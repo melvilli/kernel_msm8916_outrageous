@@ -15,6 +15,10 @@
 #include <linux/wait.h>
 #include <linux/namei.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/fsnotify.h>
+>>>>>>> v3.18
 =======
 #include <linux/fsnotify.h>
 >>>>>>> v3.18
@@ -25,6 +29,11 @@
 #include "delegation.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "nfstrace.h"
+
+>>>>>>> v3.18
 =======
 #include "nfstrace.h"
 
@@ -87,6 +96,10 @@ static void nfs_async_unlink_done(struct rpc_task *task, void *calldata)
 	struct inode *dir = data->dir;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_nfs_sillyrename_unlink(data, task->tk_status);
+>>>>>>> v3.18
 =======
 	trace_nfs_sillyrename_unlink(data, task->tk_status);
 >>>>>>> v3.18
@@ -218,7 +231,10 @@ out_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void nfs_wait_on_sillyrename(struct dentry *dentry)
 {
 	struct nfs_inode *nfsi = NFS_I(dentry->d_inode);
@@ -226,6 +242,9 @@ void nfs_wait_on_sillyrename(struct dentry *dentry)
 	wait_event(nfsi->waitqueue, atomic_read(&nfsi->silly_count) <= 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void nfs_block_sillyrename(struct dentry *dentry)
 {
@@ -360,6 +379,11 @@ static void nfs_async_rename_done(struct rpc_task *task, void *calldata)
 	struct dentry *old_dentry = data->old_dentry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_nfs_sillyrename_rename(old_dir, old_dentry,
+			new_dir, data->new_dentry, task->tk_status);
+>>>>>>> v3.18
 =======
 	trace_nfs_sillyrename_rename(old_dir, old_dentry,
 			new_dir, data->new_dentry, task->tk_status);
@@ -370,8 +394,13 @@ static void nfs_async_rename_done(struct rpc_task *task, void *calldata)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (task->tk_status != 0)
 		nfs_cancel_async_unlink(old_dentry);
+=======
+	if (data->complete)
+		data->complete(task, data);
+>>>>>>> v3.18
 =======
 	if (data->complete)
 		data->complete(task, data);
@@ -421,14 +450,20 @@ static const struct rpc_call_ops nfs_rename_ops = {
  * It's expected that valid references to the dentries and inodes are held
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rpc_task *
 nfs_async_rename(struct inode *old_dir, struct inode *new_dir,
 		 struct dentry *old_dentry, struct dentry *new_dentry)
 =======
+=======
+>>>>>>> v3.18
 struct rpc_task *
 nfs_async_rename(struct inode *old_dir, struct inode *new_dir,
 		 struct dentry *old_dentry, struct dentry *new_dentry,
 		 void (*complete)(struct rpc_task *, struct nfs_renamedata *))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct nfs_renamedata *data;
@@ -467,6 +502,10 @@ nfs_async_rename(struct inode *old_dir, struct inode *new_dir,
 	nfs_fattr_init(&data->old_fattr);
 	nfs_fattr_init(&data->new_fattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data->complete = complete;
+>>>>>>> v3.18
 =======
 	data->complete = complete;
 >>>>>>> v3.18
@@ -489,7 +528,10 @@ nfs_async_rename(struct inode *old_dir, struct inode *new_dir,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Perform tasks needed when a sillyrename is done such as cancelling the
  * queued async unlink if it failed.
@@ -519,6 +561,9 @@ nfs_complete_sillyrename(struct rpc_task *task, struct nfs_renamedata *data)
 		SILLYNAME_FILEID_LEN + \
 		SILLYNAME_COUNTER_LEN)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * nfs_sillyrename - Perform a silly-rename of a dentry
@@ -546,6 +591,7 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 {
 	static unsigned int sillycounter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int      fileidsize  = sizeof(NFS_FILEID(dentry->d_inode))*2;
 	const int      countersize = sizeof(sillycounter)*2;
 	const int      slen        = sizeof(".nfs")+fileidsize+countersize-1;
@@ -558,6 +604,8 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 		dentry->d_parent->d_name.name, dentry->d_name.name,
 		dentry->d_count);
 =======
+=======
+>>>>>>> v3.18
 	unsigned char silly[SILLYNAME_LEN + 1];
 	unsigned long long fileid;
 	struct dentry *sdentry;
@@ -566,12 +614,16 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 
 	dfprintk(VFS, "NFS: silly-rename(%pd2, ct=%d)\n",
 		dentry, d_count(dentry));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nfs_inc_stats(dir, NFSIOS_SILLYRENAME);
 
 	/*
 	 * We don't allow a dentry to be silly-renamed twice.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	error = -EBUSY;
 	if (dentry->d_flags & DCACHE_NFSFS_RENAMED)
@@ -581,10 +633,15 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 		fileidsize, fileidsize,
 		(unsigned long long)NFS_FILEID(dentry->d_inode));
 =======
+=======
+>>>>>>> v3.18
 	if (dentry->d_flags & DCACHE_NFSFS_RENAMED)
 		goto out;
 
 	fileid = NFS_FILEID(dentry->d_inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Return delegation in anticipation of the rename */
@@ -592,6 +649,7 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 
 	sdentry = NULL;
 	do {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		char *suffix = silly + slen - countersize;
 
@@ -602,6 +660,8 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 		dfprintk(VFS, "NFS: trying to rename %s to %s\n",
 				dentry->d_name.name, silly);
 =======
+=======
+>>>>>>> v3.18
 		int slen;
 		dput(sdentry);
 		sillycounter++;
@@ -612,6 +672,9 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 
 		dfprintk(VFS, "NFS: trying to rename %pd to %s\n",
 				dentry, silly);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		sdentry = lookup_one_len(silly, dentry->d_parent, slen);
@@ -640,7 +703,12 @@ nfs_sillyrename(struct inode *dir, struct dentry *dentry)
 
 	/* run the rename task, undo unlink if it fails */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task = nfs_async_rename(dir, dir, dentry, sdentry);
+=======
+	task = nfs_async_rename(dir, dir, dentry, sdentry,
+					nfs_complete_sillyrename);
+>>>>>>> v3.18
 =======
 	task = nfs_async_rename(dir, dir, dentry, sdentry,
 					nfs_complete_sillyrename);

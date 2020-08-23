@@ -105,11 +105,16 @@ nouveau_subdev_create_(struct nouveau_object *parent,
 	if (parent) {
 		struct nouveau_device *device = nv_device(parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int subidx = nv_hclass(subdev) & 0xff;
 
 		subdev->debug = nouveau_dbgopt(device->dbgopt, subname);
 		subdev->mmio  = nv_subdev(device)->mmio;
 		device->subdev[subidx] = *pobject;
+=======
+		subdev->debug = nouveau_dbgopt(device->dbgopt, subname);
+		subdev->mmio  = nv_subdev(device)->mmio;
+>>>>>>> v3.18
 =======
 		subdev->debug = nouveau_dbgopt(device->dbgopt, subname);
 		subdev->mmio  = nv_subdev(device)->mmio;

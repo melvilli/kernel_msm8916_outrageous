@@ -11,6 +11,10 @@
  */
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/netdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/netdevice.h>
 >>>>>>> v3.18
@@ -20,6 +24,7 @@
 #include <net/ip6_checksum.h>
 #include "ip6_offload.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int udp6_ufo_send_check(struct sk_buff *skb)
 {
@@ -50,6 +55,10 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 					 netdev_features_t features)
 >>>>>>> v3.18
+=======
+static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
+					 netdev_features_t features)
+>>>>>>> v3.18
 {
 	struct sk_buff *segs = ERR_PTR(-EINVAL);
 	unsigned int mss;
@@ -59,7 +68,10 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 	u8 nexthdr;
 	u8 frag_hdr_sz = sizeof(struct frag_hdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int offset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__wsum csum;
@@ -77,14 +89,20 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 				      SKB_GSO_DODGY |
 				      SKB_GSO_UDP_TUNNEL |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      SKB_GSO_GRE) ||
 =======
+=======
+>>>>>>> v3.18
 				      SKB_GSO_UDP_TUNNEL_CSUM |
 				      SKB_GSO_GRE |
 				      SKB_GSO_GRE_CSUM |
 				      SKB_GSO_IPIP |
 				      SKB_GSO_SIT |
 				      SKB_GSO_MPLS) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     !(type & (SKB_GSO_UDP))))
 			goto out;
@@ -95,6 +113,7 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Do software UFO. Complete and fill in the UDP checksum as HW cannot
 	 * do checksum of UDP packets sent as multiple IP fragments.
@@ -139,6 +158,8 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 	 */
 	segs = skb_segment(skb, features);
 =======
+=======
+>>>>>>> v3.18
 	if (skb->encapsulation && skb_shinfo(skb)->gso_type &
 	    (SKB_GSO_UDP_TUNNEL|SKB_GSO_UDP_TUNNEL_CSUM))
 		segs = skb_udp_tunnel_segment(skb, features, true);
@@ -198,17 +219,23 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 		 */
 		segs = skb_segment(skb, features);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
 	return segs;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_offload udpv6_offload = {
 	.callbacks = {
 		.gso_send_check =	udp6_ufo_send_check,
 		.gso_segment	=	udp6_ufo_fragment,
 =======
+=======
+>>>>>>> v3.18
 
 static struct sk_buff **udp6_gro_receive(struct sk_buff **head,
 					 struct sk_buff *skb)
@@ -255,6 +282,9 @@ static const struct net_offload udpv6_offload = {
 		.gso_segment	=	udp6_ufo_fragment,
 		.gro_receive	=	udp6_gro_receive,
 		.gro_complete	=	udp6_gro_complete,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

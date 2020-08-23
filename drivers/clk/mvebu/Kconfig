@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MVEBU_CLK_CORE
        bool
 
@@ -8,6 +9,8 @@ config MVEBU_CLK_CPU
 config MVEBU_CLK_GATING
        bool
 =======
+=======
+>>>>>>> v3.18
 config MVEBU_CLK_COMMON
 	bool
 
@@ -48,4 +51,7 @@ config KIRKWOOD_CLK
 config ORION_CLK
 	bool
 	select MVEBU_CLK_COMMON
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

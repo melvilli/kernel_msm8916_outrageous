@@ -50,7 +50,11 @@ static const struct ehci_driver_overrides ehci_mxc_overrides __initconst = {
 static int ehci_mxc_drv_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mxc_usbh_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct mxc_usbh_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct mxc_usbh_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -160,6 +164,10 @@ static int ehci_mxc_drv_probe(struct platform_device *pdev)
 		goto err_add;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -183,7 +191,11 @@ err_alloc:
 static int ehci_mxc_drv_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mxc_usbh_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct mxc_usbh_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct mxc_usbh_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -207,6 +219,7 @@ static int ehci_mxc_drv_remove(struct platform_device *pdev)
 
 	usb_put_hcd(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	return 0;
 }
@@ -224,13 +237,22 @@ static void ehci_mxc_drv_shutdown(struct platform_device *pdev)
 }
 
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 MODULE_ALIAS("platform:mxc-ehci");
 
 static struct platform_driver ehci_mxc_driver = {
 	.probe = ehci_mxc_drv_probe,
 	.remove = ehci_mxc_drv_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown = ehci_mxc_drv_shutdown,
+=======
+	.shutdown = usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown = usb_hcd_platform_shutdown,
 >>>>>>> v3.18

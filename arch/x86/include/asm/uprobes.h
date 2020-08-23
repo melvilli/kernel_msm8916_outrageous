@@ -34,6 +34,7 @@ typedef u8 uprobe_opcode_t;
 #define UPROBE_SWBP_INSN_SIZE		   1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct arch_uprobe {
 	u16				fixups;
 	u8				insn[MAX_UINSN_BYTES];
@@ -41,6 +42,8 @@ struct arch_uprobe {
 	unsigned long			rip_rela_target_address;
 #endif
 =======
+=======
+>>>>>>> v3.18
 struct uprobe_xol_ops;
 
 struct arch_uprobe {
@@ -62,6 +65,9 @@ struct arch_uprobe {
 			u8	ilen;
 		} 			defparam;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -74,6 +80,7 @@ struct arch_uprobe_task {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  arch_uprobe_analyze_insn(struct arch_uprobe *aup, struct mm_struct *mm, unsigned long addr);
 extern int  arch_uprobe_pre_xol(struct arch_uprobe *aup, struct pt_regs *regs);
 extern int  arch_uprobe_post_xol(struct arch_uprobe *aup, struct pt_regs *regs);
@@ -81,6 +88,8 @@ extern bool arch_uprobe_xol_was_trapped(struct task_struct *tsk);
 extern int  arch_uprobe_exception_notify(struct notifier_block *self, unsigned long val, void *data);
 extern void arch_uprobe_abort_xol(struct arch_uprobe *aup, struct pt_regs *regs);
 extern unsigned long arch_uretprobe_hijack_return_addr(unsigned long trampoline_vaddr, struct pt_regs *regs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* _ASM_UPROBES_H */

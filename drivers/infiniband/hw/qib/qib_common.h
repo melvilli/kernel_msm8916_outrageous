@@ -280,7 +280,11 @@ struct qib_base_info {
  * cares, or it must abort after initialization reports the difference.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QIB_USER_SWMINOR 11
+=======
+#define QIB_USER_SWMINOR 13
+>>>>>>> v3.18
 =======
 #define QIB_USER_SWMINOR 13
 >>>>>>> v3.18
@@ -706,8 +710,11 @@ struct qib_message_header {
 	/* fields below this point are in host byte order */
 	struct qib_header iph;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 sub_opcode;
 =======
+=======
+>>>>>>> v3.18
 	/* fields below are simplified, but should match PSM */
 	/* some are accessed by driver when packet spliting is needed */
 	__u8 sub_opcode;
@@ -739,6 +746,9 @@ struct qib_tid_session_member {
 	__u16 tid;
 	__u16 offset;
 	__u16 length;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

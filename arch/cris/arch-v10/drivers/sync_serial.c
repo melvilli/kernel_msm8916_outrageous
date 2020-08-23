@@ -23,6 +23,10 @@
 #include <linux/mutex.h>
 #include <linux/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 =======
 #include <linux/wait.h>
 >>>>>>> v3.18
@@ -585,7 +589,11 @@ static int sync_serial_open(struct inode *inode, struct file *file)
 				if (request_irq(8,
 						manual_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						IRQF_SHARED | IRQF_DISABLED,
+=======
+						IRQF_SHARED,
+>>>>>>> v3.18
 =======
 						IRQF_SHARED,
 >>>>>>> v3.18
@@ -599,7 +607,11 @@ static int sync_serial_open(struct inode *inode, struct file *file)
 				if (request_irq(8,
 						manual_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						IRQF_SHARED | IRQF_DISABLED,
+=======
+						IRQF_SHARED,
+>>>>>>> v3.18
 =======
 						IRQF_SHARED,
 >>>>>>> v3.18
@@ -1098,7 +1110,10 @@ static ssize_t sync_serial_write(struct file *file, const char *buf,
 	local_irq_restore(flags);
 	schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	remove_wait_queue(&port->out_wait_q, &wait);
@@ -1152,7 +1167,12 @@ static ssize_t sync_serial_read(struct file *file, char *buf,
 			return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&port->in_wait_q);
+=======
+		wait_event_interruptible(port->in_wait_q,
+					 !(start == end && !port->full));
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(port->in_wait_q,
 					 !(start == end && !port->full));

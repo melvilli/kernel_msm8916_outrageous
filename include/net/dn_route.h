@@ -16,11 +16,14 @@
 *******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sk_buff *dn_alloc_skb(struct sock *sk, int size, gfp_t pri);
 extern int dn_route_output_sock(struct dst_entry __rcu **pprt, struct flowidn *, struct sock *sk, int flags);
 extern int dn_cache_dump(struct sk_buff *skb, struct netlink_callback *cb);
 extern void dn_rt_cache_flush(int delay);
 =======
+=======
+>>>>>>> v3.18
 struct sk_buff *dn_alloc_skb(struct sock *sk, int size, gfp_t pri);
 int dn_route_output_sock(struct dst_entry __rcu **pprt, struct flowidn *,
 			 struct sock *sk, int flags);
@@ -28,6 +31,9 @@ int dn_cache_dump(struct sk_buff *skb, struct netlink_callback *cb);
 void dn_rt_cache_flush(int delay);
 int dn_route_rcv(struct sk_buff *skb, struct net_device *dev,
 		 struct packet_type *pt, struct net_device *orig_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Masks for flags field */
@@ -103,8 +109,13 @@ static inline bool dn_is_output_route(struct dn_route *rt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dn_route_init(void);
 extern void dn_route_cleanup(void);
+=======
+void dn_route_init(void);
+void dn_route_cleanup(void);
+>>>>>>> v3.18
 =======
 void dn_route_init(void);
 void dn_route_cleanup(void);

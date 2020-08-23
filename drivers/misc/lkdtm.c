@@ -31,6 +31,10 @@
  * See Documentation/fault-injection/provoke-crashes.txt for instructions
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 >>>>>>> v3.18
@@ -48,6 +52,12 @@
 #include <scsi/scsi_cmnd.h>
 #include <linux/debugfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+#include <linux/mman.h>
+#include <asm/cacheflush.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmalloc.h>
 #include <linux/mman.h>
@@ -59,9 +69,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFAULT_COUNT 10
 #define REC_NUM_DEFAULT 10
 =======
+=======
+>>>>>>> v3.18
 /*
  * Make sure our attempts to over run the kernel stack doesn't trigger
  * a compiler warning when CONFIG_FRAME_WARN is set. Then make sure we
@@ -76,6 +89,9 @@
 
 #define DEFAULT_COUNT 10
 #define EXEC_SIZE 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum cname {
@@ -96,6 +112,10 @@ enum ctype {
 	CT_PANIC,
 	CT_BUG,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CT_WARNING,
+>>>>>>> v3.18
 =======
 	CT_WARNING,
 >>>>>>> v3.18
@@ -109,8 +129,11 @@ enum ctype {
 	CT_SOFTLOCKUP,
 	CT_HARDLOCKUP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CT_HUNG_TASK,
 =======
+=======
+>>>>>>> v3.18
 	CT_SPINLOCKUP,
 	CT_HUNG_TASK,
 	CT_EXEC_DATA,
@@ -121,6 +144,9 @@ enum ctype {
 	CT_ACCESS_USERSPACE,
 	CT_WRITE_RO,
 	CT_WRITE_KERN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -140,6 +166,10 @@ static char* cp_type[] = {
 	"PANIC",
 	"BUG",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"WARNING",
+>>>>>>> v3.18
 =======
 	"WARNING",
 >>>>>>> v3.18
@@ -153,8 +183,11 @@ static char* cp_type[] = {
 	"SOFTLOCKUP",
 	"HARDLOCKUP",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"HUNG_TASK",
 =======
+=======
+>>>>>>> v3.18
 	"SPINLOCKUP",
 	"HUNG_TASK",
 	"EXEC_DATA",
@@ -165,6 +198,9 @@ static char* cp_type[] = {
 	"ACCESS_USERSPACE",
 	"WRITE_RO",
 	"WRITE_KERN",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -183,11 +219,14 @@ static enum ctype cptype = CT_NONE;
 static int count = DEFAULT_COUNT;
 static DEFINE_SPINLOCK(count_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_param(recur_count, int, 0644);
 MODULE_PARM_DESC(recur_count, " Recursion level for the stack overflow test, "\
 				 "default is 10");
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(lock_me_up);
 
 static u8 data_area[EXEC_SIZE];
@@ -196,6 +235,9 @@ static const unsigned long rodata = 0xAA55AA55;
 
 module_param(recur_count, int, 0644);
 MODULE_PARM_DESC(recur_count, " Recursion level for the stack overflow test");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_param(cpoint_name, charp, 0444);
 MODULE_PARM_DESC(cpoint_name, " Crash Point, where kernel is to be crashed");
@@ -261,7 +303,11 @@ static int jp_scsi_dispatch_cmd(struct scsi_cmnd *cmd)
 
 #ifdef CONFIG_IDE
 <<<<<<< HEAD
+<<<<<<< HEAD
 int jp_generic_ide_ioctl(ide_drive_t *drive, struct file *file,
+=======
+static int jp_generic_ide_ioctl(ide_drive_t *drive, struct file *file,
+>>>>>>> v3.18
 =======
 static int jp_generic_ide_ioctl(ide_drive_t *drive, struct file *file,
 >>>>>>> v3.18
@@ -340,6 +386,7 @@ static int lkdtm_parse_commandline(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int recursive_loop(int a)
 {
 	char buf[1024];
@@ -351,6 +398,8 @@ static int recursive_loop(int a)
 	else
         	return recursive_loop(a);
 =======
+=======
+>>>>>>> v3.18
 static int recursive_loop(int remaining)
 {
 	char buf[REC_STACK_SIZE];
@@ -409,6 +458,9 @@ static void execute_user_location(void *dst)
 	flush_icache_range((unsigned long)dst, (unsigned long)dst + EXEC_SIZE);
 	pr_info("attempting bad execution at %p\n", func);
 	func();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -422,6 +474,12 @@ static void lkdtm_do_action(enum ctype which)
 		BUG();
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CT_WARNING:
+		WARN_ON(1);
+		break;
+>>>>>>> v3.18
 =======
 	case CT_WARNING:
 		WARN_ON(1);
@@ -436,6 +494,7 @@ static void lkdtm_do_action(enum ctype which)
 		break;
 	case CT_OVERFLOW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(void) recursive_loop(0);
 		break;
 	case CT_CORRUPT_STACK: {
@@ -446,11 +505,16 @@ static void lkdtm_do_action(enum ctype which)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 		(void) recursive_loop(recur_count);
 		break;
 	case CT_CORRUPT_STACK:
 		corrupt_stack();
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CT_UNALIGNED_LOAD_STORE_WRITE: {
 		static u8 data[5] __attribute__((aligned(4))) = {1, 2,
@@ -492,20 +556,29 @@ static void lkdtm_do_action(enum ctype which)
 			cpu_relax();
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CT_SPINLOCKUP:
 		/* Must be called twice to trigger. */
 		spin_lock(&lock_me_up);
 		/* Let sparse know we intended to exit holding the lock. */
 		__release(&lock_me_up);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CT_HUNG_TASK:
 		set_current_state(TASK_UNINTERRUPTIBLE);
 		schedule();
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CT_EXEC_DATA:
 		execute_location(data_area);
 		break;
@@ -591,6 +664,9 @@ static void lkdtm_do_action(enum ctype which)
 		do_overwritten();
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CT_NONE:
 	default:
@@ -607,8 +683,13 @@ static void lkdtm_handler(void)
 	spin_lock_irqsave(&count_lock, flags);
 	count--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "lkdtm: Crash point %s of type %s hit, trigger in %d rounds\n",
 			cp_name_to_str(cpoint), cp_type_to_str(cptype), count);
+=======
+	pr_info("Crash point %s of type %s hit, trigger in %d rounds\n",
+		cp_name_to_str(cpoint), cp_type_to_str(cptype), count);
+>>>>>>> v3.18
 =======
 	pr_info("Crash point %s of type %s hit, trigger in %d rounds\n",
 		cp_name_to_str(cpoint), cp_type_to_str(cptype), count);
@@ -670,7 +751,11 @@ static int lkdtm_register_cpoint(enum cname which)
 		lkdtm.entry = (kprobe_opcode_t*) jp_generic_ide_ioctl;
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Crash point not available\n");
+=======
+		pr_info("Crash point not available\n");
+>>>>>>> v3.18
 =======
 		pr_info("Crash point not available\n");
 >>>>>>> v3.18
@@ -679,7 +764,11 @@ static int lkdtm_register_cpoint(enum cname which)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Invalid Crash Point\n");
+=======
+		pr_info("Invalid Crash Point\n");
+>>>>>>> v3.18
 =======
 		pr_info("Invalid Crash Point\n");
 >>>>>>> v3.18
@@ -689,7 +778,11 @@ static int lkdtm_register_cpoint(enum cname which)
 	cpoint = which;
 	if ((ret = register_jprobe(&lkdtm)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Couldn't register jprobe\n");
+=======
+		pr_info("Couldn't register jprobe\n");
+>>>>>>> v3.18
 =======
 		pr_info("Couldn't register jprobe\n");
 >>>>>>> v3.18
@@ -840,8 +933,12 @@ static ssize_t direct_entry(struct file *f, const char __user *user_buf,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "lkdtm: Performing direct entry %s\n",
 			cp_type_to_str(type));
+=======
+	pr_info("Performing direct entry %s\n", cp_type_to_str(type));
+>>>>>>> v3.18
 =======
 	pr_info("Performing direct entry %s\n", cp_type_to_str(type));
 >>>>>>> v3.18
@@ -907,7 +1004,11 @@ static int __init lkdtm_module_init(void)
 	lkdtm_debugfs_root = debugfs_create_dir("provoke-crash", NULL);
 	if (!lkdtm_debugfs_root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "lkdtm: creating root dir failed\n");
+=======
+		pr_err("creating root dir failed\n");
+>>>>>>> v3.18
 =======
 		pr_err("creating root dir failed\n");
 >>>>>>> v3.18
@@ -926,8 +1027,12 @@ static int __init lkdtm_module_init(void)
 				NULL, &cur->fops);
 		if (de == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "lkdtm: could not create %s\n",
 					cur->name);
+=======
+			pr_err("could not create %s\n", cur->name);
+>>>>>>> v3.18
 =======
 			pr_err("could not create %s\n", cur->name);
 >>>>>>> v3.18
@@ -937,7 +1042,11 @@ static int __init lkdtm_module_init(void)
 
 	if (lkdtm_parse_commandline() == -EINVAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Invalid command\n");
+=======
+		pr_info("Invalid command\n");
+>>>>>>> v3.18
 =======
 		pr_info("Invalid command\n");
 >>>>>>> v3.18
@@ -948,6 +1057,7 @@ static int __init lkdtm_module_init(void)
 		ret = lkdtm_register_cpoint(cpoint);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "lkdtm: Invalid crash point %d\n",
 					cpoint);
 			goto out_err;
@@ -957,6 +1067,8 @@ static int __init lkdtm_module_init(void)
 	} else {
 		printk(KERN_INFO "lkdtm: No crash points registered, enable through debugfs\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_info("Invalid crash point %d\n", cpoint);
 			goto out_err;
 		}
@@ -964,6 +1076,9 @@ static int __init lkdtm_module_init(void)
 			cpoint_name, cpoint_type);
 	} else {
 		pr_info("No crash points registered, enable through debugfs\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -980,7 +1095,11 @@ static void __exit lkdtm_module_exit(void)
 
 	unregister_jprobe(&lkdtm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "lkdtm: Crash point unregistered\n");
+=======
+	pr_info("Crash point unregistered\n");
+>>>>>>> v3.18
 =======
 	pr_info("Crash point unregistered\n");
 >>>>>>> v3.18
@@ -991,6 +1110,10 @@ module_exit(lkdtm_module_exit);
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DESCRIPTION("Kprobe module for testing crash dumps");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Kprobe module for testing crash dumps");
 >>>>>>> v3.18

@@ -21,6 +21,11 @@
 extern const struct xattr_handler *v9fs_xattr_handlers[];
 extern struct xattr_handler v9fs_xattr_user_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct xattr_handler v9fs_xattr_trusted_handler;
+extern struct xattr_handler v9fs_xattr_security_handler;
+>>>>>>> v3.18
 =======
 extern struct xattr_handler v9fs_xattr_trusted_handler;
 extern struct xattr_handler v9fs_xattr_security_handler;

@@ -10,6 +10,7 @@ Optional properties:
 - regulator-always-on: boolean, regulator should never be disabled
 - regulator-boot-on: bootloader/firmware enabled regulator
 <<<<<<< HEAD
+<<<<<<< HEAD
 - <name>-supply: phandle to the parent supply/regulator node
 - regulator-ramp-delay: ramp delay for regulator(in uV/uS)
 - qcom,consumer-supplies: flattened list of supply and dev_name pairs
@@ -18,6 +19,8 @@ Optional properties:
 	name.  A null device name is used to allow calls such as:
 	regulator_get(NULL, "pll_vdd").
 =======
+=======
+>>>>>>> v3.18
 - regulator-allow-bypass: allow the regulator to go into bypass mode
 - <name>-supply: phandle to the parent supply/regulator node
 - regulator-ramp-delay: ramp delay for regulator(in uV/uS)
@@ -28,6 +31,9 @@ Optional properties:
   design requires. This property describes the total system ramp time
   required due to the combination of internal ramping of the regulator itself,
   and board design issues such as trace capacitance and load on the supply.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Deprecated properties:
@@ -45,7 +51,10 @@ Example:
 		regulator-always-on;
 		vin-supply = <&vin>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qcom,consumer-supplies = "pll_vdd", "", "lcd_vcc", "foo.1";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};

@@ -12,7 +12,11 @@ config HAVE_PATA_PLATFORM
 
 menuconfig ATA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Serial ATA and Parallel ATA drivers"
+=======
+	tristate "Serial ATA and Parallel ATA drivers (libata)"
+>>>>>>> v3.18
 =======
 	tristate "Serial ATA and Parallel ATA drivers (libata)"
 >>>>>>> v3.18
@@ -21,8 +25,14 @@ menuconfig ATA
 	depends on !(M32R || M68K || S390) || BROKEN
 	select SCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	---help---
 	  If you want to use a ATA hard disk, ATA tape drive, ATA CD-ROM or
+=======
+	select GLOB
+	---help---
+	  If you want to use an ATA hard disk, ATA tape drive, ATA CD-ROM or
+>>>>>>> v3.18
 =======
 	select GLOB
 	---help---
@@ -71,7 +81,11 @@ config ATA_ACPI
 config SATA_ZPODD
 	bool "SATA Zero Power Optical Disc Drive (ZPODD) support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ATA_ACPI
+=======
+	depends on ATA_ACPI && PM_RUNTIME
+>>>>>>> v3.18
 =======
 	depends on ATA_ACPI && PM_RUNTIME
 >>>>>>> v3.18
@@ -112,6 +126,7 @@ config SATA_AHCI_PLATFORM
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SATA_AHCI_MSM
 	tristate "MSM AHCI SATA support"
 	depends on OF && ARCH_MSM
@@ -124,6 +139,8 @@ config SATA_AHCI_MSM
 	  If unsure, say N.
 
 =======
+=======
+>>>>>>> v3.18
 config AHCI_DA850
 	tristate "DaVinci DA850 AHCI SATA support"
 	depends on ARCH_DAVINCI_DA850
@@ -183,6 +200,9 @@ config AHCI_XGENE
 	help
 	 This option enables support for APM X-Gene SoC SATA host controller.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SATA_FSL
 	tristate "Freescale 3.0Gbps SATA support"
@@ -248,7 +268,11 @@ config PDC_ADMA
 config PATA_OCTEON_CF
 	tristate "OCTEON Boot Bus Compact Flash support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON
+=======
+	depends on CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC
 >>>>>>> v3.18
@@ -322,6 +346,10 @@ config SATA_DWC_VDEBUG
 config SATA_HIGHBANK
 	tristate "Calxeda Highbank SATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ARCH_HIGHBANK || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_HIGHBANK || COMPILE_TEST
 >>>>>>> v3.18
@@ -334,6 +362,12 @@ config SATA_HIGHBANK
 config SATA_MV
 	tristate "Marvell SATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on PCI || ARCH_DOVE || ARCH_MV78XX0 || \
+		   ARCH_MVEBU || ARCH_ORION5X || COMPILE_TEST
+	select GENERIC_PHY
+>>>>>>> v3.18
 =======
 	depends on PCI || ARCH_DOVE || ARCH_MV78XX0 || \
 		   ARCH_MVEBU || ARCH_ORION5X || COMPILE_TEST
@@ -365,7 +399,11 @@ config SATA_PROMISE
 config SATA_RCAR
 	tristate "Renesas R-Car SATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_SHMOBILE && ARCH_R8A7779
+=======
+	depends on ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_SHMOBILE || COMPILE_TEST
 >>>>>>> v3.18
@@ -449,6 +487,10 @@ config PATA_AMD
 config PATA_ARASAN_CF
 	tristate "ARASAN CompactFlash PATA Controller Support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ARCH_SPEAR13XX || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_SPEAR13XX || COMPILE_TEST
 >>>>>>> v3.18
@@ -504,7 +546,11 @@ config PATA_CMD64X
 config PATA_CS5520
 	tristate "CS5510/5520 PATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+	depends on PCI && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -517,7 +563,11 @@ config PATA_CS5520
 config PATA_CS5530
 	tristate "CS5530 PATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+	depends on PCI && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -530,7 +580,11 @@ config PATA_CS5530
 config PATA_CS5535
 	tristate "CS5535 PATA support (Experimental)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && X86 && !X86_64
+=======
+	depends on PCI && X86_32
+>>>>>>> v3.18
 =======
 	depends on PCI && X86_32
 >>>>>>> v3.18
@@ -543,7 +597,11 @@ config PATA_CS5535
 config PATA_CS5536
 	tristate "CS5536 PATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+	depends on PCI && (X86_32 || MIPS || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || MIPS || COMPILE_TEST)
 >>>>>>> v3.18
@@ -783,7 +841,11 @@ config PATA_RDC
 config PATA_SC1200
 	tristate "SC1200 PATA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+	depends on PCI && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -899,7 +961,11 @@ config PATA_AT32
 config PATA_AT91
 	tristate "PATA support for AT91SAM9260"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM && ARCH_AT91
+=======
+	depends on ARM && SOC_AT91SAM9
+>>>>>>> v3.18
 =======
 	depends on ARM && SOC_AT91SAM9
 >>>>>>> v3.18

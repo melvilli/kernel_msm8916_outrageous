@@ -44,7 +44,10 @@ Description:
                 the radio controller is not beaconing.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:           /sys/class/uwb_rc/uwbN/ASIE
 Date:           August 2014
 KernelVersion:  3.18
@@ -58,6 +61,9 @@ Description:
                 Reading returns the current ASIE.  Writing replaces
                 the current ASIE with the one written.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:           /sys/class/uwb_rc/uwbN/scan
 Date:           July 2008

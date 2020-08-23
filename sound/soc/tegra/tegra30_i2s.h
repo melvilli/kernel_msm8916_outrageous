@@ -226,8 +226,11 @@
 #define TEGRA30_I2S_LCOEF_COEF_MASK			(TEGRA30_I2S_LCOEF_COEF_MASK_US << TEGRA30_I2S_LCOEF_COEF_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tegra30_i2s {
 =======
+=======
+>>>>>>> v3.18
 struct tegra30_i2s_soc_data {
 	void (*set_audio_cif)(struct regmap *regmap,
 			      unsigned int reg,
@@ -236,6 +239,9 @@ struct tegra30_i2s_soc_data {
 
 struct tegra30_i2s {
 	const struct tegra30_i2s_soc_data *soc_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct snd_soc_dai_driver dai;
 	int cif_id;
@@ -243,12 +249,15 @@ struct tegra30_i2s {
 	enum tegra30_ahub_txcif capture_i2s_cif;
 	enum tegra30_ahub_rxcif capture_fifo_cif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_dmaengine_dai_dma_data capture_dma_data;
 	enum tegra30_ahub_rxcif playback_i2s_cif;
 	enum tegra30_ahub_txcif playback_fifo_cif;
 	struct snd_dmaengine_dai_dma_data playback_dma_data;
 	struct regmap *regmap;
 =======
+=======
+>>>>>>> v3.18
 	char capture_dma_chan[8];
 	struct snd_dmaengine_dai_dma_data capture_dma_data;
 	enum tegra30_ahub_rxcif playback_i2s_cif;
@@ -257,6 +266,9 @@ struct tegra30_i2s {
 	struct snd_dmaengine_dai_dma_data playback_dma_data;
 	struct regmap *regmap;
 	struct snd_dmaengine_pcm_config dma_config;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

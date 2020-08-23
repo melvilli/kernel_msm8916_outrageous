@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -166,7 +170,10 @@ union acpi_generic_state *acpi_ut_create_generic_state(void)
 
 		/* Initialize */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(state, 0, sizeof(union acpi_generic_state));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		state->common.descriptor_type = ACPI_DESC_TYPE_STATE;

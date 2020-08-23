@@ -2,11 +2,17 @@
 #define _NF_QUEUE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ip.h>
 #include <linux/ipv6.h>
 #include <linux/jhash.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Each queued (to userspace) skbuff has one of these. */
 struct nf_queue_entry {
@@ -36,7 +42,11 @@ struct nf_queue_handler {
 void nf_register_queue_handler(const struct nf_queue_handler *qh);
 void nf_unregister_queue_handler(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nf_reinject(struct nf_queue_entry *entry, unsigned int verdict);
+=======
+void nf_reinject(struct nf_queue_entry *entry, unsigned int verdict);
+>>>>>>> v3.18
 =======
 void nf_reinject(struct nf_queue_entry *entry, unsigned int verdict);
 >>>>>>> v3.18
@@ -45,7 +55,10 @@ bool nf_queue_entry_get_refs(struct nf_queue_entry *entry);
 void nf_queue_entry_release_refs(struct nf_queue_entry *entry);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void init_hashrandom(u32 *jhash_initval)
 {
 	while (*jhash_initval == 0)
@@ -104,5 +117,8 @@ nfqueue_hash(const struct sk_buff *skb, u16 queue, u16 queues_total, u8 family,
 	return queue;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _NF_QUEUE_H */

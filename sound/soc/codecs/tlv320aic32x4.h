@@ -121,7 +121,13 @@
 
 #define AIC32X4_LMICPGANIN_IN2R_10K	0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AIC32X4_RMICPGANIN_IN1L_10K	0x10
+=======
+#define AIC32X4_LMICPGANIN_CM1L_10K	0x40
+#define AIC32X4_RMICPGANIN_IN1L_10K	0x10
+#define AIC32X4_RMICPGANIN_CM1R_10K	0x40
+>>>>>>> v3.18
 =======
 #define AIC32X4_LMICPGANIN_CM1L_10K	0x40
 #define AIC32X4_RMICPGANIN_IN1L_10K	0x10
@@ -145,6 +151,10 @@
 #define AIC32X4_LDAC2LCHN		(0x01 << 4)
 #define AIC32X4_RDAC2RCHN		(0x01 << 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AIC32X4_DAC_CHAN_MASK		0x3c
+>>>>>>> v3.18
 =======
 #define AIC32X4_DAC_CHAN_MASK		0x3c
 >>>>>>> v3.18

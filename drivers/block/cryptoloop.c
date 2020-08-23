@@ -26,9 +26,15 @@
 #include <linux/crypto.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/loop.h>
 #include <linux/scatterlist.h>
 #include <asm/uaccess.h>
+=======
+#include <linux/scatterlist.h>
+#include <asm/uaccess.h>
+#include "loop.h"
+>>>>>>> v3.18
 =======
 #include <linux/scatterlist.h>
 #include <asm/uaccess.h>

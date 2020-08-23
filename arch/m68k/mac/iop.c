@@ -112,7 +112,10 @@
 #include <linux/interrupt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/macintosh.h>
@@ -122,9 +125,15 @@
 /*#define DEBUG_IOP*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Set to non-zero if the IOPs are present. Set by iop_init() */
 
 int iop_scc_present,iop_ism_present;
+=======
+/* Non-zero if the IOPs are present */
+
+int iop_scc_present, iop_ism_present;
+>>>>>>> v3.18
 =======
 /* Non-zero if the IOPs are present */
 

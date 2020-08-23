@@ -35,6 +35,7 @@
 #include "device.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 //
@@ -46,6 +47,8 @@
 // Baseband RF pair definition in eeprom (Bits 6..0)
 //
 =======
+=======
+>>>>>>> v3.18
 /*
  * Registers in the BASEBAND
  */
@@ -54,6 +57,9 @@
 /*
  * Baseband RF pair definition in eeprom (Bits 6..0)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PREAMBLE_LONG   0
@@ -76,10 +82,13 @@
 #define TOP_RATE_1M         0x00100000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Types  ------------------------------*/
 
 /*---------------------  Export Macros ------------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BBvClearFOE(dwIoBase)				\
@@ -89,12 +98,15 @@
 	BBbWriteEmbedded(dwIoBase, 0xB1, 0x0C)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned int
@@ -105,6 +117,7 @@ BBuGetFrameTime(
 	unsigned short wRate
 );
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void
 BBvCalculateParameter(
@@ -140,6 +153,8 @@ void BBvExitDeepSleep(unsigned long dwIoBase, unsigned char byLocalID);
 
 // timer for antenna diversity
 =======
+=======
+>>>>>>> v3.18
 void vnt_get_phy_field(struct vnt_private *, u32 frame_length,
 		       u16 tx_rate, u8 pkt_type, struct vnt_phy_field *);
 
@@ -165,6 +180,9 @@ void BBvSetDeepSleep(void __iomem *dwIoBase, unsigned char byLocalID);
 void BBvExitDeepSleep(void __iomem *dwIoBase, unsigned char byLocalID);
 
 /* timer for antenna diversity */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void
@@ -178,16 +196,22 @@ TimerState1CallBack(
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void BBvAntennaDiversity(PSDevice pDevice, unsigned char byRxRate, unsigned char bySQ3);
 void
 BBvClearAntDivSQ3Value(PSDevice pDevice);
 
 #endif // __BASEBAND_H__
 =======
+=======
+>>>>>>> v3.18
 void BBvAntennaDiversity(struct vnt_private *pDevice,
 			 unsigned char byRxRate, unsigned char bySQ3);
 void
 BBvClearAntDivSQ3Value(struct vnt_private *pDevice);
 
 #endif /* __BASEBAND_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

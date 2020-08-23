@@ -18,6 +18,10 @@
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #include <sound/soc.h>
 #include <sound/soc-dai.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -663,6 +671,7 @@ static int ux500_msp_dai_trigger(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ux500_msp_dai_probe(struct snd_soc_dai *dai)
 {
 	struct ux500_msp_i2s_drvdata *drvdata = dev_get_drvdata(dai->dev);
@@ -677,6 +686,8 @@ static int ux500_msp_dai_probe(struct snd_soc_dai *dai)
 	drvdata->capture_dma_data.data_size = drvdata->slot_width;
 
 =======
+=======
+>>>>>>> v3.18
 static int ux500_msp_dai_of_probe(struct snd_soc_dai *dai)
 {
 	struct ux500_msp_i2s_drvdata *drvdata = dev_get_drvdata(dai->dev);
@@ -723,6 +734,9 @@ static int ux500_msp_dai_probe(struct snd_soc_dai *dai)
 	snd_soc_dai_init_dma_data(dai,
 				  &drvdata->msp->playback_dma_data,
 				  &drvdata->msp->capture_dma_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -740,6 +754,7 @@ static struct snd_soc_dai_ops ux500_msp_dai_ops[] = {
 	}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct snd_soc_dai_driver ux500_msp_dai_drv[UX500_NBR_OF_DAI] = {
 	{
@@ -823,6 +838,8 @@ static struct snd_soc_dai_driver ux500_msp_dai_drv[UX500_NBR_OF_DAI] = {
 		.ops = ux500_msp_dai_ops,
 	},
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_dai_driver ux500_msp_dai_drv = {
 	.probe                 = ux500_msp_dai_probe,
 	.suspend               = NULL,
@@ -836,6 +853,9 @@ static struct snd_soc_dai_driver ux500_msp_dai_drv = {
 	.capture.rates         = UX500_I2S_RATES,
 	.capture.formats       = UX500_I2S_FORMATS,
 	.ops                   = ux500_msp_dai_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -848,11 +868,14 @@ static int ux500_msp_drv_probe(struct platform_device *pdev)
 {
 	struct ux500_msp_i2s_drvdata *drvdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	dev_dbg(&pdev->dev, "%s: Enter (pdev->name = %s).\n", __func__,
 		pdev->name);
 =======
+=======
+>>>>>>> v3.18
 	struct msp_i2s_platform_data *pdata = pdev->dev.platform_data;
 	struct device_node *np = pdev->dev.of_node;
 	int ret = 0;
@@ -861,6 +884,9 @@ static int ux500_msp_drv_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "No platform data or Device Tree found\n");
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	drvdata = devm_kzalloc(&pdev->dev,
@@ -914,7 +940,11 @@ static int ux500_msp_drv_probe(struct platform_device *pdev)
 
 	ret = snd_soc_register_component(&pdev->dev, &ux500_msp_component,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 &ux500_msp_dai_drv[drvdata->msp->id], 1);
+=======
+					 &ux500_msp_dai_drv, 1);
+>>>>>>> v3.18
 =======
 					 &ux500_msp_dai_drv, 1);
 >>>>>>> v3.18

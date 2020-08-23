@@ -126,9 +126,12 @@ sa1100_pcmcia_frequency_change(struct soc_pcmcia_socket *skt,
 			sa1100_pcmcia_set_mecr(skt, freqs->new);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case CPUFREQ_RESUMECHANGE:
 		sa1100_pcmcia_set_mecr(skt, freqs->new);
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

@@ -20,6 +20,7 @@
 #include "types.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int brcms_c_stf_attach(struct brcms_c_info *wlc);
 extern void brcms_c_stf_detach(struct brcms_c_info *wlc);
 
@@ -40,6 +41,8 @@ extern u16 brcms_c_stf_phytxchain_sel(struct brcms_c_info *wlc,
 extern u16 brcms_c_stf_d11hdrs_phyctl_txant(struct brcms_c_info *wlc,
 					u32 rspec);
 =======
+=======
+>>>>>>> v3.18
 int brcms_c_stf_attach(struct brcms_c_info *wlc);
 void brcms_c_stf_detach(struct brcms_c_info *wlc);
 
@@ -54,6 +57,9 @@ void brcms_c_stf_phy_txant_upd(struct brcms_c_info *wlc);
 void brcms_c_stf_phy_chain_calc(struct brcms_c_info *wlc);
 u16 brcms_c_stf_phytxchain_sel(struct brcms_c_info *wlc, u32 rspec);
 u16 brcms_c_stf_d11hdrs_phyctl_txant(struct brcms_c_info *wlc, u32 rspec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_STF_H_ */

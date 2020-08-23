@@ -14,7 +14,11 @@ struct arpt_mangle
 		struct in_addr tgt_ip;
 	} u_t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u_int8_t flags;
+=======
+	__u8 flags;
+>>>>>>> v3.18
 =======
 	__u8 flags;
 >>>>>>> v3.18

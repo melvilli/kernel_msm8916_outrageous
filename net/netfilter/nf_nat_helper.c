@@ -21,6 +21,10 @@
 #include <net/netfilter/nf_conntrack_ecache.h>
 #include <net/netfilter/nf_conntrack_expect.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_conntrack_seqadj.h>
 >>>>>>> v3.18
@@ -30,6 +34,7 @@
 #include <net/netfilter/nf_nat_core.h>
 #include <net/netfilter/nf_nat_helper.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DUMP_OFFSET(x) \
 	pr_debug("offset_before=%d, offset_after=%d, correction_pos=%u\n", \
@@ -95,6 +100,8 @@ s16 nf_nat_get_offset(const struct nf_conn *ct,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Frobs data inside this packet, which is linear. */
 static void mangle_contents(struct sk_buff *skb,
 			    unsigned int dataoff,
@@ -112,7 +119,11 @@ static void mangle_contents(struct sk_buff *skb,
 	memmove(data + match_offset + rep_len,
 		data + match_offset + match_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->tail - (skb->network_header + dataoff +
+=======
+		skb_tail_pointer(skb) - (skb_network_header(skb) + dataoff +
+>>>>>>> v3.18
 =======
 		skb_tail_pointer(skb) - (skb_network_header(skb) + dataoff +
 >>>>>>> v3.18
@@ -154,6 +165,7 @@ static int enlarge_skb(struct sk_buff *skb, unsigned int extra)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nf_nat_set_seq_adjust(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
 			   __be32 seq, s16 off)
 {
@@ -178,6 +190,8 @@ void nf_nat_tcp_seq_adjust(struct sk_buff *skb, struct nf_conn *ct,
 }
 EXPORT_SYMBOL_GPL(nf_nat_tcp_seq_adjust);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Generic function for mangling variable-length address changes inside
@@ -225,8 +239,13 @@ int __nf_nat_mangle_tcp_packet(struct sk_buff *skb,
 
 	if (adjust && rep_len != match_len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_nat_set_seq_adjust(ct, ctinfo, tcph->seq,
 				      (int)rep_len - (int)match_len);
+=======
+		nf_ct_seqadj_set(ct, ctinfo, tcph->seq,
+				 (int)rep_len - (int)match_len);
+>>>>>>> v3.18
 =======
 		nf_ct_seqadj_set(ct, ctinfo, tcph->seq,
 				 (int)rep_len - (int)match_len);
@@ -290,6 +309,7 @@ nf_nat_mangle_udp_packet(struct sk_buff *skb,
 }
 EXPORT_SYMBOL(nf_nat_mangle_udp_packet);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Adjust one found SACK option including checksum correction */
 static void
@@ -430,6 +450,8 @@ nf_nat_seq_adjust(struct sk_buff *skb,
 	return nf_nat_sack_adjust(skb, protoff, tcph, ct, ctinfo);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Setup NAT on this expected conntrack so it follows master. */

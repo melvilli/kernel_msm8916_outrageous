@@ -19,6 +19,11 @@
 #define __ARM_KVM_ASM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/virt.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/virt.h>
 
@@ -49,6 +54,7 @@
 #define	CNTKCTL_EL1	20	/* Timer Control Register (EL1) */
 #define	PAR_EL1		21	/* Physical Address Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 32bit specific registers. Keep them at the end of the range */
 #define	DACR32_EL2	22	/* Domain Access Control Register */
 #define	IFSR32_EL2	23	/* Instruction Fault Status Register */
@@ -58,6 +64,8 @@
 #define	TEEHBR32_EL1	27	/* ThumbEE Handler Base Register */
 #define	NR_SYS_REGS	28
 =======
+=======
+>>>>>>> v3.18
 #define MDSCR_EL1	22	/* Monitor Debug System Control Register */
 #define DBGBCR0_EL1	23	/* Debug Breakpoint Control Registers (0-15) */
 #define DBGBCR15_EL1	38
@@ -77,6 +85,9 @@
 #define	TEECR32_EL1	92	/* ThumbEE Configuration Register */
 #define	TEEHBR32_EL1	93	/* ThumbEE Handler Base Register */
 #define	NR_SYS_REGS	94
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 32bit mapping */
@@ -110,8 +121,11 @@
 #define c10_AMAIR1	(c10_AMAIR0 + 1)/* Aux Memory Attr Indirection Reg */
 #define c14_CNTKCTL	(CNTKCTL_EL1 * 2) /* Timer Control Register (PL1) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_CP15_REGS	(NR_SYS_REGS * 2)
 =======
+=======
+>>>>>>> v3.18
 
 #define cp14_DBGDSCRext	(MDSCR_EL1 * 2)
 #define cp14_DBGBCR0	(DBGBCR0_EL1 * 2)
@@ -122,12 +136,21 @@
 #define cp14_DBGDCCINT	(MDCCINT_EL1 * 2)
 
 #define NR_COPRO_REGS	(NR_SYS_REGS * 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ARM_EXCEPTION_IRQ	  0
 #define ARM_EXCEPTION_TRAP	  1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KVM_ARM64_DEBUG_DIRTY_SHIFT	0
+#define KVM_ARM64_DEBUG_DIRTY		(1 << KVM_ARM64_DEBUG_DIRTY_SHIFT)
+
+>>>>>>> v3.18
 =======
 #define KVM_ARM64_DEBUG_DIRTY_SHIFT	0
 #define KVM_ARM64_DEBUG_DIRTY		(1 << KVM_ARM64_DEBUG_DIRTY_SHIFT)
@@ -143,8 +166,13 @@ extern char __kvm_hyp_init_end[];
 extern char __kvm_hyp_vector[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char __kvm_hyp_code_start[];
 extern char __kvm_hyp_code_end[];
+=======
+#define	__kvm_hyp_code_start	__hyp_text_start
+#define	__kvm_hyp_code_end	__hyp_text_end
+>>>>>>> v3.18
 =======
 #define	__kvm_hyp_code_start	__hyp_text_start
 #define	__kvm_hyp_code_end	__hyp_text_end
@@ -155,7 +183,10 @@ extern void __kvm_tlb_flush_vmid_ipa(struct kvm *kvm, phys_addr_t ipa);
 
 extern int __kvm_vcpu_run(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 extern u64 __vgic_v3_get_ich_vtr_el2(void);
 
@@ -164,6 +195,9 @@ extern char __restore_vgic_v2_state[];
 extern char __save_vgic_v3_state[];
 extern char __restore_vgic_v3_state[];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

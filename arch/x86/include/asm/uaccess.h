@@ -41,6 +41,7 @@
  * Test whether a block of memory is a valid user space address.
  * Returns 0 if the range is valid, nonzero otherwise.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This is equivalent to the following test:
  * (u33)addr + (u33)size > (u33)current->addr_limit.seg (u65 for x86_64)
@@ -58,6 +59,8 @@
 	      "rm" (limit));						\
 	flag;								\
 =======
+=======
+>>>>>>> v3.18
  */
 static inline bool __chk_range_not_ok(unsigned long addr, unsigned long size, unsigned long limit)
 {
@@ -82,6 +85,9 @@ static inline bool __chk_range_not_ok(unsigned long addr, unsigned long size, un
 ({									\
 	__chk_user_ptr(addr);						\
 	__chk_range_not_ok((unsigned long __force)(addr), size, limit); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 })
 
@@ -106,7 +112,11 @@ static inline bool __chk_range_not_ok(unsigned long addr, unsigned long size, un
  */
 #define access_ok(type, addr, size) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(likely(__range_not_ok(addr, size, user_addr_max()) == 0))
+=======
+	likely(!__range_not_ok(addr, size, user_addr_max()))
+>>>>>>> v3.18
 =======
 	likely(!__range_not_ok(addr, size, user_addr_max()))
 >>>>>>> v3.18
@@ -185,7 +195,11 @@ __typeof__(__builtin_choose_expr(sizeof(x) > sizeof(0UL), 0ULL, 0UL))
  * for sign reasons.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The use of %edx as the register specifier is a bit of a
+=======
+ * The use of _ASM_DX as the register specifier is a bit of a
+>>>>>>> v3.18
 =======
  * The use of _ASM_DX as the register specifier is a bit of a
 >>>>>>> v3.18
@@ -194,6 +208,12 @@ __typeof__(__builtin_choose_expr(sizeof(x) > sizeof(0UL), 0ULL, 0UL))
  * (%ecx being the next register in gcc's x86 register sequence), and
  * %rdx on 64 bits.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Clang/LLVM cares about the size of the register, but still wants
+ * the base register for something that ends up being a pair.
+>>>>>>> v3.18
 =======
  *
  * Clang/LLVM cares about the size of the register, but still wants
@@ -204,7 +224,11 @@ __typeof__(__builtin_choose_expr(sizeof(x) > sizeof(0UL), 0ULL, 0UL))
 ({									\
 	int __ret_gu;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register __inttype(*(ptr)) __val_gu asm("%edx");		\
+=======
+	register __inttype(*(ptr)) __val_gu asm("%"_ASM_DX);		\
+>>>>>>> v3.18
 =======
 	register __inttype(*(ptr)) __val_gu asm("%"_ASM_DX);		\
 >>>>>>> v3.18
@@ -427,7 +451,11 @@ do {									\
 		     "2:\n"						\
 		     _ASM_EXTABLE_EX(1b, 2b)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     : ltype(x) : "m" (__m(addr)), "0" (0))
+=======
+		     : ltype(x) : "m" (__m(addr)))
+>>>>>>> v3.18
 =======
 		     : ltype(x) : "m" (__m(addr)))
 >>>>>>> v3.18
@@ -572,7 +600,10 @@ unsigned long __must_check clear_user(void __user *mem, unsigned long len);
 unsigned long __must_check __clear_user(void __user *mem, unsigned long len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void __cmpxchg_wrong_size(void)
 	__compiletime_error("Bad argument size for cmpxchg");
 
@@ -665,6 +696,9 @@ extern void __cmpxchg_wrong_size(void)
 		-EFAULT;						\
 })
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * movsl can be slow when source and dest are not both 8-byte aligned
@@ -684,7 +718,10 @@ extern struct movsl_mask {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned long __must_check _copy_from_user(void *to, const void __user *from,
 					   unsigned n);
 unsigned long __must_check _copy_to_user(void __user *to, const void *from,
@@ -783,6 +820,9 @@ copy_to_user(void __user *to, const void *from, unsigned long n)
 #undef __copy_from_user_overflow
 #undef __copy_to_user_overflow
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_X86_UACCESS_H */
 

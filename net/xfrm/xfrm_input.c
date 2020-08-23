@@ -17,7 +17,10 @@
 static struct kmem_cache *secpath_cachep __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(xfrm_input_afinfo_lock);
 static struct xfrm_input_afinfo __rcu *xfrm_input_afinfo[NPROTO];
 
@@ -93,6 +96,9 @@ static int xfrm_rcv_cb(struct sk_buff *skb, unsigned int family, u8 protocol,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __secpath_destroy(struct sec_path *sp)
 {
@@ -146,7 +152,11 @@ int xfrm_parse_spi(struct sk_buff *skb, u8 nexthdr, __be32 *spi, __be32 *seq)
 		if (!pskb_may_pull(skb, sizeof(struct ip_comp_hdr)))
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*spi = htonl(ntohs(*(__be16*)(skb_transport_header(skb) + 2)));
+=======
+		*spi = htonl(ntohs(*(__be16 *)(skb_transport_header(skb) + 2)));
+>>>>>>> v3.18
 =======
 		*spi = htonl(ntohs(*(__be16 *)(skb_transport_header(skb) + 2)));
 >>>>>>> v3.18
@@ -160,8 +170,13 @@ int xfrm_parse_spi(struct sk_buff *skb, u8 nexthdr, __be32 *spi, __be32 *seq)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*spi = *(__be32*)(skb_transport_header(skb) + offset);
 	*seq = *(__be32*)(skb_transport_header(skb) + offset_seq);
+=======
+	*spi = *(__be32 *)(skb_transport_header(skb) + offset);
+	*seq = *(__be32 *)(skb_transport_header(skb) + offset_seq);
+>>>>>>> v3.18
 =======
 	*spi = *(__be32 *)(skb_transport_header(skb) + offset);
 	*seq = *(__be32 *)(skb_transport_header(skb) + offset_seq);
@@ -196,7 +211,11 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 	__be32 seq;
 	__be32 seq_hi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfrm_state *x;
+=======
+	struct xfrm_state *x = NULL;
+>>>>>>> v3.18
 =======
 	struct xfrm_state *x = NULL;
 >>>>>>> v3.18
@@ -212,10 +231,13 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 		x = xfrm_input_state(skb);
 		seq = XFRM_SKB_CB(skb)->seq.input.low;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto resume;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		family = x->outer_mode->afinfo->family;
 		goto resume;
 	}
@@ -224,6 +246,9 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 				   XFRM_SPI_SKB_CB(skb)->daddroff);
 	family = XFRM_SPI_SKB_CB(skb)->family;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Allocate new secpath or COW existing one. */
 	if (!skb->sp || atomic_read(&skb->sp->refcnt) != 1) {
@@ -240,10 +265,13 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	daddr = (xfrm_address_t *)(skb_network_header(skb) +
 				   XFRM_SPI_SKB_CB(skb)->daddroff);
 	family = XFRM_SPI_SKB_CB(skb)->family;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	seq = 0;
@@ -268,8 +296,11 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 		skb->sp->xvec[skb->sp->len++] = x;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&x->lock);
 =======
+=======
+>>>>>>> v3.18
 		if (xfrm_tunnel_check(skb, x, family)) {
 			XFRM_INC_STATS(net, LINUX_MIB_XFRMINSTATEMODEERROR);
 			goto drop;
@@ -281,6 +312,9 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 			goto drop_unlock;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(x->km.state != XFRM_STATE_VALID)) {
 			XFRM_INC_STATS(net, LINUX_MIB_XFRMINSTATEINVALID);
@@ -316,7 +350,10 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 		if (nexthdr == -EINPROGRESS)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 resume:
@@ -381,11 +418,17 @@ resume:
 	} while (!err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = xfrm_rcv_cb(skb, family, x->type->proto, 0);
 	if (err)
 		goto drop;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nf_reset(skb);
 
@@ -401,6 +444,10 @@ drop_unlock:
 	spin_unlock(&x->lock);
 drop:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xfrm_rcv_cb(skb, family, x && x->type ? x->type->proto : nexthdr, -1);
+>>>>>>> v3.18
 =======
 	xfrm_rcv_cb(skb, family, x && x->type ? x->type->proto : nexthdr, -1);
 >>>>>>> v3.18

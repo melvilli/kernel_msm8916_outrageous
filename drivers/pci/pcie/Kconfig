@@ -3,7 +3,11 @@
 #
 config PCIEPORTBUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "PCI Express support"
+=======
+	bool "PCI Express Port Bus support"
+>>>>>>> v3.18
 =======
 	bool "PCI Express Port Bus support"
 >>>>>>> v3.18
@@ -19,7 +23,11 @@ config PCIEPORTBUS
 #
 config HOTPLUG_PCI_PCIE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "PCI Express Hotplug driver"
+=======
+	bool "PCI Express Hotplug driver"
+>>>>>>> v3.18
 =======
 	bool "PCI Express Hotplug driver"
 >>>>>>> v3.18
@@ -29,9 +37,12 @@ config HOTPLUG_PCI_PCIE
 	  Hotplug
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  To compile this driver as a module, choose M here: the
 	  module will be called pciehp.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	  When in doubt, say N.

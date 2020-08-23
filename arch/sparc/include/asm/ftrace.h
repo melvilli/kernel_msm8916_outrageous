@@ -7,7 +7,11 @@
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void _mcount(void);
+=======
+void _mcount(void);
+>>>>>>> v3.18
 =======
 void _mcount(void);
 >>>>>>> v3.18
@@ -27,10 +31,16 @@ struct dyn_arch_ftrace {
 #endif /*  CONFIG_DYNAMIC_FTRACE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned long prepare_ftrace_return(unsigned long parent,
 				    unsigned long self_addr,
 				    unsigned long frame_pointer);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_SPARC64_FTRACE */

@@ -11,6 +11,11 @@ struct ccw_driver;
  * @dev: embedded device structure
  * @cdev: variable number of slave devices, allocated as needed
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ungroup_work: work to be done when a ccwgroup notifier has action
+ *	type %BUS_NOTIFY_UNBIND_DRIVER
+>>>>>>> v3.18
 =======
  * @ungroup_work: work to be done when a ccwgroup notifier has action
  *	type %BUS_NOTIFY_UNBIND_DRIVER
@@ -28,6 +33,10 @@ struct ccwgroup_device {
 	unsigned int count;
 	struct device	dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct ungroup_work;
+>>>>>>> v3.18
 =======
 	struct work_struct ungroup_work;
 >>>>>>> v3.18

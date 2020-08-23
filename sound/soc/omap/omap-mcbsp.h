@@ -40,7 +40,11 @@ enum omap_mcbsp_div {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int omap_mcbsp_st_add_controls(struct snd_soc_pcm_runtime *rtd);
+=======
+int omap_mcbsp_st_add_controls(struct snd_soc_pcm_runtime *rtd, int port_id);
+>>>>>>> v3.18
 =======
 int omap_mcbsp_st_add_controls(struct snd_soc_pcm_runtime *rtd, int port_id);
 >>>>>>> v3.18

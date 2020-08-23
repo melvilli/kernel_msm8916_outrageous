@@ -61,9 +61,12 @@ static int kirkwood_cpuidle_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res == NULL)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ddr_operation_base = devm_ioremap_resource(&pdev->dev, res);
@@ -74,7 +77,11 @@ static int kirkwood_cpuidle_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kirkwood_cpuidle_remove(struct platform_device *pdev)
+=======
+static int kirkwood_cpuidle_remove(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int kirkwood_cpuidle_remove(struct platform_device *pdev)
 >>>>>>> v3.18

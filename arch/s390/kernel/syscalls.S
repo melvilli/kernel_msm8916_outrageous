@@ -10,6 +10,7 @@
 
 NI_SYSCALL							/* 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSCALL(sys_exit,sys_exit,sys32_exit_wrapper)
 SYSCALL(sys_fork,sys_fork,sys_fork)
 SYSCALL(sys_read,sys_read,sys32_read_wrapper)
@@ -27,6 +28,8 @@ SYSCALL(sys_mknod,sys_mknod,sys32_mknod_wrapper)
 SYSCALL(sys_chmod,sys_chmod,sys32_chmod_wrapper)		/* 15 */
 SYSCALL(sys_lchown16,sys_ni_syscall,sys32_lchown16_wrapper)	/* old lchown16 syscall*/
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_exit,sys_exit,compat_sys_exit)
 SYSCALL(sys_fork,sys_fork,sys_fork)
 SYSCALL(sys_read,sys_read,compat_sys_s390_read)
@@ -43,11 +46,15 @@ SYSCALL(sys_time,sys_ni_syscall,compat_sys_time)		/* old time syscall */
 SYSCALL(sys_mknod,sys_mknod,compat_sys_mknod)
 SYSCALL(sys_chmod,sys_chmod,compat_sys_chmod)			/* 15 */
 SYSCALL(sys_lchown16,sys_ni_syscall,compat_sys_s390_lchown16)	/* old lchown16 syscall*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 NI_SYSCALL							/* old break syscall holder */
 NI_SYSCALL							/* old stat syscall holder */
 SYSCALL(sys_lseek,sys_lseek,compat_sys_lseek)
 SYSCALL(sys_getpid,sys_getpid,sys_getpid)			/* 20 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL(sys_mount,sys_mount,sys32_mount_wrapper)
 SYSCALL(sys_oldumount,sys_oldumount,sys32_oldumount_wrapper)
@@ -93,6 +100,8 @@ SYSCALL(sys_chroot,sys_chroot,sys32_chroot_wrapper)
 SYSCALL(sys_ustat,sys_ustat,sys32_ustat_wrapper)
 SYSCALL(sys_dup2,sys_dup2,sys32_dup2_wrapper)
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_mount,sys_mount,compat_sys_mount)
 SYSCALL(sys_oldumount,sys_oldumount,compat_sys_oldumount)
 SYSCALL(sys_setuid16,sys_ni_syscall,compat_sys_s390_setuid16)	/* old setuid16 syscall*/
@@ -136,6 +145,9 @@ SYSCALL(sys_umask,sys_umask,compat_sys_umask)			/* 60 */
 SYSCALL(sys_chroot,sys_chroot,compat_sys_chroot)
 SYSCALL(sys_ustat,sys_ustat,compat_sys_ustat)
 SYSCALL(sys_dup2,sys_dup2,compat_sys_dup2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SYSCALL(sys_getppid,sys_getppid,sys_getppid)
 SYSCALL(sys_getpgrp,sys_getpgrp,sys_getpgrp)			/* 65 */
@@ -143,6 +155,7 @@ SYSCALL(sys_setsid,sys_setsid,sys_setsid)
 SYSCALL(sys_sigaction,sys_sigaction,compat_sys_sigaction)
 NI_SYSCALL							/* old sgetmask syscall*/
 NI_SYSCALL							/* old ssetmask syscall*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL(sys_setreuid16,sys_ni_syscall,sys32_setreuid16_wrapper)	/* old setreuid16 syscall */
 SYSCALL(sys_setregid16,sys_ni_syscall,sys32_setregid16_wrapper)	/* old setregid16 syscall */
@@ -184,6 +197,8 @@ SYSCALL(sys_newstat,sys_newstat,compat_sys_newstat_wrapper)
 SYSCALL(sys_newlstat,sys_newlstat,compat_sys_newlstat_wrapper)
 SYSCALL(sys_newfstat,sys_newfstat,compat_sys_newfstat_wrapper)
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_setreuid16,sys_ni_syscall,compat_sys_s390_setreuid16) /* old setreuid16 syscall */
 SYSCALL(sys_setregid16,sys_ni_syscall,compat_sys_s390_setregid16) /* old setregid16 syscall */
 SYSCALL(sys_sigsuspend,sys_sigsuspend,compat_sys_sigsuspend)
@@ -223,6 +238,9 @@ SYSCALL(sys_getitimer,sys_getitimer,compat_sys_getitimer)	/* 105 */
 SYSCALL(sys_newstat,sys_newstat,compat_sys_newstat)
 SYSCALL(sys_newlstat,sys_newlstat,compat_sys_newlstat)
 SYSCALL(sys_newfstat,sys_newfstat,compat_sys_newfstat)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 NI_SYSCALL							/* old uname syscall */
 SYSCALL(sys_lookup_dcookie,sys_lookup_dcookie,compat_sys_lookup_dcookie)	/* 110 */
@@ -230,6 +248,7 @@ SYSCALL(sys_vhangup,sys_vhangup,sys_vhangup)
 NI_SYSCALL							/* old "idle" system call */
 NI_SYSCALL							/* vm86old for i386 */
 SYSCALL(sys_wait4,sys_wait4,compat_sys_wait4)
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL(sys_swapoff,sys_swapoff,sys32_swapoff_wrapper)		/* 115 */
 SYSCALL(sys_sysinfo,sys_sysinfo,compat_sys_sysinfo_wrapper)
@@ -291,6 +310,8 @@ SYSCALL(sys_getresgid16,sys_ni_syscall,sys32_getresgid16_wrapper)	/* old getresg
 SYSCALL(sys_prctl,sys_prctl,sys32_prctl_wrapper)
 SYSCALL(sys_rt_sigreturn,sys_rt_sigreturn,sys32_rt_sigreturn)
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_swapoff,sys_swapoff,compat_sys_swapoff)		/* 115 */
 SYSCALL(sys_sysinfo,sys_sysinfo,compat_sys_sysinfo)
 SYSCALL(sys_s390_ipc,sys_s390_ipc,compat_sys_s390_ipc)
@@ -350,6 +371,9 @@ SYSCALL(sys_setresgid16,sys_ni_syscall,compat_sys_s390_setresgid16)	/* 170 old s
 SYSCALL(sys_getresgid16,sys_ni_syscall,compat_sys_s390_getresgid16)	/* old getresgid16 syscall */
 SYSCALL(sys_prctl,sys_prctl,compat_sys_prctl)
 SYSCALL(sys_rt_sigreturn,sys_rt_sigreturn,compat_sys_rt_sigreturn)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SYSCALL(sys_rt_sigaction,sys_rt_sigaction,compat_sys_rt_sigaction)
 SYSCALL(sys_rt_sigprocmask,sys_rt_sigprocmask,compat_sys_rt_sigprocmask) /* 175 */
@@ -358,6 +382,7 @@ SYSCALL(sys_rt_sigtimedwait,sys_rt_sigtimedwait,compat_sys_rt_sigtimedwait)
 SYSCALL(sys_rt_sigqueueinfo,sys_rt_sigqueueinfo,compat_sys_rt_sigqueueinfo)
 SYSCALL(sys_rt_sigsuspend,sys_rt_sigsuspend,compat_sys_rt_sigsuspend)
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSCALL(sys_pread64,sys_pread64,sys32_pread64_wrapper)		/* 180 */
 SYSCALL(sys_pwrite64,sys_pwrite64,sys32_pwrite64_wrapper)
 SYSCALL(sys_chown16,sys_ni_syscall,sys32_chown16_wrapper)	/* old chown16 syscall */
@@ -365,18 +390,24 @@ SYSCALL(sys_getcwd,sys_getcwd,sys32_getcwd_wrapper)
 SYSCALL(sys_capget,sys_capget,sys32_capget_wrapper)
 SYSCALL(sys_capset,sys_capset,sys32_capset_wrapper)		/* 185 */
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_pread64,sys_pread64,compat_sys_s390_pread64)		/* 180 */
 SYSCALL(sys_pwrite64,sys_pwrite64,compat_sys_s390_pwrite64)
 SYSCALL(sys_chown16,sys_ni_syscall,compat_sys_s390_chown16)	/* old chown16 syscall */
 SYSCALL(sys_getcwd,sys_getcwd,compat_sys_getcwd)
 SYSCALL(sys_capget,sys_capget,compat_sys_capget)
 SYSCALL(sys_capset,sys_capset,compat_sys_capset)		/* 185 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SYSCALL(sys_sigaltstack,sys_sigaltstack,compat_sys_sigaltstack)
 SYSCALL(sys_sendfile,sys_sendfile64,compat_sys_sendfile)
 NI_SYSCALL							/* streams1 */
 NI_SYSCALL							/* streams2 */
 SYSCALL(sys_vfork,sys_vfork,sys_vfork)				/* 190 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL(sys_getrlimit,sys_getrlimit,compat_sys_getrlimit_wrapper)
 SYSCALL(sys_mmap2,sys_mmap2,sys32_mmap2_wrapper)
@@ -387,6 +418,8 @@ SYSCALL(sys_lstat64,sys_ni_syscall,sys32_lstat64_wrapper)
 SYSCALL(sys_fstat64,sys_ni_syscall,sys32_fstat64_wrapper)
 SYSCALL(sys_lchown,sys_lchown,sys32_lchown_wrapper)
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_getrlimit,sys_getrlimit,compat_sys_getrlimit)
 SYSCALL(sys_mmap2,sys_mmap2,compat_sys_s390_mmap2)
 SYSCALL(sys_truncate64,sys_ni_syscall,compat_sys_s390_truncate64)
@@ -395,11 +428,15 @@ SYSCALL(sys_stat64,sys_ni_syscall,compat_sys_s390_stat64)		/* 195 */
 SYSCALL(sys_lstat64,sys_ni_syscall,compat_sys_s390_lstat64)
 SYSCALL(sys_fstat64,sys_ni_syscall,compat_sys_s390_fstat64)
 SYSCALL(sys_lchown,sys_lchown,compat_sys_lchown)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SYSCALL(sys_getuid,sys_getuid,sys_getuid)
 SYSCALL(sys_getgid,sys_getgid,sys_getgid)			/* 200 */
 SYSCALL(sys_geteuid,sys_geteuid,sys_geteuid)
 SYSCALL(sys_getegid,sys_getegid,sys_getegid)
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL(sys_setreuid,sys_setreuid,sys32_setreuid_wrapper)
 SYSCALL(sys_setregid,sys_setregid,sys32_setregid_wrapper)
@@ -544,6 +581,8 @@ SYSCALL(sys_ni_syscall,sys_s390_runtime_instr,sys_s390_runtime_instr_wrapper)
 SYSCALL(sys_kcmp,sys_kcmp,sys_kcmp_wrapper)
 SYSCALL(sys_finit_module,sys_finit_module,sys_finit_module_wrapper)
 =======
+=======
+>>>>>>> v3.18
 SYSCALL(sys_setreuid,sys_setreuid,compat_sys_setreuid)
 SYSCALL(sys_setregid,sys_setregid,compat_sys_setregid)
 SYSCALL(sys_getgroups,sys_getgroups,compat_sys_getgroups)	/* 205 */
@@ -693,4 +732,7 @@ SYSCALL(sys_seccomp,sys_seccomp,compat_sys_seccomp)
 SYSCALL(sys_getrandom,sys_getrandom,compat_sys_getrandom)
 SYSCALL(sys_memfd_create,sys_memfd_create,compat_sys_memfd_create) /* 350 */
 SYSCALL(sys_bpf,sys_bpf,compat_sys_bpf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

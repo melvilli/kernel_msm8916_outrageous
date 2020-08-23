@@ -52,7 +52,11 @@ struct extent_map *alloc_extent_map(void)
 	if (!em)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	em->in_tree = 0;
+=======
+	RB_CLEAR_NODE(&em->rb_node);
+>>>>>>> v3.18
 =======
 	RB_CLEAR_NODE(&em->rb_node);
 >>>>>>> v3.18
@@ -78,18 +82,25 @@ void free_extent_map(struct extent_map *em)
 	WARN_ON(atomic_read(&em->refs) == 0);
 	if (atomic_dec_and_test(&em->refs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ON(em->in_tree);
 		WARN_ON(!list_empty(&em->list));
 =======
+=======
+>>>>>>> v3.18
 		WARN_ON(extent_map_in_tree(em));
 		WARN_ON(!list_empty(&em->list));
 		if (test_bit(EXTENT_FLAG_FS_MAPPING, &em->flags))
 			kfree(em->bdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kmem_cache_free(extent_map_cache, em);
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct rb_node *tree_insert(struct rb_root *root, u64 offset,
 				   struct rb_node *node)
@@ -98,6 +109,8 @@ static struct rb_node *tree_insert(struct rb_root *root, u64 offset,
 	struct rb_node *parent = NULL;
 	struct extent_map *entry;
 =======
+=======
+>>>>>>> v3.18
 /* simple helper to do math around the end of an extent, handling wrap */
 static u64 range_end(u64 start, u64 len)
 {
@@ -113,12 +126,16 @@ static int tree_insert(struct rb_root *root, struct extent_map *em)
 	struct extent_map *entry = NULL;
 	struct rb_node *orig_parent = NULL;
 	u64 end = range_end(em->start, em->len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (*p) {
 		parent = *p;
 		entry = rb_entry(parent, struct extent_map, rb_node);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		WARN_ON(!entry->in_tree);
 
@@ -136,6 +153,8 @@ static int tree_insert(struct rb_root *root, struct extent_map *em)
 	rb_insert_color(node, root);
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 		if (em->start < entry->start)
 			p = &(*p)->rb_left;
 		else if (em->start >= extent_map_end(entry))
@@ -166,6 +185,9 @@ static int tree_insert(struct rb_root *root, struct extent_map *em)
 	rb_link_node(&em->rb_node, orig_parent, p);
 	rb_insert_color(&em->rb_node, root);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -189,8 +211,11 @@ static struct rb_node *__tree_search(struct rb_root *root, u64 offset,
 		prev_entry = entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ON(!entry->in_tree);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (offset < entry->start)
@@ -279,7 +304,10 @@ static void try_merge_map(struct extent_map_tree *tree, struct extent_map *em)
 			em->block_len += merge->block_len;
 			em->block_start = merge->block_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			merge->in_tree = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			em->mod_len = (em->mod_len + em->mod_start) - merge->mod_start;
@@ -288,6 +316,10 @@ static void try_merge_map(struct extent_map_tree *tree, struct extent_map *em)
 
 			rb_erase(&merge->rb_node, &tree->map);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			RB_CLEAR_NODE(&merge->rb_node);
+>>>>>>> v3.18
 =======
 			RB_CLEAR_NODE(&merge->rb_node);
 >>>>>>> v3.18
@@ -301,9 +333,15 @@ static void try_merge_map(struct extent_map_tree *tree, struct extent_map *em)
 	if (rb && mergable_maps(em, merge)) {
 		em->len += merge->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		em->block_len += merge->len;
 		rb_erase(&merge->rb_node, &tree->map);
 		merge->in_tree = 0;
+=======
+		em->block_len += merge->block_len;
+		rb_erase(&merge->rb_node, &tree->map);
+		RB_CLEAR_NODE(&merge->rb_node);
+>>>>>>> v3.18
 =======
 		em->block_len += merge->block_len;
 		rb_erase(&merge->rb_node, &tree->map);
@@ -342,6 +380,11 @@ int unpin_extent_cache(struct extent_map_tree *tree, u64 start, u64 len,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!test_bit(EXTENT_FLAG_LOGGING, &em->flags))
+		list_move(&em->list, &tree->modified_extents);
+>>>>>>> v3.18
 =======
 	if (!test_bit(EXTENT_FLAG_LOGGING, &em->flags))
 		list_move(&em->list, &tree->modified_extents);
@@ -374,8 +417,11 @@ void clear_em_logging(struct extent_map_tree *tree, struct extent_map *em)
 {
 	clear_bit(EXTENT_FLAG_LOGGING, &em->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (em->in_tree)
 =======
+=======
+>>>>>>> v3.18
 	if (extent_map_in_tree(em))
 		try_merge_map(tree, em);
 }
@@ -391,6 +437,9 @@ static inline void setup_extent_mapping(struct extent_map_tree *tree,
 	if (modified)
 		list_move(&em->list, &tree->modified_extents);
 	else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		try_merge_map(tree, em);
 }
@@ -409,6 +458,7 @@ int add_extent_mapping(struct extent_map_tree *tree,
 		       struct extent_map *em, int modified)
 {
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rb_node *rb;
 	struct extent_map *exist;
@@ -434,17 +484,23 @@ int add_extent_mapping(struct extent_map_tree *tree,
 	else
 		try_merge_map(tree, em);
 =======
+=======
+>>>>>>> v3.18
 
 	ret = tree_insert(&tree->map, em);
 	if (ret)
 		goto out;
 
 	setup_extent_mapping(tree, em, modified);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* simple helper to do math around the end of an extent, handling wrap */
 static u64 range_end(u64 start, u64 len)
@@ -454,6 +510,8 @@ static u64 range_end(u64 start, u64 len)
 	return start + len;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct extent_map *
@@ -536,10 +594,13 @@ int remove_extent_mapping(struct extent_map_tree *tree, struct extent_map *em)
 	if (!test_bit(EXTENT_FLAG_LOGGING, &em->flags))
 		list_del_init(&em->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	em->in_tree = 0;
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	RB_CLEAR_NODE(&em->rb_node);
 	return ret;
 }
@@ -558,4 +619,7 @@ void replace_extent_mapping(struct extent_map_tree *tree,
 
 	setup_extent_mapping(tree, new, modified);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

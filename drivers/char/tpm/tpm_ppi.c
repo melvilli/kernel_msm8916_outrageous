@@ -1,5 +1,6 @@
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include "tpm.h"
 
@@ -12,6 +13,10 @@ static const u8 tpm_ppi_uuid[] = {
 };
 static char *tpm_device_name = "TPM";
 
+=======
+#include "tpm.h"
+
+>>>>>>> v3.18
 =======
 #include "tpm.h"
 
@@ -29,6 +34,7 @@ static char *tpm_device_name = "TPM";
 #define PPI_VS_REQ_END		255
 #define PPI_VERSION_LEN		3
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static acpi_status ppi_callback(acpi_handle handle, u32 level, void *context,
 				void **return_value)
@@ -61,6 +67,8 @@ static inline void ppi_assign_params(union acpi_object params[4],
 	params[3].package.count = 0;
 	params[3].package.elements = NULL;
 =======
+=======
+>>>>>>> v3.18
 static const u8 tpm_ppi_uuid[] = {
 	0xA6, 0xFA, 0xDD, 0x3D,
 	0x1B, 0x36,
@@ -102,12 +110,16 @@ tpm_eval_dsm(int func, acpi_object_type type, union acpi_object *argv4)
 	BUG_ON(!tpm_ppi_handle);
 	return acpi_evaluate_dsm_typed(tpm_ppi_handle, tpm_ppi_uuid,
 				       TPM_PPI_REVISION_ID, func, argv4, type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static ssize_t tpm_show_ppi_version(struct device *dev,
 				    struct device_attribute *attr, char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	acpi_handle handle;
 	acpi_status status;
@@ -136,11 +148,15 @@ static ssize_t tpm_show_ppi_version(struct device *dev,
 =======
 	return scnprintf(buf, PAGE_SIZE, "%s\n", tpm_ppi_version);
 >>>>>>> v3.18
+=======
+	return scnprintf(buf, PAGE_SIZE, "%s\n", tpm_ppi_version);
+>>>>>>> v3.18
 }
 
 static ssize_t tpm_show_ppi_request(struct device *dev,
 				    struct device_attribute *attr, char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	acpi_handle handle;
 	acpi_status status;
@@ -163,6 +179,8 @@ static ssize_t tpm_show_ppi_request(struct device *dev,
 	if (ACPI_FAILURE(status))
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	ssize_t size = -EINVAL;
 	union acpi_object *obj;
 
@@ -170,6 +188,9 @@ static ssize_t tpm_show_ppi_request(struct device *dev,
 	if (!obj)
 		return -ENXIO;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * output.pointer should be of package type, including two integers.
@@ -177,6 +198,7 @@ static ssize_t tpm_show_ppi_request(struct device *dev,
 	 * error. The second is pending TPM operation requested by the OS, 0
 	 * means none and >0 means operation value.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret_obj = ((union acpi_object *)output.pointer)->package.elements;
 	if (ret_obj->type == ACPI_TYPE_INTEGER) {
@@ -197,6 +219,8 @@ cleanup:
 	kfree(output.pointer);
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	if (obj->package.count == 2 &&
 	    obj->package.elements[0].type == ACPI_TYPE_INTEGER &&
 	    obj->package.elements[1].type == ACPI_TYPE_INTEGER) {
@@ -210,6 +234,9 @@ cleanup:
 	ACPI_FREE(obj);
 
 	return size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -217,6 +244,7 @@ static ssize_t tpm_store_ppi_request(struct device *dev,
 				     struct device_attribute *attr,
 				     const char *buf, size_t count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char version[PPI_VERSION_LEN + 1];
 	acpi_handle handle;
@@ -248,12 +276,17 @@ static ssize_t tpm_store_ppi_request(struct device *dev,
 	output.length = ACPI_ALLOCATE_BUFFER;
 	output.pointer = NULL;
 =======
+=======
+>>>>>>> v3.18
 	u32 req;
 	u64 ret;
 	int func = TPM_PPI_FN_SUBREQ;
 	union acpi_object *obj, tmp;
 	union acpi_object argv4 = ACPI_INIT_DSM_ARGV4(1, &tmp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * the function to submit TPM operation request to pre-os environment
@@ -261,15 +294,21 @@ static ssize_t tpm_store_ppi_request(struct device *dev,
 	 * version 1.1
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strcmp(version, "1.1") < 0)
 		params[2].integer.value = TPM_PPI_FN_SUBREQ;
 	else
 		params[2].integer.value = TPM_PPI_FN_SUBREQ2;
 =======
+=======
+>>>>>>> v3.18
 	if (acpi_check_dsm(tpm_ppi_handle, tpm_ppi_uuid, TPM_PPI_REVISION_ID,
 			   1 << TPM_PPI_FN_SUBREQ2))
 		func = TPM_PPI_FN_SUBREQ2;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * PPI spec defines params[3].type as ACPI_TYPE_PACKAGE. Some BIOS
@@ -277,6 +316,7 @@ static ssize_t tpm_store_ppi_request(struct device *dev,
 	 * string/package type. For PPI version 1.0 and 1.1, use buffer type
 	 * for compatibility, and use package type since 1.2 according to spec.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (strcmp(version, "1.2") < 0) {
 		params[3].type = ACPI_TYPE_BUFFER;
@@ -304,6 +344,8 @@ static ssize_t tpm_store_ppi_request(struct device *dev,
 	kfree(output.pointer);
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	if (strcmp(tpm_ppi_version, "1.2") < 0) {
 		if (sscanf(buf, "%d", &req) != 1)
 			return -EINVAL;
@@ -328,6 +370,9 @@ static ssize_t tpm_store_ppi_request(struct device *dev,
 		return (acpi_status)count;
 
 	return (ret == 1) ? -EPERM : -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -335,6 +380,7 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 					      struct device_attribute *attr,
 					      char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char version[PPI_VERSION_LEN + 1];
 	acpi_handle handle;
@@ -345,6 +391,8 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 	u32 ret;
 	char *info[] = {
 =======
+=======
+>>>>>>> v3.18
 	u32 ret;
 	acpi_status status;
 	union acpi_object *obj = NULL;
@@ -355,6 +403,9 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 	};
 
 	static char *info[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"None",
 		"Shutdown",
@@ -362,6 +413,7 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 		"OS Vendor-specific",
 		"Error",
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input.count = 4;
 	ppi_assign_params(params, TPM_PPI_FN_VERSION);
@@ -382,11 +434,15 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 	/*
 	 * PPI spec defines params[3].type as empty package, but some platforms
 	 * (e.g. Capella with PPI 1.0) need integer/string/buffer type, so for
 	 * compatibility, define params[3].type as buffer, if PPI version < 1.2
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (strcmp(version, "1.2") < 0) {
 		params[3].type = ACPI_TYPE_BUFFER;
@@ -403,6 +459,8 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 		return -ENOMEM;
 	ret = ((union acpi_object *)output.pointer)->integer.value;
 =======
+=======
+>>>>>>> v3.18
 	if (strcmp(tpm_ppi_version, "1.2") < 0)
 		obj = &tmp;
 	obj = tpm_eval_dsm(TPM_PPI_FN_GETACT, ACPI_TYPE_INTEGER, obj);
@@ -413,6 +471,9 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 		ACPI_FREE(obj);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < ARRAY_SIZE(info) - 1)
 		status = scnprintf(buf, PAGE_SIZE, "%d: %s\n", ret, info[ret]);
@@ -420,7 +481,10 @@ static ssize_t tpm_show_ppi_transition_action(struct device *dev,
 		status = scnprintf(buf, PAGE_SIZE, "%d: %s\n", ret,
 				   info[ARRAY_SIZE(info)-1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(output.pointer);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return status;
@@ -430,6 +494,7 @@ static ssize_t tpm_show_ppi_response(struct device *dev,
 				     struct device_attribute *attr,
 				     char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	acpi_handle handle;
 	acpi_status status;
@@ -453,6 +518,8 @@ static ssize_t tpm_show_ppi_response(struct device *dev,
 	if (ACPI_FAILURE(status))
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	acpi_status status = -EINVAL;
 	union acpi_object *obj, *ret_obj;
 	u64 req, res;
@@ -461,6 +528,9 @@ static ssize_t tpm_show_ppi_response(struct device *dev,
 	if (!obj)
 		return -ENXIO;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * parameter output.pointer should be of package type, including
@@ -469,6 +539,7 @@ static ssize_t tpm_show_ppi_response(struct device *dev,
 	 * the most recent TPM operation request. Only if the first is 0, and
 	 * the second integer is not 0, the response makes sense.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret_obj = ((union acpi_object *)output.pointer)->package.elements;
 	if (ret_obj->type != ACPI_TYPE_INTEGER) {
@@ -516,6 +587,8 @@ static ssize_t tpm_show_ppi_response(struct device *dev,
 cleanup:
 	kfree(output.pointer);
 =======
+=======
+>>>>>>> v3.18
 	ret_obj = obj->package.elements;
 	if (obj->package.count < 3 ||
 	    ret_obj[0].type != ACPI_TYPE_INTEGER ||
@@ -553,12 +626,16 @@ cleanup:
 
 cleanup:
 	ACPI_FREE(obj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
 
 static ssize_t show_ppi_operations(char *buf, u32 start, u32 end)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char *str = buf;
 	char version[PPI_VERSION_LEN + 1];
@@ -572,6 +649,8 @@ static ssize_t show_ppi_operations(char *buf, u32 start, u32 end)
 	u32 ret;
 	char *info[] = {
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	u32 ret;
 	char *str = buf;
@@ -579,6 +658,9 @@ static ssize_t show_ppi_operations(char *buf, u32 start, u32 end)
 	union acpi_object argv = ACPI_INIT_DSM_ARGV4(1, &tmp);
 
 	static char *info[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"Not implemented",
 		"BIOS only",
@@ -586,6 +668,7 @@ static ssize_t show_ppi_operations(char *buf, u32 start, u32 end)
 		"User required",
 		"User not required",
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input.count = 4;
 	ppi_assign_params(params, TPM_PPI_FN_VERSION);
@@ -630,6 +713,8 @@ static ssize_t show_ppi_operations(char *buf, u32 start, u32 end)
 		output.pointer = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (!acpi_check_dsm(tpm_ppi_handle, tpm_ppi_uuid, TPM_PPI_REVISION_ID,
 			    1 << TPM_PPI_FN_GETOPR))
@@ -651,6 +736,9 @@ static ssize_t show_ppi_operations(char *buf, u32 start, u32 end)
 					 i, ret, info[ret]);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return str - buf;
 }
@@ -694,6 +782,7 @@ static struct attribute_group ppi_attr_grp = {
 int tpm_add_ppi(struct kobject *parent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sysfs_create_group(parent, &ppi_attr_grp);
 }
 EXPORT_SYMBOL_GPL(tpm_add_ppi);
@@ -706,6 +795,8 @@ EXPORT_SYMBOL_GPL(tpm_remove_ppi);
 
 MODULE_LICENSE("GPL");
 =======
+=======
+>>>>>>> v3.18
 	/* Cache TPM ACPI handle and version string */
 	acpi_walk_namespace(ACPI_TYPE_DEVICE, ACPI_ROOT_OBJECT, ACPI_UINT32_MAX,
 			    ppi_callback, NULL, NULL, &tpm_ppi_handle);
@@ -717,4 +808,7 @@ void tpm_remove_ppi(struct kobject *parent)
 	if (tpm_ppi_handle)
 		sysfs_remove_group(parent, &ppi_attr_grp);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

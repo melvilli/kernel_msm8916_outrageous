@@ -323,6 +323,10 @@ static struct platform_pwm_backlight_data palm27x_backlight_data = {
 	.dft_brightness	= 0x7e,
 	.pwm_period_ns	= 3500 * 1024,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18

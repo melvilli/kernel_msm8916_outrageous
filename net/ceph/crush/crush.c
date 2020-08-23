@@ -117,7 +117,11 @@ void crush_destroy(struct crush_map *map)
 		__u32 b;
 		for (b = 0; b < map->max_rules; b++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kfree(map->rules[b]);
+=======
+			crush_destroy_rule(map->rules[b]);
+>>>>>>> v3.18
 =======
 			crush_destroy_rule(map->rules[b]);
 >>>>>>> v3.18
@@ -128,10 +132,16 @@ void crush_destroy(struct crush_map *map)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 void crush_destroy_rule(struct crush_rule *rule)
 {
 	kfree(rule);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

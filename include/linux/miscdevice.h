@@ -12,6 +12,7 @@
 
 #define PSMOUSE_MINOR		1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MS_BUSMOUSE_MINOR	2
 #define ATIXL_BUSMOUSE_MINOR	3
 /*#define AMIGAMOUSE_MINOR	4	FIXME OBSOLETE */
@@ -20,6 +21,8 @@
 #define APOLLO_MOUSE_MINOR	7
 #define PC110PAD_MINOR		9
 =======
+=======
+>>>>>>> v3.18
 #define MS_BUSMOUSE_MINOR	2	/* unused */
 #define ATIXL_BUSMOUSE_MINOR	3	/* unused */
 /*#define AMIGAMOUSE_MINOR	4	FIXME OBSOLETE */
@@ -27,12 +30,16 @@
 #define SUN_MOUSE_MINOR		6	/* unused */
 #define APOLLO_MOUSE_MINOR	7	/* unused */
 #define PC110PAD_MINOR		9	/* unused */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*#define ADB_MOUSE_MINOR	10	FIXME OBSOLETE */
 #define WATCHDOG_MINOR		130	/* Watchdog timer     */
 #define TEMP_MINOR		131	/* Temperature Sensor */
 #define RTC_MINOR		135
 #define EFI_RTC_MINOR		136	/* EFI Time services */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SUN_OPENPROM_MINOR	139
 #define DMAPI_MINOR		140	/* DMAPI */
@@ -43,6 +50,8 @@
 #define MICROCODE_MINOR		184
 #define TUN_MINOR		200
 =======
+=======
+>>>>>>> v3.18
 #define VHCI_MINOR		137
 #define SUN_OPENPROM_MINOR	139
 #define DMAPI_MINOR		140	/* unused */
@@ -54,6 +63,9 @@
 #define VFIO_MINOR		196
 #define TUN_MINOR		200
 #define CUSE_MINOR		203
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MWAVE_MINOR		219	/* ACP/Mwave Modem */
 #define MPT_MINOR		220
@@ -86,7 +98,11 @@ struct miscdevice  {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int misc_register(struct miscdevice * misc);
+=======
+extern int misc_register(struct miscdevice *misc);
+>>>>>>> v3.18
 =======
 extern int misc_register(struct miscdevice *misc);
 >>>>>>> v3.18

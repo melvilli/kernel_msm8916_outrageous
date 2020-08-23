@@ -71,7 +71,10 @@ enum {
 	IEEE802154_ATTR_DEV_TYPE,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IEEE802154_ATTR_TXPOWER,
 	IEEE802154_ATTR_LBT_ENABLED,
 	IEEE802154_ATTR_CCA_MODE,
@@ -98,6 +101,9 @@ enum {
 	IEEE802154_ATTR_LLSEC_DEV_OVERRIDE,
 	IEEE802154_ATTR_LLSEC_DEV_KEY_MODE,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IEEE802154_ATTR_MAX,
 };
@@ -152,7 +158,10 @@ enum {
 	IEEE802154_DEL_IFACE,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IEEE802154_SET_MACPARAMS,
 
 	IEEE802154_LLSEC_GETPARAMS,
@@ -170,6 +179,9 @@ enum {
 	IEEE802154_LLSEC_ADD_SECLEVEL,
 	IEEE802154_LLSEC_DEL_SECLEVEL,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IEEE802154_CMD_MAX,
 };

@@ -218,11 +218,17 @@ static ssize_t qeth_dev_prioqing_show(struct device *dev,
 	case QETH_PRIO_Q_ING_TOS:
 		return sprintf(buf, "%s\n", "by type of service");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case QETH_PRIO_Q_ING_SKB:
 		return sprintf(buf, "%s\n", "by skb-priority");
 	case QETH_PRIO_Q_ING_VLAN:
 		return sprintf(buf, "%s\n", "by VLAN headers");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return sprintf(buf, "always queue %i\n",
@@ -258,12 +264,15 @@ static ssize_t qeth_dev_prioqing_store(struct device *dev,
 
 	tmp = strsep((char **) &buf, "\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(tmp, "prio_queueing_prec"))
 		card->qdio.do_prio_queueing = QETH_PRIO_Q_ING_PREC;
 	else if (!strcmp(tmp, "prio_queueing_tos"))
 		card->qdio.do_prio_queueing = QETH_PRIO_Q_ING_TOS;
 	else if (!strcmp(tmp, "no_prio_queueing:0")) {
 =======
+=======
+>>>>>>> v3.18
 	if (!strcmp(tmp, "prio_queueing_prec")) {
 		card->qdio.do_prio_queueing = QETH_PRIO_Q_ING_PREC;
 		card->qdio.default_out_queue = QETH_DEFAULT_QUEUE;
@@ -281,6 +290,9 @@ static ssize_t qeth_dev_prioqing_store(struct device *dev,
 		card->qdio.do_prio_queueing = QETH_PRIO_Q_ING_VLAN;
 		card->qdio.default_out_queue = QETH_DEFAULT_QUEUE;
 	} else if (!strcmp(tmp, "no_prio_queueing:0")) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		card->qdio.do_prio_queueing = QETH_NO_PRIO_QUEUEING;
 		card->qdio.default_out_queue = 0;
@@ -555,8 +567,11 @@ out:
 
 static DEVICE_ATTR(isolation, 0644, qeth_dev_isolation_show,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   qeth_dev_isolation_store);
 =======
+=======
+>>>>>>> v3.18
 			qeth_dev_isolation_store);
 
 static ssize_t qeth_dev_switch_attrs_show(struct device *dev,
@@ -593,6 +608,9 @@ static ssize_t qeth_dev_switch_attrs_show(struct device *dev,
 
 static DEVICE_ATTR(switch_attrs, 0444,
 		   qeth_dev_switch_attrs_show, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t qeth_hw_trap_show(struct device *dev,
@@ -779,6 +797,10 @@ static struct attribute *qeth_device_attrs[] = {
 	&dev_attr_isolation.attr,
 	&dev_attr_hw_trap.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&dev_attr_switch_attrs.attr,
+>>>>>>> v3.18
 =======
 	&dev_attr_switch_attrs.attr,
 >>>>>>> v3.18

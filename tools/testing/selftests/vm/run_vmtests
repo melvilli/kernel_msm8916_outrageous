@@ -5,6 +5,10 @@
 needmem=262144
 mnt=./huge
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+exitcode=0
+>>>>>>> v3.18
 =======
 exitcode=0
 >>>>>>> v3.18
@@ -46,6 +50,10 @@ echo "--------------------"
 if [ $? -ne 0 ]; then
 	echo "[FAIL]"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exitcode=1
+>>>>>>> v3.18
 =======
 	exitcode=1
 >>>>>>> v3.18
@@ -64,6 +72,10 @@ echo "--------------------"
 if [ $? -ne 0 ]; then
 	echo "[FAIL]"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exitcode=1
+>>>>>>> v3.18
 =======
 	exitcode=1
 >>>>>>> v3.18
@@ -80,7 +92,10 @@ echo "--------------------"
 if [ $? -ne 0 ]; then
 	echo "[FAIL]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	exitcode=1
 else
 	echo "[PASS]"
@@ -93,6 +108,9 @@ echo "--------------------"
 if [ $? -ne 0 ]; then
 	echo "[FAIL]"
 	exitcode=1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 else
 	echo "[PASS]"
@@ -103,6 +121,10 @@ umount $mnt
 rm -rf $mnt
 echo $nr_hugepgs > /proc/sys/vm/nr_hugepages
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+exit $exitcode
+>>>>>>> v3.18
 =======
 exit $exitcode
 >>>>>>> v3.18

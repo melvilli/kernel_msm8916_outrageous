@@ -7,11 +7,15 @@ Required properties:
 - reg: Address and length of the register set for the device
 - interrupts: Should contain macb interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-mode: String, operation mode of the PHY interface.
   Supported values are: "mii", "rmii".
 
 Optional properties:
 - local-mac-address: 6 bytes, mac address
+=======
+- phy-mode: see ethernet.txt file in the same directory.
+>>>>>>> v3.18
 =======
 - phy-mode: see ethernet.txt file in the same directory.
 >>>>>>> v3.18

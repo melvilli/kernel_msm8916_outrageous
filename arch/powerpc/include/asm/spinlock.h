@@ -29,6 +29,7 @@
 #include <asm/ppc-opcode.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define arch_spin_is_locked(x)		((x)->slock != 0)
 
 #ifdef CONFIG_PPC64
@@ -36,6 +37,8 @@
 #define LOCK_TOKEN	(*(u32 *)(&get_paca()->lock_token))
 #else
 =======
+=======
+>>>>>>> v3.18
 #define smp_mb__after_unlock_lock()	smp_mb()  /* Full ordering for lock. */
 
 #ifdef CONFIG_PPC64
@@ -46,6 +49,9 @@
 #define LOCK_TOKEN	(*(u32 *)(&get_paca()->paca_index))
 #endif
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LOCK_TOKEN	1
 #endif
@@ -64,7 +70,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __always_inline int arch_spin_value_unlocked(arch_spinlock_t lock)
 {
 	return lock.slock == 0;
@@ -76,6 +85,9 @@ static inline int arch_spin_is_locked(arch_spinlock_t *lock)
 	return !arch_spin_value_unlocked(*lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This returns the old value in the lock, so we succeeded
@@ -124,7 +136,11 @@ static inline int arch_spin_trylock(arch_spinlock_t *lock)
 #if defined(CONFIG_PPC_SPLPAR)
 /* We only yield to the hypervisor if we are in shared processor mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHARED_PROCESSOR (local_paca->lppaca_ptr->shared_proc)
+=======
+#define SHARED_PROCESSOR (lppaca_shared_proc(local_paca->lppaca_ptr))
+>>>>>>> v3.18
 =======
 #define SHARED_PROCESSOR (lppaca_shared_proc(local_paca->lppaca_ptr))
 >>>>>>> v3.18

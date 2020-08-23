@@ -39,6 +39,7 @@
 #include <sound/initval.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int cq93vc_read(struct snd_soc_codec *codec,
 						unsigned int reg)
 {
@@ -59,6 +60,8 @@ static inline int cq93vc_write(struct snd_soc_codec *codec, unsigned int reg,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct snd_kcontrol_new cq93vc_snd_controls[] = {
 	SOC_SINGLE("PGA Capture Volume", DAVINCI_VC_REG05, 0, 0x03, 0),
 	SOC_SINGLE("Mono DAC Playback Volume", DAVINCI_VC_REG09, 0, 0x3f, 0),
@@ -68,6 +71,7 @@ static int cq93vc_mute(struct snd_soc_dai *dai, int mute)
 {
 	struct snd_soc_codec *codec = dai->codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reg = cq93vc_read(codec, DAVINCI_VC_REG09) & ~DAVINCI_VC_REG09_MUTE;
 
 	if (mute)
@@ -76,6 +80,8 @@ static int cq93vc_mute(struct snd_soc_dai *dai, int mute)
 	else
 		cq93vc_write(codec, DAVINCI_VC_REG09, reg);
 =======
+=======
+>>>>>>> v3.18
 	u8 reg;
 
 	if (mute)
@@ -85,6 +91,9 @@ static int cq93vc_mute(struct snd_soc_dai *dai, int mute)
 
 	snd_soc_update_bits(codec, DAVINCI_VC_REG09, DAVINCI_VC_REG09_MUTE,
 			    reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -95,7 +104,11 @@ static int cq93vc_set_dai_sysclk(struct snd_soc_dai *codec_dai,
 {
 	struct snd_soc_codec *codec = codec_dai->codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct davinci_vc *davinci_vc = codec->control_data;
+=======
+	struct davinci_vc *davinci_vc = codec->dev->platform_data;
+>>>>>>> v3.18
 =======
 	struct davinci_vc *davinci_vc = codec->dev->platform_data;
 >>>>>>> v3.18
@@ -117,7 +130,11 @@ static int cq93vc_set_bias_level(struct snd_soc_codec *codec,
 	switch (level) {
 	case SND_SOC_BIAS_ON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cq93vc_write(codec, DAVINCI_VC_REG12,
+=======
+		snd_soc_write(codec, DAVINCI_VC_REG12,
+>>>>>>> v3.18
 =======
 		snd_soc_write(codec, DAVINCI_VC_REG12,
 >>>>>>> v3.18
@@ -127,7 +144,11 @@ static int cq93vc_set_bias_level(struct snd_soc_codec *codec,
 		break;
 	case SND_SOC_BIAS_STANDBY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cq93vc_write(codec, DAVINCI_VC_REG12,
+=======
+		snd_soc_write(codec, DAVINCI_VC_REG12,
+>>>>>>> v3.18
 =======
 		snd_soc_write(codec, DAVINCI_VC_REG12,
 >>>>>>> v3.18
@@ -136,7 +157,11 @@ static int cq93vc_set_bias_level(struct snd_soc_codec *codec,
 	case SND_SOC_BIAS_OFF:
 		/* force all power off */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cq93vc_write(codec, DAVINCI_VC_REG12,
+=======
+		snd_soc_write(codec, DAVINCI_VC_REG12,
+>>>>>>> v3.18
 =======
 		snd_soc_write(codec, DAVINCI_VC_REG12,
 >>>>>>> v3.18
@@ -186,11 +211,14 @@ static int cq93vc_probe(struct snd_soc_codec *codec)
 
 	davinci_vc->cq93vc.codec = codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = davinci_vc;
 
 	/* Set controls */
 	snd_soc_add_codec_controls(codec, cq93vc_snd_controls,
 			     ARRAY_SIZE(cq93vc_snd_controls));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -208,10 +236,13 @@ static int cq93vc_remove(struct snd_soc_codec *codec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_soc_codec_driver soc_codec_dev_cq93vc = {
 	.read = cq93vc_read,
 	.write = cq93vc_write,
 =======
+=======
+>>>>>>> v3.18
 static struct regmap *cq93vc_get_regmap(struct device *dev)
 {
 	struct davinci_vc *davinci_vc = dev->platform_data;
@@ -220,12 +251,21 @@ static struct regmap *cq93vc_get_regmap(struct device *dev)
 }
 
 static struct snd_soc_codec_driver soc_codec_dev_cq93vc = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set_bias_level = cq93vc_set_bias_level,
 	.probe = cq93vc_probe,
 	.remove = cq93vc_remove,
 	.resume = cq93vc_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_regmap = cq93vc_get_regmap,
+	.controls = cq93vc_snd_controls,
+	.num_controls = ARRAY_SIZE(cq93vc_snd_controls),
+>>>>>>> v3.18
 =======
 	.get_regmap = cq93vc_get_regmap,
 	.controls = cq93vc_snd_controls,

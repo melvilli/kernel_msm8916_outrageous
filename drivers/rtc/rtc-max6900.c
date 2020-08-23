@@ -165,6 +165,7 @@ static int max6900_i2c_read_time(struct i2c_client *client, struct rtc_time *tm)
 static int max6900_i2c_clear_write_protect(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 	rc = i2c_smbus_write_byte_data(client, MAX6900_REG_CONTROL_WRITE, 0);
 	if (rc < 0) {
@@ -173,6 +174,9 @@ static int max6900_i2c_clear_write_protect(struct i2c_client *client)
 		return -EIO;
 	}
 	return 0;
+=======
+	return i2c_smbus_write_byte_data(client, MAX6900_REG_CONTROL_WRITE, 0);
+>>>>>>> v3.18
 =======
 	return i2c_smbus_write_byte_data(client, MAX6900_REG_CONTROL_WRITE, 0);
 >>>>>>> v3.18
@@ -217,11 +221,14 @@ static int max6900_rtc_set_time(struct device *dev, struct rtc_time *tm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max6900_remove(struct i2c_client *client)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct rtc_class_ops max6900_rtc_ops = {
@@ -260,7 +267,10 @@ static struct i2c_driver max6900_driver = {
 		   },
 	.probe = max6900_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max6900_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max6900_id,

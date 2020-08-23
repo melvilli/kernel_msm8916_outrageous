@@ -612,8 +612,11 @@ int hwarc_reset(struct uwb_rc *uwb_rc)
 {
 	struct hwarc *hwarc = uwb_rc->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return usb_reset_device(hwarc->usb_dev);
 =======
+=======
+>>>>>>> v3.18
 	int result;
 
 	/* device lock must be held when calling usb_reset_device. */
@@ -624,6 +627,9 @@ int hwarc_reset(struct uwb_rc *uwb_rc)
 	}
 
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -723,13 +729,19 @@ static int hwarc_neep_init(struct uwb_rc *rc)
 error_neep_submit:
 	usb_free_urb(hwarc->neep_urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_urb_alloc:
 	free_page((unsigned long)hwarc->rd_buffer);
 =======
+=======
+>>>>>>> v3.18
 	hwarc->neep_urb = NULL;
 error_urb_alloc:
 	free_page((unsigned long)hwarc->rd_buffer);
 	hwarc->rd_buffer = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_rd_buffer:
 	return -ENOMEM;
@@ -744,12 +756,18 @@ static void hwarc_neep_release(struct uwb_rc *rc)
 	usb_kill_urb(hwarc->neep_urb);
 	usb_free_urb(hwarc->neep_urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_page((unsigned long)hwarc->rd_buffer);
 =======
+=======
+>>>>>>> v3.18
 	hwarc->neep_urb = NULL;
 
 	free_page((unsigned long)hwarc->rd_buffer);
 	hwarc->rd_buffer = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -839,9 +857,12 @@ static int hwarc_probe(struct usb_interface *iface,
 	struct device *dev = &iface->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iface->cur_altsetting->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	result = -ENOMEM;
@@ -934,13 +955,19 @@ static const struct usb_device_id hwarc_id_table[] = {
 	{ USB_DEVICE_AND_INTERFACE_INFO(0x8086, 0x0c3b, 0xe0, 0x01, 0x02),
 	  .driver_info = WUSB_QUIRK_WHCI_CMD_EVT },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Alereon 5310 */
 	{ USB_DEVICE_AND_INTERFACE_INFO(0x13dc, 0x5310, 0xe0, 0x01, 0x02),
 	  .driver_info = WUSB_QUIRK_WHCI_CMD_EVT },
 	/* Alereon 5611 */
 	{ USB_DEVICE_AND_INTERFACE_INFO(0x13dc, 0x5611, 0xe0, 0x01, 0x02),
 	  .driver_info = WUSB_QUIRK_WHCI_CMD_EVT },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Generic match for the Radio Control interface */
 	{ USB_INTERFACE_INFO(0xe0, 0x01, 0x02), },

@@ -1,16 +1,22 @@
 config EVM
 	boolean "EVM support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SECURITY && KEYS && (TRUSTED_KEYS=y || TRUSTED_KEYS=n)
 	select CRYPTO_HMAC
 	select CRYPTO_MD5
 	select CRYPTO_SHA1
 	select ENCRYPTED_KEYS
 =======
+=======
+>>>>>>> v3.18
 	select KEYS
 	select ENCRYPTED_KEYS
 	select CRYPTO_HMAC
 	select CRYPTO_SHA1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default n
 	help
@@ -19,6 +25,7 @@ config EVM
 
 	  If you are unsure how to answer this question, answer N.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config EVM_HMAC_VERSION
 	int "EVM HMAC version"
@@ -33,6 +40,8 @@ config EVM_HMAC_VERSION
 	  additional info to the calculation, requires existing EVM
 	  labeled file systems to be relabeled.  
 =======
+=======
+>>>>>>> v3.18
 config EVM_ATTR_FSUUID
 	bool "FSUUID (version 2)"
 	default y
@@ -64,4 +73,7 @@ config EVM_EXTRA_SMACK_XATTRS
 	  additional info to the calculation, requires existing EVM
 	  labeled file systems to be relabeled.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -3,7 +3,11 @@
     Philip Edelbrock <phil@netroedge.com>, Kyösti Mälkki <kmalkki@cc.hut.fi>,
     Mark D. Studebaker <mdsxyz123@yahoo.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
     Copyright (C) 2005 - 2008  Jean Delvare <khali@linux-fr.org>
+=======
+    Copyright (C) 2005 - 2008  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
     Copyright (C) 2005 - 2008  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -18,10 +22,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -450,7 +457,11 @@ release_region:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vt596_ids) = {
+=======
+static const struct pci_device_id vt596_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id vt596_ids[] = {
 >>>>>>> v3.18
@@ -515,7 +526,11 @@ static void __exit i2c_vt596_exit(void)
 MODULE_AUTHOR("Kyosti Malkki <kmalkki@cc.hut.fi>, "
 	      "Mark D. Studebaker <mdsxyz123@yahoo.com> and "
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      "Jean Delvare <khali@linux-fr.org>");
+=======
+	      "Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 	      "Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

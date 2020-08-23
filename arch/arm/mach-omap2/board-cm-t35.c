@@ -17,6 +17,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+#include <linux/clkdev.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 #include <linux/clkdev.h>
@@ -31,7 +36,11 @@
 #include <linux/platform_data/gpio-omap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -200,6 +209,7 @@ static inline void cm_t35_init_nand(void) {}
 #define CM_T35_DVI_EN_GPIO 54
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct panel_generic_dpi_data lcd_panel = {
 	.name			= "toppoly_tdo35s",
 	.num_gpios		= 1,
@@ -247,6 +257,8 @@ static struct omap_dss_board_info cm_t35_dss_data = {
 	.devices	= cm_t35_dss_devices,
 	.default_device	= &cm_t35_dvi_device,
 =======
+=======
+>>>>>>> v3.18
 static const struct display_timing cm_t35_lcd_videomode = {
 	.pixelclock	= { 0, 26000000, 0 },
 
@@ -322,6 +334,9 @@ static struct platform_device cm_t35_tv_connector_device = {
 
 static struct omap_dss_board_info cm_t35_dss_data = {
 	.default_display_name = "dvi",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -368,12 +383,18 @@ static void __init cm_t35_init_display(void)
 		gpio_free(CM_T35_LCD_EN_GPIO);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	platform_device_register(&cm_t35_tfp410_device);
 	platform_device_register(&cm_t35_dvi_connector_device);
 	platform_device_register(&cm_t35_lcd_device);
 	platform_device_register(&cm_t35_tv_connector_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -389,7 +410,12 @@ static struct regulator_consumer_supply cm_t35_vio_supplies[] = {
 	REGULATOR_SUPPLY("vcc", "spi1.0"),
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dsi1"),
+=======
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dsi.0"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dsi.0"),
@@ -608,9 +634,12 @@ static struct isp_platform_data cm_t35_isp_pdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init cm_t35_init_camera(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_consumer_supply cm_t35_camera_supplies[] = {
 	REGULATOR_SUPPLY("vaa", "3-005d"),
 	REGULATOR_SUPPLY("vdd", "3-005d"),
@@ -627,6 +656,9 @@ static void __init cm_t35_init_camera(void)
 	regulator_register_fixed(2, cm_t35_camera_supplies,
 				 ARRAY_SIZE(cm_t35_camera_supplies));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (omap3_init_camera(&cm_t35_isp_pdata) < 0)
 		pr_warn("CM-T3x: Failed registering camera device!\n");
@@ -835,7 +867,10 @@ MACHINE_START(CM_T35, "Compulab CM-T35")
 	.init_early	= omap35xx_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= cm_t35_init,
@@ -851,7 +886,10 @@ MACHINE_START(CM_T3730, "Compulab CM-T3730")
 	.init_early	= omap3630_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= cm_t3730_init,

@@ -23,6 +23,11 @@
 #include <linux/init.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqchip.h>
+#include <linux/irqchip/arm-gic.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip.h>
 #include <linux/irqchip/arm-gic.h>
@@ -35,6 +40,7 @@
 #include <linux/sh_timer.h>
 #include <linux/platform_data/sh_ipmmu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma-register.h>
 #include <mach/r8a7740.h>
 #include <mach/pm-rmobile.h>
@@ -43,12 +49,18 @@
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/hardware/cache-l2x0.h>
 
 #include "common.h"
@@ -56,6 +68,9 @@
 #include "irqs.h"
 #include "pm-rmobile.h"
 #include "r8a7740.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct map_desc r8a7740_io_desc[] __initdata = {
@@ -90,6 +105,7 @@ void __init r8a7740_map_io(void)
 
 /* PFC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource r8a7740_pfc_resources[] = {
 	[0] = {
 		.start	= 0xe6050000,
@@ -113,12 +129,22 @@ static const struct resource pfc_resources[] = {
 	DEFINE_RES_MEM(0xe6050000, 0x8000),
 	DEFINE_RES_MEM(0xe605800c, 0x0020),
 >>>>>>> v3.18
+=======
+static const struct resource pfc_resources[] = {
+	DEFINE_RES_MEM(0xe6050000, 0x8000),
+	DEFINE_RES_MEM(0xe605800c, 0x0020),
+>>>>>>> v3.18
 };
 
 void __init r8a7740_pinmux_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register(&r8a7740_pfc_device);
+=======
+	platform_device_register_simple("pfc-r8a7740", -1, pfc_resources,
+					ARRAY_SIZE(pfc_resources));
+>>>>>>> v3.18
 =======
 	platform_device_register_simple("pfc-r8a7740", -1, pfc_resources,
 					ARRAY_SIZE(pfc_resources));
@@ -245,6 +271,7 @@ static struct platform_device irqpin3_device = {
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* SCIFA0 */
 static struct plat_sci_port scif0_platform_data = {
@@ -530,6 +557,8 @@ static struct platform_device tmu02_device = {
 	.resource	= tmu02_resources,
 	.num_resources	= ARRAY_SIZE(tmu02_resources),
 =======
+=======
+>>>>>>> v3.18
 /* SCIF */
 #define R8A7740_SCIF(scif_type, index, baseaddr, irq)		\
 static struct plat_sci_port scif##index##_platform_data = {	\
@@ -603,6 +632,9 @@ static struct platform_device tmu0_device = {
 	},
 	.resource	= tmu0_resources,
 	.num_resources	= ARRAY_SIZE(tmu0_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -639,10 +671,13 @@ static struct platform_device ipmmu_device = {
 
 static struct platform_device *r8a7740_early_devices[] __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&irqpin0_device,
 	&irqpin1_device,
 	&irqpin2_device,
 	&irqpin3_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&scif0_device,
@@ -654,6 +689,7 @@ static struct platform_device *r8a7740_early_devices[] __initdata = {
 	&scif6_device,
 	&scif7_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&scifb_device,
 	&cmt10_device,
 	&tmu00_device,
@@ -661,6 +697,8 @@ static struct platform_device *r8a7740_early_devices[] __initdata = {
 	&tmu02_device,
 	&ipmmu_device,
 =======
+=======
+>>>>>>> v3.18
 	&scif8_device,
 	&irqpin0_device,
 	&irqpin1_device,
@@ -669,6 +707,9 @@ static struct platform_device *r8a7740_early_devices[] __initdata = {
 	&tmu0_device,
 	&ipmmu_device,
 	&cmt1_device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -720,7 +761,10 @@ static const struct sh_dmae_slave_config r8a7740_dmae_slaves[] = {
 		.chcr		= CHCR_TX(XMIT_SZ_32BIT),
 		.mid_rid	= 0xb5,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.slave_id	= SHDMA_SLAVE_MMCIF_TX,
 		.addr		= 0xe6bd0034,
@@ -731,6 +775,9 @@ static const struct sh_dmae_slave_config r8a7740_dmae_slaves[] = {
 		.addr		= 0xe6bd0034,
 		.chcr		= CHCR_RX(XMIT_SZ_32BIT),
 		.mid_rid	= 0xd2,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1027,7 +1074,11 @@ static struct platform_device *r8a7740_late_devices[] __initdata = {
  */
 #define MEBUFCNTR	0xFE950098
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r8a7740_meram_workaround(void)
+=======
+void __init r8a7740_meram_workaround(void)
+>>>>>>> v3.18
 =======
 void __init r8a7740_meram_workaround(void)
 >>>>>>> v3.18
@@ -1094,7 +1145,10 @@ static void r8a7740_i2c_workaround(struct platform_device *pdev)
 void __init r8a7740_add_standard_devices(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	static struct pm_domain_device domain_devices[] __initdata = {
 		{ "A3SP", &scif0_device },
 		{ "A3SP", &scif1_device },
@@ -1108,6 +1162,9 @@ void __init r8a7740_add_standard_devices(void)
 		{ "A3SP", &i2c1_device },
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* I2C work-around */
 	r8a7740_i2c_workaround(&i2c0_device);
@@ -1123,6 +1180,7 @@ void __init r8a7740_add_standard_devices(void)
 
 	/* add devices to PM domain  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rmobile_add_device_to_domain("A3SP",	&scif0_device);
 	rmobile_add_device_to_domain("A3SP",	&scif1_device);
@@ -1134,6 +1192,10 @@ void __init r8a7740_add_standard_devices(void)
 	rmobile_add_device_to_domain("A3SP",	&scif7_device);
 	rmobile_add_device_to_domain("A3SP",	&scifb_device);
 	rmobile_add_device_to_domain("A3SP",	&i2c1_device);
+=======
+	rmobile_add_devices_to_domains(domain_devices,
+				       ARRAY_SIZE(domain_devices));
+>>>>>>> v3.18
 =======
 	rmobile_add_devices_to_domains(domain_devices,
 				       ARRAY_SIZE(domain_devices));
@@ -1151,6 +1213,7 @@ void __init r8a7740_add_early_devices(void)
 
 #ifdef CONFIG_USE_OF
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init r8a7740_add_early_devices_dt(void)
 {
@@ -1178,6 +1241,8 @@ void __init r8a7740_add_standard_devices_dt(void)
 	of_platform_populate(NULL, of_default_bus_match_table,
 			     r8a7740_auxdata_lookup, NULL);
 =======
+=======
+>>>>>>> v3.18
 void __init r8a7740_init_irq_of(void)
 {
 	void __iomem *intc_prio_base = ioremap_nocache(0xe6900010, 0x10);
@@ -1224,6 +1289,9 @@ static void r8a7740_restart(enum reboot_mode mode, const char *cmd)
 {
 	/* Do soft power on reset */
 	writel(1 << 31, RESCNT2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1235,17 +1303,23 @@ static const char *r8a7740_boards_compat_dt[] __initdata = {
 DT_MACHINE_START(R8A7740_DT, "Generic R8A7740 (Flattened Device Tree)")
 	.map_io		= r8a7740_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= r8a7740_add_early_devices_dt,
 	.init_irq	= r8a7740_init_irq,
 	.init_machine	= r8a7740_add_standard_devices_dt,
 	.dt_compat	= r8a7740_boards_compat_dt,
 =======
+=======
+>>>>>>> v3.18
 	.init_early	= shmobile_init_delay,
 	.init_irq	= r8a7740_init_irq_of,
 	.init_machine	= r8a7740_generic_init,
 	.init_late	= shmobile_init_late,
 	.dt_compat	= r8a7740_boards_compat_dt,
 	.restart	= r8a7740_restart,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END
 

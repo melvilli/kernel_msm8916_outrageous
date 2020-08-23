@@ -184,6 +184,7 @@ extern int  sysctl_netrom_link_fails_count;
 extern int  sysctl_netrom_reset_circuit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  nr_rx_frame(struct sk_buff *, struct net_device *);
 extern void nr_destroy_socket(struct sock *);
 
@@ -230,6 +231,8 @@ extern void nr_write_internal(struct sock *, int);
 extern void __nr_transmit_reply(struct sk_buff *skb, int mine,
 	unsigned char cmdflags);
 =======
+=======
+>>>>>>> v3.18
 int nr_rx_frame(struct sk_buff *, struct net_device *);
 void nr_destroy_socket(struct sock *);
 
@@ -274,6 +277,9 @@ int nr_in_rx_window(struct sock *, unsigned short);
 void nr_write_internal(struct sock *, int);
 
 void __nr_transmit_reply(struct sk_buff *skb, int mine, unsigned char cmdflags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -295,6 +301,7 @@ do {									\
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nr_disconnect(struct sock *, int);
 
 /* nr_timer.c */
@@ -315,6 +322,8 @@ extern int  nr_t1timer_running(struct sock *);
 extern void nr_register_sysctl(void);
 extern void nr_unregister_sysctl(void);
 =======
+=======
+>>>>>>> v3.18
 void nr_disconnect(struct sock *, int);
 
 /* nr_timer.c */
@@ -334,6 +343,9 @@ int nr_t1timer_running(struct sock *);
 /* sysctl_net_netrom.c */
 void nr_register_sysctl(void);
 void nr_unregister_sysctl(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

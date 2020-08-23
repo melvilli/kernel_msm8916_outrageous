@@ -5,7 +5,12 @@ saa7134-y +=	saa7134-video.o
 saa7134-$(CONFIG_VIDEO_SAA7134_RC) += saa7134-input.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_VIDEO_SAA7134) +=  saa6752hs.o saa7134.o saa7134-empress.o
+=======
+obj-$(CONFIG_VIDEO_SAA7134) +=  saa7134.o saa7134-empress.o
+obj-$(CONFIG_VIDEO_SAA7134_GO7007) += saa7134-go7007.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_VIDEO_SAA7134) +=  saa7134.o saa7134-empress.o
 obj-$(CONFIG_VIDEO_SAA7134_GO7007) += saa7134-go7007.o
@@ -20,6 +25,10 @@ ccflags-y += -I$(srctree)/drivers/media/tuners
 ccflags-y += -I$(srctree)/drivers/media/dvb-core
 ccflags-y += -I$(srctree)/drivers/media/dvb-frontends
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-y += -I$(srctree)/drivers/media/usb/go7007
+>>>>>>> v3.18
 =======
 ccflags-y += -I$(srctree)/drivers/media/usb/go7007
 >>>>>>> v3.18

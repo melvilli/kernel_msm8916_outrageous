@@ -19,7 +19,12 @@ Optional properties:
 
 - pinctrl-single,bit-per-mux : boolean to indicate that one register controls
 <<<<<<< HEAD
+<<<<<<< HEAD
   more than one pin
+=======
+  more than one pin, for which "pinctrl-single,function-mask" property specifies
+ position mask of pin.
+>>>>>>> v3.18
 =======
   more than one pin, for which "pinctrl-single,function-mask" property specifies
  position mask of pin.
@@ -68,7 +73,10 @@ Optional properties:
 		pinctrl-single,input-schmitt-enable = <0x30 0x40 0 0x70>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - pinctrl-single,low-power-mode : array of value that are used to configure
   low power mode of this pin. For some silicons, the low power mode will
   control the output of the pin when the pad including the pin enter low
@@ -76,6 +84,9 @@ Optional properties:
 		/* low power mode value, mask */
 		pinctrl-single,low-power-mode = <0x288 0x388>;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - pinctrl-single,gpio-range : list of value that are used to configure a GPIO
   range. They're value of subnode phandle, pin base in pinctrl device, pin
@@ -87,7 +98,10 @@ Optional properties:
 		pinctrl-single,gpio-range = <&range 0 3 0 &range 3 9 1>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - interrupt-controller : standard interrupt controller binding if using
   interrupts for wake-up events for example. In this case pinctrl-single
   is set up as a chained interrupt controller and the wake-up interrupts
@@ -95,6 +109,9 @@ Optional properties:
 
 - #interrupt-cells : standard interrupt binding if using interrupts
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 This driver assumes that there is only one register for each pin (unless the
 pinctrl-single,bit-per-mux is set), and uses the common pinctrl bindings as
@@ -116,7 +133,11 @@ In case when one register changes more than one pin's mux the
 pinctrl-single,bits need to be used which takes three parameters:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-single,bits = <0xdc 0x18, 0xff>;
+=======
+	pinctrl-single,bits = <0xdc 0x18 0xff>;
+>>>>>>> v3.18
 =======
 	pinctrl-single,bits = <0xdc 0x18 0xff>;
 >>>>>>> v3.18
@@ -150,6 +171,11 @@ pmx_core: pinmux@4a100040 {
 	#address-cells = <1>;
 	#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	#interrupt-cells = <1>;
+	interrupt-controller;
+>>>>>>> v3.18
 =======
 	#interrupt-cells = <1>;
 	interrupt-controller;
@@ -165,6 +191,11 @@ pmx_wkup: pinmux@4a31e040 {
 	#address-cells = <1>;
 	#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	#interrupt-cells = <1>;
+	interrupt-controller;
+>>>>>>> v3.18
 =======
 	#interrupt-cells = <1>;
 	interrupt-controller;

@@ -19,7 +19,10 @@
 #include <asm-generic/pgtable-nopmd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int temp_tlb_entry __cpuinitdata;
 
 /*
@@ -32,6 +35,9 @@ extern int temp_tlb_entry __cpuinitdata;
 extern int add_temporary_entry(unsigned long entrylo0, unsigned long entrylo1,
 			       unsigned long entryhi, unsigned long pagemask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Basically we have the same two-level (which is the logical three level

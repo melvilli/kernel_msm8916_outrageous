@@ -105,8 +105,12 @@ static int aio_thread(void *arg)
 	int err, n, reply_fd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signal(SIGWINCH, SIG_IGN);
 
+=======
+	os_fix_helper_signals();
+>>>>>>> v3.18
 =======
 	os_fix_helper_signals();
 >>>>>>> v3.18
@@ -178,7 +182,11 @@ static int not_aio_thread(void *arg)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signal(SIGWINCH, SIG_IGN);
+=======
+	os_fix_helper_signals();
+>>>>>>> v3.18
 =======
 	os_fix_helper_signals();
 >>>>>>> v3.18

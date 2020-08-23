@@ -447,7 +447,11 @@ iscsi_tcp_data_recv_prep(struct iscsi_tcp_conn *tcp_conn)
  * @task: iscsi task
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * must be called with session lock
+=======
+ * must be called with session back_lock
+>>>>>>> v3.18
 =======
  * must be called with session back_lock
 >>>>>>> v3.18
@@ -462,6 +466,10 @@ void iscsi_tcp_cleanup_task(struct iscsi_task *task)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&tcp_task->queue2pool);
 >>>>>>> v3.18
@@ -479,6 +487,10 @@ void iscsi_tcp_cleanup_task(struct iscsi_task *task)
 		tcp_task->r2t = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&tcp_task->queue2pool);
 >>>>>>> v3.18
@@ -542,6 +554,11 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 	struct iscsi_r2t_info *r2t;
 	int r2tsn = be32_to_cpu(rhdr->r2tsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 data_length;
+	u32 data_offset;
+>>>>>>> v3.18
 =======
 	u32 data_length;
 	u32 data_offset;
@@ -571,6 +588,7 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 		return 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = kfifo_out(&tcp_task->r2tpool.queue, (void*)&r2t, sizeof(void*));
 	if (!rc) {
@@ -607,6 +625,8 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	data_length = be32_to_cpu(rhdr->data_length);
 	if (data_length == 0) {
 		iscsi_conn_printk(KERN_ERR, conn,
@@ -642,6 +662,9 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 	r2t->data_length = data_length;
 	r2t->data_offset = data_offset;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r2t->ttt = rhdr->ttt; /* no flip */
 	r2t->datasn = 0;
@@ -651,6 +674,10 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 	kfifo_in(&tcp_task->r2tqueue, (void*)&r2t, sizeof(void*));
 	conn->r2t_pdus_cnt++;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock(&tcp_task->pool2queue);
+>>>>>>> v3.18
 =======
 	spin_unlock(&tcp_task->pool2queue);
 >>>>>>> v3.18
@@ -727,7 +754,11 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 	switch(opcode) {
 	case ISCSI_OP_SCSI_DATA_IN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&conn->session->lock);
+=======
+		spin_lock(&conn->session->back_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&conn->session->back_lock);
 >>>>>>> v3.18
@@ -738,7 +769,11 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 			rc = iscsi_tcp_data_in(conn, task);
 		if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock(&conn->session->lock);
+=======
+			spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 =======
 			spin_unlock(&conn->session->back_lock);
 >>>>>>> v3.18
@@ -775,17 +810,23 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 						   iscsi_tcp_process_data_in,
 						   rx_hash);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock(&conn->session->lock);
 			return rc;
 		}
 		rc = __iscsi_complete_pdu(conn, hdr, NULL, 0);
 		spin_unlock(&conn->session->lock);
 =======
+=======
+>>>>>>> v3.18
 			spin_unlock(&conn->session->back_lock);
 			return rc;
 		}
 		rc = __iscsi_complete_pdu(conn, hdr, NULL, 0);
 		spin_unlock(&conn->session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case ISCSI_OP_SCSI_CMD_RSP:
@@ -797,8 +838,14 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 		break;
 	case ISCSI_OP_R2T:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&conn->session->lock);
 		task = iscsi_itt_to_ctask(conn, hdr->itt);
+=======
+		spin_lock(&conn->session->back_lock);
+		task = iscsi_itt_to_ctask(conn, hdr->itt);
+		spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&conn->session->back_lock);
 		task = iscsi_itt_to_ctask(conn, hdr->itt);
@@ -811,16 +858,22 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 		else if (task->sc->sc_data_direction == DMA_TO_DEVICE) {
 			task->last_xfer = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = iscsi_tcp_r2t_rsp(conn, task);
 		} else
 			rc = ISCSI_ERR_PROTO;
 		spin_unlock(&conn->session->lock);
 =======
+=======
+>>>>>>> v3.18
 			spin_lock(&conn->session->frwd_lock);
 			rc = iscsi_tcp_r2t_rsp(conn, task);
 			spin_unlock(&conn->session->frwd_lock);
 		} else
 			rc = ISCSI_ERR_PROTO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case ISCSI_OP_LOGIN_RSP:
@@ -996,7 +1049,10 @@ int iscsi_tcp_recv_skb(struct iscsi_conn *conn, struct sk_buff *skb,
 				      consumed);
 			*status = ISCSI_TCP_SKB_DONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_abort_seq_read(&seq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto skb_done;
@@ -1074,7 +1130,10 @@ EXPORT_SYMBOL_GPL(iscsi_tcp_task_init);
 static struct iscsi_r2t_info *iscsi_tcp_get_curr_r2t(struct iscsi_task *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_session *session = task->conn->session;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct iscsi_tcp_task *tcp_task = task->dd_data;
@@ -1084,7 +1143,11 @@ static struct iscsi_r2t_info *iscsi_tcp_get_curr_r2t(struct iscsi_task *task)
 		r2t = &task->unsol_r2t;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&session->lock);
+=======
+		spin_lock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&tcp_task->queue2pool);
 >>>>>>> v3.18
@@ -1110,7 +1173,11 @@ static struct iscsi_r2t_info *iscsi_tcp_get_curr_r2t(struct iscsi_task *task)
 				r2t = tcp_task->r2t;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&tcp_task->queue2pool);
 >>>>>>> v3.18
@@ -1244,6 +1311,11 @@ int iscsi_tcp_r2tpool_alloc(struct iscsi_session *session)
 			goto r2t_alloc_fail;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		spin_lock_init(&tcp_task->pool2queue);
+		spin_lock_init(&tcp_task->queue2pool);
+>>>>>>> v3.18
 =======
 		spin_lock_init(&tcp_task->pool2queue);
 		spin_lock_init(&tcp_task->queue2pool);

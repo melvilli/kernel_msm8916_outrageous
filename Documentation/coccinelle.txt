@@ -7,6 +7,7 @@ Copyright 2010 Gilles Muller <Gilles.Muller@lip6.fr>
 ~~~~~~~~~~~~~~~~~~~~
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The semantic patches included in the kernel use the 'virtual rule'
 feature which was introduced in Coccinelle version 0.1.11.
 
@@ -17,6 +18,8 @@ of many distributions, e.g. :
  - Fedora (>=13)
  - Ubuntu (>=10.04 Lucid Lynx)
 =======
+=======
+>>>>>>> v3.18
 The semantic patches included in the kernel use features and options
 which are provided by Coccinelle version 1.0.0-rc11 and above.
 Using earlier versions will fail as the option names used by
@@ -28,6 +31,9 @@ of many distributions, e.g. :
  - Debian
  - Fedora
  - Ubuntu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  - OpenSUSE
  - Arch Linux
@@ -51,11 +57,14 @@ as a regular user, and install it with
         sudo make install
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The semantic patches in the kernel will work best with Coccinelle version
 0.2.4 or later.  Using earlier versions may incur some parse errors in the
 semantic patch code, but any results that are obtained should still be
 correct.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  Using Coccinelle on the Linux kernel
@@ -66,7 +75,11 @@ Makefile. This target is named 'coccicheck' and calls the 'coccicheck'
 front-end in the 'scripts' directory.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Four modes are defined: patch, report, context, and org. The mode to
+=======
+Four basic modes are defined: patch, report, context, and org. The mode to
+>>>>>>> v3.18
 =======
 Four basic modes are defined: patch, report, context, and org. The mode to
 >>>>>>> v3.18
@@ -84,6 +97,7 @@ diff-like style.Lines of interest are indicated with '-'.
 
 Note that not all semantic patches implement all modes. For easy use
 <<<<<<< HEAD
+<<<<<<< HEAD
 of Coccinelle, the default mode is "chain" which tries the previous
 modes in the order above until one succeeds.
 
@@ -97,6 +111,8 @@ To produce patches, run:
 
 	make coccicheck MODE=patch
 =======
+=======
+>>>>>>> v3.18
 of Coccinelle, the default mode is "report".
 
 Two other modes provide some common combinations of these modes.
@@ -115,6 +131,9 @@ Examples:
 	To produce patches, run:
 
 		make coccicheck MODE=patch
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -134,12 +153,18 @@ To enable verbose messages set the V= variable, for example:
    make coccicheck MODE=report V=1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 By default, coccicheck tries to run as parallel as possible. To change
 the parallelism, set the J= variable. For example, to run across 4 CPUs:
 
    make coccicheck MODE=report J=4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  Using Coccinelle with a single semantic patch
@@ -175,6 +200,12 @@ To check only newly edited code, use the value 2 for the C flag, i.e.
     make C=2 CHECK="scripts/coccicheck"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+In these modes, which works on a file basis, there is no information
+about semantic patches displayed, and no commit message proposed.
+
+>>>>>>> v3.18
 =======
 In these modes, which works on a file basis, there is no information
 about semantic patches displayed, and no commit message proposed.
@@ -184,6 +215,7 @@ This runs every semantic patch in scripts/coccinelle by default. The
 COCCI variable may additionally be used to only apply a single
 semantic patch as shown in the previous section.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 The "chain" mode is the default. You can select another one with the
 MODE variable explained above.
@@ -196,6 +228,11 @@ The "report" mode is the default. You can select another one with the
 MODE variable explained above.
 
 >>>>>>> v3.18
+=======
+The "report" mode is the default. You can select another one with the
+MODE variable explained above.
+
+>>>>>>> v3.18
  Additional flags
 ~~~~~~~~~~~~~~~~~~
 
@@ -203,11 +240,14 @@ Additional flags can be passed to spatch through the SPFLAGS
 variable.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     make SPFLAGS=--use_glimpse coccicheck
 
 See spatch --help to learn more about spatch options.
 
 =======
+=======
+>>>>>>> v3.18
     make SPFLAGS=--use-glimpse coccicheck
     make SPFLAGS=--use-idutils coccicheck
 
@@ -219,6 +259,9 @@ thus active by default. However, by indexing the code with
 one of these tools, and according to the cocci file used,
 spatch could proceed the entire code base more quickly.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  Proposing new semantic patches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

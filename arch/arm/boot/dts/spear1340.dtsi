@@ -32,11 +32,14 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ahci@b1000000 {
 			compatible = "snps,spear-ahci";
 			reg = <0xb1000000 0x10000>;
 			interrupts = <0 72 0x4>;
 =======
+=======
+>>>>>>> v3.18
 		miphy0: miphy@eb800000 {
 			compatible = "st,spear1340-miphy";
 			reg = <0xeb800000 0x4000>;
@@ -69,6 +72,9 @@
 			device_type = "pci";
 			ranges = <0x81000000 0 0	 0x80020000 0 0x00010000   /* downstream I/O */
 				0x82000000 0 0x80030000 0xc0030000 0 0x0ffd0000>; /* non-prefetchable memory */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "disabled";
 		};

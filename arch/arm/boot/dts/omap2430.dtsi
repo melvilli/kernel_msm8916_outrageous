@@ -9,7 +9,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap2.dtsi"
+=======
+#include "omap2.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap2.dtsi"
 >>>>>>> v3.18
@@ -19,7 +23,10 @@
 
 	ocp {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		prcm: prcm@49006000 {
 			compatible = "ti,omap2-prcm";
 			reg = <0x49006000 0x1000>;
@@ -46,6 +53,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		counter32k: counter@49020000 {
 			compatible = "ti,omap-counter32k";
@@ -63,7 +73,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		omap2_scm_general: tisyscon@49002270 {
 			compatible = "syscon";
 			reg = <0x49002270 0x240>;
@@ -80,6 +93,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio1: gpio@4900c000 {
 			compatible = "ti,omap2-gpio";
@@ -166,6 +182,10 @@
 			       <&sdma 32>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -185,6 +205,10 @@
 			       <&sdma 34>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -204,6 +228,10 @@
 			       <&sdma 18>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -223,6 +251,10 @@
 			       <&sdma 20>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -242,7 +274,10 @@
 			       <&sdma 22>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			status = "disabled";
 		};
 
@@ -277,6 +312,9 @@
 				ti,mbox-tx = <0 0 0>;
 				ti,mbox-rx = <1 0 0>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -288,9 +326,12 @@
 			ti,timer-alwon;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 
 		mcspi3: mcspi@480b8000 {
 			compatible = "ti,omap2-mcspi";
@@ -326,4 +367,7 @@
 
 /include/ "omap24xx-clocks.dtsi"
 /include/ "omap2430-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

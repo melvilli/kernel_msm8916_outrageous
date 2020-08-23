@@ -131,7 +131,12 @@ struct red_parms {
 	u32		Scell_max;
 	u32		max_P;		/* probability, [0 .. 1.0] 32 scaled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32		max_P_reciprocal; /* reciprocal_value(max_P / qth_delta) */
+=======
+	/* reciprocal_value(max_P / qth_delta) */
+	struct reciprocal_value	max_P_reciprocal;
+>>>>>>> v3.18
 =======
 	/* reciprocal_value(max_P / qth_delta) */
 	struct reciprocal_value	max_P_reciprocal;
@@ -309,7 +314,11 @@ static inline unsigned long red_calc_qavg(const struct red_parms *p,
 static inline u32 red_random(const struct red_parms *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return reciprocal_divide(net_random(), p->max_P_reciprocal);
+=======
+	return reciprocal_divide(prandom_u32(), p->max_P_reciprocal);
+>>>>>>> v3.18
 =======
 	return reciprocal_divide(prandom_u32(), p->max_P_reciprocal);
 >>>>>>> v3.18

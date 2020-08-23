@@ -56,7 +56,11 @@ nv04_cursor_set_offset(struct nouveau_crtc *nv_crtc, uint32_t offset)
 	crtc_wr_cio_state(crtc, regp, NV_CIO_CRE_HCUR_ADDR1_INDEX);
 	crtc_wr_cio_state(crtc, regp, NV_CIO_CRE_HCUR_ADDR2_INDEX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type == NV_40)
+=======
+	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
 >>>>>>> v3.18

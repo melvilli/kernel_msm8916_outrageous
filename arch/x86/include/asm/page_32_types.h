@@ -16,6 +16,11 @@
 #define __PAGE_OFFSET		_AC(CONFIG_PAGE_OFFSET, UL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __START_KERNEL_map	__PAGE_OFFSET
+
+>>>>>>> v3.18
 =======
 #define __START_KERNEL_map	__PAGE_OFFSET
 

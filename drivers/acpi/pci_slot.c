@@ -36,6 +36,10 @@
 #include <linux/acpi.h>
 #include <linux/dmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci-acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci-acpi.h>
 >>>>>>> v3.18
@@ -164,6 +168,7 @@ register_slot(acpi_handle handle, u32 lvl, void *context, void **rv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void acpi_pci_slot_enumerate(struct pci_bus *bus, acpi_handle handle)
 {
 	mutex_lock(&slot_list_lock);
@@ -171,6 +176,8 @@ void acpi_pci_slot_enumerate(struct pci_bus *bus, acpi_handle handle)
 			    register_slot, NULL, bus, NULL);
 	mutex_unlock(&slot_list_lock);
 =======
+=======
+>>>>>>> v3.18
 void acpi_pci_slot_enumerate(struct pci_bus *bus)
 {
 	acpi_handle handle = ACPI_HANDLE(bus->bridge);
@@ -181,6 +188,9 @@ void acpi_pci_slot_enumerate(struct pci_bus *bus)
 				    register_slot, NULL, bus, NULL);
 		mutex_unlock(&slot_list_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

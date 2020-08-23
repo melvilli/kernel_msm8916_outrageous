@@ -5,15 +5,21 @@
 #include <linux/tick.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern seqlock_t jiffies_lock;
 
 =======
+=======
+>>>>>>> v3.18
 #include "timekeeping.h"
 
 extern seqlock_t jiffies_lock;
 
 #define CS_NAME_LEN	32
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_GENERIC_CLOCKEVENTS_BUILD
 
@@ -33,10 +39,13 @@ extern void tick_shutdown(unsigned int *cpup);
 extern void tick_suspend(void);
 extern void tick_resume(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern void clockevents_shutdown(struct clock_event_device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 extern bool tick_check_replacement(struct clock_event_device *curdev,
 				   struct clock_event_device *newdev);
 extern void tick_install_replacement(struct clock_event_device *dev);
@@ -45,6 +54,9 @@ extern void clockevents_shutdown(struct clock_event_device *dev);
 
 extern ssize_t sysfs_get_uname(const char *buf, char *dst, size_t cnt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * NO_HZ / high resolution timer shared code
@@ -111,7 +123,10 @@ static inline bool tick_broadcast_oneshot_available(void) { return false; }
 #endif /* !TICK_ONESHOT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* NO_HZ_FULL internal */
 #ifdef CONFIG_NO_HZ_FULL
 extern void tick_nohz_init(void);
@@ -119,6 +134,9 @@ extern void tick_nohz_init(void);
 static inline void tick_nohz_init(void) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Broadcasting support
@@ -179,15 +197,21 @@ static inline int tick_device_is_functional(struct clock_event_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 int __clockevents_update_freq(struct clock_event_device *dev, u32 freq);
 extern void do_timer(unsigned long ticks);
 =======
+=======
+>>>>>>> v3.18
 int __clockevents_update_freq(struct clock_event_device *dev, u32 freq);
 
 #endif
 
 extern void do_timer(unsigned long ticks);
 extern void update_wall_time(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

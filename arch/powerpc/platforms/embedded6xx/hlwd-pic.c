@@ -16,14 +16,20 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/irq.h>
 #include <linux/of.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irq.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/io.h>
 
@@ -189,6 +195,10 @@ struct irq_domain *hlwd_pic_init(struct device_node *np)
 	if (!irq_domain) {
 		pr_err("failed to allocate irq_domain\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		iounmap(io_base);
+>>>>>>> v3.18
 =======
 		iounmap(io_base);
 >>>>>>> v3.18

@@ -12,6 +12,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
 #include <linux/module.h>
@@ -26,6 +27,8 @@ static void xhci_plat_quirks(struct device *dev, struct xhci_hcd *xhci)
 	struct xhci_plat_data *pdata = dev->platform_data;
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/dma-mapping.h>
 #include <linux/module.h>
@@ -42,6 +45,9 @@ static struct hc_driver __read_mostly xhci_plat_hc_driver;
 
 static void xhci_plat_quirks(struct device *dev, struct xhci_hcd *xhci)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * As of now platform drivers don't provide MSI support so we ensure
@@ -49,6 +55,7 @@ static void xhci_plat_quirks(struct device *dev, struct xhci_hcd *xhci)
 	 * dev struct in order to setup MSI
 	 */
 	xhci->quirks |= XHCI_PLAT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (!pdata)
@@ -67,11 +74,14 @@ static void xhci_plat_quirks(struct device *dev, struct xhci_hcd *xhci)
 		xhci->quirks |= XHCI_RESET_RS_ON_RESUME_QUIRK;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 /* called during probe() after chip reset completes */
 static int xhci_plat_setup(struct usb_hcd *hcd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return xhci_gen_setup(hcd, xhci_plat_quirks);
 }
@@ -128,6 +138,8 @@ static const struct hc_driver xhci_plat_xhci_driver = {
 static int xhci_plat_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *of_node = hcd->self.controller->of_node;
 	int ret;
 
@@ -156,12 +168,19 @@ static int xhci_plat_probe(struct platform_device *pdev)
 {
 	struct device_node	*node = pdev->dev.of_node;
 	struct usb_xhci_pdata	*pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct hc_driver	*driver;
 	struct xhci_hcd		*xhci;
 	struct resource         *res;
 	struct usb_hcd		*hcd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk              *clk;
+>>>>>>> v3.18
 =======
 	struct clk              *clk;
 >>>>>>> v3.18
@@ -172,7 +191,11 @@ static int xhci_plat_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	driver = &xhci_plat_xhci_driver;
+=======
+	driver = &xhci_plat_hc_driver;
+>>>>>>> v3.18
 =======
 	driver = &xhci_plat_hc_driver;
 >>>>>>> v3.18
@@ -186,7 +209,10 @@ static int xhci_plat_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (of_device_is_compatible(pdev->dev.of_node,
 				    "marvell,armada-375-xhci") ||
 	    of_device_is_compatible(pdev->dev.of_node,
@@ -205,11 +231,15 @@ static int xhci_plat_probe(struct platform_device *pdev)
 	else
 		dma_set_mask(&pdev->dev, DMA_BIT_MASK(32));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hcd = usb_create_hcd(driver, &pdev->dev, dev_name(&pdev->dev));
 	if (!hcd)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hcd_to_bus(hcd)->skip_resume = true;
 	hcd->rsrc_start = res->start;
@@ -244,6 +274,8 @@ static int xhci_plat_probe(struct platform_device *pdev)
 	hcd = dev_get_drvdata(&pdev->dev);
 	xhci = hcd_to_xhci(hcd);
 =======
+=======
+>>>>>>> v3.18
 	hcd->rsrc_start = res->start;
 	hcd->rsrc_len = resource_size(res);
 
@@ -274,6 +306,9 @@ static int xhci_plat_probe(struct platform_device *pdev)
 	hcd = platform_get_drvdata(pdev);
 	xhci = hcd_to_xhci(hcd);
 	xhci->clk = clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xhci->shared_hcd = usb_create_shared_hcd(driver, &pdev->dev,
 			dev_name(&pdev->dev), hcd);
@@ -283,7 +318,13 @@ static int xhci_plat_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hcd_to_bus(xhci->shared_hcd)->skip_resume = true;
+=======
+	if ((node && of_property_read_bool(node, "usb3-lpm-capable")) ||
+			(pdata && pdata->usb3_lpm_capable))
+		xhci->quirks |= XHCI_LPM_SUPPORT;
+>>>>>>> v3.18
 =======
 	if ((node && of_property_read_bool(node, "usb3-lpm-capable")) ||
 			(pdata && pdata->usb3_lpm_capable))
@@ -296,6 +337,12 @@ static int xhci_plat_probe(struct platform_device *pdev)
 	*((struct xhci_hcd **) xhci->shared_hcd->hcd_priv) = xhci;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (HCC_MAX_PSA(xhci->hcc_params) >= 4)
+		xhci->shared_hcd->can_do_streams = 1;
+
+>>>>>>> v3.18
 =======
 	if (HCC_MAX_PSA(xhci->hcc_params) >= 4)
 		xhci->shared_hcd->can_do_streams = 1;
@@ -306,8 +353,11 @@ static int xhci_plat_probe(struct platform_device *pdev)
 		goto put_usb3_hcd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_put(&pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -319,11 +369,17 @@ dealloc_usb2_hcd:
 	usb_remove_hcd(hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unmap_registers:
 	iounmap(hcd->regs);
 
 release_mem_region:
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+disable_clk:
+	if (!IS_ERR(clk))
+		clk_disable_unprepare(clk);
+>>>>>>> v3.18
 =======
 disable_clk:
 	if (!IS_ERR(clk))
@@ -341,10 +397,14 @@ static int xhci_plat_remove(struct platform_device *dev)
 	struct usb_hcd	*hcd = platform_get_drvdata(dev);
 	struct xhci_hcd	*xhci = hcd_to_xhci(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	xhci->xhc_state |= XHCI_STATE_REMOVING;
 
 	pm_runtime_disable(&dev->dev);
+=======
+	struct clk *clk = xhci->clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk = xhci->clk;
 >>>>>>> v3.18
@@ -354,8 +414,13 @@ static int xhci_plat_remove(struct platform_device *dev)
 
 	usb_remove_hcd(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+	if (!IS_ERR(clk))
+		clk_disable_unprepare(clk);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(clk))
 		clk_disable_unprepare(clk);
@@ -366,6 +431,7 @@ static int xhci_plat_remove(struct platform_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM_RUNTIME
 static int xhci_plat_runtime_suspend(struct device *dev)
@@ -400,6 +466,8 @@ static const struct dev_pm_ops xhci_plat_pm_ops = {
 			   NULL)
 };
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int xhci_plat_suspend(struct device *dev)
 {
@@ -445,6 +513,9 @@ static const struct of_device_id usb_xhci_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, usb_xhci_of_match);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver usb_xhci_driver = {
@@ -453,7 +524,12 @@ static struct platform_driver usb_xhci_driver = {
 	.driver	= {
 		.name = "xhci-hcd",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm = &xhci_plat_pm_ops,
+=======
+		.pm = DEV_PM_OPS,
+		.of_match_table = of_match_ptr(usb_xhci_of_match),
+>>>>>>> v3.18
 =======
 		.pm = DEV_PM_OPS,
 		.of_match_table = of_match_ptr(usb_xhci_of_match),
@@ -462,6 +538,7 @@ static struct platform_driver usb_xhci_driver = {
 };
 MODULE_ALIAS("platform:xhci-hcd");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int xhci_register_plat(void)
 {
@@ -473,6 +550,8 @@ void xhci_unregister_plat(void)
 	platform_driver_unregister(&usb_xhci_driver);
 }
 =======
+=======
+>>>>>>> v3.18
 static int __init xhci_plat_init(void)
 {
 	xhci_init_driver(&xhci_plat_hc_driver, xhci_plat_setup);
@@ -489,4 +568,7 @@ module_exit(xhci_plat_exit);
 
 MODULE_DESCRIPTION("xHCI Platform Host Controller Driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

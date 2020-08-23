@@ -44,7 +44,10 @@ extern bool pciehp_poll_mode;
 extern int pciehp_poll_time;
 extern bool pciehp_debug;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool pciehp_force;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -81,6 +84,10 @@ struct slot {
 	struct delayed_work work;	/* work for button event */
 	struct mutex lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex hotplug_lock;
+>>>>>>> v3.18
 =======
 	struct mutex hotplug_lock;
 >>>>>>> v3.18
@@ -100,14 +107,20 @@ struct controller {
 	wait_queue_head_t queue;	/* sleep & wake process */
 	u32 slot_cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list poll_timer;
 	unsigned int cmd_busy:1;
 	unsigned int no_cmd_complete:1;
 =======
+=======
+>>>>>>> v3.18
 	u16 slot_ctrl;
 	struct timer_list poll_timer;
 	unsigned long cmd_started;	/* jiffies */
 	unsigned int cmd_busy:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int link_active_reporting:1;
 	unsigned int notification_enabled:1;
@@ -125,6 +138,11 @@ struct controller {
 #define INT_BUTTON_RELEASE		8
 #define INT_BUTTON_CANCEL		9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define INT_LINK_UP			10
+#define INT_LINK_DOWN			11
+>>>>>>> v3.18
 =======
 #define INT_LINK_UP			10
 #define INT_LINK_DOWN			11
@@ -145,7 +163,11 @@ struct controller {
 #define EMI(ctrl)		((ctrl)->slot_cap & PCI_EXP_SLTCAP_EIP)
 #define NO_CMD_CMPL(ctrl)	((ctrl)->slot_cap & PCI_EXP_SLTCAP_NCCS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PSN(ctrl)		((ctrl)->slot_cap >> 19)
+=======
+#define PSN(ctrl)		(((ctrl)->slot_cap & PCI_EXP_SLTCAP_PSN) >> 19)
+>>>>>>> v3.18
 =======
 #define PSN(ctrl)		(((ctrl)->slot_cap & PCI_EXP_SLTCAP_PSN) >> 19)
 >>>>>>> v3.18
@@ -157,6 +179,10 @@ u8 pciehp_handle_switch_change(struct slot *p_slot);
 u8 pciehp_handle_presence_change(struct slot *p_slot);
 u8 pciehp_handle_power_fault(struct slot *p_slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void pciehp_handle_linkstate_change(struct slot *p_slot);
+>>>>>>> v3.18
 =======
 void pciehp_handle_linkstate_change(struct slot *p_slot);
 >>>>>>> v3.18
@@ -168,6 +194,7 @@ int pcie_init_notification(struct controller *ctrl);
 int pciehp_enable_slot(struct slot *p_slot);
 int pciehp_disable_slot(struct slot *p_slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pcie_enable_notification(struct controller *ctrl);
 int pciehp_power_on_slot(struct slot *slot);
 int pciehp_power_off_slot(struct slot *slot);
@@ -178,6 +205,8 @@ int pciehp_set_attention_status(struct slot *slot, u8 status);
 int pciehp_get_latch_status(struct slot *slot, u8 *status);
 int pciehp_get_adapter_status(struct slot *slot, u8 *status);
 =======
+=======
+>>>>>>> v3.18
 void pcie_enable_notification(struct controller *ctrl);
 int pciehp_power_on_slot(struct slot *slot);
 void pciehp_power_off_slot(struct slot *slot);
@@ -187,6 +216,9 @@ void pciehp_get_attention_status(struct slot *slot, u8 *status);
 void pciehp_set_attention_status(struct slot *slot, u8 status);
 void pciehp_get_latch_status(struct slot *slot, u8 *status);
 void pciehp_get_adapter_status(struct slot *slot, u8 *status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int pciehp_query_power_fault(struct slot *slot);
 void pciehp_green_led_on(struct slot *slot);
@@ -194,7 +226,13 @@ void pciehp_green_led_off(struct slot *slot);
 void pciehp_green_led_blink(struct slot *slot);
 int pciehp_check_link_status(struct controller *ctrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pciehp_release_ctrl(struct controller *ctrl);
+=======
+bool pciehp_check_link_active(struct controller *ctrl);
+void pciehp_release_ctrl(struct controller *ctrl);
+int pciehp_reset_slot(struct slot *slot, int probe);
+>>>>>>> v3.18
 =======
 bool pciehp_check_link_active(struct controller *ctrl);
 void pciehp_release_ctrl(struct controller *ctrl);
@@ -208,8 +246,11 @@ static inline const char *slot_name(struct slot *slot)
 
 #ifdef CONFIG_ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci-acpi.h>
@@ -228,7 +269,11 @@ static inline int pciehp_acpi_slot_detection_check(struct pci_dev *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif 				/* CONFIG_ACPI */
+=======
+#endif				/* CONFIG_ACPI */
+>>>>>>> v3.18
 =======
 #endif				/* CONFIG_ACPI */
 >>>>>>> v3.18

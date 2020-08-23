@@ -524,7 +524,11 @@ void die_if_kernel(const char *str, ...)
 
 	va_start(va, str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vsprintf(buffer, str, va);
+=======
+	vsnprintf(buffer, sizeof(buffer), str, va);
+>>>>>>> v3.18
 =======
 	vsnprintf(buffer, sizeof(buffer), str, va);
 >>>>>>> v3.18

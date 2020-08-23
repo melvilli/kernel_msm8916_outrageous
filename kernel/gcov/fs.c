@@ -75,8 +75,13 @@ static int __init gcov_persist_setup(char *str)
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(str, 0, &val)) {
 		pr_warning("invalid gcov_persist parameter '%s'\n", str);
+=======
+	if (kstrtoul(str, 0, &val)) {
+		pr_warn("invalid gcov_persist parameter '%s'\n", str);
+>>>>>>> v3.18
 =======
 	if (kstrtoul(str, 0, &val)) {
 		pr_warn("invalid gcov_persist parameter '%s'\n", str);
@@ -248,7 +253,11 @@ static struct gcov_node *get_node_by_name(const char *name)
 	list_for_each_entry(node, &all_head, all) {
 		info = get_node_info(node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (info && (strcmp(info->filename, name) == 0))
+=======
+		if (info && (strcmp(gcov_info_filename(info), name) == 0))
+>>>>>>> v3.18
 =======
 		if (info && (strcmp(gcov_info_filename(info), name) == 0))
 >>>>>>> v3.18
@@ -289,7 +298,11 @@ static ssize_t gcov_seq_write(struct file *file, const char __user *addr,
 	info = gcov_iter_get_info(seq->private);
 	mutex_lock(&node_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = get_node_by_name(info->filename);
+=======
+	node = get_node_by_name(gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 	node = get_node_by_name(gcov_info_filename(info));
 >>>>>>> v3.18
@@ -379,7 +392,11 @@ static const char *deskew(const char *basename)
 static void add_links(struct gcov_node *node, struct dentry *parent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *basename;
+=======
+	const char *basename;
+>>>>>>> v3.18
 =======
 	const char *basename;
 >>>>>>> v3.18
@@ -394,6 +411,7 @@ static void add_links(struct gcov_node *node, struct dentry *parent)
 		return;
 	for (i = 0; i < num; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		target = get_link_target(get_node_info(node)->filename,
 					 &gcov_link[i]);
 		if (!target)
@@ -403,6 +421,8 @@ static void add_links(struct gcov_node *node, struct dentry *parent)
 			goto out_err;
 		basename++;
 =======
+=======
+>>>>>>> v3.18
 		target = get_link_target(
 				gcov_info_filename(get_node_info(node)),
 				&gcov_link[i]);
@@ -411,6 +431,9 @@ static void add_links(struct gcov_node *node, struct dentry *parent)
 		basename = kbasename(target);
 		if (basename == target)
 			goto out_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		node->links[i] = debugfs_create_symlink(deskew(basename),
 							parent,	target);
@@ -479,7 +502,11 @@ static struct gcov_node *new_node(struct gcov_node *parent,
 		node->dentry = debugfs_create_dir(node->name, parent->dentry);
 	if (!node->dentry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("could not create file\n");
+=======
+		pr_warn("could not create file\n");
+>>>>>>> v3.18
 =======
 		pr_warn("could not create file\n");
 >>>>>>> v3.18
@@ -496,7 +523,11 @@ static struct gcov_node *new_node(struct gcov_node *parent,
 err_nomem:
 	kfree(node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("out of memory\n");
+=======
+	pr_warn("out of memory\n");
+>>>>>>> v3.18
 =======
 	pr_warn("out of memory\n");
 >>>>>>> v3.18
@@ -613,7 +644,11 @@ static void add_node(struct gcov_info *info)
 	struct gcov_node *node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	filename = kstrdup(info->filename, GFP_KERNEL);
+=======
+	filename = kstrdup(gcov_info_filename(info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	filename = kstrdup(gcov_info_filename(info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -671,8 +706,13 @@ static void add_info(struct gcov_node *node, struct gcov_info *info)
 	loaded_info = kcalloc(num + 1, sizeof(struct gcov_info *), GFP_KERNEL);
 	if (!loaded_info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("could not add '%s' (out of memory)\n",
 			   info->filename);
+=======
+		pr_warn("could not add '%s' (out of memory)\n",
+			gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 		pr_warn("could not add '%s' (out of memory)\n",
 			gcov_info_filename(info));
@@ -690,8 +730,14 @@ static void add_info(struct gcov_node *node, struct gcov_info *info)
 		 */
 		if (!gcov_info_is_compatible(node->unloaded_info, info)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("discarding saved data for %s "
 				   "(incompatible version)\n", info->filename);
+=======
+			pr_warn("discarding saved data for %s "
+				"(incompatible version)\n",
+				gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 			pr_warn("discarding saved data for %s "
 				"(incompatible version)\n",
@@ -707,8 +753,13 @@ static void add_info(struct gcov_node *node, struct gcov_info *info)
 		 */
 		if (!gcov_info_is_compatible(node->loaded_info[0], info)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("could not add '%s' (incompatible "
 				   "version)\n", info->filename);
+=======
+			pr_warn("could not add '%s' (incompatible "
+				"version)\n", gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 			pr_warn("could not add '%s' (incompatible "
 				"version)\n", gcov_info_filename(info));
@@ -748,8 +799,14 @@ static void save_info(struct gcov_node *node, struct gcov_info *info)
 		node->unloaded_info = gcov_info_dup(info);
 		if (!node->unloaded_info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("could not save data for '%s' "
 				   "(out of memory)\n", info->filename);
+=======
+			pr_warn("could not save data for '%s' "
+				"(out of memory)\n",
+				gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 			pr_warn("could not save data for '%s' "
 				"(out of memory)\n",
@@ -770,8 +827,13 @@ static void remove_info(struct gcov_node *node, struct gcov_info *info)
 	i = get_info_index(node, info);
 	if (i < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("could not remove '%s' (not found)\n",
 			   info->filename);
+=======
+		pr_warn("could not remove '%s' (not found)\n",
+			gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 		pr_warn("could not remove '%s' (not found)\n",
 			gcov_info_filename(info));
@@ -803,7 +865,11 @@ void gcov_event(enum gcov_action action, struct gcov_info *info)
 
 	mutex_lock(&node_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = get_node_by_name(info->filename);
+=======
+	node = get_node_by_name(gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 	node = get_node_by_name(gcov_info_filename(info));
 >>>>>>> v3.18
@@ -819,8 +885,13 @@ void gcov_event(enum gcov_action action, struct gcov_info *info)
 			remove_info(node, info);
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("could not remove '%s' (not found)\n",
 				   info->filename);
+=======
+			pr_warn("could not remove '%s' (not found)\n",
+				gcov_info_filename(info));
+>>>>>>> v3.18
 =======
 			pr_warn("could not remove '%s' (not found)\n",
 				gcov_info_filename(info));
@@ -859,8 +930,12 @@ static __init int gcov_fs_init(void)
 err_remove:
 	pr_err("init failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (root_node.dentry)
 		debugfs_remove(root_node.dentry);
+=======
+	debugfs_remove(root_node.dentry);
+>>>>>>> v3.18
 =======
 	debugfs_remove(root_node.dentry);
 >>>>>>> v3.18

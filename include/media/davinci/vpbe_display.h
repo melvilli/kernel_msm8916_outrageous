@@ -17,6 +17,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-fh.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-fh.h>
 >>>>>>> v3.18
@@ -99,8 +103,11 @@ struct vpbe_layer {
 	 */
 	enum v4l2_memory memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used to keep track of state of the priority */
 	struct v4l2_prio_state prio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Used to store pixel format */
@@ -142,6 +149,10 @@ struct vpbe_display {
 /* File handle structure */
 struct vpbe_fh {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_fh fh;
+>>>>>>> v3.18
 =======
 	struct v4l2_fh fh;
 >>>>>>> v3.18
@@ -152,8 +163,11 @@ struct vpbe_fh {
 	/* Indicates whether this file handle is doing IO */
 	unsigned char io_allowed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used to keep track priority of this instance */
 	enum v4l2_priority prio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

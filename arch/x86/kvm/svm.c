@@ -35,6 +35,10 @@
 #include <asm/tlbflush.h>
 #include <asm/desc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/debugreg.h>
+>>>>>>> v3.18
 =======
 #include <asm/debugreg.h>
 >>>>>>> v3.18
@@ -308,12 +312,15 @@ static inline bool is_cr_intercept(struct vcpu_svm *svm, int bit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void set_dr_intercept(struct vcpu_svm *svm, int bit)
 {
 	struct vmcb *vmcb = get_host_vmcb(svm);
 
 	vmcb->control.intercept_dr |= (1U << bit);
 =======
+=======
+>>>>>>> v3.18
 static inline void set_dr_intercepts(struct vcpu_svm *svm)
 {
 	struct vmcb *vmcb = get_host_vmcb(svm);
@@ -334,11 +341,15 @@ static inline void set_dr_intercepts(struct vcpu_svm *svm)
 		| (1 << INTERCEPT_DR5_WRITE)
 		| (1 << INTERCEPT_DR6_WRITE)
 		| (1 << INTERCEPT_DR7_WRITE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	recalc_intercepts(svm);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void clr_dr_intercept(struct vcpu_svm *svm, int bit)
 {
@@ -346,11 +357,16 @@ static inline void clr_dr_intercept(struct vcpu_svm *svm, int bit)
 
 	vmcb->control.intercept_dr &= ~(1U << bit);
 =======
+=======
+>>>>>>> v3.18
 static inline void clr_dr_intercepts(struct vcpu_svm *svm)
 {
 	struct vmcb *vmcb = get_host_vmcb(svm);
 
 	vmcb->control.intercept_dr = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	recalc_intercepts(svm);
@@ -506,7 +522,11 @@ static int is_external_interrupt(u32 info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 svm_get_interrupt_shadow(struct kvm_vcpu *vcpu, int mask)
+=======
+static u32 svm_get_interrupt_shadow(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 static u32 svm_get_interrupt_shadow(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -516,8 +536,13 @@ static u32 svm_get_interrupt_shadow(struct kvm_vcpu *vcpu)
 
 	if (svm->vmcb->control.int_state & SVM_INTERRUPT_SHADOW_MASK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret |= KVM_X86_SHADOW_INT_STI | KVM_X86_SHADOW_INT_MOV_SS;
 	return ret & mask;
+=======
+		ret = KVM_X86_SHADOW_INT_STI | KVM_X86_SHADOW_INT_MOV_SS;
+	return ret;
+>>>>>>> v3.18
 =======
 		ret = KVM_X86_SHADOW_INT_STI | KVM_X86_SHADOW_INT_MOV_SS;
 	return ret;
@@ -540,10 +565,15 @@ static void skip_emulated_instruction(struct kvm_vcpu *vcpu)
 	struct vcpu_svm *svm = to_svm(vcpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (svm->vmcb->control.next_rip != 0) {
 		WARN_ON_ONCE(!static_cpu_has(X86_FEATURE_NRIPS));
 		svm->next_rip = svm->vmcb->control.next_rip;
 	}
+=======
+	if (svm->vmcb->control.next_rip != 0)
+		svm->next_rip = svm->vmcb->control.next_rip;
+>>>>>>> v3.18
 =======
 	if (svm->vmcb->control.next_rip != 0)
 		svm->next_rip = svm->vmcb->control.next_rip;
@@ -658,7 +688,11 @@ static int has_svm(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void svm_hardware_disable(void *garbage)
+=======
+static void svm_hardware_disable(void)
+>>>>>>> v3.18
 =======
 static void svm_hardware_disable(void)
 >>>>>>> v3.18
@@ -673,7 +707,11 @@ static void svm_hardware_disable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int svm_hardware_enable(void *garbage)
+=======
+static int svm_hardware_enable(void)
+>>>>>>> v3.18
 =======
 static int svm_hardware_enable(void)
 >>>>>>> v3.18
@@ -714,7 +752,11 @@ static int svm_hardware_enable(void)
 	if (static_cpu_has(X86_FEATURE_TSCRATEMSR)) {
 		wrmsrl(MSR_AMD64_TSC_RATIO, TSC_RATIO_DEFAULT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_cpu_var(current_tsc_ratio) = TSC_RATIO_DEFAULT;
+=======
+		__this_cpu_write(current_tsc_ratio, TSC_RATIO_DEFAULT);
+>>>>>>> v3.18
 =======
 		__this_cpu_write(current_tsc_ratio, TSC_RATIO_DEFAULT);
 >>>>>>> v3.18
@@ -1090,12 +1132,18 @@ static void svm_write_tsc_offset(struct kvm_vcpu *vcpu, u64 offset)
 			       svm->nested.hsave->control.tsc_offset;
 		svm->nested.hsave->control.tsc_offset = offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 	} else
 		trace_kvm_write_tsc_offset(vcpu->vcpu_id,
 					   svm->vmcb->control.tsc_offset,
 					   offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	svm->vmcb->control.tsc_offset = offset + g_tsc_offset;
@@ -1115,12 +1163,18 @@ static void svm_adjust_tsc_offset(struct kvm_vcpu *vcpu, s64 adjustment, bool ho
 	if (is_guest_mode(vcpu))
 		svm->nested.hsave->control.tsc_offset += adjustment;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else
 		trace_kvm_write_tsc_offset(vcpu->vcpu_id,
 				     svm->vmcb->control.tsc_offset - adjustment,
 				     svm->vmcb->control.tsc_offset);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mark_dirty(svm->vmcb, VMCB_INTERCEPTS);
 }
@@ -1151,6 +1205,7 @@ static void init_vmcb(struct vcpu_svm *svm)
 	set_cr_intercept(svm, INTERCEPT_CR8_WRITE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_dr_intercept(svm, INTERCEPT_DR0_READ);
 	set_dr_intercept(svm, INTERCEPT_DR1_READ);
 	set_dr_intercept(svm, INTERCEPT_DR2_READ);
@@ -1168,6 +1223,9 @@ static void init_vmcb(struct vcpu_svm *svm)
 	set_dr_intercept(svm, INTERCEPT_DR5_WRITE);
 	set_dr_intercept(svm, INTERCEPT_DR6_WRITE);
 	set_dr_intercept(svm, INTERCEPT_DR7_WRITE);
+=======
+	set_dr_intercepts(svm);
+>>>>>>> v3.18
 =======
 	set_dr_intercepts(svm);
 >>>>>>> v3.18
@@ -1332,7 +1390,12 @@ static struct kvm_vcpu *svm_create_vcpu(struct kvm *kvm, unsigned int id)
 	init_vmcb(svm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	svm->vcpu.arch.apic_base = 0xfee00000 | MSR_IA32_APICBASE_ENABLE;
+=======
+	svm->vcpu.arch.apic_base = APIC_DEFAULT_PHYS_BASE |
+				   MSR_IA32_APICBASE_ENABLE;
+>>>>>>> v3.18
 =======
 	svm->vcpu.arch.apic_base = APIC_DEFAULT_PHYS_BASE |
 				   MSR_IA32_APICBASE_ENABLE;
@@ -1392,8 +1455,13 @@ static void svm_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 
 	if (static_cpu_has(X86_FEATURE_TSCRATEMSR) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    svm->tsc_ratio != __get_cpu_var(current_tsc_ratio)) {
 		__get_cpu_var(current_tsc_ratio) = svm->tsc_ratio;
+=======
+	    svm->tsc_ratio != __this_cpu_read(current_tsc_ratio)) {
+		__this_cpu_write(current_tsc_ratio, svm->tsc_ratio);
+>>>>>>> v3.18
 =======
 	    svm->tsc_ratio != __this_cpu_read(current_tsc_ratio)) {
 		__this_cpu_write(current_tsc_ratio, svm->tsc_ratio);
@@ -1423,6 +1491,7 @@ static void svm_vcpu_put(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void svm_update_cpl(struct kvm_vcpu *vcpu)
 {
 	struct vcpu_svm *svm = to_svm(vcpu);
@@ -1440,6 +1509,8 @@ static void svm_update_cpl(struct kvm_vcpu *vcpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned long svm_get_rflags(struct kvm_vcpu *vcpu)
 {
 	return to_svm(vcpu)->vmcb->save.rflags;
@@ -1448,18 +1519,24 @@ static unsigned long svm_get_rflags(struct kvm_vcpu *vcpu)
 static void svm_set_rflags(struct kvm_vcpu *vcpu, unsigned long rflags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long old_rflags = to_svm(vcpu)->vmcb->save.rflags;
 
 	to_svm(vcpu)->vmcb->save.rflags = rflags;
 	if ((old_rflags ^ rflags) & X86_EFLAGS_VM)
 		svm_update_cpl(vcpu);
 =======
+=======
+>>>>>>> v3.18
        /*
         * Any change of EFLAGS.VM is accompained by a reload of SS
         * (caused by either a task switch or an inter-privilege IRET),
         * so we do not need to update the CPL here.
         */
 	to_svm(vcpu)->vmcb->save.rflags = rflags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1526,8 +1603,11 @@ static void svm_get_segment(struct kvm_vcpu *vcpu,
 	var->l = (s->attrib >> SVM_SELECTOR_L_SHIFT) & 1;
 	var->db = (s->attrib >> SVM_SELECTOR_DB_SHIFT) & 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	var->g = (s->attrib >> SVM_SELECTOR_G_SHIFT) & 1;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * AMD CPUs circa 2014 track the G bit for all segments except CS.
@@ -1538,6 +1618,9 @@ static void svm_get_segment(struct kvm_vcpu *vcpu,
 	 * Intel's vmentry has a check on the 'G' bit.
 	 */
 	var->g = s->limit > 0xfffff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1548,6 +1631,7 @@ static void svm_get_segment(struct kvm_vcpu *vcpu,
 
 	switch (seg) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case VCPU_SREG_CS:
 		/*
 		 * SVM always stores 0 for the 'G' bit in the CS selector in
@@ -1556,6 +1640,8 @@ static void svm_get_segment(struct kvm_vcpu *vcpu,
 		 */
 		var->g = s->limit > 0xfffff;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case VCPU_SREG_TR:
@@ -1589,6 +1675,10 @@ static void svm_get_segment(struct kvm_vcpu *vcpu,
 		if (var->unusable)
 			var->db = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		var->dpl = to_svm(vcpu)->vmcb->save.cpl;
+>>>>>>> v3.18
 =======
 		var->dpl = to_svm(vcpu)->vmcb->save.cpl;
 >>>>>>> v3.18
@@ -1748,9 +1838,12 @@ static void svm_set_segment(struct kvm_vcpu *vcpu,
 		s->attrib |= (var->g & 1) << SVM_SELECTOR_G_SHIFT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (seg == VCPU_SREG_CS)
 		svm_update_cpl(vcpu);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * This is always accurate, except if SYSRET returned to a segment
@@ -1760,6 +1853,9 @@ static void svm_set_segment(struct kvm_vcpu *vcpu,
 	 */
 	if (seg == VCPU_SREG_SS)
 		svm->vmcb->save.cpl = (s->attrib >> SVM_SELECTOR_DPL_SHIFT) & 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mark_dirty(svm->vmcb, VMCB_SEG);
@@ -1800,7 +1896,10 @@ static void new_asid(struct vcpu_svm *svm, struct svm_cpu_data *sd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u64 svm_get_dr6(struct kvm_vcpu *vcpu)
 {
 	return to_svm(vcpu)->vmcb->save.dr6;
@@ -1829,6 +1928,9 @@ static void svm_sync_dirty_debug_regs(struct kvm_vcpu *vcpu)
 	set_dr_intercepts(svm);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void svm_set_dr7(struct kvm_vcpu *vcpu, unsigned long value)
 {
@@ -2111,11 +2213,14 @@ static void nested_svm_inject_npf_exit(struct kvm_vcpu *vcpu,
 	struct vcpu_svm *svm = to_svm(vcpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	svm->vmcb->control.exit_code = SVM_EXIT_NPF;
 	svm->vmcb->control.exit_code_hi = 0;
 	svm->vmcb->control.exit_info_1 = fault->error_code;
 	svm->vmcb->control.exit_info_2 = fault->address;
 =======
+=======
+>>>>>>> v3.18
 	if (svm->vmcb->control.exit_code != SVM_EXIT_NPF) {
 		/*
 		 * TODO: track the cause of the nested page fault, and
@@ -2136,17 +2241,26 @@ static void nested_svm_inject_npf_exit(struct kvm_vcpu *vcpu,
 	 */
 	if (svm->vmcb->control.exit_info_1 & (2ULL << 32))
 		svm->vmcb->control.exit_info_1 &= ~1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nested_svm_vmexit(svm);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nested_svm_init_mmu_context(struct kvm_vcpu *vcpu)
 {
 	int r;
 
 	r = kvm_init_shadow_mmu(vcpu, &vcpu->arch.mmu);
+=======
+static void nested_svm_init_mmu_context(struct kvm_vcpu *vcpu)
+{
+	kvm_init_shadow_mmu(vcpu, &vcpu->arch.mmu);
+>>>>>>> v3.18
 =======
 static void nested_svm_init_mmu_context(struct kvm_vcpu *vcpu)
 {
@@ -2160,8 +2274,11 @@ static void nested_svm_init_mmu_context(struct kvm_vcpu *vcpu)
 	vcpu->arch.mmu.shadow_root_level = get_npt_level();
 	vcpu->arch.walk_mmu              = &vcpu->arch.nested_mmu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return r;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2290,8 +2407,14 @@ static void nested_svm_unmap(struct page *page)
 static int nested_svm_intercept_ioio(struct vcpu_svm *svm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned port;
 	u8 val, bit;
+=======
+	unsigned port, size, iopm_len;
+	u16 val, mask;
+	u8 start_bit;
+>>>>>>> v3.18
 =======
 	unsigned port, size, iopm_len;
 	u16 val, mask;
@@ -2304,6 +2427,7 @@ static int nested_svm_intercept_ioio(struct vcpu_svm *svm)
 
 	port = svm->vmcb->control.exit_info_1 >> 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpa  = svm->nested.vmcb_iopm + (port / 8);
 	bit  = port % 8;
 	val  = 0;
@@ -2313,6 +2437,8 @@ static int nested_svm_intercept_ioio(struct vcpu_svm *svm)
 
 	return val ? NESTED_EXIT_DONE : NESTED_EXIT_HOST;
 =======
+=======
+>>>>>>> v3.18
 	size = (svm->vmcb->control.exit_info_1 & SVM_IOIO_SIZE_MASK) >>
 		SVM_IOIO_SIZE_SHIFT;
 	gpa  = svm->nested.vmcb_iopm + (port / 8);
@@ -2325,6 +2451,9 @@ static int nested_svm_intercept_ioio(struct vcpu_svm *svm)
 		return NESTED_EXIT_DONE;
 
 	return (val & mask) ? NESTED_EXIT_DONE : NESTED_EXIT_HOST;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2959,12 +3088,15 @@ static int xsetbv_interception(struct vcpu_svm *svm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int invalid_op_interception(struct vcpu_svm *svm)
 {
 	kvm_queue_exception(&svm->vcpu, UD_VECTOR);
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int task_switch_interception(struct vcpu_svm *svm)
@@ -3049,6 +3181,10 @@ static int iret_interception(struct vcpu_svm *svm)
 	svm->vcpu.arch.hflags |= HF_IRET_MASK;
 	svm->nmi_iret_rip = kvm_rip_read(&svm->vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvm_make_request(KVM_REQ_EVENT, &svm->vcpu);
+>>>>>>> v3.18
 =======
 	kvm_make_request(KVM_REQ_EVENT, &svm->vcpu);
 >>>>>>> v3.18
@@ -3185,7 +3321,10 @@ static int dr_interception(struct vcpu_svm *svm)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (svm->vcpu.guest_debug == 0) {
 		/*
 		 * No more DR vmexits; force a reload of the debug registers
@@ -3197,6 +3336,9 @@ static int dr_interception(struct vcpu_svm *svm)
 		return 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!boot_cpu_has(X86_FEATURE_DECODEASSISTS))
 		return emulate_on_interception(svm);
@@ -3235,7 +3377,11 @@ static int cr8_write_interception(struct vcpu_svm *svm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 svm_read_l1_tsc(struct kvm_vcpu *vcpu, u64 host_tsc)
+=======
+static u64 svm_read_l1_tsc(struct kvm_vcpu *vcpu, u64 host_tsc)
+>>>>>>> v3.18
 =======
 static u64 svm_read_l1_tsc(struct kvm_vcpu *vcpu, u64 host_tsc)
 >>>>>>> v3.18
@@ -3489,7 +3635,10 @@ static int pause_interception(struct vcpu_svm *svm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int nop_interception(struct vcpu_svm *svm)
 {
 	skip_emulated_instruction(&(svm->vcpu));
@@ -3508,6 +3657,9 @@ static int mwait_interception(struct vcpu_svm *svm)
 	return nop_interception(svm);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int (*const svm_exit_handlers[])(struct vcpu_svm *svm) = {
 	[SVM_EXIT_READ_CR0]			= cr_interception,
@@ -3567,8 +3719,13 @@ static int (*const svm_exit_handlers[])(struct vcpu_svm *svm) = {
 	[SVM_EXIT_SKINIT]			= skinit_interception,
 	[SVM_EXIT_WBINVD]                       = emulate_on_interception,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[SVM_EXIT_MONITOR]			= invalid_op_interception,
 	[SVM_EXIT_MWAIT]			= invalid_op_interception,
+=======
+	[SVM_EXIT_MONITOR]			= monitor_interception,
+	[SVM_EXIT_MWAIT]			= mwait_interception,
+>>>>>>> v3.18
 =======
 	[SVM_EXIT_MONITOR]			= monitor_interception,
 	[SVM_EXIT_MWAIT]			= mwait_interception,
@@ -3904,7 +4061,11 @@ static int svm_interrupt_allowed(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int enable_irq_window(struct kvm_vcpu *vcpu)
+=======
+static void enable_irq_window(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 static void enable_irq_window(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -3922,10 +4083,16 @@ static void enable_irq_window(struct kvm_vcpu *vcpu)
 		svm_inject_irq(svm, 0x0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 static int enable_nmi_window(struct kvm_vcpu *vcpu)
+=======
+}
+
+static void enable_nmi_window(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 }
 
@@ -3937,7 +4104,11 @@ static void enable_nmi_window(struct kvm_vcpu *vcpu)
 	if ((svm->vcpu.arch.hflags & (HF_NMI_MASK | HF_IRET_MASK))
 	    == HF_NMI_MASK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0; /* IRET will cause a vm exit */
+=======
+		return; /* IRET will cause a vm exit */
+>>>>>>> v3.18
 =======
 		return; /* IRET will cause a vm exit */
 >>>>>>> v3.18
@@ -3950,7 +4121,10 @@ static void enable_nmi_window(struct kvm_vcpu *vcpu)
 	svm->vmcb->save.rflags |= (X86_EFLAGS_TF | X86_EFLAGS_RF);
 	update_db_bp_intercept(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4336,12 +4510,18 @@ static bool svm_invpcid_supported(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool svm_mpx_supported(void)
 {
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool svm_has_wbinvd_exit(void)
 {
@@ -4449,7 +4629,12 @@ static int svm_check_intercept(struct kvm_vcpu *vcpu,
 			icpt_info.exit_code += info->modrm_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (icpt_info.exit_code != SVM_EXIT_WRITE_CR0)
+=======
+		if (icpt_info.exit_code != SVM_EXIT_WRITE_CR0 ||
+		    info->intercept == x86_intercept_clts)
+>>>>>>> v3.18
 =======
 		if (icpt_info.exit_code != SVM_EXIT_WRITE_CR0 ||
 		    info->intercept == x86_intercept_clts)
@@ -4499,6 +4684,7 @@ static int svm_check_intercept(struct kvm_vcpu *vcpu,
 		u32 bytes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exit_info = (vcpu->arch.regs[VCPU_REGS_RDX] & 0xffff) << 16;
 
 		if (info->intercept == x86_intercept_in ||
@@ -4508,6 +4694,8 @@ static int svm_check_intercept(struct kvm_vcpu *vcpu,
 		} else {
 			bytes = info->dst_bytes;
 =======
+=======
+>>>>>>> v3.18
 		if (info->intercept == x86_intercept_in ||
 		    info->intercept == x86_intercept_ins) {
 			exit_info = ((info->src_val & 0xffff) << 16) |
@@ -4516,6 +4704,9 @@ static int svm_check_intercept(struct kvm_vcpu *vcpu,
 		} else {
 			exit_info = (info->dst_val & 0xffff) << 16;
 			bytes = info->src_bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -4542,9 +4733,13 @@ static int svm_check_intercept(struct kvm_vcpu *vcpu,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TODO: Advertise NRIPS to guest hypervisor unconditionally */
 	if (static_cpu_has(X86_FEATURE_NRIPS))
 		vmcb->control.next_rip  = info->next_rip;
+=======
+	vmcb->control.next_rip  = info->next_rip;
+>>>>>>> v3.18
 =======
 	vmcb->control.next_rip  = info->next_rip;
 >>>>>>> v3.18
@@ -4564,11 +4759,17 @@ static void svm_handle_external_intr(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void svm_sched_in(struct kvm_vcpu *vcpu, int cpu)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct kvm_x86_ops svm_x86_ops = {
 	.cpu_has_kvm_support = has_svm,
@@ -4608,12 +4809,15 @@ static struct kvm_x86_ops svm_x86_ops = {
 	.get_gdt = svm_get_gdt,
 	.set_gdt = svm_set_gdt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_dr7 = svm_set_dr7,
 	.cache_reg = svm_cache_reg,
 	.get_rflags = svm_get_rflags,
 	.set_rflags = svm_set_rflags,
 	.fpu_activate = svm_fpu_activate,
 =======
+=======
+>>>>>>> v3.18
 	.get_dr6 = svm_get_dr6,
 	.set_dr6 = svm_set_dr6,
 	.set_dr7 = svm_set_dr7,
@@ -4621,6 +4825,9 @@ static struct kvm_x86_ops svm_x86_ops = {
 	.cache_reg = svm_cache_reg,
 	.get_rflags = svm_get_rflags,
 	.set_rflags = svm_set_rflags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fpu_deactivate = svm_fpu_deactivate,
 
@@ -4662,6 +4869,10 @@ static struct kvm_x86_ops svm_x86_ops = {
 	.rdtscp_supported = svm_rdtscp_supported,
 	.invpcid_supported = svm_invpcid_supported,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.mpx_supported = svm_mpx_supported,
+>>>>>>> v3.18
 =======
 	.mpx_supported = svm_mpx_supported,
 >>>>>>> v3.18
@@ -4682,6 +4893,11 @@ static struct kvm_x86_ops svm_x86_ops = {
 	.check_intercept = svm_check_intercept,
 	.handle_external_intr = svm_handle_external_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	.sched_in = svm_sched_in,
+>>>>>>> v3.18
 =======
 
 	.sched_in = svm_sched_in,

@@ -5,9 +5,12 @@ Required properties:
 - reg : Should contain AC97 controller registers location and length
 - interrupts : Should contain AC97 interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - nvidia,dma-request-selector : The Tegra DMA controller's phandle and
   request selector for the AC97 controller
 =======
+=======
+>>>>>>> v3.18
 - resets : Must contain an entry for each entry in reset-names.
   See ../reset/reset.txt for details.
 - reset-names : Must include the following entries:
@@ -19,12 +22,19 @@ Required properties:
   - tx
 - clocks : Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - nvidia,codec-reset-gpio : The Tegra GPIO controller's phandle and the number
   of the GPIO used to reset the external AC97 codec
 - nvidia,codec-sync-gpio : The Tegra GPIO controller's phandle and the number
   of the GPIO corresponding with the AC97 DAP _FS line
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -35,10 +45,13 @@ ac97@70002000 {
 	reg = <0x70002000 0x200>;
 	interrupts = <0 81 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvidia,dma-request-selector = <&apbdma 12>;
 	nvidia,codec-reset-gpio = <&gpio 170 0>;
 	nvidia,codec-sync-gpio = <&gpio 120 0>;
 =======
+=======
+>>>>>>> v3.18
 	nvidia,codec-reset-gpio = <&gpio 170 0>;
 	nvidia,codec-sync-gpio = <&gpio 120 0>;
 	clocks = <&tegra_car 3>;
@@ -46,5 +59,8 @@ ac97@70002000 {
 	reset-names = "ac97";
 	dmas = <&apbdma 12>, <&apbdma 12>;
 	dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

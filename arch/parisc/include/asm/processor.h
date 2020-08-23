@@ -31,6 +31,11 @@
 #define current_text_addr() ({ void *pc; current_ia(pc); pc; })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HAVE_ARCH_PICK_MMAP_LAYOUT
+
+>>>>>>> v3.18
 =======
 #define HAVE_ARCH_PICK_MMAP_LAYOUT
 
@@ -59,12 +64,18 @@
 #define STACK_TOP_MAX	DEFAULT_TASK_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STACK_SIZE_MAX	(1 << 30)	/* 1 GB */
 =======
+=======
+>>>>>>> v3.18
 /* Allow bigger stacks for 64-bit processes */
 #define STACK_SIZE_MAX	(USER_WIDE_MODE					\
 			 ? (1 << 30)	/* 1 GB */			\
 			 : (CONFIG_MAX_STACK_SIZE_MB*1024*1024))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif
@@ -346,6 +357,10 @@ extern unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()	barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18

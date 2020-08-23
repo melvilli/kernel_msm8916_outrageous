@@ -3,6 +3,7 @@
 
 /* Return values for compact_zone() and try_to_compact_pages() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* compaction didn't start as it was not possible or direct reclaim was more suitable */
 #define COMPACT_SKIPPED		0
 /* compaction should continue to another pageblock */
@@ -12,6 +13,8 @@
 /* The full zone was compacted */
 #define COMPACT_COMPLETE	3
 =======
+=======
+>>>>>>> v3.18
 /* compaction didn't start as it was deferred due to past failures */
 #define COMPACT_DEFERRED	0
 /* compaction didn't start as it was not possible or direct reclaim was more suitable */
@@ -30,6 +33,9 @@
 #define COMPACT_CONTENDED_SCHED	1
 /* Zone lock or lru_lock was contended in async compaction */
 #define COMPACT_CONTENDED_LOCK	2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_COMPACTION
@@ -44,7 +50,12 @@ extern int fragmentation_index(struct zone *zone, unsigned int order);
 extern unsigned long try_to_compact_pages(struct zonelist *zonelist,
 			int order, gfp_t gfp_mask, nodemask_t *mask,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bool sync, bool *contended);
+=======
+			enum migrate_mode mode, int *contended,
+			struct zone **candidate_zone);
+>>>>>>> v3.18
 =======
 			enum migrate_mode mode, int *contended,
 			struct zone **candidate_zone);
@@ -89,7 +100,10 @@ static inline bool compaction_deferred(struct zone *zone, int order)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Update defer tracking counters after successful compaction of given order,
  * which means an allocation either succeeded (alloc_success == true) or is
@@ -106,6 +120,9 @@ static inline void compaction_defer_reset(struct zone *zone, int order,
 		zone->compact_order_failed = order + 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Returns true if restarting compaction after many failures */
 static inline bool compaction_restarting(struct zone *zone, int order)
@@ -121,7 +138,12 @@ static inline bool compaction_restarting(struct zone *zone, int order)
 static inline unsigned long try_to_compact_pages(struct zonelist *zonelist,
 			int order, gfp_t gfp_mask, nodemask_t *nodemask,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bool sync, bool *contended)
+=======
+			enum migrate_mode mode, int *contended,
+			struct zone **candidate_zone)
+>>>>>>> v3.18
 =======
 			enum migrate_mode mode, int *contended,
 			struct zone **candidate_zone)

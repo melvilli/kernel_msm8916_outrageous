@@ -32,8 +32,13 @@
 #define EM_V850		87	/* NEC v850 */
 #define EM_M32R		88	/* Renesas M32R */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EM_H8_300	46	/* Renesas H8/300,300H,H8S */
 #define EM_MN10300	89	/* Panasonic/MEI MN10300, AM33 */
+=======
+#define EM_MN10300	89	/* Panasonic/MEI MN10300, AM33 */
+#define EM_OPENRISC     92     /* OpenRISC 32-bit embedded processor */
+>>>>>>> v3.18
 =======
 #define EM_MN10300	89	/* Panasonic/MEI MN10300, AM33 */
 #define EM_OPENRISC     92     /* OpenRISC 32-bit embedded processor */

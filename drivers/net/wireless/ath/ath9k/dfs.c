@@ -159,8 +159,13 @@ void ath9k_dfs_process_phyerr(struct ath_softc *sc, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ard.rssi = rs->rs_rssi_ctl0;
 	ard.ext_rssi = rs->rs_rssi_ext0;
+=======
+	ard.rssi = rs->rs_rssi_ctl[0];
+	ard.ext_rssi = rs->rs_rssi_ext[0];
+>>>>>>> v3.18
 =======
 	ard.rssi = rs->rs_rssi_ctl[0];
 	ard.ext_rssi = rs->rs_rssi_ext[0];
@@ -184,6 +189,7 @@ void ath9k_dfs_process_phyerr(struct ath_softc *sc, void *data,
 	if (ath9k_postprocess_radar_event(sc, &ard, &pe)) {
 		struct dfs_pattern_detector *pd = sc->dfs_detector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		static u64 last_ts;
 		ath_dbg(common, DFS,
 			"ath9k_dfs_process_phyerr: channel=%d, ts=%llu, "
@@ -191,12 +197,17 @@ void ath9k_dfs_process_phyerr(struct ath_softc *sc, void *data,
 			pe.freq, pe.ts, pe.width, pe.rssi, pe.ts-last_ts);
 		last_ts = pe.ts;
 =======
+=======
+>>>>>>> v3.18
 		ath_dbg(common, DFS,
 			"ath9k_dfs_process_phyerr: channel=%d, ts=%llu, "
 			"width=%d, rssi=%d, delta_ts=%llu\n",
 			pe.freq, pe.ts, pe.width, pe.rssi,
 			pe.ts - sc->dfs_prev_pulse_ts);
 		sc->dfs_prev_pulse_ts = pe.ts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		DFS_STAT_INC(sc, pulses_processed);
 		if (pd != NULL && pd->add_pulse(pd, &pe)) {

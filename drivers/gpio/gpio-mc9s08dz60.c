@@ -103,7 +103,11 @@ static int mc9s08dz60_probe(struct i2c_client *client,
 	mc9s->chip.owner = THIS_MODULE;
 	mc9s->chip.ngpio = GPIO_NUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mc9s->chip.can_sleep = 1;
+=======
+	mc9s->chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	mc9s->chip.can_sleep = true;
 >>>>>>> v3.18
@@ -123,7 +127,12 @@ static int mc9s08dz60_remove(struct i2c_client *client)
 	mc9s = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&mc9s->chip);
+=======
+	gpiochip_remove(&mc9s->chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&mc9s->chip);
 	return 0;

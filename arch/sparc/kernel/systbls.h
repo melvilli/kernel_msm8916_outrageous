@@ -2,6 +2,7 @@
 #define _SYSTBLS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/types.h>
 #include <linux/signal.h>
@@ -40,6 +41,8 @@ extern asmlinkage void sparc64_get_context(struct pt_regs *regs);
 extern void do_rt_sigreturn(struct pt_regs *regs);
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/signal.h>
 #include <linux/kernel.h>
 #include <linux/compat.h>
@@ -139,5 +142,8 @@ asmlinkage long compat_sys_fstatat64(unsigned int dfd,
 				     struct compat_stat64 __user * statbuf,
 				     int flag);
 #endif /* CONFIG_SPARC64 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _SYSTBLS_H */

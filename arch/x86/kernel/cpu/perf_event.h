@@ -64,11 +64,14 @@ struct event_constraint {
 };
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct event_constraint flags
  */
 #define PERF_X86_EVENT_PEBS_LDLAT	0x1 /* ld+ldlat data address sampling */
 #define PERF_X86_EVENT_PEBS_ST		0x2 /* st data address sampling */
 =======
+=======
+>>>>>>> v3.18
  * struct hw_perf_event.flags flags
  */
 #define PERF_X86_EVENT_PEBS_LDLAT	0x1 /* ld+ldlat data address sampling */
@@ -77,6 +80,9 @@ struct event_constraint {
 #define PERF_X86_EVENT_COMMITTED	0x8 /* event passed commit_txn */
 #define PERF_X86_EVENT_PEBS_LD_HSW	0x10 /* haswell style datala, load */
 #define PERF_X86_EVENT_PEBS_NA_HSW	0x20 /* haswell style datala, unknown */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct amd_nb {
@@ -140,15 +146,21 @@ struct cpu_hw_events {
 	int			enabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			n_events;
 	int			n_added;
 	int			n_txn;
 =======
+=======
+>>>>>>> v3.18
 	int			n_events; /* the # of events in the below arrays */
 	int			n_added;  /* the # last events in the below arrays;
 					     they've never been enabled yet */
 	int			n_txn;    /* the # last events in the below arrays;
 					     added in the current transaction */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			assign[X86_PMC_IDX_MAX]; /* event to counter assignment */
 	u64			tags[X86_PMC_IDX_MAX];
@@ -182,12 +194,18 @@ struct cpu_hw_events {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Intel checkpoint mask
 	 */
 	u64				intel_cp_status;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * manage shared (per-core, per-cpu) registers
 	 * used on Intel NHM/WSM/SNB
@@ -255,12 +273,15 @@ struct cpu_hw_events {
  *  - edge
  *  - cnt-mask
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  The other filters are supported by fixed counters.
  *  The any-thread option is supported starting with v3.
  */
 #define FIXED_EVENT_CONSTRAINT(c, n)	\
 	EVENT_CONSTRAINT(c, (1ULL << (32+n)), X86_RAW_EVENT_MASK)
 =======
+=======
+>>>>>>> v3.18
  *  - in_tx
  *  - in_tx_checkpointed
  *  The other filters are supported by fixed counters.
@@ -269,6 +290,9 @@ struct cpu_hw_events {
 #define FIXED_EVENT_FLAGS (X86_RAW_EVENT_MASK|HSW_IN_TX|HSW_IN_TX_CHECKPOINTED)
 #define FIXED_EVENT_CONSTRAINT(c, n)	\
 	EVENT_CONSTRAINT(c, (1ULL << (32+n)), FIXED_EVENT_FLAGS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -278,6 +302,7 @@ struct cpu_hw_events {
 	EVENT_CONSTRAINT(c, n, INTEL_ARCH_EVENT_MASK)
 
 #define INTEL_PLD_CONSTRAINT(c, n)	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__EVENT_CONSTRAINT(c, n, INTEL_ARCH_EVENT_MASK, \
 			   HWEIGHT(n), 0, PERF_X86_EVENT_PEBS_LDLAT)
@@ -292,6 +317,8 @@ struct cpu_hw_events {
 #define for_each_event_constraint(e, c)	\
 	for ((e) = (c); (e)->weight; (e)++)
 =======
+=======
+>>>>>>> v3.18
 	__EVENT_CONSTRAINT(c, n, INTEL_ARCH_EVENT_MASK|X86_ALL_EVENT_FLAGS, \
 			   HWEIGHT(n), 0, PERF_X86_EVENT_PEBS_LDLAT)
 
@@ -352,6 +379,9 @@ struct cpu_hw_events {
  */
 #define for_each_event_constraint(e, c)	\
 	for ((e) = (c); (e)->weight != -1; (e)++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -371,6 +401,7 @@ struct extra_reg {
 	u64			valid_mask;
 	int			idx;  /* per_xxx->regs[] reg index */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define EVENT_EXTRA_REG(e, ms, m, vm, i) {	\
@@ -380,6 +411,8 @@ struct extra_reg {
 	.valid_mask = (vm),	\
 	.idx = EXTRA_REG_##i,	\
 =======
+=======
+>>>>>>> v3.18
 	bool			extra_msr_access;
 };
 
@@ -390,6 +423,9 @@ struct extra_reg {
 	.valid_mask = (vm),		\
 	.idx = EXTRA_REG_##i,		\
 	.extra_msr_access = true,	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -416,12 +452,18 @@ union perf_capabilities {
 		u64	pebs_format:4;
 		u64	smm_freeze:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * PMU supports separate counter range for writing
 		 * values > 32bit.
 		 */
 		u64	full_width_write:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	u64	capabilities;
@@ -498,6 +540,10 @@ struct x86_pmu {
 	struct x86_pmu_quirk *quirks;
 	int		perfctr_second_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool		late_ack;
+>>>>>>> v3.18
 =======
 	bool		late_ack;
 >>>>>>> v3.18
@@ -506,6 +552,10 @@ struct x86_pmu {
 	 * sysfs attrs
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		attr_rdpmc_broken;
+>>>>>>> v3.18
 =======
 	int		attr_rdpmc_broken;
 >>>>>>> v3.18
@@ -555,6 +605,10 @@ struct x86_pmu {
 	u64		lbr_sel_mask;		   /* LBR_SELECT valid bits */
 	const int	*lbr_sel_map;		   /* lbr_select mappings */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool		lbr_double_abort;	   /* duplicated lbr aborts */
+>>>>>>> v3.18
 =======
 	bool		lbr_double_abort;	   /* duplicated lbr aborts */
 >>>>>>> v3.18
@@ -663,7 +717,11 @@ static inline void __x86_pmu_enable_event(struct hw_perf_event *hwc,
 void x86_pmu_enable_all(int added);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_assign_events(struct event_constraint **constraints, int n,
+=======
+int perf_assign_events(struct perf_event **events, int n,
+>>>>>>> v3.18
 =======
 int perf_assign_events(struct perf_event **events, int n,
 >>>>>>> v3.18
@@ -764,6 +822,11 @@ extern struct event_constraint intel_core2_pebs_event_constraints[];
 extern struct event_constraint intel_atom_pebs_event_constraints[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct event_constraint intel_slm_pebs_event_constraints[];
+
+>>>>>>> v3.18
 =======
 extern struct event_constraint intel_slm_pebs_event_constraints[];
 
@@ -777,6 +840,11 @@ extern struct event_constraint intel_snb_pebs_event_constraints[];
 extern struct event_constraint intel_ivb_pebs_event_constraints[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct event_constraint intel_hsw_pebs_event_constraints[];
+
+>>>>>>> v3.18
 =======
 extern struct event_constraint intel_hsw_pebs_event_constraints[];
 
@@ -814,8 +882,11 @@ void intel_pmu_lbr_init_atom(void);
 void intel_pmu_lbr_init_snb(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void intel_pmu_pebs_data_source_nhm(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int intel_pmu_setup_lbr_filter(struct perf_event *event);

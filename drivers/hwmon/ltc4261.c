@@ -56,7 +56,11 @@
 
 struct ltc4261_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -72,8 +76,13 @@ struct ltc4261_data {
 static struct ltc4261_data *ltc4261_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ltc4261_data *data = i2c_get_clientdata(client);
+=======
+	struct ltc4261_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ltc4261_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -160,7 +169,10 @@ static ssize_t ltc4261_show_bool(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ltc4261_data *data = ltc4261_update_device(dev);
@@ -172,7 +184,11 @@ static ssize_t ltc4261_show_bool(struct device *dev,
 	fault = data->regs[LTC4261_FAULT] & attr->index;
 	if (fault)		/* Clear reported faults in chip register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		i2c_smbus_write_byte_data(client, LTC4261_FAULT, ~fault);
+=======
+		i2c_smbus_write_byte_data(data->client, LTC4261_FAULT, ~fault);
+>>>>>>> v3.18
 =======
 		i2c_smbus_write_byte_data(data->client, LTC4261_FAULT, ~fault);
 >>>>>>> v3.18
@@ -214,7 +230,11 @@ static SENSOR_DEVICE_ATTR(curr1_max_alarm, S_IRUGO, ltc4261_show_bool, NULL,
 			  FAULT_OC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ltc4261_attributes[] = {
+=======
+static struct attribute *ltc4261_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ltc4261_attrs[] = {
 >>>>>>> v3.18
@@ -231,10 +251,14 @@ static struct attribute *ltc4261_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group ltc4261_group = {
 	.attrs = ltc4261_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ltc4261);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ltc4261);
 >>>>>>> v3.18
@@ -244,8 +268,14 @@ static int ltc4261_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adapter = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ltc4261_data *data;
 	int ret;
+=======
+	struct device *dev = &client->dev;
+	struct ltc4261_data *data;
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &client->dev;
 	struct ltc4261_data *data;
@@ -257,6 +287,7 @@ static int ltc4261_probe(struct i2c_client *client,
 
 	if (i2c_smbus_read_byte_data(client, LTC4261_STATUS) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "Failed to read status register\n");
 		return -ENODEV;
 	}
@@ -267,6 +298,8 @@ static int ltc4261_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "Failed to read status register\n");
 		return -ENODEV;
 	}
@@ -276,12 +309,16 @@ static int ltc4261_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
 	/* Clear faults */
 	i2c_smbus_write_byte_data(client, LTC4261_FAULT, 0x00);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	ret = sysfs_create_group(&client->dev.kobj, &ltc4261_group);
@@ -310,10 +347,15 @@ static int ltc4261_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data,
 							   ltc4261_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -331,7 +373,10 @@ static struct i2c_driver ltc4261_driver = {
 		   },
 	.probe = ltc4261_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ltc4261_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ltc4261_id,

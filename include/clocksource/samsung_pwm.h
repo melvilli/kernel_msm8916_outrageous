@@ -21,8 +21,11 @@
 #define SAMSUNG_PWM_NUM		5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern spinlock_t samsung_pwm_lock;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Following declaration must be in an ifdef due to this symbol being static
  * in pwm-samsung driver if the clocksource driver is not compiled in and the
@@ -31,6 +34,9 @@ extern spinlock_t samsung_pwm_lock;
 #ifdef CONFIG_CLKSRC_SAMSUNG_PWM
 extern spinlock_t samsung_pwm_lock;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct samsung_pwm_variant {

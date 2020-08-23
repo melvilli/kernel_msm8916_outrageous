@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -15,6 +21,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bitops.h>
 #include <linux/module.h>
 #include <linux/mtd/mtd.h>
@@ -23,10 +30,15 @@
 #include <linux/module.h>
 #include <linux/mtd/mtd.h>
 >>>>>>> v3.18
+=======
+#include <linux/module.h>
+#include <linux/mtd/mtd.h>
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/rtnetlink.h>
 
 #include "net_driver.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "spi.h"
 #include "efx.h"
@@ -76,10 +88,14 @@ struct efx_mtd {
 =======
 #include "efx.h"
 >>>>>>> v3.18
+=======
+#include "efx.h"
+>>>>>>> v3.18
 
 #define to_efx_mtd_partition(mtd)				\
 	container_of(mtd, struct efx_mtd_partition, mtd)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int falcon_mtd_probe(struct efx_nic *efx);
 static int siena_mtd_probe(struct efx_nic *efx);
@@ -199,20 +215,28 @@ efx_spi_erase(struct efx_mtd_partition *part, loff_t start, size_t len)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* MTD interface */
 
 static int efx_mtd_erase(struct mtd_info *mtd, struct erase_info *erase)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct efx_mtd *efx_mtd = mtd->priv;
 	int rc;
 
 	rc = efx_mtd->ops->erase(mtd, erase->addr, erase->len);
 =======
+=======
+>>>>>>> v3.18
 	struct efx_nic *efx = mtd->priv;
 	int rc;
 
 	rc = efx->type->mtd_erase(mtd, erase->addr, erase->len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc == 0) {
 		erase->state = MTD_ERASE_DONE;
@@ -228,6 +252,7 @@ static void efx_mtd_sync(struct mtd_info *mtd)
 {
 	struct efx_mtd_partition *part = to_efx_mtd_partition(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct efx_mtd *efx_mtd = mtd->priv;
 	int rc;
 
@@ -236,6 +261,8 @@ static void efx_mtd_sync(struct mtd_info *mtd)
 		pr_err("%s: %s sync failed (%d)\n",
 		       part->name, efx_mtd->name, rc);
 =======
+=======
+>>>>>>> v3.18
 	struct efx_nic *efx = mtd->priv;
 	int rc;
 
@@ -243,6 +270,9 @@ static void efx_mtd_sync(struct mtd_info *mtd)
 	if (rc)
 		pr_err("%s: %s sync failed (%d)\n",
 		       part->name, part->dev_type_name, rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -257,6 +287,7 @@ static void efx_mtd_remove_partition(struct efx_mtd_partition *part)
 		ssleep(1);
 	}
 	WARN_ON(rc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -315,6 +346,8 @@ fail:
 	while (part != &efx_mtd->part[0]) {
 		--part;
 =======
+=======
+>>>>>>> v3.18
 	list_del(&part->node);
 }
 
@@ -353,6 +386,9 @@ fail:
 	while (i--) {
 		part = (struct efx_mtd_partition *)((char *)parts +
 						    i * sizeof_part);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		efx_mtd_remove_partition(part);
 	}
@@ -362,6 +398,7 @@ fail:
 
 void efx_mtd_remove(struct efx_nic *efx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct efx_mtd *efx_mtd, *next;
 
@@ -771,6 +808,8 @@ fail:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	struct efx_mtd_partition *parts, *part, *next;
 
 	WARN_ON(efx_dev_registered(efx));
@@ -796,4 +835,7 @@ void efx_mtd_rename(struct efx_nic *efx)
 	list_for_each_entry(part, &efx->mtd_list, node)
 		efx->type->mtd_rename(part);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -111,7 +111,11 @@ static inline int mips_atomic_set(unsigned long addr, unsigned long new)
 	if (cpu_has_llsc && R10000_LLSC_WAR) {
 		__asm__ __volatile__ (
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -140,7 +144,11 @@ static inline int mips_atomic_set(unsigned long addr, unsigned long new)
 	} else if (cpu_has_llsc) {
 		__asm__ __volatile__ (
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -149,7 +157,11 @@ static inline int mips_atomic_set(unsigned long addr, unsigned long new)
 		"	move	%[tmp], %[new]				\n"
 		"2:	sc	%[tmp], (%[addr])			\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	beqz	%[tmp], 4f				\n"
+=======
+		"	bnez	%[tmp], 4f				\n"
+>>>>>>> v3.18
 =======
 		"	bnez	%[tmp], 4f				\n"
 >>>>>>> v3.18

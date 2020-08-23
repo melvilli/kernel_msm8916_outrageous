@@ -63,10 +63,13 @@ static int ms_ergonomy_kb_quirk(struct hid_input *hi, struct hid_usage *usage,
 	struct input_dev *input = hi->input;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (usage->hid & HID_USAGE) {
 	case 0xfd06: ms_map_key_clear(KEY_CHAT);	break;
 	case 0xfd07: ms_map_key_clear(KEY_PHONE);	break;
 =======
+=======
+>>>>>>> v3.18
 	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_CONSUMER) {
 		switch (usage->hid & HID_USAGE) {
 		/*
@@ -109,6 +112,9 @@ static int ms_ergonomy_kb_quirk(struct hid_input *hi, struct hid_usage *usage,
 		 * changes state, and as such is useless, ignore it.
 		 */
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0xff05:
 		set_bit(EV_REP, input->evbit);
@@ -119,6 +125,10 @@ static int ms_ergonomy_kb_quirk(struct hid_input *hi, struct hid_usage *usage,
 		set_bit(KEY_F17, input->keybit);
 		set_bit(KEY_F18, input->keybit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -132,6 +142,12 @@ static int ms_presenter_8k_quirk(struct hid_input *hi, struct hid_usage *usage,
 		unsigned long **bit, int *max)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if ((usage->hid & HID_USAGE_PAGE) != HID_UP_MSVENDOR)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if ((usage->hid & HID_USAGE_PAGE) != HID_UP_MSVENDOR)
 		return 0;
@@ -157,9 +173,12 @@ static int ms_input_mapping(struct hid_device *hdev, struct hid_input *hi,
 	unsigned long quirks = (unsigned long)hid_get_drvdata(hdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((usage->hid & HID_USAGE_PAGE) != HID_UP_MSVENDOR)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (quirks & MS_ERGONOMY) {
@@ -192,6 +211,10 @@ static int ms_event(struct hid_device *hdev, struct hid_field *field,
 {
 	unsigned long quirks = (unsigned long)hid_get_drvdata(hdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct input_dev *input;
+>>>>>>> v3.18
 =======
 	struct input_dev *input;
 >>>>>>> v3.18
@@ -201,10 +224,13 @@ static int ms_event(struct hid_device *hdev, struct hid_field *field,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Handling MS keyboards special buttons */
 	if (quirks & MS_ERGONOMY && usage->hid == (HID_UP_MSVENDOR | 0xff05)) {
 		struct input_dev *input = field->hidinput->input;
 =======
+=======
+>>>>>>> v3.18
 	input = field->hidinput->input;
 
 	/* Handling MS keyboards special buttons */
@@ -232,6 +258,9 @@ static int ms_event(struct hid_device *hdev, struct hid_field *field,
 	}
 
 	if (quirks & MS_ERGONOMY && usage->hid == (HID_UP_MSVENDOR | 0xff05)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		static unsigned int last_key = 0;
 		unsigned int key = 0;
@@ -286,6 +315,11 @@ static const struct hid_device_id ms_devices[] = {
 	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_SIDEWINDER_GV),
 		.driver_data = MS_HIDINPUT },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_OFFICE_KB),
+		.driver_data = MS_ERGONOMY },
+>>>>>>> v3.18
 =======
 	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_OFFICE_KB),
 		.driver_data = MS_ERGONOMY },

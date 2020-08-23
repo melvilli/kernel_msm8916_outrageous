@@ -46,7 +46,11 @@ static DEFINE_MUTEX(pfkey_mutex);
 
 #define DUMMY_MARK 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct xfrm_mark dummy_mark = {0, 0};
+=======
+static const struct xfrm_mark dummy_mark = {0, 0};
+>>>>>>> v3.18
 =======
 static const struct xfrm_mark dummy_mark = {0, 0};
 >>>>>>> v3.18
@@ -104,7 +108,11 @@ static void pfkey_sock_destruct(struct sock *sk)
 
 	if (!sock_flag(sk, SOCK_DEAD)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "Attempt to release alive pfkey socket: %p\n", sk);
+=======
+		pr_err("Attempt to release alive pfkey socket: %p\n", sk);
+>>>>>>> v3.18
 =======
 		pr_err("Attempt to release alive pfkey socket: %p\n", sk);
 >>>>>>> v3.18
@@ -214,7 +222,11 @@ static int pfkey_broadcast_one(struct sk_buff *skb, struct sk_buff **skb2,
 			skb_set_owner_r(*skb2, sk);
 			skb_queue_tail(&sk->sk_receive_queue, *skb2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sk->sk_data_ready(sk, (*skb2)->len);
+=======
+			sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 			sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -351,7 +363,11 @@ static int pfkey_error(const struct sadb_msg *orig, int err, struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 sadb_ext_min_len[] = {
+=======
+static const u8 sadb_ext_min_len[] = {
+>>>>>>> v3.18
 =======
 static const u8 sadb_ext_min_len[] = {
 >>>>>>> v3.18
@@ -382,6 +398,10 @@ static const u8 sadb_ext_min_len[] = {
 	[SADB_X_EXT_SEC_CTX]		= (u8) sizeof(struct sadb_x_sec_ctx),
 	[SADB_X_EXT_KMADDRESS]		= (u8) sizeof(struct sadb_x_kmaddress),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[SADB_X_EXT_FILTER]		= (u8) sizeof(struct sadb_x_filter),
+>>>>>>> v3.18
 =======
 	[SADB_X_EXT_FILTER]		= (u8) sizeof(struct sadb_x_filter),
 >>>>>>> v3.18
@@ -425,7 +445,10 @@ static int verify_address_len(const void *p)
 		 */
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -457,7 +480,12 @@ static inline int verify_sec_ctx_len(const void *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct xfrm_user_sec_ctx *pfkey_sadb2xfrm_user_sec_ctx(const struct sadb_x_sec_ctx *sec_ctx)
+=======
+static inline struct xfrm_user_sec_ctx *pfkey_sadb2xfrm_user_sec_ctx(const struct sadb_x_sec_ctx *sec_ctx,
+								     gfp_t gfp)
+>>>>>>> v3.18
 =======
 static inline struct xfrm_user_sec_ctx *pfkey_sadb2xfrm_user_sec_ctx(const struct sadb_x_sec_ctx *sec_ctx,
 								     gfp_t gfp)
@@ -467,7 +495,11 @@ static inline struct xfrm_user_sec_ctx *pfkey_sadb2xfrm_user_sec_ctx(const struc
 	int ctx_size = sec_ctx->sadb_x_ctx_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uctx = kmalloc((sizeof(*uctx)+ctx_size), GFP_KERNEL);
+=======
+	uctx = kmalloc((sizeof(*uctx)+ctx_size), gfp);
+>>>>>>> v3.18
 =======
 	uctx = kmalloc((sizeof(*uctx)+ctx_size), gfp);
 >>>>>>> v3.18
@@ -567,7 +599,10 @@ pfkey_satype2proto(uint8_t satype)
 	case SADB_X_SATYPE_IPCOMP:
 		return IPPROTO_COMP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -587,7 +622,10 @@ pfkey_proto2satype(uint16_t proto)
 	case IPPROTO_COMP:
 		return SADB_X_SATYPE_IPCOMP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -1137,7 +1175,12 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 	x->id.proto = proto;
 	x->id.spi = sa->sadb_sa_spi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	x->props.replay_window = sa->sadb_sa_replay;
+=======
+	x->props.replay_window = min_t(unsigned int, sa->sadb_sa_replay,
+					(sizeof(x->replay.bitmap) * 8));
+>>>>>>> v3.18
 =======
 	x->props.replay_window = min_t(unsigned int, sa->sadb_sa_replay,
 					(sizeof(x->replay.bitmap) * 8));
@@ -1167,7 +1210,11 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 	sec_ctx = ext_hdrs[SADB_X_EXT_SEC_CTX - 1];
 	if (sec_ctx != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx);
+=======
+		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1183,7 +1230,10 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -ENOBUFS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	key = ext_hdrs[SADB_EXT_KEY_AUTH - 1];
@@ -1198,10 +1248,15 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 			keysize = (key->sadb_key_bits + 7) / 8;
 		x->aalg = kmalloc(sizeof(*x->aalg) + keysize, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!x->aalg) {
 			err = -ENOMEM;
 			goto out;
 		}
+=======
+		if (!x->aalg)
+			goto out;
+>>>>>>> v3.18
 =======
 		if (!x->aalg)
 			goto out;
@@ -1225,10 +1280,15 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 			}
 			x->calg = kmalloc(sizeof(*x->calg), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!x->calg) {
 				err = -ENOMEM;
 				goto out;
 			}
+=======
+			if (!x->calg)
+				goto out;
+>>>>>>> v3.18
 =======
 			if (!x->calg)
 				goto out;
@@ -1247,10 +1307,15 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 				keysize = (key->sadb_key_bits + 7) / 8;
 			x->ealg = kmalloc(sizeof(*x->ealg) + keysize, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!x->ealg) {
 				err = -ENOMEM;
 				goto out;
 			}
+=======
+			if (!x->ealg)
+				goto out;
+>>>>>>> v3.18
 =======
 			if (!x->ealg)
 				goto out;
@@ -1269,10 +1334,13 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 	x->props.family = pfkey_sadb_addr2xfrm_addr((struct sadb_address *) ext_hdrs[SADB_EXT_ADDRESS_SRC-1],
 						    &x->props.saddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!x->props.family) {
 		err = -EAFNOSUPPORT;
 		goto out;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pfkey_sadb_addr2xfrm_addr((struct sadb_address *) ext_hdrs[SADB_EXT_ADDRESS_DST-1],
@@ -1306,10 +1374,15 @@ static struct xfrm_state * pfkey_msg2xfrm_state(struct net *net,
 
 		x->encap = kmalloc(sizeof(*x->encap), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!x->encap) {
 			err = -ENOMEM;
 			goto out;
 		}
+=======
+		if (!x->encap)
+			goto out;
+>>>>>>> v3.18
 =======
 		if (!x->encap)
 			goto out;
@@ -1426,13 +1499,19 @@ static int pfkey_getspi(struct sock *sk, struct sk_buff *skb, const struct sadb_
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = verify_spi_info(x->id.proto, min_spi, max_spi);
 	if (err) {
 		xfrm_state_put(x);
 		return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = xfrm_alloc_spi(x, min_spi, max_spi);
 	resp_skb = err ? ERR_PTR(err) : pfkey_xfrm_state2msg(x);
@@ -1475,10 +1554,16 @@ static int pfkey_acquire(struct sock *sk, struct sk_buff *skb, const struct sadb
 
 	spin_lock_bh(&x->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (x->km.state == XFRM_STATE_ACQ) {
 		x->km.state = XFRM_STATE_ERROR;
 		wake_up(&net->xfrm.km_waitq);
 	}
+=======
+	if (x->km.state == XFRM_STATE_ACQ)
+		x->km.state = XFRM_STATE_ERROR;
+
+>>>>>>> v3.18
 =======
 	if (x->km.state == XFRM_STATE_ACQ)
 		x->km.state = XFRM_STATE_ERROR;
@@ -1570,9 +1655,13 @@ static int pfkey_add(struct sock *sk, struct sk_buff *skb, const struct sadb_msg
 		err = xfrm_state_update(x);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_audit_state_add(x, err ? 0 : 1,
 			     audit_get_loginuid(current),
 			     audit_get_sessionid(current), 0);
+=======
+	xfrm_audit_state_add(x, err ? 0 : 1, true);
+>>>>>>> v3.18
 =======
 	xfrm_audit_state_add(x, err ? 0 : 1, true);
 >>>>>>> v3.18
@@ -1630,9 +1719,13 @@ static int pfkey_delete(struct sock *sk, struct sk_buff *skb, const struct sadb_
 	km_state_notify(x, &c);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_audit_state_delete(x, err ? 0 : 1,
 				audit_get_loginuid(current),
 				audit_get_sessionid(current), 0);
+=======
+	xfrm_audit_state_delete(x, err ? 0 : 1, true);
+>>>>>>> v3.18
 =======
 	xfrm_audit_state_delete(x, err ? 0 : 1, true);
 >>>>>>> v3.18
@@ -1828,7 +1921,10 @@ static int pfkey_flush(struct sock *sk, struct sk_buff *skb, const struct sadb_m
 	unsigned int proto;
 	struct km_event c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfrm_audit audit_info;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err, err2;
@@ -1838,10 +1934,14 @@ static int pfkey_flush(struct sock *sk, struct sk_buff *skb, const struct sadb_m
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_info.loginuid = audit_get_loginuid(current);
 	audit_info.sessionid = audit_get_sessionid(current);
 	audit_info.secid = 0;
 	err = xfrm_state_flush(net, proto, &audit_info);
+=======
+	err = xfrm_state_flush(net, proto, true);
+>>>>>>> v3.18
 =======
 	err = xfrm_state_flush(net, proto, true);
 >>>>>>> v3.18
@@ -1901,7 +2001,13 @@ static int pfkey_dump_sa(struct pfkey_sock *pfk)
 static void pfkey_dump_sa_done(struct pfkey_sock *pfk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_state_walk_done(&pfk->dump.u.state);
+=======
+	struct net *net = sock_net(&pfk->sk);
+
+	xfrm_state_walk_done(&pfk->dump.u.state, net);
+>>>>>>> v3.18
 =======
 	struct net *net = sock_net(&pfk->sk);
 
@@ -1913,6 +2019,10 @@ static int pfkey_dump(struct sock *sk, struct sk_buff *skb, const struct sadb_ms
 {
 	u8 proto;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfrm_address_filter *filter = NULL;
+>>>>>>> v3.18
 =======
 	struct xfrm_address_filter *filter = NULL;
 >>>>>>> v3.18
@@ -1926,7 +2036,10 @@ static int pfkey_dump(struct sock *sk, struct sk_buff *skb, const struct sadb_ms
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ext_hdrs[SADB_X_EXT_FILTER - 1]) {
 		struct sadb_x_filter *xfilter = ext_hdrs[SADB_X_EXT_FILTER - 1];
 
@@ -1943,13 +2056,20 @@ static int pfkey_dump(struct sock *sk, struct sk_buff *skb, const struct sadb_ms
 		filter->dplen = xfilter->sadb_x_filter_dplen;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pfk->dump.msg_version = hdr->sadb_msg_version;
 	pfk->dump.msg_portid = hdr->sadb_msg_pid;
 	pfk->dump.dump = pfkey_dump_sa;
 	pfk->dump.done = pfkey_dump_sa_done;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_state_walk_init(&pfk->dump.u.state, proto);
+=======
+	xfrm_state_walk_init(&pfk->dump.u.state, proto, filter);
+>>>>>>> v3.18
 =======
 	xfrm_state_walk_init(&pfk->dump.u.state, proto, filter);
 >>>>>>> v3.18
@@ -2010,7 +2130,11 @@ static u32 gen_reqid(struct net *net)
 		xfrm_policy_walk_init(&walk, XFRM_POLICY_TYPE_MAIN);
 		rc = xfrm_policy_walk(net, &walk, check_reqid, (void*)&reqid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xfrm_policy_walk_done(&walk);
+=======
+		xfrm_policy_walk_done(&walk, net);
+>>>>>>> v3.18
 =======
 		xfrm_policy_walk_done(&walk, net);
 >>>>>>> v3.18
@@ -2355,10 +2479,13 @@ static int pfkey_spdadd(struct sock *sk, struct sk_buff *skb, const struct sadb_
 	sa = ext_hdrs[SADB_EXT_ADDRESS_SRC-1];
 	xp->family = pfkey_sadb_addr2xfrm_addr(sa, &xp->selector.saddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!xp->family) {
 		err = -EINVAL;
 		goto out;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xp->selector.family = xp->family;
@@ -2384,7 +2511,11 @@ static int pfkey_spdadd(struct sock *sk, struct sk_buff *skb, const struct sadb_
 	sec_ctx = ext_hdrs[SADB_X_EXT_SEC_CTX - 1];
 	if (sec_ctx != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx);
+=======
+		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2395,7 +2526,11 @@ static int pfkey_spdadd(struct sock *sk, struct sk_buff *skb, const struct sadb_
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = security_xfrm_policy_alloc(&xp->security, uctx);
+=======
+		err = security_xfrm_policy_alloc(&xp->security, uctx, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = security_xfrm_policy_alloc(&xp->security, uctx, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2430,9 +2565,13 @@ static int pfkey_spdadd(struct sock *sk, struct sk_buff *skb, const struct sadb_
 				 hdr->sadb_msg_type != SADB_X_SPDUPDATE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_audit_policy_add(xp, err ? 0 : 1,
 			      audit_get_loginuid(current),
 			      audit_get_sessionid(current), 0);
+=======
+	xfrm_audit_policy_add(xp, err ? 0 : 1, true);
+>>>>>>> v3.18
 =======
 	xfrm_audit_policy_add(xp, err ? 0 : 1, true);
 >>>>>>> v3.18
@@ -2500,7 +2639,11 @@ static int pfkey_spddelete(struct sock *sk, struct sk_buff *skb, const struct sa
 	sec_ctx = ext_hdrs[SADB_X_EXT_SEC_CTX - 1];
 	if (sec_ctx != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx);
+=======
+		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		struct xfrm_user_sec_ctx *uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2509,7 +2652,11 @@ static int pfkey_spddelete(struct sock *sk, struct sk_buff *skb, const struct sa
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = security_xfrm_policy_alloc(&pol_ctx, uctx);
+=======
+		err = security_xfrm_policy_alloc(&pol_ctx, uctx, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = security_xfrm_policy_alloc(&pol_ctx, uctx, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2526,9 +2673,13 @@ static int pfkey_spddelete(struct sock *sk, struct sk_buff *skb, const struct sa
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_audit_policy_delete(xp, err ? 0 : 1,
 				 audit_get_loginuid(current),
 				 audit_get_sessionid(current), 0);
+=======
+	xfrm_audit_policy_delete(xp, err ? 0 : 1, true);
+>>>>>>> v3.18
 =======
 	xfrm_audit_policy_delete(xp, err ? 0 : 1, true);
 >>>>>>> v3.18
@@ -2669,6 +2820,10 @@ static int pfkey_migrate(struct sock *sk, struct sk_buff *skb,
 	struct xfrm_migrate m[XFRM_MAX_DEPTH];
 	struct xfrm_kmaddress k;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net = sock_net(sk);
+>>>>>>> v3.18
 =======
 	struct net *net = sock_net(sk);
 >>>>>>> v3.18
@@ -2714,7 +2869,11 @@ static int pfkey_migrate(struct sock *sk, struct sk_buff *skb,
 
 	/* set destination address info of selector */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sa = ext_hdrs[SADB_EXT_ADDRESS_DST - 1],
+=======
+	sa = ext_hdrs[SADB_EXT_ADDRESS_DST - 1];
+>>>>>>> v3.18
 =======
 	sa = ext_hdrs[SADB_EXT_ADDRESS_DST - 1];
 >>>>>>> v3.18
@@ -2750,7 +2909,11 @@ static int pfkey_migrate(struct sock *sk, struct sk_buff *skb,
 
 	return xfrm_migrate(&sel, dir, XFRM_POLICY_TYPE_MAIN, m, i,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    kma ? &k : NULL);
+=======
+			    kma ? &k : NULL, net);
+>>>>>>> v3.18
 =======
 			    kma ? &k : NULL, net);
 >>>>>>> v3.18
@@ -2791,9 +2954,13 @@ static int pfkey_spdget(struct sock *sk, struct sk_buff *skb, const struct sadb_
 
 	if (delete) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xfrm_audit_policy_delete(xp, err ? 0 : 1,
 				audit_get_loginuid(current),
 				audit_get_sessionid(current), 0);
+=======
+		xfrm_audit_policy_delete(xp, err ? 0 : 1, true);
+>>>>>>> v3.18
 =======
 		xfrm_audit_policy_delete(xp, err ? 0 : 1, true);
 >>>>>>> v3.18
@@ -2859,7 +3026,13 @@ static int pfkey_dump_sp(struct pfkey_sock *pfk)
 static void pfkey_dump_sp_done(struct pfkey_sock *pfk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm_policy_walk_done(&pfk->dump.u.policy);
+=======
+	struct net *net = sock_net((struct sock *)pfk);
+
+	xfrm_policy_walk_done(&pfk->dump.u.policy, net);
+>>>>>>> v3.18
 =======
 	struct net *net = sock_net((struct sock *)pfk);
 
@@ -2910,6 +3083,7 @@ static int pfkey_spdflush(struct sock *sk, struct sk_buff *skb, const struct sad
 	struct net *net = sock_net(sk);
 	struct km_event c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfrm_audit audit_info;
 	int err, err2;
 
@@ -2917,6 +3091,11 @@ static int pfkey_spdflush(struct sock *sk, struct sk_buff *skb, const struct sad
 	audit_info.sessionid = audit_get_sessionid(current);
 	audit_info.secid = 0;
 	err = xfrm_policy_flush(net, XFRM_POLICY_TYPE_MAIN, &audit_info);
+=======
+	int err, err2;
+
+	err = xfrm_policy_flush(net, XFRM_POLICY_TYPE_MAIN, true);
+>>>>>>> v3.18
 =======
 	int err, err2;
 
@@ -2942,7 +3121,11 @@ static int pfkey_spdflush(struct sock *sk, struct sk_buff *skb, const struct sad
 typedef int (*pfkey_handler)(struct sock *sk, struct sk_buff *skb,
 			     const struct sadb_msg *hdr, void * const *ext_hdrs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pfkey_handler pfkey_funcs[SADB_MAX + 1] = {
+=======
+static const pfkey_handler pfkey_funcs[SADB_MAX + 1] = {
+>>>>>>> v3.18
 =======
 static const pfkey_handler pfkey_funcs[SADB_MAX + 1] = {
 >>>>>>> v3.18
@@ -3265,7 +3448,10 @@ static u32 get_acqseq(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool pfkey_is_alive(const struct km_event *c)
 {
 	struct netns_pfkey *net_pfkey = net_generic(c->net, pfkey_net_id);
@@ -3284,6 +3470,9 @@ static bool pfkey_is_alive(const struct km_event *c)
 	return is_alive;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pfkey_send_acquire(struct xfrm_state *x, struct xfrm_tmpl *t, struct xfrm_policy *xp)
 {
@@ -3466,8 +3655,13 @@ static struct xfrm_policy *pfkey_compile_policy(struct sock *sk, int opt,
 		if ((*dir = verify_sec_ctx_len(p)))
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx);
 		*dir = security_xfrm_policy_alloc(&xp->security, uctx);
+=======
+		uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_ATOMIC);
+		*dir = security_xfrm_policy_alloc(&xp->security, uctx, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		uctx = pfkey_sadb2xfrm_user_sec_ctx(sec_ctx, GFP_ATOMIC);
 		*dir = security_xfrm_policy_alloc(&xp->security, uctx, GFP_ATOMIC);
@@ -3811,6 +4005,10 @@ static int pfkey_sendmsg(struct kiocb *kiocb,
 	struct sadb_msg *hdr = NULL;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net = sock_net(sk);
+>>>>>>> v3.18
 =======
 	struct net *net = sock_net(sk);
 >>>>>>> v3.18
@@ -3837,9 +4035,15 @@ static int pfkey_sendmsg(struct kiocb *kiocb,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&xfrm_cfg_mutex);
 	err = pfkey_process(sk, skb, hdr);
 	mutex_unlock(&xfrm_cfg_mutex);
+=======
+	mutex_lock(&net->xfrm.xfrm_cfg_mutex);
+	err = pfkey_process(sk, skb, hdr);
+	mutex_unlock(&net->xfrm.xfrm_cfg_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&net->xfrm.xfrm_cfg_mutex);
 	err = pfkey_process(sk, skb, hdr);
@@ -4025,6 +4229,10 @@ static struct xfrm_mgr pfkeyv2_mgr =
 	.notify_policy	= pfkey_send_policy_notify,
 	.migrate	= pfkey_send_migrate,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.is_alive	= pfkey_is_alive,
+>>>>>>> v3.18
 =======
 	.is_alive	= pfkey_is_alive,
 >>>>>>> v3.18

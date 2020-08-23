@@ -45,23 +45,32 @@
 static int ecryptfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *lower_dentry;
 	int rc = 1;
 =======
+=======
+>>>>>>> v3.18
 	struct dentry *lower_dentry = ecryptfs_dentry_to_lower(dentry);
 	int rc;
 
 	if (!(lower_dentry->d_flags & DCACHE_OP_REVALIDATE))
 		return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (flags & LOOKUP_RCU)
 		return -ECHILD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lower_dentry = ecryptfs_dentry_to_lower(dentry);
 	if (!lower_dentry->d_op || !lower_dentry->d_op->d_revalidate)
 		goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = lower_dentry->d_op->d_revalidate(lower_dentry, flags);
@@ -72,7 +81,10 @@ static int ecryptfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 		fsstack_copy_attr_all(dentry->d_inode, lower_inode);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return rc;
@@ -81,13 +93,19 @@ out:
 struct kmem_cache *ecryptfs_dentry_info_cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ecryptfs_dentry_free_rcu(struct rcu_head *head)
 {
 	kmem_cache_free(ecryptfs_dentry_info_cache,
 		container_of(head, struct ecryptfs_dentry_info, rcu));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ecryptfs_d_release
@@ -97,6 +115,7 @@ static void ecryptfs_dentry_free_rcu(struct rcu_head *head)
  */
 static void ecryptfs_d_release(struct dentry *dentry)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ecryptfs_dentry_to_private(dentry)) {
 		if (ecryptfs_dentry_to_lower(dentry)) {
@@ -108,11 +127,16 @@ static void ecryptfs_d_release(struct dentry *dentry)
 	}
 	return;
 =======
+=======
+>>>>>>> v3.18
 	struct ecryptfs_dentry_info *p = dentry->d_fsdata;
 	if (p) {
 		path_put(&p->lower_path);
 		call_rcu(&p->rcu, ecryptfs_dentry_free_rcu);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

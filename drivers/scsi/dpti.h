@@ -185,7 +185,11 @@ struct adpt_device {
 	u8	scsi_channel;
 	u8	scsi_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 	scsi_lun;
+=======
+	u64	scsi_lun;
+>>>>>>> v3.18
 =======
 	u64	scsi_lun;
 >>>>>>> v3.18
@@ -207,7 +211,10 @@ struct adpt_channel {
 // HBA state flags
 #define DPTI_STATE_RESET	(0x01)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DPTI_STATE_IOCTL	(0x02)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -240,7 +247,11 @@ typedef struct _adpt_hba {
 	u8  top_scsi_channel;
 	u8  top_scsi_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  top_scsi_lun;
+=======
+	u64  top_scsi_lun;
+>>>>>>> v3.18
 =======
 	u64  top_scsi_lun;
 >>>>>>> v3.18
@@ -313,7 +324,11 @@ static void adpt_i2o_delete_hba(adpt_hba* pHba);
 static void adpt_inquiry(adpt_hba* pHba);
 static void adpt_fail_posted_scbs(adpt_hba* pHba);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct adpt_device* adpt_find_device(adpt_hba* pHba, u32 chan, u32 id, u32 lun);
+=======
+static struct adpt_device* adpt_find_device(adpt_hba* pHba, u32 chan, u32 id, u64 lun);
+>>>>>>> v3.18
 =======
 static struct adpt_device* adpt_find_device(adpt_hba* pHba, u32 chan, u32 id, u64 lun);
 >>>>>>> v3.18

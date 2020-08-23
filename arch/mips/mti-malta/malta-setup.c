@@ -27,6 +27,10 @@
 
 #include <asm/fw/fw.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mips-cm.h>
+>>>>>>> v3.18
 =======
 #include <asm/mips-cm.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #include <asm/dma.h>
 #include <asm/traps.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/gcmpregs.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VT
@@ -44,9 +51,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ROCIT_CONFIG_GEN0		0x1f403000
 #define  ROCIT_CONFIG_GEN0_PCI_IOCU	BIT(7)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void malta_be_init(void);
@@ -91,11 +101,15 @@ const char *get_system_type(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MIPS_MT_SMTC)
 const char display_string[] = "	      SMTC LINUX ON MALTA	";
 #else
 const char display_string[] = "	       LINUX ON MALTA	    ";
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+const char display_string[] = "	       LINUX ON MALTA	    ";
+>>>>>>> v3.18
 =======
 const char display_string[] = "	       LINUX ON MALTA	    ";
 >>>>>>> v3.18
@@ -126,8 +140,11 @@ static int __init plat_enable_iocoherency(void)
 {
 	int supported = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 cfg;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mips_revision_sconid == MIPS_REVISION_SCON_BONITO) {
@@ -150,16 +167,22 @@ static int __init plat_enable_iocoherency(void)
 			pr_info("Enabled Bonito IOBC coherency\n");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (gcmp_niocu() != 0) {
 		/* Nothing special needs to be done to enable coherency */
 		pr_info("CMP IOCU detected\n");
 		cfg = __raw_readl((u32 *)CKSEG1ADDR(ROCIT_CONFIG_GEN0));
 		if (!(cfg & ROCIT_CONFIG_GEN0_PCI_IOCU)) {
 =======
+=======
+>>>>>>> v3.18
 	} else if (mips_cm_numiocu() != 0) {
 		/* Nothing special needs to be done to enable coherency */
 		pr_info("CMP IOCU detected\n");
 		if ((*(unsigned int *)0xbf403000 & 0x81) != 0x81) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pr_crit("IOCU OPERATION DISABLED BY SWITCH - DEFAULTING TO SW IO COHERENCY\n");
 			return 0;
@@ -196,7 +219,10 @@ static void __init plat_setup_iocoherency(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLK_DEV_IDE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __init pci_clock_check(void)
@@ -208,6 +234,7 @@ static void __init pci_clock_check(void)
 		33, 20, 25, 30, 12, 16, 37, 10
 	};
 	int pciclock = pciclocks[jmpr];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char *argptr = fw_getcmdline();
 
@@ -222,6 +249,8 @@ static void __init pci_clock_check(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	char *optptr, *argptr = fw_getcmdline();
 
 	/*
@@ -241,6 +270,9 @@ static void __init pci_clock_check(void)
 			        "incorrect\n");
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_VT) && defined(CONFIG_VGA_CONSOLE)
@@ -303,11 +335,17 @@ void __init plat_mem_setup(void)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (config_enabled(CONFIG_EVA))
 		/* EVA has already been configured in mach-malta/kernel-init.h */
 		pr_info("Enhanced Virtual Addressing (EVA) activated\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mips_pcibios_init();
 
@@ -331,9 +369,13 @@ void __init plat_mem_setup(void)
 	plat_setup_iocoherency();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLK_DEV_IDE
 	pci_clock_check();
 #endif
+=======
+	pci_clock_check();
+>>>>>>> v3.18
 =======
 	pci_clock_check();
 >>>>>>> v3.18

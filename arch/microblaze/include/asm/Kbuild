@@ -1,9 +1,12 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += clkdev.h
 generic-y += exec.h
 generic-y += mcs_spinlock.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += barrier.h
 generic-y += clkdev.h
 generic-y += cputime.h
@@ -14,6 +17,9 @@ generic-y += irq_work.h
 generic-y += mcs_spinlock.h
 generic-y += preempt.h
 generic-y += scatterlist.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 generic-y += syscalls.h
 generic-y += trace_clock.h

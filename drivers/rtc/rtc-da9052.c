@@ -16,6 +16,10 @@
 #include <linux/platform_device.h>
 #include <linux/rtc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -24,8 +28,13 @@
 #include <linux/mfd/da9052/reg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define rtc_err(da9052, fmt, ...) \
 		dev_err(da9052->dev, "%s: " fmt, __func__, ##__VA_ARGS__)
+=======
+#define rtc_err(rtc, fmt, ...) \
+		dev_err(rtc->da9052->dev, "%s: " fmt, __func__, ##__VA_ARGS__)
+>>>>>>> v3.18
 =======
 #define rtc_err(rtc, fmt, ...) \
 		dev_err(rtc->da9052->dev, "%s: " fmt, __func__, ##__VA_ARGS__)
@@ -34,6 +43,7 @@
 struct da9052_rtc {
 	struct rtc_device *rtc;
 	struct da9052 *da9052;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int irq;
 };
@@ -53,6 +63,8 @@ static int da9052_rtc_enable_alarm(struct da9052 *da9052, bool enable)
 		if (ret != 0)
 			rtc_err(da9052, "Write error: %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 };
 
 static int da9052_rtc_enable_alarm(struct da9052_rtc *rtc, bool enable)
@@ -69,6 +81,9 @@ static int da9052_rtc_enable_alarm(struct da9052_rtc *rtc, bool enable)
 			DA9052_ALARM_Y_ALARM_ON|DA9052_ALARM_Y_TICK_ON, 0);
 		if (ret != 0)
 			rtc_err(rtc, "Write error: %d\n", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return ret;
@@ -77,6 +92,7 @@ static int da9052_rtc_enable_alarm(struct da9052_rtc *rtc, bool enable)
 static irqreturn_t da9052_rtc_irq(int irq, void *data)
 {
 	struct da9052_rtc *rtc = data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -95,12 +111,20 @@ static irqreturn_t da9052_rtc_irq(int irq, void *data)
 
 	rtc_update_irq(rtc->rtc, 1, RTC_IRQF | RTC_AF);
 >>>>>>> v3.18
+=======
+
+	rtc_update_irq(rtc->rtc, 1, RTC_IRQF | RTC_AF);
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int da9052_read_alarm(struct da9052 *da9052, struct rtc_time *rtc_tm)
+=======
+static int da9052_read_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
+>>>>>>> v3.18
 =======
 static int da9052_read_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 >>>>>>> v3.18
@@ -109,9 +133,15 @@ static int da9052_read_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 	uint8_t v[5];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = da9052_group_read(da9052, DA9052_ALARM_MI_REG, 5, v);
 	if (ret != 0) {
 		rtc_err(da9052, "Failed to group read ALM: %d\n", ret);
+=======
+	ret = da9052_group_read(rtc->da9052, DA9052_ALARM_MI_REG, 5, v);
+	if (ret != 0) {
+		rtc_err(rtc, "Failed to group read ALM: %d\n", ret);
+>>>>>>> v3.18
 =======
 	ret = da9052_group_read(rtc->da9052, DA9052_ALARM_MI_REG, 5, v);
 	if (ret != 0) {
@@ -128,6 +158,7 @@ static int da9052_read_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 
 	ret = rtc_valid_tm(rtc_tm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != 0)
 		return ret;
 	return ret;
@@ -139,6 +170,8 @@ static int da9052_set_alarm(struct da9052 *da9052, struct rtc_time *rtc_tm)
 	uint8_t v[3];
 
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -159,6 +192,9 @@ static int da9052_set_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 	}
 	BUG_ON(rtc_tm->tm_sec); /* it will cause repeated irqs if not zero */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtc_tm->tm_year -= 100;
 	rtc_tm->tm_mon += 1;
@@ -167,7 +203,11 @@ static int da9052_set_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 				DA9052_RTC_MIN, rtc_tm->tm_min);
 	if (ret != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtc_err(da9052, "Failed to write ALRM MIN: %d\n", ret);
+=======
+		rtc_err(rtc, "Failed to write ALRM MIN: %d\n", ret);
+>>>>>>> v3.18
 =======
 		rtc_err(rtc, "Failed to write ALRM MIN: %d\n", ret);
 >>>>>>> v3.18
@@ -186,7 +226,11 @@ static int da9052_set_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 				DA9052_RTC_YEAR, rtc_tm->tm_year);
 	if (ret != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtc_err(da9052, "Failed to write ALRM YEAR: %d\n", ret);
+=======
+		rtc_err(rtc, "Failed to write ALRM YEAR: %d\n", ret);
+>>>>>>> v3.18
 =======
 		rtc_err(rtc, "Failed to write ALRM YEAR: %d\n", ret);
 >>>>>>> v3.18
@@ -194,6 +238,7 @@ static int da9052_set_alarm(struct da9052_rtc *rtc, struct rtc_time *rtc_tm)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int da9052_rtc_get_alarm_status(struct da9052 *da9052)
 {
@@ -207,6 +252,8 @@ static int da9052_rtc_get_alarm_status(struct da9052 *da9052)
 	ret &= DA9052_ALARM_Y_ALARM_ON;
 	return (ret > 0) ? 1 : 0;
 =======
+=======
+>>>>>>> v3.18
 static int da9052_rtc_get_alarm_status(struct da9052_rtc *rtc)
 {
 	int ret;
@@ -218,6 +265,9 @@ static int da9052_rtc_get_alarm_status(struct da9052_rtc *rtc)
 	}
 
 	return !!(ret&DA9052_ALARM_Y_ALARM_ON);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -230,7 +280,11 @@ static int da9052_rtc_read_time(struct device *dev, struct rtc_time *rtc_tm)
 	ret = da9052_group_read(rtc->da9052, DA9052_COUNT_S_REG, 6, v);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtc_err(rtc->da9052, "Failed to read RTC time : %d\n", ret);
+=======
+		rtc_err(rtc, "Failed to read RTC time : %d\n", ret);
+>>>>>>> v3.18
 =======
 		rtc_err(rtc, "Failed to read RTC time : %d\n", ret);
 >>>>>>> v3.18
@@ -246,12 +300,16 @@ static int da9052_rtc_read_time(struct device *dev, struct rtc_time *rtc_tm)
 
 	ret = rtc_valid_tm(rtc_tm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != 0) {
 		rtc_err(rtc->da9052, "rtc_valid_tm failed: %d\n", ret);
 		return ret;
 	}
 
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18
@@ -262,6 +320,10 @@ static int da9052_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	struct da9052_rtc *rtc;
 	uint8_t v[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -276,12 +338,18 @@ static int da9052_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	v[5] = tm->tm_year - 100;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return da9052_group_write(rtc->da9052, DA9052_COUNT_S_REG, 6, v);
 =======
+=======
+>>>>>>> v3.18
 	ret = da9052_group_write(rtc->da9052, DA9052_COUNT_S_REG, 6, v);
 	if (ret < 0)
 		rtc_err(rtc, "failed to set RTC time: %d\n", ret);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -292,6 +360,7 @@ static int da9052_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 	struct da9052_rtc *rtc = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = da9052_read_alarm(rtc->da9052, tm);
 
 	if (ret)
@@ -300,6 +369,8 @@ static int da9052_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 	alrm->enabled = da9052_rtc_get_alarm_status(rtc->da9052);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = da9052_read_alarm(rtc, tm);
 	if (ret < 0) {
 		rtc_err(rtc, "failed to read RTC alarm: %d\n", ret);
@@ -307,6 +378,9 @@ static int da9052_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 	}
 
 	alrm->enabled = da9052_rtc_get_alarm_status(rtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -317,6 +391,7 @@ static int da9052_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 	struct rtc_time *tm = &alrm->time;
 	struct da9052_rtc *rtc = dev_get_drvdata(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = da9052_rtc_enable_alarm(rtc->da9052, 0);
 	if (ret < 0)
@@ -329,6 +404,8 @@ static int da9052_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 	ret = da9052_rtc_enable_alarm(rtc->da9052, 1);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = da9052_rtc_enable_alarm(rtc, 0);
 	if (ret < 0)
 		return ret;
@@ -338,6 +415,9 @@ static int da9052_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 		return ret;
 
 	ret = da9052_rtc_enable_alarm(rtc, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -347,7 +427,11 @@ static int da9052_rtc_alarm_irq_enable(struct device *dev, unsigned int enabled)
 	struct da9052_rtc *rtc = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return da9052_rtc_enable_alarm(rtc->da9052, enabled);
+=======
+	return da9052_rtc_enable_alarm(rtc, enabled);
+>>>>>>> v3.18
 =======
 	return da9052_rtc_enable_alarm(rtc, enabled);
 >>>>>>> v3.18
@@ -373,12 +457,15 @@ static int da9052_rtc_probe(struct platform_device *pdev)
 	rtc->da9052 = dev_get_drvdata(pdev->dev.parent);
 	platform_set_drvdata(pdev, rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc->irq =  DA9052_IRQ_ALARM;
 	ret = da9052_request_irq(rtc->da9052, rtc->irq, "ALM",
 				da9052_rtc_irq, rtc);
 	if (ret != 0) {
 		rtc_err(rtc->da9052, "irq registration failed: %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 
 	ret = da9052_reg_write(rtc->da9052, DA9052_BBAT_CONT_REG, 0xFE);
 	if (ret < 0) {
@@ -396,12 +483,16 @@ static int da9052_rtc_probe(struct platform_device *pdev)
 				da9052_rtc_irq, rtc);
 	if (ret != 0) {
 		rtc_err(rtc, "irq registration failed: %d\n", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
 
 	rtc->rtc = devm_rtc_device_register(&pdev->dev, pdev->name,
 				       &da9052_rtc_ops, THIS_MODULE);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (IS_ERR(rtc->rtc))
 		return PTR_ERR(rtc->rtc);
@@ -417,12 +508,18 @@ static int da9052_rtc_remove(struct platform_device *pdev)
 =======
 	return PTR_ERR_OR_ZERO(rtc->rtc);
 >>>>>>> v3.18
+=======
+	return PTR_ERR_OR_ZERO(rtc->rtc);
+>>>>>>> v3.18
 }
 
 static struct platform_driver da9052_rtc_driver = {
 	.probe	= da9052_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= da9052_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {
@@ -434,7 +531,11 @@ static struct platform_driver da9052_rtc_driver = {
 module_platform_driver(da9052_rtc_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("David Dajun Chen <dchen@diasemi.com>");
+=======
+MODULE_AUTHOR("Anthony Olech <Anthony.Olech@diasemi.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Anthony Olech <Anthony.Olech@diasemi.com>");
 >>>>>>> v3.18

@@ -11,6 +11,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -38,8 +42,11 @@ static int __init omap_iommu_dev_init(struct omap_hwmod *oh, void *unused)
 	pdata->name = oh->name;
 	pdata->nr_tlb_entries = a->nr_tlb_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata->da_start = a->da_start;
 	pdata->da_end = a->da_end;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -66,11 +73,17 @@ static int __init omap_iommu_dev_init(struct omap_hwmod *oh, void *unused)
 static int __init omap_iommu_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* If dtb is there, the devices will be created dynamically */
 	if (of_have_populated_dt())
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return omap_hwmod_for_each_by_class("mmu", omap_iommu_dev_init, NULL);
 }

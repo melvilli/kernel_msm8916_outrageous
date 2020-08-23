@@ -53,6 +53,10 @@ static void modtec_eeprom(struct bttv *btv);
 static void init_PXC200(struct bttv *btv);
 static void init_RTV24(struct bttv *btv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void init_PCI8604PW(struct bttv *btv);
+>>>>>>> v3.18
 =======
 static void init_PCI8604PW(struct bttv *btv);
 >>>>>>> v3.18
@@ -136,7 +140,11 @@ MODULE_PARM_DESC(vsfx,"set VSFX pci config bit "
 MODULE_PARM_DESC(latency,"pci latency timer");
 MODULE_PARM_DESC(card,"specify TV/grabber card model, see CARDLIST file for a list");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(pll,"specify installed crystal (0=none, 28=28 MHz, 35=35 MHz)");
+=======
+MODULE_PARM_DESC(pll, "specify installed crystal (0=none, 28=28 MHz, 35=35 MHz, 14=14 MHz)");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(pll, "specify installed crystal (0=none, 28=28 MHz, 35=35 MHz, 14=14 MHz)");
 >>>>>>> v3.18
@@ -2435,7 +2443,11 @@ struct tvcard bttv_tvcards[] = {
 		/* ---- card 0x87---------------------------------- */
 	[BTTV_BOARD_DVICO_FUSIONHDTV_5_LITE] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Michael Krufky <mkrufky@m1k.net> */
+=======
+		/* Michael Krufky <mkrufky@linuxtv.org> */
+>>>>>>> v3.18
 =======
 		/* Michael Krufky <mkrufky@linuxtv.org> */
 >>>>>>> v3.18
@@ -2718,7 +2730,11 @@ struct tvcard bttv_tvcards[] = {
 		.has_remote     = 1,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[BTTV_BOARD_VD012] = {
+=======
+	[BTTV_BOARD_VD012] = {
+>>>>>>> v3.18
 =======
 	[BTTV_BOARD_VD012] = {
 >>>>>>> v3.18
@@ -2735,7 +2751,11 @@ struct tvcard bttv_tvcards[] = {
 		.tuner_addr	= ADDR_UNSET,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[BTTV_BOARD_VD012_X1] = {
+=======
+	[BTTV_BOARD_VD012_X1] = {
+>>>>>>> v3.18
 =======
 	[BTTV_BOARD_VD012_X1] = {
 >>>>>>> v3.18
@@ -2752,7 +2772,11 @@ struct tvcard bttv_tvcards[] = {
 		.tuner_addr	= ADDR_UNSET,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[BTTV_BOARD_VD012_X2] = {
+=======
+	[BTTV_BOARD_VD012_X2] = {
+>>>>>>> v3.18
 =======
 	[BTTV_BOARD_VD012_X2] = {
 >>>>>>> v3.18
@@ -2769,7 +2793,11 @@ struct tvcard bttv_tvcards[] = {
 		.tuner_addr	= ADDR_UNSET,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[BTTV_BOARD_GEOVISION_GV800S] = {
+=======
+	[BTTV_BOARD_GEOVISION_GV800S] = {
+>>>>>>> v3.18
 =======
 	[BTTV_BOARD_GEOVISION_GV800S] = {
 >>>>>>> v3.18
@@ -2800,7 +2828,11 @@ struct tvcard bttv_tvcards[] = {
 		.muxsel_hook    = gv800s_muxsel,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[BTTV_BOARD_GEOVISION_GV800S_SL] = {
+=======
+	[BTTV_BOARD_GEOVISION_GV800S_SL] = {
+>>>>>>> v3.18
 =======
 	[BTTV_BOARD_GEOVISION_GV800S_SL] = {
 >>>>>>> v3.18
@@ -2841,6 +2873,10 @@ struct tvcard bttv_tvcards[] = {
 		.tuner_addr	= ADDR_UNSET,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* ---- card 0xa0---------------------------------- */
+>>>>>>> v3.18
 =======
 	/* ---- card 0xa0---------------------------------- */
 >>>>>>> v3.18
@@ -2862,8 +2898,11 @@ struct tvcard bttv_tvcards[] = {
 		.tuner_type     = TUNER_ABSENT,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	[BTTV_BOARD_ADLINK_MPG24] = {
 		/* Adlink MPG24 */
 		.name           = "Adlink MPG24",
@@ -2925,6 +2964,9 @@ struct tvcard bttv_tvcards[] = {
 		.no_tda7432	= 1,
 		.pll            = PLL_35,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3361,6 +3403,12 @@ void bttv_init_card1(struct bttv *btv)
 		init_RTV24( btv );
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BTTV_BOARD_PCI_8604PW:
+		init_PCI8604PW(btv);
+		break;
+>>>>>>> v3.18
 =======
 	case BTTV_BOARD_PCI_8604PW:
 		init_PCI8604PW(btv);
@@ -3497,11 +3545,17 @@ void bttv_init_card2(struct bttv *btv)
 			btv->pll.pll_crystal=BT848_IFORM_XT1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (PLL_14 == bttv_tvcards[btv->c.type].pll) {
 			btv->pll.pll_ifreq = 14318181;
 			btv->pll.pll_crystal = BT848_IFORM_XT0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* insmod options can override */
 		switch (pll[btv->c.nr]) {
@@ -3523,13 +3577,19 @@ void bttv_init_card2(struct bttv *btv)
 			btv->pll.pll_crystal = BT848_IFORM_XT1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 3: /* 14 MHz */
 		case 14:
 			btv->pll.pll_ifreq   = 14318181;
 			btv->pll.pll_ofreq   = 0;
 			btv->pll.pll_crystal = BT848_IFORM_XT0;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -4253,7 +4313,10 @@ init_RTV24 (struct bttv *btv)
 
 /* ----------------------------------------------------------------------- */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  *  The PCI-8604PW contains a CPLD, probably an ispMACH 4A, that filters
  *  the PCI REQ signals comming from the four BT878 chips. After power
@@ -4344,6 +4407,9 @@ init_PCI8604PW(struct bttv *btv)
 
 
 /* ----------------------------------------------------------------------- */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Miro Pro radio stuff -- the tea5757 is connected to some GPIO ports     */
 /*
@@ -4617,9 +4683,13 @@ static void tibetCS16_init(struct bttv *btv)
  * unit 3, the second (which is the master) is logical unit 0, etc.
  * We need to maintain the status of the analog switch (which of the 16
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cameras is connected to which of the 4 controllers).  Rather than
  * add to the bttv structure for this, we use the data reserved for
  * the mbox (unused for this card type).
+=======
+ * cameras is connected to which of the 4 controllers) in sw_status array.
+>>>>>>> v3.18
 =======
  * cameras is connected to which of the 4 controllers) in sw_status array.
 >>>>>>> v3.18
@@ -4658,7 +4728,10 @@ static void kodicom4400r_write(struct bttv *btv,
 static void kodicom4400r_muxsel(struct bttv *btv, unsigned int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *sw_status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int xaddr, yaddr;
@@ -4672,6 +4745,7 @@ static void kodicom4400r_muxsel(struct bttv *btv, unsigned int input)
 	yaddr = (btv->c.nr - mctlr->c.nr + 1) & 3; /* the '&' is for safety */
 	yaddr = map[yaddr];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sw_status = (char *)(&mctlr->mbox_we);
 	xaddr = input & 0xf;
 	/* Check if the controller/camera pair has changed, else ignore */
@@ -4681,6 +4755,8 @@ static void kodicom4400r_muxsel(struct bttv *btv, unsigned int input)
 		kodicom4400r_write(mctlr, sw_status[yaddr], yaddr, 0);
 		sw_status[yaddr] = xaddr;
 =======
+=======
+>>>>>>> v3.18
 	xaddr = input & 0xf;
 	/* Check if the controller/camera pair has changed, else ignore */
 	if (mctlr->sw_status[yaddr] != xaddr)
@@ -4688,6 +4764,9 @@ static void kodicom4400r_muxsel(struct bttv *btv, unsigned int input)
 		/* "open" the old switch, "close" the new one, save the new */
 		kodicom4400r_write(mctlr, mctlr->sw_status[yaddr], yaddr, 0);
 		mctlr->sw_status[yaddr] = xaddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kodicom4400r_write(mctlr, xaddr, yaddr, 1);
 	}
@@ -4702,7 +4781,10 @@ static void kodicom4400r_muxsel(struct bttv *btv, unsigned int input)
 static void kodicom4400r_init(struct bttv *btv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *sw_status = (char *)(&btv->mbox_we);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ix;
@@ -4713,7 +4795,11 @@ static void kodicom4400r_init(struct bttv *btv)
 	/* Preset camera 0 to the 4 controllers */
 	for (ix = 0; ix < 4; ix++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw_status[ix] = ix;
+=======
+		btv->sw_status[ix] = ix;
+>>>>>>> v3.18
 =======
 		btv->sw_status[ix] = ix;
 >>>>>>> v3.18
@@ -4994,7 +5080,10 @@ static void gv800s_muxsel(struct bttv *btv, unsigned int input)
 {
 	struct bttv *mctlr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *sw_status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int xaddr, yaddr;
@@ -5010,6 +5099,7 @@ static void gv800s_muxsel(struct bttv *btv, unsigned int input)
 	}
 	yaddr = (btv->c.nr - mctlr->c.nr) & 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sw_status = (char *)(&mctlr->mbox_we);
 	xaddr = map[yaddr][input] & 0xf;
 
@@ -5019,6 +5109,8 @@ static void gv800s_muxsel(struct bttv *btv, unsigned int input)
 		gv800s_write(mctlr, sw_status[yaddr], yaddr, 0);
 		sw_status[yaddr] = xaddr;
 =======
+=======
+>>>>>>> v3.18
 	xaddr = map[yaddr][input] & 0xf;
 
 	/* Check if the controller/camera pair has changed, ignore otherwise */
@@ -5026,6 +5118,9 @@ static void gv800s_muxsel(struct bttv *btv, unsigned int input)
 		/* disable the old switch, enable the new one and save status */
 		gv800s_write(mctlr, mctlr->sw_status[yaddr], yaddr, 0);
 		mctlr->sw_status[yaddr] = xaddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gv800s_write(mctlr, xaddr, yaddr, 1);
 	}
@@ -5035,7 +5130,10 @@ static void gv800s_muxsel(struct bttv *btv, unsigned int input)
 static void gv800s_init(struct bttv *btv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *sw_status = (char *)(&btv->mbox_we);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ix;
@@ -5047,7 +5145,11 @@ static void gv800s_init(struct bttv *btv)
 	/* Preset camera 0 to the 4 controllers */
 	for (ix = 0; ix < 4; ix++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw_status[ix] = ix;
+=======
+		btv->sw_status[ix] = ix;
+>>>>>>> v3.18
 =======
 		btv->sw_status[ix] = ix;
 >>>>>>> v3.18

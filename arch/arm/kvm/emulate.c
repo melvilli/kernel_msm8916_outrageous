@@ -355,7 +355,11 @@ static void inject_abt(struct kvm_vcpu *vcpu, bool is_pabt, unsigned long addr)
 
 	if (is_pabt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Set DFAR and DFSR */
+=======
+		/* Set IFAR and IFSR */
+>>>>>>> v3.18
 =======
 		/* Set IFAR and IFSR */
 >>>>>>> v3.18

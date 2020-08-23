@@ -700,7 +700,10 @@ static void fealnx_remove_one(struct pci_dev *pdev)
 		free_netdev(dev);
 		pci_release_regions(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else
@@ -1941,7 +1944,11 @@ static int netdev_close(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(fealnx_pci_tbl) = {
+=======
+static const struct pci_device_id fealnx_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id fealnx_pci_tbl[] = {
 >>>>>>> v3.18

@@ -360,7 +360,11 @@ static int tda7432_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = kzalloc(sizeof(*t), GFP_KERNEL);
+=======
+	t = devm_kzalloc(&client->dev, sizeof(*t), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	t = devm_kzalloc(&client->dev, sizeof(*t), GFP_KERNEL);
 >>>>>>> v3.18
@@ -385,7 +389,10 @@ static int tda7432_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&t->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(t);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -414,7 +421,10 @@ static int tda7432_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&t->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(t);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -59,7 +59,11 @@ ENTRY(HYPERVISOR_##hypercall)			\
 	mov r12, #__HYPERVISOR_##hypercall;	\
 	__HVC(XEN_IMM);						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov pc, lr;							\
+=======
+	ret lr;					\
+>>>>>>> v3.18
 =======
 	ret lr;					\
 >>>>>>> v3.18
@@ -79,7 +83,11 @@ ENTRY(HYPERVISOR_##hypercall)			\
 	__HVC(XEN_IMM);						\
 	ldm sp!, {r4}						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov pc, lr							\
+=======
+	ret lr					\
+>>>>>>> v3.18
 =======
 	ret lr					\
 >>>>>>> v3.18
@@ -110,7 +118,11 @@ ENTRY(privcmd_call)
 	__HVC(XEN_IMM)
 	ldm sp!, {r4}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov pc, lr
+=======
+	ret lr
+>>>>>>> v3.18
 =======
 	ret lr
 >>>>>>> v3.18

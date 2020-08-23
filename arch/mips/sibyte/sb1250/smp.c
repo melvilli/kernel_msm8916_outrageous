@@ -49,7 +49,11 @@ static void *mailbox_regs[] = {
  * SMP init and finish on secondary CPUs
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit sb1250_smp_init(void)
+=======
+void sb1250_smp_init(void)
+>>>>>>> v3.18
 =======
 void sb1250_smp_init(void)
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ static inline void sb1250_send_ipi_mask(const struct cpumask *mask,
  * Code to run on secondary just after probing the CPU
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit sb1250_init_secondary(void)
+=======
+static void sb1250_init_secondary(void)
+>>>>>>> v3.18
 =======
 static void sb1250_init_secondary(void)
 >>>>>>> v3.18
@@ -103,7 +111,11 @@ static void sb1250_init_secondary(void)
  * loop
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit sb1250_smp_finish(void)
+=======
+static void sb1250_smp_finish(void)
+>>>>>>> v3.18
 =======
 static void sb1250_smp_finish(void)
 >>>>>>> v3.18
@@ -115,6 +127,7 @@ static void sb1250_smp_finish(void)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Final cleanup after all secondaries booted
  */
@@ -128,10 +141,15 @@ static void sb1250_cpus_done(void)
  */
 static void __cpuinit sb1250_boot_secondary(int cpu, struct task_struct *idle)
 =======
+=======
+>>>>>>> v3.18
  * Setup the PC, SP, and GP of a secondary processor and start it
  * running!
  */
 static void sb1250_boot_secondary(int cpu, struct task_struct *idle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int retval;
@@ -178,7 +196,10 @@ struct plat_smp_ops sb_smp_ops = {
 	.init_secondary		= sb1250_init_secondary,
 	.smp_finish		= sb1250_smp_finish,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpus_done		= sb1250_cpus_done,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.boot_secondary		= sb1250_boot_secondary,
@@ -193,7 +214,11 @@ void sb1250_mailbox_interrupt(void)
 	unsigned int action;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kstat_incr_irqs_this_cpu(irq, irq_to_desc(irq));
+=======
+	kstat_incr_irq_this_cpu(irq);
+>>>>>>> v3.18
 =======
 	kstat_incr_irq_this_cpu(irq);
 >>>>>>> v3.18

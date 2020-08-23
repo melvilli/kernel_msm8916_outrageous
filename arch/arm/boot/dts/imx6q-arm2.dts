@@ -24,16 +24,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_3p3v: 3p3v {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_3p3v: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "3P3V";
 			regulator-min-microvolt = <3300000>;
@@ -41,7 +47,10 @@
 			regulator-always-on;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		reg_usb_otg_vbus: regulator@1 {
 			compatible = "regulator-fixed";
@@ -52,6 +61,9 @@
 			gpio = <&gpio3 22 0>;
 			enable-active-high;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -69,7 +81,11 @@
 &gpmi {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_gpmi_nand_1>;
+=======
+	pinctrl-0 = <&pinctrl_gpmi_nand>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_gpmi_nand>;
 >>>>>>> v3.18
@@ -80,6 +96,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hog {
 		pinctrl_hog: hoggrp {
@@ -95,6 +112,8 @@
 				MX6Q_PAD_NANDF_CS0__GPIO6_IO11 0x80000000
 				MX6Q_PAD_NANDF_CS1__GPIO6_IO14 0x80000000
 =======
+=======
+>>>>>>> v3.18
 	imx6q-arm2 {
 		pinctrl_hog: hoggrp {
 			fsl,pins = <
@@ -201,6 +220,9 @@
 				MX6QDL_PAD_SD4_DAT5__SD4_DATA5		0x17059
 				MX6QDL_PAD_SD4_DAT6__SD4_DATA6		0x17059
 				MX6QDL_PAD_SD4_DAT7__SD4_DATA7		0x17059
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			>;
 		};
@@ -210,9 +232,12 @@
 &fec {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_enet_2>;
 	phy-mode = "rgmii";
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_enet>;
 	phy-mode = "rgmii";
 	interrupts-extended = <&gpio1 6 IRQ_TYPE_LEVEL_HIGH>,
@@ -225,6 +250,9 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usbotg>;
 	disable-over-current;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -235,8 +263,13 @@
 	vmmc-supply = <&reg_3p3v>;
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_usdhc3_1
 		     &pinctrl_usdhc3_arm2>;
+=======
+	pinctrl-0 = <&pinctrl_usdhc3
+		     &pinctrl_usdhc3_cdwp>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_usdhc3
 		     &pinctrl_usdhc3_cdwp>;
@@ -249,8 +282,11 @@
 	vmmc-supply = <&reg_3p3v>;
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_usdhc4_1>;
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_usdhc4>;
 	status = "okay";
 };
@@ -260,6 +296,9 @@
 	pinctrl-0 = <&pinctrl_uart2>;
 	fsl,dte-mode;
 	fsl,uart-has-rtscts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -267,7 +306,11 @@
 &uart4 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart4_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart4>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart4>;
 >>>>>>> v3.18

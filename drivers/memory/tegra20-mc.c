@@ -194,14 +194,20 @@ static irqreturn_t tegra20_mc_isr(int irq, void *data)
 	if (!mask)
 		return IRQ_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((bit = ffs(mask)) != 0)
 		tegra20_mc_decode(mc, bit - 1);
 =======
+=======
+>>>>>>> v3.18
 	while ((bit = ffs(mask)) != 0) {
 		tegra20_mc_decode(mc, bit - 1);
 		mask &= ~BIT(bit - 1);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mc_writel(mc, stat, MC_INTSTATUS);
 	return IRQ_HANDLED;
@@ -224,8 +230,11 @@ static int tegra20_mc_probe(struct platform_device *pdev)
 
 		res = platform_get_resource(pdev, IORESOURCE_MEM, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!res)
 			return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		mc->regs[i] = devm_ioremap_resource(&pdev->dev, res);

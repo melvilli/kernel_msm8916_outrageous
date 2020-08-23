@@ -151,7 +151,11 @@ MODULE_AUTHOR("Karsten Wiese <annabellesgarden@yahoo.de>");
 MODULE_DESCRIPTION("TASCAM "NAME_ALLCAPS" Version 0.8.7.2");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_SUPPORTED_DEVICE("{{TASCAM(0x1604), "NAME_ALLCAPS"(0x8001)(0x8005)(0x8007) }}");
+=======
+MODULE_SUPPORTED_DEVICE("{{TASCAM(0x1604),"NAME_ALLCAPS"(0x8001)(0x8005)(0x8007)}}");
+>>>>>>> v3.18
 =======
 MODULE_SUPPORTED_DEVICE("{{TASCAM(0x1604),"NAME_ALLCAPS"(0x8001)(0x8005)(0x8007)}}");
 >>>>>>> v3.18
@@ -310,11 +314,17 @@ static void usX2Y_unlinkSeq(struct snd_usX2Y_AsyncSeq *S)
 	int	i;
 	for (i = 0; i < URBS_AsyncSeq; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (S[i].urb) {
 			usb_kill_urb(S->urb[i]);
 			usb_free_urb(S->urb[i]);
 			S->urb[i] = NULL;
 		}
+=======
+		usb_kill_urb(S->urb[i]);
+		usb_free_urb(S->urb[i]);
+		S->urb[i] = NULL;
+>>>>>>> v3.18
 =======
 		usb_kill_urb(S->urb[i]);
 		usb_free_urb(S->urb[i]);
@@ -345,7 +355,13 @@ static struct usb_device_id snd_usX2Y_usb_id_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usX2Y_create_card(struct usb_device *device, struct snd_card **cardp)
+=======
+static int usX2Y_create_card(struct usb_device *device,
+			     struct usb_interface *intf,
+			     struct snd_card **cardp)
+>>>>>>> v3.18
 =======
 static int usX2Y_create_card(struct usb_device *device,
 			     struct usb_interface *intf,
@@ -362,8 +378,13 @@ static int usX2Y_create_card(struct usb_device *device,
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct usX2Ydev), &card);
+=======
+	err = snd_card_new(&intf->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct usX2Ydev), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&intf->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct usX2Ydev), &card);
@@ -375,7 +396,11 @@ static int usX2Y_create_card(struct usb_device *device,
 	usX2Y(card)->dev = device;
 	init_waitqueue_head(&usX2Y(card)->prepare_wait_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&usX2Y(card)->prepare_mutex);
+=======
+	mutex_init(&usX2Y(card)->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_init(&usX2Y(card)->pcm_mutex);
 >>>>>>> v3.18
@@ -410,10 +435,16 @@ static int usX2Y_usb_probe(struct usb_device *device,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = usX2Y_create_card(device, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, &intf->dev);
+=======
+	err = usX2Y_create_card(device, intf, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 =======
 	err = usX2Y_create_card(device, intf, &card);
 	if (err < 0)

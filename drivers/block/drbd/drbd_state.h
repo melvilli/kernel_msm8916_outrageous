@@ -2,8 +2,13 @@
 #define DRBD_STATE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drbd_conf;
 struct drbd_tconn;
+=======
+struct drbd_device;
+struct drbd_connection;
+>>>>>>> v3.18
 =======
 struct drbd_device;
 struct drbd_connection;
@@ -113,6 +118,7 @@ union drbd_dev_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern enum drbd_state_rv drbd_change_state(struct drbd_conf *mdev,
 					    enum chg_state_flags f,
 					    union drbd_state mask,
@@ -144,6 +150,8 @@ extern bool conn_all_vols_unconf(struct drbd_tconn *tconn);
  * drbd_request_state() - Reqest a state change
  * @mdev:	DRBD device.
 =======
+=======
+>>>>>>> v3.18
 extern enum drbd_state_rv drbd_change_state(struct drbd_device *device,
 					    enum chg_state_flags f,
 					    union drbd_state mask,
@@ -174,6 +182,9 @@ extern bool conn_all_vols_unconf(struct drbd_connection *connection);
 /**
  * drbd_request_state() - Reqest a state change
  * @device:	DRBD device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @mask:	mask of state bits to change.
  * @val:	value of new state bits.
@@ -182,6 +193,7 @@ extern bool conn_all_vols_unconf(struct drbd_connection *connection);
  * quite verbose in case the state change is not possible, and all those
  * state changes are globally serialized.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int drbd_request_state(struct drbd_conf *mdev,
 				     union drbd_state mask,
@@ -197,6 +209,8 @@ enum drbd_disk_state conn_lowest_disk(struct drbd_tconn *tconn);
 enum drbd_disk_state conn_highest_pdsk(struct drbd_tconn *tconn);
 enum drbd_conns conn_lowest_conn(struct drbd_tconn *tconn);
 =======
+=======
+>>>>>>> v3.18
 static inline int drbd_request_state(struct drbd_device *device,
 				     union drbd_state mask,
 				     union drbd_state val)
@@ -210,6 +224,9 @@ enum drbd_disk_state conn_highest_disk(struct drbd_connection *connection);
 enum drbd_disk_state conn_lowest_disk(struct drbd_connection *connection);
 enum drbd_disk_state conn_highest_pdsk(struct drbd_connection *connection);
 enum drbd_conns conn_lowest_conn(struct drbd_connection *connection);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

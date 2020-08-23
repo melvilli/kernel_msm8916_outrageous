@@ -2,7 +2,11 @@
  * bq2415x charger driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011-2012  Pali Rohár <pali.rohar@gmail.com>
+=======
+ * Copyright (C) 2011-2013  Pali Rohár <pali.rohar@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2013  Pali Rohár <pali.rohar@gmail.com>
 >>>>>>> v3.18
@@ -175,6 +179,11 @@ struct bq2415x_device {
 	struct power_supply charger;
 	struct delayed_work work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *notify_psy;
+	struct notifier_block nb;
+>>>>>>> v3.18
 =======
 	struct power_supply *notify_psy;
 	struct notifier_block nb;
@@ -615,10 +624,13 @@ static int bq2415x_set_battery_regulation_voltage(struct bq2415x_device *bq,
 	int val = (mV/10 - 350) / 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (val < 0)
 		val = 0;
 	else if (val > 94) /* FIXME: Max is 94 or 122 ? Set max value ? */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * According to datasheet, maximum battery regulation voltage is
 	 * 4440mV which is b101111 = 47.
@@ -626,6 +638,9 @@ static int bq2415x_set_battery_regulation_voltage(struct bq2415x_device *bq,
 	if (val < 0)
 		val = 0;
 	else if (val > 47)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -811,6 +826,7 @@ static int bq2415x_set_mode(struct bq2415x_device *bq, enum bq2415x_mode mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* hook function called by other driver which set reported mode */
 static void bq2415x_hook_function(enum bq2415x_mode mode, void *data)
 {
@@ -821,6 +837,8 @@ static void bq2415x_hook_function(enum bq2415x_mode mode, void *data)
 
 	dev_dbg(bq->dev, "hook function was called\n");
 =======
+=======
+>>>>>>> v3.18
 static int bq2415x_notifier_call(struct notifier_block *nb,
 		unsigned long val, void *v)
 {
@@ -858,11 +876,15 @@ static int bq2415x_notifier_call(struct notifier_block *nb,
 	if (bq->reported_mode == mode)
 		return NOTIFY_OK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bq->reported_mode = mode;
 
 	/* if automode is not enabled do not tell about reported_mode */
 	if (bq->automode < 1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -870,11 +892,16 @@ static int bq2415x_notifier_call(struct notifier_block *nb,
 	bq2415x_set_mode(bq, bq->reported_mode);
 
 =======
+=======
+>>>>>>> v3.18
 		return NOTIFY_OK;
 
 	schedule_delayed_work(&bq->work, 0);
 
 	return NOTIFY_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -925,12 +952,18 @@ static void bq2415x_timer_work(struct work_struct *work)
 	int boost;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bq->automode > 0 && (bq->reported_mode != bq->mode)) {
 		sysfs_notify(&bq->charger.dev->kobj, NULL, "reported_mode");
 		bq2415x_set_mode(bq, bq->reported_mode);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!bq->autotimer)
 		return;
@@ -1584,15 +1617,21 @@ static int bq2415x_probe(struct i2c_client *client,
 	char *name;
 	struct bq2415x_device *bq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!client->dev.platform_data) {
 		dev_err(&client->dev, "platform data not set\n");
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = client->dev.of_node;
 	struct bq2415x_platform_data *pdata = client->dev.platform_data;
 
 	if (!np && !pdata) {
 		dev_err(&client->dev, "platform data missing\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 	}
@@ -1619,7 +1658,10 @@ static int bq2415x_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (np) {
 		bq->notify_psy = power_supply_get_by_phandle(np, "ti,usb-charger-detection");
 
@@ -1638,6 +1680,9 @@ static int bq2415x_probe(struct i2c_client *client,
 	else
 		bq->notify_psy = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_clientdata(client, bq);
 
@@ -1651,9 +1696,12 @@ static int bq2415x_probe(struct i2c_client *client,
 	bq->automode = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&bq->init_data, client->dev.platform_data,
 			sizeof(bq->init_data));
 =======
+=======
+>>>>>>> v3.18
 	if (np) {
 		ret = of_property_read_u32(np, "ti,current-limit",
 				&bq->init_data.current_limit);
@@ -1682,6 +1730,9 @@ static int bq2415x_probe(struct i2c_client *client,
 	} else {
 		memcpy(&bq->init_data, pdata, sizeof(bq->init_data));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bq2415x_reset_chip(bq);
@@ -1705,6 +1756,7 @@ static int bq2415x_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bq->init_data.set_mode_hook) {
 		if (bq->init_data.set_mode_hook(
 				bq2415x_hook_function, bq)) {
@@ -1716,6 +1768,8 @@ static int bq2415x_probe(struct i2c_client *client,
 			dev_info(bq->dev, "automode failed\n");
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (bq->notify_psy) {
 		bq->nb.notifier_call = bq2415x_notifier_call;
 		ret = power_supply_reg_notifier(&bq->nb);
@@ -1730,6 +1784,9 @@ static int bq2415x_probe(struct i2c_client *client,
 
 		bq->automode = 1;
 		dev_info(bq->dev, "automode enabled\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		bq->automode = -1;
@@ -1743,6 +1800,10 @@ static int bq2415x_probe(struct i2c_client *client,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+error_5:
+>>>>>>> v3.18
 =======
 error_5:
 >>>>>>> v3.18
@@ -1767,8 +1828,13 @@ static int bq2415x_remove(struct i2c_client *client)
 	struct bq2415x_device *bq = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bq->init_data.set_mode_hook)
 		bq->init_data.set_mode_hook(NULL, NULL);
+=======
+	if (bq->notify_psy)
+		power_supply_unreg_notifier(&bq->nb);
+>>>>>>> v3.18
 =======
 	if (bq->notify_psy)
 		power_supply_unreg_notifier(&bq->nb);

@@ -163,7 +163,11 @@ static void timbuart_handle_tx_port(struct uart_port *port, u32 isr, u32 *ier)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void timbuart_handle_rx_port(struct uart_port *port, u32 isr, u32 *ier)
+=======
+static void timbuart_handle_rx_port(struct uart_port *port, u32 isr, u32 *ier)
+>>>>>>> v3.18
 =======
 static void timbuart_handle_rx_port(struct uart_port *port, u32 isr, u32 *ier)
 >>>>>>> v3.18
@@ -189,7 +193,11 @@ static void timbuart_handle_rx_port(struct uart_port *port, u32 isr, u32 *ier)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void timbuart_tasklet(unsigned long arg)
+=======
+static void timbuart_tasklet(unsigned long arg)
+>>>>>>> v3.18
 =======
 static void timbuart_tasklet(unsigned long arg)
 >>>>>>> v3.18
@@ -253,11 +261,14 @@ static void timbuart_mctrl_check(struct uart_port *port, u32 isr, u32 *ier)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void timbuart_enable_ms(struct uart_port *port)
 {
 	/* N/A */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void timbuart_break_ctl(struct uart_port *port, int ctl)
@@ -417,7 +428,10 @@ static struct uart_ops timbuart_ops = {
 	.flush_buffer = timbuart_flush_buffer,
 	.stop_rx = timbuart_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms = timbuart_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl = timbuart_break_ctl,

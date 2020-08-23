@@ -2009,7 +2009,11 @@ static struct spear_pinctrl_machdata spear1340_machdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id spear1340_pinctrl_of_match[] = {
+=======
+static const struct of_device_id spear1340_pinctrl_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id spear1340_pinctrl_of_match[] = {
 >>>>>>> v3.18

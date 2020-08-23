@@ -18,7 +18,11 @@
 #include <linux/netfilter_ipv4.h>
 #include <net/netfilter/ipv4/nf_defrag_ipv4.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CONNTRACK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CONNTRACK)
 >>>>>>> v3.18
@@ -39,7 +43,11 @@ static int nf_ct_ipv4_gather_frags(struct sk_buff *skb, u_int32_t user)
 	if (!err) {
 		ip_send_check(ip_hdr(skb));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->local_df = 1;
+=======
+		skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 		skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -54,7 +62,11 @@ static enum ip_defrag_users nf_ct_defrag_user(unsigned int hooknum,
 	u16 zone = NF_CT_DEFAULT_ZONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CONNTRACK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CONNTRACK)
 >>>>>>> v3.18
@@ -63,7 +75,11 @@ static enum ip_defrag_users nf_ct_defrag_user(unsigned int hooknum,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -78,7 +94,11 @@ static enum ip_defrag_users nf_ct_defrag_user(unsigned int hooknum,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv4_conntrack_defrag(unsigned int hooknum,
+=======
+static unsigned int ipv4_conntrack_defrag(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv4_conntrack_defrag(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -95,8 +115,13 @@ static unsigned int ipv4_conntrack_defrag(const struct nf_hook_ops *ops,
 		return NF_ACCEPT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)
 #if !defined(CONFIG_NF_NAT) && !defined(CONFIG_NF_NAT_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CONNTRACK)
+#if !IS_ENABLED(CONFIG_NF_NAT)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CONNTRACK)
 #if !IS_ENABLED(CONFIG_NF_NAT)
@@ -110,7 +135,13 @@ static unsigned int ipv4_conntrack_defrag(const struct nf_hook_ops *ops,
 	/* Gather fragments. */
 	if (ip_is_fragment(ip_hdr(skb))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		enum ip_defrag_users user = nf_ct_defrag_user(hooknum, skb);
+=======
+		enum ip_defrag_users user =
+			nf_ct_defrag_user(ops->hooknum, skb);
+
+>>>>>>> v3.18
 =======
 		enum ip_defrag_users user =
 			nf_ct_defrag_user(ops->hooknum, skb);

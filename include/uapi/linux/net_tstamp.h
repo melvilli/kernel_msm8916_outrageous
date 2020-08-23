@@ -21,6 +21,7 @@ enum {
 	SOF_TIMESTAMPING_SYS_HARDWARE = (1<<5),
 	SOF_TIMESTAMPING_RAW_HARDWARE = (1<<6),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOF_TIMESTAMPING_MASK =
 	(SOF_TIMESTAMPING_RAW_HARDWARE - 1) |
 	SOF_TIMESTAMPING_RAW_HARDWARE
@@ -39,6 +40,8 @@ enum {
  * structure is intentionally chosen so that it has the same layout on
  * 32 and 64 bit systems, don't break this!
 =======
+=======
+>>>>>>> v3.18
 	SOF_TIMESTAMPING_OPT_ID = (1<<7),
 	SOF_TIMESTAMPING_TX_SCHED = (1<<8),
 	SOF_TIMESTAMPING_TX_ACK = (1<<9),
@@ -60,6 +63,9 @@ enum {
  * driver or hardware does not support the requested @rx_filter value,
  * the driver may use a more general filter mode.  In this case
  * @rx_filter will indicate the actual mode on return.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct hwtstamp_config {

@@ -147,7 +147,11 @@ ENDPROC(__und_invalid)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	svc_entry, stack_hole=0
+=======
+	.macro	svc_entry, stack_hole=0, trace=1
+>>>>>>> v3.18
 =======
 	.macro	svc_entry, stack_hole=0, trace=1
 >>>>>>> v3.18
@@ -187,15 +191,21 @@ ENDPROC(__und_invalid)
 	stmia	r7, {r2 - r6}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_TRACE_IRQFLAGS
 	bl	trace_hardirqs_off
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.if \trace
 #ifdef CONFIG_TRACE_IRQFLAGS
 	bl	trace_hardirqs_off
 #endif
 	.endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 
@@ -237,7 +247,11 @@ svc_preempt:
 	ldr	r0, [tsk, #TI_FLAGS]		@ get new tasks TI_FLAGS
 	tst	r0, #_TIF_NEED_RESCHED
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, r8				@ go again
+=======
+	reteq	r8				@ go again
+>>>>>>> v3.18
 =======
 	reteq	r8				@ go again
 >>>>>>> v3.18
@@ -312,7 +326,10 @@ ENDPROC(__pabt_svc)
 
 	.align	5
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 __fiq_svc:
 	svc_entry trace=0
 	mov	r0, sp				@ struct pt_regs *regs
@@ -322,6 +339,9 @@ __fiq_svc:
 ENDPROC(__fiq_svc)
 
 	.align	5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .LCcralign:
 	.word	cr_alignment
@@ -334,7 +354,10 @@ ENDPROC(__fiq_svc)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Abort mode handlers
  */
 
@@ -375,6 +398,9 @@ __fiq_abt:
 ENDPROC(__fiq_abt)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * User mode handlers
  *
@@ -386,7 +412,11 @@ ENDPROC(__fiq_abt)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	usr_entry
+=======
+	.macro	usr_entry, trace=1
+>>>>>>> v3.18
 =======
 	.macro	usr_entry, trace=1
 >>>>>>> v3.18
@@ -397,6 +427,12 @@ ENDPROC(__fiq_abt)
  THUMB(	stmia	sp, {r0 - r12}	)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ ATRAP(	mrc	p15, 0, r7, c1, c0, 0)
+ ATRAP(	ldr	r8, .LCcralign)
+
+>>>>>>> v3.18
 =======
  ATRAP(	mrc	p15, 0, r7, c1, c0, 0)
  ATRAP(	ldr	r8, .LCcralign)
@@ -410,6 +446,11 @@ ENDPROC(__fiq_abt)
 					@ from the exception stack
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ ATRAP(	ldr	r8, [r8, #0])
+
+>>>>>>> v3.18
 =======
  ATRAP(	ldr	r8, [r8, #0])
 
@@ -428,10 +469,16 @@ ENDPROC(__fiq_abt)
  THUMB(	store_user_sp_lr r0, r1, S_SP - S_PC	)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@
 	@ Enable the alignment trap while in kernel mode
 	@
 	alignment_trap r0
+=======
+	@ Enable the alignment trap while in kernel mode
+ ATRAP(	teq	r8, r7)
+ ATRAP( mcrne	p15, 0, r8, c1, c0, 0)
+>>>>>>> v3.18
 =======
 	@ Enable the alignment trap while in kernel mode
  ATRAP(	teq	r8, r7)
@@ -444,6 +491,10 @@ ENDPROC(__fiq_abt)
 	zero_fp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.if	\trace
+>>>>>>> v3.18
 =======
 	.if	\trace
 >>>>>>> v3.18
@@ -452,6 +503,10 @@ ENDPROC(__fiq_abt)
 #endif
 	ct_user_exit save = 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.endif
+>>>>>>> v3.18
 =======
 	.endif
 >>>>>>> v3.18
@@ -523,9 +578,14 @@ __und_usr:
 	sub	r4, r2, #4			@ ARM instr at LR - 4
 1:	ldrt	r0, [r4]
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 	rev	r0, r0				@ little endian instruction
 #endif
+=======
+ ARM_BE8(rev	r0, r0)				@ little endian instruction
+
+>>>>>>> v3.18
 =======
  ARM_BE8(rev	r0, r0)				@ little endian instruction
 
@@ -563,15 +623,21 @@ __und_usr_thumb:
 #endif
 2:	ldrht	r5, [r4]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmp	r5, #0xe800			@ 32bit instruction if xx != 0
 	blo	__und_usr_fault_16		@ 16bit undefined instruction
 3:	ldrht	r0, [r2]
 =======
+=======
+>>>>>>> v3.18
 ARM_BE8(rev16	r5, r5)				@ little endian instruction
 	cmp	r5, #0xe800			@ 32bit instruction if xx != 0
 	blo	__und_usr_fault_16		@ 16bit undefined instruction
 3:	ldrht	r0, [r2]
 ARM_BE8(rev16	r0, r0)				@ little endian instruction
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add	r2, r2, #2			@ r2 is PC + 2, make it PC + 4
 	str	r2, [sp, #S_PC]			@ it's a 2x16bit instr, update
@@ -602,7 +668,12 @@ ENDPROC(__und_usr)
 	.pushsection .fixup, "ax"
 	.align	2
 <<<<<<< HEAD
+<<<<<<< HEAD
 4:	mov	pc, r9
+=======
+4:	str     r4, [sp, #S_PC]			@ retry current instruction
+	ret	r9
+>>>>>>> v3.18
 =======
 4:	str     r4, [sp, #S_PC]			@ retry current instruction
 	ret	r9
@@ -669,7 +740,11 @@ call_fpe:
 	tst	r0, #0x08000000			@ only CDP/CPRT/LDC/STC have bit 27
 	tstne	r0, #0x04000000			@ bit 26 set on both ARM and Thumb-2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr
+=======
+	reteq	lr
+>>>>>>> v3.18
 =======
 	reteq	lr
 >>>>>>> v3.18
@@ -692,21 +767,28 @@ call_fpe:
 	nop
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movw_pc	lr				@ CP#0
 	W(b)	do_fpe				@ CP#1 (FPE)
 	W(b)	do_fpe				@ CP#2 (FPE)
 	movw_pc	lr				@ CP#3
 =======
+=======
+>>>>>>> v3.18
 	ret.w	lr				@ CP#0
 	W(b)	do_fpe				@ CP#1 (FPE)
 	W(b)	do_fpe				@ CP#2 (FPE)
 	ret.w	lr				@ CP#3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CRUNCH
 	b	crunch_task_enable		@ CP#4 (MaverickCrunch)
 	b	crunch_task_enable		@ CP#5 (MaverickCrunch)
 	b	crunch_task_enable		@ CP#6 (MaverickCrunch)
 #else
+<<<<<<< HEAD
 <<<<<<< HEAD
 	movw_pc	lr				@ CP#4
 	movw_pc	lr				@ CP#5
@@ -716,6 +798,8 @@ call_fpe:
 	movw_pc	lr				@ CP#8
 	movw_pc	lr				@ CP#9
 =======
+=======
+>>>>>>> v3.18
 	ret.w	lr				@ CP#4
 	ret.w	lr				@ CP#5
 	ret.w	lr				@ CP#6
@@ -723,11 +807,15 @@ call_fpe:
 	ret.w	lr				@ CP#7
 	ret.w	lr				@ CP#8
 	ret.w	lr				@ CP#9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_VFP
 	W(b)	do_vfp				@ CP#10 (VFP)
 	W(b)	do_vfp				@ CP#11 (VFP)
 #else
+<<<<<<< HEAD
 <<<<<<< HEAD
 	movw_pc	lr				@ CP#10 (VFP)
 	movw_pc	lr				@ CP#11 (VFP)
@@ -737,6 +825,8 @@ call_fpe:
 	movw_pc	lr				@ CP#14 (Debug)
 	movw_pc	lr				@ CP#15 (Control)
 =======
+=======
+>>>>>>> v3.18
 	ret.w	lr				@ CP#10 (VFP)
 	ret.w	lr				@ CP#11 (VFP)
 #endif
@@ -744,6 +834,9 @@ call_fpe:
 	ret.w	lr				@ CP#13
 	ret.w	lr				@ CP#14 (Debug)
 	ret.w	lr				@ CP#15 (Control)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef NEED_CPU_ARCHITECTURE
@@ -797,7 +890,11 @@ ENTRY(fp_enter)
 
 ENTRY(no_fp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -835,7 +932,10 @@ ENDPROC(__pabt_usr)
 ENDPROC(ret_from_exception)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.align	5
 __fiq_usr:
 	usr_entry trace=0
@@ -847,6 +947,9 @@ __fiq_usr:
  UNWIND(.fnend		)
 ENDPROC(__fiq_usr)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Register switch for ARMv3 and ARMv4 processors
@@ -911,7 +1014,11 @@ ENDPROC(__switch_to)
 	bx	\reg
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, \reg
+=======
+	ret	\reg
+>>>>>>> v3.18
 =======
 	ret	\reg
 >>>>>>> v3.18
@@ -933,6 +1040,7 @@ ENDPROC(__switch_to)
 	.align	5
 	.globl	__kuser_helper_start
 __kuser_helper_start:
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef GENERIC_TIME_VSYSCALL
 /*
@@ -1027,6 +1135,8 @@ __kuser_gtod_timeval:  @0xffff0f40
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * Due to the length of some sequences, __kuser_cmpxchg64 spans 2 regular
@@ -1101,7 +1211,11 @@ kuser_cmpxchg64_fixup:
 	bcc	kuser_cmpxchg32_fixup
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -1173,7 +1287,11 @@ kuser_cmpxchg32_fixup:
 	rsbcss	r8, r8, #(2b - 1b)
 	strcs	r7, [sp, #S_PC]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -1236,7 +1354,11 @@ __kuser_helper_end:
  * of which is copied into r0 for the mode specific abort handler.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	vector_stub, name, mode, fixup, correction=0
+=======
+	.macro	vector_stub, name, mode, correction=0
+>>>>>>> v3.18
 =======
 	.macro	vector_stub, name, mode, correction=0
 >>>>>>> v3.18
@@ -1269,6 +1391,7 @@ vector_\name:
  THUMB(	adr	r0, 1f			)
  THUMB(	ldr	lr, [r0, lr, lsl #2]	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.if	\fixup
 #ifdef CONFIG_MSM_KRAIT_WFE_FIXUP
 	ldr	r0, .krait_fixup
@@ -1281,6 +1404,8 @@ vector_\name:
 10:	isb
 #endif
 	.endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mov	r0, sp
@@ -1308,7 +1433,11 @@ vector_rst:
  * Interrupt dispatcher
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vector_stub	irq, IRQ_MODE, 1, 4
+=======
+	vector_stub	irq, IRQ_MODE, 4
+>>>>>>> v3.18
 =======
 	vector_stub	irq, IRQ_MODE, 4
 >>>>>>> v3.18
@@ -1335,7 +1464,11 @@ vector_rst:
  * Enter in ABT mode, spsr = USR CPSR, lr = USR PC
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vector_stub	dabt, ABT_MODE, 0, 8
+=======
+	vector_stub	dabt, ABT_MODE, 8
+>>>>>>> v3.18
 =======
 	vector_stub	dabt, ABT_MODE, 8
 >>>>>>> v3.18
@@ -1362,7 +1495,11 @@ vector_rst:
  * Enter in ABT mode, spsr = USR CPSR, lr = USR PC
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vector_stub	pabt, ABT_MODE, 0, 4
+=======
+	vector_stub	pabt, ABT_MODE, 4
+>>>>>>> v3.18
 =======
 	vector_stub	pabt, ABT_MODE, 4
 >>>>>>> v3.18
@@ -1389,7 +1526,11 @@ vector_rst:
  * Enter in UND mode, spsr = SVC/USR CPSR, lr = SVC/USR PC
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vector_stub	und, UND_MODE, 0
+=======
+	vector_stub	und, UND_MODE
+>>>>>>> v3.18
 =======
 	vector_stub	und, UND_MODE
 >>>>>>> v3.18
@@ -1425,6 +1566,7 @@ vector_addrexcptn:
 
 /*=============================================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Undefined FIQs
  *-----------------------------------------------------------------------------
  * Enter in FIQ mode, spsr = ANY CPSR, lr = ANY PC
@@ -1440,6 +1582,8 @@ vector_fiq:
 .krait_fixup:
 	.word	msm_krait_need_wfe_fixup
 =======
+=======
+>>>>>>> v3.18
  * FIQ "NMI" handler
  *-----------------------------------------------------------------------------
  * Handle a FIQ using the SVC stack allowing FIQ act like NMI on x86
@@ -1463,6 +1607,9 @@ vector_fiq:
 	.long	__fiq_svc			@  d
 	.long	__fiq_svc			@  e
 	.long	__fiq_svc			@  f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.globl	vector_fiq_offset
@@ -1483,11 +1630,16 @@ __vectors_start:
 
 	.globl	cr_alignment
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.globl	cr_no_alignment
 cr_alignment:
 	.space	4
 cr_no_alignment:
 	.space	4
+=======
+cr_alignment:
+	.space	4
+>>>>>>> v3.18
 =======
 cr_alignment:
 	.space	4

@@ -360,7 +360,11 @@ static inline void release_metapath(struct metapath *mp)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int gfs2_extent_length(void *start, unsigned int len, __be64 *ptr, unsigned limit, int *eob)
+=======
+static inline unsigned int gfs2_extent_length(void *start, unsigned int len, __be64 *ptr, size_t limit, int *eob)
+>>>>>>> v3.18
 =======
 static inline unsigned int gfs2_extent_length(void *start, unsigned int len, __be64 *ptr, size_t limit, int *eob)
 >>>>>>> v3.18
@@ -454,7 +458,11 @@ static int gfs2_bmap_alloc(struct inode *inode, const sector_t lblock,
 			   const unsigned int sheight,
 			   const unsigned int height,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   const unsigned int maxlen)
+=======
+			   const size_t maxlen)
+>>>>>>> v3.18
 =======
 			   const size_t maxlen)
 >>>>>>> v3.18
@@ -492,7 +500,12 @@ static int gfs2_bmap_alloc(struct inode *inode, const sector_t lblock,
 		/* Need to allocate indirect blocks */
 		ptrs_per_blk = height > 1 ? sdp->sd_inptrs : sdp->sd_diptrs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dblks = min(maxlen, ptrs_per_blk - mp->mp_list[end_of_metadata]);
+=======
+		dblks = min(maxlen, (size_t)(ptrs_per_blk -
+					     mp->mp_list[end_of_metadata]));
+>>>>>>> v3.18
 =======
 		dblks = min(maxlen, (size_t)(ptrs_per_blk -
 					     mp->mp_list[end_of_metadata]));
@@ -619,7 +632,11 @@ int gfs2_block_map(struct inode *inode, sector_t lblock,
 	struct gfs2_sbd *sdp = GFS2_SB(inode);
 	unsigned int bsize = sdp->sd_sb.sb_bsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int maxlen = bh_map->b_size >> inode->i_blkbits;
+=======
+	const size_t maxlen = bh_map->b_size >> inode->i_blkbits;
+>>>>>>> v3.18
 =======
 	const size_t maxlen = bh_map->b_size >> inode->i_blkbits;
 >>>>>>> v3.18
@@ -725,7 +742,11 @@ int gfs2_extent_map(struct inode *inode, u64 lblock, int *new, u64 *dblock, unsi
  * @bottom: One more than the last pointer
  * @height: the height this buffer is at
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @data: a pointer to a struct strip_mine
+=======
+ * @sm: a pointer to a struct strip_mine
+>>>>>>> v3.18
 =======
  * @sm: a pointer to a struct strip_mine
 >>>>>>> v3.18
@@ -1014,6 +1035,11 @@ unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GFS2_JTRUNC_REVOKES 8192
+
+>>>>>>> v3.18
 =======
 #define GFS2_JTRUNC_REVOKES 8192
 
@@ -1030,8 +1056,11 @@ unlock:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GFS2_JTRUNC_REVOKES 8192
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int gfs2_journaled_truncate(struct inode *inode, u64 oldsize, u64 newsize)
@@ -1046,7 +1075,11 @@ static int gfs2_journaled_truncate(struct inode *inode, u64 oldsize, u64 newsize
 		if (chunk > max_chunk)
 			chunk = max_chunk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, oldsize, oldsize - chunk);
+=======
+		truncate_pagecache(inode, oldsize - chunk);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, oldsize - chunk);
 >>>>>>> v3.18
@@ -1101,7 +1134,11 @@ static int trunc_start(struct inode *inode, u64 oldsize, u64 newsize)
 		error = gfs2_journaled_truncate(inode, oldsize, newsize);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, oldsize, newsize);
+=======
+		truncate_pagecache(inode, newsize);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, newsize);
 >>>>>>> v3.18
@@ -1254,6 +1291,10 @@ static int do_grow(struct inode *inode, u64 size)
 	struct gfs2_inode *ip = GFS2_I(inode);
 	struct gfs2_sbd *sdp = GFS2_SB(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gfs2_alloc_parms ap = { .target = 1, };
+>>>>>>> v3.18
 =======
 	struct gfs2_alloc_parms ap = { .target = 1, };
 >>>>>>> v3.18
@@ -1268,7 +1309,11 @@ static int do_grow(struct inode *inode, u64 size)
 			return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = gfs2_inplace_reserve(ip, 1, 0);
+=======
+		error = gfs2_inplace_reserve(ip, &ap);
+>>>>>>> v3.18
 =======
 		error = gfs2_inplace_reserve(ip, &ap);
 >>>>>>> v3.18
@@ -1278,7 +1323,13 @@ static int do_grow(struct inode *inode, u64 size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = gfs2_trans_begin(sdp, RES_DINODE + RES_STATFS + RES_RG_BIT, 0);
+=======
+	error = gfs2_trans_begin(sdp, RES_DINODE + RES_STATFS + RES_RG_BIT +
+				 (sdp->sd_args.ar_quota == GFS2_QUOTA_OFF ?
+				  0 : RES_QUOTA), 0);
+>>>>>>> v3.18
 =======
 	error = gfs2_trans_begin(sdp, RES_DINODE + RES_STATFS + RES_RG_BIT +
 				 (sdp->sd_args.ar_quota == GFS2_QUOTA_OFF ?
@@ -1329,6 +1380,10 @@ do_grow_qunlock:
 int gfs2_setattr_size(struct inode *inode, u64 newsize)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gfs2_inode *ip = GFS2_I(inode);
+>>>>>>> v3.18
 =======
 	struct gfs2_inode *ip = GFS2_I(inode);
 >>>>>>> v3.18
@@ -1348,7 +1403,11 @@ int gfs2_setattr_size(struct inode *inode, u64 newsize)
 	inode_dio_wait(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gfs2_rs_alloc(GFS2_I(inode));
+=======
+	ret = gfs2_rs_alloc(ip);
+>>>>>>> v3.18
 =======
 	ret = gfs2_rs_alloc(ip);
 >>>>>>> v3.18
@@ -1362,6 +1421,10 @@ int gfs2_setattr_size(struct inode *inode, u64 newsize)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gfs2_rs_deltree(ip->i_res);
+>>>>>>> v3.18
 =======
 	gfs2_rs_deltree(ip->i_res);
 >>>>>>> v3.18
@@ -1387,7 +1450,10 @@ int gfs2_file_dealloc(struct gfs2_inode *ip)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * gfs2_free_journal_extents - Free cached journal bmap info
  * @jd: The journal
  *
@@ -1503,6 +1569,9 @@ fail:
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * gfs2_write_alloc_required - figure out if a write will require an allocation
  * @ip: the file being written to

@@ -196,12 +196,18 @@ static unsigned char tw_sense_table[][4] =
 #define TW_AEN_SBUF_FAIL         0x0024
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Phase defines */
 #define TW_PHASE_INITIAL 0
 #define TW_PHASE_SINGLE 1
 #define TW_PHASE_SGLIST 2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Misc defines */
 #define TW_ALIGNMENT_6000		      64 /* 64 bytes */
@@ -396,6 +402,11 @@ typedef struct TAG_TW_Passthru
 } TW_Passthru;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#pragma pack()
+
+>>>>>>> v3.18
 =======
 #pragma pack()
 
@@ -439,8 +450,11 @@ typedef struct TAG_TW_Device_Extension {
 } TW_Device_Extension;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma pack()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _3W_XXXX_H */

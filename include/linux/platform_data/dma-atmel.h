@@ -36,6 +36,11 @@ struct at_dma_slave {
 
 /* Platform-configurable bits in CFG */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ATC_PER_MSB(h)	((0x30U & (h)) >> 4)	/* Extract most significant bits of a handshaking identifier */
+
+>>>>>>> v3.18
 =======
 #define ATC_PER_MSB(h)	((0x30U & (h)) >> 4)	/* Extract most significant bits of a handshaking identifier */
 
@@ -47,6 +52,10 @@ struct at_dma_slave {
 #define		ATC_SRC_H2SEL_SW	(0x0 <<  9)
 #define		ATC_SRC_H2SEL_HW	(0x1 <<  9)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	ATC_SRC_PER_MSB(h)	(ATC_PER_MSB(h) << 10)	/* Channel src rq (most significant bits) */
+>>>>>>> v3.18
 =======
 #define	ATC_SRC_PER_MSB(h)	(ATC_PER_MSB(h) << 10)	/* Channel src rq (most significant bits) */
 >>>>>>> v3.18
@@ -55,6 +64,10 @@ struct at_dma_slave {
 #define		ATC_DST_H2SEL_SW	(0x0 << 13)
 #define		ATC_DST_H2SEL_HW	(0x1 << 13)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	ATC_DST_PER_MSB(h)	(ATC_PER_MSB(h) << 14)	/* Channel dst rq (most significant bits) */
+>>>>>>> v3.18
 =======
 #define	ATC_DST_PER_MSB(h)	(ATC_PER_MSB(h) << 14)	/* Channel dst rq (most significant bits) */
 >>>>>>> v3.18

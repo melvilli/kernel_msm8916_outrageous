@@ -139,7 +139,11 @@ int spufs_handle_class1(struct spu_context *ctx)
 		ctx->spu->stats.hash_flt++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we must not hold the lock when entering spu_handle_mm_fault */
+=======
+	/* we must not hold the lock when entering copro_handle_mm_fault */
+>>>>>>> v3.18
 =======
 	/* we must not hold the lock when entering copro_handle_mm_fault */
 >>>>>>> v3.18
@@ -154,7 +158,11 @@ int spufs_handle_class1(struct spu_context *ctx)
 	/* hashing failed, so try the actual fault handler */
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = spu_handle_mm_fault(current->mm, ea, dsisr, &flt);
+=======
+		ret = copro_handle_mm_fault(current->mm, ea, dsisr, &flt);
+>>>>>>> v3.18
 =======
 		ret = copro_handle_mm_fault(current->mm, ea, dsisr, &flt);
 >>>>>>> v3.18

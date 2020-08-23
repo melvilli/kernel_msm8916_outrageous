@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -85,9 +89,13 @@ struct ixgbe_fcoe {
 	dma_addr_t extra_ddp_buffer_dma;
 	unsigned long mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_IXGBE_DCB
 	u8 up;
 #endif
+=======
+	u8 up;
+>>>>>>> v3.18
 =======
 	u8 up;
 >>>>>>> v3.18

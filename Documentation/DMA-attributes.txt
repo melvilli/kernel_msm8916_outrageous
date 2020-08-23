@@ -14,7 +14,11 @@ strictly order DMA from a device across all intervening busses and
 bridges.  This barrier is not specific to a particular type of
 interconnect, it applies to the system as a whole, and so its
 <<<<<<< HEAD
+<<<<<<< HEAD
 implementation must account for the idiosyncracies of the system all
+=======
+implementation must account for the idiosyncrasies of the system all
+>>>>>>> v3.18
 =======
 implementation must account for the idiosyncrasies of the system all
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ Buffers allocated with this attribute can be only passed to user space
 by calling dma_mmap_attrs(). By using this API, you are guaranteeing
 that you won't dereference the pointer returned by dma_alloc_attr(). You
 <<<<<<< HEAD
+<<<<<<< HEAD
 can threat it as a cookie that must be passed to dma_mmap_attrs() and
+=======
+can treat it as a cookie that must be passed to dma_mmap_attrs() and
+>>>>>>> v3.18
 =======
 can treat it as a cookie that must be passed to dma_mmap_attrs() and
 >>>>>>> v3.18
@@ -91,7 +99,11 @@ to 'device' domain, what synchronizes CPU caches for the given region
 depending on the dma direction). However, next calls to
 dma_map_{single,page,sg}() for other devices will perform exactly the
 <<<<<<< HEAD
+<<<<<<< HEAD
 same sychronization operation on the CPU cache. CPU cache sychronization
+=======
+same synchronization operation on the CPU cache. CPU cache synchronization
+>>>>>>> v3.18
 =======
 same synchronization operation on the CPU cache. CPU cache synchronization
 >>>>>>> v3.18
@@ -111,6 +123,7 @@ By default DMA-mapping subsystem is allowed to assemble the buffer
 allocated by dma_alloc_attrs() function from individual pages if it can
 be mapped as contiguous chunk into device dma address space. By
 <<<<<<< HEAD
+<<<<<<< HEAD
 specifing this attribute the allocated buffer is forced to be contiguous
 also in physical memory.
 
@@ -122,6 +135,10 @@ of mapping (no unaligned accesses, no re-ordering, no write merging, no
 buffering, no pre-fetching). This has severe performance penalties and
 should not be used for general purpose DMA allocations. It should only
 be used if one of the restrictions on strongly ordered memory is required.
+=======
+specifying this attribute the allocated buffer is forced to be contiguous
+also in physical memory.
+>>>>>>> v3.18
 =======
 specifying this attribute the allocated buffer is forced to be contiguous
 also in physical memory.

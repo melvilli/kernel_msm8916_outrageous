@@ -19,6 +19,7 @@
 #include <asm/hazards.h>
 #include <asm/tlbflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #include <asm/mipsmtregs.h>
 #include <asm/smtc.h>
@@ -45,6 +46,8 @@ do {									\
 
 #else /* CONFIG_MIPS_PGD_C0_CONTEXT: using  pgd_current*/
 =======
+=======
+>>>>>>> v3.18
 #include <asm-generic/mm_hooks.h>
 
 #define htw_set_pwbase(pgd)						\
@@ -76,6 +79,9 @@ do {									\
 	} while (0)
 
 #else /* !CONFIG_MIPS_PGD_C0_CONTEXT: using  pgd_current*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -85,6 +91,7 @@ do {									\
  */
 extern unsigned long pgd_current[];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define TLBMISS_HANDLER_SETUP_PGD(pgd) \
 	pgd_current[smp_processor_id()] = (unsigned long)(pgd)
@@ -102,6 +109,8 @@ extern unsigned long pgd_current[];
 	TLBMISS_HANDLER_SETUP_PGD(swapper_pg_dir)
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define TLBMISS_HANDLER_RESTORE()					\
 	write_c0_context((unsigned long) smp_processor_id() <<		\
 			 SMP_CPUID_REGSHIFT)
@@ -110,6 +119,9 @@ extern unsigned long pgd_current[];
 	TLBMISS_HANDLER_RESTORE();					\
 	back_to_back_c0_hazard();					\
 	TLBMISS_HANDLER_SETUP_PGD(swapper_pg_dir)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_MIPS_PGD_C0_CONTEXT*/
 #if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
@@ -123,6 +135,7 @@ extern unsigned long pgd_current[];
 #define ASID_MASK	0xff0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_MIPS_MT_SMTC)
 
 #define ASID_INC	0x1
@@ -130,6 +143,8 @@ extern unsigned long smtc_asid_mask;
 #define ASID_MASK	(smtc_asid_mask)
 #define HW_ASID_MASK	0xff
 /* End SMTC/34K debug hack */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else /* FIXME: not correct for R6000 */
@@ -155,7 +170,10 @@ static inline void enter_lazy_tlb(struct mm_struct *mm, struct task_struct *tsk)
 #define ASID_FIRST_VERSION ((unsigned long)(~ASID_VERSION_MASK) + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_MIPS_MT_SMTC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Normal, classic MIPS get_new_mmu_context */
@@ -181,12 +199,15 @@ get_new_mmu_context(struct mm_struct *mm, unsigned long cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* CONFIG_MIPS_MT_SMTC */
 
 #define get_new_mmu_context(mm, cpu) smtc_get_new_mmu_context((mm), (cpu))
 
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -210,6 +231,7 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	unsigned int cpu = smp_processor_id();
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long oldasid;
 	unsigned long mtflags;
@@ -222,10 +244,14 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 =======
 	local_irq_save(flags);
 >>>>>>> v3.18
+=======
+	local_irq_save(flags);
+>>>>>>> v3.18
 
 	/* Check if our ASID is of an older version and thus invalid */
 	if ((cpu_context(cpu, next) ^ asid_cache(cpu)) & ASID_VERSION_MASK)
 		get_new_mmu_context(next, cpu);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
@@ -254,6 +280,9 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 #else
 	write_c0_entryhi(cpu_asid(cpu, next));
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+	write_c0_entryhi(cpu_asid(cpu, next));
+>>>>>>> v3.18
 =======
 	write_c0_entryhi(cpu_asid(cpu, next));
 >>>>>>> v3.18
@@ -290,6 +319,7 @@ activate_mm(struct mm_struct *prev, struct mm_struct *next)
 	unsigned int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long oldasid;
 	unsigned long mtflags;
@@ -298,11 +328,14 @@ activate_mm(struct mm_struct *prev, struct mm_struct *next)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	local_irq_save(flags);
 
 	/* Unconditionally get a new ASID.  */
 	get_new_mmu_context(next, cpu);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/* See comments for similar code above */
@@ -324,6 +357,9 @@ activate_mm(struct mm_struct *prev, struct mm_struct *next)
 =======
 	write_c0_entryhi(cpu_asid(cpu, next));
 >>>>>>> v3.18
+=======
+	write_c0_entryhi(cpu_asid(cpu, next));
+>>>>>>> v3.18
 	TLBMISS_HANDLER_SETUP_PGD(next->pgd);
 
 	/* mark mmu ownership change */
@@ -342,6 +378,7 @@ drop_mmu_context(struct mm_struct *mm, unsigned cpu)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long oldasid;
 	/* Can't use spinlock because called from TLB flush within DVPE */
@@ -350,11 +387,14 @@ drop_mmu_context(struct mm_struct *mm, unsigned cpu)
 #endif /* CONFIG_MIPS_MT_SMTC */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	local_irq_save(flags);
 
 	if (cpumask_test_cpu(cpu, mm_cpumask(mm)))  {
 		get_new_mmu_context(mm, cpu);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		/* See comments for similar code above */
@@ -388,10 +428,15 @@ drop_mmu_context(struct mm_struct *mm, unsigned cpu)
 		}
 #endif /* CONFIG_MIPS_MT_SMTC */
 =======
+=======
+>>>>>>> v3.18
 		write_c0_entryhi(cpu_asid(cpu, mm));
 	} else {
 		/* will get a new context next time */
 		cpu_context(cpu, mm) = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	local_irq_restore(flags);

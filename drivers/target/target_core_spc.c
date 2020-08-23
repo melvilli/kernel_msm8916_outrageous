@@ -2,7 +2,11 @@
  * SCSI Primary Commands (SPC) parsing and emulation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2002-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2002-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2002-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -40,7 +44,11 @@
 #include "target_core_pr.h"
 #include "target_core_ua.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "target_core_xcopy.h"
+>>>>>>> v3.18
 =======
 #include "target_core_xcopy.h"
 >>>>>>> v3.18
@@ -57,7 +65,11 @@ static void spc_fill_alua_data(struct se_port *port, unsigned char *buf)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Set TPGS field for explict and/or implict ALUA access type
+=======
+	 * Set TPGS field for explicit and/or implicit ALUA access type
+>>>>>>> v3.18
 =======
 	 * Set TPGS field for explicit and/or implicit ALUA access type
 >>>>>>> v3.18
@@ -84,6 +96,10 @@ spc_emulate_inquiry_std(struct se_cmd *cmd, unsigned char *buf)
 	struct se_lun *lun = cmd->se_lun;
 	struct se_device *dev = cmd->se_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct se_session *sess = cmd->se_sess;
+>>>>>>> v3.18
 =======
 	struct se_session *sess = cmd->se_sess;
 >>>>>>> v3.18
@@ -112,7 +128,10 @@ spc_emulate_inquiry_std(struct se_cmd *cmd, unsigned char *buf)
 	spc_fill_alua_data(lun->lun_sep, buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set Third-Party Copy (3PC) bit to indicate support for EXTENDED_COPY
 	 */
@@ -127,6 +146,9 @@ spc_emulate_inquiry_std(struct se_cmd *cmd, unsigned char *buf)
 			buf[5] |= 0x1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf[7] = 0x2; /* CmdQue=1 */
 
@@ -148,6 +170,7 @@ spc_emulate_evpd_80(struct se_cmd *cmd, unsigned char *buf)
 {
 	struct se_device *dev = cmd->se_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 len = 0;
 
 	if (dev->dev_flags & DF_EMULATED_VPD_UNIT_SERIAL) {
@@ -158,10 +181,15 @@ spc_emulate_evpd_80(struct se_cmd *cmd, unsigned char *buf)
 
 		len += sprintf(&buf[4], "%s", dev->t10_wwn.unit_serial);
 =======
+=======
+>>>>>>> v3.18
 	u16 len;
 
 	if (dev->dev_flags & DF_EMULATED_VPD_UNIT_SERIAL) {
 		len = sprintf(&buf[4], "%s", dev->t10_wwn.unit_serial);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		len++; /* Extra Byte for NULL Terminator */
 		buf[3] = len;
@@ -170,8 +198,13 @@ spc_emulate_evpd_80(struct se_cmd *cmd, unsigned char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void spc_parse_naa_6h_vendor_specific(struct se_device *dev,
 		unsigned char *buf)
+=======
+void spc_parse_naa_6h_vendor_specific(struct se_device *dev,
+				      unsigned char *buf)
+>>>>>>> v3.18
 =======
 void spc_parse_naa_6h_vendor_specific(struct se_device *dev,
 				      unsigned char *buf)
@@ -307,7 +340,11 @@ check_t10_vend_desc:
 	if (port) {
 		struct t10_alua_lu_gp *lu_gp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 padding, scsi_name_len;
+=======
+		u32 padding, scsi_name_len, scsi_target_len;
+>>>>>>> v3.18
 =======
 		u32 padding, scsi_name_len, scsi_target_len;
 >>>>>>> v3.18
@@ -409,6 +446,7 @@ check_lu_gp:
 		 */
 check_scsi_name:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scsi_name_len = strlen(tpg->se_tpg_tfo->tpg_get_wwn(tpg));
 		/* UTF-8 ",t,0x<16-bit TPGT>" + NULL Terminator */
 		scsi_name_len += 10;
@@ -419,6 +457,8 @@ check_scsi_name:
 		/* Header size + Designation descriptor */
 		scsi_name_len += 4;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		buf[off] =
@@ -449,14 +489,20 @@ check_scsi_name:
 		 * of four.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (padding)
 			scsi_name_len += padding;
 =======
+=======
+>>>>>>> v3.18
 		padding = ((-scsi_name_len) & 3);
 		if (padding)
 			scsi_name_len += padding;
 		if (scsi_name_len > 256)
 			scsi_name_len = 256;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		buf[off-1] = scsi_name_len;
@@ -464,7 +510,10 @@ check_scsi_name:
 		/* Header size + Designation descriptor */
 		len += (scsi_name_len + 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * Target device designator
@@ -506,6 +555,9 @@ check_scsi_name:
 
 		/* Header size + Designation descriptor */
 		len += (scsi_target_len + 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	buf[2] = ((len >> 8) & 0xff);
@@ -533,9 +585,12 @@ spc_emulate_evpd_86(struct se_cmd *cmd, unsigned char *buf)
 {
 	struct se_device *dev = cmd->se_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	buf[3] = 0x3c;
 =======
+=======
+>>>>>>> v3.18
 	struct se_session *sess = cmd->se_sess;
 
 	buf[3] = 0x3c;
@@ -550,6 +605,9 @@ spc_emulate_evpd_86(struct se_cmd *cmd, unsigned char *buf)
 			buf[4] = 0x4;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Set HEADSUP, ORDSUP, SIMPSUP */
 	buf[5] = 0x07;
@@ -558,12 +616,18 @@ spc_emulate_evpd_86(struct se_cmd *cmd, unsigned char *buf)
 	if (spc_check_dev_wce(dev))
 		buf[6] = 0x01;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* If an LBA map is present set R_SUP */
 	spin_lock(&cmd->se_dev->t10_alua.lba_map_lock);
 	if (!list_empty(&dev->t10_alua.lba_map_list))
 		buf[8] = 0x10;
 	spin_unlock(&cmd->se_dev->t10_alua.lba_map_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -574,7 +638,13 @@ spc_emulate_evpd_b0(struct se_cmd *cmd, unsigned char *buf)
 {
 	struct se_device *dev = cmd->se_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int have_tp = 0;
+=======
+	u32 max_sectors;
+	int have_tp = 0;
+	int opt, min;
+>>>>>>> v3.18
 =======
 	u32 max_sectors;
 	int have_tp = 0;
@@ -595,31 +665,49 @@ spc_emulate_evpd_b0(struct se_cmd *cmd, unsigned char *buf)
 	/* Set WSNZ to 1 */
 	buf[4] = 0x01;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set MAXIMUM COMPARE AND WRITE LENGTH
 	 */
 	if (dev->dev_attrib.emulate_caw)
 		buf[5] = 0x01;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Set OPTIMAL TRANSFER LENGTH GRANULARITY
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_unaligned_be16(1, &buf[6]);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->transport->get_io_min && (min = dev->transport->get_io_min(dev)))
 		put_unaligned_be16(min / dev->dev_attrib.block_size, &buf[6]);
 	else
 		put_unaligned_be16(1, &buf[6]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Set MAXIMUM TRANSFER LENGTH
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_unaligned_be32(dev->dev_attrib.hw_max_sectors, &buf[8]);
+=======
+	max_sectors = min(dev->dev_attrib.fabric_max_sectors,
+			  dev->dev_attrib.hw_max_sectors);
+	put_unaligned_be32(max_sectors, &buf[8]);
+>>>>>>> v3.18
 =======
 	max_sectors = min(dev->dev_attrib.fabric_max_sectors,
 			  dev->dev_attrib.hw_max_sectors);
@@ -630,12 +718,18 @@ spc_emulate_evpd_b0(struct se_cmd *cmd, unsigned char *buf)
 	 * Set OPTIMAL TRANSFER LENGTH
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_unaligned_be32(dev->dev_attrib.optimal_sectors, &buf[12]);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->transport->get_io_opt && (opt = dev->transport->get_io_opt(dev)))
 		put_unaligned_be32(opt / dev->dev_attrib.block_size, &buf[12]);
 	else
 		put_unaligned_be32(dev->dev_attrib.optimal_sectors, &buf[12]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -743,7 +837,10 @@ spc_emulate_evpd_b2(struct se_cmd *cmd, unsigned char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Referrals VPD page */
 static sense_reason_t
 spc_emulate_evpd_b3(struct se_cmd *cmd, unsigned char *buf)
@@ -758,6 +855,9 @@ spc_emulate_evpd_b3(struct se_cmd *cmd, unsigned char *buf)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static sense_reason_t
 spc_emulate_evpd_00(struct se_cmd *cmd, unsigned char *buf);
@@ -774,6 +874,10 @@ static struct {
 	{ .page = 0xb1, .emulate = spc_emulate_evpd_b1 },
 	{ .page = 0xb2, .emulate = spc_emulate_evpd_b2 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .page = 0xb3, .emulate = spc_emulate_evpd_b3 },
+>>>>>>> v3.18
 =======
 	{ .page = 0xb3, .emulate = spc_emulate_evpd_b3 },
 >>>>>>> v3.18
@@ -807,7 +911,11 @@ spc_emulate_inquiry(struct se_cmd *cmd)
 	unsigned char *rbuf;
 	unsigned char *cdb = cmd->t_task_cdb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[SE_INQUIRY_BUF];
+=======
+	unsigned char *buf;
+>>>>>>> v3.18
 =======
 	unsigned char *buf;
 >>>>>>> v3.18
@@ -816,13 +924,19 @@ spc_emulate_inquiry(struct se_cmd *cmd)
 	int len = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buf, 0, SE_INQUIRY_BUF);
 =======
+=======
+>>>>>>> v3.18
 	buf = kzalloc(SE_INQUIRY_BUF, GFP_KERNEL);
 	if (!buf) {
 		pr_err("Unable to allocate response buffer for INQUIRY\n");
 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dev == tpg->tpg_virt_lun0.lun_se_dev)
@@ -859,14 +973,20 @@ out:
 	rbuf = transport_kmap_data_sg(cmd);
 	if (rbuf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(rbuf, buf, min_t(u32, sizeof(buf), cmd->data_length));
 		transport_kunmap_data_sg(cmd);
 	}
 =======
+=======
+>>>>>>> v3.18
 		memcpy(rbuf, buf, min_t(u32, SE_INQUIRY_BUF, cmd->data_length));
 		transport_kunmap_data_sg(cmd);
 	}
 	kfree(buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ret)
@@ -875,7 +995,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spc_modesense_rwrecovery(struct se_device *dev, u8 pc, u8 *p)
+=======
+static int spc_modesense_rwrecovery(struct se_cmd *cmd, u8 pc, u8 *p)
+>>>>>>> v3.18
 =======
 static int spc_modesense_rwrecovery(struct se_cmd *cmd, u8 pc, u8 *p)
 >>>>>>> v3.18
@@ -892,14 +1016,20 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spc_modesense_control(struct se_device *dev, u8 pc, u8 *p)
 {
 =======
+=======
+>>>>>>> v3.18
 static int spc_modesense_control(struct se_cmd *cmd, u8 pc, u8 *p)
 {
 	struct se_device *dev = cmd->se_dev;
 	struct se_session *sess = cmd->se_sess;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p[0] = 0x0a;
 	p[1] = 0x0a;
@@ -983,7 +1113,10 @@ static int spc_modesense_control(struct se_cmd *cmd, u8 pc, u8 *p)
 	 */
 	p[5] = (dev->dev_attrib.emulate_tas) ? 0x40 : 0x00;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * From spc4r30, section 7.5.7 Control mode page
 	 *
@@ -999,6 +1132,9 @@ static int spc_modesense_control(struct se_cmd *cmd, u8 pc, u8 *p)
 			p[5] |= 0x80;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p[8] = 0xff;
 	p[9] = 0xff;
@@ -1009,13 +1145,19 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spc_modesense_caching(struct se_device *dev, u8 pc, u8 *p)
 {
 =======
+=======
+>>>>>>> v3.18
 static int spc_modesense_caching(struct se_cmd *cmd, u8 pc, u8 *p)
 {
 	struct se_device *dev = cmd->se_dev;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p[0] = 0x08;
 	p[1] = 0x12;
@@ -1033,7 +1175,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spc_modesense_informational_exceptions(struct se_device *dev, u8 pc, unsigned char *p)
+=======
+static int spc_modesense_informational_exceptions(struct se_cmd *cmd, u8 pc, unsigned char *p)
+>>>>>>> v3.18
 =======
 static int spc_modesense_informational_exceptions(struct se_cmd *cmd, u8 pc, unsigned char *p)
 >>>>>>> v3.18
@@ -1053,7 +1199,11 @@ static struct {
 	uint8_t		page;
 	uint8_t		subpage;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		(*emulate)(struct se_device *, u8, unsigned char *);
+=======
+	int		(*emulate)(struct se_cmd *, u8, unsigned char *);
+>>>>>>> v3.18
 =======
 	int		(*emulate)(struct se_cmd *, u8, unsigned char *);
 >>>>>>> v3.18
@@ -1195,7 +1345,11 @@ static sense_reason_t spc_emulate_modesense(struct se_cmd *cmd)
 			 */
 			if ((modesense_handlers[i].subpage & ~subpage) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ret = modesense_handlers[i].emulate(dev, pc, &buf[length]);
+=======
+				ret = modesense_handlers[i].emulate(cmd, pc, &buf[length]);
+>>>>>>> v3.18
 =======
 				ret = modesense_handlers[i].emulate(cmd, pc, &buf[length]);
 >>>>>>> v3.18
@@ -1212,7 +1366,11 @@ static sense_reason_t spc_emulate_modesense(struct se_cmd *cmd)
 		if (modesense_handlers[i].page == page &&
 		    modesense_handlers[i].subpage == subpage) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			length += modesense_handlers[i].emulate(dev, pc, &buf[length]);
+=======
+			length += modesense_handlers[i].emulate(cmd, pc, &buf[length]);
+>>>>>>> v3.18
 =======
 			length += modesense_handlers[i].emulate(cmd, pc, &buf[length]);
 >>>>>>> v3.18
@@ -1248,7 +1406,10 @@ set_length:
 static sense_reason_t spc_emulate_modeselect(struct se_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct se_device *dev = cmd->se_dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *cdb = cmd->t_task_cdb;
@@ -1287,7 +1448,11 @@ static sense_reason_t spc_emulate_modeselect(struct se_cmd *cmd)
 		    modesense_handlers[i].subpage == subpage) {
 			memset(tbuf, 0, SE_MODE_PAGE_BUF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			length = modesense_handlers[i].emulate(dev, 0, tbuf);
+=======
+			length = modesense_handlers[i].emulate(cmd, 0, tbuf);
+>>>>>>> v3.18
 =======
 			length = modesense_handlers[i].emulate(cmd, 0, tbuf);
 >>>>>>> v3.18
@@ -1503,7 +1668,11 @@ spc_parse_cdb(struct se_cmd *cmd, unsigned int *size)
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Do implict HEAD_OF_QUEUE processing for INQUIRY.
+=======
+		 * Do implicit HEAD_OF_QUEUE processing for INQUIRY.
+>>>>>>> v3.18
 =======
 		 * Do implicit HEAD_OF_QUEUE processing for INQUIRY.
 >>>>>>> v3.18
@@ -1518,9 +1687,12 @@ spc_parse_cdb(struct se_cmd *cmd, unsigned int *size)
 		break;
 	case EXTENDED_COPY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case READ_ATTRIBUTE:
 	case RECEIVE_COPY_RESULTS:
 =======
+=======
+>>>>>>> v3.18
 		*size = get_unaligned_be32(&cdb[10]);
 		cmd->execute_cmd = target_do_xcopy;
 		break;
@@ -1529,6 +1701,9 @@ spc_parse_cdb(struct se_cmd *cmd, unsigned int *size)
 		cmd->execute_cmd = target_do_receive_copy_results;
 		break;
 	case READ_ATTRIBUTE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case WRITE_ATTRIBUTE:
 		*size = (cdb[10] << 24) | (cdb[11] << 16) |
@@ -1546,7 +1721,11 @@ spc_parse_cdb(struct se_cmd *cmd, unsigned int *size)
 		*size = (cdb[6] << 24) | (cdb[7] << 16) | (cdb[8] << 8) | cdb[9];
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Do implict HEAD_OF_QUEUE processing for REPORT_LUNS
+=======
+		 * Do implicit HEAD_OF_QUEUE processing for REPORT_LUNS
+>>>>>>> v3.18
 =======
 		 * Do implicit HEAD_OF_QUEUE processing for REPORT_LUNS
 >>>>>>> v3.18

@@ -24,7 +24,10 @@
 #include <linux/platform_device.h>
 #include <linux/mfd/twl6040.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/omap-abe-twl6040.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -52,8 +55,12 @@ static int omap_abe_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_card *card = codec->card;
+=======
+	struct snd_soc_card *card = rtd->card;
+>>>>>>> v3.18
 =======
 	struct snd_soc_card *card = rtd->card;
 >>>>>>> v3.18
@@ -174,6 +181,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void twl6040_disconnect_pin(struct snd_soc_dapm_context *dapm,
 					  int connected, char *pin)
 {
@@ -188,10 +196,15 @@ static int omap_abe_twl6040_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 	struct omap_abe_twl6040_data *pdata = dev_get_platdata(card->dev);
 =======
+=======
+>>>>>>> v3.18
 static int omap_abe_twl6040_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_card *card = rtd->card;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct abe_twl6040 *priv = snd_soc_card_get_drvdata(card);
 	int hs_trim;
@@ -218,6 +231,7 @@ static int omap_abe_twl6040_init(struct snd_soc_pcm_runtime *rtd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * NULL pdata means we booted with DT. In this case the routing is
 	 * provided and the card is fully routed, no need to mark pins.
@@ -238,6 +252,8 @@ static int omap_abe_twl6040_init(struct snd_soc_pcm_runtime *rtd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -249,8 +265,12 @@ static const struct snd_soc_dapm_route dmic_audio_map[] = {
 static int omap_abe_dmic_init(struct snd_soc_pcm_runtime *rtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
+=======
+	struct snd_soc_dapm_context *dapm = &rtd->card->dapm;
+>>>>>>> v3.18
 =======
 	struct snd_soc_dapm_context *dapm = &rtd->card->dapm;
 >>>>>>> v3.18
@@ -265,9 +285,13 @@ static struct snd_soc_dai_link abe_twl6040_dai_links[] = {
 		.name = "TWL6040",
 		.stream_name = "TWL6040",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.cpu_dai_name = "omap-mcpdm",
 		.codec_dai_name = "twl6040-legacy",
 		.platform_name = "omap-pcm-audio",
+=======
+		.codec_dai_name = "twl6040-legacy",
+>>>>>>> v3.18
 =======
 		.codec_dai_name = "twl6040-legacy",
 >>>>>>> v3.18
@@ -279,9 +303,13 @@ static struct snd_soc_dai_link abe_twl6040_dai_links[] = {
 		.name = "DMIC",
 		.stream_name = "DMIC Capture",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.cpu_dai_name = "omap-dmic",
 		.codec_dai_name = "dmic-hifi",
 		.platform_name = "omap-pcm-audio",
+=======
+		.codec_dai_name = "dmic-hifi",
+>>>>>>> v3.18
 =======
 		.codec_dai_name = "dmic-hifi",
 >>>>>>> v3.18
@@ -304,9 +332,15 @@ static struct snd_soc_card omap_abe_card = {
 static int omap_abe_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_abe_twl6040_data *pdata = dev_get_platdata(&pdev->dev);
 	struct device_node *node = pdev->dev.of_node;
 	struct snd_soc_card *card = &omap_abe_card;
+=======
+	struct device_node *node = pdev->dev.of_node;
+	struct snd_soc_card *card = &omap_abe_card;
+	struct device_node *dai_node;
+>>>>>>> v3.18
 =======
 	struct device_node *node = pdev->dev.of_node;
 	struct snd_soc_card *card = &omap_abe_card;
@@ -317,12 +351,18 @@ static int omap_abe_probe(struct platform_device *pdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!node) {
 		dev_err(&pdev->dev, "of node is missing.\n");
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	card->dev = &pdev->dev;
 
@@ -332,6 +372,7 @@ static int omap_abe_probe(struct platform_device *pdev)
 
 	priv->dmic_codec_dev = ERR_PTR(-EINVAL);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (node) {
 		struct device_node *dai_node;
@@ -406,6 +447,8 @@ static int omap_abe_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (snd_soc_of_parse_card_name(card, "ti,model")) {
 		dev_err(&pdev->dev, "Card name is not provided\n");
 		return -ENODEV;
@@ -450,6 +493,9 @@ static int omap_abe_probe(struct platform_device *pdev)
 	}
 
 	card->fully_routed = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!priv->mclk_freq) {

@@ -12,15 +12,21 @@ const char *const x86_power_flags[32] = {
 	"vid",  /* voltage id control */
 	"ttp",  /* thermal trip */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"tm",
 	"stc",
 	"100mhzsteps",
 	"hwpstate",
 =======
+=======
+>>>>>>> v3.18
 	"tm",	/* hardware thermal control */
 	"stc",	/* software thermal control */
 	"100mhzsteps", /* 100 MHz multiplier control */
 	"hwpstate", /* hardware P-state control */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"",	/* tsc invariant mapped to constant_tsc */
 	"cpb",  /* core performance boost */

@@ -58,7 +58,10 @@ struct g2d_ctx {
 	struct v4l2_fh fh;
 	struct g2d_dev		*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_m2m_ctx	*m2m_ctx;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct g2d_frame	in;

@@ -22,7 +22,10 @@ struct clk_lookup {
 	const char		*dev_id;
 	const char		*con_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			of_idx;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct clk		*clk;
@@ -48,11 +51,17 @@ int clk_register_clkdev(struct clk *, const char *, const char *, ...);
 int clk_register_clkdevs(struct clk *, struct clk_lookup *, size_t);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMMON_CLK
 int __clk_get(struct clk *clk);
 void __clk_put(struct clk *clk);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

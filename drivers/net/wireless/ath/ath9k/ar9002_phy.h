@@ -318,6 +318,7 @@
 #define AR_PHY_9285_ANT_DIV_MAIN_GAINTB     0x40000000
 #define AR_PHY_9285_ANT_DIV_MAIN_GAINTB_S   30
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_PHY_9285_ANT_DIV_LNA1            2
 #define AR_PHY_9285_ANT_DIV_LNA2            1
 #define AR_PHY_9285_ANT_DIV_LNA1_PLUS_LNA2  3
@@ -326,6 +327,8 @@
 #define AR_PHY_9285_ANT_DIV_GAINTB_1        1
 
 =======
+=======
+>>>>>>> v3.18
 #define AR_PHY_9285_ANT_DIV_GAINTB_0        0
 #define AR_PHY_9285_ANT_DIV_GAINTB_1        1
 
@@ -335,6 +338,9 @@
 #define ATH_BT_COEX_ANTDIV_CONTROL2_FIXED_A 0x09
 #define ATH_BT_COEX_ANT_DIV_SWITCH_COM      0x66666666
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AR_PHY_EXT_CCA0             0x99b8
 #define AR_PHY_EXT_CCA0_THRESH62    0x000000FF

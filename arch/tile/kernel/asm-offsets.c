@@ -15,6 +15,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kbuild.h>
 #include <linux/thread_info.h>
 #include <linux/sched.h>
@@ -22,6 +23,8 @@
 #include <linux/ptrace.h>
 #include <hv/hypervisor.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Check for compatible compiler early in the build. */
@@ -34,6 +37,7 @@
 # endif
 #else
 # ifdef __tilegx__
+<<<<<<< HEAD
 <<<<<<< HEAD
 #  error Can not build TILEPro/TILE64 configurations with tilegx compiler
 # endif
@@ -65,6 +69,8 @@ void foo(void)
 	DEFINE(THREAD_INFO_STEP_STATE_OFFSET, \
 	       offsetof(struct thread_info, step_state));
 =======
+=======
+>>>>>>> v3.18
 #  error Can not build TILEPro configurations with tilegx compiler
 # endif
 #endif
@@ -109,6 +115,9 @@ void foo(void)
 	DEFINE(THREAD_INFO_UNALIGN_JIT_TMP_OFFSET,
 	       offsetof(struct thread_info, unalign_jit_tmp));
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DEFINE(TASK_STRUCT_THREAD_KSP_OFFSET,
@@ -117,6 +126,7 @@ void foo(void)
 	       offsetof(struct task_struct, thread.pc));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEFINE(HV_TOPOLOGY_WIDTH_OFFSET, \
 	       offsetof(HV_Topology, width));
 	DEFINE(HV_TOPOLOGY_HEIGHT_OFFSET, \
@@ -124,12 +134,17 @@ void foo(void)
 
 	DEFINE(IRQ_CPUSTAT_SYSCALL_COUNT_OFFSET, \
 =======
+=======
+>>>>>>> v3.18
 	DEFINE(HV_TOPOLOGY_WIDTH_OFFSET,
 	       offsetof(HV_Topology, width));
 	DEFINE(HV_TOPOLOGY_HEIGHT_OFFSET,
 	       offsetof(HV_Topology, height));
 
 	DEFINE(IRQ_CPUSTAT_SYSCALL_COUNT_OFFSET,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       offsetof(irq_cpustat_t, irq_syscall_count));
 }

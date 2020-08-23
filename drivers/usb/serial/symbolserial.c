@@ -12,7 +12,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -79,9 +82,13 @@ static void symbol_int_callback(struct urb *urb)
 		tty_flip_buffer_push(&port->port);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&port->dev,
 			"Improper amount of data received from the device, "
 			"%d bytes", urb->actual_length);
+=======
+		dev_dbg(&port->dev, "%s - short packet\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_dbg(&port->dev, "%s - short packet\n", __func__);
 >>>>>>> v3.18
@@ -105,7 +112,11 @@ exit:
 static int symbol_open(struct tty_struct *tty, struct usb_serial_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct symbol_private *priv = usb_get_serial_port_data(port);
+=======
+	struct symbol_private *priv = usb_get_serial_data(port->serial);
+>>>>>>> v3.18
 =======
 	struct symbol_private *priv = usb_get_serial_data(port->serial);
 >>>>>>> v3.18
@@ -135,7 +146,11 @@ static void symbol_throttle(struct tty_struct *tty)
 {
 	struct usb_serial_port *port = tty->driver_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct symbol_private *priv = usb_get_serial_port_data(port);
+=======
+	struct symbol_private *priv = usb_get_serial_data(port->serial);
+>>>>>>> v3.18
 =======
 	struct symbol_private *priv = usb_get_serial_data(port->serial);
 >>>>>>> v3.18
@@ -149,7 +164,11 @@ static void symbol_unthrottle(struct tty_struct *tty)
 {
 	struct usb_serial_port *port = tty->driver_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct symbol_private *priv = usb_get_serial_port_data(port);
+=======
+	struct symbol_private *priv = usb_get_serial_data(port->serial);
+>>>>>>> v3.18
 =======
 	struct symbol_private *priv = usb_get_serial_data(port->serial);
 >>>>>>> v3.18

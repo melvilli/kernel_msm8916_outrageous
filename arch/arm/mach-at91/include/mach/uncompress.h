@@ -95,7 +95,10 @@ static const u32 uarts_sam9x5[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const u32 uarts_sama5d3[] = {
 	AT91_BASE_DBGU1,
 	SAMA5D3_BASE_USART0,
@@ -111,6 +114,9 @@ static const u32 uarts_sama5d4[] = {
 	0,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline const u32* decomp_soc_detect(void __iomem *dbgu_base)
 {
@@ -140,9 +146,12 @@ static inline const u32* decomp_soc_detect(void __iomem *dbgu_base)
 		return uarts_sam9rl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ARCH_ID_AT91SAM9X5:
 		return uarts_sam9x5;
 =======
+=======
+>>>>>>> v3.18
 	case ARCH_ID_AT91SAM9N12:
 	case ARCH_ID_AT91SAM9X5:
 		return uarts_sam9x5;
@@ -155,6 +164,9 @@ static inline const u32* decomp_soc_detect(void __iomem *dbgu_base)
 			return uarts_sama5d4;
 
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -177,14 +189,20 @@ static inline void arch_decomp_setup(void)
 
 	usarts = decomp_soc_detect((void __iomem *)AT91_BASE_DBGU0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!usarts)
 		usarts = decomp_soc_detect((void __iomem *)AT91_BASE_DBGU1);
 =======
+=======
+>>>>>>> v3.18
 	if (!usarts)
 		usarts = decomp_soc_detect((void __iomem *)AT91_BASE_DBGU1);
 	if (!usarts)
 		usarts = decomp_soc_detect((void __iomem *)AT91_BASE_DBGU2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!usarts) {
 		at91_uart = NULL;

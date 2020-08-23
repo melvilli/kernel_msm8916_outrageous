@@ -15,6 +15,10 @@ struct sunrpc_net {
 
 	struct super_block *pipefs_sb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rpc_pipe *gssd_dummy;
+>>>>>>> v3.18
 =======
 	struct rpc_pipe *gssd_dummy;
 >>>>>>> v3.18
@@ -31,7 +35,10 @@ struct sunrpc_net {
 
 	struct mutex gssp_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t gssp_wq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rpc_clnt *gssp_clnt;
@@ -40,8 +47,11 @@ struct sunrpc_net {
 	atomic_t pipe_users;
 	struct proc_dir_entry *use_gssp_proc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	unsigned int gssd_running;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

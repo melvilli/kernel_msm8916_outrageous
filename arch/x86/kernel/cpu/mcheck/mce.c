@@ -61,8 +61,11 @@ static DEFINE_MUTEX(mce_chrdev_read_mutex);
 #define SPINUNIT 100	/* 100ns */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 atomic_t mce_entry;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 DEFINE_PER_CPU(unsigned, mce_exception_count);
@@ -93,8 +96,11 @@ static DEFINE_PER_CPU(struct mce, mces_seen);
 static int			cpu_missing;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MCA banks polled by the period polling timer for corrected events */
 =======
+=======
+>>>>>>> v3.18
 /* CMCI storm detection filter */
 static DEFINE_PER_CPU(unsigned long, mce_polled_error);
 
@@ -102,13 +108,19 @@ static DEFINE_PER_CPU(unsigned long, mce_polled_error);
  * MCA banks polled by the period polling timer for corrected events.
  * With Intel CMCI, this only has MCA banks which do not support CMCI (if any).
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DEFINE_PER_CPU(mce_banks_t, mce_poll_banks) = {
 	[0 ... BITS_TO_LONGS(MAX_NR_BANKS)-1] = ~0UL
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * MCA banks controlled through firmware first for corrected errors.
  * This is a global list of banks for which we won't enable CMCI and we
@@ -118,6 +130,9 @@ DEFINE_PER_CPU(mce_banks_t, mce_poll_banks) = {
  */
 mce_banks_t mce_banks_ce_disabled;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_PER_CPU(struct work_struct, mce_work);
 
@@ -413,7 +428,11 @@ static u64 mce_rdmsrl(u32 msr)
 		if (offset < 0)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return *(u64 *)((char *)&__get_cpu_var(injectm) + offset);
+=======
+		return *(u64 *)((char *)this_cpu_ptr(&injectm) + offset);
+>>>>>>> v3.18
 =======
 		return *(u64 *)((char *)this_cpu_ptr(&injectm) + offset);
 >>>>>>> v3.18
@@ -439,7 +458,11 @@ static void mce_wrmsrl(u32 msr, u64 v)
 
 		if (offset >= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(u64 *)((char *)&__get_cpu_var(injectm) + offset) = v;
+=======
+			*(u64 *)((char *)this_cpu_ptr(&injectm) + offset) = v;
+>>>>>>> v3.18
 =======
 			*(u64 *)((char *)this_cpu_ptr(&injectm) + offset) = v;
 >>>>>>> v3.18
@@ -499,7 +522,11 @@ static DEFINE_PER_CPU(struct mce_ring, mce_ring);
 static int mce_ring_empty(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mce_ring *r = &__get_cpu_var(mce_ring);
+=======
+	struct mce_ring *r = this_cpu_ptr(&mce_ring);
+>>>>>>> v3.18
 =======
 	struct mce_ring *r = this_cpu_ptr(&mce_ring);
 >>>>>>> v3.18
@@ -515,7 +542,11 @@ static int mce_ring_get(unsigned long *pfn)
 	*pfn = 0;
 	get_cpu();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = &__get_cpu_var(mce_ring);
+=======
+	r = this_cpu_ptr(&mce_ring);
+>>>>>>> v3.18
 =======
 	r = this_cpu_ptr(&mce_ring);
 >>>>>>> v3.18
@@ -533,7 +564,11 @@ out:
 static int mce_ring_add(unsigned long pfn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mce_ring *r = &__get_cpu_var(mce_ring);
+=======
+	struct mce_ring *r = this_cpu_ptr(&mce_ring);
+>>>>>>> v3.18
 =======
 	struct mce_ring *r = this_cpu_ptr(&mce_ring);
 >>>>>>> v3.18
@@ -559,7 +594,11 @@ static void mce_schedule_work(void)
 {
 	if (!mce_ring_empty())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_work(&__get_cpu_var(mce_work));
+=======
+		schedule_work(this_cpu_ptr(&mce_work));
+>>>>>>> v3.18
 =======
 		schedule_work(this_cpu_ptr(&mce_work));
 >>>>>>> v3.18
@@ -588,7 +627,11 @@ static void mce_report_event(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_work_queue(&__get_cpu_var(mce_irq_work));
+=======
+	irq_work_queue(this_cpu_ptr(&mce_irq_work));
+>>>>>>> v3.18
 =======
 	irq_work_queue(this_cpu_ptr(&mce_irq_work));
 >>>>>>> v3.18
@@ -656,6 +699,10 @@ void machine_check_poll(enum mcp_flags flags, mce_banks_t *b)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		this_cpu_write(mce_polled_error, 1);
+>>>>>>> v3.18
 =======
 		this_cpu_write(mce_polled_error, 1);
 >>>>>>> v3.18
@@ -746,8 +793,12 @@ static int mce_timed_out(u64 *t)
 		goto out;
 	if ((s64)*t < SPINUNIT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* CHECKME: Make panic default for 1 too? */
 		if (mca_cfg.tolerant < 1)
+=======
+		if (mca_cfg.tolerant <= 1)
+>>>>>>> v3.18
 =======
 		if (mca_cfg.tolerant <= 1)
 >>>>>>> v3.18
@@ -1087,8 +1138,11 @@ void do_machine_check(struct pt_regs *regs, long error_code)
 	char *msg = "Unknown";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&mce_entry);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	this_cpu_inc(mce_exception_count);
@@ -1099,7 +1153,11 @@ void do_machine_check(struct pt_regs *regs, long error_code)
 	mce_gather_info(&m, regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	final = &__get_cpu_var(mces_seen);
+=======
+	final = this_cpu_ptr(&mces_seen);
+>>>>>>> v3.18
 =======
 	final = this_cpu_ptr(&mces_seen);
 >>>>>>> v3.18
@@ -1225,7 +1283,10 @@ void do_machine_check(struct pt_regs *regs, long error_code)
 	mce_wrmsrl(MSR_IA32_MCG_STATUS, 0);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&mce_entry);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sync_core();
@@ -1338,6 +1399,7 @@ static unsigned long (*mce_adjust_timer)(unsigned long interval) =
 	mce_adjust_timer_default;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mce_timer_fn(unsigned long data)
 {
 	struct timer_list *t = &__get_cpu_var(mce_timer);
@@ -1349,6 +1411,8 @@ static void mce_timer_fn(unsigned long data)
 		machine_check_poll(MCP_TIMESTAMP,
 				&__get_cpu_var(mce_poll_banks));
 =======
+=======
+>>>>>>> v3.18
 static int cmc_error_seen(void)
 {
 	unsigned long *v = this_cpu_ptr(&mce_polled_error);
@@ -1367,6 +1431,9 @@ static void mce_timer_fn(unsigned long data)
 	if (mce_available(this_cpu_ptr(&cpu_info))) {
 		machine_check_poll(MCP_TIMESTAMP,
 				this_cpu_ptr(&mce_poll_banks));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mce_intel_cmci_poll();
 	}
@@ -1377,7 +1444,13 @@ static void mce_timer_fn(unsigned long data)
 	 */
 	iv = __this_cpu_read(mce_next_interval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mce_notify_irq()) {
+=======
+	notify = mce_notify_irq();
+	notify |= cmc_error_seen();
+	if (notify) {
+>>>>>>> v3.18
 =======
 	notify = mce_notify_irq();
 	notify |= cmc_error_seen();
@@ -1402,7 +1475,11 @@ static void mce_timer_fn(unsigned long data)
 void mce_timer_kick(unsigned long interval)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list *t = &__get_cpu_var(mce_timer);
+=======
+	struct timer_list *t = this_cpu_ptr(&mce_timer);
+>>>>>>> v3.18
 =======
 	struct timer_list *t = this_cpu_ptr(&mce_timer);
 >>>>>>> v3.18
@@ -1463,7 +1540,11 @@ int mce_notify_irq(void)
 EXPORT_SYMBOL_GPL(mce_notify_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit __mcheck_cpu_mce_banks_init(void)
+=======
+static int __mcheck_cpu_mce_banks_init(void)
+>>>>>>> v3.18
 =======
 static int __mcheck_cpu_mce_banks_init(void)
 >>>>>>> v3.18
@@ -1488,7 +1569,11 @@ static int __mcheck_cpu_mce_banks_init(void)
  * Initialize Machine Checks for a CPU.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit __mcheck_cpu_cap_init(void)
+=======
+static int __mcheck_cpu_cap_init(void)
+>>>>>>> v3.18
 =======
 static int __mcheck_cpu_cap_init(void)
 >>>>>>> v3.18
@@ -1591,7 +1676,11 @@ static void quirk_sandybridge_ifu(int bank, struct mce *m, struct pt_regs *regs)
 
 /* Add per CPU specific workarounds here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit __mcheck_cpu_apply_quirks(struct cpuinfo_x86 *c)
+=======
+static int __mcheck_cpu_apply_quirks(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static int __mcheck_cpu_apply_quirks(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1705,7 +1794,11 @@ static int __mcheck_cpu_apply_quirks(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit __mcheck_cpu_ancient_init(struct cpuinfo_x86 *c)
+=======
+static int __mcheck_cpu_ancient_init(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static int __mcheck_cpu_ancient_init(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1745,9 +1838,13 @@ static void __mcheck_cpu_init_vendor(struct cpuinfo_x86 *c)
 static void mce_start_timer(unsigned int cpu, struct timer_list *t)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long iv = mce_adjust_timer(check_interval * HZ);
 
 	__this_cpu_write(mce_next_interval, iv);
+=======
+	unsigned long iv = check_interval * HZ;
+>>>>>>> v3.18
 =======
 	unsigned long iv = check_interval * HZ;
 >>>>>>> v3.18
@@ -1756,20 +1853,30 @@ static void mce_start_timer(unsigned int cpu, struct timer_list *t)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t->expires = round_jiffies(jiffies + iv);
 	add_timer_on(t, smp_processor_id());
 =======
+=======
+>>>>>>> v3.18
 	per_cpu(mce_next_interval, cpu) = iv;
 
 	t->expires = round_jiffies(jiffies + iv);
 	add_timer_on(t, cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __mcheck_cpu_init_timer(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list *t = &__get_cpu_var(mce_timer);
+=======
+	struct timer_list *t = this_cpu_ptr(&mce_timer);
+>>>>>>> v3.18
 =======
 	struct timer_list *t = this_cpu_ptr(&mce_timer);
 >>>>>>> v3.18
@@ -1795,7 +1902,11 @@ void (*machine_check_vector)(struct pt_regs *, long error_code) =
  * Must be called with preempt off:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit mcheck_cpu_init(struct cpuinfo_x86 *c)
+=======
+void mcheck_cpu_init(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void mcheck_cpu_init(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1820,8 +1931,13 @@ void mcheck_cpu_init(struct cpuinfo_x86 *c)
 	__mcheck_cpu_init_vendor(c);
 	__mcheck_cpu_init_timer();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&__get_cpu_var(mce_work), mce_process_work);
 	init_irq_work(&__get_cpu_var(mce_irq_work), &mce_irq_work_cb);
+=======
+	INIT_WORK(this_cpu_ptr(&mce_work), mce_process_work);
+	init_irq_work(this_cpu_ptr(&mce_irq_work), &mce_irq_work_cb);
+>>>>>>> v3.18
 =======
 	INIT_WORK(this_cpu_ptr(&mce_work), mce_process_work);
 	init_irq_work(this_cpu_ptr(&mce_irq_work), &mce_irq_work_cb);
@@ -2075,7 +2191,10 @@ static struct miscdevice mce_chrdev_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __mce_disable_bank(void *arg)
 {
 	int bank = *((int *)arg);
@@ -2095,6 +2214,9 @@ void mce_disable_bank(int bank)
 	on_each_cpu(__mce_disable_bank, &bank, 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * mce=off Disables machine check
@@ -2191,7 +2313,11 @@ static void mce_syscore_resume(void)
 {
 	__mcheck_cpu_init_generic();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__mcheck_cpu_init_vendor(__this_cpu_ptr(&cpu_info));
+=======
+	__mcheck_cpu_init_vendor(raw_cpu_ptr(&cpu_info));
+>>>>>>> v3.18
 =======
 	__mcheck_cpu_init_vendor(raw_cpu_ptr(&cpu_info));
 >>>>>>> v3.18
@@ -2210,7 +2336,11 @@ static struct syscore_ops mce_syscore_ops = {
 static void mce_cpu_restart(void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(__this_cpu_ptr(&cpu_info)))
+=======
+	if (!mce_available(raw_cpu_ptr(&cpu_info)))
+>>>>>>> v3.18
 =======
 	if (!mce_available(raw_cpu_ptr(&cpu_info)))
 >>>>>>> v3.18
@@ -2230,7 +2360,11 @@ static void mce_restart(void)
 static void mce_disable_cmci(void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(__this_cpu_ptr(&cpu_info)))
+=======
+	if (!mce_available(raw_cpu_ptr(&cpu_info)))
+>>>>>>> v3.18
 =======
 	if (!mce_available(raw_cpu_ptr(&cpu_info)))
 >>>>>>> v3.18
@@ -2241,7 +2375,11 @@ static void mce_disable_cmci(void *data)
 static void mce_enable_ce(void *all)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(__this_cpu_ptr(&cpu_info)))
+=======
+	if (!mce_available(raw_cpu_ptr(&cpu_info)))
+>>>>>>> v3.18
 =======
 	if (!mce_available(raw_cpu_ptr(&cpu_info)))
 >>>>>>> v3.18
@@ -2260,7 +2398,10 @@ static struct bus_type mce_subsys = {
 DEFINE_PER_CPU(struct device *, mce_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __cpuinitdata
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void (*threshold_cpu_callback)(unsigned long action, unsigned int cpu);
@@ -2282,7 +2423,11 @@ static ssize_t set_bank(struct device *s, struct device_attribute *attr,
 	u64 new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, &new) < 0)
+=======
+	if (kstrtou64(buf, 0, &new) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtou64(buf, 0, &new) < 0)
 >>>>>>> v3.18
@@ -2324,7 +2469,11 @@ static ssize_t set_ignore_ce(struct device *s,
 	u64 new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, &new) < 0)
+=======
+	if (kstrtou64(buf, 0, &new) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtou64(buf, 0, &new) < 0)
 >>>>>>> v3.18
@@ -2352,7 +2501,11 @@ static ssize_t set_cmci_disabled(struct device *s,
 	u64 new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, &new) < 0)
+=======
+	if (kstrtou64(buf, 0, &new) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtou64(buf, 0, &new) < 0)
 >>>>>>> v3.18
@@ -2421,7 +2574,11 @@ static void mce_device_release(struct device *dev)
 
 /* Per cpu device init. All of the cpus still share the same ctrl bank: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int mce_device_create(unsigned int cpu)
+=======
+static int mce_device_create(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int mce_device_create(unsigned int cpu)
 >>>>>>> v3.18
@@ -2442,13 +2599,19 @@ static int mce_device_create(unsigned int cpu)
 
 	err = device_register(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
 		return err;
 =======
+=======
+>>>>>>> v3.18
 	if (err) {
 		put_device(dev);
 		return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; mce_device_attrs[i]; i++) {
@@ -2478,7 +2641,11 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void mce_device_remove(unsigned int cpu)
+=======
+static void mce_device_remove(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void mce_device_remove(unsigned int cpu)
 >>>>>>> v3.18
@@ -2502,7 +2669,11 @@ static void mce_device_remove(unsigned int cpu)
 
 /* Make sure there are no machine checks on offlined CPUs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit mce_disable_cpu(void *h)
+=======
+static void mce_disable_cpu(void *h)
+>>>>>>> v3.18
 =======
 static void mce_disable_cpu(void *h)
 >>>>>>> v3.18
@@ -2511,7 +2682,11 @@ static void mce_disable_cpu(void *h)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(__this_cpu_ptr(&cpu_info)))
+=======
+	if (!mce_available(raw_cpu_ptr(&cpu_info)))
+>>>>>>> v3.18
 =======
 	if (!mce_available(raw_cpu_ptr(&cpu_info)))
 >>>>>>> v3.18
@@ -2528,7 +2703,11 @@ static void mce_disable_cpu(void *h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit mce_reenable_cpu(void *h)
+=======
+static void mce_reenable_cpu(void *h)
+>>>>>>> v3.18
 =======
 static void mce_reenable_cpu(void *h)
 >>>>>>> v3.18
@@ -2537,7 +2716,11 @@ static void mce_reenable_cpu(void *h)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(__this_cpu_ptr(&cpu_info)))
+=======
+	if (!mce_available(raw_cpu_ptr(&cpu_info)))
+>>>>>>> v3.18
 =======
 	if (!mce_available(raw_cpu_ptr(&cpu_info)))
 >>>>>>> v3.18
@@ -2555,7 +2738,11 @@ static void mce_reenable_cpu(void *h)
 
 /* Get notified when a cpu comes on/off. Be hotplug friendly. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -2576,11 +2763,17 @@ mce_cpu_callback(struct notifier_block *nfb, unsigned long action, void *hcpu)
 		mce_device_remove(cpu);
 		mce_intel_hcpu_update(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* intentionally ignoring frozen here */
 		if (!(action & CPU_TASKS_FROZEN))
 			cmci_rediscover();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CPU_DOWN_PREPARE:
@@ -2594,6 +2787,7 @@ mce_cpu_callback(struct notifier_block *nfb, unsigned long action, void *hcpu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (action == CPU_POST_DEAD) {
 		/* intentionally ignoring frozen here */
 		cmci_rediscover();
@@ -2604,10 +2798,15 @@ mce_cpu_callback(struct notifier_block *nfb, unsigned long action, void *hcpu)
 
 static struct notifier_block mce_cpu_notifier __cpuinitdata = {
 =======
+=======
+>>>>>>> v3.18
 	return NOTIFY_OK;
 }
 
 static struct notifier_block mce_cpu_notifier = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.notifier_call = mce_cpu_callback,
 };
@@ -2636,11 +2835,14 @@ static __init int mcheck_init_device(void)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(&boot_cpu_data))
 		return -EIO;
 
 	zalloc_cpumask_var(&mce_device_initialized, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (!mce_available(&boot_cpu_data)) {
 		err = -EIO;
 		goto err_out;
@@ -2650,12 +2852,16 @@ static __init int mcheck_init_device(void)
 		err = -ENOMEM;
 		goto err_out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mce_init_banks();
 
 	err = subsys_system_register(&mce_subsys, NULL);
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return err;
 
@@ -2671,6 +2877,8 @@ static __init int mcheck_init_device(void)
 	/* register character device /dev/mcelog */
 	misc_register(&mce_chrdev_device);
 =======
+=======
+>>>>>>> v3.18
 		goto err_out_mem;
 
 	cpu_notifier_register_begin();
@@ -2718,6 +2926,9 @@ err_out_mem:
 
 err_out:
 	pr_err("Unable to init device /dev/mcelog (rc: %d)\n", err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;

@@ -11,6 +11,12 @@
 #include <linux/percpu.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking_state.h>
+#include <linux/cpumask.h>
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking_state.h>
 #include <linux/cpumask.h>
@@ -53,6 +59,10 @@ enum tick_nohz_mode {
  * @idle_sleeptime:	Sum of the time slept in idle with sched tick stopped
  * @iowait_sleeptime:	Sum of the time slept in idle with sched tick stopped, with IO outstanding
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @sleep_length:	Duration of the current idle sleep
+>>>>>>> v3.18
 =======
  * @sleep_length:	Duration of the current idle sleep
 >>>>>>> v3.18
@@ -75,6 +85,10 @@ struct tick_sched {
 	ktime_t				idle_sleeptime;
 	ktime_t				iowait_sleeptime;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ktime_t				sleep_length;
+>>>>>>> v3.18
 =======
 	ktime_t				sleep_length;
 >>>>>>> v3.18
@@ -87,7 +101,10 @@ struct tick_sched {
 extern void __init tick_init(void);
 extern int tick_is_oneshot_available(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u64 jiffy_to_sched_clock(u64 *now, u64 *jiffy_sched_clock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct tick_device *tick_get_device(int cpu);
@@ -112,6 +129,7 @@ extern struct cpumask *tick_get_broadcast_mask(void);
 extern struct cpumask *tick_get_broadcast_oneshot_mask(void);
 #  endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline struct tick_device *tick_get_broadcast_device(void)
 {
@@ -125,6 +143,9 @@ static inline struct cpumask *tick_get_broadcast_mask(void)
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 # endif /* BROADCAST */
 
 # ifdef CONFIG_TICK_ONESHOT
@@ -132,20 +153,27 @@ extern void tick_clock_notify(void);
 extern int tick_check_oneshot_change(int allow_nohz);
 extern struct tick_sched *tick_get_tick_sched(int cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tick_check_idle(void);
 extern int tick_oneshot_mode_active(void);
 #  ifndef arch_needs_cpu
 #   define arch_needs_cpu(cpu) (0)
 =======
+=======
+>>>>>>> v3.18
 extern void tick_irq_enter(void);
 extern int tick_oneshot_mode_active(void);
 #  ifndef arch_needs_cpu
 #   define arch_needs_cpu() (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #  endif
 # else
 static inline void tick_clock_notify(void) { }
 static inline int tick_check_oneshot_change(int allow_nohz) { return 0; }
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void tick_check_idle(void) { }
 static inline int tick_oneshot_mode_active(void) { return 0; }
@@ -153,6 +181,10 @@ static inline struct cpumask *tick_get_broadcast_oneshot_mask(void)
 {
 	return NULL;
 }
+=======
+static inline void tick_irq_enter(void) { }
+static inline int tick_oneshot_mode_active(void) { return 0; }
+>>>>>>> v3.18
 =======
 static inline void tick_irq_enter(void) { }
 static inline int tick_oneshot_mode_active(void) { return 0; }
@@ -165,7 +197,11 @@ static inline void tick_cancel_sched_timer(int cpu) { }
 static inline void tick_clock_notify(void) { }
 static inline int tick_check_oneshot_change(int allow_nohz) { return 0; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void tick_check_idle(void) { }
+=======
+static inline void tick_irq_enter(void) { }
+>>>>>>> v3.18
 =======
 static inline void tick_irq_enter(void) { }
 >>>>>>> v3.18
@@ -208,6 +244,7 @@ static inline u64 get_cpu_iowait_time_us(int cpu, u64 *unused) { return -1; }
 
 #ifdef CONFIG_NO_HZ_FULL
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tick_nohz_init(void);
 extern int tick_nohz_full_cpu(int cpu);
 extern void tick_nohz_full_check(void);
@@ -224,6 +261,8 @@ static inline void tick_nohz_task_switch(struct task_struct *tsk) { }
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 extern bool tick_nohz_full_running;
 extern cpumask_var_t tick_nohz_full_mask;
 extern cpumask_var_t housekeeping_mask;
@@ -289,6 +328,9 @@ static inline void tick_nohz_task_switch(struct task_struct *tsk)
 		__tick_nohz_task_switch(tsk);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

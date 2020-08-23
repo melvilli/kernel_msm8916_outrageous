@@ -33,9 +33,15 @@
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -232,9 +238,15 @@ ENDPROC(coprocessor_restore)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -258,7 +270,10 @@ ENTRY(fast_coprocessor)
 	/* Save remaining registers a1-a3 and SAR */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xsr	a3, excsave1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s32i	a3, a2, PT_AREG3

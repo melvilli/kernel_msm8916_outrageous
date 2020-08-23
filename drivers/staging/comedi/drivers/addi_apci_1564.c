@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
 =======
+=======
+>>>>>>> v3.18
 /*
  * addi_apci_1564.c
  * Copyright (C) 2004,2005  ADDI-DATA GmbH for the source code of this module.
@@ -28,11 +31,15 @@
 #include <linux/pci.h>
 #include <linux/interrupt.h>
 #include <linux/sched.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "../comedidev.h"
 #include "comedi_fc.h"
 #include "amcc_s5933.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include "addi-data/addi_common.h"
@@ -71,6 +78,8 @@ static int apci1564_auto_attach(struct comedi_device *dev,
 
 	return addi_auto_attach(dev, context);
 =======
+=======
+>>>>>>> v3.18
 #include "addi_watchdog.h"
 
 struct apci1564_private {
@@ -508,6 +517,9 @@ static void apci1564_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci1564_reset(dev);
 	comedi_pci_detach(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -516,7 +528,11 @@ static struct comedi_driver apci1564_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= apci1564_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= i_ADDI_Detach,
+=======
+	.detach		= apci1564_detach,
+>>>>>>> v3.18
 =======
 	.detach		= apci1564_detach,
 >>>>>>> v3.18
@@ -529,7 +545,11 @@ static int apci1564_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci1564_pci_table) = {
+=======
+static const struct pci_device_id apci1564_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci1564_pci_table[] = {
 >>>>>>> v3.18
@@ -548,7 +568,11 @@ module_comedi_pci_driver(apci1564_driver, apci1564_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("ADDI-DATA APCI-1564, 32 channel DI / 32 channel DO boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("ADDI-DATA APCI-1564, 32 channel DI / 32 channel DO boards");
 >>>>>>> v3.18

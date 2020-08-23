@@ -14,8 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ struct ems_pci_card {
 #define EMS_PCI_BASE_SIZE  4096 /* size of controller area */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ems_pci_tbl) = {
+=======
+static const struct pci_device_id ems_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ems_pci_tbl[] = {
 >>>>>>> v3.18
@@ -216,7 +224,10 @@ static void ems_pci_del_card(struct pci_dev *pdev)
 
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -337,6 +348,10 @@ static int ems_pci_add_card(struct pci_dev *pdev,
 
 			SET_NETDEV_DEV(dev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dev->dev_id = i;
+>>>>>>> v3.18
 =======
 			dev->dev_id = i;
 >>>>>>> v3.18

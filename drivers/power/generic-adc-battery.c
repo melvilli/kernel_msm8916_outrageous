@@ -300,13 +300,19 @@ static int gab_probe(struct platform_device *pdev)
 
 	/* none of the channels are supported so let's bail out */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (index == ARRAY_SIZE(gab_chan_name))
 		goto second_mem_fail;
 =======
+=======
+>>>>>>> v3.18
 	if (index == 0) {
 		ret = -ENODEV;
 		goto second_mem_fail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*

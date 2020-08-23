@@ -73,7 +73,10 @@
 #include <linux/device.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -220,7 +223,11 @@ static s32 dpot_read_i2c(struct dpot_data *dpot, u8 reg)
 			value = swab16(value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (dpot->uid == DPOT_UID(AD5274_ID))
+=======
+			if (dpot->uid == DPOT_UID(AD5271_ID))
+>>>>>>> v3.18
 =======
 			if (dpot->uid == DPOT_UID(AD5271_ID))
 >>>>>>> v3.18
@@ -478,7 +485,11 @@ static ssize_t sysfs_set_reg(struct device *dev,
 		return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &value);
+=======
+	err = kstrtoul(buf, 10, &value);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(buf, 10, &value);
 >>>>>>> v3.18
@@ -653,7 +664,11 @@ static const struct attribute_group ad525x_group_commands = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ad_dpot_add_files(struct device *dev,
+=======
+static int ad_dpot_add_files(struct device *dev,
+>>>>>>> v3.18
 =======
 static int ad_dpot_add_files(struct device *dev,
 >>>>>>> v3.18
@@ -682,7 +697,11 @@ static int ad_dpot_add_files(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void ad_dpot_remove_files(struct device *dev,
+=======
+static inline void ad_dpot_remove_files(struct device *dev,
+>>>>>>> v3.18
 =======
 static inline void ad_dpot_remove_files(struct device *dev,
 >>>>>>> v3.18

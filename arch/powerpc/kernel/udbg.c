@@ -51,7 +51,11 @@ void __init udbg_early_init(void)
 #elif defined(CONFIG_PPC_EARLY_DEBUG_PAS_REALMODE)
 	udbg_init_pas_realmode();
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_BOOTX_TEXT)
+=======
+#elif defined(CONFIG_PPC_EARLY_DEBUG_BOOTX)
+>>>>>>> v3.18
 =======
 #elif defined(CONFIG_PPC_EARLY_DEBUG_BOOTX)
 >>>>>>> v3.18
@@ -67,8 +71,11 @@ void __init udbg_early_init(void)
 #elif defined(CONFIG_PPC_EARLY_DEBUG_USBGECKO)
 	udbg_init_usbgecko();
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_PPC_EARLY_DEBUG_WSP)
 	udbg_init_wsp();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #elif defined(CONFIG_PPC_EARLY_DEBUG_MEMCONS)

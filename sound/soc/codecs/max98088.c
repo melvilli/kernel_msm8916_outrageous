@@ -16,6 +16,10 @@
 #include <linux/pm.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -42,6 +46,7 @@ struct max98088_cdata {
 };
 
 struct max98088_priv {
+<<<<<<< HEAD
 <<<<<<< HEAD
        enum max98088_type devtype;
        struct max98088_pdata *pdata;
@@ -332,6 +337,8 @@ static const u8 max98088_reg[M98088_REG_CNT] = {
        0x00, /* FE */
        0x00, /* FF */
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap;
 	enum max98088_type devtype;
 	struct max98088_pdata *pdata;
@@ -549,6 +556,9 @@ static const struct reg_default max98088_reg[] = {
 	{ 0xc7, 0x00 }, /* C7 DAI2 biquad */
 	{ 0xc8, 0x00 }, /* C8 DAI2 biquad */
 	{ 0xc9, 0x00 }, /* C9 DAI2 biquad */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -831,21 +841,30 @@ static struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max98088_volatile_register(struct snd_soc_codec *codec, unsigned int reg)
 =======
+=======
+>>>>>>> v3.18
 static bool max98088_readable_register(struct device *dev, unsigned int reg)
 {
        return max98088_access[reg].readable;
 }
 
 static bool max98088_volatile_register(struct device *dev, unsigned int reg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
        return max98088_access[reg].vol;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct regmap_config max98088_regmap = {
 	.reg_bits = 8,
 	.val_bits = 8,
@@ -858,6 +877,9 @@ static const struct regmap_config max98088_regmap = {
 	.num_reg_defaults = ARRAY_SIZE(max98088_reg),
 	.cache_type = REGCACHE_RBTREE,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -870,8 +892,14 @@ static void m98088_eq_band(struct snd_soc_codec *codec, unsigned int dai,
        unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        BUG_ON(band > 4);
        BUG_ON(dai > 1);
+=======
+	if (WARN_ON(band > 4) ||
+	    WARN_ON(dai > 1))
+		return;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(band > 4) ||
 	    WARN_ON(dai > 1))
@@ -904,6 +932,7 @@ static const unsigned int max98088_exmode_values[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum max98088_exmode_enum =
        SOC_VALUE_ENUM_SINGLE(M98088_REG_41_SPKDHP, 0, 127,
                              ARRAY_SIZE(max98088_exmode_texts),
@@ -927,6 +956,8 @@ static const char *max98088_extmic_text[] = { "None", "MIC1", "MIC2" };
 static const struct soc_enum max98088_extmic_enum =
        SOC_ENUM_SINGLE(M98088_REG_48_CFG_MIC, 0, 3, max98088_extmic_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_VALUE_ENUM_SINGLE_DECL(max98088_exmode_enum,
 				  M98088_REG_41_SPKDHP, 0, 127,
 				  max98088_exmode_texts,
@@ -948,6 +979,9 @@ static const char *max98088_extmic_text[] = { "None", "MIC1", "MIC2" };
 static SOC_ENUM_SINGLE_DECL(max98088_extmic_enum,
 			    M98088_REG_48_CFG_MIC, 0,
 			    max98088_extmic_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98088_extmic_mux =
@@ -957,6 +991,7 @@ static const char *max98088_dai1_fltr[] = {
        "Off", "fc=258/fs=16k", "fc=500/fs=16k",
        "fc=258/fs=8k", "fc=500/fs=8k", "fc=200"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum max98088_dai1_dac_filter_enum[] = {
        SOC_ENUM_SINGLE(M98088_REG_18_DAI1_FILTERS, 0, 6, max98088_dai1_fltr),
 };
@@ -964,19 +999,28 @@ static const struct soc_enum max98088_dai1_adc_filter_enum[] = {
        SOC_ENUM_SINGLE(M98088_REG_18_DAI1_FILTERS, 4, 6, max98088_dai1_fltr),
 };
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(max98088_dai1_dac_filter_enum,
 			    M98088_REG_18_DAI1_FILTERS, 0,
 			    max98088_dai1_fltr);
 static SOC_ENUM_SINGLE_DECL(max98088_dai1_adc_filter_enum,
 			    M98088_REG_18_DAI1_FILTERS, 4,
 			    max98088_dai1_fltr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int max98088_mic1pre_set(struct snd_kcontrol *kcontrol,
                                struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+       struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
        struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -994,7 +1038,11 @@ static int max98088_mic1pre_get(struct snd_kcontrol *kcontrol,
                                struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+       struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
        struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -1008,7 +1056,11 @@ static int max98088_mic2pre_set(struct snd_kcontrol *kcontrol,
                                struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+       struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
        struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -1026,7 +1078,11 @@ static int max98088_mic2pre_get(struct snd_kcontrol *kcontrol,
                                struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+       struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
        struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -1266,7 +1322,12 @@ static int max98088_line_pga(struct snd_soc_dapm_widget *w,
        u8 *state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        BUG_ON(!((channel == 1) || (channel == 2)));
+=======
+	if (WARN_ON(!(channel == 1 || channel == 2)))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!(channel == 1 || channel == 2)))
 		return -EINVAL;
@@ -1593,6 +1654,7 @@ static int max98088_dai1_hw_params(struct snd_pcm_substream *substream,
        rate = params_rate(params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        switch (params_format(params)) {
        case SNDRV_PCM_FORMAT_S16_LE:
                snd_soc_update_bits(codec, M98088_REG_14_DAI1_FORMAT,
@@ -1600,12 +1662,17 @@ static int max98088_dai1_hw_params(struct snd_pcm_substream *substream,
                break;
        case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
        switch (params_width(params)) {
        case 16:
                snd_soc_update_bits(codec, M98088_REG_14_DAI1_FORMAT,
                        M98088_DAI_WS, 0);
                break;
        case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                snd_soc_update_bits(codec, M98088_REG_14_DAI1_FORMAT,
                        M98088_DAI_WS, M98088_DAI_WS);
@@ -1669,6 +1736,7 @@ static int max98088_dai2_hw_params(struct snd_pcm_substream *substream,
        rate = params_rate(params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        switch (params_format(params)) {
        case SNDRV_PCM_FORMAT_S16_LE:
                snd_soc_update_bits(codec, M98088_REG_1C_DAI2_FORMAT,
@@ -1676,12 +1744,17 @@ static int max98088_dai2_hw_params(struct snd_pcm_substream *substream,
                break;
        case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
        switch (params_width(params)) {
        case 16:
                snd_soc_update_bits(codec, M98088_REG_1C_DAI2_FORMAT,
                        M98088_DAI_WS, 0);
                break;
        case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                snd_soc_update_bits(codec, M98088_REG_1C_DAI2_FORMAT,
                        M98088_DAI_WS, M98088_DAI_WS);
@@ -1937,6 +2010,7 @@ static int max98088_dai2_digital_mute(struct snd_soc_dai *codec_dai, int mute)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void max98088_sync_cache(struct snd_soc_codec *codec)
 {
        u8 *reg_cache = codec->reg_cache;
@@ -1990,6 +2064,8 @@ static int max98088_set_bias_level(struct snd_soc_codec *codec,
        codec->dapm.bias_level = level;
        return 0;
 =======
+=======
+>>>>>>> v3.18
 static int max98088_set_bias_level(struct snd_soc_codec *codec,
                                   enum snd_soc_bias_level level)
 {
@@ -2018,6 +2094,9 @@ static int max98088_set_bias_level(struct snd_soc_codec *codec,
 	}
 	codec->dapm.bias_level = level;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2184,7 +2263,11 @@ static int max98088_put_eq_enum(struct snd_kcontrol *kcontrol,
                                 struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+       struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
        struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -2220,7 +2303,11 @@ static int max98088_get_eq_enum(struct snd_kcontrol *kcontrol,
                                 struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+       struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
        struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -2290,7 +2377,11 @@ static void max98088_handle_eq_pdata(struct snd_soc_codec *codec)
        /* Now point the soc_enum to .texts array items */
        max98088->eq_enum.texts = max98088->eq_texts;
 <<<<<<< HEAD
+<<<<<<< HEAD
        max98088->eq_enum.max = max98088->eq_textcnt;
+=======
+       max98088->eq_enum.items = max98088->eq_textcnt;
+>>>>>>> v3.18
 =======
        max98088->eq_enum.items = max98088->eq_textcnt;
 >>>>>>> v3.18
@@ -2358,6 +2449,7 @@ static int max98088_probe(struct snd_soc_codec *codec)
        int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        codec->cache_sync = 1;
 
        ret = snd_soc_codec_set_cache_io(codec, 8, 8, SND_SOC_I2C);
@@ -2365,6 +2457,9 @@ static int max98088_probe(struct snd_soc_codec *codec)
                dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
                return ret;
        }
+=======
+       regcache_mark_dirty(max98088->regmap);
+>>>>>>> v3.18
 =======
        regcache_mark_dirty(max98088->regmap);
 >>>>>>> v3.18
@@ -2422,9 +2517,12 @@ static int max98088_probe(struct snd_soc_codec *codec)
        max98088_handle_pdata(codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        snd_soc_add_codec_controls(codec, max98088_snd_controls,
                             ARRAY_SIZE(max98088_snd_controls));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_access:
@@ -2443,6 +2541,7 @@ static int max98088_remove(struct snd_soc_codec *codec)
 
 static struct snd_soc_codec_driver soc_codec_dev_max98088 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
        .probe   = max98088_probe,
        .remove  = max98088_remove,
        .suspend = max98088_suspend,
@@ -2453,6 +2552,8 @@ static struct snd_soc_codec_driver soc_codec_dev_max98088 = {
        .reg_cache_default = max98088_reg,
        .volatile_register = max98088_volatile_register,
 =======
+=======
+>>>>>>> v3.18
 	.probe   = max98088_probe,
 	.remove  = max98088_remove,
 	.suspend = max98088_suspend,
@@ -2460,6 +2561,9 @@ static struct snd_soc_codec_driver soc_codec_dev_max98088 = {
 	.set_bias_level = max98088_set_bias_level,
 	.controls = max98088_snd_controls,
 	.num_controls = ARRAY_SIZE(max98088_snd_controls),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dapm_widgets = max98088_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(max98088_dapm_widgets),
@@ -2469,7 +2573,11 @@ static struct snd_soc_codec_driver soc_codec_dev_max98088 = {
 
 static int max98088_i2c_probe(struct i2c_client *i2c,
 <<<<<<< HEAD
+<<<<<<< HEAD
                             const struct i2c_device_id *id)
+=======
+			      const struct i2c_device_id *id)
+>>>>>>> v3.18
 =======
 			      const struct i2c_device_id *id)
 >>>>>>> v3.18
@@ -2483,11 +2591,17 @@ static int max98088_i2c_probe(struct i2c_client *i2c,
                return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
        max98088->regmap = devm_regmap_init_i2c(i2c, &max98088_regmap);
        if (IS_ERR(max98088->regmap))
 	       return PTR_ERR(max98088->regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
        max98088->devtype = id->driver_data;
 

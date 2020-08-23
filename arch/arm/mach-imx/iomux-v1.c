@@ -154,7 +154,10 @@ int mxc_gpio_mode(int gpio_mode)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_gpio_mode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -182,7 +185,10 @@ int mxc_gpio_setup_multiple_pins(const int *pin_list, unsigned count,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_gpio_setup_multiple_pins);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

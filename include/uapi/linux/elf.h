@@ -392,6 +392,11 @@ typedef struct elf64_shdr {
 #define NT_S390_SYSTEM_CALL	0x307	/* s390 system call restart data */
 #define NT_S390_TDB	0x308		/* s390 transaction diagnostic block */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NT_S390_VXRS_LOW	0x309	/* s390 vector registers 0-15 upper half */
+#define NT_S390_VXRS_HIGH	0x30a	/* s390 vector registers 16-31 */
+>>>>>>> v3.18
 =======
 #define NT_S390_VXRS_LOW	0x309	/* s390 vector registers 0-15 upper half */
 #define NT_S390_VXRS_HIGH	0x30a	/* s390 vector registers 16-31 */
@@ -401,7 +406,10 @@ typedef struct elf64_shdr {
 #define NT_ARM_HW_BREAK	0x402		/* ARM hardware breakpoint registers */
 #define NT_ARM_HW_WATCH	0x403		/* ARM hardware watchpoint registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NT_ARM_SYSTEM_CALL	0x404	/* ARM system call number */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NT_METAG_CBUF	0x500		/* Metag catch buffer registers */

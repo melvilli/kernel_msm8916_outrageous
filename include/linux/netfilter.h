@@ -10,6 +10,10 @@
 #include <linux/wait.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/static_key.h>
+>>>>>>> v3.18
 =======
 #include <linux/static_key.h>
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ static inline void nf_inet_addr_mask(const union nf_inet_addr *a1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void netfilter_init(void);
+=======
+int netfilter_init(void);
+>>>>>>> v3.18
 =======
 int netfilter_init(void);
 >>>>>>> v3.18
@@ -51,7 +59,12 @@ int netfilter_init(void);
 struct sk_buff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef unsigned int nf_hookfn(unsigned int hooknum,
+=======
+struct nf_hook_ops;
+typedef unsigned int nf_hookfn(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 struct nf_hook_ops;
 typedef unsigned int nf_hookfn(const struct nf_hook_ops *ops,
@@ -66,6 +79,7 @@ struct nf_hook_ops {
 
 	/* User fills in from here down. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_hookfn *hook;
 	struct module *owner;
 	u_int8_t pf;
@@ -73,6 +87,8 @@ struct nf_hook_ops {
 	/* Hooks are ordered in ascending priority. */
 	int priority;
 =======
+=======
+>>>>>>> v3.18
 	nf_hookfn	*hook;
 	struct module	*owner;
 	void		*priv;
@@ -80,6 +96,9 @@ struct nf_hook_ops {
 	unsigned int	hooknum;
 	/* Hooks are ordered in ascending priority. */
 	int		priority;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -121,9 +140,15 @@ void nf_unregister_sockopt(struct nf_sockopt_ops *reg);
 extern struct list_head nf_hooks[NFPROTO_NUMPROTO][NF_MAX_HOOKS];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_JUMP_LABEL)
 #include <linux/static_key.h>
 extern struct static_key nf_hooks_needed[NFPROTO_NUMPROTO][NF_MAX_HOOKS];
+=======
+#ifdef HAVE_JUMP_LABEL
+extern struct static_key nf_hooks_needed[NFPROTO_NUMPROTO][NF_MAX_HOOKS];
+
+>>>>>>> v3.18
 =======
 #ifdef HAVE_JUMP_LABEL
 extern struct static_key nf_hooks_needed[NFPROTO_NUMPROTO][NF_MAX_HOOKS];
@@ -238,7 +263,11 @@ int compat_nf_getsockopt(struct sock *sk, u_int8_t pf, int optval,
    modifiable and linear to the point you care about (writable_len).
    Returns true or false. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int skb_make_writable(struct sk_buff *skb, unsigned int writable_len);
+=======
+int skb_make_writable(struct sk_buff *skb, unsigned int writable_len);
+>>>>>>> v3.18
 =======
 int skb_make_writable(struct sk_buff *skb, unsigned int writable_len);
 >>>>>>> v3.18
@@ -303,8 +332,13 @@ nf_checksum_partial(struct sk_buff *skb, unsigned int hook,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nf_register_afinfo(const struct nf_afinfo *afinfo);
 extern void nf_unregister_afinfo(const struct nf_afinfo *afinfo);
+=======
+int nf_register_afinfo(const struct nf_afinfo *afinfo);
+void nf_unregister_afinfo(const struct nf_afinfo *afinfo);
+>>>>>>> v3.18
 =======
 int nf_register_afinfo(const struct nf_afinfo *afinfo);
 void nf_unregister_afinfo(const struct nf_afinfo *afinfo);
@@ -353,18 +387,24 @@ nf_nat_decode_session(struct sk_buff *skb, struct flowi *fl, u_int8_t family)
 
 #if defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void (*ip_ct_attach)(struct sk_buff *, struct sk_buff *) __rcu;
 extern void nf_ct_attach(struct sk_buff *, struct sk_buff *);
 extern void (*nf_ct_destroy)(struct nf_conntrack *) __rcu;
 
 struct nf_conn;
 =======
+=======
+>>>>>>> v3.18
 extern void (*ip_ct_attach)(struct sk_buff *, const struct sk_buff *) __rcu;
 void nf_ct_attach(struct sk_buff *, const struct sk_buff *);
 extern void (*nf_ct_destroy)(struct nf_conntrack *) __rcu;
 
 struct nf_conn;
 enum ip_conntrack_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nlattr;
 
@@ -372,6 +412,7 @@ struct nfq_ct_hook {
 	size_t (*build_size)(const struct nf_conn *ct);
 	int (*build)(struct sk_buff *skb, struct nf_conn *ct);
 	int (*parse)(const struct nlattr *attr, struct nf_conn *ct);
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 extern struct nfq_ct_hook __rcu *nfq_ct_hook;
@@ -382,12 +423,17 @@ struct nfq_ct_nat_hook {
 };
 extern struct nfq_ct_nat_hook __rcu *nfq_ct_nat_hook;
 =======
+=======
+>>>>>>> v3.18
 	int (*attach_expect)(const struct nlattr *attr, struct nf_conn *ct,
 			     u32 portid, u32 report);
 	void (*seq_adjust)(struct sk_buff *skb, struct nf_conn *ct,
 			   enum ip_conntrack_info ctinfo, s32 off);
 };
 extern struct nfq_ct_hook __rcu *nfq_ct_hook;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline void nf_ct_attach(struct sk_buff *new, struct sk_buff *skb) {}

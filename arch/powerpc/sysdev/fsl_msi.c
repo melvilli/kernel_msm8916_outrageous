@@ -19,6 +19,11 @@
 #include <linux/slab.h>
 #include <linux/of_platform.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+#include <linux/seq_file.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 #include <linux/seq_file.h>
@@ -34,7 +39,10 @@
 #include "fsl_pci.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MSIIR_OFFSET_MASK	0xfffff
 #define MSIIR_IBS_SHIFT		0
 #define MSIIR_SRS_SHIFT		5
@@ -47,6 +55,9 @@
 		((msir_index) << (msi)->srs_shift | \
 		 ((intr_index) << (msi)->ibs_shift))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static LIST_HEAD(msi_head);
 
@@ -59,6 +70,10 @@ struct fsl_msi_cascade_data {
 	struct fsl_msi *msi_data;
 	int index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int virq;
+>>>>>>> v3.18
 =======
 	int virq;
 >>>>>>> v3.18
@@ -78,7 +93,10 @@ static void fsl_msi_end_irq(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void fsl_msi_print_chip(struct irq_data *irqd, struct seq_file *p)
 {
 	struct fsl_msi *msi_data = irqd->domain->host_data;
@@ -92,13 +110,20 @@ static void fsl_msi_print_chip(struct irq_data *irqd, struct seq_file *p)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct irq_chip fsl_msi_chip = {
 	.irq_mask	= mask_msi_irq,
 	.irq_unmask	= unmask_msi_irq,
 	.irq_ack	= fsl_msi_end_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "FSL-MSI",
+=======
+	.irq_print_chip = fsl_msi_print_chip,
+>>>>>>> v3.18
 =======
 	.irq_print_chip = fsl_msi_print_chip,
 >>>>>>> v3.18
@@ -125,9 +150,15 @@ static const struct irq_domain_ops fsl_msi_host_ops = {
 static int fsl_msi_init_allocator(struct fsl_msi *msi_data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	rc = msi_bitmap_alloc(&msi_data->bitmap, NR_MSI_IRQS,
+=======
+	int rc, hwirq;
+
+	rc = msi_bitmap_alloc(&msi_data->bitmap, NR_MSI_IRQS_MAX,
+>>>>>>> v3.18
 =======
 	int rc, hwirq;
 
@@ -137,6 +168,7 @@ static int fsl_msi_init_allocator(struct fsl_msi *msi_data)
 	if (rc)
 		return rc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = msi_bitmap_reserve_dt_hwirqs(&msi_data->bitmap);
 	if (rc < 0) {
@@ -152,12 +184,17 @@ static int fsl_msi_check_device(struct pci_dev *pdev, int nvec, int type)
 	if (type == PCI_CAP_ID_MSIX)
 		pr_debug("fslmsi: MSI-X untested, trying anyway.\n");
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Reserve all the hwirqs
 	 * The available hwirqs will be released in fsl_msi_setup_hwirq()
 	 */
 	for (hwirq = 0; hwirq < NR_MSI_IRQS_MAX; hwirq++)
 		msi_bitmap_reserve_hwirq(&msi_data->bitmap, hwirq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -168,7 +205,10 @@ static void fsl_teardown_msi_irqs(struct pci_dev *pdev)
 	struct msi_desc *entry;
 	struct fsl_msi *msi_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_hw_number_t hwirq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -176,17 +216,23 @@ static void fsl_teardown_msi_irqs(struct pci_dev *pdev)
 		if (entry->irq == NO_IRQ)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hwirq = virq_to_hw(entry->irq);
 		msi_data = irq_get_chip_data(entry->irq);
 		irq_set_msi_desc(entry->irq, NULL);
 		irq_dispose_mapping(entry->irq);
 		msi_bitmap_free_hwirqs(&msi_data->bitmap, hwirq, 1);
 =======
+=======
+>>>>>>> v3.18
 		msi_data = irq_get_chip_data(entry->irq);
 		irq_set_msi_desc(entry->irq, NULL);
 		msi_bitmap_free_hwirqs(&msi_data->bitmap,
 				       virq_to_hw(entry->irq), 1);
 		irq_dispose_mapping(entry->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -216,8 +262,14 @@ static void fsl_compose_msi_msg(struct pci_dev *pdev, int hwirq,
 	msg->data = hwirq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: allocated srs: %d, ibs: %d\n",
 		__func__, hwirq / IRQS_PER_MSI_REG, hwirq % IRQS_PER_MSI_REG);
+=======
+	pr_debug("%s: allocated srs: %d, ibs: %d\n", __func__,
+		 (hwirq >> msi_data->srs_shift) & MSI_SRS_MASK,
+		 (hwirq >> msi_data->ibs_shift) & MSI_IBS_MASK);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: allocated srs: %d, ibs: %d\n", __func__,
 		 (hwirq >> msi_data->srs_shift) & MSI_SRS_MASK,
@@ -237,6 +289,12 @@ static int fsl_setup_msi_irqs(struct pci_dev *pdev, int nvec, int type)
 	struct fsl_msi *msi_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (type == PCI_CAP_ID_MSIX)
+		pr_debug("fslmsi: MSI-X untested, trying anyway.\n");
+
+>>>>>>> v3.18
 =======
 	if (type == PCI_CAP_ID_MSIX)
 		pr_debug("fslmsi: MSI-X untested, trying anyway.\n");
@@ -250,7 +308,12 @@ static int fsl_setup_msi_irqs(struct pci_dev *pdev, int nvec, int type)
 	if (np) {
 		if (of_device_is_compatible(np, "fsl,mpic-msi") ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    of_device_is_compatible(np, "fsl,vmpic-msi"))
+=======
+		    of_device_is_compatible(np, "fsl,vmpic-msi") ||
+		    of_device_is_compatible(np, "fsl,vmpic-msi-v4.3"))
+>>>>>>> v3.18
 =======
 		    of_device_is_compatible(np, "fsl,vmpic-msi") ||
 		    of_device_is_compatible(np, "fsl,vmpic-msi-v4.3"))
@@ -314,10 +377,15 @@ out_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fsl_msi_cascade(unsigned int irq, struct irq_desc *desc)
 {
 	struct irq_chip *chip = irq_desc_get_chip(desc);
 	struct irq_data *idata = irq_desc_get_irq_data(desc);
+=======
+static irqreturn_t fsl_msi_cascade(int irq, void *data)
+{
+>>>>>>> v3.18
 =======
 static irqreturn_t fsl_msi_cascade(int irq, void *data)
 {
@@ -328,6 +396,7 @@ static irqreturn_t fsl_msi_cascade(int irq, void *data)
 	u32 msir_value = 0;
 	u32 intr_index;
 	u32 have_shift = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct fsl_msi_cascade_data *cascade_data;
 
@@ -354,6 +423,8 @@ static irqreturn_t fsl_msi_cascade(int irq, void *data)
 
 	irqd_set_chained_irq_inprogress(idata);
 =======
+=======
+>>>>>>> v3.18
 	struct fsl_msi_cascade_data *cascade_data = data;
 	irqreturn_t ret = IRQ_NONE;
 
@@ -364,6 +435,9 @@ static irqreturn_t fsl_msi_cascade(int irq, void *data)
 	if (msir_index >= NR_MSI_REG_MAX)
 		cascade_irq = NO_IRQ;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (msi_data->feature & FSL_PIC_IP_MASK) {
 	case FSL_PIC_IP_MPIC:
@@ -392,6 +466,7 @@ static irqreturn_t fsl_msi_cascade(int irq, void *data)
 
 		cascade_irq = irq_linear_revmap(msi_data->irqhost,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				msir_index * IRQS_PER_MSI_REG +
 					intr_index + have_shift);
 		if (cascade_irq != NO_IRQ)
@@ -414,6 +489,8 @@ static irqreturn_t fsl_msi_cascade(int irq, void *data)
 unlock:
 	raw_spin_unlock(&desc->lock);
 =======
+=======
+>>>>>>> v3.18
 				msi_hwirq(msi_data, msir_index,
 					  intr_index + have_shift));
 		if (cascade_irq != NO_IRQ) {
@@ -425,6 +502,9 @@ unlock:
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -432,6 +512,7 @@ static int fsl_of_msi_remove(struct platform_device *ofdev)
 {
 	struct fsl_msi *msi = platform_get_drvdata(ofdev);
 	int virq, i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct fsl_msi_cascade_data *cascade_data;
 
@@ -443,6 +524,8 @@ static int fsl_of_msi_remove(struct platform_device *ofdev)
 			cascade_data = irq_get_handler_data(virq);
 			kfree(cascade_data);
 =======
+=======
+>>>>>>> v3.18
 
 	if (msi->list.prev != NULL)
 		list_del(&msi->list);
@@ -454,6 +537,9 @@ static int fsl_of_msi_remove(struct platform_device *ofdev)
 
 			free_irq(virq, msi->cascade_array[i]);
 			kfree(msi->cascade_array[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			irq_dispose_mapping(virq);
 		}
@@ -474,7 +560,11 @@ static int fsl_msi_setup_hwirq(struct fsl_msi *msi, struct platform_device *dev,
 {
 	struct fsl_msi_cascade_data *cascade_data = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int virt_msir;
+=======
+	int virt_msir, i, ret;
+>>>>>>> v3.18
 =======
 	int virt_msir, i, ret;
 >>>>>>> v3.18
@@ -493,12 +583,15 @@ static int fsl_msi_setup_hwirq(struct fsl_msi *msi, struct platform_device *dev,
 	}
 	irq_set_lockdep_class(virt_msir, &fsl_msi_irq_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msi->msi_virqs[irq_index] = virt_msir;
 	cascade_data->index = offset;
 	cascade_data->msi_data = msi;
 	irq_set_handler_data(virt_msir, cascade_data);
 	irq_set_chained_handler(virt_msir, fsl_msi_cascade);
 =======
+=======
+>>>>>>> v3.18
 	cascade_data->index = offset;
 	cascade_data->msi_data = msi;
 	cascade_data->virq = virt_msir;
@@ -516,6 +609,9 @@ static int fsl_msi_setup_hwirq(struct fsl_msi *msi, struct platform_device *dev,
 	for (i = 0; i < IRQS_PER_MSI_REG; i++)
 		msi_bitmap_free_hwirqs(&msi->bitmap,
 				       msi_hwirq(msi, offset, i), 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -527,9 +623,14 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 	const struct of_device_id *match;
 	struct fsl_msi *msi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource res;
 	int err, i, j, irq_index, count;
 	int rc;
+=======
+	struct resource res, msiir;
+	int err, i, j, irq_index, count;
+>>>>>>> v3.18
 =======
 	struct resource res, msiir;
 	int err, i, j, irq_index, count;
@@ -539,7 +640,10 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 	int len;
 	u32 offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const u32 all_avail[] = { 0, NR_MSI_IRQS };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -559,7 +663,11 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 
 	msi->irqhost = irq_domain_add_linear(dev->dev.of_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      NR_MSI_IRQS, &fsl_msi_host_ops, msi);
+=======
+				      NR_MSI_IRQS_MAX, &fsl_msi_host_ops, msi);
+>>>>>>> v3.18
 =======
 				      NR_MSI_IRQS_MAX, &fsl_msi_host_ops, msi);
 >>>>>>> v3.18
@@ -592,7 +700,10 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 		msi->msiir_offset =
 			features->msiir_offset + (res.start & 0xfffff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * First read the MSIIR/MSIIR1 offset from dts
@@ -603,6 +714,9 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 					    (res.start & MSIIR_OFFSET_MASK);
 		else
 			msi->msiir_offset = msiir.start & MSIIR_OFFSET_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -615,8 +729,13 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 	msi->phandle = dev->dev.of_node->phandle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = fsl_msi_init_allocator(msi);
 	if (rc) {
+=======
+	err = fsl_msi_init_allocator(msi);
+	if (err) {
+>>>>>>> v3.18
 =======
 	err = fsl_msi_init_allocator(msi);
 	if (err) {
@@ -626,6 +745,7 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 	}
 
 	p = of_get_property(dev->dev.of_node, "msi-available-ranges", &len);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (p && len % (2 * sizeof(u32)) != 0) {
 		dev_err(&dev->dev, "%s: Malformed msi-available-ranges property\n",
@@ -646,6 +766,8 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 			       __func__, dev->dev.of_node->full_name,
 			       p[i * 2 + 1], p[i * 2]);
 =======
+=======
+>>>>>>> v3.18
 
 	if (of_device_is_compatible(dev->dev.of_node, "fsl,mpic-msi-v4.3") ||
 	    of_device_is_compatible(dev->dev.of_node, "fsl,vmpic-msi-v4.3")) {
@@ -672,11 +794,15 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 		if (p && len % (2 * sizeof(u32)) != 0) {
 			dev_err(&dev->dev, "%s: Malformed msi-available-ranges property\n",
 				__func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = -EINVAL;
 			goto error_out;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		offset = p[i * 2] / IRQS_PER_MSI_REG;
 		count = p[i * 2 + 1] / IRQS_PER_MSI_REG;
@@ -686,6 +812,8 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 			if (err)
 				goto error_out;
 =======
+=======
+>>>>>>> v3.18
 		if (!p) {
 			p = all_avail;
 			len = sizeof(all_avail);
@@ -710,6 +838,9 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 				if (err)
 					goto error_out;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -721,7 +852,10 @@ static int fsl_of_msi_probe(struct platform_device *dev)
 		ppc_md.setup_msi_irqs = fsl_setup_msi_irqs;
 		ppc_md.teardown_msi_irqs = fsl_teardown_msi_irqs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ppc_md.msi_check_device = fsl_msi_check_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if (ppc_md.setup_msi_irqs != fsl_setup_msi_irqs) {
@@ -757,11 +891,17 @@ static const struct of_device_id fsl_of_msi_ids[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.compatible = "fsl,mpic-msi-v4.3",
 		.data = &mpic_msi_feature,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.compatible = "fsl,ipic-msi",
 		.data = &ipic_msi_feature,
@@ -772,11 +912,17 @@ static const struct of_device_id fsl_of_msi_ids[] = {
 		.data = &vmpic_msi_feature,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.compatible = "fsl,vmpic-msi-v4.3",
 		.data = &vmpic_msi_feature,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	{}

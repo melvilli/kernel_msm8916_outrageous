@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * drivers/net/phy/phy.c
  *
  * Framework for configuring and reading PHY devices
+=======
+/* Framework for configuring and reading PHY devices
+>>>>>>> v3.18
 =======
 /* Framework for configuring and reading PHY devices
 >>>>>>> v3.18
@@ -28,7 +32,10 @@
 #include <linux/unistd.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -44,12 +51,15 @@
 #include <linux/workqueue.h>
 #include <linux/mdio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/atomic.h>
 #include <asm/io.h>
 #include <asm/irq.h>
 #include <asm/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/uaccess.h>
 #include <linux/atomic.h>
@@ -75,6 +85,9 @@ static const char *phy_speed_to_str(int speed)
 		return "Unsupported (update phy.c)";
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -84,6 +97,7 @@ static const char *phy_speed_to_str(int speed)
 void phy_print_status(struct phy_device *phydev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phydev->link)
 		pr_info("%s - Link is Up - %d/%s\n",
 			dev_name(&phydev->dev),
@@ -92,6 +106,8 @@ void phy_print_status(struct phy_device *phydev)
 	else
 		pr_info("%s - Link is Down\n", dev_name(&phydev->dev));
 =======
+=======
+>>>>>>> v3.18
 	if (phydev->link) {
 		netdev_info(phydev->attached_dev,
 			"Link is Up - %s/%s - flow control %s\n",
@@ -101,6 +117,9 @@ void phy_print_status(struct phy_device *phydev)
 	} else	{
 		netdev_info(phydev->attached_dev, "Link is Down\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(phy_print_status);
@@ -113,6 +132,7 @@ EXPORT_SYMBOL(phy_print_status);
  * ack and clear the phy device's interrupt.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 0 on success on < 0 on error.
  */
 static int phy_clear_interrupt(struct phy_device *phydev)
@@ -124,6 +144,8 @@ static int phy_clear_interrupt(struct phy_device *phydev)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
  * Returns 0 on success or < 0 on error.
  */
 static int phy_clear_interrupt(struct phy_device *phydev)
@@ -132,6 +154,9 @@ static int phy_clear_interrupt(struct phy_device *phydev)
 		return phydev->drv->ack_interrupt(phydev);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -140,6 +165,7 @@ static int phy_clear_interrupt(struct phy_device *phydev)
  * @phydev: the phy_device struct
  * @interrupts: interrupt flags to configure for this @phydev
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Returns 0 on success on < 0 on error.
  */
@@ -153,6 +179,8 @@ static int phy_config_interrupt(struct phy_device *phydev, u32 interrupts)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
  * Returns 0 on success or < 0 on error.
  */
 static int phy_config_interrupt(struct phy_device *phydev, u32 interrupts)
@@ -162,6 +190,9 @@ static int phy_config_interrupt(struct phy_device *phydev, u32 interrupts)
 		return phydev->drv->config_intr(phydev);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -170,6 +201,7 @@ static int phy_config_interrupt(struct phy_device *phydev, u32 interrupts)
  * phy_aneg_done - return auto-negotiation status
  * @phydev: target phy_device struct
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Description: Reads the status register and returns 0 either if
  *   auto-negotiation is incomplete, or if there was an error.
@@ -187,6 +219,8 @@ static inline int phy_aneg_done(struct phy_device *phydev)
 /* A structure for mapping a particular speed and duplex
  * combination to a particular SUPPORTED and ADVERTISED value */
 =======
+=======
+>>>>>>> v3.18
  * Description: Return the auto-negotiation status from this @phydev
  * Returns > 0 on success or < 0 on error. 0 means that auto-negotiation
  * is still pending.
@@ -202,6 +236,9 @@ static inline int phy_aneg_done(struct phy_device *phydev)
 /* A structure for mapping a particular speed and duplex
  * combination to a particular SUPPORTED and ADVERTISED value
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct phy_setting {
 	int speed;
@@ -213,8 +250,11 @@ struct phy_setting {
 static const struct phy_setting settings[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.speed = 10000,
 =======
+=======
+>>>>>>> v3.18
 		.speed = SPEED_10000,
 		.duplex = DUPLEX_FULL,
 		.setting = SUPPORTED_10000baseKR_Full,
@@ -226,13 +266,19 @@ static const struct phy_setting settings[] = {
 	},
 	{
 		.speed = SPEED_10000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.duplex = DUPLEX_FULL,
 		.setting = SUPPORTED_10000baseT_Full,
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.speed = SPEED_2500,
 		.duplex = DUPLEX_FULL,
 		.setting = SUPPORTED_2500baseX_Full,
@@ -243,6 +289,9 @@ static const struct phy_setting settings[] = {
 		.setting = SUPPORTED_1000baseKX_Full,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.speed = SPEED_1000,
 		.duplex = DUPLEX_FULL,
@@ -288,6 +337,7 @@ static const struct phy_setting settings[] = {
  *   none of the others match.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int phy_find_setting(int speed, int duplex)
 {
 	int idx = 0;
@@ -296,12 +346,17 @@ static inline int phy_find_setting(int speed, int duplex)
 			(settings[idx].speed != speed ||
 			settings[idx].duplex != duplex))
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int phy_find_setting(int speed, int duplex)
 {
 	unsigned int idx = 0;
 
 	while (idx < ARRAY_SIZE(settings) &&
 	       (settings[idx].speed != speed || settings[idx].duplex != duplex))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		idx++;
 
@@ -319,7 +374,11 @@ static inline unsigned int phy_find_setting(int speed, int duplex)
  *   if nothing else matches.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int phy_find_valid(int idx, u32 features)
+=======
+static inline unsigned int phy_find_valid(unsigned int idx, u32 features)
+>>>>>>> v3.18
 =======
 static inline unsigned int phy_find_valid(unsigned int idx, u32 features)
 >>>>>>> v3.18
@@ -331,6 +390,7 @@ static inline unsigned int phy_find_valid(unsigned int idx, u32 features)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * phy_check_valid - check if there is a valid PHY setting which matches
  *		     speed, duplex, and feature mask
@@ -353,6 +413,8 @@ static inline bool phy_check_valid(int speed, int duplex, u32 features)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * phy_sanitize_settings - make sure the PHY is set to supported speed and duplex
  * @phydev: the target phy_device struct
  *
@@ -364,7 +426,11 @@ static void phy_sanitize_settings(struct phy_device *phydev)
 {
 	u32 features = phydev->supported;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int idx;
+=======
+	unsigned int idx;
+>>>>>>> v3.18
 =======
 	unsigned int idx;
 >>>>>>> v3.18
@@ -400,8 +466,12 @@ int phy_ethtool_sset(struct phy_device *phydev, struct ethtool_cmd *cmd)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We make sure that we don't pass unsupported
 	 * values in to the PHY */
+=======
+	/* We make sure that we don't pass unsupported values in to the PHY */
+>>>>>>> v3.18
 =======
 	/* We make sure that we don't pass unsupported values in to the PHY */
 >>>>>>> v3.18
@@ -448,6 +518,7 @@ int phy_ethtool_gset(struct phy_device *phydev, struct ethtool_cmd *cmd)
 
 	cmd->advertising = phydev->advertising;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ethtool_cmd_speed_set(cmd, phydev->speed);
 	cmd->duplex = phydev->duplex;
@@ -455,6 +526,8 @@ int phy_ethtool_gset(struct phy_device *phydev, struct ethtool_cmd *cmd)
 	cmd->phy_address = phydev->addr;
 	cmd->transceiver = XCVR_EXTERNAL;
 =======
+=======
+>>>>>>> v3.18
 	cmd->lp_advertising = phydev->lp_advertising;
 
 	ethtool_cmd_speed_set(cmd, phydev->speed);
@@ -466,6 +539,9 @@ int phy_ethtool_gset(struct phy_device *phydev, struct ethtool_cmd *cmd)
 	cmd->phy_address = phydev->addr;
 	cmd->transceiver = phy_is_internal(phydev) ?
 		XCVR_INTERNAL : XCVR_EXTERNAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd->autoneg = phydev->autoneg;
 
@@ -484,17 +560,23 @@ EXPORT_SYMBOL(phy_ethtool_gset);
  * current state.  Use at own risk.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int phy_mii_ioctl(struct phy_device *phydev,
 		struct ifreq *ifr, int cmd)
 {
 	struct mii_ioctl_data *mii_data = if_mii(ifr);
 	u16 val = mii_data->val_in;
 =======
+=======
+>>>>>>> v3.18
 int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 {
 	struct mii_ioctl_data *mii_data = if_mii(ifr);
 	u16 val = mii_data->val_in;
 	bool change_autoneg = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (cmd) {
@@ -505,6 +587,7 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 	case SIOCGMIIREG:
 		mii_data->val_out = mdiobus_read(phydev->bus, mii_data->phy_id,
 						 mii_data->reg_num);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		break;
 
@@ -530,6 +613,8 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 			case MII_ADVERTISE:
 				phydev->advertising = val;
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	case SIOCSMIIREG:
@@ -559,6 +644,9 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 			case MII_ADVERTISE:
 				phydev->advertising = mii_adv_to_ethtool_adv_t(val);
 				change_autoneg = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			default:
@@ -572,6 +660,7 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 
 		if (mii_data->reg_num == MII_BMCR &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    val & BMCR_RESET &&
 		    phydev->drv->config_init) {
 			phy_scan_fixups(phydev);
@@ -579,6 +668,8 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 		}
 		break;
 =======
+=======
+>>>>>>> v3.18
 		    val & BMCR_RESET)
 			return phy_init_hw(phydev);
 
@@ -586,6 +677,9 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 			return phy_start_aneg(phydev);
 
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case SIOCSHWTSTAMP:
@@ -597,8 +691,11 @@ int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd)
 		return -EOPNOTSUPP;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -624,7 +721,10 @@ int phy_start_aneg(struct phy_device *phydev)
 
 	err = phydev->drv->config_aneg(phydev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (err < 0)
@@ -647,6 +747,7 @@ out_unlock:
 EXPORT_SYMBOL(phy_start_aneg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void phy_change(struct work_struct *work);
 
@@ -659,10 +760,16 @@ static void phy_change(struct work_struct *work);
  * phy_start_machine - start PHY state machine tracking
  * @phydev: the phy_device struct
 >>>>>>> v3.18
+=======
+/**
+ * phy_start_machine - start PHY state machine tracking
+ * @phydev: the phy_device struct
+>>>>>>> v3.18
  *
  * Description: The PHY infrastructure can run a state machine
  *   which tracks whether the PHY is starting up, negotiating,
  *   etc.  This function starts the timer which tracks the state
+<<<<<<< HEAD
 <<<<<<< HEAD
  *   of the PHY.  If you want to be notified when the state changes,
  *   pass in the callback @handler, otherwise, pass NULL.  If you
@@ -676,12 +783,17 @@ void phy_start_machine(struct phy_device *phydev,
 
 	schedule_delayed_work(&phydev->state_queue, HZ);
 =======
+=======
+>>>>>>> v3.18
  *   of the PHY.  If you want to maintain your own state machine,
  *   do not call this function.
  */
 void phy_start_machine(struct phy_device *phydev)
 {
 	queue_delayed_work(system_power_efficient_wq, &phydev->state_queue, HZ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -699,11 +811,17 @@ void phy_stop_machine(struct phy_device *phydev)
 
 	mutex_lock(&phydev->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phydev->state > PHY_UP && phydev->state != PHY_HALTED)
 		phydev->state = PHY_UP;
 	mutex_unlock(&phydev->lock);
 
 	phydev->adjust_state = NULL;
+=======
+	if (phydev->state > PHY_UP)
+		phydev->state = PHY_UP;
+	mutex_unlock(&phydev->lock);
+>>>>>>> v3.18
 =======
 	if (phydev->state > PHY_UP)
 		phydev->state = PHY_UP;
@@ -746,18 +864,24 @@ static irqreturn_t phy_interrupt(int irq, void *phy_dat)
 	 * context, so we need to disable the irq here.  A work
 	 * queue will write the PHY to disable and clear the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * interrupt, and then reenable the irq line. */
 	disable_irq_nosync(irq);
 	atomic_inc(&phydev->irq_disable);
 
 	schedule_work(&phydev->phy_queue);
 =======
+=======
+>>>>>>> v3.18
 	 * interrupt, and then reenable the irq line.
 	 */
 	disable_irq_nosync(irq);
 	atomic_inc(&phydev->irq_disable);
 
 	queue_work(system_power_efficient_wq, &phydev->phy_queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -770,9 +894,13 @@ static irqreturn_t phy_interrupt(int irq, void *phy_dat)
 static int phy_enable_interrupts(struct phy_device *phydev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = phy_clear_interrupt(phydev);
+=======
+	int err = phy_clear_interrupt(phydev);
+>>>>>>> v3.18
 =======
 	int err = phy_clear_interrupt(phydev);
 >>>>>>> v3.18
@@ -781,9 +909,13 @@ static int phy_enable_interrupts(struct phy_device *phydev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED);
 
 	return err;
+=======
+	return phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED);
+>>>>>>> v3.18
 =======
 	return phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED);
 >>>>>>> v3.18
@@ -800,7 +932,10 @@ static int phy_disable_interrupts(struct phy_device *phydev)
 	/* Disable PHY interrupts */
 	err = phy_config_interrupt(phydev, PHY_INTERRUPT_DISABLED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (err)
@@ -809,7 +944,10 @@ static int phy_disable_interrupts(struct phy_device *phydev)
 	/* Clear the interrupt */
 	err = phy_clear_interrupt(phydev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (err)
@@ -836,6 +974,7 @@ phy_err:
 int phy_start_interrupts(struct phy_device *phydev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 
 	INIT_WORK(&phydev->phy_queue, phy_change);
@@ -850,6 +989,11 @@ int phy_start_interrupts(struct phy_device *phydev)
 	if (request_irq(phydev->irq, phy_interrupt, 0, "phy_interrupt",
 			phydev) < 0) {
 >>>>>>> v3.18
+=======
+	atomic_set(&phydev->irq_disable, 0);
+	if (request_irq(phydev->irq, phy_interrupt, 0, "phy_interrupt",
+			phydev) < 0) {
+>>>>>>> v3.18
 		pr_warn("%s: Can't get IRQ %d (PHY)\n",
 			phydev->bus->name, phydev->irq);
 		phydev->irq = PHY_POLL;
@@ -857,9 +1001,13 @@ int phy_start_interrupts(struct phy_device *phydev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = phy_enable_interrupts(phydev);
 
 	return err;
+=======
+	return phy_enable_interrupts(phydev);
+>>>>>>> v3.18
 =======
 	return phy_enable_interrupts(phydev);
 >>>>>>> v3.18
@@ -873,9 +1021,13 @@ EXPORT_SYMBOL(phy_start_interrupts);
 int phy_stop_interrupts(struct phy_device *phydev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = phy_disable_interrupts(phydev);
+=======
+	int err = phy_disable_interrupts(phydev);
+>>>>>>> v3.18
 =======
 	int err = phy_disable_interrupts(phydev);
 >>>>>>> v3.18
@@ -886,8 +1038,12 @@ int phy_stop_interrupts(struct phy_device *phydev)
 	free_irq(phydev->irq, phydev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Cannot call flush_scheduled_work() here as desired because
+=======
+	/* Cannot call flush_scheduled_work() here as desired because
+>>>>>>> v3.18
 =======
 	/* Cannot call flush_scheduled_work() here as desired because
 >>>>>>> v3.18
@@ -897,8 +1053,12 @@ int phy_stop_interrupts(struct phy_device *phydev)
 	 */
 	cancel_work_sync(&phydev->phy_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If work indeed has been cancelled, disable_irq() will have
+=======
+	/* If work indeed has been cancelled, disable_irq() will have
+>>>>>>> v3.18
 =======
 	/* If work indeed has been cancelled, disable_irq() will have
 >>>>>>> v3.18
@@ -913,7 +1073,10 @@ int phy_stop_interrupts(struct phy_device *phydev)
 EXPORT_SYMBOL(phy_stop_interrupts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -921,9 +1084,14 @@ EXPORT_SYMBOL(phy_stop_interrupts);
  * @work: work_struct that describes the work to be done
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void phy_change(struct work_struct *work)
 {
 	int err;
+=======
+void phy_change(struct work_struct *work)
+{
+>>>>>>> v3.18
 =======
 void phy_change(struct work_struct *work)
 {
@@ -936,9 +1104,13 @@ void phy_change(struct work_struct *work)
 		goto ignore;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = phy_disable_interrupts(phydev);
 
 	if (err)
+=======
+	if (phy_disable_interrupts(phydev))
+>>>>>>> v3.18
 =======
 	if (phy_disable_interrupts(phydev))
 >>>>>>> v3.18
@@ -954,10 +1126,15 @@ void phy_change(struct work_struct *work)
 
 	/* Reenable interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (PHY_HALTED != phydev->state)
 		err = phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED);
 
 	if (err)
+=======
+	if (PHY_HALTED != phydev->state &&
+	    phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED))
+>>>>>>> v3.18
 =======
 	if (PHY_HALTED != phydev->state &&
 	    phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED))
@@ -967,8 +1144,12 @@ void phy_change(struct work_struct *work)
 	/* reschedule state queue work to run as soon as possible */
 	cancel_delayed_work_sync(&phydev->state_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&phydev->state_queue, 0);
 
+=======
+	queue_delayed_work(system_power_efficient_wq, &phydev->state_queue, 0);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq, &phydev->state_queue, 0);
 >>>>>>> v3.18
@@ -998,7 +1179,11 @@ void phy_stop(struct phy_device *phydev)
 		goto out_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phydev->irq != PHY_POLL) {
+=======
+	if (phy_interrupt_is_valid(phydev)) {
+>>>>>>> v3.18
 =======
 	if (phy_interrupt_is_valid(phydev)) {
 >>>>>>> v3.18
@@ -1015,8 +1200,12 @@ out_unlock:
 	mutex_unlock(&phydev->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Cannot call flush_scheduled_work() here as desired because
+=======
+	/* Cannot call flush_scheduled_work() here as desired because
+>>>>>>> v3.18
 =======
 	/* Cannot call flush_scheduled_work() here as desired because
 >>>>>>> v3.18
@@ -1025,7 +1214,11 @@ out_unlock:
 	 */
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+EXPORT_SYMBOL(phy_stop);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(phy_stop);
 >>>>>>> v3.18
@@ -1046,6 +1239,7 @@ void phy_start(struct phy_device *phydev)
 
 	switch (phydev->state) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case PHY_STARTING:
 			phydev->state = PHY_PENDING;
 			break;
@@ -1061,6 +1255,8 @@ void phy_start(struct phy_device *phydev)
 }
 EXPORT_SYMBOL(phy_stop);
 =======
+=======
+>>>>>>> v3.18
 	case PHY_STARTING:
 		phydev->state = PHY_PENDING;
 		break;
@@ -1074,6 +1270,9 @@ EXPORT_SYMBOL(phy_stop);
 	}
 	mutex_unlock(&phydev->lock);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(phy_start);
 
@@ -1087,7 +1286,11 @@ void phy_state_machine(struct work_struct *work)
 	struct phy_device *phydev =
 			container_of(dwork, struct phy_device, state_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int needs_aneg = 0;
+=======
+	bool needs_aneg = false, do_suspend = false, do_resume = false;
+>>>>>>> v3.18
 =======
 	bool needs_aneg = false, do_suspend = false, do_resume = false;
 >>>>>>> v3.18
@@ -1095,6 +1298,7 @@ void phy_state_machine(struct work_struct *work)
 
 	mutex_lock(&phydev->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (phydev->adjust_state)
 		phydev->adjust_state(phydev->attached_dev);
@@ -1245,6 +1449,8 @@ void phy_state_machine(struct work_struct *work)
 				}
 			} else {
 =======
+=======
+>>>>>>> v3.18
 	if (phydev->drv->link_change_notify)
 		phydev->drv->link_change_notify(phydev);
 
@@ -1376,6 +1582,9 @@ void phy_state_machine(struct work_struct *work)
 			 * Otherwise, it's 0, and we're  still waiting for AN
 			 */
 			if (err > 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				err = phy_read_status(phydev);
 				if (err)
@@ -1385,12 +1594,15 @@ void phy_state_machine(struct work_struct *work)
 					phydev->state = PHY_RUNNING;
 					netif_carrier_on(phydev->attached_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				} else
 					phydev->state = PHY_NOLINK;
 				phydev->adjust_link(phydev->attached_dev);
 			}
 			break;
 =======
+=======
+>>>>>>> v3.18
 				} else	{
 					phydev->state = PHY_NOLINK;
 				}
@@ -1414,6 +1626,9 @@ void phy_state_machine(struct work_struct *work)
 		}
 		do_resume = true;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1422,21 +1637,30 @@ void phy_state_machine(struct work_struct *work)
 	if (needs_aneg)
 		err = phy_start_aneg(phydev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else if (do_suspend)
 		phy_suspend(phydev);
 	else if (do_resume)
 		phy_resume(phydev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err < 0)
 		phy_error(phydev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&phydev->state_queue, PHY_STATE_TIME * HZ);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	queue_delayed_work(system_power_efficient_wq, &phydev->state_queue,
 			   PHY_STATE_TIME * HZ);
 }
@@ -1449,6 +1673,9 @@ void phy_mac_interrupt(struct phy_device *phydev, int new_link)
 }
 EXPORT_SYMBOL(phy_mac_interrupt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void mmd_phy_indirect(struct mii_bus *bus, int prtad, int devad,
 				    int addr)
@@ -1466,7 +1693,11 @@ static inline void mmd_phy_indirect(struct mii_bus *bus, int prtad, int devad,
 /**
  * phy_read_mmd_indirect - reads data from the MMD registers
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @bus: the target MII bus
+=======
+ * @phydev: The PHY device bus
+>>>>>>> v3.18
 =======
  * @phydev: The PHY device bus
 >>>>>>> v3.18
@@ -1482,6 +1713,7 @@ static inline void mmd_phy_indirect(struct mii_bus *bus, int prtad, int devad,
  * 3) Write reg 13 // MMD Data Command for MMD DEVAD
  * 3) Read  reg 14 // Read MMD data
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int phy_read_mmd_indirect(struct mii_bus *bus, int prtad, int devad,
 				 int addr)
@@ -1500,6 +1732,8 @@ static int phy_read_mmd_indirect(struct mii_bus *bus, int prtad, int devad,
  * phy_write_mmd_indirect - writes data to the MMD registers
  * @bus: the target MII bus
 =======
+=======
+>>>>>>> v3.18
 int phy_read_mmd_indirect(struct phy_device *phydev, int prtad,
 				 int devad, int addr)
 {
@@ -1521,6 +1755,9 @@ EXPORT_SYMBOL(phy_read_mmd_indirect);
 /**
  * phy_write_mmd_indirect - writes data to the MMD registers
  * @phydev: The PHY device
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @prtad: MMD Address
  * @devad: MMD DEVAD
@@ -1536,6 +1773,7 @@ EXPORT_SYMBOL(phy_read_mmd_indirect);
  * 3) Write reg 14 // Write MMD data
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void phy_write_mmd_indirect(struct mii_bus *bus, int prtad, int devad,
 				   int addr, u32 data)
 {
@@ -1545,6 +1783,8 @@ static void phy_write_mmd_indirect(struct mii_bus *bus, int prtad, int devad,
 	bus->write(bus, addr, MII_MMD_DATA, data);
 }
 =======
+=======
+>>>>>>> v3.18
 void phy_write_mmd_indirect(struct phy_device *phydev, int prtad,
 				   int devad, int addr, u32 data)
 {
@@ -1560,6 +1800,9 @@ void phy_write_mmd_indirect(struct phy_device *phydev, int prtad,
 	}
 }
 EXPORT_SYMBOL(phy_write_mmd_indirect);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1575,6 +1818,7 @@ EXPORT_SYMBOL(phy_write_mmd_indirect);
 int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EPROTONOSUPPORT;
 
 	/* According to 802.3az,the EEE is supported only in full duplex-mode.
@@ -1582,15 +1826,21 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 	 * or RGMII (all kinds). Internal PHYs are also allowed to proceed and
 	 * should return an error if they do not support EEE.
 =======
+=======
+>>>>>>> v3.18
 	/* According to 802.3az,the EEE is supported only in full duplex-mode.
 	 * Also EEE feature is active when core is operating with MII, GMII
 	 * or RGMII. Internal PHYs are also allowed to proceed and should
 	 * return an error if they do not support EEE.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if ((phydev->duplex == DUPLEX_FULL) &&
 	    ((phydev->interface == PHY_INTERFACE_MODE_MII) ||
 	    (phydev->interface == PHY_INTERFACE_MODE_GMII) ||
+<<<<<<< HEAD
 <<<<<<< HEAD
 	     (phydev->interface >= PHY_INTERFACE_MODE_RGMII &&
 	      phydev->interface <= PHY_INTERFACE_MODE_RGMII_TXID))) {
@@ -1598,12 +1848,17 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 		u32 lp, cap, adv;
 		int status;
 =======
+=======
+>>>>>>> v3.18
 	    (phydev->interface == PHY_INTERFACE_MODE_RGMII) ||
 	     phy_is_internal(phydev))) {
 		int eee_lp, eee_cap, eee_adv;
 		u32 lp, cap, adv;
 		int status;
 		unsigned int idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Read phy status to properly get the right settings */
@@ -1612,6 +1867,7 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 			return status;
 
 		/* First check if the EEE ability is supported */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		eee_cap = phy_read_mmd_indirect(phydev->bus, MDIO_PCS_EEE_ABLE,
 						MDIO_MMD_PCS, phydev->addr);
@@ -1622,6 +1878,8 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 		if (!cap)
 			goto eee_exit;
 =======
+=======
+>>>>>>> v3.18
 		eee_cap = phy_read_mmd_indirect(phydev, MDIO_PCS_EEE_ABLE,
 						MDIO_MMD_PCS, phydev->addr);
 		if (eee_cap <= 0)
@@ -1630,11 +1888,15 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 		cap = mmd_eee_cap_to_ethtool_sup_t(eee_cap);
 		if (!cap)
 			goto eee_exit_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Check which link settings negotiated and verify it in
 		 * the EEE advertising registers.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		eee_lp = phy_read_mmd_indirect(phydev->bus, MDIO_AN_EEE_LPABLE,
 					       MDIO_MMD_AN, phydev->addr);
@@ -1651,6 +1913,8 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 		if (!phy_check_valid(phydev->speed, phydev->duplex, lp & adv))
 			goto eee_exit;
 =======
+=======
+>>>>>>> v3.18
 		eee_lp = phy_read_mmd_indirect(phydev, MDIO_AN_EEE_LPABLE,
 					       MDIO_MMD_AN, phydev->addr);
 		if (eee_lp <= 0)
@@ -1666,6 +1930,9 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 		idx = phy_find_setting(phydev->speed, phydev->duplex);
 		if (!(lp & adv & settings[idx].setting))
 			goto eee_exit_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (clk_stop_enable) {
@@ -1673,7 +1940,11 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 			 * clock while it is signaling LPI.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int val = phy_read_mmd_indirect(phydev->bus, MDIO_CTRL1,
+=======
+			int val = phy_read_mmd_indirect(phydev, MDIO_CTRL1,
+>>>>>>> v3.18
 =======
 			int val = phy_read_mmd_indirect(phydev, MDIO_CTRL1,
 >>>>>>> v3.18
@@ -1683,6 +1954,7 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 				return val;
 
 			val |= MDIO_PCS_CTRL1_CLKSTOP_EN;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			phy_write_mmd_indirect(phydev->bus, MDIO_CTRL1,
 					       MDIO_MMD_PCS, phydev->addr, val);
@@ -1694,6 +1966,8 @@ int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable)
 eee_exit:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 			phy_write_mmd_indirect(phydev, MDIO_CTRL1,
 					       MDIO_MMD_PCS, phydev->addr,
 					       val);
@@ -1703,6 +1977,9 @@ eee_exit:
 	}
 eee_exit_err:
 	return -EPROTONOSUPPORT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(phy_init_eee);
@@ -1717,9 +1994,14 @@ EXPORT_SYMBOL(phy_init_eee);
 int phy_get_eee_err(struct phy_device *phydev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return phy_read_mmd_indirect(phydev->bus, MDIO_PCS_EEE_WK_ERR,
 				     MDIO_MMD_PCS, phydev->addr);
 
+=======
+	return phy_read_mmd_indirect(phydev, MDIO_PCS_EEE_WK_ERR,
+				     MDIO_MMD_PCS, phydev->addr);
+>>>>>>> v3.18
 =======
 	return phy_read_mmd_indirect(phydev, MDIO_PCS_EEE_WK_ERR,
 				     MDIO_MMD_PCS, phydev->addr);
@@ -1741,7 +2023,11 @@ int phy_ethtool_get_eee(struct phy_device *phydev, struct ethtool_eee *data)
 
 	/* Get Supported EEE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = phy_read_mmd_indirect(phydev->bus, MDIO_PCS_EEE_ABLE,
+=======
+	val = phy_read_mmd_indirect(phydev, MDIO_PCS_EEE_ABLE,
+>>>>>>> v3.18
 =======
 	val = phy_read_mmd_indirect(phydev, MDIO_PCS_EEE_ABLE,
 >>>>>>> v3.18
@@ -1752,7 +2038,11 @@ int phy_ethtool_get_eee(struct phy_device *phydev, struct ethtool_eee *data)
 
 	/* Get advertisement EEE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = phy_read_mmd_indirect(phydev->bus, MDIO_AN_EEE_ADV,
+=======
+	val = phy_read_mmd_indirect(phydev, MDIO_AN_EEE_ADV,
+>>>>>>> v3.18
 =======
 	val = phy_read_mmd_indirect(phydev, MDIO_AN_EEE_ADV,
 >>>>>>> v3.18
@@ -1763,7 +2053,11 @@ int phy_ethtool_get_eee(struct phy_device *phydev, struct ethtool_eee *data)
 
 	/* Get LP advertisement EEE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = phy_read_mmd_indirect(phydev->bus, MDIO_AN_EEE_LPABLE,
+=======
+	val = phy_read_mmd_indirect(phydev, MDIO_AN_EEE_LPABLE,
+>>>>>>> v3.18
 =======
 	val = phy_read_mmd_indirect(phydev, MDIO_AN_EEE_LPABLE,
 >>>>>>> v3.18
@@ -1786,10 +2080,16 @@ EXPORT_SYMBOL(phy_ethtool_get_eee);
 int phy_ethtool_set_eee(struct phy_device *phydev, struct ethtool_eee *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val;
 
 	val = ethtool_adv_to_mmd_eee_adv_t(data->advertised);
 	phy_write_mmd_indirect(phydev->bus, MDIO_AN_EEE_ADV, MDIO_MMD_AN,
+=======
+	int val = ethtool_adv_to_mmd_eee_adv_t(data->advertised);
+
+	phy_write_mmd_indirect(phydev, MDIO_AN_EEE_ADV, MDIO_MMD_AN,
+>>>>>>> v3.18
 =======
 	int val = ethtool_adv_to_mmd_eee_adv_t(data->advertised);
 

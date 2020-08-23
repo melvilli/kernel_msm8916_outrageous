@@ -92,8 +92,12 @@ static irqreturn_t pruss_handler(int irq, struct uio_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pruss_cleanup(struct platform_device *dev,
 			struct uio_pruss_dev *gdev)
+=======
+static void pruss_cleanup(struct device *dev, struct uio_pruss_dev *gdev)
+>>>>>>> v3.18
 =======
 static void pruss_cleanup(struct device *dev, struct uio_pruss_dev *gdev)
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ static void pruss_cleanup(struct device *dev, struct uio_pruss_dev *gdev)
 	iounmap(gdev->prussio_vaddr);
 	if (gdev->ddr_vaddr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&dev->dev, extram_pool_sz, gdev->ddr_vaddr,
+=======
+		dma_free_coherent(dev, extram_pool_sz, gdev->ddr_vaddr,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(dev, extram_pool_sz, gdev->ddr_vaddr,
 >>>>>>> v3.18
@@ -124,7 +132,11 @@ static void pruss_cleanup(struct device *dev, struct uio_pruss_dev *gdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pruss_probe(struct platform_device *dev)
+=======
+static int pruss_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int pruss_probe(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -133,8 +145,14 @@ static int pruss_probe(struct platform_device *pdev)
 	struct uio_pruss_dev *gdev;
 	struct resource *regs_prussio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -ENODEV, cnt = 0, len;
 	struct uio_pruss_pdata *pdata = dev->dev.platform_data;
+=======
+	struct device *dev = &pdev->dev;
+	int ret = -ENODEV, cnt = 0, len;
+	struct uio_pruss_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct device *dev = &pdev->dev;
 	int ret = -ENODEV, cnt = 0, len;
@@ -151,6 +169,7 @@ static int pruss_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Power on PRU in case its not done as part of boot-loader */
 	gdev->pruss_clk = clk_get(&dev->dev, "pruss");
 	if (IS_ERR(gdev->pruss_clk)) {
@@ -159,6 +178,8 @@ static int pruss_probe(struct platform_device *pdev)
 		kfree(gdev);
 		ret = PTR_ERR(gdev->pruss_clk);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Power on PRU in case its not done as part of boot-loader */
 	gdev->pruss_clk = clk_get(dev, "pruss");
@@ -167,6 +188,9 @@ static int pruss_probe(struct platform_device *pdev)
 		ret = PTR_ERR(gdev->pruss_clk);
 		kfree(gdev->info);
 		kfree(gdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	} else {
@@ -174,9 +198,15 @@ static int pruss_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs_prussio = platform_get_resource(dev, IORESOURCE_MEM, 0);
 	if (!regs_prussio) {
 		dev_err(&dev->dev, "No PRUSS I/O resource specified\n");
+=======
+	regs_prussio = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if (!regs_prussio) {
+		dev_err(dev, "No PRUSS I/O resource specified\n");
+>>>>>>> v3.18
 =======
 	regs_prussio = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!regs_prussio) {
@@ -187,7 +217,11 @@ static int pruss_probe(struct platform_device *pdev)
 
 	if (!regs_prussio->start) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->dev, "Invalid memory resource\n");
+=======
+		dev_err(dev, "Invalid memory resource\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "Invalid memory resource\n");
 >>>>>>> v3.18
@@ -197,6 +231,7 @@ static int pruss_probe(struct platform_device *pdev)
 	if (pdata->sram_pool) {
 		gdev->sram_pool = pdata->sram_pool;
 		gdev->sram_vaddr =
+<<<<<<< HEAD
 <<<<<<< HEAD
 			gen_pool_alloc(gdev->sram_pool, sram_pool_sz);
 		if (!gdev->sram_vaddr) {
@@ -213,6 +248,8 @@ static int pruss_probe(struct platform_device *pdev)
 	if (!gdev->ddr_vaddr) {
 		dev_err(&dev->dev, "Could not allocate external memory\n");
 =======
+=======
+>>>>>>> v3.18
 			(unsigned long)gen_pool_dma_alloc(gdev->sram_pool,
 					sram_pool_sz, &gdev->sram_paddr);
 		if (!gdev->sram_vaddr) {
@@ -225,6 +262,9 @@ static int pruss_probe(struct platform_device *pdev)
 				&(gdev->ddr_paddr), GFP_KERNEL | GFP_DMA);
 	if (!gdev->ddr_vaddr) {
 		dev_err(dev, "Could not allocate external memory\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_free;
 	}
@@ -233,7 +273,11 @@ static int pruss_probe(struct platform_device *pdev)
 	gdev->prussio_vaddr = ioremap(regs_prussio->start, len);
 	if (!gdev->prussio_vaddr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->dev, "Can't remap PRUSS I/O  address range\n");
+=======
+		dev_err(dev, "Can't remap PRUSS I/O  address range\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "Can't remap PRUSS I/O  address range\n");
 >>>>>>> v3.18
@@ -242,7 +286,11 @@ static int pruss_probe(struct platform_device *pdev)
 
 	gdev->pintc_base = pdata->pintc_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gdev->hostirq_start = platform_get_irq(dev, 0);
+=======
+	gdev->hostirq_start = platform_get_irq(pdev, 0);
+>>>>>>> v3.18
 =======
 	gdev->hostirq_start = platform_get_irq(pdev, 0);
 >>>>>>> v3.18
@@ -269,7 +317,11 @@ static int pruss_probe(struct platform_device *pdev)
 		p->priv = gdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = uio_register_device(&dev->dev, p);
+=======
+		ret = uio_register_device(dev, p);
+>>>>>>> v3.18
 =======
 		ret = uio_register_device(dev, p);
 >>>>>>> v3.18
@@ -278,7 +330,11 @@ static int pruss_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, gdev);
+=======
+	platform_set_drvdata(pdev, gdev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, gdev);
 >>>>>>> v3.18
@@ -294,8 +350,12 @@ static int pruss_remove(struct platform_device *dev)
 	struct uio_pruss_dev *gdev = platform_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pruss_cleanup(dev, gdev);
 	platform_set_drvdata(dev, NULL);
+=======
+	pruss_cleanup(&dev->dev, gdev);
+>>>>>>> v3.18
 =======
 	pruss_cleanup(&dev->dev, gdev);
 >>>>>>> v3.18

@@ -27,6 +27,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -343,7 +347,11 @@ void *ppc4xx_ocm_alloc(phys_addr_t *phys, int size, int align,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ocm_blk = kzalloc(sizeof(struct ocm_block *), GFP_KERNEL);
+=======
+		ocm_blk = kzalloc(sizeof(struct ocm_block), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		ocm_blk = kzalloc(sizeof(struct ocm_block), GFP_KERNEL);
 >>>>>>> v3.18

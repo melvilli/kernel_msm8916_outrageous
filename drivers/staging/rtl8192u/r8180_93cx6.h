@@ -1,6 +1,7 @@
 /*
 	This is part of rtl8187 OpenSource driver
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Copyright (C) Andrea Merello 2004-2005  <andreamrl@tiscali.it>
 	Released under the terms of GPL (General Public Licence)
 
@@ -10,6 +11,8 @@
 
 	We want to thank the Authors of such projects and the Ndiswrapper project Authors.
 =======
+=======
+>>>>>>> v3.18
 	Copyright (C) Andrea Merello 2004-2005  <andrea.merello@gmail.com>
 	Released under the terms of GPL (General Public Licence)
 
@@ -21,6 +24,9 @@
 
 	We want to thank the Authors of such projects and the Ndiswrapper
 	project Authors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 
@@ -52,7 +58,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 eprom_read(struct net_device *dev,u32 addr); //reads a 16 bits word
+=======
+u32 eprom_read(struct net_device *dev, u32 addr); /* reads a 16 bits word */
+>>>>>>> v3.18
 =======
 u32 eprom_read(struct net_device *dev, u32 addr); /* reads a 16 bits word */
 >>>>>>> v3.18

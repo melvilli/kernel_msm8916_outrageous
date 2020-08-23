@@ -22,6 +22,11 @@
 #define _ADV7604_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -36,6 +41,7 @@ enum adv7604_ain_sel {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Bus rotation and reordering (IO register 0x04, [7:5]) */
 enum adv7604_op_ch_sel {
 	ADV7604_OP_CH_SEL_GBR = 0,
@@ -45,6 +51,8 @@ enum adv7604_op_ch_sel {
 	ADV7604_OP_CH_SEL_BRG = 4,
 	ADV7604_OP_CH_SEL_RBG = 5,
 =======
+=======
+>>>>>>> v3.18
 /*
  * Bus rotation and reordering. This is used to specify component reordering on
  * the board and describes the components order on the bus when the ADV7604
@@ -57,6 +65,9 @@ enum adv7604_bus_order {
 	ADV7604_BUS_ORDER_BGR,		/* Swap 1-3	*/
 	ADV7604_BUS_ORDER_BRG,		/* Rotate right	*/
 	ADV7604_BUS_ORDER_GBR,		/* Rotate left	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -73,6 +84,7 @@ enum adv7604_inp_color_space {
 	ADV7604_INP_COLOR_SPACE_AUTO = 0xf,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Select output format (IO register 0x03, [7:0]) */
 enum adv7604_op_format_sel {
@@ -98,6 +110,8 @@ enum adv7604_op_format_sel {
 	ADV7604_OP_FORMAT_SEL_SDR_ITU656_24_MODE1 = 0x86,
 	ADV7604_OP_FORMAT_SEL_SDR_ITU656_24_MODE2 = 0x8a,
 =======
+=======
+>>>>>>> v3.18
 /* Select output format (IO register 0x03, [4:2]) */
 enum adv7604_op_format_mode_sel {
 	ADV7604_OP_FORMAT_MODE0 = 0x00,
@@ -133,15 +147,21 @@ enum adv7604_page {
 	ADV7604_PAGE_CP,
 	ADV7604_PAGE_VDP,
 	ADV7604_PAGE_MAX,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* Platform dependent definition */
 struct adv7604_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* connector - HDMI or DVI? */
 	unsigned connector_hdmi:1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* DIS_PWRDNB: 1 if the PWRDNB pin is unused and unconnected */
@@ -151,6 +171,11 @@ struct adv7604_platform_data {
 	unsigned disable_cable_det_rst:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int default_input;
+
+>>>>>>> v3.18
 =======
 	int default_input;
 
@@ -160,11 +185,14 @@ struct adv7604_platform_data {
 
 	/* Bus rotation and reordering */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum adv7604_op_ch_sel op_ch_sel;
 
 	/* Select output format */
 	enum adv7604_op_format_sel op_format_sel;
 =======
+=======
+>>>>>>> v3.18
 	enum adv7604_bus_order bus_order;
 
 	/* Select output format mode */
@@ -172,13 +200,19 @@ struct adv7604_platform_data {
 
 	/* Configuration of the INT1 pin */
 	enum adv7604_int1_config int1_config;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* IO register 0x02 */
 	unsigned alt_gamma:1;
 	unsigned op_656_range:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned rgb_out:1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned alt_data_sat:1;
@@ -188,8 +222,11 @@ struct adv7604_platform_data {
 	unsigned insert_av_codes:1;
 	unsigned replicate_av_codes:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned invert_cbcr:1;
 =======
+=======
+>>>>>>> v3.18
 
 	/* IO register 0x06 */
 	unsigned inv_vs_pol:1;
@@ -200,6 +237,9 @@ struct adv7604_platform_data {
 	enum adv7604_drive_strength dr_str_data;
 	enum adv7604_drive_strength dr_str_clk;
 	enum adv7604_drive_strength dr_str_sync;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* IO register 0x30 */
@@ -209,6 +249,7 @@ struct adv7604_platform_data {
 	unsigned hdmi_free_run_mode;
 
 	/* i2c addresses: 0 == use default */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 i2c_avlink;
 	u8 i2c_cec;
@@ -233,6 +274,8 @@ enum adv7604_mode {
 	ADV7604_MODE_GR,
 	ADV7604_MODE_HDMI,
 =======
+=======
+>>>>>>> v3.18
 	u8 i2c_addresses[ADV7604_PAGE_MAX];
 };
 
@@ -247,6 +290,9 @@ enum adv7604_pad {
 	ADV7604_PAD_SOURCE = 6,
 	ADV7611_PAD_SOURCE = 1,
 	ADV7604_PAD_MAX = 7,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

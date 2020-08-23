@@ -14,6 +14,10 @@
 #include <linux/workqueue.h>
 #include <linux/kref.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hypfs.h>
+>>>>>>> v3.18
 =======
 #include <asm/hypfs.h>
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 #define UPDATE_FILE_MODE 0220
 #define DIR_MODE         0550
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct dentry *hypfs_mkdir(struct super_block *sb, struct dentry *parent,
 				  const char *name);
@@ -33,12 +38,17 @@ extern struct dentry *hypfs_create_u64(struct super_block *sb,
 extern struct dentry *hypfs_create_str(struct super_block *sb,
 				       struct dentry *dir, const char *name,
 =======
+=======
+>>>>>>> v3.18
 extern struct dentry *hypfs_mkdir(struct dentry *parent, const char *name);
 
 extern struct dentry *hypfs_create_u64(struct dentry *dir, const char *name,
 				       __u64 value);
 
 extern struct dentry *hypfs_create_str(struct dentry *dir, const char *name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				       char *string);
 
@@ -46,7 +56,11 @@ extern struct dentry *hypfs_create_str(struct dentry *dir, const char *name,
 extern int hypfs_diag_init(void);
 extern void hypfs_diag_exit(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int hypfs_diag_create_files(struct super_block *sb, struct dentry *root);
+=======
+extern int hypfs_diag_create_files(struct dentry *root);
+>>>>>>> v3.18
 =======
 extern int hypfs_diag_create_files(struct dentry *root);
 >>>>>>> v3.18
@@ -55,13 +69,19 @@ extern int hypfs_diag_create_files(struct dentry *root);
 extern int hypfs_vm_init(void);
 extern void hypfs_vm_exit(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int hypfs_vm_create_files(struct super_block *sb, struct dentry *root);
 =======
+=======
+>>>>>>> v3.18
 extern int hypfs_vm_create_files(struct dentry *root);
 
 /* Set Partition-Resource Parameter */
 int hypfs_sprp_init(void);
 void hypfs_sprp_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* debugfs interface */
@@ -81,6 +101,11 @@ struct hypfs_dbfs_file {
 				       size_t *size);
 	void		(*data_free)(const void *buf_free_ptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	long		(*unlocked_ioctl) (struct file *, unsigned int,
+					   unsigned long);
+>>>>>>> v3.18
 =======
 	long		(*unlocked_ioctl) (struct file *, unsigned int,
 					   unsigned long);

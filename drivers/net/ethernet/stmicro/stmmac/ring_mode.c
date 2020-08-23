@@ -29,7 +29,11 @@
 #include "stmmac.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
+=======
+static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
+>>>>>>> v3.18
 =======
 static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 >>>>>>> v3.18
@@ -38,11 +42,14 @@ static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 	unsigned int txsize = priv->dma_tx_size;
 	unsigned int entry = priv->cur_tx % txsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_desc *desc = priv->dma_tx + entry;
 	unsigned int nopaged_len = skb_headlen(skb);
 	unsigned int bmax, len;
 
 =======
+=======
+>>>>>>> v3.18
 	struct dma_desc *desc;
 	unsigned int nopaged_len = skb_headlen(skb);
 	unsigned int bmax, len;
@@ -52,6 +59,9 @@ static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 	else
 		desc = priv->dma_tx + entry;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (priv->plat->enh_desc)
 		bmax = BUF_SIZE_8KiB;
@@ -65,17 +75,24 @@ static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 		desc->des2 = dma_map_single(priv->device, skb->data,
 					    bmax, DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->tx_skbuff_dma[entry] = desc->des2;
 =======
+=======
+>>>>>>> v3.18
 		if (dma_mapping_error(priv->device, desc->des2))
 			return -1;
 
 		priv->tx_skbuff_dma[entry].buf = desc->des2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		desc->des3 = desc->des2 + BUF_SIZE_4KiB;
 		priv->hw->desc->prepare_tx_desc(desc, 1, bmax, csum,
 						STMMAC_RING_MODE);
 		wmb();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		entry = (++priv->cur_tx) % txsize;
 		desc = priv->dma_tx + entry;
@@ -84,6 +101,8 @@ static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 					    len, DMA_TO_DEVICE);
 		priv->tx_skbuff_dma[entry] = desc->des2;
 =======
+=======
+>>>>>>> v3.18
 		priv->tx_skbuff[entry] = NULL;
 		entry = (++priv->cur_tx) % txsize;
 
@@ -97,6 +116,9 @@ static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 		if (dma_mapping_error(priv->device, desc->des2))
 			return -1;
 		priv->tx_skbuff_dma[entry].buf = desc->des2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		desc->des3 = desc->des2 + BUF_SIZE_4KiB;
 		priv->hw->desc->prepare_tx_desc(desc, 0, len, csum,
@@ -104,18 +126,24 @@ static int stmmac_jumbo_frm(void *p, struct sk_buff *skb, int csum)
 		wmb();
 		priv->hw->desc->set_tx_owner(desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->tx_skbuff[entry] = NULL;
 	} else {
 		desc->des2 = dma_map_single(priv->device, skb->data,
 					    nopaged_len, DMA_TO_DEVICE);
 		priv->tx_skbuff_dma[entry] = desc->des2;
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		desc->des2 = dma_map_single(priv->device, skb->data,
 					    nopaged_len, DMA_TO_DEVICE);
 		if (dma_mapping_error(priv->device, desc->des2))
 			return -1;
 		priv->tx_skbuff_dma[entry].buf = desc->des2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		desc->des3 = desc->des2 + BUF_SIZE_4KiB;
 		priv->hw->desc->prepare_tx_desc(desc, 1, nopaged_len, csum,
@@ -140,10 +168,16 @@ static void stmmac_refill_desc3(void *priv_ptr, struct dma_desc *p)
 	struct stmmac_priv *priv = (struct stmmac_priv *)priv_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(priv->plat->has_gmac))
 		/* Fill DES3 in case of RING mode */
 		if (priv->dma_buf_sz >= BUF_SIZE_8KiB)
 			p->des3 = p->des2 + BUF_SIZE_8KiB;
+=======
+	/* Fill DES3 in case of RING mode */
+	if (priv->dma_buf_sz >= BUF_SIZE_8KiB)
+		p->des3 = p->des2 + BUF_SIZE_8KiB;
+>>>>>>> v3.18
 =======
 	/* Fill DES3 in case of RING mode */
 	if (priv->dma_buf_sz >= BUF_SIZE_8KiB)
@@ -172,7 +206,11 @@ static int stmmac_set_16kib_bfsize(int mtu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct stmmac_ring_mode_ops ring_mode_ops = {
+=======
+const struct stmmac_mode_ops ring_mode_ops = {
+>>>>>>> v3.18
 =======
 const struct stmmac_mode_ops ring_mode_ops = {
 >>>>>>> v3.18

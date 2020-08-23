@@ -54,6 +54,10 @@
 #define SDMMC_DSCADDR		0x094
 #define SDMMC_BUFADDR		0x098
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SDMMC_CDTHRCTL		0x100
+>>>>>>> v3.18
 =======
 #define SDMMC_CDTHRCTL		0x100
 >>>>>>> v3.18
@@ -103,7 +107,12 @@
 #define SDMMC_INT_FRUN			BIT(11)
 #define SDMMC_INT_HTO			BIT(10)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SDMMC_INT_DTO			BIT(9)
+=======
+#define SDMMC_INT_VOLT_SWITCH		BIT(10) /* overloads bit 10! */
+#define SDMMC_INT_DRTO			BIT(9)
+>>>>>>> v3.18
 =======
 #define SDMMC_INT_VOLT_SWITCH		BIT(10) /* overloads bit 10! */
 #define SDMMC_INT_DRTO			BIT(9)
@@ -121,6 +130,11 @@
 /* Command register defines */
 #define SDMMC_CMD_START			BIT(31)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SDMMC_CMD_USE_HOLD_REG	BIT(29)
+#define SDMMC_CMD_VOLT_SWITCH		BIT(28)
+>>>>>>> v3.18
 =======
 #define SDMMC_CMD_USE_HOLD_REG	BIT(29)
 #define SDMMC_CMD_VOLT_SWITCH		BIT(28)
@@ -142,13 +156,19 @@
 /* Status register defines */
 #define SDMMC_GET_FCNT(x)		(((x)>>17) & 0x1FFF)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SDMMC_STATUS_DMA_REQ		BIT(31)
 #define SDMMC_STATUS_BUSY		BIT(9)
 /* FIFOTH register defines */
 #define SDMMC_SET_FIFOTH(m, r, t)	(((m) & 0x7) << 28 | \
 					 ((r) & 0xFFF) << 16 | \
 					 ((t) & 0xFFF))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Internal DMAC interrupt defines */
 #define SDMMC_IDMAC_INT_AI		BIT(9)
@@ -165,13 +185,19 @@
 /* Version ID register define */
 #define SDMMC_GET_VERID(x)		((x) & 0xFFFF)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Card read threshold */
 #define SDMMC_SET_RD_THLD(v, x)		(((v) & 0x1FFF) << 16 | (x))
 #define SDMMC_UHS_18V			BIT(0)
 /* All ctrl reset bits */
 #define SDMMC_CTRL_ALL_RESET_FLAGS \
 	(SDMMC_CTRL_RESET | SDMMC_CTRL_FIFO_RESET | SDMMC_CTRL_DMA_RESET)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Register access macros */
@@ -210,7 +236,11 @@
 extern int dw_mci_probe(struct dw_mci *host);
 extern void dw_mci_remove(struct dw_mci *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -220,7 +250,10 @@ extern int dw_mci_resume(struct dw_mci *host);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct dw_mci_slot - MMC slot state
  * @mmc: The mmc_host representing this slot.
  * @host: The MMC controller this slot is using.
@@ -265,6 +298,9 @@ struct dw_mci_tuning_data {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * dw_mci driver data - dw-mshc implementation specific driver data.
  * @caps: mmc subsystem specified capabilities of the controller(s).
@@ -274,6 +310,10 @@ struct dw_mci_tuning_data {
  * @set_ios: handle bus specific extensions.
  * @parse_dt: parse implementation specific device tree properties.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @execute_tuning: implementation specific tuning procedure.
+>>>>>>> v3.18
 =======
  * @execute_tuning: implementation specific tuning procedure.
 >>>>>>> v3.18
@@ -290,6 +330,11 @@ struct dw_mci_drv_data {
 	void		(*set_ios)(struct dw_mci *host, struct mmc_ios *ios);
 	int		(*parse_dt)(struct dw_mci *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		(*execute_tuning)(struct dw_mci_slot *slot, u32 opcode,
+					struct dw_mci_tuning_data *tuning_data);
+>>>>>>> v3.18
 =======
 	int		(*execute_tuning)(struct dw_mci_slot *slot, u32 opcode,
 					struct dw_mci_tuning_data *tuning_data);

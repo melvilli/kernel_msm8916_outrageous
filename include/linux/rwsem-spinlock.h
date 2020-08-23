@@ -16,6 +16,7 @@
 /*
  * the rw-semaphore definition
 <<<<<<< HEAD
+<<<<<<< HEAD
  * - if activity is 0 then there are no active readers or writers
  * - if activity is +ve then that is the number of active readers
  * - if activity is -1 then there is one active writer
@@ -24,6 +25,8 @@
 struct rw_semaphore {
 	__s32			activity;
 =======
+=======
+>>>>>>> v3.18
  * - if count is 0 then there are no active readers or writers
  * - if count is +ve then that is the number of active readers
  * - if count is -1 then there is one active writer
@@ -31,6 +34,9 @@ struct rw_semaphore {
  */
 struct rw_semaphore {
 	__s32			count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	raw_spinlock_t		wait_lock;
 	struct list_head	wait_list;

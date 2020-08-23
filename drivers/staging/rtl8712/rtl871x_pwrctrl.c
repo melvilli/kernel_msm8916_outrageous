@@ -84,7 +84,11 @@ void r8712_set_ps_mode(struct _adapter *padapter, uint ps_mode, uint smart_ps)
 		pwrpriv->pwr_mode = ps_mode;
 		pwrpriv->smart_ps = smart_ps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_set_workitem(&(pwrpriv->SetPSModeWorkItem));
+=======
+		schedule_work(&pwrpriv->SetPSModeWorkItem);
+>>>>>>> v3.18
 =======
 		schedule_work(&pwrpriv->SetPSModeWorkItem);
 >>>>>>> v3.18
@@ -138,7 +142,11 @@ static void _rpwm_check_handler (struct _adapter *padapter)
 		return;
 	if (pwrpriv->cpwm != pwrpriv->rpwm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_set_workitem(&(pwrpriv->rpwm_workitem));
+=======
+		schedule_work(&pwrpriv->rpwm_workitem);
+>>>>>>> v3.18
 =======
 		schedule_work(&pwrpriv->rpwm_workitem);
 >>>>>>> v3.18
@@ -166,6 +174,10 @@ static void rpwm_workitem_callback(struct work_struct *work)
 				    struct _adapter, pwrctrlpriv);
 	u8 cpwm = pwrpriv->cpwm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -182,6 +194,10 @@ static void rpwm_check_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -201,10 +217,15 @@ void r8712_init_pwrctrl_priv(struct _adapter *padapter)
 /* clear RPWM to ensure driver and fw back to initial state. */
 	r8712_write8(padapter, 0x1025FE58, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_init_workitem(&(pwrctrlpriv->SetPSModeWorkItem),
 		       SetPSModeWorkItemCallback, padapter);
 	_init_workitem(&(pwrctrlpriv->rpwm_workitem),
 		       rpwm_workitem_callback, padapter);
+=======
+	INIT_WORK(&pwrctrlpriv->SetPSModeWorkItem, SetPSModeWorkItemCallback);
+	INIT_WORK(&pwrctrlpriv->rpwm_workitem, rpwm_workitem_callback);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&pwrctrlpriv->SetPSModeWorkItem, SetPSModeWorkItemCallback);
 	INIT_WORK(&pwrctrlpriv->rpwm_workitem, rpwm_workitem_callback);

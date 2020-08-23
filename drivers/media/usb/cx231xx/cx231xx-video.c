@@ -37,7 +37,10 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/msp3400.h>
@@ -213,7 +216,11 @@ static inline int cx231xx_isoc_copy(struct cx231xx *dev, struct urb *urb)
 {
 	struct cx231xx_dmaqueue *dma_q = urb->context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, rc = 1;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -308,7 +315,11 @@ static inline int cx231xx_isoc_copy(struct cx231xx *dev, struct urb *urb)
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 1;
+>>>>>>> v3.18
 =======
 	return 1;
 >>>>>>> v3.18
@@ -318,7 +329,10 @@ static inline int cx231xx_bulk_copy(struct cx231xx *dev, struct urb *urb)
 {
 	struct cx231xx_dmaqueue *dma_q = urb->context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char *p_buffer;
@@ -395,7 +409,11 @@ static inline int cx231xx_bulk_copy(struct cx231xx *dev, struct urb *urb)
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 1;
+>>>>>>> v3.18
 =======
 	return 1;
 >>>>>>> v3.18
@@ -906,7 +924,10 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *priv,
 
 	f->fmt.pix.field = V4L2_FIELD_INTERLACED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -954,7 +975,10 @@ static int vidioc_try_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.colorspace = V4L2_COLORSPACE_SMPTE170M;
 	f->fmt.pix.field = V4L2_FIELD_INTERLACED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1035,7 +1059,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 	dev->height = (dev->norm & V4L2_STD_625_50) ? 576 : 480;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call_all(dev, core, s_std, dev->norm);
+=======
+	call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 =======
 	call_all(dev, video, s_std, dev->norm);
 >>>>>>> v3.18
@@ -1138,7 +1166,11 @@ int cx231xx_s_input(struct file *file, void *priv, unsigned int i)
 		   last known frequency (since it was probably powered down
 		   until now */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		call_all(dev, core, s_std, dev->norm);
+=======
+		call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 =======
 		call_all(dev, video, s_std, dev->norm);
 >>>>>>> v3.18
@@ -1261,6 +1293,7 @@ int cx231xx_s_frequency(struct file *file, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cx231xx_g_chip_ident(struct file *file, void *fh,
 			struct v4l2_dbg_chip_ident *chip)
 {
@@ -1270,6 +1303,8 @@ int cx231xx_g_chip_ident(struct file *file, void *fh,
 		if (v4l2_chip_match_host(&chip->match))
 			chip->ident = V4L2_IDENT_CX23100;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 
 int cx231xx_g_chip_info(struct file *file, void *fh,
@@ -1295,12 +1330,16 @@ int cx231xx_g_chip_info(struct file *file, void *fh,
 		return 0;
 	case 6: /* I2S Block - read dword */
 		strlcpy(chip->name, "I2S (dword)", sizeof(chip->name));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 
@@ -1319,11 +1358,14 @@ int cx231xx_g_chip_info(struct file *file, void *fh,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int cx231xx_g_register(struct file *file, void *priv,
 			     struct v4l2_dbg_register *reg)
 {
 	struct cx231xx_fh *fh = priv;
 	struct cx231xx *dev = fh->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = 0;
 	u8 value[4] = { 0, 0, 0, 0 };
@@ -1466,6 +1508,8 @@ int cx231xx_g_register(struct file *file, void *priv,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	u8 value[4] = { 0, 0, 0, 0 };
 	u32 data = 0;
@@ -1518,6 +1562,9 @@ int cx231xx_g_register(struct file *file, void *priv,
 		return -EINVAL;
 	}
 	return ret < 0 ? ret : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1526,6 +1573,7 @@ int cx231xx_s_register(struct file *file, void *priv,
 {
 	struct cx231xx_fh *fh = priv;
 	struct cx231xx *dev = fh->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = 0;
 	__le64 buf;
@@ -1687,6 +1735,8 @@ int cx231xx_s_register(struct file *file, void *priv,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	u8 data[4] = { 0, 0, 0, 0 };
 
@@ -1727,6 +1777,9 @@ int cx231xx_s_register(struct file *file, void *priv,
 		return -EINVAL;
 	}
 	return ret < 0 ? ret : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -1988,7 +2041,11 @@ static int radio_s_tuner(struct file *file, void *priv, const struct v4l2_tuner 
 static int cx231xx_v4l2_open(struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int errCode = 0, radio = 0;
+=======
+	int radio = 0;
+>>>>>>> v3.18
 =======
 	int radio = 0;
 >>>>>>> v3.18
@@ -2090,7 +2147,11 @@ static int cx231xx_v4l2_open(struct file *filp)
 	v4l2_fh_add(&fh->fh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return errCode;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -2378,8 +2439,13 @@ static const struct v4l2_ioctl_ops video_ioctl_ops = {
 	.vidioc_g_frequency            = cx231xx_g_frequency,
 	.vidioc_s_frequency            = cx231xx_s_frequency,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident           = cx231xx_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+	.vidioc_g_chip_info            = cx231xx_g_chip_info,
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_chip_info            = cx231xx_g_chip_info,
@@ -2415,8 +2481,13 @@ static const struct v4l2_ioctl_ops radio_ioctl_ops = {
 	.vidioc_g_frequency = cx231xx_g_frequency,
 	.vidioc_s_frequency = cx231xx_s_frequency,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident = cx231xx_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+	.vidioc_g_chip_info = cx231xx_g_chip_info,
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_chip_info = cx231xx_g_chip_info,
@@ -2452,7 +2523,10 @@ static struct video_device *cx231xx_vdev_init(struct cx231xx *dev,
 	vfd->debug = video_debug;
 	vfd->lock = &dev->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2488,7 +2562,11 @@ int cx231xx_register_analog_devices(struct cx231xx *dev)
 	video_mux(dev, dev->video_input);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call_all(dev, core, s_std, dev->norm);
+=======
+	call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 =======
 	call_all(dev, video, s_std, dev->norm);
 >>>>>>> v3.18

@@ -128,13 +128,19 @@ extern int fixup_exception(struct pt_regs *regs);
 #ifdef __LP64__
 #define _ASM_PTR	".quad"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define _ASM_PTR	".long"
 =======
+=======
+>>>>>>> v3.18
 #define _ASM_ALIGN	".align 8"
 #else
 #define _ASM_PTR	".long"
 #define _ASM_ALIGN	".align 4"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -145,6 +151,10 @@ extern int fixup_exception(struct pt_regs *regs);
 		     "j 9f\n"						\
 		     ".section __ex_table,\"a\"\n"			\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		     _ASM_ALIGN "\n"					\
+>>>>>>> v3.18
 =======
 		     _ASM_ALIGN "\n"					\
 >>>>>>> v3.18
@@ -180,6 +190,10 @@ extern int fixup_exception(struct pt_regs *regs);
 			     "{ movei %0, %4; j 9f }\n"			\
 			     ".section __ex_table,\"a\"\n"		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			     ".align 4\n"				\
+>>>>>>> v3.18
 =======
 			     ".align 4\n"				\
 >>>>>>> v3.18
@@ -240,6 +254,10 @@ extern int __get_user_bad(void)
 		     "0: { movei %0, %3; j 9f }\n"			\
 		     ".section __ex_table,\"a\"\n"			\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		     _ASM_ALIGN "\n"					\
+>>>>>>> v3.18
 =======
 		     _ASM_ALIGN "\n"					\
 >>>>>>> v3.18
@@ -268,6 +286,10 @@ extern int __get_user_bad(void)
 			     "0: { movei %0, %4; j 9f }\n"		\
 			     ".section __ex_table,\"a\"\n"		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			     ".align 4\n"				\
+>>>>>>> v3.18
 =======
 			     ".align 4\n"				\
 >>>>>>> v3.18
@@ -466,7 +488,11 @@ static inline unsigned long __must_check
 __copy_in_user(void __user *to, const void __user *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18
@@ -595,6 +621,7 @@ static inline unsigned long __must_check flush_user(
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * inv_user: - Invalidate a block of memory in user space from cache.
  * @mem:   Destination address, in user space.
  * @len:   Number of bytes to invalidate.
@@ -626,6 +653,8 @@ static inline unsigned long __must_check inv_user(
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * finv_user: - Flush-inval a block of memory in user space from cache.

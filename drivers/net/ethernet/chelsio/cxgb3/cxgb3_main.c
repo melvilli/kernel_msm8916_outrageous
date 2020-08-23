@@ -86,7 +86,11 @@ enum {
 	{ PCI_VENDOR_ID_CHELSIO, devid, PCI_ANY_ID, PCI_ANY_ID, 0, 0, idx }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cxgb3_pci_tbl) = {
+=======
+static const struct pci_device_id cxgb3_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cxgb3_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1814,8 +1818,13 @@ static int get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 		cmd->duplex = p->link_config.duplex;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(cmd, -1);
 		cmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
+		cmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
 		cmd->duplex = DUPLEX_UNKNOWN;
@@ -3047,7 +3056,13 @@ static void t3_io_resume(struct pci_dev *pdev)
 		 t3_read_reg(adapter, A_PCIE_PEX_ERR));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t3_resume_ports(adapter);
+=======
+	rtnl_lock();
+	t3_resume_ports(adapter);
+	rtnl_unlock();
+>>>>>>> v3.18
 =======
 	rtnl_lock();
 	t3_resume_ports(adapter);
@@ -3102,7 +3117,11 @@ static int cxgb_enable_msix(struct adapter *adap)
 	struct msix_entry entries[SGE_QSETS + 1];
 	int vectors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -3111,6 +3130,7 @@ static int cxgb_enable_msix(struct adapter *adap)
 	for (i = 0; i < vectors; ++i)
 		entries[i].entry = i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while ((err = pci_enable_msix(adap->pdev, entries, vectors)) > 0)
 		vectors = err;
@@ -3131,6 +3151,8 @@ static int cxgb_enable_msix(struct adapter *adap)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	vectors = pci_enable_msix_range(adap->pdev, entries,
 					adap->params.nports + 1, vectors);
 	if (vectors < 0)
@@ -3141,6 +3163,9 @@ static int cxgb_enable_msix(struct adapter *adap)
 	adap->msix_nvectors = vectors;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3330,7 +3355,11 @@ static int init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 		netdev->netdev_ops = &cxgb_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(netdev, &cxgb_ethtool_ops);
+=======
+		netdev->ethtool_ops = &cxgb_ethtool_ops;
+>>>>>>> v3.18
 =======
 		netdev->ethtool_ops = &cxgb_ethtool_ops;
 >>>>>>> v3.18
@@ -3409,7 +3438,10 @@ out_release_regions:
 out_disable_device:
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -3453,7 +3485,10 @@ static void remove_one(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

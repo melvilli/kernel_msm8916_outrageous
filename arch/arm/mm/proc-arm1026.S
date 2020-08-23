@@ -63,7 +63,11 @@
  */
 ENTRY(cpu_arm1026_proc_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ ENTRY(cpu_arm1026_proc_fin)
 	bic	r0, r0, #0x000e 		@ ............wca.
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -105,7 +113,11 @@ ENTRY(cpu_arm1026_reset)
 	bic	ip, ip, #0x1100 		@ ...i...s........
 	mcr	p15, 0, ip, c1, c0, 0		@ ctrl register
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 =======
 	ret	r0
 >>>>>>> v3.18
@@ -119,7 +131,11 @@ ENDPROC(cpu_arm1026_reset)
 ENTRY(cpu_arm1026_do_idle)
 	mcr	p15, 0, r0, c7, c0, 4		@ Wait for interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -139,7 +155,11 @@ ENTRY(arm1026_flush_icache_all)
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I cache
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -172,7 +192,11 @@ __flush_whole_cache:
 #endif
 	mcrne	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -205,7 +229,11 @@ ENTRY(arm1026_flush_user_cache_range)
 #endif
 	mcrne	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -248,7 +276,11 @@ ENTRY(arm1026_coherent_user_range)
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -273,7 +305,11 @@ ENTRY(arm1026_flush_kern_dcache_area)
 #endif
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -306,7 +342,11 @@ arm1026_dma_inv_range:
 #endif
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -332,7 +372,11 @@ arm1026_dma_clean_range:
 #endif
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -356,7 +400,11 @@ ENTRY(arm1026_dma_flush_range)
 #endif
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -383,7 +431,11 @@ ENDPROC(arm1026_dma_map_area)
  */
 ENTRY(arm1026_dma_unmap_area)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -405,7 +457,11 @@ ENTRY(cpu_arm1026_dcache_clean_area)
 	bhi	1b
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -435,7 +491,11 @@ ENTRY(cpu_arm1026_switch_mm)
 	mcr	p15, 0, r1, c8, c7, 0		@ invalidate I & D TLBs
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -455,10 +515,14 @@ ENTRY(cpu_arm1026_set_pte_ext)
 #endif
 #endif /* CONFIG_MMU */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 
 
 	__CPUINIT
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -485,7 +549,11 @@ __arm1026_setup:
 	orr	r0, r0, #0x4000 		@ .R.. .... .... ....
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

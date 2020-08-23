@@ -28,7 +28,11 @@
 
 /* Define the whole MOP500 soundcard, linking platform to the codec-drivers  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_dai_link mop500_dai_links[] = {
+=======
+static struct snd_soc_dai_link mop500_dai_links[] = {
+>>>>>>> v3.18
 =======
 static struct snd_soc_dai_link mop500_dai_links[] = {
 >>>>>>> v3.18
@@ -57,6 +61,10 @@ static struct snd_soc_dai_link mop500_dai_links[] = {
 static struct snd_soc_card mop500_card = {
 	.name = "MOP500-card",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner = THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner = THIS_MODULE,
 >>>>>>> v3.18
@@ -99,6 +107,11 @@ static int mop500_of_probe(struct platform_device *pdev,
 		mop500_dai_links[i].cpu_of_node = msp_np[i];
 		mop500_dai_links[i].cpu_dai_name = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mop500_dai_links[i].platform_of_node = msp_np[i];
+		mop500_dai_links[i].platform_name = NULL;
+>>>>>>> v3.18
 =======
 		mop500_dai_links[i].platform_of_node = msp_np[i];
 		mop500_dai_links[i].platform_name = NULL;

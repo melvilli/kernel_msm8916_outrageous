@@ -29,6 +29,10 @@
 #include <net/netfilter/nf_conntrack.h>
 #include <net/net_namespace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netns/generic.h>
+>>>>>>> v3.18
 =======
 #include <net/netns/generic.h>
 >>>>>>> v3.18
@@ -62,6 +66,7 @@ struct clusterip_config {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static LIST_HEAD(clusterip_configs);
 
 /* clusterip_lock protects the clusterip_configs list */
@@ -72,6 +77,8 @@ static const struct file_operations clusterip_proc_fops;
 static struct proc_dir_entry *clusterip_procdir;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 static const struct file_operations clusterip_proc_fops;
 #endif
@@ -87,6 +94,9 @@ struct clusterip_net {
 	struct proc_dir_entry *procdir;
 #endif
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void
@@ -115,11 +125,14 @@ static inline void
 clusterip_config_entry_put(struct clusterip_config *c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_disable();
 	if (atomic_dec_and_lock(&c->entries, &clusterip_lock)) {
 		list_del_rcu(&c->list);
 		spin_unlock(&clusterip_lock);
 =======
+=======
+>>>>>>> v3.18
 	struct net *net = dev_net(c->dev);
 	struct clusterip_net *cn = net_generic(net, clusterip_net_id);
 
@@ -127,6 +140,9 @@ clusterip_config_entry_put(struct clusterip_config *c)
 	if (atomic_dec_and_lock(&c->entries, &cn->lock)) {
 		list_del_rcu(&c->list);
 		spin_unlock(&cn->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		local_bh_enable();
 
@@ -146,18 +162,24 @@ clusterip_config_entry_put(struct clusterip_config *c)
 
 static struct clusterip_config *
 <<<<<<< HEAD
+<<<<<<< HEAD
 __clusterip_config_find(__be32 clusterip)
 {
 	struct clusterip_config *c;
 
 	list_for_each_entry_rcu(c, &clusterip_configs, list) {
 =======
+=======
+>>>>>>> v3.18
 __clusterip_config_find(struct net *net, __be32 clusterip)
 {
 	struct clusterip_config *c;
 	struct clusterip_net *cn = net_generic(net, clusterip_net_id);
 
 	list_for_each_entry_rcu(c, &cn->configs, list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (c->clusterip == clusterip)
 			return c;
@@ -168,7 +190,11 @@ __clusterip_config_find(struct net *net, __be32 clusterip)
 
 static inline struct clusterip_config *
 <<<<<<< HEAD
+<<<<<<< HEAD
 clusterip_config_find_get(__be32 clusterip, int entry)
+=======
+clusterip_config_find_get(struct net *net, __be32 clusterip, int entry)
+>>>>>>> v3.18
 =======
 clusterip_config_find_get(struct net *net, __be32 clusterip, int entry)
 >>>>>>> v3.18
@@ -177,7 +203,11 @@ clusterip_config_find_get(struct net *net, __be32 clusterip, int entry)
 
 	rcu_read_lock_bh();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c = __clusterip_config_find(clusterip);
+=======
+	c = __clusterip_config_find(net, clusterip);
+>>>>>>> v3.18
 =======
 	c = __clusterip_config_find(net, clusterip);
 >>>>>>> v3.18
@@ -208,6 +238,10 @@ clusterip_config_init(const struct ipt_clusterip_tgt_info *i, __be32 ip,
 {
 	struct clusterip_config *c;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clusterip_net *cn = net_generic(dev_net(dev), clusterip_net_id);
+>>>>>>> v3.18
 =======
 	struct clusterip_net *cn = net_generic(dev_net(dev), clusterip_net_id);
 >>>>>>> v3.18
@@ -234,7 +268,11 @@ clusterip_config_init(const struct ipt_clusterip_tgt_info *i, __be32 ip,
 		sprintf(buffer, "%pI4", &ip);
 		c->pde = proc_create_data(buffer, S_IWUSR|S_IRUSR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  clusterip_procdir,
+=======
+					  cn->procdir,
+>>>>>>> v3.18
 =======
 					  cn->procdir,
 >>>>>>> v3.18
@@ -247,9 +285,15 @@ clusterip_config_init(const struct ipt_clusterip_tgt_info *i, __be32 ip,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&clusterip_lock);
 	list_add_rcu(&c->list, &clusterip_configs);
 	spin_unlock_bh(&clusterip_lock);
+=======
+	spin_lock_bh(&cn->lock);
+	list_add_rcu(&c->list, &cn->configs);
+	spin_unlock_bh(&cn->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&cn->lock);
 	list_add_rcu(&c->list, &cn->configs);
@@ -337,7 +381,11 @@ clusterip_hashfn(const struct sk_buff *skb,
 
 	/* node numbers are 1..n, not 0..n */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (((u64)hashval * config->num_total_nodes) >> 32) + 1;
+=======
+	return reciprocal_scale(hashval, config->num_total_nodes) + 1;
+>>>>>>> v3.18
 =======
 	return reciprocal_scale(hashval, config->num_total_nodes) + 1;
 >>>>>>> v3.18
@@ -438,7 +486,11 @@ static int clusterip_tg_check(const struct xt_tgchk_param *par)
 	/* FIXME: further sanity checks */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config = clusterip_config_find_get(e->ip.dst.s_addr, 1);
+=======
+	config = clusterip_config_find_get(par->net, e->ip.dst.s_addr, 1);
+>>>>>>> v3.18
 =======
 	config = clusterip_config_find_get(par->net, e->ip.dst.s_addr, 1);
 >>>>>>> v3.18
@@ -456,7 +508,11 @@ static int clusterip_tg_check(const struct xt_tgchk_param *par)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev = dev_get_by_name(&init_net, e->ip.iniface);
+=======
+			dev = dev_get_by_name(par->net, e->ip.iniface);
+>>>>>>> v3.18
 =======
 			dev = dev_get_by_name(par->net, e->ip.iniface);
 >>>>>>> v3.18
@@ -559,7 +615,11 @@ static void arp_print(struct arp_payload *payload)
 
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 arp_mangle(unsigned int hook,
+=======
+arp_mangle(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 arp_mangle(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -572,6 +632,10 @@ arp_mangle(const struct nf_hook_ops *ops,
 	struct arp_payload *payload;
 	struct clusterip_config *c;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net = dev_net(in ? in : out);
+>>>>>>> v3.18
 =======
 	struct net *net = dev_net(in ? in : out);
 >>>>>>> v3.18
@@ -592,7 +656,11 @@ arp_mangle(const struct nf_hook_ops *ops,
 	/* if there is no clusterip configuration for the arp reply's
 	 * source ip, we don't want to mangle it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c = clusterip_config_find_get(payload->src_ip, 0);
+=======
+	c = clusterip_config_find_get(net, payload->src_ip, 0);
+>>>>>>> v3.18
 =======
 	c = clusterip_config_find_get(net, payload->src_ip, 0);
 >>>>>>> v3.18
@@ -786,7 +854,10 @@ static const struct file_operations clusterip_proc_fops = {
 #endif /* CONFIG_PROC_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int clusterip_net_init(struct net *net)
 {
 	struct clusterip_net *cn = net_generic(net, clusterip_net_id);
@@ -821,17 +892,23 @@ static struct pernet_operations clusterip_net_ops = {
 	.size = sizeof(struct clusterip_net),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init clusterip_tg_init(void)
 {
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = xt_register_target(&clusterip_tg_reg);
 	if (ret < 0)
 		return ret;
 
 =======
+=======
+>>>>>>> v3.18
 	ret = register_pernet_subsys(&clusterip_net_ops);
 	if (ret < 0)
 		return ret;
@@ -840,11 +917,15 @@ static int __init clusterip_tg_init(void)
 	if (ret < 0)
 		goto cleanup_subsys;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = nf_register_hook(&cip_arp_ops);
 	if (ret < 0)
 		goto cleanup_target;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PROC_FS
 	clusterip_procdir = proc_mkdir("ipt_CLUSTERIP", init_net.proc_net);
@@ -866,6 +947,8 @@ cleanup_hook:
 cleanup_target:
 	xt_unregister_target(&clusterip_tg_reg);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("ClusterIP Version %s loaded successfully\n",
 		CLUSTERIP_VERSION);
 
@@ -875,6 +958,9 @@ cleanup_target:
 	xt_unregister_target(&clusterip_tg_reg);
 cleanup_subsys:
 	unregister_pernet_subsys(&clusterip_net_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -883,16 +969,22 @@ static void __exit clusterip_tg_exit(void)
 {
 	pr_info("ClusterIP Version %s unloading\n", CLUSTERIP_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PROC_FS
 	proc_remove(clusterip_procdir);
 #endif
 	nf_unregister_hook(&cip_arp_ops);
 	xt_unregister_target(&clusterip_tg_reg);
 =======
+=======
+>>>>>>> v3.18
 
 	nf_unregister_hook(&cip_arp_ops);
 	xt_unregister_target(&clusterip_tg_reg);
 	unregister_pernet_subsys(&clusterip_net_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Wait for completion of call_rcu_bh()'s (clusterip_config_rcu_free) */

@@ -27,12 +27,18 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*  The following functions are for use by other drivers  */
 =======
+=======
+>>>>>>> v3.18
 /*
  * The following functions are for use by other drivers that cannot use
  * arch_phys_wc_add and arch_phys_wc_del.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # ifdef CONFIG_MTRR
 extern u8 mtrr_type_lookup(u64 addr, u64 end);
@@ -53,6 +59,10 @@ extern void mtrr_bp_restore(void);
 extern int mtrr_trim_uncached_memory(unsigned long end_pfn);
 extern int amd_special_default_mtrr(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int phys_wc_to_mtrr_index(int handle);
+>>>>>>> v3.18
 =======
 extern int phys_wc_to_mtrr_index(int handle);
 >>>>>>> v3.18
@@ -92,11 +102,17 @@ static inline void mtrr_centaur_report_mcr(int mcr, u32 lo, u32 hi)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int phys_wc_to_mtrr_index(int handle)
 {
 	return -1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define mtrr_ap_init() do {} while (0)

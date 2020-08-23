@@ -3,7 +3,11 @@
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_scsih.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014  LSI Corporation
 >>>>>>> v3.18
@@ -117,8 +121,13 @@ MODULE_PARM_DESC(missing_delay, " device missing delay , io missing delay");
 /* scsi-mid layer global parmeter is max_report_luns, which is 511 */
 #define MPT3SAS_MAX_LUN (16895)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max_lun = MPT3SAS_MAX_LUN;
 module_param(max_lun, int, 0);
+=======
+static u64 max_lun = MPT3SAS_MAX_LUN;
+module_param(max_lun, ullong, 0);
+>>>>>>> v3.18
 =======
 static u64 max_lun = MPT3SAS_MAX_LUN;
 module_param(max_lun, ullong, 0);
@@ -169,7 +178,11 @@ struct sense_info {
 
 #define MPT3SAS_PROCESS_TRIGGER_DIAG (0xFFFB)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPT3SAS_TURN_ON_FAULT_LED (0xFFFC)
+=======
+#define MPT3SAS_TURN_ON_PFA_LED (0xFFFC)
+>>>>>>> v3.18
 =======
 #define MPT3SAS_TURN_ON_PFA_LED (0xFFFC)
 >>>>>>> v3.18
@@ -204,7 +217,11 @@ struct fw_event_work {
 	u8			ignore;
 	u16			event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			*event_data;
+=======
+	char			event_data[0] __aligned(4);
+>>>>>>> v3.18
 =======
 	char			event_data[0] __aligned(4);
 >>>>>>> v3.18
@@ -265,7 +282,11 @@ struct _scsi_io_transfer {
  * The pci device ids are defined in mpi/mpi2_cnfg.h.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(scsih_pci_table) = {
+=======
+static const struct pci_device_id scsih_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id scsih_pci_table[] = {
 >>>>>>> v3.18
@@ -697,18 +718,24 @@ _scsih_sas_device_add(struct MPT3SAS_ADAPTER *ioc,
 		 * scsi_sysfs_add_sdev()->add_device()->sysfs_addrm_start()
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ioc->is_driver_loading)
 			mpt3sas_transport_port_remove(ioc,
 			    sas_device->sas_address,
 			    sas_device->sas_address_parent);
 		_scsih_sas_device_remove(ioc, sas_device);
 =======
+=======
+>>>>>>> v3.18
 		if (!ioc->is_driver_loading) {
 			mpt3sas_transport_port_remove(ioc,
 			    sas_device->sas_address,
 			    sas_device->sas_address_parent);
 			_scsih_sas_device_remove(ioc, sas_device);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1193,7 +1220,12 @@ _scsih_target_alloc(struct scsi_target *starget)
 	struct sas_rphy *rphy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sas_target_priv_data = kzalloc(sizeof(struct scsi_target), GFP_KERNEL);
+=======
+	sas_target_priv_data = kzalloc(sizeof(*sas_target_priv_data),
+				       GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sas_target_priv_data = kzalloc(sizeof(*sas_target_priv_data),
 				       GFP_KERNEL);
@@ -1312,7 +1344,12 @@ _scsih_slave_alloc(struct scsi_device *sdev)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sas_device_priv_data = kzalloc(sizeof(struct scsi_device), GFP_KERNEL);
+=======
+	sas_device_priv_data = kzalloc(sizeof(*sas_device_priv_data),
+				       GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sas_device_priv_data = kzalloc(sizeof(*sas_device_priv_data),
 				       GFP_KERNEL);
@@ -2069,7 +2106,10 @@ mpt3sas_scsih_clear_tm_flag(struct MPT3SAS_ADAPTER *ioc, u16 handle)
  * @smid_task: smid assigned to the task
  * @timeout: timeout in seconds
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @serial_number: the serial_number from scmd
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @m_type: TM_MUTEX_ON or TM_MUTEX_OFF
@@ -2085,7 +2125,11 @@ int
 mpt3sas_scsih_issue_tm(struct MPT3SAS_ADAPTER *ioc, u16 handle, uint channel,
 	uint id, uint lun, u8 type, u16 smid_task, ulong timeout,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long serial_number, enum mutex_type m_type)
+=======
+	enum mutex_type m_type)
+>>>>>>> v3.18
 =======
 	enum mutex_type m_type)
 >>>>>>> v3.18
@@ -2340,8 +2384,12 @@ _scsih_abort(struct scsi_cmnd *scmd)
 	r = mpt3sas_scsih_issue_tm(ioc, handle, scmd->device->channel,
 	    scmd->device->id, scmd->device->lun,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    MPI2_SCSITASKMGMT_TASKTYPE_ABORT_TASK, smid, 30,
 	    scmd->serial_number, TM_MUTEX_ON);
+=======
+	    MPI2_SCSITASKMGMT_TASKTYPE_ABORT_TASK, smid, 30, TM_MUTEX_ON);
+>>>>>>> v3.18
 =======
 	    MPI2_SCSITASKMGMT_TASKTYPE_ABORT_TASK, smid, 30, TM_MUTEX_ON);
 >>>>>>> v3.18
@@ -2404,8 +2452,12 @@ _scsih_dev_reset(struct scsi_cmnd *scmd)
 	r = mpt3sas_scsih_issue_tm(ioc, handle, scmd->device->channel,
 	    scmd->device->id, scmd->device->lun,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    MPI2_SCSITASKMGMT_TASKTYPE_LOGICAL_UNIT_RESET, 0, 30, 0,
 	    TM_MUTEX_ON);
+=======
+	    MPI2_SCSITASKMGMT_TASKTYPE_LOGICAL_UNIT_RESET, 0, 30, TM_MUTEX_ON);
+>>>>>>> v3.18
 =======
 	    MPI2_SCSITASKMGMT_TASKTYPE_LOGICAL_UNIT_RESET, 0, 30, TM_MUTEX_ON);
 >>>>>>> v3.18
@@ -2469,7 +2521,11 @@ _scsih_target_reset(struct scsi_cmnd *scmd)
 	r = mpt3sas_scsih_issue_tm(ioc, handle, scmd->device->channel,
 	    scmd->device->id, 0, MPI2_SCSITASKMGMT_TASKTYPE_TARGET_RESET, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    30, 0, TM_MUTEX_ON);
+=======
+	    30, TM_MUTEX_ON);
+>>>>>>> v3.18
 =======
 	    30, TM_MUTEX_ON);
 >>>>>>> v3.18
@@ -2552,7 +2608,10 @@ _scsih_fw_event_free(struct MPT3SAS_ADAPTER *ioc, struct fw_event_work
 	spin_lock_irqsave(&ioc->fw_event_lock, flags);
 	list_del(&fw_event->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(fw_event->event_data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(fw_event);
@@ -2576,6 +2635,7 @@ mpt3sas_send_trigger_data_event(struct MPT3SAS_ADAPTER *ioc,
 	if (ioc->is_driver_loading)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fw_event = kzalloc(sizeof(struct fw_event_work), GFP_ATOMIC);
 	if (!fw_event)
 		return;
@@ -2583,10 +2643,15 @@ mpt3sas_send_trigger_data_event(struct MPT3SAS_ADAPTER *ioc,
 	if (!fw_event->event_data)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	fw_event = kzalloc(sizeof(*fw_event) + sizeof(*event_data),
 			   GFP_ATOMIC);
 	if (!fw_event)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fw_event->event = MPT3SAS_PROCESS_TRIGGER_DIAG;
 	fw_event->ioc = ioc;
@@ -2654,16 +2719,22 @@ _scsih_fw_event_cleanup_queue(struct MPT3SAS_ADAPTER *ioc)
 
 	list_for_each_entry_safe(fw_event, next, &ioc->fw_event_list, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cancel_delayed_work(&fw_event->delayed_work)) {
 			_scsih_fw_event_free(ioc, fw_event);
 			continue;
 		}
 		fw_event->cancel_pending_work = 1;
 =======
+=======
+>>>>>>> v3.18
 		if (cancel_delayed_work_sync(&fw_event->delayed_work)) {
 			_scsih_fw_event_free(ioc, fw_event);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -3290,7 +3361,12 @@ _scsih_check_topo_delete_events(struct MPT3SAS_ADAPTER *ioc,
 		    fw_event->ignore)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_event_data = fw_event->event_data;
+=======
+		local_event_data = (Mpi2EventDataSasTopologyChangeList_t *)
+				   fw_event->event_data;
+>>>>>>> v3.18
 =======
 		local_event_data = (Mpi2EventDataSasTopologyChangeList_t *)
 				   fw_event->event_data;
@@ -3472,6 +3548,7 @@ _scsih_check_volume_delete_events(struct MPT3SAS_ADAPTER *ioc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _scsih_set_satl_pending(struct scsi_cmnd *scmd, bool pending)
 {
 	struct MPT3SAS_DEVICE *priv = scmd->device->hostdata;
@@ -3486,6 +3563,8 @@ static int _scsih_set_satl_pending(struct scsi_cmnd *scmd, bool pending)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -3510,7 +3589,10 @@ _scsih_flush_running_cmds(struct MPT3SAS_ADAPTER *ioc)
 			continue;
 		count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_scsih_set_satl_pending(scmd, false);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		mpt3sas_base_free_smid(ioc, smid);
@@ -3618,8 +3700,14 @@ _scsih_eedp_error_handling(struct scsi_cmnd *scmd, u16 ioc_status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * _scsih_qcmd_lck - main scsi request entry point
+=======
+
+/**
+ * _scsih_qcmd - main scsi request entry point
+>>>>>>> v3.18
 =======
 
 /**
@@ -3636,9 +3724,15 @@ _scsih_eedp_error_handling(struct scsi_cmnd *scmd, u16 ioc_status)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 _scsih_qcmd_lck(struct scsi_cmnd *scmd, void (*done)(struct scsi_cmnd *))
 {
 	struct MPT3SAS_ADAPTER *ioc = shost_priv(scmd->device->host);
+=======
+_scsih_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *scmd)
+{
+	struct MPT3SAS_ADAPTER *ioc = shost_priv(shost);
+>>>>>>> v3.18
 =======
 _scsih_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *scmd)
 {
@@ -3657,7 +3751,10 @@ _scsih_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *scmd)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scmd->scsi_done = done;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sas_device_priv_data = scmd->device->hostdata;
@@ -3674,6 +3771,7 @@ _scsih_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *scmd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Bug work around for firmware SATL handling.  The loop
 	 * is based on atomic operations and ensures consistency
@@ -3687,6 +3785,8 @@ _scsih_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *scmd)
 		}
 	} while (_scsih_set_satl_pending(scmd, true));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sas_target_priv_data = sas_device_priv_data->sas_target;
@@ -3791,8 +3891,11 @@ _scsih_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *scmd)
 	return SCSI_MLQUEUE_HOST_BUSY;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEF_SCSI_QCMD(_scsih_qcmd)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4027,7 +4130,11 @@ _scsih_scsi_ioc_info(struct MPT3SAS_ADAPTER *ioc, struct scsi_cmnd *scmd,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * _scsih_turn_on_fault_led - illuminate Fault LED
+=======
+ * _scsih_turn_on_pfa_led - illuminate PFA LED
+>>>>>>> v3.18
 =======
  * _scsih_turn_on_pfa_led - illuminate PFA LED
 >>>>>>> v3.18
@@ -4039,11 +4146,14 @@ _scsih_scsi_ioc_info(struct MPT3SAS_ADAPTER *ioc, struct scsi_cmnd *scmd,
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 _scsih_turn_on_fault_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 {
 	Mpi2SepReply_t mpi_reply;
 	Mpi2SepRequest_t mpi_request;
 =======
+=======
+>>>>>>> v3.18
 _scsih_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 {
 	Mpi2SepReply_t mpi_reply;
@@ -4053,6 +4163,9 @@ _scsih_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 	sas_device = _scsih_sas_device_find_by_handle(ioc, handle);
 	if (!sas_device)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&mpi_request, 0, sizeof(Mpi2SepRequest_t));
@@ -4069,6 +4182,10 @@ _scsih_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sas_device->pfa_led_on = 1;
+>>>>>>> v3.18
 =======
 	sas_device->pfa_led_on = 1;
 >>>>>>> v3.18
@@ -4082,10 +4199,13 @@ _scsih_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * _scsih_send_event_to_turn_on_fault_led - fire delayed event
 =======
+=======
+>>>>>>> v3.18
 /**
  * _scsih_turn_off_pfa_led - turn off Fault LED
  * @ioc: per adapter object
@@ -4126,6 +4246,9 @@ _scsih_turn_off_pfa_led(struct MPT3SAS_ADAPTER *ioc,
 }
 /**
  * _scsih_send_event_to_turn_on_pfa_led - fire delayed event
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @ioc: per adapter object
  * @handle: device handle
@@ -4135,7 +4258,11 @@ _scsih_turn_off_pfa_led(struct MPT3SAS_ADAPTER *ioc,
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 _scsih_send_event_to_turn_on_fault_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
+=======
+_scsih_send_event_to_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
+>>>>>>> v3.18
 =======
 _scsih_send_event_to_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 >>>>>>> v3.18
@@ -4146,7 +4273,11 @@ _scsih_send_event_to_turn_on_pfa_led(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 	if (!fw_event)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fw_event->event = MPT3SAS_TURN_ON_FAULT_LED;
+=======
+	fw_event->event = MPT3SAS_TURN_ON_PFA_LED;
+>>>>>>> v3.18
 =======
 	fw_event->event = MPT3SAS_TURN_ON_PFA_LED;
 >>>>>>> v3.18
@@ -4194,7 +4325,11 @@ _scsih_smart_predicted_fault(struct MPT3SAS_ADAPTER *ioc, u16 handle)
 
 	if (ioc->pdev->subsystem_vendor == PCI_VENDOR_ID_IBM)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_scsih_send_event_to_turn_on_fault_led(ioc, handle);
+=======
+		_scsih_send_event_to_turn_on_pfa_led(ioc, handle);
+>>>>>>> v3.18
 =======
 		_scsih_send_event_to_turn_on_pfa_led(ioc, handle);
 >>>>>>> v3.18
@@ -4257,8 +4392,11 @@ _scsih_io_done(struct MPT3SAS_ADAPTER *ioc, u16 smid, u8 msix_index, u32 reply)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_scsih_set_satl_pending(scmd, false);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mpi_request = mpt3sas_base_get_msg_frame(ioc, smid);
@@ -5133,13 +5271,19 @@ _scsih_remove_device(struct MPT3SAS_ADAPTER *ioc,
 	struct MPT3SAS_TARGET *sas_target_priv_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	if ((ioc->pdev->subsystem_vendor == PCI_VENDOR_ID_IBM) &&
 	     (sas_device->pfa_led_on)) {
 		_scsih_turn_off_pfa_led(ioc, sas_device);
 		sas_device->pfa_led_on = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dewtprintk(ioc, pr_info(MPT3SAS_FMT
 		"%s: enter: handle(0x%04x), sas_addr(0x%016llx)\n",
@@ -5272,7 +5416,13 @@ _scsih_sas_topology_change_event(struct MPT3SAS_ADAPTER *ioc,
 	unsigned long flags;
 	u8 link_rate, prev_link_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataSasTopologyChangeList_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataSasTopologyChangeList_t *event_data =
+		(Mpi2EventDataSasTopologyChangeList_t *)
+		fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataSasTopologyChangeList_t *event_data =
 		(Mpi2EventDataSasTopologyChangeList_t *)
@@ -5476,7 +5626,12 @@ _scsih_sas_device_status_change_event(struct MPT3SAS_ADAPTER *ioc,
 	unsigned long flags;
 	Mpi2EventDataSasDeviceStatusChange_t *event_data =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    fw_event->event_data;
+=======
+		(Mpi2EventDataSasDeviceStatusChange_t *)
+		fw_event->event_data;
+>>>>>>> v3.18
 =======
 		(Mpi2EventDataSasDeviceStatusChange_t *)
 		fw_event->event_data;
@@ -5577,6 +5732,10 @@ _scsih_sas_enclosure_dev_status_change_event(struct MPT3SAS_ADAPTER *ioc,
 	if (ioc->logging_level & MPT_DEBUG_EVENT_WORK_TASK)
 		_scsih_sas_enclosure_dev_status_change_event_debug(ioc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		     (Mpi2EventDataSasEnclDevStatusChange_t *)
+>>>>>>> v3.18
 =======
 		     (Mpi2EventDataSasEnclDevStatusChange_t *)
 >>>>>>> v3.18
@@ -5605,7 +5764,13 @@ _scsih_sas_broadcast_primitive_event(struct MPT3SAS_ADAPTER *ioc,
 	u32 query_count;
 	Mpi2SCSITaskManagementReply_t *mpi_reply;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataSasBroadcastPrimitive_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataSasBroadcastPrimitive_t *event_data =
+		(Mpi2EventDataSasBroadcastPrimitive_t *)
+		fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataSasBroadcastPrimitive_t *event_data =
 		(Mpi2EventDataSasBroadcastPrimitive_t *)
@@ -5669,7 +5834,11 @@ _scsih_sas_broadcast_primitive_event(struct MPT3SAS_ADAPTER *ioc,
 		spin_unlock_irqrestore(&ioc->scsi_lookup_lock, flags);
 		r = mpt3sas_scsih_issue_tm(ioc, handle, 0, 0, lun,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    MPI2_SCSITASKMGMT_TASKTYPE_QUERY_TASK, smid, 30, 0,
+=======
+		    MPI2_SCSITASKMGMT_TASKTYPE_QUERY_TASK, smid, 30,
+>>>>>>> v3.18
 =======
 		    MPI2_SCSITASKMGMT_TASKTYPE_QUERY_TASK, smid, 30,
 >>>>>>> v3.18
@@ -5715,7 +5884,11 @@ _scsih_sas_broadcast_primitive_event(struct MPT3SAS_ADAPTER *ioc,
 		r = mpt3sas_scsih_issue_tm(ioc, handle, sdev->channel, sdev->id,
 		    sdev->lun, MPI2_SCSITASKMGMT_TASKTYPE_ABORT_TASK, smid, 30,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    scmd->serial_number, TM_MUTEX_OFF);
+=======
+		    TM_MUTEX_OFF);
+>>>>>>> v3.18
 =======
 		    TM_MUTEX_OFF);
 >>>>>>> v3.18
@@ -5771,7 +5944,12 @@ _scsih_sas_discovery_event(struct MPT3SAS_ADAPTER *ioc,
 	struct fw_event_work *fw_event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataSasDiscovery_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataSasDiscovery_t *event_data =
+		(Mpi2EventDataSasDiscovery_t *) fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataSasDiscovery_t *event_data =
 		(Mpi2EventDataSasDiscovery_t *) fw_event->event_data;
@@ -6262,7 +6440,13 @@ _scsih_sas_ir_config_change_event(struct MPT3SAS_ADAPTER *ioc,
 	int i;
 	u8 foreign_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataIrConfigChangeList_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataIrConfigChangeList_t *event_data =
+		(Mpi2EventDataIrConfigChangeList_t *)
+		fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataIrConfigChangeList_t *event_data =
 		(Mpi2EventDataIrConfigChangeList_t *)
@@ -6338,7 +6522,12 @@ _scsih_sas_ir_volume_event(struct MPT3SAS_ADAPTER *ioc,
 	u32 state;
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataIrVolume_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataIrVolume_t *event_data =
+		(Mpi2EventDataIrVolume_t *) fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataIrVolume_t *event_data =
 		(Mpi2EventDataIrVolume_t *) fw_event->event_data;
@@ -6426,7 +6615,12 @@ _scsih_sas_ir_physical_disk_event(struct MPT3SAS_ADAPTER *ioc,
 	Mpi2SasDevicePage0_t sas_device_pg0;
 	u32 ioc_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataIrPhysicalDisk_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataIrPhysicalDisk_t *event_data =
+		(Mpi2EventDataIrPhysicalDisk_t *) fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataIrPhysicalDisk_t *event_data =
 		(Mpi2EventDataIrPhysicalDisk_t *) fw_event->event_data;
@@ -6551,7 +6745,13 @@ _scsih_sas_ir_operation_status_event(struct MPT3SAS_ADAPTER *ioc,
 	struct fw_event_work *fw_event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2EventDataIrOperationStatus_t *event_data = fw_event->event_data;
+=======
+	Mpi2EventDataIrOperationStatus_t *event_data =
+		(Mpi2EventDataIrOperationStatus_t *)
+		fw_event->event_data;
+>>>>>>> v3.18
 =======
 	Mpi2EventDataIrOperationStatus_t *event_data =
 		(Mpi2EventDataIrOperationStatus_t *)
@@ -7311,7 +7511,11 @@ _mpt3sas_fw_work(struct MPT3SAS_ADAPTER *ioc, struct fw_event_work *fw_event)
 {
 	/* the queue is being flushed so ignore this event */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ioc->remove_host || fw_event->cancel_pending_work ||
+=======
+	if (ioc->remove_host ||
+>>>>>>> v3.18
 =======
 	if (ioc->remove_host ||
 >>>>>>> v3.18
@@ -7323,7 +7527,13 @@ _mpt3sas_fw_work(struct MPT3SAS_ADAPTER *ioc, struct fw_event_work *fw_event)
 	switch (fw_event->event) {
 	case MPT3SAS_PROCESS_TRIGGER_DIAG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mpt3sas_process_trigger_data(ioc, fw_event->event_data);
+=======
+		mpt3sas_process_trigger_data(ioc,
+			(struct SL_WH_TRIGGERS_EVENT_DATA_T *)
+			fw_event->event_data);
+>>>>>>> v3.18
 =======
 		mpt3sas_process_trigger_data(ioc,
 			(struct SL_WH_TRIGGERS_EVENT_DATA_T *)
@@ -7346,8 +7556,13 @@ _mpt3sas_fw_work(struct MPT3SAS_ADAPTER *ioc, struct fw_event_work *fw_event)
 			ioc->name));
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case MPT3SAS_TURN_ON_FAULT_LED:
 		_scsih_turn_on_fault_led(ioc, fw_event->device_handle);
+=======
+	case MPT3SAS_TURN_ON_PFA_LED:
+		_scsih_turn_on_pfa_led(ioc, fw_event->device_handle);
+>>>>>>> v3.18
 =======
 	case MPT3SAS_TURN_ON_PFA_LED:
 		_scsih_turn_on_pfa_led(ioc, fw_event->device_handle);
@@ -7492,6 +7707,7 @@ mpt3sas_scsih_event_callback(struct MPT3SAS_ADAPTER *ioc, u8 msix_index,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fw_event = kzalloc(sizeof(struct fw_event_work), GFP_ATOMIC);
 	if (!fw_event) {
 		pr_err(MPT3SAS_FMT "failure at %s:%d/%s()!\n",
@@ -7505,11 +7721,16 @@ mpt3sas_scsih_event_callback(struct MPT3SAS_ADAPTER *ioc, u8 msix_index,
 		    ioc->name, __FILE__, __LINE__, __func__);
 		kfree(fw_event);
 =======
+=======
+>>>>>>> v3.18
 	sz = le16_to_cpu(mpi_reply->EventDataLength) * 4;
 	fw_event = kzalloc(sizeof(*fw_event) + sz, GFP_ATOMIC);
 	if (!fw_event) {
 		pr_err(MPT3SAS_FMT "failure at %s:%d/%s()!\n",
 		    ioc->name, __FILE__, __LINE__, __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	}
@@ -7739,9 +7960,15 @@ static void _scsih_remove(struct pci_dev *pdev)
 
 	sas_remove_host(shost);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpt3sas_base_detach(ioc);
 	list_del(&ioc->list);
 	scsi_remove_host(shost);
+=======
+	scsi_remove_host(shost);
+	mpt3sas_base_detach(ioc);
+	list_del(&ioc->list);
+>>>>>>> v3.18
 =======
 	scsi_remove_host(shost);
 	mpt3sas_base_detach(ioc);
@@ -7840,17 +8067,23 @@ _scsih_probe_boot_devices(struct MPT3SAS_ADAPTER *ioc)
 			_scsih_sas_device_remove(ioc, sas_device);
 		} else if (!sas_device->starget) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!ioc->is_driver_loading)
 				mpt3sas_transport_port_remove(ioc, sas_address,
 				    sas_address_parent);
 			_scsih_sas_device_remove(ioc, sas_device);
 =======
+=======
+>>>>>>> v3.18
 			if (!ioc->is_driver_loading) {
 				mpt3sas_transport_port_remove(ioc,
 				    sas_address,
 				    sas_address_parent);
 				_scsih_sas_device_remove(ioc, sas_device);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -7908,6 +8141,7 @@ _scsih_probe_sas(struct MPT3SAS_ADAPTER *ioc)
 			 * sysfs_addrm_start()
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!ioc->is_driver_loading)
 				mpt3sas_transport_port_remove(ioc,
 				    sas_device->sas_address,
@@ -7916,6 +8150,8 @@ _scsih_probe_sas(struct MPT3SAS_ADAPTER *ioc)
 			kfree(sas_device);
 			continue;
 =======
+=======
+>>>>>>> v3.18
 			if (!ioc->is_driver_loading) {
 				mpt3sas_transport_port_remove(ioc,
 				    sas_device->sas_address,
@@ -7924,6 +8160,9 @@ _scsih_probe_sas(struct MPT3SAS_ADAPTER *ioc)
 				kfree(sas_device);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -8058,6 +8297,10 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	struct MPT3SAS_ADAPTER *ioc;
 	struct Scsi_Host *shost;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rv;
+>>>>>>> v3.18
 =======
 	int rv;
 >>>>>>> v3.18
@@ -8108,6 +8351,10 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	INIT_LIST_HEAD(&ioc->delayed_tr_list);
 	INIT_LIST_HEAD(&ioc->delayed_tr_volume_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&ioc->reply_queue_list);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ioc->reply_queue_list);
 >>>>>>> v3.18
@@ -8139,6 +8386,7 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((scsi_add_host(shost, &pdev->dev))) {
 		pr_err(MPT3SAS_FMT "failure at %s:%d/%s()!\n",
 		    ioc->name, __FILE__, __LINE__, __func__);
@@ -8146,6 +8394,8 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		goto out_add_shost_fail;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* register EEDP capabilities with SCSI layer */
@@ -8167,6 +8417,10 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		pr_err(MPT3SAS_FMT "failure at %s:%d/%s()!\n",
 		    ioc->name, __FILE__, __LINE__, __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rv = -ENODEV;
+>>>>>>> v3.18
 =======
 		rv = -ENODEV;
 >>>>>>> v3.18
@@ -8178,12 +8432,15 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		pr_err(MPT3SAS_FMT "failure at %s:%d/%s()!\n",
 		    ioc->name, __FILE__, __LINE__, __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_attach_fail;
 	}
 	scsi_scan_host(shost);
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 		rv = -ENODEV;
 		goto out_attach_fail;
 	}
@@ -8198,16 +8455,24 @@ _scsih_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	return 0;
 out_add_shost_fail:
 	mpt3sas_base_detach(ioc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out_attach_fail:
 	destroy_workqueue(ioc->firmware_event_thread);
  out_thread_fail:
 	list_del(&ioc->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_remove_host(shost);
  out_add_shost_fail:
 	scsi_host_put(shost);
 	return -ENODEV;
+=======
+	scsi_host_put(shost);
+	return rv;
+>>>>>>> v3.18
 =======
 	scsi_host_put(shost);
 	return rv;

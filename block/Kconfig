@@ -78,6 +78,10 @@ config BLK_DEV_BSGLIB
 config BLK_DEV_INTEGRITY
 	bool "Block layer data integrity support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRC_T10DIF if BLK_DEV_INTEGRITY
+>>>>>>> v3.18
 =======
 	select CRC_T10DIF if BLK_DEV_INTEGRITY
 >>>>>>> v3.18
@@ -104,7 +108,10 @@ config BLK_DEV_THROTTLING
 	See Documentation/cgroups/blkio-controller.txt for more information.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BLK_CMDLINE_PARSER
 	bool "Block device command line partition parser"
 	default n
@@ -116,6 +123,9 @@ config BLK_CMDLINE_PARSER
 
 	See Documentation/block/cmdline-partition.txt for more information.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 menu "Partition Types"
 

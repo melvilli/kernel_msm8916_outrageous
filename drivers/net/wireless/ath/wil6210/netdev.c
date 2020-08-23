@@ -53,7 +53,10 @@ static int wil_change_mtu(struct net_device *ndev, int new_mtu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int wil_do_ioctl(struct net_device *ndev, struct ifreq *ifr, int cmd)
 {
 	struct wil6210_priv *wil = ndev_to_wil(ndev);
@@ -65,6 +68,9 @@ static int wil_do_ioctl(struct net_device *ndev, struct ifreq *ifr, int cmd)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct net_device_ops wil_netdev_ops = {
 	.ndo_open		= wil_open,
@@ -74,6 +80,10 @@ static const struct net_device_ops wil_netdev_ops = {
 	.ndo_validate_addr	= eth_validate_addr,
 	.ndo_change_mtu		= wil_change_mtu,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_do_ioctl		= wil_do_ioctl,
+>>>>>>> v3.18
 =======
 	.ndo_do_ioctl		= wil_do_ioctl,
 >>>>>>> v3.18
@@ -160,7 +170,11 @@ void *wil_if_alloc(struct device *dev, void __iomem *csr)
 	cfg80211_chandef_create(&wdev->preset_chandef, ch, NL80211_CHAN_NO_HT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ndev = alloc_netdev(0, "wlan%d", ether_setup);
+=======
+	ndev = alloc_netdev(0, "wlan%d", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 =======
 	ndev = alloc_netdev(0, "wlan%d", NET_NAME_UNKNOWN, ether_setup);
 >>>>>>> v3.18
@@ -172,6 +186,10 @@ void *wil_if_alloc(struct device *dev, void __iomem *csr)
 
 	ndev->netdev_ops = &wil_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wil_set_ethtoolops(ndev);
+>>>>>>> v3.18
 =======
 	wil_set_ethtoolops(ndev);
 >>>>>>> v3.18

@@ -23,6 +23,10 @@
 #include <linux/platform_data/dma-mmp_tdma.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_dma.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_dma.h>
 >>>>>>> v3.18
@@ -67,12 +71,18 @@
 #define TDCR_BURSTSZ_32B	(0x6 << 6)
 #define TDCR_BURSTSZ_64B	(0x7 << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TDCR_BURSTSZ_SQU_1B		(0x5 << 6)
 #define TDCR_BURSTSZ_SQU_2B		(0x6 << 6)
 #define TDCR_BURSTSZ_SQU_4B		(0x0 << 6)
 #define TDCR_BURSTSZ_SQU_8B		(0x1 << 6)
 #define TDCR_BURSTSZ_SQU_16B	(0x3 << 6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TDCR_BURSTSZ_SQU_32B	(0x7 << 6)
 #define TDCR_BURSTSZ_128B	(0x5 << 6)
@@ -129,7 +139,11 @@ struct mmp_tdma_chan {
 	enum mmp_tdma_type		type;
 	int				irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long			reg_base;
+=======
+	void __iomem			*reg_base;
+>>>>>>> v3.18
 =======
 	void __iomem			*reg_base;
 >>>>>>> v3.18
@@ -138,6 +152,11 @@ struct mmp_tdma_chan {
 	size_t				period_len;
 	size_t				pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct gen_pool			*pool;
+>>>>>>> v3.18
 =======
 
 	struct gen_pool			*pool;
@@ -162,11 +181,14 @@ static void mmp_tdma_chan_set_desc(struct mmp_tdma_chan *tdmac, dma_addr_t phys)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mmp_tdma_enable_chan(struct mmp_tdma_chan *tdmac)
 {
 	/* enable irq */
 	writel(TDIMR_COMP, tdmac->reg_base + TDIMR);
 =======
+=======
+>>>>>>> v3.18
 static void mmp_tdma_enable_irq(struct mmp_tdma_chan *tdmac, bool enable)
 {
 	if (enable)
@@ -177,6 +199,9 @@ static void mmp_tdma_enable_irq(struct mmp_tdma_chan *tdmac, bool enable)
 
 static void mmp_tdma_enable_chan(struct mmp_tdma_chan *tdmac)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* enable dma chan */
 	writel(readl(tdmac->reg_base + TDCR) | TDCR_CHANEN,
@@ -189,7 +214,12 @@ static void mmp_tdma_disable_chan(struct mmp_tdma_chan *tdmac)
 	writel(readl(tdmac->reg_base + TDCR) & ~TDCR_CHANEN,
 					tdmac->reg_base + TDCR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tdmac->status = DMA_SUCCESS;
+=======
+
+	tdmac->status = DMA_COMPLETE;
+>>>>>>> v3.18
 =======
 
 	tdmac->status = DMA_COMPLETE;
@@ -213,7 +243,11 @@ static void mmp_tdma_pause_chan(struct mmp_tdma_chan *tdmac)
 static int mmp_tdma_config_chan(struct mmp_tdma_chan *tdmac)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int tdcr;
+=======
+	unsigned int tdcr = 0;
+>>>>>>> v3.18
 =======
 	unsigned int tdcr = 0;
 >>>>>>> v3.18
@@ -268,9 +302,12 @@ static int mmp_tdma_config_chan(struct mmp_tdma_chan *tdmac)
 		}
 	} else if (tdmac->type == PXA910_SQU) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tdcr |= TDCR_BURSTSZ_SQU_32B;
 		tdcr |= TDCR_SSPMOD;
 =======
+=======
+>>>>>>> v3.18
 		tdcr |= TDCR_SSPMOD;
 
 		switch (tdmac->burst_sz) {
@@ -296,6 +333,9 @@ static int mmp_tdma_config_chan(struct mmp_tdma_chan *tdmac)
 			dev_err(tdmac->dev, "mmp_tdma: unknown burst size.\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -364,7 +404,11 @@ static void mmp_tdma_free_descriptor(struct mmp_tdma_chan *tdmac)
 	int size = tdmac->desc_num * sizeof(struct mmp_tdma_desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpool = sram_get_gpool("asram");
+=======
+	gpool = tdmac->pool;
+>>>>>>> v3.18
 =======
 	gpool = tdmac->pool;
 >>>>>>> v3.18
@@ -396,7 +440,11 @@ static int mmp_tdma_alloc_chan_resources(struct dma_chan *chan)
 	if (tdmac->irq) {
 		ret = devm_request_irq(tdmac->dev, tdmac->irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mmp_tdma_chan_handler, IRQF_DISABLED, "tdma", tdmac);
+=======
+			mmp_tdma_chan_handler, 0, "tdma", tdmac);
+>>>>>>> v3.18
 =======
 			mmp_tdma_chan_handler, 0, "tdma", tdmac);
 >>>>>>> v3.18
@@ -422,6 +470,7 @@ struct mmp_tdma_desc *mmp_tdma_alloc_descriptor(struct mmp_tdma_chan *tdmac)
 	int size = tdmac->desc_num * sizeof(struct mmp_tdma_desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpool = sram_get_gpool("asram");
 	if (!gpool)
 		return NULL;
@@ -433,11 +482,16 @@ struct mmp_tdma_desc *mmp_tdma_alloc_descriptor(struct mmp_tdma_chan *tdmac)
 	tdmac->desc_arr_phys = gen_pool_virt_to_phys(gpool,
 			(unsigned long)tdmac->desc_arr);
 =======
+=======
+>>>>>>> v3.18
 	gpool = tdmac->pool;
 	if (!gpool)
 		return NULL;
 
 	tdmac->desc_arr = gen_pool_dma_alloc(gpool, size, &tdmac->desc_arr_phys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return tdmac->desc_arr;
@@ -447,7 +501,11 @@ static struct dma_async_tx_descriptor *mmp_tdma_prep_dma_cyclic(
 		struct dma_chan *chan, dma_addr_t dma_addr, size_t buf_len,
 		size_t period_len, enum dma_transfer_direction direction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long flags, void *context)
+=======
+		unsigned long flags)
+>>>>>>> v3.18
 =======
 		unsigned long flags)
 >>>>>>> v3.18
@@ -458,7 +516,11 @@ static struct dma_async_tx_descriptor *mmp_tdma_prep_dma_cyclic(
 	int i = 0, buf = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tdmac->status != DMA_SUCCESS)
+=======
+	if (tdmac->status != DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 	if (tdmac->status != DMA_COMPLETE)
 >>>>>>> v3.18
@@ -500,11 +562,17 @@ static struct dma_async_tx_descriptor *mmp_tdma_prep_dma_cyclic(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* enable interrupt */
 	if (flags & DMA_PREP_INTERRUPT)
 		mmp_tdma_enable_irq(tdmac, true);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tdmac->buf_len = buf_len;
 	tdmac->period_len = period_len;
@@ -528,6 +596,11 @@ static int mmp_tdma_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 	case DMA_TERMINATE_ALL:
 		mmp_tdma_disable_chan(tdmac);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* disable interrupt */
+		mmp_tdma_enable_irq(tdmac, false);
+>>>>>>> v3.18
 =======
 		/* disable interrupt */
 		mmp_tdma_enable_irq(tdmac, false);
@@ -564,7 +637,12 @@ static enum dma_status mmp_tdma_tx_status(struct dma_chan *chan,
 	struct mmp_tdma_chan *tdmac = to_mmp_tdma_chan(chan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_set_residue(txstate, tdmac->buf_len - tdmac->pos);
+=======
+	dma_set_tx_state(txstate, chan->completed_cookie, chan->cookie,
+			 tdmac->buf_len - tdmac->pos);
+>>>>>>> v3.18
 =======
 	dma_set_tx_state(txstate, chan->completed_cookie, chan->cookie,
 			 tdmac->buf_len - tdmac->pos);
@@ -590,7 +668,12 @@ static int mmp_tdma_remove(struct platform_device *pdev)
 
 static int mmp_tdma_chan_init(struct mmp_tdma_device *tdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						int idx, int irq, int type)
+=======
+					int idx, int irq,
+					int type, struct gen_pool *pool)
+>>>>>>> v3.18
 =======
 					int idx, int irq,
 					int type, struct gen_pool *pool)
@@ -616,8 +699,14 @@ static int mmp_tdma_chan_init(struct mmp_tdma_device *tdev,
 	tdmac->idx	   = idx;
 	tdmac->type	   = type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tdmac->reg_base	   = (unsigned long)tdev->base + idx * 4;
 	tdmac->status = DMA_SUCCESS;
+=======
+	tdmac->reg_base	   = tdev->base + idx * 4;
+	tdmac->pool	   = pool;
+	tdmac->status = DMA_COMPLETE;
+>>>>>>> v3.18
 =======
 	tdmac->reg_base	   = tdev->base + idx * 4;
 	tdmac->pool	   = pool;
@@ -633,7 +722,10 @@ static int mmp_tdma_chan_init(struct mmp_tdma_device *tdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mmp_tdma_filter_param {
 	struct device_node *of_node;
 	unsigned int chan_id;
@@ -673,6 +765,9 @@ struct dma_chan *mmp_tdma_xlate(struct of_phandle_args *dma_spec,
 	return dma_request_channel(mask, mmp_tdma_filter_fn, &param);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct of_device_id mmp_tdma_dt_ids[] = {
 	{ .compatible = "marvell,adma-1.0", .data = (void *)MMP_AUD_TDMA},
@@ -691,6 +786,10 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 	int irq = 0, irq_num = 0;
 	int chan_num = TDMA_CHANNEL_NUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gen_pool *pool;
+>>>>>>> v3.18
 =======
 	struct gen_pool *pool;
 >>>>>>> v3.18
@@ -715,9 +814,12 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 
 	iores = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!iores)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tdev->base = devm_ioremap_resource(&pdev->dev, iores);
@@ -727,11 +829,14 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 	INIT_LIST_HEAD(&tdev->device.channels);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq_num != chan_num) {
 		irq = platform_get_irq(pdev, 0);
 		ret = devm_request_irq(&pdev->dev, irq,
 			mmp_tdma_int_handler, IRQF_DISABLED, "tdma", tdev);
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->dev.of_node)
 		pool = of_get_named_gen_pool(pdev->dev.of_node, "asram", 0);
 	else
@@ -745,6 +850,9 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 		irq = platform_get_irq(pdev, 0);
 		ret = devm_request_irq(&pdev->dev, irq,
 			mmp_tdma_int_handler, 0, "tdma", tdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			return ret;
@@ -754,7 +862,11 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 	for (i = 0; i < chan_num; i++) {
 		irq = (irq_num != chan_num) ? 0 : platform_get_irq(pdev, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mmp_tdma_chan_init(tdev, i, irq, type);
+=======
+		ret = mmp_tdma_chan_init(tdev, i, irq, type, pool);
+>>>>>>> v3.18
 =======
 		ret = mmp_tdma_chan_init(tdev, i, irq, type, pool);
 >>>>>>> v3.18
@@ -785,7 +897,10 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->dev.of_node) {
 		ret = of_dma_controller_register(pdev->dev.of_node,
 							mmp_tdma_xlate, tdev);
@@ -796,6 +911,9 @@ static int mmp_tdma_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(tdev->device.dev, "initialized\n");
 	return 0;

@@ -129,7 +129,11 @@ nfs41_callback_svc(void *vrqstp)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prepare_to_wait(&serv->sv_cb_waitq, &wq, TASK_UNINTERRUPTIBLE);
+=======
+		prepare_to_wait(&serv->sv_cb_waitq, &wq, TASK_INTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 		prepare_to_wait(&serv->sv_cb_waitq, &wq, TASK_INTERRUPTIBLE);
 >>>>>>> v3.18
@@ -140,7 +144,10 @@ nfs41_callback_svc(void *vrqstp)
 			list_del(&req->rq_bc_list);
 			spin_unlock_bh(&serv->sv_cb_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			finish_wait(&serv->sv_cb_waitq, &wq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			dprintk("Invoking bc_svc_process()\n");
@@ -150,10 +157,16 @@ nfs41_callback_svc(void *vrqstp)
 		} else {
 			spin_unlock_bh(&serv->sv_cb_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* schedule_timeout to game the hung task watchdog */
 			schedule_timeout(60 * HZ);
 			finish_wait(&serv->sv_cb_waitq, &wq);
 		}
+=======
+			schedule();
+		}
+		finish_wait(&serv->sv_cb_waitq, &wq);
+>>>>>>> v3.18
 =======
 			schedule();
 		}
@@ -180,8 +193,12 @@ nfs41_callback_up(struct svc_serv *serv)
 		serv->sv_bc_xprt = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("--> %s return %ld\n", __func__,
 		IS_ERR(rqstp) ? PTR_ERR(rqstp) : 0);
+=======
+	dprintk("--> %s return %d\n", __func__, PTR_ERR_OR_ZERO(rqstp));
+>>>>>>> v3.18
 =======
 	dprintk("--> %s return %d\n", __func__, PTR_ERR_OR_ZERO(rqstp));
 >>>>>>> v3.18
@@ -231,7 +248,10 @@ static int nfs_callback_start_svc(int minorversion, struct rpc_xprt *xprt,
 	int (*callback_svc)(void *vrqstp);
 	struct nfs_callback_data *cb_info = &nfs_callback_info[minorversion];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char svc_name[12];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -258,15 +278,21 @@ static int nfs_callback_start_svc(int minorversion, struct rpc_xprt *xprt,
 	svc_sock_update_bufs(serv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(svc_name, "nfsv4.%u-svc", minorversion);
 	cb_info->serv = serv;
 	cb_info->rqst = rqstp;
 	cb_info->task = kthread_run(callback_svc, cb_info->rqst, svc_name);
 =======
+=======
+>>>>>>> v3.18
 	cb_info->serv = serv;
 	cb_info->rqst = rqstp;
 	cb_info->task = kthread_create(callback_svc, cb_info->rqst,
 				    "nfsv4.%u-svc", minorversion);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(cb_info->task)) {
 		ret = PTR_ERR(cb_info->task);
@@ -276,6 +302,11 @@ static int nfs_callback_start_svc(int minorversion, struct rpc_xprt *xprt,
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rqstp->rq_task = cb_info->task;
+	wake_up_process(cb_info->task);
+>>>>>>> v3.18
 =======
 	rqstp->rq_task = cb_info->task;
 	wake_up_process(cb_info->task);
@@ -317,6 +348,10 @@ static int nfs_callback_up_net(int minorversion, struct svc_serv *serv, struct n
 			break;
 		case 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case 2:
+>>>>>>> v3.18
 =======
 		case 2:
 >>>>>>> v3.18
@@ -339,7 +374,10 @@ err_socks:
 	svc_rpcb_cleanup(serv, net);
 err_bind:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nn->cb_users[minorversion]--;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dprintk("NFS: Couldn't create callback socket: err = %d; "
@@ -472,7 +510,10 @@ check_gss_callback_principal(struct nfs_client *clp, struct svc_rqst *rqstp)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Did we get the acceptor from userland during the SETCLIENID
 	 * negotiation?
@@ -485,6 +526,9 @@ check_gss_callback_principal(struct nfs_client *clp, struct svc_rqst *rqstp)
 	 * doesn't work if a non-canonical hostname was used in the devname.
 	 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Expect a GSS_C_NT_HOSTBASED_NAME like "nfs@serverhostname" */
 

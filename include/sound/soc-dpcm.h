@@ -12,8 +12,13 @@
 #define __LINUX_SND_SOC_DPCM_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/list.h>
 #include <linux/slab.h>
+=======
+#include <linux/slab.h>
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/list.h>
@@ -23,7 +28,10 @@
 struct snd_soc_pcm_runtime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DPCM_MAX_BE_USERS   8
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -96,7 +104,10 @@ struct snd_soc_dpcm {
 	struct dentry *debugfs_state;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int stream;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -116,6 +127,11 @@ struct snd_soc_dpcm_runtime {
 	enum snd_soc_dpcm_update runtime_update;
 	enum snd_soc_dpcm_state state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	int trigger_pending; /* trigger cmd + 1 if pending, 0 if not */
+>>>>>>> v3.18
 =======
 
 	int trigger_pending; /* trigger cmd + 1 if pending, 0 if not */
@@ -153,7 +169,11 @@ void snd_soc_dpcm_be_set_state(struct snd_soc_pcm_runtime *be, int stream,
 int soc_dpcm_be_digital_mute(struct snd_soc_pcm_runtime *fe, int mute);
 int soc_dpcm_debugfs_add(struct snd_soc_pcm_runtime *rtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int soc_dpcm_runtime_update(struct snd_soc_dapm_widget *);
+=======
+int soc_dpcm_runtime_update(struct snd_soc_card *);
+>>>>>>> v3.18
 =======
 int soc_dpcm_runtime_update(struct snd_soc_card *);
 >>>>>>> v3.18
@@ -169,6 +189,7 @@ void dpcm_clear_pending_state(struct snd_soc_pcm_runtime *fe, int stream);
 int dpcm_be_dai_hw_free(struct snd_soc_pcm_runtime *fe, int stream);
 int dpcm_be_dai_hw_params(struct snd_soc_pcm_runtime *fe, int tream);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dpcm_fe_dai_hw_params_be(struct snd_soc_pcm_runtime *fe,
 	struct snd_soc_pcm_runtime *be, struct snd_pcm_hw_params *hw_params,
 							    int stream);
@@ -179,10 +200,15 @@ int dpcm_fe_dai_prepare_be(struct snd_soc_pcm_runtime *fe,
 int dpcm_dapm_stream_event(struct snd_soc_pcm_runtime *fe,
 	int dir, int event);
 =======
+=======
+>>>>>>> v3.18
 int dpcm_be_dai_trigger(struct snd_soc_pcm_runtime *fe, int stream, int cmd);
 int dpcm_be_dai_prepare(struct snd_soc_pcm_runtime *fe, int stream);
 int dpcm_dapm_stream_event(struct snd_soc_pcm_runtime *fe, int dir,
 	int event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void dpcm_path_put(struct snd_soc_dapm_widget_list **list)
@@ -191,6 +217,10 @@ static inline void dpcm_path_put(struct snd_soc_dapm_widget_list **list)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

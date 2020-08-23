@@ -38,12 +38,15 @@ SECTIONS
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	. = ALIGN(0x1000);
 	.cmdline :
 	{
 		*(.cmdline)
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -58,9 +61,15 @@ SECTIONS
 
 	. = ALIGN(PAGE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init :
 	{
 		_stext = .;
+=======
+	__init_begin = .;
+	.init :
+	{
+>>>>>>> v3.18
 =======
 	__init_begin = .;
 	.init :
@@ -73,7 +82,10 @@ SECTIONS
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__init_begin = _stext;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_DATA_SECTION(16)
@@ -87,6 +99,10 @@ SECTIONS
 	{
 		_text = .;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		_stext = .;
+>>>>>>> v3.18
 =======
 		_stext = .;
 >>>>>>> v3.18

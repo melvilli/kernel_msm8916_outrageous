@@ -17,6 +17,10 @@
 #include <linux/io.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mutex.h>
+>>>>>>> v3.18
 =======
 #include <linux/mutex.h>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 #include "ux500_pcm.h"
 #include "ux500_msp_dai.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "mop500_ab8500.h"
+>>>>>>> v3.18
 =======
 #include "mop500_ab8500.h"
 >>>>>>> v3.18
@@ -52,13 +60,19 @@ static unsigned int tx_slots = DEF_TX_SLOTS;
 static unsigned int rx_slots = DEF_RX_SLOTS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Configuration consistency parameters */
 static DEFINE_MUTEX(mop500_ab8500_params_lock);
 static unsigned long mop500_ab8500_usage;
 static int mop500_ab8500_rate;
 static int mop500_ab8500_channels;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Clocks */
 static const char * const enum_mclk[] = {
@@ -143,9 +157,15 @@ static int mclk_input_control_get(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct mop500_ab8500_drvdata *drvdata =
 				snd_soc_card_get_drvdata(codec->card);
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+	struct mop500_ab8500_drvdata *drvdata =
+				snd_soc_card_get_drvdata(card);
+>>>>>>> v3.18
 =======
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 	struct mop500_ab8500_drvdata *drvdata =
@@ -161,9 +181,15 @@ static int mclk_input_control_put(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct mop500_ab8500_drvdata *drvdata =
 				snd_soc_card_get_drvdata(codec->card);
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+	struct mop500_ab8500_drvdata *drvdata =
+				snd_soc_card_get_drvdata(card);
+>>>>>>> v3.18
 =======
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 	struct mop500_ab8500_drvdata *drvdata =
@@ -190,6 +216,7 @@ static struct snd_kcontrol_new mop500_ab8500_ctrls[] = {
 		soc_enum_mclk,
 		mclk_input_control_get, mclk_input_control_put),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Digital interface - Clocks */
 	SOC_SINGLE("Digital Interface Master Generator Switch",
 		AB8500_DIGIFCONF1, AB8500_DIGIFCONF1_ENMASTGEN,
@@ -200,6 +227,8 @@ static struct snd_kcontrol_new mop500_ab8500_ctrls[] = {
 	SOC_SINGLE("Digital Interface 1 Bit-clock Switch",
 		AB8500_DIGIFCONF1, AB8500_DIGIFCONF1_ENFSBITCLK1,
 		1, 0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SOC_DAPM_PIN_SWITCH("Headset Left"),
@@ -226,7 +255,11 @@ static struct snd_kcontrol_new mop500_ab8500_ctrls[] = {
 /* ASoC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mop500_ab8500_startup(struct snd_pcm_substream *substream)
+=======
+static int mop500_ab8500_startup(struct snd_pcm_substream *substream)
+>>>>>>> v3.18
 =======
 static int mop500_ab8500_startup(struct snd_pcm_substream *substream)
 >>>>>>> v3.18
@@ -239,7 +272,11 @@ static int mop500_ab8500_startup(struct snd_pcm_substream *substream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mop500_ab8500_shutdown(struct snd_pcm_substream *substream)
+=======
+static void mop500_ab8500_shutdown(struct snd_pcm_substream *substream)
+>>>>>>> v3.18
 =======
 static void mop500_ab8500_shutdown(struct snd_pcm_substream *substream)
 >>>>>>> v3.18
@@ -257,7 +294,11 @@ static void mop500_ab8500_shutdown(struct snd_pcm_substream *substream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
+=======
+static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
+>>>>>>> v3.18
 =======
 static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
 >>>>>>> v3.18
@@ -285,7 +326,10 @@ static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
 		substream->number);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Ensure configuration consistency between DAIs */
 	mutex_lock(&mop500_ab8500_params_lock);
 	if (mop500_ab8500_usage) {
@@ -301,6 +345,9 @@ static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
 	__set_bit(cpu_dai->id, &mop500_ab8500_usage);
 	mutex_unlock(&mop500_ab8500_params_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	channels = params_channels(params);
 
@@ -401,10 +448,13 @@ static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_ops mop500_ab8500_ops[] = {
 	{
 		.hw_params = mop500_ab8500_hw_params,
 =======
+=======
+>>>>>>> v3.18
 static int mop500_ab8500_hw_free(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
@@ -421,6 +471,9 @@ struct snd_soc_ops mop500_ab8500_ops[] = {
 	{
 		.hw_params = mop500_ab8500_hw_params,
 		.hw_free = mop500_ab8500_hw_free,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.startup = mop500_ab8500_startup,
 		.shutdown = mop500_ab8500_shutdown,
@@ -467,7 +520,11 @@ int mop500_ab8500_machine_init(struct snd_soc_pcm_runtime *rtd)
 
 	/* Add controls */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_add_codec_controls(codec, mop500_ab8500_ctrls,
+=======
+	ret = snd_soc_add_card_controls(rtd->card, mop500_ab8500_ctrls,
+>>>>>>> v3.18
 =======
 	ret = snd_soc_add_card_controls(rtd->card, mop500_ab8500_ctrls,
 >>>>>>> v3.18

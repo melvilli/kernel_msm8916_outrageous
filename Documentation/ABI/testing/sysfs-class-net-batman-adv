@@ -2,7 +2,11 @@
 What:           /sys/class/net/<iface>/batman-adv/iface_status
 Date:           May 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18
@@ -12,7 +16,11 @@ Description:
 What:           /sys/class/net/<iface>/batman-adv/mesh_iface
 Date:           May 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18

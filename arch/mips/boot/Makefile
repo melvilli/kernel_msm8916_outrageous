@@ -41,7 +41,10 @@ quiet_cmd_srec = OBJCOPY $@
 $(obj)/vmlinux.srec: $(VMLINUX) FORCE
 	$(call if_changed,srec)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 UIMAGE_LOADADDR  = $(VMLINUX_LOAD_ADDRESS)
 UIMAGE_ENTRYADDR = $(VMLINUX_ENTRY_ADDRESS)
@@ -57,4 +60,7 @@ targets += uImage
 $(obj)/uImage: $(obj)/uImage.gz FORCE
 	@ln -sf $(notdir $<) $@
 	@echo '  Image $@ is ready'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -16,6 +16,10 @@
 #define KPF_ARCH		38
 #define KPF_UNCACHED		39
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KPF_SOFTDIRTY		40
+>>>>>>> v3.18
 =======
 #define KPF_SOFTDIRTY		40
 >>>>>>> v3.18

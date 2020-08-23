@@ -148,8 +148,13 @@ static void butterfly_chipselect(struct spi_device *spi, int value)
 /* we only needed to implement one mode here, and choose SPI_MODE_0 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	spidelay(X)	do{}while(0)
 //#define	spidelay	ndelay
+=======
+#define spidelay(X)	do { } while (0)
+/* #define spidelay	ndelay */
+>>>>>>> v3.18
 =======
 #define spidelay(X)	do { } while (0)
 /* #define spidelay	ndelay */
@@ -177,22 +182,32 @@ static struct mtd_partition partitions[] = { {
 	 * sector 1 = 248 pages * 264 bytes/page
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "bookkeeping",	// 66 KB
 	.offset		= 0,
 	.size		= (8 + 248) * 264,
 //	.mask_flags	= MTD_WRITEABLE,
 =======
+=======
+>>>>>>> v3.18
 	.name		= "bookkeeping",	/* 66 KB */
 	.offset		= 0,
 	.size		= (8 + 248) * 264,
 	/* .mask_flags	= MTD_WRITEABLE, */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }, {
 	/* sector 2 = 256 pages * 264 bytes/page
 	 * sectors 3-5 = 512 pages * 264 bytes/page
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "filesystem",		// 462 KB
+=======
+	.name		= "filesystem",		/* 462 KB */
+>>>>>>> v3.18
 =======
 	.name		= "filesystem",		/* 462 KB */
 >>>>>>> v3.18
@@ -226,7 +241,11 @@ static void butterfly_attach(struct parport *p)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = spi_alloc_master(dev, sizeof *pp);
+=======
+	master = spi_alloc_master(dev, sizeof(*pp));
+>>>>>>> v3.18
 =======
 	master = spi_alloc_master(dev, sizeof(*pp));
 >>>>>>> v3.18
@@ -246,7 +265,11 @@ static void butterfly_attach(struct parport *p)
 	master->num_chipselect = 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pp->bitbang.master = spi_master_get(master);
+=======
+	pp->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	pp->bitbang.master = master;
 >>>>>>> v3.18
@@ -314,7 +337,10 @@ static void butterfly_attach(struct parport *p)
 				dev_name(&pp->dataflash->dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// dev_info(_what?_, ...)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_info("%s: AVR Butterfly\n", p->name);
@@ -338,7 +364,10 @@ static void butterfly_detach(struct parport *p)
 {
 	struct butterfly	*pp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -353,7 +382,11 @@ static void butterfly_detach(struct parport *p)
 
 	/* stop() unregisters child devices too */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_bitbang_stop(&pp->bitbang);
+=======
+	spi_bitbang_stop(&pp->bitbang);
+>>>>>>> v3.18
 =======
 	spi_bitbang_stop(&pp->bitbang);
 >>>>>>> v3.18

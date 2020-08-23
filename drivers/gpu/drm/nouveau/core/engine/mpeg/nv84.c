@@ -24,7 +24,10 @@
 
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -92,7 +95,10 @@ nv84_mpeg_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_engine(priv)->cclass = &nv84_mpeg_cclass;
 	nv_engine(priv)->sclass = nv84_mpeg_sclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_engine(priv)->tlb_flush = nv50_mpeg_tlb_flush;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

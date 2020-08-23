@@ -10,8 +10,11 @@
 #include <asm/system_info.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pgd_t *idmap_pgd;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Note: accesses outside of the kernel image and the identity map area
  * are not supported on any CPU using the idmap tables as its current
@@ -19,6 +22,9 @@ pgd_t *idmap_pgd;
  */
 pgd_t *idmap_pgd;
 phys_addr_t (*arch_virt_to_idmap) (unsigned long x);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_ARM_LPAE
@@ -32,7 +38,11 @@ static void idmap_add_pmd(pud_t *pud, unsigned long addr, unsigned long end,
 		pmd = pmd_alloc_one(&init_mm, addr);
 		if (!pmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("Failed to allocate identity pmd.\n");
+=======
+			pr_warn("Failed to allocate identity pmd.\n");
+>>>>>>> v3.18
 =======
 			pr_warn("Failed to allocate identity pmd.\n");
 >>>>>>> v3.18
@@ -89,8 +99,14 @@ static void identity_mapping_add(pgd_t *pgd, const char *text_start,
 	unsigned long next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = virt_to_phys(text_start);
 	end = virt_to_phys(text_end);
+=======
+	addr = virt_to_idmap(text_start);
+	end = virt_to_idmap(text_end);
+	pr_info("Setting up static identity map for 0x%lx - 0x%lx\n", addr, end);
+>>>>>>> v3.18
 =======
 	addr = virt_to_idmap(text_start);
 	end = virt_to_idmap(text_end);
@@ -118,8 +134,11 @@ static int __init init_static_idmap(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Setting up static identity map for 0x%p - 0x%p\n",
 		__idmap_text_start, __idmap_text_end);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	identity_mapping_add(idmap_pgd, __idmap_text_start,

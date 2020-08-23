@@ -14,6 +14,10 @@
 #include <linux/platform_device.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -25,14 +29,20 @@
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/idr.h>
 #include <linux/acpi.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_domain.h>
 #include <linux/idr.h>
 #include <linux/acpi.h>
 #include <linux/clk/clk-conf.h>
 #include <linux/limits.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "base.h"
@@ -42,9 +52,12 @@
 static DEFINE_IDA(platform_devid_ida);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_platform_driver(drv)	(container_of((drv), struct platform_driver, \
 				 driver))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct device platform_bus = {
@@ -106,8 +119,11 @@ int platform_get_irq(struct platform_device *dev, unsigned int num)
 	return dev->archdata.irqs[num];
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *r = platform_get_resource(dev, IORESOURCE_IRQ, num);
 =======
+=======
+>>>>>>> v3.18
 	struct resource *r;
 	if (IS_ENABLED(CONFIG_OF_IRQ) && dev->dev.of_node) {
 		int ret;
@@ -118,6 +134,9 @@ int platform_get_irq(struct platform_device *dev, unsigned int num)
 	}
 
 	r = platform_get_resource(dev, IORESOURCE_IRQ, num);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r ? r->start : -ENXIO;
@@ -158,10 +177,13 @@ EXPORT_SYMBOL_GPL(platform_get_resource_byname);
 int platform_get_irq_byname(struct platform_device *dev, const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *r = platform_get_resource_byname(dev, IORESOURCE_IRQ,
 							  name);
 
 =======
+=======
+>>>>>>> v3.18
 	struct resource *r;
 
 	if (IS_ENABLED(CONFIG_OF_IRQ) && dev->dev.of_node) {
@@ -173,6 +195,9 @@ int platform_get_irq_byname(struct platform_device *dev, const char *name)
 	}
 
 	r = platform_get_resource_byname(dev, IORESOURCE_IRQ, name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r ? r->start : -ENXIO;
 }
@@ -203,7 +228,11 @@ EXPORT_SYMBOL_GPL(platform_add_devices);
 struct platform_object {
 	struct platform_device pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[1];
+=======
+	char name[];
+>>>>>>> v3.18
 =======
 	char name[];
 >>>>>>> v3.18
@@ -233,6 +262,10 @@ static void platform_device_release(struct device *dev)
 	kfree(pa->pdev.mfd_cell);
 	kfree(pa->pdev.resource);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(pa->pdev.driver_override);
+>>>>>>> v3.18
 =======
 	kfree(pa->pdev.driver_override);
 >>>>>>> v3.18
@@ -252,7 +285,11 @@ struct platform_device *platform_device_alloc(const char *name, int id)
 	struct platform_object *pa;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pa = kzalloc(sizeof(struct platform_object) + strlen(name), GFP_KERNEL);
+=======
+	pa = kzalloc(sizeof(*pa) + strlen(name) + 1, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pa = kzalloc(sizeof(*pa) + strlen(name) + 1, GFP_KERNEL);
 >>>>>>> v3.18
@@ -402,7 +439,13 @@ int platform_device_add(struct platform_device *pdev)
 	while (--i >= 0) {
 		struct resource *r = &pdev->resource[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (r->parent)
+=======
+		unsigned long type = resource_type(r);
+
+		if (type == IORESOURCE_MEM || type == IORESOURCE_IO)
+>>>>>>> v3.18
 =======
 		unsigned long type = resource_type(r);
 
@@ -439,7 +482,13 @@ void platform_device_del(struct platform_device *pdev)
 		for (i = 0; i < pdev->num_resources; i++) {
 			struct resource *r = &pdev->resource[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (r->parent)
+=======
+			unsigned long type = resource_type(r);
+
+			if (type == IORESOURCE_MEM || type == IORESOURCE_IO)
+>>>>>>> v3.18
 =======
 			unsigned long type = resource_type(r);
 
@@ -498,7 +547,11 @@ struct platform_device *platform_device_register_full(
 
 	pdev->dev.parent = pdevinfo->parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_HANDLE_SET(&pdev->dev, pdevinfo->acpi_node.handle);
+=======
+	ACPI_COMPANION_SET(&pdev->dev, pdevinfo->acpi_node.companion);
+>>>>>>> v3.18
 =======
 	ACPI_COMPANION_SET(&pdev->dev, pdevinfo->acpi_node.companion);
 >>>>>>> v3.18
@@ -533,7 +586,11 @@ struct platform_device *platform_device_register_full(
 	if (ret) {
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_HANDLE_SET(&pdev->dev, NULL);
+=======
+		ACPI_COMPANION_SET(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 		ACPI_COMPANION_SET(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -555,6 +612,7 @@ static int platform_drv_probe(struct device *_dev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_HANDLE(_dev))
 		acpi_dev_pm_attach(_dev, true);
 
@@ -562,6 +620,8 @@ static int platform_drv_probe(struct device *_dev)
 	if (ret && ACPI_HANDLE(_dev))
 		acpi_dev_pm_detach(_dev, true);
 =======
+=======
+>>>>>>> v3.18
 	ret = of_clk_set_defaults(_dev->of_node, false);
 	if (ret < 0)
 		return ret;
@@ -577,6 +637,9 @@ static int platform_drv_probe(struct device *_dev)
 		dev_warn(_dev, "probe deferral not supported\n");
 		ret = -ENXIO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -595,8 +658,12 @@ static int platform_drv_remove(struct device *_dev)
 
 	ret = drv->remove(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_HANDLE(_dev))
 		acpi_dev_pm_detach(_dev, true);
+=======
+	dev_pm_domain_detach(_dev, true);
+>>>>>>> v3.18
 =======
 	dev_pm_domain_detach(_dev, true);
 >>>>>>> v3.18
@@ -611,6 +678,7 @@ static void platform_drv_shutdown(struct device *_dev)
 
 	drv->shutdown(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_HANDLE(_dev))
 		acpi_dev_pm_detach(_dev, true);
 }
@@ -622,6 +690,8 @@ static void platform_drv_shutdown(struct device *_dev)
 int platform_driver_register(struct platform_driver *drv)
 {
 =======
+=======
+>>>>>>> v3.18
 	dev_pm_domain_detach(_dev, true);
 }
 
@@ -634,6 +704,9 @@ int __platform_driver_register(struct platform_driver *drv,
 				struct module *owner)
 {
 	drv->driver.owner = owner;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drv->driver.bus = &platform_bus_type;
 	if (drv->probe)
@@ -646,7 +719,11 @@ int __platform_driver_register(struct platform_driver *drv,
 	return driver_register(&drv->driver);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(platform_driver_register);
+=======
+EXPORT_SYMBOL_GPL(__platform_driver_register);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(__platform_driver_register);
 >>>>>>> v3.18
@@ -665,8 +742,12 @@ EXPORT_SYMBOL_GPL(platform_driver_unregister);
  * platform_driver_probe - register driver for non-hotpluggable device
  * @drv: platform driver structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @probe: the driver probe routine, probably from an __init section,
  *         must not return -EPROBE_DEFER.
+=======
+ * @probe: the driver probe routine, probably from an __init section
+>>>>>>> v3.18
 =======
  * @probe: the driver probe routine, probably from an __init section
 >>>>>>> v3.18
@@ -681,8 +762,12 @@ EXPORT_SYMBOL_GPL(platform_driver_unregister);
  * configured as part of board setup.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This is incompatible with deferred probing so probe() must not
  * return -EPROBE_DEFER.
+=======
+ * Note that this is incompatible with deferred probing.
+>>>>>>> v3.18
 =======
  * Note that this is incompatible with deferred probing.
 >>>>>>> v3.18
@@ -696,13 +781,19 @@ int __init_or_module platform_driver_probe(struct platform_driver *drv,
 	int retval, code;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Prevent driver from requesting probe deferral to avoid further
 	 * futile probe attempts.
 	 */
 	drv->prevent_deferred_probe = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* make sure driver won't have bind/unbind attributes */
 	drv->driver.suppress_bind_attrs = true;
@@ -797,6 +888,7 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *a,
 {
 	struct platform_device	*pdev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = snprintf(buf, PAGE_SIZE, "platform:%s\n", pdev->name);
 
 	return (len >= PAGE_SIZE) ? (PAGE_SIZE - 1) : len;
@@ -807,6 +899,8 @@ static struct device_attribute platform_dev_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 	int len;
 
 	len = of_device_get_modalias(dev, buf, PAGE_SIZE -1);
@@ -869,6 +963,9 @@ static struct attribute *platform_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(platform_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int platform_uevent(struct device *dev, struct kobj_uevent_env *env)
@@ -882,11 +979,17 @@ static int platform_uevent(struct device *dev, struct kobj_uevent_env *env)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = acpi_device_uevent_modalias(dev, env);
 	if (rc != -ENODEV)
 		return rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add_uevent_var(env, "MODALIAS=%s%s", PLATFORM_MODULE_PREFIX,
 			pdev->name);
@@ -926,11 +1029,17 @@ static int platform_match(struct device *dev, struct device_driver *drv)
 	struct platform_driver *pdrv = to_platform_driver(drv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* When driver_override is set, only bind to the matching driver */
 	if (pdev->driver_override)
 		return !strcmp(pdev->driver_override, drv->name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Attempt an OF style match first */
 	if (of_driver_match_device(dev, drv))
@@ -1096,7 +1205,10 @@ static const struct dev_pm_ops platform_dev_pm_ops = {
 	.runtime_suspend = pm_generic_runtime_suspend,
 	.runtime_resume = pm_generic_runtime_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.runtime_idle = pm_generic_runtime_idle,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	USE_PLATFORM_PM_SLEEP_OPS
@@ -1105,7 +1217,11 @@ static const struct dev_pm_ops platform_dev_pm_ops = {
 struct bus_type platform_bus_type = {
 	.name		= "platform",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= platform_dev_attrs,
+=======
+	.dev_groups	= platform_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= platform_dev_groups,
 >>>>>>> v3.18
@@ -1270,7 +1386,11 @@ void __init early_platform_driver_register_all(char *class_str)
  * @id: id to match against
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static  __init struct platform_device *
+=======
+static struct platform_device * __init
+>>>>>>> v3.18
 =======
 static struct platform_device * __init
 >>>>>>> v3.18
@@ -1292,7 +1412,11 @@ early_platform_match(struct early_platform_driver *epdrv, int id)
  * @id: return true if id or above exists
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static  __init int early_platform_left(struct early_platform_driver *epdrv,
+=======
+static int __init early_platform_left(struct early_platform_driver *epdrv,
+>>>>>>> v3.18
 =======
 static int __init early_platform_left(struct early_platform_driver *epdrv,
 >>>>>>> v3.18

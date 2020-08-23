@@ -14,9 +14,12 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -31,7 +34,10 @@
 #include <linux/pci.h>
 #include <linux/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioctl.h>
@@ -42,7 +48,12 @@
 #include <linux/jiffies.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+
+#include <linux/pm_runtime.h>
+>>>>>>> v3.18
 =======
 
 #include <linux/pm_runtime.h>
@@ -51,6 +62,7 @@
 #include <linux/mei.h>
 
 #include "mei_dev.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "hw-me.h"
 #include "client.h"
@@ -97,6 +109,8 @@ static DEFINE_PCI_DEVICE_TABLE(mei_me_pci_tbl) = {
 	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, MEI_DEV_ID_LPT_HR)},
 	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, MEI_DEV_ID_WPT_LP)},
 =======
+=======
+>>>>>>> v3.18
 #include "client.h"
 #include "hw-me-regs.h"
 #include "hw-me.h"
@@ -142,6 +156,9 @@ static const struct pci_device_id mei_me_pci_tbl[] = {
 	{MEI_PCI_DEVICE(MEI_DEV_ID_LPT_HR, mei_me_lpt_cfg)},
 	{MEI_PCI_DEVICE(MEI_DEV_ID_WPT_LP, mei_me_pch_cfg)},
 	{MEI_PCI_DEVICE(MEI_DEV_ID_WPT_LP_2, mei_me_pch_cfg)},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* required last entry */
@@ -150,6 +167,7 @@ static const struct pci_device_id mei_me_pci_tbl[] = {
 
 MODULE_DEVICE_TABLE(pci, mei_me_pci_tbl);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEFINE_MUTEX(mei_mutex);
 
@@ -194,6 +212,8 @@ no_mei:
 /**
  * mei_probe - Device Initialization Routine
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_RUNTIME
 static inline void mei_me_set_pm_domain(struct mei_device *dev);
 static inline void mei_me_unset_pm_domain(struct mei_device *dev);
@@ -223,27 +243,37 @@ static bool mei_me_quirk_probe(struct pci_dev *pdev,
 
 /**
  * mei_me_probe - Device Initialization Routine
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * @pdev: PCI device structure
  * @ent: entry in kcs_pci_tbl
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 on success, <0 on failure.
  */
 static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
 =======
+=======
+>>>>>>> v3.18
  * Return: 0 on success, <0 on failure.
  */
 static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
 	const struct mei_cfg *cfg = (struct mei_cfg *)(ent->driver_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mei_device *dev;
 	struct mei_me_hw *hw;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&mei_mutex);
 
@@ -257,10 +287,15 @@ static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto end;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (!mei_me_quirk_probe(pdev, cfg))
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* enable pci dev */
 	err = pci_enable_device(pdev);
@@ -277,9 +312,12 @@ static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto disable_device;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* allocates and initializes the mei dev structure */
 	dev = mei_me_dev_init(pdev);
 =======
+=======
+>>>>>>> v3.18
 
 	if (dma_set_mask(&pdev->dev, DMA_BIT_MASK(64)) ||
 	    dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(64))) {
@@ -297,6 +335,9 @@ static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	/* allocates and initializes the mei dev structure */
 	dev = mei_me_dev_init(pdev, cfg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev) {
 		err = -ENOMEM;
@@ -337,12 +378,15 @@ static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mei_register(dev);
 	if (err)
 		goto release_irq;
 
 	mei_pdev = pdev;
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_set_autosuspend_delay(&pdev->dev, MEI_ME_RPM_TIMEOUT);
 	pm_runtime_use_autosuspend(&pdev->dev);
 
@@ -350,16 +394,22 @@ static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	if (err)
 		goto release_irq;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pci_set_drvdata(pdev, dev);
 
 	schedule_delayed_work(&dev->timer_work, HZ);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&mei_mutex);
 
 	pr_debug("initialization successful.\n");
 =======
+=======
+>>>>>>> v3.18
 	/*
 	* For not wake-able HW runtime pm framework
 	* can't be used on pci device level.
@@ -372,14 +422,22 @@ static int mei_me_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		pm_runtime_put_noidle(&pdev->dev);
 
 	dev_dbg(&pdev->dev, "initialization successful.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 
 release_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mei_disable_interrupts(dev);
 	flush_scheduled_work();
+=======
+	mei_cancel_work(dev);
+	mei_disable_interrupts(dev);
+>>>>>>> v3.18
 =======
 	mei_cancel_work(dev);
 	mei_disable_interrupts(dev);
@@ -396,7 +454,10 @@ disable_device:
 	pci_disable_device(pdev);
 end:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&mei_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_err(&pdev->dev, "initialization failed.\n");
@@ -405,7 +466,11 @@ end:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * mei_remove - Device Removal Routine
+=======
+ * mei_me_remove - Device Removal Routine
+>>>>>>> v3.18
 =======
  * mei_me_remove - Device Removal Routine
 >>>>>>> v3.18
@@ -421,15 +486,19 @@ static void mei_me_remove(struct pci_dev *pdev)
 	struct mei_me_hw *hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mei_pdev != pdev)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev = pci_get_drvdata(pdev);
 	if (!dev)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hw = to_me_hw(dev);
 
@@ -439,6 +508,8 @@ static void mei_me_remove(struct pci_dev *pdev)
 
 	mei_pdev = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (mei_pg_is_enabled(dev))
 		pm_runtime_get_noresume(&pdev->dev);
 
@@ -450,6 +521,9 @@ static void mei_me_remove(struct pci_dev *pdev)
 
 	if (!pci_dev_run_wake(pdev))
 		mei_me_unset_pm_domain(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* disable interrupts */
@@ -458,7 +532,10 @@ static void mei_me_remove(struct pci_dev *pdev)
 	free_irq(pdev->irq, dev);
 	pci_disable_msi(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -475,7 +552,11 @@ static void mei_me_remove(struct pci_dev *pdev)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -488,7 +569,11 @@ static int mei_me_pci_suspend(struct device *device)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(&pdev->dev, "suspend\n");
+=======
+	dev_dbg(&pdev->dev, "suspend\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(&pdev->dev, "suspend\n");
 >>>>>>> v3.18
@@ -534,6 +619,7 @@ static int mei_me_pci_resume(struct device *device)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&dev->device_lock);
 	dev->dev_state = MEI_DEV_POWER_UP;
 	mei_clear_interrupts(dev);
@@ -544,15 +630,23 @@ static int mei_me_pci_resume(struct device *device)
 	if (err)
 		return err;
 >>>>>>> v3.18
+=======
+	err = mei_restart(dev);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	/* Start timer if stopped in suspend */
 	schedule_delayed_work(&dev->timer_work, HZ);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
 }
 static SIMPLE_DEV_PM_OPS(mei_me_pm_ops, mei_me_pci_suspend, mei_me_pci_resume);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 #endif /* CONFIG_PM_SLEEP */
@@ -665,6 +759,9 @@ static const struct dev_pm_ops mei_me_pm_ops = {
 		mei_me_pm_runtime_idle)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MEI_ME_PM_OPS	(&mei_me_pm_ops)
 #else

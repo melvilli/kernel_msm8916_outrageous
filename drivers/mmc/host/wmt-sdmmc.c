@@ -73,7 +73,10 @@
 #define BM_SD_POWER			0x40
 #define BM_SOFT_RESET			0x80
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BM_ONEBIT_MASK			0xFD
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -124,6 +127,11 @@
 #define STS2_DIS_FORCECLK		0x80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* SDMMC_EXTCTRL bit fields */
+#define EXT_EIGHTBIT			0x04
+>>>>>>> v3.18
 =======
 /* SDMMC_EXTCTRL bit fields */
 #define EXT_EIGHTBIT			0x04
@@ -221,6 +229,7 @@ struct wmt_mci_priv {
 static void wmt_set_sd_power(struct wmt_mci_priv *priv, int enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg_tmp;
 	if (enable) {
 		if (priv->power_inverted) {
@@ -244,6 +253,8 @@ static void wmt_set_sd_power(struct wmt_mci_priv *priv, int enable)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	u32 reg_tmp = readb(priv->sdmmc_base + SDMMC_BUSMODE);
 
 	if (enable ^ priv->power_inverted)
@@ -252,6 +263,9 @@ static void wmt_set_sd_power(struct wmt_mci_priv *priv, int enable)
 		reg_tmp |= BM_SD_OFF;
 
 	writeb(reg_tmp, priv->sdmmc_base + SDMMC_BUSMODE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -706,7 +720,11 @@ static void wmt_mci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 {
 	struct wmt_mci_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg_tmp;
+=======
+	u32 busmode, extctrl;
+>>>>>>> v3.18
 =======
 	u32 busmode, extctrl;
 >>>>>>> v3.18
@@ -724,6 +742,7 @@ static void wmt_mci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	if (ios->clock != 0)
 		clk_set_rate(priv->clk_sdmmc, ios->clock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (ios->bus_width) {
 	case MMC_BUS_WIDTH_8:
@@ -748,6 +767,8 @@ static void wmt_mci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	busmode = readb(priv->sdmmc_base + SDMMC_BUSMODE);
 	extctrl = readb(priv->sdmmc_base + SDMMC_EXTCTRL);
 
@@ -768,6 +789,9 @@ static void wmt_mci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 
 	writeb(busmode, priv->sdmmc_base + SDMMC_BUSMODE);
 	writeb(extctrl, priv->sdmmc_base + SDMMC_EXTCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -818,7 +842,11 @@ static int wmt_mci_probe(struct platform_device *pdev)
 	const struct of_device_id *of_id =
 		of_match_device(wmt_mci_dt_ids, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct wmt_mci_caps *wmt_caps = of_id->data;
+=======
+	const struct wmt_mci_caps *wmt_caps;
+>>>>>>> v3.18
 =======
 	const struct wmt_mci_caps *wmt_caps;
 >>>>>>> v3.18
@@ -831,6 +859,11 @@ static int wmt_mci_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wmt_caps = of_id->data;
+
+>>>>>>> v3.18
 =======
 	wmt_caps = of_id->data;
 
@@ -898,7 +931,11 @@ static int wmt_mci_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(dma_irq, wmt_mci_dma_isr, 32, "sdmmc", priv);
+=======
+	ret = request_irq(dma_irq, wmt_mci_dma_isr, 0, "sdmmc", priv);
+>>>>>>> v3.18
 =======
 	ret = request_irq(dma_irq, wmt_mci_dma_isr, 0, "sdmmc", priv);
 >>>>>>> v3.18
@@ -912,7 +949,11 @@ static int wmt_mci_probe(struct platform_device *pdev)
 						   mmc->max_blk_count * 16,
 						   &priv->dma_desc_device_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   208);
+=======
+						   GFP_KERNEL);
+>>>>>>> v3.18
 =======
 						   GFP_KERNEL);
 >>>>>>> v3.18
@@ -991,8 +1032,11 @@ static int wmt_mci_remove(struct platform_device *pdev)
 	mmc_free_host(mmc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, "WMT MCI device removed\n");
@@ -1008,7 +1052,10 @@ static int wmt_mci_suspend(struct device *dev)
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 	struct wmt_mci_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1016,6 +1063,7 @@ static int wmt_mci_suspend(struct device *dev)
 		return 0;
 
 	priv = mmc_priv(mmc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = mmc_suspend_host(mmc);
 
@@ -1034,6 +1082,8 @@ static int wmt_mci_suspend(struct device *dev)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	reg_tmp = readb(priv->sdmmc_base + SDMMC_BUSMODE);
 	writeb(reg_tmp | BM_SOFT_RESET, priv->sdmmc_base +
 	       SDMMC_BUSMODE);
@@ -1046,6 +1096,9 @@ static int wmt_mci_suspend(struct device *dev)
 
 	clk_disable(priv->clk_sdmmc);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1056,7 +1109,10 @@ static int wmt_mci_resume(struct device *dev)
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 	struct wmt_mci_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1077,10 +1133,16 @@ static int wmt_mci_resume(struct device *dev)
 		       SDMMC_INTMASK0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mmc_resume_host(mmc);
 	}
 
 	return ret;
+=======
+	}
+
+	return 0;
+>>>>>>> v3.18
 =======
 	}
 

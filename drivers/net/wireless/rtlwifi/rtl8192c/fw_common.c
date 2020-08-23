@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -34,6 +37,10 @@
 #include "../pci.h"
 #include "../base.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../core.h"
+>>>>>>> v3.18
 =======
 #include "../core.h"
 >>>>>>> v3.18
@@ -79,6 +86,7 @@ static void _rtl92c_enable_fw_download(struct ieee80211_hw *hw, bool enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rtl_block_fw_writeN(struct ieee80211_hw *hw, const u8 *buffer,
 				u32 size)
 {
@@ -109,10 +117,13 @@ static void rtl_block_fw_writeN(struct ieee80211_hw *hw, const u8 *buffer,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void _rtl92c_fw_block_write(struct ieee80211_hw *hw,
 				   const u8 *buffer, u32 size)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 blockSize = sizeof(u32);
 	u8 *bufferPtr = (u8 *) buffer;
@@ -143,6 +154,8 @@ static void _rtl92c_fw_block_write(struct ieee80211_hw *hw,
 		rtl_write_dword(rtlpriv, (FW_8192C_START_ADDRESS + offset),
 				data);
 =======
+=======
+>>>>>>> v3.18
 	u32 blocksize = sizeof(u32);
 	u8 *bufferptr = (u8 *)buffer;
 	u32 *pu4byteptr = (u32 *)buffer;
@@ -164,6 +177,9 @@ static void _rtl92c_fw_block_write(struct ieee80211_hw *hw,
 			rtl_write_byte(rtlpriv, (FW_8192C_START_ADDRESS +
 						 offset + i), *(bufferptr + i));
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -203,6 +219,7 @@ static void _rtl92c_write_fw(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *bufferPtr = buffer;
 
 	RT_TRACE(rtlpriv, COMP_FW, DBG_TRACE, "FW size is %d bytes\n", size);
@@ -217,6 +234,8 @@ static void _rtl92c_write_fw(struct ieee80211_hw *hw,
 		pageNums = size / FW_8192C_PAGE_SIZE;
 		remainSize = size % FW_8192C_PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	bool is_version_b;
 	u8 *bufferptr = (u8 *)buffer;
 
@@ -231,6 +250,9 @@ static void _rtl92c_write_fw(struct ieee80211_hw *hw,
 
 		pageNums = size / FW_8192C_PAGE_SIZE;
 		remainsize = size % FW_8192C_PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (pageNums > 4) {
@@ -240,6 +262,7 @@ static void _rtl92c_write_fw(struct ieee80211_hw *hw,
 
 		for (page = 0; page < pageNums; page++) {
 			offset = page * FW_8192C_PAGE_SIZE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			_rtl92c_fw_page_write(hw, page, (bufferPtr + offset),
 					      FW_8192C_PAGE_SIZE);
@@ -251,6 +274,8 @@ static void _rtl92c_write_fw(struct ieee80211_hw *hw,
 			_rtl92c_fw_page_write(hw, page, (bufferPtr + offset),
 					      remainSize);
 =======
+=======
+>>>>>>> v3.18
 			_rtl92c_fw_page_write(hw, page, (bufferptr + offset),
 					      FW_8192C_PAGE_SIZE);
 		}
@@ -260,6 +285,9 @@ static void _rtl92c_write_fw(struct ieee80211_hw *hw,
 			page = pageNums;
 			_rtl92c_fw_page_write(hw, page, (bufferptr + offset),
 					      remainsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -271,6 +299,10 @@ static int _rtl92c_fw_free_to_go(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err = -EIO;
+>>>>>>> v3.18
 =======
 	int err = -EIO;
 >>>>>>> v3.18
@@ -285,6 +317,7 @@ static int _rtl92c_fw_free_to_go(struct ieee80211_hw *hw)
 	if (counter >= FW_8192C_POLLING_TIMEOUT_COUNT) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "chksum report faill ! REG_MCUFWDL:0x%08x\n", value32);
 		return -EIO;
 	}
@@ -292,6 +325,8 @@ static int _rtl92c_fw_free_to_go(struct ieee80211_hw *hw)
 	RT_TRACE(rtlpriv, COMP_FW, DBG_TRACE,
 		 "Checksum report OK ! REG_MCUFWDL:0x%08x\n", value32);
 =======
+=======
+>>>>>>> v3.18
 			 "chksum report faill ! REG_MCUFWDL:0x%08x .\n",
 			  value32);
 		goto exit;
@@ -299,6 +334,9 @@ static int _rtl92c_fw_free_to_go(struct ieee80211_hw *hw)
 
 	RT_TRACE(rtlpriv, COMP_FW, DBG_TRACE,
 		 "Checksum report OK ! REG_MCUFWDL:0x%08x .\n", value32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	value32 = rtl_read_dword(rtlpriv, REG_MCUFWDL);
@@ -313,14 +351,20 @@ static int _rtl92c_fw_free_to_go(struct ieee80211_hw *hw)
 		if (value32 & WINTINI_RDY) {
 			RT_TRACE(rtlpriv, COMP_FW, DBG_TRACE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "Polling FW ready success!! REG_MCUFWDL:0x%08x\n",
 				 value32);
 			return 0;
 =======
+=======
+>>>>>>> v3.18
 				 "Polling FW ready success!! REG_MCUFWDL:0x%08x .\n",
 					value32);
 			err = 0;
 			goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -330,13 +374,19 @@ static int _rtl92c_fw_free_to_go(struct ieee80211_hw *hw)
 
 	RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "Polling FW ready fail!! REG_MCUFWDL:0x%08x\n", value32);
 	return -EIO;
 =======
+=======
+>>>>>>> v3.18
 		 "Polling FW ready fail!! REG_MCUFWDL:0x%08x .\n", value32);
 
 exit:
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -348,6 +398,7 @@ int rtl92c_download_fw(struct ieee80211_hw *hw)
 	u8 *pfwdata;
 	u32 fwsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum version_8192c version = rtlhal->version;
 
 	if (rtlpriv->max_fw_size == 0 || !rtlhal->pfirmware)
@@ -356,6 +407,8 @@ int rtl92c_download_fw(struct ieee80211_hw *hw)
 	pfwheader = (struct rtl92c_firmware_header *)rtlhal->pfirmware;
 	pfwdata = rtlhal->pfirmware;
 =======
+=======
+>>>>>>> v3.18
 	int err;
 	enum version_8192c version = rtlhal->version;
 
@@ -364,6 +417,9 @@ int rtl92c_download_fw(struct ieee80211_hw *hw)
 
 	pfwheader = (struct rtl92c_firmware_header *)rtlhal->pfirmware;
 	pfwdata = (u8 *)rtlhal->pfirmware;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fwsize = rtlhal->fwsize;
 
@@ -371,9 +427,14 @@ int rtl92c_download_fw(struct ieee80211_hw *hw)
 		RT_TRACE(rtlpriv, COMP_FW, DBG_DMESG,
 			 "Firmware Version(%d), Signature(%#x),Size(%d)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 le16_to_cpu(pfwheader->version),
 			 le16_to_cpu(pfwheader->signature),
 			 (uint)sizeof(struct rtl92c_firmware_header));
+=======
+			  pfwheader->version, pfwheader->signature,
+			  (int)sizeof(struct rtl92c_firmware_header));
+>>>>>>> v3.18
 =======
 			  pfwheader->version, pfwheader->signature,
 			  (int)sizeof(struct rtl92c_firmware_header));
@@ -388,7 +449,12 @@ int rtl92c_download_fw(struct ieee80211_hw *hw)
 	_rtl92c_enable_fw_download(hw, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (_rtl92c_fw_free_to_go(hw)) {
+=======
+	err = _rtl92c_fw_free_to_go(hw);
+	if (err) {
+>>>>>>> v3.18
 =======
 	err = _rtl92c_fw_free_to_go(hw);
 	if (err) {
@@ -420,7 +486,11 @@ static bool _rtl92c_check_fw_read_last_h2c(struct ieee80211_hw *hw, u8 boxnum)
 
 static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      u8 element_id, u32 cmd_len, u8 *p_cmdbuffer)
+=======
+			      u8 element_id, u32 cmd_len, u8 *cmdbuffer)
+>>>>>>> v3.18
 =======
 			      u8 element_id, u32 cmd_len, u8 *cmdbuffer)
 >>>>>>> v3.18
@@ -432,7 +502,12 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 	u8 u1b_tmp;
 	bool isfw_read = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool bwrite_success = false;
+=======
+	u8 buf_index = 0;
+	bool bwrite_sucess = false;
+>>>>>>> v3.18
 =======
 	u8 buf_index = 0;
 	bool bwrite_sucess = false;
@@ -451,9 +526,14 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		if (rtlhal->h2c_setinprogress) {
 			RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "H2C set in progress! Wait to set..element_id(%d)\n",
 				 element_id);
 
+=======
+				 "H2C set in progress! Wait to set..element_id(%d).\n",
+				 element_id);
+>>>>>>> v3.18
 =======
 				 "H2C set in progress! Wait to set..element_id(%d).\n",
 				 element_id);
@@ -465,7 +545,11 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 				RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 					 "Wait 100 us (%d times)...\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 h2c_waitcounter);
+=======
+					  h2c_waitcounter);
+>>>>>>> v3.18
 =======
 					  h2c_waitcounter);
 >>>>>>> v3.18
@@ -485,7 +569,11 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!bwrite_success) {
+=======
+	while (!bwrite_sucess) {
+>>>>>>> v3.18
 =======
 	while (!bwrite_sucess) {
 >>>>>>> v3.18
@@ -516,8 +604,13 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
+=======
+			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
+				 "switch case not process\n");
+>>>>>>> v3.18
 =======
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
@@ -528,7 +621,10 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		isfw_read = _rtl92c_check_fw_read_last_h2c(hw, boxnum);
 		while (!isfw_read) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			wait_h2c_limmit--;
@@ -551,7 +647,11 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		if (!isfw_read) {
 			RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "Write H2C register BOX[%d] fail!!!!! Fw do not read\n",
+=======
+				 "Write H2C register BOX[%d] fail!!!!! Fw do not read.\n",
+>>>>>>> v3.18
 =======
 				 "Write H2C register BOX[%d] fail!!!!! Fw do not read.\n",
 >>>>>>> v3.18
@@ -565,7 +665,11 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 			 "Write element_id box_reg(%4x) = %2x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 box_reg, element_id);
+=======
+			  box_reg, element_id);
+>>>>>>> v3.18
 =======
 			  box_reg, element_id);
 >>>>>>> v3.18
@@ -574,8 +678,13 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		case 1:
 			boxcontent[0] &= ~(BIT(7));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy((u8 *) (boxcontent) + 1,
 			       p_cmdbuffer, 1);
+=======
+			memcpy((u8 *)(boxcontent) + 1,
+			       cmdbuffer + buf_index, 1);
+>>>>>>> v3.18
 =======
 			memcpy((u8 *)(boxcontent) + 1,
 			       cmdbuffer + buf_index, 1);
@@ -589,8 +698,13 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		case 2:
 			boxcontent[0] &= ~(BIT(7));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy((u8 *) (boxcontent) + 1,
 			       p_cmdbuffer, 2);
+=======
+			memcpy((u8 *)(boxcontent) + 1,
+			       cmdbuffer + buf_index, 2);
+>>>>>>> v3.18
 =======
 			memcpy((u8 *)(boxcontent) + 1,
 			       cmdbuffer + buf_index, 2);
@@ -604,8 +718,13 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		case 3:
 			boxcontent[0] &= ~(BIT(7));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy((u8 *) (boxcontent) + 1,
 			       p_cmdbuffer, 3);
+=======
+			memcpy((u8 *)(boxcontent) + 1,
+			       cmdbuffer + buf_index, 3);
+>>>>>>> v3.18
 =======
 			memcpy((u8 *)(boxcontent) + 1,
 			       cmdbuffer + buf_index, 3);
@@ -619,15 +738,21 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		case 4:
 			boxcontent[0] |= (BIT(7));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy((u8 *) (boxextcontent),
 			       p_cmdbuffer, 2);
 			memcpy((u8 *) (boxcontent) + 1,
 			       p_cmdbuffer + 2, 2);
 =======
+=======
+>>>>>>> v3.18
 			memcpy((u8 *)(boxextcontent),
 			       cmdbuffer + buf_index, 2);
 			memcpy((u8 *)(boxcontent) + 1,
 			       cmdbuffer + buf_index + 2, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			for (idx = 0; idx < 2; idx++) {
@@ -643,15 +768,21 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		case 5:
 			boxcontent[0] |= (BIT(7));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy((u8 *) (boxextcontent),
 			       p_cmdbuffer, 2);
 			memcpy((u8 *) (boxcontent) + 1,
 			       p_cmdbuffer + 2, 3);
 =======
+=======
+>>>>>>> v3.18
 			memcpy((u8 *)(boxextcontent),
 			       cmdbuffer + buf_index, 2);
 			memcpy((u8 *)(boxcontent) + 1,
 			       cmdbuffer + buf_index + 2, 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			for (idx = 0; idx < 2; idx++) {
@@ -666,6 +797,7 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
 			break;
@@ -673,12 +805,17 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 
 		bwrite_success = true;
 =======
+=======
+>>>>>>> v3.18
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
 			break;
 		}
 
 		bwrite_sucess = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rtlhal->last_hmeboxnum = boxnum + 1;
@@ -688,7 +825,11 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 			 "pHalData->last_hmeboxnum  = %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 rtlhal->last_hmeboxnum);
+=======
+			  rtlhal->last_hmeboxnum);
+>>>>>>> v3.18
 =======
 			  rtlhal->last_hmeboxnum);
 >>>>>>> v3.18
@@ -703,6 +844,7 @@ static void _rtl92c_fill_h2c_command(struct ieee80211_hw *hw,
 
 void rtl92c_fill_h2c_cmd(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 u8 element_id, u32 cmd_len, u8 *p_cmdbuffer)
 {
 	u32 tmp_cmdbuf[2];
@@ -710,6 +852,8 @@ void rtl92c_fill_h2c_cmd(struct ieee80211_hw *hw,
 	memset(tmp_cmdbuf, 0, 8);
 	memcpy(tmp_cmdbuf, p_cmdbuffer, cmd_len);
 =======
+=======
+>>>>>>> v3.18
 			 u8 element_id, u32 cmd_len, u8 *cmdbuffer)
 {
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
@@ -723,6 +867,9 @@ void rtl92c_fill_h2c_cmd(struct ieee80211_hw *hw,
 
 	memset(tmp_cmdbuf, 0, 8);
 	memcpy(tmp_cmdbuf, cmdbuffer, cmd_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	_rtl92c_fill_h2c_command(hw, element_id, cmd_len, (u8 *)&tmp_cmdbuf);
 
@@ -743,7 +890,11 @@ void rtl92c_firmware_selfreset(struct ieee80211_hw *hw)
 		delay--;
 		if (delay == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_ASSERT(false, "8051 reset fail\n");
+=======
+			RT_ASSERT(false, "8051 reset fail.\n");
+>>>>>>> v3.18
 =======
 			RT_ASSERT(false, "8051 reset fail.\n");
 >>>>>>> v3.18
@@ -759,7 +910,11 @@ void rtl92c_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 u1_h2c_set_pwrmode[3] = {0};
+=======
+	u8 u1_h2c_set_pwrmode[3] = { 0 };
+>>>>>>> v3.18
 =======
 	u8 u1_h2c_set_pwrmode[3] = { 0 };
 >>>>>>> v3.18
@@ -770,8 +925,12 @@ void rtl92c_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 	SET_H2CCMD_PWRMODE_PARM_MODE(u1_h2c_set_pwrmode, mode);
 	SET_H2CCMD_PWRMODE_PARM_SMART_PS(u1_h2c_set_pwrmode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 (rtlpriv->mac80211.p2p) ?
 					 ppsc->smart_ps : 1);
+=======
+		(rtlpriv->mac80211.p2p) ? ppsc->smart_ps : 1);
+>>>>>>> v3.18
 =======
 		(rtlpriv->mac80211.p2p) ? ppsc->smart_ps : 1);
 >>>>>>> v3.18
@@ -779,6 +938,7 @@ void rtl92c_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 					      ppsc->reg_max_lps_awakeintvl);
 
 	RT_PRINT_DATA(rtlpriv, COMP_CMD, DBG_DMESG,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		      "rtl92c_set_fw_rsvdpagepkt(): u1_h2c_set_pwrmode",
 		      u1_h2c_set_pwrmode, 3);
@@ -818,12 +978,17 @@ static bool _rtl92c_cmd_send_packet(struct ieee80211_hw *hw,
 }
 
 =======
+=======
+>>>>>>> v3.18
 		      "rtl92c_set_fw_rsvdpagepkt(): u1_h2c_set_pwrmode\n",
 		      u1_h2c_set_pwrmode, 3);
 	rtl92c_fill_h2c_cmd(hw, H2C_SETPWRMODE, 3, u1_h2c_set_pwrmode);
 }
 EXPORT_SYMBOL(rtl92c_set_fw_pwrmode_cmd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BEACON_PG		0 /*->1*/
 #define PSPOLL_PG		2
@@ -943,7 +1108,12 @@ static u8 reserved_page_packet[TOTAL_RESERVED_PKT_LEN] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool dl_finished)
+=======
+void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
+	 bool (*cmd_send_packet)(struct ieee80211_hw *, struct sk_buff *))
+>>>>>>> v3.18
 =======
 void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 	 bool (*cmd_send_packet)(struct ieee80211_hw *, struct sk_buff *))
@@ -956,6 +1126,7 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 	u32 totalpacketlen;
 	bool rtstatus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 u1RsvdPageLoc[3] = {0};
 	bool dlok = false;
 
@@ -964,6 +1135,8 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 	u8 *nullfunc;
 	u8 *probersp;
 =======
+=======
+>>>>>>> v3.18
 	u8 u1rsvdpageloc[3] = { 0 };
 	bool b_dlok = false;
 
@@ -971,6 +1144,9 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 	u8 *p_pspoll;
 	u8 *nullfunc;
 	u8 *p_probersp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*---------------------------------------------------------
 				(1) beacon
@@ -983,6 +1159,7 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 				(2) ps-poll
 	--------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pspoll = &reserved_page_packet[PSPOLL_PG * 128];
 	SET_80211_PS_POLL_AID(pspoll, (mac->assoc_id | 0xc000));
 	SET_80211_PS_POLL_BSSID(pspoll, mac->bssid);
@@ -990,12 +1167,17 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 
 	SET_H2CCMD_RSVDPAGE_LOC_PSPOLL(u1RsvdPageLoc, PSPOLL_PG);
 =======
+=======
+>>>>>>> v3.18
 	p_pspoll = &reserved_page_packet[PSPOLL_PG * 128];
 	SET_80211_PS_POLL_AID(p_pspoll, (mac->assoc_id | 0xc000));
 	SET_80211_PS_POLL_BSSID(p_pspoll, mac->bssid);
 	SET_80211_PS_POLL_TA(p_pspoll, mac->mac_addr);
 
 	SET_H2CCMD_RSVDPAGE_LOC_PSPOLL(u1rsvdpageloc, PSPOLL_PG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*--------------------------------------------------------
@@ -1007,7 +1189,11 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 	SET_80211_HDR_ADDRESS3(nullfunc, mac->bssid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(u1RsvdPageLoc, NULL_PG);
+=======
+	SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(u1rsvdpageloc, NULL_PG);
+>>>>>>> v3.18
 =======
 	SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(u1rsvdpageloc, NULL_PG);
 >>>>>>> v3.18
@@ -1016,6 +1202,7 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 				(4) probe response
 	----------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	probersp = &reserved_page_packet[PROBERSP_PG * 128];
 	SET_80211_HDR_ADDRESS1(probersp, mac->bssid);
 	SET_80211_HDR_ADDRESS2(probersp, mac->mac_addr);
@@ -1023,17 +1210,23 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 
 	SET_H2CCMD_RSVDPAGE_LOC_PROBE_RSP(u1RsvdPageLoc, PROBERSP_PG);
 =======
+=======
+>>>>>>> v3.18
 	p_probersp = &reserved_page_packet[PROBERSP_PG * 128];
 	SET_80211_HDR_ADDRESS1(p_probersp, mac->bssid);
 	SET_80211_HDR_ADDRESS2(p_probersp, mac->mac_addr);
 	SET_80211_HDR_ADDRESS3(p_probersp, mac->bssid);
 
 	SET_H2CCMD_RSVDPAGE_LOC_PROBE_RSP(u1rsvdpageloc, PROBERSP_PG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	totalpacketlen = TOTAL_RESERVED_PKT_LEN;
 
 	RT_PRINT_DATA(rtlpriv, COMP_CMD, DBG_LOUD,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		      "rtl92c_set_fw_rsvdpagepkt(): HW_VAR_SET_TX_CMD: ALL",
 		      &reserved_page_packet[0], totalpacketlen);
@@ -1066,6 +1259,8 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_WARNING,
 			 "Set RSVD page location to Fw FAIL!!!!!!\n");
 =======
+=======
+>>>>>>> v3.18
 		      "rtl92c_set_fw_rsvdpagepkt(): HW_VAR_SET_TX_CMD: ALL\n",
 		      &reserved_page_packet[0], totalpacketlen);
 	RT_PRINT_DATA(rtlpriv, COMP_CMD, DBG_DMESG,
@@ -1096,6 +1291,9 @@ void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw,
 	} else
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_WARNING,
 			 "Set RSVD page location to Fw FAIL!!!!!!.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(rtl92c_set_fw_rsvdpagepkt);
@@ -1103,7 +1301,11 @@ EXPORT_SYMBOL(rtl92c_set_fw_rsvdpagepkt);
 void rtl92c_set_fw_joinbss_report_cmd(struct ieee80211_hw *hw, u8 mstatus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 u1_joinbssrpt_parm[1] = {0};
+=======
+	u8 u1_joinbssrpt_parm[1] = { 0 };
+>>>>>>> v3.18
 =======
 	u8 u1_joinbssrpt_parm[1] = { 0 };
 >>>>>>> v3.18
@@ -1117,7 +1319,11 @@ EXPORT_SYMBOL(rtl92c_set_fw_joinbss_report_cmd);
 static void rtl92c_set_p2p_ctw_period_cmd(struct ieee80211_hw *hw, u8 ctwindow)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 u1_ctwindow_period[1] = {ctwindow};
+=======
+	u8 u1_ctwindow_period[1] = { ctwindow};
+>>>>>>> v3.18
 =======
 	u8 u1_ctwindow_period[1] = { ctwindow};
 >>>>>>> v3.18
@@ -1126,7 +1332,10 @@ static void rtl92c_set_p2p_ctw_period_cmd(struct ieee80211_hw *hw, u8 ctwindow)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* refactored routine */
 static void set_noa_data(struct rtl_priv *rtlpriv,
 			 struct rtl_p2p_ps_info *p2pinfo,
@@ -1167,6 +1376,9 @@ static void set_noa_data(struct rtl_priv *rtlpriv,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rtl92c_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 {
@@ -1175,6 +1387,7 @@ void rtl92c_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 	struct rtl_p2p_ps_info *p2pinfo = &(rtlps->p2p_ps_info);
 	struct p2p_ps_offload_t *p2p_ps_offload = &rtlhal->p2p_ps_offload;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8	i;
 	u16	ctwindow;
@@ -1255,6 +1468,8 @@ void rtl92c_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 
 	rtl92c_fill_h2c_cmd(hw, H2C_P2P_PS_OFFLOAD, 1, (u8 *)p2p_ps_offload);
 =======
+=======
+>>>>>>> v3.18
 	u16	ctwindow;
 
 	switch (p2p_ps_state) {
@@ -1308,6 +1523,9 @@ void rtl92c_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 
 	rtl92c_fill_h2c_cmd(hw, H2C_P2P_PS_OFFLOAD, 1, (u8 *)p2p_ps_offload);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(rtl92c_set_p2p_ps_offload_cmd);

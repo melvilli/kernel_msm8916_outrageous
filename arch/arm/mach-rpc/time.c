@@ -25,6 +25,12 @@
 #include <asm/mach/time.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RPC_CLOCK_FREQ 2000000
+#define RPC_LATCH DIV_ROUND_CLOSEST(RPC_CLOCK_FREQ, HZ)
+
+>>>>>>> v3.18
 =======
 #define RPC_CLOCK_FREQ 2000000
 #define RPC_LATCH DIV_ROUND_CLOSEST(RPC_CLOCK_FREQ, HZ)
@@ -53,7 +59,11 @@ static u32 ioc_timer_gettimeoffset(void)
 		 */
 		if (status & (1 << 5))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset -= LATCH;
+=======
+			offset -= RPC_LATCH;
+>>>>>>> v3.18
 =======
 			offset -= RPC_LATCH;
 >>>>>>> v3.18
@@ -63,25 +73,36 @@ static u32 ioc_timer_gettimeoffset(void)
 		 * count1 and count2.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset -= LATCH;
 	}
 
 	offset = (LATCH - offset) * (tick_nsec / 1000);
 	return ((offset + LATCH/2) / LATCH) * 1000;
 =======
+=======
+>>>>>>> v3.18
 		offset -= RPC_LATCH;
 	}
 
 	offset = (RPC_LATCH - offset) * (tick_nsec / 1000);
 	return DIV_ROUND_CLOSEST(offset, RPC_LATCH) * 1000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void __init ioctime_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioc_writeb(LATCH & 255, IOC_T0LTCHL);
 	ioc_writeb(LATCH >> 8, IOC_T0LTCHH);
+=======
+	ioc_writeb(RPC_LATCH & 255, IOC_T0LTCHL);
+	ioc_writeb(RPC_LATCH >> 8, IOC_T0LTCHH);
+>>>>>>> v3.18
 =======
 	ioc_writeb(RPC_LATCH & 255, IOC_T0LTCHL);
 	ioc_writeb(RPC_LATCH >> 8, IOC_T0LTCHH);
@@ -99,7 +120,10 @@ ioc_timer_interrupt(int irq, void *dev_id)
 static struct irqaction ioc_timer_irq = {
 	.name		= "timer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.handler	= ioc_timer_interrupt

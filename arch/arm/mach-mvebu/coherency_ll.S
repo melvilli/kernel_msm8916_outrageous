@@ -21,6 +21,7 @@
 #define ARMADA_XP_CFB_CFG_REG_OFFSET 0x4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.text
 /*
  * r0: Coherency fabric base register address
@@ -55,6 +56,8 @@ ENTRY(ll_set_cpu_coherent)
 	mov	pc, lr
 ENDPROC(ll_set_cpu_coherent)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/assembler.h>
 #include <asm/cp15.h>
 
@@ -182,4 +185,7 @@ ENDPROC(ll_disable_coherency)
 	.align 2
 3:
 	.long	coherency_phys_base - .
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

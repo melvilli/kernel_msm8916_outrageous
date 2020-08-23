@@ -64,6 +64,7 @@
 struct timex {
 	unsigned int modes;	/* mode selector */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long offset;		/* time offset (usec) */
 	long freq;		/* frequency offset (scaled ppm) */
 	long maxerror;		/* maximum error (usec) */
@@ -86,6 +87,8 @@ struct timex {
 	long errcnt;            /* calibration errors (ro) */
 	long stbcnt;            /* stability limit exceeded (ro) */
 =======
+=======
+>>>>>>> v3.18
 	__kernel_long_t offset;	/* time offset (usec) */
 	__kernel_long_t freq;	/* frequency offset (scaled ppm) */
 	__kernel_long_t maxerror;/* maximum error (usec) */
@@ -107,6 +110,9 @@ struct timex {
 	__kernel_long_t calcnt; /* calibration intervals (ro) */
 	__kernel_long_t errcnt; /* calibration errors (ro) */
 	__kernel_long_t stbcnt; /* stability limit exceeded (ro) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int tai;		/* TAI offset (ro) */

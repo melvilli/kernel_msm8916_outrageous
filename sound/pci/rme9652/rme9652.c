@@ -295,10 +295,13 @@ static int snd_hammerfall_get_buffer(struct pci_dev *pci, struct snd_dma_buffer 
 	dmab->dev.type = SNDRV_DMA_TYPE_DEV;
 	dmab->dev.dev = snd_dma_pci_data(pci);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (snd_dma_get_reserved_buf(dmab, snd_dma_pci_buf_id(pci))) {
 		if (dmab->bytes >= size)
 			return 0;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (snd_dma_alloc_pages(SNDRV_DMA_TYPE_DEV, snd_dma_pci_data(pci),
@@ -310,6 +313,7 @@ static int snd_hammerfall_get_buffer(struct pci_dev *pci, struct snd_dma_buffer 
 static void snd_hammerfall_free_buffer(struct snd_dma_buffer *dmab, struct pci_dev *pci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dmab->area) {
 		dmab->dev.dev = NULL; /* make it anonymous */
 		snd_dma_reserve_buf(dmab, snd_dma_pci_buf_id(pci));
@@ -319,12 +323,17 @@ static void snd_hammerfall_free_buffer(struct snd_dma_buffer *dmab, struct pci_d
 
 static DEFINE_PCI_DEVICE_TABLE(snd_rme9652_ids) = {
 =======
+=======
+>>>>>>> v3.18
 	if (dmab->area)
 		snd_dma_free_pages(dmab);
 }
 
 
 static const struct pci_device_id snd_rme9652_ids[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.vendor	   = 0x10ee,
@@ -413,7 +422,13 @@ static snd_pcm_uframes_t rme9652_hw_pointer(struct snd_rme9652 *rme9652)
 		if (offset > rme9652->max_jitter) {
 			if (frag)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "Unexpected hw_pointer position (bufid == 0): status: %x offset: %d\n", status, offset);
+=======
+				dev_err(rme9652->card->dev,
+					"Unexpected hw_pointer position (bufid == 0): status: %x offset: %d\n",
+					status, offset);
+>>>>>>> v3.18
 =======
 				dev_err(rme9652->card->dev,
 					"Unexpected hw_pointer position (bufid == 0): status: %x offset: %d\n",
@@ -428,7 +443,13 @@ static snd_pcm_uframes_t rme9652_hw_pointer(struct snd_rme9652 *rme9652)
 		if (offset > period_size + rme9652->max_jitter) {
 			if (!frag)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "Unexpected hw_pointer position (bufid == 1): status: %x offset: %d\n", status, offset);
+=======
+				dev_err(rme9652->card->dev,
+					"Unexpected hw_pointer position (bufid == 1): status: %x offset: %d\n",
+					status, offset);
+>>>>>>> v3.18
 =======
 				dev_err(rme9652->card->dev,
 					"Unexpected hw_pointer position (bufid == 1): status: %x offset: %d\n",
@@ -800,7 +821,12 @@ static inline int rme9652_spdif_sample_rate(struct snd_rme9652 *s)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "%s: unknown S/PDIF input rate (bits = 0x%x)\n",
+=======
+		dev_err(s->card->dev,
+			"%s: unknown S/PDIF input rate (bits = 0x%x)\n",
+>>>>>>> v3.18
 =======
 		dev_err(s->card->dev,
 			"%s: unknown S/PDIF input rate (bits = 0x%x)\n",
@@ -1826,7 +1852,12 @@ static int snd_rme9652_initialize_memory(struct snd_rme9652 *rme9652)
 		if (rme9652->capture_dma_buf.area)
 			snd_dma_free_pages(&rme9652->capture_dma_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: no buffers available\n", rme9652->card_name);
+=======
+		dev_err(rme9652->card->dev,
+			"%s: no buffers available\n", rme9652->card_name);
+>>>>>>> v3.18
 =======
 		dev_err(rme9652->card->dev,
 			"%s: no buffers available\n", rme9652->card_name);
@@ -2509,7 +2540,12 @@ static int snd_rme9652_create(struct snd_card *card,
 	rme9652->iobase = ioremap_nocache(rme9652->port, RME9652_IO_EXTENT);
 	if (rme9652->iobase == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to remap region 0x%lx-0x%lx\n", rme9652->port, rme9652->port + RME9652_IO_EXTENT - 1);
+=======
+		dev_err(card->dev, "unable to remap region 0x%lx-0x%lx\n",
+			rme9652->port, rme9652->port + RME9652_IO_EXTENT - 1);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to remap region 0x%lx-0x%lx\n",
 			rme9652->port, rme9652->port + RME9652_IO_EXTENT - 1);
@@ -2520,7 +2556,11 @@ static int snd_rme9652_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_rme9652_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, rme9652)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to request IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to request IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to request IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -2637,8 +2677,13 @@ static int snd_rme9652_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_rme9652), &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_rme9652), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_rme9652), &card);
@@ -2652,7 +2697,10 @@ static int snd_rme9652_probe(struct pci_dev *pci,
 	rme9652->dev = dev;
 	rme9652->pci = pci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2680,7 +2728,10 @@ static void snd_rme9652_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

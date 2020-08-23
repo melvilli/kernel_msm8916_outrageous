@@ -628,6 +628,11 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 	uint32_t ctrl;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int old_dma;
+	struct nand_buffers *nbuf;
+>>>>>>> v3.18
 =======
 	int old_dma;
 	struct nand_buffers *nbuf;
@@ -646,10 +651,15 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 
 	mtd = kzalloc(sizeof(*mtd) + sizeof(struct cafe_priv), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd) {
 		dev_warn(&pdev->dev, "failed to alloc mtd_info\n");
 		return  -ENOMEM;
 	}
+=======
+	if (!mtd)
+		return  -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!mtd)
 		return  -ENOMEM;
@@ -668,6 +678,7 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 		goto out_free_mtd;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cafe->dmabuf = dma_alloc_coherent(&cafe->pdev->dev, 2112 + sizeof(struct nand_buffers),
 					  &cafe->dmaaddr, GFP_KERNEL);
 	if (!cafe->dmabuf) {
@@ -675,6 +686,8 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 		goto out_ior;
 	}
 	cafe->nand.buffers = (void *)cafe->dmabuf + 2112;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -737,7 +750,11 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 	if (err) {
 		dev_warn(&pdev->dev, "Could not register IRQ %d\n", pdev->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_dma;
+=======
+		goto out_ior;
+>>>>>>> v3.18
 =======
 		goto out_ior;
 >>>>>>> v3.18
@@ -755,7 +772,10 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 	cafe_writel(cafe, 0x700a, GLOBAL_CTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Enable NAND IRQ in global IRQ mask register */
 	cafe_writel(cafe, 0x80000007, GLOBAL_IRQ_MASK);
 	cafe_dev_dbg(&cafe->pdev->dev, "Control %x, IRQ mask %x\n",
@@ -782,6 +802,9 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 	}
 	cafe->nand.buffers = nbuf = (void *)cafe->dmabuf + 2112;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Set up DMA address */
 	cafe_writel(cafe, cafe->dmaaddr & 0xffffffff, NAND_DMA_ADDR0);
@@ -795,6 +818,7 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 		cafe_readl(cafe, NAND_DMA_ADDR0), cafe->dmabuf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Enable NAND IRQ in global IRQ mask register */
 	cafe_writel(cafe, 0x80000007, GLOBAL_IRQ_MASK);
 	cafe_dev_dbg(&cafe->pdev->dev, "Control %x, IRQ mask %x\n",
@@ -806,6 +830,8 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 		goto out_irq;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* this driver does not need the @ecccalc and @ecccode */
 	nbuf->ecccalc = NULL;
 	nbuf->ecccode = NULL;
@@ -813,6 +839,9 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 
 	/* Restore the DMA flag */
 	usedma = old_dma;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cafe->ctl2 = 1<<27; /* Reed-Solomon ECC */
@@ -832,7 +861,11 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 		printk(KERN_WARNING "Unexpected NAND flash writesize %d. Aborting\n",
 		       mtd->writesize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_irq;
+=======
+		goto out_free_dma;
+>>>>>>> v3.18
 =======
 		goto out_free_dma;
 >>>>>>> v3.18
@@ -853,7 +886,11 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 	err = nand_scan_tail(mtd);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_irq;
+=======
+		goto out_free_dma;
+>>>>>>> v3.18
 =======
 		goto out_free_dma;
 >>>>>>> v3.18
@@ -866,20 +903,29 @@ static int cafe_nand_probe(struct pci_dev *pdev,
 	goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  out_free_dma:
 	dma_free_coherent(&cafe->pdev->dev,
 			2112 + sizeof(struct nand_buffers) +
 			mtd->writesize + mtd->oobsize,
 			cafe->dmabuf, cafe->dmaaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out_irq:
 	/* Disable NAND IRQ in global IRQ mask register */
 	cafe_writel(cafe, ~1 & cafe_readl(cafe, GLOBAL_IRQ_MASK), GLOBAL_IRQ_MASK);
 	free_irq(pdev->irq, mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
  out_free_dma:
 	dma_free_coherent(&cafe->pdev->dev, 2112, cafe->dmabuf, cafe->dmaaddr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  out_ior:
@@ -902,12 +948,18 @@ static void cafe_nand_remove(struct pci_dev *pdev)
 	free_rs(cafe->rs);
 	pci_iounmap(pdev, cafe->mmio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_free_coherent(&cafe->pdev->dev, 2112, cafe->dmabuf, cafe->dmaaddr);
 =======
+=======
+>>>>>>> v3.18
 	dma_free_coherent(&cafe->pdev->dev,
 			2112 + sizeof(struct nand_buffers) +
 			mtd->writesize + mtd->oobsize,
 			cafe->dmabuf, cafe->dmaaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(mtd);
 }

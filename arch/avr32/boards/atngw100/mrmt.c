@@ -18,6 +18,11 @@
 #include <linux/fb.h>
 #include <linux/leds.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pwm.h>
+#include <linux/leds_pwm.h>
+>>>>>>> v3.18
 =======
 #include <linux/pwm.h>
 #include <linux/leds_pwm.h>
@@ -89,7 +94,11 @@ static struct fb_monspecs __initdata lcd_fb_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata rmt_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata rmt_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata rmt_lcdc_data = {
 >>>>>>> v3.18
@@ -136,7 +145,11 @@ static struct fb_monspecs __initdata lcd_fb_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata rmt_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata rmt_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata rmt_lcdc_data = {
 >>>>>>> v3.18
@@ -164,7 +177,10 @@ static struct platform_device rmt_ts_device = {
 	.name	= "ucb1400_ts",
 	.id	= -1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -172,6 +188,7 @@ static struct platform_device rmt_ts_device = {
 
 #ifdef CONFIG_BOARD_MRMT_BL_PWM
 /* PWM LEDs: LCD Backlight, etc */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct gpio_led rmt_pwm_led[] = {
 	/* here the "gpio" is actually a PWM channel */
@@ -189,6 +206,8 @@ static struct platform_device rmt_pwm_led_dev = {
 	.dev		= {
 		.platform_data	= &rmt_pwm_led_data,
 =======
+=======
+>>>>>>> v3.18
 static struct pwm_lookup pwm_lookup[] = {
 	PWM_LOOKUP("at91sam9rl-pwm", PWM_CH_BL, "leds_pwm", "ds1",
 		   5000, PWM_POLARITY_INVERSED),
@@ -211,6 +230,9 @@ static struct platform_device leds_pwm = {
 	.id     = -1,
 	.dev    = {
 		.platform_data = &pwm_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -368,7 +390,12 @@ static int __init mrmt1_init(void)
 	/* Use PWM for Backlight controls */
 	at32_add_device_pwm(1 << PWM_CH_BL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register(&rmt_pwm_led_dev);
+=======
+	pwm_add_table(pwm_lookup, ARRAY_SIZE(pwm_lookup));
+	platform_device_register(&leds_pwm);
+>>>>>>> v3.18
 =======
 	pwm_add_table(pwm_lookup, ARRAY_SIZE(pwm_lookup));
 	platform_device_register(&leds_pwm);

@@ -126,7 +126,12 @@
 
 struct pem_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[4];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[4];
@@ -166,8 +171,13 @@ abort:
 static struct pem_data *pem_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct pem_data *data = i2c_get_clientdata(client);
+=======
+	struct pem_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct pem_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -455,13 +465,19 @@ static int pem_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adapter = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pem_data *data;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct pem_data *data;
 	int ret, idx = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BLOCK_DATA
@@ -469,17 +485,23 @@ static int pem_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
@@ -497,6 +519,7 @@ static int pem_probe(struct i2c_client *client,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&client->dev, "Firmware revision %d.%d.%d\n",
 		 data->firmware_rev[0], data->firmware_rev[1],
 		 data->firmware_rev[2]);
@@ -506,12 +529,17 @@ static int pem_probe(struct i2c_client *client,
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	dev_info(dev, "Firmware revision %d.%d.%d\n",
 		 data->firmware_rev[0], data->firmware_rev[1],
 		 data->firmware_rev[2]);
 
 	/* sysfs hooks */
 	data->groups[idx++] = &pem_group;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -536,12 +564,18 @@ static int pem_probe(struct i2c_client *client,
 			data->input_length = sizeof(data->input_string);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 0;
 	if (data->input_length) {
 		ret = sysfs_create_group(&client->dev.kobj, &pem_input_group);
 		if (ret)
 			goto out_remove_groups;
 	}
+=======
+
+	if (data->input_length)
+		data->groups[idx++] = &pem_input_group;
+>>>>>>> v3.18
 =======
 
 	if (data->input_length)
@@ -560,6 +594,7 @@ static int pem_probe(struct i2c_client *client,
 	if (!ret && (data->fan_speed[0] || data->fan_speed[1] ||
 		     data->fan_speed[2] || data->fan_speed[3])) {
 		data->fans_supported = true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = sysfs_create_group(&client->dev.kobj, &pem_fan_group);
 		if (ret)
@@ -593,12 +628,17 @@ static int pem_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		data->groups[idx++] = &pem_fan_group;
 	}
 
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data, data->groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -614,7 +654,10 @@ static struct i2c_driver pem_driver = {
 		   },
 	.probe = pem_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = pem_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = pem_id,

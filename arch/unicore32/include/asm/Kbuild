@@ -17,6 +17,10 @@ generic-y += ftrace.h
 generic-y += futex.h
 generic-y += hardirq.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 =======
 generic-y += hash.h
 >>>>>>> v3.18
@@ -26,6 +30,10 @@ generic-y += ioctls.h
 generic-y += ipcbuf.h
 generic-y += irq_regs.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += irq_work.h
+>>>>>>> v3.18
 =======
 generic-y += irq_work.h
 >>>>>>> v3.18
@@ -42,6 +50,10 @@ generic-y += percpu.h
 generic-y += poll.h
 generic-y += posix_types.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+>>>>>>> v3.18
 =======
 generic-y += preempt.h
 >>>>>>> v3.18

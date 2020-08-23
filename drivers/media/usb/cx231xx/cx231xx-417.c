@@ -1517,7 +1517,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 		cx2341x_handler_set_50hz(&dev->mpeg_ctrl_handler, true);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call_all(dev, core, s_std, dev->norm);
+=======
+	call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 =======
 	call_all(dev, video, s_std, dev->norm);
 >>>>>>> v3.18
@@ -1568,7 +1572,10 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.height = dev->ts1.height;
 	f->fmt.pix.field = V4L2_FIELD_INTERLACED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dprintk(1, "VIDIOC_G_FMT: w: %d, h: %d\n",
@@ -1590,7 +1597,10 @@ static int vidioc_try_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.field = V4L2_FIELD_INTERLACED;
 	f->fmt.pix.colorspace = V4L2_COLORSPACE_SMPTE170M;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dprintk(1, "VIDIOC_TRY_FMT: w: %d, h: %d\n",
@@ -1851,7 +1861,10 @@ static const struct v4l2_ioctl_ops mpeg_ioctl_ops = {
 	.vidioc_streamoff	 = vidioc_streamoff,
 	.vidioc_log_status	 = vidioc_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident	 = cx231xx_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1938,7 +1951,10 @@ static struct video_device *cx231xx_video_dev_alloc(
 	vfd->lock = &dev->lock;
 	vfd->release = video_device_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vfd->ctrl_handler = &dev->mpeg_ctrl_handler.hdl;

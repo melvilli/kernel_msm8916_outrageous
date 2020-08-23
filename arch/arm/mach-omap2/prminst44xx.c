@@ -21,6 +21,7 @@
 #include "prcm-common.h"
 #include "prm44xx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "prminst44xx.h"
 #include "prm-regbits-44xx.h"
 #include "prcm44xx.h"
@@ -29,6 +30,8 @@
 static void __iomem *_prm_bases[OMAP4_MAX_PRCM_PARTITIONS];
 
 =======
+=======
+>>>>>>> v3.18
 #include "prm54xx.h"
 #include "prm7xx.h"
 #include "prminst44xx.h"
@@ -42,6 +45,9 @@ static void __iomem *_prm_bases[OMAP4_MAX_PRCM_PARTITIONS];
 
 static s32 prm_dev_inst = PRM_INSTANCE_UNKNOWN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * omap_prm_base_init - Populates the prm partitions
@@ -56,7 +62,10 @@ void omap_prm_base_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 s32 omap4_prmst_get_prm_dev_inst(void)
 {
 	if (prm_dev_inst != PRM_INSTANCE_UNKNOWN)
@@ -75,6 +84,9 @@ s32 omap4_prmst_get_prm_dev_inst(void)
 	return prm_dev_inst;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Read a register in a PRM instance */
 u32 omap4_prminst_read_inst_reg(u8 part, s16 inst, u16 idx)
@@ -83,7 +95,11 @@ u32 omap4_prminst_read_inst_reg(u8 part, s16 inst, u16 idx)
 	       part == OMAP4430_INVALID_PRCM_PARTITION ||
 	       !_prm_bases[part]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(_prm_bases[part] + inst + idx);
+=======
+	return readl_relaxed(_prm_bases[part] + inst + idx);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(_prm_bases[part] + inst + idx);
 >>>>>>> v3.18
@@ -96,7 +112,11 @@ void omap4_prminst_write_inst_reg(u32 val, u8 part, s16 inst, u16 idx)
 	       part == OMAP4430_INVALID_PRCM_PARTITION ||
 	       !_prm_bases[part]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, _prm_bases[part] + inst + idx);
+=======
+	writel_relaxed(val, _prm_bases[part] + inst + idx);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, _prm_bases[part] + inst + idx);
 >>>>>>> v3.18
@@ -211,6 +231,7 @@ void omap4_prminst_global_warm_sw_reset(void)
 {
 	u32 v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	v = omap4_prminst_read_inst_reg(OMAP4430_PRM_PARTITION,
 				    OMAP4430_PRM_DEVICE_INST,
@@ -225,6 +246,8 @@ void omap4_prminst_global_warm_sw_reset(void)
 				    OMAP4430_PRM_DEVICE_INST,
 				    OMAP4_PRM_RSTCTRL_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
@@ -239,5 +262,8 @@ void omap4_prminst_global_warm_sw_reset(void)
 	/* OCP barrier */
 	v = omap4_prminst_read_inst_reg(OMAP4430_PRM_PARTITION,
 				    inst, OMAP4_PRM_RSTCTRL_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

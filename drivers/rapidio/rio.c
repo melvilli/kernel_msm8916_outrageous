@@ -6,9 +6,14 @@
  * Matt Porter <mporter@kernel.crashing.org>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2009 Integrated Device Technology, Inc.
  * Alex Bounine <alexandre.bounine@idt.com>
  * - Added Port-Write/Error Management initialization and handling
+=======
+ * Copyright 2009 - 2013 Integrated Device Technology, Inc.
+ * Alex Bounine <alexandre.bounine@idt.com>
+>>>>>>> v3.18
 =======
  * Copyright 2009 - 2013 Integrated Device Technology, Inc.
  * Alex Bounine <alexandre.bounine@idt.com>
@@ -37,7 +42,10 @@
 #include "rio.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 MODULE_DESCRIPTION("RapidIO Subsystem Core");
 MODULE_AUTHOR("Matt Porter <mporter@kernel.crashing.org>");
 MODULE_AUTHOR("Alexandre Bounine <alexandre.bounine@idt.com>");
@@ -49,12 +57,19 @@ module_param_array(hdid, int, &ids_num, 0);
 MODULE_PARM_DESC(hdid,
 	"Destination ID assignment to local RapidIO controllers");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static LIST_HEAD(rio_devices);
 static DEFINE_SPINLOCK(rio_global_list_lock);
 
 static LIST_HEAD(rio_mports);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static LIST_HEAD(rio_scans);
+>>>>>>> v3.18
 =======
 static LIST_HEAD(rio_scans);
 >>>>>>> v3.18
@@ -604,6 +619,7 @@ EXPORT_SYMBOL_GPL(rio_set_port_lockout);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * rio_switch_init - Sets switch operations for a particular vendor switch
  * @rdev: RIO device
  * @do_enum: Enumeration/Discovery mode flag
@@ -642,6 +658,8 @@ void rio_switch_init(struct rio_dev *rdev, int do_enum)
 EXPORT_SYMBOL_GPL(rio_switch_init);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * rio_enable_rx_tx_port - enable input receiver and output transmitter of
@@ -997,8 +1015,13 @@ int rio_inb_pwrite_handler(union rio_pw_msg *pw_msg)
 	 * Process the port-write notification from switch
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->rswitch->em_handle)
 		rdev->rswitch->em_handle(rdev, portnum);
+=======
+	if (rdev->rswitch->ops && rdev->rswitch->ops->em_handle)
+		rdev->rswitch->ops->em_handle(rdev, portnum);
+>>>>>>> v3.18
 =======
 	if (rdev->rswitch->ops && rdev->rswitch->ops->em_handle)
 		rdev->rswitch->ops->em_handle(rdev, portnum);
@@ -1239,8 +1262,14 @@ struct rio_dev *rio_get_device(u16 vid, u16 did, struct rio_dev *from)
  * @route_port: destination port for specified destID
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rio_std_route_add_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
 		       u16 table, u16 route_destid, u8 route_port)
+=======
+static int
+rio_std_route_add_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
+			u16 table, u16 route_destid, u8 route_port)
+>>>>>>> v3.18
 =======
 static int
 rio_std_route_add_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
@@ -1272,8 +1301,14 @@ rio_std_route_add_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
  * @route_port: returned destination port for specified destID
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rio_std_route_get_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
 		       u16 table, u16 route_destid, u8 *route_port)
+=======
+static int
+rio_std_route_get_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
+			u16 table, u16 route_destid, u8 *route_port)
+>>>>>>> v3.18
 =======
 static int
 rio_std_route_get_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
@@ -1303,8 +1338,14 @@ rio_std_route_get_entry(struct rio_mport *mport, u16 destid, u8 hopcount,
  * @table: routing table ID (global or port-specific)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rio_std_route_clr_table(struct rio_mport *mport, u16 destid, u8 hopcount,
 		       u16 table)
+=======
+static int
+rio_std_route_clr_table(struct rio_mport *mport, u16 destid, u8 hopcount,
+			u16 table)
+>>>>>>> v3.18
 =======
 static int
 rio_std_route_clr_table(struct rio_mport *mport, u16 destid, u8 hopcount,
@@ -1351,7 +1392,10 @@ rio_std_route_clr_table(struct rio_mport *mport, u16 destid, u8 hopcount,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * rio_lock_device - Acquires host device lock for specified device
  * @port: Master port to send transaction
@@ -1580,11 +1624,15 @@ int rio_route_clr_table(struct rio_dev *rdev, u16 table, int lock)
 }
 EXPORT_SYMBOL_GPL(rio_route_clr_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_RAPIDIO_DMA_ENGINE
 
 static bool rio_chan_filter(struct dma_chan *chan, void *arg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rio_dev *rdev = arg;
 
@@ -1611,6 +1659,8 @@ struct dma_chan *rio_request_dma(struct rio_dev *rdev)
 
 	return dchan;
 =======
+=======
+>>>>>>> v3.18
 	struct rio_mport *mport = arg;
 
 	/* Check that DMA device belongs to the right MPORT */
@@ -1644,6 +1694,9 @@ EXPORT_SYMBOL_GPL(rio_request_mport_dma);
 struct dma_chan *rio_request_dma(struct rio_dev *rdev)
 {
 	return rio_request_mport_dma(rdev->net->hport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(rio_request_dma);
@@ -1660,15 +1713,21 @@ EXPORT_SYMBOL_GPL(rio_release_dma);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * rio_dma_prep_slave_sg - RapidIO specific wrapper
  *   for device_prep_slave_sg callback defined by DMAENGINE.
  * @rdev: RIO device control structure
  * @dchan: DMA channel to configure
 =======
+=======
+>>>>>>> v3.18
  * rio_dma_prep_xfer - RapidIO specific wrapper
  *   for device_prep_slave_sg callback defined by DMAENGINE.
  * @dchan: DMA channel to configure
  * @destid: target RapidIO device destination ID
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @data: RIO specific data descriptor
  * @direction: DMA data transfer direction (TO or FROM the device)
@@ -1680,16 +1739,22 @@ EXPORT_SYMBOL_GPL(rio_release_dma);
  * Returns pointer to DMA transaction descriptor or NULL if failed.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_async_tx_descriptor *rio_dma_prep_slave_sg(struct rio_dev *rdev,
 	struct dma_chan *dchan, struct rio_dma_data *data,
 	enum dma_transfer_direction direction, unsigned long flags)
 {
 	struct dma_async_tx_descriptor *txd = NULL;
 =======
+=======
+>>>>>>> v3.18
 struct dma_async_tx_descriptor *rio_dma_prep_xfer(struct dma_chan *dchan,
 	u16 destid, struct rio_dma_data *data,
 	enum dma_transfer_direction direction, unsigned long flags)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rio_dma_ext rio_ext;
 
@@ -1699,7 +1764,11 @@ struct dma_async_tx_descriptor *rio_dma_prep_xfer(struct dma_chan *dchan,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rio_ext.destid = rdev->destid;
+=======
+	rio_ext.destid = destid;
+>>>>>>> v3.18
 =======
 	rio_ext.destid = destid;
 >>>>>>> v3.18
@@ -1708,11 +1777,14 @@ struct dma_async_tx_descriptor *rio_dma_prep_xfer(struct dma_chan *dchan,
 	rio_ext.wr_type = data->wr_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txd = dmaengine_prep_rio_sg(dchan, data->sg, data->sg_len,
 					direction, flags, &rio_ext);
 
 	return txd;
 =======
+=======
+>>>>>>> v3.18
 	return dmaengine_prep_rio_sg(dchan, data->sg, data->sg_len,
 				     direction, flags, &rio_ext);
 }
@@ -1737,6 +1809,9 @@ struct dma_async_tx_descriptor *rio_dma_prep_slave_sg(struct rio_dev *rdev,
 	enum dma_transfer_direction direction, unsigned long flags)
 {
 	return rio_dma_prep_xfer(dchan,	rdev->destid, data, direction, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(rio_dma_prep_slave_sg);
@@ -1772,6 +1847,7 @@ found:
  * @mport_id: mport device ID for which fabric scan routine has to be set
  *            (RIO_MPORT_ANY = set for all available mports)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @scan_ops: enumeration/discovery control structure
  *
  * Assigns enumeration or discovery method to the specified mport device (or all
@@ -1780,6 +1856,8 @@ found:
  * In case of RIO_MPORT_ANY ignores ports with valid scan routines and returns
  * an error if was unable to find at least one available mport.
 =======
+=======
+>>>>>>> v3.18
  * @scan_ops: enumeration/discovery operations structure
  *
  * Registers enumeration/discovery operations with RapidIO subsystem and
@@ -1788,11 +1866,15 @@ found:
  *
  * Returns error if the mport already has an enumerator attached to it.
  * In case of RIO_MPORT_ANY skips mports with valid scan routines (no error).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int rio_register_scan(int mport_id, struct rio_scan *scan_ops)
 {
 	struct rio_mport *port;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int rc = -EBUSY;
 
@@ -1812,6 +1894,8 @@ int rio_register_scan(int mport_id, struct rio_scan *scan_ops)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct rio_scan_node *scan;
 	int rc = 0;
 
@@ -1867,6 +1951,9 @@ int rio_register_scan(int mport_id, struct rio_scan *scan_ops)
 	list_add_tail(&scan->node, &rio_scans);
 
 err_out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&rio_mport_list_lock);
 
@@ -1877,6 +1964,7 @@ EXPORT_SYMBOL_GPL(rio_register_scan);
 /**
  * rio_unregister_scan - removes enumeration/discovery method from mport
  * @mport_id: mport device ID for which fabric scan routine has to be
+<<<<<<< HEAD
 <<<<<<< HEAD
  *            unregistered (RIO_MPORT_ANY = set for all available mports)
  *
@@ -1897,6 +1985,8 @@ int rio_unregister_scan(int mport_id)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
  *            unregistered (RIO_MPORT_ANY = apply to all mports that use
  *            the specified scan_ops)
  * @scan_ops: enumeration/discovery operations structure
@@ -1930,6 +2020,9 @@ int rio_unregister_scan(int mport_id, struct rio_scan *scan_ops)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&rio_mport_list_lock);
 
@@ -1938,7 +2031,10 @@ int rio_unregister_scan(int mport_id, struct rio_scan *scan_ops)
 EXPORT_SYMBOL_GPL(rio_unregister_scan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * rio_mport_scan - execute enumeration/discovery on the specified mport
  * @mport_id: number (ID) of mport device
@@ -1977,6 +2073,9 @@ found:
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rio_fixup_device(struct rio_dev *dev)
 {
@@ -2007,12 +2106,18 @@ static void disc_work_handler(struct work_struct *_work)
 	pr_debug("RIO: discovery work for mport %d %s\n",
 		 work->mport->id, work->mport->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	work->mport->nscan->discover(work->mport, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (try_module_get(work->mport->nscan->owner)) {
 		work->mport->nscan->discover(work->mport, 0);
 		module_put(work->mport->nscan->owner);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2033,13 +2138,19 @@ int rio_init_mports(void)
 	list_for_each_entry(port, &rio_mports, node) {
 		if (port->host_deviceid >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (port->nscan)
 				port->nscan->enumerate(port, 0);
 =======
+=======
+>>>>>>> v3.18
 			if (port->nscan && try_module_get(port->nscan->owner)) {
 				port->nscan->enumerate(port, 0);
 				module_put(port->nscan->owner);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			n++;
@@ -2055,7 +2166,11 @@ int rio_init_mports(void)
 	 * resources, exit without error to keep results of enumeration
 	 * process (if any).
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * TODO: Implement restart of dicovery process for all or
+=======
+	 * TODO: Implement restart of discovery process for all or
+>>>>>>> v3.18
 =======
 	 * TODO: Implement restart of discovery process for all or
 >>>>>>> v3.18
@@ -2085,9 +2200,15 @@ int rio_init_mports(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&rio_mport_list_lock);
 
 	flush_workqueue(rio_wq);
+=======
+
+	flush_workqueue(rio_wq);
+	mutex_unlock(&rio_mport_list_lock);
+>>>>>>> v3.18
 =======
 
 	flush_workqueue(rio_wq);
@@ -2103,6 +2224,7 @@ no_disc:
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int hdids[RIO_MAX_MPORTS + 1];
 
@@ -2125,6 +2247,8 @@ __setup("riohdid=", rio_hdid_setup);
 int rio_register_mport(struct rio_mport *port)
 {
 =======
+=======
+>>>>>>> v3.18
 static int rio_get_hdid(int index)
 {
 	if (ids_num == 0 || ids_num <= index || index >= RIO_MAX_MPORTS)
@@ -2138,6 +2262,9 @@ int rio_register_mport(struct rio_mport *port)
 	struct rio_scan_node *scan = NULL;
 	int res = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (next_portid >= RIO_MAX_MPORTS) {
 		pr_err("RIO: reached specified max number of mports\n");
@@ -2148,12 +2275,15 @@ int rio_register_mport(struct rio_mport *port)
 	port->host_deviceid = rio_get_hdid(port->id);
 	port->nscan = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&rio_mport_list_lock);
 	list_add_tail(&port->node, &rio_mports);
 	mutex_unlock(&rio_mport_list_lock);
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 
 	dev_set_name(&port->dev, "rapidio%d", port->id);
 	port->dev.class = &rio_mport_class;
@@ -2186,6 +2316,9 @@ int rio_register_mport(struct rio_mport *port)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(rio_register_mport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 EXPORT_SYMBOL_GPL(rio_local_get_device_id);

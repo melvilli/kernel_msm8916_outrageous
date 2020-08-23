@@ -69,15 +69,21 @@ static int sh_cpufreq_target(struct cpufreq_policy *policy,
 	freqs.flags	= 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 	set_cpus_allowed_ptr(current, &cpus_allowed);
 	clk_set_rate(cpuclk, freq);
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 =======
+=======
+>>>>>>> v3.18
 	cpufreq_freq_transition_begin(policy, &freqs);
 	set_cpus_allowed_ptr(current, &cpus_allowed);
 	clk_set_rate(cpuclk, freq);
 	cpufreq_freq_transition_end(policy, &freqs, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(dev, "set frequency %lu Hz\n", freq);
@@ -119,8 +125,11 @@ static int sh_cpufreq_cpu_init(struct cpufreq_policy *policy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = sh_cpufreq_get(cpu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	freq_table = cpuclk->nr_freqs ? cpuclk->freq_table : NULL;
@@ -128,9 +137,15 @@ static int sh_cpufreq_cpu_init(struct cpufreq_policy *policy)
 		int result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = cpufreq_frequency_table_cpuinfo(policy, freq_table);
 		if (!result)
 			cpufreq_frequency_table_get_attr(freq_table, cpu);
+=======
+		result = cpufreq_table_validate_and_show(policy, freq_table);
+		if (result)
+			return result;
+>>>>>>> v3.18
 =======
 		result = cpufreq_table_validate_and_show(policy, freq_table);
 		if (result)
@@ -162,7 +177,10 @@ static int sh_cpufreq_cpu_exit(struct cpufreq_policy *policy)
 	struct clk *cpuclk = &per_cpu(sh_cpuclk, cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_put_attr(cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk_put(cpuclk);
@@ -171,11 +189,14 @@ static int sh_cpufreq_cpu_exit(struct cpufreq_policy *policy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct freq_attr *sh_freq_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
 	NULL,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct cpufreq_driver sh_cpufreq_driver = {
@@ -186,7 +207,11 @@ static struct cpufreq_driver sh_cpufreq_driver = {
 	.init		= sh_cpufreq_cpu_init,
 	.exit		= sh_cpufreq_cpu_exit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attr		= sh_freq_attr,
+=======
+	.attr		= cpufreq_generic_attr,
+>>>>>>> v3.18
 =======
 	.attr		= cpufreq_generic_attr,
 >>>>>>> v3.18

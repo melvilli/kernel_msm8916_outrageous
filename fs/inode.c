@@ -18,6 +18,10 @@
 #include <linux/buffer_head.h> /* for inode_has_buffers */
 #include <linux/ratelimit.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list_lru.h>
+>>>>>>> v3.18
 =======
 #include <linux/list_lru.h>
 >>>>>>> v3.18
@@ -29,7 +33,11 @@
  * inode->i_lock protects:
  *   inode->i_state, inode->i_hash, __iget()
 <<<<<<< HEAD
+<<<<<<< HEAD
  * inode->i_sb->s_inode_lru_lock protects:
+=======
+ * Inode LRU list locks protect:
+>>>>>>> v3.18
 =======
  * Inode LRU list locks protect:
 >>>>>>> v3.18
@@ -46,7 +54,11 @@
  * inode_sb_list_lock
  *   inode->i_lock
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     inode->i_sb->s_inode_lru_lock
+=======
+ *     Inode LRU list locks
+>>>>>>> v3.18
 =======
  *     Inode LRU list locks
 >>>>>>> v3.18
@@ -83,6 +95,7 @@ EXPORT_SYMBOL(empty_aops);
 struct inodes_stat_t inodes_stat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PER_CPU(unsigned int, nr_inodes);
 static DEFINE_PER_CPU(unsigned int, nr_unused);
 
@@ -93,6 +106,8 @@ static int get_nr_inodes(void)
 	int i;
 	int sum = 0;
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_PER_CPU(unsigned long, nr_inodes);
 static DEFINE_PER_CPU(unsigned long, nr_unused);
 
@@ -102,6 +117,9 @@ static long get_nr_inodes(void)
 {
 	int i;
 	long sum = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_possible_cpu(i)
 		sum += per_cpu(nr_inodes, i);
@@ -109,15 +127,21 @@ static long get_nr_inodes(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int get_nr_inodes_unused(void)
 {
 	int i;
 	int sum = 0;
 =======
+=======
+>>>>>>> v3.18
 static inline long get_nr_inodes_unused(void)
 {
 	int i;
 	long sum = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_possible_cpu(i)
 		sum += per_cpu(nr_unused, i);
@@ -125,15 +149,21 @@ static inline long get_nr_inodes_unused(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int get_nr_dirty_inodes(void)
 {
 	/* not actually dirty inodes, but a wild approximation */
 	int nr_dirty = get_nr_inodes() - get_nr_inodes_unused();
 =======
+=======
+>>>>>>> v3.18
 long get_nr_dirty_inodes(void)
 {
 	/* not actually dirty inodes, but a wild approximation */
 	long nr_dirty = get_nr_inodes() - get_nr_inodes_unused();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return nr_dirty > 0 ? nr_dirty : 0;
 }
@@ -143,7 +173,11 @@ long get_nr_dirty_inodes(void)
  */
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_nr_inodes(ctl_table *table, int write,
+=======
+int proc_nr_inodes(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_nr_inodes(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -152,7 +186,11 @@ int proc_nr_inodes(struct ctl_table *table, int write,
 	inodes_stat.nr_inodes = get_nr_inodes();
 	inodes_stat.nr_unused = get_nr_inodes_unused();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return proc_dointvec(table, write, buffer, lenp, ppos);
+=======
+	return proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
+>>>>>>> v3.18
 =======
 	return proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
 >>>>>>> v3.18
@@ -211,6 +249,10 @@ int inode_init_always(struct super_block *sb, struct inode *inode)
 	mapping->host = inode;
 	mapping->flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_set(&mapping->i_mmap_writable, 0);
+>>>>>>> v3.18
 =======
 	atomic_set(&mapping->i_mmap_writable, 0);
 >>>>>>> v3.18
@@ -452,6 +494,7 @@ EXPORT_SYMBOL(ihold);
 static void inode_lru_list_add(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&inode->i_sb->s_inode_lru_lock);
 	if (list_empty(&inode->i_lru)) {
 		list_add(&inode->i_lru, &inode->i_sb->s_inode_lru);
@@ -459,6 +502,10 @@ static void inode_lru_list_add(struct inode *inode)
 		this_cpu_inc(nr_unused);
 	}
 	spin_unlock(&inode->i_sb->s_inode_lru_lock);
+=======
+	if (list_lru_add(&inode->i_sb->s_inode_lru, &inode->i_lru))
+		this_cpu_inc(nr_unused);
+>>>>>>> v3.18
 =======
 	if (list_lru_add(&inode->i_sb->s_inode_lru, &inode->i_lru))
 		this_cpu_inc(nr_unused);
@@ -481,6 +528,7 @@ void inode_add_lru(struct inode *inode)
 static void inode_lru_list_del(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&inode->i_sb->s_inode_lru_lock);
 	if (!list_empty(&inode->i_lru)) {
 		list_del_init(&inode->i_lru);
@@ -488,6 +536,11 @@ static void inode_lru_list_del(struct inode *inode)
 		this_cpu_dec(nr_unused);
 	}
 	spin_unlock(&inode->i_sb->s_inode_lru_lock);
+=======
+
+	if (list_lru_del(&inode->i_sb->s_inode_lru, &inode->i_lru))
+		this_cpu_dec(nr_unused);
+>>>>>>> v3.18
 =======
 
 	if (list_lru_del(&inode->i_sb->s_inode_lru, &inode->i_lru))
@@ -573,6 +626,10 @@ void clear_inode(struct inode *inode)
 	spin_lock_irq(&inode->i_data.tree_lock);
 	BUG_ON(inode->i_data.nrpages);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(inode->i_data.nrshadows);
+>>>>>>> v3.18
 =======
 	BUG_ON(inode->i_data.nrshadows);
 >>>>>>> v3.18
@@ -622,8 +679,12 @@ static void evict(struct inode *inode)
 		op->evict_inode(inode);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (inode->i_data.nrpages)
 			truncate_inode_pages(&inode->i_data, 0);
+=======
+		truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 		truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -745,6 +806,7 @@ int invalidate_inodes(struct super_block *sb, bool kill_dirty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int can_unuse(struct inode *inode)
 {
 	if (inode->i_state & ~I_REFERENCED)
@@ -767,6 +829,10 @@ static int can_unuse(struct inode *inode)
 /*
  * Isolate the inode from the LRU in preparation for freeing it.
 >>>>>>> v3.18
+=======
+/*
+ * Isolate the inode from the LRU in preparation for freeing it.
+>>>>>>> v3.18
  *
  * Any inodes which are pinned purely because of attached pagecache have their
  * pagecache removed.  If the inode has metadata buffers attached to
@@ -780,6 +846,7 @@ static int can_unuse(struct inode *inode)
  * LRU does not have strict ordering. Hence we don't want to reclaim inodes
  * with this flag set because they are the inodes that are out of order.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void prune_icache_sb(struct super_block *sb, int nr_to_scan)
 {
@@ -865,6 +932,8 @@ void prune_icache_sb(struct super_block *sb, int nr_to_scan)
 
 	dispose_list(&freeable);
 =======
+=======
+>>>>>>> v3.18
 static enum lru_status
 inode_lru_isolate(struct list_head *item, spinlock_t *lru_lock, void *arg)
 {
@@ -941,6 +1010,9 @@ long prune_icache_sb(struct super_block *sb, unsigned long nr_to_scan,
 				       &freeable, &nr_to_scan);
 	dispose_list(&freeable);
 	return freed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -958,6 +1030,7 @@ static struct inode *find_inode(struct super_block *sb,
 repeat:
 	hlist_for_each_entry(inode, head, i_hash) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&inode->i_lock);
 		if (inode->i_sb != sb) {
 			spin_unlock(&inode->i_lock);
@@ -968,11 +1041,16 @@ repeat:
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (inode->i_sb != sb)
 			continue;
 		if (!test(inode, data))
 			continue;
 		spin_lock(&inode->i_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (inode->i_state & (I_FREEING|I_WILL_FREE)) {
 			__wait_on_freeing_inode(inode);
@@ -997,6 +1075,7 @@ static struct inode *find_inode_fast(struct super_block *sb,
 repeat:
 	hlist_for_each_entry(inode, head, i_hash) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&inode->i_lock);
 		if (inode->i_ino != ino) {
 			spin_unlock(&inode->i_lock);
@@ -1007,11 +1086,16 @@ repeat:
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (inode->i_ino != ino)
 			continue;
 		if (inode->i_sb != sb)
 			continue;
 		spin_lock(&inode->i_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (inode->i_state & (I_FREEING|I_WILL_FREE)) {
 			__wait_on_freeing_inode(inode);
@@ -1152,7 +1236,10 @@ EXPORT_SYMBOL(unlock_new_inode);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * lock_two_nondirectories - take two i_mutexes on non-directory objects
  *
  * Lock any non-NULL argument that is not a directory.
@@ -1188,6 +1275,9 @@ void unlock_two_nondirectories(struct inode *inode1, struct inode *inode2)
 EXPORT_SYMBOL(unlock_two_nondirectories);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * iget5_locked - obtain an inode from a mounted file system
  * @sb:		super block of file system
@@ -1733,7 +1823,11 @@ static int update_time(struct inode *inode, struct timespec *time, int flags)
  *	as well as the "noatime" flag and inode specific "noatime" markers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void touch_atime(struct path *path)
+=======
+void touch_atime(const struct path *path)
+>>>>>>> v3.18
 =======
 void touch_atime(const struct path *path)
 >>>>>>> v3.18
@@ -1813,7 +1907,11 @@ int should_remove_suid(struct dentry *dentry)
 EXPORT_SYMBOL(should_remove_suid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __remove_suid(struct vfsmount *mnt, struct dentry *dentry, int kill)
+=======
+static int __remove_suid(struct dentry *dentry, int kill)
+>>>>>>> v3.18
 =======
 static int __remove_suid(struct dentry *dentry, int kill)
 >>>>>>> v3.18
@@ -1822,13 +1920,19 @@ static int __remove_suid(struct dentry *dentry, int kill)
 
 	newattrs.ia_valid = ATTR_FORCE | kill;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return notify_change2(mnt, dentry, &newattrs);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Note we call this on write, so notify_change will not
 	 * encounter any conflicting delegations:
 	 */
 	return notify_change(dentry, &newattrs, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1853,9 +1957,15 @@ int file_remove_suid(struct file *file)
 		error = security_inode_killpriv(dentry);
 	if (!error && killsuid)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = __remove_suid(file->f_path.mnt, dentry, killsuid);
 	if (!error)
 		inode_has_no_xattr(inode);
+=======
+		error = __remove_suid(dentry, killsuid);
+	if (!error && (inode->i_sb->s_flags & MS_NOSEC))
+		inode->i_flags |= S_NOSEC;
+>>>>>>> v3.18
 =======
 		error = __remove_suid(dentry, killsuid);
 	if (!error && (inode->i_sb->s_flags & MS_NOSEC))
@@ -1925,6 +2035,7 @@ int inode_needs_sync(struct inode *inode)
 EXPORT_SYMBOL(inode_needs_sync);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int inode_wait(void *word)
 {
 	schedule();
@@ -1932,6 +2043,8 @@ int inode_wait(void *word)
 }
 EXPORT_SYMBOL(inode_wait);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -2135,7 +2248,10 @@ void inode_dio_done(struct inode *inode)
 }
 EXPORT_SYMBOL(inode_dio_done);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * inode_set_flags - atomically set some inode flags
@@ -2167,4 +2283,7 @@ void inode_set_flags(struct inode *inode, unsigned int flags,
 				  new_flags) != old_flags));
 }
 EXPORT_SYMBOL(inode_set_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

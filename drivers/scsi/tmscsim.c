@@ -522,7 +522,11 @@ dc390_StartSCSI( struct dc390_acb* pACB, struct dc390_dcb* pDCB, struct dc390_sr
 	return 1;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (time_before (jiffies, pACB->pScsiHost->last_reset))
+=======
+    if (time_before (jiffies, pACB->last_reset))
+>>>>>>> v3.18
 =======
     if (time_before (jiffies, pACB->last_reset))
 >>>>>>> v3.18
@@ -626,7 +630,11 @@ dc390_StartSCSI( struct dc390_acb* pACB, struct dc390_dcb* pDCB, struct dc390_sr
 	dc390_freetag (pDCB, pSRB);
 	DEBUG0(printk ("DC390: Interrupt during Start SCSI (target %02i-%02i)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scmd->device->id, scmd->device->lun));
+=======
+		       scmd->device->id, (u8)scmd->device->lun));
+>>>>>>> v3.18
 =======
 		       scmd->device->id, (u8)scmd->device->lun));
 >>>>>>> v3.18
@@ -1735,7 +1743,11 @@ dc390_SRBdone( struct dc390_acb* pACB, struct dc390_dcb* pDCB, struct dc390_srb*
 		SET_RES_DRV(pcmd->result, DRIVER_SENSE);
 		//pSRB->ScsiCmdLen	 = (u8) (pSRB->Segment1[0] >> 8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG0 (printk ("DC390: RETRY (%02x), target %02i-%02i\n", pcmd->cmnd[0], pcmd->device->id, pcmd->device->lun));
+=======
+		DEBUG0 (printk ("DC390: RETRY (%02x), target %02i-%02i\n", pcmd->cmnd[0], pcmd->device->id, (u8)pcmd->device->lun));
+>>>>>>> v3.18
 =======
 		DEBUG0 (printk ("DC390: RETRY (%02x), target %02i-%02i\n", pcmd->cmnd[0], pcmd->device->id, (u8)pcmd->device->lun));
 >>>>>>> v3.18
@@ -1759,7 +1771,11 @@ dc390_SRBdone( struct dc390_acb* pACB, struct dc390_dcb* pDCB, struct dc390_srb*
 	{
 	    scsi_track_queue_full(pcmd->device, pDCB->GoingSRBCnt - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DEBUG0 (printk ("DC390: RETRY (%02x), target %02i-%02i\n", pcmd->cmnd[0], pcmd->device->id, pcmd->device->lun));
+=======
+	    DEBUG0 (printk ("DC390: RETRY (%02x), target %02i-%02i\n", pcmd->cmnd[0], pcmd->device->id, (u8)pcmd->device->lun));
+>>>>>>> v3.18
 =======
 	    DEBUG0 (printk ("DC390: RETRY (%02x), target %02i-%02i\n", pcmd->cmnd[0], pcmd->device->id, (u8)pcmd->device->lun));
 >>>>>>> v3.18
@@ -1880,7 +1896,11 @@ dc390_ScsiRstDetect( struct dc390_acb* pACB )
     udelay (1000);
     DC390_write8 (ScsiCmd, CLEAR_FIFO_CMD);
 <<<<<<< HEAD
+<<<<<<< HEAD
     pACB->pScsiHost->last_reset = jiffies + 5*HZ/2
+=======
+    pACB->last_reset = jiffies + 5*HZ/2
+>>>>>>> v3.18
 =======
     pACB->last_reset = jiffies + 5*HZ/2
 >>>>>>> v3.18
@@ -2069,9 +2089,15 @@ static int DC390_bus_reset (struct scsi_cmnd *cmd)
 	dc390_ResetDevParam(pACB);
 	mdelay(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pACB->pScsiHost->last_reset = jiffies + 3*HZ/2 
 		+ HZ * dc390_eepromBuf[pACB->AdapterIndex][EE_DELAY];
     
+=======
+	pACB->last_reset = jiffies + 3*HZ/2
+		+ HZ * dc390_eepromBuf[pACB->AdapterIndex][EE_DELAY];
+
+>>>>>>> v3.18
 =======
 	pACB->last_reset = jiffies + 3*HZ/2
 		+ HZ * dc390_eepromBuf[pACB->AdapterIndex][EE_DELAY];
@@ -2410,7 +2436,11 @@ static void dc390_init_hw(struct dc390_acb *pACB, u8 index)
 		dc390_ResetSCSIBus(pACB);
 		udelay(1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shost->last_reset = jiffies + HZ/2 +
+=======
+		pACB->last_reset = jiffies + HZ/2 +
+>>>>>>> v3.18
 =======
 		pACB->last_reset = jiffies + HZ/2 +
 >>>>>>> v3.18
@@ -2486,8 +2516,13 @@ static int dc390_probe_one(struct pci_dev *pdev, const struct pci_device_id *id)
 	shost->base = io_port;
 	shost->unique_id = io_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shost->last_reset = jiffies;
 	
+=======
+
+	pACB->last_reset = jiffies;
+>>>>>>> v3.18
 =======
 
 	pACB->last_reset = jiffies;
@@ -2589,7 +2624,10 @@ static void dc390_remove_one(struct pci_dev *dev)
 	pci_disable_device(dev);
 	scsi_host_put(scsi_host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

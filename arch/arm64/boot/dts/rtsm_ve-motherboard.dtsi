@@ -23,7 +23,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vram@2,00000000 {
+=======
+		v2m_video_ram: vram@2,00000000 {
+>>>>>>> v3.18
 =======
 		v2m_video_ram: vram@2,00000000 {
 >>>>>>> v3.18
@@ -184,10 +188,13 @@
 				compatible = "arm,pl111", "arm,primecell";
 				reg = <0x1f0000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <14>;
 				clocks = <&v2m_oscclk1>, <&v2m_clk24mhz>;
 				clock-names = "clcdclk", "apb_pclk";
 =======
+=======
+>>>>>>> v3.18
 				interrupt-names = "combined";
 				interrupts = <14>;
 				clocks = <&v2m_oscclk1>, <&v2m_clk24mhz>;
@@ -224,6 +231,9 @@
 						vsync-len = <4>;
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -244,7 +254,11 @@
 
 		mcc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "arm,vexpress,config-bus", "simple-bus";
+=======
+			compatible = "arm,vexpress,config-bus";
+>>>>>>> v3.18
 =======
 			compatible = "arm,vexpress,config-bus";
 >>>>>>> v3.18

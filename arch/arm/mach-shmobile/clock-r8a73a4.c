@@ -23,7 +23,12 @@
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
+=======
+#include "common.h"
+#include "clock.h"
+>>>>>>> v3.18
 =======
 #include "common.h"
 #include "clock.h"
@@ -33,11 +38,14 @@
 #define CPG_LEN 0x270
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPCKCR 0xe6150080
 #define SMSTPCR2 0xe6150138
 #define SMSTPCR5 0xe6150144
 
 =======
+=======
+>>>>>>> v3.18
 #define SMSTPCR2 0xe6150138
 #define SMSTPCR3 0xe615013c
 #define SMSTPCR4 0xe6150140
@@ -73,6 +81,9 @@
 
 #define CPG_MAP(o) ((o - CPG_BASE) + cpg_mapping.base)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clk_mapping cpg_mapping = {
 	.phys   = CPG_BASE,
@@ -95,6 +106,7 @@ static struct clk extal2_clk = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk *main_clks[] = {
 	&extalr_clk,
 	&extal1_clk,
@@ -105,6 +117,8 @@ enum {
 	MSTP217, MSTP216, MSTP207, MSTP206, MSTP204, MSTP203,
 	MSTP522,
 =======
+=======
+>>>>>>> v3.18
 static struct sh_clk_ops followparent_clk_ops = {
 	.recalc	= followparent_recalc,
 };
@@ -531,11 +545,15 @@ enum {
 	MSTP315, MSTP314, MSTP313, MSTP312, MSTP305, MSTP300,
 	MSTP411, MSTP410, MSTP409,
 	MSTP522, MSTP515,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MSTP_NR
 };
 
 static struct clk mstp_clks[MSTP_NR] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[MSTP204] = SH_CLK_MSTP32(&extal2_clk, SMSTPCR2, 4, 0), /* SCIFA0 */
 	[MSTP203] = SH_CLK_MSTP32(&extal2_clk, SMSTPCR2, 3, 0), /* SCIFA1 */
@@ -555,6 +573,8 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh-sci.5", &mstp_clks[MSTP217]),
 	CLKDEV_DEV_ID("rcar_thermal", &mstp_clks[MSTP522]),
 =======
+=======
+>>>>>>> v3.18
 	[MSTP204] = SH_CLK_MSTP32(&div6_clks[DIV6_MP],	SMSTPCR2, 4, 0), /* SCIFA0 */
 	[MSTP203] = SH_CLK_MSTP32(&div6_clks[DIV6_MP],	SMSTPCR2, 3, 0), /* SCIFA1 */
 	[MSTP206] = SH_CLK_MSTP32(&div6_clks[DIV6_MP],	SMSTPCR2, 6, 0), /* SCIFB0 */
@@ -651,6 +671,9 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("e6540000.i2c", &mstp_clks[MSTP410]),
 	CLKDEV_DEV_ID("e6530000.i2c", &mstp_clks[MSTP411]),
 	CLKDEV_DEV_ID("e6570000.i2c", &mstp_clks[MSTP515]),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* for DT */
@@ -659,6 +682,7 @@ static struct clk_lookup lookups[] = {
 
 void __init r8a73a4_clock_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void __iomem *cpg_base, *reg;
 	int k, ret = 0;
@@ -672,6 +696,8 @@ void __init r8a73a4_clock_init(void)
 	iowrite32(ioread32(reg) | 1 << 7 | 0x0c, reg); /* set CKSEL */
 	iounmap(cpg_base);
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *reg;
 	int k, ret = 0;
 	u32 ckscr;
@@ -697,6 +723,9 @@ void __init r8a73a4_clock_init(void)
 		main_clk.parent = &extal2_div2_clk;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (k = 0; !ret && (k < ARRAY_SIZE(main_clks)); k++)
@@ -704,13 +733,19 @@ void __init r8a73a4_clock_init(void)
 
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ret = sh_clk_div4_register(div4_clks, DIV4_NR, &div4_table);
 
 	if (!ret)
 		ret = sh_clk_div6_reparent_register(div6_clks, DIV6_NR);
 
 	if (!ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = sh_clk_mstp_register(mstp_clks, MSTP_NR);
 

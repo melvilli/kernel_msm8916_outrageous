@@ -126,7 +126,11 @@ static int wm8994_ldo_probe(struct platform_device *pdev)
 {
 	struct wm8994 *wm8994 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8994_pdata *pdata = wm8994->dev->platform_data;
+=======
+	struct wm8994_pdata *pdata = dev_get_platdata(wm8994->dev);
+>>>>>>> v3.18
 =======
 	struct wm8994_pdata *pdata = dev_get_platdata(wm8994->dev);
 >>>>>>> v3.18
@@ -139,10 +143,15 @@ static int wm8994_ldo_probe(struct platform_device *pdev)
 
 	ldo = devm_kzalloc(&pdev->dev, sizeof(struct wm8994_ldo), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ldo == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!ldo)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!ldo)
 		return -ENOMEM;
@@ -175,7 +184,13 @@ static int wm8994_ldo_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldo->regulator = regulator_register(&wm8994_ldo_desc[id], &config);
+=======
+	ldo->regulator = devm_regulator_register(&pdev->dev,
+						 &wm8994_ldo_desc[id],
+						 &config);
+>>>>>>> v3.18
 =======
 	ldo->regulator = devm_regulator_register(&pdev->dev,
 						 &wm8994_ldo_desc[id],
@@ -197,6 +212,7 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm8994_ldo_remove(struct platform_device *pdev)
 {
 	struct wm8994_ldo *ldo = platform_get_drvdata(pdev);
@@ -211,6 +227,10 @@ static int wm8994_ldo_remove(struct platform_device *pdev)
 static struct platform_driver wm8994_ldo_driver = {
 	.probe = wm8994_ldo_probe,
 	.remove = wm8994_ldo_remove,
+=======
+static struct platform_driver wm8994_ldo_driver = {
+	.probe = wm8994_ldo_probe,
+>>>>>>> v3.18
 =======
 static struct platform_driver wm8994_ldo_driver = {
 	.probe = wm8994_ldo_probe,

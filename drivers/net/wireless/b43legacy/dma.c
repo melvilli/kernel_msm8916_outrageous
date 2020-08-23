@@ -332,10 +332,16 @@ static int alloc_ringmemory(struct b43legacy_dmaring *ring)
 {
 	/* GFP flags must match the flags in free_ringmemory()! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring->descbase = dma_alloc_coherent(ring->dev->dev->dma_dev,
 					    B43legacy_DMA_RINGMEMSIZE,
 					    &(ring->dmabase),
 					    GFP_KERNEL | __GFP_ZERO);
+=======
+	ring->descbase = dma_zalloc_coherent(ring->dev->dev->dma_dev,
+					     B43legacy_DMA_RINGMEMSIZE,
+					     &(ring->dmabase), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ring->descbase = dma_zalloc_coherent(ring->dev->dev->dma_dev,
 					     B43legacy_DMA_RINGMEMSIZE,
@@ -814,12 +820,18 @@ static int b43legacy_dma_set_mask(struct b43legacy_wldev *dev, u64 mask)
 	 * lower mask, as we can always also support a lower one. */
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = dma_set_mask(dev->dev->dma_dev, mask);
 		if (!err) {
 			err = dma_set_coherent_mask(dev->dev->dma_dev, mask);
 			if (!err)
 				break;
 		}
+=======
+		err = dma_set_mask_and_coherent(dev->dev->dma_dev, mask);
+		if (!err)
+			break;
+>>>>>>> v3.18
 =======
 		err = dma_set_mask_and_coherent(dev->dev->dma_dev, mask);
 		if (!err)

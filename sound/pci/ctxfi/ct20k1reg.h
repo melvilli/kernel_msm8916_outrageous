@@ -8,7 +8,11 @@
 
 #ifndef CT20K1REG_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CT20k1REG_H
+=======
+#define CT20K1REG_H
+>>>>>>> v3.18
 =======
 #define CT20K1REG_H
 >>>>>>> v3.18
@@ -637,7 +641,10 @@
 
 #endif /* CT20K1REG_H */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

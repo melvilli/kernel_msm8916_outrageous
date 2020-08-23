@@ -5,7 +5,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -36,7 +39,10 @@ dtlb_load:
 	.asciz	"SUNW,dtlb-load"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* XXX __cpuinit this thing XXX */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TRAMP_STACK_SIZE	1024
@@ -45,7 +51,10 @@ tramp_stack:
 	.skip	TRAMP_STACK_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.align		8
@@ -122,11 +131,14 @@ startup_continue:
 	 nop
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%hi(p1275buf), %g2
 	or		%g2, %lo(p1275buf), %g2
 	ldx		[%g2 + 0x10], %l2
 	add		%l2, -(192 + 128), %sp
 =======
+=======
+>>>>>>> v3.18
 	/* Get onto temporary stack which will be in the locked
 	 * kernel image.
 	 */
@@ -134,6 +146,9 @@ startup_continue:
 	or		%g1, %lo(tramp_stack), %g1
 	add		%g1, TRAMP_STACK_SIZE, %g1
 	sub		%g1, STACKFRAME_SZ + STACK_BIAS + 256, %sp
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	flushw
 
@@ -417,7 +432,10 @@ after_lock_tlb:
 	sub		%g5, (STACKFRAME_SZ + STACK_BIAS), %g5
 	add		%g6, %g5, %sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov		0, %fp
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

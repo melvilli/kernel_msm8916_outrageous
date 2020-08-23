@@ -8,6 +8,10 @@
 #include <drm/drmP.h>
 #include "i915_drv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "intel_drv.h"
+>>>>>>> v3.18
 =======
 #include "intel_drv.h"
 >>>>>>> v3.18
@@ -19,7 +23,10 @@
 #define TRACE_INCLUDE_FILE i915_trace
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* pipe updates */
 
 TRACE_EVENT(i915_pipe_update_start,
@@ -94,6 +101,9 @@ TRACE_EVENT(i915_pipe_update_end,
 		      __entry->scanline)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* object tracking */
 
@@ -114,6 +124,7 @@ TRACE_EVENT(i915_gem_object_create,
 	    TP_printk("obj=%p, size=%u", __entry->obj, __entry->size)
 );
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 TRACE_EVENT(i915_gem_object_bind,
 	    TP_PROTO(struct drm_i915_gem_object *obj, bool mappable),
@@ -145,6 +156,8 @@ TRACE_EVENT(i915_gem_object_unbind,
 	    TP_STRUCT__entry(
 			     __field(struct drm_i915_gem_object *, obj)
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(i915_vma_bind,
 	    TP_PROTO(struct i915_vma *vma, unsigned flags),
 	    TP_ARGS(vma, flags),
@@ -178,12 +191,16 @@ TRACE_EVENT(i915_vma_unbind,
 	    TP_STRUCT__entry(
 			     __field(struct drm_i915_gem_object *, obj)
 			     __field(struct i915_address_space *, vm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     __field(u32, offset)
 			     __field(u32, size)
 			     ),
 
 	    TP_fast_assign(
+<<<<<<< HEAD
 <<<<<<< HEAD
 			   __entry->obj = obj;
 			   __entry->offset = obj->gtt_space->start;
@@ -193,6 +210,8 @@ TRACE_EVENT(i915_vma_unbind,
 	    TP_printk("obj=%p, offset=%08x size=%x",
 		      __entry->obj, __entry->offset, __entry->size)
 =======
+=======
+>>>>>>> v3.18
 			   __entry->obj = vma->obj;
 			   __entry->vm = vma->vm;
 			   __entry->offset = vma->node.start;
@@ -201,6 +220,9 @@ TRACE_EVENT(i915_vma_unbind,
 
 	    TP_printk("obj=%p, offset=%08x size=%x vm=%p",
 		      __entry->obj, __entry->offset, __entry->size, __entry->vm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -320,8 +342,13 @@ DEFINE_EVENT(i915_gem_object, i915_gem_object_destroy,
 
 TRACE_EVENT(i915_gem_evict,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct drm_device *dev, u32 size, u32 align, bool mappable),
 	    TP_ARGS(dev, size, align, mappable),
+=======
+	    TP_PROTO(struct drm_device *dev, u32 size, u32 align, unsigned flags),
+	    TP_ARGS(dev, size, align, flags),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct drm_device *dev, u32 size, u32 align, unsigned flags),
 	    TP_ARGS(dev, size, align, flags),
@@ -332,7 +359,11 @@ TRACE_EVENT(i915_gem_evict,
 			     __field(u32, size)
 			     __field(u32, align)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     __field(bool, mappable)
+=======
+			     __field(unsigned, flags)
+>>>>>>> v3.18
 =======
 			     __field(unsigned, flags)
 >>>>>>> v3.18
@@ -343,7 +374,11 @@ TRACE_EVENT(i915_gem_evict,
 			   __entry->size = size;
 			   __entry->align = align;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   __entry->mappable = mappable;
+=======
+			   __entry->flags = flags;
+>>>>>>> v3.18
 =======
 			   __entry->flags = flags;
 >>>>>>> v3.18
@@ -352,7 +387,11 @@ TRACE_EVENT(i915_gem_evict,
 	    TP_printk("dev=%d, size=%d, align=%d %s",
 		      __entry->dev, __entry->size, __entry->align,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      __entry->mappable ? ", mappable" : "")
+=======
+		      __entry->flags & PIN_MAPPABLE ? ", mappable" : "")
+>>>>>>> v3.18
 =======
 		      __entry->flags & PIN_MAPPABLE ? ", mappable" : "")
 >>>>>>> v3.18
@@ -374,9 +413,12 @@ TRACE_EVENT(i915_gem_evict_everything,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(i915_gem_ring_dispatch,
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 seqno, u32 flags),
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(i915_gem_evict_vm,
 	    TP_PROTO(struct i915_address_space *vm),
 	    TP_ARGS(vm),
@@ -422,6 +464,9 @@ TRACE_EVENT(i915_gem_ring_sync_to,
 
 TRACE_EVENT(i915_gem_ring_dispatch,
 	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno, u32 flags),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    TP_ARGS(ring, seqno, flags),
 
@@ -446,7 +491,11 @@ TRACE_EVENT(i915_gem_ring_dispatch,
 
 TRACE_EVENT(i915_gem_ring_flush,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 invalidate, u32 flush),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring, u32 invalidate, u32 flush),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring, u32 invalidate, u32 flush),
 >>>>>>> v3.18
@@ -473,7 +522,11 @@ TRACE_EVENT(i915_gem_ring_flush,
 
 DECLARE_EVENT_CLASS(i915_gem_request,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 seqno),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
 >>>>>>> v3.18
@@ -497,6 +550,7 @@ DECLARE_EVENT_CLASS(i915_gem_request,
 
 DEFINE_EVENT(i915_gem_request, i915_gem_request_add,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 seqno),
 	    TP_ARGS(ring, seqno)
 );
@@ -509,6 +563,8 @@ DEFINE_EVENT(i915_gem_request, i915_gem_request_complete,
 DEFINE_EVENT(i915_gem_request, i915_gem_request_retire,
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 seqno),
 =======
+=======
+>>>>>>> v3.18
 	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
 	    TP_ARGS(ring, seqno)
 );
@@ -535,13 +591,20 @@ TRACE_EVENT(i915_gem_request_complete,
 
 DEFINE_EVENT(i915_gem_request, i915_gem_request_retire,
 	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    TP_ARGS(ring, seqno)
 );
 
 TRACE_EVENT(i915_gem_request_wait_begin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 seqno),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
 >>>>>>> v3.18
@@ -574,7 +637,11 @@ TRACE_EVENT(i915_gem_request_wait_begin,
 
 DEFINE_EVENT(i915_gem_request, i915_gem_request_wait_end,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring, u32 seqno),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring, u32 seqno),
 >>>>>>> v3.18
@@ -583,7 +650,11 @@ DEFINE_EVENT(i915_gem_request, i915_gem_request_wait_end,
 
 DECLARE_EVENT_CLASS(i915_ring,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring),
 >>>>>>> v3.18
@@ -604,7 +675,11 @@ DECLARE_EVENT_CLASS(i915_ring,
 
 DEFINE_EVENT(i915_ring, i915_ring_wait_begin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring),
 >>>>>>> v3.18
@@ -613,7 +688,11 @@ DEFINE_EVENT(i915_ring, i915_ring_wait_begin,
 
 DEFINE_EVENT(i915_ring, i915_ring_wait_end,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(struct intel_ring_buffer *ring),
+=======
+	    TP_PROTO(struct intel_engine_cs *ring),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(struct intel_engine_cs *ring),
 >>>>>>> v3.18
@@ -657,17 +736,23 @@ TRACE_EVENT(i915_flip_complete,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(i915_reg_rw,
 	TP_PROTO(bool write, u32 reg, u64 val, int len),
 
 	TP_ARGS(write, reg, val, len),
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT_CONDITION(i915_reg_rw,
 	TP_PROTO(bool write, u32 reg, u64 val, int len, bool trace),
 
 	TP_ARGS(write, reg, val, len, trace),
 
 	TP_CONDITION(trace),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(

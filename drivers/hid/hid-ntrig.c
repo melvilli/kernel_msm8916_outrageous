@@ -239,7 +239,11 @@ static ssize_t set_min_width(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18
@@ -278,7 +282,11 @@ static ssize_t set_min_height(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18
@@ -316,7 +324,11 @@ static ssize_t set_activate_slack(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18
@@ -355,7 +367,11 @@ static ssize_t set_activation_width(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18
@@ -395,7 +411,11 @@ static ssize_t set_activation_height(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18
@@ -433,7 +453,11 @@ static ssize_t set_deactivate_slack(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18
@@ -884,7 +908,11 @@ not_claimed_input:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ntrig_input_configured(struct hid_device *hid,
+=======
+static void ntrig_input_configured(struct hid_device *hid,
+>>>>>>> v3.18
 =======
 static void ntrig_input_configured(struct hid_device *hid,
 >>>>>>> v3.18
@@ -895,7 +923,11 @@ static void ntrig_input_configured(struct hid_device *hid,
 
 	if (hidinput->report->maxfield < 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -923,8 +955,11 @@ static void ntrig_input_configured(struct hid_device *hid,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

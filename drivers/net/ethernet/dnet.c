@@ -16,7 +16,10 @@
 #include <linux/slab.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -175,11 +178,14 @@ static int dnet_mdio_write(struct mii_bus *bus, int mii_id, int regnum,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dnet_mdio_reset(struct mii_bus *bus)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void dnet_handle_link_change(struct net_device *dev)
@@ -330,7 +336,10 @@ static int dnet_mii_init(struct dnet *bp)
 	bp->mii_bus->read = &dnet_mdio_read;
 	bp->mii_bus->write = &dnet_mdio_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->mii_bus->reset = &dnet_mdio_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -340,7 +349,12 @@ static int dnet_mii_init(struct dnet *bp)
 	bp->mii_bus->priv = bp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->mii_bus->irq = kmalloc(sizeof(int) * PHY_MAX_ADDR, GFP_KERNEL);
+=======
+	bp->mii_bus->irq = devm_kmalloc(&bp->pdev->dev,
+					sizeof(int) * PHY_MAX_ADDR, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	bp->mii_bus->irq = devm_kmalloc(&bp->pdev->dev,
 					sizeof(int) * PHY_MAX_ADDR, GFP_KERNEL);
@@ -356,7 +370,11 @@ static int dnet_mii_init(struct dnet *bp)
 	if (mdiobus_register(bp->mii_bus)) {
 		err = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_out_free_mdio_irq;
+=======
+		goto err_out;
+>>>>>>> v3.18
 =======
 		goto err_out;
 >>>>>>> v3.18
@@ -372,8 +390,11 @@ static int dnet_mii_init(struct dnet *bp)
 err_out_unregister_bus:
 	mdiobus_unregister(bp->mii_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_out_free_mdio_irq:
 	kfree(bp->mii_bus->irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_out:
@@ -854,6 +875,7 @@ static int dnet_probe(struct platform_device *pdev)
 	struct dnet *bp;
 	struct phy_device *phydev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = -ENXIO;
 	unsigned int mem_base, mem_size, irq;
 
@@ -877,6 +899,8 @@ static int dnet_probe(struct platform_device *pdev)
 	if (!dev)
 		goto err_out_release_mem;
 =======
+=======
+>>>>>>> v3.18
 	int err;
 	unsigned int irq;
 
@@ -885,6 +909,9 @@ static int dnet_probe(struct platform_device *pdev)
 	dev = alloc_etherdev(sizeof(*bp));
 	if (!dev)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* TODO: Actually, we have some interesting features... */
@@ -899,15 +926,21 @@ static int dnet_probe(struct platform_device *pdev)
 	spin_lock_init(&bp->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->regs = ioremap(mem_base, mem_size);
 	if (!bp->regs) {
 		dev_err(&pdev->dev, "failed to map registers, aborting.\n");
 		err = -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	bp->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(bp->regs)) {
 		err = PTR_ERR(bp->regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_out_free_dev;
 	}
@@ -918,7 +951,11 @@ static int dnet_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Unable to request IRQ %d (error %d)\n",
 		       irq, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_out_iounmap;
+=======
+		goto err_out_free_dev;
+>>>>>>> v3.18
 =======
 		goto err_out_free_dev;
 >>>>>>> v3.18
@@ -959,7 +996,11 @@ static int dnet_probe(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "Dave DNET at 0x%p (0x%08x) irq %d %pM\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       bp->regs, mem_base, dev->irq, dev->dev_addr);
+=======
+	       bp->regs, (unsigned int)res->start, dev->irq, dev->dev_addr);
+>>>>>>> v3.18
 =======
 	       bp->regs, (unsigned int)res->start, dev->irq, dev->dev_addr);
 >>>>>>> v3.18
@@ -980,6 +1021,7 @@ err_out_unregister_netdev:
 err_out_free_irq:
 	free_irq(dev->irq, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_out_iounmap:
 	iounmap(bp->regs);
 err_out_free_dev:
@@ -987,6 +1029,10 @@ err_out_free_dev:
 err_out_release_mem:
 	release_mem_region(mem_base, mem_size);
 err_out:
+=======
+err_out_free_dev:
+	free_netdev(dev);
+>>>>>>> v3.18
 =======
 err_out_free_dev:
 	free_netdev(dev);
@@ -1008,11 +1054,17 @@ static int dnet_remove(struct platform_device *pdev)
 			phy_disconnect(bp->phy_dev);
 		mdiobus_unregister(bp->mii_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(bp->mii_bus->irq);
 		mdiobus_free(bp->mii_bus);
 		unregister_netdev(dev);
 		free_irq(dev->irq, dev);
 		iounmap(bp->regs);
+=======
+		mdiobus_free(bp->mii_bus);
+		unregister_netdev(dev);
+		free_irq(dev->irq, dev);
+>>>>>>> v3.18
 =======
 		mdiobus_free(bp->mii_bus);
 		unregister_netdev(dev);

@@ -27,7 +27,11 @@ struct vexpress_regulator {
 	struct regulator_desc desc;
 	struct regulator_dev *regdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vexpress_config_func *func;
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18
@@ -38,7 +42,11 @@ static int vexpress_regulator_get_voltage(struct regulator_dev *regdev)
 	struct vexpress_regulator *reg = rdev_get_drvdata(regdev);
 	u32 uV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = vexpress_config_read(reg->func, 0, &uV);
+=======
+	int err = regmap_read(reg->regmap, 0, &uV);
+>>>>>>> v3.18
 =======
 	int err = regmap_read(reg->regmap, 0, &uV);
 >>>>>>> v3.18
@@ -52,7 +60,11 @@ static int vexpress_regulator_set_voltage(struct regulator_dev *regdev,
 	struct vexpress_regulator *reg = rdev_get_drvdata(regdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return vexpress_config_write(reg->func, 0, min_uV);
+=======
+	return regmap_write(reg->regmap, 0, min_uV);
+>>>>>>> v3.18
 =======
 	return regmap_write(reg->regmap, 0, min_uV);
 >>>>>>> v3.18
@@ -70,7 +82,10 @@ static struct regulator_ops vexpress_regulator_ops = {
 static int vexpress_regulator_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct vexpress_regulator *reg;
@@ -78,6 +93,7 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 	struct regulator_config config = { };
 
 	reg = devm_kzalloc(&pdev->dev, sizeof(*reg), GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!reg) {
 		err = -ENOMEM;
@@ -90,12 +106,17 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 		goto error_get_func;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!reg)
 		return -ENOMEM;
 
 	reg->regmap = devm_regmap_init_vexpress_config(&pdev->dev);
 	if (IS_ERR(reg->regmap))
 		return PTR_ERR(reg->regmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	reg->desc.name = dev_name(&pdev->dev);
@@ -105,10 +126,15 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 
 	init_data = of_get_regulator_init_data(&pdev->dev, pdev->dev.of_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!init_data) {
 		err = -EINVAL;
 		goto error_get_regulator_init_data;
 	}
+=======
+	if (!init_data)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!init_data)
 		return -EINVAL;
@@ -126,6 +152,7 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 	config.of_node = pdev->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg->regdev = regulator_register(&reg->desc, &config);
 	if (IS_ERR(reg->regdev)) {
 		err = PTR_ERR(reg->regdev);
@@ -136,10 +163,16 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 	if (IS_ERR(reg->regdev))
 		return PTR_ERR(reg->regdev);
 >>>>>>> v3.18
+=======
+	reg->regdev = devm_regulator_register(&pdev->dev, &reg->desc, &config);
+	if (IS_ERR(reg->regdev))
+		return PTR_ERR(reg->regdev);
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, reg);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 error_regulator_register:
@@ -166,6 +199,11 @@ static struct of_device_id vexpress_regulator_of_match[] = {
 
 static const struct of_device_id vexpress_regulator_of_match[] = {
 >>>>>>> v3.18
+=======
+}
+
+static const struct of_device_id vexpress_regulator_of_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "arm,vexpress-volt", },
 	{ }
 };
@@ -173,7 +211,10 @@ static const struct of_device_id vexpress_regulator_of_match[] = {
 static struct platform_driver vexpress_regulator_driver = {
 	.probe = vexpress_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = vexpress_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver	= {

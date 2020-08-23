@@ -128,8 +128,14 @@ static int ohci_octeon_drv_probe(struct platform_device *pdev)
 
 	/* Ohci is a 32-bit device. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
 	pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
+=======
+	ret = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 	if (ret)
@@ -143,6 +149,7 @@ static int ohci_octeon_drv_probe(struct platform_device *pdev)
 	hcd->rsrc_start = res_mem->start;
 	hcd->rsrc_len = resource_size(res_mem);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!request_mem_region(hcd->rsrc_start, hcd->rsrc_len,
 				OCTEON_OHCI_HCD_NAME)) {
@@ -159,12 +166,17 @@ static int ohci_octeon_drv_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	reg_base = devm_ioremap_resource(&pdev->dev, res_mem);
 	if (IS_ERR(reg_base)) {
 		ret = PTR_ERR(reg_base);
 		goto err1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ohci_octeon_hw_start();
 
@@ -183,20 +195,27 @@ static int ohci_octeon_drv_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_dbg(&pdev->dev, "failed to add hcd with err %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err3;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		goto err2;
 	}
 
 	device_wakeup_enable(hcd->self.controller);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, hcd);
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err3:
 	ohci_octeon_hw_stop();
@@ -204,6 +223,11 @@ err3:
 	iounmap(hcd->regs);
 err2:
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+err2:
+	ohci_octeon_hw_stop();
+
+>>>>>>> v3.18
 =======
 err2:
 	ohci_octeon_hw_stop();
@@ -222,12 +246,17 @@ static int ohci_octeon_drv_remove(struct platform_device *pdev)
 
 	ohci_octeon_hw_stop();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
 	usb_put_hcd(hcd);
 
 	platform_set_drvdata(pdev, NULL);
 
+=======
+	usb_put_hcd(hcd);
+
+>>>>>>> v3.18
 =======
 	usb_put_hcd(hcd);
 

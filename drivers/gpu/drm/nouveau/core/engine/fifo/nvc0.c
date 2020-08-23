@@ -29,8 +29,13 @@
 #include <core/engctx.h>
 #include <core/event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 #include <core/math.h>
+=======
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -40,6 +45,10 @@
 #include <subdev/timer.h>
 #include <subdev/bar.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/fb.h>
+>>>>>>> v3.18
 =======
 #include <subdev/fb.h>
 >>>>>>> v3.18
@@ -51,9 +60,12 @@
 struct nvc0_fifo_priv {
 	struct nouveau_fifo base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_gpuobj *playlist[2];
 	int cur_playlist;
 =======
+=======
+>>>>>>> v3.18
 
 	struct work_struct fault;
 	u64 mask;
@@ -64,6 +76,9 @@ struct nvc0_fifo_priv {
 		wait_queue_head_t wait;
 	} runlist;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct {
 		struct nouveau_gpuobj *mem;
@@ -81,12 +96,18 @@ struct nvc0_fifo_base {
 struct nvc0_fifo_chan {
 	struct nouveau_fifo_chan base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	enum {
 		STOPPED,
 		RUNNING,
 		KILLED
 	} state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -96,7 +117,11 @@ struct nvc0_fifo_chan {
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nvc0_fifo_playlist_update(struct nvc0_fifo_priv *priv)
+=======
+nvc0_fifo_runlist_update(struct nvc0_fifo_priv *priv)
+>>>>>>> v3.18
 =======
 nvc0_fifo_runlist_update(struct nvc0_fifo_priv *priv)
 >>>>>>> v3.18
@@ -106,6 +131,7 @@ nvc0_fifo_runlist_update(struct nvc0_fifo_priv *priv)
 	int i, p;
 
 	mutex_lock(&nv_subdev(priv)->mutex);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cur = priv->playlist[priv->cur_playlist];
 	priv->cur_playlist = !priv->cur_playlist;
@@ -117,6 +143,8 @@ nvc0_fifo_runlist_update(struct nvc0_fifo_priv *priv)
 		nv_wo32(cur, p + 4, 0x00000004);
 		p += 8;
 =======
+=======
+>>>>>>> v3.18
 	cur = priv->runlist.mem[priv->runlist.active];
 	priv->runlist.active = !priv->runlist.active;
 
@@ -127,6 +155,9 @@ nvc0_fifo_runlist_update(struct nvc0_fifo_priv *priv)
 			nv_wo32(cur, p + 4, 0x00000004);
 			p += 8;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	bar->flush(bar);
@@ -134,14 +165,20 @@ nvc0_fifo_runlist_update(struct nvc0_fifo_priv *priv)
 	nv_wr32(priv, 0x002270, cur->addr >> 12);
 	nv_wr32(priv, 0x002274, 0x01f00000 | (p >> 3));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nv_wait(priv, 0x00227c, 0x00100000, 0x00000000))
 		nv_error(priv, "playlist update failed\n");
 =======
+=======
+>>>>>>> v3.18
 
 	if (wait_event_timeout(priv->runlist.wait,
 			       !(nv_rd32(priv, 0x00227c) & 0x00100000),
 			       msecs_to_jiffies(2000)) == 0)
 		nv_error(priv, "runlist update timeout\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&nv_subdev(priv)->mutex);
 }
@@ -226,6 +263,12 @@ nvc0_fifo_chan_ctor(struct nouveau_object *parent,
 		    struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	union {
+		struct nv50_channel_gpfifo_v0 v0;
+	} *args = data;
+>>>>>>> v3.18
 =======
 	union {
 		struct nv50_channel_gpfifo_v0 v0;
@@ -235,6 +278,7 @@ nvc0_fifo_chan_ctor(struct nouveau_object *parent,
 	struct nvc0_fifo_priv *priv = (void *)engine;
 	struct nvc0_fifo_base *base = (void *)parent;
 	struct nvc0_fifo_chan *chan;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nv50_channel_ind_class *args = data;
 	u64 usermem, ioffset, ilength;
@@ -247,6 +291,8 @@ nvc0_fifo_chan_ctor(struct nouveau_object *parent,
 					  priv->user.bar.offset, 0x1000,
 					  args->pushbuf,
 =======
+=======
+>>>>>>> v3.18
 	u64 usermem, ioffset, ilength;
 	int ret, i;
 
@@ -262,6 +308,9 @@ nvc0_fifo_chan_ctor(struct nouveau_object *parent,
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 1,
 					  priv->user.bar.offset, 0x1000,
 					  args->v0.pushbuf,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  (1ULL << NVDEV_ENGINE_SW) |
 					  (1ULL << NVDEV_ENGINE_GR) |
@@ -275,6 +324,11 @@ nvc0_fifo_chan_ctor(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	args->v0.chid = chan->base.chid;
+
+>>>>>>> v3.18
 =======
 	args->v0.chid = chan->base.chid;
 
@@ -284,8 +338,13 @@ nvc0_fifo_chan_ctor(struct nouveau_object *parent,
 
 	usermem = chan->base.chid * 0x1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioffset = args->ioffset;
 	ilength = log2i(args->ilength / 8);
+=======
+	ioffset = args->v0.ioffset;
+	ilength = order_base_2(args->v0.ilength / 8);
+>>>>>>> v3.18
 =======
 	ioffset = args->v0.ioffset;
 	ilength = order_base_2(args->v0.ilength / 8);
@@ -329,12 +388,15 @@ nvc0_fifo_chan_init(struct nouveau_object *object)
 
 	nv_wr32(priv, 0x003000 + (chid * 8), 0xc0000000 | base->addr >> 12);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wr32(priv, 0x003004 + (chid * 8), 0x001f0001);
 	nvc0_fifo_playlist_update(priv);
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (chan->state == STOPPED && (chan->state = RUNNING) == RUNNING) {
 		nv_wr32(priv, 0x003004 + (chid * 8), 0x001f0001);
@@ -346,6 +408,9 @@ nvc0_fifo_chan_init(struct nouveau_object *object)
 
 static void nvc0_fifo_intr_engine(struct nvc0_fifo_priv *priv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nvc0_fifo_chan_fini(struct nouveau_object *object, bool suspend)
@@ -353,6 +418,7 @@ nvc0_fifo_chan_fini(struct nouveau_object *object, bool suspend)
 	struct nvc0_fifo_priv *priv = (void *)object->engine;
 	struct nvc0_fifo_chan *chan = (void *)object;
 	u32 chid = chan->base.chid;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 mask, engine;
 
@@ -368,6 +434,8 @@ nvc0_fifo_chan_fini(struct nouveau_object *object, bool suspend)
 	nv_wr32(priv, 0x003000 + (chid * 8), 0x00000000);
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (chan->state == RUNNING && (chan->state = STOPPED) == STOPPED) {
 		nv_mask(priv, 0x003004 + (chid * 8), 0x00000001, 0x00000000);
@@ -377,6 +445,9 @@ nvc0_fifo_chan_fini(struct nouveau_object *object, bool suspend)
 	nvc0_fifo_intr_engine(priv);
 
 	nv_wr32(priv, 0x003000 + (chid * 8), 0x00000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return nouveau_fifo_channel_fini(&chan->base, suspend);
 }
@@ -388,20 +459,30 @@ nvc0_fifo_ofuncs = {
 	.init = nvc0_fifo_chan_init,
 	.fini = nvc0_fifo_chan_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 =======
+=======
+>>>>>>> v3.18
 	.map  = _nouveau_fifo_channel_map,
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 	.ntfy = _nouveau_fifo_channel_ntfy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct nouveau_oclass
 nvc0_fifo_sclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ NVC0_CHANNEL_IND_CLASS, &nvc0_fifo_ofuncs },
+=======
+	{ FERMI_CHANNEL_GPFIFO, &nvc0_fifo_ofuncs },
+>>>>>>> v3.18
 =======
 	{ FERMI_CHANNEL_GPFIFO, &nvc0_fifo_ofuncs },
 >>>>>>> v3.18
@@ -472,12 +553,15 @@ nvc0_fifo_cclass = {
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct nouveau_enum nvc0_fifo_fault_unit[] = {
 	{ 0x00, "PGRAPH", NULL, NVDEV_ENGINE_GR },
 	{ 0x03, "PEEPHOLE" },
 	{ 0x04, "BAR1" },
 	{ 0x05, "BAR3" },
 =======
+=======
+>>>>>>> v3.18
 static inline int
 nvc0_fifo_engidx(struct nvc0_fifo_priv *priv, u32 engn)
 {
@@ -649,6 +733,9 @@ nvc0_fifo_fault_engine[] = {
 	{ 0x03, "PEEPHOLE", NULL, NVDEV_ENGINE_IFB },
 	{ 0x04, "BAR1", NULL, NVDEV_SUBDEV_BAR },
 	{ 0x05, "BAR3", NULL, NVDEV_SUBDEV_INSTMEM },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x07, "PFIFO", NULL, NVDEV_ENGINE_FIFO },
 	{ 0x10, "PBSP", NULL, NVDEV_ENGINE_BSP },
@@ -662,7 +749,12 @@ nvc0_fifo_fault_engine[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct nouveau_enum nvc0_fifo_fault_reason[] = {
+=======
+static const struct nouveau_enum
+nvc0_fifo_fault_reason[] = {
+>>>>>>> v3.18
 =======
 static const struct nouveau_enum
 nvc0_fifo_fault_reason[] = {
@@ -680,7 +772,12 @@ nvc0_fifo_fault_reason[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct nouveau_enum nvc0_fifo_fault_hubclient[] = {
+=======
+static const struct nouveau_enum
+nvc0_fifo_fault_hubclient[] = {
+>>>>>>> v3.18
 =======
 static const struct nouveau_enum
 nvc0_fifo_fault_hubclient[] = {
@@ -703,7 +800,12 @@ nvc0_fifo_fault_hubclient[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct nouveau_enum nvc0_fifo_fault_gpcclient[] = {
+=======
+static const struct nouveau_enum
+nvc0_fifo_fault_gpcclient[] = {
+>>>>>>> v3.18
 =======
 static const struct nouveau_enum
 nvc0_fifo_fault_gpcclient[] = {
@@ -715,6 +817,7 @@ nvc0_fifo_fault_gpcclient[] = {
 	{}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct nouveau_bitfield nvc0_fifo_subfifo_intr[] = {
 /*	{ 0x00008000, "" }	seen with null ib push */
@@ -729,11 +832,16 @@ nvc0_fifo_isr_vm_fault(struct nvc0_fifo_priv *priv, int unit)
 static void
 nvc0_fifo_intr_fault(struct nvc0_fifo_priv *priv, int unit)
 >>>>>>> v3.18
+=======
+static void
+nvc0_fifo_intr_fault(struct nvc0_fifo_priv *priv, int unit)
+>>>>>>> v3.18
 {
 	u32 inst = nv_rd32(priv, 0x002800 + (unit * 0x10));
 	u32 valo = nv_rd32(priv, 0x002804 + (unit * 0x10));
 	u32 vahi = nv_rd32(priv, 0x002808 + (unit * 0x10));
 	u32 stat = nv_rd32(priv, 0x00280c + (unit * 0x10));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 client = (stat & 0x00001f00) >> 8;
 	const struct nouveau_enum *en;
@@ -776,6 +884,8 @@ nvc0_fifo_intr_fault(struct nvc0_fifo_priv *priv, int unit)
 	pr_cont(" on channel 0x%010llx [%s]\n", (u64)inst << 12,
 			nouveau_client_name(engctx));
 =======
+=======
+>>>>>>> v3.18
 	u32 gpc    = (stat & 0x1f000000) >> 24;
 	u32 client = (stat & 0x00001f00) >> 8;
 	u32 write  = (stat & 0x00000080);
@@ -841,11 +951,15 @@ nvc0_fifo_intr_fault(struct nvc0_fifo_priv *priv, int unit)
 		}
 		object = object->parent;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nouveau_engctx_put(engctx);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvc0_fifo_swmthd(struct nvc0_fifo_priv *priv, u32 chid, u32 mthd, u32 data)
@@ -876,6 +990,8 @@ out:
 static void
 nvc0_fifo_isr_subfifo_intr(struct nvc0_fifo_priv *priv, int unit)
 =======
+=======
+>>>>>>> v3.18
 static const struct nouveau_bitfield
 nvc0_fifo_pbdma_intr[] = {
 /*	{ 0x00008000, "" }	seen with null ib push */
@@ -886,6 +1002,9 @@ nvc0_fifo_pbdma_intr[] = {
 
 static void
 nvc0_fifo_intr_pbdma(struct nvc0_fifo_priv *priv, int unit)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 stat = nv_rd32(priv, 0x040108 + (unit * 0x2000));
@@ -897,6 +1016,7 @@ nvc0_fifo_intr_pbdma(struct nvc0_fifo_priv *priv, int unit)
 	u32 show = stat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (stat & 0x00200000) {
 		if (mthd == 0x0054) {
 			if (!nvc0_fifo_swmthd(priv, chid, 0x0500, 0x00000000))
@@ -906,6 +1026,8 @@ nvc0_fifo_intr_pbdma(struct nvc0_fifo_priv *priv, int unit)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (stat & 0x00800000) {
 		if (!nvc0_fifo_swmthd(priv, chid, mthd, data))
 			show &= ~0x00800000;
@@ -913,17 +1035,23 @@ nvc0_fifo_intr_pbdma(struct nvc0_fifo_priv *priv, int unit)
 
 	if (show) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_error(priv, "SUBFIFO%d:", unit);
 		nouveau_bitfield_print(nvc0_fifo_subfifo_intr, show);
 		pr_cont("\n");
 		nv_error(priv,
 			 "SUBFIFO%d: ch %d [%s] subc %d mthd 0x%04x data 0x%08x\n",
 =======
+=======
+>>>>>>> v3.18
 		nv_error(priv, "PBDMA%d:", unit);
 		nouveau_bitfield_print(nvc0_fifo_pbdma_intr, show);
 		pr_cont("\n");
 		nv_error(priv,
 			 "PBDMA%d: ch %d [%s] subc %d mthd 0x%04x data 0x%08x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 unit, chid,
 			 nouveau_client_name_for_fifo_chid(&priv->base, chid),
@@ -936,7 +1064,10 @@ nvc0_fifo_intr_pbdma(struct nvc0_fifo_priv *priv, int unit)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nvc0_fifo_intr_runlist(struct nvc0_fifo_priv *priv)
 {
 	u32 intr = nv_rd32(priv, 0x002a00);
@@ -987,6 +1118,9 @@ nvc0_fifo_intr_engine(struct nvc0_fifo_priv *priv)
 }
 
 static void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nvc0_fifo_intr(struct nouveau_subdev *subdev)
 {
@@ -1003,8 +1137,12 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 
 	if (stat & 0x00000100) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 intr = nv_rd32(priv, 0x00254c);
 		nv_warn(priv, "INTR 0x00000100: 0x%08x\n", intr);
+=======
+		nvc0_fifo_intr_sched(priv);
+>>>>>>> v3.18
 =======
 		nvc0_fifo_intr_sched(priv);
 >>>>>>> v3.18
@@ -1028,6 +1166,7 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 
 	if (stat & 0x10000000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 units = nv_rd32(priv, 0x00259c);
 		u32 u = units;
 
@@ -1039,6 +1178,8 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 
 		nv_wr32(priv, 0x00259c, units);
 =======
+=======
+>>>>>>> v3.18
 		u32 mask = nv_rd32(priv, 0x00259c);
 		while (mask) {
 			u32 unit = __ffs(mask);
@@ -1046,11 +1187,15 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 			nv_wr32(priv, 0x00259c, (1 << unit));
 			mask &= ~(1 << unit);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stat &= ~0x10000000;
 	}
 
 	if (stat & 0x20000000) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u32 units = nv_rd32(priv, 0x0025a0);
 		u32 u = units;
@@ -1063,6 +1208,8 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 
 		nv_wr32(priv, 0x0025a0, units);
 =======
+=======
+>>>>>>> v3.18
 		u32 mask = nv_rd32(priv, 0x0025a0);
 		while (mask) {
 			u32 unit = __ffs(mask);
@@ -1070,11 +1217,15 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 			nv_wr32(priv, 0x0025a0, (1 << unit));
 			mask &= ~(1 << unit);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stat &= ~0x20000000;
 	}
 
 	if (stat & 0x40000000) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u32 intr0 = nv_rd32(priv, 0x0025a4);
 		u32 intr1 = nv_mask(priv, 0x002a00, 0x00000000, 0x00000);
@@ -1083,10 +1234,14 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 =======
 		nvc0_fifo_intr_runlist(priv);
 >>>>>>> v3.18
+=======
+		nvc0_fifo_intr_runlist(priv);
+>>>>>>> v3.18
 		stat &= ~0x40000000;
 	}
 
 	if (stat & 0x80000000) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u32 intr = nv_mask(priv, 0x0025a8, 0x00000000, 0x00000000);
 		nouveau_event_trigger(priv->base.uevent, 0);
@@ -1094,10 +1249,14 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 =======
 		nvc0_fifo_intr_engine(priv);
 >>>>>>> v3.18
+=======
+		nvc0_fifo_intr_engine(priv);
+>>>>>>> v3.18
 		stat &= ~0x80000000;
 	}
 
 	if (stat) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		nv_fatal(priv, "unhandled status 0x%08x\n", stat);
 		nv_wr32(priv, 0x002100, stat);
@@ -1107,10 +1266,16 @@ nvc0_fifo_intr(struct nouveau_subdev *subdev)
 		nv_mask(priv, 0x002140, stat, 0x00000000);
 		nv_wr32(priv, 0x002100, stat);
 >>>>>>> v3.18
+=======
+		nv_error(priv, "INTR 0x%08x\n", stat);
+		nv_mask(priv, 0x002140, stat, 0x00000000);
+		nv_wr32(priv, 0x002100, stat);
+>>>>>>> v3.18
 	}
 }
 
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 nvc0_fifo_uevent_enable(struct nouveau_event *event, int index)
 {
@@ -1126,6 +1291,8 @@ nvc0_fifo_uevent_disable(struct nouveau_event *event, int index)
 }
 
 =======
+=======
+>>>>>>> v3.18
 nvc0_fifo_uevent_init(struct nvkm_event *event, int type, int index)
 {
 	struct nouveau_fifo *fifo = container_of(event, typeof(*fifo), uevent);
@@ -1146,6 +1313,9 @@ nvc0_fifo_uevent_func = {
 	.fini = nvc0_fifo_uevent_fini,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nvc0_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -1161,30 +1331,42 @@ nvc0_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_gpuobj_new(nv_object(priv), NULL, 0x1000, 0x1000, 0,
 				&priv->playlist[0]);
 =======
+=======
+>>>>>>> v3.18
 	INIT_WORK(&priv->fault, nvc0_fifo_recover_work);
 
 	ret = nouveau_gpuobj_new(nv_object(priv), NULL, 0x1000, 0x1000, 0,
 				&priv->runlist.mem[0]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	ret = nouveau_gpuobj_new(nv_object(priv), NULL, 0x1000, 0x1000, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&priv->playlist[1]);
 	if (ret)
 		return ret;
 
 =======
+=======
+>>>>>>> v3.18
 				&priv->runlist.mem[1]);
 	if (ret)
 		return ret;
 
 	init_waitqueue_head(&priv->runlist.wait);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = nouveau_gpuobj_new(nv_object(priv), NULL, 128 * 0x1000, 0x1000, 0,
 				&priv->user.mem);
@@ -1197,9 +1379,15 @@ nvc0_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.uevent->enable = nvc0_fifo_uevent_enable;
 	priv->base.uevent->disable = nvc0_fifo_uevent_disable;
 	priv->base.uevent->priv = priv;
+=======
+	ret = nvkm_event_init(&nvc0_fifo_uevent_func, 1, 1, &priv->base.uevent);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = nvkm_event_init(&nvc0_fifo_uevent_func, 1, 1, &priv->base.uevent);
 	if (ret)
@@ -1221,8 +1409,13 @@ nvc0_fifo_dtor(struct nouveau_object *object)
 	nouveau_gpuobj_unmap(&priv->user.bar);
 	nouveau_gpuobj_ref(NULL, &priv->user.mem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_gpuobj_ref(NULL, &priv->playlist[1]);
 	nouveau_gpuobj_ref(NULL, &priv->playlist[0]);
+=======
+	nouveau_gpuobj_ref(NULL, &priv->runlist.mem[0]);
+	nouveau_gpuobj_ref(NULL, &priv->runlist.mem[1]);
+>>>>>>> v3.18
 =======
 	nouveau_gpuobj_ref(NULL, &priv->runlist.mem[0]);
 	nouveau_gpuobj_ref(NULL, &priv->runlist.mem[1]);
@@ -1246,9 +1439,15 @@ nvc0_fifo_init(struct nouveau_object *object)
 
 	priv->spoon_nr = hweight32(nv_rd32(priv, 0x002204));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_debug(priv, "%d subfifo(s)\n", priv->spoon_nr);
 
 	/* assign engines to subfifos */
+=======
+	nv_debug(priv, "%d PBDMA unit(s)\n", priv->spoon_nr);
+
+	/* assign engines to PBDMAs */
+>>>>>>> v3.18
 =======
 	nv_debug(priv, "%d PBDMA unit(s)\n", priv->spoon_nr);
 
@@ -1264,7 +1463,11 @@ nvc0_fifo_init(struct nouveau_object *object)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* PSUBFIFO[n] */
+=======
+	/* PBDMA[n] */
+>>>>>>> v3.18
 =======
 	/* PBDMA[n] */
 >>>>>>> v3.18
@@ -1278,6 +1481,7 @@ nvc0_fifo_init(struct nouveau_object *object)
 	nv_wr32(priv, 0x002254, 0x10000000 | priv->user.bar.offset >> 12);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wr32(priv, 0x002a00, 0xffffffff); /* clears PFIFO.INTR bit 30 */
 	nv_wr32(priv, 0x002100, 0xffffffff);
 	nv_wr32(priv, 0x002140, 0x3fffffff);
@@ -1288,6 +1492,8 @@ nvc0_fifo_init(struct nouveau_object *object)
 struct nouveau_oclass
 nvc0_fifo_oclass = {
 =======
+=======
+>>>>>>> v3.18
 	nv_wr32(priv, 0x002100, 0xffffffff);
 	nv_wr32(priv, 0x002140, 0x7fffffff);
 	nv_wr32(priv, 0x002628, 0x00000001); /* ENGINE_INTR_EN */
@@ -1296,6 +1502,9 @@ nvc0_fifo_oclass = {
 
 struct nouveau_oclass *
 nvc0_fifo_oclass = &(struct nouveau_oclass) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.handle = NV_ENGINE(FIFO, 0xc0),
 	.ofuncs = &(struct nouveau_ofuncs) {

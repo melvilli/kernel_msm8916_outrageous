@@ -17,7 +17,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -254,15 +257,21 @@ static int hpt3x3_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int hpt3x3_reinit_one(struct pci_dev *dev)
 {
 	struct ata_host *host = dev_get_drvdata(&dev->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int hpt3x3_reinit_one(struct pci_dev *dev)
 {
 	struct ata_host *host = pci_get_drvdata(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 
@@ -289,7 +298,11 @@ static struct pci_driver hpt3x3_pci_driver = {
 	.probe 		= hpt3x3_init_one,
 	.remove		= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

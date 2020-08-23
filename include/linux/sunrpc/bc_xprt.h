@@ -33,7 +33,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef CONFIG_SUNRPC_BACKCHANNEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rpc_rqst *xprt_alloc_bc_request(struct rpc_xprt *xprt);
+=======
+struct rpc_rqst *xprt_lookup_bc_request(struct rpc_xprt *xprt, __be32 xid);
+void xprt_complete_bc_request(struct rpc_rqst *req, uint32_t copied);
+>>>>>>> v3.18
 =======
 struct rpc_rqst *xprt_lookup_bc_request(struct rpc_xprt *xprt, __be32 xid);
 void xprt_complete_bc_request(struct rpc_rqst *req, uint32_t copied);

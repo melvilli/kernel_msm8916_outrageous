@@ -92,10 +92,13 @@ void flush_tlb_all(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_tlb_kernel_range(unsigned long start, unsigned long end)
 {
 	flush_remote(0, HV_FLUSH_EVICT_L1I, cpu_online_mask,
 =======
+=======
+>>>>>>> v3.18
 /*
  * Callers need to flush the L1I themselves if necessary, e.g. for
  * kernel module unload.  Otherwise we assume callers are not using
@@ -105,6 +108,9 @@ void flush_tlb_kernel_range(unsigned long start, unsigned long end)
 void flush_tlb_kernel_range(unsigned long start, unsigned long end)
 {
 	flush_remote(0, 0, NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     start, end - start, PAGE_SIZE, cpu_online_mask, NULL, 0);
 }

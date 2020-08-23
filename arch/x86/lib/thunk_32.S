@@ -5,6 +5,7 @@
  * Subject to the GNU public license, v.2. No warranty of any kind.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	#include <linux/linkage.h>
 
@@ -29,6 +30,8 @@
 	thunk_ra trace_hardirqs_off_thunk,trace_hardirqs_off_caller
 #endif
 =======
+=======
+>>>>>>> v3.18
 	#include <linux/linkage.h>
 	#include <asm/asm.h>
 	#include <asm/dwarf2.h>
@@ -74,4 +77,7 @@
 #endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

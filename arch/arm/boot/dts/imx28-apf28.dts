@@ -11,7 +11,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx28.dtsi"
+=======
+#include "imx28.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx28.dtsi"
 >>>>>>> v3.18

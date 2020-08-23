@@ -26,11 +26,17 @@
 #define TEGRA30_AUDIOCIF_CTRL_FIFO_THRESHOLD_MASK	(TEGRA30_AUDIOCIF_CTRL_FIFO_THRESHOLD_MASK_US << TEGRA30_AUDIOCIF_CTRL_FIFO_THRESHOLD_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TEGRA124_AUDIOCIF_CTRL_FIFO_THRESHOLD_SHIFT	24
 #define TEGRA124_AUDIOCIF_CTRL_FIFO_THRESHOLD_MASK_US	0x3f
 #define TEGRA124_AUDIOCIF_CTRL_FIFO_THRESHOLD_MASK	(TEGRA124_AUDIOCIF_CTRL_FIFO_THRESHOLD_MASK_US << TEGRA124_AUDIOCIF_CTRL_FIFO_THRESHOLD_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Channel count minus 1 */
 #define TEGRA30_AUDIOCIF_CTRL_AUDIO_CHANNELS_SHIFT	24
@@ -39,24 +45,36 @@
 
 /* Channel count minus 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TEGRA124_AUDIOCIF_CTRL_AUDIO_CHANNELS_SHIFT	20
 #define TEGRA124_AUDIOCIF_CTRL_AUDIO_CHANNELS_MASK_US	0xf
 #define TEGRA124_AUDIOCIF_CTRL_AUDIO_CHANNELS_MASK	(TEGRA124_AUDIOCIF_CTRL_AUDIO_CHANNELS_MASK_US << TEGRA124_AUDIOCIF_CTRL_AUDIO_CHANNELS_SHIFT)
 
 /* Channel count minus 1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_SHIFT	16
 #define TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_MASK_US	7
 #define TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_MASK	(TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_MASK_US << TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Channel count minus 1 */
 #define TEGRA124_AUDIOCIF_CTRL_CLIENT_CHANNELS_SHIFT	16
 #define TEGRA124_AUDIOCIF_CTRL_CLIENT_CHANNELS_MASK_US	0xf
 #define TEGRA124_AUDIOCIF_CTRL_CLIENT_CHANNELS_MASK	(TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_MASK_US << TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TEGRA30_AUDIOCIF_BITS_4				0
 #define TEGRA30_AUDIOCIF_BITS_8				1
@@ -110,7 +128,11 @@
 #define TEGRA30_AUDIOCIF_CTRL_STEREO_CONV_AVG		(TEGRA30_AUDIOCIF_STEREO_CONV_AVG << TEGRA30_AUDIOCIF_CTRL_STEREO_CONV_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TEGRA30_AUDIOCIF_CTRL_REPLICATE			3
+=======
+#define TEGRA30_AUDIOCIF_CTRL_REPLICATE_SHIFT		3
+>>>>>>> v3.18
 =======
 #define TEGRA30_AUDIOCIF_CTRL_REPLICATE_SHIFT		3
 >>>>>>> v3.18
@@ -479,8 +501,13 @@ enum tegra30_ahub_rxcif {
 
 extern int tegra30_ahub_allocate_rx_fifo(enum tegra30_ahub_rxcif *rxcif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 dma_addr_t *fiforeg,
 					 unsigned int *reqsel);
+=======
+					 char *dmachan, int dmachan_len,
+					 dma_addr_t *fiforeg);
+>>>>>>> v3.18
 =======
 					 char *dmachan, int dmachan_len,
 					 dma_addr_t *fiforeg);
@@ -491,8 +518,13 @@ extern int tegra30_ahub_free_rx_fifo(enum tegra30_ahub_rxcif rxcif);
 
 extern int tegra30_ahub_allocate_tx_fifo(enum tegra30_ahub_txcif *txcif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 dma_addr_t *fiforeg,
 					 unsigned int *reqsel);
+=======
+					 char *dmachan, int dmachan_len,
+					 dma_addr_t *fiforeg);
+>>>>>>> v3.18
 =======
 					 char *dmachan, int dmachan_len,
 					 dma_addr_t *fiforeg);
@@ -506,9 +538,12 @@ extern int tegra30_ahub_set_rx_cif_source(enum tegra30_ahub_rxcif rxcif,
 extern int tegra30_ahub_unset_rx_cif_source(enum tegra30_ahub_rxcif rxcif);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tegra30_ahub_soc_data {
 	u32 clk_list_mask;
 =======
+=======
+>>>>>>> v3.18
 struct tegra30_ahub_cif_conf {
 	unsigned int threshold;
 	unsigned int audio_channels;
@@ -533,6 +568,9 @@ struct tegra30_ahub_soc_data {
 	void (*set_audio_cif)(struct regmap *regmap,
 			      unsigned int reg,
 			      struct tegra30_ahub_cif_conf *conf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * FIXME: There are many more differences in HW, such as:
@@ -553,7 +591,10 @@ struct tegra30_ahub {
 	struct clk *clk_d_audio;
 	struct clk *clk_apbif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dma_sel;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	resource_size_t apbif_addr;

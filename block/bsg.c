@@ -271,8 +271,13 @@ bsg_map_hdr(struct bsg_device *bd, struct sg_io_v4 *hdr, fmode_t has_write_perm,
 	 */
 	rq = blk_get_request(q, rw, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rq)
 		return ERR_PTR(-ENOMEM);
+=======
+	if (IS_ERR(rq))
+		return rq;
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq))
 		return rq;
@@ -291,8 +296,14 @@ bsg_map_hdr(struct bsg_device *bd, struct sg_io_v4 *hdr, fmode_t has_write_perm,
 
 		next_rq = blk_get_request(q, READ, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!next_rq) {
 			ret = -ENOMEM;
+=======
+		if (IS_ERR(next_rq)) {
+			ret = PTR_ERR(next_rq);
+			next_rq = NULL;
+>>>>>>> v3.18
 =======
 		if (IS_ERR(next_rq)) {
 			ret = PTR_ERR(next_rq);
@@ -688,9 +699,12 @@ bsg_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos)
 	dprintk("%s: write %Zd bytes\n", bd->name, count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(segment_eq(get_fs(), KERNEL_DS)))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bsg_set_block(bd, file);
@@ -1027,7 +1041,11 @@ int bsg_register_queue(struct request_queue *q, struct device *parent,
 	 * we need a proper transport to send commands, not a stacked device
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!q->request_fn)
+=======
+	if (!queue_is_rq_based(q))
+>>>>>>> v3.18
 =======
 	if (!queue_is_rq_based(q))
 >>>>>>> v3.18

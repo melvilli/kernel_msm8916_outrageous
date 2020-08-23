@@ -8,7 +8,11 @@ config XEN
 	select PARAVIRT_CLOCK
 	select XEN_HAVE_PVMMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86_64 || (X86_32 && X86_PAE && !X86_VISWS)
+=======
+	depends on X86_64 || (X86_32 && X86_PAE)
+>>>>>>> v3.18
 =======
 	depends on X86_64 || (X86_32 && X86_PAE)
 >>>>>>> v3.18
@@ -24,11 +28,14 @@ config XEN_DOM0
 	depends on X86_LOCAL_APIC && X86_IO_APIC && ACPI && PCI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Dummy symbol since people have come to rely on the PRIVILEGED_GUEST
 # name in tools.
 config XEN_PRIVILEGED_GUEST
 	def_bool XEN_DOM0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config XEN_PVHVM
@@ -59,9 +66,15 @@ config XEN_DEBUG_FS
 	  Enabling this option may incur a significant performance overhead.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config XEN_PVH
 	bool "Support for running as a PVH guest"
 	depends on X86_64 && XEN && XEN_PVHVM
 	def_bool n
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

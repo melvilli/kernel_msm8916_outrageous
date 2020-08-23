@@ -53,7 +53,10 @@
 #include <linux/errno.h>
 #include <linux/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -105,6 +108,7 @@ static struct ez_usb_fw firmware = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_DEBUG
 static int debug = 1;
 #else
@@ -119,15 +123,21 @@ static int debug;
 =======
 /* Debugging macros */
 >>>>>>> v3.18
+=======
+/* Debugging macros */
+>>>>>>> v3.18
 #undef err
 #define err(format, arg...) \
 	do { printk(KERN_ERR PFX format "\n", ## arg); } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Module paramaters */
 module_param(debug, int, 0644);
 MODULE_PARM_DESC(debug, "Debug enabled or not");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_FIRMWARE("orinoco_ezusb_fw");
@@ -353,7 +363,11 @@ static void ezusb_request_timerfn(u_long _ctx)
 	} else {
 		ctx->state = EZUSB_CTX_RESP_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dbg("couldn't unlink");
+=======
+		dev_dbg(&ctx->outurb->dev->dev, "couldn't unlink\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&ctx->outurb->dev->dev, "couldn't unlink\n");
 >>>>>>> v3.18
@@ -564,7 +578,11 @@ static void ezusb_request_out_callback(struct urb *urb)
 	if (ctx->killed) {
 		spin_unlock_irqrestore(&upriv->req_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("interrupt called with dead ctx");
+=======
+		pr_warn("interrupt called with dead ctx\n");
+>>>>>>> v3.18
 =======
 		pr_warn("interrupt called with dead ctx\n");
 >>>>>>> v3.18
@@ -654,9 +672,15 @@ static void ezusb_request_in_callback(struct ezusb_priv *upriv,
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dbg("Skipped (0x%x/0x%x) (%d/%d)",
 			    le16_to_cpu(ans->hermes_rid),
 			    c->in_rid, ans->ans_reply_count, reply_count);
+=======
+			netdev_dbg(upriv->dev, "Skipped (0x%x/0x%x) (%d/%d)\n",
+				   le16_to_cpu(ans->hermes_rid), c->in_rid,
+				   ans->ans_reply_count, reply_count);
+>>>>>>> v3.18
 =======
 			netdev_dbg(upriv->dev, "Skipped (0x%x/0x%x) (%d/%d)\n",
 				   le16_to_cpu(ans->hermes_rid), c->in_rid,
@@ -711,8 +735,13 @@ static void ezusb_request_in_callback(struct ezusb_priv *upriv,
 		spin_unlock_irqrestore(&upriv->req_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Matched IN URB, unexpected context state(0x%x)",
 		     state);
+=======
+		pr_warn("Matched IN URB, unexpected context state(0x%x)\n",
+			state);
+>>>>>>> v3.18
 =======
 		pr_warn("Matched IN URB, unexpected context state(0x%x)\n",
 			state);
@@ -799,7 +828,11 @@ static int ezusb_submit_in_urb(struct ezusb_priv *upriv)
 
 	if (upriv->read_urb->status == -EINPROGRESS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dbg("urb busy, not resubmiting");
+=======
+		netdev_dbg(upriv->dev, "urb busy, not resubmiting\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(upriv->dev, "urb busy, not resubmiting\n");
 >>>>>>> v3.18
@@ -873,8 +906,14 @@ static int ezusb_firmware_download(struct ezusb_priv *upriv,
 		if (variant_offset >= addr &&
 		    variant_offset < addr + FW_BUF_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dbg("Patching card_variant byte at 0x%04X",
 			    variant_offset);
+=======
+			netdev_dbg(upriv->dev,
+				   "Patching card_variant byte at 0x%04X\n",
+				   variant_offset);
+>>>>>>> v3.18
 =======
 			netdev_dbg(upriv->dev,
 				   "Patching card_variant byte at 0x%04X\n",
@@ -920,8 +959,13 @@ static int ezusb_access_ltv(struct ezusb_priv *upriv,
 
 	if (!upriv->udev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dbg("Device disconnected");
 		return -ENODEV;
+=======
+		retval = -ENODEV;
+		goto exit;
+>>>>>>> v3.18
 =======
 		retval = -ENODEV;
 		goto exit;
@@ -980,7 +1024,10 @@ static int ezusb_access_ltv(struct ezusb_priv *upriv,
 		}
 		goto exit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1071,8 +1118,14 @@ static int ezusb_doicmd_wait(struct hermes *hw, u16 cmd, u16 parm0, u16 parm1,
 		cpu_to_le16(parm2),
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("0x%04X, parm0 0x%04X, parm1 0x%04X, parm2 0x%04X",
 	    cmd, parm0, parm1, parm2);
+=======
+	netdev_dbg(upriv->dev,
+		   "0x%04X, parm0 0x%04X, parm1 0x%04X, parm2 0x%04X\n", cmd,
+		   parm0, parm1, parm2);
+>>>>>>> v3.18
 =======
 	netdev_dbg(upriv->dev,
 		   "0x%04X, parm0 0x%04X, parm1 0x%04X, parm2 0x%04X\n", cmd,
@@ -1099,7 +1152,11 @@ static int ezusb_docmd_wait(struct hermes *hw, u16 cmd, u16 parm0,
 		0,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("0x%04X, parm0 0x%04X", cmd, parm0);
+=======
+	netdev_dbg(upriv->dev, "0x%04X, parm0 0x%04X\n", cmd, parm0);
+>>>>>>> v3.18
 =======
 	netdev_dbg(upriv->dev, "0x%04X, parm0 0x%04X\n", cmd, parm0);
 >>>>>>> v3.18
@@ -1390,7 +1447,11 @@ static int ezusb_hard_reset(struct orinoco_private *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("sending control message");
+=======
+	netdev_dbg(upriv->dev, "sending control message\n");
+>>>>>>> v3.18
 =======
 	netdev_dbg(upriv->dev, "sending control message\n");
 >>>>>>> v3.18
@@ -1463,10 +1524,15 @@ static void ezusb_bulk_in_callback(struct urb *urb)
 	u16 hermes_rid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (upriv->udev == NULL) {
 		dbg("disconnected");
 		return;
 	}
+=======
+	if (upriv->udev == NULL)
+		return;
+>>>>>>> v3.18
 =======
 	if (upriv->udev == NULL)
 		return;
@@ -1477,6 +1543,7 @@ static void ezusb_bulk_in_callback(struct urb *urb)
 		 * we resubmit, flooding the logs.  Since we don't use
 		 * USB timeouts, it shouldn't happen any other time*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: urb timed out, not resubmiting", __func__);
 		return;
 	}
@@ -1484,18 +1551,24 @@ static void ezusb_bulk_in_callback(struct urb *urb)
 		pr_warning("%s: connection abort, resubmiting urb",
 		     __func__);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("%s: urb timed out, not resubmitting\n", __func__);
 		return;
 	}
 	if (urb->status == -ECONNABORTED) {
 		pr_warn("%s: connection abort, resubmitting urb\n",
 			__func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto resubmit;
 	}
 	if ((urb->status == -EILSEQ)
 	    || (urb->status == -ENOENT)
 	    || (urb->status == -ECONNRESET)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dbg("status %d, not resubmiting", urb->status);
 		return;
@@ -1504,6 +1577,8 @@ static void ezusb_bulk_in_callback(struct urb *urb)
 		dbg("status: %d length: %d",
 		    urb->status, urb->actual_length);
 =======
+=======
+>>>>>>> v3.18
 		netdev_dbg(upriv->dev, "status %d, not resubmiting\n",
 			   urb->status);
 		return;
@@ -1511,6 +1586,9 @@ static void ezusb_bulk_in_callback(struct urb *urb)
 	if (urb->status)
 		netdev_dbg(upriv->dev, "status: %d length: %d\n",
 			   urb->status, urb->actual_length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (urb->actual_length < sizeof(*ans)) {
 		err("%s: short read, ignoring", __func__);
@@ -1706,6 +1784,7 @@ static int ezusb_probe(struct usb_interface *interface,
 		ep = &interface->altsetting[0].endpoint[i].desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (((ep->bEndpointAddress & USB_ENDPOINT_DIR_MASK)
 		     == USB_DIR_IN) &&
 		    ((ep->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK)
@@ -1714,10 +1793,15 @@ static int ezusb_probe(struct usb_interface *interface,
 			if (upriv->read_urb != NULL) {
 				pr_warning("Found a second bulk in ep, ignored");
 =======
+=======
+>>>>>>> v3.18
 		if (usb_endpoint_is_bulk_in(ep)) {
 			/* we found a bulk in endpoint */
 			if (upriv->read_urb != NULL) {
 				pr_warn("Found a second bulk in ep, ignored\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 			}
@@ -1729,15 +1813,21 @@ static int ezusb_probe(struct usb_interface *interface,
 			}
 			if (le16_to_cpu(ep->wMaxPacketSize) != 64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("bulk in: wMaxPacketSize!= 64");
 			if (ep->bEndpointAddress != (2 | USB_DIR_IN))
 				pr_warning("bulk in: bEndpointAddress: %d",
 				     ep->bEndpointAddress);
 =======
+=======
+>>>>>>> v3.18
 				pr_warn("bulk in: wMaxPacketSize!= 64\n");
 			if (ep->bEndpointAddress != (2 | USB_DIR_IN))
 				pr_warn("bulk in: bEndpointAddress: %d\n",
 					ep->bEndpointAddress);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			upriv->read_pipe = usb_rcvbulkpipe(udev,
 							 ep->
@@ -1751,6 +1841,7 @@ static int ezusb_probe(struct usb_interface *interface,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (((ep->bEndpointAddress & USB_ENDPOINT_DIR_MASK)
 		     == USB_DIR_OUT) &&
 		    ((ep->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK)
@@ -1759,25 +1850,36 @@ static int ezusb_probe(struct usb_interface *interface,
 			if (upriv->bap_buf != NULL) {
 				pr_warning("Found a second bulk out ep, ignored");
 =======
+=======
+>>>>>>> v3.18
 		if (usb_endpoint_is_bulk_out(ep)) {
 			/* we found a bulk out endpoint */
 			if (upriv->bap_buf != NULL) {
 				pr_warn("Found a second bulk out ep, ignored\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 			}
 
 			if (le16_to_cpu(ep->wMaxPacketSize) != 64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("bulk out: wMaxPacketSize != 64");
 			if (ep->bEndpointAddress != 2)
 				pr_warning("bulk out: bEndpointAddress: %d",
 				     ep->bEndpointAddress);
 =======
+=======
+>>>>>>> v3.18
 				pr_warn("bulk out: wMaxPacketSize != 64\n");
 			if (ep->bEndpointAddress != 2)
 				pr_warn("bulk out: bEndpointAddress: %d\n",
 					ep->bEndpointAddress);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			upriv->write_pipe = usb_sndbulkpipe(udev,
 							  ep->
@@ -1801,7 +1903,11 @@ static int ezusb_probe(struct usb_interface *interface,
 	}
 	if (firmware.size && firmware.code) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ezusb_firmware_download(upriv, &firmware))
+=======
+		if (ezusb_firmware_download(upriv, &firmware) < 0)
+>>>>>>> v3.18
 =======
 		if (ezusb_firmware_download(upriv, &firmware) < 0)
 >>>>>>> v3.18

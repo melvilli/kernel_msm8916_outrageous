@@ -2,7 +2,11 @@
  * shmob_drm_regs.h  --  SH Mobile DRM registers
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Renesas Electronics Corporation
 >>>>>>> v3.18

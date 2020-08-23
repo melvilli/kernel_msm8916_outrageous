@@ -9,7 +9,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -52,7 +55,11 @@ static void gpio_mouse_scan(struct input_polled_dev *dev)
 static int gpio_mouse_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_mouse_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct gpio_mouse_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct gpio_mouse_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -146,7 +153,10 @@ static int gpio_mouse_probe(struct platform_device *pdev)
  out_free_polldev:
 	input_free_polled_device(input_poll);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -176,8 +186,11 @@ static int gpio_mouse_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

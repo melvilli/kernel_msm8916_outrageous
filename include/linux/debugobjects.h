@@ -64,7 +64,11 @@ extern void debug_object_init      (void *addr, struct debug_obj_descr *descr);
 extern void
 debug_object_init_on_stack(void *addr, struct debug_obj_descr *descr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void debug_object_activate  (void *addr, struct debug_obj_descr *descr);
+=======
+extern int debug_object_activate  (void *addr, struct debug_obj_descr *descr);
+>>>>>>> v3.18
 =======
 extern int debug_object_activate  (void *addr, struct debug_obj_descr *descr);
 >>>>>>> v3.18
@@ -90,8 +94,13 @@ debug_object_init      (void *addr, struct debug_obj_descr *descr) { }
 static inline void
 debug_object_init_on_stack(void *addr, struct debug_obj_descr *descr) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 debug_object_activate  (void *addr, struct debug_obj_descr *descr) { }
+=======
+static inline int
+debug_object_activate  (void *addr, struct debug_obj_descr *descr) { return 0; }
+>>>>>>> v3.18
 =======
 static inline int
 debug_object_activate  (void *addr, struct debug_obj_descr *descr) { return 0; }

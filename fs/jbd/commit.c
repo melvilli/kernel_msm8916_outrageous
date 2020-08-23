@@ -341,7 +341,10 @@ void journal_commit_transaction(journal_t *journal)
 
 	commit_transaction = journal->j_running_transaction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	J_ASSERT(commit_transaction->t_state == T_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -351,6 +354,10 @@ void journal_commit_transaction(journal_t *journal)
 
 	spin_lock(&journal->j_state_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	J_ASSERT(commit_transaction->t_state == T_RUNNING);
+>>>>>>> v3.18
 =======
 	J_ASSERT(commit_transaction->t_state == T_RUNNING);
 >>>>>>> v3.18

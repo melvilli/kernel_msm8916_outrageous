@@ -10,7 +10,11 @@ Example for OMAP4:
 
 usbhsohci: ohci@4a064800 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compatible = "ti,ohci-omap3", "usb-ohci";
+=======
+	compatible = "ti,ohci-omap3";
+>>>>>>> v3.18
 =======
 	compatible = "ti,ohci-omap3";
 >>>>>>> v3.18

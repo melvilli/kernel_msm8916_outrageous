@@ -20,8 +20,13 @@
 struct aa_profile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int aa_may_ptrace(struct task_struct *tracer_task, struct aa_profile *tracer,
 		  struct aa_profile *tracee, unsigned int mode);
+=======
+int aa_may_ptrace(struct aa_profile *tracer, struct aa_profile *tracee,
+		  unsigned int mode);
+>>>>>>> v3.18
 =======
 int aa_may_ptrace(struct aa_profile *tracer, struct aa_profile *tracee,
 		  unsigned int mode);

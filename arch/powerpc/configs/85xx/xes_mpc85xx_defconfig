@@ -66,7 +66,10 @@ CONFIG_IPV6=y
 CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 CONFIG_MTD=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_PARTITIONS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_REDBOOT_PARTS=y
@@ -130,7 +133,10 @@ CONFIG_WATCHDOG=y
 CONFIG_VIDEO_OUTPUT_CONTROL=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

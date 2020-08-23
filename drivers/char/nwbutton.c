@@ -169,12 +169,18 @@ static int button_read (struct file *filp, char __user *buffer,
 			size_t count, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	interruptible_sleep_on (&button_wait_queue);
 =======
+=======
+>>>>>>> v3.18
 	DEFINE_WAIT(wait);
 	prepare_to_wait(&button_wait_queue, &wait, TASK_INTERRUPTIBLE);
 	schedule();
 	finish_wait(&button_wait_queue, &wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (copy_to_user (buffer, &button_output_buffer, bcount))
 		 ? -EFAULT : bcount;
@@ -228,7 +234,11 @@ static int __init nwbutton_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq (IRQ_NETWINDER_BUTTON, button_handler, IRQF_DISABLED,
+=======
+	if (request_irq (IRQ_NETWINDER_BUTTON, button_handler, 0,
+>>>>>>> v3.18
 =======
 	if (request_irq (IRQ_NETWINDER_BUTTON, button_handler, 0,
 >>>>>>> v3.18

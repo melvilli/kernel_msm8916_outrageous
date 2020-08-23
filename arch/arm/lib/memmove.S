@@ -148,6 +148,7 @@ ENTRY(memmove)
 12:	PLD(	pld	[r1, #-128]		)
 13:		ldmdb   r1!, {r7, r8, r9, ip}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov     lr, r3, push #\push
 		subs    r2, r2, #32
 		ldmdb   r1!, {r3, r4, r5, r6}
@@ -167,6 +168,8 @@ ENTRY(memmove)
 		mov     r4, r4, push #\push
 		orr     r4, r4, r3, pull #\pull
 =======
+=======
+>>>>>>> v3.18
 		mov     lr, r3, lspush #\push
 		subs    r2, r2, #32
 		ldmdb   r1!, {r3, r4, r5, r6}
@@ -185,6 +188,9 @@ ENTRY(memmove)
 		orr     r5, r5, r4, lspull #\pull
 		mov     r4, r4, lspush #\push
 		orr     r4, r4, r3, lspull #\pull
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmdb   r0!, {r4 - r9, ip, lr}
 		bge	12b
@@ -197,15 +203,21 @@ ENTRY(memmove)
 		beq	16f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 15:		mov     lr, r3, push #\push
 		ldr	r3, [r1, #-4]!
 		subs	ip, ip, #4
 		orr	lr, lr, r3, pull #\pull
 =======
+=======
+>>>>>>> v3.18
 15:		mov     lr, r3, lspush #\push
 		ldr	r3, [r1, #-4]!
 		subs	ip, ip, #4
 		orr	lr, lr, r3, lspull #\pull
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		str	lr, [r0, #-4]!
 		bgt	15b

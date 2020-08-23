@@ -68,7 +68,11 @@ static const struct firmware card_fw[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_echo_ids) = {
+=======
+static const struct pci_device_id snd_echo_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_echo_ids[] = {
 >>>>>>> v3.18

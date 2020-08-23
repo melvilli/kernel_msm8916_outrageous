@@ -41,6 +41,7 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * handle_IRQ handles all hardware IRQ's.  Decoded IRQs should
  * not come via this function.  Instead, they should provide their
@@ -70,6 +71,8 @@ void handle_IRQ(unsigned int irq, struct pt_regs *regs)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __init set_handle_irq(void (*handle_irq)(struct pt_regs *))
 {
 	if (handle_arch_irq)
@@ -91,6 +94,10 @@ static bool migrate_one_irq(struct irq_desc *desc)
 	struct irq_data *d = irq_desc_get_irq_data(desc);
 	const struct cpumask *affinity = d->affinity;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct irq_chip *c;
+>>>>>>> v3.18
 =======
 	struct irq_chip *c;
 >>>>>>> v3.18
@@ -109,13 +116,19 @@ static bool migrate_one_irq(struct irq_desc *desc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_set_affinity_locked(d, affinity, 0);
 =======
+=======
+>>>>>>> v3.18
 	c = irq_data_get_irq_chip(d);
 	if (!c->irq_set_affinity)
 		pr_debug("IRQ%u: unable to set affinity\n", d->irq);
 	else if (c->irq_set_affinity(d, affinity, false) == IRQ_SET_MASK_OK && ret)
 		cpumask_copy(d->affinity, affinity);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -146,7 +159,11 @@ void migrate_irqs(void)
 
 		if (affinity_broken)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug_ratelimited("IRQ%u no longer affine to CPU%u\n",
+=======
+			pr_warn_ratelimited("IRQ%u no longer affine to CPU%u\n",
+>>>>>>> v3.18
 =======
 			pr_warn_ratelimited("IRQ%u no longer affine to CPU%u\n",
 >>>>>>> v3.18

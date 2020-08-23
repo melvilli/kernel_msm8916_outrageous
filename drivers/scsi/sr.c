@@ -80,6 +80,10 @@ static DEFINE_MUTEX(sr_mutex);
 static int sr_probe(struct device *);
 static int sr_remove(struct device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int sr_init_command(struct scsi_cmnd *SCpnt);
+>>>>>>> v3.18
 =======
 static int sr_init_command(struct scsi_cmnd *SCpnt);
 >>>>>>> v3.18
@@ -99,6 +103,10 @@ static struct scsi_driver sr_template = {
 		.pm		= &sr_pm_ops,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.init_command		= sr_init_command,
+>>>>>>> v3.18
 =======
 	.init_command		= sr_init_command,
 >>>>>>> v3.18
@@ -151,9 +159,12 @@ static int sr_runtime_suspend(struct device *dev)
 	struct scsi_cd *cd = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cd)	/* E.g.: runtime suspend following sr_remove() */
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (cd->media_present)
@@ -176,6 +187,7 @@ static inline struct scsi_cd *scsi_cd_get(struct gendisk *disk)
 	cd = scsi_cd(disk);
 	kref_get(&cd->kref);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (scsi_device_get(cd->device))
 		goto out_put;
 	if (!scsi_autopm_get_device(cd->device))
@@ -185,10 +197,15 @@ static inline struct scsi_cd *scsi_cd_get(struct gendisk *disk)
 	kref_put(&cd->kref, sr_kref_release);
 	cd = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (scsi_device_get(cd->device)) {
 		kref_put(&cd->kref, sr_kref_release);
 		cd = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	mutex_unlock(&sr_ref_mutex);
@@ -202,7 +219,10 @@ static void scsi_cd_put(struct scsi_cd *cd)
 	mutex_lock(&sr_ref_mutex);
 	kref_put(&cd->kref, sr_kref_release);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_autopm_put_device(sdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	scsi_device_put(sdev);
@@ -320,8 +340,13 @@ do_tur:
 		if (cd->get_event_changed) {
 			if (cd->tur_mismatch++ > 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sdev_printk(KERN_WARNING, cd->device,
 					    "GET_EVENT and TUR disagree continuously, suppress GET_EVENT events\n");
+=======
+				sr_printk(KERN_WARNING, cd,
+					  "GET_EVENT and TUR disagree continuously, suppress GET_EVENT events\n");
+>>>>>>> v3.18
 =======
 				sr_printk(KERN_WARNING, cd,
 					  "GET_EVENT and TUR disagree continuously, suppress GET_EVENT events\n");
@@ -355,7 +380,11 @@ static int sr_done(struct scsi_cmnd *SCpnt)
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("sr.c done: %x\n", result);
+=======
+	scmd_printk(KERN_INFO, SCpnt, "done: %x\n", result);
+>>>>>>> v3.18
 =======
 	scmd_printk(KERN_INFO, SCpnt, "done: %x\n", result);
 >>>>>>> v3.18
@@ -417,6 +446,7 @@ static int sr_done(struct scsi_cmnd *SCpnt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sr_prep_fn(struct request_queue *q, struct request *rq)
 {
 	int block = 0, this_count, s_size;
@@ -434,6 +464,8 @@ static int sr_prep_fn(struct request_queue *q, struct request *rq)
 	}
 	ret = scsi_setup_fs_cmnd(sdp, rq);
 =======
+=======
+>>>>>>> v3.18
 static int sr_init_command(struct scsi_cmnd *SCpnt)
 {
 	int block = 0, this_count, s_size;
@@ -442,6 +474,9 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 	int ret;
 
 	ret = scsi_init_io(SCpnt, GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret != BLKPREP_OK)
 		goto out;
@@ -453,6 +488,7 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 	ret = BLKPREP_KILL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCSI_LOG_HLQUEUE(1, printk("Doing sr request, dev = %s, block = %d\n",
 				cd->disk->disk_name, block));
 
@@ -461,6 +497,8 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 					   blk_rq_sectors(rq)));
 		SCSI_LOG_HLQUEUE(2, printk("Retry with 0x%p\n", SCpnt));
 =======
+=======
+>>>>>>> v3.18
 	SCSI_LOG_HLQUEUE(1, scmd_printk(KERN_INFO, SCpnt,
 		"Doing sr request, block = %d\n", block));
 
@@ -469,6 +507,9 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 			"Finishing %u sectors\n", blk_rq_sectors(rq)));
 		SCSI_LOG_HLQUEUE(2, scmd_printk(KERN_INFO, SCpnt,
 			"Retry with 0x%p\n", SCpnt));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -491,7 +532,12 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 			sr_set_blocklength(cd, 2048);
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("sr: can't switch blocksize: in interrupt\n");
+=======
+			scmd_printk(KERN_INFO, SCpnt,
+				    "can't switch blocksize: in interrupt\n");
+>>>>>>> v3.18
 =======
 			scmd_printk(KERN_INFO, SCpnt,
 				    "can't switch blocksize: in interrupt\n");
@@ -505,6 +551,7 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 
 	if (rq_data_dir(rq) == WRITE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cd->device->writeable)
 			goto out;
 		SCpnt->cmnd[0] = WRITE_10;
@@ -514,12 +561,17 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 		SCpnt->cmnd[0] = READ_10;
 		SCpnt->sc_data_direction = DMA_FROM_DEVICE;
 =======
+=======
+>>>>>>> v3.18
 		if (!cd->writeable)
 			goto out;
 		SCpnt->cmnd[0] = WRITE_10;
 		cd->cdi.media_written = 1;
 	} else if (rq_data_dir(rq) == READ) {
 		SCpnt->cmnd[0] = READ_10;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		blk_dump_rq_flags(rq, "Unknown sr command");
@@ -555,17 +607,23 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCSI_LOG_HLQUEUE(2, printk("%s : %s %d/%u 512 byte blocks.\n",
 				cd->cdi.name,
 				(rq_data_dir(rq) == WRITE) ?
 					"writing" : "reading",
 				this_count, blk_rq_sectors(rq)));
 =======
+=======
+>>>>>>> v3.18
 	SCSI_LOG_HLQUEUE(2, scmd_printk(KERN_INFO, SCpnt,
 					"%s %d/%u 512 byte blocks.\n",
 					(rq_data_dir(rq) == WRITE) ?
 					"writing" : "reading",
 					this_count, blk_rq_sectors(rq)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SCpnt->cmnd[1] = 0;
@@ -600,7 +658,11 @@ static int sr_init_command(struct scsi_cmnd *SCpnt)
 	ret = BLKPREP_OK;
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return scsi_prep_return(q, rq, ret);
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18
@@ -640,8 +702,11 @@ static int sr_block_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_autopm_get_device(cd->device);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&sr_mutex);
@@ -676,7 +741,10 @@ static int sr_block_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
 out:
 	mutex_unlock(&sr_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_autopm_put_device(cd->device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -686,6 +754,7 @@ static unsigned int sr_block_check_events(struct gendisk *disk,
 					  unsigned int clearing)
 {
 	struct scsi_cd *cd = scsi_cd(disk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int ret;
 
@@ -699,11 +768,16 @@ static unsigned int sr_block_check_events(struct gendisk *disk,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	if (atomic_read(&cd->device->disk_events_disable_depth))
 		return 0;
 
 	return cdrom_check_events(&cd->cdi, clearing);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -713,8 +787,11 @@ static int sr_block_revalidate_disk(struct gendisk *disk)
 	struct scsi_sense_hdr sshdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_autopm_get_device(cd->device);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* if the unit is not ready, nothing more to do */
@@ -725,7 +802,10 @@ static int sr_block_revalidate_disk(struct gendisk *disk)
 	get_sectorsize(cd);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_autopm_put_device(cd->device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -782,6 +862,10 @@ static int sr_probe(struct device *dev)
 	int minor, error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	scsi_autopm_get_device(sdev);
+>>>>>>> v3.18
 =======
 	scsi_autopm_get_device(sdev);
 >>>>>>> v3.18
@@ -841,7 +925,10 @@ static int sr_probe(struct device *dev)
 	/* FIXME: need to handle a get_capabilities failure properly ?? */
 	get_capabilities(cd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_queue_prep_rq(sdev->request_queue, sr_prep_fn);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sr_vendor_init(cd);
@@ -856,13 +943,19 @@ static int sr_probe(struct device *dev)
 		goto fail_put;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Initialize block layer runtime PM stuffs before the
 	 * periodic event checking request gets started in add_disk.
 	 */
 	blk_pm_runtime_init(sdev->request_queue, dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_set_drvdata(dev, cd);
 	disk->flags |= GENHD_FL_REMOVABLE;
@@ -880,6 +973,10 @@ fail_free:
 	kfree(cd);
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	scsi_autopm_put_device(sdev);
+>>>>>>> v3.18
 =======
 	scsi_autopm_put_device(sdev);
 >>>>>>> v3.18
@@ -949,8 +1046,13 @@ static void get_sectorsize(struct scsi_cd *cd)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("%s: unsupported sector size %d.\n",
 			       cd->cdi.name, sector_size);
+=======
+			sr_printk(KERN_INFO, cd,
+				  "unsupported sector size %d.", sector_size);
+>>>>>>> v3.18
 =======
 			sr_printk(KERN_INFO, cd,
 				  "unsupported sector size %d.", sector_size);
@@ -979,7 +1081,10 @@ static void get_capabilities(struct scsi_cd *cd)
 	struct scsi_mode_data data;
 	struct scsi_sense_hdr sshdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ms_len = 128;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rc, n;
@@ -1001,7 +1106,11 @@ static void get_capabilities(struct scsi_cd *cd)
 	buffer = kmalloc(512, GFP_KERNEL | GFP_DMA);
 	if (!buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "sr: out of memory.\n");
+=======
+		sr_printk(KERN_ERR, cd, "out of memory.\n");
+>>>>>>> v3.18
 =======
 		sr_printk(KERN_ERR, cd, "out of memory.\n");
 >>>>>>> v3.18
@@ -1013,16 +1122,22 @@ static void get_capabilities(struct scsi_cd *cd)
 
 	/* ask for mode page 0x2a */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = scsi_mode_sense(cd->device, 0, 0x2a, buffer, ms_len,
 			     SR_TIMEOUT, 3, &data, NULL);
 
 	if (!scsi_status_is_good(rc) || data.length > ms_len ||
 	    data.header_length + data.block_descriptor_length > data.length) {
 =======
+=======
+>>>>>>> v3.18
 	rc = scsi_mode_sense(cd->device, 0, 0x2a, buffer, 128,
 			     SR_TIMEOUT, 3, &data, NULL);
 
 	if (!scsi_status_is_good(rc)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* failed, drive doesn't have capabilities mode page */
 		cd->cdi.speed = 1;
@@ -1032,7 +1147,11 @@ static void get_capabilities(struct scsi_cd *cd)
 				 CDC_MRW | CDC_MRW_W | CDC_RAM);
 		kfree(buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: scsi-1 drive\n", cd->cdi.name);
+=======
+		sr_printk(KERN_INFO, cd, "scsi-1 drive");
+>>>>>>> v3.18
 =======
 		sr_printk(KERN_INFO, cd, "scsi-1 drive");
 >>>>>>> v3.18
@@ -1045,6 +1164,7 @@ static void get_capabilities(struct scsi_cd *cd)
 	cd->readcd_cdda = buffer[n + 5] & 0x01;
 	/* print some capability bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: scsi3-mmc drive: %dx/%dx %s%s%s%s%s%s\n", cd->cdi.name,
 	       ((buffer[n + 14] << 8) + buffer[n + 15]) / 176,
 	       cd->cdi.speed,
@@ -1055,6 +1175,8 @@ static void get_capabilities(struct scsi_cd *cd)
 	       buffer[n + 5] & 0x01 ? "cdda " : "", /* can read audio data */
 	       loadmech[buffer[n + 6] >> 5]);
 =======
+=======
+>>>>>>> v3.18
 	sr_printk(KERN_INFO, cd,
 		  "scsi3-mmc drive: %dx/%dx %s%s%s%s%s%s\n",
 		  ((buffer[n + 14] << 8) + buffer[n + 15]) / 176,
@@ -1065,6 +1187,9 @@ static void get_capabilities(struct scsi_cd *cd)
 		  buffer[n + 4] & 0x20 ? "xa/form2 " : "",	/* can read xa/from2 */
 		  buffer[n + 5] & 0x01 ? "cdda " : "", /* can read audio data */
 		  loadmech[buffer[n + 6] >> 5]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((buffer[n + 6] >> 5) == 0)
 		/* caddy drives can't close tray... */
@@ -1073,7 +1198,11 @@ static void get_capabilities(struct scsi_cd *cd)
 		/* not a DVD drive */
 		cd->cdi.mask |= CDC_DVD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((buffer[n + 3] & 0x20) == 0) 
+=======
+	if ((buffer[n + 3] & 0x20) == 0)
+>>>>>>> v3.18
 =======
 	if ((buffer[n + 3] & 0x20) == 0)
 >>>>>>> v3.18
@@ -1108,7 +1237,11 @@ static void get_capabilities(struct scsi_cd *cd)
 	if ((cd->cdi.mask & (CDC_DVD_RAM | CDC_MRW_W | CDC_RAM | CDC_CD_RW)) !=
 			(CDC_DVD_RAM | CDC_MRW_W | CDC_RAM | CDC_CD_RW)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cd->device->writeable = 1;
+=======
+		cd->writeable = 1;
+>>>>>>> v3.18
 =======
 		cd->writeable = 1;
 >>>>>>> v3.18
@@ -1120,7 +1253,11 @@ static void get_capabilities(struct scsi_cd *cd)
 /*
  * sr_packet() is the entry point for the generic commands generated
 <<<<<<< HEAD
+<<<<<<< HEAD
  * by the Uniform CD-ROM layer. 
+=======
+ * by the Uniform CD-ROM layer.
+>>>>>>> v3.18
 =======
  * by the Uniform CD-ROM layer.
 >>>>>>> v3.18
@@ -1176,9 +1313,13 @@ static int sr_remove(struct device *dev)
 	scsi_autopm_get_device(cd->device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_queue_prep_rq(cd->device->request_queue, scsi_prep_fn);
 	del_gendisk(cd->disk);
 	dev_set_drvdata(dev, NULL);
+=======
+	del_gendisk(cd->disk);
+>>>>>>> v3.18
 =======
 	del_gendisk(cd->disk);
 >>>>>>> v3.18

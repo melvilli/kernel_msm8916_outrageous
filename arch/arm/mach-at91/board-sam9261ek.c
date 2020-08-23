@@ -50,15 +50,21 @@
 
 #include "at91_aic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "at91_shdwc.h"
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -272,11 +278,15 @@ static void __init ek_add_device_ts(void) {}
 static struct at73c213_board_info at73c213_data = {
 	.ssc_id		= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MACH_AT91SAM9261EK)
 	.shortname	= "AT91SAM9261-EK external DAC",
 #else
 	.shortname	= "AT91SAM9G10-EK external DAC",
 #endif
+=======
+	.shortname	= "AT91SAM9261/9G10-EK external DAC",
+>>>>>>> v3.18
 =======
 	.shortname	= "AT91SAM9261/9G10-EK external DAC",
 >>>>>>> v3.18
@@ -405,7 +415,11 @@ static struct fb_monspecs at91fb_default_stn_monspecs = {
 					| ATMEL_LCDC_SCANMOD_SINGLE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void at91_lcdc_stn_power_control(int on)
+=======
+static void at91_lcdc_stn_power_control(struct atmel_lcdfb_pdata *pdata, int on)
+>>>>>>> v3.18
 =======
 static void at91_lcdc_stn_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 >>>>>>> v3.18
@@ -421,7 +435,11 @@ static void at91_lcdc_stn_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 >>>>>>> v3.18
@@ -432,9 +450,12 @@ static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 	.atmel_lcdfb_power_control	= at91_lcdc_stn_power_control,
 	.guard_time			= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MACH_AT91SAM9G10EK)
 	.lcd_wiring_mode		= ATMEL_LCDC_WIRING_RGB,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -475,7 +496,11 @@ static struct fb_monspecs at91fb_default_tft_monspecs = {
 					| ATMEL_LCDC_CLKMOD_ALWAYSACTIVE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void at91_lcdc_tft_power_control(int on)
+=======
+static void at91_lcdc_tft_power_control(struct atmel_lcdfb_pdata *pdata, int on)
+>>>>>>> v3.18
 =======
 static void at91_lcdc_tft_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 >>>>>>> v3.18
@@ -487,7 +512,11 @@ static void at91_lcdc_tft_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 >>>>>>> v3.18
@@ -499,9 +528,12 @@ static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 	.atmel_lcdfb_power_control	= at91_lcdc_tft_power_control,
 	.guard_time			= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MACH_AT91SAM9G10EK)
 	.lcd_wiring_mode		= ATMEL_LCDC_WIRING_RGB,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -509,7 +541,11 @@ static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data;
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
 >>>>>>> v3.18
@@ -608,6 +644,11 @@ static struct gpio_led ek_leds[] = {
 static void __init ek_board_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 =======
 	at91_register_devices();
 
@@ -617,11 +658,17 @@ static void __init ek_board_init(void)
 	at91_register_uart(0, 0, 0);
 	at91_add_device_serial();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (cpu_is_at91sam9g10())
 		ek_lcdc_data.lcd_wiring_mode = ATMEL_LCDC_WIRING_RGB;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* USB Host */
 	at91_add_device_usbh(&ek_usbh_data);
@@ -656,6 +703,7 @@ static void __init ek_board_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MACH_AT91SAM9261EK)
 MACHINE_START(AT91SAM9261EK, "Atmel AT91SAM9261-EK")
 #else
@@ -664,6 +712,8 @@ MACHINE_START(AT91SAM9G10EK, "Atmel AT91SAM9G10-EK")
 	/* Maintainer: Atmel */
 	.init_time	= at91sam926x_pit_init,
 =======
+=======
+>>>>>>> v3.18
 MACHINE_START(AT91SAM9261EK, "Atmel AT91SAM9261-EK")
 	/* Maintainer: Atmel */
 	.init_time	= at91_init_time,
@@ -677,6 +727,9 @@ MACHINE_END
 MACHINE_START(AT91SAM9G10EK, "Atmel AT91SAM9G10-EK")
 	/* Maintainer: Atmel */
 	.init_time	= at91_init_time,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,

@@ -45,6 +45,12 @@
 #define MXR_CM_COEFF_CB			0x0084
 #define MXR_CM_COEFF_CR			0x0088
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MXR_MO				0x0304
+#define MXR_RESOLUTION			0x0310
+
+>>>>>>> v3.18
 =======
 #define MXR_MO				0x0304
 #define MXR_RESOLUTION			0x0310
@@ -82,6 +88,10 @@
 #define MXR_STATUS_ENDIAN_MASK		(1 << 3)
 #define MXR_STATUS_SYNC_ENABLE		(1 << 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MXR_STATUS_REG_IDLE		(1 << 1)
+>>>>>>> v3.18
 =======
 #define MXR_STATUS_REG_IDLE		(1 << 1)
 >>>>>>> v3.18
@@ -130,11 +140,17 @@
 #define MXR_GRP_WH_HEIGHT(x)		MXR_MASK_VAL(x, 10, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for MXR_RESOLUTION */
 #define MXR_MXR_RES_HEIGHT(x)		MXR_MASK_VAL(x, 26, 16)
 #define MXR_MXR_RES_WIDTH(x)		MXR_MASK_VAL(x, 10, 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* bits for MXR_GRAPHICn_SXY */
 #define MXR_GRP_SXY_SX(x)		MXR_MASK_VAL(x, 26, 16)

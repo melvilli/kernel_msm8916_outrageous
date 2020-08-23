@@ -37,7 +37,10 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "board-zoom.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "gpmc.h"
@@ -188,6 +191,7 @@ static inline void __init ldp_init_smsc911x(void)
 #define LCD_PANEL_QVGA_GPIO		56
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct panel_generic_dpi_data ldp_panel_data = {
 	.name			= "nec_nl2432dr22-11b",
 	.num_gpios		= 4,
@@ -211,6 +215,8 @@ static struct omap_dss_board_info ldp_dss_data = {
 	.devices	= ldp_dss_devices,
 	.default_device	= &ldp_lcd_device,
 =======
+=======
+>>>>>>> v3.18
 static const struct display_timing ldp_lcd_videomode = {
 	.pixelclock	= { 0, 5400000, 0 },
 
@@ -248,15 +254,21 @@ static struct platform_device ldp_lcd_device = {
 
 static struct omap_dss_board_info ldp_dss_data = {
 	.default_display_name = "lcd",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static void __init ldp_display_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldp_panel_data.gpios[2] = LCD_PANEL_RESET_GPIO;
 	ldp_panel_data.gpios[3] = LCD_PANEL_QVGA_GPIO;
 =======
+=======
+>>>>>>> v3.18
 	int r;
 
 	static struct gpio gpios[] __initdata = {
@@ -269,6 +281,9 @@ static void __init ldp_display_init(void)
 		pr_err("Cannot request LCD GPIOs, error %d\n", r);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	omap_display_init(&ldp_dss_data);
@@ -277,12 +292,15 @@ static void __init ldp_display_init(void)
 static int ldp_twl_gpio_setup(struct device *dev, unsigned gpio, unsigned ngpio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldp_panel_data.gpios[0] = gpio + 7;
 	ldp_panel_data.gpio_invert[0] = true;
 
 	ldp_panel_data.gpios[1] = gpio + 15;
 	ldp_panel_data.gpio_invert[1] = true;
 =======
+=======
+>>>>>>> v3.18
 	int res;
 
 	/* LCD enable GPIO */
@@ -294,6 +312,9 @@ static int ldp_twl_gpio_setup(struct device *dev, unsigned gpio, unsigned ngpio)
 	res = platform_device_register(&ldp_lcd_device);
 	if (res)
 		pr_err("Unable to register LCD: %d\n", res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -345,7 +366,12 @@ static struct regulator_init_data ldp_vaux1 = {
 static struct regulator_consumer_supply ldp_vpll2_supplies[] = {
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dsi1"),
+=======
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dsi.0"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dsi.0"),
@@ -457,7 +483,11 @@ static void __init omap_ldp_init(void)
 	usb_musb_init(NULL);
 	board_nand_init(ldp_nand_partitions, ARRAY_SIZE(ldp_nand_partitions),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ZOOM_NAND_CS, 0, nand_default_timings);
+=======
+			0, 0, nand_default_timings);
+>>>>>>> v3.18
 =======
 			0, 0, nand_default_timings);
 >>>>>>> v3.18
@@ -473,7 +503,10 @@ MACHINE_START(OMAP_LDP, "OMAP LDP board")
 	.init_early	= omap3430_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap_ldp_init,

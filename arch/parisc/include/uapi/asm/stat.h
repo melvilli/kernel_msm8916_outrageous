@@ -6,8 +6,13 @@
 struct stat {
 	unsigned int	st_dev;		/* dev_t is 32 bits on parisc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ino_t		st_ino;		/* 32 bits */
 	mode_t		st_mode;	/* 16 bits */
+=======
+	unsigned int	st_ino;		/* 32 bits */
+	unsigned short	st_mode;	/* 16 bits */
+>>>>>>> v3.18
 =======
 	unsigned int	st_ino;		/* 32 bits */
 	unsigned short	st_mode;	/* 16 bits */
@@ -17,6 +22,7 @@ struct stat {
 	unsigned short	st_reserved2;	/* old st_gid */
 	unsigned int	st_rdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	off_t		st_size;
 	time_t		st_atime;
 	unsigned int	st_atime_nsec;
@@ -24,12 +30,17 @@ struct stat {
 	unsigned int	st_mtime_nsec;
 	time_t		st_ctime;
 =======
+=======
+>>>>>>> v3.18
 	signed int	st_size;
 	signed int	st_atime;
 	unsigned int	st_atime_nsec;
 	signed int	st_mtime;
 	unsigned int	st_mtime_nsec;
 	signed int	st_ctime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int	st_ctime_nsec;
 	int		st_blksize;
@@ -37,7 +48,11 @@ struct stat {
 	unsigned int	__unused1;	/* ACL stuff */
 	unsigned int	__unused2;	/* network */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ino_t		__unused3;	/* network */
+=======
+	unsigned int	__unused3;	/* network */
+>>>>>>> v3.18
 =======
 	unsigned int	__unused3;	/* network */
 >>>>>>> v3.18
@@ -48,8 +63,13 @@ struct stat {
 	unsigned short	st_basemode;
 	unsigned short	st_spareshort;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uid_t		st_uid;
 	gid_t		st_gid;
+=======
+	unsigned int	st_uid;
+	unsigned int	st_gid;
+>>>>>>> v3.18
 =======
 	unsigned int	st_uid;
 	unsigned int	st_gid;
@@ -60,6 +80,7 @@ struct stat {
 #define STAT_HAVE_NSEC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef __kernel_off64_t	off64_t;
 
 struct hpux_stat64 {
@@ -67,15 +88,21 @@ struct hpux_stat64 {
 	ino_t           st_ino;         /* 32 bits */
 	mode_t		st_mode;	/* 16 bits */
 =======
+=======
+>>>>>>> v3.18
 struct hpux_stat64 {
 	unsigned int	st_dev;		/* dev_t is 32 bits on parisc */
 	unsigned int	st_ino;         /* 32 bits */
 	unsigned short	st_mode;	/* 16 bits */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned short	st_nlink;	/* 16 bits */
 	unsigned short	st_reserved1;	/* old st_uid */
 	unsigned short	st_reserved2;	/* old st_gid */
 	unsigned int	st_rdev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	off64_t		st_size;
 	time_t		st_atime;
@@ -90,6 +117,8 @@ struct hpux_stat64 {
 	unsigned int	__unused2;	/* network */
 	ino_t           __unused3;      /* network */
 =======
+=======
+>>>>>>> v3.18
 	signed long long st_size;
 	signed int	st_atime;
 	unsigned int	st_spare1;
@@ -102,6 +131,9 @@ struct hpux_stat64 {
 	unsigned int	__unused1;	/* ACL stuff */
 	unsigned int	__unused2;	/* network */
 	unsigned int	__unused3;      /* network */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int	__unused4;	/* cnodes */
 	unsigned short	__unused5;	/* netsite */
@@ -110,8 +142,13 @@ struct hpux_stat64 {
 	unsigned short	st_basemode;
 	unsigned short	st_spareshort;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uid_t		st_uid;
 	gid_t		st_gid;
+=======
+	unsigned int	st_uid;
+	unsigned int	st_gid;
+>>>>>>> v3.18
 =======
 	unsigned int	st_uid;
 	unsigned int	st_gid;

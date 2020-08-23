@@ -27,15 +27,21 @@
 /* minimum FW required for driver */
 #define WL18XX_CHIP_VER		8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WL18XX_IFTYPE_VER	5
 #define WL18XX_MAJOR_VER	WLCORE_FW_VER_IGNORE
 #define WL18XX_SUBTYPE_VER	WLCORE_FW_VER_IGNORE
 #define WL18XX_MINOR_VER	39
 =======
+=======
+>>>>>>> v3.18
 #define WL18XX_IFTYPE_VER	8
 #define WL18XX_MAJOR_VER	WLCORE_FW_VER_IGNORE
 #define WL18XX_SUBTYPE_VER	WLCORE_FW_VER_IGNORE
 #define WL18XX_MINOR_VER	13
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define WL18XX_CMD_MAX_SIZE          740
@@ -46,16 +52,22 @@
 #define WL18XX_NUM_RX_DESCRIPTORS 32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WL18XX_NUM_MAC_ADDRESSES 3
 
 #define WL18XX_RX_BA_MAX_SESSIONS 5
 =======
+=======
+>>>>>>> v3.18
 #define WL18XX_NUM_MAC_ADDRESSES 2
 
 #define WL18XX_RX_BA_MAX_SESSIONS 13
 
 #define WL18XX_MAX_AP_STATIONS 10
 #define WL18XX_MAX_LINKS 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct wl18xx_priv {
@@ -126,7 +138,10 @@ struct wl18xx_fw_status_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct wl18xx_fw_packet_counters {
 	/* Cumulative counter of released packets per AC */
 	u8 tx_released_pkts[NUM_TX_QUEUES];
@@ -180,6 +195,9 @@ struct wl18xx_fw_status {
 	struct wl18xx_fw_status_priv priv;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WL18XX_PHY_VERSION_MAX_LEN 20
 

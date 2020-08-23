@@ -74,7 +74,11 @@ static long jz_battery_read_voltage(struct jz_battery *battery)
 	mutex_lock(&battery->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(battery->read_completion);
+=======
+	reinit_completion(&battery->read_completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&battery->read_completion);
 >>>>>>> v3.18
@@ -297,7 +301,11 @@ static int jz_battery_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to request irq %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -358,8 +366,11 @@ err_free_gpio:
 err_free_irq:
 	free_irq(jz_battery->irq, jz_battery);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err:
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

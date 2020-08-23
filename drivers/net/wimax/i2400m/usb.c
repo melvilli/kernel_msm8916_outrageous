@@ -473,7 +473,11 @@ int i2400mu_probe(struct usb_interface *iface,
 	/* Allocate instance [calls i2400m_netdev_setup() on it]. */
 	result = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net_dev = alloc_netdev(sizeof(*i2400mu), "wmx%d",
+=======
+	net_dev = alloc_netdev(sizeof(*i2400mu), "wmx%d", NET_NAME_UNKNOWN,
+>>>>>>> v3.18
 =======
 	net_dev = alloc_netdev(sizeof(*i2400mu), "wmx%d", NET_NAME_UNKNOWN,
 >>>>>>> v3.18

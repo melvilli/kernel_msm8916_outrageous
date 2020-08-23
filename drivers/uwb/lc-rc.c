@@ -120,7 +120,10 @@ struct uwb_rc *uwb_rc_alloc(void)
 EXPORT_SYMBOL_GPL(uwb_rc_alloc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Show the ASIE that is broadcast in the UWB beacon by this uwb_rc device.
  */
@@ -219,12 +222,19 @@ static ssize_t ASIE_store(struct device *dev,
 }
 static DEVICE_ATTR_RW(ASIE);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct attribute *rc_attrs[] = {
 		&dev_attr_mac_address.attr,
 		&dev_attr_scan.attr,
 		&dev_attr_beacon.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		&dev_attr_ASIE.attr,
+>>>>>>> v3.18
 =======
 		&dev_attr_ASIE.attr,
 >>>>>>> v3.18

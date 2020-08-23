@@ -18,7 +18,10 @@
 #include <linux/types.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -26,11 +29,14 @@
 #include <linux/sched.h>
 #include <linux/completion.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mmc/sdio.h>
 #include <linux/mmc/sdio_func.h>
 #include <linux/mmc/card.h>
 #include <linux/platform_data/brcmfmac-sdio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/scatterlist.h>
 #include <linux/mmc/sdio.h>
 #include <linux/mmc/core.h>
@@ -43,12 +49,16 @@
 #include <linux/errno.h>
 #include <linux/module.h>
 #include <net/cfg80211.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <defs.h>
 #include <brcm_hw_ids.h>
 #include <brcmu_utils.h>
 #include <brcmu_wifi.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <soc.h>
 #include "dhd_bus.h"
@@ -60,6 +70,8 @@
 
 static irqreturn_t brcmf_sdio_oob_irqhandler(int irq, void *dev_id)
 =======
+=======
+>>>>>>> v3.18
 #include <chipcommon.h>
 #include <soc.h>
 #include "chip.h"
@@ -85,6 +97,9 @@ module_param_named(txglomsz, brcmf_sdiod_txglomsz, int, 0);
 MODULE_PARM_DESC(txglomsz, "maximum tx packet chain size [SDIO]");
 
 static irqreturn_t brcmf_sdiod_oob_irqhandler(int irq, void *dev_id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct brcmf_bus *bus_if = dev_get_drvdata(dev_id);
@@ -101,7 +116,11 @@ static irqreturn_t brcmf_sdiod_oob_irqhandler(int irq, void *dev_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcmf_sdbrcm_isr(sdiodev->bus);
+=======
+	brcmf_sdio_isr(sdiodev->bus);
+>>>>>>> v3.18
 =======
 	brcmf_sdio_isr(sdiodev->bus);
 >>>>>>> v3.18
@@ -110,7 +129,11 @@ static irqreturn_t brcmf_sdiod_oob_irqhandler(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void brcmf_sdio_ib_irqhandler(struct sdio_func *func)
+=======
+static void brcmf_sdiod_ib_irqhandler(struct sdio_func *func)
+>>>>>>> v3.18
 =======
 static void brcmf_sdiod_ib_irqhandler(struct sdio_func *func)
 >>>>>>> v3.18
@@ -120,6 +143,7 @@ static void brcmf_sdiod_ib_irqhandler(struct sdio_func *func)
 
 	brcmf_dbg(INTR, "IB intr triggered\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	brcmf_sdbrcm_isr(sdiodev->bus);
 }
@@ -134,6 +158,8 @@ int brcmf_sdio_intr_register(struct brcmf_sdio_dev *sdiodev)
 	int ret = 0;
 	u8 data;
 =======
+=======
+>>>>>>> v3.18
 	brcmf_sdio_isr(sdiodev->bus);
 }
 
@@ -166,6 +192,9 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 	int ret = 0;
 	u8 data;
 	u32 addr, gpiocontrol;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 
@@ -174,7 +203,11 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 			  sdiodev->pdata->oob_irq_nr);
 		ret = request_irq(sdiodev->pdata->oob_irq_nr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  brcmf_sdio_oob_irqhandler,
+=======
+				  brcmf_sdiod_oob_irqhandler,
+>>>>>>> v3.18
 =======
 				  brcmf_sdiod_oob_irqhandler,
 >>>>>>> v3.18
@@ -201,11 +234,14 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 		sdio_claim_host(sdiodev->func[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* must configure SDIO_CCCR_IENx to enable irq */
 		data = brcmf_sdio_regrb(sdiodev, SDIO_CCCR_IENx, &ret);
 		data |= 1 << SDIO_FUNC_1 | 1 << SDIO_FUNC_2 | 1;
 		brcmf_sdio_regwb(sdiodev, SDIO_CCCR_IENx, data, &ret);
 =======
+=======
+>>>>>>> v3.18
 		if (sdiodev->bus_if->chip == BRCM_CC_43362_CHIP_ID) {
 			/* assign GPIO to SDIO core */
 			addr = CORE_CC_REG(SI_ENUM_BASE, gpiocontrol);
@@ -223,6 +259,9 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 		data = brcmf_sdiod_regrb(sdiodev, SDIO_CCCR_IENx, &ret);
 		data |= 1 << SDIO_FUNC_1 | 1 << SDIO_FUNC_2 | 1;
 		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_IENx, data, &ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* redirect, configure and enable io for interrupt signal */
@@ -230,7 +269,11 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 		if (sdiodev->pdata->oob_irq_flags & IRQF_TRIGGER_HIGH)
 			data |= SDIO_SEPINT_ACT_HI;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_sdio_regwb(sdiodev, SDIO_CCCR_BRCM_SEPINT, data, &ret);
+=======
+		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_BRCM_SEPINT, data, &ret);
+>>>>>>> v3.18
 =======
 		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_BRCM_SEPINT, data, &ret);
 >>>>>>> v3.18
@@ -240,8 +283,13 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 		brcmf_dbg(SDIO, "Entering\n");
 		sdio_claim_host(sdiodev->func[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sdio_claim_irq(sdiodev->func[1], brcmf_sdio_ib_irqhandler);
 		sdio_claim_irq(sdiodev->func[2], brcmf_sdio_dummy_irqhandler);
+=======
+		sdio_claim_irq(sdiodev->func[1], brcmf_sdiod_ib_irqhandler);
+		sdio_claim_irq(sdiodev->func[2], brcmf_sdiod_dummy_irqhandler);
+>>>>>>> v3.18
 =======
 		sdio_claim_irq(sdiodev->func[1], brcmf_sdiod_ib_irqhandler);
 		sdio_claim_irq(sdiodev->func[2], brcmf_sdiod_dummy_irqhandler);
@@ -253,7 +301,11 @@ int brcmf_sdiod_intr_register(struct brcmf_sdio_dev *sdiodev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int brcmf_sdio_intr_unregister(struct brcmf_sdio_dev *sdiodev)
+=======
+int brcmf_sdiod_intr_unregister(struct brcmf_sdio_dev *sdiodev)
+>>>>>>> v3.18
 =======
 int brcmf_sdiod_intr_unregister(struct brcmf_sdio_dev *sdiodev)
 >>>>>>> v3.18
@@ -263,8 +315,13 @@ int brcmf_sdiod_intr_unregister(struct brcmf_sdio_dev *sdiodev)
 	if ((sdiodev->pdata) && (sdiodev->pdata->oob_irq_supported)) {
 		sdio_claim_host(sdiodev->func[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_sdio_regwb(sdiodev, SDIO_CCCR_BRCM_SEPINT, 0, NULL);
 		brcmf_sdio_regwb(sdiodev, SDIO_CCCR_IENx, 0, NULL);
+=======
+		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_BRCM_SEPINT, 0, NULL);
+		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_IENx, 0, NULL);
+>>>>>>> v3.18
 =======
 		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_BRCM_SEPINT, 0, NULL);
 		brcmf_sdiod_regwb(sdiodev, SDIO_CCCR_IENx, 0, NULL);
@@ -291,6 +348,7 @@ int brcmf_sdiod_intr_unregister(struct brcmf_sdio_dev *sdiodev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 brcmf_sdcard_set_sbaddr_window(struct brcmf_sdio_dev *sdiodev, u32 address)
@@ -333,6 +391,8 @@ brcmf_sdio_regrw_helper(struct brcmf_sdio_dev *sdiodev, u32 addr,
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 static inline int brcmf_sdiod_f0_writeb(struct sdio_func *func,
 					uint regaddr, u8 byte)
 {
@@ -419,6 +479,9 @@ static int brcmf_sdiod_regrw_helper(struct brcmf_sdio_dev *sdiodev, u32 addr,
 	if (sdiodev->bus_if->state == BRCMF_BUS_NOMEDIUM)
 		return -ENOMEDIUM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * figure out how to read the register based on address range
@@ -426,6 +489,7 @@ static int brcmf_sdiod_regrw_helper(struct brcmf_sdio_dev *sdiodev, u32 addr,
 	 * 0x10000 ~ 0x1FFFF: function 1 miscellaneous registers
 	 * The rest: function 1 silicon backplane core registers
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((addr & ~REG_F0_REG_MASK) == 0) {
 		func_num = SDIO_FUNC_0;
@@ -472,6 +536,8 @@ static int brcmf_sdiod_regrw_helper(struct brcmf_sdio_dev *sdiodev, u32 addr,
 
 u8 brcmf_sdio_regrb(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
 =======
+=======
+>>>>>>> v3.18
 	if ((addr & ~REG_F0_REG_MASK) == 0)
 		func = SDIO_FUNC_0;
 	else
@@ -556,6 +622,9 @@ brcmf_sdiod_addrprep(struct brcmf_sdio_dev *sdiodev, uint width, u32 *addr)
 }
 
 u8 brcmf_sdiod_regrb(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u8 data;
@@ -563,7 +632,12 @@ u8 brcmf_sdiod_regrb(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
 
 	brcmf_dbg(SDIO, "addr:0x%08x\n", addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = brcmf_sdio_regrw_helper(sdiodev, addr, &data, false);
+=======
+	retval = brcmf_sdiod_regrw_helper(sdiodev, addr, sizeof(data), &data,
+					  false);
+>>>>>>> v3.18
 =======
 	retval = brcmf_sdiod_regrw_helper(sdiodev, addr, sizeof(data), &data,
 					  false);
@@ -577,7 +651,11 @@ u8 brcmf_sdiod_regrb(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 brcmf_sdio_regrl(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
+=======
+u32 brcmf_sdiod_regrl(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
+>>>>>>> v3.18
 =======
 u32 brcmf_sdiod_regrl(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
 >>>>>>> v3.18
@@ -587,10 +665,13 @@ u32 brcmf_sdiod_regrl(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
 
 	brcmf_dbg(SDIO, "addr:0x%08x\n", addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = brcmf_sdio_regrw_helper(sdiodev, addr, &data, false);
 	brcmf_dbg(SDIO, "data:0x%08x\n", data);
 
 =======
+=======
+>>>>>>> v3.18
 	retval = brcmf_sdiod_addrprep(sdiodev, sizeof(data), &addr);
 	if (retval)
 		goto done;
@@ -599,6 +680,9 @@ u32 brcmf_sdiod_regrl(struct brcmf_sdio_dev *sdiodev, u32 addr, int *ret)
 	brcmf_dbg(SDIO, "data:0x%08x\n", data);
 
 done:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		*ret = retval;
@@ -607,7 +691,11 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void brcmf_sdio_regwb(struct brcmf_sdio_dev *sdiodev, u32 addr,
+=======
+void brcmf_sdiod_regwb(struct brcmf_sdio_dev *sdiodev, u32 addr,
+>>>>>>> v3.18
 =======
 void brcmf_sdiod_regwb(struct brcmf_sdio_dev *sdiodev, u32 addr,
 >>>>>>> v3.18
@@ -617,8 +705,13 @@ void brcmf_sdiod_regwb(struct brcmf_sdio_dev *sdiodev, u32 addr,
 
 	brcmf_dbg(SDIO, "addr:0x%08x, data:0x%02x\n", addr, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = brcmf_sdio_regrw_helper(sdiodev, addr, &data, true);
 
+=======
+	retval = brcmf_sdiod_regrw_helper(sdiodev, addr, sizeof(data), &data,
+					  true);
+>>>>>>> v3.18
 =======
 	retval = brcmf_sdiod_regrw_helper(sdiodev, addr, sizeof(data), &data,
 					  true);
@@ -628,7 +721,11 @@ void brcmf_sdiod_regwb(struct brcmf_sdio_dev *sdiodev, u32 addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void brcmf_sdio_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr,
+=======
+void brcmf_sdiod_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr,
+>>>>>>> v3.18
 =======
 void brcmf_sdiod_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr,
 >>>>>>> v3.18
@@ -638,9 +735,12 @@ void brcmf_sdiod_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr,
 
 	brcmf_dbg(SDIO, "addr:0x%08x, data:0x%08x\n", addr, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = brcmf_sdio_regrw_helper(sdiodev, addr, &data, true);
 
 =======
+=======
+>>>>>>> v3.18
 	retval = brcmf_sdiod_addrprep(sdiodev, sizeof(data), &addr);
 	if (retval)
 		goto done;
@@ -648,11 +748,15 @@ void brcmf_sdiod_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr,
 					  true);
 
 done:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		*ret = retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int brcmf_sdcard_recv_prepare(struct brcmf_sdio_dev *sdiodev, uint fn,
 				     uint flags, uint width, u32 *addr)
@@ -684,6 +788,8 @@ int
 brcmf_sdcard_recv_buf(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 		      uint flags, u8 *buf, uint nbytes)
 =======
+=======
+>>>>>>> v3.18
 static int brcmf_sdiod_buffrw(struct brcmf_sdio_dev *sdiodev, uint fn,
 			     bool write, u32 addr, struct sk_buff *pkt)
 {
@@ -892,6 +998,9 @@ exit:
 }
 
 int brcmf_sdiod_recv_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct sk_buff *mypkt;
@@ -905,7 +1014,11 @@ int brcmf_sdiod_recv_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = brcmf_sdcard_recv_pkt(sdiodev, addr, fn, flags, mypkt);
+=======
+	err = brcmf_sdiod_recv_pkt(sdiodev, mypkt);
+>>>>>>> v3.18
 =======
 	err = brcmf_sdiod_recv_pkt(sdiodev, mypkt);
 >>>>>>> v3.18
@@ -916,6 +1029,7 @@ int brcmf_sdiod_recv_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes)
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 brcmf_sdcard_recv_pkt(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
@@ -937,6 +1051,8 @@ brcmf_sdcard_recv_pkt(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 	err = brcmf_sdioh_request_buffer(sdiodev, incr_fix, SDIOH_READ,
 					 fn, addr, pkt);
 =======
+=======
+>>>>>>> v3.18
 int brcmf_sdiod_recv_pkt(struct brcmf_sdio_dev *sdiodev, struct sk_buff *pkt)
 {
 	u32 addr = sdiodev->sbwad;
@@ -949,12 +1065,16 @@ int brcmf_sdiod_recv_pkt(struct brcmf_sdio_dev *sdiodev, struct sk_buff *pkt)
 		goto done;
 
 	err = brcmf_sdiod_buffrw(sdiodev, SDIO_FUNC_2, false, addr, pkt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 done:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int brcmf_sdcard_recv_chain(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 			    uint flags, struct sk_buff_head *pktq)
@@ -975,6 +1095,8 @@ int brcmf_sdcard_recv_chain(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 	err = brcmf_sdioh_request_chain(sdiodev, incr_fix, SDIOH_READ, fn, addr,
 					pktq);
 =======
+=======
+>>>>>>> v3.18
 int brcmf_sdiod_recv_chain(struct brcmf_sdio_dev *sdiodev,
 			   struct sk_buff_head *pktq, uint totlen)
 {
@@ -1009,6 +1131,9 @@ int brcmf_sdiod_recv_chain(struct brcmf_sdio_dev *sdiodev,
 	} else
 		err = brcmf_sdiod_sglist_rw(sdiodev, SDIO_FUNC_2, false, addr,
 					    pktq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 done:
@@ -1016,16 +1141,22 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 brcmf_sdcard_send_buf(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 		      uint flags, u8 *buf, uint nbytes)
 {
 	struct sk_buff *mypkt;
 =======
+=======
+>>>>>>> v3.18
 int brcmf_sdiod_send_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes)
 {
 	struct sk_buff *mypkt;
 	u32 addr = sdiodev->sbwad;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 
@@ -1038,14 +1169,20 @@ int brcmf_sdiod_send_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes)
 
 	memcpy(mypkt->data, buf, nbytes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = brcmf_sdcard_send_pkt(sdiodev, addr, fn, flags, mypkt);
 =======
+=======
+>>>>>>> v3.18
 
 	err = brcmf_sdiod_addrprep(sdiodev, 4, &addr);
 
 	if (!err)
 		err = brcmf_sdiod_buffrw(sdiodev, SDIO_FUNC_2, true, addr,
 					 mypkt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	brcmu_pkt_buf_free_skb(mypkt);
@@ -1053,6 +1190,7 @@ int brcmf_sdiod_send_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes)
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 brcmf_sdcard_send_pkt(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
@@ -1090,6 +1228,8 @@ brcmf_sdcard_send_pkt(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 
 done:
 =======
+=======
+>>>>>>> v3.18
 int brcmf_sdiod_send_pkt(struct brcmf_sdio_dev *sdiodev,
 			 struct sk_buff_head *pktq)
 {
@@ -1114,14 +1254,22 @@ int brcmf_sdiod_send_pkt(struct brcmf_sdio_dev *sdiodev,
 		err = brcmf_sdiod_sglist_rw(sdiodev, SDIO_FUNC_2, true, addr,
 					    pktq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 brcmf_sdio_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 		 u8 *data, uint size)
+=======
+brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
+		  u8 *data, uint size)
+>>>>>>> v3.18
 =======
 brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 		  u8 *data, uint size)
@@ -1153,7 +1301,11 @@ brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 	while (size) {
 		/* Set the backplane window to include the start address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcmerror = brcmf_sdcard_set_sbaddr_window(sdiodev, address);
+=======
+		bcmerror = brcmf_sdiod_set_sbaddr_window(sdiodev, address);
+>>>>>>> v3.18
 =======
 		bcmerror = brcmf_sdiod_set_sbaddr_window(sdiodev, address);
 >>>>>>> v3.18
@@ -1171,9 +1323,14 @@ brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 		if (write)
 			memcpy(pkt->data, data, dsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcmerror = brcmf_sdioh_request_buffer(sdiodev, SDIOH_DATA_INC,
 						      write, SDIO_FUNC_1,
 						      sdaddr, pkt);
+=======
+		bcmerror = brcmf_sdiod_buffrw(sdiodev, SDIO_FUNC_1, write,
+					      sdaddr, pkt);
+>>>>>>> v3.18
 =======
 		bcmerror = brcmf_sdiod_buffrw(sdiodev, SDIO_FUNC_1, write,
 					      sdaddr, pkt);
@@ -1185,7 +1342,11 @@ brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 		if (!write)
 			memcpy(data, pkt->data, dsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb_trim(pkt, dsize);
+=======
+		skb_trim(pkt, 0);
+>>>>>>> v3.18
 =======
 		skb_trim(pkt, 0);
 >>>>>>> v3.18
@@ -1204,7 +1365,11 @@ brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 
 	/* Return the window to backplane enumeration space for core access */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (brcmf_sdcard_set_sbaddr_window(sdiodev, sdiodev->sbwad))
+=======
+	if (brcmf_sdiod_set_sbaddr_window(sdiodev, sdiodev->sbwad))
+>>>>>>> v3.18
 =======
 	if (brcmf_sdiod_set_sbaddr_window(sdiodev, sdiodev->sbwad))
 >>>>>>> v3.18
@@ -1217,7 +1382,11 @@ brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int brcmf_sdcard_abort(struct brcmf_sdio_dev *sdiodev, uint fn)
+=======
+int brcmf_sdiod_abort(struct brcmf_sdio_dev *sdiodev, uint fn)
+>>>>>>> v3.18
 =======
 int brcmf_sdiod_abort(struct brcmf_sdio_dev *sdiodev, uint fn)
 >>>>>>> v3.18
@@ -1227,8 +1396,13 @@ int brcmf_sdiod_abort(struct brcmf_sdio_dev *sdiodev, uint fn)
 
 	/* issue abort cmd52 command through F0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcmf_sdioh_request_byte(sdiodev, SDIOH_WRITE, SDIO_FUNC_0,
 				 SDIO_CCCR_ABORT, &t_func);
+=======
+	brcmf_sdiod_request_data(sdiodev, SDIO_FUNC_0, SDIO_CCCR_ABORT,
+				 sizeof(t_func), &t_func, true);
+>>>>>>> v3.18
 =======
 	brcmf_sdiod_request_data(sdiodev, SDIO_FUNC_0, SDIO_CCCR_ABORT,
 				 sizeof(t_func), &t_func, true);
@@ -1238,6 +1412,7 @@ int brcmf_sdiod_abort(struct brcmf_sdio_dev *sdiodev, uint fn)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int brcmf_sdio_probe(struct brcmf_sdio_dev *sdiodev)
 {
@@ -1255,6 +1430,8 @@ int brcmf_sdio_probe(struct brcmf_sdio_dev *sdiodev)
 	if (!sdiodev->bus) {
 		brcmf_err("device attach failed\n");
 =======
+=======
+>>>>>>> v3.18
 static void brcmf_sdiod_sgtable_alloc(struct brcmf_sdio_dev *sdiodev)
 {
 	uint nents;
@@ -1359,6 +1536,9 @@ static int brcmf_sdiod_probe(struct brcmf_sdio_dev *sdiodev)
 	/* try to attach to the target device */
 	sdiodev->bus = brcmf_sdio_probe(sdiodev);
 	if (!sdiodev->bus) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENODEV;
 		goto out;
@@ -1366,6 +1546,7 @@ static int brcmf_sdiod_probe(struct brcmf_sdio_dev *sdiodev)
 
 out:
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		brcmf_sdio_remove(sdiodev);
 
@@ -1397,6 +1578,8 @@ void brcmf_sdio_wdtmr_enable(struct brcmf_sdio_dev *sdiodev, bool enable)
 	else
 		brcmf_sdbrcm_wd_timer(sdiodev->bus, 0);
 =======
+=======
+>>>>>>> v3.18
 		brcmf_sdiod_remove(sdiodev);
 
 	return ret;
@@ -1643,5 +1826,8 @@ void __init brcmf_sdio_init(void)
 	ret = platform_driver_probe(&brcmf_sdio_pd, brcmf_sdio_pd_probe);
 	if (ret == -ENODEV)
 		brcmf_dbg(SDIO, "No platform data available.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

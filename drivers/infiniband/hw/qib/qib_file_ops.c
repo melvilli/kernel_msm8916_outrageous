@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Intel Corporation. All rights reserved.
+=======
+ * Copyright (c) 2012, 2013 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2012, 2013 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -50,8 +54,11 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <rdma/ib.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "qib.h"
@@ -1165,7 +1172,10 @@ static unsigned int qib_poll(struct file *fp, struct poll_table_struct *pt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void assign_ctxt_affinity(struct file *fp, struct qib_devdata *dd)
 {
 	struct qib_filedata *fd = fp->private_data;
@@ -1209,6 +1219,9 @@ static void assign_ctxt_affinity(struct file *fp, struct qib_devdata *dd)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Check that userland and driver are compatible for subcontexts.
@@ -1233,7 +1246,11 @@ static int qib_compatible_subctxts(int user_swmajor, int user_swminor)
 		default:
 			/* >= 4 are compatible (or are expected to be) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return user_swminor >= 4;
+=======
+			return user_swminor <= QIB_USER_SWMINOR;
+>>>>>>> v3.18
 =======
 			return user_swminor <= QIB_USER_SWMINOR;
 >>>>>>> v3.18
@@ -1319,6 +1336,10 @@ static int setup_ctxt(struct qib_pportdata *ppd, int ctxt,
 		      struct file *fp, const struct qib_user_info *uinfo)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qib_filedata *fd = fp->private_data;
+>>>>>>> v3.18
 =======
 	struct qib_filedata *fd = fp->private_data;
 >>>>>>> v3.18
@@ -1327,9 +1348,12 @@ static int setup_ctxt(struct qib_pportdata *ppd, int ctxt,
 	void *ptmp = NULL;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rcd = qib_create_ctxtdata(ppd, ctxt);
 =======
+=======
+>>>>>>> v3.18
 	int numa_id;
 
 	assign_ctxt_affinity(fp, dd);
@@ -1339,6 +1363,9 @@ static int setup_ctxt(struct qib_pportdata *ppd, int ctxt,
 		numa_node_id()) : dd->assigned_node_id;
 
 	rcd = qib_create_ctxtdata(ppd, ctxt, numa_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1372,6 +1399,12 @@ static int setup_ctxt(struct qib_pportdata *ppd, int ctxt,
 
 bailerr:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (fd->rec_cpu_num != -1)
+		__clear_bit(fd->rec_cpu_num, qib_cpulist);
+
+>>>>>>> v3.18
 =======
 	if (fd->rec_cpu_num != -1)
 		__clear_bit(fd->rec_cpu_num, qib_cpulist);
@@ -1487,7 +1520,11 @@ static int get_a_ctxt(struct file *fp, const struct qib_user_info *uinfo,
 				else
 					cfree++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pusable && cfree && cused < inuse) {
+=======
+			if (cfree && cused < inuse) {
+>>>>>>> v3.18
 =======
 			if (cfree && cused < inuse) {
 >>>>>>> v3.18
@@ -1571,7 +1608,10 @@ static int qib_open(struct inode *in, struct file *fp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int find_hca(unsigned int cpu, int *unit)
 {
 	int ret = 0, devmax, npresent, nup, ndev;
@@ -1624,6 +1664,9 @@ static int do_qib_user_sdma_queue_create(struct file *fp)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Get ctxt early, so can set affinity prior to memory allocation.
@@ -1658,16 +1701,22 @@ static int qib_assign_ctxt(struct file *fp, const struct qib_user_info *uinfo)
 	    uinfo->spu_subctxt_cnt) {
 		ret = find_shared_ctxt(fp, uinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret) {
 			if (ret > 0)
 				ret = 0;
 			goto done_chk_sdma;
 =======
+=======
+>>>>>>> v3.18
 		if (ret > 0) {
 			ret = do_qib_user_sdma_queue_create(fp);
 			if (!ret)
 				assign_ctxt_affinity(fp, (ctxt_fp(fp))->dd);
 			goto done_ok;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1675,6 +1724,7 @@ static int qib_assign_ctxt(struct file *fp, const struct qib_user_info *uinfo)
 	i_minor = iminor(file_inode(fp)) - QIB_USER_MINOR_BASE;
 	if (i_minor)
 		ret = find_free_ctxt(i_minor - 1, fp, uinfo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	else
 		ret = get_a_ctxt(fp, uinfo, alg);
@@ -1722,6 +1772,8 @@ done_chk_sdma:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	else {
 		int unit;
 		const unsigned int cpu = cpumask_first(&current->cpus_allowed);
@@ -1741,6 +1793,9 @@ done_chk_sdma:
 	if (!ret)
 		ret = do_qib_user_sdma_queue_create(fp);
 done_ok:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&qib_mutex);
 
@@ -2148,9 +2203,12 @@ static ssize_t qib_write(struct file *fp, const char __user *data,
 	void *dest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON_ONCE(!ib_safe_file_access(fp)))
 		return -EACCES;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (count < sizeof(cmd.type)) {
@@ -2385,7 +2443,11 @@ int qib_cdev_init(int minor, const char *name,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device = device_create(qib_class, NULL, dev, NULL, name);
+=======
+	device = device_create(qib_class, NULL, dev, NULL, "%s", name);
+>>>>>>> v3.18
 =======
 	device = device_create(qib_class, NULL, dev, NULL, "%s", name);
 >>>>>>> v3.18

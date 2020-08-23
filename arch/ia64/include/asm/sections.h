@@ -11,7 +11,11 @@
 #include <asm-generic/sections.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char __per_cpu_start[], __per_cpu_end[], __phys_per_cpu_start[];
+=======
+extern char __phys_per_cpu_start[];
+>>>>>>> v3.18
 =======
 extern char __phys_per_cpu_start[];
 >>>>>>> v3.18

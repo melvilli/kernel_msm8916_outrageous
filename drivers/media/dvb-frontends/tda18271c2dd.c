@@ -1031,7 +1031,11 @@ static int ChannelConfiguration(struct tda_state *state,
 
 		if ((Standard == HF_FM_Radio) && state->m_bFMInput)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			state->m_Regs[EP4] |= 80;
+=======
+			state->m_Regs[EP4] |= 0x80;
+>>>>>>> v3.18
 =======
 			state->m_Regs[EP4] |= 0x80;
 >>>>>>> v3.18

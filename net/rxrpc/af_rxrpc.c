@@ -672,7 +672,11 @@ static void rxrpc_sock_destructor(struct sock *sk)
 
 	if (!sock_flag(sk, SOCK_DEAD)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "Attempt to release alive rxrpc socket: %p\n", sk);
+=======
+		printk("Attempt to release alive rxrpc socket: %p\n", sk);
+>>>>>>> v3.18
 =======
 		printk("Attempt to release alive rxrpc socket: %p\n", sk);
 >>>>>>> v3.18
@@ -843,13 +847,19 @@ static int __init af_rxrpc_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = rxrpc_sysctl_init();
 	if (ret < 0) {
 		printk(KERN_CRIT "RxRPC: Cannot register sysctls\n");
 		goto error_sysctls;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 	proc_create("rxrpc_calls", 0, init_net.proc_net, &rxrpc_call_seq_fops);
@@ -859,6 +869,11 @@ static int __init af_rxrpc_init(void)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+error_sysctls:
+	unregister_key_type(&key_type_rxrpc_s);
+>>>>>>> v3.18
 =======
 error_sysctls:
 	unregister_key_type(&key_type_rxrpc_s);
@@ -884,6 +899,10 @@ static void __exit af_rxrpc_exit(void)
 {
 	_enter("");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rxrpc_sysctl_exit();
+>>>>>>> v3.18
 =======
 	rxrpc_sysctl_exit();
 >>>>>>> v3.18

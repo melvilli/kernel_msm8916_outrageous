@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_CACHECTL_H
 #define __ASM_AVR32_CACHECTL_H
+=======
+#ifndef _UAPI__ASM_AVR32_CACHECTL_H
+#define _UAPI__ASM_AVR32_CACHECTL_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_CACHECTL_H
 #define _UAPI__ASM_AVR32_CACHECTL_H
@@ -14,7 +19,11 @@
 #define CACHE_IFLUSH	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_CACHECTL_H */
+=======
+#endif /* _UAPI__ASM_AVR32_CACHECTL_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_CACHECTL_H */
 >>>>>>> v3.18

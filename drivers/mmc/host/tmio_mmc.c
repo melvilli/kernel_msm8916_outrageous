@@ -24,6 +24,7 @@
 #include "tmio_mmc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int tmio_mmc_suspend(struct platform_device *dev, pm_message_t state)
 {
@@ -36,6 +37,8 @@ static int tmio_mmc_suspend(struct platform_device *dev, pm_message_t state)
 	if (!ret && cell->disable)
 		cell->disable(dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int tmio_mmc_suspend(struct device *dev)
 {
@@ -48,25 +51,35 @@ static int tmio_mmc_suspend(struct device *dev)
 	/* Tell MFD core it can disable us now.*/
 	if (!ret && cell->disable)
 		cell->disable(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tmio_mmc_resume(struct platform_device *dev)
 {
 	const struct mfd_cell *cell = mfd_get_cell(dev);
 =======
+=======
+>>>>>>> v3.18
 static int tmio_mmc_resume(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	const struct mfd_cell *cell = mfd_get_cell(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret = 0;
 
 	/* Tell the MFD core we are ready to be enabled */
 	if (cell->resume)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = cell->resume(dev);
 
@@ -79,6 +92,8 @@ static int tmio_mmc_resume(struct device *dev)
 #define tmio_mmc_suspend NULL
 #define tmio_mmc_resume NULL
 =======
+=======
+>>>>>>> v3.18
 		ret = cell->resume(pdev);
 
 	if (!ret)
@@ -86,6 +101,9 @@ static int tmio_mmc_resume(struct device *dev)
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -95,6 +113,10 @@ static int tmio_mmc_probe(struct platform_device *pdev)
 	struct tmio_mmc_data *pdata;
 	struct tmio_mmc_host *host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource *res;
+>>>>>>> v3.18
 =======
 	struct resource *res;
 >>>>>>> v3.18
@@ -121,7 +143,10 @@ static int tmio_mmc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -EINVAL;
@@ -130,6 +155,9 @@ static int tmio_mmc_probe(struct platform_device *pdev)
 	pdata->bus_shift = resource_size(res) >> 10;
 	pdata->flags |= TMIO_MMC_HAVE_HIGH_REG;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = tmio_mmc_host_probe(&host, pdev, pdata);
 	if (ret)
@@ -160,8 +188,11 @@ static int tmio_mmc_remove(struct platform_device *pdev)
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mmc) {
@@ -178,7 +209,10 @@ static int tmio_mmc_remove(struct platform_device *pdev)
 /* ------------------- device registration ----------------------- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops tmio_mmc_dev_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(tmio_mmc_suspend, tmio_mmc_resume)
 	SET_PM_RUNTIME_PM_OPS(tmio_mmc_host_runtime_suspend,
@@ -186,11 +220,15 @@ static const struct dev_pm_ops tmio_mmc_dev_pm_ops = {
 			NULL)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver tmio_mmc_driver = {
 	.driver = {
 		.name = "tmio-mmc",
 		.owner = THIS_MODULE,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	},
 	.probe = tmio_mmc_probe,
@@ -198,10 +236,15 @@ static struct platform_driver tmio_mmc_driver = {
 	.suspend = tmio_mmc_suspend,
 	.resume = tmio_mmc_resume,
 =======
+=======
+>>>>>>> v3.18
 		.pm = &tmio_mmc_dev_pm_ops,
 	},
 	.probe = tmio_mmc_probe,
 	.remove = tmio_mmc_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

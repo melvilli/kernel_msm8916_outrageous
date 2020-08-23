@@ -42,6 +42,7 @@
 
 #define ICE1712_REG_CONTROL		0x00	/* byte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   ICE1712_RESET			0x80	/* reset whole chip */
 #define   ICE1712_SERR_LEVEL		0x04	/* SERR# level otherwise edge */
 #define   ICE1712_NATIVE		0x01	/* native mode otherwise SB */
@@ -51,6 +52,8 @@
 #define   ICE1712_IRQ_MPU2		0x20
 #define   ICE1712_IRQ_PROPCM		0x10
 =======
+=======
+>>>>>>> v3.18
 #define   ICE1712_RESET			0x80	/* soft reset whole chip */
 #define   ICE1712_SERR_ASSERT_DS_DMA	0x40    /* disabled SERR# assertion for the DS DMA Ch-C irq otherwise enabled */
 #define   ICE1712_DOS_VOL		0x10    /* DOS WT/FM volume control */
@@ -62,6 +65,9 @@
 #define   ICE1712_IRQ_TIMER		0x40	/* Timer mask */
 #define   ICE1712_IRQ_MPU2		0x20	/* Secondary MIDI irq mask */
 #define   ICE1712_IRQ_PROPCM		0x10	/* professional multi-track */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   ICE1712_IRQ_FM		0x08	/* FM/MIDI - legacy */
 #define   ICE1712_IRQ_PBKDS		0x04	/* playback DS channels */

@@ -360,6 +360,12 @@ int braille_register_console(struct console *console, int index,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (!(console->flags & CON_BRL))
+		return 0;
+>>>>>>> v3.18
 =======
 
 	if (!(console->flags & CON_BRL))
@@ -381,7 +387,11 @@ int braille_register_console(struct console *console, int index,
 	register_keyboard_notifier(&keyboard_notifier_block);
 	register_vt_notifier(&vt_notifier_block);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return 1;
+>>>>>>> v3.18
 =======
 	return 1;
 >>>>>>> v3.18
@@ -392,16 +402,22 @@ int braille_unregister_console(struct console *console)
 	if (braille_co != console)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_keyboard_notifier(&keyboard_notifier_block);
 	unregister_vt_notifier(&vt_notifier_block);
 	braille_co = NULL;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!(console->flags & CON_BRL))
 		return 0;
 	unregister_keyboard_notifier(&keyboard_notifier_block);
 	unregister_vt_notifier(&vt_notifier_block);
 	braille_co = NULL;
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

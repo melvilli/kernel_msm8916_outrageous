@@ -120,11 +120,17 @@ extern unsigned long uml_physmem;
 
 #endif	/* __ASSEMBLY__ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_32
 #define __HAVE_ARCH_GATE_AREA 1
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __UM_PAGE_H */

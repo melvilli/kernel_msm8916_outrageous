@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../platform/efi/efi_stub_64.S"
 =======
+=======
+>>>>>>> v3.18
 #include <asm/segment.h>
 #include <asm/msr.h>
 #include <asm/processor-flags.h>
@@ -31,4 +34,7 @@ ENTRY(efi64_thunk)
 	ret
 ENDPROC(efi64_thunk)
 #endif /* CONFIG_EFI_MIXED */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

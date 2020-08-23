@@ -9,6 +9,10 @@
 #include <linux/random.h>
 #include <asm/dmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <asm/unaligned.h>
 >>>>>>> v3.18
@@ -19,7 +23,11 @@
  * Management BIOS.  See further: http://www.dmtf.org/standards
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char dmi_empty_string[] = "        ";
+=======
+static const char dmi_empty_string[] = "        ";
+>>>>>>> v3.18
 =======
 static const char dmi_empty_string[] = "        ";
 >>>>>>> v3.18
@@ -34,7 +42,10 @@ static int dmi_initialized;
 static char dmi_ids_string[128] __initdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct dmi_memdev_info {
 	const char *device;
 	const char *bank;
@@ -42,6 +53,9 @@ static struct dmi_memdev_info {
 } *dmi_memdev;
 static int dmi_memdev_nr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char * __init dmi_string_nosave(const struct dmi_header *dm, u8 s)
 {
@@ -68,7 +82,11 @@ static const char * __init dmi_string_nosave(const struct dmi_header *dm, u8 s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char * __init dmi_string(const struct dmi_header *dm, u8 s)
+=======
+static const char * __init dmi_string(const struct dmi_header *dm, u8 s)
+>>>>>>> v3.18
 =======
 static const char * __init dmi_string(const struct dmi_header *dm, u8 s)
 >>>>>>> v3.18
@@ -85,8 +103,11 @@ static const char * __init dmi_string(const struct dmi_header *dm, u8 s)
 	if (str != NULL)
 		strcpy(str, bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		printk(KERN_ERR "dmi_string: cannot allocate %Zu bytes.\n", len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -136,7 +157,11 @@ static int __init dmi_walk_early(void (*decode)(const struct dmi_header *,
 	u8 *buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = dmi_ioremap(dmi_base, dmi_len);
+=======
+	buf = dmi_early_remap(dmi_base, dmi_len);
+>>>>>>> v3.18
 =======
 	buf = dmi_early_remap(dmi_base, dmi_len);
 >>>>>>> v3.18
@@ -148,7 +173,11 @@ static int __init dmi_walk_early(void (*decode)(const struct dmi_header *,
 	add_device_randomness(buf, dmi_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dmi_iounmap(buf, dmi_len);
+=======
+	dmi_early_unmap(buf, dmi_len);
+>>>>>>> v3.18
 =======
 	dmi_early_unmap(buf, dmi_len);
 >>>>>>> v3.18
@@ -167,7 +196,11 @@ static int __init dmi_checksum(const u8 *buf, u8 len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char *dmi_ident[DMI_STRING_MAX];
+=======
+static const char *dmi_ident[DMI_STRING_MAX];
+>>>>>>> v3.18
 =======
 static const char *dmi_ident[DMI_STRING_MAX];
 >>>>>>> v3.18
@@ -178,16 +211,22 @@ int dmi_available;
  *	Save a DMI string
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init dmi_save_ident(const struct dmi_header *dm, int slot, int string)
 {
 	const char *d = (const char*) dm;
 	char *p;
 =======
+=======
+>>>>>>> v3.18
 static void __init dmi_save_ident(const struct dmi_header *dm, int slot,
 		int string)
 {
 	const char *d = (const char *) dm;
 	const char *p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dmi_ident[slot])
@@ -201,14 +240,20 @@ static void __init dmi_save_ident(const struct dmi_header *dm, int slot,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init dmi_save_uuid(const struct dmi_header *dm, int slot, int index)
 {
 	const u8 *d = (u8*) dm + index;
 =======
+=======
+>>>>>>> v3.18
 static void __init dmi_save_uuid(const struct dmi_header *dm, int slot,
 		int index)
 {
 	const u8 *d = (u8 *) dm + index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *s;
 	int is_ff = 1, is_00 = 1, i;
@@ -241,6 +286,7 @@ static void __init dmi_save_uuid(const struct dmi_header *dm, int slot,
 		sprintf(s, "%pUB", d);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         dmi_ident[slot] = s;
 }
 
@@ -248,6 +294,8 @@ static void __init dmi_save_type(const struct dmi_header *dm, int slot, int inde
 {
 	const u8 *d = (u8*) dm + index;
 =======
+=======
+>>>>>>> v3.18
 	dmi_ident[slot] = s;
 }
 
@@ -255,6 +303,9 @@ static void __init dmi_save_type(const struct dmi_header *dm, int slot,
 		int index)
 {
 	const u8 *d = (u8 *) dm + index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *s;
 
@@ -279,10 +330,15 @@ static void __init dmi_save_one_device(int type, const char *name)
 
 	dev = dmi_alloc(sizeof(*dev) + strlen(name) + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev) {
 		printk(KERN_ERR "dmi_save_one_device: out of memory.\n");
 		return;
 	}
+=======
+	if (!dev)
+		return;
+>>>>>>> v3.18
 =======
 	if (!dev)
 		return;
@@ -317,7 +373,11 @@ static void __init dmi_save_oem_strings_devices(const struct dmi_header *dm)
 
 	for (i = 1; i <= count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *devname = dmi_string(dm, i);
+=======
+		const char *devname = dmi_string(dm, i);
+>>>>>>> v3.18
 =======
 		const char *devname = dmi_string(dm, i);
 >>>>>>> v3.18
@@ -327,11 +387,16 @@ static void __init dmi_save_oem_strings_devices(const struct dmi_header *dm)
 
 		dev = dmi_alloc(sizeof(*dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!dev) {
 			printk(KERN_ERR
 			   "dmi_save_oem_strings_devices: out of memory.\n");
 			break;
 		}
+=======
+		if (!dev)
+			break;
+>>>>>>> v3.18
 =======
 		if (!dev)
 			break;
@@ -349,6 +414,7 @@ static void __init dmi_save_ipmi_device(const struct dmi_header *dm)
 {
 	struct dmi_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void * data;
 
 	data = dmi_alloc(dm->length);
@@ -357,21 +423,31 @@ static void __init dmi_save_ipmi_device(const struct dmi_header *dm)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	void *data;
 
 	data = dmi_alloc(dm->length);
 	if (data == NULL)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(data, dm, dm->length);
 
 	dev = dmi_alloc(sizeof(*dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev) {
 		printk(KERN_ERR "dmi_save_ipmi_device: out of memory.\n");
 		return;
 	}
+=======
+	if (!dev)
+		return;
+>>>>>>> v3.18
 =======
 	if (!dev)
 		return;
@@ -391,10 +467,16 @@ static void __init dmi_save_dev_onboard(int instance, int segment, int bus,
 
 	onboard_dev = dmi_alloc(sizeof(*onboard_dev) + strlen(name) + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!onboard_dev) {
 		printk(KERN_ERR "dmi_save_dev_onboard: out of memory.\n");
 		return;
 	}
+=======
+	if (!onboard_dev)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!onboard_dev)
 		return;
@@ -416,7 +498,11 @@ static void __init dmi_save_dev_onboard(int instance, int segment, int bus,
 static void __init dmi_save_extended_devices(const struct dmi_header *dm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u8 *d = (u8*) dm + 5;
+=======
+	const u8 *d = (u8 *) dm + 5;
+>>>>>>> v3.18
 =======
 	const u8 *d = (u8 *) dm + 5;
 >>>>>>> v3.18
@@ -431,7 +517,10 @@ static void __init dmi_save_extended_devices(const struct dmi_header *dm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init count_mem_devices(const struct dmi_header *dm, void *v)
 {
 	if (dm->type != DMI_ENTRY_MEM_DEVICE)
@@ -468,6 +557,9 @@ void __init dmi_memdev_walk(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	Process a DMI table entry. Right now all we care about are the BIOS
@@ -477,7 +569,11 @@ void __init dmi_memdev_walk(void)
 static void __init dmi_decode(const struct dmi_header *dm, void *dummy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(dm->type) {
+=======
+	switch (dm->type) {
+>>>>>>> v3.18
 =======
 	switch (dm->type) {
 >>>>>>> v3.18
@@ -562,7 +658,10 @@ static void __init dmi_format_ids(char *buf, size_t len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Check for DMI/SMBIOS headers in the system firmware image.  Any
  * SMBIOS header must start 16 bytes before the DMI header, so take a
@@ -570,6 +669,9 @@ static void __init dmi_format_ids(char *buf, size_t len)
  * 0.  If the DMI header is present, set dmi_ver accordingly (SMBIOS
  * takes precedence) and return 0.  Otherwise return 1.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init dmi_present(const u8 *buf)
 {
@@ -638,23 +740,30 @@ void __init dmi_scan_machine(void)
 		 * iounmap the space when we're done with it.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = dmi_ioremap(efi.smbios, 32);
 		if (p == NULL)
 			goto error;
 		memcpy_fromio(buf, p, 32);
 		dmi_iounmap(p, 32);
 =======
+=======
+>>>>>>> v3.18
 		p = dmi_early_remap(efi.smbios, 32);
 		if (p == NULL)
 			goto error;
 		memcpy_fromio(buf, p, 32);
 		dmi_early_unmap(p, 32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!dmi_present(buf)) {
 			dmi_available = 1;
 			goto out;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 	else {
@@ -668,6 +777,8 @@ void __init dmi_scan_machine(void)
 			goto error;
 
 =======
+=======
+>>>>>>> v3.18
 	} else if (IS_ENABLED(CONFIG_DMI_SCAN_MACHINE_NON_EFI_FALLBACK)) {
 		p = dmi_early_remap(0xF0000, 0x10000);
 		if (p == NULL)
@@ -680,6 +791,9 @@ void __init dmi_scan_machine(void)
 		 * out-of-range bytes so there is no chance of falsely
 		 * detecting an SMBIOS header.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memset(buf, 0, 16);
 		for (q = p; q < p + 0x10000; q += 16) {
@@ -687,7 +801,11 @@ void __init dmi_scan_machine(void)
 			if (!dmi_present(buf)) {
 				dmi_available = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dmi_iounmap(p, 0x10000);
+=======
+				dmi_early_unmap(p, 0x10000);
+>>>>>>> v3.18
 =======
 				dmi_early_unmap(p, 0x10000);
 >>>>>>> v3.18
@@ -696,15 +814,21 @@ void __init dmi_scan_machine(void)
 			memcpy(buf, buf + 16, 16);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dmi_iounmap(p, 0x10000);
 	}
  error:
 	printk(KERN_INFO "DMI not present or invalid.\n");
 =======
+=======
+>>>>>>> v3.18
 		dmi_early_unmap(p, 0x10000);
 	}
  error:
 	pr_info("DMI not present or invalid.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	dmi_initialized = 1;
@@ -842,7 +966,11 @@ int dmi_name_in_serial(const char *str)
 /**
  *	dmi_name_in_vendors - Check if string is in the DMI system or board vendor name
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@str: 	Case sensitive Name
+=======
+ *	@str: Case sensitive Name
+>>>>>>> v3.18
 =======
  *	@str: Case sensitive Name
 >>>>>>> v3.18
@@ -873,7 +1001,11 @@ EXPORT_SYMBOL(dmi_name_in_vendors);
  *	If @from is not %NULL, searches continue from next device.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct dmi_device * dmi_find_device(int type, const char *name,
+=======
+const struct dmi_device *dmi_find_device(int type, const char *name,
+>>>>>>> v3.18
 =======
 const struct dmi_device *dmi_find_device(int type, const char *name,
 >>>>>>> v3.18
@@ -883,7 +1015,11 @@ const struct dmi_device *dmi_find_device(int type, const char *name,
 	struct list_head *d;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for(d = head->next; d != &dmi_devices; d = d->next) {
+=======
+	for (d = head->next; d != &dmi_devices; d = d->next) {
+>>>>>>> v3.18
 =======
 	for (d = head->next; d != &dmi_devices; d = d->next) {
 >>>>>>> v3.18
@@ -987,7 +1123,11 @@ int dmi_walk(void (*decode)(const struct dmi_header *, void *),
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = ioremap(dmi_base, dmi_len);
+=======
+	buf = dmi_remap(dmi_base, dmi_len);
+>>>>>>> v3.18
 =======
 	buf = dmi_remap(dmi_base, dmi_len);
 >>>>>>> v3.18
@@ -997,7 +1137,11 @@ int dmi_walk(void (*decode)(const struct dmi_header *, void *),
 	dmi_table(buf, dmi_len, dmi_num, decode, private_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(buf);
+=======
+	dmi_unmap(buf);
+>>>>>>> v3.18
 =======
 	dmi_unmap(buf);
 >>>>>>> v3.18
@@ -1023,7 +1167,10 @@ bool dmi_match(enum dmi_field f, const char *str)
 }
 EXPORT_SYMBOL_GPL(dmi_match);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void dmi_memdev_name(u16 handle, const char **bank, const char **device)
 {
@@ -1041,4 +1188,7 @@ void dmi_memdev_name(u16 handle, const char **bank, const char **device)
 	}
 }
 EXPORT_SYMBOL_GPL(dmi_memdev_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

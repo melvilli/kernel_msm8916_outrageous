@@ -27,7 +27,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -335,7 +338,10 @@ il3945_hdl_tx(struct il_priv *il, struct il_rx_buf *rxb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Firmware will not transmit frame on passive channel, if it not yet
 	 * received some valid frame on that channel. When this error happen
@@ -349,6 +355,9 @@ il3945_hdl_tx(struct il_priv *il, struct il_rx_buf *rxb)
 		D_INFO("Stopped queues - RX waiting on passive channel\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	txq->time_stamp = jiffies;
 	info = IEEE80211_SKB_CB(txq->skbs[txq->q.read_ptr]);
@@ -473,15 +482,21 @@ il3945_is_network_packet(struct il_priv *il, struct ieee80211_hdr *header)
 	case NL80211_IFTYPE_ADHOC:	/* Header: Dest. | Source    | BSSID */
 		/* packets to our IBSS update information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ether_addr_equal(header->addr3, il->bssid);
 	case NL80211_IFTYPE_STATION:	/* Header: Dest. | AP{BSSID} | Source */
 		/* packets to our IBSS update information */
 		return ether_addr_equal(header->addr2, il->bssid);
 =======
+=======
+>>>>>>> v3.18
 		return ether_addr_equal_64bits(header->addr3, il->bssid);
 	case NL80211_IFTYPE_STATION:	/* Header: Dest. | AP{BSSID} | Source */
 		/* packets to our IBSS update information */
 		return ether_addr_equal_64bits(header->addr2, il->bssid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return 1;
@@ -516,12 +531,18 @@ il3945_pass_packet_to_mac80211(struct il_priv *il, struct il_rx_buf *rxb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(test_bit(IL_STOP_REASON_PASSIVE, &il->stop_reason))) {
 		il_wake_queues_by_reason(il, IL_STOP_REASON_PASSIVE);
 		D_INFO("Woke queues - frame received on passive channel\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb = dev_alloc_skb(SMALL_PACKET_SIZE);
 	if (!skb) {
@@ -591,7 +612,11 @@ il3945_hdl_rx(struct il_priv *il, struct il_rx_buf *rxb)
 
 	if ((unlikely(rx_stats->phy_count > 20))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		D_DROP("dsp size out of range [0,20]: %d/n",
+=======
+		D_DROP("dsp size out of range [0,20]: %d\n",
+>>>>>>> v3.18
 =======
 		D_DROP("dsp size out of range [0,20]: %d\n",
 >>>>>>> v3.18
@@ -2750,7 +2775,11 @@ static struct il_cfg il3945_abg_cfg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PCI_DEVICE_TABLE(il3945_hw_card_ids) = {
+=======
+const struct pci_device_id il3945_hw_card_ids[] = {
+>>>>>>> v3.18
 =======
 const struct pci_device_id il3945_hw_card_ids[] = {
 >>>>>>> v3.18

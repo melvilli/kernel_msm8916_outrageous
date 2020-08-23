@@ -179,6 +179,10 @@ static int tcf_em_validate(struct tcf_proto *tp,
 	int data_len = nla_len(nla) - sizeof(*em_hdr);
 	void *data = (void *) em_hdr + sizeof(*em_hdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net = dev_net(qdisc_dev(tp->q));
+>>>>>>> v3.18
 =======
 	struct net *net = dev_net(qdisc_dev(tp->q));
 >>>>>>> v3.18
@@ -232,7 +236,10 @@ static int tcf_em_validate(struct tcf_proto *tp,
 				 */
 				module_put(em->ops->owner);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				em->ops = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				err = -EAGAIN;
@@ -249,7 +256,11 @@ static int tcf_em_validate(struct tcf_proto *tp,
 
 		if (em->ops->change) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = em->ops->change(tp, data, data_len, em);
+=======
+			err = em->ops->change(net, data, data_len, em);
+>>>>>>> v3.18
 =======
 			err = em->ops->change(net, data, data_len, em);
 >>>>>>> v3.18
@@ -284,6 +295,10 @@ static int tcf_em_validate(struct tcf_proto *tp,
 	em->flags = em_hdr->flags;
 	em->datalen = data_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	em->net = net;
+>>>>>>> v3.18
 =======
 	em->net = net;
 >>>>>>> v3.18
@@ -395,7 +410,11 @@ errout:
 
 errout_abort:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcf_em_tree_destroy(tp, tree);
+=======
+	tcf_em_tree_destroy(tree);
+>>>>>>> v3.18
 =======
 	tcf_em_tree_destroy(tree);
 >>>>>>> v3.18
@@ -414,7 +433,11 @@ EXPORT_SYMBOL(tcf_em_tree_validate);
  * the ematch tree is not in use before calling this function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tcf_em_tree_destroy(struct tcf_proto *tp, struct tcf_ematch_tree *tree)
+=======
+void tcf_em_tree_destroy(struct tcf_ematch_tree *tree)
+>>>>>>> v3.18
 =======
 void tcf_em_tree_destroy(struct tcf_ematch_tree *tree)
 >>>>>>> v3.18
@@ -430,7 +453,11 @@ void tcf_em_tree_destroy(struct tcf_ematch_tree *tree)
 		if (em->ops) {
 			if (em->ops->destroy)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				em->ops->destroy(tp, em);
+=======
+				em->ops->destroy(em);
+>>>>>>> v3.18
 =======
 				em->ops->destroy(em);
 >>>>>>> v3.18
@@ -555,16 +582,22 @@ pop_stack:
 		cur_match = tcf_em_get_match(tree, match_idx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tcf_em_early_end(cur_match, res))
 			goto pop_stack;
 		else {
 =======
+=======
+>>>>>>> v3.18
 		if (tcf_em_is_inverted(cur_match))
 			res = !res;
 
 		if (tcf_em_early_end(cur_match, res)) {
 			goto pop_stack;
 		} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			match_idx++;
 			goto proceed;

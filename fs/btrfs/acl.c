@@ -36,6 +36,7 @@ struct posix_acl *btrfs_get_acl(struct inode *inode, int type)
 	struct posix_acl *acl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_POSIXACL(inode))
 		return NULL;
 
@@ -43,6 +44,8 @@ struct posix_acl *btrfs_get_acl(struct inode *inode, int type)
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -80,6 +83,7 @@ struct posix_acl *btrfs_get_acl(struct inode *inode, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btrfs_xattr_acl_get(struct dentry *dentry, const char *name,
 		void *value, size_t size, int type)
 {
@@ -106,10 +110,15 @@ static int btrfs_xattr_acl_get(struct dentry *dentry, const char *name,
  */
 static int btrfs_set_acl(struct btrfs_trans_handle *trans,
 =======
+=======
+>>>>>>> v3.18
 /*
  * Needs to be called with fs_mutex held
  */
 static int __btrfs_set_acl(struct btrfs_trans_handle *trans,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 struct inode *inode, struct posix_acl *acl, int type)
 {
@@ -117,6 +126,7 @@ static int __btrfs_set_acl(struct btrfs_trans_handle *trans,
 	const char *name;
 	char *value = NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (acl) {
 		ret = posix_acl_valid(acl);
@@ -127,21 +137,29 @@ static int __btrfs_set_acl(struct btrfs_trans_handle *trans,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		name = POSIX_ACL_XATTR_ACCESS;
 		if (acl) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ret = posix_acl_update_mode(inode,
 				&inode->i_mode, &acl);
 			if (ret)
 				return ret;
 =======
+=======
+>>>>>>> v3.18
 			ret = posix_acl_equiv_mode(acl, &inode->i_mode);
 			if (ret < 0)
 				return ret;
 			if (ret == 0)
 				acl = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		ret = 0;
@@ -179,6 +197,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btrfs_xattr_acl_set(struct dentry *dentry, const char *name,
 		const void *value, size_t size, int flags, int type)
 {
@@ -213,6 +232,11 @@ int btrfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
 	return __btrfs_set_acl(NULL, inode, acl, type);
 >>>>>>> v3.18
+=======
+int btrfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
+{
+	return __btrfs_set_acl(NULL, inode, acl, type);
+>>>>>>> v3.18
 }
 
 /*
@@ -224,7 +248,11 @@ int btrfs_init_acl(struct btrfs_trans_handle *trans,
 		   struct inode *inode, struct inode *dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct posix_acl *acl = NULL;
+=======
+	struct posix_acl *default_acl, *acl;
+>>>>>>> v3.18
 =======
 	struct posix_acl *default_acl, *acl;
 >>>>>>> v3.18
@@ -234,6 +262,7 @@ int btrfs_init_acl(struct btrfs_trans_handle *trans,
 	if (!dir)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!S_ISLNK(inode->i_mode)) {
 		if (IS_POSIXACL(dir)) {
@@ -309,6 +338,8 @@ const struct xattr_handler btrfs_xattr_acl_access_handler = {
 	.set	= btrfs_xattr_acl_set,
 };
 =======
+=======
+>>>>>>> v3.18
 	ret = posix_acl_create(dir, &inode->i_mode, &default_acl, &acl);
 	if (ret)
 		return ret;
@@ -330,4 +361,7 @@ const struct xattr_handler btrfs_xattr_acl_access_handler = {
 		cache_no_acl(inode);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

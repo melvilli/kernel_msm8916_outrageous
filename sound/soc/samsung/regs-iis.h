@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/plat-samsung/include/plat/regs-iis.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -15,8 +19,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_REGS_IIS_H
 #define __ASM_ARCH_REGS_IIS_H
+=======
+#ifndef __SAMSUNG_REGS_IIS_H__
+#define __SAMSUNG_REGS_IIS_H__
+>>>>>>> v3.18
 =======
 #ifndef __SAMSUNG_REGS_IIS_H__
 #define __SAMSUNG_REGS_IIS_H__
@@ -77,7 +86,11 @@
 #define S3C2410_IISFIFO			(0x10)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_REGS_IIS_H */
+=======
+#endif /* __SAMSUNG_REGS_IIS_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __SAMSUNG_REGS_IIS_H__ */
 >>>>>>> v3.18

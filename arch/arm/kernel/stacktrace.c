@@ -4,6 +4,10 @@
 
 #include <asm/stacktrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/traps.h>
+>>>>>>> v3.18
 =======
 #include <asm/traps.h>
 >>>>>>> v3.18
@@ -66,6 +70,10 @@ EXPORT_SYMBOL(walk_stackframe);
 struct stack_trace_data {
 	struct stack_trace *trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long last_pc;
+>>>>>>> v3.18
 =======
 	unsigned long last_pc;
 >>>>>>> v3.18
@@ -78,6 +86,10 @@ static int save_trace(struct stackframe *frame, void *d)
 	struct stack_trace_data *data = d;
 	struct stack_trace *trace = data->trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pt_regs *regs;
+>>>>>>> v3.18
 =======
 	struct pt_regs *regs;
 >>>>>>> v3.18
@@ -93,7 +105,10 @@ static int save_trace(struct stackframe *frame, void *d)
 	trace->entries[trace->nr_entries++] = addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (trace->nr_entries >= trace->max_entries)
 		return 1;
 
@@ -113,6 +128,9 @@ static int save_trace(struct stackframe *frame, void *d)
 
 	trace->entries[trace->nr_entries++] = regs->ARM_pc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return trace->nr_entries >= trace->max_entries;
 }
@@ -126,6 +144,10 @@ static noinline void __save_stack_trace(struct task_struct *tsk,
 
 	data.trace = trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data.last_pc = ULONG_MAX;
+>>>>>>> v3.18
 =======
 	data.last_pc = ULONG_MAX;
 >>>>>>> v3.18
@@ -165,7 +187,10 @@ static noinline void __save_stack_trace(struct task_struct *tsk,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void save_stack_trace_regs(struct pt_regs *regs, struct stack_trace *trace)
 {
 	struct stack_trace_data data;
@@ -185,6 +210,9 @@ void save_stack_trace_regs(struct pt_regs *regs, struct stack_trace *trace)
 		trace->entries[trace->nr_entries++] = ULONG_MAX;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void save_stack_trace_tsk(struct task_struct *tsk, struct stack_trace *trace)
 {

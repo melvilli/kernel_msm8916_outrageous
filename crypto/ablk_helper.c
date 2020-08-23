@@ -76,7 +76,11 @@ int ablk_encrypt(struct ablkcipher_request *req)
 			ablkcipher_request_ctx(req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(cryptd_req, req, sizeof(*req));
+=======
+		*cryptd_req = *req;
+>>>>>>> v3.18
 =======
 		*cryptd_req = *req;
 >>>>>>> v3.18
@@ -99,7 +103,11 @@ int ablk_decrypt(struct ablkcipher_request *req)
 			ablkcipher_request_ctx(req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(cryptd_req, req, sizeof(*req));
+=======
+		*cryptd_req = *req;
+>>>>>>> v3.18
 =======
 		*cryptd_req = *req;
 >>>>>>> v3.18

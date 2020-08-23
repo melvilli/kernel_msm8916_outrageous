@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -179,6 +187,10 @@ struct iwl_mac_data_ap {
  * @bi: beacon interval in TU
  * @bi_reciprocal: 2^32 / bi
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @beacon_template: beacon template ID
+>>>>>>> v3.18
 =======
  * @beacon_template: beacon template ID
 >>>>>>> v3.18
@@ -189,6 +201,10 @@ struct iwl_mac_data_ibss {
 	__le32 bi;
 	__le32 bi_reciprocal;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__le32 beacon_template;
+>>>>>>> v3.18
 =======
 	__le32 beacon_template;
 >>>>>>> v3.18
@@ -389,7 +405,10 @@ static inline u32 iwl_mvm_reciprocal(u32 v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IWL_NONQOS_SEQ_GET	0x1
 #define IWL_NONQOS_SEQ_SET	0x2
 struct iwl_nonqos_seq_query_cmd {
@@ -399,5 +418,8 @@ struct iwl_nonqos_seq_query_cmd {
 	__le16 reserved;
 } __packed; /* NON_QOS_TX_COUNTER_GET_SET_API_S_VER_1 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __fw_api_mac_h__ */

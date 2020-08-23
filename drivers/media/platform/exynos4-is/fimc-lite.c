@@ -2,8 +2,13 @@
  * Samsung EXYNOS FIMC-LITE (camera host interface) driver
 *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Samsung Electronics Co., Ltd.
  * Sylwester Nawrocki <s.nawrocki@samsung.com>
+=======
+ * Copyright (C) 2012 - 2013 Samsung Electronics Co., Ltd.
+ * Author: Sylwester Nawrocki <s.nawrocki@samsung.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 - 2013 Samsung Electronics Co., Ltd.
  * Author: Sylwester Nawrocki <s.nawrocki@samsung.com>
@@ -36,8 +41,14 @@
 #include <media/videobuf2-core.h>
 #include <media/videobuf2-dma-contig.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
 
+=======
+#include <media/exynos-fimc.h>
+
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include <media/exynos-fimc.h>
 
@@ -55,6 +66,10 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "YUV 4:2:2 packed, YCbYCr",
 		.fourcc		= V4L2_PIX_FMT_YUYV,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.colorspace	= V4L2_COLORSPACE_JPEG,
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_JPEG,
 >>>>>>> v3.18
@@ -67,6 +82,10 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "YUV 4:2:2 packed, CbYCrY",
 		.fourcc		= V4L2_PIX_FMT_UYVY,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.colorspace	= V4L2_COLORSPACE_JPEG,
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_JPEG,
 >>>>>>> v3.18
@@ -79,6 +98,10 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "YUV 4:2:2 packed, CrYCbY",
 		.fourcc		= V4L2_PIX_FMT_VYUY,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.colorspace	= V4L2_COLORSPACE_JPEG,
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_JPEG,
 >>>>>>> v3.18
@@ -91,6 +114,10 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "YUV 4:2:2 packed, YCrYCb",
 		.fourcc		= V4L2_PIX_FMT_YVYU,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.colorspace	= V4L2_COLORSPACE_JPEG,
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_JPEG,
 >>>>>>> v3.18
@@ -103,6 +130,10 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "RAW8 (GRBG)",
 		.fourcc		= V4L2_PIX_FMT_SGRBG8,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.colorspace	= V4L2_COLORSPACE_SRGB,
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_SRGB,
 >>>>>>> v3.18
@@ -115,7 +146,12 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "RAW10 (GRBG)",
 		.fourcc		= V4L2_PIX_FMT_SGRBG10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.depth		= { 10 },
+=======
+		.colorspace	= V4L2_COLORSPACE_SRGB,
+		.depth		= { 16 },
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_SRGB,
 		.depth		= { 16 },
@@ -128,7 +164,12 @@ static const struct fimc_fmt fimc_lite_formats[] = {
 		.name		= "RAW12 (GRBG)",
 		.fourcc		= V4L2_PIX_FMT_SGRBG12,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.depth		= { 12 },
+=======
+		.colorspace	= V4L2_COLORSPACE_SRGB,
+		.depth		= { 16 },
+>>>>>>> v3.18
 =======
 		.colorspace	= V4L2_COLORSPACE_SRGB,
 		.depth		= { 16 },
@@ -173,6 +214,7 @@ static const struct fimc_fmt *fimc_lite_find_format(const u32 *pixelformat,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Called with the media graph mutex held or @me stream_count > 0. */
 static struct v4l2_subdev *__find_remote_sensor(struct media_entity *me)
 {
@@ -199,6 +241,8 @@ static struct v4l2_subdev *__find_remote_sensor(struct media_entity *me)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int fimc_lite_hw_init(struct fimc_lite *fimc, bool isp_output)
 {
 	struct fimc_source_info *si;
@@ -221,6 +265,10 @@ static int fimc_lite_hw_init(struct fimc_lite *fimc, bool isp_output)
 	flite_hw_set_source_format(fimc, &fimc->inp_frame);
 	flite_hw_set_window_offset(fimc, &fimc->inp_frame);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	flite_hw_set_dma_buf_mask(fimc, 0);
+>>>>>>> v3.18
 =======
 	flite_hw_set_dma_buf_mask(fimc, 0);
 >>>>>>> v3.18
@@ -282,7 +330,11 @@ static int fimc_lite_reinit(struct fimc_lite *fimc, bool suspend)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fimc_pipeline_call(fimc, set_stream, &fimc->pipeline, 0);
+=======
+	return fimc_pipeline_call(&fimc->ve, set_stream, 0);
+>>>>>>> v3.18
 =======
 	return fimc_pipeline_call(&fimc->ve, set_stream, 0);
 >>>>>>> v3.18
@@ -352,9 +404,12 @@ static irqreturn_t flite_irq_handler(int irq, void *priv)
 	if ((intsrc & FLITE_REG_CISTATUS_IRQ_SRC_FRMSTART) &&
 	    test_bit(ST_FLITE_RUN, &fimc->state) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !list_empty(&fimc->active_buf_q) &&
 	    !list_empty(&fimc->pending_buf_q)) {
 =======
+=======
+>>>>>>> v3.18
 	    !list_empty(&fimc->pending_buf_q)) {
 		vbuf = fimc_lite_pending_queue_pop(fimc);
 		flite_hw_set_dma_buffer(fimc, vbuf);
@@ -364,6 +419,9 @@ static irqreturn_t flite_irq_handler(int irq, void *priv)
 	if ((intsrc & FLITE_REG_CISTATUS_IRQ_SRC_FRMEND) &&
 	    test_bit(ST_FLITE_RUN, &fimc->state) &&
 	    !list_empty(&fimc->active_buf_q)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vbuf = fimc_lite_active_queue_pop(fimc);
 		ktime_get_ts(&ts);
@@ -372,11 +430,16 @@ static irqreturn_t flite_irq_handler(int irq, void *priv)
 		tv->tv_usec = ts.tv_nsec / NSEC_PER_USEC;
 		vbuf->vb.v4l2_buf.sequence = fimc->frame_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vb2_buffer_done(&vbuf->vb, VB2_BUF_STATE_DONE);
 
 		vbuf = fimc_lite_pending_queue_pop(fimc);
 		flite_hw_set_output_addr(fimc, vbuf->paddr);
 		fimc_lite_active_queue_add(fimc, vbuf);
+=======
+		flite_hw_mask_dma_buffer(fimc, vbuf->index);
+		vb2_buffer_done(&vbuf->vb, VB2_BUF_STATE_DONE);
+>>>>>>> v3.18
 =======
 		flite_hw_mask_dma_buffer(fimc, vbuf->index);
 		vb2_buffer_done(&vbuf->vb, VB2_BUF_STATE_DONE);
@@ -400,11 +463,14 @@ static int start_streaming(struct vb2_queue *q, unsigned int count)
 {
 	struct fimc_lite *fimc = q->drv_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	fimc->frame_count = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	int ret;
 
@@ -415,6 +481,9 @@ static int start_streaming(struct vb2_queue *q, unsigned int count)
 
 	spin_unlock_irqrestore(&fimc->slock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = fimc_lite_hw_init(fimc, false);
 	if (ret) {
@@ -430,8 +499,12 @@ static int start_streaming(struct vb2_queue *q, unsigned int count)
 
 		if (!test_and_set_bit(ST_SENSOR_STREAM, &fimc->state))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fimc_pipeline_call(fimc, set_stream,
 					   &fimc->pipeline, 1);
+=======
+			fimc_pipeline_call(&fimc->ve, set_stream, 1);
+>>>>>>> v3.18
 =======
 			fimc_pipeline_call(&fimc->ve, set_stream, 1);
 >>>>>>> v3.18
@@ -443,7 +516,11 @@ static int start_streaming(struct vb2_queue *q, unsigned int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *q)
+=======
+static void stop_streaming(struct vb2_queue *q)
+>>>>>>> v3.18
 =======
 static void stop_streaming(struct vb2_queue *q)
 >>>>>>> v3.18
@@ -452,9 +529,15 @@ static void stop_streaming(struct vb2_queue *q)
 
 	if (!fimc_lite_active(fimc))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
 
 	return fimc_lite_stop_capture(fimc, false);
+=======
+		return;
+
+	fimc_lite_stop_capture(fimc, false);
+>>>>>>> v3.18
 =======
 		return;
 
@@ -512,7 +595,11 @@ static int buffer_prepare(struct vb2_buffer *vb)
 
 		if (vb2_plane_size(vb, i) < size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			v4l2_err(&fimc->vfd,
+=======
+			v4l2_err(&fimc->ve.vdev,
+>>>>>>> v3.18
 =======
 			v4l2_err(&fimc->ve.vdev,
 >>>>>>> v3.18
@@ -537,11 +624,14 @@ static void buffer_queue(struct vb2_buffer *vb)
 	buf->paddr = vb2_dma_contig_plane_dma_addr(vb, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(ST_FLITE_SUSPENDED, &fimc->state) &&
 	    !test_bit(ST_FLITE_STREAM, &fimc->state) &&
 	    list_empty(&fimc->active_buf_q)) {
 		flite_hw_set_output_addr(fimc, buf->paddr);
 =======
+=======
+>>>>>>> v3.18
 	buf->index = fimc->buf_index++;
 	if (fimc->buf_index >= fimc->reqbufs_count)
 		fimc->buf_index = 0;
@@ -550,6 +640,9 @@ static void buffer_queue(struct vb2_buffer *vb)
 	    !test_bit(ST_FLITE_STREAM, &fimc->state) &&
 	    list_empty(&fimc->active_buf_q)) {
 		flite_hw_set_dma_buffer(fimc, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fimc_lite_active_queue_add(fimc, buf);
 	} else {
@@ -564,8 +657,12 @@ static void buffer_queue(struct vb2_buffer *vb)
 
 		if (!test_and_set_bit(ST_SENSOR_STREAM, &fimc->state))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fimc_pipeline_call(fimc, set_stream,
 					   &fimc->pipeline, 1);
+=======
+			fimc_pipeline_call(&fimc->ve, set_stream, 1);
+>>>>>>> v3.18
 =======
 			fimc_pipeline_call(&fimc->ve, set_stream, 1);
 >>>>>>> v3.18
@@ -597,11 +694,17 @@ static int fimc_lite_open(struct file *file)
 {
 	struct fimc_lite *fimc = video_drvdata(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct media_entity *me = &fimc->vfd.entity;
 	int ret;
 
 	mutex_lock(&me->parent->graph_mutex);
 
+=======
+	struct media_entity *me = &fimc->ve.vdev.entity;
+	int ret;
+
+>>>>>>> v3.18
 =======
 	struct media_entity *me = &fimc->ve.vdev.entity;
 	int ret;
@@ -627,12 +730,15 @@ static int fimc_lite_open(struct file *file)
 		goto unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = fimc_pipeline_call(fimc, open, &fimc->pipeline,
 						me, true);
 	if (!ret) {
 		fimc_lite_clear_event_counters(fimc);
 		fimc->ref_count++;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&me->parent->graph_mutex);
 
 	ret = fimc_pipeline_call(&fimc->ve, open, me, true);
@@ -645,6 +751,9 @@ static int fimc_lite_open(struct file *file)
 
 	if (!ret) {
 		fimc_lite_clear_event_counters(fimc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto unlock;
 	}
@@ -656,7 +765,10 @@ err_pm:
 unlock:
 	mutex_unlock(&fimc->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&me->parent->graph_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -666,6 +778,10 @@ static int fimc_lite_release(struct file *file)
 {
 	struct fimc_lite *fimc = video_drvdata(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct media_entity *entity = &fimc->ve.vdev.entity;
+>>>>>>> v3.18
 =======
 	struct media_entity *entity = &fimc->ve.vdev.entity;
 >>>>>>> v3.18
@@ -675,6 +791,7 @@ static int fimc_lite_release(struct file *file)
 	if (v4l2_fh_is_singular_file(file) &&
 	    atomic_read(&fimc->out_path) == FIMC_IO_DMA) {
 		if (fimc->streaming) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			media_entity_pipeline_stop(&fimc->vfd.entity);
 			fimc->streaming = false;
@@ -687,6 +804,8 @@ static int fimc_lite_release(struct file *file)
 
 	vb2_fop_release(file);
 =======
+=======
+>>>>>>> v3.18
 			media_entity_pipeline_stop(entity);
 			fimc->streaming = false;
 		}
@@ -700,6 +819,9 @@ static int fimc_lite_release(struct file *file)
 	}
 
 	_vb2_fop_release(file, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pm_runtime_put(&fimc->pdev->dev);
 	clear_bit(ST_FLITE_SUSPENDED, &fimc->state);
@@ -721,6 +843,7 @@ static const struct v4l2_file_operations fimc_lite_fops = {
  * Format and crop negotiation helpers
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct fimc_fmt *fimc_lite_try_format(struct fimc_lite *fimc,
 					u32 *width, u32 *height,
@@ -754,6 +877,8 @@ static const struct fimc_fmt *fimc_lite_try_format(struct fimc_lite *fimc,
 	v4l2_dbg(1, debug, &fimc->subdev, "code: 0x%x, %dx%d\n",
 		 code ? *code : 0, *width, *height);
 =======
+=======
+>>>>>>> v3.18
 static const struct fimc_fmt *fimc_lite_subdev_try_fmt(struct fimc_lite *fimc,
 					struct v4l2_subdev_fh *fh,
 					struct v4l2_subdev_format *format)
@@ -802,6 +927,9 @@ static const struct fimc_fmt *fimc_lite_subdev_try_fmt(struct fimc_lite *fimc,
 
 	v4l2_dbg(1, debug, &fimc->subdev, "code: %#x (%d), %dx%d\n",
 		 mf->code, mf->colorspace, mf->width, mf->height);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return fmt;
@@ -848,6 +976,7 @@ static void fimc_lite_try_compose(struct fimc_lite *fimc, struct v4l2_rect *r)
  * Video node ioctl operations
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fimc_vidioc_querycap_capture(struct file *file, void *priv,
 					struct v4l2_capability *cap)
 {
@@ -856,6 +985,8 @@ static int fimc_vidioc_querycap_capture(struct file *file, void *priv,
 	cap->card[0] = 0;
 	cap->capabilities = V4L2_CAP_STREAMING;
 =======
+=======
+>>>>>>> v3.18
 static int fimc_lite_querycap(struct file *file, void *priv,
 					struct v4l2_capability *cap)
 {
@@ -868,6 +999,9 @@ static int fimc_lite_querycap(struct file *file, void *priv,
 
 	cap->device_caps = V4L2_CAP_STREAMING;
 	cap->capabilities = cap->device_caps | V4L2_CAP_DEVICE_CAPS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -905,7 +1039,11 @@ static int fimc_lite_g_fmt_mplane(struct file *file, void *fh,
 	pixm->height = frame->f_height;
 	pixm->field = V4L2_FIELD_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pixm->colorspace = V4L2_COLORSPACE_JPEG;
+=======
+	pixm->colorspace = fmt->colorspace;
+>>>>>>> v3.18
 =======
 	pixm->colorspace = fmt->colorspace;
 >>>>>>> v3.18
@@ -952,7 +1090,11 @@ static int fimc_lite_try_fmt(struct fimc_lite *fimc,
 	pixm->num_planes = fmt->memplanes;
 	pixm->pixelformat = fmt->fourcc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pixm->colorspace = V4L2_COLORSPACE_JPEG;
+=======
+	pixm->colorspace = fmt->colorspace;
+>>>>>>> v3.18
 =======
 	pixm->colorspace = fmt->colorspace;
 >>>>>>> v3.18
@@ -1020,7 +1162,11 @@ static int fimc_pipeline_validate(struct fimc_lite *fimc)
 		}
 		/* Retrieve format at the source pad */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pad = media_entity_remote_source(pad);
+=======
+		pad = media_entity_remote_pad(pad);
+>>>>>>> v3.18
 =======
 		pad = media_entity_remote_pad(pad);
 >>>>>>> v3.18
@@ -1048,8 +1194,12 @@ static int fimc_lite_streamon(struct file *file, void *priv,
 {
 	struct fimc_lite *fimc = video_drvdata(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct media_entity *entity = &fimc->vfd.entity;
 	struct fimc_pipeline *p = &fimc->pipeline;
+=======
+	struct media_entity *entity = &fimc->ve.vdev.entity;
+>>>>>>> v3.18
 =======
 	struct media_entity *entity = &fimc->ve.vdev.entity;
 >>>>>>> v3.18
@@ -1059,7 +1209,11 @@ static int fimc_lite_streamon(struct file *file, void *priv,
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = media_entity_pipeline_start(entity, p->m_pipeline);
+=======
+	ret = media_entity_pipeline_start(entity, &fimc->ve.pipe->mp);
+>>>>>>> v3.18
 =======
 	ret = media_entity_pipeline_start(entity, &fimc->ve.pipe->mp);
 >>>>>>> v3.18
@@ -1071,7 +1225,11 @@ static int fimc_lite_streamon(struct file *file, void *priv,
 		goto err_p_stop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc->sensor = __find_remote_sensor(&fimc->subdev.entity);
+=======
+	fimc->sensor = fimc_find_remote_sensor(&fimc->subdev.entity);
+>>>>>>> v3.18
 =======
 	fimc->sensor = fimc_find_remote_sensor(&fimc->subdev.entity);
 >>>>>>> v3.18
@@ -1098,7 +1256,11 @@ static int fimc_lite_streamoff(struct file *file, void *priv,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	media_entity_pipeline_stop(&fimc->vfd.entity);
+=======
+	media_entity_pipeline_stop(&fimc->ve.vdev.entity);
+>>>>>>> v3.18
 =======
 	media_entity_pipeline_stop(&fimc->ve.vdev.entity);
 >>>>>>> v3.18
@@ -1192,7 +1354,11 @@ static int fimc_lite_s_selection(struct file *file, void *fh,
 
 static const struct v4l2_ioctl_ops fimc_lite_ioctl_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_querycap		= fimc_vidioc_querycap_capture,
+=======
+	.vidioc_querycap		= fimc_lite_querycap,
+>>>>>>> v3.18
 =======
 	.vidioc_querycap		= fimc_lite_querycap,
 >>>>>>> v3.18
@@ -1230,8 +1396,11 @@ static int fimc_lite_link_setup(struct media_entity *entity,
 		 flags, fimc->source_subdev_grp_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&fimc->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (local->index) {
@@ -1276,7 +1445,10 @@ static int fimc_lite_link_setup(struct media_entity *entity,
 	mb();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&fimc->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1300,7 +1472,10 @@ static int fimc_lite_subdev_enum_mbus_code(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct v4l2_mbus_framefmt *__fimc_lite_subdev_get_try_fmt(
 			struct v4l2_subdev_fh *fh, unsigned int pad)
 {
@@ -1310,6 +1485,9 @@ static struct v4l2_mbus_framefmt *__fimc_lite_subdev_get_try_fmt(
 	return v4l2_subdev_get_try_format(fh, pad);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fimc_lite_subdev_get_fmt(struct v4l2_subdev *sd,
 				    struct v4l2_subdev_fh *fh,
@@ -1321,6 +1499,7 @@ static int fimc_lite_subdev_get_fmt(struct v4l2_subdev *sd,
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mf = v4l2_subdev_get_try_format(fh, fmt->pad);
 		fmt->format = *mf;
 		return 0;
@@ -1329,6 +1508,8 @@ static int fimc_lite_subdev_get_fmt(struct v4l2_subdev *sd,
 
 	mutex_lock(&fimc->lock);
 =======
+=======
+>>>>>>> v3.18
 		mf = __fimc_lite_subdev_get_try_fmt(fh, fmt->pad);
 		fmt->format = *mf;
 		return 0;
@@ -1336,6 +1517,9 @@ static int fimc_lite_subdev_get_fmt(struct v4l2_subdev *sd,
 
 	mutex_lock(&fimc->lock);
 	mf->colorspace = f->fmt->colorspace;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mf->code = f->fmt->mbus_code;
 
@@ -1366,7 +1550,10 @@ static int fimc_lite_subdev_set_fmt(struct v4l2_subdev *sd,
 		 fmt->pad, mf->code, mf->width, mf->height);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mf->colorspace = V4L2_COLORSPACE_JPEG;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&fimc->lock);
@@ -1380,6 +1567,7 @@ static int fimc_lite_subdev_set_fmt(struct v4l2_subdev *sd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ffmt = fimc_lite_try_format(fimc, &mf->width, &mf->height,
 				    &mf->code, NULL, fmt->pad);
 
@@ -1387,6 +1575,8 @@ static int fimc_lite_subdev_set_fmt(struct v4l2_subdev *sd,
 		mf = v4l2_subdev_get_try_format(fh, fmt->pad);
 		*mf = fmt->format;
 =======
+=======
+>>>>>>> v3.18
 	ffmt = fimc_lite_subdev_try_fmt(fimc, fh, fmt);
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
@@ -1401,6 +1591,9 @@ static int fimc_lite_subdev_set_fmt(struct v4l2_subdev *sd,
 			*src_fmt = *mf;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&fimc->lock);
 		return 0;
@@ -1420,11 +1613,14 @@ static int fimc_lite_subdev_set_fmt(struct v4l2_subdev *sd,
 		source->f_width = mf->width;
 		source->f_height = mf->height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/* Allow changing format only on sink pad */
 		mf->code = sink->fmt->mbus_code;
 		mf->width = sink->rect.width;
 		mf->height = sink->rect.height;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1516,7 +1712,11 @@ static int fimc_lite_subdev_s_stream(struct v4l2_subdev *sd, int on)
 	 * so there is no need to take the media graph mutex here.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc->sensor = __find_remote_sensor(&sd->entity);
+=======
+	fimc->sensor = fimc_find_remote_sensor(&sd->entity);
+>>>>>>> v3.18
 =======
 	fimc->sensor = fimc_find_remote_sensor(&sd->entity);
 >>>>>>> v3.18
@@ -1565,6 +1765,7 @@ static int fimc_lite_subdev_registered(struct v4l2_subdev *sd)
 	struct fimc_lite *fimc = v4l2_get_subdevdata(sd);
 	struct vb2_queue *q = &fimc->vb_queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct video_device *vfd = &fimc->vfd;
 	int ret;
 
@@ -1573,10 +1774,15 @@ static int fimc_lite_subdev_registered(struct v4l2_subdev *sd)
 	fimc->inp_frame.fmt = &fimc_lite_formats[0];
 	fimc->out_frame.fmt = &fimc_lite_formats[0];
 =======
+=======
+>>>>>>> v3.18
 	struct video_device *vfd = &fimc->ve.vdev;
 	int ret;
 
 	memset(vfd, 0, sizeof(*vfd));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_set(&fimc->out_path, FIMC_IO_DMA);
 
@@ -1602,7 +1808,11 @@ static int fimc_lite_subdev_registered(struct v4l2_subdev *sd)
 	q->buf_struct_size = sizeof(struct flite_buffer);
 	q->drv_priv = fimc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 =======
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 >>>>>>> v3.18
@@ -1619,7 +1829,11 @@ static int fimc_lite_subdev_registered(struct v4l2_subdev *sd)
 
 	video_set_drvdata(vfd, fimc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc->pipeline_ops = v4l2_get_subdev_hostdata(sd);
+=======
+	fimc->ve.pipe = v4l2_get_subdev_hostdata(sd);
+>>>>>>> v3.18
 =======
 	fimc->ve.pipe = v4l2_get_subdev_hostdata(sd);
 >>>>>>> v3.18
@@ -1628,7 +1842,11 @@ static int fimc_lite_subdev_registered(struct v4l2_subdev *sd)
 	if (ret < 0) {
 		media_entity_cleanup(&vfd->entity);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc->pipeline_ops = NULL;
+=======
+		fimc->ve.pipe = NULL;
+>>>>>>> v3.18
 =======
 		fimc->ve.pipe = NULL;
 >>>>>>> v3.18
@@ -1648,12 +1866,15 @@ static void fimc_lite_subdev_unregistered(struct v4l2_subdev *sd)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (video_is_registered(&fimc->vfd)) {
 		video_unregister_device(&fimc->vfd);
 		media_entity_cleanup(&fimc->vfd.entity);
 		fimc->pipeline_ops = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&fimc->lock);
 
 	if (video_is_registered(&fimc->ve.vdev)) {
@@ -1663,6 +1884,9 @@ static void fimc_lite_subdev_unregistered(struct v4l2_subdev *sd)
 	}
 
 	mutex_unlock(&fimc->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1714,7 +1938,10 @@ static const struct v4l2_ctrl_config fimc_lite_ctrl = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void fimc_lite_set_default_config(struct fimc_lite *fimc)
 {
 	struct flite_frame *sink = &fimc->inp_frame;
@@ -1732,6 +1959,9 @@ static void fimc_lite_set_default_config(struct fimc_lite *fimc)
 	*source = *sink;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fimc_lite_create_capture_subdev(struct fimc_lite *fimc)
 {
@@ -1781,7 +2011,11 @@ static void fimc_lite_unregister_capture_subdev(struct fimc_lite *fimc)
 static void fimc_lite_clk_put(struct fimc_lite *fimc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(fimc->clock))
+=======
+	if (IS_ERR(fimc->clock))
+>>>>>>> v3.18
 =======
 	if (IS_ERR(fimc->clock))
 >>>>>>> v3.18
@@ -1790,7 +2024,11 @@ static void fimc_lite_clk_put(struct fimc_lite *fimc)
 	clk_unprepare(fimc->clock);
 	clk_put(fimc->clock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc->clock = NULL;
+=======
+	fimc->clock = ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 =======
 	fimc->clock = ERR_PTR(-EINVAL);
 >>>>>>> v3.18
@@ -1808,7 +2046,11 @@ static int fimc_lite_clk_get(struct fimc_lite *fimc)
 	if (ret < 0) {
 		clk_put(fimc->clock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc->clock = NULL;
+=======
+		fimc->clock = ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 =======
 		fimc->clock = ERR_PTR(-EINVAL);
 >>>>>>> v3.18
@@ -1828,6 +2070,12 @@ static int fimc_lite_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!dev->of_node)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!dev->of_node)
 		return -ENODEV;
@@ -1837,6 +2085,7 @@ static int fimc_lite_probe(struct platform_device *pdev)
 	if (!fimc)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev->of_node) {
 		of_id = of_match_node(flite_of_match, dev->of_node);
@@ -1851,6 +2100,8 @@ static int fimc_lite_probe(struct platform_device *pdev)
 	if (!drv_data || fimc->index < 0 || fimc->index >= FIMC_LITE_MAX_DEVS)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	of_id = of_match_node(flite_of_match, dev->of_node);
 	if (of_id)
 		drv_data = (struct flite_drvdata *)of_id->data;
@@ -1862,6 +2113,9 @@ static int fimc_lite_probe(struct platform_device *pdev)
 					dev->of_node->full_name);
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fimc->dd = drv_data;
@@ -1891,7 +2145,11 @@ static int fimc_lite_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(dev, "Failed to install irq (%d)\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_clk;
+=======
+		goto err_clk_put;
+>>>>>>> v3.18
 =======
 		goto err_clk_put;
 >>>>>>> v3.18
@@ -1901,6 +2159,7 @@ static int fimc_lite_probe(struct platform_device *pdev)
 	ret = fimc_lite_create_capture_subdev(fimc);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_clk;
 
 	platform_set_drvdata(pdev, fimc);
@@ -1909,6 +2168,8 @@ static int fimc_lite_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto err_sd;
 =======
+=======
+>>>>>>> v3.18
 		goto err_clk_put;
 
 	platform_set_drvdata(pdev, fimc);
@@ -1919,25 +2180,35 @@ static int fimc_lite_probe(struct platform_device *pdev)
 		if (ret < 0)
 			goto err_sd;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fimc->alloc_ctx = vb2_dma_contig_init_ctx(dev);
 	if (IS_ERR(fimc->alloc_ctx)) {
 		ret = PTR_ERR(fimc->alloc_ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_pm;
 	}
 	pm_runtime_put(dev);
 =======
+=======
+>>>>>>> v3.18
 		goto err_clk_dis;
 	}
 
 	fimc_lite_set_default_config(fimc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(dev, "FIMC-LITE.%d registered successfully\n",
 		fimc->index);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_pm:
 	pm_runtime_put(dev);
@@ -1945,6 +2216,8 @@ err_sd:
 	fimc_lite_unregister_capture_subdev(fimc);
 err_clk:
 =======
+=======
+>>>>>>> v3.18
 
 err_clk_dis:
 	if (!pm_runtime_enabled(dev))
@@ -1952,12 +2225,19 @@ err_clk_dis:
 err_sd:
 	fimc_lite_unregister_capture_subdev(fimc);
 err_clk_put:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fimc_lite_clk_put(fimc);
 	return ret;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_RUNTIME
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_RUNTIME
 >>>>>>> v3.18
@@ -1977,6 +2257,10 @@ static int fimc_lite_runtime_suspend(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -2003,8 +2287,13 @@ static int fimc_lite_resume(struct device *dev)
 
 	INIT_LIST_HEAD(&fimc->active_buf_q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_pipeline_call(fimc, open, &fimc->pipeline,
 			   &fimc->vfd.entity, false);
+=======
+	fimc_pipeline_call(&fimc->ve, open,
+			   &fimc->ve.vdev.entity, false);
+>>>>>>> v3.18
 =======
 	fimc_pipeline_call(&fimc->ve, open,
 			   &fimc->ve.vdev.entity, false);
@@ -2035,7 +2324,11 @@ static int fimc_lite_suspend(struct device *dev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fimc_pipeline_call(fimc, close, &fimc->pipeline);
+=======
+	return fimc_pipeline_call(&fimc->ve, close);
+>>>>>>> v3.18
 =======
 	return fimc_pipeline_call(&fimc->ve, close);
 >>>>>>> v3.18
@@ -2071,6 +2364,7 @@ static struct flite_drvdata fimc_lite_drvdata_exynos4 = {
 	.win_hor_offs_align	= 2,
 	.out_hor_offs_align	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct platform_device_id fimc_lite_driver_ids[] = {
@@ -2082,6 +2376,8 @@ static struct platform_device_id fimc_lite_driver_ids[] = {
 };
 MODULE_DEVICE_TABLE(platform, fimc_lite_driver_ids);
 =======
+=======
+>>>>>>> v3.18
 	.max_dma_bufs		= 1,
 	.num_instances		= 2,
 };
@@ -2096,6 +2392,9 @@ static struct flite_drvdata fimc_lite_drvdata_exynos5 = {
 	.max_dma_bufs		= 32,
 	.num_instances		= 3,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct of_device_id flite_of_match[] = {
@@ -2104,11 +2403,17 @@ static const struct of_device_id flite_of_match[] = {
 		.data = &fimc_lite_drvdata_exynos4,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.compatible = "samsung,exynos5250-fimc-lite",
 		.data = &fimc_lite_drvdata_exynos5,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ /* sentinel */ },
 };
@@ -2118,7 +2423,10 @@ static struct platform_driver fimc_lite_driver = {
 	.probe		= fimc_lite_probe,
 	.remove		= fimc_lite_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.id_table	= fimc_lite_driver_ids,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

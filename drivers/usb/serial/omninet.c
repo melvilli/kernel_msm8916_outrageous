@@ -14,7 +14,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -43,7 +46,10 @@ static int  omninet_write(struct tty_struct *tty, struct usb_serial_port *port,
 static int  omninet_write_room(struct tty_struct *tty);
 static void omninet_disconnect(struct usb_serial *serial);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int omninet_attach(struct usb_serial *serial);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int omninet_port_probe(struct usb_serial_port *port);
@@ -65,7 +71,10 @@ static struct usb_serial_driver zyxel_omninet_device = {
 	.id_table =		id_table,
 	.num_ports =		1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attach =		omninet_attach,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe =		omninet_port_probe,
@@ -117,6 +126,7 @@ struct omninet_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int omninet_attach(struct usb_serial *serial)
 {
 	/* The second bulk-out endpoint is used for writing. */
@@ -128,6 +138,8 @@ static int omninet_attach(struct usb_serial *serial)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int omninet_port_probe(struct usb_serial_port *port)
@@ -156,13 +168,19 @@ static int omninet_port_remove(struct usb_serial_port *port)
 static int omninet_open(struct tty_struct *tty, struct usb_serial_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct usb_serial	*serial = port->serial;
 	struct usb_serial_port	*wport;
 
 	wport = serial->port[1];
 	tty_port_tty_set(&wport->port, tty);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return usb_serial_generic_open(tty, port);
 }

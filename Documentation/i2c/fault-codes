@@ -65,9 +65,12 @@ EINVAL
 	specific fault code when you can.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	One example would be a driver trying an SMBus Block Write
 	with block size outside the range of 1-32 bytes.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EIO

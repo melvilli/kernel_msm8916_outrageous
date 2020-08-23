@@ -65,11 +65,17 @@ real_start:
 
 	mts	rmsr, r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Disable stack protection from bootloader */
 	mts	rslr, r0
 	addi	r8, r0, 0xFFFFFFFF
 	mts	rshr, r8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * According to Xilinx, msrclr instruction behaves like 'mfs rX,rpc'
@@ -184,7 +190,11 @@ _invalidate:
 	addik	r12, r0, _end
 	rsub	r12, r3, r12
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addik	r12, r12, CONFIG_KERNEL_PAD /* that's the pad */
+=======
+	addik	r12, r12, CONFIG_LOWMEM_SIZE >> PTE_SHIFT /* that's the pad */
+>>>>>>> v3.18
 =======
 	addik	r12, r12, CONFIG_LOWMEM_SIZE >> PTE_SHIFT /* that's the pad */
 >>>>>>> v3.18
@@ -213,7 +223,11 @@ GT16: /* TLB0 is 16MB */
 	addik	r9, r0, 0x1000000 /* means TLB0 is 16MB */
 TLB1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* must be used r2 because of substract if failed */
+=======
+	/* must be used r2 because of subtract if failed */
+>>>>>>> v3.18
 =======
 	/* must be used r2 because of subtract if failed */
 >>>>>>> v3.18

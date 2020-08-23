@@ -1,6 +1,11 @@
 config UNICORE32
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT
+	select ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_PARPORT
 	select ARCH_MIGHT_HAVE_PC_SERIO
@@ -55,9 +60,12 @@ config ARCH_HAS_ILOG2_U64
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_HAS_CPUFREQ
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config GENERIC_HWEIGHT
@@ -94,7 +102,10 @@ config ARCH_PUV3
 	select HAVE_CLK
 	select ARCH_REQUIRE_GPIOLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -208,9 +219,13 @@ menu "Power management options"
 source "kernel/power/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if ARCH_HAS_CPUFREQ
 source "drivers/cpufreq/Kconfig"
 endif
+=======
+source "drivers/cpufreq/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/cpufreq/Kconfig"
 >>>>>>> v3.18

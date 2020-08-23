@@ -34,18 +34,24 @@
 #include "drmP.h"
 #include "drm/drm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "qxl_drv.h"
 
 extern int qxl_max_ioctls;
 static DEFINE_PCI_DEVICE_TABLE(pciidlist) = {
 =======
+=======
+>>>>>>> v3.18
 #include "drm_crtc_helper.h"
 #include "qxl_drv.h"
 #include "qxl_object.h"
 
 extern int qxl_max_ioctls;
 static const struct pci_device_id pciidlist[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x1b36, 0x100, PCI_ANY_ID, PCI_ANY_ID, PCI_CLASS_DISPLAY_VGA << 8,
 	  0xffff00, 0 },
@@ -57,6 +63,10 @@ MODULE_DEVICE_TABLE(pci, pciidlist);
 
 static int qxl_modeset = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int qxl_num_crtc = 4;
+>>>>>>> v3.18
 =======
 int qxl_num_crtc = 4;
 >>>>>>> v3.18
@@ -65,6 +75,12 @@ MODULE_PARM_DESC(modeset, "Disable/Enable modesetting");
 module_param_named(modeset, qxl_modeset, int, 0400);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_PARM_DESC(num_heads, "Number of virtual crtcs to expose (default 4)");
+module_param_named(num_heads, qxl_num_crtc, int, 0400);
+
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(num_heads, "Number of virtual crtcs to expose (default 4)");
 module_param_named(num_heads, qxl_num_crtc, int, 0400);
@@ -93,6 +109,7 @@ qxl_pci_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_driver qxl_pci_driver = {
 	 .name = DRIVER_NAME,
 	 .id_table = pciidlist,
@@ -102,12 +119,15 @@ static struct pci_driver qxl_pci_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct file_operations qxl_fops = {
 	.owner = THIS_MODULE,
 	.open = drm_open,
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 	.poll = drm_poll,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.fasync = drm_fasync,
 	.mmap = qxl_mmap,
@@ -124,6 +144,8 @@ static struct drm_driver qxl_driver = {
 	.dumb_map_offset = qxl_mode_dumb_mmap,
 	.dumb_destroy = qxl_mode_dumb_destroy,
 =======
+=======
+>>>>>>> v3.18
 	.read = drm_read,
 	.mmap = qxl_mmap,
 };
@@ -280,14 +302,20 @@ static struct drm_driver qxl_driver = {
 	.dumb_create = qxl_mode_dumb_create,
 	.dumb_map_offset = qxl_mode_dumb_mmap,
 	.dumb_destroy = drm_gem_dumb_destroy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_DEBUG_FS)
 	.debugfs_init = qxl_debugfs_init,
 	.debugfs_cleanup = qxl_debugfs_takedown,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gem_init_object = qxl_gem_object_init,
 =======
+=======
+>>>>>>> v3.18
 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
 	.gem_prime_export = drm_gem_prime_export,
@@ -299,6 +327,9 @@ static struct drm_driver qxl_driver = {
 	.gem_prime_vmap = qxl_gem_prime_vmap,
 	.gem_prime_vunmap = qxl_gem_prime_vunmap,
 	.gem_prime_mmap = qxl_gem_prime_mmap,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.gem_free_object = qxl_gem_object_free,
 	.gem_open_object = qxl_gem_object_open,

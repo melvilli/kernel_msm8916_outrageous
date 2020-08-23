@@ -125,9 +125,12 @@ static int lpc32xx_pwm_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lpc32xx->base = devm_ioremap_resource(&pdev->dev, res);
@@ -175,7 +178,12 @@ static struct platform_driver lpc32xx_pwm_driver = {
 	.driver = {
 		.name = "lpc32xx-pwm",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(lpc32xx_pwm_dt_ids),
+=======
+		.owner = THIS_MODULE,
+		.of_match_table = lpc32xx_pwm_dt_ids,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 		.of_match_table = lpc32xx_pwm_dt_ids,

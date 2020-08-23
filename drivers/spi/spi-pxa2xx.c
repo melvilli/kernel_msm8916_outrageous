@@ -28,7 +28,10 @@
 #include <linux/spi/pxa2xx_spi.h>
 #include <linux/spi/spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/workqueue.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -73,6 +76,11 @@ MODULE_ALIAS("platform:pxa2xx-spi");
 
 /* Offset from drv_data->lpss_base */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GENERAL_REG		0x08
+#define GENERAL_REG_RXTO_HOLDOFF_DISABLE BIT(24)
+>>>>>>> v3.18
 =======
 #define GENERAL_REG		0x08
 #define GENERAL_REG_RXTO_HOLDOFF_DISABLE BIT(24)
@@ -126,6 +134,10 @@ static void lpss_ssp_setup(struct driver_data *drv_data)
 	orig = readl(drv_data->ioaddr + offset + SPI_CS_CONTROL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Test SPI_CS_CONTROL_SW_MODE bit enabling */
+>>>>>>> v3.18
 =======
 	/* Test SPI_CS_CONTROL_SW_MODE bit enabling */
 >>>>>>> v3.18
@@ -138,11 +150,14 @@ static void lpss_ssp_setup(struct driver_data *drv_data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value &= ~SPI_CS_CONTROL_SW_MODE;
 	writel(value, drv_data->ioaddr + offset + SPI_CS_CONTROL);
 	value = readl(drv_data->ioaddr + offset + SPI_CS_CONTROL);
 	if (value != orig) {
 =======
+=======
+>>>>>>> v3.18
 	orig = readl(drv_data->ioaddr + offset + SPI_CS_CONTROL);
 
 	/* Test SPI_CS_CONTROL_SW_MODE bit disabling */
@@ -150,6 +165,9 @@ static void lpss_ssp_setup(struct driver_data *drv_data)
 	writel(value, drv_data->ioaddr + offset + SPI_CS_CONTROL);
 	value = readl(drv_data->ioaddr + offset + SPI_CS_CONTROL);
 	if (value != (orig & ~SPI_CS_CONTROL_SW_MODE)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		offset = 0x800;
 		goto detection_done;
@@ -165,9 +183,12 @@ detection_done:
 
 	/* Enable multiblock DMA transfers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drv_data->master_info->enable_dma)
 		__lpss_ssp_write_priv(drv_data, SSP_REG, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (drv_data->master_info->enable_dma) {
 		__lpss_ssp_write_priv(drv_data, SSP_REG, 1);
 
@@ -175,6 +196,9 @@ detection_done:
 		value |= GENERAL_REG_RXTO_HOLDOFF_DISABLE;
 		__lpss_ssp_write_priv(drv_data, GENERAL_REG, value);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -388,8 +412,12 @@ static void giveback(struct driver_data *drv_data)
 	drv_data->cur_transfer = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_transfer = list_entry(msg->transfers.prev,
 					struct spi_transfer,
+=======
+	last_transfer = list_last_entry(&msg->transfers, struct spi_transfer,
+>>>>>>> v3.18
 =======
 	last_transfer = list_last_entry(&msg->transfers, struct spi_transfer,
 >>>>>>> v3.18
@@ -430,8 +458,13 @@ static void giveback(struct driver_data *drv_data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv_data->cur_chip = NULL;
 	spi_finalize_current_message(drv_data->master);
+=======
+	spi_finalize_current_message(drv_data->master);
+	drv_data->cur_chip = NULL;
+>>>>>>> v3.18
 =======
 	spi_finalize_current_message(drv_data->master);
 	drv_data->cur_chip = NULL;
@@ -581,9 +614,12 @@ static irqreturn_t ssp_int(int irq, void *dev_id)
 		return IRQ_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sccr1_reg = read_SSCR1(reg);
 	status = read_SSSR(reg);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If the device is not yet in RPM suspended state and we get an
 	 * interrupt that is meant for another device, check if status bits
@@ -595,6 +631,9 @@ static irqreturn_t ssp_int(int irq, void *dev_id)
 		return IRQ_NONE;
 
 	sccr1_reg = read_SSCR1(reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Ignore possible writes if we don't need to write */
@@ -602,10 +641,13 @@ static irqreturn_t ssp_int(int irq, void *dev_id)
 		mask &= ~SSSR_TFS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Ignore RX timeout interrupt if it is disabled */
 	if (!(sccr1_reg & SSCR1_TINTE))
 		mask &= ~SSSR_TINT;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!(status & mask))
@@ -620,8 +662,13 @@ static irqreturn_t ssp_int(int irq, void *dev_id)
 		write_SSSR_CS(drv_data, drv_data->clear_sr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&drv_data->pdev->dev, "bad message state "
 			"in interrupt handler\n");
+=======
+		dev_err(&drv_data->pdev->dev,
+			"bad message state in interrupt handler\n");
+>>>>>>> v3.18
 =======
 		dev_err(&drv_data->pdev->dev,
 			"bad message state in interrupt handler\n");
@@ -703,8 +750,13 @@ static void pump_transfers(unsigned long data)
 				|| transfer->rx_dma || transfer->tx_dma) {
 			dev_err(&drv_data->pdev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"pump_transfers: mapped transfer length "
 				"of %u is greater than %d\n",
+=======
+				"pump_transfers: mapped transfer length of "
+				"%u is greater than %d\n",
+>>>>>>> v3.18
 =======
 				"pump_transfers: mapped transfer length of "
 				"%u is greater than %d\n",
@@ -717,16 +769,22 @@ static void pump_transfers(unsigned long data)
 
 		/* warn ... we force this to PIO mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (printk_ratelimit())
 			dev_warn(&message->spi->dev, "pump_transfers: "
 				"DMA disabled for transfer length %ld "
 				"greater than %d\n",
 				(long)drv_data->len, MAX_DMA_LEN);
 =======
+=======
+>>>>>>> v3.18
 		dev_warn_ratelimited(&message->spi->dev,
 				     "pump_transfers: DMA disabled for transfer length %ld "
 				     "greater than %d\n",
 				     (long)drv_data->len, MAX_DMA_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -790,11 +848,16 @@ static void pump_transfers(unsigned long data)
 							bits, &dma_burst,
 							&dma_thresh))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (printk_ratelimit())
 					dev_warn(&message->spi->dev,
 						"pump_transfers: "
 						"DMA burst size reduced to "
 						"match bits_per_word\n");
+=======
+				dev_warn_ratelimited(&message->spi->dev,
+						     "pump_transfers: DMA burst size reduced to match bits_per_word\n");
+>>>>>>> v3.18
 =======
 				dev_warn_ratelimited(&message->spi->dev,
 						     "pump_transfers: DMA burst size reduced to match bits_per_word\n");
@@ -889,6 +952,7 @@ static int pxa2xx_spi_transfer_one_message(struct spi_master *master,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxa2xx_spi_prepare_transfer(struct spi_master *master)
 {
 	struct driver_data *drv_data = spi_master_get_devdata(master);
@@ -897,6 +961,8 @@ static int pxa2xx_spi_prepare_transfer(struct spi_master *master)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int pxa2xx_spi_unprepare_transfer(struct spi_master *master)
@@ -908,8 +974,11 @@ static int pxa2xx_spi_unprepare_transfer(struct spi_master *master)
 		    drv_data->ioaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_mark_last_busy(&drv_data->pdev->dev);
 	pm_runtime_put_autosuspend(&drv_data->pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -939,8 +1008,13 @@ static int setup_cs(struct spi_device *spi, struct chip_data *chip,
 		err = gpio_request(chip_info->gpio_cs, "SPI_CS");
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&spi->dev, "failed to request chip select "
 					"GPIO%d\n", chip_info->gpio_cs);
+=======
+			dev_err(&spi->dev, "failed to request chip select GPIO%d\n",
+				chip_info->gpio_cs);
+>>>>>>> v3.18
 =======
 			dev_err(&spi->dev, "failed to request chip select GPIO%d\n",
 				chip_info->gpio_cs);
@@ -977,6 +1051,7 @@ static int setup(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pxa25x_ssp_comp(drv_data)
 		&& (spi->bits_per_word < 4 || spi->bits_per_word > 32)) {
 		dev_err(&spi->dev, "failed setup: ssp_type=%d, bits/wrd=%d "
@@ -994,10 +1069,13 @@ static int setup(struct spi_device *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Only alloc on first setup */
 	chip = spi_get_ctldata(spi);
 	if (!chip) {
 		chip = kzalloc(sizeof(struct chip_data), GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!chip) {
 			dev_err(&spi->dev,
@@ -1010,6 +1088,8 @@ static int setup(struct spi_device *spi)
 				dev_err(&spi->dev, "failed setup: "
 				"cs number must not be > 4.\n");
 =======
+=======
+>>>>>>> v3.18
 		if (!chip)
 			return -ENOMEM;
 
@@ -1017,6 +1097,9 @@ static int setup(struct spi_device *spi)
 			if (spi->chip_select > 4) {
 				dev_err(&spi->dev,
 					"failed setup: cs number must not be > 4.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				kfree(chip);
 				return -EINVAL;
@@ -1074,8 +1157,13 @@ static int setup(struct spi_device *spi)
 						&chip->dma_burst_size,
 						&chip->dma_threshold)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_warn(&spi->dev, "in setup: DMA burst size reduced "
 					"to match bits_per_word\n");
+=======
+			dev_warn(&spi->dev,
+				 "in setup: DMA burst size reduced to match bits_per_word\n");
+>>>>>>> v3.18
 =======
 			dev_warn(&spi->dev,
 				 "in setup: DMA burst size reduced to match bits_per_word\n");
@@ -1125,9 +1213,12 @@ static int setup(struct spi_device *spi)
 		chip->read = u32_reader;
 		chip->write = u32_writer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		dev_err(&spi->dev, "invalid wordsize\n");
 		return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1157,6 +1248,7 @@ static void cleanup(struct spi_device *spi)
 
 #ifdef CONFIG_ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxa2xx_spi_acpi_add_dma(struct acpi_resource *res, void *data)
 {
 	struct pxa2xx_spi_master *pdata = data;
@@ -1180,12 +1272,17 @@ static int pxa2xx_spi_acpi_add_dma(struct acpi_resource *res, void *data)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct pxa2xx_spi_master *
 pxa2xx_spi_acpi_get_pdata(struct platform_device *pdev)
 {
 	struct pxa2xx_spi_master *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head resource_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct acpi_device *adev;
@@ -1199,11 +1296,16 @@ pxa2xx_spi_acpi_get_pdata(struct platform_device *pdev)
 
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata) {
 		dev_err(&pdev->dev,
 			"failed to allocate memory for platform data\n");
 		return NULL;
 	}
+=======
+	if (!pdata)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!pdata)
 		return NULL;
@@ -1219,7 +1321,11 @@ pxa2xx_spi_acpi_get_pdata(struct platform_device *pdev)
 	ssp->mmio_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(ssp->mmio_base))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return PTR_ERR(ssp->mmio_base);
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -1235,6 +1341,7 @@ pxa2xx_spi_acpi_get_pdata(struct platform_device *pdev)
 
 	pdata->num_chipselect = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata->rx_slave_id = -1;
 	pdata->tx_slave_id = -1;
 
@@ -1247,6 +1354,9 @@ pxa2xx_spi_acpi_get_pdata(struct platform_device *pdev)
 =======
 	pdata->enable_dma = true;
 >>>>>>> v3.18
+=======
+	pdata->enable_dma = true;
+>>>>>>> v3.18
 
 	return pdata;
 }
@@ -1255,11 +1365,17 @@ static struct acpi_device_id pxa2xx_spi_acpi_match[] = {
 	{ "INT33C0", 0 },
 	{ "INT33C1", 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ "INT3430", 0 },
 	{ "INT3431", 0 },
 	{ "80860F0E", 0 },
 	{ "8086228E", 0 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -1324,8 +1440,13 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 	master->setup = setup;
 	master->transfer_one_message = pxa2xx_spi_transfer_one_message;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->prepare_transfer_hardware = pxa2xx_spi_prepare_transfer;
 	master->unprepare_transfer_hardware = pxa2xx_spi_unprepare_transfer;
+=======
+	master->unprepare_transfer_hardware = pxa2xx_spi_unprepare_transfer;
+	master->auto_runtime_pm = true;
+>>>>>>> v3.18
 =======
 	master->unprepare_transfer_hardware = pxa2xx_spi_unprepare_transfer;
 	master->auto_runtime_pm = true;
@@ -1338,6 +1459,10 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 	drv_data->ssdr_physical = ssp->phys_base + SSDR;
 	if (pxa25x_ssp_comp(drv_data)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 16);
+>>>>>>> v3.18
 =======
 		master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 16);
 >>>>>>> v3.18
@@ -1347,6 +1472,10 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 		drv_data->mask_sr = SSSR_RFS | SSSR_TFS | SSSR_ROR;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 32);
+>>>>>>> v3.18
 =======
 		master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 32);
 >>>>>>> v3.18
@@ -1370,7 +1499,11 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 		status = pxa2xx_spi_dma_setup(drv_data);
 		if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_warn(dev, "failed to setup DMA, using PIO\n");
+=======
+			dev_dbg(dev, "no DMA channels available, using PIO\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(dev, "no DMA channels available, using PIO\n");
 >>>>>>> v3.18
@@ -1402,10 +1535,13 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 		     (unsigned long)drv_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register with the SPI framework */
 	platform_set_drvdata(pdev, drv_data);
 	status = spi_register_master(master);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_set_autosuspend_delay(&pdev->dev, 50);
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_runtime_set_active(&pdev->dev);
@@ -1414,6 +1550,9 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 	/* Register with the SPI framework */
 	platform_set_drvdata(pdev, drv_data);
 	status = devm_spi_register_master(&pdev->dev, master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status != 0) {
 		dev_err(&pdev->dev, "problem registering spi master\n");
@@ -1421,11 +1560,14 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_set_autosuspend_delay(&pdev->dev, 50);
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_runtime_set_active(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return status;
@@ -1470,12 +1612,15 @@ static int pxa2xx_spi_remove(struct platform_device *pdev)
 	pxa_ssp_free(ssp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Disconnect from the SPI framework */
 	spi_unregister_master(drv_data->master);
 
 	/* Prevent double remove */
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1490,7 +1635,11 @@ static void pxa2xx_spi_shutdown(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1524,6 +1673,12 @@ static int pxa2xx_spi_resume(struct device *dev)
 		clk_prepare_enable(ssp->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Restore LPSS private register bits */
+	lpss_ssp_setup(drv_data);
+
+>>>>>>> v3.18
 =======
 	/* Restore LPSS private register bits */
 	lpss_ssp_setup(drv_data);

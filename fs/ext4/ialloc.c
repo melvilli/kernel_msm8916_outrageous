@@ -71,6 +71,11 @@ static unsigned ext4_init_inode_bitmap(struct super_block *sb,
 				       struct ext4_group_desc *gdp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ext4_group_info *grp;
+	struct ext4_sb_info *sbi = EXT4_SB(sb);
+>>>>>>> v3.18
 =======
 	struct ext4_group_info *grp;
 	struct ext4_sb_info *sbi = EXT4_SB(sb);
@@ -82,6 +87,7 @@ static unsigned ext4_init_inode_bitmap(struct super_block *sb,
 	if (!ext4_group_desc_csum_verify(sb, block_group, gdp)) {
 		ext4_error(sb, "Checksum bad for group %u", block_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ext4_free_group_clusters_set(sb, gdp, 0);
 		ext4_free_inodes_set(sb, gdp, 0);
 		ext4_itable_unused_set(sb, gdp, 0);
@@ -89,6 +95,8 @@ static unsigned ext4_init_inode_bitmap(struct super_block *sb,
 		ext4_inode_bitmap_csum_set(sb, block_group, gdp, bh,
 					   EXT4_INODES_PER_GROUP(sb) / 8);
 =======
+=======
+>>>>>>> v3.18
 		grp = ext4_get_group_info(sb, block_group);
 		if (!EXT4_MB_GRP_BBITMAP_CORRUPT(grp))
 			percpu_counter_sub(&sbi->s_freeclusters_counter,
@@ -101,6 +109,9 @@ static unsigned ext4_init_inode_bitmap(struct super_block *sb,
 					   count);
 		}
 		set_bit(EXT4_GROUP_INFO_IBITMAP_CORRUPT_BIT, &grp->bb_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -138,6 +149,11 @@ ext4_read_inode_bitmap(struct super_block *sb, ext4_group_t block_group)
 	struct buffer_head *bh = NULL;
 	ext4_fsblk_t bitmap_blk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ext4_group_info *grp;
+	struct ext4_sb_info *sbi = EXT4_SB(sb);
+>>>>>>> v3.18
 =======
 	struct ext4_group_info *grp;
 	struct ext4_sb_info *sbi = EXT4_SB(sb);
@@ -211,7 +227,10 @@ verify:
 		ext4_error(sb, "Corrupt inode bitmap - block_group = %u, "
 			   "inode_bitmap = %llu", block_group, bitmap_blk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		grp = ext4_get_group_info(sb, block_group);
 		if (!EXT4_MB_GRP_IBITMAP_CORRUPT(grp)) {
 			int count;
@@ -220,6 +239,9 @@ verify:
 					   count);
 		}
 		set_bit(EXT4_GROUP_INFO_IBITMAP_CORRUPT_BIT, &grp->bb_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -258,6 +280,10 @@ void ext4_free_inode(handle_t *handle, struct inode *inode)
 	struct ext4_sb_info *sbi;
 	int fatal = 0, err, count, cleared;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ext4_group_info *grp;
+>>>>>>> v3.18
 =======
 	struct ext4_group_info *grp;
 >>>>>>> v3.18
@@ -307,7 +333,13 @@ void ext4_free_inode(handle_t *handle, struct inode *inode)
 	bit = (ino - 1) % EXT4_INODES_PER_GROUP(sb);
 	bitmap_bh = ext4_read_inode_bitmap(sb, block_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bitmap_bh)
+=======
+	/* Don't bother if the inode bitmap is corrupt. */
+	grp = ext4_get_group_info(sb, block_group);
+	if (unlikely(EXT4_MB_GRP_IBITMAP_CORRUPT(grp)) || !bitmap_bh)
+>>>>>>> v3.18
 =======
 	/* Don't bother if the inode bitmap is corrupt. */
 	grp = ext4_get_group_info(sb, block_group);
@@ -362,9 +394,12 @@ out:
 		if (!fatal)
 			fatal = err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		ext4_error(sb, "bit already cleared for inode %lu", ino);
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		ext4_error(sb, "bit already cleared for inode %lu", ino);
 		if (gdp && !EXT4_MB_GRP_IBITMAP_CORRUPT(grp)) {
@@ -375,6 +410,9 @@ out:
 		}
 		set_bit(EXT4_GROUP_INFO_IBITMAP_CORRUPT_BIT, &grp->bb_state);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 error_return:
@@ -486,7 +524,11 @@ static int find_group_orlov(struct super_block *sb, struct inode *parent,
 			grp = hinfo.hash;
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			get_random_bytes(&grp, sizeof(grp));
+=======
+			grp = prandom_u32();
+>>>>>>> v3.18
 =======
 			grp = prandom_u32();
 >>>>>>> v3.18
@@ -689,7 +731,10 @@ static int find_group_other(struct super_block *sb, struct inode *parent,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * In no journal mode, if an inode has recently been deleted, we want
  * to avoid reusing it until we're reasonably sure the inode table
  * block has been written back to disk.  (Yes, these values are
@@ -735,6 +780,9 @@ out:
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * There are two policies for allocating an inode.  If the new inode is
  * a directory, then a forward search is made for a block group with both
@@ -764,6 +812,10 @@ struct inode *__ext4_new_inode(handle_t *handle, struct inode *dir,
 	ext4_group_t i;
 	ext4_group_t flex_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ext4_group_info *grp;
+>>>>>>> v3.18
 =======
 	struct ext4_group_info *grp;
 >>>>>>> v3.18
@@ -841,11 +893,14 @@ got_group:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brelse(inode_bitmap_bh);
 		inode_bitmap_bh = ext4_read_inode_bitmap(sb, group);
 		if (!inode_bitmap_bh)
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 		grp = ext4_get_group_info(sb, group);
 		/* Skip groups with already-known suspicious inode tables */
 		if (EXT4_MB_GRP_IBITMAP_CORRUPT(grp)) {
@@ -862,6 +917,9 @@ got_group:
 				group = 0;
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 repeat_in_this_group:
@@ -876,11 +934,14 @@ repeat_in_this_group:
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!handle) {
 			BUG_ON(nblocks <= 0);
 			handle = __ext4_journal_start_sb(dir->i_sb, line_no,
 							 handle_type, nblocks);
 =======
+=======
+>>>>>>> v3.18
 		if ((EXT4_SB(sb)->s_journal == NULL) &&
 		    recently_deleted(sb, group, ino)) {
 			ino++;
@@ -891,6 +952,9 @@ repeat_in_this_group:
 			handle = __ext4_journal_start_sb(dir->i_sb, line_no,
 							 handle_type, nblocks,
 							 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (IS_ERR(handle)) {
 				err = PTR_ERR(handle);
@@ -911,6 +975,10 @@ repeat_in_this_group:
 		if (!ret2)
 			goto got; /* we grabbed the inode! */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+next_inode:
+>>>>>>> v3.18
 =======
 next_inode:
 >>>>>>> v3.18
@@ -1073,8 +1141,12 @@ got:
 
 	/* Precompute checksum seed for inode metadata */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (EXT4_HAS_RO_COMPAT_FEATURE(sb,
 			EXT4_FEATURE_RO_COMPAT_METADATA_CSUM)) {
+=======
+	if (ext4_has_metadata_csum(sb)) {
+>>>>>>> v3.18
 =======
 	if (ext4_has_metadata_csum(sb)) {
 >>>>>>> v3.18
@@ -1183,6 +1255,7 @@ struct inode *ext4_orphan_get(struct super_block *sb, unsigned long ino)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * If the orphans has i_nlinks > 0 then it should be able to
 	 * be truncated, otherwise it won't be removed from the orphan
 	 * list during processing and an infinite loop will result.
@@ -1191,11 +1264,16 @@ struct inode *ext4_orphan_get(struct super_block *sb, unsigned long ino)
 	if ((inode->i_nlink && !ext4_can_truncate(inode)) ||
 	    is_bad_inode(inode))
 =======
+=======
+>>>>>>> v3.18
 	 * If the orphans has i_nlinks > 0 then it should be able to be
 	 * truncated, otherwise it won't be removed from the orphan list
 	 * during processing and an infinite loop will result.
 	 */
 	if (inode->i_nlink && !ext4_can_truncate(inode))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto bad_orphan;
 

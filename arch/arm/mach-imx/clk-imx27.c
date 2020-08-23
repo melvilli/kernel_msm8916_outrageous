@@ -1,5 +1,6 @@
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/module.h>
 #include <linux/clkdev.h>
@@ -7,18 +8,24 @@
 #include <linux/clk-provider.h>
 #include <linux/of.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk-provider.h>
 #include <linux/clkdev.h>
 #include <linux/err.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <dt-bindings/clock/imx27-clock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "clk.h"
 #include "common.h"
 #include "hardware.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IO_ADDR_CCM(off)	(MX27_IO_ADDRESS(MX27_CCM_BASE_ADDR + (off)))
 
@@ -59,6 +66,8 @@
 #define CCM_SPCTL1_LF           (1 << 15)
 #define CCM_SPCTL1_BRMO         (1 << 6)
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *ccm __initdata;
 
 /* Register offsets */
@@ -72,21 +81,30 @@ static void __iomem *ccm __initdata;
 #define CCM_PCCR0		(ccm + 0x20)
 #define CCM_PCCR1		(ccm + 0x24)
 #define CCM_CCSR		(ccm + 0x28)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *vpu_sel_clks[] = { "spll", "mpll_main2", };
 static const char *cpu_sel_clks[] = { "mpll_main2", "mpll", };
 static const char *mpll_sel_clks[] = { "fpm", "mpll_osc_sel", };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *mpll_osc_sel_clks[] = { "ckih", "ckih_div1p5", };
 static const char *clko_sel_clks[] = {
 	"ckil", "fpm", "ckih", "ckih",
 	"ckih", "mpll", "spll", "cpu_div",
 =======
+=======
+>>>>>>> v3.18
 static const char *mpll_osc_sel_clks[] = { "ckih_gate", "ckih_div1p5", };
 static const char *clko_sel_clks[] = {
 	"ckil", "fpm", "ckih_gate", "ckih_gate",
 	"ckih_gate", "mpll", "spll", "cpu_div",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"ahb", "ipg", "per1_div", "per2_div",
 	"per3_div", "per4_div", "ssi1_div", "ssi2_div",
@@ -96,6 +114,7 @@ static const char *clko_sel_clks[] = {
 
 static const char *ssi_sel_clks[] = { "spll_gate", "mpll", };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum mx27_clks {
 	dummy, ckih, ckil, mpll, spll, mpll_main2, ahb, ipg, nfc_div, per1_div,
@@ -327,6 +346,8 @@ int __init mx27_clocks_init(unsigned long fref)
 
 	imx_print_silicon_rev("i.MX27", mx27_revision());
 =======
+=======
+>>>>>>> v3.18
 static struct clk *clk[IMX27_CLK_MAX];
 static struct clk_onecell_data clk_data;
 
@@ -518,11 +539,15 @@ int __init mx27_clocks_init(unsigned long fref)
 	clk_register_clkdev(clk[IMX27_CLK_EMMA_IPG_GATE], "ipg", "m2m-emmaprp.0");
 
 	mxc_timer_init(MX27_IO_ADDRESS(MX27_GPT1_BASE_ADDR), MX27_INT_GPT1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_OF
 int __init mx27_clocks_init_dt(void)
@@ -542,6 +567,8 @@ int __init mx27_clocks_init_dt(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 static void __init mx27_clocks_init_dt(struct device_node *np)
 {
 	struct device_node *refnp;
@@ -564,4 +591,7 @@ static void __init mx27_clocks_init_dt(struct device_node *np)
 	of_clk_add_provider(np, of_clk_src_onecell_get, &clk_data);
 }
 CLK_OF_DECLARE(imx27_ccm, "fsl,imx27-ccm", mx27_clocks_init_dt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

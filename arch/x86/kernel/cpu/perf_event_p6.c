@@ -232,6 +232,7 @@ static __initconst const struct x86_pmu p6_pmu = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __init int p6_pmu_init(void)
 {
 	switch (boot_cpu_data.x86_model) {
@@ -259,6 +260,8 @@ __init int p6_pmu_init(void)
 
 
 =======
+=======
+>>>>>>> v3.18
 static __init void p6_pmu_rdpmc_quirk(void)
 {
 	if (boot_cpu_data.x86_mask < 9) {
@@ -303,6 +306,9 @@ __init int p6_pmu_init(void)
 	memcpy(hw_cache_event_ids, p6_hw_cache_event_ids,
 		sizeof(hw_cache_event_ids));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

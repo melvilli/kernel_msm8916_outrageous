@@ -21,6 +21,12 @@
 #include <linux/memcontrol.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CREATE_TRACE_POINTS
+#include <trace/events/kmem.h>
+
+>>>>>>> v3.18
 =======
 #define CREATE_TRACE_POINTS
 #include <trace/events/kmem.h>
@@ -34,10 +40,13 @@ DEFINE_MUTEX(slab_mutex);
 struct kmem_cache *kmem_cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_VM
 static int kmem_cache_sanity_check(struct mem_cgroup *memcg, const char *name,
 				   size_t size)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Set of flags that will prevent slab merging
  */
@@ -77,6 +86,9 @@ EXPORT_SYMBOL(kmem_cache_size);
 
 #ifdef CONFIG_DEBUG_VM
 static int kmem_cache_sanity_check(const char *name, size_t size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kmem_cache *s = NULL;
@@ -103,6 +115,7 @@ static int kmem_cache_sanity_check(const char *name, size_t size)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if !defined(CONFIG_SLUB)
 		/*
@@ -121,6 +134,8 @@ static int kmem_cache_sanity_check(const char *name, size_t size)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	}
 
 	WARN_ON(strchr(name, ' '));	/* It confuses parsers */
@@ -128,8 +143,12 @@ static int kmem_cache_sanity_check(const char *name, size_t size)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int kmem_cache_sanity_check(struct mem_cgroup *memcg,
 					  const char *name, size_t size)
+=======
+static inline int kmem_cache_sanity_check(const char *name, size_t size)
+>>>>>>> v3.18
 =======
 static inline int kmem_cache_sanity_check(const char *name, size_t size)
 >>>>>>> v3.18
@@ -140,7 +159,10 @@ static inline int kmem_cache_sanity_check(const char *name, size_t size)
 
 #ifdef CONFIG_MEMCG_KMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int memcg_alloc_cache_params(struct mem_cgroup *memcg,
 		struct kmem_cache *s, struct kmem_cache *root_cache)
 {
@@ -200,6 +222,9 @@ static int memcg_update_cache_params(struct kmem_cache *s, int num_memcgs)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int memcg_update_all_caches(int num_memcgs)
 {
@@ -212,9 +237,14 @@ int memcg_update_all_caches(int num_memcgs)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = memcg_update_cache_size(s, num_memcgs);
 		/*
 		 * See comment in memcontrol.c, memcg_update_cache_size:
+=======
+		ret = memcg_update_cache_params(s, num_memcgs);
+		/*
+>>>>>>> v3.18
 =======
 		ret = memcg_update_cache_params(s, num_memcgs);
 		/*
@@ -232,8 +262,11 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 #else
 static inline int memcg_alloc_cache_params(struct mem_cgroup *memcg,
 		struct kmem_cache *s, struct kmem_cache *root_cache)
@@ -312,6 +345,9 @@ struct kmem_cache *find_mergeable(size_t size, size_t align,
 	}
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -342,7 +378,10 @@ unsigned long calculate_alignment(unsigned long flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct kmem_cache *
 do_kmem_cache_create(char *name, size_t object_size, size_t size, size_t align,
 		     unsigned long flags, void (*ctor)(void *),
@@ -382,6 +421,9 @@ out_free_cache:
 	kfree(s);
 	goto out;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -409,6 +451,7 @@ out_free_cache:
  * as davem.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct kmem_cache *
 kmem_cache_create_memcg(struct mem_cgroup *memcg, const char *name, size_t size,
@@ -424,6 +467,8 @@ kmem_cache_create_memcg(struct mem_cgroup *memcg, const char *name, size_t size,
 	if (!kmem_cache_sanity_check(memcg, name, size) == 0)
 		goto out_locked;
 =======
+=======
+>>>>>>> v3.18
 struct kmem_cache *
 kmem_cache_create(const char *name, size_t size, size_t align,
 		  unsigned long flags, void (*ctor)(void *))
@@ -442,6 +487,9 @@ kmem_cache_create(const char *name, size_t size, size_t align,
 		s = NULL;	/* suppress uninit var warning */
 		goto out_unlock;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -452,6 +500,7 @@ kmem_cache_create(const char *name, size_t size, size_t align,
 	 */
 	flags &= CACHE_CREATE_MASK;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s = __kmem_cache_alias(memcg, name, size, align, flags, ctor);
 	if (s)
@@ -495,6 +544,8 @@ out_locked:
 	if (err) {
 
 =======
+=======
+>>>>>>> v3.18
 	s = __kmem_cache_alias(name, size, align, flags, ctor);
 	if (s)
 		goto out_unlock;
@@ -520,6 +571,9 @@ out_unlock:
 	put_online_cpus();
 
 	if (err) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (flags & SLAB_PANIC)
 			panic("kmem_cache_create: Failed to create slab '%s'. Error %d\n",
@@ -530,10 +584,13 @@ out_unlock:
 			dump_stack();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 	}
 	return s;
@@ -582,11 +639,15 @@ out_unlock:
 
 	put_online_mems();
 	put_online_cpus();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return s;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct kmem_cache *
 kmem_cache_create(const char *name, size_t size, size_t align,
@@ -626,6 +687,8 @@ void kmem_cache_destroy(struct kmem_cache *s)
 		mutex_unlock(&slab_mutex);
 	}
 =======
+=======
+>>>>>>> v3.18
 static int memcg_cleanup_cache_params(struct kmem_cache *s)
 {
 	int rc;
@@ -692,13 +755,19 @@ out_unlock:
 	mutex_unlock(&slab_mutex);
 out:
 	put_online_mems();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	put_online_cpus();
 }
 EXPORT_SYMBOL(kmem_cache_destroy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * kmem_cache_shrink - Shrink a cache.
  * @cachep: The cache to shrink.
@@ -719,6 +788,9 @@ int kmem_cache_shrink(struct kmem_cache *cachep)
 }
 EXPORT_SYMBOL(kmem_cache_shrink);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int slab_is_available(void)
 {
@@ -813,7 +885,11 @@ struct kmem_cache *kmalloc_slab(size_t size, gfp_t flags)
 	int index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size > KMALLOC_MAX_SIZE) {
+=======
+	if (unlikely(size > KMALLOC_MAX_SIZE)) {
+>>>>>>> v3.18
 =======
 	if (unlikely(size > KMALLOC_MAX_SIZE)) {
 >>>>>>> v3.18
@@ -939,9 +1015,12 @@ void __init create_kmalloc_caches(unsigned long flags)
 #endif /* !CONFIG_SLOB */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_SLABINFO
 =======
+=======
+>>>>>>> v3.18
 /*
  * To avoid unnecessary overhead, we pass through large allocation requests
  * directly to the page allocator. We use __GFP_COMP, because we will need to
@@ -978,6 +1057,9 @@ EXPORT_SYMBOL(kmalloc_order_trace);
 #define SLABINFO_RIGHTS S_IRUSR
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void print_slabinfo_header(struct seq_file *m)
 {
@@ -1014,7 +1096,11 @@ static void *s_start(struct seq_file *m, loff_t *pos)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *s_next(struct seq_file *m, void *p, loff_t *pos)
+=======
+void *slab_next(struct seq_file *m, void *p, loff_t *pos)
+>>>>>>> v3.18
 =======
 void *slab_next(struct seq_file *m, void *p, loff_t *pos)
 >>>>>>> v3.18
@@ -1023,7 +1109,11 @@ void *slab_next(struct seq_file *m, void *p, loff_t *pos)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void s_stop(struct seq_file *m, void *p)
+=======
+void slab_stop(struct seq_file *m, void *p)
+>>>>>>> v3.18
 =======
 void slab_stop(struct seq_file *m, void *p)
 >>>>>>> v3.18
@@ -1043,7 +1133,11 @@ memcg_accumulate_slabinfo(struct kmem_cache *s, struct slabinfo *info)
 
 	for_each_memcg_cache_index(i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c = cache_from_memcg(s, i);
+=======
+		c = cache_from_memcg_idx(s, i);
+>>>>>>> v3.18
 =======
 		c = cache_from_memcg_idx(s, i);
 >>>>>>> v3.18
@@ -1108,8 +1202,13 @@ static int s_show(struct seq_file *m, void *p)
 static const struct seq_operations slabinfo_op = {
 	.start = s_start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.next = s_next,
 	.stop = s_stop,
+=======
+	.next = slab_next,
+	.stop = slab_stop,
+>>>>>>> v3.18
 =======
 	.next = slab_next,
 	.stop = slab_stop,
@@ -1133,7 +1232,12 @@ static const struct file_operations proc_slabinfo_operations = {
 static int __init slab_proc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	proc_create("slabinfo", S_IRUSR, NULL, &proc_slabinfo_operations);
+=======
+	proc_create("slabinfo", SLABINFO_RIGHTS, NULL,
+						&proc_slabinfo_operations);
+>>>>>>> v3.18
 =======
 	proc_create("slabinfo", SLABINFO_RIGHTS, NULL,
 						&proc_slabinfo_operations);
@@ -1143,7 +1247,10 @@ static int __init slab_proc_init(void)
 module_init(slab_proc_init);
 #endif /* CONFIG_SLABINFO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static __always_inline void *__do_krealloc(const void *p, size_t new_size,
 					   gfp_t flags)
@@ -1243,4 +1350,7 @@ EXPORT_TRACEPOINT_SYMBOL(kmalloc_node);
 EXPORT_TRACEPOINT_SYMBOL(kmem_cache_alloc_node);
 EXPORT_TRACEPOINT_SYMBOL(kfree);
 EXPORT_TRACEPOINT_SYMBOL(kmem_cache_free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

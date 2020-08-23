@@ -141,6 +141,7 @@ static int setup_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs,
  * Determine which stack to use..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __user *get_sigframe(struct k_sigaction *ka, unsigned long sp,
 				 size_t frame_size)
 {
@@ -153,11 +154,17 @@ static void __user *get_sigframe(struct ksignal *ksig, unsigned long sp)
 {
 	sp = sigsp(sp, ksig);
 >>>>>>> v3.18
+=======
+static void __user *get_sigframe(struct ksignal *ksig, unsigned long sp)
+{
+	sp = sigsp(sp, ksig);
+>>>>>>> v3.18
 	sp = (sp + 7) & ~7;			/* 8byte align stack */
 
 	return (void __user *)sp;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 			  sigset_t *set, struct pt_regs *regs)
@@ -172,6 +179,8 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	err = copy_siginfo_to_user(&frame->info, info);
 =======
+=======
+>>>>>>> v3.18
 static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 			  struct pt_regs *regs)
 {
@@ -184,6 +193,9 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 		return -EFAULT;
 
 	err = copy_siginfo_to_user(&frame->info, &ksig->info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create the ucontext.  */
@@ -196,7 +208,11 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -213,7 +229,11 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -222,15 +242,21 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	regs->REG_RTP = (unsigned long) frame->retcode;
 	regs->REG_SP = (unsigned long) frame + sizeof(*frame);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->REG_ARG1 = sig;
 	regs->REG_ARG2 = (unsigned long) &frame->info;
 	regs->REG_ARG3 = (unsigned long) &frame->uc;
 	regs->REG_PC = (unsigned long) ka->sa.sa_handler;
 =======
+=======
+>>>>>>> v3.18
 	regs->REG_ARG1 = ksig->sig;
 	regs->REG_ARG2 = (unsigned long) &frame->info;
 	regs->REG_ARG3 = (unsigned long) &frame->uc;
 	regs->REG_PC = (unsigned long) ksig->ka.sa.sa_handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("SIG deliver (%s:%d): sp=%p pc=%08x pr=%08x\n",
@@ -241,6 +267,7 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	 * effective cache flush - directed rather than 'full flush'.
 	 */
 	flush_cache_sigtramp(regs->REG_RTP, sizeof(frame->retcode));
+<<<<<<< HEAD
 <<<<<<< HEAD
 out:
 	if (err) {
@@ -261,6 +288,8 @@ static void handle_signal(unsigned long sig, siginfo_t *info,
 
 	signal_delivered(sig, info, ka, regs, test_thread_flag(TIF_SINGLESTEP));
 =======
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -274,6 +303,9 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	ret = setup_rt_frame(ksig, oldset, regs);
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -288,10 +320,15 @@ static int do_signal(struct pt_regs *regs, int syscall)
 {
 	unsigned int retval = 0, continue_addr = 0, restart_addr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct k_sigaction ka;
 	siginfo_t info;
 	int signr;
 	int restart = 0;
+=======
+	int restart = 0;
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	int restart = 0;
 	struct ksignal ksig;
@@ -333,7 +370,12 @@ static int do_signal(struct pt_regs *regs, int syscall)
 	 * the debugger may change all our registers ...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
+=======
+	get_signal(&ksig);
+
+>>>>>>> v3.18
 =======
 	get_signal(&ksig);
 
@@ -346,7 +388,11 @@ static int do_signal(struct pt_regs *regs, int syscall)
 	if (regs->REG_PC != restart_addr)
 		restart = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (signr > 0) {
+=======
+	if (ksig.sig > 0) {
+>>>>>>> v3.18
 =======
 	if (ksig.sig > 0) {
 >>>>>>> v3.18
@@ -355,7 +401,11 @@ static int do_signal(struct pt_regs *regs, int syscall)
 			    || retval == -ERESTART_RESTARTBLOCK
 			    || (retval == -ERESTARTSYS
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&& !(ka.sa.sa_flags & SA_RESTART))) {
+=======
+				&& !(ksig.ka.sa.sa_flags & SA_RESTART))) {
+>>>>>>> v3.18
 =======
 				&& !(ksig.ka.sa.sa_flags & SA_RESTART))) {
 >>>>>>> v3.18
@@ -366,7 +416,11 @@ static int do_signal(struct pt_regs *regs, int syscall)
 
 		/* Whee! Actually deliver the signal.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		handle_signal(signr, &info, &ka, regs);
+=======
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 =======
 		handle_signal(&ksig, regs);
 >>>>>>> v3.18

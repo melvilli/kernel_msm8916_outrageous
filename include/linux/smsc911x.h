@@ -23,6 +23,7 @@
 
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* platform_device configuration data, should be assigned to
  * the platform_device's dev.platform_data
@@ -34,10 +35,15 @@
  * Both values would need to set in the appropriate board file
  */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/if_ether.h>
 
 /* platform_device configuration data, should be assigned to
  * the platform_device's dev.platform_data */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct smsc911x_platform_config {
 	unsigned int irq_polarity;
@@ -46,9 +52,13 @@ struct smsc911x_platform_config {
 	unsigned int shift;
 	phy_interface_t phy_interface;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char mac[6];
 	unsigned char has_reset_gpio;
 	unsigned int reset_gpio;
+=======
+	unsigned char mac[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	unsigned char mac[ETH_ALEN];
 >>>>>>> v3.18

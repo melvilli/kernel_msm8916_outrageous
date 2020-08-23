@@ -55,7 +55,11 @@ struct res_counter {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RESOURCE_MAX (unsigned long long)LLONG_MAX
+=======
+#define RES_COUNTER_MAX ULLONG_MAX
+>>>>>>> v3.18
 =======
 #define RES_COUNTER_MAX ULLONG_MAX
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ void res_counter_init(struct res_counter *counter, struct res_counter *parent);
  *
  * returns 0 on success and <0 if the counter->usage will exceed the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * counter->limit _locked call expects the counter->lock to be taken
+=======
+ * counter->limit
+>>>>>>> v3.18
 =======
  * counter->limit
 >>>>>>> v3.18
@@ -120,8 +128,11 @@ void res_counter_init(struct res_counter *counter, struct res_counter *parent);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check res_counter_charge_locked(struct res_counter *counter,
 					   unsigned long val, bool force);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int __must_check res_counter_charge(struct res_counter *counter,
@@ -137,7 +148,10 @@ int res_counter_charge_nofail(struct res_counter *counter,
  *
  * these calls check for usage underflow and show a warning on the console
 <<<<<<< HEAD
+<<<<<<< HEAD
  * _locked call expects the counter->lock to be taken
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -145,7 +159,10 @@ int res_counter_charge_nofail(struct res_counter *counter,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 res_counter_uncharge_locked(struct res_counter *counter, unsigned long val);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 u64 res_counter_uncharge(struct res_counter *counter, unsigned long val);

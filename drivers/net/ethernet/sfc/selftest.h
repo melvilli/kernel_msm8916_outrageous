@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2012 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -45,6 +51,10 @@ struct efx_self_tests {
 	int eventq_int[EFX_MAX_CHANNELS];
 	/* offline tests */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int memory;
+>>>>>>> v3.18
 =======
 	int memory;
 >>>>>>> v3.18
@@ -53,6 +63,7 @@ struct efx_self_tests {
 	struct efx_loopback_self_tests loopback[LOOPBACK_TEST_MAX + 1];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void efx_loopback_rx_packet(struct efx_nic *efx,
 				   const char *buf_ptr, int pkt_len);
@@ -63,6 +74,8 @@ extern void efx_selftest_async_start(struct efx_nic *efx);
 extern void efx_selftest_async_cancel(struct efx_nic *efx);
 extern void efx_selftest_async_work(struct work_struct *data);
 =======
+=======
+>>>>>>> v3.18
 void efx_loopback_rx_packet(struct efx_nic *efx, const char *buf_ptr,
 			    int pkt_len);
 int efx_selftest(struct efx_nic *efx, struct efx_self_tests *tests,
@@ -70,6 +83,9 @@ int efx_selftest(struct efx_nic *efx, struct efx_self_tests *tests,
 void efx_selftest_async_start(struct efx_nic *efx);
 void efx_selftest_async_cancel(struct efx_nic *efx);
 void efx_selftest_async_work(struct work_struct *data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* EFX_SELFTEST_H */

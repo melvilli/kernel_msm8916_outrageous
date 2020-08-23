@@ -19,7 +19,11 @@
 
 #if defined(CONFIG_CPU_SUBTYPE_SH7619)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CCR		0xffffffec
+=======
+#define SH_CCR		0xffffffec
+>>>>>>> v3.18
 =======
 #define SH_CCR		0xffffffec
 >>>>>>> v3.18

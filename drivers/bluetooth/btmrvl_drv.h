@@ -60,6 +60,11 @@ struct btmrvl_device {
 
 struct btmrvl_adapter {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void *hw_regs_buf;
+	u8 *hw_regs;
+>>>>>>> v3.18
 =======
 	void *hw_regs_buf;
 	u8 *hw_regs;
@@ -72,6 +77,10 @@ struct btmrvl_adapter {
 	u8 wakeup_tries;
 	wait_queue_head_t cmd_wait_q;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wait_queue_head_t event_hs_wait_q;
+>>>>>>> v3.18
 =======
 	wait_queue_head_t event_hs_wait_q;
 >>>>>>> v3.18
@@ -96,12 +105,15 @@ struct btmrvl_private {
 #define MRVL_VENDOR_PKT			0xFE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Bluetooth commands  */
 #define BT_CMD_AUTO_SLEEP_MODE		0x23
 #define BT_CMD_HOST_SLEEP_CONFIG	0x59
 #define BT_CMD_HOST_SLEEP_ENABLE	0x5A
 #define BT_CMD_MODULE_CFG_REQ		0x5B
 =======
+=======
+>>>>>>> v3.18
 /* Vendor specific Bluetooth commands */
 #define BT_CMD_PSCAN_WIN_REPORT_ENABLE	0xFC03
 #define BT_CMD_SET_BDADDR		0xFC22
@@ -110,6 +122,9 @@ struct btmrvl_private {
 #define BT_CMD_HOST_SLEEP_ENABLE	0xFC5A
 #define BT_CMD_MODULE_CFG_REQ		0xFC5B
 #define BT_CMD_LOAD_CONFIG_DATA		0xFC61
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Sub-commands: Module Bringup/Shutdown Request/Response */
@@ -120,12 +135,18 @@ struct btmrvl_private {
 #define MODULE_SHUTDOWN_REQ		0xF2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Vendor specific Bluetooth events */
 #define BT_EVENT_AUTO_SLEEP_MODE	0x23
 #define BT_EVENT_HOST_SLEEP_CONFIG	0x59
 #define BT_EVENT_HOST_SLEEP_ENABLE	0x5A
 #define BT_EVENT_MODULE_CFG_REQ		0x5B
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BT_EVENT_POWER_STATE		0x20
 
@@ -135,8 +156,11 @@ struct btmrvl_private {
 #define BT_PS_SLEEP			0x01
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OGF				0x3F
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Host Sleep states */
@@ -148,11 +172,16 @@ struct btmrvl_private {
 #define PS_AWAKE			0x00
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct btmrvl_cmd {
 	__le16 ocf_ogf;
 	u8 length;
 	u8 data[4];
 } __packed;
+=======
+#define BT_CAL_HDR_LEN			4
+#define BT_CAL_DATA_SIZE		28
+>>>>>>> v3.18
 =======
 #define BT_CAL_HDR_LEN			4
 #define BT_CAL_DATA_SIZE		28
@@ -176,7 +205,12 @@ bool btmrvl_check_evtpkt(struct btmrvl_private *priv, struct sk_buff *skb);
 int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int btmrvl_send_module_cfg_cmd(struct btmrvl_private *priv, int subcmd);
+=======
+int btmrvl_send_module_cfg_cmd(struct btmrvl_private *priv, u8 subcmd);
+int btmrvl_pscan_window_reporting(struct btmrvl_private *priv, u8 subcmd);
+>>>>>>> v3.18
 =======
 int btmrvl_send_module_cfg_cmd(struct btmrvl_private *priv, u8 subcmd);
 int btmrvl_pscan_window_reporting(struct btmrvl_private *priv, u8 subcmd);

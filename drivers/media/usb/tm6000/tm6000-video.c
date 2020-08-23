@@ -919,7 +919,10 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.sizeimage =
 		f->fmt.pix.height * f->fmt.pix.bytesperline;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -963,7 +966,10 @@ static int vidioc_try_fmt_vid_cap(struct file *file, void *priv,
 
 	f->fmt.pix.field = field;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1078,7 +1084,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_std, dev->norm);
+=======
+	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, dev->norm);
+>>>>>>> v3.18
 =======
 	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, dev->norm);
 >>>>>>> v3.18
@@ -1087,7 +1097,10 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vidioc_g_std(struct file *file, void *priv, v4l2_std_id *norm)
 {
 	struct tm6000_fh *fh = priv;
@@ -1097,6 +1110,9 @@ static int vidioc_g_std(struct file *file, void *priv, v4l2_std_id *norm)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *iname[] = {
 	[TM6000_INPUT_TV] = "Television",
@@ -1157,7 +1173,11 @@ static int vidioc_s_input(struct file *file, void *priv, unsigned int i)
 	dev->input = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = vidioc_s_std(file, priv, dev->vfd->current_norm);
+=======
+	rc = vidioc_s_std(file, priv, dev->norm);
+>>>>>>> v3.18
 =======
 	rc = vidioc_s_std(file, priv, dev->norm);
 >>>>>>> v3.18
@@ -1574,6 +1594,10 @@ static const struct v4l2_ioctl_ops video_ioctl_ops = {
 	.vidioc_s_fmt_vid_cap     = vidioc_s_fmt_vid_cap,
 	.vidioc_s_std             = vidioc_s_std,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.vidioc_g_std             = vidioc_g_std,
+>>>>>>> v3.18
 =======
 	.vidioc_g_std             = vidioc_g_std,
 >>>>>>> v3.18
@@ -1601,7 +1625,10 @@ static struct video_device tm6000_template = {
 	.release	= video_device_release,
 	.tvnorms        = TM6000_STD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.current_norm   = V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1651,7 +1678,10 @@ static struct video_device *vdev_init(struct tm6000_core *dev,
 	vfd->debug = tm6000_debug;
 	vfd->lock = &dev->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

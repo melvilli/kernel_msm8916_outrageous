@@ -32,9 +32,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 
 #include <linux/mlx4/cmd.h>
+=======
+
+#include <linux/mlx4/cmd.h>
+#include <linux/mlx4/srq.h>
+>>>>>>> v3.18
 =======
 
 #include <linux/mlx4/cmd.h>
@@ -110,17 +116,23 @@ int __mlx4_srq_alloc_icm(struct mlx4_dev *dev, int *srqn)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_table_get(dev, &srq_table->table, *srqn);
 	if (err)
 		goto err_out;
 
 	err = mlx4_table_get(dev, &srq_table->cmpt_table, *srqn);
 =======
+=======
+>>>>>>> v3.18
 	err = mlx4_table_get(dev, &srq_table->table, *srqn, GFP_KERNEL);
 	if (err)
 		goto err_out;
 
 	err = mlx4_table_get(dev, &srq_table->cmpt_table, *srqn, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		goto err_put;
@@ -131,7 +143,11 @@ err_put:
 
 err_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&srq_table->bitmap, *srqn);
+=======
+	mlx4_bitmap_free(&srq_table->bitmap, *srqn, MLX4_NO_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&srq_table->bitmap, *srqn, MLX4_NO_RR);
 >>>>>>> v3.18
@@ -163,7 +179,11 @@ void __mlx4_srq_free_icm(struct mlx4_dev *dev, int srqn)
 	mlx4_table_put(dev, &srq_table->cmpt_table, srqn);
 	mlx4_table_put(dev, &srq_table->table, srqn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&srq_table->bitmap, srqn);
+=======
+	mlx4_bitmap_free(&srq_table->bitmap, srqn, MLX4_NO_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&srq_table->bitmap, srqn, MLX4_NO_RR);
 >>>>>>> v3.18
@@ -211,8 +231,11 @@ int mlx4_srq_alloc(struct mlx4_dev *dev, u32 pdn, u32 cqn, u16 xrcd,
 
 	srq_context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(srq_context, 0, sizeof *srq_context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	srq_context->state_logsize_srqn = cpu_to_be32((ilog2(srq->max) << 24) |

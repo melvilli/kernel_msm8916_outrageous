@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: 802.11n
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -39,6 +43,7 @@
  * RD responder bit to set to clear in the extended capability header.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 		      struct mwifiex_ie_types_htcap *ht_cap)
@@ -49,6 +54,8 @@ mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 
 	ht_cap->ht_cap.ampdu_params_info =
 =======
+=======
+>>>>>>> v3.18
 int mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 			  struct ieee80211_ht_cap *ht_cap)
 {
@@ -62,6 +69,9 @@ int mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 	}
 
 	ht_cap->ampdu_params_info =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		(sband->ht_cap.ampdu_factor &
 		 IEEE80211_HT_AMPDU_PARM_FACTOR) |
@@ -70,7 +80,11 @@ int mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 		 IEEE80211_HT_AMPDU_PARM_DENSITY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy((u8 *) &ht_cap->ht_cap.mcs, &sband->ht_cap.mcs,
+=======
+	memcpy((u8 *)&ht_cap->mcs, &sband->ht_cap.mcs,
+>>>>>>> v3.18
 =======
 	memcpy((u8 *)&ht_cap->mcs, &sband->ht_cap.mcs,
 >>>>>>> v3.18
@@ -82,7 +96,11 @@ int mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 					IEEE80211_HT_PARAM_CHA_SEC_NONE)))
 		/* Set MCS32 for infra mode or ad-hoc mode with 40MHz support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETHT_MCS32(ht_cap->ht_cap.mcs.rx_mask);
+=======
+		SETHT_MCS32(ht_cap->mcs.rx_mask);
+>>>>>>> v3.18
 =======
 		SETHT_MCS32(ht_cap->mcs.rx_mask);
 >>>>>>> v3.18
@@ -91,9 +109,12 @@ int mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 	ht_ext_cap &= ~IEEE80211_HT_EXT_CAP_RD_RESPONDER;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ht_cap->ht_cap.cap_info = cpu_to_le16(sband->ht_cap.cap);
 	ht_cap->ht_cap.extended_ht_cap_info = cpu_to_le16(ht_ext_cap);
 =======
+=======
+>>>>>>> v3.18
 	ht_cap->cap_info = cpu_to_le16(sband->ht_cap.cap);
 	ht_cap->extended_ht_cap_info = cpu_to_le16(ht_ext_cap);
 
@@ -101,6 +122,9 @@ int mwifiex_fill_cap_info(struct mwifiex_private *priv, u8 radio_type,
 		ht_cap->tx_BF_cap_info = cpu_to_le32(MWIFIEX_DEF_11N_TX_BF_CAP);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -189,6 +213,10 @@ int mwifiex_ret_11n_addba_req(struct mwifiex_private *priv,
 	struct host_cmd_ds_11n_addba_rsp *add_ba_rsp = &resp->params.add_ba_rsp;
 	struct mwifiex_tx_ba_stream_tbl *tx_ba_tbl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 block_ack_param_set = le16_to_cpu(add_ba_rsp->block_ack_param_set);
+>>>>>>> v3.18
 =======
 	u16 block_ack_param_set = le16_to_cpu(add_ba_rsp->block_ack_param_set);
 >>>>>>> v3.18
@@ -196,6 +224,7 @@ int mwifiex_ret_11n_addba_req(struct mwifiex_private *priv,
 	add_ba_rsp->ssn = cpu_to_le16((le16_to_cpu(add_ba_rsp->ssn))
 			& SSN_MASK);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tid = (le16_to_cpu(add_ba_rsp->block_ack_param_set)
 		& IEEE80211_ADDBA_PARAM_TID_MASK)
@@ -215,13 +244,21 @@ int mwifiex_ret_11n_addba_req(struct mwifiex_private *priv,
 	       >> BLOCKACKPARAM_TID_POS;
 	if (le16_to_cpu(add_ba_rsp->status_code) != BA_RESULT_SUCCESS) {
 >>>>>>> v3.18
+=======
+	tid = (block_ack_param_set & IEEE80211_ADDBA_PARAM_TID_MASK)
+	       >> BLOCKACKPARAM_TID_POS;
+	if (le16_to_cpu(add_ba_rsp->status_code) != BA_RESULT_SUCCESS) {
+>>>>>>> v3.18
 		mwifiex_del_ba_tbl(priv, tid, add_ba_rsp->peer_mac_addr,
 				   TYPE_DELBA_SENT, true);
 		if (add_ba_rsp->add_rsp_result != BA_RESULT_TIMEOUT)
 			priv->aggr_prio_tbl[tid].ampdu_ap =
 				BA_STREAM_NOT_ALLOWED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -237,6 +274,9 @@ int mwifiex_ret_11n_addba_req(struct mwifiex_private *priv,
 			tx_ba_tbl->amsdu = false;
 	} else {
 		dev_err(priv->adapter->dev, "BA stream not created\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -359,6 +399,10 @@ mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 	int ret_len = 0;
 	struct ieee80211_supported_band *sband;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee_types_header *hdr;
+>>>>>>> v3.18
 =======
 	struct ieee_types_header *hdr;
 >>>>>>> v3.18
@@ -381,7 +425,11 @@ mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 		       le16_to_cpu(ht_cap->header.len));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mwifiex_fill_cap_info(priv, radio_type, ht_cap);
+=======
+		mwifiex_fill_cap_info(priv, radio_type, &ht_cap->ht_cap);
+>>>>>>> v3.18
 =======
 		mwifiex_fill_cap_info(priv, radio_type, &ht_cap->ht_cap);
 >>>>>>> v3.18
@@ -404,8 +452,12 @@ mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 			memcpy((u8 *) ht_info +
 			       sizeof(struct mwifiex_ie_types_header),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       (u8 *) bss_desc->bcn_ht_oper +
 			       sizeof(struct ieee_types_header),
+=======
+			       (u8 *)bss_desc->bcn_ht_oper,
+>>>>>>> v3.18
 =======
 			       (u8 *)bss_desc->bcn_ht_oper,
 >>>>>>> v3.18
@@ -466,6 +518,7 @@ mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 
 	if (bss_desc->bcn_ext_cap) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ext_cap = (struct mwifiex_ie_types_extcap *) *buffer;
 		memset(ext_cap, 0, sizeof(struct mwifiex_ie_types_extcap));
 		ext_cap->header.type = cpu_to_le16(WLAN_EID_EXT_CAPABILITY);
@@ -478,6 +531,8 @@ mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 		*buffer += sizeof(struct mwifiex_ie_types_extcap);
 		ret_len += sizeof(struct mwifiex_ie_types_extcap);
 =======
+=======
+>>>>>>> v3.18
 		hdr = (void *)bss_desc->bcn_ext_cap;
 		ext_cap = (struct mwifiex_ie_types_extcap *) *buffer;
 		memset(ext_cap, 0, sizeof(struct mwifiex_ie_types_extcap));
@@ -496,6 +551,9 @@ mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 
 		*buffer += sizeof(struct mwifiex_ie_types_extcap) + hdr->len;
 		ret_len += sizeof(struct mwifiex_ie_types_extcap) + hdr->len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -574,7 +632,11 @@ mwifiex_get_ba_tbl(struct mwifiex_private *priv, int tid, u8 *ra)
 	spin_lock_irqsave(&priv->tx_ba_stream_tbl_lock, flags);
 	list_for_each_entry(tx_ba_tsr_tbl, &priv->tx_ba_stream_tbl_ptr, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!memcmp(tx_ba_tsr_tbl->ra, ra, ETH_ALEN) &&
+=======
+		if (ether_addr_equal_unaligned(tx_ba_tsr_tbl->ra, ra) &&
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal_unaligned(tx_ba_tsr_tbl->ra, ra) &&
 >>>>>>> v3.18
@@ -623,6 +685,7 @@ int mwifiex_send_addba(struct mwifiex_private *priv, int tid, u8 *peer_mac)
 {
 	struct host_cmd_ds_11n_addba_req add_ba_req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static u8 dialog_tok;
 	int ret;
 
@@ -634,6 +697,8 @@ int mwifiex_send_addba(struct mwifiex_private *priv, int tid, u8 *peer_mac)
 			  tx_win_size << BLOCKACKPARAM_WINSIZE_POS) |
 			 IMMEDIATE_BLOCK_ACK));
 =======
+=======
+>>>>>>> v3.18
 	u32 tx_win_size = priv->add_ba_param.tx_win_size;
 	static u8 dialog_tok;
 	int ret;
@@ -668,6 +733,9 @@ int mwifiex_send_addba(struct mwifiex_private *priv, int tid, u8 *peer_mac)
 		block_ack_param_set |= BLOCKACKPARAM_AMSDU_SUPP_MASK;
 
 	add_ba_req.block_ack_param_set = cpu_to_le16(block_ack_param_set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add_ba_req.block_ack_tmo = cpu_to_le16((u16)priv->add_ba_param.timeout);
 
@@ -681,8 +749,13 @@ int mwifiex_send_addba(struct mwifiex_private *priv, int tid, u8 *peer_mac)
 
 	/* We don't wait for the response of this command */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mwifiex_send_cmd_async(priv, HostCmd_CMD_11N_ADDBA_REQ,
 				     0, 0, &add_ba_req);
+=======
+	ret = mwifiex_send_cmd(priv, HostCmd_CMD_11N_ADDBA_REQ,
+			       0, 0, &add_ba_req, false);
+>>>>>>> v3.18
 =======
 	ret = mwifiex_send_cmd(priv, HostCmd_CMD_11N_ADDBA_REQ,
 			       0, 0, &add_ba_req, false);
@@ -714,8 +787,13 @@ int mwifiex_send_delba(struct mwifiex_private *priv, int tid, u8 *peer_mac,
 
 	/* We don't wait for the response of this command */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mwifiex_send_cmd_async(priv, HostCmd_CMD_11N_DELBA,
 				     HostCmd_ACT_GEN_SET, 0, &delba);
+=======
+	ret = mwifiex_send_cmd(priv, HostCmd_CMD_11N_DELBA,
+			       HostCmd_ACT_GEN_SET, 0, &delba, false);
+>>>>>>> v3.18
 =======
 	ret = mwifiex_send_cmd(priv, HostCmd_CMD_11N_DELBA,
 			       HostCmd_ACT_GEN_SET, 0, &delba, false);
@@ -794,6 +872,10 @@ int mwifiex_get_tx_ba_stream_tbl(struct mwifiex_private *priv,
 			__func__, rx_reo_tbl->tid);
 		memcpy(rx_reo_tbl->ra, tx_ba_tsr_tbl->ra, ETH_ALEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rx_reo_tbl->amsdu = tx_ba_tsr_tbl->amsdu;
+>>>>>>> v3.18
 =======
 		rx_reo_tbl->amsdu = tx_ba_tsr_tbl->amsdu;
 >>>>>>> v3.18
@@ -853,9 +935,12 @@ void mwifiex_set_ba_params(struct mwifiex_private *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
 }
 =======
+=======
+>>>>>>> v3.18
 	priv->add_ba_param.tx_amsdu = true;
 	priv->add_ba_param.rx_amsdu = true;
 
@@ -903,4 +988,7 @@ u8 mwifiex_get_sec_chan_offset(int chan)
 
 	return sec_offset;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -47,6 +47,10 @@ static struct api_info api_table[] = {
 	{ .group = HV_GRP_KT_CPU,				},
 	{ .group = HV_GRP_VT_CPU,				},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .group = HV_GRP_T5_CPU,				},
+>>>>>>> v3.18
 =======
 	{ .group = HV_GRP_T5_CPU,				},
 >>>>>>> v3.18

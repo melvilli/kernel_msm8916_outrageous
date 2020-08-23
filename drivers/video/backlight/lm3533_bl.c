@@ -285,7 +285,11 @@ static int lm3533_bl_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -301,11 +305,16 @@ static int lm3533_bl_probe(struct platform_device *pdev)
 
 	bl = devm_kzalloc(&pdev->dev, sizeof(*bl), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bl) {
 		dev_err(&pdev->dev,
 				"failed to allocate memory for backlight\n");
 		return -ENOMEM;
 	}
+=======
+	if (!bl)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!bl)
 		return -ENOMEM;
@@ -323,8 +332,14 @@ static int lm3533_bl_probe(struct platform_device *pdev)
 	props.max_brightness = LM3533_BL_MAX_BRIGHTNESS;
 	props.brightness = pdata->default_brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd = backlight_device_register(pdata->name, pdev->dev.parent, bl,
 						&lm3533_bl_ops, &props);
+=======
+	bd = devm_backlight_device_register(&pdev->dev, pdata->name,
+					pdev->dev.parent, bl, &lm3533_bl_ops,
+					&props);
+>>>>>>> v3.18
 =======
 	bd = devm_backlight_device_register(&pdev->dev, pdata->name,
 					pdev->dev.parent, bl, &lm3533_bl_ops,
@@ -344,7 +359,11 @@ static int lm3533_bl_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(&pdev->dev, "failed to create sysfs attributes\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_unregister;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -365,8 +384,11 @@ static int lm3533_bl_probe(struct platform_device *pdev)
 err_sysfs_remove:
 	sysfs_remove_group(&bd->dev.kobj, &lm3533_bl_attribute_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_unregister:
 	backlight_device_unregister(bd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -386,7 +408,10 @@ static int lm3533_bl_remove(struct platform_device *pdev)
 	lm3533_ctrlbank_disable(&bl->cb);
 	sysfs_remove_group(&bd->dev.kobj, &lm3533_bl_attribute_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(bd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -428,7 +453,10 @@ static struct platform_driver lm3533_bl_driver = {
 	.driver = {
 		.name	= "lm3533-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	= &lm3533_bl_pm_ops,

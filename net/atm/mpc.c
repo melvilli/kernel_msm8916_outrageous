@@ -479,7 +479,11 @@ static const uint8_t *copy_macs(struct mpoa_client *mpc,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(mpc->mps_macs, router_mac, ETH_ALEN);
+=======
+	ether_addr_copy(mpc->mps_macs, router_mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(mpc->mps_macs, router_mac);
 >>>>>>> v3.18
@@ -604,7 +608,11 @@ static netdev_tx_t mpc_send_packet(struct sk_buff *skb,
 
 non_ip:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mpc->old_ops->ndo_start_xmit(skb, dev);
+=======
+	return __netdev_start_xmit(mpc->old_ops, skb, dev, false);
+>>>>>>> v3.18
 =======
 	return __netdev_start_xmit(mpc->old_ops, skb, dev, false);
 >>>>>>> v3.18
@@ -715,7 +723,11 @@ static void mpc_push(struct atm_vcc *vcc, struct sk_buff *skb)
 		/* Pass control packets to daemon */
 		skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -1005,7 +1017,11 @@ int msg_to_mpoad(struct k_message *mesg, struct mpoa_client *mpc)
 	sk = sk_atm(mpc->mpoad_vcc);
 	skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, skb->len);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -1014,6 +1030,7 @@ int msg_to_mpoad(struct k_message *mesg, struct mpoa_client *mpc)
 }
 
 static int mpoa_event_listener(struct notifier_block *mpoa_notifier,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       unsigned long event, void *dev_ptr)
 {
@@ -1024,12 +1041,17 @@ static int mpoa_event_listener(struct notifier_block *mpoa_notifier,
 	dev = dev_ptr;
 
 =======
+=======
+>>>>>>> v3.18
 			       unsigned long event, void *ptr)
 {
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 	struct mpoa_client *mpc;
 	struct lec_priv *priv;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!net_eq(dev_net(dev), &init_net))
 		return NOTIFY_DONE;
@@ -1301,7 +1323,11 @@ static void purge_egress_shortcut(struct atm_vcc *vcc, eg_cache_entry *entry)
 	sk = sk_atm(vcc);
 	skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, skb->len);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -1524,7 +1550,11 @@ static void __exit atm_mpoa_cleanup(void)
 	mpc_proc_clean();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&mpc_timer);
+=======
+	del_timer_sync(&mpc_timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&mpc_timer);
 >>>>>>> v3.18

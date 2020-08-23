@@ -24,9 +24,12 @@
 static int dram_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* the pll dividers */
 static u32 mt7620_clk_divider[] = { 2, 3, 4, 8 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct ralink_pinmux_grp mode_mux[] = {
@@ -144,6 +147,7 @@ struct ralink_pinmux rt_gpio_pinmux = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init ralink_clk_init(void)
 {
 	unsigned long cpu_rate, sys_rate;
@@ -173,6 +177,8 @@ void __init ralink_clk_init(void)
 	ralink_clk_add("10000500.uart", 40000000);
 	ralink_clk_add("10000c00.uartlite", 40000000);
 =======
+=======
+>>>>>>> v3.18
 static __init u32
 mt7620_calc_rate(u32 ref_rate, u32 mul, u32 div)
 {
@@ -356,6 +362,9 @@ void __init ralink_clk_init(void)
 	ralink_clk_add("10000500.uart", periph_rate);
 	ralink_clk_add("10000b00.spi", sys_rate);
 	ralink_clk_add("10000c00.uartlite", periph_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -388,7 +397,11 @@ void prom_soc_init(struct ralink_soc_info *soc_info)
 		soc_info->compatible = "ralink,mt7620a-soc";
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic("mt7620: unknown SoC, n0:%08x n1:%08x\n", n0, n1);
+=======
+		panic("mt7620: unknown SoC, n0:%08x n1:%08x", n0, n1);
+>>>>>>> v3.18
 =======
 		panic("mt7620: unknown SoC, n0:%08x n1:%08x", n0, n1);
 >>>>>>> v3.18
@@ -408,6 +421,10 @@ void prom_soc_init(struct ralink_soc_info *soc_info)
 	switch (dram_type) {
 	case SYSCFG0_DRAM_TYPE_SDRAM:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pr_info("Board has SDRAM\n");
+>>>>>>> v3.18
 =======
 		pr_info("Board has SDRAM\n");
 >>>>>>> v3.18
@@ -417,6 +434,10 @@ void prom_soc_init(struct ralink_soc_info *soc_info)
 
 	case SYSCFG0_DRAM_TYPE_DDR1:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pr_info("Board has DDR1\n");
+>>>>>>> v3.18
 =======
 		pr_info("Board has DDR1\n");
 >>>>>>> v3.18
@@ -426,6 +447,10 @@ void prom_soc_init(struct ralink_soc_info *soc_info)
 
 	case SYSCFG0_DRAM_TYPE_DDR2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pr_info("Board has DDR2\n");
+>>>>>>> v3.18
 =======
 		pr_info("Board has DDR2\n");
 >>>>>>> v3.18

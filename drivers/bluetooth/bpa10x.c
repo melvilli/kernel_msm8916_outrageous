@@ -38,7 +38,11 @@
 #define VERSION "0.10"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id bpa10x_table[] = {
+=======
+static const struct usb_device_id bpa10x_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id bpa10x_table[] = {
 >>>>>>> v3.18
@@ -134,8 +138,11 @@ static int bpa10x_recv(struct hci_dev *hdev, int queue, void *buf, int count)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb->dev = (void *) hdev;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			data->rx_skb[queue] = skb;
@@ -163,7 +170,11 @@ static int bpa10x_recv(struct hci_dev *hdev, int queue, void *buf, int count)
 
 			bt_cb(skb)->pkt_type = scb->type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hci_recv_frame(skb);
+=======
+			hci_recv_frame(hdev, skb);
+>>>>>>> v3.18
 =======
 			hci_recv_frame(hdev, skb);
 >>>>>>> v3.18
@@ -364,9 +375,14 @@ static int bpa10x_flush(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bpa10x_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev *hdev = (struct hci_dev *) skb->dev;
+=======
+static int bpa10x_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+>>>>>>> v3.18
 =======
 static int bpa10x_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
@@ -383,6 +399,11 @@ static int bpa10x_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb->dev = (void *) hdev;
+
+>>>>>>> v3.18
 =======
 	skb->dev = (void *) hdev;
 

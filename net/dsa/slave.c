@@ -10,15 +10,21 @@
 
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/phy.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/etherdevice.h>
 #include <linux/phy.h>
 #include <linux/phy_fixed.h>
 #include <linux/of_net.h>
 #include <linux/of_mdio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "dsa_priv.h"
 
@@ -28,7 +34,11 @@ static int dsa_slave_phy_read(struct mii_bus *bus, int addr, int reg)
 	struct dsa_switch *ds = bus->priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ds->phys_port_mask & (1 << addr))
+=======
+	if (ds->phys_mii_mask & (1 << addr))
+>>>>>>> v3.18
 =======
 	if (ds->phys_mii_mask & (1 << addr))
 >>>>>>> v3.18
@@ -42,7 +52,11 @@ static int dsa_slave_phy_write(struct mii_bus *bus, int addr, int reg, u16 val)
 	struct dsa_switch *ds = bus->priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ds->phys_port_mask & (1 << addr))
+=======
+	if (ds->phys_mii_mask & (1 << addr))
+>>>>>>> v3.18
 =======
 	if (ds->phys_mii_mask & (1 << addr))
 >>>>>>> v3.18
@@ -60,7 +74,11 @@ void dsa_slave_mii_bus_init(struct dsa_switch *ds)
 	snprintf(ds->slave_mii_bus->id, MII_BUS_ID_SIZE, "dsa-%d:%.2x",
 			ds->index, ds->pd->sw_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ds->slave_mii_bus->parent = &ds->master_mii_bus->dev;
+=======
+	ds->slave_mii_bus->parent = ds->master_dev;
+>>>>>>> v3.18
 =======
 	ds->slave_mii_bus->parent = ds->master_dev;
 >>>>>>> v3.18
@@ -82,6 +100,10 @@ static int dsa_slave_open(struct net_device *dev)
 	struct dsa_slave_priv *p = netdev_priv(dev);
 	struct net_device *master = p->parent->dst->master_netdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dsa_switch *ds = p->parent;
+>>>>>>> v3.18
 =======
 	struct dsa_switch *ds = p->parent;
 >>>>>>> v3.18
@@ -108,9 +130,12 @@ static int dsa_slave_open(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	if (ds->drv->port_enable) {
 		err = ds->drv->port_enable(ds, p->port, p->phy);
 		if (err)
@@ -125,6 +150,9 @@ static int dsa_slave_open(struct net_device *dev)
 clear_promisc:
 	if (dev->flags & IFF_PROMISC)
 		dev_set_promiscuity(master, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 clear_allmulti:
 	if (dev->flags & IFF_ALLMULTI)
@@ -141,11 +169,17 @@ static int dsa_slave_close(struct net_device *dev)
 	struct dsa_slave_priv *p = netdev_priv(dev);
 	struct net_device *master = p->parent->dst->master_netdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct dsa_switch *ds = p->parent;
 
 	if (p->phy)
 		phy_stop(p->phy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_mc_unsync(master, dev);
@@ -159,6 +193,12 @@ static int dsa_slave_close(struct net_device *dev)
 		dev_uc_del(master, dev->dev_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ds->drv->port_disable)
+		ds->drv->port_disable(ds, p->port, p->phy);
+
+>>>>>>> v3.18
 =======
 	if (ds->drv->port_disable)
 		ds->drv->port_disable(ds, p->port, p->phy);
@@ -211,7 +251,11 @@ static int dsa_slave_set_mac_address(struct net_device *dev, void *a)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, addr->sa_data, ETH_ALEN);
+=======
+	ether_addr_copy(dev->dev_addr, addr->sa_data);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(dev->dev_addr, addr->sa_data);
 >>>>>>> v3.18
@@ -230,7 +274,10 @@ static int dsa_slave_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static netdev_tx_t dsa_slave_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 	struct dsa_slave_priv *p = netdev_priv(dev);
@@ -249,6 +296,9 @@ static netdev_tx_t dsa_slave_notag_xmit(struct sk_buff *skb,
 	return NETDEV_TX_OK;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ethtool operations *******************************************************/
@@ -362,7 +412,10 @@ static int dsa_slave_get_sset_count(struct net_device *dev, int sset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void dsa_slave_get_wol(struct net_device *dev, struct ethtool_wolinfo *w)
 {
 	struct dsa_slave_priv *p = netdev_priv(dev);
@@ -422,6 +475,9 @@ static int dsa_slave_get_eee(struct net_device *dev, struct ethtool_eee *e)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct ethtool_ops dsa_slave_ethtool_ops = {
 	.get_settings		= dsa_slave_get_settings,
@@ -432,6 +488,7 @@ static const struct ethtool_ops dsa_slave_ethtool_ops = {
 	.get_strings		= dsa_slave_get_strings,
 	.get_ethtool_stats	= dsa_slave_get_ethtool_stats,
 	.get_sset_count		= dsa_slave_get_sset_count,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -466,6 +523,8 @@ static const struct net_device_ops trailer_netdev_ops = {
 	.ndo_stop		= dsa_slave_close,
 	.ndo_start_xmit		= trailer_xmit,
 =======
+=======
+>>>>>>> v3.18
 	.set_wol		= dsa_slave_set_wol,
 	.get_wol		= dsa_slave_get_wol,
 	.set_eee		= dsa_slave_set_eee,
@@ -477,6 +536,9 @@ static const struct net_device_ops dsa_slave_netdev_ops = {
 	.ndo_open	 	= dsa_slave_open,
 	.ndo_stop		= dsa_slave_close,
 	.ndo_start_xmit		= dsa_slave_xmit,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ndo_change_rx_flags	= dsa_slave_change_rx_flags,
 	.ndo_set_rx_mode	= dsa_slave_set_rx_mode,
@@ -484,10 +546,13 @@ static const struct net_device_ops dsa_slave_netdev_ops = {
 	.ndo_do_ioctl		= dsa_slave_ioctl,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 /* slave device setup *******************************************************/
 =======
+=======
+>>>>>>> v3.18
 
 static void dsa_slave_adjust_link(struct net_device *dev)
 {
@@ -612,6 +677,9 @@ int dsa_slave_resume(struct net_device *slave_dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct net_device *
 dsa_slave_create(struct dsa_switch *ds, struct device *parent,
@@ -623,8 +691,13 @@ dsa_slave_create(struct dsa_switch *ds, struct device *parent,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	slave_dev = alloc_netdev(sizeof(struct dsa_slave_priv),
 				 name, ether_setup);
+=======
+	slave_dev = alloc_netdev(sizeof(struct dsa_slave_priv), name,
+				 NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 =======
 	slave_dev = alloc_netdev(sizeof(struct dsa_slave_priv), name,
 				 NET_NAME_UNKNOWN, ether_setup);
@@ -633,6 +706,7 @@ dsa_slave_create(struct dsa_switch *ds, struct device *parent,
 		return slave_dev;
 
 	slave_dev->features = master->vlan_features;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SET_ETHTOOL_OPS(slave_dev, &dsa_slave_ethtool_ops);
 	memcpy(slave_dev->dev_addr, master->dev_addr, ETH_ALEN);
@@ -667,6 +741,8 @@ dsa_slave_create(struct dsa_switch *ds, struct device *parent,
 	p->port = port;
 	p->phy = ds->slave_mii_bus->phy_map[port];
 =======
+=======
+>>>>>>> v3.18
 	slave_dev->ethtool_ops = &dsa_slave_ethtool_ops;
 	eth_hw_addr_inherit(slave_dev, master);
 	slave_dev->tx_queue_len = 0;
@@ -712,6 +788,9 @@ dsa_slave_create(struct dsa_switch *ds, struct device *parent,
 	p->old_duplex = -1;
 
 	dsa_slave_phy_setup(p, slave_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = register_netdev(slave_dev);
@@ -726,6 +805,12 @@ dsa_slave_create(struct dsa_switch *ds, struct device *parent,
 
 	if (p->phy != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (ds->drv->get_phy_flags)
+			p->phy->dev_flags |= ds->drv->get_phy_flags(ds, port);
+
+>>>>>>> v3.18
 =======
 		if (ds->drv->get_phy_flags)
 			p->phy->dev_flags |= ds->drv->get_phy_flags(ds, port);
@@ -739,7 +824,10 @@ dsa_slave_create(struct dsa_switch *ds, struct device *parent,
 		p->phy->duplex = 0;
 		p->phy->advertising = p->phy->supported | ADVERTISED_Autoneg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_start_aneg(p->phy);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

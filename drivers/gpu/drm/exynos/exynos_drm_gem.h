@@ -13,6 +13,11 @@
 #define _EXYNOS_DRM_GEM_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_gem.h>
 
@@ -66,7 +71,11 @@ struct exynos_drm_gem_buf {
  * @flags: indicate memory type to allocated buffer and cache attruibute.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * P.S. this object would be transfered to user as kms_bo.handle so
+=======
+ * P.S. this object would be transferred to user as kms_bo.handle so
+>>>>>>> v3.18
 =======
  * P.S. this object would be transferred to user as kms_bo.handle so
 >>>>>>> v3.18
@@ -121,6 +130,7 @@ void exynos_drm_gem_put_dma_addr(struct drm_device *dev,
 					struct drm_file *filp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* get buffer offset to map to user space. */
 int exynos_drm_gem_map_offset_ioctl(struct drm_device *dev, void *data,
 				    struct drm_file *file_priv);
@@ -132,6 +142,8 @@ int exynos_drm_gem_map_offset_ioctl(struct drm_device *dev, void *data,
 int exynos_drm_gem_mmap_ioctl(struct drm_device *dev, void *data,
 			      struct drm_file *file_priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* map user space allocated by malloc to pages. */
@@ -148,9 +160,12 @@ unsigned long exynos_drm_gem_get_size(struct drm_device *dev,
 						struct drm_file *file_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* initialize gem object. */
 int exynos_drm_gem_init_object(struct drm_gem_object *obj);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* free gem object. */
@@ -167,6 +182,7 @@ int exynos_drm_gem_dumb_map_offset(struct drm_file *file_priv,
 				   uint64_t *offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * destroy memory region allocated.
  *	- a gem handle and physical memory region pointed by a gem object
@@ -176,6 +192,8 @@ int exynos_drm_gem_dumb_destroy(struct drm_file *file_priv,
 				struct drm_device *dev,
 				unsigned int handle);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* page fault handler and mmap fault address(virtual) to physical memory. */

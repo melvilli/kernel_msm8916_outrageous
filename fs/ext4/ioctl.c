@@ -18,7 +18,10 @@
 #include "ext4_jbd2.h"
 #include "ext4.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ext4_extents.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -106,6 +109,7 @@ static long swap_inode_boot_loader(struct super_block *sb,
 	int err;
 	struct inode *inode_bl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ext4_inode_info *ei;
 	struct ext4_inode_info *ei_bl;
 	struct ext4_sb_info *sbi;
@@ -129,6 +133,8 @@ static long swap_inode_boot_loader(struct super_block *sb,
 		goto swap_boot_out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct ext4_inode_info *ei_bl;
 	struct ext4_sb_info *sbi = EXT4_SB(sb);
 
@@ -141,6 +147,9 @@ static long swap_inode_boot_loader(struct super_block *sb,
 	inode_bl = ext4_iget(sb, EXT4_BOOT_LOADER_INO);
 	if (IS_ERR(inode_bl))
 		return PTR_ERR(inode_bl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ei_bl = EXT4_I(inode_bl);
 
@@ -150,7 +159,11 @@ static long swap_inode_boot_loader(struct super_block *sb,
 	/* Protect orig inodes against a truncate and make sure,
 	 * that only 1 swap_inode_boot_loader is running. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ext4_inode_double_lock(inode, inode_bl);
+=======
+	lock_two_nondirectories(inode, inode_bl);
+>>>>>>> v3.18
 =======
 	lock_two_nondirectories(inode, inode_bl);
 >>>>>>> v3.18
@@ -221,9 +234,13 @@ static long swap_inode_boot_loader(struct super_block *sb,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ext4_journal_stop(handle);
 
+=======
+	ext4_journal_stop(handle);
+>>>>>>> v3.18
 =======
 	ext4_journal_stop(handle);
 >>>>>>> v3.18
@@ -233,12 +250,17 @@ journal_err_out:
 	ext4_inode_resume_unlocked_dio(inode);
 	ext4_inode_resume_unlocked_dio(inode_bl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ext4_inode_double_unlock(inode, inode_bl);
 
 	iput(inode_bl);
 
 swap_boot_out:
+=======
+	unlock_two_nondirectories(inode, inode_bl);
+	iput(inode_bl);
+>>>>>>> v3.18
 =======
 	unlock_two_nondirectories(inode, inode_bl);
 	iput(inode_bl);
@@ -380,8 +402,12 @@ flags_out:
 			return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (EXT4_HAS_RO_COMPAT_FEATURE(inode->i_sb,
 				EXT4_FEATURE_RO_COMPAT_METADATA_CSUM)) {
+=======
+		if (ext4_has_metadata_csum(inode->i_sb)) {
+>>>>>>> v3.18
 =======
 		if (ext4_has_metadata_csum(inode->i_sb)) {
 >>>>>>> v3.18
@@ -669,6 +695,11 @@ resizefs_out:
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case EXT4_IOC_PRECACHE_EXTENTS:
+		return ext4_ext_precache(inode);
+>>>>>>> v3.18
 =======
 	case EXT4_IOC_PRECACHE_EXTENTS:
 		return ext4_ext_precache(inode);
@@ -738,6 +769,10 @@ long ext4_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case FITRIM:
 	case EXT4_IOC_RESIZE_FS:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case EXT4_IOC_PRECACHE_EXTENTS:
+>>>>>>> v3.18
 =======
 	case EXT4_IOC_PRECACHE_EXTENTS:
 >>>>>>> v3.18

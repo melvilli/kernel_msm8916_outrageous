@@ -16,6 +16,7 @@
    Free Software Foundation, Inc., 59 Temple Place -
    Suite 330, Boston, MA 02111-1307, USA.
 <<<<<<< HEAD
+<<<<<<< HEAD
 -----------------------------------------------------------------------------*/
 
 #include <linux/kernel.h>
@@ -23,10 +24,15 @@
 #include <linux/proc_fs.h>
 
 =======
+=======
+>>>>>>> v3.18
   -------------------------------------------------------------------------*/
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/ptrace.h>
@@ -72,8 +78,13 @@ static struct timer_list poll_timer = {
 static u16 cmdbuffer[1024];
 static u8 tempbuffer[1600];
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 ft1000_card_present = 0;
 static u8 flarion_ft1000_cnt = 0;
+=======
+static u8 ft1000_card_present;
+static u8 flarion_ft1000_cnt;
+>>>>>>> v3.18
 =======
 static u8 ft1000_card_present;
 static u8 flarion_ft1000_cnt;
@@ -93,6 +104,7 @@ MODULE_SUPPORTED_DEVICE("FT1000");
 #define MAX_RCV_LOOP   100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_read_fifo_len
@@ -107,6 +119,8 @@ MODULE_SUPPORTED_DEVICE("FT1000");
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_read_fifo_len
@@ -120,6 +134,9 @@ MODULE_SUPPORTED_DEVICE("FT1000");
        value  - number of bytes available in the ASIC Uplink FIFO.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u16 ft1000_read_fifo_len(struct net_device *dev)
 {
@@ -131,6 +148,7 @@ static inline u16 ft1000_read_fifo_len(struct net_device *dev)
 		return (ft1000_read_reg(dev, FT1000_REG_MAG_UFSR) - 16);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -145,6 +163,8 @@ static inline u16 ft1000_read_fifo_len(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_read_dpram
@@ -157,6 +177,9 @@ static inline u16 ft1000_read_fifo_len(struct net_device *dev)
        value  - value of dpram
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u16 ft1000_read_dpram(struct net_device *dev, int offset)
 {
@@ -165,7 +188,11 @@ u16 ft1000_read_dpram(struct net_device *dev, int offset)
 	u16 data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Provide mutual exclusive access while reading ASIC registers.
+=======
+	/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 	/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -174,6 +201,7 @@ u16 ft1000_read_dpram(struct net_device *dev, int offset)
 	data = ft1000_read_reg(dev, FT1000_REG_DPRAM_DATA);
 	spin_unlock_irqrestore(&info->dpram_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (data);
 }
@@ -192,6 +220,8 @@ u16 ft1000_read_dpram(struct net_device *dev, int offset)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	return data;
 }
 
@@ -208,6 +238,9 @@ u16 ft1000_read_dpram(struct net_device *dev, int offset)
        none.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void ft1000_write_dpram(struct net_device *dev,
 					  int offset, u16 value)
@@ -216,7 +249,11 @@ static inline void ft1000_write_dpram(struct net_device *dev,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Provide mutual exclusive access while reading ASIC registers.
+=======
+	/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 	/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -226,6 +263,7 @@ static inline void ft1000_write_dpram(struct net_device *dev,
 	spin_unlock_irqrestore(&info->dpram_lock, flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -240,6 +278,8 @@ static inline void ft1000_write_dpram(struct net_device *dev,
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_read_dpram_mag_16
@@ -252,6 +292,9 @@ static inline void ft1000_write_dpram(struct net_device *dev,
        value  - value of dpram
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset, int Index)
 {
@@ -260,15 +303,21 @@ u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset, int Index)
 	u16 data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Provide mutual exclusive access while reading ASIC registers.
 	spin_lock_irqsave(&info->dpram_lock, flags);
 	ft1000_write_reg(dev, FT1000_REG_DPRAM_ADDR, offset);
 	// check if we want to read upper or lower 32-bit word
 =======
+=======
+>>>>>>> v3.18
 	/* Provide mutual exclusive access while reading ASIC registers. */
 	spin_lock_irqsave(&info->dpram_lock, flags);
 	ft1000_write_reg(dev, FT1000_REG_DPRAM_ADDR, offset);
 	/* check if we want to read upper or lower 32-bit word */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (Index) {
 		data = ft1000_read_reg(dev, FT1000_REG_MAG_DPDATAL);
@@ -277,6 +326,7 @@ u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset, int Index)
 	}
 	spin_unlock_irqrestore(&info->dpram_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (data);
 }
@@ -295,6 +345,8 @@ u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset, int Index)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	return data;
 }
 
@@ -311,6 +363,9 @@ u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset, int Index)
        none.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void ft1000_write_dpram_mag_16(struct net_device *dev,
 						 int offset, u16 value, int Index)
@@ -319,7 +374,11 @@ static inline void ft1000_write_dpram_mag_16(struct net_device *dev,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Provide mutual exclusive access while reading ASIC registers.
+=======
+	/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 	/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -334,6 +393,7 @@ static inline void ft1000_write_dpram_mag_16(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_read_dpram_mag_32
@@ -347,6 +407,8 @@ static inline void ft1000_write_dpram_mag_16(struct net_device *dev,
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_read_dpram_mag_32
@@ -359,6 +421,9 @@ static inline void ft1000_write_dpram_mag_16(struct net_device *dev,
        value  - value of dpram
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u32 ft1000_read_dpram_mag_32(struct net_device *dev, int offset)
 {
@@ -367,7 +432,11 @@ u32 ft1000_read_dpram_mag_32(struct net_device *dev, int offset)
 	u32 data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Provide mutual exclusive access while reading ASIC registers.
+=======
+	/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 	/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -376,6 +445,7 @@ u32 ft1000_read_dpram_mag_32(struct net_device *dev, int offset)
 	data = inl(dev->base_addr + FT1000_REG_MAG_DPDATAL);
 	spin_unlock_irqrestore(&info->dpram_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (data);
 }
@@ -394,6 +464,8 @@ u32 ft1000_read_dpram_mag_32(struct net_device *dev, int offset)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	return data;
 }
 
@@ -410,6 +482,9 @@ u32 ft1000_read_dpram_mag_32(struct net_device *dev, int offset)
        none.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ft1000_write_dpram_mag_32(struct net_device *dev, int offset, u32 value)
 {
@@ -417,7 +492,11 @@ void ft1000_write_dpram_mag_32(struct net_device *dev, int offset, u32 value)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Provide mutual exclusive access while reading ASIC registers.
+=======
+	/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 	/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -427,6 +506,7 @@ void ft1000_write_dpram_mag_32(struct net_device *dev, int offset, u32 value)
 	spin_unlock_irqrestore(&info->dpram_lock, flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -439,6 +519,8 @@ void ft1000_write_dpram_mag_32(struct net_device *dev, int offset, u32 value)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_enable_interrupts
@@ -449,6 +531,9 @@ void ft1000_write_dpram_mag_32(struct net_device *dev, int offset, u32 value)
        None.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_enable_interrupts(struct net_device *dev)
 {
@@ -463,6 +548,7 @@ static void ft1000_enable_interrupts(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_disable_interrupts
@@ -474,6 +560,8 @@ static void ft1000_enable_interrupts(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_disable_interrupts
@@ -484,6 +572,9 @@ static void ft1000_enable_interrupts(struct net_device *dev)
        None.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_disable_interrupts(struct net_device *dev)
 {
@@ -498,6 +589,7 @@ static void ft1000_disable_interrupts(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_reset_asic
@@ -510,6 +602,8 @@ static void ft1000_disable_interrupts(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_reset_asic
@@ -521,6 +615,9 @@ static void ft1000_disable_interrupts(struct net_device *dev)
        none
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_reset_asic(struct net_device *dev)
 {
@@ -533,13 +630,19 @@ static void ft1000_reset_asic(struct net_device *dev)
 	(*info->ft1000_reset) (pcmcia->link);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Let's use the register provided by the Magnemite ASIC to reset the
 	// ASIC and DSP.
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Let's use the register provided by the Magnemite ASIC to reset the
 	 * ASIC and DSP.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (info->AsicID == MAGNEMITE_ID) {
 		ft1000_write_reg(dev, FT1000_REG_RESET,
@@ -547,6 +650,7 @@ static void ft1000_reset_asic(struct net_device *dev)
 	}
 	mdelay(1);
 	if (info->AsicID == ELECTRABUZZ_ID) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// set watermark to -1 in order to not generate an interrupt
 		ft1000_write_reg(dev, FT1000_REG_WATERMARK, 0xffff);
@@ -556,6 +660,8 @@ static void ft1000_reset_asic(struct net_device *dev)
 	}
 	// clear interrupts
 =======
+=======
+>>>>>>> v3.18
 		/* set watermark to -1 in order to not generate an interrupt */
 		ft1000_write_reg(dev, FT1000_REG_WATERMARK, 0xffff);
 	} else {
@@ -563,6 +669,9 @@ static void ft1000_reset_asic(struct net_device *dev)
 		ft1000_write_reg(dev, FT1000_REG_MAG_WATERMARK, 0xffff);
 	}
 	/* clear interrupts */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tempword = ft1000_read_reg(dev, FT1000_REG_SUP_ISR);
 	DEBUG(1, "ft1000_hw: interrupt status register = 0x%x\n", tempword);
@@ -572,6 +681,7 @@ static void ft1000_reset_asic(struct net_device *dev)
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -585,6 +695,8 @@ static void ft1000_reset_asic(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_reset_card
@@ -596,6 +708,9 @@ static void ft1000_reset_asic(struct net_device *dev)
                 true  (card reset successful)
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_reset_card(struct net_device *dev)
 {
@@ -613,9 +728,15 @@ static int ft1000_reset_card(struct net_device *dev)
 	ft1000_disable_interrupts(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	del_timer(&poll_timer);
 
 	// Make sure we free any memory reserve for provisioning
+=======
+	/* del_timer(&poll_timer); */
+
+	/* Make sure we free any memory reserve for provisioning */
+>>>>>>> v3.18
 =======
 	/* del_timer(&poll_timer); */
 
@@ -641,7 +762,11 @@ static int ft1000_reset_card(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Copy DSP session record into info block if this is not a coldstart
+=======
+	/* Copy DSP session record into info block if this is not a coldstart */
+>>>>>>> v3.18
 =======
 	/* Copy DSP session record into info block if this is not a coldstart */
 >>>>>>> v3.18
@@ -669,7 +794,11 @@ static int ft1000_reset_card(struct net_device *dev)
 	DEBUG(1, "ft1000_hw:ft1000_reset_card:resetting ASIC\n");
 	mdelay(10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//reset ASIC
+=======
+	/* reset ASIC */
+>>>>>>> v3.18
 =======
 	/* reset ASIC */
 >>>>>>> v3.18
@@ -679,7 +808,11 @@ static int ft1000_reset_card(struct net_device *dev)
 
 	if (info->AsicID == MAGNEMITE_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Put dsp in reset and take ASIC out of reset
+=======
+		/* Put dsp in reset and take ASIC out of reset */
+>>>>>>> v3.18
 =======
 		/* Put dsp in reset and take ASIC out of reset */
 >>>>>>> v3.18
@@ -687,6 +820,7 @@ static int ft1000_reset_card(struct net_device *dev)
 			  "ft1000_hw:ft1000_reset_card:Put DSP in reset and take ASIC out of reset\n");
 		ft1000_write_reg(dev, FT1000_REG_RESET, DSP_RESET_BIT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Setting MAGNEMITE ASIC to big endian mode
 		ft1000_write_reg(dev, FT1000_REG_SUP_CTRL, HOST_INTF_BE);
@@ -701,6 +835,8 @@ static int ft1000_reset_card(struct net_device *dev)
 
 		// Wait for 0xfefe indicating dsp ready before starting download
 =======
+=======
+>>>>>>> v3.18
 		/* Setting MAGNEMITE ASIC to big endian mode */
 		ft1000_write_reg(dev, FT1000_REG_SUP_CTRL, HOST_INTF_BE);
 		/* Download bootloader */
@@ -713,6 +849,9 @@ static int ft1000_reset_card(struct net_device *dev)
 		DEBUG(0, "ft1000_hw:ft1000_reset_card:Take DSP out of reset\n");
 
 		/* Wait for 0xfefe indicating dsp ready before starting download */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = 0; i < 50; i++) {
 			tempword =
@@ -732,7 +871,11 @@ static int ft1000_reset_card(struct net_device *dev)
 
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Take DSP out of reset
+=======
+		/* Take DSP out of reset */
+>>>>>>> v3.18
 =======
 		/* Take DSP out of reset */
 >>>>>>> v3.18
@@ -751,12 +894,15 @@ static int ft1000_reset_card(struct net_device *dev)
 
 	if (info->AsicID == ELECTRABUZZ_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Need to initialize the FIFO length counter to zero in order to sync up
 		// with the DSP
 		info->fifo_cnt = 0;
 		ft1000_write_dpram(dev, FT1000_FIFO_LEN, info->fifo_cnt);
 		// Initialize DSP heartbeat area to ho
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Need to initialize the FIFO length counter to zero in order to sync up
 		 * with the DSP
@@ -764,6 +910,9 @@ static int ft1000_reset_card(struct net_device *dev)
 		info->fifo_cnt = 0;
 		ft1000_write_dpram(dev, FT1000_FIFO_LEN, info->fifo_cnt);
 		/* Initialize DSP heartbeat area to ho */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ft1000_write_dpram(dev, FT1000_HI_HO, ho);
 		tempword = ft1000_read_dpram(dev, FT1000_HI_HO);
@@ -771,7 +920,11 @@ static int ft1000_reset_card(struct net_device *dev)
 			  tempword);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Initialize DSP heartbeat area to ho
+=======
+		/* Initialize DSP heartbeat area to ho */
+>>>>>>> v3.18
 =======
 		/* Initialize DSP heartbeat area to ho */
 >>>>>>> v3.18
@@ -789,9 +942,15 @@ static int ft1000_reset_card(struct net_device *dev)
 
 	/* Schedule heartbeat process to run every 2 seconds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	poll_timer.expires = jiffies + (2*HZ);
 //	poll_timer.data = (u_long)dev;
 //	add_timer(&poll_timer);
+=======
+	/* poll_timer.expires = jiffies + (2*HZ); */
+	/* poll_timer.data = (u_long)dev; */
+	/* add_timer(&poll_timer); */
+>>>>>>> v3.18
 =======
 	/* poll_timer.expires = jiffies + (2*HZ); */
 	/* poll_timer.data = (u_long)dev; */
@@ -802,6 +961,7 @@ static int ft1000_reset_card(struct net_device *dev)
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -816,6 +976,8 @@ static int ft1000_reset_card(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_chkcard
@@ -828,19 +990,28 @@ static int ft1000_reset_card(struct net_device *dev)
                 true  (device is present)
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_chkcard(struct net_device *dev)
 {
 	u16 tempword;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Mask register is used to check for device presence since it is never
 	// set to zero.
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Mask register is used to check for device presence since it is never
 	 * set to zero.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tempword = ft1000_read_reg(dev, FT1000_REG_SUP_IMASK);
 	if (tempword == 0) {
@@ -849,13 +1020,19 @@ static int ft1000_chkcard(struct net_device *dev)
 		return false;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// The system will return the value of 0xffff for the version register
 	// if the device is not present.
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The system will return the value of 0xffff for the version register
 	 * if the device is not present.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tempword = ft1000_read_reg(dev, FT1000_REG_ASIC_ID);
 	if (tempword == 0xffff) {
@@ -867,6 +1044,7 @@ static int ft1000_chkcard(struct net_device *dev)
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -880,6 +1058,8 @@ static int ft1000_chkcard(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_hbchk
@@ -891,6 +1071,9 @@ static int ft1000_chkcard(struct net_device *dev)
        none
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_hbchk(u_long data)
 {
@@ -903,7 +1086,11 @@ static void ft1000_hbchk(u_long data)
 
 	if (info->CardReady == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Perform dsp heartbeat check
+=======
+		/* Perform dsp heartbeat check */
+>>>>>>> v3.18
 =======
 		/* Perform dsp heartbeat check */
 >>>>>>> v3.18
@@ -918,7 +1105,11 @@ static void ft1000_hbchk(u_long data)
 		DEBUG(1, "ft1000_hw:ft1000_hbchk:hi_ho value = 0x%x\n",
 			  tempword);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Let's perform another check if ho is not detected
+=======
+		/* Let's perform another check if ho is not detected */
+>>>>>>> v3.18
 =======
 		/* Let's perform another check if ho is not detected */
 >>>>>>> v3.18
@@ -976,7 +1167,11 @@ static void ft1000_hbchk(u_long data)
 
 		tempword = ft1000_read_reg(dev, FT1000_REG_DOORBELL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Let's check doorbell again if fail
+=======
+		/* Let's check doorbell again if fail */
+>>>>>>> v3.18
 =======
 		/* Let's check doorbell again if fail */
 >>>>>>> v3.18
@@ -1027,13 +1222,19 @@ static void ft1000_hbchk(u_long data)
 			return;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Set dedicated area to hi and ring appropriate doorbell according
 		// to hi/ho heartbeat protocol
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Set dedicated area to hi and ring appropriate doorbell according
 		 * to hi/ho heartbeat protocol
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (info->AsicID == ELECTRABUZZ_ID) {
 			ft1000_write_dpram(dev, FT1000_HI_HO, hi);
@@ -1051,7 +1252,11 @@ static void ft1000_hbchk(u_long data)
 				   FT1000_MAG_HI_HO_INDX));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
         // Let's write hi again if fail
+=======
+		/* Let's write hi again if fail */
+>>>>>>> v3.18
 =======
 		/* Let's write hi again if fail */
 >>>>>>> v3.18
@@ -1126,6 +1331,7 @@ static void ft1000_hbchk(u_long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_send_cmd
@@ -1135,6 +1341,8 @@ static void ft1000_hbchk(u_long data)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_send_cmd
@@ -1143,6 +1351,9 @@ static void ft1000_hbchk(u_long data)
    Output:
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size, u16 qtype)
 {
@@ -1153,7 +1364,11 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 
 	size += sizeof(struct pseudo_hdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// check for odd byte and increment to 16-bit word align value
+=======
+	/* check for odd byte and increment to 16-bit word align value */
+>>>>>>> v3.18
 =======
 	/* check for odd byte and increment to 16-bit word align value */
 >>>>>>> v3.18
@@ -1163,12 +1378,15 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 	DEBUG(1, "FT1000:ft1000_send_cmd:total length = %d\n", size);
 	DEBUG(1, "FT1000:ft1000_send_cmd:length = %d\n", ntohs(*ptempbuffer));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// put message into slow queue area
 	// All messages are in the form total_len + pseudo header + message body
 	spin_lock_irqsave(&info->dpram_lock, flags);
 
     // Make sure SLOWQ doorbell is clear
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * put message into slow queue area
 	 * All messages are in the form total_len + pseudo header + message body
@@ -1176,6 +1394,9 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 	spin_lock_irqsave(&info->dpram_lock, flags);
 
     /* Make sure SLOWQ doorbell is clear */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     tempword = ft1000_read_reg(dev, FT1000_REG_DOORBELL);
     i=0;
@@ -1193,9 +1414,15 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 		ft1000_write_reg(dev, FT1000_REG_DPRAM_ADDR,
 				 FT1000_DPRAM_TX_BASE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Write total length to dpram
 		ft1000_write_reg(dev, FT1000_REG_DPRAM_DATA, size);
 		// Write pseudo header and messgae body
+=======
+		/* Write total length to dpram */
+		ft1000_write_reg(dev, FT1000_REG_DPRAM_DATA, size);
+		/* Write pseudo header and messgae body */
+>>>>>>> v3.18
 =======
 		/* Write total length to dpram */
 		ft1000_write_reg(dev, FT1000_REG_DPRAM_DATA, size);
@@ -1211,9 +1438,15 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 		ft1000_write_reg(dev, FT1000_REG_DPRAM_ADDR,
 				 FT1000_DPRAM_MAG_TX_BASE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Write total length to dpram
 		ft1000_write_reg(dev, FT1000_REG_MAG_DPDATAH, htons(size));
 		// Write pseudo header and messgae body
+=======
+		/* Write total length to dpram */
+		ft1000_write_reg(dev, FT1000_REG_MAG_DPDATAH, htons(size));
+		/* Write pseudo header and messgae body */
+>>>>>>> v3.18
 =======
 		/* Write total length to dpram */
 		ft1000_write_reg(dev, FT1000_REG_MAG_DPDATAH, htons(size));
@@ -1239,6 +1472,7 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 	spin_unlock_irqrestore(&info->dpram_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// ring doorbell to notify DSP that we have a message ready
 	ft1000_write_reg(dev, FT1000_REG_DOORBELL, FT1000_DB_DPRAM_TX);
 }
@@ -1257,6 +1491,8 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	/* ring doorbell to notify DSP that we have a message ready */
 	ft1000_write_reg(dev, FT1000_REG_DOORBELL, FT1000_DB_DPRAM_TX);
 }
@@ -1274,6 +1510,9 @@ static void ft1000_send_cmd (struct net_device *dev, u16 *ptempbuffer, int size,
             = 1 (successful)
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 				int maxsz, u16 *pnxtph)
@@ -1328,7 +1567,11 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 				pbuffer++;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//copy odd aligned word
+=======
+			/* copy odd aligned word */
+>>>>>>> v3.18
 =======
 			/* copy odd aligned word */
 >>>>>>> v3.18
@@ -1341,7 +1584,11 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 		}
 		if (size & 0x0001) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//copy odd byte from fifo
+=======
+			/* copy odd byte from fifo */
+>>>>>>> v3.18
 =======
 			/* copy odd byte from fifo */
 >>>>>>> v3.18
@@ -1351,13 +1598,19 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 		spin_unlock_irqrestore(&info->dpram_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Check if pseudo header checksum is good
 		// Calculate pseudo header checksum
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Check if pseudo header checksum is good
 		 * Calculate pseudo header checksum
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tempword = *ppseudohdr++;
 		for (i = 1; i < 7; i++) {
@@ -1367,7 +1620,11 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 			DEBUG(1,
 				  "FT1000:ft1000_receive_cmd:Pseudo header checksum mismatch\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Drop this message
+=======
+			/* Drop this message */
+>>>>>>> v3.18
 =======
 			/* Drop this message */
 >>>>>>> v3.18
@@ -1377,6 +1634,7 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -1390,6 +1648,8 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_proc_drvmsg
@@ -1401,6 +1661,9 @@ static bool ft1000_receive_cmd(struct net_device *dev, u16 *pbuffer,
        none
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_proc_drvmsg(struct net_device *dev)
 {
@@ -1430,7 +1693,11 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
     if ( ft1000_receive_cmd(dev, &cmdbuffer[0], MAX_CMD_SQSIZE, &tempword) ) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Get the message type which is total_len + PSEUDO header + msgtype + message body
+=======
+		/* Get the message type which is total_len + PSEUDO header + msgtype + message body */
+>>>>>>> v3.18
 =======
 		/* Get the message type which is total_len + PSEUDO header + msgtype + message body */
 >>>>>>> v3.18
@@ -1445,7 +1712,11 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 			while (list_empty(&info->prov_list) == 0) {
 				DEBUG(0, "Sending a provisioning message\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Make sure SLOWQ doorbell is clear
+=======
+				/* Make sure SLOWQ doorbell is clear */
+>>>>>>> v3.18
 =======
 				/* Make sure SLOWQ doorbell is clear */
 >>>>>>> v3.18
@@ -1468,15 +1739,21 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 				pmsg = (u16 *) ptr->pprov_data;
 				ppseudo_hdr = (struct pseudo_hdr *) pmsg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Insert slow queue sequence number
 				ppseudo_hdr->seq_num = info->squeseqnum++;
 				ppseudo_hdr->portsrc = 0;
 				// Calculate new checksum
 =======
+=======
+>>>>>>> v3.18
 				/* Insert slow queue sequence number */
 				ppseudo_hdr->seq_num = info->squeseqnum++;
 				ppseudo_hdr->portsrc = 0;
 				/* Calculate new checksum */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ppseudo_hdr->checksum = *pmsg++;
 				DEBUG(1, "checksum = 0x%x\n",
@@ -1493,13 +1770,19 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 				kfree(ptr);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Indicate adapter is ready to take application messages after all
 			// provisioning messages are sent
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * Indicate adapter is ready to take application messages after all
 			 * provisioning messages are sent
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			info->CardReady = 1;
 			break;
@@ -1527,7 +1810,11 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
             }
             else {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBUG(1,"Media is down\n");
+=======
+                DEBUG(1, "Media is down\n");
+>>>>>>> v3.18
 =======
                 DEBUG(1, "Media is down\n");
 >>>>>>> v3.18
@@ -1586,13 +1873,19 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 		case DSP_GET_INFO:
 			DEBUG(1, "FT1000:drivermsg:Got DSP_GET_INFO\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// copy dsp info block to dsp
 			// allow any outstanding ioctl to finish
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * copy dsp info block to dsp
 			 * allow any outstanding ioctl to finish
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mdelay(10);
 			tempword = ft1000_read_reg(dev, FT1000_REG_DOORBELL);
@@ -1607,13 +1900,19 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 
 			if ((tempword & FT1000_DB_DPRAM_TX) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Put message into Slow Queue
 				// Form Pseudo header
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * Put message into Slow Queue
 				 * Form Pseudo header
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pmsg = (u16 *) info->DSPInfoBlk;
 				ppseudo_hdr = (struct pseudo_hdr *) pmsg;
@@ -1629,17 +1928,23 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 				ppseudo_hdr->rsvd2 = 0;
 				ppseudo_hdr->qos_class = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Insert slow queue sequence number
 				ppseudo_hdr->seq_num = info->squeseqnum++;
 				// Insert application id
 				ppseudo_hdr->portsrc = 0;
 				// Calculate new checksum
 =======
+=======
+>>>>>>> v3.18
 				/* Insert slow queue sequence number */
 				ppseudo_hdr->seq_num = info->squeseqnum++;
 				/* Insert application id */
 				ppseudo_hdr->portsrc = 0;
 				/* Calculate new checksum */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ppseudo_hdr->checksum = *pmsg++;
 				for (i = 1; i < 7; i++) {
@@ -1655,13 +1960,19 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 		case GET_DRV_ERR_RPT_MSG:
 			DEBUG(1, "FT1000:drivermsg:Got GET_DRV_ERR_RPT_MSG\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// copy driver error message to dsp
 			// allow any outstanding ioctl to finish
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * copy driver error message to dsp
 			 * allow any outstanding ioctl to finish
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mdelay(10);
 			tempword = ft1000_read_reg(dev, FT1000_REG_DOORBELL);
@@ -1676,13 +1987,19 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 
 			if ((tempword & FT1000_DB_DPRAM_TX) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Put message into Slow Queue
 				// Form Pseudo header
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * Put message into Slow Queue
 				 * Form Pseudo header
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pmsg = (u16 *) & tempbuffer[0];
 				ppseudo_hdr = (struct pseudo_hdr *) pmsg;
@@ -1697,17 +2014,23 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 				ppseudo_hdr->rsvd2 = 0;
 				ppseudo_hdr->qos_class = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Insert slow queue sequence number
 				ppseudo_hdr->seq_num = info->squeseqnum++;
 				// Insert application id
 				ppseudo_hdr->portsrc = 0;
 				// Calculate new checksum
 =======
+=======
+>>>>>>> v3.18
 				/* Insert slow queue sequence number */
 				ppseudo_hdr->seq_num = info->squeseqnum++;
 				/* Insert application id */
 				ppseudo_hdr->portsrc = 0;
 				/* Calculate new checksum */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                 ppseudo_hdr->checksum = *pmsg++;
                 for (i=1; i<7; i++) {
@@ -1740,6 +2063,7 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_parse_dpram_msg
@@ -1753,6 +2077,8 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_parse_dpram_msg
@@ -1765,6 +2091,9 @@ static void ft1000_proc_drvmsg(struct net_device *dev)
                 SUCCESS
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_parse_dpram_msg(struct net_device *dev)
 {
@@ -1782,7 +2111,11 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 
 	if (doorbell & FT1000_ASIC_RESET_REQ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Copy DSP session record from info block
+=======
+		/* Copy DSP session record from info block */
+>>>>>>> v3.18
 =======
 		/* Copy DSP session record from info block */
 >>>>>>> v3.18
@@ -1805,7 +2138,11 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 		spin_unlock_irqrestore(&info->dpram_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// clear ASIC RESET request
+=======
+		/* clear ASIC RESET request */
+>>>>>>> v3.18
 =======
 		/* clear ASIC RESET request */
 >>>>>>> v3.18
@@ -1817,7 +2154,11 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 
 		if (info->AsicID == MAGNEMITE_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Setting MAGNEMITE ASIC to big endian mode
+=======
+			/* Setting MAGNEMITE ASIC to big endian mode */
+>>>>>>> v3.18
 =======
 			/* Setting MAGNEMITE ASIC to big endian mode */
 >>>>>>> v3.18
@@ -1854,13 +2195,19 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
             total_len += nxtph;
             cnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
             // ft1000_read_reg will return a value that needs to be byteswap
             // in order to get DSP_QID_OFFSET.
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * ft1000_read_reg will return a value that needs to be byteswap
 			 * in order to get DSP_QID_OFFSET.
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (info->AsicID == ELECTRABUZZ_ID) {
 				portid =
@@ -1878,7 +2225,11 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 
 			if (portid == DRIVERID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// We are assumming one driver message from the DSP at a time.
+=======
+				/* We are assumming one driver message from the DSP at a time. */
+>>>>>>> v3.18
 =======
 				/* We are assumming one driver message from the DSP at a time. */
 >>>>>>> v3.18
@@ -1890,7 +2241,11 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 
 	if (doorbell & FT1000_DB_COND_RESET) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Reset ASIC and DSP
+=======
+		/* Reset ASIC and DSP */
+>>>>>>> v3.18
 =======
 		/* Reset ASIC and DSP */
 >>>>>>> v3.18
@@ -1924,7 +2279,11 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 				 FT1000_DB_COND_RESET);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// let's clear any unexpected doorbells from DSP
+=======
+	/* let's clear any unexpected doorbells from DSP */
+>>>>>>> v3.18
 =======
 	/* let's clear any unexpected doorbells from DSP */
 >>>>>>> v3.18
@@ -1941,6 +2300,7 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_flush_fifo
@@ -1954,6 +2314,8 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_flush_fifo
@@ -1966,6 +2328,9 @@ static int ft1000_parse_dpram_msg(struct net_device *dev)
        None.
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 {
@@ -2005,7 +2370,11 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 		return;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Flush corrupted pkt from FIFO
+=======
+		/* Flush corrupted pkt from FIFO */
+>>>>>>> v3.18
 =======
 		/* Flush corrupted pkt from FIFO */
 >>>>>>> v3.18
@@ -2024,13 +2393,19 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 			}
 			i++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// This should never happen unless the ASIC is broken.
 			// We must reset to recover.
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * This should never happen unless the ASIC is broken.
 			 * We must reset to recover.
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((i > 2048) || (tempword == 0)) {
 				if (info->AsicID == ELECTRABUZZ_ID) {
@@ -2066,18 +2441,25 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 				}
 				if (tempword == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// Let's check if ASIC reads are still ok by reading the Mask register
 					// which is never zero at this point of the code.
 =======
+=======
+>>>>>>> v3.18
 					/*
 					 * Let's check if ASIC reads are still ok by reading the Mask register
 					 * which is never zero at this point of the code.
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					tempword =
 						inw(dev->base_addr +
 						FT1000_REG_SUP_IMASK);
 					if (tempword == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 						// This indicates that we can not communicate with the ASIC
 						info->DrvErrNum =
@@ -2085,11 +2467,16 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 					} else {
 						// Let's assume that we really flush the FIFO
 =======
+=======
+>>>>>>> v3.18
 						/* This indicates that we can not communicate with the ASIC */
 						info->DrvErrNum =
 							FIFO_FLUSH_BADCNT;
 					} else {
 						/* Let's assume that we really flush the FIFO */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						pcmcia->PktIntfErr++;
 						return;
@@ -2105,9 +2492,15 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 			i++;
 			DEBUG(0, "Flushing FIFO complete = %x\n", tempword);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Flush last word in FIFO.
 			tempword = ft1000_read_reg(dev, FT1000_REG_DFIFO);
 			// Update FIFO counter for DSP
+=======
+			/* Flush last word in FIFO. */
+			tempword = ft1000_read_reg(dev, FT1000_REG_DFIFO);
+			/* Update FIFO counter for DSP */
+>>>>>>> v3.18
 =======
 			/* Flush last word in FIFO. */
 			tempword = ft1000_read_reg(dev, FT1000_REG_DFIFO);
@@ -2121,7 +2514,11 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 		} else {
 			DEBUG(0, "Flushing FIFO complete = %x\n", tempword);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Flush last word in FIFO
+=======
+			/* Flush last word in FIFO */
+>>>>>>> v3.18
 =======
 			/* Flush last word in FIFO */
 >>>>>>> v3.18
@@ -2138,6 +2535,7 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_copy_up_pkt
@@ -2152,6 +2550,8 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_copy_up_pkt
@@ -2165,6 +2565,9 @@ static void ft1000_flush_fifo(struct net_device *dev, u16 DrvErrNum)
                 SUCCESS
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_copy_up_pkt(struct net_device *dev)
 {
@@ -2181,7 +2584,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 
 	DEBUG(1, "ft1000_copy_up_pkt\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Read length
+=======
+	/* Read length */
+>>>>>>> v3.18
 =======
 	/* Read length */
 >>>>>>> v3.18
@@ -2199,7 +2606,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 		DEBUG(0, "size of ethernet packet invalid\n");
 		if (info->AsicID == MAGNEMITE_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Read High word to complete 32 bit access
+=======
+			/* Read High word to complete 32 bit access */
+>>>>>>> v3.18
 =======
 			/* Read High word to complete 32 bit access */
 >>>>>>> v3.18
@@ -2215,7 +2626,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 	if (skb == NULL) {
 		DEBUG(0, "No Network buffers available\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Read High word to complete 32 bit access
+=======
+		/* Read High word to complete 32 bit access */
+>>>>>>> v3.18
 =======
 		/* Read High word to complete 32 bit access */
 >>>>>>> v3.18
@@ -2229,7 +2644,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 	pbuffer = (u8 *) skb_put(skb, len + 12);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Pseudo header
+=======
+	/* Pseudo header */
+>>>>>>> v3.18
 =======
 	/* Pseudo header */
 >>>>>>> v3.18
@@ -2239,7 +2658,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 			chksum ^= tempword;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// read checksum value
+=======
+		/* read checksum value */
+>>>>>>> v3.18
 =======
 		/* read checksum value */
 >>>>>>> v3.18
@@ -2270,7 +2693,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 		chksum ^= tempword;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// read checksum value
+=======
+		/* read checksum value */
+>>>>>>> v3.18
 =======
 		/* read checksum value */
 >>>>>>> v3.18
@@ -2287,15 +2714,21 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 		return FAILURE;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//subtract the number of bytes read already
 	ptemp = pbuffer;
 
 	// fake MAC address
 =======
+=======
+>>>>>>> v3.18
 	/* subtract the number of bytes read already */
 	ptemp = pbuffer;
 
 	/* fake MAC address */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*pbuffer++ = dev->dev_addr[0];
 	*pbuffer++ = dev->dev_addr[1];
@@ -2322,7 +2755,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Need to read one more word if odd byte
+=======
+		/* Need to read one more word if odd byte */
+>>>>>>> v3.18
 =======
 		/* Need to read one more word if odd byte */
 >>>>>>> v3.18
@@ -2339,7 +2776,11 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Need to read one more word if odd align.
+=======
+		/* Need to read one more word if odd align. */
+>>>>>>> v3.18
 =======
 		/* Need to read one more word if odd align. */
 >>>>>>> v3.18
@@ -2363,17 +2804,23 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 
 	info->stats.rx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Add on 12 bytes for MAC address which was removed
 	info->stats.rx_bytes += (len + 12);
 
 	if (info->AsicID == ELECTRABUZZ_ID) {
 		// track how many bytes have been read from FIFO - round up to 16 bit word
 =======
+=======
+>>>>>>> v3.18
 	/* Add on 12 bytes for MAC address which was removed */
 	info->stats.rx_bytes += (len + 12);
 
 	if (info->AsicID == ELECTRABUZZ_ID) {
 		/* track how many bytes have been read from FIFO - round up to 16 bit word */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tempword = len + 16;
 		if (tempword & 0x01)
@@ -2386,6 +2833,7 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 	return SUCCESS;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -2403,6 +2851,8 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*---------------------------------------------------------------------------
 
    Function:   ft1000_copy_down_pkt
@@ -2418,6 +2868,9 @@ static int ft1000_copy_up_pkt(struct net_device *dev)
                 SUCCESS
 
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 {
@@ -2434,7 +2887,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 	DEBUG(1, "ft1000_hw: copy_down_pkt()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Check if there is room on the FIFO
+=======
+	/* Check if there is room on the FIFO */
+>>>>>>> v3.18
 =======
 	/* Check if there is room on the FIFO */
 >>>>>>> v3.18
@@ -2463,7 +2920,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Create pseudo header and send pseudo/ip to hardware
+=======
+	/* Create pseudo header and send pseudo/ip to hardware */
+>>>>>>> v3.18
 =======
 	/* Create pseudo header and send pseudo/ip to hardware */
 >>>>>>> v3.18
@@ -2473,9 +2934,15 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 		pseudo.blk.length = ntohs(len);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pseudo.blk.source = DSPID;	// Need to swap to get in correct order
 	pseudo.blk.destination = HOSTID;
 	pseudo.blk.portdest = NETWORKID;	// Need to swap to get in correct order
+=======
+	pseudo.blk.source = DSPID;	/* Need to swap to get in correct order */
+	pseudo.blk.destination = HOSTID;
+	pseudo.blk.portdest = NETWORKID;	/* Need to swap to get in correct order */
+>>>>>>> v3.18
 =======
 	pseudo.blk.source = DSPID;	/* Need to swap to get in correct order */
 	pseudo.blk.destination = HOSTID;
@@ -2495,9 +2962,15 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Production Mode
 	if (info->AsicID == ELECTRABUZZ_ID) {
 		// copy first word to UFIFO_BEG reg
+=======
+	/* Production Mode */
+	if (info->AsicID == ELECTRABUZZ_ID) {
+		/* copy first word to UFIFO_BEG reg */
+>>>>>>> v3.18
 =======
 	/* Production Mode */
 	if (info->AsicID == ELECTRABUZZ_ID) {
@@ -2508,7 +2981,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 			  pseudo.buff[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// copy subsequent words to UFIFO_MID reg
+=======
+		/* copy subsequent words to UFIFO_MID reg */
+>>>>>>> v3.18
 =======
 		/* copy subsequent words to UFIFO_MID reg */
 >>>>>>> v3.18
@@ -2535,7 +3012,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 			  pseudo.buff[7]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Write PPP type + IP Packet into Downlink FIFO
+=======
+		/* Write PPP type + IP Packet into Downlink FIFO */
+>>>>>>> v3.18
 =======
 		/* Write PPP type + IP Packet into Downlink FIFO */
 >>>>>>> v3.18
@@ -2549,7 +3030,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Check for odd byte
+=======
+		/* Check for odd byte */
+>>>>>>> v3.18
 =======
 		/* Check for odd byte */
 >>>>>>> v3.18
@@ -2592,7 +3077,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 
 		plong = (u32 *) packet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Write PPP type + IP Packet into Downlink FIFO
+=======
+		/* Write PPP type + IP Packet into Downlink FIFO */
+>>>>>>> v3.18
 =======
 		/* Write PPP type + IP Packet into Downlink FIFO */
 >>>>>>> v3.18
@@ -2601,7 +3090,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Check for odd alignment
+=======
+		/* Check for odd alignment */
+>>>>>>> v3.18
 =======
 		/* Check for odd alignment */
 >>>>>>> v3.18
@@ -2616,7 +3109,11 @@ static int ft1000_copy_down_pkt(struct net_device *dev, u16 * packet, u16 len)
 
 	info->stats.tx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Add 14 bytes for MAC address plus ethernet type
+=======
+	/* Add 14 bytes for MAC address plus ethernet type */
+>>>>>>> v3.18
 =======
 	/* Add 14 bytes for MAC address plus ethernet type */
 >>>>>>> v3.18
@@ -2628,7 +3125,12 @@ static struct net_device_stats *ft1000_stats(struct net_device *dev)
 {
 	struct ft1000_info *info = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (&info->stats);
+=======
+
+	return &info->stats;
+>>>>>>> v3.18
 =======
 
 	return &info->stats;
@@ -2670,7 +3172,11 @@ static int ft1000_close(struct net_device *dev)
 		ft1000_write_reg(dev, FT1000_REG_RESET, DSP_RESET_BIT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//reset ASIC
+=======
+		/* reset ASIC */
+>>>>>>> v3.18
 =======
 		/* reset ASIC */
 >>>>>>> v3.18
@@ -2738,15 +3244,21 @@ static irqreturn_t ft1000_interrupt(int irq, void *dev_id)
 	ft1000_disable_interrupts(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Read interrupt type
 	inttype = ft1000_read_reg(dev, FT1000_REG_SUP_ISR);
 
     // Make sure we process all interrupt before leaving the ISR due to the edge trigger interrupt type
 =======
+=======
+>>>>>>> v3.18
 	/* Read interrupt type */
 	inttype = ft1000_read_reg(dev, FT1000_REG_SUP_ISR);
 
 	/* Make sure we process all interrupt before leaving the ISR due to the edge trigger interrupt type */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (inttype) {
 		if (inttype & ISR_DOORBELL_PEND)
@@ -2758,7 +3270,11 @@ static irqreturn_t ft1000_interrupt(int irq, void *dev_id)
 			cnt = 0;
 			do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Check if we have packets in the Downlink FIFO
+=======
+				/* Check if we have packets in the Downlink FIFO */
+>>>>>>> v3.18
 =======
 				/* Check if we have packets in the Downlink FIFO */
 >>>>>>> v3.18
@@ -2781,7 +3297,11 @@ static irqreturn_t ft1000_interrupt(int irq, void *dev_id)
 
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// clear interrupts
+=======
+		/* clear interrupts */
+>>>>>>> v3.18
 =======
 		/* clear interrupts */
 >>>>>>> v3.18
@@ -2790,9 +3310,15 @@ static irqreturn_t ft1000_interrupt(int irq, void *dev_id)
 		ft1000_write_reg(dev, FT1000_REG_SUP_ISR, tempword);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Read interrupt type
 		inttype = ft1000_read_reg (dev, FT1000_REG_SUP_ISR);
 		DEBUG(1,"ft1000_hw: interrupt status register after clear = 0x%x\n",inttype);
+=======
+		/* Read interrupt type */
+		inttype = ft1000_read_reg (dev, FT1000_REG_SUP_ISR);
+		DEBUG(1, "ft1000_hw: interrupt status register after clear = 0x%x\n", inttype);
+>>>>>>> v3.18
 =======
 		/* Read interrupt type */
 		inttype = ft1000_read_reg (dev, FT1000_REG_SUP_ISR);
@@ -2808,7 +3334,11 @@ void stop_ft1000_card(struct net_device *dev)
 	struct ft1000_info *info = netdev_priv(dev);
 	struct prov_record *ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	int cnt;
+=======
+	/* int cnt; */
+>>>>>>> v3.18
 =======
 	/* int cnt; */
 >>>>>>> v3.18
@@ -2821,7 +3351,11 @@ void stop_ft1000_card(struct net_device *dev)
 	ft1000_disable_interrupts(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Make sure we free any memory reserve for provisioning
+=======
+	/* Make sure we free any memory reserve for provisioning */
+>>>>>>> v3.18
 =======
 	/* Make sure we free any memory reserve for provisioning */
 >>>>>>> v3.18
@@ -2841,10 +3375,16 @@ void stop_ft1000_card(struct net_device *dev)
 
 	free_irq(dev->irq, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_region(dev->base_addr,256);
 	release_firmware(fw_entry);
 	flarion_ft1000_cnt--;
 	ft1000CleanupProc(dev);
+=======
+	release_region(dev->base_addr, 256);
+	release_firmware(fw_entry);
+	flarion_ft1000_cnt--;
+>>>>>>> v3.18
 =======
 	release_region(dev->base_addr, 256);
 	release_firmware(fw_entry);
@@ -2887,7 +3427,11 @@ struct net_device *init_ft1000_card(struct pcmcia_device *link,
 	struct net_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const struct net_device_ops ft1000ops =		// Slavius 21.10.2009 due to kernel changes
+=======
+	static const struct net_device_ops ft1000ops =		/* Slavius 21.10.2009 due to kernel changes */
+>>>>>>> v3.18
 =======
 	static const struct net_device_ops ft1000ops =		/* Slavius 21.10.2009 due to kernel changes */
 >>>>>>> v3.18
@@ -2951,6 +3495,7 @@ struct net_device *init_ft1000_card(struct pcmcia_device *link,
 	info->squeseqnum = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	dev->hard_start_xmit = &ft1000_start_xmit;
 //	dev->get_stats = &ft1000_stats;
 //	dev->open = &ft1000_open;
@@ -2958,12 +3503,17 @@ struct net_device *init_ft1000_card(struct pcmcia_device *link,
 
 	dev->netdev_ops = &ft1000ops;		// Slavius 21.10.2009 due to kernel changes
 =======
+=======
+>>>>>>> v3.18
 	/* dev->hard_start_xmit = &ft1000_start_xmit; */
 	/* dev->get_stats = &ft1000_stats; */
 	/* dev->open = &ft1000_open; */
 	/* dev->stop = &ft1000_close; */
 
 	dev->netdev_ops = &ft1000ops;		/* Slavius 21.10.2009 due to kernel changes */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DEBUG(0, "device name = %s\n", dev->name);
@@ -3008,9 +3558,14 @@ struct net_device *init_ft1000_card(struct pcmcia_device *link,
 	ft1000_enable_interrupts(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ft1000InitProc(dev);
 	ft1000_card_present = 1;
 	SET_ETHTOOL_OPS(dev, &ops);
+=======
+	ft1000_card_present = 1;
+	dev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	ft1000_card_present = 1;
 	dev->ethtool_ops = &ops;

@@ -57,7 +57,11 @@ static int __init amiga_a4000t_scsi_probe(struct platform_device *pdev)
 
 	/* Fill in the required pieces of hostdata */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hostdata->base = (void __iomem *)ZTWO_VADDR(scsi_addr);
+=======
+	hostdata->base = ZTWO_VADDR(scsi_addr);
+>>>>>>> v3.18
 =======
 	hostdata->base = ZTWO_VADDR(scsi_addr);
 >>>>>>> v3.18
@@ -121,6 +125,7 @@ static struct platform_driver amiga_a4000t_scsi_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init amiga_a4000t_scsi_init(void)
 {
 	return platform_driver_probe(&amiga_a4000t_scsi_driver,
@@ -135,6 +140,9 @@ static void __exit amiga_a4000t_scsi_exit(void)
 }
 
 module_exit(amiga_a4000t_scsi_exit);
+=======
+module_platform_driver_probe(amiga_a4000t_scsi_driver, amiga_a4000t_scsi_probe);
+>>>>>>> v3.18
 =======
 module_platform_driver_probe(amiga_a4000t_scsi_driver, amiga_a4000t_scsi_probe);
 >>>>>>> v3.18

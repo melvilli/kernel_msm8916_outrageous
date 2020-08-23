@@ -41,6 +41,7 @@ static long clk_factor_round_rate(struct clk_hw *hw, unsigned long drate,
 	for (i = 0; i < factor->ftbl_cnt; i++) {
 		prev_rate = rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rate = (((*prate / 10000) * factor->ftbl[i].num) /
 			(factor->ftbl[i].den * factor->masks->factor)) * 10000;
 		if (rate > drate)
@@ -51,6 +52,8 @@ static long clk_factor_round_rate(struct clk_hw *hw, unsigned long drate,
 	else
 		return prev_rate;
 =======
+=======
+>>>>>>> v3.18
 		rate = (((*prate / 10000) * factor->ftbl[i].den) /
 			(factor->ftbl[i].num * factor->masks->factor)) * 10000;
 		if (rate > drate)
@@ -64,6 +67,9 @@ static long clk_factor_round_rate(struct clk_hw *hw, unsigned long drate,
 		else
 			return prev_rate;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -81,7 +87,11 @@ static unsigned long clk_factor_recalc_rate(struct clk_hw *hw,
 
 	/* calculate denominator */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	den = (val >> masks->den_shift) & masks->num_mask;
+=======
+	den = (val >> masks->den_shift) & masks->den_mask;
+>>>>>>> v3.18
 =======
 	den = (val >> masks->den_shift) & masks->den_mask;
 >>>>>>> v3.18
@@ -106,8 +116,13 @@ static int clk_factor_set_rate(struct clk_hw *hw, unsigned long drate,
 	for (i = 0; i < factor->ftbl_cnt; i++) {
 		prev_rate = rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rate = (((prate / 10000) * factor->ftbl[i].num) /
 			(factor->ftbl[i].den * factor->masks->factor)) * 10000;
+=======
+		rate = (((prate / 10000) * factor->ftbl[i].den) /
+			(factor->ftbl[i].num * factor->masks->factor)) * 10000;
+>>>>>>> v3.18
 =======
 		rate = (((prate / 10000) * factor->ftbl[i].den) /
 			(factor->ftbl[i].num * factor->masks->factor)) * 10000;

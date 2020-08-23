@@ -4,6 +4,7 @@
  * José Luis Sánchez
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
 Driver: pcl730
 Description: Advantech PCL-730 (& compatibles)
@@ -47,6 +48,8 @@ static int pcl730_do_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 		outb((s->state >> 8),
 		     dev->iobase + ((unsigned long)s->private) + 1);
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Driver: pcl730
@@ -278,6 +281,9 @@ static int pcl730_do_insn_bits(struct comedi_device *dev,
 		if ((mask & 0xff000000) && (s->n_chan > 24))
 			outb((s->state >> 24) & 0xff, dev->iobase + reg + 3);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -286,12 +292,15 @@ static int pcl730_do_insn_bits(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcl730_di_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 			  struct comedi_insn *insn, unsigned int *data)
 {
 	data[1] = inb(dev->iobase + ((unsigned long)s->private)) |
 	    (inb(dev->iobase + ((unsigned long)s->private) + 1) << 8);
 =======
+=======
+>>>>>>> v3.18
 static unsigned int pcl730_get_bits(struct comedi_device *dev,
 				    struct comedi_subdevice *s)
 {
@@ -315,23 +324,32 @@ static int pcl730_di_insn_bits(struct comedi_device *dev,
 			       unsigned int *data)
 {
 	data[1] = pcl730_get_bits(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcl730_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 	const struct pcl730_board *board = comedi_board(dev);
 	struct comedi_subdevice *s;
 =======
+=======
+>>>>>>> v3.18
 static int pcl730_attach(struct comedi_device *dev,
 			 struct comedi_devconfig *it)
 {
 	const struct pcl730_board *board = dev->board_ptr;
 	struct comedi_subdevice *s;
 	int subdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -339,6 +357,7 @@ static int pcl730_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = comedi_alloc_subdevices(dev, 4);
 	if (ret)
@@ -386,6 +405,8 @@ static int pcl730_attach(struct comedi_device *dev,
 
 	printk(KERN_INFO "\n");
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_alloc_subdevices(dev, board->n_subdevs);
 	if (ret)
 		return ret;
@@ -443,11 +464,15 @@ static int pcl730_attach(struct comedi_device *dev,
 		s->insn_bits	= pcl730_di_insn_bits;
 		s->private	= (void *)2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct pcl730_board boardtypes[] = {
 	{ "pcl730", PCL730_SIZE, },
@@ -457,14 +482,21 @@ static const struct pcl730_board boardtypes[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct comedi_driver pcl730_driver = {
 	.driver_name	= "pcl730",
 	.module		= THIS_MODULE,
 	.attach		= pcl730_attach,
 	.detach		= comedi_legacy_detach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.board_name	= &boardtypes[0].name,
 	.num_names	= ARRAY_SIZE(boardtypes),
+=======
+	.board_name	= &pcl730_boards[0].name,
+	.num_names	= ARRAY_SIZE(pcl730_boards),
+>>>>>>> v3.18
 =======
 	.board_name	= &pcl730_boards[0].name,
 	.num_names	= ARRAY_SIZE(pcl730_boards),

@@ -28,15 +28,21 @@
 #define TARGET_BUCKET_SIZE	64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct hlist_head *	cache_hash;
 static struct list_head 	lru_head;
 =======
+=======
+>>>>>>> v3.18
 struct nfsd_drc_bucket {
 	struct list_head lru_head;
 	spinlock_t cache_lock;
 };
 
 static struct nfsd_drc_bucket	*drc_hashtbl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct kmem_cache	*drc_slab;
 
@@ -46,6 +52,10 @@ static unsigned int		max_drc_entries;
 /* number of significant bits in the hash value */
 static unsigned int		maskbits;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static unsigned int		drc_hashsize;
+>>>>>>> v3.18
 =======
 static unsigned int		drc_hashsize;
 >>>>>>> v3.18
@@ -57,7 +67,11 @@ static unsigned int		drc_hashsize;
 
 /* total number of entries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int		num_drc_entries;
+=======
+static atomic_t			num_drc_entries;
+>>>>>>> v3.18
 =======
 static atomic_t			num_drc_entries;
 >>>>>>> v3.18
@@ -77,12 +91,15 @@ static unsigned int		longest_chain_cachesize;
 static int	nfsd_cache_append(struct svc_rqst *rqstp, struct kvec *vec);
 static void	cache_cleaner_func(struct work_struct *unused);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int 	nfsd_reply_cache_shrink(struct shrinker *shrink,
 					struct shrink_control *sc);
 
 static struct shrinker nfsd_reply_cache_shrinker = {
 	.shrink	= nfsd_reply_cache_shrink,
 =======
+=======
+>>>>>>> v3.18
 static unsigned long nfsd_reply_cache_count(struct shrinker *shrink,
 					    struct shrink_control *sc);
 static unsigned long nfsd_reply_cache_scan(struct shrinker *shrink,
@@ -91,6 +108,9 @@ static unsigned long nfsd_reply_cache_scan(struct shrinker *shrink,
 static struct shrinker nfsd_reply_cache_shrinker = {
 	.scan_objects = nfsd_reply_cache_scan,
 	.count_objects = nfsd_reply_cache_count,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.seeks	= 1,
 };
@@ -101,7 +121,10 @@ static struct shrinker nfsd_reply_cache_shrinker = {
  * Otherwise, it when accessing _prev or _next, the lock must be held.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_SPINLOCK(cache_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static DECLARE_DELAYED_WORK(cache_cleaner, cache_cleaner_func);
@@ -145,13 +168,19 @@ nfsd_hashsize(unsigned int limit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32
 nfsd_cache_hash(__be32 xid)
 {
 	return hash_32(be32_to_cpu(xid), maskbits);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct svc_cacherep *
 nfsd_reply_cache_alloc(void)
@@ -164,7 +193,10 @@ nfsd_reply_cache_alloc(void)
 		rp->c_type = RC_NOCACHE;
 		INIT_LIST_HEAD(&rp->c_lru);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_HLIST_NODE(&rp->c_hash);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -179,10 +211,15 @@ nfsd_reply_cache_free_locked(struct svc_cacherep *rp)
 		kfree(rp->c_replvec.iov_base);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hlist_unhashed(&rp->c_hash))
 		hlist_del(&rp->c_hash);
 	list_del(&rp->c_lru);
 	--num_drc_entries;
+=======
+	list_del(&rp->c_lru);
+	atomic_dec(&num_drc_entries);
+>>>>>>> v3.18
 =======
 	list_del(&rp->c_lru);
 	atomic_dec(&num_drc_entries);
@@ -193,17 +230,23 @@ nfsd_reply_cache_free_locked(struct svc_cacherep *rp)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd_reply_cache_free(struct svc_cacherep *rp)
 {
 	spin_lock(&cache_lock);
 	nfsd_reply_cache_free_locked(rp);
 	spin_unlock(&cache_lock);
 =======
+=======
+>>>>>>> v3.18
 nfsd_reply_cache_free(struct nfsd_drc_bucket *b, struct svc_cacherep *rp)
 {
 	spin_lock(&b->cache_lock);
 	nfsd_reply_cache_free_locked(rp);
 	spin_unlock(&b->cache_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -211,15 +254,21 @@ int nfsd_reply_cache_init(void)
 {
 	unsigned int hashsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	INIT_LIST_HEAD(&lru_head);
 	max_drc_entries = nfsd_cache_size_limit();
 	num_drc_entries = 0;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i;
 
 	max_drc_entries = nfsd_cache_size_limit();
 	atomic_set(&num_drc_entries, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hashsize = nfsd_hashsize(max_drc_entries);
 	maskbits = ilog2(hashsize);
@@ -231,10 +280,13 @@ int nfsd_reply_cache_init(void)
 		goto out_nomem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache_hash = kcalloc(hashsize, sizeof(struct hlist_head), GFP_KERNEL);
 	if (!cache_hash)
 		goto out_nomem;
 =======
+=======
+>>>>>>> v3.18
 	drc_hashtbl = kcalloc(hashsize, sizeof(*drc_hashtbl), GFP_KERNEL);
 	if (!drc_hashtbl)
 		goto out_nomem;
@@ -243,6 +295,9 @@ int nfsd_reply_cache_init(void)
 		spin_lock_init(&drc_hashtbl[i].cache_lock);
 	}
 	drc_hashsize = hashsize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -256,6 +311,10 @@ void nfsd_reply_cache_shutdown(void)
 {
 	struct svc_cacherep	*rp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int i;
+>>>>>>> v3.18
 =======
 	unsigned int i;
 >>>>>>> v3.18
@@ -263,6 +322,7 @@ void nfsd_reply_cache_shutdown(void)
 	unregister_shrinker(&nfsd_reply_cache_shrinker);
 	cancel_delayed_work_sync(&cache_cleaner);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (!list_empty(&lru_head)) {
 		rp = list_entry(lru_head.next, struct svc_cacherep, c_lru);
@@ -272,6 +332,8 @@ void nfsd_reply_cache_shutdown(void)
 	kfree (cache_hash);
 	cache_hash = NULL;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < drc_hashsize; i++) {
 		struct list_head *head = &drc_hashtbl[i].lru_head;
 		while (!list_empty(head)) {
@@ -283,6 +345,9 @@ void nfsd_reply_cache_shutdown(void)
 	kfree (drc_hashtbl);
 	drc_hashtbl = NULL;
 	drc_hashsize = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (drc_slab) {
@@ -296,6 +361,7 @@ void nfsd_reply_cache_shutdown(void)
  * not already scheduled.
  */
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 lru_put_end(struct svc_cacherep *rp)
 {
@@ -325,6 +391,8 @@ prune_cache_entries(void)
 
 	list_for_each_entry_safe(rp, tmp, &lru_head, c_lru) {
 =======
+=======
+>>>>>>> v3.18
 lru_put_end(struct nfsd_drc_bucket *b, struct svc_cacherep *rp)
 {
 	rp->c_timestamp = jiffies;
@@ -339,6 +407,9 @@ prune_bucket(struct nfsd_drc_bucket *b)
 	long freed = 0;
 
 	list_for_each_entry_safe(rp, tmp, &b->lru_head, c_lru) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Don't free entries attached to calls that are still
@@ -346,6 +417,7 @@ prune_bucket(struct nfsd_drc_bucket *b)
 		 */
 		if (rp->c_state == RC_INPROG)
 			continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (num_drc_entries <= max_drc_entries &&
 		    time_before(jiffies, rp->c_timestamp + RC_EXPIRE))
@@ -364,6 +436,8 @@ prune_bucket(struct nfsd_drc_bucket *b)
 	else
 		mod_delayed_work(system_wq, &cache_cleaner, RC_EXPIRE);
 =======
+=======
+>>>>>>> v3.18
 		if (atomic_read(&num_drc_entries) <= max_drc_entries &&
 		    time_before(jiffies, rp->c_timestamp + RC_EXPIRE))
 			break;
@@ -403,12 +477,16 @@ prune_cache_entries(void)
 	if (!cancel)
 		mod_delayed_work(system_wq, &cache_cleaner, RC_EXPIRE);
 	return freed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void
 cache_cleaner_func(struct work_struct *unused)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock(&cache_lock);
 	prune_cache_entries();
@@ -430,6 +508,8 @@ nfsd_reply_cache_shrink(struct shrinker *shrink, struct shrink_control *sc)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	prune_cache_entries();
 }
 
@@ -444,6 +524,9 @@ nfsd_reply_cache_scan(struct shrinker *shrink, struct shrink_control *sc)
 {
 	return prune_cache_entries();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Walk an xdr_buf and get a CRC for at most the first RC_CSUMLEN bytes
@@ -482,6 +565,7 @@ static bool
 nfsd_cache_match(struct svc_rqst *rqstp, __wsum csum, struct svc_cacherep *rp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check RPC header info first */
 	if (rqstp->rq_xid != rp->c_xid || rqstp->rq_proc != rp->c_proc ||
 	    rqstp->rq_prot != rp->c_prot || rqstp->rq_vers != rp->c_vers ||
@@ -495,6 +579,11 @@ nfsd_cache_match(struct svc_rqst *rqstp, __wsum csum, struct svc_cacherep *rp)
 	if (rqstp->rq_xid != rp->c_xid)
 		return false;
 >>>>>>> v3.18
+=======
+	/* Check RPC XID first */
+	if (rqstp->rq_xid != rp->c_xid)
+		return false;
+>>>>>>> v3.18
 	/* compare checksum of NFS data */
 	if (csum != rp->c_csum) {
 		++payload_misses;
@@ -502,7 +591,10 @@ nfsd_cache_match(struct svc_rqst *rqstp, __wsum csum, struct svc_cacherep *rp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Other discriminators */
 	if (rqstp->rq_proc != rp->c_proc ||
 	    rqstp->rq_prot != rp->c_prot ||
@@ -512,6 +604,9 @@ nfsd_cache_match(struct svc_rqst *rqstp, __wsum csum, struct svc_cacherep *rp)
 	    rpc_get_port(svc_addr(rqstp)) != rpc_get_port((struct sockaddr *)&rp->c_addr))
 		return false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return true;
 }
@@ -523,6 +618,7 @@ nfsd_cache_match(struct svc_rqst *rqstp, __wsum csum, struct svc_cacherep *rp)
  */
 static struct svc_cacherep *
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd_cache_search(struct svc_rqst *rqstp, __wsum csum)
 {
 	struct svc_cacherep	*rp, *ret = NULL;
@@ -532,6 +628,8 @@ nfsd_cache_search(struct svc_rqst *rqstp, __wsum csum)
 	rh = &cache_hash[hash_32(rqstp->rq_xid, maskbits)];
 	hlist_for_each_entry(rp, rh, c_hash) {
 =======
+=======
+>>>>>>> v3.18
 nfsd_cache_search(struct nfsd_drc_bucket *b, struct svc_rqst *rqstp,
 		__wsum csum)
 {
@@ -540,6 +638,9 @@ nfsd_cache_search(struct nfsd_drc_bucket *b, struct svc_rqst *rqstp,
 	unsigned int		entries = 0;
 
 	list_for_each_entry(rp, rh, c_lru) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		++entries;
 		if (nfsd_cache_match(rqstp, csum, rp)) {
@@ -552,18 +653,24 @@ nfsd_cache_search(struct nfsd_drc_bucket *b, struct svc_rqst *rqstp,
 	if (entries > longest_chain) {
 		longest_chain = entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		longest_chain_cachesize = num_drc_entries;
 	} else if (entries == longest_chain) {
 		/* prefer to keep the smallest cachesize possible here */
 		longest_chain_cachesize = min(longest_chain_cachesize,
 						num_drc_entries);
 =======
+=======
+>>>>>>> v3.18
 		longest_chain_cachesize = atomic_read(&num_drc_entries);
 	} else if (entries == longest_chain) {
 		/* prefer to keep the smallest cachesize possible here */
 		longest_chain_cachesize = min_t(unsigned int,
 				longest_chain_cachesize,
 				atomic_read(&num_drc_entries));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -587,6 +694,11 @@ nfsd_cache_lookup(struct svc_rqst *rqstp)
 				proc = rqstp->rq_proc;
 	__wsum			csum;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 hash = nfsd_cache_hash(xid);
+	struct nfsd_drc_bucket *b = &drc_hashtbl[hash];
+>>>>>>> v3.18
 =======
 	u32 hash = nfsd_cache_hash(xid);
 	struct nfsd_drc_bucket *b = &drc_hashtbl[hash];
@@ -609,9 +721,15 @@ nfsd_cache_lookup(struct svc_rqst *rqstp)
 	 */
 	rp = nfsd_reply_cache_alloc();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cache_lock);
 	if (likely(rp)) {
 		++num_drc_entries;
+=======
+	spin_lock(&b->cache_lock);
+	if (likely(rp)) {
+		atomic_inc(&num_drc_entries);
+>>>>>>> v3.18
 =======
 	spin_lock(&b->cache_lock);
 	if (likely(rp)) {
@@ -622,9 +740,15 @@ nfsd_cache_lookup(struct svc_rqst *rqstp)
 
 	/* go ahead and prune the cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prune_cache_entries();
 
 	found = nfsd_cache_search(rqstp, csum);
+=======
+	prune_bucket(b);
+
+	found = nfsd_cache_search(b, rqstp, csum);
+>>>>>>> v3.18
 =======
 	prune_bucket(b);
 
@@ -655,8 +779,12 @@ nfsd_cache_lookup(struct svc_rqst *rqstp)
 	rp->c_csum = csum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hash_refile(rp);
 	lru_put_end(rp);
+=======
+	lru_put_end(b, rp);
+>>>>>>> v3.18
 =======
 	lru_put_end(b, rp);
 >>>>>>> v3.18
@@ -670,7 +798,11 @@ nfsd_cache_lookup(struct svc_rqst *rqstp)
 	rp->c_type = RC_NOCACHE;
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&cache_lock);
+=======
+	spin_unlock(&b->cache_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&b->cache_lock);
 >>>>>>> v3.18
@@ -681,7 +813,11 @@ found_entry:
 	/* We found a matching entry which is either in progress or done. */
 	age = jiffies - rp->c_timestamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lru_put_end(rp);
+=======
+	lru_put_end(b, rp);
+>>>>>>> v3.18
 =======
 	lru_put_end(b, rp);
 >>>>>>> v3.18
@@ -740,6 +876,11 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 	struct svc_cacherep *rp = rqstp->rq_cacherep;
 	struct kvec	*resv = &rqstp->rq_res.head[0], *cachv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32		hash;
+	struct nfsd_drc_bucket *b;
+>>>>>>> v3.18
 =======
 	u32		hash;
 	struct nfsd_drc_bucket *b;
@@ -751,6 +892,12 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hash = nfsd_cache_hash(rp->c_xid);
+	b = &drc_hashtbl[hash];
+
+>>>>>>> v3.18
 =======
 	hash = nfsd_cache_hash(rp->c_xid);
 	b = &drc_hashtbl[hash];
@@ -762,7 +909,11 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 	/* Don't cache excessive amounts of data and XDR failures */
 	if (!statp || len > (256 >> 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nfsd_reply_cache_free(rp);
+=======
+		nfsd_reply_cache_free(b, rp);
+>>>>>>> v3.18
 =======
 		nfsd_reply_cache_free(b, rp);
 >>>>>>> v3.18
@@ -781,7 +932,11 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 		cachv->iov_base = kmalloc(bufsize, GFP_KERNEL);
 		if (!cachv->iov_base) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nfsd_reply_cache_free(rp);
+=======
+			nfsd_reply_cache_free(b, rp);
+>>>>>>> v3.18
 =======
 			nfsd_reply_cache_free(b, rp);
 >>>>>>> v3.18
@@ -791,6 +946,7 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 		memcpy(cachv->iov_base, statp, bufsize);
 		break;
 	case RC_NOCACHE:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		nfsd_reply_cache_free(rp);
 		return;
@@ -803,6 +959,8 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 	rp->c_state = RC_DONE;
 	spin_unlock(&cache_lock);
 =======
+=======
+>>>>>>> v3.18
 		nfsd_reply_cache_free(b, rp);
 		return;
 	}
@@ -813,6 +971,9 @@ nfsd_cache_update(struct svc_rqst *rqstp, int cachetype, __be32 *statp)
 	rp->c_type = cachetype;
 	rp->c_state = RC_DONE;
 	spin_unlock(&b->cache_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }
@@ -845,9 +1006,15 @@ nfsd_cache_append(struct svc_rqst *rqstp, struct kvec *data)
 static int nfsd_reply_cache_stats_show(struct seq_file *m, void *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cache_lock);
 	seq_printf(m, "max entries:           %u\n", max_drc_entries);
 	seq_printf(m, "num entries:           %u\n", num_drc_entries);
+=======
+	seq_printf(m, "max entries:           %u\n", max_drc_entries);
+	seq_printf(m, "num entries:           %u\n",
+			atomic_read(&num_drc_entries));
+>>>>>>> v3.18
 =======
 	seq_printf(m, "max entries:           %u\n", max_drc_entries);
 	seq_printf(m, "num entries:           %u\n",
@@ -862,7 +1029,10 @@ static int nfsd_reply_cache_stats_show(struct seq_file *m, void *v)
 	seq_printf(m, "longest chain len:     %u\n", longest_chain);
 	seq_printf(m, "cachesize at longest:  %u\n", longest_chain_cachesize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&cache_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

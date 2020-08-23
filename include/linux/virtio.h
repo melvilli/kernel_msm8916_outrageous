@@ -35,6 +35,7 @@ struct virtqueue {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int virtqueue_add_buf(struct virtqueue *vq,
 		      struct scatterlist sg[],
 		      unsigned int out_num,
@@ -42,6 +43,8 @@ int virtqueue_add_buf(struct virtqueue *vq,
 		      void *data,
 		      gfp_t gfp);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int virtqueue_add_outbuf(struct virtqueue *vq,
@@ -62,17 +65,23 @@ int virtqueue_add_sgs(struct virtqueue *vq,
 		      gfp_t gfp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void virtqueue_kick(struct virtqueue *vq);
 
 bool virtqueue_kick_prepare(struct virtqueue *vq);
 
 void virtqueue_notify(struct virtqueue *vq);
 =======
+=======
+>>>>>>> v3.18
 bool virtqueue_kick(struct virtqueue *vq);
 
 bool virtqueue_kick_prepare(struct virtqueue *vq);
 
 bool virtqueue_notify(struct virtqueue *vq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void *virtqueue_get_buf(struct virtqueue *vq, unsigned int *len);
@@ -92,10 +101,13 @@ void *virtqueue_detach_unused_buf(struct virtqueue *vq);
 unsigned int virtqueue_get_vring_size(struct virtqueue *vq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * virtio_device - representation of a device using virtio
  * @index: unique position on the virtio bus
 =======
+=======
+>>>>>>> v3.18
 bool virtqueue_is_broken(struct virtqueue *vq);
 
 /**
@@ -105,6 +117,9 @@ bool virtqueue_is_broken(struct virtqueue *vq);
  * @config_enabled: configuration change reporting enabled
  * @config_change_pending: configuration change reported while disabled
  * @config_lock: protects configuration change reporting
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @dev: underlying device.
  * @id: the device type identification (used to match it with a driver).
@@ -117,11 +132,17 @@ bool virtqueue_is_broken(struct virtqueue *vq);
 struct virtio_device {
 	int index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool failed;
 	bool config_enabled;
 	bool config_change_pending;
 	spinlock_t config_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device dev;
 	struct virtio_device_id id;
@@ -142,7 +163,10 @@ int register_virtio_device(struct virtio_device *dev);
 void unregister_virtio_device(struct virtio_device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void virtio_break_device(struct virtio_device *dev);
 
 void virtio_config_changed(struct virtio_device *dev);
@@ -151,6 +175,9 @@ int virtio_device_freeze(struct virtio_device *dev);
 int virtio_device_restore(struct virtio_device *dev);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * virtio_driver - operations for a virtio I/O driver

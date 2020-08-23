@@ -112,6 +112,10 @@ static int wm831x_backlight_get_brightness(struct backlight_device *bl)
 {
 	struct wm831x_backlight_data *data = bl_get_data(bl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -128,7 +132,11 @@ static int wm831x_backlight_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm831x_pdata *wm831x_pdata;
+=======
+	struct wm831x_pdata *wm831x_pdata = dev_get_platdata(pdev->dev.parent);
+>>>>>>> v3.18
 =======
 	struct wm831x_pdata *wm831x_pdata = dev_get_platdata(pdev->dev.parent);
 >>>>>>> v3.18
@@ -140,6 +148,7 @@ static int wm831x_backlight_probe(struct platform_device *pdev)
 
 	/* We need platform data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.parent->platform_data) {
 		wm831x_pdata = pdev->dev.parent->platform_data;
 		pdata = wm831x_pdata->backlight;
@@ -147,10 +156,15 @@ static int wm831x_backlight_probe(struct platform_device *pdev)
 		pdata = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (wm831x_pdata)
 		pdata = wm831x_pdata->backlight;
 	else
 		pdata = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pdata) {
@@ -213,8 +227,13 @@ static int wm831x_backlight_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = max_isel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register("wm831x", &pdev->dev, data,
 				       &wm831x_backlight_ops, &props);
+=======
+	bl = devm_backlight_device_register(&pdev->dev, "wm831x", &pdev->dev,
+					data, &wm831x_backlight_ops, &props);
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, "wm831x", &pdev->dev,
 					data, &wm831x_backlight_ops, &props);
@@ -237,6 +256,7 @@ static int wm831x_backlight_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm831x_backlight_remove(struct platform_device *pdev)
 {
 	struct backlight_device *bl = platform_get_drvdata(pdev);
@@ -253,11 +273,16 @@ static struct platform_driver wm831x_backlight_driver = {
 	.probe		= wm831x_backlight_probe,
 	.remove		= wm831x_backlight_remove,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver wm831x_backlight_driver = {
 	.driver		= {
 		.name	= "wm831x-backlight",
 	},
 	.probe		= wm831x_backlight_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

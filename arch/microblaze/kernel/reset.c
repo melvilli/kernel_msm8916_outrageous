@@ -68,13 +68,19 @@ static void gpio_system_reset(void)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define gpio_system_reset() do {} while (0)
 =======
+=======
+>>>>>>> v3.18
 static void gpio_system_reset(void)
 {
 	pr_notice("No reset GPIO present - halting!\n");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void of_platform_reset_gpio_probe(void)
 {

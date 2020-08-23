@@ -4,7 +4,10 @@
 #include "oxygen.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GPIO_MAGIC		0x0008
 #define GPIO_HP_DETECT		0x0010
 #define GPIO_INPUT_ROUTE	0x0060
@@ -53,6 +56,9 @@ void dg_suspend(struct oxygen *chip);
 void dg_resume(struct oxygen *chip);
 void dg_cleanup(struct oxygen *chip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct oxygen_model model_xonar_dg;
 

@@ -6,7 +6,11 @@
  * Copyright (C) 2005 Mike Christie
  * Copyright (c) 2005, 2006 Voltaire, Inc. All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013 Mellanox Technologies. All rights reserved.
+=======
+ * Copyright (c) 2013-2014 Mellanox Technologies. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013-2014 Mellanox Technologies. All rights reserved.
 >>>>>>> v3.18
@@ -87,6 +91,11 @@ module_param_named(max_lun, iscsi_max_lun, uint, S_IRUGO);
 
 int iser_debug_level = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool iser_pi_enable = false;
+int iser_pi_guard = 1;
+>>>>>>> v3.18
 =======
 bool iser_pi_enable = false;
 int iser_pi_guard = 1;
@@ -101,12 +110,15 @@ module_param_named(debug_level, iser_debug_level, int, 0644);
 MODULE_PARM_DESC(debug_level, "Enable debug tracing if > 0 (default:disabled)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iser_global ig;
 
 void
 iscsi_iser_recv(struct iscsi_conn *conn,
 		struct iscsi_hdr *hdr, char *rx_data, int rx_data_len)
 =======
+=======
+>>>>>>> v3.18
 module_param_named(pi_enable, iser_pi_enable, bool, 0644);
 MODULE_PARM_DESC(pi_enable, "Enable T10-PI offload support (default:disabled)");
 
@@ -129,6 +141,9 @@ struct iser_global ig;
 void
 iscsi_iser_recv(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 		char *rx_data, int rx_data_len)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int rc = 0;
@@ -161,8 +176,11 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int iscsi_iser_pdu_alloc(struct iscsi_task *task, uint8_t opcode)
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_pdu_alloc() - allocate an iscsi-iser PDU
  * @task:     iscsi task
@@ -173,6 +191,9 @@ static int iscsi_iser_pdu_alloc(struct iscsi_task *task, uint8_t opcode)
  */
 static int
 iscsi_iser_pdu_alloc(struct iscsi_task *task, uint8_t opcode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct iscsi_iser_task *iser_task = task->dd_data;
@@ -180,6 +201,10 @@ iscsi_iser_pdu_alloc(struct iscsi_task *task, uint8_t opcode)
 	task->hdr = (struct iscsi_hdr *)&iser_task->desc.iscsi_header;
 	task->hdr_max = sizeof(iser_task->desc.iscsi_header);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -190,8 +215,13 @@ int iser_initialize_task_headers(struct iscsi_task *task,
 						struct iser_tx_desc *tx_desc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_iser_conn *iser_conn = task->conn->dd_data;
 	struct iser_device     *device    = iser_conn->ib_conn->device;
+=======
+	struct iser_conn       *iser_conn   = task->conn->dd_data;
+	struct iser_device *device = iser_conn->ib_conn.device;
+>>>>>>> v3.18
 =======
 	struct iser_conn       *iser_conn   = task->conn->dd_data;
 	struct iser_device *device = iser_conn->ib_conn.device;
@@ -210,6 +240,7 @@ int iser_initialize_task_headers(struct iscsi_task *task,
 	tx_desc->tx_sg[0].lkey   = device->mr->lkey;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iser_task->iser_conn		= iser_conn;
 	return 0;
 }
@@ -219,6 +250,8 @@ int iser_initialize_task_headers(struct iscsi_task *task,
  *
  * Initialize the task for the scsi command or mgmt command.
 =======
+=======
+>>>>>>> v3.18
 	iser_task->iser_conn = iser_conn;
 	return 0;
 }
@@ -231,6 +264,9 @@ int iser_initialize_task_headers(struct iscsi_task *task,
  *
  * Return: Returns zero on success or -ENOMEM when failing
  *         to init task headers (dma mapping error).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int
@@ -248,6 +284,11 @@ iscsi_iser_task_init(struct iscsi_task *task)
 	iser_task->command_sent = 0;
 	iser_task_rdma_init(iser_task);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iser_task->sc = task->sc;
+
+>>>>>>> v3.18
 =======
 	iser_task->sc = task->sc;
 
@@ -257,7 +298,11 @@ iscsi_iser_task_init(struct iscsi_task *task)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * iscsi_iser_mtask_xmit - xmit management(immediate) task
+=======
+ * iscsi_iser_mtask_xmit() - xmit management (immediate) task
+>>>>>>> v3.18
 =======
  * iscsi_iser_mtask_xmit() - xmit management (immediate) task
 >>>>>>> v3.18
@@ -319,13 +364,19 @@ iscsi_iser_task_xmit_unsol_data_exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_task_xmit() - xmit iscsi-iser task
  * @task: iscsi task
  *
  * Return: zero on success or escalates $error on failure.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 iscsi_iser_task_xmit(struct iscsi_task *task)
@@ -365,6 +416,7 @@ iscsi_iser_task_xmit(struct iscsi_task *task)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void iscsi_iser_cleanup_task(struct iscsi_task *task)
 {
 	struct iscsi_iser_task *iser_task = task->dd_data;
@@ -373,6 +425,8 @@ static void iscsi_iser_cleanup_task(struct iscsi_task *task)
 	struct iscsi_iser_conn *iser_conn = task->conn->dd_data;
 	struct iser_device     *device    = iser_conn->ib_conn->device;
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_cleanup_task() - cleanup an iscsi-iser task
  * @task: iscsi task
@@ -391,6 +445,9 @@ static void iscsi_iser_cleanup_task(struct iscsi_task *task)
 	/* DEVICE_REMOVAL event might have already released the device */
 	if (!device)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ib_dma_unmap_single(device->ib_device,
@@ -407,6 +464,7 @@ static void iscsi_iser_cleanup_task(struct iscsi_task *task)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct iscsi_cls_conn *
 iscsi_iser_conn_create(struct iscsi_cls_session *cls_session, uint32_t conn_idx)
 {
@@ -416,6 +474,8 @@ iscsi_iser_conn_create(struct iscsi_cls_session *cls_session, uint32_t conn_idx)
 
 	cls_conn = iscsi_conn_setup(cls_session, sizeof(*iser_conn), conn_idx);
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_check_protection() - check protection information status of task.
  * @task:     iscsi task
@@ -457,6 +517,9 @@ iscsi_iser_conn_create(struct iscsi_cls_session *cls_session,
 	struct iscsi_cls_conn *cls_conn;
 
 	cls_conn = iscsi_conn_setup(cls_session, 0, conn_idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!cls_conn)
 		return NULL;
@@ -468,6 +531,7 @@ iscsi_iser_conn_create(struct iscsi_cls_session *cls_session,
 	 */
 	conn->max_recv_dlength = ISER_RECV_DATA_SEG_LEN;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	iser_conn = conn->dd_data;
 	conn->dd_data = iser_conn;
@@ -504,6 +568,8 @@ iscsi_iser_conn_bind(struct iscsi_cls_session *cls_session,
 	struct iscsi_iser_conn *iser_conn;
 	struct iser_conn *ib_conn;
 =======
+=======
+>>>>>>> v3.18
 	return cls_conn;
 }
 
@@ -526,6 +592,9 @@ iscsi_iser_conn_bind(struct iscsi_cls_session *cls_session,
 {
 	struct iscsi_conn *conn = cls_conn->dd_data;
 	struct iser_conn *iser_conn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iscsi_endpoint *ep;
 	int error;
@@ -543,11 +612,14 @@ iscsi_iser_conn_bind(struct iscsi_cls_session *cls_session,
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ib_conn = ep->dd_data;
 
 	if (iser_alloc_rx_descriptors(ib_conn))
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	iser_conn = ep->dd_data;
 
 	mutex_lock(&iser_conn->state_mutex);
@@ -561,11 +633,15 @@ iscsi_iser_conn_bind(struct iscsi_cls_session *cls_session,
 	error = iser_alloc_rx_descriptors(iser_conn, conn->session);
 	if (error)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* binds the iSER connection retrieved from the previously
 	 * connected ep_handle to the iSCSI layer connection. exchanges
 	 * connection pointers */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	iser_info("binding iscsi/iser conn %p %p to ib_conn %p\n",
 		  conn, conn->dd_data, ib_conn);
@@ -577,6 +653,8 @@ iscsi_iser_conn_bind(struct iscsi_cls_session *cls_session,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	iser_info("binding iscsi conn %p to iser_conn %p\n", conn, iser_conn);
 
 	conn->dd_data = iser_conn;
@@ -618,14 +696,23 @@ iscsi_iser_conn_start(struct iscsi_cls_conn *cls_conn)
  *        handle, so we call it under iser the state lock to protect against
  *        this kind of race.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 iscsi_iser_conn_stop(struct iscsi_cls_conn *cls_conn, int flag)
 {
 	struct iscsi_conn *conn = cls_conn->dd_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_iser_conn *iser_conn = conn->dd_data;
 	struct iser_conn *ib_conn = iser_conn->ib_conn;
+=======
+	struct iser_conn *iser_conn = conn->dd_data;
+
+	iser_info("stopping iscsi_conn: %p, iser_conn: %p\n", conn, iser_conn);
+>>>>>>> v3.18
 =======
 	struct iser_conn *iser_conn = conn->dd_data;
 
@@ -636,6 +723,7 @@ iscsi_iser_conn_stop(struct iscsi_cls_conn *cls_conn, int flag)
 	 * Userspace may have goofed up and not bound the connection or
 	 * might have only partially setup the connection.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ib_conn) {
 		iscsi_conn_stop(cls_conn, flag);
@@ -650,6 +738,8 @@ iscsi_iser_conn_stop(struct iscsi_cls_conn *cls_conn, int flag)
 
 static void iscsi_iser_session_destroy(struct iscsi_cls_session *cls_session)
 =======
+=======
+>>>>>>> v3.18
 	if (iser_conn) {
 		mutex_lock(&iser_conn->state_mutex);
 		iscsi_conn_stop(cls_conn, flag);
@@ -674,6 +764,9 @@ static void iscsi_iser_session_destroy(struct iscsi_cls_session *cls_session)
  */
 static void
 iscsi_iser_session_destroy(struct iscsi_cls_session *cls_session)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct Scsi_Host *shost = iscsi_session_to_shost(cls_session);
@@ -684,7 +777,10 @@ iscsi_iser_session_destroy(struct iscsi_cls_session *cls_session)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int
 iser_dif_prot_caps(int prot_caps)
 {
@@ -706,6 +802,9 @@ iser_dif_prot_caps(int prot_caps)
  * Allocates and adds a scsi host, expose DIF supprot if
  * exists, and sets up an iscsi session.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct iscsi_cls_session *
 iscsi_iser_session_create(struct iscsi_endpoint *ep,
@@ -716,7 +815,12 @@ iscsi_iser_session_create(struct iscsi_endpoint *ep,
 	struct iscsi_session *session;
 	struct Scsi_Host *shost;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iser_conn *ib_conn;
+=======
+	struct iser_conn *iser_conn = NULL;
+	struct ib_conn *ib_conn;
+>>>>>>> v3.18
 =======
 	struct iser_conn *iser_conn = NULL;
 	struct ib_conn *ib_conn;
@@ -727,6 +831,10 @@ iscsi_iser_session_create(struct iscsi_endpoint *ep,
 		return NULL;
 	shost->transportt = iscsi_iser_scsi_transport;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	shost->cmd_per_lun = qdepth;
+>>>>>>> v3.18
 =======
 	shost->cmd_per_lun = qdepth;
 >>>>>>> v3.18
@@ -739,6 +847,7 @@ iscsi_iser_session_create(struct iscsi_endpoint *ep,
 	 * older userspace tools (before 2.0-870) did not pass us
 	 * the leading conn's ep so this will be NULL;
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ep)
 		ib_conn = ep->dd_data;
@@ -754,6 +863,8 @@ iscsi_iser_session_create(struct iscsi_endpoint *ep,
 	cls_session = iscsi_session_setup(&iscsi_iser_transport, shost,
 					  ISCSI_DEF_XMIT_CMDS_MAX, 0,
 =======
+=======
+>>>>>>> v3.18
 	if (ep) {
 		iser_conn = ep->dd_data;
 		ib_conn = &iser_conn->ib_conn;
@@ -780,6 +891,9 @@ iscsi_iser_session_create(struct iscsi_endpoint *ep,
 
 	cls_session = iscsi_session_setup(&iscsi_iser_transport, shost,
 					  cmds_max, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  sizeof(struct iscsi_iser_task),
 					  initial_cmdsn, 0);
@@ -811,7 +925,11 @@ iscsi_iser_set_param(struct iscsi_cls_conn *cls_conn,
 		sscanf(buf, "%d", &value);
 		if (value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iser_err("DataDigest wasn't negotiated to None");
+=======
+			iser_err("DataDigest wasn't negotiated to None\n");
+>>>>>>> v3.18
 =======
 			iser_err("DataDigest wasn't negotiated to None\n");
 >>>>>>> v3.18
@@ -822,7 +940,11 @@ iscsi_iser_set_param(struct iscsi_cls_conn *cls_conn,
 		sscanf(buf, "%d", &value);
 		if (value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iser_err("DataDigest wasn't negotiated to None");
+=======
+			iser_err("DataDigest wasn't negotiated to None\n");
+>>>>>>> v3.18
 =======
 			iser_err("DataDigest wasn't negotiated to None\n");
 >>>>>>> v3.18
@@ -833,7 +955,11 @@ iscsi_iser_set_param(struct iscsi_cls_conn *cls_conn,
 		sscanf(buf, "%d", &value);
 		if (value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iser_err("IFMarker wasn't negotiated to No");
+=======
+			iser_err("IFMarker wasn't negotiated to No\n");
+>>>>>>> v3.18
 =======
 			iser_err("IFMarker wasn't negotiated to No\n");
 >>>>>>> v3.18
@@ -844,7 +970,11 @@ iscsi_iser_set_param(struct iscsi_cls_conn *cls_conn,
 		sscanf(buf, "%d", &value);
 		if (value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iser_err("OFMarker wasn't negotiated to No");
+=======
+			iser_err("OFMarker wasn't negotiated to No\n");
+>>>>>>> v3.18
 =======
 			iser_err("OFMarker wasn't negotiated to No\n");
 >>>>>>> v3.18
@@ -859,7 +989,10 @@ iscsi_iser_set_param(struct iscsi_cls_conn *cls_conn,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_set_param() - set class connection parameter
  * @cls_conn:    iscsi class connection
@@ -867,6 +1000,9 @@ iscsi_iser_set_param(struct iscsi_cls_conn *cls_conn,
  *
  * Output connection statistics.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 iscsi_iser_conn_get_stats(struct iscsi_cls_conn *cls_conn, struct iscsi_stats *stats)
@@ -897,7 +1033,11 @@ static int iscsi_iser_get_ep_param(struct iscsi_endpoint *ep,
 				   enum iscsi_param param, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iser_conn *ib_conn = ep->dd_data;
+=======
+	struct iser_conn *iser_conn = ep->dd_data;
+>>>>>>> v3.18
 =======
 	struct iser_conn *iser_conn = ep->dd_data;
 >>>>>>> v3.18
@@ -907,6 +1047,7 @@ static int iscsi_iser_get_ep_param(struct iscsi_endpoint *ep,
 	case ISCSI_PARAM_CONN_PORT:
 	case ISCSI_PARAM_CONN_ADDRESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ib_conn || !ib_conn->cma_id)
 			return -ENOTCONN;
 
@@ -914,12 +1055,17 @@ static int iscsi_iser_get_ep_param(struct iscsi_endpoint *ep,
 					&ib_conn->cma_id->route.addr.dst_addr,
 					param, buf);
 =======
+=======
+>>>>>>> v3.18
 		if (!iser_conn || !iser_conn->ib_conn.cma_id)
 			return -ENOTCONN;
 
 		return iscsi_conn_get_addr_param((struct sockaddr_storage *)
 				&iser_conn->ib_conn.cma_id->route.addr.dst_addr,
 				param, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -930,7 +1076,10 @@ static int iscsi_iser_get_ep_param(struct iscsi_endpoint *ep,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_ep_connect() - Initiate iSER connection establishment
  * @shost:          scsi_host
@@ -946,12 +1095,16 @@ static int iscsi_iser_get_ep_param(struct iscsi_endpoint *ep,
  * Return: iscsi_endpoint created by iscsi layer or ERR_PTR(error)
  *         if fails.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct iscsi_endpoint *
 iscsi_iser_ep_connect(struct Scsi_Host *shost, struct sockaddr *dst_addr,
 		      int non_blocking)
 {
 	int err;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct iser_conn *ib_conn;
 	struct iscsi_endpoint *ep;
@@ -991,6 +1144,8 @@ iscsi_iser_ep_poll(struct iscsi_endpoint *ep, int timeout_ms)
 
 	iser_info("ib conn %p rc = %d\n", ib_conn, rc);
 =======
+=======
+>>>>>>> v3.18
 	struct iser_conn *iser_conn;
 	struct iscsi_endpoint *ep;
 
@@ -1050,6 +1205,9 @@ iscsi_iser_ep_poll(struct iscsi_endpoint *ep, int timeout_ms)
 	}
 
 	iser_info("ib conn %p rc = %d\n", iser_conn, rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rc > 0)
@@ -1060,6 +1218,7 @@ iscsi_iser_ep_poll(struct iscsi_endpoint *ep, int timeout_ms)
 		return rc; /* signal */
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 iscsi_iser_ep_disconnect(struct iscsi_endpoint *ep)
@@ -1081,6 +1240,8 @@ iscsi_iser_ep_disconnect(struct iscsi_endpoint *ep)
 	iser_info("ib conn %p state %d\n", ib_conn, ib_conn->state);
 	iser_conn_terminate(ib_conn);
 =======
+=======
+>>>>>>> v3.18
 /**
  * iscsi_iser_ep_disconnect() - Initiate connection teardown process
  * @ep:    iscsi endpoint handle
@@ -1118,6 +1279,9 @@ iscsi_iser_ep_disconnect(struct iscsi_endpoint *ep)
 		iser_conn_release(iser_conn);
 	}
 	iscsi_destroy_endpoint(ep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1166,6 +1330,10 @@ static umode_t iser_attr_is_visible(int param_type, int param)
 		case ISCSI_PARAM_IFACE_NAME:
 		case ISCSI_PARAM_INITIATOR_NAME:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case ISCSI_PARAM_DISCOVERY_SESS:
+>>>>>>> v3.18
 =======
 		case ISCSI_PARAM_DISCOVERY_SESS:
 >>>>>>> v3.18
@@ -1199,7 +1367,11 @@ static struct iscsi_transport iscsi_iser_transport = {
 	.owner                  = THIS_MODULE,
 	.name                   = "iser",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.caps                   = CAP_RECOVERY_L0 | CAP_MULTI_R2T,
+=======
+	.caps                   = CAP_RECOVERY_L0 | CAP_MULTI_R2T | CAP_TEXT_NEGO,
+>>>>>>> v3.18
 =======
 	.caps                   = CAP_RECOVERY_L0 | CAP_MULTI_R2T | CAP_TEXT_NEGO,
 >>>>>>> v3.18
@@ -1210,7 +1382,11 @@ static struct iscsi_transport iscsi_iser_transport = {
 	.create_conn            = iscsi_iser_conn_create,
 	.bind_conn              = iscsi_iser_conn_bind,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.destroy_conn           = iscsi_iser_conn_destroy,
+=======
+	.destroy_conn           = iscsi_conn_teardown,
+>>>>>>> v3.18
 =======
 	.destroy_conn           = iscsi_conn_teardown,
 >>>>>>> v3.18
@@ -1220,7 +1396,11 @@ static struct iscsi_transport iscsi_iser_transport = {
 	.get_ep_param		= iscsi_iser_get_ep_param,
 	.get_session_param	= iscsi_session_get_param,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.start_conn             = iscsi_conn_start,
+=======
+	.start_conn             = iscsi_iser_conn_start,
+>>>>>>> v3.18
 =======
 	.start_conn             = iscsi_iser_conn_start,
 >>>>>>> v3.18
@@ -1236,6 +1416,10 @@ static struct iscsi_transport iscsi_iser_transport = {
 	.cleanup_task		= iscsi_iser_cleanup_task,
 	.alloc_pdu		= iscsi_iser_pdu_alloc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.check_protection	= iscsi_iser_check_protection,
+>>>>>>> v3.18
 =======
 	.check_protection	= iscsi_iser_check_protection,
 >>>>>>> v3.18
@@ -1274,13 +1458,19 @@ static int __init iser_init(void)
 	INIT_LIST_HEAD(&ig.connlist);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	release_wq = alloc_workqueue("release workqueue", 0, 0);
 	if (!release_wq) {
 		iser_err("failed to allocate release workqueue\n");
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iscsi_iser_scsi_transport = iscsi_register_transport(
 							&iscsi_iser_transport);
@@ -1301,8 +1491,11 @@ register_transport_failure:
 static void __exit iser_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iser_dbg("Removing iSER datamover...\n");
 =======
+=======
+>>>>>>> v3.18
 	struct iser_conn *iser_conn, *n;
 	int connlist_empty;
 
@@ -1322,6 +1515,9 @@ static void __exit iser_exit(void)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iscsi_unregister_transport(&iscsi_iser_transport);
 	kmem_cache_destroy(ig.desc_cache);

@@ -28,7 +28,10 @@
 #include "w1.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum w1_cn_msg_flags - bitfield flags for struct cn_msg.flags
  *
@@ -52,6 +55,9 @@ enum w1_cn_msg_flags {
  * operation
  * @W1_LIST_MASTERS: used to determine the bus master identifiers
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum w1_netlink_message_types {
 	W1_SLAVE_ADD = 0,
@@ -64,7 +70,10 @@ enum w1_netlink_message_types {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct w1_netlink_msg - holds w1 message type, id, and result
  *
@@ -78,6 +87,9 @@ enum w1_netlink_message_types {
  * The netlink connector data sequence is, struct nlmsghdr, struct cn_msg,
  * then one or more struct w1_netlink_msg (each with optional data).
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_netlink_msg
 {
@@ -95,7 +107,10 @@ struct w1_netlink_msg
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum w1_commands - commands available for master or slave operations
  *
@@ -113,6 +128,9 @@ struct w1_netlink_msg
  * @W1_CMD_LIST_SLAVES: list of slaves registered on this master
  * @W1_CMD_MAX: number of available commands
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum w1_commands {
 	W1_CMD_READ = 0,
@@ -122,10 +140,13 @@ enum w1_commands {
 	W1_CMD_TOUCH,
 	W1_CMD_RESET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	W1_CMD_MAX,
 };
 
 =======
+=======
+>>>>>>> v3.18
 	W1_CMD_SLAVE_ADD,
 	W1_CMD_SLAVE_REMOVE,
 	W1_CMD_LIST_SLAVES,
@@ -143,6 +164,9 @@ enum w1_commands {
  * One or more struct w1_netlink_cmd is placed starting at w1_netlink_msg.data
  * each with optional data.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_netlink_cmd
 {

@@ -10,10 +10,14 @@
 
 /* AIC26 Registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AIC26_READ_COMMAND_WORD(addr)	((1 << 15) | (addr << 5))
 #define AIC26_WRITE_COMMAND_WORD(addr)	((0 << 15) | (addr << 5))
 #define AIC26_PAGE_ADDR(page, offset)	((page << 6) | offset)
 #define AIC26_NUM_REGS			AIC26_PAGE_ADDR(3, 0)
+=======
+#define AIC26_PAGE_ADDR(page, offset)	((page << 11) | offset << 5)
+>>>>>>> v3.18
 =======
 #define AIC26_PAGE_ADDR(page, offset)	((page << 11) | offset << 5)
 >>>>>>> v3.18

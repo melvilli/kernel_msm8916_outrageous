@@ -11,6 +11,10 @@ can-dev-y			:= dev.o
 can-dev-$(CONFIG_CAN_LEDS)	+= led.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-y				+= spi/
+>>>>>>> v3.18
 =======
 obj-y				+= spi/
 >>>>>>> v3.18
@@ -21,15 +25,21 @@ obj-$(CONFIG_CAN_SJA1000)	+= sja1000/
 obj-$(CONFIG_CAN_MSCAN)		+= mscan/
 obj-$(CONFIG_CAN_C_CAN)		+= c_can/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CAN_CC770)		+= cc770/
 obj-$(CONFIG_CAN_AT91)		+= at91_can.o
 obj-$(CONFIG_CAN_TI_HECC)	+= ti_hecc.o
 obj-$(CONFIG_CAN_MCP251X)	+= mcp251x.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_CAN_M_CAN)		+= m_can/
 obj-$(CONFIG_CAN_CC770)		+= cc770/
 obj-$(CONFIG_CAN_AT91)		+= at91_can.o
 obj-$(CONFIG_CAN_TI_HECC)	+= ti_hecc.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_CAN_BFIN)		+= bfin_can.o
 obj-$(CONFIG_CAN_JANZ_ICAN3)	+= janz-ican3.o
@@ -37,11 +47,17 @@ obj-$(CONFIG_CAN_FLEXCAN)	+= flexcan.o
 obj-$(CONFIG_PCH_CAN)		+= pch_can.o
 obj-$(CONFIG_CAN_GRCAN)		+= grcan.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ccflags-$(CONFIG_CAN_DEBUG_DEVICES) := -DDEBUG
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_CAN_RCAR)		+= rcar_can.o
 obj-$(CONFIG_CAN_XILINXCAN)	+= xilinx_can.o
 
 subdir-ccflags-$(CONFIG_CAN_DEBUG_DEVICES) := -DDEBUG
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

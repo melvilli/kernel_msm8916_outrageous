@@ -25,7 +25,11 @@
 #include <mach/at91_rtt.h>
 #include <mach/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/hardware.h>
 >>>>>>> v3.18
@@ -329,8 +333,12 @@ static int at91_rtc_probe(struct platform_device *pdev)
 	if (!rtc->rtt) {
 		dev_err(&pdev->dev, "failed to map registers, aborting.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto fail;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -341,8 +349,12 @@ static int at91_rtc_probe(struct platform_device *pdev)
 	if (!rtc->gpbr) {
 		dev_err(&pdev->dev, "failed to map gpbr registers, aborting.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto fail;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -363,10 +375,15 @@ static int at91_rtc_probe(struct platform_device *pdev)
 	rtc->rtcdev = devm_rtc_device_register(&pdev->dev, pdev->name,
 					&at91_rtc_ops, THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(rtc->rtcdev)) {
 		ret = PTR_ERR(rtc->rtcdev);
 		goto fail;
 	}
+=======
+	if (IS_ERR(rtc->rtcdev))
+		return PTR_ERR(rtc->rtcdev);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rtc->rtcdev))
 		return PTR_ERR(rtc->rtcdev);
@@ -378,7 +395,11 @@ static int at91_rtc_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_dbg(&pdev->dev, "can't share IRQ %d?\n", rtc->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -396,10 +417,13 @@ static int at91_rtc_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail:
 	platform_set_drvdata(pdev, NULL);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -416,7 +440,10 @@ static int at91_rtc_remove(struct platform_device *pdev)
 	rtt_writel(rtc, MR, mr & ~(AT91_RTT_ALMIEN | AT91_RTT_RTTINCIEN));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

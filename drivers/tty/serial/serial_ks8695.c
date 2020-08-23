@@ -438,7 +438,11 @@ static void ks8695uart_set_termios(struct uart_port *port, struct ktermios *term
 	if (termios->c_iflag & INPCK)
 		port->read_status_mask |= (URLS_URFE | URLS_URPE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18

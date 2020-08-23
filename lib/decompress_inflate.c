@@ -20,6 +20,10 @@
 
 #include "zlib_inflate/infutil.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/decompress/inflate.h>
+>>>>>>> v3.18
 =======
 #include <linux/decompress/inflate.h>
 >>>>>>> v3.18
@@ -31,7 +35,11 @@
 #define GZIP_IOBUF_SIZE (16*1024)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int INIT nofill(void *buffer, unsigned int len)
+=======
+static long INIT nofill(void *buffer, unsigned long len)
+>>>>>>> v3.18
 =======
 static long INIT nofill(void *buffer, unsigned long len)
 >>>>>>> v3.18
@@ -41,17 +49,23 @@ static long INIT nofill(void *buffer, unsigned long len)
 
 /* Included from initramfs et al code */
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC int INIT gunzip(unsigned char *buf, int len,
 		       int(*fill)(void*, unsigned int),
 		       int(*flush)(void*, unsigned int),
 		       unsigned char *out_buf,
 		       int *pos,
 =======
+=======
+>>>>>>> v3.18
 STATIC int INIT gunzip(unsigned char *buf, long len,
 		       long (*fill)(void*, unsigned long),
 		       long (*flush)(void*, unsigned long),
 		       unsigned char *out_buf,
 		       long *pos,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       void(*error)(char *x)) {
 	u8 *zbuf;
@@ -158,7 +172,11 @@ STATIC int INIT gunzip(unsigned char *buf, long len,
 		/* Write any data generated */
 		if (flush && strm->next_out > out_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int l = strm->next_out - out_buf;
+=======
+			long l = strm->next_out - out_buf;
+>>>>>>> v3.18
 =======
 			long l = strm->next_out - out_buf;
 >>>>>>> v3.18

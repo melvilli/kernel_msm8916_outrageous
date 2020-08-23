@@ -77,9 +77,13 @@ int install_user_keyrings(void)
 			uid_keyring = keyring_alloc(buf, user->uid, INVALID_GID,
 						    cred, user_keyring_perm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    KEY_ALLOC_UID_KEYRING |
 							KEY_ALLOC_IN_QUOTA,
 						    NULL);
+=======
+						    KEY_ALLOC_IN_QUOTA, NULL);
+>>>>>>> v3.18
 =======
 						    KEY_ALLOC_IN_QUOTA, NULL);
 >>>>>>> v3.18
@@ -99,9 +103,13 @@ int install_user_keyrings(void)
 				keyring_alloc(buf, user->uid, INVALID_GID,
 					      cred, user_keyring_perm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      KEY_ALLOC_UID_KEYRING |
 						  KEY_ALLOC_IN_QUOTA,
 					      NULL);
+=======
+					      KEY_ALLOC_IN_QUOTA, NULL);
+>>>>>>> v3.18
 =======
 					      KEY_ALLOC_IN_QUOTA, NULL);
 >>>>>>> v3.18
@@ -138,10 +146,15 @@ error:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Install a thread keyring to the given credentials struct if it didn't have
  * one already.  This is allowed to overrun the quota.
  *
  * Return: 0 if a thread keyring is now present; -errno on failure.
+=======
+ * Install a fresh thread keyring directly to new credentials.  This keyring is
+ * allowed to overrun the quota.
+>>>>>>> v3.18
 =======
  * Install a fresh thread keyring directly to new credentials.  This keyring is
  * allowed to overrun the quota.
@@ -152,9 +165,12 @@ int install_thread_keyring_to_cred(struct cred *new)
 	struct key *keyring;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new->thread_keyring)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	keyring = keyring_alloc("_tid", new->uid, new->gid, new,
@@ -169,9 +185,13 @@ int install_thread_keyring_to_cred(struct cred *new)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Install a thread keyring to the current task if it didn't have one already.
  *
  * Return: 0 if a thread keyring is now present; -errno on failure.
+=======
+ * Install a fresh thread keyring, discarding the old one.
+>>>>>>> v3.18
 =======
  * Install a fresh thread keyring, discarding the old one.
 >>>>>>> v3.18
@@ -186,6 +206,11 @@ static int install_thread_keyring(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(new->thread_keyring);
+
+>>>>>>> v3.18
 =======
 	BUG_ON(new->thread_keyring);
 
@@ -201,15 +226,21 @@ static int install_thread_keyring(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Install a process keyring to the given credentials struct if it didn't have
  * one already.  This is allowed to overrun the quota.
  *
  * Return: 0 if a process keyring is now present; -errno on failure.
 =======
+=======
+>>>>>>> v3.18
  * Install a process keyring directly to a credentials struct.
  *
  * Returns -EEXIST if there was already a process keyring, 0 if one installed,
  * and other value on any other error
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int install_process_keyring_to_cred(struct cred *new)
@@ -218,7 +249,11 @@ int install_process_keyring_to_cred(struct cred *new)
 
 	if (new->process_keyring)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EEXIST;
+>>>>>>> v3.18
 =======
 		return -EEXIST;
 >>>>>>> v3.18
@@ -235,15 +270,21 @@ int install_process_keyring_to_cred(struct cred *new)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Install a process keyring to the current task if it didn't have one already.
  *
  * Return: 0 if a process keyring is now present; -errno on failure.
 =======
+=======
+>>>>>>> v3.18
  * Make sure a process keyring is installed for the current process.  The
  * existing process keyring is not replaced.
  *
  * Returns 0 if there is a process keyring by the end of this function, some
  * error otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int install_process_keyring(void)
@@ -259,7 +300,11 @@ static int install_process_keyring(void)
 	if (ret < 0) {
 		abort_creds(new);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
+=======
+		return ret != -EEXIST ? ret : 0;
+>>>>>>> v3.18
 =======
 		return ret != -EEXIST ? ret : 0;
 >>>>>>> v3.18
@@ -270,11 +315,15 @@ static int install_process_keyring(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Install the given keyring as the session keyring of the given credentials
  * struct, replacing the existing one if any.  If the given keyring is NULL,
  * then install a new anonymous session keyring.
  *
  * Return: 0 on success; -errno on failure.
+=======
+ * Install a session keyring directly to a credentials struct.
+>>>>>>> v3.18
 =======
  * Install a session keyring directly to a credentials struct.
 >>>>>>> v3.18
@@ -299,7 +348,11 @@ int install_session_keyring_to_cred(struct cred *cred, struct key *keyring)
 			return PTR_ERR(keyring);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_inc(&keyring->usage);
+=======
+		__key_get(keyring);
+>>>>>>> v3.18
 =======
 		__key_get(keyring);
 >>>>>>> v3.18
@@ -317,11 +370,16 @@ int install_session_keyring_to_cred(struct cred *cred, struct key *keyring)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Install the given keyring as the session keyring of the current task,
  * replacing the existing one if any.  If the given keyring is NULL, then
  * install a new anonymous session keyring.
  *
  * Return: 0 on success; -errno on failure.
+=======
+ * Install a session keyring, discarding the old one.  If a keyring is not
+ * supplied, an empty one is invented.
+>>>>>>> v3.18
 =======
  * Install a session keyring, discarding the old one.  If a keyring is not
  * supplied, an empty one is invented.
@@ -395,11 +453,15 @@ void key_fsgid_changed(struct task_struct *tsk)
  * returned key reference.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 key_ref_t search_my_process_keyrings(struct key_type *type,
 				     const void *description,
 				     key_match_func_t match,
 				     bool no_state_check,
 				     const struct cred *cred)
+=======
+key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx)
+>>>>>>> v3.18
 =======
 key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx)
 >>>>>>> v3.18
@@ -419,10 +481,16 @@ key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx)
 
 	/* search the thread keyring first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cred->thread_keyring) {
 		key_ref = keyring_search_aux(
 			make_key_ref(cred->thread_keyring, 1),
 			cred, type, description, match, no_state_check);
+=======
+	if (ctx->cred->thread_keyring) {
+		key_ref = keyring_search_aux(
+			make_key_ref(ctx->cred->thread_keyring, 1), ctx);
+>>>>>>> v3.18
 =======
 	if (ctx->cred->thread_keyring) {
 		key_ref = keyring_search_aux(
@@ -444,10 +512,16 @@ key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx)
 
 	/* search the process keyring second */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cred->process_keyring) {
 		key_ref = keyring_search_aux(
 			make_key_ref(cred->process_keyring, 1),
 			cred, type, description, match, no_state_check);
+=======
+	if (ctx->cred->process_keyring) {
+		key_ref = keyring_search_aux(
+			make_key_ref(ctx->cred->process_keyring, 1), ctx);
+>>>>>>> v3.18
 =======
 	if (ctx->cred->process_keyring) {
 		key_ref = keyring_search_aux(
@@ -471,17 +545,23 @@ key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx)
 
 	/* search the session keyring */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cred->session_keyring) {
 		rcu_read_lock();
 		key_ref = keyring_search_aux(
 			make_key_ref(rcu_dereference(cred->session_keyring), 1),
 			cred, type, description, match, no_state_check);
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->cred->session_keyring) {
 		rcu_read_lock();
 		key_ref = keyring_search_aux(
 			make_key_ref(rcu_dereference(ctx->cred->session_keyring), 1),
 			ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcu_read_unlock();
 
@@ -502,15 +582,21 @@ key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx)
 	}
 	/* or search the user-session keyring */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (cred->user->session_keyring) {
 		key_ref = keyring_search_aux(
 			make_key_ref(cred->user->session_keyring, 1),
 			cred, type, description, match, no_state_check);
 =======
+=======
+>>>>>>> v3.18
 	else if (ctx->cred->user->session_keyring) {
 		key_ref = keyring_search_aux(
 			make_key_ref(ctx->cred->user->session_keyring, 1),
 			ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!IS_ERR(key_ref))
 			goto found;
@@ -544,10 +630,14 @@ found:
  * Return same as search_my_process_keyrings().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 key_ref_t search_process_keyrings(struct key_type *type,
 				  const void *description,
 				  key_match_func_t match,
 				  const struct cred *cred)
+=======
+key_ref_t search_process_keyrings(struct keyring_search_context *ctx)
+>>>>>>> v3.18
 =======
 key_ref_t search_process_keyrings(struct keyring_search_context *ctx)
 >>>>>>> v3.18
@@ -558,8 +648,12 @@ key_ref_t search_process_keyrings(struct keyring_search_context *ctx)
 	might_sleep();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = search_my_process_keyrings(type, description, match,
 					     false, cred);
+=======
+	key_ref = search_my_process_keyrings(ctx);
+>>>>>>> v3.18
 =======
 	key_ref = search_my_process_keyrings(ctx);
 >>>>>>> v3.18
@@ -571,6 +665,7 @@ key_ref_t search_process_keyrings(struct keyring_search_context *ctx)
 	 * search the keyrings of the process mentioned there
 	 * - we don't permit access to request_key auth keys via this method
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cred->request_key_auth &&
 	    cred == current_cred() &&
@@ -585,6 +680,8 @@ key_ref_t search_process_keyrings(struct keyring_search_context *ctx)
 			key_ref = search_process_keyrings(type, description,
 							  match, rka->cred);
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->cred->request_key_auth &&
 	    ctx->cred == current_cred() &&
 	    ctx->index_key.type != &key_type_request_key_auth
@@ -600,6 +697,9 @@ key_ref_t search_process_keyrings(struct keyring_search_context *ctx)
 			ctx->cred = rka->cred;
 			key_ref = search_process_keyrings(ctx);
 			ctx->cred = cred;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			up_read(&cred->request_key_auth->sem);
@@ -629,14 +729,20 @@ found:
  * See if the key we're looking at is the target key.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int lookup_user_key_possessed(const struct key *key, const void *target)
 {
 	return key == target;
 =======
+=======
+>>>>>>> v3.18
 bool lookup_user_key_possessed(const struct key *key,
 			       const struct key_match_data *match_data)
 {
 	return key == match_data->raw_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -662,15 +768,21 @@ key_ref_t lookup_user_key(key_serial_t id, unsigned long lflags,
 			  key_perm_t perm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct request_key_auth *rka;
 	const struct cred *cred;
 =======
+=======
+>>>>>>> v3.18
 	struct keyring_search_context ctx = {
 		.match_data.cmp		= lookup_user_key_possessed,
 		.match_data.lookup_type	= KEYRING_SEARCH_LOOKUP_DIRECT,
 		.flags			= KEYRING_SEARCH_NO_STATE_CHECK,
 	};
 	struct request_key_auth *rka;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct key *key;
 	key_ref_t key_ref, skey_ref;
@@ -678,7 +790,11 @@ key_ref_t lookup_user_key(key_serial_t id, unsigned long lflags,
 
 try_again:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cred = get_current_cred();
+=======
+	ctx.cred = get_current_cred();
+>>>>>>> v3.18
 =======
 	ctx.cred = get_current_cred();
 >>>>>>> v3.18
@@ -687,7 +803,11 @@ try_again:
 	switch (id) {
 	case KEY_SPEC_THREAD_KEYRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cred->thread_keyring) {
+=======
+		if (!ctx.cred->thread_keyring) {
+>>>>>>> v3.18
 =======
 		if (!ctx.cred->thread_keyring) {
 >>>>>>> v3.18
@@ -703,8 +823,13 @@ try_again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = cred->thread_keyring;
 		atomic_inc(&key->usage);
+=======
+		key = ctx.cred->thread_keyring;
+		__key_get(key);
+>>>>>>> v3.18
 =======
 		key = ctx.cred->thread_keyring;
 		__key_get(key);
@@ -714,7 +839,11 @@ try_again:
 
 	case KEY_SPEC_PROCESS_KEYRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cred->process_keyring) {
+=======
+		if (!ctx.cred->process_keyring) {
+>>>>>>> v3.18
 =======
 		if (!ctx.cred->process_keyring) {
 >>>>>>> v3.18
@@ -730,8 +859,13 @@ try_again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = cred->process_keyring;
 		atomic_inc(&key->usage);
+=======
+		key = ctx.cred->process_keyring;
+		__key_get(key);
+>>>>>>> v3.18
 =======
 		key = ctx.cred->process_keyring;
 		__key_get(key);
@@ -741,7 +875,11 @@ try_again:
 
 	case KEY_SPEC_SESSION_KEYRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cred->session_keyring) {
+=======
+		if (!ctx.cred->session_keyring) {
+>>>>>>> v3.18
 =======
 		if (!ctx.cred->session_keyring) {
 >>>>>>> v3.18
@@ -755,7 +893,11 @@ try_again:
 			else
 				ret = install_session_keyring(
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cred->user->session_keyring);
+=======
+					ctx.cred->user->session_keyring);
+>>>>>>> v3.18
 =======
 					ctx.cred->user->session_keyring);
 >>>>>>> v3.18
@@ -764,8 +906,13 @@ try_again:
 				goto error;
 			goto reget_creds;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (cred->session_keyring ==
 			   cred->user->session_keyring &&
+=======
+		} else if (ctx.cred->session_keyring ==
+			   ctx.cred->user->session_keyring &&
+>>>>>>> v3.18
 =======
 		} else if (ctx.cred->session_keyring ==
 			   ctx.cred->user->session_keyring &&
@@ -779,8 +926,13 @@ try_again:
 
 		rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = rcu_dereference(cred->session_keyring);
 		atomic_inc(&key->usage);
+=======
+		key = rcu_dereference(ctx.cred->session_keyring);
+		__key_get(key);
+>>>>>>> v3.18
 =======
 		key = rcu_dereference(ctx.cred->session_keyring);
 		__key_get(key);
@@ -791,7 +943,11 @@ try_again:
 
 	case KEY_SPEC_USER_KEYRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cred->user->uid_keyring) {
+=======
+		if (!ctx.cred->user->uid_keyring) {
+>>>>>>> v3.18
 =======
 		if (!ctx.cred->user->uid_keyring) {
 >>>>>>> v3.18
@@ -801,8 +957,13 @@ try_again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = cred->user->uid_keyring;
 		atomic_inc(&key->usage);
+=======
+		key = ctx.cred->user->uid_keyring;
+		__key_get(key);
+>>>>>>> v3.18
 =======
 		key = ctx.cred->user->uid_keyring;
 		__key_get(key);
@@ -812,7 +973,11 @@ try_again:
 
 	case KEY_SPEC_USER_SESSION_KEYRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cred->user->session_keyring) {
+=======
+		if (!ctx.cred->user->session_keyring) {
+>>>>>>> v3.18
 =======
 		if (!ctx.cred->user->session_keyring) {
 >>>>>>> v3.18
@@ -822,8 +987,13 @@ try_again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = cred->user->session_keyring;
 		atomic_inc(&key->usage);
+=======
+		key = ctx.cred->user->session_keyring;
+		__key_get(key);
+>>>>>>> v3.18
 =======
 		key = ctx.cred->user->session_keyring;
 		__key_get(key);
@@ -838,22 +1008,29 @@ try_again:
 
 	case KEY_SPEC_REQKEY_AUTH_KEY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = cred->request_key_auth;
 		if (!key)
 			goto error;
 
 		atomic_inc(&key->usage);
 =======
+=======
+>>>>>>> v3.18
 		key = ctx.cred->request_key_auth;
 		if (!key)
 			goto error;
 
 		__key_get(key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		key_ref = make_key_ref(key, 1);
 		break;
 
 	case KEY_SPEC_REQUESTOR_KEYRING:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!cred->request_key_auth)
 			goto error;
@@ -870,6 +1047,8 @@ try_again:
 		}
 		up_read(&cred->request_key_auth->sem);
 =======
+=======
+>>>>>>> v3.18
 		if (!ctx.cred->request_key_auth)
 			goto error;
 
@@ -884,6 +1063,9 @@ try_again:
 			__key_get(key);
 		}
 		up_read(&ctx.cred->request_key_auth->sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!key)
 			goto error;
@@ -905,10 +1087,13 @@ try_again:
 
 		/* check to see if we possess the key */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skey_ref = search_process_keyrings(key->type, key,
 						   lookup_user_key_possessed,
 						   cred);
 =======
+=======
+>>>>>>> v3.18
 		ctx.index_key.type		= key->type;
 		ctx.index_key.description	= key->description;
 		ctx.index_key.desc_len		= strlen(key->description);
@@ -916,6 +1101,9 @@ try_again:
 		kdebug("check possessed");
 		skey_ref = search_process_keyrings(&ctx);
 		kdebug("possessed=%p", skey_ref);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!IS_ERR(skey_ref)) {
@@ -957,7 +1145,11 @@ try_again:
 
 	/* check the permissions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = key_task_permission(key_ref, cred, perm);
+=======
+	ret = key_task_permission(key_ref, ctx.cred, perm);
+>>>>>>> v3.18
 =======
 	ret = key_task_permission(key_ref, ctx.cred, perm);
 >>>>>>> v3.18
@@ -968,7 +1160,11 @@ try_again:
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_cred(cred);
+=======
+	put_cred(ctx.cred);
+>>>>>>> v3.18
 =======
 	put_cred(ctx.cred);
 >>>>>>> v3.18
@@ -983,7 +1179,11 @@ invalid_key:
 	 * creds to be installed */
 reget_creds:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_cred(cred);
+=======
+	put_cred(ctx.cred);
+>>>>>>> v3.18
 =======
 	put_cred(ctx.cred);
 >>>>>>> v3.18
@@ -1046,7 +1246,10 @@ long join_session_keyring(const char *name)
 		goto error2;
 	} else if (keyring == new->session_keyring) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key_put(keyring);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = 0;
@@ -1104,7 +1307,10 @@ void key_change_session_keyring(struct callback_head *twork)
 	new->cap_permitted	= old->cap_permitted;
 	new->cap_effective	= old->cap_effective;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new->cap_ambient	= old->cap_ambient;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	new->cap_bset		= old->cap_bset;
@@ -1118,7 +1324,10 @@ void key_change_session_keyring(struct callback_head *twork)
 	commit_creds(new);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Make sure that root's user and user-session keyrings exist.
@@ -1129,4 +1338,7 @@ static int __init init_root_keyring(void)
 }
 
 late_initcall(init_root_keyring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -8,8 +8,12 @@ void raw6_icmp_error(struct sk_buff *, int nexthdr,
 bool raw6_local_deliver(struct sk_buff *, int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int			rawv6_rcv(struct sock *sk,
 					  struct sk_buff *skb);
+=======
+int rawv6_rcv(struct sock *sk, struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 int rawv6_rcv(struct sock *sk, struct sk_buff *skb);
 >>>>>>> v3.18

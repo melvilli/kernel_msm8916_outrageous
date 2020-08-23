@@ -2,6 +2,7 @@
 #define __NOUVEAU_FENCE_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_drm;
 
 struct nouveau_fence {
@@ -14,6 +15,8 @@ struct nouveau_fence {
 	unsigned long timeout;
 	u32 sequence;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/fence.h>
 #include <nvif/notify.h>
 
@@ -29,14 +32,20 @@ struct nouveau_fence {
 
 	struct nouveau_channel __rcu *channel;
 	unsigned long timeout;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 int  nouveau_fence_new(struct nouveau_channel *, bool sysmem,
 		       struct nouveau_fence **);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_fence *
 nouveau_fence_ref(struct nouveau_fence *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void nouveau_fence_unref(struct nouveau_fence **);
@@ -44,11 +53,14 @@ void nouveau_fence_unref(struct nouveau_fence **);
 int  nouveau_fence_emit(struct nouveau_fence *, struct nouveau_channel *);
 bool nouveau_fence_done(struct nouveau_fence *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  nouveau_fence_wait(struct nouveau_fence *, bool lazy, bool intr);
 int  nouveau_fence_sync(struct nouveau_fence *, struct nouveau_channel *);
 
 struct nouveau_fence_chan {
 =======
+=======
+>>>>>>> v3.18
 void nouveau_fence_work(struct fence *, void (*)(void *), void *);
 int  nouveau_fence_wait(struct nouveau_fence *, bool lazy, bool intr);
 int  nouveau_fence_sync(struct nouveau_bo *, struct nouveau_channel *, bool exclusive, bool intr);
@@ -57,6 +69,9 @@ struct nouveau_fence_chan {
 	spinlock_t lock;
 	struct kref fence_ref;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head pending;
 	struct list_head flip;
@@ -69,15 +84,21 @@ struct nouveau_fence_chan {
 	int  (*sync32)(struct nouveau_channel *, u64, u32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;
 	u32 sequence;
 =======
+=======
+>>>>>>> v3.18
 	u32 sequence;
 	u32 context;
 	char name[32];
 
 	struct nvif_notify notify;
 	int notify_ref, dead;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -89,7 +110,11 @@ struct nouveau_fence_priv {
 	void (*context_del)(struct nouveau_channel *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t waiting;
+=======
+	u32 contexts, context_base;
+>>>>>>> v3.18
 =======
 	u32 contexts, context_base;
 >>>>>>> v3.18
@@ -99,8 +124,14 @@ struct nouveau_fence_priv {
 #define nouveau_fence(drm) ((struct nouveau_fence_priv *)(drm)->fence)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nouveau_fence_context_new(struct nouveau_fence_chan *);
 void nouveau_fence_context_del(struct nouveau_fence_chan *);
+=======
+void nouveau_fence_context_new(struct nouveau_channel *, struct nouveau_fence_chan *);
+void nouveau_fence_context_del(struct nouveau_fence_chan *);
+void nouveau_fence_context_free(struct nouveau_fence_chan *);
+>>>>>>> v3.18
 =======
 void nouveau_fence_context_new(struct nouveau_channel *, struct nouveau_fence_chan *);
 void nouveau_fence_context_del(struct nouveau_fence_chan *);

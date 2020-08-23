@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/threads.h>
 #include <linux/smp.h>
@@ -194,6 +195,8 @@ EXPORT_SYMBOL(__arch_hweight64);
 #ifdef CONFIG_PPC_BOOK3S_64
 EXPORT_SYMBOL_GPL(mmu_psize_defs);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ftrace.h>
 #include <linux/mm.h>
 
@@ -232,6 +235,9 @@ EXPORT_SYMBOL_GPL(__giveup_vsx);
 
 #ifdef CONFIG_SPE
 EXPORT_SYMBOL(giveup_spe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -239,6 +245,11 @@ EXPORT_SYMBOL(giveup_spe);
 EXPORT_SYMBOL(epapr_hypercall_start);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+EXPORT_SYMBOL(current_stack_pointer);
+>>>>>>> v3.18
 =======
 
 EXPORT_SYMBOL(current_stack_pointer);

@@ -35,6 +35,10 @@
 #include <asm/page.h>
 #include <asm/cacheflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hvcall.h>
+>>>>>>> v3.18
 =======
 #include <asm/hvcall.h>
 >>>>>>> v3.18
@@ -53,13 +57,17 @@
 #define KVM_IRQCHIP_NUM_PINS     256
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(CONFIG_KVM_440)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mmu_notifier.h>
 
 #define KVM_ARCH_WANT_MMU_NOTIFIER
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct kvm;
 extern int kvm_unmap_hva(struct kvm *kvm, unsigned long hva);
@@ -76,6 +84,8 @@ extern void kvm_set_spte_hva(struct kvm *kvm, unsigned long hva, pte_t pte);
 #define KVM_NR_PAGE_SIZES	1
 #define KVM_PAGES_PER_HPAGE(x)	(1UL<<31)
 =======
+=======
+>>>>>>> v3.18
 extern int kvm_unmap_hva(struct kvm *kvm, unsigned long hva);
 extern int kvm_unmap_hva_range(struct kvm *kvm,
 			       unsigned long start, unsigned long end);
@@ -87,6 +97,9 @@ static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
 							 unsigned long address)
 {
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define HPTEG_CACHE_NUM			(1 << 15)
@@ -95,6 +108,10 @@ static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
 #define HPTEG_HASH_BITS_VPTE		13
 #define HPTEG_HASH_BITS_VPTE_LONG	5
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HPTEG_HASH_BITS_VPTE_64K	11
+>>>>>>> v3.18
 =======
 #define HPTEG_HASH_BITS_VPTE_64K	11
 >>>>>>> v3.18
@@ -103,6 +120,10 @@ static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
 #define HPTEG_HASH_NUM_VPTE		(1 << HPTEG_HASH_BITS_VPTE)
 #define HPTEG_HASH_NUM_VPTE_LONG	(1 << HPTEG_HASH_BITS_VPTE_LONG)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HPTEG_HASH_NUM_VPTE_64K		(1 << HPTEG_HASH_BITS_VPTE_64K)
+>>>>>>> v3.18
 =======
 #define HPTEG_HASH_NUM_VPTE_64K		(1 << HPTEG_HASH_BITS_VPTE_64K)
 >>>>>>> v3.18
@@ -111,10 +132,13 @@ static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
 #define KVM_PAM			0x0fffffffffffffffULL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm;
 struct kvm_run;
 struct kvm_vcpu;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct lppaca;
@@ -122,6 +146,12 @@ struct slb_shadow;
 struct dtl_entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct kvmppc_vcpu_book3s;
+struct kvmppc_book3s_shadow_vcpu;
+
+>>>>>>> v3.18
 =======
 struct kvmppc_vcpu_book3s;
 struct kvmppc_book3s_shadow_vcpu;
@@ -135,7 +165,10 @@ struct kvm_vcpu_stat {
 	u32 sum_exits;
 	u32 mmio_exits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 dcr_exits;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 signal_exits;
@@ -155,6 +188,11 @@ struct kvm_vcpu_stat {
 	u32 dbell_exits;
 	u32 gdbell_exits;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ld;
+	u32 st;
+>>>>>>> v3.18
 =======
 	u32 ld;
 	u32 st;
@@ -166,9 +204,13 @@ struct kvm_vcpu_stat {
 	u32 sp_instruc;
 	u32 queue_intr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ld;
 	u32 ld_slow;
 	u32 st;
+=======
+	u32 ld_slow;
+>>>>>>> v3.18
 =======
 	u32 ld_slow;
 >>>>>>> v3.18
@@ -179,7 +221,10 @@ struct kvm_vcpu_stat {
 enum kvm_exit_types {
 	MMIO_EXITS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DCR_EXITS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SIGNAL_EXITS,
@@ -202,6 +247,10 @@ enum kvm_exit_types {
 	EMULATED_RFI_EXITS,
 	EMULATED_RFCI_EXITS,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EMULATED_RFDI_EXITS,
+>>>>>>> v3.18
 =======
 	EMULATED_RFDI_EXITS,
 >>>>>>> v3.18
@@ -241,6 +290,7 @@ struct kvmppc_spapr_tce_table {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvmppc_linear_info {
 	void		*base_virt;
 	unsigned long	 base_pfn;
@@ -248,6 +298,11 @@ struct kvmppc_linear_info {
 	struct list_head list;
 	atomic_t	 use_count;
 	int		 type;
+=======
+struct kvm_rma_info {
+	atomic_t use_count;
+	unsigned long base_pfn;
+>>>>>>> v3.18
 =======
 struct kvm_rma_info {
 	atomic_t use_count;
@@ -292,22 +347,32 @@ struct revmap_entry {
 
 struct kvm_arch_memory_slot {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_HV
 	unsigned long *rmap;
 	unsigned long *slot_phys;
 #endif /* CONFIG_KVM_BOOK3S_64_HV */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 	unsigned long *rmap;
 	unsigned long *slot_phys;
 #endif /* CONFIG_KVM_BOOK3S_HV_POSSIBLE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct kvm_arch {
 	unsigned int lpid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_HV
+=======
+#ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 >>>>>>> v3.18
@@ -321,7 +386,11 @@ struct kvm_arch {
 	unsigned long lpcr;
 	unsigned long rmor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvmppc_linear_info *rma;
+=======
+	struct kvm_rma_info *rma;
+>>>>>>> v3.18
 =======
 	struct kvm_rma_info *rma;
 >>>>>>> v3.18
@@ -337,6 +406,7 @@ struct kvm_arch {
 	spinlock_t slot_phys_lock;
 	cpumask_t need_tlb_flush;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvmppc_vcore *vcores[KVM_MAX_VCORES];
 	struct kvmppc_linear_info *hpt_li;
 #endif /* CONFIG_KVM_BOOK3S_64_HV */
@@ -344,6 +414,8 @@ struct kvm_arch {
 	struct list_head spapr_tce_tables;
 	struct list_head rtas_tokens;
 =======
+=======
+>>>>>>> v3.18
 	int hpt_cma_alloc;
 #endif /* CONFIG_KVM_BOOK3S_HV_POSSIBLE */
 #ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
@@ -353,6 +425,9 @@ struct kvm_arch {
 	struct list_head spapr_tce_tables;
 	struct list_head rtas_tokens;
 	DECLARE_BITMAP(enabled_hcalls, MAX_HCALL_OPCODE/4 + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_KVM_MPIC
@@ -362,12 +437,18 @@ struct kvm_arch {
 	struct kvmppc_xics *xics;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct kvmppc_ops *kvm_ops;
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 	/* This array can grow quite large, keep it at the end */
 	struct kvmppc_vcore *vcores[KVM_MAX_VCORES];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -387,6 +468,10 @@ struct kvmppc_vcore {
 	int nap_count;
 	int napping_threads;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int first_vcpuid;
+>>>>>>> v3.18
 =======
 	int first_vcpuid;
 >>>>>>> v3.18
@@ -401,7 +486,10 @@ struct kvmppc_vcore {
 	u64 preempt_tb;
 	struct kvm_vcpu *runner;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct kvm *kvm;
 	u64 tb_offset;		/* guest timebase - host timebase */
 	ulong lpcr;
@@ -410,6 +498,9 @@ struct kvmppc_vcore {
 	ulong dpdes;		/* doorbell state (POWER8) */
 	void *mpp_buffer; /* Micro Partition Prefetch buffer */
 	bool mpp_buffer_is_valid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -446,6 +537,10 @@ struct kvmppc_pte {
 	bool may_write		: 1;
 	bool may_execute	: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 page_size;		/* MMU_PAGE_xxx */
+>>>>>>> v3.18
 =======
 	u8 page_size;		/* MMU_PAGE_xxx */
 >>>>>>> v3.18
@@ -462,7 +557,12 @@ struct kvmppc_mmu {
 	void (*mtsrin)(struct kvm_vcpu *vcpu, u32 srnum, ulong value);
 	u32  (*mfsrin)(struct kvm_vcpu *vcpu, u32 srnum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int  (*xlate)(struct kvm_vcpu *vcpu, gva_t eaddr, struct kvmppc_pte *pte, bool data);
+=======
+	int  (*xlate)(struct kvm_vcpu *vcpu, gva_t eaddr,
+		      struct kvmppc_pte *pte, bool data, bool iswrite);
+>>>>>>> v3.18
 =======
 	int  (*xlate)(struct kvm_vcpu *vcpu, gva_t eaddr,
 		      struct kvmppc_pte *pte, bool data, bool iswrite);
@@ -487,6 +587,10 @@ struct kvmppc_slb {
 	bool tb		: 1;	/* 1TB segment */
 	bool class	: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 base_page_size;	/* MMU_PAGE_xxx */
+>>>>>>> v3.18
 =======
 	u8 base_page_size;	/* MMU_PAGE_xxx */
 >>>>>>> v3.18
@@ -508,6 +612,7 @@ struct kvmppc_slb {
 #define KVMPPC_EPR_KERNEL	2 /* in-kernel irqchip */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvmppc_booke_debug_reg {
 	u32 dbcr0;
 	u32 dbcr1;
@@ -519,6 +624,8 @@ struct kvmppc_booke_debug_reg {
 	u64 dac[KVMPPC_BOOKE_MAX_DAC];
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define KVMPPC_IRQ_DEFAULT	0
@@ -536,19 +643,29 @@ struct kvm_vcpu_arch {
 	int slb_nr;		/* total number of entries in SLB */
 	struct kvmppc_mmu mmu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct kvmppc_vcpu_book3s *book3s;
 #endif
 #ifdef CONFIG_PPC_BOOK3S_32
 	struct kvmppc_book3s_shadow_vcpu *shadow_vcpu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 	ulong gpr[32];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 fpr[32];
 	u64 fpscr;
+=======
+	struct thread_fp_state fp;
+>>>>>>> v3.18
 =======
 	struct thread_fp_state fp;
 >>>>>>> v3.18
@@ -561,12 +678,16 @@ struct kvm_vcpu_arch {
 #endif
 #ifdef CONFIG_ALTIVEC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vector128 vr[32];
 	vector128 vscr;
 #endif
 
 #ifdef CONFIG_VSX
 	u64 vsr[64];
+=======
+	struct thread_vr_state vr;
+>>>>>>> v3.18
 =======
 	struct thread_vr_state vr;
 >>>>>>> v3.18
@@ -597,6 +718,12 @@ struct kvm_vcpu_arch {
 	ulong ctr;
 	ulong lr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PPC_BOOK3S
+	ulong tar;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S
 	ulong tar;
@@ -612,6 +739,7 @@ struct kvm_vcpu_arch {
 	ulong purr;
 	ulong spurr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ulong dscr;
 	ulong amr;
 	ulong uamor;
@@ -619,6 +747,8 @@ struct kvm_vcpu_arch {
 	ulong dabr;
 	ulong cfar;
 =======
+=======
+>>>>>>> v3.18
 	ulong ic;
 	ulong vtb;
 	ulong dscr;
@@ -645,6 +775,9 @@ struct kvm_vcpu_arch {
 	ulong acop;
 	ulong wort;
 	ulong shadow_srr1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	u32 vrsave; /* also USPRG0 */
@@ -663,13 +796,19 @@ struct kvm_vcpu_arch {
 	u32 decar;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tbl;
 	u32 tbu;
 =======
+=======
+>>>>>>> v3.18
 	/* Time base value when we entered the guest */
 	u64 entry_tb;
 	u64 entry_vtb;
 	u64 entry_ic;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 tcr;
 	ulong tsr; /* we need to perform set/clr_bits() which requires ulong */
@@ -687,9 +826,12 @@ struct kvm_vcpu_arch {
 	u32 dbsr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 mmcr[3];
 	u32 pmc[8];
 =======
+=======
+>>>>>>> v3.18
 	u64 mmcr[5];
 	u32 pmc[8];
 	u32 spmc[2];
@@ -717,6 +859,9 @@ struct kvm_vcpu_arch {
 	u32 vrsave_tm; /* also USPRG0 */
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_KVM_EXIT_TIMING
@@ -737,6 +882,10 @@ struct kvm_vcpu_arch {
 	ulong fault_dar;
 	u32 fault_dsisr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long intr_msr;
+>>>>>>> v3.18
 =======
 	unsigned long intr_msr;
 >>>>>>> v3.18
@@ -755,12 +904,15 @@ struct kvm_vcpu_arch {
 	u32 eptcfg;
 	u32 epr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 crit_save;
 	struct kvmppc_booke_debug_reg dbg_reg;
 #endif
 	gpa_t paddr_accessed;
 	gva_t vaddr_accessed;
 =======
+=======
+>>>>>>> v3.18
 	u64 sprg9;
 	u32 pwrmgtcr0;
 	u32 crit_save;
@@ -770,14 +922,20 @@ struct kvm_vcpu_arch {
 	gpa_t paddr_accessed;
 	gva_t vaddr_accessed;
 	pgd_t *pgdir;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u8 io_gpr; /* GPR used as IO source/target */
 	u8 mmio_is_bigendian;
 	u8 mmio_sign_extend;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 dcr_needed;
 	u8 dcr_is_write;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 osi_needed;
@@ -794,7 +952,10 @@ struct kvm_vcpu_arch {
 
 	struct hrtimer dec_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tasklet_struct tasklet;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 dec_jiffies;
@@ -815,15 +976,21 @@ struct kvm_vcpu_arch {
 
 	struct kvm_vcpu_arch_shared *shared;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long magic_page_pa; /* phys addr to map the magic page to */
 	unsigned long magic_page_ea; /* effect. addr to map the magic page to */
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PPC_BOOK3S_64) && defined(CONFIG_KVM_BOOK3S_PR_POSSIBLE)
 	bool shared_big_endian;
 #endif
 	unsigned long magic_page_pa; /* phys addr to map the magic page to */
 	unsigned long magic_page_ea; /* effect. addr to map the magic page to */
 	bool disable_kernel_nx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int irq_type;		/* one of KVM_IRQ_* */
@@ -834,7 +1001,11 @@ struct kvm_vcpu_arch {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_HV
+=======
+#ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 >>>>>>> v3.18
@@ -848,7 +1019,10 @@ struct kvm_vcpu_arch {
 	struct task_struct *run_task;
 	struct kvm_run *kvm_run;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgd_t *pgdir;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -867,6 +1041,11 @@ struct kvm_vcpu_arch {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VCPU_FPR(vcpu, i)	(vcpu)->arch.fp.fpr[i][TS_FPROFFSET]
+
+>>>>>>> v3.18
 =======
 #define VCPU_FPR(vcpu, i)	(vcpu)->arch.fp.fpr[i][TS_FPROFFSET]
 
@@ -888,7 +1067,10 @@ struct kvm_vcpu_arch {
 #define __KVM_HAVE_CREATE_DEVICE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void kvm_arch_hardware_disable(void) {}
 static inline void kvm_arch_hardware_unsetup(void) {}
 static inline void kvm_arch_sync_events(struct kvm *kvm) {}
@@ -897,5 +1079,8 @@ static inline void kvm_arch_flush_shadow_all(struct kvm *kvm) {}
 static inline void kvm_arch_sched_in(struct kvm_vcpu *vcpu, int cpu) {}
 static inline void kvm_arch_exit(void) {}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __POWERPC_KVM_HOST_H__ */

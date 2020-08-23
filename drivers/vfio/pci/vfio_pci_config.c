@@ -728,7 +728,11 @@ static int __init init_pci_ext_cap_err_perm(struct perm_bits *perm)
 
 	/* Writable bits mask */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mask =	PCI_ERR_UNC_TRAIN |		/* Training */
+=======
+	mask =	PCI_ERR_UNC_UND |		/* Undefined */
+>>>>>>> v3.18
 =======
 	mask =	PCI_ERR_UNC_UND |		/* Undefined */
 >>>>>>> v3.18
@@ -980,6 +984,7 @@ static int vfio_vc_cap_len(struct vfio_pci_device *vdev, u16 pos)
 	int len = PCI_CAP_VC_BASE_SIZEOF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pci_read_config_dword(pdev, pos + PCI_VC_PORT_REG1, &tmp);
 	if (ret)
 		return pcibios_err_to_errno(ret);
@@ -995,6 +1000,8 @@ static int vfio_vc_cap_len(struct vfio_pci_device *vdev, u16 pos)
 		phases = 64;
 	else if (tmp & PCI_VC_REG2_32_PHASE)
 =======
+=======
+>>>>>>> v3.18
 	ret = pci_read_config_dword(pdev, pos + PCI_VC_PORT_CAP1, &tmp);
 	if (ret)
 		return pcibios_err_to_errno(ret);
@@ -1009,6 +1016,9 @@ static int vfio_vc_cap_len(struct vfio_pci_device *vdev, u16 pos)
 	else if (tmp & PCI_VC_CAP2_64_PHASE)
 		phases = 64;
 	else if (tmp & PCI_VC_CAP2_32_PHASE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		phases = 32;
 	else
@@ -1034,6 +1044,10 @@ static int vfio_cap_len(struct vfio_pci_device *vdev, u8 cap, u8 pos)
 {
 	struct pci_dev *pdev = vdev->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 dword;
+>>>>>>> v3.18
 =======
 	u32 dword;
 >>>>>>> v3.18
@@ -1051,7 +1065,13 @@ static int vfio_cap_len(struct vfio_pci_device *vdev, u8 cap, u8 pos)
 
 		if (PCI_X_CMD_VERSION(word)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vdev->extended_caps = true;
+=======
+			/* Test for extended capabilities */
+			pci_read_config_dword(pdev, PCI_CFG_SPACE_SIZE, &dword);
+			vdev->extended_caps = (dword != 0);
+>>>>>>> v3.18
 =======
 			/* Test for extended capabilities */
 			pci_read_config_dword(pdev, PCI_CFG_SPACE_SIZE, &dword);
@@ -1069,15 +1089,21 @@ static int vfio_cap_len(struct vfio_pci_device *vdev, u8 cap, u8 pos)
 		return byte;
 	case PCI_CAP_ID_EXP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* length based on version */
 		vdev->extended_caps = true;
 
 =======
+=======
+>>>>>>> v3.18
 		/* Test for extended capabilities */
 		pci_read_config_dword(pdev, PCI_CFG_SPACE_SIZE, &dword);
 		vdev->extended_caps = (dword != 0);
 
 		/* length based on version */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((pcie_caps_reg(pdev) & PCI_EXP_FLAGS_VERS) == 1)
 			return PCI_CAP_EXP_ENDPOINT_SIZEOF_V1;
@@ -1161,8 +1187,12 @@ static int vfio_ext_cap_len(struct vfio_pci_device *vdev, u16 ecap, u16 epos)
 
 		byte &= PCI_DPA_CAP_SUBSTATE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		byte = round_up(byte + 1, 4);
 		return PCI_DPA_BASE_SIZEOF + byte;
+=======
+		return PCI_DPA_BASE_SIZEOF + byte + 1;
+>>>>>>> v3.18
 =======
 		return PCI_DPA_BASE_SIZEOF + byte + 1;
 >>>>>>> v3.18
@@ -1175,9 +1205,15 @@ static int vfio_ext_cap_len(struct vfio_pci_device *vdev, u16 ecap, u16 epos)
 			int sts;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sts = byte & PCI_TPH_CAP_ST_MASK;
 			sts >>= PCI_TPH_CAP_ST_SHIFT;
 			return PCI_TPH_BASE_SIZEOF + round_up(sts * 2, 4);
+=======
+			sts = dword & PCI_TPH_CAP_ST_MASK;
+			sts >>= PCI_TPH_CAP_ST_SHIFT;
+			return PCI_TPH_BASE_SIZEOF + (sts * 2) + 2;
+>>>>>>> v3.18
 =======
 			sts = dword & PCI_TPH_CAP_ST_MASK;
 			sts >>= PCI_TPH_CAP_ST_SHIFT;

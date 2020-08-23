@@ -14,12 +14,18 @@
  * It uses intrinsics to do the equivalent things.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef barrier
 #undef RELOC_HIDE
 #undef OPTIMIZER_HIDE_VAR
 
 #define barrier() __memory_barrier()
 
+=======
+#undef RELOC_HIDE
+#undef OPTIMIZER_HIDE_VAR
+
+>>>>>>> v3.18
 =======
 #undef RELOC_HIDE
 #undef OPTIMIZER_HIDE_VAR

@@ -5,6 +5,7 @@
 #include <core/device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_mc_intr {
 	u32 stat;
 	u32 unit;
@@ -14,11 +15,16 @@ struct nouveau_mc {
 	struct nouveau_subdev base;
 	const struct nouveau_mc_intr *intr_map;
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_mc {
 	struct nouveau_subdev base;
 	bool use_msi;
 	unsigned int irq;
 	void (*unk260)(struct nouveau_mc *, u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -28,6 +34,7 @@ nouveau_mc(void *obj)
 	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_MC];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nouveau_mc_create(p,e,o,m,d)                                           \
 	nouveau_mc_create_((p), (e), (o), (m), sizeof(**d), (void **)d)
@@ -58,6 +65,8 @@ extern const struct nouveau_mc_intr nv04_mc_intr[];
 int nv04_mc_init(struct nouveau_object *);
 int nv50_mc_init(struct nouveau_object *);
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nv04_mc_oclass;
 extern struct nouveau_oclass *nv40_mc_oclass;
 extern struct nouveau_oclass *nv44_mc_oclass;
@@ -68,6 +77,9 @@ extern struct nouveau_oclass *nv98_mc_oclass;
 extern struct nouveau_oclass *nvc0_mc_oclass;
 extern struct nouveau_oclass *nvc3_mc_oclass;
 extern struct nouveau_oclass *gk20a_mc_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -13,16 +13,22 @@
 #include <linux/memblock.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/backlight.h>
 #include <linux/platform_device.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/i2c-gpio.h>
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 #include <linux/pwm.h>
 #include <linux/pwm_backlight.h>
 #include <linux/memblock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/mtd/physmap.h>
@@ -39,6 +45,10 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "devices.h"
+>>>>>>> v3.18
 =======
 #include "devices.h"
 >>>>>>> v3.18
@@ -50,12 +60,15 @@
 #define EDB7211_LCDBL		CLPS711X_GPIO(3, 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EDB7211_FLASH0_BASE	(CS0_PHYS_BASE)
 #define EDB7211_FLASH1_BASE	(CS1_PHYS_BASE)
 #define EDB7211_CS8900_BASE	(CS2_PHYS_BASE + 0x300)
 #define EDB7211_CS8900_IRQ	(IRQ_EINT3)
 
 =======
+=======
+>>>>>>> v3.18
 #define EDB7211_I2C_SDA		CLPS711X_GPIO(3, 4)
 #define EDB7211_I2C_SCL		CLPS711X_GPIO(3, 5)
 
@@ -74,6 +87,9 @@ static struct i2c_gpio_platform_data edb7211_i2c_pdata __initdata = {
 	.scl_is_output_only = 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct resource edb7211_cs8900_resource[] __initdata = {
 	DEFINE_RES_MEM(EDB7211_CS8900_BASE, SZ_1K),
@@ -127,6 +143,7 @@ static struct plat_lcd_data edb7211_lcd_power_pdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void edb7211_lcd_backlight_set_intensity(int intensity)
 {
 	gpio_set_value(EDB7211_LCDBL, intensity);
@@ -161,6 +178,8 @@ void __init edb7211_map_io(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static struct pwm_lookup edb7211_pwm_lookup[] = {
 	PWM_LOOKUP("clps711x-pwm", 0, "pwm-backlight.0", NULL,
 		   0, PWM_POLARITY_NORMAL),
@@ -180,6 +199,9 @@ static struct gpio edb7211_gpios[] __initconst = {
 	{ EDB7211_LCDEN,	GPIOF_OUT_INIT_LOW,	"LCD POWER" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Reserve screen memory region at the start of main system memory. */
 static void __init edb7211_reserve(void)
@@ -189,7 +211,11 @@ static void __init edb7211_reserve(void)
 
 static void __init
 <<<<<<< HEAD
+<<<<<<< HEAD
 fixup_edb7211(struct tag *tags, char **cmdline, struct meminfo *mi)
+=======
+fixup_edb7211(struct tag *tags, char **cmdline)
+>>>>>>> v3.18
 =======
 fixup_edb7211(struct tag *tags, char **cmdline)
 >>>>>>> v3.18
@@ -203,6 +229,7 @@ fixup_edb7211(struct tag *tags, char **cmdline)
 	 * not using that information yet.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mi->bank[0].start = 0xc0000000;
 	mi->bank[0].size = SZ_8M;
 	mi->bank[1].start = 0xc1000000;
@@ -212,16 +239,22 @@ fixup_edb7211(struct tag *tags, char **cmdline)
 
 static void __init edb7211_init(void)
 =======
+=======
+>>>>>>> v3.18
 	memblock_add(0xc0000000, SZ_8M);
 	memblock_add(0xc1000000, SZ_8M);
 }
 
 static void __init edb7211_init_late(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	gpio_request_array(edb7211_gpios, ARRAY_SIZE(edb7211_gpios));
 
 	platform_device_register(&edb7211_flash_pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_device_register_data(&platform_bus, "platform-lcd", 0,
 				      &edb7211_lcd_power_pdata,
@@ -233,6 +266,8 @@ static void __init edb7211_init_late(void)
 	platform_device_register_simple("cs89x0", 0, edb7211_cs8900_resource,
 					ARRAY_SIZE(edb7211_cs8900_resource));
 =======
+=======
+>>>>>>> v3.18
 
 	platform_device_register_data(NULL, "platform-lcd", 0,
 				      &edb7211_lcd_power_pdata,
@@ -251,12 +286,16 @@ static void __init edb7211_init_late(void)
 	platform_device_register_data(NULL, "i2c-gpio", 0,
 				      &edb7211_i2c_pdata,
 				      sizeof(edb7211_i2c_pdata));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 MACHINE_START(EDB7211, "CL-EDB7211 (EP7211 eval board)")
 	/* Maintainer: Jon McClintock */
 	.atag_offset	= VIDEORAM_SIZE + 0x100,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.nr_irqs	= CLPS711X_NR_IRQS,
 	.fixup		= fixup_edb7211,
@@ -267,6 +306,8 @@ MACHINE_START(EDB7211, "CL-EDB7211 (EP7211 eval board)")
 	.init_machine	= edb7211_init,
 	.handle_irq	= clps711x_handle_irq,
 =======
+=======
+>>>>>>> v3.18
 	.fixup		= fixup_edb7211,
 	.reserve	= edb7211_reserve,
 	.map_io		= clps711x_map_io,
@@ -274,6 +315,9 @@ MACHINE_START(EDB7211, "CL-EDB7211 (EP7211 eval board)")
 	.init_time	= clps711x_timer_init,
 	.init_machine	= clps711x_devices_init,
 	.init_late	= edb7211_init_late,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.restart	= clps711x_restart,
 MACHINE_END

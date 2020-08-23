@@ -3,6 +3,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -17,15 +21,21 @@ extern struct ms_hyperv_info ms_hyperv;
 
 void hyperv_callback_vector(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hyperv_vector_handler(struct pt_regs *regs);
 void hv_register_vmbus_handler(int irq, irq_handler_t handler);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRACING
 #define trace_hyperv_callback_vector hyperv_callback_vector
 #endif
 void hyperv_vector_handler(struct pt_regs *regs);
 void hv_setup_vmbus_irq(void (*handler)(void));
 void hv_remove_vmbus_irq(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

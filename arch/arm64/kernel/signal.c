@@ -210,7 +210,11 @@ static int setup_sigframe(struct rt_sigframe __user *sf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rt_sigframe __user *get_sigframe(struct k_sigaction *ka,
+=======
+static struct rt_sigframe __user *get_sigframe(struct ksignal *ksig,
+>>>>>>> v3.18
 =======
 static struct rt_sigframe __user *get_sigframe(struct ksignal *ksig,
 >>>>>>> v3.18
@@ -220,6 +224,7 @@ static struct rt_sigframe __user *get_sigframe(struct ksignal *ksig,
 	struct rt_sigframe __user *frame;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sp = sp_top = regs->sp;
 
 	/*
@@ -227,6 +232,9 @@ static struct rt_sigframe __user *get_sigframe(struct ksignal *ksig,
 	 */
 	if ((ka->sa.sa_flags & SA_ONSTACK) && !sas_ss_flags(sp))
 		sp = sp_top = current->sas_ss_sp + current->sas_ss_size;
+=======
+	sp = sp_top = sigsp(regs->sp, ksig);
+>>>>>>> v3.18
 =======
 	sp = sp_top = sigsp(regs->sp, ksig);
 >>>>>>> v3.18
@@ -262,8 +270,13 @@ static void setup_return(struct pt_regs *regs, struct k_sigaction *ka,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_rt_frame(int usig, struct k_sigaction *ka, siginfo_t *info,
 			  sigset_t *set, struct pt_regs *regs)
+=======
+static int setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
+			  struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static int setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
 			  struct pt_regs *regs)
@@ -273,7 +286,11 @@ static int setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = get_sigframe(ka, regs);
+=======
+	frame = get_sigframe(ksig, regs);
+>>>>>>> v3.18
 =======
 	frame = get_sigframe(ksig, regs);
 >>>>>>> v3.18
@@ -287,9 +304,15 @@ static int setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
 	err |= setup_sigframe(frame, regs, set);
 	if (err == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setup_return(regs, ka, frame, usig);
 		if (ka->sa.sa_flags & SA_SIGINFO) {
 			err |= copy_siginfo_to_user(&frame->info, info);
+=======
+		setup_return(regs, &ksig->ka, frame, usig);
+		if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
+			err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 		setup_return(regs, &ksig->ka, frame, usig);
 		if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
@@ -315,8 +338,12 @@ static void setup_restart_syscall(struct pt_regs *regs)
  * OK, we're invoking a handler
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void handle_signal(unsigned long sig, struct k_sigaction *ka,
 			  siginfo_t *info, struct pt_regs *regs)
+=======
+static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -325,7 +352,11 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	struct task_struct *tsk = current;
 	sigset_t *oldset = sigmask_to_save();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int usig = sig;
+=======
+	int usig = ksig->sig;
+>>>>>>> v3.18
 =======
 	int usig = ksig->sig;
 >>>>>>> v3.18
@@ -342,6 +373,7 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	 */
 	if (is_compat_task()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ka->sa.sa_flags & SA_SIGINFO)
 			ret = compat_setup_rt_frame(usig, ka, info, oldset,
 						    regs);
@@ -350,12 +382,17 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	} else {
 		ret = setup_rt_frame(usig, ka, info, oldset, regs);
 =======
+=======
+>>>>>>> v3.18
 		if (ksig->ka.sa.sa_flags & SA_SIGINFO)
 			ret = compat_setup_rt_frame(usig, ksig, oldset, regs);
 		else
 			ret = compat_setup_frame(usig, ksig, oldset, regs);
 	} else {
 		ret = setup_rt_frame(usig, ksig, oldset, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -365,6 +402,7 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	ret |= !valid_user_regs(&regs->user_regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != 0) {
 		force_sigsegv(sig, tsk);
 		return;
@@ -372,19 +410,27 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/*
 	 * Fast forward the stepping logic so we step into the signal
 	 * handler.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	user_fastforward_single_step(tsk);
 
 	signal_delivered(sig, info, ka, regs, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (!ret)
 		user_fastforward_single_step(tsk);
 
 	signal_setup_done(ret, ksig, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -401,10 +447,16 @@ static void do_signal(struct pt_regs *regs)
 {
 	unsigned long continue_addr = 0, restart_addr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct k_sigaction ka;
 	siginfo_t info;
 	int signr, retval = 0;
 	int syscall = (int)regs->syscallno;
+=======
+	int retval = 0;
+	int syscall = (int)regs->syscallno;
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	int retval = 0;
 	int syscall = (int)regs->syscallno;
@@ -444,8 +496,12 @@ static void do_signal(struct pt_regs *regs)
 	 * the debugger may change all of our registers.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 	if (signr > 0) {
+=======
+	if (get_signal(&ksig)) {
+>>>>>>> v3.18
 =======
 	if (get_signal(&ksig)) {
 >>>>>>> v3.18
@@ -459,7 +515,11 @@ static void do_signal(struct pt_regs *regs)
 		     retval == -ERESTART_RESTARTBLOCK ||
 		     (retval == -ERESTARTSYS &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      !(ka.sa.sa_flags & SA_RESTART)))) {
+=======
+		      !(ksig.ka.sa.sa_flags & SA_RESTART)))) {
+>>>>>>> v3.18
 =======
 		      !(ksig.ka.sa.sa_flags & SA_RESTART)))) {
 >>>>>>> v3.18
@@ -468,7 +528,11 @@ static void do_signal(struct pt_regs *regs)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		handle_signal(signr, &ka, &info, regs);
+=======
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 =======
 		handle_signal(&ksig, regs);
 >>>>>>> v3.18
@@ -499,10 +563,16 @@ asmlinkage void do_notify_resume(struct pt_regs *regs,
 		tracehook_notify_resume(regs);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (thread_flags & _TIF_FOREIGN_FPSTATE)
 		fpsimd_restore_current_state();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

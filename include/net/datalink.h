@@ -16,6 +16,11 @@ struct datalink_proto {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct datalink_proto *make_EII_client(void);
+void destroy_EII_client(struct datalink_proto *dl);
+>>>>>>> v3.18
 =======
 struct datalink_proto *make_EII_client(void);
 void destroy_EII_client(struct datalink_proto *dl);

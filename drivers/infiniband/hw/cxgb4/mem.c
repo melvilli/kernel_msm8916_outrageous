@@ -38,9 +38,15 @@
 #include "iw_cxgb4.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int use_dsgl = 1;
 module_param(use_dsgl, int, 0644);
 MODULE_PARM_DESC(use_dsgl, "Use DSGL for PBL/FastReg (default=1)");
+=======
+int use_dsgl = 0;
+module_param(use_dsgl, int, 0644);
+MODULE_PARM_DESC(use_dsgl, "Use DSGL for PBL/FastReg (default=0)");
+>>>>>>> v3.18
 =======
 int use_dsgl = 0;
 module_param(use_dsgl, int, 0644);
@@ -83,7 +89,11 @@ static int _c4iw_write_mem_dma_aligned(struct c4iw_rdev *rdev, u32 addr,
 	req->wr.wr_hi = cpu_to_be32(FW_WR_OP(FW_ULPTX_WR) |
 			(wait ? FW_WR_COMPL(1) : 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->wr.wr_lo = wait ? (__force __be64)&wr_wait : 0;
+=======
+	req->wr.wr_lo = wait ? (__force __be64)(unsigned long) &wr_wait : 0L;
+>>>>>>> v3.18
 =======
 	req->wr.wr_lo = wait ? (__force __be64)(unsigned long) &wr_wait : 0L;
 >>>>>>> v3.18
@@ -184,7 +194,11 @@ static int _c4iw_write_mem_inline(struct c4iw_rdev *rdev, u32 addr, u32 len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int _c4iw_write_mem_dma(struct c4iw_rdev *rdev, u32 addr, u32 len, void *data)
+=======
+static int _c4iw_write_mem_dma(struct c4iw_rdev *rdev, u32 addr, u32 len, void *data)
+>>>>>>> v3.18
 =======
 static int _c4iw_write_mem_dma(struct c4iw_rdev *rdev, u32 addr, u32 len, void *data)
 >>>>>>> v3.18
@@ -274,15 +288,21 @@ static int write_tpt_entry(struct c4iw_rdev *rdev, u32 reset_tpt_entry,
 	if ((!reset_tpt_entry) && (*stag == T4_STAG_UNSET)) {
 		stag_idx = c4iw_get_resource(&rdev->resource.tpt_table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!stag_idx)
 			return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 		if (!stag_idx) {
 			mutex_lock(&rdev->stats.lock);
 			rdev->stats.stag.fail++;
 			mutex_unlock(&rdev->stats.lock);
 			return -ENOMEM;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_lock(&rdev->stats.lock);
 		rdev->stats.stag.cur += 32;
@@ -702,9 +722,15 @@ struct ib_mr *c4iw_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	__be64 *pages;
 	int shift, n, len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, k;
 	int err = 0;
 	struct ib_umem_chunk *chunk;
+=======
+	int i, k, entry;
+	int err = 0;
+	struct scatterlist *sg;
+>>>>>>> v3.18
 =======
 	int i, k, entry;
 	int err = 0;
@@ -740,10 +766,14 @@ struct ib_mr *c4iw_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	shift = ffs(mhp->umem->page_size) - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = 0;
 	list_for_each_entry(chunk, &mhp->umem->chunk_list, list)
 		n += chunk->nents;
 
+=======
+	n = mhp->umem->nmap;
+>>>>>>> v3.18
 =======
 	n = mhp->umem->nmap;
 >>>>>>> v3.18
@@ -759,6 +789,7 @@ struct ib_mr *c4iw_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 
 	i = n = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(chunk, &mhp->umem->chunk_list, list)
 		for (j = 0; j < chunk->nmap; ++j) {
@@ -779,6 +810,8 @@ struct ib_mr *c4iw_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 	for_each_sg(mhp->umem->sg_head.sgl, sg, mhp->umem->nmap, entry) {
 		len = sg_dma_len(sg) >> shift;
 		for (k = 0; k < len; ++k) {
@@ -795,6 +828,9 @@ struct ib_mr *c4iw_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i)
@@ -956,13 +992,19 @@ struct ib_fast_reg_page_list *c4iw_alloc_fastreg_pbl(struct ib_device *device,
 	c4pl->dma_addr = dma_addr;
 	c4pl->dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c4pl->ibpl.max_page_list_len = pll_len;
 =======
+=======
+>>>>>>> v3.18
 	c4pl->pll_len = pll_len;
 
 	PDBG("%s c4pl %p pll_len %u page_list %p dma_addr %pad\n",
 	     __func__, c4pl, c4pl->pll_len, c4pl->ibpl.page_list,
 	     &c4pl->dma_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return &c4pl->ibpl;
@@ -973,15 +1015,21 @@ void c4iw_free_fastreg_pbl(struct ib_fast_reg_page_list *ibpl)
 	struct c4iw_fr_page_list *c4pl = to_c4iw_fr_page_list(ibpl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_free_coherent(&c4pl->dev->rdev.lldi.pdev->dev,
 			  c4pl->ibpl.max_page_list_len,
 =======
+=======
+>>>>>>> v3.18
 	PDBG("%s c4pl %p pll_len %u page_list %p dma_addr %pad\n",
 	     __func__, c4pl, c4pl->pll_len, c4pl->ibpl.page_list,
 	     &c4pl->dma_addr);
 
 	dma_free_coherent(&c4pl->dev->rdev.lldi.pdev->dev,
 			  c4pl->pll_len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  c4pl->ibpl.page_list, dma_unmap_addr(c4pl, mapping));
 	kfree(c4pl);

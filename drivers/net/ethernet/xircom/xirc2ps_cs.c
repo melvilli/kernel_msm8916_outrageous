@@ -28,8 +28,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -272,7 +276,11 @@ static void xirc2ps_detach(struct pcmcia_device *p_dev);
 static irqreturn_t xirc2ps_interrupt(int irq, void *dev_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct local_info_t {
+=======
+struct local_info {
+>>>>>>> v3.18
 =======
 struct local_info {
 >>>>>>> v3.18
@@ -291,7 +299,11 @@ struct local_info {
     const char *manf_str;
     struct work_struct tx_timeout_task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } local_info_t;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -489,7 +501,11 @@ xirc2ps_probe(struct pcmcia_device *link)
 {
     struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local;
+=======
+    struct local_info *local;
+>>>>>>> v3.18
 =======
     struct local_info *local;
 >>>>>>> v3.18
@@ -498,7 +514,11 @@ xirc2ps_probe(struct pcmcia_device *link)
 
     /* Allocate the device structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
     dev = alloc_etherdev(sizeof(local_info_t));
+=======
+    dev = alloc_etherdev(sizeof(struct local_info));
+>>>>>>> v3.18
 =======
     dev = alloc_etherdev(sizeof(struct local_info));
 >>>>>>> v3.18
@@ -558,7 +578,11 @@ set_card_type(struct pcmcia_device *link)
 {
     struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -716,7 +740,11 @@ xirc2ps_config(struct pcmcia_device * link)
 {
     struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -961,7 +989,11 @@ xirc2ps_release(struct pcmcia_device *link)
 	if (link->resource[2]->end) {
 		struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_info_t *local = netdev_priv(dev);
+=======
+		struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 		struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1009,7 +1041,11 @@ xirc2ps_interrupt(int irq, void *dev_id)
 {
     struct net_device *dev = (struct net_device *)dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *lp = netdev_priv(dev);
+=======
+    struct local_info *lp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *lp = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1232,8 +1268,13 @@ static void
 xirc2ps_tx_timeout_task(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_info_t *local =
 		container_of(work, local_info_t, tx_timeout_task);
+=======
+	struct local_info *local =
+		container_of(work, struct local_info, tx_timeout_task);
+>>>>>>> v3.18
 =======
 	struct local_info *local =
 		container_of(work, struct local_info, tx_timeout_task);
@@ -1249,7 +1290,11 @@ static void
 xirc_tx_timeout(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *lp = netdev_priv(dev);
+=======
+    struct local_info *lp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *lp = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1262,7 +1307,11 @@ static netdev_tx_t
 do_start_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *lp = netdev_priv(dev);
+=======
+    struct local_info *lp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *lp = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1351,7 +1400,11 @@ static void set_addresses(struct net_device *dev)
 {
 	unsigned int ioaddr = dev->base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_info_t *lp = netdev_priv(dev);
+=======
+	struct local_info *lp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct local_info *lp = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1417,7 +1470,11 @@ static int
 do_config(struct net_device *dev, struct ifmap *map)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1446,7 +1503,11 @@ static int
 do_open(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *lp = netdev_priv(dev);
+=======
+    struct local_info *lp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *lp = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1484,7 +1545,11 @@ static int
 do_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1520,7 +1585,11 @@ static void
 hardreset(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1541,7 +1610,11 @@ static void
 do_reset(struct net_device *dev, int full)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1706,7 +1779,11 @@ static int
 init_mii(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *local = netdev_priv(dev);
+=======
+    struct local_info *local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1794,7 +1871,11 @@ do_stop(struct net_device *dev)
 {
     unsigned int ioaddr = dev->base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
     local_info_t *lp = netdev_priv(dev);
+=======
+    struct local_info *lp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
     struct local_info *lp = netdev_priv(dev);
 >>>>>>> v3.18

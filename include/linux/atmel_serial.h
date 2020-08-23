@@ -125,6 +125,12 @@
 #define ATMEL_US_IF		0x4c			/* IrDA Filter Register */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ATMEL_US_NAME		0xf0			/* Ip Name */
+#define ATMEL_US_VERSION	0xfc			/* Ip Version */
+
+>>>>>>> v3.18
 =======
 #define ATMEL_US_NAME		0xf0			/* Ip Name */
 #define ATMEL_US_VERSION	0xfc			/* Ip Version */

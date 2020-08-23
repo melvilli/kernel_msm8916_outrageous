@@ -19,9 +19,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -136,9 +143,15 @@ static inline bool rt2800usb_entry_txstatus_timeout(struct queue_entry *entry)
 	tout = time_after(jiffies, entry->last_action + msecs_to_jiffies(100));
 	if (unlikely(tout))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rt2x00_warn(entry->queue->rt2x00dev,
 			    "TX status timeout for entry %d in queue %d\n",
 			    entry->entry_idx, entry->queue->qid);
+=======
+		rt2x00_dbg(entry->queue->rt2x00dev,
+			   "TX status timeout for entry %d in queue %d\n",
+			   entry->entry_idx, entry->queue->qid);
+>>>>>>> v3.18
 =======
 		rt2x00_dbg(entry->queue->rt2x00dev,
 			   "TX status timeout for entry %d in queue %d\n",
@@ -178,7 +191,11 @@ static bool rt2800usb_tx_sta_fifo_read_completed(struct rt2x00_dev *rt2x00dev,
 	valid = rt2x00_get_field32(tx_status, TX_STA_FIFO_VALID);
 	if (valid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!kfifo_put(&rt2x00dev->txstatus_fifo, &tx_status))
+=======
+		if (!kfifo_put(&rt2x00dev->txstatus_fifo, tx_status))
+>>>>>>> v3.18
 =======
 		if (!kfifo_put(&rt2x00dev->txstatus_fifo, tx_status))
 >>>>>>> v3.18
@@ -250,7 +267,10 @@ static enum hrtimer_restart rt2800usb_tx_sta_fifo_timeout(struct hrtimer *timer)
  * Firmware functions
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rt2800usb_autorun_detect(struct rt2x00_dev *rt2x00dev)
 {
 	__le32 *reg;
@@ -276,6 +296,9 @@ static int rt2800usb_autorun_detect(struct rt2x00_dev *rt2x00dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static char *rt2800usb_get_firmware_name(struct rt2x00_dev *rt2x00dev)
 {
@@ -289,6 +312,10 @@ static int rt2800usb_write_firmware(struct rt2x00_dev *rt2x00dev,
 	u32 offset;
 	u32 length;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int retval;
+>>>>>>> v3.18
 =======
 	int retval;
 >>>>>>> v3.18
@@ -310,9 +337,12 @@ static int rt2800usb_write_firmware(struct rt2x00_dev *rt2x00dev,
 	 * Write firmware to device.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt2x00usb_register_multiwrite(rt2x00dev, FIRMWARE_IMAGE_BASE,
 				      data + offset, length);
 =======
+=======
+>>>>>>> v3.18
 	retval = rt2800usb_autorun_detect(rt2x00dev);
 	if (retval < 0)
 		return retval;
@@ -323,6 +353,9 @@ static int rt2800usb_write_firmware(struct rt2x00_dev *rt2x00dev,
 		rt2x00usb_register_multiwrite(rt2x00dev, FIRMWARE_IMAGE_BASE,
 					      data + offset, length);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rt2x00usb_register_write(rt2x00dev, H2M_MAILBOX_CID, ~0);
@@ -394,7 +427,11 @@ static int rt2800usb_enable_radio(struct rt2x00_dev *rt2x00dev)
 	 */
 	rt2x00_set_field32(&reg, USB_DMA_CFG_RX_BULK_AGG_LIMIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   ((rt2x00dev->ops->rx->entry_num * DATA_FRAME_SIZE)
+=======
+			   ((rt2x00dev->rx->limit * DATA_FRAME_SIZE)
+>>>>>>> v3.18
 =======
 			   ((rt2x00dev->rx->limit * DATA_FRAME_SIZE)
 >>>>>>> v3.18
@@ -636,8 +673,13 @@ static void rt2800usb_txdone(struct rt2x00_dev *rt2x00dev)
 
 		if (unlikely(rt2x00queue_empty(queue))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rt2x00_warn(rt2x00dev, "Got TX status for an empty queue %u, dropping\n",
 				    qid);
+=======
+			rt2x00_dbg(rt2x00dev, "Got TX status for an empty queue %u, dropping\n",
+				   qid);
+>>>>>>> v3.18
 =======
 			rt2x00_dbg(rt2x00dev, "Got TX status for an empty queue %u, dropping\n",
 				   qid);
@@ -810,7 +852,10 @@ static void rt2800usb_fill_rxdone(struct queue_entry *entry,
  * Device probe functions.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rt2800usb_efuse_detect(struct rt2x00_dev *rt2x00dev)
 {
 	int retval;
@@ -823,18 +868,27 @@ static int rt2800usb_efuse_detect(struct rt2x00_dev *rt2x00dev)
 	return rt2800_efuse_detect(rt2x00dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rt2800usb_read_eeprom(struct rt2x00_dev *rt2x00dev)
 {
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rt2800_efuse_detect(rt2x00dev))
 =======
+=======
+>>>>>>> v3.18
 	retval = rt2800usb_efuse_detect(rt2x00dev);
 	if (retval < 0)
 		return retval;
 	if (retval)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = rt2800_read_eeprom_efuse(rt2x00dev);
 	else
@@ -861,7 +915,11 @@ static int rt2800usb_probe_hw(struct rt2x00_dev *rt2x00dev)
 	 * Overwrite TX done handler
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PREPARE_WORK(&rt2x00dev->txdone_work, rt2800usb_work_txdone);
+=======
+	INIT_WORK(&rt2x00dev->txdone_work, rt2800usb_work_txdone);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&rt2x00dev->txdone_work, rt2800usb_work_txdone);
 >>>>>>> v3.18
@@ -951,6 +1009,7 @@ static const struct rt2x00lib_ops rt2800usb_rt2x00_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct data_queue_desc rt2800usb_queue_rx = {
 	.entry_num		= 128,
 	.data_size		= AGGREGATION_SIZE,
@@ -1021,6 +1080,8 @@ static const struct data_queue_desc rt2800usb_queue_bcn_5592 = {
 
 static const struct rt2x00_ops rt2800usb_ops_5592 = {
 =======
+=======
+>>>>>>> v3.18
 static void rt2800usb_queue_init(struct data_queue *queue)
 {
 	struct rt2x00_dev *rt2x00dev = queue->rt2x00dev;
@@ -1065,6 +1126,9 @@ static void rt2800usb_queue_init(struct data_queue *queue)
 }
 
 static const struct rt2x00_ops rt2800usb_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name			= KBUILD_MODNAME,
 	.drv_data_size		= sizeof(struct rt2800_drv_data),
@@ -1073,10 +1137,14 @@ static const struct rt2x00_ops rt2800usb_ops = {
 	.rf_size		= RF_SIZE,
 	.tx_queues		= NUM_TX_QUEUES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.extra_tx_headroom	= TXINFO_DESC_SIZE + TXWI_DESC_SIZE_5592,
 	.rx			= &rt2800usb_queue_rx_5592,
 	.tx			= &rt2800usb_queue_tx_5592,
 	.bcn			= &rt2800usb_queue_bcn_5592,
+=======
+	.queue_init		= rt2800usb_queue_init,
+>>>>>>> v3.18
 =======
 	.queue_init		= rt2800usb_queue_init,
 >>>>>>> v3.18
@@ -1152,6 +1220,10 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x0411, 0x01a2) },
 	{ USB_DEVICE(0x0411, 0x01ee) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(0x0411, 0x01a8) },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x0411, 0x01a8) },
 >>>>>>> v3.18
@@ -1172,8 +1244,13 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x07d1, 0x3c16) },
 	{ USB_DEVICE(0x07d1, 0x3c17) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x2001, 0x3c1b) },
 	{ USB_DEVICE(0x2001, 0x3c25) },
+=======
+	{ USB_DEVICE(0x2001, 0x3317) },
+	{ USB_DEVICE(0x2001, 0x3c1b) },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x2001, 0x3317) },
 	{ USB_DEVICE(0x2001, 0x3c1b) },
@@ -1367,6 +1444,11 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x13b1, 0x002f) },
 	{ USB_DEVICE(0x1737, 0x0079) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Logitec */
+	{ USB_DEVICE(0x0789, 0x0170) },
+>>>>>>> v3.18
 =======
 	/* Logitec */
 	{ USB_DEVICE(0x0789, 0x0170) },
@@ -1385,7 +1467,10 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x5a57, 0x0284) },
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RT2800USB_RT3573
 	/* AirLive */
 	{ USB_DEVICE(0x1b75, 0x7733) },
@@ -1424,12 +1509,20 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	/* ZyXEL */
 	{ USB_DEVICE(0x0586, 0x3421) },
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_RT2800USB_RT53XX
 	/* Arcadyan */
 	{ USB_DEVICE(0x043e, 0x7a12) },
 	{ USB_DEVICE(0x043e, 0x7a32) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* ASUS */
+	{ USB_DEVICE(0x0b05, 0x17e8) },
+>>>>>>> v3.18
 =======
 	/* ASUS */
 	{ USB_DEVICE(0x0b05, 0x17e8) },
@@ -1444,6 +1537,12 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x2001, 0x3c1d) },
 	{ USB_DEVICE(0x2001, 0x3c1e) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(0x2001, 0x3c20) },
+	{ USB_DEVICE(0x2001, 0x3c22) },
+	{ USB_DEVICE(0x2001, 0x3c23) },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x2001, 0x3c20) },
 	{ USB_DEVICE(0x2001, 0x3c22) },
@@ -1469,6 +1568,7 @@ static struct usb_device_id rt2800usb_device_table[] = {
 #ifdef CONFIG_RT2800USB_RT55XX
 	/* Arcadyan */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x043e, 0x7a32), .driver_info = 5592 },
 	/* AVM GmbH */
 	{ USB_DEVICE(0x057c, 0x8501), .driver_info = 5592 },
@@ -1479,6 +1579,8 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	/* Ralink */
 	{ USB_DEVICE(0x148f, 0x5572), .driver_info = 5592 },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x043e, 0x7a32) },
 	/* AVM GmbH */
 	{ USB_DEVICE(0x057c, 0x8501) },
@@ -1494,6 +1596,9 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x148f, 0x5572) },
 	/* TRENDnet */
 	{ USB_DEVICE(0x20f4, 0x724a) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_RT2800USB_UNKNOWN
@@ -1565,6 +1670,10 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	/* Planex */
 	{ USB_DEVICE(0x2019, 0xab24) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(0x2019, 0xab29) },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x2019, 0xab29) },
 >>>>>>> v3.18
@@ -1580,6 +1689,10 @@ static struct usb_device_id rt2800usb_device_table[] = {
 	{ USB_DEVICE(0x0df6, 0x0069) },
 	{ USB_DEVICE(0x0df6, 0x006f) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(0x0df6, 0x0078) },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x0df6, 0x0078) },
 >>>>>>> v3.18
@@ -1608,9 +1721,12 @@ static int rt2800usb_probe(struct usb_interface *usb_intf,
 			   const struct usb_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id->driver_info == 5592)
 		return rt2x00usb_probe(usb_intf, &rt2800usb_ops_5592);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return rt2x00usb_probe(usb_intf, &rt2800usb_ops);

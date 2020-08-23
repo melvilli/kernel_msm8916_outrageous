@@ -38,7 +38,10 @@ static int ath6kl_hif_cp_scat_dma_buf(struct hif_scatter_req *req,
 
 	for (i = 0; i < req->scat_entries; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (from_dma)
@@ -120,7 +123,10 @@ static void ath6kl_hif_dump_fw_crash(struct ath6kl *ar)
 			    le32_to_cpu(regdump_val[i + 3]));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -708,7 +714,10 @@ int ath6kl_hif_setup(struct ath6kl_device *dev)
 fail_setup:
 	return status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

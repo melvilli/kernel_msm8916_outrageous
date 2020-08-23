@@ -31,10 +31,16 @@
 #define XEN_PLATFORM_ERR_BLACKLIST -3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* store the value of xen_emul_unplug after the unplug is done */
 int xen_platform_pci_unplug;
 EXPORT_SYMBOL_GPL(xen_platform_pci_unplug);
 #ifdef CONFIG_XEN_PVHVM
+=======
+#ifdef CONFIG_XEN_PVHVM
+/* store the value of xen_emul_unplug after the unplug is done */
+static int xen_platform_pci_unplug;
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_XEN_PVHVM
 /* store the value of xen_emul_unplug after the unplug is done */
@@ -76,7 +82,10 @@ static int check_platform_magic(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool xen_has_pv_devices()
 {
 	if (!xen_domain())
@@ -151,6 +160,9 @@ bool xen_has_pv_and_legacy_disk_devices(void)
 }
 EXPORT_SYMBOL_GPL(xen_has_pv_and_legacy_disk_devices);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void xen_unplug_emulated_devices(void)
 {

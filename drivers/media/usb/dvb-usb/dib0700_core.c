@@ -659,6 +659,7 @@ struct dib0700_rc_response {
 	u8 report_id;
 	u8 data_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		u16 system16;
 		struct {
@@ -666,6 +667,10 @@ struct dib0700_rc_response {
 			u8 system;
 		};
 	};
+=======
+	u8 system;
+	u8 not_system;
+>>>>>>> v3.18
 =======
 	u8 system;
 	u8 not_system;
@@ -680,6 +685,10 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 	struct dvb_usb_device *d = purb->context;
 	struct dib0700_rc_response *poll_reply;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum rc_type protocol;
+>>>>>>> v3.18
 =======
 	enum rc_type protocol;
 >>>>>>> v3.18
@@ -717,12 +726,15 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 	switch (d->props.rc.core.protocol) {
 	case RC_BIT_NEC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		toggle = 0;
 
 		/* NEC protocol sends repeat code as 0 0 0 FF */
 		if ((poll_reply->system == 0x00) && (poll_reply->data == 0x00)
 		    && (poll_reply->not_data == 0xff)) {
 =======
+=======
+>>>>>>> v3.18
 		protocol = RC_TYPE_NEC;
 		toggle = 0;
 
@@ -731,11 +743,15 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 		    poll_reply->not_system == 0x00 &&
 		    poll_reply->data       == 0x00 &&
 		    poll_reply->not_data   == 0xff) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			poll_reply->data_state = 2;
 			break;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ((poll_reply->system ^ poll_reply->not_system) != 0xff) {
 			deb_data("NEC extended protocol\n");
@@ -746,6 +762,8 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 			/* normal NEC code - 16 bits */
 			keycode = poll_reply->system << 8 | poll_reply->data;
 =======
+=======
+>>>>>>> v3.18
 		if ((poll_reply->data ^ poll_reply->not_data) != 0xff) {
 			deb_data("NEC32 protocol\n");
 			keycode = RC_SCANCODE_NEC32(poll_reply->system     << 24 |
@@ -762,6 +780,9 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 			deb_data("NEC normal protocol\n");
 			keycode = RC_SCANCODE_NEC(poll_reply->system,
 						   poll_reply->data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -769,9 +790,15 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 	default:
 		deb_data("RC5 protocol\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* RC5 Protocol */
 		toggle = poll_reply->report_id;
 		keycode = poll_reply->system << 8 | poll_reply->data;
+=======
+		protocol = RC_TYPE_RC5;
+		toggle = poll_reply->report_id;
+		keycode = RC_SCANCODE_RC5(poll_reply->system, poll_reply->data);
+>>>>>>> v3.18
 =======
 		protocol = RC_TYPE_RC5;
 		toggle = poll_reply->report_id;
@@ -784,8 +811,13 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 	if ((poll_reply->data + poll_reply->not_data) != 0xff) {
 		/* Key failed integrity check */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("key failed integrity check: %04x %02x %02x",
 		    poll_reply->system,
+=======
+		err("key failed integrity check: %02x %02x %02x %02x",
+		    poll_reply->system,  poll_reply->not_system,
+>>>>>>> v3.18
 =======
 		err("key failed integrity check: %02x %02x %02x %02x",
 		    poll_reply->system,  poll_reply->not_system,
@@ -795,7 +827,11 @@ static void dib0700_rc_urb_completion(struct urb *purb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc_keydown(d->rc_dev, keycode, toggle);
+=======
+	rc_keydown(d->rc_dev, protocol, keycode, toggle);
+>>>>>>> v3.18
 =======
 	rc_keydown(d->rc_dev, protocol, keycode, toggle);
 >>>>>>> v3.18
@@ -809,6 +845,7 @@ resubmit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dib0700_rc_setup(struct dvb_usb_device *d)
 {
 	struct dib0700_state *st = d->priv;
@@ -821,6 +858,8 @@ int dib0700_rc_setup(struct dvb_usb_device *d)
 
 	/* Starting in firmware 1.20, the RC info is provided on a bulk pipe */
 =======
+=======
+>>>>>>> v3.18
 int dib0700_rc_setup(struct dvb_usb_device *d, struct usb_interface *intf)
 {
 	struct dib0700_state *st = d->priv;
@@ -835,6 +874,9 @@ int dib0700_rc_setup(struct dvb_usb_device *d, struct usb_interface *intf)
 
 	/* Starting in firmware 1.20, the RC info is provided on a bulk pipe */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	purb = usb_alloc_urb(0, GFP_KERNEL);
 	if (purb == NULL) {
@@ -851,10 +893,13 @@ int dib0700_rc_setup(struct dvb_usb_device *d, struct usb_interface *intf)
 
 	purb->status = -EINPROGRESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_fill_bulk_urb(purb, d->udev, usb_rcvbulkpipe(d->udev, 1),
 			  purb->transfer_buffer, RC_MSG_SIZE_V1_20,
 			  dib0700_rc_urb_completion, d);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Some devices like the Hauppauge NovaTD model 52009 use an interrupt
@@ -884,6 +929,9 @@ int dib0700_rc_setup(struct dvb_usb_device *d, struct usb_interface *intf)
 		usb_free_urb(purb);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = usb_submit_urb(purb, GFP_ATOMIC);
@@ -924,7 +972,11 @@ static int dib0700_probe(struct usb_interface *intf,
 				dev->props.rc.core.bulk_mode = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dib0700_rc_setup(dev);
+=======
+			dib0700_rc_setup(dev, intf);
+>>>>>>> v3.18
 =======
 			dib0700_rc_setup(dev, intf);
 >>>>>>> v3.18

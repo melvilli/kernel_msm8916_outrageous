@@ -1,6 +1,12 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011-2012 Synopsys, Inc. (www.synopsys.com)
+=======
+ * Linux performance counter support for ARC
+ *
+ * Copyright (C) 2011-2013 Synopsys, Inc. (www.synopsys.com)
+>>>>>>> v3.18
 =======
  * Linux performance counter support for ARC
  *
@@ -17,7 +23,10 @@
 #define __ASM_PERF_EVENT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* real maximum varies per CPU, this is the maximum supported by the driver */
 #define ARC_PMU_MAX_HWEVENTS	64
 
@@ -218,5 +227,8 @@ static const unsigned arc_pmu_cache_map[C(MAX)][C(OP_MAX)][C(RESULT_MAX)] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_PERF_EVENT_H */

@@ -17,7 +17,10 @@
 
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pinctrl/pinmux.h>
@@ -77,7 +80,10 @@ static void slave_encoder_prepare(struct drm_encoder *encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool slave_encoder_fixup(struct drm_encoder *encoder,
 		const struct drm_display_mode *mode,
 		struct drm_display_mode *adjusted_mode)
@@ -103,6 +109,9 @@ static bool slave_encoder_fixup(struct drm_encoder *encoder,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct drm_encoder_funcs slave_encoder_funcs = {
 		.destroy        = slave_encoder_destroy,
@@ -111,7 +120,11 @@ static const struct drm_encoder_funcs slave_encoder_funcs = {
 static const struct drm_encoder_helper_funcs slave_encoder_helper_funcs = {
 		.dpms           = drm_i2c_encoder_dpms,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mode_fixup     = drm_i2c_encoder_mode_fixup,
+=======
+		.mode_fixup     = slave_encoder_fixup,
+>>>>>>> v3.18
 =======
 		.mode_fixup     = slave_encoder_fixup,
 >>>>>>> v3.18
@@ -178,7 +191,11 @@ static void slave_connector_destroy(struct drm_connector *connector)
 {
 	struct slave_connector *slave_connector = to_slave_connector(connector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -278,7 +295,11 @@ static struct drm_connector *slave_connector_create(struct drm_device *dev,
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18
@@ -316,6 +337,7 @@ static int slave_modeset_init(struct tilcdc_module *mod, struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void slave_destroy(struct tilcdc_module *mod)
 {
 	struct slave_module *slave_mod = to_slave_module(mod);
@@ -327,6 +349,10 @@ static void slave_destroy(struct tilcdc_module *mod)
 static const struct tilcdc_module_ops slave_module_ops = {
 		.modeset_init = slave_modeset_init,
 		.destroy = slave_destroy,
+=======
+static const struct tilcdc_module_ops slave_module_ops = {
+		.modeset_init = slave_modeset_init,
+>>>>>>> v3.18
 =======
 static const struct tilcdc_module_ops slave_module_ops = {
 		.modeset_init = slave_modeset_init,
@@ -348,6 +374,10 @@ static int slave_probe(struct platform_device *pdev)
 	struct pinctrl *pinctrl;
 	uint32_t i2c_phandle;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct i2c_adapter *slavei2c;
+>>>>>>> v3.18
 =======
 	struct i2c_adapter *slavei2c;
 >>>>>>> v3.18
@@ -359,6 +389,7 @@ static int slave_probe(struct platform_device *pdev)
 		return -ENXIO;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	slave_mod = kzalloc(sizeof(*slave_mod), GFP_KERNEL);
 	if (!slave_mod)
@@ -376,16 +407,22 @@ static int slave_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "could not get i2c bus phandle\n");
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	/* Bail out early if i2c not specified */
 	if (of_property_read_u32(node, "i2c", &i2c_phandle)) {
 		dev_err(&pdev->dev, "could not get i2c bus phandle\n");
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	i2c_node = of_find_node_by_phandle(i2c_phandle);
 	if (!i2c_node) {
 		dev_err(&pdev->dev, "could not get i2c bus node\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail;
 	}
@@ -403,6 +440,8 @@ static int slave_probe(struct platform_device *pdev)
 fail:
 	slave_destroy(mod);
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -442,6 +481,9 @@ fail:
 
 fail_adapter:
 	i2c_put_adapter(slavei2c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -449,13 +491,19 @@ fail_adapter:
 static int slave_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct tilcdc_module *mod = dev_get_platdata(&pdev->dev);
 	struct slave_module *slave_mod = to_slave_module(mod);
 
 	tilcdc_module_cleanup(mod);
 	kfree(slave_mod);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

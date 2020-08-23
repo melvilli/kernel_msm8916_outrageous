@@ -21,7 +21,10 @@
 #include <linux/i2c.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/acpi.h>
@@ -68,7 +71,11 @@ static struct pci_driver ali1563_pci_driver;
 static unsigned short ali1563_smba;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ali1563_transaction(struct i2c_adapter * a, int size)
+=======
+static int ali1563_transaction(struct i2c_adapter *a, int size)
+>>>>>>> v3.18
 =======
 static int ali1563_transaction(struct i2c_adapter *a, int size)
 >>>>>>> v3.18
@@ -87,7 +94,11 @@ static int ali1563_transaction(struct i2c_adapter *a, int size)
 	if (data & HST_STS_BAD) {
 		dev_err(&a->dev, "ali1563: Trying to reset busy device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb_p(data | HST_STS_BAD,SMB_HST_STS);
+=======
+		outb_p(data | HST_STS_BAD, SMB_HST_STS);
+>>>>>>> v3.18
 =======
 		outb_p(data | HST_STS_BAD, SMB_HST_STS);
 >>>>>>> v3.18
@@ -115,15 +126,21 @@ static int ali1563_transaction(struct i2c_adapter *a, int size)
 		dev_err(&a->dev, "Timeout - Trying to KILL transaction!\n");
 		/* Issue 'kill' to host controller */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb_p(HST_CNTL2_KILL,SMB_HST_CNTL2);
 		data = inb_p(SMB_HST_STS);
 		status = -ETIMEDOUT;
  	}
 =======
+=======
+>>>>>>> v3.18
 		outb_p(HST_CNTL2_KILL, SMB_HST_CNTL2);
 		data = inb_p(SMB_HST_STS);
 		status = -ETIMEDOUT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* device error - no response, ignore the autodetection case */
@@ -137,7 +154,11 @@ static int ali1563_transaction(struct i2c_adapter *a, int size)
 		dev_err(&a->dev, "Bus collision!\n");
 		/* Issue timeout, hoping it helps */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb_p(HST_CNTL1_TIMEOUT,SMB_HST_CNTL1);
+=======
+		outb_p(HST_CNTL1_TIMEOUT, SMB_HST_CNTL1);
+>>>>>>> v3.18
 =======
 		outb_p(HST_CNTL1_TIMEOUT, SMB_HST_CNTL1);
 >>>>>>> v3.18
@@ -146,7 +167,11 @@ static int ali1563_transaction(struct i2c_adapter *a, int size)
 	if (data & HST_STS_FAIL) {
 		dev_err(&a->dev, "Cleaning fail after KILL!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb_p(0x0,SMB_HST_CNTL2);
+=======
+		outb_p(0x0, SMB_HST_CNTL2);
+>>>>>>> v3.18
 =======
 		outb_p(0x0, SMB_HST_CNTL2);
 >>>>>>> v3.18
@@ -156,7 +181,11 @@ static int ali1563_transaction(struct i2c_adapter *a, int size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ali1563_block_start(struct i2c_adapter * a)
+=======
+static int ali1563_block_start(struct i2c_adapter *a)
+>>>>>>> v3.18
 =======
 static int ali1563_block_start(struct i2c_adapter *a)
 >>>>>>> v3.18
@@ -174,8 +203,13 @@ static int ali1563_block_start(struct i2c_adapter *a)
 	data = inb_p(SMB_HST_STS);
 	if (data & HST_STS_BAD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(&a->dev,"ali1563: Trying to reset busy device\n");
 		outb_p(data | HST_STS_BAD,SMB_HST_STS);
+=======
+		dev_warn(&a->dev, "ali1563: Trying to reset busy device\n");
+		outb_p(data | HST_STS_BAD, SMB_HST_STS);
+>>>>>>> v3.18
 =======
 		dev_warn(&a->dev, "ali1563: Trying to reset busy device\n");
 		outb_p(data | HST_STS_BAD, SMB_HST_STS);
@@ -221,7 +255,12 @@ static int ali1563_block_start(struct i2c_adapter *a)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ali1563_block(struct i2c_adapter * a, union i2c_smbus_data * data, u8 rw)
+=======
+static int ali1563_block(struct i2c_adapter *a,
+			 union i2c_smbus_data *data, u8 rw)
+>>>>>>> v3.18
 =======
 static int ali1563_block(struct i2c_adapter *a,
 			 union i2c_smbus_data *data, u8 rw)
@@ -232,7 +271,11 @@ static int ali1563_block(struct i2c_adapter *a,
 
 	/* Do we need this? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb_p(HST_CNTL1_LAST,SMB_HST_CNTL1);
+=======
+	outb_p(HST_CNTL1_LAST, SMB_HST_CNTL1);
+>>>>>>> v3.18
 =======
 	outb_p(HST_CNTL1_LAST, SMB_HST_CNTL1);
 >>>>>>> v3.18
@@ -244,8 +287,13 @@ static int ali1563_block(struct i2c_adapter *a,
 		else if (len > 32)
 			len = 32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb_p(len,SMB_HST_DAT0);
 		outb_p(data->block[1],SMB_BLK_DAT);
+=======
+		outb_p(len, SMB_HST_DAT0);
+		outb_p(data->block[1], SMB_BLK_DAT);
+>>>>>>> v3.18
 =======
 		outb_p(len, SMB_HST_DAT0);
 		outb_p(data->block[1], SMB_BLK_DAT);
@@ -259,17 +307,23 @@ static int ali1563_block(struct i2c_adapter *a,
 		if (rw == I2C_SMBUS_WRITE) {
 			outb_p(data->block[i + 1], SMB_BLK_DAT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((error = ali1563_block_start(a)))
 				break;
 		} else {
 			if ((error = ali1563_block_start(a)))
 =======
+=======
+>>>>>>> v3.18
 			error = ali1563_block_start(a);
 			if (error)
 				break;
 		} else {
 			error = ali1563_block_start(a);
 			if (error)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			if (i == 0) {
@@ -284,6 +338,7 @@ static int ali1563_block(struct i2c_adapter *a,
 	}
 	/* Do we need this? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb_p(HST_CNTL1_LAST,SMB_HST_CNTL1);
 	return error;
 }
@@ -292,6 +347,8 @@ static s32 ali1563_access(struct i2c_adapter * a, u16 addr,
 			  unsigned short flags, char rw, u8 cmd,
 			  int size, union i2c_smbus_data * data)
 =======
+=======
+>>>>>>> v3.18
 	outb_p(HST_CNTL1_LAST, SMB_HST_CNTL1);
 	return error;
 }
@@ -299,6 +356,9 @@ static s32 ali1563_access(struct i2c_adapter * a, u16 addr,
 static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 			  unsigned short flags, char rw, u8 cmd,
 			  int size, union i2c_smbus_data *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int error = 0;
@@ -307,6 +367,7 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 
 	for (timeout = ALI1563_MAX_TIMEOUT; timeout; timeout--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(reg = inb_p(SMB_HST_STS) & HST_STS_BUSY))
 			break;
 	}
@@ -314,6 +375,8 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 		dev_warn(&a->dev,"SMBus not idle. HST_STS = %02x\n",reg);
 	outb_p(0xff,SMB_HST_STS);
 =======
+=======
+>>>>>>> v3.18
 		reg = inb_p(SMB_HST_STS);
 		if (!(reg & HST_STS_BUSY))
 			break;
@@ -321,6 +384,9 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 	if (!timeout)
 		dev_warn(&a->dev, "SMBus not idle. HST_STS = %02x\n", reg);
 	outb_p(0xff, SMB_HST_STS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Map the size to what the chip understands */
@@ -348,6 +414,7 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 
 	outb_p(((addr & 0x7f) << 1) | (rw & 0x01), SMB_HST_ADD);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb_p((inb_p(SMB_HST_CNTL2) & ~HST_CNTL2_SIZEMASK) | (size << 3), SMB_HST_CNTL2);
 
 	/* Write the command register */
@@ -356,6 +423,8 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 	case HST_CNTL2_BYTE:
 		if (rw== I2C_SMBUS_WRITE)
 =======
+=======
+>>>>>>> v3.18
 	outb_p((inb_p(SMB_HST_CNTL2) & ~HST_CNTL2_SIZEMASK) |
 	       (size << 3), SMB_HST_CNTL2);
 
@@ -364,6 +433,9 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 	switch (size) {
 	case HST_CNTL2_BYTE:
 		if (rw == I2C_SMBUS_WRITE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Beware it uses DAT0 register and not CMD! */
 			outb_p(cmd, SMB_HST_DAT0);
@@ -383,18 +455,24 @@ static s32 ali1563_access(struct i2c_adapter *a, u16 addr,
 	case HST_CNTL2_BLOCK:
 		outb_p(cmd, SMB_HST_CMD);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = ali1563_block(a,data,rw);
 		goto Done;
 	}
 
 	if ((error = ali1563_transaction(a, size)))
 =======
+=======
+>>>>>>> v3.18
 		error = ali1563_block(a, data, rw);
 		goto Done;
 	}
 
 	error = ali1563_transaction(a, size);
 	if (error)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto Done;
 
@@ -417,7 +495,11 @@ Done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 ali1563_func(struct i2c_adapter * a)
+=======
+static u32 ali1563_func(struct i2c_adapter *a)
+>>>>>>> v3.18
 =======
 static u32 ali1563_func(struct i2c_adapter *a)
 >>>>>>> v3.18
@@ -433,7 +515,11 @@ static int ali1563_setup(struct pci_dev *dev)
 	u16 ctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(dev,ALI1563_SMBBA,&ctrl);
+=======
+	pci_read_config_word(dev, ALI1563_SMBBA, &ctrl);
+>>>>>>> v3.18
 =======
 	pci_read_config_word(dev, ALI1563_SMBBA, &ctrl);
 >>>>>>> v3.18
@@ -443,7 +529,11 @@ static int ali1563_setup(struct pci_dev *dev)
 	ali1563_smba = ctrl & ~(ALI1563_SMB_IOSIZE - 1);
 	if (!ali1563_smba) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(&dev->dev,"ali1563_smba Uninitialized\n");
+=======
+		dev_warn(&dev->dev, "ali1563_smba Uninitialized\n");
+>>>>>>> v3.18
 =======
 		dev_warn(&dev->dev, "ali1563_smba Uninitialized\n");
 >>>>>>> v3.18
@@ -462,8 +552,13 @@ static int ali1563_setup(struct pci_dev *dev)
 		pci_read_config_word(dev, ALI1563_SMBBA, &ctrl);
 		if (!(ctrl & ALI1563_SMB_IOEN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&dev->dev, "I/O space still not enabled, "
 				"giving up\n");
+=======
+			dev_err(&dev->dev,
+				"I/O space still not enabled, giving up\n");
+>>>>>>> v3.18
 =======
 			dev_err(&dev->dev,
 				"I/O space still not enabled, giving up\n");
@@ -492,7 +587,11 @@ Err:
 static void ali1563_shutdown(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_region(ali1563_smba,ALI1563_SMB_IOSIZE);
+=======
+	release_region(ali1563_smba, ALI1563_SMB_IOSIZE);
+>>>>>>> v3.18
 =======
 	release_region(ali1563_smba, ALI1563_SMB_IOSIZE);
 >>>>>>> v3.18
@@ -515,7 +614,12 @@ static int ali1563_probe(struct pci_dev *dev,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((error = ali1563_setup(dev)))
+=======
+	error = ali1563_setup(dev);
+	if (error)
+>>>>>>> v3.18
 =======
 	error = ali1563_setup(dev);
 	if (error)
@@ -525,7 +629,12 @@ static int ali1563_probe(struct pci_dev *dev,
 	snprintf(ali1563_adapter.name, sizeof(ali1563_adapter.name),
 		 "SMBus ALi 1563 Adapter @ %04x", ali1563_smba);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((error = i2c_add_adapter(&ali1563_adapter)))
+=======
+	error = i2c_add_adapter(&ali1563_adapter);
+	if (error)
+>>>>>>> v3.18
 =======
 	error = i2c_add_adapter(&ali1563_adapter);
 	if (error)
@@ -547,7 +656,11 @@ static void ali1563_remove(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ali1563_id_table) = {
+=======
+static const struct pci_device_id ali1563_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ali1563_id_table[] = {
 >>>>>>> v3.18
@@ -556,6 +669,7 @@ static const struct pci_device_id ali1563_id_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DEVICE_TABLE (pci, ali1563_id_table);
 
 static struct pci_driver ali1563_pci_driver = {
@@ -563,12 +677,17 @@ static struct pci_driver ali1563_pci_driver = {
 	.id_table	= ali1563_id_table,
  	.probe		= ali1563_probe,
 =======
+=======
+>>>>>>> v3.18
 MODULE_DEVICE_TABLE(pci, ali1563_id_table);
 
 static struct pci_driver ali1563_pci_driver = {
 	.name		= "ali1563_smbus",
 	.id_table	= ali1563_id_table,
 	.probe		= ali1563_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.remove		= ali1563_remove,
 };

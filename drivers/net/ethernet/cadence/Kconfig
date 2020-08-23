@@ -5,7 +5,11 @@
 config NET_CADENCE
 	bool "Cadence devices"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_IOMEM
+=======
+	depends on HAS_IOMEM && (ARM || AVR32 || MICROBLAZE || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM && (ARM || AVR32 || MICROBLAZE || COMPILE_TEST)
 >>>>>>> v3.18
@@ -27,8 +31,12 @@ if NET_CADENCE
 config ARM_AT91_ETHER
 	tristate "AT91RM9200 Ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_DMA
 	select NET_CORE
+=======
+	depends on HAS_DMA && (ARCH_AT91RM9200 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA && (ARCH_AT91RM9200 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -40,7 +48,11 @@ config ARM_AT91_ETHER
 config MACB
 	tristate "Cadence MACB/GEM support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_DMA
+=======
+	depends on HAS_DMA && (PLATFORM_AT32AP || ARCH_AT91 || ARCH_PICOXCELL || ARCH_ZYNQ || MICROBLAZE || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA && (PLATFORM_AT32AP || ARCH_AT91 || ARCH_PICOXCELL || ARCH_ZYNQ || MICROBLAZE || COMPILE_TEST)
 >>>>>>> v3.18

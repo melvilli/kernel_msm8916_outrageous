@@ -18,6 +18,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -33,7 +37,10 @@
 #include <linux/mfd/tps65090.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MAX_CTRL_READ_TRIES	5
 #define MAX_FET_ENABLE_TRIES	1000
 
@@ -54,12 +61,20 @@
  * @overcurrent_wait: For FETs, the value to put in the WTFET bitfield.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tps65090_regulator {
 	struct device		*dev;
 	struct regulator_desc	*desc;
 	struct regulator_dev	*rdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			overcurrent_wait_valid;
+	int			overcurrent_wait;
+>>>>>>> v3.18
 =======
 	bool			overcurrent_wait_valid;
 	int			overcurrent_wait;
@@ -70,8 +85,11 @@ static struct regulator_ops tps65090_ext_control_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regulator_ops tps65090_reg_contol_ops = {
 =======
+=======
+>>>>>>> v3.18
 /**
  * tps65090_reg_set_overcurrent_wait - Setup overcurrent wait
  *
@@ -190,6 +208,9 @@ err:
 }
 
 static struct regulator_ops tps65090_reg_control_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.enable		= regulator_enable_regmap,
 	.disable	= regulator_disable_regmap,
@@ -197,11 +218,14 @@ static struct regulator_ops tps65090_reg_control_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regulator_ops tps65090_ldo_ops = {
 };
 
 #define tps65090_REG_DESC(_id, _sname, _en_reg, _ops)	\
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_ops tps65090_fet_control_ops = {
 	.enable		= tps65090_fet_enable,
 	.disable	= regulator_disable_regmap,
@@ -212,27 +236,37 @@ static struct regulator_ops tps65090_ldo_ops = {
 };
 
 #define tps65090_REG_DESC(_id, _sname, _en_reg, _en_bits, _nvolt, _volt, _ops) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {							\
 	.name = "TPS65090_RAILS"#_id,			\
 	.supply_name = _sname,				\
 	.id = TPS65090_REGULATOR_##_id,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ops = &_ops,					\
 	.enable_reg = _en_reg,				\
 	.enable_mask = BIT(0),				\
 =======
+=======
+>>>>>>> v3.18
 	.n_voltages = _nvolt,				\
 	.ops = &_ops,					\
 	.fixed_uV = _volt,				\
 	.enable_reg = _en_reg,				\
 	.enable_val = _en_bits,				\
 	.enable_mask = _en_bits,			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.type = REGULATOR_VOLTAGE,			\
 	.owner = THIS_MODULE,				\
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct regulator_desc tps65090_regulator_desc[] = {
 	tps65090_REG_DESC(DCDC1, "vsys1",   0x0C, tps65090_reg_contol_ops),
@@ -248,6 +282,8 @@ static struct regulator_desc tps65090_regulator_desc[] = {
 	tps65090_REG_DESC(LDO1,  "vsys-l1", 0,    tps65090_ldo_ops),
 	tps65090_REG_DESC(LDO2,  "vsys-l2", 0,    tps65090_ldo_ops),
 =======
+=======
+>>>>>>> v3.18
 #define tps65090_REG_FIXEDV(_id, _sname, en_reg, _en_bits, _volt, _ops) \
 	tps65090_REG_DESC(_id, _sname, en_reg, _en_bits, 1, _volt, _ops)
 
@@ -288,6 +324,9 @@ static struct regulator_desc tps65090_regulator_desc[] = {
 			    tps65090_ldo_ops),
 	tps65090_REG_FIXEDV(LDO2,  "vsys-l2", 0, 0, 3300000,
 			    tps65090_ldo_ops),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -387,6 +426,7 @@ static struct tps65090_platform_data *tps65090_parse_dt_reg_data(
 	tps65090_pdata = devm_kzalloc(&pdev->dev, sizeof(*tps65090_pdata),
 				GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tps65090_pdata) {
 		dev_err(&pdev->dev, "Memory alloc for tps65090_pdata failed\n");
 		return ERR_PTR(-ENOMEM);
@@ -401,6 +441,8 @@ static struct tps65090_platform_data *tps65090_parse_dt_reg_data(
 
 	regulators = of_find_node_by_name(np, "regulators");
 =======
+=======
+>>>>>>> v3.18
 	if (!tps65090_pdata)
 		return ERR_PTR(-ENOMEM);
 
@@ -410,6 +452,9 @@ static struct tps65090_platform_data *tps65090_parse_dt_reg_data(
 		return ERR_PTR(-ENOMEM);
 
 	regulators = of_get_child_by_name(np, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!regulators) {
 		dev_err(&pdev->dev, "regulator node not found\n");
@@ -419,6 +464,10 @@ static struct tps65090_platform_data *tps65090_parse_dt_reg_data(
 	ret = of_regulator_match(&pdev->dev, regulators, tps65090_matches,
 			ARRAY_SIZE(tps65090_matches));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(regulators);
+>>>>>>> v3.18
 =======
 	of_node_put(regulators);
 >>>>>>> v3.18
@@ -447,12 +496,18 @@ static struct tps65090_platform_data *tps65090_parse_dt_reg_data(
 					"dcdc-ext-control-gpios", 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (of_property_read_u32(tps65090_matches[idx].of_node,
 					 "ti,overcurrent-wait",
 					 &rpdata->overcurrent_wait) == 0)
 			rpdata->overcurrent_wait_valid = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tps65090_pdata->reg_pdata[idx] = rpdata;
 	}
@@ -495,10 +550,15 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 	pmic = devm_kzalloc(&pdev->dev, TPS65090_REGULATOR_MAX * sizeof(*pmic),
 			GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pmic) {
 		dev_err(&pdev->dev, "mem alloc for pmic failed\n");
 		return -ENOMEM;
 	}
+=======
+	if (!pmic)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!pmic)
 		return -ENOMEM;
@@ -511,12 +571,18 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 		ri->dev = &pdev->dev;
 		ri->desc = &tps65090_regulator_desc[num];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (tps_pdata) {
 			ri->overcurrent_wait_valid =
 				tps_pdata->overcurrent_wait_valid;
 			ri->overcurrent_wait = tps_pdata->overcurrent_wait;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -535,7 +601,11 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 					dev_err(&pdev->dev,
 						"failed disable ext control\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 					goto scrub;
+=======
+					return ret;
+>>>>>>> v3.18
 =======
 					return ret;
 >>>>>>> v3.18
@@ -556,6 +626,7 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 			config.of_node = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev = regulator_register(ri->desc, &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
@@ -566,6 +637,8 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 		ri->rdev = rdev;
 
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&pdev->dev, ri->desc, &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
@@ -580,11 +653,15 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 				return ret;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Enable external control if it is require */
 		if (tps_pdata && is_dcdc(num) && tps_pdata->reg_init_data &&
 				tps_pdata->enable_ext_control) {
 			ret = tps65090_config_ext_control(ri, true);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (ret < 0) {
 				/* Increment num to get unregister rdev */
@@ -595,11 +672,16 @@ static int tps65090_regulator_probe(struct platform_device *pdev)
 			if (ret < 0)
 				return ret;
 >>>>>>> v3.18
+=======
+			if (ret < 0)
+				return ret;
+>>>>>>> v3.18
 		}
 	}
 
 	platform_set_drvdata(pdev, pmic);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 scrub:
@@ -623,6 +705,8 @@ static int tps65090_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver tps65090_regulator_driver = {
@@ -632,7 +716,10 @@ static struct platform_driver tps65090_regulator_driver = {
 	},
 	.probe		= tps65090_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= tps65090_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

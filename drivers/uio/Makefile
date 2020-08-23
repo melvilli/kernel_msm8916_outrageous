@@ -1,7 +1,10 @@
 obj-$(CONFIG_UIO)	+= uio.o
 obj-$(CONFIG_UIO_CIF)	+= uio_cif.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_UIO_PDRV)	+= uio_pdrv.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_UIO_PDRV_GENIRQ)	+= uio_pdrv_genirq.o
@@ -12,7 +15,11 @@ obj-$(CONFIG_UIO_PCI_GENERIC)	+= uio_pci_generic.o
 obj-$(CONFIG_UIO_NETX)	+= uio_netx.o
 obj-$(CONFIG_UIO_PRUSS)         += uio_pruss.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_UIO_MSM_SHAREDMEM) += msm_sharedmem/
+=======
+obj-$(CONFIG_UIO_MF624)         += uio_mf624.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_UIO_MF624)         += uio_mf624.o
 >>>>>>> v3.18

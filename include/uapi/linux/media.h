@@ -99,6 +99,10 @@ struct media_entity_desc {
 #define MEDIA_PAD_FL_SINK		(1 << 0)
 #define MEDIA_PAD_FL_SOURCE		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MEDIA_PAD_FL_MUST_CONNECT	(1 << 2)
+>>>>>>> v3.18
 =======
 #define MEDIA_PAD_FL_MUST_CONNECT	(1 << 2)
 >>>>>>> v3.18

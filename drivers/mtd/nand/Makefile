@@ -28,6 +28,10 @@ obj-$(CONFIG_MTD_NAND_ATMEL)		+= atmel_nand.o
 obj-$(CONFIG_MTD_NAND_GPIO)		+= gpio.o
 obj-$(CONFIG_MTD_NAND_OMAP2) 		+= omap2.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MTD_NAND_OMAP_BCH_BUILD)	+= omap_elm.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MTD_NAND_OMAP_BCH_BUILD)	+= omap_elm.o
 >>>>>>> v3.18
@@ -36,7 +40,10 @@ obj-$(CONFIG_MTD_NAND_PXA3xx)		+= pxa3xx_nand.o
 obj-$(CONFIG_MTD_NAND_TMIO)		+= tmio_nand.o
 obj-$(CONFIG_MTD_NAND_PLATFORM)		+= plat_nand.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MTD_ALAUDA)		+= alauda.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MTD_NAND_PASEMI)		+= pasemi_nand.o
@@ -59,7 +66,11 @@ obj-$(CONFIG_MTD_NAND_XWAY)		+= xway_nand.o
 obj-$(CONFIG_MTD_NAND_BCM47XXNFLASH)	+= bcm47xxnflash/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 nand-objs := nand_base.o nand_bbt.o
+=======
+nand-objs := nand_base.o nand_bbt.o nand_timings.o
+>>>>>>> v3.18
 =======
 nand-objs := nand_base.o nand_bbt.o nand_timings.o
 >>>>>>> v3.18

@@ -11,6 +11,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
 #include <plat/regs-watchdog.h>
 #include <mach/map.h>
@@ -46,6 +47,8 @@ static inline void arch_wdt_reset(void)
 	mdelay(50);
 }
 =======
+=======
+>>>>>>> v3.18
 #ifndef __PLAT_SAMSUNG_WATCHDOG_RESET_H
 #define __PLAT_SAMSUNG_WATCHDOG_RESET_H
 
@@ -54,4 +57,7 @@ extern void samsung_wdt_reset_of_init(void);
 extern void samsung_wdt_reset_init(void __iomem *base);
 
 #endif /* __PLAT_SAMSUNG_WATCHDOG_RESET_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

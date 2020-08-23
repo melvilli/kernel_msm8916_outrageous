@@ -19,11 +19,17 @@
 /* this file is part of imx21-hcd.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 #define DEBUG
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef DEBUG
 

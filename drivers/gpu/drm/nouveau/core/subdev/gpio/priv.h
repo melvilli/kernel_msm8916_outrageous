@@ -4,6 +4,7 @@
 #include <subdev/gpio.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nv50_gpio_dtor(struct nouveau_object *);
 int  nv50_gpio_init(struct nouveau_object *);
 int  nv50_gpio_fini(struct nouveau_object *, bool);
@@ -11,6 +12,8 @@ void nv50_gpio_intr(struct nouveau_subdev *);
 void nv50_gpio_intr_enable(struct nouveau_event *, int line);
 void nv50_gpio_intr_disable(struct nouveau_event *, int line);
 =======
+=======
+>>>>>>> v3.18
 #define nouveau_gpio_create(p,e,o,d)                                           \
 	nouveau_gpio_create_((p), (e), (o), sizeof(**d), (void **)d)
 #define nouveau_gpio_destroy(p) ({                                             \
@@ -66,6 +69,9 @@ int  nv50_gpio_sense(struct nouveau_gpio *, int);
 
 void nv94_gpio_intr_stat(struct nouveau_gpio *, u32 *, u32 *);
 void nv94_gpio_intr_mask(struct nouveau_gpio *, u32, u32, u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void nvd0_gpio_reset(struct nouveau_gpio *, u8);
@@ -73,6 +79,10 @@ int  nvd0_gpio_drive(struct nouveau_gpio *, int, int, int);
 int  nvd0_gpio_sense(struct nouveau_gpio *, int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

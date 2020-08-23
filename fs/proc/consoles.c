@@ -110,7 +110,11 @@ static int __init proc_consoles_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_consoles_init);
+=======
+fs_initcall(proc_consoles_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_consoles_init);
 >>>>>>> v3.18

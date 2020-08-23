@@ -66,6 +66,12 @@ enum hwsim_tx_control_flags {
  *	%HWSIM_ATTR_ADDR_TRANSMITTER, %HWSIM_ATTR_FLAGS,
  *	%HWSIM_ATTR_TX_INFO, %HWSIM_ATTR_SIGNAL, %HWSIM_ATTR_COOKIE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @HWSIM_CMD_CREATE_RADIO: create a new radio with the given parameters,
+ *	returns the radio ID (>= 0) or negative on errors
+ * @HWSIM_CMD_DESTROY_RADIO: destroy a radio
+>>>>>>> v3.18
 =======
  * @HWSIM_CMD_CREATE_RADIO: create a new radio with the given parameters,
  *	returns the radio ID (>= 0) or negative on errors
@@ -79,6 +85,11 @@ enum {
 	HWSIM_CMD_FRAME,
 	HWSIM_CMD_TX_INFO_FRAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HWSIM_CMD_CREATE_RADIO,
+	HWSIM_CMD_DESTROY_RADIO,
+>>>>>>> v3.18
 =======
 	HWSIM_CMD_CREATE_RADIO,
 	HWSIM_CMD_DESTROY_RADIO,
@@ -106,7 +117,10 @@ enum {
  * @HWSIM_ATTR_TX_INFO: ieee80211_tx_rate array
  * @HWSIM_ATTR_COOKIE: sk_buff cookie to identify the frame
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @HWSIM_ATTR_CHANNELS: u32 attribute used with the %HWSIM_CMD_CREATE_RADIO
  *	command giving the number of channels supported by the new radio
  * @HWSIM_ATTR_RADIO_ID: u32 attribute used with %HWSIM_CMD_DESTROY_RADIO
@@ -119,6 +133,9 @@ enum {
  * @HWSIM_ATTR_USE_CHANCTX: used with the %HWSIM_CMD_CREATE_RADIO
  *	command to force use of channel contexts even when only a
  *	single channel is supported
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @__HWSIM_ATTR_MAX: enum limit
  */
@@ -135,7 +152,10 @@ enum {
 	HWSIM_ATTR_TX_INFO,
 	HWSIM_ATTR_COOKIE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	HWSIM_ATTR_CHANNELS,
 	HWSIM_ATTR_RADIO_ID,
 	HWSIM_ATTR_REG_HINT_ALPHA2,
@@ -143,6 +163,9 @@ enum {
 	HWSIM_ATTR_REG_STRICT_REG,
 	HWSIM_ATTR_SUPPORT_P2P_DEVICE,
 	HWSIM_ATTR_USE_CHANCTX,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__HWSIM_ATTR_MAX,
 };

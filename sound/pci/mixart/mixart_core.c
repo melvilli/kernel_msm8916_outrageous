@@ -23,6 +23,10 @@
 #include <linux/interrupt.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 >>>>>>> v3.18
@@ -80,7 +84,10 @@ static int get_msg(struct mixart_mgr *mgr, struct mixart_msg *resp,
 		   u32 msg_frame_address )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32  headptr;
@@ -91,7 +98,11 @@ static int get_msg(struct mixart_mgr *mgr, struct mixart_msg *resp,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&mgr->msg_lock, flags);
+=======
+	mutex_lock(&mgr->msg_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&mgr->msg_lock);
 >>>>>>> v3.18
@@ -106,7 +117,12 @@ static int get_msg(struct mixart_mgr *mgr, struct mixart_msg *resp,
 	if( (size < MSG_DESCRIPTOR_SIZE) || (resp->size < (size - MSG_DESCRIPTOR_SIZE))) {
 		err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "problem with response size = %d\n", size);
+=======
+		dev_err(&mgr->pci->dev,
+			"problem with response size = %d\n", size);
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev,
 			"problem with response size = %d\n", size);
@@ -148,7 +164,11 @@ static int get_msg(struct mixart_mgr *mgr, struct mixart_msg *resp,
 
  _clean_exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&mgr->msg_lock, flags);
+=======
+	mutex_unlock(&mgr->msg_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&mgr->msg_lock);
 >>>>>>> v3.18
@@ -170,7 +190,11 @@ static int send_msg( struct mixart_mgr *mgr,
 	u32 headptr, tailptr;
 	u32 msg_frame_address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err, i;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -179,8 +203,11 @@ static int send_msg( struct mixart_mgr *mgr,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* get message frame address */
@@ -189,7 +216,11 @@ static int send_msg( struct mixart_mgr *mgr,
 
 	if (tailptr == headptr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "error: no message frame available\n");
+=======
+		dev_err(&mgr->pci->dev, "error: no message frame available\n");
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "error: no message frame available\n");
 >>>>>>> v3.18
@@ -275,6 +306,7 @@ int snd_mixart_send_msg(struct mixart_mgr *mgr, struct mixart_msg *request, int 
 	long timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&mgr->msg_mutex);
 
 	init_waitqueue_entry(&wait, current);
@@ -286,6 +318,8 @@ int snd_mixart_send_msg(struct mixart_mgr *mgr, struct mixart_msg *request, int 
 		spin_unlock_irq(&mgr->msg_lock);
 		mutex_unlock(&mgr->msg_mutex);
 =======
+=======
+>>>>>>> v3.18
 	init_waitqueue_entry(&wait, current);
 
 	mutex_lock(&mgr->msg_lock);
@@ -293,6 +327,9 @@ int snd_mixart_send_msg(struct mixart_mgr *mgr, struct mixart_msg *request, int 
 	err = send_msg(mgr, request, max_resp_size, 1, &msg_frame);  /* send and mark the answer pending */
 	if (err) {
 		mutex_unlock(&mgr->msg_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return err;
 	}
@@ -300,7 +337,11 @@ int snd_mixart_send_msg(struct mixart_mgr *mgr, struct mixart_msg *request, int 
 	set_current_state(TASK_UNINTERRUPTIBLE);
 	add_wait_queue(&mgr->msg_sleep, &wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&mgr->msg_lock);
+=======
+	mutex_unlock(&mgr->msg_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&mgr->msg_lock);
 >>>>>>> v3.18
@@ -310,8 +351,13 @@ int snd_mixart_send_msg(struct mixart_mgr *mgr, struct mixart_msg *request, int 
 	if (! timeout) {
 		/* error - no ack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&mgr->msg_mutex);
 		snd_printk(KERN_ERR "error: no response on msg %x\n", msg_frame);
+=======
+		dev_err(&mgr->pci->dev,
+			"error: no response on msg %x\n", msg_frame);
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev,
 			"error: no response on msg %x\n", msg_frame);
@@ -329,9 +375,14 @@ int snd_mixart_send_msg(struct mixart_mgr *mgr, struct mixart_msg *request, int 
 
 	if( request->message_id != resp.message_id )
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "RESPONSE ERROR!\n");
 
 	mutex_unlock(&mgr->msg_mutex);
+=======
+		dev_err(&mgr->pci->dev, "RESPONSE ERROR!\n");
+
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "RESPONSE ERROR!\n");
 
@@ -355,6 +406,7 @@ int snd_mixart_send_msg_wait_notif(struct mixart_mgr *mgr,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&mgr->msg_mutex);
 
 	init_waitqueue_entry(&wait, current);
@@ -366,6 +418,8 @@ int snd_mixart_send_msg_wait_notif(struct mixart_mgr *mgr,
 		spin_unlock_irq(&mgr->msg_lock);
 		mutex_unlock(&mgr->msg_mutex);
 =======
+=======
+>>>>>>> v3.18
 	init_waitqueue_entry(&wait, current);
 
 	mutex_lock(&mgr->msg_lock);
@@ -373,6 +427,9 @@ int snd_mixart_send_msg_wait_notif(struct mixart_mgr *mgr,
 	err = send_msg(mgr, request, MSG_DEFAULT_SIZE, 1, &notif_event);  /* send and mark the notification event pending */
 	if(err) {
 		mutex_unlock(&mgr->msg_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return err;
 	}
@@ -380,7 +437,11 @@ int snd_mixart_send_msg_wait_notif(struct mixart_mgr *mgr,
 	set_current_state(TASK_UNINTERRUPTIBLE);
 	add_wait_queue(&mgr->msg_sleep, &wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&mgr->msg_lock);
+=======
+	mutex_unlock(&mgr->msg_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&mgr->msg_lock);
 >>>>>>> v3.18
@@ -390,6 +451,7 @@ int snd_mixart_send_msg_wait_notif(struct mixart_mgr *mgr,
 	if (! timeout) {
 		/* error - no ack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&mgr->msg_mutex);
 		snd_printk(KERN_ERR "error: notification %x not received\n", notif_event);
 		return -EIO;
@@ -397,11 +459,16 @@ int snd_mixart_send_msg_wait_notif(struct mixart_mgr *mgr,
 
 	mutex_unlock(&mgr->msg_mutex);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&mgr->pci->dev,
 			"error: notification %x not received\n", notif_event);
 		return -EIO;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -411,6 +478,7 @@ int snd_mixart_send_msg_nonblock(struct mixart_mgr *mgr, struct mixart_msg *requ
 {
 	u32 message_frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	int err;
 
@@ -419,12 +487,17 @@ int snd_mixart_send_msg_nonblock(struct mixart_mgr *mgr, struct mixart_msg *requ
 	err = send_msg(mgr, request, MSG_DEFAULT_SIZE, 0, &message_frame);
 	spin_unlock_irqrestore(&mgr->msg_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	/* just send the message (do not mark it as a pending one) */
 	mutex_lock(&mgr->msg_lock);
 	err = send_msg(mgr, request, MSG_DEFAULT_SIZE, 0, &message_frame);
 	mutex_unlock(&mgr->msg_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* the answer will be handled by snd_struct mixart_msgasklet()  */
@@ -435,6 +508,7 @@ int snd_mixart_send_msg_nonblock(struct mixart_mgr *mgr, struct mixart_msg *requ
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* common buffer of tasklet and interrupt to send/receive messages */
 static u32 mixart_msg_data[MSG_DEFAULT_SIZE / 4];
 
@@ -443,20 +517,28 @@ void snd_mixart_msg_tasklet(unsigned long arg)
 {
 	struct mixart_mgr *mgr = ( struct mixart_mgr*)(arg);
 =======
+=======
+>>>>>>> v3.18
 /* common buffer of interrupt to send/receive messages */
 static u32 mixart_msg_data[MSG_DEFAULT_SIZE / 4];
 
 
 static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mixart_msg resp;
 	u32 msg, addr, type;
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&mgr->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (mgr->msg_fifo_readptr != mgr->msg_fifo_writeptr) {
@@ -477,7 +559,13 @@ static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 			err = get_msg(mgr, &resp, addr);
 			if( err < 0 ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "tasklet: error(%d) reading mf %x\n", err, msg);
+=======
+				dev_err(&mgr->pci->dev,
+					"error(%d) reading mf %x\n",
+					err, msg);
+>>>>>>> v3.18
 =======
 				dev_err(&mgr->pci->dev,
 					"error(%d) reading mf %x\n",
@@ -493,11 +581,14 @@ static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 			case MSG_STREAM_STOP_OUTPUT_STAGE_PACKET:
 				if(mixart_msg_data[0])
 <<<<<<< HEAD
+<<<<<<< HEAD
 					snd_printk(KERN_ERR "tasklet : error MSG_STREAM_ST***_***PUT_STAGE_PACKET status=%x\n", mixart_msg_data[0]);
 				break;
 			default:
 				snd_printdd("tasklet received mf(%x) : msg_id(%x) uid(%x, %x) size(%zd)\n",
 =======
+=======
+>>>>>>> v3.18
 					dev_err(&mgr->pci->dev,
 						"error MSG_STREAM_ST***_***PUT_STAGE_PACKET status=%x\n",
 						mixart_msg_data[0]);
@@ -505,6 +596,9 @@ static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 			default:
 				dev_dbg(&mgr->pci->dev,
 					"received mf(%x) : msg_id(%x) uid(%x, %x) size(%zd)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   msg, resp.message_id, resp.uid.object_id, resp.uid.desc, resp.size);
 				break;
@@ -516,7 +610,13 @@ static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 			/* get_msg() necessary */
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "tasklet doesn't know what to do with message %x\n", msg);
+=======
+			dev_err(&mgr->pci->dev,
+				"doesn't know what to do with message %x\n",
+				msg);
+>>>>>>> v3.18
 =======
 			dev_err(&mgr->pci->dev,
 				"doesn't know what to do with message %x\n",
@@ -529,8 +629,11 @@ static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 
 	} /* while there is a msg in fifo */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_unlock(&mgr->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -539,6 +642,7 @@ static void snd_mixart_process_msg(struct mixart_mgr *mgr)
 irqreturn_t snd_mixart_interrupt(int irq, void *dev_id)
 {
 	struct mixart_mgr *mgr = dev_id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 	struct mixart_msg resp;
@@ -553,11 +657,16 @@ irqreturn_t snd_mixart_interrupt(int irq, void *dev_id)
 		/* this device did not cause the interrupt */
 		spin_unlock(&mgr->lock);
 =======
+=======
+>>>>>>> v3.18
 	u32 it_reg;
 
 	it_reg = readl_le(MIXART_REG(mgr, MIXART_PCI_OMISR_OFFSET));
 	if( !(it_reg & MIXART_OIDI) ) {
 		/* this device did not cause the interrupt */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return IRQ_NONE;
 	}
@@ -573,7 +682,10 @@ irqreturn_t snd_mixart_interrupt(int irq, void *dev_id)
 	writel_le( MIXART_OIDI, MIXART_REG(mgr, MIXART_PCI_OMISR_OFFSET) );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return IRQ_WAKE_THREAD;
 }
 
@@ -585,6 +697,9 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 	u32 msg;
 
 	mutex_lock(&mgr->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* process interrupt */
 	while (retrieve_msg_frame(mgr, &msg)) {
@@ -597,7 +712,13 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 			err = get_msg(mgr, &resp, msg & ~MSG_TYPE_MASK);
 			if( err < 0 ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "interrupt: error(%d) reading mf %x\n", err, msg);
+=======
+				dev_err(&mgr->pci->dev,
+					"interrupt: error(%d) reading mf %x\n",
+					err, msg);
+>>>>>>> v3.18
 =======
 				dev_err(&mgr->pci->dev,
 					"interrupt: error(%d) reading mf %x\n",
@@ -624,7 +745,12 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 
 					if ((chip_number >= mgr->num_cards) || (pcm_number >= MIXART_PCM_TOTAL) || (sub_number >= MIXART_PLAYBACK_STREAMS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						snd_printk(KERN_ERR "error MSG_SERVICES_TIMER_NOTIFY buffer_id (%x) pos(%d)\n",
+=======
+						dev_err(&mgr->pci->dev,
+							"error MSG_SERVICES_TIMER_NOTIFY buffer_id (%x) pos(%d)\n",
+>>>>>>> v3.18
 =======
 						dev_err(&mgr->pci->dev,
 							"error MSG_SERVICES_TIMER_NOTIFY buffer_id (%x) pos(%d)\n",
@@ -663,9 +789,15 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 
 						if(elapsed) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 							spin_unlock(&mgr->lock);
 							snd_pcm_period_elapsed(stream->substream);
 							spin_lock(&mgr->lock);
+=======
+							mutex_unlock(&mgr->lock);
+							snd_pcm_period_elapsed(stream->substream);
+							mutex_lock(&mgr->lock);
+>>>>>>> v3.18
 =======
 							mutex_unlock(&mgr->lock);
 							snd_pcm_period_elapsed(stream->substream);
@@ -687,7 +819,13 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 #endif
 					((char*)mixart_msg_data)[resp.size - 1] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					snd_printdd("MIXART TRACE : %s\n", (char*)mixart_msg_data);
+=======
+					dev_dbg(&mgr->pci->dev,
+						"MIXART TRACE : %s\n",
+						(char *)mixart_msg_data);
+>>>>>>> v3.18
 =======
 					dev_dbg(&mgr->pci->dev,
 						"MIXART TRACE : %s\n",
@@ -698,7 +836,12 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("command %x not handled\n", resp.message_id);
+=======
+			dev_dbg(&mgr->pci->dev, "command %x not handled\n",
+				resp.message_id);
+>>>>>>> v3.18
 =======
 			dev_dbg(&mgr->pci->dev, "command %x not handled\n",
 				resp.message_id);
@@ -709,7 +852,12 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 			if(msg & MSG_CANCEL_NOTIFY_MASK) {
 				msg &= ~MSG_CANCEL_NOTIFY_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "canceled notification %x !\n", msg);
+=======
+				dev_err(&mgr->pci->dev,
+					"canceled notification %x !\n", msg);
+>>>>>>> v3.18
 =======
 				dev_err(&mgr->pci->dev,
 					"canceled notification %x !\n", msg);
@@ -719,7 +867,11 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 		case MSG_TYPE_ANSWER:
 			/* answer or notification to a message we are waiting for*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_lock(&mgr->msg_lock);
+=======
+			mutex_lock(&mgr->msg_lock);
+>>>>>>> v3.18
 =======
 			mutex_lock(&mgr->msg_lock);
 >>>>>>> v3.18
@@ -733,6 +885,7 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 				mgr->msg_fifo_writeptr++;
 				mgr->msg_fifo_writeptr %= MSG_FIFO_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				tasklet_schedule(&mgr->msg_taskq);
 			}
 			spin_unlock(&mgr->msg_lock);
@@ -741,6 +894,8 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 		default:
 			snd_printdd("interrupt received request %x\n", msg);
 =======
+=======
+>>>>>>> v3.18
 				snd_mixart_process_msg(mgr);
 			}
 			mutex_unlock(&mgr->msg_lock);
@@ -749,6 +904,9 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 		default:
 			dev_dbg(&mgr->pci->dev,
 				"interrupt received request %x\n", msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* TODO : are there things to do here ? */
 			break;
@@ -759,7 +917,11 @@ irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id)
 	writel_le( MIXART_ALLOW_OUTBOUND_DOORBELL, MIXART_REG( mgr, MIXART_PCI_OMIMR_OFFSET));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&mgr->lock);
+=======
+	mutex_unlock(&mgr->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&mgr->lock);
 >>>>>>> v3.18

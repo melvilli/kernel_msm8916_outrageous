@@ -7,7 +7,11 @@
 config USB_MUSB_HDRC
 	tristate 'Inventra Highspeed Dual Role Controller (TI, ADI, ...)'
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB_GADGET
+=======
+	depends on (USB || USB_GADGET)
+>>>>>>> v3.18
 =======
 	depends on (USB || USB_GADGET)
 >>>>>>> v3.18
@@ -33,7 +37,10 @@ if USB_MUSB_HDRC
 
 choice
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool "MUSB Mode Selection"
 	default USB_MUSB_DUAL_ROLE if (USB && USB_GADGET)
 	default USB_MUSB_HOST if (USB && !USB_GADGET)
@@ -65,6 +72,9 @@ config USB_MUSB_DUAL_ROLE
 endchoice
 
 choice
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prompt "Platform Glue Layer"
 
@@ -84,7 +94,12 @@ config USB_MUSB_TUSB6010
 config USB_MUSB_OMAP2PLUS
 	tristate "OMAP2430 and onwards"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_OMAP2PLUS
+=======
+	depends on ARCH_OMAP2PLUS && USB
+	select GENERIC_PHY
+>>>>>>> v3.18
 =======
 	depends on ARCH_OMAP2PLUS && USB
 	select GENERIC_PHY
@@ -97,6 +112,11 @@ config USB_MUSB_AM35X
 config USB_MUSB_DSPS
 	tristate "TI DSPS platforms"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select USB_MUSB_AM335X_CHILD
+	depends on OF_IRQ
+>>>>>>> v3.18
 =======
 	select USB_MUSB_AM335X_CHILD
 	depends on OF_IRQ
@@ -108,6 +128,7 @@ config USB_MUSB_BLACKFIN
 
 config USB_MUSB_UX500
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "U8500 and U5500"
 
 endchoice
@@ -116,6 +137,8 @@ choice
 	prompt 'MUSB DMA mode'
 	default MUSB_PIO_ONLY if ARCH_MULTIPLATFORM
 =======
+=======
+>>>>>>> v3.18
 	tristate "Ux500 platforms"
 
 config USB_MUSB_JZ4740
@@ -132,6 +155,9 @@ config USB_MUSB_AM335X_CHILD
 choice
 	prompt 'MUSB DMA mode'
 	default MUSB_PIO_ONLY if ARCH_MULTIPLATFORM || USB_MUSB_JZ4740
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default USB_UX500_DMA if USB_MUSB_UX500
 	default USB_INVENTRA_DMA if USB_MUSB_OMAP2PLUS || USB_MUSB_BLACKFIN
@@ -146,7 +172,11 @@ choice
 
 config USB_UX500_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool 'ST Ericsson U8500 and U5500'
+=======
+	bool 'ST Ericsson Ux500'
+>>>>>>> v3.18
 =======
 	bool 'ST Ericsson Ux500'
 >>>>>>> v3.18
@@ -167,10 +197,13 @@ config USB_TI_CPPI_DMA
 	  Enable DMA transfers when TI CPPI DMA is available.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_TUSB_OMAP_DMA
 	bool 'TUSB 6010'
 	depends on USB_MUSB_TUSB6010
 =======
+=======
+>>>>>>> v3.18
 config USB_TI_CPPI41_DMA
 	bool 'TI CPPI 4.1 (AM335x)'
 	depends on ARCH_OMAP
@@ -179,6 +212,9 @@ config USB_TI_CPPI41_DMA
 config USB_TUSB_OMAP_DMA
 	bool 'TUSB 6010'
 	depends on USB_MUSB_TUSB6010 = USB_MUSB_HDRC # both built-in or both modules
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on ARCH_OMAP
 	help

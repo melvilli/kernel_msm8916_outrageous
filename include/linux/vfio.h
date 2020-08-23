@@ -77,7 +77,10 @@ extern void vfio_unregister_iommu_driver(
 				const struct vfio_iommu_driver_ops *ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * offsetofend(TYPE, MEMBER)
  *
@@ -123,5 +126,8 @@ static inline long vfio_spapr_iommu_eeh_ioctl(struct iommu_group *group,
 	return -ENOTTY;
 }
 #endif /* CONFIG_EEH */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* VFIO_H */

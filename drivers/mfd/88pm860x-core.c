@@ -3,7 +3,12 @@
  *
  * Copyright (C) 2009 Marvell International Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Haojian Zhuang <haojian.zhuang@marvell.com>
+=======
+ *
+ * Author: Haojian Zhuang <haojian.zhuang@marvell.com>
+>>>>>>> v3.18
 =======
  *
  * Author: Haojian Zhuang <haojian.zhuang@marvell.com>
@@ -146,7 +151,12 @@ static struct resource codec_resources[] = {
 	{PM8607_IRQ_HEADSET, PM8607_IRQ_HEADSET, "headset", IORESOURCE_IRQ,},
 	/* Audio short */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{PM8607_IRQ_AUDIO_SHORT, PM8607_IRQ_AUDIO_SHORT, "audio-short", IORESOURCE_IRQ,},
+=======
+	{PM8607_IRQ_AUDIO_SHORT, PM8607_IRQ_AUDIO_SHORT, "audio-short",
+	 IORESOURCE_IRQ,},
+>>>>>>> v3.18
 =======
 	{PM8607_IRQ_AUDIO_SHORT, PM8607_IRQ_AUDIO_SHORT, "audio-short",
 	 IORESOURCE_IRQ,},
@@ -161,11 +171,14 @@ static struct resource battery_resources[] = {
 static struct resource charger_resources[] = {
 	{PM8607_IRQ_CHG,  PM8607_IRQ_CHG,  "charger detect",  IORESOURCE_IRQ,},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{PM8607_IRQ_CHG_DONE,  PM8607_IRQ_CHG_DONE,  "charging done",       IORESOURCE_IRQ,},
 	{PM8607_IRQ_CHG_FAIL,  PM8607_IRQ_CHG_FAIL,  "charging timeout",    IORESOURCE_IRQ,},
 	{PM8607_IRQ_CHG_FAULT, PM8607_IRQ_CHG_FAULT, "charging fault",	    IORESOURCE_IRQ,},
 	{PM8607_IRQ_GPADC1,    PM8607_IRQ_GPADC1,    "battery temperature", IORESOURCE_IRQ,},
 =======
+=======
+>>>>>>> v3.18
 	{PM8607_IRQ_CHG_DONE,  PM8607_IRQ_CHG_DONE,  "charging done",
 	 IORESOURCE_IRQ,},
 	{PM8607_IRQ_CHG_FAIL,  PM8607_IRQ_CHG_FAIL,  "charging timeout",
@@ -174,6 +187,9 @@ static struct resource charger_resources[] = {
 	 IORESOURCE_IRQ,},
 	{PM8607_IRQ_GPADC1,    PM8607_IRQ_GPADC1,    "battery temperature",
 	 IORESOURCE_IRQ,},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{PM8607_IRQ_VBAT, PM8607_IRQ_VBAT, "battery voltage", IORESOURCE_IRQ,},
 	{PM8607_IRQ_VCHG, PM8607_IRQ_VCHG, "vchg voltage",    IORESOURCE_IRQ,},
@@ -590,8 +606,13 @@ static int device_irq_init(struct pm860x_chip *chip,
 				     struct pm860x_platform_data *pdata)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *i2c = (chip->id == CHIP_PM8607) ? chip->client \
 				: chip->companion;
+=======
+	struct i2c_client *i2c = (chip->id == CHIP_PM8607) ?
+		chip->client : chip->companion;
+>>>>>>> v3.18
 =======
 	struct i2c_client *i2c = (chip->id == CHIP_PM8607) ?
 		chip->client : chip->companion;
@@ -658,8 +679,13 @@ static int device_irq_init(struct pm860x_chip *chip,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_threaded_irq(chip->core_irq, NULL, pm860x_irq, flags | IRQF_ONESHOT,
 				   "88pm860x", chip);
+=======
+	ret = request_threaded_irq(chip->core_irq, NULL, pm860x_irq,
+				   flags | IRQF_ONESHOT, "88pm860x", chip);
+>>>>>>> v3.18
 =======
 	ret = request_threaded_irq(chip->core_irq, NULL, pm860x_irq,
 				   flags | IRQF_ONESHOT, "88pm860x", chip);
@@ -903,7 +929,11 @@ static void device_rtc_init(struct pm860x_chip *chip,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pdata == NULL))
+=======
+	if (!pdata)
+>>>>>>> v3.18
 =======
 	if (!pdata)
 >>>>>>> v3.18
@@ -1033,8 +1063,14 @@ static void device_8607_init(struct pm860x_chip *chip,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(chip->dev, "Failed to detect Marvell 88PM8607. "
 			"Chip ID: %02x\n", ret);
+=======
+		dev_err(chip->dev,
+			"Failed to detect Marvell 88PM8607. Chip ID: %02x\n",
+			ret);
+>>>>>>> v3.18
 =======
 		dev_err(chip->dev,
 			"Failed to detect Marvell 88PM8607. Chip ID: %02x\n",
@@ -1162,8 +1198,13 @@ static int pm860x_dt_init(struct device_node *np,
 				   &pdata->companion_addr);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "Not found \"marvell,88pm860x-slave-addr\" "
 			"property\n");
+=======
+		dev_err(dev,
+			"Not found \"marvell,88pm860x-slave-addr\" property\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev,
 			"Not found \"marvell,88pm860x-slave-addr\" property\n");
@@ -1177,7 +1218,11 @@ static int pm860x_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm860x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct pm860x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct pm860x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -1201,7 +1246,12 @@ static int pm860x_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip = kzalloc(sizeof(struct pm860x_chip), GFP_KERNEL);
+=======
+	chip = devm_kzalloc(&client->dev,
+			    sizeof(struct pm860x_chip), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	chip = devm_kzalloc(&client->dev,
 			    sizeof(struct pm860x_chip), GFP_KERNEL);
@@ -1211,7 +1261,11 @@ static int pm860x_probe(struct i2c_client *client,
 
 	chip->id = verify_addr(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->regmap = regmap_init_i2c(client, &pm860x_regmap_config);
+=======
+	chip->regmap = devm_regmap_init_i2c(client, &pm860x_regmap_config);
+>>>>>>> v3.18
 =======
 	chip->regmap = devm_regmap_init_i2c(client, &pm860x_regmap_config);
 >>>>>>> v3.18
@@ -1220,7 +1274,10 @@ static int pm860x_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Failed to allocate register map: %d\n",
 				ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return ret;
@@ -1272,8 +1329,11 @@ static int pm860x_remove(struct i2c_client *client)
 		i2c_unregister_device(chip->companion);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regmap_exit(chip->regmap);
 	kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1321,7 +1381,11 @@ static struct i2c_driver pm860x_driver = {
 		.owner	= THIS_MODULE,
 		.pm     = &pm860x_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table	= of_match_ptr(pm860x_dt_ids),
+=======
+		.of_match_table	= pm860x_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table	= pm860x_dt_ids,
 >>>>>>> v3.18

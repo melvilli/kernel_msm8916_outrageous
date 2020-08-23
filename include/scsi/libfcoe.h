@@ -91,6 +91,10 @@ enum fip_state {
  * @sel_fcf:	   currently selected FCF, or NULL.
  * @fcfs:	   list of discovered FCFs.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cdev:          (Optional) pointer to sysfs fcoe_ctlr_device.
+>>>>>>> v3.18
 =======
  * @cdev:          (Optional) pointer to sysfs fcoe_ctlr_device.
 >>>>>>> v3.18
@@ -132,6 +136,10 @@ struct fcoe_ctlr {
 	struct fcoe_fcf *sel_fcf;
 	struct list_head fcfs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct fcoe_ctlr_device *cdev;
+>>>>>>> v3.18
 =======
 	struct fcoe_ctlr_device *cdev;
 >>>>>>> v3.18
@@ -177,14 +185,20 @@ static inline void *fcoe_ctlr_priv(const struct fcoe_ctlr *ctlr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define fcoe_ctlr_to_ctlr_dev(x)					\
 	(struct fcoe_ctlr_device *)(((struct fcoe_ctlr_device *)(x)) - 1)
 =======
+=======
+>>>>>>> v3.18
 /*
  * This assumes that the fcoe_ctlr (x) is allocated with the fcoe_ctlr_device.
  */
 #define fcoe_ctlr_to_ctlr_dev(x)					\
 	(x)->cdev
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**

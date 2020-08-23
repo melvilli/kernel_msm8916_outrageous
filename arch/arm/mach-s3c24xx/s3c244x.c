@@ -18,6 +18,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -40,6 +44,7 @@
 
 #include <mach/regs-clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <mach/regs-gpio.h>
 
@@ -52,6 +57,8 @@
 #include <plat/watchdog-reset.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <mach/regs-gpio.h>
 
 #include <plat/devs.h>
@@ -60,6 +67,9 @@
 #include <plat/nand-core.h>
 
 #include "common.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "regs-dsc.h"
 
@@ -89,6 +99,7 @@ void __init s3c244x_map_io(void)
 	s3c_nand_setname("s3c2440-nand");
 	s3c_device_ts.name = "s3c2440-ts";
 	s3c_device_usbgadget.name = "s3c2440-usbgadget";
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -150,6 +161,9 @@ void __init s3c244x_init_clocks(int xtal)
 	s3c24xx_register_baseclocks(xtal);
 	s3c244x_setup_clocks();
 	s3c2410_baseclk_add();
+=======
+	s3c2410_device_dclk.name = "s3c2440-dclk";
+>>>>>>> v3.18
 =======
 	s3c2410_device_dclk.name = "s3c2440-dclk";
 >>>>>>> v3.18
@@ -217,6 +231,7 @@ struct syscore_ops s3c244x_pm_syscore_ops = {
 	.resume		= s3c244x_resume,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void s3c244x_restart(enum reboot_mode mode, const char *cmd)
 {
@@ -228,5 +243,7 @@ void s3c244x_restart(enum reboot_mode mode, const char *cmd)
 	/* we'll take a jump through zero as a poor second */
 	soft_restart(0);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

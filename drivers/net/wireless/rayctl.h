@@ -1,5 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef RAYLINK_H
+=======
+#ifndef _RAYCTL_H_
+#define _RAYCTL_H_
+>>>>>>> v3.18
 =======
 #ifndef _RAYCTL_H_
 #define _RAYCTL_H_
@@ -735,7 +740,11 @@ typedef struct snaphdr_t
 #define APPLEARP_TYPE 0x80f3
 /*****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* #ifndef RAYLINK_H */
+=======
+#endif /* _RAYCTL_H_ */
+>>>>>>> v3.18
 =======
 #endif /* _RAYCTL_H_ */
 >>>>>>> v3.18

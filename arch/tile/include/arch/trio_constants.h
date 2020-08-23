@@ -17,7 +17,11 @@
 #define __ARCH_TRIO_CONSTANTS_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TRIO_NUM_ASIDS 16
+=======
+#define TRIO_NUM_ASIDS 32
+>>>>>>> v3.18
 =======
 #define TRIO_NUM_ASIDS 32
 >>>>>>> v3.18
@@ -27,8 +31,13 @@
 #define TRIO_LOG2_NUM_TPIO_REGIONS 3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TRIO_NUM_MAP_MEM_REGIONS 16
 #define TRIO_LOG2_NUM_MAP_MEM_REGIONS 4
+=======
+#define TRIO_NUM_MAP_MEM_REGIONS 32
+#define TRIO_LOG2_NUM_MAP_MEM_REGIONS 5
+>>>>>>> v3.18
 =======
 #define TRIO_NUM_MAP_MEM_REGIONS 32
 #define TRIO_LOG2_NUM_MAP_MEM_REGIONS 5
@@ -39,9 +48,15 @@
 #define TRIO_LOG2_NUM_SQ_FIFO_ENTRIES 6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TRIO_NUM_PUSH_DMA_RINGS 32
 
 #define TRIO_NUM_PULL_DMA_RINGS 32
+=======
+#define TRIO_NUM_PUSH_DMA_RINGS 64
+
+#define TRIO_NUM_PULL_DMA_RINGS 64
+>>>>>>> v3.18
 =======
 #define TRIO_NUM_PUSH_DMA_RINGS 64
 

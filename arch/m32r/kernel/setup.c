@@ -82,10 +82,14 @@ static struct resource code_resource = {
 
 unsigned long memory_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(memory_start);
 
 unsigned long memory_end;
 EXPORT_SYMBOL(memory_end);
+=======
+unsigned long memory_end;
+>>>>>>> v3.18
 =======
 unsigned long memory_end;
 >>>>>>> v3.18

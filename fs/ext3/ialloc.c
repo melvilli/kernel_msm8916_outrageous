@@ -216,7 +216,11 @@ static int find_group_orlov(struct super_block *sb, struct inode *parent)
 		int best_group = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get_random_bytes(&group, sizeof(group));
+=======
+		group = prandom_u32();
+>>>>>>> v3.18
 =======
 		group = prandom_u32();
 >>>>>>> v3.18

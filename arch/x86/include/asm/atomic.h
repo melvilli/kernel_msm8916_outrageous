@@ -7,6 +7,11 @@
 #include <asm/alternative.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/rmwcc.h>
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/rmwcc.h>
 #include <asm/barrier.h>
@@ -28,7 +33,11 @@
 static inline int atomic_read(const atomic_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (*(volatile int *)&(v)->counter);
+=======
+	return ACCESS_ONCE((v)->counter);
+>>>>>>> v3.18
 =======
 	return ACCESS_ONCE((v)->counter);
 >>>>>>> v3.18
@@ -86,12 +95,16 @@ static inline void atomic_sub(int i, atomic_t *v)
 static inline int atomic_sub_and_test(int i, atomic_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(LOCK_PREFIX "subl %2,%0; sete %1"
 		     : "+m" (v->counter), "=qm" (c)
 		     : "ir" (i) : "memory");
 	return c;
+=======
+	GEN_BINARY_RMWcc(LOCK_PREFIX "subl", v->counter, "er", i, "%0", "e");
+>>>>>>> v3.18
 =======
 	GEN_BINARY_RMWcc(LOCK_PREFIX "subl", v->counter, "er", i, "%0", "e");
 >>>>>>> v3.18
@@ -132,12 +145,16 @@ static inline void atomic_dec(atomic_t *v)
 static inline int atomic_dec_and_test(atomic_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(LOCK_PREFIX "decl %0; sete %1"
 		     : "+m" (v->counter), "=qm" (c)
 		     : : "memory");
 	return c != 0;
+=======
+	GEN_UNARY_RMWcc(LOCK_PREFIX "decl", v->counter, "%0", "e");
+>>>>>>> v3.18
 =======
 	GEN_UNARY_RMWcc(LOCK_PREFIX "decl", v->counter, "%0", "e");
 >>>>>>> v3.18
@@ -154,12 +171,16 @@ static inline int atomic_dec_and_test(atomic_t *v)
 static inline int atomic_inc_and_test(atomic_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(LOCK_PREFIX "incl %0; sete %1"
 		     : "+m" (v->counter), "=qm" (c)
 		     : : "memory");
 	return c != 0;
+=======
+	GEN_UNARY_RMWcc(LOCK_PREFIX "incl", v->counter, "%0", "e");
+>>>>>>> v3.18
 =======
 	GEN_UNARY_RMWcc(LOCK_PREFIX "incl", v->counter, "%0", "e");
 >>>>>>> v3.18
@@ -177,12 +198,16 @@ static inline int atomic_inc_and_test(atomic_t *v)
 static inline int atomic_add_negative(int i, atomic_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(LOCK_PREFIX "addl %2,%0; sets %1"
 		     : "+m" (v->counter), "=qm" (c)
 		     : "ir" (i) : "memory");
 	return c;
+=======
+	GEN_BINARY_RMWcc(LOCK_PREFIX "addl", v->counter, "er", i, "%0", "s");
+>>>>>>> v3.18
 =======
 	GEN_BINARY_RMWcc(LOCK_PREFIX "addl", v->counter, "er", i, "%0", "s");
 >>>>>>> v3.18
@@ -263,6 +288,7 @@ static inline short int atomic_inc_short(short int *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 /**
  * atomic_or_long - OR of two long integers
@@ -280,6 +306,8 @@ static inline void atomic_or_long(unsigned long *v1, unsigned long v2)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* These are x86-specific, used by some header files */
 #define atomic_clear_mask(mask, addr)				\
 	asm volatile(LOCK_PREFIX "andl %0,%1"			\
@@ -291,12 +319,15 @@ static inline void atomic_or_long(unsigned long *v1, unsigned long v2)
 		     : "memory")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomic operations are already serializing on x86 */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_32

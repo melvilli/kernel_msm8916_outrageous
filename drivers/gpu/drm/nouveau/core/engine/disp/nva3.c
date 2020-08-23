@@ -26,6 +26,7 @@
 #include <engine/disp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 
 #include "nv50.h"
@@ -61,6 +62,8 @@ nva3_disp_base_oclass[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/class.h>
 
 #include "nv50.h"
@@ -89,6 +92,9 @@ nva3_disp_base_oclass[] = {
  * Display engine implementation
  ******************************************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nva3_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -105,11 +111,17 @@ nva3_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = nvkm_event_init(&nv50_disp_chan_uevent, 1, 9, &priv->uevent);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_engine(priv)->sclass = nva3_disp_base_oclass;
 	nv_engine(priv)->cclass = &nv50_disp_cclass;
@@ -126,6 +138,7 @@ nva3_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->sor.hda_eld = nva3_hda_eld;
 	priv->sor.hdmi = nva3_hdmi_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->sor.dp = &nv94_sor_dp_func;
 	priv->pior.power = nv50_pior_power;
 	priv->pior.dp = &nv50_pior_dp_func;
@@ -137,6 +150,8 @@ nva3_disp_oclass = {
 	.handle = NV_ENGINE(DISP, 0x85),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	priv->pior.power = nv50_pior_power;
 	return 0;
 }
@@ -145,6 +160,9 @@ struct nouveau_oclass *
 nva3_disp_oclass = &(struct nv50_disp_impl) {
 	.base.base.handle = NV_ENGINE(DISP, 0x85),
 	.base.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nva3_disp_ctor,
 		.dtor = _nouveau_disp_dtor,
@@ -152,8 +170,11 @@ nva3_disp_oclass = &(struct nv50_disp_impl) {
 		.fini = _nouveau_disp_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.base.vblank = &nv50_disp_vblank_func,
 	.base.outp =  nv94_disp_outp_sclass,
 	.mthd.core = &nv94_disp_mast_mthd_chan,
@@ -162,4 +183,7 @@ nva3_disp_oclass = &(struct nv50_disp_impl) {
 	.mthd.prev = 0x000004,
 	.head.scanoutpos = nv50_disp_base_scanoutpos,
 }.base.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

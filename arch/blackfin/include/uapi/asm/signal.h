@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _BLACKFIN_SIGNAL_H
 #define _BLACKFIN_SIGNAL_H
+=======
+#ifndef _UAPI_BLACKFIN_SIGNAL_H
+#define _UAPI_BLACKFIN_SIGNAL_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_BLACKFIN_SIGNAL_H
 #define _UAPI_BLACKFIN_SIGNAL_H
@@ -10,7 +15,11 @@
 #include <asm-generic/signal.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* _UAPI_BLACKFIN_SIGNAL_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_BLACKFIN_SIGNAL_H */
 >>>>>>> v3.18

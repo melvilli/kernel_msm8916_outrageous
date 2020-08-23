@@ -369,6 +369,10 @@ void cdev_put(struct cdev *p)
 static int chrdev_open(struct inode *inode, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct file_operations *fops;
+>>>>>>> v3.18
 =======
 	const struct file_operations *fops;
 >>>>>>> v3.18
@@ -405,16 +409,22 @@ static int chrdev_open(struct inode *inode, struct file *filp)
 
 	ret = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	filp->f_op = fops_get(p->ops);
 	if (!filp->f_op)
 		goto out_cdev_put;
 
 =======
+=======
+>>>>>>> v3.18
 	fops = fops_get(p->ops);
 	if (!fops)
 		goto out_cdev_put;
 
 	replace_fops(filp, fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (filp->f_op->open) {
 		ret = filp->f_op->open(inode, filp);
@@ -587,7 +597,12 @@ void __init chrdev_init(void)
 {
 	cdev_map = kobj_map_init(base_probe, &chrdevs_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdi_init(&directly_mappable_cdev_bdi);
+=======
+	if (bdi_init(&directly_mappable_cdev_bdi))
+		panic("Failed to init directly mappable cdev bdi");
+>>>>>>> v3.18
 =======
 	if (bdi_init(&directly_mappable_cdev_bdi))
 		panic("Failed to init directly mappable cdev bdi");

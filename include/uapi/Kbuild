@@ -13,7 +13,11 @@ header-y += drm/
 header-y += xen/
 header-y += scsi/
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += media/
+=======
+header-y += misc/
+>>>>>>> v3.18
 =======
 header-y += misc/
 >>>>>>> v3.18

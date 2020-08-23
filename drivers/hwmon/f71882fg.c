@@ -2268,7 +2268,11 @@ static int f71882fg_probe(struct platform_device *pdev)
 {
 	struct f71882fg_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct f71882fg_sio_data *sio_data = pdev->dev.platform_data;
+=======
+	struct f71882fg_sio_data *sio_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct f71882fg_sio_data *sio_data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2425,7 +2429,10 @@ exit_unregister_sysfs:
 	f71882fg_remove(pdev); /* Will unregister the sysfs files for us */
 	return err; /* f71882fg_remove() also frees our data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

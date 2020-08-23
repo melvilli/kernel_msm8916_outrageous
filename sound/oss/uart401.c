@@ -31,7 +31,11 @@
 #include "mpu401.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct uart401_devc
+=======
+struct uart401_devc
+>>>>>>> v3.18
 =======
 struct uart401_devc
 >>>>>>> v3.18
@@ -46,8 +50,12 @@ struct uart401_devc
 	int             share_irq;
 	spinlock_t	lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 uart401_devc;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -57,7 +65,11 @@ uart401_devc;
 #define	STATPORT   (devc->base+1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int uart401_status(uart401_devc * devc)
+=======
+static int uart401_status(struct uart401_devc *devc)
+>>>>>>> v3.18
 =======
 static int uart401_status(struct uart401_devc *devc)
 >>>>>>> v3.18
@@ -69,7 +81,11 @@ static int uart401_status(struct uart401_devc *devc)
 #define output_ready(devc)	(!(uart401_status(devc)&OUTPUT_READY))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void uart401_cmd(uart401_devc * devc, unsigned char cmd)
+=======
+static void uart401_cmd(struct uart401_devc *devc, unsigned char cmd)
+>>>>>>> v3.18
 =======
 static void uart401_cmd(struct uart401_devc *devc, unsigned char cmd)
 >>>>>>> v3.18
@@ -78,7 +94,11 @@ static void uart401_cmd(struct uart401_devc *devc, unsigned char cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int uart401_read(uart401_devc * devc)
+=======
+static int uart401_read(struct uart401_devc *devc)
+>>>>>>> v3.18
 =======
 static int uart401_read(struct uart401_devc *devc)
 >>>>>>> v3.18
@@ -87,7 +107,11 @@ static int uart401_read(struct uart401_devc *devc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void uart401_write(uart401_devc * devc, unsigned char byte)
+=======
+static void uart401_write(struct uart401_devc *devc, unsigned char byte)
+>>>>>>> v3.18
 =======
 static void uart401_write(struct uart401_devc *devc, unsigned char byte)
 >>>>>>> v3.18
@@ -102,15 +126,21 @@ static void uart401_write(struct uart401_devc *devc, unsigned char byte)
 #define	UART_MODE_ON	0x3F
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int      reset_uart401(uart401_devc * devc);
 static void     enter_uart_mode(uart401_devc * devc);
 
 static void uart401_input_loop(uart401_devc * devc)
 =======
+=======
+>>>>>>> v3.18
 static int      reset_uart401(struct uart401_devc *devc);
 static void     enter_uart_mode(struct uart401_devc *devc);
 
 static void uart401_input_loop(struct uart401_devc *devc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int work_limit=30000;
@@ -131,7 +161,11 @@ static void uart401_input_loop(struct uart401_devc *devc)
 irqreturn_t uart401intr(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uart401_devc *devc = dev_id;
+=======
+	struct uart401_devc *devc = dev_id;
+>>>>>>> v3.18
 =======
 	struct uart401_devc *devc = dev_id;
 >>>>>>> v3.18
@@ -154,7 +188,12 @@ uart401_open(int dev, int mode,
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uart401_devc *devc = (uart401_devc *) midi_devs[dev]->devc;
+=======
+	struct uart401_devc *devc = (struct uart401_devc *)
+				    midi_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct uart401_devc *devc = (struct uart401_devc *)
 				    midi_devs[dev]->devc;
@@ -179,7 +218,12 @@ uart401_open(int dev, int mode,
 static void uart401_close(int dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uart401_devc *devc = (uart401_devc *) midi_devs[dev]->devc;
+=======
+	struct uart401_devc *devc = (struct uart401_devc *)
+				    midi_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct uart401_devc *devc = (struct uart401_devc *)
 				    midi_devs[dev]->devc;
@@ -194,7 +238,12 @@ static int uart401_out(int dev, unsigned char midi_byte)
 	int timeout;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uart401_devc *devc = (uart401_devc *) midi_devs[dev]->devc;
+=======
+	struct uart401_devc *devc = (struct uart401_devc *)
+				    midi_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct uart401_devc *devc = (struct uart401_devc *)
 				    midi_devs[dev]->devc;
@@ -270,7 +319,11 @@ static const struct midi_operations uart401_operations =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void enter_uart_mode(uart401_devc * devc)
+=======
+static void enter_uart_mode(struct uart401_devc *devc)
+>>>>>>> v3.18
 =======
 static void enter_uart_mode(struct uart401_devc *devc)
 >>>>>>> v3.18
@@ -296,7 +349,11 @@ static void enter_uart_mode(struct uart401_devc *devc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int reset_uart401(uart401_devc * devc)
+=======
+static int reset_uart401(struct uart401_devc *devc)
+>>>>>>> v3.18
 =======
 static int reset_uart401(struct uart401_devc *devc)
 >>>>>>> v3.18
@@ -333,6 +390,7 @@ static int reset_uart401(struct uart401_devc *devc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ok)
 	{
@@ -347,12 +405,17 @@ static int reset_uart401(struct uart401_devc *devc)
 						 */
 
 =======
+=======
+>>>>>>> v3.18
 	/* Flush input before enabling interrupts */
 	if (ok)
 		uart401_input_loop(devc);
 	else
 		DDB(printk("Reset UART401 failed - No hardware detected.\n"));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ok;
 }
@@ -360,7 +423,11 @@ static int reset_uart401(struct uart401_devc *devc)
 int probe_uart401(struct address_info *hw_config, struct module *owner)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uart401_devc *devc;
+=======
+	struct uart401_devc *devc;
+>>>>>>> v3.18
 =======
 	struct uart401_devc *devc;
 >>>>>>> v3.18
@@ -379,7 +446,11 @@ int probe_uart401(struct address_info *hw_config, struct module *owner)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devc = kmalloc(sizeof(uart401_devc), GFP_KERNEL);
+=======
+	devc = kmalloc(sizeof(struct uart401_devc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	devc = kmalloc(sizeof(struct uart401_devc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -475,7 +546,11 @@ cleanup_region:
 void unload_uart401(struct address_info *hw_config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uart401_devc *devc;
+=======
+	struct uart401_devc *devc;
+>>>>>>> v3.18
 =======
 	struct uart401_devc *devc;
 >>>>>>> v3.18

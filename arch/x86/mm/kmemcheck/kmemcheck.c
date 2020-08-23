@@ -79,11 +79,14 @@ early_initcall(kmemcheck_init);
 static int __init param_kmemcheck(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!str)
 		return -EINVAL;
 
 	sscanf(str, "%d", &kmemcheck_enabled);
 =======
+=======
+>>>>>>> v3.18
 	int val;
 	int ret;
 
@@ -94,6 +97,9 @@ static int __init param_kmemcheck(char *str)
 	if (ret)
 		return ret;
 	kmemcheck_enabled = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -148,7 +154,11 @@ static DEFINE_PER_CPU(struct kmemcheck_context, kmemcheck_context);
 bool kmemcheck_active(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18
@@ -160,7 +170,11 @@ bool kmemcheck_active(struct pt_regs *regs)
 static void kmemcheck_save_addr(unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18
@@ -172,7 +186,11 @@ static void kmemcheck_save_addr(unsigned long addr)
 static unsigned int kmemcheck_show_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18
@@ -189,7 +207,11 @@ static unsigned int kmemcheck_show_all(void)
 static unsigned int kmemcheck_hide_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18
@@ -209,7 +231,11 @@ static unsigned int kmemcheck_hide_all(void)
 void kmemcheck_show(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18
@@ -254,7 +280,11 @@ void kmemcheck_show(struct pt_regs *regs)
 void kmemcheck_hide(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18
@@ -560,7 +590,11 @@ static void kmemcheck_access(struct pt_regs *regs,
 	unsigned int size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 =======
 	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
 >>>>>>> v3.18

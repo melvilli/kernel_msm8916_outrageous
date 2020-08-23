@@ -21,7 +21,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -208,7 +211,11 @@ static ssize_t tsl2550_store_power_state(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (val < 0 || val > 1)
+=======
+	if (val > 1)
+>>>>>>> v3.18
 =======
 	if (val > 1)
 >>>>>>> v3.18
@@ -244,7 +251,11 @@ static ssize_t tsl2550_store_operating_mode(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (val < 0 || val > 1)
+=======
+	if (val > 1)
+>>>>>>> v3.18
 =======
 	if (val > 1)
 >>>>>>> v3.18

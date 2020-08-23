@@ -94,7 +94,10 @@ static int lbs_mesh_config(struct lbs_private *priv, uint16_t action,
 	struct cmd_ds_mesh_config cmd;
 	struct mrvl_meshie *ie;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -126,9 +129,15 @@ static int lbs_mesh_config(struct lbs_private *priv, uint16_t action,
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lbs_deb_cmd("mesh config action %d type %x channel %d SSID %s\n",
 		    action, priv->mesh_tlv, chan,
 		    print_ssid(ssid, priv->mesh_ssid, priv->mesh_ssid_len));
+=======
+	lbs_deb_cmd("mesh config action %d type %x channel %d SSID %*pE\n",
+		    action, priv->mesh_tlv, chan, priv->mesh_ssid_len,
+		    priv->mesh_ssid);
+>>>>>>> v3.18
 =======
 	lbs_deb_cmd("mesh config action %d type %x channel %d SSID %*pE\n",
 		    action, priv->mesh_tlv, chan, priv->mesh_ssid_len,
@@ -250,7 +259,11 @@ static ssize_t lbs_prb_rsp_limit_set(struct device *dev,
 	mesh_access.data[0] = cpu_to_le32(CMD_ACT_SET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strict_strtoul(buf, 10, &retry_limit))
+=======
+	if (!kstrtoul(buf, 10, &retry_limit))
+>>>>>>> v3.18
 =======
 	if (!kstrtoul(buf, 10, &retry_limit))
 >>>>>>> v3.18
@@ -1014,7 +1027,11 @@ static int lbs_add_mesh(struct lbs_private *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mesh_dev = alloc_netdev(0, "msh%d", ether_setup);
+=======
+	mesh_dev = alloc_netdev(0, "msh%d", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 =======
 	mesh_dev = alloc_netdev(0, "msh%d", NET_NAME_UNKNOWN, ether_setup);
 >>>>>>> v3.18
@@ -1035,7 +1052,11 @@ static int lbs_add_mesh(struct lbs_private *priv)
 	mesh_dev->netdev_ops = &mesh_netdev_ops;
 	mesh_dev->ethtool_ops = &lbs_ethtool_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(mesh_dev->dev_addr, priv->dev->dev_addr, ETH_ALEN);
+=======
+	eth_hw_addr_inherit(mesh_dev, priv->dev);
+>>>>>>> v3.18
 =======
 	eth_hw_addr_inherit(mesh_dev, priv->dev);
 >>>>>>> v3.18

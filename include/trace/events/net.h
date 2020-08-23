@@ -7,10 +7,13 @@
 #include <linux/skbuff.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ip.h>
 #include <linux/tracepoint.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/if_vlan.h>
 #include <linux/ip.h>
 #include <linux/tracepoint.h>
@@ -72,6 +75,9 @@ TRACE_EVENT(net_dev_start_xmit,
 		  __entry->gso_size, __entry->gso_segs, __entry->gso_type)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TRACE_EVENT(net_dev_xmit,
 
@@ -143,7 +149,10 @@ DEFINE_EVENT(net_dev_template, netif_rx,
 	TP_ARGS(skb)
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 DECLARE_EVENT_CLASS(net_dev_rx_verbose_template,
 
@@ -244,6 +253,9 @@ DEFINE_EVENT(net_dev_rx_verbose_template, netif_rx_ni_entry,
 	TP_ARGS(skb)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_NET_H */
 

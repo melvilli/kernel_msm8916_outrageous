@@ -13,7 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -41,7 +44,11 @@ static int  ipaq_calc_num_ports(struct usb_serial *serial);
 static int  ipaq_startup(struct usb_serial *serial);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id ipaq_id_table [] = {
+=======
+static const struct usb_device_id ipaq_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id ipaq_id_table[] = {
 >>>>>>> v3.18
@@ -540,8 +547,12 @@ static int ipaq_open(struct tty_struct *tty,
 	 * several times.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (retries) {
 		retries--;
+=======
+	while (retries--) {
+>>>>>>> v3.18
 =======
 	while (retries--) {
 >>>>>>> v3.18

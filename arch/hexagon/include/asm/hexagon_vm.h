@@ -56,6 +56,7 @@
 
 enum VM_CACHE_OPS {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ickill,
 	dckill,
 	l2kill,
@@ -78,6 +79,8 @@ enum VM_INT_OPS {
 	post,
 	clear
 =======
+=======
+>>>>>>> v3.18
 	hvmc_ickill,
 	hvmc_dckill,
 	hvmc_l2kill,
@@ -99,6 +102,9 @@ enum VM_INT_OPS {
 	hvmi_status,
 	hvmi_post,
 	hvmi_clear
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -123,7 +129,11 @@ long __vmvpid(void);
 static inline long __vmcache_ickill(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(ickill, 0, 0);
+=======
+	return __vmcache(hvmc_ickill, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_ickill, 0, 0);
 >>>>>>> v3.18
@@ -132,7 +142,11 @@ static inline long __vmcache_ickill(void)
 static inline long __vmcache_dckill(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(dckill, 0, 0);
+=======
+	return __vmcache(hvmc_dckill, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_dckill, 0, 0);
 >>>>>>> v3.18
@@ -141,7 +155,11 @@ static inline long __vmcache_dckill(void)
 static inline long __vmcache_l2kill(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(l2kill, 0, 0);
+=======
+	return __vmcache(hvmc_l2kill, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_l2kill, 0, 0);
 >>>>>>> v3.18
@@ -150,7 +168,11 @@ static inline long __vmcache_l2kill(void)
 static inline long __vmcache_dccleaninva(unsigned long addr, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(dccleaninva, addr, len);
+=======
+	return __vmcache(hvmc_dccleaninva, addr, len);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_dccleaninva, addr, len);
 >>>>>>> v3.18
@@ -159,7 +181,11 @@ static inline long __vmcache_dccleaninva(unsigned long addr, unsigned long len)
 static inline long __vmcache_icinva(unsigned long addr, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(icinva, addr, len);
+=======
+	return __vmcache(hvmc_icinva, addr, len);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_icinva, addr, len);
 >>>>>>> v3.18
@@ -169,7 +195,11 @@ static inline long __vmcache_idsync(unsigned long addr,
 					   unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(idsync, addr, len);
+=======
+	return __vmcache(hvmc_idsync, addr, len);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_idsync, addr, len);
 >>>>>>> v3.18
@@ -178,7 +208,11 @@ static inline long __vmcache_idsync(unsigned long addr,
 static inline long __vmcache_fetch_cfg(unsigned long val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmcache(fetch_cfg, val, 0);
+=======
+	return __vmcache(hvmc_fetch_cfg, val, 0);
+>>>>>>> v3.18
 =======
 	return __vmcache(hvmc_fetch_cfg, val, 0);
 >>>>>>> v3.18
@@ -189,7 +223,11 @@ static inline long __vmcache_fetch_cfg(unsigned long val)
 static inline long __vmintop_nop(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(nop, 0, 0, 0, 0);
+=======
+	return __vmintop(hvmi_nop, 0, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_nop, 0, 0, 0, 0);
 >>>>>>> v3.18
@@ -198,7 +236,11 @@ static inline long __vmintop_nop(void)
 static inline long __vmintop_globen(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(globen, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_globen, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_globen, i, 0, 0, 0);
 >>>>>>> v3.18
@@ -207,7 +249,11 @@ static inline long __vmintop_globen(long i)
 static inline long __vmintop_globdis(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(globdis, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_globdis, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_globdis, i, 0, 0, 0);
 >>>>>>> v3.18
@@ -216,7 +262,11 @@ static inline long __vmintop_globdis(long i)
 static inline long __vmintop_locen(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(locen, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_locen, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_locen, i, 0, 0, 0);
 >>>>>>> v3.18
@@ -225,7 +275,11 @@ static inline long __vmintop_locen(long i)
 static inline long __vmintop_locdis(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(locdis, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_locdis, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_locdis, i, 0, 0, 0);
 >>>>>>> v3.18
@@ -234,7 +288,11 @@ static inline long __vmintop_locdis(long i)
 static inline long __vmintop_affinity(long i, long cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(locdis, i, cpu, 0, 0);
+=======
+	return __vmintop(hvmi_affinity, i, cpu, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_affinity, i, cpu, 0, 0);
 >>>>>>> v3.18
@@ -243,7 +301,11 @@ static inline long __vmintop_affinity(long i, long cpu)
 static inline long __vmintop_get(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(get, 0, 0, 0, 0);
+=======
+	return __vmintop(hvmi_get, 0, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_get, 0, 0, 0, 0);
 >>>>>>> v3.18
@@ -252,7 +314,11 @@ static inline long __vmintop_get(void)
 static inline long __vmintop_peek(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(peek, 0, 0, 0, 0);
+=======
+	return __vmintop(hvmi_peek, 0, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_peek, 0, 0, 0, 0);
 >>>>>>> v3.18
@@ -261,7 +327,11 @@ static inline long __vmintop_peek(void)
 static inline long __vmintop_status(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(status, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_status, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_status, i, 0, 0, 0);
 >>>>>>> v3.18
@@ -270,7 +340,11 @@ static inline long __vmintop_status(long i)
 static inline long __vmintop_post(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(post, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_post, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_post, i, 0, 0, 0);
 >>>>>>> v3.18
@@ -279,7 +353,11 @@ static inline long __vmintop_post(long i)
 static inline long __vmintop_clear(long i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmintop(clear, i, 0, 0, 0);
+=======
+	return __vmintop(hvmi_clear, i, 0, 0, 0);
+>>>>>>> v3.18
 =======
 	return __vmintop(hvmi_clear, i, 0, 0, 0);
 >>>>>>> v3.18

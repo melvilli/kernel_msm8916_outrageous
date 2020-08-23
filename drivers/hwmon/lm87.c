@@ -6,7 +6,11 @@
  *                          Stephen Rousset <stephen.rousset@rocketlogix.com>
  *                          Dan Eaton <dan.eaton@rocketlogix.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2008  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2004-2008  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2008  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -622,11 +626,17 @@ static ssize_t set_vrm(struct device *dev, struct device_attribute *attr,
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (val > 255)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->vrm = val;
 	return count;
@@ -867,8 +877,13 @@ static void lm87_init_client(struct i2c_client *client)
 	struct lm87_data *data = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (client->dev.platform_data) {
 		data->channel = *(u8 *)client->dev.platform_data;
+=======
+	if (dev_get_platdata(&client->dev)) {
+		data->channel = *(u8 *)dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	if (dev_get_platdata(&client->dev)) {
 		data->channel = *(u8 *)dev_get_platdata(&client->dev);
@@ -920,7 +935,10 @@ static int lm87_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 	i2c_set_clientdata(client, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->valid = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
@@ -1031,7 +1049,11 @@ static struct i2c_driver lm87_driver = {
 module_i2c_driver(lm87_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org> and others");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de> and others");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de> and others");
 >>>>>>> v3.18

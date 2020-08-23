@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <acpi/acpi.h>
@@ -97,6 +104,7 @@ const u8 acpi_gbl_ns_properties[ACPI_NUM_NS_TYPES] = {
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FUNCTION:    acpi_ut_hex_to_ascii_char
  *
  * PARAMETERS:  integer             - Contains the hex digit
@@ -124,6 +132,8 @@ char acpi_ut_hex_to_ascii_char(u64 integer, u32 position)
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * FUNCTION:    acpi_ut_get_region_name
@@ -474,7 +484,11 @@ char *acpi_ut_get_mutex_name(u32 mutex_id)
 /* Names for Notify() values, used for debug output */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *acpi_gbl_notify_value_names[ACPI_NOTIFY_MAX + 1] = {
+=======
+static const char *acpi_gbl_generic_notify[ACPI_NOTIFY_MAX + 1] = {
+>>>>>>> v3.18
 =======
 static const char *acpi_gbl_generic_notify[ACPI_NOTIFY_MAX + 1] = {
 >>>>>>> v3.18
@@ -488,6 +502,7 @@ static const char *acpi_gbl_generic_notify[ACPI_NOTIFY_MAX + 1] = {
 	/* 07 */ "Power Fault",
 	/* 08 */ "Capabilities Check",
 	/* 09 */ "Device PLD Check",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* 10 */ "Reserved",
 	/* 11 */ "System Locality Update",
@@ -507,6 +522,8 @@ const char *acpi_ut_get_notify_name(u32 notify_value)
 		return ("Hardware Specific");
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* 0A */ "Reserved",
 	/* 0B */ "System Locality Update",
 	/* 0C */ "Shutdown Request",
@@ -577,6 +594,9 @@ const char *acpi_ut_get_notify_name(u32 notify_value, acpi_object_type type)
 	/* C0 and above are hardware-specific */
 
 	return ("Hardware-Specific");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

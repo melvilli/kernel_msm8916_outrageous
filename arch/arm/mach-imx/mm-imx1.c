@@ -40,7 +40,10 @@ void __init imx1_init_early(void)
 {
 	mxc_set_cpu_type(MXC_CPU_MX1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxc_arch_reset_init(MX1_IO_ADDRESS(MX1_WDT_BASE_ADDR));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	imx_iomuxv1_init(MX1_IO_ADDRESS(MX1_GPIO_BASE_ADDR),
@@ -55,6 +58,10 @@ void __init mx1_init_irq(void)
 void __init imx1_soc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxc_arch_reset_init(MX1_IO_ADDRESS(MX1_WDT_BASE_ADDR));
+>>>>>>> v3.18
 =======
 	mxc_arch_reset_init(MX1_IO_ADDRESS(MX1_WDT_BASE_ADDR));
 >>>>>>> v3.18

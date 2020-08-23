@@ -34,6 +34,7 @@ struct drm_exynos_gem_create {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * A structure for getting buffer offset.
  *
  * @handle: a pointer to gem object created.
@@ -66,6 +67,8 @@ struct drm_exynos_gem_mmap {
 };
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * A structure to gem information.
@@ -320,8 +323,11 @@ struct drm_exynos_ipp_cmd_ctrl {
 
 #define DRM_EXYNOS_GEM_CREATE		0x00
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_EXYNOS_GEM_MAP_OFFSET	0x01
 #define DRM_EXYNOS_GEM_MMAP		0x02
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Reserved 0x03 ~ 0x05 for exynos specific gem ioctl */
@@ -343,12 +349,15 @@ struct drm_exynos_ipp_cmd_ctrl {
 		DRM_EXYNOS_GEM_CREATE, struct drm_exynos_gem_create)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_IOCTL_EXYNOS_GEM_MAP_OFFSET	DRM_IOWR(DRM_COMMAND_BASE + \
 		DRM_EXYNOS_GEM_MAP_OFFSET, struct drm_exynos_gem_map_off)
 
 #define DRM_IOCTL_EXYNOS_GEM_MMAP	DRM_IOWR(DRM_COMMAND_BASE + \
 		DRM_EXYNOS_GEM_MMAP, struct drm_exynos_gem_mmap)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DRM_IOCTL_EXYNOS_GEM_GET	DRM_IOWR(DRM_COMMAND_BASE + \

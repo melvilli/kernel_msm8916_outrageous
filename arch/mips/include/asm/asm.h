@@ -19,6 +19,10 @@
 
 #include <asm/sgidefs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/asm-eva.h>
+>>>>>>> v3.18
 =======
 #include <asm/asm-eva.h>
 >>>>>>> v3.18
@@ -150,6 +154,7 @@ symbol		=	value
 #define PREF(hint,addr)					\
 		.set	push;				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.set	mips4;				\
 		pref	hint, addr;			\
 		.set	pop
@@ -158,6 +163,8 @@ symbol		=	value
 		.set	push;				\
 		.set	mips4;				\
 =======
+=======
+>>>>>>> v3.18
 		.set	arch=r5000;			\
 		pref	hint, addr;			\
 		.set	pop
@@ -172,6 +179,9 @@ symbol		=	value
 #define PREFX(hint,addr)				\
 		.set	push;				\
 		.set	arch=r5000;			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		prefx	hint, addr;			\
 		.set	pop
@@ -180,6 +190,10 @@ symbol		=	value
 
 #define PREF(hint, addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PREFE(hint, addr)
+>>>>>>> v3.18
 =======
 #define PREFE(hint, addr)
 >>>>>>> v3.18

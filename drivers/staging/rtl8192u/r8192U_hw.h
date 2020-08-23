@@ -1,7 +1,11 @@
 /*
 	This is part of rtl8187 OpenSource driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Copyright (C) Andrea Merello 2004-2005  <andreamrl@tiscali.it>
+=======
+	Copyright (C) Andrea Merello 2004-2005  <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
 	Copyright (C) Andrea Merello 2004-2005  <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -29,7 +33,11 @@ typedef enum _VERSION_819xU{
 	VERSION_819xU_B, // B-cut
 	VERSION_819xU_C,// C-cut
 <<<<<<< HEAD
+<<<<<<< HEAD
 }VERSION_819xU,*PVERSION_819xU;
+=======
+} VERSION_819xU, *PVERSION_819xU;
+>>>>>>> v3.18
 =======
 } VERSION_819xU, *PVERSION_819xU;
 >>>>>>> v3.18
@@ -397,16 +405,22 @@ enum _RTL8192Usb_HW {
 #define EPROM_CMD_LOAD 1
 #define EPROM_CMD_PROGRAM 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EPROM_CS_SHIFT 3
 #define EPROM_CK_SHIFT 2
 #define EPROM_W_SHIFT 1
 #define EPROM_R_SHIFT 0
 =======
+=======
+>>>>>>> v3.18
 #define EPROM_CS_BIT BIT(3)
 #define EPROM_CK_BIT BIT(2)
 #define EPROM_W_BIT  BIT(1)
 #define EPROM_R_BIT  BIT(0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MAC0			= 0x000,
 	MAC1			= 0x001,

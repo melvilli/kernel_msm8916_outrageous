@@ -401,10 +401,14 @@ reg_user_mr_fallback:
 	pginfo.u.usr.region = e_mr->umem;
 	pginfo.next_hwpage = e_mr->umem->offset / hwpage_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pginfo.u.usr.next_chunk = list_prepare_entry(pginfo.u.usr.next_chunk,
 						     (&e_mr->umem->chunk_list),
 						     list);
 
+=======
+	pginfo.u.usr.next_sg = pginfo.u.usr.region->sg_head.sgl;
+>>>>>>> v3.18
 =======
 	pginfo.u.usr.next_sg = pginfo.u.usr.region->sg_head.sgl;
 >>>>>>> v3.18
@@ -1863,6 +1867,7 @@ static int ehca_set_pagebuf_user1(struct ehca_mr_pginfo *pginfo,
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_umem_chunk *prev_chunk;
 	struct ib_umem_chunk *chunk;
 	u64 pgaddr;
@@ -1919,6 +1924,8 @@ static int ehca_set_pagebuf_user1(struct ehca_mr_pginfo *pginfo,
 				   (&(pginfo->u.usr.region->chunk_list)),
 				   list);
 =======
+=======
+>>>>>>> v3.18
 	u64 pgaddr;
 	u32 j = 0;
 	int hwpages_per_kpage = PAGE_SIZE / pginfo->hwpage_size;
@@ -1952,6 +1959,9 @@ static int ehca_set_pagebuf_user1(struct ehca_mr_pginfo *pginfo,
 			break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1961,6 +1971,7 @@ static int ehca_set_pagebuf_user1(struct ehca_mr_pginfo *pginfo,
  * last page addr is returned in prev_pgaddr for further check
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ehca_check_kpages_per_ate(struct scatterlist *page_list,
 				     int start_idx, int end_idx,
 				     u64 *prev_pgaddr)
@@ -1969,12 +1980,17 @@ static int ehca_check_kpages_per_ate(struct scatterlist *page_list,
 	for (t = start_idx; t <= end_idx; t++) {
 		u64 pgaddr = page_to_pfn(sg_page(&page_list[t])) << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 static int ehca_check_kpages_per_ate(struct scatterlist **sg,
 				     int num_pages,
 				     u64 *prev_pgaddr)
 {
 	for (; *sg && num_pages > 0; *sg = sg_next(*sg), num_pages--) {
 		u64 pgaddr = page_to_pfn(sg_page(*sg)) << PAGE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ehca_debug_level >= 3)
 			ehca_gen_dbg("chunk_page=%llx value=%016llx", pgaddr,
@@ -1982,8 +1998,13 @@ static int ehca_check_kpages_per_ate(struct scatterlist **sg,
 		if (pgaddr - PAGE_SIZE != *prev_pgaddr) {
 			ehca_gen_err("uncontiguous page found pgaddr=%llx "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     "prev_pgaddr=%llx page_list_i=%x",
 				     pgaddr, *prev_pgaddr, t);
+=======
+				     "prev_pgaddr=%llx entries_left_in_hwpage=%x",
+				     pgaddr, *prev_pgaddr, num_pages);
+>>>>>>> v3.18
 =======
 				     "prev_pgaddr=%llx entries_left_in_hwpage=%x",
 				     pgaddr, *prev_pgaddr, num_pages);
@@ -2001,6 +2022,7 @@ static int ehca_set_pagebuf_user2(struct ehca_mr_pginfo *pginfo,
 				  u64 *kpage)
 {
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ib_umem_chunk *prev_chunk;
 	struct ib_umem_chunk *chunk;
@@ -2108,6 +2130,8 @@ next_kpage:
 				   (&(pginfo->u.usr.region->chunk_list)),
 				   list);
 =======
+=======
+>>>>>>> v3.18
 	u64 pgaddr, prev_pgaddr;
 	u32 j = 0;
 	int kpages_per_hwpage = pginfo->hwpage_size / PAGE_SIZE;
@@ -2182,6 +2206,9 @@ next_kpage:
 			break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2723,6 +2750,7 @@ static void ehca_dma_unmap_sg(struct ib_device *dev, struct scatterlist *sg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 ehca_dma_address(struct ib_device *dev, struct scatterlist *sg)
 {
 	return sg->dma_address;
@@ -2733,6 +2761,8 @@ static unsigned int ehca_dma_len(struct ib_device *dev, struct scatterlist *sg)
 	return sg->length;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ehca_dma_sync_single_for_cpu(struct ib_device *dev, u64 addr,
@@ -2788,8 +2818,11 @@ struct ib_dma_mapping_ops ehca_dma_mapping_ops = {
 	.map_sg                 = ehca_dma_map_sg,
 	.unmap_sg               = ehca_dma_unmap_sg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dma_address            = ehca_dma_address,
 	.dma_len                = ehca_dma_len,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.sync_single_for_cpu    = ehca_dma_sync_single_for_cpu,

@@ -61,6 +61,11 @@
 #define TPS65217_REG_SEQ6		0X1E
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TPS65217_REG_MAX		TPS65217_REG_SEQ6
+
+>>>>>>> v3.18
 =======
 #define TPS65217_REG_MAX		TPS65217_REG_SEQ6
 
@@ -250,6 +255,7 @@ struct tps65217_board {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct tps_info - packages regulator constraints
  * @name:		Voltage regulator name
  * @min_uV:		minimum micro volts
@@ -270,6 +276,8 @@ struct tps_info {
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * struct tps65217 - tps65217 sub-driver chip access routines
  *
  * Device data may be used to access the TPS65217 chip
@@ -279,10 +287,15 @@ struct tps65217 {
 	struct device *dev;
 	struct tps65217_board *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int id;
 	struct regulator_desc desc[TPS65217_NUM_REGULATOR];
 	struct regulator_dev *rdev[TPS65217_NUM_REGULATOR];
 	struct tps_info *info[TPS65217_NUM_REGULATOR];
+=======
+	unsigned long id;
+	struct regulator_desc desc[TPS65217_NUM_REGULATOR];
+>>>>>>> v3.18
 =======
 	unsigned long id;
 	struct regulator_desc desc[TPS65217_NUM_REGULATOR];
@@ -296,7 +309,11 @@ static inline struct tps65217 *dev_to_tps65217(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int tps65217_chip_id(struct tps65217 *tps65217)
+=======
+static inline unsigned long tps65217_chip_id(struct tps65217 *tps65217)
+>>>>>>> v3.18
 =======
 static inline unsigned long tps65217_chip_id(struct tps65217 *tps65217)
 >>>>>>> v3.18

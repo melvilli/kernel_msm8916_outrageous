@@ -80,7 +80,12 @@ static int get_dir_index_using_name(struct super_block *sb,
 {
 	struct squashfs_sb_info *msblk = sb->s_fs_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, size, length = 0, err;
+=======
+	int i, length = 0, err;
+	unsigned int size;
+>>>>>>> v3.18
 =======
 	int i, length = 0, err;
 	unsigned int size;
@@ -109,6 +114,11 @@ static int get_dir_index_using_name(struct super_block *sb,
 
 		size = le32_to_cpu(index->size) + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (size > SQUASHFS_NAME_LEN)
+			break;
+>>>>>>> v3.18
 =======
 		if (size > SQUASHFS_NAME_LEN)
 			break;
@@ -155,7 +165,12 @@ static struct dentry *squashfs_lookup(struct inode *dir, struct dentry *dentry,
 	u64 block = squashfs_i(dir)->start + msblk->directory_table;
 	int offset = squashfs_i(dir)->offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err, length, dir_count, size;
+=======
+	int err, length;
+	unsigned int dir_count, size;
+>>>>>>> v3.18
 =======
 	int err, length;
 	unsigned int dir_count, size;

@@ -979,7 +979,11 @@ static int __init gpio_init(void)
 
 	int res2 = request_irq(GIO_INTR_VECT, gpio_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_SHARED | IRQF_DISABLED, "gpio", &alarmlist);
+=======
+		IRQF_SHARED, "gpio", &alarmlist);
+>>>>>>> v3.18
 =======
 		IRQF_SHARED, "gpio", &alarmlist);
 >>>>>>> v3.18

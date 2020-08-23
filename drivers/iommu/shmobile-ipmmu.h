@@ -15,7 +15,11 @@ struct shmobile_ipmmu {
 	void __iomem *ipmmu_base;
 	int tlb_enabled;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex flush_lock;
+=======
+	spinlock_t flush_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t flush_lock;
 >>>>>>> v3.18

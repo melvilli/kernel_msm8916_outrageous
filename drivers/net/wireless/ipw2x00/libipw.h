@@ -951,6 +951,7 @@ static inline int libipw_is_cck_rate(u8 rate)
 
 /* libipw.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void free_libipw(struct net_device *dev, int monitor);
 extern struct net_device *alloc_libipw(int sizeof_priv, int monitor);
 extern int libipw_change_mtu(struct net_device *dev, int new_mtu);
@@ -1012,6 +1013,8 @@ extern int libipw_wx_get_encodeext(struct libipw_device *ieee,
 				      struct iw_request_info *info,
 				      union iwreq_data *wrqu, char *extra);
 =======
+=======
+>>>>>>> v3.18
 void free_libipw(struct net_device *dev, int monitor);
 struct net_device *alloc_libipw(int sizeof_priv, int monitor);
 int libipw_change_mtu(struct net_device *dev, int new_mtu);
@@ -1061,6 +1064,9 @@ int libipw_wx_set_encodeext(struct libipw_device *ieee,
 int libipw_wx_get_encodeext(struct libipw_device *ieee,
 			    struct iw_request_info *info,
 			    union iwreq_data *wrqu, char *extra);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void libipw_increment_scans(struct libipw_device *ieee)

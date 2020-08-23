@@ -67,9 +67,13 @@ runqueue.
 
 CFS maintains a time-ordered rbtree, where all runnable tasks are sorted by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 p->se.vruntime key (there is a subtraction using rq->cfs.min_vruntime to
 account for possible wraparounds).  CFS picks the "leftmost" task from this
 tree and sticks to it.
+=======
+p->se.vruntime key. CFS picks the "leftmost" task from this tree and sticks to it.
+>>>>>>> v3.18
 =======
 p->se.vruntime key. CFS picks the "leftmost" task from this tree and sticks to it.
 >>>>>>> v3.18

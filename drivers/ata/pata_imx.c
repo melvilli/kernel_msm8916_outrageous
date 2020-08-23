@@ -16,7 +16,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -104,6 +107,7 @@ static int pata_imx_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (io_res == NULL)
 		return -EINVAL;
@@ -111,6 +115,11 @@ static int pata_imx_probe(struct platform_device *pdev)
 	irq = platform_get_irq(pdev, 0);
 	if (irq <= 0)
 		return -EINVAL;
+=======
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return irq;
+>>>>>>> v3.18
 =======
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0)
@@ -129,7 +138,13 @@ static int pata_imx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(priv->clk);
+=======
+	ret = clk_prepare_enable(priv->clk);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = clk_prepare_enable(priv->clk);
 	if (ret)
@@ -150,16 +165,22 @@ static int pata_imx_probe(struct platform_device *pdev)
 	ap->flags |= ATA_FLAG_SLAVE_POSS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->host_regs = devm_ioremap(&pdev->dev, io_res->start,
 		resource_size(io_res));
 	if (!priv->host_regs) {
 		dev_err(&pdev->dev, "failed to map IO/CTL base\n");
 		ret = -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 	io_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	priv->host_regs = devm_ioremap_resource(&pdev->dev, io_res);
 	if (IS_ERR(priv->host_regs)) {
 		ret = PTR_ERR(priv->host_regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 	}
@@ -200,7 +221,11 @@ err:
 static int pata_imx_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -216,7 +241,11 @@ static int pata_imx_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -243,7 +272,13 @@ static int pata_imx_resume(struct device *dev)
 	struct pata_imx_priv *priv = host->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(priv->clk);
+=======
+	int ret = clk_prepare_enable(priv->clk);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	int ret = clk_prepare_enable(priv->clk);
 	if (ret)
@@ -260,6 +295,7 @@ static int pata_imx_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct dev_pm_ops pata_imx_pm_ops = {
 	.suspend	= pata_imx_suspend,
@@ -268,10 +304,15 @@ static const struct dev_pm_ops pata_imx_pm_ops = {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static SIMPLE_DEV_PM_OPS(pata_imx_pm_ops, pata_imx_suspend, pata_imx_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct of_device_id imx_pata_dt_ids[] = {
 	{
@@ -281,6 +322,10 @@ static const struct of_device_id imx_pata_dt_ids[] = {
 	}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(of, imx_pata_dt_ids);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(of, imx_pata_dt_ids);
 >>>>>>> v3.18
@@ -293,9 +338,13 @@ static struct platform_driver pata_imx_driver = {
 		.of_match_table	= imx_pata_dt_ids,
 		.owner		= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm		= &pata_imx_pm_ops,
 #endif
+=======
+		.pm		= &pata_imx_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm		= &pata_imx_pm_ops,
 >>>>>>> v3.18

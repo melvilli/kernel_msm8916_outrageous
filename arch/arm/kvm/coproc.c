@@ -24,6 +24,10 @@
 #include <asm/kvm_emulate.h>
 #include <asm/kvm_coproc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/kvm_mmu.h>
+>>>>>>> v3.18
 =======
 #include <asm/kvm_mmu.h>
 >>>>>>> v3.18
@@ -48,7 +52,10 @@ static u32 cache_levels;
 #define CSSELR_MAX 12
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * kvm_vcpu_arch.cp15 holds cp15 registers as an array of u32, but some
  * of cp15 registers can be viewed either as couple of two u32 registers
@@ -74,6 +81,9 @@ static inline u64 vcpu_cp15_reg64_get(struct kvm_vcpu *vcpu,
 	return val;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvm_handle_cp10_id(struct kvm_vcpu *vcpu, struct kvm_run *run)
 {
@@ -104,7 +114,10 @@ int kvm_handle_cp14_access(struct kvm_vcpu *vcpu, struct kvm_run *run)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void reset_mpidr(struct kvm_vcpu *vcpu, const struct coproc_reg *r)
 {
 	/*
@@ -197,6 +210,9 @@ static bool access_l2ectlr(struct kvm_vcpu *vcpu,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* See note at ARM ARM B1.14.4 */
 static bool access_dcsw(struct kvm_vcpu *vcpu,
@@ -241,7 +257,10 @@ done:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Generic accessor for VM registers. Only called as long as HCR_TVM
  * is set.
  */
@@ -280,6 +299,9 @@ bool access_sctlr(struct kvm_vcpu *vcpu,
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * We could trap ID_DFR0 and tell the guest we don't support performance
  * monitoring.  Unfortunately the patch to make the kernel check ID_DFR0 was
@@ -322,16 +344,23 @@ static bool pm_fake(struct kvm_vcpu *vcpu,
  */
 static const struct coproc_reg cp15_regs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* MPIDR: we use VMPIDR for guest access. */
 	{ CRn( 0), CRm( 0), Op1( 0), Op2( 5), is32,
 			NULL, reset_mpidr, c0_MPIDR },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* CSSELR: swapped by interrupt.S. */
 	{ CRn( 0), CRm( 0), Op1( 2), Op2( 0), is32,
 			NULL, reset_unknown, c0_CSSELR },
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* TTBR0/TTBR1: swapped by interrupt.S. */
 	{ CRm64( 2), Op1( 0), is64, NULL, reset_unknown64, c2_TTBR0 },
@@ -361,6 +390,8 @@ static const struct coproc_reg cp15_regs[] = {
 	{ CRn( 6), CRm( 0), Op1( 0), Op2( 2), is32,
 			NULL, reset_unknown, c6_IFAR },
 =======
+=======
+>>>>>>> v3.18
 	/* ACTLR: trapped by HCR.TAC bit. */
 	{ CRn( 1), CRm( 0), Op1( 0), Op2( 1), is32,
 			access_actlr, reset_actlr, c1_ACTLR },
@@ -399,6 +430,9 @@ static const struct coproc_reg cp15_regs[] = {
 			access_vm_reg, reset_unknown, c6_DFAR },
 	{ CRn( 6), CRm( 0), Op1( 0), Op2( 2), is32,
 			access_vm_reg, reset_unknown, c6_IFAR },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* PAR swapped by interrupt.S */
@@ -412,7 +446,10 @@ static const struct coproc_reg cp15_regs[] = {
 	{ CRn( 7), CRm(14), Op1( 0), Op2( 2), is32, access_dcsw},
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * L2CTLR access (guest wants to know #CPUs).
 	 */
 	{ CRn( 9), CRm( 0), Op1( 1), Op2( 2), is32,
@@ -420,6 +457,9 @@ static const struct coproc_reg cp15_regs[] = {
 	{ CRn( 9), CRm( 0), Op1( 1), Op2( 3), is32, access_l2ectlr},
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Dummy performance monitor implementation.
 	 */
@@ -440,10 +480,13 @@ static const struct coproc_reg cp15_regs[] = {
 	/* PRRR/NMRR (aka MAIR0/MAIR1): swapped by interrupt.S. */
 	{ CRn(10), CRm( 2), Op1( 0), Op2( 0), is32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			NULL, reset_unknown, c10_PRRR},
 	{ CRn(10), CRm( 2), Op1( 0), Op2( 1), is32,
 			NULL, reset_unknown, c10_NMRR},
 =======
+=======
+>>>>>>> v3.18
 			access_vm_reg, reset_unknown, c10_PRRR},
 	{ CRn(10), CRm( 2), Op1( 0), Op2( 1), is32,
 			access_vm_reg, reset_unknown, c10_NMRR},
@@ -453,6 +496,9 @@ static const struct coproc_reg cp15_regs[] = {
 			access_vm_reg, reset_unknown, c10_AMAIR0},
 	{ CRn(10), CRm( 3), Op1( 0), Op2( 1), is32,
 			access_vm_reg, reset_unknown, c10_AMAIR1},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* VBAR: swapped by interrupt.S. */
@@ -462,7 +508,11 @@ static const struct coproc_reg cp15_regs[] = {
 	/* CONTEXTIDR/TPIDRURW/TPIDRURO/TPIDRPRW: swapped by interrupt.S. */
 	{ CRn(13), CRm( 0), Op1( 0), Op2( 1), is32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			NULL, reset_val, c13_CID, 0x00000000 },
+=======
+			access_vm_reg, reset_val, c13_CID, 0x00000000 },
+>>>>>>> v3.18
 =======
 			access_vm_reg, reset_val, c13_CID, 0x00000000 },
 >>>>>>> v3.18
@@ -477,6 +527,12 @@ static const struct coproc_reg cp15_regs[] = {
 	{ CRn(14), CRm( 1), Op1( 0), Op2( 0), is32,
 			NULL, reset_val, c14_CNTKCTL, 0x00000000 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* The Configuration Base Address Register. */
+	{ CRn(15), CRm( 0), Op1( 4), Op2( 0), is32, access_cbar},
+>>>>>>> v3.18
 =======
 
 	/* The Configuration Base Address Register. */
@@ -490,13 +546,19 @@ static struct kvm_coproc_target_table *target_tables[KVM_ARM_NUM_TARGETS];
 void kvm_register_target_coproc_table(struct kvm_coproc_target_table *table)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i;
 
 	for (i = 1; i < table->num; i++)
 		BUG_ON(cmp_reg(&table->table[i-1],
 			       &table->table[i]) >= 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	target_tables[table->target] = table;
 }
@@ -581,7 +643,11 @@ int kvm_handle_cp15_64(struct kvm_vcpu *vcpu, struct kvm_run *run)
 	struct coproc_params params;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	params.CRm = (kvm_vcpu_get_hsr(vcpu) >> 1) & 0xf;
+=======
+	params.CRn = (kvm_vcpu_get_hsr(vcpu) >> 1) & 0xf;
+>>>>>>> v3.18
 =======
 	params.CRn = (kvm_vcpu_get_hsr(vcpu) >> 1) & 0xf;
 >>>>>>> v3.18
@@ -593,7 +659,11 @@ int kvm_handle_cp15_64(struct kvm_vcpu *vcpu, struct kvm_run *run)
 	params.Op2 = 0;
 	params.Rt2 = (kvm_vcpu_get_hsr(vcpu) >> 10) & 0xf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	params.CRn = 0;
+=======
+	params.CRm = 0;
+>>>>>>> v3.18
 =======
 	params.CRm = 0;
 >>>>>>> v3.18
@@ -780,16 +850,22 @@ static struct coproc_reg invariant_cp15[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int reg_from_user(void *val, const void __user *uaddr, u64 id)
 {
 	/* This Just Works because we are little endian. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Reads a register value from a userspace address to a kernel
  * variable. Make sure that register size matches sizeof(*__val).
  */
 static int reg_from_user(void *val, const void __user *uaddr, u64 id)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (copy_from_user(val, uaddr, KVM_REG_SIZE(id)) != 0)
 		return -EFAULT;
@@ -797,16 +873,22 @@ static int reg_from_user(void *val, const void __user *uaddr, u64 id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int reg_to_user(void __user *uaddr, const void *val, u64 id)
 {
 	/* This Just Works because we are little endian. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Writes a register value to a userspace address from a kernel variable.
  * Make sure that register size matches sizeof(*__val).
  */
 static int reg_to_user(void __user *uaddr, const void *val, u64 id)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (copy_to_user(uaddr, val, KVM_REG_SIZE(id)) != 0)
 		return -EFAULT;
@@ -818,6 +900,10 @@ static int get_invariant_cp15(u64 id, void __user *uaddr)
 	struct coproc_params params;
 	const struct coproc_reg *r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -830,8 +916,11 @@ static int get_invariant_cp15(u64 id, void __user *uaddr)
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return reg_to_user(uaddr, &r->val, id);
 =======
+=======
+>>>>>>> v3.18
 	ret = -ENOENT;
 	if (KVM_REG_SIZE(id) == 4) {
 		u32 val = r->val;
@@ -841,6 +930,9 @@ static int get_invariant_cp15(u64 id, void __user *uaddr)
 		ret = reg_to_user(uaddr, &r->val, id);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -850,7 +942,11 @@ static int set_invariant_cp15(u64 id, void __user *uaddr)
 	const struct coproc_reg *r;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 val = 0; /* Make sure high bits are 0 for 32-bit regs */
+=======
+	u64 val;
+>>>>>>> v3.18
 =======
 	u64 val;
 >>>>>>> v3.18
@@ -862,8 +958,11 @@ static int set_invariant_cp15(u64 id, void __user *uaddr)
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = reg_from_user(&val, uaddr, id);
 =======
+=======
+>>>>>>> v3.18
 	err = -ENOENT;
 	if (KVM_REG_SIZE(id) == 4) {
 		u32 val32;
@@ -874,6 +973,9 @@ static int set_invariant_cp15(u64 id, void __user *uaddr)
 	} else if (KVM_REG_SIZE(id) == 8) {
 		err = reg_from_user(&val, uaddr, id);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		return err;
@@ -891,7 +993,11 @@ static bool is_valid_cache(u32 val)
 
 	if (val >= CSSELR_MAX)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOENT;
+=======
+		return false;
+>>>>>>> v3.18
 =======
 		return false;
 >>>>>>> v3.18
@@ -1157,6 +1263,10 @@ int kvm_arm_coproc_get_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 	const struct coproc_reg *r;
 	void __user *uaddr = (void __user *)(long)reg->addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1172,9 +1282,12 @@ int kvm_arm_coproc_get_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 		return get_invariant_cp15(reg->id, uaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Note: copies two regs if size is 64 bit. */
 	return reg_to_user(uaddr, &vcpu->arch.cp15[r->reg], reg->id);
 =======
+=======
+>>>>>>> v3.18
 	ret = -ENOENT;
 	if (KVM_REG_SIZE(reg->id) == 8) {
 		u64 val;
@@ -1186,6 +1299,9 @@ int kvm_arm_coproc_get_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1194,6 +1310,10 @@ int kvm_arm_coproc_set_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 	const struct coproc_reg *r;
 	void __user *uaddr = (void __user *)(long)reg->addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1209,9 +1329,12 @@ int kvm_arm_coproc_set_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 		return set_invariant_cp15(reg->id, uaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Note: copies two regs if size is 64 bit */
 	return reg_from_user(&vcpu->arch.cp15[r->reg], uaddr, reg->id);
 =======
+=======
+>>>>>>> v3.18
 	ret = -ENOENT;
 	if (KVM_REG_SIZE(reg->id) == 8) {
 		u64 val;
@@ -1224,6 +1347,9 @@ int kvm_arm_coproc_set_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

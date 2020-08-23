@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -43,8 +51,12 @@
 #include <linux/etherdevice.h>
 #include <linux/if_vlan.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/if_ether.h>
 #include "unicast.h"
+=======
+#include "multicast.h"
+>>>>>>> v3.18
 =======
 #include "multicast.h"
 >>>>>>> v3.18
@@ -128,6 +140,7 @@ static int batadv_interface_set_mac_addr(struct net_device *dev, void *p)
 		return -EADDRNOTAVAIL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(old_addr, dev->dev_addr, ETH_ALEN);
 	memcpy(dev->dev_addr, addr->sa_data, ETH_ALEN);
 
@@ -137,6 +150,8 @@ static int batadv_interface_set_mac_addr(struct net_device *dev, void *p)
 				       "mac address changed", false);
 		batadv_tt_local_add(dev, addr->sa_data, BATADV_NULL_IFINDEX);
 =======
+=======
+>>>>>>> v3.18
 	ether_addr_copy(old_addr, dev->dev_addr);
 	ether_addr_copy(dev->dev_addr, addr->sa_data);
 
@@ -146,6 +161,9 @@ static int batadv_interface_set_mac_addr(struct net_device *dev, void *p)
 				       "mac address changed", false);
 		batadv_tt_local_add(dev, addr->sa_data, BATADV_NO_FLAGS,
 				    BATADV_NULL_IFINDEX, BATADV_NO_MARK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -164,6 +182,7 @@ static int batadv_interface_change_mtu(struct net_device *dev, int new_mtu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int batadv_interface_tx(struct sk_buff *skb,
 			       struct net_device *soft_iface)
 {
@@ -174,6 +193,8 @@ static int batadv_interface_tx(struct sk_buff *skb,
 	struct vlan_ethhdr *vhdr;
 	__be16 ethertype = __constant_htons(ETH_P_BATMAN);
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_interface_set_rx_mode - set the rx mode of a device
  * @dev: registered network device to modify
@@ -194,11 +215,15 @@ static int batadv_interface_tx(struct sk_buff *skb,
 	struct batadv_hard_iface *primary_if = NULL;
 	struct batadv_bcast_packet *bcast_packet;
 	__be16 ethertype = htons(ETH_P_BATMAN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static const uint8_t stp_addr[ETH_ALEN] = {0x01, 0x80, 0xC2, 0x00,
 						   0x00, 0x00};
 	static const uint8_t ectp_addr[ETH_ALEN] = {0xCF, 0x00, 0x00, 0x00,
 						    0x00, 0x00};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int header_len = 0;
 	int data_len = skb->len, ret;
@@ -207,6 +232,8 @@ static int batadv_interface_tx(struct sk_buff *skb,
 	uint32_t seqno;
 	unsigned long brd_delay = 1;
 =======
+=======
+>>>>>>> v3.18
 	enum batadv_dhcp_recipient dhcp_rcp = BATADV_DHCP_NO;
 	uint8_t *dst_hint = NULL, chaddr[ETH_ALEN];
 	struct vlan_ethhdr *vhdr;
@@ -219,6 +246,9 @@ static int batadv_interface_tx(struct sk_buff *skb,
 	int gw_mode;
 	enum batadv_forw_mode forw_mode;
 	struct batadv_orig_node *mcast_single_orig = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (atomic_read(&bat_priv->mesh_state) != BATADV_MESH_ACTIVE)
@@ -226,18 +256,24 @@ static int batadv_interface_tx(struct sk_buff *skb,
 
 	soft_iface->trans_start = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	switch (ntohs(ethhdr->h_proto)) {
 	case ETH_P_8021Q:
 		vhdr = (struct vlan_ethhdr *)skb->data;
 		vid = ntohs(vhdr->h_vlan_TCI) & VLAN_VID_MASK;
 =======
+=======
+>>>>>>> v3.18
 	vid = batadv_get_vid(skb, 0);
 	ethhdr = eth_hdr(skb);
 
 	switch (ntohs(ethhdr->h_proto)) {
 	case ETH_P_8021Q:
 		vhdr = vlan_eth_hdr(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (vhdr->h_vlan_encapsulated_proto != ethertype)
@@ -252,10 +288,13 @@ static int batadv_interface_tx(struct sk_buff *skb,
 		goto dropped;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register the client MAC in the transtable */
 	if (!is_multicast_ether_addr(ethhdr->h_source))
 		batadv_tt_local_add(soft_iface, ethhdr->h_source, skb->skb_iif);
 =======
+=======
+>>>>>>> v3.18
 	/* skb->data might have been reallocated by batadv_bla_tx() */
 	ethhdr = eth_hdr(skb);
 
@@ -267,6 +306,9 @@ static int batadv_interface_tx(struct sk_buff *skb,
 		if (!client_added)
 			goto dropped;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* don't accept stp packets. STP does not help in meshes.
@@ -281,6 +323,7 @@ static int batadv_interface_tx(struct sk_buff *skb,
 	if (batadv_compare_eth(ethhdr->h_dest, ectp_addr))
 		goto dropped;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (is_multicast_ether_addr(ethhdr->h_dest)) {
 		do_bcast = true;
@@ -309,6 +352,8 @@ static int batadv_interface_tx(struct sk_buff *skb,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	gw_mode = atomic_read(&bat_priv->gw_mode);
 	if (is_multicast_ether_addr(ethhdr->h_dest)) {
 		/* if gw mode is off, broadcast every packet */
@@ -354,6 +399,9 @@ send:
 
 	batadv_skb_set_priority(skb, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* ethernet packet should be broadcasted */
 	if (do_bcast) {
@@ -373,17 +421,23 @@ send:
 
 		bcast_packet = (struct batadv_bcast_packet *)skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcast_packet->header.version = BATADV_COMPAT_VERSION;
 		bcast_packet->header.ttl = BATADV_TTL;
 
 		/* batman packet type: broadcast */
 		bcast_packet->header.packet_type = BATADV_BCAST;
 =======
+=======
+>>>>>>> v3.18
 		bcast_packet->version = BATADV_COMPAT_VERSION;
 		bcast_packet->ttl = BATADV_TTL;
 
 		/* batman packet type: broadcast */
 		bcast_packet->packet_type = BATADV_BCAST;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bcast_packet->reserved = 0;
 
@@ -391,8 +445,13 @@ send:
 		 * this mac is known throughout the mesh
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(bcast_packet->orig,
 		       primary_if->net_dev->dev_addr, ETH_ALEN);
+=======
+		ether_addr_copy(bcast_packet->orig,
+				primary_if->net_dev->dev_addr);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(bcast_packet->orig,
 				primary_if->net_dev->dev_addr);
@@ -412,6 +471,7 @@ send:
 	/* unicast packet */
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (atomic_read(&bat_priv->gw_mode) != BATADV_GW_MODE_OFF) {
 			ret = batadv_gw_out_of_range(bat_priv, skb, ethhdr);
 			if (ret)
@@ -426,6 +486,8 @@ send:
 		ret = batadv_unicast_send_skb(bat_priv, skb);
 		if (ret != 0)
 =======
+=======
+>>>>>>> v3.18
 		/* DHCP packets going to a server will use the GW feature */
 		if (dhcp_rcp == BATADV_DHCP_TO_SERVER) {
 			ret = batadv_gw_out_of_range(bat_priv, skb);
@@ -447,6 +509,9 @@ send:
 						     vid);
 		}
 		if (ret == NET_XMIT_DROP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto dropped_freed;
 	}
@@ -470,6 +535,7 @@ void batadv_interface_rx(struct net_device *soft_iface,
 			 int hdr_size, struct batadv_orig_node *orig_node)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct batadv_priv *bat_priv = netdev_priv(soft_iface);
 	struct ethhdr *ethhdr;
 	struct vlan_ethhdr *vhdr;
@@ -480,6 +546,8 @@ void batadv_interface_rx(struct net_device *soft_iface,
 
 	is_bcast = (batadv_header->packet_type == BATADV_BCAST);
 =======
+=======
+>>>>>>> v3.18
 	struct batadv_bcast_packet *batadv_bcast_packet;
 	struct batadv_priv *bat_priv = netdev_priv(soft_iface);
 	__be16 ethertype = htons(ETH_P_BATMAN);
@@ -490,6 +558,9 @@ void batadv_interface_rx(struct net_device *soft_iface,
 
 	batadv_bcast_packet = (struct batadv_bcast_packet *)skb->data;
 	is_bcast = (batadv_bcast_packet->packet_type == BATADV_BCAST);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* check if enough space is available for pulling, and pull */
@@ -500,8 +571,11 @@ void batadv_interface_rx(struct net_device *soft_iface,
 	skb_reset_mac_header(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
 =======
+=======
+>>>>>>> v3.18
 	/* clean the netfilter state now that the batman-adv header has been
 	 * removed
 	 */
@@ -509,13 +583,19 @@ void batadv_interface_rx(struct net_device *soft_iface,
 
 	vid = batadv_get_vid(skb, 0);
 	ethhdr = eth_hdr(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (ntohs(ethhdr->h_proto)) {
 	case ETH_P_8021Q:
 		vhdr = (struct vlan_ethhdr *)skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vid = ntohs(vhdr->h_vlan_TCI) & VLAN_VID_MASK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -554,11 +634,14 @@ void batadv_interface_rx(struct net_device *soft_iface,
 	if (orig_node)
 		batadv_tt_add_temporary_global_entry(bat_priv, orig_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						     ethhdr->h_source);
 
 	if (batadv_is_ap_isolated(bat_priv, ethhdr->h_source, ethhdr->h_dest))
 		goto dropped;
 =======
+=======
+>>>>>>> v3.18
 						     ethhdr->h_source, vid);
 
 	if (is_multicast_ether_addr(ethhdr->h_dest)) {
@@ -578,6 +661,9 @@ void batadv_interface_rx(struct net_device *soft_iface,
 					 ethhdr->h_dest, vid)) {
 		goto dropped;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	netif_rx(skb);
@@ -590,7 +676,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_softif_vlan_free_ref - decrease the vlan object refcounter and
  *  possibly free it
@@ -794,6 +883,9 @@ static int batadv_interface_kill_vid(struct net_device *dev, __be16 proto,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* batman-adv network devices have devices nesting below it and are a special
  * "super class" of normal network devices; split their locks off into a
@@ -835,6 +927,10 @@ static void batadv_set_lockdep_class(struct net_device *dev)
 static void batadv_softif_destroy_finish(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct batadv_softif_vlan *vlan;
+>>>>>>> v3.18
 =======
 	struct batadv_softif_vlan *vlan;
 >>>>>>> v3.18
@@ -846,12 +942,15 @@ static void batadv_softif_destroy_finish(struct work_struct *work)
 	soft_iface = bat_priv->soft_iface;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	batadv_sysfs_del_meshif(soft_iface);
 
 	rtnl_lock();
 	unregister_netdevice(soft_iface);
 	rtnl_unlock();
 =======
+=======
+>>>>>>> v3.18
 	/* destroy the "untagged" VLAN */
 	vlan = batadv_softif_vlan_get(bat_priv, BATADV_NO_FLAGS);
 	if (vlan) {
@@ -861,6 +960,9 @@ static void batadv_softif_destroy_finish(struct work_struct *work)
 
 	batadv_sysfs_del_meshif(soft_iface);
 	unregister_netdev(soft_iface);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -874,6 +976,10 @@ static int batadv_softif_init_late(struct net_device *dev)
 {
 	struct batadv_priv *bat_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t random_seqno;
+>>>>>>> v3.18
 =======
 	uint32_t random_seqno;
 >>>>>>> v3.18
@@ -902,12 +1008,15 @@ static int batadv_softif_init_late(struct net_device *dev)
 	atomic_set(&bat_priv->distributed_arp_table, 1);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&bat_priv->ap_isolation, 0);
 	atomic_set(&bat_priv->vis_mode, BATADV_VIS_TYPE_CLIENT_UPDATE);
 	atomic_set(&bat_priv->gw_mode, BATADV_GW_MODE_OFF);
 	atomic_set(&bat_priv->gw_sel_class, 20);
 	atomic_set(&bat_priv->gw_bandwidth, 41);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BATMAN_ADV_MCAST
 	bat_priv->mcast.flags = BATADV_NO_FLAGS;
 	atomic_set(&bat_priv->multicast_mode, 1);
@@ -920,6 +1029,9 @@ static int batadv_softif_init_late(struct net_device *dev)
 	atomic_set(&bat_priv->gw_sel_class, 20);
 	atomic_set(&bat_priv->gw.bandwidth_down, 100);
 	atomic_set(&bat_priv->gw.bandwidth_up, 20);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_set(&bat_priv->orig_interval, 1000);
 	atomic_set(&bat_priv->hop_penalty, 30);
@@ -928,6 +1040,10 @@ static int batadv_softif_init_late(struct net_device *dev)
 #endif
 	atomic_set(&bat_priv->fragmentation, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_set(&bat_priv->packet_size_max, ETH_DATA_LEN);
+>>>>>>> v3.18
 =======
 	atomic_set(&bat_priv->packet_size_max, ETH_DATA_LEN);
 >>>>>>> v3.18
@@ -945,13 +1061,19 @@ static int batadv_softif_init_late(struct net_device *dev)
 	bat_priv->tt.last_changeset = NULL;
 	bat_priv->tt.last_changeset_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bat_priv->isolation_mark = 0;
 	bat_priv->isolation_mark_mask = 0;
 
 	/* randomize initial seqno to avoid collision */
 	get_random_bytes(&random_seqno, sizeof(random_seqno));
 	atomic_set(&bat_priv->frag_seqno, random_seqno);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bat_priv->primary_if = NULL;
@@ -1040,14 +1162,20 @@ static const struct net_device_ops batadv_netdev_ops = {
 	.ndo_stop = batadv_interface_release,
 	.ndo_get_stats = batadv_interface_stats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ndo_set_mac_address = batadv_interface_set_mac_addr,
 	.ndo_change_mtu = batadv_interface_change_mtu,
 =======
+=======
+>>>>>>> v3.18
 	.ndo_vlan_rx_add_vid = batadv_interface_add_vid,
 	.ndo_vlan_rx_kill_vid = batadv_interface_kill_vid,
 	.ndo_set_mac_address = batadv_interface_set_mac_addr,
 	.ndo_change_mtu = batadv_interface_change_mtu,
 	.ndo_set_rx_mode = batadv_interface_set_rx_mode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ndo_start_xmit = batadv_interface_tx,
 	.ndo_validate_addr = eth_validate_addr,
@@ -1086,6 +1214,10 @@ static void batadv_softif_init_early(struct net_device *dev)
 	dev->netdev_ops = &batadv_netdev_ops;
 	dev->destructor = batadv_softif_free;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->features |= NETIF_F_HW_VLAN_CTAG_FILTER;
+>>>>>>> v3.18
 =======
 	dev->features |= NETIF_F_HW_VLAN_CTAG_FILTER;
 >>>>>>> v3.18
@@ -1097,7 +1229,11 @@ static void batadv_softif_init_early(struct net_device *dev)
 	dev->mtu = ETH_DATA_LEN;
 	/* reserve more space in the skbuff for our header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->hard_header_len = BATADV_HEADER_LEN;
+=======
+	dev->hard_header_len = batadv_max_header_len();
+>>>>>>> v3.18
 =======
 	dev->hard_header_len = batadv_max_header_len();
 >>>>>>> v3.18
@@ -1106,7 +1242,11 @@ static void batadv_softif_init_early(struct net_device *dev)
 	eth_hw_addr_random(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &batadv_ethtool_ops);
+=======
+	dev->ethtool_ops = &batadv_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &batadv_ethtool_ops;
 >>>>>>> v3.18
@@ -1121,7 +1261,11 @@ struct net_device *batadv_softif_create(const char *name)
 
 	soft_iface = alloc_netdev(sizeof(struct batadv_priv), name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  batadv_softif_init_early);
+=======
+				  NET_NAME_UNKNOWN, batadv_softif_init_early);
+>>>>>>> v3.18
 =======
 				  NET_NAME_UNKNOWN, batadv_softif_init_early);
 >>>>>>> v3.18
@@ -1246,13 +1390,19 @@ static const struct {
 	{ "mgmt_rx" },
 	{ "mgmt_rx_bytes" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ "frag_tx" },
 	{ "frag_tx_bytes" },
 	{ "frag_rx" },
 	{ "frag_rx_bytes" },
 	{ "frag_fwd" },
 	{ "frag_fwd_bytes" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "tt_request_tx" },
 	{ "tt_request_rx" },

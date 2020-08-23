@@ -59,6 +59,10 @@ int rtas_read_config(struct pci_dn *, int where, int size, u32 *val);
 void eeh_pe_state_mark(struct eeh_pe *pe, int state);
 void eeh_pe_state_clear(struct eeh_pe *pe, int state);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void eeh_pe_dev_mode_mark(struct eeh_pe *pe, int mode);
+>>>>>>> v3.18
 =======
 void eeh_pe_dev_mode_mark(struct eeh_pe *pe, int mode);
 >>>>>>> v3.18

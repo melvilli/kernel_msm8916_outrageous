@@ -66,7 +66,11 @@ void arch_task_cache_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit init_thread_xstate(void)
+=======
+void init_thread_xstate(void)
+>>>>>>> v3.18
 =======
 void init_thread_xstate(void)
 >>>>>>> v3.18

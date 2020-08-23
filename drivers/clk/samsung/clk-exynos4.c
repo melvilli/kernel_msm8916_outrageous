@@ -11,6 +11,10 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/clock/exynos4.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/clock/exynos4.h>
 >>>>>>> v3.18
@@ -20,9 +24,15 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "clk.h"
 #include "clk-pll.h"
+=======
+#include <linux/syscore_ops.h>
+
+#include "clk.h"
+>>>>>>> v3.18
 =======
 #include <linux/syscore_ops.h>
 
@@ -35,6 +45,10 @@
 #define GATE_IP_LEFTBUS		0x4800
 #define E4X12_GATE_IP_IMAGE	0x4930
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLKOUT_CMU_LEFTBUS	0x4a00
+>>>>>>> v3.18
 =======
 #define CLKOUT_CMU_LEFTBUS	0x4a00
 >>>>>>> v3.18
@@ -43,6 +57,10 @@
 #define GATE_IP_RIGHTBUS	0x8800
 #define E4X12_GATE_IP_PERIR	0x8960
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLKOUT_CMU_RIGHTBUS	0x8a00
+>>>>>>> v3.18
 =======
 #define CLKOUT_CMU_RIGHTBUS	0x8a00
 >>>>>>> v3.18
@@ -116,6 +134,11 @@
 #define E4210_GATE_IP_PERIR	0xc960
 #define GATE_BLOCK		0xc970
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLKOUT_CMU_TOP		0xca00
+#define E4X12_MPLL_LOCK		0x10008
+>>>>>>> v3.18
 =======
 #define CLKOUT_CMU_TOP		0xca00
 #define E4X12_MPLL_LOCK		0x10008
@@ -127,6 +150,12 @@
 #define DIV_DMC1		0x10504
 #define GATE_IP_DMC		0x10900
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLKOUT_CMU_DMC		0x10a00
+#define APLL_LOCK		0x14000
+#define E4210_MPLL_LOCK		0x14008
+>>>>>>> v3.18
 =======
 #define CLKOUT_CMU_DMC		0x10a00
 #define APLL_LOCK		0x14000
@@ -140,6 +169,12 @@
 #define GATE_SCLK_CPU		0x14800
 #define GATE_IP_CPU		0x14900
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLKOUT_CMU_CPU		0x14a00
+#define PWR_CTRL1		0x15020
+#define E4X12_PWR_CTRL2		0x15024
+>>>>>>> v3.18
 =======
 #define CLKOUT_CMU_CPU		0x14a00
 #define PWR_CTRL1		0x15020
@@ -151,7 +186,10 @@
 #define E4X12_GATE_ISP1		0x18804
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Below definitions are used for PWR_CTRL settings */
 #define PWR_CTRL1_CORE2_DOWN_RATIO(x)		(((x) & 0x7) << 28)
 #define PWR_CTRL1_CORE1_DOWN_RATIO(x)		(((x) & 0x7) << 16)
@@ -166,6 +204,9 @@
 #define PWR_CTRL1_USE_CORE1_WFI			(1 << 1)
 #define PWR_CTRL1_USE_CORE0_WFI			(1 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* the exynos4 soc type */
 enum exynos4_soc {
@@ -173,6 +214,7 @@ enum exynos4_soc {
 	EXYNOS4X12,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Let each supported clock get a unique id. This id is used to lookup the clock
@@ -236,6 +278,8 @@ enum exynos4_clks {
 	nr_clks,
 };
 =======
+=======
+>>>>>>> v3.18
 /* list of PLLs to be registered */
 enum exynos4_plls {
 	apll, mpll, epll, vpll,
@@ -252,6 +296,9 @@ static enum exynos4_soc exynos4_soc;
 static struct samsung_clk_reg_dump *exynos4_save_common;
 static struct samsung_clk_reg_dump *exynos4_save_soc;
 static struct samsung_clk_reg_dump *exynos4_save_pll;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -259,7 +306,11 @@ static struct samsung_clk_reg_dump *exynos4_save_pll;
  * suspend/resume cycle.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata unsigned long exynos4210_clk_save[] = {
+=======
+static unsigned long exynos4210_clk_save[] __initdata = {
+>>>>>>> v3.18
 =======
 static unsigned long exynos4210_clk_save[] __initdata = {
 >>>>>>> v3.18
@@ -272,14 +323,20 @@ static unsigned long exynos4210_clk_save[] __initdata = {
 	E4210_GATE_IP_PERIR,
 	E4210_MPLL_CON0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static __initdata unsigned long exynos4x12_clk_save[] = {
 =======
+=======
+>>>>>>> v3.18
 	PWR_CTRL1,
 };
 
 static unsigned long exynos4x12_clk_save[] __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	E4X12_GATE_IP_IMAGE,
 	E4X12_GATE_IP_PERIR,
@@ -287,6 +344,7 @@ static unsigned long exynos4x12_clk_save[] __initdata = {
 	E4X12_DIV_ISP,
 	E4X12_DIV_CAM1,
 	E4X12_MPLL_CON0,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -298,6 +356,8 @@ static __initdata unsigned long exynos4_clk_regs[] = {
 	DIV_RIGHTBUS,
 	GATE_IP_RIGHTBUS,
 =======
+=======
+>>>>>>> v3.18
 	PWR_CTRL1,
 	E4X12_PWR_CTRL2,
 };
@@ -305,6 +365,9 @@ static __initdata unsigned long exynos4_clk_regs[] = {
 static unsigned long exynos4_clk_pll_regs[] __initdata = {
 	EPLL_LOCK,
 	VPLL_LOCK,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EPLL_CON0,
 	EPLL_CON1,
@@ -313,7 +376,10 @@ static unsigned long exynos4_clk_pll_regs[] __initdata = {
 	VPLL_CON1,
 	VPLL_CON2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 };
 
 static unsigned long exynos4_clk_regs[] __initdata = {
@@ -323,6 +389,9 @@ static unsigned long exynos4_clk_regs[] __initdata = {
 	SRC_RIGHTBUS,
 	DIV_RIGHTBUS,
 	GATE_IP_RIGHTBUS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SRC_TOP0,
 	SRC_TOP1,
@@ -383,9 +452,12 @@ static unsigned long exynos4_clk_regs[] __initdata = {
 	GATE_SCLK_CPU,
 	GATE_IP_CPU,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	CLKOUT_CMU_LEFTBUS,
 	CLKOUT_CMU_RIGHTBUS,
 	CLKOUT_CMU_TOP,
@@ -511,6 +583,9 @@ err_warn:
 static void __init exynos4_clk_sleep_init(void) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* list of all parent clock list */
 PNAME(mout_apll_p)	= { "fin_pll", "fout_apll", };
@@ -548,7 +623,10 @@ PNAME(mout_audio2_p4210) = { "cdclk2", "none", "sclk_hdmi24m",
 PNAME(mout_mixer_p4210)	= { "sclk_dac", "sclk_hdmi", };
 PNAME(mout_dac_p4210)	= { "sclk_vpll", "sclk_hdmiphy", };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 PNAME(mout_pwi_p4210) = { "xxti", "xusbxti", "sclk_hdmi24m", "sclk_usbphy0",
 				"sclk_usbphy1", "sclk_hdmiphy", "none",
 				"sclk_epll", "sclk_vpll" };
@@ -569,12 +647,20 @@ PNAME(clkout_cpu_p4210) = { "fout_apll_div_2", "none", "fout_mpll_div_2",
 				"none", "arm_clk_div_2", "div_corem0",
 				"div_corem1", "div_corem0", "div_atb",
 				"div_periph", "div_pclk_dbg", "div_hpm" };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Exynos 4x12-specific parent groups */
 PNAME(mout_mpll_user_p4x12) = { "fin_pll", "sclk_mpll", };
 PNAME(mout_core_p4x12)	= { "mout_apll", "mout_mpll_user_c", };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+PNAME(mout_gdl_p4x12)	= { "mout_mpll_user_l", "sclk_apll", };
+PNAME(mout_gdr_p4x12)	= { "mout_mpll_user_r", "sclk_apll", };
+>>>>>>> v3.18
 =======
 PNAME(mout_gdl_p4x12)	= { "mout_mpll_user_l", "sclk_apll", };
 PNAME(mout_gdr_p4x12)	= { "mout_mpll_user_r", "sclk_apll", };
@@ -596,6 +682,7 @@ PNAME(aclk_p4412)	= { "mout_mpll_user_t", "sclk_apll", };
 PNAME(mout_user_aclk400_mcuisp_p4x12) = {"fin_pll", "div_aclk400_mcuisp", };
 PNAME(mout_user_aclk200_p4x12) = {"fin_pll", "div_aclk200", };
 PNAME(mout_user_aclk266_gps_p4x12) = {"fin_pll", "div_aclk266_gps", };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* fixed rate clocks generated outside the soc */
@@ -819,6 +906,8 @@ struct samsung_div_clock exynos4210_div_clks[] __initdata = {
 	DIV(none, "div_sata", "mout_sata", DIV_FSYS0, 20, 4),
 	DIV_F(none, "div_mipi_pre1", "div_mipi1", E4210_DIV_LCD1, 20, 4,
 =======
+=======
+>>>>>>> v3.18
 PNAME(mout_pwi_p4x12) = { "xxti", "xusbxti", "sclk_hdmi24m", "sclk_usbphy0",
 				"none", "sclk_hdmiphy", "sclk_mpll",
 				"sclk_epll", "sclk_vpll" };
@@ -1149,11 +1238,15 @@ static struct samsung_div_clock exynos4210_div_clks[] __initdata = {
 	DIV(0, "div_mipi1", "mout_mipi1", E4210_DIV_LCD1, 16, 4),
 	DIV(0, "div_sata", "mout_sata", DIV_FSYS0, 20, 4),
 	DIV_F(0, "div_mipi_pre1", "div_mipi1", E4210_DIV_LCD1, 20, 4,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			CLK_SET_RATE_PARENT, 0),
 };
 
 /* list of divider clocks supported in exynos4x12 soc */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct samsung_div_clock exynos4x12_div_clks[] __initdata = {
 	DIV(none, "div_mdnie0", "mout_mdnie0", DIV_LCD0, 4, 4),
@@ -1181,6 +1274,8 @@ struct samsung_div_clock exynos4x12_div_clks[] __initdata = {
 /* list of gate clocks supported in all exynos4 soc's */
 struct samsung_gate_clock exynos4_gate_clks[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_div_clock exynos4x12_div_clks[] __initdata = {
 	DIV(0, "div_mdnie0", "mout_mdnie0", DIV_LCD0, 4, 4),
 	DIV(0, "div_mdnie_pwm0", "mout_mdnie_pwm0", DIV_LCD0, 8, 4),
@@ -1213,12 +1308,16 @@ static struct samsung_div_clock exynos4x12_div_clks[] __initdata = {
 
 /* list of gate clocks supported in all exynos4 soc's */
 static struct samsung_gate_clock exynos4_gate_clks[] __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * After all Exynos4 based platforms are migrated to use device tree,
 	 * the device name and clock alias names specified below for some
 	 * of the clocks can be removed.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	GATE(sclk_hdmi, "sclk_hdmi", "mout_hdmi", SRC_MASK_TV, 0, 0, 0),
 	GATE(sclk_spdif, "sclk_spdif", "mout_spdif", SRC_MASK_PERIL1, 8, 0, 0),
@@ -1539,6 +1638,8 @@ struct samsung_gate_clock exynos4x12_gate_clks[] __initdata = {
 	GATE(spi1_isp, "spi1_isp", "aclk200", E4X12_GATE_ISP1, 13,
 			CLK_IGNORE_UNUSED, 0),
 =======
+=======
+>>>>>>> v3.18
 	GATE(CLK_PPMULEFT, "ppmuleft", "aclk200", GATE_IP_LEFTBUS, 1, 0, 0),
 	GATE(CLK_PPMURIGHT, "ppmuright", "aclk200", GATE_IP_RIGHTBUS, 1, 0, 0),
 	GATE(CLK_SCLK_HDMI, "sclk_hdmi", "mout_hdmi", SRC_MASK_TV, 0, 0, 0),
@@ -1896,6 +1997,9 @@ static struct samsung_clock_alias exynos4210_aliases[] __initdata = {
 
 static struct samsung_clock_alias exynos4x12_aliases[] __initdata = {
 	ALIAS(CLK_MOUT_MPLL_USER_C, NULL, "mout_mpll"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1926,7 +2030,11 @@ static unsigned long exynos4_get_xom(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init exynos4_clk_register_finpll(unsigned long xom)
+=======
+static void __init exynos4_clk_register_finpll(struct samsung_clk_provider *ctx)
+>>>>>>> v3.18
 =======
 static void __init exynos4_clk_register_finpll(struct samsung_clk_provider *ctx)
 >>>>>>> v3.18
@@ -1936,6 +2044,10 @@ static void __init exynos4_clk_register_finpll(struct samsung_clk_provider *ctx)
 	unsigned long finpll_f = 24000000;
 	char *parent_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int xom = exynos4_get_xom();
+>>>>>>> v3.18
 =======
 	unsigned int xom = exynos4_get_xom();
 >>>>>>> v3.18
@@ -1951,7 +2063,11 @@ static void __init exynos4_clk_register_finpll(struct samsung_clk_provider *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fclk.id = fin_pll;
+=======
+	fclk.id = CLK_FIN_PLL;
+>>>>>>> v3.18
 =======
 	fclk.id = CLK_FIN_PLL;
 >>>>>>> v3.18
@@ -1959,6 +2075,7 @@ static void __init exynos4_clk_register_finpll(struct samsung_clk_provider *ctx)
 	fclk.parent_name = NULL;
 	fclk.flags = CLK_IS_ROOT;
 	fclk.fixed_rate = finpll_f;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	samsung_clk_register_fixed_rate(&fclk, 1);
 
@@ -1980,17 +2097,23 @@ void __init exynos4_clk_register_fixed_ext(unsigned long xxti_f,
 
 static __initdata struct of_device_id ext_clk_match[] = {
 =======
+=======
+>>>>>>> v3.18
 	samsung_clk_register_fixed_rate(ctx, &fclk, 1);
 
 }
 
 static const struct of_device_id ext_clk_match[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "samsung,clock-xxti", .data = (void *)0, },
 	{ .compatible = "samsung,clock-xusbxti", .data = (void *)1, },
 	{},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* register exynos4 clocks */
 void __init exynos4_clk_init(struct device_node *np, enum exynos4_soc exynos4_soc, void __iomem *reg_base, unsigned long xom)
@@ -2072,6 +2195,8 @@ void __init exynos4_clk_init(struct device_node *np, enum exynos4_soc exynos4_so
 	}
 
 =======
+=======
+>>>>>>> v3.18
 /* PLLs PMS values */
 static struct samsung_pll_rate_table exynos4210_apll_rates[] __initdata = {
 	PLL_45XX_RATE(1200000000, 150,  3, 1, 28),
@@ -2293,6 +2418,9 @@ static void __init exynos4_clk_init(struct device_node *np,
 
 	samsung_clk_of_add_provider(np, ctx);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("%s clocks: sclk_apll = %ld, sclk_mpll = %ld\n"
 		"\tsclk_epll = %ld, sclk_vpll = %ld, arm_clk = %ld\n",
@@ -2300,7 +2428,11 @@ static void __init exynos4_clk_init(struct device_node *np,
 		_get_rate("sclk_apll"),	_get_rate("sclk_mpll"),
 		_get_rate("sclk_epll"), _get_rate("sclk_vpll"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_get_rate("arm_clk"));
+=======
+		_get_rate("div_core2"));
+>>>>>>> v3.18
 =======
 		_get_rate("div_core2"));
 >>>>>>> v3.18
@@ -2310,7 +2442,11 @@ static void __init exynos4_clk_init(struct device_node *np,
 static void __init exynos4210_clk_init(struct device_node *np)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exynos4_clk_init(np, EXYNOS4210, NULL, exynos4_get_xom());
+=======
+	exynos4_clk_init(np, EXYNOS4210);
+>>>>>>> v3.18
 =======
 	exynos4_clk_init(np, EXYNOS4210);
 >>>>>>> v3.18
@@ -2320,7 +2456,11 @@ CLK_OF_DECLARE(exynos4210_clk, "samsung,exynos4210-clock", exynos4210_clk_init);
 static void __init exynos4412_clk_init(struct device_node *np)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exynos4_clk_init(np, EXYNOS4X12, NULL, exynos4_get_xom());
+=======
+	exynos4_clk_init(np, EXYNOS4X12);
+>>>>>>> v3.18
 =======
 	exynos4_clk_init(np, EXYNOS4X12);
 >>>>>>> v3.18

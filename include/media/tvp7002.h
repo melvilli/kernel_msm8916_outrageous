@@ -27,6 +27,7 @@
 #define _TVP7002_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Platform-dependent data
  *
  * clk_polarity:
@@ -54,6 +55,8 @@ struct tvp7002_config {
 	u8 fid_polarity;
 	u8 sog_polarity;
 =======
+=======
+>>>>>>> v3.18
 #define TVP7002_MODULE_NAME "tvp7002"
 
 /**
@@ -78,6 +81,9 @@ struct tvp7002_config {
 	bool vs_polarity;
 	bool fid_polarity;
 	bool sog_polarity;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #endif

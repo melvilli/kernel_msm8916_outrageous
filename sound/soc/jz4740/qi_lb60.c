@@ -20,33 +20,45 @@
 #include <sound/pcm.h>
 #include <sound/soc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 
 #define QI_LB60_SND_GPIO JZ_GPIO_PORTB(29)
 #define QI_LB60_AMP_GPIO JZ_GPIO_PORTD(4)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/gpio/consumer.h>
 
 struct qi_lb60 {
 	struct gpio_desc *snd_gpio;
 	struct gpio_desc *amp_gpio;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int qi_lb60_spk_event(struct snd_soc_dapm_widget *widget,
 			     struct snd_kcontrol *ctrl, int event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int on = !SND_SOC_DAPM_EVENT_OFF(event);
 
 	gpio_set_value(QI_LB60_SND_GPIO, on);
 	gpio_set_value(QI_LB60_AMP_GPIO, on);
 =======
+=======
+>>>>>>> v3.18
 	struct qi_lb60 *qi_lb60 = snd_soc_card_get_drvdata(widget->dapm->card);
 	int on = !SND_SOC_DAPM_EVENT_OFF(event);
 
 	gpiod_set_value_cansleep(qi_lb60->snd_gpio, on);
 	gpiod_set_value_cansleep(qi_lb60->amp_gpio, on);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -63,6 +75,7 @@ static const struct snd_soc_dapm_route qi_lb60_routes[] = {
 	{"Speaker", NULL, "ROUT"},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define QI_LB60_DAIFMT (SND_SOC_DAIFMT_I2S | \
 			SND_SOC_DAIFMT_NB_NF | \
@@ -89,10 +102,13 @@ static int qi_lb60_codec_init(struct snd_soc_pcm_runtime *rtd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct snd_soc_dai_link qi_lb60_dai = {
 	.name = "jz4740",
 	.stream_name = "jz4740",
 	.cpu_dai_name = "jz4740-i2s",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.platform_name = "jz4740-pcm-audio",
 	.codec_dai_name = "jz4740-hifi",
@@ -102,6 +118,8 @@ static struct snd_soc_dai_link qi_lb60_dai = {
 
 static struct snd_soc_card qi_lb60 = {
 =======
+=======
+>>>>>>> v3.18
 	.platform_name = "jz4740-i2s",
 	.codec_dai_name = "jz4740-hifi",
 	.codec_name = "jz4740-codec",
@@ -110,6 +128,9 @@ static struct snd_soc_card qi_lb60 = {
 };
 
 static struct snd_soc_card qi_lb60_card = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name = "QI LB60",
 	.owner = THIS_MODULE,
@@ -121,6 +142,7 @@ static struct snd_soc_card qi_lb60_card = {
 	.dapm_routes = qi_lb60_routes,
 	.num_dapm_routes = ARRAY_SIZE(qi_lb60_routes),
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct gpio qi_lb60_gpios[] = {
@@ -129,10 +151,14 @@ static const struct gpio qi_lb60_gpios[] = {
 =======
 	.fully_routed = true,
 >>>>>>> v3.18
+=======
+	.fully_routed = true,
+>>>>>>> v3.18
 };
 
 static int qi_lb60_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_card *card = &qi_lb60;
 	int ret;
@@ -160,6 +186,8 @@ static int qi_lb60_remove(struct platform_device *pdev)
 	gpio_free_array(qi_lb60_gpios, ARRAY_SIZE(qi_lb60_gpios));
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct qi_lb60 *qi_lb60;
 	struct snd_soc_card *card = &qi_lb60_card;
 	int ret;
@@ -187,6 +215,9 @@ static int qi_lb60_remove(struct platform_device *pdev)
 	snd_soc_card_set_drvdata(card, qi_lb60);
 
 	return devm_snd_soc_register_card(&pdev->dev, card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -197,7 +228,10 @@ static struct platform_driver qi_lb60_driver = {
 	},
 	.probe		= qi_lb60_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= qi_lb60_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

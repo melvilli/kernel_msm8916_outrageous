@@ -9,6 +9,10 @@
  * Copyright (c) 2008 Silicon Graphics Inc.  All Rights Reserved.
  * Copyright (C) 2011 Bart Van Assche.  All Rights Reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 Du, Changbin <changbin.du@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Du, Changbin <changbin.du@gmail.com>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 #include <linux/ctype.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/parser.h>
+>>>>>>> v3.18
 =======
 #include <linux/parser.h>
 >>>>>>> v3.18
@@ -156,7 +164,12 @@ static int ddebug_change(const struct ddebug_query *query,
 
 		/* match against the module name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (query->module && strcmp(query->module, dt->mod_name))
+=======
+		if (query->module &&
+		    !match_wildcard(query->module, dt->mod_name))
+>>>>>>> v3.18
 =======
 		if (query->module &&
 		    !match_wildcard(query->module, dt->mod_name))
@@ -169,22 +182,32 @@ static int ddebug_change(const struct ddebug_query *query,
 			/* match against the source filename */
 			if (query->filename &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    strcmp(query->filename, dp->filename) &&
 			    strcmp(query->filename, kbasename(dp->filename)) &&
 			    strcmp(query->filename, trim_prefix(dp->filename)))
 =======
+=======
+>>>>>>> v3.18
 			    !match_wildcard(query->filename, dp->filename) &&
 			    !match_wildcard(query->filename,
 					   kbasename(dp->filename)) &&
 			    !match_wildcard(query->filename,
 					   trim_prefix(dp->filename)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 
 			/* match against the function */
 			if (query->function &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    strcmp(query->function, dp->function))
+=======
+			    !match_wildcard(query->function, dp->function))
+>>>>>>> v3.18
 =======
 			    !match_wildcard(query->function, dp->function))
 >>>>>>> v3.18
@@ -289,7 +312,10 @@ static int ddebug_tokenize(char *buf, char *words[], int maxwords)
 static inline int parse_lineno(const char *str, unsigned int *val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *end = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(str == NULL);
@@ -298,8 +324,12 @@ static inline int parse_lineno(const char *str, unsigned int *val)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*val = simple_strtoul(str, &end, 10);
 	if (end == NULL || end == str || *end != '\0') {
+=======
+	if (kstrtouint(str, 10, val) < 0) {
+>>>>>>> v3.18
 =======
 	if (kstrtouint(str, 10, val) < 0) {
 >>>>>>> v3.18
@@ -342,7 +372,11 @@ static int ddebug_parse_query(char *words[], int nwords,
 {
 	unsigned int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+	int rc = 0;
+>>>>>>> v3.18
 =======
 	int rc = 0;
 >>>>>>> v3.18
@@ -380,6 +414,7 @@ static int ddebug_parse_query(char *words[], int nwords,
 			if (last)
 				*last++ = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (parse_lineno(first, &query->first_lineno) < 0) {
 				pr_err("line-number is <0\n");
 				return -EINVAL;
@@ -389,6 +424,8 @@ static int ddebug_parse_query(char *words[], int nwords,
 				if (parse_lineno(last, &query->last_lineno)
 				    < query->first_lineno) {
 =======
+=======
+>>>>>>> v3.18
 			if (parse_lineno(first, &query->first_lineno) < 0)
 				return -EINVAL;
 			if (last) {
@@ -397,6 +434,9 @@ static int ddebug_parse_query(char *words[], int nwords,
 					return -EINVAL;
 
 				if (query->last_lineno < query->first_lineno) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					pr_err("last-line:%d < 1st-line:%d\n",
 						query->last_lineno,
@@ -582,10 +622,16 @@ static char *dynamic_emit_prefix(const struct _ddebug *desc, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...)
 {
 	va_list args;
 	int res;
+=======
+void __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...)
+{
+	va_list args;
+>>>>>>> v3.18
 =======
 void __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...)
 {
@@ -603,6 +649,7 @@ void __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...)
 	vaf.va = &args;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = printk(KERN_DEBUG "%s%pV",
 		     dynamic_emit_prefix(descriptor, buf), &vaf);
 
@@ -614,6 +661,8 @@ EXPORT_SYMBOL(__dynamic_pr_debug);
 
 int __dynamic_dev_dbg(struct _ddebug *descriptor,
 =======
+=======
+>>>>>>> v3.18
 	printk(KERN_DEBUG "%s%pV", dynamic_emit_prefix(descriptor, buf), &vaf);
 
 	va_end(args);
@@ -621,13 +670,19 @@ int __dynamic_dev_dbg(struct _ddebug *descriptor,
 EXPORT_SYMBOL(__dynamic_pr_debug);
 
 void __dynamic_dev_dbg(struct _ddebug *descriptor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		      const struct device *dev, const char *fmt, ...)
 {
 	struct va_format vaf;
 	va_list args;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -640,6 +695,7 @@ void __dynamic_dev_dbg(struct _ddebug *descriptor,
 	vaf.va = &args;
 
 	if (!dev) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		res = printk(KERN_DEBUG "(NULL device *): %pV", &vaf);
 	} else {
@@ -655,6 +711,8 @@ void __dynamic_dev_dbg(struct _ddebug *descriptor,
 
 	return res;
 =======
+=======
+>>>>>>> v3.18
 		printk(KERN_DEBUG "(NULL device *): %pV", &vaf);
 	} else {
 		char buf[PREFIX_SIZE];
@@ -666,12 +724,16 @@ void __dynamic_dev_dbg(struct _ddebug *descriptor,
 	}
 
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(__dynamic_dev_dbg);
 
 #ifdef CONFIG_NET
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __dynamic_netdev_dbg(struct _ddebug *descriptor,
 			 const struct net_device *dev, const char *fmt, ...)
@@ -680,11 +742,16 @@ int __dynamic_netdev_dbg(struct _ddebug *descriptor,
 	va_list args;
 	int res;
 =======
+=======
+>>>>>>> v3.18
 void __dynamic_netdev_dbg(struct _ddebug *descriptor,
 			  const struct net_device *dev, const char *fmt, ...)
 {
 	struct va_format vaf;
 	va_list args;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!descriptor);
@@ -698,6 +765,7 @@ void __dynamic_netdev_dbg(struct _ddebug *descriptor,
 	if (dev && dev->dev.parent) {
 		char buf[PREFIX_SIZE];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		res = dev_printk_emit(7, dev->dev.parent,
 				      "%s%s %s %s: %pV",
@@ -715,6 +783,8 @@ void __dynamic_netdev_dbg(struct _ddebug *descriptor,
 
 	return res;
 =======
+=======
+>>>>>>> v3.18
 		dev_printk_emit(7, dev->dev.parent,
 				"%s%s %s %s%s: %pV",
 				dynamic_emit_prefix(descriptor, buf),
@@ -730,6 +800,9 @@ void __dynamic_netdev_dbg(struct _ddebug *descriptor,
 	}
 
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(__dynamic_netdev_dbg);
@@ -931,6 +1004,7 @@ static const struct seq_operations ddebug_proc_seqops = {
 static int ddebug_proc_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ddebug_iter *iter;
 	int err;
 
@@ -947,6 +1021,11 @@ static int ddebug_proc_open(struct inode *inode, struct file *file)
 	}
 	((struct seq_file *)file->private_data)->private = iter;
 	return 0;
+=======
+	vpr_info("called\n");
+	return seq_open_private(file, &ddebug_proc_seqops,
+				sizeof(struct ddebug_iter));
+>>>>>>> v3.18
 =======
 	vpr_info("called\n");
 	return seq_open_private(file, &ddebug_proc_seqops,

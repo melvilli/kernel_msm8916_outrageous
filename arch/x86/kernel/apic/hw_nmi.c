@@ -34,23 +34,30 @@ static DECLARE_BITMAP(backtrace_mask, NR_CPUS) __read_mostly;
 static unsigned long backtrace_flag;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void arch_trigger_all_cpu_backtrace(void)
 {
 	int i;
 
 	if (test_and_set_bit(0, &backtrace_flag))
 =======
+=======
+>>>>>>> v3.18
 void arch_trigger_all_cpu_backtrace(bool include_self)
 {
 	int i;
 	int cpu = get_cpu();
 
 	if (test_and_set_bit(0, &backtrace_flag)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * If there is already a trigger_all_cpu_backtrace() in progress
 		 * (backtrace_flag == 1), don't output double cpu dump infos.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -59,6 +66,8 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 	printk(KERN_INFO "sending NMI to all CPUs:\n");
 	apic->send_IPI_all(NMI_VECTOR);
 =======
+=======
+>>>>>>> v3.18
 		put_cpu();
 		return;
 	}
@@ -72,6 +81,9 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 			(include_self ? "all" : "other"));
 		apic->send_IPI_mask(to_cpumask(backtrace_mask), NMI_VECTOR);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Wait for up to 10 seconds for all CPUs to do the backtrace */
@@ -79,6 +91,7 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 		if (cpumask_empty(to_cpumask(backtrace_mask)))
 			break;
 		mdelay(1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -88,6 +101,8 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 
 static int __kprobes
 =======
+=======
+>>>>>>> v3.18
 		touch_softlockup_watchdog();
 	}
 
@@ -97,6 +112,9 @@ static int __kprobes
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 arch_trigger_all_cpu_backtrace_handler(unsigned int cmd, struct pt_regs *regs)
 {
@@ -118,6 +136,10 @@ arch_trigger_all_cpu_backtrace_handler(unsigned int cmd, struct pt_regs *regs)
 	return NMI_DONE;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(arch_trigger_all_cpu_backtrace_handler);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(arch_trigger_all_cpu_backtrace_handler);
 >>>>>>> v3.18

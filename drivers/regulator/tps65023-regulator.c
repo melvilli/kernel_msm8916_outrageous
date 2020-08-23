@@ -212,9 +212,12 @@ static int tps_65023_probe(struct i2c_client *client,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -EIO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/**
@@ -222,7 +225,11 @@ static int tps_65023_probe(struct i2c_client *client,
 	 * coming from the board-evm file.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_data = client->dev.platform_data;
+=======
+	init_data = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	init_data = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -285,6 +292,7 @@ static int tps_65023_probe(struct i2c_client *client,
 
 		/* Register the regulators */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev = regulator_register(&tps->desc[i], &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&client->dev, "failed to register %s\n",
@@ -292,12 +300,17 @@ static int tps_65023_probe(struct i2c_client *client,
 			error = PTR_ERR(rdev);
 			goto fail;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&client->dev, &tps->desc[i],
 					       &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&client->dev, "failed to register %s\n",
 				id->name);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -309,6 +322,7 @@ static int tps_65023_probe(struct i2c_client *client,
 
 	/* Enable setting output voltage by I2C */
 	regmap_update_bits(tps->regmap, TPS65023_REG_CON_CTRL2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			TPS65023_REG_CTRL2_CORE_ADJ, TPS65023_REG_CTRL2_CORE_ADJ);
 
@@ -327,6 +341,11 @@ static int tps_65023_remove(struct i2c_client *client)
 
 	for (i = 0; i < TPS65023_NUM_REGULATOR; i++)
 		regulator_unregister(tps->rdev[i]);
+=======
+					TPS65023_REG_CTRL2_CORE_ADJ,
+					TPS65023_REG_CTRL2_CORE_ADJ);
+
+>>>>>>> v3.18
 =======
 					TPS65023_REG_CTRL2_CORE_ADJ,
 					TPS65023_REG_CTRL2_CORE_ADJ);
@@ -453,7 +472,10 @@ static struct i2c_driver tps_65023_i2c_driver = {
 	},
 	.probe = tps_65023_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tps_65023_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = tps_65023_id,

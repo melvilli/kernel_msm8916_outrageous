@@ -137,7 +137,10 @@ static unsigned long num_core_regs(void)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ARM64 versions of the TIMER registers, always available on arm64
  */
 
@@ -191,6 +194,9 @@ static int get_timer_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * kvm_arm_num_regs - how many registers do we present via KVM_GET_ONE_REG
  *
@@ -199,7 +205,12 @@ static int get_timer_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 unsigned long kvm_arm_num_regs(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return num_core_regs() + kvm_arm_num_sys_reg_descs(vcpu);
+=======
+	return num_core_regs() + kvm_arm_num_sys_reg_descs(vcpu)
+                + NUM_TIMER_REGS;
+>>>>>>> v3.18
 =======
 	return num_core_regs() + kvm_arm_num_sys_reg_descs(vcpu)
                 + NUM_TIMER_REGS;
@@ -216,6 +227,10 @@ int kvm_arm_copy_reg_indices(struct kvm_vcpu *vcpu, u64 __user *uindices)
 	unsigned int i;
 	const u64 core_reg = KVM_REG_ARM64 | KVM_REG_SIZE_U64 | KVM_REG_ARM_CORE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -227,12 +242,18 @@ int kvm_arm_copy_reg_indices(struct kvm_vcpu *vcpu, u64 __user *uindices)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = copy_timer_indices(vcpu, uindices);
 	if (ret)
 		return ret;
 	uindices += NUM_TIMER_REGS;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return kvm_arm_copy_sys_reg_indices(vcpu, uindices);
 }
@@ -248,6 +269,12 @@ int kvm_arm_get_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 		return get_core_reg(vcpu, reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (is_timer_reg(reg->id))
+		return get_timer_reg(vcpu, reg);
+
+>>>>>>> v3.18
 =======
 	if (is_timer_reg(reg->id))
 		return get_timer_reg(vcpu, reg);
@@ -267,6 +294,12 @@ int kvm_arm_set_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 		return set_core_reg(vcpu, reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (is_timer_reg(reg->id))
+		return set_timer_reg(vcpu, reg);
+
+>>>>>>> v3.18
 =======
 	if (is_timer_reg(reg->id))
 		return set_timer_reg(vcpu, reg);

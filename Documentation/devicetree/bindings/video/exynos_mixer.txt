@@ -2,11 +2,14 @@ Device-Tree bindings for mixer driver
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: value should be "samsung,exynos5-mixer".
 - reg: physical base address of the mixer and length of memory mapped
 	region.
 - interrupts: interrupt number to the cpu.
 =======
+=======
+>>>>>>> v3.18
 - compatible: value should be one of the following:
 	1) "samsung,exynos5-mixer" <DEPRECATED>
 	2) "samsung,exynos4210-mixer"
@@ -21,13 +24,20 @@ Required properties:
 	a) mixer: Gate of Mixer IP bus clock.
 	b) sclk_hdmi: HDMI Special clock, one of the two possible inputs of
                mixer mux.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
 
 	mixer {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos5-mixer";
+=======
+		compatible = "samsung,exynos5250-mixer";
+>>>>>>> v3.18
 =======
 		compatible = "samsung,exynos5250-mixer";
 >>>>>>> v3.18

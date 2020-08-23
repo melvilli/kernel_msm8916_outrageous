@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -152,12 +156,18 @@ void acpi_ut_get_expected_return_types(char *buffer, u32 expected_btypes)
 	u32 j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!expected_btypes) {
 		ACPI_STRCPY(buffer, "NONE");
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	j = 1;
 	buffer[0] = 0;
@@ -341,9 +351,13 @@ static u32 acpi_ut_get_argument_types(char *buffer, u16 argument_types)
 	/* First field in the types list is the count of args to follow */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arg_count = (argument_types & METHOD_ARG_MASK);
 	argument_types >>= METHOD_ARG_BIT_WIDTH;
 
+=======
+	arg_count = METHOD_GET_ARG_COUNT(argument_types);
+>>>>>>> v3.18
 =======
 	arg_count = METHOD_GET_ARG_COUNT(argument_types);
 >>>>>>> v3.18
@@ -357,7 +371,12 @@ static u32 acpi_ut_get_argument_types(char *buffer, u16 argument_types)
 
 	for (i = 0; i < arg_count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this_argument_type = (argument_types & METHOD_ARG_MASK);
+=======
+		this_argument_type = METHOD_GET_NEXT_TYPE(argument_types);
+
+>>>>>>> v3.18
 =======
 		this_argument_type = METHOD_GET_NEXT_TYPE(argument_types);
 
@@ -373,10 +392,13 @@ static u32 acpi_ut_get_argument_types(char *buffer, u16 argument_types)
 		strcat(buffer,
 		       ut_external_type_names[this_argument_type] + sub_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Shift to next argument type field */
 
 		argument_types >>= METHOD_ARG_BIT_WIDTH;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sub_index = 0;

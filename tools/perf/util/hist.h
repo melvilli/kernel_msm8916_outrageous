@@ -5,20 +5,27 @@
 #include <pthread.h>
 #include "callchain.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "header.h"
 
 extern struct callchain_param callchain_param;
 =======
+=======
+>>>>>>> v3.18
 #include "evsel.h"
 #include "header.h"
 #include "color.h"
 #include "ui/progress.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct hist_entry;
 struct addr_location;
 struct symbol;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * The kernel collects the number of events it couldn't send in a stretch and
@@ -44,6 +51,8 @@ struct events_stats {
 	u32 nr_unprocessable_samples;
 	u32 nr_unordered_events;
 =======
+=======
+>>>>>>> v3.18
 enum hist_filter {
 	HIST_FILTER__DSO,
 	HIST_FILTER__THREAD,
@@ -51,6 +60,9 @@ enum hist_filter {
 	HIST_FILTER__SYMBOL,
 	HIST_FILTER__GUEST,
 	HIST_FILTER__HOST,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -62,19 +74,28 @@ enum hist_column {
 	HISTC_PARENT,
 	HISTC_CPU,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HISTC_MISPREDICT,
 =======
+=======
+>>>>>>> v3.18
 	HISTC_SRCLINE,
 	HISTC_MISPREDICT,
 	HISTC_IN_TX,
 	HISTC_ABORT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	HISTC_SYMBOL_FROM,
 	HISTC_SYMBOL_TO,
 	HISTC_DSO_FROM,
 	HISTC_DSO_TO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HISTC_SRCLINE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	HISTC_LOCAL_WEIGHT,
@@ -86,6 +107,11 @@ enum hist_column {
 	HISTC_MEM_LVL,
 	HISTC_MEM_SNOOP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HISTC_MEM_DCACHELINE,
+	HISTC_TRANSACTION,
+>>>>>>> v3.18
 =======
 	HISTC_MEM_DCACHELINE,
 	HISTC_TRANSACTION,
@@ -103,6 +129,10 @@ struct hists {
 	struct rb_root		entries_collapsed;
 	u64			nr_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64			nr_non_filtered_entries;
+>>>>>>> v3.18
 =======
 	u64			nr_non_filtered_entries;
 >>>>>>> v3.18
@@ -116,6 +146,7 @@ struct hists {
 	u16			col_len[HISTC_NR_COLS];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct hist_entry *__hists__add_entry(struct hists *self,
 				      struct addr_location *al,
@@ -162,6 +193,8 @@ size_t hists__fprintf(struct hists *self, bool show_header, int max_rows,
 int hist_entry__inc_addr_samples(struct hist_entry *self, int evidx, u64 addr);
 int hist_entry__annotate(struct hist_entry *self, size_t privsize);
 =======
+=======
+>>>>>>> v3.18
 struct hist_entry_iter;
 
 struct hist_iter_ops {
@@ -231,6 +264,9 @@ size_t events_stats__fprintf(struct events_stats *stats, FILE *fp);
 size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		      int max_cols, float min_pcnt, FILE *fp);
 size_t perf_evlist__fprintf_nr_events(struct perf_evlist *evlist, FILE *fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void hists__filter_by_dso(struct hists *hists);
@@ -238,10 +274,13 @@ void hists__filter_by_thread(struct hists *hists);
 void hists__filter_by_symbol(struct hists *hists);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 hists__col_len(struct hists *self, enum hist_column col);
 void hists__set_col_len(struct hists *self, enum hist_column col, u16 len);
 bool hists__new_col_len(struct hists *self, enum hist_column col, u16 len);
 =======
+=======
+>>>>>>> v3.18
 static inline bool hists__has_filter(struct hists *hists)
 {
 	return hists->thread_filter || hists->dso_filter ||
@@ -251,6 +290,9 @@ static inline bool hists__has_filter(struct hists *hists)
 u16 hists__col_len(struct hists *hists, enum hist_column col);
 void hists__set_col_len(struct hists *hists, enum hist_column col, u16 len);
 bool hists__new_col_len(struct hists *hists, enum hist_column col, u16 len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void hists__reset_col_len(struct hists *hists);
 void hists__calc_col_len(struct hists *hists, struct hist_entry *he);
@@ -259,7 +301,10 @@ void hists__match(struct hists *leader, struct hists *other);
 int hists__link(struct hists *leader, struct hists *other);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct hists_evsel {
 	struct perf_evsel evsel;
 	struct hists	  hists;
@@ -279,6 +324,9 @@ static inline struct hists *evsel__hists(struct perf_evsel *evsel)
 
 int hists__init(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct perf_hpp {
 	char *buf;
@@ -288,6 +336,7 @@ struct perf_hpp {
 };
 
 struct perf_hpp_fmt {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*header)(struct perf_hpp *hpp);
 	int (*width)(struct perf_hpp *hpp);
@@ -299,6 +348,8 @@ struct perf_hpp_fmt {
 
 extern struct list_head perf_hpp__list;
 =======
+=======
+>>>>>>> v3.18
 	const char *name;
 	int (*header)(struct perf_hpp_fmt *fmt, struct perf_hpp *hpp,
 		      struct perf_evsel *evsel);
@@ -321,17 +372,23 @@ extern struct list_head perf_hpp__list;
 
 extern struct list_head perf_hpp__list;
 extern struct list_head perf_hpp__sort_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define perf_hpp__for_each_format(format) \
 	list_for_each_entry(format, &perf_hpp__list, list)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct perf_hpp_fmt perf_hpp__format[];
 
 enum {
 	PERF_HPP__BASELINE,
 =======
+=======
+>>>>>>> v3.18
 #define perf_hpp__for_each_format_safe(format, tmp)	\
 	list_for_each_entry_safe(format, tmp, &perf_hpp__list, list)
 
@@ -345,12 +402,16 @@ extern struct perf_hpp_fmt perf_hpp__format[];
 
 enum {
 	/* Matches perf_hpp__format array. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PERF_HPP__OVERHEAD,
 	PERF_HPP__OVERHEAD_SYS,
 	PERF_HPP__OVERHEAD_US,
 	PERF_HPP__OVERHEAD_GUEST_SYS,
 	PERF_HPP__OVERHEAD_GUEST_US,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PERF_HPP__SAMPLES,
 	PERF_HPP__PERIOD,
@@ -364,6 +425,11 @@ enum {
 	PERF_HPP__SAMPLES,
 	PERF_HPP__PERIOD,
 >>>>>>> v3.18
+=======
+	PERF_HPP__OVERHEAD_ACC,
+	PERF_HPP__SAMPLES,
+	PERF_HPP__PERIOD,
+>>>>>>> v3.18
 
 	PERF_HPP__MAX_INDEX
 };
@@ -371,10 +437,13 @@ enum {
 void perf_hpp__init(void);
 void perf_hpp__column_register(struct perf_hpp_fmt *format);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void perf_hpp__column_enable(unsigned col);
 int hist_entry__period_snprintf(struct perf_hpp *hpp, struct hist_entry *he,
 				bool color);
 =======
+=======
+>>>>>>> v3.18
 void perf_hpp__column_unregister(struct perf_hpp_fmt *format);
 void perf_hpp__column_enable(unsigned col);
 void perf_hpp__column_disable(unsigned col);
@@ -425,6 +494,9 @@ static inline size_t perf_hpp__color_overhead(void)
 	       (COLOR_MAXLEN + sizeof(PERF_COLOR_RESET)) * PERF_HPP__MAX_INDEX
 	       : 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct perf_evlist;
@@ -436,7 +508,11 @@ struct hist_browser_timer {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef SLANG_SUPPORT
+=======
+#ifdef HAVE_SLANG_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_SLANG_SUPPORT
 >>>>>>> v3.18
@@ -447,6 +523,10 @@ int hist_entry__tui_annotate(struct hist_entry *he, struct perf_evsel *evsel,
 int perf_evlist__tui_browse_hists(struct perf_evlist *evlist, const char *help,
 				  struct hist_browser_timer *hbt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  float min_pcnt,
+>>>>>>> v3.18
 =======
 				  float min_pcnt,
 >>>>>>> v3.18
@@ -458,6 +538,10 @@ int perf_evlist__tui_browse_hists(struct perf_evlist *evlist __maybe_unused,
 				  const char *help __maybe_unused,
 				  struct hist_browser_timer *hbt __maybe_unused,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  float min_pcnt __maybe_unused,
+>>>>>>> v3.18
 =======
 				  float min_pcnt __maybe_unused,
 >>>>>>> v3.18
@@ -467,12 +551,18 @@ int perf_evlist__tui_browse_hists(struct perf_evlist *evlist __maybe_unused,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int hist_entry__tui_annotate(struct hist_entry *self
 					   __maybe_unused,
 					   struct perf_evsel *evsel
 					   __maybe_unused,
 					   struct hist_browser_timer *hbt
 					   __maybe_unused)
+=======
+static inline int hist_entry__tui_annotate(struct hist_entry *he __maybe_unused,
+					   struct perf_evsel *evsel __maybe_unused,
+					   struct hist_browser_timer *hbt __maybe_unused)
+>>>>>>> v3.18
 =======
 static inline int hist_entry__tui_annotate(struct hist_entry *he __maybe_unused,
 					   struct perf_evsel *evsel __maybe_unused,
@@ -492,6 +582,7 @@ static inline int script_browse(const char *script_opt __maybe_unused)
 #define K_SWITCH_INPUT_DATA -3000
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef GTK2_SUPPORT
 int perf_evlist__gtk_browse_hists(struct perf_evlist *evlist, const char *help,
@@ -515,6 +606,8 @@ int perf_diff__formula(struct hist_entry *he, struct hist_entry *pair,
 		       char *buf, size_t size);
 double perf_diff__period_percent(struct hist_entry *he, u64 period);
 =======
+=======
+>>>>>>> v3.18
 unsigned int hists__sort_list_width(struct hists *hists);
 
 struct option;
@@ -522,5 +615,8 @@ int parse_filter_percentage(const struct option *opt __maybe_unused,
 			    const char *arg, int unset __maybe_unused);
 int perf_hist_config(const char *var, const char *value);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __PERF_HIST_H */

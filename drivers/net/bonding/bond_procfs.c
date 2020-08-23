@@ -8,6 +8,7 @@
 static void *bond_info_seq_start(struct seq_file *seq, loff_t *pos)
 	__acquires(RCU)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__acquires(&bond->lock)
 {
 	struct bonding *bond = seq->private;
@@ -19,6 +20,8 @@ static void *bond_info_seq_start(struct seq_file *seq, loff_t *pos)
 	rcu_read_lock();
 	read_lock(&bond->lock);
 =======
+=======
+>>>>>>> v3.18
 {
 	struct bonding *bond = seq->private;
 	struct list_head *iter;
@@ -26,16 +29,25 @@ static void *bond_info_seq_start(struct seq_file *seq, loff_t *pos)
 	loff_t off = 0;
 
 	rcu_read_lock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (*pos == 0)
 		return SEQ_START_TOKEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bond_for_each_slave(bond, slave, i) {
 		if (++off == *pos)
 			return slave;
 	}
+=======
+	bond_for_each_slave_rcu(bond, slave, iter)
+		if (++off == *pos)
+			return slave;
+>>>>>>> v3.18
 =======
 	bond_for_each_slave_rcu(bond, slave, iter)
 		if (++off == *pos)
@@ -48,6 +60,7 @@ static void *bond_info_seq_start(struct seq_file *seq, loff_t *pos)
 static void *bond_info_seq_next(struct seq_file *seq, void *v, loff_t *pos)
 {
 	struct bonding *bond = seq->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct slave *slave = v;
 
@@ -68,6 +81,8 @@ static void bond_info_seq_stop(struct seq_file *seq, void *v)
 
 	read_unlock(&bond->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head *iter;
 	struct slave *slave;
 	bool found = false;
@@ -89,6 +104,9 @@ static void bond_info_seq_stop(struct seq_file *seq, void *v)
 static void bond_info_seq_stop(struct seq_file *seq, void *v)
 	__releases(RCU)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 }
@@ -96,6 +114,7 @@ static void bond_info_seq_stop(struct seq_file *seq, void *v)
 static void bond_info_show_master(struct seq_file *seq)
 {
 	struct bonding *bond = seq->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct slave *curr;
 	int i;
@@ -129,6 +148,8 @@ static void bond_info_show_master(struct seq_file *seq)
 			seq_printf(seq, " (primary_reselect %s)",
 		   pri_reselect_tbl[bond->params.primary_reselect].modename);
 =======
+=======
+>>>>>>> v3.18
 	const struct bond_opt_value *optval;
 	struct slave *curr, *primary;
 	int i;
@@ -164,6 +185,9 @@ static void bond_info_show_master(struct seq_file *seq)
 			seq_printf(seq, " (primary_reselect %s)",
 				   optval->string);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		seq_printf(seq, "\nCurrently Active Slave: %s\n",
@@ -199,7 +223,11 @@ static void bond_info_show_master(struct seq_file *seq)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bond->params.mode == BOND_MODE_8023AD) {
+=======
+	if (BOND_MODE(bond) == BOND_MODE_8023AD) {
+>>>>>>> v3.18
 =======
 	if (BOND_MODE(bond) == BOND_MODE_8023AD) {
 >>>>>>> v3.18
@@ -210,13 +238,19 @@ static void bond_info_show_master(struct seq_file *seq)
 			   (bond->params.lacp_fast) ? "fast" : "slow");
 		seq_printf(seq, "Min links: %d\n", bond->params.min_links);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(seq, "Aggregator selection policy (ad_select): %s\n",
 			   ad_select_tbl[bond->params.ad_select].modename);
 =======
+=======
+>>>>>>> v3.18
 		optval = bond_opt_get_val(BOND_OPT_AD_SELECT,
 					  bond->params.ad_select);
 		seq_printf(seq, "Aggregator selection policy (ad_select): %s\n",
 			   optval->string);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (__bond_3ad_get_active_agg_info(bond, &ad_info)) {
@@ -240,6 +274,7 @@ static void bond_info_show_master(struct seq_file *seq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *bond_slave_link_status(s8 link)
 {
 	static const char * const status[] = {
@@ -252,6 +287,8 @@ static const char *bond_slave_link_status(s8 link)
 	return status[link];
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void bond_info_show_slave(struct seq_file *seq,
@@ -277,9 +314,15 @@ static void bond_info_show_slave(struct seq_file *seq,
 	seq_printf(seq, "Permanent HW addr: %pM\n", slave->perm_hwaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bond->params.mode == BOND_MODE_8023AD) {
 		const struct aggregator *agg
 			= SLAVE_AD_INFO(slave).port.aggregator;
+=======
+	if (BOND_MODE(bond) == BOND_MODE_8023AD) {
+		const struct aggregator *agg
+			= SLAVE_AD_INFO(slave)->port.aggregator;
+>>>>>>> v3.18
 =======
 	if (BOND_MODE(bond) == BOND_MODE_8023AD) {
 		const struct aggregator *agg
@@ -347,8 +390,13 @@ void bond_create_proc_entry(struct bonding *bond)
 						    &bond_info_fops, bond);
 		if (bond->proc_entry == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("Warning: Cannot create /proc/net/%s/%s\n",
 				   DRV_NAME, bond_dev->name);
+=======
+			netdev_warn(bond_dev, "Cannot create /proc/net/%s/%s\n",
+				    DRV_NAME, bond_dev->name);
+>>>>>>> v3.18
 =======
 			netdev_warn(bond_dev, "Cannot create /proc/net/%s/%s\n",
 				    DRV_NAME, bond_dev->name);
@@ -379,8 +427,13 @@ void __net_init bond_create_proc_dir(struct bond_net *bn)
 		bn->proc_dir = proc_mkdir(DRV_NAME, bn->net->proc_net);
 		if (!bn->proc_dir)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("Warning: cannot create /proc/net/%s\n",
 				   DRV_NAME);
+=======
+			pr_warn("Warning: Cannot create /proc/net/%s\n",
+				DRV_NAME);
+>>>>>>> v3.18
 =======
 			pr_warn("Warning: Cannot create /proc/net/%s\n",
 				DRV_NAME);

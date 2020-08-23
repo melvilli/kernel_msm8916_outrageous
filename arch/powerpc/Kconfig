@@ -86,16 +86,22 @@ config PPC
 	bool
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select BINFMT_ELF
 	select OF
 	select OF_EARLY_FLATTREE
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_MIGHT_HAVE_PC_PARPORT
 	select ARCH_MIGHT_HAVE_PC_SERIO
 	select BINFMT_ELF
 	select OF
 	select OF_EARLY_FLATTREE
 	select OF_RESERVED_MEM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_FTRACE_MCOUNT_RECORD
 	select HAVE_DYNAMIC_FTRACE
@@ -107,7 +113,11 @@ config PPC
 	select HAVE_IDE
 	select HAVE_IOREMAP_PROT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_EFFICIENT_UNALIGNED_ACCESS
+=======
+	select HAVE_EFFICIENT_UNALIGNED_ACCESS if !CPU_LITTLE_ENDIAN
+>>>>>>> v3.18
 =======
 	select HAVE_EFFICIENT_UNALIGNED_ACCESS if !CPU_LITTLE_ENDIAN
 >>>>>>> v3.18
@@ -122,6 +132,10 @@ config PPC
 	select HAVE_OPROFILE
 	select HAVE_DEBUG_KMEMLEAK
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 	select ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -146,6 +160,11 @@ config PPC
 	select GENERIC_TIME_VSYSCALL_OLD
 	select GENERIC_CLOCKEVENTS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GENERIC_CLOCKEVENTS_BROADCAST if SMP
+	select ARCH_HAS_TICK_BROADCAST if GENERIC_CLOCKEVENTS_BROADCAST
+>>>>>>> v3.18
 =======
 	select GENERIC_CLOCKEVENTS_BROADCAST if SMP
 	select ARCH_HAS_TICK_BROADCAST if GENERIC_CLOCKEVENTS_BROADCAST
@@ -159,8 +178,11 @@ config PPC
 	select OLD_SIGSUSPEND
 	select OLD_SIGACTION if PPC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_ATOMIC_RMW
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_DEBUG_STACKOVERFLOW
 	select HAVE_IRQ_EXIT_ON_IRQ_STACK
 	select ARCH_USE_CMPXCHG_LOCKREF if PPC64
@@ -170,6 +192,9 @@ config PPC
 
 config GENERIC_CSUM
 	def_bool CPU_LITTLE_ENDIAN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config EARLY_PRINTK
@@ -177,11 +202,17 @@ config EARLY_PRINTK
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PANIC_TIMEOUT
 	int
 	default 180
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config COMPAT
 	bool
@@ -207,7 +238,11 @@ config SCHED_OMIT_FRAME_POINTER
 config ARCH_MAY_HAVE_PC_FDC
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default !PPC_PSERIES || PCI
+=======
+	default PCI
+>>>>>>> v3.18
 =======
 	default PCI
 >>>>>>> v3.18
@@ -250,9 +285,12 @@ config DEFAULT_UIMAGE
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config REDBOOT
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARCH_HIBERNATION_POSSIBLE
@@ -322,11 +360,17 @@ config PPC_EMULATE_SSTEP
 	default y if KPROBES || UPROBES || XMON || HAVE_HW_BREAKPOINT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ZONE_DMA32
 	bool
 	default y if PPC64
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "init/Kconfig"
 
@@ -353,7 +397,11 @@ config HUGETLB_PAGE_SIZE_VARIABLE
 config MATH_EMULATION
 	bool "Math emulation"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on 4xx || 8xx || E200 || PPC_MPC832x || E500
+=======
+	depends on 4xx || 8xx || PPC_MPC832x || BOOKE
+>>>>>>> v3.18
 =======
 	depends on 4xx || 8xx || PPC_MPC832x || BOOKE
 >>>>>>> v3.18
@@ -366,7 +414,10 @@ config MATH_EMULATION
 	  instructions to run.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  This is also useful to emulate missing (optional) instructions
 	  such as fsqrt on cores that do have an FPU but do not implement
 	  them (such as Freescale BookE).
@@ -391,12 +442,20 @@ config MATH_EMULATION_HW_UNIMPLEMENTED
 
 endchoice
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PPC_TRANSACTIONAL_MEM
        bool "Transactional Memory support for POWERPC"
        depends on PPC_BOOK3S_64
        depends on SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+       select ALTIVEC
+       select VSX
+>>>>>>> v3.18
 =======
        select ALTIVEC
        select VSX
@@ -405,6 +464,7 @@ config PPC_TRANSACTIONAL_MEM
        ---help---
          Support user-mode Transactional Memory on POWERPC.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config 8XX_MINIMAL_FPEMU
 	bool "Minimal math emulation for 8xx"
@@ -417,6 +477,8 @@ config 8XX_MINIMAL_FPEMU
 
 	  It is recommended that you build a soft-float userspace instead.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config IOMMU_HELPER
@@ -435,7 +497,11 @@ config SWIOTLB
 config HOTPLUG_CPU
 	bool "Support for enabling/disabling CPUs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SMP && HOTPLUG && (PPC_PSERIES || \
+=======
+	depends on SMP && (PPC_PSERIES || \
+>>>>>>> v3.18
 =======
 	depends on SMP && (PPC_PSERIES || \
 >>>>>>> v3.18
@@ -460,13 +526,19 @@ config ARCH_ENABLE_MEMORY_HOTREMOVE
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PPC64_SUPPORTS_MEMORY_FAILURE
 	bool "Add support for memory hwpoison"
 	depends on PPC_BOOK3S_64
 	default "y" if PPC_POWERNV
 	select ARCH_SUPPORTS_MEMORY_FAILURE
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config KEXEC
 	bool "kexec system call"
@@ -482,9 +554,15 @@ config KEXEC
 	  It is an ongoing process to be certain the hardware in a machine
 	  is properly shutdown, so do not be surprised if this code does not
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  initially work for you.  It may help to enable device hotplugging
 	  support.  As of this writing the exact hardware interface is
 	  strongly in flux, so no good recommendation can be made.
+=======
+	  initially work for you.  As of this writing the exact hardware
+	  interface is strongly in flux, so no good recommendation can be
+	  made.
+>>>>>>> v3.18
 =======
 	  initially work for you.  As of this writing the exact hardware
 	  interface is strongly in flux, so no good recommendation can be
@@ -495,8 +573,12 @@ config CRASH_DUMP
 	bool "Build a kdump crash kernel"
 	depends on PPC64 || 6xx || FSL_BOOKE || (44x && !SMP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select RELOCATABLE if PPC64 || 44x
 	select DYNAMIC_MEMSTART if FSL_BOOKE
+=======
+	select RELOCATABLE if (PPC64 && !COMPILE_TEST) || 44x || FSL_BOOKE
+>>>>>>> v3.18
 =======
 	select RELOCATABLE if (PPC64 && !COMPILE_TEST) || 44x || FSL_BOOKE
 >>>>>>> v3.18
@@ -508,7 +590,11 @@ config CRASH_DUMP
 config FA_DUMP
 	bool "Firmware-assisted dump"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PPC64 && PPC_RTAS && CRASH_DUMP
+=======
+	depends on PPC64 && PPC_RTAS && CRASH_DUMP && KEXEC
+>>>>>>> v3.18
 =======
 	depends on PPC64 && PPC_RTAS && CRASH_DUMP && KEXEC
 >>>>>>> v3.18
@@ -525,7 +611,11 @@ config FA_DUMP
 config IRQ_ALL_CPUS
 	bool "Distribute interrupts on all CPUs by default"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SMP && !MV64360
+=======
+	depends on SMP
+>>>>>>> v3.18
 =======
 	depends on SMP
 >>>>>>> v3.18
@@ -547,7 +637,10 @@ config NODES_SHIFT
 	depends on NEED_MULTIPLE_NODES
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USE_PERCPU_NUMA_NODE_ID
 	def_bool y
 	depends on NUMA
@@ -556,6 +649,9 @@ config HAVE_MEMORYLESS_NODES
 	def_bool y
 	depends on NUMA
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARCH_SELECT_MEMORY_MODEL
 	def_bool y
@@ -643,6 +739,10 @@ config PPC_16K_PAGES
 config PPC_64K_PAGES
 	bool "64k page size" if 44x || PPC_STD_MMU_64 || PPC_BOOK3E_64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on !PPC_FSL_BOOK3E
+>>>>>>> v3.18
 =======
 	depends on !PPC_FSL_BOOK3E
 >>>>>>> v3.18
@@ -701,11 +801,17 @@ config PPC_SUBPAGE_PROT
 	  on the 4k subpages of each 64k page.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PPC_COPRO_BASE
 	bool
 	default n
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SCHED_SMT
 	bool "SMT (Hyperthreading) scheduler support"
@@ -737,7 +843,10 @@ config CMDLINE
 	  most cases you will need to specify the root device here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CMDLINE_FORCE
 	bool "Always use the default kernel command string"
 	depends on CMDLINE_BOOL
@@ -747,6 +856,9 @@ config CMDLINE_FORCE
 	  This is useful if you cannot or don't want to change the
 	  command-line options your boot loader passes to the kernel.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config EXTRA_TARGETS
 	string "Additional default image types"
@@ -833,7 +945,10 @@ config SBUS
 config FSL_SOC
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_CAN_FLEXCAN if NET && CAN
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -871,10 +986,13 @@ config FSL_LBC
 	  drivers for specific local bus peripherals.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config FSL_IFC
 	bool
         depends on FSL_SOC
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config FSL_GTM
@@ -899,7 +1017,10 @@ config PCI
 		&& !PPC_85xx && !PPC_86xx && !GAMECUBE_COMMON
 	default PCI_QSPAN if !4xx && !CPM2 && 8xx
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_MSI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select GENERIC_PCI_IOMAP
@@ -943,7 +1064,11 @@ config HAS_RAPIDIO
 
 config RAPIDIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "RapidIO support"
+=======
+	tristate "RapidIO support"
+>>>>>>> v3.18
 =======
 	tristate "RapidIO support"
 >>>>>>> v3.18
@@ -955,7 +1080,11 @@ config RAPIDIO
 config FSL_RIO
 	bool "Freescale Embedded SRIO Controller support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on RAPIDIO && HAS_RAPIDIO
+=======
+	depends on RAPIDIO = y && HAS_RAPIDIO
+>>>>>>> v3.18
 =======
 	depends on RAPIDIO = y && HAS_RAPIDIO
 >>>>>>> v3.18
@@ -1042,7 +1171,11 @@ config DYNAMIC_MEMSTART
 config RELOCATABLE
 	bool "Build a relocatable kernel"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ADVANCED_OPTIONS && FLATMEM && 44x
+=======
+	depends on ADVANCED_OPTIONS && FLATMEM && (44x || FSL_BOOKE)
+>>>>>>> v3.18
 =======
 	depends on ADVANCED_OPTIONS && FLATMEM && (44x || FSL_BOOKE)
 >>>>>>> v3.18
@@ -1154,6 +1287,10 @@ if PPC64
 config RELOCATABLE
 	bool "Build a relocatable kernel"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on !COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on !COMPILE_TEST
 >>>>>>> v3.18
@@ -1182,6 +1319,12 @@ config PHYSICAL_START
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config	ARCH_RANDOM
+	def_bool n
+
+>>>>>>> v3.18
 =======
 config	ARCH_RANDOM
 	def_bool n
@@ -1209,11 +1352,14 @@ config KEYS_COMPAT
 source "crypto/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PPC_CLOCK
 	bool
 	default n
 	select HAVE_CLK
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PPC_LIB_RHEAP

@@ -30,6 +30,11 @@
 
 #define _PORT(port, a, b) ((a) + (port)*((b)-(a)))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _PIPE3(pipe, a, b, c) ((pipe) == PIPE_A ? (a) : \
+			       (pipe) == PIPE_B ? (b) : (c))
+>>>>>>> v3.18
 =======
 #define _PIPE3(pipe, a, b, c) ((pipe) == PIPE_A ? (a) : \
 			       (pipe) == PIPE_B ? (b) : (c))
@@ -38,6 +43,7 @@
 #define _MASKED_BIT_ENABLE(a) (((a) << 16) | (a))
 #define _MASKED_BIT_DISABLE(a) ((a) << 16)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * The Bridge device's PCI config space has information about the
@@ -56,6 +62,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* PCI config space */
 
 #define HPLLCC	0xc0 /* 855 only */
@@ -70,13 +78,19 @@
 #define   GC_DISPLAY_CLOCK_190_200_MHZ	(0 << 4)
 #define   GC_DISPLAY_CLOCK_333_MHZ	(4 << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define   GC_DISPLAY_CLOCK_267_MHZ_PNV	(0 << 4)
 #define   GC_DISPLAY_CLOCK_333_MHZ_PNV	(1 << 4)
 #define   GC_DISPLAY_CLOCK_444_MHZ_PNV	(2 << 4)
 #define   GC_DISPLAY_CLOCK_200_MHZ_PNV	(5 << 4)
 #define   GC_DISPLAY_CLOCK_133_MHZ_PNV	(6 << 4)
 #define   GC_DISPLAY_CLOCK_167_MHZ_PNV	(7 << 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   GC_DISPLAY_CLOCK_MASK		(7 << 4)
 #define   GM45_GC_RENDER_CLOCK_MASK	(0xf << 0)
@@ -99,17 +113,23 @@
 #define   I915_GC_RENDER_CLOCK_200_MHZ	(1 << 0)
 #define   I915_GC_RENDER_CLOCK_333_MHZ	(4 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LBB	0xf4
 
 /* Graphics reset regs */
 #define I965_GDRST 0xc0 /* PCI config register */
 #define ILK_GDSR 0x2ca4 /* MCHBAR offset */
 =======
+=======
+>>>>>>> v3.18
 #define PCI_LBPC 0xf4 /* legacy/combination backlight modes, also called LBB */
 
 
 /* Graphics reset regs */
 #define I965_GDRST 0xc0 /* PCI config register */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  GRDOM_FULL	(0<<2)
 #define  GRDOM_RENDER	(1<<2)
@@ -118,7 +138,10 @@
 #define  GRDOM_RESET_ENABLE (1<<0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ILK_GDSR 0x2ca4 /* MCHBAR offset */
 #define  ILK_GRDOM_FULL		(0<<1)
 #define  ILK_GRDOM_RENDER	(1<<1)
@@ -126,6 +149,9 @@
 #define  ILK_GRDOM_MASK		(3<<1)
 #define  ILK_GRDOM_RESET_ENABLE (1<<0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GEN6_MBCUNIT_SNPCR	0x900c /* for LLC config */
 #define   GEN6_MBC_SNPCR_SHIFT	21
@@ -136,6 +162,12 @@
 #define   GEN6_MBC_SNPCR_MIN	(3<<21) /* only 1/16th of the cache is shared */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VLV_G3DCTL		0x9024
+#define VLV_GSCKGCTL		0x9028
+
+>>>>>>> v3.18
 =======
 #define VLV_G3DCTL		0x9024
 #define VLV_GSCKGCTL		0x9028
@@ -160,6 +192,12 @@
 #define   PP_DIR_DCLV_2G		0xffffffff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GEN8_RING_PDP_UDW(ring, n)	((ring)->mmio_base+0x270 + ((n) * 8 + 4))
+#define GEN8_RING_PDP_LDW(ring, n)	((ring)->mmio_base+0x270 + (n) * 8)
+
+>>>>>>> v3.18
 =======
 #define GEN8_RING_PDP_UDW(ring, n)	((ring)->mmio_base+0x270 + ((n) * 8 + 4))
 #define GEN8_RING_PDP_LDW(ring, n)	((ring)->mmio_base+0x270 + (n) * 8)
@@ -185,7 +223,10 @@
 #define   GAB_CTL_CONT_AFTER_PAGEFAULT	(1<<8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GEN7_BIOS_RESERVED		0x1082C0
 #define GEN7_BIOS_RESERVED_1M		(0 << 5)
 #define GEN7_BIOS_RESERVED_256K		(1 << 5)
@@ -194,6 +235,9 @@
 #define GEN8_BIOS_RESERVED_MASK        0x3
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* VGA stuff */
 
@@ -206,6 +250,7 @@
 #define   VGA_MSR_CGA_MODE (1<<0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * SR01 is the only VGA register touched on non-UMS setups.
  * VLV doesn't do UMS, so the sequencer index/data registers
@@ -215,6 +260,11 @@
 #define VGA_SR_INDEX (dev_priv->info->display_mmio_offset + 0x3c4)
 #define SR01			1
 #define VGA_SR_DATA (dev_priv->info->display_mmio_offset + 0x3c5)
+=======
+#define VGA_SR_INDEX 0x3c4
+#define SR01			1
+#define VGA_SR_DATA 0x3c5
+>>>>>>> v3.18
 =======
 #define VGA_SR_INDEX 0x3c4
 #define SR01			1
@@ -251,10 +301,13 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Memory interface instructions used by the kernel
  */
 #define MI_INSTR(opcode, flags) (((opcode) << 23) | (flags))
 =======
+=======
+>>>>>>> v3.18
  * Instruction field definitions used by the command parser
  */
 #define INSTR_CLIENT_SHIFT      29
@@ -272,6 +325,9 @@
 #define MI_INSTR(opcode, flags) (((opcode) << 23) | (flags))
 /* Many MI commands use bit 22 of the header dword for GGTT vs PPGTT */
 #define  MI_GLOBAL_GTT    (1<<22)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MI_NOOP			MI_INSTR(0, 0)
@@ -289,11 +345,14 @@
 #define   MI_END_SCENE		(1 << 4) /* flush binner and incr scene count */
 #define   MI_INVALIDATE_ISP	(1 << 5) /* invalidate indirect state pointers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MI_BATCH_BUFFER_END	MI_INSTR(0x0a, 0)
 #define MI_SUSPEND_FLUSH	MI_INSTR(0x0b, 0)
 #define   MI_SUSPEND_FLUSH_EN	(1<<0)
 #define MI_REPORT_HEAD		MI_INSTR(0x07, 0)
 =======
+=======
+>>>>>>> v3.18
 #define MI_REPORT_HEAD		MI_INSTR(0x07, 0)
 #define MI_ARB_ON_OFF		MI_INSTR(0x08, 0)
 #define   MI_ARB_ENABLE			(1<<0)
@@ -301,6 +360,9 @@
 #define MI_BATCH_BUFFER_END	MI_INSTR(0x0a, 0)
 #define MI_SUSPEND_FLUSH	MI_INSTR(0x0b, 0)
 #define   MI_SUSPEND_FLUSH_EN	(1<<0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MI_OVERLAY_FLIP		MI_INSTR(0x11, 0)
 #define   MI_OVERLAY_CONTINUE	(0x0<<21)
@@ -318,11 +380,14 @@
 #define   MI_DISPLAY_FLIP_IVB_PLANE_C  (4 << 19)
 #define   MI_DISPLAY_FLIP_IVB_SPRITE_C (5 << 19)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MI_ARB_ON_OFF		MI_INSTR(0x08, 0)
 #define   MI_ARB_ENABLE			(1<<0)
 #define   MI_ARB_DISABLE		(0<<0)
 
 =======
+=======
+>>>>>>> v3.18
 #define MI_SEMAPHORE_MBOX	MI_INSTR(0x16, 1) /* gen6, gen7 */
 #define   MI_SEMAPHORE_GLOBAL_GTT    (1<<22)
 #define   MI_SEMAPHORE_UPDATE	    (1<<21)
@@ -342,6 +407,9 @@
 #define   MI_SEMAPHORE_SYNC_RVE	    (2<<16) /* VECS wait for RCS  (VERSYNC) */
 #define   MI_SEMAPHORE_SYNC_INVALID (3<<16)
 #define   MI_SEMAPHORE_SYNC_MASK    (3<<16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MI_SET_CONTEXT		MI_INSTR(0x18, 0)
 #define   MI_MM_SPACE_GTT		(1<<8)
@@ -351,8 +419,11 @@
 #define   MI_FORCE_RESTORE		(1<<1)
 #define   MI_RESTORE_INHIBIT		(1<<0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MI_STORE_DWORD_IMM	MI_INSTR(0x20, 1)
 =======
+=======
+>>>>>>> v3.18
 #define MI_SEMAPHORE_SIGNAL	MI_INSTR(0x1b, 0) /* GEN8+ */
 #define   MI_SEMAPHORE_TARGET(engine)	((engine)<<15)
 #define MI_SEMAPHORE_WAIT	MI_INSTR(0x1c, 2) /* GEN8+ */
@@ -360,6 +431,9 @@
 #define   MI_SEMAPHORE_SAD_GTE_SDD	(1<<12)
 #define MI_STORE_DWORD_IMM	MI_INSTR(0x20, 1)
 #define MI_STORE_DWORD_IMM_GEN8	MI_INSTR(0x20, 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   MI_MEM_VIRTUAL	(1 << 22) /* 965+ only */
 #define MI_STORE_DWORD_INDEX	MI_INSTR(0x21, 1)
@@ -371,19 +445,30 @@
  *   address/value pairs. Don't overdue it, though, x <= 2^4 must hold!
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MI_LOAD_REGISTER_IMM(x)	MI_INSTR(0x22, 2*x-1)
 =======
+=======
+>>>>>>> v3.18
 #define MI_LOAD_REGISTER_IMM(x)	MI_INSTR(0x22, 2*(x)-1)
 #define   MI_LRI_FORCE_POSTED		(1<<12)
 #define MI_STORE_REGISTER_MEM(x) MI_INSTR(0x24, 2*(x)-1)
 #define MI_STORE_REGISTER_MEM_GEN8(x) MI_INSTR(0x24, 3*(x)-1)
 #define   MI_SRM_LRM_GLOBAL_GTT		(1<<22)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MI_FLUSH_DW		MI_INSTR(0x26, 1) /* for GEN6 */
 #define   MI_FLUSH_DW_STORE_INDEX	(1<<21)
 #define   MI_INVALIDATE_TLB		(1<<18)
 #define   MI_FLUSH_DW_OP_STOREDW	(1<<14)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   MI_FLUSH_DW_OP_MASK		(3<<14)
+#define   MI_FLUSH_DW_NOTIFY		(1<<8)
+>>>>>>> v3.18
 =======
 #define   MI_FLUSH_DW_OP_MASK		(3<<14)
 #define   MI_FLUSH_DW_NOTIFY		(1<<8)
@@ -394,6 +479,7 @@
 #define MI_BATCH_BUFFER		MI_INSTR(0x30, 1)
 #define   MI_BATCH_NON_SECURE		(1)
 /* for snb/ivb/vlv this also means "batch in ppgtt" when ppgtt is enabled. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define   MI_BATCH_NON_SECURE_I965 	(1<<8)
 #define   MI_BATCH_PPGTT_HSW		(1<<8)
@@ -413,6 +499,8 @@
 #define  MI_SEMAPHORE_SYNC_BV	    (0<<16)
 #define  MI_SEMAPHORE_SYNC_INVALID  (1<<0)
 =======
+=======
+>>>>>>> v3.18
 #define   MI_BATCH_NON_SECURE_I965	(1<<8)
 #define   MI_BATCH_PPGTT_HSW		(1<<8)
 #define   MI_BATCH_NON_SECURE_HSW	(1<<13)
@@ -425,6 +513,9 @@
 #define  LOWER_SLICE_ENABLED	(1<<0)
 #define  LOWER_SLICE_DISABLED	(0<<0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * 3D instructions used by the kernel
@@ -452,12 +543,15 @@
 #define GFX_OP_DRAWRECT_INFO     ((0x3<<29)|(0x1d<<24)|(0x80<<16)|(0x3))
 #define GFX_OP_DRAWRECT_INFO_I965  ((0x7900<<16)|0x2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SRC_COPY_BLT_CMD                ((2<<29)|(0x43<<22)|4)
 #define XY_SRC_COPY_BLT_CMD		((2<<29)|(0x53<<22)|6)
 #define XY_MONO_SRC_COPY_IMM_BLT	((2<<29)|(0x71<<22)|5)
 #define XY_SRC_COPY_BLT_WRITE_ALPHA	(1<<21)
 #define XY_SRC_COPY_BLT_WRITE_RGB	(1<<20)
 =======
+=======
+>>>>>>> v3.18
 
 #define COLOR_BLT_CMD			(2<<29 | 0x40<<22 | (5-2))
 #define SRC_COPY_BLT_CMD		((2<<29)|(0x43<<22)|4)
@@ -466,13 +560,21 @@
 #define   BLT_WRITE_A			(2<<20)
 #define   BLT_WRITE_RGB			(1<<20)
 #define   BLT_WRITE_RGBA		(BLT_WRITE_RGB | BLT_WRITE_A)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   BLT_DEPTH_8			(0<<24)
 #define   BLT_DEPTH_16_565		(1<<24)
 #define   BLT_DEPTH_16_1555		(2<<24)
 #define   BLT_DEPTH_32			(3<<24)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   BLT_ROP_GXCOPY		(0xcc<<16)
+=======
+#define   BLT_ROP_SRC_COPY		(0xcc<<16)
+#define   BLT_ROP_COLOR_COPY		(0xf0<<16)
+>>>>>>> v3.18
 =======
 #define   BLT_ROP_SRC_COPY		(0xcc<<16)
 #define   BLT_ROP_COLOR_COPY		(0xf0<<16)
@@ -486,17 +588,23 @@
 #define GFX_OP_PIPE_CONTROL(len)	((0x3<<29)|(0x3<<27)|(0x2<<24)|(len-2))
 #define   PIPE_CONTROL_GLOBAL_GTT_IVB			(1<<24) /* gen7+ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   PIPE_CONTROL_CS_STALL				(1<<20)
 #define   PIPE_CONTROL_TLB_INVALIDATE			(1<<18)
 #define   PIPE_CONTROL_MEDIA_STATE_CLEAR		(1<<16)
 #define   PIPE_CONTROL_QW_WRITE				(1<<14)
 =======
+=======
+>>>>>>> v3.18
 #define   PIPE_CONTROL_MMIO_WRITE			(1<<23)
 #define   PIPE_CONTROL_STORE_DATA_INDEX			(1<<21)
 #define   PIPE_CONTROL_CS_STALL				(1<<20)
 #define   PIPE_CONTROL_TLB_INVALIDATE			(1<<18)
 #define   PIPE_CONTROL_QW_WRITE				(1<<14)
 #define   PIPE_CONTROL_POST_SYNC_OP_MASK                (3<<14)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   PIPE_CONTROL_DEPTH_STALL			(1<<13)
 #define   PIPE_CONTROL_WRITE_FLUSH			(1<<12)
@@ -506,6 +614,10 @@
 #define   PIPE_CONTROL_INDIRECT_STATE_DISABLE		(1<<9)
 #define   PIPE_CONTROL_NOTIFY				(1<<8)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   PIPE_CONTROL_FLUSH_ENABLE			(1<<7) /* gen7+ */
+>>>>>>> v3.18
 =======
 #define   PIPE_CONTROL_FLUSH_ENABLE			(1<<7) /* gen7+ */
 >>>>>>> v3.18
@@ -517,7 +629,10 @@
 #define   PIPE_CONTROL_GLOBAL_GTT (1<<2) /* in addr dword */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Commands used only by the command parser
  */
@@ -606,6 +721,9 @@
 #define GEN7_PIPE_DE_LOAD_SL(pipe) _PIPE(pipe, \
 					 _GEN7_PIPEA_DE_LOAD_SL, \
 					 _GEN7_PIPEB_DE_LOAD_SL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -617,6 +735,7 @@
 #define  DEBUG_RESET_DISPLAY		(1<<9)
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * DPIO - a special bus for various display related registers to hide behind:
  *  0x800c: m1, m2, n, p1, p2, k dividers
@@ -638,6 +757,8 @@
 #define DPIO_DATA			(VLV_DISPLAY_BASE + 0x2104)
 #define DPIO_REG			(VLV_DISPLAY_BASE + 0x2108)
 =======
+=======
+>>>>>>> v3.18
  * IOSF sideband
  */
 #define VLV_IOSF_DOORBELL_REQ			(VLV_DISPLAY_BASE + 0x2100)
@@ -876,17 +997,23 @@ enum punit_power_well {
  */
 #define DPIO_DEVFN			0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DPIO_CTL			(VLV_DISPLAY_BASE + 0x2110)
 #define  DPIO_MODSEL1			(1<<3) /* if ref clk b == 27 */
 #define  DPIO_MODSEL0			(1<<2) /* if ref clk a == 27 */
 #define  DPIO_SFR_BYPASS		(1<<1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  DPIO_RESET			(1<<0)
 
 #define _DPIO_DIV_A			0x800c
 #define   DPIO_POST_DIV_SHIFT		(28) /* 3 bits */
 =======
+=======
+>>>>>>> v3.18
 #define  DPIO_CMNRST			(1<<0)
 
 #define DPIO_PHY(pipe)			((pipe) >> 1)
@@ -901,6 +1028,9 @@ enum punit_power_well {
 #define   DPIO_POST_DIV_HDMIDP		1 /* DAC 225-400M rate */
 #define   DPIO_POST_DIV_LVDS1		2
 #define   DPIO_POST_DIV_LVDS2		3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   DPIO_K_SHIFT			(24) /* 4 bits */
 #define   DPIO_P1_SHIFT			(21) /* 3 bits */
@@ -910,15 +1040,21 @@ enum punit_power_well {
 #define   DPIO_M1DIV_SHIFT		(8) /* 3 bits */
 #define   DPIO_M2DIV_MASK		0xff
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _DPIO_DIV_B			0x802c
 #define DPIO_DIV(pipe) _PIPE(pipe, _DPIO_DIV_A, _DPIO_DIV_B)
 
 #define _DPIO_REFSFR_A			0x8014
 =======
+=======
+>>>>>>> v3.18
 #define _VLV_PLL_DW3_CH1		0x802c
 #define VLV_PLL_DW3(ch) _PIPE(ch, _VLV_PLL_DW3_CH0, _VLV_PLL_DW3_CH1)
 
 #define _VLV_PLL_DW5_CH0		0x8014
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   DPIO_REFSEL_OVERRIDE		27
 #define   DPIO_PLL_MODESEL_SHIFT	24 /* 3 bits */
@@ -927,6 +1063,7 @@ enum punit_power_well {
 #define   DPIO_PLL_REFCLK_SEL_MASK	3
 #define   DPIO_DRIVER_CTL_SHIFT		12 /* always set to 0x8 */
 #define   DPIO_CLK_BIAS_CTL_SHIFT	8 /* always set to 0x5 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _DPIO_REFSFR_B			0x8034
 #define DPIO_REFSFR(pipe) _PIPE(pipe, _DPIO_REFSFR_A, _DPIO_REFSFR_B)
@@ -945,6 +1082,8 @@ enum punit_power_well {
 #define DPIO_DATA_CHANNEL2		0x8420
 
 =======
+=======
+>>>>>>> v3.18
 #define _VLV_PLL_DW5_CH1		0x8034
 #define VLV_PLL_DW5(ch) _PIPE(ch, _VLV_PLL_DW5_CH0, _VLV_PLL_DW5_CH1)
 
@@ -1183,6 +1322,9 @@ enum punit_power_well {
 #define   DPIO_FRC_LATENCY_SHFIT	8
 #define CHV_TX_DW14(ch, lane) _TXLANE(ch, lane, 0xb8)
 #define   DPIO_UPAR_SHIFT		30
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Fence registers
@@ -1212,6 +1354,10 @@ enum punit_power_well {
 #define   GEN7_FENCE_MAX_PITCH_VAL	0x0800
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1225,11 +1371,14 @@ enum punit_power_well {
  * Instruction and interrupt control regs
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PGTBL_ER	0x02024
 #define RENDER_RING_BASE	0x02000
 #define BSD_RING_BASE		0x04000
 #define GEN6_BSD_RING_BASE	0x12000
 =======
+=======
+>>>>>>> v3.18
 #define PGTBL_CTL	0x02020
 #define   PGTBL_ADDRESS_LO_MASK	0xfffff000 /* bits [31:12] */
 #define   PGTBL_ADDRESS_HI_MASK	0x000000f0 /* bits [35:32] (gen4) */
@@ -1246,6 +1395,9 @@ enum punit_power_well {
 #define GEN6_BSD_RING_BASE	0x12000
 #define GEN8_BSD2_RING_BASE	0x1c000
 #define VEBOX_RING_BASE		0x1a000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BLT_RING_BASE		0x22000
 #define RING_TAIL(base)		((base)+0x30)
@@ -1254,6 +1406,7 @@ enum punit_power_well {
 #define RING_CTL(base)		((base)+0x3c)
 #define RING_SYNC_0(base)	((base)+0x40)
 #define RING_SYNC_1(base)	((base)+0x44)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define GEN6_RVSYNC (RING_SYNC_0(RENDER_RING_BASE))
 #define GEN6_RBSYNC (RING_SYNC_1(RENDER_RING_BASE))
@@ -1276,6 +1429,8 @@ enum punit_power_well {
 #define RING_NOPID(base)	((base)+0x94)
 #define RING_IMR(base)		((base)+0xa8)
 =======
+=======
+>>>>>>> v3.18
 #define RING_SYNC_2(base)	((base)+0x48)
 #define GEN6_RVSYNC	(RING_SYNC_0(RENDER_RING_BASE))
 #define GEN6_RBSYNC	(RING_SYNC_1(RENDER_RING_BASE))
@@ -1326,6 +1481,9 @@ enum punit_power_well {
 #define RING_NOPID(base)	((base)+0x94)
 #define RING_IMR(base)		((base)+0xa8)
 #define RING_HWSTAM(base)	((base)+0x98)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RING_TIMESTAMP(base)	((base)+0x358)
 #define   TAIL_ADDR		0x001FFFF8
@@ -1344,6 +1502,12 @@ enum punit_power_well {
 #define   RING_WAIT		(1<<11) /* gen3+, PRBx_CTL */
 #define   RING_WAIT_SEMAPHORE	(1<<10) /* gen6+ */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define GEN7_TLB_RD_ADDR	0x4700
+
+>>>>>>> v3.18
 =======
 
 #define GEN7_TLB_RD_ADDR	0x4700
@@ -1373,7 +1537,13 @@ enum punit_power_well {
 #define RING_INSTPS(base)	((base)+0x70)
 #define RING_DMA_FADD(base)	((base)+0x78)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RING_INSTPM(base)	((base)+0xc0)
+=======
+#define RING_DMA_FADD_UDW(base)	((base)+0x60) /* gen8+ */
+#define RING_INSTPM(base)	((base)+0xc0)
+#define RING_MI_MODE(base)	((base)+0x9c)
+>>>>>>> v3.18
 =======
 #define RING_DMA_FADD_UDW(base)	((base)+0x60) /* gen8+ */
 #define RING_INSTPM(base)	((base)+0xc0)
@@ -1394,11 +1564,14 @@ enum punit_power_well {
 #define HWSTAM		0x02098
 #define DMA_FADD_I8XX	0x020d0
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ERROR_GEN6	0x040a0
 #define GEN7_ERR_INT	0x44040
 #define   ERR_INT_MMIO_UNCLAIMED (1<<13)
 =======
+=======
+>>>>>>> v3.18
 #define RING_BBSTATE(base)	((base)+0x110)
 #define RING_BBADDR(base)	((base)+0x140)
 #define RING_BBADDR_UDW(base)	((base)+0x168) /* gen8+ */
@@ -1415,6 +1588,9 @@ enum punit_power_well {
 #define   ERR_INT_PIPE_CRC_DONE(pipe)	(1<<(2 + pipe*3))
 #define   ERR_INT_FIFO_UNDERRUN_A	(1<<0)
 #define   ERR_INT_FIFO_UNDERRUN(pipe)	(1<<(pipe*3))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FPGA_DBG		0x42300
@@ -1422,7 +1598,10 @@ enum punit_power_well {
 
 #define DERRMR		0x44050
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Note that HBLANK events are reserved on bdw+ */
 #define   DERRMR_PIPEA_SCANLINE		(1<<0)
 #define   DERRMR_PIPEA_PRI_FLIP_DONE	(1<<1)
@@ -1441,6 +1620,9 @@ enum punit_power_well {
 #define   DERRMR_PIPEC_VBLANK		(1<<21)
 #define   DERRMR_PIPEC_HBLANK		(1<<22)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* GM45+ chicken bits -- debug workaround bits that may be required
@@ -1459,6 +1641,11 @@ enum punit_power_well {
 #define  _3D_CHICKEN_SF_DISABLE_OBJEND_CULL		(1 << 10)
 #define  _3D_CHICKEN3_SF_DISABLE_FASTCLIP_CULL		(1 << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  _3D_CHICKEN_SDE_LIMIT_FIFO_POLY_DEPTH(x)	((x)<<1) /* gen8+ */
+#define  _3D_CHICKEN3_SF_DISABLE_PIPELINED_ATTR_FETCH	(1 << 1) /* gen6 */
+>>>>>>> v3.18
 =======
 #define  _3D_CHICKEN_SDE_LIMIT_FIFO_POLY_DEPTH(x)	((x)<<1) /* gen8+ */
 #define  _3D_CHICKEN3_SF_DISABLE_PIPELINED_ATTR_FETCH	(1 << 1) /* gen6 */
@@ -1469,10 +1656,13 @@ enum punit_power_well {
 # define MI_FLUSH_ENABLE				(1 << 12)
 # define ASYNC_FLIP_PERF_DISABLE			(1 << 14)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define GEN6_GT_MODE	0x20d0
 #define   GEN6_GT_MODE_HI				(1 << 9)
 =======
+=======
+>>>>>>> v3.18
 # define MODE_IDLE					(1 << 9)
 # define STOP_RING					(1 << 8)
 
@@ -1483,6 +1673,9 @@ enum punit_power_well {
 #define   GEN6_WIZ_HASHING_8x4				GEN6_WIZ_HASHING(0, 1)
 #define   GEN6_WIZ_HASHING_16x4				GEN6_WIZ_HASHING(1, 0)
 #define   GEN6_WIZ_HASHING_MASK				(GEN6_WIZ_HASHING(1, 1) << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   GEN6_TD_FOUR_ROW_DISPATCH_DISABLE		(1 << 5)
 
@@ -1491,7 +1684,11 @@ enum punit_power_well {
 #define RING_MODE_GEN7(ring)	((ring)->mmio_base+0x29c)
 #define   GFX_RUN_LIST_ENABLE		(1<<15)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   GFX_TLB_INVALIDATE_ALWAYS	(1<<13)
+=======
+#define   GFX_TLB_INVALIDATE_EXPLICIT	(1<<13)
+>>>>>>> v3.18
 =======
 #define   GFX_TLB_INVALIDATE_EXPLICIT	(1<<13)
 >>>>>>> v3.18
@@ -1502,12 +1699,18 @@ enum punit_power_well {
 
 #define VLV_DISPLAY_BASE 0x180000
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define VLV_MIPI_BASE VLV_DISPLAY_BASE
 
 #define VLV_GU_CTL0	(VLV_DISPLAY_BASE + 0x2030)
 #define VLV_GU_CTL1	(VLV_DISPLAY_BASE + 0x2034)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SCPD0		0x0209c /* 915+ only */
 #define IER		0x020a0
@@ -1516,7 +1719,13 @@ enum punit_power_well {
 #define ISR		0x020ac
 #define VLV_GUNIT_CLOCK_GATE	(VLV_DISPLAY_BASE + 0x2060)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   GCFG_DIS		(1<<8)
+=======
+#define   GINT_DIS		(1<<22)
+#define   GCFG_DIS		(1<<8)
+#define VLV_GUNIT_CLOCK_GATE2	(VLV_DISPLAY_BASE + 0x2064)
+>>>>>>> v3.18
 =======
 #define   GINT_DIS		(1<<22)
 #define   GCFG_DIS		(1<<8)
@@ -1527,6 +1736,7 @@ enum punit_power_well {
 #define VLV_IIR		(VLV_DISPLAY_BASE + 0x20a4)
 #define VLV_IMR		(VLV_DISPLAY_BASE + 0x20a8)
 #define VLV_ISR		(VLV_DISPLAY_BASE + 0x20ac)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define   I915_PIPE_CONTROL_NOTIFY_INTERRUPT		(1<<18)
 #define   I915_DISPLAY_PORT_INTERRUPT			(1<<17)
@@ -1551,6 +1761,11 @@ enum punit_power_well {
 #define VLV_PCBR_ADDR_SHIFT	12
 
 >>>>>>> v3.18
+=======
+#define VLV_PCBR	(VLV_DISPLAY_BASE + 0x2120)
+#define VLV_PCBR_ADDR_SHIFT	12
+
+>>>>>>> v3.18
 #define   DISPLAY_PLANE_FLIP_PENDING(plane) (1<<(11-(plane))) /* A and B only */
 #define EIR		0x020b0
 #define EMR		0x020b4
@@ -1564,7 +1779,11 @@ enum punit_power_well {
 #define INSTPM	        0x020c0
 #define   INSTPM_SELF_EN (1<<12) /* 915GM only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   INSTPM_AGPBUSY_DIS (1<<11) /* gen3: when disabled, pending interrupts
+=======
+#define   INSTPM_AGPBUSY_INT_EN (1<<11) /* gen3: when disabled, pending interrupts
+>>>>>>> v3.18
 =======
 #define   INSTPM_AGPBUSY_INT_EN (1<<11) /* gen3: when disabled, pending interrupts
 >>>>>>> v3.18
@@ -1575,11 +1794,17 @@ enum punit_power_well {
 #define   INSTPM_SYNC_FLUSH	(1<<5)
 #define ACTHD	        0x020c8
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MEM_MODE	0x020cc
 #define   MEM_DISPLAY_B_TRICKLE_FEED_DISABLE (1<<3) /* 830 only */
 #define   MEM_DISPLAY_A_TRICKLE_FEED_DISABLE (1<<2) /* 830/845 only */
 #define   MEM_DISPLAY_TRICKLE_FEED_DISABLE (1<<2) /* 85x only */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FW_BLC		0x020d8
 #define FW_BLC2		0x020dc
@@ -1656,11 +1881,17 @@ enum punit_power_well {
 #define   MI_ARB_DISPLAY_PRIORITY_B_A		(1 << 0)	/* display B > display A */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MI_STATE	0x020e4 /* gen2 only */
 #define   MI_AGPBUSY_INT_EN			(1 << 1) /* 85x only */
 #define   MI_AGPBUSY_830_MODE			(1 << 0) /* 85x only */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CACHE_MODE_0	0x02120 /* 915+ only */
 #define   CM0_PIPELINED_RENDER_FLUSH_DISABLE (1<<8)
@@ -1672,7 +1903,10 @@ enum punit_power_well {
 #define   CM0_DEPTH_WRITE_DISABLE (1<<1)
 #define   CM0_RC_OP_FLUSH_DISABLE (1<<0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BB_ADDR		0x02140 /* 8 bytes */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define GFX_FLSH_CNTL	0x02170 /* 915+ only */
@@ -1682,6 +1916,7 @@ enum punit_power_well {
 #define   ECO_GATING_CX_ONLY	(1<<3)
 #define   ECO_FLIP_DONE		(1<<0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CACHE_MODE_1		0x7004 /* IVB+ */
 #define   PIXEL_SUBSPAN_COLLECT_OPT_DISABLE (1<<6)
@@ -1708,12 +1943,17 @@ enum punit_power_well {
 #define   GEN6_BLITTER_SYNC_STATUS			(1 << 24)
 #define   GEN6_BLITTER_USER_INTERRUPT			(1 << 22)
 =======
+=======
+>>>>>>> v3.18
 #define CACHE_MODE_0_GEN7	0x7000 /* IVB+ */
 #define RC_OP_FLUSH_ENABLE (1<<0)
 #define   HIZ_RAW_STALL_OPT_DISABLE (1<<2)
 #define CACHE_MODE_1		0x7004 /* IVB+ */
 #define   PIXEL_SUBSPAN_COLLECT_OPT_DISABLE	(1<<6)
 #define   GEN8_4x4_STC_OPTIMIZATION_DISABLE	(1<<6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GEN6_BLITTER_ECOSKPD	0x221d0
@@ -1721,11 +1961,17 @@ enum punit_power_well {
 #define   GEN6_BLITTER_FBC_NOTIFY			(1<<3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GEN6_RC_SLEEP_PSMI_CONTROL	0x2050
 #define   GEN8_RC_SEMA_IDLE_MSG_DISABLE	(1 << 12)
 #define   GEN8_FF_DOP_CLOCK_GATE_DISABLE	(1<<10)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GEN6_BSD_SLEEP_PSMI_CONTROL	0x12050
 #define   GEN6_BSD_SLEEP_MSG_DISABLE	(1 << 0)
@@ -1734,10 +1980,13 @@ enum punit_power_well {
 #define   GEN6_BSD_GO_INDICATOR		(1 << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GEN6_BSD_HWSTAM			0x12098
 #define GEN6_BSD_IMR			0x120a8
 #define   GEN6_BSD_USER_INTERRUPT	(1 << 12)
 =======
+=======
+>>>>>>> v3.18
 /* On modern GEN architectures interrupt control consists of two sets
  * of registers. The first set pertains to the ring generating the
  * interrupt. The second control is for the functional block generating the
@@ -1809,6 +2058,9 @@ enum punit_power_well {
 #define I915_USER_INTERRUPT				(1<<1)
 #define I915_ASLE_INTERRUPT				(1<<0)
 #define I915_BSD_USER_INTERRUPT				(1<<25)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GEN6_BSD_RNCID			0x12198
@@ -1816,6 +2068,10 @@ enum punit_power_well {
 #define GEN7_FF_THREAD_MODE		0x20a0
 #define   GEN7_FF_SCHED_MASK		0x0077070
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   GEN8_FF_DS_REF_CNT_FFME	(1 << 19)
+>>>>>>> v3.18
 =======
 #define   GEN8_FF_DS_REF_CNT_FFME	(1 << 19)
 >>>>>>> v3.18
@@ -1847,7 +2103,11 @@ enum punit_power_well {
 #define   FBC_CTL_C3_IDLE	(1<<13)
 #define   FBC_CTL_STRIDE_SHIFT	(5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   FBC_CTL_FENCENO	(1<<0)
+=======
+#define   FBC_CTL_FENCENO_SHIFT	(0)
+>>>>>>> v3.18
 =======
 #define   FBC_CTL_FENCENO_SHIFT	(0)
 >>>>>>> v3.18
@@ -1858,7 +2118,11 @@ enum punit_power_well {
 #define   FBC_STAT_COMPRESSED	(1<<30)
 #define   FBC_STAT_MODIFIED	(1<<29)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   FBC_STAT_CURRENT_LINE	(1<<0)
+=======
+#define   FBC_STAT_CURRENT_LINE_SHIFT	(0)
+>>>>>>> v3.18
 =======
 #define   FBC_STAT_CURRENT_LINE_SHIFT	(0)
 >>>>>>> v3.18
@@ -1870,9 +2134,14 @@ enum punit_power_well {
 #define   FBC_CTL_IDLE_DEBUG	(3<<2)
 #define   FBC_CTL_CPU_FENCE	(1<<1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   FBC_CTL_PLANEA	(0<<0)
 #define   FBC_CTL_PLANEB	(1<<0)
 #define FBC_FENCE_OFF		0x0321b
+=======
+#define   FBC_CTL_PLANE(plane)	((plane)<<0)
+#define FBC_FENCE_OFF		0x03218 /* BSpec typo has 321Bh */
+>>>>>>> v3.18
 =======
 #define   FBC_CTL_PLANE(plane)	((plane)<<0)
 #define FBC_FENCE_OFF		0x03218 /* BSpec typo has 321Bh */
@@ -1886,14 +2155,20 @@ enum punit_power_well {
 #define DPFC_CONTROL		0x3208
 #define   DPFC_CTL_EN		(1<<31)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   DPFC_CTL_PLANEA	(0<<30)
 #define   DPFC_CTL_PLANEB	(1<<30)
 #define   DPFC_CTL_FENCE_EN	(1<<29)
 =======
+=======
+>>>>>>> v3.18
 #define   DPFC_CTL_PLANE(plane)	((plane)<<30)
 #define   IVB_DPFC_CTL_PLANE(plane)	((plane)<<29)
 #define   DPFC_CTL_FENCE_EN	(1<<29)
 #define   IVB_DPFC_CTL_FENCE_EN	(1<<28)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   DPFC_CTL_PERSISTENT_MODE	(1<<25)
 #define   DPFC_SR_EN		(1<<10)
@@ -1920,6 +2195,10 @@ enum punit_power_well {
 #define ILK_DPFC_CB_BASE	0x43200
 #define ILK_DPFC_CONTROL	0x43208
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   FBC_CTL_FALSE_COLOR	(1<<10)
+>>>>>>> v3.18
 =======
 #define   FBC_CTL_FALSE_COLOR	(1<<10)
 >>>>>>> v3.18
@@ -1932,6 +2211,10 @@ enum punit_power_well {
 #define ILK_FBC_RT_BASE		0x2128
 #define   ILK_FBC_RT_VALID	(1<<0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   SNB_FBC_FRONT_BUFFER	(1<<1)
+>>>>>>> v3.18
 =======
 #define   SNB_FBC_FRONT_BUFFER	(1<<1)
 >>>>>>> v3.18
@@ -1951,7 +2234,10 @@ enum punit_power_well {
 #define DPFC_CPU_FENCE_OFFSET	0x100104
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Framebuffer compression for Ivybridge */
 #define IVB_FBC_RT_BASE			0x7020
 
@@ -1961,6 +2247,9 @@ enum punit_power_well {
 #define MSG_FBC_REND_STATE	0x50380
 #define   FBC_REND_NUKE		(1<<2)
 #define   FBC_REND_CACHE_CLEAN	(1<<1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2000,6 +2289,10 @@ enum punit_power_well {
 #define   GMBUS_PORT_VGADDC	2
 #define   GMBUS_PORT_PANEL	3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   GMBUS_PORT_DPD_CHV	3 /* HDMID_CHV */
+>>>>>>> v3.18
 =======
 #define   GMBUS_PORT_DPD_CHV	3 /* HDMID_CHV */
 >>>>>>> v3.18
@@ -2018,7 +2311,10 @@ enum punit_power_well {
 #define   GMBUS_CYCLE_STOP	(4<<25)
 #define   GMBUS_BYTE_COUNT_SHIFT 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   GMBUS_BYTE_COUNT_MAX   256U
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define   GMBUS_SLAVE_INDEX_SHIFT 8
@@ -2047,11 +2343,17 @@ enum punit_power_well {
  * Clock control & power management
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define _DPLL_A (dev_priv->info.display_mmio_offset + 0x6014)
 #define _DPLL_B (dev_priv->info.display_mmio_offset + 0x6018)
 #define _CHV_DPLL_C (dev_priv->info.display_mmio_offset + 0x6030)
 #define DPLL(pipe) _PIPE3((pipe), _DPLL_A, _DPLL_B, _CHV_DPLL_C)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VGA0	0x6000
@@ -2066,11 +2368,17 @@ enum punit_power_well {
 #define   VGA1_PD_P1_SHIFT	8
 #define   VGA1_PD_P1_MASK	(0x1f << 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _DPLL_A	(dev_priv->info->display_mmio_offset + 0x6014)
 #define _DPLL_B	(dev_priv->info->display_mmio_offset + 0x6018)
 #define DPLL(pipe) _PIPE(pipe, _DPLL_A, _DPLL_B)
 #define   DPLL_VCO_ENABLE		(1 << 31)
 #define   DPLL_DVO_HIGH_SPEED		(1 << 30)
+=======
+#define   DPLL_VCO_ENABLE		(1 << 31)
+#define   DPLL_SDVO_HIGH_SPEED		(1 << 30)
+#define   DPLL_DVO_2X_MODE		(1 << 30)
+>>>>>>> v3.18
 =======
 #define   DPLL_VCO_ENABLE		(1 << 31)
 #define   DPLL_SDVO_HIGH_SPEED		(1 << 30)
@@ -2092,10 +2400,13 @@ enum punit_power_well {
 #define   DPLL_FPA01_P1_POST_DIV_MASK_PINEVIEW	0x00ff8000 /* Pineview */
 #define   DPLL_LOCK_VLV			(1<<15)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   DPLL_INTEGRATED_CLOCK_VLV	(1<<13)
 
 #define   DPLL_FPA01_P1_POST_DIV_MASK_I830	0x001f0000
 =======
+=======
+>>>>>>> v3.18
 #define   DPLL_INTEGRATED_CRI_CLK_VLV	(1<<14)
 #define   DPLL_INTEGRATED_CLOCK_VLV	(1<<13)
 #define   DPLL_SSC_REF_CLOCK_CHV	(1<<13)
@@ -2112,6 +2423,9 @@ enum punit_power_well {
 #define DISPLAY_PHY_STATUS (VLV_DISPLAY_BASE + 0x60104)
 #define   PHY_POWERGOOD(phy)	(((phy) == DPIO_PHY0) ? (1<<31) : (1<<30))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The i830 generation, in LVDS mode, defines P1 as the bit number set within
@@ -2151,14 +2465,20 @@ enum punit_power_well {
 #define   SDVO_MULTIPLIER_SHIFT_HIRES		4
 #define   SDVO_MULTIPLIER_SHIFT_VGA		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _DPLL_A_MD (dev_priv->info->display_mmio_offset + 0x601c) /* 965+ only */
 =======
+=======
+>>>>>>> v3.18
 
 #define _DPLL_A_MD (dev_priv->info.display_mmio_offset + 0x601c)
 #define _DPLL_B_MD (dev_priv->info.display_mmio_offset + 0x6020)
 #define _CHV_DPLL_C_MD (dev_priv->info.display_mmio_offset + 0x603c)
 #define DPLL_MD(pipe) _PIPE3((pipe), _DPLL_A_MD, _DPLL_B_MD, _CHV_DPLL_C_MD)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * UDI pixel divider, controlling how many pixels are stuffed into a packet.
@@ -2197,8 +2517,11 @@ enum punit_power_well {
 #define   DPLL_MD_VGA_UDI_MULTIPLIER_MASK	0x0000003f
 #define   DPLL_MD_VGA_UDI_MULTIPLIER_SHIFT	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _DPLL_B_MD (dev_priv->info->display_mmio_offset + 0x6020) /* 965+ only */
 #define DPLL_MD(pipe) _PIPE(pipe, _DPLL_A_MD, _DPLL_B_MD)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2233,7 +2556,11 @@ enum punit_power_well {
 #define  DSTATE_GFX_CLOCK_GATING		(1<<1)
 #define  DSTATE_DOT_CLOCK_GATING		(1<<0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DSPCLK_GATE_D		0x6200
+=======
+#define DSPCLK_GATE_D	(dev_priv->info.display_mmio_offset + 0x6200)
+>>>>>>> v3.18
 =======
 #define DSPCLK_GATE_D	(dev_priv->info.display_mmio_offset + 0x6200)
 >>>>>>> v3.18
@@ -2266,7 +2593,11 @@ enum punit_power_well {
 # define OVFUNIT_CLOCK_GATE_DISABLE		(1 << 5)
 # define OVBUNIT_CLOCK_GATE_DISABLE		(1 << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -2290,7 +2621,11 @@ enum punit_power_well {
 # define MOTION_COMP_CLOCK_GATE_DISABLE		(1 << 6)
 # define MAG_CLOCK_GATE_DISABLE			(1 << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** This bit must be unset on 855,865 */
+=======
+/* This bit must be unset on 855,865 */
+>>>>>>> v3.18
 =======
 /* This bit must be unset on 855,865 */
 >>>>>>> v3.18
@@ -2299,7 +2634,11 @@ enum punit_power_well {
 # define MEC_CLOCK_GATE_DISABLE			(1 << 2)
 # define MECO_CLOCK_GATE_DISABLE		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** This bit must be set on 855,865. */
+=======
+/* This bit must be set on 855,865. */
+>>>>>>> v3.18
 =======
 /* This bit must be set on 855,865. */
 >>>>>>> v3.18
@@ -2324,7 +2663,11 @@ enum punit_power_well {
 
 # define I965_RCZ_CLOCK_GATE_DISABLE		(1 << 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** This bit must always be set on 965G/965GM */
+=======
+/* This bit must always be set on 965G/965GM */
+>>>>>>> v3.18
 =======
 /* This bit must always be set on 965G/965GM */
 >>>>>>> v3.18
@@ -2335,7 +2678,11 @@ enum punit_power_well {
 # define I965_GW_CLOCK_GATE_DISABLE		(1 << 25)
 # define I965_TD_CLOCK_GATE_DISABLE		(1 << 24)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** This bit must always be set on 965G */
+=======
+/* This bit must always be set on 965G */
+>>>>>>> v3.18
 =======
 /* This bit must always be set on 965G */
 >>>>>>> v3.18
@@ -2364,11 +2711,17 @@ enum punit_power_well {
 #define GS_UNIT_CLOCK_GATE_DISABLE		(1 << 7)
 #define CL_UNIT_CLOCK_GATE_DISABLE		(1 << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define VDECCLK_GATE_D		0x620C		/* g4x only */
 #define  VCP_UNIT_CLOCK_GATE_DISABLE		(1 << 4)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RAMCLK_GATE_D		0x6210		/* CRL only */
 #define DEUC			0x6214          /* CRL only */
@@ -2376,6 +2729,7 @@ enum punit_power_well {
 #define FW_BLC_SELF_VLV		(VLV_DISPLAY_BASE + 0x6500)
 #define  FW_CSPWRDWNEN		(1<<15)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Palette regs
@@ -2385,6 +2739,8 @@ enum punit_power_well {
 #define _PALETTE_B		(dev_priv->info->display_mmio_offset + 0xa800)
 #define PALETTE(pipe) _PIPE(pipe, _PALETTE_A, _PALETTE_B)
 =======
+=======
+>>>>>>> v3.18
 #define MI_ARB_VLV		(VLV_DISPLAY_BASE + 0x6504)
 
 #define CZCLK_CDCLK_FREQ_RATIO	(VLV_DISPLAY_BASE + 0x6508)
@@ -2401,6 +2757,9 @@ enum punit_power_well {
 #define CHV_PALETTE_C_OFFSET 0xc000
 #define PALETTE(pipe) (dev_priv->info.palette_offsets[pipe] + \
 		       dev_priv->info.display_mmio_offset)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MCH MMIO space */
@@ -2413,6 +2772,11 @@ enum punit_power_well {
  * every way.  It is not accessible from the CP register read instructions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Starting from Haswell, you can't write registers using the MCHBAR mirror,
+ * just read.
+>>>>>>> v3.18
 =======
  * Starting from Haswell, you can't write registers using the MCHBAR mirror,
  * just read.
@@ -2424,9 +2788,15 @@ enum punit_power_well {
 
 /* Memory controller frequency in MCHBAR for Haswell (possible SNB+) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DCLK 0x5e04
 
 /** 915-945 and GM965 MCH register controlling DRAM channel access */
+=======
+#define DCLK (MCHBAR_MIRROR_BASE_SNB + 0x5e04)
+
+/* 915-945 and GM965 MCH register controlling DRAM channel access */
+>>>>>>> v3.18
 =======
 #define DCLK (MCHBAR_MIRROR_BASE_SNB + 0x5e04)
 
@@ -2441,6 +2811,7 @@ enum punit_power_well {
 #define DCC_CHANNEL_XOR_BIT_17				(1 << 9)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Pineview MCH register contains DDR3 setting */
 #define CSHRDDR3CTL            0x101a8
 #define CSHRDDR3CTL_DDR3       (1 << 2)
@@ -2451,6 +2822,8 @@ enum punit_power_well {
 
 /** snb MCH registers for reading the DRAM channel configuration */
 =======
+=======
+>>>>>>> v3.18
 /* Pineview MCH register contains DDR3 setting */
 #define CSHRDDR3CTL            0x101a8
 #define CSHRDDR3CTL_DDR3       (1 << 2)
@@ -2460,6 +2833,9 @@ enum punit_power_well {
 #define C1DRB3			0x10606
 
 /* snb MCH registers for reading the DRAM channel configuration */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAD_DIMM_C0			(MCHBAR_MIRROR_BASE_SNB + 0x5004)
 #define MAD_DIMM_C1			(MCHBAR_MIRROR_BASE_SNB + 0x5008)
@@ -2483,7 +2859,11 @@ enum punit_power_well {
 #define   MAD_DIMM_A_SIZE_MASK		(0xff << MAD_DIMM_A_SIZE_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** snb MCH registers for priority tuning */
+=======
+/* snb MCH registers for priority tuning */
+>>>>>>> v3.18
 =======
 /* snb MCH registers for priority tuning */
 >>>>>>> v3.18
@@ -2492,6 +2872,11 @@ enum punit_power_well {
 #define   MCH_SSKPD_WM0_VAL		0xc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MCH_SECP_NRG_STTS		(MCHBAR_MIRROR_BASE_SNB + 0x592c)
+
+>>>>>>> v3.18
 =======
 #define MCH_SECP_NRG_STTS		(MCHBAR_MIRROR_BASE_SNB + 0x592c)
 
@@ -2744,9 +3129,15 @@ enum punit_power_well {
 #define GEN6_GT_THREAD_STATUS_CORE_MASK_HSW (0x7 | (0x07 << 16))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GEN6_GT_PERF_STATUS	0x145948
 #define GEN6_RP_STATE_LIMITS	0x145994
 #define GEN6_RP_STATE_CAP	0x145998
+=======
+#define GEN6_GT_PERF_STATUS	(MCHBAR_MIRROR_BASE_SNB + 0x5948)
+#define GEN6_RP_STATE_LIMITS	(MCHBAR_MIRROR_BASE_SNB + 0x5994)
+#define GEN6_RP_STATE_CAP	(MCHBAR_MIRROR_BASE_SNB + 0x5998)
+>>>>>>> v3.18
 =======
 #define GEN6_GT_PERF_STATUS	(MCHBAR_MIRROR_BASE_SNB + 0x5948)
 #define GEN6_RP_STATE_LIMITS	(MCHBAR_MIRROR_BASE_SNB + 0x5994)
@@ -2759,7 +3150,10 @@ enum punit_power_well {
 #define CCID			0x2180
 #define   CCID_EN		(1<<0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Notes on SNB/IVB/VLV context size:
  * - Power context is saved elsewhere (LLC or stolen)
@@ -2773,6 +3167,9 @@ enum punit_power_well {
  * - GT1 size just indicates how much of render context
  *   doesn't need saving on GT1
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CXT_SIZE		0x21a0
 #define GEN6_CXT_POWER_SIZE(cxt_reg)	((cxt_reg >> 24) & 0x3f)
@@ -2781,9 +3178,13 @@ enum punit_power_well {
 #define GEN6_CXT_EXTENDED_SIZE(cxt_reg)	((cxt_reg >> 6) & 0x3f)
 #define GEN6_CXT_PIPELINE_SIZE(cxt_reg)	((cxt_reg >> 0) & 0x3f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GEN6_CXT_TOTAL_SIZE(cxt_reg)	(GEN6_CXT_POWER_SIZE(cxt_reg) + \
 					GEN6_CXT_RING_SIZE(cxt_reg) + \
 					GEN6_CXT_RENDER_SIZE(cxt_reg) + \
+=======
+#define GEN6_CXT_TOTAL_SIZE(cxt_reg)	(GEN6_CXT_RING_SIZE(cxt_reg) + \
+>>>>>>> v3.18
 =======
 #define GEN6_CXT_TOTAL_SIZE(cxt_reg)	(GEN6_CXT_RING_SIZE(cxt_reg) + \
 >>>>>>> v3.18
@@ -2797,11 +3198,15 @@ enum punit_power_well {
 #define GEN7_CXT_GT1_SIZE(ctx_reg)	((ctx_reg >> 6) & 0x7)
 #define GEN7_CXT_VFSTATE_SIZE(ctx_reg)	((ctx_reg >> 0) & 0x3f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GEN7_CXT_TOTAL_SIZE(ctx_reg)	(GEN7_CXT_POWER_SIZE(ctx_reg) + \
 					 GEN7_CXT_RING_SIZE(ctx_reg) + \
 					 GEN7_CXT_RENDER_SIZE(ctx_reg) + \
 					 GEN7_CXT_EXTENDED_SIZE(ctx_reg) + \
 					 GEN7_CXT_GT1_SIZE(ctx_reg) + \
+=======
+#define GEN7_CXT_TOTAL_SIZE(ctx_reg)	(GEN7_CXT_EXTENDED_SIZE(ctx_reg) + \
+>>>>>>> v3.18
 =======
 #define GEN7_CXT_TOTAL_SIZE(ctx_reg)	(GEN7_CXT_EXTENDED_SIZE(ctx_reg) + \
 >>>>>>> v3.18
@@ -2814,13 +3219,19 @@ enum punit_power_well {
  */
 #define HSW_CXT_TOTAL_SIZE		(17 * PAGE_SIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Same as Haswell, but 72064 bytes now. */
 #define GEN8_CXT_TOTAL_SIZE		(18 * PAGE_SIZE)
 
 #define CHV_CLK_CTL1			0x101100
 #define VLV_CLK_CTL2			0x101104
 #define   CLK_CTL2_CZCOUNT_30NS_SHIFT	28
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2841,6 +3252,7 @@ enum punit_power_well {
  * Display engine regs
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Pipe A timing regs */
 #define _HTOTAL_A	(dev_priv->info->display_mmio_offset + 0x60000)
@@ -2874,6 +3286,8 @@ enum punit_power_well {
 #define BCLRPAT(pipe) _PIPE(pipe, _BCLRPAT_A, _BCLRPAT_B)
 #define VSYNCSHIFT(trans) _TRANSCODER(trans, _VSYNCSHIFT_A, _VSYNCSHIFT_B)
 =======
+=======
+>>>>>>> v3.18
 /* Pipe A CRC regs */
 #define _PIPE_CRC_CTL_A			0x60050
 #define   PIPE_CRC_ENABLE		(1 << 31)
@@ -3062,6 +3476,9 @@ enum punit_power_well {
 #define   EDP_PSR_DEBUG_MASK_LPSP	(1<<27)
 #define   EDP_PSR_DEBUG_MASK_MEMUP	(1<<26)
 #define   EDP_PSR_DEBUG_MASK_HPD	(1<<25)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* VGA port control */
@@ -3114,7 +3531,11 @@ enum punit_power_well {
 
 /* Hotplug control (945+ only) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PORT_HOTPLUG_EN		(dev_priv->info->display_mmio_offset + 0x61110)
+=======
+#define PORT_HOTPLUG_EN		(dev_priv->info.display_mmio_offset + 0x61110)
+>>>>>>> v3.18
 =======
 #define PORT_HOTPLUG_EN		(dev_priv->info.display_mmio_offset + 0x61110)
 >>>>>>> v3.18
@@ -3148,7 +3569,11 @@ enum punit_power_well {
 #define CRT_HOTPLUG_DETECT_VOLTAGE_475MV	(1 << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PORT_HOTPLUG_STAT	(dev_priv->info->display_mmio_offset + 0x61114)
+=======
+#define PORT_HOTPLUG_STAT	(dev_priv->info.display_mmio_offset + 0x61114)
+>>>>>>> v3.18
 =======
 #define PORT_HOTPLUG_STAT	(dev_priv->info.display_mmio_offset + 0x61114)
 >>>>>>> v3.18
@@ -3168,9 +3593,12 @@ enum punit_power_well {
 #define   PORTB_HOTPLUG_LIVE_STATUS_VLV		(1 << 29)
 #define   PORTD_HOTPLUG_INT_STATUS		(3 << 21)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   PORTC_HOTPLUG_INT_STATUS		(3 << 19)
 #define   PORTB_HOTPLUG_INT_STATUS		(3 << 17)
 =======
+=======
+>>>>>>> v3.18
 #define   PORTD_HOTPLUG_INT_LONG_PULSE		(2 << 21)
 #define   PORTD_HOTPLUG_INT_SHORT_PULSE		(1 << 21)
 #define   PORTC_HOTPLUG_INT_STATUS		(3 << 19)
@@ -3179,6 +3607,9 @@ enum punit_power_well {
 #define   PORTB_HOTPLUG_INT_STATUS		(3 << 17)
 #define   PORTB_HOTPLUG_INT_LONG_PULSE		(2 << 17)
 #define   PORTB_HOTPLUG_INT_SHORT_PLUSE		(1 << 17)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* CRT/TV common between gen3+ */
 #define   CRT_HOTPLUG_INT_STATUS		(1 << 11)
@@ -3188,12 +3619,18 @@ enum punit_power_well {
 #define   CRT_HOTPLUG_MONITOR_MONO		(2 << 8)
 #define   CRT_HOTPLUG_MONITOR_NONE		(0 << 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define   DP_AUX_CHANNEL_D_INT_STATUS_G4X	(1 << 6)
 #define   DP_AUX_CHANNEL_C_INT_STATUS_G4X	(1 << 5)
 #define   DP_AUX_CHANNEL_B_INT_STATUS_G4X	(1 << 4)
 #define   DP_AUX_CHANNEL_MASK_INT_STATUS_G4X	(7 << 4)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SDVO is different across gen3/4 */
 #define   SDVOC_HOTPLUG_INT_STATUS_G4X		(1 << 3)
@@ -3229,6 +3666,10 @@ enum punit_power_well {
 #define GEN4_HDMIB	GEN3_SDVOB
 #define GEN4_HDMIC	GEN3_SDVOC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CHV_HDMID	0x6116C
+>>>>>>> v3.18
 =======
 #define CHV_HDMID	0x6116C
 >>>>>>> v3.18
@@ -3238,7 +3679,10 @@ enum punit_power_well {
 #define PCH_HDMID	0xe1160
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PORT_DFT_I9XX				0x61150
 #define   DC_BALANCE_RESET			(1 << 25)
 #define PORT_DFT2_G4X		(dev_priv->info.display_mmio_offset + 0x61154)
@@ -3247,6 +3691,9 @@ enum punit_power_well {
 #define   PIPE_B_SCRAMBLE_RESET			(1 << 1)
 #define   PIPE_A_SCRAMBLE_RESET			(1 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Gen 3 SDVO bits: */
 #define   SDVO_ENABLE				(1 << 31)
@@ -3256,7 +3703,11 @@ enum punit_power_well {
 #define   SDVO_STALL_SELECT			(1 << 29)
 #define   SDVO_INTERRUPT_ENABLE			(1 << 26)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -3281,6 +3732,10 @@ enum punit_power_well {
 /* Gen 4 SDVO/HDMI bits: */
 #define   SDVO_COLOR_FORMAT_8bpc		(0 << 26)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   SDVO_COLOR_FORMAT_MASK		(7 << 26)
+>>>>>>> v3.18
 =======
 #define   SDVO_COLOR_FORMAT_MASK		(7 << 26)
 >>>>>>> v3.18
@@ -3303,11 +3758,17 @@ enum punit_power_well {
 #define   SDVO_PIPE_SEL_MASK_CPT		(3 << 29)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* CHV SDVO/HDMI bits: */
 #define   SDVO_PIPE_SEL_CHV(pipe)		((pipe) << 24)
 #define   SDVO_PIPE_SEL_MASK_CHV		(3 << 24)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DVO port control */
@@ -3401,6 +3862,7 @@ enum punit_power_well {
  * of the infoframe structure specified by CEA-861. */
 #define   VIDEO_DIP_DATA_SIZE	32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VIDEO_DIP_CTL		0x61170
 /* Pre HSW: */
 #define   VIDEO_DIP_ENABLE		(1 << 31)
@@ -3408,11 +3870,16 @@ enum punit_power_well {
 #define   VIDEO_DIP_PORT_C		(2 << 29)
 #define   VIDEO_DIP_PORT_D		(3 << 29)
 =======
+=======
+>>>>>>> v3.18
 #define   VIDEO_DIP_VSC_DATA_SIZE	36
 #define VIDEO_DIP_CTL		0x61170
 /* Pre HSW: */
 #define   VIDEO_DIP_ENABLE		(1 << 31)
 #define   VIDEO_DIP_PORT(port)		((port) << 29)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   VIDEO_DIP_PORT_MASK		(3 << 29)
 #define   VIDEO_DIP_ENABLE_GCP		(1 << 25)
@@ -3471,7 +3938,11 @@ enum punit_power_well {
 
 /* Panel fitting */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFIT_CONTROL	(dev_priv->info->display_mmio_offset + 0x61230)
+=======
+#define PFIT_CONTROL	(dev_priv->info.display_mmio_offset + 0x61230)
+>>>>>>> v3.18
 =======
 #define PFIT_CONTROL	(dev_priv->info.display_mmio_offset + 0x61230)
 >>>>>>> v3.18
@@ -3493,7 +3964,11 @@ enum punit_power_well {
 #define   PFIT_SCALING_PILLAR	(2 << 26)
 #define   PFIT_SCALING_LETTER	(3 << 26)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFIT_PGM_RATIOS	(dev_priv->info->display_mmio_offset + 0x61234)
+=======
+#define PFIT_PGM_RATIOS	(dev_priv->info.display_mmio_offset + 0x61234)
+>>>>>>> v3.18
 =======
 #define PFIT_PGM_RATIOS	(dev_priv->info.display_mmio_offset + 0x61234)
 >>>>>>> v3.18
@@ -3509,11 +3984,14 @@ enum punit_power_well {
 #define		PFIT_HORIZ_SCALE_MASK_965	0x00001fff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFIT_AUTO_RATIOS (dev_priv->info->display_mmio_offset + 0x61238)
 
 /* Backlight control */
 #define BLC_PWM_CTL2	(dev_priv->info->display_mmio_offset + 0x61250) /* 965+ only */
 =======
+=======
+>>>>>>> v3.18
 #define PFIT_AUTO_RATIOS (dev_priv->info.display_mmio_offset + 0x61238)
 
 #define _VLV_BLC_PWM_CTL2_A (dev_priv->info.display_mmio_offset + 0x61250)
@@ -3533,6 +4011,9 @@ enum punit_power_well {
 
 /* Backlight control */
 #define BLC_PWM_CTL2	(dev_priv->info.display_mmio_offset + 0x61250) /* 965+ only */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   BLM_PWM_ENABLE		(1 << 31)
 #define   BLM_COMBINATION_MODE		(1 << 30) /* gen4 only */
@@ -3542,11 +4023,17 @@ enum punit_power_well {
 #define   BLM_PIPE_B			(1 << 29)
 #define   BLM_PIPE_C			(2 << 29) /* ivb + */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define   BLM_TRANSCODER_A		BLM_PIPE_A /* hsw */
 #define   BLM_TRANSCODER_B		BLM_PIPE_B
 #define   BLM_TRANSCODER_C		BLM_PIPE_C
 #define   BLM_TRANSCODER_EDP		(3 << 29)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   BLM_PIPE(pipe)		((pipe) << 29)
 #define   BLM_POLARITY_I965		(1 << 28) /* gen4 only */
@@ -3560,7 +4047,11 @@ enum punit_power_well {
 #define   BLM_PHASE_IN_INCR_SHIFT	(0)
 #define   BLM_PHASE_IN_INCR_MASK	(0xff << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BLC_PWM_CTL	(dev_priv->info->display_mmio_offset + 0x61254)
+=======
+#define BLC_PWM_CTL	(dev_priv->info.display_mmio_offset + 0x61254)
+>>>>>>> v3.18
 =======
 #define BLC_PWM_CTL	(dev_priv->info.display_mmio_offset + 0x61254)
 >>>>>>> v3.18
@@ -3586,7 +4077,11 @@ enum punit_power_well {
 #define   BLM_POLARITY_PNV			(1 << 0) /* pnv only */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BLC_HIST_CTL	(dev_priv->info->display_mmio_offset + 0x61260)
+=======
+#define BLC_HIST_CTL	(dev_priv->info.display_mmio_offset + 0x61260)
+>>>>>>> v3.18
 =======
 #define BLC_HIST_CTL	(dev_priv->info.display_mmio_offset + 0x61260)
 >>>>>>> v3.18
@@ -3597,6 +4092,11 @@ enum punit_power_well {
 #define BLC_PWM_CPU_CTL		0x48254
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HSW_BLC_PWM2_CTL	0x48350
+
+>>>>>>> v3.18
 =======
 #define HSW_BLC_PWM2_CTL	0x48350
 
@@ -3609,6 +4109,7 @@ enum punit_power_well {
 #define   BLM_PCH_POLARITY			(1 << 29)
 #define BLC_PWM_PCH_CTL2	0xc8254
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* TV port control */
 #define TV_CTL			0x68000
@@ -3645,6 +4146,8 @@ enum punit_power_well {
 # define TV_ENC_SDP_FIX			(1 << 11)
 /**
 =======
+=======
+>>>>>>> v3.18
 #define UTIL_PIN_CTL		0x48400
 #define   UTIL_PIN_ENABLE	(1 << 31)
 
@@ -3685,12 +4188,16 @@ enum punit_power_well {
 /* Enables a fix for 480p/576p standard definition modes on the 915GM only */
 # define TV_ENC_SDP_FIX			(1 << 11)
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Enables a fix for the 915GM only.
  *
  * Not sure what it does.
  */
 # define TV_ENC_C0_FIX			(1 << 10)
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** Bits that must be preserved by software */
 # define TV_CTL_SAVE			((1 << 11) | (3 << 9) | (7 << 6) | 0xf)
@@ -3715,6 +4222,8 @@ enum punit_power_well {
 # define TV_TEST_MODE_PATTERN_5		(5 << 0)
 /**
 =======
+=======
+>>>>>>> v3.18
 /* Bits that must be preserved by software */
 # define TV_CTL_SAVE			((1 << 11) | (3 << 9) | (7 << 6) | 0xf)
 # define TV_FUSE_STATE_MASK		(3 << 4)
@@ -3737,6 +4246,9 @@ enum punit_power_well {
 /* Encoder test pattern 5 - linear color ramps */
 # define TV_TEST_MODE_PATTERN_5		(5 << 0)
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This test mode forces the DACs to 50% of full output.
  *
@@ -3748,7 +4260,11 @@ enum punit_power_well {
 #define TV_DAC			0x68004
 # define TV_DAC_SAVE		0x00ffff00
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -3759,6 +4275,7 @@ enum punit_power_well {
 # define TVDAC_STATE_CHG		(1 << 31)
 # define TVDAC_SENSE_MASK		(7 << 28)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Reports that DAC A voltage is above the detect threshold */
 # define TVDAC_A_SENSE			(1 << 30)
 /** Reports that DAC B voltage is above the detect threshold */
@@ -3767,6 +4284,8 @@ enum punit_power_well {
 # define TVDAC_C_SENSE			(1 << 28)
 /**
 =======
+=======
+>>>>>>> v3.18
 /* Reports that DAC A voltage is above the detect threshold */
 # define TVDAC_A_SENSE			(1 << 30)
 /* Reports that DAC B voltage is above the detect threshold */
@@ -3774,6 +4293,9 @@ enum punit_power_well {
 /* Reports that DAC C voltage is above the detect threshold */
 # define TVDAC_C_SENSE			(1 << 28)
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Enables DAC state detection logic, for load-based TV detection.
  *
@@ -3781,6 +4303,7 @@ enum punit_power_well {
  * to off, for load detection to work.
  */
 # define TVDAC_STATE_CHG_EN		(1 << 27)
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** Sets the DAC A sense value to high */
 # define TVDAC_A_SENSE_CTL		(1 << 26)
@@ -3792,6 +4315,8 @@ enum punit_power_well {
 # define DAC_CTL_OVERRIDE		(1 << 7)
 /** Sets the slew rate.  Must be preserved in software */
 =======
+=======
+>>>>>>> v3.18
 /* Sets the DAC A sense value to high */
 # define TVDAC_A_SENSE_CTL		(1 << 26)
 /* Sets the DAC B sense value to high */
@@ -3801,6 +4326,9 @@ enum punit_power_well {
 /* Overrides the ENC_ENABLE and DAC voltage levels */
 # define DAC_CTL_OVERRIDE		(1 << 7)
 /* Sets the slew rate.  Must be preserved in software */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define ENC_TVDAC_SLEW_FAST		(1 << 6)
 # define DAC_A_1_3_V			(0 << 4)
@@ -3817,7 +4345,11 @@ enum punit_power_well {
 # define DAC_C_MASK			(3 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -3836,7 +4368,11 @@ enum punit_power_well {
 # define TV_BY_MASK			0x07ff0000
 # define TV_BY_SHIFT			16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -3857,7 +4393,11 @@ enum punit_power_well {
 # define TV_BU_MASK			0x07ff0000
 # define TV_BU_SHIFT			16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -3878,7 +4418,11 @@ enum punit_power_well {
 # define TV_BV_MASK			0x07ff0000
 # define TV_BV_SHIFT			16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -3891,6 +4435,7 @@ enum punit_power_well {
 
 #define TV_CLR_KNOBS		0x68028
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** 2s-complement brightness adjustment */
 # define TV_BRIGHTNESS_MASK		0xff000000
 # define TV_BRIGHTNESS_SHIFT		24
@@ -3902,6 +4447,8 @@ enum punit_power_well {
 # define TV_SATURATION_SHIFT		8
 /** Hue adjustment, as an integer phase angle in degrees */
 =======
+=======
+>>>>>>> v3.18
 /* 2s-complement brightness adjustment */
 # define TV_BRIGHTNESS_MASK		0xff000000
 # define TV_BRIGHTNESS_SHIFT		24
@@ -3912,41 +4459,57 @@ enum punit_power_well {
 # define TV_SATURATION_MASK		0x0000ff00
 # define TV_SATURATION_SHIFT		8
 /* Hue adjustment, as an integer phase angle in degrees */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_HUE_MASK			0x000000ff
 # define TV_HUE_SHIFT			0
 
 #define TV_CLR_LEVEL		0x6802c
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Controls the DAC level for black */
 # define TV_BLACK_LEVEL_MASK		0x01ff0000
 # define TV_BLACK_LEVEL_SHIFT		16
 /** Controls the DAC level for blanking */
 =======
+=======
+>>>>>>> v3.18
 /* Controls the DAC level for black */
 # define TV_BLACK_LEVEL_MASK		0x01ff0000
 # define TV_BLACK_LEVEL_SHIFT		16
 /* Controls the DAC level for blanking */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_BLANK_LEVEL_MASK		0x000001ff
 # define TV_BLANK_LEVEL_SHIFT		0
 
 #define TV_H_CTL_1		0x68030
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Number of pixels in the hsync. */
 # define TV_HSYNC_END_MASK		0x1fff0000
 # define TV_HSYNC_END_SHIFT		16
 /** Total number of pixels minus one in the line (display and blanking). */
 =======
+=======
+>>>>>>> v3.18
 /* Number of pixels in the hsync. */
 # define TV_HSYNC_END_MASK		0x1fff0000
 # define TV_HSYNC_END_SHIFT		16
 /* Total number of pixels minus one in the line (display and blanking). */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_HTOTAL_MASK			0x00001fff
 # define TV_HTOTAL_SHIFT		0
 
 #define TV_H_CTL_2		0x68034
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** Enables the colorburst (needed for non-component color) */
 # define TV_BURST_ENA			(1 << 31)
@@ -3955,33 +4518,45 @@ enum punit_power_well {
 # define TV_HBURST_START_MASK		0x1fff0000
 /** Length of the colorburst */
 =======
+=======
+>>>>>>> v3.18
 /* Enables the colorburst (needed for non-component color) */
 # define TV_BURST_ENA			(1 << 31)
 /* Offset of the colorburst from the start of hsync, in pixels minus one. */
 # define TV_HBURST_START_SHIFT		16
 # define TV_HBURST_START_MASK		0x1fff0000
 /* Length of the colorburst */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_HBURST_LEN_SHIFT		0
 # define TV_HBURST_LEN_MASK		0x0001fff
 
 #define TV_H_CTL_3		0x68038
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** End of hblank, measured in pixels minus one from start of hsync */
 # define TV_HBLANK_END_SHIFT		16
 # define TV_HBLANK_END_MASK		0x1fff0000
 /** Start of hblank, measured in pixels minus one from start of hsync */
 =======
+=======
+>>>>>>> v3.18
 /* End of hblank, measured in pixels minus one from start of hsync */
 # define TV_HBLANK_END_SHIFT		16
 # define TV_HBLANK_END_MASK		0x1fff0000
 /* Start of hblank, measured in pixels minus one from start of hsync */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_HBLANK_START_SHIFT		0
 # define TV_HBLANK_START_MASK		0x0001fff
 
 #define TV_V_CTL_1		0x6803c
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** XXX */
 # define TV_NBR_END_SHIFT		16
 # define TV_NBR_END_MASK		0x07ff0000
@@ -3990,6 +4565,8 @@ enum punit_power_well {
 # define TV_VI_END_F1_MASK		0x00003f00
 /** XXX */
 =======
+=======
+>>>>>>> v3.18
 /* XXX */
 # define TV_NBR_END_SHIFT		16
 # define TV_NBR_END_MASK		0x07ff0000
@@ -3997,28 +4574,41 @@ enum punit_power_well {
 # define TV_VI_END_F1_SHIFT		8
 # define TV_VI_END_F1_MASK		0x00003f00
 /* XXX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_VI_END_F2_SHIFT		0
 # define TV_VI_END_F2_MASK		0x0000003f
 
 #define TV_V_CTL_2		0x68040
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Length of vsync, in half lines */
 # define TV_VSYNC_LEN_MASK		0x07ff0000
 # define TV_VSYNC_LEN_SHIFT		16
 /** Offset of the start of vsync in field 1, measured in one less than the
 =======
+=======
+>>>>>>> v3.18
 /* Length of vsync, in half lines */
 # define TV_VSYNC_LEN_MASK		0x07ff0000
 # define TV_VSYNC_LEN_SHIFT		16
 /* Offset of the start of vsync in field 1, measured in one less than the
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * number of half lines.
  */
 # define TV_VSYNC_START_F1_MASK		0x00007f00
 # define TV_VSYNC_START_F1_SHIFT	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4030,6 +4620,7 @@ enum punit_power_well {
 
 #define TV_V_CTL_3		0x68044
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Enables generation of the equalization signal */
 # define TV_EQUAL_ENA			(1 << 31)
 /** Length of vsync, in half lines */
@@ -4037,19 +4628,28 @@ enum punit_power_well {
 # define TV_VEQ_LEN_SHIFT		16
 /** Offset of the start of equalization in field 1, measured in one less than
 =======
+=======
+>>>>>>> v3.18
 /* Enables generation of the equalization signal */
 # define TV_EQUAL_ENA			(1 << 31)
 /* Length of vsync, in half lines */
 # define TV_VEQ_LEN_MASK		0x007f0000
 # define TV_VEQ_LEN_SHIFT		16
 /* Offset of the start of equalization in field 1, measured in one less than
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * the number of half lines.
  */
 # define TV_VEQ_START_F1_MASK		0x0007f00
 # define TV_VEQ_START_F1_SHIFT		8
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4061,7 +4661,11 @@ enum punit_power_well {
 
 #define TV_V_CTL_4		0x68048
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4071,7 +4675,11 @@ enum punit_power_well {
 # define TV_VBURST_START_F1_MASK	0x003f0000
 # define TV_VBURST_START_F1_SHIFT	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4083,7 +4691,11 @@ enum punit_power_well {
 
 #define TV_V_CTL_5		0x6804c
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4093,7 +4705,11 @@ enum punit_power_well {
 # define TV_VBURST_START_F2_MASK	0x003f0000
 # define TV_VBURST_START_F2_SHIFT	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4105,7 +4721,11 @@ enum punit_power_well {
 
 #define TV_V_CTL_6		0x68050
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4115,7 +4735,11 @@ enum punit_power_well {
 # define TV_VBURST_START_F3_MASK	0x003f0000
 # define TV_VBURST_START_F3_SHIFT	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4127,7 +4751,11 @@ enum punit_power_well {
 
 #define TV_V_CTL_7		0x68054
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4137,7 +4765,11 @@ enum punit_power_well {
 # define TV_VBURST_START_F4_MASK	0x003f0000
 # define TV_VBURST_START_F4_SHIFT	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4148,6 +4780,7 @@ enum punit_power_well {
 # define TV_VBURST_END_F4_SHIFT		0
 
 #define TV_SC_CTL_1		0x68060
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** Turns on the first subcarrier phase generation DDA */
 # define TV_SC_DDA1_EN			(1 << 31)
@@ -4168,6 +4801,8 @@ enum punit_power_well {
 # define TV_BURST_LEVEL_SHIFT		16
 /** Sets the increment of the first subcarrier phase generation DDA */
 =======
+=======
+>>>>>>> v3.18
 /* Turns on the first subcarrier phase generation DDA */
 # define TV_SC_DDA1_EN			(1 << 31)
 /* Turns on the first subcarrier phase generation DDA */
@@ -4186,66 +4821,93 @@ enum punit_power_well {
 # define TV_BURST_LEVEL_MASK		0x00ff0000
 # define TV_BURST_LEVEL_SHIFT		16
 /* Sets the increment of the first subcarrier phase generation DDA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_SCDDA1_INC_MASK		0x00000fff
 # define TV_SCDDA1_INC_SHIFT		0
 
 #define TV_SC_CTL_2		0x68064
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Sets the rollover for the second subcarrier phase generation DDA */
 # define TV_SCDDA2_SIZE_MASK		0x7fff0000
 # define TV_SCDDA2_SIZE_SHIFT		16
 /** Sets the increent of the second subcarrier phase generation DDA */
 =======
+=======
+>>>>>>> v3.18
 /* Sets the rollover for the second subcarrier phase generation DDA */
 # define TV_SCDDA2_SIZE_MASK		0x7fff0000
 # define TV_SCDDA2_SIZE_SHIFT		16
 /* Sets the increent of the second subcarrier phase generation DDA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_SCDDA2_INC_MASK		0x00007fff
 # define TV_SCDDA2_INC_SHIFT		0
 
 #define TV_SC_CTL_3		0x68068
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Sets the rollover for the third subcarrier phase generation DDA */
 # define TV_SCDDA3_SIZE_MASK		0x7fff0000
 # define TV_SCDDA3_SIZE_SHIFT		16
 /** Sets the increent of the third subcarrier phase generation DDA */
 =======
+=======
+>>>>>>> v3.18
 /* Sets the rollover for the third subcarrier phase generation DDA */
 # define TV_SCDDA3_SIZE_MASK		0x7fff0000
 # define TV_SCDDA3_SIZE_SHIFT		16
 /* Sets the increent of the third subcarrier phase generation DDA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_SCDDA3_INC_MASK		0x00007fff
 # define TV_SCDDA3_INC_SHIFT		0
 
 #define TV_WIN_POS		0x68070
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** X coordinate of the display from the start of horizontal active */
 # define TV_XPOS_MASK			0x1fff0000
 # define TV_XPOS_SHIFT			16
 /** Y coordinate of the display from the start of vertical active (NBR) */
 =======
+=======
+>>>>>>> v3.18
 /* X coordinate of the display from the start of horizontal active */
 # define TV_XPOS_MASK			0x1fff0000
 # define TV_XPOS_SHIFT			16
 /* Y coordinate of the display from the start of vertical active (NBR) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_YPOS_MASK			0x00000fff
 # define TV_YPOS_SHIFT			0
 
 #define TV_WIN_SIZE		0x68074
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Horizontal size of the display window, measured in pixels*/
 # define TV_XSIZE_MASK			0x1fff0000
 # define TV_XSIZE_SHIFT			16
 /**
 =======
+=======
+>>>>>>> v3.18
 /* Horizontal size of the display window, measured in pixels*/
 # define TV_XSIZE_MASK			0x1fff0000
 # define TV_XSIZE_SHIFT			16
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Vertical size of the display window, measured in pixels.
  *
@@ -4256,7 +4918,11 @@ enum punit_power_well {
 
 #define TV_FILTER_CTL_1		0x68080
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4267,7 +4933,11 @@ enum punit_power_well {
  */
 # define TV_AUTO_SCALE			(1 << 31)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4275,6 +4945,7 @@ enum punit_power_well {
  *
  * This is required on modes more than 1024 pixels wide */
 # define TV_V_FILTER_BYPASS		(1 << 29)
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** Enables adaptive vertical filtering */
 # define TV_VADAPT			(1 << 28)
@@ -4287,6 +4958,8 @@ enum punit_power_well {
 # define TV_VADAPT_MODE_MOST		(3 << 26)
 /**
 =======
+=======
+>>>>>>> v3.18
 /* Enables adaptive vertical filtering */
 # define TV_VADAPT			(1 << 28)
 # define TV_VADAPT_MODE_MASK		(3 << 26)
@@ -4297,6 +4970,9 @@ enum punit_power_well {
 /* Selects the most adaptive vertical filtering mode */
 # define TV_VADAPT_MODE_MOST		(3 << 26)
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Sets the horizontal scaling factor.
  *
@@ -4310,7 +4986,11 @@ enum punit_power_well {
 
 #define TV_FILTER_CTL_2		0x68084
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4321,7 +5001,11 @@ enum punit_power_well {
 # define TV_VSCALE_INT_MASK		0x00038000
 # define TV_VSCALE_INT_SHIFT		15
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4334,7 +5018,11 @@ enum punit_power_well {
 
 #define TV_FILTER_CTL_3		0x68088
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4347,7 +5035,11 @@ enum punit_power_well {
 # define TV_VSCALE_IP_INT_MASK		0x00038000
 # define TV_VSCALE_IP_INT_SHIFT		15
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4363,7 +5055,11 @@ enum punit_power_well {
 #define TV_CC_CONTROL		0x68090
 # define TV_CC_ENABLE			(1 << 31)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -4374,15 +5070,21 @@ enum punit_power_well {
 # define TV_CC_FID_MASK			(1 << 27)
 # define TV_CC_FID_SHIFT		27
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Sets the horizontal position of the CC data.  Usually 135. */
 # define TV_CC_HOFF_MASK		0x03ff0000
 # define TV_CC_HOFF_SHIFT		16
 /** Sets the vertical position of the CC data.  Usually 21 */
 =======
+=======
+>>>>>>> v3.18
 /* Sets the horizontal position of the CC data.  Usually 135. */
 # define TV_CC_HOFF_MASK		0x03ff0000
 # define TV_CC_HOFF_SHIFT		16
 /* Sets the vertical position of the CC data.  Usually 21 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_CC_LINE_MASK		0x0000003f
 # define TV_CC_LINE_SHIFT		0
@@ -4390,15 +5092,21 @@ enum punit_power_well {
 #define TV_CC_DATA		0x68094
 # define TV_CC_RDY			(1 << 31)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Second word of CC data to be transmitted. */
 # define TV_CC_DATA_2_MASK		0x007f0000
 # define TV_CC_DATA_2_SHIFT		16
 /** First word of CC data to be transmitted. */
 =======
+=======
+>>>>>>> v3.18
 /* Second word of CC data to be transmitted. */
 # define TV_CC_DATA_2_MASK		0x007f0000
 # define TV_CC_DATA_2_SHIFT		16
 /* First word of CC data to be transmitted. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define TV_CC_DATA_1_MASK		0x0000007f
 # define TV_CC_DATA_1_SHIFT		0
@@ -4422,6 +5130,11 @@ enum punit_power_well {
 #define   DP_PIPEB_SELECT		(1 << 30)
 #define   DP_PIPE_MASK			(1 << 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   DP_PIPE_SELECT_CHV(pipe)	((pipe) << 16)
+#define   DP_PIPE_MASK_CHV		(3 << 16)
+>>>>>>> v3.18
 =======
 #define   DP_PIPE_SELECT_CHV(pipe)	((pipe) << 16)
 #define   DP_PIPE_MASK_CHV		(3 << 16)
@@ -4435,6 +5148,11 @@ enum punit_power_well {
 #define   DP_LINK_TRAIN_MASK		(3 << 28)
 #define   DP_LINK_TRAIN_SHIFT		28
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   DP_LINK_TRAIN_PAT_3_CHV	(1 << 14)
+#define   DP_LINK_TRAIN_MASK_CHV	((3 << 28)|(1<<14))
+>>>>>>> v3.18
 =======
 #define   DP_LINK_TRAIN_PAT_3_CHV	(1 << 14)
 #define   DP_LINK_TRAIN_MASK_CHV	((3 << 28)|(1<<14))
@@ -4468,9 +5186,13 @@ enum punit_power_well {
 
 /* How many wires to use. I guess 3 was too hard */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   DP_PORT_WIDTH_1		(0 << 19)
 #define   DP_PORT_WIDTH_2		(1 << 19)
 #define   DP_PORT_WIDTH_4		(3 << 19)
+=======
+#define   DP_PORT_WIDTH(width)		(((width) - 1) << 19)
+>>>>>>> v3.18
 =======
 #define   DP_PORT_WIDTH(width)		(((width) - 1) << 19)
 >>>>>>> v3.18
@@ -4485,7 +5207,11 @@ enum punit_power_well {
 #define   DP_PLL_FREQ_MASK		(3 << 16)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** locked once port is enabled */
+=======
+/* locked once port is enabled */
+>>>>>>> v3.18
 =======
 /* locked once port is enabled */
 >>>>>>> v3.18
@@ -4495,7 +5221,11 @@ enum punit_power_well {
 #define   DP_PLL_ENABLE			(1 << 14)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** sends the clock on lane 15 of the PEG for debug */
+=======
+/* sends the clock on lane 15 of the PEG for debug */
+>>>>>>> v3.18
 =======
 /* sends the clock on lane 15 of the PEG for debug */
 >>>>>>> v3.18
@@ -4504,6 +5234,7 @@ enum punit_power_well {
 #define   DP_SCRAMBLING_DISABLE		(1 << 12)
 #define   DP_SCRAMBLING_DISABLE_IRONLAKE	(1 << 7)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** limit RGB values to avoid confusing TVs */
 #define   DP_COLOR_RANGE_16_235		(1 << 8)
@@ -4520,6 +5251,8 @@ enum punit_power_well {
 
 /** The aux channel provides a way to talk to the
 =======
+=======
+>>>>>>> v3.18
 /* limit RGB values to avoid confusing TVs */
 #define   DP_COLOR_RANGE_16_235		(1 << 8)
 
@@ -4534,6 +5267,9 @@ enum punit_power_well {
 #define   DP_DETECTED			(1 << 2)
 
 /* The aux channel provides a way to talk to the
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * signal sink for DDC etc. Max packet size supported
  * is 20 bytes in each direction, hence the 5 fixed
@@ -4603,18 +5339,24 @@ enum punit_power_well {
  * For our current usage, this is always 3, one byte for R, G and B.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEA_GMCH_DATA_M			0x70050
 #define _PIPEB_GMCH_DATA_M			0x71050
 
 /* Transfer unit size for display port - 1, default is 0x3f (for TU size 64) */
 #define  TU_SIZE(x)             (((x)-1) << 25) /* default size 64 */
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEA_DATA_M_G4X	0x70050
 #define _PIPEB_DATA_M_G4X	0x71050
 
 /* Transfer unit size for display port - 1, default is 0x3f (for TU size 64) */
 #define  TU_SIZE(x)             (((x)-1) << 25) /* default size 64 */
 #define  TU_SIZE_SHIFT		25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  TU_SIZE_MASK           (0x3f << 25)
 
@@ -4622,8 +5364,14 @@ enum punit_power_well {
 #define  DATA_LINK_N_MAX	(0x800000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEA_GMCH_DATA_N			0x70054
 #define _PIPEB_GMCH_DATA_N			0x71054
+=======
+#define _PIPEA_DATA_N_G4X	0x70054
+#define _PIPEB_DATA_N_G4X	0x71054
+#define   PIPE_GMCH_DATA_N_MASK			(0xffffff)
+>>>>>>> v3.18
 =======
 #define _PIPEA_DATA_N_G4X	0x70054
 #define _PIPEB_DATA_N_G4X	0x71054
@@ -4642,6 +5390,7 @@ enum punit_power_well {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEA_DP_LINK_M				0x70060
 #define _PIPEB_DP_LINK_M				0x71060
 
@@ -4653,6 +5402,8 @@ enum punit_power_well {
 #define PIPE_DP_LINK_M(pipe) _PIPE(pipe, _PIPEA_DP_LINK_M, _PIPEB_DP_LINK_M)
 #define PIPE_DP_LINK_N(pipe) _PIPE(pipe, _PIPEA_DP_LINK_N, _PIPEB_DP_LINK_N)
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEA_LINK_M_G4X	0x70060
 #define _PIPEB_LINK_M_G4X	0x71060
 #define   PIPEA_DP_LINK_M_MASK			(0xffffff)
@@ -4665,27 +5416,40 @@ enum punit_power_well {
 #define PIPE_DATA_N_G4X(pipe) _PIPE(pipe, _PIPEA_DATA_N_G4X, _PIPEB_DATA_N_G4X)
 #define PIPE_LINK_M_G4X(pipe) _PIPE(pipe, _PIPEA_LINK_M_G4X, _PIPEB_LINK_M_G4X)
 #define PIPE_LINK_N_G4X(pipe) _PIPE(pipe, _PIPEA_LINK_N_G4X, _PIPEB_LINK_N_G4X)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Display & cursor control */
 
 /* Pipe A */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEADSL		(dev_priv->info->display_mmio_offset + 0x70000)
 #define   DSL_LINEMASK_GEN2	0x00000fff
 #define   DSL_LINEMASK_GEN3	0x00001fff
 #define _PIPEACONF		(dev_priv->info->display_mmio_offset + 0x70008)
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEADSL		0x70000
 #define   DSL_LINEMASK_GEN2	0x00000fff
 #define   DSL_LINEMASK_GEN3	0x00001fff
 #define _PIPEACONF		0x70008
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   PIPECONF_ENABLE	(1<<31)
 #define   PIPECONF_DISABLE	0
 #define   PIPECONF_DOUBLE_WIDE	(1<<30)
 #define   I965_PIPECONF_ACTIVE	(1<<30)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   PIPECONF_DSI_PLL_LOCKED	(1<<29) /* vlv & pipe A only */
+>>>>>>> v3.18
 =======
 #define   PIPECONF_DSI_PLL_LOCKED	(1<<29) /* vlv & pipe A only */
 >>>>>>> v3.18
@@ -4713,6 +5477,11 @@ enum punit_power_well {
 #define   PIPECONF_INTERLACED_DBL_ILK		(4 << 21) /* ilk/snb only */
 #define   PIPECONF_PFIT_PF_INTERLACED_DBL_ILK	(5 << 21) /* ilk/snb only */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   PIPECONF_INTERLACE_MODE_MASK		(7 << 21)
+#define   PIPECONF_EDP_RR_MODE_SWITCH		(1 << 20)
+>>>>>>> v3.18
 =======
 #define   PIPECONF_INTERLACE_MODE_MASK		(7 << 21)
 #define   PIPECONF_EDP_RR_MODE_SWITCH		(1 << 20)
@@ -4731,18 +5500,24 @@ enum punit_power_well {
 #define   PIPECONF_DITHER_TYPE_ST2 (2<<2)
 #define   PIPECONF_DITHER_TYPE_TEMP (3<<2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEASTAT		(dev_priv->info->display_mmio_offset + 0x70024)
 #define   PIPE_FIFO_UNDERRUN_STATUS		(1UL<<31)
 #define   SPRITE1_FLIPDONE_INT_EN_VLV		(1UL<<30)
 #define   PIPE_CRC_ERROR_ENABLE			(1UL<<29)
 #define   PIPE_CRC_DONE_ENABLE			(1UL<<28)
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEASTAT		0x70024
 #define   PIPE_FIFO_UNDERRUN_STATUS		(1UL<<31)
 #define   SPRITE1_FLIP_DONE_INT_EN_VLV		(1UL<<30)
 #define   PIPE_CRC_ERROR_ENABLE			(1UL<<29)
 #define   PIPE_CRC_DONE_ENABLE			(1UL<<28)
 #define   PERF_COUNTER2_INTERRUPT_EN		(1UL<<27)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   PIPE_GMBUS_EVENT_ENABLE		(1UL<<27)
 #define   PLANE_FLIP_DONE_INT_EN_VLV		(1UL<<26)
@@ -4754,6 +5529,7 @@ enum punit_power_well {
 #define   PIPE_LEGACY_BLC_EVENT_ENABLE		(1UL<<22)
 #define   PIPE_ODD_FIELD_INTERRUPT_ENABLE	(1UL<<21)
 #define   PIPE_EVEN_FIELD_INTERRUPT_ENABLE	(1UL<<20)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define   PIPE_HOTPLUG_TV_INTERRUPT_ENABLE	(1UL<<18) /* pre-965 */
 #define   PIPE_START_VBLANK_INTERRUPT_ENABLE	(1UL<<18) /* 965 or later */
@@ -4767,6 +5543,8 @@ enum punit_power_well {
 #define   PIPE_GMBUS_INTERRUPT_STATUS		(1UL<<11)
 #define   PLANE_FLIPDONE_INT_STATUS_VLV		(1UL<<10)
 =======
+=======
+>>>>>>> v3.18
 #define   PIPE_B_PSR_INTERRUPT_ENABLE_VLV	(1UL<<19)
 #define   PERF_COUNTER_INTERRUPT_EN		(1UL<<19)
 #define   PIPE_HOTPLUG_TV_INTERRUPT_ENABLE	(1UL<<18) /* pre-965 */
@@ -4782,11 +5560,15 @@ enum punit_power_well {
 #define   PERF_COUNTER2_INTERRUPT_STATUS	(1UL<<11)
 #define   PIPE_GMBUS_INTERRUPT_STATUS		(1UL<<11)
 #define   PLANE_FLIP_DONE_INT_STATUS_VLV	(1UL<<10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   PIPE_HOTPLUG_INTERRUPT_STATUS		(1UL<<10)
 #define   PIPE_VSYNC_INTERRUPT_STATUS		(1UL<<9)
 #define   PIPE_DISPLAY_LINE_COMPARE_STATUS	(1UL<<8)
 #define   PIPE_DPST_EVENT_STATUS		(1UL<<7)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define   PIPE_LEGACY_BLC_EVENT_STATUS		(1UL<<6)
 #define   PIPE_ODD_FIELD_INTERRUPT_STATUS	(1UL<<5)
@@ -4803,6 +5585,8 @@ enum punit_power_well {
 #define PIPEFRAMEPIXEL(pipe)  _PIPE(pipe, _PIPEAFRAMEPIXEL, _PIPEBFRAMEPIXEL)
 #define PIPESTAT(pipe) _PIPE(pipe, _PIPEASTAT, _PIPEBSTAT)
 =======
+=======
+>>>>>>> v3.18
 #define   PIPE_A_PSR_STATUS_VLV			(1UL<<6)
 #define   PIPE_LEGACY_BLC_EVENT_STATUS		(1UL<<6)
 #define   PIPE_ODD_FIELD_INTERRUPT_STATUS	(1UL<<5)
@@ -4852,12 +5636,16 @@ enum punit_power_well {
 #define   PIPEMISC_DITHER_TYPE_MASK	(3<<2)
 #define   PIPEMISC_DITHER_TYPE_SP	(0<<2)
 #define PIPEMISC(pipe) _PIPE2(pipe, _PIPE_MISC_A)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VLV_DPFLIPSTAT				(VLV_DISPLAY_BASE + 0x70028)
 #define   PIPEB_LINE_COMPARE_INT_EN		(1<<29)
 #define   PIPEB_HLINE_INT_EN			(1<<28)
 #define   PIPEB_VBLANK_INT_EN			(1<<27)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define   SPRITED_FLIPDONE_INT_EN		(1<<26)
 #define   SPRITEC_FLIPDONE_INT_EN		(1<<25)
@@ -4871,6 +5659,8 @@ enum punit_power_well {
 
 #define DPINVGTT				(VLV_DISPLAY_BASE + 0x7002c) /* VLV only */
 =======
+=======
+>>>>>>> v3.18
 #define   SPRITED_FLIP_DONE_INT_EN		(1<<26)
 #define   SPRITEC_FLIP_DONE_INT_EN		(1<<25)
 #define   PLANEB_FLIP_DONE_INT_EN		(1<<24)
@@ -4893,6 +5683,9 @@ enum punit_power_well {
 #define   SPRITEE_INVALID_GTT_INT_EN		(1<<26)
 #define   PLANEC_INVALID_GTT_INT_EN		(1<<25)
 #define   CURSORC_INVALID_GTT_INT_EN		(1<<24)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   CURSORB_INVALID_GTT_INT_EN		(1<<23)
 #define   CURSORA_INVALID_GTT_INT_EN		(1<<22)
@@ -4904,12 +5697,18 @@ enum punit_power_well {
 #define   PLANEA_INVALID_GTT_INT_EN		(1<<16)
 #define   DPINVGTT_EN_MASK			0xff0000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define   DPINVGTT_EN_MASK_CHV			0xfff0000
 #define   SPRITEF_INVALID_GTT_STATUS		(1<<11)
 #define   SPRITEE_INVALID_GTT_STATUS		(1<<10)
 #define   PLANEC_INVALID_GTT_STATUS		(1<<9)
 #define   CURSORC_INVALID_GTT_STATUS		(1<<8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   CURSORB_INVALID_GTT_STATUS		(1<<7)
 #define   CURSORA_INVALID_GTT_STATUS		(1<<6)
@@ -4921,6 +5720,10 @@ enum punit_power_well {
 #define   PLANEA_INVALID_GTT_STATUS		(1<<0)
 #define   DPINVGTT_STATUS_MASK			0xff
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   DPINVGTT_STATUS_MASK_CHV		0xfff
+>>>>>>> v3.18
 =======
 #define   DPINVGTT_STATUS_MASK_CHV		0xfff
 >>>>>>> v3.18
@@ -4933,6 +5736,7 @@ enum punit_power_well {
 #define   DSPARB_BEND_SHIFT	9 /* on 855 */
 #define   DSPARB_AEND_SHIFT	0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DSPFW1			(dev_priv->info->display_mmio_offset + 0x70034)
 #define   DSPFW_SR_SHIFT	23
@@ -4973,6 +5777,8 @@ enum punit_power_well {
 #define DDL_PLANEB_PRECISION_32		(1<<7)
 #define DDL_PLANEB_PRECISION_16		(0<<7)
 =======
+=======
+>>>>>>> v3.18
 /* pnv/gen4/g4x/vlv/chv */
 #define DSPFW1			(dev_priv->info.display_mmio_offset + 0x70034)
 #define   DSPFW_SR_SHIFT		23
@@ -5118,6 +5924,9 @@ enum punit_power_well {
 #define DDL_PLANE_PRECISION_32		(0<<7)
 #define DDL_PLANE_SHIFT			0
 #define DRAIN_LATENCY_MASK		0x7f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* FIFO watermark sizes etc */
@@ -5156,17 +5965,23 @@ enum punit_power_well {
 /* define the Watermark register on Ironlake */
 #define WM0_PIPEA_ILK		0x45100
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  WM0_PIPE_PLANE_MASK	(0x7f<<16)
 #define  WM0_PIPE_PLANE_SHIFT	16
 #define  WM0_PIPE_SPRITE_MASK	(0x3f<<8)
 #define  WM0_PIPE_SPRITE_SHIFT	8
 #define  WM0_PIPE_CURSOR_MASK	(0x1f)
 =======
+=======
+>>>>>>> v3.18
 #define  WM0_PIPE_PLANE_MASK	(0xffff<<16)
 #define  WM0_PIPE_PLANE_SHIFT	16
 #define  WM0_PIPE_SPRITE_MASK	(0xff<<8)
 #define  WM0_PIPE_SPRITE_SHIFT	8
 #define  WM0_PIPE_CURSOR_MASK	(0xff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define WM0_PIPEB_ILK		0x45104
@@ -5178,14 +5993,20 @@ enum punit_power_well {
 #define  WM1_LP_FBC_MASK	(0xf<<20)
 #define  WM1_LP_FBC_SHIFT	20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  WM1_LP_SR_MASK		(0x1ff<<8)
 #define  WM1_LP_SR_SHIFT	8
 #define  WM1_LP_CURSOR_MASK	(0x3f)
 =======
+=======
+>>>>>>> v3.18
 #define  WM1_LP_FBC_SHIFT_BDW	19
 #define  WM1_LP_SR_MASK		(0x7ff<<8)
 #define  WM1_LP_SR_SHIFT	8
 #define  WM1_LP_CURSOR_MASK	(0xff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WM2_LP_ILK		0x4510c
 #define  WM2_LP_EN		(1<<31)
@@ -5197,11 +6018,17 @@ enum punit_power_well {
 #define  WM1S_LP_EN		(1<<31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HSW_WM_LP_VAL(lat, fbc, pri, cur) \
 	(WM3_LP_EN | ((lat) << WM1_LP_LATENCY_SHIFT) | \
 	 ((fbc) << WM1_LP_FBC_SHIFT) | ((pri) << WM1_LP_SR_SHIFT) | (cur))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Memory latency timer register */
 #define MLTR_ILK		0x11222
@@ -5209,6 +6036,7 @@ enum punit_power_well {
 #define  MLTR_WM2_SHIFT		8
 /* the unit of memory self-refresh latency time is 0.5us */
 #define  ILK_SRLT_MASK		0x3f
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ILK_LATENCY(shift)	(I915_READ(MLTR_ILK) >> (shift) & ILK_SRLT_MASK)
 #define ILK_READ_WM1_LATENCY()	ILK_LATENCY(MLTR_WM1_SHIFT)
@@ -5251,6 +6079,8 @@ enum punit_power_well {
 #define SNB_FIFO_LINE_SIZE	64
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 
 /* the address where we get all kinds of latency value */
@@ -5262,12 +6092,15 @@ enum punit_power_well {
 #define SSKPD_WM3_SHIFT		24
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNB_LATENCY(shift)	(I915_READ(MCHBAR_MIRROR_BASE_SNB + SSKPD) >> (shift) & SSKPD_WM_MASK)
 #define SNB_READ_WM0_LATENCY()		SNB_LATENCY(SSKPD_WM0_SHIFT)
 #define SNB_READ_WM1_LATENCY()		SNB_LATENCY(SSKPD_WM1_SHIFT)
 #define SNB_READ_WM2_LATENCY()		SNB_LATENCY(SSKPD_WM2_SHIFT)
 #define SNB_READ_WM3_LATENCY()		SNB_LATENCY(SSKPD_WM3_SHIFT)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -5286,15 +6119,21 @@ enum punit_power_well {
  *  frame = (high1 << 8) | low1;
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEAFRAMEHIGH          (dev_priv->info->display_mmio_offset + 0x70040)
 #define   PIPE_FRAME_HIGH_MASK    0x0000ffff
 #define   PIPE_FRAME_HIGH_SHIFT   0
 #define _PIPEAFRAMEPIXEL         (dev_priv->info->display_mmio_offset + 0x70044)
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEAFRAMEHIGH          0x70040
 #define   PIPE_FRAME_HIGH_MASK    0x0000ffff
 #define   PIPE_FRAME_HIGH_SHIFT   0
 #define _PIPEAFRAMEPIXEL         0x70044
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   PIPE_FRAME_LOW_MASK     0xff000000
 #define   PIPE_FRAME_LOW_SHIFT    24
@@ -5303,6 +6142,7 @@ enum punit_power_well {
 /* GM45+ just has to be different */
 #define _PIPEA_FRMCOUNT_GM45	0x70040
 #define _PIPEA_FLIPCOUNT_GM45	0x70044
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PIPE_FRMCOUNT_GM45(pipe) _PIPE(pipe, _PIPEA_FRMCOUNT_GM45, _PIPEB_FRMCOUNT_GM45)
 
@@ -5313,6 +6153,8 @@ enum punit_power_well {
 #define   CURSOR_GAMMA_ENABLE	0x40000000
 #define   CURSOR_STRIDE_MASK	0x30000000
 =======
+=======
+>>>>>>> v3.18
 #define PIPE_FRMCOUNT_GM45(pipe) _PIPE2(pipe, _PIPEA_FRMCOUNT_GM45)
 #define PIPE_FLIPCOUNT_GM45(pipe) _PIPE2(pipe, _PIPEA_FLIPCOUNT_GM45)
 
@@ -5323,6 +6165,9 @@ enum punit_power_well {
 #define   CURSOR_GAMMA_ENABLE	0x40000000
 #define   CURSOR_STRIDE_SHIFT	28
 #define   CURSOR_STRIDE(x)	((ffs(x)-9) << CURSOR_STRIDE_SHIFT) /* 256,512,1k,2k */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   CURSOR_PIPE_CSC_ENABLE (1<<24)
 #define   CURSOR_FORMAT_SHIFT	24
@@ -5336,13 +6181,19 @@ enum punit_power_well {
 #define   CURSOR_MODE		0x27
 #define   CURSOR_MODE_DISABLE   0x00
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   CURSOR_MODE_64_32B_AX 0x07
 =======
+=======
+>>>>>>> v3.18
 #define   CURSOR_MODE_128_32B_AX 0x02
 #define   CURSOR_MODE_256_32B_AX 0x03
 #define   CURSOR_MODE_64_32B_AX 0x07
 #define   CURSOR_MODE_128_ARGB_AX ((1 << 5) | CURSOR_MODE_128_32B_AX)
 #define   CURSOR_MODE_256_ARGB_AX ((1 << 5) | CURSOR_MODE_256_32B_AX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   CURSOR_MODE_64_ARGB_AX ((1 << 5) | CURSOR_MODE_64_32B_AX)
 #define   MCURSOR_PIPE_SELECT	(1 << 28)
@@ -5350,8 +6201,14 @@ enum punit_power_well {
 #define   MCURSOR_PIPE_B	(1 << 28)
 #define   MCURSOR_GAMMA_ENABLE  (1 << 26)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _CURABASE		(dev_priv->info->display_mmio_offset + 0x70084)
 #define _CURAPOS		(dev_priv->info->display_mmio_offset + 0x70088)
+=======
+#define   CURSOR_TRICKLE_FEED_DISABLE	(1 << 14)
+#define _CURABASE		0x70084
+#define _CURAPOS		0x70088
+>>>>>>> v3.18
 =======
 #define   CURSOR_TRICKLE_FEED_DISABLE	(1 << 14)
 #define _CURABASE		0x70084
@@ -5363,9 +6220,15 @@ enum punit_power_well {
 #define   CURSOR_Y_SHIFT        16
 #define CURSIZE			0x700a0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _CURBCNTR		(dev_priv->info->display_mmio_offset + 0x700c0)
 #define _CURBBASE		(dev_priv->info->display_mmio_offset + 0x700c4)
 #define _CURBPOS		(dev_priv->info->display_mmio_offset + 0x700c8)
+=======
+#define _CURBCNTR		0x700c0
+#define _CURBBASE		0x700c4
+#define _CURBPOS		0x700c8
+>>>>>>> v3.18
 =======
 #define _CURBCNTR		0x700c0
 #define _CURBBASE		0x700c4
@@ -5376,6 +6239,7 @@ enum punit_power_well {
 #define _CURBBASE_IVB		0x71084
 #define _CURBPOS_IVB		0x71088
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CURCNTR(pipe) _PIPE(pipe, _CURACNTR, _CURBCNTR)
 #define CURBASE(pipe) _PIPE(pipe, _CURABASE, _CURBBASE)
@@ -5388,6 +6252,8 @@ enum punit_power_well {
 /* Display A control */
 #define _DSPACNTR                (dev_priv->info->display_mmio_offset + 0x70180)
 =======
+=======
+>>>>>>> v3.18
 #define _CURSOR2(pipe, reg) (dev_priv->info.cursor_offsets[(pipe)] - \
 	dev_priv->info.cursor_offsets[PIPE_A] + (reg) + \
 	dev_priv->info.display_mmio_offset)
@@ -5404,6 +6270,9 @@ enum punit_power_well {
 
 /* Display A control */
 #define _DSPACNTR				0x70180
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   DISPLAY_PLANE_ENABLE			(1<<31)
 #define   DISPLAY_PLANE_DISABLE			0
@@ -5437,6 +6306,7 @@ enum punit_power_well {
 #define   DISPPLANE_STEREO_POLARITY_FIRST	0
 #define   DISPPLANE_STEREO_POLARITY_SECOND	(1<<18)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   DISPPLANE_TRICKLE_FEED_DISABLE	(1<<14) /* Ironlake */
 #define   DISPPLANE_TILED			(1<<10)
 #define _DSPAADDR		(dev_priv->info->display_mmio_offset + 0x70184)
@@ -5459,6 +6329,8 @@ enum punit_power_well {
 #define DSPOFFSET(plane) _PIPE(plane, _DSPAOFFSET, _DSPBOFFSET)
 #define DSPSURFLIVE(plane) _PIPE(plane, _DSPASURFLIVE, _DSPBSURFLIVE)
 =======
+=======
+>>>>>>> v3.18
 #define   DISPPLANE_ROTATE_180         (1<<15)
 #define   DISPPLANE_TRICKLE_FEED_DISABLE	(1<<14) /* Ironlake */
 #define   DISPPLANE_TILED			(1<<10)
@@ -5481,12 +6353,16 @@ enum punit_power_well {
 #define DSPLINOFF(plane) DSPADDR(plane)
 #define DSPOFFSET(plane) _PIPE2(plane, _DSPAOFFSET)
 #define DSPSURFLIVE(plane) _PIPE2(plane, _DSPASURFLIVE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Display/Sprite base address macros */
 #define DISP_BASEADDR_MASK	(0xfffff000)
 #define I915_LO_DISPBASE(val)	(val & ~DISP_BASEADDR_MASK)
 #define I915_HI_DISPBASE(val)	(val & DISP_BASEADDR_MASK)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define I915_MODIFY_DISPBASE(reg, gfx_addr) \
 		(I915_WRITE((reg), (gfx_addr) | I915_LO_DISPBASE(I915_READ(reg))))
@@ -5519,6 +6395,8 @@ enum punit_power_well {
 /* Display B control */
 #define _DSPBCNTR		(dev_priv->info->display_mmio_offset + 0x71180)
 =======
+=======
+>>>>>>> v3.18
 
 /* VBIOS flags */
 #define SWF00			(dev_priv->info.display_mmio_offset + 0x71410)
@@ -5547,11 +6425,15 @@ enum punit_power_well {
 
 /* Display B control */
 #define _DSPBCNTR		(dev_priv->info.display_mmio_offset + 0x71180)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   DISPPLANE_ALPHA_TRANS_ENABLE		(1<<15)
 #define   DISPPLANE_ALPHA_TRANS_DISABLE		0
 #define   DISPPLANE_SPRITE_ABOVE_DISPLAY	0
 #define   DISPPLANE_SPRITE_ABOVE_OVERLAY	(1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _DSPBADDR		(dev_priv->info->display_mmio_offset + 0x71184)
 #define _DSPBSTRIDE		(dev_priv->info->display_mmio_offset + 0x71188)
@@ -5562,6 +6444,8 @@ enum punit_power_well {
 #define _DSPBOFFSET		(dev_priv->info->display_mmio_offset + 0x711A4)
 #define _DSPBSURFLIVE		(dev_priv->info->display_mmio_offset + 0x711AC)
 =======
+=======
+>>>>>>> v3.18
 #define _DSPBADDR		(dev_priv->info.display_mmio_offset + 0x71184)
 #define _DSPBSTRIDE		(dev_priv->info.display_mmio_offset + 0x71188)
 #define _DSPBPOS		(dev_priv->info.display_mmio_offset + 0x7118C)
@@ -5570,6 +6454,9 @@ enum punit_power_well {
 #define _DSPBTILEOFF		(dev_priv->info.display_mmio_offset + 0x711A4)
 #define _DSPBOFFSET		(dev_priv->info.display_mmio_offset + 0x711A4)
 #define _DSPBSURFLIVE		(dev_priv->info.display_mmio_offset + 0x711AC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Sprite A control */
@@ -5590,6 +6477,10 @@ enum punit_power_well {
 #define   DVS_YUV_ORDER_YVYU	(2<<16)
 #define   DVS_YUV_ORDER_VYUY	(3<<16)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   DVS_ROTATE_180	(1<<15)
+>>>>>>> v3.18
 =======
 #define   DVS_ROTATE_180	(1<<15)
 >>>>>>> v3.18
@@ -5664,6 +6555,10 @@ enum punit_power_well {
 #define   SPRITE_YUV_ORDER_YVYU		(2<<16)
 #define   SPRITE_YUV_ORDER_VYUY		(3<<16)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   SPRITE_ROTATE_180		(1<<15)
+>>>>>>> v3.18
 =======
 #define   SPRITE_ROTATE_180		(1<<15)
 >>>>>>> v3.18
@@ -5723,9 +6618,15 @@ enum punit_power_well {
 #define SPRSURFLIVE(pipe) _PIPE(pipe, _SPRA_SURFLIVE, _SPRB_SURFLIVE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _SPACNTR		0x72180
 #define   SP_ENABLE			(1<<31)
 #define   SP_GEAMMA_ENABLE		(1<<30)
+=======
+#define _SPACNTR		(VLV_DISPLAY_BASE + 0x72180)
+#define   SP_ENABLE			(1<<31)
+#define   SP_GAMMA_ENABLE		(1<<30)
+>>>>>>> v3.18
 =======
 #define _SPACNTR		(VLV_DISPLAY_BASE + 0x72180)
 #define   SP_ENABLE			(1<<31)
@@ -5746,6 +6647,7 @@ enum punit_power_well {
 #define   SP_YUV_ORDER_UYVY		(1<<16)
 #define   SP_YUV_ORDER_YVYU		(2<<16)
 #define   SP_YUV_ORDER_VYUY		(3<<16)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define   SP_TILED			(1<<10)
 #define _SPALINOFF		0x72184
@@ -5773,6 +6675,8 @@ enum punit_power_well {
 #define _SPBCONSTALPHA		0x722a8
 #define _SPBGAMC		0x722f4
 =======
+=======
+>>>>>>> v3.18
 #define   SP_ROTATE_180			(1<<15)
 #define   SP_TILED			(1<<10)
 #define _SPALINOFF		(VLV_DISPLAY_BASE + 0x72184)
@@ -5799,6 +6703,9 @@ enum punit_power_well {
 #define _SPBTILEOFF		(VLV_DISPLAY_BASE + 0x722a4)
 #define _SPBCONSTALPHA		(VLV_DISPLAY_BASE + 0x722a8)
 #define _SPBGAMC		(VLV_DISPLAY_BASE + 0x722f4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SPCNTR(pipe, plane) _PIPE(pipe * 2 + plane, _SPACNTR, _SPBCNTR)
@@ -5863,6 +6770,7 @@ enum punit_power_well {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PIPEA_DATA_M1           (dev_priv->info->display_mmio_offset + 0x60030)
 #define  PIPE_DATA_M1_OFFSET    0
 #define _PIPEA_DATA_N1           (dev_priv->info->display_mmio_offset + 0x60034)
@@ -5882,6 +6790,8 @@ enum punit_power_well {
 #define  PIPE_LINK_M2_OFFSET    0
 #define _PIPEA_LINK_N2           (dev_priv->info->display_mmio_offset + 0x6004c)
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEA_DATA_M1		0x60030
 #define  PIPE_DATA_M1_OFFSET    0
 #define _PIPEA_DATA_N1		0x60034
@@ -5900,11 +6810,15 @@ enum punit_power_well {
 #define _PIPEA_LINK_M2		0x60048
 #define  PIPE_LINK_M2_OFFSET    0
 #define _PIPEA_LINK_N2		0x6004c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  PIPE_LINK_N2_OFFSET    0
 
 /* PIPEB timing regs are same start from 0x61000 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _PIPEB_DATA_M1           (dev_priv->info->display_mmio_offset + 0x61030)
 #define _PIPEB_DATA_N1           (dev_priv->info->display_mmio_offset + 0x61034)
@@ -5927,6 +6841,8 @@ enum punit_power_well {
 #define PIPE_LINK_M2(tran) _TRANSCODER(tran, _PIPEA_LINK_M2, _PIPEB_LINK_M2)
 #define PIPE_LINK_N2(tran) _TRANSCODER(tran, _PIPEA_LINK_N2, _PIPEB_LINK_N2)
 =======
+=======
+>>>>>>> v3.18
 #define _PIPEB_DATA_M1		0x61030
 #define _PIPEB_DATA_N1		0x61034
 #define _PIPEB_DATA_M2		0x61038
@@ -5944,6 +6860,9 @@ enum punit_power_well {
 #define PIPE_LINK_N1(tran) _TRANSCODER2(tran, _PIPEA_LINK_N1)
 #define PIPE_LINK_M2(tran) _TRANSCODER2(tran, _PIPEA_LINK_M2)
 #define PIPE_LINK_N2(tran) _TRANSCODER2(tran, _PIPEA_LINK_N2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* CPU panel fitter */
@@ -5979,7 +6898,10 @@ enum punit_power_well {
 #define LGC_PALETTE(pipe) _PIPE(pipe, _LGC_PALETTE_A, _LGC_PALETTE_B)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define _GAMMA_MODE_A		0x4a480
 #define _GAMMA_MODE_B		0x4ac80
 #define GAMMA_MODE(pipe) _PIPE(pipe, _GAMMA_MODE_A, _GAMMA_MODE_B)
@@ -5989,6 +6911,9 @@ enum punit_power_well {
 #define GAMMA_MODE_MODE_12BIT	(2 << 0)
 #define GAMMA_MODE_MODE_SPLIT	(3 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* interrupts */
 #define DE_MASTER_IRQ_CONTROL   (1 << 31)
@@ -5997,6 +6922,10 @@ enum punit_power_well {
 #define DE_PLANEB_FLIP_DONE     (1 << 27)
 #define DE_PLANEA_FLIP_DONE     (1 << 26)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DE_PLANE_FLIP_DONE(plane) (1 << (26 + (plane)))
+>>>>>>> v3.18
 =======
 #define DE_PLANE_FLIP_DONE(plane) (1 << (26 + (plane)))
 >>>>>>> v3.18
@@ -6014,24 +6943,33 @@ enum punit_power_well {
 #define DE_PIPEB_LINE_COMPARE   (1 << 12)
 #define DE_PIPEB_VSYNC          (1 << 11)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DE_PIPEB_FIFO_UNDERRUN  (1 << 8)
 #define DE_PIPEA_VBLANK         (1 << 7)
 =======
+=======
+>>>>>>> v3.18
 #define DE_PIPEB_CRC_DONE	(1 << 10)
 #define DE_PIPEB_FIFO_UNDERRUN  (1 << 8)
 #define DE_PIPEA_VBLANK         (1 << 7)
 #define DE_PIPE_VBLANK(pipe)    (1 << (7 + 8*(pipe)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DE_PIPEA_EVEN_FIELD     (1 << 6)
 #define DE_PIPEA_ODD_FIELD      (1 << 5)
 #define DE_PIPEA_LINE_COMPARE   (1 << 4)
 #define DE_PIPEA_VSYNC          (1 << 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DE_PIPEA_FIFO_UNDERRUN  (1 << 0)
 
 /* More Ivybridge lolz */
 #define DE_ERR_DEBUG_IVB		(1<<30)
 =======
+=======
+>>>>>>> v3.18
 #define DE_PIPEA_CRC_DONE	(1 << 2)
 #define DE_PIPE_CRC_DONE(pipe)	(1 << (2 + 8*(pipe)))
 #define DE_PIPEA_FIFO_UNDERRUN  (1 << 0)
@@ -6039,6 +6977,9 @@ enum punit_power_well {
 
 /* More Ivybridge lolz */
 #define DE_ERR_INT_IVB			(1<<30)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DE_GSE_IVB			(1<<29)
 #define DE_PCH_EVENT_IVB		(1<<28)
@@ -6053,7 +6994,13 @@ enum punit_power_well {
 #define DE_SPRITEA_FLIP_DONE_IVB	(1<<4)
 #define DE_PLANEA_FLIP_DONE_IVB		(1<<3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DE_PIPEA_VBLANK_IVB		(1<<0)
+=======
+#define DE_PLANE_FLIP_DONE_IVB(plane)	(1<< (3 + 5*(plane)))
+#define DE_PIPEA_VBLANK_IVB		(1<<0)
+#define DE_PIPE_VBLANK_IVB(pipe)	(1 << (pipe * 5))
+>>>>>>> v3.18
 =======
 #define DE_PLANE_FLIP_DONE_IVB(plane)	(1<< (3 + 5*(plane)))
 #define DE_PIPEA_VBLANK_IVB		(1<<0)
@@ -6068,6 +7015,7 @@ enum punit_power_well {
 #define DEIIR   0x44008
 #define DEIER   0x4400c
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* GT interrupt.
  * Note that for gen6+ the ring-specific interrupt bits do alias with the
@@ -6086,13 +7034,18 @@ enum punit_power_well {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define GTISR   0x44010
 #define GTIMR   0x44014
 #define GTIIR   0x44018
 #define GTIER   0x4401c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GEN8_MASTER_IRQ			0x44200
 #define  GEN8_MASTER_IRQ_CONTROL	(1<<31)
 #define  GEN8_PCU_IRQ			(1<<30)
@@ -6159,12 +7112,16 @@ enum punit_power_well {
 #define GEN8_PCU_IIR 0x444e8
 #define GEN8_PCU_IER 0x444ec
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ILK_DISPLAY_CHICKEN2	0x42004
 /* Required on all Ironlake and Sandybridge according to the B-Spec. */
 #define  ILK_ELPIN_409_SELECT	(1 << 25)
 #define  ILK_DPARB_GATE	(1<<22)
 #define  ILK_VSDPFD_FULL	(1<<21)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ILK_DISPLAY_CHICKEN_FUSES	0x42014
 #define  ILK_INTERNAL_GRAPHICS_DISABLE	(1<<31)
@@ -6174,6 +7131,8 @@ enum punit_power_well {
 #define  ILK_eDP_A_DISABLE		(1<<24)
 #define  ILK_DESKTOP			(1<<23)
 =======
+=======
+>>>>>>> v3.18
 #define FUSE_STRAP			0x42014
 #define  ILK_INTERNAL_GRAPHICS_DISABLE	(1 << 31)
 #define  ILK_INTERNAL_DISPLAY_DISABLE	(1 << 30)
@@ -6182,6 +7141,9 @@ enum punit_power_well {
 #define  ILK_eDP_A_DISABLE		(1 << 24)
 #define  HSW_CDCLK_LIMIT		(1 << 24)
 #define  ILK_DESKTOP			(1 << 23)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ILK_DSPCLK_GATE_D			0x42020
@@ -6196,6 +7158,7 @@ enum punit_power_well {
 # define CHICKEN3_DGMG_DONE_FIX_DISABLE		(1 << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DISP_ARB_CTL	0x45000
 #define  DISP_TILE_SURFACE_SWIZZLING	(1<<13)
 #define  DISP_FBC_WM_DIS		(1<<15)
@@ -6203,6 +7166,8 @@ enum punit_power_well {
 #define  WAIT_FOR_PCH_RESET_ACK		(1<<1)
 #define  WAIT_FOR_PCH_FLR_ACK		(1<<0)
 =======
+=======
+>>>>>>> v3.18
 #define CHICKEN_PAR1_1		0x42080
 #define  DPA_MASK_VBLANK_SRD	(1 << 15)
 #define  FORCE_ARB_IDLE_PLANES	(1 << 14)
@@ -6223,17 +7188,23 @@ enum punit_power_well {
 #define  WAIT_FOR_PCH_FLR_ACK		(1<<0)
 #define HSW_NDE_RSTWRN_OPT	0x46408
 #define  RESET_PCH_HANDSHAKE_ENABLE	(1<<4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* GEN7 chicken */
 #define GEN7_COMMON_SLICE_CHICKEN1		0x7010
 # define GEN7_CSC1_RHWO_OPT_DISABLE_IN_RCC	((1<<10) | (1<<26))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define GEN7_L3CNTLREG1				0xB01C
 #define  GEN7_WA_FOR_GEN7_L3_CONTROL			0x3C4FFF8C
 #define  GEN7_L3AGDIS				(1<<19)
 =======
+=======
+>>>>>>> v3.18
 #define COMMON_SLICE_CHICKEN2			0x7014
 # define GEN8_CSC2_SBE_VUE_CACHE_CONSERVATIVE	(1<<0)
 
@@ -6245,6 +7216,9 @@ enum punit_power_well {
 #define  GEN7_L3AGDIS				(1<<19)
 #define GEN7_L3CNTLREG2				0xB020
 #define GEN7_L3CNTLREG3				0xB024
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GEN7_L3_CHICKEN_MODE_REGISTER		0xB030
@@ -6254,19 +7228,30 @@ enum punit_power_well {
 #define  L3SQ_URB_READ_CAM_MATCH_DISABLE	(1<<27)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* GEN8 chicken */
 #define HDC_CHICKEN0				0x7300
 #define  HDC_FORCE_NON_COHERENT			(1<<4)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* WaCatErrorRejectionIssue */
 #define GEN7_SQ_CHICKEN_MBCUNIT_CONFIG		0x9030
 #define  GEN7_SQ_CHICKEN_MBCUNIT_SQINTMOB	(1<<11)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HSW_FUSE_STRAP		0x42014
 #define  HSW_CDCLK_LIMIT	(1 << 24)
+=======
+#define HSW_SCRATCH1				0xb038
+#define  HSW_SCRATCH1_L3_DATA_ATOMICS_DISABLE	(1<<27)
+>>>>>>> v3.18
 =======
 #define HSW_SCRATCH1				0xb038
 #define  HSW_SCRATCH1_L3_DATA_ATOMICS_DISABLE	(1<<27)
@@ -6337,6 +7322,10 @@ enum punit_power_well {
 				 SDE_PORTB_HOTPLUG_CPT)
 #define SDE_GMBUS_CPT		(1 << 17)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SDE_ERROR_CPT		(1 << 16)
+>>>>>>> v3.18
 =======
 #define SDE_ERROR_CPT		(1 << 16)
 >>>>>>> v3.18
@@ -6365,7 +7354,10 @@ enum punit_power_well {
 #define SDEIER  0xc400c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SERR_INT			0xc4040
 #define  SERR_INT_POISON		(1<<31)
 #define  SERR_INT_TRANS_C_FIFO_UNDERRUN	(1<<6)
@@ -6373,6 +7365,9 @@ enum punit_power_well {
 #define  SERR_INT_TRANS_A_FIFO_UNDERRUN	(1<<0)
 #define  SERR_INT_TRANS_FIFO_UNDERRUN(pipe)	(1<<(pipe*3))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* digital port hotplug */
 #define PCH_PORT_HOTPLUG        0xc4030		/* SHOTPLUG_CTL */
@@ -6424,7 +7419,11 @@ enum punit_power_well {
 #define _PCH_DPLL_A              0xc6014
 #define _PCH_DPLL_B              0xc6018
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PCH_DPLL(pll) (pll == 0 ? _PCH_DPLL_A : _PCH_DPLL_B)
+=======
+#define PCH_DPLL(pll) (pll == 0 ? _PCH_DPLL_A : _PCH_DPLL_B)
+>>>>>>> v3.18
 =======
 #define PCH_DPLL(pll) (pll == 0 ? _PCH_DPLL_A : _PCH_DPLL_B)
 >>>>>>> v3.18
@@ -6435,8 +7434,13 @@ enum punit_power_well {
 #define _PCH_FPB0                0xc6048
 #define _PCH_FPB1                0xc604c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PCH_FP0(pll) (pll == 0 ? _PCH_FPA0 : _PCH_FPB0)
 #define _PCH_FP1(pll) (pll == 0 ? _PCH_FPA1 : _PCH_FPB1)
+=======
+#define PCH_FP0(pll) (pll == 0 ? _PCH_FPA0 : _PCH_FPB0)
+#define PCH_FP1(pll) (pll == 0 ? _PCH_FPA1 : _PCH_FPB1)
+>>>>>>> v3.18
 =======
 #define PCH_FP0(pll) (pll == 0 ? _PCH_FPA0 : _PCH_FPB0)
 #define PCH_FP1(pll) (pll == 0 ? _PCH_FPA1 : _PCH_FPB1)
@@ -6480,6 +7484,7 @@ enum punit_power_well {
 #define PCH_SSC4_AUX_PARMS      0xc6214
 
 #define PCH_DPLL_SEL		0xc7000
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define  TRANSA_DPLL_ENABLE	(1<<3)
 #define	 TRANSA_DPLLB_SEL	(1<<0)
@@ -6525,6 +7530,8 @@ enum punit_power_well {
 /* Per-transcoder DIP controls */
 
 =======
+=======
+>>>>>>> v3.18
 #define	 TRANS_DPLLB_SEL(pipe)		(1 << (pipe * 4))
 #define	 TRANS_DPLLA_SEL(pipe)		0
 #define  TRANS_DPLL_ENABLE(pipe)	(1 << (pipe * 4 + 3))
@@ -6561,6 +7568,9 @@ enum punit_power_well {
 #define _PCH_TRANSA_LINK_N2	0xe004c
 
 /* Per-transcoder DIP controls (PCH) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _VIDEO_DIP_CTL_A         0xe0200
 #define _VIDEO_DIP_DATA_A        0xe0208
@@ -6575,6 +7585,10 @@ enum punit_power_well {
 #define TVIDEO_DIP_GCP(pipe) _PIPE(pipe, _VIDEO_DIP_GCP_A, _VIDEO_DIP_GCP_B)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Per-transcoder DIP controls (VLV) */
+>>>>>>> v3.18
 =======
 /* Per-transcoder DIP controls (VLV) */
 >>>>>>> v3.18
@@ -6587,6 +7601,7 @@ enum punit_power_well {
 #define VLV_VIDEO_DIP_GDCP_PAYLOAD_B	(VLV_DISPLAY_BASE + 0x61178)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VLV_TVIDEO_DIP_CTL(pipe) \
 	 _PIPE(pipe, VLV_VIDEO_DIP_CTL_A, VLV_VIDEO_DIP_CTL_B)
 #define VLV_TVIDEO_DIP_DATA(pipe) \
@@ -6594,6 +7609,8 @@ enum punit_power_well {
 #define VLV_TVIDEO_DIP_GCP(pipe) \
 	_PIPE(pipe, VLV_VIDEO_DIP_GDCP_PAYLOAD_A, VLV_VIDEO_DIP_GDCP_PAYLOAD_B)
 =======
+=======
+>>>>>>> v3.18
 #define CHV_VIDEO_DIP_CTL_C		(VLV_DISPLAY_BASE + 0x611f0)
 #define CHV_VIDEO_DIP_DATA_C		(VLV_DISPLAY_BASE + 0x611f4)
 #define CHV_VIDEO_DIP_GDCP_PAYLOAD_C	(VLV_DISPLAY_BASE + 0x611f8)
@@ -6607,6 +7624,9 @@ enum punit_power_well {
 #define VLV_TVIDEO_DIP_GCP(pipe) \
 	_PIPE3((pipe), VLV_VIDEO_DIP_GDCP_PAYLOAD_A, \
 		VLV_VIDEO_DIP_GDCP_PAYLOAD_B, CHV_VIDEO_DIP_GDCP_PAYLOAD_C)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Haswell DIP controls */
@@ -6637,6 +7657,7 @@ enum punit_power_well {
 #define HSW_VIDEO_DIP_GCP_B		0x61210
 
 #define HSW_TVIDEO_DIP_CTL(trans) \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 _TRANSCODER(trans, HSW_VIDEO_DIP_CTL_A, HSW_VIDEO_DIP_CTL_B)
 #define HSW_TVIDEO_DIP_AVI_DATA(trans) \
@@ -6687,6 +7708,8 @@ enum punit_power_well {
 #define _TRANSBCONF              0xf1008
 #define TRANSCONF(plane) _PIPE(plane, _TRANSACONF, _TRANSBCONF)
 =======
+=======
+>>>>>>> v3.18
 	 _TRANSCODER2(trans, HSW_VIDEO_DIP_CTL_A)
 #define HSW_TVIDEO_DIP_AVI_DATA(trans) \
 	 _TRANSCODER2(trans, HSW_VIDEO_DIP_AVI_DATA_A)
@@ -6745,6 +7768,9 @@ enum punit_power_well {
 #define _PCH_TRANSBCONF              0xf1008
 #define PCH_TRANSCONF(pipe) _PIPE(pipe, _PCH_TRANSACONF, _PCH_TRANSBCONF)
 #define LPT_TRANSCONF		_PCH_TRANSACONF /* lpt has only one transcoder */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  TRANS_DISABLE          (0<<31)
 #define  TRANS_ENABLE           (1<<31)
@@ -6796,7 +7822,13 @@ enum punit_power_well {
 
 #define SOUTH_DSPCLK_GATE_D	0xc2020
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  PCH_DPLSUNIT_CLOCK_GATE_DISABLE (1<<29)
+=======
+#define  PCH_DPLUNIT_CLOCK_GATE_DISABLE (1<<30)
+#define  PCH_DPLSUNIT_CLOCK_GATE_DISABLE (1<<29)
+#define  PCH_CPUNIT_CLOCK_GATE_DISABLE (1<<14)
+>>>>>>> v3.18
 =======
 #define  PCH_DPLUNIT_CLOCK_GATE_DISABLE (1<<30)
 #define  PCH_DPLSUNIT_CLOCK_GATE_DISABLE (1<<29)
@@ -6836,10 +7868,16 @@ enum punit_power_well {
 #define  FDI_LINK_TRAIN_800MV_0DB_SNB_B		(0x38<<22)
 #define  FDI_LINK_TRAIN_VOL_EMP_MASK		(0x3f<<22)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  FDI_DP_PORT_WIDTH_X1           (0<<19)
 #define  FDI_DP_PORT_WIDTH_X2           (1<<19)
 #define  FDI_DP_PORT_WIDTH_X3           (2<<19)
 #define  FDI_DP_PORT_WIDTH_X4           (3<<19)
+=======
+#define  FDI_DP_PORT_WIDTH_SHIFT		19
+#define  FDI_DP_PORT_WIDTH_MASK			(7 << FDI_DP_PORT_WIDTH_SHIFT)
+#define  FDI_DP_PORT_WIDTH(width)           (((width) - 1) << FDI_DP_PORT_WIDTH_SHIFT)
+>>>>>>> v3.18
 =======
 #define  FDI_DP_PORT_WIDTH_SHIFT		19
 #define  FDI_DP_PORT_WIDTH_MASK			(7 << FDI_DP_PORT_WIDTH_SHIFT)
@@ -6870,7 +7908,10 @@ enum punit_power_well {
 #define  FDI_FS_ERRC_ENABLE		(1<<27)
 #define  FDI_FE_ERRC_ENABLE		(1<<26)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  FDI_DP_PORT_WIDTH_X8           (7<<19)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define  FDI_RX_POLARITY_REVERSED_LPT	(1<<16)
@@ -6895,9 +7936,12 @@ enum punit_power_well {
 #define  FDI_LINK_TRAIN_NORMAL_CPT		(3<<8)
 #define  FDI_LINK_TRAIN_PATTERN_MASK_CPT	(3<<8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LPT */
 #define  FDI_PORT_WIDTH_2X_LPT			(1<<19)
 #define  FDI_PORT_WIDTH_1X_LPT			(0<<19)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -6950,6 +7994,10 @@ enum punit_power_well {
 #define PIPEA_PP_CONTROL        (VLV_DISPLAY_BASE + 0x61204)
 #define PIPEA_PP_ON_DELAYS      (VLV_DISPLAY_BASE + 0x61208)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  PANEL_PORT_SELECT_VLV(port)	((port) << 30)
+>>>>>>> v3.18
 =======
 #define  PANEL_PORT_SELECT_VLV(port)	((port) << 30)
 >>>>>>> v3.18
@@ -6985,7 +8033,10 @@ enum punit_power_well {
 #define  PANEL_PORT_SELECT_LVDS	(0 << 30)
 #define  PANEL_PORT_SELECT_DPA	(1 << 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  EDP_PANEL		(1 << 30)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define  PANEL_PORT_SELECT_DPC	(2 << 30)
@@ -6997,11 +8048,14 @@ enum punit_power_well {
 
 #define PCH_PP_OFF_DELAYS	0xc720c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  PANEL_POWER_PORT_SELECT_MASK	(0x3 << 30)
 #define  PANEL_POWER_PORT_LVDS		(0 << 30)
 #define  PANEL_POWER_PORT_DP_A		(1 << 30)
 #define  PANEL_POWER_PORT_DP_C		(2 << 30)
 #define  PANEL_POWER_PORT_DP_D		(3 << 30)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define  PANEL_POWER_DOWN_DELAY_MASK	(0x1fff0000)
@@ -7048,6 +8102,11 @@ enum punit_power_well {
 #define  PORT_TO_PIPE(val)	(((val) & (1<<30)) >> 30)
 #define  PORT_TO_PIPE_CPT(val)	(((val) & PORT_TRANS_SEL_MASK) >> 29)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  SDVO_PORT_TO_PIPE_CHV(val)	(((val) & (3<<24)) >> 24)
+#define  DP_PORT_TO_PIPE_CHV(val)	(((val) & (3<<16)) >> 16)
+>>>>>>> v3.18
 =======
 #define  SDVO_PORT_TO_PIPE_CHV(val)	(((val) & (3<<24)) >> 24)
 #define  DP_PORT_TO_PIPE_CHV(val)	(((val) & (3<<16)) >> 16)
@@ -7109,6 +8168,11 @@ enum punit_power_well {
 #define  EDP_LINK_TRAIN_VOL_EMP_MASK_IVB	(0x3f<<22)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  VLV_PMWGICZ				0x1300a4
+
+>>>>>>> v3.18
 =======
 #define  VLV_PMWGICZ				0x1300a4
 
@@ -7122,8 +8186,11 @@ enum punit_power_well {
 #define  FORCEWAKE_ACK				0x130090
 #define  VLV_GTLC_WAKE_CTRL			0x130090
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  VLV_GTLC_PW_STATUS			0x130094
 =======
+=======
+>>>>>>> v3.18
 #define   VLV_GTLC_RENDER_CTX_EXISTS		(1 << 25)
 #define   VLV_GTLC_MEDIA_CTX_EXISTS		(1 << 24)
 #define   VLV_GTLC_ALLOWWAKEREQ			(1 << 0)
@@ -7133,6 +8200,9 @@ enum punit_power_well {
 #define   VLV_GTLC_ALLOWWAKEERR			(1 << 1)
 #define   VLV_GTLC_PW_MEDIA_STATUS_MASK		(1 << 5)
 #define   VLV_GTLC_PW_RENDER_STATUS_MASK	(1 << 7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  FORCEWAKE_MT				0xa188 /* multi-threaded */
 #define   FORCEWAKE_KERNEL			0x1
@@ -7141,10 +8211,13 @@ enum punit_power_well {
 #define  ECOBUS					0xa180
 #define    FORCEWAKE_MT_ENABLE			(1<<5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define  GTFIFODBG				0x120000
 #define    GT_FIFO_CPU_ERROR_MASK		7
 =======
+=======
+>>>>>>> v3.18
 #define  VLV_SPAREG2H				0xA194
 
 #define  GTFIFODBG				0x120000
@@ -7152,17 +8225,23 @@ enum punit_power_well {
 #define    GT_FIFO_BLOBDROPERR			(1<<5)
 #define    GT_FIFO_SB_READ_ABORTERR		(1<<4)
 #define    GT_FIFO_DROPERR			(1<<3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define    GT_FIFO_OVFERR			(1<<2)
 #define    GT_FIFO_IAWRERR			(1<<1)
 #define    GT_FIFO_IARDERR			(1<<0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  GT_FIFO_FREE_ENTRIES			0x120008
 #define    GT_FIFO_NUM_RESERVED_ENTRIES		20
 
 #define GEN6_UCGCTL1				0x9400
 =======
+=======
+>>>>>>> v3.18
 #define  GTFIFOCTL				0x120008
 #define    GT_FIFO_FREE_ENTRIES_MASK		0x7f
 #define    GT_FIFO_NUM_RESERVED_ENTRIES		20
@@ -7173,6 +8252,9 @@ enum punit_power_well {
 
 #define GEN6_UCGCTL1				0x9400
 # define GEN6_EU_TCUNIT_CLOCK_GATE_DISABLE		(1 << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define GEN6_BLBUNIT_CLOCK_GATE_DISABLE		(1 << 5)
 # define GEN6_CSUNIT_CLOCK_GATE_DISABLE			(1 << 7)
@@ -7185,10 +8267,13 @@ enum punit_power_well {
 # define GEN6_RCCUNIT_CLOCK_GATE_DISABLE		(1 << 11)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GEN7_UCGCTL4				0x940c
 #define  GEN7_L3BANK2X_CLOCK_GATE_DISABLE	(1<<25)
 
 =======
+=======
+>>>>>>> v3.18
 #define GEN6_UCGCTL3				0x9408
 
 #define GEN7_UCGCTL4				0x940c
@@ -7202,6 +8287,9 @@ enum punit_power_well {
 #define   GEN8_SDEUNIT_CLOCK_GATE_DISABLE	(1<<14)
 
 #define GEN6_GFXPAUSE				0xA000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GEN6_RPNSWREQ				0xA008
 #define   GEN6_TURBO_DISABLE			(1<<31)
@@ -7217,6 +8305,11 @@ enum punit_power_well {
 #define   GEN6_RC_CTL_RC1e_ENABLE		(1<<20)
 #define   GEN6_RC_CTL_RC7_ENABLE		(1<<22)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   VLV_RC_CTL_CTX_RST_PARALLEL		(1<<24)
+#define   GEN7_RC_CTL_TO_MODE			(1<<28)
+>>>>>>> v3.18
 =======
 #define   VLV_RC_CTL_CTX_RST_PARALLEL		(1<<24)
 #define   GEN7_RC_CTL_TO_MODE			(1<<28)
@@ -7243,7 +8336,11 @@ enum punit_power_well {
 #define   GEN6_RP_UP_BUSY_AVG			(0x2<<3)
 #define   GEN6_RP_UP_BUSY_CONT			(0x4<<3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   GEN7_RP_DOWN_IDLE_AVG			(0x2<<0)
+=======
+#define   GEN6_RP_DOWN_IDLE_AVG			(0x2<<0)
+>>>>>>> v3.18
 =======
 #define   GEN6_RP_DOWN_IDLE_AVG			(0x2<<0)
 >>>>>>> v3.18
@@ -7263,6 +8360,12 @@ enum punit_power_well {
 #define GEN6_RP_DOWN_EI				0xA06C
 #define GEN6_RP_IDLE_HYSTERSIS			0xA070
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GEN6_RPDEUHWTC				0xA080
+#define GEN6_RPDEUC				0xA084
+#define GEN6_RPDEUCSW				0xA088
+>>>>>>> v3.18
 =======
 #define GEN6_RPDEUHWTC				0xA080
 #define GEN6_RPDEUC				0xA084
@@ -7276,12 +8379,15 @@ enum punit_power_well {
 #define GEN6_RC_IDLE_HYSTERSIS			0xA0AC
 #define GEN6_RC_SLEEP				0xA0B0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GEN6_RC1e_THRESHOLD			0xA0B4
 #define GEN6_RC6_THRESHOLD			0xA0B8
 #define GEN6_RC6p_THRESHOLD			0xA0BC
 #define GEN6_RC6pp_THRESHOLD			0xA0C0
 #define GEN6_PMINTRMSK				0xA168
 =======
+=======
+>>>>>>> v3.18
 #define GEN6_RCUBMABDTMR			0xA0B0
 #define GEN6_RC1e_THRESHOLD			0xA0B4
 #define GEN6_RC6_THRESHOLD			0xA0B8
@@ -7291,6 +8397,9 @@ enum punit_power_well {
 #define GEN6_PMINTRMSK				0xA168
 #define GEN8_PMINTR_REDIRECT_TO_NON_DISP	(1<<31)
 #define VLV_PWRDWNUPCTL				0xA294
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GEN6_PMISR				0x44020
@@ -7305,6 +8414,7 @@ enum punit_power_well {
 #define  GEN6_PM_RP_UP_EI_EXPIRED		(1<<2)
 #define  GEN6_PM_RP_DOWN_EI_EXPIRED		(1<<1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  GEN6_PM_DEFERRED_EVENTS		(GEN6_PM_RP_UP_THRESHOLD | \
 						 GEN6_PM_RP_DOWN_THRESHOLD | \
 						 GEN6_PM_RP_DOWN_TIMEOUT)
@@ -7314,6 +8424,8 @@ enum punit_power_well {
 #define GEN6_GT_GFX_RC6p			0x13810C
 #define GEN6_GT_GFX_RC6pp			0x138110
 =======
+=======
+>>>>>>> v3.18
 #define  GEN6_PM_RPS_EVENTS			(GEN6_PM_RP_UP_THRESHOLD | \
 						 GEN6_PM_RP_DOWN_THRESHOLD | \
 						 GEN6_PM_RP_DOWN_TIMEOUT)
@@ -7340,6 +8452,9 @@ enum punit_power_well {
 #define GEN6_GT_GFX_RC6pp			0x138110
 #define VLV_RENDER_C0_COUNT_REG		0x138118
 #define VLV_MEDIA_C0_COUNT_REG			0x13811C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GEN6_PCODE_MAILBOX			0x138124
@@ -7350,19 +8465,26 @@ enum punit_power_well {
 #define	  GEN6_PCODE_WRITE_RC6VIDS		0x4
 #define	  GEN6_PCODE_READ_RC6VIDS		0x5
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   GEN6_ENCODE_RC6_VID(mv)		(((mv) - 245) / 5)
 #define   GEN6_DECODE_RC6_VID(vids)		(((vids) * 5) + 245)
 =======
+=======
+>>>>>>> v3.18
 #define   GEN6_PCODE_READ_D_COMP		0x10
 #define   GEN6_PCODE_WRITE_D_COMP		0x11
 #define   GEN6_ENCODE_RC6_VID(mv)		(((mv) - 245) / 5)
 #define   GEN6_DECODE_RC6_VID(vids)		(((vids) * 5) + 245)
 #define   DISPLAY_IPS_CONTROL			0x19
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GEN6_PCODE_DATA				0x138128
 #define   GEN6_PCODE_FREQ_IA_RATIO_SHIFT	8
 #define   GEN6_PCODE_FREQ_RING_RATIO_SHIFT	16
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define VLV_IOSF_DOORBELL_REQ			0x182100
 #define   IOSF_DEVFN_SHIFT			24
@@ -7380,6 +8502,8 @@ enum punit_power_well {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define GEN6_GT_CORE_STATUS		0x138060
 #define   GEN6_CORE_CPD_STATE_MASK	(7<<4)
 #define   GEN6_RCn_MASK			7
@@ -7394,6 +8518,10 @@ enum punit_power_well {
 /* IVYBRIDGE DPF */
 #define GEN7_L3CDERRST1			0xB008 /* L3CD Error Status 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HSW_L3CDERRST11			0xB208 /* L3CD Error Status register 1 slice 1 */
+>>>>>>> v3.18
 =======
 #define HSW_L3CDERRST11			0xB208 /* L3CD Error Status register 1 slice 1 */
 >>>>>>> v3.18
@@ -7411,6 +8539,10 @@ enum punit_power_well {
 
 #define GEN7_L3LOG_BASE			0xB070
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HSW_L3LOG_BASE_SLICE1		0xB270
+>>>>>>> v3.18
 =======
 #define HSW_L3LOG_BASE_SLICE1		0xB270
 >>>>>>> v3.18
@@ -7420,9 +8552,12 @@ enum punit_power_well {
 #define GEN7_HALF_SLICE_CHICKEN1_GT2	0xf100
 #define   GEN7_MAX_PS_THREAD_DEP		(8<<12)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   GEN7_PSD_SINGLE_PORT_DISPATCH_ENABLE	(1<<3)
 
 =======
+=======
+>>>>>>> v3.18
 #define   GEN7_SINGLE_SUBSCAN_DISPATCH_ENABLE	(1<<10)
 #define   GEN7_PSD_SINGLE_PORT_DISPATCH_ENABLE	(1<<3)
 
@@ -7430,14 +8565,20 @@ enum punit_power_well {
 #define   PARTIAL_INSTRUCTION_SHOOTDOWN_DISABLE	(1<<8)
 #define   STALL_DOP_GATING_DISABLE		(1<<5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GEN7_ROW_CHICKEN2		0xe4f4
 #define GEN7_ROW_CHICKEN2_GT2		0xf4f4
 #define   DOP_CLOCK_GATING_DISABLE	(1<<0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define G4X_AUD_VID_DID			(dev_priv->info->display_mmio_offset + 0x62020)
 =======
+=======
+>>>>>>> v3.18
 #define HSW_ROW_CHICKEN3		0xe49c
 #define  HSW_ROW_CHICKEN3_L3_GLOBAL_ATOMICS_DISABLE    (1 << 6)
 
@@ -7446,6 +8587,9 @@ enum punit_power_well {
 #define   GEN8_SAMPLER_POWER_BYPASS_DIS	(1<<1)
 
 #define G4X_AUD_VID_DID			(dev_priv->info.display_mmio_offset + 0x62020)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define INTEL_AUDIO_DEVCL		0x808629FB
 #define INTEL_AUDIO_DEVBLC		0x80862801
@@ -7488,7 +8632,10 @@ enum punit_power_well {
 #define CPT_AUD_CNTRL_ST2		0xE50C0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VLV_HDMIW_HDMIEDID_A		(VLV_DISPLAY_BASE + 0x62050)
 #define VLV_HDMIW_HDMIEDID_B		(VLV_DISPLAY_BASE + 0x62150)
 #define VLV_HDMIW_HDMIEDID(pipe) _PIPE(pipe, \
@@ -7501,6 +8648,9 @@ enum punit_power_well {
 					VLV_AUD_CNTL_ST_B)
 #define VLV_AUD_CNTL_ST2		(VLV_DISPLAY_BASE + 0x620C0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* These are the 4 32-bit write offset registers for each stream
  * output buffer.  It determines the offset from the
@@ -7519,13 +8669,19 @@ enum punit_power_well {
 					CPT_AUD_CONFIG_A, \
 					CPT_AUD_CONFIG_B)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VLV_AUD_CONFIG_A		(VLV_DISPLAY_BASE + 0x62000)
 #define VLV_AUD_CONFIG_B		(VLV_DISPLAY_BASE + 0x62100)
 #define VLV_AUD_CFG(pipe) _PIPE(pipe, \
 					VLV_AUD_CONFIG_A, \
 					VLV_AUD_CONFIG_B)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   AUD_CONFIG_N_VALUE_INDEX		(1 << 29)
 #define   AUD_CONFIG_N_PROG_ENABLE		(1 << 28)
@@ -7535,8 +8691,11 @@ enum punit_power_well {
 #define   AUD_CONFIG_LOWER_N_VALUE		(0xfff << 4)
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_SHIFT	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI		(0xf << 16)
 =======
+=======
+>>>>>>> v3.18
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_MASK	(0xf << 16)
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_25175	(0 << 16)
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_25200	(1 << 16)
@@ -7548,6 +8707,9 @@ enum punit_power_well {
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_74250	(7 << 16)
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_148352	(8 << 16)
 #define   AUD_CONFIG_PIXEL_CLOCK_HDMI_148500	(9 << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define   AUD_CONFIG_DISABLE_NCTS		(1 << 3)
 
@@ -7605,8 +8767,13 @@ enum punit_power_well {
 #define HSW_PWR_WELL_KVMR			0x45408 /* CTL3 */
 #define HSW_PWR_WELL_DEBUG			0x4540C /* CTL4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   HSW_PWR_WELL_ENABLE			(1<<31)
 #define   HSW_PWR_WELL_STATE			(1<<30)
+=======
+#define   HSW_PWR_WELL_ENABLE_REQUEST		(1<<31)
+#define   HSW_PWR_WELL_STATE_ENABLED		(1<<30)
+>>>>>>> v3.18
 =======
 #define   HSW_PWR_WELL_ENABLE_REQUEST		(1<<31)
 #define   HSW_PWR_WELL_STATE_ENABLED		(1<<30)
@@ -7623,18 +8790,24 @@ enum punit_power_well {
 #define TRANS_DDI_FUNC_CTL_C		0x62400
 #define TRANS_DDI_FUNC_CTL_EDP		0x6F400
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TRANS_DDI_FUNC_CTL(tran) _TRANSCODER(tran, TRANS_DDI_FUNC_CTL_A, \
 						   TRANS_DDI_FUNC_CTL_B)
 #define  TRANS_DDI_FUNC_ENABLE		(1<<31)
 /* Those bits are ignored by pipe EDP since it can only connect to DDI A */
 #define  TRANS_DDI_PORT_MASK		(7<<28)
 =======
+=======
+>>>>>>> v3.18
 #define TRANS_DDI_FUNC_CTL(tran) _TRANSCODER2(tran, TRANS_DDI_FUNC_CTL_A)
 
 #define  TRANS_DDI_FUNC_ENABLE		(1<<31)
 /* Those bits are ignored by pipe EDP since it can only connect to DDI A */
 #define  TRANS_DDI_PORT_MASK		(7<<28)
 #define  TRANS_DDI_PORT_SHIFT		28
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  TRANS_DDI_SELECT_PORT(x)	((x)<<28)
 #define  TRANS_DDI_PORT_NONE		(0<<28)
@@ -7657,10 +8830,15 @@ enum punit_power_well {
 #define  TRANS_DDI_EDP_INPUT_B_ONOFF	(5<<12)
 #define  TRANS_DDI_EDP_INPUT_C_ONOFF	(6<<12)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  TRANS_DDI_BFI_ENABLE		(1<<4)
 #define  TRANS_DDI_PORT_WIDTH_X1	(0<<1)
 #define  TRANS_DDI_PORT_WIDTH_X2	(1<<1)
 #define  TRANS_DDI_PORT_WIDTH_X4	(3<<1)
+=======
+#define  TRANS_DDI_DP_VC_PAYLOAD_ALLOC	(1<<8)
+#define  TRANS_DDI_BFI_ENABLE		(1<<4)
+>>>>>>> v3.18
 =======
 #define  TRANS_DDI_DP_VC_PAYLOAD_ALLOC	(1<<8)
 #define  TRANS_DDI_BFI_ENABLE		(1<<4)
@@ -7674,6 +8852,10 @@ enum punit_power_well {
 #define  DP_TP_CTL_MODE_SST			(0<<27)
 #define  DP_TP_CTL_MODE_MST			(1<<27)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  DP_TP_CTL_FORCE_ACT			(1<<25)
+>>>>>>> v3.18
 =======
 #define  DP_TP_CTL_FORCE_ACT			(1<<25)
 >>>>>>> v3.18
@@ -7692,9 +8874,12 @@ enum punit_power_well {
 #define DP_TP_STATUS_B			0x64144
 #define DP_TP_STATUS(port) _PORT(port, DP_TP_STATUS_A, DP_TP_STATUS_B)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  DP_TP_STATUS_IDLE_DONE		(1<<25)
 #define  DP_TP_STATUS_AUTOTRAIN_DONE	(1<<12)
 =======
+=======
+>>>>>>> v3.18
 #define  DP_TP_STATUS_IDLE_DONE			(1<<25)
 #define  DP_TP_STATUS_ACT_SENT			(1<<24)
 #define  DP_TP_STATUS_MODE_STATUS_MST		(1<<23)
@@ -7702,6 +8887,9 @@ enum punit_power_well {
 #define  DP_TP_STATUS_PAYLOAD_MAPPING_VC2	(3 << 8)
 #define  DP_TP_STATUS_PAYLOAD_MAPPING_VC1	(3 << 4)
 #define  DP_TP_STATUS_PAYLOAD_MAPPING_VC0	(3 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DDI Buffer Control */
@@ -7709,6 +8897,7 @@ enum punit_power_well {
 #define DDI_BUF_CTL_B				0x64100
 #define DDI_BUF_CTL(port) _PORT(port, DDI_BUF_CTL_A, DDI_BUF_CTL_B)
 #define  DDI_BUF_CTL_ENABLE			(1<<31)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define  DDI_BUF_EMP_400MV_0DB_HSW		(0<<24)   /* Sel0 */
 #define  DDI_BUF_EMP_400MV_3_5DB_HSW		(1<<24)   /* Sel1 */
@@ -7722,14 +8911,21 @@ enum punit_power_well {
 =======
 #define  DDI_BUF_TRANS_SELECT(n)	((n) << 24)
 >>>>>>> v3.18
+=======
+#define  DDI_BUF_TRANS_SELECT(n)	((n) << 24)
+>>>>>>> v3.18
 #define  DDI_BUF_EMP_MASK			(0xf<<24)
 #define  DDI_BUF_PORT_REVERSAL			(1<<16)
 #define  DDI_BUF_IS_IDLE			(1<<7)
 #define  DDI_A_4_LANES				(1<<4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  DDI_PORT_WIDTH_X1			(0<<1)
 #define  DDI_PORT_WIDTH_X2			(1<<1)
 #define  DDI_PORT_WIDTH_X4			(3<<1)
+=======
+#define  DDI_PORT_WIDTH(width)			(((width) - 1) << 1)
+>>>>>>> v3.18
 =======
 #define  DDI_PORT_WIDTH(width)			(((width) - 1) << 1)
 >>>>>>> v3.18
@@ -7773,7 +8969,12 @@ enum punit_power_well {
 #define   SBI_SSCAUXDIV_FINALDIV2SEL(x)		((x)<<4)
 #define  SBI_DBUFF0				0x2a00
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   SBI_DBUFF0_ENABLE			(1<<0)
+=======
+#define  SBI_GEN0				0x1f00
+#define   SBI_GEN0_CFG_BUFFENABLE_DISABLE	(1<<0)
+>>>>>>> v3.18
 =======
 #define  SBI_GEN0				0x1f00
 #define   SBI_GEN0_CFG_BUFFENABLE_DISABLE	(1<<0)
@@ -7790,20 +8991,27 @@ enum punit_power_well {
 #define  SPLL_PLL_SSC			(1<<28)
 #define  SPLL_PLL_NON_SSC		(2<<28)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  SPLL_PLL_FREQ_810MHz		(0<<26)
 #define  SPLL_PLL_FREQ_1350MHz		(1<<26)
 =======
+=======
+>>>>>>> v3.18
 #define  SPLL_PLL_LCPLL			(3<<28)
 #define  SPLL_PLL_REF_MASK		(3<<28)
 #define  SPLL_PLL_FREQ_810MHz		(0<<26)
 #define  SPLL_PLL_FREQ_1350MHz		(1<<26)
 #define  SPLL_PLL_FREQ_2700MHz		(2<<26)
 #define  SPLL_PLL_FREQ_MASK		(3<<26)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* WRPLL */
 #define WRPLL_CTL1			0x46040
 #define WRPLL_CTL2			0x46060
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define  WRPLL_PLL_ENABLE		(1<<31)
 #define  WRPLL_PLL_SELECT_SSC		(0x01<<28)
@@ -7814,6 +9022,8 @@ enum punit_power_well {
 #define  WRPLL_DIVIDER_POST(x)		((x)<<8)
 #define  WRPLL_DIVIDER_FEEDBACK(x)	((x)<<16)
 =======
+=======
+>>>>>>> v3.18
 #define WRPLL_CTL(pll)			(pll == 0 ? WRPLL_CTL1 : WRPLL_CTL2)
 #define  WRPLL_PLL_ENABLE		(1<<31)
 #define  WRPLL_PLL_SSC			(1<<28)
@@ -7829,6 +9039,9 @@ enum punit_power_well {
 #define  WRPLL_DIVIDER_FEEDBACK(x)	((x)<<16)
 #define  WRPLL_DIVIDER_FB_SHIFT		16
 #define  WRPLL_DIVIDER_FB_MASK		(0xff<<16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Port clock selection */
@@ -7840,15 +9053,21 @@ enum punit_power_well {
 #define  PORT_CLK_SEL_LCPLL_810		(2<<29)
 #define  PORT_CLK_SEL_SPLL		(3<<29)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  PORT_CLK_SEL_WRPLL1		(4<<29)
 #define  PORT_CLK_SEL_WRPLL2		(5<<29)
 #define  PORT_CLK_SEL_NONE		(7<<29)
 =======
+=======
+>>>>>>> v3.18
 #define  PORT_CLK_SEL_WRPLL(pll)	(((pll)+4)<<29)
 #define  PORT_CLK_SEL_WRPLL1		(4<<29)
 #define  PORT_CLK_SEL_WRPLL2		(5<<29)
 #define  PORT_CLK_SEL_NONE		(7<<29)
 #define  PORT_CLK_SEL_MASK		(7<<29)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Transcoder clock selection */
@@ -7860,17 +9079,23 @@ enum punit_power_well {
 #define  TRANS_CLK_SEL_PORT(x)		((x+1)<<29)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _TRANSA_MSA_MISC		0x60410
 #define _TRANSB_MSA_MISC		0x61410
 #define TRANS_MSA_MISC(tran) _TRANSCODER(tran, _TRANSA_MSA_MISC, \
 					       _TRANSB_MSA_MISC)
 =======
+=======
+>>>>>>> v3.18
 #define TRANSA_MSA_MISC			0x60410
 #define TRANSB_MSA_MISC			0x61410
 #define TRANSC_MSA_MISC			0x62410
 #define TRANS_EDP_MSA_MISC		0x6f410
 #define TRANS_MSA_MISC(tran) _TRANSCODER2(tran, TRANSA_MSA_MISC)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  TRANS_MSA_SYNC_CLK		(1<<0)
 #define  TRANS_MSA_6_BPC		(0<<5)
@@ -7886,10 +9111,13 @@ enum punit_power_well {
 #define  LCPLL_CLK_FREQ_MASK		(3<<26)
 #define  LCPLL_CLK_FREQ_450		(0<<26)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  LCPLL_CD_CLOCK_DISABLE		(1<<25)
 #define  LCPLL_CD2X_CLOCK_DISABLE	(1<<23)
 #define  LCPLL_CD_SOURCE_FCLK		(1<<21)
 =======
+=======
+>>>>>>> v3.18
 #define  LCPLL_CLK_FREQ_54O_BDW		(1<<26)
 #define  LCPLL_CLK_FREQ_337_5_BDW	(2<<26)
 #define  LCPLL_CLK_FREQ_675_BDW		(3<<26)
@@ -7906,6 +9134,9 @@ enum punit_power_well {
 #define  D_COMP_RCOMP_IN_PROGRESS	(1<<9)
 #define  D_COMP_COMP_FORCE		(1<<8)
 #define  D_COMP_COMP_DISABLE		(1<<0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Pipe WM_LINETIME - watermark line time */
@@ -7921,6 +9152,11 @@ enum punit_power_well {
 /* SFUSE_STRAP */
 #define SFUSE_STRAP			0xc2014
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  SFUSE_STRAP_FUSE_LOCK		(1<<13)
+#define  SFUSE_STRAP_DISPLAY_DISABLED	(1<<7)
+>>>>>>> v3.18
 =======
 #define  SFUSE_STRAP_FUSE_LOCK		(1<<13)
 #define  SFUSE_STRAP_DISPLAY_DISABLED	(1<<7)
@@ -7930,6 +9166,12 @@ enum punit_power_well {
 #define  SFUSE_STRAP_DDID_DETECTED	(1<<0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define WM_MISC				0x45260
+#define  WM_MISC_DATA_PARTITION_5_6	(1 << 0)
+
+>>>>>>> v3.18
 =======
 #define WM_MISC				0x45260
 #define  WM_MISC_DATA_PARTITION_5_6	(1 << 0)
@@ -7949,6 +9191,12 @@ enum punit_power_well {
 #define _PIPE_A_CSC_COEFF_BV	0x49024
 #define _PIPE_A_CSC_MODE	0x49028
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   CSC_BLACK_SCREEN_OFFSET	(1 << 2)
+#define   CSC_POSITION_BEFORE_GAMMA	(1 << 1)
+#define   CSC_MODE_YUV_TO_RGB		(1 << 0)
+>>>>>>> v3.18
 =======
 #define   CSC_BLACK_SCREEN_OFFSET	(1 << 2)
 #define   CSC_POSITION_BEFORE_GAMMA	(1 << 1)
@@ -7976,10 +9224,13 @@ enum punit_power_well {
 #define _PIPE_B_CSC_POSTOFF_LO	0x49148
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CSC_BLACK_SCREEN_OFFSET (1 << 2)
 #define CSC_POSITION_BEFORE_GAMMA (1 << 1)
 #define CSC_MODE_YUV_TO_RGB (1 << 0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PIPE_CSC_COEFF_RY_GY(pipe) _PIPE(pipe, _PIPE_A_CSC_COEFF_RY_GY, _PIPE_B_CSC_COEFF_RY_GY)
@@ -7997,7 +9248,10 @@ enum punit_power_well {
 #define PIPE_CSC_POSTOFF_LO(pipe) _PIPE(pipe, _PIPE_A_CSC_POSTOFF_LO, _PIPE_B_CSC_POSTOFF_LO)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* VLV MIPI registers */
 
 #define _MIPIA_PORT_CTRL			(VLV_DISPLAY_BASE + 0x61190)
@@ -8461,5 +9715,8 @@ enum punit_power_well {
 #define _PALETTE_A (dev_priv->info.display_mmio_offset + 0xa000)
 #define _PALETTE_B (dev_priv->info.display_mmio_offset + 0xa800)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _I915_REG_H_ */

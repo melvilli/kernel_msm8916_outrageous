@@ -383,6 +383,7 @@ static int cp_set_eeprom(struct net_device *dev,
 			 struct ethtool_eeprom *eeprom, u8 *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cp_pci_tbl) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK,	PCI_DEVICE_ID_REALTEK_8139), },
 	{ PCI_DEVICE(PCI_VENDOR_ID_TTTECH,	PCI_DEVICE_ID_TTTECH_MC322), },
@@ -390,6 +391,8 @@ static DEFINE_PCI_DEVICE_TABLE(cp_pci_tbl) = {
 };
 MODULE_DEVICE_TABLE(pci, cp_pci_tbl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct {
@@ -480,7 +483,11 @@ rx_status_loop:
 	cpw16(IntrStatus, cp_rx_intr_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (1) {
+=======
+	while (rx < budget) {
+>>>>>>> v3.18
 =======
 	while (rx < budget) {
 >>>>>>> v3.18
@@ -562,9 +569,12 @@ rx_next:
 			desc->opts1 = cpu_to_le32(DescOwn | cp->rx_buf_sz);
 		rx_tail = NEXT_RX(rx_tail);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (rx >= budget)
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1870,7 +1880,11 @@ static int cp_set_eeprom(struct net_device *dev,
 static void cp_set_d3_state (struct cp_private *cp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_enable_wake (cp->pdev, 0, 1); /* Enable PME# generation */
+=======
+	pci_enable_wake(cp->pdev, PCI_D0, 1); /* Enable PME# generation */
+>>>>>>> v3.18
 =======
 	pci_enable_wake(cp->pdev, PCI_D0, 1); /* Enable PME# generation */
 >>>>>>> v3.18
@@ -1905,11 +1919,15 @@ static int cp_init_one (struct pci_dev *pdev, const struct pci_device_id *ent)
 	unsigned int addr_len, i, pci_using_dac;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef MODULE
 	static int version_printed;
 	if (version_printed++ == 0)
 		pr_info("%s", version);
 #endif
+=======
+	pr_info_once("%s", version);
+>>>>>>> v3.18
 =======
 	pr_info_once("%s", version);
 >>>>>>> v3.18
@@ -2070,7 +2088,10 @@ static void cp_remove_one (struct pci_dev *pdev)
 	pci_clear_mwi(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -2136,7 +2157,10 @@ static int cp_resume (struct pci_dev *pdev)
 #endif /* CONFIG_PM */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct pci_device_id cp_pci_tbl[] = {
         { PCI_DEVICE(PCI_VENDOR_ID_REALTEK,     PCI_DEVICE_ID_REALTEK_8139), },
         { PCI_DEVICE(PCI_VENDOR_ID_TTTECH,      PCI_DEVICE_ID_TTTECH_MC322), },
@@ -2144,6 +2168,9 @@ static const struct pci_device_id cp_pci_tbl[] = {
 };
 MODULE_DEVICE_TABLE(pci, cp_pci_tbl);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pci_driver cp_driver = {
 	.name         = DRV_NAME,
@@ -2156,6 +2183,7 @@ static struct pci_driver cp_driver = {
 #endif
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init cp_init (void)
 {
@@ -2172,6 +2200,9 @@ static void __exit cp_exit (void)
 
 module_init(cp_init);
 module_exit(cp_exit);
+=======
+module_pci_driver(cp_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(cp_driver);
 >>>>>>> v3.18

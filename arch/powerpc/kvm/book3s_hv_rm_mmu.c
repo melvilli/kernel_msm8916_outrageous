@@ -28,7 +28,11 @@ static void *real_vmalloc_addr(void *x)
 	pte_t *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = find_linux_pte(swapper_pg_dir, addr);
+=======
+	p = find_linux_pte_or_hugepte(swapper_pg_dir, addr, NULL);
+>>>>>>> v3.18
 =======
 	p = find_linux_pte_or_hugepte(swapper_pg_dir, addr, NULL);
 >>>>>>> v3.18
@@ -47,6 +51,10 @@ static int global_invalidates(struct kvm *kvm, unsigned long flags)
 	/*
 	 * If there is only one vcore, and it's currently running,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * as indicated by local_paca->kvm_hstate.kvm_vcpu being set,
+>>>>>>> v3.18
 =======
 	 * as indicated by local_paca->kvm_hstate.kvm_vcpu being set,
 >>>>>>> v3.18
@@ -57,7 +65,11 @@ static int global_invalidates(struct kvm *kvm, unsigned long flags)
 	 * Otherwise, don't use tlbiel.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kvm->arch.online_vcores == 1 && local_paca->kvm_hstate.kvm_vcore)
+=======
+	if (kvm->arch.online_vcores == 1 && local_paca->kvm_hstate.kvm_vcpu)
+>>>>>>> v3.18
 =======
 	if (kvm->arch.online_vcores == 1 && local_paca->kvm_hstate.kvm_vcpu)
 >>>>>>> v3.18
@@ -124,7 +136,11 @@ static void remove_revmap_chain(struct kvm *kvm, long pte_index,
 	ptel = rev->guest_rpte |= rcbits;
 	gfn = hpte_rpn(ptel, hpte_page_size(hpte_v, ptel));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memslot = __gfn_to_memslot(kvm_memslots(kvm), gfn);
+=======
+	memslot = __gfn_to_memslot(kvm_memslots_raw(kvm), gfn);
+>>>>>>> v3.18
 =======
 	memslot = __gfn_to_memslot(kvm_memslots_raw(kvm), gfn);
 >>>>>>> v3.18
@@ -151,7 +167,11 @@ static void remove_revmap_chain(struct kvm *kvm, long pte_index,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pte_t lookup_linux_pte(pgd_t *pgdir, unsigned long hva,
+=======
+static pte_t lookup_linux_pte_and_update(pgd_t *pgdir, unsigned long hva,
+>>>>>>> v3.18
 =======
 static pte_t lookup_linux_pte_and_update(pgd_t *pgdir, unsigned long hva,
 >>>>>>> v3.18
@@ -159,6 +179,7 @@ static pte_t lookup_linux_pte_and_update(pgd_t *pgdir, unsigned long hva,
 {
 	pte_t *ptep;
 	unsigned long ps = *pte_sizep;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int shift;
 
@@ -168,6 +189,8 @@ static pte_t lookup_linux_pte_and_update(pgd_t *pgdir, unsigned long hva,
 	if (shift)
 		*pte_sizep = 1ul << shift;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int hugepage_shift;
 
 	ptep = find_linux_pte_or_hugepte(pgdir, hva, &hugepage_shift);
@@ -175,11 +198,15 @@ static pte_t lookup_linux_pte_and_update(pgd_t *pgdir, unsigned long hva,
 		return __pte(0);
 	if (hugepage_shift)
 		*pte_sizep = 1ul << hugepage_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		*pte_sizep = PAGE_SIZE;
 	if (ps > *pte_sizep)
 		return __pte(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!pte_present(*ptep))
 		return __pte(0);
@@ -191,6 +218,8 @@ static inline void unlock_hpte(unsigned long *hpte, unsigned long hpte_v)
 	asm volatile(PPC_RELEASE_BARRIER "" : : : "memory");
 	hpte[0] = hpte_v;
 =======
+=======
+>>>>>>> v3.18
 	return kvmppc_read_update_linux_pte(ptep, writing, hugepage_shift);
 }
 
@@ -198,6 +227,9 @@ static inline void unlock_hpte(__be64 *hpte, unsigned long hpte_v)
 {
 	asm volatile(PPC_RELEASE_BARRIER "" : : : "memory");
 	hpte[0] = cpu_to_be64(hpte_v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -208,7 +240,11 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 	unsigned long i, pa, gpa, gfn, psize;
 	unsigned long slot_fn, hva;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *hpte;
+=======
+	__be64 *hpte;
+>>>>>>> v3.18
 =======
 	__be64 *hpte;
 >>>>>>> v3.18
@@ -239,7 +275,11 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 	gpa = (ptel & HPTE_R_RPN) & ~(psize - 1);
 	gfn = gpa >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memslot = __gfn_to_memslot(kvm_memslots(kvm), gfn);
+=======
+	memslot = __gfn_to_memslot(kvm_memslots_raw(kvm), gfn);
+>>>>>>> v3.18
 =======
 	memslot = __gfn_to_memslot(kvm_memslots_raw(kvm), gfn);
 >>>>>>> v3.18
@@ -276,6 +316,10 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 		pte_size = PAGE_SIZE << (pa & KVMPPC_PAGE_ORDER_MASK);
 		pa &= PAGE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pa |= gpa & ~PAGE_MASK;
+>>>>>>> v3.18
 =======
 		pa |= gpa & ~PAGE_MASK;
 >>>>>>> v3.18
@@ -286,8 +330,14 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 		/* Look up the Linux PTE for the backing page */
 		pte_size = psize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte = lookup_linux_pte(pgdir, hva, writing, &pte_size);
 		if (pte_present(pte)) {
+=======
+		pte = lookup_linux_pte_and_update(pgdir, hva, writing,
+						  &pte_size);
+		if (pte_present(pte) && !pte_numa(pte)) {
+>>>>>>> v3.18
 =======
 		pte = lookup_linux_pte_and_update(pgdir, hva, writing,
 						  &pte_size);
@@ -299,6 +349,11 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 			is_io = hpte_cache_bits(pte_val(pte));
 			pa = pte_pfn(pte) << PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pa |= hva & (pte_size - 1);
+			pa |= gpa & ~PAGE_MASK;
+>>>>>>> v3.18
 =======
 			pa |= hva & (pte_size - 1);
 			pa |= gpa & ~PAGE_MASK;
@@ -309,8 +364,11 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 	if (pte_size < psize)
 		return H_PARAMETER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pa && pte_size > psize)
 		pa |= gpa & (pte_size - 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -341,9 +399,15 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 	if (likely((flags & H_EXACT) == 0)) {
 		pte_index &= ~7UL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpte = (unsigned long *)(kvm->arch.hpt_virt + (pte_index << 4));
 		for (i = 0; i < 8; ++i) {
 			if ((*hpte & HPTE_V_VALID) == 0 &&
+=======
+		hpte = (__be64 *)(kvm->arch.hpt_virt + (pte_index << 4));
+		for (i = 0; i < 8; ++i) {
+			if ((be64_to_cpu(*hpte) & HPTE_V_VALID) == 0 &&
+>>>>>>> v3.18
 =======
 		hpte = (__be64 *)(kvm->arch.hpt_virt + (pte_index << 4));
 		for (i = 0; i < 8; ++i) {
@@ -364,12 +428,15 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 			hpte -= 16;
 			for (i = 0; i < 8; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				while (!try_lock_hpte(hpte, HPTE_V_HVLOCK))
 					cpu_relax();
 				if (!(*hpte & (HPTE_V_VALID | HPTE_V_ABSENT)))
 					break;
 				*hpte &= ~HPTE_V_HVLOCK;
 =======
+=======
+>>>>>>> v3.18
 				u64 pte;
 				while (!try_lock_hpte(hpte, HPTE_V_HVLOCK))
 					cpu_relax();
@@ -377,6 +444,9 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 				if (!(pte & (HPTE_V_VALID | HPTE_V_ABSENT)))
 					break;
 				*hpte &= ~cpu_to_be64(HPTE_V_HVLOCK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				hpte += 2;
 			}
@@ -385,6 +455,7 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 		}
 		pte_index += i;
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hpte = (unsigned long *)(kvm->arch.hpt_virt + (pte_index << 4));
 		if (!try_lock_hpte(hpte, HPTE_V_HVLOCK | HPTE_V_VALID |
@@ -395,6 +466,8 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 			if (*hpte & (HPTE_V_VALID | HPTE_V_ABSENT)) {
 				*hpte &= ~HPTE_V_HVLOCK;
 =======
+=======
+>>>>>>> v3.18
 		hpte = (__be64 *)(kvm->arch.hpt_virt + (pte_index << 4));
 		if (!try_lock_hpte(hpte, HPTE_V_HVLOCK | HPTE_V_VALID |
 				   HPTE_V_ABSENT)) {
@@ -406,6 +479,9 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 			pte = be64_to_cpu(*hpte);
 			if (pte & (HPTE_V_VALID | HPTE_V_ABSENT)) {
 				*hpte &= ~cpu_to_be64(HPTE_V_HVLOCK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return H_PTEG_FULL;
 			}
@@ -443,17 +519,23 @@ long kvmppc_do_h_enter(struct kvm *kvm, unsigned long flags,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpte[1] = ptel;
 
 	/* Write the first HPTE dword, unlocking the HPTE and making it valid */
 	eieio();
 	hpte[0] = pteh;
 =======
+=======
+>>>>>>> v3.18
 	hpte[1] = cpu_to_be64(ptel);
 
 	/* Write the first HPTE dword, unlocking the HPTE and making it valid */
 	eieio();
 	hpte[0] = cpu_to_be64(pteh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asm volatile("ptesync" : : : "memory");
 
@@ -470,13 +552,19 @@ long kvmppc_h_enter(struct kvm_vcpu *vcpu, unsigned long flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOCK_TOKEN	(*(u32 *)(&get_paca()->lock_token))
 =======
+=======
+>>>>>>> v3.18
 #ifdef __BIG_ENDIAN__
 #define LOCK_TOKEN	(*(u32 *)(&get_paca()->lock_token))
 #else
 #define LOCK_TOKEN	(*(u32 *)(&get_paca()->paca_index))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int try_lock_tlbie(unsigned int *lock)
@@ -498,7 +586,10 @@ static inline int try_lock_tlbie(unsigned int *lock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * tlbie/tlbiel is a bit different on the PPC970 compared to later
  * processors such as POWER7; the large page bit is in the instruction
@@ -573,11 +664,15 @@ static void do_tlbies(struct kvm *kvm, unsigned long *rbvalues,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long kvmppc_do_h_remove(struct kvm *kvm, unsigned long flags,
 			unsigned long pte_index, unsigned long avpn,
 			unsigned long *hpret)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long *hpte;
 	unsigned long v, r, rb;
@@ -593,6 +688,8 @@ long kvmppc_do_h_remove(struct kvm *kvm, unsigned long flags,
 	    ((flags & H_ANDCOND) && (hpte[0] & avpn) != 0)) {
 		hpte[0] &= ~HPTE_V_HVLOCK;
 =======
+=======
+>>>>>>> v3.18
 	__be64 *hpte;
 	unsigned long v, r, rb;
 	struct revmap_entry *rev;
@@ -608,11 +705,15 @@ long kvmppc_do_h_remove(struct kvm *kvm, unsigned long flags,
 	    ((flags & H_AVPN) && (pte & ~0x7fUL) != avpn) ||
 	    ((flags & H_ANDCOND) && (pte & avpn) != 0)) {
 		hpte[0] &= ~cpu_to_be64(HPTE_V_HVLOCK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return H_NOT_FOUND;
 	}
 
 	rev = real_vmalloc_addr(&kvm->arch.revmap[pte_index]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	v = hpte[0] & ~HPTE_V_HVLOCK;
 	if (v & HPTE_V_VALID) {
@@ -634,6 +735,8 @@ long kvmppc_do_h_remove(struct kvm *kvm, unsigned long flags,
 		/* Read PTE low word after tlbie to get final R/C values */
 		remove_revmap_chain(kvm, pte_index, rev, v, hpte[1]);
 =======
+=======
+>>>>>>> v3.18
 	v = pte & ~HPTE_V_HVLOCK;
 	if (v & HPTE_V_VALID) {
 		u64 pte1;
@@ -644,6 +747,9 @@ long kvmppc_do_h_remove(struct kvm *kvm, unsigned long flags,
 		do_tlbies(kvm, &rb, 1, global_invalidates(kvm, flags), true);
 		/* Read PTE low word after tlbie to get final R/C values */
 		remove_revmap_chain(kvm, pte_index, rev, v, pte1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	r = rev->guest_rpte & ~HPTE_GR_RESERVED;
@@ -668,6 +774,7 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 	struct kvm *kvm = vcpu->kvm;
 	unsigned long *args = &vcpu->arch.gpr[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *hp, *hptes[4], tlbrb[4];
 	long int i, j, k, n, found, indexes[4];
 	unsigned long flags, req, pte_index, rcbits;
@@ -678,6 +785,8 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 	if (atomic_read(&kvm->online_vcpus) == 1)
 		local = 1;
 =======
+=======
+>>>>>>> v3.18
 	__be64 *hp, *hptes[4];
 	unsigned long tlbrb[4];
 	long int i, j, k, n, found, indexes[4];
@@ -688,6 +797,9 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 	u64 hp0;
 
 	global = global_invalidates(kvm, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < 4 && ret == H_SUCCESS; ) {
 		n = 0;
@@ -710,8 +822,12 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hp = (unsigned long *)
 				(kvm->arch.hpt_virt + (pte_index << 4));
+=======
+			hp = (__be64 *) (kvm->arch.hpt_virt + (pte_index << 4));
+>>>>>>> v3.18
 =======
 			hp = (__be64 *) (kvm->arch.hpt_virt + (pte_index << 4));
 >>>>>>> v3.18
@@ -724,7 +840,12 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 			}
 			found = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (hp[0] & (HPTE_V_ABSENT | HPTE_V_VALID)) {
+=======
+			hp0 = be64_to_cpu(hp[0]);
+			if (hp0 & (HPTE_V_ABSENT | HPTE_V_VALID)) {
+>>>>>>> v3.18
 =======
 			hp0 = be64_to_cpu(hp[0]);
 			if (hp0 & (HPTE_V_ABSENT | HPTE_V_VALID)) {
@@ -735,17 +856,23 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 					break;
 				case 1:		/* andcond */
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (!(hp[0] & args[j + 1]))
 						found = 1;
 					break;
 				case 2:		/* AVPN */
 					if ((hp[0] & ~0x7fUL) == args[j + 1])
 =======
+=======
+>>>>>>> v3.18
 					if (!(hp0 & args[j + 1]))
 						found = 1;
 					break;
 				case 2:		/* AVPN */
 					if ((hp0 & ~0x7fUL) == args[j + 1])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						found = 1;
 					break;
@@ -753,7 +880,11 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 			}
 			if (!found) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hp[0] &= ~HPTE_V_HVLOCK;
+=======
+				hp[0] &= ~cpu_to_be64(HPTE_V_HVLOCK);
+>>>>>>> v3.18
 =======
 				hp[0] &= ~cpu_to_be64(HPTE_V_HVLOCK);
 >>>>>>> v3.18
@@ -766,7 +897,11 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 			note_hpte_modification(kvm, rev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(hp[0] & HPTE_V_VALID)) {
+=======
+			if (!(hp0 & HPTE_V_VALID)) {
+>>>>>>> v3.18
 =======
 			if (!(hp0 & HPTE_V_VALID)) {
 >>>>>>> v3.18
@@ -778,13 +913,19 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hp[0] &= ~HPTE_V_VALID;		/* leave it locked */
 			tlbrb[n] = compute_tlbie_rb(hp[0], hp[1], pte_index);
 =======
+=======
+>>>>>>> v3.18
 			/* leave it locked */
 			hp[0] &= ~cpu_to_be64(HPTE_V_VALID);
 			tlbrb[n] = compute_tlbie_rb(be64_to_cpu(hp[0]),
 				be64_to_cpu(hp[1]), pte_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			indexes[n] = j;
 			hptes[n] = hp;
@@ -796,6 +937,7 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 			break;
 
 		/* Now that we've collected a batch, do the tlbies */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!local) {
 			while(!try_lock_tlbie(&kvm->arch.tlbie_lock))
@@ -816,6 +958,9 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 =======
 		do_tlbies(kvm, tlbrb, n, global, true);
 >>>>>>> v3.18
+=======
+		do_tlbies(kvm, tlbrb, n, global, true);
+>>>>>>> v3.18
 
 		/* Read PTE low words after tlbie to get final R/C values */
 		for (k = 0; k < n; ++k) {
@@ -824,7 +969,12 @@ long kvmppc_h_bulk_remove(struct kvm_vcpu *vcpu)
 			hp = hptes[k];
 			rev = revs[k];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			remove_revmap_chain(kvm, pte_index, rev, hp[0], hp[1]);
+=======
+			remove_revmap_chain(kvm, pte_index, rev,
+				be64_to_cpu(hp[0]), be64_to_cpu(hp[1]));
+>>>>>>> v3.18
 =======
 			remove_revmap_chain(kvm, pte_index, rev,
 				be64_to_cpu(hp[0]), be64_to_cpu(hp[1]));
@@ -844,19 +994,26 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 {
 	struct kvm *kvm = vcpu->kvm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *hpte;
 	struct revmap_entry *rev;
 	unsigned long v, r, rb, mask, bits;
 =======
+=======
+>>>>>>> v3.18
 	__be64 *hpte;
 	struct revmap_entry *rev;
 	unsigned long v, r, rb, mask, bits;
 	u64 pte;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pte_index >= kvm->arch.hpt_npte)
 		return H_PARAMETER;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hpte = (unsigned long *)(kvm->arch.hpt_virt + (pte_index << 4));
 	while (!try_lock_hpte(hpte, HPTE_V_HVLOCK))
@@ -869,6 +1026,8 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 
 	v = hpte[0];
 =======
+=======
+>>>>>>> v3.18
 	hpte = (__be64 *)(kvm->arch.hpt_virt + (pte_index << 4));
 	while (!try_lock_hpte(hpte, HPTE_V_HVLOCK))
 		cpu_relax();
@@ -880,6 +1039,9 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 	}
 
 	v = pte;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bits = (flags << 55) & HPTE_R_PP0;
 	bits |= (flags << 48) & HPTE_R_KEY_HI;
@@ -895,7 +1057,11 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 		note_hpte_modification(kvm, rev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = (hpte[1] & ~mask) | bits;
+=======
+	r = (be64_to_cpu(hpte[1]) & ~mask) | bits;
+>>>>>>> v3.18
 =======
 	r = (be64_to_cpu(hpte[1]) & ~mask) | bits;
 >>>>>>> v3.18
@@ -903,6 +1069,7 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 	/* Update HPTE */
 	if (v & HPTE_V_VALID) {
 		rb = compute_tlbie_rb(v, r, pte_index);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hpte[0] = v & ~HPTE_V_VALID;
 		if (global_invalidates(kvm, flags)) {
@@ -922,6 +1089,10 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 		hpte[0] = cpu_to_be64(v & ~HPTE_V_VALID);
 		do_tlbies(kvm, &rb, 1, global_invalidates(kvm, flags), true);
 >>>>>>> v3.18
+=======
+		hpte[0] = cpu_to_be64(v & ~HPTE_V_VALID);
+		do_tlbies(kvm, &rb, 1, global_invalidates(kvm, flags), true);
+>>>>>>> v3.18
 		/*
 		 * If the host has this page as readonly but the guest
 		 * wants to make it read/write, reduce the permissions.
@@ -937,16 +1108,22 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 			psize = hpte_page_size(v, r);
 			gfn = ((r & HPTE_R_RPN) & ~(psize - 1)) >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memslot = __gfn_to_memslot(kvm_memslots(kvm), gfn);
 			if (memslot) {
 				hva = __gfn_to_hva_memslot(memslot, gfn);
 				pte = lookup_linux_pte(pgdir, hva, 1, &psize);
 =======
+=======
+>>>>>>> v3.18
 			memslot = __gfn_to_memslot(kvm_memslots_raw(kvm), gfn);
 			if (memslot) {
 				hva = __gfn_to_hva_memslot(memslot, gfn);
 				pte = lookup_linux_pte_and_update(pgdir, hva,
 								  1, &psize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (pte_present(pte) && !pte_write(pte))
 					r = hpte_make_readonly(r);
@@ -954,9 +1131,15 @@ long kvmppc_h_protect(struct kvm_vcpu *vcpu, unsigned long flags,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpte[1] = r;
 	eieio();
 	hpte[0] = v & ~HPTE_V_HVLOCK;
+=======
+	hpte[1] = cpu_to_be64(r);
+	eieio();
+	hpte[0] = cpu_to_be64(v & ~HPTE_V_HVLOCK);
+>>>>>>> v3.18
 =======
 	hpte[1] = cpu_to_be64(r);
 	eieio();
@@ -971,7 +1154,12 @@ long kvmppc_h_read(struct kvm_vcpu *vcpu, unsigned long flags,
 {
 	struct kvm *kvm = vcpu->kvm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *hpte, v, r;
+=======
+	__be64 *hpte;
+	unsigned long v, r;
+>>>>>>> v3.18
 =======
 	__be64 *hpte;
 	unsigned long v, r;
@@ -988,9 +1176,15 @@ long kvmppc_h_read(struct kvm_vcpu *vcpu, unsigned long flags,
 	rev = real_vmalloc_addr(&kvm->arch.revmap[pte_index]);
 	for (i = 0; i < n; ++i, ++pte_index) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpte = (unsigned long *)(kvm->arch.hpt_virt + (pte_index << 4));
 		v = hpte[0] & ~HPTE_V_HVLOCK;
 		r = hpte[1];
+=======
+		hpte = (__be64 *)(kvm->arch.hpt_virt + (pte_index << 4));
+		v = be64_to_cpu(hpte[0]) & ~HPTE_V_HVLOCK;
+		r = be64_to_cpu(hpte[1]);
+>>>>>>> v3.18
 =======
 		hpte = (__be64 *)(kvm->arch.hpt_virt + (pte_index << 4));
 		v = be64_to_cpu(hpte[0]) & ~HPTE_V_HVLOCK;
@@ -1011,7 +1205,11 @@ long kvmppc_h_read(struct kvm_vcpu *vcpu, unsigned long flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_invalidate_hpte(struct kvm *kvm, unsigned long *hptep,
+=======
+void kvmppc_invalidate_hpte(struct kvm *kvm, __be64 *hptep,
+>>>>>>> v3.18
 =======
 void kvmppc_invalidate_hpte(struct kvm *kvm, __be64 *hptep,
 >>>>>>> v3.18
@@ -1019,6 +1217,7 @@ void kvmppc_invalidate_hpte(struct kvm *kvm, __be64 *hptep,
 {
 	unsigned long rb;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hptep[0] &= ~HPTE_V_VALID;
 	rb = compute_tlbie_rb(hptep[0], hptep[1], pte_index);
@@ -1034,6 +1233,8 @@ EXPORT_SYMBOL_GPL(kvmppc_invalidate_hpte);
 
 void kvmppc_clear_ref_hpte(struct kvm *kvm, unsigned long *hptep,
 =======
+=======
+>>>>>>> v3.18
 	hptep[0] &= ~cpu_to_be64(HPTE_V_VALID);
 	rb = compute_tlbie_rb(be64_to_cpu(hptep[0]), be64_to_cpu(hptep[1]),
 			      pte_index);
@@ -1042,12 +1243,16 @@ void kvmppc_clear_ref_hpte(struct kvm *kvm, unsigned long *hptep,
 EXPORT_SYMBOL_GPL(kvmppc_invalidate_hpte);
 
 void kvmppc_clear_ref_hpte(struct kvm *kvm, __be64 *hptep,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   unsigned long pte_index)
 {
 	unsigned long rb;
 	unsigned char rbyte;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rb = compute_tlbie_rb(hptep[0], hptep[1], pte_index);
 	rbyte = (hptep[1] & ~HPTE_R_R) >> 8;
@@ -1060,12 +1265,17 @@ void kvmppc_clear_ref_hpte(struct kvm *kvm, __be64 *hptep,
 	asm volatile("ptesync" : : : "memory");
 	kvm->arch.tlbie_lock = 0;
 =======
+=======
+>>>>>>> v3.18
 	rb = compute_tlbie_rb(be64_to_cpu(hptep[0]), be64_to_cpu(hptep[1]),
 			      pte_index);
 	rbyte = (be64_to_cpu(hptep[1]) & ~HPTE_R_R) >> 8;
 	/* modify only the second-last byte, which contains the ref bit */
 	*((char *)hptep + 14) = rbyte;
 	do_tlbies(kvm, &rb, 1, 1, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(kvmppc_clear_ref_hpte);
@@ -1090,7 +1300,11 @@ long kvmppc_hv_find_lock_hpte(struct kvm *kvm, gva_t eaddr, unsigned long slb_v,
 	unsigned long vsid, hash;
 	unsigned long avpn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *hpte;
+=======
+	__be64 *hpte;
+>>>>>>> v3.18
 =======
 	__be64 *hpte;
 >>>>>>> v3.18
@@ -1126,17 +1340,23 @@ long kvmppc_hv_find_lock_hpte(struct kvm *kvm, gva_t eaddr, unsigned long slb_v,
 
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpte = (unsigned long *)(kvm->arch.hpt_virt + (hash << 7));
 
 		for (i = 0; i < 16; i += 2) {
 			/* Read the PTE racily */
 			v = hpte[i] & ~HPTE_V_HVLOCK;
 =======
+=======
+>>>>>>> v3.18
 		hpte = (__be64 *)(kvm->arch.hpt_virt + (hash << 7));
 
 		for (i = 0; i < 16; i += 2) {
 			/* Read the PTE racily */
 			v = be64_to_cpu(hpte[i]) & ~HPTE_V_HVLOCK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* Check valid/absent, hash, segment size and AVPN */
@@ -1146,6 +1366,7 @@ long kvmppc_hv_find_lock_hpte(struct kvm *kvm, gva_t eaddr, unsigned long slb_v,
 			/* Lock the PTE and read it under the lock */
 			while (!try_lock_hpte(&hpte[i], HPTE_V_HVLOCK))
 				cpu_relax();
+<<<<<<< HEAD
 <<<<<<< HEAD
 			v = hpte[i] & ~HPTE_V_HVLOCK;
 			r = hpte[i+1];
@@ -1159,6 +1380,8 @@ long kvmppc_hv_find_lock_hpte(struct kvm *kvm, gva_t eaddr, unsigned long slb_v,
 			if ((v & valid) && (v & mask) == val &&
 			    hpte_page_size(v, r) == (1ul << pshift))
 =======
+=======
+>>>>>>> v3.18
 			v = be64_to_cpu(hpte[i]) & ~HPTE_V_HVLOCK;
 			r = be64_to_cpu(hpte[i+1]);
 
@@ -1167,13 +1390,20 @@ long kvmppc_hv_find_lock_hpte(struct kvm *kvm, gva_t eaddr, unsigned long slb_v,
 			 */
 			if ((v & valid) && (v & mask) == val &&
 			    hpte_base_page_size(v, r) == (1ul << pshift))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* Return with the HPTE still locked */
 				return (hash << 3) + (i >> 1);
 
 			/* Unlock and move on */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hpte[i] = v;
+=======
+			hpte[i] = cpu_to_be64(v);
+>>>>>>> v3.18
 =======
 			hpte[i] = cpu_to_be64(v);
 >>>>>>> v3.18
@@ -1206,7 +1436,11 @@ long kvmppc_hpte_hv_fault(struct kvm_vcpu *vcpu, unsigned long addr,
 	long int index;
 	unsigned long v, r, gr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *hpte;
+=======
+	__be64 *hpte;
+>>>>>>> v3.18
 =======
 	__be64 *hpte;
 >>>>>>> v3.18
@@ -1226,9 +1460,15 @@ long kvmppc_hpte_hv_fault(struct kvm_vcpu *vcpu, unsigned long addr,
 		return 0;		/* for prot fault, HPTE disappeared */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpte = (unsigned long *)(kvm->arch.hpt_virt + (index << 4));
 	v = hpte[0] & ~HPTE_V_HVLOCK;
 	r = hpte[1];
+=======
+	hpte = (__be64 *)(kvm->arch.hpt_virt + (index << 4));
+	v = be64_to_cpu(hpte[0]) & ~HPTE_V_HVLOCK;
+	r = be64_to_cpu(hpte[1]);
+>>>>>>> v3.18
 =======
 	hpte = (__be64 *)(kvm->arch.hpt_virt + (index << 4));
 	v = be64_to_cpu(hpte[0]) & ~HPTE_V_HVLOCK;

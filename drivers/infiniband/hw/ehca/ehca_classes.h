@@ -323,7 +323,11 @@ struct ehca_mr_pginfo {
 		struct { /* type EHCA_MR_PGI_USER section */
 			struct ib_umem *region;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct ib_umem_chunk *next_chunk;
+=======
+			struct scatterlist *next_sg;
+>>>>>>> v3.18
 =======
 			struct scatterlist *next_sg;
 >>>>>>> v3.18

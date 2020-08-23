@@ -20,7 +20,11 @@ MODULE_DESCRIPTION("Clevo mail LED driver");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __initdata nodetect;
+=======
+static bool nodetect;
+>>>>>>> v3.18
 =======
 static bool nodetect;
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ static int __init clevo_mail_led_dmi_callback(const struct dmi_system_id *id)
  * possible.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id __initdata clevo_mail_led_dmi_table[] = {
+=======
+static struct dmi_system_id clevo_mail_led_dmi_table[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct dmi_system_id clevo_mail_led_dmi_table[] __initdata = {
 >>>>>>> v3.18
@@ -162,7 +170,11 @@ static struct led_classdev clevo_mail_led = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int clevo_mail_led_probe(struct platform_device *pdev)
+=======
+static int __init clevo_mail_led_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int __init clevo_mail_led_probe(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -178,7 +190,10 @@ static int clevo_mail_led_remove(struct platform_device *pdev)
 
 static struct platform_driver clevo_mail_led_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe		= clevo_mail_led_probe,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.remove		= clevo_mail_led_remove,

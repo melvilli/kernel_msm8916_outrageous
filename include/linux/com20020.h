@@ -42,7 +42,10 @@ extern const struct net_device_ops com20020_netdev_ops;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PLX_PCI_MAX_CARDS 2
 
 struct com20020_pci_channel_map {
@@ -72,6 +75,9 @@ struct com20020_dev {
 	struct com20020_priv *pci_priv;
 	int index;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _INTMASK  (ioaddr+BUS_ALIGN*0)	/* writable */

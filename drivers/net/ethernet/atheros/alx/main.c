@@ -87,6 +87,7 @@ static int alx_refill_rx_ring(struct alx_priv *alx, gfp_t gfp)
 		struct alx_rfd *rfd = &rxq->rfd[cur];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb = __netdev_alloc_skb(alx->dev, alx->rxbuf_size + 64, gfp);
 		if (!skb)
 			break;
@@ -95,6 +96,11 @@ static int alx_refill_rx_ring(struct alx_priv *alx, gfp_t gfp)
 		if (((unsigned long)skb->data & 0xfff) == 0xfc0)
 			skb_reserve(skb, 64);
 
+=======
+		skb = __netdev_alloc_skb(alx->dev, alx->rxbuf_size, gfp);
+		if (!skb)
+			break;
+>>>>>>> v3.18
 =======
 		skb = __netdev_alloc_skb(alx->dev, alx->rxbuf_size, gfp);
 		if (!skb)
@@ -196,7 +202,11 @@ static void alx_schedule_reset(struct alx_priv *alx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alx_clean_rx_irq(struct alx_priv *alx, int budget)
+=======
+static bool alx_clean_rx_irq(struct alx_priv *alx, int budget)
+>>>>>>> v3.18
 =======
 static bool alx_clean_rx_irq(struct alx_priv *alx, int budget)
 >>>>>>> v3.18
@@ -207,9 +217,14 @@ static bool alx_clean_rx_irq(struct alx_priv *alx, int budget)
 	struct sk_buff *skb;
 	u16 length, rfd_cleaned = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int work = 0;
 
 	while (work < budget) {
+=======
+
+	while (budget > 0) {
+>>>>>>> v3.18
 =======
 
 	while (budget > 0) {
@@ -225,7 +240,11 @@ static bool alx_clean_rx_irq(struct alx_priv *alx, int budget)
 				  RRD_NOR) != 1) {
 			alx_schedule_reset(alx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return work;
+=======
+			return 0;
+>>>>>>> v3.18
 =======
 			return 0;
 >>>>>>> v3.18
@@ -269,7 +288,11 @@ static bool alx_clean_rx_irq(struct alx_priv *alx, int budget)
 
 		napi_gro_receive(&alx->napi, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		work++;
+=======
+		budget--;
+>>>>>>> v3.18
 =======
 		budget--;
 >>>>>>> v3.18
@@ -288,7 +311,11 @@ next_pkt:
 		alx_refill_rx_ring(alx, GFP_ATOMIC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return work;
+=======
+	return budget > 0;
+>>>>>>> v3.18
 =======
 	return budget > 0;
 >>>>>>> v3.18
@@ -298,6 +325,7 @@ static int alx_poll(struct napi_struct *napi, int budget)
 {
 	struct alx_priv *alx = container_of(napi, struct alx_priv, napi);
 	struct alx_hw *hw = &alx->hw;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	bool tx_complete;
@@ -309,6 +337,8 @@ static int alx_poll(struct napi_struct *napi, int budget)
 	if (!tx_complete || work == budget)
 		return budget;
 =======
+=======
+>>>>>>> v3.18
 	bool complete = true;
 	unsigned long flags;
 
@@ -317,6 +347,9 @@ static int alx_poll(struct napi_struct *napi, int budget)
 
 	if (!complete)
 		return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	napi_complete(&alx->napi);
@@ -330,7 +363,11 @@ static int alx_poll(struct napi_struct *napi, int budget)
 	alx_post_write(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return work;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -585,7 +622,11 @@ static int alx_alloc_descriptors(struct alx_priv *alx)
 		goto out_free;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alx->txq.tpd = (void *)alx->descmem.virt;
+=======
+	alx->txq.tpd = alx->descmem.virt;
+>>>>>>> v3.18
 =======
 	alx->txq.tpd = alx->descmem.virt;
 >>>>>>> v3.18
@@ -760,7 +801,10 @@ static int alx_init_sw(struct alx_priv *alx)
 	alx->tx_ringsz = 256;
 	alx->rx_ringsz = 512;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->sleep_ctrl = ALX_SLEEP_WOL_MAGIC | ALX_SLEEP_WOL_PHY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw->imt = 200;
@@ -769,6 +813,10 @@ static int alx_init_sw(struct alx_priv *alx)
 	hw->ith_tpd = alx->tx_ringsz / 3;
 	hw->link_speed = SPEED_UNKNOWN;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hw->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 	hw->duplex = DUPLEX_UNKNOWN;
 >>>>>>> v3.18
@@ -819,6 +867,10 @@ static void alx_halt(struct alx_priv *alx)
 	alx_netif_stop(alx);
 	hw->link_speed = SPEED_UNKNOWN;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hw->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 	hw->duplex = DUPLEX_UNKNOWN;
 >>>>>>> v3.18
@@ -934,6 +986,7 @@ static void __alx_stop(struct alx_priv *alx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *alx_speed_desc(u16 speed)
 {
 	switch (speed) {
@@ -947,6 +1000,8 @@ static const char *alx_speed_desc(u16 speed)
 		return "10 Mbps Full";
 	case SPEED_10 + DUPLEX_HALF:
 =======
+=======
+>>>>>>> v3.18
 static const char *alx_speed_desc(struct alx_hw *hw)
 {
 	switch (alx_speed_to_ethadv(hw->link_speed, hw->duplex)) {
@@ -959,6 +1014,9 @@ static const char *alx_speed_desc(struct alx_hw *hw)
 	case ADVERTISED_10baseT_Full:
 		return "10 Mbps Full";
 	case ADVERTISED_10baseT_Half:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return "10 Mbps Half";
 	default:
@@ -971,7 +1029,12 @@ static void alx_check_link(struct alx_priv *alx)
 	struct alx_hw *hw = &alx->hw;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int speed, old_speed;
+=======
+	int old_speed;
+	u8 old_duplex;
+>>>>>>> v3.18
 =======
 	int old_speed;
 	u8 old_duplex;
@@ -984,7 +1047,13 @@ static void alx_check_link(struct alx_priv *alx)
 	alx_clear_phy_intr(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = alx_get_phy_link(hw, &speed);
+=======
+	old_speed = hw->link_speed;
+	old_duplex = hw->duplex;
+	err = alx_read_phy_link(hw);
+>>>>>>> v3.18
 =======
 	old_speed = hw->link_speed;
 	old_duplex = hw->duplex;
@@ -999,6 +1068,7 @@ static void alx_check_link(struct alx_priv *alx)
 	spin_unlock_irqrestore(&alx->irq_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	old_speed = hw->link_speed;
 
 	if (old_speed == speed)
@@ -1009,12 +1079,17 @@ static void alx_check_link(struct alx_priv *alx)
 		netif_info(alx, link, alx->dev,
 			   "NIC Up: %s\n", alx_speed_desc(speed));
 =======
+=======
+>>>>>>> v3.18
 	if (old_speed == hw->link_speed)
 		return;
 
 	if (hw->link_speed != SPEED_UNKNOWN) {
 		netif_info(alx, link, alx->dev,
 			   "NIC Up: %s\n", alx_speed_desc(hw));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		alx_post_phy_link(hw);
 		alx_enable_aspm(hw, true, true);
@@ -1058,6 +1133,7 @@ static int alx_stop(struct net_device *netdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __alx_shutdown(struct pci_dev *pdev, bool *wol_en)
 {
@@ -1118,6 +1194,8 @@ static void alx_shutdown(struct pci_dev *pdev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void alx_link_check(struct work_struct *work)
@@ -1258,7 +1336,11 @@ static netdev_tx_t alx_start_xmit(struct sk_buff *skb,
 
 drop:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1331,7 +1413,10 @@ static void alx_poll_controller(struct net_device *netdev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct rtnl_link_stats64 *alx_get_stats64(struct net_device *dev,
 					struct rtnl_link_stats64 *net_stats)
 {
@@ -1381,12 +1466,19 @@ static struct rtnl_link_stats64 *alx_get_stats64(struct net_device *dev,
 	return net_stats;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct net_device_ops alx_netdev_ops = {
 	.ndo_open               = alx_open,
 	.ndo_stop               = alx_stop,
 	.ndo_start_xmit         = alx_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_get_stats64        = alx_get_stats64,
+>>>>>>> v3.18
 =======
 	.ndo_get_stats64        = alx_get_stats64,
 >>>>>>> v3.18
@@ -1409,7 +1501,11 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	struct alx_hw *hw;
 	bool phy_configured;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bars, pm_cap, err;
+=======
+	int bars, err;
+>>>>>>> v3.18
 =======
 	int bars, err;
 >>>>>>> v3.18
@@ -1422,6 +1518,7 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	 * shared register for the high 32 bits, so only a single, aligned,
 	 * 4 GB physical address range can be used for descriptors.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!dma_set_mask(&pdev->dev, DMA_BIT_MASK(64)) &&
 	    !dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(64))) {
@@ -1437,6 +1534,8 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				goto out_pci_disable;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (!dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64))) {
 		dev_dbg(&pdev->dev, "DMA to 64-BIT addresses\n");
 	} else {
@@ -1444,6 +1543,9 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		if (err) {
 			dev_err(&pdev->dev, "No usable DMA config, aborting\n");
 			goto out_pci_disable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1460,8 +1562,12 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	pci_set_master(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_cap = pci_find_capability(pdev, PCI_CAP_ID_PM);
 	if (pm_cap == 0) {
+=======
+	if (!pdev->pm_cap) {
+>>>>>>> v3.18
 =======
 	if (!pdev->pm_cap) {
 >>>>>>> v3.18
@@ -1472,10 +1578,13 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pci_set_power_state(pdev, PCI_D0);
 	if (err)
 		goto out_pci_release;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netdev = alloc_etherdev(sizeof(*alx));
@@ -1489,6 +1598,10 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	spin_lock_init(&alx->hw.mdio_lock);
 	spin_lock_init(&alx->irq_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&alx->stats_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&alx->stats_lock);
 >>>>>>> v3.18
@@ -1508,7 +1621,11 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	netdev->netdev_ops = &alx_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &alx_ethtool_ops);
+=======
+	netdev->ethtool_ops = &alx_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &alx_ethtool_ops;
 >>>>>>> v3.18
@@ -1587,8 +1704,11 @@ static int alx_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_set_wakeup_enable(&pdev->dev, hw->sleep_ctrl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netdev_info(netdev,
@@ -1627,7 +1747,10 @@ static void alx_remove(struct pci_dev *pdev)
 	pci_disable_pcie_error_reporting(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1638,6 +1761,7 @@ static void alx_remove(struct pci_dev *pdev)
 static int alx_suspend(struct device *dev)
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 	bool wol_en;
@@ -1656,12 +1780,17 @@ static int alx_suspend(struct device *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct alx_priv *alx = pci_get_drvdata(pdev);
 
 	if (!netif_running(alx->dev))
 		return 0;
 	netif_device_detach(alx->dev);
 	__alx_stop(alx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1670,6 +1799,7 @@ static int alx_resume(struct device *dev)
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
 	struct alx_priv *alx = pci_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct net_device *netdev = alx->dev;
 	struct alx_hw *hw = &alx->hw;
@@ -1715,6 +1845,8 @@ static int alx_resume(struct device *dev)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	struct alx_hw *hw = &alx->hw;
 
 	alx_reset_phy(hw);
@@ -1732,6 +1864,9 @@ static SIMPLE_DEV_PM_OPS(alx_pm_ops, alx_suspend, alx_resume);
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static pci_ers_result_t alx_pci_error_detected(struct pci_dev *pdev,
 					       pci_channel_state_t state)
@@ -1776,8 +1911,11 @@ static pci_ers_result_t alx_pci_error_slot_reset(struct pci_dev *pdev)
 
 	pci_set_master(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_enable_wake(pdev, PCI_D3hot, 0);
 	pci_enable_wake(pdev, PCI_D3cold, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1816,6 +1954,7 @@ static const struct pci_error_handlers alx_err_handlers = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 static SIMPLE_DEV_PM_OPS(alx_pm_ops, alx_suspend, alx_resume);
 #define ALX_PM_OPS      (&alx_pm_ops)
@@ -1824,6 +1963,9 @@ static SIMPLE_DEV_PM_OPS(alx_pm_ops, alx_suspend, alx_resume);
 #endif
 
 static DEFINE_PCI_DEVICE_TABLE(alx_pci_tbl) = {
+=======
+static const struct pci_device_id alx_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id alx_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1844,7 +1986,10 @@ static struct pci_driver alx_driver = {
 	.probe       = alx_probe,
 	.remove      = alx_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown    = alx_shutdown,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.err_handler = &alx_err_handlers,

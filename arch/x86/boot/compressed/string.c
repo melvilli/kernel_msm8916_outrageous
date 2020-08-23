@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "misc.h"
 
 int memcmp(const void *s1, const void *s2, size_t len)
@@ -11,6 +12,8 @@ int memcmp(const void *s1, const void *s2, size_t len)
 
 #include "../string.c"
 =======
+=======
+>>>>>>> v3.18
 #include "../string.c"
 
 #ifdef CONFIG_X86_32
@@ -52,4 +55,7 @@ void *memset(void *s, int c, size_t n)
 		ss[i] = c;
 	return s;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

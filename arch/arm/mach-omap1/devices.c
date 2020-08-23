@@ -31,7 +31,10 @@
 #include "common.h"
 #include "clock.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "mmc.h"
@@ -227,8 +230,13 @@ void __init omap1_init_mmc(struct omap_mmc_platform_data **mmc_data,
 			base = OMAP1_MMC1_BASE;
 			irq = INT_MMC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rx_req = OMAP_DMA_MMC_RX;
 			tx_req = OMAP_DMA_MMC_TX;
+=======
+			rx_req = 22;
+			tx_req = 21;
+>>>>>>> v3.18
 =======
 			rx_req = 22;
 			tx_req = 21;
@@ -240,8 +248,13 @@ void __init omap1_init_mmc(struct omap_mmc_platform_data **mmc_data,
 			base = OMAP1_MMC2_BASE;
 			irq = INT_1610_MMC2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rx_req = OMAP_DMA_MMC2_RX;
 			tx_req = OMAP_DMA_MMC2_TX;
+=======
+			rx_req = 55;
+			tx_req = 54;
+>>>>>>> v3.18
 =======
 			rx_req = 55;
 			tx_req = 54;

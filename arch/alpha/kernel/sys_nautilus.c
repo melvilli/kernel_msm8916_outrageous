@@ -239,8 +239,13 @@ nautilus_init_pci(void)
 		memtop = pci_mem;
 	if (memtop > alpha_mv.min_mem_address) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_reserved_area((unsigned long)__va(alpha_mv.min_mem_address),
 				   (unsigned long)__va(memtop), 0, NULL);
+=======
+		free_reserved_area(__va(alpha_mv.min_mem_address),
+				   __va(memtop), -1, NULL);
+>>>>>>> v3.18
 =======
 		free_reserved_area(__va(alpha_mv.min_mem_address),
 				   __va(memtop), -1, NULL);

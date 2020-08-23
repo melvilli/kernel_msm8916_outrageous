@@ -6,7 +6,10 @@ source "virt/kvm/Kconfig"
 menuconfig VIRTUALIZATION
 	bool "Virtualization"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_KVM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---

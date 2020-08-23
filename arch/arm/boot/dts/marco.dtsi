@@ -37,7 +37,11 @@
 
 		l2-cache-controller@c0030000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "sirf,marco-pl310-cache", "arm,pl310-cache";
+=======
+			compatible = "arm,pl310-cache";
+>>>>>>> v3.18
 =======
 			compatible = "arm,pl310-cache";
 >>>>>>> v3.18
@@ -63,14 +67,20 @@
 			ranges = <0xc2000000 0xc2000000 0x1000000>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			reset-controller@c2000000 {
 				compatible = "sirf,marco-rstc";
 				reg = <0xc2000000 0x10000>;
 =======
+=======
+>>>>>>> v3.18
 			rstc: reset-controller@c2000000 {
 				compatible = "sirf,marco-rstc";
 				reg = <0xc2000000 0x10000>;
 				#reset-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};

@@ -17,6 +17,11 @@
 #include <linux/string.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 
@@ -39,11 +44,14 @@ static DEVICE_ATTR(name, S_IRUGO, show_##name, NULL);
 zorro_config_attr(id, id, "0x%08x\n");
 zorro_config_attr(type, rom.er_Type, "0x%02x\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 zorro_config_attr(serial, rom.er_SerialNumber, "0x%08x\n");
 zorro_config_attr(slotaddr, slotaddr, "0x%04x\n");
 zorro_config_attr(slotsize, slotsize, "0x%04x\n");
 
 =======
+=======
+>>>>>>> v3.18
 zorro_config_attr(slotaddr, slotaddr, "0x%04x\n");
 zorro_config_attr(slotsize, slotsize, "0x%04x\n");
 
@@ -58,6 +66,9 @@ show_serial(struct device *dev, struct device_attribute *attr, char *buf)
 
 static DEVICE_ATTR(serial, S_IRUGO, show_serial, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t zorro_show_resource(struct device *dev, struct device_attribute *attr, char *buf)
 {
@@ -83,15 +94,21 @@ static ssize_t zorro_read_config(struct file *filp, struct kobject *kobj,
 	memset(&cd, 0, sizeof(cd));
 	cd.cd_Rom = z->rom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cd.cd_SlotAddr = z->slotaddr;
 	cd.cd_SlotSize = z->slotsize;
 	cd.cd_BoardAddr = (void *)zorro_resource_start(z);
 	cd.cd_BoardSize = zorro_resource_len(z);
 =======
+=======
+>>>>>>> v3.18
 	cd.cd_SlotAddr = cpu_to_be16(z->slotaddr);
 	cd.cd_SlotSize = cpu_to_be16(z->slotsize);
 	cd.cd_BoardAddr = cpu_to_be32(zorro_resource_start(z));
 	cd.cd_BoardSize = cpu_to_be32(zorro_resource_len(z));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return memory_read_from_buffer(buf, count, &off, &cd, sizeof(cd));

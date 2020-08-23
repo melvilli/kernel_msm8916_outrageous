@@ -8,6 +8,7 @@
 #define __BOARD_MOP500_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* For NOMADIK_NR_GPIO */
 #include "irqs.h"
 #include <linux/platform_data/asoc-ux500-msp.h>
@@ -89,10 +90,15 @@ extern struct mmci_platform_data mop500_sdi4_data;
 #include <linux/platform_data/asoc-ux500-msp.h>
 
 >>>>>>> v3.18
+=======
+#include <linux/platform_data/asoc-ux500-msp.h>
+
+>>>>>>> v3.18
 extern struct msp_i2s_platform_data msp0_platform_data;
 extern struct msp_i2s_platform_data msp1_platform_data;
 extern struct msp_i2s_platform_data msp2_platform_data;
 extern struct msp_i2s_platform_data msp3_platform_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct arm_pmu_platdata db8500_pmu_platdata;
 extern struct amba_pl011_data uart0_plat;
@@ -115,6 +121,9 @@ void mop500_snowball_ethernet_clock_enable(void);
 int __init mop500_uib_init(void);
 void mop500_uib_i2c_add(int busnum, struct i2c_board_info *info,
 		unsigned n);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

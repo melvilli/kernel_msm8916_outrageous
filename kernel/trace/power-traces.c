@@ -15,8 +15,12 @@
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(cpu_idle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_TRACEPOINT_SYMBOL(core_ctl_set_busy);
 EXPORT_TRACEPOINT_SYMBOL(core_ctl_eval_need);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

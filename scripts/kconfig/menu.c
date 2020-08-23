@@ -120,14 +120,20 @@ void menu_set_type(int type)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	menu_warn(current_entry, "type of '%s' redefined from '%s' to '%s'",
 	    sym->name ? sym->name : "<choice>",
 	    sym_type_name(sym->type), sym_type_name(type));
 =======
+=======
+>>>>>>> v3.18
 	menu_warn(current_entry,
 		"ignoring type redefinition of '%s' from '%s' to '%s'",
 		sym->name ? sym->name : "<choice>",
 		sym_type_name(sym->type), sym_type_name(type));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -205,6 +211,7 @@ void menu_add_symbol(enum prop_type type, struct symbol *sym, struct expr *dep)
 void menu_add_option(int token, char *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct property *prop;
 
 	switch (token) {
@@ -212,6 +219,8 @@ void menu_add_option(int token, char *arg)
 		prop = prop_alloc(P_DEFAULT, modules_sym);
 		prop->expr = expr_alloc_symbol(current_entry->sym);
 =======
+=======
+>>>>>>> v3.18
 	switch (token) {
 	case T_OPT_MODULES:
 		if (modules_sym)
@@ -221,6 +230,9 @@ void menu_add_option(int token, char *arg)
 				    modules_sym->name
 				    );
 		modules_sym = current_entry->sym;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case T_OPT_DEFCONFIG_LIST:
@@ -233,6 +245,12 @@ void menu_add_option(int token, char *arg)
 		prop_add_env(arg);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case T_OPT_ALLNOCONFIG_Y:
+		current_entry->sym->flags |= SYMBOL_ALLNOCONFIG_Y;
+		break;
+>>>>>>> v3.18
 =======
 	case T_OPT_ALLNOCONFIG_Y:
 		current_entry->sym->flags |= SYMBOL_ALLNOCONFIG_Y;
@@ -277,8 +295,13 @@ static void sym_check_prop(struct symbol *sym)
 				    "not boolean or tristate", sym->name);
 			else if (sym2->type != S_UNKNOWN &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			         sym2->type != S_BOOLEAN &&
 			         sym2->type != S_TRISTATE)
+=======
+				 sym2->type != S_BOOLEAN &&
+				 sym2->type != S_TRISTATE)
+>>>>>>> v3.18
 =======
 				 sym2->type != S_BOOLEAN &&
 				 sym2->type != S_TRISTATE)
@@ -292,7 +315,11 @@ static void sym_check_prop(struct symbol *sym)
 			if (sym->type != S_INT && sym->type != S_HEX)
 				prop_warn(prop, "range is only allowed "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				                "for int or hex symbols");
+=======
+						"for int or hex symbols");
+>>>>>>> v3.18
 =======
 						"for int or hex symbols");
 >>>>>>> v3.18
@@ -478,7 +505,10 @@ bool menu_has_prompt(struct menu *menu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Determine if a menu is empty.
  * A menu is considered empty if it contains no or only
@@ -495,6 +525,9 @@ bool menu_is_empty(struct menu *menu)
 	return(true);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool menu_is_visible(struct menu *menu)
 {
@@ -579,7 +612,11 @@ static void get_prompt_str(struct gstr *r, struct property *prop,
 	int i, j;
 	struct menu *submenu[8], *menu, *location = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct jump_key *jump = NULL;
+=======
+	struct jump_key *jump;
+>>>>>>> v3.18
 =======
 	struct jump_key *jump;
 >>>>>>> v3.18
@@ -621,8 +658,13 @@ static void get_prompt_str(struct gstr *r, struct property *prop,
 		for (j = 4; --i >= 0; j += 2) {
 			menu = submenu[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (jump && menu == location)
 				jump->offset = r->len - 1;
+=======
+			if (head && location && menu == location)
+				jump->offset = strlen(r->s);
+>>>>>>> v3.18
 =======
 			if (head && location && menu == location)
 				jump->offset = strlen(r->s);
@@ -641,7 +683,11 @@ static void get_prompt_str(struct gstr *r, struct property *prop,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * get peoperty of type P_SYMBOL
+=======
+ * get property of type P_SYMBOL
+>>>>>>> v3.18
 =======
  * get property of type P_SYMBOL
 >>>>>>> v3.18

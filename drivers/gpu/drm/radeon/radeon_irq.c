@@ -182,7 +182,11 @@ static u32 radeon_acknowledge_irqs(drm_radeon_private_t *dev_priv, u32 *r500_dis
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t radeon_driver_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t radeon_driver_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t radeon_driver_irq_handler(int irq, void *arg)
 >>>>>>> v3.18
@@ -208,7 +212,11 @@ irqreturn_t radeon_driver_irq_handler(int irq, void *arg)
 	/* SW interrupt */
 	if (stat & RADEON_SW_INT_TEST)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_WAKEUP(&dev_priv->swi_queue);
+=======
+		wake_up(&dev_priv->swi_queue);
+>>>>>>> v3.18
 =======
 		wake_up(&dev_priv->swi_queue);
 >>>>>>> v3.18
@@ -258,7 +266,11 @@ static int radeon_wait_irq(struct drm_device * dev, int swi_nr)
 	dev_priv->stats.boxes |= RADEON_BOX_WAIT_IDLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_WAIT_ON(ret, dev_priv->swi_queue, 3 * DRM_HZ,
+=======
+	DRM_WAIT_ON(ret, dev_priv->swi_queue, 3 * HZ,
+>>>>>>> v3.18
 =======
 	DRM_WAIT_ON(ret, dev_priv->swi_queue, 3 * HZ,
 >>>>>>> v3.18
@@ -315,7 +327,11 @@ int radeon_irq_emit(struct drm_device *dev, void *data, struct drm_file *file_pr
 	result = radeon_emit_irq(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_TO_USER(emit->irq_seq, &result, sizeof(int))) {
+=======
+	if (copy_to_user(emit->irq_seq, &result, sizeof(int))) {
+>>>>>>> v3.18
 =======
 	if (copy_to_user(emit->irq_seq, &result, sizeof(int))) {
 >>>>>>> v3.18
@@ -371,7 +387,11 @@ int radeon_driver_irq_postinstall(struct drm_device *dev)
 
 	atomic_set(&dev_priv->swi_emitted, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_INIT_WAITQUEUE(&dev_priv->swi_queue);
+=======
+	init_waitqueue_head(&dev_priv->swi_queue);
+>>>>>>> v3.18
 =======
 	init_waitqueue_head(&dev_priv->swi_queue);
 >>>>>>> v3.18

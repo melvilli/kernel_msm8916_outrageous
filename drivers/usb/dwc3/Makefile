@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-$(CONFIG_USB_DWC3_DEBUG)	:= -DDEBUG
 ccflags-$(CONFIG_USB_DWC3_VERBOSE)	+= -DVERBOSE_DEBUG
 ccflags-y += -Idrivers/usb/host
@@ -8,6 +9,8 @@ obj-$(CONFIG_USB_DWC3)			+= dwc3.o
 
 dwc3-y					:= core.o
 =======
+=======
+>>>>>>> v3.18
 # define_trace.h needs to know how to find our header
 CFLAGS_trace.o				:= -I$(src)
 
@@ -17,6 +20,9 @@ ccflags-$(CONFIG_USB_DWC3_VERBOSE)	+= -DVERBOSE_DEBUG
 obj-$(CONFIG_USB_DWC3)			+= dwc3.o
 
 dwc3-y					:= core.o debug.o trace.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ifneq ($(filter y,$(CONFIG_USB_DWC3_HOST) $(CONFIG_USB_DWC3_DUAL_ROLE)),)
@@ -28,8 +34,11 @@ ifneq ($(filter y,$(CONFIG_USB_DWC3_GADGET) $(CONFIG_USB_DWC3_DUAL_ROLE)),)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 dwc3-y					+= dwc3_otg.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ifneq ($(CONFIG_DEBUG_FS),)
@@ -47,6 +56,7 @@ endif
 # and make sure it compiles fine. This will also help with allmodconfig
 # and allyesconfig builds.
 <<<<<<< HEAD
+<<<<<<< HEAD
 #
 # The only exception is the PCI glue layer, but that's only because
 # PCI doesn't provide nops if CONFIG_PCI isn't enabled.
@@ -61,6 +71,8 @@ ifneq ($(CONFIG_PCI),)
 endif
 
 =======
+=======
+>>>>>>> v3.18
 ##
 
 obj-$(CONFIG_USB_DWC3_OMAP)		+= dwc3-omap.o
@@ -69,4 +81,7 @@ obj-$(CONFIG_USB_DWC3_PCI)		+= dwc3-pci.o
 obj-$(CONFIG_USB_DWC3_KEYSTONE)		+= dwc3-keystone.o
 obj-$(CONFIG_USB_DWC3_QCOM)		+= dwc3-qcom.o
 obj-$(CONFIG_USB_DWC3_ST)		+= dwc3-st.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

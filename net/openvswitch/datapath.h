@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2007-2012 Nicira, Inc.
+=======
+ * Copyright (c) 2007-2014 Nicira, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2007-2014 Nicira, Inc.
 >>>>>>> v3.18
@@ -32,6 +36,10 @@
 
 #include "flow.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "flow_table.h"
+>>>>>>> v3.18
 =======
 #include "flow_table.h"
 >>>>>>> v3.18
@@ -54,6 +62,12 @@
  * table that could not be sent to userspace (normally due to an overflow in
  * one of the datapath's queues).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @n_mask_hit: Number of masks looked up for flow match.
+ *   @n_mask_hit / (@n_hit + @n_missed)  will be the average masks looked
+ *   up per packet.
+>>>>>>> v3.18
 =======
  * @n_mask_hit: Number of masks looked up for flow match.
  *   @n_mask_hit / (@n_hit + @n_missed)  will be the average masks looked
@@ -65,7 +79,12 @@ struct dp_stats_percpu {
 	u64 n_missed;
 	u64 n_lost;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct u64_stats_sync sync;
+=======
+	u64 n_mask_hit;
+	struct u64_stats_sync syncp;
+>>>>>>> v3.18
 =======
 	u64 n_mask_hit;
 	struct u64_stats_sync syncp;
@@ -77,7 +96,11 @@ struct dp_stats_percpu {
  * @rcu: RCU callback head for deferred destruction.
  * @list_node: Element in global 'dps' list.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @table: Current flow table.  Protected by ovs_mutex and RCU.
+=======
+ * @table: flow table.
+>>>>>>> v3.18
 =======
  * @table: flow table.
 >>>>>>> v3.18
@@ -95,7 +118,11 @@ struct datapath {
 
 	/* Flow table. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct flow_table __rcu *table;
+=======
+	struct flow_table table;
+>>>>>>> v3.18
 =======
 	struct flow_table table;
 >>>>>>> v3.18
@@ -111,6 +138,11 @@ struct datapath {
 	struct net *net;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	u32 user_features;
+>>>>>>> v3.18
 =======
 
 	u32 user_features;
@@ -121,10 +153,13 @@ struct datapath {
  * struct ovs_skb_cb - OVS data in skb CB
  * @flow: The flow associated with this packet.  May be %NULL if no flow.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct ovs_skb_cb {
 	struct sw_flow		*flow;
 =======
+=======
+>>>>>>> v3.18
  * @egress_tun_key: Tunnel information about this packet on egress path.
  * NULL if the packet is not being tunneled.
  * @input_vport: The original vport packet came in on. This value is cached
@@ -134,6 +169,9 @@ struct ovs_skb_cb {
 	struct sw_flow		*flow;
 	struct ovs_tunnel_info  *egress_tun_info;
 	struct vport		*input_vport;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define OVS_CB(skb) ((struct ovs_skb_cb *)(skb)->cb)
@@ -164,6 +202,10 @@ struct ovs_net {
 	struct list_head dps;
 	struct work_struct dp_notify_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vport_net vport_net;
+>>>>>>> v3.18
 =======
 	struct vport_net vport_net;
 >>>>>>> v3.18
@@ -180,15 +222,21 @@ int lockdep_ovsl_is_held(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ASSERT_OVSL()		WARN_ON(unlikely(!lockdep_ovsl_is_held()))
 #define ovsl_dereference(p)					\
 	rcu_dereference_protected(p, lockdep_ovsl_is_held())
 =======
+=======
+>>>>>>> v3.18
 #define ASSERT_OVSL()		WARN_ON(!lockdep_ovsl_is_held())
 #define ovsl_dereference(p)					\
 	rcu_dereference_protected(p, lockdep_ovsl_is_held())
 #define rcu_dereference_ovsl(p)					\
 	rcu_dereference_check(p, lockdep_ovsl_is_held())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct net *ovs_dp_get_net(struct datapath *dp)
@@ -223,9 +271,15 @@ static inline struct vport *ovs_vport_ovsl(const struct datapath *dp, int port_n
 
 extern struct notifier_block ovs_dp_device_notifier;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct genl_multicast_group ovs_dp_vport_multicast_group;
 
 void ovs_dp_process_received_packet(struct vport *, struct sk_buff *);
+=======
+extern struct genl_family dp_vport_genl_family;
+
+void ovs_dp_process_packet(struct sk_buff *skb, struct sw_flow_key *key);
+>>>>>>> v3.18
 =======
 extern struct genl_family dp_vport_genl_family;
 
@@ -240,9 +294,12 @@ struct sk_buff *ovs_vport_cmd_build_info(struct vport *, u32 pid, u32 seq,
 					 u8 cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb);
 void ovs_dp_notify_wq(struct work_struct *work);
 =======
+=======
+>>>>>>> v3.18
 int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			struct sw_flow_key *);
 
@@ -256,5 +313,8 @@ do {								\
 	if (net_ratelimit())					\
 		pr_info("netlink: " fmt, ##__VA_ARGS__);	\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* datapath.h */

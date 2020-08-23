@@ -89,6 +89,7 @@ static int ctr_aes_nx_crypt(struct blkcipher_desc *desc,
 	struct nx_crypto_ctx *nx_ctx = crypto_blkcipher_ctx(desc->tfm);
 	struct nx_csbcpb *csbcpb = nx_ctx->csbcpb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	if (nbytes > nx_ctx->ap->databytelen)
@@ -114,6 +115,8 @@ static int ctr_aes_nx_crypt(struct blkcipher_desc *desc,
 		     &(nx_ctx->stats->aes_bytes));
 out:
 =======
+=======
+>>>>>>> v3.18
 	unsigned long irq_flags;
 	unsigned int processed = 0, to_process;
 	u32 max_sg_len;
@@ -156,6 +159,9 @@ out:
 	} while (processed < nbytes);
 out:
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }

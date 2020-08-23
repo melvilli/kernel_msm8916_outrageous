@@ -23,13 +23,19 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
 
 #define pr_fmt(fmt) "FS-Cache: " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/fscache-cache.h>
 #include <linux/sched.h>
@@ -101,8 +107,12 @@ static inline bool fscache_object_congested(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int fscache_wait_bit(void *);
 extern int fscache_wait_bit_interruptible(void *);
+=======
+extern int fscache_wait_atomic_t(atomic_t *);
+>>>>>>> v3.18
 =======
 extern int fscache_wait_atomic_t(atomic_t *);
 >>>>>>> v3.18
@@ -111,10 +121,13 @@ extern int fscache_wait_atomic_t(atomic_t *);
  * object.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char fscache_object_states_short[FSCACHE_OBJECT__NSTATES][5];
 
 extern void fscache_withdrawing_object(struct fscache_cache *,
 				       struct fscache_object *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void fscache_enqueue_object(struct fscache_object *);
@@ -127,13 +140,19 @@ extern const struct file_operations fscache_objlist_fops;
 
 extern void fscache_objlist_add(struct fscache_object *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define fscache_objlist_add(object) do {} while(0)
 =======
+=======
+>>>>>>> v3.18
 extern void fscache_objlist_remove(struct fscache_object *);
 #else
 #define fscache_objlist_add(object) do {} while(0)
 #define fscache_objlist_remove(object) do {} while(0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -155,13 +174,19 @@ extern void fscache_operation_gc(struct work_struct *);
  * page.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int fscache_wait_for_deferred_lookup(struct fscache_cookie *);
 extern int fscache_wait_for_operation_activation(struct fscache_object *,
 						 struct fscache_operation *,
 						 atomic_t *,
 						 atomic_t *,
 						 void (*)(struct fscache_operation *));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void fscache_invalidate_writes(struct fscache_cookie *);
 
@@ -324,11 +349,17 @@ static inline void fscache_raise_event(struct fscache_object *object,
 {
 	BUG_ON(event >= NR_FSCACHE_OBJECT_EVENTS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if 0
 	printk("*** fscache_raise_event(OBJ%d{%lx},%x)\n",
 	       object->debug_id, object->event_mask, (1 << event));
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!test_and_set_bit(event, &object->events) &&
 	    test_bit(event, &object->event_mask))
@@ -444,8 +475,13 @@ do {						\
 do {									\
 	if (unlikely(!(X))) {						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "FS-Cache: Assertion failed\n");	\
+=======
+		pr_err("\n");					\
+		pr_err("Assertion failed\n");	\
+>>>>>>> v3.18
 =======
 		pr_err("\n");					\
 		pr_err("Assertion failed\n");	\
@@ -458,9 +494,15 @@ do {									\
 do {									\
 	if (unlikely(!((X) OP (Y)))) {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "FS-Cache: Assertion failed\n");	\
 		printk(KERN_ERR "%lx " #OP " %lx is false\n",		\
+=======
+		pr_err("\n");					\
+		pr_err("Assertion failed\n");	\
+		pr_err("%lx " #OP " %lx is false\n",		\
+>>>>>>> v3.18
 =======
 		pr_err("\n");					\
 		pr_err("Assertion failed\n");	\
@@ -475,8 +517,13 @@ do {									\
 do {									\
 	if (unlikely((C) && !(X))) {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "FS-Cache: Assertion failed\n");	\
+=======
+		pr_err("\n");					\
+		pr_err("Assertion failed\n");	\
+>>>>>>> v3.18
 =======
 		pr_err("\n");					\
 		pr_err("Assertion failed\n");	\
@@ -489,9 +536,15 @@ do {									\
 do {									\
 	if (unlikely((C) && !((X) OP (Y)))) {				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "FS-Cache: Assertion failed\n");	\
 		printk(KERN_ERR "%lx " #OP " %lx is false\n",		\
+=======
+		pr_err("\n");					\
+		pr_err("Assertion failed\n");	\
+		pr_err("%lx " #OP " %lx is false\n",		\
+>>>>>>> v3.18
 =======
 		pr_err("\n");					\
 		pr_err("Assertion failed\n");	\

@@ -99,7 +99,11 @@ static struct platform_device alix_leds_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata platform_device *alix_devs[] = {
+=======
+static struct platform_device *alix_devs[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct platform_device *alix_devs[] __initdata = {
 >>>>>>> v3.18

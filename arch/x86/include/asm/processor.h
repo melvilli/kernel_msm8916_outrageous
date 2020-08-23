@@ -28,7 +28,10 @@ struct mm_struct;
 #include <linux/threads.h>
 #include <linux/math64.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
@@ -76,7 +79,11 @@ extern u16 __read_mostly tlb_lld_4k[NR_INFO];
 extern u16 __read_mostly tlb_lld_2m[NR_INFO];
 extern u16 __read_mostly tlb_lld_4m[NR_INFO];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern s8  __read_mostly tlb_flushall_shift;
+=======
+extern u16 __read_mostly tlb_lld_1g[NR_INFO];
+>>>>>>> v3.18
 =======
 extern u16 __read_mostly tlb_lld_1g[NR_INFO];
 >>>>>>> v3.18
@@ -97,9 +104,15 @@ struct cpuinfo_x86 {
 
 	/* Problems on some 486Dx4's and old 386's: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			hard_math;
 	char			rfu;
 	char			pad0;
+=======
+	char			rfu;
+	char			pad0;
+	char			pad1;
+>>>>>>> v3.18
 =======
 	char			rfu;
 	char			pad0;
@@ -178,6 +191,10 @@ extern const struct seq_operations cpuinfo_op;
 
 extern void cpu_detect(struct cpuinfo_x86 *c);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void fpu_detect(struct cpuinfo_x86 *c);
+>>>>>>> v3.18
 =======
 extern void fpu_detect(struct cpuinfo_x86 *c);
 >>>>>>> v3.18
@@ -387,11 +404,14 @@ struct ymmh_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xsave_hdr_struct {
 	u64 xstate_bv;
 	u64 reserved1[2];
 	u64 reserved2[5];
 =======
+=======
+>>>>>>> v3.18
 /* We don't support LWP yet: */
 struct lwp_struct {
 	u8 reserved[128];
@@ -410,6 +430,9 @@ struct xsave_hdr_struct {
 	u64 xstate_bv;
 	u64 xcomp_bv;
 	u64 reserved[6];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__((packed));
 
@@ -418,6 +441,12 @@ struct xsave_struct {
 	struct xsave_hdr_struct xsave_hdr;
 	struct ymmh_struct ymmh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct lwp_struct lwp;
+	struct bndregs_struct bndregs;
+	struct bndcsr_struct bndcsr;
+>>>>>>> v3.18
 =======
 	struct lwp_struct lwp;
 	struct bndregs_struct bndregs;
@@ -456,7 +485,11 @@ union irq_stack_union {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DECLARE_PER_CPU_FIRST(union irq_stack_union, irq_stack_union);
+=======
+DECLARE_PER_CPU_FIRST(union irq_stack_union, irq_stack_union) __visible;
+>>>>>>> v3.18
 =======
 DECLARE_PER_CPU_FIRST(union irq_stack_union, irq_stack_union) __visible;
 >>>>>>> v3.18
@@ -480,7 +513,10 @@ struct stack_canary {
 DECLARE_PER_CPU_ALIGNED(struct stack_canary, stack_canary);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * per-CPU IRQ handling stacks
  */
@@ -490,6 +526,9 @@ struct irq_stack {
 
 DECLARE_PER_CPU(struct irq_stack *, hardirq_stack);
 DECLARE_PER_CPU(struct irq_stack *, softirq_stack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* X86_64 */
 
@@ -548,7 +587,10 @@ struct thread_struct {
 	/* Max allowed port in the bitmap, in bytes: */
 	unsigned		io_bitmap_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * fpu_counter contains the number of consecutive context switches
 	 * that the FPU is used. If this is over a threshold, the lazy fpu
@@ -558,6 +600,9 @@ struct thread_struct {
 	 * a short time
 	 */
 	unsigned char fpu_counter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -733,6 +778,11 @@ static inline void cpu_relax(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 
@@ -768,6 +818,7 @@ static inline void sync_core(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __monitor(const void *eax, unsigned long ecx,
 			     unsigned long edx)
 {
@@ -791,6 +842,8 @@ static inline void __sti_mwait(unsigned long eax, unsigned long ecx)
 		     :: "a" (eax), "c" (ecx));
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void select_idle_routine(const struct cpuinfo_x86 *c);
@@ -1022,6 +1075,7 @@ extern int set_tsc_mode(unsigned int val);
 extern u16 amd_get_nb_id(int cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aperfmperf {
 	u64 aperf, mperf;
 };
@@ -1050,6 +1104,8 @@ unsigned long calc_aperfmperf_ratio(struct aperfmperf *old,
 
 	return ratio;
 =======
+=======
+>>>>>>> v3.18
 static inline uint32_t hypervisor_cpuid_base(const char *sig, uint32_t leaves)
 {
 	uint32_t base, eax, signature[3];
@@ -1063,6 +1119,9 @@ static inline uint32_t hypervisor_cpuid_base(const char *sig, uint32_t leaves)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1078,7 +1137,11 @@ bool xen_set_default_idle(void);
 
 void stop_this_cpu(void *dummy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+void df_debug(struct pt_regs *regs, long error_code);
+>>>>>>> v3.18
 =======
 void df_debug(struct pt_regs *regs, long error_code);
 >>>>>>> v3.18

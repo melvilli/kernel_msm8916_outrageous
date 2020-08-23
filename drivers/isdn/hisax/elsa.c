@@ -510,7 +510,12 @@ set_arcofi(struct IsdnCardState *cs, int bc) {
 	cs->dc.isac.arcofi_bc = bc;
 	arcofi_fsm(cs, ARCOFI_START, &ARCOFI_COP_5);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	interruptible_sleep_on(&cs->dc.isac.arcofi_wait);
+=======
+	wait_event_interruptible(cs->dc.isac.arcofi_wait,
+				 cs->dc.isac.arcofi_state == ARCOFI_NOP);
+>>>>>>> v3.18
 =======
 	wait_event_interruptible(cs->dc.isac.arcofi_wait,
 				 cs->dc.isac.arcofi_state == ARCOFI_NOP);
@@ -534,7 +539,12 @@ check_arcofi(struct IsdnCardState *cs)
 	cs->dc.isac.arcofi_bc = 0;
 	arcofi_fsm(cs, ARCOFI_START, &ARCOFI_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	interruptible_sleep_on(&cs->dc.isac.arcofi_wait);
+=======
+	wait_event_interruptible(cs->dc.isac.arcofi_wait,
+				 cs->dc.isac.arcofi_state == ARCOFI_NOP);
+>>>>>>> v3.18
 =======
 	wait_event_interruptible(cs->dc.isac.arcofi_wait,
 				 cs->dc.isac.arcofi_state == ARCOFI_NOP);
@@ -546,7 +556,11 @@ check_arcofi(struct IsdnCardState *cs)
 		t += sprintf(tmp, "Arcofi data");
 		QuickHex(t, p, cs->dc.isac.mon_rxp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, tmp);
+=======
+		debugl1(cs, "%s", tmp);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", tmp);
 >>>>>>> v3.18
@@ -610,7 +624,12 @@ check_arcofi(struct IsdnCardState *cs)
 			       cs->hw.elsa.base + 8);
 		arcofi_fsm(cs, ARCOFI_START, &ARCOFI_XOP_0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&cs->dc.isac.arcofi_wait);
+=======
+		wait_event_interruptible(cs->dc.isac.arcofi_wait,
+				 cs->dc.isac.arcofi_state == ARCOFI_NOP);
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(cs->dc.isac.arcofi_wait,
 				 cs->dc.isac.arcofi_state == ARCOFI_NOP);

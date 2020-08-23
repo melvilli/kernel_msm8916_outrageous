@@ -168,7 +168,11 @@ nouveau_namedb_create_(struct nouveau_object *parent,
 		       struct nouveau_object *engine,
 		       struct nouveau_oclass *oclass, u32 pclass,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct nouveau_oclass *sclass, u32 engcls,
+=======
+		       struct nouveau_oclass *sclass, u64 engcls,
+>>>>>>> v3.18
 =======
 		       struct nouveau_oclass *sclass, u64 engcls,
 >>>>>>> v3.18

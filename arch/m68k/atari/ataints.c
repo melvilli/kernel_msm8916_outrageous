@@ -42,6 +42,10 @@
 #include <linux/seq_file.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 >>>>>>> v3.18
@@ -338,6 +342,12 @@ void __init atari_init_IRQ(void)
 				  IRQ_MFP_TIMER1, 8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	irq_set_status_flags(IRQ_MFP_TIMER1, IRQ_IS_POLLED);
+	irq_set_status_flags(IRQ_MFP_TIMER2, IRQ_IS_POLLED);
+
+>>>>>>> v3.18
 =======
 	irq_set_status_flags(IRQ_MFP_TIMER1, IRQ_IS_POLLED);
 	irq_set_status_flags(IRQ_MFP_TIMER2, IRQ_IS_POLLED);

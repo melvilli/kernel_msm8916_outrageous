@@ -355,9 +355,15 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	/* set size + mode */
 	se401_write_req(gspca_dev, SE401_REQ_SET_WIDTH,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gspca_dev->width * mult, 0);
 	se401_write_req(gspca_dev, SE401_REQ_SET_HEIGHT,
 			gspca_dev->height * mult, 0);
+=======
+			gspca_dev->pixfmt.width * mult, 0);
+	se401_write_req(gspca_dev, SE401_REQ_SET_HEIGHT,
+			gspca_dev->pixfmt.height * mult, 0);
+>>>>>>> v3.18
 =======
 			gspca_dev->pixfmt.width * mult, 0);
 	se401_write_req(gspca_dev, SE401_REQ_SET_HEIGHT,
@@ -487,7 +493,11 @@ static void sd_pkt_scan_janggu(struct gspca_dev *gspca_dev, u8 *data, int len)
 {
 	struct sd *sd = (struct sd *)gspca_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int imagesize = gspca_dev->width * gspca_dev->height;
+=======
+	int imagesize = gspca_dev->pixfmt.width * gspca_dev->pixfmt.height;
+>>>>>>> v3.18
 =======
 	int imagesize = gspca_dev->pixfmt.width * gspca_dev->pixfmt.height;
 >>>>>>> v3.18

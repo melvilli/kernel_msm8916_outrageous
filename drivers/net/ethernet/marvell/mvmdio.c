@@ -5,11 +5,17 @@
  * between all network interfaces, having a single driver allows to
  * handle concurrent accesses properly (you may have four Ethernet
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ports, but they in fact share the same SMI interface to access the
  * MDIO bus). Moreover, this MDIO interface code is similar between
  * the mv643xx_eth driver and the mvneta driver. For now, it is only
  * used by the mvneta driver, but it could later be used by the
  * mv643xx_eth driver as well.
+=======
+ * ports, but they in fact share the same SMI interface to access
+ * the MDIO bus). This driver is currently used by the mvneta and
+ * mv643xx_eth drivers.
+>>>>>>> v3.18
 =======
  * ports, but they in fact share the same SMI interface to access
  * the MDIO bus). This driver is currently used by the mvneta and
@@ -26,7 +32,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -54,7 +63,10 @@
 #define MVMDIO_ERR_INT_MASK		   0x0080
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * SMI Timeout measurements:
  * - Kirkwood 88F6281 (Globalscale Dreamplug): 45us to 95us (Interrupt)
@@ -64,6 +76,9 @@
 #define MVMDIO_SMI_POLL_INTERVAL_MIN	   45
 #define MVMDIO_SMI_POLL_INTERVAL_MAX	   55
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct orion_mdio_dev {
 	struct mutex lock;
@@ -89,6 +104,7 @@ static int orion_mdio_smi_is_done(struct orion_mdio_dev *dev)
 static int orion_mdio_wait_ready(struct mii_bus *bus)
 {
 	struct orion_mdio_dev *dev = bus->priv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int count;
 
@@ -119,6 +135,8 @@ static int orion_mdio_wait_ready(struct mii_bus *bus)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long timeout = usecs_to_jiffies(MVMDIO_SMI_TIMEOUT);
 	unsigned long end = jiffies + timeout;
 	int timedout = 0;
@@ -152,6 +170,9 @@ static int orion_mdio_wait_ready(struct mii_bus *bus)
 
 	dev_err(bus->parent, "Timeout: SMI busy for too long\n");
 	return  -ETIMEDOUT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -160,7 +181,10 @@ static int orion_mdio_read(struct mii_bus *bus, int mii_id,
 {
 	struct orion_mdio_dev *dev = bus->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 val;
@@ -170,10 +194,15 @@ static int orion_mdio_read(struct mii_bus *bus, int mii_id,
 
 	ret = orion_mdio_wait_ready(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		mutex_unlock(&dev->lock);
 		return ret;
 	}
+=======
+	if (ret < 0)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 		goto out;
@@ -184,6 +213,7 @@ static int orion_mdio_read(struct mii_bus *bus, int mii_id,
 		MVMDIO_SMI_READ_OPERATION),
 	       dev->regs);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Wait for the value to become available */
 	count = 0;
@@ -206,6 +236,8 @@ static int orion_mdio_read(struct mii_bus *bus, int mii_id,
 
 	return val & 0xFFFF;
 =======
+=======
+>>>>>>> v3.18
 	ret = orion_mdio_wait_ready(bus);
 	if (ret < 0)
 		goto out;
@@ -221,6 +253,9 @@ static int orion_mdio_read(struct mii_bus *bus, int mii_id,
 out:
 	mutex_unlock(&dev->lock);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -234,10 +269,15 @@ static int orion_mdio_write(struct mii_bus *bus, int mii_id,
 
 	ret = orion_mdio_wait_ready(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		mutex_unlock(&dev->lock);
 		return ret;
 	}
+=======
+	if (ret < 0)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 		goto out;
@@ -250,6 +290,7 @@ static int orion_mdio_write(struct mii_bus *bus, int mii_id,
 	       dev->regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&dev->lock);
 
 	return 0;
@@ -258,6 +299,11 @@ static int orion_mdio_write(struct mii_bus *bus, int mii_id,
 static int orion_mdio_reset(struct mii_bus *bus)
 {
 	return 0;
+=======
+out:
+	mutex_unlock(&dev->lock);
+	return ret;
+>>>>>>> v3.18
 =======
 out:
 	mutex_unlock(&dev->lock);
@@ -294,23 +340,32 @@ static int orion_mdio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus = mdiobus_alloc_size(sizeof(struct orion_mdio_dev));
 	if (!bus) {
 		dev_err(&pdev->dev, "Cannot allocate MDIO bus\n");
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	bus = devm_mdiobus_alloc_size(&pdev->dev,
 				      sizeof(struct orion_mdio_dev));
 	if (!bus)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bus->name = "orion_mdio_bus";
 	bus->read = orion_mdio_read;
 	bus->write = orion_mdio_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus->reset = orion_mdio_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snprintf(bus->id, MII_BUS_ID_SIZE, "%s-mii",
@@ -318,16 +373,22 @@ static int orion_mdio_probe(struct platform_device *pdev)
 	bus->parent = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus->irq = kmalloc(sizeof(int) * PHY_MAX_ADDR, GFP_KERNEL);
 	if (!bus->irq) {
 		mdiobus_free(bus);
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	bus->irq = devm_kmalloc_array(&pdev->dev, PHY_MAX_ADDR, sizeof(int),
 				      GFP_KERNEL);
 	if (!bus->irq)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < PHY_MAX_ADDR; i++)
@@ -349,7 +410,11 @@ static int orion_mdio_probe(struct platform_device *pdev)
 
 	dev->err_interrupt = platform_get_irq(pdev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->err_interrupt != -ENXIO) {
+=======
+	if (dev->err_interrupt > 0) {
+>>>>>>> v3.18
 =======
 	if (dev->err_interrupt > 0) {
 >>>>>>> v3.18
@@ -362,6 +427,12 @@ static int orion_mdio_probe(struct platform_device *pdev)
 		writel(MVMDIO_ERR_INT_SMI_DONE,
 			dev->regs + MVMDIO_ERR_INT_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	} else if (dev->err_interrupt == -EPROBE_DEFER) {
+		return -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 
 	} else if (dev->err_interrupt == -EPROBE_DEFER) {
@@ -388,8 +459,11 @@ out_mdio:
 	if (!IS_ERR(dev->clk))
 		clk_disable_unprepare(dev->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(bus->irq);
 	mdiobus_free(bus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -403,8 +477,11 @@ static int orion_mdio_remove(struct platform_device *pdev)
 	writel(0, dev->regs + MVMDIO_ERR_INT_MASK);
 	mdiobus_unregister(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(bus->irq);
 	mdiobus_free(bus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!IS_ERR(dev->clk))

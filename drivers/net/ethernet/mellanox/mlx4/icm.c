@@ -94,6 +94,7 @@ void mlx4_free_icm(struct mlx4_dev *dev, struct mlx4_icm *icm, int coherent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mlx4_alloc_icm_pages(struct scatterlist *mem, int order, gfp_t gfp_mask)
 {
 	struct page *page;
@@ -102,6 +103,8 @@ static int mlx4_alloc_icm_pages(struct scatterlist *mem, int order, gfp_t gfp_ma
 	if (!page)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 static int mlx4_alloc_icm_pages(struct scatterlist *mem, int order,
 				gfp_t gfp_mask, int node)
 {
@@ -113,6 +116,9 @@ static int mlx4_alloc_icm_pages(struct scatterlist *mem, int order,
 		if (!page)
 			return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sg_set_page(mem, page, PAGE_SIZE << order, 0);
@@ -128,6 +134,7 @@ static int mlx4_alloc_icm_coherent(struct device *dev, struct scatterlist *mem,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (offset_in_page(buf)) {
 		dma_free_coherent(dev, PAGE_SIZE << order,
 				  buf, sg_dma_address(mem));
@@ -135,6 +142,10 @@ static int mlx4_alloc_icm_coherent(struct device *dev, struct scatterlist *mem,
 	}
 
 	sg_set_buf(mem, buf, PAGE_SIZE << order);
+=======
+	sg_set_buf(mem, buf, PAGE_SIZE << order);
+	BUG_ON(mem->offset);
+>>>>>>> v3.18
 =======
 	sg_set_buf(mem, buf, PAGE_SIZE << order);
 	BUG_ON(mem->offset);
@@ -155,10 +166,13 @@ struct mlx4_icm *mlx4_alloc_icm(struct mlx4_dev *dev, int npages,
 	BUG_ON(coherent && (gfp_mask & __GFP_HIGHMEM));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	icm = kmalloc(sizeof *icm, gfp_mask & ~(__GFP_HIGHMEM | __GFP_NOWARN));
 	if (!icm)
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 	icm = kmalloc_node(sizeof(*icm),
 			   gfp_mask & ~(__GFP_HIGHMEM | __GFP_NOWARN),
 			   dev->numa_node);
@@ -168,6 +182,9 @@ struct mlx4_icm *mlx4_alloc_icm(struct mlx4_dev *dev, int npages,
 		if (!icm)
 			return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	icm->refcount = 0;
@@ -178,11 +195,14 @@ struct mlx4_icm *mlx4_alloc_icm(struct mlx4_dev *dev, int npages,
 	while (npages > 0) {
 		if (!chunk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			chunk = kmalloc(sizeof *chunk,
 					gfp_mask & ~(__GFP_HIGHMEM | __GFP_NOWARN));
 			if (!chunk)
 				goto fail;
 =======
+=======
+>>>>>>> v3.18
 			chunk = kmalloc_node(sizeof(*chunk),
 					     gfp_mask & ~(__GFP_HIGHMEM |
 							  __GFP_NOWARN),
@@ -194,6 +214,9 @@ struct mlx4_icm *mlx4_alloc_icm(struct mlx4_dev *dev, int npages,
 				if (!chunk)
 					goto fail;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			sg_init_table(chunk->mem, MLX4_ICM_CHUNK_LEN);
@@ -212,7 +235,12 @@ struct mlx4_icm *mlx4_alloc_icm(struct mlx4_dev *dev, int npages,
 		else
 			ret = mlx4_alloc_icm_pages(&chunk->mem[chunk->npages],
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   cur_order, gfp_mask);
+=======
+						   cur_order, gfp_mask,
+						   dev->numa_node);
+>>>>>>> v3.18
 =======
 						   cur_order, gfp_mask,
 						   dev->numa_node);
@@ -283,7 +311,12 @@ int mlx4_UNMAP_ICM_AUX(struct mlx4_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mlx4_table_get(struct mlx4_dev *dev, struct mlx4_icm_table *table, u32 obj)
+=======
+int mlx4_table_get(struct mlx4_dev *dev, struct mlx4_icm_table *table, u32 obj,
+		   gfp_t gfp)
+>>>>>>> v3.18
 =======
 int mlx4_table_get(struct mlx4_dev *dev, struct mlx4_icm_table *table, u32 obj,
 		   gfp_t gfp)
@@ -302,7 +335,11 @@ int mlx4_table_get(struct mlx4_dev *dev, struct mlx4_icm_table *table, u32 obj,
 
 	table->icm[i] = mlx4_alloc_icm(dev, MLX4_TABLE_CHUNK_SIZE >> PAGE_SHIFT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       (table->lowmem ? GFP_KERNEL : GFP_HIGHUSER) |
+=======
+				       (table->lowmem ? gfp : GFP_HIGHUSER) |
+>>>>>>> v3.18
 =======
 				       (table->lowmem ? gfp : GFP_HIGHUSER) |
 >>>>>>> v3.18
@@ -403,7 +440,11 @@ int mlx4_table_get_range(struct mlx4_dev *dev, struct mlx4_icm_table *table,
 
 	for (i = start; i <= end; i += inc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = mlx4_table_get(dev, table, i);
+=======
+		err = mlx4_table_get(dev, table, i, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = mlx4_table_get(dev, table, i, GFP_KERNEL);
 >>>>>>> v3.18

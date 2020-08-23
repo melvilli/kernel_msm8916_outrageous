@@ -1,7 +1,10 @@
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # arch/microblaze/boot/Makefile
 #
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

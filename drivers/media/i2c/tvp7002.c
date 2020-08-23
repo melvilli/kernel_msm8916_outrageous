@@ -30,6 +30,7 @@
 #include <linux/videodev2.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/v4l2-dv-timings.h>
 #include <media/tvp7002.h>
 #include <media/v4l2-device.h>
@@ -37,6 +38,8 @@
 #include <media/v4l2-common.h>
 #include <media/v4l2-ctrls.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_graph.h>
 #include <linux/v4l2-dv-timings.h>
@@ -47,6 +50,9 @@
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-of.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "tvp7002_reg.h"
 
@@ -55,9 +61,12 @@ MODULE_AUTHOR("Santiago Nunez-Corrales <santiago.nunez@ridgerun.com>");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Module Name */
 #define TVP7002_MODULE_NAME	"tvp7002"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* I2C retry attempts */
@@ -441,6 +450,10 @@ struct tvp7002 {
 
 	const struct tvp7002_timings_definition *current_timings;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct media_pad pad;
+>>>>>>> v3.18
 =======
 	struct media_pad pad;
 >>>>>>> v3.18
@@ -556,6 +569,7 @@ static inline void tvp7002_write_err(struct v4l2_subdev *sd, u8 reg,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * tvp7002_g_chip_ident() - Get chip identification number
  * @sd: ptr to v4l2_subdev struct
  * @chip: ptr to v4l2_dbg_chip_ident struct
@@ -579,6 +593,8 @@ static int tvp7002_g_chip_ident(struct v4l2_subdev *sd,
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * tvp7002_write_inittab() - Write initialization values
@@ -762,8 +778,12 @@ static int tvp7002_query_dv_timings(struct v4l2_subdev *sd,
  * Get the value of a TVP7002 decoder device register.
  * Returns zero when successful, -EINVAL if register read fails or
 <<<<<<< HEAD
+<<<<<<< HEAD
  * access to I2C client fails, -EPERM if the call is not allowed
  * by disabled CAP_SYS_ADMIN.
+=======
+ * access to I2C client fails.
+>>>>>>> v3.18
 =======
  * access to I2C client fails.
 >>>>>>> v3.18
@@ -771,6 +791,7 @@ static int tvp7002_query_dv_timings(struct v4l2_subdev *sd,
 static int tvp7002_g_register(struct v4l2_subdev *sd,
 						struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	u8 val;
@@ -784,12 +805,17 @@ static int tvp7002_g_register(struct v4l2_subdev *sd,
 	ret = tvp7002_read(sd, reg->reg & 0xff, &val);
 	reg->val = val;
 =======
+=======
+>>>>>>> v3.18
 	u8 val;
 	int ret;
 
 	ret = tvp7002_read(sd, reg->reg & 0xff, &val);
 	reg->val = val;
 	reg->size = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -801,8 +827,12 @@ static int tvp7002_g_register(struct v4l2_subdev *sd,
  *
  * Get the value of a TVP7002 decoder device register.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero when successful, -EINVAL if register read fails or
  * -EPERM if call not allowed.
+=======
+ * Returns zero when successful, -EINVAL if register read fails.
+>>>>>>> v3.18
 =======
  * Returns zero when successful, -EINVAL if register read fails.
 >>>>>>> v3.18
@@ -811,6 +841,7 @@ static int tvp7002_s_register(struct v4l2_subdev *sd,
 						const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -818,6 +849,8 @@ static int tvp7002_s_register(struct v4l2_subdev *sd,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return tvp7002_write(sd, reg->reg & 0xff, reg->val & 0xff);
@@ -854,7 +887,11 @@ static int tvp7002_s_stream(struct v4l2_subdev *sd, int enable)
 {
 	struct tvp7002 *device = to_tvp7002(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error = 0;
+=======
+	int error;
+>>>>>>> v3.18
 =======
 	int error;
 >>>>>>> v3.18
@@ -862,6 +899,7 @@ static int tvp7002_s_stream(struct v4l2_subdev *sd, int enable)
 	if (device->streaming == enable)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (enable) {
 		/* Set output state on (low impedance means stream on) */
@@ -878,6 +916,8 @@ static int tvp7002_s_stream(struct v4l2_subdev *sd, int enable)
 
 	return error;
 =======
+=======
+>>>>>>> v3.18
 	/* low impedance: on, high impedance: off */
 	error = tvp7002_write(sd, TVP7002_MISC_CTL_2, enable ? 0x00 : 0x03);
 	if (error) {
@@ -887,6 +927,9 @@ static int tvp7002_s_stream(struct v4l2_subdev *sd, int enable)
 
 	device->streaming = enable;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -928,6 +971,12 @@ static int tvp7002_enum_dv_timings(struct v4l2_subdev *sd,
 		struct v4l2_enum_dv_timings *timings)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (timings->pad != 0)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (timings->pad != 0)
 		return -EINVAL;
@@ -946,10 +995,13 @@ static const struct v4l2_ctrl_ops tvp7002_ctrl_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* V4L2 core operation handlers */
 static const struct v4l2_subdev_core_ops tvp7002_core_ops = {
 	.g_chip_ident = tvp7002_g_chip_ident,
 =======
+=======
+>>>>>>> v3.18
 /*
  * tvp7002_enum_mbus_code() - Enum supported digital video format on pad
  * @sd: pointer to standard V4L2 sub-device structure
@@ -1011,6 +1063,9 @@ tvp7002_set_pad_format(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh,
 
 /* V4L2 core operation handlers */
 static const struct v4l2_subdev_core_ops tvp7002_core_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.log_status = tvp7002_log_status,
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -1031,7 +1086,10 @@ static const struct v4l2_subdev_video_ops tvp7002_video_ops = {
 	.g_dv_timings = tvp7002_g_dv_timings,
 	.s_dv_timings = tvp7002_s_dv_timings,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enum_dv_timings = tvp7002_enum_dv_timings,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.query_dv_timings = tvp7002_query_dv_timings,
@@ -1043,7 +1101,10 @@ static const struct v4l2_subdev_video_ops tvp7002_video_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* media pad related operation handlers */
 static const struct v4l2_subdev_pad_ops tvp7002_pad_ops = {
 	.enum_mbus_code = tvp7002_enum_mbus_code,
@@ -1052,15 +1113,21 @@ static const struct v4l2_subdev_pad_ops tvp7002_pad_ops = {
 	.enum_dv_timings = tvp7002_enum_dv_timings,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* V4L2 top level operation handlers */
 static const struct v4l2_subdev_ops tvp7002_ops = {
 	.core = &tvp7002_core_ops,
 	.video = &tvp7002_video_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.pad = &tvp7002_pad_ops,
 };
 
@@ -1106,6 +1173,9 @@ done:
 	return pdata;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * tvp7002_probe - Probe a TVP7002 device
@@ -1119,6 +1189,10 @@ done:
 static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tvp7002_config *pdata = tvp7002_get_pdata(c);
+>>>>>>> v3.18
 =======
 	struct tvp7002_config *pdata = tvp7002_get_pdata(c);
 >>>>>>> v3.18
@@ -1129,10 +1203,13 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 	int polarity_b;
 	u8 revision;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int error;
 
 =======
+=======
+>>>>>>> v3.18
 	int error;
 
 	if (pdata == NULL) {
@@ -1140,6 +1217,9 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Check if the adapter supports the needed features */
 	if (!i2c_check_functionality(c->adapter,
@@ -1147,11 +1227,14 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!c->dev.platform_data) {
 		v4l_err(c, "No platform data!!\n");
 		return -ENODEV;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device = devm_kzalloc(&c->dev, sizeof(struct tvp7002), GFP_KERNEL);
@@ -1161,7 +1244,11 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 
 	sd = &device->sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device->pdata = c->dev.platform_data;
+=======
+	device->pdata = pdata;
+>>>>>>> v3.18
 =======
 	device->pdata = pdata;
 >>>>>>> v3.18
@@ -1206,7 +1293,10 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 	error = tvp7002_s_dv_timings(sd, &timings);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_MEDIA_CONTROLLER)
 	device->pad.flags = MEDIA_PAD_FL_SOURCE;
 	device->sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
@@ -1217,12 +1307,16 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 		return error;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v4l2_ctrl_handler_init(&device->hdl, 1);
 	v4l2_ctrl_new_std(&device->hdl, &tvp7002_ctrl_ops,
 			V4L2_CID_GAIN, 0, 255, 1, 0);
 	sd->ctrl_handler = &device->hdl;
 	if (device->hdl.error) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int err = device->hdl.error;
 
@@ -1233,6 +1327,8 @@ static int tvp7002_probe(struct i2c_client *c, const struct i2c_device_id *id)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		error = device->hdl.error;
 		goto error;
 	}
@@ -1250,6 +1346,9 @@ error:
 	media_entity_cleanup(&device->sd.entity);
 #endif
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1268,12 +1367,18 @@ static int tvp7002_remove(struct i2c_client *c)
 	v4l2_dbg(1, debug, sd, "Removing tvp7002 adapter"
 				"on address 0x%x\n", c->addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	v4l2_async_unregister_subdev(&device->sd);
 #if defined(CONFIG_MEDIA_CONTROLLER)
 	media_entity_cleanup(&device->sd.entity);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&device->hdl);
@@ -1288,10 +1393,13 @@ static const struct i2c_device_id tvp7002_id[] = {
 MODULE_DEVICE_TABLE(i2c, tvp7002_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* I2C driver data */
 static struct i2c_driver tvp7002_driver = {
 	.driver = {
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_OF)
 static const struct of_device_id tvp7002_of_match[] = {
 	{ .compatible = "ti,tvp7002", },
@@ -1304,6 +1412,9 @@ MODULE_DEVICE_TABLE(of, tvp7002_of_match);
 static struct i2c_driver tvp7002_driver = {
 	.driver = {
 		.of_match_table = of_match_ptr(tvp7002_of_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.owner = THIS_MODULE,
 		.name = TVP7002_MODULE_NAME,

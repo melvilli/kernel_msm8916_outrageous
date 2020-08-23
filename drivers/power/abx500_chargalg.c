@@ -2036,7 +2036,10 @@ static int abx500_chargalg_remove(struct platform_device *pdev)
 
 	power_supply_unregister(&di->chargalg_psy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

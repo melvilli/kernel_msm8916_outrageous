@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -93,6 +101,10 @@ enum iwl_device_family {
 	IWL_DEVICE_FAMILY_6150,
 	IWL_DEVICE_FAMILY_7000,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IWL_DEVICE_FAMILY_8000,
+>>>>>>> v3.18
 =======
 	IWL_DEVICE_FAMILY_8000,
 >>>>>>> v3.18
@@ -132,6 +144,11 @@ enum iwl_led_mode {
 #define IWL_MAX_WD_TIMEOUT	120000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DEFAULT_MAX_TX_POWER 22
+
+>>>>>>> v3.18
 =======
 #define IWL_DEFAULT_MAX_TX_POWER 22
 
@@ -147,13 +164,19 @@ enum iwl_led_mode {
 #define ANT_ABC		(ANT_A | ANT_B | ANT_C)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u8 num_of_ant(u8 mask)
 {
 	return  !!((mask) & ANT_A) +
 		!!((mask) & ANT_B) +
 		!!((mask) & ANT_C);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -162,6 +185,7 @@ static inline u8 num_of_ant(u8 mask)
  * @led_compensation: compensate on the led on/off time per HW according
  *	to the deviation to achieve the desired led frequency.
  *	The detail algorithm is described in iwl-led.c
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @chain_noise_num_beacons: number of beacons used to compute chain noise
  * @adv_thermal_throttle: support advance thermal throttle
@@ -175,12 +199,17 @@ static inline u8 num_of_ant(u8 mask)
  * @hd_v2: v2 of enhanced sensitivity value, used for 2000 series and up
  * @no_idle_support: do not support idle mode
 =======
+=======
+>>>>>>> v3.18
  * @wd_timeout: TX queues watchdog timeout
  * @max_event_log_size: size of event log buffer size for ucode event logging
  * @shadow_reg_enable: HW shadow register support
  * @apmg_wake_up_wa: should the MAC access REQ be asserted when a command
  *	is in flight. This is due to a HW bug in 7260, 3160 and 7265.
  * @scd_chain_ext_wa: should the chain extension feature in SCD be disabled.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct iwl_base_params {
@@ -192,6 +221,7 @@ struct iwl_base_params {
 	const u16 max_ll_items;
 	const bool shadow_ram_support;
 	u16 led_compensation;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool adv_thermal_throttle;
 	bool support_ct_kill_exit;
@@ -222,6 +252,8 @@ struct iwl_bt_params {
 
 /*
 =======
+=======
+>>>>>>> v3.18
 	unsigned int wd_timeout;
 	u32 max_event_log_size;
 	const bool shadow_reg_enable;
@@ -233,6 +265,9 @@ struct iwl_bt_params {
 /*
  * @stbc: support Tx STBC and 1*SS Rx STBC
  * @ldpc: support Tx/Rx with LDPC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @use_rts_for_aggregation: use rts/cts protection for HT traffic
  * @ht40_bands: bitmap of bands (using %IEEE80211_BAND_*) that support HT40
@@ -241,6 +276,11 @@ struct iwl_ht_params {
 	enum ieee80211_smps_mode smps_mode;
 	const bool ht_greenfield_support; /* if used set to true */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const bool stbc;
+	const bool ldpc;
+>>>>>>> v3.18
 =======
 	const bool stbc;
 	const bool ldpc;
@@ -263,12 +303,18 @@ struct iwl_ht_params {
 #define EEPROM_REGULATORY_BAND_NO_HT40		0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* lower blocks contain EEPROM image and calibration data */
 #define OTP_LOW_IMAGE_SIZE		(2 * 512 * sizeof(u16)) /* 2 KB */
 #define OTP_LOW_IMAGE_SIZE_FAMILY_7000	(16 * 512 * sizeof(u16)) /* 16 KB */
 #define OTP_LOW_IMAGE_SIZE_FAMILY_8000	(32 * 512 * sizeof(u16)) /* 32 KB */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iwl_eeprom_params {
 	const u8 regulatory_bands[7];
@@ -276,7 +322,10 @@ struct iwl_eeprom_params {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Tx-backoff power threshold
  * @pwr: The power limit in mw
  * @backoff: The tx-backoff in uSec
@@ -286,6 +335,9 @@ struct iwl_pwr_tx_backoff {
 	u32 backoff;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct iwl_cfg
@@ -302,6 +354,10 @@ struct iwl_pwr_tx_backoff {
  * @valid_tx_ant: valid transmit antenna
  * @valid_rx_ant: valid receive antenna
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @non_shared_ant: the antenna that is for WiFi only
+>>>>>>> v3.18
 =======
  * @non_shared_ant: the antenna that is for WiFi only
 >>>>>>> v3.18
@@ -309,6 +365,7 @@ struct iwl_pwr_tx_backoff {
  * @nvm_calib_ver: NVM calibration version
  * @lib: pointer to the lib ops
  * @base_params: pointer to basic parameters
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @ht_params: point to ht patameters
  * @bt_params: pointer to bt parameters
@@ -323,6 +380,8 @@ struct iwl_pwr_tx_backoff {
  * @host_interrupt_operation_mode: device needs host interrupt operation
  *	mode set
 =======
+=======
+>>>>>>> v3.18
  * @ht_params: point to ht parameters
  * @led_mode: 0=blinking, 1=On(RF On)/Off(RF Off)
  * @rx_with_siso_diversity: 1x1 device with rx antenna diversity
@@ -334,6 +393,9 @@ struct iwl_pwr_tx_backoff {
  * @nvm_hw_section_num: the ID of the HW NVM section
  * @pwr_tx_backoffs: translation table between power limits and backoffs
  * @max_rx_agg_size: max RX aggregation size of the ADDBA request/response
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * We enable the driver to be backward compatible wrt. hardware features.
@@ -353,6 +415,11 @@ struct iwl_cfg {
 	u8   valid_tx_ant;
 	u8   valid_rx_ant;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8   non_shared_ant;
+	bool bt_shared_single_ant;
+>>>>>>> v3.18
 =======
 	u8   non_shared_ant;
 	bool bt_shared_single_ant;
@@ -363,6 +430,7 @@ struct iwl_cfg {
 	const struct iwl_base_params *base_params;
 	/* params likely to change within a device family */
 	const struct iwl_ht_params *ht_params;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct iwl_bt_params *bt_params;
 	const struct iwl_eeprom_params *eeprom_params;
@@ -375,6 +443,8 @@ struct iwl_cfg {
 	const bool temp_offset_v2;
 	const bool host_interrupt_operation_mode;
 =======
+=======
+>>>>>>> v3.18
 	const struct iwl_eeprom_params *eeprom_params;
 	enum iwl_led_mode led_mode;
 	const bool rx_with_siso_diversity;
@@ -389,6 +459,9 @@ struct iwl_cfg {
 	const char *default_nvm_file;
 	unsigned int max_rx_agg_size;
 	bool disable_dummy_notification;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -396,6 +469,10 @@ struct iwl_cfg {
  * This list declares the config structures for all devices.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_IWLDVM)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_IWLDVM)
 >>>>>>> v3.18
@@ -442,12 +519,18 @@ extern const struct iwl_cfg iwl105_bgn_cfg;
 extern const struct iwl_cfg iwl105_bgn_d_cfg;
 extern const struct iwl_cfg iwl135_bgn_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct iwl_cfg iwl7260_2ac_cfg;
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_IWLDVM */
 #if IS_ENABLED(CONFIG_IWLMVM)
 extern const struct iwl_cfg iwl7260_2ac_cfg;
 extern const struct iwl_cfg iwl7260_2ac_cfg_high_temp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern const struct iwl_cfg iwl7260_2n_cfg;
 extern const struct iwl_cfg iwl7260_n_cfg;
@@ -455,7 +538,10 @@ extern const struct iwl_cfg iwl3160_2ac_cfg;
 extern const struct iwl_cfg iwl3160_2n_cfg;
 extern const struct iwl_cfg iwl3160_n_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const struct iwl_cfg iwl3165_2ac_cfg;
 extern const struct iwl_cfg iwl7265_2ac_cfg;
 extern const struct iwl_cfg iwl7265_2n_cfg;
@@ -464,6 +550,9 @@ extern const struct iwl_cfg iwl8260_2n_cfg;
 extern const struct iwl_cfg iwl8260_2ac_cfg;
 extern const struct iwl_cfg iwl8260_2ac_sdio_cfg;
 #endif /* CONFIG_IWLMVM */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __IWL_CONFIG_H__ */

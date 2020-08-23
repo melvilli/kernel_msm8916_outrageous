@@ -274,6 +274,7 @@ static inline unsigned long
 copy_from_user(void *to, const void *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long res = n;
 
 	if (likely(access_ok(VERIFY_READ, from, n)))
@@ -282,6 +283,8 @@ copy_from_user(void *to, const void *from, unsigned long n)
 		memset(to + (n - res), 0, res);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long over;
 
 	if (access_ok(VERIFY_READ, from, n))
@@ -291,6 +294,9 @@ copy_from_user(void *to, const void *from, unsigned long n)
 		return __copy_tofrom_user(to, from, n - over) + over;
 	}
 	return n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -298,9 +304,12 @@ static inline unsigned long
 copy_to_user(void *to, const void *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_WRITE, to, n)))
 		n = __copy_tofrom_user(to, from, n);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long over;
 
 	if (access_ok(VERIFY_WRITE, to, n))
@@ -309,6 +318,9 @@ copy_to_user(void *to, const void *from, unsigned long n)
 		over = (unsigned long)to + n - TASK_SIZE;
 		return __copy_tofrom_user(to, from, n - over) + over;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return n;
 }
@@ -319,9 +331,12 @@ static inline __must_check unsigned long
 clear_user(void *addr, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_WRITE, addr, size)))
 		size = __clear_user(addr, size);
 =======
+=======
+>>>>>>> v3.18
 
 	if (access_ok(VERIFY_WRITE, addr, size))
 		return __clear_user(addr, size);
@@ -329,6 +344,9 @@ clear_user(void *addr, unsigned long size)
 		unsigned long over = (unsigned long)addr + size - TASK_SIZE;
 		return __clear_user(addr, size - over) + over;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return size;
 }

@@ -5,6 +5,7 @@ static void read_int_callback(struct urb *urb/*, struct pt_regs *regs*/)
 {
 	int		status = urb->status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_interface_adapter *psIntfAdapter = (struct bcm_interface_adapter *)urb->context;
 	struct bcm_mini_adapter *Adapter = psIntfAdapter->psAdapter ;
 
@@ -108,6 +109,8 @@ static void read_int_callback(struct urb *urb/*, struct pt_regs *regs*/)
 			//This is required to check what is the defaults conditions when it occurs..
 			BCM_DEBUG_PRINT(Adapter,DBG_TYPE_TX, NEXT_SEND, DBG_LVL_ALL,"GOT DEFAULT INTERRUPT URB STATUS :%d..Please Analyze it...", status);
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_interface_adapter *psIntfAdapter =
 		(struct bcm_interface_adapter *)urb->context;
 	struct bcm_mini_adapter *Adapter = psIntfAdapter->psAdapter;
@@ -228,6 +231,9 @@ static void read_int_callback(struct urb *urb/*, struct pt_regs *regs*/)
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, NEXT_SEND, DBG_LVL_ALL,
 				"GOT DEFAULT INTERRUPT URB STATUS :%d..Please Analyze it...",
 				status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -240,6 +246,7 @@ static void read_int_callback(struct urb *urb/*, struct pt_regs *regs*/)
 int CreateInterruptUrb(struct bcm_interface_adapter *psIntfAdapter)
 {
 	psIntfAdapter->psInterruptUrb = usb_alloc_urb(0, GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!psIntfAdapter->psInterruptUrb)
 	{
@@ -264,6 +271,8 @@ int CreateInterruptUrb(struct bcm_interface_adapter *psIntfAdapter)
 	BCM_DEBUG_PRINT(psIntfAdapter->psAdapter,DBG_TYPE_OTHERS, INTF_INIT, DBG_LVL_ALL,"Interrupt Interval: %d\n",
 				psIntfAdapter->sIntrIn.int_in_interval);
 =======
+=======
+>>>>>>> v3.18
 	if (!psIntfAdapter->psInterruptUrb) {
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS,
 				INTF_INIT, DBG_LVL_ALL,
@@ -288,6 +297,9 @@ int CreateInterruptUrb(struct bcm_interface_adapter *psIntfAdapter)
 	BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, INTF_INIT,
 			DBG_LVL_ALL, "Interrupt Interval: %d\n",
 			psIntfAdapter->sIntrIn.int_in_interval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -297,6 +309,7 @@ INT StartInterruptUrb(struct bcm_interface_adapter *psIntfAdapter)
 {
 	INT status = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if( FALSE == psIntfAdapter->psAdapter->device_removed &&
 		FALSE == psIntfAdapter->psAdapter->bEndPointHalted &&
@@ -312,6 +325,8 @@ INT StartInterruptUrb(struct bcm_interface_adapter *psIntfAdapter)
 			{
 				psIntfAdapter->psAdapter->bEndPointHalted = TRUE ;
 =======
+=======
+>>>>>>> v3.18
 	if (!(psIntfAdapter->psAdapter->device_removed ||
 				psIntfAdapter->psAdapter->bEndPointHalted ||
 				psIntfAdapter->bSuspended ||
@@ -326,6 +341,9 @@ INT StartInterruptUrb(struct bcm_interface_adapter *psIntfAdapter)
 			if (status == -EPIPE) {
 				psIntfAdapter->psAdapter->bEndPointHalted =
 					TRUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				wake_up(&psIntfAdapter->psAdapter->tx_packet_wait_queue);
 			}

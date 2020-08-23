@@ -203,7 +203,11 @@ __initcall(db88f5281_7seg_init);
  ****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init db88f5281_pci_preinit(void)
+=======
+static void __init db88f5281_pci_preinit(void)
+>>>>>>> v3.18
 =======
 static void __init db88f5281_pci_preinit(void)
 >>>>>>> v3.18
@@ -345,6 +349,7 @@ static void __init db88f5281_init(void)
 	orion5x_uart1_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", DB88F5281_NOR_BOOT_BASE,
 			      DB88F5281_NOR_BOOT_SIZE);
 	platform_device_register(&db88f5281_boot_flash);
@@ -359,6 +364,8 @@ static void __init db88f5281_init(void)
 	mvebu_mbus_add_window("devbus-cs2", DB88F5281_NAND_BASE,
 			      DB88F5281_NAND_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    DB88F5281_NOR_BOOT_BASE,
@@ -380,6 +387,9 @@ static void __init db88f5281_init(void)
 				    ORION_MBUS_DEVBUS_ATTR(2),
 				    DB88F5281_NAND_BASE,
 				    DB88F5281_NAND_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&db88f5281_nand_flash);
 

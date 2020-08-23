@@ -122,7 +122,11 @@ static int omap3pandora_hp_event(struct snd_soc_dapm_widget *w,
  *  |P| <--- TWL4030 <--------- Line In and MICs
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct snd_soc_dapm_widget omap3pandora_out_dapm_widgets[] = {
+=======
+static const struct snd_soc_dapm_widget omap3pandora_dapm_widgets[] = {
+>>>>>>> v3.18
 =======
 static const struct snd_soc_dapm_widget omap3pandora_dapm_widgets[] = {
 >>>>>>> v3.18
@@ -135,9 +139,13 @@ static const struct snd_soc_dapm_widget omap3pandora_dapm_widgets[] = {
 	SND_SOC_DAPM_HP("Headphone Jack", NULL),
 	SND_SOC_DAPM_LINE("Line Out", NULL),
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct snd_soc_dapm_widget omap3pandora_in_dapm_widgets[] = {
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -147,7 +155,11 @@ static const struct snd_soc_dapm_widget omap3pandora_in_dapm_widgets[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct snd_soc_dapm_route omap3pandora_out_map[] = {
+=======
+static const struct snd_soc_dapm_route omap3pandora_map[] = {
+>>>>>>> v3.18
 =======
 static const struct snd_soc_dapm_route omap3pandora_map[] = {
 >>>>>>> v3.18
@@ -156,9 +168,13 @@ static const struct snd_soc_dapm_route omap3pandora_map[] = {
 	{"Line Out", NULL, "PCM DAC"},
 	{"Headphone Jack", NULL, "Headphone Amplifier"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct snd_soc_dapm_route omap3pandora_in_map[] = {
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -177,7 +193,10 @@ static int omap3pandora_out_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -194,6 +213,7 @@ static int omap3pandora_out_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_nc_pin(dapm, "VIBRA");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_dapm_new_controls(dapm, omap3pandora_out_dapm_widgets,
 				ARRAY_SIZE(omap3pandora_out_dapm_widgets));
 	if (ret < 0)
@@ -204,6 +224,9 @@ static int omap3pandora_out_init(struct snd_soc_pcm_runtime *rtd)
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int omap3pandora_in_init(struct snd_soc_pcm_runtime *rtd)
@@ -211,7 +234,10 @@ static int omap3pandora_in_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -222,6 +248,7 @@ static int omap3pandora_in_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_nc_pin(dapm, "DIGIMIC1");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_dapm_new_controls(dapm, omap3pandora_in_dapm_widgets,
 				ARRAY_SIZE(omap3pandora_in_dapm_widgets));
 	if (ret < 0)
@@ -229,6 +256,9 @@ static int omap3pandora_in_init(struct snd_soc_pcm_runtime *rtd)
 
 	return snd_soc_dapm_add_routes(dapm, omap3pandora_in_map,
 		ARRAY_SIZE(omap3pandora_in_map));
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -246,7 +276,11 @@ static struct snd_soc_dai_link omap3pandora_dai[] = {
 		.cpu_dai_name = "omap-mcbsp.2",
 		.codec_dai_name = "twl4030-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.platform_name = "omap-pcm-audio",
+=======
+		.platform_name = "omap-mcbsp.2",
+>>>>>>> v3.18
 =======
 		.platform_name = "omap-mcbsp.2",
 >>>>>>> v3.18
@@ -261,7 +295,11 @@ static struct snd_soc_dai_link omap3pandora_dai[] = {
 		.cpu_dai_name = "omap-mcbsp.4",
 		.codec_dai_name = "twl4030-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.platform_name = "omap-pcm-audio",
+=======
+		.platform_name = "omap-mcbsp.4",
+>>>>>>> v3.18
 =======
 		.platform_name = "omap-mcbsp.4",
 >>>>>>> v3.18
@@ -280,12 +318,18 @@ static struct snd_soc_card snd_soc_card_omap3pandora = {
 	.dai_link = omap3pandora_dai,
 	.num_links = ARRAY_SIZE(omap3pandora_dai),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	.dapm_widgets = omap3pandora_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(omap3pandora_dapm_widgets),
 	.dapm_routes = omap3pandora_map,
 	.num_dapm_routes = ARRAY_SIZE(omap3pandora_map),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -26,7 +26,11 @@ Authors:
     Michiel Rook <michiel@grendelproject.nl>,
     Grant Coady <gcoady.lk@gmail.com> with guidance
 <<<<<<< HEAD
+<<<<<<< HEAD
         from Jean Delvare <khali@linux-fr.org>
+=======
+        from Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
         from Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

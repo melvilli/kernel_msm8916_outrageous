@@ -37,7 +37,11 @@ void *memchr(const void *s, int c, size_t n)
 
 	/* Create eight copies of the byte for which we are looking. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	goal = 0x0101010101010101ULL * (uint8_t) c;
+=======
+	goal = copy_byte(c);
+>>>>>>> v3.18
 =======
 	goal = copy_byte(c);
 >>>>>>> v3.18

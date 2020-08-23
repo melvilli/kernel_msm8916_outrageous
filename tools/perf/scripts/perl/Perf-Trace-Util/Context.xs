@@ -24,7 +24,11 @@
 #include "XSUB.h"
 #include "../../../perf.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../../util/script-event.h"
+=======
+#include "../../../util/trace-event.h"
+>>>>>>> v3.18
 =======
 #include "../../../util/trace-event.h"
 >>>>>>> v3.18

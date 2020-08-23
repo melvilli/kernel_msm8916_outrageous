@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2fc_hwi.c: Broadcom NetXtreme II Linux FCoE offload driver.
+=======
+/* bnx2fc_hwi.c: QLogic NetXtreme II Linux FCoE offload driver.
+>>>>>>> v3.18
 =======
 /* bnx2fc_hwi.c: QLogic NetXtreme II Linux FCoE offload driver.
 >>>>>>> v3.18
@@ -8,6 +12,10 @@
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014, QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c) 2014, QLogic Corporation
 >>>>>>> v3.18
@@ -1430,8 +1438,12 @@ int bnx2fc_map_doorbell(struct bnx2fc_rport *tgt)
 	reg_base = pci_resource_start(hba->pcidev,
 					BNX2X_DOORBELL_PCI_BAR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_off = BNX2FC_5771X_DB_PAGE_SIZE *
 			(context_id & 0x1FFFF) + DPM_TRIGER_TYPE;
+=======
+	reg_off = (1 << BNX2X_DB_SHIFT) * (context_id & 0x1FFFF);
+>>>>>>> v3.18
 =======
 	reg_off = (1 << BNX2X_DB_SHIFT) * (context_id & 0x1FFFF);
 >>>>>>> v3.18
@@ -1980,6 +1992,7 @@ static void bnx2fc_free_hash_table(struct bnx2fc_hba *hba)
 	int i;
 	int segment_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int hash_table_size;
 	u32 *pbl;
 
@@ -2001,6 +2014,8 @@ static void bnx2fc_free_hash_table(struct bnx2fc_hba *hba)
 				  dma_address);
 
 =======
+=======
+>>>>>>> v3.18
 	u32 *pbl;
 
 	if (hba->hash_tbl_segments) {
@@ -2024,6 +2039,9 @@ static void bnx2fc_free_hash_table(struct bnx2fc_hba *hba)
 
 		kfree(hba->hash_tbl_segments);
 		hba->hash_tbl_segments = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2063,7 +2081,11 @@ static int bnx2fc_allocate_hash_table(struct bnx2fc_hba *hba)
 	if (!dma_segment_array) {
 		printk(KERN_ERR PFX "hash table pointers (dma) alloc failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		goto cleanup_ht;
+>>>>>>> v3.18
 =======
 		goto cleanup_ht;
 >>>>>>> v3.18
@@ -2078,6 +2100,7 @@ static int bnx2fc_allocate_hash_table(struct bnx2fc_hba *hba)
 		if (!hba->hash_tbl_segments[i]) {
 			printk(KERN_ERR PFX "hash segment alloc failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (--i >= 0) {
 				dma_free_coherent(&hba->pcidev->dev,
 						    BNX2FC_HASH_TBL_CHUNK_SIZE,
@@ -2087,6 +2110,9 @@ static int bnx2fc_allocate_hash_table(struct bnx2fc_hba *hba)
 			}
 			kfree(dma_segment_array);
 			return -ENOMEM;
+=======
+			goto cleanup_dma;
+>>>>>>> v3.18
 =======
 			goto cleanup_dma;
 >>>>>>> v3.18
@@ -2102,8 +2128,12 @@ static int bnx2fc_allocate_hash_table(struct bnx2fc_hba *hba)
 	if (!hba->hash_tbl_pbl) {
 		printk(KERN_ERR PFX "hash table pbl alloc failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(dma_segment_array);
 		return -ENOMEM;
+=======
+		goto cleanup_dma;
+>>>>>>> v3.18
 =======
 		goto cleanup_dma;
 >>>>>>> v3.18
@@ -2132,7 +2162,10 @@ static int bnx2fc_allocate_hash_table(struct bnx2fc_hba *hba)
 	kfree(dma_segment_array);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 cleanup_dma:
 	for (i = 0; i < segment_count; ++i) {
@@ -2149,6 +2182,9 @@ cleanup_ht:
 	kfree(hba->hash_tbl_segments);
 	hba->hash_tbl_segments = NULL;
 	return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

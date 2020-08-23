@@ -85,8 +85,13 @@ struct nvt_dev {
 
 	/* EFER Config register index/data pair */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 cr_efir;
 	u8 cr_efdr;
+=======
+	u32 cr_efir;
+	u32 cr_efdr;
+>>>>>>> v3.18
 =======
 	u32 cr_efir;
 	u32 cr_efdr;
@@ -369,7 +374,10 @@ struct nvt_dev {
 
 #define CIR_WAKE_ENABLE_BIT	0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CIR_INTR_MOUSE_IRQ_BIT	0x80
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PME_INTR_CIR_PASS_BIT	0x08

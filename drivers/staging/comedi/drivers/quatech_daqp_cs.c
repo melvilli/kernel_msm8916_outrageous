@@ -48,6 +48,10 @@ Devices: [Quatech] DAQP-208 (daqp), DAQP-308
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -212,8 +216,12 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 		while (!((status = inb(dev->iobase + DAQP_STATUS))
 			 & DAQP_STATUS_FIFO_EMPTY)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			short data;
+=======
+			unsigned short data;
+>>>>>>> v3.18
 =======
 			unsigned short data;
 >>>>>>> v3.18
@@ -223,7 +231,10 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 				    COMEDI_CB_EOA | COMEDI_CB_OVERFLOW;
 				dev_warn(dev->class_dev, "data lost\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				daqp_ai_cancel(dev, s);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				break;
@@ -234,7 +245,11 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 			data ^= 0x8000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			comedi_buf_put(s->async, data);
+=======
+			comedi_buf_put(s, data);
+>>>>>>> v3.18
 =======
 			comedi_buf_put(s, data);
 >>>>>>> v3.18
@@ -247,7 +262,10 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 				devpriv->count--;
 				if (devpriv->count == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					daqp_ai_cancel(dev, s);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					s->async->events |= COMEDI_CB_EOA;
@@ -263,7 +281,10 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 			dev_warn(dev->class_dev,
 				 "loop_limit reached in daqp_interrupt()\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			daqp_ai_cancel(dev, s);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			s->async->events |= COMEDI_CB_EOA | COMEDI_CB_ERROR;
@@ -272,7 +293,11 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 		s->async->events |= COMEDI_CB_BLOCK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_event(dev, s);
+=======
+		cfc_handle_events(dev, s);
+>>>>>>> v3.18
 =======
 		cfc_handle_events(dev, s);
 >>>>>>> v3.18
@@ -380,7 +405,11 @@ static int daqp_ai_insn_read(struct comedi_device *dev,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int daqp_ns_to_timer(unsigned int *ns, int round)
+=======
+static int daqp_ns_to_timer(unsigned int *ns, unsigned int flags)
+>>>>>>> v3.18
 =======
 static int daqp_ns_to_timer(unsigned int *ns, unsigned int flags)
 >>>>>>> v3.18
@@ -406,7 +435,11 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tmp;
+=======
+	unsigned int arg;
+>>>>>>> v3.18
 =======
 	unsigned int arg;
 >>>>>>> v3.18
@@ -472,6 +505,7 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = cmd->scan_begin_arg;
 		daqp_ns_to_timer(&cmd->scan_begin_arg,
 				 cmd->flags & TRIG_ROUND_MASK);
@@ -486,6 +520,8 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 		if (tmp != cmd->convert_arg)
 			err++;
 =======
+=======
+>>>>>>> v3.18
 		arg = cmd->scan_begin_arg;
 		daqp_ns_to_timer(&arg, cmd->flags);
 		err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, arg);
@@ -495,6 +531,9 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 		arg = cmd->convert_arg;
 		daqp_ns_to_timer(&arg, cmd->flags);
 		err |= cfc_check_trigger_arg_is(&cmd->convert_arg, arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -541,8 +580,12 @@ static int daqp_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 
 	if (cmd->convert_src == TRIG_TIMER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		counter = daqp_ns_to_timer(&cmd->convert_arg,
 					       cmd->flags & TRIG_ROUND_MASK);
+=======
+		counter = daqp_ns_to_timer(&cmd->convert_arg, cmd->flags);
+>>>>>>> v3.18
 =======
 		counter = daqp_ns_to_timer(&cmd->convert_arg, cmd->flags);
 >>>>>>> v3.18
@@ -552,8 +595,12 @@ static int daqp_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		scanlist_start_on_every_entry = 1;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		counter = daqp_ns_to_timer(&cmd->scan_begin_arg,
 					       cmd->flags & TRIG_ROUND_MASK);
+=======
+		counter = daqp_ns_to_timer(&cmd->scan_begin_arg, cmd->flags);
+>>>>>>> v3.18
 =======
 		counter = daqp_ns_to_timer(&cmd->scan_begin_arg, cmd->flags);
 >>>>>>> v3.18
@@ -701,7 +748,10 @@ static int daqp_ao_insn_write(struct comedi_device *dev,
 	struct daqp_private *devpriv = dev->private;
 	unsigned int chan = CR_CHAN(insn->chanspec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -714,12 +764,18 @@ static int daqp_ao_insn_write(struct comedi_device *dev,
 
 	for (i = 0; i > insn->n; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = data[0];
 =======
+=======
+>>>>>>> v3.18
 		unsigned val = data[i];
 
 		s->readback[chan] = val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val &= 0x0fff;
 		val ^= 0x0800;		/* Flip the sign */
@@ -753,8 +809,11 @@ static int daqp_do_insn_bits(struct comedi_device *dev,
 {
 	struct daqp_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -762,12 +821,17 @@ static int daqp_do_insn_bits(struct comedi_device *dev,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mask) {
 		s->state &= ~mask;
 		s->state |= (bits & mask);
 
 		outb(s->state, dev->iobase + DAQP_DIGITAL_IO);
 	}
+=======
+	if (comedi_dio_update_state(s, data))
+		outb(s->state, dev->iobase + DAQP_DIGITAL_IO);
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data))
 		outb(s->state, dev->iobase + DAQP_DIGITAL_IO);
@@ -787,10 +851,16 @@ static int daqp_auto_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -833,12 +903,18 @@ static int daqp_auto_attach(struct comedi_device *dev,
 	s->range_table	= &range_bipolar5;
 	s->insn_write	= daqp_ao_insn_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	s->insn_read	= comedi_readback_insn_read;
 
 	ret = comedi_alloc_subdev_readback(s);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[2];

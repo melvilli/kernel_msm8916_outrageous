@@ -20,6 +20,10 @@
 #include <linux/rio_ids.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -297,6 +301,7 @@ exit_es:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tsi57x_switch_init(struct rio_dev *rdev, int do_enum)
 {
 	pr_debug("RIO: %s for %s\n", __func__, rio_name(rdev));
@@ -310,6 +315,8 @@ static int tsi57x_switch_init(struct rio_dev *rdev, int do_enum)
 
 	if (do_enum) {
 =======
+=======
+>>>>>>> v3.18
 static struct rio_switch_ops tsi57x_switch_ops = {
 	.owner = THIS_MODULE,
 	.add_entry = tsi57x_route_add_entry,
@@ -334,12 +341,16 @@ static int tsi57x_probe(struct rio_dev *rdev, const struct rio_device_id *id)
 	rdev->rswitch->ops = &tsi57x_switch_ops;
 
 	if (rdev->do_enum) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Ensure that default routing is disabled on startup */
 		rio_write_config_32(rdev, RIO_STD_RTE_DEFAULT_PORT,
 				    RIO_INVALID_ROUTE);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -349,6 +360,8 @@ DECLARE_RIO_SWITCH_INIT(RIO_VID_TUNDRA, RIO_DID_TSI574, tsi57x_switch_init);
 DECLARE_RIO_SWITCH_INIT(RIO_VID_TUNDRA, RIO_DID_TSI577, tsi57x_switch_init);
 DECLARE_RIO_SWITCH_INIT(RIO_VID_TUNDRA, RIO_DID_TSI578, tsi57x_switch_init);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&rdev->rswitch->lock);
 	return 0;
 }
@@ -396,4 +409,7 @@ module_exit(tsi57x_exit);
 MODULE_DESCRIPTION("IDT Tsi57x Serial RapidIO switch family driver");
 MODULE_AUTHOR("Integrated Device Technology, Inc.");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

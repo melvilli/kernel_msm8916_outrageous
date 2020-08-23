@@ -78,7 +78,10 @@ struct smiapp_platform_data {
 
 	int (*set_xclk)(struct v4l2_subdev *sd, int hz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *ext_clk_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int xshutdown;			/* gpio or SMIAPP_NO_XSHUTDOWN */

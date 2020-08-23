@@ -15,7 +15,11 @@ interrupt multiplexor (one node for all groups). A group in the
 interrupt controller shares config/control registers with other groups.
 For example, a 32-bit interrupt enable/disable config register can
 <<<<<<< HEAD
+<<<<<<< HEAD
 accommodate upto 4 interrupt groups.
+=======
+accommodate up to 4 interrupt groups.
+>>>>>>> v3.18
 =======
 accommodate up to 4 interrupt groups.
 >>>>>>> v3.18

@@ -36,6 +36,10 @@
 #include <linux/export.h>
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "drm_legacy.h"
+>>>>>>> v3.18
 =======
 #include "drm_legacy.h"
 >>>>>>> v3.18
@@ -49,11 +53,14 @@
  * Allocate and initialize a drm_device_dma structure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_dma_setup(struct drm_device *dev)
 {
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 int drm_legacy_dma_setup(struct drm_device *dev)
 {
 	int i;
@@ -66,6 +73,9 @@ int drm_legacy_dma_setup(struct drm_device *dev)
 	dev->buf_use = 0;
 	atomic_set(&dev->buf_alloc, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->dma = kzalloc(sizeof(*dev->dma), GFP_KERNEL);
 	if (!dev->dma)
@@ -86,7 +96,11 @@ int drm_legacy_dma_setup(struct drm_device *dev)
  * finally the drm_device::dma structure itself.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_dma_takedown(struct drm_device *dev)
+=======
+void drm_legacy_dma_takedown(struct drm_device *dev)
+>>>>>>> v3.18
 =======
 void drm_legacy_dma_takedown(struct drm_device *dev)
 >>>>>>> v3.18
@@ -95,12 +109,18 @@ void drm_legacy_dma_takedown(struct drm_device *dev)
 	int i, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!drm_core_check_feature(dev, DRIVER_HAVE_DMA) ||
 	    drm_core_check_feature(dev, DRIVER_MODESET)) {
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dma)
 		return;
@@ -143,7 +163,11 @@ void drm_legacy_dma_takedown(struct drm_device *dev)
  * Resets the fields of \p buf.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_free_buffer(struct drm_device *dev, struct drm_buf * buf)
+=======
+void drm_legacy_free_buffer(struct drm_device *dev, struct drm_buf * buf)
+>>>>>>> v3.18
 =======
 void drm_legacy_free_buffer(struct drm_device *dev, struct drm_buf * buf)
 >>>>>>> v3.18
@@ -165,8 +189,13 @@ void drm_legacy_free_buffer(struct drm_device *dev, struct drm_buf * buf)
  * Frees each buffer associated with \p file_priv not already on the hardware.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_core_reclaim_buffers(struct drm_device *dev,
 			      struct drm_file *file_priv)
+=======
+void drm_legacy_reclaim_buffers(struct drm_device *dev,
+				struct drm_file *file_priv)
+>>>>>>> v3.18
 =======
 void drm_legacy_reclaim_buffers(struct drm_device *dev,
 				struct drm_file *file_priv)
@@ -182,7 +211,11 @@ void drm_legacy_reclaim_buffers(struct drm_device *dev,
 			switch (dma->buflist[i]->list) {
 			case DRM_LIST_NONE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				drm_free_buffer(dev, dma->buflist[i]);
+=======
+				drm_legacy_free_buffer(dev, dma->buflist[i]);
+>>>>>>> v3.18
 =======
 				drm_legacy_free_buffer(dev, dma->buflist[i]);
 >>>>>>> v3.18
@@ -198,7 +231,10 @@ void drm_legacy_reclaim_buffers(struct drm_device *dev,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(drm_core_reclaim_buffers);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

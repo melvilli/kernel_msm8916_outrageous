@@ -1,6 +1,10 @@
 /**********************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 * 			LEAKYBUCKET.C
+=======
+*			LEAKYBUCKET.C
+>>>>>>> v3.18
 =======
 *			LEAKYBUCKET.C
 >>>>>>> v3.18
@@ -8,6 +12,7 @@
 ***********************************************************************/
 #include "headers.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*********************************************************************
 * Function    - UpdateTokenCount()
@@ -32,6 +37,8 @@ static VOID UpdateTokenCount(register struct bcm_mini_adapter *Adapter)
 	{
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, TOKEN_COUNTS, 
 =======
+=======
+>>>>>>> v3.18
 /**
  * UpdateTokenCount() - Calculates the token count for each channel
  * and updates the same in Adapter structure
@@ -50,12 +57,16 @@ static VOID UpdateTokenCount(register struct bcm_mini_adapter *Adapter)
 			"=====>\n");
 	if (NULL == Adapter) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, TOKEN_COUNTS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				DBG_LVL_ALL, "Adapter found NULL!\n");
 		return;
 	}
 
 	do_gettimeofday(&tv);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for(i = 0; i < NO_OF_QUEUES; i++)
 	{
@@ -80,6 +91,8 @@ static VOID UpdateTokenCount(register struct bcm_mini_adapter *Adapter)
 					Adapter->PackInfo[i].uiCurrentTokenCount =
 						Adapter->PackInfo[i].uiMaxBucketSize;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < NO_OF_QUEUES; i++) {
 		curr_pi = &Adapter->PackInfo[i];
 
@@ -99,11 +112,15 @@ static VOID UpdateTokenCount(register struct bcm_mini_adapter *Adapter)
 				    curr_pi->uiMaxBucketSize) {
 					curr_pi->uiCurrentTokenCount =
 						curr_pi->uiMaxBucketSize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter,DBG_TYPE_TX, TOKEN_COUNTS, DBG_LVL_ALL, "<=====\n");
 	return;
@@ -155,6 +172,8 @@ static ULONG GetSFTokenCount(struct bcm_mini_adapter *Adapter, struct bcm_packet
 	}
 	BCM_DEBUG_PRINT(Adapter,DBG_TYPE_TX, TOKEN_COUNTS, DBG_LVL_ALL, "IsPacketAllowedForFlow <===");
 =======
+=======
+>>>>>>> v3.18
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, TOKEN_COUNTS, DBG_LVL_ALL,
 			"<=====\n");
 }
@@ -201,6 +220,9 @@ static ULONG GetSFTokenCount(struct bcm_mini_adapter *Adapter, struct bcm_packet
 	}
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, TOKEN_COUNTS, DBG_LVL_ALL,
 			"IsPacketAllowedForFlow <===");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -211,6 +233,7 @@ This function despatches packet from the specified queue.
 @return Zero(success) or Negative value(failure)
 */
 static INT SendPacketFromQueue(struct bcm_mini_adapter *Adapter,/**<Logical Adapter*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 			struct bcm_packet_info *psSF, /**<Queue identifier*/
 			       struct sk_buff*  Packet)	/**<Pointer to the packet to be sent*/
@@ -359,6 +382,8 @@ static VOID CheckAndSendPacketFromIndex(struct bcm_mini_adapter *Adapter, struct
 			}
 	   	}
 =======
+=======
+>>>>>>> v3.18
 			       struct bcm_packet_info *psSF, /**<Queue identifier*/
 			       struct sk_buff *Packet)	/**<Pointer to the packet to be sent*/
 {
@@ -522,11 +547,15 @@ static VOID CheckAndSendPacketFromIndex(struct bcm_mini_adapter *Adapter,
 		get_data_packet(Adapter, psSF);
 	} else {
 		send_control_packet(Adapter, psSF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*******************************************************************
 * Function    - transmit_packets()
@@ -564,6 +593,8 @@ VOID transmit_packets(struct bcm_mini_adapter *Adapter)
 
     BCM_DEBUG_PRINT (Adapter, DBG_TYPE_TX, TX_PACKETS, DBG_LVL_ALL, "\nPruneQueueAllSF ====>\n");
 =======
+=======
+>>>>>>> v3.18
 /**
  * transmit_packets() - This function transmits the packets from
  * different queues, if free descriptors are available on target.
@@ -599,12 +630,16 @@ VOID transmit_packets(struct bcm_mini_adapter *Adapter)
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, TX_PACKETS, DBG_LVL_ALL,
 			"\nPruneQueueAllSF ====>\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	PruneQueueAllSF(Adapter);
 
 	uiPrevTotalCount = atomic_read(&Adapter->TotalPacketCount);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for(iIndex=HiPriority;iIndex>=0;iIndex--)
 	{
@@ -618,6 +653,8 @@ VOID transmit_packets(struct bcm_mini_adapter *Adapter)
 			BCM_DEBUG_PRINT(Adapter,DBG_TYPE_TX, TX_PACKETS, DBG_LVL_ALL, "Calling CheckAndSendPacketFromIndex..");
 			CheckAndSendPacketFromIndex(Adapter, &Adapter->PackInfo[iIndex]);
 =======
+=======
+>>>>>>> v3.18
 	for (iIndex = HiPriority; iIndex >= 0; iIndex--) {
 		if (!uiPrevTotalCount || (TRUE == Adapter->device_removed))
 				break;
@@ -630,11 +667,15 @@ VOID transmit_packets(struct bcm_mini_adapter *Adapter)
 					"Calling CheckAndSendPacketFromIndex..");
 			CheckAndSendPacketFromIndex(Adapter,
 						    &Adapter->PackInfo[iIndex]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			uiPrevTotalCount--;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while(uiPrevTotalCount > 0 && !Adapter->device_removed)
 	{
@@ -669,6 +710,8 @@ VOID transmit_packets(struct bcm_mini_adapter *Adapter)
 	Adapter->txtransmit_running = 0;
 	BCM_DEBUG_PRINT(Adapter,DBG_TYPE_TX, TX_PACKETS, DBG_LVL_ALL, "<======");
 =======
+=======
+>>>>>>> v3.18
 	while (uiPrevTotalCount > 0 && !Adapter->device_removed) {
 		exit_flag = TRUE;
 		/* second iteration to parse non-pending queues */
@@ -702,5 +745,8 @@ VOID transmit_packets(struct bcm_mini_adapter *Adapter)
 	Adapter->txtransmit_running = 0;
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, TX_PACKETS, DBG_LVL_ALL,
 			"<======");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

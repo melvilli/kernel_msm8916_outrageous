@@ -76,6 +76,7 @@ static void configfs_d_iput(struct dentry * dentry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * We _must_ delete our dentries on last dput, as the chain-to-parent
  * behavior is required to clear the parents of default_groups.
@@ -89,6 +90,11 @@ const struct dentry_operations configfs_dentry_ops = {
 	.d_iput		= configfs_d_iput,
 	/* simple_delete_dentry() isn't exported */
 	.d_delete	= configfs_d_delete,
+=======
+const struct dentry_operations configfs_dentry_ops = {
+	.d_iput		= configfs_d_iput,
+	.d_delete	= always_delete_dentry,
+>>>>>>> v3.18
 =======
 const struct dentry_operations configfs_dentry_ops = {
 	.d_iput		= configfs_d_iput,
@@ -403,7 +409,11 @@ static void remove_dir(struct dentry * d)
 		simple_rmdir(parent->d_inode,d);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug(" o %s removing done (%d)\n",d->d_name.name, d->d_count);
+=======
+	pr_debug(" o %s removing done (%d)\n",d->d_name.name, d_count(d));
+>>>>>>> v3.18
 =======
 	pr_debug(" o %s removing done (%d)\n",d->d_name.name, d_count(d));
 >>>>>>> v3.18
@@ -683,7 +693,10 @@ static int create_default_group(struct config_group *parent_group,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qstr name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct configfs_dirent *sd;
@@ -693,12 +706,18 @@ static int create_default_group(struct config_group *parent_group,
 	if (!group->cg_item.ci_name)
 		group->cg_item.ci_name = group->cg_item.ci_namebuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name.name = group->cg_item.ci_name;
 	name.len = strlen(name.name);
 	name.hash = full_name_hash(name.name, name.len);
 
 	ret = -ENOMEM;
 	child = d_alloc(parent, &name);
+=======
+
+	ret = -ENOMEM;
+	child = d_alloc_name(parent, group->cg_item.ci_name);
+>>>>>>> v3.18
 =======
 
 	ret = -ENOMEM;
@@ -974,9 +993,15 @@ static void client_drop_item(struct config_item *parent_item,
 static void configfs_dump_one(struct configfs_dirent *sd, int level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "%*s\"%s\":\n", level, " ", configfs_get_name(sd));
 
 #define type_print(_type) if (sd->s_type & _type) printk(KERN_INFO "%*s %s\n", level, " ", #_type);
+=======
+	pr_info("%*s\"%s\":\n", level, " ", configfs_get_name(sd));
+
+#define type_print(_type) if (sd->s_type & _type) pr_info("%*s %s\n", level, " ", #_type);
+>>>>>>> v3.18
 =======
 	pr_info("%*s\"%s\":\n", level, " ", configfs_get_name(sd));
 
@@ -1570,6 +1595,7 @@ static inline unsigned char dt_type(struct configfs_dirent *sd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int configfs_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
 	struct dentry *dentry = filp->f_path.dentry;
@@ -1649,6 +1675,8 @@ static int configfs_readdir(struct file * filp, void * dirent, filldir_t filldir
 				filp->f_pos++;
 			}
 =======
+=======
+>>>>>>> v3.18
 static int configfs_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct dentry *dentry = file->f_path.dentry;
@@ -1709,6 +1737,9 @@ static int configfs_readdir(struct file *file, struct dir_context *ctx)
 		spin_unlock(&configfs_dirent_lock);
 		p = q;
 		ctx->pos++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1762,7 +1793,11 @@ const struct file_operations configfs_dir_operations = {
 	.llseek		= configfs_dir_lseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= configfs_readdir,
+=======
+	.iterate	= configfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= configfs_readdir,
 >>>>>>> v3.18
@@ -1773,7 +1808,10 @@ int configfs_register_subsystem(struct configfs_subsystem *subsys)
 	int err;
 	struct config_group *group = &subsys->su_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qstr name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dentry *dentry;
@@ -1793,12 +1831,17 @@ int configfs_register_subsystem(struct configfs_subsystem *subsys)
 	mutex_lock_nested(&root->d_inode->i_mutex, I_MUTEX_PARENT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name.name = group->cg_item.ci_name;
 	name.len = strlen(name.name);
 	name.hash = full_name_hash(name.name, name.len);
 
 	err = -ENOMEM;
 	dentry = d_alloc(root, &name);
+=======
+	err = -ENOMEM;
+	dentry = d_alloc_name(root, group->cg_item.ci_name);
+>>>>>>> v3.18
 =======
 	err = -ENOMEM;
 	dentry = d_alloc_name(root, group->cg_item.ci_name);
@@ -1837,7 +1880,11 @@ void configfs_unregister_subsystem(struct configfs_subsystem *subsys)
 
 	if (dentry->d_parent != root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "configfs: Tried to unregister non-subsystem!\n");
+=======
+		pr_err("Tried to unregister non-subsystem!\n");
+>>>>>>> v3.18
 =======
 		pr_err("Tried to unregister non-subsystem!\n");
 >>>>>>> v3.18
@@ -1851,7 +1898,11 @@ void configfs_unregister_subsystem(struct configfs_subsystem *subsys)
 	spin_lock(&configfs_dirent_lock);
 	if (configfs_detach_prep(dentry, NULL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "configfs: Tried to unregister non-empty subsystem!\n");
+=======
+		pr_err("Tried to unregister non-empty subsystem!\n");
+>>>>>>> v3.18
 =======
 		pr_err("Tried to unregister non-empty subsystem!\n");
 >>>>>>> v3.18

@@ -83,11 +83,17 @@ int ft_queue_data_in(struct se_cmd *se_cmd)
 	if (cmd->aborted)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (se_cmd->scsi_status == SAM_STAT_TASK_SET_FULL)
 		goto queue_status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ep = fc_seq_exch(cmd->seq);
 	lport = ep->lp;
@@ -186,8 +192,12 @@ int ft_queue_data_in(struct se_cmd *se_cmd)
 		error = lport->tt.seq_send(lport, seq, fp);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* XXX For now, initiator will retry */
 			pr_err_ratelimited("%s: Failed to send frame %p, "
+=======
+			pr_info_ratelimited("%s: Failed to send frame %p, "
+>>>>>>> v3.18
 =======
 			pr_info_ratelimited("%s: Failed to send frame %p, "
 >>>>>>> v3.18
@@ -196,9 +206,12 @@ int ft_queue_data_in(struct se_cmd *se_cmd)
 						__func__, fp, ep->xid,
 						remaining, lport->lso_max);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * Go ahead and set TASK_SET_FULL status ignoring the
 			 * rest of the DataIN, and immediately attempt to
@@ -211,6 +224,9 @@ int ft_queue_data_in(struct se_cmd *se_cmd)
 		}
 	}
 queue_status:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ft_queue_status(se_cmd);
 }
@@ -373,7 +389,11 @@ void ft_invl_hw_context(struct ft_cmd *cmd)
 		if (ep) {
 			lport = ep->lp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (lport && (ep->xid <= lport->lro_xid)) {
+=======
+			if (lport && (ep->xid <= lport->lro_xid))
+>>>>>>> v3.18
 =======
 			if (lport && (ep->xid <= lport->lro_xid))
 >>>>>>> v3.18
@@ -392,7 +412,10 @@ void ft_invl_hw_context(struct ft_cmd *cmd)
 				 */
 				cmd->was_ddp_setup = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}

@@ -140,9 +140,14 @@ static long watchdog_ioctl(struct file *file, unsigned int cmd,
 			   unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int new_margin;
 	int __user *int_arg = (int __user *)arg;
 	int ret = -ENOTTY;
+=======
+	int __user *int_arg = (int __user *)arg;
+	int new_margin, ret = -ENOTTY;
+>>>>>>> v3.18
 =======
 	int __user *int_arg = (int __user *)arg;
 	int new_margin, ret = -ENOTTY;
@@ -230,7 +235,10 @@ MODULE_AUTHOR("Phil Blundell <pb@nexus.co.uk>");
 MODULE_DESCRIPTION("Footbridge watchdog driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

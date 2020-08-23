@@ -115,7 +115,11 @@ int ocfs2_read_blocks_sync(struct ocfs2_super *osb, u64 block,
 			bhs[i] = sb_getblk(osb->sb, block++);
 			if (bhs[i] == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = -EIO;
+=======
+				status = -ENOMEM;
+>>>>>>> v3.18
 =======
 				status = -ENOMEM;
 >>>>>>> v3.18
@@ -218,7 +222,11 @@ int ocfs2_read_blocks(struct ocfs2_caching_info *ci, u64 block, int nr,
 			if (bhs[i] == NULL) {
 				ocfs2_metadata_cache_io_unlock(ci);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = -EIO;
+=======
+				status = -ENOMEM;
+>>>>>>> v3.18
 =======
 				status = -ENOMEM;
 >>>>>>> v3.18

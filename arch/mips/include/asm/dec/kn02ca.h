@@ -69,7 +69,11 @@
 
 #define KN03CA_IO_SSR_FLOPPY_RST (1<<7)		/* ~FDC (82077) reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KN03CA_IO_SSR_VIDEO_RST (1<<6)		/* ~framebuffer reset */
+=======
+#define KN03CA_IO_SSR_VIDEO_RST	(1<<6)		/* ~framebuffer reset */
+>>>>>>> v3.18
 =======
 #define KN03CA_IO_SSR_VIDEO_RST	(1<<6)		/* ~framebuffer reset */
 >>>>>>> v3.18

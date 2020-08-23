@@ -15,12 +15,18 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/edma.h>
 #include <linux/i2c.h>
 #include <linux/of_platform.h>
 #include <linux/clk.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sound/core.h>
 #include <sound/pcm.h>
@@ -29,6 +35,7 @@
 #include <asm/dma.h>
 #include <asm/mach-types.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "davinci-pcm.h"
 #include "davinci-i2s.h"
@@ -74,6 +81,8 @@ static int evm_hw_params(struct snd_pcm_substream *substream,
 	if (ret < 0)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/edma.h>
 
 #include "davinci-pcm.h"
@@ -118,6 +127,9 @@ static int evm_hw_params(struct snd_pcm_substream *substream,
 	int ret = 0;
 	unsigned sysclk = ((struct snd_soc_card_drvdata_davinci *)
 			   snd_soc_card_get_drvdata(soc_card))->sysclk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set the codec system clock */
@@ -133,6 +145,7 @@ static int evm_hw_params(struct snd_pcm_substream *substream,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int evm_spdif_hw_params(struct snd_pcm_substream *substream,
 				struct snd_pcm_hw_params *params)
@@ -153,12 +166,17 @@ static struct snd_soc_ops evm_spdif_ops = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_ops evm_ops = {
 	.startup = evm_startup,
 	.shutdown = evm_shutdown,
 	.hw_params = evm_hw_params,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* davinci-evm machine dapm widgets */
 static const struct snd_soc_dapm_widget aic3x_dapm_widgets[] = {
@@ -194,6 +212,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 static int evm_aic3x_init(struct snd_soc_pcm_runtime *rtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
@@ -215,6 +234,8 @@ static int evm_aic3x_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_enable_pin(dapm, "Mic Jack");
 	snd_soc_dapm_enable_pin(dapm, "Line In");
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_card *card = rtd->card;
 	struct snd_soc_codec *codec = rtd->codec;
 	struct device_node *np = card->dev->of_node;
@@ -238,6 +259,9 @@ static int evm_aic3x_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_nc_pin(&codec->dapm, "MONO_LOUT");
 	snd_soc_dapm_nc_pin(&codec->dapm, "HPLCOM");
 	snd_soc_dapm_nc_pin(&codec->dapm, "HPRCOM");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -254,6 +278,11 @@ static struct snd_soc_dai_link dm6446_evm_dai = {
 	.init = evm_aic3x_init,
 	.ops = &evm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
+		   SND_SOC_DAIFMT_IB_NF,
+>>>>>>> v3.18
 =======
 	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 		   SND_SOC_DAIFMT_IB_NF,
@@ -270,6 +299,11 @@ static struct snd_soc_dai_link dm355_evm_dai = {
 	.init = evm_aic3x_init,
 	.ops = &evm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
+		   SND_SOC_DAIFMT_IB_NF,
+>>>>>>> v3.18
 =======
 	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 		   SND_SOC_DAIFMT_IB_NF,
@@ -283,17 +317,23 @@ static struct snd_soc_dai_link dm365_evm_dai = {
 	.cpu_dai_name = "davinci-mcbsp",
 	.codec_dai_name = "tlv320aic3x-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init = evm_aic3x_init,
 	.codec_name = "tlv320aic3x-codec.1-0018",
 	.ops = &evm_ops,
 	.platform_name = "davinci-mcbsp",
 =======
+=======
+>>>>>>> v3.18
 	.codec_name = "tlv320aic3x-codec.1-0018",
 	.platform_name = "davinci-mcbsp",
 	.init = evm_aic3x_init,
 	.ops = &evm_ops,
 	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 		   SND_SOC_DAIFMT_IB_NF,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #elif defined(CONFIG_SND_DM365_VOICE_CODEC)
 	.name = "Voice Codec - CQ93VC",
@@ -316,6 +356,11 @@ static struct snd_soc_dai_link dm6467_evm_dai[] = {
 		.init = evm_aic3x_init,
 		.ops = &evm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
+			   SND_SOC_DAIFMT_IB_NF,
+>>>>>>> v3.18
 =======
 		.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 			   SND_SOC_DAIFMT_IB_NF,
@@ -329,7 +374,12 @@ static struct snd_soc_dai_link dm6467_evm_dai[] = {
 		.codec_name = "spdif_dit",
 		.platform_name = "davinci-mcasp.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ops = &evm_spdif_ops,
+=======
+		.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
+			   SND_SOC_DAIFMT_IB_NF,
+>>>>>>> v3.18
 =======
 		.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 			   SND_SOC_DAIFMT_IB_NF,
@@ -347,6 +397,11 @@ static struct snd_soc_dai_link da830_evm_dai = {
 	.init = evm_aic3x_init,
 	.ops = &evm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
+		   SND_SOC_DAIFMT_IB_NF,
+>>>>>>> v3.18
 =======
 	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 		   SND_SOC_DAIFMT_IB_NF,
@@ -363,10 +418,13 @@ static struct snd_soc_dai_link da850_evm_dai = {
 	.init = evm_aic3x_init,
 	.ops = &evm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* davinci dm6446 evm audio machine driver */
 =======
+=======
+>>>>>>> v3.18
 	.dai_fmt = SND_SOC_DAIFMT_DSP_B | SND_SOC_DAIFMT_CBM_CFM |
 		   SND_SOC_DAIFMT_IB_NF,
 };
@@ -381,6 +439,9 @@ static struct snd_soc_card_drvdata_davinci dm6446_snd_soc_card_drvdata = {
 	.sysclk = 12288000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_card dm6446_snd_soc_card_evm = {
 	.name = "DaVinci DM6446 EVM",
@@ -388,10 +449,13 @@ static struct snd_soc_card dm6446_snd_soc_card_evm = {
 	.dai_link = &dm6446_evm_dai,
 	.num_links = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* davinci dm355 evm audio machine driver */
 =======
+=======
+>>>>>>> v3.18
 	.drvdata = &dm6446_snd_soc_card_drvdata,
 };
 
@@ -401,6 +465,9 @@ static struct snd_soc_card_drvdata_davinci dm355_snd_soc_card_drvdata = {
 	.sysclk = 27000000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_card dm355_snd_soc_card_evm = {
 	.name = "DaVinci DM355 EVM",
@@ -408,10 +475,13 @@ static struct snd_soc_card dm355_snd_soc_card_evm = {
 	.dai_link = &dm355_evm_dai,
 	.num_links = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* davinci dm365 evm audio machine driver */
 =======
+=======
+>>>>>>> v3.18
 	.drvdata = &dm355_snd_soc_card_drvdata,
 };
 
@@ -420,6 +490,9 @@ static struct snd_soc_card_drvdata_davinci dm365_snd_soc_card_drvdata = {
 	.sysclk = 27000000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_card dm365_snd_soc_card_evm = {
 	.name = "DaVinci DM365 EVM",
@@ -427,10 +500,13 @@ static struct snd_soc_card dm365_snd_soc_card_evm = {
 	.dai_link = &dm365_evm_dai,
 	.num_links = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* davinci dm6467 evm audio machine driver */
 =======
+=======
+>>>>>>> v3.18
 	.drvdata = &dm365_snd_soc_card_drvdata,
 };
 
@@ -439,6 +515,9 @@ static struct snd_soc_card_drvdata_davinci dm6467_snd_soc_card_drvdata = {
 	.sysclk = 27000000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_card dm6467_snd_soc_card_evm = {
 	.name = "DaVinci DM6467 EVM",
@@ -446,12 +525,18 @@ static struct snd_soc_card dm6467_snd_soc_card_evm = {
 	.dai_link = dm6467_evm_dai,
 	.num_links = ARRAY_SIZE(dm6467_evm_dai),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.drvdata = &dm6467_snd_soc_card_drvdata,
 };
 
 static struct snd_soc_card_drvdata_davinci da830_snd_soc_card_drvdata = {
 	.sysclk = 24576000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -461,12 +546,18 @@ static struct snd_soc_card da830_snd_soc_card = {
 	.dai_link = &da830_evm_dai,
 	.num_links = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.drvdata = &da830_snd_soc_card_drvdata,
 };
 
 static struct snd_soc_card_drvdata_davinci da850_snd_soc_card_drvdata = {
 	.sysclk = 24576000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -476,9 +567,12 @@ static struct snd_soc_card da850_snd_soc_card = {
 	.dai_link = &da850_evm_dai,
 	.num_links = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.drvdata = &da850_snd_soc_card_drvdata,
 };
 
@@ -603,6 +697,9 @@ static struct platform_driver davinci_evm_driver = {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_device *evm_snd_device;
 
@@ -613,7 +710,10 @@ static int __init evm_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If dtb is there, the devices will be created dynamically.
 	 * Only register platfrom driver structure.
@@ -623,6 +723,9 @@ static int __init evm_init(void)
 		return platform_driver_register(&davinci_evm_driver);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (machine_is_davinci_evm()) {
 		evm_snd_dev_data = &dm6446_snd_soc_card_evm;
@@ -660,7 +763,10 @@ static int __init evm_init(void)
 static void __exit evm_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 	if (of_have_populated_dt()) {
 		platform_driver_unregister(&davinci_evm_driver);
@@ -668,6 +774,9 @@ static void __exit evm_exit(void)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_unregister(evm_snd_device);
 }

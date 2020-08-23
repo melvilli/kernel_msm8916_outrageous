@@ -10,6 +10,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef _RING_HW_H_
+#define _RING_HW_H_
+
+>>>>>>> v3.18
 =======
 #ifndef _RING_HW_H_
 #define _RING_HW_H_
@@ -27,6 +33,11 @@ struct iio_hw_buffer {
 
 #define iio_to_hw_buf(r) container_of(r, struct iio_hw_buffer, buf)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /* _RING_HW_H_ */
+>>>>>>> v3.18
 =======
 
 #endif /* _RING_HW_H_ */

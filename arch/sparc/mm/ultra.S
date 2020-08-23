@@ -154,15 +154,21 @@ __spitfire_flush_tlb_mm_slow:
 __flush_icache_page:	/* %o0 = phys_page */
 	srlx		%o0, PAGE_SHIFT, %o0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%uhi(PAGE_OFFSET), %g1
 	sllx		%o0, PAGE_SHIFT, %o0
 	sethi		%hi(PAGE_SIZE), %g2
 	sllx		%g1, 32, %g1
 =======
+=======
+>>>>>>> v3.18
 	sethi		%hi(PAGE_OFFSET), %g1
 	sllx		%o0, PAGE_SHIFT, %o0
 	sethi		%hi(PAGE_SIZE), %g2
 	ldx		[%g1 + %lo(PAGE_OFFSET)], %g1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add		%o0, %g1, %o0
 1:	subcc		%g2, 32, %g2
@@ -186,8 +192,13 @@ __flush_icache_page:	/* %o0 = phys_page */
 	.globl		__flush_dcache_page
 __flush_dcache_page:	/* %o0=kaddr, %o1=flush_icache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%uhi(PAGE_OFFSET), %g1
 	sllx		%g1, 32, %g1
+=======
+	sethi		%hi(PAGE_OFFSET), %g1
+	ldx		[%g1 + %lo(PAGE_OFFSET)], %g1
+>>>>>>> v3.18
 =======
 	sethi		%hi(PAGE_OFFSET), %g1
 	ldx		[%g1 + %lo(PAGE_OFFSET)], %g1
@@ -300,8 +311,13 @@ __cheetah_flush_tlb_pending:	/* 27 insns */
 #ifdef DCACHE_ALIASING_POSSIBLE
 __cheetah_flush_dcache_page: /* 11 insns */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%uhi(PAGE_OFFSET), %g1
 	sllx		%g1, 32, %g1
+=======
+	sethi		%hi(PAGE_OFFSET), %g1
+	ldx		[%g1 + %lo(PAGE_OFFSET)], %g1
+>>>>>>> v3.18
 =======
 	sethi		%hi(PAGE_OFFSET), %g1
 	ldx		[%g1 + %lo(PAGE_OFFSET)], %g1

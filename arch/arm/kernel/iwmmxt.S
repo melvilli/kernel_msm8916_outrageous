@@ -19,6 +19,7 @@
 #include <asm/thread_info.h>
 #include <asm/asm-offsets.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if defined(CONFIG_CPU_PJ4)
 #define PJ4(code...)		code
@@ -27,6 +28,8 @@
 #define PJ4(code...)
 #define XSC(code...)		code
 =======
+=======
+>>>>>>> v3.18
 #include <asm/assembler.h>
 
 #if defined(CONFIG_CPU_PJ4) || defined(CONFIG_CPU_PJ4B)
@@ -39,6 +42,9 @@
 #define XSC(code...)		code
 #else
 #error "Unsupported iWMMXt architecture"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -81,6 +87,10 @@
 
 ENTRY(iwmmxt_task_enable)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	inc_preempt_count r10, r3
+>>>>>>> v3.18
 =======
 	inc_preempt_count r10, r3
 >>>>>>> v3.18
@@ -91,7 +101,11 @@ ENTRY(iwmmxt_task_enable)
 	XSC(tst	r2, #0x3)
 	PJ4(tst	r2, #0xf)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movne	pc, lr				@ if so no business here
+=======
+	bne	4f				@ if so no business here
+>>>>>>> v3.18
 =======
 	bne	4f				@ if so no business here
 >>>>>>> v3.18
@@ -112,6 +126,7 @@ ENTRY(iwmmxt_task_enable)
 	mrc	p15, 0, r2, c2, c0, 0
 	mov	r2, r2				@ cpwait
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	teq	r1, #0				@ test for last ownership
 	mov	lr, r9				@ normal exit from exception
@@ -120,6 +135,8 @@ ENTRY(iwmmxt_task_enable)
 concan_save:
 
 =======
+=======
+>>>>>>> v3.18
 	bl	concan_save
 
 #ifdef CONFIG_PREEMPT_COUNT
@@ -133,6 +150,9 @@ concan_save:
 	teq	r1, #0				@ test for last ownership
 	beq	concan_load			@ no owner, skip save
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tmrc	r2, wCon
 
@@ -172,7 +192,11 @@ concan_dump:
 
 2:	teq	r0, #0				@ anything to load?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr
+=======
+	reteq	lr				@ if not, return
+>>>>>>> v3.18
 =======
 	reteq	lr				@ if not, return
 >>>>>>> v3.18
@@ -209,14 +233,20 @@ concan_load:
 	teq	r1, #0
 	mov 	r2, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr
 	tmcr	wCon, r2
 	mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 	reteq	lr
 
 	tmcr	wCon, r2
 	ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -304,7 +334,11 @@ ENTRY(iwmmxt_task_copy)
 	bl	concan_dump
 	msr	cpsr_c, ip			@ restore interrupt mode
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r3
+=======
+	ret	r3
+>>>>>>> v3.18
 =======
 	ret	r3
 >>>>>>> v3.18
@@ -344,7 +378,11 @@ ENTRY(iwmmxt_task_restore)
 	bl	concan_load
 	msr	cpsr_c, ip			@ restore interrupt mode
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r3
+=======
+	ret	r3
+>>>>>>> v3.18
 =======
 	ret	r3
 >>>>>>> v3.18
@@ -370,7 +408,11 @@ ENTRY(iwmmxt_task_switch)
 	ldr	r2, [r2]			@ get current Concan owner
 	teq	r2, r3				@ next task owns it?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movne	pc, lr				@ no: leave Concan disabled
+=======
+	retne	lr				@ no: leave Concan disabled
+>>>>>>> v3.18
 =======
 	retne	lr				@ no: leave Concan disabled
 >>>>>>> v3.18
@@ -401,7 +443,11 @@ ENTRY(iwmmxt_task_release)
 	streq	r0, [r3]			@ then clear ownership
 	msr	cpsr_c, r2			@ restore interrupts
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

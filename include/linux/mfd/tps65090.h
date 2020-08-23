@@ -65,7 +65,10 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Register addresses */
 #define TPS65090_REG_INTR_STS	0x00
 #define TPS65090_REG_INTR_STS2	0x01
@@ -80,6 +83,9 @@ enum {
 #define TPS65090_REG_CG_STATUS1	0x0a
 #define TPS65090_REG_CG_STATUS2	0x0b
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tps65090 {
 	struct device		*dev;
@@ -96,6 +102,12 @@ struct tps65090 {
  * @gpio: Gpio number if external control is enabled and controlled through
  *     gpio.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @overcurrent_wait_valid: True if the overcurrent_wait should be applied.
+ * @overcurrent_wait: Value to set as the overcurrent wait time.  This is the
+ *     actual bitfield value, not a time in ms (valid value are 0 - 3).
+>>>>>>> v3.18
 =======
  * @overcurrent_wait_valid: True if the overcurrent_wait should be applied.
  * @overcurrent_wait: Value to set as the overcurrent wait time.  This is the
@@ -107,6 +119,11 @@ struct tps65090_regulator_plat_data {
 	bool enable_ext_control;
 	int gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool overcurrent_wait_valid;
+	int overcurrent_wait;
+>>>>>>> v3.18
 =======
 	bool overcurrent_wait_valid;
 	int overcurrent_wait;

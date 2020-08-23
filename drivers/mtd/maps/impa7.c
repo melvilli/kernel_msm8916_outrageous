@@ -80,7 +80,11 @@ static int __init init_impa7(void)
 		simple_map_init(&impa7_map[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		impa7_mtd[i] = 0;
+=======
+		impa7_mtd[i] = NULL;
+>>>>>>> v3.18
 =======
 		impa7_mtd[i] = NULL;
 >>>>>>> v3.18
@@ -96,9 +100,15 @@ static int __init init_impa7(void)
 						  partitions,
 						  ARRAY_SIZE(partitions));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else
 			iounmap((void *)impa7_map[i].virt);
+=======
+		} else {
+			iounmap((void __iomem *)impa7_map[i].virt);
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			iounmap((void __iomem *)impa7_map[i].virt);
@@ -116,8 +126,13 @@ static void __exit cleanup_impa7(void)
 			mtd_device_unregister(impa7_mtd[i]);
 			map_destroy(impa7_mtd[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iounmap((void *)impa7_map[i].virt);
 			impa7_map[i].virt = 0;
+=======
+			iounmap((void __iomem *)impa7_map[i].virt);
+			impa7_map[i].virt = NULL;
+>>>>>>> v3.18
 =======
 			iounmap((void __iomem *)impa7_map[i].virt);
 			impa7_map[i].virt = NULL;

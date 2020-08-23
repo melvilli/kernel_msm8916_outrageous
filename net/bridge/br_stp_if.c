@@ -38,7 +38,11 @@ void br_init_port(struct net_bridge_port *p)
 	p->port_id = br_make_port_id(p->priority, p->port_no);
 	br_become_designated_port(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->state = BR_STATE_BLOCKING;
+=======
+	br_set_state(p, BR_STATE_BLOCKING);
+>>>>>>> v3.18
 =======
 	br_set_state(p, BR_STATE_BLOCKING);
 >>>>>>> v3.18
@@ -105,7 +109,11 @@ void br_stp_disable_port(struct net_bridge_port *p)
 	wasroot = br_is_root_bridge(br);
 	br_become_designated_port(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->state = BR_STATE_DISABLED;
+=======
+	br_set_state(p, BR_STATE_DISABLED);
+>>>>>>> v3.18
 =======
 	br_set_state(p, BR_STATE_DISABLED);
 >>>>>>> v3.18
@@ -137,10 +145,14 @@ static void br_stp_start(struct net_bridge *br)
 	char *envp[] = { NULL };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (net_eq(dev_net(br->dev), &init_net))
 		r = call_usermodehelper(BR_STP_PROG, argv, envp, UMH_WAIT_PROC);
 	else
 		r = -ENOENT;
+=======
+	r = call_usermodehelper(BR_STP_PROG, argv, envp, UMH_WAIT_PROC);
+>>>>>>> v3.18
 =======
 	r = call_usermodehelper(BR_STP_PROG, argv, envp, UMH_WAIT_PROC);
 >>>>>>> v3.18
@@ -210,6 +222,11 @@ void br_stp_change_bridge_id(struct net_bridge *br, const unsigned char *addr)
 	wasroot = br_is_root_bridge(br);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	br_fdb_change_mac_address(br, addr);
+
+>>>>>>> v3.18
 =======
 	br_fdb_change_mac_address(br, addr);
 
@@ -262,7 +279,11 @@ bool br_stp_recalculate_bridge_id(struct net_bridge *br)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Acquires and releases bridge lock */
+=======
+/* called under bridge lock */
+>>>>>>> v3.18
 =======
 /* called under bridge lock */
 >>>>>>> v3.18
@@ -272,7 +293,10 @@ void br_stp_set_bridge_priority(struct net_bridge *br, u16 newprio)
 	int wasroot;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&br->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wasroot = br_is_root_bridge(br);
@@ -293,7 +317,10 @@ void br_stp_set_bridge_priority(struct net_bridge *br, u16 newprio)
 	if (br_is_root_bridge(br) && !wasroot)
 		br_become_root_bridge(br);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&br->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

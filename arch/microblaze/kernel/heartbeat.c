@@ -18,7 +18,11 @@
 static unsigned int base_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void heartbeat(void)
+=======
+void microblaze_heartbeat(void)
+>>>>>>> v3.18
 =======
 void microblaze_heartbeat(void)
 >>>>>>> v3.18
@@ -47,7 +51,11 @@ void microblaze_heartbeat(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void setup_heartbeat(void)
+=======
+void microblaze_setup_heartbeat(void)
+>>>>>>> v3.18
 =======
 void microblaze_setup_heartbeat(void)
 >>>>>>> v3.18

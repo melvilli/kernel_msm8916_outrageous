@@ -52,7 +52,11 @@
  * version 0.7.3
  * bugfix : The mdc800->state field gets set to READY after the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the diconnect function sets it to NOT_CONNECTED. This makes the
+=======
+ * the disconnect function sets it to NOT_CONNECTED. This makes the
+>>>>>>> v3.18
 =======
  * the disconnect function sets it to NOT_CONNECTED. This makes the
 >>>>>>> v3.18

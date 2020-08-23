@@ -613,7 +613,11 @@ static int tgr160_final(struct shash_desc *desc, u8 * out)
 	tgr192_final(desc, D);
 	memcpy(out, D, TGR160_DIGEST_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(D, 0, TGR192_DIGEST_SIZE);
+=======
+	memzero_explicit(D, TGR192_DIGEST_SIZE);
+>>>>>>> v3.18
 =======
 	memzero_explicit(D, TGR192_DIGEST_SIZE);
 >>>>>>> v3.18
@@ -628,7 +632,11 @@ static int tgr128_final(struct shash_desc *desc, u8 * out)
 	tgr192_final(desc, D);
 	memcpy(out, D, TGR128_DIGEST_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(D, 0, TGR192_DIGEST_SIZE);
+=======
+	memzero_explicit(D, TGR192_DIGEST_SIZE);
+>>>>>>> v3.18
 =======
 	memzero_explicit(D, TGR192_DIGEST_SIZE);
 >>>>>>> v3.18
@@ -685,9 +693,14 @@ static void __exit tgr192_mod_fini(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("tgr192");
 MODULE_ALIAS_CRYPTO("tgr160");
 MODULE_ALIAS_CRYPTO("tgr128");
+=======
+MODULE_ALIAS("tgr160");
+MODULE_ALIAS("tgr128");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("tgr160");
 MODULE_ALIAS("tgr128");

@@ -16,6 +16,7 @@
 	compatible = "fsl,imx6dl-sabresd", "fsl,imx6dl";
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 &iomuxc {
 	pinctrl-names = "default";
@@ -34,5 +35,7 @@
 		};
 	};
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

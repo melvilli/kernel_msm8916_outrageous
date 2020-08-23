@@ -4,7 +4,11 @@
  * Picked from realview
  * Copyright (c) 2012 ST Microelectronics Limited
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18

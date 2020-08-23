@@ -69,7 +69,11 @@ static int print_format1_lock(struct seq_file *s, struct dlm_lkb *lkb,
 		seq_printf(s, " wait_type: %d", lkb->lkb_wait_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return seq_printf(s, "\n");
+=======
+	return seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 	return seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -97,6 +101,7 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 
 	if (res->res_nodeid > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rv = seq_printf(s, "\"  \nLocal Copy, Master is node %d\n",
 				res->res_nodeid);
 	else if (res->res_nodeid == 0)
@@ -107,6 +112,8 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 	else
 		rv = seq_printf(s, "\"  \nInvalid master %d\n",
 =======
+=======
+>>>>>>> v3.18
 		rv = seq_printf(s, "\"\nLocal Copy, Master is node %d\n",
 				res->res_nodeid);
 	else if (res->res_nodeid == 0)
@@ -116,6 +123,9 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 			   	res->res_first_lkid);
 	else
 		rv = seq_printf(s, "\"\nInvalid master %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				res->res_nodeid);
 	if (rv)
@@ -124,23 +134,34 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 	/* Print the LVB: */
 	if (res->res_lvbptr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, "LVB: ");
 		for (i = 0; i < lvblen; i++) {
 			if (i == lvblen / 2)
 				seq_printf(s, "\n     ");
 =======
+=======
+>>>>>>> v3.18
 		seq_puts(s, "LVB: ");
 		for (i = 0; i < lvblen; i++) {
 			if (i == lvblen / 2)
 				seq_puts(s, "\n     ");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			seq_printf(s, "%02x ",
 				   (unsigned char) res->res_lvbptr[i]);
 		}
 		if (rsb_flag(res, RSB_VALNOTVALID))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(s, " (INVALID)");
 		rv = seq_printf(s, "\n");
+=======
+			seq_puts(s, " (INVALID)");
+		rv = seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 			seq_puts(s, " (INVALID)");
 		rv = seq_puts(s, "\n");
@@ -162,7 +183,11 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 
 	/* Print the locks attached to this resource */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "Granted Queue\n");
+=======
+	seq_puts(s, "Granted Queue\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "Granted Queue\n");
 >>>>>>> v3.18
@@ -173,7 +198,11 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "Conversion Queue\n");
+=======
+	seq_puts(s, "Conversion Queue\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "Conversion Queue\n");
 >>>>>>> v3.18
@@ -184,7 +213,11 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "Waiting Queue\n");
+=======
+	seq_puts(s, "Waiting Queue\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "Waiting Queue\n");
 >>>>>>> v3.18
@@ -198,7 +231,11 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "Lookup Queue\n");
+=======
+	seq_puts(s, "Lookup Queue\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "Lookup Queue\n");
 >>>>>>> v3.18
@@ -208,7 +245,11 @@ static int print_format1(struct dlm_rsb *res, struct seq_file *s)
 		if (lkb->lkb_wait_type)
 			seq_printf(s, " wait_type: %d", lkb->lkb_wait_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rv = seq_printf(s, "\n");
+=======
+		rv = seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 		rv = seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -349,7 +390,11 @@ static int print_format3(struct dlm_rsb *r, struct seq_file *s)
 			seq_printf(s, " %02x", (unsigned char)r->res_name[i]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = seq_printf(s, "\n");
+=======
+	rv = seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 	rv = seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -364,7 +409,11 @@ static int print_format3(struct dlm_rsb *r, struct seq_file *s)
 	for (i = 0; i < lvblen; i++)
 		seq_printf(s, " %02x", (unsigned char)r->res_lvbptr[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = seq_printf(s, "\n");
+=======
+	rv = seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 	rv = seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -434,7 +483,11 @@ static int print_format4(struct dlm_rsb *r, struct seq_file *s)
 			seq_printf(s, " %02x", (unsigned char)r->res_name[i]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = seq_printf(s, "\n");
+=======
+	rv = seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 	rv = seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -779,6 +832,7 @@ static const struct file_operations waiters_fops = {
 void dlm_delete_debug_file(struct dlm_ls *ls)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ls->ls_debug_rsb_dentry)
 		debugfs_remove(ls->ls_debug_rsb_dentry);
 	if (ls->ls_debug_waiters_dentry)
@@ -790,11 +844,16 @@ void dlm_delete_debug_file(struct dlm_ls *ls)
 	if (ls->ls_debug_toss_dentry)
 		debugfs_remove(ls->ls_debug_toss_dentry);
 =======
+=======
+>>>>>>> v3.18
 	debugfs_remove(ls->ls_debug_rsb_dentry);
 	debugfs_remove(ls->ls_debug_waiters_dentry);
 	debugfs_remove(ls->ls_debug_locks_dentry);
 	debugfs_remove(ls->ls_debug_all_dentry);
 	debugfs_remove(ls->ls_debug_toss_dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

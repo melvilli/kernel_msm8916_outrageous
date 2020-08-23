@@ -9,6 +9,11 @@
 #include <asm/asm-compat.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __BIG_ENDIAN__
+
+>>>>>>> v3.18
 =======
 #ifdef __BIG_ENDIAN__
 
@@ -44,7 +49,10 @@ static inline bool has_zero(unsigned long val, unsigned long *data, const struct
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 
 #ifdef CONFIG_64BIT
@@ -205,5 +213,8 @@ static inline unsigned long load_unaligned_zeropad(const void *addr)
 
 #undef FIXUP_SECTION
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_WORD_AT_A_TIME_H */

@@ -1,6 +1,10 @@
 /*
  * Copyright (C) 2007 Oracle.  All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Fujitsu.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Fujitsu.  All rights reserved.
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
 #include <linux/spinlock.h>
 #include <linux/freezer.h>
 #include "async-thread.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define WORK_QUEUED_BIT 0
@@ -201,6 +206,8 @@ static noinline void run_ordered_completions(struct btrfs_workers *workers,
 
 		/* we are going to call the ordered done function, but
 =======
+=======
+>>>>>>> v3.18
 #include "ctree.h"
 
 #define WORK_DONE_BIT 0
@@ -416,6 +423,9 @@ static void run_ordered_work(struct __btrfs_workqueue *wq)
 
 		/*
 		 * we are going to call the ordered done function, but
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * we leave the work item on the list as a barrier so
 		 * that later work items that are done don't have their
@@ -423,6 +433,7 @@ static void run_ordered_work(struct __btrfs_workqueue *wq)
 		 */
 		if (test_and_set_bit(WORK_ORDER_DONE_BIT, &work->flags))
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		spin_unlock(&workers->order_lock);
@@ -434,6 +445,8 @@ static void run_ordered_work(struct __btrfs_workqueue *wq)
 		list_del(&work->order_list);
 		spin_unlock(&workers->order_lock);
 =======
+=======
+>>>>>>> v3.18
 		trace_btrfs_ordered_sched(work);
 		spin_unlock_irqrestore(lock, flags);
 		work->ordered_func(work);
@@ -442,6 +455,9 @@ static void run_ordered_work(struct __btrfs_workqueue *wq)
 		spin_lock_irqsave(lock, flags);
 		list_del(&work->ordered_list);
 		spin_unlock_irqrestore(lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -449,6 +465,7 @@ static void run_ordered_work(struct __btrfs_workqueue *wq)
 		 * with the lock held though
 		 */
 		work->ordered_free(work);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		spin_lock(&workers->order_lock);
 	}
@@ -947,6 +964,8 @@ void btrfs_queue_worker(struct btrfs_workers *workers, struct btrfs_work *work)
 	spin_unlock_irqrestore(&worker->lock, flags);
 }
 =======
+=======
+>>>>>>> v3.18
 		trace_btrfs_all_work_done(work);
 	}
 	spin_unlock_irqrestore(lock, flags);
@@ -1052,4 +1071,7 @@ void btrfs_set_work_high_priority(struct btrfs_work *work)
 {
 	set_bit(WORK_HIGH_PRIO_BIT, &work->flags);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

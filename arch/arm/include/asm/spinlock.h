@@ -6,9 +6,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/processor.h>
 
 extern int msm_krait_need_wfe_fixup;
+=======
+#include <linux/prefetch.h>
+>>>>>>> v3.18
 =======
 #include <linux/prefetch.h>
 >>>>>>> v3.18
@@ -17,6 +21,7 @@ extern int msm_krait_need_wfe_fixup;
  * sev and wfe are ARMv6K extensions.  Uniprocessor ARMv6 may not have the K
  * extensions, so when running on UP, we have to patch these instructions away.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ALT_SMP(smp, up)					\
 	"9998:	" smp "\n"					\
@@ -83,6 +88,8 @@ static inline void dsb_sev(void)
 	);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_THUMB2_KERNEL
 /*
  * For Thumb-2, special care is needed to ensure that the conditional WFE
@@ -112,6 +119,9 @@ static inline void dsb_sev(void)
 
 	dsb(ishst);
 	__asm__(SEV);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -131,16 +141,22 @@ static inline void dsb_sev(void)
 static inline void arch_spin_lock(arch_spinlock_t *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp, flags = 0;
 	u32 newval;
 	arch_spinlock_t lockval;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long tmp;
 	u32 newval;
 	arch_spinlock_t lockval;
 
 	prefetchw(&lock->slock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__asm__ __volatile__(
 "1:	ldrex	%0, [%3]\n"
@@ -153,6 +169,7 @@ static inline void arch_spin_lock(arch_spinlock_t *lock)
 	: "cc");
 
 	while (lockval.tickets.next != lockval.tickets.owner) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (msm_krait_need_wfe_fixup) {
 			local_save_flags(flags);
@@ -184,6 +201,9 @@ static inline void arch_spin_lock(arch_spinlock_t *lock)
 =======
 		wfe();
 >>>>>>> v3.18
+=======
+		wfe();
+>>>>>>> v3.18
 		lockval.tickets.owner = ACCESS_ONCE(lock->tickets.owner);
 	}
 
@@ -196,6 +216,10 @@ static inline int arch_spin_trylock(arch_spinlock_t *lock)
 	u32 slock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&lock->slock);
+>>>>>>> v3.18
 =======
 	prefetchw(&lock->slock);
 >>>>>>> v3.18
@@ -227,11 +251,14 @@ static inline void arch_spin_unlock(arch_spinlock_t *lock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int arch_spin_is_locked(arch_spinlock_t *lock)
 {
 	struct __raw_tickets tickets = ACCESS_ONCE(lock->tickets);
 	return tickets.owner != tickets.next;
 =======
+=======
+>>>>>>> v3.18
 static inline int arch_spin_value_unlocked(arch_spinlock_t lock)
 {
 	return lock.tickets.owner == lock.tickets.next;
@@ -240,6 +267,9 @@ static inline int arch_spin_value_unlocked(arch_spinlock_t lock)
 static inline int arch_spin_is_locked(arch_spinlock_t *lock)
 {
 	return !arch_spin_value_unlocked(ACCESS_ONCE(*lock));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -261,6 +291,7 @@ static inline int arch_spin_is_contended(arch_spinlock_t *lock)
 static inline void arch_write_lock(arch_rwlock_t *rw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp, fixup = msm_krait_need_wfe_fixup;
 
 	__asm__ __volatile__(
@@ -274,6 +305,8 @@ static inline void arch_write_lock(arch_rwlock_t *rw)
 "	bne	1b"
 	: "=&r" (tmp), "+r" (fixup)
 =======
+=======
+>>>>>>> v3.18
 	unsigned long tmp;
 
 	prefetchw(&rw->lock);
@@ -285,6 +318,9 @@ static inline void arch_write_lock(arch_rwlock_t *rw)
 "	teq	%0, #0\n"
 "	bne	1b"
 	: "=&r" (tmp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	: "r" (&rw->lock), "r" (0x80000000)
 	: "cc");
@@ -297,6 +333,10 @@ static inline int arch_write_trylock(arch_rwlock_t *rw)
 	unsigned long contended, res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&rw->lock);
+>>>>>>> v3.18
 =======
 	prefetchw(&rw->lock);
 >>>>>>> v3.18
@@ -334,7 +374,11 @@ static inline void arch_write_unlock(arch_rwlock_t *rw)
 
 /* write_can_lock - would write_trylock() succeed? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define arch_write_can_lock(x)		((x)->lock == 0)
+=======
+#define arch_write_can_lock(x)		(ACCESS_ONCE((x)->lock) == 0)
+>>>>>>> v3.18
 =======
 #define arch_write_can_lock(x)		(ACCESS_ONCE((x)->lock) == 0)
 >>>>>>> v3.18
@@ -354,6 +398,7 @@ static inline void arch_write_unlock(arch_rwlock_t *rw)
 static inline void arch_read_lock(arch_rwlock_t *rw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp, tmp2, fixup = msm_krait_need_wfe_fixup;
 
 	__asm__ __volatile__(
@@ -367,6 +412,8 @@ static inline void arch_read_lock(arch_rwlock_t *rw)
 "	bmi	1b"
 	: "=&r" (tmp), "=&r" (tmp2), "+r" (fixup)
 =======
+=======
+>>>>>>> v3.18
 	unsigned long tmp, tmp2;
 
 	prefetchw(&rw->lock);
@@ -378,6 +425,9 @@ static inline void arch_read_lock(arch_rwlock_t *rw)
 "	rsbpls	%0, %1, #0\n"
 "	bmi	1b"
 	: "=&r" (tmp), "=&r" (tmp2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	: "r" (&rw->lock)
 	: "cc");
@@ -392,6 +442,10 @@ static inline void arch_read_unlock(arch_rwlock_t *rw)
 	smp_mb();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&rw->lock);
+>>>>>>> v3.18
 =======
 	prefetchw(&rw->lock);
 >>>>>>> v3.18
@@ -414,6 +468,10 @@ static inline int arch_read_trylock(arch_rwlock_t *rw)
 	unsigned long contended, res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&rw->lock);
+>>>>>>> v3.18
 =======
 	prefetchw(&rw->lock);
 >>>>>>> v3.18
@@ -439,7 +497,11 @@ static inline int arch_read_trylock(arch_rwlock_t *rw)
 
 /* read_can_lock - would read_trylock() succeed? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define arch_read_can_lock(x)		((x)->lock < 0x80000000)
+=======
+#define arch_read_can_lock(x)		(ACCESS_ONCE((x)->lock) < 0x80000000)
+>>>>>>> v3.18
 =======
 #define arch_read_can_lock(x)		(ACCESS_ONCE((x)->lock) < 0x80000000)
 >>>>>>> v3.18

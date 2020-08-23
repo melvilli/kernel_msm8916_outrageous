@@ -334,9 +334,15 @@ int ccw_device_set_offline(struct ccw_device *cdev)
 			return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdev->online = 0;
 	spin_lock_irq(cdev->ccwlock);
 	sch = to_subchannel(cdev->dev.parent);
+=======
+	spin_lock_irq(cdev->ccwlock);
+	sch = to_subchannel(cdev->dev.parent);
+	cdev->online = 0;
+>>>>>>> v3.18
 =======
 	spin_lock_irq(cdev->ccwlock);
 	sch = to_subchannel(cdev->dev.parent);
@@ -453,12 +459,18 @@ int ccw_device_set_online(struct ccw_device *cdev)
 	if (ret)
 		goto rollback;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdev->online = 1;
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock_irq(cdev->ccwlock);
 	cdev->online = 1;
 	spin_unlock_irq(cdev->ccwlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -560,7 +572,11 @@ static ssize_t online_store (struct device *dev, struct device_attribute *attr,
 	    cdev->private->state != DEV_STATE_DISCONNECTED) {
 		ret = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_onoff;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -569,12 +585,16 @@ static ssize_t online_store (struct device *dev, struct device_attribute *attr,
 	if (work_pending(&cdev->private->todo_work)) {
 		ret = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_onoff;
 	}
 
 	if (cdev->drv && !try_module_get(cdev->drv->driver.owner)) {
 		ret = -EINVAL;
 		goto out_onoff;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -586,17 +606,23 @@ static ssize_t online_store (struct device *dev, struct device_attribute *attr,
 	} else {
 		force = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = strict_strtoul(buf, 16, &i);
 	}
 	if (ret)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		ret = kstrtoul(buf, 16, &i);
 	}
 	if (ret)
 		goto out;
 
 	device_lock(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (i) {
 	case 0:
@@ -609,10 +635,16 @@ static ssize_t online_store (struct device *dev, struct device_attribute *attr,
 		ret = -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	if (cdev->drv)
 		module_put(cdev->drv->driver.owner);
 out_onoff:
+=======
+	device_unlock(dev);
+
+out:
+>>>>>>> v3.18
 =======
 	device_unlock(dev);
 
@@ -716,6 +748,7 @@ static const struct attribute_group *ccwdev_attr_groups[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* this is a simple abstraction for device_register that sets the
  * correct bus type and adds the bus specific files */
 static int ccw_device_register(struct ccw_device *cdev)
@@ -729,11 +762,16 @@ static int ccw_device_register(struct ccw_device *cdev)
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 static int ccw_device_add(struct ccw_device *cdev)
 {
 	struct device *dev = &cdev->dev;
 
 	dev->bus = &ccw_bus_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return device_add(dev);
 }
@@ -810,6 +848,7 @@ static int io_subchannel_initialize_dev(struct subchannel *sch,
 					struct ccw_device *cdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdev->private->cdev = cdev;
 	cdev->private->int_class = IRQIO_CIO;
 	atomic_set(&cdev->private->onoff, 0);
@@ -827,6 +866,8 @@ static int io_subchannel_initialize_dev(struct subchannel *sch,
 	cdev->private->flags.initialized = 1;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct ccw_device_private *priv = cdev->private;
 	int ret;
 
@@ -867,6 +908,9 @@ out_put:
 	/* Release reference from device_initialize(). */
 	put_device(&cdev->dev);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -947,7 +991,11 @@ static void io_subchannel_register(struct ccw_device *cdev)
 	kobject_uevent(&sch->dev.kobj, KOBJ_ADD);
 	/* make it known to the system */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ccw_device_register(cdev);
+=======
+	ret = ccw_device_add(cdev);
+>>>>>>> v3.18
 =======
 	ret = ccw_device_add(cdev);
 >>>>>>> v3.18
@@ -1016,6 +1064,7 @@ io_subchannel_recog_done(struct ccw_device *cdev)
 static void io_subchannel_recog(struct ccw_device *cdev, struct subchannel *sch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ccw_device_private *priv;
 
 	cdev->ccwlock = sch->lock;
@@ -1032,13 +1081,18 @@ static void io_subchannel_recog(struct ccw_device *cdev, struct subchannel *sch)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Increase counter of devices currently in recognition. */
 	atomic_inc(&ccw_device_init_count);
 
 	/* Start async. device sensing. */
 	spin_lock_irq(sch->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch_set_cdev(sch, cdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ccw_device_recognition(cdev);
@@ -1182,7 +1236,11 @@ static int io_subchannel_probe(struct subchannel *sch)
 		kobject_uevent(&sch->dev.kobj, KOBJ_ADD);
 		cdev = sch_get_cdev(sch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = ccw_device_register(cdev);
+=======
+		rc = ccw_device_add(cdev);
+>>>>>>> v3.18
 =======
 		rc = ccw_device_add(cdev);
 >>>>>>> v3.18
@@ -1674,6 +1732,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CCW_CONSOLE
 static int ccw_device_console_enable(struct ccw_device *cdev,
 				     struct subchannel *sch)
@@ -1681,6 +1740,8 @@ static int ccw_device_console_enable(struct ccw_device *cdev,
 	int rc;
 
 =======
+=======
+>>>>>>> v3.18
 static void ccw_device_set_int_class(struct ccw_device *cdev)
 {
 	struct ccw_driver *cdrv = cdev->drv;
@@ -1702,6 +1763,9 @@ int __init ccw_device_enable_console(struct ccw_device *cdev)
 	if (!cdev->drv || !cdev->handler)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	io_subchannel_init_fields(sch);
 	rc = cio_commit_config(sch);
@@ -1709,7 +1773,10 @@ int __init ccw_device_enable_console(struct ccw_device *cdev)
 		return rc;
 	sch->driver = &io_subchannel_driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch_set_cdev(sch, cdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	io_subchannel_recog(cdev, sch);
@@ -1739,7 +1806,11 @@ out_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ccw_device *ccw_device_probe_console(struct ccw_driver *drv)
+=======
+struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
+>>>>>>> v3.18
 =======
 struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
 >>>>>>> v3.18
@@ -1748,7 +1819,10 @@ struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
 	struct ccw_device *cdev;
 	struct subchannel *sch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1762,6 +1836,10 @@ struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
 		return ERR_PTR(-ENOMEM);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_io_private(sch, io_priv);
+>>>>>>> v3.18
 =======
 	set_io_private(sch, io_priv);
 >>>>>>> v3.18
@@ -1772,6 +1850,7 @@ struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
 		return cdev;
 	}
 	cdev->drv = drv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	set_io_private(sch, io_priv);
 	ret = ccw_device_console_enable(cdev, sch);
@@ -1786,6 +1865,8 @@ struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	ccw_device_set_int_class(cdev);
 	return cdev;
 }
@@ -1801,6 +1882,9 @@ void __init ccw_device_destroy_console(struct ccw_device *cdev)
 	kfree(io_priv);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ccw_device_wait_idle() - busy wait for device to become idle
@@ -1886,6 +1970,7 @@ ccw_device_probe (struct device *dev)
 
 	cdev->drv = cdrv; /* to let the driver call _set_online */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Note: we interpret class 0 in this context as an uninitialized
 	 * field since it translates to a non-I/O interrupt class. */
 	if (cdrv->int_class != 0)
@@ -1895,6 +1980,10 @@ ccw_device_probe (struct device *dev)
 
 	ret = cdrv->probe ? cdrv->probe(cdev) : -ENODEV;
 
+=======
+	ccw_device_set_int_class(cdev);
+	ret = cdrv->probe ? cdrv->probe(cdev) : -ENODEV;
+>>>>>>> v3.18
 =======
 	ccw_device_set_int_class(cdev);
 	ret = cdrv->probe ? cdrv->probe(cdev) : -ENODEV;
@@ -1909,8 +1998,12 @@ ccw_device_probe (struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 ccw_device_remove (struct device *dev)
+=======
+static int ccw_device_remove(struct device *dev)
+>>>>>>> v3.18
 =======
 static int ccw_device_remove(struct device *dev)
 >>>>>>> v3.18
@@ -1922,14 +2015,20 @@ static int ccw_device_remove(struct device *dev)
 	if (cdrv->remove)
 		cdrv->remove(cdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cdev->online) {
 		cdev->online = 0;
 		spin_lock_irq(cdev->ccwlock);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock_irq(cdev->ccwlock);
 	if (cdev->online) {
 		cdev->online = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = ccw_device_offline(cdev);
 		spin_unlock_irq(cdev->ccwlock);
@@ -1944,6 +2043,10 @@ static int ccw_device_remove(struct device *dev)
 		/* Give up reference obtained in ccw_device_set_online(). */
 		put_device(&cdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		spin_lock_irq(cdev->ccwlock);
+>>>>>>> v3.18
 =======
 		spin_lock_irq(cdev->ccwlock);
 >>>>>>> v3.18
@@ -1952,6 +2055,10 @@ static int ccw_device_remove(struct device *dev)
 	cdev->drv = NULL;
 	cdev->private->int_class = IRQIO_CIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irq(cdev->ccwlock);
+>>>>>>> v3.18
 =======
 	spin_unlock_irq(cdev->ccwlock);
 >>>>>>> v3.18

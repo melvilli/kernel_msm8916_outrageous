@@ -30,6 +30,7 @@ extern const struct dentry_operations ocfs2_dentry_ops;
 
 struct ocfs2_dentry_lock {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Use count of dentry lock */
 	unsigned int		dl_count;
 	union {
@@ -37,6 +38,10 @@ struct ocfs2_dentry_lock {
 		struct ocfs2_dentry_lock *dl_next;
 		u64			dl_parent_blkno;
 	};
+=======
+	unsigned int		dl_count;
+	u64			dl_parent_blkno;
+>>>>>>> v3.18
 =======
 	unsigned int		dl_count;
 	u64			dl_parent_blkno;
@@ -55,6 +60,7 @@ int ocfs2_dentry_attach_lock(struct dentry *dentry, struct inode *inode,
 			     u64 parent_blkno);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern spinlock_t dentry_list_lock;
 
 void ocfs2_dentry_lock_put(struct ocfs2_super *osb,
@@ -63,6 +69,11 @@ void ocfs2_dentry_lock_put(struct ocfs2_super *osb,
 void ocfs2_drop_dl_inodes(struct work_struct *work);
 void ocfs2_drop_all_dl_inodes(struct ocfs2_super *osb);
 
+=======
+void ocfs2_dentry_lock_put(struct ocfs2_super *osb,
+			   struct ocfs2_dentry_lock *dl);
+
+>>>>>>> v3.18
 =======
 void ocfs2_dentry_lock_put(struct ocfs2_super *osb,
 			   struct ocfs2_dentry_lock *dl);

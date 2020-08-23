@@ -186,7 +186,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("MD5 Secure Hash Algorithm, sparc64 md5 opcode accelerated");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("md5");
+=======
+MODULE_ALIAS("md5");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("md5");
 >>>>>>> v3.18

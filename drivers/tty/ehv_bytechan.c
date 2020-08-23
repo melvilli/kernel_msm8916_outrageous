@@ -33,6 +33,10 @@
 #include <asm/epapr_hcalls.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -112,6 +116,7 @@ static void disable_tx_interrupt(struct ehv_bc_data *bc)
  * The byte channel to be used for the console is specified via a "stdout"
  * property in the /chosen node.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * For compatible with legacy device trees, we also look for a "stdout" alias.
  */
@@ -162,6 +167,8 @@ static int find_console_handle(void)
 		pr_err("ehv-bc: no 'interrupts' property in %s node\n", sprop);
 		of_node_put(np);
 =======
+=======
+>>>>>>> v3.18
  */
 static int find_console_handle(void)
 {
@@ -179,6 +186,9 @@ static int find_console_handle(void)
 	stdout_irq = irq_of_parse_and_map(np, 0);
 	if (stdout_irq == NO_IRQ) {
 		pr_err("ehv-bc: no 'interrupts' property in %s node\n", np->full_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -191,12 +201,18 @@ static int find_console_handle(void)
 		pr_err("ehv-bc: no 'hv-handle' property in %s node\n",
 		       np->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_node_put(np);
 		return 0;
 	}
 	stdout_bc = be32_to_cpu(*iprop);
 
 	of_node_put(np);
+=======
+		return 0;
+	}
+	stdout_bc = be32_to_cpu(*iprop);
+>>>>>>> v3.18
 =======
 		return 0;
 	}

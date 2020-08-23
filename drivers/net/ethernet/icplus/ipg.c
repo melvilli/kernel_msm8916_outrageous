@@ -96,7 +96,11 @@ static const char * const ipg_brand_name[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ipg_pci_tbl) = {
+=======
+static const struct pci_device_id ipg_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ipg_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1009,7 +1013,11 @@ static struct net_device_stats *ipg_nic_get_stats(struct net_device *dev)
 	 * before trying to read statistic registers.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(__LINK_STATE_START, &dev->state))
+=======
+	if (!netif_running(dev))
+>>>>>>> v3.18
 =======
 	if (!netif_running(dev))
 >>>>>>> v3.18
@@ -2192,7 +2200,10 @@ static void ipg_remove(struct pci_dev *pdev)
 	free_netdev(dev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2258,7 +2269,11 @@ static int ipg_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	dev->netdev_ops = &ipg_netdev_ops;
 	SET_NETDEV_DEV(dev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ipg_ethtool_ops);
+=======
+	dev->ethtool_ops = &ipg_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ipg_ethtool_ops;
 >>>>>>> v3.18
@@ -2314,6 +2329,7 @@ static struct pci_driver ipg_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init ipg_init_module(void)
 {
 	return pci_register_driver(&ipg_pci_driver);
@@ -2326,6 +2342,9 @@ static void __exit ipg_exit_module(void)
 
 module_init(ipg_init_module);
 module_exit(ipg_exit_module);
+=======
+module_pci_driver(ipg_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(ipg_pci_driver);
 >>>>>>> v3.18

@@ -135,6 +135,7 @@ static int dove_thermal_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "Failed to get platform resource\n");
@@ -143,11 +144,17 @@ static int dove_thermal_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -186,7 +193,10 @@ static int dove_thermal_exit(struct platform_device *pdev)
 
 	thermal_zone_device_unregister(dove_thermal);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -202,7 +212,11 @@ static struct platform_driver dove_thermal_driver = {
 		.name = "dove_thermal",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(dove_thermal_id_table),
+=======
+		.of_match_table = dove_thermal_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = dove_thermal_id_table,
 >>>>>>> v3.18

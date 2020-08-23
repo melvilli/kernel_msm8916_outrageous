@@ -25,6 +25,10 @@
 #include <linux/atomic.h>
 #include <linux/security.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/net_namespace.h>
+>>>>>>> v3.18
 =======
 #include <net/net_namespace.h>
 >>>>>>> v3.18
@@ -43,6 +47,7 @@ struct flow_cache_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct flow_cache_percpu {
 	struct hlist_head		*hash_table;
 	int				hash_count;
@@ -53,12 +58,15 @@ struct flow_cache_percpu {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct flow_flush_info {
 	struct flow_cache		*cache;
 	atomic_t			cpuleft;
 	struct completion		completion;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct flow_cache {
 	u32				hash_shift;
@@ -81,6 +89,10 @@ static LIST_HEAD(flow_cache_gc_list);
 static struct kmem_cache *flow_cachep __read_mostly;
 
 >>>>>>> v3.18
+=======
+static struct kmem_cache *flow_cachep __read_mostly;
+
+>>>>>>> v3.18
 #define flow_cache_hash_size(cache)	(1 << (cache)->hash_shift)
 #define FLOW_HASH_RND_PERIOD		(10 * 60 * HZ)
 
@@ -97,14 +109,20 @@ static void flow_cache_new_hashrnd(unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int flow_entry_valid(struct flow_cache_entry *fle)
 {
 	if (atomic_read(&flow_cache_genid) != fle->genid)
 =======
+=======
+>>>>>>> v3.18
 static int flow_entry_valid(struct flow_cache_entry *fle,
 				struct netns_xfrm *xfrm)
 {
 	if (atomic_read(&xfrm->flow_cache_genid) != fle->genid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	if (fle->object && !fle->object->ops->check(fle->object))
@@ -113,7 +131,12 @@ static int flow_entry_valid(struct flow_cache_entry *fle,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void flow_entry_kill(struct flow_cache_entry *fle)
+=======
+static void flow_entry_kill(struct flow_cache_entry *fle,
+				struct netns_xfrm *xfrm)
+>>>>>>> v3.18
 =======
 static void flow_entry_kill(struct flow_cache_entry *fle,
 				struct netns_xfrm *xfrm)
@@ -128,6 +151,7 @@ static void flow_cache_gc_task(struct work_struct *work)
 {
 	struct list_head gc_list;
 	struct flow_cache_entry *fce, *n;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	INIT_LIST_HEAD(&gc_list);
@@ -150,6 +174,8 @@ static void flow_cache_queue_garbage(struct flow_cache_percpu *fcp,
 		spin_unlock_bh(&flow_cache_gc_lock);
 		schedule_work(&flow_cache_gc_work);
 =======
+=======
+>>>>>>> v3.18
 	struct netns_xfrm *xfrm = container_of(work, struct netns_xfrm,
 						flow_cache_gc_work);
 
@@ -172,6 +198,9 @@ static void flow_cache_queue_garbage(struct flow_cache_percpu *fcp,
 		list_splice_tail(gc_list, &xfrm->flow_cache_gc_list);
 		spin_unlock_bh(&xfrm->flow_cache_gc_lock);
 		schedule_work(&xfrm->flow_cache_gc_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -185,6 +214,11 @@ static void __flow_cache_shrink(struct flow_cache *fc,
 	LIST_HEAD(gc_list);
 	int i, deleted = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct netns_xfrm *xfrm = container_of(fc, struct netns_xfrm,
+						flow_cache_global);
+>>>>>>> v3.18
 =======
 	struct netns_xfrm *xfrm = container_of(fc, struct netns_xfrm,
 						flow_cache_global);
@@ -197,7 +231,11 @@ static void __flow_cache_shrink(struct flow_cache *fc,
 					  &fcp->hash_table[i], u.hlist) {
 			if (saved < shrink_to &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    flow_entry_valid(fle)) {
+=======
+			    flow_entry_valid(fle, xfrm)) {
+>>>>>>> v3.18
 =======
 			    flow_entry_valid(fle, xfrm)) {
 >>>>>>> v3.18
@@ -211,7 +249,11 @@ static void __flow_cache_shrink(struct flow_cache *fc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flow_cache_queue_garbage(fcp, deleted, &gc_list);
+=======
+	flow_cache_queue_garbage(fcp, deleted, &gc_list, xfrm);
+>>>>>>> v3.18
 =======
 	flow_cache_queue_garbage(fcp, deleted, &gc_list, xfrm);
 >>>>>>> v3.18
@@ -271,7 +313,11 @@ flow_cache_lookup(struct net *net, const struct flowi *key, u16 family, u8 dir,
 		  flow_resolve_t resolver, void *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct flow_cache *fc = &flow_cache_global;
+=======
+	struct flow_cache *fc = &net->xfrm.flow_cache_global;
+>>>>>>> v3.18
 =======
 	struct flow_cache *fc = &net->xfrm.flow_cache_global;
 >>>>>>> v3.18
@@ -325,7 +371,11 @@ flow_cache_lookup(struct net *net, const struct flowi *key, u16 family, u8 dir,
 			fcp->hash_count++;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (likely(fle->genid == atomic_read(&flow_cache_genid))) {
+=======
+	} else if (likely(fle->genid == atomic_read(&net->xfrm.flow_cache_genid))) {
+>>>>>>> v3.18
 =======
 	} else if (likely(fle->genid == atomic_read(&net->xfrm.flow_cache_genid))) {
 >>>>>>> v3.18
@@ -350,7 +400,11 @@ nocache:
 	flo = resolver(net, key, family, dir, flo, ctx);
 	if (fle) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fle->genid = atomic_read(&flow_cache_genid);
+=======
+		fle->genid = atomic_read(&net->xfrm.flow_cache_genid);
+>>>>>>> v3.18
 =======
 		fle->genid = atomic_read(&net->xfrm.flow_cache_genid);
 >>>>>>> v3.18
@@ -378,6 +432,11 @@ static void flow_cache_flush_tasklet(unsigned long data)
 	LIST_HEAD(gc_list);
 	int i, deleted = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct netns_xfrm *xfrm = container_of(fc, struct netns_xfrm,
+						flow_cache_global);
+>>>>>>> v3.18
 =======
 	struct netns_xfrm *xfrm = container_of(fc, struct netns_xfrm,
 						flow_cache_global);
@@ -388,7 +447,11 @@ static void flow_cache_flush_tasklet(unsigned long data)
 		hlist_for_each_entry_safe(fle, tmp,
 					  &fcp->hash_table[i], u.hlist) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (flow_entry_valid(fle))
+=======
+			if (flow_entry_valid(fle, xfrm))
+>>>>>>> v3.18
 =======
 			if (flow_entry_valid(fle, xfrm))
 >>>>>>> v3.18
@@ -401,7 +464,11 @@ static void flow_cache_flush_tasklet(unsigned long data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flow_cache_queue_garbage(fcp, deleted, &gc_list);
+=======
+	flow_cache_queue_garbage(fcp, deleted, &gc_list, xfrm);
+>>>>>>> v3.18
 =======
 	flow_cache_queue_garbage(fcp, deleted, &gc_list, xfrm);
 >>>>>>> v3.18
@@ -439,10 +506,16 @@ static void flow_cache_flush_per_cpu(void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flow_cache_flush(void)
 {
 	struct flow_flush_info info;
 	static DEFINE_MUTEX(flow_flush_sem);
+=======
+void flow_cache_flush(struct net *net)
+{
+	struct flow_flush_info info;
+>>>>>>> v3.18
 =======
 void flow_cache_flush(struct net *net)
 {
@@ -459,8 +532,13 @@ void flow_cache_flush(struct net *net)
 	/* Don't want cpus going down or up during this. */
 	get_online_cpus();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&flow_flush_sem);
 	info.cache = &flow_cache_global;
+=======
+	mutex_lock(&net->xfrm.flow_flush_sem);
+	info.cache = &net->xfrm.flow_cache_global;
+>>>>>>> v3.18
 =======
 	mutex_lock(&net->xfrm.flow_flush_sem);
 	info.cache = &net->xfrm.flow_cache_global;
@@ -485,7 +563,11 @@ void flow_cache_flush(struct net *net)
 
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&flow_flush_sem);
+=======
+	mutex_unlock(&net->xfrm.flow_flush_sem);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&net->xfrm.flow_flush_sem);
 >>>>>>> v3.18
@@ -495,6 +577,7 @@ done:
 
 static void flow_cache_flush_task(struct work_struct *work)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	flow_cache_flush();
 }
@@ -508,6 +591,8 @@ void flow_cache_flush_deferred(void)
 
 static int __cpuinit flow_cache_cpu_prepare(struct flow_cache *fc, int cpu)
 =======
+=======
+>>>>>>> v3.18
 	struct netns_xfrm *xfrm = container_of(work, struct netns_xfrm,
 						flow_cache_gc_work);
 	struct net *net = container_of(xfrm, struct net, xfrm);
@@ -521,6 +606,9 @@ void flow_cache_flush_deferred(struct net *net)
 }
 
 static int flow_cache_cpu_prepare(struct flow_cache *fc, int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct flow_cache_percpu *fcp = per_cpu_ptr(fc->percpu, cpu);
@@ -540,18 +628,24 @@ static int flow_cache_cpu_prepare(struct flow_cache *fc, int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit flow_cache_cpu(struct notifier_block *nfb,
 			  unsigned long action,
 			  void *hcpu)
 {
 	struct flow_cache *fc = container_of(nfb, struct flow_cache, hotcpu_notifier);
 =======
+=======
+>>>>>>> v3.18
 static int flow_cache_cpu(struct notifier_block *nfb,
 			  unsigned long action,
 			  void *hcpu)
 {
 	struct flow_cache *fc = container_of(nfb, struct flow_cache,
 						hotcpu_notifier);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int res, cpu = (unsigned long) hcpu;
 	struct flow_cache_percpu *fcp = per_cpu_ptr(fc->percpu, cpu);
@@ -572,10 +666,13 @@ static int flow_cache_cpu(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init flow_cache_init(struct flow_cache *fc)
 {
 	int i;
 =======
+=======
+>>>>>>> v3.18
 int flow_cache_init(struct net *net)
 {
 	int i;
@@ -590,6 +687,9 @@ int flow_cache_init(struct net *net)
 	INIT_WORK(&net->xfrm.flow_cache_gc_work, flow_cache_gc_task);
 	INIT_WORK(&net->xfrm.flow_cache_flush_work, flow_cache_flush_task);
 	mutex_init(&net->xfrm.flow_flush_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fc->hash_shift = 10;
@@ -635,6 +735,7 @@ err:
 	return -ENOMEM;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __init flow_cache_init_global(void)
 {
@@ -647,6 +748,8 @@ static int __init flow_cache_init_global(void)
 
 module_init(flow_cache_init_global);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(flow_cache_init);
 
 void flow_cache_fini(struct net *net)
@@ -667,4 +770,7 @@ void flow_cache_fini(struct net *net)
 	fc->percpu = NULL;
 }
 EXPORT_SYMBOL(flow_cache_fini);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

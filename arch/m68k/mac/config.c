@@ -27,14 +27,20 @@
 #include <linux/cuda.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOOTINFO_COMPAT_1_0
 #include <asm/setup.h>
 #include <asm/bootinfo.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/setup.h>
 #include <asm/bootinfo.h>
 #include <asm/bootinfo-mac.h>
 #include <asm/byteorder.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/io.h>
@@ -78,6 +84,7 @@ static void mac_identify(void);
 static void mac_report_hardware(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_EARLY_PRINTK
 asmlinkage void __init mac_early_print(const char *s, unsigned n);
 
@@ -105,6 +112,8 @@ late_initcall(mac_unregister_early_cons);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void __init mac_sched_init(irq_handler_t vector)
 {
 	via_init_clock(vector);
@@ -117,6 +126,7 @@ static void __init mac_sched_init(irq_handler_t vector)
 int __init mac_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const u_long *data = record->data;
 
@@ -158,6 +168,8 @@ int __init mac_parse_bootinfo(const struct bi_record *record)
 	case BI_MAC_ROMBASE:
 		mac_bi_data.rombase = *data;
 =======
+=======
+>>>>>>> v3.18
 	const void *data = record->data;
 
 	switch (be16_to_cpu(record->tag)) {
@@ -198,6 +210,9 @@ int __init mac_parse_bootinfo(const struct bi_record *record)
 		break;
 	case BI_MAC_ROMBASE:
 		mac_bi_data.rombase = be32_to_cpup(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -242,10 +257,13 @@ void __init config_mac(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_EARLY_PRINTK
 	register_console(&mac_early_cons);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

@@ -13,6 +13,7 @@
 
 #include "f2fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "node.h"
 
 bool f2fs_may_inline_data(struct inode *inode)
@@ -39,6 +40,8 @@ bool f2fs_may_inline_dentry(struct inode *inode)
 
 	if (!S_ISDIR(inode->i_mode))
 =======
+=======
+>>>>>>> v3.18
 
 bool f2fs_may_inline(struct inode *inode)
 {
@@ -57,12 +60,16 @@ bool f2fs_may_inline(struct inode *inode)
 
 	i_size = i_size_read(inode);
 	if (i_size > MAX_INLINE_DATA)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 
 	return true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void read_inline_data(struct page *page, struct page *ipage)
 {
@@ -106,6 +113,8 @@ int f2fs_read_inline_data(struct inode *inode, struct page *page)
 {
 	struct page *ipage;
 =======
+=======
+>>>>>>> v3.18
 int f2fs_read_inline_data(struct inode *inode, struct page *page)
 {
 	struct page *ipage;
@@ -115,6 +124,9 @@ int f2fs_read_inline_data(struct inode *inode, struct page *page)
 		zero_user_segment(page, 0, PAGE_CACHE_SIZE);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipage = get_node_page(F2FS_I_SB(inode), inode->i_ino);
@@ -123,6 +135,7 @@ int f2fs_read_inline_data(struct inode *inode, struct page *page)
 		return PTR_ERR(ipage);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!f2fs_has_inline_data(inode)) {
 		f2fs_put_page(ipage, 1);
@@ -234,6 +247,8 @@ int f2fs_write_inline_data(struct inode *inode, struct page *page)
 {
 	void *src_addr, *dst_addr;
 =======
+=======
+>>>>>>> v3.18
 	zero_user_segment(page, MAX_INLINE_DATA, PAGE_CACHE_SIZE);
 
 	/* Copy the whole inline data block */
@@ -340,6 +355,9 @@ int f2fs_write_inline_data(struct inode *inode,
 {
 	void *src_addr, *dst_addr;
 	struct page *ipage;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dnode_of_data dn;
 	int err;
@@ -348,6 +366,7 @@ int f2fs_write_inline_data(struct inode *inode,
 	err = get_dnode_of_data(&dn, 0, LOOKUP_NODE);
 	if (err)
 		return err;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (!f2fs_has_inline_data(inode)) {
@@ -371,6 +390,8 @@ int f2fs_write_inline_data(struct inode *inode,
 	f2fs_put_dnode(&dn);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ipage = dn.inode_page;
 
 	f2fs_wait_on_page_writeback(ipage, NODE);
@@ -412,6 +433,9 @@ void truncate_inline_data(struct inode *inode, u64 from)
 				INLINE_DATA_OFFSET + MAX_INLINE_DATA);
 	set_page_dirty(ipage);
 	f2fs_put_page(ipage, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -440,7 +464,11 @@ process_inline:
 		f2fs_bug_on(sbi, IS_ERR(ipage));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		f2fs_wait_on_page_writeback(ipage, NODE, true);
+=======
+		f2fs_wait_on_page_writeback(ipage, NODE);
+>>>>>>> v3.18
 =======
 		f2fs_wait_on_page_writeback(ipage, NODE);
 >>>>>>> v3.18
@@ -449,11 +477,15 @@ process_inline:
 		dst_addr = inline_data_addr(ipage);
 		memcpy(dst_addr, src_addr, MAX_INLINE_DATA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		set_inode_flag(inode, FI_INLINE_DATA);
 		set_inode_flag(inode, FI_DATA_EXIST);
 
 		set_page_dirty(ipage);
+=======
+		update_inode(inode, ipage);
+>>>>>>> v3.18
 =======
 		update_inode(inode, ipage);
 >>>>>>> v3.18
@@ -465,6 +497,7 @@ process_inline:
 		ipage = get_node_page(sbi, inode->i_ino);
 		f2fs_bug_on(sbi, IS_ERR(ipage));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_inline_inode(inode, ipage, 0);
 		clear_inode_flag(inode, FI_INLINE_DATA);
 		f2fs_put_page(ipage, 1);
@@ -472,6 +505,8 @@ process_inline:
 		if (truncate_blocks(inode, 0, false))
 			return false;
 =======
+=======
+>>>>>>> v3.18
 		f2fs_wait_on_page_writeback(ipage, NODE);
 		zero_user_segment(ipage, INLINE_DATA_OFFSET,
 				 INLINE_DATA_OFFSET + MAX_INLINE_DATA);
@@ -481,11 +516,15 @@ process_inline:
 	} else if (ri && (ri->i_inline & F2FS_INLINE_DATA)) {
 		truncate_blocks(inode, 0, false);
 		set_inode_flag(F2FS_I(inode), FI_INLINE_DATA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto process_inline;
 	}
 	return false;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct f2fs_dir_entry *find_in_inline_dir(struct inode *dir,
@@ -878,5 +917,7 @@ out:
 	f2fs_put_page(ipage, 1);
 	return err;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

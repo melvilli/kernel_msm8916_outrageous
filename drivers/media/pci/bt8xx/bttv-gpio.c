@@ -99,7 +99,11 @@ int bttv_sub_add_device(struct bttv_core *core, char *name)
 	err = device_register(&sub->dev);
 	if (0 != err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(sub);
+=======
+		put_device(&sub->dev);
+>>>>>>> v3.18
 =======
 		put_device(&sub->dev);
 >>>>>>> v3.18

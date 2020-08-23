@@ -83,7 +83,10 @@ void handler_irq(unsigned int pil, struct pt_regs *regs);
 unsigned long leon_get_irqmask(unsigned int irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* irq_32.c */
 void sparc_floppy_irq(int irq, void *dev_id, struct pt_regs *regs);
 
@@ -93,6 +96,9 @@ void sun4m_nmi(struct pt_regs *regs);
 /* sun4d_irq.c */
 void sun4d_handler_irq(unsigned int pil, struct pt_regs *regs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
 
@@ -100,7 +106,11 @@ void sun4d_handler_irq(unsigned int pil, struct pt_regs *regs);
 #define SUN4D_IPI_IRQ 13
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sun4d_ipi_interrupt(void);
+=======
+void sun4d_ipi_interrupt(void);
+>>>>>>> v3.18
 =======
 void sun4d_ipi_interrupt(void);
 >>>>>>> v3.18

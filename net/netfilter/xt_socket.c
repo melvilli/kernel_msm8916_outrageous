@@ -20,7 +20,10 @@
 #include <net/sock.h>
 #include <net/inet_sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/netfilter/nf_tproxy_core.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/netfilter/ipv4/nf_defrag_ipv4.h>
@@ -29,6 +32,10 @@
 #define XT_SOCKET_HAVE_IPV6 1
 #include <linux/netfilter_ipv6/ip6_tables.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/inet6_hashtables.h>
+>>>>>>> v3.18
 =======
 #include <net/inet6_hashtables.h>
 >>>>>>> v3.18
@@ -43,6 +50,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 xt_socket_put_sk(struct sock *sk)
 {
@@ -53,6 +61,8 @@ xt_socket_put_sk(struct sock *sk)
 }
 EXPORT_SYMBOL(xt_socket_put_sk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int
@@ -113,9 +123,12 @@ extract_icmp4_fields(const struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sock*
 xt_socket_get4_sk(const struct sk_buff *skb, struct xt_action_param *par)
 =======
+=======
+>>>>>>> v3.18
 /* "socket" match based redirection (no specific rule)
  * ===================================================
  *
@@ -156,6 +169,9 @@ xt_socket_get_sock_v4(struct net *net, const u8 protocol,
 static bool
 socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 	     const struct xt_socket_mtinfo1 *info)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct iphdr *iph = ip_hdr(skb);
@@ -174,7 +190,11 @@ socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 					sizeof(_hdr), &_hdr);
 		if (hp == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return NULL;
+=======
+			return false;
+>>>>>>> v3.18
 =======
 			return false;
 >>>>>>> v3.18
@@ -189,9 +209,15 @@ socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 		if (extract_icmp4_fields(skb, &protocol, &saddr, &daddr,
 					&sport, &dport))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return NULL;
 	} else {
 		return NULL;
+=======
+			return false;
+	} else {
+		return false;
+>>>>>>> v3.18
 =======
 			return false;
 	} else {
@@ -219,6 +245,7 @@ socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk = nf_tproxy_get_sock_v4(dev_net(skb->dev), protocol,
 				   saddr, daddr, sport, dport,
 				   par->in, NFT_LOOKUP_ANY);
@@ -241,10 +268,15 @@ socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 
 	sk = xt_socket_get4_sk(skb, par);
 =======
+=======
+>>>>>>> v3.18
 	if (!sk)
 		sk = xt_socket_get_sock_v4(dev_net(skb->dev), protocol,
 					   saddr, daddr, sport, dport,
 					   par->in);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sk) {
 		bool wildcard;
@@ -266,6 +298,7 @@ socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 					inet_twsk(sk)->tw_transparent));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (info->flags & XT_SOCKET_RESTORESKMARK && !wildcard &&
 		    transparent)
 			pskb->mark = sk->sk_mark;
@@ -276,18 +309,28 @@ socket_match(const struct sk_buff *skb, struct xt_action_param *par,
 		if (sk != skb->sk)
 			sock_gen_put(sk);
 >>>>>>> v3.18
+=======
+		if (sk != skb->sk)
+			sock_gen_put(sk);
+>>>>>>> v3.18
 
 		if (wildcard || !transparent)
 			sk = NULL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("proto %hhu %pI4:%hu -> %pI4:%hu (orig %pI4:%hu) sock %p\n",
 		 protocol, &saddr, ntohs(sport),
 		 &daddr, ntohs(dport),
 		 &iph->daddr, hp ? ntohs(hp->dest) : 0, sk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (sk != NULL);
 }
@@ -304,7 +347,11 @@ socket_mt4_v0(const struct sk_buff *skb, struct xt_action_param *par)
 
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 socket_mt4_v1_v2_v3(const struct sk_buff *skb, struct xt_action_param *par)
+=======
+socket_mt4_v1_v2(const struct sk_buff *skb, struct xt_action_param *par)
+>>>>>>> v3.18
 =======
 socket_mt4_v1_v2(const struct sk_buff *skb, struct xt_action_param *par)
 >>>>>>> v3.18
@@ -369,9 +416,12 @@ extract_icmp6_fields(const struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sock*
 xt_socket_get6_sk(const struct sk_buff *skb, struct xt_action_param *par)
 =======
+=======
+>>>>>>> v3.18
 static struct sock *
 xt_socket_get_sock_v6(struct net *net, const u8 protocol,
 		      const struct in6_addr *saddr, const struct in6_addr *daddr,
@@ -393,6 +443,9 @@ xt_socket_get_sock_v6(struct net *net, const u8 protocol,
 
 static bool
 socket_mt6_v1_v2(const struct sk_buff *skb, struct xt_action_param *par)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ipv6hdr *iph = ipv6_hdr(skb);
@@ -402,6 +455,10 @@ socket_mt6_v1_v2(const struct sk_buff *skb, struct xt_action_param *par)
 	__be16 uninitialized_var(dport), uninitialized_var(sport);
 	int thoff = 0, uninitialized_var(tproto);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct xt_socket_mtinfo1 *info = (struct xt_socket_mtinfo1 *) par->matchinfo;
+>>>>>>> v3.18
 =======
 	const struct xt_socket_mtinfo1 *info = (struct xt_socket_mtinfo1 *) par->matchinfo;
 >>>>>>> v3.18
@@ -417,7 +474,11 @@ socket_mt6_v1_v2(const struct sk_buff *skb, struct xt_action_param *par)
 					sizeof(_hdr), &_hdr);
 		if (hp == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return NULL;
+=======
+			return false;
+>>>>>>> v3.18
 =======
 			return false;
 >>>>>>> v3.18
@@ -430,6 +491,7 @@ socket_mt6_v1_v2(const struct sk_buff *skb, struct xt_action_param *par)
 	} else if (tproto == IPPROTO_ICMPV6) {
 		if (extract_icmp6_fields(skb, thoff, &tproto, &saddr, &daddr,
 					 &sport, &dport))
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return NULL;
 	} else {
@@ -460,6 +522,8 @@ socket_mt6_v1_v2_v3(const struct sk_buff *skb, struct xt_action_param *par)
 	sk = xt_socket_get6_sk(skb, par);
 
 =======
+=======
+>>>>>>> v3.18
 			return false;
 	} else {
 		return false;
@@ -469,6 +533,9 @@ socket_mt6_v1_v2_v3(const struct sk_buff *skb, struct xt_action_param *par)
 		sk = xt_socket_get_sock_v6(dev_net(skb->dev), tproto,
 					   saddr, daddr, sport, dport,
 					   par->in);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sk) {
 		bool wildcard;
@@ -480,7 +547,11 @@ socket_mt6_v1_v2_v3(const struct sk_buff *skb, struct xt_action_param *par)
 		wildcard = (!(info->flags & XT_SOCKET_NOWILDCARD) &&
 			    sk->sk_state != TCP_TIME_WAIT &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ipv6_addr_any(&inet6_sk(sk)->rcv_saddr));
+=======
+			    ipv6_addr_any(&sk->sk_v6_rcv_saddr));
+>>>>>>> v3.18
 =======
 			    ipv6_addr_any(&sk->sk_v6_rcv_saddr));
 >>>>>>> v3.18
@@ -494,6 +565,7 @@ socket_mt6_v1_v2_v3(const struct sk_buff *skb, struct xt_action_param *par)
 					inet_twsk(sk)->tw_transparent));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (info->flags & XT_SOCKET_RESTORESKMARK && !wildcard &&
 		    transparent)
 			pskb->mark = sk->sk_mark;
@@ -504,19 +576,29 @@ socket_mt6_v1_v2_v3(const struct sk_buff *skb, struct xt_action_param *par)
 		if (sk != skb->sk)
 			sock_gen_put(sk);
 >>>>>>> v3.18
+=======
+		if (sk != skb->sk)
+			sock_gen_put(sk);
+>>>>>>> v3.18
 
 		if (wildcard || !transparent)
 			sk = NULL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("proto %hhd %pI6:%hu -> %pI6:%hu "
 		 "(orig %pI6:%hu) sock %p\n",
 		 tproto, saddr, ntohs(sport),
 		 daddr, ntohs(dport),
 		 &iph->daddr, hp ? ntohs(hp->dest) : 0, sk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (sk != NULL);
 }
@@ -545,6 +627,7 @@ static int socket_mt_v2_check(const struct xt_mtchk_param *par)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int socket_mt_v3_check(const struct xt_mtchk_param *par)
 {
 	const struct xt_socket_mtinfo3 *info =
@@ -558,6 +641,8 @@ static int socket_mt_v3_check(const struct xt_mtchk_param *par)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct xt_match socket_mt_reg[] __read_mostly = {
@@ -575,7 +660,11 @@ static struct xt_match socket_mt_reg[] __read_mostly = {
 		.revision	= 1,
 		.family		= NFPROTO_IPV4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.match		= socket_mt4_v1_v2_v3,
+=======
+		.match		= socket_mt4_v1_v2,
+>>>>>>> v3.18
 =======
 		.match		= socket_mt4_v1_v2,
 >>>>>>> v3.18
@@ -591,7 +680,11 @@ static struct xt_match socket_mt_reg[] __read_mostly = {
 		.revision	= 1,
 		.family		= NFPROTO_IPV6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.match		= socket_mt6_v1_v2_v3,
+=======
+		.match		= socket_mt6_v1_v2,
+>>>>>>> v3.18
 =======
 		.match		= socket_mt6_v1_v2,
 >>>>>>> v3.18
@@ -607,7 +700,11 @@ static struct xt_match socket_mt_reg[] __read_mostly = {
 		.revision	= 2,
 		.family		= NFPROTO_IPV4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.match		= socket_mt4_v1_v2_v3,
+=======
+		.match		= socket_mt4_v1_v2,
+>>>>>>> v3.18
 =======
 		.match		= socket_mt4_v1_v2,
 >>>>>>> v3.18
@@ -623,7 +720,11 @@ static struct xt_match socket_mt_reg[] __read_mostly = {
 		.revision	= 2,
 		.family		= NFPROTO_IPV6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.match		= socket_mt6_v1_v2_v3,
+=======
+		.match		= socket_mt6_v1_v2,
+>>>>>>> v3.18
 =======
 		.match		= socket_mt6_v1_v2,
 >>>>>>> v3.18
@@ -634,6 +735,7 @@ static struct xt_match socket_mt_reg[] __read_mostly = {
 		.me		= THIS_MODULE,
 	},
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		.name = "socket",
@@ -659,6 +761,8 @@ static struct xt_match socket_mt_reg[] __read_mostly = {
 		.me = THIS_MODULE,
 	},
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

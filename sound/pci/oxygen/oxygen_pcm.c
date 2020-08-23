@@ -30,6 +30,12 @@
 #define BUFFER_BYTES_MAX_MULTICH	((1 << 24) * 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FIFO_BYTES			256
+#define FIFO_BYTES_MULTICH		1024
+
+>>>>>>> v3.18
 =======
 #define FIFO_BYTES			256
 #define FIFO_BYTES_MULTICH		1024
@@ -67,6 +73,10 @@ static const struct snd_pcm_hardware oxygen_stereo_hardware = {
 	.periods_min = 1,
 	.periods_max = BUFFER_BYTES_MAX / PERIOD_BYTES_MIN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fifo_size = FIFO_BYTES,
+>>>>>>> v3.18
 =======
 	.fifo_size = FIFO_BYTES,
 >>>>>>> v3.18
@@ -98,6 +108,10 @@ static const struct snd_pcm_hardware oxygen_multichannel_hardware = {
 	.periods_min = 1,
 	.periods_max = BUFFER_BYTES_MAX_MULTICH / PERIOD_BYTES_MIN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fifo_size = FIFO_BYTES_MULTICH,
+>>>>>>> v3.18
 =======
 	.fifo_size = FIFO_BYTES_MULTICH,
 >>>>>>> v3.18
@@ -121,6 +135,10 @@ static const struct snd_pcm_hardware oxygen_ac97_hardware = {
 	.periods_min = 1,
 	.periods_max = BUFFER_BYTES_MAX / PERIOD_BYTES_MIN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fifo_size = FIFO_BYTES,
+>>>>>>> v3.18
 =======
 	.fifo_size = FIFO_BYTES,
 >>>>>>> v3.18
@@ -160,11 +178,17 @@ static int oxygen_open(struct snd_pcm_substream *substream,
 				       SNDRV_PCM_RATE_64000);
 		runtime->hw.rate_min = 44100;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* fall through */
 	case PCM_A:
 	case PCM_B:
 		runtime->hw.fifo_size = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case PCM_MULTICH:

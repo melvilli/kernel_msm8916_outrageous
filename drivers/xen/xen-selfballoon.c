@@ -65,6 +65,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -174,6 +179,10 @@ static void frontswap_selfshrink(void)
 			(cur_frontswap_pages / frontswap_hysteresis);
 	frontswap_shrink(tgt_frontswap_pages);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	frontswap_inertia_counter = frontswap_inertia;
+>>>>>>> v3.18
 =======
 	frontswap_inertia_counter = frontswap_inertia;
 >>>>>>> v3.18
@@ -183,6 +192,10 @@ static void frontswap_selfshrink(void)
 
 #define MB2PAGES(mb)	((mb) << (20 - PAGE_SHIFT))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PAGES2MB(pages) ((pages) >> (20 - PAGE_SHIFT))
+>>>>>>> v3.18
 =======
 #define PAGES2MB(pages) ((pages) >> (20 - PAGE_SHIFT))
 >>>>>>> v3.18
@@ -277,13 +290,19 @@ static ssize_t store_selfballooning(struct device *dev,
 		return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &tmp);
 	if (err || ((tmp != 0) && (tmp != 1)))
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &tmp);
 	if (err)
 		return err;
 	if ((tmp != 0) && (tmp != 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -311,13 +330,19 @@ static ssize_t store_selfballoon_interval(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	selfballoon_interval = val;
@@ -340,13 +365,19 @@ static ssize_t store_selfballoon_downhys(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	selfballoon_downhysteresis = val;
@@ -370,13 +401,19 @@ static ssize_t store_selfballoon_uphys(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	selfballoon_uphysteresis = val;
@@ -400,13 +437,19 @@ static ssize_t store_selfballoon_min_usable_mb(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	selfballoon_min_usable_mb = val;
@@ -431,13 +474,19 @@ static ssize_t store_selfballoon_reserved_mb(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	selfballoon_reserved_mb = val;
@@ -464,13 +513,19 @@ static ssize_t store_frontswap_selfshrinking(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &tmp);
 	if (err || ((tmp != 0) && (tmp != 1)))
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &tmp);
 	if (err)
 		return err;
 	if ((tmp != 0) && (tmp != 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	frontswap_selfshrinking = !!tmp;
@@ -498,13 +553,19 @@ static ssize_t store_frontswap_inertia(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	frontswap_inertia = val;
@@ -528,13 +589,19 @@ static ssize_t store_frontswap_hysteresis(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &val);
 	if (err || val == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
 	if (val == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	frontswap_hysteresis = val;
@@ -582,6 +649,10 @@ int xen_selfballoon_init(bool use_selfballooning, bool use_frontswap_selfshrink)
 {
 	bool enable = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long reserve_pages;
+>>>>>>> v3.18
 =======
 	unsigned long reserve_pages;
 >>>>>>> v3.18
@@ -591,8 +662,12 @@ int xen_selfballoon_init(bool use_selfballooning, bool use_frontswap_selfshrink)
 
 	if (xen_initial_domain()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("xen/balloon: Xen selfballooning driver "
 				"disabled for domain0.\n");
+=======
+		pr_info("Xen selfballooning driver disabled for domain0\n");
+>>>>>>> v3.18
 =======
 		pr_info("Xen selfballooning driver disabled for domain0\n");
 >>>>>>> v3.18
@@ -602,8 +677,12 @@ int xen_selfballoon_init(bool use_selfballooning, bool use_frontswap_selfshrink)
 	xen_selfballooning_enabled = tmem_enabled && use_selfballooning;
 	if (xen_selfballooning_enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("xen/balloon: Initializing Xen "
 					"selfballooning driver.\n");
+=======
+		pr_info("Initializing Xen selfballooning driver\n");
+>>>>>>> v3.18
 =======
 		pr_info("Initializing Xen selfballooning driver\n");
 >>>>>>> v3.18
@@ -613,8 +692,12 @@ int xen_selfballoon_init(bool use_selfballooning, bool use_frontswap_selfshrink)
 	frontswap_selfshrinking = tmem_enabled && use_frontswap_selfshrink;
 	if (frontswap_selfshrinking) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("xen/balloon: Initializing frontswap "
 					"selfshrinking driver.\n");
+=======
+		pr_info("Initializing frontswap selfshrinking driver\n");
+>>>>>>> v3.18
 =======
 		pr_info("Initializing frontswap selfshrinking driver\n");
 >>>>>>> v3.18
@@ -625,7 +708,10 @@ int xen_selfballoon_init(bool use_selfballooning, bool use_frontswap_selfshrink)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Give selfballoon_reserved_mb a default value(10% of total ram pages)
 	 * to make selfballoon not so aggressive.
@@ -646,6 +732,9 @@ int xen_selfballoon_init(bool use_selfballooning, bool use_frontswap_selfshrink)
 		reserve_pages = totalram_pages / 10;
 		selfballoon_reserved_mb = PAGES2MB(reserve_pages);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	schedule_delayed_work(&selfballoon_worker, selfballoon_interval * HZ);
 

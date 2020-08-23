@@ -7,7 +7,13 @@ menu "PTP clock support"
 config PTP_1588_CLOCK
 	tristate "PTP clock support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PPS
+=======
+	depends on NET
+	select PPS
+	select NET_PTP_CLASSIFY
+>>>>>>> v3.18
 =======
 	depends on NET
 	select PPS
@@ -79,6 +85,11 @@ config DP83640_PHY
 config PTP_1588_CLOCK_PCH
 	tristate "Intel PCH EG20T as PTP clock"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on X86_32 || COMPILE_TEST
+	depends on HAS_IOMEM && NET
+>>>>>>> v3.18
 =======
 	depends on X86_32 || COMPILE_TEST
 	depends on HAS_IOMEM && NET

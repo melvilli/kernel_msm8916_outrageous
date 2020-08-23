@@ -3,8 +3,12 @@
 #
 config RAPIDIO_TSI57X
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "IDT Tsi57x SRIO switches support"
 	depends on RAPIDIO
+=======
+	tristate "IDT Tsi57x SRIO switches support"
+>>>>>>> v3.18
 =======
 	tristate "IDT Tsi57x SRIO switches support"
 >>>>>>> v3.18
@@ -13,8 +17,12 @@ config RAPIDIO_TSI57X
 
 config RAPIDIO_CPS_XX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "IDT CPS-xx SRIO switches support"
 	depends on RAPIDIO
+=======
+	tristate "IDT CPS-xx SRIO switches support"
+>>>>>>> v3.18
 =======
 	tristate "IDT CPS-xx SRIO switches support"
 >>>>>>> v3.18
@@ -23,8 +31,12 @@ config RAPIDIO_CPS_XX
 
 config RAPIDIO_TSI568
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Tsi568 SRIO switch support"
 	depends on RAPIDIO
+=======
+	tristate "Tsi568 SRIO switch support"
+>>>>>>> v3.18
 =======
 	tristate "Tsi568 SRIO switch support"
 >>>>>>> v3.18
@@ -33,6 +45,7 @@ config RAPIDIO_TSI568
 	  Includes support for IDT Tsi568 serial RapidIO switch.
 
 config RAPIDIO_CPS_GEN2
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool "IDT CPS Gen.2 SRIO switch support"
 	depends on RAPIDIO
@@ -47,8 +60,13 @@ config RAPIDIO_TSI500
 	---help---
 	  Includes support for IDT Tsi500 parallel RapidIO switch.
 =======
+=======
+>>>>>>> v3.18
 	tristate "IDT CPS Gen.2 SRIO switch support"
 	default n
 	---help---
 	  Includes support for ITD CPS Gen.2 serial RapidIO switches.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

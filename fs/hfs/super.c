@@ -113,6 +113,10 @@ static int hfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 static int hfs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18

@@ -1,10 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 menuconfig SND_HDA_INTEL
 	tristate "Intel HD Audio"
 	select SND_PCM
 	select SND_VMASTER
 	select SND_KCTL_JACK
 =======
+=======
+>>>>>>> v3.18
 menu "HD-Audio"
 
 config SND_HDA
@@ -17,6 +20,9 @@ config SND_HDA_INTEL
 	tristate "HD Audio PCI"
 	depends on SND_PCI
 	select SND_HDA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say Y here to include support for Intel "High Definition
@@ -29,8 +35,11 @@ config SND_HDA_INTEL
 	  will be called snd-hda-intel.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if SND_HDA_INTEL
 =======
+=======
+>>>>>>> v3.18
 config SND_HDA_TEGRA
 	tristate "NVIDIA Tegra HD Audio"
 	depends on ARCH_TEGRA
@@ -47,6 +56,9 @@ config SND_HDA_TEGRA
 	  will be called snd-hda-tegra.
 
 if SND_HDA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SND_HDA_DSP_LOADER
@@ -76,7 +88,10 @@ config SND_HDA_HWDEP
 config SND_HDA_RECONFIG
 	bool "Allow dynamic codec reconfiguration"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SND_HDA_HWDEP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -88,7 +103,11 @@ config SND_HDA_RECONFIG
 config SND_HDA_INPUT_BEEP
 	bool "Support digital beep via input layer"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on INPUT=y || INPUT=SND_HDA_INTEL
+=======
+	depends on INPUT=y || INPUT=SND_HDA
+>>>>>>> v3.18
 =======
 	depends on INPUT=y || INPUT=SND_HDA
 >>>>>>> v3.18
@@ -118,7 +137,10 @@ config SND_HDA_PATCH_LOADER
 	bool "Support initialization patch loading for HD-audio"
 	select FW_LOADER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_HDA_HWDEP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select SND_HDA_RECONFIG
@@ -128,6 +150,7 @@ config SND_HDA_PATCH_LOADER
 	  start up.  The "patch" file can be specified via patch module
 	  option, such as patch=hda-init.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  This option turns on hwdep and reconfig features automatically.
 
@@ -253,6 +276,8 @@ config SND_HDA_CODEC_CA0132_DSP
 	depends on SND_HDA_CODEC_CA0132 && FW_LOADER
 	select SND_HDA_DSP_LOADER
 =======
+=======
+>>>>>>> v3.18
 config SND_HDA_CODEC_REALTEK
 	tristate "Build Realtek HD-audio codec support"
 	select SND_HDA_GENERIC
@@ -352,6 +377,9 @@ config SND_HDA_CODEC_CA0132_DSP
 	depends on SND_HDA_CODEC_CA0132
 	select SND_HDA_DSP_LOADER
 	select FW_LOADER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say Y here to enable the DSP for Creative CA0132 for extended
@@ -361,6 +389,7 @@ config SND_HDA_CODEC_CA0132_DSP
 	  (ctefx.bin).
 
 config SND_HDA_CODEC_CMEDIA
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool "Build C-Media HD-audio codec support"
 	default y
@@ -394,6 +423,8 @@ config SND_HDA_GENERIC
 	  in snd-hda-intel driver.
 
 =======
+=======
+>>>>>>> v3.18
 	tristate "Build C-Media HD-audio codec support"
 	select SND_HDA_GENERIC
 	help
@@ -421,6 +452,9 @@ config SND_HDA_GENERIC
 comment "Set to Y if you want auto-loading the codec driver"
 	depends on SND_HDA=y && SND_HDA_GENERIC=m
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SND_HDA_POWER_SAVE_DEFAULT
 	int "Default time-out for HD-audio power-save mode"
@@ -432,6 +466,11 @@ config SND_HDA_POWER_SAVE_DEFAULT
 
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+endmenu
+>>>>>>> v3.18
 =======
 
 endmenu

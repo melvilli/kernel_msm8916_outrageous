@@ -4,6 +4,10 @@
 #include <stdbool.h>
 #include "util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "intlist.h"
+>>>>>>> v3.18
 =======
 #include "intlist.h"
 >>>>>>> v3.18
@@ -12,6 +16,10 @@
 #define MAX_PROBE_BUFFER	1024
 #define MAX_PROBES		 128
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_PROBE_ARGS		 128
+>>>>>>> v3.18
 =======
 #define MAX_PROBE_ARGS		 128
 >>>>>>> v3.18
@@ -23,7 +31,11 @@ static inline int is_c_varname(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_DWARF_SUPPORT
 >>>>>>> v3.18
@@ -36,6 +48,10 @@ static inline int is_c_varname(const char *name)
 struct debuginfo {
 	Dwarf		*dbg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Dwfl_Module	*mod;
+>>>>>>> v3.18
 =======
 	Dwfl_Module	*mod;
 >>>>>>> v3.18
@@ -44,6 +60,7 @@ struct debuginfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct debuginfo *debuginfo__new(const char *path);
 extern struct debuginfo *debuginfo__new_online_kernel(unsigned long addr);
 extern void debuginfo__delete(struct debuginfo *self);
@@ -51,12 +68,17 @@ extern void debuginfo__delete(struct debuginfo *self);
 /* Find probe_trace_events specified by perf_probe_event from debuginfo */
 extern int debuginfo__find_trace_events(struct debuginfo *self,
 =======
+=======
+>>>>>>> v3.18
 /* This also tries to open distro debuginfo */
 extern struct debuginfo *debuginfo__new(const char *path);
 extern void debuginfo__delete(struct debuginfo *dbg);
 
 /* Find probe_trace_events specified by perf_probe_event from debuginfo */
 extern int debuginfo__find_trace_events(struct debuginfo *dbg,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					struct perf_probe_event *pev,
 					struct probe_trace_event **tevs,
@@ -64,7 +86,11 @@ extern int debuginfo__find_trace_events(struct debuginfo *dbg,
 
 /* Find a perf_probe_point from debuginfo */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int debuginfo__find_probe_point(struct debuginfo *self,
+=======
+extern int debuginfo__find_probe_point(struct debuginfo *dbg,
+>>>>>>> v3.18
 =======
 extern int debuginfo__find_probe_point(struct debuginfo *dbg,
 >>>>>>> v3.18
@@ -73,17 +99,23 @@ extern int debuginfo__find_probe_point(struct debuginfo *dbg,
 
 /* Find a line range */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int debuginfo__find_line_range(struct debuginfo *self,
 				      struct line_range *lr);
 
 /* Find available variables */
 extern int debuginfo__find_available_vars_at(struct debuginfo *self,
 =======
+=======
+>>>>>>> v3.18
 extern int debuginfo__find_line_range(struct debuginfo *dbg,
 				      struct line_range *lr);
 
 /* Find available variables */
 extern int debuginfo__find_available_vars_at(struct debuginfo *dbg,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					     struct perf_probe_event *pev,
 					     struct variable_list **vls,
@@ -102,7 +134,11 @@ struct probe_finder {
 	Dwarf_Die		cu_die;		/* Current CU */
 	Dwarf_Die		sp_die;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	lcache;		/* Line cache for lazy match */
+=======
+	struct intlist		*lcache;	/* Line cache for lazy match */
+>>>>>>> v3.18
 =======
 	struct intlist		*lcache;	/* Line cache for lazy match */
 >>>>>>> v3.18
@@ -119,6 +155,10 @@ struct probe_finder {
 struct trace_event_finder {
 	struct probe_finder	pf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Dwfl_Module		*mod;		/* For solving symbols */
+>>>>>>> v3.18
 =======
 	Dwfl_Module		*mod;		/* For solving symbols */
 >>>>>>> v3.18
@@ -130,6 +170,10 @@ struct trace_event_finder {
 struct available_var_finder {
 	struct probe_finder	pf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Dwfl_Module		*mod;		/* For solving symbols */
+>>>>>>> v3.18
 =======
 	Dwfl_Module		*mod;		/* For solving symbols */
 >>>>>>> v3.18
@@ -152,7 +196,11 @@ struct line_finder {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* DWARF_SUPPORT */
+=======
+#endif /* HAVE_DWARF_SUPPORT */
+>>>>>>> v3.18
 =======
 #endif /* HAVE_DWARF_SUPPORT */
 >>>>>>> v3.18

@@ -215,8 +215,12 @@ static irqreturn_t stk17ta8_rtc_interrupt(int irq, void *dev_id)
 		else
 			events |= RTC_AF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (likely(pdata->rtc))
 			rtc_update_irq(pdata->rtc, 1, events);
+=======
+		rtc_update_irq(pdata->rtc, 1, events);
+>>>>>>> v3.18
 =======
 		rtc_update_irq(pdata->rtc, 1, events);
 >>>>>>> v3.18
@@ -299,6 +303,7 @@ static int stk17ta8_rtc_probe(struct platform_device *pdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
@@ -313,6 +318,8 @@ static int stk17ta8_rtc_probe(struct platform_device *pdev)
 	if (!ioaddr)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
@@ -321,6 +328,9 @@ static int stk17ta8_rtc_probe(struct platform_device *pdev)
 	ioaddr = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(ioaddr))
 		return PTR_ERR(ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata->ioaddr = ioaddr;
 	pdata->irq = platform_get_irq(pdev, 0);

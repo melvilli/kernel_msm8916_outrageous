@@ -136,7 +136,10 @@ extern void unregister_srm_console(void);
 extern void setup_smp(void);
 extern void handle_ipi(struct pt_regs *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void smp_percpu_timer_interrupt(struct pt_regs *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -145,16 +148,22 @@ extern void smp_percpu_timer_interrupt(struct pt_regs *);
 
 /* time.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t timer_interrupt(int irq, void *dev);
 extern void common_init_rtc(void);
 extern unsigned long est_cycle_freq;
 extern unsigned int common_get_rtc_time(struct rtc_time *time);
 extern int common_set_rtc_time(struct rtc_time *time);
 =======
+=======
+>>>>>>> v3.18
 extern irqreturn_t rtc_timer_interrupt(int irq, void *dev);
 extern void init_clockevent(void);
 extern void common_init_rtc(void);
 extern unsigned long est_cycle_freq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* smc37c93x.c */

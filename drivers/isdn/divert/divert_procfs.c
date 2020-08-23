@@ -87,6 +87,7 @@ isdn_divert_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 	int len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!*((struct divert_info **) file->private_data)) {
 		if (file->f_flags & O_NONBLOCK)
 			return -EAGAIN;
@@ -94,6 +95,8 @@ isdn_divert_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 	}
 	if (!(inf = *((struct divert_info **) file->private_data)))
 =======
+=======
+>>>>>>> v3.18
 	if (!(inf = *((struct divert_info **) file->private_data))) {
 		if (file->f_flags & O_NONBLOCK)
 			return -EAGAIN;
@@ -101,6 +104,9 @@ isdn_divert_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 			*((struct divert_info **) file->private_data)));
 	}
 	if (!inf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return (0);
 

@@ -27,6 +27,10 @@
 #include <asm/rtas.h>
 #include <asm/topology.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../../kernel/cacheinfo.h"
+>>>>>>> v3.18
 =======
 #include "../../kernel/cacheinfo.h"
 >>>>>>> v3.18
@@ -84,7 +88,10 @@ static int pseries_suspend_cpu(void)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pseries_suspend_enable_irqs
  *
  * Post suspend configuration updates
@@ -102,6 +109,9 @@ static void pseries_suspend_enable_irqs(void)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pseries_suspend_enter - Final phase of hibernation
  *
@@ -131,7 +141,11 @@ static int pseries_prepare_late(void)
 	atomic_set(&suspend_data.error, 0);
 	suspend_data.complete = &suspend_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(suspend_work);
+=======
+	reinit_completion(&suspend_work);
+>>>>>>> v3.18
 =======
 	reinit_completion(&suspend_work);
 >>>>>>> v3.18
@@ -203,8 +217,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(hibernate, S_IWUSR, NULL, store_hibernate);
 =======
+=======
+>>>>>>> v3.18
 #define USER_DT_UPDATE	0
 #define KERN_DT_UPDATE	1
 
@@ -229,6 +246,9 @@ static ssize_t show_hibernate(struct device *dev,
 
 static DEVICE_ATTR(hibernate, S_IWUSR | S_IRUGO,
 		   show_hibernate, store_hibernate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct bus_type suspend_subsys = {
@@ -280,7 +300,11 @@ static int __init pseries_suspend_init(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!machine_is(pseries) || !firmware_has_feature(FW_FEATURE_LPAR))
+=======
+	if (!firmware_has_feature(FW_FEATURE_LPAR))
+>>>>>>> v3.18
 =======
 	if (!firmware_has_feature(FW_FEATURE_LPAR))
 >>>>>>> v3.18
@@ -295,15 +319,21 @@ static int __init pseries_suspend_init(void)
 
 	ppc_md.suspend_disable_cpu = pseries_suspend_cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	suspend_set_ops(&pseries_suspend_ops);
 	return 0;
 }
 
 __initcall(pseries_suspend_init);
 =======
+=======
+>>>>>>> v3.18
 	ppc_md.suspend_enable_irqs = pseries_suspend_enable_irqs;
 	suspend_set_ops(&pseries_suspend_ops);
 	return 0;
 }
 machine_device_initcall(pseries, pseries_suspend_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

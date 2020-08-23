@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
 >>>>>>> v3.18
@@ -13,6 +17,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define pr_fmt(fmt) "#%d: " fmt, __LINE__
@@ -35,6 +40,8 @@
 
 #define SPMI_PMIC_ARB_NAME		"spmi_pmic_arb"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/err.h>
 #include <linux/interrupt.h>
@@ -48,12 +55,16 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/spmi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* PMIC Arbiter configuration registers */
 #define PMIC_ARB_VERSION		0x0000
 #define PMIC_ARB_INT_EN			0x0004
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum {
 	PMIC_ARB_GENI_CTRL,
@@ -86,6 +97,8 @@ u32 pmic_arb_regs_v2[] = {
 #define PMIC_ARB_V2_MIN			(0x20010000)
 #define PMIC_ARB_CORE_REGISTERS_OBS	(0x800000)
 =======
+=======
+>>>>>>> v3.18
 /* PMIC Arbiter channel registers */
 #define PMIC_ARB_CMD(N)			(0x0800 + (0x80 * (N)))
 #define PMIC_ARB_CONFIG(N)		(0x0804 + (0x80 * (N)))
@@ -100,6 +113,9 @@ u32 pmic_arb_regs_v2[] = {
 #define SPMI_PIC_ACC_ENABLE(N)		(0x0200 + (4 * (N)))
 #define SPMI_PIC_IRQ_STATUS(N)		(0x0600 + (4 * (N)))
 #define SPMI_PIC_IRQ_CLEAR(N)		(0x0A00 + (4 * (N)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Mapping Table */
@@ -118,12 +134,15 @@ u32 pmic_arb_regs_v2[] = {
 #define SPMI_OWNERSHIP_PERIPH2OWNER(X)	((X) & 0x7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PPID, SID, PID */
 #define PMIC_ARB_PERIPH_ID(spmi_addr)		(((spmi_addr) >> 8) & 0xFF)
 #define PMIC_ARB_ADDR_IN_PERIPH(spmi_addr)	((spmi_addr) & 0xFF)
 #define PMIC_ARB_REG_CHNL(chnl_num)		(0x800 + 0x4 * (chnl_num))
 #define PMIC_ARB_TO_PPID(sid, pid)	((pid & 0xFF) | ((sid & 0xF) << 8))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Channel Status fields */
@@ -158,7 +177,10 @@ enum pmic_arb_cmd_op_code {
 /* Maximum number of support PMIC peripherals */
 #define PMIC_ARB_MAX_PERIPHS		256
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PMIC_ARB_MAX_CHNL		128
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PMIC_ARB_PERIPH_ID_VALID	(1 << 15)
@@ -171,6 +193,7 @@ enum pmic_arb_cmd_op_code {
 /* interrupt enable bit */
 #define SPMI_PIC_ACC_ENABLE_BIT		BIT(0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* lookup channel num, given sid+pid. each sid points to 8bits of pids */
 #define PMIC_ARB_CHNL(pmic_arb, sid, pid) \
@@ -416,6 +439,8 @@ static int pmic_arb_wait_for_done(struct spmi_pmic_arb_dev *dev,
 					"(peripheral not owned by apps)",
 					status, sid, addr);
 =======
+=======
+>>>>>>> v3.18
 /**
  * spmi_pmic_arb_dev - SPMI PMIC Arbiter object
  *
@@ -501,11 +526,15 @@ static int pmic_arb_wait_for_done(struct spmi_controller *ctrl)
 				dev_err(&ctrl->dev,
 					"%s: transaction denied (0x%x)\n",
 					__func__, status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return -EPERM;
 			}
 
 			if (status & PMIC_ARB_STATUS_FAILURE) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				dev_err(dev->dev, diag_msg_fmt,
 				   "failed (possible parity-error due to noisy"
@@ -516,10 +545,16 @@ static int pmic_arb_wait_for_done(struct spmi_controller *ctrl)
 					"%s: transaction failed (0x%x)\n",
 					__func__, status);
 >>>>>>> v3.18
+=======
+				dev_err(&ctrl->dev,
+					"%s: transaction failed (0x%x)\n",
+					__func__, status);
+>>>>>>> v3.18
 				return -EIO;
 			}
 
 			if (status & PMIC_ARB_STATUS_DROPPED) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				dev_err(dev->dev, diag_msg_fmt,
 					"transaction dropped pmic-arb busy",
@@ -629,6 +664,8 @@ static int pmic_arb_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid)
 
 	pr_debug("op:0x%x sid:%d\n", opc, sid);
 =======
+=======
+>>>>>>> v3.18
 				dev_err(&ctrl->dev,
 					"%s: transaction dropped (0x%x)\n",
 					__func__, status);
@@ -653,12 +690,16 @@ static int pmic_arb_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid)
 	unsigned long flags;
 	u32 cmd;
 	int rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check for valid non-data command */
 	if (opc < SPMI_CMD_RESET || opc > SPMI_CMD_WAKEUP)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return pmic_arb->ver->non_data_cmd(pmic_arb, opc, sid);
 }
@@ -703,6 +744,8 @@ static int pmic_arb_read_cmd(struct spmi_controller *ctrl,
 	dev_dbg(pmic_arb->dev, "client-rd op:0x%x sid:%d addr:0x%x bc:%d\n",
 							opc, sid, addr, bc + 1);
 =======
+=======
+>>>>>>> v3.18
 	cmd = ((opc | 0x40) << 27) | ((sid & 0xf) << 20);
 
 	raw_spin_lock_irqsave(&pmic_arb->lock, flags);
@@ -728,6 +771,9 @@ static int pmic_arb_read_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid,
 			PMIC_ARB_MAX_TRANS_BYTES, len);
 		return  -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check the opcode */
@@ -740,6 +786,7 @@ static int pmic_arb_read_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid,
 	else
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmd = pmic_arb->ver->fmt_cmd(opc, sid, addr, bc);
 
@@ -785,6 +832,8 @@ static int pmic_arb_write_cmd(struct spmi_controller *ctrl,
 	dev_dbg(pmic_arb->dev, "client-wr op:0x%x sid:%d addr:0x%x bc:%d\n",
 							opc, sid, addr, bc + 1);
 =======
+=======
+>>>>>>> v3.18
 	cmd = (opc << 27) | ((sid & 0xf) << 20) | (addr << 4) | (bc & 0x7);
 
 	raw_spin_lock_irqsave(&pmic_arb->lock, flags);
@@ -820,6 +869,9 @@ static int pmic_arb_write_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid,
 			PMIC_ARB_MAX_TRANS_BYTES, len);
 		return  -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check the opcode */
@@ -834,6 +886,7 @@ static int pmic_arb_write_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid,
 	else
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmd = pmic_arb->ver->fmt_cmd(opc, sid, addr, bc);
 
@@ -857,6 +910,8 @@ static int pmic_arb_write_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid,
 		pmic_arb_dbg_err_dump(pmic_arb, rc, "write", opc, sid, addr, bc,
 									buf);
 =======
+=======
+>>>>>>> v3.18
 	cmd = (opc << 27) | ((sid & 0xf) << 20) | (addr << 4) | (bc & 0x7);
 
 	/* Write data to FIFOs */
@@ -871,11 +926,15 @@ static int pmic_arb_write_cmd(struct spmi_controller *ctrl, u8 opc, u8 sid,
 	pmic_arb_base_write(pmic_arb, PMIC_ARB_CMD(pmic_arb->channel), cmd);
 	rc = pmic_arb_wait_for_done(ctrl);
 	raw_spin_unlock_irqrestore(&pmic_arb->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* APID to PPID */
 static u16 get_peripheral_id(struct spmi_pmic_arb_dev *pmic_arb, u8 apid)
@@ -1151,6 +1210,8 @@ __pmic_arb_periph_irq(int irq, void *dev_id, bool show)
 
 				ret |= periph_interrupt(pmic_arb, id, show);
 =======
+=======
+>>>>>>> v3.18
 enum qpnpint_regs {
 	QPNPINT_REG_RT_STS		= 0x10,
 	QPNPINT_REG_SET_TYPE		= 0x11,
@@ -1379,11 +1440,15 @@ static int search_mapping_table(struct spmi_pmic_arb_dev *pa,
 			} else {
 				*apid = SPMI_MAPPING_BIT_IS_0_RESULT(data);
 				return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ret;
 }
@@ -1735,6 +1800,8 @@ err_add_controller:
 		irq_set_irq_wake(pmic_arb->pic_irq, 0);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	return -ENODEV;
 }
 
@@ -1921,11 +1988,15 @@ err_domain_remove:
 err_put_ctrl:
 	spmi_controller_put(ctrl);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int spmi_pmic_arb_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct spmi_pmic_arb_dev *pmic_arb = platform_get_drvdata(pdev);
 	int ret;
@@ -1948,6 +2019,8 @@ static struct of_device_id spmi_pmic_arb_match_table[] = {
 	{}
 };
 =======
+=======
+>>>>>>> v3.18
 	struct spmi_controller *ctrl = platform_get_drvdata(pdev);
 	struct spmi_pmic_arb_dev *pa = spmi_controller_get_drvdata(ctrl);
 	spmi_controller_remove(ctrl);
@@ -1963,6 +2036,9 @@ static const struct of_device_id spmi_pmic_arb_match_table[] = {
 	{},
 };
 MODULE_DEVICE_TABLE(of, spmi_pmic_arb_match_table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver spmi_pmic_arb_driver = {
@@ -1970,7 +2046,11 @@ static struct platform_driver spmi_pmic_arb_driver = {
 	.remove		= spmi_pmic_arb_remove,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name	= SPMI_PMIC_ARB_NAME,
+=======
+		.name	= "spmi_pmic_arb",
+>>>>>>> v3.18
 =======
 		.name	= "spmi_pmic_arb",
 >>>>>>> v3.18
@@ -1978,6 +2058,7 @@ static struct platform_driver spmi_pmic_arb_driver = {
 		.of_match_table = spmi_pmic_arb_match_table,
 	},
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __init spmi_pmic_arb_init(void)
@@ -1994,6 +2075,11 @@ module_exit(spmi_pmic_arb_exit);
 
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION("1.0");
+=======
+module_platform_driver(spmi_pmic_arb_driver);
+
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 module_platform_driver(spmi_pmic_arb_driver);
 

@@ -31,7 +31,10 @@
 #include <linux/init.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/dmi.h>
@@ -79,6 +82,7 @@ static struct acpi_blacklist_item acpi_blacklist[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if	CONFIG_ACPI_BLACKLIST_YEAR
 
 static int __init blacklist_by_year(void)
@@ -112,6 +116,8 @@ static inline int blacklist_by_year(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int __init acpi_blacklisted(void)
@@ -173,8 +179,11 @@ int __init acpi_blacklisted(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blacklisted += blacklist_by_year();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dmi_check_system(acpi_osi_dmi_table);
@@ -202,13 +211,19 @@ static int __init dmi_disable_osi_win7(const struct dmi_system_id *d)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init dmi_disable_osi_win8(const struct dmi_system_id *d)
 {
 	printk(KERN_NOTICE PREFIX "DMI detected: %s\n", d->ident);
 	acpi_osi_setup("!Windows 2012");
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
@@ -286,7 +301,10 @@ static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 	.callback = dmi_disable_osi_vista,
 	.ident = "Toshiba NB100",
@@ -348,6 +366,9 @@ static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
 		    DMI_MATCH(DMI_PRODUCT_NAME, "Vostro 3546"),
 		},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*

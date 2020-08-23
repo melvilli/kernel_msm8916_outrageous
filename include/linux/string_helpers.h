@@ -21,6 +21,7 @@ int string_get_size(u64 size, enum string_size_units units,
 	(UNESCAPE_SPACE | UNESCAPE_OCTAL | UNESCAPE_HEX | UNESCAPE_SPECIAL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * string_unescape - unquote characters in the given string
  * @src:	source buffer (escaped)
@@ -57,6 +58,8 @@ int string_get_size(u64 size, enum string_size_units units,
  */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int string_unescape(char *src, char *dst, size_t size, unsigned int flags);
 
 static inline int string_unescape_inplace(char *buf, unsigned int flags)
@@ -75,7 +78,10 @@ static inline int string_unescape_any_inplace(char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ESCAPE_SPACE		0x01
 #define ESCAPE_SPECIAL		0x02
 #define ESCAPE_NULL		0x04
@@ -107,5 +113,8 @@ static inline int string_escape_str_any_np(const char *src, char **dst,
 	return string_escape_str(src, dst, sz, ESCAPE_ANY_NP, esc);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

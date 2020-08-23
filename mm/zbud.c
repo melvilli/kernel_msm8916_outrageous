@@ -17,7 +17,11 @@
  * zbud works by storing compressed pages, or "zpages", together in pairs in a
  * single memory page called a "zbud page".  The first buddy is "left
 <<<<<<< HEAD
+<<<<<<< HEAD
  * justifed" at the beginning of the zbud page, and the last buddy is "right
+=======
+ * justified" at the beginning of the zbud page, and the last buddy is "right
+>>>>>>> v3.18
 =======
  * justified" at the beginning of the zbud page, and the last buddy is "right
 >>>>>>> v3.18
@@ -56,6 +60,10 @@
 #include <linux/spinlock.h>
 #include <linux/zbud.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/zpool.h>
+>>>>>>> v3.18
 =======
 #include <linux/zpool.h>
 >>>>>>> v3.18
@@ -68,13 +76,19 @@
  * adjusting internal fragmentation.  It also determines the number of
  * freelists maintained in each pool. NCHUNKS_ORDER of 6 means that the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * allocation granularity will be in chunks of size PAGE_SIZE/64, and there
  * will be 64 freelists per pool.
 =======
+=======
+>>>>>>> v3.18
  * allocation granularity will be in chunks of size PAGE_SIZE/64. As one chunk
  * in allocated page is occupied by zbud header, NCHUNKS will be calculated to
  * 63 which shows the max number of free chunks in zbud page, also there will be
  * 63 freelists per pool.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define NCHUNKS_ORDER	6
@@ -82,8 +96,13 @@
 #define CHUNK_SHIFT	(PAGE_SHIFT - NCHUNKS_ORDER)
 #define CHUNK_SIZE	(1 << CHUNK_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NCHUNKS		(PAGE_SIZE >> CHUNK_SHIFT)
 #define ZHDR_SIZE_ALIGNED CHUNK_SIZE
+=======
+#define ZHDR_SIZE_ALIGNED CHUNK_SIZE
+#define NCHUNKS		((PAGE_SIZE - ZHDR_SIZE_ALIGNED) >> CHUNK_SHIFT)
+>>>>>>> v3.18
 =======
 #define ZHDR_SIZE_ALIGNED CHUNK_SIZE
 #define NCHUNKS		((PAGE_SIZE - ZHDR_SIZE_ALIGNED) >> CHUNK_SHIFT)
@@ -148,8 +167,12 @@ static struct zbud_ops zbud_zpool_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *zbud_zpool_create(char *name, gfp_t gfp,
 			struct zpool_ops *zpool_ops)
+=======
+static void *zbud_zpool_create(gfp_t gfp, struct zpool_ops *zpool_ops)
+>>>>>>> v3.18
 =======
 static void *zbud_zpool_create(gfp_t gfp, struct zpool_ops *zpool_ops)
 >>>>>>> v3.18
@@ -233,7 +256,11 @@ enum buddy {
 
 /* Converts an allocation size in bytes to size in zbud chunks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int size_to_chunks(int size)
+=======
+static int size_to_chunks(size_t size)
+>>>>>>> v3.18
 =======
 static int size_to_chunks(size_t size)
 >>>>>>> v3.18
@@ -297,10 +324,16 @@ static int num_free_chunks(struct zbud_header *zhdr)
 	/*
 	 * Rather than branch for different situations, just use the fact that
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * free buddies have a length of zero to simplify everything. -1 at the
 	 * end for the zbud header.
 	 */
 	return NCHUNKS - zhdr->first_chunks - zhdr->last_chunks - 1;
+=======
+	 * free buddies have a length of zero to simplify everything.
+	 */
+	return NCHUNKS - zhdr->first_chunks - zhdr->last_chunks;
+>>>>>>> v3.18
 =======
 	 * free buddies have a length of zero to simplify everything.
 	 */
@@ -364,17 +397,23 @@ void zbud_destroy_pool(struct zbud_pool *pool)
  * as zbud pool pages.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return: 0 if success and handle is set, otherwise -EINVAL is the size or
  * gfp arguments are invalid or -ENOMEM if the pool was unable to allocate
  * a new page.
  */
 int zbud_alloc(struct zbud_pool *pool, int size, gfp_t gfp,
 =======
+=======
+>>>>>>> v3.18
  * Return: 0 if success and handle is set, otherwise -EINVAL if the size or
  * gfp arguments are invalid or -ENOMEM if the pool was unable to allocate
  * a new page.
  */
 int zbud_alloc(struct zbud_pool *pool, size_t size, gfp_t gfp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unsigned long *handle)
 {
@@ -384,9 +423,15 @@ int zbud_alloc(struct zbud_pool *pool, size_t size, gfp_t gfp,
 	struct page *page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size <= 0 || gfp & __GFP_HIGHMEM)
 		return -EINVAL;
 	if (size > PAGE_SIZE - ZHDR_SIZE_ALIGNED)
+=======
+	if (!size || (gfp & __GFP_HIGHMEM))
+		return -EINVAL;
+	if (size > PAGE_SIZE - ZHDR_SIZE_ALIGNED - CHUNK_SIZE)
+>>>>>>> v3.18
 =======
 	if (!size || (gfp & __GFP_HIGHMEM))
 		return -EINVAL;
@@ -646,12 +691,18 @@ static int __init init_zbud(void)
 	BUILD_BUG_ON(sizeof(struct zbud_header) > ZHDR_SIZE_ALIGNED);
 	pr_info("loaded\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_ZPOOL
 	zpool_register_driver(&zbud_zpool_driver);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -659,11 +710,17 @@ static int __init init_zbud(void)
 static void __exit exit_zbud(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ZPOOL
 	zpool_unregister_driver(&zbud_zpool_driver);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("unloaded\n");
 }

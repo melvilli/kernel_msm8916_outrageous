@@ -23,7 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/i2c.h>
+=======
+#include "port.h"
+>>>>>>> v3.18
 =======
 #include "port.h"
 >>>>>>> v3.18
@@ -42,6 +46,11 @@ anx9805_train(struct nouveau_i2c_port *port, int link_nr, int link_bw, bool enh)
 	u8 tmp, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DBG("ANX9805 train %d 0x%02x %d\n", link_nr, link_bw, enh);
+
+>>>>>>> v3.18
 =======
 	DBG("ANX9805 train %d 0x%02x %d\n", link_nr, link_bw, enh);
 
@@ -70,7 +79,12 @@ anx9805_train(struct nouveau_i2c_port *port, int link_nr, int link_bw, bool enh)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 anx9805_aux(struct nouveau_i2c_port *port, u8 type, u32 addr, u8 *data, u8 size)
+=======
+anx9805_aux(struct nouveau_i2c_port *port, bool retry,
+	    u8 type, u32 addr, u8 *data, u8 size)
+>>>>>>> v3.18
 =======
 anx9805_aux(struct nouveau_i2c_port *port, bool retry,
 	    u8 type, u32 addr, u8 *data, u8 size)
@@ -80,14 +94,20 @@ anx9805_aux(struct nouveau_i2c_port *port, bool retry,
 	struct nouveau_i2c_port *mast = (void *)nv_object(chan)->parent;
 	int i, ret = -ETIMEDOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 tmp;
 
 =======
+=======
+>>>>>>> v3.18
 	u8 buf[16] = {};
 	u8 tmp;
 
 	DBG("%02x %05x %d\n", type, addr, size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tmp = nv_rdi2cr(mast, chan->ctrl, 0x07) & ~0x04;
 	nv_wri2cr(mast, chan->ctrl, 0x07, tmp | 0x04);
@@ -96,15 +116,21 @@ anx9805_aux(struct nouveau_i2c_port *port, bool retry,
 
 	nv_wri2cr(mast, chan->addr, 0xe4, 0x80);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; !(type & 1) && i < size; i++)
 		nv_wri2cr(mast, chan->addr, 0xf0 + i, data[i]);
 =======
+=======
+>>>>>>> v3.18
 	if (!(type & 1)) {
 		memcpy(buf, data, size);
 		DBG("%16ph", buf);
 		for (i = 0; i < size; i++)
 			nv_wri2cr(mast, chan->addr, 0xf0 + i, buf[i]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wri2cr(mast, chan->addr, 0xe5, ((size - 1) << 4) | type);
 	nv_wri2cr(mast, chan->addr, 0xe6, (addr & 0x000ff) >>  0);
@@ -125,9 +151,12 @@ anx9805_aux(struct nouveau_i2c_port *port, bool retry,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; (type & 1) && i < size; i++)
 		data[i] = nv_rdi2cr(mast, chan->addr, 0xf0 + i);
 =======
+=======
+>>>>>>> v3.18
 	if (type & 1) {
 		for (i = 0; i < size; i++)
 			buf[i] = nv_rdi2cr(mast, chan->addr, 0xf0 + i);
@@ -135,6 +164,9 @@ anx9805_aux(struct nouveau_i2c_port *port, bool retry,
 		memcpy(data, buf, size);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = 0;
 done:
@@ -160,7 +192,12 @@ anx9805_aux_chan_ctor(struct nouveau_object *parent,
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     &nouveau_i2c_aux_algo, &chan);
+=======
+				      &nouveau_i2c_aux_algo, &anx9805_aux_func,
+				      &chan);
+>>>>>>> v3.18
 =======
 				      &nouveau_i2c_aux_algo, &anx9805_aux_func,
 				      &chan);
@@ -187,8 +224,11 @@ anx9805_aux_chan_ctor(struct nouveau_object *parent,
 		algo->udelay = max(algo->udelay, 40);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	chan->base.func = &anx9805_aux_func;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -284,7 +324,12 @@ anx9805_ddc_port_ctor(struct nouveau_object *parent,
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     &anx9805_i2c_algo, &port);
+=======
+				      &anx9805_i2c_algo, &anx9805_i2c_func,
+				      &port);
+>>>>>>> v3.18
 =======
 				      &anx9805_i2c_algo, &anx9805_i2c_func,
 				      &port);
@@ -311,8 +356,11 @@ anx9805_ddc_port_ctor(struct nouveau_object *parent,
 		algo->udelay = max(algo->udelay, 40);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	port->base.func = &anx9805_i2c_func;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

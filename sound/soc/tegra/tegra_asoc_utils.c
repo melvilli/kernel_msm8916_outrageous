@@ -174,7 +174,10 @@ int tegra_asoc_utils_init(struct tegra_asoc_utils_data *data,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool new_clocks = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -185,26 +188,36 @@ int tegra_asoc_utils_init(struct tegra_asoc_utils_data *data,
 	else if (of_machine_is_compatible("nvidia,tegra30"))
 		data->soc = TEGRA_ASOC_UTILS_SOC_TEGRA30;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (of_machine_is_compatible("nvidia,tegra114")) {
 		data->soc = TEGRA_ASOC_UTILS_SOC_TEGRA114;
 		new_clocks = true;
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	else if (of_machine_is_compatible("nvidia,tegra114"))
 		data->soc = TEGRA_ASOC_UTILS_SOC_TEGRA114;
 	else if (of_machine_is_compatible("nvidia,tegra124"))
 		data->soc = TEGRA_ASOC_UTILS_SOC_TEGRA124;
 	else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(data->dev, "SoC unknown to Tegra ASoC utils\n");
 		return -EINVAL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_clocks)
 		data->clk_pll_a = clk_get(dev, "pll_a");
 	else
 		data->clk_pll_a = clk_get_sys(NULL, "pll_a");
+=======
+	data->clk_pll_a = clk_get(dev, "pll_a");
+>>>>>>> v3.18
 =======
 	data->clk_pll_a = clk_get(dev, "pll_a");
 >>>>>>> v3.18
@@ -215,10 +228,14 @@ int tegra_asoc_utils_init(struct tegra_asoc_utils_data *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_clocks)
 		data->clk_pll_a_out0 = clk_get(dev, "pll_a_out0");
 	else
 		data->clk_pll_a_out0 = clk_get_sys(NULL, "pll_a_out0");
+=======
+	data->clk_pll_a_out0 = clk_get(dev, "pll_a_out0");
+>>>>>>> v3.18
 =======
 	data->clk_pll_a_out0 = clk_get(dev, "pll_a_out0");
 >>>>>>> v3.18
@@ -229,12 +246,16 @@ int tegra_asoc_utils_init(struct tegra_asoc_utils_data *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_clocks)
 		data->clk_cdev1 = clk_get(dev, "mclk");
 	else if (data->soc == TEGRA_ASOC_UTILS_SOC_TEGRA20)
 		data->clk_cdev1 = clk_get_sys(NULL, "cdev1");
 	else
 		data->clk_cdev1 = clk_get_sys("extern1", NULL);
+=======
+	data->clk_cdev1 = clk_get(dev, "mclk");
+>>>>>>> v3.18
 =======
 	data->clk_cdev1 = clk_get(dev, "mclk");
 >>>>>>> v3.18

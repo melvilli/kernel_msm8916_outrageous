@@ -64,7 +64,11 @@ MODULE_LICENSE("GPL");
  * PCI ID of the Intel ICH7 LPC Device within which the GPIO block lives.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ich7_lpc_pci_id) = {
+=======
+static const struct pci_device_id ich7_lpc_pci_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ich7_lpc_pci_id[] = {
 >>>>>>> v3.18
@@ -83,7 +87,11 @@ static int __init ss4200_led_dmi_callback(const struct dmi_system_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __initdata nodetect;
+=======
+static bool nodetect;
+>>>>>>> v3.18
 =======
 static bool nodetect;
 >>>>>>> v3.18
@@ -100,7 +108,11 @@ MODULE_PARM_DESC(nodetect, "Skip DMI-based hardware detection");
  * possible.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id __initdata nas_led_whitelist[] = {
+=======
+static struct dmi_system_id nas_led_whitelist[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct dmi_system_id nas_led_whitelist[] __initdata = {
 >>>>>>> v3.18
@@ -210,7 +222,11 @@ static void nasgpio_led_set_attr(struct led_classdev *led_cdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 nasgpio_led_get_attr(struct led_classdev *led_cdev, u32 port)
+=======
+static u32 nasgpio_led_get_attr(struct led_classdev *led_cdev, u32 port)
+>>>>>>> v3.18
 =======
 static u32 nasgpio_led_get_attr(struct led_classdev *led_cdev, u32 port)
 >>>>>>> v3.18
@@ -486,13 +502,19 @@ static ssize_t nas_led_blink_store(struct device *dev,
 static DEVICE_ATTR(blink, 0644, nas_led_blink_show, nas_led_blink_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *nasgpio_led_attrs[] = {
 	&dev_attr_blink.attr,
 	NULL
 };
 ATTRIBUTE_GROUPS(nasgpio_led);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int register_nasgpio_led(int led_nr)
 {
@@ -507,6 +529,7 @@ static int register_nasgpio_led(int led_nr)
 	led->brightness_set = nasgpio_led_set_brightness;
 	led->blink_set = nasgpio_led_set_blink;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = led_classdev_register(&nas_gpio_pci_dev->dev, led);
 	if (ret)
 		return ret;
@@ -515,12 +538,17 @@ static int register_nasgpio_led(int led_nr)
 		led_classdev_unregister(led);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	led->groups = nasgpio_led_groups;
 	ret = led_classdev_register(&nas_gpio_pci_dev->dev, led);
 	if (ret)
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -529,7 +557,10 @@ static void unregister_nasgpio_led(int led_nr)
 	struct led_classdev *led = get_classdev_for_led_nr(led_nr);
 	led_classdev_unregister(led);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(led->dev, &dev_attr_blink);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

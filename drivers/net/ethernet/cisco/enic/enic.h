@@ -30,6 +30,7 @@
 #include "vnic_nic.h"
 #include "vnic_rss.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define DRV_NAME		"enic"
 #define DRV_DESCRIPTION		"Cisco VIC Ethernet NIC Driver"
@@ -40,6 +41,8 @@
 
 #define ENIC_WQ_MAX		1
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irq.h>
 
 #define DRV_NAME		"enic"
@@ -50,12 +53,20 @@
 #define ENIC_BARS_MAX		6
 
 #define ENIC_WQ_MAX		8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ENIC_RQ_MAX		8
 #define ENIC_CQ_MAX		(ENIC_WQ_MAX + ENIC_RQ_MAX)
 #define ENIC_INTR_MAX		(ENIC_CQ_MAX + 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ENIC_AIC_LARGE_PKT_DIFF	3
+
+>>>>>>> v3.18
 =======
 #define ENIC_AIC_LARGE_PKT_DIFF	3
 
@@ -68,7 +79,10 @@ struct enic_msix_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Store only the lower range.  Higher range is given by fw. */
 struct enic_intr_mod_range {
 	u32 small_pkt_range_start;
@@ -96,6 +110,9 @@ struct enic_rx_coal {
 	u32 use_adaptive_rx_coalesce;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* priv_flags */
 #define ENIC_SRIOV_ENABLED		(1 << 0)
@@ -118,7 +135,10 @@ struct enic_port_profile {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* enic_rfs_fltr_node - rfs filter node in hash table
  *	@@keys: IPv4 5 tuple
  *	@flow_id: flow_id of clsf filter provided by kernel
@@ -154,6 +174,9 @@ struct enic_rfs_flw_tbl {
 	struct timer_list rfs_may_expire;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Per-instance private data structure */
 struct enic {
@@ -171,8 +194,11 @@ struct enic {
 	spinlock_t devcmd_lock;
 	u8 mac_addr[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mc_addr[ENIC_MULTICAST_PERFECT_FILTERS][ETH_ALEN];
 	u8 uc_addr[ENIC_UNICAST_PERFECT_FILTERS][ETH_ALEN];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int flags;
@@ -181,6 +207,10 @@ struct enic {
 	unsigned int uc_count;
 	u32 port_mtu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct enic_rx_coal rx_coalesce_setting;
+>>>>>>> v3.18
 =======
 	struct enic_rx_coal rx_coalesce_setting;
 >>>>>>> v3.18
@@ -190,6 +220,10 @@ struct enic {
 	u16 num_vfs;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t enic_api_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t enic_api_lock;
 >>>>>>> v3.18
@@ -208,7 +242,11 @@ struct enic {
 	u64 rq_truncated_pkts;
 	u64 rq_bad_fcs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct napi_struct napi[ENIC_RQ_MAX];
+=======
+	struct napi_struct napi[ENIC_RQ_MAX + ENIC_WQ_MAX];
+>>>>>>> v3.18
 =======
 	struct napi_struct napi[ENIC_RQ_MAX + ENIC_WQ_MAX];
 >>>>>>> v3.18
@@ -222,6 +260,11 @@ struct enic {
 	____cacheline_aligned struct vnic_cq cq[ENIC_CQ_MAX];
 	unsigned int cq_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct enic_rfs_flw_tbl rfs_h;
+	u32 rx_copybreak;
+>>>>>>> v3.18
 =======
 	struct enic_rfs_flw_tbl rfs_h;
 	u32 rx_copybreak;
@@ -234,7 +277,10 @@ static inline struct device *enic_get_dev(struct enic *enic)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int enic_cq_rq(struct enic *enic, unsigned int rq)
 {
 	return rq;
@@ -282,12 +328,19 @@ static inline unsigned int enic_msix_notify_intr(struct enic *enic)
 	return enic->rq_count + enic->wq_count + 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void enic_reset_addr_lists(struct enic *enic);
 int enic_sriov_enabled(struct enic *enic);
 int enic_is_valid_vf(struct enic *enic, int vf);
 int enic_is_dynamic(struct enic *enic);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void enic_set_ethtool_ops(struct net_device *netdev);
+>>>>>>> v3.18
 =======
 void enic_set_ethtool_ops(struct net_device *netdev);
 >>>>>>> v3.18

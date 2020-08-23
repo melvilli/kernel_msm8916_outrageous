@@ -41,6 +41,10 @@ struct fiemap {
 #define FIEMAP_FLAG_SYNC	0x00000001 /* sync file data before map */
 #define FIEMAP_FLAG_XATTR	0x00000002 /* map extended attribute tree */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FIEMAP_FLAG_CACHE	0x00000004 /* request caching of the extents */
+>>>>>>> v3.18
 =======
 #define FIEMAP_FLAG_CACHE	0x00000004 /* request caching of the extents */
 >>>>>>> v3.18

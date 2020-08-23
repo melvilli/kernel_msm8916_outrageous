@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_SHMBUF_H
 #define __ASM_AVR32_SHMBUF_H
+=======
+#ifndef _UAPI__ASM_AVR32_SHMBUF_H
+#define _UAPI__ASM_AVR32_SHMBUF_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_SHMBUF_H
 #define _UAPI__ASM_AVR32_SHMBUF_H
@@ -45,7 +50,11 @@ struct shminfo64 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_SHMBUF_H */
+=======
+#endif /* _UAPI__ASM_AVR32_SHMBUF_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_SHMBUF_H */
 >>>>>>> v3.18

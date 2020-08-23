@@ -5,7 +5,11 @@
  *
  * Copyright (C) 1998-2008 Novell/SUSE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2009-2010 Canonical Ltd.
+=======
+ * Copyright 2009-2012 Canonical Ltd.
+>>>>>>> v3.18
 =======
  * Copyright 2009-2012 Canonical Ltd.
 >>>>>>> v3.18
@@ -28,6 +32,11 @@
 #include "include/match.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define base_idx(X) ((X) & 0xffffff)
+
+>>>>>>> v3.18
 =======
 #define base_idx(X) ((X) & 0xffffff)
 
@@ -40,7 +49,11 @@
  * Returns: pointer to table else NULL on failure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * NOTE: must be freed by kvfree (not kmalloc)
+=======
+ * NOTE: must be freed by kvfree (not kfree)
+>>>>>>> v3.18
 =======
  * NOTE: must be freed by kvfree (not kfree)
 >>>>>>> v3.18
@@ -59,8 +72,11 @@ static struct table_header *unpack_table(char *blob, size_t bsize)
 	 */
 	th.td_id = be16_to_cpu(*(u16 *) (blob)) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (th.td_id > YYTD_ID_MAX)
 		goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	th.td_flags = be16_to_cpu(*(u16 *) (blob + 2));
@@ -76,11 +92,17 @@ static struct table_header *unpack_table(char *blob, size_t bsize)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	table = kvmalloc(tsize);
 	if (table) {
 		table->td_id = th.td_id;
 		table->td_flags = th.td_flags;
 		table->td_lolen = th.td_lolen;
+=======
+	table = kvzalloc(tsize);
+	if (table) {
+		*table = th;
+>>>>>>> v3.18
 =======
 	table = kvzalloc(tsize);
 	if (table) {
@@ -98,6 +120,7 @@ static struct table_header *unpack_table(char *blob, size_t bsize)
 		else
 			goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* if table was vmalloced make sure the page tables are synced
 		 * before it is used, as it goes live to all cpus.
 		 */
@@ -107,6 +130,8 @@ static struct table_header *unpack_table(char *blob, size_t bsize)
 
 out:
 =======
+=======
+>>>>>>> v3.18
 	}
 
 out:
@@ -115,6 +140,9 @@ out:
 	 */
 	if (is_vmalloc_addr(table))
 		vm_unmap_aliases();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return table;
 fail:
@@ -175,8 +203,12 @@ static int verify_dfa(struct aa_dfa *dfa, int flags)
 			if (DEFAULT_TABLE(dfa)[i] >= state_count)
 				goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* TODO: do check that DEF state recursion terminates */
 			if (BASE_TABLE(dfa)[i] + 255 >= trans_count) {
+=======
+			if (base_idx(BASE_TABLE(dfa)[i]) + 255 >= trans_count) {
+>>>>>>> v3.18
 =======
 			if (base_idx(BASE_TABLE(dfa)[i]) + 255 >= trans_count) {
 >>>>>>> v3.18
@@ -356,7 +388,11 @@ unsigned int aa_dfa_match_len(struct aa_dfa *dfa, unsigned int start,
 		/* default is direct to next state */
 		for (; len; len--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pos = base[state] + equiv[(u8) *str++];
+=======
+			pos = base_idx(base[state]) + equiv[(u8) *str++];
+>>>>>>> v3.18
 =======
 			pos = base_idx(base[state]) + equiv[(u8) *str++];
 >>>>>>> v3.18
@@ -369,7 +405,11 @@ unsigned int aa_dfa_match_len(struct aa_dfa *dfa, unsigned int start,
 		/* default is direct to next state */
 		for (; len; len--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pos = base[state] + (u8) *str++;
+=======
+			pos = base_idx(base[state]) + (u8) *str++;
+>>>>>>> v3.18
 =======
 			pos = base_idx(base[state]) + (u8) *str++;
 >>>>>>> v3.18
@@ -414,7 +454,11 @@ unsigned int aa_dfa_match(struct aa_dfa *dfa, unsigned int start,
 		/* default is direct to next state */
 		while (*str) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pos = base[state] + equiv[(u8) *str++];
+=======
+			pos = base_idx(base[state]) + equiv[(u8) *str++];
+>>>>>>> v3.18
 =======
 			pos = base_idx(base[state]) + equiv[(u8) *str++];
 >>>>>>> v3.18
@@ -427,7 +471,11 @@ unsigned int aa_dfa_match(struct aa_dfa *dfa, unsigned int start,
 		/* default is direct to next state */
 		while (*str) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pos = base[state] + (u8) *str++;
+=======
+			pos = base_idx(base[state]) + (u8) *str++;
+>>>>>>> v3.18
 =======
 			pos = base_idx(base[state]) + (u8) *str++;
 >>>>>>> v3.18
@@ -467,7 +515,11 @@ unsigned int aa_dfa_next(struct aa_dfa *dfa, unsigned int state,
 		/* default is direct to next state */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos = base[state] + equiv[(u8) c];
+=======
+		pos = base_idx(base[state]) + equiv[(u8) c];
+>>>>>>> v3.18
 =======
 		pos = base_idx(base[state]) + equiv[(u8) c];
 >>>>>>> v3.18
@@ -478,7 +530,11 @@ unsigned int aa_dfa_next(struct aa_dfa *dfa, unsigned int state,
 	} else {
 		/* default is direct to next state */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos = base[state] + (u8) c;
+=======
+		pos = base_idx(base[state]) + (u8) c;
+>>>>>>> v3.18
 =======
 		pos = base_idx(base[state]) + (u8) c;
 >>>>>>> v3.18

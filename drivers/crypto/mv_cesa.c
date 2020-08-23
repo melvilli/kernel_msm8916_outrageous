@@ -403,6 +403,7 @@ static int mv_hash_final_fallback(struct ahash_request *req)
 	const struct mv_tfm_hash_ctx *tfm_ctx = crypto_tfm_ctx(req->base.tfm);
 	struct mv_req_hash_ctx *req_ctx = ahash_request_ctx(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		struct shash_desc shash;
 		char ctx[crypto_shash_descsize(tfm_ctx->fallback)];
@@ -415,6 +416,8 @@ static int mv_hash_final_fallback(struct ahash_request *req)
 		crypto_shash_init(&desc.shash);
 		crypto_shash_update(&desc.shash, req_ctx->buffer,
 =======
+=======
+>>>>>>> v3.18
 	SHASH_DESC_ON_STACK(shash, tfm_ctx->fallback);
 	int rc;
 
@@ -423,11 +426,15 @@ static int mv_hash_final_fallback(struct ahash_request *req)
 	if (unlikely(req_ctx->first_hash)) {
 		crypto_shash_init(shash);
 		crypto_shash_update(shash, req_ctx->buffer,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    req_ctx->extra_bytes);
 	} else {
 		/* only SHA1 for now....
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc = mv_hash_import_sha1_ctx(req_ctx, &desc.shash);
 		if (rc)
@@ -435,11 +442,16 @@ static int mv_hash_final_fallback(struct ahash_request *req)
 	}
 	rc = crypto_shash_final(&desc.shash, req->result);
 =======
+=======
+>>>>>>> v3.18
 		rc = mv_hash_import_sha1_ctx(req_ctx, shash);
 		if (rc)
 			goto out;
 	}
 	rc = crypto_shash_final(shash, req->result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return rc;
@@ -642,8 +654,13 @@ static int queue_manag(void *data)
 
 		if (async_req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (async_req->tfm->__crt_alg->cra_type !=
 			    &crypto_ahash_type) {
+=======
+			if (crypto_tfm_alg_type(async_req->tfm) !=
+			    CRYPTO_ALG_TYPE_AHASH) {
+>>>>>>> v3.18
 =======
 			if (crypto_tfm_alg_type(async_req->tfm) !=
 			    CRYPTO_ALG_TYPE_AHASH) {
@@ -819,10 +836,15 @@ static int mv_hash_setkey(struct crypto_ahash *tfm, const u8 * key,
 
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct {
 			struct shash_desc shash;
 			char ctx[crypto_shash_descsize(ctx->base_hash)];
 		} desc;
+=======
+		SHASH_DESC_ON_STACK(shash, ctx->base_hash);
+
+>>>>>>> v3.18
 =======
 		SHASH_DESC_ON_STACK(shash, ctx->base_hash);
 
@@ -832,8 +854,13 @@ static int mv_hash_setkey(struct crypto_ahash *tfm, const u8 * key,
 		char opad[ss];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc.shash.tfm = ctx->base_hash;
 		desc.shash.flags = crypto_shash_get_flags(ctx->base_hash) &
+=======
+		shash->tfm = ctx->base_hash;
+		shash->flags = crypto_shash_get_flags(ctx->base_hash) &
+>>>>>>> v3.18
 =======
 		shash->tfm = ctx->base_hash;
 		shash->flags = crypto_shash_get_flags(ctx->base_hash) &
@@ -845,7 +872,11 @@ static int mv_hash_setkey(struct crypto_ahash *tfm, const u8 * key,
 
 			err =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    crypto_shash_digest(&desc.shash, key, keylen, ipad);
+=======
+			    crypto_shash_digest(shash, key, keylen, ipad);
+>>>>>>> v3.18
 =======
 			    crypto_shash_digest(shash, key, keylen, ipad);
 >>>>>>> v3.18
@@ -865,6 +896,7 @@ static int mv_hash_setkey(struct crypto_ahash *tfm, const u8 * key,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = crypto_shash_init(&desc.shash) ? :
 		    crypto_shash_update(&desc.shash, ipad, bs) ? :
 		    crypto_shash_export(&desc.shash, ipad) ? :
@@ -872,12 +904,17 @@ static int mv_hash_setkey(struct crypto_ahash *tfm, const u8 * key,
 		    crypto_shash_update(&desc.shash, opad, bs) ? :
 		    crypto_shash_export(&desc.shash, opad);
 =======
+=======
+>>>>>>> v3.18
 		rc = crypto_shash_init(shash) ? :
 		    crypto_shash_update(shash, ipad, bs) ? :
 		    crypto_shash_export(shash, ipad) ? :
 		    crypto_shash_init(shash) ? :
 		    crypto_shash_update(shash, opad, bs) ? :
 		    crypto_shash_export(shash, opad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (rc == 0)
@@ -891,7 +928,11 @@ static int mv_cra_hash_init(struct crypto_tfm *tfm, const char *base_hash_name,
 			    enum hash_op op, int count_add)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *fallback_driver_name = tfm->__crt_alg->cra_name;
+=======
+	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 =======
 	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
 >>>>>>> v3.18
@@ -959,7 +1000,11 @@ static int mv_cra_hash_hmac_sha1_init(struct crypto_tfm *tfm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t crypto_int(int irq, void *priv)
+=======
+static irqreturn_t crypto_int(int irq, void *priv)
+>>>>>>> v3.18
 =======
 static irqreturn_t crypto_int(int irq, void *priv)
 >>>>>>> v3.18
@@ -984,7 +1029,11 @@ static irqreturn_t crypto_int(int irq, void *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct crypto_alg mv_aes_alg_ecb = {
+=======
+static struct crypto_alg mv_aes_alg_ecb = {
+>>>>>>> v3.18
 =======
 static struct crypto_alg mv_aes_alg_ecb = {
 >>>>>>> v3.18
@@ -1011,7 +1060,11 @@ static struct crypto_alg mv_aes_alg_ecb = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct crypto_alg mv_aes_alg_cbc = {
+=======
+static struct crypto_alg mv_aes_alg_cbc = {
+>>>>>>> v3.18
 =======
 static struct crypto_alg mv_aes_alg_cbc = {
 >>>>>>> v3.18
@@ -1039,7 +1092,11 @@ static struct crypto_alg mv_aes_alg_cbc = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ahash_alg mv_sha1_alg = {
+=======
+static struct ahash_alg mv_sha1_alg = {
+>>>>>>> v3.18
 =======
 static struct ahash_alg mv_sha1_alg = {
 >>>>>>> v3.18
@@ -1067,7 +1124,11 @@ static struct ahash_alg mv_sha1_alg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ahash_alg mv_hmac_sha1_alg = {
+=======
+static struct ahash_alg mv_hmac_sha1_alg = {
+>>>>>>> v3.18
 =======
 static struct ahash_alg mv_hmac_sha1_alg = {
 >>>>>>> v3.18
@@ -1156,7 +1217,11 @@ static int mv_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(irq, crypto_int, IRQF_DISABLED, dev_name(&pdev->dev),
+=======
+	ret = request_irq(irq, crypto_int, 0, dev_name(&pdev->dev),
+>>>>>>> v3.18
 =======
 	ret = request_irq(irq, crypto_int, 0, dev_name(&pdev->dev),
 >>>>>>> v3.18
@@ -1222,7 +1287,10 @@ err:
 	kfree(cp);
 	cpg = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1267,7 +1335,11 @@ static struct platform_driver marvell_crypto = {
 		.owner	= THIS_MODULE,
 		.name	= "mv_crypto",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(mv_cesa_of_match_table),
+=======
+		.of_match_table = mv_cesa_of_match_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = mv_cesa_of_match_table,
 >>>>>>> v3.18

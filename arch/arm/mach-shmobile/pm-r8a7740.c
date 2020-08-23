@@ -11,22 +11,32 @@
 #include <linux/console.h>
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/pm-rmobile.h>
 #include <mach/common.h>
 
 #ifdef CONFIG_PM
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "pm-rmobile.h"
 
 #if defined(CONFIG_PM) && !defined(CONFIG_ARCH_MULTIPLATFORM)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int r8a7740_pd_a4s_suspend(void)
 {
 	/*
 	 * The A4S domain contains the CPU core and therefore it should
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * only be turned off if the CPU is in use.
+=======
+	 * only be turned off if the CPU is not in use.
+>>>>>>> v3.18
 =======
 	 * only be turned off if the CPU is not in use.
 >>>>>>> v3.18
@@ -46,6 +56,12 @@ static int r8a7740_pd_a3sp_suspend(void)
 static struct rmobile_pm_domain r8a7740_pm_domains[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.genpd.name	= "A4LC",
+		.bit_shift	= 1,
+	}, {
+>>>>>>> v3.18
 =======
 		.genpd.name	= "A4LC",
 		.bit_shift	= 1,
@@ -57,8 +73,12 @@ static struct rmobile_pm_domain r8a7740_pm_domains[] = {
 		.no_debug	= true,
 		.suspend	= r8a7740_pd_a4s_suspend,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	{
+=======
+	}, {
+>>>>>>> v3.18
 =======
 	}, {
 >>>>>>> v3.18
@@ -69,10 +89,13 @@ static struct rmobile_pm_domain r8a7740_pm_domains[] = {
 		.suspend	= r8a7740_pd_a3sp_suspend,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.genpd.name	= "A4LC",
 		.bit_shift	= 1,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -83,8 +106,12 @@ void __init r8a7740_init_pm_domains(void)
 	pm_genpd_add_subdomain_names("A4S", "A3SP");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif /* CONFIG_PM */
+=======
+#endif /* CONFIG_PM && !CONFIG_ARCH_MULTIPLATFORM */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PM && !CONFIG_ARCH_MULTIPLATFORM */
 >>>>>>> v3.18

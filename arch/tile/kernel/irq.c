@@ -22,6 +22,10 @@
 #include <arch/spr_def.h>
 #include <asm/traps.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/perf_event.h>
+>>>>>>> v3.18
 =======
 #include <linux/perf_event.h>
 >>>>>>> v3.18
@@ -58,12 +62,15 @@ static DEFINE_PER_CPU(unsigned long, irq_disable_mask)
 static DEFINE_PER_CPU(int, irq_depth);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* State for allocating IRQs on Gx. */
 #if CHIP_HAS_IPI()
 static unsigned long available_irqs = ~(1UL << IRQ_RESCHEDULE);
 static DEFINE_SPINLOCK(available_irqs_lock);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if CHIP_HAS_IPI()
@@ -81,18 +88,24 @@ static DEFINE_SPINLOCK(available_irqs_lock);
 /*
  * The interrupt handling path, implemented in terms of HV interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
  * emulation on TILE64 and TILEPro, and IPI hardware on TILE-Gx.
  */
 void tile_dev_intr(struct pt_regs *regs, int intnum)
 {
 	int depth = __get_cpu_var(irq_depth)++;
 =======
+=======
+>>>>>>> v3.18
  * emulation on TILEPro, and IPI hardware on TILE-Gx.
  * Entered with interrupts disabled.
  */
 void tile_dev_intr(struct pt_regs *regs, int intnum)
 {
 	int depth = __this_cpu_inc_return(irq_depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long original_irqs;
 	unsigned long remaining_irqs;
@@ -141,7 +154,11 @@ void tile_dev_intr(struct pt_regs *regs, int intnum)
 		/* Count device irqs; Linux IPIs are counted elsewhere. */
 		if (irq != IRQ_RESCHEDULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__get_cpu_var(irq_stat).irq_dev_intr_count++;
+=======
+			__this_cpu_inc(irq_stat.irq_dev_intr_count);
+>>>>>>> v3.18
 =======
 			__this_cpu_inc(irq_stat.irq_dev_intr_count);
 >>>>>>> v3.18
@@ -155,15 +172,21 @@ void tile_dev_intr(struct pt_regs *regs, int intnum)
 	 * handling.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (depth == 0)
 		unmask_irqs(~__get_cpu_var(irq_disable_mask));
 
 	__get_cpu_var(irq_depth)--;
 =======
+=======
+>>>>>>> v3.18
 	if (depth == 1)
 		unmask_irqs(~__this_cpu_read(irq_disable_mask));
 
 	__this_cpu_dec(irq_depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -183,7 +206,11 @@ static void tile_irq_chip_enable(struct irq_data *d)
 {
 	get_cpu_var(irq_disable_mask) &= ~(1UL << d->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__get_cpu_var(irq_depth) == 0)
+=======
+	if (__this_cpu_read(irq_depth) == 0)
+>>>>>>> v3.18
 =======
 	if (__this_cpu_read(irq_depth) == 0)
 >>>>>>> v3.18
@@ -233,7 +260,11 @@ static void tile_irq_chip_ack(struct irq_data *d)
 static void tile_irq_chip_eoi(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(__get_cpu_var(irq_disable_mask) & (1UL << d->irq)))
+=======
+	if (!(__this_cpu_read(irq_disable_mask) & (1UL << d->irq)))
+>>>>>>> v3.18
 =======
 	if (!(__this_cpu_read(irq_disable_mask) & (1UL << d->irq)))
 >>>>>>> v3.18
@@ -256,7 +287,11 @@ void __init init_IRQ(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit setup_irq_regs(void)
+=======
+void setup_irq_regs(void)
+>>>>>>> v3.18
 =======
 void setup_irq_regs(void)
 >>>>>>> v3.18
@@ -273,7 +308,11 @@ void tile_irq_activate(unsigned int irq, int tile_irq_type)
 	/*
 	 * We use handle_level_irq() by default because the pending
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * interrupt vector (whether modeled by the HV on TILE64 and
+=======
+	 * interrupt vector (whether modeled by the HV on
+>>>>>>> v3.18
 =======
 	 * interrupt vector (whether modeled by the HV on
 >>>>>>> v3.18
@@ -302,6 +341,7 @@ void ack_bad_irq(unsigned int irq)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Generic, controller-independent functions:
  */
@@ -337,6 +377,8 @@ void destroy_irq(unsigned int irq)
 }
 EXPORT_SYMBOL(destroy_irq);
 =======
+=======
+>>>>>>> v3.18
  * /proc/interrupts printing:
  */
 int arch_show_interrupts(struct seq_file *p, int prec)
@@ -360,5 +402,8 @@ int arch_setup_hwirq(unsigned int irq, int node)
 }
 
 void arch_teardown_hwirq(unsigned int irq) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

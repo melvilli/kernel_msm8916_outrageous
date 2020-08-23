@@ -187,11 +187,14 @@ typedef struct page *pgtable_t;
 #include <asm-generic/getorder.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* vDSO support */
 #ifdef CONFIG_VSYSCALL
 #define __HAVE_ARCH_GATE_AREA
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

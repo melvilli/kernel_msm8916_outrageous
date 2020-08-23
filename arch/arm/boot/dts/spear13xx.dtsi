@@ -23,6 +23,10 @@
 		cpu@0 {
 			compatible = "arm,cortex-a9";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_type = "cpu";
+>>>>>>> v3.18
 =======
 			device_type = "cpu";
 >>>>>>> v3.18
@@ -33,6 +37,10 @@
 		cpu@1 {
 			compatible = "arm,cortex-a9";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_type = "cpu";
+>>>>>>> v3.18
 =======
 			device_type = "cpu";
 >>>>>>> v3.18
@@ -90,8 +98,13 @@
 		compatible = "simple-bus";
 		ranges = <0x50000000 0x50000000 0x10000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  0xb0000000 0xb0000000 0x10000000
 			  0xd0000000 0xd0000000 0x02000000
+=======
+			  0x80000000 0x80000000 0x20000000
+			  0xb0000000 0xb0000000 0x22000000
+>>>>>>> v3.18
 =======
 			  0x80000000 0x80000000 0x20000000
 			  0xb0000000 0xb0000000 0x22000000
@@ -232,12 +245,18 @@
 				  0xe0000000 0xe0000000 0x10000000>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			misc: syscon@e0700000 {
 				compatible = "st,spear1340-misc", "syscon";
 				reg = <0xe0700000 0x1000>;
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			gpio0: gpio@e0600000 {
 				compatible = "arm,pl061", "arm,primecell";

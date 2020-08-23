@@ -13,6 +13,10 @@
 #include <linux/hugetlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-features.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-features.h>
 >>>>>>> v3.18
@@ -278,7 +282,11 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 
 	end = start + len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (end < start)
+=======
+	if (end < start || cpu_has_dc_aliases)
+>>>>>>> v3.18
 =======
 	if (end < start || cpu_has_dc_aliases)
 >>>>>>> v3.18

@@ -26,8 +26,13 @@
 #include <core/engctx.h>
 #include <core/ramht.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 #include <core/math.h>
+=======
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -40,6 +45,10 @@
 #include <engine/fifo.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -204,6 +213,7 @@ nv50_fifo_chan_ctor_dma(struct nouveau_object *parent,
 			struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_bar *bar = nouveau_bar(parent);
 	struct nv50_fifo_base *base = (void *)parent;
 	struct nv50_fifo_chan *chan;
@@ -216,6 +226,8 @@ nv50_fifo_chan_ctor_dma(struct nouveau_object *parent,
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->pushbuf,
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct nv03_channel_dma_v0 v0;
 	} *args = data;
@@ -234,6 +246,9 @@ nv50_fifo_chan_ctor_dma(struct nouveau_object *parent,
 
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->v0.pushbuf,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  (1ULL << NVDEV_ENGINE_DMAOBJ) |
 					  (1ULL << NVDEV_ENGINE_SW) |
@@ -244,6 +259,11 @@ nv50_fifo_chan_ctor_dma(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	args->v0.chid = chan->base.chid;
+
+>>>>>>> v3.18
 =======
 	args->v0.chid = chan->base.chid;
 
@@ -259,15 +279,21 @@ nv50_fifo_chan_ctor_dma(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wo32(base->ramfc, 0x08, lower_32_bits(args->offset));
 	nv_wo32(base->ramfc, 0x0c, upper_32_bits(args->offset));
 	nv_wo32(base->ramfc, 0x10, lower_32_bits(args->offset));
 	nv_wo32(base->ramfc, 0x14, upper_32_bits(args->offset));
 =======
+=======
+>>>>>>> v3.18
 	nv_wo32(base->ramfc, 0x08, lower_32_bits(args->v0.offset));
 	nv_wo32(base->ramfc, 0x0c, upper_32_bits(args->v0.offset));
 	nv_wo32(base->ramfc, 0x10, lower_32_bits(args->v0.offset));
 	nv_wo32(base->ramfc, 0x14, upper_32_bits(args->v0.offset));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wo32(base->ramfc, 0x3c, 0x003f6078);
 	nv_wo32(base->ramfc, 0x44, 0x01003fff);
@@ -290,7 +316,13 @@ nv50_fifo_chan_ctor_ind(struct nouveau_object *parent,
 			struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv50_channel_ind_class *args = data;
+=======
+	union {
+		struct nv50_channel_gpfifo_v0 v0;
+	} *args = data;
+>>>>>>> v3.18
 =======
 	union {
 		struct nv50_channel_gpfifo_v0 v0;
@@ -303,12 +335,15 @@ nv50_fifo_chan_ctor_ind(struct nouveau_object *parent,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size < sizeof(*args))
 		return -EINVAL;
 
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->pushbuf,
 =======
+=======
+>>>>>>> v3.18
 	nv_ioctl(parent, "create channel gpfifo size %d\n", size);
 	if (nvif_unpack(args->v0, 0, 0, false)) {
 		nv_ioctl(parent, "create channel gpfifo vers %d pushbuf %08x "
@@ -320,6 +355,9 @@ nv50_fifo_chan_ctor_ind(struct nouveau_object *parent,
 
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->v0.pushbuf,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  (1ULL << NVDEV_ENGINE_DMAOBJ) |
 					  (1ULL << NVDEV_ENGINE_SW) |
@@ -330,6 +368,11 @@ nv50_fifo_chan_ctor_ind(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	args->v0.chid = chan->base.chid;
+
+>>>>>>> v3.18
 =======
 	args->v0.chid = chan->base.chid;
 
@@ -345,8 +388,13 @@ nv50_fifo_chan_ctor_ind(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioffset = args->ioffset;
 	ilength = log2i(args->ilength / 8);
+=======
+	ioffset = args->v0.ioffset;
+	ilength = order_base_2(args->v0.ilength / 8);
+>>>>>>> v3.18
 =======
 	ioffset = args->v0.ioffset;
 	ilength = order_base_2(args->v0.ilength / 8);
@@ -416,13 +464,19 @@ nv50_fifo_ofuncs_dma = {
 	.init = nv50_fifo_chan_init,
 	.fini = nv50_fifo_chan_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 =======
+=======
+>>>>>>> v3.18
 	.map  = _nouveau_fifo_channel_map,
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 	.ntfy = _nouveau_fifo_channel_ntfy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -433,21 +487,32 @@ nv50_fifo_ofuncs_ind = {
 	.init = nv50_fifo_chan_init,
 	.fini = nv50_fifo_chan_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 =======
+=======
+>>>>>>> v3.18
 	.map  = _nouveau_fifo_channel_map,
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 	.ntfy = _nouveau_fifo_channel_ntfy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct nouveau_oclass
 nv50_fifo_sclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ NV50_CHANNEL_DMA_CLASS, &nv50_fifo_ofuncs_dma },
 	{ NV50_CHANNEL_IND_CLASS, &nv50_fifo_ofuncs_ind },
+=======
+	{ NV50_CHANNEL_DMA, &nv50_fifo_ofuncs_dma },
+	{ NV50_CHANNEL_GPFIFO, &nv50_fifo_ofuncs_ind },
+>>>>>>> v3.18
 =======
 	{ NV50_CHANNEL_DMA, &nv50_fifo_ofuncs_dma },
 	{ NV50_CHANNEL_GPFIFO, &nv50_fifo_ofuncs_ind },
@@ -553,6 +618,11 @@ nv50_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_engine(priv)->cclass = &nv50_fifo_cclass;
 	nv_engine(priv)->sclass = nv50_fifo_sclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->base.pause = nv04_fifo_pause;
+	priv->base.start = nv04_fifo_start;
+>>>>>>> v3.18
 =======
 	priv->base.pause = nv04_fifo_pause;
 	priv->base.start = nv04_fifo_start;
@@ -600,8 +670,13 @@ nv50_fifo_init(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_oclass
 nv50_fifo_oclass = {
+=======
+struct nouveau_oclass *
+nv50_fifo_oclass = &(struct nouveau_oclass) {
+>>>>>>> v3.18
 =======
 struct nouveau_oclass *
 nv50_fifo_oclass = &(struct nouveau_oclass) {

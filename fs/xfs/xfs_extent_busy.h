@@ -21,11 +21,17 @@
 #define	__XFS_EXTENT_BUSY_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct xfs_mount;
 struct xfs_trans;
 struct xfs_alloc_arg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Busy block/extent entry.  Indexed by a rbtree in perag to mark blocks that

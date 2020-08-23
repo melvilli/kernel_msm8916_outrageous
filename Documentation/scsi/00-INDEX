@@ -37,6 +37,11 @@ NinjaSCSI.txt
 aacraid.txt
 	- Driver supporting Adaptec RAID controllers
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+advansys.txt
+	- List of Advansys Host Adapters
+>>>>>>> v3.18
 =======
 advansys.txt
 	- List of Advansys Host Adapters
@@ -48,11 +53,14 @@ aic79xx.txt
 aic7xxx.txt
 	- info on driver for Adaptec controllers
 <<<<<<< HEAD
+<<<<<<< HEAD
 aic7xxx_old.txt
 	- info on driver for Adaptec controllers, old generation
 arcmsr_spec.txt
 	- ARECA FIRMWARE SPEC (for IOP331 adapter)
 =======
+=======
+>>>>>>> v3.18
 arcmsr_spec.txt
 	- ARECA FIRMWARE SPEC (for IOP331 adapter)
 bfa.txt
@@ -61,6 +69,9 @@ bnx2fc.txt
 	- FCoE hardware offload for Broadcom network interfaces.
 cxgb3i.txt
 	- Chelsio iSCSI Linux Driver
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dc395x.txt
 	- README file for the dc395x SCSI driver
@@ -71,6 +82,11 @@ dtc3x80.txt
 g_NCR5380.txt
 	- info on driver for NCR5380 and NCR53c400 based adapters
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+hpsa.txt
+	- HP Smart Array Controller SCSI driver.
+>>>>>>> v3.18
 =======
 hpsa.txt
 	- HP Smart Array Controller SCSI driver.
@@ -82,6 +98,11 @@ in2000.txt
 libsas.txt
 	- Serial Attached SCSI management layer.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+link_power_management_policy.txt
+	- Link power management options.
+>>>>>>> v3.18
 =======
 link_power_management_policy.txt
 	- Link power management options.
@@ -93,6 +114,11 @@ megaraid.txt
 ncr53c8xx.txt
 	- info on driver for NCR53c8xx based adapters
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+osd.txt
+	Object-Based Storage Device, command set introduction.
+>>>>>>> v3.18
 =======
 osd.txt
 	Object-Based Storage Device, command set introduction.
@@ -108,6 +134,11 @@ scsi-changer.txt
 scsi-generic.txt
 	- info on the sg driver for generic (non-disk/CD/tape) SCSI devices.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+scsi-parameters.txt
+	- List of SCSI-parameters to pass to the kernel at module load-time.
+>>>>>>> v3.18
 =======
 scsi-parameters.txt
 	- List of SCSI-parameters to pass to the kernel at module load-time.

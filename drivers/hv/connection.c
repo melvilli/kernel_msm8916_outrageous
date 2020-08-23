@@ -79,11 +79,16 @@ static int vmbus_negotiate_version(struct vmbus_channel_msginfo *msginfo,
 	msg->vmbus_version_requested = version;
 	msg->interrupt_page = virt_to_phys(vmbus_connection.int_page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msg->monitor_page1 = virt_to_phys(vmbus_connection.monitor_pages);
 	msg->monitor_page2 = virt_to_phys(
 			(void *)((unsigned long)vmbus_connection.monitor_pages +
 				 PAGE_SIZE));
 
+=======
+	msg->monitor_page1 = virt_to_phys(vmbus_connection.monitor_pages[0]);
+	msg->monitor_page2 = virt_to_phys(vmbus_connection.monitor_pages[1]);
+>>>>>>> v3.18
 =======
 	msg->monitor_page1 = virt_to_phys(vmbus_connection.monitor_pages[0]);
 	msg->monitor_page2 = virt_to_phys(vmbus_connection.monitor_pages[1]);
@@ -172,14 +177,20 @@ int vmbus_connect(void)
 	 * parent->child and the 2nd page for child->parent
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vmbus_connection.monitor_pages =
 	(void *)__get_free_pages((GFP_KERNEL|__GFP_ZERO), 1);
 	if (vmbus_connection.monitor_pages == NULL) {
 =======
+=======
+>>>>>>> v3.18
 	vmbus_connection.monitor_pages[0] = (void *)__get_free_pages((GFP_KERNEL|__GFP_ZERO), 0);
 	vmbus_connection.monitor_pages[1] = (void *)__get_free_pages((GFP_KERNEL|__GFP_ZERO), 0);
 	if ((vmbus_connection.monitor_pages[0] == NULL) ||
 	    (vmbus_connection.monitor_pages[1] == NULL)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENOMEM;
 		goto cleanup;
@@ -205,12 +216,18 @@ int vmbus_connect(void)
 	do {
 		ret = vmbus_negotiate_version(msginfo, version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == 0)
 =======
+=======
+>>>>>>> v3.18
 		if (ret == -ETIMEDOUT)
 			goto cleanup;
 
 		if (vmbus_connection.conn_state == CONNECTED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -243,15 +260,21 @@ cleanup:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vmbus_connection.monitor_pages) {
 		free_pages((unsigned long)vmbus_connection.monitor_pages, 1);
 		vmbus_connection.monitor_pages = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	free_pages((unsigned long)vmbus_connection.monitor_pages[0], 0);
 	free_pages((unsigned long)vmbus_connection.monitor_pages[1], 0);
 	vmbus_connection.monitor_pages[0] = NULL;
 	vmbus_connection.monitor_pages[1] = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(msginfo);
@@ -260,7 +283,10 @@ cleanup:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Map the given relid to the corresponding channel based on the
  * per-cpu list of channels that have been affinitized to this CPU.
@@ -283,6 +309,9 @@ static struct vmbus_channel *pcpu_relid2channel(u32 relid)
 
 	return found_channel;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -295,6 +324,11 @@ struct vmbus_channel *relid2channel(u32 relid)
 	struct vmbus_channel *found_channel  = NULL;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head *cur, *tmp;
+	struct vmbus_channel *cur_sc;
+>>>>>>> v3.18
 =======
 	struct list_head *cur, *tmp;
 	struct vmbus_channel *cur_sc;
@@ -306,7 +340,10 @@ struct vmbus_channel *relid2channel(u32 relid)
 			found_channel = channel;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (!list_empty(&channel->sc_list)) {
 			/*
 			 * Deal with sub-channels.
@@ -319,6 +356,9 @@ struct vmbus_channel *relid2channel(u32 relid)
 					break;
 				}
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -334,7 +374,10 @@ static void process_chn_event(u32 relid)
 {
 	struct vmbus_channel *channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void *arg;
@@ -346,7 +389,11 @@ static void process_chn_event(u32 relid)
 	 * channel callback to process the event
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	channel = relid2channel(relid);
+=======
+	channel = pcpu_relid2channel(relid);
+>>>>>>> v3.18
 =======
 	channel = pcpu_relid2channel(relid);
 >>>>>>> v3.18
@@ -360,6 +407,7 @@ static void process_chn_event(u32 relid)
 	 * A channel once created is persistent even when there
 	 * is no driver handling the device. An unloading driver
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * sets the onchannel_callback to NULL under the
 	 * protection of the channel inbound_lock. Thus, checking
 	 * and invoking the driver specific callback takes care of
@@ -368,12 +416,17 @@ static void process_chn_event(u32 relid)
 
 	spin_lock_irqsave(&channel->inbound_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	 * sets the onchannel_callback to NULL on the same CPU
 	 * as where this interrupt is handled (in an interrupt context).
 	 * Thus, checking and invoking the driver specific callback takes
 	 * care of orderly unloading of the driver.
 	 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (channel->onchannel_callback != NULL) {
 		arg = channel->channel_callback_context;
@@ -404,7 +457,10 @@ static void process_chn_event(u32 relid)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&channel->inbound_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

@@ -110,7 +110,11 @@ int pcibios_unmap_io_space(struct pci_bus *bus)
 
 	/* Check if we have IOs allocated */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hose->io_base_alloc == 0)
+=======
+	if (hose->io_base_alloc == NULL)
+>>>>>>> v3.18
 =======
 	if (hose->io_base_alloc == NULL)
 >>>>>>> v3.18
@@ -213,8 +217,12 @@ long sys_pciconfig_iobase(long which, unsigned long in_bus,
 {
 	struct pci_controller* hose;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *ln;
 	struct pci_bus *bus = NULL;
+=======
+	struct pci_bus *tmp_bus, *bus = NULL;
+>>>>>>> v3.18
 =======
 	struct pci_bus *tmp_bus, *bus = NULL;
 >>>>>>> v3.18
@@ -239,18 +247,24 @@ long sys_pciconfig_iobase(long which, unsigned long in_bus,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ln = pci_root_buses.next; ln != &pci_root_buses; ln = ln->next) {
 		bus = pci_bus_b(ln);
 		if (in_bus >= bus->number && in_bus <= bus->busn_res.end)
 			break;
 		bus = NULL;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(tmp_bus, &pci_root_buses, node) {
 		if (in_bus >= tmp_bus->number &&
 		    in_bus <= tmp_bus->busn_res.end) {
 			bus = tmp_bus;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (bus == NULL || bus->dev.of_node == NULL)
@@ -284,6 +298,7 @@ int pcibus_to_node(struct pci_bus *bus)
 EXPORT_SYMBOL(pcibus_to_node);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void quirk_radeon_32bit_msi(struct pci_dev *dev)
 {
@@ -294,5 +309,7 @@ static void quirk_radeon_32bit_msi(struct pci_dev *dev)
 }
 DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_ATI, 0x68f2, quirk_radeon_32bit_msi);
 DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_ATI, 0xaa68, quirk_radeon_32bit_msi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -1693,7 +1693,10 @@ static u16 MXL5005_TunerConfig(struct dvb_frontend *fe,
 {
 	struct mxl5005s_state *state = fe->tuner_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 status = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1719,7 +1722,11 @@ static u16 MXL5005_TunerConfig(struct dvb_frontend *fe,
 	MXL_SynthIFLO_Calc(fe);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

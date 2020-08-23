@@ -6,7 +6,10 @@
 #include <asm/smp_plat.h>
 #include <asm/opcodes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mmu_writeable.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -22,10 +25,13 @@ void __kprobes __patch_text(void *addr, unsigned int insn)
 	bool thumb2 = IS_ENABLED(CONFIG_THUMB2_KERNEL);
 	int size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	mem_text_writeable_spinlock(&flags);
 	mem_text_address_writeable((unsigned long)addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -54,9 +60,12 @@ void __kprobes __patch_text(void *addr, unsigned int insn)
 	flush_icache_range((uintptr_t)(addr),
 			   (uintptr_t)(addr) + size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mem_text_address_restore();
 	mem_text_writeable_spinunlock(&flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

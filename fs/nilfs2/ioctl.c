@@ -38,8 +38,11 @@
 #include "dat.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_wrap_copy - wrapping function of get/set metadata info
  * @nilfs: nilfs object
@@ -60,6 +63,9 @@
  *
  * %-EFAULT - Failure during execution of requested operation.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_wrap_copy(struct the_nilfs *nilfs,
 				 struct nilfs_argv *argv, int dir,
@@ -81,7 +87,10 @@ static int nilfs_ioctl_wrap_copy(struct the_nilfs *nilfs,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Reject pairs of a start item position (argv->v_index) and a
 	 * total count (argv->v_nmembs) which leads position 'pos' to
@@ -90,6 +99,9 @@ static int nilfs_ioctl_wrap_copy(struct the_nilfs *nilfs,
 	if (argv->v_index > ~(__u64)0 - argv->v_nmembs)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf = (void *)__get_free_pages(GFP_NOFS, 0);
 	if (unlikely(!buf))
@@ -134,6 +146,12 @@ static int nilfs_ioctl_wrap_copy(struct the_nilfs *nilfs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/**
+ * nilfs_ioctl_getflags - ioctl to support lsattr
+ */
+>>>>>>> v3.18
 =======
 /**
  * nilfs_ioctl_getflags - ioctl to support lsattr
@@ -147,6 +165,12 @@ static int nilfs_ioctl_getflags(struct inode *inode, void __user *argp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/**
+ * nilfs_ioctl_setflags - ioctl to support chattr
+ */
+>>>>>>> v3.18
 =======
 /**
  * nilfs_ioctl_setflags - ioctl to support chattr
@@ -205,6 +229,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/**
+ * nilfs_ioctl_getversion - get info about a file's version (generation number)
+ */
+>>>>>>> v3.18
 =======
 /**
  * nilfs_ioctl_getversion - get info about a file's version (generation number)
@@ -216,7 +246,10 @@ static int nilfs_ioctl_getversion(struct inode *inode, void __user *argp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_change_cpmode - change checkpoint mode (checkpoint/snapshot)
  * @inode: inode object
@@ -236,6 +269,9 @@ static int nilfs_ioctl_getversion(struct inode *inode, void __user *argp)
  *
  * %-EFAULT - Failure during checkpoint mode changing.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_change_cpmode(struct inode *inode, struct file *filp,
 				     unsigned int cmd, void __user *argp)
@@ -273,7 +309,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_delete_checkpoint - remove checkpoint
  * @inode: inode object
@@ -293,6 +332,9 @@ out:
  *
  * %-EFAULT - Failure during checkpoint removing.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nilfs_ioctl_delete_checkpoint(struct inode *inode, struct file *filp,
@@ -326,7 +368,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_do_get_cpinfo - callback method getting info about checkpoints
  * @nilfs: nilfs object
@@ -342,6 +387,9 @@ out:
  *
  * Return value: count of nilfs_cpinfo structures in output buffer.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t
 nilfs_ioctl_do_get_cpinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
@@ -357,7 +405,10 @@ nilfs_ioctl_do_get_cpinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_get_cpstat - get checkpoints statistics
  * @inode: inode object
@@ -379,6 +430,9 @@ nilfs_ioctl_do_get_cpinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
  *
  * %-EFAULT - Failure during getting checkpoints statistics.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_get_cpstat(struct inode *inode, struct file *filp,
 				  unsigned int cmd, void __user *argp)
@@ -399,7 +453,10 @@ static int nilfs_ioctl_get_cpstat(struct inode *inode, struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_do_get_suinfo - callback method getting segment usage info
  * @nilfs: nilfs object
@@ -415,6 +472,9 @@ static int nilfs_ioctl_get_cpstat(struct inode *inode, struct file *filp,
  *
  * Return value: count of nilfs_suinfo structures in output buffer.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t
 nilfs_ioctl_do_get_suinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
@@ -430,7 +490,10 @@ nilfs_ioctl_do_get_suinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_get_sustat - get segment usage statistics
  * @inode: inode object
@@ -452,6 +515,9 @@ nilfs_ioctl_do_get_suinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
  *
  * %-EFAULT - Failure during getting segment usage statistics.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_get_sustat(struct inode *inode, struct file *filp,
 				  unsigned int cmd, void __user *argp)
@@ -472,7 +538,10 @@ static int nilfs_ioctl_get_sustat(struct inode *inode, struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_do_get_vinfo - callback method getting virtual blocks info
  * @nilfs: nilfs object
@@ -488,6 +557,9 @@ static int nilfs_ioctl_get_sustat(struct inode *inode, struct file *filp,
  *
  * Return value: count of nilfs_vinfo structures in output buffer.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t
 nilfs_ioctl_do_get_vinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
@@ -502,7 +574,10 @@ nilfs_ioctl_do_get_vinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_do_get_bdescs - callback method getting disk block descriptors
  * @nilfs: nilfs object
@@ -518,6 +593,9 @@ nilfs_ioctl_do_get_vinfo(struct the_nilfs *nilfs, __u64 *posp, int flags,
  *
  * Return value: count of nilfs_bdescs structures in output buffer.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t
 nilfs_ioctl_do_get_bdescs(struct the_nilfs *nilfs, __u64 *posp, int flags,
@@ -546,7 +624,10 @@ nilfs_ioctl_do_get_bdescs(struct the_nilfs *nilfs, __u64 *posp, int flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_get_bdescs - get disk block descriptors
  * @inode: inode object
@@ -570,6 +651,9 @@ nilfs_ioctl_do_get_bdescs(struct the_nilfs *nilfs, __u64 *posp, int flags,
  *
  * %-EFAULT - Failure during getting disk block descriptors.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_get_bdescs(struct inode *inode, struct file *filp,
 				  unsigned int cmd, void __user *argp)
@@ -595,7 +679,10 @@ static int nilfs_ioctl_get_bdescs(struct inode *inode, struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_move_inode_block - prepare data/node block for moving by GC
  * @inode: inode object
@@ -616,6 +703,9 @@ static int nilfs_ioctl_get_bdescs(struct inode *inode, struct file *filp,
  *
  * %-EEXIST - Blocks conflict is detected.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_move_inode_block(struct inode *inode,
 					struct nilfs_vdesc *vdesc,
@@ -663,7 +753,10 @@ static int nilfs_ioctl_move_inode_block(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_move_blocks - move valid inode's blocks during garbage collection
  * @sb: superblock object
@@ -677,6 +770,9 @@ static int nilfs_ioctl_move_inode_block(struct inode *inode,
  * Return Value: Number of processed nilfs_vdesc structures or
  * error code, otherwise.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_move_blocks(struct super_block *sb,
 				   struct nilfs_argv *argv, void *buf)
@@ -744,7 +840,10 @@ static int nilfs_ioctl_move_blocks(struct super_block *sb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_delete_checkpoints - delete checkpoints
  * @nilfs: nilfs object
@@ -764,6 +863,9 @@ static int nilfs_ioctl_move_blocks(struct super_block *sb,
  *
  * %-EINVAL - invalid checkpoints.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_delete_checkpoints(struct the_nilfs *nilfs,
 					  struct nilfs_argv *argv, void *buf)
@@ -783,7 +885,10 @@ static int nilfs_ioctl_delete_checkpoints(struct the_nilfs *nilfs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_free_vblocknrs - free virtual block numbers
  * @nilfs: nilfs object
@@ -802,6 +907,9 @@ static int nilfs_ioctl_delete_checkpoints(struct the_nilfs *nilfs,
  *
  * %-ENOENT - The virtual block number have not been allocated.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_free_vblocknrs(struct the_nilfs *nilfs,
 				      struct nilfs_argv *argv, void *buf)
@@ -815,7 +923,10 @@ static int nilfs_ioctl_free_vblocknrs(struct the_nilfs *nilfs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_mark_blocks_dirty - mark blocks dirty
  * @nilfs: nilfs object
@@ -834,6 +945,9 @@ static int nilfs_ioctl_free_vblocknrs(struct the_nilfs *nilfs,
  *
  * %-ENOENT - the specified block does not exist (hole block)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_mark_blocks_dirty(struct the_nilfs *nilfs,
 					 struct nilfs_argv *argv, void *buf)
@@ -917,7 +1031,10 @@ int nilfs_ioctl_prepare_clean_segments(struct the_nilfs *nilfs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_clean_segments - clean segments
  * @inode: inode object
@@ -932,6 +1049,9 @@ int nilfs_ioctl_prepare_clean_segments(struct the_nilfs *nilfs,
  *
  * Return Value: On success, 0 is returned or error code, otherwise.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_clean_segments(struct inode *inode, struct file *filp,
 				      unsigned int cmd, void __user *argp)
@@ -1045,7 +1165,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_sync - make a checkpoint
  * @inode: inode object
@@ -1073,6 +1196,9 @@ out:
  *
  * %-EFAULT - Failure during execution of requested operation.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_sync(struct inode *inode, struct file *filp,
 			    unsigned int cmd, void __user *argp)
@@ -1087,11 +1213,17 @@ static int nilfs_ioctl_sync(struct inode *inode, struct file *filp,
 
 	nilfs = inode->i_sb->s_fs_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nilfs_test_opt(nilfs, BARRIER)) {
 		ret = blkdev_issue_flush(inode->i_sb->s_bdev, GFP_KERNEL, NULL);
 		if (ret == -EIO)
 			return ret;
 	}
+=======
+	ret = nilfs_flush_device(nilfs);
+	if (ret < 0)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = nilfs_flush_device(nilfs);
 	if (ret < 0)
@@ -1109,7 +1241,10 @@ static int nilfs_ioctl_sync(struct inode *inode, struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_resize - resize NILFS2 volume
  * @inode: inode object
@@ -1118,6 +1253,9 @@ static int nilfs_ioctl_sync(struct inode *inode, struct file *filp,
  *
  * Return Value: On success, 0 is returned or error code, otherwise.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_resize(struct inode *inode, struct file *filp,
 			      void __user *argp)
@@ -1145,7 +1283,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_trim_fs() - trim ioctl handle function
  * @inode: inode object
@@ -1199,6 +1340,9 @@ static int nilfs_ioctl_trim_fs(struct inode *inode, void __user *argp)
  *
  * Return Value: On success, 0 is returned or error code, otherwise.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_set_alloc_range(struct inode *inode, void __user *argp)
 {
@@ -1233,7 +1377,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_get_info - wrapping function of get metadata info
  * @inode: inode object
@@ -1256,6 +1403,9 @@ out:
  *
  * %-EFAULT - Failure during execution of requested operation.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nilfs_ioctl_get_info(struct inode *inode, struct file *filp,
 				unsigned int cmd, void __user *argp,
@@ -1285,7 +1435,10 @@ static int nilfs_ioctl_get_info(struct inode *inode, struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_ioctl_set_suinfo - set segment usage info
  * @inode: inode object
@@ -1375,6 +1528,9 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long nilfs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
@@ -1403,6 +1559,11 @@ long nilfs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 					    sizeof(struct nilfs_suinfo),
 					    nilfs_ioctl_do_get_suinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case NILFS_IOCTL_SET_SUINFO:
+		return nilfs_ioctl_set_suinfo(inode, filp, cmd, argp);
+>>>>>>> v3.18
 =======
 	case NILFS_IOCTL_SET_SUINFO:
 		return nilfs_ioctl_set_suinfo(inode, filp, cmd, argp);
@@ -1424,6 +1585,11 @@ long nilfs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case NILFS_IOCTL_SET_ALLOC_RANGE:
 		return nilfs_ioctl_set_alloc_range(inode, argp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case FITRIM:
+		return nilfs_ioctl_trim_fs(inode, argp);
+>>>>>>> v3.18
 =======
 	case FITRIM:
 		return nilfs_ioctl_trim_fs(inode, argp);
@@ -1452,6 +1618,10 @@ long nilfs_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case NILFS_IOCTL_GET_CPSTAT:
 	case NILFS_IOCTL_GET_SUINFO:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case NILFS_IOCTL_SET_SUINFO:
+>>>>>>> v3.18
 =======
 	case NILFS_IOCTL_SET_SUINFO:
 >>>>>>> v3.18
@@ -1463,6 +1633,10 @@ long nilfs_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case NILFS_IOCTL_RESIZE:
 	case NILFS_IOCTL_SET_ALLOC_RANGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case FITRIM:
+>>>>>>> v3.18
 =======
 	case FITRIM:
 >>>>>>> v3.18

@@ -1,6 +1,7 @@
 config ARCH_SOCFPGA
 	bool "Altera SOCFPGA family" if ARCH_MULTI_V7
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select ARM_AMBA
 	select ARM_GIC
@@ -17,6 +18,8 @@ config ARCH_SOCFPGA
 	select SPARSE_IRQ
 	select USE_OF
 =======
+=======
+>>>>>>> v3.18
 	select ARM_AMBA
 	select ARM_GIC
 	select CACHE_L2X0
@@ -25,4 +28,7 @@ config ARCH_SOCFPGA
 	select HAVE_ARM_SCU
 	select HAVE_ARM_TWD if SMP
 	select MFD_SYSCON
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

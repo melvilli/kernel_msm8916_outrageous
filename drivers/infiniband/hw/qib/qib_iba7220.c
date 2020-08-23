@@ -1963,10 +1963,14 @@ static irqreturn_t qib_7220intr(int irq, void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qib_stats.sps_ints++;
 	if (dd->int_counter != (u32) -1)
 		dd->int_counter++;
 
+=======
+	this_cpu_inc(*dd->int_counter);
+>>>>>>> v3.18
 =======
 	this_cpu_inc(*dd->int_counter);
 >>>>>>> v3.18
@@ -2125,7 +2129,12 @@ static int qib_setup_7220_reset(struct qib_devdata *dd)
 	 */
 	dd->flags &= ~(QIB_INITTED | QIB_PRESENT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dd->int_counter = 0; /* so we check interrupts work again */
+=======
+	/* so we check interrupts work again */
+	dd->z_int_counter = qib_int_counter(dd);
+>>>>>>> v3.18
 =======
 	/* so we check interrupts work again */
 	dd->z_int_counter = qib_int_counter(dd);
@@ -3309,6 +3318,11 @@ static void qib_get_7220_faststats(unsigned long opaque)
 	traffic_wds -= dd->traffic_wds;
 	dd->traffic_wds += traffic_wds;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (traffic_wds  >= QIB_TRAFFIC_ACTIVE_THRESHOLD)
+		atomic_add(5, &dd->active_time); /* S/B #define */
+>>>>>>> v3.18
 =======
 	if (traffic_wds  >= QIB_TRAFFIC_ACTIVE_THRESHOLD)
 		atomic_add(5, &dd->active_time); /* S/B #define */
@@ -4074,7 +4088,13 @@ static int qib_init_7220_variables(struct qib_devdata *dd)
 	INIT_DELAYED_WORK(&cpspec->autoneg_work, autoneg_7220_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qib_init_pportdata(ppd, dd, 0, 1);
+=======
+	ret = qib_init_pportdata(ppd, dd, 0, 1);
+	if (ret)
+		goto bail;
+>>>>>>> v3.18
 =======
 	ret = qib_init_pportdata(ppd, dd, 0, 1);
 	if (ret)
@@ -4532,7 +4552,10 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 static int qib_7220_notify_dca(struct qib_devdata *dd, unsigned long event)
 {
@@ -4540,6 +4563,9 @@ static int qib_7220_notify_dca(struct qib_devdata *dd, unsigned long event)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Dummy function, as 7220 boards never disable EEPROM Write */
 static int qib_7220_eeprom_wen(struct qib_devdata *dd, int wen)
@@ -4616,6 +4642,12 @@ struct qib_devdata *qib_init_iba7220_funcs(struct pci_dev *pdev,
 	dd->f_writescratch      = writescratch;
 	dd->f_tempsense_rd	= qib_7220_tempsense_rd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_INFINIBAND_QIB_DCA
+	dd->f_notify_dca = qib_7220_notify_dca;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 	dd->f_notify_dca = qib_7220_notify_dca;

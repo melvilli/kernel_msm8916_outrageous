@@ -161,8 +161,11 @@ int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 {
 	struct level_datum *levdatum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ebitmap_node *node;
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -173,6 +176,7 @@ int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 	if (!levdatum)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ebitmap_for_each_positive_bit(&l->cat, node, i) {
 		if (i > p->p_cats.nprim)
@@ -188,6 +192,8 @@ int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Return 1 iff all the bits set in l->cat are also be set in
 	 * levdatum->level->cat and no bit in l->cat is larger than
@@ -195,6 +201,9 @@ int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 	 */
 	return ebitmap_contains(&levdatum->level->cat, &l->cat,
 				p->p_cats.nprim);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -514,6 +523,11 @@ int mls_convert_context(struct policydb *oldp,
 			if (rc)
 				return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+			cond_resched();
+>>>>>>> v3.18
 =======
 
 			cond_resched();

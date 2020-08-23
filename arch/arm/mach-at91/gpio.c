@@ -30,6 +30,10 @@
 
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18
@@ -54,6 +58,10 @@ static void at91_gpiolib_dbg_show(struct seq_file *s, struct gpio_chip *chip);
 static void at91_gpiolib_set(struct gpio_chip *chip, unsigned offset, int val);
 static int at91_gpiolib_get(struct gpio_chip *chip, unsigned offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int at91_gpiolib_get_direction(struct gpio_chip *chip, unsigned offset);
+>>>>>>> v3.18
 =======
 static int at91_gpiolib_get_direction(struct gpio_chip *chip, unsigned offset);
 >>>>>>> v3.18
@@ -69,6 +77,10 @@ static int at91_gpiolib_to_irq(struct gpio_chip *chip, unsigned offset);
 			.label		  = name,			\
 			.request	  = at91_gpiolib_request,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.get_direction    = at91_gpiolib_get_direction, \
+>>>>>>> v3.18
 =======
 			.get_direction    = at91_gpiolib_get_direction, \
 >>>>>>> v3.18
@@ -812,7 +824,10 @@ static int at91_gpiolib_request(struct gpio_chip *chip, unsigned offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int at91_gpiolib_get_direction(struct gpio_chip *chip, unsigned offset)
 {
 	struct at91_gpio_chip *at91_gpio = to_at91_gpio_chip(chip);
@@ -824,6 +839,9 @@ static int at91_gpiolib_get_direction(struct gpio_chip *chip, unsigned offset)
 	return !(osr & mask);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int at91_gpiolib_direction_input(struct gpio_chip *chip,
 					unsigned offset)

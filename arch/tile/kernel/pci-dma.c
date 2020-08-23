@@ -37,8 +37,14 @@ static void *tile_dma_alloc_coherent(struct device *dev, size_t size,
 				     struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 dma_mask = dev->coherent_dma_mask ?: DMA_BIT_MASK(32);
 	int node = dev_to_node(dev);
+=======
+	u64 dma_mask = (dev && dev->coherent_dma_mask) ?
+		dev->coherent_dma_mask : DMA_BIT_MASK(32);
+	int node = dev ? dev_to_node(dev) : 0;
+>>>>>>> v3.18
 =======
 	u64 dma_mask = (dev && dev->coherent_dma_mask) ?
 		dev->coherent_dma_mask : DMA_BIT_MASK(32);
@@ -263,7 +269,11 @@ static void tile_dma_unmap_page(struct device *dev, dma_addr_t dma_address,
 
 	__dma_complete_page(pfn_to_page(PFN_DOWN(dma_address)),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    dma_address & PAGE_OFFSET, size, direction);
+=======
+			    dma_address & (PAGE_SIZE - 1), size, direction);
+>>>>>>> v3.18
 =======
 			    dma_address & (PAGE_SIZE - 1), size, direction);
 >>>>>>> v3.18
@@ -368,7 +378,11 @@ static void *tile_pci_dma_alloc_coherent(struct device *dev, size_t size,
 	addr = page_to_phys(pg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*dma_handle = phys_to_dma(dev, addr);
+=======
+	*dma_handle = addr + get_dma_offset(dev);
+>>>>>>> v3.18
 =======
 	*dma_handle = addr + get_dma_offset(dev);
 >>>>>>> v3.18
@@ -402,7 +416,11 @@ static int tile_pci_dma_map_sg(struct device *dev, struct scatterlist *sglist,
 		__dma_prep_pa_range(sg->dma_address, sg->length, direction);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sg->dma_address = phys_to_dma(dev, sg->dma_address);
+=======
+		sg->dma_address = sg->dma_address + get_dma_offset(dev);
+>>>>>>> v3.18
 =======
 		sg->dma_address = sg->dma_address + get_dma_offset(dev);
 >>>>>>> v3.18
@@ -441,7 +459,11 @@ static dma_addr_t tile_pci_dma_map_page(struct device *dev, struct page *page,
 	__dma_prep_page(page, offset, size, direction);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return phys_to_dma(dev, page_to_pa(page) + offset);
+=======
+	return page_to_pa(page) + offset + get_dma_offset(dev);
+>>>>>>> v3.18
 =======
 	return page_to_pa(page) + offset + get_dma_offset(dev);
 >>>>>>> v3.18
@@ -455,15 +477,21 @@ static void tile_pci_dma_unmap_page(struct device *dev, dma_addr_t dma_address,
 	BUG_ON(!valid_dma_direction(direction));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_address = dma_to_phys(dev, dma_address);
 
 	__dma_complete_page(pfn_to_page(PFN_DOWN(dma_address)),
 			    dma_address & PAGE_OFFSET, size, direction);
 =======
+=======
+>>>>>>> v3.18
 	dma_address -= get_dma_offset(dev);
 
 	__dma_complete_page(pfn_to_page(PFN_DOWN(dma_address)),
 			    dma_address & (PAGE_SIZE - 1), size, direction);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -475,7 +503,11 @@ static void tile_pci_dma_sync_single_for_cpu(struct device *dev,
 	BUG_ON(!valid_dma_direction(direction));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_handle = dma_to_phys(dev, dma_handle);
+=======
+	dma_handle -= get_dma_offset(dev);
+>>>>>>> v3.18
 =======
 	dma_handle -= get_dma_offset(dev);
 >>>>>>> v3.18
@@ -490,7 +522,11 @@ static void tile_pci_dma_sync_single_for_device(struct device *dev,
 						direction)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_handle = dma_to_phys(dev, dma_handle);
+=======
+	dma_handle -= get_dma_offset(dev);
+>>>>>>> v3.18
 =======
 	dma_handle -= get_dma_offset(dev);
 >>>>>>> v3.18
@@ -596,12 +632,15 @@ static struct dma_map_ops pci_swiotlb_dma_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_map_ops *gx_legacy_pci_dma_map_ops = &pci_swiotlb_dma_ops;
 #else
 struct dma_map_ops *gx_legacy_pci_dma_map_ops;
 #endif
 EXPORT_SYMBOL(gx_legacy_pci_dma_map_ops);
 =======
+=======
+>>>>>>> v3.18
 static struct dma_map_ops pci_hybrid_dma_ops = {
 	.alloc = tile_swiotlb_alloc_coherent,
 	.free = tile_swiotlb_free_coherent,
@@ -625,6 +664,9 @@ struct dma_map_ops *gx_hybrid_pci_dma_map_ops;
 #endif
 EXPORT_SYMBOL(gx_legacy_pci_dma_map_ops);
 EXPORT_SYMBOL(gx_hybrid_pci_dma_map_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_HAS_DMA_SET_COHERENT_MASK
@@ -633,12 +675,15 @@ int dma_set_coherent_mask(struct device *dev, u64 mask)
 	struct dma_map_ops *dma_ops = get_dma_ops(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Handle legacy PCI devices with limited memory addressability. */
 	if (((dma_ops == gx_pci_dma_map_ops) ||
 	    (dma_ops == gx_legacy_pci_dma_map_ops)) &&
 	    (mask <= DMA_BIT_MASK(32))) {
 		if (mask > dev->archdata.max_direct_dma_addr)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * For PCI devices with 64-bit DMA addressing capability, promote
 	 * the dma_ops to full capability for both streams and consistent
@@ -651,6 +696,9 @@ int dma_set_coherent_mask(struct device *dev, u64 mask)
 		if (mask == DMA_BIT_MASK(64))
 			set_dma_ops(dev, gx_pci_dma_map_ops);
 		else if (mask > dev->archdata.max_direct_dma_addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mask = dev->archdata.max_direct_dma_addr;
 	}
@@ -663,7 +711,10 @@ int dma_set_coherent_mask(struct device *dev, u64 mask)
 EXPORT_SYMBOL(dma_set_coherent_mask);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef ARCH_HAS_DMA_GET_REQUIRED_MASK
 /*
@@ -682,4 +733,7 @@ u64 dma_get_required_mask(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(dma_get_required_mask);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

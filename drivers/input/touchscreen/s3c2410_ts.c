@@ -29,7 +29,10 @@
 #include <linux/gpio.h>
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -255,7 +258,11 @@ static int s3c2410ts_probe(struct platform_device *pdev)
 	ts.dev = dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = pdev->dev.platform_data;
+=======
+	info = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	info = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -273,7 +280,11 @@ static int s3c2410ts_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(ts.clock);
+=======
+	clk_prepare_enable(ts.clock);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(ts.clock);
 >>>>>>> v3.18
@@ -382,7 +393,11 @@ static int s3c2410ts_remove(struct platform_device *pdev)
 	del_timer_sync(&touch_timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(ts.clock);
+=======
+	clk_disable_unprepare(ts.clock);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(ts.clock);
 >>>>>>> v3.18
@@ -408,7 +423,11 @@ static int s3c2410ts_resume(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c2410_ts_mach_info *info = pdev->dev.platform_data;
+=======
+	struct s3c2410_ts_mach_info *info = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct s3c2410_ts_mach_info *info = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

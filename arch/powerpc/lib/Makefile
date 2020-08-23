@@ -11,7 +11,11 @@ CFLAGS_REMOVE_feature-fixups.o = -pg
 
 obj-y			:= string.o alloc.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   checksum_$(CONFIG_WORD_SIZE).o crtsavres.o
+=======
+			   crtsavres.o ppc_ksyms.o
+>>>>>>> v3.18
 =======
 			   crtsavres.o ppc_ksyms.o
 >>>>>>> v3.18
@@ -20,11 +24,14 @@ obj-$(CONFIG_HAS_IOMEM)	+= devres.o
 
 obj-$(CONFIG_PPC64)	+= copypage_64.o copyuser_64.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   memcpy_64.o usercopy_64.o mem_64.o string.o \
 			   checksum_wrappers_64.o hweight_64.o \
 			   copyuser_power7.o string_64.o copypage_power7.o \
 			   memcpy_power7.o
 =======
+=======
+>>>>>>> v3.18
 			   usercopy_64.o mem_64.o string.o \
 			   hweight_64.o \
 			   copyuser_power7.o string_64.o copypage_power7.o
@@ -35,6 +42,9 @@ endif
 
 obj-$(CONFIG_PPC64)		+= memcpy_power7.o memcpy_64.o 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_PPC_EMULATE_SSTEP)	+= sstep.o ldstfp.o
 
@@ -49,6 +59,12 @@ obj-y			+= code-patching.o
 obj-y			+= feature-fixups.o
 obj-$(CONFIG_FTR_FIXUP_SELFTEST) += feature-fixups-test.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_ALTIVEC)	+= xor_vmx.o
+CFLAGS_xor_vmx.o += -maltivec -mabi=altivec
+>>>>>>> v3.18
 =======
 
 obj-$(CONFIG_ALTIVEC)	+= xor_vmx.o

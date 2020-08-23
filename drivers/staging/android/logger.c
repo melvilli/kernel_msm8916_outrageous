@@ -34,10 +34,13 @@
 #include <asm/ioctls.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_LOGCAT_SIZE
 #define CONFIG_LOGCAT_SIZE 256
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -116,14 +119,20 @@ static inline struct logger_log *file_get_log(struct file *file)
 	if (file->f_mode & FMODE_READ) {
 		struct logger_reader *reader = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return reader->log;
 	} else
 		return file->private_data;
 =======
+=======
+>>>>>>> v3.18
 
 		return reader->log;
 	}
 	return file->private_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -139,6 +148,10 @@ static struct logger_entry *get_entry_header(struct logger_log *log,
 {
 	size_t len = min(sizeof(struct logger_entry), log->size - off);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -176,8 +189,12 @@ static size_t get_user_hdr_len(int ver)
 	if (ver < 2)
 		return sizeof(struct user_logger_entry_compat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return sizeof(struct logger_entry);
+=======
+	return sizeof(struct logger_entry);
+>>>>>>> v3.18
 =======
 	return sizeof(struct logger_entry);
 >>>>>>> v3.18
@@ -433,6 +450,7 @@ static void fix_up_readers(struct logger_log *log, size_t len)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * do_write_log - writes 'len' bytes from 'buf' to 'log'
  *
  * The caller needs to hold log->mutex.
@@ -497,6 +515,8 @@ static ssize_t logger_aio_write(struct kiocb *iocb, const struct iovec *iov,
 	struct timespec now;
 	ssize_t ret = 0;
 =======
+=======
+>>>>>>> v3.18
  * logger_write_iter - our write method, implementing support for write(),
  * writev(), and aio_write(). Writes are our fast path, and we try to optimize
  * them above all else.
@@ -509,6 +529,9 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	size_t len, count, w_off;
 
 	count = min_t(size_t, iocb->ki_nbytes, LOGGER_ENTRY_MAX_PAYLOAD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	now = current_kernel_time();
@@ -519,7 +542,11 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	header.nsec = now.tv_nsec;
 	header.euid = current_euid();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	header.len = min_t(size_t, iocb->ki_left, LOGGER_ENTRY_MAX_PAYLOAD);
+=======
+	header.len = count;
+>>>>>>> v3.18
 =======
 	header.len = count;
 >>>>>>> v3.18
@@ -532,8 +559,11 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	mutex_lock(&log->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	orig = log->w_off;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -544,6 +574,7 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	 */
 	fix_up_readers(log, sizeof(struct logger_entry) + header.len);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do_write_log(log, &header, sizeof(struct logger_entry));
 
@@ -567,6 +598,8 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	len = min(sizeof(header), log->size - log->w_off);
 	memcpy(log->buffer + log->w_off, &header, len);
 	memcpy(log->buffer, (char *)&header + len, sizeof(header) - len);
@@ -593,6 +626,9 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	}
 
 	log->w_off = logger_offset(log, w_off + count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&log->mutex);
 
@@ -600,7 +636,11 @@ static ssize_t logger_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	wake_up_interruptible(&log->wq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return len;
+>>>>>>> v3.18
 =======
 	return len;
 >>>>>>> v3.18
@@ -720,6 +760,10 @@ static long logger_set_version(struct logger_reader *reader, void __user *arg)
 {
 	int version;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -780,7 +824,11 @@ static long logger_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(in_egroup_p(file->f_dentry->d_inode->i_gid) ||
+=======
+		if (!(in_egroup_p(file_inode(file)->i_gid) ||
+>>>>>>> v3.18
 =======
 		if (!(in_egroup_p(file_inode(file)->i_gid) ||
 >>>>>>> v3.18
@@ -820,7 +868,11 @@ static const struct file_operations logger_fops = {
 	.owner = THIS_MODULE,
 	.read = logger_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.aio_write = logger_aio_write,
+=======
+	.write_iter = logger_write_iter,
+>>>>>>> v3.18
 =======
 	.write_iter = logger_write_iter,
 >>>>>>> v3.18
@@ -878,7 +930,11 @@ static int __init create_log(char *log_name, int size)
 		pr_err("failed to register misc device for log '%s'!\n",
 				log->misc.name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_log;
+=======
+		goto out_free_misc_name;
+>>>>>>> v3.18
 =======
 		goto out_free_misc_name;
 >>>>>>> v3.18
@@ -890,6 +946,12 @@ static int __init create_log(char *log_name, int size)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_free_misc_name:
+	kfree(log->misc.name);
+
+>>>>>>> v3.18
 =======
 out_free_misc_name:
 	kfree(log->misc.name);
@@ -908,6 +970,7 @@ static int __init logger_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = create_log(LOGGER_LOG_MAIN, CONFIG_LOGCAT_SIZE*1024);
 	if (unlikely(ret))
 		goto out;
@@ -922,6 +985,8 @@ static int __init logger_init(void)
 
 	ret = create_log(LOGGER_LOG_SYSTEM, CONFIG_LOGCAT_SIZE*1024);
 =======
+=======
+>>>>>>> v3.18
 	ret = create_log(LOGGER_LOG_MAIN, 256*1024);
 	if (unlikely(ret))
 		goto out;
@@ -935,6 +1000,9 @@ static int __init logger_init(void)
 		goto out;
 
 	ret = create_log(LOGGER_LOG_SYSTEM, 256*1024);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret))
 		goto out;

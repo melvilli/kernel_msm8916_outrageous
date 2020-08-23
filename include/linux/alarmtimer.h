@@ -49,7 +49,10 @@ void alarm_restart(struct alarm *alarm);
 int alarm_try_to_cancel(struct alarm *alarm);
 int alarm_cancel(struct alarm *alarm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void set_power_on_alarm(long secs, bool enable);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

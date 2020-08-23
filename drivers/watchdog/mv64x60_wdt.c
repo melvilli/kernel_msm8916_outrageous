@@ -256,7 +256,11 @@ static struct miscdevice mv64x60_wdt_miscdev = {
 static int mv64x60_wdt_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mv64x60_wdt_pdata *pdata = dev->dev.platform_data;
+=======
+	struct mv64x60_wdt_pdata *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct mv64x60_wdt_pdata *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -281,7 +285,11 @@ static int mv64x60_wdt_probe(struct platform_device *dev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mv64x60_wdt_regs = ioremap(r->start, resource_size(r));
+=======
+	mv64x60_wdt_regs = devm_ioremap(&dev->dev, r->start, resource_size(r));
+>>>>>>> v3.18
 =======
 	mv64x60_wdt_regs = devm_ioremap(&dev->dev, r->start, resource_size(r));
 >>>>>>> v3.18
@@ -302,8 +310,11 @@ static int mv64x60_wdt_remove(struct platform_device *dev)
 	mv64x60_wdt_handler_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(mv64x60_wdt_regs);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -337,7 +348,10 @@ MODULE_AUTHOR("James Chapman <jchapman@katalix.com>");
 MODULE_DESCRIPTION("MV64x60 watchdog driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:" MV64x60_WDT_NAME);

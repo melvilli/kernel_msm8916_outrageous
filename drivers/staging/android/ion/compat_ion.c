@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/gpu/ion/compat_ion.c
+=======
+ * drivers/staging/android/ion/compat_ion.c
+>>>>>>> v3.18
 =======
  * drivers/staging/android/ion/compat_ion.c
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ long compat_ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filp->f_op || !filp->f_op->unlocked_ioctl)
+=======
+	if (!filp->f_op->unlocked_ioctl)
+>>>>>>> v3.18
 =======
 	if (!filp->f_op->unlocked_ioctl)
 >>>>>>> v3.18

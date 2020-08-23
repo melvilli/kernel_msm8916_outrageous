@@ -87,9 +87,15 @@ static inline void skcipher_givcrypt_free(struct skcipher_givcrypt_request *req)
 static inline void skcipher_givcrypt_set_callback(
 	struct skcipher_givcrypt_request *req, u32 flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete, void *data)
 {
 	ablkcipher_request_set_callback(&req->creq, flags, complete, data);
+=======
+	crypto_completion_t compl, void *data)
+{
+	ablkcipher_request_set_callback(&req->creq, flags, compl, data);
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl, void *data)
 {

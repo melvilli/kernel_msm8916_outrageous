@@ -32,6 +32,10 @@
 #include <asm/vaddrs.h>
 #include <asm/pgalloc.h>	/* bug in asm-generic/tlb.h: check_pgt_cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -40,6 +44,11 @@
 #include <asm/leon.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "mm_32.h"
+
+>>>>>>> v3.18
 =======
 #include "mm_32.h"
 
@@ -73,7 +82,10 @@ void show_mem(unsigned int filter)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long cmdline_memory_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned long last_valid_pfn;
@@ -259,9 +271,12 @@ unsigned long __init bootmem_init(unsigned long *pages_avail)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void srmmu_paging_init(void);
 extern void device_scan(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init paging_init(void)
@@ -304,10 +319,13 @@ static void map_high_region(unsigned long start_pfn, unsigned long end_pfn)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codepages = 0;
 	int datapages = 0;
 	int initpages = 0; 
 	int reservedpages = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -348,8 +366,11 @@ void __init mem_init(void)
 		unsigned long end_pfn = (sp_banks[i].base_addr + sp_banks[i].num_bytes) >> PAGE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		num_physpages += sp_banks[i].num_bytes >> PAGE_SHIFT;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (end_pfn <= highstart_pfn)
@@ -361,6 +382,7 @@ void __init mem_init(void)
 		map_high_region(start_pfn, end_pfn);
 	}
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	codepages = (((unsigned long) &_etext) - ((unsigned long)&_start));
 	codepages = PAGE_ALIGN(codepages) >> PAGE_SHIFT;
@@ -386,12 +408,19 @@ void __init mem_init(void)
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 void free_initmem (void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages += free_initmem_default(POISON_FREE_INITMEM);
+=======
+	free_initmem_default(POISON_FREE_INITMEM);
+>>>>>>> v3.18
 =======
 	free_initmem_default(POISON_FREE_INITMEM);
 >>>>>>> v3.18
@@ -401,8 +430,13 @@ void free_initmem (void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages += free_reserved_area(start, end, POISON_FREE_INITMEM,
 					    "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
+			   "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
 			   "initrd");

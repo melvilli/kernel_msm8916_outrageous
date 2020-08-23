@@ -29,6 +29,10 @@
 #include "ps.h"
 #include "io.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "event.h"
+>>>>>>> v3.18
 =======
 #include "event.h"
 >>>>>>> v3.18
@@ -94,15 +98,21 @@ static void wl1251_tx_control(struct tx_double_buffer_desc *tx_hdr,
 	tx_hdr->control.packet_type = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (control->flags & IEEE80211_TX_CTL_NO_ACK)
 		tx_hdr->control.ack_policy = 1;
 =======
+=======
+>>>>>>> v3.18
 	/* Also disable retry and ACK policy for injected packets */
 	if ((control->flags & IEEE80211_TX_CTL_NO_ACK) ||
 	    (control->flags & IEEE80211_TX_CTL_INJECTED)) {
 		tx_hdr->control.rate_policy = 1;
 		tx_hdr->control.ack_policy = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tx_hdr->control.tx_complete = 1;
@@ -291,7 +301,10 @@ static void wl1251_tx_trigger(struct wl1251 *wl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void enable_tx_for_packet_injection(struct wl1251 *wl)
 {
 	int ret;
@@ -312,6 +325,9 @@ static void enable_tx_for_packet_injection(struct wl1251 *wl)
 	wl->joined = true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* caller must hold wl->mutex */
 static int wl1251_tx_frame(struct wl1251 *wl, struct sk_buff *skb)
@@ -324,6 +340,12 @@ static int wl1251_tx_frame(struct wl1251 *wl, struct sk_buff *skb)
 
 	if (info->control.hw_key) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (unlikely(wl->monitor_present))
+			return -EINVAL;
+
+>>>>>>> v3.18
 =======
 		if (unlikely(wl->monitor_present))
 			return -EINVAL;
@@ -338,11 +360,17 @@ static int wl1251_tx_frame(struct wl1251 *wl, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Enable tx path in monitor mode for packet injection */
 	if ((wl->vif == NULL) && !wl->joined)
 		enable_tx_for_packet_injection(wl);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = wl1251_tx_path_status(wl);
 	if (ret < 0)
@@ -444,6 +472,10 @@ static void wl1251_tx_packet_cb(struct wl1251 *wl,
 
 	if (!(info->flags & IEEE80211_TX_CTL_NO_ACK) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    !(info->flags & IEEE80211_TX_CTL_INJECTED) &&
+>>>>>>> v3.18
 =======
 	    !(info->flags & IEEE80211_TX_CTL_INJECTED) &&
 >>>>>>> v3.18

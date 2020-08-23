@@ -91,7 +91,12 @@ do { if ((lbs_debug & (grp)) == (grp)) \
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void lbs_deb_hex(unsigned int grp, const char *prompt, u8 *buf, int len)
+=======
+static inline void lbs_deb_hex(unsigned int grp, const char *prompt,
+			       const u8 *buf, int len)
+>>>>>>> v3.18
 =======
 static inline void lbs_deb_hex(unsigned int grp, const char *prompt,
 			       const u8 *buf, int len)

@@ -13,8 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -279,7 +284,11 @@ static void print_one_rcu_state(struct seq_file *m, struct rcu_state *rsp)
 		   rsp->n_force_qs, rsp->n_force_qs_ngp,
 		   rsp->n_force_qs - rsp->n_force_qs_ngp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   rsp->n_force_qs_lh, rsp->qlen_lazy, rsp->qlen);
+=======
+		   ACCESS_ONCE(rsp->n_force_qs_lh), rsp->qlen_lazy, rsp->qlen);
+>>>>>>> v3.18
 =======
 		   ACCESS_ONCE(rsp->n_force_qs_lh), rsp->qlen_lazy, rsp->qlen);
 >>>>>>> v3.18
@@ -374,14 +383,20 @@ static void print_one_rcu_pending(struct seq_file *m, struct rcu_data *rdp)
 		   rdp->n_rp_cb_ready,
 		   rdp->n_rp_cpu_needs_gp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m, "gpc=%ld gps=%ld nn=%ld\n",
 		   rdp->n_rp_gp_completed,
 		   rdp->n_rp_gp_started,
 =======
+=======
+>>>>>>> v3.18
 	seq_printf(m, "gpc=%ld gps=%ld nn=%ld ndw%ld\n",
 		   rdp->n_rp_gp_completed,
 		   rdp->n_rp_gp_started,
 		   rdp->n_rp_nocb_defer_wakeup,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   rdp->n_rp_need_nothing);
 }

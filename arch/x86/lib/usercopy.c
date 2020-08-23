@@ -12,7 +12,12 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * best effort, GUP based copy_from_user() that is NMI-safe
+=======
+ * We rely on the nested NMI work to allow atomic faults from the NMI path; the
+ * nested NMI paths are careful to preserve CR2.
+>>>>>>> v3.18
 =======
  * We rely on the nested NMI work to allow atomic faults from the NMI path; the
  * nested NMI paths are careful to preserve CR2.
@@ -21,6 +26,7 @@
 unsigned long
 copy_from_user_nmi(void *to, const void __user *from, unsigned long n)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long offset, addr = (unsigned long)from;
 	unsigned long size, len = 0;
@@ -52,6 +58,8 @@ copy_from_user_nmi(void *to, const void __user *from, unsigned long n)
 
 	return len;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ret;
 
 	if (__range_not_ok(from, n, TASK_SIZE))
@@ -67,6 +75,9 @@ copy_from_user_nmi(void *to, const void __user *from, unsigned long n)
 	pagefault_enable();
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(copy_from_user_nmi);

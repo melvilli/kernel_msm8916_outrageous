@@ -120,6 +120,10 @@ struct s3c_cpufreq_config {
 	struct s3c_freq		freq;
 	struct s3c_freq		max;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk		*mpll;
+>>>>>>> v3.18
 =======
 	struct clk		*mpll;
 >>>>>>> v3.18
@@ -144,7 +148,10 @@ struct s3c_cpufreq_config {
  *	S3C2410 where there is no or limited divider between the PLL and the
  *	ARMCLK.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @resume_clocks: Update the clocks on resume.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @get_iotiming: Get the current IO timing data, mainly for use at start.
@@ -176,8 +183,11 @@ struct s3c_cpufreq_info {
 	/* driver routines */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		(*resume_clocks)(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int		(*get_iotiming)(struct s3c_cpufreq_config *cfg,
@@ -213,7 +223,11 @@ extern struct s3c_cpufreq_config *s3c_cpufreq_getconfig(void);
 extern struct s3c_iotimings *s3c_cpufreq_getiotimings(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ_S3C24XX_DEBUGFS
+=======
+#ifdef CONFIG_ARM_S3C24XX_CPUFREQ_DEBUGFS
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARM_S3C24XX_CPUFREQ_DEBUGFS
 >>>>>>> v3.18
@@ -274,6 +288,7 @@ extern void s3c2412_iotiming_set(struct s3c_cpufreq_config *cfg,
 #endif /* CONFIG_S3C2412_IOTIMING */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ_S3C24XX_DEBUG
 #define s3c_freq_dbg(x...) printk(KERN_INFO x)
 #else
@@ -286,6 +301,8 @@ extern void s3c2412_iotiming_set(struct s3c_cpufreq_config *cfg,
 #define s3c_freq_iodbg(x...) do { if (0) printk(x); } while (0)
 #endif /* CONFIG_CPU_FREQ_S3C24XX_IODEBUG */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_S3C24XX_CPUFREQ_DEBUG
 #define s3c_freq_dbg(x...) printk(KERN_INFO x)
 #else
@@ -297,6 +314,9 @@ extern void s3c2412_iotiming_set(struct s3c_cpufreq_config *cfg,
 #else
 #define s3c_freq_iodbg(x...) do { if (0) printk(x); } while (0)
 #endif /* CONFIG_ARM_S3C24XX_CPUFREQ_IODEBUG */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int s3c_cpufreq_addfreq(struct cpufreq_frequency_table *table,

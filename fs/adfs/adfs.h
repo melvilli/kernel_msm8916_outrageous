@@ -44,16 +44,22 @@ struct adfs_dir_ops;
  */
 struct adfs_sb_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct adfs_discmap *s_map;	/* bh list containing map		 */
 	struct adfs_dir_ops *s_dir;	/* directory operations			 */
 
 =======
+=======
+>>>>>>> v3.18
 	union { struct {
 		struct adfs_discmap *s_map;	/* bh list containing map	 */
 		struct adfs_dir_ops *s_dir;	/* directory operations		 */
 		};
 		struct rcu_head rcu;		/* used only at shutdown time	 */
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kuid_t		s_uid;		/* owner uid				 */
 	kgid_t		s_gid;		/* owner gid				 */
@@ -160,6 +166,10 @@ extern unsigned int adfs_map_free(struct super_block *sb);
 
 /* Misc */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__printf(3, 4)
+>>>>>>> v3.18
 =======
 __printf(3, 4)
 >>>>>>> v3.18

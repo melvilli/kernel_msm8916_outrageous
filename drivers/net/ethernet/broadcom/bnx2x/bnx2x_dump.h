@@ -14,12 +14,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* This struct holds a signature to ensure the dump returned from the driver
  * match the meta data file inserted to grc_dump.tcl
  * The signature is time stamp, diag version and grc_dump version
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef BNX2X_DUMP_H
@@ -32,7 +35,10 @@
 #define DRV_DUMP_CSTORM_WAITP_ADDRESS    0x238a80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Possible Chips */
@@ -54,7 +60,11 @@ struct	dump_header {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNX2X_DUMP_VERSION 0x50acff01
+=======
+#define  BNX2X_DUMP_VERSION 0x61111111
+>>>>>>> v3.18
 =======
 #define  BNX2X_DUMP_VERSION 0x61111111
 >>>>>>> v3.18
@@ -1482,7 +1492,10 @@ static const struct reg_addr reg_addrs[] = {
 	{ 0x1803a0, 5, 0x1c, 0x924},
 	{ 0x1803b4, 2, 0x18, 0x924},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x180400, 256, 0x3, 0xfff},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0x181000, 4, 0x1f, 0x93c},
@@ -1597,7 +1610,10 @@ static const struct reg_addr reg_addrs[] = {
 	{ 0x2003a0, 1, 0x1c, 0x924},
 	{ 0x2003a8, 2, 0x1c, 0x924},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x200400, 256, 0x3, 0xfff},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0x202000, 4, 0x1f, 0x1927},
@@ -1712,7 +1728,10 @@ static const struct reg_addr reg_addrs[] = {
 	{ 0x2803a0, 1, 0x1c, 0x924},
 	{ 0x2803a8, 2, 0x1c, 0x924},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x280400, 256, 0x3, 0xfff},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0x282000, 4, 0x1f, 0x9e4},
@@ -1827,7 +1846,10 @@ static const struct reg_addr reg_addrs[] = {
 	{ 0x3003a0, 1, 0x1c, 0x924},
 	{ 0x3003a8, 2, 0x1c, 0x924},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x300400, 256, 0x3, 0xfff},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0x302000, 4, 0x1f, 0xf24},
@@ -2236,15 +2258,21 @@ static const struct wreg_addr wreg_addr_e3b0 = {
 
 static const unsigned int dump_num_registers[NUM_CHIPS][NUM_PRESETS] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{20782, 18567, 27975, 19729, 18311, 27719, 20836, 32391, 41799, 20812,
 	 26247, 35655, 19074},
 	{32774, 19297, 33277, 31721, 19041, 33021, 32828, 33121, 47101, 32804,
 	 26977, 40957, 35895},
 =======
+=======
+>>>>>>> v3.18
 	{19758, 17543, 26951, 18705, 17287, 26695, 19812, 31367, 40775, 19788,
 	 25223, 34631, 19074},
 	{31750, 18273, 32253, 30697, 18017, 31997, 31804, 32097, 46077, 31780,
 	 25953, 39933, 35895},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{36527, 17928, 33697, 35474, 18700, 34466, 36581, 31752, 47521, 36557,
 	 25608, 41377, 43903},

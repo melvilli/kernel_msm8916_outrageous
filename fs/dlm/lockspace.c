@@ -36,14 +36,20 @@ static ssize_t dlm_control_store(struct dlm_ls *ls, const char *buf, size_t len)
 {
 	ssize_t ret = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n = simple_strtol(buf, NULL, 0);
 
 =======
+=======
+>>>>>>> v3.18
 	int n;
 	int rc = kstrtoint(buf, 0, &n);
 
 	if (rc)
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ls = dlm_find_lockspace_local(ls->ls_local_handle);
 	if (!ls)
@@ -66,12 +72,18 @@ static ssize_t dlm_control_store(struct dlm_ls *ls, const char *buf, size_t len)
 static ssize_t dlm_event_store(struct dlm_ls *ls, const char *buf, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ls->ls_uevent_result = simple_strtol(buf, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	int rc = kstrtoint(buf, 0, &ls->ls_uevent_result);
 
 	if (rc)
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_bit(LSFL_UEVENT_WAIT, &ls->ls_flags);
 	wake_up(&ls->ls_uevent_wait);
@@ -86,12 +98,18 @@ static ssize_t dlm_id_show(struct dlm_ls *ls, char *buf)
 static ssize_t dlm_id_store(struct dlm_ls *ls, const char *buf, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ls->ls_global_id = simple_strtoul(buf, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	int rc = kstrtouint(buf, 0, &ls->ls_global_id);
 
 	if (rc)
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return len;
 }
@@ -104,13 +122,19 @@ static ssize_t dlm_nodir_show(struct dlm_ls *ls, char *buf)
 static ssize_t dlm_nodir_store(struct dlm_ls *ls, const char *buf, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val = simple_strtoul(buf, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	int val;
 	int rc = kstrtoint(buf, 0, &val);
 
 	if (rc)
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (val == 1)
 		set_bit(LSFL_NODIR, &ls->ls_flags);
@@ -221,7 +245,11 @@ static int do_uevent(struct dlm_ls *ls, int in)
 		kobject_uevent(&ls->ls_kobj, KOBJ_OFFLINE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "%s the lockspace group...", in ? "joining" : "leaving");
+=======
+	log_rinfo(ls, "%s the lockspace group...", in ? "joining" : "leaving");
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "%s the lockspace group...", in ? "joining" : "leaving");
 >>>>>>> v3.18
@@ -233,7 +261,11 @@ static int do_uevent(struct dlm_ls *ls, int in)
 			test_and_clear_bit(LSFL_UEVENT_WAIT, &ls->ls_flags));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "group event done %d %d", error, ls->ls_uevent_result);
+=======
+	log_rinfo(ls, "group event done %d %d", error, ls->ls_uevent_result);
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "group event done %d %d", error, ls->ls_uevent_result);
 >>>>>>> v3.18
@@ -679,7 +711,11 @@ static int new_lockspace(const char *name, const char *cluster,
 	dlm_create_debug_file(ls);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "join complete");
+=======
+	log_rinfo(ls, "join complete");
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "join complete");
 >>>>>>> v3.18
@@ -749,9 +785,13 @@ static int lkb_idr_is_local(int id, void *p, void *data)
 	struct dlm_lkb *lkb = p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!lkb->lkb_nodeid)
 		return 1;
 	return 0;
+=======
+	return lkb->lkb_nodeid == 0 && lkb->lkb_grmode != DLM_LOCK_IV;
+>>>>>>> v3.18
 =======
 	return lkb->lkb_nodeid == 0 && lkb->lkb_grmode != DLM_LOCK_IV;
 >>>>>>> v3.18
@@ -884,7 +924,11 @@ static int release_lockspace(struct dlm_ls *ls, int force)
 	dlm_clear_members_gone(ls);
 	kfree(ls->ls_node_array);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "release_lockspace final free");
+=======
+	log_rinfo(ls, "release_lockspace final free");
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "release_lockspace final free");
 >>>>>>> v3.18
@@ -934,6 +978,7 @@ void dlm_stop_lockspaces(void)
 {
 	struct dlm_ls *ls;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  restart:
 	spin_lock(&lslist_lock);
@@ -941,6 +986,8 @@ void dlm_stop_lockspaces(void)
 		if (!test_bit(LSFL_RUNNING, &ls->ls_flags))
 			continue;
 =======
+=======
+>>>>>>> v3.18
 	int count;
 
  restart:
@@ -951,6 +998,9 @@ void dlm_stop_lockspaces(void)
 			count++;
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_unlock(&lslist_lock);
 		log_error(ls, "no userland control daemon, stopping lockspace");
@@ -959,6 +1009,12 @@ void dlm_stop_lockspaces(void)
 	}
 	spin_unlock(&lslist_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (count)
+		log_print("dlm user daemon left %d lockspaces", count);
+>>>>>>> v3.18
 =======
 
 	if (count)

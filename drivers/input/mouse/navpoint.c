@@ -10,7 +10,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -291,7 +294,11 @@ static int navpoint_probe(struct platform_device *pdev)
 
 err_free_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(ssp->irq, &pdev->dev);
+=======
+	free_irq(ssp->irq, navpoint);
+>>>>>>> v3.18
 =======
 	free_irq(ssp->irq, navpoint);
 >>>>>>> v3.18

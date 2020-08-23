@@ -113,6 +113,12 @@ struct gpmc_timings nand_default_timings[1] = {
 		.cs_wr_off = 36,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.we_on = 6,
+		.oe_on = 6,
+
+>>>>>>> v3.18
 =======
 		.we_on = 6,
 		.oe_on = 6,
@@ -146,7 +152,11 @@ __init board_nand_init(struct mtd_partition *nand_parts, u8 nr_parts, u8 cs,
 	board_nand_data.devsize		= nand_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	board_nand_data.ecc_opt = OMAP_ECC_HAMMING_CODE_DEFAULT;
+=======
+	board_nand_data.ecc_opt = OMAP_ECC_HAM1_CODE_SW;
+>>>>>>> v3.18
 =======
 	board_nand_data.ecc_opt = OMAP_ECC_HAM1_CODE_SW;
 >>>>>>> v3.18
@@ -168,7 +178,11 @@ static u8 get_gpmc0_type(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(__raw_readw(fpga_map_addr + REG_FPGA_REV)))
+=======
+	if (!(readw_relaxed(fpga_map_addr + REG_FPGA_REV)))
+>>>>>>> v3.18
 =======
 	if (!(readw_relaxed(fpga_map_addr + REG_FPGA_REV)))
 >>>>>>> v3.18
@@ -178,7 +192,11 @@ static u8 get_gpmc0_type(void)
 
 	/* S8-DIP-OFF = 1, S8-DIP-ON = 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cs = __raw_readw(fpga_map_addr + REG_FPGA_DIP_SWITCH_INPUT2) & 0xf;
+=======
+	cs = readw_relaxed(fpga_map_addr + REG_FPGA_DIP_SWITCH_INPUT2) & 0xf;
+>>>>>>> v3.18
 =======
 	cs = readw_relaxed(fpga_map_addr + REG_FPGA_DIP_SWITCH_INPUT2) & 0xf;
 >>>>>>> v3.18

@@ -1,6 +1,10 @@
 /* IEEE 802.11 SoftMAC layer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2005 Andrea Merello <andreamrl@tiscali.it>
+=======
+ * Copyright (c) 2005 Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (c) 2005 Andrea Merello <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -249,6 +253,10 @@ int rtllib_wx_get_rate(struct rtllib_device *ieee,
 {
 	u32 tmp_rate = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -343,7 +351,10 @@ void rtllib_wx_sync_scan_wq(void *data)
 	enum ht_channel_width bandwidth = 0;
 	int b40M = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -423,7 +434,10 @@ void rtllib_wx_sync_scan_wq(void *data)
 	rtllib_wake_all_queues(ieee);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -643,8 +657,11 @@ int rtllib_wx_get_power(struct rtllib_device *ieee,
 				 union iwreq_data *wrqu, char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	down(&ieee->wx_sem);
@@ -675,7 +692,11 @@ int rtllib_wx_get_power(struct rtllib_device *ieee,
 exit:
 	up(&ieee->wx_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

@@ -75,7 +75,11 @@ static struct cmtp_application *cmtp_application_add(struct cmtp_session *sessio
 	struct cmtp_application *app = kzalloc(sizeof(*app), GFP_KERNEL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK application %pK appl %d", session, app, appl);
+=======
+	BT_DBG("session %p application %p appl %d", session, app, appl);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p application %p appl %d", session, app, appl);
 >>>>>>> v3.18
@@ -94,7 +98,11 @@ static struct cmtp_application *cmtp_application_add(struct cmtp_session *sessio
 static void cmtp_application_del(struct cmtp_session *session, struct cmtp_application *app)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK application %pK", session, app);
+=======
+	BT_DBG("session %p application %p", session, app);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p application %p", session, app);
 >>>>>>> v3.18
@@ -146,7 +154,11 @@ static void cmtp_send_capimsg(struct cmtp_session *session, struct sk_buff *skb)
 	struct cmtp_scb *scb = (void *) skb->cb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK skb %pK len %d", session, skb, skb->len);
+=======
+	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
 >>>>>>> v3.18
@@ -167,8 +179,12 @@ static void cmtp_send_interopmsg(struct cmtp_session *session,
 	unsigned char *s;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK subcmd 0x%02x appl %d msgnum %d",
 	       session, subcmd, appl, msgnum);
+=======
+	BT_DBG("session %p subcmd 0x%02x appl %d msgnum %d", session, subcmd, appl, msgnum);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p subcmd 0x%02x appl %d msgnum %d", session, subcmd, appl, msgnum);
 >>>>>>> v3.18
@@ -208,7 +224,11 @@ static void cmtp_recv_interopmsg(struct cmtp_session *session, struct sk_buff *s
 	__u32 controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK skb %pK len %d", session, skb, skb->len);
+=======
+	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
 >>>>>>> v3.18
@@ -351,7 +371,11 @@ void cmtp_recv_capimsg(struct cmtp_session *session, struct sk_buff *skb)
 	__u32 contr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK skb %pK len %d", session, skb, skb->len);
+=======
+	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
 >>>>>>> v3.18
@@ -388,6 +412,7 @@ void cmtp_recv_capimsg(struct cmtp_session *session, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctrl) {
 		BT_ERR("Can't find controller %d for message", session->num);
 		kfree_skb(skb);
@@ -396,13 +421,19 @@ void cmtp_recv_capimsg(struct cmtp_session *session, struct sk_buff *skb)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	capi_ctr_handle_message(ctrl, appl, skb);
 }
 
 static int cmtp_load_firmware(struct capi_ctr *ctrl, capiloaddata *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("ctrl %pK data %pK", ctrl, data);
+=======
+	BT_DBG("ctrl %p data %p", ctrl, data);
+>>>>>>> v3.18
 =======
 	BT_DBG("ctrl %p data %p", ctrl, data);
 >>>>>>> v3.18
@@ -415,7 +446,11 @@ static void cmtp_reset_ctr(struct capi_ctr *ctrl)
 	struct cmtp_session *session = ctrl->driverdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("ctrl %pK", ctrl);
+=======
+	BT_DBG("ctrl %p", ctrl);
+>>>>>>> v3.18
 =======
 	BT_DBG("ctrl %p", ctrl);
 >>>>>>> v3.18
@@ -436,8 +471,13 @@ static void cmtp_register_appl(struct capi_ctr *ctrl, __u16 appl, capi_register_
 	int err = 0, nconn, want = rp->level3cnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("ctrl %pK appl %d level3cnt %d datablkcnt %d datablklen %d",
 	       ctrl, appl, rp->level3cnt, rp->datablkcnt, rp->datablklen);
+=======
+	BT_DBG("ctrl %p appl %d level3cnt %d datablkcnt %d datablklen %d",
+		ctrl, appl, rp->level3cnt, rp->datablkcnt, rp->datablklen);
+>>>>>>> v3.18
 =======
 	BT_DBG("ctrl %p appl %d level3cnt %d datablkcnt %d datablklen %d",
 		ctrl, appl, rp->level3cnt, rp->datablkcnt, rp->datablklen);
@@ -506,7 +546,11 @@ static void cmtp_release_appl(struct capi_ctr *ctrl, __u16 appl)
 	struct cmtp_application *application;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("ctrl %pK appl %d", ctrl, appl);
+=======
+	BT_DBG("ctrl %p appl %d", ctrl, appl);
+>>>>>>> v3.18
 =======
 	BT_DBG("ctrl %p appl %d", ctrl, appl);
 >>>>>>> v3.18
@@ -536,7 +580,11 @@ static u16 cmtp_send_message(struct capi_ctr *ctrl, struct sk_buff *skb)
 	__u32 contr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("ctrl %pK skb %pK", ctrl, skb);
+=======
+	BT_DBG("ctrl %p skb %p", ctrl, skb);
+>>>>>>> v3.18
 =======
 	BT_DBG("ctrl %p skb %p", ctrl, skb);
 >>>>>>> v3.18
@@ -605,7 +653,11 @@ int cmtp_attach_device(struct cmtp_session *session)
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK", session);
+=======
+	BT_DBG("session %p", session);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p", session);
 >>>>>>> v3.18
@@ -651,7 +703,11 @@ int cmtp_attach_device(struct cmtp_session *session)
 	session->num = session->ctrl.cnr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK num %d", session, session->num);
+=======
+	BT_DBG("session %p num %d", session, session->num);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p num %d", session, session->num);
 >>>>>>> v3.18
@@ -676,7 +732,11 @@ int cmtp_attach_device(struct cmtp_session *session)
 void cmtp_detach_device(struct cmtp_session *session)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK", session);
+=======
+	BT_DBG("session %p", session);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p", session);
 >>>>>>> v3.18

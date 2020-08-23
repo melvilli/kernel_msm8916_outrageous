@@ -29,7 +29,11 @@ VOID SortPackInfo(struct bcm_mini_adapter *Adapter)
 
 	sort(Adapter->PackInfo, NO_OF_QUEUES, sizeof(struct bcm_packet_info),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compare_packet_info, NULL);
+=======
+	     compare_packet_info, NULL);
+>>>>>>> v3.18
 =======
 	     compare_packet_info, NULL);
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ VOID SortClassifiers(struct bcm_mini_adapter *Adapter)
 
 	sort(Adapter->astClassifierTable, MAX_CLASSIFIERS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sizeof(struct bcm_classifier_rule), compare_classifiers, NULL);
+=======
+	     sizeof(struct bcm_classifier_rule), compare_classifiers, NULL);
+>>>>>>> v3.18
 =======
 	     sizeof(struct bcm_classifier_rule), compare_classifiers, NULL);
 >>>>>>> v3.18

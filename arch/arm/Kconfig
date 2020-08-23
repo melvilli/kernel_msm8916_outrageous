@@ -4,6 +4,7 @@ config ARM
 	select ARCH_BINFMT_ELF_RANDOMIZE_PIE
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAVE_CUSTOM_GPIO_H
 	select ARCH_SUPPORTS_ATOMIC_RMW
 	select ARCH_HAS_TICK_BROADCAST if GENERIC_CLOCKEVENTS_BROADCAST
@@ -14,6 +15,8 @@ config ARM
 	select GENERIC_ATOMIC64 if (CPU_V6 || !CPU_32v6K || !AEABI)
 	select GENERIC_CLOCKEVENTS_BROADCAST if SMP
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_HAS_TICK_BROADCAST if GENERIC_CLOCKEVENTS_BROADCAST
 	select ARCH_HAVE_CUSTOM_GPIO_H
 	select ARCH_MIGHT_HAVE_PC_PARPORT
@@ -29,12 +32,16 @@ config ARM
 	select GENERIC_ATOMIC64 if (CPU_V7M || CPU_V6 || !CPU_32v6K || !AEABI)
 	select GENERIC_CLOCKEVENTS_BROADCAST if SMP
 	select GENERIC_IDLE_POLL_SETUP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select GENERIC_IRQ_PROBE
 	select GENERIC_IRQ_SHOW
 	select GENERIC_PCI_IOMAP
 	select GENERIC_SCHED_CLOCK
 	select GENERIC_SMP_IDLE_THREAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select GENERIC_IDLE_POLL_SETUP
 	select GENERIC_STRNCPY_FROM_USER
@@ -49,6 +56,8 @@ config ARM
 	select HAVE_C_RECORDMCOUNT
 	select HAVE_CC_STACKPROTECTOR
 =======
+=======
+>>>>>>> v3.18
 	select GENERIC_STRNCPY_FROM_USER
 	select GENERIC_STRNLEN_USER
 	select HANDLE_DOMAIN_IRQ
@@ -62,6 +71,9 @@ config ARM
 	select HAVE_CC_STACKPROTECTOR
 	select HAVE_CONTEXT_TRACKING
 	select HAVE_C_RECORDMCOUNT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_DEBUG_KMEMLEAK
 	select HAVE_DMA_API_DEBUG
@@ -69,6 +81,10 @@ config ARM
 	select HAVE_DMA_CONTIGUOUS if MMU
 	select HAVE_DYNAMIC_FTRACE if (!XIP_KERNEL)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_EFFICIENT_UNALIGNED_ACCESS if (CPU_V6 || CPU_V6K || CPU_V7) && MMU
+>>>>>>> v3.18
 =======
 	select HAVE_EFFICIENT_UNALIGNED_ACCESS if (CPU_V6 || CPU_V6K || CPU_V7) && MMU
 >>>>>>> v3.18
@@ -81,6 +97,10 @@ config ARM
 	select HAVE_IRQ_TIME_ACCOUNTING
 	select HAVE_KERNEL_GZIP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KERNEL_LZ4
+>>>>>>> v3.18
 =======
 	select HAVE_KERNEL_LZ4
 >>>>>>> v3.18
@@ -90,6 +110,7 @@ config ARM
 	select HAVE_KPROBES if !XIP_KERNEL
 	select HAVE_KRETPROBES if (HAVE_KPROBES)
 	select HAVE_MEMBLOCK
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select HAVE_OPROFILE if (HAVE_PERF_EVENTS)
 	select HAVE_PERF_EVENTS
@@ -107,6 +128,8 @@ config ARM
 	select OLD_SIGACTION
 	select HAVE_CONTEXT_TRACKING
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_MOD_ARCH_SPECIFIC if ARM_UNWIND
 	select HAVE_OPROFILE if (HAVE_PERF_EVENTS)
 	select HAVE_PERF_EVENTS
@@ -127,6 +150,9 @@ config ARM
 	select SYS_SUPPORTS_APM_EMULATION
 	# Above selects are sorted alphabetically; please add new ones
 	# according to that.  Thanks.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  The ARM series is a line of low-power-consumption RISC chip designs
@@ -138,6 +164,10 @@ config ARM
 
 config ARM_HAS_SG_CHAIN
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 	select ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -173,9 +203,12 @@ config ARM_DMA_IOMMU_ALIGNMENT
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_PWM
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MIGHT_HAVE_PCI
@@ -230,12 +263,18 @@ config TRACE_IRQFLAGS_SUPPORT
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RWSEM_GENERIC_SPINLOCK
 	bool
 	default y
 
 config RWSEM_XCHGADD_ALGORITHM
 	bool
+=======
+config RWSEM_XCHGADD_ALGORITHM
+	bool
+	default y
+>>>>>>> v3.18
 =======
 config RWSEM_XCHGADD_ALGORITHM
 	bool
@@ -249,12 +288,17 @@ config ARCH_HAS_ILOG2_U64
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_HAS_CPUFREQ
 	bool
 	help
 	  Internal node to signify that the ARCH has CPUFREQ support
 	  and that the relevant menu configurations are displayed for
 	  it.
+=======
+config ARCH_HAS_BANDGAP
+	bool
+>>>>>>> v3.18
 =======
 config ARCH_HAS_BANDGAP
 	bool
@@ -278,6 +322,12 @@ config NEED_DMA_MAP_STATE
        def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config ARCH_SUPPORTS_UPROBES
+	def_bool y
+
+>>>>>>> v3.18
 =======
 config ARCH_SUPPORTS_UPROBES
 	def_bool y
@@ -299,9 +349,12 @@ config ARCH_MTD_XIP
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_WANT_KMAP_ATOMIC_FLUSH
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config VECTORS_BASE
@@ -331,6 +384,7 @@ config ARM_PATCH_PHYS_VIRT
 	  you need to shrink the kernel to the minimal size.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NEED_MACH_GPIO_H
 	bool
 	help
@@ -338,6 +392,8 @@ config NEED_MACH_GPIO_H
 	  definitions for this platform. The need for mach/gpio.h should
 	  be avoided when possible.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config NEED_MACH_IO_H
@@ -357,9 +413,12 @@ config NEED_MACH_MEMORY_H
 config PHYS_OFFSET
 	hex "Physical address of main memory" if MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ARM_PATCH_PHYS_VIRT && !NEED_MACH_MEMORY_H
 	default DRAM_BASE if !MMU
 =======
+=======
+>>>>>>> v3.18
 	depends on !ARM_PATCH_PHYS_VIRT
 	default DRAM_BASE if !MMU
 	default 0x00000000 if ARCH_EBSA110 || \
@@ -376,6 +435,9 @@ config PHYS_OFFSET
 	default 0xd0000000 if EP93XX_SDCE1_PHYS_OFFSET
 	default 0xe0000000 if EP93XX_SDCE2_PHYS_OFFSET
 	default 0xf0000000 if EP93XX_SDCE3_ASYNC_PHYS_OFFSET
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Please provide the physical address corresponding to the
@@ -385,6 +447,7 @@ config GENERIC_BUG
 	def_bool y
 	depends on BUG
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARM_USER_ACCESSIBLE_TIMER_BASE
 	hex "Base address of user-accessible timer counter page"
@@ -406,6 +469,8 @@ config ARCH_RANDOM
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 source "init/Kconfig"
 
 source "kernel/Kconfig.freezer"
@@ -420,6 +485,7 @@ config MMU
 	  support by paged memory management. If unsure, say 'Y'.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_MMAP_RND_BITS_MIN
 	default 8
 
@@ -428,6 +494,8 @@ config ARCH_MMAP_RND_BITS_MAX
 	default 15 if PAGE_OFFSET=0x80000000
 	default 16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #
@@ -443,10 +511,13 @@ config ARCH_MULTIPLATFORM
 	bool "Allow multiple platforms to be selected"
 	depends on MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARM_PATCH_PHYS_VIRT
 	select AUTO_ZRELADDR
 	select COMMON_CLK
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select ARM_HAS_SG_CHAIN
 	select ARM_PATCH_PHYS_VIRT
@@ -455,6 +526,9 @@ config ARCH_MULTIPLATFORM
 	select COMMON_CLK
 	select GENERIC_CLOCKEVENTS
 	select MIGHT_HAVE_PCI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select MULTI_IRQ_HANDLER
 	select SPARSE_IRQ
@@ -463,8 +537,14 @@ config ARCH_MULTIPLATFORM
 config ARCH_INTEGRATOR
 	bool "ARM Ltd. Integrator family"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
 	select ARM_AMBA
+=======
+	select ARM_AMBA
+	select ARM_PATCH_PHYS_VIRT if MMU
+	select AUTO_ZRELADDR
+>>>>>>> v3.18
 =======
 	select ARM_AMBA
 	select ARM_PATCH_PHYS_VIRT if MMU
@@ -477,9 +557,15 @@ config ARCH_INTEGRATOR
 	select ICST
 	select MULTI_IRQ_HANDLER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_MEMORY_H
 	select PLAT_VERSATILE
 	select SPARSE_IRQ
+=======
+	select PLAT_VERSATILE
+	select SPARSE_IRQ
+	select USE_OF
+>>>>>>> v3.18
 =======
 	select PLAT_VERSATILE
 	select SPARSE_IRQ
@@ -502,7 +588,10 @@ config ARCH_REALVIEW
 	select NEED_MACH_MEMORY_H
 	select PLAT_VERSATILE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PLAT_VERSATILE_CLCD
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -520,7 +609,10 @@ config ARCH_VERSATILE
 	select ICST
 	select PLAT_VERSATILE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PLAT_VERSATILE_CLCD
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select PLAT_VERSATILE_CLOCK
@@ -533,9 +625,13 @@ config ARCH_AT91
 	select ARCH_REQUIRE_GPIOLIB
 	select CLKDEV_LOOKUP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_CLK
 	select IRQ_DOMAIN
 	select NEED_MACH_GPIO_H
+=======
+	select IRQ_DOMAIN
+>>>>>>> v3.18
 =======
 	select IRQ_DOMAIN
 >>>>>>> v3.18
@@ -551,6 +647,7 @@ config ARCH_CLPS711X
 	select ARCH_REQUIRE_GPIOLIB
 	select AUTO_ZRELADDR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CLKDEV_LOOKUP
 	select COMMON_CLK
 	select CPU_ARM720T
@@ -559,12 +656,17 @@ config ARCH_CLPS711X
 	select NEED_MACH_MEMORY_H
 	select SPARSE_IRQ
 =======
+=======
+>>>>>>> v3.18
 	select CLKSRC_MMIO
 	select COMMON_CLK
 	select CPU_ARM720T
 	select GENERIC_CLOCKEVENTS
 	select MFD_SYSCON
 	select SOC_BUS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Support for Cirrus Logic 711x/721x/731x based boards.
@@ -573,9 +675,15 @@ config ARCH_GEMINI
 	bool "Cortina Systems Gemini"
 	select ARCH_REQUIRE_GPIOLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_USES_GETTIMEOFFSET
 	select NEED_MACH_GPIO_H
 	select CPU_FA526
+=======
+	select CLKSRC_MMIO
+	select CPU_FA526
+	select GENERIC_CLOCKEVENTS
+>>>>>>> v3.18
 =======
 	select CLKSRC_MMIO
 	select CPU_FA526
@@ -599,7 +707,10 @@ config ARCH_EBSA110
 	  parallel port.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_EFM32
 	bool "Energy Micro efm32"
 	depends on !MMU
@@ -618,6 +729,9 @@ config ARCH_EFM32
 	  Support for Energy Micro's (now Silicon Labs) efm32 Giant Gecko
 	  processors.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARCH_EP93XX
 	bool "EP93xx-based"
@@ -629,7 +743,10 @@ config ARCH_EP93XX
 	select CLKDEV_LOOKUP
 	select CPU_ARM920T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_MEMORY_H
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -660,7 +777,10 @@ config ARCH_IOP13XX
 	bool "IOP13xx-based"
 	depends on MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_MSI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select CPU_XSC3
@@ -670,6 +790,10 @@ config ARCH_IOP13XX
 	select PLAT_IOP
 	select VMSPLIT_1G
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SPARSE_IRQ
+>>>>>>> v3.18
 =======
 	select SPARSE_IRQ
 >>>>>>> v3.18
@@ -682,7 +806,11 @@ config ARCH_IOP32X
 	select ARCH_REQUIRE_GPIOLIB
 	select CPU_XSCALE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
+=======
+	select GPIO_IOP
+>>>>>>> v3.18
 =======
 	select GPIO_IOP
 >>>>>>> v3.18
@@ -699,7 +827,11 @@ config ARCH_IOP33X
 	select ARCH_REQUIRE_GPIOLIB
 	select CPU_XSCALE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
+=======
+	select GPIO_IOP
+>>>>>>> v3.18
 =======
 	select GPIO_IOP
 >>>>>>> v3.18
@@ -715,6 +847,10 @@ config ARCH_IXP4XX
 	select ARCH_HAS_DMA_SET_COHERENT_MASK
 	select ARCH_REQUIRE_GPIOLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_SUPPORTS_BIG_ENDIAN
+>>>>>>> v3.18
 =======
 	select ARCH_SUPPORTS_BIG_ENDIAN
 >>>>>>> v3.18
@@ -725,8 +861,13 @@ config ARCH_IXP4XX
 	select MIGHT_HAVE_PCI
 	select NEED_MACH_IO_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select USB_EHCI_BIG_ENDIAN_MMIO
 	select USB_EHCI_BIG_ENDIAN_DESC
+=======
+	select USB_EHCI_BIG_ENDIAN_DESC
+	select USB_EHCI_BIG_ENDIAN_MMIO
+>>>>>>> v3.18
 =======
 	select USB_EHCI_BIG_ENDIAN_DESC
 	select USB_EHCI_BIG_ENDIAN_MMIO
@@ -740,6 +881,7 @@ config ARCH_DOVE
 	select CPU_PJ4
 	select GENERIC_CLOCKEVENTS
 	select MIGHT_HAVE_PCI
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select PINCTRL
 	select PINCTRL_DOVE
@@ -765,6 +907,8 @@ config ARCH_KIRKWOOD
 	  88F6180, 88F6192 and 88F6281.
 
 =======
+=======
+>>>>>>> v3.18
 	select MVEBU_MBUS
 	select PINCTRL
 	select PINCTRL_DOVE
@@ -772,6 +916,9 @@ config ARCH_KIRKWOOD
 	help
 	  Support for the Marvell Dove SoC 88AP510
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARCH_MV78XX0
 	bool "Marvell MV78xx0"
@@ -779,9 +926,15 @@ config ARCH_MV78XX0
 	select CPU_FEROCEON
 	select GENERIC_CLOCKEVENTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PCI
 	select PLAT_ORION_LEGACY
 	select MVEBU_MBUS
+=======
+	select MVEBU_MBUS
+	select PCI
+	select PLAT_ORION_LEGACY
+>>>>>>> v3.18
 =======
 	select MVEBU_MBUS
 	select PCI
@@ -798,9 +951,15 @@ config ARCH_ORION5X
 	select CPU_FEROCEON
 	select GENERIC_CLOCKEVENTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PCI
 	select PLAT_ORION_LEGACY
 	select MVEBU_MBUS
+=======
+	select MVEBU_MBUS
+	select PCI
+	select PLAT_ORION_LEGACY
+>>>>>>> v3.18
 =======
 	select MVEBU_MBUS
 	select PCI
@@ -821,7 +980,11 @@ config ARCH_MMP
 	select GPIO_PXA
 	select IRQ_DOMAIN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
+=======
+	select MULTI_IRQ_HANDLER
+>>>>>>> v3.18
 =======
 	select MULTI_IRQ_HANDLER
 >>>>>>> v3.18
@@ -868,8 +1031,11 @@ config ARCH_LPC32XX
 	select GENERIC_CLOCKEVENTS
 	select HAVE_IDE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_PWM
 	select USB_ARCH_HAS_OHCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select USE_OF
@@ -880,7 +1046,10 @@ config ARCH_PXA
 	bool "PXA2xx/PXA3xx-based"
 	depends on MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select ARCH_MTD_XIP
@@ -890,6 +1059,10 @@ config ARCH_PXA
 	select CLKDEV_LOOKUP
 	select CLKSRC_MMIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CLKSRC_OF
+>>>>>>> v3.18
 =======
 	select CLKSRC_OF
 >>>>>>> v3.18
@@ -898,7 +1071,10 @@ config ARCH_PXA
 	select HAVE_IDE
 	select MULTI_IRQ_HANDLER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select PLAT_PXA
@@ -907,6 +1083,7 @@ config ARCH_PXA
 	  Support for Intel/Marvell's PXA2xx/PXA3xx processor line.
 
 config ARCH_MSM
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool "Qualcomm MSM"
 	select ARCH_HAS_CPUFREQ
@@ -927,10 +1104,15 @@ config ARCH_MSM
 	select SPARSE_IRQ
 	select USE_OF
 =======
+=======
+>>>>>>> v3.18
 	bool "Qualcomm MSM (non-multiplatform)"
 	select ARCH_REQUIRE_GPIOLIB
 	select COMMON_CLK
 	select GENERIC_CLOCKEVENTS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Support for Qualcomm MSM/QSD based systems.  This runs on the
@@ -940,6 +1122,7 @@ config ARCH_MSM
 	  (clock and power control, etc).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_SHMOBILE
 	bool "Renesas SH-Mobile / R-Mobile"
 	select CLKDEV_LOOKUP
@@ -948,6 +1131,8 @@ config ARCH_SHMOBILE
 	select HAVE_ARM_TWD if LOCAL_TIMERS
 	select HAVE_CLK
 =======
+=======
+>>>>>>> v3.18
 config ARCH_SHMOBILE_LEGACY
 	bool "Renesas ARM SoCs (non-multiplatform)"
 	select ARCH_SHMOBILE
@@ -957,11 +1142,15 @@ config ARCH_SHMOBILE_LEGACY
 	select GENERIC_CLOCKEVENTS
 	select HAVE_ARM_SCU if SMP
 	select HAVE_ARM_TWD if SMP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_MACH_CLKDEV
 	select HAVE_SMP
 	select MIGHT_HAVE_CACHE_L2X0
 	select MULTI_IRQ_HANDLER
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select NEED_MACH_MEMORY_H
 	select NO_IOPORT_MAP
@@ -971,6 +1160,8 @@ config ARCH_SHMOBILE_LEGACY
 	help
 	  Support for Renesas's SH-Mobile and R-Mobile ARM platforms.
 =======
+=======
+>>>>>>> v3.18
 	select NO_IOPORT_MAP
 	select PINCTRL
 	select PM_GENERIC_DOMAINS if PM
@@ -980,6 +1171,9 @@ config ARCH_SHMOBILE_LEGACY
 	  Support for Renesas ARM SoC platforms using a non-multiplatform
 	  kernel. This includes the SH-Mobile, R-Mobile, EMMA-Mobile, R-Car
 	  and RZ families.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARCH_RPC
@@ -989,6 +1183,10 @@ config ARCH_RPC
 	select ARCH_SPARSEMEM_ENABLE
 	select ARCH_USES_GETTIMEOFFSET
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CPU_SA110
+>>>>>>> v3.18
 =======
 	select CPU_SA110
 >>>>>>> v3.18
@@ -1007,7 +1205,10 @@ config ARCH_RPC
 config ARCH_SA1100
 	bool "SA1100-based"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select ARCH_MTD_XIP
@@ -1021,7 +1222,10 @@ config ARCH_SA1100
 	select HAVE_IDE
 	select ISA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select NEED_MACH_MEMORY_H
@@ -1032,6 +1236,7 @@ config ARCH_SA1100
 config ARCH_S3C24XX
 	bool "Samsung S3C24XX SoCs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
 	select ARCH_REQUIRE_GPIOLIB
 	select CLKDEV_LOOKUP
@@ -1039,20 +1244,30 @@ config ARCH_S3C24XX
 	select GENERIC_CLOCKEVENTS
 	select HAVE_CLK
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_REQUIRE_GPIOLIB
 	select ATAGS
 	select CLKDEV_LOOKUP
 	select CLKSRC_SAMSUNG_PWM
 	select GENERIC_CLOCKEVENTS
 	select GPIO_SAMSUNG
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_S3C2410_I2C if I2C
 	select HAVE_S3C2410_WATCHDOG if WATCHDOG
 	select HAVE_S3C_RTC if RTC_CLASS
 	select MULTI_IRQ_HANDLER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
 	select NEED_MACH_IO_H
+=======
+	select NEED_MACH_IO_H
+	select SAMSUNG_ATAGS
+>>>>>>> v3.18
 =======
 	select NEED_MACH_IO_H
 	select SAMSUNG_ATAGS
@@ -1065,6 +1280,7 @@ config ARCH_S3C24XX
 
 config ARCH_S3C64XX
 	bool "Samsung S3C64XX"
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
 	select ARCH_REQUIRE_GPIOLIB
@@ -1187,6 +1403,8 @@ config ARCH_U300
 	  Support for ST-Ericsson U300 series mobile platforms.
 
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_REQUIRE_GPIOLIB
 	select ARM_AMBA
 	select ARM_VIC
@@ -1211,6 +1429,9 @@ config ARCH_U300
 	help
 	  Samsung S3C64XX series based systems
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARCH_DAVINCI
 	bool "TI DaVinci"
@@ -1222,7 +1443,11 @@ config ARCH_DAVINCI
 	select GENERIC_IRQ_CHIP
 	select HAVE_IDE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEED_MACH_GPIO_H
+=======
+	select TI_PRIV_EDMA
+>>>>>>> v3.18
 =======
 	select TI_PRIV_EDMA
 >>>>>>> v3.18
@@ -1235,7 +1460,10 @@ config ARCH_OMAP1
 	bool "TI OMAP1"
 	depends on MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select ARCH_HAS_HOLES_MEMORYMODEL
@@ -1246,7 +1474,10 @@ config ARCH_OMAP1
 	select GENERIC_CLOCKEVENTS
 	select GENERIC_IRQ_CHIP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_CLK
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select HAVE_IDE
@@ -1265,14 +1496,20 @@ comment "CPU Core family selection"
 
 config ARCH_MULTI_V4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "ARMv4 based platforms (FA526, StrongARM)"
 	depends on !ARCH_MULTI_V6_V7
 	select ARCH_MULTI_V4_V5
 =======
+=======
+>>>>>>> v3.18
 	bool "ARMv4 based platforms (FA526)"
 	depends on !ARCH_MULTI_V6_V7
 	select ARCH_MULTI_V4_V5
 	select CPU_FA526
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARCH_MULTI_V4T
@@ -1280,6 +1517,12 @@ config ARCH_MULTI_V4T
 	depends on !ARCH_MULTI_V6_V7
 	select ARCH_MULTI_V4_V5
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CPU_ARM920T if !(CPU_ARM7TDMI || CPU_ARM720T || \
+		CPU_ARM740T || CPU_ARM9TDMI || CPU_ARM922T || \
+		CPU_ARM925T || CPU_ARM940T)
+>>>>>>> v3.18
 =======
 	select CPU_ARM920T if !(CPU_ARM7TDMI || CPU_ARM720T || \
 		CPU_ARM740T || CPU_ARM9TDMI || CPU_ARM922T || \
@@ -1291,6 +1534,12 @@ config ARCH_MULTI_V5
 	depends on !ARCH_MULTI_V6_V7
 	select ARCH_MULTI_V4_V5
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CPU_ARM926T if !(CPU_ARM946E || CPU_ARM1020 || \
+		CPU_ARM1020E || CPU_ARM1022 || CPU_ARM1026 || \
+		CPU_XSCALE || CPU_XSC3 || CPU_MOHAWK || CPU_FEROCEON)
+>>>>>>> v3.18
 =======
 	select CPU_ARM926T if !(CPU_ARM946E || CPU_ARM1020 || \
 		CPU_ARM1020E || CPU_ARM1022 || CPU_ARM1026 || \
@@ -1304,7 +1553,11 @@ config ARCH_MULTI_V6
 	bool "ARMv6 based platforms (ARM11)"
 	select ARCH_MULTI_V6_V7
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_V6
+=======
+	select CPU_V6K
+>>>>>>> v3.18
 =======
 	select CPU_V6K
 >>>>>>> v3.18
@@ -1315,15 +1568,21 @@ config ARCH_MULTI_V7
 	select ARCH_MULTI_V6_V7
 	select CPU_V7
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config ARCH_MULTI_V6_V7
 	bool
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_SMP
 
 config ARCH_MULTI_V6_V7
 	bool
 	select MIGHT_HAVE_CACHE_L2X0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARCH_MULTI_CPU_AUTO
@@ -1333,7 +1592,10 @@ config ARCH_MULTI_CPU_AUTO
 endmenu
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_VIRT
 	bool "Dummy Virtual Machine" if ARCH_MULTI_V7
 	select ARM_AMBA
@@ -1341,6 +1603,9 @@ config ARCH_VIRT
 	select ARM_PSCI
 	select HAVE_ARM_ARCH_TIMER
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # This is sorted alphabetically by mach-* pathname.  However, plat-*
@@ -1352,15 +1617,21 @@ source "arch/arm/mach-mvebu/Kconfig"
 source "arch/arm/mach-at91/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "arch/arm/mach-bcm/Kconfig"
 
 source "arch/arm/mach-bcm2835/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "arch/arm/mach-axxia/Kconfig"
 
 source "arch/arm/mach-bcm/Kconfig"
 
 source "arch/arm/mach-berlin/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 source "arch/arm/mach-clps711x/Kconfig"
@@ -1380,6 +1651,11 @@ source "arch/arm/mach-gemini/Kconfig"
 source "arch/arm/mach-highbank/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "arch/arm/mach-hisi/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "arch/arm/mach-hisi/Kconfig"
 
@@ -1395,6 +1671,7 @@ source "arch/arm/mach-iop13xx/Kconfig"
 source "arch/arm/mach-ixp4xx/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "arch/arm/mach-kirkwood/Kconfig"
 
 source "arch/arm/mach-ks8695/Kconfig"
@@ -1402,6 +1679,8 @@ source "arch/arm/mach-ks8695/Kconfig"
 source "arch/arm/mach-msm/Kconfig"
 
 =======
+=======
+>>>>>>> v3.18
 source "arch/arm/mach-keystone/Kconfig"
 
 source "arch/arm/mach-ks8695/Kconfig"
@@ -1412,12 +1691,20 @@ source "arch/arm/mach-msm/Kconfig"
 
 source "arch/arm/mach-moxart/Kconfig"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "arch/arm/mach-mv78xx0/Kconfig"
 
 source "arch/arm/mach-imx/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "arch/arm/mach-mediatek/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "arch/arm/mach-mediatek/Kconfig"
 
@@ -1429,6 +1716,11 @@ source "arch/arm/mach-netx/Kconfig"
 source "arch/arm/mach-nomadik/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "arch/arm/mach-nspire/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "arch/arm/mach-nspire/Kconfig"
 
@@ -1449,12 +1741,15 @@ source "arch/arm/plat-pxa/Kconfig"
 source "arch/arm/mach-mmp/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "arch/arm/mach-realview/Kconfig"
 
 source "arch/arm/mach-sa1100/Kconfig"
 
 source "arch/arm/plat-samsung/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "arch/arm/mach-qcom/Kconfig"
 
 source "arch/arm/mach-realview/Kconfig"
@@ -1462,12 +1757,16 @@ source "arch/arm/mach-realview/Kconfig"
 source "arch/arm/mach-rockchip/Kconfig"
 
 source "arch/arm/mach-sa1100/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 source "arch/arm/mach-socfpga/Kconfig"
 
 source "arch/arm/mach-spear/Kconfig"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 source "arch/arm/mach-s3c24xx/Kconfig"
 
@@ -1479,17 +1778,26 @@ source "arch/arm/mach-s5p64x0/Kconfig"
 
 source "arch/arm/mach-s5pc100/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "arch/arm/mach-sti/Kconfig"
 
 source "arch/arm/mach-s3c24xx/Kconfig"
 
 source "arch/arm/mach-s3c64xx/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 source "arch/arm/mach-s5pv210/Kconfig"
 
 source "arch/arm/mach-exynos/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "arch/arm/plat-samsung/Kconfig"
+>>>>>>> v3.18
 =======
 source "arch/arm/plat-samsung/Kconfig"
 >>>>>>> v3.18
@@ -1512,8 +1820,11 @@ source "arch/arm/mach-vexpress/Kconfig"
 source "arch/arm/plat-versatile/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "arch/arm/mach-virt/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "arch/arm/mach-vt8500/Kconfig"
@@ -1553,6 +1864,7 @@ config ARM_TIMER_SP804
 	select CLKSRC_OF if OF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source arch/arm/mm/Kconfig
 
 config ARM_NR_BANKS
@@ -1565,6 +1877,8 @@ config IWMMXT
 	depends on CPU_XSCALE || CPU_XSC3 || CPU_MOHAWK || CPU_PJ4
 	default y if PXA27x || PXA3xx || ARCH_MMP || CPU_PJ4
 =======
+=======
+>>>>>>> v3.18
 source "arch/arm/firmware/Kconfig"
 
 source arch/arm/mm/Kconfig
@@ -1573,17 +1887,23 @@ config IWMMXT
 	bool "Enable iWMMXt support"
 	depends on CPU_XSCALE || CPU_XSC3 || CPU_MOHAWK || CPU_PJ4 || CPU_PJ4B
 	default y if PXA27x || PXA3xx || ARCH_MMP || CPU_PJ4 || CPU_PJ4B
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Enable support for iWMMXt context switching at run time if
 	  running on a CPU that supports it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config XSCALE_PMU
 	bool
 	depends on CPU_XSCALE
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MULTI_IRQ_HANDLER
@@ -1699,6 +2019,7 @@ config ARM_ERRATA_742231
 	  capabilities of the processor.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PL310_ERRATA_588369
 	bool "PL310 errata: Clean & Invalidate maintenance operations do not invalidate clean lines"
 	depends on CACHE_L2X0
@@ -1712,6 +2033,8 @@ config PL310_ERRATA_588369
 	   is not correctly implemented in PL310 as clean lines are not
 	   invalidated as a result of these operations.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARM_ERRATA_643719
@@ -1737,6 +2060,7 @@ config ARM_ERRATA_720789
 	  entries regardless of the ASID.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PL310_ERRATA_727915
 	bool "PL310 errata: Background Clean & Invalidate by Way operation can cause data corruption"
 	depends on CACHE_L2X0
@@ -1748,6 +2072,8 @@ config PL310_ERRATA_727915
 	  PL310 treats a cacheable write transaction during a Clean &
 	  Invalidate by Way operation.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARM_ERRATA_743622
@@ -1776,6 +2102,7 @@ config ARM_ERRATA_751472
 	  potentially leading to corrupted entries in the cache or TLB.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PL310_ERRATA_753970
 	bool "PL310 errata: cache sync operation may be faulty"
 	depends on CACHE_PL310
@@ -1791,6 +2118,8 @@ config PL310_ERRATA_753970
 	  This has the same effect as the cache sync operation: store buffer
 	  drain and waiting for all buffers empty.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARM_ERRATA_754322
@@ -1818,7 +2147,11 @@ config ARM_ERRATA_754327
 config ARM_ERRATA_364296
 	bool "ARM errata: Possible cache data corruption with hit-under-miss enabled"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_V6 && !SMP
+=======
+	depends on CPU_V6
+>>>>>>> v3.18
 =======
 	depends on CPU_V6
 >>>>>>> v3.18
@@ -1846,6 +2179,7 @@ config ARM_ERRATA_764369
 	  in the diagnostic control register of the SCU.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PL310_ERRATA_769419
 	bool "PL310 errata: no automatic Store Buffer drain"
 	depends on CACHE_L2X0
@@ -1858,6 +2192,8 @@ config PL310_ERRATA_769419
 	  on systems with an outer cache, the store buffer is drained
 	  explicitly.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARM_ERRATA_775420
@@ -1881,12 +2217,15 @@ config ARM_ERRATA_798181
 	  as the one being invalidated.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PERFMAP
         tristate "Perfmap support (EXPERIMENTAL)"
 	depends on ARCH_MSM_KRAIT
         help
           Perfmap: memory mapped interface for performance monitors.
 =======
+=======
+>>>>>>> v3.18
 config ARM_ERRATA_773022
 	bool "ARM errata: incorrect instructions may be executed from loop buffer"
 	depends on CPU_V7
@@ -1895,6 +2234,9 @@ config ARM_ERRATA_773022
 	  (up to r0p4) erratum. In certain rare sequences of code, the
 	  loop buffer may deliver incorrect instructions. This
 	  workaround disables the loop buffer to avoid the erratum.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endmenu
@@ -1946,12 +2288,15 @@ config PCI_SYSCALL
 	def_bool PCI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Select the host bridge type
 config PCI_HOST_VIA82C505
 	bool
 	depends on PCI && ARCH_SHARK
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PCI_HOST_ITE8152
@@ -1962,6 +2307,10 @@ config PCI_HOST_ITE8152
 
 source "drivers/pci/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/pci/pcie/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/pci/pcie/Kconfig"
 >>>>>>> v3.18
@@ -1987,6 +2336,7 @@ config SMP
 	depends on GENERIC_CLOCKEVENTS
 	depends on HAVE_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MMU
 	help
 	  This enables support for systems with more than one CPU. If you have
@@ -1999,6 +2349,8 @@ config SMP
 	  processor machines. On a single processor machine, the kernel will
 	  run faster if you say N here.
 =======
+=======
+>>>>>>> v3.18
 	depends on MMU || ARM_MPU
 	help
 	  This enables support for systems with more than one CPU. If you have
@@ -2010,6 +2362,9 @@ config SMP
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
 	  will run faster if you say N here.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  See also <file:Documentation/x86/i386/IO-APIC.txt>,
@@ -2021,7 +2376,11 @@ config SMP
 config SMP_ON_UP
 	bool "Allow booting SMP kernel on uniprocessor systems (EXPERIMENTAL)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SMP && !XIP_KERNEL
+=======
+	depends on SMP && !XIP_KERNEL && MMU
+>>>>>>> v3.18
 =======
 	depends on SMP && !XIP_KERNEL && MMU
 >>>>>>> v3.18
@@ -2069,6 +2428,10 @@ config HAVE_ARM_ARCH_TIMER
 	depends on CPU_V7
 	select ARM_ARCH_TIMER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GENERIC_CLOCKEVENTS
+>>>>>>> v3.18
 =======
 	select GENERIC_CLOCKEVENTS
 >>>>>>> v3.18
@@ -2091,9 +2454,12 @@ config MCPM
 	  systems.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 choice
 	prompt "Memory split"
 =======
+=======
+>>>>>>> v3.18
 config MCPM_QUAD_CLUSTER
 	bool
 	depends on MCPM
@@ -2132,6 +2498,9 @@ config BL_SWITCHER_DUMMY_IF
 choice
 	prompt "Memory split"
 	depends on MMU
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default VMSPLIT_3G
 	help
@@ -2151,6 +2520,10 @@ endchoice
 config PAGE_OFFSET
 	hex
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	default PHYS_OFFSET if !MMU
+>>>>>>> v3.18
 =======
 	default PHYS_OFFSET if !MMU
 >>>>>>> v3.18
@@ -2167,7 +2540,11 @@ config NR_CPUS
 config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SMP && HOTPLUG
+=======
+	depends on SMP
+>>>>>>> v3.18
 =======
 	depends on SMP
 >>>>>>> v3.18
@@ -2186,6 +2563,7 @@ config ARM_PSCI
 	  ARM processors").
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LOCAL_TIMERS
 	bool "Use local timer interrupts"
 	depends on SMP
@@ -2198,6 +2576,8 @@ config LOCAL_TIMERS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 # The GPIO number here must be sorted by descending number. In case of
 # a multiplatform kernel, we just want the highest value required by the
 # selected platforms.
@@ -2205,17 +2585,23 @@ config ARCH_NR_GPIO
 	int
 	default 1024 if ARCH_SHMOBILE || ARCH_TEGRA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default 512 if SOC_OMAP5
 	default 392 if ARCH_U8500
 	default 352 if ARCH_VT8500
 	default 288 if ARCH_SUNXI
 =======
+=======
+>>>>>>> v3.18
 	default 512 if ARCH_EXYNOS || ARCH_KEYSTONE || SOC_OMAP5 || \
 		SOC_DRA7XX || ARCH_S3C24XX || ARCH_S3C64XX || ARCH_S5PV210
 	default 416 if ARCH_SUNXI
 	default 392 if ARCH_U8500
 	default 352 if ARCH_VT8500
 	default 288 if ARCH_ROCKCHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default 264 if MACH_H4700
 	default 0
@@ -2229,15 +2615,21 @@ source kernel/Kconfig.preempt
 config HZ_FIXED
 	int
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default 200 if ARCH_EBSA110 || ARCH_S3C24XX || ARCH_S5P64X0 || \
 		ARCH_S5PV210 || ARCH_EXYNOS4
 	default AT91_TIMER_HZ if ARCH_AT91
 	default SHMOBILE_TIMER_HZ if ARCH_SHMOBILE
 =======
+=======
+>>>>>>> v3.18
 	default 200 if ARCH_EBSA110 || ARCH_S3C24XX || \
 		ARCH_S5PV210 || ARCH_EXYNOS4
 	default AT91_TIMER_HZ if ARCH_AT91
 	default SHMOBILE_TIMER_HZ if ARCH_SHMOBILE_LEGACY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default 0
 
@@ -2279,12 +2671,18 @@ config SCHED_HRTICK
 	def_bool HIGH_RES_TIMERS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCHED_HRTICK
 	def_bool HIGH_RES_TIMERS
 
 config THUMB2_KERNEL
 	bool "Compile the kernel in Thumb-2 mode" if !CPU_THUMBONLY
 	depends on CPU_V7 && !CPU_V6 && !CPU_V6K
+=======
+config THUMB2_KERNEL
+	bool "Compile the kernel in Thumb-2 mode" if !CPU_THUMBONLY
+	depends on (CPU_V7 || CPU_V7M) && !CPU_V6 && !CPU_V6K
+>>>>>>> v3.18
 =======
 config THUMB2_KERNEL
 	bool "Compile the kernel in Thumb-2 mode" if !CPU_THUMBONLY
@@ -2354,7 +2752,10 @@ config OABI_COMPAT
 	bool "Allow old ABI binaries to run with this kernel (EXPERIMENTAL)"
 	depends on AEABI && !THUMB2_KERNEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default y if !SMP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -2365,17 +2766,24 @@ config OABI_COMPAT
 	  (only for non "thumb" binaries). This option adds a tiny
 	  overhead to all syscalls and produces a slightly larger kernel.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	  The seccomp filter system will not be available when this is
 	  selected, since there is no way yet to sensibly distinguish
 	  between calling conventions during filtering.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  If you know you'll be using only pure EABI user space then you
 	  can say N here. If this option is not selected and you attempt
 	  to execute a legacy ABI binary then the result will be
 	  UNPREDICTABLE (in fact it can be predicted that it won't work
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  at all). If in doubt say Y.
 
@@ -2391,6 +2799,9 @@ config 4KSTACKS
 	  kernel stack usage and verified that your programs and kernel
 	  usage patterns will not overflow 4K, you should leave this set
 	  to N.
+=======
+	  at all). If in doubt say N.
+>>>>>>> v3.18
 =======
 	  at all). If in doubt say N.
 >>>>>>> v3.18
@@ -2411,11 +2822,17 @@ config HAVE_ARCH_PFN_VALID
 	def_bool ARCH_HAS_HOLES_MEMORYMODEL || !SPARSEMEM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HAVE_GENERIC_RCU_GUP
 	def_bool y
 	depends on ARM_LPAE
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HIGHMEM
 	bool "High Memory Support"
@@ -2447,6 +2864,7 @@ config HW_PERF_EVENTS
 	  disabled, perf events will use software events only.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PERF_EVENTS_USERMODE
 	bool "Enable usermode access for perf events"
 	depends on PERF_EVENTS
@@ -2459,11 +2877,17 @@ config SYS_SUPPORTS_HUGETLBFS
        def_bool y
        depends on ARM_LPAE
 >>>>>>> v3.18
+=======
+config SYS_SUPPORTS_HUGETLBFS
+       def_bool y
+       depends on ARM_LPAE
+>>>>>>> v3.18
 
 config HAVE_ARCH_TRANSPARENT_HUGEPAGE
        def_bool y
        depends on ARM_LPAE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PERF_EVENTS_RESET_PMU_DEBUGFS
 	bool "Reset PMU via debugfs node"
@@ -2508,6 +2932,8 @@ config FORCE_MAX_ZONEORDER
 	default "12" if SOC_AM33XX
 	default "9" if SA1111
 =======
+=======
+>>>>>>> v3.18
 config ARCH_WANT_GENERAL_HUGETLB
 	def_bool y
 
@@ -2518,6 +2944,9 @@ config FORCE_MAX_ZONEORDER
 	range 11 64 if ARCH_SHMOBILE_LEGACY
 	default "12" if SOC_AM33XX
 	default "9" if SA1111 || ARCH_EFM32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default "11"
 	help
@@ -2576,6 +3005,7 @@ config SECCOMP
 	  defined by each seccomp mode.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CC_STACKPROTECTOR
 	bool "Enable -fstack-protector buffer overflow detection (EXPERIMENTAL)"
 	help
@@ -2588,11 +3018,16 @@ config CC_STACKPROTECTOR
 	  neutralized via a kernel panic.
 	  This feature requires gcc version 4.2 or above.
 =======
+=======
+>>>>>>> v3.18
 config SWIOTLB
 	def_bool y
 
 config IOMMU_HELPER
 	def_bool SWIOTLB
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config XEN_DOM0
@@ -2601,23 +3036,30 @@ config XEN_DOM0
 
 config XEN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Xen guest support on ARM (EXPERIMENTAL)"
 	depends on ARM && AEABI && OF
 	depends on CPU_V7 && !CPU_V6
 	depends on !GENERIC_ATOMIC64
 =======
+=======
+>>>>>>> v3.18
 	bool "Xen guest support on ARM"
 	depends on ARM && AEABI && OF
 	depends on CPU_V7 && !CPU_V6
 	depends on !GENERIC_ATOMIC64
 	depends on MMU
 	select ARCH_DMA_ADDR_T_64BIT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select ARM_PSCI
 	select SWIOTLB_XEN
 	help
 	  Say Y if you want to run Linux in a Virtual Machine on Xen on ARM.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config CP_ACCESS
 	tristate "CP register access tool"
@@ -2639,6 +3081,8 @@ config ARM_FLUSH_CONSOLE_ON_RESTART
 	  released if it failed to be acquired, which will cause all the
 	  pending messages to be flushed.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endmenu
@@ -2672,6 +3116,7 @@ config DEPRECATED_PARAM_STRUCT
 	  Some old boot loaders still use this way.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BUILD_ARM_APPENDED_DTB_IMAGE
 	bool "Build a concatenated zImage/dtb by default"
 	depends on OF
@@ -2687,6 +3132,8 @@ config BUILD_ARM_APPENDED_DTB_IMAGE_NAMES
 	  Space separated list of names of dtbs to append when
 	  building a concatenated zImage-dtb.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # Compressed boot loader in ROM.  Yes, we really want to ask about
@@ -2719,6 +3166,10 @@ config ZBOOT_ROM
 	bool "Compressed boot loader in ROM/flash"
 	depends on ZBOOT_ROM_TEXT != ZBOOT_ROM_BSS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on !ARM_APPENDED_DTB && !XIP_KERNEL && !AUTO_ZRELADDR
+>>>>>>> v3.18
 =======
 	depends on !ARM_APPENDED_DTB && !XIP_KERNEL && !AUTO_ZRELADDR
 >>>>>>> v3.18
@@ -2758,7 +3209,11 @@ endchoice
 config ARM_APPENDED_DTB
 	bool "Use appended device tree blob to zImage (EXPERIMENTAL)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on OF && !ZBOOT_ROM
+=======
+	depends on OF
+>>>>>>> v3.18
 =======
 	depends on OF
 >>>>>>> v3.18
@@ -2850,7 +3305,11 @@ endchoice
 config XIP_KERNEL
 	bool "Kernel Execute-In-Place from ROM"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ZBOOT_ROM && !ARM_LPAE && !ARCH_MULTIPLATFORM
+=======
+	depends on !ARM_LPAE && !ARCH_MULTIPLATFORM
+>>>>>>> v3.18
 =======
 	depends on !ARM_LPAE && !ARCH_MULTIPLATFORM
 >>>>>>> v3.18
@@ -2893,8 +3352,12 @@ config KEXEC
 	  It is an ongoing process to be certain the hardware in a machine
 	  is properly shutdown, so do not be surprised if this code does not
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  initially work for you.  It may help to enable device hotplugging
 	  support.
+=======
+	  initially work for you.
+>>>>>>> v3.18
 =======
 	  initially work for you.
 >>>>>>> v3.18
@@ -2922,7 +3385,10 @@ config CRASH_DUMP
 config AUTO_ZRELADDR
 	bool "Auto calculation of the decompressed kernel image address"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ZBOOT_ROM && !ARCH_U300
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -2932,6 +3398,7 @@ config AUTO_ZRELADDR
 	  0xf8000000. This assumes the zImage being placed in the first 128MB
 	  from start of memory.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARM_DECOMPRESSOR_LIMIT
 	hex "Limit the decompressor memory area"
@@ -2946,10 +3413,13 @@ config ARM_DECOMPRESSOR_LIMIT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 endmenu
 
 menu "CPU Power Management"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 if ARCH_HAS_CPUFREQ
 source "drivers/cpufreq/Kconfig"
@@ -3002,6 +3472,10 @@ config CPU_FREQ_S3C24XX_DEBUGFS
 
 endif
 
+=======
+source "drivers/cpufreq/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/cpufreq/Kconfig"
 
@@ -3079,8 +3553,12 @@ config NEON
 config KERNEL_MODE_NEON
 	bool "Support for NEON in kernel mode"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default n
 	depends on NEON
+=======
+	depends on NEON && AEABI
+>>>>>>> v3.18
 =======
 	depends on NEON && AEABI
 >>>>>>> v3.18
@@ -3111,9 +3589,14 @@ source "kernel/power/Kconfig"
 
 config ARCH_SUSPEND_POSSIBLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ARCH_S5PC100
 	depends on CPU_ARM920T || CPU_ARM926T || CPU_SA1100 || \
 		CPU_V6 || CPU_V6K || CPU_V7 || CPU_XSC3 || CPU_XSCALE || CPU_MOHAWK
+=======
+	depends on CPU_ARM920T || CPU_ARM926T || CPU_FEROCEON || CPU_SA1100 || \
+		CPU_V6 || CPU_V6K || CPU_V7 || CPU_V7M || CPU_XSC3 || CPU_XSCALE || CPU_MOHAWK
+>>>>>>> v3.18
 =======
 	depends on CPU_ARM920T || CPU_ARM926T || CPU_FEROCEON || CPU_SA1100 || \
 		CPU_V6 || CPU_V6K || CPU_V7 || CPU_V7M || CPU_XSC3 || CPU_XSCALE || CPU_MOHAWK
@@ -3124,12 +3607,18 @@ config ARM_CPU_SUSPEND
 	def_bool PM_SLEEP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_HIBERNATION_POSSIBLE
 	bool
 	depends on MMU
 	default y if ARCH_SUSPEND_POSSIBLE
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 

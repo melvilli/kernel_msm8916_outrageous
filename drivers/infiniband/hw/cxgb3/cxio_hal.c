@@ -736,8 +736,12 @@ static int __cxio_tpt_op(struct cxio_rdev *rdev_p, u32 reset_tpt_entry,
 			V_TPT_ADDR_TYPE((zbva ? TPT_ZBTO : TPT_VATO)) |
 			V_TPT_PAGE_SIZE(page_size));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tpt.rsvd_pbl_addr = reset_tpt_entry ? 0 :
 				    cpu_to_be32(V_TPT_PBL_ADDR(PBL_OFF(rdev_p, pbl_addr)>>3));
+=======
+		tpt.rsvd_pbl_addr = cpu_to_be32(V_TPT_PBL_ADDR(PBL_OFF(rdev_p, pbl_addr)>>3));
+>>>>>>> v3.18
 =======
 		tpt.rsvd_pbl_addr = cpu_to_be32(V_TPT_PBL_ADDR(PBL_OFF(rdev_p, pbl_addr)>>3));
 >>>>>>> v3.18
@@ -746,8 +750,12 @@ static int __cxio_tpt_op(struct cxio_rdev *rdev_p, u32 reset_tpt_entry,
 		tpt.va_low_or_fbo = cpu_to_be32((u32) (to & 0xFFFFFFFFULL));
 		tpt.rsvd_bind_cnt_or_pstag = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tpt.rsvd_pbl_size = reset_tpt_entry ? 0 :
 				  cpu_to_be32(V_TPT_PBL_SIZE(pbl_size >> 2));
+=======
+		tpt.rsvd_pbl_size = cpu_to_be32(V_TPT_PBL_SIZE(pbl_size >> 2));
+>>>>>>> v3.18
 =======
 		tpt.rsvd_pbl_size = cpu_to_be32(V_TPT_PBL_SIZE(pbl_size >> 2));
 >>>>>>> v3.18

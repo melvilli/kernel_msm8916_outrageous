@@ -329,6 +329,11 @@ struct quotactl_ops {
 	int (*get_xstate)(struct super_block *, struct fs_quota_stat *);
 	int (*set_xstate)(struct super_block *, unsigned int, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*get_xstatev)(struct super_block *, struct fs_quota_statv *);
+	int (*rm_xquota)(struct super_block *, unsigned int);
+>>>>>>> v3.18
 =======
 	int (*get_xstatev)(struct super_block *, struct fs_quota_statv *);
 	int (*rm_xquota)(struct super_block *, unsigned int);
@@ -394,7 +399,10 @@ struct quota_info {
 	struct mutex dqio_mutex;		/* lock device while I/O in progress */
 	struct mutex dqonoff_mutex;		/* Serialize quotaon & quotaoff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rw_semaphore dqptr_sem;		/* serialize ops using quota_info struct, pointers from inode to dquots */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct inode *files[MAXQUOTAS];		/* inodes of quotafiles */

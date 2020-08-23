@@ -46,6 +46,10 @@
 #include <net/ip6_route.h>
 #include <rdma/ib_addr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <rdma/ib.h>
+>>>>>>> v3.18
 =======
 #include <rdma/ib.h>
 >>>>>>> v3.18
@@ -75,7 +79,10 @@ static DECLARE_DELAYED_WORK(work, process_req);
 static struct workqueue_struct *addr_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rdma_addr_size(struct sockaddr *addr)
 {
 	switch (addr->sa_family) {
@@ -93,6 +100,9 @@ EXPORT_SYMBOL(rdma_addr_size);
 
 static struct rdma_addr_client self;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rdma_addr_register_client(struct rdma_addr_client *client)
 {
@@ -128,7 +138,12 @@ int rdma_copy_addr(struct rdma_dev_addr *dev_addr, struct net_device *dev,
 EXPORT_SYMBOL(rdma_copy_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr)
+=======
+int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr,
+		      u16 *vlan_id)
+>>>>>>> v3.18
 =======
 int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr,
 		      u16 *vlan_id)
@@ -156,6 +171,11 @@ int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr,
 
 		ret = rdma_copy_addr(dev_addr, dev, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (vlan_id)
+			*vlan_id = rdma_vlan_dev_vlan_id(dev);
+>>>>>>> v3.18
 =======
 		if (vlan_id)
 			*vlan_id = rdma_vlan_dev_vlan_id(dev);
@@ -172,6 +192,11 @@ int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr,
 					  dev, 1)) {
 				ret = rdma_copy_addr(dev_addr, dev, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				if (vlan_id)
+					*vlan_id = rdma_vlan_dev_vlan_id(dev);
+>>>>>>> v3.18
 =======
 				if (vlan_id)
 					*vlan_id = rdma_vlan_dev_vlan_id(dev);
@@ -262,7 +287,11 @@ static int addr4_resolve(struct sockaddr_in *src_in,
 
 	if (rt->dst.dev->flags & IFF_LOOPBACK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = rdma_translate_ip((struct sockaddr *) dst_in, addr);
+=======
+		ret = rdma_translate_ip((struct sockaddr *)dst_in, addr, NULL);
+>>>>>>> v3.18
 =======
 		ret = rdma_translate_ip((struct sockaddr *)dst_in, addr, NULL);
 >>>>>>> v3.18
@@ -314,7 +343,11 @@ static int addr6_resolve(struct sockaddr_in6 *src_in,
 
 	if (dst->dev->flags & IFF_LOOPBACK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = rdma_translate_ip((struct sockaddr *) dst_in, addr);
+=======
+		ret = rdma_translate_ip((struct sockaddr *)dst_in, addr, NULL);
+>>>>>>> v3.18
 =======
 		ret = rdma_translate_ip((struct sockaddr *)dst_in, addr, NULL);
 >>>>>>> v3.18
@@ -417,7 +450,11 @@ int rdma_resolve_ip(struct rdma_addr_client *client,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(src_in, src_addr, ip_addr_size(src_addr));
+=======
+		memcpy(src_in, src_addr, rdma_addr_size(src_addr));
+>>>>>>> v3.18
 =======
 		memcpy(src_in, src_addr, rdma_addr_size(src_addr));
 >>>>>>> v3.18
@@ -426,7 +463,11 @@ int rdma_resolve_ip(struct rdma_addr_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dst_in, dst_addr, ip_addr_size(dst_addr));
+=======
+	memcpy(dst_in, dst_addr, rdma_addr_size(dst_addr));
+>>>>>>> v3.18
 =======
 	memcpy(dst_in, dst_addr, rdma_addr_size(dst_addr));
 >>>>>>> v3.18
@@ -477,7 +518,10 @@ void rdma_addr_cancel(struct rdma_dev_addr *addr)
 EXPORT_SYMBOL(rdma_addr_cancel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct resolve_cb_context {
 	struct rdma_dev_addr *addr;
 	struct completion comp;
@@ -560,6 +604,9 @@ int rdma_addr_find_smac_by_sgid(union ib_gid *sgid, u8 *smac, u16 *vlan_id)
 }
 EXPORT_SYMBOL(rdma_addr_find_smac_by_sgid);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int netevent_callback(struct notifier_block *self, unsigned long event,
 	void *ctx)
@@ -586,6 +633,10 @@ static int __init addr_init(void)
 
 	register_netevent_notifier(&nb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rdma_addr_register_client(&self);
+>>>>>>> v3.18
 =======
 	rdma_addr_register_client(&self);
 >>>>>>> v3.18
@@ -595,6 +646,10 @@ static int __init addr_init(void)
 static void __exit addr_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rdma_addr_unregister_client(&self);
+>>>>>>> v3.18
 =======
 	rdma_addr_unregister_client(&self);
 >>>>>>> v3.18

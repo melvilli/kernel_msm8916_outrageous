@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -32,12 +36,17 @@
 
 ieee754dp ieee754dp_fint(int x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include "ieee754dp.h"
 
 union ieee754dp ieee754dp_fint(int x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u64 xm;
@@ -45,7 +54,11 @@ union ieee754dp ieee754dp_fint(int x)
 	int xs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -68,6 +81,7 @@ union ieee754dp ieee754dp_fint(int x)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 1
 	/* normalize - result can never be inexact or overflow */
 	xe = DP_MBITS;
@@ -77,10 +91,16 @@ union ieee754dp ieee754dp_fint(int x)
 	xe = DP_FBITS;
 	while ((xm >> DP_FBITS) == 0) {
 >>>>>>> v3.18
+=======
+	/* normalize - result can never be inexact or overflow */
+	xe = DP_FBITS;
+	while ((xm >> DP_FBITS) == 0) {
+>>>>>>> v3.18
 		xm <<= 1;
 		xe--;
 	}
 	return builddp(xs, xe + DP_EBIAS, xm & ~DP_HIDDEN_BIT);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 	/* normalize */
@@ -99,6 +119,8 @@ ieee754dp ieee754dp_funs(unsigned int u)
 		return ieee754dp_add(ieee754dp_1e31(),
 				     ieee754dp_fint(u & ~(1 << 31)));
 	return ieee754dp_fint(u);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

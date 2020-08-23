@@ -6,11 +6,17 @@ config MAY_HAVE_SPARSE_IRQ
        bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Legacy support, required for itanic
 config GENERIC_IRQ_LEGACY
        bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Enable the generic irq autoprobe mechanism
 config GENERIC_IRQ_PROBE
@@ -25,12 +31,18 @@ config GENERIC_IRQ_SHOW_LEVEL
        bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Facility to allocate a hardware interrupt. This is legacy support
 # and should not be used in new code. Use irq domains instead.
 config GENERIC_IRQ_LEGACY_ALLOC_HWIRQ
        bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Support for delayed migration from interrupt context
 config GENERIC_PENDING_IRQ
@@ -56,6 +68,10 @@ config IRQ_EDGE_EOI_HANDLER
 config GENERIC_IRQ_CHIP
        bool
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+       select IRQ_DOMAIN
+>>>>>>> v3.18
 =======
        select IRQ_DOMAIN
 >>>>>>> v3.18
@@ -65,6 +81,12 @@ config IRQ_DOMAIN
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config HANDLE_DOMAIN_IRQ
+	bool
+
+>>>>>>> v3.18
 =======
 config HANDLE_DOMAIN_IRQ
 	bool

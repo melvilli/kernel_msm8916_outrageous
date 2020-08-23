@@ -7,6 +7,7 @@ vt6656_stage-y +=	main_usb.o \
 			mac.o   \
 			baseband.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wctl.o  \
 			80211mgr.o \
 			wcmd.o\
@@ -33,6 +34,16 @@ vt6656_stage-y +=	main_usb.o \
 			usbpipe.o \
 			channel.o \
 			control.o \
+=======
+			wcmd.o\
+			rxtx.o \
+			dpc.o \
+			power.o \
+			key.o \
+			rf.o \
+			usbpipe.o \
+			channel.o \
+>>>>>>> v3.18
 =======
 			wcmd.o\
 			rxtx.o \

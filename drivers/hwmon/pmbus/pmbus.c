@@ -194,7 +194,10 @@ static const struct i2c_device_id pmbus_id[] = {
 	{"pmbus", 0},
 	{"tps40400", 1},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"tps40422", 2},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{"udt020", 1},

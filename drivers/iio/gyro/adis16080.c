@@ -52,7 +52,10 @@ static int adis16080_read_sample(struct iio_dev *indio_dev,
 {
 	struct adis16080_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_message m;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -70,11 +73,15 @@ static int adis16080_read_sample(struct iio_dev *indio_dev,
 	st->buf = cpu_to_be16(addr | ADIS16080_DIN_WRITE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_message_init(&m);
 	spi_message_add_tail(&t[0], &m);
 	spi_message_add_tail(&t[1], &m);
 
 	ret = spi_sync(st->us, &m);
+=======
+	ret = spi_sync_transfer(st->us, t, ARRAY_SIZE(t));
+>>>>>>> v3.18
 =======
 	ret = spi_sync_transfer(st->us, t, ARRAY_SIZE(t));
 >>>>>>> v3.18
@@ -200,7 +207,10 @@ static int adis16080_probe(struct spi_device *spi)
 {
 	const struct spi_device_id *id = spi_get_device_id(spi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct adis16080_state *st;
@@ -208,11 +218,17 @@ static int adis16080_probe(struct spi_device *spi)
 
 	/* setup the industrialio driver allocated elements */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -234,6 +250,7 @@ static int adis16080_probe(struct spi_device *spi)
 	indio_dev->modes = INDIO_DIRECT_MODE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
@@ -246,14 +263,20 @@ error_ret:
 =======
 	return iio_device_register(indio_dev);
 >>>>>>> v3.18
+=======
+	return iio_device_register(indio_dev);
+>>>>>>> v3.18
 }
 
 static int adis16080_remove(struct spi_device *spi)
 {
 	iio_device_unregister(spi_get_drvdata(spi));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(spi_get_drvdata(spi));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

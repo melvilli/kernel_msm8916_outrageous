@@ -170,7 +170,11 @@ static int zc_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	struct zc_device *zc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zc = kzalloc(sizeof(*zc), GFP_KERNEL);
+=======
+	zc = devm_kzalloc(&hdev->dev, sizeof(*zc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	zc = devm_kzalloc(&hdev->dev, sizeof(*zc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -185,7 +189,11 @@ static int zc_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	if (ret) {
 		hid_err(hdev, "parse failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -194,6 +202,7 @@ static int zc_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
 	if (ret) {
 		hid_err(hdev, "hw start failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free;
 	}
@@ -212,10 +221,15 @@ static void zc_remove(struct hid_device *hdev)
 	hid_hw_stop(hdev);
 	kfree(zc);
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -233,7 +247,10 @@ static struct hid_driver zc_driver = {
 	.raw_event = zc_raw_event,
 	.probe = zc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = zc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

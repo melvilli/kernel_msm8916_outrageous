@@ -1,6 +1,10 @@
 ///
 <<<<<<< HEAD
+<<<<<<< HEAD
 /// Use PTR_RET rather than if(IS_ERR(...)) + PTR_ERR
+=======
+/// Use PTR_ERR_OR_ZERO rather than if(IS_ERR(...)) + PTR_ERR
+>>>>>>> v3.18
 =======
 /// Use PTR_ERR_OR_ZERO rather than if(IS_ERR(...)) + PTR_ERR
 >>>>>>> v3.18
@@ -10,9 +14,15 @@
 // Copyright: (C) 2012 Gilles Muller, INRIA/LiP6.  GPLv2.
 // URL: http://coccinelle.lip6.fr/
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
 //
 // Keywords: ERR_PTR, PTR_ERR, PTR_RET
+=======
+// Options: --no-includes --include-headers
+//
+// Keywords: ERR_PTR, PTR_ERR, PTR_ERR_OR_ZERO
+>>>>>>> v3.18
 =======
 // Options: --no-includes --include-headers
 //
@@ -32,7 +42,11 @@ expression ptr;
 
 - if (IS_ERR(ptr)) return PTR_ERR(ptr); else return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 + return PTR_RET(ptr);
+=======
++ return PTR_ERR_OR_ZERO(ptr);
+>>>>>>> v3.18
 =======
 + return PTR_ERR_OR_ZERO(ptr);
 >>>>>>> v3.18
@@ -43,7 +57,11 @@ expression ptr;
 
 - if (IS_ERR(ptr)) return PTR_ERR(ptr); return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 + return PTR_RET(ptr);
+=======
++ return PTR_ERR_OR_ZERO(ptr);
+>>>>>>> v3.18
 =======
 + return PTR_ERR_OR_ZERO(ptr);
 >>>>>>> v3.18
@@ -54,7 +72,11 @@ expression ptr;
 
 - (IS_ERR(ptr) ? PTR_ERR(ptr) : 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 + PTR_RET(ptr)
+=======
++ PTR_ERR_OR_ZERO(ptr)
+>>>>>>> v3.18
 =======
 + PTR_ERR_OR_ZERO(ptr)
 >>>>>>> v3.18
@@ -85,7 +107,11 @@ p << r1.p1;
 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 coccilib.org.print_todo(p[0], "WARNING: PTR_RET can be used")
+=======
+coccilib.org.print_todo(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
+>>>>>>> v3.18
 =======
 coccilib.org.print_todo(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
 >>>>>>> v3.18
@@ -96,7 +122,11 @@ p << r2.p2;
 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 coccilib.org.print_todo(p[0], "WARNING: PTR_RET can be used")
+=======
+coccilib.org.print_todo(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
+>>>>>>> v3.18
 =======
 coccilib.org.print_todo(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
 >>>>>>> v3.18
@@ -106,7 +136,11 @@ p << r3.p3;
 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 coccilib.org.print_todo(p[0], "WARNING: PTR_RET can be used")
+=======
+coccilib.org.print_todo(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
+>>>>>>> v3.18
 =======
 coccilib.org.print_todo(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
 >>>>>>> v3.18
@@ -116,7 +150,11 @@ p << r1.p1;
 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 coccilib.report.print_report(p[0], "WARNING: PTR_RET can be used")
+=======
+coccilib.report.print_report(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
+>>>>>>> v3.18
 =======
 coccilib.report.print_report(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
 >>>>>>> v3.18
@@ -126,7 +164,11 @@ p << r2.p2;
 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 coccilib.report.print_report(p[0], "WARNING: PTR_RET can be used")
+=======
+coccilib.report.print_report(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
+>>>>>>> v3.18
 =======
 coccilib.report.print_report(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
 >>>>>>> v3.18
@@ -136,7 +178,11 @@ p << r3.p3;
 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 coccilib.report.print_report(p[0], "WARNING: PTR_RET can be used")
+=======
+coccilib.report.print_report(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
+>>>>>>> v3.18
 =======
 coccilib.report.print_report(p[0], "WARNING: PTR_ERR_OR_ZERO can be used")
 >>>>>>> v3.18

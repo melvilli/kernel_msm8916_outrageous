@@ -6,7 +6,11 @@
 
 /* Text loads starting from the supervisor interrupt vector address. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TEXT_OFFSET MEM_SV_INTRPT
+=======
+#define TEXT_OFFSET MEM_SV_START
+>>>>>>> v3.18
 =======
 #define TEXT_OFFSET MEM_SV_START
 >>>>>>> v3.18
@@ -18,7 +22,11 @@ jiffies = jiffies_64;
 PHDRS
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   intrpt1 PT_LOAD ;
+=======
+  intrpt PT_LOAD ;
+>>>>>>> v3.18
 =======
   intrpt PT_LOAD ;
 >>>>>>> v3.18
@@ -33,6 +41,7 @@ SECTIONS
 
   /* Interrupt vectors */
 <<<<<<< HEAD
+<<<<<<< HEAD
   .intrpt1 (LOAD_OFFSET) : AT ( 0 )   /* put at the start of physical memory */
   {
     _text = .;
@@ -46,6 +55,8 @@ SECTIONS
   /* Now the real code */
   . = ALIGN(0x20000);
 =======
+=======
+>>>>>>> v3.18
   .intrpt (LOAD_OFFSET) : AT ( 0 )   /* put at the start of physical memory */
   {
     _text = .;
@@ -61,19 +72,28 @@ SECTIONS
   /* Now the real code */
   . = ALIGN(0x20000);
   _stext = .;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   .text : AT (ADDR(.text) - LOAD_OFFSET) {
     HEAD_TEXT
     SCHED_TEXT
     LOCK_TEXT
 <<<<<<< HEAD
+<<<<<<< HEAD
     __fix_text_end = .;   /* tile-cpack won't rearrange before this */
 =======
+=======
+>>>>>>> v3.18
     KPROBES_TEXT
     IRQENTRY_TEXT
     __fix_text_end = .;   /* tile-cpack won't rearrange before this */
     ALIGN_FUNCTION();
     *(.hottext*)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     TEXT_TEXT
     *(.text.*)
@@ -92,6 +112,7 @@ SECTIONS
   #define LOAD_OFFSET PAGE_OFFSET
 
   . = ALIGN(PAGE_SIZE);
+<<<<<<< HEAD
 <<<<<<< HEAD
   VMLINUX_SYMBOL(_sinitdata) = .;
   INIT_DATA_SECTION(16) :data =0
@@ -115,6 +136,8 @@ SECTIONS
   RW_DATA_SECTION(L2_CACHE_BYTES, PAGE_SIZE, THREAD_SIZE)
 
 =======
+=======
+>>>>>>> v3.18
   __init_begin = .;
   INIT_DATA_SECTION(16) :data =0
   PERCPU_SECTION(L2_CACHE_BYTES)
@@ -124,6 +147,9 @@ SECTIONS
   _sdata = .;                   /* Start of data section */
   RO_DATA_SECTION(PAGE_SIZE)
   RW_DATA_SECTION(L2_CACHE_BYTES, PAGE_SIZE, THREAD_SIZE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   _edata = .;
 

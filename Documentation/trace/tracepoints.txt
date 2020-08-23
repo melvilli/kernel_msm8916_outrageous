@@ -41,8 +41,11 @@ Two elements are required for tracepoints :
 In order to use tracepoints, you should include linux/tracepoint.h.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 In include/trace/subsys.h :
 =======
+=======
+>>>>>>> v3.18
 In include/trace/events/subsys.h :
 
 #undef TRACE_SYSTEM
@@ -50,6 +53,9 @@ In include/trace/events/subsys.h :
 
 #if !defined(_TRACE_SUBSYS_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_SUBSYS_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/tracepoint.h>
@@ -59,11 +65,14 @@ DECLARE_TRACE(subsys_eventname,
 	TP_ARGS(firstarg, p));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 In subsys/file.c (where the tracing statement must be added) :
 
 #include <trace/subsys.h>
 
 =======
+=======
+>>>>>>> v3.18
 #endif /* _TRACE_SUBSYS_H */
 
 /* This part must be outside protection */
@@ -74,6 +83,9 @@ In subsys/file.c (where the tracing statement must be added) :
 #include <trace/events/subsys.h>
 
 #define CREATE_TRACE_POINTS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DEFINE_TRACE(subsys_eventname);
 
@@ -96,6 +108,12 @@ Where :
   prototype.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- if you use the header in multiple source files, #define CREATE_TRACE_POINTS
+  should appear only in one source file.
+
+>>>>>>> v3.18
 =======
 - if you use the header in multiple source files, #define CREATE_TRACE_POINTS
   should appear only in one source file.
@@ -129,7 +147,10 @@ If the tracepoint has to be used in kernel modules, an
 EXPORT_TRACEPOINT_SYMBOL_GPL() or EXPORT_TRACEPOINT_SYMBOL() can be
 used to export the defined tracepoints.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 If you need to do a bit of work for a tracepoint parameter, and
 that work is only used for the tracepoint, that work can be encapsulated
@@ -159,4 +180,7 @@ Note: The convenience macro TRACE_EVENT provides an alternative way to
       define tracepoints. Check http://lwn.net/Articles/379903,
       http://lwn.net/Articles/381064 and http://lwn.net/Articles/383362
       for a series of articles with more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

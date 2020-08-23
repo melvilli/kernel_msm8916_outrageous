@@ -12,8 +12,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(GDM_QOS_H_20090403)
 #define GDM_QOS_H_20090403
+=======
+#ifndef __GDM72XX_GDM_QOS_H__
+#define __GDM72XX_GDM_QOS_H__
+>>>>>>> v3.18
 =======
 #ifndef __GDM72XX_GDM_QOS_H__
 #define __GDM72XX_GDM_QOS_H__
@@ -24,8 +29,11 @@
 #include <linux/list.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOOLEAN	u8
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define QOS_MAX				16
@@ -42,6 +50,7 @@
 #define	IEEE802_1QVLANID		0x10
 
 struct gdm_wimax_csr_s {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*	union{
 		U16 all;
@@ -62,6 +71,10 @@ struct gdm_wimax_csr_s {
 	} */
 	BOOLEAN		enabled;
 	u32		SFID;
+=======
+	bool		enabled;
+	u32		sfid;
+>>>>>>> v3.18
 =======
 	bool		enabled;
 	u32		sfid;
@@ -92,17 +105,23 @@ struct qos_entry_s {
 struct qos_cb_s {
 	struct list_head	qos_list[QOS_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			qos_list_cnt;
 	u32			qos_null_idx;
 	struct gdm_wimax_csr_s	csr[QOS_MAX];
 	spinlock_t		qos_lock;
 	u32			qos_limit_size;
 =======
+=======
+>>>>>>> v3.18
 	int			qos_list_cnt;
 	int			qos_null_idx;
 	struct gdm_wimax_csr_s	csr[QOS_MAX];
 	spinlock_t		qos_lock;
 	int			qos_limit_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -112,7 +131,11 @@ int gdm_qos_send_hci_pkt(struct sk_buff *skb, struct net_device *dev);
 void gdm_recv_qos_hci_packet(void *nic_ptr, u8 *buf, int size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* __GDM72XX_GDM_QOS_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __GDM72XX_GDM_QOS_H__ */
 >>>>>>> v3.18

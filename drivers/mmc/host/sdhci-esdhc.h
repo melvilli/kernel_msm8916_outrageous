@@ -21,10 +21,15 @@
 #define ESDHC_DEFAULT_QUIRKS	(SDHCI_QUIRK_FORCE_BLK_SZ_2048 | \
 				SDHCI_QUIRK_NO_BUSY_IRQ | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SDHCI_QUIRK_NONSTANDARD_CLOCK | \
 				SDHCI_QUIRK_DATA_TIMEOUT_USES_SDCLK | \
 				SDHCI_QUIRK_PIO_NEEDS_DELAY | \
 				SDHCI_QUIRK_RESTORE_IRQS_AFTER_RESET)
+=======
+				SDHCI_QUIRK_DATA_TIMEOUT_USES_SDCLK | \
+				SDHCI_QUIRK_PIO_NEEDS_DELAY)
+>>>>>>> v3.18
 =======
 				SDHCI_QUIRK_DATA_TIMEOUT_USES_SDCLK | \
 				SDHCI_QUIRK_PIO_NEEDS_DELAY)
@@ -42,7 +47,10 @@
 #define ESDHC_HOST_CONTROL_LE	0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * P2020 interpretation of the SDHCI_HOST_CONTROL register
  */
@@ -50,11 +58,15 @@
 #define ESDHC_CTRL_8BITBUS          (0x2 << 1)
 #define ESDHC_CTRL_BUSWIDTH_MASK    (0x3 << 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* OF-specific */
 #define ESDHC_DMA_SYSCTL	0x40c
 #define ESDHC_DMA_SNOOP		0x00000040
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ESDHC_HOST_CONTROL_RES	0x01
 
@@ -93,6 +105,9 @@ static inline void esdhc_set_clock(struct sdhci_host *host, unsigned int clock)
 out:
 	host->clock = clock;
 }
+=======
+#define ESDHC_HOST_CONTROL_RES	0x05
+>>>>>>> v3.18
 =======
 #define ESDHC_HOST_CONTROL_RES	0x05
 >>>>>>> v3.18

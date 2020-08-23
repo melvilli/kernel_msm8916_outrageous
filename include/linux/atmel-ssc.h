@@ -8,6 +8,10 @@
 struct atmel_ssc_platform_data {
 	int			use_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			has_fslen_ext;
+>>>>>>> v3.18
 =======
 	int			has_fslen_ext;
 >>>>>>> v3.18
@@ -16,7 +20,11 @@ struct atmel_ssc_platform_data {
 struct ssc_device {
 	struct list_head	list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resource_size_t		phybase;
+=======
+	dma_addr_t		phybase;
+>>>>>>> v3.18
 =======
 	dma_addr_t		phybase;
 >>>>>>> v3.18
@@ -27,6 +35,10 @@ struct ssc_device {
 	int			user;
 	int			irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			clk_from_rk_pin;
+>>>>>>> v3.18
 =======
 	bool			clk_from_rk_pin;
 >>>>>>> v3.18
@@ -83,13 +95,19 @@ void ssc_free(struct ssc_device *ssc);
 #define SSC_RFMR_FSEDGE_SIZE			 1
 #define SSC_RFMR_FSEDGE_OFFSET			24
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The FSLEN_EXT exist on at91sam9rl, at91sam9g10,
  * at91sam9g20, and at91sam9g45 and newer SoCs
  */
 #define SSC_RFMR_FSLEN_EXT_SIZE			 4
 #define SSC_RFMR_FSLEN_EXT_OFFSET		28
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SSC_RFMR_FSLEN_SIZE			 4
 #define SSC_RFMR_FSLEN_OFFSET			16
@@ -130,13 +148,19 @@ void ssc_free(struct ssc_device *ssc);
 #define SSC_TFMR_FSEDGE_SIZE			 1
 #define SSC_TFMR_FSEDGE_OFFSET			24
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The FSLEN_EXT exist on at91sam9rl, at91sam9g10,
  * at91sam9g20, and at91sam9g45 and newer SoCs
  */
 #define SSC_TFMR_FSLEN_EXT_SIZE			 4
 #define SSC_TFMR_FSLEN_EXT_OFFSET		28
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SSC_TFMR_FSLEN_SIZE			 4
 #define SSC_TFMR_FSLEN_OFFSET			16

@@ -170,7 +170,13 @@ static const unsigned int ld9040_22_50[] = {
 struct ld9040_gamma {
 	unsigned int *gamma_22_table[MAX_GAMMA_LEVEL];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } gamma_table = {
+=======
+};
+
+static struct ld9040_gamma gamma_table = {
+>>>>>>> v3.18
 =======
 };
 

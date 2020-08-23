@@ -80,8 +80,14 @@ static int usb6fire_pcm_set_rate(struct pcm_runtime *rt)
 	ret = ctrl_rt->update_streaming(ctrl_rt);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "error stopping streaming while "
 				"setting samplerate %d.\n", rates[rt->rate]);
+=======
+		dev_err(&rt->chip->dev->dev,
+			"error stopping streaming while setting samplerate %d.\n",
+			rates[rt->rate]);
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"error stopping streaming while setting samplerate %d.\n",
@@ -93,8 +99,14 @@ static int usb6fire_pcm_set_rate(struct pcm_runtime *rt)
 	ret = ctrl_rt->set_rate(ctrl_rt, rt->rate);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "error setting samplerate %d.\n",
 				rates[rt->rate]);
+=======
+		dev_err(&rt->chip->dev->dev,
+			"error setting samplerate %d.\n",
+			rates[rt->rate]);
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"error setting samplerate %d.\n",
@@ -107,9 +119,15 @@ static int usb6fire_pcm_set_rate(struct pcm_runtime *rt)
 			false, false);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "error initializing channels "
 				"while setting samplerate %d.\n",
 				rates[rt->rate]);
+=======
+		dev_err(&rt->chip->dev->dev,
+			"error initializing channels while setting samplerate %d.\n",
+			rates[rt->rate]);
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"error initializing channels while setting samplerate %d.\n",
@@ -122,8 +140,14 @@ static int usb6fire_pcm_set_rate(struct pcm_runtime *rt)
 	ret = ctrl_rt->update_streaming(ctrl_rt);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "error starting streaming while "
 				"setting samplerate %d.\n", rates[rt->rate]);
+=======
+		dev_err(&rt->chip->dev->dev,
+			"error starting streaming while setting samplerate %d.\n",
+			rates[rt->rate]);
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"error starting streaming while setting samplerate %d.\n",
@@ -149,7 +173,11 @@ static struct pcm_substream *usb6fire_pcm_get_substream(
 	else if (alsa_sub->stream == SNDRV_PCM_STREAM_CAPTURE)
 		return &rt->capture;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR PREFIX "error getting pcm substream slot.\n");
+=======
+	dev_err(&rt->chip->dev->dev, "error getting pcm substream slot.\n");
+>>>>>>> v3.18
 =======
 	dev_err(&rt->chip->dev->dev, "error getting pcm substream slot.\n");
 >>>>>>> v3.18
@@ -286,7 +314,11 @@ static void usb6fire_pcm_playback(struct pcm_substream *sub,
 		dest = (u32 *) (urb->buffer);
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "Unknown sample format.");
+=======
+		dev_err(&rt->chip->dev->dev, "Unknown sample format.");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev, "Unknown sample format.");
 >>>>>>> v3.18
@@ -340,8 +372,13 @@ static void usb6fire_pcm_in_urb_handler(struct urb *usb_urb)
 
 	if (rt->stream_state == STREAM_DISABLED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "internal error: "
 				"stream disabled in in-urb handler.\n");
+=======
+		dev_err(&rt->chip->dev->dev,
+			"internal error: stream disabled in in-urb handler.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"internal error: stream disabled in in-urb handler.\n");
@@ -448,7 +485,11 @@ static int usb6fire_pcm_open(struct snd_pcm_substream *alsa_sub)
 	if (!sub) {
 		mutex_unlock(&rt->stream_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "invalid stream type.\n");
+=======
+		dev_err(&rt->chip->dev->dev, "invalid stream type.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev, "invalid stream type.\n");
 >>>>>>> v3.18
@@ -492,8 +533,13 @@ static int usb6fire_pcm_hw_params(struct snd_pcm_substream *alsa_sub,
 		struct snd_pcm_hw_params *hw_params)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_pcm_lib_malloc_pages(alsa_sub,
 			params_buffer_bytes(hw_params));
+=======
+	return snd_pcm_lib_alloc_vmalloc_buffer(alsa_sub,
+						params_buffer_bytes(hw_params));
+>>>>>>> v3.18
 =======
 	return snd_pcm_lib_alloc_vmalloc_buffer(alsa_sub,
 						params_buffer_bytes(hw_params));
@@ -503,7 +549,11 @@ static int usb6fire_pcm_hw_params(struct snd_pcm_substream *alsa_sub,
 static int usb6fire_pcm_hw_free(struct snd_pcm_substream *alsa_sub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_pcm_lib_free_pages(alsa_sub);
+=======
+	return snd_pcm_lib_free_vmalloc_buffer(alsa_sub);
+>>>>>>> v3.18
 =======
 	return snd_pcm_lib_free_vmalloc_buffer(alsa_sub);
 >>>>>>> v3.18
@@ -532,8 +582,14 @@ static int usb6fire_pcm_prepare(struct snd_pcm_substream *alsa_sub)
 		if (rt->rate == ARRAY_SIZE(rates)) {
 			mutex_unlock(&rt->stream_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk("invalid rate %d in prepare.\n",
 					alsa_rt->rate);
+=======
+			dev_err(&rt->chip->dev->dev,
+				"invalid rate %d in prepare.\n",
+				alsa_rt->rate);
+>>>>>>> v3.18
 =======
 			dev_err(&rt->chip->dev->dev,
 				"invalid rate %d in prepare.\n",
@@ -551,8 +607,13 @@ static int usb6fire_pcm_prepare(struct snd_pcm_substream *alsa_sub)
 		if (ret) {
 			mutex_unlock(&rt->stream_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR PREFIX
 					"could not start pcm stream.\n");
+=======
+			dev_err(&rt->chip->dev->dev,
+				"could not start pcm stream.\n");
+>>>>>>> v3.18
 =======
 			dev_err(&rt->chip->dev->dev,
 				"could not start pcm stream.\n");
@@ -622,6 +683,11 @@ static struct snd_pcm_ops pcm_ops = {
 	.trigger = usb6fire_pcm_trigger,
 	.pointer = usb6fire_pcm_pointer,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.page = snd_pcm_lib_get_vmalloc_page,
+	.mmap = snd_pcm_lib_mmap_vmalloc,
+>>>>>>> v3.18
 =======
 	.page = snd_pcm_lib_get_vmalloc_page,
 	.mmap = snd_pcm_lib_mmap_vmalloc,
@@ -715,7 +781,11 @@ int usb6fire_pcm_init(struct sfire_chip *chip)
 		usb6fire_pcm_buffers_destroy(rt);
 		kfree(rt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "cannot create pcm instance.\n");
+=======
+		dev_err(&chip->dev->dev, "cannot create pcm instance.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&chip->dev->dev, "cannot create pcm instance.\n");
 >>>>>>> v3.18
@@ -728,6 +798,7 @@ int usb6fire_pcm_init(struct sfire_chip *chip)
 	snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_CAPTURE, &pcm_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_pcm_lib_preallocate_pages_for_all(pcm,
 			SNDRV_DMA_TYPE_CONTINUOUS,
 			snd_dma_continuous_data(GFP_KERNEL),
@@ -738,11 +809,16 @@ int usb6fire_pcm_init(struct sfire_chip *chip)
 		snd_printk(KERN_ERR PREFIX
 				"error preallocating pcm buffers.\n");
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		usb6fire_pcm_buffers_destroy(rt);
 		kfree(rt);
 		dev_err(&chip->dev->dev,
 			"error preallocating pcm buffers.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}

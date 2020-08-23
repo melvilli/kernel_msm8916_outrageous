@@ -56,6 +56,10 @@ static int fib6_rule_action(struct fib_rule *rule, struct flowi *flp,
 	struct net *net = rule->fr_net;
 	pol_lookup_t lookup = arg->lookup_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err = 0;
+>>>>>>> v3.18
 =======
 	int err = 0;
 >>>>>>> v3.18
@@ -65,6 +69,10 @@ static int fib6_rule_action(struct fib_rule *rule, struct flowi *flp,
 		break;
 	case FR_ACT_UNREACHABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -ENETUNREACH;
+>>>>>>> v3.18
 =======
 		err = -ENETUNREACH;
 >>>>>>> v3.18
@@ -73,15 +81,21 @@ static int fib6_rule_action(struct fib_rule *rule, struct flowi *flp,
 	default:
 	case FR_ACT_BLACKHOLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rt = net->ipv6.ip6_blk_hole_entry;
 		goto discard_pkt;
 	case FR_ACT_PROHIBIT:
 =======
+=======
+>>>>>>> v3.18
 		err = -EINVAL;
 		rt = net->ipv6.ip6_blk_hole_entry;
 		goto discard_pkt;
 	case FR_ACT_PROHIBIT:
 		err = -EACCES;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rt = net->ipv6.ip6_prohibit_entry;
 		goto discard_pkt;
@@ -89,16 +103,22 @@ static int fib6_rule_action(struct fib_rule *rule, struct flowi *flp,
 
 	table = fib6_get_table(net, rule->table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (table)
 		rt = lookup(net, table, flp6, flags);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!table) {
 		err = -EAGAIN;
 		goto out;
 	}
 
 	rt = lookup(net, table, flp6, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rt != net->ipv6.ip6_null_entry) {
 		struct fib6_rule *r = (struct fib6_rule *)rule;
@@ -127,6 +147,10 @@ static int fib6_rule_action(struct fib_rule *rule, struct flowi *flp,
 again:
 	ip6_rt_put(rt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	err = -EAGAIN;
+>>>>>>> v3.18
 =======
 	err = -EAGAIN;
 >>>>>>> v3.18
@@ -138,10 +162,13 @@ discard_pkt:
 out:
 	arg->result = rt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rt == NULL ? -EAGAIN : 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return err;
 }
 
@@ -171,6 +198,9 @@ suppress_route:
 	ip6_rt_put(rt);
 	return true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int fib6_rule_match(struct fib_rule *rule, struct flowi *fl, int flags)
@@ -197,7 +227,11 @@ static int fib6_rule_match(struct fib_rule *rule, struct flowi *fl, int flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (r->tclass && r->tclass != ((ntohl(fl6->flowlabel) >> 20) & 0xff))
+=======
+	if (r->tclass && r->tclass != ip6_tclass(fl6->flowlabel))
+>>>>>>> v3.18
 =======
 	if (r->tclass && r->tclass != ip6_tclass(fl6->flowlabel))
 >>>>>>> v3.18
@@ -310,6 +344,10 @@ static const struct fib_rules_ops __net_initconst fib6_rules_ops_template = {
 	.action			= fib6_rule_action,
 	.match			= fib6_rule_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suppress		= fib6_rule_suppress,
+>>>>>>> v3.18
 =======
 	.suppress		= fib6_rule_suppress,
 >>>>>>> v3.18

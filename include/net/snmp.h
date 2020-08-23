@@ -117,6 +117,7 @@ struct linux_xfrm_mib {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNMP_ARRAY_SZ 1
 
 #define DEFINE_SNMP_STAT(type, name)	\
@@ -132,6 +133,8 @@ struct linux_xfrm_mib {
 #define SNMP_INC_STATS_USER(mib, field)	\
 			this_cpu_inc(mib[0]->mibs[field])
 =======
+=======
+>>>>>>> v3.18
 #define DEFINE_SNMP_STAT(type, name)	\
 	__typeof__(type) __percpu *name
 #define DEFINE_SNMP_STAT_ATOMIC(type, name)	\
@@ -144,12 +147,16 @@ struct linux_xfrm_mib {
 
 #define SNMP_INC_STATS_USER(mib, field)	\
 			this_cpu_inc(mib->mibs[field])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SNMP_INC_STATS_ATOMIC_LONG(mib, field)	\
 			atomic_long_inc(&mib->mibs[field])
 
 #define SNMP_INC_STATS(mib, field)	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 			this_cpu_inc(mib[0]->mibs[field])
 
@@ -172,6 +179,8 @@ struct linux_xfrm_mib {
 	do { \
 		__typeof__(*mib[0]->mibs) *ptr = mib[0]->mibs;	\
 =======
+=======
+>>>>>>> v3.18
 			this_cpu_inc(mib->mibs[field])
 
 #define SNMP_DEC_STATS(mib, field)	\
@@ -188,6 +197,9 @@ struct linux_xfrm_mib {
 #define SNMP_UPD_PO_STATS(mib, basefield, addend)	\
 	do { \
 		__typeof__((mib->mibs) + 0) ptr = mib->mibs;	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		this_cpu_inc(ptr[basefield##PKTS]);		\
 		this_cpu_add(ptr[basefield##OCTETS], addend);	\
@@ -195,7 +207,11 @@ struct linux_xfrm_mib {
 #define SNMP_UPD_PO_STATS_BH(mib, basefield, addend)	\
 	do { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__typeof__(*mib[0]->mibs) *ptr = mib[0]->mibs;	\
+=======
+		__typeof__((mib->mibs) + 0) ptr = mib->mibs;	\
+>>>>>>> v3.18
 =======
 		__typeof__((mib->mibs) + 0) ptr = mib->mibs;	\
 >>>>>>> v3.18
@@ -209,7 +225,11 @@ struct linux_xfrm_mib {
 #define SNMP_ADD_STATS64_BH(mib, field, addend) 			\
 	do {								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__typeof__(*mib[0]) *ptr = __this_cpu_ptr((mib)[0]);	\
+=======
+		__typeof__(*mib) *ptr = raw_cpu_ptr(mib);		\
+>>>>>>> v3.18
 =======
 		__typeof__(*mib) *ptr = raw_cpu_ptr(mib);		\
 >>>>>>> v3.18
@@ -234,8 +254,13 @@ struct linux_xfrm_mib {
 #define SNMP_UPD_PO_STATS64_BH(mib, basefield, addend)			\
 	do {								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__typeof__(*mib[0]) *ptr;				\
 		ptr = __this_cpu_ptr((mib)[0]);				\
+=======
+		__typeof__(*mib) *ptr;				\
+		ptr = raw_cpu_ptr((mib));				\
+>>>>>>> v3.18
 =======
 		__typeof__(*mib) *ptr;				\
 		ptr = raw_cpu_ptr((mib));				\

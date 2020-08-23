@@ -46,7 +46,11 @@ static inline void __install_page_table(pgd_t *pgdir, int asid, pgprot_t prot)
 static inline void install_page_table(pgd_t *pgdir, int asid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_t *ptep = virt_to_pte(NULL, (unsigned long)pgdir);
+=======
+	pte_t *ptep = virt_to_kpte((unsigned long)pgdir);
+>>>>>>> v3.18
 =======
 	pte_t *ptep = virt_to_kpte((unsigned long)pgdir);
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ static inline void enter_lazy_tlb(struct mm_struct *mm, struct task_struct *t)
 	 */
 	if (current->thread.tile_dma_state.enabled)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		install_page_table(mm->pgd, __get_cpu_var(current_asid));
+=======
+		install_page_table(mm->pgd, __this_cpu_read(current_asid));
+>>>>>>> v3.18
 =======
 		install_page_table(mm->pgd, __this_cpu_read(current_asid));
 >>>>>>> v3.18
@@ -105,7 +113,11 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 
 		/* Pick new ASID. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int asid = __get_cpu_var(current_asid) + 1;
+=======
+		int asid = __this_cpu_read(current_asid) + 1;
+>>>>>>> v3.18
 =======
 		int asid = __this_cpu_read(current_asid) + 1;
 >>>>>>> v3.18
@@ -114,7 +126,11 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 			local_flush_tlb();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_cpu_var(current_asid) = asid;
+=======
+		__this_cpu_write(current_asid, asid);
+>>>>>>> v3.18
 =======
 		__this_cpu_write(current_asid, asid);
 >>>>>>> v3.18

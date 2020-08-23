@@ -43,7 +43,10 @@ fqs_stutter	Wait time (in seconds) between consecutive bursts
 		of calls to force_quiescent_state().
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 gp_normal	Make the fake writers use normal synchronous grace-period
 		primitives.
 
@@ -54,6 +57,9 @@ gp_exp		Make the fake writers use expedited synchronous grace-period
 		50% expedited.  By default, neither are set, which
 		gives best overall test coverage.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 irqreader	Says to invoke RCU readers from irq level.  This is currently
 		done via timers.  Defaults to "1" for variants of RCU that
@@ -196,12 +202,15 @@ torture_type	The type of RCU to test, with string values as follows:
 			synchronize_srcu_expedited().
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"srcu_raw": srcu_read_lock_raw(), srcu_read_unlock_raw(),
 			and call_srcu().
 
 		"srcu_raw_sync": srcu_read_lock_raw(), srcu_read_unlock_raw(),
 			and synchronize_srcu().
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		"sched": preempt_disable(), preempt_enable(), and

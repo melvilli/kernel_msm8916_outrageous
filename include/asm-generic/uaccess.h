@@ -4,7 +4,11 @@
 /*
  * User space memory access functions, these should work
 <<<<<<< HEAD
+<<<<<<< HEAD
  * on a ny machine that has kernel and user data in the same
+=======
+ * on any machine that has kernel and user data in the same
+>>>>>>> v3.18
 =======
  * on any machine that has kernel and user data in the same
 >>>>>>> v3.18
@@ -168,7 +172,11 @@ static inline __must_check long __copy_to_user(void __user *to,
 #define put_user(x, ptr)					\
 ({								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();						\
+=======
+	might_fault();						\
+>>>>>>> v3.18
 =======
 	might_fault();						\
 >>>>>>> v3.18
@@ -234,15 +242,21 @@ extern int __put_user_bad(void) __attribute__((noreturn));
 #define get_user(x, ptr)					\
 ({								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();						\
 	access_ok(VERIFY_READ, ptr, sizeof(*ptr)) ?		\
 		__get_user(x, ptr) :				\
 		((x) = (__typeof__(*(ptr)))0,-EFAULT);		\
 =======
+=======
+>>>>>>> v3.18
 	might_fault();						\
 	access_ok(VERIFY_READ, ptr, sizeof(*ptr)) ?		\
 		__get_user(x, ptr) :				\
 		-EFAULT;					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 })
 
@@ -250,12 +264,17 @@ extern int __put_user_bad(void) __attribute__((noreturn));
 static inline int __get_user_fn(size_t size, const void __user *ptr, void *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t n = __copy_from_user(x, ptr, size);
 	if (unlikely(n)) {
 		memset(x + (size - n), 0, n);
 		return -EFAULT;
 	}
 	return 0;
+=======
+	size = __copy_from_user(x, ptr, size);
+	return size ? -EFAULT : size;
+>>>>>>> v3.18
 =======
 	size = __copy_from_user(x, ptr, size);
 	return size ? -EFAULT : size;
@@ -280,6 +299,7 @@ static inline long copy_from_user(void *to,
 		const void __user * from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long res = n;
 	might_sleep();
 	if (likely(access_ok(VERIFY_READ, from, n)))
@@ -288,11 +308,16 @@ static inline long copy_from_user(void *to,
 		memset(to + (n - res), 0, res);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	might_fault();
 	if (access_ok(VERIFY_READ, from, n))
 		return __copy_from_user(to, from, n);
 	else
 		return n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -300,7 +325,11 @@ static inline long copy_to_user(void __user *to,
 		const void *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18
@@ -375,7 +404,11 @@ static inline __must_check unsigned long
 clear_user(void __user *to, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18

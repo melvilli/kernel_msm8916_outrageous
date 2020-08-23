@@ -3,9 +3,13 @@
  * iscsi_target_mib.c code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011 Rising Tide Systems
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * Copyright (c) 2011-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -182,7 +186,11 @@ static ssize_t iscsi_stat_instance_show_attr_vendor(
 	struct iscsi_wwn_stat_grps *igrps, char *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "RisingTide Systems iSCSI-Target\n");
+=======
+	return snprintf(page, PAGE_SIZE, "Datera, Inc. iSCSI-Target\n");
+>>>>>>> v3.18
 =======
 	return snprintf(page, PAGE_SIZE, "Datera, Inc. iSCSI-Target\n");
 >>>>>>> v3.18
@@ -441,6 +449,7 @@ static ssize_t iscsi_stat_tgt_attr_show_attr_fail_intr_addr(
 
 	spin_lock(&lstat->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lstat->last_intr_fail_ip_family == AF_INET6) {
 		ret = snprintf(page, PAGE_SIZE, "[%s]\n",
 			       lstat->last_intr_fail_ip_addr);
@@ -448,6 +457,9 @@ static ssize_t iscsi_stat_tgt_attr_show_attr_fail_intr_addr(
 		ret = snprintf(page, PAGE_SIZE, "%s\n",
 			       lstat->last_intr_fail_ip_addr);
 	}
+=======
+	ret = snprintf(page, PAGE_SIZE, "%s\n", lstat->last_intr_fail_ip_addr);
+>>>>>>> v3.18
 =======
 	ret = snprintf(page, PAGE_SIZE, "%s\n", lstat->last_intr_fail_ip_addr);
 >>>>>>> v3.18
@@ -813,7 +825,12 @@ static ssize_t iscsi_stat_sess_show_attr_cmd_pdus(
 		sess = se_sess->fabric_sess_ptr;
 		if (sess)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snprintf(page, PAGE_SIZE, "%u\n", sess->cmd_pdus);
+=======
+			ret = snprintf(page, PAGE_SIZE, "%lu\n",
+				       atomic_long_read(&sess->cmd_pdus));
+>>>>>>> v3.18
 =======
 			ret = snprintf(page, PAGE_SIZE, "%lu\n",
 				       atomic_long_read(&sess->cmd_pdus));
@@ -841,7 +858,12 @@ static ssize_t iscsi_stat_sess_show_attr_rsp_pdus(
 		sess = se_sess->fabric_sess_ptr;
 		if (sess)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snprintf(page, PAGE_SIZE, "%u\n", sess->rsp_pdus);
+=======
+			ret = snprintf(page, PAGE_SIZE, "%lu\n",
+				       atomic_long_read(&sess->rsp_pdus));
+>>>>>>> v3.18
 =======
 			ret = snprintf(page, PAGE_SIZE, "%lu\n",
 				       atomic_long_read(&sess->rsp_pdus));
@@ -869,8 +891,13 @@ static ssize_t iscsi_stat_sess_show_attr_txdata_octs(
 		sess = se_sess->fabric_sess_ptr;
 		if (sess)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snprintf(page, PAGE_SIZE, "%llu\n",
 				(unsigned long long)sess->tx_data_octets);
+=======
+			ret = snprintf(page, PAGE_SIZE, "%lu\n",
+				       atomic_long_read(&sess->tx_data_octets));
+>>>>>>> v3.18
 =======
 			ret = snprintf(page, PAGE_SIZE, "%lu\n",
 				       atomic_long_read(&sess->tx_data_octets));
@@ -898,8 +925,13 @@ static ssize_t iscsi_stat_sess_show_attr_rxdata_octs(
 		sess = se_sess->fabric_sess_ptr;
 		if (sess)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snprintf(page, PAGE_SIZE, "%llu\n",
 				(unsigned long long)sess->rx_data_octets);
+=======
+			ret = snprintf(page, PAGE_SIZE, "%lu\n",
+				       atomic_long_read(&sess->rx_data_octets));
+>>>>>>> v3.18
 =======
 			ret = snprintf(page, PAGE_SIZE, "%lu\n",
 				       atomic_long_read(&sess->rx_data_octets));
@@ -927,8 +959,13 @@ static ssize_t iscsi_stat_sess_show_attr_conn_digest_errors(
 		sess = se_sess->fabric_sess_ptr;
 		if (sess)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snprintf(page, PAGE_SIZE, "%u\n",
 					sess->conn_digest_errors);
+=======
+			ret = snprintf(page, PAGE_SIZE, "%lu\n",
+				       atomic_long_read(&sess->conn_digest_errors));
+>>>>>>> v3.18
 =======
 			ret = snprintf(page, PAGE_SIZE, "%lu\n",
 				       atomic_long_read(&sess->conn_digest_errors));
@@ -956,8 +993,13 @@ static ssize_t iscsi_stat_sess_show_attr_conn_timeout_errors(
 		sess = se_sess->fabric_sess_ptr;
 		if (sess)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snprintf(page, PAGE_SIZE, "%u\n",
 					sess->conn_timeout_errors);
+=======
+			ret = snprintf(page, PAGE_SIZE, "%lu\n",
+				       atomic_long_read(&sess->conn_timeout_errors));
+>>>>>>> v3.18
 =======
 			ret = snprintf(page, PAGE_SIZE, "%lu\n",
 				       atomic_long_read(&sess->conn_timeout_errors));

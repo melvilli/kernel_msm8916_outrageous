@@ -49,17 +49,23 @@ static struct sh_pfc *gpio_to_pfc(struct gpio_chip *gc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void gpio_get_data_reg(struct sh_pfc_chip *chip, unsigned int gpio,
 			      struct sh_pfc_gpio_data_reg **reg,
 			      unsigned int *bit)
 {
 	int idx = sh_pfc_get_pin_index(chip->pfc, gpio);
 =======
+=======
+>>>>>>> v3.18
 static void gpio_get_data_reg(struct sh_pfc_chip *chip, unsigned int offset,
 			      struct sh_pfc_gpio_data_reg **reg,
 			      unsigned int *bit)
 {
 	int idx = sh_pfc_get_pin_index(chip->pfc, offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sh_pfc_gpio_pin *gpio_pin = &chip->pins[idx];
 
@@ -85,17 +91,23 @@ static void gpio_write_data_reg(struct sh_pfc_chip *chip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void gpio_setup_data_reg(struct sh_pfc_chip *chip, unsigned gpio)
 {
 	struct sh_pfc *pfc = chip->pfc;
 	struct sh_pfc_gpio_pin *gpio_pin = &chip->pins[gpio];
 	const struct sh_pfc_pin *pin = &pfc->info->pins[gpio];
 =======
+=======
+>>>>>>> v3.18
 static void gpio_setup_data_reg(struct sh_pfc_chip *chip, unsigned idx)
 {
 	struct sh_pfc *pfc = chip->pfc;
 	struct sh_pfc_gpio_pin *gpio_pin = &chip->pins[idx];
 	const struct sh_pfc_pin *pin = &pfc->info->pins[idx];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct pinmux_data_reg *dreg;
 	unsigned int bit;
@@ -221,6 +233,7 @@ static int gpio_pin_to_irq(struct gpio_chip *gc, unsigned offset)
 {
 	struct sh_pfc *pfc = gpio_to_pfc(gc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, k;
 
 	for (i = 0; i < pfc->info->gpio_irq_size; i++) {
@@ -230,6 +243,8 @@ static int gpio_pin_to_irq(struct gpio_chip *gc, unsigned offset)
 			if (gpios[k] == offset)
 				return pfc->info->gpio_irq[i].irq;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i, k;
 
 	for (i = 0; i < pfc->info->gpio_irq_size; i++) {
@@ -238,19 +253,28 @@ static int gpio_pin_to_irq(struct gpio_chip *gc, unsigned offset)
 		for (k = 0; gpios[k] >= 0; k++) {
 			if (gpios[k] == offset)
 				goto found;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return -ENOSYS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 found:
 	if (pfc->num_irqs)
 		return pfc->irqs[i];
 	else
 		return pfc->info->gpio_irq[i].irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -261,8 +285,13 @@ static int gpio_pin_setup(struct sh_pfc_chip *chip)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->pins = devm_kzalloc(pfc->dev, pfc->nr_pins * sizeof(*chip->pins),
 				  GFP_KERNEL);
+=======
+	chip->pins = devm_kzalloc(pfc->dev, pfc->info->nr_pins *
+				  sizeof(*chip->pins), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	chip->pins = devm_kzalloc(pfc->dev, pfc->info->nr_pins *
 				  sizeof(*chip->pins), GFP_KERNEL);
@@ -287,7 +316,11 @@ static int gpio_pin_setup(struct sh_pfc_chip *chip)
 	gc->owner = THIS_MODULE;
 	gc->base = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gc->ngpio = pfc->nr_pins;
+=======
+	gc->ngpio = pfc->nr_gpio_pins;
+>>>>>>> v3.18
 =======
 	gc->ngpio = pfc->nr_gpio_pins;
 >>>>>>> v3.18
@@ -339,7 +372,11 @@ static int gpio_function_setup(struct sh_pfc_chip *chip)
 	gc->label = pfc->info->name;
 	gc->owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gc->base = pfc->nr_pins;
+=======
+	gc->base = pfc->nr_gpio_pins;
+>>>>>>> v3.18
 =======
 	gc->base = pfc->nr_gpio_pins;
 >>>>>>> v3.18
@@ -384,10 +421,14 @@ sh_pfc_add_gpiochip(struct sh_pfc *pfc, int(*setup)(struct sh_pfc_chip *),
 int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pinmux_range *ranges;
 	struct pinmux_range def_range;
 	struct sh_pfc_chip *chip;
 	unsigned int nr_ranges;
+=======
+	struct sh_pfc_chip *chip;
+>>>>>>> v3.18
 =======
 	struct sh_pfc_chip *chip;
 >>>>>>> v3.18
@@ -404,7 +445,11 @@ int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 	 */
 	for (i = 0; i < pfc->num_windows; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sh_pfc_window *window = &pfc->window[i];
+=======
+		struct sh_pfc_window *window = &pfc->windows[i];
+>>>>>>> v3.18
 =======
 		struct sh_pfc_window *window = &pfc->windows[i];
 >>>>>>> v3.18
@@ -418,9 +463,12 @@ int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register the real GPIOs chip. */
 	chip = sh_pfc_add_gpiochip(pfc, gpio_pin_setup, &pfc->window[i]);
 =======
+=======
+>>>>>>> v3.18
 	/* If we have IRQ resources make sure their number is correct. */
 	if (pfc->num_irqs && pfc->num_irqs != pfc->info->gpio_irq_size) {
 		dev_err(pfc->dev, "invalid number of IRQ resources\n");
@@ -429,12 +477,16 @@ int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 
 	/* Register the real GPIOs chip. */
 	chip = sh_pfc_add_gpiochip(pfc, gpio_pin_setup, &pfc->windows[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(chip))
 		return PTR_ERR(chip);
 
 	pfc->gpio = chip;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register the GPIO to pin mappings. */
 	if (pfc->info->ranges == NULL) {
@@ -455,6 +507,8 @@ int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 					     range->begin, range->begin,
 					     range->end - range->begin + 1);
 =======
+=======
+>>>>>>> v3.18
 	/* Register the GPIO to pin mappings. As pins with GPIO ports must come
 	 * first in the ranges, skip the pins without GPIO ports by stopping at
 	 * the first range that contains such a pin.
@@ -469,6 +523,9 @@ int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 					     dev_name(pfc->dev),
 					     range->start, range->start,
 					     range->end - range->start + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret < 0)
 			return ret;
@@ -490,6 +547,7 @@ int sh_pfc_register_gpiochip(struct sh_pfc *pfc)
 int sh_pfc_unregister_gpiochip(struct sh_pfc *pfc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	int ret;
 
@@ -498,9 +556,14 @@ int sh_pfc_unregister_gpiochip(struct sh_pfc *pfc)
 
 	return ret < 0 ? ret : err;
 =======
+=======
+>>>>>>> v3.18
 	gpiochip_remove(&pfc->gpio->gpio_chip);
 	gpiochip_remove(&pfc->func->gpio_chip);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

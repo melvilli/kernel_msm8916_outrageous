@@ -348,8 +348,12 @@ static struct amd_nb *amd_alloc_nb(int cpu)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nb = kmalloc_node(sizeof(struct amd_nb), GFP_KERNEL | __GFP_ZERO,
 			  cpu_to_node(cpu));
+=======
+	nb = kzalloc_node(sizeof(struct amd_nb), GFP_KERNEL, cpu_to_node(cpu));
+>>>>>>> v3.18
 =======
 	nb = kzalloc_node(sizeof(struct amd_nb), GFP_KERNEL, cpu_to_node(cpu));
 >>>>>>> v3.18
@@ -705,7 +709,11 @@ __init int amd_pmu_init(void)
 void amd_pmu_enable_virt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -721,7 +729,11 @@ EXPORT_SYMBOL_GPL(amd_pmu_enable_virt);
 void amd_pmu_disable_virt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18

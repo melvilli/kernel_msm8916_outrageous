@@ -3,6 +3,12 @@
 
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI_MSI
+#include <linux/msi.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PCI_MSI
 #include <linux/msi.h>
@@ -14,6 +20,11 @@
 #include <asm/xen/events.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned xen_evtchn_nr_channels(void);
+
+>>>>>>> v3.18
 =======
 unsigned xen_evtchn_nr_channels(void);
 
@@ -35,6 +46,11 @@ int bind_ipi_to_irqhandler(enum ipi_vector ipi,
 			   const char *devname,
 			   void *dev_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int bind_interdomain_evtchn_to_irq(unsigned int remote_domain,
+				   unsigned int remote_port);
+>>>>>>> v3.18
 =======
 int bind_interdomain_evtchn_to_irq(unsigned int remote_domain,
 				   unsigned int remote_port);
@@ -54,12 +70,18 @@ int bind_interdomain_evtchn_to_irqhandler(unsigned int remote_domain,
 void unbind_from_irqhandler(unsigned int irq, void *dev_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define XEN_IRQ_PRIORITY_MAX     EVTCHN_FIFO_PRIORITY_MAX
 #define XEN_IRQ_PRIORITY_DEFAULT EVTCHN_FIFO_PRIORITY_DEFAULT
 #define XEN_IRQ_PRIORITY_MIN     EVTCHN_FIFO_PRIORITY_MIN
 int xen_set_irq_priority(unsigned irq, unsigned priority);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Allow extra references to event channels exposed to userspace by evtchn
@@ -70,7 +92,10 @@ void evtchn_put(unsigned int evtchn);
 
 void xen_send_IPI_one(unsigned int cpu, enum ipi_vector vector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int resend_irq_on_evtchn(unsigned int irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void rebind_evtchn_irq(int evtchn, int irq);
@@ -101,10 +126,13 @@ void xen_poll_irq_timeout(int irq, u64 timeout);
 /* Determine the IRQ which is bound to an event channel */
 unsigned irq_from_evtchn(unsigned int evtchn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Xen HVM evtchn vector callback */
 void xen_hvm_callback_vector(void);
 =======
+=======
+>>>>>>> v3.18
 int irq_from_virq(unsigned int cpu, unsigned int virq);
 unsigned int evtchn_from_irq(unsigned irq);
 
@@ -113,6 +141,9 @@ void xen_hvm_callback_vector(void);
 #ifdef CONFIG_TRACING
 #define trace_xen_hvm_callback_vector xen_hvm_callback_vector
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int xen_have_vector_callback;
 int xen_set_callback_via(uint64_t via);
@@ -129,7 +160,11 @@ int xen_allocate_pirq_msi(struct pci_dev *dev, struct msi_desc *msidesc);
 /* Bind an PSI pirq to an irq. */
 int xen_bind_pirq_msi_to_irq(struct pci_dev *dev, struct msi_desc *msidesc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     int pirq, const char *name, domid_t domid);
+=======
+			     int pirq, int nvec, const char *name, domid_t domid);
+>>>>>>> v3.18
 =======
 			     int pirq, int nvec, const char *name, domid_t domid);
 >>>>>>> v3.18

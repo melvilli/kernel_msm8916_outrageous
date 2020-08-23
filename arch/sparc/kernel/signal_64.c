@@ -24,6 +24,10 @@
 #include <linux/binfmts.h>
 #include <linux/bitops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -39,14 +43,20 @@
 #include <asm/cacheflush.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "entry.h"
 #include "systbls.h"
 #include "sigutil.h"
 =======
+=======
+>>>>>>> v3.18
 #include "sigutil.h"
 #include "systbls.h"
 #include "kernel.h"
 #include "entry.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* {set, get}context() needed for 64-bit SparcLinux userland. */
@@ -55,6 +65,10 @@ asmlinkage void sparc64_set_context(struct pt_regs *regs)
 	struct ucontext __user *ucp = (struct ucontext __user *)
 		regs->u_regs[UREG_I0];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -145,17 +159,23 @@ asmlinkage void sparc64_set_context(struct pt_regs *regs)
 	if (err)
 		goto do_sigsegv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
 do_sigsegv:
 	force_sig(SIGSEGV, current);
 =======
+=======
+>>>>>>> v3.18
 out:
 	exception_exit(prev_state);
 	return;
 do_sigsegv:
 	force_sig(SIGSEGV, current);
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -164,6 +184,10 @@ asmlinkage void sparc64_get_context(struct pt_regs *regs)
 	struct ucontext __user *ucp = (struct ucontext __user *)
 		regs->u_regs[UREG_I0];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -249,17 +273,23 @@ asmlinkage void sparc64_get_context(struct pt_regs *regs)
 	if (err)
 		goto do_sigsegv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
 do_sigsegv:
 	force_sig(SIGSEGV, current);
 =======
+=======
+>>>>>>> v3.18
 out:
 	exception_exit(prev_state);
 	return;
 do_sigsegv:
 	force_sig(SIGSEGV, current);
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -523,7 +553,10 @@ static void do_signal(struct pt_regs *regs, unsigned long orig_i0)
 #ifdef CONFIG_COMPAT
 	if (test_thread_flag(TIF_32BIT)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		extern void do_signal32(struct pt_regs *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		do_signal32(regs);
@@ -569,6 +602,10 @@ static void do_signal(struct pt_regs *regs, unsigned long orig_i0)
 void do_notify_resume(struct pt_regs *regs, unsigned long orig_i0, unsigned long thread_info_flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	user_exit();
+>>>>>>> v3.18
 =======
 	user_exit();
 >>>>>>> v3.18
@@ -579,6 +616,10 @@ void do_notify_resume(struct pt_regs *regs, unsigned long orig_i0, unsigned long
 		tracehook_notify_resume(regs);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	user_enter();
+>>>>>>> v3.18
 =======
 	user_enter();
 >>>>>>> v3.18

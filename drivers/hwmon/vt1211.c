@@ -880,6 +880,12 @@ static ssize_t set_vrm(struct device *dev, struct device_attribute *attr,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (val > 255)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (val > 255)
 		return -EINVAL;
@@ -1159,10 +1165,15 @@ static int vt1211_probe(struct platform_device *pdev)
 
 	data = devm_kzalloc(dev, sizeof(struct vt1211_data), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		dev_err(dev, "Out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!data)
 		return -ENOMEM;

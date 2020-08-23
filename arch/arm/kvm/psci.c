@@ -28,7 +28,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AFFINITY_MASK(level)	~((0x1UL << ((level) * MPIDR_LEVEL_BITS)) - 1)
 
 static unsigned long psci_affinity_mask(unsigned long affinity_level)
@@ -59,6 +62,9 @@ static unsigned long kvm_psci_vcpu_suspend(struct kvm_vcpu *vcpu)
 	return PSCI_RET_SUCCESS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void kvm_psci_vcpu_off(struct kvm_vcpu *vcpu)
 {
@@ -72,6 +78,10 @@ static unsigned long kvm_psci_vcpu_on(struct kvm_vcpu *source_vcpu)
 	wait_queue_head_t *wq;
 	unsigned long cpu_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long context_id;
+>>>>>>> v3.18
 =======
 	unsigned long context_id;
 >>>>>>> v3.18
@@ -96,11 +106,14 @@ static unsigned long kvm_psci_vcpu_on(struct kvm_vcpu *source_vcpu)
 	 * turned off.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vcpu || !vcpu->arch.pause)
 		return PSCI_RET_INVALID_PARAMS;
 
 	target_pc = *vcpu_reg(source_vcpu, 2);
 =======
+=======
+>>>>>>> v3.18
 	if (!vcpu)
 		return PSCI_RET_INVALID_PARAMS;
 	if (!vcpu->arch.pause) {
@@ -112,6 +125,9 @@ static unsigned long kvm_psci_vcpu_on(struct kvm_vcpu *source_vcpu)
 
 	target_pc = *vcpu_reg(source_vcpu, 2);
 	context_id = *vcpu_reg(source_vcpu, 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kvm_reset_vcpu(vcpu);
@@ -128,12 +144,18 @@ static unsigned long kvm_psci_vcpu_on(struct kvm_vcpu *source_vcpu)
 
 	*vcpu_pc(vcpu) = target_pc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * NOTE: We always update r0 (or x0) because for PSCI v0.1
 	 * the general puspose registers are undefined upon CPU_ON.
 	 */
 	*vcpu_reg(vcpu, 0) = context_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vcpu->arch.pause = false;
 	smp_mb();		/* Make sure the above is visible */
@@ -145,7 +167,10 @@ static unsigned long kvm_psci_vcpu_on(struct kvm_vcpu *source_vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long kvm_psci_vcpu_affinity_info(struct kvm_vcpu *vcpu)
 {
 	int i;
@@ -199,6 +224,9 @@ static void kvm_psci_system_reset(struct kvm_vcpu *vcpu)
 	kvm_prepare_system_event(vcpu, KVM_SYSTEM_EVENT_RESET);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvm_psci_version(struct kvm_vcpu *vcpu)
 {
@@ -211,6 +239,10 @@ int kvm_psci_version(struct kvm_vcpu *vcpu)
 static int kvm_psci_0_2_call(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 1;
+>>>>>>> v3.18
 =======
 	int ret = 1;
 >>>>>>> v3.18
@@ -226,11 +258,17 @@ static int kvm_psci_0_2_call(struct kvm_vcpu *vcpu)
 		val = 2;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case PSCI_0_2_FN_CPU_SUSPEND:
 	case PSCI_0_2_FN64_CPU_SUSPEND:
 		val = kvm_psci_vcpu_suspend(vcpu);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case PSCI_0_2_FN_CPU_OFF:
 		kvm_psci_vcpu_off(vcpu);
@@ -240,6 +278,7 @@ static int kvm_psci_0_2_call(struct kvm_vcpu *vcpu)
 	case PSCI_0_2_FN64_CPU_ON:
 		val = kvm_psci_vcpu_on(vcpu);
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case PSCI_0_2_FN_CPU_SUSPEND:
 	case PSCI_0_2_FN_AFFINITY_INFO:
@@ -255,6 +294,8 @@ static int kvm_psci_0_2_call(struct kvm_vcpu *vcpu)
 		val = PSCI_RET_NOT_SUPPORTED;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case PSCI_0_2_FN_AFFINITY_INFO:
 	case PSCI_0_2_FN64_AFFINITY_INFO:
 		val = kvm_psci_vcpu_affinity_info(vcpu);
@@ -299,6 +340,9 @@ static int kvm_psci_0_2_call(struct kvm_vcpu *vcpu)
 		val = PSCI_RET_INTERNAL_FAILURE;
 		ret = 0;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -306,7 +350,11 @@ static int kvm_psci_0_2_call(struct kvm_vcpu *vcpu)
 
 	*vcpu_reg(vcpu, 0) = val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18

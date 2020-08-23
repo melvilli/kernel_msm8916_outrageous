@@ -58,12 +58,15 @@ static inline void tlb_gather_mmu(struct mmu_gather *tlb,
 	tlb->fullmm = !(start | (end+1));
 	tlb->batch = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tlb->fullmm)
 		__tlb_flush_mm(mm);
 }
 
 static inline void tlb_flush_mmu(struct mmu_gather *tlb)
 =======
+=======
+>>>>>>> v3.18
 }
 
 static inline void tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
@@ -72,17 +75,23 @@ static inline void tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
 }
 
 static inline void tlb_flush_mmu_free(struct mmu_gather *tlb)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	tlb_table_flush(tlb);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void tlb_finish_mmu(struct mmu_gather *tlb,
 				  unsigned long start, unsigned long end)
 {
 	tlb_table_flush(tlb);
 =======
+=======
+>>>>>>> v3.18
 
 static inline void tlb_flush_mmu(struct mmu_gather *tlb)
 {
@@ -94,6 +103,9 @@ static inline void tlb_finish_mmu(struct mmu_gather *tlb,
 				  unsigned long start, unsigned long end)
 {
 	tlb_flush_mmu(tlb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -121,9 +133,13 @@ static inline void pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte,
 				unsigned long address)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tlb->fullmm)
 		return page_table_free_rcu(tlb, (unsigned long *) pte);
 	page_table_free(tlb->mm, (unsigned long *) pte);
+=======
+	page_table_free_rcu(tlb, (unsigned long *) pte, address);
+>>>>>>> v3.18
 =======
 	page_table_free_rcu(tlb, (unsigned long *) pte, address);
 >>>>>>> v3.18
@@ -143,9 +159,13 @@ static inline void pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmd,
 	if (tlb->mm->context.asce_limit <= (1UL << 31))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tlb->fullmm)
 		return tlb_remove_table(tlb, pmd);
 	crst_table_free(tlb->mm, (unsigned long *) pmd);
+=======
+	tlb_remove_table(tlb, pmd);
+>>>>>>> v3.18
 =======
 	tlb_remove_table(tlb, pmd);
 >>>>>>> v3.18
@@ -166,9 +186,13 @@ static inline void pud_free_tlb(struct mmu_gather *tlb, pud_t *pud,
 	if (tlb->mm->context.asce_limit <= (1UL << 42))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tlb->fullmm)
 		return tlb_remove_table(tlb, pud);
 	crst_table_free(tlb->mm, (unsigned long *) pud);
+=======
+	tlb_remove_table(tlb, pud);
+>>>>>>> v3.18
 =======
 	tlb_remove_table(tlb, pud);
 >>>>>>> v3.18

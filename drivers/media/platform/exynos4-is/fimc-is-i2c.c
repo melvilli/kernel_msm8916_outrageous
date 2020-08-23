@@ -13,7 +13,11 @@
 #include <linux/clk.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/i2c.h>
+>>>>>>> v3.18
 =======
 #include <linux/i2c.h>
 >>>>>>> v3.18
@@ -72,8 +76,11 @@ static int fimc_is_i2c_probe(struct platform_device *pdev)
 	pm_runtime_enable(&i2c_adap->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(i2c_adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -91,20 +98,27 @@ static int fimc_is_i2c_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fimc_is_i2c_suspend(struct device *dev)
 {
 	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PM_RUNTIME) || defined(CONFIG_PM_SLEEP)
 static int fimc_is_i2c_runtime_suspend(struct device *dev)
 {
 	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_disable_unprepare(isp_i2c->clock);
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fimc_is_i2c_resume(struct device *dev)
 {
@@ -115,6 +129,8 @@ static int fimc_is_i2c_resume(struct device *dev)
 UNIVERSAL_DEV_PM_OPS(fimc_is_i2c_pm_ops, fimc_is_i2c_suspend,
 		     fimc_is_i2c_resume, NULL);
 =======
+=======
+>>>>>>> v3.18
 static int fimc_is_i2c_runtime_resume(struct device *dev)
 {
 	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
@@ -146,6 +162,9 @@ static struct dev_pm_ops fimc_is_i2c_pm_ops = {
 					fimc_is_i2c_runtime_resume, NULL)
 	SET_SYSTEM_SLEEP_PM_OPS(fimc_is_i2c_suspend, fimc_is_i2c_resume)
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct of_device_id fimc_is_i2c_of_match[] = {

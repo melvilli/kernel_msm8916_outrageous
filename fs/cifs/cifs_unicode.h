@@ -53,7 +53,10 @@
 #define UNI_SLASH       (__u16) ('\\' + 0xF000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Macs use an older "SFM" mapping of the symbols above. Fortunately it does
  * not conflict (although almost does) with the mapping above.
@@ -82,6 +85,9 @@
 #define SFM_MAP_UNI_RSVD	1
 #define SFU_MAP_UNI_RSVD	2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Just define what we want from uniupr.h.  We don't want to define the tables
  * in each source file.
@@ -107,7 +113,11 @@ extern const struct UniCaseRange CifsUniLowerRange[];
 #ifdef __KERNEL__
 int cifs_from_utf16(char *to, const __le16 *from, int tolen, int fromlen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    const struct nls_table *codepage, bool mapchar);
+=======
+		    const struct nls_table *cp, int map_type);
+>>>>>>> v3.18
 =======
 		    const struct nls_table *cp, int map_type);
 >>>>>>> v3.18
@@ -120,6 +130,10 @@ char *cifs_strndup_from_utf16(const char *src, const int maxlen,
 extern int cifsConvertToUTF16(__le16 *target, const char *source, int maxlen,
 			      const struct nls_table *cp, int mapChars);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int cifs_remap(struct cifs_sb_info *cifs_sb);
+>>>>>>> v3.18
 =======
 extern int cifs_remap(struct cifs_sb_info *cifs_sb);
 >>>>>>> v3.18
@@ -131,6 +145,11 @@ extern __le16 *cifs_strndup_to_utf16(const char *src, const int maxlen,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+wchar_t cifs_toupper(wchar_t in);
+
+>>>>>>> v3.18
 =======
 wchar_t cifs_toupper(wchar_t in);
 

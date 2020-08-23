@@ -32,6 +32,10 @@
 
 #include <mach/at91_st.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/hardware.h>
 >>>>>>> v3.18
@@ -98,7 +102,11 @@ static irqreturn_t at91rm9200_timer_interrupt(int irq, void *dev_id)
 static struct irqaction at91rm9200_timer_irq = {
 	.name		= "at91_tick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_SHARED | IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_SHARED | IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_SHARED | IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -183,7 +191,10 @@ static struct clock_event_device clkevt = {
 	.name		= "at91_tick",
 	.features	= CLOCK_EVT_FEAT_PERIODIC | CLOCK_EVT_FEAT_ONESHOT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shift		= 32,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.rating		= 150,
@@ -277,11 +288,17 @@ void __init at91rm9200_timer_init(void)
 
 	/* Setup timer clockevent, with minimum of two ticks (important!!) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clkevt.mult = div_sc(AT91_SLOW_CLOCK, NSEC_PER_SEC, clkevt.shift);
 	clkevt.max_delta_ns = clockevent_delta2ns(AT91_ST_ALMV, &clkevt);
 	clkevt.min_delta_ns = clockevent_delta2ns(2, &clkevt) + 1;
 	clkevt.cpumask = cpumask_of(0);
 	clockevents_register_device(&clkevt);
+=======
+	clkevt.cpumask = cpumask_of(0);
+	clockevents_config_and_register(&clkevt, AT91_SLOW_CLOCK,
+					2, AT91_ST_ALMV);
+>>>>>>> v3.18
 =======
 	clkevt.cpumask = cpumask_of(0);
 	clockevents_config_and_register(&clkevt, AT91_SLOW_CLOCK,

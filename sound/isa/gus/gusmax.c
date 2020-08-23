@@ -215,8 +215,13 @@ static int snd_gusmax_probe(struct device *pdev, unsigned int dev)
 	struct snd_gusmax *maxcard;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_gusmax), &card);
+=======
+	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_gusmax), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_gusmax), &card);
@@ -343,8 +348,11 @@ static int snd_gusmax_probe(struct device *pdev, unsigned int dev)
 		sprintf(card->longname + strlen(card->longname), "&%i", xdma2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, pdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_card_register(card);
@@ -366,7 +374,10 @@ static int snd_gusmax_remove(struct device *devptr, unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

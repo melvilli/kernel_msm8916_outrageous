@@ -5,9 +5,15 @@
 ccflags-y := -Iinclude/drm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ast-y := ast_drv.o ast_main.o ast_mode.o ast_fb.o ast_ttm.o ast_post.o
 
 obj-$(CONFIG_DRM_AST) := ast.o
+=======
+ast-y := ast_drv.o ast_main.o ast_mode.o ast_fb.o ast_ttm.o ast_post.o ast_dp501.o
+
+obj-$(CONFIG_DRM_AST) := ast.o
+>>>>>>> v3.18
 =======
 ast-y := ast_drv.o ast_main.o ast_mode.o ast_fb.o ast_ttm.o ast_post.o ast_dp501.o
 

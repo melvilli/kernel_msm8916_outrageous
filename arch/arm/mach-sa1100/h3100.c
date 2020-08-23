@@ -29,6 +29,7 @@
  * helper for sa1100fb
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void h3100_lcd_power(int enable)
 {
 	if (!gpio_request(H3XXX_EGPIO_LCD_ON, "LCD ON")) {
@@ -39,6 +40,8 @@ static void h3100_lcd_power(int enable)
 		pr_err("%s: can't request H3XXX_EGPIO_LCD_ON\n", __func__);
 	}
 =======
+=======
+>>>>>>> v3.18
 static struct gpio h3100_lcd_gpio[] = {
 	{ H3100_GPIO_LCD_3V_ON, GPIOF_OUT_INIT_LOW, "LCD 3V" },
 	{ H3XXX_EGPIO_LCD_ON, GPIOF_OUT_INIT_LOW, "LCD ON" },
@@ -68,6 +71,9 @@ static void h3100_lcd_power(int enable)
 
 	gpio_set_value(H3100_GPIO_LCD_3V_ON, enable);
 	gpio_set_value(H3XXX_EGPIO_LCD_ON, enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -102,12 +108,18 @@ static void __init h3100_map_io(void)
  * This turns the IRDA power on or off on the Compaq H3100
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct gpio h3100_irda_gpio[] = {
 	{ H3100_GPIO_IR_ON,	GPIOF_OUT_INIT_LOW, "IrDA power" },
 	{ H3100_GPIO_IR_FSEL,	GPIOF_OUT_INIT_LOW, "IrDA fsel" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int h3100_irda_set_power(struct device *dev, unsigned int state)
 {
@@ -120,6 +132,7 @@ static void h3100_irda_set_speed(struct device *dev, unsigned int speed)
 	gpio_set_value(H3100_GPIO_IR_FSEL, !(speed < 4000000));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct irda_platform_data h3100_irda_data = {
 	.set_power	= h3100_irda_set_power,
@@ -134,6 +147,8 @@ static struct gpio_default_state h3100_default_gpio[] = {
 	{ H3XXX_GPIO_COM_RTS,	GPIO_MODE_OUT0,	"COM RTS" },
 	{ H3100_GPIO_LCD_3V_ON,	GPIO_MODE_OUT0,	"LCD 3v" },
 =======
+=======
+>>>>>>> v3.18
 static int h3100_irda_startup(struct device *dev)
 {
 	return gpio_request_array(h3100_irda_gpio, sizeof(h3100_irda_gpio));
@@ -149,13 +164,19 @@ static struct irda_platform_data h3100_irda_data = {
 	.set_speed	= h3100_irda_set_speed,
 	.startup	= h3100_irda_startup,
 	.shutdown	= h3100_irda_shutdown,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static void __init h3100_mach_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	h3xxx_init_gpio(h3100_default_gpio, ARRAY_SIZE(h3100_default_gpio));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	h3xxx_mach_init();

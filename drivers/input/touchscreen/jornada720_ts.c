@@ -15,7 +15,10 @@
 
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -41,6 +44,7 @@ struct jornada_ts {
 static void jornada720_ts_collect_data(struct jornada_ts *jornada_ts)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     /* 3 low word X samples */
     jornada_ts->x_data[0] = jornada_ssp_byte(TXDUMMY);
@@ -58,6 +62,8 @@ static void jornada720_ts_collect_data(struct jornada_ts *jornada_ts)
     /* combined y samples bits */
     jornada_ts->y_data[3] = jornada_ssp_byte(TXDUMMY);
 =======
+=======
+>>>>>>> v3.18
 	/* 3 low word X samples */
 	jornada_ts->x_data[0] = jornada_ssp_byte(TXDUMMY);
 	jornada_ts->x_data[1] = jornada_ssp_byte(TXDUMMY);
@@ -73,6 +79,9 @@ static void jornada720_ts_collect_data(struct jornada_ts *jornada_ts)
 
 	/* combined y samples bits */
 	jornada_ts->y_data[3] = jornada_ssp_byte(TXDUMMY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -127,6 +136,7 @@ static int jornada720_ts_probe(struct platform_device *pdev)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jornada_ts = kzalloc(sizeof(struct jornada_ts), GFP_KERNEL);
 	input_dev = input_allocate_device();
 
@@ -135,6 +145,8 @@ static int jornada720_ts_probe(struct platform_device *pdev)
 		goto fail1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	jornada_ts = devm_kzalloc(&pdev->dev, sizeof(*jornada_ts), GFP_KERNEL);
 	if (!jornada_ts)
 		return -ENOMEM;
@@ -142,6 +154,9 @@ static int jornada720_ts_probe(struct platform_device *pdev)
 	input_dev = devm_input_allocate_device(&pdev->dev);
 	if (!input_dev)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, jornada_ts);
@@ -159,6 +174,7 @@ static int jornada720_ts_probe(struct platform_device *pdev)
 	input_set_abs_params(input_dev, ABS_Y, 180, 3700, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_irq(IRQ_GPIO9,
 			jornada720_ts_interrupt,
 			IRQF_TRIGGER_RISING,
@@ -167,6 +183,8 @@ static int jornada720_ts_probe(struct platform_device *pdev)
 		printk(KERN_INFO "HP7XX TS : Unable to acquire irq!\n");
 		goto fail1;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_irq(&pdev->dev, IRQ_GPIO9,
 				 jornada720_ts_interrupt,
 				 IRQF_TRIGGER_RISING,
@@ -174,11 +192,15 @@ static int jornada720_ts_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(&pdev->dev, "HP7XX TS : Unable to acquire irq!\n");
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	error = input_register_device(jornada_ts->dev);
 	if (error)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail2;
 
@@ -204,6 +226,9 @@ static int jornada720_ts_remove(struct platform_device *pdev)
 =======
 		return error;
 >>>>>>> v3.18
+=======
+		return error;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -214,7 +239,10 @@ MODULE_ALIAS("platform:jornada_ts");
 static struct platform_driver jornada720_ts_driver = {
 	.probe		= jornada720_ts_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= jornada720_ts_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

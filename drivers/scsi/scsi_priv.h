@@ -20,6 +20,10 @@ struct scsi_nl_hdr;
  */
 #define SCSI_EH_CANCEL_CMD	0x0001	/* Cancel this cmd */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SCSI_EH_ABORT_SCHEDULED	0x0002	/* Abort has been scheduled */
+>>>>>>> v3.18
 =======
 #define SCSI_EH_ABORT_SCHEDULED	0x0002	/* Abort has been scheduled */
 >>>>>>> v3.18
@@ -71,6 +75,10 @@ extern void scsi_exit_devinfo(void);
 
 /* scsi_error.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void scmd_eh_abort_handler(struct work_struct *work);
+>>>>>>> v3.18
 =======
 extern void scmd_eh_abort_handler(struct work_struct *work);
 >>>>>>> v3.18
@@ -95,6 +103,12 @@ extern void scsi_io_completion(struct scsi_cmnd *, unsigned int);
 extern void scsi_run_host_queues(struct Scsi_Host *shost);
 extern struct request_queue *scsi_alloc_queue(struct scsi_device *sdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct request_queue *scsi_mq_alloc_queue(struct scsi_device *sdev);
+extern int scsi_mq_setup_tags(struct Scsi_Host *shost);
+extern void scsi_mq_destroy_tags(struct Scsi_Host *shost);
+>>>>>>> v3.18
 =======
 extern struct request_queue *scsi_mq_alloc_queue(struct scsi_device *sdev);
 extern int scsi_mq_setup_tags(struct Scsi_Host *shost);
@@ -125,14 +139,20 @@ extern void scsi_exit_procfs(void);
 
 /* scsi_scan.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int scsi_complete_async_scans(void);
 extern int scsi_scan_host_selected(struct Scsi_Host *, unsigned int,
 				   unsigned int, unsigned int, int);
 =======
+=======
+>>>>>>> v3.18
 extern char scsi_scan_type[];
 extern int scsi_complete_async_scans(void);
 extern int scsi_scan_host_selected(struct Scsi_Host *, unsigned int,
 				   unsigned int, u64, int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void scsi_forget_host(struct Scsi_Host *);
 extern void scsi_rescan_device(struct device *);
@@ -186,6 +206,10 @@ static inline void scsi_autopm_put_host(struct Scsi_Host *h) {}
 #endif /* CONFIG_PM_RUNTIME */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct async_domain scsi_sd_pm_domain;
+>>>>>>> v3.18
 =======
 extern struct async_domain scsi_sd_pm_domain;
 >>>>>>> v3.18

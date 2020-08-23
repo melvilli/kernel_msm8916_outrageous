@@ -49,6 +49,11 @@ static inline void bcm47xx_nvram_parse_macaddr(char *buf, u8 macaddr[6])
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int bcm47xx_nvram_gpio_pin(const char *name);
+
+>>>>>>> v3.18
 =======
 int bcm47xx_nvram_gpio_pin(const char *name);
 

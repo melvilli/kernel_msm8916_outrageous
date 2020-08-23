@@ -103,8 +103,13 @@ badframe:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_rt_frame_n32(void *sig_return, struct k_sigaction *ka,
 	struct pt_regs *regs, int signr, sigset_t *set, siginfo_t *info)
+=======
+static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
+			      struct pt_regs *regs, sigset_t *set)
+>>>>>>> v3.18
 =======
 static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 			      struct pt_regs *regs, sigset_t *set)
@@ -114,6 +119,7 @@ static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
 		goto give_sigsegv;
@@ -121,12 +127,17 @@ static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 	/* Create siginfo.  */
 	err |= copy_siginfo_to_user32(&frame->rs_info, info);
 =======
+=======
+>>>>>>> v3.18
 	frame = get_sigframe(ksig, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
 		return -EFAULT;
 
 	/* Create siginfo.  */
 	err |= copy_siginfo_to_user32(&frame->rs_info, &ksig->info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create the ucontext.	 */
@@ -138,7 +149,11 @@ static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -154,7 +169,11 @@ static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 	 * the struct rt_sigframe.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->regs[ 4] = signr;
+=======
+	regs->regs[ 4] = ksig->sig;
+>>>>>>> v3.18
 =======
 	regs->regs[ 4] = ksig->sig;
 >>>>>>> v3.18
@@ -163,7 +182,11 @@ static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 	regs->regs[29] = (unsigned long) frame;
 	regs->regs[31] = (unsigned long) sig_return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -174,10 +197,13 @@ static int setup_rt_frame_n32(void *sig_return, struct ksignal *ksig,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(signr, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

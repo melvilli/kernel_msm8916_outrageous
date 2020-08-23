@@ -13,6 +13,12 @@
 #include <unistd.h>
 #include <errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/utsname.h>
+>>>>>>> v3.18
 =======
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -24,12 +30,15 @@
 #include "helpers/bitmask.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cmd_struct {
 	const char *cmd;
 	int (*main)(int, const char **);
 	int needs_root;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))
@@ -53,19 +62,29 @@ int be_verbose;
 static void print_help(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct cmd_struct {
 	const char *cmd;
 	int (*main)(int, const char **);
 	int needs_root;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct cmd_struct commands[] = {
 	{ "frequency-info",	cmd_freq_info,	0	},
 	{ "frequency-set",	cmd_freq_set,	1	},
 	{ "idle-info",		cmd_idle_info,	0	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "idle-set",		cmd_idle_set,	1	},
+>>>>>>> v3.18
 =======
 	{ "idle-set",		cmd_idle_set,	1	},
 >>>>>>> v3.18
@@ -191,6 +210,11 @@ int main(int argc, const char *argv[])
 	const char *cmd;
 	unsigned int i, ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct stat statbuf;
+	struct utsname uts;
+>>>>>>> v3.18
 =======
 	struct stat statbuf;
 	struct utsname uts;
@@ -222,7 +246,10 @@ int main(int argc, const char *argv[])
 	get_cpu_info(0, &cpupower_cpu_info);
 	run_as_root = !getuid();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (run_as_root) {
 		ret = uname(&uts);
 		if (!ret && !strcmp(uts.machine, "x86_64") &&
@@ -232,6 +259,9 @@ int main(int argc, const char *argv[])
 		}
 	}
 		
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(commands); i++) {

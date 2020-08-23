@@ -15,6 +15,10 @@
 #include <linux/cpu.h>
 #include <asm/ctl_reg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/io.h>
+>>>>>>> v3.18
 =======
 #include <asm/io.h>
 >>>>>>> v3.18
@@ -132,7 +136,11 @@ void memcpy_absolute(void *dest, void *src, size_t count)
  * Copy memory from kernel (real) to user (virtual)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int copy_to_user_real(void __user *dest, void *src, size_t count)
+=======
+int copy_to_user_real(void __user *dest, void *src, unsigned long count)
+>>>>>>> v3.18
 =======
 int copy_to_user_real(void __user *dest, void *src, unsigned long count)
 >>>>>>> v3.18
@@ -160,6 +168,7 @@ out:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copy memory from user (virtual) to kernel (real)
  */
 int copy_from_user_real(void *dest, void __user *src, size_t count)
@@ -186,6 +195,8 @@ out:
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Check if physical address is within prefix or zero page

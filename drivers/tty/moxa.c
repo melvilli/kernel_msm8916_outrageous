@@ -1097,7 +1097,11 @@ static int __init moxa_init(void)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "MOXA isa board found at 0x%.8lu and "
+=======
+			printk(KERN_INFO "MOXA isa board found at 0x%.8lx and "
+>>>>>>> v3.18
 =======
 			printk(KERN_INFO "MOXA isa board found at 0x%.8lx and "
 >>>>>>> v3.18

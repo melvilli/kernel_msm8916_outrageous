@@ -23,6 +23,7 @@ struct sock;
 struct sockaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int inet6_csk_bind_conflict(const struct sock *sk,
 				   const struct inet_bind_bucket *tb, bool relax);
 
@@ -47,6 +48,8 @@ extern int inet6_csk_xmit(struct sk_buff *skb, struct flowi *fl);
 
 extern struct dst_entry *inet6_csk_update_pmtu(struct sock *sk, u32 mtu);
 =======
+=======
+>>>>>>> v3.18
 int inet6_csk_bind_conflict(const struct sock *sk,
 			    const struct inet_bind_bucket *tb, bool relax);
 
@@ -68,5 +71,8 @@ void inet6_csk_addr2sockaddr(struct sock *sk, struct sockaddr *uaddr);
 int inet6_csk_xmit(struct sock *sk, struct sk_buff *skb, struct flowi *fl);
 
 struct dst_entry *inet6_csk_update_pmtu(struct sock *sk, u32 mtu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _INET6_CONNECTION_SOCK_H */

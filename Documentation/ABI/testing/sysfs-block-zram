@@ -142,6 +142,7 @@ Description:
 		limit could be changed in run time and "0" means disable the
 		limit.  No limit is the initial state.  Unit: bytes
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 What:		/sys/block/zram<id>/compact
 Date:		August 2015
@@ -167,5 +168,7 @@ Description:
 		The mm_stat file is read-only and represents device's mm
 		statistics (orig_data_size, compr_data_size, etc.) in a format
 		similar to block layer statistics file format.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -34,6 +34,10 @@
 #include <linux/tty_flip.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -166,18 +170,24 @@ static irqreturn_t sport_uart_rx_irq(int irq, void *dev_id)
 			tty_insert_flip_char(port, ch, TTY_NORMAL);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* XXX this won't deadlock with lowlat? */
 	tty_flip_buffer_push(port);
 
 	spin_unlock(&up->port.lock);
 
 =======
+=======
+>>>>>>> v3.18
 
 	spin_unlock(&up->port.lock);
 
 	/* XXX this won't deadlock with lowlat? */
 	tty_flip_buffer_push(port);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
@@ -439,11 +449,14 @@ static void sport_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sport_enable_ms(struct uart_port *port)
 {
 	pr_debug("%s enter\n", __func__);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void sport_break_ctl(struct uart_port *port, int break_state)
@@ -516,7 +529,10 @@ static void sport_set_termios(struct uart_port *port,
 	pr_debug("%s enter, c_cflag:%08x\n", __func__, termios->c_cflag);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_SPORT_CTSRTS
 	if (old == NULL && up->cts_pin != -1)
 		termios->c_cflag |= CRTSCTS;
@@ -524,6 +540,9 @@ static void sport_set_termios(struct uart_port *port,
 		termios->c_cflag &= ~CRTSCTS;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (termios->c_cflag & CSIZE) {
 	case CS8:
@@ -613,7 +632,10 @@ struct uart_ops sport_uart_ops = {
 	.start_tx	= sport_start_tx,
 	.stop_rx	= sport_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= sport_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= sport_break_ctl,
@@ -795,8 +817,13 @@ static int sport_uart_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = peripheral_request_list(
 			(unsigned short *)pdev->dev.platform_data, DRV_NAME);
+=======
+		ret = peripheral_request_list(dev_get_platdata(&pdev->dev),
+						DRV_NAME);
+>>>>>>> v3.18
 =======
 		ret = peripheral_request_list(dev_get_platdata(&pdev->dev),
 						DRV_NAME);
@@ -847,10 +874,15 @@ static int sport_uart_probe(struct platform_device *pdev)
 		if (res == NULL)
 			sport->cts_pin = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else {
 			sport->cts_pin = res->start;
 			sport->port.flags |= ASYNC_CTS_FLOW;
 		}
+=======
+		else
+			sport->cts_pin = res->start;
+>>>>>>> v3.18
 =======
 		else
 			sport->cts_pin = res->start;
@@ -882,8 +914,12 @@ out_error_unmap:
 		iounmap(sport->port.membase);
 out_error_free_peripherals:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		peripheral_free_list(
 			(unsigned short *)pdev->dev.platform_data);
+=======
+		peripheral_free_list(dev_get_platdata(&pdev->dev));
+>>>>>>> v3.18
 =======
 		peripheral_free_list(dev_get_platdata(&pdev->dev));
 >>>>>>> v3.18
@@ -906,8 +942,12 @@ static int sport_uart_remove(struct platform_device *pdev)
 		uart_remove_one_port(&sport_uart_reg, &sport->port);
 		iounmap(sport->port.membase);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		peripheral_free_list(
 			(unsigned short *)pdev->dev.platform_data);
+=======
+		peripheral_free_list(dev_get_platdata(&pdev->dev));
+>>>>>>> v3.18
 =======
 		peripheral_free_list(dev_get_platdata(&pdev->dev));
 >>>>>>> v3.18
@@ -931,7 +971,11 @@ static struct platform_driver sport_uart_driver = {
 
 #ifdef CONFIG_SERIAL_BFIN_SPORT_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct early_platform_driver early_sport_uart_driver = {
+=======
+static struct early_platform_driver early_sport_uart_driver __initdata = {
+>>>>>>> v3.18
 =======
 static struct early_platform_driver early_sport_uart_driver __initdata = {
 >>>>>>> v3.18

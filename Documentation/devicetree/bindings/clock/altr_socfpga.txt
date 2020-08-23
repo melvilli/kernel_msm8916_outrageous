@@ -10,6 +10,12 @@ Required properties:
 	"altr,socfpga-perip-clock" - The peripheral clock divided from the
 		PLL clock.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"altr,socfpga-gate-clk" - Clocks that directly feed peripherals and
+		can get gated.
+
+>>>>>>> v3.18
 =======
 	"altr,socfpga-gate-clk" - Clocks that directly feed peripherals and
 		can get gated.
@@ -23,7 +29,10 @@ Required properties:
 Optional properties:
 - fixed-divider : If clocks have a fixed divider value, use this property.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - clk-gate : For "socfpga-gate-clk", clk-gate contains the gating register
         and the bit index.
 - div-reg : For "socfpga-gate-clk" and "socfpga-periph-clock", div-reg contains
@@ -33,4 +42,7 @@ Optional properties:
 	value is the cclk_in_drv(drvsel). The clk-phase is used to enable the correct
 	hold/delay times that is needed for the SD/MMC CIU clock. The values of both
 	can be 0-315 degrees, in 45 degree increments.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

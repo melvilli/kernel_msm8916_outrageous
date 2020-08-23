@@ -179,7 +179,11 @@ do {								\
 	__typeof__(*(ptr)) __user *__pu_addr = (ptr);		\
 	if (!is_kernel_addr((unsigned long)__pu_addr))		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		might_sleep();					\
+=======
+		might_fault();					\
+>>>>>>> v3.18
 =======
 		might_fault();					\
 >>>>>>> v3.18
@@ -193,7 +197,11 @@ do {								\
 	long __pu_err = -EFAULT;					\
 	__typeof__(*(ptr)) __user *__pu_addr = (ptr);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 =======
 	might_fault();							\
 >>>>>>> v3.18
@@ -277,7 +285,11 @@ do {								\
 	__chk_user_ptr(ptr);					\
 	if (!is_kernel_addr((unsigned long)__gu_addr))		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		might_sleep();					\
+=======
+		might_fault();					\
+>>>>>>> v3.18
 =======
 		might_fault();					\
 >>>>>>> v3.18
@@ -295,7 +307,11 @@ do {								\
 	__chk_user_ptr(ptr);					\
 	if (!is_kernel_addr((unsigned long)__gu_addr))		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		might_sleep();					\
+=======
+		might_fault();					\
+>>>>>>> v3.18
 =======
 		might_fault();					\
 >>>>>>> v3.18
@@ -311,7 +327,11 @@ do {								\
 	unsigned long  __gu_val = 0;					\
 	const __typeof__(*(ptr)) __user *__gu_addr = (ptr);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 =======
 	might_fault();							\
 >>>>>>> v3.18
@@ -344,10 +364,13 @@ static inline unsigned long copy_from_user(void *to,
 		const void __user *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_READ, from, n)))
 		return __copy_tofrom_user((__force void __user *)to, from, n);
 	memset(to, 0, n);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long over;
 
 	if (access_ok(VERIFY_READ, from, n))
@@ -357,6 +380,9 @@ static inline unsigned long copy_from_user(void *to,
 		return __copy_tofrom_user((__force void __user *)to, from,
 				n - over) + over;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return n;
 }
@@ -365,9 +391,12 @@ static inline unsigned long copy_to_user(void __user *to,
 		const void *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (access_ok(VERIFY_WRITE, to, n))
 		return __copy_tofrom_user(to, (__force void __user *)from, n);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long over;
 
 	if (access_ok(VERIFY_WRITE, to, n))
@@ -377,6 +406,9 @@ static inline unsigned long copy_to_user(void __user *to,
 		return __copy_tofrom_user(to, (__force void __user *)from,
 				n - over) + over;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return n;
 }
@@ -451,7 +483,11 @@ static inline unsigned long __copy_from_user(void *to,
 		const void __user *from, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18
@@ -462,7 +498,11 @@ static inline unsigned long __copy_to_user(void __user *to,
 		const void *from, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18
@@ -474,10 +514,13 @@ extern unsigned long __clear_user(void __user *addr, unsigned long size);
 static inline unsigned long clear_user(void __user *addr, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
 	if (likely(access_ok(VERIFY_WRITE, addr, size)))
 		return __clear_user(addr, size);
 =======
+=======
+>>>>>>> v3.18
 	might_fault();
 	if (likely(access_ok(VERIFY_WRITE, addr, size)))
 		return __clear_user(addr, size);
@@ -485,6 +528,9 @@ static inline unsigned long clear_user(void __user *addr, unsigned long size)
 		unsigned long over = (unsigned long)addr + size - TASK_SIZE;
 		return __clear_user(addr, size - over) + over;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return size;
 }

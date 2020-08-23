@@ -24,6 +24,7 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sock_filter ptp_filter[] = {
 	PTP_FILTER
 };
@@ -35,11 +36,16 @@ static unsigned int classify(const struct sk_buff *skb)
 		   skb->dev->phydev->drv))
 		return sk_run_filter(skb, ptp_filter);
 =======
+=======
+>>>>>>> v3.18
 static unsigned int classify(const struct sk_buff *skb)
 {
 	if (likely(skb->dev && skb->dev->phydev &&
 		   skb->dev->phydev->drv))
 		return ptp_classify_raw(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		return PTP_CLASS_NONE;
@@ -49,6 +55,7 @@ void skb_clone_tx_timestamp(struct sk_buff *skb)
 {
 	struct phy_device *phydev;
 	struct sk_buff *clone;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sock *sk = skb->sk;
 	unsigned int type;
@@ -81,6 +88,8 @@ void skb_clone_tx_timestamp(struct sk_buff *skb)
 	default:
 		break;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int type;
 
 	if (!skb->sk)
@@ -96,11 +105,15 @@ void skb_clone_tx_timestamp(struct sk_buff *skb)
 		if (!clone)
 			return;
 		phydev->drv->txtstamp(phydev, clone, type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 EXPORT_SYMBOL_GPL(skb_clone_tx_timestamp);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void skb_complete_tx_timestamp(struct sk_buff *skb,
 			       struct skb_shared_hwtstamps *hwtstamps)
@@ -130,6 +143,8 @@ EXPORT_SYMBOL_GPL(skb_complete_tx_timestamp);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 bool skb_defer_rx_timestamp(struct sk_buff *skb)
 {
 	struct phy_device *phydev;
@@ -143,6 +158,7 @@ bool skb_defer_rx_timestamp(struct sk_buff *skb)
 
 	__skb_pull(skb, ETH_HLEN);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (type) {
 	case PTP_CLASS_V1_IPV4:
@@ -159,22 +175,30 @@ bool skb_defer_rx_timestamp(struct sk_buff *skb)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (type == PTP_CLASS_NONE)
 		return false;
 
 	phydev = skb->dev->phydev;
 	if (likely(phydev->drv->rxtstamp))
 		return phydev->drv->rxtstamp(phydev, skb, type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return false;
 }
 EXPORT_SYMBOL_GPL(skb_defer_rx_timestamp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __init skb_timestamping_init(void)
 {
 	BUG_ON(sk_chk_filter(ptp_filter, ARRAY_SIZE(ptp_filter)));
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

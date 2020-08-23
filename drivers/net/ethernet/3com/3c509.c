@@ -253,8 +253,12 @@ static int el3_isa_id_sequence(__be16 *phys_addr)
 			struct el3_private *lp = netdev_priv(el3_devs[i]);
 			if (lp->type == EL3_PNP &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    !memcmp(phys_addr, el3_devs[i]->dev_addr,
 				    ETH_ALEN)) {
+=======
+			    ether_addr_equal((u8 *)phys_addr, el3_devs[i]->dev_addr)) {
+>>>>>>> v3.18
 =======
 			    ether_addr_equal((u8 *)phys_addr, el3_devs[i]->dev_addr)) {
 >>>>>>> v3.18
@@ -540,7 +544,11 @@ static int el3_common_init(struct net_device *dev)
 	dev->netdev_ops = &netdev_ops;
 	dev->watchdog_timeo = TX_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+	dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ethtool_ops;
 >>>>>>> v3.18
@@ -705,9 +713,15 @@ el3_tx_timeout (struct net_device *dev)
 
 	/* Transmitter timeout, serious problems. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("%s: transmit timed out, Tx_status %2.2x status %4.4x Tx FIFO room %d.\n",
 		   dev->name, inb(ioaddr + TX_STATUS), inw(ioaddr + EL3_STATUS),
 		   inw(ioaddr + TX_FREE));
+=======
+	pr_warn("%s: transmit timed out, Tx_status %2.2x status %4.4x Tx FIFO room %d\n",
+		dev->name, inb(ioaddr + TX_STATUS), inw(ioaddr + EL3_STATUS),
+		inw(ioaddr + TX_FREE));
+>>>>>>> v3.18
 =======
 	pr_warn("%s: transmit timed out, Tx_status %2.2x status %4.4x Tx FIFO room %d\n",
 		dev->name, inb(ioaddr + TX_STATUS), inw(ioaddr + EL3_STATUS),
@@ -738,6 +752,7 @@ el3_start_xmit(struct sk_buff *skb, struct net_device *dev)
 			   dev->name, skb->len, inw(ioaddr + EL3_STATUS));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 #ifndef final_version
 	{	/* Error-checking code, delete someday. */
@@ -757,6 +772,8 @@ el3_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	}
 #endif
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -787,7 +804,11 @@ el3_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	spin_unlock_irqrestore(&lp->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb (skb);
+=======
+	dev_consume_skb_any (skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any (skb);
 >>>>>>> v3.18

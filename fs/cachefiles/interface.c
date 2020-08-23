@@ -14,8 +14,11 @@
 #include "internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define list_to_page(head) (list_entry((head)->prev, struct page, lru))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct cachefiles_lookup_data {
@@ -152,8 +155,12 @@ static int cachefiles_lookup_object(struct fscache_object *_object)
 	if (ret < 0 && ret != -ETIMEDOUT) {
 		if (ret != -ENOBUFS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "CacheFiles: Lookup failed error %d\n", ret);
+=======
+			pr_warn("Lookup failed error %d\n", ret);
+>>>>>>> v3.18
 =======
 			pr_warn("Lookup failed error %d\n", ret);
 >>>>>>> v3.18
@@ -220,10 +227,13 @@ static void cachefiles_update_object(struct fscache_object *_object)
 	cache = container_of(object->fscache.cache, struct cachefiles_cache,
 			     cache);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cookie = object->fscache.cookie;
 
 	if (!cookie->def->get_aux) {
 =======
+=======
+>>>>>>> v3.18
 
 	if (!fscache_use_cookie(_object)) {
 		_leave(" [relinq]");
@@ -234,6 +244,9 @@ static void cachefiles_update_object(struct fscache_object *_object)
 
 	if (!cookie->def->get_aux) {
 		fscache_unuse_cookie(_object);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		_leave(" [no aux]");
 		return;
@@ -242,6 +255,10 @@ static void cachefiles_update_object(struct fscache_object *_object)
 	auxdata = kmalloc(2 + 512 + 3, cachefiles_gfp);
 	if (!auxdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fscache_unuse_cookie(_object);
+>>>>>>> v3.18
 =======
 		fscache_unuse_cookie(_object);
 >>>>>>> v3.18
@@ -251,6 +268,10 @@ static void cachefiles_update_object(struct fscache_object *_object)
 
 	auxlen = cookie->def->get_aux(cookie->netfs_data, auxdata->data, 511);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fscache_unuse_cookie(_object);
+>>>>>>> v3.18
 =======
 	fscache_unuse_cookie(_object);
 >>>>>>> v3.18
@@ -291,6 +312,7 @@ static void cachefiles_drop_object(struct fscache_object *_object)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* delete retired objects */
 	if (object->fscache.state == FSCACHE_OBJECT_RECYCLING &&
 	    _object != cache->cache.fsdef
@@ -306,6 +328,8 @@ static void cachefiles_drop_object(struct fscache_object *_object)
 		dput(object->backer);
 	object->backer = NULL;
 =======
+=======
+>>>>>>> v3.18
 	/* We need to tidy the object up if we did in fact manage to open it.
 	 * It's possible for us to get here before the object is fully
 	 * initialised if the parent goes away or the object gets retired
@@ -327,6 +351,9 @@ static void cachefiles_drop_object(struct fscache_object *_object)
 			dput(object->backer);
 		object->backer = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* note that the object is now inactive */
@@ -424,7 +451,10 @@ static void cachefiles_sync_cache(struct fscache_cache *_cache)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * check if the backing cache is updated to FS-Cache
  * - called by FS-Cache when evaluates if need to invalidate the cache
  */
@@ -450,6 +480,9 @@ static bool cachefiles_check_consistency(struct fscache_operation *op)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * notification the attributes on an object have changed
  * - called with reads/writes excluded by FS-Cache
@@ -498,7 +531,11 @@ static int cachefiles_attr_changed(struct fscache_object *_object)
 		newattrs.ia_valid = ATTR_SIZE;
 		newattrs.ia_size = oi_size & PAGE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = notify_change(object->backer, &newattrs);
+=======
+		ret = notify_change(object->backer, &newattrs, NULL);
+>>>>>>> v3.18
 =======
 		ret = notify_change(object->backer, &newattrs, NULL);
 >>>>>>> v3.18
@@ -509,7 +546,11 @@ static int cachefiles_attr_changed(struct fscache_object *_object)
 	newattrs.ia_valid = ATTR_SIZE;
 	newattrs.ia_size = ni_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = notify_change(object->backer, &newattrs);
+=======
+	ret = notify_change(object->backer, &newattrs, NULL);
+>>>>>>> v3.18
 =======
 	ret = notify_change(object->backer, &newattrs, NULL);
 >>>>>>> v3.18
@@ -604,6 +645,10 @@ const struct fscache_cache_ops cachefiles_cache_ops = {
 	.uncache_page		= cachefiles_uncache_page,
 	.dissociate_pages	= cachefiles_dissociate_pages,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.check_consistency	= cachefiles_check_consistency,
+>>>>>>> v3.18
 =======
 	.check_consistency	= cachefiles_check_consistency,
 >>>>>>> v3.18

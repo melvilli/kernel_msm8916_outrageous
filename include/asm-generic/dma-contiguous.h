@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ASM_DMA_CONTIGUOUS_H
 #define ASM_DMA_CONTIGUOUS_H
 
@@ -24,6 +25,8 @@ static inline void dev_set_cma_area(struct device *dev, struct cma *cma)
 #endif
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifndef _ASM_GENERIC_DMA_CONTIGUOUS_H
 #define _ASM_GENERIC_DMA_CONTIGUOUS_H
 
@@ -31,6 +34,9 @@ static inline void dev_set_cma_area(struct device *dev, struct cma *cma)
 
 static inline void
 dma_contiguous_early_fixup(phys_addr_t base, unsigned long size) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

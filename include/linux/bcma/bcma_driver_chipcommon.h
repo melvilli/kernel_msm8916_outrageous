@@ -331,6 +331,11 @@
 #define  BCMA_CC_PMU_CAP_REVISION	0x000000FF /* Revision mask */
 #define BCMA_CC_PMU_STAT		0x0608 /* PMU status */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  BCMA_CC_PMU_STAT_EXT_LPO_AVAIL	0x00000100
+#define  BCMA_CC_PMU_STAT_WDRESET	0x00000080
+>>>>>>> v3.18
 =======
 #define  BCMA_CC_PMU_STAT_EXT_LPO_AVAIL	0x00000100
 #define  BCMA_CC_PMU_STAT_WDRESET	0x00000080
@@ -361,12 +366,18 @@
 #define BCMA_CC_PLLCTL_ADDR		0x0660
 #define BCMA_CC_PLLCTL_DATA		0x0664
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BCMA_CC_PMU_STRAPOPT		0x0668 /* (corerev >= 28) */
 #define BCMA_CC_PMU_XTAL_FREQ		0x066C /* (pmurev >= 10) */
 #define  BCMA_CC_PMU_XTAL_FREQ_ILPCTL_MASK	0x00001FFF
 #define  BCMA_CC_PMU_XTAL_FREQ_MEASURE_MASK	0x80000000
 #define  BCMA_CC_PMU_XTAL_FREQ_MEASURE_SHIFT	31
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BCMA_CC_SPROM			0x0800 /* SPROM beginning */
 /* NAND flash MLC controller registers (corerev >= 38) */
@@ -449,7 +460,10 @@
 #define  BCMA_CC_PMU6_4706_PROC_NDIV_MODE_SHIFT	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* PMU rev 15 */
 #define BCMA_CC_PMU15_PLL_PLLCTL0	0
 #define  BCMA_CC_PMU15_PLL_PC0_CLKSEL_MASK	0x00000003
@@ -467,6 +481,9 @@
 #define  BCMA_CC_PMU15_PLL_PC0_CTRLBIAS_MASK	0x80000000
 #define  BCMA_CC_PMU15_PLL_PC0_CTRLBIAS_SHIFT	31
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ALP clock on pre-PMU chips */
 #define BCMA_CC_PMU_ALP_CLOCK		20000000
@@ -541,7 +558,10 @@
 #define BCMA_CHIPCTL_5357_I2CSPI_PINS_ENABLE	BIT(19)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BCMA_RES_4314_LPLDO_PU			BIT(0)
 #define BCMA_RES_4314_PMU_SLEEP_DIS		BIT(1)
 #define BCMA_RES_4314_PMU_BG_PU			BIT(2)
@@ -573,6 +593,9 @@
 #define BCMA_RES_4314_HT_AVAIL			BIT(28)
 #define BCMA_RES_4314_MACPHY_CLK_AVAIL		BIT(29)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Data for the PMU, if available.
  * Check availability with ((struct bcma_chipcommon)->capabilities & BCMA_CC_CAP_PMU)
@@ -653,10 +676,13 @@ struct bcma_drv_cc {
 #ifdef CONFIG_BCMA_DRIVER_GPIO
 	struct gpio_chip gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct irq_domain *irq_domain;
 #endif
 };
@@ -667,6 +693,9 @@ struct bcma_drv_cc_b {
 	void __iomem *mii;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Register access */
 #define bcma_cc_read32(cc, offset) \
@@ -724,6 +753,11 @@ extern void bcma_pmu_spuravoid_pllupdate(struct bcma_drv_cc *cc, int spuravoid);
 extern u32 bcma_pmu_get_bus_clock(struct bcma_drv_cc *cc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void bcma_chipco_b_mii_write(struct bcma_drv_cc_b *ccb, u32 offset, u32 value);
+
+>>>>>>> v3.18
 =======
 void bcma_chipco_b_mii_write(struct bcma_drv_cc_b *ccb, u32 offset, u32 value);
 

@@ -1,14 +1,20 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  drivers/i2c/busses/i2c-rcar.c
  *
  * Copyright (C) 2012 Renesas Solutions Corp.
 =======
+=======
+>>>>>>> v3.18
  * Driver for the Renesas RCar I2C unit
  *
  * Copyright (C) 2014 Wolfram Sang <wsa@sang-engineering.com>
  *
  * Copyright (C) 2012-14 Renesas Solutions Corp.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
  *
@@ -21,7 +27,11 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the Free Software Foundation; either version 2 of the License
+=======
+ * the Free Software Foundation; version 2 of the License.
+>>>>>>> v3.18
 =======
  * the Free Software Foundation; version 2 of the License.
 >>>>>>> v3.18
@@ -31,10 +41,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -42,7 +55,10 @@
 #include <linux/delay.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -52,6 +68,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -83,7 +103,11 @@
 #define ESG	(1 << 0)	/* en startbit gen */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ICMSR */
+=======
+/* ICMSR (also for ICMIE) */
+>>>>>>> v3.18
 =======
 /* ICMSR (also for ICMIE) */
 >>>>>>> v3.18
@@ -95,6 +119,7 @@
 #define MDR	(1 << 1)
 #define MAT	(1 << 0)	/* slave addr xfer done */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* ICMIE */
 #define MNRE	(1 << 6)	/* nack irq en */
@@ -123,6 +148,8 @@ enum {
  * flags
  */
 =======
+=======
+>>>>>>> v3.18
 
 #define RCAR_BUS_PHASE_START	(MDBS | MIE | ESG)
 #define RCAR_BUS_PHASE_DATA	(MDBS | MIE)
@@ -135,6 +162,9 @@ enum {
 #define RCAR_IRQ_ACK_SEND	(~(MAT | MDE) & 0xFF)
 #define RCAR_IRQ_ACK_RECV	(~(MAT | MDR) & 0xFF)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ID_LAST_MSG	(1 << 0)
 #define ID_IOERROR	(1 << 1)
@@ -143,18 +173,28 @@ enum {
 #define ID_NACK		(1 << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum rcar_i2c_type {
 	I2C_RCAR_GEN1,
 	I2C_RCAR_GEN2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rcar_i2c_priv {
 	void __iomem *io;
 	struct i2c_adapter adap;
 	struct i2c_msg	*msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk;
 >>>>>>> v3.18
@@ -164,9 +204,15 @@ struct rcar_i2c_priv {
 
 	int pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq;
 	u32 icccr;
 	u32 flags;
+=======
+	u32 icccr;
+	u32 flags;
+	enum rcar_i2c_type devtype;
+>>>>>>> v3.18
 =======
 	u32 icccr;
 	u32 flags;
@@ -183,9 +229,13 @@ struct rcar_i2c_priv {
 #define LOOP_TIMEOUT	1024
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *		basic functions
  */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -217,6 +267,7 @@ static void rcar_i2c_init(struct rcar_i2c_priv *priv)
 	rcar_i2c_write(priv, ICMAR, 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void rcar_i2c_irq_mask(struct rcar_i2c_priv *priv, int open)
 {
@@ -250,6 +301,8 @@ static void rcar_i2c_set_addr(struct rcar_i2c_priv *priv, u32 recv)
  */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int rcar_i2c_bus_barrier(struct rcar_i2c_priv *priv)
 {
 	int i;
@@ -264,6 +317,7 @@ static int rcar_i2c_bus_barrier(struct rcar_i2c_priv *priv)
 	return -EBUSY;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void rcar_i2c_bus_phase(struct rcar_i2c_priv *priv, int phase)
 {
@@ -285,10 +339,13 @@ static void rcar_i2c_bus_phase(struct rcar_i2c_priv *priv, int phase)
  */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int rcar_i2c_clock_calculate(struct rcar_i2c_priv *priv,
 				    u32 bus_speed,
 				    struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clk *clkp = clk_get(NULL, "peripheral_clk");
 	u32 scgd, cdf;
@@ -298,6 +355,8 @@ static int rcar_i2c_clock_calculate(struct rcar_i2c_priv *priv,
 	if (!clkp) {
 		dev_err(dev, "there is no peripheral_clk\n");
 =======
+=======
+>>>>>>> v3.18
 	u32 scgd, cdf;
 	u32 round, ick;
 	u32 scl;
@@ -313,6 +372,9 @@ static int rcar_i2c_clock_calculate(struct rcar_i2c_priv *priv,
 		break;
 	default:
 		dev_err(dev, "device type error\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
@@ -333,6 +395,7 @@ static int rcar_i2c_clock_calculate(struct rcar_i2c_priv *priv,
 	 * F[]  : integer up-valuation
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (cdf = 0; cdf < 4; cdf++) {
 		ick = clk_get_rate(clkp) / (1 + cdf);
 		if (ick < 20000000)
@@ -343,6 +406,8 @@ static int rcar_i2c_clock_calculate(struct rcar_i2c_priv *priv,
 
 ick_find:
 =======
+=======
+>>>>>>> v3.18
 	rate = clk_get_rate(priv->clk);
 	cdf = rate / 20000000;
 	if (cdf >= 1U << cdf_width) {
@@ -351,6 +416,9 @@ ick_find:
 	}
 	ick = rate / (cdf + 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * it is impossible to calculate large scale
@@ -370,13 +438,19 @@ ick_find:
 	 * Calculation result (= SCL) should be less than
 	 * bus_speed for hardware safety
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * We could use something along the lines of
 	 *	div = ick / (bus_speed + 1) + 1;
 	 *	scgd = (div - 20 - round + 7) / 8;
 	 *	scl = ick / (20 + (scgd * 8) + round);
 	 * (not fully verified) but that would get pretty involved
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	for (scgd = 0; scgd < 0x40; scgd++) {
@@ -390,7 +464,11 @@ ick_find:
 scgd_find:
 	dev_dbg(dev, "clk %d/%d(%lu), round %u, CDF:0x%x, SCGD: 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scl, bus_speed, clk_get_rate(clkp), round, cdf, scgd);
+=======
+		scl, bus_speed, clk_get_rate(priv->clk), round, cdf, scgd);
+>>>>>>> v3.18
 =======
 		scl, bus_speed, clk_get_rate(priv->clk), round, cdf, scgd);
 >>>>>>> v3.18
@@ -398,6 +476,7 @@ scgd_find:
 	/*
 	 * keep icccr value
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->icccr = (scgd << 2 | cdf);
 
@@ -435,10 +514,14 @@ static int rcar_i2c_recv(struct rcar_i2c_priv *priv)
 =======
 	priv->icccr = scgd << cdf_width | cdf;
 >>>>>>> v3.18
+=======
+	priv->icccr = scgd << cdf_width | cdf;
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int rcar_i2c_send(struct rcar_i2c_priv *priv)
 {
@@ -463,6 +546,8 @@ static int rcar_i2c_send(struct rcar_i2c_priv *priv)
 #define rcar_i2c_recv_restart(priv) rcar_i2c_status_bit_clear(priv, (MAT | MDR))
 
 =======
+=======
+>>>>>>> v3.18
 static void rcar_i2c_prepare_msg(struct rcar_i2c_priv *priv)
 {
 	int read = !!rcar_i2c_is_recv(priv);
@@ -473,6 +558,9 @@ static void rcar_i2c_prepare_msg(struct rcar_i2c_priv *priv)
 	rcar_i2c_write(priv, ICMIER, read ? RCAR_IRQ_RECV : RCAR_IRQ_SEND);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *		interrupt functions
@@ -495,7 +583,11 @@ static int rcar_i2c_irq_send(struct rcar_i2c_priv *priv, u32 msr)
 	 */
 	if (msr & MAT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcar_i2c_bus_phase(priv, RCAR_BUS_PHASE_DATA);
+=======
+		rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_DATA);
+>>>>>>> v3.18
 =======
 		rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_DATA);
 >>>>>>> v3.18
@@ -527,7 +619,11 @@ static int rcar_i2c_irq_send(struct rcar_i2c_priv *priv, u32 msr)
 			 * ID_DONE will be set on STOP irq.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rcar_i2c_bus_phase(priv, RCAR_BUS_PHASE_STOP);
+=======
+			rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_STOP);
+>>>>>>> v3.18
 =======
 			rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_STOP);
 >>>>>>> v3.18
@@ -542,7 +638,11 @@ static int rcar_i2c_irq_send(struct rcar_i2c_priv *priv, u32 msr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcar_i2c_send_restart(priv);
+=======
+	rcar_i2c_write(priv, ICMSR, RCAR_IRQ_ACK_SEND);
+>>>>>>> v3.18
 =======
 	rcar_i2c_write(priv, ICMSR, RCAR_IRQ_ACK_SEND);
 >>>>>>> v3.18
@@ -583,17 +683,23 @@ static int rcar_i2c_irq_recv(struct rcar_i2c_priv *priv, u32 msr)
 	 */
 	if (priv->pos + 1 >= msg->len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcar_i2c_bus_phase(priv, RCAR_BUS_PHASE_STOP);
 	else
 		rcar_i2c_bus_phase(priv, RCAR_BUS_PHASE_DATA);
 
 	rcar_i2c_recv_restart(priv);
 =======
+=======
+>>>>>>> v3.18
 		rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_STOP);
 	else
 		rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_DATA);
 
 	rcar_i2c_write(priv, ICMSR, RCAR_IRQ_ACK_RECV);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -603,7 +709,11 @@ static irqreturn_t rcar_i2c_irq(int irq, void *ptr)
 {
 	struct rcar_i2c_priv *priv = ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = rcar_i2c_priv_to_dev(priv);
+=======
+	irqreturn_t result = IRQ_HANDLED;
+>>>>>>> v3.18
 =======
 	irqreturn_t result = IRQ_HANDLED;
 >>>>>>> v3.18
@@ -612,6 +722,7 @@ static irqreturn_t rcar_i2c_irq(int irq, void *ptr)
 	/*-------------- spin lock -----------------*/
 	spin_lock(&priv->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	msr = rcar_i2c_status_get(priv);
 
@@ -648,6 +759,8 @@ static irqreturn_t rcar_i2c_irq(int irq, void *ptr)
 		rcar_i2c_bus_phase(priv, RCAR_BUS_PHASE_STOP);
 		rcar_i2c_irq_mask(priv, RCAR_IRQ_OPEN_FOR_STOP);
 =======
+=======
+>>>>>>> v3.18
 	msr = rcar_i2c_read(priv, ICMSR);
 
 	/* Only handle interrupts that are currently enabled */
@@ -668,22 +781,31 @@ static irqreturn_t rcar_i2c_irq(int irq, void *ptr)
 		/* go to stop phase */
 		rcar_i2c_write(priv, ICMCR, RCAR_BUS_PHASE_STOP);
 		rcar_i2c_write(priv, ICMIER, RCAR_IRQ_STOP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcar_i2c_flags_set(priv, ID_NACK);
 		goto out;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * recv/send
 	 */
 =======
+=======
+>>>>>>> v3.18
 	/* Stop */
 	if (msr & MST) {
 		rcar_i2c_flags_set(priv, ID_DONE);
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rcar_i2c_is_recv(priv))
 		rcar_i2c_flags_set(priv, rcar_i2c_irq_recv(priv, msr));
@@ -692,6 +814,7 @@ static irqreturn_t rcar_i2c_irq(int irq, void *ptr)
 
 out:
 	if (rcar_i2c_flags_has(priv, ID_DONE)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcar_i2c_irq_mask(priv, RCAR_IRQ_CLOSE);
 		rcar_i2c_status_clear(priv);
@@ -703,6 +826,8 @@ out:
 
 	return IRQ_HANDLED;
 =======
+=======
+>>>>>>> v3.18
 		rcar_i2c_write(priv, ICMIER, 0);
 		rcar_i2c_write(priv, ICMSR, 0);
 		wake_up(&priv->wait);
@@ -713,6 +838,9 @@ exit:
 	/*-------------- spin unlock -----------------*/
 
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -732,7 +860,12 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 
 	rcar_i2c_init(priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcar_i2c_clock_start(priv);
+=======
+	/* start clock */
+	rcar_i2c_write(priv, ICCCR, priv->icccr);
+>>>>>>> v3.18
 =======
 	/* start clock */
 	rcar_i2c_write(priv, ICCCR, priv->icccr);
@@ -742,12 +875,18 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 	/*-------------- spin unlock -----------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	ret = rcar_i2c_bus_barrier(priv);
 	if (ret < 0)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < num; i++) {
 		/* This HW can't send STOP after address phase */
@@ -764,6 +903,7 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 		priv->pos	= 0;
 		priv->flags	= 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (priv->msg == &msgs[num - 1])
 			rcar_i2c_flags_set(priv, ID_LAST_MSG);
 
@@ -773,15 +913,21 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 		else
 			ret = rcar_i2c_send(priv);
 =======
+=======
+>>>>>>> v3.18
 		if (i == num - 1)
 			rcar_i2c_flags_set(priv, ID_LAST_MSG);
 
 		rcar_i2c_prepare_msg(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		spin_unlock_irqrestore(&priv->lock, flags);
 		/*-------------- spin unlock -----------------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ret < 0)
 			break;
@@ -789,6 +935,8 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 		/*
 		 * wait result
 		 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		timeout = wait_event_timeout(priv->wait,
@@ -800,11 +948,16 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * error handling
 		 */
 		if (rcar_i2c_flags_has(priv, ID_NACK)) {
 			ret = -EREMOTEIO;
+=======
+		if (rcar_i2c_flags_has(priv, ID_NACK)) {
+			ret = -ENXIO;
+>>>>>>> v3.18
 =======
 		if (rcar_i2c_flags_has(priv, ID_NACK)) {
 			ret = -ENXIO;
@@ -825,15 +978,21 @@ static int rcar_i2c_master_xfer(struct i2c_adapter *adap,
 		ret = i + 1; /* The number of transfer */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pm_runtime_put(dev);
 
 	if (ret < 0)
 =======
+=======
+>>>>>>> v3.18
 out:
 	pm_runtime_put(dev);
 
 	if (ret < 0 && ret != -ENXIO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev, "error %d : %x\n", ret, priv->flags);
 
@@ -852,10 +1011,13 @@ static const struct i2c_algorithm rcar_i2c_algo = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rcar_i2c_probe(struct platform_device *pdev)
 {
 	struct i2c_rcar_platform_data *pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id rcar_i2c_dt_ids[] = {
 	{ .compatible = "renesas,i2c-rcar", .data = (void *)I2C_RCAR_GEN1 },
 	{ .compatible = "renesas,i2c-r8a7778", .data = (void *)I2C_RCAR_GEN1 },
@@ -872,12 +1034,16 @@ MODULE_DEVICE_TABLE(of, rcar_i2c_dt_ids);
 static int rcar_i2c_probe(struct platform_device *pdev)
 {
 	struct i2c_rcar_platform_data *pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rcar_i2c_priv *priv;
 	struct i2c_adapter *adap;
 	struct resource *res;
 	struct device *dev = &pdev->dev;
 	u32 bus_speed;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -897,6 +1063,8 @@ static int rcar_i2c_probe(struct platform_device *pdev)
 	if (pdata && pdata->bus_speed)
 		bus_speed = pdata->bus_speed;
 =======
+=======
+>>>>>>> v3.18
 	int irq, ret;
 
 	priv = devm_kzalloc(dev, sizeof(struct rcar_i2c_priv), GFP_KERNEL);
@@ -920,12 +1088,19 @@ static int rcar_i2c_probe(struct platform_device *pdev)
 	else
 		priv->devtype = platform_get_device_id(pdev)->driver_data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = rcar_i2c_clock_calculate(priv, bus_speed, dev);
 	if (ret < 0)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -933,6 +1108,7 @@ static int rcar_i2c_probe(struct platform_device *pdev)
 	if (IS_ERR(priv->io))
 		return PTR_ERR(priv->io);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->irq = platform_get_irq(pdev, 0);
 	init_waitqueue_head(&priv->wait);
@@ -965,6 +1141,8 @@ static int rcar_i2c_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
 	init_waitqueue_head(&priv->wait);
 	spin_lock_init(&priv->lock);
@@ -995,6 +1173,9 @@ static int rcar_i2c_probe(struct platform_device *pdev)
 	pm_runtime_enable(dev);
 	platform_set_drvdata(pdev, priv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(dev, "probed\n");
 
@@ -1013,7 +1194,10 @@ static int rcar_i2c_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device_id rcar_i2c_id_table[] = {
 	{ "i2c-rcar",		I2C_RCAR_GEN1 },
 	{ "i2c-rcar_gen1",	I2C_RCAR_GEN1 },
@@ -1022,28 +1206,41 @@ static struct platform_device_id rcar_i2c_id_table[] = {
 };
 MODULE_DEVICE_TABLE(platform, rcar_i2c_id_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver rcar_i2c_driver = {
 	.driver	= {
 		.name	= "i2c-rcar",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.probe		= rcar_i2c_probe,
 	.remove		= rcar_i2c_remove,
 =======
+=======
+>>>>>>> v3.18
 		.of_match_table = rcar_i2c_dt_ids,
 	},
 	.probe		= rcar_i2c_probe,
 	.remove		= rcar_i2c_remove,
 	.id_table	= rcar_i2c_id_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 module_platform_driver(rcar_i2c_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

@@ -30,6 +30,11 @@
  *			into the buffer. The buffer is aligned for any type.
  * @priv:		Private data, for use by the RNG driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @quality:		Estimation of true entropy in RNG's bitstream
+ *			(per mill).
+>>>>>>> v3.18
 =======
  * @quality:		Estimation of true entropy in RNG's bitstream
  *			(per mill).
@@ -44,6 +49,10 @@ struct hwrng {
 	int (*read)(struct hwrng *rng, void *data, size_t max, bool wait);
 	unsigned long priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned short quality;
+>>>>>>> v3.18
 =======
 	unsigned short quality;
 >>>>>>> v3.18

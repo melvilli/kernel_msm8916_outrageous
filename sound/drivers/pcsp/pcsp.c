@@ -47,8 +47,14 @@ static int snd_pcsp_create(struct snd_card *card)
 	int div, min_div, order;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nopcm) {
 		hrtimer_get_res(CLOCK_MONOTONIC, &tp);
+=======
+	hrtimer_get_res(CLOCK_MONOTONIC, &tp);
+
+	if (!nopcm) {
+>>>>>>> v3.18
 =======
 	hrtimer_get_res(CLOCK_MONOTONIC, &tp);
 
@@ -111,7 +117,11 @@ static int snd_card_pcsp_probe(int devnum, struct device *dev)
 	pcsp_chip.timer.function = pcsp_do_timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(dev, index, id, THIS_MODULE, 0, &card);
 >>>>>>> v3.18
@@ -137,8 +147,11 @@ static int snd_card_pcsp_probe(int devnum, struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(pcsp_chip.card, dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(card->driver, "PC-Speaker");
@@ -201,9 +214,14 @@ static int pcsp_remove(struct platform_device *dev)
 {
 	struct snd_pcsp *chip = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alsa_card_pcsp_exit(chip);
 	pcspkr_input_remove(chip->input_dev);
 	platform_set_drvdata(dev, NULL);
+=======
+	pcspkr_input_remove(chip->input_dev);
+	alsa_card_pcsp_exit(chip);
+>>>>>>> v3.18
 =======
 	pcspkr_input_remove(chip->input_dev);
 	alsa_card_pcsp_exit(chip);

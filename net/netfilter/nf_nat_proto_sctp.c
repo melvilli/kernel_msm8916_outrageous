@@ -35,9 +35,13 @@ sctp_manip_pkt(struct sk_buff *skb,
 	       enum nf_nat_manip_type maniptype)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *frag;
 	sctp_sctphdr_t *hdr;
 	__u32 crc32;
+=======
+	sctp_sctphdr_t *hdr;
+>>>>>>> v3.18
 =======
 	sctp_sctphdr_t *hdr;
 >>>>>>> v3.18
@@ -56,11 +60,15 @@ sctp_manip_pkt(struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crc32 = sctp_start_cksum((u8 *)hdr, skb_headlen(skb) - hdroff);
 	skb_walk_frags(skb, frag)
 		crc32 = sctp_update_cksum((u8 *)frag->data, skb_headlen(frag),
 					  crc32);
 	hdr->checksum = sctp_end_cksum(crc32);
+=======
+	hdr->checksum = sctp_compute_cksum(skb, hdroff);
+>>>>>>> v3.18
 =======
 	hdr->checksum = sctp_compute_cksum(skb, hdroff);
 >>>>>>> v3.18
@@ -74,7 +82,11 @@ static const struct nf_nat_l4proto nf_nat_l4proto_sctp = {
 	.in_range		= nf_nat_l4proto_in_range,
 	.unique_tuple		= sctp_unique_tuple,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 >>>>>>> v3.18

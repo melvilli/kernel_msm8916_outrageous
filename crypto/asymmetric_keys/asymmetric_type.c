@@ -16,6 +16,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ctype.h>
+>>>>>>> v3.18
 =======
 #include <linux/ctype.h>
 >>>>>>> v3.18
@@ -26,6 +30,7 @@ MODULE_LICENSE("GPL");
 static LIST_HEAD(asymmetric_key_parsers);
 static DECLARE_RWSEM(asymmetric_key_parsers_sem);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Match asymmetric keys on (part of) their name
@@ -83,6 +88,8 @@ static int asymmetric_key_match(const struct key *key, const void *description)
 		return 1;
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * asymmetric_key_generate_id: Construct an asymmetric key ID
  * @val_1: First binary blob
@@ -265,13 +272,19 @@ static int asymmetric_key_match_preparse(struct key_match_data *match_data)
 	return 0;
 
 default_match:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Free the preparsed the match criterion.
  */
 static void asymmetric_key_match_free(struct key_match_data *match_data)
@@ -280,6 +293,9 @@ static void asymmetric_key_match_free(struct key_match_data *match_data)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Describe the asymmetric key
  */
@@ -287,13 +303,19 @@ static void asymmetric_key_describe(const struct key *key, struct seq_file *m)
 {
 	const struct asymmetric_key_subtype *subtype = asymmetric_key_subtype(key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *kid = asymmetric_key_id(key);
 	size_t n;
 =======
+=======
+>>>>>>> v3.18
 	const struct asymmetric_key_ids *kids = asymmetric_key_ids(key);
 	const struct asymmetric_key_id *kid;
 	const unsigned char *p;
 	int n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	seq_puts(m, key->description);
@@ -303,6 +325,7 @@ static void asymmetric_key_describe(const struct key *key, struct seq_file *m)
 		subtype->describe(key, m);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (kid) {
 			seq_putc(m, ' ');
 			n = strlen(kid);
@@ -311,6 +334,8 @@ static void asymmetric_key_describe(const struct key *key, struct seq_file *m)
 			else
 				seq_puts(m, kid + n - 8);
 =======
+=======
+>>>>>>> v3.18
 		if (kids && kids->id[1]) {
 			kid = kids->id[1];
 			seq_putc(m, ' ');
@@ -321,6 +346,9 @@ static void asymmetric_key_describe(const struct key *key, struct seq_file *m)
 				n = 4;
 			}
 			seq_printf(m, "%*phN", n, p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -373,6 +401,11 @@ static void asymmetric_key_free_preparse(struct key_preparsed_payload *prep)
 {
 	struct asymmetric_key_subtype *subtype = prep->type_data[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct asymmetric_key_ids *kids = prep->type_data[1];
+	int i;
+>>>>>>> v3.18
 =======
 	struct asymmetric_key_ids *kids = prep->type_data[1];
 	int i;
@@ -381,6 +414,7 @@ static void asymmetric_key_free_preparse(struct key_preparsed_payload *prep)
 	pr_devel("==>%s()\n", __func__);
 
 	if (subtype) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		subtype->destroy(prep->payload);
 		module_put(subtype->owner);
@@ -411,6 +445,8 @@ static int asymmetric_key_instantiate(struct key *key, struct key_preparsed_payl
 	pr_devel("<==%s() = %d\n", __func__, ret);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		subtype->destroy(prep->payload[0]);
 		module_put(subtype->owner);
 	}
@@ -420,6 +456,9 @@ static int asymmetric_key_instantiate(struct key *key, struct key_preparsed_payl
 		kfree(kids);
 	}
 	kfree(prep->description);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -430,6 +469,11 @@ static void asymmetric_key_destroy(struct key *key)
 {
 	struct asymmetric_key_subtype *subtype = asymmetric_key_subtype(key);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct asymmetric_key_ids *kids = key->type_data.p[1];
+
+>>>>>>> v3.18
 =======
 	struct asymmetric_key_ids *kids = key->type_data.p[1];
 
@@ -440,9 +484,12 @@ static void asymmetric_key_destroy(struct key *key)
 		key->type_data.p[0] = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(key->type_data.p[1]);
 	key->type_data.p[1] = NULL;
 =======
+=======
+>>>>>>> v3.18
 
 	if (kids) {
 		kfree(kids->id[0]);
@@ -450,6 +497,9 @@ static void asymmetric_key_destroy(struct key *key)
 		kfree(kids);
 		key->type_data.p[1] = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -458,8 +508,14 @@ struct key_type key_type_asymmetric = {
 	.preparse	= asymmetric_key_preparse,
 	.free_preparse	= asymmetric_key_free_preparse,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.instantiate	= asymmetric_key_instantiate,
 	.match		= asymmetric_key_match,
+=======
+	.instantiate	= generic_key_instantiate,
+	.match_preparse	= asymmetric_key_match_preparse,
+	.match_free	= asymmetric_key_match_free,
+>>>>>>> v3.18
 =======
 	.instantiate	= generic_key_instantiate,
 	.match_preparse	= asymmetric_key_match_preparse,

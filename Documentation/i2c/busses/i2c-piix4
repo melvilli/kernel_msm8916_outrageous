@@ -14,7 +14,11 @@ Supported adapters:
     Datasheet: Publicly available at the AMD website
     http://support.amd.com/us/Embedded_TechDocs/44413.pdf
 <<<<<<< HEAD
+<<<<<<< HEAD
   * AMD Hudson-2, CZ
+=======
+  * AMD Hudson-2, ML, CZ
+>>>>>>> v3.18
 =======
   * AMD Hudson-2, ML, CZ
 >>>>>>> v3.18
@@ -78,14 +82,20 @@ The ServerWorks Southbridges, the Intel 440MX, and the Victory66 are
 identical to the PIIX4 in I2C/SMBus support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The AMD SB700 and SP5100 chipsets implement two PIIX4-compatible SMBus
 controllers. If your BIOS initializes the secondary controller, it will
 be detected by this driver as an "Auxiliary SMBus Host Controller".
 =======
+=======
+>>>>>>> v3.18
 The AMD SB700, SB800, SP5100 and Hudson-2 chipsets implement two
 PIIX4-compatible SMBus controllers. If your BIOS initializes the
 secondary controller, it will be detected by this driver as
 an "Auxiliary SMBus Host Controller".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If you own Force CPCI735 motherboard or other OSB4 based systems you may need

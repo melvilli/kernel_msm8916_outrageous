@@ -42,7 +42,11 @@
 #include "cow.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum ubd_req { UBD_READ, UBD_WRITE };
+=======
+enum ubd_req { UBD_READ, UBD_WRITE, UBD_FLUSH };
+>>>>>>> v3.18
 =======
 enum ubd_req { UBD_READ, UBD_WRITE, UBD_FLUSH };
 >>>>>>> v3.18
@@ -871,6 +875,10 @@ static int ubd_add(int n, char **error_out)
 	}
 	ubd_dev->queue->queuedata = ubd_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	blk_queue_flush(ubd_dev->queue, REQ_FLUSH);
+>>>>>>> v3.18
 =======
 	blk_queue_flush(ubd_dev->queue, REQ_FLUSH);
 >>>>>>> v3.18
@@ -1248,7 +1256,10 @@ static void prepare_request(struct request *req, struct io_thread_req *io_req,
 
 /* Called with dev->lock held */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void prepare_flush_request(struct request *req,
 				  struct io_thread_req *io_req)
 {
@@ -1279,11 +1290,15 @@ static bool submit_request(struct io_thread_req *io_req, struct ubd *dev)
 }
 
 /* Called with dev->lock held */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void do_ubd_request(struct request_queue *q)
 {
 	struct io_thread_req *io_req;
 	struct request *req;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int n;
 
@@ -1291,10 +1306,15 @@ static void do_ubd_request(struct request_queue *q)
 		struct ubd *dev = q->queuedata;
 		if(dev->end_sg == 0){
 =======
+=======
+>>>>>>> v3.18
 
 	while(1){
 		struct ubd *dev = q->queuedata;
 		if(dev->request == NULL){
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct request *req = blk_fetch_request(q);
 			if(req == NULL)
@@ -1308,7 +1328,10 @@ static void do_ubd_request(struct request_queue *q)
 
 		req = dev->request;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (req->cmd_flags & REQ_FLUSH) {
 			io_req = kmalloc(sizeof(struct io_thread_req),
@@ -1323,6 +1346,9 @@ static void do_ubd_request(struct request_queue *q)
 				return;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		while(dev->start_sg < dev->end_sg){
 			struct scatterlist *sg = &dev->sg[dev->start_sg];
@@ -1339,6 +1365,7 @@ static void do_ubd_request(struct request_queue *q)
 					sg->offset, sg->length, sg_page(sg));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			n = os_write_file(thread_fd, &io_req,
 					  sizeof(struct io_thread_req *));
 			if(n != sizeof(struct io_thread_req *)){
@@ -1350,6 +1377,10 @@ static void do_ubd_request(struct request_queue *q)
 				kfree(io_req);
 				return;
 			}
+=======
+			if (submit_request(io_req, dev) == false)
+				return;
+>>>>>>> v3.18
 =======
 			if (submit_request(io_req, dev) == false)
 				return;
@@ -1438,7 +1469,10 @@ static void do_io(struct io_thread_req *req)
 	__u64 off;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (req->op == UBD_FLUSH) {
 		/* fds[0] is always either the rw image or our cow file */
 		n = os_sync_file(req->fds[0]);
@@ -1450,6 +1484,9 @@ static void do_io(struct io_thread_req *req)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nsectors = req->length / req->sectorsize;
 	start = 0;
@@ -1516,7 +1553,12 @@ int io_thread(void *arg)
 	int n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ignore_sigwinch_sig();
+=======
+	os_fix_helper_signals();
+
+>>>>>>> v3.18
 =======
 	os_fix_helper_signals();
 

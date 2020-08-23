@@ -330,8 +330,11 @@ static int  da9052_ts_remove(struct platform_device *pdev)
 	kfree(tsi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

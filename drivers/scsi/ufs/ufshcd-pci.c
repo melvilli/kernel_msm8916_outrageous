@@ -34,7 +34,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/scsi/ufs/ufshcd.h>
+=======
+#include "ufshcd.h"
+>>>>>>> v3.18
 =======
 #include "ufshcd.h"
 >>>>>>> v3.18
@@ -112,8 +116,11 @@ static void ufshcd_pci_remove(struct pci_dev *pdev)
 	pm_runtime_get_noresume(&pdev->dev);
 	ufshcd_remove(hba);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ufshcd_dealloc_host(hba);
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -160,7 +167,10 @@ ufshcd_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	if (err) {
 		dev_err(&pdev->dev, "Initialization failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ufshcd_dealloc_host(hba);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -182,7 +192,11 @@ static const struct dev_pm_ops ufshcd_pci_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ufshcd_pci_tbl) = {
+=======
+static const struct pci_device_id ufshcd_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ufshcd_pci_tbl[] = {
 >>>>>>> v3.18

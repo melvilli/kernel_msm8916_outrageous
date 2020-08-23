@@ -16,7 +16,10 @@
 #include <linux/etherdevice.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/if_vlan.h>
 
 #if IS_ENABLED(CONFIG_IPV6)
@@ -25,6 +28,9 @@
 
 #include <net/icmp.h>
 #include <net/route.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/vio.h>
@@ -44,9 +50,12 @@ MODULE_LICENSE("GPL");
 MODULE_VERSION(DRV_MODULE_VERSION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Ordered from largest major to lowest */
 static struct vio_version vnet_versions[] = {
 =======
+=======
+>>>>>>> v3.18
 /* Heuristic for the number of times to exponentially backoff and
  * retry sending an LDC trigger when EAGAIN is encountered
  */
@@ -57,6 +66,9 @@ static int __vnet_tx_trigger(struct vnet_port *port, u32 start);
 /* Ordered from largest major to lowest */
 static struct vio_version vnet_versions[] = {
 	{ .major = 1, .minor = 6 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .major = 1, .minor = 0 },
 };
@@ -85,6 +97,10 @@ static int vnet_send_attr(struct vio_driver_state *vio)
 	struct net_device *dev = port->vp->dev;
 	struct vio_net_attr_info pkt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int framelen = ETH_FRAME_LEN;
+>>>>>>> v3.18
 =======
 	int framelen = ETH_FRAME_LEN;
 >>>>>>> v3.18
@@ -96,17 +112,24 @@ static int vnet_send_attr(struct vio_driver_state *vio)
 	pkt.tag.stype_env = VIO_ATTR_INFO;
 	pkt.tag.sid = vio_send_sid(vio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pkt.xfer_mode = VIO_DRING_MODE;
 =======
+=======
+>>>>>>> v3.18
 	if (vio_version_before(vio, 1, 2))
 		pkt.xfer_mode = VIO_DRING_MODE;
 	else
 		pkt.xfer_mode = VIO_NEW_DRING_MODE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pkt.addr_type = VNET_ADDR_ETHERMAC;
 	pkt.ack_freq = 0;
 	for (i = 0; i < 6; i++)
 		pkt.addr |= (u64)dev->dev_addr[i] << ((5 - i) * 8);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pkt.mtu = ETH_FRAME_LEN;
 
@@ -117,6 +140,8 @@ static int vnet_send_attr(struct vio_driver_state *vio)
 	       pkt.ack_freq,
 	       (unsigned long long) pkt.mtu);
 =======
+=======
+>>>>>>> v3.18
 	if (vio_version_after(vio, 1, 3)) {
 		if (port->rmtu) {
 			port->rmtu = min(VNET_MAXPACKET, port->rmtu);
@@ -144,6 +169,9 @@ static int vnet_send_attr(struct vio_driver_state *vio)
 	       pkt.ack_freq, pkt.plnk_updt, pkt.options,
 	       (unsigned long long)pkt.mtu, pkt.cflags, pkt.ipv4_lso_maxlen);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return vio_ldc_send(vio, &pkt, sizeof(pkt));
@@ -152,6 +180,7 @@ static int vnet_send_attr(struct vio_driver_state *vio)
 static int handle_attr_info(struct vio_driver_state *vio,
 			    struct vio_net_attr_info *pkt)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	viodbg(HS, "GOT NET ATTR INFO xmode[0x%x] atype[0x%x] addr[%llx] "
 	       "ackfreq[%u] mtu[%llu]\n",
@@ -166,6 +195,8 @@ static int handle_attr_info(struct vio_driver_state *vio,
 	    pkt->addr_type != VNET_ADDR_ETHERMAC ||
 	    pkt->mtu != ETH_FRAME_LEN) {
 =======
+=======
+>>>>>>> v3.18
 	struct vnet_port *port = to_vnet_port(vio);
 	u64	localmtu;
 	u8	xfer_mode;
@@ -212,6 +243,9 @@ static int handle_attr_info(struct vio_driver_state *vio,
 	if (!(xfer_mode | VIO_NEW_DRING_MODE) ||
 	    pkt->addr_type != VNET_ADDR_ETHERMAC ||
 	    pkt->mtu != localmtu) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		viodbg(HS, "SEND NET ATTR NACK\n");
 
@@ -222,8 +256,11 @@ static int handle_attr_info(struct vio_driver_state *vio,
 		return -ECONNRESET;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		viodbg(HS, "SEND NET ATTR ACK\n");
 =======
+=======
+>>>>>>> v3.18
 		viodbg(HS, "SEND NET ATTR ACK xmode[0x%x] atype[0x%x] "
 		       "addr[%llx] ackfreq[%u] plnk_updt[0x%02x] opts[0x%02x] "
 		       "mtu[%llu] (rmtu[%llu]) cflags[0x%04x] lso_max[%u]\n",
@@ -232,6 +269,9 @@ static int handle_attr_info(struct vio_driver_state *vio,
 		       pkt->ack_freq, pkt->plnk_updt, pkt->options,
 		       (unsigned long long)pkt->mtu, port->rmtu, pkt->cflags,
 		       pkt->ipv4_lso_maxlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		pkt->tag.stype = VIO_SUBTYPE_ACK;
@@ -329,7 +369,11 @@ static int vnet_rx_one(struct vnet_port *port, unsigned int len,
 
 	err = -EMSGSIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(len < ETH_ZLEN || len > ETH_FRAME_LEN)) {
+=======
+	if (unlikely(len < ETH_ZLEN || len > port->rmtu)) {
+>>>>>>> v3.18
 =======
 	if (unlikely(len < ETH_ZLEN || len > port->rmtu)) {
 >>>>>>> v3.18
@@ -390,6 +434,10 @@ static int vnet_send_ack(struct vnet_port *port, struct vio_dring_state *dr,
 	};
 	int err, delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int retries = 0;
+>>>>>>> v3.18
 =======
 	int retries = 0;
 >>>>>>> v3.18
@@ -406,9 +454,12 @@ static int vnet_send_ack(struct vnet_port *port, struct vio_dring_state *dr,
 		if ((delay <<= 1) > 128)
 			delay = 128;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (err == -EAGAIN);
 
 =======
+=======
+>>>>>>> v3.18
 		if (retries++ > VNET_MAX_RETRIES) {
 			pr_info("ECONNRESET %x:%x:%x:%x:%x:%x\n",
 				port->raddr[0], port->raddr[1],
@@ -426,6 +477,9 @@ static int vnet_send_ack(struct vnet_port *port, struct vio_dring_state *dr,
 		port->stop_rx = false;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -491,12 +545,18 @@ static int vnet_walk_rx_one(struct vnet_port *port,
 		return PTR_ERR(desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (desc->hdr.state != VIO_DESC_READY)
 		return 1;
 
 	rmb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	viodbg(DATA, "vio_walk_rx_one desc[%02x:%02x:%08x:%08x:%llx:%llx]\n",
 	       desc->hdr.state, desc->hdr.ack,
@@ -505,8 +565,11 @@ static int vnet_walk_rx_one(struct vnet_port *port,
 	       desc->cookies[0].cookie_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (desc->hdr.state != VIO_DESC_READY)
 		return 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = vnet_rx_one(port, desc->size, desc->cookies, desc->ncookies);
@@ -600,7 +663,11 @@ static int vnet_ack(struct vnet_port *port, void *msgbuf)
 	struct vnet *vp;
 	u32 end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct vio_net_desc *desc;
+>>>>>>> v3.18
 =======
 	struct vio_net_desc *desc;
 >>>>>>> v3.18
@@ -612,8 +679,11 @@ static int vnet_ack(struct vnet_port *port, void *msgbuf)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dr->cons = next_idx(end, dr);
 =======
+=======
+>>>>>>> v3.18
 	/* sync for race conditions with vnet_start_xmit() and tell xmit it
 	 * is time to send a trigger.
 	 */
@@ -632,6 +702,9 @@ static int vnet_ack(struct vnet_port *port, void *msgbuf)
 		port->start_cons = true;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	vp = port->vp;
@@ -665,8 +738,14 @@ static int handle_mcast(struct vnet_port *port, void *msgbuf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void maybe_tx_wakeup(struct vnet *vp)
 {
+=======
+static void maybe_tx_wakeup(unsigned long param)
+{
+	struct vnet *vp = (struct vnet *)param;
+>>>>>>> v3.18
 =======
 static void maybe_tx_wakeup(unsigned long param)
 {
@@ -710,20 +789,30 @@ static void vnet_event(void *arg, int event)
 		spin_unlock_irqrestore(&vio->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (event == LDC_EVENT_RESET)
 			vio_port_up(vio);
 =======
+=======
+>>>>>>> v3.18
 		if (event == LDC_EVENT_RESET) {
 			port->rmtu = 0;
 			vio_port_up(vio);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 
 	if (unlikely(event != LDC_EVENT_DATA_READY)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Unexpected LDC event %d\n", event);
+=======
+		pr_warn("Unexpected LDC event %d\n", event);
+>>>>>>> v3.18
 =======
 		pr_warn("Unexpected LDC event %d\n", event);
 >>>>>>> v3.18
@@ -780,6 +869,7 @@ static void vnet_event(void *arg, int event)
 	}
 	spin_unlock(&vio->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(tx_wakeup && err != -ECONNRESET))
 		maybe_tx_wakeup(port->vp);
 	local_irq_restore(flags);
@@ -787,6 +877,8 @@ static void vnet_event(void *arg, int event)
 
 static int __vnet_tx_trigger(struct vnet_port *port)
 =======
+=======
+>>>>>>> v3.18
 	/* Kick off a tasklet to wake the queue.  We cannot call
 	 * maybe_tx_wakeup directly here because we could deadlock on
 	 * netif_tx_lock() with dev_watchdog()
@@ -798,6 +890,9 @@ static int __vnet_tx_trigger(struct vnet_port *port)
 }
 
 static int __vnet_tx_trigger(struct vnet_port *port, u32 start)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct vio_dring_state *dr = &port->vio.drings[VIO_DRIVER_TX_RING];
@@ -810,11 +905,14 @@ static int __vnet_tx_trigger(struct vnet_port *port, u32 start)
 		},
 		.dring_ident		= dr->ident,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.start_idx		= dr->prod,
 		.end_idx		= (u32) -1,
 	};
 	int err, delay;
 =======
+=======
+>>>>>>> v3.18
 		.start_idx		= start,
 		.end_idx		= (u32) -1,
 	};
@@ -829,6 +927,9 @@ static int __vnet_tx_trigger(struct vnet_port *port, u32 start)
 		if (err <= 0)
 			return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdr.seq = dr->snd_nxt;
@@ -843,6 +944,11 @@ static int __vnet_tx_trigger(struct vnet_port *port, u32 start)
 		if ((delay <<= 1) > 128)
 			delay = 128;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (retries++ > VNET_MAX_RETRIES)
+			break;
+>>>>>>> v3.18
 =======
 		if (retries++ > VNET_MAX_RETRIES)
 			break;
@@ -853,7 +959,10 @@ static int __vnet_tx_trigger(struct vnet_port *port, u32 start)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool port_is_up(struct vnet_port *vnet)
 {
 	struct vio_driver_state *vio = &vnet->vio;
@@ -861,6 +970,9 @@ static inline bool port_is_up(struct vnet_port *vnet)
 	return !!(vio->hs_state & VIO_HS_COMPLETE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct vnet_port *__tx_port_find(struct vnet *vp, struct sk_buff *skb)
 {
@@ -869,6 +981,7 @@ struct vnet_port *__tx_port_find(struct vnet *vp, struct sk_buff *skb)
 	struct vnet_port *port;
 
 	hlist_for_each_entry(port, hp, hash) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ether_addr_equal(port->raddr, skb->data))
 			return port;
@@ -879,6 +992,8 @@ struct vnet_port *__tx_port_find(struct vnet *vp, struct sk_buff *skb)
 
 	return port;
 =======
+=======
+>>>>>>> v3.18
 		if (!port_is_up(port))
 			continue;
 		if (ether_addr_equal(port->raddr, skb->data))
@@ -892,6 +1007,9 @@ struct vnet_port *__tx_port_find(struct vnet *vp, struct sk_buff *skb)
 		return port;
 	}
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -908,7 +1026,10 @@ struct vnet_port *tx_port_find(struct vnet *vp, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct sk_buff *vnet_clean_tx_ring(struct vnet_port *port,
 					  unsigned *pending)
 {
@@ -1020,6 +1141,9 @@ static inline struct sk_buff *vnet_skb_shape(struct sk_buff *skb, void **pstart,
 	return skb;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 {
@@ -1030,21 +1154,30 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	unsigned long flags;
 	unsigned int len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *tx_buf;
 	int i, err;
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *freeskbs = NULL;
 	int i, err, txi;
 	void *start = NULL;
 	int nlen = 0;
 	unsigned pending = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(!port))
 		goto out_dropped;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	skb = vnet_skb_shape(skb, &start, &nlen);
 
 	if (unlikely(!skb))
@@ -1081,6 +1214,9 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		goto out_dropped;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&port->vio.lock, flags);
 
@@ -1100,6 +1236,7 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	d = vio_dring_cur(dr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_buf = port->tx_bufs[dr->prod].buf;
 	skb_copy_from_linear_data(skb, tx_buf + VNET_PACKET_SKIP, skb->len);
 
@@ -1115,6 +1252,8 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	for (i = 0; i < d->ncookies; i++)
 		d->cookies[i] = port->tx_bufs[dr->prod].cookies[i];
 =======
+=======
+>>>>>>> v3.18
 	txi = dr->prod;
 
 	freeskbs = vnet_clean_tx_ring(port, &pending);
@@ -1150,6 +1289,9 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	d->ncookies = port->tx_bufs[txi].ncookies;
 	for (i = 0; i < d->ncookies; i++)
 		d->cookies[i] = port->tx_bufs[txi].cookies[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* This has to be a non-SMP write barrier because we are writing
@@ -1160,8 +1302,11 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	d->hdr.state = VIO_DESC_READY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __vnet_tx_trigger(port);
 =======
+=======
+>>>>>>> v3.18
 	/* Exactly one ldc "start" trigger (for dr->cons) needs to be sent
 	 * to notify the consumer that some descriptors are READY.
 	 * After that "start" trigger, no additional triggers are needed until
@@ -1186,6 +1331,9 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		goto ldc_start_done; /* previous trigger suffices */
 
 	err = __vnet_tx_trigger(port, dr->cons);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(err < 0)) {
 		netdev_info(dev, "TX trigger error %d\n", err);
@@ -1195,14 +1343,20 @@ static int vnet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->stats.tx_packets++;
 	dev->stats.tx_bytes += skb->len;
 =======
+=======
+>>>>>>> v3.18
 ldc_start_done:
 	port->start_cons = false;
 
 	dev->stats.tx_packets++;
 	dev->stats.tx_bytes += port->tx_bufs[txi].skb->len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dr->prod = (dr->prod + 1) & (VNET_TX_RING_SIZE - 1);
@@ -1215,7 +1369,13 @@ ldc_start_done:
 	spin_unlock_irqrestore(&port->vio.lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	vnet_free_skbs(freeskbs);
+
+	(void)mod_timer(&port->clean_timer, jiffies + VNET_CLEAN_TIMEOUT);
+>>>>>>> v3.18
 =======
 	vnet_free_skbs(freeskbs);
 
@@ -1229,8 +1389,11 @@ out_dropped_unlock:
 
 out_dropped:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 	if (skb)
 		dev_kfree_skb(skb);
 	vnet_free_skbs(freeskbs);
@@ -1239,6 +1402,9 @@ out_dropped:
 				jiffies + VNET_CLEAN_TIMEOUT);
 	else if (port)
 		del_timer(&port->clean_timer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->stats.tx_dropped++;
 	return NETDEV_TX_OK;
@@ -1271,7 +1437,11 @@ static struct vnet_mcast_entry *__vnet_mc_find(struct vnet *vp, u8 *addr)
 
 	for (m = vp->mcast_list; m; m = m->next) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!memcmp(m->addr, addr, ETH_ALEN))
+=======
+		if (ether_addr_equal(m->addr, addr))
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(m->addr, addr))
 >>>>>>> v3.18
@@ -1390,7 +1560,11 @@ static void vnet_set_rx_mode(struct net_device *dev)
 static int vnet_change_mtu(struct net_device *dev, int new_mtu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_mtu != ETH_DATA_LEN)
+=======
+	if (new_mtu < 68 || new_mtu > 65535)
+>>>>>>> v3.18
 =======
 	if (new_mtu < 68 || new_mtu > 65535)
 >>>>>>> v3.18
@@ -1450,6 +1624,7 @@ static void vnet_port_free_tx_bufs(struct vnet_port *port)
 
 	for (i = 0; i < VNET_TX_RING_SIZE; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void *buf = port->tx_bufs[i].buf;
 
 		if (!buf)
@@ -1462,6 +1637,8 @@ static void vnet_port_free_tx_bufs(struct vnet_port *port)
 		kfree(buf);
 		port->tx_bufs[i].buf = NULL;
 =======
+=======
+>>>>>>> v3.18
 		struct vio_net_desc *d;
 		void *skb = port->tx_bufs[i].skb;
 
@@ -1478,6 +1655,9 @@ static void vnet_port_free_tx_bufs(struct vnet_port *port)
 		dev_kfree_skb(skb);
 		port->tx_bufs[i].skb = NULL;
 		d->hdr.state = VIO_DESC_FREE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1489,6 +1669,7 @@ static int vnet_port_alloc_tx_bufs(struct vnet_port *port)
 	int i, err, ncookies;
 	void *dring;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < VNET_TX_RING_SIZE; i++) {
 		void *buf = kzalloc(ETH_FRAME_LEN + 8, GFP_KERNEL);
@@ -1520,6 +1701,8 @@ static int vnet_port_alloc_tx_bufs(struct vnet_port *port)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	dr = &port->vio.drings[VIO_DRIVER_TX_RING];
 
 	len = (VNET_TX_RING_SIZE *
@@ -1543,10 +1726,13 @@ static int vnet_port_alloc_tx_bufs(struct vnet_port *port)
 	dr->num_entries = VNET_TX_RING_SIZE;
 	dr->prod = dr->cons = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dr->pending = VNET_TX_RING_SIZE;
 	dr->ncookies = ncookies;
 
 =======
+=======
+>>>>>>> v3.18
 	port->start_cons  = true; /* need an initial trigger */
 	dr->pending = VNET_TX_RING_SIZE;
 	dr->ncookies = ncookies;
@@ -1557,6 +1743,9 @@ static int vnet_port_alloc_tx_bufs(struct vnet_port *port)
 		d = vio_dring_entry(dr, i);
 		d->hdr.state = VIO_DESC_FREE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1590,6 +1779,11 @@ static struct vnet *vnet_new(const u64 *local_mac)
 	if (!dev)
 		return ERR_PTR(-ENOMEM);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->needed_headroom = VNET_PACKET_SKIP + 8;
+	dev->needed_tailroom = 8;
+>>>>>>> v3.18
 =======
 	dev->needed_headroom = VNET_PACKET_SKIP + 8;
 	dev->needed_tailroom = 8;
@@ -1602,6 +1796,10 @@ static struct vnet *vnet_new(const u64 *local_mac)
 
 	spin_lock_init(&vp->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tasklet_init(&vp->vnet_tx_wakeup, maybe_tx_wakeup, (unsigned long)vp);
+>>>>>>> v3.18
 =======
 	tasklet_init(&vp->vnet_tx_wakeup, maybe_tx_wakeup, (unsigned long)vp);
 >>>>>>> v3.18
@@ -1665,6 +1863,10 @@ static void vnet_cleanup(void)
 		list_del(&vp->list);
 		dev = vp->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tasklet_kill(&vp->vnet_tx_wakeup);
+>>>>>>> v3.18
 =======
 		tasklet_kill(&vp->vnet_tx_wakeup);
 >>>>>>> v3.18
@@ -1795,6 +1997,12 @@ static int vnet_port_probe(struct vio_dev *vdev, const struct vio_device_id *id)
 		vp->dev->name, port->raddr, switch_port ? " switch-port" : "");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setup_timer(&port->clean_timer, vnet_clean_timer_expire,
+		    (unsigned long)port);
+
+>>>>>>> v3.18
 =======
 	setup_timer(&port->clean_timer, vnet_clean_timer_expire,
 		    (unsigned long)port);
@@ -1827,6 +2035,10 @@ static int vnet_port_remove(struct vio_dev *vdev)
 
 		del_timer_sync(&port->vio.timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		del_timer_sync(&port->clean_timer);
+>>>>>>> v3.18
 =======
 		del_timer_sync(&port->clean_timer);
 >>>>>>> v3.18

@@ -20,8 +20,11 @@
 #define AT_SYSINFO_EHDR	33
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AT_VECTOR_SIZE_ARCH 1 /* entries in ARCH_DLINFO */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

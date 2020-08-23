@@ -1,8 +1,14 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 /include/ "kirkwood-98dx4122.dtsi"
+=======
+#include "kirkwood.dtsi"
+#include "kirkwood-98dx4122.dtsi"
+#include "kirkwood-km_common.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood.dtsi"
 #include "kirkwood-98dx4122.dtsi"
@@ -17,6 +23,7 @@
 		device_type = "memory";
 		reg = <0x00000000 0x08000000>;
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	chosen {
@@ -49,6 +56,8 @@
 			chip-delay = <25>;
 		};
 =======
+=======
+>>>>>>> v3.18
 };
 
 &mdio {
@@ -63,6 +72,9 @@
 	status = "okay";
 	ethernet0-port@0 {
 		phy-handle = <&ethphy0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

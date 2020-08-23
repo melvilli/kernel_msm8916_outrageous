@@ -15,6 +15,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/dma/at91.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/dma/at91.h>
 >>>>>>> v3.18
@@ -59,6 +63,10 @@ MODULE_PARM_DESC(init_nr_desc_per_channel,
 /* prototypes */
 static dma_cookie_t atc_tx_submit(struct dma_async_tx_descriptor *tx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void atc_issue_pending(struct dma_chan *chan);
+>>>>>>> v3.18
 =======
 static void atc_issue_pending(struct dma_chan *chan);
 >>>>>>> v3.18
@@ -239,7 +247,10 @@ static void atc_dostart(struct at_dma_chan *atchan, struct at_desc *first)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * atc_get_current_descriptors -
  * locate the descriptor which equal to physical address in DSCR
@@ -331,6 +342,9 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * atc_chain_complete - finish work for one transaction chain
@@ -355,6 +369,7 @@ atc_chain_complete(struct at_dma_chan *atchan, struct at_desc *desc)
 	/* move myself to free_list */
 	list_move(&desc->desc_node, &atchan->free_list);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* unmap dma addresses (not on slave channels) */
 	if (!atchan->chan_common.private) {
@@ -381,6 +396,9 @@ atc_chain_complete(struct at_dma_chan *atchan, struct at_desc *desc)
 		}
 	}
 
+=======
+	dma_descriptor_unmap(txd);
+>>>>>>> v3.18
 =======
 	dma_descriptor_unmap(txd);
 >>>>>>> v3.18
@@ -434,6 +452,7 @@ static void atc_complete_all(struct at_dma_chan *atchan)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * atc_cleanup_descriptors - cleanup up finished descriptors in active_list
  * @atchan: channel to be cleaned up
  *
@@ -465,6 +484,8 @@ static void atc_cleanup_descriptors(struct at_dma_chan *atchan)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * atc_advance_work - at the end of a transaction, move forward
@@ -606,6 +627,11 @@ static irqreturn_t at_dma_interrupt(int irq, void *dev_id)
 					set_bit(ATC_IS_ERROR, &atchan->status);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				if (pending & AT_DMA_BTC(i))
+					set_bit(ATC_IS_BTC, &atchan->status);
+>>>>>>> v3.18
 =======
 				if (pending & AT_DMA_BTC(i))
 					set_bit(ATC_IS_BTC, &atchan->status);
@@ -730,6 +756,10 @@ atc_prep_dma_memcpy(struct dma_chan *chan, dma_addr_t dest, dma_addr_t src,
 	first->txd.cookie = -EBUSY;
 	first->len = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	first->tx_width = src_width;
+>>>>>>> v3.18
 =======
 	first->tx_width = src_width;
 >>>>>>> v3.18
@@ -880,6 +910,10 @@ atc_prep_slave_sg(struct dma_chan *chan, struct scatterlist *sgl,
 	first->txd.cookie = -EBUSY;
 	first->len = total_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	first->tx_width = reg_width;
+>>>>>>> v3.18
 =======
 	first->tx_width = reg_width;
 >>>>>>> v3.18
@@ -976,7 +1010,10 @@ atc_dma_cyclic_fill_desc(struct dma_chan *chan, struct at_desc *desc,
  * @direction: transfer direction, to or from device
  * @flags: tx descriptor status flags
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @context: transfer context (ignored)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -984,7 +1021,11 @@ static struct dma_async_tx_descriptor *
 atc_prep_dma_cyclic(struct dma_chan *chan, dma_addr_t buf_addr, size_t buf_len,
 		size_t period_len, enum dma_transfer_direction direction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long flags, void *context)
+=======
+		unsigned long flags)
+>>>>>>> v3.18
 =======
 		unsigned long flags)
 >>>>>>> v3.18
@@ -1049,6 +1090,10 @@ atc_prep_dma_cyclic(struct dma_chan *chan, dma_addr_t buf_addr, size_t buf_len,
 	first->txd.cookie = -EBUSY;
 	first->len = buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	first->tx_width = reg_width;
+>>>>>>> v3.18
 =======
 	first->tx_width = reg_width;
 >>>>>>> v3.18
@@ -1166,6 +1211,7 @@ atc_tx_status(struct dma_chan *chan,
 {
 	struct at_dma_chan	*atchan = to_at_dma_chan(chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_cookie_t		last_used;
 	dma_cookie_t		last_complete;
 	unsigned long		flags;
@@ -1195,6 +1241,8 @@ atc_tx_status(struct dma_chan *chan,
 		 ret, cookie, last_complete ? last_complete : 0,
 		 last_used ? last_used : 0);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		flags;
 	enum dma_status		ret;
 	int bytes = 0;
@@ -1225,6 +1273,9 @@ atc_tx_status(struct dma_chan *chan,
 
 	dev_vdbg(chan2dev(chan), "tx_status %d: cookie = %d residue = %d\n",
 		 ret, cookie, bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1287,7 +1338,11 @@ static int atc_alloc_chan_resources(struct dma_chan *chan)
 		BUG_ON(!atslave->dma_dev || atslave->dma_dev != atdma->dma_common.dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* if cfg configuration specified take it instad of default */
+=======
+		/* if cfg configuration specified take it instead of default */
+>>>>>>> v3.18
 =======
 		/* if cfg configuration specified take it instead of default */
 >>>>>>> v3.18
@@ -1314,6 +1369,10 @@ static int atc_alloc_chan_resources(struct dma_chan *chan)
 	spin_lock_irqsave(&atchan->lock, flags);
 	atchan->descs_allocated = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atchan->remain_desc = 0;
+>>>>>>> v3.18
 =======
 	atchan->remain_desc = 0;
 >>>>>>> v3.18
@@ -1360,6 +1419,10 @@ static void atc_free_chan_resources(struct dma_chan *chan)
 	atchan->descs_allocated = 0;
 	atchan->status = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atchan->remain_desc = 0;
+>>>>>>> v3.18
 =======
 	atchan->remain_desc = 0;
 >>>>>>> v3.18
@@ -1402,6 +1465,11 @@ static struct dma_chan *at_dma_xlate(struct of_phandle_args *dma_spec,
 	if (!atslave)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	atslave->cfg = ATC_DST_H2SEL_HW | ATC_SRC_H2SEL_HW;
+>>>>>>> v3.18
 =======
 
 	atslave->cfg = ATC_DST_H2SEL_HW | ATC_SRC_H2SEL_HW;
@@ -1411,11 +1479,14 @@ static struct dma_chan *at_dma_xlate(struct of_phandle_args *dma_spec,
 	 * ignored depending on DMA transfer direction.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	per_id = dma_spec->args[1];
 	atslave->cfg = ATC_FIFOCFG_HALFFIFO | ATC_DST_H2SEL_HW
 		      | ATC_SRC_H2SEL_HW | ATC_DST_PER(per_id)
 		      | ATC_SRC_PER(per_id);
 =======
+=======
+>>>>>>> v3.18
 	per_id = dma_spec->args[1] & AT91_DMA_CFG_PER_ID_MASK;
 	atslave->cfg |= ATC_DST_PER_MSB(per_id) | ATC_DST_PER(per_id)
 		     | ATC_SRC_PER_MSB(per_id) | ATC_SRC_PER(per_id);
@@ -1435,6 +1506,9 @@ static struct dma_chan *at_dma_xlate(struct of_phandle_args *dma_spec,
 	default:
 		atslave->cfg |= ATC_FIFOCFG_HALFFIFO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atslave->dma_dev = &dmac_pdev->dev;
 
@@ -1580,7 +1654,13 @@ static int __init at_dma_probe(struct platform_device *pdev)
 		goto err_clk;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(atdma->clk);
+=======
+	err = clk_prepare_enable(atdma->clk);
+	if (err)
+		goto err_clk_prepare;
+>>>>>>> v3.18
 =======
 	err = clk_prepare_enable(atdma->clk);
 	if (err)
@@ -1684,15 +1764,21 @@ err_of_dma_controller_register:
 	dma_pool_destroy(atdma->dma_desc_pool);
 err_pool_create:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	free_irq(platform_get_irq(pdev, 0), atdma);
 err_irq:
 	clk_disable(atdma->clk);
 =======
+=======
+>>>>>>> v3.18
 	free_irq(platform_get_irq(pdev, 0), atdma);
 err_irq:
 	clk_disable_unprepare(atdma->clk);
 err_clk_prepare:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_put(atdma->clk);
 err_clk:
@@ -1716,7 +1802,10 @@ static int at_dma_remove(struct platform_device *pdev)
 
 	dma_pool_destroy(atdma->dma_desc_pool);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_irq(platform_get_irq(pdev, 0), atdma);
@@ -1728,7 +1817,10 @@ static int at_dma_remove(struct platform_device *pdev)
 		/* Disable interrupts */
 		atc_disable_chan_irq(atdma, chan->chan_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tasklet_disable(&atchan->tasklet);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1737,7 +1829,11 @@ static int at_dma_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(atdma->clk);
+=======
+	clk_disable_unprepare(atdma->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(atdma->clk);
 >>>>>>> v3.18
@@ -1760,7 +1856,11 @@ static void at_dma_shutdown(struct platform_device *pdev)
 
 	at_dma_off(platform_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(atdma->clk);
+=======
+	clk_disable_unprepare(atdma->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(atdma->clk);
 >>>>>>> v3.18
@@ -1821,7 +1921,11 @@ static int at_dma_suspend_noirq(struct device *dev)
 	/* disable DMA controller */
 	at_dma_off(atdma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(atdma->clk);
+=======
+	clk_disable_unprepare(atdma->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(atdma->clk);
 >>>>>>> v3.18
@@ -1855,7 +1959,11 @@ static int at_dma_resume_noirq(struct device *dev)
 
 	/* bring back DMA controller */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(atdma->clk);
+=======
+	clk_prepare_enable(atdma->clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(atdma->clk);
 >>>>>>> v3.18

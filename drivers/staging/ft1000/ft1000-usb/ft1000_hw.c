@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //=====================================================
 // CopyRight (C) 2007 Qualcomm Inc. All Rights Reserved.
 //
@@ -9,12 +10,17 @@
 //====================================================
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
 /* CopyRight (C) 2007 Qualcomm Inc. All Rights Reserved.
 *
 *
 * This file is part of Express Card USB Driver
 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -37,6 +43,7 @@
 #define HARLEY_WRITE_OPERATION   0x41
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#define JDEBUG
 
 static int ft1000_reset(void *ft1000dev);
@@ -46,17 +53,23 @@ static int ft1000_open (struct net_device *dev);
 static struct net_device_stats *ft1000_netdev_stats(struct net_device *dev);
 static int ft1000_chkcard (struct ft1000_usb *dev);
 =======
+=======
+>>>>>>> v3.18
 #if 0
 #define JDEBUG
 #endif
 
 static int ft1000_submit_rx_urb(struct ft1000_info *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u8 tempbuffer[1600];
 
 #define MAX_RCV_LOOP   100
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_control
@@ -80,6 +93,8 @@ static u8 tempbuffer[1600];
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /* send a control message via USB interface synchronously
 *  Parameters:  ft1000_usb  - device structure
 *               pipe - usb control message pipe
@@ -91,13 +106,20 @@ static u8 tempbuffer[1600];
 *               size - data size
 *               timeout - control message time out value
 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_control(struct ft1000_usb *ft1000dev, unsigned int pipe,
 			  u8 request, u8 requesttype, u16 value, u16 index,
 			  void *data, u16 size, int timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 ret;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -116,6 +138,7 @@ static int ft1000_control(struct ft1000_usb *ft1000dev, unsigned int pipe,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_read_register
@@ -138,11 +161,16 @@ int ft1000_read_register(struct ft1000_usb *ft1000dev, u16* Data,
 {
 	int ret = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* returns the value in a register */
 int ft1000_read_register(struct ft1000_usb *ft1000dev, u16 *Data,
 			 u16 nRegIndx)
 {
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ft1000_control(ft1000dev,
@@ -158,6 +186,7 @@ int ft1000_read_register(struct ft1000_usb *ft1000dev, u16 *Data,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_write_register
@@ -179,11 +208,16 @@ int ft1000_write_register(struct ft1000_usb *ft1000dev, u16 value,
 {
 	int ret = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* writes the value in a register */
 int ft1000_write_register(struct ft1000_usb *ft1000dev, u16 value,
 			  u16 nRegIndx)
 {
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ft1000_control(ft1000dev,
@@ -199,6 +233,7 @@ int ft1000_write_register(struct ft1000_usb *ft1000dev, u16 value,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_read_dpram32
@@ -222,11 +257,16 @@ int ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 {
 	int ret = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* read a number of bytes from DPRAM */
 int ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 			u16 cnt)
 {
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ft1000_control(ft1000dev,
@@ -242,6 +282,7 @@ int ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_write_dpram32
@@ -264,11 +305,16 @@ int ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 {
 	int ret = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* writes into DPRAM a number of bytes */
 int ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 			 u16 cnt)
 {
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cnt % 4)
@@ -287,6 +333,7 @@ int ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_read_dpram16
@@ -309,11 +356,16 @@ int ft1000_read_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 {
 	int ret = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* read 16 bits from DPRAM */
 int ft1000_read_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 			u8 highlow)
 {
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 request;
 
@@ -336,6 +388,7 @@ int ft1000_read_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    ft1000_write_dpram16
 //
@@ -356,11 +409,16 @@ int ft1000_write_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u16 value, u8 h
 {
 	int ret = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* write into DPRAM a number of bytes */
 int ft1000_write_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u16 value,
 		u8 highlow)
 {
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 request;
 
@@ -383,6 +441,7 @@ int ft1000_write_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u16 value,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    fix_ft1000_read_dpram32
 //
@@ -402,13 +461,20 @@ int ft1000_write_dpram16(struct ft1000_usb *ft1000dev, u16 indx, u16 value,
 =======
 /* read DPRAM 4 words at a time */
 >>>>>>> v3.18
+=======
+/* read DPRAM 4 words at a time */
+>>>>>>> v3.18
 int fix_ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx,
 			    u8 *buffer)
 {
 	u8 buf[16];
 	u16 pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = STATUS_SUCCESS;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -417,7 +483,11 @@ int fix_ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx,
 	ret = ft1000_read_dpram32(ft1000dev, pos, buf, 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == STATUS_SUCCESS) {
+=======
+	if (ret == 0) {
+>>>>>>> v3.18
 =======
 	if (ret == 0) {
 >>>>>>> v3.18
@@ -439,6 +509,7 @@ int fix_ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    fix_ft1000_write_dpram32
 //
@@ -458,6 +529,9 @@ int fix_ft1000_read_dpram32(struct ft1000_usb *ft1000dev, u16 indx,
 =======
 /* Description: This function write to DPRAM 4 words at a time */
 >>>>>>> v3.18
+=======
+/* Description: This function write to DPRAM 4 words at a time */
+>>>>>>> v3.18
 int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 {
 	u16 pos1;
@@ -467,7 +541,11 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 	u8 resultbuffer[32];
 	u8 *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret  = STATUS_SUCCESS;
+=======
+	int ret  = 0;
+>>>>>>> v3.18
 =======
 	int ret  = 0;
 >>>>>>> v3.18
@@ -477,7 +555,11 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 	ret = ft1000_read_dpram32(ft1000dev, pos1, buf, 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == STATUS_SUCCESS) {
+=======
+	if (ret == 0) {
+>>>>>>> v3.18
 =======
 	if (ret == 0) {
 >>>>>>> v3.18
@@ -495,6 +577,7 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 	ret = ft1000_read_dpram32(ft1000dev, pos1, (u8 *)&resultbuffer[0], 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == STATUS_SUCCESS) {
 		buffer = pdata;
 		for (i = 0; i < 16; i++) {
@@ -505,6 +588,8 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 
 	if (ret == STATUS_FAILURE) {
 =======
+=======
+>>>>>>> v3.18
 	if (ret == 0) {
 		buffer = pdata;
 		for (i = 0; i < 16; i++) {
@@ -514,11 +599,15 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 	}
 
 	if (ret == -1) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = ft1000_write_dpram32(ft1000dev, pos1,
 					   (u8 *)&tempbuffer[0], 16);
 		ret = ft1000_read_dpram32(ft1000dev, pos1,
 					  (u8 *)&resultbuffer[0], 16);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ret == STATUS_SUCCESS) {
 			buffer = pdata;
@@ -526,11 +615,16 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 				if (tempbuffer[i] != resultbuffer[i]) {
 					ret = STATUS_FAILURE;
 =======
+=======
+>>>>>>> v3.18
 		if (ret == 0) {
 			buffer = pdata;
 			for (i = 0; i < 16; i++) {
 				if (tempbuffer[i] != resultbuffer[i]) {
 					ret = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					DEBUG("%s Failed to write\n",
 					      __func__);
@@ -542,6 +636,7 @@ int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev, u16 indx, u8 *buffer)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 //------------------------------------------------------------------------
@@ -558,10 +653,15 @@ static void card_reset_dsp(struct ft1000_usb *ft1000dev, bool value)
 {
 	u16 status = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 /* reset or activate the DSP */
 static void card_reset_dsp(struct ft1000_usb *ft1000dev, bool value)
 {
 	int status = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 tempword;
 
@@ -597,6 +697,7 @@ static void card_reset_dsp(struct ft1000_usb *ft1000dev, bool value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    card_send_command
 //
@@ -616,6 +717,8 @@ void card_send_command(struct ft1000_usb *ft1000dev, void *ptempbuffer,
 		       int size)
 {
 =======
+=======
+>>>>>>> v3.18
 /* send a command to ASIC
 *  Parameters:  ft1000_usb  - device structure
 *               ptempbuffer - command buffer
@@ -625,6 +728,9 @@ int card_send_command(struct ft1000_usb *ft1000dev, void *ptempbuffer,
 		       int size)
 {
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned short temp;
 	unsigned char *commandbuf;
@@ -633,6 +739,7 @@ int card_send_command(struct ft1000_usb *ft1000dev, void *ptempbuffer,
 
 	commandbuf = kmalloc(size + 2, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy((void *)commandbuf + 2, (void *)ptempbuffer, size);
 
 	ft1000_read_register(ft1000dev, &temp, FT1000_REG_DOORBELL);
@@ -640,6 +747,8 @@ int card_send_command(struct ft1000_usb *ft1000dev, void *ptempbuffer,
 	if (temp & 0x0100)
 		msleep(10);
 =======
+=======
+>>>>>>> v3.18
 	if (!commandbuf)
 		return -ENOMEM;
 	memcpy((void *)commandbuf + 2, (void *)ptempbuffer, size);
@@ -650,6 +759,9 @@ int card_send_command(struct ft1000_usb *ft1000dev, void *ptempbuffer,
 
 	if (temp & 0x0100)
 		usleep_range(900, 1100);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* check for odd word */
@@ -659,6 +771,7 @@ int card_send_command(struct ft1000_usb *ft1000dev, void *ptempbuffer,
 	if (size % 4)
 		size += 4 - (size % 4);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ft1000_write_dpram32(ft1000dev, 0, commandbuf, size);
 	msleep(1);
@@ -688,6 +801,8 @@ int dsp_reload(struct ft1000_usb *ft1000dev)
 {
 	u16 status;
 =======
+=======
+>>>>>>> v3.18
 	ret = ft1000_write_dpram32(ft1000dev, 0, commandbuf, size);
 	if (ret)
 		return ret;
@@ -711,6 +826,9 @@ int dsp_reload(struct ft1000_usb *ft1000dev)
 int dsp_reload(struct ft1000_usb *ft1000dev)
 {
 	int status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 tempword;
 	u32 templong;
@@ -750,7 +868,11 @@ int dsp_reload(struct ft1000_usb *ft1000dev)
 	status = scram_dnldr(ft1000dev, pFileStart, FileLength);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status != STATUS_SUCCESS)
+=======
+	if (status != 0)
+>>>>>>> v3.18
 =======
 	if (status != 0)
 >>>>>>> v3.18
@@ -764,6 +886,7 @@ int dsp_reload(struct ft1000_usb *ft1000dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
 // Function:   ft1000_reset_asic
@@ -775,6 +898,9 @@ int dsp_reload(struct ft1000_usb *ft1000dev)
 //     none
 //
 //---------------------------------------------------------------------------
+=======
+/* call the Card Service function to reset the ASIC. */
+>>>>>>> v3.18
 =======
 /* call the Card Service function to reset the ASIC. */
 >>>>>>> v3.18
@@ -806,6 +932,7 @@ static void ft1000_reset_asic(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 //---------------------------------------------------------------------------
 //
@@ -820,6 +947,8 @@ static void ft1000_reset_asic(struct net_device *dev)
 //---------------------------------------------------------------------------
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ft1000_reset_card(struct net_device *dev)
 {
 	struct ft1000_info *info = netdev_priv(dev);
@@ -830,9 +959,15 @@ static int ft1000_reset_card(struct net_device *dev)
 	DEBUG("ft1000_hw:ft1000_reset_card called.....\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ft1000dev->fCondResetPend = 1;
 	info->CardReady = 0;
 	ft1000dev->fProvComplete = 0;
+=======
+	ft1000dev->fCondResetPend = true;
+	info->CardReady = 0;
+	ft1000dev->fProvComplete = false;
+>>>>>>> v3.18
 =======
 	ft1000dev->fCondResetPend = true;
 	info->CardReady = 0;
@@ -869,7 +1004,11 @@ static int ft1000_reset_card(struct net_device *dev)
 	info->CardReady = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ft1000dev->fCondResetPend = 0;
+=======
+	ft1000dev->fCondResetPend = false;
+>>>>>>> v3.18
 =======
 	ft1000dev->fCondResetPend = false;
 >>>>>>> v3.18
@@ -878,9 +1017,12 @@ static int ft1000_reset_card(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_device_ops ftnet_ops =
 {
 =======
+=======
+>>>>>>> v3.18
 /* callback function when a urb is transmitted */
 static void ft1000_usb_transmit_complete(struct urb *urb)
 {
@@ -1039,6 +1181,9 @@ static struct net_device_stats *ft1000_netdev_stats(struct net_device *dev)
 }
 
 static const struct net_device_ops ftnet_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ndo_open = &ft1000_open,
 	.ndo_stop = &ft1000_close,
@@ -1046,6 +1191,7 @@ static const struct net_device_ops ftnet_ops = {
 	.ndo_get_stats = &ft1000_netdev_stats,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 //---------------------------------------------------------------------------
@@ -1063,6 +1209,8 @@ static const struct net_device_ops ftnet_ops = {
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /* initialize the network device */
 static int ft1000_reset(void *dev)
 {
@@ -1070,6 +1218,9 @@ static int ft1000_reset(void *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int init_ft1000_netdev(struct ft1000_usb *ft1000dev)
 {
@@ -1103,7 +1254,11 @@ int init_ft1000_netdev(struct ft1000_usb *ft1000dev)
 		ret_val = kstrtou8(card_nr, 10, &gCardIndex);
 		if (ret_val) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Can't parse netdev\n");
+=======
+			netdev_err(ft1000dev->net, "Can't parse netdev\n");
+>>>>>>> v3.18
 =======
 			netdev_err(ft1000dev->net, "Can't parse netdev\n");
 >>>>>>> v3.18
@@ -1114,7 +1269,11 @@ int init_ft1000_netdev(struct ft1000_usb *ft1000dev)
 		DEBUG("card number = %d\n", ft1000dev->CardNumber);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ft1000: Invalid device name\n");
+=======
+		netdev_err(ft1000dev->net, "ft1000: Invalid device name\n");
+>>>>>>> v3.18
 =======
 		netdev_err(ft1000dev->net, "ft1000: Invalid device name\n");
 >>>>>>> v3.18
@@ -1138,8 +1297,13 @@ int init_ft1000_netdev(struct ft1000_usb *ft1000dev)
 	pInfo->DSP_TIME[2] = 0;
 	pInfo->DSP_TIME[3] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ft1000dev->fAppMsgPend = 0;
 	ft1000dev->fCondResetPend = 0;
+=======
+	ft1000dev->fAppMsgPend = false;
+	ft1000dev->fCondResetPend = false;
+>>>>>>> v3.18
 =======
 	ft1000dev->fAppMsgPend = false;
 	ft1000dev->fCondResetPend = false;
@@ -1199,6 +1363,7 @@ err_net:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    reg_ft1000_netdev
 //
@@ -1213,6 +1378,9 @@ err_net:
 // Notes:
 //
 //---------------------------------------------------------------------------
+=======
+/* register the network driver */
+>>>>>>> v3.18
 =======
 /* register the network driver */
 >>>>>>> v3.18
@@ -1248,6 +1416,7 @@ int reg_ft1000_netdev(struct ft1000_usb *ft1000dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ft1000_reset(void *dev)
 {
@@ -1436,6 +1605,11 @@ err:
 *  convert it into an ethernet packet and deliver it to the IP stack
 */
 >>>>>>> v3.18
+=======
+/* take a packet from the FIFO up link and
+*  convert it into an ethernet packet and deliver it to the IP stack
+*/
+>>>>>>> v3.18
 static int ft1000_copy_up_pkt(struct urb *urb)
 {
 	struct ft1000_info *info = urb->context;
@@ -1454,9 +1628,15 @@ static int ft1000_copy_up_pkt(struct urb *urb)
 	if (ft1000dev->status & FT1000_STATUS_CLOSING) {
 		DEBUG("network driver is closed, return\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return STATUS_SUCCESS;
 	}
 	// Read length
+=======
+		return 0;
+	}
+	/* Read length */
+>>>>>>> v3.18
 =======
 		return 0;
 	}
@@ -1475,7 +1655,11 @@ static int ft1000_copy_up_pkt(struct urb *urb)
 		info->stats.rx_errors++;
 		ft1000_submit_rx_urb(info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return STATUS_FAILURE;
+=======
+		return -1;
+>>>>>>> v3.18
 =======
 		return -1;
 >>>>>>> v3.18
@@ -1488,7 +1672,11 @@ static int ft1000_copy_up_pkt(struct urb *urb)
 		info->stats.rx_errors++;
 		ft1000_submit_rx_urb(info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return STATUS_FAILURE;
+=======
+		return -1;
+>>>>>>> v3.18
 =======
 		return -1;
 >>>>>>> v3.18
@@ -1529,6 +1717,7 @@ static int ft1000_copy_up_pkt(struct urb *urb)
 	ft1000_submit_rx_urb(info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return SUCCESS;
 }
 
@@ -1547,11 +1736,16 @@ static int ft1000_copy_up_pkt(struct urb *urb)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 
 /* the receiving function of the network driver */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ft1000_submit_rx_urb(struct ft1000_info *info)
 {
@@ -1581,6 +1775,7 @@ static int ft1000_submit_rx_urb(struct ft1000_info *info)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 //---------------------------------------------------------------------------
@@ -1637,6 +1832,9 @@ static int ft1000_open(struct net_device *dev)
 =======
 /* close the network driver */
 >>>>>>> v3.18
+=======
+/* close the network driver */
+>>>>>>> v3.18
 int ft1000_close(struct net_device *net)
 {
 	struct ft1000_info *pInfo = netdev_priv(net);
@@ -1654,6 +1852,7 @@ int ft1000_close(struct net_device *net)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct net_device_stats *ft1000_netdev_stats(struct net_device *dev)
 {
@@ -1684,6 +1883,8 @@ static int ft1000_chkcard(struct ft1000_usb *dev)
 		DEBUG
 		    ("ft1000_hw:ft1000_chkcard:Card is being reset, return FALSE\n");
 =======
+=======
+>>>>>>> v3.18
 /* check if the device is presently available on the system. */
 static int ft1000_chkcard(struct ft1000_usb *dev)
 {
@@ -1692,6 +1893,9 @@ static int ft1000_chkcard(struct ft1000_usb *dev)
 
 	if (dev->fCondResetPend) {
 		DEBUG("ft1000_hw:ft1000_chkcard:Card is being reset, return FALSE\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return TRUE;
 	}
@@ -1701,8 +1905,12 @@ static int ft1000_chkcard(struct ft1000_usb *dev)
 	status = ft1000_read_register(dev, &tempword, FT1000_REG_SUP_IMASK);
 	if (tempword == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG
 		    ("ft1000_hw:ft1000_chkcard: IMASK = 0 Card not detected\n");
+=======
+		DEBUG("ft1000_hw:ft1000_chkcard: IMASK = 0 Card not detected\n");
+>>>>>>> v3.18
 =======
 		DEBUG("ft1000_hw:ft1000_chkcard: IMASK = 0 Card not detected\n");
 >>>>>>> v3.18
@@ -1715,8 +1923,12 @@ static int ft1000_chkcard(struct ft1000_usb *dev)
 	if (tempword != 0x1b01) {
 		dev->status |= FT1000_STATUS_CLOSING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG
 		    ("ft1000_hw:ft1000_chkcard: Version = 0xffff Card not detected\n");
+=======
+		DEBUG("ft1000_hw:ft1000_chkcard: Version = 0xffff Card not detected\n");
+>>>>>>> v3.18
 =======
 		DEBUG("ft1000_hw:ft1000_chkcard: Version = 0xffff Card not detected\n");
 >>>>>>> v3.18
@@ -1725,6 +1937,7 @@ static int ft1000_chkcard(struct ft1000_usb *dev)
 	return TRUE;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 //
@@ -1744,6 +1957,8 @@ static bool ft1000_receive_cmd(struct ft1000_usb *dev, u16 *pbuffer,
 {
 	u16 size, ret;
 =======
+=======
+>>>>>>> v3.18
 /* read a message from the dpram area.
 *  Input:
 *    dev - network device structure
@@ -1754,6 +1969,9 @@ static bool ft1000_receive_cmd(struct ft1000_usb *dev, u16 *pbuffer,
 {
 	u16 size;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 *ppseudohdr;
 	int i;
@@ -1767,6 +1985,7 @@ static bool ft1000_receive_cmd(struct ft1000_usb *dev, u16 *pbuffer,
 		DEBUG("FT1000:ft1000_receive_cmd:Invalid command length = %d\n",
 		      size);
 		return FALSE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {
 		ppseudohdr = (u16 *) pbuffer;
@@ -1816,6 +2035,8 @@ static bool ft1000_receive_cmd(struct ft1000_usb *dev, u16 *pbuffer,
 		return TRUE;
 	}
 =======
+=======
+>>>>>>> v3.18
 	}
 	ppseudohdr = (u16 *) pbuffer;
 	ft1000_write_register(dev, FT1000_DPRAM_MAG_RX_BASE,
@@ -1862,6 +2083,9 @@ static bool ft1000_receive_cmd(struct ft1000_usb *dev, u16 *pbuffer,
 		return FALSE;
 
 	return TRUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1876,7 +2100,11 @@ static int ft1000_dsp_prov(void *arg)
 	struct pseudo_hdr *ppseudo_hdr;
 	u16 *pmsg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 status;
+=======
+	int status;
+>>>>>>> v3.18
 =======
 	int status;
 >>>>>>> v3.18
@@ -1902,7 +2130,11 @@ static int ft1000_dsp_prov(void *arg)
 			if (i == 10) {
 				DEBUG("FT1000:ft1000_dsp_prov:message drop\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return STATUS_FAILURE;
+=======
+				return -1;
+>>>>>>> v3.18
 =======
 				return -1;
 >>>>>>> v3.18
@@ -1930,9 +2162,14 @@ static int ft1000_dsp_prov(void *arg)
 			/* Calculate new checksum */
 			ppseudo_hdr->checksum = *pmsg++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (i = 1; i < 7; i++) {
 				ppseudo_hdr->checksum ^= *pmsg++;
 			}
+=======
+			for (i = 1; i < 7; i++)
+				ppseudo_hdr->checksum ^= *pmsg++;
+>>>>>>> v3.18
 =======
 			for (i = 1; i < 7; i++)
 				ppseudo_hdr->checksum ^= *pmsg++;
@@ -1955,7 +2192,11 @@ static int ft1000_dsp_prov(void *arg)
 			kfree(ptr);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(10);
+=======
+		usleep_range(9000, 11000);
+>>>>>>> v3.18
 =======
 		usleep_range(9000, 11000);
 >>>>>>> v3.18
@@ -1966,15 +2207,21 @@ static int ft1000_dsp_prov(void *arg)
 	msleep(100);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->fProvComplete = 1;
 	info->CardReady = 1;
 
 	return STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 	dev->fProvComplete = true;
 	info->CardReady = 1;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1990,7 +2237,11 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 	struct pseudo_hdr *ppseudo_hdr;
 	u16 *pmsg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 status;
+=======
+	int status;
+>>>>>>> v3.18
 =======
 	int status;
 >>>>>>> v3.18
@@ -2001,8 +2252,14 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 
 	char *cmdbuffer = kmalloc(1600, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cmdbuffer)
 		return STATUS_FAILURE;
+=======
+
+	if (!cmdbuffer)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 
 	if (!cmdbuffer)
@@ -2032,6 +2289,7 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 	switch (msgtype) {
 	case MEDIA_STATE:{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUG
 			    ("ft1000_proc_drvmsg:Command message type = MEDIA_STATE");
 
@@ -2055,6 +2313,8 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 						info->ConTm = 0;
 					}
 =======
+=======
+>>>>>>> v3.18
 		DEBUG("ft1000_proc_drvmsg:Command message type = MEDIA_STATE");
 		pmediamsg = (struct media_msg *)&cmdbuffer[0];
 		if (info->ProgConStat != 0xFF) {
@@ -2064,12 +2324,16 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 					if (dev->NetDevRegDone)
 						netif_wake_queue(dev->net);
 					info->mediastate = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			} else {
 				DEBUG("Media is down\n");
 				if (info->mediastate == 1) {
 					info->mediastate = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 					info->ConTm = 0;
 				}
@@ -2193,6 +2457,8 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 			    htons(info->DSPInfoBlklen + 4 +
 				  info->DSPInfoBlklen);
 =======
+=======
+>>>>>>> v3.18
 					if (dev->NetDevRegDone)
 						info->ConTm = 0;
 				}
@@ -2352,6 +2618,9 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 			pmsg = (u16 *) &tempbuffer[0];
 			ppseudo_hdr = (struct pseudo_hdr *)pmsg;
 			ppseudo_hdr->length = htons(0x0012);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ppseudo_hdr->source = 0x10;
 			ppseudo_hdr->destination = 0x20;
@@ -2371,6 +2640,7 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 			for (i = 1; i < 7; i++)
 				ppseudo_hdr->checksum ^= *pmsg++;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			info->DSPInfoBlk[10] = 0x7200;
 			info->DSPInfoBlk[11] = htons(info->DSPInfoBlklen);
@@ -2457,6 +2727,8 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 			pmsg = (u16 *) &tempbuffer[16];
 			*pmsg++ = htons(RSP_DRV_ERR_RPT_MSG);
 			*pmsg++ = htons(0x000e);
@@ -2481,13 +2753,20 @@ static int ft1000_proc_drvmsg(struct ft1000_usb *dev, u16 size)
 		dev->DrvMsgPend = 0;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = STATUS_SUCCESS;
+=======
+	status = 0;
+>>>>>>> v3.18
 =======
 	status = 0;
 >>>>>>> v3.18
@@ -2497,6 +2776,7 @@ out:
 	return status;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ft1000_poll(void* dev_id)
 {
@@ -2693,6 +2973,8 @@ int ft1000_poll(void* dev_id)
     return STATUS_SUCCESS;
 
 =======
+=======
+>>>>>>> v3.18
 /* Check which application has registered for dsp broadcast messages */
 static int dsp_broadcast_msg_id(struct ft1000_usb *dev)
 {
@@ -2901,5 +3183,8 @@ int ft1000_poll(void *dev_id)
 		}
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

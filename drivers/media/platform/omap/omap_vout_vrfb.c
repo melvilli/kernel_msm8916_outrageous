@@ -149,7 +149,11 @@ int omap_vout_setup_vrfb_bufs(struct platform_device *pdev, int vid_num,
 			goto release_vrfb_ctx;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vout->vrfb_static_allocation = 1;
+=======
+		vout->vrfb_static_allocation = true;
+>>>>>>> v3.18
 =======
 		vout->vrfb_static_allocation = true;
 >>>>>>> v3.18
@@ -275,7 +279,12 @@ int omap_vout_prepare_vrfb(struct omap_vout_device *vout,
 
 	omap_start_dma(tx->dma_ch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	interruptible_sleep_on_timeout(&tx->wait, VRFB_TX_TIMEOUT);
+=======
+	wait_event_interruptible_timeout(tx->wait, tx->tx_status == 1,
+					 VRFB_TX_TIMEOUT);
+>>>>>>> v3.18
 =======
 	wait_event_interruptible_timeout(tx->wait, tx->tx_status == 1,
 					 VRFB_TX_TIMEOUT);
@@ -345,7 +354,11 @@ void omap_vout_calculate_vrfb_offset(struct omap_vout_device *vout)
 			vout->vrfb_context[0].bytespp;
 		temp_ps = ps / vr_ps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mirroring == 0) {
+=======
+		if (!mirroring) {
+>>>>>>> v3.18
 =======
 		if (!mirroring) {
 >>>>>>> v3.18
@@ -363,7 +376,11 @@ void omap_vout_calculate_vrfb_offset(struct omap_vout_device *vout)
 			(vout->vrfb_context[0].xoffset *
 			vout->vrfb_context[0].bytespp));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mirroring == 0) {
+=======
+		if (!mirroring) {
+>>>>>>> v3.18
 =======
 		if (!mirroring) {
 >>>>>>> v3.18
@@ -381,7 +398,11 @@ void omap_vout_calculate_vrfb_offset(struct omap_vout_device *vout)
 			vout->vrfb_context[0].bytespp;
 		temp_ps = ps / vr_ps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mirroring == 0) {
+=======
+		if (!mirroring) {
+>>>>>>> v3.18
 =======
 		if (!mirroring) {
 >>>>>>> v3.18
@@ -396,7 +417,11 @@ void omap_vout_calculate_vrfb_offset(struct omap_vout_device *vout)
 		break;
 	case dss_rotation_0_degree:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mirroring == 0) {
+=======
+		if (!mirroring) {
+>>>>>>> v3.18
 =======
 		if (!mirroring) {
 >>>>>>> v3.18

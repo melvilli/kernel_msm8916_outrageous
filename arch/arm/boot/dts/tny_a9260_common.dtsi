@@ -25,7 +25,10 @@
 			clock-frequency = <12000000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -34,6 +37,9 @@
 		main_xtal {
 			clock-frequency = <12000000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 

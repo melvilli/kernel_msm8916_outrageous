@@ -24,9 +24,12 @@
 
 #include <core/object.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/parent.h>
 #include <core/namedb.h>
 #include <core/handle.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engine.h>
@@ -65,7 +68,11 @@ nouveau_object_create_(struct nouveau_object *parent,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -74,6 +81,7 @@ _nouveau_object_ctor(struct nouveau_object *parent,
 		     struct nouveau_oclass *oclass, void *data, u32 size,
 		     struct nouveau_object **pobject)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nouveau_object *object;
 	int ret;
@@ -84,6 +92,11 @@ _nouveau_object_ctor(struct nouveau_object *parent,
 		return ret;
 
 	return 0;
+=======
+	if (size != 0)
+		return -ENOSYS;
+	return nouveau_object_create(parent, engine, oclass, 0, pobject);
+>>>>>>> v3.18
 =======
 	if (size != 0)
 		return -ENOSYS;
@@ -105,12 +118,15 @@ nouveau_object_destroy(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 _nouveau_object_dtor(struct nouveau_object *object)
 {
 	nouveau_object_destroy(object);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int
@@ -120,6 +136,7 @@ nouveau_object_init(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 _nouveau_object_init(struct nouveau_object *object)
 {
@@ -128,12 +145,15 @@ _nouveau_object_init(struct nouveau_object *object)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int
 nouveau_object_fini(struct nouveau_object *object, bool suspend)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 _nouveau_object_fini(struct nouveau_object *object, bool suspend)
@@ -148,12 +168,17 @@ nouveau_object_ofuncs = {
 	.init = _nouveau_object_init,
 	.fini = _nouveau_object_fini,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_ofuncs
 nouveau_object_ofuncs = {
 	.ctor = _nouveau_object_ctor,
 	.dtor = nouveau_object_destroy,
 	.init = nouveau_object_init,
 	.fini = nouveau_object_fini,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -185,7 +210,11 @@ nouveau_object_ctor(struct nouveau_object *parent,
 
 	if (ret == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_debug(object, "created\n");
+=======
+		nv_trace(object, "created\n");
+>>>>>>> v3.18
 =======
 		nv_trace(object, "created\n");
 >>>>>>> v3.18
@@ -199,7 +228,11 @@ static void
 nouveau_object_dtor(struct nouveau_object *object)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_debug(object, "destroying\n");
+=======
+	nv_trace(object, "destroying\n");
+>>>>>>> v3.18
 =======
 	nv_trace(object, "destroying\n");
 >>>>>>> v3.18
@@ -225,6 +258,7 @@ nouveau_object_ref(struct nouveau_object *obj, struct nouveau_object **ref)
 }
 
 int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nouveau_object_new(struct nouveau_object *client, u32 _parent, u32 _handle,
 		   u16 _oclass, void *data, u32 size,
@@ -341,6 +375,8 @@ nouveau_object_del(struct nouveau_object *client, u32 _parent, u32 _handle)
 int
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 nouveau_object_inc(struct nouveau_object *object)
 {
 	int ref = atomic_add_return(1, &object->usecount);
@@ -377,7 +413,11 @@ nouveau_object_inc(struct nouveau_object *object)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_debug(object, "initialised\n");
+=======
+	nv_trace(object, "initialised\n");
+>>>>>>> v3.18
 =======
 	nv_trace(object, "initialised\n");
 >>>>>>> v3.18
@@ -419,7 +459,11 @@ nouveau_object_decf(struct nouveau_object *object)
 		nouveau_object_dec(object->parent, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_debug(object, "stopped\n");
+=======
+	nv_trace(object, "stopped\n");
+>>>>>>> v3.18
 =======
 	nv_trace(object, "stopped\n");
 >>>>>>> v3.18
@@ -459,7 +503,11 @@ nouveau_object_decs(struct nouveau_object *object)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_debug(object, "suspended\n");
+=======
+	nv_trace(object, "suspended\n");
+>>>>>>> v3.18
 =======
 	nv_trace(object, "suspended\n");
 >>>>>>> v3.18

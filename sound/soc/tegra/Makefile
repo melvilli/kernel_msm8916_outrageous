@@ -19,6 +19,10 @@ obj-$(CONFIG_SND_SOC_TEGRA30_I2S) += snd-soc-tegra30-i2s.o
 
 # Tegra machine Support
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+snd-soc-tegra-rt5640-objs := tegra_rt5640.o
+>>>>>>> v3.18
 =======
 snd-soc-tegra-rt5640-objs := tegra_rt5640.o
 >>>>>>> v3.18
@@ -28,7 +32,13 @@ snd-soc-tegra-wm9712-objs := tegra_wm9712.o
 snd-soc-tegra-trimslice-objs := trimslice.o
 snd-soc-tegra-alc5632-objs := tegra_alc5632.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+snd-soc-tegra-max98090-objs := tegra_max98090.o
+
+obj-$(CONFIG_SND_SOC_TEGRA_RT5640) += snd-soc-tegra-rt5640.o
+>>>>>>> v3.18
 =======
 snd-soc-tegra-max98090-objs := tegra_max98090.o
 
@@ -40,6 +50,10 @@ obj-$(CONFIG_SND_SOC_TEGRA_WM9712) += snd-soc-tegra-wm9712.o
 obj-$(CONFIG_SND_SOC_TEGRA_TRIMSLICE) += snd-soc-tegra-trimslice.o
 obj-$(CONFIG_SND_SOC_TEGRA_ALC5632) += snd-soc-tegra-alc5632.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SND_SOC_TEGRA_MAX98090) += snd-soc-tegra-max98090.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SND_SOC_TEGRA_MAX98090) += snd-soc-tegra-max98090.o
 >>>>>>> v3.18

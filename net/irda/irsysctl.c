@@ -74,7 +74,11 @@ static int min_lap_keepalive_time = 100;	/* 100us */
  * us on that - Jean II */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_devname(ctl_table *table, int write,
+=======
+static int do_devname(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int do_devname(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -95,7 +99,11 @@ static int do_devname(struct ctl_table *table, int write,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_discovery(ctl_table *table, int write,
+=======
+static int do_discovery(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int do_discovery(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -120,7 +128,11 @@ static int do_discovery(struct ctl_table *table, int write,
 
 /* One file */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table irda_table[] = {
+=======
+static struct ctl_table irda_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table irda_table[] = {
 >>>>>>> v3.18

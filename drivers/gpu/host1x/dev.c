@@ -28,6 +28,10 @@
 #include <trace/events/host1x.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "bus.h"
+>>>>>>> v3.18
 =======
 #include "bus.h"
 >>>>>>> v3.18
@@ -36,6 +40,7 @@
 #include "channel.h"
 #include "debug.h"
 #include "hw/host1x01.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "host1x_client.h"
 
@@ -50,6 +55,10 @@ void *host1x_get_drm_data(struct device *dev)
 	struct host1x *host1x = dev_get_drvdata(dev);
 	return host1x->drm_data;
 }
+=======
+#include "hw/host1x02.h"
+#include "hw/host1x04.h"
+>>>>>>> v3.18
 =======
 #include "hw/host1x02.h"
 #include "hw/host1x04.h"
@@ -89,8 +98,11 @@ static const struct host1x_info host1x01_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id host1x_of_match[] = {
 =======
+=======
+>>>>>>> v3.18
 static const struct host1x_info host1x02_info = {
 	.nb_channels = 9,
 	.nb_pts = 32,
@@ -112,6 +124,9 @@ static const struct host1x_info host1x04_info = {
 static struct of_device_id host1x_of_match[] = {
 	{ .compatible = "nvidia,tegra124-host1x", .data = &host1x04_info, },
 	{ .compatible = "nvidia,tegra114-host1x", .data = &host1x02_info, },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "nvidia,tegra30-host1x", .data = &host1x01_info, },
 	{ .compatible = "nvidia,tegra20-host1x", .data = &host1x01_info, },
@@ -148,6 +163,12 @@ static int host1x_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&host->devices_lock);
+	INIT_LIST_HEAD(&host->devices);
+	INIT_LIST_HEAD(&host->list);
+>>>>>>> v3.18
 =======
 	mutex_init(&host->devices_lock);
 	INIT_LIST_HEAD(&host->devices);
@@ -192,7 +213,11 @@ static int host1x_probe(struct platform_device *pdev)
 	if (err) {
 		dev_err(&pdev->dev, "failed to initialize syncpts\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return err;
+=======
+		goto fail_unprepare_disable;
+>>>>>>> v3.18
 =======
 		goto fail_unprepare_disable;
 >>>>>>> v3.18
@@ -206,6 +231,7 @@ static int host1x_probe(struct platform_device *pdev)
 
 	host1x_debug_init(host);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	host1x_drm_alloc(pdev);
 
@@ -221,6 +247,8 @@ static int __exit host1x_remove(struct platform_device *pdev)
 	struct host1x *host = platform_get_drvdata(pdev);
 
 =======
+=======
+>>>>>>> v3.18
 	err = host1x_register(host);
 	if (err < 0)
 		goto fail_deinit_intr;
@@ -241,6 +269,9 @@ static int host1x_remove(struct platform_device *pdev)
 	struct host1x *host = platform_get_drvdata(pdev);
 
 	host1x_unregister(host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host1x_intr_deinit(host);
 	host1x_syncpt_deinit(host);
@@ -251,6 +282,7 @@ static int host1x_remove(struct platform_device *pdev)
 
 static struct platform_driver tegra_host1x_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe = host1x_probe,
 	.remove = __exit_p(host1x_remove),
 	.driver = {
@@ -259,12 +291,17 @@ static struct platform_driver tegra_host1x_driver = {
 		.of_match_table = host1x_of_match,
 	},
 =======
+=======
+>>>>>>> v3.18
 	.driver = {
 		.name = "tegra-host1x",
 		.of_match_table = host1x_of_match,
 	},
 	.probe = host1x_probe,
 	.remove = host1x_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -272,6 +309,7 @@ static int __init tegra_host1x_init(void)
 {
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = platform_driver_register(&tegra_host1x_driver);
 	if (err < 0)
@@ -303,6 +341,8 @@ unregister_host1x:
 	return err;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	err = host1x_bus_init();
 	if (err < 0)
 		return err;
@@ -322,6 +362,9 @@ unregister_host1x:
 unregister_bus:
 	host1x_bus_exit();
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 module_init(tegra_host1x_init);
@@ -329,12 +372,18 @@ module_init(tegra_host1x_init);
 static void __exit tegra_host1x_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DRM_TEGRA
 	platform_driver_unregister(&tegra_gr2d_driver);
 	platform_driver_unregister(&tegra_hdmi_driver);
 	platform_driver_unregister(&tegra_dc_driver);
 #endif
 	platform_driver_unregister(&tegra_host1x_driver);
+=======
+	platform_driver_unregister(&tegra_mipi_driver);
+	platform_driver_unregister(&tegra_host1x_driver);
+	host1x_bus_exit();
+>>>>>>> v3.18
 =======
 	platform_driver_unregister(&tegra_mipi_driver);
 	platform_driver_unregister(&tegra_host1x_driver);

@@ -18,7 +18,11 @@
 
 	chosen {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "console=ttyARC0,115200n8";
+=======
+		bootargs = "earlycon=arc_uart,mmio32,0xc0fc1000,115200n8 console=ttyARC0,115200n8";
+>>>>>>> v3.18
 =======
 		bootargs = "earlycon=arc_uart,mmio32,0xc0fc1000,115200n8 console=ttyARC0,115200n8";
 >>>>>>> v3.18
@@ -29,11 +33,14 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memory {
 		device_type = "memory";
 		reg = <0x00000000 0x10000000>;	/* 256M */
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fpga {
@@ -59,7 +66,10 @@
 			status = "okay";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		ethernet@c0fc2000 {
 			compatible = "snps,arc-emac";
@@ -80,6 +90,9 @@
 		arcpmu0: pmu {
 			compatible = "snps,arc700-pmu";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

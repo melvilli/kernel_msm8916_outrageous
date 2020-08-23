@@ -159,7 +159,11 @@ do {									\
 		 break;							\
 	case 8: 							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (__copy_from_user((void *)&val, ptr, 8) == 0)	\
+=======
+		if ((copy_from_user((void *)&val, ptr, 8)) == 0)	\
+>>>>>>> v3.18
 =======
 		if ((copy_from_user((void *)&val, ptr, 8)) == 0)	\
 >>>>>>> v3.18
@@ -188,8 +192,11 @@ do {									\
 	if (likely(access_ok(VERIFY_READ, __gu_ptr, size)))		\
 		__get_user_common((x), size, __gu_ptr);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else								\
 		(x) = 0;						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 									\
@@ -206,7 +213,10 @@ do {									\
 		".section .fixup,\"ax\"\n"				\
 		"3:li	%0, %4\n"					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"li	%1, 0\n"					\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		"j	2b\n"						\
@@ -307,6 +317,7 @@ static inline unsigned long
 copy_from_user(void *to, const void *from, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long res = len;
 
 	if (likely(access_ok(VERIFY_READ, from, len)))
@@ -317,6 +328,8 @@ copy_from_user(void *to, const void *from, unsigned long len)
 
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long over;
 
 	if (access_ok(VERIFY_READ, from, len))
@@ -327,12 +340,16 @@ copy_from_user(void *to, const void *from, unsigned long len)
 		return __copy_tofrom_user(to, from, len - over) + over;
 	}
 	return len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline unsigned long
 copy_to_user(void *to, const void *from, unsigned long len)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (likely(access_ok(VERIFY_WRITE, to, len)))
 		len = __copy_tofrom_user(to, from, len);
@@ -349,6 +366,8 @@ __copy_from_user(void *to, const void *from, unsigned long len)
 	return left;
 }
 =======
+=======
+>>>>>>> v3.18
 	unsigned long over;
 
 	if (access_ok(VERIFY_WRITE, to, len))
@@ -363,6 +382,9 @@ __copy_from_user(void *to, const void *from, unsigned long len)
 
 #define __copy_from_user(to, from, len)	\
 		__copy_tofrom_user((to), (from), (len))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __copy_to_user(to, from, len)		\
@@ -378,15 +400,21 @@ static inline unsigned long
 __copy_from_user_inatomic(void *to, const void *from, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __copy_tofrom_user(to, from, len);
 }
 
 #define __copy_in_user(to, from, len)	__copy_tofrom_user(to, from, len)
 =======
+=======
+>>>>>>> v3.18
 	return __copy_from_user(to, from, len);
 }
 
 #define __copy_in_user(to, from, len)	__copy_from_user(to, from, len)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline unsigned long
@@ -395,7 +423,11 @@ copy_in_user(void *to, const void *from, unsigned long len)
 	if (access_ok(VERIFY_READ, from, len) &&
 		      access_ok(VERFITY_WRITE, to, len))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return __copy_tofrom_user(to, from, len);
+=======
+		return copy_from_user(to, from, len);
+>>>>>>> v3.18
 =======
 		return copy_from_user(to, from, len);
 >>>>>>> v3.18

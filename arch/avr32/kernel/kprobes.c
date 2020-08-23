@@ -105,7 +105,11 @@ static void __kprobes resume_execution(struct kprobe *p, struct pt_regs *regs)
 static void __kprobes set_current_kprobe(struct kprobe *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = p;
+=======
+	__this_cpu_write(current_kprobe, p);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, p);
 >>>>>>> v3.18

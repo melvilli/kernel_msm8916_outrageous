@@ -18,6 +18,10 @@
 #define PHY_ID_KSZ8873MLL	0x000e7237
 #define PHY_ID_KSZ9021		0x00221610
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PHY_ID_KSZ9021RLRN	0x00221611
+>>>>>>> v3.18
 =======
 #define PHY_ID_KSZ9021RLRN	0x00221611
 >>>>>>> v3.18
@@ -26,6 +30,11 @@
 #define PHY_ID_KSZ8031		0x00221556
 #define PHY_ID_KSZ8041		0x00221510
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* undocumented */
+#define PHY_ID_KSZ8041RNLI	0x00221537
+>>>>>>> v3.18
 =======
 /* undocumented */
 #define PHY_ID_KSZ8041RNLI	0x00221537
@@ -44,13 +53,19 @@
 /* struct phy_device dev_flags definitions */
 #define MICREL_PHY_50MHZ_CLK	0x00000001
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MICREL_PHY_25MHZ_CLK	0x00000002
 
 #define MICREL_KSZ9021_EXTREG_CTRL	0xB
 #define MICREL_KSZ9021_EXTREG_DATA_WRITE	0xC
 #define MICREL_KSZ9021_RGMII_CLK_CTRL_PAD_SCEW	0x104
 #define MICREL_KSZ9021_RGMII_RX_DATA_PAD_SCEW	0x105
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _MICREL_PHY_H */

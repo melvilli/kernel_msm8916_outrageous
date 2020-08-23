@@ -306,9 +306,13 @@ void dma_free_coherent(struct device *dev, size_t size,
 			if (pfn_valid(pfn)) {
 				struct page *page = pfn_to_page(pfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ClearPageReserved(page);
 
 				__free_page(page);
+=======
+				__free_reserved_page(page);
+>>>>>>> v3.18
 =======
 				__free_reserved_page(page);
 >>>>>>> v3.18
@@ -406,11 +410,14 @@ static int __init dma_alloc_init(void)
 		pud = pud_alloc(&init_mm, pgd, CONSISTENT_START);
 		pmd = pmd_alloc(&init_mm, pud, CONSISTENT_START);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pmd) {
 			pr_err("%s: no pmd tables\n", __func__);
 			ret = -ENOMEM;
 			break;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		WARN_ON(!pmd_none(*pmd));

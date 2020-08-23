@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 filter.txt: Linux Socket Filtering
 Written by: Jay Schulist <jschlst@samba.org>
 
@@ -49,6 +50,8 @@ setsockopt(sockfd, SOL_SOCKET, SO_LOCK_FILTER, &value, sizeof(value));
 See the BSD bpf.4 manpage and the BSD Packet Filter paper written by
 Steven McCanne and Van Jacobson of Lawrence Berkeley Laboratory.
 =======
+=======
+>>>>>>> v3.18
 Linux Socket Filtering aka Berkeley Packet Filter (BPF)
 =======================================================
 
@@ -1345,4 +1348,7 @@ the underlying architecture.
 Jay Schulist <jschlst@samba.org>
 Daniel Borkmann <dborkman@redhat.com>
 Alexei Starovoitov <ast@plumgrid.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

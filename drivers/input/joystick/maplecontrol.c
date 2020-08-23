@@ -62,7 +62,11 @@ static void dc_pad_callback(struct mapleq *mq)
 static int dc_pad_open(struct input_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dc_pad *pad = dev->dev.platform_data;
+=======
+	struct dc_pad *pad = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct dc_pad *pad = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ static int dc_pad_open(struct input_dev *dev)
 static void dc_pad_close(struct input_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dc_pad *pad = dev->dev.platform_data;
+=======
+	struct dc_pad *pad = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct dc_pad *pad = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18

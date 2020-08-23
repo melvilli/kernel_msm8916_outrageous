@@ -37,7 +37,10 @@ struct spu_context *alloc_spu_context(struct spu_gang *gang)
 {
 	struct spu_context *ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -71,8 +74,12 @@ struct spu_context *alloc_spu_context(struct spu_gang *gang)
 	spu_set_timeslice(ctx);
 	ctx->stats.util_state = SPU_UTIL_IDLE_LOADED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts);
 	ctx->stats.tstamp = timespec_to_ns(&ts);
+=======
+	ctx->stats.tstamp = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ctx->stats.tstamp = ktime_get_ns();
 >>>>>>> v3.18

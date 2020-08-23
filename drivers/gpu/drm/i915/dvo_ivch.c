@@ -196,7 +196,11 @@ static bool ivch_read(struct intel_dvo_device *dvo, int addr, uint16_t *data)
 		*data = (in_buf[1] << 8) | in_buf[0];
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -382,6 +386,7 @@ static void ivch_dump_regs(struct intel_dvo_device *dvo)
 
 	ivch_read(dvo, VR00, &val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_LOG_KMS("VR00: 0x%04x\n", val);
 	ivch_read(dvo, VR01, &val);
 	DRM_LOG_KMS("VR01: 0x%04x\n", val);
@@ -418,6 +423,8 @@ static void ivch_dump_regs(struct intel_dvo_device *dvo)
 	ivch_read(dvo, VR8F, &val);
 	DRM_LOG_KMS("VR8F: 0x%04x\n", val);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("VR00: 0x%04x\n", val);
 	ivch_read(dvo, VR01, &val);
 	DRM_DEBUG_KMS("VR01: 0x%04x\n", val);
@@ -453,6 +460,9 @@ static void ivch_dump_regs(struct intel_dvo_device *dvo)
 	/* Scratch register 1 - Status register */
 	ivch_read(dvo, VR8F, &val);
 	DRM_DEBUG_KMS("VR8F: 0x%04x\n", val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

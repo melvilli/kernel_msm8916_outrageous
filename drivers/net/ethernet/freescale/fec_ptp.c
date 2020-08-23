@@ -29,7 +29,10 @@
 #include <linux/interrupt.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -66,7 +69,10 @@
 #define FEC_T_INC_CORR_OFFSET           8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FEC_T_CTRL_PINPER		0x00000080
 #define FEC_T_TF0_MASK			0x00000001
 #define FEC_T_TF0_OFFSET		0
@@ -85,6 +91,9 @@
 #define FEC_T_TF_MASK			0x00000080
 #define FEC_T_TF_OFFSET			7
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FEC_ATIME_CTRL		0x400
 #define FEC_ATIME		0x404
@@ -95,8 +104,11 @@
 #define FEC_TS_TIMESTAMP	0x418
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FEC_CC_MULT	(1 << 31)
 =======
+=======
+>>>>>>> v3.18
 #define FEC_TGSR		0x604
 #define FEC_TCSR(n)		(0x608 + n * 0x08)
 #define FEC_TCCR(n)		(0x60C + n * 0x08)
@@ -234,6 +246,9 @@ static int fec_ptp_enable_pps(struct fec_enet_private *fep, uint enable)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * fec_ptp_read - read raw cycle counter (to be used by time counter)
@@ -248,6 +263,11 @@ static cycle_t fec_ptp_read(const struct cyclecounter *cc)
 	struct fec_enet_private *fep =
 		container_of(cc, struct fec_enet_private, cc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct platform_device_id *id_entry =
+		platform_get_device_id(fep->pdev);
+>>>>>>> v3.18
 =======
 	const struct platform_device_id *id_entry =
 		platform_get_device_id(fep->pdev);
@@ -259,6 +279,12 @@ static cycle_t fec_ptp_read(const struct cyclecounter *cc)
 	writel(tempval, fep->hwp + FEC_ATIME_CTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (id_entry->driver_data & FEC_QUIRK_BUG_CAPTURE)
+		udelay(1);
+
+>>>>>>> v3.18
 =======
 	if (id_entry->driver_data & FEC_QUIRK_BUG_CAPTURE)
 		udelay(1);
@@ -290,6 +316,7 @@ void fec_ptp_start_cyclecounter(struct net_device *ndev)
 	writel(inc << FEC_T_INC_OFFSET, fep->hwp + FEC_ATIME_INC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* use free running count */
 	writel(0, fep->hwp + FEC_ATIME_EVT_PERIOD);
 
@@ -299,6 +326,8 @@ void fec_ptp_start_cyclecounter(struct net_device *ndev)
 	fep->cc.read = fec_ptp_read;
 	fep->cc.mask = CLOCKSOURCE_MASK(32);
 =======
+=======
+>>>>>>> v3.18
 	/* use 31-bit timer counter */
 	writel(FEC_COUNTER_PERIOD, fep->hwp + FEC_ATIME_EVT_PERIOD);
 
@@ -308,6 +337,9 @@ void fec_ptp_start_cyclecounter(struct net_device *ndev)
 	memset(&fep->cc, 0, sizeof(fep->cc));
 	fep->cc.read = fec_ptp_read;
 	fep->cc.mask = CLOCKSOURCE_MASK(31);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fep->cc.shift = 31;
 	fep->cc.mult = FEC_CC_MULT;
@@ -332,23 +364,35 @@ void fec_ptp_start_cyclecounter(struct net_device *ndev)
 static int fec_ptp_adjfreq(struct ptp_clock_info *ptp, s32 ppb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 diff;
 	unsigned long flags;
 	int neg_adj = 0;
 	u32 mult = FEC_CC_MULT;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	int neg_adj = 0;
 	u32 i, tmp;
 	u32 corr_inc, corr_period;
 	u32 corr_ns;
 	u64 lhs, rhs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct fec_enet_private *fep =
 	    container_of(ptp, struct fec_enet_private, ptp_caps);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ppb == 0)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (ppb == 0)
 		return 0;
@@ -359,6 +403,7 @@ static int fec_ptp_adjfreq(struct ptp_clock_info *ptp, s32 ppb)
 		neg_adj = 1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	diff = mult;
 	diff *= ppb;
@@ -374,6 +419,8 @@ static int fec_ptp_adjfreq(struct ptp_clock_info *ptp, s32 ppb)
 
 	fep->cc.mult = neg_adj ? mult - diff : mult + diff;
 =======
+=======
+>>>>>>> v3.18
 	/* In theory, corr_inc/corr_period = ppb/NSEC_PER_SEC;
 	 * Try to find the corr_inc  between 1 to fep->ptp_inc to
 	 * meet adjustment requirement.
@@ -409,6 +456,9 @@ static int fec_ptp_adjfreq(struct ptp_clock_info *ptp, s32 ppb)
 	writel(corr_period, fep->hwp + FEC_ATIME_CORR);
 	/* dummy read to update the timer. */
 	timecounter_read(&fep->tc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&fep->tmreg_lock, flags);
@@ -430,6 +480,10 @@ static int fec_ptp_adjtime(struct ptp_clock_info *ptp, s64 delta)
 	unsigned long flags;
 	u64 now;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 counter;
+>>>>>>> v3.18
 =======
 	u32 counter;
 >>>>>>> v3.18
@@ -440,13 +494,19 @@ static int fec_ptp_adjtime(struct ptp_clock_info *ptp, s64 delta)
 	now += delta;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Get the timer value based on adjusted timestamp.
 	 * Update the counter with the masked value.
 	 */
 	counter = now & fep->cc.mask;
 	writel(counter, fep->hwp + FEC_ATIME);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* reset the timecounter */
 	timecounter_init(&fep->tc, &fep->cc, now);
@@ -499,6 +559,7 @@ static int fec_ptp_settime(struct ptp_clock_info *ptp,
 	u64 ns;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ns = ts->tv_sec * 1000000000ULL;
 	ns += ts->tv_nsec;
@@ -507,6 +568,8 @@ static int fec_ptp_settime(struct ptp_clock_info *ptp,
 	timecounter_init(&fep->tc, &fep->cc, ns);
 	spin_unlock_irqrestore(&fep->tmreg_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	u32 counter;
 
 	mutex_lock(&fep->ptp_clk_mutex);
@@ -528,6 +591,9 @@ static int fec_ptp_settime(struct ptp_clock_info *ptp,
 	timecounter_init(&fep->tc, &fep->cc, ns);
 	spin_unlock_irqrestore(&fep->tmreg_lock, flags);
 	mutex_unlock(&fep->ptp_clk_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -543,7 +609,10 @@ static int fec_ptp_enable(struct ptp_clock_info *ptp,
 			  struct ptp_clock_request *rq, int on)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct fec_enet_private *fep =
 	    container_of(ptp, struct fec_enet_private, ptp_caps);
 	int ret = 0;
@@ -553,6 +622,9 @@ static int fec_ptp_enable(struct ptp_clock_info *ptp,
 
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -EOPNOTSUPP;
 }
@@ -564,7 +636,11 @@ static int fec_ptp_enable(struct ptp_clock_info *ptp,
  * @cmd: particular ioctl requested
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fec_ptp_ioctl(struct net_device *ndev, struct ifreq *ifr, int cmd)
+=======
+int fec_ptp_set(struct net_device *ndev, struct ifreq *ifr)
+>>>>>>> v3.18
 =======
 int fec_ptp_set(struct net_device *ndev, struct ifreq *ifr)
 >>>>>>> v3.18
@@ -615,7 +691,10 @@ int fec_ptp_set(struct net_device *ndev, struct ifreq *ifr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int fec_ptp_get(struct net_device *ndev, struct ifreq *ifr)
 {
 	struct fec_enet_private *fep = netdev_priv(ndev);
@@ -630,11 +709,15 @@ int fec_ptp_get(struct net_device *ndev, struct ifreq *ifr)
 		-EFAULT : 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * fec_time_keep - call timecounter_read every second to avoid timer overrun
  *                 because ENET just support 32bit counter, will timeout in 4s
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void fec_time_keep(unsigned long _data)
 {
@@ -648,6 +731,8 @@ static void fec_time_keep(unsigned long _data)
 
 	mod_timer(&fep->time_keep, jiffies + HZ);
 =======
+=======
+>>>>>>> v3.18
 static void fec_time_keep(struct work_struct *work)
 {
 	struct delayed_work *dwork = to_delayed_work(work);
@@ -664,6 +749,9 @@ static void fec_time_keep(struct work_struct *work)
 	mutex_unlock(&fep->ptp_clk_mutex);
 
 	schedule_delayed_work(&fep->time_keep, HZ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -677,8 +765,14 @@ static void fec_time_keep(struct work_struct *work)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fec_ptp_init(struct net_device *ndev, struct platform_device *pdev)
 {
+=======
+void fec_ptp_init(struct platform_device *pdev)
+{
+	struct net_device *ndev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 void fec_ptp_init(struct platform_device *pdev)
 {
@@ -694,7 +788,12 @@ void fec_ptp_init(struct platform_device *pdev)
 	fep->ptp_caps.n_ext_ts = 0;
 	fep->ptp_caps.n_per_out = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fep->ptp_caps.pps = 0;
+=======
+	fep->ptp_caps.n_pins = 0;
+	fep->ptp_caps.pps = 1;
+>>>>>>> v3.18
 =======
 	fep->ptp_caps.n_pins = 0;
 	fep->ptp_caps.pps = 1;
@@ -707,6 +806,10 @@ void fec_ptp_init(struct platform_device *pdev)
 
 	fep->cycle_speed = clk_get_rate(fep->clk_ptp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fep->ptp_inc = NSEC_PER_SEC / fep->cycle_speed;
+>>>>>>> v3.18
 =======
 	fep->ptp_inc = NSEC_PER_SEC / fep->cycle_speed;
 >>>>>>> v3.18
@@ -716,11 +819,15 @@ void fec_ptp_init(struct platform_device *pdev)
 	fec_ptp_start_cyclecounter(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_timer(&fep->time_keep);
 	fep->time_keep.data = (unsigned long)fep;
 	fep->time_keep.function = fec_time_keep;
 	fep->time_keep.expires = jiffies + HZ;
 	add_timer(&fep->time_keep);
+=======
+	INIT_DELAYED_WORK(&fep->time_keep, fec_time_keep);
+>>>>>>> v3.18
 =======
 	INIT_DELAYED_WORK(&fep->time_keep, fec_time_keep);
 >>>>>>> v3.18
@@ -731,7 +838,10 @@ void fec_ptp_init(struct platform_device *pdev)
 		pr_err("ptp_clock_register failed\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	schedule_delayed_work(&fep->time_keep, HZ);
 }
@@ -767,5 +877,8 @@ uint fec_ptp_check_pps_event(struct fec_enet_private *fep)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

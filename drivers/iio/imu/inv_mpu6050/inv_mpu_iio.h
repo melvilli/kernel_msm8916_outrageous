@@ -60,6 +60,10 @@ struct inv_mpu6050_reg_map {
 enum inv_devices {
 	INV_MPU6050,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INV_MPU6500,
+>>>>>>> v3.18
 =======
 	INV_MPU6500,
 >>>>>>> v3.18
@@ -131,6 +135,7 @@ struct inv_mpu6050_state {
 #define INV_MPU6050_REG_CONFIG              0x1A
 #define INV_MPU6050_REG_GYRO_CONFIG         0x1B
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INV_MPU6050_REG_ACCEL_CONFIG	    0x1C
 
 #define INV_MPU6050_REG_FIFO_EN             0x23
@@ -141,6 +146,8 @@ struct inv_mpu6050_state {
 #define INV_MPU6050_BIT_DATA_RDY_EN                 0x01
 #define INV_MPU6050_BIT_DMP_INT_EN                  0x02
 =======
+=======
+>>>>>>> v3.18
 #define INV_MPU6050_REG_ACCEL_CONFIG        0x1C
 
 #define INV_MPU6050_REG_FIFO_EN             0x23
@@ -150,6 +157,9 @@ struct inv_mpu6050_state {
 #define INV_MPU6050_REG_INT_ENABLE          0x38
 #define INV_MPU6050_BIT_DATA_RDY_EN         0x01
 #define INV_MPU6050_BIT_DMP_INT_EN          0x02
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define INV_MPU6050_REG_RAW_ACCEL           0x3B
@@ -157,6 +167,7 @@ struct inv_mpu6050_state {
 #define INV_MPU6050_REG_RAW_GYRO            0x43
 
 #define INV_MPU6050_REG_USER_CTRL           0x6A
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define INV_MPU6050_BIT_FIFO_RST                    0x04
 #define INV_MPU6050_BIT_DMP_RST                     0x08
@@ -173,6 +184,8 @@ struct inv_mpu6050_state {
 #define INV_MPU6050_BIT_PWR_ACCL_STBY               0x38
 #define INV_MPU6050_BIT_PWR_GYRO_STBY               0x07
 =======
+=======
+>>>>>>> v3.18
 #define INV_MPU6050_BIT_FIFO_RST            0x04
 #define INV_MPU6050_BIT_DMP_RST             0x08
 #define INV_MPU6050_BIT_I2C_MST_EN          0x20
@@ -187,6 +200,9 @@ struct inv_mpu6050_state {
 #define INV_MPU6050_REG_PWR_MGMT_2          0x6C
 #define INV_MPU6050_BIT_PWR_ACCL_STBY       0x38
 #define INV_MPU6050_BIT_PWR_GYRO_STBY       0x07
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define INV_MPU6050_REG_FIFO_COUNT_H        0x72
@@ -214,15 +230,21 @@ struct inv_mpu6050_state {
 /* init parameters */
 #define INV_MPU6050_INIT_FIFO_RATE           50
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INV_MPU6050_TIME_STAMP_TOR                        5
 #define INV_MPU6050_MAX_FIFO_RATE                         1000
 #define INV_MPU6050_MIN_FIFO_RATE                         4
 #define INV_MPU6050_ONE_K_HZ                              1000
 =======
+=======
+>>>>>>> v3.18
 #define INV_MPU6050_TIME_STAMP_TOR           5
 #define INV_MPU6050_MAX_FIFO_RATE            1000
 #define INV_MPU6050_MIN_FIFO_RATE            4
 #define INV_MPU6050_ONE_K_HZ                 1000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* scan element definition */

@@ -634,6 +634,7 @@ static ssize_t store_pch_mac(struct device *dev, struct device_attribute *attr,
 			     const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mac[6];
 	ssize_t rom_size;
 	struct pch_phub_reg *chip = dev_get_drvdata(dev);
@@ -646,6 +647,8 @@ static ssize_t store_pch_mac(struct device *dev, struct device_attribute *attr,
 		(u32 *)&mac[4], (u32 *)&mac[5]);
 
 =======
+=======
+>>>>>>> v3.18
 	u8 mac[ETH_ALEN];
 	ssize_t rom_size;
 	struct pch_phub_reg *chip = dev_get_drvdata(dev);
@@ -654,19 +657,28 @@ static ssize_t store_pch_mac(struct device *dev, struct device_attribute *attr,
 	if (!mac_pton(buf, mac))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chip->pch_phub_extrom_base_address = pci_map_rom(chip->pdev, &rom_size);
 	if (!chip->pch_phub_extrom_base_address)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pch_phub_write_gbe_mac_addr(chip, mac);
 	pci_unmap_rom(chip->pdev, chip->pch_phub_extrom_base_address);
 =======
+=======
+>>>>>>> v3.18
 	ret = pch_phub_write_gbe_mac_addr(chip, mac);
 	pci_unmap_rom(chip->pdev, chip->pch_phub_extrom_base_address);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return count;
@@ -688,8 +700,11 @@ static int pch_phub_probe(struct pci_dev *pdev,
 				    const struct pci_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -735,6 +750,7 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		const char *board_name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = sysfs_create_file(&pdev->dev.kobj,
 					   &dev_attr_pch_mac.attr);
 		if (retval)
@@ -743,6 +759,8 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (retval)
 =======
+=======
+>>>>>>> v3.18
 		ret = sysfs_create_file(&pdev->dev.kobj,
 					&dev_attr_pch_mac.attr);
 		if (ret)
@@ -750,6 +768,9 @@ static int pch_phub_probe(struct pci_dev *pdev,
 
 		ret = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto exit_bin_attr;
 
@@ -775,8 +796,13 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		chip->pch_mac_start_address = PCH_PHUB_MAC_START_ADDR_EG20T;
 	} else if (id->driver_data == 2) { /* ML7213 IOH */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (retval)
+=======
+		ret = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
+		if (ret)
+>>>>>>> v3.18
 =======
 		ret = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (ret)
@@ -803,6 +829,7 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		chip->pch_mac_start_address = PCH_PHUB_MAC_START_ADDR_ML7223;
 	} else if (id->driver_data == 4) { /* ML7223 IOH Bus-n*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = sysfs_create_file(&pdev->dev.kobj,
 					   &dev_attr_pch_mac.attr);
 		if (retval)
@@ -810,12 +837,17 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (retval)
 =======
+=======
+>>>>>>> v3.18
 		ret = sysfs_create_file(&pdev->dev.kobj,
 					&dev_attr_pch_mac.attr);
 		if (ret)
 			goto err_sysfs_create;
 		ret = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto exit_bin_attr;
 		/* set the prefech value
@@ -829,6 +861,7 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		chip->pch_mac_start_address = PCH_PHUB_MAC_START_ADDR_ML7223;
 	} else if (id->driver_data == 5) { /* ML7831 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = sysfs_create_file(&pdev->dev.kobj,
 					   &dev_attr_pch_mac.attr);
 		if (retval)
@@ -837,6 +870,8 @@ static int pch_phub_probe(struct pci_dev *pdev,
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (retval)
 =======
+=======
+>>>>>>> v3.18
 		ret = sysfs_create_file(&pdev->dev.kobj,
 					&dev_attr_pch_mac.attr);
 		if (ret)
@@ -844,6 +879,9 @@ static int pch_phub_probe(struct pci_dev *pdev,
 
 		ret = sysfs_create_bin_file(&pdev->dev.kobj, &pch_bin_attr);
 		if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto exit_bin_attr;
 

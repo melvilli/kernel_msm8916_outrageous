@@ -42,7 +42,10 @@ __sum16 csum_ipv6_magic(const struct in6_addr *saddr,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline __wsum ip6_compute_pseudo(struct sk_buff *skb, int proto)
 {
 	return ~csum_unfold(csum_ipv6_magic(&ipv6_hdr(skb)->saddr,
@@ -58,6 +61,9 @@ static inline __wsum ip6_gro_compute_pseudo(struct sk_buff *skb, int proto)
 					    skb_gro_len(skb), proto, 0));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __inline__ __sum16 tcp_v6_check(int len,
 				   const struct in6_addr *saddr,
@@ -85,6 +91,10 @@ static inline void __tcp_v6_send_check(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_IPV6)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_IPV6)
 >>>>>>> v3.18
@@ -93,9 +103,12 @@ static inline void tcp_v6_send_check(struct sock *sk, struct sk_buff *skb)
 	struct ipv6_pinfo *np = inet6_sk(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__tcp_v6_send_check(skb, &np->saddr, &np->daddr);
 }
 =======
+=======
+>>>>>>> v3.18
 	__tcp_v6_send_check(skb, &np->saddr, &sk->sk_v6_daddr);
 }
 #endif
@@ -111,6 +124,9 @@ static inline __sum16 udp_v6_check(int len,
 void udp6_set_csum(bool nocheck, struct sk_buff *skb,
 		   const struct in6_addr *saddr,
 		   const struct in6_addr *daddr, int len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int udp6_csum_init(struct sk_buff *skb, struct udphdr *uh, int proto);

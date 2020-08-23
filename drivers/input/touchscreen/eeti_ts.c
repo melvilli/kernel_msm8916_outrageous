@@ -158,7 +158,11 @@ static int eeti_ts_probe(struct i2c_client *client,
 				   const struct i2c_device_id *idp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct eeti_ts_platform_data *pdata = client->dev.platform_data;
+=======
+	struct eeti_ts_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct eeti_ts_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -269,7 +273,11 @@ static int eeti_ts_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -311,9 +319,15 @@ static int eeti_ts_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static SIMPLE_DEV_PM_OPS(eeti_ts_pm, eeti_ts_suspend, eeti_ts_resume);
 #endif
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(eeti_ts_pm, eeti_ts_suspend, eeti_ts_resume);
+>>>>>>> v3.18
 =======
 #endif
 
@@ -330,9 +344,13 @@ static struct i2c_driver eeti_ts_driver = {
 	.driver = {
 		.name = "eeti_ts",
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm = &eeti_ts_pm,
 #endif
+=======
+		.pm = &eeti_ts_pm,
+>>>>>>> v3.18
 =======
 		.pm = &eeti_ts_pm,
 >>>>>>> v3.18

@@ -943,7 +943,12 @@ static int snd_serial_probe(struct platform_device *devptr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err  = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err  = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
+			    0, &card);
+>>>>>>> v3.18
 =======
 	err  = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
 			    0, &card);
@@ -975,8 +980,11 @@ static int snd_serial_probe(struct platform_device *devptr)
 		uart->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &devptr->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_card_register(card)) < 0)
@@ -994,7 +1002,10 @@ static int snd_serial_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

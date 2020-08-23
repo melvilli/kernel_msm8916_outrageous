@@ -20,15 +20,21 @@
 #include <asm/regdef.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	EX insn, reg, src
 	.set	push
 =======
+=======
+>>>>>>> v3.18
 /* preprocessor replaces the fp in ".set fp=64" with $30 otherwise */
 #undef fp
 
 	.macro	EX insn, reg, src
 	.set	push
 	SET_HARDFLOAT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set	nomacro
 .ex\@:	\insn	\reg, \src
@@ -40,6 +46,7 @@
 
 	.set	noreorder
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set	mips3
 
 LEAF(_save_fp_context)
@@ -47,6 +54,8 @@ LEAF(_save_fp_context)
 
 #ifdef CONFIG_64BIT
 =======
+=======
+>>>>>>> v3.18
 	.set	arch=r4000
 
 LEAF(_save_fp_context)
@@ -66,6 +75,9 @@ LEAF(_save_fp_context)
 	bgez	t0, 1f			# skip storing odd if FR=0
 	 nop
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Store the 16 odd double precision registers */
 	EX	sdc1 $f1, SC_FPREGS+8(a0)
@@ -85,14 +97,20 @@ LEAF(_save_fp_context)
 	EX	sdc1 $f29, SC_FPREGS+232(a0)
 	EX	sdc1 $f31, SC_FPREGS+248(a0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 1:	.set	pop
 #endif
 
 	.set push
 	SET_HARDFLOAT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Store the 16 even double precision registers */
 	EX	sdc1 $f0, SC_FPREGS+0(a0)
@@ -115,6 +133,10 @@ LEAF(_save_fp_context)
 	jr	ra
 	 li	v0, 0					# success
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set pop
+>>>>>>> v3.18
 =======
 	.set pop
 >>>>>>> v3.18
@@ -124,10 +146,13 @@ LEAF(_save_fp_context)
 	/* Save 32-bit process floating point context */
 LEAF(_save_fp_context32)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfc1	t1, fcr31
 
 	EX	sdc1 $f0, SC32_FPREGS+0(a0)
 =======
+=======
+>>>>>>> v3.18
 	.set push
 	SET_HARDFLOAT
 	cfc1	t1, fcr31
@@ -157,6 +182,9 @@ LEAF(_save_fp_context32)
 
 	/* Store the 16 even double precision registers */
 1:	EX	sdc1 $f0, SC32_FPREGS+0(a0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EX	sdc1 $f2, SC32_FPREGS+16(a0)
 	EX	sdc1 $f4, SC32_FPREGS+32(a0)
@@ -177,6 +205,10 @@ LEAF(_save_fp_context32)
 	cfc1	t0, $0				# implementation/version
 	EX	sw t0, SC32_FPC_EIR(a0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set pop
+>>>>>>> v3.18
 =======
 	.set pop
 >>>>>>> v3.18
@@ -193,9 +225,12 @@ LEAF(_save_fp_context32)
  */
 LEAF(_restore_fp_context)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EX	lw t0, SC_FPC_CSR(a0)
 #ifdef CONFIG_64BIT
 =======
+=======
+>>>>>>> v3.18
 	EX	lw t1, SC_FPC_CSR(a0)
 
 #if defined(CONFIG_64BIT) || defined(CONFIG_CPU_MIPS32_R2)
@@ -209,6 +244,9 @@ LEAF(_restore_fp_context)
 	bgez	t0, 1f			# skip loading odd if FR=0
 	 nop
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EX	ldc1 $f1, SC_FPREGS+8(a0)
 	EX	ldc1 $f3, SC_FPREGS+24(a0)
@@ -227,12 +265,18 @@ LEAF(_restore_fp_context)
 	EX	ldc1 $f29, SC_FPREGS+232(a0)
 	EX	ldc1 $f31, SC_FPREGS+248(a0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 1:	.set pop
 #endif
 	.set push
 	SET_HARDFLOAT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EX	ldc1 $f0, SC_FPREGS+0(a0)
 	EX	ldc1 $f2, SC_FPREGS+16(a0)
@@ -251,7 +295,12 @@ LEAF(_restore_fp_context)
 	EX	ldc1 $f28, SC_FPREGS+224(a0)
 	EX	ldc1 $f30, SC_FPREGS+240(a0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctc1	t0, fcr31
+=======
+	ctc1	t1, fcr31
+	.set pop
+>>>>>>> v3.18
 =======
 	ctc1	t1, fcr31
 	.set pop
@@ -264,9 +313,12 @@ LEAF(_restore_fp_context)
 LEAF(_restore_fp_context32)
 	/* Restore an o32 sigcontext.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EX	lw t0, SC32_FPC_CSR(a0)
 	EX	ldc1 $f0, SC32_FPREGS+0(a0)
 =======
+=======
+>>>>>>> v3.18
 	.set push
 	SET_HARDFLOAT
 	EX	lw t1, SC32_FPC_CSR(a0)
@@ -294,6 +346,9 @@ LEAF(_restore_fp_context32)
 	EX      ldc1 $f31, SC32_FPREGS+248(a0)
 
 1:	EX	ldc1 $f0, SC32_FPREGS+0(a0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EX	ldc1 $f2, SC32_FPREGS+16(a0)
 	EX	ldc1 $f4, SC32_FPREGS+32(a0)
@@ -311,14 +366,20 @@ LEAF(_restore_fp_context32)
 	EX	ldc1 $f28, SC32_FPREGS+224(a0)
 	EX	ldc1 $f30, SC32_FPREGS+240(a0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctc1	t0, fcr31
 	jr	ra
 	 li	v0, 0					# success
 =======
+=======
+>>>>>>> v3.18
 	ctc1	t1, fcr31
 	jr	ra
 	 li	v0, 0					# success
 	.set pop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	END(_restore_fp_context32)
 #endif

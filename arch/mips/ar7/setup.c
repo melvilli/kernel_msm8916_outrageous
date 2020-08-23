@@ -93,7 +93,10 @@ void __init plat_mem_setup(void)
 	_machine_halt = ar7_machine_halt;
 	pm_power_off = ar7_machine_power_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panic_timeout = 3;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

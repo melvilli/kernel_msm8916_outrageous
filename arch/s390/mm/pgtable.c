@@ -18,6 +18,10 @@
 #include <linux/rcupdate.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/swapops.h>
+>>>>>>> v3.18
 =======
 #include <linux/swapops.h>
 >>>>>>> v3.18
@@ -53,7 +57,10 @@ void crst_table_free(struct mm_struct *mm, unsigned long *table)
 
 #ifdef CONFIG_64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __crst_table_upgrade(void *arg)
 {
 	struct mm_struct *mm = arg;
@@ -65,19 +72,28 @@ static void __crst_table_upgrade(void *arg)
 	__tlb_flush_local();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int crst_table_upgrade(struct mm_struct *mm, unsigned long limit)
 {
 	unsigned long *table, *pgd;
 	unsigned long entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	BUG_ON(limit > (1UL << 53));
 =======
+=======
+>>>>>>> v3.18
 	int flush;
 
 	BUG_ON(limit > (1UL << 53));
 	flush = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 repeat:
 	table = crst_table_alloc(mm);
@@ -105,6 +121,10 @@ repeat:
 		mm->task_size = mm->context.asce_limit;
 		table = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		flush = 1;
+>>>>>>> v3.18
 =======
 		flush = 1;
 >>>>>>> v3.18
@@ -115,6 +135,11 @@ repeat:
 	if (mm->context.asce_limit < limit)
 		goto repeat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (flush)
+		on_each_cpu(__crst_table_upgrade, mm, 0);
+>>>>>>> v3.18
 =======
 	if (flush)
 		on_each_cpu(__crst_table_upgrade, mm, 0);
@@ -127,11 +152,17 @@ void crst_table_downgrade(struct mm_struct *mm, unsigned long limit)
 	pgd_t *pgd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (current->active_mm == mm) {
 		clear_user_asce();
 		__tlb_flush_mm(mm);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (mm->context.asce_limit > limit) {
 		pgd = mm->pgd;
@@ -156,6 +187,11 @@ void crst_table_downgrade(struct mm_struct *mm, unsigned long limit)
 		crst_table_free(mm, (unsigned long *) pgd);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (current->active_mm == mm)
+		set_user_asce(mm);
+>>>>>>> v3.18
 =======
 	if (current->active_mm == mm)
 		set_user_asce(mm);
@@ -169,24 +205,33 @@ void crst_table_downgrade(struct mm_struct *mm, unsigned long limit)
  * gmap_alloc - allocate a guest address space
  * @mm: pointer to the parent mm_struct
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Returns a guest address space structure.
  */
 struct gmap *gmap_alloc(struct mm_struct *mm)
 =======
+=======
+>>>>>>> v3.18
  * @limit: maximum size of the gmap address space
  *
  * Returns a guest address space structure.
  */
 struct gmap *gmap_alloc(struct mm_struct *mm, unsigned long limit)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct gmap *gmap;
 	struct page *page;
 	unsigned long *table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long etype, atype;
 
 	if (limit < (1UL << 31)) {
@@ -206,12 +251,21 @@ struct gmap *gmap_alloc(struct mm_struct *mm, unsigned long limit)
 		atype = _ASCE_TYPE_REGION1;
 		etype = _REGION1_ENTRY_EMPTY;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gmap = kzalloc(sizeof(struct gmap), GFP_KERNEL);
 	if (!gmap)
 		goto out;
 	INIT_LIST_HEAD(&gmap->crst_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_RADIX_TREE(&gmap->guest_to_host, GFP_KERNEL);
+	INIT_RADIX_TREE(&gmap->host_to_guest, GFP_ATOMIC);
+	spin_lock_init(&gmap->guest_table_lock);
+>>>>>>> v3.18
 =======
 	INIT_RADIX_TREE(&gmap->guest_to_host, GFP_KERNEL);
 	INIT_RADIX_TREE(&gmap->host_to_guest, GFP_ATOMIC);
@@ -222,6 +276,7 @@ struct gmap *gmap_alloc(struct mm_struct *mm, unsigned long limit)
 	if (!page)
 		goto out_free;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&page->lru, &gmap->crst_list);
 	table = (unsigned long *) page_to_phys(page);
 	crst_table_init(table, _REGION1_ENTRY_EMPTY);
@@ -230,6 +285,8 @@ struct gmap *gmap_alloc(struct mm_struct *mm, unsigned long limit)
 		     _ASCE_USER_BITS | __pa(table);
 	list_add(&gmap->list, &mm->context.gmap_list);
 =======
+=======
+>>>>>>> v3.18
 	page->index = 0;
 	list_add(&page->lru, &gmap->crst_list);
 	table = (unsigned long *) page_to_phys(page);
@@ -241,6 +298,9 @@ struct gmap *gmap_alloc(struct mm_struct *mm, unsigned long limit)
 	down_write(&mm->mmap_sem);
 	list_add(&gmap->list, &mm->context.gmap_list);
 	up_write(&mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return gmap;
 
@@ -251,6 +311,7 @@ out:
 }
 EXPORT_SYMBOL_GPL(gmap_alloc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int gmap_unlink_segment(struct gmap *gmap, unsigned long *table)
 {
@@ -279,17 +340,25 @@ static void gmap_flush_tlb(struct gmap *gmap)
 		__tlb_flush_idte((unsigned long) gmap->table |
 				 _ASCE_TYPE_REGION1);
 =======
+=======
+>>>>>>> v3.18
 static void gmap_flush_tlb(struct gmap *gmap)
 {
 	if (MACHINE_HAS_IDTE)
 		__tlb_flush_asce(gmap->mm, gmap->asce);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		__tlb_flush_global();
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void gmap_radix_tree_free(struct radix_tree_root *root)
 {
 	struct radix_tree_iter iter;
@@ -314,6 +383,9 @@ static void gmap_radix_tree_free(struct radix_tree_root *root)
 	} while (nr > 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * gmap_free - free a guest address space
@@ -322,6 +394,7 @@ static void gmap_radix_tree_free(struct radix_tree_root *root)
 void gmap_free(struct gmap *gmap)
 {
 	struct page *page, *next;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long *table;
 	int i;
@@ -332,15 +405,21 @@ void gmap_free(struct gmap *gmap)
 		__tlb_flush_idte((unsigned long) gmap->table |
 				 _ASCE_TYPE_REGION1);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Flush tlb. */
 	if (MACHINE_HAS_IDTE)
 		__tlb_flush_asce(gmap->mm, gmap->asce);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		__tlb_flush_global();
 
 	/* Free all segment & region tables. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	down_read(&gmap->mm->mmap_sem);
 	spin_lock(&gmap->mm->page_table_lock);
@@ -356,6 +435,8 @@ void gmap_free(struct gmap *gmap)
 	up_read(&gmap->mm->mmap_sem);
 	list_del(&gmap->list);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_safe(page, next, &gmap->crst_list, lru)
 		__free_pages(page, ALLOC_ORDER);
 	gmap_radix_tree_free(&gmap->guest_to_host);
@@ -363,6 +444,9 @@ void gmap_free(struct gmap *gmap)
 	down_write(&gmap->mm->mmap_sem);
 	list_del(&gmap->list);
 	up_write(&gmap->mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(gmap);
 }
@@ -392,8 +476,13 @@ EXPORT_SYMBOL_GPL(gmap_disable);
  * gmap_alloc_table is assumed to be called with mmap_sem held
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gmap_alloc_table(struct gmap *gmap,
 			       unsigned long *table, unsigned long init)
+=======
+static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
+			    unsigned long init, unsigned long gaddr)
+>>>>>>> v3.18
 =======
 static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
 			    unsigned long init, unsigned long gaddr)
@@ -404,9 +493,13 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
 
 	/* since we dont free the gmap table until gmap_free we can unlock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&gmap->mm->page_table_lock);
 	page = alloc_pages(GFP_KERNEL, ALLOC_ORDER);
 	spin_lock(&gmap->mm->page_table_lock);
+=======
+	page = alloc_pages(GFP_KERNEL, ALLOC_ORDER);
+>>>>>>> v3.18
 =======
 	page = alloc_pages(GFP_KERNEL, ALLOC_ORDER);
 >>>>>>> v3.18
@@ -415,12 +508,15 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
 	new = (unsigned long *) page_to_phys(page);
 	crst_table_init(new, init);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*table & _REGION_ENTRY_INV) {
 		list_add(&page->lru, &gmap->crst_list);
 		*table = (unsigned long) new | _REGION_ENTRY_LENGTH |
 			(*table & _REGION_ENTRY_TYPE_MASK);
 	} else
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&gmap->mm->page_table_lock);
 	if (*table & _REGION_ENTRY_INVALID) {
 		list_add(&page->lru, &gmap->crst_list);
@@ -431,12 +527,16 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
 	}
 	spin_unlock(&gmap->mm->page_table_lock);
 	if (page)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__free_pages(page, ALLOC_ORDER);
 	return 0;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * gmap_unmap_segment - unmap segment from the guest address space
  * @gmap: pointer to the guest address space structure
@@ -449,6 +549,8 @@ int gmap_unmap_segment(struct gmap *gmap, unsigned long to, unsigned long len)
 {
 	unsigned long *table;
 =======
+=======
+>>>>>>> v3.18
  * __gmap_segment_gaddr - find virtual address from segment pointer
  * @entry: pointer to a segment table entry in the guest address space
  *
@@ -513,6 +615,9 @@ static int __gmap_unmap_by_gaddr(struct gmap *gmap, unsigned long gaddr)
  */
 int gmap_unmap_segment(struct gmap *gmap, unsigned long to, unsigned long len)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long off;
 	int flush;
@@ -523,6 +628,7 @@ int gmap_unmap_segment(struct gmap *gmap, unsigned long to, unsigned long len)
 		return -EINVAL;
 
 	flush = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	down_read(&gmap->mm->mmap_sem);
 	spin_lock(&gmap->mm->page_table_lock);
@@ -550,10 +656,15 @@ out:
 	spin_unlock(&gmap->mm->page_table_lock);
 	up_read(&gmap->mm->mmap_sem);
 =======
+=======
+>>>>>>> v3.18
 	down_write(&gmap->mm->mmap_sem);
 	for (off = 0; off < len; off += PMD_SIZE)
 		flush |= __gmap_unmap_by_gaddr(gmap, to + off);
 	up_write(&gmap->mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (flush)
 		gmap_flush_tlb(gmap);
@@ -567,8 +678,14 @@ EXPORT_SYMBOL_GPL(gmap_unmap_segment);
  * @from: source address in the parent address space
  * @to: target address in the guest address space
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Returns 0 if the mmap succeded, -EINVAL or -ENOMEM if not.
+=======
+ * @len: length of the memory area to map
+ *
+ * Returns 0 if the mmap succeeded, -EINVAL or -ENOMEM if not.
+>>>>>>> v3.18
 =======
  * @len: length of the memory area to map
  *
@@ -579,7 +696,10 @@ int gmap_map_segment(struct gmap *gmap, unsigned long from,
 		     unsigned long to, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *table;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long off;
@@ -587,6 +707,7 @@ int gmap_map_segment(struct gmap *gmap, unsigned long from,
 
 	if ((from | to | len) & (PMD_SIZE - 1))
 		return -EINVAL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (len == 0 || from + len > TASK_MAX_SIZE ||
 	    from + len < from || to + len < to)
@@ -628,6 +749,8 @@ out_unmap:
 	spin_unlock(&gmap->mm->page_table_lock);
 	up_read(&gmap->mm->mmap_sem);
 =======
+=======
+>>>>>>> v3.18
 	if (len == 0 || from + len < from || to + len < to ||
 	    from + len > TASK_MAX_SIZE || to + len > gmap->asce_end)
 		return -EINVAL;
@@ -648,12 +771,16 @@ out_unmap:
 		gmap_flush_tlb(gmap);
 	if (off >= len)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gmap_unmap_segment(gmap, to, len);
 	return -ENOMEM;
 }
 EXPORT_SYMBOL_GPL(gmap_map_segment);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned long *gmap_table_walk(unsigned long address, struct gmap *gmap)
 {
@@ -680,10 +807,15 @@ static unsigned long *gmap_table_walk(unsigned long address, struct gmap *gmap)
  * @address: guest address
  * @gmap: pointer to guest mapping meta data structure
 =======
+=======
+>>>>>>> v3.18
 /**
  * __gmap_translate - translate a guest address to a user space address
  * @gmap: pointer to guest mapping meta data structure
  * @gaddr: guest address
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Returns user space address which corresponds to the guest address or
@@ -692,6 +824,7 @@ static unsigned long *gmap_table_walk(unsigned long address, struct gmap *gmap)
  * The mmap_sem of the mm that belongs to the address space must be held
  * when this function gets called.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 unsigned long __gmap_translate(unsigned long address, struct gmap *gmap)
 {
@@ -715,6 +848,8 @@ unsigned long __gmap_translate(unsigned long address, struct gmap *gmap)
 	}
 	return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 unsigned long __gmap_translate(struct gmap *gmap, unsigned long gaddr)
 {
 	unsigned long vmaddr;
@@ -722,6 +857,9 @@ unsigned long __gmap_translate(struct gmap *gmap, unsigned long gaddr)
 	vmaddr = (unsigned long)
 		radix_tree_lookup(&gmap->guest_to_host, gaddr >> PMD_SHIFT);
 	return vmaddr ? (vmaddr | (gaddr & ~PMD_MASK)) : -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(__gmap_translate);
@@ -729,8 +867,13 @@ EXPORT_SYMBOL_GPL(__gmap_translate);
 /**
  * gmap_translate - translate a guest address to a user space address
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @address: guest address
  * @gmap: pointer to guest mapping meta data structure
+=======
+ * @gmap: pointer to guest mapping meta data structure
+ * @gaddr: guest address
+>>>>>>> v3.18
 =======
  * @gmap: pointer to guest mapping meta data structure
  * @gaddr: guest address
@@ -741,7 +884,11 @@ EXPORT_SYMBOL_GPL(__gmap_translate);
  * This function does not establish potentially missing page table entries.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long gmap_translate(unsigned long address, struct gmap *gmap)
+=======
+unsigned long gmap_translate(struct gmap *gmap, unsigned long gaddr)
+>>>>>>> v3.18
 =======
 unsigned long gmap_translate(struct gmap *gmap, unsigned long gaddr)
 >>>>>>> v3.18
@@ -750,7 +897,11 @@ unsigned long gmap_translate(struct gmap *gmap, unsigned long gaddr)
 
 	down_read(&gmap->mm->mmap_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = __gmap_translate(address, gmap);
+=======
+	rc = __gmap_translate(gmap, gaddr);
+>>>>>>> v3.18
 =======
 	rc = __gmap_translate(gmap, gaddr);
 >>>>>>> v3.18
@@ -759,6 +910,7 @@ unsigned long gmap_translate(struct gmap *gmap, unsigned long gaddr)
 }
 EXPORT_SYMBOL_GPL(gmap_translate);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int gmap_connect_pgtable(unsigned long address, unsigned long segment,
 				unsigned long *segment_ptr, struct gmap *gmap)
@@ -922,6 +1074,8 @@ void gmap_discard(unsigned long from, unsigned long to, struct gmap *gmap)
 			       size, NULL);
 		address = (address + PMD_SIZE) & PMD_MASK;
 =======
+=======
+>>>>>>> v3.18
 /**
  * gmap_unlink - disconnect a page table from the gmap shadow tables
  * @gmap: pointer to guest mapping meta data structure
@@ -1123,6 +1277,9 @@ void gmap_discard(struct gmap *gmap, unsigned long from, unsigned long to)
 		vma = find_vma(gmap->mm, vmaddr);
 		size = min(to - gaddr, PMD_SIZE - (gaddr & ~PMD_MASK));
 		zap_page_range(vma, vmaddr, size, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	up_read(&gmap->mm->mmap_sem);
@@ -1160,7 +1317,11 @@ EXPORT_SYMBOL_GPL(gmap_unregister_ipte_notifier);
  * gmap_ipte_notify - mark a range of ptes for invalidation notification
  * @gmap: pointer to guest mapping meta data structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @address: virtual address in the guest address space
+=======
+ * @gaddr: virtual address in the guest address space
+>>>>>>> v3.18
 =======
  * @gaddr: virtual address in the guest address space
 >>>>>>> v3.18
@@ -1172,7 +1333,11 @@ EXPORT_SYMBOL_GPL(gmap_unregister_ipte_notifier);
  * -ENOMEM is returned. This function establishes missing page table entries.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gmap_ipte_notify(struct gmap *gmap, unsigned long start, unsigned long len)
+=======
+int gmap_ipte_notify(struct gmap *gmap, unsigned long gaddr, unsigned long len)
+>>>>>>> v3.18
 =======
 int gmap_ipte_notify(struct gmap *gmap, unsigned long gaddr, unsigned long len)
 >>>>>>> v3.18
@@ -1184,7 +1349,11 @@ int gmap_ipte_notify(struct gmap *gmap, unsigned long gaddr, unsigned long len)
 	int rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((start & ~PAGE_MASK) || (len & ~PAGE_MASK))
+=======
+	if ((gaddr & ~PAGE_MASK) || (len & ~PAGE_MASK))
+>>>>>>> v3.18
 =======
 	if ((gaddr & ~PAGE_MASK) || (len & ~PAGE_MASK))
 >>>>>>> v3.18
@@ -1193,7 +1362,11 @@ int gmap_ipte_notify(struct gmap *gmap, unsigned long gaddr, unsigned long len)
 	while (len) {
 		/* Convert gmap address and connect the page tables */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr = __gmap_fault(start, gmap);
+=======
+		addr = __gmap_translate(gmap, gaddr);
+>>>>>>> v3.18
 =======
 		addr = __gmap_translate(gmap, gaddr);
 >>>>>>> v3.18
@@ -1207,6 +1380,12 @@ int gmap_ipte_notify(struct gmap *gmap, unsigned long gaddr, unsigned long len)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rc = __gmap_link(gmap, gaddr, addr);
+		if (rc)
+			break;
+>>>>>>> v3.18
 =======
 		rc = __gmap_link(gmap, gaddr, addr);
 		if (rc)
@@ -1219,17 +1398,23 @@ int gmap_ipte_notify(struct gmap *gmap, unsigned long gaddr, unsigned long len)
 		/* Set notification bit in the pgste of the pte */
 		entry = *ptep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((pte_val(entry) & (_PAGE_INVALID | _PAGE_RO)) == 0) {
 			pgste = pgste_get_lock(ptep);
 			pgste_val(pgste) |= RCP_IN_BIT;
 			pgste_set_unlock(ptep, pgste);
 			start += PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 		if ((pte_val(entry) & (_PAGE_INVALID | _PAGE_PROTECT)) == 0) {
 			pgste = pgste_get_lock(ptep);
 			pgste_val(pgste) |= PGSTE_IN_BIT;
 			pgste_set_unlock(ptep, pgste);
 			gaddr += PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			len -= PAGE_SIZE;
 		}
@@ -1249,6 +1434,7 @@ EXPORT_SYMBOL_GPL(gmap_ipte_notify);
  * This function is assumed to be called with the page table lock held
  * for the pte to notify.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void gmap_do_ipte_notify(struct mm_struct *mm, unsigned long addr, pte_t *pte)
 {
@@ -1278,6 +1464,8 @@ static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm,
 	unsigned long *table;
 	struct gmap_pgtable *mp;
 =======
+=======
+>>>>>>> v3.18
 void gmap_do_ipte_notify(struct mm_struct *mm, unsigned long vmaddr, pte_t *pte)
 {
 	unsigned long offset, gaddr;
@@ -1310,11 +1498,15 @@ static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm)
 {
 	struct page *page;
 	unsigned long *table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	page = alloc_page(GFP_KERNEL|__GFP_REPEAT);
 	if (!page)
 		return NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mp = kmalloc(sizeof(*mp), GFP_KERNEL|__GFP_REPEAT);
 	if (!mp) {
@@ -1329,6 +1521,8 @@ static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm)
 	table = (unsigned long *) page_to_phys(page);
 	clear_table(table, _PAGE_TYPE_EMPTY, PAGE_SIZE/2);
 =======
+=======
+>>>>>>> v3.18
 	if (!pgtable_page_ctor(page)) {
 		__free_page(page);
 		return NULL;
@@ -1336,6 +1530,9 @@ static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm)
 	atomic_set(&page->_mapcount, 0);
 	table = (unsigned long *) page_to_phys(page);
 	clear_table(table, _PAGE_INVALID, PAGE_SIZE/2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clear_table(table + PTRS_PER_PTE, 0, PAGE_SIZE/2);
 	return table;
@@ -1344,6 +1541,7 @@ static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm)
 static inline void page_table_free_pgste(unsigned long *table)
 {
 	struct page *page;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct gmap_pgtable *mp;
 
@@ -1361,6 +1559,8 @@ static inline void page_table_free_pgste(unsigned long *table)
 static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm,
 						    unsigned long vmaddr)
 =======
+=======
+>>>>>>> v3.18
 
 	page = pfn_to_page(__pa(table) >> PAGE_SHIFT);
 	pgtable_page_dtor(page);
@@ -1522,26 +1722,40 @@ static inline int page_table_with_pgste(struct page *page)
 }
 
 static inline unsigned long *page_table_alloc_pgste(struct mm_struct *mm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return NULL;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void page_table_reset_pgste(struct mm_struct *mm, unsigned long start,
 			    unsigned long end, bool init_skey)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void page_table_free_pgste(unsigned long *table)
 {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void gmap_disconnect_pgtable(struct mm_struct *mm,
 					   unsigned long *table)
+=======
+static inline void gmap_unlink(struct mm_struct *mm, unsigned long *table,
+			unsigned long vmaddr)
+>>>>>>> v3.18
 =======
 static inline void gmap_unlink(struct mm_struct *mm, unsigned long *table,
 			unsigned long vmaddr)
@@ -1566,7 +1780,11 @@ static inline unsigned int atomic_xor_bits(atomic_t *v, unsigned int bits)
  * page table entry allocation/free routines.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long *page_table_alloc(struct mm_struct *mm, unsigned long vmaddr)
+=======
+unsigned long *page_table_alloc(struct mm_struct *mm)
+>>>>>>> v3.18
 =======
 unsigned long *page_table_alloc(struct mm_struct *mm)
 >>>>>>> v3.18
@@ -1577,7 +1795,11 @@ unsigned long *page_table_alloc(struct mm_struct *mm)
 
 	if (mm_has_pgste(mm))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return page_table_alloc_pgste(mm, vmaddr);
+=======
+		return page_table_alloc_pgste(mm);
+>>>>>>> v3.18
 =======
 		return page_table_alloc_pgste(mm);
 >>>>>>> v3.18
@@ -1597,11 +1819,14 @@ unsigned long *page_table_alloc(struct mm_struct *mm)
 		if (!page)
 			return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pgtable_page_ctor(page);
 		atomic_set(&page->_mapcount, 1);
 		table = (unsigned long *) page_to_phys(page);
 		clear_table(table, _PAGE_TYPE_EMPTY, PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 		if (!pgtable_page_ctor(page)) {
 			__free_page(page);
 			return NULL;
@@ -1609,6 +1834,9 @@ unsigned long *page_table_alloc(struct mm_struct *mm)
 		atomic_set(&page->_mapcount, 1);
 		table = (unsigned long *) page_to_phys(page);
 		clear_table(table, _PAGE_INVALID, PAGE_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock_bh(&mm->context.list_lock);
 		list_add(&page->lru, &mm->context.pgtable_list);
@@ -1629,6 +1857,7 @@ void page_table_free(struct mm_struct *mm, unsigned long *table)
 	unsigned int bit, mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mm_has_pgste(mm)) {
 		gmap_disconnect_pgtable(mm, table);
 		return page_table_free_pgste(table);
@@ -1636,10 +1865,15 @@ void page_table_free(struct mm_struct *mm, unsigned long *table)
 	/* Free 1K/2K page table fragment of a 4K page */
 	page = pfn_to_page(__pa(table) >> PAGE_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	page = pfn_to_page(__pa(table) >> PAGE_SHIFT);
 	if (page_table_with_pgste(page))
 		return page_table_free_pgste(table);
 	/* Free 1K/2K page table fragment of a 4K page */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bit = 1 << ((__pa(table) & ~PAGE_MASK)/(PTRS_PER_PTE*sizeof(pte_t)));
 	spin_lock_bh(&mm->context.list_lock);
@@ -1672,7 +1906,12 @@ static void __page_table_free_rcu(void *table, unsigned bit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void page_table_free_rcu(struct mmu_gather *tlb, unsigned long *table)
+=======
+void page_table_free_rcu(struct mmu_gather *tlb, unsigned long *table,
+			 unsigned long vmaddr)
+>>>>>>> v3.18
 =======
 void page_table_free_rcu(struct mmu_gather *tlb, unsigned long *table,
 			 unsigned long vmaddr)
@@ -1684,8 +1923,14 @@ void page_table_free_rcu(struct mmu_gather *tlb, unsigned long *table,
 
 	mm = tlb->mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mm_has_pgste(mm)) {
 		gmap_disconnect_pgtable(mm, table);
+=======
+	page = pfn_to_page(__pa(table) >> PAGE_SHIFT);
+	if (page_table_with_pgste(page)) {
+		gmap_unlink(mm, table, vmaddr);
+>>>>>>> v3.18
 =======
 	page = pfn_to_page(__pa(table) >> PAGE_SHIFT);
 	if (page_table_with_pgste(page)) {
@@ -1697,7 +1942,10 @@ void page_table_free_rcu(struct mmu_gather *tlb, unsigned long *table,
 	}
 	bit = 1 << ((__pa(table) & ~PAGE_MASK) / (PTRS_PER_PTE*sizeof(pte_t)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page = pfn_to_page(__pa(table) >> PAGE_SHIFT);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_bh(&mm->context.list_lock);
@@ -1712,7 +1960,11 @@ void page_table_free_rcu(struct mmu_gather *tlb, unsigned long *table,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __tlb_remove_table(void *_table)
+=======
+static void __tlb_remove_table(void *_table)
+>>>>>>> v3.18
 =======
 static void __tlb_remove_table(void *_table)
 >>>>>>> v3.18
@@ -1764,7 +2016,10 @@ void tlb_table_flush(struct mmu_gather *tlb)
 
 	if (*batch) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__tlb_flush_mm(tlb->mm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		call_rcu_sched(&(*batch)->rcu, tlb_remove_table_rcu);
@@ -1777,6 +2032,10 @@ void tlb_remove_table(struct mmu_gather *tlb, void *table)
 	struct mmu_table_batch **batch = &tlb->batch;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tlb->mm->context.flush_mm = 1;
+>>>>>>> v3.18
 =======
 	tlb->mm->context.flush_mm = 1;
 >>>>>>> v3.18
@@ -1785,7 +2044,11 @@ void tlb_remove_table(struct mmu_gather *tlb, void *table)
 			__get_free_page(GFP_NOWAIT | __GFP_NOWARN);
 		if (*batch == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__tlb_flush_mm(tlb->mm);
+=======
+			__tlb_flush_mm_lazy(tlb->mm);
+>>>>>>> v3.18
 =======
 			__tlb_flush_mm_lazy(tlb->mm);
 >>>>>>> v3.18
@@ -1796,6 +2059,7 @@ void tlb_remove_table(struct mmu_gather *tlb, void *table)
 	}
 	(*batch)->tables[(*batch)->nr++] = table;
 	if ((*batch)->nr == MAX_TABLE_BATCH)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tlb_table_flush(tlb);
 }
@@ -1825,6 +2089,8 @@ void thp_split_mm(struct mm_struct *mm)
 #endif /* CONFIG_TRANSPARENT_HUGEPAGE */
 
 =======
+=======
+>>>>>>> v3.18
 		tlb_flush_mmu(tlb);
 }
 
@@ -1941,6 +2207,9 @@ static unsigned long page_table_realloc(struct mmu_gather *tlb, struct mm_struct
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * switch on pgstes for its userspace process (for kvm)
@@ -1948,6 +2217,7 @@ static unsigned long page_table_realloc(struct mmu_gather *tlb, struct mm_struct
 int s390_enable_sie(void)
 {
 	struct task_struct *tsk = current;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mm_struct *mm, *old_mm;
 
@@ -1958,11 +2228,16 @@ int s390_enable_sie(void)
 	struct mm_struct *mm = tsk->mm;
 	struct mmu_gather tlb;
 >>>>>>> v3.18
+=======
+	struct mm_struct *mm = tsk->mm;
+	struct mmu_gather tlb;
+>>>>>>> v3.18
 
 	/* Do we have pgstes? if yes, we are done */
 	if (mm_has_pgste(tsk->mm))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* lets check if we are allowed to replace the mm */
 	task_lock(tsk);
@@ -2018,6 +2293,8 @@ int s390_enable_sie(void)
 }
 EXPORT_SYMBOL_GPL(s390_enable_sie);
 =======
+=======
+>>>>>>> v3.18
 	down_write(&mm->mmap_sem);
 	/* split thp mappings and disable thp for future mappings */
 	thp_split_mm(mm);
@@ -2061,6 +2338,9 @@ bool gmap_test_and_clear_dirty(unsigned long address, struct gmap *gmap)
 	return dirty;
 }
 EXPORT_SYMBOL_GPL(gmap_test_and_clear_dirty);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
@@ -2080,6 +2360,12 @@ int pmdp_set_access_flags(struct vm_area_struct *vma,
 	VM_BUG_ON(address & ~HPAGE_PMD_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	entry = pmd_mkyoung(entry);
+	if (dirty)
+		entry = pmd_mkdirty(entry);
+>>>>>>> v3.18
 =======
 	entry = pmd_mkyoung(entry);
 	if (dirty)
@@ -2109,6 +2395,7 @@ void pmdp_splitting_flush(struct vm_area_struct *vma, unsigned long address,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
 {
 	struct list_head *lh = (struct list_head *) pgtable;
@@ -2125,6 +2412,8 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
 
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
 =======
+=======
+>>>>>>> v3.18
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 				pgtable_t pgtable)
 {
@@ -2141,12 +2430,16 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 }
 
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct list_head *lh;
 	pgtable_t pgtable;
 	pte_t *ptep;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	assert_spin_locked(&mm->page_table_lock);
 
@@ -2164,6 +2457,8 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
 	ptep++;
 	pte_val(*ptep) = _PAGE_TYPE_EMPTY;
 =======
+=======
+>>>>>>> v3.18
 	assert_spin_locked(pmd_lockptr(mm, pmdp));
 
 	/* FIFO */
@@ -2179,6 +2474,9 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
 	pte_val(*ptep) = _PAGE_INVALID;
 	ptep++;
 	pte_val(*ptep) = _PAGE_INVALID;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pgtable;
 }

@@ -33,7 +33,10 @@
  */
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ptrace.h>
@@ -117,6 +120,7 @@ static void com20020_detach(struct pcmcia_device *p_dev);
 /*====================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct com20020_dev_t {
     struct net_device       *dev;
 } com20020_dev_t;
@@ -129,6 +133,11 @@ static int com20020_probe(struct pcmcia_device *p_dev)
 {
     struct com20020_dev *info;
 >>>>>>> v3.18
+=======
+static int com20020_probe(struct pcmcia_device *p_dev)
+{
+    struct com20020_dev *info;
+>>>>>>> v3.18
     struct net_device *dev;
     struct arcnet_local *lp;
 
@@ -136,7 +145,11 @@ static int com20020_probe(struct pcmcia_device *p_dev)
 
     /* Create new network device */
 <<<<<<< HEAD
+<<<<<<< HEAD
     info = kzalloc(sizeof(struct com20020_dev_t), GFP_KERNEL);
+=======
+    info = kzalloc(sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
     info = kzalloc(sizeof(*info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -175,7 +188,11 @@ fail_alloc_info:
 static void com20020_detach(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     struct com20020_dev_t *info = link->priv;
+=======
+    struct com20020_dev *info = link->priv;
+>>>>>>> v3.18
 =======
     struct com20020_dev *info = link->priv;
 >>>>>>> v3.18
@@ -218,7 +235,11 @@ static int com20020_config(struct pcmcia_device *link)
 {
     struct arcnet_local *lp;
 <<<<<<< HEAD
+<<<<<<< HEAD
     com20020_dev_t *info;
+=======
+    struct com20020_dev *info;
+>>>>>>> v3.18
 =======
     struct com20020_dev *info;
 >>>>>>> v3.18
@@ -314,7 +335,11 @@ static void com20020_release(struct pcmcia_device *link)
 static int com20020_suspend(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	com20020_dev_t *info = link->priv;
+=======
+	struct com20020_dev *info = link->priv;
+>>>>>>> v3.18
 =======
 	struct com20020_dev *info = link->priv;
 >>>>>>> v3.18
@@ -329,7 +354,11 @@ static int com20020_suspend(struct pcmcia_device *link)
 static int com20020_resume(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	com20020_dev_t *info = link->priv;
+=======
+	struct com20020_dev *info = link->priv;
+>>>>>>> v3.18
 =======
 	struct com20020_dev *info = link->priv;
 >>>>>>> v3.18

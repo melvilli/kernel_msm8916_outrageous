@@ -41,7 +41,11 @@
 &esdhc1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc1_1>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc1>;
 >>>>>>> v3.18
@@ -53,7 +57,11 @@
 &esdhc2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc2_1>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc2>;
 >>>>>>> v3.18
@@ -64,7 +72,11 @@
 &uart3 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart3_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart3>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart3>;
 >>>>>>> v3.18
@@ -75,7 +87,11 @@
 &ecspi1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_ecspi1_1>;
+=======
+	pinctrl-0 = <&pinctrl_ecspi1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_ecspi1>;
 >>>>>>> v3.18
@@ -112,7 +128,11 @@
 &esdhc3 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc3_1>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc3>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc3>;
 >>>>>>> v3.18
@@ -125,7 +145,11 @@
 	pinctrl-0 = <&pinctrl_hog>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hog {
+=======
+	imx53-smd {
+>>>>>>> v3.18
 =======
 	imx53-smd {
 >>>>>>> v3.18
@@ -141,7 +165,10 @@
 			>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		pinctrl_ecspi1: ecspi1grp {
 			fsl,pins = <
@@ -239,6 +266,9 @@
 				MX53_PAD_PATA_DA_2__UART3_RTS		0x1e4
 			>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };
@@ -246,7 +276,11 @@
 &uart1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart1_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart1>;
 >>>>>>> v3.18
@@ -256,7 +290,11 @@
 &uart2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart2_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart2>;
 >>>>>>> v3.18
@@ -266,7 +304,11 @@
 &i2c2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_i2c2_1>;
+=======
+	pinctrl-0 = <&pinctrl_i2c2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_i2c2>;
 >>>>>>> v3.18
@@ -291,7 +333,11 @@
 &i2c1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_i2c1_1>;
+=======
+	pinctrl-0 = <&pinctrl_i2c1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_i2c1>;
 >>>>>>> v3.18
@@ -309,7 +355,11 @@
 
 	pmic: dialog@48 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "dialog,da9053", "dialog,da9052";
+=======
+		compatible = "dlg,da9053", "dlg,da9052";
+>>>>>>> v3.18
 =======
 		compatible = "dlg,da9053", "dlg,da9052";
 >>>>>>> v3.18
@@ -320,7 +370,11 @@
 &fec {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_fec_1>;
+=======
+	pinctrl-0 = <&pinctrl_fec>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_fec>;
 >>>>>>> v3.18

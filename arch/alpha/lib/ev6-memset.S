@@ -31,6 +31,7 @@
 	.set noreorder
 .text
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.globl __memset
 	.globl __memsetw
 	.globl __constant_c_memset
@@ -40,6 +41,8 @@
 .align 5
 __memset:
 =======
+=======
+>>>>>>> v3.18
 	.globl memset
 	.globl __memset
 	.globl ___memset
@@ -49,6 +52,9 @@ __memset:
 	.ent ___memset
 .align 5
 ___memset:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.frame $30,0,$26,0
 	.prologue 0
@@ -240,7 +246,11 @@ end_b:
 	nop
 	ret $31,($26),1		# L0 :
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.end __memset
+=======
+	.end ___memset
+>>>>>>> v3.18
 =======
 	.end ___memset
 >>>>>>> v3.18
@@ -611,7 +621,12 @@ end_w:
 	.end __memsetw
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 memset = __memset
+=======
+memset = ___memset
+__memset = ___memset
+>>>>>>> v3.18
 =======
 memset = ___memset
 __memset = ___memset

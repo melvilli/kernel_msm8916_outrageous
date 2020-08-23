@@ -5,11 +5,17 @@
 
 struct module;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct scsi_cmnd;
 struct scsi_device;
 struct request;
 struct request_queue;
 
+=======
+struct request;
+struct scsi_cmnd;
+struct scsi_device;
+>>>>>>> v3.18
 =======
 struct request;
 struct scsi_cmnd;
@@ -22,13 +28,19 @@ struct scsi_driver {
 
 	void (*rescan)(struct device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*done)(struct scsi_cmnd *);
 	int (*eh_action)(struct scsi_cmnd *, unsigned char *, int, int);
 =======
+=======
+>>>>>>> v3.18
 	int (*init_command)(struct scsi_cmnd *);
 	void (*uninit_command)(struct scsi_cmnd *);
 	int (*done)(struct scsi_cmnd *);
 	int (*eh_action)(struct scsi_cmnd *, int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define to_scsi_driver(drv) \
@@ -43,12 +55,15 @@ extern int scsi_register_interface(struct class_interface *);
 	class_interface_unregister(intf)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int scsi_setup_blk_pc_cmnd(struct scsi_device *sdev, struct request *req);
 int scsi_setup_fs_cmnd(struct scsi_device *sdev, struct request *req);
 int scsi_prep_state_check(struct scsi_device *sdev, struct request *req);
 int scsi_prep_return(struct request_queue *q, struct request *req, int ret);
 int scsi_prep_fn(struct request_queue *, struct request *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _SCSI_SCSI_DRIVER_H */

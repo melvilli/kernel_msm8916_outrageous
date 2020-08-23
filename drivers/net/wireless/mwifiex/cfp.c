@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: Channel, Frequence and Power
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -76,7 +80,10 @@ u16 region_code_index[MWIFIEX_MAX_REGION_CODE] = { 0x10, 0x20, 0x30,
 static u8 supported_rates_n[N_SUPPORTED_RATES] = { 0x02, 0x04, 0 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* For every mcs_rate line, the first 8 bytes are for stream 1x1,
  * and all 16 bytes are for stream 2x2.
  */
@@ -166,6 +173,9 @@ static const u16 ac_mcs_rate_nss2[8][10] = {
 	  0x15B, 0x00 },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct region_code_mapping {
 	u8 code;
@@ -205,6 +215,7 @@ u8 *mwifiex_11d_code_2_region(u8 code)
 u32 mwifiex_index_to_acs_data_rate(struct mwifiex_private *priv,
 				   u8 index, u8 ht_info)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * For every mcs_rate line, the first 8 bytes are for stream 1x1,
@@ -297,6 +308,8 @@ u32 mwifiex_index_to_acs_data_rate(struct mwifiex_private *priv,
 	};
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	u32 rate = 0;
 	u8 mcs_index = 0;
 	u8 bw = 0;
@@ -352,6 +365,7 @@ u32 mwifiex_index_to_data_rate(struct mwifiex_private *priv,
 			       u8 index, u8 ht_info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For every mcs_rate line, the first 8 bytes are for stream 1x1,
 	 * and all 16 bytes are for stream 2x2.
 	 */
@@ -374,6 +388,10 @@ u32 mwifiex_index_to_data_rate(struct mwifiex_private *priv,
 	};
 	u32 mcs_num_supp =
 		(priv->adapter->hw_dev_mcs_support == HT_STREAM_2X2) ? 16 : 8;
+=======
+	u32 mcs_num_supp =
+		(priv->adapter->user_dev_mcs_support == HT_STREAM_2X2) ? 16 : 8;
+>>>>>>> v3.18
 =======
 	u32 mcs_num_supp =
 		(priv->adapter->user_dev_mcs_support == HT_STREAM_2X2) ? 16 : 8;
@@ -509,12 +527,15 @@ mwifiex_is_rate_auto(struct mwifiex_private *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This function gets the supported data rates.
  *
  * The function works in both Ad-Hoc and infra mode by printing the
  * band and returning the data rates.
 =======
+=======
+>>>>>>> v3.18
 /* This function gets the supported data rates from bitmask inside
  * cfg80211_scan_request.
  */
@@ -552,6 +573,9 @@ u32 mwifiex_get_rates_from_cfg80211(struct mwifiex_private *priv,
 /* This function gets the supported data rates. The function works in
  * both Ad-Hoc and infra mode by printing the band and returning the
  * data rates.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 u32 mwifiex_get_supported_rates(struct mwifiex_private *priv, u8 *rates)
@@ -571,7 +595,10 @@ u32 mwifiex_get_supported_rates(struct mwifiex_private *priv, u8 *rates)
 		case BAND_G:
 		case BAND_G | BAND_GN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BAND_G | BAND_GN | BAND_GAC:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			dev_dbg(adapter->dev, "info: infra band=%d "
@@ -585,10 +612,14 @@ u32 mwifiex_get_supported_rates(struct mwifiex_private *priv, u8 *rates)
 		case BAND_A | BAND_B | BAND_G | BAND_GN | BAND_AN:
 		case BAND_A | BAND_B | BAND_G | BAND_GN | BAND_AN | BAND_AAC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BAND_A | BAND_B | BAND_G | BAND_GN | BAND_AN |
 		     BAND_AAC | BAND_GAC:
 		case BAND_B | BAND_G | BAND_GN:
 		case BAND_B | BAND_G | BAND_GN | BAND_GAC:
+=======
+		case BAND_B | BAND_G | BAND_GN:
+>>>>>>> v3.18
 =======
 		case BAND_B | BAND_G | BAND_GN:
 >>>>>>> v3.18
@@ -616,7 +647,10 @@ u32 mwifiex_get_supported_rates(struct mwifiex_private *priv, u8 *rates)
 			break;
 		case BAND_GN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BAND_GN | BAND_GAC:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			dev_dbg(adapter->dev, "info: infra band=%d "

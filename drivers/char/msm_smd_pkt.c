@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2008-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2008-2010, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2008-2010, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -14,11 +18,14 @@
  * GNU General Public License for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 /*
  * SMD Packet Driver -- Provides a binary SMD non-muxed packet port
  *                       interface.
 =======
+=======
+>>>>>>> v3.18
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
@@ -27,6 +34,9 @@
  */
 /*
  * SMD Packet Driver -- Provides userspace interface to SMD packet ports.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -37,13 +47,17 @@
 #include <linux/device.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/spinlock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mutex.h>
 #include <linux/delay.h>
 #include <linux/uaccess.h>
 #include <linux/workqueue.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/completion.h>
@@ -80,6 +94,8 @@ struct smd_pkt_dev {
 
 	struct smd_channel *ch;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/poll.h>
 
 #include <mach/msm_smd.h>
@@ -94,11 +110,15 @@ struct smd_pkt_dev {
 
 	struct smd_channel *ch;
 	int open_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex ch_lock;
 	struct mutex rx_lock;
 	struct mutex tx_lock;
 	wait_queue_head_t ch_read_wait_queue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wait_queue_head_t ch_write_wait_queue;
 	wait_queue_head_t ch_opened_wait_queue;
@@ -584,6 +604,8 @@ wait_for_packet:
 
 	/* check and wakeup read threads waiting on this device */
 =======
+=======
+>>>>>>> v3.18
 	wait_queue_head_t ch_opened_wait_queue;
 
 	int i;
@@ -705,12 +727,16 @@ wait_for_packet:
 	}
 
 	DBG("read complete %d bytes\n", bytes_read);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	check_and_wakeup_reader(smd_pkt_devp);
 
 	return bytes_read;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ssize_t smd_pkt_write(struct file *file,
 		       const char __user *_buf,
@@ -815,6 +841,8 @@ ssize_t smd_pkt_write(struct file *file,
 
 	kfree(buf);
 =======
+=======
+>>>>>>> v3.18
 static int smd_pkt_write(struct file *file, const char __user *buf,
 			 size_t count, loff_t *ppos)
 {
@@ -854,6 +882,9 @@ static int smd_pkt_write(struct file *file, const char __user *buf,
 	mutex_unlock(&smd_pkt_devp->tx_lock);
 
 	DBG("wrote %d bytes\n", count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -864,6 +895,7 @@ static unsigned int smd_pkt_poll(struct file *file, poll_table *wait)
 	unsigned int mask = 0;
 
 	smd_pkt_devp = file->private_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!smd_pkt_devp) {
 		pr_err_ratelimited("%s on a NULL device\n", __func__);
@@ -988,6 +1020,8 @@ static void ch_notify(void *priv, unsigned event)
 			schedule_delayed_work(&loopback_work,
 					msecs_to_jiffies(1000));
 =======
+=======
+>>>>>>> v3.18
 	if (!smd_pkt_devp)
 		return POLLERR;
 
@@ -1026,11 +1060,15 @@ static void smd_pkt_ch_notify(void *priv, unsigned event)
 
 	default:
 		pr_err("unknown event %d\n", event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Legacy configuration : smd_ch_name[], smd_ch_edge[] and smd_pkt_dev_name[].
@@ -1060,6 +1098,8 @@ static uint32_t smd_ch_edge[] = {
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static char *smd_pkt_dev_name[] = {
 	"smdcntl0",
 	"smdcntl1",
@@ -1069,6 +1109,7 @@ static char *smd_pkt_dev_name[] = {
 	"smdcntl5",
 	"smdcntl6",
 	"smdcntl7",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	"smdcntl9",
 	"smdcntl10",
@@ -1096,6 +1137,9 @@ static char *smd_pkt_dev_name[] = {
 =======
 	"smd22",
 >>>>>>> v3.18
+=======
+	"smd22",
+>>>>>>> v3.18
 };
 
 static char *smd_ch_name[] = {
@@ -1107,6 +1151,7 @@ static char *smd_ch_name[] = {
 	"DATA12_CNTL",
 	"DATA13_CNTL",
 	"DATA14_CNTL",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	"DATA15_CNTL",
 	"DATA16_CNTL",
@@ -1322,6 +1367,8 @@ int smd_pkt_open(struct inode *inode, struct file *file)
 	}
 	D_STATUS("Begin %s on smd_pkt_dev id:%d\n", __func__, smd_pkt_devp->i);
 =======
+=======
+>>>>>>> v3.18
 	"DATA22",
 };
 
@@ -1333,11 +1380,15 @@ static int smd_pkt_open(struct inode *inode, struct file *file)
 	smd_pkt_devp = container_of(inode->i_cdev, struct smd_pkt_dev, cdev);
 	if (!smd_pkt_devp)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	file->private_data = smd_pkt_devp;
 
 	mutex_lock(&smd_pkt_devp->ch_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (smd_pkt_devp->ch == 0) {
 		INIT_COMPLETION(smd_pkt_devp->ch_allocated);
@@ -1407,6 +1458,8 @@ static int smd_pkt_open(struct inode *inode, struct file *file)
 			       smd_pkt_devp->ch_name, r);
 			goto release_pil;
 =======
+=======
+>>>>>>> v3.18
 	if (smd_pkt_devp->open_count == 0) {
 		r = smd_open(smd_ch_name[smd_pkt_devp->i],
 			     &smd_pkt_devp->ch, smd_pkt_devp,
@@ -1415,11 +1468,15 @@ static int smd_pkt_open(struct inode *inode, struct file *file)
 			pr_err("smd_open failed for %s, %d\n",
 			       smd_ch_name[smd_pkt_devp->i], r);
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		r = wait_event_interruptible_timeout(
 				smd_pkt_devp->ch_opened_wait_queue,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				smd_pkt_devp->is_open, (2 * HZ));
 		if (r == 0) {
@@ -1464,6 +1521,8 @@ out:
 
 int smd_pkt_release(struct inode *inode, struct file *file)
 =======
+=======
+>>>>>>> v3.18
 				smd_pkt_devp->remote_open,
 				msecs_to_jiffies(2 * HZ));
 		if (r == 0)
@@ -1484,11 +1543,15 @@ out:
 }
 
 static int smd_pkt_release(struct inode *inode, struct file *file)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r = 0;
 	struct smd_pkt_dev *smd_pkt_devp = file->private_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!smd_pkt_devp) {
 		pr_err_ratelimited("%s on a NULL device\n", __func__);
@@ -1528,6 +1591,8 @@ static int smd_pkt_release(struct inode *inode, struct file *file)
 		 __func__, smd_pkt_devp->i);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!smd_pkt_devp)
 		return -EINVAL;
 
@@ -1538,6 +1603,9 @@ static int smd_pkt_release(struct inode *inode, struct file *file)
 	}
 	mutex_unlock(&smd_pkt_devp->ch_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -1549,6 +1617,7 @@ static const struct file_operations smd_pkt_fops = {
 	.read = smd_pkt_read,
 	.write = smd_pkt_write,
 	.poll = smd_pkt_poll,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.unlocked_ioctl = smd_pkt_ioctl,
 	.compat_ioctl = smd_pkt_ioctl,
@@ -1660,6 +1729,8 @@ static int smd_pkt_alloc_chrdev_region(void)
 		pr_err("%s: alloc_chrdev_region() failed ret:%i\n",
 			__func__, r);
 =======
+=======
+>>>>>>> v3.18
 };
 
 static int __init smd_pkt_init(void)
@@ -1671,12 +1742,16 @@ static int __init smd_pkt_init(void)
 				NUM_SMD_PKT_PORTS, DEVICE_NAME);
 	if (r) {
 		pr_err("alloc_chrdev_region() failed %d\n", r);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return r;
 	}
 
 	smd_pkt_classp = class_create(THIS_MODULE, DEVICE_NAME);
 	if (IS_ERR(smd_pkt_classp)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_err("%s: class_create() failed ENOMEM\n", __func__);
 		r = -ENOMEM;
@@ -1925,6 +2000,8 @@ static void __exit smd_pkt_cleanup(void)
 
 module_init(smd_pkt_init);
 =======
+=======
+>>>>>>> v3.18
 		r = PTR_ERR(smd_pkt_classp);
 		pr_err("class_create() failed %d\n", r);
 		goto unreg_chardev;
@@ -2013,6 +2090,9 @@ static void __exit smd_pkt_cleanup(void)
 	class_destroy(smd_pkt_classp);
 	unregister_chrdev_region(MAJOR(smd_pkt_number), NUM_SMD_PKT_PORTS);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_exit(smd_pkt_cleanup);
 

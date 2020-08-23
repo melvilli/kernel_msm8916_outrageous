@@ -73,7 +73,11 @@ int __init pxa_register_device(struct pxa_device_desc *desc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB) || defined(CONFIG_USB_GADGET)
+=======
+#if IS_ENABLED(CONFIG_USB) || IS_ENABLED(CONFIG_USB_GADGET)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB) || IS_ENABLED(CONFIG_USB_GADGET)
 >>>>>>> v3.18
@@ -117,9 +121,15 @@ static void u2o_write(void __iomem *base, unsigned int offset,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_MV_UDC) || defined(CONFIG_USB_EHCI_MV)
 
 #if defined(CONFIG_CPU_PXA910) || defined(CONFIG_CPU_PXA168)
+=======
+#if IS_ENABLED(CONFIG_USB_MV_UDC) || IS_ENABLED(CONFIG_USB_EHCI_MV)
+
+#if IS_ENABLED(CONFIG_CPU_PXA910) || IS_ENABLED(CONFIG_CPU_PXA168)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_MV_UDC) || IS_ENABLED(CONFIG_USB_EHCI_MV)
 
@@ -249,15 +259,21 @@ void pxa_usb_phy_deinit(void __iomem *phy_reg)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_SUPPORT
 static u64 usb_dma_mask = ~(u32)0;
 
 #ifdef CONFIG_USB_MV_UDC
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_USB_SUPPORT)
 static u64 usb_dma_mask = ~(u32)0;
 
 #if IS_ENABLED(CONFIG_USB_MV_UDC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct resource pxa168_u2o_resources[] = {
 	/* regbase */
@@ -294,7 +310,11 @@ struct platform_device pxa168_device_u2o = {
 #endif /* CONFIG_USB_MV_UDC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_EHCI_MV_U2O
+=======
+#if IS_ENABLED(CONFIG_USB_EHCI_MV_U2O)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_EHCI_MV_U2O)
 >>>>>>> v3.18
@@ -334,7 +354,11 @@ struct platform_device pxa168_device_u2oehci = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_MV_OTG)
+=======
+#if IS_ENABLED(CONFIG_USB_MV_OTG)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_MV_OTG)
 >>>>>>> v3.18

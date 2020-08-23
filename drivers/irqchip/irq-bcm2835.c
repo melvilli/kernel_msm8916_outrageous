@@ -50,15 +50,21 @@
 #include <linux/of_irq.h>
 #include <linux/irqdomain.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip/bcm2835.h>
 
 #include <asm/exception.h>
 =======
+=======
+>>>>>>> v3.18
 
 #include <asm/exception.h>
 #include <asm/mach/irq.h>
 
 #include "irqchip.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Put the bank and irq (32 bits) into the hwirq */
@@ -102,6 +108,11 @@ struct armctrl_ic {
 
 static struct armctrl_ic intc __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void __exception_irq_entry bcm2835_handle_irq(
+	struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 static void __exception_irq_entry bcm2835_handle_irq(
 	struct pt_regs *regs);
@@ -178,6 +189,7 @@ static int __init armctrl_of_init(struct device_node *node,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -189,6 +201,11 @@ static struct of_device_id irq_of_match[] __initconst = {
 void __init bcm2835_init_irq(void)
 {
 	of_irq_init(irq_of_match);
+=======
+
+	set_handle_irq(bcm2835_handle_irq);
+	return 0;
+>>>>>>> v3.18
 =======
 
 	set_handle_irq(bcm2835_handle_irq);
@@ -220,7 +237,11 @@ static void armctrl_handle_shortcut(int bank, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void __exception_irq_entry bcm2835_handle_irq(
+=======
+static void __exception_irq_entry bcm2835_handle_irq(
+>>>>>>> v3.18
 =======
 static void __exception_irq_entry bcm2835_handle_irq(
 >>>>>>> v3.18
@@ -246,6 +267,11 @@ static void __exception_irq_entry bcm2835_handle_irq(
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+IRQCHIP_DECLARE(bcm2835_armctrl_ic, "brcm,bcm2835-armctrl-ic", armctrl_of_init);
+>>>>>>> v3.18
 =======
 
 IRQCHIP_DECLARE(bcm2835_armctrl_ic, "brcm,bcm2835-armctrl-ic", armctrl_of_init);

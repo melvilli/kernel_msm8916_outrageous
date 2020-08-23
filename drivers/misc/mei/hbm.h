@@ -26,6 +26,7 @@ struct mei_cl;
  *
  * @MEI_HBM_IDLE : protocol not started
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @MEI_HBM_START : start request message was sent
  * @MEI_HBM_ENUM_CLIENTS : enumeration request was sent
  * @MEI_HBM_CLIENT_PROPERTIES : acquiring clients properties
@@ -51,6 +52,8 @@ static inline void mei_hbm_hdr(struct mei_msg_hdr *hdr, size_t length)
 }
 
 =======
+=======
+>>>>>>> v3.18
  * @MEI_HBM_STARTING : start request message was sent
  * @MEI_HBM_STARTED : start reply message was received
  * @MEI_HBM_ENUM_CLIENTS : enumeration request was sent
@@ -72,19 +75,28 @@ int mei_hbm_dispatch(struct mei_device *dev, struct mei_msg_hdr *hdr);
 
 void mei_hbm_idle(struct mei_device *dev);
 void mei_hbm_reset(struct mei_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mei_hbm_start_req(struct mei_device *dev);
 int mei_hbm_start_wait(struct mei_device *dev);
 int mei_hbm_cl_flow_control_req(struct mei_device *dev, struct mei_cl *cl);
 int mei_hbm_cl_disconnect_req(struct mei_device *dev, struct mei_cl *cl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mei_hbm_cl_connect_req(struct mei_device *dev, struct mei_cl *cl);
 
 =======
+=======
+>>>>>>> v3.18
 int mei_hbm_cl_disconnect_rsp(struct mei_device *dev, struct mei_cl *cl);
 int mei_hbm_cl_connect_req(struct mei_device *dev, struct mei_cl *cl);
 bool mei_hbm_version_is_supported(struct mei_device *dev);
 int mei_hbm_pg(struct mei_device *dev, u8 pg_cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _MEI_HBM_H_ */

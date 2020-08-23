@@ -49,7 +49,11 @@ static inline void __flush_dtlb_all (void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_tlb_all (void)
+=======
+void local_flush_tlb_all(void)
+>>>>>>> v3.18
 =======
 void local_flush_tlb_all(void)
 >>>>>>> v3.18
@@ -65,6 +69,7 @@ void local_flush_tlb_all(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_tlb_mm(struct mm_struct *mm)
 {
 	if (mm == current->active_mm) {
@@ -79,6 +84,8 @@ void flush_tlb_mm(struct mm_struct *mm)
 }
 
 =======
+=======
+>>>>>>> v3.18
 void local_flush_tlb_mm(struct mm_struct *mm)
 {
 	int cpu = smp_processor_id();
@@ -96,6 +103,9 @@ void local_flush_tlb_mm(struct mm_struct *mm)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _ITLB_ENTRIES (ITLB_ARF_WAYS << XCHAL_ITLB_ARF_ENTRIES_LOG2)
 #define _DTLB_ENTRIES (DTLB_ARF_WAYS << XCHAL_DTLB_ARF_ENTRIES_LOG2)
@@ -106,6 +116,7 @@ void local_flush_tlb_mm(struct mm_struct *mm)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_tlb_range (struct vm_area_struct *vma,
 		      unsigned long start, unsigned long end)
 {
@@ -114,6 +125,8 @@ void flush_tlb_range (struct vm_area_struct *vma,
 
 	if (mm->context == NO_CONTEXT)
 =======
+=======
+>>>>>>> v3.18
 void local_flush_tlb_range(struct vm_area_struct *vma,
 		unsigned long start, unsigned long end)
 {
@@ -122,11 +135,15 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 	unsigned long flags;
 
 	if (mm->context.asid[cpu] == NO_CONTEXT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
 #if 0
 	printk("[tlbrange<%02lx,%08lx,%08lx>]\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			(unsigned long)mm->context, start, end);
 #endif
@@ -136,6 +153,8 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 		int oldpid = get_rasid_register();
 		set_rasid_register (ASID_INSERT(mm->context));
 =======
+=======
+>>>>>>> v3.18
 			(unsigned long)mm->context.asid[cpu], start, end);
 #endif
 	local_irq_save(flags);
@@ -144,6 +163,9 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 		int oldpid = get_rasid_register();
 
 		set_rasid_register(ASID_INSERT(mm->context.asid[cpu]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		start &= PAGE_MASK;
 		if (vma->vm_flags & VM_EXEC)
@@ -161,7 +183,11 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 		set_rasid_register(oldpid);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flush_tlb_mm(mm);
+=======
+		local_flush_tlb_mm(mm);
+>>>>>>> v3.18
 =======
 		local_flush_tlb_mm(mm);
 >>>>>>> v3.18
@@ -170,8 +196,14 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_tlb_page (struct vm_area_struct *vma, unsigned long page)
 {
+=======
+void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
+{
+	int cpu = smp_processor_id();
+>>>>>>> v3.18
 =======
 void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 {
@@ -182,6 +214,7 @@ void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 	int oldpid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(mm->context == NO_CONTEXT)
 		return;
 
@@ -189,6 +222,8 @@ void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 
 	oldpid = get_rasid_register();
 =======
+=======
+>>>>>>> v3.18
 	if (mm->context.asid[cpu] == NO_CONTEXT)
 		return;
 
@@ -196,6 +231,9 @@ void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 
 	oldpid = get_rasid_register();
 	set_rasid_register(ASID_INSERT(mm->context.asid[cpu]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (vma->vm_flags & VM_EXEC)
@@ -207,7 +245,10 @@ void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 	local_irq_restore(flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void local_flush_tlb_kernel_range(unsigned long start, unsigned long end)
 {
@@ -336,4 +377,7 @@ void check_tlb_sanity(void)
 }
 
 #endif /* CONFIG_DEBUG_TLB_SANITY */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

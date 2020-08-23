@@ -69,6 +69,7 @@ union tcp_word_hdr {
 #define tcp_flag_word(tp) ( ((union tcp_word_hdr *)(tp))->words [3]) 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
 	TCP_FLAG_CWR = __constant_htonl(0x00800000),
 	TCP_FLAG_ECE = __constant_htonl(0x00400000),
@@ -82,6 +83,8 @@ enum {
 	TCP_DATA_OFFSET = __constant_htonl(0xF0000000)
 };
 =======
+=======
+>>>>>>> v3.18
 enum { 
 	TCP_FLAG_CWR = __constant_cpu_to_be32(0x00800000),
 	TCP_FLAG_ECE = __constant_cpu_to_be32(0x00400000),
@@ -94,6 +97,9 @@ enum {
 	TCP_RESERVED_BITS = __constant_cpu_to_be32(0x0F000000),
 	TCP_DATA_OFFSET = __constant_cpu_to_be32(0xF0000000)
 }; 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -127,6 +133,10 @@ enum {
 #define TCP_FASTOPEN		23	/* Enable FastOpen on listeners */
 #define TCP_TIMESTAMP		24
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TCP_NOTSENT_LOWAT	25	/* limit number of unsent bytes in write queue */
+>>>>>>> v3.18
 =======
 #define TCP_NOTSENT_LOWAT	25	/* limit number of unsent bytes in write queue */
 >>>>>>> v3.18
@@ -173,7 +183,10 @@ struct tcp_info {
 	__u8	tcpi_options;
 	__u8	tcpi_snd_wscale : 4, tcpi_rcv_wscale : 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8    tcpi_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -209,6 +222,12 @@ struct tcp_info {
 
 	__u32	tcpi_total_retrans;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	__u64	tcpi_pacing_rate;
+	__u64	tcpi_max_pacing_rate;
+>>>>>>> v3.18
 =======
 
 	__u64	tcpi_pacing_rate;

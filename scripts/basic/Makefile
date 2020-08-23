@@ -10,6 +10,10 @@
 
 hostprogs-y	:= fixdep
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+hostprogs-$(CONFIG_BUILD_BIN2C)     += bin2c
+>>>>>>> v3.18
 =======
 hostprogs-$(CONFIG_BUILD_BIN2C)     += bin2c
 >>>>>>> v3.18

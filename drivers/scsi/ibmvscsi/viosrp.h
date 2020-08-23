@@ -76,9 +76,15 @@ struct viosrp_crq {
 	u8 reserved;
 	u8 status;		/* non-scsi failure? (e.g. DMA failure) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 timeout;		/* in seconds */
 	u16 IU_length;		/* in bytes */
 	u64 IU_data_ptr;	/* the TCE for transferring data */
+=======
+	__be16 timeout;		/* in seconds */
+	__be16 IU_length;		/* in bytes */
+	__be64 IU_data_ptr;	/* the TCE for transferring data */
+>>>>>>> v3.18
 =======
 	__be16 timeout;		/* in seconds */
 	__be16 IU_length;		/* in bytes */
@@ -131,15 +137,21 @@ enum viosrp_capability_flag {
  */
 struct mad_common {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 type;
 	u16 status;
 	u16 length;
 	u64 tag;
 =======
+=======
+>>>>>>> v3.18
 	__be32 type;
 	__be16 status;
 	__be16 length;
 	__be64 tag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -153,8 +165,13 @@ struct mad_common {
 struct viosrp_empty_iu {
 	struct mad_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 buffer;
 	u32 port;
+=======
+	__be64 buffer;
+	__be32 port;
+>>>>>>> v3.18
 =======
 	__be64 buffer;
 	__be32 port;
@@ -164,7 +181,11 @@ struct viosrp_empty_iu {
 struct viosrp_error_log {
 	struct mad_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 buffer;
+=======
+	__be64 buffer;
+>>>>>>> v3.18
 =======
 	__be64 buffer;
 >>>>>>> v3.18
@@ -173,7 +194,11 @@ struct viosrp_error_log {
 struct viosrp_adapter_info {
 	struct mad_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 buffer;
+=======
+	__be64 buffer;
+>>>>>>> v3.18
 =======
 	__be64 buffer;
 >>>>>>> v3.18
@@ -182,7 +207,11 @@ struct viosrp_adapter_info {
 struct viosrp_host_config {
 	struct mad_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 buffer;
+=======
+	__be64 buffer;
+>>>>>>> v3.18
 =======
 	__be64 buffer;
 >>>>>>> v3.18
@@ -195,6 +224,7 @@ struct viosrp_fast_fail {
 struct viosrp_capabilities {
 	struct mad_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 buffer;
 };
 
@@ -203,6 +233,8 @@ struct mad_capability_common {
 	u16 length;
 	u16 server_support;
 =======
+=======
+>>>>>>> v3.18
 	__be64 buffer;
 };
 
@@ -210,13 +242,20 @@ struct mad_capability_common {
 	__be32 cap_type;
 	__be16 length;
 	__be16 server_support;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct mad_reserve_cap {
 	struct mad_capability_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 type;
+=======
+	__be32 type;
+>>>>>>> v3.18
 =======
 	__be32 type;
 >>>>>>> v3.18
@@ -225,17 +264,23 @@ struct mad_reserve_cap {
 struct mad_migration_cap {
 	struct mad_capability_common common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ecl;
 };
 
 struct capabilities{
 	u32 flags;
 =======
+=======
+>>>>>>> v3.18
 	__be32 ecl;
 };
 
 struct capabilities{
 	__be32 flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char name[SRP_MAX_LOC_LEN];
 	char loc[SRP_MAX_LOC_LEN];
@@ -261,15 +306,21 @@ struct mad_adapter_info_data {
 	char srp_version[8];
 	char partition_name[96];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 partition_number;
 	u32 mad_version;
 	u32 os_type;
 	u32 port_max_txu[8];	/* per-port maximum transfer */
 =======
+=======
+>>>>>>> v3.18
 	__be32 partition_number;
 	__be32 mad_version;
 	__be32 os_type;
 	__be32 port_max_txu[8];	/* per-port maximum transfer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

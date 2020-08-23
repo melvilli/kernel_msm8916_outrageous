@@ -169,9 +169,15 @@ struct ak4114 {
 	ak4114_read_t * read;
 	void * private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t wq_processing;
 	spinlock_t lock;
 	unsigned char regmap[7];
+=======
+	unsigned int init: 1;
+	spinlock_t lock;
+	unsigned char regmap[6];
+>>>>>>> v3.18
 =======
 	unsigned int init: 1;
 	spinlock_t lock;
@@ -196,7 +202,11 @@ struct ak4114 {
 int snd_ak4114_create(struct snd_card *card,
 		      ak4114_read_t *read, ak4114_write_t *write,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      const unsigned char pgm[7], const unsigned char txcsb[5],
+=======
+		      const unsigned char pgm[6], const unsigned char txcsb[5],
+>>>>>>> v3.18
 =======
 		      const unsigned char pgm[6], const unsigned char txcsb[5],
 >>>>>>> v3.18

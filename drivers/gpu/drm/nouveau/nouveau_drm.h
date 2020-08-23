@@ -10,7 +10,11 @@
 
 #define DRIVER_MAJOR		1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRIVER_MINOR		1
+=======
+#define DRIVER_MINOR		2
+>>>>>>> v3.18
 =======
 #define DRIVER_MINOR		2
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
  *        and to control the warp error enable mask (OpenGL requires out of
  *        bounds access to local memory to be silently ignored / return 0).
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #include <core/client.h>
@@ -36,6 +41,8 @@
 #include <drmP.h>
 #include <drm/nouveau_drm.h>
 =======
+=======
+>>>>>>> v3.18
  * 1.1.2:
  *      - fixes multiple bugs in flip completion events and timestamping
  * 1.2.0:
@@ -49,6 +56,9 @@
 #include <nvif/device.h>
 
 #include <drmP.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <drm/ttm/ttm_bo_api.h>
@@ -59,12 +69,18 @@
 #include <drm/ttm/ttm_page_alloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_channel;
 =======
+=======
+>>>>>>> v3.18
 #include "uapi/drm/nouveau_drm.h"
 
 struct nouveau_channel;
 struct platform_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DRM_FILE_PAGE_OFFSET (0x100000000ULL >> PAGE_SHIFT)
@@ -77,6 +93,7 @@ struct nouveau_drm_tile {
 	bool used;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum nouveau_drm_handle {
 	NVDRM_CLIENT = 0xffffffff,
@@ -91,6 +108,8 @@ struct nouveau_cli {
 	struct mutex mutex;
 	void *abi16;
 =======
+=======
+>>>>>>> v3.18
 enum nouveau_drm_object_route {
 	NVDRM_OBJECT_NVIF = 0,
 	NVDRM_OBJECT_USIF,
@@ -120,6 +139,9 @@ struct nouveau_cli {
 	void *abi16;
 	struct list_head objects;
 	struct list_head notifys;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -130,19 +152,29 @@ nouveau_cli(struct drm_file *fpriv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/object.h>
 #include <nvif/device.h>
 
 extern int nouveau_runtime_pm;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nouveau_drm {
 	struct nouveau_cli client;
 	struct drm_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_object *device;
+=======
+	struct nvif_device device;
+>>>>>>> v3.18
 =======
 	struct nvif_device device;
 >>>>>>> v3.18
@@ -168,6 +200,11 @@ struct nouveau_drm {
 			    struct ttm_buffer_object *,
 			    struct ttm_mem_reg *, struct ttm_mem_reg *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct nouveau_channel *chan;
+		struct nvif_object copy;
+>>>>>>> v3.18
 =======
 		struct nouveau_channel *chan;
 		struct nvif_object copy;
@@ -190,6 +227,11 @@ struct nouveau_drm {
 	struct nouveau_gpuobj *notify;
 	struct nouveau_fbdev *fbcon;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nvif_object nvsw;
+	struct nvif_object ntfy;
+>>>>>>> v3.18
 =======
 	struct nvif_object nvsw;
 	struct nvif_object ntfy;
@@ -206,11 +248,14 @@ struct nouveau_drm {
 	struct nouveau_display *display;
 	struct backlight_device *backlight;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_eventh vblank[4];
 
 	/* power management */
 	struct nouveau_pm *pm;
 =======
+=======
+>>>>>>> v3.18
 
 	/* power management */
 	struct nouveau_hwmon *hwmon;
@@ -221,6 +266,9 @@ struct nouveau_drm {
 
 	struct dev_pm_domain vga_pm_domain;
 	struct pci_dev *hdmi_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -230,6 +278,7 @@ nouveau_drm(struct drm_device *dev)
 	return dev->dev_private;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct nouveau_device *
 nouveau_dev(struct drm_device *dev)
@@ -249,6 +298,8 @@ int nouveau_pmops_resume(struct device *);
 		nv_info((cli), fmt, ##args);                                   \
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 int nouveau_pmops_suspend(struct device *);
 int nouveau_pmops_resume(struct device *);
 
@@ -268,6 +319,9 @@ void nouveau_drm_device_remove(struct drm_device *dev);
 #define NV_WARN(drm,f,a...) NV_PRINTK(warn, &(drm)->client, f, ##a)
 #define NV_INFO(drm,f,a...) NV_PRINTK(info, &(drm)->client, f, ##a)
 #define NV_DEBUG(drm,f,a...) NV_PRINTK(debug, &(drm)->client, f, ##a)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int nouveau_modeset;

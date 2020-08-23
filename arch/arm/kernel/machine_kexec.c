@@ -17,6 +17,10 @@
 #include <asm/fncpy.h>
 #include <asm/mach-types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/smp_plat.h>
+>>>>>>> v3.18
 =======
 #include <asm/smp_plat.h>
 >>>>>>> v3.18
@@ -45,7 +49,10 @@ int machine_kexec_prepare(struct kimage *image)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Validate that if the current HW supports SMP, then the SW supports
 	 * and implements CPU hotplug for the current HW. If not, we won't be
 	 * able to kexec reliably, so fail the prepare operation.
@@ -54,6 +61,9 @@ int machine_kexec_prepare(struct kimage *image)
 		return -EINVAL;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * No segment at default ATAGs address. try to locate
 	 * a dtb using magic.
@@ -154,11 +164,14 @@ void machine_kexec(struct kimage *image)
 	void *reboot_code_buffer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num_online_cpus() > 1) {
 		pr_err("kexec: error: multiple CPUs still online\n");
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This can only happen if machine_shutdown() failed to disable some
 	 * CPU, and that can only happen if the checks in
@@ -166,6 +179,9 @@ void machine_kexec(struct kimage *image)
 	 * reliably kexec anyway, so BUG_ON is appropriate.
 	 */
 	BUG_ON(num_online_cpus() > 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	page_list = image->head & PAGE_MASK;

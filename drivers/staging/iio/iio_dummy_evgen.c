@@ -203,6 +203,10 @@ static __init int iio_dummy_evgen_init(void)
 {
 	int ret = iio_dummy_evgen_create();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -9,11 +9,14 @@ struct pata_platform_info {
 	 */
 	unsigned int ioport_shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 
 	 * Indicate platform specific irq types and initial
 	 * IRQ flags when call request_irq()
 	 */
 	unsigned int irq_flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

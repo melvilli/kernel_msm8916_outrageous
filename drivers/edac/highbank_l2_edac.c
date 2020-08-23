@@ -51,9 +51,12 @@ static irqreturn_t highbank_l2_err_handler(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int highbank_l2_err_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id hb_l2_err_of_match[] = {
 	{ .compatible = "calxeda,hb-sregs-l2-ecc", },
 	{},
@@ -63,6 +66,9 @@ MODULE_DEVICE_TABLE(of, hb_l2_err_of_match);
 static int highbank_l2_err_probe(struct platform_device *pdev)
 {
 	const struct of_device_id *id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct edac_device_ctl_info *dci;
 	struct hb_l2_drvdata *drvdata;
@@ -103,7 +109,13 @@ static int highbank_l2_err_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dci->mod_name = dev_name(&pdev->dev);
+=======
+	id = of_match_device(hb_l2_err_of_match, &pdev->dev);
+	dci->mod_name = pdev->dev.driver->name;
+	dci->ctl_name = id ? id->compatible : "unknown";
+>>>>>>> v3.18
 =======
 	id = of_match_device(hb_l2_err_of_match, &pdev->dev);
 	dci->mod_name = pdev->dev.driver->name;
@@ -148,12 +160,15 @@ static int highbank_l2_err_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id hb_l2_err_of_match[] = {
 	{ .compatible = "calxeda,hb-sregs-l2-ecc", },
 	{},
 };
 MODULE_DEVICE_TABLE(of, hb_l2_err_of_match);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver highbank_l2_edac_driver = {

@@ -11,7 +11,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx28.dtsi"
+=======
+#include "imx28-m28.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx28-m28.dtsi"
 >>>>>>> v3.18
@@ -20,6 +24,7 @@
 	model = "DENX M28EVK";
 	compatible = "denx,m28evk", "fsl,imx28";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memory {
 		reg = <0x40000000 0x08000000>;
@@ -65,6 +70,10 @@
 	apb@80000000 {
 		apbh@80000000 {
 >>>>>>> v3.18
+=======
+	apb@80000000 {
+		apbh@80000000 {
+>>>>>>> v3.18
 			ssp0: ssp@80010000 {
 				compatible = "fsl,imx28-mmc";
 				pinctrl-names = "default";
@@ -102,6 +111,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x31c3 /* MX28_PAD_PWM3__GPIO_3_28 */
 						0x30a3 /* MX28_PAD_AUART2_CTS__GPIO_3_10 */
 						0x30b3 /* MX28_PAD_AUART2_RTS__GPIO_3_11 */
@@ -112,6 +122,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_PWM3__GPIO_3_28
 						MX28_PAD_AUART2_CTS__GPIO_3_10
 						MX28_PAD_AUART2_RTS__GPIO_3_11
@@ -121,12 +133,16 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				lcdif_pins_m28: lcdif-m28@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x11e0 /* MX28_PAD_LCD_DOTCLK__LCD_DOTCLK */
 						0x11f0 /* MX28_PAD_LCD_ENABLE__LCD_ENABLE */
@@ -135,12 +151,17 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_LCD_DOTCLK__LCD_DOTCLK
 						MX28_PAD_LCD_ENABLE__LCD_ENABLE
 					>;
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -150,15 +171,21 @@
 				pinctrl-0 = <&lcdif_24bit_pins_a
 					     &lcdif_pins_m28>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				display = <&display>;
 				status = "okay";
 
 				display: display {
 =======
+=======
+>>>>>>> v3.18
 				display = <&display0>;
 				status = "okay";
 
 				display0: display0 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					bits-per-pixel = <16>;
 					bus-width = <18>;
@@ -213,10 +240,13 @@
 
 			i2c0: i2c@80058000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pinctrl-names = "default";
 				pinctrl-0 = <&i2c0_pins_a>;
 				status = "okay";
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				sgtl5000: codec@0a {
@@ -225,7 +255,11 @@
 					VDDA-supply = <&reg_3p3v>;
 					VDDIO-supply = <&reg_3p3v>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+					clocks = <&saif0>;
+>>>>>>> v3.18
 =======
 					clocks = <&saif0>;
 >>>>>>> v3.18
@@ -237,11 +271,14 @@
 					pagesize = <32>;
 				};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				rtc: rtc@68 {
 					compatible = "stm,mt41t62";
 					reg = <0x68>;
 				};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			};
@@ -268,8 +305,11 @@
 			auart0: serial@8006a000 {
 				pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pinctrl-0 = <&auart0_2pins_a>;
 =======
+=======
+>>>>>>> v3.18
 				pinctrl-0 = <&auart0_pins_a>;
 				status = "okay";
 			};
@@ -289,6 +329,9 @@
 			pwm: pwm@80064000 {
 				pinctrl-names = "default";
 				pinctrl-0 = <&pwm4_pins_a>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -300,7 +343,11 @@
 			vbus-supply = <&reg_usb0_vbus>;
 			pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pinctrl-0 = <&usbphy0_pins_a>;
+=======
+			pinctrl-0 = <&usb0_pins_a>;
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&usb0_pins_a>;
 >>>>>>> v3.18
@@ -311,7 +358,11 @@
 			vbus-supply = <&reg_usb1_vbus>;
 			pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pinctrl-0 = <&usbphy1_pins_a>;
+=======
+			pinctrl-0 = <&usb1_pins_a>;
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&usb1_pins_a>;
 >>>>>>> v3.18
@@ -336,6 +387,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulators {
 		compatible = "simple-bus";
 
@@ -350,6 +402,8 @@
 		reg_vddio_sd0: vddio-sd0 {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 	backlight {
 		compatible = "pwm-backlight";
 		pwms = <&pwm 4 5000000>;
@@ -361,6 +415,9 @@
 		reg_vddio_sd0: regulator@1 {
 			compatible = "regulator-fixed";
 			reg = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "vddio-sd0";
 			regulator-min-microvolt = <3300000>;
@@ -369,8 +426,14 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_usb0_vbus: usb0_vbus {
 			compatible = "regulator-fixed";
+=======
+		reg_usb0_vbus: regulator@2 {
+			compatible = "regulator-fixed";
+			reg = <2>;
+>>>>>>> v3.18
 =======
 		reg_usb0_vbus: regulator@2 {
 			compatible = "regulator-fixed";
@@ -383,8 +446,14 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_usb1_vbus: usb1_vbus {
 			compatible = "regulator-fixed";
+=======
+		reg_usb1_vbus: regulator@3 {
+			compatible = "regulator-fixed";
+			reg = <3>;
+>>>>>>> v3.18
 =======
 		reg_usb1_vbus: regulator@3 {
 			compatible = "regulator-fixed";

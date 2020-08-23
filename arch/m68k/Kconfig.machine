@@ -151,6 +151,7 @@ config XCOPILOT_BUGS
 	  Support the bugs of Xcopilot.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config UC5272
 	bool "Arcturus Networks uC5272 dimm board support"
 	depends on M5272
@@ -163,6 +164,8 @@ config UC5282
 	help
 	  Support for the Arcturus Networks uC5282 dimm board.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config UCSIMM
@@ -209,6 +212,7 @@ config UCQUICC
 	  Support for the Lineo uCquicc board.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARNEWSH
 	bool
 
@@ -227,6 +231,8 @@ config M5206eC3
 	depends on M5206e
 	select FREESCALE
 =======
+=======
+>>>>>>> v3.18
 config ARN5206
 	bool "Arnewsh 5206 board support"
 	depends on M5206
@@ -236,6 +242,9 @@ config ARN5206
 config M5206eC3
 	bool "Motorola M5206eC3 board support"
 	depends on M5206e
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Support for the Motorola M5206eC3 board.
@@ -246,6 +255,7 @@ config ELITE
 	help
 	  Support for the Motorola M5206eLITE board.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config M5208EVB
 	bool "Freescale M5208EVB board support"
@@ -263,12 +273,18 @@ config M5235EVB
 	bool "Freescale M5235EVB support"
 	depends on M523x
 >>>>>>> v3.18
+=======
+config M5235EVB
+	bool "Freescale M5235EVB support"
+	depends on M523x
+>>>>>>> v3.18
 	help
 	  Support for the Freescale M5235EVB board.
 
 config M5249C3
 	bool "Motorola M5249C3 board support"
 	depends on M5249
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select FREESCALE
 	help
@@ -336,6 +352,8 @@ config SOM5282EM
 	  Support for the EMAC.Inc SOM5282EM module.
 
 =======
+=======
+>>>>>>> v3.18
 	help
 	  Support for the Motorola M5249C3 board.
 
@@ -345,6 +363,9 @@ config M5272C3
 	help
 	  Support for the Motorola M5272C3 board.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config WILDFIRE
 	bool "Intec Automation Inc. WildFire board support"
@@ -362,7 +383,10 @@ config ARN5307
 	bool "Arnewsh 5307 board support"
 	depends on M5307
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARNEWSH
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -372,7 +396,10 @@ config M5307C3
 	bool "Motorola M5307C3 board support"
 	depends on M5307
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select FREESCALE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -384,6 +411,7 @@ config SECUREEDGEMP3
 	help
 	  Support for the SnapGear SecureEdge/MP3 platform.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config M5329EVB
 	bool "Freescale (Motorola) M5329EVB board support"
@@ -409,6 +437,11 @@ config M5407C3
 	bool "Motorola M5407C3 board support"
 	depends on M5407
 	select FREESCALE
+=======
+config M5407C3
+	bool "Motorola M5407C3 board support"
+	depends on M5407
+>>>>>>> v3.18
 =======
 config M5407C3
 	bool "Motorola M5407C3 board support"
@@ -448,6 +481,7 @@ config NETtel
 	  Support for the SnapGear NETtel/SecureEdge/SnapGear boards.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SNAPGEAR
 	bool "SnapGear router board support"
 	depends on NETtel
@@ -466,12 +500,15 @@ config CPU16B
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config MOD5272
 	bool "Netburner MOD-5272 board support"
 	depends on M5272
 	help
 	  Support for the Netburner MOD-5272 board.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SAVANT
 	bool
@@ -484,6 +521,8 @@ config SAVANTrosie1
 	  Support for the Savant Rosie1 board.
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 if !MMU || COLDFIRE

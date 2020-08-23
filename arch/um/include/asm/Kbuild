@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += barrier.h
+>>>>>>> v3.18
 =======
 generic-y += barrier.h
 >>>>>>> v3.18
@@ -14,15 +18,21 @@ generic-y += ftrace.h
 generic-y += futex.h
 generic-y += hardirq.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += hw_irq.h
 generic-y += io.h
 generic-y += irq_regs.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += hash.h
 generic-y += hw_irq.h
 generic-y += io.h
 generic-y += irq_regs.h
 generic-y += irq_work.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 generic-y += kdebug.h
 generic-y += mcs_spinlock.h
@@ -31,6 +41,11 @@ generic-y += param.h
 generic-y += pci.h
 generic-y += percpu.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+generic-y += scatterlist.h
+>>>>>>> v3.18
 =======
 generic-y += preempt.h
 generic-y += scatterlist.h
@@ -41,6 +56,9 @@ generic-y += topology.h
 generic-y += trace_clock.h
 generic-y += xor.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += barrier.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

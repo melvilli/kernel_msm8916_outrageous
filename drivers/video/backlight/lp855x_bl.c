@@ -27,7 +27,11 @@
 #define LP8556_EPROM_END		0xAF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LP8557 Registers */
+=======
+/* LP8555/7 Registers */
+>>>>>>> v3.18
 =======
 /* LP8555/7 Registers */
 >>>>>>> v3.18
@@ -38,6 +42,11 @@
 #define LP8557_BRIGHTNESS_CTRL		0x04
 #define LP8557_CONFIG			0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LP8555_EPROM_START		0x10
+#define LP8555_EPROM_END		0x7A
+>>>>>>> v3.18
 =======
 #define LP8555_EPROM_START		0x10
 #define LP8555_EPROM_END		0x7A
@@ -121,11 +130,17 @@ static bool lp855x_is_valid_rom_area(struct lp855x *lp, u8 addr)
 		end = LP8556_EPROM_END;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case LP8555:
 		start = LP8555_EPROM_START;
 		end = LP8555_EPROM_END;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case LP8557:
 		start = LP8557_EPROM_START;
@@ -136,7 +151,11 @@ static bool lp855x_is_valid_rom_area(struct lp855x *lp, u8 addr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (addr >= start && addr <= end);
+=======
+	return addr >= start && addr <= end;
+>>>>>>> v3.18
 =======
 	return addr >= start && addr <= end;
 >>>>>>> v3.18
@@ -186,10 +205,13 @@ static int lp855x_configure(struct lp855x *lp)
 
 	switch (lp->chip_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case LP8550 ... LP8556:
 		lp->cfg = &lp855x_dev_cfg;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case LP8550:
 	case LP8551:
 	case LP8552:
@@ -198,6 +220,9 @@ static int lp855x_configure(struct lp855x *lp)
 		lp->cfg = &lp855x_dev_cfg;
 		break;
 	case LP8555:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case LP8557:
 		lp->cfg = &lp8557_dev_cfg;
@@ -278,7 +303,11 @@ static int lp855x_bl_update_status(struct backlight_device *bl)
 	struct lp855x *lp = bl_get_data(bl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bl->props.state & BL_CORE_SUSPENDED)
+=======
+	if (bl->props.state & (BL_CORE_SUSPENDED | BL_CORE_FBBLANK))
+>>>>>>> v3.18
 =======
 	if (bl->props.state & (BL_CORE_SUSPENDED | BL_CORE_FBBLANK))
 >>>>>>> v3.18
@@ -293,6 +322,10 @@ static int lp855x_bl_update_status(struct backlight_device *bl)
 	} else if (lp->mode == REGISTER_BASED) {
 		u8 val = bl->props.brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -303,6 +336,7 @@ static int lp855x_bl_update_status(struct backlight_device *bl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lp855x_bl_get_brightness(struct backlight_device *bl)
 {
 	return bl->props.brightness;
@@ -312,6 +346,11 @@ static const struct backlight_ops lp855x_bl_ops = {
 	.options = BL_CORE_SUSPENDRESUME,
 	.update_status = lp855x_bl_update_status,
 	.get_brightness = lp855x_bl_get_brightness,
+=======
+static const struct backlight_ops lp855x_bl_ops = {
+	.options = BL_CORE_SUSPENDRESUME,
+	.update_status = lp855x_bl_update_status,
+>>>>>>> v3.18
 =======
 static const struct backlight_ops lp855x_bl_ops = {
 	.options = BL_CORE_SUSPENDRESUME,
@@ -335,7 +374,11 @@ static int lp855x_backlight_register(struct lp855x *lp)
 	props.brightness = pdata->initial_brightness;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(name, lp->dev, lp,
+=======
+	bl = devm_backlight_device_register(lp->dev, name, lp->dev, lp,
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(lp->dev, name, lp->dev, lp,
 >>>>>>> v3.18
@@ -349,6 +392,7 @@ static int lp855x_backlight_register(struct lp855x *lp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void lp855x_backlight_unregister(struct lp855x *lp)
 {
 	if (lp->bl)
@@ -357,11 +401,17 @@ static void lp855x_backlight_unregister(struct lp855x *lp)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static ssize_t lp855x_get_chip_id(struct device *dev,
 				struct device_attribute *attr, char *buf)
 {
 	struct lp855x *lp = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -451,7 +501,11 @@ static int lp855x_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 {
 	struct lp855x *lp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lp855x_platform_data *pdata = cl->dev.platform_data;
+=======
+	struct lp855x_platform_data *pdata = dev_get_platdata(&cl->dev);
+>>>>>>> v3.18
 =======
 	struct lp855x_platform_data *pdata = dev_get_platdata(&cl->dev);
 >>>>>>> v3.18
@@ -464,7 +518,11 @@ static int lp855x_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 			return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdata = cl->dev.platform_data;
+=======
+		pdata = dev_get_platdata(&cl->dev);
+>>>>>>> v3.18
 =======
 		pdata = dev_get_platdata(&cl->dev);
 >>>>>>> v3.18
@@ -493,7 +551,11 @@ static int lp855x_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 	if (ret) {
 		dev_err(lp->dev, "device config err: %d", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -504,7 +566,11 @@ static int lp855x_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 		dev_err(lp->dev,
 			"failed to register backlight. err: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -514,7 +580,11 @@ static int lp855x_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 	if (ret) {
 		dev_err(lp->dev, "failed to register sysfs. err: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_sysfs;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -523,11 +593,14 @@ static int lp855x_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 	backlight_update_status(lp->bl);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_sysfs:
 	lp855x_backlight_unregister(lp);
 err_dev:
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -540,7 +613,10 @@ static int lp855x_remove(struct i2c_client *cl)
 	backlight_update_status(lp->bl);
 	sysfs_remove_group(&lp->dev->kobj, &lp855x_attr_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp855x_backlight_unregister(lp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -553,6 +629,10 @@ static const struct of_device_id lp855x_dt_ids[] = {
 	{ .compatible = "ti,lp8552", },
 	{ .compatible = "ti,lp8553", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "ti,lp8555", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "ti,lp8555", },
 >>>>>>> v3.18
@@ -568,6 +648,10 @@ static const struct i2c_device_id lp855x_ids[] = {
 	{"lp8552", LP8552},
 	{"lp8553", LP8553},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"lp8555", LP8555},
+>>>>>>> v3.18
 =======
 	{"lp8555", LP8555},
 >>>>>>> v3.18

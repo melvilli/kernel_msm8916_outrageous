@@ -40,7 +40,11 @@ void __ref omap4_cpu_die(unsigned int cpu)
 			pr_err("Secure clear status failed\n");
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writel(0, base + OMAP_AUX_CORE_BOOT_0);
+=======
+		writel_relaxed(0, base + OMAP_AUX_CORE_BOOT_0);
+>>>>>>> v3.18
 =======
 		writel_relaxed(0, base + OMAP_AUX_CORE_BOOT_0);
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ void __ref omap4_cpu_die(unsigned int cpu)
 		else
 			boot_cpu =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__raw_readl(base + OMAP_AUX_CORE_BOOT_0) >> 5;
+=======
+				readl_relaxed(base + OMAP_AUX_CORE_BOOT_0) >> 5;
+>>>>>>> v3.18
 =======
 				readl_relaxed(base + OMAP_AUX_CORE_BOOT_0) >> 5;
 >>>>>>> v3.18

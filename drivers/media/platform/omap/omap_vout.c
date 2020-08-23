@@ -166,7 +166,10 @@ static int omap_vout_try_format(struct v4l2_pix_format *pix)
 	pix->pixelformat = omap_formats[ifmt].pixelformat;
 	pix->field = V4L2_FIELD_ANY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -339,8 +342,11 @@ static int video_mode_to_dss_mode(struct omap_vout_device *vout)
 
 	switch (pix->pixelformat) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0:
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case V4L2_PIX_FMT_YUYV:
@@ -365,6 +371,10 @@ static int video_mode_to_dss_mode(struct omap_vout_device *vout)
 	default:
 		mode = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -382,7 +392,11 @@ static int omapvid_setup_overlay(struct omap_vout_device *vout,
 	int ret = 0;
 	struct omap_overlay_info info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cropheight, cropwidth, pixheight, pixwidth;
+=======
+	int cropheight, cropwidth, pixwidth;
+>>>>>>> v3.18
 =======
 	int cropheight, cropwidth, pixwidth;
 >>>>>>> v3.18
@@ -406,7 +420,10 @@ static int omapvid_setup_overlay(struct omap_vout_device *vout,
 		cropheight = vout->crop.width;
 		cropwidth = vout->crop.height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pixheight = vout->pix.width;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pixwidth = vout->pix.height;
@@ -414,7 +431,10 @@ static int omapvid_setup_overlay(struct omap_vout_device *vout,
 		cropheight = vout->crop.height;
 		cropwidth = vout->crop.width;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pixheight = vout->pix.height;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pixwidth = vout->pix.width;
@@ -623,6 +643,10 @@ static void omap_vout_isr(void *arg, unsigned int irqstatus)
 	case OMAP_DISPLAY_TYPE_DSI:
 	case OMAP_DISPLAY_TYPE_DPI:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case OMAP_DISPLAY_TYPE_DVI:
+>>>>>>> v3.18
 =======
 	case OMAP_DISPLAY_TYPE_DVI:
 >>>>>>> v3.18
@@ -1017,7 +1041,11 @@ static int omap_vout_release(struct file *file)
 			DISPC_IRQ_EVSYNC_ODD | DISPC_IRQ_VSYNC2;
 		omap_dispc_unregister_isr(omap_vout_isr, vout, mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vout->streaming = 0;
+=======
+		vout->streaming = false;
+>>>>>>> v3.18
 =======
 		vout->streaming = false;
 >>>>>>> v3.18
@@ -1481,7 +1509,10 @@ static int vidioc_s_ctrl(struct file *file, void *fh, struct v4l2_control *a)
 	case V4L2_CID_VFLIP:
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct omap_overlay *ovl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		struct omapvideo_info *ovid;
@@ -1489,7 +1520,10 @@ static int vidioc_s_ctrl(struct file *file, void *fh, struct v4l2_control *a)
 
 		ovid = &vout->vid_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ovl = ovid->overlays[0];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1525,7 +1559,11 @@ static int vidioc_reqbufs(struct file *file, void *fh,
 	struct videobuf_queue *q = &vout->vbq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((req->type != V4L2_BUF_TYPE_VIDEO_OUTPUT) || (req->count < 0))
+=======
+	if (req->type != V4L2_BUF_TYPE_VIDEO_OUTPUT)
+>>>>>>> v3.18
 =======
 	if (req->type != V4L2_BUF_TYPE_VIDEO_OUTPUT)
 >>>>>>> v3.18
@@ -1688,7 +1726,11 @@ static int vidioc_streamon(struct file *file, void *fh, enum v4l2_buf_type i)
 
 	/* set flag here. Next QBUF will start DMA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vout->streaming = 1;
+=======
+	vout->streaming = true;
+>>>>>>> v3.18
 =======
 	vout->streaming = true;
 >>>>>>> v3.18
@@ -1752,7 +1794,11 @@ static int vidioc_streamoff(struct file *file, void *fh, enum v4l2_buf_type i)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vout->streaming = 0;
+=======
+	vout->streaming = false;
+>>>>>>> v3.18
 =======
 	vout->streaming = false;
 >>>>>>> v3.18
@@ -1943,7 +1989,10 @@ static int __init omap_vout_setup_video_data(struct omap_vout_device *vout)
 	pix->bytesperline = pix->width * 2;
 	pix->sizeimage = pix->bytesperline * pix->height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pix->colorspace = V4L2_COLORSPACE_JPEG;
@@ -1968,7 +2017,11 @@ static int __init omap_vout_setup_video_data(struct omap_vout_device *vout)
 	control[0].value = 0;
 	vout->rotation = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vout->mirror = 0;
+=======
+	vout->mirror = false;
+>>>>>>> v3.18
 =======
 	vout->mirror = false;
 >>>>>>> v3.18

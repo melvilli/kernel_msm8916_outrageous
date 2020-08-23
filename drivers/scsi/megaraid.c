@@ -532,6 +532,7 @@ mega_build_cmd(adapter_t *adapter, Scsi_Cmnd *cmd, int *busy)
 	int	ldrv_num = 0;   /* logical drive number */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * filter the internal and ioctl commands
@@ -539,6 +540,8 @@ mega_build_cmd(adapter_t *adapter, Scsi_Cmnd *cmd, int *busy)
 	if((cmd->cmnd[0] == MEGA_INTERNAL_CMD))
 		return (scb_t *)cmd->host_scribble;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1443,6 +1446,7 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 		cmdid = completed[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if( cmdid == CMDID_INT_CMDS ) { /* internal command */
 			scb = &adapter->int_scb;
 			cmd = scb->cmd;
@@ -1457,6 +1461,8 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 		}
 		else {
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Only free SCBs for the commands coming down from the
 		 * mid-layer, not for which were issued internally
@@ -1473,6 +1479,9 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 			adapter->int_status = status;
 			complete(&adapter->int_waitq);
 		} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			scb = &adapter->scb_list[cmdid];
 
@@ -1663,6 +1672,7 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Only free SCBs for the commands coming down from the
 		 * mid-layer, not for which were issued internally
@@ -1682,6 +1692,9 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 		else {
 			mega_free_scb(adapter, scb);
 		}
+=======
+		mega_free_scb(adapter, scb);
+>>>>>>> v3.18
 =======
 		mega_free_scb(adapter, scb);
 >>>>>>> v3.18
@@ -1909,7 +1922,11 @@ megaraid_info(struct Scsi_Host *host)
 		 adapter->fw_version, adapter->product_info.max_commands,
 		 adapter->host->max_id, adapter->host->max_channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 adapter->host->max_lun);
+=======
+		 (u32)adapter->host->max_lun);
+>>>>>>> v3.18
 =======
 		 (u32)adapter->host->max_lun);
 >>>>>>> v3.18
@@ -1994,8 +2011,13 @@ megaraid_abort_and_reset(adapter_t *adapter, Scsi_Cmnd *cmd, int aor)
 	printk(KERN_WARNING "megaraid: %s cmd=%x <c=%d t=%d l=%d>\n",
 	     (aor == SCB_ABORT)? "ABORTING":"RESET",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     cmd->cmnd[0], cmd->device->channel, 
 	     cmd->device->id, cmd->device->lun);
+=======
+	     cmd->cmnd[0], cmd->device->channel,
+	     cmd->device->id, (u32)cmd->device->lun);
+>>>>>>> v3.18
 =======
 	     cmd->cmnd[0], cmd->device->channel,
 	     cmd->device->id, (u32)cmd->device->lun);
@@ -2062,7 +2084,11 @@ static inline int
 make_local_pdev(adapter_t *adapter, struct pci_dev **pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*pdev = alloc_pci_dev();
+=======
+	*pdev = pci_alloc_dev(NULL);
+>>>>>>> v3.18
 =======
 	*pdev = pci_alloc_dev(NULL);
 >>>>>>> v3.18
@@ -4173,9 +4199,12 @@ mega_internal_dev_inquiry(adapter_t *adapter, u8 ch, u8 tgt,
  * to be fired is a passthru command
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lockscope specifies whether the caller has already acquired the lock. Of
  * course, the caller must know which lock we are talking about.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Note: parameter 'pthru' is null for non-passthru commands.
@@ -4183,6 +4212,7 @@ mega_internal_dev_inquiry(adapter_t *adapter, u8 ch, u8 tgt,
 static int
 mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	Scsi_Cmnd	*scmd;
 	struct	scsi_device *sdev;
@@ -4194,10 +4224,15 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	scb_t	*scb;
 	int	rval;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The internal commands share one command id and hence are
@@ -4209,6 +4244,7 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	scb = &adapter->int_scb;
 	memset(scb, 0, sizeof(scb_t));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sdev = kzalloc(sizeof(struct scsi_device), GFP_KERNEL);
 	scmd->device = sdev;
@@ -4225,12 +4261,17 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	scb->idx = CMDID_INT_CMDS;
 	scb->state |= SCB_ACTIVE | SCB_PENDQ;
 >>>>>>> v3.18
+=======
+	scb->idx = CMDID_INT_CMDS;
+	scb->state |= SCB_ACTIVE | SCB_PENDQ;
+>>>>>>> v3.18
 
 	memcpy(scb->raw_mbox, mc, sizeof(megacmd_t));
 
 	/*
 	 * Is it a passthru command
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if( mc->cmd == MEGA_MBOXCMD_PASSTHRU ) {
 
@@ -4247,6 +4288,8 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	mc->status = scmd->result;
 	kfree(sdev);
 =======
+=======
+>>>>>>> v3.18
 	if (mc->cmd == MEGA_MBOXCMD_PASSTHRU)
 		scb->pthru = pthru;
 
@@ -4264,12 +4307,16 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	wait_for_completion(&adapter->int_waitq);
 
 	mc->status = rval = adapter->int_status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Print a debug message for all failed commands. Applications can use
 	 * this information.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if( scmd->result && trace_level ) {
 		printk("megaraid: cmd [%x, %x, %x] status:[%x]\n",
@@ -4303,6 +4350,8 @@ mega_internal_done(Scsi_Cmnd *scmd)
 
 
 =======
+=======
+>>>>>>> v3.18
 	if (rval && trace_level) {
 		printk("megaraid: cmd [%x, %x, %x] status:[%x]\n",
 			mc->cmd, mc->opcode, mc->subopcode, rval);
@@ -4312,6 +4361,9 @@ mega_internal_done(Scsi_Cmnd *scmd)
 	return rval;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct scsi_host_template megaraid_template = {
 	.module				= THIS_MODULE,

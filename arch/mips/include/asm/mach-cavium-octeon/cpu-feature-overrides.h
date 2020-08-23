@@ -23,7 +23,10 @@
 #define cpu_has_4k_cache	0
 #define cpu_has_tx39_cache	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_fpu		0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define cpu_has_counter		1
@@ -62,6 +65,10 @@
 #define cpu_has_veic		0
 #define cpu_hwrena_impl_bits	0xc0000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_has_wsbh            1
+>>>>>>> v3.18
 =======
 #define cpu_has_wsbh            1
 >>>>>>> v3.18

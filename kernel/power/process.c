@@ -18,6 +18,10 @@
 #include <linux/workqueue.h>
 #include <linux/kmod.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <trace/events/power.h>
+>>>>>>> v3.18
 =======
 #include <trace/events/power.h>
 >>>>>>> v3.18
@@ -50,7 +54,11 @@ static int try_to_freeze_tasks(bool user_only)
 		todo = 0;
 		read_lock(&tasklist_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		do_each_thread(g, p) {
+=======
+		for_each_process_thread(g, p) {
+>>>>>>> v3.18
 =======
 		for_each_process_thread(g, p) {
 >>>>>>> v3.18
@@ -60,7 +68,11 @@ static int try_to_freeze_tasks(bool user_only)
 			if (!freezer_should_skip(p))
 				todo++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while_each_thread(g, p);
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -105,17 +117,23 @@ static int try_to_freeze_tasks(bool user_only)
 		if (!wakeup) {
 			read_lock(&tasklist_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			do_each_thread(g, p) {
 				if (p != current && !freezer_should_skip(p)
 				    && freezing(p) && !frozen(p))
 					sched_show_task(p);
 			} while_each_thread(g, p);
 =======
+=======
+>>>>>>> v3.18
 			for_each_process_thread(g, p) {
 				if (p != current && !freezer_should_skip(p)
 				    && freezing(p) && !frozen(p))
 					sched_show_task(p);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			read_unlock(&tasklist_lock);
 		}
@@ -128,7 +146,10 @@ static int try_to_freeze_tasks(bool user_only)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool __check_frozen_processes(void)
 {
 	struct task_struct *g, *p;
@@ -140,12 +161,16 @@ static bool __check_frozen_processes(void)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Returns true if all freezable tasks (except for current) are frozen already
  */
 static bool check_frozen_processes(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct task_struct *g, *p;
 	bool ret = true;
@@ -162,11 +187,16 @@ done:
 	read_unlock(&tasklist_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	bool ret;
 
 	read_lock(&tasklist_lock);
 	ret = __check_frozen_processes();
 	read_unlock(&tasklist_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -174,6 +204,11 @@ done:
 /**
  * freeze_processes - Signal user space processes to enter the refrigerator.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * The current thread will not be frozen.  The same process that calls
+ * freeze_processes must later call thaw_processes.
+>>>>>>> v3.18
 =======
  * The current thread will not be frozen.  The same process that calls
  * freeze_processes must later call thaw_processes.
@@ -191,10 +226,13 @@ int freeze_processes(void)
 		return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pm_freezing)
 		atomic_inc(&system_freezing_cnt);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure this task doesn't get frozen */
 	current->flags |= PF_SUSPEND_TASK;
 
@@ -202,6 +240,9 @@ int freeze_processes(void)
 		atomic_inc(&system_freezing_cnt);
 
 	pm_wakeup_clear();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk("Freezing user space processes ... ");
 	pm_freezing = true;
@@ -218,6 +259,7 @@ int freeze_processes(void)
 		 */
 		if (oom_kills_count() != oom_kills_saved &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				!check_frozen_processes()) {
 			__usermodehelper_set_disable_depth(UMH_ENABLED);
 			printk("OOM in progress.");
@@ -228,6 +270,8 @@ int freeze_processes(void)
 	}
 done:
 =======
+=======
+>>>>>>> v3.18
 		    !check_frozen_processes()) {
 			__usermodehelper_set_disable_depth(UMH_ENABLED);
 			printk("OOM in progress.");
@@ -236,6 +280,9 @@ done:
 			printk("done.");
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk("\n");
 	BUG_ON(in_atomic());
@@ -275,7 +322,13 @@ void thaw_processes(void)
 {
 	struct task_struct *g, *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct task_struct *curr = current;
+
+	trace_suspend_resume(TPS("thaw_processes"), 0, true);
+>>>>>>> v3.18
 =======
 	struct task_struct *curr = current;
 
@@ -295,12 +348,15 @@ void thaw_processes(void)
 
 	read_lock(&tasklist_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_each_thread(g, p) {
 		__thaw_task(p);
 	} while_each_thread(g, p);
 	read_unlock(&tasklist_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	for_each_process_thread(g, p) {
 		/* No other threads should have PF_SUSPEND_TASK set */
 		WARN_ON((p != curr) && (p->flags & PF_SUSPEND_TASK));
@@ -311,12 +367,19 @@ void thaw_processes(void)
 	WARN_ON(!(curr->flags & PF_SUSPEND_TASK));
 	curr->flags &= ~PF_SUSPEND_TASK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usermodehelper_enable();
 
 	schedule();
 	printk("done.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_suspend_resume(TPS("thaw_processes"), 0, false);
+>>>>>>> v3.18
 =======
 	trace_suspend_resume(TPS("thaw_processes"), 0, false);
 >>>>>>> v3.18
@@ -333,15 +396,21 @@ void thaw_kernel_threads(void)
 
 	read_lock(&tasklist_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_each_thread(g, p) {
 		if (p->flags & (PF_KTHREAD | PF_WQ_WORKER))
 			__thaw_task(p);
 	} while_each_thread(g, p);
 =======
+=======
+>>>>>>> v3.18
 	for_each_process_thread(g, p) {
 		if (p->flags & (PF_KTHREAD | PF_WQ_WORKER))
 			__thaw_task(p);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	read_unlock(&tasklist_lock);
 

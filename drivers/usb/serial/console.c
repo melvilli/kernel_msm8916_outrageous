@@ -15,7 +15,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -112,8 +115,13 @@ static int usb_console_setup(struct console *co, char *options)
 	 * code won't call us
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	serial = usb_serial_get_by_index(co->index);
 	if (serial == NULL) {
+=======
+	port = usb_serial_port_get_by_minor(co->index);
+	if (port == NULL) {
+>>>>>>> v3.18
 =======
 	port = usb_serial_port_get_by_minor(co->index);
 	if (port == NULL) {
@@ -123,6 +131,10 @@ static int usb_console_setup(struct console *co, char *options)
 		return -ENODEV;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	serial = port->serial;
+>>>>>>> v3.18
 =======
 	serial = port->serial;
 >>>>>>> v3.18
@@ -132,7 +144,10 @@ static int usb_console_setup(struct console *co, char *options)
 		goto error_get_interface;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port = serial->port[co->index - serial->minor];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tty_port_tty_set(&port->port, NULL);
@@ -151,7 +166,10 @@ static int usb_console_setup(struct console *co, char *options)
 			if (!tty) {
 				retval = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_err(&port->dev, "no more memory\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				goto reset_open_count;
@@ -163,7 +181,10 @@ static int usb_console_setup(struct console *co, char *options)
 			if (tty_init_termios(tty)) {
 				retval = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_err(&port->dev, "no more memory\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				goto free_tty;
@@ -173,11 +194,15 @@ static int usb_console_setup(struct console *co, char *options)
 		/* only call the device specific open if this
 		 * is the first time the port is opened */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (serial->type->open)
 			retval = serial->type->open(NULL, port);
 		else
 			retval = usb_serial_generic_open(NULL, port);
 
+=======
+		retval = serial->type->open(NULL, port);
+>>>>>>> v3.18
 =======
 		retval = serial->type->open(NULL, port);
 >>>>>>> v3.18
@@ -214,7 +239,10 @@ static int usb_console_setup(struct console *co, char *options)
  reset_open_count:
 	port->port.count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->port = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_autopm_put_interface(serial->interface);
@@ -240,15 +268,21 @@ static void usb_console_write(struct console *co,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s - port %d, %d byte(s)\n", __func__, port->number, count);
 
 	if (!port->port.console) {
 		pr_debug("%s - port not opened\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&port->dev, "%s - %d byte(s)\n", __func__, count);
 
 	if (!port->port.console) {
 		dev_dbg(&port->dev, "%s - port not opened\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -267,6 +301,7 @@ static void usb_console_write(struct console *co,
 		/* pass on to the driver specific version of this function if
 		   it is available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (serial->type->write)
 			retval = serial->type->write(NULL, port, buf, i);
 		else
@@ -283,6 +318,8 @@ static void usb_console_write(struct console *co,
 								port, &cr, 1);
 			pr_debug("%s - return value : %d\n", __func__, retval);
 =======
+=======
+>>>>>>> v3.18
 		retval = serial->type->write(NULL, port, buf, i);
 		dev_dbg(&port->dev, "%s - write: %d\n", __func__, retval);
 		if (lf) {
@@ -291,6 +328,9 @@ static void usb_console_write(struct console *co,
 			retval = serial->type->write(NULL, port, &cr, 1);
 			dev_dbg(&port->dev, "%s - write cr: %d\n",
 							__func__, retval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		buf += i;

@@ -41,12 +41,15 @@ struct rand_pool_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rnd_state {
 	__u32 s1, s2, s3;
 };
 
 /* Exported functions */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

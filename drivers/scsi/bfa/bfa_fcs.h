@@ -244,21 +244,28 @@ struct bfa_fcs_fabric_s;
  *
  *  Physical Port's symbolic name Format : (Total 128 bytes)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Adapter Model number/name : 12 bytes
  *  Driver Version     : 10 bytes
  *  Host Machine Name  : 30 bytes
  *  Host OS Info	   : 48 bytes
 =======
+=======
+>>>>>>> v3.18
  *  Adapter Model number/name : 16 bytes
  *  Driver Version     : 10 bytes
  *  Host Machine Name  : 30 bytes
  *  Host OS Info	   : 44 bytes
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  Host OS PATCH Info : 16 bytes
  *  ( remaining 12 bytes reserved to be used for separator)
  */
 #define BFA_FCS_PORT_SYMBNAME_SEPARATOR			" | "
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define BFA_FCS_PORT_SYMBNAME_MODEL_SZ			12
 #define BFA_FCS_PORT_SYMBNAME_VERSION_SZ		10
@@ -270,12 +277,17 @@ struct bfa_fcs_fabric_s;
 #define BFA_FCS_PORT_DEF_BB_SCN				3
 
 =======
+=======
+>>>>>>> v3.18
 #define BFA_FCS_PORT_SYMBNAME_MODEL_SZ			16
 #define BFA_FCS_PORT_SYMBNAME_VERSION_SZ		10
 #define BFA_FCS_PORT_SYMBNAME_MACHINENAME_SZ		30
 #define BFA_FCS_PORT_SYMBNAME_OSINFO_SZ			44
 #define BFA_FCS_PORT_SYMBNAME_OSPATCH_SZ		16
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Get FC port ID for a logical port.
@@ -648,6 +660,12 @@ void bfa_fcs_fcpim_uf_recv(struct bfa_fcs_itnim_s *itnim,
 #define BFA_FCS_FDMI_SUPP_SPEEDS_10G	FDMI_TRANS_SPEED_10G
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BFA_FCS_FDMI_VENDOR_INFO_LEN    8
+#define BFA_FCS_FDMI_FC4_TYPE_LEN       32
+
+>>>>>>> v3.18
 =======
 #define BFA_FCS_FDMI_VENDOR_INFO_LEN    8
 #define BFA_FCS_FDMI_FC4_TYPE_LEN       32
@@ -664,7 +682,11 @@ struct bfa_fcs_fdmi_hba_attr_s {
 	u8         serial_num[64];
 	u8         model[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8         model_desc[256];
+=======
+	u8         model_desc[128];
+>>>>>>> v3.18
 =======
 	u8         model_desc[128];
 >>>>>>> v3.18
@@ -675,12 +697,18 @@ struct bfa_fcs_fdmi_hba_attr_s {
 	u8         os_name[256];
 	__be32        max_ct_pyld;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct      bfa_lport_symname_s node_sym_name;
 	u8     vendor_info[BFA_FCS_FDMI_VENDOR_INFO_LEN];
 	__be32    num_ports;
 	wwn_t       fabric_name;
 	u8     bios_ver[BFA_VERSION_LEN];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -689,7 +717,11 @@ struct bfa_fcs_fdmi_hba_attr_s {
  */
 struct bfa_fcs_fdmi_port_attr_s {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8         supp_fc4_types[32];	/* supported FC4 types */
+=======
+	u8         supp_fc4_types[BFA_FCS_FDMI_FC4_TYPE_LEN];
+>>>>>>> v3.18
 =======
 	u8         supp_fc4_types[BFA_FCS_FDMI_FC4_TYPE_LEN];
 >>>>>>> v3.18
@@ -699,7 +731,10 @@ struct bfa_fcs_fdmi_port_attr_s {
 	u8         os_device_name[256];	/* OS device Name */
 	u8         host_name[256];	/* host name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	wwn_t       port_name;
 	wwn_t       node_name;
 	struct      bfa_lport_symname_s port_sym_name;
@@ -709,6 +744,9 @@ struct bfa_fcs_fdmi_port_attr_s {
 	u8     port_act_fc4_type[BFA_FCS_FDMI_FC4_TYPE_LEN];
 	__be32    port_state;
 	__be32    num_ports;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -735,8 +773,11 @@ struct bfa_fcs_s {
 	bfa_boolean_t	vf_enabled;	/*  VF mode is enabled */
 	bfa_boolean_t	fdmi_enabled;	/*  FDMI is enabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa_boolean_t	bbscn_enabled;	/*  Driver Config Parameter */
 	bfa_boolean_t	bbscn_flogi_rjt;/*  FLOGI reject due to BB_SCN */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bfa_boolean_t min_cfg;		/* min cfg enabled/disabled */

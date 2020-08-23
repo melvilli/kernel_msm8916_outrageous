@@ -4238,11 +4238,16 @@
 
 #define WM8995_CLASS_W_SWITCH(xname, reg, shift, max, invert) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, \
 	.info = snd_soc_info_volsw, \
 	.get = snd_soc_dapm_get_volsw, .put = wm8995_put_class_w, \
 	.private_value =  SOC_SINGLE_VALUE(reg, shift, max, invert) \
 }
+=======
+	SOC_SINGLE_EXT(xname, reg, shift, max, invert, \
+		snd_soc_dapm_get_volsw, wm8995_put_class_w)
+>>>>>>> v3.18
 =======
 	SOC_SINGLE_EXT(xname, reg, shift, max, invert, \
 		snd_soc_dapm_get_volsw, wm8995_put_class_w)

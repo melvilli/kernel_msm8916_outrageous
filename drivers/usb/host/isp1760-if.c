@@ -119,7 +119,11 @@ static int of_isp1760_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&dev->dev, drvdata);
+=======
+	platform_set_drvdata(dev, drvdata);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(dev, drvdata);
 >>>>>>> v3.18
@@ -138,9 +142,13 @@ free_data:
 static int of_isp1760_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct isp1760 *drvdata = dev_get_drvdata(&dev->dev);
 
 	dev_set_drvdata(&dev->dev, NULL);
+=======
+	struct isp1760 *drvdata = platform_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct isp1760 *drvdata = platform_get_drvdata(dev);
 >>>>>>> v3.18
@@ -362,7 +370,11 @@ static int isp1760_plat_probe(struct platform_device *pdev)
 	struct resource *irq_res;
 	resource_size_t mem_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct isp1760_platform_data *priv = pdev->dev.platform_data;
+=======
+	struct isp1760_platform_data *priv = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct isp1760_platform_data *priv = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -411,7 +423,11 @@ static int isp1760_plat_probe(struct platform_device *pdev)
 			       &pdev->dev, dev_name(&pdev->dev), devflags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, hcd);
+=======
+	platform_set_drvdata(pdev, hcd);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, hcd);
 >>>>>>> v3.18
@@ -436,7 +452,11 @@ static int isp1760_plat_remove(struct platform_device *pdev)
 	struct resource *mem_res;
 	resource_size_t mem_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&pdev->dev);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 >>>>>>> v3.18

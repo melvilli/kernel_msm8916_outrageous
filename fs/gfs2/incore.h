@@ -22,6 +22,10 @@
 #include <linux/ktime.h>
 #include <linux/percpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/lockref.h>
+>>>>>>> v3.18
 =======
 #include <linux/lockref.h>
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct gfs2_log_header_host {
 
 struct gfs2_log_operations {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*lo_before_commit) (struct gfs2_sbd *sdp);
+=======
+	void (*lo_before_commit) (struct gfs2_sbd *sdp, struct gfs2_trans *tr);
+>>>>>>> v3.18
 =======
 	void (*lo_before_commit) (struct gfs2_sbd *sdp, struct gfs2_trans *tr);
 >>>>>>> v3.18
@@ -80,6 +88,10 @@ struct gfs2_bitmap {
 	u32 bi_start;
 	u32 bi_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 bi_blocks;
+>>>>>>> v3.18
 =======
 	u32 bi_blocks;
 >>>>>>> v3.18
@@ -104,6 +116,10 @@ struct gfs2_rgrpd {
 	u32 rd_last_alloc;
 	u32 rd_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 rd_extfail_pt;		/* extent failure point */
+>>>>>>> v3.18
 =======
 	u32 rd_extfail_pt;		/* extent failure point */
 >>>>>>> v3.18
@@ -118,6 +134,7 @@ struct gfs2_rgrpd {
 struct gfs2_rbm {
 	struct gfs2_rgrpd *rgd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gfs2_bitmap *bi;	/* Bitmap must belong to the rgd */
 	u32 offset;		/* The offset is bitmap relative */
 };
@@ -126,6 +143,8 @@ static inline u64 gfs2_rbm_to_block(const struct gfs2_rbm *rbm)
 {
 	return rbm->rgd->rd_data0 + (rbm->bi->bi_start * GFS2_NBBY) + rbm->offset;
 =======
+=======
+>>>>>>> v3.18
 	u32 offset;		/* The offset is bitmap relative */
 	int bii;		/* Bitmap index */
 };
@@ -139,6 +158,9 @@ static inline u64 gfs2_rbm_to_block(const struct gfs2_rbm *rbm)
 {
 	return rbm->rgd->rd_data0 + (rbm_bi(rbm)->bi_start * GFS2_NBBY) +
 		rbm->offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -146,7 +168,11 @@ static inline bool gfs2_rbm_eq(const struct gfs2_rbm *rbm1,
 			       const struct gfs2_rbm *rbm2)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (rbm1->rgd == rbm2->rgd) && (rbm1->bi == rbm2->bi) && 
+=======
+	return (rbm1->rgd == rbm2->rgd) && (rbm1->bii == rbm2->bii) &&
+>>>>>>> v3.18
 =======
 	return (rbm1->rgd == rbm2->rgd) && (rbm1->bii == rbm2->bii) &&
 >>>>>>> v3.18
@@ -246,7 +272,11 @@ struct gfs2_glock_operations {
 	int (*go_lock) (struct gfs2_holder *gh);
 	void (*go_unlock) (struct gfs2_holder *gh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*go_dump)(struct seq_file *seq, const struct gfs2_glock *gl);
+=======
+	void (*go_dump)(struct seq_file *seq, const struct gfs2_glock *gl);
+>>>>>>> v3.18
 =======
 	void (*go_dump)(struct seq_file *seq, const struct gfs2_glock *gl);
 >>>>>>> v3.18
@@ -294,6 +324,12 @@ struct gfs2_holder {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Number of quota types we support */
+#define GFS2_MAXQUOTAS 2
+
+>>>>>>> v3.18
 =======
 /* Number of quota types we support */
 #define GFS2_MAXQUOTAS 2
@@ -320,12 +356,15 @@ struct gfs2_blkreserv {
 
 	/* ancillary quota stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gfs2_quota_data *rs_qa_qd[2 * MAXQUOTAS];
 	struct gfs2_holder rs_qa_qd_ghs[2 * MAXQUOTAS];
 	unsigned int rs_qa_qd_num;
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct gfs2_quota_data *rs_qa_qd[2 * GFS2_MAXQUOTAS];
 	struct gfs2_holder rs_qa_qd_ghs[2 * GFS2_MAXQUOTAS];
 	unsigned int rs_qa_qd_num;
@@ -345,6 +384,9 @@ struct gfs2_alloc_parms {
 	u32 aflags;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	GLF_LOCK			= 1,
@@ -369,9 +411,15 @@ struct gfs2_glock {
 	unsigned long gl_flags;		/* GLF_... */
 	struct lm_lockname gl_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t gl_ref;
 
 	spinlock_t gl_spin;
+=======
+
+	struct lockref gl_lockref;
+#define gl_spin gl_lockref.lock
+>>>>>>> v3.18
 =======
 
 	struct lockref gl_lockref;
@@ -403,8 +451,11 @@ struct gfs2_glock {
 	atomic_t gl_revokes;
 	struct delayed_work gl_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct gl_delete;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		/* For inode and iopen glocks only */
 		struct work_struct gl_delete;
@@ -414,6 +465,9 @@ struct gfs2_glock {
 			loff_t end;
 		} gl_vm;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rcu_head gl_rcu;
 };
@@ -427,6 +481,10 @@ enum {
 	GIF_SW_PAGED		= 3,
 	GIF_ORDERED		= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GIF_FREE_VFS_INODE      = 5,
+>>>>>>> v3.18
 =======
 	GIF_FREE_VFS_INODE      = 5,
 >>>>>>> v3.18
@@ -488,6 +546,7 @@ enum {
 
 struct gfs2_quota_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head qd_list;
 	struct list_head qd_reclaim;
 
@@ -495,6 +554,8 @@ struct gfs2_quota_data {
 
 	struct kqid qd_id;
 =======
+=======
+>>>>>>> v3.18
 	struct hlist_bl_node qd_hlist;
 	struct list_head qd_list;
 	struct kqid qd_id;
@@ -503,6 +564,9 @@ struct gfs2_quota_data {
 	struct list_head qd_lru;
 	unsigned qd_hash;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long qd_flags;		/* QDF_... */
 
@@ -522,6 +586,10 @@ struct gfs2_quota_data {
 	u64 qd_sync_gen;
 	unsigned long qd_last_warn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head qd_rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head qd_rcu;
 >>>>>>> v3.18
@@ -534,11 +602,17 @@ struct gfs2_trans {
 	unsigned int tr_revokes;
 	unsigned int tr_reserved;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct gfs2_holder tr_t_gh;
 
 	int tr_touched;
 	int tr_attached;
+=======
+	unsigned int tr_touched:1;
+	unsigned int tr_attached:1;
+	unsigned int tr_alloced:1;
+>>>>>>> v3.18
 =======
 	unsigned int tr_touched:1;
 	unsigned int tr_attached:1;
@@ -554,6 +628,11 @@ struct gfs2_trans {
 
 	struct list_head tr_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head tr_databuf;
+	struct list_head tr_buf;
+>>>>>>> v3.18
 =======
 	struct list_head tr_databuf;
 	struct list_head tr_buf;
@@ -566,7 +645,11 @@ struct gfs2_trans {
 
 struct gfs2_journal_extent {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head extent_list;
+=======
+	struct list_head list;
+>>>>>>> v3.18
 =======
 	struct list_head list;
 >>>>>>> v3.18
@@ -580,6 +663,10 @@ struct gfs2_jdesc {
 	struct list_head jd_list;
 	struct list_head extent_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int nr_extents;
+>>>>>>> v3.18
 =======
 	unsigned int nr_extents;
 >>>>>>> v3.18
@@ -591,7 +678,10 @@ struct gfs2_jdesc {
 	unsigned int jd_blocks;
 	int jd_recover_error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Replay stuff */
 
 	unsigned int jd_found_blocks;
@@ -601,6 +691,9 @@ struct gfs2_jdesc {
 	struct list_head jd_revoke_list;
 	unsigned int jd_replay_tail;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -653,7 +746,10 @@ struct gfs2_tune {
 	unsigned int gt_logd_secs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int gt_quota_simul_sync; /* Max quotavals to sync at once */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int gt_quota_warn_period; /* Secs between quota warn msgs */
@@ -776,7 +872,11 @@ struct gfs2_sbd {
 	struct gfs2_holder sd_live_gh;
 	struct gfs2_glock *sd_rename_gl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gfs2_glock *sd_trans_gl;
+=======
+	struct gfs2_glock *sd_freeze_gl;
+>>>>>>> v3.18
 =======
 	struct gfs2_glock *sd_freeze_gl;
 >>>>>>> v3.18
@@ -828,6 +928,11 @@ struct gfs2_sbd {
 	struct gfs2_holder sd_qc_gh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct completion sd_journal_ready;
+
+>>>>>>> v3.18
 =======
 	struct completion sd_journal_ready;
 
@@ -843,6 +948,10 @@ struct gfs2_sbd {
 	atomic_t sd_quota_count;
 	struct mutex sd_quota_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex sd_quota_sync_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex sd_quota_sync_mutex;
 >>>>>>> v3.18
@@ -852,8 +961,13 @@ struct gfs2_sbd {
 
 	unsigned int sd_quota_slots;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int sd_quota_chunks;
 	unsigned char **sd_quota_bitmap;
+=======
+	unsigned long *sd_quota_bitmap;
+	spinlock_t sd_bitmap_lock;
+>>>>>>> v3.18
 =======
 	unsigned long *sd_quota_bitmap;
 	spinlock_t sd_bitmap_lock;
@@ -864,6 +978,11 @@ struct gfs2_sbd {
 	/* Log stuff */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct address_space sd_aspace;
+
+>>>>>>> v3.18
 =======
 	struct address_space sd_aspace;
 
@@ -872,6 +991,7 @@ struct gfs2_sbd {
 
 	struct gfs2_trans *sd_log_tr;
 	unsigned int sd_log_blks_reserved;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int sd_log_commited_buf;
 	unsigned int sd_log_commited_databuf;
@@ -887,12 +1007,17 @@ struct gfs2_sbd {
 	struct list_head sd_log_le_revoke;
 	struct list_head sd_log_le_databuf;
 =======
+=======
+>>>>>>> v3.18
 	int sd_log_commited_revoke;
 
 	atomic_t sd_log_pinned;
 	unsigned int sd_log_num_revoke;
 
 	struct list_head sd_log_le_revoke;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head sd_log_le_ordered;
 	spinlock_t sd_ordered_lock;
@@ -922,6 +1047,7 @@ struct gfs2_sbd {
 	struct list_head sd_ail2_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Replay stuff */
 
 	struct list_head sd_revoke_list;
@@ -934,6 +1060,8 @@ struct gfs2_sbd {
 	/* For quiescing the filesystem */
 	struct gfs2_holder sd_freeze_gh;
 =======
+=======
+>>>>>>> v3.18
 	/* For quiescing the filesystem */
 	struct gfs2_holder sd_freeze_gh;
 	struct gfs2_holder sd_freeze_root_gh;
@@ -942,6 +1070,9 @@ struct gfs2_sbd {
 	atomic_t sd_frozen_root;
 	wait_queue_head_t sd_frozen_root_wait;
 	wait_queue_head_t sd_log_frozen_wait;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	char sd_fsname[GFS2_FSNAME_LEN];

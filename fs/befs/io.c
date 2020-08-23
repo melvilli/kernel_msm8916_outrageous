@@ -31,9 +31,15 @@ befs_bread_iaddr(struct super_block *sb, befs_inode_addr iaddr)
 	befs_sb_info *befs_sb = BEFS_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> Enter befs_read_iaddr() "
 		   "[%u, %hu, %hu]",
 		   iaddr.allocation_group, iaddr.start, iaddr.len);
+=======
+	befs_debug(sb, "---> Enter %s "
+		   "[%u, %hu, %hu]", __func__, iaddr.allocation_group,
+		   iaddr.start, iaddr.len);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> Enter %s "
 		   "[%u, %hu, %hu]", __func__, iaddr.allocation_group,
@@ -49,7 +55,11 @@ befs_bread_iaddr(struct super_block *sb, befs_inode_addr iaddr)
 	block = iaddr2blockno(sb, &iaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "befs_read_iaddr: offset = %lu", block);
+=======
+	befs_debug(sb, "%s: offset = %lu", __func__, (unsigned long)block);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "%s: offset = %lu", __func__, (unsigned long)block);
 >>>>>>> v3.18
@@ -57,6 +67,7 @@ befs_bread_iaddr(struct super_block *sb, befs_inode_addr iaddr)
 	bh = sb_bread(sb, block);
 
 	if (bh == NULL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		befs_error(sb, "Failed to read block %lu", block);
 		goto error;
@@ -68,6 +79,8 @@ befs_bread_iaddr(struct super_block *sb, befs_inode_addr iaddr)
       error:
 	befs_debug(sb, "<--- befs_read_iaddr() ERROR");
 =======
+=======
+>>>>>>> v3.18
 		befs_error(sb, "Failed to read block %lu",
 			   (unsigned long)block);
 		goto error;
@@ -78,6 +91,9 @@ befs_bread_iaddr(struct super_block *sb, befs_inode_addr iaddr)
 
       error:
 	befs_debug(sb, "<--- %s ERROR", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -88,7 +104,11 @@ befs_bread(struct super_block *sb, befs_blocknr_t block)
 	struct buffer_head *bh = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> Enter befs_read() %Lu", block);
+=======
+	befs_debug(sb, "---> Enter %s %lu", __func__, (unsigned long)block);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> Enter %s %lu", __func__, (unsigned long)block);
 >>>>>>> v3.18
@@ -97,25 +117,35 @@ befs_bread(struct super_block *sb, befs_blocknr_t block)
 
 	if (bh == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_error(sb, "Failed to read block %lu", block);
 		goto error;
 	}
 
 	befs_debug(sb, "<--- befs_read()");
 =======
+=======
+>>>>>>> v3.18
 		befs_error(sb, "Failed to read block %lu",
 			   (unsigned long)block);
 		goto error;
 	}
 
 	befs_debug(sb, "<--- %s", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return bh;
 
       error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_read() ERROR");
+=======
+	befs_debug(sb, "<--- %s ERROR", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s ERROR", __func__);
 >>>>>>> v3.18

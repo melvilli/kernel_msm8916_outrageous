@@ -18,6 +18,7 @@
 #include <linux/mv643xx_i2c.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/of.h>
 #include <linux/of_irq.h>
@@ -34,6 +35,8 @@
 #define	MV64XXX_I2C_REG_EXT_SLAVE_ADDR			0x10
 #define	MV64XXX_I2C_REG_SOFT_RESET			0x1c
 =======
+=======
+>>>>>>> v3.18
 #include <linux/reset.h>
 #include <linux/io.h>
 #include <linux/of.h>
@@ -46,6 +49,9 @@
 #define MV64XXX_I2C_ADDR_ADDR(val)			((val & 0x7f) << 1)
 #define MV64XXX_I2C_BAUD_DIV_N(val)			(val & 0x7)
 #define MV64XXX_I2C_BAUD_DIV_M(val)			((val & 0xf) << 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	MV64XXX_I2C_REG_CONTROL_ACK			0x00000004
@@ -75,7 +81,10 @@
 #define	MV64XXX_I2C_STATUS_NO_STATUS			0xf8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Register defines (I2C bridge) */
 #define	MV64XXX_I2C_REG_TX_DATA_LO			0xc0
 #define	MV64XXX_I2C_REG_TX_DATA_HI			0xc4
@@ -102,6 +111,9 @@
 #define	MV64XXX_I2C_STATUS_OFFLOAD_OK			0xf0000000
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Driver states */
 enum {
@@ -120,8 +132,13 @@ enum {
 	MV64XXX_I2C_ACTION_INVALID,
 	MV64XXX_I2C_ACTION_CONTINUE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MV64XXX_I2C_ACTION_SEND_START,
 	MV64XXX_I2C_ACTION_SEND_RESTART,
+=======
+	MV64XXX_I2C_ACTION_SEND_RESTART,
+	MV64XXX_I2C_ACTION_OFFLOAD_RESTART,
+>>>>>>> v3.18
 =======
 	MV64XXX_I2C_ACTION_SEND_RESTART,
 	MV64XXX_I2C_ACTION_OFFLOAD_RESTART,
@@ -133,10 +150,13 @@ enum {
 	MV64XXX_I2C_ACTION_RCV_DATA_STOP,
 	MV64XXX_I2C_ACTION_SEND_STOP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct mv64xxx_i2c_data {
 =======
+=======
+>>>>>>> v3.18
 	MV64XXX_I2C_ACTION_OFFLOAD_SEND_STOP,
 };
 
@@ -153,6 +173,9 @@ struct mv64xxx_i2c_regs {
 struct mv64xxx_i2c_data {
 	struct i2c_msg		*msgs;
 	int			num_msgs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			irq;
 	u32			state;
@@ -161,8 +184,12 @@ struct mv64xxx_i2c_data {
 	u32			cntl_bits;
 	void __iomem		*reg_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			reg_base_p;
 	u32			reg_size;
+=======
+	struct mv64xxx_i2c_regs	reg_offsets;
+>>>>>>> v3.18
 =======
 	struct mv64xxx_i2c_regs	reg_offsets;
 >>>>>>> v3.18
@@ -183,9 +210,12 @@ struct mv64xxx_i2c_data {
 	struct i2c_msg		*msg;
 	struct i2c_adapter	adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	bool			offload_enabled;
 /* 5us delay in order to avoid repeated start timing violation */
 	bool			errata_delay;
@@ -303,6 +333,9 @@ mv64xxx_i2c_update_offload_data(struct mv64xxx_i2c_data *drv_data)
 	}
 
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *****************************************************************************
@@ -317,6 +350,7 @@ static void
 mv64xxx_i2c_hw_init(struct mv64xxx_i2c_data *drv_data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(0, drv_data->reg_base + MV64XXX_I2C_REG_SOFT_RESET);
 	writel((((drv_data->freq_m & 0xf) << 3) | (drv_data->freq_n & 0x7)),
 		drv_data->reg_base + MV64XXX_I2C_REG_BAUD);
@@ -325,6 +359,8 @@ mv64xxx_i2c_hw_init(struct mv64xxx_i2c_data *drv_data)
 	writel(MV64XXX_I2C_REG_CONTROL_TWSIEN | MV64XXX_I2C_REG_CONTROL_STOP,
 		drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
 =======
+=======
+>>>>>>> v3.18
 	if (drv_data->offload_enabled) {
 		writel(0, drv_data->reg_base + MV64XXX_I2C_REG_BRIDGE_CONTROL);
 		writel(0, drv_data->reg_base + MV64XXX_I2C_REG_BRIDGE_TIMING);
@@ -341,6 +377,9 @@ mv64xxx_i2c_hw_init(struct mv64xxx_i2c_data *drv_data)
 	writel(0, drv_data->reg_base + drv_data->reg_offsets.ext_addr);
 	writel(MV64XXX_I2C_REG_CONTROL_TWSIEN | MV64XXX_I2C_REG_CONTROL_STOP,
 		drv_data->reg_base + drv_data->reg_offsets.control);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drv_data->state = MV64XXX_I2C_STATE_IDLE;
 }
@@ -382,7 +421,11 @@ mv64xxx_i2c_fsm(struct mv64xxx_i2c_data *drv_data, u32 status)
 				|| (drv_data->aborting
 					&& (drv_data->byte_posn != 0))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (drv_data->send_stop) {
+=======
+			if (drv_data->send_stop || drv_data->aborting) {
+>>>>>>> v3.18
 =======
 			if (drv_data->send_stop || drv_data->aborting) {
 >>>>>>> v3.18
@@ -443,8 +486,11 @@ mv64xxx_i2c_fsm(struct mv64xxx_i2c_data *drv_data, u32 status)
 		drv_data->action = MV64XXX_I2C_ACTION_SEND_STOP;
 		drv_data->state = MV64XXX_I2C_STATE_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drv_data->rc = -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 		drv_data->rc = -ENXIO;
 		break;
 
@@ -456,6 +502,9 @@ mv64xxx_i2c_fsm(struct mv64xxx_i2c_data *drv_data, u32 status)
 			drv_data->action = MV64XXX_I2C_ACTION_OFFLOAD_RESTART;
 			drv_data->state = MV64XXX_I2C_STATE_WAITING_FOR_RESTART;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -472,7 +521,10 @@ mv64xxx_i2c_fsm(struct mv64xxx_i2c_data *drv_data, u32 status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mv64xxx_i2c_send_start(struct mv64xxx_i2c_data *drv_data)
 {
 	drv_data->msg = drv_data->msgs;
@@ -490,11 +542,15 @@ static void mv64xxx_i2c_send_start(struct mv64xxx_i2c_data *drv_data)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 {
 	switch(drv_data->action) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case MV64XXX_I2C_ACTION_SEND_RESTART:
 		drv_data->cntl_bits |= MV64XXX_I2C_REG_CONTROL_START;
@@ -504,6 +560,8 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 		drv_data->block = 0;
 		wake_up(&drv_data->waitq);
 =======
+=======
+>>>>>>> v3.18
 	case MV64XXX_I2C_ACTION_OFFLOAD_RESTART:
 		mv64xxx_i2c_update_offload_data(drv_data);
 		writel(0, drv_data->reg_base +	MV64XXX_I2C_REG_BRIDGE_CONTROL);
@@ -527,11 +585,15 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 		 * Thankfully, do not advertise support for that feature.
 		 */
 		drv_data->send_stop = drv_data->num_msgs == 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	case MV64XXX_I2C_ACTION_CONTINUE:
 		writel(drv_data->cntl_bits,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
 		break;
@@ -542,14 +604,23 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 =======
 			drv_data->reg_base + drv_data->reg_offsets.control);
 >>>>>>> v3.18
+=======
+			drv_data->reg_base + drv_data->reg_offsets.control);
+>>>>>>> v3.18
 		break;
 
 	case MV64XXX_I2C_ACTION_SEND_ADDR_1:
 		writel(drv_data->addr1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drv_data->reg_base + MV64XXX_I2C_REG_DATA);
 		writel(drv_data->cntl_bits,
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
+=======
+			drv_data->reg_base + drv_data->reg_offsets.data);
+		writel(drv_data->cntl_bits,
+			drv_data->reg_base + drv_data->reg_offsets.control);
+>>>>>>> v3.18
 =======
 			drv_data->reg_base + drv_data->reg_offsets.data);
 		writel(drv_data->cntl_bits,
@@ -560,9 +631,15 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 	case MV64XXX_I2C_ACTION_SEND_ADDR_2:
 		writel(drv_data->addr2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drv_data->reg_base + MV64XXX_I2C_REG_DATA);
 		writel(drv_data->cntl_bits,
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
+=======
+			drv_data->reg_base + drv_data->reg_offsets.data);
+		writel(drv_data->cntl_bits,
+			drv_data->reg_base + drv_data->reg_offsets.control);
+>>>>>>> v3.18
 =======
 			drv_data->reg_base + drv_data->reg_offsets.data);
 		writel(drv_data->cntl_bits,
@@ -573,9 +650,15 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 	case MV64XXX_I2C_ACTION_SEND_DATA:
 		writel(drv_data->msg->buf[drv_data->byte_posn++],
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drv_data->reg_base + MV64XXX_I2C_REG_DATA);
 		writel(drv_data->cntl_bits,
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
+=======
+			drv_data->reg_base + drv_data->reg_offsets.data);
+		writel(drv_data->cntl_bits,
+			drv_data->reg_base + drv_data->reg_offsets.control);
+>>>>>>> v3.18
 =======
 			drv_data->reg_base + drv_data->reg_offsets.data);
 		writel(drv_data->cntl_bits,
@@ -586,9 +669,15 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 	case MV64XXX_I2C_ACTION_RCV_DATA:
 		drv_data->msg->buf[drv_data->byte_posn++] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			readl(drv_data->reg_base + MV64XXX_I2C_REG_DATA);
 		writel(drv_data->cntl_bits,
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
+=======
+			readl(drv_data->reg_base + drv_data->reg_offsets.data);
+		writel(drv_data->cntl_bits,
+			drv_data->reg_base + drv_data->reg_offsets.control);
+>>>>>>> v3.18
 =======
 			readl(drv_data->reg_base + drv_data->reg_offsets.data);
 		writel(drv_data->cntl_bits,
@@ -599,12 +688,15 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 	case MV64XXX_I2C_ACTION_RCV_DATA_STOP:
 		drv_data->msg->buf[drv_data->byte_posn++] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			readl(drv_data->reg_base + MV64XXX_I2C_REG_DATA);
 		drv_data->cntl_bits &= ~MV64XXX_I2C_REG_CONTROL_INTEN;
 		writel(drv_data->cntl_bits | MV64XXX_I2C_REG_CONTROL_STOP,
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
 		drv_data->block = 0;
 =======
+=======
+>>>>>>> v3.18
 			readl(drv_data->reg_base + drv_data->reg_offsets.data);
 		drv_data->cntl_bits &= ~MV64XXX_I2C_REG_CONTROL_INTEN;
 		writel(drv_data->cntl_bits | MV64XXX_I2C_REG_CONTROL_STOP,
@@ -613,6 +705,9 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 		if (drv_data->errata_delay)
 			udelay(5);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wake_up(&drv_data->waitq);
 		break;
@@ -624,6 +719,10 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 			drv_data->action);
 		drv_data->rc = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -632,8 +731,11 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 		drv_data->cntl_bits &= ~MV64XXX_I2C_REG_CONTROL_INTEN;
 		writel(drv_data->cntl_bits | MV64XXX_I2C_REG_CONTROL_STOP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drv_data->reg_base + MV64XXX_I2C_REG_CONTROL);
 =======
+=======
+>>>>>>> v3.18
 			drv_data->reg_base + drv_data->reg_offsets.control);
 		drv_data->block = 0;
 		wake_up(&drv_data->waitq);
@@ -644,6 +746,9 @@ mv64xxx_i2c_do_action(struct mv64xxx_i2c_data *drv_data)
 		writel(0, drv_data->reg_base +	MV64XXX_I2C_REG_BRIDGE_CONTROL);
 		writel(0, drv_data->reg_base +
 			MV64XXX_I2C_REG_BRIDGE_INTR_CAUSE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		drv_data->block = 0;
 		wake_up(&drv_data->waitq);
@@ -661,12 +766,15 @@ mv64xxx_i2c_intr(int irq, void *dev_id)
 
 	spin_lock_irqsave(&drv_data->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (readl(drv_data->reg_base + MV64XXX_I2C_REG_CONTROL) &
 						MV64XXX_I2C_REG_CONTROL_IFLG) {
 		status = readl(drv_data->reg_base + MV64XXX_I2C_REG_STATUS);
 		mv64xxx_i2c_fsm(drv_data, status);
 		mv64xxx_i2c_do_action(drv_data);
 =======
+=======
+>>>>>>> v3.18
 
 	if (drv_data->offload_enabled) {
 		while (readl(drv_data->reg_base +
@@ -692,6 +800,9 @@ mv64xxx_i2c_intr(int irq, void *dev_id)
 			writel(drv_data->cntl_bits | MV64XXX_I2C_REG_CONTROL_IFLG,
 			       drv_data->reg_base + drv_data->reg_offsets.control);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = IRQ_HANDLED;
 	}
@@ -708,6 +819,7 @@ mv64xxx_i2c_intr(int irq, void *dev_id)
  *****************************************************************************
  */
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 mv64xxx_i2c_prepare_for_io(struct mv64xxx_i2c_data *drv_data,
 	struct i2c_msg *msg)
@@ -735,6 +847,8 @@ mv64xxx_i2c_prepare_for_io(struct mv64xxx_i2c_data *drv_data,
 }
 
 static void
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 mv64xxx_i2c_wait_for_completion(struct mv64xxx_i2c_data *drv_data)
@@ -777,7 +891,11 @@ mv64xxx_i2c_wait_for_completion(struct mv64xxx_i2c_data *drv_data)
 static int
 mv64xxx_i2c_execute_msg(struct mv64xxx_i2c_data *drv_data, struct i2c_msg *msg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int is_first, int is_last)
+=======
+				int is_last)
+>>>>>>> v3.18
 =======
 				int is_last)
 >>>>>>> v3.18
@@ -785,6 +903,7 @@ mv64xxx_i2c_execute_msg(struct mv64xxx_i2c_data *drv_data, struct i2c_msg *msg,
 	unsigned long	flags;
 
 	spin_lock_irqsave(&drv_data->lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mv64xxx_i2c_prepare_for_io(drv_data, msg);
 
@@ -816,12 +935,17 @@ mv64xxx_i2c_execute_msg(struct mv64xxx_i2c_data *drv_data, struct i2c_msg *msg,
 	drv_data->block = 1;
 	mv64xxx_i2c_do_action(drv_data);
 =======
+=======
+>>>>>>> v3.18
 
 	drv_data->state = MV64XXX_I2C_STATE_WAITING_FOR_START_COND;
 
 	drv_data->send_stop = is_last;
 	drv_data->block = 1;
 	mv64xxx_i2c_send_start(drv_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&drv_data->lock, flags);
 
@@ -847,6 +971,7 @@ mv64xxx_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 {
 	struct mv64xxx_i2c_data *drv_data = i2c_get_adapdata(adap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	i, rc;
 
 	for (i = 0; i < num; i++) {
@@ -858,6 +983,8 @@ mv64xxx_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 
 	return num;
 =======
+=======
+>>>>>>> v3.18
 	int rc, ret = num;
 
 	BUG_ON(drv_data->msgs != NULL);
@@ -872,6 +999,9 @@ mv64xxx_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 	drv_data->msgs = NULL;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -887,6 +1017,7 @@ static const struct i2c_algorithm mv64xxx_i2c_algo = {
  *
  *****************************************************************************
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 mv64xxx_i2c_map_regs(struct platform_device *pd,
@@ -924,6 +1055,8 @@ mv64xxx_i2c_unmap_regs(struct mv64xxx_i2c_data *drv_data)
 
 #ifdef CONFIG_OF
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id mv64xxx_i2c_of_match_table[] = {
 	{ .compatible = "allwinner,sun4i-a10-i2c", .data = &mv64xxx_i2c_regs_sun4i},
 	{ .compatible = "allwinner,sun6i-a31-i2c", .data = &mv64xxx_i2c_regs_sun4i},
@@ -936,6 +1069,9 @@ MODULE_DEVICE_TABLE(of, mv64xxx_i2c_of_match_table);
 
 #ifdef CONFIG_OF
 #ifdef CONFIG_HAVE_CLK
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 mv64xxx_calc_freq(const int tclk, const int n, const int m)
@@ -967,6 +1103,7 @@ mv64xxx_find_baud_factors(const u32 req_freq, const u32 tclk, u32 *best_n,
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int
 mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
@@ -976,12 +1113,17 @@ mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 	int rc = 0;
 
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_HAVE_CLK */
 
 static int
 mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 		  struct device *dev)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* CLK is mandatory when using DT to describe the i2c bus. We
 	 * need to know tclk in order to calculate bus clock
@@ -992,12 +1134,18 @@ mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 	return -ENODEV;
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *device;
 	struct device_node *np = dev->of_node;
 	u32 bus_freq, tclk;
 	int rc = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(drv_data->clk)) {
 		rc = -ENODEV;
@@ -1005,12 +1153,18 @@ mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 	}
 	tclk = clk_get_rate(drv_data->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_property_read_u32(np, "clock-frequency", &bus_freq);
 =======
+=======
+>>>>>>> v3.18
 
 	if (of_property_read_u32(np, "clock-frequency", &bus_freq))
 		bus_freq = 100000; /* 100kHz by default */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!mv64xxx_find_baud_factors(bus_freq, tclk,
 				       &drv_data->freq_n, &drv_data->freq_m)) {
@@ -1020,7 +1174,10 @@ mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 	drv_data->irq = irq_of_parse_and_map(np, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	drv_data->rstc = devm_reset_control_get_optional(dev, NULL);
 	if (IS_ERR(drv_data->rstc)) {
 		if (PTR_ERR(drv_data->rstc) == -EPROBE_DEFER) {
@@ -1031,13 +1188,19 @@ mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 		reset_control_deassert(drv_data->rstc);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Its not yet defined how timeouts will be specified in device tree.
 	 * So hard code the value to 1 second.
 	 */
 	drv_data->adapter.timeout = HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	device = of_match_device(mv64xxx_i2c_of_match_table, dev);
 	if (!device)
@@ -1062,6 +1225,9 @@ mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 	if (of_device_is_compatible(np, "allwinner,sun6i-a31-i2c"))
 		drv_data->irq_clear_inverted = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return rc;
@@ -1071,7 +1237,11 @@ out:
 static int
 mv64xxx_of_config(struct mv64xxx_i2c_data *drv_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  struct device_node *np)
+=======
+		  struct device *dev)
+>>>>>>> v3.18
 =======
 		  struct device *dev)
 >>>>>>> v3.18
@@ -1085,7 +1255,12 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 {
 	struct mv64xxx_i2c_data		*drv_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mv64xxx_i2c_pdata	*pdata = pd->dev.platform_data;
+=======
+	struct mv64xxx_i2c_pdata	*pdata = dev_get_platdata(&pd->dev);
+	struct resource	*r;
+>>>>>>> v3.18
 =======
 	struct mv64xxx_i2c_pdata	*pdata = dev_get_platdata(&pd->dev);
 	struct resource	*r;
@@ -1096,6 +1271,7 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv_data = kzalloc(sizeof(struct mv64xxx_i2c_data), GFP_KERNEL);
 	if (!drv_data)
 		return -ENOMEM;
@@ -1105,6 +1281,8 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		goto exit_kfree;
 	}
 =======
+=======
+>>>>>>> v3.18
 	drv_data = devm_kzalloc(&pd->dev, sizeof(struct mv64xxx_i2c_data),
 				GFP_KERNEL);
 	if (!drv_data)
@@ -1114,6 +1292,9 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 	drv_data->reg_base = devm_ioremap_resource(&pd->dev, r);
 	if (IS_ERR(drv_data->reg_base))
 		return PTR_ERR(drv_data->reg_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	strlcpy(drv_data->adapter.name, MV64XXX_I2C_CTLR_NAME " adapter",
@@ -1125,7 +1306,11 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 #if defined(CONFIG_HAVE_CLK)
 	/* Not all platforms have a clk */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv_data->clk = clk_get(&pd->dev, NULL);
+=======
+	drv_data->clk = devm_clk_get(&pd->dev, NULL);
+>>>>>>> v3.18
 =======
 	drv_data->clk = devm_clk_get(&pd->dev, NULL);
 >>>>>>> v3.18
@@ -1140,6 +1325,7 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		drv_data->irq = platform_get_irq(pd, 0);
 		drv_data->adapter.timeout = msecs_to_jiffies(pdata->timeout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (pd->dev.of_node) {
 		rc = mv64xxx_of_config(drv_data, pd->dev.of_node);
 		if (rc)
@@ -1149,6 +1335,8 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		rc = -ENXIO;
 		goto exit_unmap_regs;
 =======
+=======
+>>>>>>> v3.18
 		drv_data->offload_enabled = false;
 		memcpy(&drv_data->reg_offsets, &mv64xxx_i2c_regs_mv64xxx, sizeof(drv_data->reg_offsets));
 	} else if (pd->dev.of_node) {
@@ -1159,6 +1347,9 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 	if (drv_data->irq < 0) {
 		rc = -ENXIO;
 		goto exit_reset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1166,7 +1357,11 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 	drv_data->adapter.algo = &mv64xxx_i2c_algo;
 	drv_data->adapter.owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv_data->adapter.class = I2C_CLASS_HWMON | I2C_CLASS_SPD;
+=======
+	drv_data->adapter.class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 =======
 	drv_data->adapter.class = I2C_CLASS_DEPRECATED;
 >>>>>>> v3.18
@@ -1178,6 +1373,7 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 	mv64xxx_i2c_hw_init(drv_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(drv_data->irq, mv64xxx_i2c_intr, 0,
 			MV64XXX_I2C_CTLR_NAME, drv_data)) {
 		dev_err(&drv_data->adapter.dev,
@@ -1186,6 +1382,8 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		rc = -EINVAL;
 		goto exit_unmap_regs;
 =======
+=======
+>>>>>>> v3.18
 	rc = request_irq(drv_data->irq, mv64xxx_i2c_intr, 0,
 			 MV64XXX_I2C_CTLR_NAME, drv_data);
 	if (rc) {
@@ -1193,6 +1391,9 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 			"mv64xxx: Can't register intr handler irq%d: %d\n",
 			drv_data->irq, rc);
 		goto exit_reset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if ((rc = i2c_add_numbered_adapter(&drv_data->adapter)) != 0) {
 		dev_err(&drv_data->adapter.dev,
@@ -1200,6 +1401,7 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		goto exit_free_irq;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	of_i2c_register_devices(&drv_data->adapter);
 
@@ -1209,6 +1411,8 @@ mv64xxx_i2c_probe(struct platform_device *pd)
 		free_irq(drv_data->irq, drv_data);
 	exit_unmap_regs:
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 
 exit_free_irq:
@@ -1217,6 +1421,9 @@ exit_reset:
 	if (!IS_ERR_OR_NULL(drv_data->rstc))
 		reset_control_assert(drv_data->rstc);
 exit_clk:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_HAVE_CLK)
 	/* Not all platforms have a clk */
@@ -1226,9 +1433,12 @@ exit_clk:
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mv64xxx_i2c_unmap_regs(drv_data);
 	exit_kfree:
 		kfree(drv_data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return rc;
@@ -1242,7 +1452,12 @@ mv64xxx_i2c_remove(struct platform_device *dev)
 	i2c_del_adapter(&drv_data->adapter);
 	free_irq(drv_data->irq, drv_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mv64xxx_i2c_unmap_regs(drv_data);
+=======
+	if (!IS_ERR_OR_NULL(drv_data->rstc))
+		reset_control_assert(drv_data->rstc);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR_OR_NULL(drv_data->rstc))
 		reset_control_assert(drv_data->rstc);
@@ -1255,13 +1470,17 @@ mv64xxx_i2c_remove(struct platform_device *dev)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(drv_data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct of_device_id mv64xxx_i2c_of_match_table[] = {
 	{ .compatible = "marvell,mv64xxx-i2c", },
@@ -1271,6 +1490,8 @@ MODULE_DEVICE_TABLE(of, mv64xxx_i2c_of_match_table);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver mv64xxx_i2c_driver = {
 	.probe	= mv64xxx_i2c_probe,
 	.remove	= mv64xxx_i2c_remove,
@@ -1278,7 +1499,11 @@ static struct platform_driver mv64xxx_i2c_driver = {
 		.owner	= THIS_MODULE,
 		.name	= MV64XXX_I2C_CTLR_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(mv64xxx_i2c_of_match_table),
+=======
+		.of_match_table = mv64xxx_i2c_of_match_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = mv64xxx_i2c_of_match_table,
 >>>>>>> v3.18

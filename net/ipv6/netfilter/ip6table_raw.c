@@ -20,7 +20,11 @@ static const struct xt_table packet_raw = {
 /* The work comes in here from netfilter.c. */
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip6table_raw_hook(unsigned int hook, struct sk_buff *skb,
+=======
+ip6table_raw_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 ip6table_raw_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -30,7 +34,12 @@ ip6table_raw_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 	const struct net *net = dev_net((in != NULL) ? in : out);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ip6t_do_table(skb, hook, in, out, net->ipv6.ip6table_raw);
+=======
+	return ip6t_do_table(skb, ops->hooknum, in, out,
+			     net->ipv6.ip6table_raw);
+>>>>>>> v3.18
 =======
 	return ip6t_do_table(skb, ops->hooknum, in, out,
 			     net->ipv6.ip6table_raw);
@@ -50,7 +59,11 @@ static int __net_init ip6table_raw_net_init(struct net *net)
 		ip6t_register_table(net, &packet_raw, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv6.ip6table_raw);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_raw);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_raw);
 >>>>>>> v3.18

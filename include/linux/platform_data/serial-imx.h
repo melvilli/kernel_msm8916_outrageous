@@ -24,8 +24,11 @@
 
 struct imxuart_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*init)(struct platform_device *pdev);
 	void (*exit)(struct platform_device *pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int flags;

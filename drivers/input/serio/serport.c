@@ -126,7 +126,11 @@ static void serport_ldisc_receive(struct tty_struct *tty, const unsigned char *c
 	struct serport *serport = (struct serport*) tty->disc_data;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ch_flags;
+=======
+	unsigned int ch_flags = 0;
+>>>>>>> v3.18
 =======
 	unsigned int ch_flags = 0;
 >>>>>>> v3.18
@@ -138,6 +142,7 @@ static void serport_ldisc_receive(struct tty_struct *tty, const unsigned char *c
 		goto out;
 
 	for (i = 0; i < count; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (fp[i]) {
 		case TTY_FRAME:
@@ -152,6 +157,8 @@ static void serport_ldisc_receive(struct tty_struct *tty, const unsigned char *c
 			ch_flags = 0;
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (fp) {
 			switch (fp[i]) {
 			case TTY_FRAME:
@@ -166,6 +173,9 @@ static void serport_ldisc_receive(struct tty_struct *tty, const unsigned char *c
 				ch_flags = 0;
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 

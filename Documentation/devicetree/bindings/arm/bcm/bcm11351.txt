@@ -7,7 +7,12 @@ bcm11351, bcm28145, bcm28155 SoCs) shall have the following properties:
 Required root node property:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 compatible = "bcm,bcm11351";
+=======
+compatible = "brcm,bcm11351";
+DEPRECATED: compatible = "bcm,bcm11351";
+>>>>>>> v3.18
 =======
 compatible = "brcm,bcm11351";
 DEPRECATED: compatible = "bcm,bcm11351";

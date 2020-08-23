@@ -37,7 +37,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -181,6 +184,7 @@ static int bt856_s_routing(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt856_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -192,6 +196,11 @@ static int bt856_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident
 
 static const struct v4l2_subdev_core_ops bt856_core_ops = {
 	.g_chip_ident = bt856_g_chip_ident,
+=======
+/* ----------------------------------------------------------------------- */
+
+static const struct v4l2_subdev_core_ops bt856_core_ops = {
+>>>>>>> v3.18
 =======
 /* ----------------------------------------------------------------------- */
 
@@ -226,7 +235,11 @@ static int bt856_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	encoder = kzalloc(sizeof(struct bt856), GFP_KERNEL);
+=======
+	encoder = devm_kzalloc(&client->dev, sizeof(*encoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	encoder = devm_kzalloc(&client->dev, sizeof(*encoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -264,7 +277,10 @@ static int bt856_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_bt856(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

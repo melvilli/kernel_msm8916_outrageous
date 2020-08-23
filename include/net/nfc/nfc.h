@@ -17,9 +17,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -33,10 +37,13 @@
 #include <linux/skbuff.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nfc_dev_info(dev, fmt, arg...) dev_info((dev), "NFC: " fmt "\n", ## arg)
 #define nfc_dev_err(dev, fmt, arg...) dev_err((dev), "NFC: " fmt "\n", ## arg)
 #define nfc_dev_dbg(dev, fmt, arg...) dev_dbg((dev), fmt "\n", ## arg)
 =======
+=======
+>>>>>>> v3.18
 #define nfc_info(dev, fmt, ...) dev_info((dev), "NFC: " fmt, ##__VA_ARGS__)
 #define nfc_err(dev, fmt, ...) dev_err((dev), "NFC: " fmt, ##__VA_ARGS__)
 
@@ -45,6 +52,9 @@ struct nfc_phy_ops {
 	int (*enable)(void *dev_id);
 	void (*disable)(void *dev_id);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct nfc_dev;
@@ -64,6 +74,11 @@ typedef void (*data_exchange_cb_t)(void *context, struct sk_buff *skb,
 								int err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+typedef void (*se_io_cb_t)(void *context, u8 *apdu, size_t apdu_len, int err);
+
+>>>>>>> v3.18
 =======
 typedef void (*se_io_cb_t)(void *context, u8 *apdu, size_t apdu_len, int err);
 
@@ -89,9 +104,12 @@ struct nfc_ops {
 	int (*tm_send)(struct nfc_dev *dev, struct sk_buff *skb);
 	int (*check_presence)(struct nfc_dev *dev, struct nfc_target *target);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*enable_se)(struct nfc_dev *dev, u32 secure_element);
 	int (*disable_se)(struct nfc_dev *dev, u32 secure_element);
 =======
+=======
+>>>>>>> v3.18
 	int (*fw_download)(struct nfc_dev *dev, const char *firmware_name);
 
 	/* Secure Element API */
@@ -101,6 +119,9 @@ struct nfc_ops {
 	int (*se_io) (struct nfc_dev *dev, u32 se_idx,
 		      u8 *apdu, size_t apdu_length,
 		      se_io_cb_t cb, void *cb_context);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -109,7 +130,10 @@ struct nfc_ops {
 #define NFC_ATR_RES_GT_OFFSET 15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct nfc_target - NFC target descriptiom
  *
@@ -118,6 +142,9 @@ struct nfc_ops {
  *	as described by the NFC Forum digital specification (i.e. the platform
  *	configuration one) while %sens_res least significant byte is byte 1.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfc_target {
 	u32 idx;
@@ -127,6 +154,11 @@ struct nfc_target {
 	u8 nfcid1_len;
 	u8 nfcid1[NFC_NFCID1_MAXSIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 nfcid2_len;
+	u8 nfcid2[NFC_NFCID2_MAXSIZE];
+>>>>>>> v3.18
 =======
 	u8 nfcid2_len;
 	u8 nfcid2[NFC_NFCID2_MAXSIZE];
@@ -138,7 +170,10 @@ struct nfc_target {
 	u8 hci_reader_gate;
 	u8 logical_idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 is_iso15693;
 	u8 iso15693_dsfid;
 	u8 iso15693_uid[NFC_ISO15693_UID_MAXSIZE];
@@ -159,6 +194,9 @@ struct nfc_se {
 	u32 idx;
 	u16 type;
 	u16 state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -176,6 +214,10 @@ struct nfc_dev {
 	struct device dev;
 	bool dev_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool fw_download_in_progress;
+>>>>>>> v3.18
 =======
 	bool fw_download_in_progress;
 >>>>>>> v3.18
@@ -187,8 +229,12 @@ struct nfc_dev {
 	u32 supported_protocols;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 supported_se;
 	u32 active_se;
+=======
+	struct list_head secure_elements;
+>>>>>>> v3.18
 =======
 	struct list_head secure_elements;
 >>>>>>> v3.18
@@ -212,7 +258,10 @@ extern struct class nfc_class;
 struct nfc_dev *nfc_allocate_device(struct nfc_ops *ops,
 				    u32 supported_protocols,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    u32 supported_se,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				    int tx_headroom,
@@ -285,6 +334,12 @@ int nfc_set_remote_general_bytes(struct nfc_dev *dev,
 u8 *nfc_get_local_general_bytes(struct nfc_dev *dev, size_t *gb_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nfc_fw_download_done(struct nfc_dev *dev, const char *firmware_name,
+			 u32 result);
+
+>>>>>>> v3.18
 =======
 int nfc_fw_download_done(struct nfc_dev *dev, const char *firmware_name,
 			 u32 result);
@@ -305,7 +360,10 @@ int nfc_tm_data_received(struct nfc_dev *dev, struct sk_buff *skb);
 void nfc_driver_failure(struct nfc_dev *dev, int err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nfc_add_se(struct nfc_dev *dev, u32 se_idx, u16 type);
 int nfc_remove_se(struct nfc_dev *dev, u32 se_idx);
 struct nfc_se *nfc_find_se(struct nfc_dev *dev, u32 se_idx);
@@ -313,5 +371,8 @@ struct nfc_se *nfc_find_se(struct nfc_dev *dev, u32 se_idx);
 void nfc_send_to_raw_sock(struct nfc_dev *dev, struct sk_buff *skb,
 			  u8 payload_type, u8 direction);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __NET_NFC_H */

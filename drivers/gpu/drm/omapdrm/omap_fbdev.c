@@ -282,6 +282,7 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void omap_crtc_fb_gamma_set(struct drm_crtc *crtc,
 		u16 red, u16 green, u16 blue, int regno)
 {
@@ -297,6 +298,9 @@ static void omap_crtc_fb_gamma_get(struct drm_crtc *crtc,
 static struct drm_fb_helper_funcs omap_fb_helper_funcs = {
 	.gamma_set = omap_crtc_fb_gamma_set,
 	.gamma_get = omap_crtc_fb_gamma_get,
+=======
+static const struct drm_fb_helper_funcs omap_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs omap_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -344,7 +348,11 @@ struct drm_fb_helper *omap_fbdev_init(struct drm_device *dev)
 	helper = &fbdev->base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	helper->funcs = &omap_fb_helper_funcs;
+=======
+	drm_fb_helper_prepare(dev, helper, &omap_fb_helper_funcs);
+>>>>>>> v3.18
 =======
 	drm_fb_helper_prepare(dev, helper, &omap_fb_helper_funcs);
 >>>>>>> v3.18
@@ -394,6 +402,12 @@ void omap_fbdev_free(struct drm_device *dev)
 	fbdev = to_omap_fbdev(priv->fbdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* release the ref taken in omap_fbdev_create() */
+	omap_gem_put_paddr(fbdev->bo);
+
+>>>>>>> v3.18
 =======
 	/* release the ref taken in omap_fbdev_create() */
 	omap_gem_put_paddr(fbdev->bo);

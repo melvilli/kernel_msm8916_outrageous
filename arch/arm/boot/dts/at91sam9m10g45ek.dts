@@ -8,7 +8,12 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9g45.dtsi"
+=======
+#include "at91sam9g45.dtsi"
+#include <dt-bindings/pwm/pwm.h>
+>>>>>>> v3.18
 =======
 #include "at91sam9g45.dtsi"
 #include <dt-bindings/pwm/pwm.h>
@@ -36,7 +41,10 @@
 			clock-frequency = <12000000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 		      clock-frequency = <32768>;
@@ -45,6 +53,9 @@
 		main_xtal {
 		      clock-frequency = <12000000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -76,11 +87,17 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			watchdog@fffffd40 {
 				status = "okay";
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mmc0: mmc@fff80000 {
 				pinctrl-0 = <
@@ -92,7 +109,11 @@
 					reg = <0>;
 					bus-width = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cd-gpios = <&pioD 10 0>;
+=======
+					cd-gpios = <&pioD 10 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 					cd-gpios = <&pioD 10 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -109,8 +130,13 @@
 					reg = <0>;
 					bus-width = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cd-gpios = <&pioD 11 0>;
 					wp-gpios = <&pioD 29 0>;
+=======
+					cd-gpios = <&pioD 11 GPIO_ACTIVE_HIGH>;
+					wp-gpios = <&pioD 29 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 					cd-gpios = <&pioD 11 GPIO_ACTIVE_HIGH>;
 					wp-gpios = <&pioD 29 GPIO_ACTIVE_HIGH>;
@@ -123,7 +149,11 @@
 					pinctrl_board_mmc0: mmc0-board {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<3 10 0x0 0x5>;	/* PD10 gpio CD pin pull up and deglitch */
+=======
+							<AT91_PIOD 10 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;	/* PD10 gpio CD pin pull up and deglitch */
+>>>>>>> v3.18
 =======
 							<AT91_PIOD 10 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;	/* PD10 gpio CD pin pull up and deglitch */
 >>>>>>> v3.18
@@ -134,9 +164,12 @@
 					pinctrl_board_mmc1: mmc1-board {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<3 11 0x0 0x5	/* PD11 gpio CD pin pull up and deglitch */
 							 3 29 0x0 0x1>;	/* PD29 gpio WP pin pull up */
 =======
+=======
+>>>>>>> v3.18
 							<AT91_PIOD 11 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH	/* PD11 gpio CD pin pull up and deglitch */
 							 AT91_PIOD 29 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;	/* PD29 gpio WP pin pull up */
 					};
@@ -147,6 +180,9 @@
 						atmel,pins =
 							<AT91_PIOD 0  AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PD0 periph B */
 							 AT91_PIOD 31 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>;	/* PD31 periph B */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					};
 				};
@@ -162,7 +198,10 @@
 				};
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			usb2: gadget@fff78000 {
 				atmel,vbus-gpio = <&pioB 19 GPIO_ACTIVE_HIGH>;
@@ -223,6 +262,9 @@
 					};
 				};
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -252,8 +294,13 @@
 			status = "okay";
 			num-ports = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			atmel,vbus-gpio = <&pioD 1 1
 					   &pioD 3 1>;
+=======
+			atmel,vbus-gpio = <&pioD 1 GPIO_ACTIVE_LOW
+					   &pioD 3 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			atmel,vbus-gpio = <&pioD 1 GPIO_ACTIVE_LOW
 					   &pioD 3 GPIO_ACTIVE_LOW>;
@@ -271,6 +318,7 @@
 		d8 {
 			label = "d8";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioD 30 0>;
 			linux,default-trigger = "heartbeat";
 		};
@@ -279,6 +327,8 @@
 			label = "d6";
 			gpios = <&pioD 0 1>;
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&pioD 30 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "heartbeat";
 		};
@@ -291,6 +341,9 @@
 			label = "d6";
 			pwms = <&pwm0 3 5000 PWM_POLARITY_INVERTED>;
 			max-brightness = <255>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			linux,default-trigger = "nand-disk";
 		};
@@ -298,7 +351,12 @@
 		d7 {
 			label = "d7";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioD 31 1>;
+=======
+			pwms = <&pwm0 1 5000 PWM_POLARITY_INVERTED>;
+			max-brightness = <255>;
+>>>>>>> v3.18
 =======
 			pwms = <&pwm0 1 5000 PWM_POLARITY_INVERTED>;
 			max-brightness = <255>;
@@ -313,7 +371,11 @@
 		left_click {
 			label = "left_click";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 6 1>;
+=======
+			gpios = <&pioB 6 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 6 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -324,7 +386,11 @@
 		right_click {
 			label = "right_click";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 7 1>;
+=======
+			gpios = <&pioB 7 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 7 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -335,7 +401,11 @@
 		left {
 			label = "Joystick Left";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 14 1>;
+=======
+			gpios = <&pioB 14 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 14 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -345,7 +415,11 @@
 		right {
 			label = "Joystick Right";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 15 1>;
+=======
+			gpios = <&pioB 15 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 15 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -355,7 +429,11 @@
 		up {
 			label = "Joystick Up";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 16 1>;
+=======
+			gpios = <&pioB 16 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 16 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -365,7 +443,11 @@
 		down {
 			label = "Joystick Down";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 17 1>;
+=======
+			gpios = <&pioB 17 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 17 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -375,7 +457,11 @@
 		enter {
 			label = "Joystick Press";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 18 1>;
+=======
+			gpios = <&pioB 18 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 18 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

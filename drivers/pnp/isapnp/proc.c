@@ -30,6 +30,7 @@ static struct proc_dir_entry *isapnp_proc_bus_dir = NULL;
 static loff_t isapnp_proc_bus_lseek(struct file *file, loff_t off, int whence)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t new = -1;
 	struct inode *inode = file_inode(file);
 
@@ -51,6 +52,9 @@ static loff_t isapnp_proc_bus_lseek(struct file *file, loff_t off, int whence)
 		file->f_pos = new;
 	mutex_unlock(&inode->i_mutex);
 	return new;
+=======
+	return fixed_size_llseek(file, off, whence, 256);
+>>>>>>> v3.18
 =======
 	return fixed_size_llseek(file, off, whence, 256);
 >>>>>>> v3.18

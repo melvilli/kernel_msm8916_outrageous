@@ -278,11 +278,14 @@ static int __init pci_common_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Tell drivers about devices found.
 	 */
 	pci_bus_add_devices(puv3_bus);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -42,6 +42,7 @@ fffe0000	fffe7fff	ITCM mapping area for platforms with
 				ITCM mounted inside the CPU.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 fff00000	fffdffff	Fixmap mapping region.  Addresses provided
 				by fix_to_virt() will be located here.
 
@@ -52,6 +53,11 @@ ffc00000	ffefffff	DMA memory mapping region.  Memory returned
 ff000000	ffbfffff	Reserved for future expansion of DMA
 				mapping region.
 
+=======
+ffc00000	ffdfffff	Fixmap mapping region.  Addresses provided
+				by fix_to_virt() will be located here.
+
+>>>>>>> v3.18
 =======
 ffc00000	ffdfffff	Fixmap mapping region.  Addresses provided
 				by fix_to_virt() will be located here.

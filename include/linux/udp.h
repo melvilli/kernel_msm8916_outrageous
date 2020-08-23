@@ -48,8 +48,11 @@ struct udp_sock {
 	int		 pending;	/* Any pending frames ? */
 	unsigned int	 corkflag;	/* Cork is required */
 <<<<<<< HEAD
+<<<<<<< HEAD
   	__u16		 encap_type;	/* Is this an Encapsulation socket? */
 =======
+=======
+>>>>>>> v3.18
 	__u8		 encap_type;	/* Is this an Encapsulation socket? */
 	unsigned char	 no_check6_tx:1,/* Send zero UDP6 checksums on TX? */
 			 no_check6_rx:1,/* Allow zero UDP6 checksums on RX? */
@@ -57,6 +60,9 @@ struct udp_sock {
 					 * unnecessary to checksum complete
 					 * if possible.
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Following member retains the information to create a UDP header
@@ -87,7 +93,10 @@ static inline struct udp_sock *udp_sk(const struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void udp_set_no_check6_tx(struct sock *sk, bool val)
 {
 	udp_sk(sk)->no_check6_tx = val;
@@ -118,6 +127,9 @@ static inline bool udp_get_convert_csum(struct sock *sk)
 	return udp_sk(sk)->convert_csum;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define udp_portaddr_for_each_entry(__sk, node, list) \
 	hlist_nulls_for_each_entry(__sk, node, list, __sk_common.skc_portaddr_node)

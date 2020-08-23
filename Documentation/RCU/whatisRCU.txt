@@ -327,17 +327,23 @@ a.	synchronize_rcu()	rcu_read_lock() / rcu_read_unlock()
 	call_rcu()		rcu_dereference()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 b.	call_rcu_bh()		rcu_read_lock_bh() / rcu_read_unlock_bh()
 				rcu_dereference_bh()
 
 c.	synchronize_sched()	rcu_read_lock_sched() / rcu_read_unlock_sched()
 				preempt_disable() / preempt_enable()
 =======
+=======
+>>>>>>> v3.18
 b.	synchronize_rcu_bh()	rcu_read_lock_bh() / rcu_read_unlock_bh()
 	call_rcu_bh()		rcu_dereference_bh()
 
 c.	synchronize_sched()	rcu_read_lock_sched() / rcu_read_unlock_sched()
 	call_rcu_sched()	preempt_disable() / preempt_enable()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				local_irq_save() / local_irq_restore()
 				hardirq enter / hardirq exit
@@ -803,11 +809,14 @@ in docbook.  Here is the list, by category.
 RCU list traversal:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_rcu
 	hlist_for_each_entry_rcu
 	hlist_nulls_for_each_entry_rcu
 	list_for_each_entry_continue_rcu
 =======
+=======
+>>>>>>> v3.18
 	list_entry_rcu
 	list_first_entry_rcu
 	list_next_rcu
@@ -824,6 +833,9 @@ RCU list traversal:
 	hlist_nulls_for_each_entry_rcu
 	hlist_bl_first_rcu
 	hlist_bl_for_each_entry_rcu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 RCU pointer/list update:
@@ -834,6 +846,7 @@ RCU pointer/list update:
 	list_del_rcu
 	list_replace_rcu
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_del_rcu
 	hlist_add_after_rcu
 	hlist_add_before_rcu
@@ -841,6 +854,8 @@ RCU pointer/list update:
 	hlist_replace_rcu
 	list_splice_init_rcu()
 =======
+=======
+>>>>>>> v3.18
 	hlist_add_behind_rcu
 	hlist_add_before_rcu
 	hlist_add_head_rcu
@@ -855,6 +870,9 @@ RCU pointer/list update:
 	hlist_bl_del_init_rcu
 	hlist_bl_del_rcu
 	hlist_bl_set_first_rcu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 RCU:	Critical sections	Grace period		Barrier
@@ -863,9 +881,15 @@ RCU:	Critical sections	Grace period		Barrier
 	rcu_read_unlock		synchronize_rcu
 	rcu_dereference		synchronize_rcu_expedited
 <<<<<<< HEAD
+<<<<<<< HEAD
 				call_rcu
 				kfree_rcu
 
+=======
+	rcu_read_lock_held	call_rcu
+	rcu_dereference_check	kfree_rcu
+	rcu_dereference_protected
+>>>>>>> v3.18
 =======
 	rcu_read_lock_held	call_rcu
 	rcu_dereference_check	kfree_rcu
@@ -878,7 +902,13 @@ bh:	Critical sections	Grace period		Barrier
 	rcu_read_unlock_bh	synchronize_rcu_bh
 	rcu_dereference_bh	synchronize_rcu_bh_expedited
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	rcu_dereference_bh_check
+	rcu_dereference_bh_protected
+	rcu_read_lock_bh_held
+>>>>>>> v3.18
 =======
 	rcu_dereference_bh_check
 	rcu_dereference_bh_protected
@@ -892,14 +922,20 @@ sched:	Critical sections	Grace period		Barrier
 	[preempt_disable]	synchronize_sched_expedited
 	[and friends]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_dereference_sched
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock_sched_notrace
 	rcu_read_unlock_sched_notrace
 	rcu_dereference_sched
 	rcu_dereference_sched_check
 	rcu_dereference_sched_protected
 	rcu_read_lock_sched_held
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -908,9 +944,15 @@ SRCU:	Critical sections	Grace period		Barrier
 	srcu_read_lock		synchronize_srcu	srcu_barrier
 	srcu_read_unlock	call_srcu
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srcu_read_lock_raw	synchronize_srcu_expedited
 	srcu_read_unlock_raw
 	srcu_dereference
+=======
+	srcu_dereference	synchronize_srcu_expedited
+	srcu_dereference_check
+	srcu_read_lock_held
+>>>>>>> v3.18
 =======
 	srcu_dereference	synchronize_srcu_expedited
 	srcu_dereference_check
@@ -924,10 +966,13 @@ SRCU:	Initialization/cleanup
 All:  lockdep-checked RCU-protected pointer access
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_dereference_check
 	rcu_dereference_protected
 	rcu_access_pointer
 =======
+=======
+>>>>>>> v3.18
 	rcu_access_index
 	rcu_access_pointer
 	rcu_dereference_index_check
@@ -935,6 +980,9 @@ All:  lockdep-checked RCU-protected pointer access
 	rcu_lockdep_assert
 	rcu_sleep_check
 	RCU_NONIDLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 See the comment headers in the source code (or the docbook generated
@@ -947,6 +995,7 @@ list can be helpful:
 a.	Will readers need to block?  If so, you need SRCU.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 b.	Is it necessary to start a read-side critical section in a
 	hardirq handler or exception handler, and then to complete
 	this read-side critical section in the task that was
@@ -957,12 +1006,19 @@ c.	What about the -rt patchset?  If readers would need to block
 =======
 b.	What about the -rt patchset?  If readers would need to block
 >>>>>>> v3.18
+=======
+b.	What about the -rt patchset?  If readers would need to block
+>>>>>>> v3.18
 	in an non-rt kernel, you need SRCU.  If readers would block
 	in a -rt kernel, but not in a non-rt kernel, SRCU is not
 	necessary.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 d.	Do you need to treat NMI handlers, hardirq handlers,
+=======
+c.	Do you need to treat NMI handlers, hardirq handlers,
+>>>>>>> v3.18
 =======
 c.	Do you need to treat NMI handlers, hardirq handlers,
 >>>>>>> v3.18
@@ -972,7 +1028,11 @@ c.	Do you need to treat NMI handlers, hardirq handlers,
 	If so, RCU-sched is the only choice that will work for you.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 e.	Do you need RCU grace periods to complete even in the face
+=======
+d.	Do you need RCU grace periods to complete even in the face
+>>>>>>> v3.18
 =======
 d.	Do you need RCU grace periods to complete even in the face
 >>>>>>> v3.18
@@ -981,24 +1041,34 @@ d.	Do you need RCU grace periods to complete even in the face
 	attacks?  If so, you need RCU-bh.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 f.	Is your workload too update-intensive for normal use of
 	RCU, but inappropriate for other synchronization mechanisms?
 	If so, consider SLAB_DESTROY_BY_RCU.  But please be careful!
 
 g.	Do you need read-side critical sections that are respected
 =======
+=======
+>>>>>>> v3.18
 e.	Is your workload too update-intensive for normal use of
 	RCU, but inappropriate for other synchronization mechanisms?
 	If so, consider SLAB_DESTROY_BY_RCU.  But please be careful!
 
 f.	Do you need read-side critical sections that are respected
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	even though they are in the middle of the idle loop, during
 	user-mode execution, or on an offlined CPU?  If so, SRCU is the
 	only choice that will work for you.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 h.	Otherwise, use RCU.
+=======
+g.	Otherwise, use RCU.
+>>>>>>> v3.18
 =======
 g.	Otherwise, use RCU.
 >>>>>>> v3.18

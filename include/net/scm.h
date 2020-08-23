@@ -22,7 +22,10 @@ struct scm_fp_list {
 	short			count;
 	short			max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct user_struct	*user;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct file		*fp[SCM_MAX_FD];
@@ -38,17 +41,23 @@ struct scm_cookie {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void scm_detach_fds(struct msghdr *msg, struct scm_cookie *scm);
 extern void scm_detach_fds_compat(struct msghdr *msg, struct scm_cookie *scm);
 extern int __scm_send(struct socket *sock, struct msghdr *msg, struct scm_cookie *scm);
 extern void __scm_destroy(struct scm_cookie *scm);
 extern struct scm_fp_list * scm_fp_dup(struct scm_fp_list *fpl);
 =======
+=======
+>>>>>>> v3.18
 void scm_detach_fds(struct msghdr *msg, struct scm_cookie *scm);
 void scm_detach_fds_compat(struct msghdr *msg, struct scm_cookie *scm);
 int __scm_send(struct socket *sock, struct msghdr *msg, struct scm_cookie *scm);
 void __scm_destroy(struct scm_cookie *scm);
 struct scm_fp_list *scm_fp_dup(struct scm_fp_list *fpl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SECURITY_NETWORK

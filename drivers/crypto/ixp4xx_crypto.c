@@ -219,6 +219,7 @@ static dma_addr_t crypt_phys;
 static int support_aes = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dev_release(struct device *dev)
 {
 	return;
@@ -236,6 +237,11 @@ static struct platform_device pseudo_dev = {
 };
 
 static struct device *dev = &pseudo_dev.dev;
+=======
+#define DRIVER_NAME "ixp4xx_crypto"
+
+static struct platform_device *pdev;
+>>>>>>> v3.18
 =======
 #define DRIVER_NAME "ixp4xx_crypto"
 
@@ -270,6 +276,10 @@ static inline const struct ix_hash_algo *ix_hash(struct crypto_tfm *tfm)
 static int setup_crypt_desc(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = &pdev->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &pdev->dev;
 >>>>>>> v3.18
@@ -374,6 +384,10 @@ static void finish_scattered_hmac(struct crypt_ctl *crypt)
 static void one_packet(dma_addr_t phys)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = &pdev->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &pdev->dev;
 >>>>>>> v3.18
@@ -447,7 +461,11 @@ static void crypto_done_action(unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_ixp_crypto(void)
+=======
+static int init_ixp_crypto(struct device *dev)
+>>>>>>> v3.18
 =======
 static int init_ixp_crypto(struct device *dev)
 >>>>>>> v3.18
@@ -538,7 +556,11 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void release_ixp_crypto(void)
+=======
+static void release_ixp_crypto(struct device *dev)
+>>>>>>> v3.18
 =======
 static void release_ixp_crypto(struct device *dev)
 >>>>>>> v3.18
@@ -909,6 +931,10 @@ static int ablk_perform(struct ablkcipher_request *req, int encrypt)
 	struct ablk_ctx *req_ctx = ablkcipher_request_ctx(req);
 	struct buffer_desc src_hook;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = &pdev->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &pdev->dev;
 >>>>>>> v3.18
@@ -942,6 +968,10 @@ static int ablk_perform(struct ablkcipher_request *req, int encrypt)
 		/* This was never tested by Intel
 		 * for more than one dst buffer, I think. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		BUG_ON(req->dst->length < nbytes);
+>>>>>>> v3.18
 =======
 		BUG_ON(req->dst->length < nbytes);
 >>>>>>> v3.18
@@ -1040,6 +1070,10 @@ static int aead_perform(struct aead_request *req, int encrypt,
 	struct buffer_desc *buf, src_hook;
 	struct aead_ctx *req_ctx = aead_request_ctx(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = &pdev->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &pdev->dev;
 >>>>>>> v3.18
@@ -1193,6 +1227,7 @@ static int aead_setkey(struct crypto_aead *tfm, const u8 *key,
 {
 	struct ixp_ctx *ctx = crypto_aead_ctx(tfm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtattr *rta = (struct rtattr *)key;
 	struct crypto_authenc_key_param *param;
 
@@ -1220,6 +1255,8 @@ static int aead_setkey(struct crypto_aead *tfm, const u8 *key,
 badkey:
 	ctx->enckey_len = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct crypto_authenc_keys keys;
 
 	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
@@ -1238,6 +1275,9 @@ badkey:
 
 	return aead_setup(tfm, crypto_aead_authsize(tfm));
 badkey:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	crypto_aead_set_flags(tfm, CRYPTO_TFM_RES_BAD_KEY_LEN);
 	return -EINVAL;
@@ -1473,6 +1513,7 @@ static struct ixp_alg ixp4xx_algos[] = {
 
 #define IXP_POSTFIX "-ixp4xx"
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init ixp_module_init(void)
 {
 	int num = ARRAY_SIZE(ixp4xx_algos);
@@ -1481,6 +1522,8 @@ static int __init ixp_module_init(void)
 	if (platform_device_register(&pseudo_dev))
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 
 static const struct platform_device_info ixp_dev_info __initdata = {
 	.name		= DRIVER_NAME,
@@ -1496,15 +1539,24 @@ static int __init ixp_module_init(void)
 	pdev = platform_device_register_full(&ixp_dev_info);
 	if (IS_ERR(pdev))
 		return PTR_ERR(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&desc_lock);
 	spin_lock_init(&emerg_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = init_ixp_crypto();
 	if (err) {
 		platform_device_unregister(&pseudo_dev);
+=======
+	err = init_ixp_crypto(&pdev->dev);
+	if (err) {
+		platform_device_unregister(pdev);
+>>>>>>> v3.18
 =======
 	err = init_ixp_crypto(&pdev->dev);
 	if (err) {
@@ -1574,8 +1626,13 @@ static void __exit ixp_module_exit(void)
 			crypto_unregister_alg(&ixp4xx_algos[i].crypto);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_ixp_crypto();
 	platform_device_unregister(&pseudo_dev);
+=======
+	release_ixp_crypto(&pdev->dev);
+	platform_device_unregister(pdev);
+>>>>>>> v3.18
 =======
 	release_ixp_crypto(&pdev->dev);
 	platform_device_unregister(pdev);

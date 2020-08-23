@@ -18,6 +18,12 @@
 #include "ocfs2.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Number of quota types we support */
+#define OCFS2_MAXQUOTAS 2
+
+>>>>>>> v3.18
 =======
 /* Number of quota types we support */
 #define OCFS2_MAXQUOTAS 2
@@ -35,6 +41,10 @@ struct ocfs2_dquot {
 	s64 dq_origspace;	/* Last globally synced space usage */
 	s64 dq_originodes;	/* Last globally synced inode usage */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct llist_node list;	/* Member of list of dquots to drop */
+>>>>>>> v3.18
 =======
 	struct llist_node list;	/* Member of list of dquots to drop */
 >>>>>>> v3.18
@@ -49,7 +59,11 @@ struct ocfs2_recovery_chunk {
 
 struct ocfs2_quota_recovery {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head r_list[MAXQUOTAS];	/* List of chunks to recover */
+=======
+	struct list_head r_list[OCFS2_MAXQUOTAS];	/* List of chunks to recover */
+>>>>>>> v3.18
 =======
 	struct list_head r_list[OCFS2_MAXQUOTAS];	/* List of chunks to recover */
 >>>>>>> v3.18
@@ -125,6 +139,10 @@ int ocfs2_create_local_dquot(struct dquot *dquot);
 int ocfs2_local_release_dquot(handle_t *handle, struct dquot *dquot);
 int ocfs2_local_write_dquot(struct dquot *dquot);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void ocfs2_drop_dquot_refs(struct work_struct *work);
+>>>>>>> v3.18
 =======
 void ocfs2_drop_dquot_refs(struct work_struct *work);
 >>>>>>> v3.18

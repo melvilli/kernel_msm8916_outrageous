@@ -18,13 +18,19 @@
 #include <linux/personality.h>
 #include <linux/security.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/compat.h>
 #include <linux/signal.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/seccomp.h>
 #include <linux/compat.h>
 #include <linux/signal.h>
 #include <linux/audit.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/uaccess.h>
@@ -275,12 +281,15 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 long do_syscall_trace_enter(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_thread_flag(TIF_SYSCALL_TRACE) &&
 	    tracehook_report_syscall_entry(regs))
 		return -1L;
 
 	return regs->gr[20];
 =======
+=======
+>>>>>>> v3.18
 	long ret = 0;
 
 	/* Do the secure computing check first. */
@@ -303,6 +312,9 @@ long do_syscall_trace_enter(struct pt_regs *regs)
 			regs->gr[23] & 0xffffffff);
 
 	return ret ? : regs->gr[20];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -312,6 +324,11 @@ void do_syscall_trace_exit(struct pt_regs *regs)
 		test_thread_flag(TIF_BLOCKSTEP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	audit_syscall_exit(regs);
+
+>>>>>>> v3.18
 =======
 	audit_syscall_exit(regs);
 

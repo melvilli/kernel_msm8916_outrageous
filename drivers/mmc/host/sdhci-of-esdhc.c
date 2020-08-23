@@ -14,6 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -125,7 +129,10 @@ static void esdhc_writeb(struct sdhci_host *host, u8 val, int reg)
 		u32 dma_bits;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If host control register is not standard, exit
 		 * this function
@@ -133,6 +140,9 @@ static void esdhc_writeb(struct sdhci_host *host, u8 val, int reg)
 		if (host->quirks2 & SDHCI_QUIRK2_BROKEN_HOST_CONTROL)
 			return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* DMA select is 22,23 bits in Protocol Control Register */
 		dma_bits = (val & SDHCI_CTRL_DMA_MASK) << 5;
@@ -206,7 +216,10 @@ static unsigned int esdhc_of_get_min_clock(struct sdhci_host *host)
 static void esdhc_of_set_clock(struct sdhci_host *host, unsigned int clock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int pre_div = 2;
 	int div = 1;
 	u32 temp;
@@ -216,6 +229,9 @@ static void esdhc_of_set_clock(struct sdhci_host *host, unsigned int clock)
 	if (clock == 0)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Workaround to reduce the clock frequency for p1010 esdhc */
 	if (of_find_compatible_node(NULL, NULL, "fsl,p1010-esdhc")) {
@@ -225,6 +241,7 @@ static void esdhc_of_set_clock(struct sdhci_host *host, unsigned int clock)
 			clock -= 5000000;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set the clock */
 	esdhc_set_clock(host, clock);
@@ -244,6 +261,8 @@ static void esdhc_of_resume(struct sdhci_host *host)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	temp = sdhci_readl(host, ESDHC_SYSTEM_CONTROL);
 	temp &= ~(ESDHC_CLOCK_IPGEN | ESDHC_CLOCK_HCKEN | ESDHC_CLOCK_PEREN
 		| ESDHC_CLOCK_MASK);
@@ -268,6 +287,9 @@ static void esdhc_of_resume(struct sdhci_host *host)
 	sdhci_writel(host, temp, ESDHC_SYSTEM_CONTROL);
 	mdelay(1);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void esdhc_of_platform_init(struct sdhci_host *host)
@@ -284,7 +306,10 @@ static void esdhc_of_platform_init(struct sdhci_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void esdhc_pltfm_set_bus_width(struct sdhci_host *host, int width)
 {
 	u32 ctrl;
@@ -307,6 +332,9 @@ static void esdhc_pltfm_set_bus_width(struct sdhci_host *host, int width)
 			ESDHC_CTRL_BUSWIDTH_MASK, ctrl);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct sdhci_ops sdhci_esdhc_ops = {
 	.read_l = esdhc_readl,
@@ -321,6 +349,7 @@ static const struct sdhci_ops sdhci_esdhc_ops = {
 	.get_min_clock = esdhc_of_get_min_clock,
 	.platform_init = esdhc_of_platform_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 	.platform_suspend = esdhc_of_suspend,
 	.platform_resume = esdhc_of_resume,
@@ -329,6 +358,8 @@ static const struct sdhci_ops sdhci_esdhc_ops = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.adma_workaround = esdhci_of_adma_workaround,
 	.set_bus_width = esdhc_pltfm_set_bus_width,
 	.reset = sdhci_reset,
@@ -370,6 +401,9 @@ static const struct dev_pm_ops esdhc_pmops = {
 #define ESDHC_PMOPS NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct sdhci_pltfm_data sdhci_esdhc_pdata = {
 	/*
@@ -385,8 +419,11 @@ static const struct sdhci_pltfm_data sdhci_esdhc_pdata = {
 static int sdhci_esdhc_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sdhci_pltfm_register(pdev, &sdhci_esdhc_pdata);
 =======
+=======
+>>>>>>> v3.18
 	struct sdhci_host *host;
 	struct device_node *np;
 	int ret;
@@ -415,6 +452,9 @@ static int sdhci_esdhc_probe(struct platform_device *pdev)
 		sdhci_pltfm_free(pdev);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -435,9 +475,14 @@ static struct platform_driver sdhci_esdhc_driver = {
 	.driver = {
 		.name = "sdhci-esdhc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
 		.of_match_table = sdhci_esdhc_of_match,
 		.pm = SDHCI_PLTFM_PMOPS,
+=======
+		.of_match_table = sdhci_esdhc_of_match,
+		.pm = ESDHC_PMOPS,
+>>>>>>> v3.18
 =======
 		.of_match_table = sdhci_esdhc_of_match,
 		.pm = ESDHC_PMOPS,

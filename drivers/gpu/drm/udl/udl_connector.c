@@ -35,8 +35,13 @@ static u8 *udl_get_edid(struct udl_device *udl)
 
 	for (i = 0; i < EDID_LENGTH; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = usb_control_msg(udl->ddev->usbdev,
 				      usb_rcvctrlpipe(udl->ddev->usbdev, 0), (0x02),
+=======
+		ret = usb_control_msg(udl->udev,
+				      usb_rcvctrlpipe(udl->udev, 0), (0x02),
+>>>>>>> v3.18
 =======
 		ret = usb_control_msg(udl->udev,
 				      usb_rcvctrlpipe(udl->udev, 0), (0x02),
@@ -111,6 +116,7 @@ udl_best_single_encoder(struct drm_connector *connector)
 {
 	int enc_id = connector->encoder_ids[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_mode_object *obj;
 	struct drm_encoder *encoder;
 
@@ -119,6 +125,9 @@ udl_best_single_encoder(struct drm_connector *connector)
 		return NULL;
 	encoder = obj_to_encoder(obj);
 	return encoder;
+=======
+	return drm_encoder_find(connector->dev, enc_id);
+>>>>>>> v3.18
 =======
 	return drm_encoder_find(connector->dev, enc_id);
 >>>>>>> v3.18
@@ -134,7 +143,11 @@ static int udl_connector_set_property(struct drm_connector *connector,
 static void udl_connector_destroy(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -168,7 +181,11 @@ int udl_connector_init(struct drm_device *dev, struct drm_encoder *encoder)
 	drm_connector_helper_add(connector, &udl_connector_helper_funcs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18

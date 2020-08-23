@@ -2,6 +2,11 @@
 #define _PARISC_MSGBUF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bitsperlong.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/bitsperlong.h>
 
@@ -19,6 +24,7 @@
 struct msqid64_ds {
 	struct ipc64_perm msg_perm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_64BIT
 	unsigned int   __pad1;
 #endif
@@ -29,6 +35,8 @@ struct msqid64_ds {
 	__kernel_time_t msg_rtime;	/* last msgrcv time */
 #ifndef CONFIG_64BIT
 =======
+=======
+>>>>>>> v3.18
 #if __BITS_PER_LONG != 64
 	unsigned int   __pad1;
 #endif
@@ -38,6 +46,9 @@ struct msqid64_ds {
 #endif
 	__kernel_time_t msg_rtime;	/* last msgrcv time */
 #if __BITS_PER_LONG != 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int   __pad3;
 #endif

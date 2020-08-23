@@ -72,7 +72,10 @@ static const char	hcd_name [] = "ehci_hcd";
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef VERBOSE_DEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #undef EHCI_URB_TRACE
@@ -114,6 +117,12 @@ MODULE_PARM_DESC (ignore_oc, "ignore bogus hardware overcurrent indications");
 #include "pci-quirks.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void compute_tt_budget(u8 budget_table[EHCI_BANDWIDTH_SIZE],
+		struct ehci_tt *tt);
+
+>>>>>>> v3.18
 =======
 static void compute_tt_budget(u8 budget_table[EHCI_BANDWIDTH_SIZE],
 		struct ehci_tt *tt);
@@ -149,7 +158,11 @@ static inline unsigned ehci_read_frame_index(struct ehci_hcd *ehci)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * handshake - spin reading hc until handshake completes or fails
+=======
+ * ehci_handshake - spin reading hc until handshake completes or fails
+>>>>>>> v3.18
 =======
  * ehci_handshake - spin reading hc until handshake completes or fails
 >>>>>>> v3.18
@@ -169,8 +182,13 @@ static inline unsigned ehci_read_frame_index(struct ehci_hcd *ehci)
  * bridge shutdown:  shutting down the bridge before the devices using it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int handshake (struct ehci_hcd *ehci, void __iomem *ptr,
 		      u32 mask, u32 done, int usec)
+=======
+int ehci_handshake(struct ehci_hcd *ehci, void __iomem *ptr,
+		   u32 mask, u32 done, int usec)
+>>>>>>> v3.18
 =======
 int ehci_handshake(struct ehci_hcd *ehci, void __iomem *ptr,
 		   u32 mask, u32 done, int usec)
@@ -191,6 +209,10 @@ int ehci_handshake(struct ehci_hcd *ehci, void __iomem *ptr,
 	return -ETIMEDOUT;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ehci_handshake);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ehci_handshake);
 >>>>>>> v3.18
@@ -235,7 +257,11 @@ static int ehci_halt (struct ehci_hcd *ehci)
 	synchronize_irq(ehci_to_hcd(ehci)->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return handshake(ehci, &ehci->regs->status,
+=======
+	return ehci_handshake(ehci, &ehci->regs->status,
+>>>>>>> v3.18
 =======
 	return ehci_handshake(ehci, &ehci->regs->status,
 >>>>>>> v3.18
@@ -278,7 +304,11 @@ static int ehci_reset (struct ehci_hcd *ehci)
 	ehci->rh_state = EHCI_RH_HALTED;
 	ehci->next_statechange = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = handshake (ehci, &ehci->regs->command,
+=======
+	retval = ehci_handshake(ehci, &ehci->regs->command,
+>>>>>>> v3.18
 =======
 	retval = ehci_handshake(ehci, &ehci->regs->command,
 >>>>>>> v3.18
@@ -317,7 +347,12 @@ static void ehci_quiesce (struct ehci_hcd *ehci)
 	/* wait for any schedule enables/disables to take effect */
 	temp = (ehci->command << 10) & (STS_ASS | STS_PSS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handshake(ehci, &ehci->regs->status, STS_ASS | STS_PSS, temp, 16 * 125);
+=======
+	ehci_handshake(ehci, &ehci->regs->status, STS_ASS | STS_PSS, temp,
+			16 * 125);
+>>>>>>> v3.18
 =======
 	ehci_handshake(ehci, &ehci->regs->status, STS_ASS | STS_PSS, temp,
 			16 * 125);
@@ -331,7 +366,12 @@ static void ehci_quiesce (struct ehci_hcd *ehci)
 
 	/* hardware can take 16 microframes to turn off ... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handshake(ehci, &ehci->regs->status, STS_ASS | STS_PSS, 0, 16 * 125);
+=======
+	ehci_handshake(ehci, &ehci->regs->status, STS_ASS | STS_PSS, 0,
+			16 * 125);
+>>>>>>> v3.18
 =======
 	ehci_handshake(ehci, &ehci->regs->status, STS_ASS | STS_PSS, 0,
 			16 * 125);
@@ -478,6 +518,7 @@ static void ehci_stop (struct usb_hcd *hcd)
 		usb_amd_dev_put();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef	EHCI_STATS
 	ehci_dbg(ehci, "irq normal %ld err %ld iaa %ld (lost %ld)\n",
 		ehci->stats.normal, ehci->stats.error, ehci->stats.iaa,
@@ -486,6 +527,8 @@ static void ehci_stop (struct usb_hcd *hcd)
 		ehci->stats.complete, ehci->stats.unlink);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dbg_status (ehci, "ehci_stop completed",
@@ -528,6 +571,10 @@ static int ehci_init(struct usb_hcd *hcd)
 	INIT_LIST_HEAD(&ehci->async_unlink);
 	INIT_LIST_HEAD(&ehci->async_idle);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&ehci->intr_unlink_wait);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ehci->intr_unlink_wait);
 >>>>>>> v3.18
@@ -536,6 +583,10 @@ static int ehci_init(struct usb_hcd *hcd)
 	INIT_LIST_HEAD(&ehci->cached_itd_list);
 	INIT_LIST_HEAD(&ehci->cached_sitd_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&ehci->tt_list);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ehci->tt_list);
 >>>>>>> v3.18
@@ -579,8 +630,11 @@ static int ehci_init(struct usb_hcd *hcd)
 
 	/* clear interrupt enables, set irq latency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log2_irq_thresh = ehci->log2_irq_thresh;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (log2_irq_thresh < 0 || log2_irq_thresh > 6)
@@ -778,6 +832,7 @@ static irqreturn_t ehci_irq (struct usb_hcd *hcd)
 	bh = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef	VERBOSE_DEBUG
 	/* unrequested/ignored: Frame List Rollover */
 	dbg_status (ehci, "irq", status);
@@ -785,6 +840,8 @@ static irqreturn_t ehci_irq (struct usb_hcd *hcd)
 
 	/* INT, ERR, and IAA interrupt rates can be throttled */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* normal [4.15.1.2] or error [4.15.1.1] completion */
@@ -846,12 +903,15 @@ static irqreturn_t ehci_irq (struct usb_hcd *hcd)
 					 &ehci->regs->port_status[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*set RS bit in case of remote wakeup*/
 			if (ehci_is_TDI(ehci) && !(cmd & CMD_RUN) &&
 					(pstatus & PORT_SUSPEND))
 				ehci_writel(ehci, cmd | CMD_RUN,
 						&ehci->regs->command);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (pstatus & PORT_OWNER)
@@ -865,7 +925,11 @@ static irqreturn_t ehci_irq (struct usb_hcd *hcd)
 
 			/* start 20 msec resume signaling from this port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * and make khubd collect PORT_STAT_C_SUSPEND to
+=======
+			 * and make hub_wq collect PORT_STAT_C_SUSPEND to
+>>>>>>> v3.18
 =======
 			 * and make hub_wq collect PORT_STAT_C_SUSPEND to
 >>>>>>> v3.18
@@ -884,10 +948,13 @@ static irqreturn_t ehci_irq (struct usb_hcd *hcd)
 	if (unlikely ((status & STS_FATAL) != 0)) {
 		ehci_err(ehci, "fatal error\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hcd->driver->dump_regs) {
 			hcd->driver->dump_regs(hcd);
 			panic("System error\n");
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dbg_cmd(ehci, "fatal", cmd);
@@ -1026,7 +1093,11 @@ ehci_endpoint_disable (struct usb_hcd *hcd, struct usb_host_endpoint *ep)
 	struct ehci_hcd		*ehci = hcd_to_ehci (hcd);
 	unsigned long		flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ehci_qh		*qh, *tmp;
+=======
+	struct ehci_qh		*qh;
+>>>>>>> v3.18
 =======
 	struct ehci_qh		*qh;
 >>>>>>> v3.18
@@ -1051,6 +1122,10 @@ rescan:
 
 		/* BUG_ON(!list_empty(&stream->free_list)); */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		reserve_release_iso_bandwidth(ehci, stream, -1);
+>>>>>>> v3.18
 =======
 		reserve_release_iso_bandwidth(ehci, stream, -1);
 >>>>>>> v3.18
@@ -1061,6 +1136,7 @@ rescan:
 	qh->exception = 1;
 	switch (qh->qh_state) {
 	case QH_STATE_LINKED:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case QH_STATE_COMPLETING:
 		for (tmp = ehci->async->qh_next.qh;
@@ -1074,6 +1150,8 @@ rescan:
 			start_unlink_async(ehci, qh);
 		/* FALL THROUGH */
 =======
+=======
+>>>>>>> v3.18
 		WARN_ON(!list_empty(&qh->qtd_list));
 		if (usb_endpoint_type(&ep->desc) != USB_ENDPOINT_XFER_INT)
 			start_unlink_async(ehci, qh);
@@ -1081,6 +1159,9 @@ rescan:
 			start_unlink_intr(ehci, qh);
 		/* FALL THROUGH */
 	case QH_STATE_COMPLETING:	/* already in unlinking */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case QH_STATE_UNLINK:		/* wait for hw to finish? */
 	case QH_STATE_UNLINK_WAIT:
@@ -1093,6 +1174,11 @@ idle_timeout:
 			goto idle_timeout;
 		if (list_empty (&qh->qtd_list)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (qh->ps.bw_uperiod)
+				reserve_release_intr_bandwidth(ehci, qh, -1);
+>>>>>>> v3.18
 =======
 			if (qh->ps.bw_uperiod)
 				reserve_release_intr_bandwidth(ehci, qh, -1);
@@ -1106,7 +1192,11 @@ idle_timeout:
 		 * that's not our job.  just leak this memory.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ehci_err (ehci, "qh %pK (#%02x) state %d%s\n",
+=======
+		ehci_err (ehci, "qh %p (#%02x) state %d%s\n",
+>>>>>>> v3.18
 =======
 		ehci_err (ehci, "qh %p (#%02x) state %d%s\n",
 >>>>>>> v3.18
@@ -1142,7 +1232,10 @@ ehci_endpoint_reset(struct usb_hcd *hcd, struct usb_host_endpoint *ep)
 	 */
 	if (qh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_settoggle(qh->dev, epnum, is_out, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!list_empty(&qh->qtd_list)) {
@@ -1153,6 +1246,10 @@ ehci_endpoint_reset(struct usb_hcd *hcd, struct usb_host_endpoint *ep)
 			 * re-linking will call qh_refresh().
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			usb_settoggle(qh->ps.udev, epnum, is_out, 0);
+>>>>>>> v3.18
 =======
 			usb_settoggle(qh->ps.udev, epnum, is_out, 0);
 >>>>>>> v3.18
@@ -1175,7 +1272,10 @@ static int ehci_get_frame (struct usb_hcd *hcd)
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Device addition and removal */
 
 static void ehci_remove_device(struct usb_hcd *hcd, struct usb_device *udev)
@@ -1189,6 +1289,9 @@ static void ehci_remove_device(struct usb_hcd *hcd, struct usb_device *udev)
 
 /*-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef	CONFIG_PM
 
@@ -1218,7 +1321,10 @@ int ehci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 	spin_unlock_irq(&ehci->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	synchronize_irq(hcd->irq);
 
 	/* Check for race with a wakeup request */
@@ -1227,6 +1333,9 @@ int ehci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1312,7 +1421,11 @@ static const struct hc_driver ehci_hc_driver = {
 	 */
 	.irq =			ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags =		HCD_MEMORY | HCD_USB2,
+=======
+	.flags =		HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags =		HCD_MEMORY | HCD_USB2 | HCD_BH,
 >>>>>>> v3.18
@@ -1349,12 +1462,18 @@ static const struct hc_driver ehci_hc_driver = {
 	.relinquish_port =	ehci_relinquish_port,
 	.port_handed_over =	ehci_port_handed_over,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * device support
 	 */
 	.free_dev =		ehci_remove_device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1367,6 +1486,7 @@ void ehci_init_driver(struct hc_driver *drv,
 	if (over) {
 		drv->hcd_priv_size += over->extra_priv_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (over->flags)
 			drv->flags = over->flags;
 		if (over->reset)
@@ -1375,6 +1495,10 @@ void ehci_init_driver(struct hc_driver *drv,
 			drv->bus_suspend = over->bus_suspend;
 		if (over->bus_resume)
 			drv->bus_resume = over->bus_resume;
+=======
+		if (over->reset)
+			drv->reset = over->reset;
+>>>>>>> v3.18
 =======
 		if (over->reset)
 			drv->reset = over->reset;
@@ -1415,11 +1539,14 @@ MODULE_LICENSE ("GPL");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_W90X900_EHCI
 #include "ehci-w90x900.c"
 #define	PLATFORM_DRIVER		ehci_hcd_w90x900_driver
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_USB_OCTEON_EHCI
@@ -1438,11 +1565,14 @@ MODULE_LICENSE ("GPL");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_EHCI_TEGRA
 #include "ehci-tegra.c"
 #define PLATFORM_DRIVER		tegra_ehci_driver
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SPARC_LEON
@@ -1461,11 +1591,14 @@ MODULE_LICENSE ("GPL");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_EHCI_MSM_HSIC
 #include "ehci-msm-hsic.c"
 #define	PLATFORM_DRIVER		ehci_msm_hsic_driver
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init ehci_hcd_init(void)
@@ -1488,7 +1621,11 @@ static int __init ehci_hcd_init(void)
 		 sizeof(struct ehci_itd), sizeof(struct ehci_sitd));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 >>>>>>> v3.18
@@ -1541,7 +1678,11 @@ clean2:
 clean0:
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 >>>>>>> v3.18
@@ -1569,7 +1710,11 @@ static void __exit ehci_hcd_cleanup(void)
 	ps3_ehci_driver_unregister(&PS3_SYSTEM_BUS_DRIVER);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 >>>>>>> v3.18

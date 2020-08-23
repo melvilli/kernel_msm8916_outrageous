@@ -351,9 +351,12 @@ static struct snd_soc_codec_conf bells_codec_conf[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_soc_dapm_route bells_routes[] = {
 	{ "Sub CLK_SYS", NULL, "OPCLK" },
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_dapm_widget bells_widgets[] = {
 	SND_SOC_DAPM_MIC("DMIC", NULL),
 };
@@ -365,6 +368,9 @@ static struct snd_soc_dapm_route bells_routes[] = {
 	{ "DMIC", NULL, "MICBIAS2" },
 	{ "IN2L", NULL, "DMIC" },
 	{ "IN2R", NULL, "DMIC" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -380,6 +386,11 @@ static struct snd_soc_card bells_cards[] = {
 		.late_probe = bells_late_probe,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dapm_widgets = bells_widgets,
+		.num_dapm_widgets = ARRAY_SIZE(bells_widgets),
+>>>>>>> v3.18
 =======
 		.dapm_widgets = bells_widgets,
 		.num_dapm_widgets = ARRAY_SIZE(bells_widgets),
@@ -403,6 +414,11 @@ static struct snd_soc_card bells_cards[] = {
 		.late_probe = bells_late_probe,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dapm_widgets = bells_widgets,
+		.num_dapm_widgets = ARRAY_SIZE(bells_widgets),
+>>>>>>> v3.18
 =======
 		.dapm_widgets = bells_widgets,
 		.num_dapm_widgets = ARRAY_SIZE(bells_widgets),
@@ -426,6 +442,11 @@ static struct snd_soc_card bells_cards[] = {
 		.late_probe = bells_late_probe,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dapm_widgets = bells_widgets,
+		.num_dapm_widgets = ARRAY_SIZE(bells_widgets),
+>>>>>>> v3.18
 =======
 		.dapm_widgets = bells_widgets,
 		.num_dapm_widgets = ARRAY_SIZE(bells_widgets),
@@ -448,6 +469,7 @@ static int bells_probe(struct platform_device *pdev)
 	bells_cards[pdev->id].dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_card(&bells_cards[pdev->id]);
 	if (ret) {
 		dev_err(&pdev->dev,
@@ -465,6 +487,8 @@ static int bells_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_snd_soc_register_card(&pdev->dev, &bells_cards[pdev->id]);
 	if (ret)
 		dev_err(&pdev->dev,
@@ -472,6 +496,9 @@ static int bells_remove(struct platform_device *pdev)
 			bells_cards[pdev->id].name, ret);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -483,7 +510,10 @@ static struct platform_driver bells_driver = {
 	},
 	.probe = bells_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = bells_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

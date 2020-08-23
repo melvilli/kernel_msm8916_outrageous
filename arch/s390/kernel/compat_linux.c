@@ -59,10 +59,13 @@
 #include "compat_linux.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 psw32_user_bits = PSW32_MASK_DAT | PSW32_MASK_IO | PSW32_MASK_EXT |
 		      PSW32_DEFAULT_KEY | PSW32_MASK_BASE | PSW32_MASK_MCHECK |
 		      PSW32_MASK_PSTATE | PSW32_ASC_HOME;
  
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* For this source file, we want overflow handling. */
@@ -94,7 +97,12 @@ u32 psw32_user_bits = PSW32_MASK_DAT | PSW32_MASK_IO | PSW32_MASK_EXT |
 #define SET_STAT_GID(stat, gid)		(stat).st_gid = high2lowgid(gid)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_chown16(const char __user * filename, u16 user, u16 group)
+=======
+COMPAT_SYSCALL_DEFINE3(s390_chown16, const char __user *, filename,
+		       u16, user, u16, group)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(s390_chown16, const char __user *, filename,
 		       u16, user, u16, group)
@@ -104,7 +112,12 @@ COMPAT_SYSCALL_DEFINE3(s390_chown16, const char __user *, filename,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_lchown16(const char __user * filename, u16 user, u16 group)
+=======
+COMPAT_SYSCALL_DEFINE3(s390_lchown16, const char __user *,
+		       filename, u16, user, u16, group)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(s390_lchown16, const char __user *,
 		       filename, u16, user, u16, group)
@@ -114,7 +127,11 @@ COMPAT_SYSCALL_DEFINE3(s390_lchown16, const char __user *,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_fchown16(unsigned int fd, u16 user, u16 group)
+=======
+COMPAT_SYSCALL_DEFINE3(s390_fchown16, unsigned int, fd, u16, user, u16, group)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(s390_fchown16, unsigned int, fd, u16, user, u16, group)
 >>>>>>> v3.18
@@ -123,7 +140,11 @@ COMPAT_SYSCALL_DEFINE3(s390_fchown16, unsigned int, fd, u16, user, u16, group)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setregid16(u16 rgid, u16 egid)
+=======
+COMPAT_SYSCALL_DEFINE2(s390_setregid16, u16, rgid, u16, egid)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(s390_setregid16, u16, rgid, u16, egid)
 >>>>>>> v3.18
@@ -132,7 +153,11 @@ COMPAT_SYSCALL_DEFINE2(s390_setregid16, u16, rgid, u16, egid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setgid16(u16 gid)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_setgid16, u16, gid)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_setgid16, u16, gid)
 >>>>>>> v3.18
@@ -141,7 +166,11 @@ COMPAT_SYSCALL_DEFINE1(s390_setgid16, u16, gid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setreuid16(u16 ruid, u16 euid)
+=======
+COMPAT_SYSCALL_DEFINE2(s390_setreuid16, u16, ruid, u16, euid)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(s390_setreuid16, u16, ruid, u16, euid)
 >>>>>>> v3.18
@@ -150,7 +179,11 @@ COMPAT_SYSCALL_DEFINE2(s390_setreuid16, u16, ruid, u16, euid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setuid16(u16 uid)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_setuid16, u16, uid)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_setuid16, u16, uid)
 >>>>>>> v3.18
@@ -158,6 +191,7 @@ COMPAT_SYSCALL_DEFINE1(s390_setuid16, u16, uid)
 	return sys_setuid((uid_t)uid);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 asmlinkage long sys32_setresuid16(u16 ruid, u16 euid, u16 suid)
 {
@@ -167,6 +201,8 @@ asmlinkage long sys32_setresuid16(u16 ruid, u16 euid, u16 suid)
 
 asmlinkage long sys32_getresuid16(u16 __user *ruidp, u16 __user *euidp, u16 __user *suidp)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE3(s390_setresuid16, u16, ruid, u16, euid, u16, suid)
 {
 	return sys_setresuid(low2highuid(ruid), low2highuid(euid),
@@ -175,6 +211,9 @@ COMPAT_SYSCALL_DEFINE3(s390_setresuid16, u16, ruid, u16, euid, u16, suid)
 
 COMPAT_SYSCALL_DEFINE3(s390_getresuid16, u16 __user *, ruidp,
 		       u16 __user *, euidp, u16 __user *, suidp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct cred *cred = current_cred();
@@ -193,6 +232,7 @@ COMPAT_SYSCALL_DEFINE3(s390_getresuid16, u16 __user *, ruidp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setresgid16(u16 rgid, u16 egid, u16 sgid)
 {
 	return sys_setresgid(low2highgid(rgid), low2highgid(egid),
@@ -201,6 +241,8 @@ asmlinkage long sys32_setresgid16(u16 rgid, u16 egid, u16 sgid)
 
 asmlinkage long sys32_getresgid16(u16 __user *rgidp, u16 __user *egidp, u16 __user *sgidp)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE3(s390_setresgid16, u16, rgid, u16, egid, u16, sgid)
 {
 	return sys_setresgid(low2highgid(rgid), low2highgid(egid),
@@ -209,6 +251,9 @@ COMPAT_SYSCALL_DEFINE3(s390_setresgid16, u16, rgid, u16, egid, u16, sgid)
 
 COMPAT_SYSCALL_DEFINE3(s390_getresgid16, u16 __user *, rgidp,
 		       u16 __user *, egidp, u16 __user *, sgidp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct cred *cred = current_cred();
@@ -227,7 +272,11 @@ COMPAT_SYSCALL_DEFINE3(s390_getresgid16, u16 __user *, rgidp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setfsuid16(u16 uid)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_setfsuid16, u16, uid)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_setfsuid16, u16, uid)
 >>>>>>> v3.18
@@ -236,7 +285,11 @@ COMPAT_SYSCALL_DEFINE1(s390_setfsuid16, u16, uid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_setfsgid16(u16 gid)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_setfsgid16, u16, gid)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_setfsgid16, u16, gid)
 >>>>>>> v3.18
@@ -283,8 +336,14 @@ static int groups16_from_user(struct group_info *group_info, u16 __user *groupli
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_getgroups16(int gidsetsize, u16 __user *grouplist)
 {
+=======
+COMPAT_SYSCALL_DEFINE2(s390_getgroups16, int, gidsetsize, u16 __user *, grouplist)
+{
+	const struct cred *cred = current_cred();
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(s390_getgroups16, int, gidsetsize, u16 __user *, grouplist)
 {
@@ -296,8 +355,13 @@ COMPAT_SYSCALL_DEFINE2(s390_getgroups16, int, gidsetsize, u16 __user *, grouplis
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_group_info(current->cred->group_info);
 	i = current->cred->group_info->ngroups;
+=======
+	get_group_info(cred->group_info);
+	i = cred->group_info->ngroups;
+>>>>>>> v3.18
 =======
 	get_group_info(cred->group_info);
 	i = cred->group_info->ngroups;
@@ -308,7 +372,11 @@ COMPAT_SYSCALL_DEFINE2(s390_getgroups16, int, gidsetsize, u16 __user *, grouplis
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (groups16_to_user(grouplist, current->cred->group_info)) {
+=======
+		if (groups16_to_user(grouplist, cred->group_info)) {
+>>>>>>> v3.18
 =======
 		if (groups16_to_user(grouplist, cred->group_info)) {
 >>>>>>> v3.18
@@ -318,24 +386,34 @@ COMPAT_SYSCALL_DEFINE2(s390_getgroups16, int, gidsetsize, u16 __user *, grouplis
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_group_info(current->cred->group_info);
 	return i;
 }
 
 asmlinkage long sys32_setgroups16(int gidsetsize, u16 __user *grouplist)
 =======
+=======
+>>>>>>> v3.18
 	put_group_info(cred->group_info);
 	return i;
 }
 
 COMPAT_SYSCALL_DEFINE2(s390_setgroups16, int, gidsetsize, u16 __user *, grouplist)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct group_info *group_info;
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!may_setgroups())
+=======
+	if (!capable(CAP_SETGID))
+>>>>>>> v3.18
 =======
 	if (!capable(CAP_SETGID))
 >>>>>>> v3.18
@@ -359,7 +437,11 @@ COMPAT_SYSCALL_DEFINE2(s390_setgroups16, int, gidsetsize, u16 __user *, grouplis
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_getuid16(void)
+=======
+COMPAT_SYSCALL_DEFINE0(s390_getuid16)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE0(s390_getuid16)
 >>>>>>> v3.18
@@ -368,7 +450,11 @@ COMPAT_SYSCALL_DEFINE0(s390_getuid16)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_geteuid16(void)
+=======
+COMPAT_SYSCALL_DEFINE0(s390_geteuid16)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE0(s390_geteuid16)
 >>>>>>> v3.18
@@ -377,7 +463,11 @@ COMPAT_SYSCALL_DEFINE0(s390_geteuid16)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_getgid16(void)
+=======
+COMPAT_SYSCALL_DEFINE0(s390_getgid16)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE0(s390_getgid16)
 >>>>>>> v3.18
@@ -386,7 +476,11 @@ COMPAT_SYSCALL_DEFINE0(s390_getgid16)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_getegid16(void)
+=======
+COMPAT_SYSCALL_DEFINE0(s390_getegid16)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE0(s390_getegid16)
 >>>>>>> v3.18
@@ -396,8 +490,13 @@ COMPAT_SYSCALL_DEFINE0(s390_getegid16)
 
 #ifdef CONFIG_SYSVIPC
 <<<<<<< HEAD
+<<<<<<< HEAD
 COMPAT_SYSCALL_DEFINE5(s390_ipc, uint, call, int, first, unsigned long, second,
 		unsigned long, third, compat_uptr_t, ptr)
+=======
+COMPAT_SYSCALL_DEFINE5(s390_ipc, uint, call, int, first, compat_ulong_t, second,
+		compat_ulong_t, third, compat_uptr_t, ptr)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE5(s390_ipc, uint, call, int, first, compat_ulong_t, second,
 		compat_ulong_t, third, compat_uptr_t, ptr)
@@ -409,6 +508,7 @@ COMPAT_SYSCALL_DEFINE5(s390_ipc, uint, call, int, first, compat_ulong_t, second,
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 asmlinkage long sys32_truncate64(const char __user * path, unsigned long high, unsigned long low)
 {
@@ -446,6 +546,8 @@ asmlinkage compat_ssize_t sys32_readahead(int fd, u32 offhi, u32 offlo, s32 coun
 {
 	return sys_readahead(fd, ((loff_t)AA(offhi) << 32) | AA(offlo), count);
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE3(s390_truncate64, const char __user *, path, u32, high, u32, low)
 {
 	return sys_truncate(path, (unsigned long)high << 32 | low);
@@ -475,6 +577,9 @@ COMPAT_SYSCALL_DEFINE5(s390_pwrite64, unsigned int, fd, const char __user *, ubu
 COMPAT_SYSCALL_DEFINE4(s390_readahead, int, fd, u32, high, u32, low, s32, count)
 {
 	return sys_readahead(fd, (unsigned long)high << 32 | low, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -528,7 +633,11 @@ static int cp_stat64(struct stat64_emu31 __user *ubuf, struct kstat *stat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_stat64(const char __user * filename, struct stat64_emu31 __user * statbuf)
+=======
+COMPAT_SYSCALL_DEFINE2(s390_stat64, const char __user *, filename, struct stat64_emu31 __user *, statbuf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(s390_stat64, const char __user *, filename, struct stat64_emu31 __user *, statbuf)
 >>>>>>> v3.18
@@ -541,7 +650,11 @@ COMPAT_SYSCALL_DEFINE2(s390_stat64, const char __user *, filename, struct stat64
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_lstat64(const char __user * filename, struct stat64_emu31 __user * statbuf)
+=======
+COMPAT_SYSCALL_DEFINE2(s390_lstat64, const char __user *, filename, struct stat64_emu31 __user *, statbuf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(s390_lstat64, const char __user *, filename, struct stat64_emu31 __user *, statbuf)
 >>>>>>> v3.18
@@ -554,7 +667,11 @@ COMPAT_SYSCALL_DEFINE2(s390_lstat64, const char __user *, filename, struct stat6
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_fstat64(unsigned long fd, struct stat64_emu31 __user * statbuf)
+=======
+COMPAT_SYSCALL_DEFINE2(s390_fstat64, unsigned int, fd, struct stat64_emu31 __user *, statbuf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(s390_fstat64, unsigned int, fd, struct stat64_emu31 __user *, statbuf)
 >>>>>>> v3.18
@@ -567,8 +684,13 @@ COMPAT_SYSCALL_DEFINE2(s390_fstat64, unsigned int, fd, struct stat64_emu31 __use
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_fstatat64(unsigned int dfd, const char __user *filename,
 				struct stat64_emu31 __user* statbuf, int flag)
+=======
+COMPAT_SYSCALL_DEFINE4(s390_fstatat64, unsigned int, dfd, const char __user *, filename,
+		       struct stat64_emu31 __user *, statbuf, int, flag)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE4(s390_fstatat64, unsigned int, dfd, const char __user *, filename,
 		       struct stat64_emu31 __user *, statbuf, int, flag)
@@ -599,7 +721,11 @@ struct mmap_arg_struct_emu31 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage unsigned long old32_mmap(struct mmap_arg_struct_emu31 __user *arg)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_old_mmap, struct mmap_arg_struct_emu31 __user *, arg)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_old_mmap, struct mmap_arg_struct_emu31 __user *, arg)
 >>>>>>> v3.18
@@ -615,7 +741,11 @@ COMPAT_SYSCALL_DEFINE1(s390_old_mmap, struct mmap_arg_struct_emu31 __user *, arg
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_mmap2(struct mmap_arg_struct_emu31 __user *arg)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_mmap2, struct mmap_arg_struct_emu31 __user *, arg)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_mmap2, struct mmap_arg_struct_emu31 __user *, arg)
 >>>>>>> v3.18
@@ -628,7 +758,11 @@ COMPAT_SYSCALL_DEFINE1(s390_mmap2, struct mmap_arg_struct_emu31 __user *, arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_read(unsigned int fd, char __user * buf, size_t count)
+=======
+COMPAT_SYSCALL_DEFINE3(s390_read, unsigned int, fd, char __user *, buf, compat_size_t, count)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(s390_read, unsigned int, fd, char __user *, buf, compat_size_t, count)
 >>>>>>> v3.18
@@ -640,7 +774,11 @@ COMPAT_SYSCALL_DEFINE3(s390_read, unsigned int, fd, char __user *, buf, compat_s
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_write(unsigned int fd, const char __user * buf, size_t count)
+=======
+COMPAT_SYSCALL_DEFINE3(s390_write, unsigned int, fd, const char __user *, buf, compat_size_t, count)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(s390_write, unsigned int, fd, const char __user *, buf, compat_size_t, count)
 >>>>>>> v3.18
@@ -658,8 +796,12 @@ COMPAT_SYSCALL_DEFINE3(s390_write, unsigned int, fd, const char __user *, buf, c
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long
 sys32_fadvise64(int fd, loff_t offset, size_t len, int advise)
+=======
+COMPAT_SYSCALL_DEFINE5(s390_fadvise64, int, fd, u32, high, u32, low, compat_size_t, len, int, advise)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE5(s390_fadvise64, int, fd, u32, high, u32, low, compat_size_t, len, int, advise)
 >>>>>>> v3.18
@@ -669,7 +811,11 @@ COMPAT_SYSCALL_DEFINE5(s390_fadvise64, int, fd, u32, high, u32, low, compat_size
 	else if (advise == 5)
 		advise = POSIX_FADV_NOREUSE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sys_fadvise64(fd, offset, len, advise);
+=======
+	return sys_fadvise64(fd, (unsigned long)high << 32 | low, len, advise);
+>>>>>>> v3.18
 =======
 	return sys_fadvise64(fd, (unsigned long)high << 32 | low, len, advise);
 >>>>>>> v3.18
@@ -683,8 +829,12 @@ struct fadvise64_64_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long
 sys32_fadvise64_64(struct fadvise64_64_args __user *args)
+=======
+COMPAT_SYSCALL_DEFINE1(s390_fadvise64_64, struct fadvise64_64_args __user *, args)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(s390_fadvise64_64, struct fadvise64_64_args __user *, args)
 >>>>>>> v3.18
@@ -700,7 +850,10 @@ COMPAT_SYSCALL_DEFINE1(s390_fadvise64_64, struct fadvise64_64_args __user *, arg
 	return sys_fadvise64_64(a.fd, a.offset, a.len, a.advice);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 COMPAT_SYSCALL_DEFINE6(s390_sync_file_range, int, fd, u32, offhigh, u32, offlow,
 		       u32, nhigh, u32, nlow, unsigned int, flags)
@@ -715,4 +868,7 @@ COMPAT_SYSCALL_DEFINE6(s390_fallocate, int, fd, int, mode, u32, offhigh, u32, of
 	return sys_fallocate(fd, mode, ((loff_t)offhigh << 32) + offlow,
 			     ((u64)lenhigh << 32) + lenlow);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

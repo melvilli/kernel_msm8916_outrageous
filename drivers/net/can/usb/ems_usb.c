@@ -17,7 +17,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/signal.h>
@@ -122,9 +125,12 @@ MODULE_LICENSE("GPL v2");
 #define EMS_USB_ARM7_CLOCK 8000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPC_TX_QUEUE_TRIGGER_LOW	25
 #define CPC_TX_QUEUE_TRIGGER_HIGH	35
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -289,11 +295,14 @@ static void ems_usb_read_interrupt_callback(struct urb *urb)
 	case 0:
 		dev->free_slots = dev->intr_in_buffer[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(dev->free_slots > CPC_TX_QUEUE_TRIGGER_HIGH){
 			if (netif_queue_stopped(netdev)){
 				netif_wake_queue(netdev);
 			}
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -453,10 +462,16 @@ static void ems_usb_read_bulk_callback(struct urb *urb)
 		struct ems_cpc_msg *msg;
 		u8 *ibuf = urb->transfer_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 msg_count, again, start;
 
 		msg_count = ibuf[0] & ~0x80;
 		again = ibuf[0] & 0x80;
+=======
+		u8 msg_count, start;
+
+		msg_count = ibuf[0] & ~0x80;
+>>>>>>> v3.18
 =======
 		u8 msg_count, start;
 
@@ -554,6 +569,11 @@ static void ems_usb_write_bulk_callback(struct urb *urb)
 	context->echo_index = MAX_TX_URBS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (netif_queue_stopped(netdev))
+		netif_wake_queue(netdev);
+>>>>>>> v3.18
 =======
 	if (netif_queue_stopped(netdev))
 		netif_wake_queue(netdev);
@@ -618,7 +638,11 @@ static int ems_usb_start(struct ems_usb *dev)
 
 	dev->intr_in_buffer[0] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->free_slots = 50; /* initial size */
+=======
+	dev->free_slots = 15; /* initial size */
+>>>>>>> v3.18
 =======
 	dev->free_slots = 15; /* initial size */
 >>>>>>> v3.18
@@ -656,6 +680,10 @@ static int ems_usb_start(struct ems_usb *dev)
 			usb_free_coherent(dev->udev, RX_BUFFER_SIZE, buf,
 					  urb->transfer_dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			usb_free_urb(urb);
+>>>>>>> v3.18
 =======
 			usb_free_urb(urb);
 >>>>>>> v3.18
@@ -833,8 +861,13 @@ static netdev_tx_t ems_usb_start_xmit(struct sk_buff *skb, struct net_device *ne
 	 */
 	if (!context) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_unanchor_urb(urb);
 		usb_free_coherent(dev->udev, size, buf, urb->transfer_dma);
+=======
+		usb_free_coherent(dev->udev, size, buf, urb->transfer_dma);
+		usb_free_urb(urb);
+>>>>>>> v3.18
 =======
 		usb_free_coherent(dev->udev, size, buf, urb->transfer_dma);
 		usb_free_urb(urb);
@@ -881,7 +914,11 @@ static netdev_tx_t ems_usb_start_xmit(struct sk_buff *skb, struct net_device *ne
 		/* Slow down tx path */
 		if (atomic_read(&dev->active_tx_urbs) >= MAX_TX_URBS ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    dev->free_slots < CPC_TX_QUEUE_TRIGGER_LOW) {
+=======
+		    dev->free_slots < 5) {
+>>>>>>> v3.18
 =======
 		    dev->free_slots < 5) {
 >>>>>>> v3.18
@@ -927,6 +964,10 @@ static const struct net_device_ops ems_usb_netdev_ops = {
 	.ndo_stop = ems_usb_close,
 	.ndo_start_xmit = ems_usb_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu = can_change_mtu,
 >>>>>>> v3.18

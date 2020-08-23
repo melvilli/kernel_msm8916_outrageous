@@ -31,6 +31,10 @@
 #include "../core.h"
 #include "../pci.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../base.h"
+>>>>>>> v3.18
 =======
 #include "../base.h"
 >>>>>>> v3.18
@@ -39,6 +43,12 @@
 #include "phy.h"
 #include "dm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../rtl8192c/dm_common.h"
+#include "../rtl8192c/fw_common.h"
+#include "../rtl8192c/phy_common.h"
+>>>>>>> v3.18
 =======
 #include "../rtl8192c/dm_common.h"
 #include "../rtl8192c/fw_common.h"
@@ -175,7 +185,11 @@ int rtl92c_init_sw_vars(struct ieee80211_hw *hw)
 	    !IS_92C_SERIAL(rtlhal->version))
 		rtlpriv->cfg->fw_name = "rtlwifi/rtl8192cfwU.bin";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (IS_81xxC_VENDOR_UMC_B_CUT(rtlhal->version))
+=======
+	else if (IS_81XXC_VENDOR_UMC_B_CUT(rtlhal->version))
+>>>>>>> v3.18
 =======
 	else if (IS_81XXC_VENDOR_UMC_B_CUT(rtlhal->version))
 >>>>>>> v3.18
@@ -234,7 +248,11 @@ static struct rtl_hal_ops rtl8192ce_hal_ops = {
 	.switch_channel = rtl92c_phy_sw_chnl,
 	.dm_watchdog = rtl92c_dm_watchdog,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_operation_backup = rtl92c_phy_scan_operation_backup,
+=======
+	.scan_operation_backup = rtl_phy_scan_operation_backup,
+>>>>>>> v3.18
 =======
 	.scan_operation_backup = rtl_phy_scan_operation_backup,
 >>>>>>> v3.18
@@ -247,7 +265,10 @@ static struct rtl_hal_ops rtl8192ce_hal_ops = {
 	.set_key = rtl92ce_set_key,
 	.init_sw_leds = rtl92ce_init_sw_leds,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.allow_all_destaddr = rtl92ce_allow_all_destaddr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.get_bbreg = rtl92c_phy_query_bb_reg,
@@ -263,6 +284,10 @@ static struct rtl_hal_ops rtl8192ce_hal_ops = {
 	.phy_set_bw_mode_callback = rtl92ce_phy_set_bw_mode_callback,
 	.dm_dynamic_txpower = rtl92ce_dm_dynamic_txpower,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_btc_status = rtl_btc_status_false,
+>>>>>>> v3.18
 =======
 	.get_btc_status = rtl_btc_status_false,
 >>>>>>> v3.18
@@ -370,7 +395,11 @@ static struct rtl_hal_cfg rtl92ce_hal_cfg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rtl92ce_pci_ids) = {
+=======
+static const struct pci_device_id rtl92ce_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rtl92ce_pci_ids[] = {
 >>>>>>> v3.18

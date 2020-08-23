@@ -41,8 +41,13 @@ module_param(write_iteration, uint, 0644);
 MODULE_PARM_DESC(write_iteration, "# of writes between timestamp readings");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int producer_nice = 19;
 static int consumer_nice = 19;
+=======
+static int producer_nice = MAX_NICE;
+static int consumer_nice = MAX_NICE;
+>>>>>>> v3.18
 =======
 static int producer_nice = MAX_NICE;
 static int consumer_nice = MAX_NICE;
@@ -211,7 +216,10 @@ static void ring_buffer_consumer(void)
 
 		schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -317,7 +325,11 @@ static void ring_buffer_producer(void)
 	/* Let the user know that the test is running at low priority */
 	if (producer_fifo < 0 && consumer_fifo < 0 &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    producer_nice == 19 && consumer_nice == 19)
+=======
+	    producer_nice == MAX_NICE && consumer_nice == MAX_NICE)
+>>>>>>> v3.18
 =======
 	    producer_nice == MAX_NICE && consumer_nice == MAX_NICE)
 >>>>>>> v3.18
@@ -392,7 +404,10 @@ static int ring_buffer_consumer_thread(void *arg)
 
 		schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -423,7 +438,10 @@ static int ring_buffer_producer_thread(void *arg)
 		set_current_state(TASK_INTERRUPTIBLE);
 		schedule_timeout(HZ * SLEEP_TIME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -474,7 +492,11 @@ static int __init ring_buffer_benchmark_init(void)
 	if (producer_fifo >= 0) {
 		struct sched_param param = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.sched_priority = producer_fifo
+=======
+			.sched_priority = consumer_fifo
+>>>>>>> v3.18
 =======
 			.sched_priority = consumer_fifo
 >>>>>>> v3.18

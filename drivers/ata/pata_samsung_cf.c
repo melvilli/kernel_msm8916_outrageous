@@ -25,7 +25,10 @@
 
 #include <linux/platform_data/ata-samsung_cf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-ata.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -33,10 +36,13 @@
 #define DRV_VERSION "0.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum s3c_cpu_type {
 	TYPE_S3C64XX,
 	TYPE_S5PC100,
 =======
+=======
+>>>>>>> v3.18
 #define S3C_CFATA_REG(x)	(x)
 #define S3C_CFATA_MUX		S3C_CFATA_REG(0x0)
 #define S3C_ATA_CTRL		S3C_CFATA_REG(0x0)
@@ -63,6 +69,9 @@ enum s3c_cpu_type {
 
 enum s3c_cpu_type {
 	TYPE_S3C64XX,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TYPE_S5PV210,
 };
@@ -274,8 +283,13 @@ static u8 pata_s3c_check_altstatus(struct ata_port *ap)
  * pata_s3c_data_xfer - Transfer data by PIO
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int pata_s3c_data_xfer(struct ata_device *dev, unsigned char *buf,
 				unsigned int buflen, int rw)
+=======
+static unsigned int pata_s3c_data_xfer(struct ata_device *dev,
+				unsigned char *buf, unsigned int buflen, int rw)
+>>>>>>> v3.18
 =======
 static unsigned int pata_s3c_data_xfer(struct ata_device *dev,
 				unsigned char *buf, unsigned int buflen, int rw)
@@ -376,7 +390,11 @@ static int pata_s3c_wait_after_reset(struct ata_link *link,
  * pata_s3c_bus_softreset - PATA device software reset
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int pata_s3c_bus_softreset(struct ata_port *ap,
+=======
+static int pata_s3c_bus_softreset(struct ata_port *ap,
+>>>>>>> v3.18
 =======
 static int pata_s3c_bus_softreset(struct ata_port *ap,
 >>>>>>> v3.18
@@ -460,7 +478,11 @@ static struct ata_port_operations pata_s5p_port_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pata_s3c_enable(void *s3c_ide_regbase, bool state)
+=======
+static void pata_s3c_enable(void __iomem *s3c_ide_regbase, bool state)
+>>>>>>> v3.18
 =======
 static void pata_s3c_enable(void __iomem *s3c_ide_regbase, bool state)
 >>>>>>> v3.18
@@ -499,10 +521,13 @@ static void pata_s3c_hwinit(struct s3c_ide_info *info,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TYPE_S5PC100:
 		pata_s3c_cfg_mode(info->sfr_addr);
 		/* FALLTHROUGH */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case TYPE_S5PV210:
@@ -524,7 +549,11 @@ static void pata_s3c_hwinit(struct s3c_ide_info *info,
 static int __init pata_s3c_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_ide_platdata *pdata = pdev->dev.platform_data;
+=======
+	struct s3c_ide_platdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct s3c_ide_platdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -548,6 +577,7 @@ static int __init pata_s3c_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res == NULL) {
 		dev_err(dev, "failed to get mem resource\n");
 		return -EINVAL;
@@ -565,10 +595,15 @@ static int __init pata_s3c_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	info->ide_addr = devm_ioremap_resource(dev, res);
 	if (IS_ERR(info->ide_addr))
 		return PTR_ERR(info->ide_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	info->clk = devm_clk_get(&pdev->dev, "cfcon");
@@ -598,11 +633,14 @@ static int __init pata_s3c_probe(struct platform_device *pdev)
 		info->ide_addr += 0x1900;
 		info->fifo_status_reg = 0x94;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (cpu_type == TYPE_S5PC100) {
 		ap->ops = &pata_s5p_port_ops;
 		info->sfr_addr = info->ide_addr + 0x1800;
 		info->ide_addr += 0x1900;
 		info->fifo_status_reg = 0x84;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -646,10 +684,13 @@ static int __init pata_s3c_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ata_host_activate(host, info->irq,
 			info->irq ? pata_s3c_irq : NULL,
 			0, &pata_s3c_sht);
 =======
+=======
+>>>>>>> v3.18
 	ret = ata_host_activate(host, info->irq,
 				info->irq ? pata_s3c_irq : NULL,
 				0, &pata_s3c_sht);
@@ -657,6 +698,9 @@ static int __init pata_s3c_probe(struct platform_device *pdev)
 		goto stop_clk;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 stop_clk:
@@ -677,7 +721,11 @@ static int __exit pata_s3c_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -694,7 +742,11 @@ static int pata_s3c_resume(struct device *dev)
 	struct platform_device *pdev = to_platform_device(dev);
 	struct ata_host *host = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_ide_platdata *pdata = pdev->dev.platform_data;
+=======
+	struct s3c_ide_platdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct s3c_ide_platdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -719,9 +771,12 @@ static struct platform_device_id pata_s3c_driver_ids[] = {
 		.driver_data	= TYPE_S3C64XX,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= "s5pc100-pata",
 		.driver_data	= TYPE_S5PC100,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name		= "s5pv210-pata",
@@ -739,7 +794,11 @@ static struct platform_driver pata_s3c_driver = {
 		.name	= DRV_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

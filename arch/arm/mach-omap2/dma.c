@@ -36,6 +36,7 @@
 #include "omap_device.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OMAP2_DMA_STRIDE	0x60
 
 static u32 errata;
@@ -90,6 +91,8 @@ static u16 reg_map[] = {
 	[CNDP]			= 0xd4,
 	[CCDN]			= 0xd8,
 =======
+=======
+>>>>>>> v3.18
 static enum omap_reg_offsets dma_common_ch_end;
 
 static const struct omap_dma_reg reg_map[] = {
@@ -136,12 +139,16 @@ static const struct omap_dma_reg reg_map[] = {
 	[CDP]		= { 0x00d0, 0x60, OMAP_DMA_REG_32BIT },
 	[CNDP]		= { 0x00d4, 0x60, OMAP_DMA_REG_32BIT },
 	[CCDN]		= { 0x00d8, 0x60, OMAP_DMA_REG_32BIT },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static void __iomem *dma_base;
 static inline void dma_write(u32 val, int reg, int lch)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8  stride;
 	u32 offset;
@@ -150,17 +157,23 @@ static inline void dma_write(u32 val, int reg, int lch)
 	offset = reg_map[reg] + (stride * lch);
 	__raw_writel(val, dma_base + offset);
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *addr = dma_base;
 
 	addr += reg_map[reg].offset;
 	addr += reg_map[reg].stride * lch;
 
 	writel_relaxed(val, addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline u32 dma_read(int reg, int lch)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 stride;
 	u32 offset, val;
@@ -179,21 +192,32 @@ static inline void omap2_disable_irq_lch(int lch)
 	val &= ~(1 << lch);
 	dma_write(val, IRQENABLE_L0, lch);
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *addr = dma_base;
 
 	addr += reg_map[reg].offset;
 	addr += reg_map[reg].stride * lch;
 
 	return readl_relaxed(addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void omap2_clear_dma(int lch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = dma_common_ch_start;
 
 	for (; i <= dma_common_ch_end; i += 1)
+=======
+	int i;
+
+	for (i = CSDP; i <= dma_common_ch_end; i += 1)
+>>>>>>> v3.18
 =======
 	int i;
 
@@ -211,8 +235,14 @@ static void omap2_show_dma_caps(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 configure_dma_errata(void)
 {
+=======
+static unsigned configure_dma_errata(void)
+{
+	unsigned errata = 0;
+>>>>>>> v3.18
 =======
 static unsigned configure_dma_errata(void)
 {
@@ -300,7 +330,10 @@ static unsigned configure_dma_errata(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct omap_system_dma_plat_info dma_plat_info __initdata = {
 	.reg_map	= reg_map,
 	.channel_stride	= 0x60,
@@ -316,11 +349,15 @@ static struct platform_device_info omap_dma_dev_info = {
 	.dma_mask = DMA_BIT_MASK(32),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* One time initializations */
 static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 {
 	struct platform_device			*pdev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct omap_system_dma_plat_info	*p;
 	struct resource				*mem;
@@ -350,6 +387,8 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 	pdev = omap_device_build(name, 0, oh, p, sizeof(*p));
 	kfree(p);
 =======
+=======
+>>>>>>> v3.18
 	struct omap_system_dma_plat_info	p;
 	struct omap_dma_dev_attr		*d;
 	struct resource				*mem;
@@ -360,6 +399,9 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 	p.errata = configure_dma_errata();
 
 	pdev = omap_device_build(name, 0, oh, &p, sizeof(p));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(pdev)) {
 		pr_err("%s: Can't build omap_device for %s:%s.\n",
@@ -368,6 +410,12 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	omap_dma_dev_info.res = pdev->resource;
+	omap_dma_dev_info.num_res = pdev->num_resources;
+
+>>>>>>> v3.18
 =======
 	omap_dma_dev_info.res = pdev->resource;
 	omap_dma_dev_info.num_res = pdev->num_resources;
@@ -379,6 +427,10 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -390,6 +442,7 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 
 	d = oh->dev_attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d->chan = kzalloc(sizeof(struct omap_dma_lch) *
 					(d->lch_count), GFP_KERNEL);
 
@@ -399,11 +452,19 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	if (cpu_is_omap34xx() && (omap_type() != OMAP2_DEVICE_TYPE_GP))
 		d->dev_caps |= HS_CHANNELS_RESERVED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (platform_get_irq_byname(pdev, "0") < 0)
+		d->dev_caps |= DMA_ENGINE_HANDLE_IRQ;
+
+>>>>>>> v3.18
 =======
 	if (platform_get_irq_byname(pdev, "0") < 0)
 		d->dev_caps |= DMA_ENGINE_HANDLE_IRQ;
@@ -419,12 +480,15 @@ static int __init omap2_system_dma_init_dev(struct omap_hwmod *oh, void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct platform_device_info omap_dma_dev_info = {
 	.name = "omap-dma-engine",
 	.id = -1,
 	.dma_mask = DMA_BIT_MASK(32),
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init omap2_system_dma_init(void)

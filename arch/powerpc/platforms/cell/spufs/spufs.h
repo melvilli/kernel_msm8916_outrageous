@@ -36,7 +36,10 @@
 #define SPUFS_MFC_MAP_SIZE	0x1000
 #define SPUFS_CNTL_MAP_SIZE	0x1000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPUFS_CNTL_MAP_SIZE	0x1000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SPUFS_SIGNAL_MAP_SIZE	PAGE_SIZE
@@ -251,6 +254,10 @@ extern const struct spufs_tree_descr spufs_dir_debug_contents[];
 /* system call implementation */
 extern struct spufs_calls spufs_calls;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct coredump_params;
+>>>>>>> v3.18
 =======
 struct coredump_params;
 >>>>>>> v3.18
@@ -260,7 +267,11 @@ long spufs_create(struct path *nd, struct dentry *dentry, unsigned int flags,
 /* ELF coredump callbacks for writing SPU ELF notes */
 extern int spufs_coredump_extra_notes_size(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int spufs_coredump_extra_notes_write(struct file *file, loff_t *foffset);
+=======
+extern int spufs_coredump_extra_notes_write(struct coredump_params *cprm);
+>>>>>>> v3.18
 =======
 extern int spufs_coredump_extra_notes_write(struct coredump_params *cprm);
 >>>>>>> v3.18

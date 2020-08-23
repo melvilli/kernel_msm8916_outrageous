@@ -153,6 +153,7 @@ ext4_get_acl(struct inode *inode, int type)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_opt(inode->i_sb, POSIX_ACL))
 		return NULL;
 
@@ -160,6 +161,8 @@ ext4_get_acl(struct inode *inode, int type)
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -200,7 +203,11 @@ ext4_get_acl(struct inode *inode, int type)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ext4_set_acl(handle_t *handle, struct inode *inode, int type,
+=======
+__ext4_set_acl(handle_t *handle, struct inode *inode, int type,
+>>>>>>> v3.18
 =======
 __ext4_set_acl(handle_t *handle, struct inode *inode, int type,
 >>>>>>> v3.18
@@ -212,15 +219,19 @@ __ext4_set_acl(handle_t *handle, struct inode *inode, int type,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (S_ISLNK(inode->i_mode))
 		return -EOPNOTSUPP;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		name_index = EXT4_XATTR_INDEX_POSIX_ACL_ACCESS;
 		if (acl) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			error = posix_acl_update_mode(inode,
 				&inode->i_mode, &acl);
@@ -229,6 +240,8 @@ __ext4_set_acl(handle_t *handle, struct inode *inode, int type,
 			inode->i_ctime = ext4_current_time(inode);
 			ext4_mark_inode_dirty(handle, inode);
 =======
+=======
+>>>>>>> v3.18
 			error = posix_acl_equiv_mode(acl, &inode->i_mode);
 			if (error < 0)
 				return error;
@@ -238,6 +251,9 @@ __ext4_set_acl(handle_t *handle, struct inode *inode, int type,
 				if (error == 0)
 					acl = NULL;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -267,6 +283,7 @@ __ext4_set_acl(handle_t *handle, struct inode *inode, int type,
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Initialize the ACLs of a new inode. Called from ext4_new_inode.
@@ -359,6 +376,8 @@ retry:
 out:
 	posix_acl_release(acl);
 =======
+=======
+>>>>>>> v3.18
 int
 ext4_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
@@ -375,11 +394,15 @@ retry:
 	ext4_journal_stop(handle);
 	if (error == -ENOSPC && ext4_should_retry_alloc(inode->i_sb, &retries))
 		goto retry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return error;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Extended attribute handlers
  */
@@ -493,6 +516,8 @@ const struct xattr_handler ext4_xattr_acl_default_handler = {
 	.set	= ext4_xattr_set_acl,
 };
 =======
+=======
+>>>>>>> v3.18
  * Initialize the ACLs of a new inode. Called from ext4_new_inode.
  *
  * dir->i_mutex: down
@@ -521,4 +546,7 @@ ext4_init_acl(handle_t *handle, struct inode *inode, struct inode *dir)
 	}
 	return error;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

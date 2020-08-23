@@ -40,8 +40,13 @@ extern unsigned long SCR_value;
 #define ASSABET_BCR_CF_PWR	(1<<0)	/* Compact Flash Power (1 = 3.3v, 0 = off) */
 #define ASSABET_BCR_CF_RST	(1<<1)	/* Compact Flash Reset (1 = power up reset) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ASSABET_BCR_GFX_RST	(1<<1)	/* Graphics Accelerator Reset (0 = hold reset) */
 #define ASSABET_BCR_CODEC_RST	(1<<2)	/* 0 = Holds UCB1300, ADI7171, and UDA1341 in reset */
+=======
+#define ASSABET_BCR_NGFX_RST	(1<<1)	/* Graphics Accelerator Reset (0 = hold reset) */
+#define ASSABET_BCR_NCODEC_RST	(1<<2)	/* 0 = Holds UCB1300, ADI7171, and UDA1341 in reset */
+>>>>>>> v3.18
 =======
 #define ASSABET_BCR_NGFX_RST	(1<<1)	/* Graphics Accelerator Reset (0 = hold reset) */
 #define ASSABET_BCR_NCODEC_RST	(1<<2)	/* 0 = Holds UCB1300, ADI7171, and UDA1341 in reset */
@@ -75,6 +80,11 @@ extern void ASSABET_BCR_frob(unsigned int mask, unsigned int set);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void assabet_uda1341_reset(int set);
+
+>>>>>>> v3.18
 =======
 extern void assabet_uda1341_reset(int set);
 

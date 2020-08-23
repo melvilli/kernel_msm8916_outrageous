@@ -50,10 +50,13 @@ static inline int
 dma_set_mask(struct device *dev, u64 mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!dev->dma_mask || !dma_supported(dev, mask))
 		return -EIO;
 
 =======
+=======
+>>>>>>> v3.18
 	struct dma_map_ops *ops = get_dma_ops(dev);
 
 	if(!dev->dma_mask || !dma_supported(dev, mask))
@@ -62,6 +65,9 @@ dma_set_mask(struct device *dev, u64 mask)
 	if (ops->set_dma_mask)
 		return ops->set_dma_mask(dev, mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*dev->dma_mask = mask;
 

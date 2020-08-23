@@ -10,7 +10,11 @@
 
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
+=======
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include "common.h"
 >>>>>>> v3.18

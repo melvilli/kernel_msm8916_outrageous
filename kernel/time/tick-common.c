@@ -34,9 +34,12 @@ DEFINE_PER_CPU(struct tick_device, tick_cpu_device);
 ktime_t tick_next_period;
 ktime_t tick_period;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tick_do_timer_cpu __read_mostly = TICK_DO_TIMER_BOOT;
 static DEFINE_RAW_SPINLOCK(tick_device_lock);
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * tick_do_timer_cpu is a timer core internal variable which holds the CPU NR
@@ -53,6 +56,9 @@ static DEFINE_RAW_SPINLOCK(tick_device_lock);
  *    procedure also covers cpu hotplug.
  */
 int tick_do_timer_cpu __read_mostly = TICK_DO_TIMER_BOOT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -91,6 +97,10 @@ static void tick_periodic(int cpu)
 		do_timer(1);
 		write_sequnlock(&jiffies_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		update_wall_time();
+>>>>>>> v3.18
 =======
 		update_wall_time();
 >>>>>>> v3.18
@@ -107,7 +117,11 @@ void tick_handle_periodic(struct clock_event_device *dev)
 {
 	int cpu = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_t next;
+=======
+	ktime_t next = dev->next_event;
+>>>>>>> v3.18
 =======
 	ktime_t next = dev->next_event;
 >>>>>>> v3.18
@@ -117,6 +131,7 @@ void tick_handle_periodic(struct clock_event_device *dev)
 	if (dev->mode != CLOCK_EVT_MODE_ONESHOT)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Setup the next period for devices, which do not have
 	 * periodic mode:
@@ -124,6 +139,8 @@ void tick_handle_periodic(struct clock_event_device *dev)
 	next = ktime_add(dev->next_event, tick_period);
 	for (;;) {
 =======
+=======
+>>>>>>> v3.18
 	for (;;) {
 		/*
 		 * Setup the next period for devices, which do not have
@@ -131,6 +148,9 @@ void tick_handle_periodic(struct clock_event_device *dev)
 		 */
 		next = ktime_add(next, tick_period);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!clockevents_program_event(dev, next, false))
 			return;
@@ -141,7 +161,11 @@ void tick_handle_periodic(struct clock_event_device *dev)
 		 * Otherwise we could get trapped in an infinite
 		 * loop, as the tick_periodic() increments jiffies,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * when then will increment time, posibly causing
+=======
+		 * which then will increment time, possibly causing
+>>>>>>> v3.18
 =======
 		 * which then will increment time, possibly causing
 >>>>>>> v3.18
@@ -150,7 +174,10 @@ void tick_handle_periodic(struct clock_event_device *dev)
 		if (timekeeping_valid_for_hres())
 			tick_periodic(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		next = ktime_add(next, tick_period);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -252,7 +279,10 @@ static void tick_setup_device(struct tick_device *td,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void tick_install_replacement(struct clock_event_device *newdev)
 {
 	struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
@@ -264,6 +294,9 @@ void tick_install_replacement(struct clock_event_device *newdev)
 		tick_oneshot_notify();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool tick_check_percpu(struct clock_event_device *curdev,
 			      struct clock_event_device *newdev, int cpu)
@@ -303,8 +336,11 @@ static bool tick_check_preferred(struct clock_event_device *curdev,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Check, if the new registered device should be used.
 =======
+=======
+>>>>>>> v3.18
  * Check whether the new device is a better fit than curdev. curdev
  * can be NULL !
  */
@@ -320,6 +356,9 @@ bool tick_check_replacement(struct clock_event_device *curdev,
 /*
  * Check, if the new registered device should be used. Called with
  * clockevents_lock held and interrupts disabled.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void tick_check_new_device(struct clock_event_device *newdev)
@@ -328,9 +367,12 @@ void tick_check_new_device(struct clock_event_device *newdev)
 	struct tick_device *td;
 	int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	raw_spin_lock_irqsave(&tick_device_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -366,8 +408,11 @@ void tick_check_new_device(struct clock_event_device *newdev)
 	if (newdev->features & CLOCK_EVT_FEAT_ONESHOT)
 		tick_oneshot_notify();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	raw_spin_unlock_irqrestore(&tick_device_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return;
@@ -378,7 +423,10 @@ out_bc:
 	 */
 	tick_install_broadcast_device(newdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_spin_unlock_irqrestore(&tick_device_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -410,9 +458,13 @@ void tick_shutdown(unsigned int *cpup)
 	struct tick_device *td = &per_cpu(tick_cpu_device, *cpup);
 	struct clock_event_device *dev = td->evtdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	raw_spin_lock_irqsave(&tick_device_lock, flags);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -428,13 +480,17 @@ void tick_shutdown(unsigned int *cpup)
 		td->evtdev = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_spin_unlock_irqrestore(&tick_device_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
 
 void tick_suspend(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tick_device *td = &__get_cpu_var(tick_cpu_device);
 	unsigned long flags;
@@ -447,16 +503,27 @@ void tick_suspend(void)
 
 	clockevents_shutdown(td->evtdev);
 >>>>>>> v3.18
+=======
+	struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
+
+	clockevents_shutdown(td->evtdev);
+>>>>>>> v3.18
 }
 
 void tick_resume(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tick_device *td = &__get_cpu_var(tick_cpu_device);
 	unsigned long flags;
 	int broadcast = tick_resume_broadcast();
 
 	raw_spin_lock_irqsave(&tick_device_lock, flags);
+=======
+	struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
+	int broadcast = tick_resume_broadcast();
+
+>>>>>>> v3.18
 =======
 	struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
 	int broadcast = tick_resume_broadcast();
@@ -471,7 +538,10 @@ void tick_resume(void)
 			tick_resume_oneshot();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_spin_unlock_irqrestore(&tick_device_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -483,6 +553,10 @@ void __init tick_init(void)
 {
 	tick_broadcast_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tick_nohz_init();
+>>>>>>> v3.18
 =======
 	tick_nohz_init();
 >>>>>>> v3.18

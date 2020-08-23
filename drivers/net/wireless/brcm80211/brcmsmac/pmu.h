@@ -21,8 +21,13 @@
 #include "types.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u16 si_pmu_fast_pwrup_delay(struct si_pub *sih);
 extern u32 si_pmu_measure_alpclk(struct si_pub *sih);
+=======
+u16 si_pmu_fast_pwrup_delay(struct si_pub *sih);
+u32 si_pmu_measure_alpclk(struct si_pub *sih);
+>>>>>>> v3.18
 =======
 u16 si_pmu_fast_pwrup_delay(struct si_pub *sih);
 u32 si_pmu_measure_alpclk(struct si_pub *sih);

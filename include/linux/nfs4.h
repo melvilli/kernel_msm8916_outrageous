@@ -33,7 +33,10 @@ struct nfs4_acl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define NFS4_MAXLABELLEN	2048
 
 struct nfs4_label {
@@ -43,6 +46,9 @@ struct nfs4_label {
 	char	*label;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct { char data[NFS4_VERIFIER_SIZE]; } nfs4_verifier;
 
@@ -114,7 +120,10 @@ enum nfs_opnum4 {
 	OP_RECLAIM_COMPLETE = 58,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* nfs42 */
 	OP_ALLOCATE = 59,
 	OP_COPY = 60,
@@ -129,6 +138,9 @@ enum nfs_opnum4 {
 	OP_SEEK = 69,
 	OP_WRITE_SAME = 70,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OP_ILLEGAL = 10044,
 };
@@ -138,12 +150,18 @@ Needs to be updated if more operations are defined in future.*/
 
 #define FIRST_NFS4_OP	OP_ACCESS
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LAST_NFS4_OP 	OP_RECLAIM_COMPLETE
 =======
+=======
+>>>>>>> v3.18
 #define LAST_NFS4_OP 	OP_WRITE_SAME
 #define LAST_NFS40_OP	OP_RELEASE_LOCKOWNER
 #define LAST_NFS41_OP	OP_RECLAIM_COMPLETE
 #define LAST_NFS42_OP	OP_WRITE_SAME
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum nfsstat4 {
@@ -256,7 +274,10 @@ enum nfsstat4 {
 	NFS4ERR_RETURNCONFLICT	= 10086,	/* outstanding layoutreturn */
 	NFS4ERR_DELEG_REVOKED	= 10087,	/* deleg./layout revoked */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* nfs42 */
 	NFS4ERR_PARTNER_NOTSUPP	= 10088,
@@ -266,13 +287,20 @@ enum nfsstat4 {
 	NFS4ERR_WRONG_LFS = 10092,
 	NFS4ERR_BADLABEL = 10093,
 	NFS4ERR_OFFLOAD_NO_REQS = 10094,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static inline bool seqid_mutating_err(u32 err)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* See RFC 7530, section 9.1.7 */
+=======
+	/* rfc 3530 section 8.1.5: */
+>>>>>>> v3.18
 =======
 	/* rfc 3530 section 8.1.5: */
 >>>>>>> v3.18
@@ -285,7 +313,10 @@ static inline bool seqid_mutating_err(u32 err)
 	case NFS4ERR_RESOURCE:
 	case NFS4ERR_NOFILEHANDLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case NFS4ERR_MOVED:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return false;
@@ -435,6 +466,10 @@ enum lock_type4 {
 #define FATTR4_WORD2_LAYOUT_BLKSIZE     (1UL << 1)
 #define FATTR4_WORD2_MDSTHRESHOLD       (1UL << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FATTR4_WORD2_SECURITY_LABEL     (1UL << 16)
+>>>>>>> v3.18
 =======
 #define FATTR4_WORD2_SECURITY_LABEL     (1UL << 16)
 >>>>>>> v3.18
@@ -451,12 +486,15 @@ enum lock_type4 {
 #define NFS4_MINOR_VERSION 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NFS_V4_1)
 #define NFS4_MAX_MINOR_VERSION 1
 #else
 #define NFS4_MAX_MINOR_VERSION 0
 #endif /* CONFIG_NFS_V4_1 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NFS4_DEBUG 1
@@ -502,6 +540,10 @@ enum {
 	NFSPROC4_CLNT_RELEASE_LOCKOWNER,
 	NFSPROC4_CLNT_SECINFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NFSPROC4_CLNT_FSID_PRESENT,
+>>>>>>> v3.18
 =======
 	NFSPROC4_CLNT_FSID_PRESENT,
 >>>>>>> v3.18
@@ -524,6 +566,12 @@ enum {
 	NFSPROC4_CLNT_BIND_CONN_TO_SESSION,
 	NFSPROC4_CLNT_DESTROY_CLIENTID,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* nfs42 */
+	NFSPROC4_CLNT_SEEK,
+>>>>>>> v3.18
 =======
 
 	/* nfs42 */
@@ -593,11 +641,17 @@ struct nfs4_deviceid {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum data_content4 {
 	NFS4_CONTENT_DATA		= 0,
 	NFS4_CONTENT_HOLE		= 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

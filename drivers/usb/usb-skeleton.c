@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -329,9 +332,14 @@ retry:
 		if (rv < 0)
 			goto exit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (!(file->f_flags & O_NONBLOCK))
 			goto retry;
 		rv = -EAGAIN;
+=======
+		else
+			goto retry;
+>>>>>>> v3.18
 =======
 		else
 			goto retry;

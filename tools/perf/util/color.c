@@ -2,6 +2,10 @@
 #include "cache.h"
 #include "color.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <math.h>
+>>>>>>> v3.18
 =======
 #include <math.h>
 >>>>>>> v3.18
@@ -303,15 +307,21 @@ const char *get_percent_color(double percent)
 	 * normal:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (percent >= MIN_RED)
 		color = PERF_COLOR_RED;
 	else {
 		if (percent > MIN_GREEN)
 =======
+=======
+>>>>>>> v3.18
 	if (fabs(percent) >= MIN_RED)
 		color = PERF_COLOR_RED;
 	else {
 		if (fabs(percent) > MIN_GREEN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			color = PERF_COLOR_GREEN;
 	}
@@ -330,18 +340,25 @@ int percent_color_fprintf(FILE *fp, const char *fmt, double percent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int value_color_snprintf(char *bf, size_t size, const char *fmt, double value)
 {
 	const char *color = get_percent_color(value);
 	return color_snprintf(bf, size, color, fmt, value);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int percent_color_snprintf(char *bf, size_t size, const char *fmt, ...)
 {
 	va_list args;
 	double percent;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const char *color;
 
@@ -351,6 +368,8 @@ int percent_color_snprintf(char *bf, size_t size, const char *fmt, ...)
 	color = get_percent_color(percent);
 	return color_snprintf(bf, size, color, fmt, percent);
 =======
+=======
+>>>>>>> v3.18
 
 	va_start(args, fmt);
 	percent = va_arg(args, double);
@@ -372,5 +391,8 @@ int percent_color_len_snprintf(char *bf, size_t size, const char *fmt, ...)
 
 	color = get_percent_color(percent);
 	return color_snprintf(bf, size, color, fmt, len, percent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

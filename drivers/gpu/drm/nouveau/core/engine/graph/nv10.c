@@ -25,7 +25,10 @@
 #include <core/client.h>
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/handle.h>
@@ -949,7 +952,12 @@ nv10_graph_load_context(struct nv10_graph_chan *chan, int chid)
 		nv_wr32(priv, nv10_graph_ctx_regs[i], chan->nv10[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(priv)->chipset >= 0x17) {
+=======
+	if (nv_device(priv)->card_type >= NV_11 &&
+	    nv_device(priv)->chipset >= 0x17) {
+>>>>>>> v3.18
 =======
 	if (nv_device(priv)->card_type >= NV_11 &&
 	    nv_device(priv)->chipset >= 0x17) {
@@ -979,7 +987,12 @@ nv10_graph_unload_context(struct nv10_graph_chan *chan)
 		chan->nv10[i] = nv_rd32(priv, nv10_graph_ctx_regs[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(priv)->chipset >= 0x17) {
+=======
+	if (nv_device(priv)->card_type >= NV_11 &&
+	    nv_device(priv)->chipset >= 0x17) {
+>>>>>>> v3.18
 =======
 	if (nv_device(priv)->card_type >= NV_11 &&
 	    nv_device(priv)->chipset >= 0x17) {
@@ -1066,7 +1079,12 @@ nv10_graph_context_ctor(struct nouveau_object *parent,
 	NV_WRITE_CTX(0x00400e30, 0x00080008);
 	NV_WRITE_CTX(0x00400e34, 0x00080008);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(priv)->chipset >= 0x17) {
+=======
+	if (nv_device(priv)->card_type >= NV_11 &&
+	    nv_device(priv)->chipset >= 0x17) {
+>>>>>>> v3.18
 =======
 	if (nv_device(priv)->card_type >= NV_11 &&
 	    nv_device(priv)->chipset >= 0x17) {
@@ -1250,7 +1268,11 @@ nv10_graph_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	else
 	if (nv_device(priv)->chipset <  0x17 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nv_device(priv)->chipset == 0x1a)
+=======
+	    nv_device(priv)->card_type < NV_11)
+>>>>>>> v3.18
 =======
 	    nv_device(priv)->card_type < NV_11)
 >>>>>>> v3.18
@@ -1293,7 +1315,12 @@ nv10_graph_init(struct nouveau_object *object)
 	nv_wr32(priv, NV04_PGRAPH_DEBUG_3, 0x55DE0830 | (1 << 29) | (1 << 31));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(priv)->chipset >= 0x17) {
+=======
+	if (nv_device(priv)->card_type >= NV_11 &&
+	    nv_device(priv)->chipset >= 0x17) {
+>>>>>>> v3.18
 =======
 	if (nv_device(priv)->card_type >= NV_11 &&
 	    nv_device(priv)->chipset >= 0x17) {

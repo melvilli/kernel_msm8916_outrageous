@@ -18,6 +18,10 @@
 #include <mach/regs-clock.h>
 #include <plat/gpio-cfg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18

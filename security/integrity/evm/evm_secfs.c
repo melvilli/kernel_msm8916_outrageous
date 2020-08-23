@@ -14,6 +14,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -85,9 +90,15 @@ static ssize_t evm_write_key(struct file *file, const char __user *buf,
 	if (!error) {
 		evm_initialized = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("EVM: initialized\n");
 	} else
 		pr_err("EVM: initialization failed\n");
+=======
+		pr_info("initialized\n");
+	} else
+		pr_err("initialization failed\n");
+>>>>>>> v3.18
 =======
 		pr_info("initialized\n");
 	} else

@@ -18,6 +18,10 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -45,6 +49,12 @@ int __init omap_init_opp_table(struct omap_opp_def *opp_def,
 	int i, r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_have_populated_dt())
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (of_have_populated_dt())
 		return -EINVAL;

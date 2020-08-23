@@ -23,12 +23,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/object.h>
 #include <core/client.h>
 #include <core/class.h>
 
 #include <engine/fifo.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -51,7 +54,11 @@ nv84_fence_emit32(struct nouveau_channel *chan, u64 virtual, u32 sequence)
 	if (ret == 0) {
 		BEGIN_NV04(chan, 0, NV11_SUBCHAN_DMA_SEMAPHORE, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OUT_RING  (chan, chan->vram);
+=======
+		OUT_RING  (chan, chan->vram.handle);
+>>>>>>> v3.18
 =======
 		OUT_RING  (chan, chan->vram.handle);
 >>>>>>> v3.18
@@ -73,7 +80,11 @@ nv84_fence_sync32(struct nouveau_channel *chan, u64 virtual, u32 sequence)
 	if (ret == 0) {
 		BEGIN_NV04(chan, 0, NV11_SUBCHAN_DMA_SEMAPHORE, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OUT_RING  (chan, chan->vram);
+=======
+		OUT_RING  (chan, chan->vram.handle);
+>>>>>>> v3.18
 =======
 		OUT_RING  (chan, chan->vram.handle);
 >>>>>>> v3.18
@@ -93,8 +104,12 @@ nv84_fence_emit(struct nouveau_fence *fence)
 	struct nouveau_channel *chan = fence->channel;
 	struct nv84_fence_chan *fctx = chan->fence;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo_chan *fifo = (void *)chan->object;
 	u64 addr = fifo->chid * 16;
+=======
+	u64 addr = chan->chid * 16;
+>>>>>>> v3.18
 =======
 	u64 addr = chan->chid * 16;
 >>>>>>> v3.18
@@ -105,7 +120,11 @@ nv84_fence_emit(struct nouveau_fence *fence)
 		addr += fctx->vma.offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fctx->base.emit32(chan, addr, fence->sequence);
+=======
+	return fctx->base.emit32(chan, addr, fence->base.seqno);
+>>>>>>> v3.18
 =======
 	return fctx->base.emit32(chan, addr, fence->base.seqno);
 >>>>>>> v3.18
@@ -117,8 +136,12 @@ nv84_fence_sync(struct nouveau_fence *fence,
 {
 	struct nv84_fence_chan *fctx = chan->fence;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo_chan *fifo = (void *)prev->object;
 	u64 addr = fifo->chid * 16;
+=======
+	u64 addr = prev->chid * 16;
+>>>>>>> v3.18
 =======
 	u64 addr = prev->chid * 16;
 >>>>>>> v3.18
@@ -129,7 +152,11 @@ nv84_fence_sync(struct nouveau_fence *fence,
 		addr += fctx->vma.offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fctx->base.sync32(chan, addr, fence->sequence);
+=======
+	return fctx->base.sync32(chan, addr, fence->base.seqno);
+>>>>>>> v3.18
 =======
 	return fctx->base.sync32(chan, addr, fence->base.seqno);
 >>>>>>> v3.18
@@ -139,9 +166,14 @@ static u32
 nv84_fence_read(struct nouveau_channel *chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo_chan *fifo = (void *)chan->object;
 	struct nv84_fence_priv *priv = chan->drm->fence;
 	return nouveau_bo_rd32(priv->bo, fifo->chid * 16/4);
+=======
+	struct nv84_fence_priv *priv = chan->drm->fence;
+	return nouveau_bo_rd32(priv->bo, chan->chid * 16/4);
+>>>>>>> v3.18
 =======
 	struct nv84_fence_priv *priv = chan->drm->fence;
 	return nouveau_bo_rd32(priv->bo, chan->chid * 16/4);
@@ -162,6 +194,10 @@ nv84_fence_context_del(struct nouveau_channel *chan)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nouveau_bo_wr32(priv->bo, chan->chid * 16 / 4, fctx->base.sequence);
+>>>>>>> v3.18
 =======
 	nouveau_bo_wr32(priv->bo, chan->chid * 16 / 4, fctx->base.sequence);
 >>>>>>> v3.18
@@ -170,7 +206,11 @@ nv84_fence_context_del(struct nouveau_channel *chan)
 	nouveau_fence_context_del(&fctx->base);
 	chan->fence = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(fctx);
+=======
+	nouveau_fence_context_free(&fctx->base);
+>>>>>>> v3.18
 =======
 	nouveau_fence_context_free(&fctx->base);
 >>>>>>> v3.18
@@ -180,8 +220,12 @@ int
 nv84_fence_context_new(struct nouveau_channel *chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo_chan *fifo = (void *)chan->object;
 	struct nouveau_client *client = nouveau_client(fifo);
+=======
+	struct nouveau_cli *cli = (void *)nvif_client(&chan->device->base);
+>>>>>>> v3.18
 =======
 	struct nouveau_cli *cli = (void *)nvif_client(&chan->device->base);
 >>>>>>> v3.18
@@ -194,7 +238,11 @@ nv84_fence_context_new(struct nouveau_channel *chan)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_fence_context_new(&fctx->base);
+=======
+	nouveau_fence_context_new(chan, &fctx->base);
+>>>>>>> v3.18
 =======
 	nouveau_fence_context_new(chan, &fctx->base);
 >>>>>>> v3.18
@@ -204,16 +252,22 @@ nv84_fence_context_new(struct nouveau_channel *chan)
 	fctx->base.emit32 = nv84_fence_emit32;
 	fctx->base.sync32 = nv84_fence_sync32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = nouveau_bo_vma_add(priv->bo, client->vm, &fctx->vma);
 	if (ret == 0) {
 		ret = nouveau_bo_vma_add(priv->bo_gart, client->vm,
 =======
+=======
+>>>>>>> v3.18
 	fctx->base.sequence = nv84_fence_read(chan);
 
 	ret = nouveau_bo_vma_add(priv->bo, cli->vm, &fctx->vma);
 	if (ret == 0) {
 		ret = nouveau_bo_vma_add(priv->bo_gart, cli->vm,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&fctx->vma_gart);
 	}
@@ -222,11 +276,17 @@ nv84_fence_context_new(struct nouveau_channel *chan)
 	for (i = 0; !ret && i < chan->drm->dev->mode_config.num_crtc; i++) {
 		struct nouveau_bo *bo = nv50_display_crtc_sema(chan->drm->dev, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = nouveau_bo_vma_add(bo, client->vm, &fctx->dispc_vma[i]);
 	}
 
 	nouveau_bo_wr32(priv->bo, fifo->chid * 16/4, 0x00000000);
 
+=======
+		ret = nouveau_bo_vma_add(bo, cli->vm, &fctx->dispc_vma[i]);
+	}
+
+>>>>>>> v3.18
 =======
 		ret = nouveau_bo_vma_add(bo, cli->vm, &fctx->dispc_vma[i]);
 	}
@@ -241,6 +301,7 @@ static bool
 nv84_fence_suspend(struct nouveau_drm *drm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo *pfifo = nouveau_fifo(drm->device);
 	struct nv84_fence_priv *priv = drm->fence;
 	int i;
@@ -249,12 +310,17 @@ nv84_fence_suspend(struct nouveau_drm *drm)
 	if (priv->suspend) {
 		for (i = 0; i <= pfifo->max; i++)
 =======
+=======
+>>>>>>> v3.18
 	struct nv84_fence_priv *priv = drm->fence;
 	int i;
 
 	priv->suspend = vmalloc(priv->base.contexts * sizeof(u32));
 	if (priv->suspend) {
 		for (i = 0; i < priv->base.contexts; i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			priv->suspend[i] = nouveau_bo_rd32(priv->bo, i*4);
 	}
@@ -266,7 +332,10 @@ static void
 nv84_fence_resume(struct nouveau_drm *drm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo *pfifo = nouveau_fifo(drm->device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct nv84_fence_priv *priv = drm->fence;
@@ -274,7 +343,11 @@ nv84_fence_resume(struct nouveau_drm *drm)
 
 	if (priv->suspend) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i <= pfifo->max; i++)
+=======
+		for (i = 0; i < priv->base.contexts; i++)
+>>>>>>> v3.18
 =======
 		for (i = 0; i < priv->base.contexts; i++)
 >>>>>>> v3.18
@@ -304,7 +377,11 @@ int
 nv84_fence_create(struct nouveau_drm *drm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo *pfifo = nouveau_fifo(drm->device);
+=======
+	struct nouveau_fifo *pfifo = nvkm_fifo(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_fifo *pfifo = nvkm_fifo(&drm->device);
 >>>>>>> v3.18
@@ -322,18 +399,24 @@ nv84_fence_create(struct nouveau_drm *drm)
 	priv->base.context_del = nv84_fence_context_del;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&priv->base.waiting);
 	priv->base.uevent = true;
 
 	ret = nouveau_bo_new(drm->dev, 16 * (pfifo->max + 1), 0,
 			     TTM_PL_FLAG_VRAM, 0, 0, NULL, &priv->bo);
 =======
+=======
+>>>>>>> v3.18
 	priv->base.contexts = pfifo->max + 1;
 	priv->base.context_base = fence_context_alloc(priv->base.contexts);
 	priv->base.uevent = true;
 
 	ret = nouveau_bo_new(drm->dev, 16 * priv->base.contexts, 0,
 			     TTM_PL_FLAG_VRAM, 0, 0, NULL, NULL, &priv->bo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret == 0) {
 		ret = nouveau_bo_pin(priv->bo, TTM_PL_FLAG_VRAM);
@@ -348,8 +431,13 @@ nv84_fence_create(struct nouveau_drm *drm)
 
 	if (ret == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = nouveau_bo_new(drm->dev, 16 * (pfifo->max + 1), 0,
 				     TTM_PL_FLAG_TT, 0, 0, NULL,
+=======
+		ret = nouveau_bo_new(drm->dev, 16 * priv->base.contexts, 0,
+				     TTM_PL_FLAG_TT, 0, 0, NULL, NULL,
+>>>>>>> v3.18
 =======
 		ret = nouveau_bo_new(drm->dev, 16 * priv->base.contexts, 0,
 				     TTM_PL_FLAG_TT, 0, 0, NULL, NULL,

@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -45,6 +48,10 @@ See the notes in the ni_atmio.o driver.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -59,6 +66,7 @@ See the notes in the ni_atmio.o driver.
 #include <pcmcia/ds.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef DEBUG
 
 #define ATMIO 1
@@ -66,10 +74,13 @@ See the notes in the ni_atmio.o driver.
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  *  AT specific setup
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define NI_SIZE 0x20
 
@@ -102,6 +113,8 @@ static const struct ni_board_struct ni_boards[] = {
 		.n_adchan	= 16,
 		.adbits		= 12,
 =======
+=======
+>>>>>>> v3.18
 static const struct ni_board_struct ni_boards[] = {
 	{
 		.name		= "DAQCard-ai-16xe-50",
@@ -126,11 +139,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.device_id	= 0x02c4,
 		.n_adchan	= 16,
 		.ai_maxdata	= 0x0fff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ai_fifo_depth	= 8192,
 		.gainlkup	= ai_gain_16,
 		.ai_speed	= 2000,
 		.n_aochan	= 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 2048,
@@ -145,6 +162,8 @@ static const struct ni_board_struct ni_boards[] = {
 		.n_adchan	= 16,
 		.adbits		= 12,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_bipolar10,
@@ -156,11 +175,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.device_id	= 0x075e,
 		.n_adchan	= 16,
 		.ai_maxdata	= 0x0fff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ai_fifo_depth	= 1024,
 		.gainlkup	= ai_gain_4,
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.aobits		= 12,
 		.ao_range_table	= &range_bipolar10,
@@ -174,6 +197,8 @@ static const struct ni_board_struct ni_boards[] = {
 		.n_adchan	= 16,
 		.adbits		= 16,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000000,
@@ -184,12 +209,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.device_id	= 0x0245,
 		.n_adchan	= 16,
 		.ai_maxdata	= 0xffff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ai_fifo_depth	= 1024,
 		.alwaysdither	= 1,
 		.gainlkup	= ai_gain_4,
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.aobits		= 16,
 		.ao_range_table	= &range_bipolar10,
@@ -200,10 +229,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000000,
 >>>>>>> v3.18
+=======
+		.ao_maxdata	= 0xffff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 1000000,
+>>>>>>> v3.18
 		.caldac		= { ad8804_debug },
 	 },
 #if 0
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.device_id	= 0x0000,	/* unknown */
 		.name		= "DAQCard-6715",
@@ -212,17 +247,23 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_671x	= 8192,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.name		= "DAQCard-6715",
 		.device_id	= 0x0000,	/* unknown */
 		.n_aochan	= 8,
 		.ao_maxdata	= 0x0fff,
 		.ao_671x	= 8192,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { mb88341, mb88341 },
 	},
 #endif
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define interrupt_pin(a)	0
 
@@ -282,6 +323,8 @@ static uint16_t mio_cs_win_in(struct comedi_device *dev, int addr)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ni_mio_common.c"
@@ -348,12 +391,17 @@ static int mio_cs_auto_attach(struct comedi_device *dev,
 
 	devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->stc_writew	= mio_cs_win_out;
 	devpriv->stc_readw	= mio_cs_win_in;
 	devpriv->stc_writel	= win_out2;
 	devpriv->stc_readl	= win_in2;
 
 	return ni_E_init(dev);
+=======
+
+	return ni_E_init(dev, 0, 1);
+>>>>>>> v3.18
 =======
 
 	return ni_E_init(dev, 0, 1);

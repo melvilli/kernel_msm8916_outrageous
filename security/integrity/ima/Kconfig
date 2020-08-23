@@ -3,8 +3,11 @@
 config IMA
 	bool "Integrity Measurement Architecture(IMA)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SECURITY
 	select INTEGRITY
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select SECURITYFS
@@ -13,6 +16,10 @@ config IMA
 	select CRYPTO_MD5
 	select CRYPTO_SHA1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRYPTO_HASH_INFO
+>>>>>>> v3.18
 =======
 	select CRYPTO_HASH_INFO
 >>>>>>> v3.18
@@ -46,6 +53,7 @@ config IMA_MEASURE_PCR_IDX
 	  measurement list.  If unsure, use the default 10.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IMA_AUDIT
 	bool "Enables auditing support"
 	depends on IMA
@@ -60,6 +68,8 @@ config IMA_AUDIT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config IMA_LSM_RULES
 	bool
 	depends on IMA && AUDIT && (SECURITY_SELINUX || SECURITY_SMACK)
@@ -68,7 +78,10 @@ config IMA_LSM_RULES
 	  Disabling this option will disregard LSM based policy rules.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 choice
 	prompt "Default template"
 	default IMA_NG_TEMPLATE
@@ -132,6 +145,9 @@ config IMA_DEFAULT_HASH
 	default "sha512" if IMA_DEFAULT_HASH_SHA512
 	default "wp512" if IMA_DEFAULT_HASH_WP512
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config IMA_APPRAISE
 	bool "Appraise integrity measurements"
@@ -148,7 +164,10 @@ config IMA_APPRAISE
 	  <http://linux-ima.sourceforge.net>
 	  If unsure, say N.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config IMA_TRUSTED_KEYRING
 	bool "Require all keys on the .ima keyring be signed"
@@ -159,4 +178,7 @@ config IMA_TRUSTED_KEYRING
 	help
 	   This option requires that all keys added to the .ima
 	   keyring be signed by a key on the system trusted keyring.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

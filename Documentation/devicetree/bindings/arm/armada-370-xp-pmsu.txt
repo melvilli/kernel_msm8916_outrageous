@@ -1,6 +1,7 @@
 Power Management Service Unit(PMSU)
 -----------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Available on Marvell SOCs: Armada 370 and Armada XP
 
 Required properties:
@@ -18,6 +19,8 @@ armada-370-xp-pmsu@d0022000 {
 	reg = <0xd0022100 0x430>,
 	      <0xd0020800 0x20>;
 =======
+=======
+>>>>>>> v3.18
 Available on Marvell SOCs: Armada 370, Armada 38x and Armada XP
 
 Required properties:
@@ -35,6 +38,9 @@ Example:
 armada-370-xp-pmsu@22000 {
 	compatible = "marvell,armada-370-pmsu";
 	reg = <0x22000 0x1000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -19,8 +19,13 @@
 #include <linux/kernel.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/at24.h>
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 #include <linux/platform_data/pca953x.h>
@@ -34,6 +39,10 @@
 #include <linux/mtd/physmap.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-davinci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/gpio-davinci.h>
 >>>>>>> v3.18
@@ -44,6 +53,10 @@
 #include <linux/regulator/machine.h>
 #include <linux/regulator/tps6507x.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/fixed.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/fixed.h>
 >>>>>>> v3.18
@@ -52,6 +65,10 @@
 #include <linux/wl12xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/common.h>
+>>>>>>> v3.18
 =======
 #include <mach/common.h>
 >>>>>>> v3.18
@@ -374,6 +391,12 @@ static inline void da850_evm_setup_nor_nand(void)
 		platform_add_devices(da850_evm_devices,
 					ARRAY_SIZE(da850_evm_devices));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		if (davinci_aemif_setup(&da850_evm_nandflash_device))
+			pr_warn("%s: Cannot configure AEMIF.\n", __func__);
+>>>>>>> v3.18
 =======
 
 		if (davinci_aemif_setup(&da850_evm_nandflash_device))
@@ -770,10 +793,13 @@ static struct davinci_i2c_platform_data da850_evm_i2c_0_pdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config da850_evm_uart_config __initdata = {
 	.enabled_uarts = 0x7,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* davinci da850 evm audio machine driver */
@@ -868,7 +894,10 @@ static int da850_lcd_hw_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Fixed regulator support */
 static struct regulator_consumer_supply fixed_supplies[] = {
 	/* Baseboard 3.3V: 5V -> TPS73701DCQ -> 3.3V */
@@ -879,6 +908,9 @@ static struct regulator_consumer_supply fixed_supplies[] = {
 	REGULATOR_SUPPLY("DVDD", "1-0018"),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* TPS65070 voltage regulator support */
 
@@ -904,6 +936,10 @@ static struct regulator_consumer_supply tps65070_dcdc2_consumers[] = {
 		.supply = "dvdd3318_c",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGULATOR_SUPPLY("IOVDD", "1-0018"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("IOVDD", "1-0018"),
 >>>>>>> v3.18
@@ -979,6 +1015,10 @@ static struct regulator_init_data tps65070_regulator_data[] = {
 				REGULATOR_CHANGE_STATUS),
 			.boot_on = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.always_on = 1,
+>>>>>>> v3.18
 =======
 			.always_on = 1,
 >>>>>>> v3.18
@@ -1033,7 +1073,10 @@ static struct touchscreen_init_data tps6507x_touchscreen_data = {
 	.poll_period =  30,	/* ms between touch samples */
 	.min_pressure = 0x30,	/* minimum pressure to trigger touch */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vref = 0,		/* turn off vref when not using A/D */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.vendor = 0,		/* /sys/class/input/input?/id/vendor */
@@ -1301,6 +1344,7 @@ static struct vpif_capture_config da850_vpif_capture_config = {
 static struct adv7343_platform_data adv7343_pdata = {
 	.mode_config = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.dac_3 = 1,
 		.dac_2 = 1,
 		.dac_1 = 1,
@@ -1308,10 +1352,15 @@ static struct adv7343_platform_data adv7343_pdata = {
 	.sd_config = {
 		.sd_dac_out1 = 1,
 =======
+=======
+>>>>>>> v3.18
 		.dac = { 1, 1, 1 },
 	},
 	.sd_config = {
 		.sd_dac_out = { 1 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1502,13 +1551,19 @@ static __init void da850_evm_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = da850_register_gpio();
 	if (ret)
 		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
 
 	regulator_register_fixed(0, fixed_supplies, ARRAY_SIZE(fixed_supplies));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = pmic_tps65070_init();
 	if (ret)
@@ -1562,7 +1617,11 @@ static __init void da850_evm_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_serial_init(&da850_evm_uart_config);
+=======
+	davinci_serial_init(da8xx_serial_device);
+>>>>>>> v3.18
 =======
 	davinci_serial_init(da8xx_serial_device);
 >>>>>>> v3.18

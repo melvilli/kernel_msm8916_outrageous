@@ -19,9 +19,13 @@
 #include <linux/i2c.h>
 #include <linux/i2c-mux.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/of_i2c.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -30,6 +34,10 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -123,7 +131,11 @@ static int i2c_mux_pinctrl_parse_dt(struct i2c_mux_pinctrl *mux,
 	if (!adapter) {
 		dev_err(mux->dev, "Cannot find parent bus\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 		return -EPROBE_DEFER;
 >>>>>>> v3.18
@@ -158,7 +170,11 @@ static int i2c_mux_pinctrl_probe(struct platform_device *pdev)
 	mux->dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mux->pdata = pdev->dev.platform_data;
+=======
+	mux->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	mux->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -229,7 +245,11 @@ static int i2c_mux_pinctrl_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Parent adapter (%d) not found\n",
 			mux->pdata->parent_bus_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENODEV;
+=======
+		ret = -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 		ret = -EPROBE_DEFER;
 >>>>>>> v3.18

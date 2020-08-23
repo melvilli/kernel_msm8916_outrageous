@@ -30,6 +30,7 @@
 #include <linux/mfd/wm831x/auxadc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct wm831x_hwmon {
 	struct wm831x *wm831x;
 	struct device *classdev;
@@ -43,6 +44,8 @@ static ssize_t show_name(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const char * const input_names[] = {
 	[WM831X_AUX_SYSVDD]    = "SYSVDD",
 	[WM831X_AUX_USB]       = "USB",
@@ -54,6 +57,7 @@ static const char * const input_names[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t show_voltage(struct device *dev,
 			    struct device_attribute *attr, char *buf)
@@ -64,6 +68,8 @@ static ssize_t show_voltage(struct device *dev,
 
 	ret = wm831x_auxadc_read_uv(hwmon->wm831x, channel);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_voltage(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
@@ -72,6 +78,9 @@ static ssize_t show_voltage(struct device *dev,
 	int ret;
 
 	ret = wm831x_auxadc_read_uv(wm831x, channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -83,17 +92,23 @@ static ssize_t show_chip_temp(struct device *dev,
 			      struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm831x_hwmon *hwmon = dev_get_drvdata(dev);
 	int channel = to_sensor_dev_attr(attr)->index;
 	int ret;
 
 	ret = wm831x_auxadc_read(hwmon->wm831x, channel);
 =======
+=======
+>>>>>>> v3.18
 	struct wm831x *wm831x = dev_get_drvdata(dev);
 	int channel = to_sensor_dev_attr(attr)->index;
 	int ret;
 
 	ret = wm831x_auxadc_read(wm831x, channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -123,8 +138,11 @@ static ssize_t show_label(struct device *dev,
 				  NULL, name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 WM831X_VOLTAGE(0, WM831X_AUX_AUX1);
@@ -152,9 +170,13 @@ static SENSOR_DEVICE_ATTR(temp2_label, S_IRUGO, show_label, NULL,
 			  WM831X_AUX_BATT_TEMP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *wm831x_attributes[] = {
 	&dev_attr_name.attr,
 
+=======
+static struct attribute *wm831x_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *wm831x_attrs[] = {
 >>>>>>> v3.18
@@ -183,9 +205,13 @@ static struct attribute *wm831x_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group wm831x_attr_group = {
 	.attrs	= wm831x_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(wm831x);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(wm831x);
 >>>>>>> v3.18
@@ -193,6 +219,7 @@ ATTRIBUTE_GROUPS(wm831x);
 static int wm831x_hwmon_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct wm831x_hwmon *hwmon;
 	int ret;
@@ -232,19 +259,27 @@ static int wm831x_hwmon_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct device *hwmon_dev;
 
 	hwmon_dev = devm_hwmon_device_register_with_groups(&pdev->dev, "wm831x",
 							   wm831x,
 							   wm831x_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct platform_driver wm831x_hwmon_driver = {
 	.probe = wm831x_hwmon_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = wm831x_hwmon_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

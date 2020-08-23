@@ -17,6 +17,7 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
 #include <linux/platform_device.h>
 #include <linux/watchdog.h>
@@ -28,6 +29,8 @@
 #include <linux/of.h>
 #include <mach/bridge-regs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/watchdog.h>
 #include <linux/interrupt.h>
@@ -42,12 +45,16 @@
 
 /* Internal registers can be configured at any 1 MiB aligned address */
 #define INTERNAL_REGS_MASK		~(SZ_1M - 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Watchdog timer block registers.
  */
 #define TIMER_CTRL		0x0000
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define WDT_EN			0x0010
 #define WDT_VAL			0x0024
@@ -133,6 +140,8 @@ static unsigned int orion_wdt_get_timeleft(struct watchdog_device *wdt_dev)
 
 	return time_left;
 =======
+=======
+>>>>>>> v3.18
 #define TIMER_A370_STATUS	0x04
 
 #define WDT_MAX_CYCLE_COUNT	0xffffffff
@@ -405,6 +414,9 @@ static unsigned int orion_wdt_get_timeleft(struct watchdog_device *wdt_dev)
 {
 	struct orion_watchdog *dev = watchdog_get_drvdata(wdt_dev);
 	return readl(dev->reg + dev->data->wdt_counter_offset) / dev->clk_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -430,6 +442,7 @@ static const struct watchdog_ops orion_wdt_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct watchdog_device orion_wdt = {
 	.info = &orion_wdt_info,
 	.ops = &orion_wdt_ops,
@@ -449,6 +462,8 @@ static int orion_wdt_probe(struct platform_device *pdev)
 	clk_prepare_enable(clk);
 	wdt_tclk = clk_get_rate(clk);
 =======
+=======
+>>>>>>> v3.18
 static irqreturn_t orion_wdt_irq(int irq, void *devid)
 {
 	panic("Watchdog Timeout");
@@ -560,11 +575,15 @@ static int orion_wdt_get_regs(struct platform_device *pdev,
 {
 	struct device_node *node = pdev->dev.of_node;
 	struct resource *res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wdt_reg = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 	if (!wdt_reg)
@@ -587,6 +606,8 @@ static int orion_wdt_get_regs(struct platform_device *pdev,
 		orion_wdt.timeout, nowayout ? ", nowayout" : "");
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	dev->reg = devm_ioremap(&pdev->dev, res->start,
 				resource_size(res));
 	if (!dev->reg)
@@ -711,27 +732,37 @@ disable_clk:
 	clk_disable_unprepare(dev->clk);
 	clk_put(dev->clk);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int orion_wdt_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	watchdog_unregister_device(&orion_wdt);
 	clk_disable_unprepare(clk);
 =======
+=======
+>>>>>>> v3.18
 	struct watchdog_device *wdt_dev = platform_get_drvdata(pdev);
 	struct orion_watchdog *dev = watchdog_get_drvdata(wdt_dev);
 
 	watchdog_unregister_device(wdt_dev);
 	clk_disable_unprepare(dev->clk);
 	clk_put(dev->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static void orion_wdt_shutdown(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	orion_wdt_stop(&orion_wdt);
 }
@@ -743,10 +774,15 @@ static const struct of_device_id orion_wdt_of_match_table[] = {
 MODULE_DEVICE_TABLE(of, orion_wdt_of_match_table);
 
 =======
+=======
+>>>>>>> v3.18
 	struct watchdog_device *wdt_dev = platform_get_drvdata(pdev);
 	orion_wdt_stop(wdt_dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver orion_wdt_driver = {
 	.probe		= orion_wdt_probe,
@@ -756,7 +792,11 @@ static struct platform_driver orion_wdt_driver = {
 		.owner	= THIS_MODULE,
 		.name	= "orion_wdt",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(orion_wdt_of_match_table),
+=======
+		.of_match_table = orion_wdt_of_match_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = orion_wdt_of_match_table,
 >>>>>>> v3.18
@@ -778,6 +818,9 @@ MODULE_PARM_DESC(nowayout, "Watchdog cannot be stopped once started (default="
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:orion_wdt");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

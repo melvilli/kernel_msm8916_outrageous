@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -31,7 +35,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -1717,12 +1724,18 @@ static int rt2500usb_probe_hw_mode(struct rt2x00_dev *rt2x00dev)
 	    IEEE80211_HW_PS_NULLFUNC_STACK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Disable powersaving as default.
 	 */
 	rt2x00dev->hw->wiphy->flags &= ~WIPHY_FLAG_PS_ON_BY_DEFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SET_IEEE80211_DEV(rt2x00dev->hw, rt2x00dev->dev);
 	SET_IEEE80211_PERM_ADDR(rt2x00dev->hw,
@@ -1883,6 +1896,7 @@ static const struct rt2x00lib_ops rt2500usb_rt2x00_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct data_queue_desc rt2500usb_queue_rx = {
 	.entry_num		= 32,
 	.data_size		= DATA_FRAME_SIZE,
@@ -1911,6 +1925,8 @@ static const struct data_queue_desc rt2500usb_queue_atim = {
 	.priv_size		= sizeof(struct queue_entry_priv_usb),
 };
 =======
+=======
+>>>>>>> v3.18
 static void rt2500usb_queue_init(struct data_queue *queue)
 {
 	switch (queue->qid) {
@@ -1950,6 +1966,9 @@ static void rt2500usb_queue_init(struct data_queue *queue)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct rt2x00_ops rt2500usb_ops = {
@@ -1959,11 +1978,15 @@ static const struct rt2x00_ops rt2500usb_ops = {
 	.rf_size		= RF_SIZE,
 	.tx_queues		= NUM_TX_QUEUES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.extra_tx_headroom	= TXD_DESC_SIZE,
 	.rx			= &rt2500usb_queue_rx,
 	.tx			= &rt2500usb_queue_tx,
 	.bcn			= &rt2500usb_queue_bcn,
 	.atim			= &rt2500usb_queue_atim,
+=======
+	.queue_init		= rt2500usb_queue_init,
+>>>>>>> v3.18
 =======
 	.queue_init		= rt2500usb_queue_init,
 >>>>>>> v3.18

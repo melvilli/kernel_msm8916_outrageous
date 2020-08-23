@@ -1,7 +1,10 @@
 obj-$(CONFIG_ASYNC_CORE) += async_tx.o
 obj-$(CONFIG_ASYNC_MEMCPY) += async_memcpy.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ASYNC_MEMSET) += async_memset.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ASYNC_XOR) += async_xor.o

@@ -49,6 +49,10 @@ static inline int reiserfs_acl_count(size_t size)
 #ifdef CONFIG_REISERFS_FS_POSIX_ACL
 struct posix_acl *reiserfs_get_acl(struct inode *inode, int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int reiserfs_set_acl(struct inode *inode, struct posix_acl *acl, int type);
+>>>>>>> v3.18
 =======
 int reiserfs_set_acl(struct inode *inode, struct posix_acl *acl, int type);
 >>>>>>> v3.18
@@ -58,8 +62,11 @@ int reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
 				 struct inode *inode);
 int reiserfs_cache_default_acl(struct inode *dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct xattr_handler reiserfs_posix_acl_default_handler;
 extern const struct xattr_handler reiserfs_posix_acl_access_handler;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -68,6 +75,10 @@ extern const struct xattr_handler reiserfs_posix_acl_access_handler;
 #define reiserfs_cache_default_acl(inode) 0
 #define reiserfs_get_acl NULL
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define reiserfs_set_acl NULL
+>>>>>>> v3.18
 =======
 #define reiserfs_set_acl NULL
 >>>>>>> v3.18

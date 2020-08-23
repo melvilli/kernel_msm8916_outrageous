@@ -25,7 +25,11 @@ point to the namespace to which it belongs.
 
 Each sysfs superblock's sysfs_super_info contains an array void
 <<<<<<< HEAD
+<<<<<<< HEAD
 *ns[KOBJ_NS_TYPES].  When a a task in a tagging namespace
+=======
+*ns[KOBJ_NS_TYPES].  When a task in a tagging namespace
+>>>>>>> v3.18
 =======
 *ns[KOBJ_NS_TYPES].  When a task in a tagging namespace
 >>>>>>> v3.18

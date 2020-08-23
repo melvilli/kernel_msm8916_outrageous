@@ -53,7 +53,11 @@ module_param_named(debug, saa_debug, int, 0644);
 MODULE_PARM_DESC(debug, "enable debug messages");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int fw_debug;
+=======
+static unsigned int fw_debug;
+>>>>>>> v3.18
 =======
 static unsigned int fw_debug;
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ module_param_array(card,  int, NULL, 0444);
 MODULE_PARM_DESC(card, "card type");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int print_histogram = 64;
+=======
+static unsigned int print_histogram = 64;
+>>>>>>> v3.18
 =======
 static unsigned int print_histogram = 64;
 >>>>>>> v3.18
@@ -89,7 +97,11 @@ module_param(crc_checking, int, 0644);
 MODULE_PARM_DESC(crc_checking, "enable crc sanity checking on buffers");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int guard_checking = 1;
+=======
+static unsigned int guard_checking = 1;
+>>>>>>> v3.18
 =======
 static unsigned int guard_checking = 1;
 >>>>>>> v3.18
@@ -1209,13 +1221,19 @@ static int saa7164_initdev(struct pci_dev *pci_dev,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = v4l2_device_register(&pci_dev->dev, &dev->v4l2_dev);
 	if (err < 0) {
 		dev_err(&pci_dev->dev, "v4l2_device_register failed\n");
 		goto fail_free;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* pci init */
 	dev->pci = pci_dev;
@@ -1248,7 +1266,11 @@ static int saa7164_initdev(struct pci_dev *pci_dev,
 
 	err = request_irq(pci_dev->irq, saa7164_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_SHARED | IRQF_DISABLED, dev->name, dev);
+=======
+		IRQF_SHARED, dev->name, dev);
+>>>>>>> v3.18
 =======
 		IRQF_SHARED, dev->name, dev);
 >>>>>>> v3.18
@@ -1395,6 +1417,10 @@ fail_irq:
 	saa7164_dev_unregister(dev);
 fail_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_device_unregister(&dev->v4l2_dev);
+>>>>>>> v3.18
 =======
 	v4l2_device_unregister(&dev->v4l2_dev);
 >>>>>>> v3.18
@@ -1464,7 +1490,10 @@ static void saa7164_finidev(struct pci_dev *pci_dev)
 	/* unregister stuff */
 	free_irq(pci_dev->irq, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1474,6 +1503,10 @@ static void saa7164_finidev(struct pci_dev *pci_dev)
 
 	saa7164_dev_unregister(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_device_unregister(&dev->v4l2_dev);
+>>>>>>> v3.18
 =======
 	v4l2_device_unregister(&dev->v4l2_dev);
 >>>>>>> v3.18

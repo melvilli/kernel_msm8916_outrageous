@@ -90,6 +90,10 @@ extern int link_file(const char *from, const char *to);
 extern int hostfs_do_readlink(char *file, char *buf, int size);
 extern int rename_file(char *from, char *to);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int rename2_file(char *from, char *to, unsigned int flags);
+>>>>>>> v3.18
 =======
 extern int rename2_file(char *from, char *to, unsigned int flags);
 >>>>>>> v3.18

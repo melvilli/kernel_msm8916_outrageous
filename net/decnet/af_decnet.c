@@ -128,6 +128,10 @@ Version 0.0.6    2.1.110   07-aug-98   Eduardo Marcelo Serrat
 #include <linux/init.h>
 #include <linux/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jiffies.h>
+>>>>>>> v3.18
 =======
 #include <linux/jiffies.h>
 >>>>>>> v3.18
@@ -486,7 +490,11 @@ static struct sock *dn_alloc_sock(struct net *net, struct socket *sock, gfp_t gf
 	sk->sk_backlog_rcv = dn_nsp_backlog_rcv;
 	sk->sk_destruct    = dn_destruct;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_no_check    = 1;
+=======
+	sk->sk_no_check_tx = 1;
+>>>>>>> v3.18
 =======
 	sk->sk_no_check_tx = 1;
 >>>>>>> v3.18
@@ -607,7 +615,11 @@ int dn_destroy_timer(struct sock *sk)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((jiffies - scp->stamp) >= (HZ * decnet_time_wait)) {
+=======
+	if (time_after_eq(jiffies, scp->stamp + HZ * decnet_time_wait)) {
+>>>>>>> v3.18
 =======
 	if (time_after_eq(jiffies, scp->stamp + HZ * decnet_time_wait)) {
 >>>>>>> v3.18
@@ -690,9 +702,12 @@ static int dn_create(struct net *net, struct socket *sock, int protocol,
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (protocol < 0 || protocol > SK_PROTOCOL_MAX)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!net_eq(net, &init_net))
@@ -1827,6 +1842,10 @@ out:
 
 	if ((rv >= 0) && msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__sockaddr_check_size(sizeof(struct sockaddr_dn));
+>>>>>>> v3.18
 =======
 		__sockaddr_check_size(sizeof(struct sockaddr_dn));
 >>>>>>> v3.18
@@ -1937,7 +1956,11 @@ static int dn_sendmsg(struct kiocb *iocb, struct socket *sock,
 	size_t sent = 0;
 	int addr_len = msg->msg_namelen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_dn *addr = (struct sockaddr_dn *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_dn *, addr, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_dn *, addr, msg->msg_name);
 >>>>>>> v3.18
@@ -2105,9 +2128,15 @@ out_err:
 
 static int dn_device_event(struct notifier_block *this, unsigned long event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void *ptr)
 {
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+			   void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			   void *ptr)
 {
@@ -2136,8 +2165,11 @@ static struct notifier_block dn_dev_notifier = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dn_route_rcv(struct sk_buff *, struct net_device *, struct packet_type *, struct net_device *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct packet_type dn_dix_packet_type __read_mostly = {
@@ -2388,9 +2420,12 @@ static const struct proto_ops dn_proto_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dn_register_sysctl(void);
 void dn_unregister_sysctl(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("The Linux DECnet Network Protocol");

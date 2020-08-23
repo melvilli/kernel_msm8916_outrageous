@@ -1,6 +1,10 @@
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005 - 2014 Emulex
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #include <linux/ctype.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/aer.h>
+>>>>>>> v3.18
 =======
 #include <linux/aer.h>
 >>>>>>> v3.18
@@ -43,9 +51,14 @@
 #include <scsi/scsi_transport_iscsi.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "be.h"
 #define DRV_NAME		"be2iscsi"
 #define BUILD_STR		"10.0.467.0"
+=======
+#define DRV_NAME		"be2iscsi"
+#define BUILD_STR		"10.4.114.0"
+>>>>>>> v3.18
 =======
 #define DRV_NAME		"be2iscsi"
 #define BUILD_STR		"10.4.114.0"
@@ -80,7 +93,10 @@
 #define MAX_CPUS		64
 #define BEISCSI_MAX_NUM_CPUS	7
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OC_SKH_MAX_NUM_CPUS	31
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -89,8 +105,14 @@
 #define BEISCSI_SGLIST_ELEMENTS	30
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BEISCSI_CMD_PER_LUN	128	/* scsi_host->cmd_per_lun */
 #define BEISCSI_MAX_SECTORS	2048	/* scsi_host->max_sectors */
+=======
+#define BEISCSI_CMD_PER_LUN	128 /* scsi_host->cmd_per_lun */
+#define BEISCSI_MAX_SECTORS	1024 /* scsi_host->max_sectors */
+#define BEISCSI_TEMPLATE_HDR_PER_CXN_SIZE 128 /* Template size per cxn */
+>>>>>>> v3.18
 =======
 #define BEISCSI_CMD_PER_LUN	128 /* scsi_host->cmd_per_lun */
 #define BEISCSI_MAX_SECTORS	1024 /* scsi_host->max_sectors */
@@ -120,9 +142,12 @@
 #define INVALID_SESS_HANDLE	0xFFFFFFFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BE_ADAPTER_UP		0x00000000
 #define BE_ADAPTER_LINK_DOWN	0x00000001
 =======
+=======
+>>>>>>> v3.18
 /**
  * Adapter States
  **/
@@ -135,6 +160,9 @@
 
 #define BEISCSI_CLEAN_UNLOAD	0x01
 #define BEISCSI_EEH_UNLOAD	0x02
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * hardware needs the async PDU buffers to be posted in multiples of 8
@@ -142,7 +170,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HWI_GET_ASYNC_PDU_CTX(phwi)	(phwi->phwi_ctxt->pasync_ctx)
+=======
+#define HWI_GET_ASYNC_PDU_CTX(phwi, ulp_num)	\
+	(phwi->phwi_ctxt->pasync_ctx[ulp_num])
+>>>>>>> v3.18
 =======
 #define HWI_GET_ASYNC_PDU_CTX(phwi, ulp_num)	\
 	(phwi->phwi_ctxt->pasync_ctx[ulp_num])
@@ -173,7 +206,11 @@
 /********* Event Q door bell *************/
 #define DB_EQ_OFFSET			DB_CQ_OFFSET
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DB_EQ_RING_ID_MASK		0x1FF	/* bits 0 - 8 */
+=======
+#define DB_EQ_RING_ID_LOW_MASK		0x1FF	/* bits 0 - 8 */
+>>>>>>> v3.18
 =======
 #define DB_EQ_RING_ID_LOW_MASK		0x1FF	/* bits 0 - 8 */
 >>>>>>> v3.18
@@ -182,11 +219,17 @@
 /* Must be 1 */
 #define DB_EQ_EVNT_SHIFT		(10)	/* bit 10 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Higher Order EQ_ID bit */
 #define DB_EQ_RING_ID_HIGH_MASK	0x1F /* bits 11 - 15 */
 #define DB_EQ_HIGH_SET_SHIFT	11
 #define DB_EQ_HIGH_FEILD_SHIFT	9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Number of event entries processed */
 #define DB_EQ_NUM_POPPED_SHIFT		(16)	/* bits 16 - 28 */
@@ -196,14 +239,20 @@
 /********* Compl Q door bell *************/
 #define DB_CQ_OFFSET			0x120
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DB_CQ_RING_ID_MASK		0x3FF	/* bits 0 - 9 */
 =======
+=======
+>>>>>>> v3.18
 #define DB_CQ_RING_ID_LOW_MASK		0x3FF	/* bits 0 - 9 */
 /* Higher Order CQ_ID bit */
 #define DB_CQ_RING_ID_HIGH_MASK	0x1F /* bits 11 - 15 */
 #define DB_CQ_HIGH_SET_SHIFT	11
 #define DB_CQ_HIGH_FEILD_SHIFT	10
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Number of event entries processed */
 #define DB_CQ_NUM_POPPED_SHIFT		(16)	/* bits 16 - 28 */
@@ -212,15 +261,21 @@
 
 #define GET_HWI_CONTROLLER_WS(pc)	(pc->phwi_ctrlr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HWI_GET_DEF_BUFQ_ID(pc) (((struct hwi_controller *)\
 		(GET_HWI_CONTROLLER_WS(pc)))->default_pdu_data.id)
 #define HWI_GET_DEF_HDRQ_ID(pc) (((struct hwi_controller *)\
 		(GET_HWI_CONTROLLER_WS(pc)))->default_pdu_hdr.id)
 =======
+=======
+>>>>>>> v3.18
 #define HWI_GET_DEF_BUFQ_ID(pc, ulp_num) (((struct hwi_controller *)\
 		(GET_HWI_CONTROLLER_WS(pc)))->default_pdu_data[ulp_num].id)
 #define HWI_GET_DEF_HDRQ_ID(pc, ulp_num) (((struct hwi_controller *)\
 		(GET_HWI_CONTROLLER_WS(pc)))->default_pdu_hdr[ulp_num].id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PAGES_REQUIRED(x) \
@@ -229,6 +284,12 @@
 #define BEISCSI_MSI_NAME 20 /* size of msi_name string */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MEM_DESCR_OFFSET 8
+#define BEISCSI_DEFQ_HDR 1
+#define BEISCSI_DEFQ_DATA 0
+>>>>>>> v3.18
 =======
 #define MEM_DESCR_OFFSET 8
 #define BEISCSI_DEFQ_HDR 1
@@ -241,6 +302,7 @@ enum be_mem_enum {
 	HWI_MEM_SGLH,
 	HWI_MEM_SGE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HWI_MEM_ASYNC_HEADER_BUF,	/* 5 */
 	HWI_MEM_ASYNC_DATA_BUF,
 	HWI_MEM_ASYNC_HEADER_RING,
@@ -249,6 +311,8 @@ enum be_mem_enum {
 	HWI_MEM_ASYNC_DATA_HANDLE,	/* 10 */
 	HWI_MEM_ASYNC_PDU_CONTEXT,
 =======
+=======
+>>>>>>> v3.18
 	HWI_MEM_TEMPLATE_HDR_ULP0,
 	HWI_MEM_ASYNC_HEADER_BUF_ULP0,	/* 6 */
 	HWI_MEM_ASYNC_DATA_BUF_ULP0,
@@ -265,6 +329,9 @@ enum be_mem_enum {
 	HWI_MEM_ASYNC_HEADER_HANDLE_ULP1,
 	HWI_MEM_ASYNC_DATA_HANDLE_ULP1,	/* 19 */
 	HWI_MEM_ASYNC_PDU_CONTEXT_ULP1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ISCSI_MEM_GLOBAL_HEADER,
 	SE_MEM_MAX
@@ -361,10 +428,13 @@ struct invalidate_command_table {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define chip_be2(phba)      (phba->generation == BE_GEN2)
 #define chip_be3_r(phba)    (phba->generation == BE_GEN3)
 #define is_chip_be2_be3r(phba) (chip_be3_r(phba) || (chip_be2(phba)))
 =======
+=======
+>>>>>>> v3.18
 #define BEISCSI_GET_ULP_FROM_CRI(phwi_ctrlr, cri) \
 	(phwi_ctrlr->wrb_context[cri].ulp_num)
 struct hwi_wrb_context {
@@ -408,6 +478,9 @@ struct ulp_cid_info {
 #define BEISCSI_ULP1_AVLBL_CID(phba) \
 	BEISCSI_ULP_AVLBL_CID(phba, BEISCSI_ULP1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct beiscsi_hba {
 	struct hba_parameters params;
@@ -444,10 +517,15 @@ struct beiscsi_hba {
 	spinlock_t mgmt_sgl_lock;
 	spinlock_t isr_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int age;
 	unsigned short avlbl_cids;
 	unsigned short cid_alloc;
 	unsigned short cid_free;
+=======
+	spinlock_t async_pdu_lock;
+	unsigned int age;
+>>>>>>> v3.18
 =======
 	spinlock_t async_pdu_lock;
 	unsigned int age;
@@ -459,7 +537,11 @@ struct beiscsi_hba {
 #define BE_GET_CRI_FROM_CID(cid) (phba->cid_to_cri_map[cid])
 	unsigned short cid_to_cri_map[BE_MAX_SESSION];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short *cid_array;
+=======
+	struct ulp_cid_info *cid_array_info[BEISCSI_ULP_COUNT];
+>>>>>>> v3.18
 =======
 	struct ulp_cid_info *cid_array_info[BEISCSI_ULP_COUNT];
 >>>>>>> v3.18
@@ -474,6 +556,7 @@ struct beiscsi_hba {
 		 * group together since they are used most frequently
 		 * for cid to cri conversion
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		unsigned int iscsi_cid_start;
 		unsigned int phys_port;
@@ -490,6 +573,8 @@ struct beiscsi_hba {
 		unsigned short iscsi_features;
 		spinlock_t cid_lock;
 =======
+=======
+>>>>>>> v3.18
 		unsigned int phys_port;
 		unsigned int eqid_count;
 		unsigned int cqid_count;
@@ -505,6 +590,9 @@ struct beiscsi_hba {
 		unsigned short iscsi_features;
 		uint16_t dual_ulp_aware;
 		unsigned long ulp_supported;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} fw_config;
 
@@ -514,6 +602,10 @@ struct beiscsi_hba {
 	struct delayed_work beiscsi_hw_check_task;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool mac_addr_set;
+>>>>>>> v3.18
 =======
 	bool mac_addr_set;
 >>>>>>> v3.18
@@ -528,6 +620,10 @@ struct beiscsi_hba {
 	struct invalidate_command_table inv_tbl[128];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct be_aic_obj aic_obj[MAX_CPUS];
+>>>>>>> v3.18
 =======
 	struct be_aic_obj aic_obj[MAX_CPUS];
 >>>>>>> v3.18
@@ -550,6 +646,10 @@ struct beiscsi_conn {
 	struct beiscsi_hba *phba;
 	u32 exp_statsn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 doorbell_offset;
+>>>>>>> v3.18
 =======
 	u32 doorbell_offset;
 >>>>>>> v3.18
@@ -654,7 +754,11 @@ struct amap_iscsi_sge {
 
 struct beiscsi_offload_params {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 dw[5];
+=======
+	u32 dw[6];
+>>>>>>> v3.18
 =======
 	u32 dw[6];
 >>>>>>> v3.18
@@ -688,6 +792,10 @@ struct amap_beiscsi_offload_params {
 	u8 pad[8];
 	u8 exp_statsn[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 max_recv_data_segment_length[32];
+>>>>>>> v3.18
 =======
 	u8 max_recv_data_segment_length[32];
 >>>>>>> v3.18
@@ -755,7 +863,12 @@ struct hwi_async_pdu_context {
 	unsigned int buffer_size;
 	unsigned int num_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define BE_GET_ASYNC_CRI_FROM_CID(cid) (pasync_ctx->cid_to_async_cri_map[cid])
+	unsigned short cid_to_async_cri_map[BE_MAX_SESSION];
+>>>>>>> v3.18
 =======
 #define BE_GET_ASYNC_CRI_FROM_CID(cid) (pasync_ctx->cid_to_async_cri_map[cid])
 	unsigned short cid_to_async_cri_map[BE_MAX_SESSION];
@@ -954,13 +1067,19 @@ void beiscsi_free_mgmt_task_handles(struct beiscsi_conn *beiscsi_conn,
 				     struct iscsi_task *task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void hwi_ring_cq_db(struct beiscsi_hba *phba,
 		     unsigned int id, unsigned int num_processed,
 		     unsigned char rearm, unsigned char event);
 
 unsigned int beiscsi_process_cq(struct be_eq_obj *pbe_eq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool beiscsi_error(struct beiscsi_hba *phba)
 {
@@ -1087,6 +1206,7 @@ struct amap_iscsi_target_context_update_wrb_v2 {
 	u8 rsvd3[8]; /* DOWRD 3 */
 	u8 max_r2t[16]; /* DWORD 4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rsvd4[10];   /* DWORD 4 */
 	u8 hde;         /* DWORD 4 */
 	u8 dde;         /* DWORD 4 */
@@ -1112,6 +1232,8 @@ struct amap_iscsi_target_context_update_wrb_v2 {
 	u8 rsvd14[32]; /* DWORD 14 */
 	u8 rsvd15[32]; /* DWORD 15 */
 =======
+=======
+>>>>>>> v3.18
 	u8 rsvd4;       /* DWORD 4 */
 	u8 hde;         /* DWORD 4 */
 	u8 dde;         /* DWORD 4 */
@@ -1138,6 +1260,9 @@ struct amap_iscsi_target_context_update_wrb_v2 {
 	u8 rsvd15[32]; /* DWORD 13 */
 	u8 rsvd16[32]; /* DWORD 14 */
 	u8 rsvd17[32]; /* DWORD 15 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -1150,11 +1275,17 @@ struct be_ring {
 	u32 pidx;		/* producer index -- not used by most rings */
 	u32 item_size;		/* size in bytes of one object */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 ulp_num;	/* ULP to which CID binded */
 	u16 register_set;
 	u16 doorbell_format;
 	u32 doorbell_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	void *va;		/* The virtual address of the ring.  This
@@ -1163,6 +1294,7 @@ struct be_ring {
 				 */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct hwi_wrb_context {
 	struct list_head wrb_handle_list;
@@ -1178,6 +1310,8 @@ struct hwi_wrb_context {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct hwi_controller {
 	struct list_head io_sgl_list;
 	struct list_head eh_sgl_list;
@@ -1187,8 +1321,13 @@ struct hwi_controller {
 	struct hwi_wrb_context *wrb_context;
 	struct mcc_wrb *pmcc_wrb_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_ring default_pdu_hdr;
 	struct be_ring default_pdu_data;
+=======
+	struct be_ring default_pdu_hdr[BEISCSI_ULP_COUNT];
+	struct be_ring default_pdu_data[BEISCSI_ULP_COUNT];
+>>>>>>> v3.18
 =======
 	struct be_ring default_pdu_hdr[BEISCSI_ULP_COUNT];
 	struct be_ring default_pdu_data[BEISCSI_ULP_COUNT];
@@ -1224,16 +1363,22 @@ struct hwi_context_memory {
 	struct be_queue_info be_cq[MAX_CPUS - 1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_queue_info be_def_hdrq;
 	struct be_queue_info be_def_dataq;
 
 	struct be_queue_info *be_wrbq;
 	struct hwi_async_pdu_context *pasync_ctx;
 =======
+=======
+>>>>>>> v3.18
 	struct be_queue_info *be_wrbq;
 	struct be_queue_info be_def_hdrq[BEISCSI_ULP_COUNT];
 	struct be_queue_info be_def_dataq[BEISCSI_ULP_COUNT];
 	struct hwi_async_pdu_context *pasync_ctx[BEISCSI_ULP_COUNT];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1245,6 +1390,10 @@ struct hwi_context_memory {
 #define BEISCSI_LOG_IO		0x0010	/* IO Code Path */
 #define BEISCSI_LOG_CONFIG	0x0020	/* CONFIG Code Path */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BEISCSI_LOG_ISCSI	0x0040	/* SCSI/iSCSI Protocol related Logs */
+>>>>>>> v3.18
 =======
 #define BEISCSI_LOG_ISCSI	0x0040	/* SCSI/iSCSI Protocol related Logs */
 >>>>>>> v3.18

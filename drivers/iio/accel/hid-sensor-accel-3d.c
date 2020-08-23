@@ -23,6 +23,10 @@
 #include <linux/irq.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -35,10 +39,13 @@
 #include "../common/hid-sensors/hid-sensor-trigger.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*Format: HID-SENSOR-usage_id_in_hex*/
 /*Usage ID from spec for Accelerometer-3D: 0x200073*/
 #define DRIVER_NAME "HID-SENSOR-200073"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum accel_3d_channel {
@@ -54,11 +61,17 @@ struct accel_3d_state {
 	struct hid_sensor_hub_attribute_info accel[ACCEL_3D_CHANNEL_MAX];
 	u32 accel_val[ACCEL_3D_CHANNEL_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int scale_pre_decml;
 	int scale_post_decml;
 	int scale_precision;
 	int value_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -75,6 +88,10 @@ static const struct iio_chan_spec accel_3d_channels[] = {
 		.modified = 1,
 		.channel2 = IIO_MOD_X,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
+>>>>>>> v3.18
 =======
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 >>>>>>> v3.18
@@ -88,6 +105,10 @@ static const struct iio_chan_spec accel_3d_channels[] = {
 		.modified = 1,
 		.channel2 = IIO_MOD_Y,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
+>>>>>>> v3.18
 =======
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 >>>>>>> v3.18
@@ -101,6 +122,10 @@ static const struct iio_chan_spec accel_3d_channels[] = {
 		.modified = 1,
 		.channel2 = IIO_MOD_Z,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
+>>>>>>> v3.18
 =======
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 >>>>>>> v3.18
@@ -133,8 +158,13 @@ static int accel_3d_read_raw(struct iio_dev *indio_dev,
 	int report_id = -1;
 	u32 address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	int ret_type;
+=======
+	int ret_type;
+	s32 poll_value;
+>>>>>>> v3.18
 =======
 	int ret_type;
 	s32 poll_value;
@@ -145,7 +175,10 @@ static int accel_3d_read_raw(struct iio_dev *indio_dev,
 	switch (mask) {
 	case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		poll_value = hid_sensor_read_poll_value(
 					&accel_state->common_attributes);
 		if (poll_value < 0)
@@ -153,11 +186,15 @@ static int accel_3d_read_raw(struct iio_dev *indio_dev,
 
 		hid_sensor_power_state(&accel_state->common_attributes, true);
 		msleep_interruptible(poll_value * 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		report_id = accel_state->accel[chan->scan_index].report_id;
 		address = accel_3d_addresses[chan->scan_index];
 		if (report_id >= 0)
 			*val = sensor_hub_input_attr_get_raw_value(
+<<<<<<< HEAD
 <<<<<<< HEAD
 				accel_state->common_attributes.hsdev,
 				HID_USAGE_SENSOR_ACCEL_3D, address,
@@ -187,6 +224,8 @@ static int accel_3d_read_raw(struct iio_dev *indio_dev,
 			&accel_state->common_attributes, val, val2);
 		ret_type = IIO_VAL_INT_PLUS_MICRO;
 =======
+=======
+>>>>>>> v3.18
 					accel_state->common_attributes.hsdev,
 					HID_USAGE_SENSOR_ACCEL_3D, address,
 					report_id);
@@ -215,6 +254,9 @@ static int accel_3d_read_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_HYSTERESIS:
 		ret_type = hid_sensor_read_raw_hyst_value(
 			&accel_state->common_attributes, val, val2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -252,6 +294,7 @@ static int accel_3d_write_raw(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int accel_3d_write_raw_get_fmt(struct iio_dev *indio_dev,
 			       struct iio_chan_spec const *chan,
 			       long mask)
@@ -261,10 +304,13 @@ static int accel_3d_write_raw_get_fmt(struct iio_dev *indio_dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct iio_info accel_3d_info = {
 	.driver_module = THIS_MODULE,
 	.read_raw = &accel_3d_read_raw,
 	.write_raw = &accel_3d_write_raw,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.write_raw_get_fmt = &accel_3d_write_raw_get_fmt,
 };
@@ -275,6 +321,8 @@ static void hid_sensor_push_data(struct iio_dev *indio_dev, u8 *data, int len)
 	dev_dbg(&indio_dev->dev, "hid_sensor_push_data\n");
 	iio_push_to_buffers(indio_dev, (u8 *)data);
 =======
+=======
+>>>>>>> v3.18
 };
 
 /* Function to push data to buffer */
@@ -283,6 +331,9 @@ static void hid_sensor_push_data(struct iio_dev *indio_dev, const void *data,
 {
 	dev_dbg(&indio_dev->dev, "hid_sensor_push_data\n");
 	iio_push_to_buffers(indio_dev, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -295,16 +346,22 @@ static int accel_3d_proc_event(struct hid_sensor_hub_device *hsdev,
 	struct accel_3d_state *accel_state = iio_priv(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&indio_dev->dev, "accel_3d_proc_event [%d]\n",
 				accel_state->common_attributes.data_ready);
 	if (accel_state->common_attributes.data_ready)
 		hid_sensor_push_data(indio_dev,
 				(u8 *)accel_state->accel_val,
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&indio_dev->dev, "accel_3d_proc_event\n");
 	if (atomic_read(&accel_state->common_attributes.data_ready))
 		hid_sensor_push_data(indio_dev,
 				accel_state->accel_val,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				sizeof(accel_state->accel_val));
 
@@ -367,7 +424,10 @@ static int accel_3d_parse_report(struct platform_device *pdev,
 			st->accel[2].index, st->accel[2].report_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	st->scale_precision = hid_sensor_format_scale(
 				HID_USAGE_SENSOR_ACCEL_3D,
 				&st->accel[CHANNEL_SCAN_INDEX_X],
@@ -385,6 +445,9 @@ static int accel_3d_parse_report(struct platform_device *pdev,
 			st->common_attributes.sensitivity.report_id);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -400,17 +463,23 @@ static int hid_accel_3d_probe(struct platform_device *pdev)
 	struct iio_chan_spec *channels;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(struct accel_3d_state));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&pdev->dev,
 					  sizeof(struct accel_3d_state));
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, indio_dev);
 
@@ -424,7 +493,11 @@ static int hid_accel_3d_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to setup common attributes\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -434,9 +507,14 @@ static int hid_accel_3d_probe(struct platform_device *pdev)
 			   GFP_KERNEL);
 	if (!channels) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		dev_err(&pdev->dev, "failed to duplicate channels\n");
 		goto error_free_dev;
+=======
+		dev_err(&pdev->dev, "failed to duplicate channels\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "failed to duplicate channels\n");
 		return -ENOMEM;
@@ -464,7 +542,11 @@ static int hid_accel_3d_probe(struct platform_device *pdev)
 		goto error_free_dev_mem;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	accel_state->common_attributes.data_ready = false;
+=======
+	atomic_set(&accel_state->common_attributes.data_ready, 0);
+>>>>>>> v3.18
 =======
 	atomic_set(&accel_state->common_attributes.data_ready, 0);
 >>>>>>> v3.18
@@ -497,7 +579,11 @@ error_iio_unreg:
 	iio_device_unregister(indio_dev);
 error_remove_trigger:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hid_sensor_remove_trigger(indio_dev);
+=======
+	hid_sensor_remove_trigger(&accel_state->common_attributes);
+>>>>>>> v3.18
 =======
 	hid_sensor_remove_trigger(&accel_state->common_attributes);
 >>>>>>> v3.18
@@ -506,9 +592,12 @@ error_unreg_buffer_funcs:
 error_free_dev_mem:
 	kfree(indio_dev->channels);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -520,6 +609,7 @@ static int hid_accel_3d_remove(struct platform_device *pdev)
 	struct hid_sensor_hub_device *hsdev = pdev->dev.platform_data;
 	struct iio_dev *indio_dev = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sensor_hub_remove_callback(hsdev, HID_USAGE_SENSOR_ACCEL_3D);
 	iio_device_unregister(indio_dev);
@@ -528,6 +618,8 @@ static int hid_accel_3d_remove(struct platform_device *pdev)
 	kfree(indio_dev->channels);
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 	struct accel_3d_state *accel_state = iio_priv(indio_dev);
 
 	sensor_hub_remove_callback(hsdev, HID_USAGE_SENSOR_ACCEL_3D);
@@ -535,17 +627,23 @@ static int hid_accel_3d_remove(struct platform_device *pdev)
 	hid_sensor_remove_trigger(&accel_state->common_attributes);
 	iio_triggered_buffer_cleanup(indio_dev);
 	kfree(indio_dev->channels);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver hid_accel_3d_platform_driver = {
 	.driver = {
 		.name	= DRIVER_NAME,
 		.owner	= THIS_MODULE,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device_id hid_accel_3d_ids[] = {
 	{
 		/* Format: HID-SENSOR-usage_id_in_hex_lowercase */
@@ -559,6 +657,9 @@ static struct platform_driver hid_accel_3d_platform_driver = {
 	.id_table = hid_accel_3d_ids,
 	.driver = {
 		.name	= KBUILD_MODNAME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe		= hid_accel_3d_probe,

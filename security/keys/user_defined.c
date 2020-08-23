@@ -26,6 +26,7 @@ static int logon_vet_description(const char *desc);
  */
 struct key_type key_type_user = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "user",
 	.instantiate	= user_instantiate,
 	.update		= user_update,
@@ -35,6 +36,8 @@ struct key_type key_type_user = {
 	.describe	= user_describe,
 	.read		= user_read,
 =======
+=======
+>>>>>>> v3.18
 	.name			= "user",
 	.preparse		= user_preparse,
 	.free_preparse		= user_free_preparse,
@@ -44,6 +47,9 @@ struct key_type key_type_user = {
 	.destroy		= user_destroy,
 	.describe		= user_describe,
 	.read			= user_read,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -58,14 +64,20 @@ EXPORT_SYMBOL_GPL(key_type_user);
 struct key_type key_type_logon = {
 	.name			= "logon",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.instantiate		= user_instantiate,
 	.update			= user_update,
 	.match			= user_match,
 =======
+=======
+>>>>>>> v3.18
 	.preparse		= user_preparse,
 	.free_preparse		= user_free_preparse,
 	.instantiate		= generic_key_instantiate,
 	.update			= user_update,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.revoke			= user_revoke,
 	.destroy		= user_destroy,
@@ -75,6 +87,7 @@ struct key_type key_type_logon = {
 EXPORT_SYMBOL_GPL(key_type_logon);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * instantiate a user defined key
  */
@@ -109,6 +122,8 @@ error:
 
 EXPORT_SYMBOL_GPL(user_instantiate);
 =======
+=======
+>>>>>>> v3.18
  * Preparse a user defined key payload
  */
 int user_preparse(struct key_preparsed_payload *prep)
@@ -140,6 +155,9 @@ void user_free_preparse(struct key_preparsed_payload *prep)
 	kfree(prep->payload[0]);
 }
 EXPORT_SYMBOL_GPL(user_free_preparse);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -173,10 +191,14 @@ int user_update(struct key *key, struct key_preparsed_payload *prep)
 	if (ret == 0) {
 		/* attach the new data, displacing the old */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!test_bit(KEY_FLAG_NEGATIVE, &key->flags))
 			zap = key->payload.data;
 		else
 			zap = NULL;
+=======
+		zap = key->payload.data;
+>>>>>>> v3.18
 =======
 		zap = key->payload.data;
 >>>>>>> v3.18
@@ -195,6 +217,7 @@ EXPORT_SYMBOL_GPL(user_update);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * match users on their name
  */
 int user_match(const struct key *key, const void *description)
@@ -205,6 +228,8 @@ int user_match(const struct key *key, const void *description)
 EXPORT_SYMBOL_GPL(user_match);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * dispose of the links from a revoked keyring

@@ -199,7 +199,11 @@ fail_base2:
 			}
 		}	  
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buddha_board = ZTWO_VADDR(board);
+=======
+		buddha_board = (unsigned long)ZTWO_VADDR(board);
+>>>>>>> v3.18
 =======
 		buddha_board = (unsigned long)ZTWO_VADDR(board);
 >>>>>>> v3.18

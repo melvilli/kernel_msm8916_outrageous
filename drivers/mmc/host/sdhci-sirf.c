@@ -14,14 +14,20 @@
 #include <linux/of_gpio.h>
 #include <linux/mmc/slot-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
 #include "sdhci-pltfm.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "sdhci-pltfm.h"
 
 #define SDHCI_SIRF_8BITBUS BIT(3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sdhci_sirf_priv {
 	struct clk *clk;
@@ -32,6 +38,7 @@ static unsigned int sdhci_sirf_get_max_clk(struct sdhci_host *host)
 {
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_sirf_priv *priv = pltfm_host->priv;
 	return clk_get_rate(priv->clk);
 }
@@ -39,6 +46,8 @@ static unsigned int sdhci_sirf_get_max_clk(struct sdhci_host *host)
 static struct sdhci_ops sdhci_sirf_ops = {
 	.get_max_clock	= sdhci_sirf_get_max_clk,
 =======
+=======
+>>>>>>> v3.18
 	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
 	return clk_get_rate(priv->clk);
 }
@@ -69,6 +78,9 @@ static struct sdhci_ops sdhci_sirf_ops = {
 	.set_bus_width = sdhci_sirf_set_bus_width,
 	.reset = sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -86,6 +98,7 @@ static int sdhci_sirf_probe(struct platform_device *pdev)
 	struct sdhci_host *host;
 	struct sdhci_pltfm_host *pltfm_host;
 	struct sdhci_sirf_priv *priv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pinctrl *pinctrl;
 	int ret;
@@ -129,6 +142,8 @@ static int sdhci_sirf_probe(struct platform_device *pdev)
 
 	clk_prepare_enable(priv->clk);
 =======
+=======
+>>>>>>> v3.18
 	struct clk *clk;
 	int gpio_cd;
 	int ret;
@@ -158,6 +173,9 @@ static int sdhci_sirf_probe(struct platform_device *pdev)
 	ret = clk_prepare_enable(priv->clk);
 	if (ret)
 		goto err_clk_prepare;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sdhci_add_host(host);
@@ -170,7 +188,11 @@ static int sdhci_sirf_probe(struct platform_device *pdev)
 	 */
 	if (gpio_is_valid(priv->gpio_cd)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mmc_gpio_request_cd(host->mmc, priv->gpio_cd);
+=======
+		ret = mmc_gpio_request_cd(host->mmc, priv->gpio_cd, 0);
+>>>>>>> v3.18
 =======
 		ret = mmc_gpio_request_cd(host->mmc, priv->gpio_cd, 0);
 >>>>>>> v3.18
@@ -180,6 +202,10 @@ static int sdhci_sirf_probe(struct platform_device *pdev)
 			goto err_request_cd;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mmc_gpiod_request_cd_irq(host->mmc);
+>>>>>>> v3.18
 =======
 		mmc_gpiod_request_cd_irq(host->mmc);
 >>>>>>> v3.18
@@ -192,8 +218,13 @@ err_request_cd:
 err_sdhci_add:
 	clk_disable_unprepare(priv->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdhci_pltfm_free(pdev);
 err_sdhci_pltfm_init:
+=======
+err_clk_prepare:
+	sdhci_pltfm_free(pdev);
+>>>>>>> v3.18
 =======
 err_clk_prepare:
 	sdhci_pltfm_free(pdev);
@@ -206,7 +237,11 @@ static int sdhci_sirf_remove(struct platform_device *pdev)
 	struct sdhci_host *host = platform_get_drvdata(pdev);
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_sirf_priv *priv = pltfm_host->priv;
+=======
+	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
+>>>>>>> v3.18
 =======
 	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
 >>>>>>> v3.18
@@ -226,7 +261,11 @@ static int sdhci_sirf_suspend(struct device *dev)
 	struct sdhci_host *host = dev_get_drvdata(dev);
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_sirf_priv *priv = pltfm_host->priv;
+=======
+	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
+>>>>>>> v3.18
 =======
 	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
 >>>>>>> v3.18
@@ -246,7 +285,11 @@ static int sdhci_sirf_resume(struct device *dev)
 	struct sdhci_host *host = dev_get_drvdata(dev);
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_sirf_priv *priv = pltfm_host->priv;
+=======
+	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
+>>>>>>> v3.18
 =======
 	struct sdhci_sirf_priv *priv = sdhci_pltfm_priv(pltfm_host);
 >>>>>>> v3.18
@@ -274,7 +317,10 @@ static struct platform_driver sdhci_sirf_driver = {
 	.driver		= {
 		.name	= "sdhci-sirf",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = sdhci_sirf_of_match,

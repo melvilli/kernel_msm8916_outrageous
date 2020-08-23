@@ -148,11 +148,14 @@
 #define	PCI_MEMSPACE	0x00000001L  /* Bit 0:	Memory Space Indic. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*	PCI_BASE_2ND	32 bit	2nd Base address */
 #define	PCI_IOBASE	0xffffff00L  /* Bit 31..8:  I/O Base address */
 #define	PCI_IOSIZE	0x000000fcL  /* Bit 7..2:   I/O Size Requirements */
 #define	PCI_IOSPACE	0x00000001L  /* Bit 0:	    I/O Space Indicator */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*	PCI_SUB_VID	16 bit	Subsystem Vendor ID */

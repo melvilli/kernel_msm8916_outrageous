@@ -56,7 +56,11 @@
 #define DMAR_IQ_SHIFT	4	/* Invalidation queue head/tail shift */
 #define DMAR_IQA_REG	0x90	/* Invalidation queue addr register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DMAR_ICS_REG	0x98	/* Invalidation complete status register */
+=======
+#define DMAR_ICS_REG	0x9c	/* Invalidation complete status register */
+>>>>>>> v3.18
 =======
 #define DMAR_ICS_REG	0x9c	/* Invalidation complete status register */
 >>>>>>> v3.18
@@ -293,6 +297,10 @@ struct q_inval {
 struct ir_table {
 	struct irte *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long *bitmap;
+>>>>>>> v3.18
 =======
 	unsigned long *bitmap;
 >>>>>>> v3.18
@@ -327,6 +335,10 @@ struct intel_iommu {
 	int		msagaw; /* max sagaw of this iommu */
 	unsigned int 	irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16		segment;     /* PCI segment# */
+>>>>>>> v3.18
 =======
 	u16		segment;     /* PCI segment# */
 >>>>>>> v3.18
@@ -347,6 +359,10 @@ struct intel_iommu {
 	struct ir_table *ir_table;	/* Interrupt remapping info */
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device	*iommu_dev; /* IOMMU-sysfs device */
+>>>>>>> v3.18
 =======
 	struct device	*iommu_dev; /* IOMMU-sysfs device */
 >>>>>>> v3.18
@@ -364,8 +380,11 @@ extern struct dmar_drhd_unit * dmar_find_matched_drhd_unit(struct pci_dev *dev);
 extern int dmar_find_matched_atsr_unit(struct pci_dev *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int alloc_iommu(struct dmar_drhd_unit *drhd);
 extern void free_iommu(struct intel_iommu *iommu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int dmar_enable_qi(struct intel_iommu *iommu);
@@ -385,6 +404,11 @@ extern int qi_submit_sync(struct qi_desc *desc, struct intel_iommu *iommu);
 extern int dmar_ir_support(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct attribute_group *intel_iommu_groups[];
+
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *intel_iommu_groups[];
 

@@ -66,7 +66,11 @@ void __init opal_nvram_init(void)
 {
 	struct device_node *np;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *nbytes_p;
+=======
+	const __be32 *nbytes_p;
+>>>>>>> v3.18
 =======
 	const __be32 *nbytes_p;
 >>>>>>> v3.18
@@ -81,9 +85,15 @@ void __init opal_nvram_init(void)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvram_size = *nbytes_p;
 
 	printk(KERN_INFO "OPAL nvram setup, %u bytes\n", nvram_size);
+=======
+	nvram_size = be32_to_cpup(nbytes_p);
+
+	pr_info("OPAL nvram setup, %u bytes\n", nvram_size);
+>>>>>>> v3.18
 =======
 	nvram_size = be32_to_cpup(nbytes_p);
 

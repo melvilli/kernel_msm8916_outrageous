@@ -177,7 +177,10 @@ extern unsigned long __copy_user_zeroing(void *to, const void __user *from, unsi
 extern unsigned long __do_clear_user(void __user *to, unsigned long n);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long
 __generic_copy_to_user(void __user *to, const void *from, unsigned long n)
 {
@@ -202,6 +205,9 @@ __generic_clear_user(void __user *to, unsigned long n)
 	return n;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline long
 __strncpy_from_user(char *dst, const char __user *src, long count)
@@ -266,7 +272,11 @@ __constant_copy_from_user(void *to, const void __user *from, unsigned long n)
 		__asm_copy_from_user_24(to, from, ret);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = __copy_user_zeroing(to, from, n);
+=======
+		ret = __generic_copy_from_user(to, from, n);
+>>>>>>> v3.18
 =======
 		ret = __generic_copy_from_user(to, from, n);
 >>>>>>> v3.18
@@ -320,7 +330,11 @@ __constant_copy_to_user(void __user *to, const void *from, unsigned long n)
 		__asm_copy_to_user_24(to, from, ret);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = __copy_user(to, from, n);
+=======
+		ret = __generic_copy_to_user(to, from, n);
+>>>>>>> v3.18
 =======
 		ret = __generic_copy_to_user(to, from, n);
 >>>>>>> v3.18
@@ -356,7 +370,11 @@ __constant_clear_user(void __user *to, unsigned long n)
 		__asm_clear_24(to, ret);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = __do_clear_user(to, n);
+=======
+		ret = __generic_clear_user(to, n);
+>>>>>>> v3.18
 =======
 		ret = __generic_clear_user(to, n);
 >>>>>>> v3.18
@@ -365,6 +383,7 @@ __constant_clear_user(void __user *to, unsigned long n)
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline size_t clear_user(void __user *to, size_t n)
 {
@@ -398,6 +417,8 @@ static inline size_t copy_to_user(void __user *to, const void *from, size_t n)
 		return __copy_user(to, from, n);
 }
 =======
+=======
+>>>>>>> v3.18
 #define clear_user(to, n)			\
 (__builtin_constant_p(n) ?			\
  __constant_clear_user(to, n) :			\
@@ -412,6 +433,9 @@ static inline size_t copy_to_user(void __user *to, const void *from, size_t n)
 (__builtin_constant_p(n) ?			\
  __constant_copy_to_user(to, from, n) :		\
  __generic_copy_to_user(to, from, n))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* We let the __ versions of copy_from/to_user inline, because they're often

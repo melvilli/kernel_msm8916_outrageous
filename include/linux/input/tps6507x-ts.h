@@ -15,7 +15,10 @@
 struct touchscreen_init_data {
 	int	poll_period;	/* ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	vref;		/* non-zero to leave vref on */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u16	min_pressure;	/* min reading to be treated as a touch */

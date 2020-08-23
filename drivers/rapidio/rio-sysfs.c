@@ -28,6 +28,10 @@ field##_show(struct device *dev, struct device_attribute *attr, char *buf)			\
 	return sprintf(buf, format_string, rdev->field);		\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(field);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(field);
 >>>>>>> v3.18
@@ -59,6 +63,10 @@ static ssize_t routes_show(struct device *dev, struct device_attribute *attr, ch
 	return (str - buf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(routes);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(routes);
 >>>>>>> v3.18
@@ -72,6 +80,10 @@ static ssize_t lprev_show(struct device *dev,
 			(rdev->prev) ? rio_name(rdev->prev) : "root");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(lprev);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(lprev);
 >>>>>>> v3.18
@@ -96,6 +108,7 @@ static ssize_t lnext_show(struct device *dev,
 	return str - buf;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct device_attribute rio_dev_attrs[] = {
 	__ATTR_RO(did),
@@ -113,6 +126,8 @@ static DEVICE_ATTR(routes, S_IRUGO, routes_show, NULL);
 static DEVICE_ATTR(lnext, S_IRUGO, lnext_show, NULL);
 static DEVICE_ATTR(hopcount, S_IRUGO, hopcount_show, NULL);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(lnext);
 
 static ssize_t modalias_show(struct device *dev,
@@ -146,6 +161,9 @@ const struct attribute_group *rio_dev_groups[] = {
 	&rio_dev_group,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t
@@ -306,8 +324,11 @@ int rio_create_sysfs_dev_files(struct rio_dev *rdev)
 		err |= device_create_file(&rdev->dev, &dev_attr_lnext);
 		err |= device_create_file(&rdev->dev, &dev_attr_hopcount);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!err && rdev->rswitch->sw_sysfs)
 			err = rdev->rswitch->sw_sysfs(rdev, RIO_SW_SYSFS_CREATE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -333,8 +354,11 @@ void rio_remove_sysfs_dev_files(struct rio_dev *rdev)
 		device_remove_file(&rdev->dev, &dev_attr_lnext);
 		device_remove_file(&rdev->dev, &dev_attr_hopcount);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->rswitch->sw_sysfs)
 			rdev->rswitch->sw_sysfs(rdev, RIO_SW_SYSFS_REMOVE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -345,7 +369,10 @@ static ssize_t bus_scan_store(struct bus_type *bus, const char *buf,
 {
 	long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rio_mport *port = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rc;
@@ -361,6 +388,7 @@ static ssize_t bus_scan_store(struct bus_type *bus, const char *buf,
 	if (val < 0 || val >= RIO_MAX_MPORTS)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	port = rio_find_mport((int)val);
 
@@ -380,6 +408,9 @@ static ssize_t bus_scan_store(struct bus_type *bus, const char *buf,
 =======
 	rc = rio_mport_scan((int)val);
 >>>>>>> v3.18
+=======
+	rc = rio_mport_scan((int)val);
+>>>>>>> v3.18
 exit:
 	if (!rc)
 		rc = count;
@@ -387,11 +418,14 @@ exit:
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct bus_attribute rio_bus_attrs[] = {
 	__ATTR(scan, (S_IWUSR|S_IWGRP), NULL, bus_scan_store),
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static BUS_ATTR(scan, (S_IWUSR|S_IWGRP), NULL, bus_scan_store);
 
 static struct attribute *rio_bus_attrs[] = {
@@ -446,5 +480,8 @@ static const struct attribute_group rio_mport_group = {
 const struct attribute_group *rio_mport_groups[] = {
 	&rio_mport_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

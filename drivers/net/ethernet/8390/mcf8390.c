@@ -14,7 +14,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -43,6 +46,10 @@ static const char version[] =
 #define NESM_START_PG	0x40	/* First page of TX buffer */
 #define NESM_STOP_PG	0x80	/* Last page +1 of RX ring */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 mcf8390_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 mcf8390_msg_enable;
 >>>>>>> v3.18
@@ -161,9 +168,15 @@ static void mcf8390_reset_8390(struct net_device *dev)
 	unsigned long reset_start_time = jiffies;
 	u32 addr = dev->base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ei_debug > 1)
 		netdev_dbg(dev, "resetting the 8390 t=%ld...\n", jiffies);
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	netif_dbg(ei_local, hw, dev, "resetting the 8390 t=%ld...\n", jiffies);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 
@@ -302,7 +315,11 @@ static void mcf8390_block_output(struct net_device *dev, int count,
 	while ((ei_inb(addr + NE_EN0_ISR) & ENISR_RDC) == 0) {
 		if (time_after(jiffies, dma_start + 2 * HZ / 100)) { /* 20ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_err(dev, "timeout waiting for Tx RDC\n");
+=======
+			netdev_warn(dev, "timeout waiting for Tx RDC\n");
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "timeout waiting for Tx RDC\n");
 >>>>>>> v3.18
@@ -455,6 +472,10 @@ static int mcf8390_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, dev);
 	ei_local = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ei_local->msg_enable = mcf8390_msg_enable;
+>>>>>>> v3.18
 =======
 	ei_local->msg_enable = mcf8390_msg_enable;
 >>>>>>> v3.18

@@ -21,14 +21,20 @@
  */
 #define MAX_CPUS_PER_CLUSTER	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_NR_CLUSTERS		2
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MCPM_QUAD_CLUSTER
 #define MAX_NR_CLUSTERS		4
 #else
 #define MAX_NR_CLUSTERS		2
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
@@ -52,7 +58,10 @@ void mcpm_set_entry_vector(unsigned cpu, unsigned cluster, void *ptr);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This sets an early poke i.e a value to be poked into some address
  * from very early assembly code before the CPU is ungated.  The
  * address must be physical, and if 0 then nothing will happen.
@@ -61,13 +70,19 @@ void mcpm_set_early_poke(unsigned cpu, unsigned cluster,
 			 unsigned long poke_phys_addr, unsigned long poke_val);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * CPU/cluster power operations API for higher subsystems to use.
  */
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * mcpm_is_available - returns whether MCPM is initialized and available
  *
  * This returns true or false accordingly.
@@ -75,6 +90,9 @@ void mcpm_set_early_poke(unsigned cpu, unsigned cluster,
 bool mcpm_is_available(void);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * mcpm_cpu_power_up - make given CPU in given cluster runable
  *
@@ -107,9 +125,12 @@ int mcpm_cpu_power_up(unsigned int cpu, unsigned int cluster);
  * This must be called with interrupts disabled.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This does not return.  Re-entry in the kernel is expected via
  * mcpm_entry_point.
 =======
+=======
+>>>>>>> v3.18
  * On success this does not return.  Re-entry in the kernel is expected
  * via mcpm_entry_point.
  *
@@ -120,13 +141,19 @@ int mcpm_cpu_power_up(unsigned int cpu, unsigned int cluster);
  * mcpm_wait_for_cpu_powerdown() subsequently returns non-zero for the
  * specified cpu.  Until then, other CPUs should make sure they do not
  * trash memory the target CPU might be executing/accessing.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void mcpm_cpu_power_down(void);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * mcpm_wait_for_cpu_powerdown - wait for a specified CPU to halt, and
  *	make sure it is powered off
  *
@@ -152,6 +179,9 @@ void mcpm_cpu_power_down(void);
 int mcpm_wait_for_cpu_powerdown(unsigned int cpu, unsigned int cluster);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * mcpm_cpu_suspend - bring the calling CPU in a suspended state
  *
@@ -170,14 +200,20 @@ int mcpm_wait_for_cpu_powerdown(unsigned int cpu, unsigned int cluster);
  * This must be called with interrupts disabled.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This does not return.  Re-entry in the kernel is expected via
  * mcpm_entry_point.
 =======
+=======
+>>>>>>> v3.18
  * On success this does not return.  Re-entry in the kernel is expected
  * via mcpm_entry_point.
  *
  * This will return if mcpm_platform_register() has not been called
  * previously in which case the caller should take appropriate action.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void mcpm_cpu_suspend(u64 expected_residency);
@@ -200,6 +236,10 @@ struct mcpm_platform_ops {
 	int (*power_up)(unsigned int cpu, unsigned int cluster);
 	void (*power_down)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*wait_for_powerdown)(unsigned int cpu, unsigned int cluster);
+>>>>>>> v3.18
 =======
 	int (*wait_for_powerdown)(unsigned int cpu, unsigned int cluster);
 >>>>>>> v3.18
@@ -240,8 +280,11 @@ struct sync_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long sync_phys;	/* physical address of *mcpm_sync */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __mcpm_cpu_going_down(unsigned int cpu, unsigned int cluster);
@@ -254,7 +297,10 @@ int __init mcpm_sync_init(
 	void (*power_up_setup)(unsigned int affinity_level));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * mcpm_loopback - make a run through the MCPM low-level code
  *
@@ -271,6 +317,9 @@ int __init mcpm_sync_init(
  */
 int __init mcpm_loopback(void (*cache_disable)(void));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init mcpm_smp_set_ops(void);
 

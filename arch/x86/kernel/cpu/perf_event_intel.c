@@ -14,6 +14,10 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpufeature.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpufeature.h>
 >>>>>>> v3.18
@@ -85,7 +89,12 @@ static struct event_constraint intel_nehalem_event_constraints[] __read_mostly =
 static struct extra_reg intel_nehalem_extra_regs[] __read_mostly =
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INTEL_EVENT_EXTRA_REG(0xb7, MSR_OFFCORE_RSP_0, 0xffff, RSP_0),
+=======
+	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
+	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0xffff, RSP_0),
+>>>>>>> v3.18
 =======
 	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
 	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0xffff, RSP_0),
@@ -132,6 +141,10 @@ static struct event_constraint intel_ivb_event_constraints[] __read_mostly =
 	INTEL_UEVENT_CONSTRAINT(0x0279, 0xf), /* IDQ.EMTPY */
 	INTEL_UEVENT_CONSTRAINT(0x019c, 0xf), /* IDQ_UOPS_NOT_DELIVERED.CORE */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INTEL_UEVENT_CONSTRAINT(0x02a3, 0xf), /* CYCLE_ACTIVITY.CYCLES_LDM_PENDING */
+>>>>>>> v3.18
 =======
 	INTEL_UEVENT_CONSTRAINT(0x02a3, 0xf), /* CYCLE_ACTIVITY.CYCLES_LDM_PENDING */
 >>>>>>> v3.18
@@ -156,8 +169,14 @@ static struct event_constraint intel_ivb_event_constraints[] __read_mostly =
 static struct extra_reg intel_westmere_extra_regs[] __read_mostly =
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INTEL_EVENT_EXTRA_REG(0xb7, MSR_OFFCORE_RSP_0, 0xffff, RSP_0),
 	INTEL_EVENT_EXTRA_REG(0xbb, MSR_OFFCORE_RSP_1, 0xffff, RSP_1),
+=======
+	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
+	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0xffff, RSP_0),
+	INTEL_UEVENT_EXTRA_REG(0x01bb, MSR_OFFCORE_RSP_1, 0xffff, RSP_1),
+>>>>>>> v3.18
 =======
 	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
 	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0xffff, RSP_0),
@@ -181,10 +200,13 @@ static struct event_constraint intel_gen_event_constraints[] __read_mostly =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct extra_reg intel_snb_extra_regs[] __read_mostly = {
 	INTEL_EVENT_EXTRA_REG(0xb7, MSR_OFFCORE_RSP_0, 0x3f807f8fffull, RSP_0),
 	INTEL_EVENT_EXTRA_REG(0xbb, MSR_OFFCORE_RSP_1, 0x3f807f8fffull, RSP_1),
 =======
+=======
+>>>>>>> v3.18
 static struct event_constraint intel_slm_event_constraints[] __read_mostly =
 {
 	FIXED_EVENT_CONSTRAINT(0x00c0, 0), /* INST_RETIRED.ANY */
@@ -197,6 +219,9 @@ static struct extra_reg intel_snb_extra_regs[] __read_mostly = {
 	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
 	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0x3f807f8fffull, RSP_0),
 	INTEL_UEVENT_EXTRA_REG(0x01bb, MSR_OFFCORE_RSP_1, 0x3f807f8fffull, RSP_1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INTEL_UEVENT_PEBS_LDLAT_EXTRA_REG(0x01cd),
 	EVENT_EXTRA_END
@@ -204,8 +229,14 @@ static struct extra_reg intel_snb_extra_regs[] __read_mostly = {
 
 static struct extra_reg intel_snbep_extra_regs[] __read_mostly = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INTEL_EVENT_EXTRA_REG(0xb7, MSR_OFFCORE_RSP_0, 0x3fffff8fffull, RSP_0),
 	INTEL_EVENT_EXTRA_REG(0xbb, MSR_OFFCORE_RSP_1, 0x3fffff8fffull, RSP_1),
+=======
+	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
+	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0x3fffff8fffull, RSP_0),
+	INTEL_UEVENT_EXTRA_REG(0x01bb, MSR_OFFCORE_RSP_1, 0x3fffff8fffull, RSP_1),
+>>>>>>> v3.18
 =======
 	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
 	INTEL_UEVENT_EXTRA_REG(0x01b7, MSR_OFFCORE_RSP_0, 0x3fffff8fffull, RSP_0),
@@ -216,9 +247,15 @@ static struct extra_reg intel_snbep_extra_regs[] __read_mostly = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EVENT_ATTR_STR(mem-loads, mem_ld_nhm, "event=0x0b,umask=0x10,ldlat=3");
 EVENT_ATTR_STR(mem-loads, mem_ld_snb, "event=0xcd,umask=0x1,ldlat=3");
 EVENT_ATTR_STR(mem-stores, mem_st_snb, "event=0xcd,umask=0x2");
+=======
+EVENT_ATTR_STR(mem-loads,	mem_ld_nhm,	"event=0x0b,umask=0x10,ldlat=3");
+EVENT_ATTR_STR(mem-loads,	mem_ld_snb,	"event=0xcd,umask=0x1,ldlat=3");
+EVENT_ATTR_STR(mem-stores,	mem_st_snb,	"event=0xcd,umask=0x2");
+>>>>>>> v3.18
 =======
 EVENT_ATTR_STR(mem-loads,	mem_ld_nhm,	"event=0x0b,umask=0x10,ldlat=3");
 EVENT_ATTR_STR(mem-loads,	mem_ld_snb,	"event=0xcd,umask=0x1,ldlat=3");
@@ -237,7 +274,10 @@ struct attribute *snb_events_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct event_constraint intel_hsw_event_constraints[] = {
 	FIXED_EVENT_CONSTRAINT(0x00c0, 0), /* INST_RETIRED.ANY */
 	FIXED_EVENT_CONSTRAINT(0x003c, 1), /* CPU_CLK_UNHALTED.CORE */
@@ -254,6 +294,9 @@ static struct event_constraint intel_hsw_event_constraints[] = {
 	EVENT_CONSTRAINT_END
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 intel_pmu_event_map(int hw_event)
 {
@@ -931,7 +974,10 @@ static __initconst const u64 atom_hw_cache_event_ids
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct extra_reg intel_slm_extra_regs[] __read_mostly =
 {
 	/* must define OFFCORE_RSP_X first, see intel_fixup_er() */
@@ -1066,6 +1112,9 @@ static __initconst const u64 slm_hw_cache_event_ids
  },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool intel_pmu_needs_lbr_smpl(struct perf_event *event)
 {
@@ -1075,7 +1124,12 @@ static inline bool intel_pmu_needs_lbr_smpl(struct perf_event *event)
 
 	/* implicit branch sampling to correct PEBS skid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (x86_pmu.intel_cap.pebs_trap && event->attr.precise_ip > 1)
+=======
+	if (x86_pmu.intel_cap.pebs_trap && event->attr.precise_ip > 1 &&
+	    x86_pmu.intel_cap.pebs_format < 2)
+>>>>>>> v3.18
 =======
 	if (x86_pmu.intel_cap.pebs_trap && event->attr.precise_ip > 1 &&
 	    x86_pmu.intel_cap.pebs_format < 2)
@@ -1088,7 +1142,11 @@ static inline bool intel_pmu_needs_lbr_smpl(struct perf_event *event)
 static void intel_pmu_disable_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1105,7 +1163,11 @@ static void intel_pmu_disable_all(void)
 static void intel_pmu_enable_all(int added)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1143,7 +1205,11 @@ static void intel_pmu_enable_all(int added)
 static void intel_pmu_nhm_workaround(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1238,11 +1304,14 @@ static void intel_pmu_disable_fixed(struct hw_perf_event *hwc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void intel_pmu_disable_event(struct perf_event *event)
 {
 	struct hw_perf_event *hwc = &event->hw;
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
 =======
+=======
+>>>>>>> v3.18
 static inline bool event_is_checkpointed(struct perf_event *event)
 {
 	return (event->hw.config & HSW_IN_TX_CHECKPOINTED) != 0;
@@ -1252,6 +1321,9 @@ static void intel_pmu_disable_event(struct perf_event *event)
 {
 	struct hw_perf_event *hwc = &event->hw;
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(hwc->idx == INTEL_PMC_IDX_FIXED_BTS)) {
@@ -1263,6 +1335,10 @@ static void intel_pmu_disable_event(struct perf_event *event)
 	cpuc->intel_ctrl_guest_mask &= ~(1ull << hwc->idx);
 	cpuc->intel_ctrl_host_mask &= ~(1ull << hwc->idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpuc->intel_cp_status &= ~(1ull << hwc->idx);
+>>>>>>> v3.18
 =======
 	cpuc->intel_cp_status &= ~(1ull << hwc->idx);
 >>>>>>> v3.18
@@ -1320,7 +1396,11 @@ static void intel_pmu_enable_event(struct perf_event *event)
 {
 	struct hw_perf_event *hwc = &event->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1345,6 +1425,12 @@ static void intel_pmu_enable_event(struct perf_event *event)
 		cpuc->intel_ctrl_host_mask |= (1ull << hwc->idx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(event_is_checkpointed(event)))
+		cpuc->intel_cp_status |= (1ull << hwc->idx);
+
+>>>>>>> v3.18
 =======
 	if (unlikely(event_is_checkpointed(event)))
 		cpuc->intel_cp_status |= (1ull << hwc->idx);
@@ -1369,7 +1455,10 @@ int intel_pmu_save_and_restart(struct perf_event *event)
 {
 	x86_perf_event_update(event);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * For a checkpointed counter always reset back to 0.  This
 	 * avoids a situation where the counter overflows, aborts the
@@ -1381,6 +1470,9 @@ int intel_pmu_save_and_restart(struct perf_event *event)
 		wrmsrl(event->hw.event_base, 0);
 		local64_set(&event->hw.prev_count, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return x86_perf_event_set_period(event);
 }
@@ -1424,6 +1516,7 @@ static int intel_pmu_handle_irq(struct pt_regs *regs)
 	int handled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
 
 	/*
@@ -1444,6 +1537,8 @@ static int intel_pmu_handle_irq(struct pt_regs *regs)
 		return handled;
 	}
 =======
+=======
+>>>>>>> v3.18
 	cpuc = this_cpu_ptr(&cpu_hw_events);
 
 	/*
@@ -1457,6 +1552,9 @@ static int intel_pmu_handle_irq(struct pt_regs *regs)
 	status = intel_pmu_get_status();
 	if (!status)
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	loops = 0;
@@ -1464,15 +1562,21 @@ again:
 	intel_pmu_ack_status(status);
 	if (++loops > 100) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ONCE(1, "perfevents: irq loop stuck!\n");
 		perf_event_print_debug();
 =======
+=======
+>>>>>>> v3.18
 		static bool warned = false;
 		if (!warned) {
 			WARN(1, "perfevents: irq loop stuck!\n");
 			perf_event_print_debug();
 			warned = true;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		intel_pmu_reset();
 		goto done;
@@ -1500,7 +1604,10 @@ again:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Checkpointed counters can lead to 'spurious' PMIs because the
 	 * rollback caused by the PMI will have cleared the overflow status
@@ -1508,6 +1615,9 @@ again:
 	 */
 	status |= cpuc->intel_cp_status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_set_bit(bit, (unsigned long *)&status, X86_PMC_IDX_MAX) {
 		struct perf_event *event = cpuc->events[bit];
@@ -1539,7 +1649,10 @@ again:
 done:
 	intel_pmu_enable_all(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Only unmask the NMI after the overflow counters
 	 * have been reset. This avoids spurious NMIs on
@@ -1547,6 +1660,9 @@ done:
 	 */
 	if (x86_pmu.late_ack)
 		apic_write(APIC_LVTPC, APIC_DM_NMI);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return handled;
 }
@@ -1590,17 +1706,23 @@ static void intel_fixup_er(struct perf_event *event, int idx)
 	if (idx == EXTRA_REG_RSP_0) {
 		event->hw.config &= ~INTEL_ARCH_EVENT_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		event->hw.config |= 0x01b7;
 		event->hw.extra_reg.reg = MSR_OFFCORE_RSP_0;
 	} else if (idx == EXTRA_REG_RSP_1) {
 		event->hw.config &= ~INTEL_ARCH_EVENT_MASK;
 		event->hw.config |= 0x01bb;
 =======
+=======
+>>>>>>> v3.18
 		event->hw.config |= x86_pmu.extra_regs[EXTRA_REG_RSP_0].event;
 		event->hw.extra_reg.reg = MSR_OFFCORE_RSP_0;
 	} else if (idx == EXTRA_REG_RSP_1) {
 		event->hw.config &= ~INTEL_ARCH_EVENT_MASK;
 		event->hw.config |= x86_pmu.extra_regs[EXTRA_REG_RSP_1].event;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		event->hw.extra_reg.reg = MSR_OFFCORE_RSP_1;
 	}
@@ -1747,7 +1869,10 @@ x86_get_event_constraints(struct cpu_hw_events *cpuc, struct perf_event *event)
 		for_each_event_constraint(c, x86_pmu.event_constraints) {
 			if ((event->hw.config & c->cmask) == c->code) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* hw.flags zeroed at initialization */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				event->hw.flags |= c->flags;
@@ -1798,7 +1923,10 @@ static void intel_put_event_constraints(struct cpu_hw_events *cpuc,
 					struct perf_event *event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event->hw.flags = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	intel_put_shared_regs_event_constraints(cpuc, event);
@@ -1905,7 +2033,11 @@ EXPORT_SYMBOL_GPL(perf_guest_get_msrs);
 static struct perf_guest_switch_msr *intel_guest_get_msrs(int *nr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1930,7 +2062,11 @@ static struct perf_guest_switch_msr *intel_guest_get_msrs(int *nr)
 static struct perf_guest_switch_msr *core_guest_get_msrs(int *nr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1968,7 +2104,11 @@ static void core_pmu_enable_event(struct perf_event *event)
 static void core_pmu_enable_all(int added)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1986,7 +2126,10 @@ static void core_pmu_enable_all(int added)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hsw_hw_config(struct perf_event *event)
 {
 	int ret = intel_pmu_hw_config(event);
@@ -2042,6 +2185,9 @@ hsw_get_event_constraints(struct cpu_hw_events *cpuc, struct perf_event *event)
 	return c;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 PMU_FORMAT_ATTR(event,	"config:0-7"	);
 PMU_FORMAT_ATTR(umask,	"config:8-15"	);
@@ -2051,6 +2197,11 @@ PMU_FORMAT_ATTR(any,	"config:21"	); /* v3 + */
 PMU_FORMAT_ATTR(inv,	"config:23"	);
 PMU_FORMAT_ATTR(cmask,	"config:24-31"	);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+PMU_FORMAT_ATTR(in_tx,  "config:32");
+PMU_FORMAT_ATTR(in_tx_cp, "config:33");
+>>>>>>> v3.18
 =======
 PMU_FORMAT_ATTR(in_tx,  "config:32");
 PMU_FORMAT_ATTR(in_tx_cp, "config:33");
@@ -2210,6 +2361,11 @@ static struct attribute *intel_arch3_formats_attr[] = {
 	&format_attr_inv.attr,
 	&format_attr_cmask.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&format_attr_in_tx.attr,
+	&format_attr_in_tx_cp.attr,
+>>>>>>> v3.18
 =======
 	&format_attr_in_tx.attr,
 	&format_attr_in_tx_cp.attr,
@@ -2327,7 +2483,10 @@ static void intel_snb_check_microcode(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Under certain circumstances, access certain MSR may cause #GP.
  * The function tests if the input MSR can be safely accessed.
@@ -2363,6 +2522,9 @@ static bool check_msr(unsigned long msr, u64 mask)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __init void intel_sandybridge_quirk(void)
 {
@@ -2412,7 +2574,10 @@ static __init void intel_nehalem_quirk(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EVENT_ATTR_STR(mem-loads,	mem_ld_hsw,	"event=0xcd,umask=0x1,ldlat=3");
 EVENT_ATTR_STR(mem-stores,	mem_st_hsw,	"event=0xd0,umask=0x82")
 
@@ -2448,6 +2613,9 @@ static struct attribute *hsw_events_attrs[] = {
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __init int intel_pmu_init(void)
 {
@@ -2457,7 +2625,12 @@ __init int intel_pmu_init(void)
 	struct event_constraint *c;
 	unsigned int unused;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int version;
+=======
+	struct extra_reg *er;
+	int version, i;
+>>>>>>> v3.18
 =======
 	struct extra_reg *er;
 	int version, i;
@@ -2507,10 +2680,14 @@ __init int intel_pmu_init(void)
 		x86_pmu.num_counters_fixed = max((int)edx.split.num_counters_fixed, 3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * v2 and above have a perf capabilities MSR
 	 */
 	if (version > 1) {
+=======
+	if (boot_cpu_has(X86_FEATURE_PDCM)) {
+>>>>>>> v3.18
 =======
 	if (boot_cpu_has(X86_FEATURE_PDCM)) {
 >>>>>>> v3.18
@@ -2529,6 +2706,7 @@ __init int intel_pmu_init(void)
 	 */
 	switch (boot_cpu_data.x86_model) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 14: /* 65 nm core solo/duo, "Yonah" */
 		pr_cont("Core events, ");
 		break;
@@ -2539,6 +2717,8 @@ __init int intel_pmu_init(void)
 	case 23: /* current 45 nm celeron/core2/xeon "Penryn"/"Wolfdale" */
 	case 29: /* six-core 45 nm xeon "Dunnington" */
 =======
+=======
+>>>>>>> v3.18
 	case 14: /* 65nm Core "Yonah" */
 		pr_cont("Core events, ");
 		break;
@@ -2548,6 +2728,9 @@ __init int intel_pmu_init(void)
 	case 22: /* 65nm Core2 "Merom-L"        */
 	case 23: /* 45nm Core2 "Penryn"         */
 	case 29: /* 45nm Core2 "Dunnington (MP) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(hw_cache_event_ids, core2_hw_cache_event_ids,
 		       sizeof(hw_cache_event_ids));
@@ -2560,9 +2743,15 @@ __init int intel_pmu_init(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 26: /* 45 nm nehalem, "Bloomfield" */
 	case 30: /* 45 nm nehalem, "Lynnfield" */
 	case 46: /* 45 nm nehalem-ex, "Beckton" */
+=======
+	case 30: /* 45nm Nehalem    */
+	case 26: /* 45nm Nehalem-EP */
+	case 46: /* 45nm Nehalem-EX */
+>>>>>>> v3.18
 =======
 	case 30: /* 45nm Nehalem    */
 	case 26: /* 45nm Nehalem-EP */
@@ -2590,7 +2779,10 @@ __init int intel_pmu_init(void)
 			X86_CONFIG(.event=0xb1, .umask=0x3f, .inv=1, .cmask=1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intel_pmu_pebs_data_source_nhm();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		x86_add_quirk(intel_nehalem_quirk);
@@ -2599,17 +2791,23 @@ __init int intel_pmu_init(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 28: /* Atom */
 	case 38: /* Lincroft */
 	case 39: /* Penwell */
 	case 53: /* Cloverview */
 	case 54: /* Cedarview */
 =======
+=======
+>>>>>>> v3.18
 	case 28: /* 45nm Atom "Pineview"   */
 	case 38: /* 45nm Atom "Lincroft"   */
 	case 39: /* 32nm Atom "Penwell"    */
 	case 53: /* 32nm Atom "Cloverview" */
 	case 54: /* 32nm Atom "Cedarview"  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(hw_cache_event_ids, atom_hw_cache_event_ids,
 		       sizeof(hw_cache_event_ids));
@@ -2622,10 +2820,13 @@ __init int intel_pmu_init(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 37: /* 32 nm nehalem, "Clarkdale" */
 	case 44: /* 32 nm nehalem, "Gulftown" */
 	case 47: /* 32 nm Xeon E7 */
 =======
+=======
+>>>>>>> v3.18
 	case 55: /* 22nm Atom "Silvermont"                */
 	case 77: /* 22nm Atom "Silvermont Avoton/Rangely" */
 		memcpy(hw_cache_event_ids, slm_hw_cache_event_ids,
@@ -2645,6 +2846,9 @@ __init int intel_pmu_init(void)
 	case 37: /* 32nm Westmere    */
 	case 44: /* 32nm Westmere-EP */
 	case 47: /* 32nm Westmere-EX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(hw_cache_event_ids, westmere_hw_cache_event_ids,
 		       sizeof(hw_cache_event_ids));
@@ -2669,6 +2873,7 @@ __init int intel_pmu_init(void)
 			X86_CONFIG(.event=0xb1, .umask=0x3f, .inv=1, .cmask=1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intel_pmu_pebs_data_source_nhm();
 		pr_cont("Westmere events, ");
 		break;
@@ -2676,11 +2881,16 @@ __init int intel_pmu_init(void)
 	case 42: /* SandyBridge */
 	case 45: /* SandyBridge, "Romely-EP" */
 =======
+=======
+>>>>>>> v3.18
 		pr_cont("Westmere events, ");
 		break;
 
 	case 42: /* 32nm SandyBridge         */
 	case 45: /* 32nm SandyBridge-E/EN/EP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		x86_add_quirk(intel_sandybridge_quirk);
 		memcpy(hw_cache_event_ids, snb_hw_cache_event_ids,
@@ -2713,8 +2923,14 @@ __init int intel_pmu_init(void)
 		pr_cont("SandyBridge events, ");
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 58: /* IvyBridge */
 	case 62: /* IvyBridge EP */
+=======
+
+	case 58: /* 22nm IvyBridge       */
+	case 62: /* 22nm IvyBridge-EP/EX */
+>>>>>>> v3.18
 =======
 
 	case 58: /* 22nm IvyBridge       */
@@ -2752,7 +2968,10 @@ __init int intel_pmu_init(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 60: /* 22nm Haswell Core */
 	case 63: /* 22nm Haswell Server */
 	case 69: /* 22nm Haswell ULT */
@@ -2778,6 +2997,9 @@ __init int intel_pmu_init(void)
 		pr_cont("Haswell events, ");
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		switch (x86_pmu.version) {
@@ -2818,6 +3040,7 @@ __init int intel_pmu_init(void)
 		 */
 		for_each_event_constraint(c, x86_pmu.event_constraints) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (c->cmask == X86_RAW_EVENT_MASK
 			    && c->idxmsk64 == INTEL_PMC_MSK_FIXED_REF_CYCLES) {
 				c->idxmsk64 |= (1ULL << x86_pmu.num_counters) - 1;
@@ -2832,6 +3055,8 @@ __init int intel_pmu_init(void)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			if (c->cmask != FIXED_EVENT_FLAGS
 			    || c->idxmsk64 == INTEL_PMC_MSK_FIXED_REF_CYCLES) {
 				continue;
@@ -2877,6 +3102,9 @@ __init int intel_pmu_init(void)
 		pr_cont("full-width counters, ");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

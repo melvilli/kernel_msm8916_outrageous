@@ -221,7 +221,11 @@ static int __init amiga_a3000_scsi_probe(struct platform_device *pdev)
 	instance->irq = IRQ_AMIGA_PORTS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs = (struct a3000_scsiregs *)ZTWO_VADDR(res->start);
+=======
+	regs = ZTWO_VADDR(res->start);
+>>>>>>> v3.18
 =======
 	regs = ZTWO_VADDR(res->start);
 >>>>>>> v3.18
@@ -285,6 +289,7 @@ static struct platform_driver amiga_a3000_scsi_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init amiga_a3000_scsi_init(void)
 {
 	return platform_driver_probe(&amiga_a3000_scsi_driver,
@@ -297,6 +302,9 @@ static void __exit amiga_a3000_scsi_exit(void)
 	platform_driver_unregister(&amiga_a3000_scsi_driver);
 }
 module_exit(amiga_a3000_scsi_exit);
+=======
+module_platform_driver_probe(amiga_a3000_scsi_driver, amiga_a3000_scsi_probe);
+>>>>>>> v3.18
 =======
 module_platform_driver_probe(amiga_a3000_scsi_driver, amiga_a3000_scsi_probe);
 >>>>>>> v3.18

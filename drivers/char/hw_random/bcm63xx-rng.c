@@ -138,7 +138,10 @@ out_clk_disable:
 	clk_disable(clk);
 out_free_rng:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(rng);
@@ -158,7 +161,10 @@ static int bcm63xx_rng_remove(struct platform_device *pdev)
 	kfree(priv);
 	kfree(rng);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

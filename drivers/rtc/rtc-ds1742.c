@@ -14,7 +14,10 @@
 
 #include <linux/bcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -23,6 +26,11 @@
 #include <linux/jiffies.h>
 #include <linux/rtc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -61,11 +69,17 @@
 
 struct rtc_plat_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtc_device *rtc;
 	void __iomem *ioaddr_nvram;
 	void __iomem *ioaddr_rtc;
 	size_t size_nvram;
 	size_t size;
+=======
+	void __iomem *ioaddr_nvram;
+	void __iomem *ioaddr_rtc;
+	size_t size_nvram;
+>>>>>>> v3.18
 =======
 	void __iomem *ioaddr_nvram;
 	void __iomem *ioaddr_rtc;
@@ -132,11 +146,15 @@ static int ds1742_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	tm->tm_year = bcd2bin(year) + bcd2bin(century) * 100 - 1900;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtc_valid_tm(tm) < 0) {
 		dev_err(dev, "retrieved date/time is not valid.\n");
 		rtc_time_to_tm(0, tm);
 	}
 	return 0;
+=======
+	return rtc_valid_tm(tm);
+>>>>>>> v3.18
 =======
 	return rtc_valid_tm(tm);
 >>>>>>> v3.18
@@ -187,6 +205,7 @@ static int ds1742_rtc_probe(struct platform_device *pdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
@@ -204,6 +223,8 @@ static int ds1742_rtc_probe(struct platform_device *pdev)
 	pdata->ioaddr_nvram = ioaddr;
 	pdata->size_nvram = pdata->size - RTC_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
@@ -215,6 +236,9 @@ static int ds1742_rtc_probe(struct platform_device *pdev)
 
 	pdata->ioaddr_nvram = ioaddr;
 	pdata->size_nvram = resource_size(res) - RTC_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata->ioaddr_rtc = ioaddr + pdata->size_nvram;
 
@@ -245,12 +269,15 @@ static int ds1742_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(rtc))
 		return PTR_ERR(rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata->rtc = rtc;
 
 	ret = sysfs_create_bin_file(&pdev->dev.kobj, &pdata->nvram_attr);
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = sysfs_create_bin_file(&pdev->dev.kobj, &pdata->nvram_attr);
 	if (ret)
@@ -258,6 +285,9 @@ static int ds1742_rtc_probe(struct platform_device *pdev)
 			pdata->nvram_attr.attr.name);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -270,13 +300,19 @@ static int ds1742_rtc_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id __maybe_unused ds1742_rtc_of_match[] = {
 	{ .compatible = "maxim,ds1742", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, ds1742_rtc_of_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver ds1742_rtc_driver = {
 	.probe		= ds1742_rtc_probe,
@@ -285,6 +321,10 @@ static struct platform_driver ds1742_rtc_driver = {
 		.name	= "rtc-ds1742",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(ds1742_rtc_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(ds1742_rtc_of_match),
 >>>>>>> v3.18

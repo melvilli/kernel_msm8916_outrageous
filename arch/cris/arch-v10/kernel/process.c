@@ -57,7 +57,11 @@ void hard_reset_now (void)
 	 * this code, implementing hard reset through the watchdog.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ETRAX_WATCHDOG) && !defined(CONFIG_SVINTO_SIM)
+=======
+#if defined(CONFIG_ETRAX_WATCHDOG)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ETRAX_WATCHDOG)
 >>>>>>> v3.18
@@ -68,7 +72,11 @@ void hard_reset_now (void)
 	local_irq_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ETRAX_WATCHDOG) && !defined(CONFIG_SVINTO_SIM)
+=======
+#if defined(CONFIG_ETRAX_WATCHDOG)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ETRAX_WATCHDOG)
 >>>>>>> v3.18

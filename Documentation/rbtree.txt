@@ -256,7 +256,11 @@ way making it possible to do efficient lookup and exact match.
 
 This "extra information" stored in each node is the maximum hi
 <<<<<<< HEAD
+<<<<<<< HEAD
 (max_hi) value among all the nodes that are its descendents. This
+=======
+(max_hi) value among all the nodes that are its descendants. This
+>>>>>>> v3.18
 =======
 (max_hi) value among all the nodes that are its descendants. This
 >>>>>>> v3.18

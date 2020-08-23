@@ -23,8 +23,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/os.h>
 #include <core/class.h>
+=======
+#include <core/client.h>
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <core/client.h>
 #include <nvif/unpack.h>
@@ -35,12 +41,15 @@
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nvd0_hdmi_ctrl(struct nv50_disp_priv *priv, int head, int or, u32 data)
 {
 	const u32 hoff = (head * 0x800);
 
 	if (!(data & NV84_DISP_SOR_HDMI_PWR_STATE_ON)) {
 =======
+=======
+>>>>>>> v3.18
 nvd0_hdmi_ctrl(NV50_DISP_MTHD_V1)
 {
 	const u32 hoff = (head * 0x800);
@@ -65,6 +74,9 @@ nvd0_hdmi_ctrl(NV50_DISP_MTHD_V1)
 		return ret;
 
 	if (!(ctrl & 0x40000000)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nv_mask(priv, 0x616798 + hoff, 0x40000000, 0x00000000);
 		nv_mask(priv, 0x6167a4 + hoff, 0x00000001, 0x00000000);
@@ -88,10 +100,14 @@ nvd0_hdmi_ctrl(NV50_DISP_MTHD_V1)
 
 	/* HDMI_CTRL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_mask(priv, 0x616798 + hoff, 0x401f007f, data);
 
 	/* NFI, audio doesn't work without it though.. */
 	nv_mask(priv, 0x616548 + hoff, 0x00000070, 0x00000000);
+=======
+	nv_mask(priv, 0x616798 + hoff, 0x401f007f, ctrl);
+>>>>>>> v3.18
 =======
 	nv_mask(priv, 0x616798 + hoff, 0x401f007f, ctrl);
 >>>>>>> v3.18

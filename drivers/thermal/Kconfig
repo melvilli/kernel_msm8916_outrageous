@@ -18,9 +18,12 @@ if THERMAL
 config THERMAL_HWMON
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HWMON=y || HWMON=THERMAL
 	default y
 =======
+=======
+>>>>>>> v3.18
 	prompt "Expose thermal sensors as hwmon device"
 	depends on HWMON=y || HWMON=THERMAL
 	default y
@@ -45,6 +48,9 @@ config THERMAL_OF
 
 	  Say 'Y' here if you need to build thermal infrastructure
 	  based on device tree.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 choice
@@ -75,7 +81,11 @@ config THERMAL_DEFAULT_GOV_USER_SPACE
 	help
 	  Select this if you want to let the user space manage the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  lpatform thermals.
+=======
+	  platform thermals.
+>>>>>>> v3.18
 =======
 	  platform thermals.
 >>>>>>> v3.18
@@ -92,7 +102,10 @@ config THERMAL_GOV_STEP_WISE
 	help
 	  Enable this to manage platform thermals using a simple linear
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  governor.
 
 config THERMAL_GOV_BANG_BANG
@@ -104,6 +117,9 @@ config THERMAL_GOV_BANG_BANG
 	  Say 'Y' here if you want to use two point temperature regulation
 	  used for fans without throttling.  Some fan drivers depend on this
 	  governor to be enabled (e.g. acerhdf).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config THERMAL_GOV_USER_SPACE
@@ -115,6 +131,10 @@ config CPU_THERMAL
 	bool "generic cpu cooling support"
 	depends on CPU_FREQ
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on THERMAL_OF
+>>>>>>> v3.18
 =======
 	depends on THERMAL_OF
 >>>>>>> v3.18
@@ -139,6 +159,7 @@ config THERMAL_EMULATION
 	  because userland can easily disable the thermal policy by simply
 	  flooding this sysfs node with low temperature values.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config THERMAL_TSENS8974
 	tristate "Qualcomm 8974 TSENS Temperature driver"
@@ -188,6 +209,8 @@ config SUPPLY_LM_MONITOR
 	 temperature. Based on these inputs, the driver throttles
 	 apps subsystem.
 =======
+=======
+>>>>>>> v3.18
 config IMX_THERMAL
 	tristate "Temperature sensor driver for Freescale i.MX SoCs"
 	depends on CPU_THERMAL
@@ -198,6 +221,9 @@ config IMX_THERMAL
 	  It supports one critical trip point and one passive trip point.  The
 	  cpufreq is used as the cooling device to throttle CPUs when the
 	  passive trip is crossed.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SPEAR_THERMAL
@@ -206,6 +232,7 @@ config SPEAR_THERMAL
 	depends on OF
 	help
 	  Enable this to plug the SPEAr thermal sensor driver into the Linux
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  thermal framework
 
@@ -220,6 +247,8 @@ config KIRKWOOD_THERMAL
 	tristate "Temperature sensor on Marvell Kirkwood SoCs"
 	depends on ARCH_KIRKWOOD
 =======
+=======
+>>>>>>> v3.18
 	  thermal framework.
 
 config RCAR_THERMAL
@@ -233,12 +262,16 @@ config RCAR_THERMAL
 config KIRKWOOD_THERMAL
 	tristate "Temperature sensor on Marvell Kirkwood SoCs"
 	depends on MACH_KIRKWOOD
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on OF
 	help
 	  Support for the Kirkwood thermal sensor driver into the Linux thermal
 	  framework. Only kirkwood 88F6282 and 88F6283 have this sensor.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config EXYNOS_THERMAL
 	tristate "Temperature sensor on Samsung EXYNOS"
@@ -251,6 +284,11 @@ config EXYNOS_THERMAL
 config DOVE_THERMAL
 	tristate "Temperature sensor on Marvell Dove SoCs"
 	depends on ARCH_DOVE
+=======
+config DOVE_THERMAL
+	tristate "Temperature sensor on Marvell Dove SoCs"
+	depends on ARCH_DOVE || MACH_DOVE
+>>>>>>> v3.18
 =======
 config DOVE_THERMAL
 	tristate "Temperature sensor on Marvell Dove SoCs"
@@ -301,6 +339,7 @@ config INTEL_POWERCLAMP
 	  user interface is exposed via generic thermal framework.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config THERMAL_QPNP
 	tristate "Qualcomm Plug-and-Play PMIC Temperature Alarm"
 	depends on THERMAL
@@ -327,6 +366,8 @@ config THERMAL_QPNP_ADC_TM
 	  the sensor. Also able to set threshold temperature for both hot and cold
 	  and update when a threshold is reached.
 =======
+=======
+>>>>>>> v3.18
 config X86_PKG_TEMP_THERMAL
 	tristate "X86 package temperature thermal driver"
 	depends on X86_THERMAL_VECTOR
@@ -388,5 +429,8 @@ depends on ARCH_STI && OF
 source "drivers/thermal/st/Kconfig"
 endmenu
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

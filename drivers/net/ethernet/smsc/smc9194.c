@@ -56,7 +56,11 @@
 
 static const char version[] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"smc9194.c:v0.14 12/15/00 by Erik Stahlman (erik@vt.edu)\n";
+=======
+	"smc9194.c:v0.14 12/15/00 by Erik Stahlman (erik@vt.edu)";
+>>>>>>> v3.18
 =======
 	"smc9194.c:v0.14 12/15/00 by Erik Stahlman (erik@vt.edu)";
 >>>>>>> v3.18
@@ -100,6 +104,7 @@ static const char version[] =
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(__H8300H__) || defined(__H8300S__)
 #define NO_AUTOPROBE
 #undef insl
@@ -108,6 +113,8 @@ static const char version[] =
 #define outsl(a,b,l) io_outsl_noswap(a,b,l)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -122,12 +129,15 @@ struct devlist {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_H8S_EDOSK2674)
 static struct devlist smc_devlist[] __initdata = {
 	{.port = 0xf80000, .irq = 16},
 	{.port = 0,        .irq = 0 },
 };
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct devlist smc_devlist[] __initdata = {
@@ -150,7 +160,10 @@ static struct devlist smc_devlist[] __initdata = {
 	{.port = 0,     .irq = 0},
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -626,7 +639,11 @@ static void smc_hardware_send_packet( struct net_device * dev )
 	if ( packet_no & 0x80 ) {
 		/* or isn't there?  BAD CHIP! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG CARDNAME": Memory allocation failed.\n");
+=======
+		netdev_dbg(dev, CARDNAME": Memory allocation failed.\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, CARDNAME": Memory allocation failed.\n");
 >>>>>>> v3.18
@@ -643,7 +660,11 @@ static void smc_hardware_send_packet( struct net_device * dev )
 	outw( PTR_AUTOINC , ioaddr + POINTER );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    	PRINTK3((CARDNAME": Trying to xmit packet of length %x\n", length ));
+=======
+	PRINTK3((CARDNAME": Trying to xmit packet of length %x\n", length));
+>>>>>>> v3.18
 =======
 	PRINTK3((CARDNAME": Trying to xmit packet of length %x\n", length));
 >>>>>>> v3.18
@@ -673,11 +694,15 @@ static void smc_hardware_send_packet( struct net_device * dev )
 	if ( length & 0x2  ) {
 		outsl(ioaddr + DATA_1, buf,  length >> 2 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(__H8300H__) && !defined(__H8300S__)
 		outw( *((word *)(buf + (length & 0xFFFFFFFC))),ioaddr +DATA_1);
 #else
 		ctrl_outw( *((word *)(buf + (length & 0xFFFFFFFC))),ioaddr +DATA_1);
 #endif
+=======
+		outw( *((word *)(buf + (length & 0xFFFFFFFC))),ioaddr +DATA_1);
+>>>>>>> v3.18
 =======
 		outw( *((word *)(buf + (length & 0xFFFFFFFC))),ioaddr +DATA_1);
 >>>>>>> v3.18
@@ -891,7 +916,10 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
 {
 	int i, memory, retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static unsigned version_printed;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int bank;
@@ -928,7 +956,10 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
 		goto err_out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(CONFIG_H8S_EDOSK2674)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* well, we've already written once, so hopefully another time won't
@@ -946,10 +977,13 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
 		goto err_out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	(void)base_address_register; /* Warning suppression */
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -972,8 +1006,12 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
 	   against the hardware address, or do some other tests. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (version_printed++ == 0)
 		printk("%s", version);
+=======
+	pr_info_once("%s\n", version);
+>>>>>>> v3.18
 =======
 	pr_info_once("%s\n", version);
 >>>>>>> v3.18
@@ -1066,6 +1104,7 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
 	/* now, print out the card info, in a short format.. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: %s(r:%d) at %#3x IRQ:%d INTF:%s MEM:%db ", dev->name,
 		version_string, revision_register & 0xF, ioaddr, dev->irq,
 		if_string, memory );
@@ -1082,6 +1121,8 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
   	  	goto err_out;
       	}
 =======
+=======
+>>>>>>> v3.18
 	netdev_info(dev, "%s(r:%d) at %#3x IRQ:%d INTF:%s MEM:%db ",
 		    version_string, revision_register & 0xF, ioaddr, dev->irq,
 		    if_string, memory);
@@ -1097,6 +1138,9 @@ static int __init smc_probe(struct net_device *dev, int ioaddr)
 			    DRV_NAME, dev->irq, retval);
 		goto err_out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->netdev_ops			= &smc_netdev_ops;
@@ -1118,7 +1162,11 @@ static void print_packet( byte * buf, int length )
 	int lines;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Packet of length %d\n", length);
+=======
+	pr_dbg("Packet of length %d\n", length);
+>>>>>>> v3.18
 =======
 	pr_dbg("Packet of length %d\n", length);
 >>>>>>> v3.18
@@ -1129,6 +1177,10 @@ static void print_packet( byte * buf, int length )
 		int cur;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		printk(KERN_DEBUG);
+>>>>>>> v3.18
 =======
 		printk(KERN_DEBUG);
 >>>>>>> v3.18
@@ -1138,16 +1190,22 @@ static void print_packet( byte * buf, int length )
 			a = *(buf ++ );
 			b = *(buf ++ );
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("%02x%02x ", a, b );
 		}
 		printk("\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 			pr_cont("%02x%02x ", a, b);
 		}
 		pr_cont("\n");
 	}
 	printk(KERN_DEBUG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for ( i = 0; i < remainder/2 ; i++ ) {
 		byte a, b;
@@ -1155,9 +1213,15 @@ static void print_packet( byte * buf, int length )
 		a = *(buf ++ );
 		b = *(buf ++ );
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%02x%02x ", a, b );
 	}
 	printk("\n");
+=======
+		pr_cont("%02x%02x ", a, b);
+	}
+	pr_cont("\n");
+>>>>>>> v3.18
 =======
 		pr_cont("%02x%02x ", a, b);
 	}
@@ -1230,9 +1294,14 @@ static void smc_timeout(struct net_device *dev)
 	/* If we get here, some higher level has decided we are broken.
 	   There should really be a "kick me" function call instead. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING CARDNAME": transmit timed out, %s?\n",
 		tx_done(dev) ? "IRQ conflict" :
 		"network cable problem");
+=======
+	netdev_warn(dev, CARDNAME": transmit timed out, %s?\n",
+		    tx_done(dev) ? "IRQ conflict" : "network cable problem");
+>>>>>>> v3.18
 =======
 	netdev_warn(dev, CARDNAME": transmit timed out, %s?\n",
 		    tx_done(dev) ? "IRQ conflict" : "network cable problem");
@@ -1407,8 +1476,12 @@ static void smc_tx( struct net_device * dev )
 	if ( tx_status & TS_LOSTCAR ) dev->stats.tx_carrier_errors++;
 	if ( tx_status & TS_LATCOL  ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG CARDNAME
 			": Late collision occurred on last xmit.\n");
+=======
+		netdev_dbg(dev, CARDNAME": Late collision occurred on last xmit.\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, CARDNAME": Late collision occurred on last xmit.\n");
 >>>>>>> v3.18
@@ -1420,7 +1493,11 @@ static void smc_tx( struct net_device * dev )
 
 	if ( tx_status & TS_SUCCESS ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(CARDNAME": Successful packet caused interrupt\n");
+=======
+		netdev_info(dev, CARDNAME": Successful packet caused interrupt\n");
+>>>>>>> v3.18
 =======
 		netdev_info(dev, CARDNAME": Successful packet caused interrupt\n");
 >>>>>>> v3.18
@@ -1663,9 +1740,13 @@ int __init init_module(void)
 	/* copy the parameters from insmod into the device structure */
 	devSMC9194 = smc_init(-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(devSMC9194))
 		return PTR_ERR(devSMC9194);
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(devSMC9194);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(devSMC9194);
 >>>>>>> v3.18

@@ -37,7 +37,10 @@ config EFI_VARS_PSTORE_DEFAULT_DISABLE
 	  using the efivars module's pstore_disable parameter.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config EFI_RUNTIME_MAP
 	bool "Export efi runtime maps to sysfs"
 	depends on X86 && EFI && KEXEC
@@ -49,6 +52,9 @@ config EFI_RUNTIME_MAP
 
 	  See also Documentation/ABI/testing/sysfs-firmware-efi-runtime-map.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config EFI_PARAMS_FROM_FDT
 	bool
@@ -58,8 +64,11 @@ config EFI_PARAMS_FROM_FDT
           map address, and other parameters from the device tree.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
 =======
+=======
+>>>>>>> v3.18
 config EFI_RUNTIME_WRAPPERS
 	bool
 
@@ -70,4 +79,7 @@ endmenu
 
 config UEFI_CPER
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

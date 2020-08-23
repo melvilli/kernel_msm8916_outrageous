@@ -27,7 +27,10 @@ static inline unsigned long __my_cpu_offset(void)
 {
 	unsigned long off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register unsigned long *sp asm ("sp");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -36,7 +39,12 @@ static inline unsigned long __my_cpu_offset(void)
 	 * instead use a fake stack read to hazard against barrier().
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm("mrs %0, tpidr_el1" : "=r" (off) : "Q" (*sp));
+=======
+	asm("mrs %0, tpidr_el1" : "=r" (off) :
+		"Q" (*(const unsigned long *)current_stack_pointer));
+>>>>>>> v3.18
 =======
 	asm("mrs %0, tpidr_el1" : "=r" (off) :
 		"Q" (*(const unsigned long *)current_stack_pointer));

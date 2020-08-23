@@ -15,8 +15,14 @@ config OMAP_REMOTEPROC
 	depends on ARCH_OMAP4 || SOC_OMAP5
 	depends on OMAP_IOMMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on OMAP_MBOX_FWK
 	select REMOTEPROC
+=======
+	select REMOTEPROC
+	select MAILBOX
+	select OMAP2PLUS_MBOX
+>>>>>>> v3.18
 =======
 	select REMOTEPROC
 	select MAILBOX
@@ -50,7 +56,11 @@ config DA8XX_REMOTEPROC
 	tristate "DA8xx/OMAP-L13x remoteproc support"
 	depends on ARCH_DAVINCI_DA8XX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CMA
+=======
+	select CMA if MMU
+>>>>>>> v3.18
 =======
 	select CMA if MMU
 >>>>>>> v3.18

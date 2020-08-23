@@ -2,6 +2,10 @@
 #include <linux/nfs_mount.h>
 #include "internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "nfs3_fs.h"
+>>>>>>> v3.18
 =======
 #include "nfs3_fs.h"
 >>>>>>> v3.18

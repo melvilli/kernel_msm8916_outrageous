@@ -3,15 +3,21 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARM_BIG_LITTLE_CPUFREQ
 	tristate "Generic ARM big LITTLE CPUfreq driver"
 	depends on ARM_CPU_TOPOLOGY && PM_OPP && HAVE_CLK
 =======
+=======
+>>>>>>> v3.18
 # big LITTLE core layer and glue drivers
 config ARM_BIG_LITTLE_CPUFREQ
 	tristate "Generic ARM big LITTLE CPUfreq driver"
 	depends on ARM && BIG_LITTLE && ARM_CPU_TOPOLOGY && HAVE_CLK
 	select PM_OPP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This enables the Generic CPUfreq driver for ARM big.LITTLE platforms.
@@ -23,6 +29,7 @@ config ARM_DT_BL_CPUFREQ
 	  This enables probing via DT for Generic CPUfreq driver for ARM
 	  big.LITTLE platform. This gets frequency tables from DT.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARM_EXYNOS_CPUFREQ
 	bool "SAMSUNG EXYNOS SoCs"
@@ -37,6 +44,8 @@ config ARM_EXYNOS_CPUFREQ
 config ARM_EXYNOS4210_CPUFREQ
 	def_bool CPU_EXYNOS4210
 =======
+=======
+>>>>>>> v3.18
 config ARM_VEXPRESS_SPC_CPUFREQ
         tristate "Versatile Express SPC based CPUfreq driver"
 	depends on ARM_BIG_LITTLE_CPUFREQ && ARCH_VEXPRESS_SPC
@@ -53,15 +62,21 @@ config ARM_EXYNOS4210_CPUFREQ
 	depends on CPU_EXYNOS4210
 	default y
 	select ARM_EXYNOS_CPUFREQ
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This adds the CPUFreq driver for Samsung EXYNOS4210
 	  SoC (S5PV310 or S5PC210).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARM_EXYNOS4X12_CPUFREQ
 	def_bool (SOC_EXYNOS4212 || SOC_EXYNOS4412)
 =======
+=======
+>>>>>>> v3.18
 	  If in doubt, say N.
 
 config ARM_EXYNOS4X12_CPUFREQ
@@ -69,15 +84,21 @@ config ARM_EXYNOS4X12_CPUFREQ
 	depends on SOC_EXYNOS4212 || SOC_EXYNOS4412
 	default y
 	select ARM_EXYNOS_CPUFREQ
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This adds the CPUFreq driver for Samsung EXYNOS4X12
 	  SoC (EXYNOS4212 or EXYNOS4412).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARM_EXYNOS5250_CPUFREQ
 	def_bool SOC_EXYNOS5250
 =======
+=======
+>>>>>>> v3.18
 	  If in doubt, say N.
 
 config ARM_EXYNOS5250_CPUFREQ
@@ -85,16 +106,22 @@ config ARM_EXYNOS5250_CPUFREQ
 	depends on SOC_EXYNOS5250
 	default y
 	select ARM_EXYNOS_CPUFREQ
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This adds the CPUFreq driver for Samsung EXYNOS5250
 	  SoC.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARM_EXYNOS5440_CPUFREQ
 	def_bool SOC_EXYNOS5440
 	depends on HAVE_CLK && PM_OPP && OF
 =======
+=======
+>>>>>>> v3.18
 	  If in doubt, say N.
 
 config ARM_EXYNOS5440_CPUFREQ
@@ -103,6 +130,9 @@ config ARM_EXYNOS5440_CPUFREQ
 	depends on HAVE_CLK && OF
 	select PM_OPP
 	default y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This adds the CPUFreq driver for Samsung EXYNOS5440
@@ -110,6 +140,7 @@ config ARM_EXYNOS5440_CPUFREQ
 	  different than previous exynos controllers so not using
 	  the common exynos framework.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARM_HIGHBANK_CPUFREQ
 	tristate "Calxeda Highbank-based"
@@ -119,6 +150,8 @@ config ARM_HIGHBANK_CPUFREQ
 	select REGULATOR
 
 =======
+=======
+>>>>>>> v3.18
 	  If in doubt, say N.
 
 config ARM_EXYNOS_CPU_FREQ_BOOST_SW
@@ -139,6 +172,9 @@ config ARM_EXYNOS_CPU_FREQ_BOOST_SW
 config ARM_HIGHBANK_CPUFREQ
 	tristate "Calxeda Highbank-based"
 	depends on ARCH_HIGHBANK && CPUFREQ_DT && REGULATOR
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default m
 	help
@@ -149,18 +185,24 @@ config ARM_HIGHBANK_CPUFREQ
 
 config ARM_IMX6Q_CPUFREQ
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Freescale i.MX6Q cpufreq support"
 	depends on SOC_IMX6Q
 	depends on REGULATOR_ANATOP
 	help
 	  This adds cpufreq driver support for Freescale i.MX6Q SOC.
 =======
+=======
+>>>>>>> v3.18
 	tristate "Freescale i.MX6 cpufreq support"
 	depends on ARCH_MXC
 	depends on REGULATOR_ANATOP
 	select PM_OPP
 	help
 	  This adds cpufreq driver support for Freescale i.MX6 series SoCs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If in doubt, say N.
@@ -175,7 +217,11 @@ config ARM_INTEGRATOR
 
 config ARM_KIRKWOOD_CPUFREQ
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_bool ARCH_KIRKWOOD && OF
+=======
+	def_bool MACH_KIRKWOOD
+>>>>>>> v3.18
 =======
 	def_bool MACH_KIRKWOOD
 >>>>>>> v3.18
@@ -189,7 +235,10 @@ config ARM_OMAP2PLUS_CPUFREQ
 	default ARCH_OMAP2PLUS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARM_S3C_CPUFREQ
 	bool
 	help
@@ -240,6 +289,9 @@ config ARM_S3C2412_CPUFREQ
 	help
 	  CPU Frequency scaling support for S3C2412 and S3C2413 SoC CPUs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARM_S3C2416_CPUFREQ
 	bool "S3C2416 CPU Frequency scaling support"
@@ -250,7 +302,11 @@ config ARM_S3C2416_CPUFREQ
 	  armdiv clock source and also entering a so called dynamic
 	  voltage scaling mode in which it is possible to reduce the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  core voltage of the cpu.
+=======
+	  core voltage of the CPU.
+>>>>>>> v3.18
 =======
 	  core voltage of the CPU.
 >>>>>>> v3.18
@@ -268,7 +324,10 @@ config ARM_S3C2416_CPUFREQ_VCORESCALE
 	  If in doubt, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARM_S3C2440_CPUFREQ
 	bool "S3C2440/S3C2442 CPU Frequency scaling support"
 	depends on ARM_S3C24XX_CPUFREQ && (CPU_S3C2440 || CPU_S3C2442)
@@ -277,6 +336,9 @@ config ARM_S3C2440_CPUFREQ
 	help
 	  CPU Frequency scaling support for S3C2440 and S3C2442 SoC CPUs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARM_S3C64XX_CPUFREQ
 	bool "Samsung S3C64XX"
@@ -311,6 +373,7 @@ config ARM_SPEAR_CPUFREQ
 	  This adds the CPUFreq driver support for SPEAr SOCs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CPU_FREQ_MSM
         bool
         depends on CPU_FREQ && ARCH_MSM
@@ -318,10 +381,15 @@ config CPU_FREQ_MSM
         help
           This enables the CPUFreq driver for Qualcomm CPUs.
 =======
+=======
+>>>>>>> v3.18
 config ARM_TEGRA_CPUFREQ
 	bool "TEGRA CPUFreq support"
 	depends on ARCH_TEGRA
 	default y
 	help
 	  This adds the CPUFreq driver support for TEGRA SOCs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

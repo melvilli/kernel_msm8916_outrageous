@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* linux/arch/arm/mach-exynos/include/mach/map.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 
 #include <plat/map-s5p.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXYNOS4_PA_SYSRAM0		0x02025000
 #define EXYNOS4_PA_SYSRAM1		0x02020000
@@ -62,15 +67,20 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define EXYNOS_PA_CHIPID		0x10000000
 
 #define EXYNOS4_PA_SYSCON		0x10010000
 #define EXYNOS5_PA_SYSCON		0x10050100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXYNOS4_PA_PMU			0x10020000
 #define EXYNOS5_PA_PMU			0x10040000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EXYNOS4_PA_CMU			0x10030000
@@ -82,10 +92,13 @@
 #define EXYNOS5_PA_WATCHDOG		0x101D0000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXYNOS4_PA_RTC			0x10070000
 
 #define EXYNOS4_PA_KEYPAD		0x100A0000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EXYNOS4_PA_DMC0			0x10400000
@@ -100,6 +113,7 @@
 #define EXYNOS5_PA_GIC_DIST		0x10481000
 
 #define EXYNOS4_PA_COREPERI		0x10500000
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXYNOS4_PA_TWD			0x10500600
 #define EXYNOS4_PA_L2CC			0x10502000
@@ -223,10 +237,19 @@
 
 #define EXYNOS4_PA_HSPHY		0x125B0000
 >>>>>>> v3.18
+=======
+#define EXYNOS4_PA_L2CC			0x10502000
+
+#define EXYNOS4_PA_SROMC		0x12570000
+#define EXYNOS5_PA_SROMC		0x12250000
+
+#define EXYNOS4_PA_HSPHY		0x125B0000
+>>>>>>> v3.18
 
 #define EXYNOS4_PA_UART			0x13800000
 #define EXYNOS5_PA_UART			0x12C00000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXYNOS4_PA_VP			0x12C00000
 #define EXYNOS4_PA_MIXER		0x12C10000
@@ -312,12 +335,17 @@
 #define EXYNOS5440_PA_UART1		0x000C0000
 #define EXYNOS5440_SZ_UART		SZ_256
 =======
+=======
+>>>>>>> v3.18
 #define EXYNOS4_PA_TIMER		0x139D0000
 #define EXYNOS5_PA_TIMER		0x12DD0000
 
 /* Compatibility UART */
 
 #define EXYNOS5440_PA_UART0		0x000B0000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define S3C_VA_UARTx(x)			(S3C_VA_UART + ((x) * S3C_UART_OFFSET))

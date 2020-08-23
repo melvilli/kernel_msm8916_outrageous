@@ -44,8 +44,13 @@ int blkdev_issue_discard(struct block_device *bdev, sector_t sector,
 	struct request_queue *q = bdev_get_queue(bdev);
 	int type = REQ_WRITE | REQ_DISCARD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t max_discard_sectors;
 	sector_t granularity, alignment;
+=======
+	unsigned int max_discard_sectors, granularity;
+	int alignment;
+>>>>>>> v3.18
 =======
 	unsigned int max_discard_sectors, granularity;
 	int alignment;
@@ -64,8 +69,12 @@ int blkdev_issue_discard(struct block_device *bdev, sector_t sector,
 	/* Zero-sector (unknown) and one-sector granularities are the same.  */
 	granularity = max(q->limits.discard_granularity >> 9, 1U);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alignment = bdev_discard_alignment(bdev) >> 9;
 	alignment = sector_div(alignment, granularity);
+=======
+	alignment = (bdev_discard_alignment(bdev) >> 9) % granularity;
+>>>>>>> v3.18
 =======
 	alignment = (bdev_discard_alignment(bdev) >> 9) % granularity;
 >>>>>>> v3.18
@@ -76,8 +85,12 @@ int blkdev_issue_discard(struct block_device *bdev, sector_t sector,
 	 */
 	max_discard_sectors = min(q->limits.max_discard_sectors, UINT_MAX >> 9);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_div(max_discard_sectors, granularity);
 	max_discard_sectors *= granularity;
+=======
+	max_discard_sectors -= max_discard_sectors % granularity;
+>>>>>>> v3.18
 =======
 	max_discard_sectors -= max_discard_sectors % granularity;
 >>>>>>> v3.18
@@ -124,7 +137,11 @@ int blkdev_issue_discard(struct block_device *bdev, sector_t sector,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = sector;
+=======
+		bio->bi_iter.bi_sector = sector;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = sector;
 >>>>>>> v3.18
@@ -133,7 +150,11 @@ int blkdev_issue_discard(struct block_device *bdev, sector_t sector,
 		bio->bi_private = &bb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_size = req_sects << 9;
+=======
+		bio->bi_iter.bi_size = req_sects << 9;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_size = req_sects << 9;
 >>>>>>> v3.18
@@ -206,7 +227,11 @@ int blkdev_issue_write_same(struct block_device *bdev, sector_t sector,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = sector;
+=======
+		bio->bi_iter.bi_sector = sector;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = sector;
 >>>>>>> v3.18
@@ -220,17 +245,23 @@ int blkdev_issue_write_same(struct block_device *bdev, sector_t sector,
 
 		if (nr_sects > max_write_same_sectors) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bio->bi_size = max_write_same_sectors << 9;
 			nr_sects -= max_write_same_sectors;
 			sector += max_write_same_sectors;
 		} else {
 			bio->bi_size = nr_sects << 9;
 =======
+=======
+>>>>>>> v3.18
 			bio->bi_iter.bi_size = max_write_same_sectors << 9;
 			nr_sects -= max_write_same_sectors;
 			sector += max_write_same_sectors;
 		} else {
 			bio->bi_iter.bi_size = nr_sects << 9;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nr_sects = 0;
 		}
@@ -262,8 +293,13 @@ EXPORT_SYMBOL(blkdev_issue_write_same);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __blkdev_issue_zeroout(struct block_device *bdev, sector_t sector,
 			sector_t nr_sects, gfp_t gfp_mask)
+=======
+static int __blkdev_issue_zeroout(struct block_device *bdev, sector_t sector,
+				  sector_t nr_sects, gfp_t gfp_mask)
+>>>>>>> v3.18
 =======
 static int __blkdev_issue_zeroout(struct block_device *bdev, sector_t sector,
 				  sector_t nr_sects, gfp_t gfp_mask)
@@ -289,7 +325,11 @@ static int __blkdev_issue_zeroout(struct block_device *bdev, sector_t sector,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = sector;
+=======
+		bio->bi_iter.bi_sector = sector;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = sector;
 >>>>>>> v3.18

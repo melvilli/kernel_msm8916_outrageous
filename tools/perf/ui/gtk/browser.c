@@ -44,7 +44,11 @@ const char *perf_gtk__get_percent_color(double percent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_GTK_INFO_BAR
+=======
+#ifdef HAVE_GTK_INFO_BAR_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_GTK_INFO_BAR_SUPPORT
 >>>>>>> v3.18

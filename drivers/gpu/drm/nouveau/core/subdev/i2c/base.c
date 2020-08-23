@@ -24,6 +24,11 @@
 
 #include <core/option.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <core/object.h>
+#include <core/event.h>
+>>>>>>> v3.18
 =======
 #include <core/object.h>
 #include <core/event.h>
@@ -33,15 +38,21 @@
 #include <subdev/bios/dcb.h>
 #include <subdev/bios/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/i2c.h>
 #include <subdev/vga.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/vga.h>
 
 #include "priv.h"
 #include "pad.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /******************************************************************************
  * interface to linux i2c bit-banging algorithm
@@ -59,10 +70,13 @@ nouveau_i2c_pre_xfer(struct i2c_adapter *adap)
 	struct i2c_algo_bit_data *bit = adap->algo_data;
 	struct nouveau_i2c_port *port = bit->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (port->func->acquire)
 		port->func->acquire(port);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return nouveau_i2c(port)->acquire(port, bit->timeout);
 }
 
@@ -72,6 +86,9 @@ nouveau_i2c_post_xfer(struct i2c_adapter *adap)
 	struct i2c_algo_bit_data *bit = adap->algo_data;
 	struct nouveau_i2c_port *port = bit->data;
 	return nouveau_i2c(port)->release(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -108,7 +125,10 @@ nouveau_i2c_getsda(void *data)
  *****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int
 _nouveau_i2c_port_fini(struct nouveau_object *object, bool suspend)
 {
@@ -118,6 +138,9 @@ _nouveau_i2c_port_fini(struct nouveau_object *object, bool suspend)
 	return nouveau_object_fini(&port->base, suspend);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void
 _nouveau_i2c_port_dtor(struct nouveau_object *object)
@@ -133,14 +156,20 @@ nouveau_i2c_port_create_(struct nouveau_object *parent,
 			 struct nouveau_oclass *oclass, u8 index,
 			 const struct i2c_algorithm *algo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 int size, void **pobject)
 {
 	struct nouveau_device *device = nv_device(parent);
 =======
+=======
+>>>>>>> v3.18
 			 const struct nouveau_i2c_func *func,
 			 int size, void **pobject)
 {
 	struct nouveau_device *device = nv_device(engine);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nouveau_i2c *i2c = (void *)engine;
 	struct nouveau_i2c_port *port;
@@ -155,15 +184,21 @@ nouveau_i2c_port_create_(struct nouveau_object *parent,
 		 "nouveau-%s-%d", device->name, index);
 	port->adapter.owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->adapter.dev.parent = &device->pdev->dev;
 	port->index = index;
 	i2c_set_adapdata(&port->adapter, i2c);
 =======
+=======
+>>>>>>> v3.18
 	port->adapter.dev.parent = nv_device_base(device);
 	port->index = index;
 	port->aux = -1;
 	port->func = func;
 	mutex_init(&port->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ( algo == &nouveau_i2c_bit_algo &&
@@ -179,6 +214,10 @@ nouveau_i2c_port_create_(struct nouveau_object *parent,
 		bit->data = port;
 		bit->pre_xfer = nouveau_i2c_pre_xfer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bit->post_xfer = nouveau_i2c_post_xfer;
+>>>>>>> v3.18
 =======
 		bit->post_xfer = nouveau_i2c_post_xfer;
 >>>>>>> v3.18
@@ -196,7 +235,10 @@ nouveau_i2c_port_create_(struct nouveau_object *parent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* drop port's i2c subdev refcount, i2c handles this itself */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ret == 0)
@@ -251,12 +293,15 @@ nouveau_i2c_find_type(struct nouveau_i2c *i2c, u16 type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nouveau_i2c_identify(struct nouveau_i2c *i2c, int index, const char *what,
 		     struct i2c_board_info *info,
 		     bool (*match)(struct nouveau_i2c_port *,
 				   struct i2c_board_info *))
 =======
+=======
+>>>>>>> v3.18
 static void
 nouveau_i2c_release_pad(struct nouveau_i2c_port *port)
 {
@@ -331,6 +376,9 @@ nouveau_i2c_identify(struct nouveau_i2c *i2c, int index, const char *what,
 		     struct nouveau_i2c_board_info *info,
 		     bool (*match)(struct nouveau_i2c_port *,
 				   struct i2c_board_info *, void *), void *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct nouveau_i2c_port *port = nouveau_i2c_find(i2c, index);
@@ -343,6 +391,7 @@ nouveau_i2c_identify(struct nouveau_i2c *i2c, int index, const char *what,
 
 	nv_debug(i2c, "probing %ss on bus: %d\n", what, port->index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; info[i].addr; i++) {
 		if (nv_probe_i2c(port, info[i].addr) &&
 		    (!match || match(port, &info[i]))) {
@@ -350,6 +399,8 @@ nouveau_i2c_identify(struct nouveau_i2c *i2c, int index, const char *what,
 			return i;
 		}
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; info[i].dev.addr; i++) {
 		u8 orig_udelay = 0;
 
@@ -373,6 +424,9 @@ nouveau_i2c_identify(struct nouveau_i2c *i2c, int index, const char *what,
 			struct i2c_algo_bit_data *algo = port->adapter.algo_data;
 			algo->udelay = orig_udelay;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -381,12 +435,15 @@ nouveau_i2c_identify(struct nouveau_i2c *i2c, int index, const char *what,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 _nouveau_i2c_fini(struct nouveau_object *object, bool suspend)
 {
 	struct nouveau_i2c *i2c = (void *)object;
 	struct nouveau_i2c_port *port;
 =======
+=======
+>>>>>>> v3.18
 static void
 nouveau_i2c_intr_fini(struct nvkm_event *event, int type, int index)
 {
@@ -467,6 +524,9 @@ _nouveau_i2c_fini(struct nouveau_object *object, bool suspend)
 	struct nouveau_i2c *i2c = (void *)object;
 	struct nouveau_i2c_port *port;
 	u32 mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -477,12 +537,18 @@ _nouveau_i2c_fini(struct nouveau_object *object, bool suspend)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((mask = (1 << impl->aux) - 1), impl->aux_stat) {
 		impl->aux_mask(i2c, NVKM_I2C_ANY, mask, 0);
 		impl->aux_stat(i2c, &mask, &mask, &mask, &mask);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return nouveau_subdev_fini(&i2c->base, suspend);
 fail:
@@ -525,6 +591,11 @@ _nouveau_i2c_dtor(struct nouveau_object *object)
 	struct nouveau_i2c_port *port, *temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nvkm_event_fini(&i2c->event);
+
+>>>>>>> v3.18
 =======
 	nvkm_event_fini(&i2c->event);
 
@@ -546,9 +617,15 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 		    struct nouveau_object *engine,
 		    struct nouveau_oclass *oclass,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct nouveau_oclass *sclass,
 		    int length, void **pobject)
 {
+=======
+		    int length, void **pobject)
+{
+	const struct nouveau_i2c_impl *impl = (void *)oclass;
+>>>>>>> v3.18
 =======
 		    int length, void **pobject)
 {
@@ -559,7 +636,11 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 	struct nouveau_object *object;
 	struct dcb_i2c_entry info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, i, j, index = -1;
+=======
+	int ret, i, j, index = -1, pad;
+>>>>>>> v3.18
 =======
 	int ret, i, j, index = -1, pad;
 >>>>>>> v3.18
@@ -574,10 +655,13 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c->find = nouveau_i2c_find;
 	i2c->find_type = nouveau_i2c_find_type;
 	i2c->identify = nouveau_i2c_identify;
 =======
+=======
+>>>>>>> v3.18
 	nv_subdev(i2c)->intr = nouveau_i2c_intr;
 	i2c->find = nouveau_i2c_find;
 	i2c->find_type = nouveau_i2c_find_type;
@@ -587,6 +671,9 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 	i2c->release = nouveau_i2c_release;
 	i2c->identify = nouveau_i2c_identify;
 	init_waitqueue_head(&i2c->wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&i2c->ports);
 
@@ -595,12 +682,15 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oclass = sclass;
 		do {
 			ret = -EINVAL;
 			if (oclass->handle == info.type) {
 				ret = nouveau_object_ctor(*pobject, *pobject,
 =======
+=======
+>>>>>>> v3.18
 		if (info.share != DCB_I2C_UNUSED) {
 			if (info.type == DCB_I2C_NVIO_AUX)
 				pad = info.drive;
@@ -622,12 +712,20 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 			ret = -EINVAL;
 			if (oclass->handle == info.type) {
 				ret = nouveau_object_ctor(parent, *pobject,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							  oclass, &info,
 							  index, &object);
 			}
 		} while (ret && (++oclass)->handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		nouveau_object_ref(NULL, &parent);
+>>>>>>> v3.18
 =======
 
 		nouveau_object_ref(NULL, &parent);
@@ -671,7 +769,10 @@ nouveau_i2c_create_(struct nouveau_object *parent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = nvkm_event_init(&nouveau_i2c_intr_func, 4, index, &i2c->event);
 	if (ret)
 		return ret;
@@ -692,6 +793,9 @@ _nouveau_i2c_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

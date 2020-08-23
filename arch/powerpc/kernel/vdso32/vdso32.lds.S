@@ -5,13 +5,19 @@
 #include <asm/vdso.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 OUTPUT_FORMAT("elf32-powerpc", "elf32-powerpc", "elf32-powerpc")
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 OUTPUT_FORMAT("elf32-powerpcle", "elf32-powerpcle", "elf32-powerpcle")
 #else
 OUTPUT_FORMAT("elf32-powerpc", "elf32-powerpc", "elf32-powerpc")
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 OUTPUT_ARCH(powerpc:common)
 ENTRY(_start)

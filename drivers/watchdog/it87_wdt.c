@@ -55,6 +55,10 @@
 /* Defaults for Module Parameter */
 #define DEFAULT_NOGAMEPORT	0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DEFAULT_NOCIR		0
+>>>>>>> v3.18
 =======
 #define DEFAULT_NOCIR		0
 >>>>>>> v3.18
@@ -141,6 +145,10 @@
 #define WDTS_USE_GP	4
 #define WDTS_EXPECTED	5
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define WDTS_USE_CIR	6
+>>>>>>> v3.18
 =======
 #define WDTS_USE_CIR	6
 >>>>>>> v3.18
@@ -150,6 +158,10 @@ static	unsigned long wdt_status;
 
 static	int nogameport = DEFAULT_NOGAMEPORT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int nocir      = DEFAULT_NOCIR;
+>>>>>>> v3.18
 =======
 static int nocir      = DEFAULT_NOCIR;
 >>>>>>> v3.18
@@ -162,6 +174,12 @@ module_param(nogameport, int, 0);
 MODULE_PARM_DESC(nogameport, "Forbid the activation of game port, default="
 		__MODULE_STRING(DEFAULT_NOGAMEPORT));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+module_param(nocir, int, 0);
+MODULE_PARM_DESC(nocir, "Forbid the use of Consumer IR interrupts to reset timer, default="
+		__MODULE_STRING(DEFAULT_NOCIR));
+>>>>>>> v3.18
 =======
 module_param(nocir, int, 0);
 MODULE_PARM_DESC(nocir, "Forbid the use of Consumer IR interrupts to reset timer, default="
@@ -277,10 +295,13 @@ static void wdt_keepalive(void)
 	if (test_bit(WDTS_USE_GP, &wdt_status))
 		inb(base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		/* The timer reloads with around 5 msec delay */
 		outb(0x55, CIR_DR(base));
 =======
+=======
+>>>>>>> v3.18
 	else if (test_bit(WDTS_USE_CIR, &wdt_status))
 		/* The timer reloads with around 5 msec delay */
 		outb(0x55, CIR_DR(base));
@@ -292,6 +313,9 @@ static void wdt_keepalive(void)
 		wdt_update_timeout();
 		superio_exit();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_bit(WDTS_KEEPALIVE, &wdt_status);
 }
@@ -306,7 +330,11 @@ static int wdt_start(void)
 	if (test_bit(WDTS_USE_GP, &wdt_status))
 		superio_outb(WDT_GAMEPORT, WDTCTRL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
+=======
+	else if (test_bit(WDTS_USE_CIR, &wdt_status))
+>>>>>>> v3.18
 =======
 	else if (test_bit(WDTS_USE_CIR, &wdt_status))
 >>>>>>> v3.18
@@ -697,7 +725,11 @@ static int __init it87_wdt_init(void)
 
 	/* If we haven't Gameport support, try to get CIR support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(WDTS_USE_GP, &wdt_status)) {
+=======
+	if (!nocir && !test_bit(WDTS_USE_GP, &wdt_status)) {
+>>>>>>> v3.18
 =======
 	if (!nocir && !test_bit(WDTS_USE_GP, &wdt_status)) {
 >>>>>>> v3.18
@@ -723,6 +755,10 @@ static int __init it87_wdt_init(void)
 			superio_outb(gpact, ACTREG);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		set_bit(WDTS_USE_CIR, &wdt_status);
+>>>>>>> v3.18
 =======
 		set_bit(WDTS_USE_CIR, &wdt_status);
 >>>>>>> v3.18
@@ -752,7 +788,11 @@ static int __init it87_wdt_init(void)
 
 	/* Initialize CIR to use it as keepalive source */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(WDTS_USE_GP, &wdt_status)) {
+=======
+	if (test_bit(WDTS_USE_CIR, &wdt_status)) {
+>>>>>>> v3.18
 =======
 	if (test_bit(WDTS_USE_CIR, &wdt_status)) {
 >>>>>>> v3.18
@@ -766,9 +806,15 @@ static int __init it87_wdt_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Chip IT%04x revision %d initialized. timeout=%d sec (nowayout=%d testmode=%d exclusive=%d nogameport=%d)\n",
 		chip_type, chip_rev, timeout,
 		nowayout, testmode, exclusive, nogameport);
+=======
+	pr_info("Chip IT%04x revision %d initialized. timeout=%d sec (nowayout=%d testmode=%d exclusive=%d nogameport=%d nocir=%d)\n",
+		chip_type, chip_rev, timeout,
+		nowayout, testmode, exclusive, nogameport, nocir);
+>>>>>>> v3.18
 =======
 	pr_info("Chip IT%04x revision %d initialized. timeout=%d sec (nowayout=%d testmode=%d exclusive=%d nogameport=%d nocir=%d)\n",
 		chip_type, chip_rev, timeout,
@@ -782,13 +828,19 @@ err_out_reboot:
 	unregister_reboot_notifier(&wdt_notifier);
 err_out_region:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_region(base, test_bit(WDTS_USE_GP, &wdt_status) ? 1 : 8);
 	if (!test_bit(WDTS_USE_GP, &wdt_status)) {
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(WDTS_USE_GP, &wdt_status))
 		release_region(base, 1);
 	else if (test_bit(WDTS_USE_CIR, &wdt_status)) {
 		release_region(base, 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		superio_select(CIR);
 		superio_outb(ciract, ACTREG);
@@ -816,7 +868,11 @@ static void __exit it87_wdt_exit(void)
 			superio_select(GAMEPORT);
 			superio_outb(gpact, ACTREG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else {
+=======
+		} else if (test_bit(WDTS_USE_CIR, &wdt_status)) {
+>>>>>>> v3.18
 =======
 		} else if (test_bit(WDTS_USE_CIR, &wdt_status)) {
 >>>>>>> v3.18
@@ -829,13 +885,19 @@ static void __exit it87_wdt_exit(void)
 	misc_deregister(&wdt_miscdev);
 	unregister_reboot_notifier(&wdt_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_region(base, test_bit(WDTS_USE_GP, &wdt_status) ? 1 : 8);
 =======
+=======
+>>>>>>> v3.18
 
 	if (test_bit(WDTS_USE_GP, &wdt_status))
 		release_region(base, 1);
 	else if (test_bit(WDTS_USE_CIR, &wdt_status))
 		release_region(base, 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -846,6 +908,9 @@ MODULE_AUTHOR("Oliver Schuster");
 MODULE_DESCRIPTION("Hardware Watchdog Device Driver for IT87xx EC-LPC I/O");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

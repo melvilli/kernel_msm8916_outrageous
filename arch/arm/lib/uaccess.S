@@ -118,9 +118,15 @@ USER(	TUSER(	strgtb) r3, [r0], #1)			@ May fault
 		addmi	ip, r2, #4
 		bmi	.Lc2u_1nowords
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, r7, pull #8
 		ldr	r7, [r1], #4
 		orr	r3, r3, r7, push #24
+=======
+		mov	r3, r7, lspull #8
+		ldr	r7, [r1], #4
+		orr	r3, r3, r7, lspush #24
+>>>>>>> v3.18
 =======
 		mov	r3, r7, lspull #8
 		ldr	r7, [r1], #4
@@ -138,6 +144,7 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		blt	.Lc2u_1rem8lp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lc2u_1cpy8lp:	mov	r3, r7, pull #8
 		ldmia	r1!, {r4 - r7}
 		subs	ip, ip, #16
@@ -149,6 +156,8 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		mov	r6, r6, pull #8
 		orr	r6, r6, r7, push #24
 =======
+=======
+>>>>>>> v3.18
 .Lc2u_1cpy8lp:	mov	r3, r7, lspull #8
 		ldmia	r1!, {r4 - r7}
 		subs	ip, ip, #16
@@ -159,11 +168,15 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		orr	r5, r5, r6, lspush #24
 		mov	r6, r6, lspull #8
 		orr	r6, r6, r7, lspush #24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	r0!, {r3 - r6}			@ Shouldnt fault
 		bpl	.Lc2u_1cpy8lp
 
 .Lc2u_1rem8lp:	tst	ip, #8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movne	r3, r7, pull #8
 		ldmneia	r1!, {r4, r7}
@@ -176,6 +189,8 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		ldrne	r7, [r1], #4
 		orrne	r3, r3, r7, push #24
 =======
+=======
+>>>>>>> v3.18
 		movne	r3, r7, lspull #8
 		ldmneia	r1!, {r4, r7}
 		orrne	r3, r3, r4, lspush #24
@@ -186,6 +201,9 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		movne	r3, r7, lspull #8
 		ldrne	r7, [r1], #4
 		orrne	r3, r3, r7, lspush #24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TUSER(	strne) r3, [r0], #4			@ Shouldnt fault
 		ands	ip, ip, #3
@@ -205,9 +223,15 @@ USER(	TUSER(	strgtb) r3, [r0], #1)			@ May fault
 		addmi	ip, r2, #4
 		bmi	.Lc2u_2nowords
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, r7, pull #16
 		ldr	r7, [r1], #4
 		orr	r3, r3, r7, push #16
+=======
+		mov	r3, r7, lspull #16
+		ldr	r7, [r1], #4
+		orr	r3, r3, r7, lspush #16
+>>>>>>> v3.18
 =======
 		mov	r3, r7, lspull #16
 		ldr	r7, [r1], #4
@@ -225,6 +249,7 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		blt	.Lc2u_2rem8lp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lc2u_2cpy8lp:	mov	r3, r7, pull #16
 		ldmia	r1!, {r4 - r7}
 		subs	ip, ip, #16
@@ -236,6 +261,8 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		mov	r6, r6, pull #16
 		orr	r6, r6, r7, push #16
 =======
+=======
+>>>>>>> v3.18
 .Lc2u_2cpy8lp:	mov	r3, r7, lspull #16
 		ldmia	r1!, {r4 - r7}
 		subs	ip, ip, #16
@@ -246,11 +273,15 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		orr	r5, r5, r6, lspush #16
 		mov	r6, r6, lspull #16
 		orr	r6, r6, r7, lspush #16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	r0!, {r3 - r6}			@ Shouldnt fault
 		bpl	.Lc2u_2cpy8lp
 
 .Lc2u_2rem8lp:	tst	ip, #8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movne	r3, r7, pull #16
 		ldmneia	r1!, {r4, r7}
@@ -263,6 +294,8 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		ldrne	r7, [r1], #4
 		orrne	r3, r3, r7, push #16
 =======
+=======
+>>>>>>> v3.18
 		movne	r3, r7, lspull #16
 		ldmneia	r1!, {r4, r7}
 		orrne	r3, r3, r4, lspush #16
@@ -273,6 +306,9 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		movne	r3, r7, lspull #16
 		ldrne	r7, [r1], #4
 		orrne	r3, r3, r7, lspush #16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TUSER(	strne) r3, [r0], #4			@ Shouldnt fault
 		ands	ip, ip, #3
@@ -292,9 +328,15 @@ USER(	TUSER(	strgtb) r3, [r0], #1)			@ May fault
 		addmi	ip, r2, #4
 		bmi	.Lc2u_3nowords
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, r7, pull #24
 		ldr	r7, [r1], #4
 		orr	r3, r3, r7, push #8
+=======
+		mov	r3, r7, lspull #24
+		ldr	r7, [r1], #4
+		orr	r3, r3, r7, lspush #8
+>>>>>>> v3.18
 =======
 		mov	r3, r7, lspull #24
 		ldr	r7, [r1], #4
@@ -312,6 +354,7 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		blt	.Lc2u_3rem8lp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lc2u_3cpy8lp:	mov	r3, r7, pull #24
 		ldmia	r1!, {r4 - r7}
 		subs	ip, ip, #16
@@ -323,6 +366,8 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		mov	r6, r6, pull #24
 		orr	r6, r6, r7, push #8
 =======
+=======
+>>>>>>> v3.18
 .Lc2u_3cpy8lp:	mov	r3, r7, lspull #24
 		ldmia	r1!, {r4 - r7}
 		subs	ip, ip, #16
@@ -333,11 +378,15 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		orr	r5, r5, r6, lspush #8
 		mov	r6, r6, lspull #24
 		orr	r6, r6, r7, lspush #8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	r0!, {r3 - r6}			@ Shouldnt fault
 		bpl	.Lc2u_3cpy8lp
 
 .Lc2u_3rem8lp:	tst	ip, #8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movne	r3, r7, pull #24
 		ldmneia	r1!, {r4, r7}
@@ -350,6 +399,8 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		ldrne	r7, [r1], #4
 		orrne	r3, r3, r7, push #8
 =======
+=======
+>>>>>>> v3.18
 		movne	r3, r7, lspull #24
 		ldmneia	r1!, {r4, r7}
 		orrne	r3, r3, r4, lspush #8
@@ -360,6 +411,9 @@ USER(	TUSER(	str)	r3, [r0], #4)			@ May fault
 		movne	r3, r7, lspull #24
 		ldrne	r7, [r1], #4
 		orrne	r3, r3, r7, lspush #8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TUSER(	strne) r3, [r0], #4			@ Shouldnt fault
 		ands	ip, ip, #3
@@ -479,9 +533,15 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		addmi	ip, r2, #4
 		bmi	.Lcfu_1nowords
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, r7, pull #8
 USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		orr	r3, r3, r7, push #24
+=======
+		mov	r3, r7, lspull #8
+USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
+		orr	r3, r3, r7, lspush #24
+>>>>>>> v3.18
 =======
 		mov	r3, r7, lspull #8
 USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
@@ -499,6 +559,7 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		blt	.Lcfu_1rem8lp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lcfu_1cpy8lp:	mov	r3, r7, pull #8
 		ldmia	r1!, {r4 - r7}			@ Shouldnt fault
 		subs	ip, ip, #16
@@ -510,6 +571,8 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		mov	r6, r6, pull #8
 		orr	r6, r6, r7, push #24
 =======
+=======
+>>>>>>> v3.18
 .Lcfu_1cpy8lp:	mov	r3, r7, lspull #8
 		ldmia	r1!, {r4 - r7}			@ Shouldnt fault
 		subs	ip, ip, #16
@@ -520,11 +583,15 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		orr	r5, r5, r6, lspush #24
 		mov	r6, r6, lspull #8
 		orr	r6, r6, r7, lspush #24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	r0!, {r3 - r6}
 		bpl	.Lcfu_1cpy8lp
 
 .Lcfu_1rem8lp:	tst	ip, #8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movne	r3, r7, pull #8
 		ldmneia	r1!, {r4, r7}			@ Shouldnt fault
@@ -537,6 +604,8 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		orrne	r3, r3, r7, push #24
 =======
+=======
+>>>>>>> v3.18
 		movne	r3, r7, lspull #8
 		ldmneia	r1!, {r4, r7}			@ Shouldnt fault
 		orrne	r3, r3, r4, lspush #24
@@ -547,6 +616,9 @@ USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		movne	r3, r7, lspull #8
 USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		orrne	r3, r3, r7, lspush #24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		strne	r3, [r0], #4
 		ands	ip, ip, #3
@@ -566,9 +638,15 @@ USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		addmi	ip, r2, #4
 		bmi	.Lcfu_2nowords
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, r7, pull #16
 USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		orr	r3, r3, r7, push #16
+=======
+		mov	r3, r7, lspull #16
+USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
+		orr	r3, r3, r7, lspush #16
+>>>>>>> v3.18
 =======
 		mov	r3, r7, lspull #16
 USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
@@ -587,6 +665,7 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lcfu_2cpy8lp:	mov	r3, r7, pull #16
 		ldmia	r1!, {r4 - r7}			@ Shouldnt fault
 		subs	ip, ip, #16
@@ -598,6 +677,8 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		mov	r6, r6, pull #16
 		orr	r6, r6, r7, push #16
 =======
+=======
+>>>>>>> v3.18
 .Lcfu_2cpy8lp:	mov	r3, r7, lspull #16
 		ldmia	r1!, {r4 - r7}			@ Shouldnt fault
 		subs	ip, ip, #16
@@ -608,11 +689,15 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		orr	r5, r5, r6, lspush #16
 		mov	r6, r6, lspull #16
 		orr	r6, r6, r7, lspush #16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	r0!, {r3 - r6}
 		bpl	.Lcfu_2cpy8lp
 
 .Lcfu_2rem8lp:	tst	ip, #8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movne	r3, r7, pull #16
 		ldmneia	r1!, {r4, r7}			@ Shouldnt fault
@@ -625,6 +710,8 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		orrne	r3, r3, r7, push #16
 =======
+=======
+>>>>>>> v3.18
 		movne	r3, r7, lspull #16
 		ldmneia	r1!, {r4, r7}			@ Shouldnt fault
 		orrne	r3, r3, r4, lspush #16
@@ -635,6 +722,9 @@ USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		movne	r3, r7, lspull #16
 USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		orrne	r3, r3, r7, lspush #16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		strne	r3, [r0], #4
 		ands	ip, ip, #3
@@ -654,9 +744,15 @@ USER(	TUSER(	ldrgtb) r3, [r1], #0)			@ May fault
 		addmi	ip, r2, #4
 		bmi	.Lcfu_3nowords
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, r7, pull #24
 USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		orr	r3, r3, r7, push #8
+=======
+		mov	r3, r7, lspull #24
+USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
+		orr	r3, r3, r7, lspush #8
+>>>>>>> v3.18
 =======
 		mov	r3, r7, lspull #24
 USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
@@ -674,6 +770,7 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		blt	.Lcfu_3rem8lp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lcfu_3cpy8lp:	mov	r3, r7, pull #24
 		ldmia	r1!, {r4 - r7}			@ Shouldnt fault
 		orr	r3, r3, r4, push #8
@@ -684,6 +781,8 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		mov	r6, r6, pull #24
 		orr	r6, r6, r7, push #8
 =======
+=======
+>>>>>>> v3.18
 .Lcfu_3cpy8lp:	mov	r3, r7, lspull #24
 		ldmia	r1!, {r4 - r7}			@ Shouldnt fault
 		orr	r3, r3, r4, lspush #8
@@ -693,12 +792,16 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 		orr	r5, r5, r6, lspush #8
 		mov	r6, r6, lspull #24
 		orr	r6, r6, r7, lspush #8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	r0!, {r3 - r6}
 		subs	ip, ip, #16
 		bpl	.Lcfu_3cpy8lp
 
 .Lcfu_3rem8lp:	tst	ip, #8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movne	r3, r7, pull #24
 		ldmneia	r1!, {r4, r7}			@ Shouldnt fault
@@ -711,6 +814,8 @@ USER(	TUSER(	ldr)	r7, [r1], #4)			@ May fault
 USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		orrne	r3, r3, r7, push #8
 =======
+=======
+>>>>>>> v3.18
 		movne	r3, r7, lspull #24
 		ldmneia	r1!, {r4, r7}			@ Shouldnt fault
 		orrne	r3, r3, r4, lspush #8
@@ -721,6 +826,9 @@ USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		movne	r3, r7, lspull #24
 USER(	TUSER(	ldrne) r7, [r1], #4)			@ May fault
 		orrne	r3, r3, r7, lspush #8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		strne	r3, [r0], #4
 		ands	ip, ip, #3

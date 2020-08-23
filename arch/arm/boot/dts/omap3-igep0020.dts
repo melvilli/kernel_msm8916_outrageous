@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Device Tree Source for IGEPv2 board
+=======
+ * Device Tree Source for IGEPv2 Rev. (TI OMAP AM/DM37x)
+>>>>>>> v3.18
 =======
  * Device Tree Source for IGEPv2 Rev. (TI OMAP AM/DM37x)
 >>>>>>> v3.18
@@ -14,6 +18,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap3-igep.dtsi"
 
 / {
@@ -26,6 +31,8 @@
 			 label = "omap3:green:boot";
 			 gpios = <&gpio1 26 0>;
 =======
+=======
+>>>>>>> v3.18
 #include "omap3-igep.dtsi"
 #include "omap-gpmc-smsc9221.dtsi"
 
@@ -41,6 +48,9 @@
 		boot {
 			 label = "omap3:green:boot";
 			 gpios = <&gpio1 26 GPIO_ACTIVE_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 default-state = "on";
 		};
@@ -48,7 +58,11 @@
 		user0 {
 			 label = "omap3:red:user0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 gpios = <&gpio1 27 0>;
+=======
+			 gpios = <&gpio1 27 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			 gpios = <&gpio1 27 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -58,7 +72,11 @@
 		user1 {
 			 label = "omap3:red:user1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 gpios = <&gpio1 28 0>;
+=======
+			 gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			 gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -68,8 +86,11 @@
 		user2 {
 			label = "omap3:green:user1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&twl_gpio 19 1>;
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&twl_gpio 19 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -129,13 +150,19 @@
 			dvi_connector_in: endpoint {
 				remote-endpoint = <&tfp410_out>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 &omap3_pmx_core {
 	pinctrl-names = "default";
 	pinctrl-0 = <
@@ -215,6 +242,9 @@
 	};
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 &i2c3 {
 	clock-frequency = <100000>;
@@ -229,7 +259,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &gpmc {
 	ranges = <0 0 0x00000000 0x20000000>,
@@ -313,4 +346,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

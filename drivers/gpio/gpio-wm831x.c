@@ -241,7 +241,11 @@ static struct gpio_chip template_chip = {
 	.set_debounce		= wm831x_gpio_set_debounce,
 	.dbg_show		= wm831x_gpio_dbg_show,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep		= 1,
+=======
+	.can_sleep		= true,
+>>>>>>> v3.18
 =======
 	.can_sleep		= true,
 >>>>>>> v3.18
@@ -251,7 +255,11 @@ static int wm831x_gpio_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 =======
 	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
 >>>>>>> v3.18
@@ -288,7 +296,12 @@ static int wm831x_gpio_remove(struct platform_device *pdev)
 	struct wm831x_gpio *wm831x_gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return  gpiochip_remove(&wm831x_gpio->gpio_chip);
+=======
+	gpiochip_remove(&wm831x_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&wm831x_gpio->gpio_chip);
 	return 0;

@@ -63,6 +63,10 @@ intel_i2c_reset(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -208,6 +212,7 @@ intel_gpio_setup(struct intel_gmbus *bus, u32 pin)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * gmbus on gen4 seems to be able to generate legacy interrupts even when in MSI
  * mode. This results in spurious interrupt warnings if the legacy irq no. is
@@ -215,6 +220,8 @@ intel_gpio_setup(struct intel_gmbus *bus, u32 pin)
  * and so prevents the other device from working properly.
  */
 #define HAS_GMBUS_IRQ(dev) (INTEL_INFO(dev)->gen >= 5)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int
@@ -284,18 +291,24 @@ gmbus_wait_idle(struct drm_i915_private *dev_priv)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 gmbus_xfer_read_chunk(struct drm_i915_private *dev_priv,
 		      unsigned short addr, u8 *buf, unsigned int len,
 		      u32 gmbus1_index)
 {
 	int reg_offset = dev_priv->gpio_mmio_base;
 =======
+=======
+>>>>>>> v3.18
 gmbus_xfer_read(struct drm_i915_private *dev_priv, struct i2c_msg *msg,
 		u32 gmbus1_index)
 {
 	int reg_offset = dev_priv->gpio_mmio_base;
 	u16 len = msg->len;
 	u8 *buf = msg->buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	I915_WRITE(GMBUS1 + reg_offset,
@@ -303,7 +316,11 @@ gmbus_xfer_read(struct drm_i915_private *dev_priv, struct i2c_msg *msg,
 		   GMBUS_CYCLE_WAIT |
 		   (len << GMBUS_BYTE_COUNT_SHIFT) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   (addr << GMBUS_SLAVE_ADDR_SHIFT) |
+=======
+		   (msg->addr << GMBUS_SLAVE_ADDR_SHIFT) |
+>>>>>>> v3.18
 =======
 		   (msg->addr << GMBUS_SLAVE_ADDR_SHIFT) |
 >>>>>>> v3.18
@@ -328,6 +345,7 @@ gmbus_xfer_read(struct drm_i915_private *dev_priv, struct i2c_msg *msg,
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 gmbus_xfer_read(struct drm_i915_private *dev_priv, struct i2c_msg *msg,
 		u32 gmbus1_index)
@@ -359,11 +377,16 @@ gmbus_xfer_write_chunk(struct drm_i915_private *dev_priv,
 	int reg_offset = dev_priv->gpio_mmio_base;
 	unsigned int chunk_size = len;
 =======
+=======
+>>>>>>> v3.18
 gmbus_xfer_write(struct drm_i915_private *dev_priv, struct i2c_msg *msg)
 {
 	int reg_offset = dev_priv->gpio_mmio_base;
 	u16 len = msg->len;
 	u8 *buf = msg->buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 val, loop;
 
@@ -377,8 +400,13 @@ gmbus_xfer_write(struct drm_i915_private *dev_priv, struct i2c_msg *msg)
 	I915_WRITE(GMBUS1 + reg_offset,
 		   GMBUS_CYCLE_WAIT |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   (chunk_size << GMBUS_BYTE_COUNT_SHIFT) |
 		   (addr << GMBUS_SLAVE_ADDR_SHIFT) |
+=======
+		   (msg->len << GMBUS_BYTE_COUNT_SHIFT) |
+		   (msg->addr << GMBUS_SLAVE_ADDR_SHIFT) |
+>>>>>>> v3.18
 =======
 		   (msg->len << GMBUS_BYTE_COUNT_SHIFT) |
 		   (msg->addr << GMBUS_SLAVE_ADDR_SHIFT) |
@@ -399,6 +427,7 @@ gmbus_xfer_write(struct drm_i915_private *dev_priv, struct i2c_msg *msg)
 		if (ret)
 			return ret;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -423,6 +452,8 @@ gmbus_xfer_write(struct drm_i915_private *dev_priv, struct i2c_msg *msg)
 		tx_size -= len;
 	} while (tx_size != 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -478,14 +509,20 @@ gmbus_xfer(struct i2c_adapter *adapter,
 					       adapter);
 	struct drm_i915_private *dev_priv = bus->dev_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0, inc, try = 0, reg_offset;
 	int ret = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	int i, reg_offset;
 	int ret = 0;
 
 	intel_aux_display_runtime_get(dev_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&dev_priv->gmbus_mutex);
 
@@ -497,6 +534,7 @@ gmbus_xfer(struct i2c_adapter *adapter,
 	reg_offset = dev_priv->gpio_mmio_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 retry:
 	I915_WRITE(GMBUS0 + reg_offset, bus->reg0);
 
@@ -506,12 +544,17 @@ retry:
 			ret = gmbus_xfer_index_read(dev_priv, &msgs[i]);
 			inc = 2; /* an index read is two msgs */
 =======
+=======
+>>>>>>> v3.18
 	I915_WRITE(GMBUS0 + reg_offset, bus->reg0);
 
 	for (i = 0; i < num; i++) {
 		if (gmbus_is_index_read(msgs, i, num)) {
 			ret = gmbus_xfer_index_read(dev_priv, &msgs[i]);
 			i += 1;  /* set i to the index of the read xfer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (msgs[i].flags & I2C_M_RD) {
 			ret = gmbus_xfer_read(dev_priv, &msgs[i], 0);
@@ -585,6 +628,7 @@ clear_err:
 			 (msgs[i].flags & I2C_M_RD) ? 'r' : 'w', msgs[i].len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Passive adapters sometimes NAK the first probe. Retry the first
 	 * message once on -ENXIO for GMBUS transfers; the bit banging algorithm
@@ -597,6 +641,8 @@ clear_err:
 		goto retry;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	goto out;
@@ -613,6 +659,10 @@ timeout:
 out:
 	mutex_unlock(&dev_priv->gmbus_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	intel_aux_display_runtime_put(dev_priv);
+>>>>>>> v3.18
 =======
 	intel_aux_display_runtime_put(dev_priv);
 >>>>>>> v3.18

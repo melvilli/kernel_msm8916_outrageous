@@ -21,8 +21,12 @@ config GFS2_FS
 
 	  The "nolock" lock module is now built in to GFS2 by default. If
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  you want to use the DLM, be sure to enable HOTPLUG and IPv4/6
 	  networking.
+=======
+	  you want to use the DLM, be sure to enable IPv4/6 networking.
+>>>>>>> v3.18
 =======
 	  you want to use the DLM, be sure to enable IPv4/6 networking.
 >>>>>>> v3.18
@@ -31,7 +35,11 @@ config GFS2_FS_LOCKING_DLM
 	bool "GFS2 DLM locking"
 	depends on (GFS2_FS!=n) && NET && INET && (IPV6 || IPV6=n) && \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		HOTPLUG && CONFIGFS_FS && SYSFS && (DLM=y || DLM=GFS2_FS)
+=======
+		CONFIGFS_FS && SYSFS && (DLM=y || DLM=GFS2_FS)
+>>>>>>> v3.18
 =======
 		CONFIGFS_FS && SYSFS && (DLM=y || DLM=GFS2_FS)
 >>>>>>> v3.18

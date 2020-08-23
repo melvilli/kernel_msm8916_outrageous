@@ -86,13 +86,19 @@ settings for data transfer parameters:
 	(clock polarity, idle high iff this is set) or SPI_CPHA (clock phase,
 	sample on trailing edge iff this is set) flags.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	Note that this request is limited to SPI mode flags that fit in a
 	single byte.
 
     SPI_IOC_RD_MODE32, SPI_IOC_WR_MODE32 ... pass a pointer to a uin32_t
 	which will return (RD) or assign (WR) the full SPI transfer mode,
 	not limited to the bits that fit in one byte.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     SPI_IOC_RD_LSB_FIRST, SPI_IOC_WR_LSB_FIRST ... pass a pointer to a byte

@@ -73,12 +73,18 @@ pte_alloc_one(struct mm_struct *mm, unsigned long address)
 		return NULL;
 	page = virt_to_page(pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_page_ctor(page);
 =======
+=======
+>>>>>>> v3.18
 	if (!pgtable_page_ctor(page)) {
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }

@@ -35,9 +35,12 @@ static noinline int gup_pte_range(pmd_t pmd, unsigned long addr,
 	ptep = pte_offset_kernel(&pmd, addr);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_t pte = *ptep;
 		struct page *page;
 =======
+=======
+>>>>>>> v3.18
 		pte_t pte = ACCESS_ONCE(*ptep);
 		struct page *page;
 		/*
@@ -45,6 +48,9 @@ static noinline int gup_pte_range(pmd_t pmd, unsigned long addr,
 		 */
 		if (pte_numa(pte))
 			return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if ((pte_val(pte) & mask) != result)
@@ -74,6 +80,7 @@ static int gup_pmd_range(pud_t pud, unsigned long addr, unsigned long end,
 	pmdp = pmd_offset(&pud, addr);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pmd_t pmd = *pmdp;
 
 		next = pmd_addr_end(addr, end);
@@ -81,6 +88,8 @@ static int gup_pmd_range(pud_t pud, unsigned long addr, unsigned long end,
 			return 0;
 		if (pmd_huge(pmd)) {
 =======
+=======
+>>>>>>> v3.18
 		pmd_t pmd = ACCESS_ONCE(*pmdp);
 
 		next = pmd_addr_end(addr, end);
@@ -101,6 +110,9 @@ static int gup_pmd_range(pud_t pud, unsigned long addr, unsigned long end,
 			if (pmd_numa(pmd))
 				return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!gup_hugepte((pte_t *)pmdp, PMD_SIZE, addr, next,
 					 write, pages, nr))
@@ -125,7 +137,11 @@ static int gup_pud_range(pgd_t pgd, unsigned long addr, unsigned long end,
 	pudp = pud_offset(&pgd, addr);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pud_t pud = *pudp;
+=======
+		pud_t pud = ACCESS_ONCE(*pudp);
+>>>>>>> v3.18
 =======
 		pud_t pud = ACCESS_ONCE(*pudp);
 >>>>>>> v3.18
@@ -149,8 +165,13 @@ static int gup_pud_range(pgd_t pgd, unsigned long addr, unsigned long end,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			struct page **pages)
+=======
+int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
+			  struct page **pages)
+>>>>>>> v3.18
 =======
 int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			  struct page **pages)
@@ -160,6 +181,10 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	unsigned long addr, len, end;
 	unsigned long next;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -176,7 +201,11 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	if (unlikely(!access_ok(write ? VERIFY_WRITE : VERIFY_READ,
 					start, len)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto slow_irqon;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -201,23 +230,30 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	 * we can follow the address down to the the page and take a ref on it.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_disable();
 
 	pgdp = pgd_offset(mm, addr);
 	do {
 		pgd_t pgd = *pgdp;
 =======
+=======
+>>>>>>> v3.18
 	local_irq_save(flags);
 
 	pgdp = pgd_offset(mm, addr);
 	do {
 		pgd_t pgd = ACCESS_ONCE(*pgdp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		pr_devel("  %016lx: normal pgd %p\n", addr,
 			 (void *)pgd_val(pgd));
 		next = pgd_addr_end(addr, end);
 		if (pgd_none(pgd))
+<<<<<<< HEAD
 <<<<<<< HEAD
 			goto slow;
 		if (pgd_huge(pgd)) {
@@ -244,6 +280,8 @@ slow:
 		local_irq_enable();
 slow_irqon:
 =======
+=======
+>>>>>>> v3.18
 			break;
 		if (pgd_huge(pgd)) {
 			if (!gup_hugepte((pte_t *)pgdp, PGDIR_SIZE, addr, next,
@@ -273,6 +311,9 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	ret = nr;
 
 	if (nr < nr_pages) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_devel("  slow path ! nr = %d\n", nr);
 
@@ -283,7 +324,11 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 		down_read(&mm->mmap_sem);
 		ret = get_user_pages(current, mm, start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(end - start) >> PAGE_SHIFT, write, 0, pages, NULL);
+=======
+				     nr_pages - nr, write, 0, pages, NULL);
+>>>>>>> v3.18
 =======
 				     nr_pages - nr, write, 0, pages, NULL);
 >>>>>>> v3.18
@@ -297,9 +342,15 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 				ret += nr;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		return ret;
 	}
+=======
+	}
+
+	return ret;
+>>>>>>> v3.18
 =======
 	}
 

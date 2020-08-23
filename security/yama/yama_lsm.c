@@ -293,7 +293,11 @@ int yama_ptrace_access_check(struct task_struct *child,
 
 	/* require ptrace target be a child of ptracer on attach */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mode & PTRACE_MODE_ATTACH) {
+=======
+	if (mode == PTRACE_MODE_ATTACH) {
+>>>>>>> v3.18
 =======
 	if (mode == PTRACE_MODE_ATTACH) {
 >>>>>>> v3.18
@@ -323,7 +327,11 @@ int yama_ptrace_access_check(struct task_struct *child,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc && (mode & PTRACE_MODE_NOAUDIT) == 0) {
+=======
+	if (rc) {
+>>>>>>> v3.18
 =======
 	if (rc) {
 >>>>>>> v3.18

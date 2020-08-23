@@ -55,16 +55,20 @@ static int atmel_trng_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -EINVAL;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	trng = devm_kzalloc(&pdev->dev, sizeof(*trng), GFP_KERNEL);
 	if (!trng)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, res->start,
 				     resource_size(res), pdev->name))
@@ -76,12 +80,17 @@ static int atmel_trng_probe(struct platform_device *pdev)
 
 	trng->clk = clk_get(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	trng->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(trng->base))
 		return PTR_ERR(trng->base);
 
 	trng->clk = devm_clk_get(&pdev->dev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(trng->clk))
 		return PTR_ERR(trng->clk);
@@ -89,7 +98,11 @@ static int atmel_trng_probe(struct platform_device *pdev)
 	ret = clk_enable(trng->clk);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_enable;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -109,9 +122,12 @@ static int atmel_trng_probe(struct platform_device *pdev)
 err_register:
 	clk_disable(trng->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_enable:
 	clk_put(trng->clk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -126,9 +142,12 @@ static int atmel_trng_remove(struct platform_device *pdev)
 	writel(TRNG_KEY, trng->base + TRNG_CR);
 	clk_disable(trng->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(trng->clk);
 
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

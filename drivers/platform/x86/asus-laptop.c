@@ -54,8 +54,12 @@
 #include <linux/slab.h>
 #include <linux/dmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -1499,10 +1503,16 @@ static int asus_input_init(struct asus_laptop *asus)
 
 	input = input_allocate_device();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!input) {
 		pr_warn("Unable to allocate input device\n");
 		return -ENOMEM;
 	}
+=======
+	if (!input)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!input)
 		return -ENOMEM;
@@ -1554,7 +1564,10 @@ static void asus_acpi_notify(struct acpi_device *device, u32 event)
 	/* TODO Find a better way to handle events count. */
 	count = asus->event_count[event % 128]++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_bus_generate_proc_event(asus->device, event, count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_bus_generate_netlink_event(asus->device->pnp.device_class,
@@ -1949,7 +1962,10 @@ fail_backlight:
 	asus_platform_exit(asus);
 fail_platform:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(asus->name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(asus);

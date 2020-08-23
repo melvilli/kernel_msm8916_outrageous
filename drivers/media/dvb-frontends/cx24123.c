@@ -740,7 +740,11 @@ static int cx24123_set_voltage(struct dvb_frontend *fe,
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1100,6 +1104,10 @@ struct dvb_frontend *cx24123_attach(const struct cx24123_config *config,
 	state->tuner_i2c_adapter.algo      = &cx24123_tuner_i2c_algo;
 	state->tuner_i2c_adapter.algo_data = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	state->tuner_i2c_adapter.dev.parent = i2c->dev.parent;
+>>>>>>> v3.18
 =======
 	state->tuner_i2c_adapter.dev.parent = i2c->dev.parent;
 >>>>>>> v3.18

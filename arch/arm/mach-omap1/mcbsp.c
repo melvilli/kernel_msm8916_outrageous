@@ -28,7 +28,10 @@
 
 #include "iomap.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -118,7 +121,11 @@ struct resource omap7xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP1_RX,
+=======
+			.start = 9,
+>>>>>>> v3.18
 =======
 			.start = 9,
 >>>>>>> v3.18
@@ -127,7 +134,11 @@ struct resource omap7xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP1_TX,
+=======
+			.start = 8,
+>>>>>>> v3.18
 =======
 			.start = 8,
 >>>>>>> v3.18
@@ -153,7 +164,11 @@ struct resource omap7xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP3_RX,
+=======
+			.start = 11,
+>>>>>>> v3.18
 =======
 			.start = 11,
 >>>>>>> v3.18
@@ -162,7 +177,11 @@ struct resource omap7xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP3_TX,
+=======
+			.start = 10,
+>>>>>>> v3.18
 =======
 			.start = 10,
 >>>>>>> v3.18
@@ -211,7 +230,11 @@ struct resource omap15xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP1_RX,
+=======
+			.start = 9,
+>>>>>>> v3.18
 =======
 			.start = 9,
 >>>>>>> v3.18
@@ -220,7 +243,11 @@ struct resource omap15xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP1_TX,
+=======
+			.start = 8,
+>>>>>>> v3.18
 =======
 			.start = 8,
 >>>>>>> v3.18
@@ -246,7 +273,11 @@ struct resource omap15xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP2_RX,
+=======
+			.start = 17,
+>>>>>>> v3.18
 =======
 			.start = 17,
 >>>>>>> v3.18
@@ -255,7 +286,11 @@ struct resource omap15xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP2_TX,
+=======
+			.start = 16,
+>>>>>>> v3.18
 =======
 			.start = 16,
 >>>>>>> v3.18
@@ -281,7 +316,11 @@ struct resource omap15xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP3_RX,
+=======
+			.start = 11,
+>>>>>>> v3.18
 =======
 			.start = 11,
 >>>>>>> v3.18
@@ -290,7 +329,11 @@ struct resource omap15xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP3_TX,
+=======
+			.start = 10,
+>>>>>>> v3.18
 =======
 			.start = 10,
 >>>>>>> v3.18
@@ -342,7 +385,11 @@ struct resource omap16xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP1_RX,
+=======
+			.start = 9,
+>>>>>>> v3.18
 =======
 			.start = 9,
 >>>>>>> v3.18
@@ -351,7 +398,11 @@ struct resource omap16xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP1_TX,
+=======
+			.start = 8,
+>>>>>>> v3.18
 =======
 			.start = 8,
 >>>>>>> v3.18
@@ -377,7 +428,11 @@ struct resource omap16xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP2_RX,
+=======
+			.start = 17,
+>>>>>>> v3.18
 =======
 			.start = 17,
 >>>>>>> v3.18
@@ -386,7 +441,11 @@ struct resource omap16xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP2_TX,
+=======
+			.start = 16,
+>>>>>>> v3.18
 =======
 			.start = 16,
 >>>>>>> v3.18
@@ -412,7 +471,11 @@ struct resource omap16xx_mcbsp_res[][6] = {
 		{
 			.name  = "rx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP3_RX,
+=======
+			.start = 11,
+>>>>>>> v3.18
 =======
 			.start = 11,
 >>>>>>> v3.18
@@ -421,7 +484,11 @@ struct resource omap16xx_mcbsp_res[][6] = {
 		{
 			.name  = "tx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.start = OMAP_DMA_MCBSP3_TX,
+=======
+			.start = 10,
+>>>>>>> v3.18
 =======
 			.start = 10,
 >>>>>>> v3.18

@@ -29,7 +29,11 @@
 #include <linux/spi/at73c213.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -50,15 +54,21 @@
 
 #include "at91_aic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "at91_shdwc.h"
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -318,6 +328,11 @@ static void __init ek_add_device_buttons(void) {}
 static void __init ek_board_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 =======
 	at91_register_devices();
 
@@ -360,7 +375,11 @@ static void __init ek_board_init(void)
 MACHINE_START(AT91SAM9260EK, "Atmel AT91SAM9260-EK")
 	/* Maintainer: Atmel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

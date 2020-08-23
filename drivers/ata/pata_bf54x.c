@@ -1597,7 +1597,11 @@ static int bfin_atapi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, host);
+=======
+	platform_set_drvdata(pdev, host);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, host);
 >>>>>>> v3.18
@@ -1615,11 +1619,17 @@ static int bfin_atapi_probe(struct platform_device *pdev)
 static int bfin_atapi_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = &pdev->dev;
 	struct ata_host *host = dev_get_drvdata(dev);
 
 	ata_host_detach(host);
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+	struct ata_host *host = platform_get_drvdata(pdev);
+
+	ata_host_detach(host);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = platform_get_drvdata(pdev);
 
@@ -1632,15 +1642,21 @@ static int bfin_atapi_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int bfin_atapi_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int bfin_atapi_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	struct ata_host *host = platform_get_drvdata(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (host)
 		return ata_host_suspend(host, state);
@@ -1651,7 +1667,11 @@ static int bfin_atapi_suspend(struct platform_device *pdev, pm_message_t state)
 static int bfin_atapi_resume(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = platform_get_drvdata(pdev);
 >>>>>>> v3.18

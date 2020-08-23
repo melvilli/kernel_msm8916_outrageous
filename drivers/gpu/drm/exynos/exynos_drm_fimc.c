@@ -13,7 +13,10 @@
  */
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -22,6 +25,11 @@
 #include <linux/clk.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/spinlock.h>
@@ -31,6 +39,10 @@
 #include <drm/exynos_drm.h>
 #include "regs-fimc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "exynos_drm_drv.h"
+>>>>>>> v3.18
 =======
 #include "exynos_drm_drv.h"
 >>>>>>> v3.18
@@ -69,7 +81,10 @@
 #define FIMC_BUF_STOP	1
 #define FIMC_BUF_START	2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIMC_REG_SZ		32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FIMC_WIDTH_ITU_709	1280
@@ -84,9 +99,12 @@
 #define get_ctx_from_ippdrv(ippdrv)	container_of(ippdrv,\
 					struct fimc_context, ippdrv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define fimc_read(offset)		readl(ctx->regs + (offset))
 #define fimc_write(cfg, offset)	writel(cfg, ctx->regs + (offset))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum fimc_wb {
@@ -179,7 +197,11 @@ struct fimc_context {
 	struct resource	*regs_res;
 	void __iomem	*regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex	lock;
+=======
+	spinlock_t	lock;
+>>>>>>> v3.18
 =======
 	spinlock_t	lock;
 >>>>>>> v3.18
@@ -194,7 +216,10 @@ struct fimc_context {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 fimc_read(struct fimc_context *ctx, u32 reg)
 {
 	return readl(ctx->regs + reg);
@@ -219,11 +244,15 @@ static void fimc_clear_bits(struct fimc_context *ctx, u32 reg, u32 bits)
 	writel(readl(r) & ~bits, r);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void fimc_sw_reset(struct fimc_context *ctx)
 {
 	u32 cfg;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
@@ -257,6 +286,8 @@ static void fimc_sw_reset(struct fimc_context *ctx)
 	/* reset sequence */
 	fimc_write(0x0, EXYNOS_CIFCNTSEQ);
 =======
+=======
+>>>>>>> v3.18
 	/* stop dma operation */
 	cfg = fimc_read(ctx, EXYNOS_CISTATUS);
 	if (EXYNOS_CISTATUS_GET_ENVID_STATUS(cfg))
@@ -276,14 +307,20 @@ static void fimc_sw_reset(struct fimc_context *ctx)
 
 	/* reset sequence */
 	fimc_write(ctx, 0x0, EXYNOS_CIFCNTSEQ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int fimc_set_camblk_fimd0_wb(struct fimc_context *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return regmap_update_bits(ctx->sysreg, SYSREG_CAMERA_BLK,
@@ -296,9 +333,15 @@ static void fimc_set_type_ctrl(struct fimc_context *ctx, enum fimc_wb wb)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:wb[%d]\n", __func__, wb);
 
 	cfg = fimc_read(EXYNOS_CIGCTRL);
+=======
+	DRM_DEBUG_KMS("wb[%d]\n", wb);
+
+	cfg = fimc_read(ctx, EXYNOS_CIGCTRL);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("wb[%d]\n", wb);
 
@@ -330,7 +373,11 @@ static void fimc_set_type_ctrl(struct fimc_context *ctx, enum fimc_wb wb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIGCTRL);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
 >>>>>>> v3.18
@@ -342,6 +389,7 @@ static void fimc_set_polarity(struct fimc_context *ctx,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:inv_pclk[%d]inv_vsync[%d]\n",
 		__func__, pol->inv_pclk, pol->inv_vsync);
 	DRM_DEBUG_KMS("%s:inv_href[%d]inv_hsync[%d]\n",
@@ -349,12 +397,17 @@ static void fimc_set_polarity(struct fimc_context *ctx,
 
 	cfg = fimc_read(EXYNOS_CIGCTRL);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("inv_pclk[%d]inv_vsync[%d]\n",
 		pol->inv_pclk, pol->inv_vsync);
 	DRM_DEBUG_KMS("inv_href[%d]inv_hsync[%d]\n",
 		pol->inv_href, pol->inv_hsync);
 
 	cfg = fimc_read(ctx, EXYNOS_CIGCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg &= ~(EXYNOS_CIGCTRL_INVPOLPCLK | EXYNOS_CIGCTRL_INVPOLVSYNC |
 		 EXYNOS_CIGCTRL_INVPOLHREF | EXYNOS_CIGCTRL_INVPOLHSYNC);
@@ -369,7 +422,11 @@ static void fimc_set_polarity(struct fimc_context *ctx,
 		cfg |= EXYNOS_CIGCTRL_INVPOLHSYNC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIGCTRL);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
 >>>>>>> v3.18
@@ -380,9 +437,15 @@ static void fimc_handle_jpeg(struct fimc_context *ctx, bool enable)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:enable[%d]\n", __func__, enable);
 
 	cfg = fimc_read(EXYNOS_CIGCTRL);
+=======
+	DRM_DEBUG_KMS("enable[%d]\n", enable);
+
+	cfg = fimc_read(ctx, EXYNOS_CIGCTRL);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("enable[%d]\n", enable);
 
@@ -393,6 +456,7 @@ static void fimc_handle_jpeg(struct fimc_context *ctx, bool enable)
 	else
 		cfg &= ~EXYNOS_CIGCTRL_CAM_JPEG;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIGCTRL);
 }
@@ -418,6 +482,8 @@ static void fimc_handle_irq(struct fimc_context *ctx, bool enable,
 
 	fimc_write(cfg, EXYNOS_CIGCTRL);
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
 }
 
@@ -434,11 +500,15 @@ static void fimc_mask_irq(struct fimc_context *ctx, bool enable)
 	} else
 		cfg &= ~EXYNOS_CIGCTRL_IRQ_ENABLE;
 	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void fimc_clear_irq(struct fimc_context *ctx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 cfg;
 
@@ -450,11 +520,15 @@ static void fimc_clear_irq(struct fimc_context *ctx)
 =======
 	fimc_set_bits(ctx, EXYNOS_CIGCTRL, EXYNOS_CIGCTRL_IRQ_CLR);
 >>>>>>> v3.18
+=======
+	fimc_set_bits(ctx, EXYNOS_CIGCTRL, EXYNOS_CIGCTRL_IRQ_CLR);
+>>>>>>> v3.18
 }
 
 static bool fimc_check_ovf(struct fimc_context *ctx)
 {
 	struct exynos_drm_ippdrv *ippdrv = &ctx->ippdrv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 cfg, status, flag;
 
@@ -479,6 +553,8 @@ static bool fimc_check_ovf(struct fimc_context *ctx)
 
 		dev_err(ippdrv->dev, "occured overflow at %d, status 0x%x.\n",
 =======
+=======
+>>>>>>> v3.18
 	u32 status, flag;
 
 	status = fimc_read(ctx, EXYNOS_CISTATUS);
@@ -493,6 +569,9 @@ static bool fimc_check_ovf(struct fimc_context *ctx)
 			EXYNOS_CIWDOFST_CLROVFICR);
 
 		dev_err(ippdrv->dev, "occurred overflow at %d, status 0x%x.\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->id, status);
 		return true;
@@ -506,9 +585,15 @@ static bool fimc_check_frame_end(struct fimc_context *ctx)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg = fimc_read(EXYNOS_CISTATUS);
 
 	DRM_DEBUG_KMS("%s:cfg[0x%x]\n", __func__, cfg);
+=======
+	cfg = fimc_read(ctx, EXYNOS_CISTATUS);
+
+	DRM_DEBUG_KMS("cfg[0x%x]\n", cfg);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_CISTATUS);
 
@@ -520,7 +605,11 @@ static bool fimc_check_frame_end(struct fimc_context *ctx)
 
 	cfg &= ~(EXYNOS_CISTATUS_FRAMEEND);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CISTATUS);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CISTATUS);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CISTATUS);
 >>>>>>> v3.18
@@ -534,9 +623,13 @@ static int fimc_get_buf_id(struct fimc_context *ctx)
 	int frame_cnt, buf_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
 	cfg = fimc_read(EXYNOS_CISTATUS2);
+=======
+	cfg = fimc_read(ctx, EXYNOS_CISTATUS2);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_CISTATUS2);
 >>>>>>> v3.18
@@ -546,7 +639,11 @@ static int fimc_get_buf_id(struct fimc_context *ctx)
 		frame_cnt = EXYNOS_CISTATUS2_GET_FRAMECOUNT_PRESENT(cfg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:present[%d]before[%d]\n", __func__,
+=======
+	DRM_DEBUG_KMS("present[%d]before[%d]\n",
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("present[%d]before[%d]\n",
 >>>>>>> v3.18
@@ -560,7 +657,11 @@ static int fimc_get_buf_id(struct fimc_context *ctx)
 
 	buf_id = frame_cnt - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:buf_id[%d]\n", __func__, buf_id);
+=======
+	DRM_DEBUG_KMS("buf_id[%d]\n", buf_id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("buf_id[%d]\n", buf_id);
 >>>>>>> v3.18
@@ -573,9 +674,15 @@ static void fimc_handle_lastend(struct fimc_context *ctx, bool enable)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:enable[%d]\n", __func__, enable);
 
 	cfg = fimc_read(EXYNOS_CIOCTRL);
+=======
+	DRM_DEBUG_KMS("enable[%d]\n", enable);
+
+	cfg = fimc_read(ctx, EXYNOS_CIOCTRL);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("enable[%d]\n", enable);
 
@@ -587,7 +694,11 @@ static void fimc_handle_lastend(struct fimc_context *ctx, bool enable)
 		cfg &= ~EXYNOS_CIOCTRL_LASTENDEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIOCTRL);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIOCTRL);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIOCTRL);
 >>>>>>> v3.18
@@ -600,15 +711,21 @@ static int fimc_src_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fmt[0x%x]\n", __func__, fmt);
 
 	/* RGB */
 	cfg = fimc_read(EXYNOS_CISCCTRL);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
 
 	/* RGB */
 	cfg = fimc_read(ctx, EXYNOS_CISCCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg &= ~EXYNOS_CISCCTRL_INRGB_FMT_RGB_MASK;
 
@@ -616,7 +733,11 @@ static int fimc_src_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	case DRM_FORMAT_RGB565:
 		cfg |= EXYNOS_CISCCTRL_INRGB_FMT_RGB565;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(cfg, EXYNOS_CISCCTRL);
+=======
+		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
+>>>>>>> v3.18
 =======
 		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
 >>>>>>> v3.18
@@ -625,7 +746,11 @@ static int fimc_src_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	case DRM_FORMAT_XRGB8888:
 		cfg |= EXYNOS_CISCCTRL_INRGB_FMT_RGB888;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(cfg, EXYNOS_CISCCTRL);
+=======
+		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
+>>>>>>> v3.18
 =======
 		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
 >>>>>>> v3.18
@@ -637,7 +762,11 @@ static int fimc_src_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 
 	/* YUV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg = fimc_read(EXYNOS_MSCTRL);
+=======
+	cfg = fimc_read(ctx, EXYNOS_MSCTRL);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_MSCTRL);
 >>>>>>> v3.18
@@ -681,7 +810,11 @@ static int fimc_src_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_MSCTRL);
+=======
+	fimc_write(ctx, cfg, EXYNOS_MSCTRL);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_MSCTRL);
 >>>>>>> v3.18
@@ -696,9 +829,15 @@ static int fimc_src_set_fmt(struct device *dev, u32 fmt)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fmt[0x%x]\n", __func__, fmt);
 
 	cfg = fimc_read(EXYNOS_MSCTRL);
+=======
+	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
+
+	cfg = fimc_read(ctx, EXYNOS_MSCTRL);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
 
@@ -739,9 +878,15 @@ static int fimc_src_set_fmt(struct device *dev, u32 fmt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_MSCTRL);
 
 	cfg = fimc_read(EXYNOS_CIDMAPARAM);
+=======
+	fimc_write(ctx, cfg, EXYNOS_MSCTRL);
+
+	cfg = fimc_read(ctx, EXYNOS_CIDMAPARAM);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_MSCTRL);
 
@@ -755,7 +900,11 @@ static int fimc_src_set_fmt(struct device *dev, u32 fmt)
 		cfg |= EXYNOS_CIDMAPARAM_R_MODE_LINEAR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIDMAPARAM);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIDMAPARAM);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIDMAPARAM);
 >>>>>>> v3.18
@@ -772,6 +921,7 @@ static int fimc_src_set_transf(struct device *dev,
 	u32 cfg1, cfg2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:degree[%d]flip[0x%x]\n", __func__,
 		degree, flip);
 
@@ -781,6 +931,8 @@ static int fimc_src_set_transf(struct device *dev,
 
 	cfg2 = fimc_read(EXYNOS_CITRGFMT);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
 
 	cfg1 = fimc_read(ctx, EXYNOS_MSCTRL);
@@ -788,6 +940,9 @@ static int fimc_src_set_transf(struct device *dev,
 		EXYNOS_MSCTRL_FLIP_Y_MIRROR);
 
 	cfg2 = fimc_read(ctx, EXYNOS_CITRGFMT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg2 &= ~EXYNOS_CITRGFMT_INROT90_CLOCKWISE;
 
@@ -828,8 +983,13 @@ static int fimc_src_set_transf(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg1, EXYNOS_MSCTRL);
 	fimc_write(cfg2, EXYNOS_CITRGFMT);
+=======
+	fimc_write(ctx, cfg1, EXYNOS_MSCTRL);
+	fimc_write(ctx, cfg2, EXYNOS_CITRGFMT);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg1, EXYNOS_MSCTRL);
 	fimc_write(ctx, cfg2, EXYNOS_CITRGFMT);
@@ -851,10 +1011,16 @@ static int fimc_set_window(struct fimc_context *ctx,
 	v2 = sz->vsize - pos->h - pos->y;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:x[%d]y[%d]w[%d]h[%d]hsize[%d]vsize[%d]\n",
 	__func__, pos->x, pos->y, pos->w, pos->h, sz->hsize, sz->vsize);
 	DRM_DEBUG_KMS("%s:h1[%d]h2[%d]v1[%d]v2[%d]\n", __func__,
 		h1, h2, v1, v2);
+=======
+	DRM_DEBUG_KMS("x[%d]y[%d]w[%d]h[%d]hsize[%d]vsize[%d]\n",
+		pos->x, pos->y, pos->w, pos->h, sz->hsize, sz->vsize);
+	DRM_DEBUG_KMS("h1[%d]h2[%d]v1[%d]v2[%d]\n", h1, h2, v1, v2);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("x[%d]y[%d]w[%d]h[%d]hsize[%d]vsize[%d]\n",
 		pos->x, pos->y, pos->w, pos->h, sz->hsize, sz->vsize);
@@ -866,7 +1032,11 @@ static int fimc_set_window(struct fimc_context *ctx,
 	 * check figure 43-21 in user manual
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg = fimc_read(EXYNOS_CIWDOFST);
+=======
+	cfg = fimc_read(ctx, EXYNOS_CIWDOFST);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_CIWDOFST);
 >>>>>>> v3.18
@@ -876,17 +1046,23 @@ static int fimc_set_window(struct fimc_context *ctx,
 		EXYNOS_CIWDOFST_WINVEROFST(v1));
 	cfg |= EXYNOS_CIWDOFST_WINOFSEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIWDOFST);
 
 	cfg = (EXYNOS_CIWDOFST2_WINHOROFST2(h2) |
 		EXYNOS_CIWDOFST2_WINVEROFST2(v2));
 	fimc_write(cfg, EXYNOS_CIWDOFST2);
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg, EXYNOS_CIWDOFST);
 
 	cfg = (EXYNOS_CIWDOFST2_WINHOROFST2(h2) |
 		EXYNOS_CIWDOFST2_WINVEROFST2(v2));
 	fimc_write(ctx, cfg, EXYNOS_CIWDOFST2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -901,8 +1077,13 @@ static int fimc_src_set_size(struct device *dev, int swap,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:swap[%d]hsize[%d]vsize[%d]\n",
 		__func__, swap, sz->hsize, sz->vsize);
+=======
+	DRM_DEBUG_KMS("swap[%d]hsize[%d]vsize[%d]\n",
+		swap, sz->hsize, sz->vsize);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("swap[%d]hsize[%d]vsize[%d]\n",
 		swap, sz->hsize, sz->vsize);
@@ -913,10 +1094,16 @@ static int fimc_src_set_size(struct device *dev, int swap,
 		EXYNOS_ORGISIZE_VERTICAL(img_sz.vsize));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_ORGISIZE);
 
 	DRM_DEBUG_KMS("%s:x[%d]y[%d]w[%d]h[%d]\n", __func__,
 		pos->x, pos->y, pos->w, pos->h);
+=======
+	fimc_write(ctx, cfg, EXYNOS_ORGISIZE);
+
+	DRM_DEBUG_KMS("x[%d]y[%d]w[%d]h[%d]\n", pos->x, pos->y, pos->w, pos->h);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_ORGISIZE);
 
@@ -932,7 +1119,11 @@ static int fimc_src_set_size(struct device *dev, int swap,
 
 	/* set input DMA image size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg = fimc_read(EXYNOS_CIREAL_ISIZE);
+=======
+	cfg = fimc_read(ctx, EXYNOS_CIREAL_ISIZE);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_CIREAL_ISIZE);
 >>>>>>> v3.18
@@ -941,7 +1132,11 @@ static int fimc_src_set_size(struct device *dev, int swap,
 	cfg |= (EXYNOS_CIREAL_ISIZE_WIDTH(img_pos.w) |
 		EXYNOS_CIREAL_ISIZE_HEIGHT(img_pos.h));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIREAL_ISIZE);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIREAL_ISIZE);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIREAL_ISIZE);
 >>>>>>> v3.18
@@ -954,7 +1149,11 @@ static int fimc_src_set_size(struct device *dev, int swap,
 		EXYNOS_CISRCFMT_SOURCEHSIZE(img_sz.hsize) |
 		EXYNOS_CISRCFMT_SOURCEVSIZE(img_sz.vsize));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CISRCFMT);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CISRCFMT);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CISRCFMT);
 >>>>>>> v3.18
@@ -962,6 +1161,7 @@ static int fimc_src_set_size(struct device *dev, int swap,
 	/* offset Y(RGB), Cb, Cr */
 	cfg = (EXYNOS_CIIYOFF_HORIZONTAL(img_pos.x) |
 		EXYNOS_CIIYOFF_VERTICAL(img_pos.y));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIIYOFF);
 	cfg = (EXYNOS_CIICBOFF_HORIZONTAL(img_pos.x) |
@@ -971,6 +1171,8 @@ static int fimc_src_set_size(struct device *dev, int swap,
 		EXYNOS_CIICROFF_VERTICAL(img_pos.y));
 	fimc_write(cfg, EXYNOS_CIICROFF);
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg, EXYNOS_CIIYOFF);
 	cfg = (EXYNOS_CIICBOFF_HORIZONTAL(img_pos.x) |
 		EXYNOS_CIICBOFF_VERTICAL(img_pos.y));
@@ -978,6 +1180,9 @@ static int fimc_src_set_size(struct device *dev, int swap,
 	cfg = (EXYNOS_CIICROFF_HORIZONTAL(img_pos.x) |
 		EXYNOS_CIICROFF_VERTICAL(img_pos.y));
 	fimc_write(ctx, cfg, EXYNOS_CIICROFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return fimc_set_window(ctx, &img_pos, &img_sz);
@@ -1001,7 +1206,11 @@ static int fimc_src_set_addr(struct device *dev,
 	property = &c_node->property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:prop_id[%d]buf_id[%d]buf_type[%d]\n", __func__,
+=======
+	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
 >>>>>>> v3.18
@@ -1016,6 +1225,7 @@ static int fimc_src_set_addr(struct device *dev,
 	switch (buf_type) {
 	case IPP_BUF_ENQUEUE:
 		config = &property->config[EXYNOS_DRM_OPS_SRC];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		fimc_write(buf_info->base[EXYNOS_DRM_PLANAR_Y],
 			EXYNOS_CIIYSA(buf_id));
@@ -1037,6 +1247,8 @@ static int fimc_src_set_addr(struct device *dev,
 		fimc_write(0x0, EXYNOS_CIICBSA(buf_id));
 		fimc_write(0x0, EXYNOS_CIICRSA(buf_id));
 =======
+=======
+>>>>>>> v3.18
 		fimc_write(ctx, buf_info->base[EXYNOS_DRM_PLANAR_Y],
 			EXYNOS_CIIYSA0);
 
@@ -1056,6 +1268,9 @@ static int fimc_src_set_addr(struct device *dev,
 		fimc_write(ctx, 0x0, EXYNOS_CIIYSA0);
 		fimc_write(ctx, 0x0, EXYNOS_CIICBSA0);
 		fimc_write(ctx, 0x0, EXYNOS_CIICRSA0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1079,15 +1294,21 @@ static int fimc_dst_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fmt[0x%x]\n", __func__, fmt);
 
 	/* RGB */
 	cfg = fimc_read(EXYNOS_CISCCTRL);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
 
 	/* RGB */
 	cfg = fimc_read(ctx, EXYNOS_CISCCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg &= ~EXYNOS_CISCCTRL_OUTRGB_FMT_RGB_MASK;
 
@@ -1095,24 +1316,34 @@ static int fimc_dst_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	case DRM_FORMAT_RGB565:
 		cfg |= EXYNOS_CISCCTRL_OUTRGB_FMT_RGB565;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(cfg, EXYNOS_CISCCTRL);
 		return 0;
 	case DRM_FORMAT_RGB888:
 		cfg |= EXYNOS_CISCCTRL_OUTRGB_FMT_RGB888;
 		fimc_write(cfg, EXYNOS_CISCCTRL);
 =======
+=======
+>>>>>>> v3.18
 		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
 		return 0;
 	case DRM_FORMAT_RGB888:
 		cfg |= EXYNOS_CISCCTRL_OUTRGB_FMT_RGB888;
 		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	case DRM_FORMAT_XRGB8888:
 		cfg |= (EXYNOS_CISCCTRL_OUTRGB_FMT_RGB888 |
 			EXYNOS_CISCCTRL_EXTRGB_EXTENSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(cfg, EXYNOS_CISCCTRL);
+=======
+		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
+>>>>>>> v3.18
 =======
 		fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
 >>>>>>> v3.18
@@ -1124,7 +1355,11 @@ static int fimc_dst_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 
 	/* YUV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg = fimc_read(EXYNOS_CIOCTRL);
+=======
+	cfg = fimc_read(ctx, EXYNOS_CIOCTRL);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_CIOCTRL);
 >>>>>>> v3.18
@@ -1170,7 +1405,11 @@ static int fimc_dst_set_fmt_order(struct fimc_context *ctx, u32 fmt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIOCTRL);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIOCTRL);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIOCTRL);
 >>>>>>> v3.18
@@ -1185,6 +1424,7 @@ static int fimc_dst_set_fmt(struct device *dev, u32 fmt)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fmt[0x%x]\n", __func__, fmt);
 
 	cfg = fimc_read(EXYNOS_CIEXTEN);
@@ -1198,6 +1438,8 @@ static int fimc_dst_set_fmt(struct device *dev, u32 fmt)
 
 		cfg = fimc_read(EXYNOS_CITRGFMT);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
 
 	cfg = fimc_read(ctx, EXYNOS_CIEXTEN);
@@ -1210,6 +1452,9 @@ static int fimc_dst_set_fmt(struct device *dev, u32 fmt)
 		fimc_write(ctx, cfg, EXYNOS_CIEXTEN);
 
 		cfg = fimc_read(ctx, EXYNOS_CITRGFMT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cfg &= ~EXYNOS_CITRGFMT_OUTFORMAT_MASK;
 
@@ -1244,15 +1489,21 @@ static int fimc_dst_set_fmt(struct device *dev, u32 fmt)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(cfg, EXYNOS_CITRGFMT);
 	}
 
 	cfg = fimc_read(EXYNOS_CIDMAPARAM);
 =======
+=======
+>>>>>>> v3.18
 		fimc_write(ctx, cfg, EXYNOS_CITRGFMT);
 	}
 
 	cfg = fimc_read(ctx, EXYNOS_CIDMAPARAM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg &= ~EXYNOS_CIDMAPARAM_W_MODE_MASK;
 
@@ -1262,7 +1513,11 @@ static int fimc_dst_set_fmt(struct device *dev, u32 fmt)
 		cfg |= EXYNOS_CIDMAPARAM_W_MODE_LINEAR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIDMAPARAM);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIDMAPARAM);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIDMAPARAM);
 >>>>>>> v3.18
@@ -1279,10 +1534,16 @@ static int fimc_dst_set_transf(struct device *dev,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:degree[%d]flip[0x%x]\n", __func__,
 		degree, flip);
 
 	cfg = fimc_read(EXYNOS_CITRGFMT);
+=======
+	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
+
+	cfg = fimc_read(ctx, EXYNOS_CITRGFMT);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
 
@@ -1328,7 +1589,11 @@ static int fimc_dst_set_transf(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CITRGFMT);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CITRGFMT);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CITRGFMT);
 >>>>>>> v3.18
@@ -1337,6 +1602,7 @@ static int fimc_dst_set_transf(struct device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fimc_get_ratio_shift(u32 src, u32 dst, u32 *ratio, u32 *shift)
 {
@@ -1370,6 +1636,8 @@ static int fimc_get_ratio_shift(u32 src, u32 dst, u32 *ratio, u32 *shift)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 		struct drm_exynos_pos *src, struct drm_exynos_pos *dst)
 {
@@ -1377,17 +1645,23 @@ static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 	u32 cfg, cfg_ext, shfactor;
 	u32 pre_dst_width, pre_dst_height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 pre_hratio, hfactor, pre_vratio, vfactor;
 	int ret = 0;
 	u32 src_w, src_h, dst_w, dst_h;
 
 	cfg_ext = fimc_read(EXYNOS_CITRGFMT);
 =======
+=======
+>>>>>>> v3.18
 	u32 hfactor, vfactor;
 	int ret = 0;
 	u32 src_w, src_h, dst_w, dst_h;
 
 	cfg_ext = fimc_read(ctx, EXYNOS_CITRGFMT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cfg_ext & EXYNOS_CITRGFMT_INROT90_CLOCKWISE) {
 		src_w = src->h;
@@ -1405,6 +1679,7 @@ static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 		dst_h = dst->h;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = fimc_get_ratio_shift(src_w, dst_w, &pre_hratio, &hfactor);
 	if (ret) {
@@ -1425,6 +1700,8 @@ static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 	DRM_DEBUG_KMS("%s:pre_hratio[%d]hfactor[%d]pre_vratio[%d]vfactor[%d]\n",
 		__func__, pre_hratio, hfactor, pre_vratio, vfactor);
 =======
+=======
+>>>>>>> v3.18
 	/* fimc_ippdrv_check_property assures that dividers are not null */
 	hfactor = fls(src_w / dst_w / 2);
 	if (hfactor > FIMC_SHFACTOR / 2) {
@@ -1443,12 +1720,16 @@ static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 	DRM_DEBUG_KMS("pre_dst_width[%d]pre_dst_height[%d]\n",
 		pre_dst_width, pre_dst_height);
 	DRM_DEBUG_KMS("hfactor[%d]vfactor[%d]\n", hfactor, vfactor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sc->hratio = (src_w << 14) / (dst_w << hfactor);
 	sc->vratio = (src_h << 14) / (dst_h << vfactor);
 	sc->up_h = (dst_w >= src_w) ? true : false;
 	sc->up_v = (dst_h >= src_h) ? true : false;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:hratio[%d]vratio[%d]up_h[%d]up_v[%d]\n",
 	__func__, sc->hratio, sc->vratio, sc->up_h, sc->up_v);
@@ -1465,6 +1746,8 @@ static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 		EXYNOS_CISCPREDST_PREDSTHEIGHT(pre_dst_height));
 	fimc_write(cfg, EXYNOS_CISCPREDST);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("hratio[%d]vratio[%d]up_h[%d]up_v[%d]\n",
 		sc->hratio, sc->vratio, sc->up_h, sc->up_v);
 
@@ -1479,6 +1762,9 @@ static int fimc_set_prescaler(struct fimc_context *ctx, struct fimc_scaler *sc,
 	cfg = (EXYNOS_CISCPREDST_PREDSTWIDTH(pre_dst_width) |
 		EXYNOS_CISCPREDST_PREDSTHEIGHT(pre_dst_height));
 	fimc_write(ctx, cfg, EXYNOS_CISCPREDST);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1489,6 +1775,7 @@ static void fimc_set_scaler(struct fimc_context *ctx, struct fimc_scaler *sc)
 	u32 cfg, cfg_ext;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:range[%d]bypass[%d]up_h[%d]up_v[%d]\n",
 		__func__, sc->range, sc->bypass, sc->up_h, sc->up_v);
 	DRM_DEBUG_KMS("%s:hratio[%d]vratio[%d]\n",
@@ -1496,12 +1783,17 @@ static void fimc_set_scaler(struct fimc_context *ctx, struct fimc_scaler *sc)
 
 	cfg = fimc_read(EXYNOS_CISCCTRL);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("range[%d]bypass[%d]up_h[%d]up_v[%d]\n",
 		sc->range, sc->bypass, sc->up_h, sc->up_v);
 	DRM_DEBUG_KMS("hratio[%d]vratio[%d]\n",
 		sc->hratio, sc->vratio);
 
 	cfg = fimc_read(ctx, EXYNOS_CISCCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg &= ~(EXYNOS_CISCCTRL_SCALERBYPASS |
 		EXYNOS_CISCCTRL_SCALEUP_H | EXYNOS_CISCCTRL_SCALEUP_V |
@@ -1523,9 +1815,15 @@ static void fimc_set_scaler(struct fimc_context *ctx, struct fimc_scaler *sc)
 	cfg |= (EXYNOS_CISCCTRL_MAINHORRATIO((sc->hratio >> 6)) |
 		EXYNOS_CISCCTRL_MAINVERRATIO((sc->vratio >> 6)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CISCCTRL);
 
 	cfg_ext = fimc_read(EXYNOS_CIEXTEN);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
+
+	cfg_ext = fimc_read(ctx, EXYNOS_CIEXTEN);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CISCCTRL);
 
@@ -1536,7 +1834,11 @@ static void fimc_set_scaler(struct fimc_context *ctx, struct fimc_scaler *sc)
 	cfg_ext |= (EXYNOS_CIEXTEN_MAINHORRATIO_EXT(sc->hratio) |
 		EXYNOS_CIEXTEN_MAINVERRATIO_EXT(sc->vratio));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg_ext, EXYNOS_CIEXTEN);
+=======
+	fimc_write(ctx, cfg_ext, EXYNOS_CIEXTEN);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg_ext, EXYNOS_CIEXTEN);
 >>>>>>> v3.18
@@ -1551,8 +1853,13 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:swap[%d]hsize[%d]vsize[%d]\n",
 		__func__, swap, sz->hsize, sz->vsize);
+=======
+	DRM_DEBUG_KMS("swap[%d]hsize[%d]vsize[%d]\n",
+		swap, sz->hsize, sz->vsize);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("swap[%d]hsize[%d]vsize[%d]\n",
 		swap, sz->hsize, sz->vsize);
@@ -1563,6 +1870,7 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 		EXYNOS_ORGOSIZE_VERTICAL(img_sz.vsize));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_ORGOSIZE);
 
 	DRM_DEBUG_KMS("%s:x[%d]y[%d]w[%d]h[%d]\n",
@@ -1571,12 +1879,17 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 	/* CSC ITU */
 	cfg = fimc_read(EXYNOS_CIGCTRL);
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg, EXYNOS_ORGOSIZE);
 
 	DRM_DEBUG_KMS("x[%d]y[%d]w[%d]h[%d]\n", pos->x, pos->y, pos->w, pos->h);
 
 	/* CSC ITU */
 	cfg = fimc_read(ctx, EXYNOS_CIGCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg &= ~EXYNOS_CIGCTRL_CSC_MASK;
 
@@ -1586,7 +1899,11 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 		cfg |= EXYNOS_CIGCTRL_CSC_ITU601;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIGCTRL);
+=======
+	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, cfg, EXYNOS_CIGCTRL);
 >>>>>>> v3.18
@@ -1600,7 +1917,11 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 
 	/* target image size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg = fimc_read(EXYNOS_CITRGFMT);
+=======
+	cfg = fimc_read(ctx, EXYNOS_CITRGFMT);
+>>>>>>> v3.18
 =======
 	cfg = fimc_read(ctx, EXYNOS_CITRGFMT);
 >>>>>>> v3.18
@@ -1609,22 +1930,29 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 	cfg |= (EXYNOS_CITRGFMT_TARGETHSIZE(img_pos.w) |
 		EXYNOS_CITRGFMT_TARGETVSIZE(img_pos.h));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CITRGFMT);
 
 	/* target area */
 	cfg = EXYNOS_CITAREA_TARGET_AREA(img_pos.w * img_pos.h);
 	fimc_write(cfg, EXYNOS_CITAREA);
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg, EXYNOS_CITRGFMT);
 
 	/* target area */
 	cfg = EXYNOS_CITAREA_TARGET_AREA(img_pos.w * img_pos.h);
 	fimc_write(ctx, cfg, EXYNOS_CITAREA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* offset Y(RGB), Cb, Cr */
 	cfg = (EXYNOS_CIOYOFF_HORIZONTAL(img_pos.x) |
 		EXYNOS_CIOYOFF_VERTICAL(img_pos.y));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fimc_write(cfg, EXYNOS_CIOYOFF);
 	cfg = (EXYNOS_CIOCBOFF_HORIZONTAL(img_pos.x) |
@@ -1634,6 +1962,8 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 		EXYNOS_CIOCROFF_VERTICAL(img_pos.y));
 	fimc_write(cfg, EXYNOS_CIOCROFF);
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg, EXYNOS_CIOYOFF);
 	cfg = (EXYNOS_CIOCBOFF_HORIZONTAL(img_pos.x) |
 		EXYNOS_CIOCBOFF_VERTICAL(img_pos.y));
@@ -1641,11 +1971,15 @@ static int fimc_dst_set_size(struct device *dev, int swap,
 	cfg = (EXYNOS_CIOCROFF_HORIZONTAL(img_pos.x) |
 		EXYNOS_CIOCROFF_VERTICAL(img_pos.y));
 	fimc_write(ctx, cfg, EXYNOS_CIOCROFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fimc_dst_get_buf_seq(struct fimc_context *ctx)
 {
@@ -1712,6 +2046,8 @@ err_unlock:
 	mutex_unlock(&ctx->lock);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static void fimc_dst_set_buf_seq(struct fimc_context *ctx, u32 buf_id,
 		enum drm_exynos_ipp_buf_type buf_type)
 {
@@ -1740,6 +2076,9 @@ static void fimc_dst_set_buf_seq(struct fimc_context *ctx, u32 buf_id,
 		fimc_mask_irq(ctx, false);
 
 	spin_unlock_irqrestore(&ctx->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1761,7 +2100,11 @@ static int fimc_dst_set_addr(struct device *dev,
 	property = &c_node->property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:prop_id[%d]buf_id[%d]buf_type[%d]\n", __func__,
+=======
+	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
 >>>>>>> v3.18
@@ -1778,6 +2121,7 @@ static int fimc_dst_set_addr(struct device *dev,
 		config = &property->config[EXYNOS_DRM_OPS_DST];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(buf_info->base[EXYNOS_DRM_PLANAR_Y],
 			EXYNOS_CIOYSA(buf_id));
 
@@ -1791,6 +2135,8 @@ static int fimc_dst_set_addr(struct device *dev,
 				EXYNOS_CIOCBSA(buf_id));
 			fimc_write(buf_info->base[EXYNOS_DRM_PLANAR_CR],
 =======
+=======
+>>>>>>> v3.18
 		fimc_write(ctx, buf_info->base[EXYNOS_DRM_PLANAR_Y],
 			EXYNOS_CIOYSA(buf_id));
 
@@ -1803,15 +2149,24 @@ static int fimc_dst_set_addr(struct device *dev,
 			fimc_write(ctx, buf_info->base[EXYNOS_DRM_PLANAR_CB],
 				EXYNOS_CIOCBSA(buf_id));
 			fimc_write(ctx, buf_info->base[EXYNOS_DRM_PLANAR_CR],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				EXYNOS_CIOCRSA(buf_id));
 		}
 		break;
 	case IPP_BUF_DEQUEUE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fimc_write(0x0, EXYNOS_CIOYSA(buf_id));
 		fimc_write(0x0, EXYNOS_CIOCBSA(buf_id));
 		fimc_write(0x0, EXYNOS_CIOCRSA(buf_id));
+=======
+		fimc_write(ctx, 0x0, EXYNOS_CIOYSA(buf_id));
+		fimc_write(ctx, 0x0, EXYNOS_CIOCBSA(buf_id));
+		fimc_write(ctx, 0x0, EXYNOS_CIOCRSA(buf_id));
+>>>>>>> v3.18
 =======
 		fimc_write(ctx, 0x0, EXYNOS_CIOYSA(buf_id));
 		fimc_write(ctx, 0x0, EXYNOS_CIOCBSA(buf_id));
@@ -1824,7 +2179,13 @@ static int fimc_dst_set_addr(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fimc_dst_set_buf_seq(ctx, buf_id, buf_type);
+=======
+	fimc_dst_set_buf_seq(ctx, buf_id, buf_type);
+
+	return 0;
+>>>>>>> v3.18
 =======
 	fimc_dst_set_buf_seq(ctx, buf_id, buf_type);
 
@@ -1842,7 +2203,11 @@ static struct exynos_drm_ipp_ops fimc_dst_ops = {
 static int fimc_clk_ctrl(struct fimc_context *ctx, bool enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:enable[%d]\n", __func__, enable);
+=======
+	DRM_DEBUG_KMS("enable[%d]\n", enable);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("enable[%d]\n", enable);
 >>>>>>> v3.18
@@ -1870,7 +2235,11 @@ static irqreturn_t fimc_irq_handler(int irq, void *dev_id)
 	int buf_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fimc id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("fimc id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("fimc id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -1887,6 +2256,7 @@ static irqreturn_t fimc_irq_handler(int irq, void *dev_id)
 		return IRQ_HANDLED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:buf_id[%d]\n", __func__, buf_id);
 
 	if (fimc_dst_set_buf_seq(ctx, buf_id, IPP_BUF_DEQUEUE) < 0) {
@@ -1898,6 +2268,8 @@ static irqreturn_t fimc_irq_handler(int irq, void *dev_id)
 	event_work->buf_id[EXYNOS_DRM_OPS_DST] = buf_id;
 	queue_work(ippdrv->event_workq, (struct work_struct *)event_work);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("buf_id[%d]\n", buf_id);
 
 	fimc_dst_set_buf_seq(ctx, buf_id, IPP_BUF_DEQUEUE);
@@ -1905,6 +2277,9 @@ static irqreturn_t fimc_irq_handler(int irq, void *dev_id)
 	event_work->ippdrv = ippdrv;
 	event_work->buf_id[EXYNOS_DRM_OPS_DST] = buf_id;
 	queue_work(ippdrv->event_workq, &event_work->work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -1912,6 +2287,7 @@ static irqreturn_t fimc_irq_handler(int irq, void *dev_id)
 
 static int fimc_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drm_exynos_ipp_prop_list *prop_list;
 
@@ -1922,6 +2298,9 @@ static int fimc_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 		DRM_ERROR("failed to alloc property list.\n");
 		return -ENOMEM;
 	}
+=======
+	struct drm_exynos_ipp_prop_list *prop_list = &ippdrv->prop_list;
+>>>>>>> v3.18
 =======
 	struct drm_exynos_ipp_prop_list *prop_list = &ippdrv->prop_list;
 >>>>>>> v3.18
@@ -1950,8 +2329,11 @@ static int fimc_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 	prop_list->scale_min.vsize = FIMC_SCALE_MIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ippdrv->prop_list = prop_list;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1967,7 +2349,11 @@ static inline bool fimc_check_drm_flip(enum drm_exynos_flip flip)
 		return true;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:invalid flip\n", __func__);
+=======
+		DRM_DEBUG_KMS("invalid flip\n");
+>>>>>>> v3.18
 =======
 		DRM_DEBUG_KMS("invalid flip\n");
 >>>>>>> v3.18
@@ -1981,7 +2367,11 @@ static int fimc_ippdrv_check_property(struct device *dev,
 	struct fimc_context *ctx = get_fimc_context(dev);
 	struct exynos_drm_ippdrv *ippdrv = &ctx->ippdrv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_exynos_ipp_prop_list *pp = ippdrv->prop_list;
+=======
+	struct drm_exynos_ipp_prop_list *pp = &ippdrv->prop_list;
+>>>>>>> v3.18
 =======
 	struct drm_exynos_ipp_prop_list *pp = &ippdrv->prop_list;
 >>>>>>> v3.18
@@ -1992,8 +2382,11 @@ static int fimc_ippdrv_check_property(struct device *dev,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_ipp_ops(i) {
@@ -2102,6 +2495,7 @@ static void fimc_clear_addr(struct fimc_context *ctx)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:\n", __func__);
 
 	for (i = 0; i < FIMC_MAX_SRC; i++) {
@@ -2115,6 +2509,8 @@ static void fimc_clear_addr(struct fimc_context *ctx)
 		fimc_write(0, EXYNOS_CIOCBSA(i));
 		fimc_write(0, EXYNOS_CIOCRSA(i));
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < FIMC_MAX_SRC; i++) {
 		fimc_write(ctx, 0, EXYNOS_CIIYSA(i));
 		fimc_write(ctx, 0, EXYNOS_CIICBSA(i));
@@ -2125,6 +2521,9 @@ static void fimc_clear_addr(struct fimc_context *ctx)
 		fimc_write(ctx, 0, EXYNOS_CIOYSA(i));
 		fimc_write(ctx, 0, EXYNOS_CIOCBSA(i));
 		fimc_write(ctx, 0, EXYNOS_CIOCRSA(i));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2134,8 +2533,11 @@ static int fimc_ippdrv_reset(struct device *dev)
 	struct fimc_context *ctx = get_fimc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* reset h/w block */
@@ -2162,7 +2564,11 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	u32 cfg0, cfg1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:cmd[%d]\n", __func__, cmd);
+=======
+	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
 >>>>>>> v3.18
@@ -2175,7 +2581,11 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	property = &c_node->property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_handle_irq(ctx, true, false, true);
+=======
+	fimc_mask_irq(ctx, true);
+>>>>>>> v3.18
 =======
 	fimc_mask_irq(ctx, true);
 >>>>>>> v3.18
@@ -2205,15 +2615,21 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 
 		/* setup dma */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg0 = fimc_read(EXYNOS_MSCTRL);
 		cfg0 &= ~EXYNOS_MSCTRL_INPUT_MASK;
 		cfg0 |= EXYNOS_MSCTRL_INPUT_MEMORY;
 		fimc_write(cfg0, EXYNOS_MSCTRL);
 =======
+=======
+>>>>>>> v3.18
 		cfg0 = fimc_read(ctx, EXYNOS_MSCTRL);
 		cfg0 &= ~EXYNOS_MSCTRL_INPUT_MASK;
 		cfg0 |= EXYNOS_MSCTRL_INPUT_MEMORY;
 		fimc_write(ctx, cfg0, EXYNOS_MSCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IPP_CMD_WB:
@@ -2240,9 +2656,15 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 
 	/* Reset status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_write(0x0, EXYNOS_CISTATUS);
 
 	cfg0 = fimc_read(EXYNOS_CIIMGCPT);
+=======
+	fimc_write(ctx, 0x0, EXYNOS_CISTATUS);
+
+	cfg0 = fimc_read(ctx, EXYNOS_CIIMGCPT);
+>>>>>>> v3.18
 =======
 	fimc_write(ctx, 0x0, EXYNOS_CISTATUS);
 
@@ -2253,7 +2675,11 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 
 	/* Scaler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg1 = fimc_read(EXYNOS_CISCCTRL);
+=======
+	cfg1 = fimc_read(ctx, EXYNOS_CISCCTRL);
+>>>>>>> v3.18
 =======
 	cfg1 = fimc_read(ctx, EXYNOS_CISCCTRL);
 >>>>>>> v3.18
@@ -2261,6 +2687,7 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	cfg1 |= (EXYNOS_CISCCTRL_PROGRESSIVE |
 		EXYNOS_CISCCTRL_SCALERSTART);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fimc_write(cfg1, EXYNOS_CISCCTRL);
 
@@ -2287,6 +2714,8 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 		fimc_write(cfg0, EXYNOS_MSCTRL);
 	}
 =======
+=======
+>>>>>>> v3.18
 	fimc_write(ctx, cfg1, EXYNOS_CISCCTRL);
 
 	/* Enable image capture*/
@@ -2300,6 +2729,9 @@ static int fimc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 
 	if (cmd == IPP_CMD_M2M)
 		fimc_set_bits(ctx, EXYNOS_MSCTRL, EXYNOS_MSCTRL_ENVID);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2312,7 +2744,11 @@ static void fimc_ippdrv_stop(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:cmd[%d]\n", __func__, cmd);
+=======
+	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
 >>>>>>> v3.18
@@ -2321,15 +2757,21 @@ static void fimc_ippdrv_stop(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	case IPP_CMD_M2M:
 		/* Source clear */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg = fimc_read(EXYNOS_MSCTRL);
 		cfg &= ~EXYNOS_MSCTRL_INPUT_MASK;
 		cfg &= ~EXYNOS_MSCTRL_ENVID;
 		fimc_write(cfg, EXYNOS_MSCTRL);
 =======
+=======
+>>>>>>> v3.18
 		cfg = fimc_read(ctx, EXYNOS_MSCTRL);
 		cfg &= ~EXYNOS_MSCTRL_INPUT_MASK;
 		cfg &= ~EXYNOS_MSCTRL_ENVID;
 		fimc_write(ctx, cfg, EXYNOS_MSCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IPP_CMD_WB:
@@ -2341,6 +2783,7 @@ static void fimc_ippdrv_stop(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fimc_handle_irq(ctx, false, false, true);
 
@@ -2362,6 +2805,8 @@ static void fimc_ippdrv_stop(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	cfg |= EXYNOS_CIGCTRL_IRQ_END_DISABLE;
 	fimc_write(cfg, EXYNOS_CIGCTRL);
 =======
+=======
+>>>>>>> v3.18
 	fimc_mask_irq(ctx, false);
 
 	/* reset sequence */
@@ -2376,6 +2821,9 @@ static void fimc_ippdrv_stop(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 
 	/* Enable frame end irq */
 	fimc_set_bits(ctx, EXYNOS_CIGCTRL, EXYNOS_CIGCTRL_IRQ_END_DISABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2530,10 +2978,16 @@ static int fimc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]ippdrv[0x%x]\n", __func__, ctx->id,
 		(int)ippdrv);
 
 	mutex_init(&ctx->lock);
+=======
+	DRM_DEBUG_KMS("id[%d]ippdrv[0x%x]\n", ctx->id, (int)ippdrv);
+
+	spin_lock_init(&ctx->lock);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]ippdrv[0x%x]\n", ctx->id, (int)ippdrv);
 
@@ -2570,7 +3024,10 @@ static int fimc_remove(struct platform_device *pdev)
 
 	exynos_drm_ippdrv_unregister(ippdrv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_destroy(&ctx->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2587,7 +3044,11 @@ static int fimc_suspend(struct device *dev)
 	struct fimc_context *ctx = get_fimc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -2603,7 +3064,11 @@ static int fimc_resume(struct device *dev)
 	struct fimc_context *ctx = get_fimc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -2621,7 +3086,11 @@ static int fimc_runtime_suspend(struct device *dev)
 	struct fimc_context *ctx = get_fimc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -2634,7 +3103,11 @@ static int fimc_runtime_resume(struct device *dev)
 	struct fimc_context *ctx = get_fimc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -2654,6 +3127,10 @@ static const struct of_device_id fimc_of_match[] = {
 	{ },
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(of, fimc_of_match);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(of, fimc_of_match);
 >>>>>>> v3.18

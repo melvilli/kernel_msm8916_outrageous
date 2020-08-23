@@ -21,7 +21,11 @@
 #define __ASM_KVM_BOOK3S_64_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_PR
+=======
+#ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
 >>>>>>> v3.18
@@ -40,9 +44,15 @@ static inline void svcpu_put(struct kvmppc_book3s_shadow_vcpu *svcpu)
 #define SPAPR_TCE_SHIFT		12
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_HV
 #define KVM_DEFAULT_HPT_ORDER	24	/* 16MB HPT by default */
 extern int kvm_hpt_order;		/* order of preallocated HPTs */
+=======
+#ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+#define KVM_DEFAULT_HPT_ORDER	24	/* 16MB HPT by default */
+extern unsigned long kvm_rma_pages;
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 #define KVM_DEFAULT_HPT_ORDER	24	/* 16MB HPT by default */
@@ -70,10 +80,13 @@ extern unsigned long kvm_rma_pages;
 #define HPTE_GR_RESERVED	HPTE_GR_MODIFIED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline long try_lock_hpte(unsigned long *hpte, unsigned long bits)
 {
 	unsigned long tmp, old;
 =======
+=======
+>>>>>>> v3.18
 static inline long try_lock_hpte(__be64 *hpte, unsigned long bits)
 {
 	unsigned long tmp, old;
@@ -86,13 +99,20 @@ static inline long try_lock_hpte(__be64 *hpte, unsigned long bits)
 	 */
 	be_lockbit = cpu_to_be64(HPTE_V_HVLOCK);
 	be_bits = cpu_to_be64(bits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	asm volatile("	ldarx	%0,0,%2\n"
 		     "	and.	%1,%0,%3\n"
 		     "	bne	2f\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     "	ori	%0,%0,%4\n"
+=======
+		     "	or	%0,%0,%4\n"
+>>>>>>> v3.18
 =======
 		     "	or	%0,%0,%4\n"
 >>>>>>> v3.18
@@ -102,7 +122,11 @@ static inline long try_lock_hpte(__be64 *hpte, unsigned long bits)
 		     "2:	isync"
 		     : "=&r" (tmp), "=&r" (old)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     : "r" (hpte), "r" (bits), "i" (HPTE_V_HVLOCK)
+=======
+		     : "r" (hpte), "r" (be_bits), "r" (be_lockbit)
+>>>>>>> v3.18
 =======
 		     : "r" (hpte), "r" (be_bits), "r" (be_lockbit)
 >>>>>>> v3.18
@@ -110,6 +134,7 @@ static inline long try_lock_hpte(__be64 *hpte, unsigned long bits)
 	return old == 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned long compute_tlbie_rb(unsigned long v, unsigned long r,
 					     unsigned long pte_index)
@@ -140,6 +165,8 @@ static inline unsigned long compute_tlbie_rb(unsigned long v, unsigned long r,
 		/* 4kB page */
 		rb |= (va_low & 0x7ff) << 12;	/* remaining 11b of VA */
 =======
+=======
+>>>>>>> v3.18
 static inline int __hpte_actual_psize(unsigned int lp, int psize)
 {
 	int i, shift;
@@ -254,12 +281,16 @@ static inline unsigned long compute_tlbie_rb(unsigned long v, unsigned long r,
 		rb |= penc << 12;	/* LP field */
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	rb |= (v >> 54) & 0x300;		/* B field */
 	return rb;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned long hpte_page_size(unsigned long h, unsigned long l)
 {
@@ -272,6 +303,8 @@ static inline unsigned long hpte_page_size(unsigned long h, unsigned long l)
 		return 1ul << 24;		/* 16M page */
 	return 0;				/* error */
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long __hpte_page_size(unsigned long h, unsigned long l,
 					     bool is_base_size)
 {
@@ -309,6 +342,9 @@ static inline unsigned long hpte_page_size(unsigned long h, unsigned long l)
 static inline unsigned long hpte_base_page_size(unsigned long h, unsigned long l)
 {
 	return __hpte_page_size(h, l, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -350,6 +386,7 @@ static inline int hpte_cache_flags_ok(unsigned long ptel, unsigned long io_type)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Lock and read a linux PTE.  If it's present and writable, atomically
  * set dirty and referenced bits and return the PTE, otherwise return 0.
  */
@@ -381,6 +418,8 @@ static inline pte_t kvmppc_read_update_linux_pte(pte_t *p, int writing)
 }
 
 =======
+=======
+>>>>>>> v3.18
  * If it's present and writable, atomically set dirty and referenced bits and
  * return the PTE, otherwise return 0. If we find a transparent hugepage
  * and if it is marked splitting we return 0;
@@ -421,6 +460,9 @@ static inline pte_t kvmppc_read_update_linux_pte(pte_t *ptep, int writing,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Return HPTE cache control bits corresponding to Linux pte bits */
 static inline unsigned long hpte_cache_bits(unsigned long pte_val)
@@ -502,7 +544,11 @@ static inline int is_vrma_hpte(unsigned long hpte_v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_HV
+=======
+#ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 >>>>>>> v3.18
@@ -517,8 +563,11 @@ static inline void note_hpte_modification(struct kvm *kvm,
 		rev->guest_rpte |= HPTE_GR_MODIFIED;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_KVM_BOOK3S_64_HV */
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Like kvm_memslots(), but for use in real mode when we can't do
@@ -532,6 +581,9 @@ static inline struct kvm_memslots *kvm_memslots_raw(struct kvm *kvm)
 }
 
 #endif /* CONFIG_KVM_BOOK3S_HV_POSSIBLE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_KVM_BOOK3S_64_H__ */

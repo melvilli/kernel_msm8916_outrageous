@@ -7,7 +7,10 @@
 #include <linux/bio.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bootmem.h>	/* for max_pfn/max_low_pfn */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -73,7 +76,11 @@ static void ioc_destroy_icq(struct io_cq *icq)
 	 * will.  Hint assignment itself can race safely.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rcu_dereference_raw(ioc->icq_hint) == icq)
+=======
+	if (rcu_access_pointer(ioc->icq_hint) == icq)
+>>>>>>> v3.18
 =======
 	if (rcu_access_pointer(ioc->icq_hint) == icq)
 >>>>>>> v3.18
@@ -152,7 +159,12 @@ void put_io_context(struct io_context *ioc)
 		spin_lock_irqsave(&ioc->lock, flags);
 		if (!hlist_empty(&ioc->icq_list))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			schedule_work(&ioc->release_work);
+=======
+			queue_work(system_power_efficient_wq,
+					&ioc->release_work);
+>>>>>>> v3.18
 =======
 			queue_work(system_power_efficient_wq,
 					&ioc->release_work);
@@ -379,7 +391,11 @@ struct io_cq *ioc_create_icq(struct io_context *ioc, struct request_queue *q,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (radix_tree_preload(gfp_mask) < 0) {
+=======
+	if (radix_tree_maybe_preload(gfp_mask) < 0) {
+>>>>>>> v3.18
 =======
 	if (radix_tree_maybe_preload(gfp_mask) < 0) {
 >>>>>>> v3.18

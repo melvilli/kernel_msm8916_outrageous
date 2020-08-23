@@ -16,8 +16,14 @@
 #include <net/bluetooth/hci_core.h>
 #include <net/bluetooth/l2cap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/bluetooth/a2mp.h>
 #include <net/bluetooth/amp.h>
+=======
+
+#include "a2mp.h"
+#include "amp.h"
+>>>>>>> v3.18
 =======
 
 #include "a2mp.h"
@@ -69,7 +75,11 @@ void a2mp_send(struct amp_mgr *mgr, u8 code, u8 ident, u16 len, void *data)
 	msg.msg_iovlen = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l2cap_chan_send(chan, &msg, total_len, 0);
+=======
+	l2cap_chan_send(chan, &msg, total_len);
+>>>>>>> v3.18
 =======
 	l2cap_chan_send(chan, &msg, total_len);
 >>>>>>> v3.18
@@ -85,6 +95,7 @@ u8 __next_ident(struct amp_mgr *mgr)
 	return mgr->ident;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void __a2mp_cl_bredr(struct a2mp_cl *cl)
 {
@@ -114,6 +125,8 @@ static void __a2mp_add_cl(struct amp_mgr *mgr, struct a2mp_cl *cl, u8 num_ctrl)
 		cl[i].type = hdev->amp_type;
 		cl[i].status = hdev->amp_status;
 =======
+=======
+>>>>>>> v3.18
 /* hci_dev_list shall be locked */
 static void __a2mp_add_cl(struct amp_mgr *mgr, struct a2mp_cl *cl)
 {
@@ -134,6 +147,9 @@ static void __a2mp_add_cl(struct amp_mgr *mgr, struct a2mp_cl *cl)
 				cl[i].status = AMP_STATUS_POWERED_DOWN;
 			i++;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -163,6 +179,10 @@ static int a2mp_discover_req(struct amp_mgr *mgr, struct sk_buff *skb,
 	u16 ext_feat;
 	u8 num_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hci_dev *hdev;
+>>>>>>> v3.18
 =======
 	struct hci_dev *hdev;
 >>>>>>> v3.18
@@ -190,8 +210,11 @@ static int a2mp_discover_req(struct amp_mgr *mgr, struct sk_buff *skb,
 	read_lock(&hci_dev_list_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_ctrl = __hci_num_ctrl();
 =======
+=======
+>>>>>>> v3.18
 	/* at minimum the BR/EDR needs to be listed */
 	num_ctrl = 1;
 
@@ -200,6 +223,9 @@ static int a2mp_discover_req(struct amp_mgr *mgr, struct sk_buff *skb,
 			num_ctrl++;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	len = num_ctrl * sizeof(struct a2mp_cl) + sizeof(*rsp);
 	rsp = kmalloc(len, GFP_ATOMIC);
@@ -209,15 +235,21 @@ static int a2mp_discover_req(struct amp_mgr *mgr, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rsp->mtu = __constant_cpu_to_le16(L2CAP_A2MP_DEFAULT_MTU);
 	rsp->ext_feat = 0;
 
 	__a2mp_add_cl(mgr, rsp->cl, num_ctrl);
 =======
+=======
+>>>>>>> v3.18
 	rsp->mtu = cpu_to_le16(L2CAP_A2MP_DEFAULT_MTU);
 	rsp->ext_feat = 0;
 
 	__a2mp_add_cl(mgr, rsp->cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	read_unlock(&hci_dev_list_lock);
@@ -264,7 +296,11 @@ static int a2mp_discover_rsp(struct amp_mgr *mgr, struct sk_buff *skb,
 		       cl->status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cl->id != HCI_BREDR_ID && cl->type == HCI_AMP) {
+=======
+		if (cl->id != AMP_ID_BREDR && cl->type != AMP_TYPE_BREDR) {
+>>>>>>> v3.18
 =======
 		if (cl->id != AMP_ID_BREDR && cl->type != AMP_TYPE_BREDR) {
 >>>>>>> v3.18
@@ -293,7 +329,11 @@ static int a2mp_discover_rsp(struct amp_mgr *mgr, struct sk_buff *skb,
 			       state_to_string(chan->state));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (chan->chan_type == L2CAP_CHAN_CONN_FIX_A2MP)
+=======
+			if (chan->scid == L2CAP_CID_A2MP)
+>>>>>>> v3.18
 =======
 			if (chan->scid == L2CAP_CID_A2MP)
 >>>>>>> v3.18
@@ -408,7 +448,11 @@ static int a2mp_getampassoc_req(struct amp_mgr *mgr, struct sk_buff *skb,
 
 	hdev = hci_dev_get(req->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hdev || hdev->amp_type == HCI_BREDR || tmp) {
+=======
+	if (!hdev || hdev->amp_type == AMP_TYPE_BREDR || tmp) {
+>>>>>>> v3.18
 =======
 	if (!hdev || hdev->amp_type == AMP_TYPE_BREDR || tmp) {
 >>>>>>> v3.18
@@ -519,7 +563,11 @@ static int a2mp_createphyslink_req(struct amp_mgr *mgr, struct sk_buff *skb,
 
 	hdev = hci_dev_get(req->remote_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hdev || hdev->amp_type != HCI_AMP) {
+=======
+	if (!hdev || hdev->amp_type == AMP_TYPE_BREDR) {
+>>>>>>> v3.18
 =======
 	if (!hdev || hdev->amp_type == AMP_TYPE_BREDR) {
 >>>>>>> v3.18
@@ -607,7 +655,12 @@ static int a2mp_discphyslink_req(struct amp_mgr *mgr, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hcon = hci_conn_hash_lookup_ba(hdev, AMP_LINK, mgr->l2cap_conn->dst);
+=======
+	hcon = hci_conn_hash_lookup_ba(hdev, AMP_LINK,
+				       &mgr->l2cap_conn->hcon->dst);
+>>>>>>> v3.18
 =======
 	hcon = hci_conn_hash_lookup_ba(hdev, AMP_LINK,
 				       &mgr->l2cap_conn->hcon->dst);
@@ -723,7 +776,11 @@ static int a2mp_chan_recv_cb(struct l2cap_chan *chan, struct sk_buff *skb)
 		struct a2mp_cmd_rej rej;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rej.reason = __constant_cpu_to_le16(0);
+=======
+		rej.reason = cpu_to_le16(0);
+>>>>>>> v3.18
 =======
 		rej.reason = cpu_to_le16(0);
 >>>>>>> v3.18
@@ -750,7 +807,12 @@ static void a2mp_chan_close_cb(struct l2cap_chan *chan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void a2mp_chan_state_change_cb(struct l2cap_chan *chan, int state)
+=======
+static void a2mp_chan_state_change_cb(struct l2cap_chan *chan, int state,
+				      int err)
+>>>>>>> v3.18
 =======
 static void a2mp_chan_state_change_cb(struct l2cap_chan *chan, int state,
 				      int err)
@@ -775,6 +837,7 @@ static void a2mp_chan_state_change_cb(struct l2cap_chan *chan, int state,
 
 static struct sk_buff *a2mp_chan_alloc_skb_cb(struct l2cap_chan *chan,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      unsigned long len, int nb)
 {
 	return bt_skb_alloc(len, GFP_KERNEL);
@@ -782,6 +845,8 @@ static struct sk_buff *a2mp_chan_alloc_skb_cb(struct l2cap_chan *chan,
 
 static struct l2cap_ops a2mp_chan_ops = {
 =======
+=======
+>>>>>>> v3.18
 					      unsigned long hdr_len,
 					      unsigned long len, int nb)
 {
@@ -795,6 +860,9 @@ static struct l2cap_ops a2mp_chan_ops = {
 }
 
 static const struct l2cap_ops a2mp_chan_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name = "L2CAP A2MP channel",
 	.recv = a2mp_chan_recv_cb,
@@ -808,11 +876,17 @@ static const struct l2cap_ops a2mp_chan_ops = {
 	.ready = l2cap_chan_no_ready,
 	.defer = l2cap_chan_no_defer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.resume = l2cap_chan_no_resume,
 	.set_shutdown = l2cap_chan_no_set_shutdown,
 	.get_sndtimeo = l2cap_chan_no_get_sndtimeo,
 	.memcpy_fromiovec = l2cap_chan_no_memcpy_fromiovec,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -828,13 +902,19 @@ static struct l2cap_chan *a2mp_chan_open(struct l2cap_conn *conn, bool locked)
 	BT_DBG("chan %p", chan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->chan_type = L2CAP_CHAN_CONN_FIX_A2MP;
 =======
+=======
+>>>>>>> v3.18
 	chan->chan_type = L2CAP_CHAN_FIXED;
 	chan->scid = L2CAP_CID_A2MP;
 	chan->dcid = L2CAP_CID_A2MP;
 	chan->omtu = L2CAP_A2MP_DEFAULT_MTU;
 	chan->imtu = L2CAP_A2MP_DEFAULT_MTU;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chan->flush_to = L2CAP_DEFAULT_FLUSH_TO;
 
@@ -946,6 +1026,12 @@ struct l2cap_chan *a2mp_channel_create(struct l2cap_conn *conn,
 	struct amp_mgr *mgr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (conn->hcon->type != ACL_LINK)
+		return NULL;
+
+>>>>>>> v3.18
 =======
 	if (conn->hcon->type != ACL_LINK)
 		return NULL;
@@ -994,7 +1080,11 @@ void a2mp_send_getinfo_rsp(struct hci_dev *hdev)
 	rsp.status = A2MP_STATUS_INVALID_CTRL_ID;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdev->amp_type != HCI_BREDR) {
+=======
+	if (hdev->amp_type != AMP_TYPE_BREDR) {
+>>>>>>> v3.18
 =======
 	if (hdev->amp_type != AMP_TYPE_BREDR) {
 >>>>>>> v3.18

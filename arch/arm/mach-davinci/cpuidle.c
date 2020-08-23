@@ -66,7 +66,11 @@ static struct cpuidle_driver davinci_idle_driver = {
 		.enter			= davinci_enter_idle,
 		.exit_latency		= 10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.target_residency	= 100000,
+=======
+		.target_residency	= 10000,
+>>>>>>> v3.18
 =======
 		.target_residency	= 10000,
 >>>>>>> v3.18

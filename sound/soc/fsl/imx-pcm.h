@@ -23,6 +23,7 @@
 static inline void
 imx_pcm_dma_params_init_data(struct imx_dma_data *dma_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dma, bool shared)
 {
 	dma_data->dma_request = dma;
@@ -42,6 +43,8 @@ void imx_pcm_free(struct snd_pcm *pcm);
 int imx_pcm_dma_init(struct platform_device *pdev);
 void imx_pcm_dma_exit(struct platform_device *pdev);
 =======
+=======
+>>>>>>> v3.18
 	int dma, enum sdma_peripheral_type peripheral_type)
 {
 	dma_data->dma_request = dma;
@@ -60,12 +63,16 @@ struct imx_pcm_fiq_params {
 
 #if IS_ENABLED(CONFIG_SND_SOC_IMX_PCM_DMA)
 int imx_pcm_dma_init(struct platform_device *pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int imx_pcm_dma_init(struct platform_device *pdev)
 {
 	return -ENODEV;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static inline void imx_pcm_dma_exit(struct platform_device *pdev)
@@ -81,6 +88,8 @@ static inline int imx_pcm_fiq_init(struct platform_device *pdev)
 	return -ENODEV;
 }
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #if IS_ENABLED(CONFIG_SND_SOC_IMX_PCM_FIQ)
@@ -97,6 +106,9 @@ static inline int imx_pcm_fiq_init(struct platform_device *pdev,
 static inline void imx_pcm_fiq_exit(struct platform_device *pdev)
 {
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

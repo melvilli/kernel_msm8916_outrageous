@@ -14,7 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -107,6 +110,7 @@ static void altera_spi_chipsel(struct spi_device *spi, int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int altera_spi_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 {
 	return 0;
@@ -117,6 +121,8 @@ static int altera_spi_setup(struct spi_device *spi)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned int hw_txbyte(struct altera_spi *hw, int count)
@@ -141,7 +147,11 @@ static int altera_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 	hw->rx = t->rx_buf;
 	hw->count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->bytes_per_word = t->bits_per_word / 8;
+=======
+	hw->bytes_per_word = DIV_ROUND_UP(t->bits_per_word, 8);
+>>>>>>> v3.18
 =======
 	hw->bytes_per_word = DIV_ROUND_UP(t->bits_per_word, 8);
 >>>>>>> v3.18
@@ -161,6 +171,7 @@ static int altera_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 		writel(hw->imr, hw->base + ALTERA_SPI_CONTROL);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* send the first byte */
 		writel(hw_txbyte(hw, 0), hw->base + ALTERA_SPI_TXDATA);
 
@@ -168,12 +179,17 @@ static int altera_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 			unsigned int rxd;
 
 =======
+=======
+>>>>>>> v3.18
 		while (hw->count < hw->len) {
 			unsigned int rxd;
 
 			writel(hw_txbyte(hw, hw->count),
 			       hw->base + ALTERA_SPI_TXDATA);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			while (!(readl(hw->base + ALTERA_SPI_STATUS) &
 				 ALTERA_SPI_STATUS_RRDY_MSK))
@@ -194,6 +210,7 @@ static int altera_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 
 			hw->count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			if (hw->count < hw->len)
 				writel(hw_txbyte(hw, hw->count),
@@ -202,6 +219,9 @@ static int altera_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 				break;
 		}
 
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -241,7 +261,10 @@ static irqreturn_t altera_spi_irq(int irq, void *dev)
 static int altera_spi_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct altera_spi_platform_data *platp = pdev->dev.platform_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct altera_spi *hw;
@@ -258,7 +281,12 @@ static int altera_spi_probe(struct platform_device *pdev)
 	master->num_chipselect = 16;
 	master->mode_bits = SPI_CS_HIGH;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = altera_spi_setup;
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 16);
+	master->dev.of_node = pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 16);
 	master->dev.of_node = pdev->dev.of_node;
@@ -269,10 +297,14 @@ static int altera_spi_probe(struct platform_device *pdev)
 
 	/* setup the state for the bitbang driver */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->bitbang.master = spi_master_get(master);
 	if (!hw->bitbang.master)
 		return err;
 	hw->bitbang.setup_transfer = altera_spi_setupxfer;
+=======
+	hw->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	hw->bitbang.master = master;
 >>>>>>> v3.18
@@ -281,6 +313,7 @@ static int altera_spi_probe(struct platform_device *pdev)
 
 	/* find and map our resources */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res)
 		goto exit_busy;
@@ -292,11 +325,16 @@ static int altera_spi_probe(struct platform_device *pdev)
 	if (!hw->base)
 		goto exit_busy;
 =======
+=======
+>>>>>>> v3.18
 	hw->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(hw->base)) {
 		err = PTR_ERR(hw->base);
 		goto exit;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* program defaults into the registers */
 	hw->imr = 0;		/* disable spi interrupts */
@@ -314,9 +352,12 @@ static int altera_spi_probe(struct platform_device *pdev)
 			goto exit;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* find platform data */
 	if (!platp)
 		hw->bitbang.master->dev.of_node = pdev->dev.of_node;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -328,11 +369,15 @@ static int altera_spi_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 exit_busy:
 	err = -EBUSY;
 exit:
 	platform_set_drvdata(pdev, NULL);
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -347,7 +392,10 @@ static int altera_spi_remove(struct platform_device *dev)
 
 	spi_bitbang_stop(&hw->bitbang);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_master_put(master);
@@ -358,6 +406,10 @@ static int altera_spi_remove(struct platform_device *dev)
 static const struct of_device_id altera_spi_match[] = {
 	{ .compatible = "ALTR,spi-1.0", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "altr,spi-1.0", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "altr,spi-1.0", },
 >>>>>>> v3.18

@@ -3128,7 +3128,11 @@
        #3  0x1006a052 in switch_to (prev=0x50072000, next=0x507e8000, last=0x50072000)
            at process_kern.c:161
 <<<<<<< HEAD
+<<<<<<< HEAD
        #4  0x10001d12 in schedule () at sched.c:777
+=======
+       #4  0x10001d12 in schedule () at core.c:777
+>>>>>>> v3.18
 =======
        #4  0x10001d12 in schedule () at core.c:777
 >>>>>>> v3.18
@@ -3196,7 +3200,11 @@
        161       _switch_to(prev, next);
        (gdb)
 <<<<<<< HEAD
+<<<<<<< HEAD
        #4  0x10001d12 in schedule () at sched.c:777
+=======
+       #4  0x10001d12 in schedule () at core.c:777
+>>>>>>> v3.18
 =======
        #4  0x10001d12 in schedule () at core.c:777
 >>>>>>> v3.18

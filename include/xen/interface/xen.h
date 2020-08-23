@@ -4,7 +4,10 @@
  * Guest OS interface to Xen.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -23,6 +26,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Copyright (c) 2004, K A Fraser
  */
@@ -95,6 +101,7 @@
  *
  * Virtual interrupts that a guest OS may receive from Xen.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define VIRQ_TIMER      0  /* Timebase update, and/or requested timeout.  */
 #define VIRQ_DEBUG      1  /* Request guest to dump debug info.           */
@@ -103,6 +110,8 @@
 #define VIRQ_DEBUGGER   6  /* (DOM0) A domain has paused for debugging.   */
 #define VIRQ_PCPU_STATE 9  /* (DOM0) PCPU state changed                   */
 =======
+=======
+>>>>>>> v3.18
  * In the side comments, 'V.' denotes a per-VCPU VIRQ while 'G.' denotes a
  * global VIRQ. The former can be bound once per VCPU and cannot be re-bound.
  * The latter can be allocated only once per guest: they must initially be
@@ -120,6 +129,9 @@
 #define VIRQ_MEM_EVENT  10 /* G. (DOM0) A memory event has occured           */
 #define VIRQ_XC_RESERVED 11 /* G. Reserved for XenClient                     */
 #define VIRQ_ENOMEM     12 /* G. (DOM0) Low on heap memory       */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Architecture-specific VIRQ definitions. */
@@ -133,6 +145,7 @@
 #define VIRQ_ARCH_7    23
 
 #define NR_VIRQS       24
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * MMU-UPDATE REQUESTS
@@ -148,6 +161,8 @@
  * an FD has been specified. If attempting to map an I/O page then the
  * caller assumes the privilege of the FD.
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * enum neg_errnoval HYPERVISOR_mmu_update(const struct mmu_update reqs[],
@@ -171,6 +186,9 @@
  * and the new table entry is valid/present, the mapped frame must belong to
  * FD. If attempting to map an I/O page then the caller assumes the privilege
  * of the FD.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FD == DOMID_IO: Permit /only/ I/O mappings, at the priv level of the caller.
  * FD == DOMID_XEN: Map restricted areas of Xen's heap space.
@@ -178,7 +196,10 @@
  * val      -- Value to write.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * There also certain implicit requirements when using this hypercall. The
  * pages that make up a pagetable must be mapped read-only in the guest.
  * This prevents uncontrolled guest updates to the pagetable. Xen strictly
@@ -213,6 +234,9 @@
  * mentioned above. The argument is MMUEXT_UNPIN_TABLE for all levels and the
  * pagetable MUST not be in use (meaning that the cr3 is not set to it).
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ptr[1:0] == MMU_MACHPHYS_UPDATE:
  * Updates an entry in the machine->pseudo-physical mapping table.
@@ -224,7 +248,10 @@
  * As MMU_NORMAL_PT_UPDATE above, but A/D bits currently in the PTE are ORed
  * with those in @val.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * @val is usually the machine frame number along with some attributes.
  * The attributes by default follow the architecture defined bits. Meaning that
@@ -291,6 +318,9 @@
  * And to translate back it would:
  *
  * PAT (bit 7 on) --> PWT (bit 3 on) and clear bit 7.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MMU_NORMAL_PT_UPDATE      0 /* checked '*ptr = val'. ptr is MA.       */
@@ -301,14 +331,20 @@
  * MMU EXTENDED OPERATIONS
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * HYPERVISOR_mmuext_op() accepts a list of mmuext_op structures.
 =======
+=======
+>>>>>>> v3.18
  * enum neg_errnoval HYPERVISOR_mmuext_op(mmuext_op_t uops[],
  *                                        unsigned int count,
  *                                        unsigned int *pdone,
  *                                        unsigned int foreigndom)
  */
 /* HYPERVISOR_mmuext_op() accepts a list of mmuext_op structures.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * A foreigndom (FD) can be specified (or DOMID_SELF for none).
  * Where the FD has some effect, it is described below.
@@ -347,10 +383,13 @@
  * No additional arguments. Writes back and flushes cache contents.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cmd: MMUEXT_SET_LDT
  * linear_addr: Linear address of LDT base (NB. must be page-aligned).
  * nr_ents: Number of entries in LDT.
 =======
+=======
+>>>>>>> v3.18
  * cmd: MMUEXT_FLUSH_CACHE_GLOBAL
  * No additional arguments. Writes back and flushes cache contents
  * on all CPUs in the system.
@@ -368,6 +407,9 @@
  *
  * cmd: MMUEXT_[UN]MARK_SUPER
  * mfn: Machine frame number of head of superpage to be [un]marked.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MMUEXT_PIN_L1_TABLE      0
@@ -386,12 +428,18 @@
 #define MMUEXT_SET_LDT          13
 #define MMUEXT_NEW_USER_BASEPTR 15
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MMUEXT_CLEAR_PAGE       16
 #define MMUEXT_COPY_PAGE        17
 #define MMUEXT_FLUSH_CACHE_GLOBAL 18
 #define MMUEXT_MARK_SUPER       19
 #define MMUEXT_UNMARK_SUPER     20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
@@ -399,7 +447,12 @@ struct mmuext_op {
 	unsigned int cmd;
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* [UN]PIN_TABLE, NEW_BASEPTR, NEW_USER_BASEPTR */
+=======
+		/* [UN]PIN_TABLE, NEW_BASEPTR, NEW_USER_BASEPTR
+		 * CLEAR_PAGE, COPY_PAGE, [UN]MARK_SUPER */
+>>>>>>> v3.18
 =======
 		/* [UN]PIN_TABLE, NEW_BASEPTR, NEW_USER_BASEPTR
 		 * CLEAR_PAGE, COPY_PAGE, [UN]MARK_SUPER */
@@ -414,6 +467,11 @@ struct mmuext_op {
 		/* TLB_FLUSH_MULTI, INVLPG_MULTI */
 		void *vcpumask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* COPY_PAGE */
+		xen_pfn_t src_mfn;
+>>>>>>> v3.18
 =======
 		/* COPY_PAGE */
 		xen_pfn_t src_mfn;
@@ -446,11 +504,14 @@ DEFINE_GUEST_HANDLE_STRUCT(mmuext_op);
 #define VMASST_CMD_enable                0
 #define VMASST_CMD_disable               1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VMASST_TYPE_4gb_segments         0
 #define VMASST_TYPE_4gb_segments_notify  1
 #define VMASST_TYPE_writable_pagetables  2
 #define VMASST_TYPE_pae_extended_cr3     3
 =======
+=======
+>>>>>>> v3.18
 
 /* x86/32 guests: simulate full 4GB segment limits. */
 #define VMASST_TYPE_4gb_segments         0
@@ -468,6 +529,9 @@ DEFINE_GUEST_HANDLE_STRUCT(mmuext_op);
 /* x86/PAE guests: support PDPTs above 4GB. */
 #define VMASST_TYPE_pae_extended_cr3     3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_VMASST_TYPE 3
 
@@ -501,7 +565,10 @@ typedef uint16_t domid_t;
 #define DOMID_XEN  (0x7FF2U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DOMID_COW is used as the owner of sharable pages */
 #define DOMID_COW  (0x7FF3U)
 
@@ -511,6 +578,9 @@ typedef uint16_t domid_t;
 /* Idle domain. */
 #define DOMID_IDLE (0x7FFFU)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Send an array of these to HYPERVISOR_mmu_update().
@@ -525,7 +595,13 @@ DEFINE_GUEST_HANDLE_STRUCT(mmu_update);
 /*
  * Send an array of these to HYPERVISOR_multicall().
 <<<<<<< HEAD
+<<<<<<< HEAD
  * NB. The fields are natural register size for this architecture.
+=======
+ * NB. The fields are logically the natural register size for this
+ * architecture. In cases where xen_ulong_t is larger than this then
+ * any unused bits in the upper portion must be zero.
+>>>>>>> v3.18
 =======
  * NB. The fields are logically the natural register size for this
  * architecture. In cases where xen_ulong_t is larger than this then
@@ -540,12 +616,15 @@ struct multicall_entry {
 DEFINE_GUEST_HANDLE_STRUCT(multicall_entry);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Event channel endpoints per domain:
  *  1024 if a long is 32 bits; 4096 if a long is 64 bits.
  */
 #define NR_EVENT_CHANNELS (sizeof(xen_ulong_t) * sizeof(xen_ulong_t) * 64)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct vcpu_time_info {
@@ -710,9 +789,12 @@ struct start_info {
 	unsigned long mod_len;      /* Size (bytes) of pre-loaded module.     */
 	int8_t cmd_line[MAX_GUEST_CMDLINE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	/* The pfn range here covers both page table and p->m table frames.   */
 	unsigned long first_p2m_pfn;/* 1st pfn forming initial P->M table.    */
 	unsigned long nr_p2m_frames;/* # of pfns forming initial P->M table.  */
@@ -755,6 +837,9 @@ struct xen_multiboot_mod_list {
  * This structure includes a variety of information required to
  * have a working VGA/VESA console.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dom0_vga_console_info {
 	uint8_t video_type;
@@ -797,11 +882,14 @@ struct dom0_vga_console_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These flags are passed in the 'flags' field of start_info_t. */
 #define SIF_PRIVILEGED    (1<<0)  /* Is the domain privileged? */
 #define SIF_INITDOMAIN    (1<<1)  /* Is this the initial control domain? */
 #define SIF_PM_MASK       (0xFF<<8) /* reserve 1 byte for xen-pm options */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef uint64_t cpumap_t;

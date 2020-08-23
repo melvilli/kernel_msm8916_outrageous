@@ -1,6 +1,11 @@
 00-INDEX
 	- this file
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+botching-up-ioctls.txt
+	- how to avoid botching up ioctls
+>>>>>>> v3.18
 =======
 botching-up-ioctls.txt
 	- how to avoid botching up ioctls

@@ -65,7 +65,12 @@ static int pnp_registered;
 static unsigned int snd_mpu401_devices;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_mpu401_create(int dev, struct snd_card **rcard)
+=======
+static int snd_mpu401_create(struct device *devptr, int dev,
+			     struct snd_card **rcard)
+>>>>>>> v3.18
 =======
 static int snd_mpu401_create(struct device *devptr, int dev,
 			     struct snd_card **rcard)
@@ -79,7 +84,12 @@ static int snd_mpu401_create(struct device *devptr, int dev,
 
 	*rcard = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -125,10 +135,16 @@ static int snd_mpu401_probe(struct platform_device *devptr)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_mpu401_create(dev, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, &devptr->dev);
+=======
+	err = snd_mpu401_create(&devptr->dev, dev, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 =======
 	err = snd_mpu401_create(&devptr->dev, dev, &card);
 	if (err < 0)
@@ -146,7 +162,10 @@ static int snd_mpu401_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -215,7 +234,11 @@ static int snd_mpu401_pnp_probe(struct pnp_dev *pnp_dev,
 		if (err < 0)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = snd_mpu401_create(dev, &card);
+=======
+		err = snd_mpu401_create(&pnp_dev->dev, dev, &card);
+>>>>>>> v3.18
 =======
 		err = snd_mpu401_create(&pnp_dev->dev, dev, &card);
 >>>>>>> v3.18
@@ -226,7 +249,10 @@ static int snd_mpu401_pnp_probe(struct pnp_dev *pnp_dev,
 			return err;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_card_set_dev(card, &pnp_dev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pnp_set_drvdata(pnp_dev, card);

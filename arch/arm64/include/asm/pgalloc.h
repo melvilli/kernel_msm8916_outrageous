@@ -27,7 +27,11 @@
 #define check_pgt_cache()		do { } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_ARM64_64K_PAGES
+=======
+#if CONFIG_ARM64_PGTABLE_LEVELS > 2
+>>>>>>> v3.18
 =======
 #if CONFIG_ARM64_PGTABLE_LEVELS > 2
 >>>>>>> v3.18
@@ -49,8 +53,11 @@ static inline void pud_populate(struct mm_struct *mm, pud_t *pud, pmd_t *pmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* CONFIG_ARM64_64K_PAGES */
 =======
+=======
+>>>>>>> v3.18
 #endif	/* CONFIG_ARM64_PGTABLE_LEVELS > 2 */
 
 #if CONFIG_ARM64_PGTABLE_LEVELS > 3
@@ -72,6 +79,9 @@ static inline void pgd_populate(struct mm_struct *mm, pgd_t *pgd, pud_t *pud)
 }
 
 #endif	/* CONFIG_ARM64_PGTABLE_LEVELS > 3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern pgd_t *pgd_alloc(struct mm_struct *mm);

@@ -82,10 +82,14 @@ modejade(struct BCState *bcs, int mode, int bc)
 
 	if (cs->debug & L1_DEB_HSCX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char tmp[40];
 		sprintf(tmp, "jade %c mode %d ichan %d",
 			'A' + jade, mode, bc);
 		debugl1(cs, tmp);
+=======
+		debugl1(cs, "jade %c mode %d ichan %d", 'A' + jade, mode, bc);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "jade %c mode %d ichan %d", 'A' + jade, mode, bc);
 >>>>>>> v3.18
@@ -262,7 +266,10 @@ clear_pending_jade_ints(struct IsdnCardState *cs)
 {
 	int val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char tmp[64];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -270,6 +277,7 @@ clear_pending_jade_ints(struct IsdnCardState *cs)
 	cs->BC_Write_Reg(cs, 1, jade_HDLC_IMR, 0x00);
 
 	val = cs->BC_Read_Reg(cs, 1, jade_HDLC_ISR);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sprintf(tmp, "jade B ISTA %x", val);
 	debugl1(cs, tmp);
@@ -283,6 +291,8 @@ clear_pending_jade_ints(struct IsdnCardState *cs)
 	sprintf(tmp, "jade A STAR %x", val);
 	debugl1(cs, tmp);
 =======
+=======
+>>>>>>> v3.18
 	debugl1(cs, "jade B ISTA %x", val);
 	val = cs->BC_Read_Reg(cs, 0, jade_HDLC_ISR);
 	debugl1(cs, "jade A ISTA %x", val);
@@ -290,6 +300,9 @@ clear_pending_jade_ints(struct IsdnCardState *cs)
 	debugl1(cs, "jade B STAR %x", val);
 	val = cs->BC_Read_Reg(cs, 0, jade_HDLC_STAR);
 	debugl1(cs, "jade A STAR %x", val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Unmask ints */
 	cs->BC_Write_Reg(cs, 0, jade_HDLC_IMR, 0xF8);

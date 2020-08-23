@@ -2,7 +2,11 @@
  * shmob_drm_crtc.c  --  SH Mobile DRM CRTCs
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Renesas Electronics Corporation
 >>>>>>> v3.18
@@ -42,11 +46,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void shmob_drm_clk_on(struct shmob_drm_device *sdev)
 {
 	if (sdev->clock)
 		clk_enable(sdev->clock);
 =======
+=======
+>>>>>>> v3.18
 static int shmob_drm_clk_on(struct shmob_drm_device *sdev)
 {
 	int ret;
@@ -56,12 +63,20 @@ static int shmob_drm_clk_on(struct shmob_drm_device *sdev)
 		if (ret < 0)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if 0
 	if (sdev->meram_dev && sdev->meram_dev->pdev)
 		pm_runtime_get_sync(&sdev->meram_dev->pdev->dev);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -76,7 +91,11 @@ static void shmob_drm_clk_off(struct shmob_drm_device *sdev)
 #endif
 	if (sdev->clock)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_disable(sdev->clock);
+=======
+		clk_disable_unprepare(sdev->clock);
+>>>>>>> v3.18
 =======
 		clk_disable_unprepare(sdev->clock);
 >>>>>>> v3.18
@@ -187,6 +206,10 @@ static void shmob_drm_crtc_start(struct shmob_drm_crtc *scrtc)
 	struct drm_plane *plane;
 	u32 value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -195,7 +218,11 @@ static void shmob_drm_crtc_start(struct shmob_drm_crtc *scrtc)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	format = shmob_drm_format_info(crtc->fb->pixel_format);
+=======
+	format = shmob_drm_format_info(crtc->primary->fb->pixel_format);
+>>>>>>> v3.18
 =======
 	format = shmob_drm_format_info(crtc->primary->fb->pixel_format);
 >>>>>>> v3.18
@@ -204,7 +231,13 @@ static void shmob_drm_crtc_start(struct shmob_drm_crtc *scrtc)
 
 	/* Enable clocks before accessing the hardware. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shmob_drm_clk_on(sdev);
+=======
+	ret = shmob_drm_clk_on(sdev);
+	if (ret < 0)
+		return;
+>>>>>>> v3.18
 =======
 	ret = shmob_drm_clk_on(sdev);
 	if (ret < 0)
@@ -277,7 +310,11 @@ static void shmob_drm_crtc_start(struct shmob_drm_crtc *scrtc)
 
 	/* Setup planes. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(plane, &dev->mode_config.plane_list, head) {
+=======
+	drm_for_each_legacy_plane(plane, &dev->mode_config.plane_list) {
+>>>>>>> v3.18
 =======
 	drm_for_each_legacy_plane(plane, &dev->mode_config.plane_list) {
 >>>>>>> v3.18
@@ -337,7 +374,11 @@ static void shmob_drm_crtc_compute_base(struct shmob_drm_crtc *scrtc,
 {
 	struct drm_crtc *crtc = &scrtc->crtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_framebuffer *fb = crtc->fb;
+=======
+	struct drm_framebuffer *fb = crtc->primary->fb;
+>>>>>>> v3.18
 =======
 	struct drm_framebuffer *fb = crtc->primary->fb;
 >>>>>>> v3.18
@@ -420,22 +461,32 @@ static int shmob_drm_crtc_mode_set(struct drm_crtc *crtc,
 	void *cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	format = shmob_drm_format_info(crtc->fb->pixel_format);
 	if (format == NULL) {
 		dev_dbg(sdev->dev, "mode_set: unsupported format %08x\n",
 			crtc->fb->pixel_format);
 =======
+=======
+>>>>>>> v3.18
 	format = shmob_drm_format_info(crtc->primary->fb->pixel_format);
 	if (format == NULL) {
 		dev_dbg(sdev->dev, "mode_set: unsupported format %08x\n",
 			crtc->primary->fb->pixel_format);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	scrtc->format = format;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scrtc->line_size = crtc->fb->pitches[0];
+=======
+	scrtc->line_size = crtc->primary->fb->pitches[0];
+>>>>>>> v3.18
 =======
 	scrtc->line_size = crtc->primary->fb->pitches[0];
 >>>>>>> v3.18
@@ -451,7 +502,11 @@ static int shmob_drm_crtc_mode_set(struct drm_crtc *crtc,
 
 		cache = sh_mobile_meram_cache_alloc(sdev->meram, mdata,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    crtc->fb->pitches[0],
+=======
+						    crtc->primary->fb->pitches[0],
+>>>>>>> v3.18
 =======
 						    crtc->primary->fb->pitches[0],
 >>>>>>> v3.18
@@ -528,7 +583,12 @@ void shmob_drm_crtc_finish_page_flip(struct shmob_drm_crtc *scrtc)
 static int shmob_drm_crtc_page_flip(struct drm_crtc *crtc,
 				    struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    struct drm_pending_vblank_event *event)
+=======
+				    struct drm_pending_vblank_event *event,
+				    uint32_t page_flip_flags)
+>>>>>>> v3.18
 =======
 				    struct drm_pending_vblank_event *event,
 				    uint32_t page_flip_flags)
@@ -546,7 +606,11 @@ static int shmob_drm_crtc_page_flip(struct drm_crtc *crtc,
 	spin_unlock_irqrestore(&dev->event_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = fb;
+=======
+	crtc->primary->fb = fb;
+>>>>>>> v3.18
 =======
 	crtc->primary->fb = fb;
 >>>>>>> v3.18
@@ -735,12 +799,15 @@ static int shmob_drm_connector_get_modes(struct drm_connector *connector)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int shmob_drm_connector_mode_valid(struct drm_connector *connector,
 					  struct drm_display_mode *mode)
 {
 	return MODE_OK;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct drm_encoder *
@@ -754,7 +821,10 @@ shmob_drm_connector_best_encoder(struct drm_connector *connector)
 static const struct drm_connector_helper_funcs connector_helper_funcs = {
 	.get_modes = shmob_drm_connector_get_modes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mode_valid = shmob_drm_connector_mode_valid,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.best_encoder = shmob_drm_connector_best_encoder,
@@ -766,7 +836,11 @@ static void shmob_drm_connector_destroy(struct drm_connector *connector)
 
 	shmob_drm_backlight_exit(scon);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -804,7 +878,11 @@ int shmob_drm_connector_create(struct shmob_drm_device *sdev,
 
 	drm_connector_helper_add(connector, &connector_helper_funcs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = drm_sysfs_connector_add(connector);
+=======
+	ret = drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	ret = drm_connector_register(connector);
 >>>>>>> v3.18
@@ -831,7 +909,11 @@ err_backlight:
 	shmob_drm_backlight_exit(&sdev->connector);
 err_sysfs:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18

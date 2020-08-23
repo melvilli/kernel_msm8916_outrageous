@@ -96,7 +96,11 @@ static int twl6040_clk_probe(struct platform_device *pdev)
 		return PTR_ERR(clkdata->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, clkdata);
+=======
+	platform_set_drvdata(pdev, clkdata);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, clkdata);
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ static int twl6040_clk_probe(struct platform_device *pdev)
 static int twl6040_clk_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct twl6040_clk *clkdata = dev_get_drvdata(&pdev->dev);
+=======
+	struct twl6040_clk *clkdata = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct twl6040_clk *clkdata = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -121,7 +129,10 @@ static struct platform_driver twl6040_clk_driver = {
 	.driver = {
 		.name = "twl6040-clk",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},

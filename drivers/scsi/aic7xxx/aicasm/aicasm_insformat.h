@@ -210,7 +210,10 @@ struct instruction {
 #define AIC_OP_JNC16	0x9205
 #define AIC_OP_CALL16	0x9305
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AIC_OP_CALL16	0x9305
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

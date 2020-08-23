@@ -79,7 +79,12 @@ void hdpvr_delete(struct hdpvr_device *dev)
 static void challenge(u8 *bytes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *i64P, tmp64;
+=======
+	__le64 *i64P;
+	u64 tmp64;
+>>>>>>> v3.18
 =======
 	__le64 *i64P;
 	u64 tmp64;
@@ -112,15 +117,21 @@ static void challenge(u8 *bytes)
 				bytes[1] *= bytes[6] + 1;
 			for (i = 0; i < 3; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				i64P = (u64 *)bytes;
 				tmp64 = le64_to_cpup(i64P);
 				tmp64 <<= bytes[7] & 0x0f;
 				*i64P += cpu_to_le64(tmp64);
 =======
+=======
+>>>>>>> v3.18
 				i64P = (__le64 *)bytes;
 				tmp64 = le64_to_cpup(i64P);
 				tmp64 = tmp64 + (tmp64 << (bytes[7] & 0x0f));
 				*i64P = cpu_to_le64(tmp64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -136,6 +147,7 @@ static int device_authorization(struct hdpvr_device *dev)
 	char request_type = 0x38, rcv_request = 0x81;
 	char *response;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HDPVR_DEBUG
 	size_t buf_size = 46;
 	char *print_buf = kzalloc(5*buf_size+1, GFP_KERNEL);
@@ -144,6 +156,8 @@ static int device_authorization(struct hdpvr_device *dev)
 		return retval;
 	}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -162,11 +176,17 @@ static int device_authorization(struct hdpvr_device *dev)
 #ifdef HDPVR_DEBUG
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hex_dump_to_buffer(dev->usbc_buf, 46, 16, 1, print_buf,
 				   5*buf_size+1, 0);
 		v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev,
 			 "Status request returned, len %d: %s\n",
 			 ret, print_buf);
+=======
+		v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev,
+			 "Status request returned, len %d: %46ph\n",
+			 ret, dev->usbc_buf);
+>>>>>>> v3.18
 =======
 		v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev,
 			 "Status request returned, len %d: %46ph\n",
@@ -210,6 +230,7 @@ static int device_authorization(struct hdpvr_device *dev)
 	response = dev->usbc_buf+38;
 #ifdef HDPVR_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hex_dump_to_buffer(response, 8, 16, 1, print_buf, 5*buf_size+1, 0);
 	v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev, "challenge: %s\n",
 		 print_buf);
@@ -221,6 +242,8 @@ static int device_authorization(struct hdpvr_device *dev)
 		 print_buf);
 	kfree(print_buf);
 =======
+=======
+>>>>>>> v3.18
 	v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev, "challenge: %8ph\n",
 		 response);
 #endif
@@ -228,6 +251,9 @@ static int device_authorization(struct hdpvr_device *dev)
 #ifdef HDPVR_DEBUG
 	v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev, " response: %8ph\n",
 		 response);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -252,7 +278,10 @@ static int hdpvr_device_init(struct hdpvr_device *dev)
 	int ret;
 	u8 *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hdpvr_video_info *vidinf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -277,6 +306,7 @@ static int hdpvr_device_init(struct hdpvr_device *dev)
 	mutex_unlock(&dev->usbc_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vidinf = get_video_info(dev);
 	if (!vidinf)
 		v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev,
@@ -284,6 +314,8 @@ static int hdpvr_device_init(struct hdpvr_device *dev)
 	else
 		kfree(vidinf);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* enable fan and bling leds */
@@ -347,8 +379,11 @@ static int hdpvr_probe(struct usb_interface *interface,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->workqueue = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* init video transfer queues first of all */

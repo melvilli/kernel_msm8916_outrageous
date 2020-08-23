@@ -1,7 +1,11 @@
 /*
  * NVM Express device driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011, Intel Corporation.
+=======
+ * Copyright (c) 2011-2014, Intel Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011-2014, Intel Corporation.
 >>>>>>> v3.18
@@ -15,10 +19,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -33,6 +40,10 @@
 #include <linux/bitops.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compat.h>
+>>>>>>> v3.18
 =======
 #include <linux/compat.h>
 >>>>>>> v3.18
@@ -254,8 +265,11 @@ static int sg_version_num = 30534;	/* 2 digits for each component */
 
 /* NVMe Namespace and Command Defines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NVME_GET_SMART_LOG_PAGE				0x02
 #define NVME_GET_FEAT_TEMP_THRESH			0x04
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BYTES_TO_DWORDS					4
@@ -700,6 +714,10 @@ static int nvme_trans_standard_inquiry_page(struct nvme_ns *ns,
 	u8 protect;
 	u8 cmdque = 0x01 << 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 fw_offset = sizeof(dev->firmware_rev);
+>>>>>>> v3.18
 =======
 	u8 fw_offset = sizeof(dev->firmware_rev);
 >>>>>>> v3.18
@@ -739,13 +757,19 @@ static int nvme_trans_standard_inquiry_page(struct nvme_ns *ns,
 	strncpy(&inq_response[8], "NVMe    ", 8);
 	strncpy(&inq_response[16], dev->model, 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(&inq_response[32], dev->firmware_rev, 4);
 =======
+=======
+>>>>>>> v3.18
 
 	while (dev->firmware_rev[fw_offset - 1] == ' ' && fw_offset > 4)
 		fw_offset--;
 	fw_offset -= 4;
 	strncpy(&inq_response[32], dev->firmware_rev + fw_offset, 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	xfer_len = min(alloc_len, STANDARD_INQUIRY_LENGTH);
@@ -960,7 +984,11 @@ static int nvme_trans_bdev_char_page(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	int xfer_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inq_response = kmalloc(EXTENDED_INQUIRY_DATA_PAGE_LENGTH, GFP_KERNEL);
+=======
+	inq_response = kzalloc(EXTENDED_INQUIRY_DATA_PAGE_LENGTH, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	inq_response = kzalloc(EXTENDED_INQUIRY_DATA_PAGE_LENGTH, GFP_KERNEL);
 >>>>>>> v3.18
@@ -970,7 +998,10 @@ static int nvme_trans_bdev_char_page(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(inq_response, 0, EXTENDED_INQUIRY_DATA_PAGE_LENGTH);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	inq_response[1] = INQ_BDEV_CHARACTERISTICS_PAGE;    /* Page Code */
@@ -998,7 +1029,11 @@ static int nvme_trans_log_supp_pages(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	u8 *log_response;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_response = kmalloc(LOG_PAGE_SUPPORTED_LOG_PAGES_LENGTH, GFP_KERNEL);
+=======
+	log_response = kzalloc(LOG_PAGE_SUPPORTED_LOG_PAGES_LENGTH, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	log_response = kzalloc(LOG_PAGE_SUPPORTED_LOG_PAGES_LENGTH, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1007,7 +1042,10 @@ static int nvme_trans_log_supp_pages(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		goto out_mem;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(log_response, 0, LOG_PAGE_SUPPORTED_LOG_PAGES_LENGTH);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1041,7 +1079,11 @@ static int nvme_trans_log_info_exceptions(struct nvme_ns *ns,
 	u16 temp_k;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_response = kmalloc(LOG_INFO_EXCP_PAGE_LENGTH, GFP_KERNEL);
+=======
+	log_response = kzalloc(LOG_INFO_EXCP_PAGE_LENGTH, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	log_response = kzalloc(LOG_INFO_EXCP_PAGE_LENGTH, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1050,7 +1092,10 @@ static int nvme_trans_log_info_exceptions(struct nvme_ns *ns,
 		goto out_mem;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(log_response, 0, LOG_INFO_EXCP_PAGE_LENGTH);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1068,8 +1113,13 @@ static int nvme_trans_log_info_exceptions(struct nvme_ns *ns,
 	c.common.nsid = cpu_to_le32(0xFFFFFFFF);
 	c.common.prp1 = cpu_to_le64(dma_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c.common.cdw10[0] = cpu_to_le32(((sizeof(struct nvme_smart_log) /
 			BYTES_TO_DWORDS) << 16) | NVME_GET_SMART_LOG_PAGE);
+=======
+	c.common.cdw10[0] = cpu_to_le32((((sizeof(struct nvme_smart_log) /
+			BYTES_TO_DWORDS) - 1) << 16) | NVME_LOG_SMART);
+>>>>>>> v3.18
 =======
 	c.common.cdw10[0] = cpu_to_le32((((sizeof(struct nvme_smart_log) /
 			BYTES_TO_DWORDS) - 1) << 16) | NVME_LOG_SMART);
@@ -1122,7 +1172,11 @@ static int nvme_trans_log_temperature(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	u16 temp_k;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_response = kmalloc(LOG_TEMP_PAGE_LENGTH, GFP_KERNEL);
+=======
+	log_response = kzalloc(LOG_TEMP_PAGE_LENGTH, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	log_response = kzalloc(LOG_TEMP_PAGE_LENGTH, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1131,7 +1185,10 @@ static int nvme_trans_log_temperature(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		goto out_mem;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(log_response, 0, LOG_TEMP_PAGE_LENGTH);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1149,8 +1206,13 @@ static int nvme_trans_log_temperature(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	c.common.nsid = cpu_to_le32(0xFFFFFFFF);
 	c.common.prp1 = cpu_to_le64(dma_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c.common.cdw10[0] = cpu_to_le32(((sizeof(struct nvme_smart_log) /
 			BYTES_TO_DWORDS) << 16) | NVME_GET_SMART_LOG_PAGE);
+=======
+	c.common.cdw10[0] = cpu_to_le32((((sizeof(struct nvme_smart_log) /
+			BYTES_TO_DWORDS) - 1) << 16) | NVME_LOG_SMART);
+>>>>>>> v3.18
 =======
 	c.common.cdw10[0] = cpu_to_le32((((sizeof(struct nvme_smart_log) /
 			BYTES_TO_DWORDS) - 1) << 16) | NVME_LOG_SMART);
@@ -1445,7 +1507,11 @@ static int nvme_trans_mode_page_create(struct nvme_ns *ns,
 	mode_pages_offset_1 = blk_desc_offset + blk_desc_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	response = kmalloc(resp_size, GFP_KERNEL);
+=======
+	response = kzalloc(resp_size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	response = kzalloc(resp_size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1454,7 +1520,10 @@ static int nvme_trans_mode_page_create(struct nvme_ns *ns,
 		goto out_mem;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(response, 0, resp_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1553,7 +1622,11 @@ static int nvme_trans_power_state(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	}
 	id_ctrl = mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lowest_pow_st = id_ctrl->npss - 1;
+=======
+	lowest_pow_st = max(POWER_STATE_0, (int)(id_ctrl->npss - 1));
+>>>>>>> v3.18
 =======
 	lowest_pow_st = max(POWER_STATE_0, (int)(id_ctrl->npss - 1));
 >>>>>>> v3.18
@@ -1574,6 +1647,7 @@ static int nvme_trans_power_state(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	case NVME_POWER_STATE_IDLE:
 		/* Action unspecified if POWER CONDITION MODIFIER != [0,1,2] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* min of desired state and (lps-1) because lps is STOP */
 		if (pcmod == 0x0)
 			ps_desired = min(POWER_STATE_1, (lowest_pow_st - 1));
@@ -1582,21 +1656,32 @@ static int nvme_trans_power_state(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		else if (pcmod == 0x2)
 			ps_desired = min(POWER_STATE_3, (lowest_pow_st - 1));
 =======
+=======
+>>>>>>> v3.18
 		if (pcmod == 0x0)
 			ps_desired = POWER_STATE_1;
 		else if (pcmod == 0x1)
 			ps_desired = POWER_STATE_2;
 		else if (pcmod == 0x2)
 			ps_desired = POWER_STATE_3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case NVME_POWER_STATE_STANDBY:
 		/* Action unspecified if POWER CONDITION MODIFIER != [0,1] */
 		if (pcmod == 0x0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ps_desired = max(0, (lowest_pow_st - 2));
 		else if (pcmod == 0x1)
 			ps_desired = max(0, (lowest_pow_st - 1));
+=======
+			ps_desired = max(POWER_STATE_0, (lowest_pow_st - 2));
+		else if (pcmod == 0x1)
+			ps_desired = max(POWER_STATE_0, (lowest_pow_st - 1));
+>>>>>>> v3.18
 =======
 			ps_desired = max(POWER_STATE_0, (lowest_pow_st - 2));
 		else if (pcmod == 0x1)
@@ -1657,8 +1742,12 @@ static int nvme_trans_send_fw_cmd(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		length = nvme_setup_prps(dev, &c.common, iod, tot_len,
 								GFP_KERNEL);
+=======
+		length = nvme_setup_prps(dev, iod, tot_len, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		length = nvme_setup_prps(dev, iod, tot_len, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1668,6 +1757,11 @@ static int nvme_trans_send_fw_cmd(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c.dlfw.prp1 = cpu_to_le64(sg_dma_address(iod->sg));
+		c.dlfw.prp2 = cpu_to_le64(iod->first_dma);
+>>>>>>> v3.18
 =======
 		c.dlfw.prp1 = cpu_to_le64(sg_dma_address(iod->sg));
 		c.dlfw.prp2 = cpu_to_le64(iod->first_dma);
@@ -2137,7 +2231,10 @@ static int nvme_trans_do_nvme_io(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	int nvme_sc;
 	struct nvme_dev *dev = ns->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvme_queue *nvmeq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 num_cmds;
@@ -2152,7 +2249,11 @@ static int nvme_trans_do_nvme_io(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	u8 opcode = (is_write ? nvme_cmd_write : nvme_cmd_read);
 	u16 control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 max_blocks = nvme_block_nr(ns, dev->max_hw_sectors);
+=======
+	u32 max_blocks = queue_max_hw_sectors(ns->queue);
+>>>>>>> v3.18
 =======
 	u32 max_blocks = queue_max_hw_sectors(ns->queue);
 >>>>>>> v3.18
@@ -2204,8 +2305,12 @@ static int nvme_trans_do_nvme_io(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retcode = nvme_setup_prps(dev, &c.common, iod, unit_len,
 							GFP_KERNEL);
+=======
+		retcode = nvme_setup_prps(dev, iod, unit_len, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		retcode = nvme_setup_prps(dev, iod, unit_len, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2217,6 +2322,7 @@ static int nvme_trans_do_nvme_io(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 			res = -ENOMEM;
 			goto out;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		nvme_offset += unit_num_blocks;
@@ -2234,12 +2340,17 @@ static int nvme_trans_do_nvme_io(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		nvme_sc = nvme_submit_sync_cmd(nvmeq, &c, NULL,
 						NVME_IO_TIMEOUT);
 =======
+=======
+>>>>>>> v3.18
 		c.rw.prp1 = cpu_to_le64(sg_dma_address(iod->sg));
 		c.rw.prp2 = cpu_to_le64(iod->first_dma);
 
 		nvme_offset += unit_num_blocks;
 
 		nvme_sc = nvme_submit_io_cmd(dev, &c, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (nvme_sc != NVME_SC_SUCCESS) {
 			nvme_unmap_user_pages(dev,
@@ -2600,7 +2711,11 @@ static int nvme_trans_read_capacity(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	id_ns = mem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	response = kmalloc(resp_size, GFP_KERNEL);
+=======
+	response = kzalloc(resp_size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	response = kzalloc(resp_size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2609,7 +2724,10 @@ static int nvme_trans_read_capacity(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		goto out_dma;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(response, 0, resp_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nvme_trans_fill_read_cap(response, id_ns, cdb16);
@@ -2681,7 +2799,11 @@ static int nvme_trans_report_luns(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		response = kmalloc(resp_size, GFP_KERNEL);
+=======
+		response = kzalloc(resp_size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		response = kzalloc(resp_size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2690,7 +2812,10 @@ static int nvme_trans_report_luns(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 			goto out_dma;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(response, 0, resp_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2734,7 +2859,11 @@ static int nvme_trans_request_sense(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	resp_size = ((desc_format) ? (DESC_FMT_SENSE_DATA_SIZE) :
 					(FIXED_FMT_SENSE_DATA_SIZE));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	response = kmalloc(resp_size, GFP_KERNEL);
+=======
+	response = kzalloc(resp_size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	response = kzalloc(resp_size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -2743,7 +2872,10 @@ static int nvme_trans_request_sense(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(response, 0, resp_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2792,7 +2924,10 @@ static int nvme_trans_start_stop(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	int res = SNTI_TRANSLATION_SUCCESS;
 	int nvme_sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvme_queue *nvmeq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct nvme_command c;
@@ -2822,10 +2957,14 @@ static int nvme_trans_start_stop(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 			c.common.nsid = cpu_to_le32(ns->ns_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nvmeq = get_nvmeq(ns->dev);
 			put_nvmeq(nvmeq);
 			nvme_sc = nvme_submit_sync_cmd(nvmeq, &c, NULL, NVME_IO_TIMEOUT);
 
+=======
+			nvme_sc = nvme_submit_io_cmd(ns->dev, &c, NULL);
+>>>>>>> v3.18
 =======
 			nvme_sc = nvme_submit_io_cmd(ns->dev, &c, NULL);
 >>>>>>> v3.18
@@ -2852,7 +2991,10 @@ static int nvme_trans_synchronize_cache(struct nvme_ns *ns,
 	int nvme_sc;
 	struct nvme_command c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvme_queue *nvmeq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2861,9 +3003,13 @@ static int nvme_trans_synchronize_cache(struct nvme_ns *ns,
 	c.common.nsid = cpu_to_le32(ns->ns_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvmeq = get_nvmeq(ns->dev);
 	put_nvmeq(nvmeq);
 	nvme_sc = nvme_submit_sync_cmd(nvmeq, &c, NULL, NVME_IO_TIMEOUT);
+=======
+	nvme_sc = nvme_submit_io_cmd(ns->dev, &c, NULL);
+>>>>>>> v3.18
 =======
 	nvme_sc = nvme_submit_io_cmd(ns->dev, &c, NULL);
 >>>>>>> v3.18
@@ -3034,7 +3180,10 @@ static int nvme_trans_unmap(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	struct scsi_unmap_parm_list *plist;
 	struct nvme_dsm_range *range;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvme_queue *nvmeq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct nvme_command c;
@@ -3079,10 +3228,14 @@ static int nvme_trans_unmap(struct nvme_ns *ns, struct sg_io_hdr *hdr,
 	c.dsm.attributes = cpu_to_le32(NVME_DSMGMT_AD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvmeq = get_nvmeq(dev);
 	put_nvmeq(nvmeq);
 
 	nvme_sc = nvme_submit_sync_cmd(nvmeq, &c, NULL, NVME_IO_TIMEOUT);
+=======
+	nvme_sc = nvme_submit_io_cmd(dev, &c, NULL);
+>>>>>>> v3.18
 =======
 	nvme_sc = nvme_submit_io_cmd(dev, &c, NULL);
 >>>>>>> v3.18
@@ -3208,7 +3361,10 @@ int nvme_sg_io(struct nvme_ns *ns, struct sg_io_hdr __user *u_hdr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 typedef struct sg_io_hdr32 {
 	compat_int_t interface_id;	/* [i] 'S' for SCSI generic (required) */
@@ -3355,6 +3511,9 @@ int nvme_sg_io32(struct nvme_ns *ns, unsigned long arg)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nvme_sg_get_version_num(int __user *ip)
 {

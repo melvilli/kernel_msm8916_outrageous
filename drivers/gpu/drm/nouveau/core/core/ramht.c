@@ -23,7 +23,10 @@
 #include <core/object.h>
 #include <core/ramht.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/math.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -108,7 +111,11 @@ nouveau_ramht_new(struct nouveau_object *parent, struct nouveau_object *pargpu,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ramht->bits = log2i(nv_gpuobj(ramht)->size >> 3);
+=======
+	ramht->bits = order_base_2(nv_gpuobj(ramht)->size >> 3);
+>>>>>>> v3.18
 =======
 	ramht->bits = order_base_2(nv_gpuobj(ramht)->size >> 3);
 >>>>>>> v3.18

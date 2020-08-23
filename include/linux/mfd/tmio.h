@@ -6,6 +6,10 @@
 #include <linux/io.h>
 #include <linux/jiffies.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmc/card.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmc/card.h>
 >>>>>>> v3.18
@@ -81,7 +85,10 @@
 #define TMIO_MMC_USE_GPIO_CD		(1 << 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Some controllers doesn't have over 0x100 register.
  * it is used to checking accessibility of
@@ -110,6 +117,9 @@
  */
 #define TMIO_MMC_CLK_ACTUAL		(1 << 10)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int tmio_core_mmc_enable(void __iomem *cnf, int shift, unsigned long base);
 int tmio_core_mmc_resume(void __iomem *cnf, int shift, unsigned long base);
@@ -117,11 +127,14 @@ void tmio_core_mmc_pwr(void __iomem *cnf, int shift, int state);
 void tmio_core_mmc_clk_div(void __iomem *cnf, int shift, int state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tmio_mmc_dma {
 	void *chan_priv_tx;
 	void *chan_priv_rx;
 	int alignment_shift;
 =======
+=======
+>>>>>>> v3.18
 struct dma_chan;
 
 struct tmio_mmc_dma {
@@ -132,6 +145,9 @@ struct tmio_mmc_dma {
 	int alignment_shift;
 	dma_addr_t dma_rx_offset;
 	bool (*filter)(struct dma_chan *chan, void *arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -146,6 +162,10 @@ struct tmio_mmc_data {
 	unsigned long			capabilities2;
 	unsigned long			flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long			bus_shift;
+>>>>>>> v3.18
 =======
 	unsigned long			bus_shift;
 >>>>>>> v3.18
@@ -156,7 +176,10 @@ struct tmio_mmc_data {
 	void (*set_pwr)(struct platform_device *host, int state);
 	void (*set_clk_div)(struct platform_device *host, int state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*get_cd)(struct platform_device *host);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*write16_hook)(struct tmio_mmc_host *host, int addr);
@@ -164,6 +187,11 @@ struct tmio_mmc_data {
 	int (*clk_enable)(struct platform_device *pdev, unsigned int *f);
 	void (*clk_disable)(struct platform_device *pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*multi_io_quirk)(struct mmc_card *card,
+			      unsigned int direction, int blk_size);
+>>>>>>> v3.18
 =======
 	int (*multi_io_quirk)(struct mmc_card *card,
 			      unsigned int direction, int blk_size);

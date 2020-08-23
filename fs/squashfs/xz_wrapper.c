@@ -33,6 +33,10 @@
 #include "squashfs.h"
 #include "decompressor.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "page_actor.h"
+>>>>>>> v3.18
 =======
 #include "page_actor.h"
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ struct squashfs_xz {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct comp_opts {
+=======
+struct disk_comp_opts {
+>>>>>>> v3.18
 =======
 struct disk_comp_opts {
 >>>>>>> v3.18
@@ -51,6 +59,7 @@ struct disk_comp_opts {
 	__le32 flags;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void *squashfs_xz_init(struct squashfs_sb_info *msblk, void *buff,
 	int len)
@@ -60,6 +69,8 @@ static void *squashfs_xz_init(struct squashfs_sb_info *msblk, void *buff,
 	int dict_size = msblk->block_size;
 	int err, n;
 =======
+=======
+>>>>>>> v3.18
 struct comp_opts {
 	int dict_size;
 };
@@ -76,12 +87,16 @@ static void *squashfs_xz_comp_opts(struct squashfs_sb_info *msblk,
 		err = -ENOMEM;
 		goto out2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (comp_opts) {
 		/* check compressor options are the expected length */
 		if (len < sizeof(*comp_opts)) {
 			err = -EIO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			goto failed;
 		}
@@ -99,6 +114,8 @@ static void *squashfs_xz_comp_opts(struct squashfs_sb_info *msblk,
 
 	dict_size = max_t(int, dict_size, SQUASHFS_METADATA_SIZE);
 =======
+=======
+>>>>>>> v3.18
 			goto out;
 		}
 
@@ -130,6 +147,9 @@ static void *squashfs_xz_init(struct squashfs_sb_info *msblk, void *buff)
 	struct comp_opts *comp_opts = buff;
 	struct squashfs_xz *stream;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	stream = kmalloc(sizeof(*stream), GFP_KERNEL);
@@ -139,7 +159,11 @@ static void *squashfs_xz_init(struct squashfs_sb_info *msblk, void *buff)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stream->state = xz_dec_init(XZ_PREALLOC, dict_size);
+=======
+	stream->state = xz_dec_init(XZ_PREALLOC, comp_opts->dict_size);
+>>>>>>> v3.18
 =======
 	stream->state = xz_dec_init(XZ_PREALLOC, comp_opts->dict_size);
 >>>>>>> v3.18
@@ -169,6 +193,7 @@ static void squashfs_xz_free(void *strm)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void **buffer,
 	struct buffer_head **bh, int b, int offset, int length, int srclength,
 	int pages)
@@ -179,6 +204,8 @@ static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void **buffer,
 
 	mutex_lock(&msblk->read_data_mutex);
 =======
+=======
+>>>>>>> v3.18
 static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void *strm,
 	struct buffer_head **bh, int b, int offset, int length,
 	struct squashfs_page_actor *output)
@@ -186,6 +213,9 @@ static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void *strm,
 	enum xz_ret xz_err;
 	int avail, total = 0, k = 0;
 	struct squashfs_xz *stream = strm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	xz_dec_reset(stream->state);
@@ -194,7 +224,11 @@ static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void *strm,
 	stream->buf.out_pos = 0;
 	stream->buf.out_size = PAGE_CACHE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stream->buf.out = buffer[page++];
+=======
+	stream->buf.out = squashfs_first_page(output);
+>>>>>>> v3.18
 =======
 	stream->buf.out = squashfs_first_page(output);
 >>>>>>> v3.18
@@ -204,10 +238,13 @@ static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void *strm,
 			avail = min(length, msblk->devblksize - offset);
 			length -= avail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wait_on_buffer(bh[k]);
 			if (!buffer_uptodate(bh[k]))
 				goto release_mutex;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			stream->buf.in = bh[k]->b_data + offset;
@@ -217,18 +254,24 @@ static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void *strm,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (stream->buf.out_pos == stream->buf.out_size
 							&& page < pages) {
 			stream->buf.out = buffer[page++];
 			stream->buf.out_pos = 0;
 			total += PAGE_CACHE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 		if (stream->buf.out_pos == stream->buf.out_size) {
 			stream->buf.out = squashfs_next_page(output);
 			if (stream->buf.out != NULL) {
 				stream->buf.out_pos = 0;
 				total += PAGE_CACHE_SIZE;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -238,6 +281,7 @@ static int squashfs_xz_uncompress(struct squashfs_sb_info *msblk, void *strm,
 			put_bh(bh[k++]);
 	} while (xz_err == XZ_OK);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (xz_err != XZ_STREAM_END) {
 		ERROR("xz_dec_run error, data probably corrupt\n");
@@ -257,6 +301,8 @@ release_mutex:
 	mutex_unlock(&msblk->read_data_mutex);
 
 =======
+=======
+>>>>>>> v3.18
 	squashfs_finish_page(output);
 
 	if (xz_err != XZ_STREAM_END || k < b)
@@ -265,6 +311,9 @@ release_mutex:
 	return total + stream->buf.out_pos;
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (; k < b; k++)
 		put_bh(bh[k]);
@@ -275,6 +324,10 @@ out:
 const struct squashfs_decompressor squashfs_xz_comp_ops = {
 	.init = squashfs_xz_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.comp_opts = squashfs_xz_comp_opts,
+>>>>>>> v3.18
 =======
 	.comp_opts = squashfs_xz_comp_opts,
 >>>>>>> v3.18

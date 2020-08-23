@@ -28,17 +28,23 @@
 
 #define DMA_ERROR_CODE	(~(dma_addr_t)0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct dma_map_ops *dma_ops;
 extern const struct dma_map_ops coherent_swiotlb_dma_ops;
 extern const struct dma_map_ops noncoherent_swiotlb_dma_ops;
 
 static inline const struct dma_map_ops *__generic_dma_ops(struct device *dev)
 =======
+=======
+>>>>>>> v3.18
 extern struct dma_map_ops *dma_ops;
 extern struct dma_map_ops coherent_swiotlb_dma_ops;
 extern struct dma_map_ops noncoherent_swiotlb_dma_ops;
 
 static inline struct dma_map_ops *__generic_dma_ops(struct device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (unlikely(!dev) || !dev->archdata.dma_ops)
@@ -48,7 +54,10 @@ static inline struct dma_map_ops *__generic_dma_ops(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 {
 	if (xen_initial_domain())
@@ -57,12 +66,16 @@ static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 		return __generic_dma_ops(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void set_dma_ops(struct device *dev, struct dma_map_ops *ops)
 {
 	dev->archdata.dma_ops = ops;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline const struct dma_map_ops *get_dma_ops(struct device *dev)
 {
@@ -72,12 +85,17 @@ static inline const struct dma_map_ops *get_dma_ops(struct device *dev)
 		return __generic_dma_ops(dev);
 }
 =======
+=======
+>>>>>>> v3.18
 static inline int set_arch_dma_coherent_ops(struct device *dev)
 {
 	set_dma_ops(dev, &coherent_swiotlb_dma_ops);
 	return 0;
 }
 #define set_arch_dma_coherent_ops	set_arch_dma_coherent_ops
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm-generic/dma-mapping-common.h>
@@ -95,7 +113,11 @@ static inline phys_addr_t dma_to_phys(struct device *dev, dma_addr_t dev_addr)
 static inline int dma_mapping_error(struct device *dev, dma_addr_t dev_addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -106,7 +128,11 @@ static inline int dma_mapping_error(struct device *dev, dma_addr_t dev_addr)
 static inline int dma_supported(struct device *dev, u64 mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -142,7 +168,11 @@ static inline void *dma_alloc_attrs(struct device *dev, size_t size,
 				    struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -161,7 +191,11 @@ static inline void dma_free_attrs(struct device *dev, size_t size,
 				  struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -173,6 +207,7 @@ static inline void dma_free_attrs(struct device *dev, size_t size,
 	ops->free(dev, size, vaddr, dev_addr, attrs);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static inline void *dma_alloc_writecombine(struct device *dev, size_t size,
@@ -217,6 +252,8 @@ static inline int dma_mmap_nonconsistent(struct device *dev,
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

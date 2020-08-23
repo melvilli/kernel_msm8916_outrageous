@@ -17,11 +17,14 @@
 #define __ARCH_ARM_MACH_OMAP2_CONTROL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ctrl_module_core_44xx.h"
 #include "ctrl_module_wkup_44xx.h"
 #include "ctrl_module_pad_core_44xx.h"
 #include "ctrl_module_pad_wkup_44xx.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "am33xx.h"
@@ -258,7 +261,10 @@
 #define TI81XX_CONTROL_DEVICE_ID	(TI81XX_CONTROL_DEVCONF + 0x000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* OMAP4 CONTROL MODULE */
 #define OMAP4_CTRL_MODULE_PAD_WKUP			0x4a31e000
 #define OMAP4_CTRL_MODULE_PAD_WKUP_CONTROL_I2C_2	0x0604
@@ -292,6 +298,9 @@
 #define OMAP4_CAMERARX_CSI21_CAMMODE_SHIFT		16
 #define OMAP4_CAMERARX_CSI21_CAMMODE_MASK		(0x3 << 16)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* OMAP54XX CONTROL STATUS register */
 #define OMAP5XXX_CONTROL_STATUS                0x134
@@ -398,7 +407,10 @@
 #define AM33XX_CONTROL_STATUS_SYSBOOT1_MASK		(0x3 << 22)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* AM33XX PWMSS Control register */
 #define AM33XX_PWMSS_TBCLK_CLKCTRL			0x664
 
@@ -411,6 +423,9 @@
 #define AM33XX_DEV_FEATURE		0x604
 #define AM33XX_SGX_MASK			BIT(29)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* CONTROL OMAP STATUS register to identify OMAP3 features */
 #define OMAP3_CONTROL_OMAP_STATUS	0x044c
@@ -470,6 +485,10 @@ extern void omap_ctrl_write_dsp_boot_mode(u8 bootmode);
 extern void omap3630_ctrl_disable_rta(void);
 extern int omap3_ctrl_save_padconf(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void omap3_ctrl_init(void);
+>>>>>>> v3.18
 =======
 void omap3_ctrl_init(void);
 >>>>>>> v3.18

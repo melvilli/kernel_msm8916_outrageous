@@ -27,7 +27,10 @@
 #include <linux/fs.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dma-contiguous.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -37,6 +40,10 @@
 #include <asm/sizes.h>
 #include <asm/tlb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/memblock.h>
+>>>>>>> v3.18
 =======
 #include <asm/memblock.h>
 >>>>>>> v3.18
@@ -52,11 +59,14 @@ struct page *empty_zero_page;
 EXPORT_SYMBOL(empty_zero_page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pgprot_t pgprot_default;
 EXPORT_SYMBOL(pgprot_default);
 
 static pmdval_t prot_sect_kernel;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct cachepolicy {
@@ -81,6 +91,7 @@ static struct cachepolicy cache_policies[] __initdata = {
 	}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 static struct {
@@ -177,6 +188,8 @@ EXPORT_SYMBOL(mem_text_write_kernel_word);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * These are useful for identifying cache coherency problems by allowing the
  * cache or the cache and writebuffer to be turned off. It changes the Normal
@@ -206,7 +219,11 @@ static int __init early_cachepolicy(char *p)
 	asm volatile(
 	"	mrs	%0, mair_el1\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	bfi	%0, %1, #%2, #8\n"
+=======
+	"	bfi	%0, %1, %2, #8\n"
+>>>>>>> v3.18
 =======
 	"	bfi	%0, %1, %2, #8\n"
 >>>>>>> v3.18
@@ -233,6 +250,7 @@ static int __init early_cachepolicy(char *p)
 }
 early_param("cachepolicy", early_cachepolicy);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Adjust the PMD section entries according to the CPU in use.
@@ -261,6 +279,8 @@ void __init init_mem_pgprot(void)
 	pgprot_default = __pgprot(PTE_TYPE_PAGE | PTE_AF | default_pgprot);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 pgprot_t phys_mem_access_prot(struct file *file, unsigned long pfn,
@@ -301,6 +321,7 @@ static void __init alloc_init_pte(pmd_t *pmd, unsigned long addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 pmdval_t get_pmd_prot_sect_kernel(unsigned long addr)
 {
@@ -329,6 +350,11 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 				  unsigned long end, phys_addr_t phys,
 				  int map_io)
 >>>>>>> v3.18
+=======
+static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
+				  unsigned long end, phys_addr_t phys,
+				  int map_io)
+>>>>>>> v3.18
 {
 	pmd_t *pmd;
 	unsigned long next;
@@ -337,6 +363,7 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 
 	if (map_io) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prot_sect = PMD_TYPE_SECT | PMD_SECT_AF |
 			    PMD_ATTRINDX(MT_DEVICE_nGnRE);
 		prot_pte = __pgprot(PROT_DEVICE_nGnRE);
@@ -344,11 +371,16 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 		prot_sect = prot_sect_kernel;
 		prot_pte = PAGE_KERNEL;
 =======
+=======
+>>>>>>> v3.18
 		prot_sect = PROT_SECT_DEVICE_nGnRE;
 		prot_pte = __pgprot(PROT_DEVICE_nGnRE);
 	} else {
 		prot_sect = PROT_SECT_NORMAL_EXEC;
 		prot_pte = PAGE_KERNEL_EXEC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -365,10 +397,16 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 		next = pmd_addr_end(addr, end);
 		/* try section mapping first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pages && ((addr | next | phys) & ~SECTION_MASK) == 0) {
 			pmd_t old_pmd =*pmd;
 			set_pmd(pmd,
 				__pmd(phys | get_pmd_prot_sect_kernel(addr)));
+=======
+		if (((addr | next | phys) & ~SECTION_MASK) == 0) {
+			pmd_t old_pmd =*pmd;
+			set_pmd(pmd, __pmd(phys | prot_sect));
+>>>>>>> v3.18
 =======
 		if (((addr | next | phys) & ~SECTION_MASK) == 0) {
 			pmd_t old_pmd =*pmd;
@@ -390,6 +428,7 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 
 static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  unsigned long end, unsigned long phys,
 				  int map_io, bool force_pages)
 {
@@ -400,6 +439,8 @@ static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
 		next = pud_addr_end(addr, end);
 		alloc_init_pmd(pud, addr, next, phys, map_io, force_pages);
 =======
+=======
+>>>>>>> v3.18
 				  unsigned long end, phys_addr_t phys,
 				  int map_io)
 {
@@ -439,6 +480,9 @@ static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
 		} else {
 			alloc_init_pmd(pud, addr, next, phys, map_io);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		phys += next - addr;
 	} while (pud++, addr = next, addr != end);
@@ -451,7 +495,11 @@ static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
 static void __init __create_mapping(pgd_t *pgd, phys_addr_t phys,
 				    unsigned long virt, phys_addr_t size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    int map_io, bool force_pages)
+=======
+				    int map_io)
+>>>>>>> v3.18
 =======
 				    int map_io)
 >>>>>>> v3.18
@@ -465,7 +513,11 @@ static void __init __create_mapping(pgd_t *pgd, phys_addr_t phys,
 	do {
 		next = pgd_addr_end(addr, end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		alloc_init_pud(pgd, addr, next, phys, map_io, force_pages);
+=======
+		alloc_init_pud(pgd, addr, next, phys, map_io);
+>>>>>>> v3.18
 =======
 		alloc_init_pud(pgd, addr, next, phys, map_io);
 >>>>>>> v3.18
@@ -475,7 +527,11 @@ static void __init __create_mapping(pgd_t *pgd, phys_addr_t phys,
 
 static void __init create_mapping(phys_addr_t phys, unsigned long virt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  phys_addr_t size, bool force_pages)
+=======
+				  phys_addr_t size)
+>>>>>>> v3.18
 =======
 				  phys_addr_t size)
 >>>>>>> v3.18
@@ -486,7 +542,11 @@ static void __init create_mapping(phys_addr_t phys, unsigned long virt,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__create_mapping(pgd_offset_k(virt & PAGE_MASK), phys, virt, size, 0, force_pages);
+=======
+	__create_mapping(pgd_offset_k(virt & PAGE_MASK), phys, virt, size, 0);
+>>>>>>> v3.18
 =======
 	__create_mapping(pgd_offset_k(virt & PAGE_MASK), phys, virt, size, 0);
 >>>>>>> v3.18
@@ -499,6 +559,7 @@ void __init create_id_mapping(phys_addr_t addr, phys_addr_t size, int map_io)
 		return;
 	}
 	__create_mapping(&idmap_pg_dir[pgd_index(addr)],
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 addr, addr, size, map_io, false);
 }
@@ -554,6 +615,11 @@ static void __init dma_contiguous_remap(void)
 }
 
 >>>>>>> v3.18
+=======
+			 addr, addr, size, map_io);
+}
+
+>>>>>>> v3.18
 static void __init map_mem(void)
 {
 	struct memblock_region *reg;
@@ -565,12 +631,15 @@ static void __init map_mem(void)
 	 * memory addressable from the initial direct kernel mapping.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * The initial direct kernel mapping, located at swapper_pg_dir,
 	 * gives us PGDIR_SIZE memory starting from PHYS_OFFSET (which must be
 	 * aligned to 2MB as per Documentation/arm64/booting.txt).
 	 */
 	limit = PHYS_OFFSET + PGDIR_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	 * The initial direct kernel mapping, located at swapper_pg_dir, gives
 	 * us PUD_SIZE (4K pages) or PMD_SIZE (64K pages) memory starting from
 	 * PHYS_OFFSET (which must be aligned to 2MB as per
@@ -580,6 +649,9 @@ static void __init map_mem(void)
 		limit = PHYS_OFFSET + PMD_SIZE;
 	else
 		limit = PHYS_OFFSET + PUD_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memblock_set_current_limit(limit);
 
@@ -608,8 +680,12 @@ static void __init map_mem(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		create_mapping(start, __phys_to_virt(start), end - start,
 					false);
+=======
+		create_mapping(start, __phys_to_virt(start), end - start);
+>>>>>>> v3.18
 =======
 		create_mapping(start, __phys_to_virt(start), end - start);
 >>>>>>> v3.18
@@ -618,6 +694,7 @@ static void __init map_mem(void)
 	/* Limit no longer required. */
 	memblock_set_current_limit(MEMBLOCK_ALLOC_ANYWHERE);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_FORCE_PAGES
 static noinline void split_pmd(pmd_t *pmd, unsigned long addr,
@@ -692,6 +769,8 @@ static void __init remap_pages(void)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * paging_init() sets up the page tables, initialises the zone memory
@@ -703,8 +782,11 @@ void __init paging_init(void)
 
 	map_mem();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_contiguous_remap();
 	remap_pages();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -723,9 +805,12 @@ void __init paging_init(void)
 	empty_zero_page = virt_to_page(zero_page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Ensure the zero page is visible to the page table walker */
 	dsb(ishst);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -767,6 +852,12 @@ int kern_addr_valid(unsigned long addr)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (pud_sect(*pud))
+		return pfn_valid(pud_pfn(*pud));
+
+>>>>>>> v3.18
 =======
 	if (pud_sect(*pud))
 		return pfn_valid(pud_pfn(*pud));
@@ -820,7 +911,11 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 				return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_pmd(pmd, __pmd(__pa(p) | prot_sect_kernel));
+=======
+			set_pmd(pmd, __pmd(__pa(p) | PROT_SECT_NORMAL));
+>>>>>>> v3.18
 =======
 			set_pmd(pmd, __pmd(__pa(p) | PROT_SECT_NORMAL));
 >>>>>>> v3.18

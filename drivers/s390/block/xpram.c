@@ -185,6 +185,7 @@ static void xpram_make_request(struct request_queue *q, struct bio *bio)
 {
 	xpram_device_t *xdev = bio->bi_bdev->bd_disk->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec;
 	unsigned int index;
 	unsigned long page_addr;
@@ -205,6 +206,8 @@ static void xpram_make_request(struct request_queue *q, struct bio *bio)
 			kmap(bvec->bv_page) + bvec->bv_offset;
 		bytes = bvec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec bvec;
 	struct bvec_iter iter;
 	unsigned int index;
@@ -225,6 +228,9 @@ static void xpram_make_request(struct request_queue *q, struct bio *bio)
 		page_addr = (unsigned long)
 			kmap(bvec.bv_page) + bvec.bv_offset;
 		bytes = bvec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((page_addr & 4095) != 0 || (bytes & 4095) != 0)
 			/* More paranoia. */
@@ -281,6 +287,10 @@ static int __init xpram_setup_sizes(unsigned long pages)
 	unsigned long mem_auto;
 	unsigned long long size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *sizes_end;
+>>>>>>> v3.18
 =======
 	char *sizes_end;
 >>>>>>> v3.18
@@ -303,8 +313,13 @@ static int __init xpram_setup_sizes(unsigned long pages)
 	for (i = 0; i < xpram_devs; i++) {
 		if (sizes[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			size = simple_strtoull(sizes[i], &sizes[i], 0);
 			switch (sizes[i][0]) {
+=======
+			size = simple_strtoull(sizes[i], &sizes_end, 0);
+			switch (*sizes_end) {
+>>>>>>> v3.18
 =======
 			size = simple_strtoull(sizes[i], &sizes_end, 0);
 			switch (*sizes_end) {
@@ -377,6 +392,10 @@ static int __init xpram_setup_blkdev(void)
 		}
 		queue_flag_set_unlocked(QUEUE_FLAG_NONROT, xpram_queues[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, xpram_queues[i]);
+>>>>>>> v3.18
 =======
 		queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, xpram_queues[i]);
 >>>>>>> v3.18

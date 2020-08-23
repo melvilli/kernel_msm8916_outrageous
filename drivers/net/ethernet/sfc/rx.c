@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2005-2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2005-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -19,6 +25,10 @@
 #include <linux/slab.h>
 #include <linux/ip.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ipv6.h>
+>>>>>>> v3.18
 =======
 #include <linux/ipv6.h>
 >>>>>>> v3.18
@@ -32,6 +42,10 @@
 #include "net_driver.h"
 #include "efx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "filter.h"
+>>>>>>> v3.18
 =======
 #include "filter.h"
 >>>>>>> v3.18
@@ -51,7 +65,11 @@
 
 /* Size of buffer allocated for skb header area. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EFX_SKB_HEADERS  64u
+=======
+#define EFX_SKB_HEADERS  128u
+>>>>>>> v3.18
 =======
 #define EFX_SKB_HEADERS  128u
 >>>>>>> v3.18
@@ -79,6 +97,7 @@ static inline u8 *efx_rx_buf_va(struct efx_rx_buffer *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 efx_rx_buf_hash(const u8 *eh)
 {
 	/* The ethernet header is always directly after any hash. */
@@ -87,12 +106,17 @@ static inline u32 efx_rx_buf_hash(const u8 *eh)
 #else
 	const u8 *data = eh - 4;
 =======
+=======
+>>>>>>> v3.18
 static inline u32 efx_rx_buf_hash(struct efx_nic *efx, const u8 *eh)
 {
 #if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
 	return __le32_to_cpup((const __le32 *)(eh + efx->rx_packet_hash_offset));
 #else
 	const u8 *data = eh + efx->rx_packet_hash_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (u32)data[0]	  |
 	       (u32)data[1] << 8  |
@@ -121,7 +145,11 @@ static inline void efx_sync_rx_buffer(struct efx_nic *efx,
 void efx_rx_config_page_split(struct efx_nic *efx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx->rx_page_buf_step = ALIGN(efx->rx_dma_len + NET_IP_ALIGN,
+=======
+	efx->rx_page_buf_step = ALIGN(efx->rx_dma_len + efx->rx_ip_align,
+>>>>>>> v3.18
 =======
 	efx->rx_page_buf_step = ALIGN(efx->rx_dma_len + efx->rx_ip_align,
 >>>>>>> v3.18
@@ -180,7 +208,11 @@ static struct page *efx_reuse_page(struct efx_rx_queue *rx_queue)
  * then the page will either be inserted fully, or not at all.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efx_init_rx_buffers(struct efx_rx_queue *rx_queue)
+=======
+static int efx_init_rx_buffers(struct efx_rx_queue *rx_queue, bool atomic)
+>>>>>>> v3.18
 =======
 static int efx_init_rx_buffers(struct efx_rx_queue *rx_queue, bool atomic)
 >>>>>>> v3.18
@@ -198,7 +230,12 @@ static int efx_init_rx_buffers(struct efx_rx_queue *rx_queue, bool atomic)
 		page = efx_reuse_page(rx_queue);
 		if (page == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page = alloc_pages(__GFP_COLD | __GFP_COMP | GFP_ATOMIC,
+=======
+			page = alloc_pages(__GFP_COLD | __GFP_COMP |
+					   (atomic ? GFP_ATOMIC : GFP_KERNEL),
+>>>>>>> v3.18
 =======
 			page = alloc_pages(__GFP_COLD | __GFP_COMP |
 					   (atomic ? GFP_ATOMIC : GFP_KERNEL),
@@ -229,9 +266,15 @@ static int efx_init_rx_buffers(struct efx_rx_queue *rx_queue, bool atomic)
 			index = rx_queue->added_count & rx_queue->ptr_mask;
 			rx_buf = efx_rx_buffer(rx_queue, index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rx_buf->dma_addr = dma_addr + NET_IP_ALIGN;
 			rx_buf->page = page;
 			rx_buf->page_offset = page_offset + NET_IP_ALIGN;
+=======
+			rx_buf->dma_addr = dma_addr + efx->rx_ip_align;
+			rx_buf->page = page;
+			rx_buf->page_offset = page_offset + efx->rx_ip_align;
+>>>>>>> v3.18
 =======
 			rx_buf->dma_addr = dma_addr + efx->rx_ip_align;
 			rx_buf->page = page;
@@ -367,7 +410,11 @@ static void efx_discard_rx_packet(struct efx_channel *channel,
  * when NAPI is disabled.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void efx_fast_push_rx_descriptors(struct efx_rx_queue *rx_queue)
+=======
+void efx_fast_push_rx_descriptors(struct efx_rx_queue *rx_queue, bool atomic)
+>>>>>>> v3.18
 =======
 void efx_fast_push_rx_descriptors(struct efx_rx_queue *rx_queue, bool atomic)
 >>>>>>> v3.18
@@ -377,6 +424,12 @@ void efx_fast_push_rx_descriptors(struct efx_rx_queue *rx_queue, bool atomic)
 	int space, rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!rx_queue->refill_enabled)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!rx_queue->refill_enabled)
 		return;
@@ -407,7 +460,11 @@ void efx_fast_push_rx_descriptors(struct efx_rx_queue *rx_queue, bool atomic)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = efx_init_rx_buffers(rx_queue);
+=======
+		rc = efx_init_rx_buffers(rx_queue, atomic);
+>>>>>>> v3.18
 =======
 		rc = efx_init_rx_buffers(rx_queue, atomic);
 >>>>>>> v3.18
@@ -496,7 +553,12 @@ efx_rx_packet_gro(struct efx_channel *channel, struct efx_rx_buffer *rx_buf,
 
 	if (efx->net_dev->features & NETIF_F_RXHASH)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->rxhash = efx_rx_buf_hash(eh);
+=======
+		skb_set_hash(skb, efx_rx_buf_hash(efx, eh),
+			     PKT_HASH_TYPE_L3);
+>>>>>>> v3.18
 =======
 		skb_set_hash(skb, efx_rx_buf_hash(efx, eh),
 			     PKT_HASH_TYPE_L3);
@@ -522,6 +584,10 @@ efx_rx_packet_gro(struct efx_channel *channel, struct efx_rx_buffer *rx_buf,
 	skb_record_rx_queue(skb, channel->rx_queue.core_index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb_mark_napi_id(skb, &channel->napi_str);
+>>>>>>> v3.18
 =======
 	skb_mark_napi_id(skb, &channel->napi_str);
 >>>>>>> v3.18
@@ -541,6 +607,7 @@ static struct sk_buff *efx_rx_mk_skb(struct efx_channel *channel,
 
 	/* Allocate an SKB to store the headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = netdev_alloc_skb(efx->net_dev, hdr_len + EFX_PAGE_SKB_ALIGN);
 	if (unlikely(skb == NULL))
 		return NULL;
@@ -550,6 +617,8 @@ static struct sk_buff *efx_rx_mk_skb(struct efx_channel *channel,
 	skb_reserve(skb, EFX_PAGE_SKB_ALIGN);
 	memcpy(__skb_put(skb, hdr_len), eh, hdr_len);
 =======
+=======
+>>>>>>> v3.18
 	skb = netdev_alloc_skb(efx->net_dev,
 			       efx->rx_ip_align + efx->rx_prefix_size +
 			       hdr_len);
@@ -564,6 +633,9 @@ static struct sk_buff *efx_rx_mk_skb(struct efx_channel *channel,
 	       efx->rx_prefix_size + hdr_len);
 	skb_reserve(skb, efx->rx_ip_align + efx->rx_prefix_size);
 	__skb_put(skb, hdr_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Append the remaining page(s) onto the frag list */
@@ -595,6 +667,11 @@ static struct sk_buff *efx_rx_mk_skb(struct efx_channel *channel,
 	skb->protocol = eth_type_trans(skb, efx->net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb_mark_napi_id(skb, &channel->napi_str);
+
+>>>>>>> v3.18
 =======
 	skb_mark_napi_id(skb, &channel->napi_str);
 
@@ -610,6 +687,11 @@ void efx_rx_packet(struct efx_rx_queue *rx_queue, unsigned int index,
 	struct efx_rx_buffer *rx_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rx_queue->rx_packets++;
+
+>>>>>>> v3.18
 =======
 	rx_queue->rx_packets++;
 
@@ -620,16 +702,22 @@ void efx_rx_packet(struct efx_rx_queue *rx_queue, unsigned int index,
 	/* Validate the number of fragments and completed length */
 	if (n_frags == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		efx_rx_packet__check_len(rx_queue, rx_buf, len);
 	} else if (unlikely(n_frags > EFX_RX_MAX_FRAGS) ||
 		   unlikely(len <= (n_frags - 1) * EFX_RX_USR_BUF_SIZE) ||
 		   unlikely(len > n_frags * EFX_RX_USR_BUF_SIZE) ||
 =======
+=======
+>>>>>>> v3.18
 		if (!(flags & EFX_RX_PKT_PREFIX_LEN))
 			efx_rx_packet__check_len(rx_queue, rx_buf, len);
 	} else if (unlikely(n_frags > EFX_RX_MAX_FRAGS) ||
 		   unlikely(len <= (n_frags - 1) * efx->rx_dma_len) ||
 		   unlikely(len > n_frags * efx->rx_dma_len) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   unlikely(!efx->rx_scatter)) {
 		/* If this isn't an explicit discard request, either
@@ -656,7 +744,11 @@ void efx_rx_packet(struct efx_rx_queue *rx_queue, unsigned int index,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (n_frags == 1)
+=======
+	if (n_frags == 1 && !(flags & EFX_RX_PKT_PREFIX_LEN))
+>>>>>>> v3.18
 =======
 	if (n_frags == 1 && !(flags & EFX_RX_PKT_PREFIX_LEN))
 >>>>>>> v3.18
@@ -673,8 +765,13 @@ void efx_rx_packet(struct efx_rx_queue *rx_queue, unsigned int index,
 	prefetch(efx_rx_buf_va(rx_buf));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rx_buf->page_offset += efx->type->rx_buffer_hash_size;
 	rx_buf->len -= efx->type->rx_buffer_hash_size;
+=======
+	rx_buf->page_offset += efx->rx_prefix_size;
+	rx_buf->len -= efx->rx_prefix_size;
+>>>>>>> v3.18
 =======
 	rx_buf->page_offset += efx->rx_prefix_size;
 	rx_buf->len -= efx->rx_prefix_size;
@@ -691,9 +788,15 @@ void efx_rx_packet(struct efx_rx_queue *rx_queue, unsigned int index,
 			if (--tail_frags == 0)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			efx_sync_rx_buffer(efx, rx_buf, EFX_RX_USR_BUF_SIZE);
 		}
 		rx_buf->len = len - (n_frags - 1) * EFX_RX_USR_BUF_SIZE;
+=======
+			efx_sync_rx_buffer(efx, rx_buf, efx->rx_dma_len);
+		}
+		rx_buf->len = len - (n_frags - 1) * efx->rx_dma_len;
+>>>>>>> v3.18
 =======
 			efx_sync_rx_buffer(efx, rx_buf, efx->rx_dma_len);
 		}
@@ -731,11 +834,17 @@ static void efx_rx_deliver(struct efx_channel *channel, u8 *eh,
 	/* Set the SKB flags */
 	skb_checksum_none_assert(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (likely(rx_buf->flags & EFX_RX_PKT_CSUMMED))
 		skb->ip_summed = CHECKSUM_UNNECESSARY;
 
 	efx_rx_skb_attach_timestamp(channel, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (channel->type->receive_skb)
@@ -755,7 +864,10 @@ void __efx_rx_packet(struct efx_channel *channel)
 	u8 *eh = efx_rx_buf_va(rx_buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Read length from the prefix if necessary.  This already
 	 * excludes the length of the prefix itself.
 	 */
@@ -763,6 +875,9 @@ void __efx_rx_packet(struct efx_channel *channel)
 		rx_buf->len = le16_to_cpup((__le16 *)
 					   (eh + efx->rx_packet_len_offset));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If we're in loopback test, then pass the packet directly to the
 	 * loopback layer, and free the rx_buf here
@@ -777,7 +892,12 @@ void __efx_rx_packet(struct efx_channel *channel)
 		rx_buf->flags &= ~EFX_RX_PKT_CSUMMED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!channel->type->receive_skb)
+=======
+	if ((rx_buf->flags & EFX_RX_PKT_TCP) && !channel->type->receive_skb &&
+	    !efx_channel_busy_polling(channel))
+>>>>>>> v3.18
 =======
 	if ((rx_buf->flags & EFX_RX_PKT_TCP) && !channel->type->receive_skb &&
 	    !efx_channel_busy_polling(channel))
@@ -830,7 +950,11 @@ static void efx_init_rx_recycle_ring(struct efx_nic *efx,
 	bufs_in_recycle_ring = EFX_RECYCLE_RING_SIZE_IOMMU;
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (efx->pci_dev->dev.iommu_group)
+=======
+	if (iommu_present(&pci_bus_type))
+>>>>>>> v3.18
 =======
 	if (iommu_present(&pci_bus_type))
 >>>>>>> v3.18
@@ -882,9 +1006,15 @@ void efx_init_rx_queue(struct efx_rx_queue *rx_queue)
 	rx_queue->max_fill = max_fill;
 	rx_queue->fast_fill_trigger = trigger;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Set up RX descriptor ring */
 	rx_queue->enabled = true;
+=======
+	rx_queue->refill_enabled = true;
+
+	/* Set up RX descriptor ring */
+>>>>>>> v3.18
 =======
 	rx_queue->refill_enabled = true;
 
@@ -903,11 +1033,15 @@ void efx_fini_rx_queue(struct efx_rx_queue *rx_queue)
 		  "shutting down RX queue %d\n", efx_rx_queue_index(rx_queue));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* A flush failure might have left rx_queue->enabled */
 	rx_queue->enabled = false;
 
 	del_timer_sync(&rx_queue->slow_fill);
 	efx_nic_fini_rx(rx_queue);
+=======
+	del_timer_sync(&rx_queue->slow_fill);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&rx_queue->slow_fill);
 >>>>>>> v3.18
@@ -957,7 +1091,10 @@ MODULE_PARM_DESC(rx_refill_threshold,
 		 "RX descriptor ring refill threshold (%)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RFS_ACCEL
 
 int efx_filter_rfs(struct net_device *net_dev, const struct sk_buff *skb,
@@ -1118,4 +1255,7 @@ bool efx_filter_is_mc_recipient(const struct efx_filter_spec *spec)
 
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

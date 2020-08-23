@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -83,7 +87,10 @@ acpi_ds_exec_begin_control_op(struct acpi_walk_state *walk_state,
 	switch (op->common.aml_opcode) {
 	case AML_WHILE_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -107,7 +114,10 @@ acpi_ds_exec_begin_control_op(struct acpi_walk_state *walk_state,
 
 	case AML_IF_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -153,6 +163,10 @@ acpi_ds_exec_begin_control_op(struct acpi_walk_state *walk_state,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -359,6 +373,10 @@ acpi_ds_exec_end_control_op(struct acpi_walk_state * walk_state,
 
 		/* Just do nothing! */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -185,7 +185,11 @@ static void crisv32_arbiter_init(void)
 	crisv32_arbiter_config(INT_REGION, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(MEMARB_INTR_VECT, crisv32_arbiter_irq, IRQF_DISABLED,
+=======
+	if (request_irq(MEMARB_INTR_VECT, crisv32_arbiter_irq, 0,
+>>>>>>> v3.18
 =======
 	if (request_irq(MEMARB_INTR_VECT, crisv32_arbiter_irq, 0,
 >>>>>>> v3.18

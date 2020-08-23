@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -32,6 +33,8 @@
 #include "xfs_trace.h"
 #include "xfs_icache.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -47,6 +50,9 @@
 #include "xfs_trace.h"
 #include "xfs_icache.h"
 #include "xfs_log.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -165,9 +171,15 @@ xfs_nfs_get_inode(
 		 * confuse applications using bulkstat that expect EINVAL.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (error == EINVAL || error == ENOENT)
 			error = ESTALE;
 		return ERR_PTR(-error);
+=======
+		if (error == -EINVAL || error == -ENOENT)
+			error = -ESTALE;
+		return ERR_PTR(error);
+>>>>>>> v3.18
 =======
 		if (error == -EINVAL || error == -ENOENT)
 			error = -ESTALE;
@@ -241,7 +253,11 @@ xfs_fs_get_parent(
 	error = xfs_lookup(XFS_I(child->d_inode), &xfs_name_dotdot, &cip, NULL);
 	if (unlikely(error))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-error);
+=======
+		return ERR_PTR(error);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(error);
 >>>>>>> v3.18

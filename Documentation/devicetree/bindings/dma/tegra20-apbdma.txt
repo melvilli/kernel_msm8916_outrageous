@@ -6,7 +6,10 @@ Required properties:
   all of the per-channel registers.
 - interrupts: Should contain all of the per-channel DMA interrupts.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - clocks: Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
 - resets : Must contain an entry for each entry in reset-names.
@@ -17,6 +20,9 @@ Required properties:
   client nodes' dmas properties. The specifier represents the DMA request
   select value for the peripheral. For more details, consult the Tegra TRM's
   documentation of the APB DMA channel control register REQ_SEL field.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Examples:
@@ -41,10 +47,16 @@ apbdma: dma@6000a000 {
 		       0 150 0x04
 		       0 151 0x04 >;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks = <&tegra_car 34>;
 	resets = <&tegra_car 34>;
 	reset-names = "dma";
 	#dma-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

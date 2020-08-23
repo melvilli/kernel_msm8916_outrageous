@@ -118,7 +118,10 @@ struct mxs_saif {
 	void __iomem *base;
 	int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mxs_pcm_dma_params dma_param;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int id;
@@ -129,12 +132,18 @@ struct mxs_saif {
 	u32 fifo_underrun;
 	u32 fifo_overrun;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	enum {
 		MXS_SAIF_STATE_STOPPED,
 		MXS_SAIF_STATE_RUNNING,
 	} state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

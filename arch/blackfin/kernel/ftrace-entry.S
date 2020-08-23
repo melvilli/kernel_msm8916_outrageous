@@ -34,6 +34,7 @@ ENDPROC(__mcount)
  */
 ENTRY(_ftrace_caller)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ifdef CONFIG_HAVE_FUNCTION_TRACE_MCOUNT_TEST
 	/* optional micro optimization: return if stopped */
 	p1.l = _function_trace_stop;
@@ -43,6 +44,8 @@ ENTRY(_ftrace_caller)
 	if ! cc jump _ftrace_stub (bp);
 # endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* save first/second/third function arg and the return register */
@@ -87,6 +90,7 @@ ENDPROC(_ftrace_caller)
 /* See documentation for _ftrace_caller */
 ENTRY(__mcount)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ifdef CONFIG_HAVE_FUNCTION_TRACE_MCOUNT_TEST
 	/* optional micro optimization: return if stopped */
 	p1.l = _function_trace_stop;
@@ -96,6 +100,8 @@ ENTRY(__mcount)
 	if ! cc jump _ftrace_stub (bp);
 # endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* save third function arg early so we can do testing below */

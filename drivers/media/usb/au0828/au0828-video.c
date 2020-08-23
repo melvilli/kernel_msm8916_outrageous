@@ -29,6 +29,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "au0828.h"
+
+>>>>>>> v3.18
 =======
 #include "au0828.h"
 
@@ -38,6 +43,7 @@
 #include <linux/init.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/suspend.h>
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
@@ -45,6 +51,12 @@
 #include <media/v4l2-chip-ident.h>
 #include <media/tuner.h>
 #include "au0828.h"
+=======
+#include <media/v4l2-common.h>
+#include <media/v4l2-ioctl.h>
+#include <media/v4l2-event.h>
+#include <media/tuner.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
@@ -67,7 +79,11 @@ MODULE_PARM_DESC(isoc_debug, "enable debug messages [isoc transfers]");
 do {\
 	if (isoc_debug) { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "au0828 %s :"fmt, \
+=======
+		pr_info("au0828 %s :"fmt, \
+>>>>>>> v3.18
 =======
 		pr_info("au0828 %s :"fmt, \
 >>>>>>> v3.18
@@ -124,7 +140,11 @@ static int check_dev(struct au0828_dev *dev)
 {
 	if (dev->dev_state & DEV_DISCONNECTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "v4l2 ioctl: device not present\n");
+=======
+		pr_info("v4l2 ioctl: device not present\n");
+>>>>>>> v3.18
 =======
 		pr_info("v4l2 ioctl: device not present\n");
 >>>>>>> v3.18
@@ -133,7 +153,11 @@ static int check_dev(struct au0828_dev *dev)
 
 	if (dev->dev_state & DEV_MISCONFIGURED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "v4l2 ioctl: device is misconfigured; "
+=======
+		pr_info("v4l2 ioctl: device is misconfigured; "
+>>>>>>> v3.18
 =======
 		pr_info("v4l2 ioctl: device is misconfigured; "
 >>>>>>> v3.18
@@ -185,6 +209,10 @@ static void au0828_irq_callback(struct urb *urb)
 			       urb->status);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->stream_state = STREAM_ON;
+>>>>>>> v3.18
 =======
 	dev->stream_state = STREAM_ON;
 >>>>>>> v3.18
@@ -228,6 +256,11 @@ static void au0828_uninit_isoc(struct au0828_dev *dev)
 	dev->isoc_ctl.transfer_buffer = NULL;
 	dev->isoc_ctl.num_bufs = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	dev->stream_state = STREAM_OFF;
+>>>>>>> v3.18
 =======
 
 	dev->stream_state = STREAM_OFF;
@@ -752,7 +785,11 @@ buffer_prepare(struct videobuf_queue *vq, struct videobuf_buffer *vb,
 		rc = videobuf_iolock(vq, &buf->vb, NULL);
 		if (rc < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "videobuf_iolock failed\n");
+=======
+			pr_info("videobuf_iolock failed\n");
+>>>>>>> v3.18
 =======
 			pr_info("videobuf_iolock failed\n");
 >>>>>>> v3.18
@@ -769,7 +806,11 @@ buffer_prepare(struct videobuf_queue *vq, struct videobuf_buffer *vb,
 				      au0828_isoc_copy);
 		if (rc < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "au0828_init_isoc failed\n");
+=======
+			pr_info("au0828_init_isoc failed\n");
+>>>>>>> v3.18
 =======
 			pr_info("au0828_init_isoc failed\n");
 >>>>>>> v3.18
@@ -834,7 +875,11 @@ static int au0828_analog_stream_enable(struct au0828_dev *d)
 {
 	struct usb_interface *iface;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret, h, w;
+>>>>>>> v3.18
 =======
 	int ret, h, w;
 >>>>>>> v3.18
@@ -848,7 +893,11 @@ static int au0828_analog_stream_enable(struct au0828_dev *d)
 		ret = usb_set_interface(d->usbdev, 0, 5);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "Au0828 can't set alt setting to 5!\n");
+=======
+			pr_info("Au0828 can't set alt setting to 5!\n");
+>>>>>>> v3.18
 =======
 			pr_info("Au0828 can't set alt setting to 5!\n");
 >>>>>>> v3.18
@@ -857,7 +906,12 @@ static int au0828_analog_stream_enable(struct au0828_dev *d)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME: size should be calculated using d->width, d->height */
+=======
+	h = d->height / 2 + 2;
+	w = d->width * 2;
+>>>>>>> v3.18
 =======
 	h = d->height / 2 + 2;
 	w = d->width * 2;
@@ -869,6 +923,7 @@ static int au0828_analog_stream_enable(struct au0828_dev *d)
 	au0828_writereg(d, 0x110, 0x00);
 	au0828_writereg(d, 0x111, 0x00);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au0828_writereg(d, 0x114, 0xa0);
 	au0828_writereg(d, 0x115, 0x05);
 	/* set y position */
@@ -877,6 +932,8 @@ static int au0828_analog_stream_enable(struct au0828_dev *d)
 	au0828_writereg(d, 0x116, 0xf2);
 	au0828_writereg(d, 0x117, 0x00);
 =======
+=======
+>>>>>>> v3.18
 	au0828_writereg(d, 0x114, w & 0xff);
 	au0828_writereg(d, 0x115, w >> 8);
 	/* set y position */
@@ -884,6 +941,9 @@ static int au0828_analog_stream_enable(struct au0828_dev *d)
 	au0828_writereg(d, 0x113, 0x00);
 	au0828_writereg(d, 0x116, h & 0xff);
 	au0828_writereg(d, 0x117, h >> 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	au0828_writereg(d, AU0828_SENSORCTRL_100, 0xb3);
 
@@ -1155,7 +1215,11 @@ static int au0828_v4l2_close(struct file *filp)
 		ret = usb_set_interface(dev->usbdev, 0, 0);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "Au0828 can't set alternate to 0!\n");
+=======
+			pr_info("Au0828 can't set alternate to 0!\n");
+>>>>>>> v3.18
 =======
 			pr_info("Au0828 can't set alternate to 0!\n");
 >>>>>>> v3.18
@@ -1186,7 +1250,11 @@ static void au0828_init_tuner(struct au0828_dev *dev)
 	   We don't do this at device probe because we don't want to
 	   incur the cost of a firmware load */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_std, dev->std);
+=======
+	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, dev->std);
+>>>>>>> v3.18
 =======
 	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, dev->std);
 >>>>>>> v3.18
@@ -1417,7 +1485,11 @@ static int vidioc_s_fmt_vid_cap(struct file *file, void *priv,
 
 	if (videobuf_queue_is_busy(&fh->vb_vidq)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s queue busy\n", __func__);
+=======
+		pr_info("%s queue busy\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_info("%s queue busy\n", __func__);
 >>>>>>> v3.18
@@ -1442,12 +1514,15 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 	i2c_gate_ctrl(dev, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME: when we support something other than NTSC, we are going to
 	   have to make the au0828 bridge adjust the size of its capture
 	   buffer, which is currently hardcoded at 720x480 */
 
 	v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_std, norm);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * FIXME: when we support something other than 60Hz standards,
 	 * we are going to have to make the au0828 bridge adjust the size
@@ -1455,6 +1530,9 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 	 */
 
 	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, norm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c_gate_ctrl(dev, 0);
@@ -1725,6 +1803,7 @@ static int vidioc_g_fmt_vbi_cap(struct file *file, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vidioc_g_chip_ident(struct file *file, void *priv,
 	       struct v4l2_dbg_chip_ident *chip)
 {
@@ -1745,6 +1824,8 @@ static int vidioc_g_chip_ident(struct file *file, void *priv,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int vidioc_cropcap(struct file *file, void *priv,
@@ -1834,6 +1915,10 @@ static int vidioc_streamoff(struct file *file, void *priv,
 		del_timer_sync(&dev->vid_timeout);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		au0828_analog_stream_disable(dev);
+>>>>>>> v3.18
 =======
 		au0828_analog_stream_disable(dev);
 >>>>>>> v3.18
@@ -1873,6 +1958,7 @@ static int vidioc_g_register(struct file *file, void *priv,
 	struct au0828_dev *dev = fh->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (reg->match.type) {
 	case V4L2_CHIP_MATCH_I2C_DRIVER:
 		v4l2_device_call_all(&dev->v4l2_dev, 0, core, g_register, reg);
@@ -1887,6 +1973,10 @@ static int vidioc_g_register(struct file *file, void *priv,
 	reg->val = au0828_read(dev, reg->reg);
 	reg->size = 1;
 >>>>>>> v3.18
+=======
+	reg->val = au0828_read(dev, reg->reg);
+	reg->size = 1;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1897,6 +1987,7 @@ static int vidioc_s_register(struct file *file, void *priv,
 	struct au0828_dev *dev = fh->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (reg->match.type) {
 	case V4L2_CHIP_MATCH_I2C_DRIVER:
 		v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_register, reg);
@@ -1905,6 +1996,8 @@ static int vidioc_s_register(struct file *file, void *priv,
 		if (!v4l2_chip_match_host(&reg->match))
 			return -EINVAL;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return au0828_writereg(dev, reg->reg, reg->val);
@@ -2003,7 +2096,10 @@ static int vidioc_dqbuf(struct file *file, void *priv, struct v4l2_buffer *b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void au0828_v4l2_suspend(struct au0828_dev *dev)
 {
 	struct urb *urb;
@@ -2067,6 +2163,9 @@ void au0828_v4l2_resume(struct au0828_dev *dev)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct v4l2_file_operations au0828_v4l_fops = {
 	.owner      = THIS_MODULE,
@@ -2111,7 +2210,10 @@ static const struct v4l2_ioctl_ops video_ioctl_ops = {
 	.vidioc_s_register          = vidioc_s_register,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident        = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.vidioc_log_status	    = vidioc_log_status,
@@ -2124,7 +2226,11 @@ static const struct video_device au0828_video_template = {
 	.release                    = video_device_release,
 	.ioctl_ops 		    = &video_ioctl_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tvnorms                    = V4L2_STD_NTSC_M,
+=======
+	.tvnorms                    = V4L2_STD_NTSC_M | V4L2_STD_PAL_M,
+>>>>>>> v3.18
 =======
 	.tvnorms                    = V4L2_STD_NTSC_M | V4L2_STD_PAL_M,
 >>>>>>> v3.18
@@ -2141,7 +2247,12 @@ int au0828_analog_register(struct au0828_dev *dev,
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk(1, "au0828_analog_register called!\n");
+=======
+	dprintk(1, "au0828_analog_register called for intf#%d!\n",
+		interface->cur_altsetting->desc.bInterfaceNumber);
+>>>>>>> v3.18
 =======
 	dprintk(1, "au0828_analog_register called for intf#%d!\n",
 		interface->cur_altsetting->desc.bInterfaceNumber);
@@ -2152,7 +2263,11 @@ int au0828_analog_register(struct au0828_dev *dev,
 			interface->cur_altsetting->desc.bInterfaceNumber, 5);
 	if (retval != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "Failure setting usb interface0 to as5\n");
+=======
+		pr_info("Failure setting usb interface0 to as5\n");
+>>>>>>> v3.18
 =======
 		pr_info("Failure setting usb interface0 to as5\n");
 >>>>>>> v3.18
@@ -2174,11 +2289,14 @@ int au0828_analog_register(struct au0828_dev *dev,
 				(((tmp & 0x1800) >> 11) + 1);
 			dev->isoc_in_endpointaddr = endpoint->bEndpointAddress;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 	if (!(dev->isoc_in_endpointaddr)) {
 		printk(KERN_INFO "Could not locate isoc endpoint\n");
 =======
+=======
+>>>>>>> v3.18
 			dprintk(1,
 				"Found isoc endpoint 0x%02x, max size = %d\n",
 				dev->isoc_in_endpointaddr, dev->max_pkt_size);
@@ -2186,6 +2304,9 @@ int au0828_analog_register(struct au0828_dev *dev,
 	}
 	if (!(dev->isoc_in_endpointaddr)) {
 		pr_info("Could not locate isoc endpoint\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(dev);
 		return -ENODEV;
@@ -2240,7 +2361,10 @@ int au0828_analog_register(struct au0828_dev *dev,
 	dev->vdev->v4l2_dev = &dev->v4l2_dev;
 	dev->vdev->lock = &dev->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->vdev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(dev->vdev->name, "au0828a video");
@@ -2250,7 +2374,10 @@ int au0828_analog_register(struct au0828_dev *dev,
 	dev->vbi_dev->v4l2_dev = &dev->v4l2_dev;
 	dev->vbi_dev->lock = &dev->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->vbi_dev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(dev->vbi_dev->name, "au0828a vbi");

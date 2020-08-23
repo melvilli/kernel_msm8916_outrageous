@@ -218,7 +218,11 @@ static int wl1271_probe(struct sdio_func *func,
 				  const struct sdio_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wlcore_platdev_data *pdev_data;
+=======
+	struct wlcore_platdev_data pdev_data;
+>>>>>>> v3.18
 =======
 	struct wlcore_platdev_data pdev_data;
 >>>>>>> v3.18
@@ -233,6 +237,7 @@ static int wl1271_probe(struct sdio_func *func,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev_data = kzalloc(sizeof(*pdev_data), GFP_KERNEL);
 	if (!pdev_data)
 		goto out;
@@ -242,12 +247,20 @@ static int wl1271_probe(struct sdio_func *func,
 	memset(&pdev_data, 0x00, sizeof(pdev_data));
 	pdev_data.if_ops = &sdio_ops;
 >>>>>>> v3.18
+=======
+	memset(&pdev_data, 0x00, sizeof(pdev_data));
+	pdev_data.if_ops = &sdio_ops;
+>>>>>>> v3.18
 
 	glue = kzalloc(sizeof(*glue), GFP_KERNEL);
 	if (!glue) {
 		dev_err(&func->dev, "can't allocate glue\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_pdev_data;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -262,9 +275,15 @@ static int wl1271_probe(struct sdio_func *func,
 	func->card->quirks |= MMC_QUIRK_BLKSZ_FOR_BYTE_MODE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev_data->pdata = wl12xx_get_platform_data();
 	if (IS_ERR(pdev_data->pdata)) {
 		ret = PTR_ERR(pdev_data->pdata);
+=======
+	pdev_data.pdata = wl12xx_get_platform_data();
+	if (IS_ERR(pdev_data.pdata)) {
+		ret = PTR_ERR(pdev_data.pdata);
+>>>>>>> v3.18
 =======
 	pdev_data.pdata = wl12xx_get_platform_data();
 	if (IS_ERR(pdev_data.pdata)) {
@@ -280,7 +299,11 @@ static int wl1271_probe(struct sdio_func *func,
 
 	if (mmcflags & MMC_PM_KEEP_POWER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdev_data->pdata->pwr_in_suspend = true;
+=======
+		pdev_data.pdata->pwr_in_suspend = true;
+>>>>>>> v3.18
 =======
 		pdev_data.pdata->pwr_in_suspend = true;
 >>>>>>> v3.18
@@ -313,7 +336,11 @@ static int wl1271_probe(struct sdio_func *func,
 	memset(res, 0x00, sizeof(res));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res[0].start = pdev_data->pdata->irq;
+=======
+	res[0].start = pdev_data.pdata->irq;
+>>>>>>> v3.18
 =======
 	res[0].start = pdev_data.pdata->irq;
 >>>>>>> v3.18
@@ -327,8 +354,13 @@ static int wl1271_probe(struct sdio_func *func,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = platform_device_add_data(glue->core, pdev_data,
 				       sizeof(*pdev_data));
+=======
+	ret = platform_device_add_data(glue->core, &pdev_data,
+				       sizeof(pdev_data));
+>>>>>>> v3.18
 =======
 	ret = platform_device_add_data(glue->core, &pdev_data,
 				       sizeof(pdev_data));
@@ -352,9 +384,12 @@ out_free_glue:
 	kfree(glue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_pdev_data:
 	kfree(pdev_data);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:

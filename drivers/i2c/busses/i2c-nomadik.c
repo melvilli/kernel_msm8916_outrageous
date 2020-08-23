@@ -16,7 +16,10 @@
 #include <linux/module.h>
 #include <linux/amba/bus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/atomic.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -27,9 +30,13 @@
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/i2c-nomadik.h>
 #include <linux/of.h>
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -114,7 +121,10 @@
 #define MAX_I2C_FIFO_THRESHOLD	15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum i2c_freq_mode {
 	I2C_FREQ_MODE_STANDARD,		/* up to 100 Kb/s */
 	I2C_FREQ_MODE_FAST,		/* up to 400 Kb/s */
@@ -132,6 +142,9 @@ struct i2c_vendor_data {
 	u32 fifodepth;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum i2c_status {
 	I2C_NOP,
@@ -166,6 +179,10 @@ struct i2c_nmk_client {
 /**
  * struct nmk_i2c_dev - private data structure of the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @vendor: vendor data for this variant.
+>>>>>>> v3.18
 =======
  * @vendor: vendor data for this variant.
 >>>>>>> v3.18
@@ -174,6 +191,7 @@ struct i2c_nmk_client {
  * @irq: interrupt line for the controller.
  * @virtbase: virtual io memory area.
  * @clk: hardware i2c block clock.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @cfg: machine provided controller configuration.
  * @cli: holder of client specific data.
@@ -188,6 +206,8 @@ struct i2c_nmk_client {
  */
 struct nmk_i2c_dev {
 =======
+=======
+>>>>>>> v3.18
  * @cli: holder of client specific data.
  * @clk_freq: clock frequency for the operation mode
  * @tft: Tx FIFO Threshold in bytes
@@ -200,12 +220,16 @@ struct nmk_i2c_dev {
  */
 struct nmk_i2c_dev {
 	struct i2c_vendor_data		*vendor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct amba_device		*adev;
 	struct i2c_adapter		adap;
 	int				irq;
 	void __iomem			*virtbase;
 	struct clk			*clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nmk_i2c_controller	cfg;
 	struct i2c_nmk_client		cli;
@@ -219,6 +243,8 @@ struct nmk_i2c_dev {
 	struct pinctrl_state		*pins_sleep;
 	bool				busy;
 =======
+=======
+>>>>>>> v3.18
 	struct i2c_nmk_client		cli;
 	u32				clk_freq;
 	unsigned char			tft;
@@ -228,6 +254,9 @@ struct nmk_i2c_dev {
 	int				stop;
 	struct completion		xfer_complete;
 	int				result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -398,6 +427,11 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 	u32 brcr1, brcr2;
 	u32 i2c_clk, div;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ns;
+	u16 slsu;
+>>>>>>> v3.18
 =======
 	u32 ns;
 	u16 slsu;
@@ -410,6 +444,11 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 	writel(0x0, dev->virtbase + I2C_DMAR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2c_clk = clk_get_rate(dev->clk);
+
+>>>>>>> v3.18
 =======
 	i2c_clk = clk_get_rate(dev->clk);
 
@@ -418,6 +457,7 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 	 * set the slsu:
 	 *
 	 * slsu defines the data setup time after SCL clock
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * stretching in terms of i2c clk cycles. The
 	 * needed setup time for the three modes are 250ns,
@@ -428,6 +468,8 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 
 	i2c_clk = clk_get_rate(dev->clk);
 =======
+=======
+>>>>>>> v3.18
 	 * stretching in terms of i2c clk cycles + 1 (zero means
 	 * "wait one cycle"), the needed setup time for the three
 	 * modes are 250ns, 100ns, 10ns respectively.
@@ -454,6 +496,9 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 
 	dev_dbg(&dev->adev->dev, "calculated SLSU = %04x\n", slsu);
 	writel(slsu << 16, dev->virtbase + I2C_SCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -462,7 +507,11 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 	 * operation. TODO - high speed support.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	div = (dev->cfg.clk_freq > 100000) ? 3 : 2;
+=======
+	div = (dev->clk_freq > 100000) ? 3 : 2;
+>>>>>>> v3.18
 =======
 	div = (dev->clk_freq > 100000) ? 3 : 2;
 >>>>>>> v3.18
@@ -476,7 +525,11 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 	 */
 	brcr1 = 0 << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcr2 = (i2c_clk/(dev->cfg.clk_freq * div)) & 0xffff;
+=======
+	brcr2 = (i2c_clk/(dev->clk_freq * div)) & 0xffff;
+>>>>>>> v3.18
 =======
 	brcr2 = (i2c_clk/(dev->clk_freq * div)) & 0xffff;
 >>>>>>> v3.18
@@ -491,7 +544,11 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 	 * and high speed (up to 3.4 Mb/s)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->cfg.sm > I2C_FREQ_MODE_FAST) {
+=======
+	if (dev->sm > I2C_FREQ_MODE_FAST) {
+>>>>>>> v3.18
 =======
 	if (dev->sm > I2C_FREQ_MODE_FAST) {
 >>>>>>> v3.18
@@ -503,17 +560,23 @@ static void setup_i2c_controller(struct nmk_i2c_dev *dev)
 				dev->virtbase + I2C_CR);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(dev->cfg.sm << 4, dev->virtbase + I2C_CR);
 
 	/* set the Tx and Rx FIFO threshold */
 	writel(dev->cfg.tft, dev->virtbase + I2C_TFTR);
 	writel(dev->cfg.rft, dev->virtbase + I2C_RFTR);
 =======
+=======
+>>>>>>> v3.18
 	writel(dev->sm << 4, dev->virtbase + I2C_CR);
 
 	/* set the Tx and Rx FIFO threshold */
 	writel(dev->tft, dev->virtbase + I2C_TFTR);
 	writel(dev->rft, dev->virtbase + I2C_RFTR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -549,7 +612,11 @@ static int read_i2c(struct nmk_i2c_dev *dev, u16 flags)
 			I2C_IT_MAL | I2C_IT_BERR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->stop)
+=======
+	if (dev->stop || !dev->vendor->has_mtdws)
+>>>>>>> v3.18
 =======
 	if (dev->stop || !dev->vendor->has_mtdws)
 >>>>>>> v3.18
@@ -633,7 +700,11 @@ static int write_i2c(struct nmk_i2c_dev *dev, u16 flags)
 	 * to start repeated start operation
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->stop)
+=======
+	if (dev->stop || !dev->vendor->has_mtdws)
+>>>>>>> v3.18
 =======
 	if (dev->stop || !dev->vendor->has_mtdws)
 >>>>>>> v3.18
@@ -755,7 +826,11 @@ static int nmk_i2c_xfer(struct i2c_adapter *i2c_adap,
 		struct i2c_msg msgs[], int num_msgs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status;
+=======
+	int status = 0;
+>>>>>>> v3.18
 =======
 	int status = 0;
 >>>>>>> v3.18
@@ -763,6 +838,7 @@ static int nmk_i2c_xfer(struct i2c_adapter *i2c_adap,
 	struct nmk_i2c_dev *dev = i2c_get_adapdata(i2c_adap);
 	int j;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->busy = true;
 
@@ -791,6 +867,10 @@ static int nmk_i2c_xfer(struct i2c_adapter *i2c_adap,
 	pm_runtime_get_sync(&dev->adev->dev);
 
 >>>>>>> v3.18
+=======
+	pm_runtime_get_sync(&dev->adev->dev);
+
+>>>>>>> v3.18
 	/* Attempt three times to send the message queue */
 	for (j = 0; j < 3; j++) {
 		/* setup the i2c controller */
@@ -812,6 +892,7 @@ static int nmk_i2c_xfer(struct i2c_adapter *i2c_adap,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	clk_disable_unprepare(dev->clk);
 out_clk:
@@ -828,6 +909,10 @@ out_clk:
 
 	dev->busy = false;
 
+=======
+	pm_runtime_put_sync(&dev->adev->dev);
+
+>>>>>>> v3.18
 =======
 	pm_runtime_put_sync(&dev->adev->dev);
 
@@ -1016,6 +1101,7 @@ static irqreturn_t i2c_irq_handler(int irq, void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PM
 static int nmk_i2c_suspend(struct device *dev)
@@ -1039,6 +1125,8 @@ static int nmk_i2c_suspend(struct device *dev)
 
 static int nmk_i2c_resume(struct device *dev)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int nmk_i2c_suspend_late(struct device *dev)
 {
@@ -1070,12 +1158,16 @@ static int nmk_i2c_runtime_suspend(struct device *dev)
 }
 
 static int nmk_i2c_runtime_resume(struct device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct amba_device *adev = to_amba_device(dev);
 	struct nmk_i2c_dev *nmk_i2c = amba_get_drvdata(adev);
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* First go to the default state */
 	if (!IS_ERR(nmk_i2c->pins_default)) {
@@ -1107,6 +1199,8 @@ static const struct dev_pm_ops nmk_i2c_pm = {
 	.suspend_noirq	= nmk_i2c_suspend,
 	.resume_noirq	= nmk_i2c_resume,
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(nmk_i2c->clk);
 	if (ret) {
 		dev_err(dev, "can't prepare_enable clock\n");
@@ -1130,6 +1224,9 @@ static const struct dev_pm_ops nmk_i2c_pm = {
 	SET_PM_RUNTIME_PM_OPS(nmk_i2c_runtime_suspend,
 			nmk_i2c_runtime_resume,
 			NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1143,6 +1240,7 @@ static const struct i2c_algorithm nmk_i2c_algo = {
 	.functionality	= nmk_i2c_functionality
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct nmk_i2c_controller u8500_i2c = {
 	/*
@@ -1196,6 +1294,8 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 
 	dev = kzalloc(sizeof(struct nmk_i2c_dev), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 static void nmk_i2c_of_probe(struct device_node *np,
 			     struct nmk_i2c_dev *nmk)
 {
@@ -1223,12 +1323,16 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 	u32 max_fifo_threshold = (vendor->fifodepth / 2) - 1;
 
 	dev = devm_kzalloc(&adev->dev, sizeof(struct nmk_i2c_dev), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev) {
 		dev_err(&adev->dev, "cannot allocate memory\n");
 		ret = -ENOMEM;
 		goto err_no_mem;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->busy = false;
 	dev->adev = adev;
@@ -1281,6 +1385,8 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 		dev_err(&adev->dev, "cannot claim the irq %d\n", dev->irq);
 		goto err_irq;
 =======
+=======
+>>>>>>> v3.18
 	dev->vendor = vendor;
 	dev->adev = adev;
 	nmk_i2c_of_probe(np, dev);
@@ -1312,11 +1418,15 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 	if (ret) {
 		dev_err(&adev->dev, "cannot claim the irq %d\n", dev->irq);
 		goto err_no_mem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	pm_suspend_ignore_children(&adev->dev, true);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->clk = clk_get(&adev->dev, NULL);
 	if (IS_ERR(dev->clk)) {
@@ -1344,6 +1454,8 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 	dev->cfg.rft	= pdata->rft;
 	dev->cfg.sm	= pdata->sm;
 =======
+=======
+>>>>>>> v3.18
 	dev->clk = devm_clk_get(&adev->dev, NULL);
 	if (IS_ERR(dev->clk)) {
 		dev_err(&adev->dev, "could not get i2c clock\n");
@@ -1368,6 +1480,9 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 	adap->timeout = msecs_to_jiffies(dev->timeout);
 	snprintf(adap->name, sizeof(adap->name),
 		 "Nomadik I2C at %pR", &adev->res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c_set_adapdata(adap, dev);
@@ -1376,6 +1491,7 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 		 "initialize %s on virtual base %p\n",
 		 adap->name, dev->virtbase);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = i2c_add_numbered_adapter(adap);
 	if (ret) {
@@ -1386,17 +1502,23 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
 	of_i2c_register_devices(adap);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = i2c_add_adapter(adap);
 	if (ret) {
 		dev_err(&adev->dev, "failed to add adapter\n");
 		goto err_no_adap;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pm_runtime_put(&adev->dev);
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  err_add_adap:
 	clk_put(dev->clk);
@@ -1407,6 +1529,10 @@ static int nmk_i2c_probe(struct amba_device *adev, const struct amba_id *id)
  err_no_ioremap:
 	kfree(dev);
  err_pinctrl:
+=======
+ err_no_adap:
+	clk_disable_unprepare(dev->clk);
+>>>>>>> v3.18
 =======
  err_no_adap:
 	clk_disable_unprepare(dev->clk);
@@ -1428,6 +1554,7 @@ static int nmk_i2c_remove(struct amba_device *adev)
 	/* disable the controller */
 	i2c_clr_bit(dev->virtbase + I2C_CR, I2C_CR_PE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(dev->irq, dev);
 	iounmap(dev->virtbase);
 	if (res)
@@ -1440,12 +1567,20 @@ static int nmk_i2c_remove(struct amba_device *adev)
 	if (res)
 		release_mem_region(res->start, resource_size(res));
 >>>>>>> v3.18
+=======
+	clk_disable_unprepare(dev->clk);
+	if (res)
+		release_mem_region(res->start, resource_size(res));
+>>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct i2c_vendor_data vendor_stn8815 = {
 	.has_mtdws = false,
 	.fifodepth = 16, /* Guessed from TFTR/RFTR = 7 */
@@ -1456,12 +1591,19 @@ static struct i2c_vendor_data vendor_db8500 = {
 	.fifodepth = 32, /* Guessed from TFTR/RFTR = 15 */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct amba_id nmk_i2c_ids[] = {
 	{
 		.id	= 0x00180024,
 		.mask	= 0x00ffffff,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.data	= &vendor_stn8815,
+>>>>>>> v3.18
 =======
 		.data	= &vendor_stn8815,
 >>>>>>> v3.18
@@ -1470,6 +1612,10 @@ static struct amba_id nmk_i2c_ids[] = {
 		.id	= 0x00380024,
 		.mask	= 0x00ffffff,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.data	= &vendor_db8500,
+>>>>>>> v3.18
 =======
 		.data	= &vendor_db8500,
 >>>>>>> v3.18

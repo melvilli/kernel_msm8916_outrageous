@@ -68,7 +68,10 @@ Example:
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 * Freescale on-board FPGA connected on I2C bus
 
@@ -102,4 +105,7 @@ Example:
 		compatible = "fsl,t1040rdb-cpld";
 		reg = <3 0 0x300>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

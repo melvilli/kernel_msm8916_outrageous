@@ -14,9 +14,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/types.h>
 #include <linux/init.h>
+=======
+#include <linux/err.h>
+#include <linux/module.h>
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 #include <linux/module.h>
@@ -159,11 +165,17 @@ static const char * const probes[] = { "RedBoot", "cmdlinepart", NULL };
 static int ixp4xx_flash_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct flash_platform_data *plat = dev->dev.platform_data;
 	struct ixp4xx_flash_info *info = platform_get_drvdata(dev);
 
 	platform_set_drvdata(dev, NULL);
 
+=======
+	struct flash_platform_data *plat = dev_get_platdata(&dev->dev);
+	struct ixp4xx_flash_info *info = platform_get_drvdata(dev);
+
+>>>>>>> v3.18
 =======
 	struct flash_platform_data *plat = dev_get_platdata(&dev->dev);
 	struct ixp4xx_flash_info *info = platform_get_drvdata(dev);
@@ -177,6 +189,7 @@ static int ixp4xx_flash_remove(struct platform_device *dev)
 		map_destroy(info->mtd);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (info->map.virt)
 		iounmap(info->map.virt);
 
@@ -184,6 +197,8 @@ static int ixp4xx_flash_remove(struct platform_device *dev)
 		release_resource(info->res);
 		kfree(info->res);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -196,7 +211,11 @@ static int ixp4xx_flash_remove(struct platform_device *dev)
 static int ixp4xx_flash_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct flash_platform_data *plat = dev->dev.platform_data;
+=======
+	struct flash_platform_data *plat = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct flash_platform_data *plat = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -216,7 +235,12 @@ static int ixp4xx_flash_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kzalloc(sizeof(struct ixp4xx_flash_info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&dev->dev, sizeof(struct ixp4xx_flash_info),
+			    GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	info = devm_kzalloc(&dev->dev, sizeof(struct ixp4xx_flash_info),
 			    GFP_KERNEL);
@@ -247,6 +271,7 @@ static int ixp4xx_flash_probe(struct platform_device *dev)
 	info->map.copy_from = ixp4xx_copy_from;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->res = request_mem_region(dev->resource->start,
 			resource_size(dev->resource),
 			"IXP4XXFlash");
@@ -261,6 +286,11 @@ static int ixp4xx_flash_probe(struct platform_device *dev)
 	if (!info->map.virt) {
 		printk(KERN_ERR "IXP4XXFlash: Failed to ioremap region\n");
 		err = -EIO;
+=======
+	info->map.virt = devm_ioremap_resource(&dev->dev, dev->resource);
+	if (IS_ERR(info->map.virt)) {
+		err = PTR_ERR(info->map.virt);
+>>>>>>> v3.18
 =======
 	info->map.virt = devm_ioremap_resource(&dev->dev, dev->resource);
 	if (IS_ERR(info->map.virt)) {

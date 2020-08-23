@@ -158,7 +158,11 @@ static void run_guest_once(struct lg_cpu *cpu, struct lguest_pages *pages)
 	 * exactly match the stack layout created by an interrupt...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm volatile("pushf; lcall *lguest_entry"
+=======
+	asm volatile("pushf; lcall *%4"
+>>>>>>> v3.18
 =======
 	asm volatile("pushf; lcall *%4"
 >>>>>>> v3.18
@@ -174,7 +178,13 @@ static void run_guest_once(struct lg_cpu *cpu, struct lguest_pages *pages)
 		      * directory.
 		      */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     : "0"(pages), "1"(__pa(cpu->lg->pgdirs[cpu->cpu_pgd].pgdir))
+=======
+		     : "0"(pages), 
+		       "1"(__pa(cpu->lg->pgdirs[cpu->cpu_pgd].pgdir)),
+		       "m"(lguest_entry)
+>>>>>>> v3.18
 =======
 		     : "0"(pages), 
 		       "1"(__pa(cpu->lg->pgdirs[cpu->cpu_pgd].pgdir)),

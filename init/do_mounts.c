@@ -27,6 +27,11 @@
 #include <linux/fs_struct.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ramfs.h>
+#include <linux/shmem_fs.h>
+>>>>>>> v3.18
 =======
 #include <linux/ramfs.h>
 #include <linux/shmem_fs.h>
@@ -106,7 +111,11 @@ no_match:
 /**
  * devt_from_partuuid - looks up the dev_t of a partition by its UUID
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @uuid:	char array containing ascii UUID
+=======
+ * @uuid_str:	char array containing ascii UUID
+>>>>>>> v3.18
 =======
  * @uuid_str:	char array containing ascii UUID
 >>>>>>> v3.18
@@ -116,7 +125,11 @@ no_match:
  * by filesystem UUIDs.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If @uuid is followed by a "/PARTNROFF=%d", then the number will be
+=======
+ * If @uuid_str is followed by a "/PARTNROFF=%d", then the number will be
+>>>>>>> v3.18
 =======
  * If @uuid_str is followed by a "/PARTNROFF=%d", then the number will be
 >>>>>>> v3.18
@@ -194,7 +207,12 @@ done:
  *	Convert a name into device number.  We accept the following variants:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	1) device number in hexadecimal	represents itself
+=======
+ *	1) <hex_major><hex_minor> device number in hexadecimal represents itself
+ *         no leading 0x, for example b302.
+>>>>>>> v3.18
 =======
  *	1) <hex_major><hex_minor> device number in hexadecimal represents itself
  *         no leading 0x, for example b302.
@@ -214,6 +232,11 @@ done:
  *	7) PARTUUID=<UUID>/PARTNROFF=<int> to select a partition in relation to
  *	   a partition with a known unique id.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	8) <major>:<minor> major and minor number of the device separated by
+ *	   a colon.
+>>>>>>> v3.18
 =======
  *	8) <major>:<minor> major and minor number of the device separated by
  *	   a colon.
@@ -560,7 +583,11 @@ void __init prepare_namespace(void)
 
 	if (root_delay) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "Waiting %dsec before mounting root device...\n",
+=======
+		printk(KERN_INFO "Waiting %d sec before mounting root device...\n",
+>>>>>>> v3.18
 =======
 		printk(KERN_INFO "Waiting %d sec before mounting root device...\n",
 >>>>>>> v3.18
@@ -616,7 +643,10 @@ out:
 	sys_chroot(".");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static bool is_tmpfs;
 static struct dentry *rootfs_mount(struct file_system_type *fs_type,
@@ -660,4 +690,7 @@ int __init init_rootfs(void)
 
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

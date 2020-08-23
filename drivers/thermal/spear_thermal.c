@@ -105,7 +105,11 @@ static int spear_thermal_probe(struct platform_device *pdev)
 	struct spear_thermal_dev *stdev;
 	struct device_node *np = pdev->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *stres = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+=======
+	struct resource *res;
+>>>>>>> v3.18
 =======
 	struct resource *res;
 >>>>>>> v3.18
@@ -116,6 +120,7 @@ static int spear_thermal_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!stres) {
 		dev_err(&pdev->dev, "memory resource missing\n");
@@ -136,6 +141,8 @@ static int spear_thermal_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	stdev = devm_kzalloc(&pdev->dev, sizeof(*stdev), GFP_KERNEL);
 	if (!stdev)
 		return -ENOMEM;
@@ -145,6 +152,9 @@ static int spear_thermal_probe(struct platform_device *pdev)
 	stdev->thermal_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(stdev->thermal_base))
 		return PTR_ERR(stdev->thermal_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	stdev->clk = devm_clk_get(&pdev->dev, NULL);
@@ -191,7 +201,10 @@ static int spear_thermal_exit(struct platform_device *pdev)
 
 	thermal_zone_device_unregister(spear_thermal);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -218,7 +231,11 @@ static struct platform_driver spear_thermal_driver = {
 		.owner = THIS_MODULE,
 		.pm = &spear_thermal_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(spear_thermal_id_table),
+=======
+		.of_match_table = spear_thermal_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = spear_thermal_id_table,
 >>>>>>> v3.18

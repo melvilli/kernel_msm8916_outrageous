@@ -159,7 +159,10 @@ static void wdt_timer_ping(unsigned long data)
 static void wdt_config(int writeval)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 dummy;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long flags;
@@ -167,7 +170,11 @@ static void wdt_config(int writeval)
 	/* buy some time (ping) */
 	spin_lock_irqsave(&wdt_spinlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dummy = readw(wdtmrctl);	/* ensure write synchronization */
+=======
+	readw(wdtmrctl);	/* ensure write synchronization */
+>>>>>>> v3.18
 =======
 	readw(wdtmrctl);	/* ensure write synchronization */
 >>>>>>> v3.18
@@ -441,6 +448,9 @@ MODULE_DESCRIPTION(
 	"Driver for watchdog timer in AMD \"Elan\" SC520 uProcessor");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -36,6 +36,7 @@ create_package() {
 		debarch=sparc ;;
 	s390*)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debarch=s390 ;;
 	ppc*)
 		debarch=powerpc ;;
@@ -46,6 +47,8 @@ create_package() {
 	arm*)
 		debarch=arm$(grep -q CONFIG_AEABI=y .config && echo el) ;;
 =======
+=======
+>>>>>>> v3.18
 		debarch=s390$(grep -q CONFIG_64BIT=y $KCONFIG_CONFIG && echo x || true) ;;
 	ppc*)
 		debarch=$(grep -q CPU_LITTLE_ENDIAN=y $KCONFIG_CONFIG && echo ppc64el || echo powerpc) ;;
@@ -57,6 +60,9 @@ create_package() {
 		debarch=arm64 ;;
 	arm*)
 		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo el || true) ;;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*)
 		echo "" >&2
@@ -77,7 +83,11 @@ create_package() {
 
 	# Create the package
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dpkg-gencontrol -isp $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
+=======
+	dpkg-gencontrol $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
+>>>>>>> v3.18
 =======
 	dpkg-gencontrol $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
 >>>>>>> v3.18
@@ -97,17 +107,23 @@ fwdir="$objtree/debian/fwtmp"
 kernel_headers_dir="$objtree/debian/hdrtmp"
 libc_headers_dir="$objtree/debian/headertmp"
 <<<<<<< HEAD
+<<<<<<< HEAD
 packagename=linux-image-$version
 fwpackagename=linux-firmware-image
 kernel_headers_packagename=linux-headers-$version
 libc_headers_packagename=linux-libc-dev
 =======
+=======
+>>>>>>> v3.18
 dbg_dir="$objtree/debian/dbgtmp"
 packagename=linux-image-$version
 fwpackagename=linux-firmware-image-$version
 kernel_headers_packagename=linux-headers-$version
 libc_headers_packagename=linux-libc-dev
 dbg_packagename=$packagename-dbg
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 if [ "$ARCH" = "um" ] ; then
@@ -115,9 +131,12 @@ if [ "$ARCH" = "um" ] ; then
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Setup the directory structure
 rm -rf "$tmpdir" "$fwdir" "$kernel_headers_dir" "$libc_headers_dir"
 =======
+=======
+>>>>>>> v3.18
 # Not all arches have the same installed path in debian
 # XXX: have each arch Makefile export a variable of the canonical image install
 # path instead
@@ -136,6 +155,9 @@ BUILD_DEBUG="$(grep -s '^CONFIG_DEBUG_INFO=y' $KCONFIG_CONFIG || true)"
 
 # Setup the directory structure
 rm -rf "$tmpdir" "$fwdir" "$kernel_headers_dir" "$libc_headers_dir" "$dbg_dir"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 mkdir -m 755 -p "$tmpdir/DEBIAN"
 mkdir -p  "$tmpdir/lib" "$tmpdir/boot" "$tmpdir/usr/share/doc/$packagename"
@@ -150,17 +172,24 @@ if [ "$ARCH" = "um" ] ; then
 	mkdir -p "$tmpdir/usr/lib/uml/modules/$version" "$tmpdir/usr/bin"
 fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 if [ -n "$BUILD_DEBUG" ] ; then
 	mkdir -p "$dbg_dir/usr/share/doc/$dbg_packagename"
 	mkdir -m 755 -p "$dbg_dir/DEBIAN"
 fi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # Build and install the kernel
 if [ "$ARCH" = "um" ] ; then
 	$MAKE linux
 	cp System.map "$tmpdir/usr/lib/uml/modules/$version/System.map"
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cp .config "$tmpdir/usr/share/doc/$packagename/config"
 	gzip "$tmpdir/usr/share/doc/$packagename/config"
@@ -178,6 +207,8 @@ fi
 
 if grep -q '^CONFIG_MODULES=y' .config ; then
 =======
+=======
+>>>>>>> v3.18
 	cp $KCONFIG_CONFIG "$tmpdir/usr/share/doc/$packagename/config"
 	gzip "$tmpdir/usr/share/doc/$packagename/config"
 else
@@ -192,6 +223,9 @@ else
 fi
 
 if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INSTALL_MOD_PATH="$tmpdir" $MAKE KBUILD_SRC= modules_install
 	rm -f "$tmpdir/lib/modules/$version/build"
@@ -201,7 +235,10 @@ if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
 		rmdir "$tmpdir/lib/modules/$version"
 	fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if [ -n "$BUILD_DEBUG" ] ; then
 		for module in $(find $tmpdir/lib/modules/ -name *.ko -printf '%P\n'); do
 			module=lib/modules/$module
@@ -214,6 +251,9 @@ if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
 			$OBJCOPY --add-gnu-debuglink=$dbg_dir/usr/lib/debug/$module $tmpdir/$module
 		done
 	fi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fi
 
@@ -225,9 +265,12 @@ fi
 # Install the maintainer scripts
 # Note: hook scripts under /etc/kernel are also executed by official Debian
 <<<<<<< HEAD
+<<<<<<< HEAD
 # kernel packages, as well as kernel packages built using make-kpkg
 debhookdir=${KDEB_HOOKDIR:-/etc/kernel}
 =======
+=======
+>>>>>>> v3.18
 # kernel packages, as well as kernel packages built using make-kpkg.
 # make-kpkg sets $INITRD to indicate whether an initramfs is wanted, and
 # so do we; recent versions of dracut and initramfs-tools will obey this.
@@ -237,6 +280,9 @@ if grep -q '^CONFIG_BLK_DEV_INITRD=y' $KCONFIG_CONFIG; then
 else
 	want_initrd=No
 fi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 for script in postinst postrm preinst prerm ; do
 	mkdir -p "$tmpdir$debhookdir/$script.d"
@@ -249,12 +295,18 @@ set -e
 export DEB_MAINT_PARAMS="\$*"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 test -d $debhookdir/$script.d && run-parts --arg="$version" $debhookdir/$script.d
 =======
+=======
+>>>>>>> v3.18
 # Tell initramfs builder whether it's wanted
 export INITRD=$want_initrd
 
 test -d $debhookdir/$script.d && run-parts --arg="$version" --arg="/$installed_image_path" $debhookdir/$script.d
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit 0
 EOF
@@ -349,6 +401,7 @@ EOF
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Build header package
 (cd $srctree; find . -name Makefile\* -o -name Kconfig\* -o -name \*.pl > "$objtree/debian/hdrsrcfiles")
 (cd $srctree; find arch/$SRCARCH/include include scripts -type f >> "$objtree/debian/hdrsrcfiles")
@@ -358,6 +411,8 @@ mkdir -p "$destdir"
 (cd $srctree; tar -c -f - -T "$objtree/debian/hdrsrcfiles") | (cd $destdir; tar -xf -)
 (cd $objtree; tar -c -f - -T "$objtree/debian/hdrobjfiles") | (cd $destdir; tar -xf -)
 =======
+=======
+>>>>>>> v3.18
 # Build kernel header package
 (cd $srctree; find . -name Makefile\* -o -name Kconfig\* -o -name \*.pl) > "$objtree/debian/hdrsrcfiles"
 (cd $srctree; find arch/$SRCARCH/include include scripts -type f) >> "$objtree/debian/hdrsrcfiles"
@@ -369,6 +424,9 @@ mkdir -p "$destdir"
 (cd $srctree; tar -c -f - -T -) < "$objtree/debian/hdrsrcfiles" | (cd $destdir; tar -xf -)
 (cd $objtree; tar -c -f - -T -) < "$objtree/debian/hdrobjfiles" | (cd $destdir; tar -xf -)
 (cd $objtree; cp $KCONFIG_CONFIG $destdir/.config) # copy .config manually to be where it's expected to be
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ln -sf "/usr/src/linux-headers-$version" "$kernel_headers_dir/lib/modules/$version/build"
 rm -f "$objtree/debian/hdrsrcfiles" "$objtree/debian/hdrobjfiles"
@@ -419,7 +477,10 @@ fi
 create_package "$packagename" "$tmpdir"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 if [ -n "$BUILD_DEBUG" ] ; then
 	# Build debug package
 	# Different tools want the image in different locations
@@ -446,5 +507,8 @@ EOF
 	create_package "$dbg_packagename" "$dbg_dir"
 fi
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit 0

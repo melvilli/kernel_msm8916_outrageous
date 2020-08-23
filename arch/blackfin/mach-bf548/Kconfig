@@ -378,6 +378,7 @@ config IRQ_PINT3
 endmenu
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 comment "Pin Interrupt to Port Assignment"
 menu "Assignment"
 
@@ -412,6 +413,8 @@ config PINT3_ASSIGN
 
 endmenu
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endmenu

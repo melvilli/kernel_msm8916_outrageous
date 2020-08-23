@@ -28,6 +28,11 @@
 #include <net/netfilter/nf_conntrack_l4proto.h>
 #include <net/netfilter/nf_conntrack_ecache.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+#include <net/netfilter/nf_conntrack_synproxy.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_conntrack_seqadj.h>
 #include <net/netfilter/nf_conntrack_synproxy.h>
@@ -217,7 +222,11 @@ static const u8 tcp_conntracks[2][6][TCP_CONNTRACK_MAX] = {
 /* REPLY */
 /* 	     sNO, sSS, sSR, sES, sFW, sCW, sLA, sTW, sCL, sS2	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*syn*/	   { sIV, sS2, sIV, sIV, sIV, sIV, sIV, sIV, sIV, sS2 },
+=======
+/*syn*/	   { sIV, sS2, sIV, sIV, sIV, sIV, sIV, sSS, sIV, sS2 },
+>>>>>>> v3.18
 =======
 /*syn*/	   { sIV, sS2, sIV, sIV, sIV, sIV, sIV, sSS, sIV, sS2 },
 >>>>>>> v3.18
@@ -231,7 +240,11 @@ static const u8 tcp_conntracks[2][6][TCP_CONNTRACK_MAX] = {
  *	sCW -> sIV
  *	sLA -> sIV
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	sTW -> sIV	Reopened connection, but server may not do it.
+=======
+ *	sTW -> sSS	Reopened connection, but server may have switched role
+>>>>>>> v3.18
 =======
  *	sTW -> sSS	Reopened connection, but server may have switched role
 >>>>>>> v3.18
@@ -509,6 +522,7 @@ static void tcp_sack(const struct sk_buff *skb, unsigned int dataoff,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NF_NAT_NEEDED
 static inline s16 nat_offset(const struct nf_conn *ct,
 			     enum ip_conntrack_dir dir,
@@ -524,6 +538,8 @@ static inline s16 nat_offset(const struct nf_conn *ct,
 #define NAT_OFFSET(ct, dir, seq)	0
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static bool tcp_in_window(const struct nf_conn *ct,
@@ -542,8 +558,13 @@ static bool tcp_in_window(const struct nf_conn *ct,
 	const struct nf_conntrack_tuple *tuple = &ct->tuplehash[dir].tuple;
 	__u32 seq, ack, sack, end, win, swin;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s16 receiver_offset;
 	bool res;
+=======
+	s32 receiver_offset;
+	bool res, in_recv_win;
+>>>>>>> v3.18
 =======
 	s32 receiver_offset;
 	bool res, in_recv_win;
@@ -562,7 +583,11 @@ static bool tcp_in_window(const struct nf_conn *ct,
 
 	/* Take into account NAT sequence number mangling */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	receiver_offset = NAT_OFFSET(ct, !dir, ack - 1);
+=======
+	receiver_offset = nf_ct_seq_offset(ct, !dir, ack - 1);
+>>>>>>> v3.18
 =======
 	receiver_offset = nf_ct_seq_offset(ct, !dir, ack - 1);
 >>>>>>> v3.18
@@ -675,10 +700,13 @@ static bool tcp_in_window(const struct nf_conn *ct,
 		 receiver->td_scale);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("tcp_in_window: I=%i II=%i III=%i IV=%i\n",
 		 before(seq, sender->td_maxend + 1),
 		 after(end, sender->td_end - receiver->td_maxwin - 1),
 =======
+=======
+>>>>>>> v3.18
 	/* Is the ending sequence in the receive window (if available)? */
 	in_recv_win = !receiver->td_maxwin ||
 		      after(end, sender->td_end - receiver->td_maxwin - 1);
@@ -686,13 +714,20 @@ static bool tcp_in_window(const struct nf_conn *ct,
 	pr_debug("tcp_in_window: I=%i II=%i III=%i IV=%i\n",
 		 before(seq, sender->td_maxend + 1),
 		 (in_recv_win ? 1 : 0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 before(sack, receiver->td_end + 1),
 		 after(sack, receiver->td_end - MAXACKWINDOW(sender) - 1));
 
 	if (before(seq, sender->td_maxend + 1) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    after(end, sender->td_end - receiver->td_maxwin - 1) &&
+=======
+	    in_recv_win &&
+>>>>>>> v3.18
 =======
 	    in_recv_win &&
 >>>>>>> v3.18
@@ -765,7 +800,11 @@ static bool tcp_in_window(const struct nf_conn *ct,
 			"nf_ct_tcp: %s ",
 			before(seq, sender->td_maxend + 1) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 			after(end, sender->td_end - receiver->td_maxwin - 1) ?
+=======
+			in_recv_win ?
+>>>>>>> v3.18
 =======
 			in_recv_win ?
 >>>>>>> v3.18
@@ -1000,7 +1039,10 @@ static int tcp_packet(struct nf_conn *ct,
 		return NF_ACCEPT;
 	case TCP_CONNTRACK_MAX:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Special case for SYN proxy: when the SYN to the server or
 		 * the SYN/ACK from the server is lost, the client may transmit
 		 * a keep-alive packet while in SYN_SENT state. This needs to
@@ -1016,6 +1058,9 @@ static int tcp_packet(struct nf_conn *ct,
 			return NF_ACCEPT;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Invalid packet */
 		pr_debug("nf_ct_tcp: Invalid dir=%i index=%u ostate=%u\n",

@@ -8,7 +8,10 @@
 #include "stats.h"
 #include "btree.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "request.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "sysfs.h"
@@ -200,6 +203,7 @@ static void mark_cache_stats(struct cache_stat_collector *stats,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bch_mark_cache_accounting(struct search *s, bool hit, bool bypass)
 {
 	struct cached_dev *dc = container_of(s->d, struct cached_dev, disk);
@@ -230,6 +234,8 @@ void bch_mark_sectors_bypassed(struct search *s, int sectors)
 	atomic_add(sectors, &dc->accounting.collector.sectors_bypassed);
 	atomic_add(sectors, &s->op.c->accounting.collector.sectors_bypassed);
 =======
+=======
+>>>>>>> v3.18
 void bch_mark_cache_accounting(struct cache_set *c, struct bcache_device *d,
 			       bool hit, bool bypass)
 {
@@ -257,6 +263,9 @@ void bch_mark_sectors_bypassed(struct cache_set *c, struct cached_dev *dc,
 {
 	atomic_add(sectors, &dc->accounting.collector.sectors_bypassed);
 	atomic_add(sectors, &c->accounting.collector.sectors_bypassed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

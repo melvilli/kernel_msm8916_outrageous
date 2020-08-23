@@ -23,8 +23,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/os.h>
 #include <core/class.h>
+=======
+#include <core/client.h>
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <core/client.h>
 #include <nvif/unpack.h>
@@ -39,6 +45,7 @@
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv50_dac_power(struct nv50_disp_priv *priv, int or, u32 data)
 {
 	const u32 stat = (data & NV50_DISP_DAC_PWR_HSYNC) |
@@ -47,6 +54,8 @@ nv50_dac_power(struct nv50_disp_priv *priv, int or, u32 data)
 		         (data & NV50_DISP_DAC_PWR_STATE);
 	const u32 doff = (or * 0x800);
 =======
+=======
+>>>>>>> v3.18
 nv50_dac_power(NV50_DISP_MTHD_V1)
 {
 	const u32 doff = outp->or * 0x800;
@@ -69,6 +78,9 @@ nv50_dac_power(NV50_DISP_MTHD_V1)
 	} else
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wait(priv, 0x61a004 + doff, 0x80000000, 0x00000000);
 	nv_mask(priv, 0x61a004 + doff, 0xc000007f, 0x80000000 | stat);
@@ -78,10 +90,13 @@ nv50_dac_power(NV50_DISP_MTHD_V1)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv50_dac_sense(struct nv50_disp_priv *priv, int or, u32 loadval)
 {
 	const u32 doff = (or * 0x800);
 =======
+=======
+>>>>>>> v3.18
 nv50_dac_sense(NV50_DISP_MTHD_V1)
 {
 	union {
@@ -100,6 +115,9 @@ nv50_dac_sense(NV50_DISP_MTHD_V1)
 		loadval = args->v0.data;
 	} else
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nv_mask(priv, 0x61a004 + doff, 0x807f0000, 0x80150000);
@@ -113,6 +131,7 @@ nv50_dac_sense(NV50_DISP_MTHD_V1)
 	nv_mask(priv, 0x61a004 + doff, 0x807f0000, 0x80550000);
 	nv_wait(priv, 0x61a004 + doff, 0x80000000, 0x00000000);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nv_debug(priv, "DAC%d sense: 0x%08x\n", or, loadval);
 	if (!(loadval & 0x80000000))
@@ -149,11 +168,16 @@ nv50_dac_mthd(struct nouveau_object *object, u32 mthd, void *args, u32 size)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	nv_debug(priv, "DAC%d sense: 0x%08x\n", outp->or, loadval);
 	if (!(loadval & 0x80000000))
 		return -ETIMEDOUT;
 
 	args->v0.load = (loadval & 0x38000000) >> 27;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

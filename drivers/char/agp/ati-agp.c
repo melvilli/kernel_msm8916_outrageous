@@ -13,7 +13,11 @@
 #include "agp.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ATI_GART_MMBASE_ADDR	0x14
+=======
+#define ATI_GART_MMBASE_BAR	1
+>>>>>>> v3.18
 =======
 #define ATI_GART_MMBASE_BAR	1
 >>>>>>> v3.18
@@ -201,6 +205,7 @@ static void ati_cleanup(void)
 static int ati_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
 
 	/* Get the memory mapped registers */
@@ -208,12 +213,17 @@ static int ati_configure(void)
 	temp = (temp & 0xfffff000);
 	ati_generic_private.registers = (volatile u8 __iomem *) ioremap(temp, 4096);
 =======
+=======
+>>>>>>> v3.18
 	phys_addr_t reg;
 	u32 temp;
 
 	/* Get the memory mapped registers */
 	reg = pci_resource_start(agp_bridge->dev, ATI_GART_MMBASE_BAR);
 	ati_generic_private.registers = (volatile u8 __iomem *) ioremap(reg, 4096);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ati_generic_private.registers)
@@ -225,15 +235,21 @@ static int ati_configure(void)
 		pci_write_config_dword(agp_bridge->dev, ATI_RS300_IG_AGPMODE, 0x20000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* address to map too */
 	/*
 	pci_read_config_dword(agp_bridge.dev, AGP_APBASE, &temp);
 	agp_bridge.gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
 =======
+=======
+>>>>>>> v3.18
 	/* address to map to */
 	/*
 	agp_bridge.gart_bus_addr = pci_bus_address(agp_bridge.dev,
 						   AGP_APERTURE_BAR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk(KERN_INFO PFX "IGP320 gart_bus_addr: %x\n", agp_bridge.gart_bus_addr);
 	*/
@@ -242,8 +258,13 @@ static int ati_configure(void)
 
 	/* SIGNALED_SYSTEM_ERROR @ NB_STATUS */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, 4, &temp);
 	pci_write_config_dword(agp_bridge->dev, 4, temp | (1<<14));
+=======
+	pci_read_config_dword(agp_bridge->dev, PCI_COMMAND, &temp);
+	pci_write_config_dword(agp_bridge->dev, PCI_COMMAND, temp | (1<<14));
+>>>>>>> v3.18
 =======
 	pci_read_config_dword(agp_bridge->dev, PCI_COMMAND, &temp);
 	pci_write_config_dword(agp_bridge->dev, PCI_COMMAND, temp | (1<<14));
@@ -262,7 +283,11 @@ static int agp_ati_suspend(struct pci_dev *dev, pm_message_t state)
 {
 	pci_save_state(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(dev, 3);
+=======
+	pci_set_power_state(dev, PCI_D3hot);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(dev, PCI_D3hot);
 >>>>>>> v3.18
@@ -273,7 +298,11 @@ static int agp_ati_suspend(struct pci_dev *dev, pm_message_t state)
 static int agp_ati_resume(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(dev, 0);
+=======
+	pci_set_power_state(dev, PCI_D0);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(dev, PCI_D0);
 >>>>>>> v3.18
@@ -419,8 +448,12 @@ static int ati_create_gatt_table(struct agp_bridge_data *bridge)
 	 * used to program the agp master not the cpu
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	addr = pci_bus_address(agp_bridge->dev, AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	addr = pci_bus_address(agp_bridge->dev, AGP_APERTURE_BAR);
 >>>>>>> v3.18

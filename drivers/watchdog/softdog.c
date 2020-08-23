@@ -43,7 +43,10 @@
 #include <linux/types.h>
 #include <linux/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/watchdog.h>
@@ -67,7 +70,11 @@ MODULE_PARM_DESC(nowayout,
 				__MODULE_STRING(WATCHDOG_NOWAYOUT) ")");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int soft_noboot = 0;
+=======
+static int soft_noboot;
+>>>>>>> v3.18
 =======
 static int soft_noboot;
 >>>>>>> v3.18
@@ -160,7 +167,10 @@ static struct watchdog_ops softdog_ops = {
 	.start = softdog_ping,
 	.stop = softdog_stop,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ping = softdog_ping,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_timeout = softdog_set_timeout,
@@ -219,6 +229,9 @@ MODULE_AUTHOR("Alan Cox");
 MODULE_DESCRIPTION("Software Watchdog Device Driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

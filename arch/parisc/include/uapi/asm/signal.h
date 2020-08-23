@@ -9,7 +9,11 @@
 #define SIGABRT		 6
 #define SIGIOT		 6
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIGEMT		 7
+=======
+#define SIGSTKFLT	 7
+>>>>>>> v3.18
 =======
 #define SIGSTKFLT	 7
 >>>>>>> v3.18
@@ -18,7 +22,11 @@
 #define SIGBUS		10
 #define SIGSEGV		11
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIGSYS		12 /* Linux doesn't use this */
+=======
+#define SIGXCPU		12
+>>>>>>> v3.18
 =======
 #define SIGXCPU		12
 >>>>>>> v3.18
@@ -41,6 +49,7 @@
 #define SIGTTOU		28
 #define SIGURG		29
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIGLOST		30 /* Linux doesn't use this either */
 #define	SIGUNUSED	31
 #define SIGRESERVE	SIGUNUSED
@@ -52,12 +61,17 @@
 /* These should not be considered constants from userland.  */
 #define SIGRTMIN	37
 =======
+=======
+>>>>>>> v3.18
 #define SIGXFSZ		30
 #define SIGUNUSED	31
 #define SIGSYS		31 /* Linux doesn't use this */
 
 /* These should not be considered constants from userland.  */
 #define SIGRTMIN	32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SIGRTMAX	_NSIG /* it's 44 under HP/UX */
 
@@ -107,7 +121,11 @@ struct siginfo;
 
 /* Type of a signal handler.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
+=======
+#if defined(__LP64__)
+>>>>>>> v3.18
 =======
 #if defined(__LP64__)
 >>>>>>> v3.18

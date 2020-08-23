@@ -27,7 +27,11 @@
 ENTRY(__raw_readsw)
 		teq	r2, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 =======
 		reteq	lr
 >>>>>>> v3.18

@@ -4,7 +4,12 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef RAYLINK_H
+=======
+#ifndef _RAY_CS_H_
+#define _RAY_CS_H_
+>>>>>>> v3.18
 =======
 #ifndef _RAY_CS_H_
 #define _RAY_CS_H_
@@ -75,7 +80,11 @@ typedef struct ray_dev_t {
 /*****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* RAYLINK_H */
+=======
+#endif /* _RAY_CS_H_ */
+>>>>>>> v3.18
 =======
 #endif /* _RAY_CS_H_ */
 >>>>>>> v3.18

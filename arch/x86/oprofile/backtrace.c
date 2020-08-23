@@ -48,7 +48,11 @@ dump_user_backtrace_32(struct stack_frame_ia32 *head)
 
 	bytes = copy_from_user_nmi(bufhead, head, sizeof(bufhead));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bytes != sizeof(bufhead))
+=======
+	if (bytes != 0)
+>>>>>>> v3.18
 =======
 	if (bytes != 0)
 >>>>>>> v3.18
@@ -98,7 +102,11 @@ static struct stack_frame *dump_user_backtrace(struct stack_frame *head)
 
 	bytes = copy_from_user_nmi(bufhead, head, sizeof(bufhead));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bytes != sizeof(bufhead))
+=======
+	if (bytes != 0)
+>>>>>>> v3.18
 =======
 	if (bytes != 0)
 >>>>>>> v3.18

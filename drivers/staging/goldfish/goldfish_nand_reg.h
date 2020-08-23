@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* drivers/mtd/devices/goldfish_nand_reg.h
 **
 ** Copyright (C) 2007 Google, Inc.
@@ -14,6 +15,8 @@
 **
 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * drivers/mtd/devices/goldfish_nand_reg.h
  *
@@ -29,6 +32,9 @@
  * GNU General Public License for more details.
  *
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef GOLDFISH_NAND_REG_H
@@ -36,12 +42,15 @@
 
 enum nand_cmd {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NAND_CMD_GET_DEV_NAME,  /* Write device name for NAND_DEV to NAND_DATA (vaddr) */
 	NAND_CMD_READ,
 	NAND_CMD_WRITE,
 	NAND_CMD_ERASE,
 	NAND_CMD_BLOCK_BAD_GET, /* NAND_RESULT is 1 if block is bad, 0 if it is not */
 =======
+=======
+>>>>>>> v3.18
 	/* Write device name for NAND_DEV to NAND_DATA (vaddr) */
 	NAND_CMD_GET_DEV_NAME,
 	NAND_CMD_READ,
@@ -49,6 +58,9 @@ enum nand_cmd {
 	NAND_CMD_ERASE,
 	/* NAND_RESULT is 1 if block is bad, 0 if it is not */
 	NAND_CMD_BLOCK_BAD_GET,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NAND_CMD_BLOCK_BAD_SET,
 	NAND_CMD_READ_WITH_PARAMS,
@@ -83,6 +95,10 @@ enum nand_reg {
 	NAND_COMMAND        = 0x044,
 	NAND_DATA           = 0x048,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NAND_DATA_HIGH	    = 0x100,
+>>>>>>> v3.18
 =======
 	NAND_DATA_HIGH	    = 0x100,
 >>>>>>> v3.18
@@ -99,7 +115,11 @@ struct cmd_params {
 	uint32_t addr_high;
 	uint32_t transfer_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t data;
+=======
+	unsigned long data;
+>>>>>>> v3.18
 =======
 	unsigned long data;
 >>>>>>> v3.18

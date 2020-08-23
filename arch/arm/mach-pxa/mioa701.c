@@ -39,6 +39,10 @@
 #include <linux/usb/gpio_vbus.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/fixed.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/fixed.h>
 >>>>>>> v3.18
@@ -191,6 +195,10 @@ static struct platform_pwm_backlight_data mioa701_backlight_data = {
 	.dft_brightness	= 50,
 	.pwm_period_ns	= 4000 * 1024,	/* Fl = 250kHz */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -232,7 +240,11 @@ static struct pxafb_mach_info mioa701_pxafb_info = {
  * Keyboard configuration
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int mioa701_matrix_keys[] = {
+=======
+static const unsigned int mioa701_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int mioa701_matrix_keys[] = {
 >>>>>>> v3.18
@@ -247,12 +259,15 @@ static const unsigned int mioa701_matrix_keys[] = {
 	KEY(2, 2, KEY_CAMERA)	/* Camera key */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data mioa701_keypad_info = {
 	.matrix_key_rows = 3,
 	.matrix_key_cols = 3,
 	.matrix_key_map = mioa701_matrix_keys,
 	.matrix_key_map_size = ARRAY_SIZE(mioa701_matrix_keys),
 =======
+=======
+>>>>>>> v3.18
 
 static struct matrix_keymap_data mioa701_matrix_keymap_data = {
 	.keymap			= mioa701_matrix_keys,
@@ -263,6 +278,9 @@ static struct pxa27x_keypad_platform_data mioa701_keypad_info = {
 	.matrix_key_rows = 3,
 	.matrix_key_cols = 3,
 	.matrix_keymap_data = &mioa701_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -734,11 +752,17 @@ static struct gpio global_gpios[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_consumer_supply fixed_5v0_consumers[] = {
 	REGULATOR_SUPPLY("power", "pwm-backlight"),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init mioa701_machine_init(void)
 {
@@ -780,11 +804,17 @@ static void __init mioa701_machine_init(void)
 	pxa27x_set_i2c_power_info(NULL);
 	pxa_set_camera_info(&mioa701_pxacamera_platform_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	regulator_register_always_on(0, "fixed-5.0V", fixed_5v0_consumers,
 				     ARRAY_SIZE(fixed_5v0_consumers),
 				     5000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -797,7 +827,10 @@ static void mioa701_machine_exit(void)
 MACHINE_START(MIOA701, "MIO A701")
 	.atag_offset	= 0x100,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.restart_mode	= 's',
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.map_io		= &pxa27x_map_io,

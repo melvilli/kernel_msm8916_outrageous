@@ -39,7 +39,10 @@ ocfs2-objs := \
 	sysfile.o 		\
 	uptodate.o		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ver.o			\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	quota_local.o		\

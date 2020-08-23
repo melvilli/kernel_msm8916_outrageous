@@ -153,10 +153,15 @@ static struct pci_ops indirect_pci_ops =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init
 setup_indirect_pci(struct pci_controller* hose,
 		   resource_size_t cfg_addr,
 		   resource_size_t cfg_data, u32 flags)
+=======
+void setup_indirect_pci(struct pci_controller *hose, resource_size_t cfg_addr,
+			resource_size_t cfg_data, u32 flags)
+>>>>>>> v3.18
 =======
 void setup_indirect_pci(struct pci_controller *hose, resource_size_t cfg_addr,
 			resource_size_t cfg_data, u32 flags)

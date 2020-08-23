@@ -18,6 +18,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __ffs - find first set bit in word
  * @word: The word to search
  *
@@ -47,6 +52,8 @@ static inline unsigned long __ffs(unsigned long word)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * ffz - find first zero bit in word
  * @word: The word to search
  *
@@ -57,6 +64,7 @@ static inline unsigned long ffz(unsigned long word)
 	return __builtin_ctzl(~word);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * __fls - find last set bit in word
@@ -85,6 +93,8 @@ static inline int ffs(int x)
 	return __builtin_ffs(x);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int fls64(__u64 w)
@@ -129,6 +139,12 @@ static inline unsigned long __arch_hweight64(__u64 w)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm-generic/bitops/builtin-__ffs.h>
+#include <asm-generic/bitops/builtin-__fls.h>
+#include <asm-generic/bitops/builtin-ffs.h>
+>>>>>>> v3.18
 =======
 #include <asm-generic/bitops/builtin-__ffs.h>
 #include <asm-generic/bitops/builtin-__fls.h>

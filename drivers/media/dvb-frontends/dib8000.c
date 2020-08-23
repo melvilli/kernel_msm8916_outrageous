@@ -12,6 +12,10 @@
 #include <linux/i2c.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/div64.h>
+>>>>>>> v3.18
 =======
 #include <asm/div64.h>
 >>>>>>> v3.18
@@ -119,11 +123,14 @@ struct dib8000_state {
 	u8 subchannel;
 	u8 symbol_duration;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 timeout;
 	u8 longest_intlv_layer;
 	u16 output_mode;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long timeout;
 	u8 longest_intlv_layer;
 	u16 output_mode;
@@ -134,6 +141,9 @@ struct dib8000_state {
 	unsigned long ber_jiffies_stats;
 	unsigned long ber_jiffies_stats_layer[3];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef DIB8000_AGC_FREEZE
 	u16 agc1_max;
@@ -599,8 +609,13 @@ static int dib8000_set_adc_state(struct dib8000_state *state, enum dibx000_adc_s
 
 	case DIBX000_ADC_OFF:	// leave the VBG voltage on
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_907 |= (1 << 14) | (1 << 13) | (1 << 12);
 		reg_908 |= (1 << 5) | (1 << 4) | (1 << 3) | (1 << 2);
+=======
+		reg_907 = (1 << 13) | (1 << 12);
+		reg_908 = (1 << 6) | (1 << 5) | (1 << 4) | (1 << 3) | (1 << 1);
+>>>>>>> v3.18
 =======
 		reg_907 = (1 << 13) | (1 << 12);
 		reg_908 = (1 << 6) | (1 << 5) | (1 << 4) | (1 << 3) | (1 << 1);
@@ -672,7 +687,11 @@ static int dib8000_sad_calib(struct dib8000_state *state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dib8000_set_wbd_ref(struct dvb_frontend *fe, u16 value)
+=======
+static int dib8000_set_wbd_ref(struct dvb_frontend *fe, u16 value)
+>>>>>>> v3.18
 =======
 static int dib8000_set_wbd_ref(struct dvb_frontend *fe, u16 value)
 >>>>>>> v3.18
@@ -684,7 +703,10 @@ static int dib8000_set_wbd_ref(struct dvb_frontend *fe, u16 value)
 	return dib8000_write_word(state, 106, value);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_set_wbd_ref);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -762,7 +784,11 @@ static void dib8000_reset_pll(struct dib8000_state *state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dib8000_update_pll(struct dvb_frontend *fe,
+=======
+static int dib8000_update_pll(struct dvb_frontend *fe,
+>>>>>>> v3.18
 =======
 static int dib8000_update_pll(struct dvb_frontend *fe,
 >>>>>>> v3.18
@@ -838,6 +864,7 @@ static int dib8000_update_pll(struct dvb_frontend *fe,
 			dib8000_write_word(state, 901, (state->cfg.pll->pll_prediv << 8) | (ratio << 0)); /* only the PLL ratio is updated. */
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 	return 0;
@@ -845,10 +872,15 @@ static int dib8000_update_pll(struct dvb_frontend *fe,
 EXPORT_SYMBOL(dib8000_update_pll);
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int dib8000_reset_gpio(struct dib8000_state *st)
@@ -883,7 +915,11 @@ static int dib8000_cfg_gpio(struct dib8000_state *st, u8 num, u8 dir, u8 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dib8000_set_gpio(struct dvb_frontend *fe, u8 num, u8 dir, u8 val)
+=======
+static int dib8000_set_gpio(struct dvb_frontend *fe, u8 num, u8 dir, u8 val)
+>>>>>>> v3.18
 =======
 static int dib8000_set_gpio(struct dvb_frontend *fe, u8 num, u8 dir, u8 val)
 >>>>>>> v3.18
@@ -893,7 +929,10 @@ static int dib8000_set_gpio(struct dvb_frontend *fe, u8 num, u8 dir, u8 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_set_gpio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u16 dib8000_defaults[] = {
@@ -1031,7 +1070,10 @@ static u16 dib8000_identify(struct i2c_device *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dib8000_read_unc_blocks(struct dvb_frontend *fe, u32 *unc);
 
 static void dib8000_reset_stats(struct dvb_frontend *fe)
@@ -1071,6 +1113,9 @@ static void dib8000_reset_stats(struct dvb_frontend *fe)
 	       sizeof(state->ber_jiffies_stats_layer));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dib8000_reset(struct dvb_frontend *fe)
 {
@@ -1098,6 +1143,10 @@ static int dib8000_reset(struct dvb_frontend *fe)
 	dib8000_write_word(state, 771, 0xffff);
 	dib8000_write_word(state, 772, 0xfffc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dib8000_write_word(state, 898, 0x000c);	/* restart sad */
+>>>>>>> v3.18
 =======
 	dib8000_write_word(state, 898, 0x000c);	/* restart sad */
 >>>>>>> v3.18
@@ -1182,6 +1231,11 @@ static int dib8000_reset(struct dvb_frontend *fe)
 	dib8000_set_power_mode(state, DIB8000_POWER_INTERFACE_ONLY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dib8000_reset_stats(fe);
+
+>>>>>>> v3.18
 =======
 	dib8000_reset_stats(fe);
 
@@ -1279,7 +1333,11 @@ static int dib8000_set_agc_config(struct dib8000_state *state, u8 band)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dib8000_pwm_agc_reset(struct dvb_frontend *fe)
+=======
+static void dib8000_pwm_agc_reset(struct dvb_frontend *fe)
+>>>>>>> v3.18
 =======
 static void dib8000_pwm_agc_reset(struct dvb_frontend *fe)
 >>>>>>> v3.18
@@ -1289,7 +1347,10 @@ static void dib8000_pwm_agc_reset(struct dvb_frontend *fe)
 	dib8000_set_agc_config(state, (unsigned char)(BAND_OF_FREQUENCY(fe->dtv_property_cache.frequency / 1000)));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_pwm_agc_reset);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1299,7 +1360,11 @@ static int dib8000_agc_soft_split(struct dib8000_state *state)
 
 	if (!state->current_agc || !state->current_agc->perform_agc_softsplit || state->current_agc->split.max == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return FE_CALLBACK_TIME_NEVER;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -1943,7 +2008,11 @@ static struct i2c_algorithm dib8096p_tuner_xfer_algo = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct i2c_adapter *dib8096p_get_i2c_tuner(struct dvb_frontend *fe)
+=======
+static struct i2c_adapter *dib8096p_get_i2c_tuner(struct dvb_frontend *fe)
+>>>>>>> v3.18
 =======
 static struct i2c_adapter *dib8096p_get_i2c_tuner(struct dvb_frontend *fe)
 >>>>>>> v3.18
@@ -1952,9 +2021,14 @@ static struct i2c_adapter *dib8096p_get_i2c_tuner(struct dvb_frontend *fe)
 	return &st->dib8096p_tuner_adap;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8096p_get_i2c_tuner);
 
 int dib8096p_tuner_sleep(struct dvb_frontend *fe, int onoff)
+=======
+
+static int dib8096p_tuner_sleep(struct dvb_frontend *fe, int onoff)
+>>>>>>> v3.18
 =======
 
 static int dib8096p_tuner_sleep(struct dvb_frontend *fe, int onoff)
@@ -1983,7 +2057,10 @@ static int dib8096p_tuner_sleep(struct dvb_frontend *fe, int onoff)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8096p_tuner_sleep);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1993,7 +2070,11 @@ static const s32 lut_1000ln_mant[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 dib8000_get_adc_power(struct dvb_frontend *fe, u8 mode)
+=======
+static s32 dib8000_get_adc_power(struct dvb_frontend *fe, u8 mode)
+>>>>>>> v3.18
 =======
 static s32 dib8000_get_adc_power(struct dvb_frontend *fe, u8 mode)
 >>>>>>> v3.18
@@ -2015,9 +2096,14 @@ static s32 dib8000_get_adc_power(struct dvb_frontend *fe, u8 mode)
 	return val;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_get_adc_power);
 
 int dib8090p_get_dc_power(struct dvb_frontend *fe, u8 IQ)
+=======
+
+static int dib8090p_get_dc_power(struct dvb_frontend *fe, u8 IQ)
+>>>>>>> v3.18
 =======
 
 static int dib8090p_get_dc_power(struct dvb_frontend *fe, u8 IQ)
@@ -2040,7 +2126,10 @@ static int dib8090p_get_dc_power(struct dvb_frontend *fe, u8 IQ)
 	return val;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8090p_get_dc_power);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2054,7 +2143,11 @@ static void dib8000_update_timf(struct dib8000_state *state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 dib8000_ctrl_timf(struct dvb_frontend *fe, uint8_t op, uint32_t timf)
+=======
+static u32 dib8000_ctrl_timf(struct dvb_frontend *fe, uint8_t op, uint32_t timf)
+>>>>>>> v3.18
 =======
 static u32 dib8000_ctrl_timf(struct dvb_frontend *fe, uint8_t op, uint32_t timf)
 >>>>>>> v3.18
@@ -2076,6 +2169,7 @@ static u32 dib8000_ctrl_timf(struct dvb_frontend *fe, uint8_t op, uint32_t timf)
 	return state->timf;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_ctrl_timf);
 
 static const u16 adc_target_16dB[11] = {
@@ -2092,11 +2186,16 @@ static const u16 adc_target_16dB[11] = {
 	(1 << 13) - 501 - 117
 };
 =======
+=======
+>>>>>>> v3.18
 
 static const u16 adc_target_16dB[11] = {
 	7250, 7238, 7264, 7309, 7338, 7382, 7427, 7456, 7500, 7544, 7574
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u8 permu_seg[] = { 6, 5, 7, 4, 8, 3, 9, 2, 10, 1, 11, 0, 12 };
 
@@ -2141,9 +2240,14 @@ static u16 dib8000_set_layer(struct dib8000_state *state, u8 layer_index, u16 ma
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((c->layer[layer_index].interleaving > 0) && ((c->layer[layer_index].interleaving <= 3) || (c->layer[layer_index].interleaving == 4 && c->isdbt_sb_mode == 1)))
 		time_intlv = c->layer[layer_index].interleaving;
 	else
+=======
+	time_intlv = fls(c->layer[layer_index].interleaving);
+	if (time_intlv > 3 && !(time_intlv == 4 && c->isdbt_sb_mode == 1))
+>>>>>>> v3.18
 =======
 	time_intlv = fls(c->layer[layer_index].interleaving);
 	if (time_intlv > 3 && !(time_intlv == 4 && c->isdbt_sb_mode == 1))
@@ -2465,6 +2569,12 @@ static void dib8000_set_isdbt_common_channel(struct dib8000_state *state, u8 seq
 	struct dtv_frontend_properties *c = &state->fe[0]->dtv_property_cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (autosearching)
+		c->isdbt_partial_reception = 1;
+
+>>>>>>> v3.18
 =======
 	if (autosearching)
 		c->isdbt_partial_reception = 1;
@@ -2965,6 +3075,7 @@ static void dib8000_set_sync_wait(struct dib8000_state *state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 dib8000_get_timeout(struct dib8000_state *state, u32 delay, enum timeout_mode mode)
 {
 	if (mode == SYMBOL_DEPENDENT_ON)
@@ -2972,12 +3083,17 @@ static u32 dib8000_get_timeout(struct dib8000_state *state, u32 delay, enum time
 	else
 		return systime() + delay;
 =======
+=======
+>>>>>>> v3.18
 static unsigned long dib8000_get_timeout(struct dib8000_state *state, u32 delay, enum timeout_mode mode)
 {
 	if (mode == SYMBOL_DEPENDENT_ON)
 		delay *= state->symbol_duration;
 
 	return jiffies + usecs_to_jiffies(delay * 100);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2988,7 +3104,11 @@ static s32 dib8000_get_status(struct dvb_frontend *fe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum frontend_tune_state dib8000_get_tune_state(struct dvb_frontend *fe)
+=======
+static enum frontend_tune_state dib8000_get_tune_state(struct dvb_frontend *fe)
+>>>>>>> v3.18
 =======
 static enum frontend_tune_state dib8000_get_tune_state(struct dvb_frontend *fe)
 >>>>>>> v3.18
@@ -2997,9 +3117,14 @@ static enum frontend_tune_state dib8000_get_tune_state(struct dvb_frontend *fe)
 	return state->tune_state;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_get_tune_state);
 
 int dib8000_set_tune_state(struct dvb_frontend *fe, enum frontend_tune_state tune_state)
+=======
+
+static int dib8000_set_tune_state(struct dvb_frontend *fe, enum frontend_tune_state tune_state)
+>>>>>>> v3.18
 =======
 
 static int dib8000_set_tune_state(struct dvb_frontend *fe, enum frontend_tune_state tune_state)
@@ -3011,7 +3136,10 @@ static int dib8000_set_tune_state(struct dvb_frontend *fe, enum frontend_tune_st
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_set_tune_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3051,7 +3179,10 @@ static int dib8090p_init_sdram(struct dib8000_state *state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * is_manual_mode - Check if TMCC should be used for parameters settings
  * @c:	struct dvb_frontend_properties
@@ -3137,6 +3268,9 @@ static int is_manual_mode(struct dtv_frontend_properties *c)
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dib8000_tune(struct dvb_frontend *fe)
 {
@@ -3148,8 +3282,13 @@ static int dib8000_tune(struct dvb_frontend *fe)
 	int ret = 1; /* 1 symbol duration (in 100us unit) delay most of the time */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *timeout = &state->timeout;
 	u32 now = systime();
+=======
+	unsigned long *timeout = &state->timeout;
+	unsigned long now = jiffies;
+>>>>>>> v3.18
 =======
 	unsigned long *timeout = &state->timeout;
 	unsigned long now = jiffies;
@@ -3164,7 +3303,12 @@ static int dib8000_tune(struct dvb_frontend *fe)
 #if 0
 	if (*tune_state < CT_DEMOD_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("IN: context status = %d, TUNE_STATE %d autosearch step = %u systime = %u", state->channel_parameters_set, *tune_state, state->autosearch_state, now);
+=======
+		dprintk("IN: context status = %d, TUNE_STATE %d autosearch step = %u jiffies = %lu",
+			state->channel_parameters_set, *tune_state, state->autosearch_state, now);
+>>>>>>> v3.18
 =======
 		dprintk("IN: context status = %d, TUNE_STATE %d autosearch step = %u jiffies = %lu",
 			state->channel_parameters_set, *tune_state, state->autosearch_state, now);
@@ -3173,6 +3317,7 @@ static int dib8000_tune(struct dvb_frontend *fe)
 
 	switch (*tune_state) {
 	case CT_DEMOD_START: /* 30 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (state->revision == 0x8090)
 				dib8090p_init_sdram(state);
@@ -3482,6 +3627,8 @@ static int dib8000_tune(struct dvb_frontend *fe)
 	default:
 			break;
 =======
+=======
+>>>>>>> v3.18
 		dib8000_reset_stats(fe);
 
 		if (state->revision == 0x8090)
@@ -3776,6 +3923,9 @@ static int dib8000_tune(struct dvb_frontend *fe)
 
 	default:
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3783,6 +3933,7 @@ static int dib8000_tune(struct dvb_frontend *fe)
 	switch (*tune_state) {
 	case CT_DEMOD_STOP: /* (42) */
 #ifdef DIB8000_AGC_FREEZE
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if ((state->revision != 0x8090) && (state->agc1_max != 0)) {
 				dib8000_write_word(state, 108, state->agc1_max);
@@ -3800,6 +3951,8 @@ static int dib8000_tune(struct dvb_frontend *fe)
 	default:
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if ((state->revision != 0x8090) && (state->agc1_max != 0)) {
 			dib8000_write_word(state, 108, state->agc1_max);
 			dib8000_write_word(state, 109, state->agc1_min);
@@ -3815,6 +3968,9 @@ static int dib8000_tune(struct dvb_frontend *fe)
 		break;
 	default:
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3867,6 +4023,11 @@ static int dib8000_sleep(struct dvb_frontend *fe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int dib8000_read_status(struct dvb_frontend *fe, fe_status_t * stat);
+
+>>>>>>> v3.18
 =======
 static int dib8000_read_status(struct dvb_frontend *fe, fe_status_t * stat);
 
@@ -3876,7 +4037,11 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 	struct dib8000_state *state = fe->demodulator_priv;
 	u16 i, val = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fe_status_t stat;
+=======
+	fe_status_t stat = 0;
+>>>>>>> v3.18
 =======
 	fe_status_t stat = 0;
 >>>>>>> v3.18
@@ -3885,7 +4050,10 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 	fe->dtv_property_cache.bandwidth_hz = 6000000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If called to early, get_frontend makes dib8000_tune to either
 	 * not lock or not sync. This causes dvbv5-scan/dvbv5-zap to fail.
@@ -3896,6 +4064,9 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 		return 0;
 
 	dprintk("dib8000_get_frontend: TMCC lock");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (index_frontend = 1; (index_frontend < MAX_NUMBER_OF_FRONTENDS) && (state->fe[index_frontend] != NULL); index_frontend++) {
 		state->fe[index_frontend]->ops.read_status(state->fe[index_frontend], &stat);
@@ -3933,18 +4104,28 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 	case 1:
 		fe->dtv_property_cache.transmission_mode = TRANSMISSION_MODE_2K;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		dprintk("dib8000_get_frontend: transmission mode 2K");
 		break;
 	case 2:
 		fe->dtv_property_cache.transmission_mode = TRANSMISSION_MODE_4K;
 		dprintk("dib8000_get_frontend: transmission mode 4K");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 3:
 	default:
 		fe->dtv_property_cache.transmission_mode = TRANSMISSION_MODE_8K;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dprintk("dib8000_get_frontend: transmission mode 8K");
+>>>>>>> v3.18
 =======
 		dprintk("dib8000_get_frontend: transmission mode 8K");
 >>>>>>> v3.18
@@ -3954,6 +4135,7 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 	switch (val & 0x3) {
 	case 0:
 		fe->dtv_property_cache.guard_interval = GUARD_INTERVAL_1_32;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dprintk("dib8000_get_frontend GI = 1/32 ");
 		break;
@@ -3968,6 +4150,8 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 	case 3:
 		dprintk("dib8000_get_frontend GI = 1/4 ");
 =======
+=======
+>>>>>>> v3.18
 		dprintk("dib8000_get_frontend: Guard Interval = 1/32 ");
 		break;
 	case 1:
@@ -3980,6 +4164,9 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 		break;
 	case 3:
 		dprintk("dib8000_get_frontend: Guard Interval = 1/4 ");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fe->dtv_property_cache.guard_interval = GUARD_INTERVAL_1_4;
 		break;
@@ -3987,6 +4174,7 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 
 	val = dib8000_read_word(state, 505);
 	fe->dtv_property_cache.isdbt_partial_reception = val & 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dprintk("dib8000_get_frontend : partial_reception = %d ", fe->dtv_property_cache.isdbt_partial_reception);
 
@@ -3999,6 +4187,8 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 		fe->dtv_property_cache.layer[i].interleaving = val & 0x3;
 		dprintk("dib8000_get_frontend : Layer %d time_intlv = %d ", i, fe->dtv_property_cache.layer[i].interleaving);
 =======
+=======
+>>>>>>> v3.18
 	dprintk("dib8000_get_frontend: partial_reception = %d ", fe->dtv_property_cache.isdbt_partial_reception);
 
 	for (i = 0; i < 3; i++) {
@@ -4024,12 +4214,16 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 		if (show)
 			dprintk("dib8000_get_frontend: Layer %d time_intlv = %d ",
 				i, fe->dtv_property_cache.layer[i].interleaving);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		val = dib8000_read_word(state, 481 + i);
 		switch (val & 0x7) {
 		case 1:
 			fe->dtv_property_cache.layer[i].fec = FEC_1_2;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dprintk("dib8000_get_frontend : Layer %d Code Rate = 1/2 ", i);
 			break;
@@ -4049,6 +4243,8 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 			fe->dtv_property_cache.layer[i].fec = FEC_7_8;
 			dprintk("dib8000_get_frontend : Layer %d Code Rate = 7/8 ", i);
 =======
+=======
+>>>>>>> v3.18
 			if (show)
 				dprintk("dib8000_get_frontend: Layer %d Code Rate = 1/2 ", i);
 			break;
@@ -4071,6 +4267,9 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 			fe->dtv_property_cache.layer[i].fec = FEC_7_8;
 			if (show)
 				dprintk("dib8000_get_frontend: Layer %d Code Rate = 7/8 ", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -4078,6 +4277,7 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 		val = dib8000_read_word(state, 487 + i);
 		switch (val & 0x3) {
 		case 0:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dprintk("dib8000_get_frontend : Layer %d DQPSK ", i);
 			fe->dtv_property_cache.layer[i].modulation = DQPSK;
@@ -4095,6 +4295,8 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 			dprintk("dib8000_get_frontend : Layer %d QAM64 ", i);
 			fe->dtv_property_cache.layer[i].modulation = QAM_64;
 =======
+=======
+>>>>>>> v3.18
 			fe->dtv_property_cache.layer[i].modulation = DQPSK;
 			if (show)
 				dprintk("dib8000_get_frontend: Layer %d DQPSK ", i);
@@ -4114,6 +4316,9 @@ static int dib8000_get_frontend(struct dvb_frontend *fe)
 			fe->dtv_property_cache.layer[i].modulation = QAM_64;
 			if (show)
 				dprintk("dib8000_get_frontend: Layer %d QAM64 ", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -4141,9 +4346,15 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 	struct dib8000_state *state = fe->demodulator_priv;
 	struct dtv_frontend_properties *c = &state->fe[0]->dtv_property_cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int l, i, active, time, ret, time_slave = FE_CALLBACK_TIME_NEVER;
 	u8 exit_condition, index_frontend;
 	u32 delay, callback_time;
+=======
+	int l, i, active, time, time_slave = 0;
+	u8 exit_condition, index_frontend;
+	unsigned long delay, callback_time;
+>>>>>>> v3.18
 =======
 	int l, i, active, time, time_slave = 0;
 	u8 exit_condition, index_frontend;
@@ -4201,6 +4412,7 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 		for (index_frontend = 1; (index_frontend < MAX_NUMBER_OF_FRONTENDS) && (state->fe[index_frontend] != NULL); index_frontend++) {
 			time_slave = dib8000_agc_startup(state->fe[index_frontend]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (time == FE_CALLBACK_TIME_NEVER)
 				time = time_slave;
 			else if ((time_slave != FE_CALLBACK_TIME_NEVER) && (time_slave > time))
@@ -4211,6 +4423,8 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 		else
 			break;
 =======
+=======
+>>>>>>> v3.18
 			if (time == 0)
 				time = time_slave;
 			else if ((time_slave != 0) && (time_slave > time))
@@ -4229,6 +4443,9 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 		 */
 		time = 10 * (time + 99)/100;
 		usleep_range(time * 1000, (time + 1) * 1000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		exit_condition = 1;
 		for (index_frontend = 0; (index_frontend < MAX_NUMBER_OF_FRONTENDS) && (state->fe[index_frontend] != NULL); index_frontend++) {
@@ -4245,12 +4462,15 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 	active = 1;
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		callback_time = FE_CALLBACK_TIME_NEVER;
 		for (index_frontend = 0; (index_frontend < MAX_NUMBER_OF_FRONTENDS) && (state->fe[index_frontend] != NULL); index_frontend++) {
 			delay = dib8000_tune(state->fe[index_frontend]);
 			if (delay != FE_CALLBACK_TIME_NEVER)
 				delay += systime();
 =======
+=======
+>>>>>>> v3.18
 		callback_time = 0;
 		for (index_frontend = 0; (index_frontend < MAX_NUMBER_OF_FRONTENDS) && (state->fe[index_frontend] != NULL); index_frontend++) {
 			delay = dib8000_tune(state->fe[index_frontend]);
@@ -4259,6 +4479,9 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 				if (!callback_time || delay < callback_time)
 					callback_time = delay;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* we are in autosearch */
@@ -4271,6 +4494,10 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 					for (l = 0; (l < MAX_NUMBER_OF_FRONTENDS) && (state->fe[l] != NULL); l++) {
 						if (l != index_frontend) { /* and for all frontend except the successful one */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+							dprintk("Restarting frontend %d\n", l);
+>>>>>>> v3.18
 =======
 							dprintk("Restarting frontend %d\n", l);
 >>>>>>> v3.18
@@ -4293,8 +4520,11 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (delay < callback_time)
 				callback_time = delay;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -4313,7 +4543,11 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((active == 1) && (callback_time == FE_CALLBACK_TIME_NEVER)) {
+=======
+		if ((active == 1) && (callback_time == 0)) {
+>>>>>>> v3.18
 =======
 		if ((active == 1) && (callback_time == 0)) {
 >>>>>>> v3.18
@@ -4322,7 +4556,11 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((active == 1) && (systime() < callback_time))
+=======
+		while ((active == 1) && (time_before(jiffies, callback_time)))
+>>>>>>> v3.18
 =======
 		while ((active == 1) && (time_before(jiffies, callback_time)))
 >>>>>>> v3.18
@@ -4341,15 +4579,21 @@ static int dib8000_set_frontend(struct dvb_frontend *fe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static int dib8000_get_stats(struct dvb_frontend *fe, fe_status_t stat);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dib8000_read_status(struct dvb_frontend *fe, fe_status_t * stat)
 {
@@ -4389,6 +4633,10 @@ static int dib8000_read_status(struct dvb_frontend *fe, fe_status_t * stat)
 			*stat |= FE_HAS_VITERBI;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dib8000_get_stats(fe, *stat);
+>>>>>>> v3.18
 =======
 	dib8000_get_stats(fe, *stat);
 >>>>>>> v3.18
@@ -4499,8 +4747,11 @@ static int dib8000_read_snr(struct dvb_frontend *fe, u16 * snr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dib8000_set_slave_frontend(struct dvb_frontend *fe, struct dvb_frontend *fe_slave)
 =======
+=======
+>>>>>>> v3.18
 struct per_layer_regs {
 	u16 lock, ber, per;
 };
@@ -4853,6 +5104,9 @@ static int dib8000_get_stats(struct dvb_frontend *fe, fe_status_t stat)
 }
 
 static int dib8000_set_slave_frontend(struct dvb_frontend *fe, struct dvb_frontend *fe_slave)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dib8000_state *state = fe->demodulator_priv;
@@ -4870,9 +5124,14 @@ static int dib8000_set_slave_frontend(struct dvb_frontend *fe, struct dvb_fronte
 	return -ENOMEM;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_set_slave_frontend);
 
 int dib8000_remove_slave_frontend(struct dvb_frontend *fe)
+=======
+
+static int dib8000_remove_slave_frontend(struct dvb_frontend *fe)
+>>>>>>> v3.18
 =======
 
 static int dib8000_remove_slave_frontend(struct dvb_frontend *fe)
@@ -4893,9 +5152,14 @@ static int dib8000_remove_slave_frontend(struct dvb_frontend *fe)
 	return -ENODEV;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_remove_slave_frontend);
 
 struct dvb_frontend *dib8000_get_slave_frontend(struct dvb_frontend *fe, int slave_index)
+=======
+
+static struct dvb_frontend *dib8000_get_slave_frontend(struct dvb_frontend *fe, int slave_index)
+>>>>>>> v3.18
 =======
 
 static struct dvb_frontend *dib8000_get_slave_frontend(struct dvb_frontend *fe, int slave_index)
@@ -4908,10 +5172,15 @@ static struct dvb_frontend *dib8000_get_slave_frontend(struct dvb_frontend *fe, 
 	return state->fe[slave_index];
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_get_slave_frontend);
 
 
 int dib8000_i2c_enumeration(struct i2c_adapter *host, int no_of_demods,
+=======
+
+static int dib8000_i2c_enumeration(struct i2c_adapter *host, int no_of_demods,
+>>>>>>> v3.18
 =======
 
 static int dib8000_i2c_enumeration(struct i2c_adapter *host, int no_of_demods,
@@ -4993,7 +5262,10 @@ error_memory_read:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_i2c_enumeration);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int dib8000_fe_get_tune_settings(struct dvb_frontend *fe, struct dvb_frontend_tune_settings *tune)
@@ -5019,7 +5291,11 @@ static void dib8000_release(struct dvb_frontend *fe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct i2c_adapter *dib8000_get_i2c_master(struct dvb_frontend *fe, enum dibx000_i2c_interface intf, int gating)
+=======
+static struct i2c_adapter *dib8000_get_i2c_master(struct dvb_frontend *fe, enum dibx000_i2c_interface intf, int gating)
+>>>>>>> v3.18
 =======
 static struct i2c_adapter *dib8000_get_i2c_master(struct dvb_frontend *fe, enum dibx000_i2c_interface intf, int gating)
 >>>>>>> v3.18
@@ -5029,9 +5305,13 @@ static struct i2c_adapter *dib8000_get_i2c_master(struct dvb_frontend *fe, enum 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_get_i2c_master);
 
 int dib8000_pid_filter_ctrl(struct dvb_frontend *fe, u8 onoff)
+=======
+static int dib8000_pid_filter_ctrl(struct dvb_frontend *fe, u8 onoff)
+>>>>>>> v3.18
 =======
 static int dib8000_pid_filter_ctrl(struct dvb_frontend *fe, u8 onoff)
 >>>>>>> v3.18
@@ -5044,9 +5324,14 @@ static int dib8000_pid_filter_ctrl(struct dvb_frontend *fe, u8 onoff)
 	return dib8000_write_word(st, 299, val);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_pid_filter_ctrl);
 
 int dib8000_pid_filter(struct dvb_frontend *fe, u8 id, u16 pid, u8 onoff)
+=======
+
+static int dib8000_pid_filter(struct dvb_frontend *fe, u8 id, u16 pid, u8 onoff)
+>>>>>>> v3.18
 =======
 
 static int dib8000_pid_filter(struct dvb_frontend *fe, u8 id, u16 pid, u8 onoff)
@@ -5057,7 +5342,10 @@ static int dib8000_pid_filter(struct dvb_frontend *fe, u8 id, u16 pid, u8 onoff)
 	return dib8000_write_word(st, 305 + id, onoff ? (1 << 13) | pid : 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dib8000_pid_filter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -5092,7 +5380,11 @@ static const struct dvb_frontend_ops dib8000_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dvb_frontend *dib8000_attach(struct i2c_adapter *i2c_adap, u8 i2c_addr, struct dib8000_config *cfg)
+=======
+static struct dvb_frontend *dib8000_init(struct i2c_adapter *i2c_adap, u8 i2c_addr, struct dib8000_config *cfg)
+>>>>>>> v3.18
 =======
 static struct dvb_frontend *dib8000_init(struct i2c_adapter *i2c_adap, u8 i2c_addr, struct dib8000_config *cfg)
 >>>>>>> v3.18
@@ -5101,7 +5393,11 @@ static struct dvb_frontend *dib8000_init(struct i2c_adapter *i2c_adap, u8 i2c_ad
 	struct dib8000_state *state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("dib8000_attach");
+=======
+	dprintk("dib8000_init");
+>>>>>>> v3.18
 =======
 	dprintk("dib8000_init");
 >>>>>>> v3.18
@@ -5162,7 +5458,10 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void *dib8000_attach(struct dib8000_ops *ops)
 {
 	if (!ops)
@@ -5190,6 +5489,9 @@ void *dib8000_attach(struct dib8000_ops *ops)
 
 	return ops;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(dib8000_attach);
 

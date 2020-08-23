@@ -30,6 +30,10 @@
 #include <linux/kernel.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cifs_fs_sb.h"
+>>>>>>> v3.18
 =======
 #include "cifs_fs_sb.h"
 >>>>>>> v3.18

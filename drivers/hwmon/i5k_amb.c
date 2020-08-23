@@ -4,7 +4,11 @@
  * Copyright (C) 2007 IBM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
 =======
  * Author: Darrick J. Wong <darrick.wong@oracle.com>
 >>>>>>> v3.18
@@ -561,7 +565,10 @@ static int i5k_amb_probe(struct platform_device *pdev)
 err_init_failed:
 	iounmap(data->amb_mmio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_map_failed:
@@ -584,7 +591,10 @@ static int i5k_amb_remove(struct platform_device *pdev)
 	iounmap(data->amb_mmio);
 	release_mem_region(data->amb_base, data->amb_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(data);
@@ -622,7 +632,11 @@ static void __exit i5k_amb_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
+=======
+MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
 >>>>>>> v3.18

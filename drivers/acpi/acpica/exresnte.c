@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -129,7 +133,12 @@ acpi_ex_resolve_node_to_value(struct acpi_namespace_node **object_ptr,
 
 	if (!source_desc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_ERROR((AE_INFO, "No object attached to node %p", node));
+=======
+		ACPI_ERROR((AE_INFO, "No object attached to node [%4.4s] %p",
+			    node->name.ascii, node));
+>>>>>>> v3.18
 =======
 		ACPI_ERROR((AE_INFO, "No object attached to node [%4.4s] %p",
 			    node->name.ascii, node));
@@ -258,6 +267,10 @@ acpi_ex_resolve_node_to_value(struct acpi_namespace_node **object_ptr,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -100,7 +100,11 @@ int omap_i2c_reset(struct omap_hwmod *oh)
 
 	if (c == MAX_MODULE_SOFTRESET_WAIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: %s: softreset failed (waited %d usec)\n",
+=======
+		pr_warn("%s: %s: softreset failed (waited %d usec)\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: %s: softreset failed (waited %d usec)\n",
 >>>>>>> v3.18
@@ -186,7 +190,11 @@ int __init omap_i2c_add_bus(struct omap_i2c_bus_platform_data *i2c_pdata,
 	WARN(IS_ERR(pdev), "Could not build omap_device for %s\n", name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(pdev);
+=======
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(pdev);
 >>>>>>> v3.18

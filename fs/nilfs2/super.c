@@ -311,6 +311,12 @@ int nilfs_commit_super(struct super_block *sb, int flag)
 	}
 	clear_nilfs_sb_dirty(nilfs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nilfs->ns_flushed_device = 1;
+	/* make sure store to ns_flushed_device cannot be reordered */
+	smp_wmb();
+>>>>>>> v3.18
 =======
 	nilfs->ns_flushed_device = 1;
 	/* make sure store to ns_flushed_device cannot be reordered */
@@ -521,6 +527,12 @@ static int nilfs_sync_fs(struct super_block *sb, int wait)
 	up_write(&nilfs->ns_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!err)
+		err = nilfs_flush_device(nilfs);
+
+>>>>>>> v3.18
 =======
 	if (!err)
 		err = nilfs_flush_device(nilfs);
@@ -567,13 +579,19 @@ int nilfs_attach_checkpoint(struct super_block *sb, __u64 cno, int curr_mnt,
 		goto failed_bh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&root->inodes_count, le64_to_cpu(raw_cp->cp_inodes_count));
 	atomic_set(&root->blocks_count, le64_to_cpu(raw_cp->cp_blocks_count));
 =======
+=======
+>>>>>>> v3.18
 	atomic64_set(&root->inodes_count,
 			le64_to_cpu(raw_cp->cp_inodes_count));
 	atomic64_set(&root->blocks_count,
 			le64_to_cpu(raw_cp->cp_blocks_count));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nilfs_cpfile_put_checkpoint(nilfs->ns_cpfile, cno, bh_cp);
@@ -629,6 +647,10 @@ static int nilfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	unsigned long nrsvblocks;
 	sector_t nfreeblocks;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 nmaxinodes, nfreeinodes;
+>>>>>>> v3.18
 =======
 	u64 nmaxinodes, nfreeinodes;
 >>>>>>> v3.18
@@ -657,7 +679,10 @@ static int nilfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = nilfs_ifile_count_free_inodes(root->ifile,
 					    &nmaxinodes, &nfreeinodes);
 	if (unlikely(err)) {
@@ -678,6 +703,9 @@ static int nilfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 			return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf->f_type = NILFS_SUPER_MAGIC;
 	buf->f_bsize = sb->s_blocksize;
@@ -686,8 +714,13 @@ static int nilfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	buf->f_bavail = (buf->f_bfree >= nrsvblocks) ?
 		(buf->f_bfree - nrsvblocks) : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->f_files = atomic_read(&root->inodes_count);
 	buf->f_ffree = 0; /* nilfs_count_free_inodes(sb); */
+=======
+	buf->f_files = nmaxinodes;
+	buf->f_ffree = nfreeinodes;
+>>>>>>> v3.18
 =======
 	buf->f_files = nmaxinodes;
 	buf->f_ffree = nfreeinodes;
@@ -971,7 +1004,11 @@ static int nilfs_get_root_dentry(struct super_block *sb,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dentry = d_obtain_alias(inode);
+=======
+		dentry = d_obtain_root(inode);
+>>>>>>> v3.18
 =======
 		dentry = d_obtain_root(inode);
 >>>>>>> v3.18
@@ -1027,6 +1064,7 @@ static int nilfs_attach_snapshot(struct super_block *s, __u64 cno,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nilfs_tree_was_touched(struct dentry *root_dentry)
 {
 	return root_dentry->d_count > 1;
@@ -1038,10 +1076,15 @@ static int nilfs_tree_was_touched(struct dentry *root_dentry)
 /**
  * nilfs_tree_is_busy() - try to shrink dentries of a checkpoint
 >>>>>>> v3.18
+=======
+/**
+ * nilfs_tree_is_busy() - try to shrink dentries of a checkpoint
+>>>>>>> v3.18
  * @root_dentry: root dentry of the tree to be shrunk
  *
  * This function returns true if the tree was in-use.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int nilfs_try_to_shrink_tree(struct dentry *root_dentry)
 {
@@ -1050,10 +1093,15 @@ static int nilfs_try_to_shrink_tree(struct dentry *root_dentry)
 	shrink_dcache_parent(root_dentry);
 	return nilfs_tree_was_touched(root_dentry);
 =======
+=======
+>>>>>>> v3.18
 static bool nilfs_tree_is_busy(struct dentry *root_dentry)
 {
 	shrink_dcache_parent(root_dentry);
 	return d_count(root_dentry) > 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1079,8 +1127,12 @@ int nilfs_checkpoint_is_mounted(struct super_block *sb, __u64 cno)
 			dentry = d_find_alias(inode);
 			if (dentry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (nilfs_tree_was_touched(dentry))
 					ret = nilfs_try_to_shrink_tree(dentry);
+=======
+				ret = nilfs_tree_is_busy(dentry);
+>>>>>>> v3.18
 =======
 				ret = nilfs_tree_is_busy(dentry);
 >>>>>>> v3.18
@@ -1186,6 +1238,10 @@ static int nilfs_remount(struct super_block *sb, int *flags, char *data)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -1384,11 +1440,16 @@ nilfs_mount(struct file_system_type *fs_type, int flags,
 		s->s_flags |= MS_ACTIVE;
 	} else if (!sd.cno) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int busy = false;
 
 		if (nilfs_tree_was_touched(s->s_root)) {
 			busy = nilfs_try_to_shrink_tree(s->s_root);
 			if (busy && (flags ^ s->s_flags) & MS_RDONLY) {
+=======
+		if (nilfs_tree_is_busy(s->s_root)) {
+			if ((flags ^ s->s_flags) & MS_RDONLY) {
+>>>>>>> v3.18
 =======
 		if (nilfs_tree_is_busy(s->s_root)) {
 			if ((flags ^ s->s_flags) & MS_RDONLY) {
@@ -1401,8 +1462,12 @@ nilfs_mount(struct file_system_type *fs_type, int flags,
 				goto failed_super;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		if (!busy) {
+=======
+		} else {
+>>>>>>> v3.18
 =======
 		} else {
 >>>>>>> v3.18
@@ -1525,6 +1590,7 @@ static int __init init_nilfs_fs(void)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = register_filesystem(&nilfs_fs_type);
 	if (err)
 		goto free_cachep;
@@ -1533,6 +1599,8 @@ static int __init init_nilfs_fs(void)
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	err = nilfs_sysfs_init();
 	if (err)
 		goto free_cachep;
@@ -1546,6 +1614,9 @@ static int __init init_nilfs_fs(void)
 
 deinit_sysfs_entry:
 	nilfs_sysfs_exit();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 free_cachep:
 	nilfs_destroy_cachep();
@@ -1557,6 +1628,10 @@ static void __exit exit_nilfs_fs(void)
 {
 	nilfs_destroy_cachep();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nilfs_sysfs_exit();
+>>>>>>> v3.18
 =======
 	nilfs_sysfs_exit();
 >>>>>>> v3.18

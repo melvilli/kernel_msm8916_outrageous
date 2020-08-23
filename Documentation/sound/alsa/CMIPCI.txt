@@ -88,7 +88,11 @@ with 4 channels,
 and use the interleaved 4 channel data.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 There are some control switchs affecting to the speaker connections:
+=======
+There are some control switches affecting to the speaker connections:
+>>>>>>> v3.18
 =======
 There are some control switches affecting to the speaker connections:
 >>>>>>> v3.18

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ASoC Codec Driver
 =================
 
@@ -19,6 +20,8 @@ Optionally, codec drivers can also provide:-
  5) DAPM description.
  6) DAPM event handler.
 =======
+=======
+>>>>>>> v3.18
 ASoC Codec Class Driver
 =======================
 
@@ -39,6 +42,9 @@ Each codec class driver *must* provide the following features:-
 
 Optionally, codec drivers can also provide:-
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  7) DAC Digital mute control.
 
@@ -88,6 +94,7 @@ struct snd_soc_dai_driver wm8731_dai = {
 --------------------
 The codec can usually be controlled via an I2C or SPI style interface
 <<<<<<< HEAD
+<<<<<<< HEAD
 (AC97 combines control with data in the DAI). The codec drivers provide
 functions to read and write the codec registers along with supplying a
 register cache:-
@@ -108,6 +115,11 @@ read/write:-
 
 	hw_write_t hw_write;
 	hw_read_t hw_read;
+=======
+(AC97 combines control with data in the DAI). The codec driver should use the
+Regmap API for all codec IO. Please see include/linux/regmap.h and existing
+codec drivers for example regmap usage.
+>>>>>>> v3.18
 =======
 (AC97 combines control with data in the DAI). The codec driver should use the
 Regmap API for all codec IO. Please see include/linux/regmap.h and existing
@@ -157,7 +169,11 @@ Defines a stereo enumerated control
 4 - Codec Audio Operations
 --------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 The codec driver also supports the following ALSA operations:-
+=======
+The codec driver also supports the following ALSA PCM operations:-
+>>>>>>> v3.18
 =======
 The codec driver also supports the following ALSA PCM operations:-
 >>>>>>> v3.18

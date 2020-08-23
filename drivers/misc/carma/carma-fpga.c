@@ -89,6 +89,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -105,7 +110,10 @@
 #include <linux/module.h>
 #include <linux/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -640,8 +648,12 @@ static int data_submit_dma(struct fpga_device *priv, struct data_buf *buf)
 	dma_cookie_t cookie;
 	dma_addr_t dst, src;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dma_flags = DMA_COMPL_SKIP_DEST_UNMAP |
 				  DMA_COMPL_SKIP_SRC_UNMAP;
+=======
+	unsigned long dma_flags = 0;
+>>>>>>> v3.18
 =======
 	unsigned long dma_flags = 0;
 >>>>>>> v3.18
@@ -967,10 +979,14 @@ static int data_debugfs_init(struct fpga_device *priv)
 	priv->dbg_entry = debugfs_create_file(drv_name, S_IRUGO, NULL, priv,
 					      &data_debug_fops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(priv->dbg_entry))
 		return PTR_ERR(priv->dbg_entry);
 
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(priv->dbg_entry);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(priv->dbg_entry);
 >>>>>>> v3.18
@@ -1019,15 +1035,21 @@ static ssize_t data_en_set(struct device *dev, struct device_attribute *attr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 0, &enable);
 	if (ret) {
 		dev_err(priv->dev, "unable to parse enable input\n");
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 0, &enable);
 	if (ret) {
 		dev_err(priv->dev, "unable to parse enable input\n");
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1320,7 +1342,11 @@ static int data_of_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, priv);
+=======
+	platform_set_drvdata(op, priv);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, priv);
 >>>>>>> v3.18
@@ -1428,7 +1454,11 @@ out_return:
 static int data_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fpga_device *priv = dev_get_drvdata(&op->dev);
+=======
+	struct fpga_device *priv = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct fpga_device *priv = platform_get_drvdata(op);
 >>>>>>> v3.18

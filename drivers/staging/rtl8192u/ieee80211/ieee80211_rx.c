@@ -15,7 +15,11 @@
 
   Few modifications for Realtek's Wi-Fi drivers by
 <<<<<<< HEAD
+<<<<<<< HEAD
   Andrea Merello <andreamrl@tiscali.it>
+=======
+  Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
   Andrea Merello <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ static inline void ieee80211_monitor_rx(struct ieee80211_device *ieee,
 static struct ieee80211_frag_entry *
 ieee80211_frag_cache_find(struct ieee80211_device *ieee, unsigned int seq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  unsigned int frag, u8 tid,u8 *src, u8 *dst)
+=======
+			  unsigned int frag, u8 tid, u8 *src, u8 *dst)
+>>>>>>> v3.18
 =======
 			  unsigned int frag, u8 tid, u8 *src, u8 *dst)
 >>>>>>> v3.18
@@ -197,7 +205,11 @@ static int ieee80211_frag_cache_invalidate(struct ieee80211_device *ieee,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry = ieee80211_frag_cache_find(ieee, seq, -1, tid,hdr->addr2,
+=======
+	entry = ieee80211_frag_cache_find(ieee, seq, -1, tid, hdr->addr2,
+>>>>>>> v3.18
 =======
 	entry = ieee80211_frag_cache_find(ieee, seq, -1, tid, hdr->addr2,
 >>>>>>> v3.18
@@ -231,7 +243,11 @@ ieee80211_rx_frame_mgmt(struct ieee80211_device *ieee, struct sk_buff *skb,
 	 * response parser uses it
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_hdr_3addr * hdr = (struct ieee80211_hdr_3addr *)skb->data;
+=======
+	struct ieee80211_hdr_3addr *hdr = (struct ieee80211_hdr_3addr *)skb->data;
+>>>>>>> v3.18
 =======
 	struct ieee80211_hdr_3addr *hdr = (struct ieee80211_hdr_3addr *)skb->data;
 >>>>>>> v3.18
@@ -353,7 +369,11 @@ static int ieee80211_is_eapol_frame(struct ieee80211_device *ieee,
 /* Called only as a tasklet (software IRQ), by ieee80211_rx */
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee80211_rx_frame_decrypt(struct ieee80211_device* ieee, struct sk_buff *skb,
+=======
+ieee80211_rx_frame_decrypt(struct ieee80211_device *ieee, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 ieee80211_rx_frame_decrypt(struct ieee80211_device *ieee, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -373,7 +393,10 @@ ieee80211_rx_frame_decrypt(struct ieee80211_device *ieee, struct sk_buff *skb,
 	hdrlen = ieee80211_get_hdrlen(le16_to_cpu(hdr->frame_ctl));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_IEEE80211_CRYPT_TKIP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ieee->tkip_countermeasures &&
@@ -386,7 +409,10 @@ ieee80211_rx_frame_decrypt(struct ieee80211_device *ieee, struct sk_buff *skb,
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -412,7 +438,11 @@ ieee80211_rx_frame_decrypt(struct ieee80211_device *ieee, struct sk_buff *skb,
 /* Called only as a tasklet (software IRQ), by ieee80211_rx */
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee80211_rx_frame_decrypt_msdu(struct ieee80211_device* ieee, struct sk_buff *skb,
+=======
+ieee80211_rx_frame_decrypt_msdu(struct ieee80211_device *ieee, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 ieee80211_rx_frame_decrypt_msdu(struct ieee80211_device *ieee, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -470,7 +500,11 @@ static int is_duplicate_packet(struct ieee80211_device *ieee,
 	  tid ++;
 	} else if(IEEE80211_QOS_HAS_SEQ(fc)) { //QoS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  hdr_3addrqos = (struct ieee80211_hdr_3addrqos*)header;
+=======
+	  hdr_3addrqos = (struct ieee80211_hdr_3addrqos *)header;
+>>>>>>> v3.18
 =======
 	  hdr_3addrqos = (struct ieee80211_hdr_3addrqos *)header;
 >>>>>>> v3.18
@@ -489,8 +523,12 @@ static int is_duplicate_packet(struct ieee80211_device *ieee,
 		u8 *mac = header->addr2;
 		int index = mac[5] % IEEE_IBSS_MAC_HASH_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//for (pos = (head)->next; pos != (head); pos = pos->next)
 		//__list_for_each(p, &ieee->ibss_mac_hash[index]) {
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -557,11 +595,16 @@ drop:
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool
 AddReorderEntry(
 	PRX_TS_RECORD			pTS,
 	PRX_REORDER_ENTRY		pReorderEntry
 	)
+=======
+
+static bool AddReorderEntry(PRX_TS_RECORD pTS, PRX_REORDER_ENTRY pReorderEntry)
+>>>>>>> v3.18
 =======
 
 static bool AddReorderEntry(PRX_TS_RECORD pTS, PRX_REORDER_ENTRY pReorderEntry)
@@ -592,7 +635,11 @@ static bool AddReorderEntry(PRX_TS_RECORD pTS, PRX_REORDER_ENTRY pReorderEntry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_indicate_packets(struct ieee80211_device *ieee, struct ieee80211_rxb** prxbIndicateArray,u8  index)
+=======
+void ieee80211_indicate_packets(struct ieee80211_device *ieee, struct ieee80211_rxb **prxbIndicateArray,u8  index)
+>>>>>>> v3.18
 =======
 void ieee80211_indicate_packets(struct ieee80211_device *ieee, struct ieee80211_rxb **prxbIndicateArray,u8  index)
 >>>>>>> v3.18
@@ -601,17 +648,23 @@ void ieee80211_indicate_packets(struct ieee80211_device *ieee, struct ieee80211_
 	u16 ethertype;
 //	if(index > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 //		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): hahahahhhh, We indicate packet from reorder list, index is %u\n",__FUNCTION__,index);
 	for(j = 0; j<index; j++)
 	{
 //added by amy for reorder
 		struct ieee80211_rxb* prxb = prxbIndicateArray[j];
 =======
+=======
+>>>>>>> v3.18
 //		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): hahahahhhh, We indicate packet from reorder list, index is %u\n",__func__,index);
 	for(j = 0; j<index; j++)
 	{
 //added by amy for reorder
 		struct ieee80211_rxb *prxb = prxbIndicateArray[j];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for(i = 0; i<prxb->nr_subframes; i++) {
 			struct sk_buff *sub_skb = prxb->subframes[i];
@@ -658,6 +711,7 @@ void ieee80211_indicate_packets(struct ieee80211_device *ieee, struct ieee80211_
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void RxReorderIndicatePacket( struct ieee80211_device *ieee,
 		struct ieee80211_rxb* prxb,
 		PRX_TS_RECORD		pTS,
@@ -667,6 +721,8 @@ void RxReorderIndicatePacket( struct ieee80211_device *ieee,
 	PRX_REORDER_ENTRY	pReorderEntry = NULL;
 	struct ieee80211_rxb* prxbIndicateArray[REORDER_WIN_SIZE];
 =======
+=======
+>>>>>>> v3.18
 static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 				    struct ieee80211_rxb *prxb,
 				    PRX_TS_RECORD pTS, u16 SeqNum)
@@ -674,13 +730,20 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 	PRT_HIGH_THROUGHPUT	pHTInfo = ieee->pHTInfo;
 	PRX_REORDER_ENTRY	pReorderEntry = NULL;
 	struct ieee80211_rxb *prxbIndicateArray[REORDER_WIN_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8			WinSize = pHTInfo->RxReorderWinSize;
 	u16			WinEnd = (pTS->RxIndicateSeq + WinSize -1)%4096;
 	u8			index = 0;
 	bool			bMatchWinStart = false, bPktInBuf = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): Seq is %d,pTS->RxIndicateSeq is %d, WinSize is %d\n",__FUNCTION__,SeqNum,pTS->RxIndicateSeq,WinSize);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): Seq is %d,pTS->RxIndicateSeq is %d, WinSize is %d\n",__func__,SeqNum,pTS->RxIndicateSeq,WinSize);
+>>>>>>> v3.18
 =======
 	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): Seq is %d,pTS->RxIndicateSeq is %d, WinSize is %d\n",__func__,SeqNum,pTS->RxIndicateSeq,WinSize);
 >>>>>>> v3.18
@@ -737,17 +800,23 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 				pTS->RxIndicateSeq, SeqNum);
 		prxbIndicateArray[0] = prxb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 //		printk("========================>%s(): SeqNum is %d\n",__FUNCTION__,SeqNum);
 		index = 1;
 	} else {
 		/* Current packet is going to be inserted into pending list.*/
 		//IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): We RX no ordered packed, insert to ordered list\n",__FUNCTION__);
 =======
+=======
+>>>>>>> v3.18
 //		printk("========================>%s(): SeqNum is %d\n",__func__,SeqNum);
 		index = 1;
 	} else {
 		/* Current packet is going to be inserted into pending list.*/
 		//IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): We RX no ordered packed, insert to ordered list\n",__func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if(!list_empty(&ieee->RxReorder_Unused_List)) {
 			pReorderEntry = (PRX_REORDER_ENTRY)list_entry(ieee->RxReorder_Unused_List.next,RX_REORDER_ENTRY,List);
@@ -757,17 +826,23 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 			pReorderEntry->SeqNum = SeqNum;
 			pReorderEntry->prxb = prxb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): pREorderEntry->SeqNum is %d\n",__FUNCTION__,pReorderEntry->SeqNum);
 
 			if(!AddReorderEntry(pTS, pReorderEntry)) {
 				IEEE80211_DEBUG(IEEE80211_DL_REORDER, "%s(): Duplicate packet is dropped!! IndicateSeq: %d, NewSeq: %d\n",
 					__FUNCTION__, pTS->RxIndicateSeq, SeqNum);
 =======
+=======
+>>>>>>> v3.18
 	//		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): pREorderEntry->SeqNum is %d\n",__func__,pReorderEntry->SeqNum);
 
 			if(!AddReorderEntry(pTS, pReorderEntry)) {
 				IEEE80211_DEBUG(IEEE80211_DL_REORDER, "%s(): Duplicate packet is dropped!! IndicateSeq: %d, NewSeq: %d\n",
 					__func__, pTS->RxIndicateSeq, SeqNum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				list_add_tail(&pReorderEntry->List,&ieee->RxReorder_Unused_List);
 				{
@@ -804,7 +879,11 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 	/* Check if there is any packet need indicate.*/
 	while(!list_empty(&pTS->RxPendingPktList)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): start RREORDER indicate\n",__FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): start RREORDER indicate\n",__func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): start RREORDER indicate\n",__func__);
 >>>>>>> v3.18
@@ -827,7 +906,11 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 			IEEE80211_DEBUG(IEEE80211_DL_REORDER,"Packets indication!! IndicateSeq: %d, NewSeq: %d\n",pTS->RxIndicateSeq, SeqNum);
 			prxbIndicateArray[index] = pReorderEntry->prxb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//	printk("========================>%s(): pReorderEntry->SeqNum is %d\n",__FUNCTION__,pReorderEntry->SeqNum);
+=======
+		//	printk("========================>%s(): pReorderEntry->SeqNum is %d\n",__func__,pReorderEntry->SeqNum);
+>>>>>>> v3.18
 =======
 		//	printk("========================>%s(): pReorderEntry->SeqNum is %d\n",__func__,pReorderEntry->SeqNum);
 >>>>>>> v3.18
@@ -857,7 +940,11 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 	if(bPktInBuf && pTS->RxTimeoutIndicateSeq==0xffff) {
 		// Set new pending timer.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): SET rx timeout timer\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): SET rx timeout timer\n", __func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): SET rx timeout timer\n", __func__);
 >>>>>>> v3.18
@@ -870,17 +957,23 @@ static void RxReorderIndicatePacket(struct ieee80211_device *ieee,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 parse_subframe(struct sk_buff *skb,
 		  struct ieee80211_rx_stats *rx_stats,
 		  struct ieee80211_rxb *rxb,u8* src,u8* dst)
 {
 	struct ieee80211_hdr_3addr  *hdr = (struct ieee80211_hdr_3addr* )skb->data;
 =======
+=======
+>>>>>>> v3.18
 static u8 parse_subframe(struct sk_buff *skb,
 			 struct ieee80211_rx_stats *rx_stats,
 			 struct ieee80211_rxb *rxb, u8 *src, u8 *dst)
 {
 	struct ieee80211_hdr_3addr  *hdr = (struct ieee80211_hdr_3addr *)skb->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16		fc = le16_to_cpu(hdr->frame_ctl);
 
@@ -937,7 +1030,11 @@ static u8 parse_subframe(struct sk_buff *skb,
 		while(skb->len > ETHERNET_HEADER_SIZE) {
 			/* Offset 12 denote 2 mac address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nSubframe_Length = *((u16*)(skb->data + 12));
+=======
+			nSubframe_Length = *((u16 *)(skb->data + 12));
+>>>>>>> v3.18
 =======
 			nSubframe_Length = *((u16 *)(skb->data + 12));
 >>>>>>> v3.18
@@ -947,8 +1044,13 @@ static u8 parse_subframe(struct sk_buff *skb,
 			if(skb->len<(ETHERNET_HEADER_SIZE + nSubframe_Length)) {
 				printk("%s: A-MSDU parse error!! pRfd->nTotalSubframe : %d\n",\
 <<<<<<< HEAD
+<<<<<<< HEAD
 						__FUNCTION__,rxb->nr_subframes);
 				printk("%s: A-MSDU parse error!! Subframe Length: %d\n",__FUNCTION__, nSubframe_Length);
+=======
+						__func__, rxb->nr_subframes);
+				printk("%s: A-MSDU parse error!! Subframe Length: %d\n",__func__, nSubframe_Length);
+>>>>>>> v3.18
 =======
 						__func__, rxb->nr_subframes);
 				printk("%s: A-MSDU parse error!! Subframe Length: %d\n",__func__, nSubframe_Length);
@@ -969,15 +1071,21 @@ static u8 parse_subframe(struct sk_buff *skb,
 			/* Allocate new skb for releasing to upper layer */
 			sub_skb = dev_alloc_skb(nSubframe_Length + 12);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_reserve(sub_skb, 12);
 			data_ptr = (u8 *)skb_put(sub_skb, nSubframe_Length);
 			memcpy(data_ptr,skb->data,nSubframe_Length);
 =======
+=======
+>>>>>>> v3.18
 			if (!sub_skb)
 				return 0;
 			skb_reserve(sub_skb, 12);
 			data_ptr = (u8 *)skb_put(sub_skb, nSubframe_Length);
 			memcpy(data_ptr, skb->data, nSubframe_Length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 			rxb->subframes[rxb->nr_subframes++] = sub_skb;
@@ -986,7 +1094,11 @@ static u8 parse_subframe(struct sk_buff *skb,
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_pull(skb,nSubframe_Length);
+=======
+			skb_pull(skb, nSubframe_Length);
+>>>>>>> v3.18
 =======
 			skb_pull(skb, nSubframe_Length);
 >>>>>>> v3.18
@@ -1002,7 +1114,11 @@ static u8 parse_subframe(struct sk_buff *skb,
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				skb_pull(skb,nPadding_Length);
+=======
+				skb_pull(skb, nPadding_Length);
+>>>>>>> v3.18
 =======
 				skb_pull(skb, nPadding_Length);
 >>>>>>> v3.18
@@ -1057,7 +1173,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_rxb* rxb = NULL;
+=======
+	struct ieee80211_rxb *rxb = NULL;
+>>>>>>> v3.18
 =======
 	struct ieee80211_rxb *rxb = NULL;
 >>>>>>> v3.18
@@ -1090,7 +1210,10 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	//IEEE80211_DEBUG_DATA(IEEE80211_DL_DATA, skb->data, skb->len);
 #ifdef NOT_YET
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if WIRELESS_EXT > 15
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Put this code here so that we avoid duplicating it in all
@@ -1107,11 +1230,17 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	}
 #endif /* IW_WIRELESS_SPY */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* WIRELESS_EXT > 15 */
 	hostap_update_rx_stats(local->ap, hdr, rx_stats);
 #endif
 
 #if WIRELESS_EXT > 15
+=======
+	hostap_update_rx_stats(local->ap, hdr, rx_stats);
+#endif
+
+>>>>>>> v3.18
 =======
 	hostap_update_rx_stats(local->ap, hdr, rx_stats);
 #endif
@@ -1124,7 +1253,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 		return 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1180,6 +1313,7 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	{
 		PRX_TS_RECORD pRxTS = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): QOS ENABLE AND RECEIVE QOS DATA , we will get Ts, tid:%d\n",__FUNCTION__, tid);
 		if(GetTs(
 				ieee,
@@ -1187,19 +1321,28 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 				hdr->addr2,
 				(u8)Frame_QoSTID((u8*)(skb->data)),
 =======
+=======
+>>>>>>> v3.18
 			//IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): QOS ENABLE AND RECEIVE QOS DATA , we will get Ts, tid:%d\n",__func__, tid);
 		if(GetTs(
 				ieee,
 				(PTS_COMMON_INFO *) &pRxTS,
 				hdr->addr2,
 				(u8)Frame_QoSTID((u8 *)(skb->data)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				RX_DIR,
 				true))
 		{
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): pRxTS->RxLastFragNum is %d,frag is %d,pRxTS->RxLastSeqNum is %d,seq is %d\n",__FUNCTION__,pRxTS->RxLastFragNum,frag,pRxTS->RxLastSeqNum,WLAN_GET_SEQ_SEQ(sc));
+=======
+		//	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): pRxTS->RxLastFragNum is %d,frag is %d,pRxTS->RxLastSeqNum is %d,seq is %d\n",__func__,pRxTS->RxLastFragNum,frag,pRxTS->RxLastSeqNum,WLAN_GET_SEQ_SEQ(sc));
+>>>>>>> v3.18
 =======
 		//	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): pRxTS->RxLastFragNum is %d,frag is %d,pRxTS->RxLastSeqNum is %d,seq is %d\n",__func__,pRxTS->RxLastFragNum,frag,pRxTS->RxLastSeqNum,WLAN_GET_SEQ_SEQ(sc));
 >>>>>>> v3.18
@@ -1218,7 +1361,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 		else
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IEEE80211_DEBUG(IEEE80211_DL_ERR, "%s(): No TS!! Skip the check!!\n",__FUNCTION__);
+=======
+			IEEE80211_DEBUG(IEEE80211_DL_ERR, "%s(): No TS!! Skip the check!!\n",__func__);
+>>>>>>> v3.18
 =======
 			IEEE80211_DEBUG(IEEE80211_DL_ERR, "%s(): No TS!! Skip the check!!\n",__func__);
 >>>>>>> v3.18
@@ -1454,7 +1601,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 		TID = Frame_QoSTID(skb->data);
 		SeqNum = WLAN_GET_SEQ_SEQ(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		GetTs(ieee,(PTS_COMMON_INFO*) &pTS,hdr->addr2,TID,RX_DIR,true);
+=======
+		GetTs(ieee,(PTS_COMMON_INFO *) &pTS,hdr->addr2,TID,RX_DIR,true);
+>>>>>>> v3.18
 =======
 		GetTs(ieee,(PTS_COMMON_INFO *) &pTS,hdr->addr2,TID,RX_DIR,true);
 >>>>>>> v3.18
@@ -1471,7 +1622,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	if(rxb == NULL)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR,"%s(): kmalloc rxb error\n",__FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR,"%s(): kmalloc rxb error\n",__func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_ERR,"%s(): kmalloc rxb error\n",__func__);
 >>>>>>> v3.18
@@ -1480,7 +1635,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	/* to parse amsdu packets */
 	/* qos data packets & reserved bit is 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(parse_subframe(skb,rx_stats,rxb,src,dst) == 0) {
+=======
+	if (parse_subframe(skb, rx_stats, rxb, src, dst) == 0) {
+>>>>>>> v3.18
 =======
 	if (parse_subframe(skb, rx_stats, rxb, src, dst) == 0) {
 >>>>>>> v3.18
@@ -1545,7 +1704,11 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	else
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): REORDER ENABLE AND PTS not NULL, and we will enter RxReorderIndicatePacket()\n",__FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): REORDER ENABLE AND PTS not NULL, and we will enter RxReorderIndicatePacket()\n",__func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_REORDER,"%s(): REORDER ENABLE AND PTS not NULL, and we will enter RxReorderIndicatePacket()\n",__func__);
 >>>>>>> v3.18
@@ -1573,6 +1736,10 @@ int ieee80211_rx(struct ieee80211_device *ieee, struct sk_buff *skb,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_rx);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_rx);
 >>>>>>> v3.18
@@ -1669,7 +1836,10 @@ static int ieee80211_qos_convert_ac_to_parameters(struct
 						  *qos_param)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -1699,7 +1869,11 @@ static int ieee80211_qos_convert_ac_to_parameters(struct
 		qos_param->tx_op_limit[aci] = le16_to_cpu(ac_params->tx_op_limit);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1789,7 +1963,11 @@ static inline void ieee80211_extract_country_ie(
 	struct ieee80211_info_element *info_element,
 	struct ieee80211_network *network,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 * addr2
+=======
+	u8 *addr2
+>>>>>>> v3.18
 =======
 	u8 *addr2
 >>>>>>> v3.18
@@ -2130,7 +2308,11 @@ int ieee80211_parse_info_param(struct ieee80211_device *ieee,
 				info_element->data[2] == 0x74))
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("========>%s(): athros AP is exist\n",__FUNCTION__);
+=======
+				printk("========>%s(): athros AP is exist\n",__func__);
+>>>>>>> v3.18
 =======
 				printk("========>%s(): athros AP is exist\n",__func__);
 >>>>>>> v3.18
@@ -2367,7 +2549,12 @@ static inline u8 ieee80211_SignalStrengthTranslate(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 long ieee80211_translate_todbm(u8 signal_strength_index	)// 0-100 index.
+=======
+/* 0-100 index */
+static long ieee80211_translate_todbm(u8 signal_strength_index)
+>>>>>>> v3.18
 =======
 /* 0-100 index */
 static long ieee80211_translate_todbm(u8 signal_strength_index)
@@ -2405,7 +2592,11 @@ static inline int ieee80211_network_init(
 	network->time_stamp[0] = le32_to_cpu(beacon->time_stamp[0]);
 	network->time_stamp[1] = le32_to_cpu(beacon->time_stamp[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	network->beacon_interval = le32_to_cpu(beacon->beacon_interval);
+=======
+	network->beacon_interval = le16_to_cpu(beacon->beacon_interval);
+>>>>>>> v3.18
 =======
 	network->beacon_interval = le16_to_cpu(beacon->beacon_interval);
 >>>>>>> v3.18
@@ -2484,7 +2675,11 @@ static inline int ieee80211_network_init(
 
 static inline int is_same_network(struct ieee80211_network *src,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct ieee80211_network *dst, struct ieee80211_device* ieee)
+=======
+				  struct ieee80211_network *dst, struct ieee80211_device *ieee)
+>>>>>>> v3.18
 =======
 				  struct ieee80211_network *dst, struct ieee80211_device *ieee)
 >>>>>>> v3.18
@@ -2606,17 +2801,23 @@ static inline void update_network(struct ieee80211_network *dst,
 	dst->bWithAironetIE = src->bWithAironetIE;
 	dst->bCkipSupported = src->bCkipSupported;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dst->CcxRmState,src->CcxRmState,2);
 	dst->bCcxRmEnable = src->bCcxRmEnable;
 	dst->MBssidMask = src->MBssidMask;
 	dst->bMBssidValid = src->bMBssidValid;
 	memcpy(dst->MBssid,src->MBssid,6);
 =======
+=======
+>>>>>>> v3.18
 	memcpy(dst->CcxRmState, src->CcxRmState, 2);
 	dst->bCcxRmEnable = src->bCcxRmEnable;
 	dst->MBssidMask = src->MBssidMask;
 	dst->bMBssidValid = src->bMBssidValid;
 	memcpy(dst->MBssid, src->MBssid, 6);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dst->bWithCcxVerNum = src->bWithCcxVerNum;
 	dst->BssCcxVerNumber = src->BssCcxVerNumber;
@@ -2868,9 +3069,13 @@ void ieee80211_rx_mgt(struct ieee80211_device *ieee,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(ieee80211_rx_mgt);
 EXPORT_SYMBOL(ieee80211_rx);
+=======
+EXPORT_SYMBOL(ieee80211_rx_mgt);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_rx_mgt);
 >>>>>>> v3.18

@@ -16,8 +16,13 @@
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_gpio.h>
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_gpio.h>
@@ -100,6 +105,12 @@ static int of_i2c_gpio_get_pins(struct device_node *np,
 	*scl_pin = of_get_gpio(np, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (*sda_pin == -EPROBE_DEFER || *scl_pin == -EPROBE_DEFER)
+		return -EPROBE_DEFER;
+
+>>>>>>> v3.18
 =======
 	if (*sda_pin == -EPROBE_DEFER || *scl_pin == -EPROBE_DEFER)
 		return -EPROBE_DEFER;
@@ -149,9 +160,15 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 			return ret;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pdev->dev.platform_data)
 			return -ENXIO;
 		pdata = pdev->dev.platform_data;
+=======
+		if (!dev_get_platdata(&pdev->dev))
+			return -ENXIO;
+		pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		if (!dev_get_platdata(&pdev->dev))
 			return -ENXIO;
@@ -161,6 +178,7 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 		scl_pin = pdata->scl_pin;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = gpio_request(sda_pin, "sda");
 	if (ret) {
@@ -181,6 +199,8 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 		goto err_add_bus;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_gpio_request(&pdev->dev, sda_pin, "sda");
 	if (ret) {
 		if (ret == -EINVAL)
@@ -197,6 +217,9 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adap = &priv->adap;
 	bit_data = &priv->bit_data;
@@ -208,7 +231,11 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 		of_i2c_gpio_get_props(pdev->dev.of_node, pdata);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(pdata, pdev->dev.platform_data, sizeof(*pdata));
+=======
+		memcpy(pdata, dev_get_platdata(&pdev->dev), sizeof(*pdata));
+>>>>>>> v3.18
 =======
 		memcpy(pdata, dev_get_platdata(&pdev->dev), sizeof(*pdata));
 >>>>>>> v3.18
@@ -263,9 +290,13 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 	ret = i2c_bit_add_numbered_bus(adap);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_add_bus;
 
 	of_i2c_register_devices(adap);
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -279,6 +310,7 @@ static int i2c_gpio_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_add_bus:
 	gpio_free(scl_pin);
@@ -288,13 +320,18 @@ err_request_sda:
 	return ret;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int i2c_gpio_remove(struct platform_device *pdev)
 {
 	struct i2c_gpio_private_data *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_gpio_platform_data *pdata;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct i2c_adapter *adap;
@@ -302,11 +339,16 @@ static int i2c_gpio_remove(struct platform_device *pdev)
 	priv = platform_get_drvdata(pdev);
 	adap = &priv->adap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = &priv->pdata;
 
 	i2c_del_adapter(adap);
 	gpio_free(pdata->scl_pin);
 	gpio_free(pdata->sda_pin);
+=======
+
+	i2c_del_adapter(adap);
+>>>>>>> v3.18
 =======
 
 	i2c_del_adapter(adap);

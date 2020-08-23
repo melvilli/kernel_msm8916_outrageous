@@ -13,8 +13,12 @@
  *                                                                           *
  * You should have received a copy of the GNU General Public License along   *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * with this program; if not, write to the Free Software Foundation, Inc.,   *
  * 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.                 *
+=======
+ * with this program; if not, see <http://www.gnu.org/licenses/>.            *
+>>>>>>> v3.18
 =======
  * with this program; if not, see <http://www.gnu.org/licenses/>.            *
 >>>>>>> v3.18
@@ -504,7 +508,11 @@ static const struct cmac_statistics *pm3393_update_statistics(struct cmac *mac,
 static int pm3393_macaddress_get(struct cmac *cmac, u8 mac_addr[6])
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(mac_addr, cmac->instance->mac_addr, 6);
+=======
+	memcpy(mac_addr, cmac->instance->mac_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(mac_addr, cmac->instance->mac_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -535,7 +543,11 @@ static int pm3393_macaddress_set(struct cmac *cmac, u8 ma[6])
 
 	/* Store local copy */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(cmac->instance->mac_addr, ma, 6);
+=======
+	memcpy(cmac->instance->mac_addr, ma, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(cmac->instance->mac_addr, ma, ETH_ALEN);
 >>>>>>> v3.18

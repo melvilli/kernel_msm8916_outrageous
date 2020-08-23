@@ -16,7 +16,11 @@
 #include <linux/kobject.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/tracepoint.h>
+=======
+#include <linux/jump_label.h>
+>>>>>>> v3.18
 =======
 #include <linux/jump_label.h>
 >>>>>>> v3.18
@@ -34,8 +38,12 @@
 #define MODULE_NAME_LEN MAX_PARAM_PREFIX_LEN
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct modversion_info
 {
+=======
+struct modversion_info {
+>>>>>>> v3.18
 =======
 struct modversion_info {
 >>>>>>> v3.18
@@ -51,6 +59,10 @@ struct module_kobject {
 	struct kobject *drivers_dir;
 	struct module_param_attrs *mp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct completion *kobj_completion;
+>>>>>>> v3.18
 =======
 	struct completion *kobj_completion;
 >>>>>>> v3.18
@@ -95,6 +107,7 @@ void sort_main_extable(void);
 void trim_init_extable(struct module *m);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef MODULE
 #define MODULE_GENERIC_TABLE(gtype,name)			\
 extern const struct gtype##_id __mod_##gtype##_table		\
@@ -106,6 +119,8 @@ extern const struct gtype##_id __mod_##gtype##_table		\
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Generic info of form tag = "info" */
 #define MODULE_INFO(tag, info) __MODULE_INFO(tag, tag, info)
 
@@ -113,12 +128,18 @@ extern const struct gtype##_id __mod_##gtype##_table		\
 #define MODULE_ALIAS(_alias) MODULE_INFO(alias, _alias)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Soft module dependencies. See man modprobe.d for details.
  * Example: MODULE_SOFTDEP("pre: module-foo module-bar post: module-baz")
  */
 #define MODULE_SOFTDEP(_softdep) MODULE_INFO(softdep, _softdep)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The following license idents are currently accepted as indicating free
@@ -144,7 +165,11 @@ extern const struct gtype##_id __mod_##gtype##_table		\
  *
  * This exists for several reasons
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 1.	So modinfo can show license info for users wanting to vet their setup 
+=======
+ * 1.	So modinfo can show license info for users wanting to vet their setup
+>>>>>>> v3.18
 =======
  * 1.	So modinfo can show license info for users wanting to vet their setup
 >>>>>>> v3.18
@@ -159,6 +184,7 @@ extern const struct gtype##_id __mod_##gtype##_table		\
  * authors use multiple MODULE_AUTHOR() statements/lines.
  */
 #define MODULE_AUTHOR(_author) MODULE_INFO(author, _author)
+<<<<<<< HEAD
 <<<<<<< HEAD
   
 /* What your module does. */
@@ -182,6 +208,8 @@ extern const struct gtype##_id __mod_##gtype##_table		\
   local headers in "srcversion".
 */
 =======
+=======
+>>>>>>> v3.18
 
 /* What your module does. */
 #define MODULE_DESCRIPTION(_description) MODULE_INFO(description, _description)
@@ -211,6 +239,9 @@ extern const struct gtype##_id __mod_##gtype##_table		\
  * Using this automatically adds a checksum of the .c files and the
  * local headers in "srcversion".
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(MODULE) || !defined(CONFIG_SYSFS)
@@ -280,6 +311,7 @@ struct module_ref {
 } __attribute((aligned(2 * sizeof(unsigned long))));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mod_kallsyms {
 	Elf_Sym *symtab;
 	unsigned int num_symtab;
@@ -288,6 +320,9 @@ struct mod_kallsyms {
 
 struct module
 {
+=======
+struct module {
+>>>>>>> v3.18
 =======
 struct module {
 >>>>>>> v3.18
@@ -378,10 +413,13 @@ struct module {
 
 #ifdef CONFIG_KALLSYMS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Protected by RCU and/or module_mutex: use rcu_dereference() */
 	struct mod_kallsyms *kallsyms;
 	struct mod_kallsyms core_kallsyms;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We keep the symbol and string tables for kallsyms.
 	 * The core_* fields below are temporary, loader-only (they
@@ -390,6 +428,9 @@ struct module {
 	Elf_Sym *symtab, *core_symtab;
 	unsigned int num_symtab, core_num_syms;
 	char *strtab, *core_strtab;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Section attributes */
@@ -437,9 +478,12 @@ struct module {
 	struct list_head target_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Who is waiting for us to be unloaded */
 	struct task_struct *waiter;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Destruction function. */
@@ -475,7 +519,12 @@ bool is_module_percpu_address(unsigned long addr);
 bool is_module_text_address(unsigned long addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int within_module_core(unsigned long addr, const struct module *mod)
+=======
+static inline bool within_module_core(unsigned long addr,
+				      const struct module *mod)
+>>>>>>> v3.18
 =======
 static inline bool within_module_core(unsigned long addr,
 				      const struct module *mod)
@@ -486,7 +535,12 @@ static inline bool within_module_core(unsigned long addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int within_module_init(unsigned long addr, const struct module *mod)
+=======
+static inline bool within_module_init(unsigned long addr,
+				      const struct module *mod)
+>>>>>>> v3.18
 =======
 static inline bool within_module_init(unsigned long addr,
 				      const struct module *mod)
@@ -497,12 +551,18 @@ static inline bool within_module_init(unsigned long addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool within_module(unsigned long addr, const struct module *mod)
 {
 	return within_module_init(addr, mod) || within_module_core(addr, mod);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Search for module by name: must hold module_mutex. */
 struct module *find_module(const char *name);
@@ -545,7 +605,11 @@ int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
 extern void __module_put_and_exit(struct module *mod, long code)
 	__attribute__((noreturn));
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define module_put_and_exit(code) __module_put_and_exit(THIS_MODULE, code);
+=======
+#define module_put_and_exit(code) __module_put_and_exit(THIS_MODULE, code)
+>>>>>>> v3.18
 =======
 #define module_put_and_exit(code) __module_put_and_exit(THIS_MODULE, code)
 >>>>>>> v3.18
@@ -578,8 +642,13 @@ static inline void __module_get(struct module *module)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define symbol_put(x) do { } while(0)
 #define symbol_put_addr(p) do { } while(0)
+=======
+#define symbol_put(x) do { } while (0)
+#define symbol_put_addr(p) do { } while (0)
+>>>>>>> v3.18
 =======
 #define symbol_put(x) do { } while (0)
 #define symbol_put_addr(p) do { } while (0)
@@ -610,8 +679,13 @@ int lookup_module_symbol_attrs(unsigned long addr, unsigned long *size, unsigned
 const struct exception_table_entry *search_module_extables(unsigned long addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int register_module_notifier(struct notifier_block * nb);
 int unregister_module_notifier(struct notifier_block * nb);
+=======
+int register_module_notifier(struct notifier_block *nb);
+int unregister_module_notifier(struct notifier_block *nb);
+>>>>>>> v3.18
 =======
 int register_module_notifier(struct notifier_block *nb);
 int unregister_module_notifier(struct notifier_block *nb);
@@ -656,8 +730,13 @@ static inline bool is_module_text_address(unsigned long addr)
 /* Get/put a kernel symbol (calls should be symmetric) */
 #define symbol_get(x) ({ extern typeof(x) x __attribute__((weak)); &(x); })
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define symbol_put(x) do { } while(0)
 #define symbol_put_addr(x) do { } while(0)
+=======
+#define symbol_put(x) do { } while (0)
+#define symbol_put_addr(x) do { } while (0)
+>>>>>>> v3.18
 =======
 #define symbol_put(x) do { } while (0)
 #define symbol_put_addr(x) do { } while (0)
@@ -719,7 +798,11 @@ static inline int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int register_module_notifier(struct notifier_block * nb)
+=======
+static inline int register_module_notifier(struct notifier_block *nb)
+>>>>>>> v3.18
 =======
 static inline int register_module_notifier(struct notifier_block *nb)
 >>>>>>> v3.18
@@ -729,7 +812,11 @@ static inline int register_module_notifier(struct notifier_block *nb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int unregister_module_notifier(struct notifier_block * nb)
+=======
+static inline int unregister_module_notifier(struct notifier_block *nb)
+>>>>>>> v3.18
 =======
 static inline int unregister_module_notifier(struct notifier_block *nb)
 >>>>>>> v3.18

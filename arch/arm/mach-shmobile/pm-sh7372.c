@@ -22,6 +22,10 @@
 #include <linux/bitrev.h>
 #include <linux/console.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -30,14 +34,20 @@
 #include <asm/tlbflush.h>
 #include <asm/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 #include <mach/sh7372.h>
 #include <mach/pm-rmobile.h>
 =======
+=======
+>>>>>>> v3.18
 
 #include "common.h"
 #include "pm-rmobile.h"
 #include "sh7372.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DBG */
@@ -363,6 +373,12 @@ static void sh7372_enter_a4s_common(int pllc0_on)
 static void sh7372_pm_setup_smfram(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* pass physical address of cpu_resume() to assembly resume code */
+	sh7372_cpu_resume = virt_to_phys(cpu_resume);
+
+>>>>>>> v3.18
 =======
 	/* pass physical address of cpu_resume() to assembly resume code */
 	sh7372_cpu_resume = virt_to_phys(cpu_resume);

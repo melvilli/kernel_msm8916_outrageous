@@ -320,7 +320,11 @@ extern struct cpu_tlb_fns cpu_tlb;
 #define tlb_l2_op(f, regs, arg)	__tlb_op(f, "p15, 1, %0, " regs, arg)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void local_flush_tlb_all(void)
+=======
+static inline void __local_flush_tlb_all(void)
+>>>>>>> v3.18
 =======
 static inline void __local_flush_tlb_all(void)
 >>>>>>> v3.18
@@ -328,6 +332,7 @@ static inline void __local_flush_tlb_all(void)
 	const int zero = 0;
 	const unsigned int __tlb_flag = __cpu_tlb_flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tlb_flag(TLB_WB))
 		dsb();
@@ -340,6 +345,8 @@ static inline void __local_flush_tlb_all(void)
 	if (tlb_flag(TLB_BARRIER)) {
 		dsb();
 =======
+=======
+>>>>>>> v3.18
 	tlb_op(TLB_V4_U_FULL | TLB_V6_U_FULL, "c8, c7, 0", zero);
 	tlb_op(TLB_V4_D_FULL | TLB_V6_D_FULL, "c8, c6, 0", zero);
 	tlb_op(TLB_V4_I_FULL | TLB_V6_I_FULL, "c8, c5, 0", zero);
@@ -358,11 +365,15 @@ static inline void local_flush_tlb_all(void)
 
 	if (tlb_flag(TLB_BARRIER)) {
 		dsb(nsh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		isb();
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void local_flush_tlb_mm(struct mm_struct *mm)
 {
@@ -376,6 +387,8 @@ static inline void local_flush_tlb_mm(struct mm_struct *mm)
 	if (possible_tlb_flags & (TLB_V4_U_FULL|TLB_V4_D_FULL|TLB_V4_I_FULL)) {
 		if (cpumask_test_cpu(get_cpu(), mm_cpumask(mm))) {
 =======
+=======
+>>>>>>> v3.18
 static inline void __flush_tlb_all(void)
 {
 	const int zero = 0;
@@ -401,13 +414,19 @@ static inline void __local_flush_tlb_mm(struct mm_struct *mm)
 
 	if (possible_tlb_flags & (TLB_V4_U_FULL|TLB_V4_D_FULL|TLB_V4_I_FULL)) {
 		if (cpumask_test_cpu(smp_processor_id(), mm_cpumask(mm))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tlb_op(TLB_V4_U_FULL, "c8, c7, 0", zero);
 			tlb_op(TLB_V4_D_FULL, "c8, c6, 0", zero);
 			tlb_op(TLB_V4_I_FULL, "c8, c5, 0", zero);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_cpu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -415,6 +434,7 @@ static inline void __local_flush_tlb_mm(struct mm_struct *mm)
 	tlb_op(TLB_V6_U_ASID, "c8, c7, 2", asid);
 	tlb_op(TLB_V6_D_ASID, "c8, c6, 2", asid);
 	tlb_op(TLB_V6_I_ASID, "c8, c5, 2", asid);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ARM_ERRATA_720789
 	tlb_op(TLB_V7_UIS_ASID, "c8, c3, 0", zero);
@@ -429,6 +449,8 @@ static inline void __local_flush_tlb_mm(struct mm_struct *mm)
 static inline void
 local_flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
 =======
+=======
+>>>>>>> v3.18
 }
 
 static inline void local_flush_tlb_mm(struct mm_struct *mm)
@@ -466,6 +488,9 @@ static inline void __flush_tlb_mm(struct mm_struct *mm)
 
 static inline void
 __local_flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const int zero = 0;
@@ -474,9 +499,12 @@ __local_flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
 	uaddr = (uaddr & PAGE_MASK) | ASID(vma->vm_mm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tlb_flag(TLB_WB))
 		dsb();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (possible_tlb_flags & (TLB_V4_U_PAGE|TLB_V4_D_PAGE|TLB_V4_I_PAGE|TLB_V4_I_FULL) &&
@@ -492,8 +520,11 @@ __local_flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
 	tlb_op(TLB_V6_D_PAGE, "c8, c6, 1", uaddr);
 	tlb_op(TLB_V6_I_PAGE, "c8, c5, 1", uaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ARM_ERRATA_720789) || defined(CONFIG_ARCH_MSM8X60)
 =======
+=======
+>>>>>>> v3.18
 }
 
 static inline void
@@ -525,6 +556,9 @@ __flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
 
 	__local_flush_tlb_page(vma, uaddr);
 #ifdef CONFIG_ARM_ERRATA_720789
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tlb_op(TLB_V7_UIS_PAGE, "c8, c3, 3", uaddr & PAGE_MASK);
 #else
@@ -533,26 +567,35 @@ __flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
 
 	if (tlb_flag(TLB_BARRIER))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dsb();
 }
 
 static inline void local_flush_tlb_kernel_page(unsigned long kaddr)
 =======
+=======
+>>>>>>> v3.18
 		dsb(ish);
 }
 
 static inline void __local_flush_tlb_kernel_page(unsigned long kaddr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const int zero = 0;
 	const unsigned int __tlb_flag = __cpu_tlb_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kaddr &= PAGE_MASK;
 
 	if (tlb_flag(TLB_WB))
 		dsb();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tlb_op(TLB_V4_U_PAGE, "c8, c7, 1", kaddr);
@@ -565,6 +608,7 @@ static inline void __local_flush_tlb_kernel_page(unsigned long kaddr)
 	tlb_op(TLB_V6_D_PAGE, "c8, c6, 1", kaddr);
 	tlb_op(TLB_V6_I_PAGE, "c8, c5, 1", kaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM8X60
 	tlb_op(TLB_V7_UIS_PAGE, "c8, c3, 3", kaddr);
 #else
@@ -574,6 +618,8 @@ static inline void __local_flush_tlb_kernel_page(unsigned long kaddr)
 	if (tlb_flag(TLB_BARRIER)) {
 		dsb();
 =======
+=======
+>>>>>>> v3.18
 }
 
 static inline void local_flush_tlb_kernel_page(unsigned long kaddr)
@@ -608,24 +654,34 @@ static inline void __flush_tlb_kernel_page(unsigned long kaddr)
 
 	if (tlb_flag(TLB_BARRIER)) {
 		dsb(ish);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		isb();
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void local_flush_bp_all(void)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Branch predictor maintenance is paired with full TLB invalidation, so
  * there is no need for any barriers here.
  */
 static inline void __local_flush_bp_all(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const int zero = 0;
 	const unsigned int __tlb_flag = __cpu_tlb_flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tlb_flag(TLB_V7_UIS_BP))
 		asm("mcr p15, 0, %0, c7, c1, 6" : : "r" (zero));
@@ -651,6 +707,8 @@ static inline void dummy_flush_tlb_a15_erratum(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (tlb_flag(TLB_V6_BP))
 		asm("mcr p15, 0, %0, c7, c5, 6" : : "r" (zero));
 }
@@ -674,6 +732,9 @@ static inline void __flush_bp_all(void)
 	if (tlb_flag(TLB_V7_UIS_BP))
 		asm("mcr p15, 0, %0, c7, c1, 6" : : "r" (zero));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -698,7 +759,11 @@ static inline void flush_pmd_entry(void *pmd)
 
 	if (tlb_flag(TLB_WB))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dsb();
+=======
+		dsb(ishst);
+>>>>>>> v3.18
 =======
 		dsb(ishst);
 >>>>>>> v3.18
@@ -762,8 +827,11 @@ static inline void update_mmu_cache(struct vm_area_struct *vma,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MMU */
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_SMP)	/* !CONFIG_MMU */
 
 #ifndef __ASSEMBLY__
@@ -805,6 +873,9 @@ static inline bool erratum_a15_798181(void)
 	return false;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

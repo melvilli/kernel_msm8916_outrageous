@@ -42,6 +42,11 @@
 #include <linux/dma-mapping.h>
 #include <linux/fs_uart_pd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -206,6 +211,7 @@ static void cpm_uart_stop_rx(struct uart_port *port)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Enable Modem status interrupts
  */
 static void cpm_uart_enable_ms(struct uart_port *port)
@@ -214,6 +220,8 @@ static void cpm_uart_enable_ms(struct uart_port *port)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Generate a break.
@@ -978,7 +986,11 @@ static void cpm_uart_config_port(struct uart_port *port, int flags)
  */
 static void cpm_uart_early_write(struct uart_cpm_port *pinfo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const char *string, u_int count)
+=======
+		const char *string, u_int count, bool handle_linefeed)
+>>>>>>> v3.18
 =======
 		const char *string, u_int count, bool handle_linefeed)
 >>>>>>> v3.18
@@ -1024,7 +1036,11 @@ static void cpm_uart_early_write(struct uart_cpm_port *pinfo,
 
 		/* if a LF, also do CR... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*string == 10) {
+=======
+		if (handle_linefeed && *string == 10) {
+>>>>>>> v3.18
 =======
 		if (handle_linefeed && *string == 10) {
 >>>>>>> v3.18
@@ -1126,7 +1142,11 @@ static void cpm_put_poll_char(struct uart_port *port,
 
 	ch[0] = (char)c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpm_uart_early_write(pinfo, ch, 1);
+=======
+	cpm_uart_early_write(pinfo, ch, 1, false);
+>>>>>>> v3.18
 =======
 	cpm_uart_early_write(pinfo, ch, 1, false);
 >>>>>>> v3.18
@@ -1141,7 +1161,10 @@ static struct uart_ops cpm_uart_pops = {
 	.start_tx	= cpm_uart_start_tx,
 	.stop_rx	= cpm_uart_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= cpm_uart_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= cpm_uart_break_ctl,
@@ -1231,7 +1254,11 @@ static int cpm_uart_init_port(struct device_node *np,
 	spin_lock_init(&pinfo->port.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinfo->port.irq = of_irq_to_resource(np, 0, NULL);
+=======
+	pinfo->port.irq = irq_of_parse_and_map(np, 0);
+>>>>>>> v3.18
 =======
 	pinfo->port.irq = irq_of_parse_and_map(np, 0);
 >>>>>>> v3.18
@@ -1241,9 +1268,12 @@ static int cpm_uart_init_port(struct device_node *np,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < NUM_GPIOS; i++)
 		pinfo->gpios[i] = of_get_gpio(np, i);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < NUM_GPIOS; i++) {
 		int gpio;
 
@@ -1270,6 +1300,9 @@ static int cpm_uart_init_port(struct device_node *np,
 			pinfo->gpios[i] = gpio;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PPC_EARLY_DEBUG_CPM
@@ -1306,7 +1339,11 @@ static void cpm_uart_console_write(struct console *co, const char *s,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpm_uart_early_write(pinfo, s, count);
+=======
+	cpm_uart_early_write(pinfo, s, count, true);
+>>>>>>> v3.18
 =======
 	cpm_uart_early_write(pinfo, s, count, true);
 >>>>>>> v3.18
@@ -1445,7 +1482,11 @@ static int cpm_uart_probe(struct platform_device *ofdev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, pinfo);
+=======
+	platform_set_drvdata(ofdev, pinfo);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, pinfo);
 >>>>>>> v3.18
@@ -1463,7 +1504,11 @@ static int cpm_uart_probe(struct platform_device *ofdev)
 static int cpm_uart_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_cpm_port *pinfo = dev_get_drvdata(&ofdev->dev);
+=======
+	struct uart_cpm_port *pinfo = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct uart_cpm_port *pinfo = platform_get_drvdata(ofdev);
 >>>>>>> v3.18

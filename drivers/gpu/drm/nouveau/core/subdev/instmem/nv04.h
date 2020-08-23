@@ -6,7 +6,13 @@
 #include <core/mm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/instmem.h>
+=======
+#include "priv.h"
+
+extern struct nouveau_instobj_impl nv04_instobj_oclass;
+>>>>>>> v3.18
 =======
 #include "priv.h"
 

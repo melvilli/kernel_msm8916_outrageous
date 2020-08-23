@@ -131,8 +131,12 @@ static int mxc_mmc1_init(struct device *dev,
 
 	ret = request_irq(gpio_to_irq(IOMUX_TO_GPIO(MX31_PIN_GPIO1_1)),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  detect_irq,
 			  IRQF_DISABLED | IRQF_TRIGGER_FALLING,
+=======
+			  detect_irq, IRQF_TRIGGER_FALLING,
+>>>>>>> v3.18
 =======
 			  detect_irq, IRQF_TRIGGER_FALLING,
 >>>>>>> v3.18

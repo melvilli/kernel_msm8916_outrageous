@@ -77,6 +77,10 @@
 #define SERIO_PS2MULT	0x3c
 #define SERIO_TSC40	0x3d
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SERIO_WACOM_IV	0x3e
+>>>>>>> v3.18
 =======
 #define SERIO_WACOM_IV	0x3e
 >>>>>>> v3.18

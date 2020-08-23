@@ -14,7 +14,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -92,8 +95,12 @@ static irqreturn_t mpr_touchkey_interrupt(int irq, void *dev_id)
 	struct i2c_client *client = mpr121->client;
 	struct input_dev *input = mpr121->input_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long bit_changed;
 	unsigned int key_num;
+=======
+	unsigned int key_num, key_val, pressed;
+>>>>>>> v3.18
 =======
 	unsigned int key_num, key_val, pressed;
 >>>>>>> v3.18
@@ -115,6 +122,7 @@ static irqreturn_t mpr_touchkey_interrupt(int irq, void *dev_id)
 	reg &= TOUCH_STATUS_MASK;
 	/* use old press bit to figure out which bit changed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bit_changed = reg ^ mpr121->statusbits;
 	mpr121->statusbits = reg;
 	for_each_set_bit(key_num, &bit_changed, mpr121->keycount) {
@@ -133,6 +141,8 @@ static irqreturn_t mpr_touchkey_interrupt(int irq, void *dev_id)
 	input_sync(input);
 
 =======
+=======
+>>>>>>> v3.18
 	key_num = ffs(reg ^ mpr121->statusbits) - 1;
 	pressed = reg & (1 << key_num);
 	mpr121->statusbits = reg;
@@ -146,6 +156,9 @@ static irqreturn_t mpr_touchkey_interrupt(int irq, void *dev_id)
 	dev_dbg(&client->dev, "key %d %d %s\n", key_num, key_val,
 		pressed ? "pressed" : "released");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return IRQ_HANDLED;
@@ -217,7 +230,12 @@ static int mpr_touchkey_probe(struct i2c_client *client,
 			      const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct mpr121_platform_data *pdata = client->dev.platform_data;
+=======
+	const struct mpr121_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct mpr121_platform_data *pdata =
 			dev_get_platdata(&client->dev);
@@ -264,7 +282,10 @@ static int mpr_touchkey_probe(struct i2c_client *client,
 	input_dev->dev.parent = &client->dev;
 	input_dev->evbit[0] = BIT_MASK(EV_KEY) | BIT_MASK(EV_REP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_set_capability(input_dev, EV_MSC, MSC_SCAN);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

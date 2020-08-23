@@ -2,6 +2,11 @@
 #define _LINUX_PRCTL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -125,7 +130,10 @@
 # define PR_SET_MM_AUXV			12
 # define PR_SET_MM_EXE_FILE		13
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # define PR_SET_MM_MAP			14
 # define PR_SET_MM_MAP_SIZE		15
 
@@ -151,6 +159,9 @@ struct prctl_mm_map {
 	__u32	auxv_size;		/* vector size */
 	__u32	exe_fd;			/* /proc/$pid/exe link file */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -183,6 +194,7 @@ struct prctl_mm_map {
 #define PR_GET_TID_ADDRESS	40
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Sets the timerslack for arbitrary threads
  * arg2 slack value, 0 means "use default"
  * arg3 pid of the thread whose timer slack needs to be set
@@ -198,6 +210,10 @@ struct prctl_mm_map {
 # define PR_CAP_AMBIENT_RAISE		2
 # define PR_CAP_AMBIENT_LOWER		3
 # define PR_CAP_AMBIENT_CLEAR_ALL	4
+=======
+#define PR_SET_THP_DISABLE	41
+#define PR_GET_THP_DISABLE	42
+>>>>>>> v3.18
 =======
 #define PR_SET_THP_DISABLE	41
 #define PR_GET_THP_DISABLE	42

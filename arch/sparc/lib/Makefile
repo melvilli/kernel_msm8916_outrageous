@@ -42,7 +42,11 @@ lib-$(CONFIG_SPARC64) += copy_in_user.o user_fixup.o memmove.o
 lib-$(CONFIG_SPARC64) += mcount.o ipcsum.o xor.o hweight.o ffs.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y                 += iomap.o
+=======
+obj-$(CONFIG_SPARC64) += iomap.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SPARC64) += iomap.o
 >>>>>>> v3.18

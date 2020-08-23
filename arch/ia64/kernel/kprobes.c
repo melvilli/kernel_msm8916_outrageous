@@ -397,7 +397,11 @@ static void __kprobes restore_previous_kprobe(struct kprobe_ctlblk *kcb)
 	unsigned int i;
 	i = atomic_read(&kcb->prev_kprobe_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = kcb->prev_kprobe[i-1].kp;
+=======
+	__this_cpu_write(current_kprobe, kcb->prev_kprobe[i-1].kp);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, kcb->prev_kprobe[i-1].kp);
 >>>>>>> v3.18
@@ -409,7 +413,11 @@ static void __kprobes set_current_kprobe(struct kprobe *p,
 			struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = p;
+=======
+	__this_cpu_write(current_kprobe, p);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, p);
 >>>>>>> v3.18
@@ -832,7 +840,11 @@ static int __kprobes pre_kprobes_handler(struct die_args *args)
 			 * jprobe instrumented function just completed
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p = __get_cpu_var(current_kprobe);
+=======
+			p = __this_cpu_read(current_kprobe);
+>>>>>>> v3.18
 =======
 			p = __this_cpu_read(current_kprobe);
 >>>>>>> v3.18
@@ -960,7 +972,11 @@ int __kprobes kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 		/*
 		 * We increment the nmissed count for accounting,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * we can also use npre/npostfault count for accouting
+=======
+		 * we can also use npre/npostfault count for accounting
+>>>>>>> v3.18
 =======
 		 * we can also use npre/npostfault count for accounting
 >>>>>>> v3.18

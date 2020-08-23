@@ -383,7 +383,11 @@
 #define S5P_FIMV_R2H_CMD_ERR_RET		32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Dummy definition for MFCv6 compatibilty */
+=======
+/* Dummy definition for MFCv6 compatibility */
+>>>>>>> v3.18
 =======
 /* Dummy definition for MFCv6 compatibility */
 >>>>>>> v3.18

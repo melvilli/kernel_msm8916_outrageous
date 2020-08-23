@@ -29,6 +29,7 @@ asmlinkage void twofish_dec_blk_3way(struct twofish_ctx *ctx, u8 *dst,
 				     const u8 *src);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 8-way parallel cipher functions */
 asmlinkage void twofish_ecb_enc_8way(struct twofish_ctx *ctx, u8 *dst,
 				     const u8 *src);
@@ -43,6 +44,8 @@ asmlinkage void twofish_xts_enc_8way(struct twofish_ctx *ctx, u8 *dst,
 asmlinkage void twofish_xts_dec_8way(struct twofish_ctx *ctx, u8 *dst,
 				     const u8 *src, le128 *iv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* helpers from twofish_x86_64-3way module */
@@ -61,10 +64,13 @@ extern int xts_twofish_setkey(struct crypto_tfm *tfm, const u8 *key,
 			      unsigned int keylen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* helpers from twofish-avx module */
 extern void twofish_xts_enc(void *ctx, u128 *dst, const u128 *src, le128 *iv);
 extern void twofish_xts_dec(void *ctx, u128 *dst, const u128 *src, le128 *iv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ASM_X86_TWOFISH_H */

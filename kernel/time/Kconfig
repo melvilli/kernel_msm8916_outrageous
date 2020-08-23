@@ -13,12 +13,18 @@ config ARCH_CLOCKSOURCE_DATA
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Clocksources require validation of the clocksource against the last
 # cycle update - x86/TSC misfeature
 config CLOCKSOURCE_VALIDATE_LAST_CYCLE
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Timekeeping vsyscall support
 config GENERIC_TIME_VSYSCALL
@@ -29,10 +35,13 @@ config GENERIC_TIME_VSYSCALL_OLD
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ktime_t scalar 64bit nsec representation
 config KTIME_SCALAR
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # Old style timekeeping
@@ -112,7 +121,11 @@ config NO_HZ_FULL
 	depends on HAVE_CONTEXT_TRACKING
 	# VIRT_CPU_ACCOUNTING_GEN dependency
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on 64BIT
+=======
+	depends on HAVE_VIRT_CPU_ACCOUNTING_GEN
+>>>>>>> v3.18
 =======
 	depends on HAVE_VIRT_CPU_ACCOUNTING_GEN
 >>>>>>> v3.18
@@ -121,7 +134,10 @@ config NO_HZ_FULL
 	select RCU_NOCB_CPU
 	select VIRT_CPU_ACCOUNTING_GEN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CONTEXT_TRACKING_FORCE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select IRQ_WORK
@@ -144,7 +160,11 @@ endchoice
 
 config NO_HZ_FULL_ALL
 <<<<<<< HEAD
+<<<<<<< HEAD
        bool "Full dynticks system on all CPUs by default"
+=======
+       bool "Full dynticks system on all CPUs by default (except CPU 0)"
+>>>>>>> v3.18
 =======
        bool "Full dynticks system on all CPUs by default (except CPU 0)"
 >>>>>>> v3.18
@@ -157,7 +177,10 @@ config NO_HZ_FULL_ALL
 	 handle the timekeeping duty.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NO_HZ_FULL_SYSIDLE
 	bool "Detect full-system idle state for full dynticks system"
 	depends on NO_HZ_FULL
@@ -208,6 +231,9 @@ config NO_HZ_FULL_SYSIDLE_SMALL
 
 	 Take the default if you are unsure.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NO_HZ
 	bool "Old Idle dynticks config"

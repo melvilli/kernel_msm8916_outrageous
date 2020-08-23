@@ -552,7 +552,11 @@ static int aac_eh_abort(struct scsi_cmnd* cmd)
 	int ret = FAILED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "%s: Host adapter abort request (%d,%d,%d,%d)\n",
+=======
+	printk(KERN_ERR "%s: Host adapter abort request (%d,%d,%d,%llu)\n",
+>>>>>>> v3.18
 =======
 	printk(KERN_ERR "%s: Host adapter abort request (%d,%d,%d,%llu)\n",
 >>>>>>> v3.18
@@ -1157,6 +1161,10 @@ static int aac_probe_one(struct pci_dev *pdev, const struct pci_device_id *id)
 	shost->unique_id = unique_id;
 	shost->max_cmd_len = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	shost->use_cmd_list = 1;
+>>>>>>> v3.18
 =======
 	shost->use_cmd_list = 1;
 >>>>>>> v3.18

@@ -26,7 +26,10 @@
 #include <linux/fs.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kthread.h>
@@ -44,8 +47,12 @@
 #include <asm/uaccess.h>
 #include <linux/memory.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+>>>>>>> v3.18
 =======
 #include <asm/plpar_wrappers.h>
 >>>>>>> v3.18
@@ -565,7 +572,10 @@ static int cmm_mem_going_offline(void *arg)
 				free_page((unsigned long)cmm_page_list);
 				cmm_page_list = pa_last;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				continue;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}

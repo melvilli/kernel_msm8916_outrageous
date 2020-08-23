@@ -13,10 +13,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -37,8 +40,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/interrupt.h>
@@ -48,7 +56,10 @@
 #include "../comedidev.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mite.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ni_labpc.h"
@@ -62,6 +73,7 @@ static const struct labpc_boardinfo labpc_pci_boards[] = {
 		.name			= "ni_pci-1200",
 		.ai_speed		= 10000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.register_layout	= labpc_1200_layout,
 		.has_ao			= 1,
 		.ai_range_table		= &range_labpc_1200_ai,
@@ -72,6 +84,8 @@ static const struct labpc_boardinfo labpc_pci_boards[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.ai_scan_up		= 1,
 		.has_ao			= 1,
 		.is_labpc1200		= 1,
@@ -101,6 +115,9 @@ static int labpc_pci_mite_init(struct pci_dev *pcidev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int labpc_pci_auto_attach(struct comedi_device *dev,
 				 unsigned long context)
@@ -121,6 +138,7 @@ static int labpc_pci_auto_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -152,6 +170,8 @@ static void labpc_pci_detach(struct comedi_device *dev)
 		free_irq(dev->irq, dev);
 	comedi_pci_disable(dev);
 =======
+=======
+>>>>>>> v3.18
 	ret = labpc_pci_mite_init(pcidev);
 	if (ret)
 		return ret;
@@ -165,6 +185,9 @@ static void labpc_pci_detach(struct comedi_device *dev)
 		return -ENOMEM;
 
 	return labpc_common_attach(dev, pcidev->irq, IRQF_SHARED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -173,15 +196,21 @@ static struct comedi_driver labpc_pci_comedi_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= labpc_pci_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= labpc_pci_detach,
 };
 
 static DEFINE_PCI_DEVICE_TABLE(labpc_pci_table) = {
 =======
+=======
+>>>>>>> v3.18
 	.detach		= comedi_pci_detach,
 };
 
 static const struct pci_device_id labpc_pci_table[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_VDEVICE(NI, 0x161), BOARD_NI_PCI1200 },
 	{ 0 }

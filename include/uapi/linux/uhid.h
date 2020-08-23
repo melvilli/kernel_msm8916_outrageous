@@ -22,14 +22,20 @@
 #include <linux/input.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 enum uhid_event_type {
 	UHID_CREATE,
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hid.h>
 
 enum uhid_event_type {
 	__UHID_LEGACY_CREATE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	UHID_DESTROY,
 	UHID_START,
@@ -37,6 +43,7 @@ enum uhid_event_type {
 	UHID_OPEN,
 	UHID_CLOSE,
 	UHID_OUTPUT,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	UHID_OUTPUT_EV,
 	UHID_INPUT,
@@ -52,6 +59,8 @@ struct uhid_create_req {
 	__u16 rd_size;
 
 =======
+=======
+>>>>>>> v3.18
 	__UHID_LEGACY_OUTPUT_EV,
 	__UHID_LEGACY_INPUT,
 	UHID_GET_REPORT,
@@ -67,6 +76,9 @@ struct uhid_create2_req {
 	__u8 phys[64];
 	__u8 uniq[64];
 	__u16 rd_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u16 bus;
 	__u32 vendor;
@@ -74,9 +86,12 @@ struct uhid_create2_req {
 	__u32 version;
 	__u32 country;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((__packed__));
 
 =======
+=======
+>>>>>>> v3.18
 	__u8 rd_data[HID_MAX_DESCRIPTOR_SIZE];
 } __attribute__((__packed__));
 
@@ -90,6 +105,9 @@ struct uhid_start_req {
 	__u64 dev_flags;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UHID_DATA_MAX 4096
 
@@ -100,9 +118,15 @@ enum uhid_report_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct uhid_input_req {
 	__u8 data[UHID_DATA_MAX];
 	__u16 size;
+=======
+struct uhid_input2_req {
+	__u16 size;
+	__u8 data[UHID_DATA_MAX];
+>>>>>>> v3.18
 =======
 struct uhid_input2_req {
 	__u16 size;
@@ -117,7 +141,10 @@ struct uhid_output_req {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct uhid_get_report_req {
 	__u32 id;
 	__u8 rnum;
@@ -181,6 +208,9 @@ struct uhid_input_req {
 } __attribute__((__packed__));
 
 /* Obsolete! Kernel uses UHID_OUTPUT exclusively now. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct uhid_output_ev_req {
 	__u16 type;
@@ -189,6 +219,10 @@ struct uhid_output_ev_req {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Obsolete! Kernel uses ABI compatible UHID_GET_REPORT. */
+>>>>>>> v3.18
 =======
 /* Obsolete! Kernel uses ABI compatible UHID_GET_REPORT. */
 >>>>>>> v3.18
@@ -199,6 +233,10 @@ struct uhid_feature_req {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Obsolete! Use ABI compatible UHID_GET_REPORT_REPLY. */
+>>>>>>> v3.18
 =======
 /* Obsolete! Use ABI compatible UHID_GET_REPORT_REPLY. */
 >>>>>>> v3.18
@@ -210,7 +248,10 @@ struct uhid_feature_answer_req {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * UHID Events
  * All UHID events from and to the kernel are encoded as "struct uhid_event".
@@ -220,6 +261,9 @@ struct uhid_feature_answer_req {
  * the kernel writes short events, user-space shall extend them with 0s.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct uhid_event {
 	__u32 type;
@@ -231,8 +275,11 @@ struct uhid_event {
 		struct uhid_output_ev_req output_ev;
 		struct uhid_feature_req feature;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct uhid_feature_answer_req feature_answer;
 =======
+=======
+>>>>>>> v3.18
 		struct uhid_get_report_req get_report;
 		struct uhid_feature_answer_req feature_answer;
 		struct uhid_get_report_reply_req get_report_reply;
@@ -241,6 +288,9 @@ struct uhid_event {
 		struct uhid_set_report_req set_report;
 		struct uhid_set_report_reply_req set_report_reply;
 		struct uhid_start_req start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} u;
 } __attribute__((__packed__));

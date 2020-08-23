@@ -21,10 +21,13 @@
 #include <linux/mount.h>
 #include <linux/pagevec.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/random.h>
 #include <linux/aio.h>
 #include <linux/uuid.h>
 #include <linux/file.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -33,6 +36,7 @@
 #include "segment.h"
 #include "xattr.h"
 #include "acl.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "gc.h"
 #include "trace.h"
@@ -55,6 +59,10 @@ static int f2fs_filemap_fault(struct vm_area_struct *vma,
 #include <trace/events/f2fs.h>
 
 >>>>>>> v3.18
+=======
+#include <trace/events/f2fs.h>
+
+>>>>>>> v3.18
 static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 						struct vm_fault *vmf)
 {
@@ -65,10 +73,13 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb_start_pagefault(inode->i_sb);
 
 	f2fs_bug_on(sbi, f2fs_has_inline_data(inode));
 =======
+=======
+>>>>>>> v3.18
 	f2fs_balance_fs(sbi);
 
 	sb_start_pagefault(inode->i_sb);
@@ -77,12 +88,16 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 	err = f2fs_convert_inline_data(inode, MAX_INLINE_DATA + 1, page);
 	if (err)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* block allocation */
 	f2fs_lock_op(sbi);
 	set_new_dnode(&dn, inode, NULL, NULL, 0);
 	err = f2fs_reserve_block(&dn, page->index);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (err) {
 		f2fs_unlock_op(sbi);
@@ -96,11 +111,16 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 	file_update_time(vma->vm_file);
 	down_read(&F2FS_I(inode)->i_mmap_sem);
 =======
+=======
+>>>>>>> v3.18
 	f2fs_unlock_op(sbi);
 	if (err)
 		goto out;
 
 	file_update_time(vma->vm_file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lock_page(page);
 	if (unlikely(page->mapping != inode->i_mapping ||
@@ -109,7 +129,11 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 		unlock_page(page);
 		err = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_sem;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -123,6 +147,7 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 
 	/* page is wholly or partially inside EOF */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((loff_t)(page->index + 1) << PAGE_SHIFT) >
 						i_size_read(inode)) {
 		unsigned offset;
@@ -133,6 +158,8 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 	if (!PageUptodate(page))
 		SetPageUptodate(page);
 =======
+=======
+>>>>>>> v3.18
 	if (((page->index + 1) << PAGE_CACHE_SHIFT) > i_size_read(inode)) {
 		unsigned offset;
 		offset = i_size_read(inode) & ~PAGE_CACHE_MASK;
@@ -140,11 +167,15 @@ static int f2fs_vm_page_mkwrite(struct vm_area_struct *vma,
 	}
 	set_page_dirty(page);
 	SetPageUptodate(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	trace_f2fs_vm_page_mkwrite(page, DATA);
 mapped:
 	/* fill the page */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	f2fs_wait_on_page_writeback(page, DATA, false);
 
@@ -162,18 +193,29 @@ out:
 out:
 	sb_end_pagefault(inode->i_sb);
 >>>>>>> v3.18
+=======
+	f2fs_wait_on_page_writeback(page, DATA);
+out:
+	sb_end_pagefault(inode->i_sb);
+>>>>>>> v3.18
 	return block_page_mkwrite_return(err);
 }
 
 static const struct vm_operations_struct f2fs_file_vm_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fault		= f2fs_filemap_fault,
 	.page_mkwrite	= f2fs_vm_page_mkwrite,
 =======
+=======
+>>>>>>> v3.18
 	.fault		= filemap_fault,
 	.map_pages	= filemap_map_pages,
 	.page_mkwrite	= f2fs_vm_page_mkwrite,
 	.remap_pages	= generic_file_remap_pages,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -188,12 +230,18 @@ static int get_parent_ino(struct inode *inode, nid_t *pino)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (update_dent_inode(inode, &dentry->d_name)) {
 		dput(dentry);
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*pino = parent_ino(dentry);
 	dput(dentry);
@@ -208,8 +256,11 @@ static inline bool need_do_checkpoint(struct inode *inode)
 	if (!S_ISREG(inode->i_mode) || inode->i_nlink != 1)
 		need_cp = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (is_sbi_flag_set(sbi, SBI_NEED_CP))
 		need_cp = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	else if (file_wrong_pino(inode))
@@ -219,9 +270,13 @@ static inline bool need_do_checkpoint(struct inode *inode)
 	else if (!is_checkpointed_node(sbi, F2FS_I(inode)->i_pino))
 		need_cp = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (test_opt(sbi, FASTBOOT))
 		need_cp = true;
 	else if (sbi->active_logs == 2)
+=======
+	else if (F2FS_I(inode)->xattr_ver == cur_cp_version(F2FS_CKPT(sbi)))
+>>>>>>> v3.18
 =======
 	else if (F2FS_I(inode)->xattr_ver == cur_cp_version(F2FS_CKPT(sbi)))
 >>>>>>> v3.18
@@ -230,6 +285,7 @@ static inline bool need_do_checkpoint(struct inode *inode)
 	return need_cp;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool need_inode_page_update(struct f2fs_sb_info *sbi, nid_t ino)
 {
@@ -261,10 +317,15 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
 {
 	struct inode *inode = file->f_mapping->host;
 =======
+=======
+>>>>>>> v3.18
 int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 {
 	struct inode *inode = file->f_mapping->host;
 	struct f2fs_inode_info *fi = F2FS_I(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	nid_t ino = inode->i_ino;
@@ -283,15 +344,21 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 
 	/* if fdatasync is triggered, let's do in-place-update */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (datasync || get_dirty_pages(inode) <= SM_I(sbi)->min_fsync_blocks)
 		set_inode_flag(inode, FI_NEED_IPU);
 	ret = filemap_write_and_wait_range(inode->i_mapping, start, end);
 	clear_inode_flag(inode, FI_NEED_IPU);
 =======
+=======
+>>>>>>> v3.18
 	if (get_dirty_pages(inode) <= SM_I(sbi)->min_fsync_blocks)
 		set_inode_flag(fi, FI_NEED_IPU);
 	ret = filemap_write_and_wait_range(inode->i_mapping, start, end);
 	clear_inode_flag(fi, FI_NEED_IPU);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret) {
@@ -299,6 +366,7 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* if the inode is dirty, let's recover all the time */
 	if (!f2fs_skip_inode_update(inode, datasync)) {
@@ -318,6 +386,8 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 
 		if (is_inode_flag_set(inode, FI_UPDATE_WRITE) ||
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * if there is no written data, don't waste time to write recovery info.
 	 */
@@ -333,6 +403,9 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 		f2fs_put_page(i, 0);
 
 		if (is_inode_flag_set(fi, FI_UPDATE_WRITE) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				exist_written_data(sbi, ino, UPDATE_INO))
 			goto flush_out;
@@ -340,6 +413,12 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 	}
 go_write:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* guarantee free sections for fsync */
+	f2fs_balance_fs(sbi);
+
+>>>>>>> v3.18
 =======
 	/* guarantee free sections for fsync */
 	f2fs_balance_fs(sbi);
@@ -349,6 +428,7 @@ go_write:
 	 * Both of fdatasync() and fsync() are able to be recovered from
 	 * sudden-power-off.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	down_read(&F2FS_I(inode)->i_sem);
 	need_cp = need_do_checkpoint(inode);
@@ -409,6 +489,8 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	down_read(&fi->i_sem);
 	need_cp = need_do_checkpoint(inode);
 	up_read(&fi->i_sem);
@@ -462,6 +544,9 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static pgoff_t __get_first_dirty_index(struct address_space *mapping,
 						pgoff_t pgofs, int whence)
@@ -477,7 +562,11 @@ static pgoff_t __get_first_dirty_index(struct address_space *mapping,
 	nr_pages = pagevec_lookup_tag(&pvec, mapping, &pgofs,
 					PAGECACHE_TAG_DIRTY, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgofs = nr_pages ? pvec.pages[0]->index : ULONG_MAX;
+=======
+	pgofs = nr_pages ? pvec.pages[0]->index : LONG_MAX;
+>>>>>>> v3.18
 =======
 	pgofs = nr_pages ? pvec.pages[0]->index : LONG_MAX;
 >>>>>>> v3.18
@@ -503,6 +592,7 @@ static bool __found_offset(block_t blkaddr, pgoff_t dirty, pgoff_t pgofs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int unsigned_offsets(struct file *file)
 {
 	return file->f_mode & FMODE_UNSIGNED_OFFSET;
@@ -524,6 +614,8 @@ static loff_t vfs_setpos(struct file *file, loff_t offset, loff_t maxsize)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 {
 	struct inode *inode = file->f_mapping->host;
@@ -535,7 +627,11 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode_lock(inode);
+=======
+	mutex_lock(&inode->i_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&inode->i_mutex);
 >>>>>>> v3.18
@@ -546,7 +642,11 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 
 	/* handle inline data case */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (f2fs_has_inline_data(inode) || f2fs_has_inline_dentry(inode)) {
+=======
+	if (f2fs_has_inline_data(inode)) {
+>>>>>>> v3.18
 =======
 	if (f2fs_has_inline_data(inode)) {
 >>>>>>> v3.18
@@ -556,6 +656,7 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgofs = (pgoff_t)(offset >> PAGE_SHIFT);
 
 	dirty = __get_first_dirty_index(inode->i_mapping, pgofs, whence);
@@ -564,6 +665,8 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 		set_new_dnode(&dn, inode, NULL, NULL, 0);
 		err = get_dnode_of_data(&dn, pgofs, LOOKUP_NODE);
 =======
+=======
+>>>>>>> v3.18
 	pgofs = (pgoff_t)(offset >> PAGE_CACHE_SHIFT);
 
 	dirty = __get_first_dirty_index(inode->i_mapping, pgofs, whence);
@@ -571,6 +674,9 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 	for (; data_ofs < isize; data_ofs = pgofs << PAGE_CACHE_SHIFT) {
 		set_new_dnode(&dn, inode, NULL, NULL, 0);
 		err = get_dnode_of_data(&dn, pgofs, LOOKUP_NODE_RA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err && err != -ENOENT) {
 			goto fail;
@@ -578,7 +684,12 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 			/* direct node does not exists */
 			if (whence == SEEK_DATA) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pgofs = get_next_page_offset(&dn, pgofs);
+=======
+				pgofs = PGOFS_OF_NEXT_DNODE(pgofs,
+							F2FS_I(inode));
+>>>>>>> v3.18
 =======
 				pgofs = PGOFS_OF_NEXT_DNODE(pgofs,
 							F2FS_I(inode));
@@ -590,7 +701,11 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
+=======
+		end_offset = ADDRS_PER_PAGE(dn.node_page, F2FS_I(inode));
+>>>>>>> v3.18
 =======
 		end_offset = ADDRS_PER_PAGE(dn.node_page, F2FS_I(inode));
 >>>>>>> v3.18
@@ -599,7 +714,11 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 		for (; dn.ofs_in_node < end_offset;
 				dn.ofs_in_node++, pgofs++,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				data_ofs = (loff_t)pgofs << PAGE_SHIFT) {
+=======
+				data_ofs = pgofs << PAGE_CACHE_SHIFT) {
+>>>>>>> v3.18
 =======
 				data_ofs = pgofs << PAGE_CACHE_SHIFT) {
 >>>>>>> v3.18
@@ -620,15 +739,21 @@ found:
 	if (whence == SEEK_HOLE && data_ofs > isize)
 		data_ofs = isize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode_unlock(inode);
 	return vfs_setpos(file, data_ofs, maxbytes);
 fail:
 	inode_unlock(inode);
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&inode->i_mutex);
 	return vfs_setpos(file, data_ofs, maxbytes);
 fail:
 	mutex_unlock(&inode->i_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -ENXIO;
 }
@@ -657,6 +782,7 @@ static loff_t f2fs_llseek(struct file *file, loff_t offset, int whence)
 static int f2fs_file_mmap(struct file *file, struct vm_area_struct *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = file_inode(file);
 	int err;
 
@@ -667,11 +793,14 @@ static int f2fs_file_mmap(struct file *file, struct vm_area_struct *vma)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	file_accessed(file);
 	vma->vm_ops = &f2fs_file_vm_ops;
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int f2fs_file_open(struct inode *inode, struct file *filp)
 {
@@ -700,11 +829,16 @@ int truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 	struct f2fs_node *raw_node;
 	int nr_free = 0, ofs = dn->ofs_in_node, len = count;
 =======
+=======
+>>>>>>> v3.18
 int truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 {
 	int nr_free = 0, ofs = dn->ofs_in_node;
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
 	struct f2fs_node *raw_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 *addr;
 
@@ -716,6 +850,7 @@ int truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 		if (blkaddr == NULL_ADDR)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dn->data_blkaddr = NULL_ADDR;
 		set_data_blkaddr(dn);
@@ -740,6 +875,8 @@ int truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 
 	f2fs_update_time(sbi, REQ_TIME);
 =======
+=======
+>>>>>>> v3.18
 		update_extent_cache(NULL_ADDR, dn);
 		invalidate_blocks(sbi, blkaddr);
 		nr_free++;
@@ -751,6 +888,9 @@ int truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 	}
 	dn->ofs_in_node = ofs;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_f2fs_truncate_data_blocks_range(dn->inode, dn->nid,
 					 dn->ofs_in_node, nr_free);
@@ -762,6 +902,7 @@ void truncate_data_blocks(struct dnode_of_data *dn)
 	truncate_data_blocks_range(dn, ADDRS_PER_BLOCK);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int truncate_partial_data_page(struct inode *inode, u64 from,
 								bool cache_only)
@@ -796,6 +937,8 @@ truncate_out:
 	f2fs_put_page(page, 1);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void truncate_partial_data_page(struct inode *inode, u64 from)
 {
 	unsigned offset = from & (PAGE_CACHE_SIZE - 1);
@@ -822,6 +965,9 @@ static void truncate_partial_data_page(struct inode *inode, u64 from)
 
 out:
 	f2fs_put_page(page, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -833,6 +979,7 @@ int truncate_blocks(struct inode *inode, u64 from, bool lock)
 	pgoff_t free_from;
 	int count = 0, err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *ipage;
 	bool truncate_page = false;
 
@@ -843,6 +990,8 @@ int truncate_blocks(struct inode *inode, u64 from, bool lock)
 	if (free_from >= sbi->max_file_blocks)
 		goto free_partial;
 =======
+=======
+>>>>>>> v3.18
 
 	trace_f2fs_truncate_blocks_enter(inode, from);
 
@@ -851,11 +1000,15 @@ int truncate_blocks(struct inode *inode, u64 from, bool lock)
 
 	free_from = (pgoff_t)
 			((from + blocksize - 1) >> (sbi->log_blocksize));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (lock)
 		f2fs_lock_op(sbi);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ipage = get_node_page(sbi, inode->i_ino);
 	if (IS_ERR(ipage)) {
@@ -880,6 +1033,8 @@ int truncate_blocks(struct inode *inode, u64 from, bool lock)
 
 	count = ADDRS_PER_PAGE(dn.node_page, inode);
 =======
+=======
+>>>>>>> v3.18
 	set_new_dnode(&dn, inode, NULL, NULL, 0);
 	err = get_dnode_of_data(&dn, free_from, LOOKUP_NODE);
 	if (err) {
@@ -892,6 +1047,9 @@ int truncate_blocks(struct inode *inode, u64 from, bool lock)
 	}
 
 	count = ADDRS_PER_PAGE(dn.node_page, F2FS_I(inode));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	count -= dn.ofs_in_node;
@@ -906,6 +1064,7 @@ int truncate_blocks(struct inode *inode, u64 from, bool lock)
 free_next:
 	err = truncate_inode_blocks(inode, free_from);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	if (lock)
 		f2fs_unlock_op(sbi);
@@ -914,17 +1073,23 @@ free_partial:
 	if (!err)
 		err = truncate_partial_data_page(inode, from, truncate_page);
 =======
+=======
+>>>>>>> v3.18
 	if (lock)
 		f2fs_unlock_op(sbi);
 done:
 	/* lastly zero out the first data page */
 	truncate_partial_data_page(inode, from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	trace_f2fs_truncate_blocks_exit(inode, err);
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int f2fs_truncate(struct inode *inode)
 {
@@ -957,6 +1122,8 @@ int f2fs_truncate(struct inode *inode)
 	f2fs_mark_inode_dirty_sync(inode, false);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 void f2fs_truncate(struct inode *inode)
 {
 	if (!(S_ISREG(inode->i_mode) || S_ISDIR(inode->i_mode) ||
@@ -969,6 +1136,9 @@ void f2fs_truncate(struct inode *inode)
 		inode->i_mtime = inode->i_ctime = CURRENT_TIME;
 		mark_inode_dirty(inode);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -976,8 +1146,14 @@ int f2fs_getattr(struct vfsmount *mnt,
 			 struct dentry *dentry, struct kstat *stat)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = d_inode(dentry);
 	generic_fillattr(inode, stat);
+=======
+	struct inode *inode = dentry->d_inode;
+	generic_fillattr(inode, stat);
+	stat->blocks <<= 3;
+>>>>>>> v3.18
 =======
 	struct inode *inode = dentry->d_inode;
 	generic_fillattr(inode, stat);
@@ -990,6 +1166,10 @@ int f2fs_getattr(struct vfsmount *mnt,
 static void __setattr_copy(struct inode *inode, const struct iattr *attr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct f2fs_inode_info *fi = F2FS_I(inode);
+>>>>>>> v3.18
 =======
 	struct f2fs_inode_info *fi = F2FS_I(inode);
 >>>>>>> v3.18
@@ -1014,7 +1194,11 @@ static void __setattr_copy(struct inode *inode, const struct iattr *attr)
 		if (!in_group_p(inode->i_gid) && !capable(CAP_FSETID))
 			mode &= ~S_ISGID;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_acl_inode(inode, mode);
+=======
+		set_acl_inode(fi, mode);
+>>>>>>> v3.18
 =======
 		set_acl_inode(fi, mode);
 >>>>>>> v3.18
@@ -1027,9 +1211,15 @@ static void __setattr_copy(struct inode *inode, const struct iattr *attr)
 int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = d_inode(dentry);
 	int err;
 	bool size_changed = false;
+=======
+	struct inode *inode = dentry->d_inode;
+	struct f2fs_inode_info *fi = F2FS_I(inode);
+	int err;
+>>>>>>> v3.18
 =======
 	struct inode *inode = dentry->d_inode;
 	struct f2fs_inode_info *fi = F2FS_I(inode);
@@ -1040,6 +1230,7 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 	if (err)
 		return err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (is_quota_modification(inode, attr))
 		dquot_initialize(inode);
@@ -1088,6 +1279,8 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 
 		size_changed = true;
 =======
+=======
+>>>>>>> v3.18
 	if (attr->ia_valid & ATTR_SIZE) {
 		err = f2fs_convert_inline_data(inode, attr->ia_size, NULL);
 		if (err)
@@ -1104,12 +1297,16 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 			 */
 			f2fs_truncate(inode);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	__setattr_copy(inode, attr);
 
 	if (attr->ia_valid & ATTR_MODE) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = f2fs_acl_chmod(inode);
 		if (err || is_inode_flag_set(inode, FI_ACL_MODE)) {
@@ -1125,6 +1322,8 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 	f2fs_balance_fs(F2FS_I_SB(inode), true);
 
 =======
+=======
+>>>>>>> v3.18
 		err = posix_acl_chmod(inode, get_inode_mode(inode));
 		if (err || is_inode_flag_set(fi, FI_ACL_MODE)) {
 			inode->i_mode = fi->i_acl_mode;
@@ -1133,6 +1332,9 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 	}
 
 	mark_inode_dirty(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1142,6 +1344,10 @@ const struct inode_operations f2fs_file_inode_operations = {
 	.setattr	= f2fs_setattr,
 	.get_acl	= f2fs_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl	= f2fs_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl	= f2fs_set_acl,
 >>>>>>> v3.18
@@ -1155,7 +1361,11 @@ const struct inode_operations f2fs_file_inode_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fill_zero(struct inode *inode, pgoff_t index,
+=======
+static void fill_zero(struct inode *inode, pgoff_t index,
+>>>>>>> v3.18
 =======
 static void fill_zero(struct inode *inode, pgoff_t index,
 >>>>>>> v3.18
@@ -1166,9 +1376,15 @@ static void fill_zero(struct inode *inode, pgoff_t index,
 
 	if (!len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	f2fs_balance_fs(sbi, true);
+=======
+		return;
+
+	f2fs_balance_fs(sbi);
+>>>>>>> v3.18
 =======
 		return;
 
@@ -1180,6 +1396,7 @@ static void fill_zero(struct inode *inode, pgoff_t index,
 	f2fs_unlock_op(sbi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(page))
 		return PTR_ERR(page);
 
@@ -1189,17 +1406,23 @@ static void fill_zero(struct inode *inode, pgoff_t index,
 	f2fs_put_page(page, 1);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(page)) {
 		f2fs_wait_on_page_writeback(page, DATA);
 		zero_user(page, start, len);
 		set_page_dirty(page);
 		f2fs_put_page(page, 1);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int truncate_hole(struct inode *inode, pgoff_t pg_start, pgoff_t pg_end)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 
@@ -1227,6 +1450,8 @@ int truncate_hole(struct inode *inode, pgoff_t pg_start, pgoff_t pg_end)
 
 		pg_start += count;
 =======
+=======
+>>>>>>> v3.18
 	pgoff_t index;
 	int err;
 
@@ -1244,6 +1469,9 @@ int truncate_hole(struct inode *inode, pgoff_t pg_start, pgoff_t pg_end)
 		if (dn.data_blkaddr != NULL_ADDR)
 			truncate_data_blocks_range(&dn, 1);
 		f2fs_put_dnode(&dn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1253,6 +1481,7 @@ static int punch_hole(struct inode *inode, loff_t offset, loff_t len)
 {
 	pgoff_t pg_start, pg_end;
 	loff_t off_start, off_end;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -1284,6 +1513,8 @@ static int punch_hole(struct inode *inode, loff_t offset, loff_t len)
 				return ret;
 		}
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 
 	if (!S_ISREG(inode->i_mode))
@@ -1312,6 +1543,9 @@ static int punch_hole(struct inode *inode, loff_t offset, loff_t len)
 					PAGE_CACHE_SIZE - off_start);
 		if (off_end)
 			fill_zero(inode, pg_end, 0, off_end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (pg_start < pg_end) {
@@ -1320,16 +1554,22 @@ static int punch_hole(struct inode *inode, loff_t offset, loff_t len)
 			struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			f2fs_balance_fs(sbi, true);
 
 			blk_start = (loff_t)pg_start << PAGE_SHIFT;
 			blk_end = (loff_t)pg_end << PAGE_SHIFT;
 			down_write(&F2FS_I(inode)->i_mmap_sem);
 =======
+=======
+>>>>>>> v3.18
 			f2fs_balance_fs(sbi);
 
 			blk_start = pg_start << PAGE_CACHE_SHIFT;
 			blk_end = pg_end << PAGE_CACHE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			truncate_inode_pages_range(mapping, blk_start,
 					blk_end - 1);
@@ -1338,7 +1578,10 @@ static int punch_hole(struct inode *inode, loff_t offset, loff_t len)
 			ret = truncate_hole(inode, pg_start, pg_end);
 			f2fs_unlock_op(sbi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			up_write(&F2FS_I(inode)->i_mmap_sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -1347,6 +1590,7 @@ static int punch_hole(struct inode *inode, loff_t offset, loff_t len)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __read_out_blkaddrs(struct inode *inode, block_t *blkaddr,
 				int *do_replace, pgoff_t off, pgoff_t len)
@@ -2458,6 +2702,26 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
 	ret = f2fs_convert_inline_data(inode, offset + len, NULL);
 	if (ret)
 		return ret;
+=======
+static int expand_inode_data(struct inode *inode, loff_t offset,
+					loff_t len, int mode)
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	pgoff_t index, pg_start, pg_end;
+	loff_t new_size = i_size_read(inode);
+	loff_t off_start, off_end;
+	int ret = 0;
+
+	f2fs_balance_fs(sbi);
+
+	ret = inode_newsize_ok(inode, (len + offset));
+	if (ret)
+		return ret;
+
+	ret = f2fs_convert_inline_data(inode, offset + len, NULL);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	pg_start = ((unsigned long long) offset) >> PAGE_CACHE_SHIFT;
 	pg_end = ((unsigned long long) offset + len) >> PAGE_CACHE_SHIFT;
@@ -2555,11 +2819,15 @@ static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
 	unsigned int oldflags;
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = mnt_want_write_file(filp);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = f2fs_sync_fs(sbi->sb, 1);
 
@@ -2899,6 +3167,8 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
 	unsigned int dev_start_segno = 0, dev_end_segno = 0;
 	struct f2fs_flush_device range;
 =======
+=======
+>>>>>>> v3.18
 	if (!inode_owner_or_capable(inode)) {
 		ret = -EACCES;
 		goto out;
@@ -2991,12 +3261,16 @@ static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
 	struct super_block *sb = inode->i_sb;
 	struct request_queue *q = bdev_get_queue(sb->s_bdev);
 	struct fstrim_range range;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (f2fs_readonly(sbi->sb))
 		return -EROFS;
@@ -3049,6 +3323,8 @@ out:
 
 
 =======
+=======
+>>>>>>> v3.18
 	if (!blk_queue_discard(q))
 		return -EOPNOTSUPP;
 
@@ -3068,6 +3344,9 @@ out:
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
@@ -3077,8 +3356,11 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case F2FS_IOC_SETFLAGS:
 		return f2fs_ioc_setflags(filp, arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case F2FS_IOC_GETVERSION:
 		return f2fs_ioc_getversion(filp, arg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case F2FS_IOC_START_ATOMIC_WRITE:
@@ -3087,6 +3369,7 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		return f2fs_ioc_commit_atomic_write(filp);
 	case F2FS_IOC_START_VOLATILE_WRITE:
 		return f2fs_ioc_start_volatile_write(filp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case F2FS_IOC_RELEASE_VOLATILE_WRITE:
 		return f2fs_ioc_release_volatile_write(filp);
@@ -3118,11 +3401,16 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case FITRIM:
 		return f2fs_ioc_fitrim(filp, arg);
 >>>>>>> v3.18
+=======
+	case FITRIM:
+		return f2fs_ioc_fitrim(filp, arg);
+>>>>>>> v3.18
 	default:
 		return -ENOTTY;
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t f2fs_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 		unsigned long nr_segs, loff_t pos)
@@ -3165,6 +3453,8 @@ static ssize_t f2fs_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
@@ -3175,6 +3465,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case F2FS_IOC32_SETFLAGS:
 		cmd = F2FS_IOC_SETFLAGS;
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case F2FS_IOC32_GETVERSION:
 		cmd = F2FS_IOC_GETVERSION;
@@ -3197,6 +3488,8 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		break;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	default:
 		return -ENOIOCTLCMD;
 	}
@@ -3204,6 +3497,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t f2fs_file_splice_write(struct pipe_inode_info *pipe,
 			struct file *out,
@@ -3231,6 +3525,8 @@ const struct file_operations f2fs_file_operations = {
 	.open		= f2fs_file_open,
 	.release	= f2fs_release_file,
 =======
+=======
+>>>>>>> v3.18
 const struct file_operations f2fs_file_operations = {
 	.llseek		= f2fs_llseek,
 	.read		= new_sync_read,
@@ -3238,6 +3534,9 @@ const struct file_operations f2fs_file_operations = {
 	.read_iter	= generic_file_read_iter,
 	.write_iter	= generic_file_write_iter,
 	.open		= generic_file_open,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= f2fs_file_mmap,
 	.fsync		= f2fs_sync_file,
@@ -3248,7 +3547,11 @@ const struct file_operations f2fs_file_operations = {
 #endif
 	.splice_read	= generic_file_splice_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.splice_write	= f2fs_file_splice_write,
+=======
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 =======
 	.splice_write	= iter_file_splice_write,
 >>>>>>> v3.18

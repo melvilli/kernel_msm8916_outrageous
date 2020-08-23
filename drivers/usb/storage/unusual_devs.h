@@ -493,7 +493,11 @@ UNUSUAL_DEV(  0x04e6, 0x000a, 0x0200, 0x0200,
 		USB_SC_8020, USB_PR_CB, NULL, 0),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 UNUSUAL_DEV(  0x04e6, 0x000B, 0x0100, 0x0100,
+=======
+UNUSUAL_DEV(  0x04e6, 0x000b, 0x0100, 0x0100,
+>>>>>>> v3.18
 =======
 UNUSUAL_DEV(  0x04e6, 0x000b, 0x0100, 0x0100,
 >>>>>>> v3.18
@@ -503,7 +507,11 @@ UNUSUAL_DEV(  0x04e6, 0x000b, 0x0100, 0x0100,
 		US_FL_SCM_MULT_TARG ), 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 UNUSUAL_DEV(  0x04e6, 0x000C, 0x0100, 0x0100,
+=======
+UNUSUAL_DEV(  0x04e6, 0x000c, 0x0100, 0x0100,
+>>>>>>> v3.18
 =======
 UNUSUAL_DEV(  0x04e6, 0x000c, 0x0100, 0x0100,
 >>>>>>> v3.18
@@ -513,13 +521,19 @@ UNUSUAL_DEV(  0x04e6, 0x000c, 0x0100, 0x0100,
 		US_FL_SCM_MULT_TARG ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 UNUSUAL_DEV(  0x04e6, 0x000f, 0x0000, 0x9999,
 		"SCM Microsystems",
 		"eUSB SCSI Adapter (Bus Powered)",
 		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
 		US_FL_SCM_MULT_TARG ),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 UNUSUAL_DEV(  0x04e6, 0x0101, 0x0200, 0x0200,
 		"Shuttle",
@@ -778,6 +792,7 @@ UNUSUAL_DEV(  0x059f, 0x0643, 0x0000, 0x0000,
 		US_FL_GO_SLOW ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Reported by Christian Schaller <cschalle@redhat.com> */
 UNUSUAL_DEV(  0x059f, 0x0651, 0x0000, 0x0000,
 		"LaCie",
@@ -785,6 +800,8 @@ UNUSUAL_DEV(  0x059f, 0x0651, 0x0000, 0x0000,
 		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
 		US_FL_NO_WP_DETECT ),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Submitted by Joel Bourquard <numlock@freesurf.ch>
@@ -962,13 +979,19 @@ UNUSUAL_DEV(  0x069b, 0x3004, 0x0001, 0x0001,
 		US_FL_FIX_CAPACITY ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 UNUSUAL_DEV(  0x06ca, 0x2003, 0x0100, 0x0100,
 		"Newer Technology",
 		"uSCSI",
 		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
 		US_FL_SCM_MULT_TARG ),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Reported by Adrian Pilchowiec <adi1981@epf.pl> */
 UNUSUAL_DEV(  0x071b, 0x3203, 0x0000, 0x0000,
@@ -1130,7 +1153,10 @@ UNUSUAL_DEV( 0x0840, 0x0085, 0x0001, 0x0001,
 		US_FL_FIX_CAPACITY),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Supplied with some Castlewood ORB removable drives */
 UNUSUAL_DEV(  0x084b, 0xa001, 0x0000, 0x9999,
 		"Castlewood Systems",
@@ -1138,6 +1164,9 @@ UNUSUAL_DEV(  0x084b, 0xa001, 0x0000, 0x9999,
 		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
 		US_FL_SCM_MULT_TARG ),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Entry and supporting patch by Theodore Kilgore <kilgota@auburn.edu>.
  * Flag will support Bulk devices which use a standards-violating 32-byte
@@ -2007,7 +2036,10 @@ UNUSUAL_DEV(  0x14cd, 0x6600, 0x0201, 0x0201,
 		US_FL_IGNORE_RESIDUE ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Reported by Michael Büsch <m@bues.ch> */
 UNUSUAL_DEV(  0x152d, 0x0567, 0x0114, 0x0114,
 		"JMicron",
@@ -2015,6 +2047,9 @@ UNUSUAL_DEV(  0x152d, 0x0567, 0x0114, 0x0114,
 		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
 		US_FL_BROKEN_FUA ),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Reported by Alexandre Oliva <oliva@lsd.ic.unicamp.br>
  * JMicron responds to USN and several other SCSI ioctls with a
@@ -2082,6 +2117,7 @@ UNUSUAL_DEV( 0x1908, 0x3335, 0x0200, 0x0200,
 		US_FL_NO_READ_DISC_INFO ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Reported by Oliver Neukum <oneukum@suse.com>
  * This device morphes spontaneously into another device if the access
  * pattern of Windows isn't followed. Thus writable media would be dirty
@@ -2094,6 +2130,8 @@ UNUSUAL_DEV( 0x19d2, 0x1225, 0x0000, 0xffff,
 		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
 		US_FL_SINGLE_LUN ),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Reported by Sven Geggus <sven-usbst@geggus.net>
@@ -2122,7 +2160,10 @@ UNUSUAL_DEV( 0x1e74, 0x4621, 0x0000, 0x0000,
 		US_FL_BULK_IGNORE_TAG | US_FL_MAX_SECTORS_64 ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Supplied with some Castlewood ORB removable drives */
 UNUSUAL_DEV(  0x2027, 0xa001, 0x0000, 0x9999,
 		"Double-H Technology",
@@ -2130,6 +2171,9 @@ UNUSUAL_DEV(  0x2027, 0xa001, 0x0000, 0x9999,
 		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
 		US_FL_SCM_MULT_TARG ),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 UNUSUAL_DEV( 0x2116, 0x0320, 0x0001, 0x0001,
 		"ST",
@@ -2220,12 +2264,18 @@ UNUSUAL_DEV( 0xed10, 0x7636, 0x0001, 0x0001,
 		USB_SC_DEVICE, USB_PR_DEVICE, NULL, US_FL_NOT_LOCKABLE ),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Unusual uas devices */
 #if IS_ENABLED(CONFIG_USB_UAS)
 #include "unusual_uas.h"
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Control/Bulk transport for all SubClass values */
 USUAL_DEV(USB_SC_RBC, USB_PR_CB),

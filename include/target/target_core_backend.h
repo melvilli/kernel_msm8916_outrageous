@@ -35,6 +35,7 @@ struct se_subsystem_api {
 	u32 (*get_device_type)(struct se_device *);
 	sector_t (*get_blocks)(struct se_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *(*get_sense_buffer)(struct se_cmd *);
 	bool (*get_write_cache)(struct se_device *);
 };
@@ -42,6 +43,8 @@ struct se_subsystem_api {
 struct sbc_ops {
 	sense_reason_t (*execute_rw)(struct se_cmd *cmd);
 =======
+=======
+>>>>>>> v3.18
 	sector_t (*get_alignment_offset_lbas)(struct se_device *);
 	/* lbppbe = logical blocks per physical block exponent. see SBC-3 */
 	unsigned int (*get_lbppbe)(struct se_device *);
@@ -57,6 +60,9 @@ struct sbc_ops {
 struct sbc_ops {
 	sense_reason_t (*execute_rw)(struct se_cmd *cmd, struct scatterlist *,
 				     u32, enum dma_data_direction);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sense_reason_t (*execute_sync_cache)(struct se_cmd *cmd);
 	sense_reason_t (*execute_write_same)(struct se_cmd *cmd);
@@ -84,13 +90,19 @@ sense_reason_t sbc_execute_unmap(struct se_cmd *cmd,
 				      sector_t lba, sector_t nolb),
 	void *priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void	sbc_dif_generate(struct se_cmd *);
 sense_reason_t	sbc_dif_verify_write(struct se_cmd *, sector_t, unsigned int,
 				     unsigned int, struct scatterlist *, int);
 sense_reason_t	sbc_dif_verify_read(struct se_cmd *, sector_t, unsigned int,
 				    unsigned int, struct scatterlist *, int);
 sense_reason_t	sbc_dif_read_strip(struct se_cmd *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void	transport_set_vpd_proto_id(struct t10_vpd *, unsigned char *);
@@ -102,11 +114,17 @@ int	transport_set_vpd_ident(struct t10_vpd *, unsigned char *);
 void	*transport_kmap_data_sg(struct se_cmd *);
 void	transport_kunmap_data_sg(struct se_cmd *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* core helpers also used by xcopy during internal command setup */
 int	target_alloc_sgl(struct scatterlist **, unsigned int *, u32, bool);
 sense_reason_t	transport_generic_map_mem_to_cmd(struct se_cmd *,
 		struct scatterlist *, u32, struct scatterlist *, u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void	array_free(void *array, int n);

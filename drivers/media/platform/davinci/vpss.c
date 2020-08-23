@@ -22,6 +22,10 @@
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -409,9 +413,14 @@ EXPORT_SYMBOL(dm365_vpss_set_pg_frame_size);
 static int vpss_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource		*r1, *r2;
 	char *platform_name;
 	int status;
+=======
+	struct resource *res;
+	char *platform_name;
+>>>>>>> v3.18
 =======
 	struct resource *res;
 	char *platform_name;
@@ -436,6 +445,7 @@ static int vpss_probe(struct platform_device *pdev)
 	}
 
 	dev_info(&pdev->dev, "%s vpss probed\n", platform_name);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r1 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!r1)
@@ -470,6 +480,8 @@ static int vpss_probe(struct platform_device *pdev)
 			goto fail3;
 		}
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 
 	oper_cfg.vpss_regs_base0 = devm_ioremap_resource(&pdev->dev, res);
@@ -483,6 +495,9 @@ static int vpss_probe(struct platform_device *pdev)
 								 res);
 		if (IS_ERR(oper_cfg.vpss_regs_base1))
 			return PTR_ERR(oper_cfg.vpss_regs_base1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -519,6 +534,7 @@ static int vpss_probe(struct platform_device *pdev)
 	spin_lock_init(&oper_cfg.vpss_lock);
 	dev_info(&pdev->dev, "%s vpss probe success\n", platform_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 fail3:
@@ -532,10 +548,15 @@ fail1:
 
 	return 0;
 >>>>>>> v3.18
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int vpss_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resource		*res;
 
@@ -548,6 +569,9 @@ static int vpss_remove(struct platform_device *pdev)
 		res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 		release_mem_region(res->start, resource_size(res));
 	}
+=======
+	pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_disable(&pdev->dev);
 >>>>>>> v3.18

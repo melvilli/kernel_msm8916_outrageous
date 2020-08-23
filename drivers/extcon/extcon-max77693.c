@@ -190,6 +190,7 @@ enum max77693_muic_acc_type {
 	/* The below accessories have same ADC value so ADCLow and
 	   ADC1K bit is used to separate specific accessory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MAX77693_MUIC_GND_USB_OTG = 0x100,	/* ADC:0x0, VBVolot:0, ADCLow:0, ADC1K:0 */
 	MAX77693_MUIC_GND_USB_OTG_VB = 0x104,	/* ADC:0x0, VBVolot:1, ADCLow:0, ADC1K:0 */
 	MAX77693_MUIC_GND_AV_CABLE_LOAD = 0x102,/* ADC:0x0, VBVolot:0, ADCLow:1, ADC1K:0 */
@@ -199,6 +200,8 @@ enum max77693_muic_acc_type {
 
 /* MAX77693 MUIC device support below list of accessories(external connector) */
 =======
+=======
+>>>>>>> v3.18
 						/* ADC|VBVolot|ADCLow|ADC1K| */
 	MAX77693_MUIC_GND_USB_OTG = 0x100,	/* 0x0|      0|     0|    0| */
 	MAX77693_MUIC_GND_USB_OTG_VB = 0x104,	/* 0x0|      1|     0|    0| */
@@ -210,6 +213,9 @@ enum max77693_muic_acc_type {
 /*
  * MAX77693 MUIC device support below list of accessories(external connector)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	EXTCON_CABLE_USB = 0,
@@ -267,11 +273,14 @@ static int max77693_muic_set_debounce_time(struct max77693_muic_info *info,
 	case ADC_DEBOUNCE_TIME_25MS:
 	case ADC_DEBOUNCE_TIME_38_62MS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = max77693_update_reg(info->max77693->regmap_muic,
 					  MAX77693_MUIC_REG_CTRL3,
 					  time << CONTROL3_ADCDBSET_SHIFT,
 					  CONTROL3_ADCDBSET_MASK);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Don't touch BTLDset, JIGset when you want to change adc
 		 * debounce time. If it writes other than 0 to BTLDset, JIGset
@@ -280,6 +289,9 @@ static int max77693_muic_set_debounce_time(struct max77693_muic_info *info,
 		ret = regmap_write(info->max77693->regmap_muic,
 				  MAX77693_MUIC_REG_CTRL3,
 				  time << CONTROL3_ADCDBSET_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret) {
 			dev_err(info->dev, "failed to set ADC debounce time\n");
@@ -309,7 +321,11 @@ static int max77693_muic_set_path(struct max77693_muic_info *info,
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ctrl1, ctrl2 = 0;
+=======
+	unsigned int ctrl1, ctrl2 = 0;
+>>>>>>> v3.18
 =======
 	unsigned int ctrl1, ctrl2 = 0;
 >>>>>>> v3.18
@@ -320,8 +336,13 @@ static int max77693_muic_set_path(struct max77693_muic_info *info,
 		ctrl1 = CONTROL1_SW_OPEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = max77693_update_reg(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_CTRL1, ctrl1, COMP_SW_MASK);
+=======
+	ret = regmap_update_bits(info->max77693->regmap_muic,
+			MAX77693_MUIC_REG_CTRL1, COMP_SW_MASK, ctrl1);
+>>>>>>> v3.18
 =======
 	ret = regmap_update_bits(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_CTRL1, COMP_SW_MASK, ctrl1);
@@ -337,9 +358,15 @@ static int max77693_muic_set_path(struct max77693_muic_info *info,
 		ctrl2 |= CONTROL2_LOWPWR_MASK;	/* LowPwr=1, CPEn=0 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = max77693_update_reg(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_CTRL2, ctrl2,
 			CONTROL2_LOWPWR_MASK | CONTROL2_CPEN_MASK);
+=======
+	ret = regmap_update_bits(info->max77693->regmap_muic,
+			MAX77693_MUIC_REG_CTRL2,
+			CONTROL2_LOWPWR_MASK | CONTROL2_CPEN_MASK, ctrl2);
+>>>>>>> v3.18
 =======
 	ret = regmap_update_bits(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_CTRL2,
@@ -436,6 +463,7 @@ static int max77693_muic_get_cable_type(struct max77693_muic_info *info,
 
 			/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * [0x1][VBVolt][ADCLow][ADC1K]
 			 * [0x1    0	   0       0  ]	: USB_OTG
 			 * [0x1    1	   0       0  ]	: USB_OTG_VB
@@ -443,12 +471,17 @@ static int max77693_muic_get_cable_type(struct max77693_muic_info *info,
 			 * [0x1    0       1       1  ] : MHL without charging connector
 			 * [0x1    1       1       1  ] : MHL with charging connector
 =======
+=======
+>>>>>>> v3.18
 			 * [0x1|VBVolt|ADCLow|ADC1K]
 			 * [0x1|     0|     0|    0] USB_OTG
 			 * [0x1|     1|     0|    0] USB_OTG_VB
 			 * [0x1|     0|     1|    0] Audio Video cable with load
 			 * [0x1|     0|     1|    1] MHL without charging cable
 			 * [0x1|     1|     1|    1] MHL with charging cable
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 */
 			cable_type = ((0x1 << 8)
@@ -773,17 +806,23 @@ static int max77693_muic_adc_handler(struct max77693_muic_info *info)
 			return ret;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case MAX77693_MUIC_ADC_REMOTE_S3_BUTTON:	/* DOCK_KEY_PREV */
 	case MAX77693_MUIC_ADC_REMOTE_S7_BUTTON:	/* DOCK_KEY_NEXT */
 	case MAX77693_MUIC_ADC_REMOTE_S9_BUTTON:	/* DOCK_VOL_DOWN */
 	case MAX77693_MUIC_ADC_REMOTE_S10_BUTTON:	/* DOCK_VOL_UP */
 	case MAX77693_MUIC_ADC_REMOTE_S12_BUTTON:	/* DOCK_KEY_PLAY_PAUSE */
 =======
+=======
+>>>>>>> v3.18
 	case MAX77693_MUIC_ADC_REMOTE_S3_BUTTON:      /* DOCK_KEY_PREV */
 	case MAX77693_MUIC_ADC_REMOTE_S7_BUTTON:      /* DOCK_KEY_NEXT */
 	case MAX77693_MUIC_ADC_REMOTE_S9_BUTTON:      /* DOCK_VOL_DOWN */
 	case MAX77693_MUIC_ADC_REMOTE_S10_BUTTON:     /* DOCK_VOL_UP */
 	case MAX77693_MUIC_ADC_REMOTE_S12_BUTTON:     /* DOCK_KEY_PLAY_PAUSE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Button of DOCK device
@@ -873,6 +912,7 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			/*
 			 * MHL cable with MHL_TA(USB/TA) cable
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * - MHL cable include two port(HDMI line and separate micro-
 			 * usb port. When the target connect MHL cable, extcon driver
 			 * check whether MHL_TA(USB/TA) cable is connected. If MHL_TA
@@ -887,6 +927,8 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			if (!cable_attached)
 				extcon_set_cable_state(info->edev, "MHL", cable_attached);
 =======
+=======
+>>>>>>> v3.18
 			 * - MHL cable include two port(HDMI line and separate
 			 * micro-usb port. When the target connect MHL cable,
 			 * extcon driver check whether MHL_TA(USB/TA) cable is
@@ -902,6 +944,9 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			if (!cable_attached)
 				extcon_set_cable_state(info->edev,
 						      "MHL", cable_attached);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -915,6 +960,7 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			/*
 			 * Dock-Audio device with USB/TA cable
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * - Dock device include two port(Dock-Audio and micro-usb
 			 * port). When the target connect Dock-Audio device, extcon
 			 * driver check whether USB/TA cable is connected. If USB/TA
@@ -926,6 +972,8 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			 * - Support charging through micro-usb port without data
 			 *           connection.
 =======
+=======
+>>>>>>> v3.18
 			 * - Dock device include two port(Dock-Audio and micro-
 			 * usb port). When the target connect Dock-Audio device,
 			 * extcon driver check whether USB/TA cable is connected
@@ -936,13 +984,21 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			 * - Support external output feature of audio.
 			 * - Support charging through micro-usb port without
 			 *   data connection.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 */
 			extcon_set_cable_state(info->edev, "USB", attached);
 
 			if (!cable_attached)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				extcon_set_cable_state(info->edev, "Dock-Audio", cable_attached);
+=======
+				extcon_set_cable_state(info->edev, "Dock-Audio",
+						      cable_attached);
+>>>>>>> v3.18
 =======
 				extcon_set_cable_state(info->edev, "Dock-Audio",
 						      cable_attached);
@@ -954,21 +1010,28 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			 * - Dock-Desk device include three type of cable which
 			 * are HDMI, USB for mouse/keyboard and micro-usb port
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * for USB/TA cable. Dock-Smart device need always exteranl
 			 * power supply(USB/TA cable through micro-usb cable). Dock-
 			 * Smart device support screen output of target to separate
 			 * monitor and mouse/keyboard for desktop mode.
 =======
+=======
+>>>>>>> v3.18
 			 * for USB/TA cable. Dock-Smart device need always
 			 * exteranl power supply(USB/TA cable through micro-usb
 			 * cable). Dock-Smart device support screen output of
 			 * target to separate monitor and mouse/keyboard for
 			 * desktop mode.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 *
 			 * Features of 'USB/TA cable with Dock-Smart device'
 			 * - Support MHL
 			 * - Support external output feature of audio
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 * - Support charging through micro-usb port without data
 			 *	     connection if TA cable is connected to target.
@@ -983,6 +1046,8 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 
 			extcon_set_cable_state(info->edev, "Dock-Smart", attached);
 =======
+=======
+>>>>>>> v3.18
 			 * - Support charging through micro-usb port without
 			 *   data connection if TA cable is connected to target.
 			 * - Support charging and data connection through micro-
@@ -997,6 +1062,9 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 
 			extcon_set_cable_state(info->edev, "Dock-Smart",
 					      attached);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			extcon_set_cable_state(info->edev, "MHL", attached);
 
@@ -1007,6 +1075,7 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 		switch (chg_type) {
 		case MAX77693_CHARGER_TYPE_NONE:
 			/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 * When MHL(with USB/TA cable) or Dock-Audio with USB/TA cable
 			 * is attached, muic device happen below two interrupt.
@@ -1023,6 +1092,8 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			 * be face with unusual action. So, driver should check this
 			 * situation in spite of, that previous charger type is N/A.
 =======
+=======
+>>>>>>> v3.18
 			 * When MHL(with USB/TA cable) or Dock-Audio with USB/TA
 			 * cable is attached, muic device happen below two irq.
 			 * - 'MAX77693_MUIC_IRQ_INT1_ADC' for detecting
@@ -1039,13 +1110,21 @@ static int max77693_muic_chg_handler(struct max77693_muic_info *info)
 			 * connected to target. The user be face with unusual
 			 * action. So, driver should check this situation in
 			 * spite of, that previous charger type is N/A.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 */
 			break;
 		case MAX77693_CHARGER_TYPE_USB:
 			/* Only USB cable, PATH:AP_USB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = max77693_muic_set_path(info, info->path_usb, attached);
+=======
+			ret = max77693_muic_set_path(info, info->path_usb,
+						    attached);
+>>>>>>> v3.18
 =======
 			ret = max77693_muic_set_path(info, info->path_usb,
 						    attached);
@@ -1096,6 +1175,7 @@ static void max77693_muic_irq_work(struct work_struct *work)
 	mutex_lock(&info->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; i < ARRAY_SIZE(muic_irqs) ; i++)
 		if (info->irq == muic_irqs[i].virq)
 			irq_type = muic_irqs[i].irq;
@@ -1103,12 +1183,17 @@ static void max77693_muic_irq_work(struct work_struct *work)
 	ret = max77693_bulk_read(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_STATUS1, 2, info->status);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(muic_irqs); i++)
 		if (info->irq == muic_irqs[i].virq)
 			irq_type = muic_irqs[i].irq;
 
 	ret = regmap_bulk_read(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_STATUS1, info->status, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(info->dev, "failed to read MUIC register\n");
@@ -1182,8 +1267,13 @@ static int max77693_muic_detect_accessory(struct max77693_muic_info *info)
 
 	/* Read STATUSx register to detect accessory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = max77693_bulk_read(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_STATUS1, 2, info->status);
+=======
+	ret = regmap_bulk_read(info->max77693->regmap_muic,
+			MAX77693_MUIC_REG_STATUS1, info->status, 2);
+>>>>>>> v3.18
 =======
 	ret = regmap_bulk_read(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_STATUS1, info->status, 2);
@@ -1240,6 +1330,7 @@ static int max77693_muic_probe(struct platform_device *pdev)
 	int ret;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 id;
 
 	info = devm_kzalloc(&pdev->dev, sizeof(struct max77693_muic_info),
@@ -1249,6 +1340,8 @@ static int max77693_muic_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned int id;
 
 	info = devm_kzalloc(&pdev->dev, sizeof(struct max77693_muic_info),
@@ -1256,6 +1349,9 @@ static int max77693_muic_probe(struct platform_device *pdev)
 	if (!info)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	info->dev = &pdev->dev;
 	info->max77693 = max77693;
@@ -1309,6 +1405,7 @@ static int max77693_muic_probe(struct platform_device *pdev)
 		unsigned int virq = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		virq = irq_create_mapping(max77693->irq_domain, muic_irq->irq);
 		if (!virq) {
 			ret = -EINVAL;
@@ -1318,6 +1415,8 @@ static int max77693_muic_probe(struct platform_device *pdev)
 
 		ret = request_threaded_irq(virq, NULL,
 =======
+=======
+>>>>>>> v3.18
 		virq = regmap_irq_get_virq(max77693->irq_data_muic,
 					muic_irq->irq);
 		if (!virq)
@@ -1325,6 +1424,9 @@ static int max77693_muic_probe(struct platform_device *pdev)
 		muic_irq->virq = virq;
 
 		ret = devm_request_threaded_irq(&pdev->dev, virq, NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				max77693_muic_irq_handler,
 				IRQF_NO_SUSPEND,
@@ -1335,7 +1437,11 @@ static int max77693_muic_probe(struct platform_device *pdev)
 				" error :%d)\n",
 				muic_irq->irq, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_irq;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1343,6 +1449,7 @@ static int max77693_muic_probe(struct platform_device *pdev)
 	}
 
 	/* Initialize extcon device */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info->edev = devm_kzalloc(&pdev->dev, sizeof(struct extcon_dev),
 				  GFP_KERNEL);
@@ -1361,6 +1468,8 @@ static int max77693_muic_probe(struct platform_device *pdev)
 
 
 =======
+=======
+>>>>>>> v3.18
 	info->edev = devm_extcon_dev_allocate(&pdev->dev,
 					      max77693_extcon_cable);
 	if (IS_ERR(info->edev)) {
@@ -1375,6 +1484,9 @@ static int max77693_muic_probe(struct platform_device *pdev)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Initialize MUIC register by using platform data or default data */
 	if (pdata && pdata->muic_data) {
@@ -1386,17 +1498,23 @@ static int max77693_muic_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; i < num_init_data ; i++) {
 		enum max77693_irq_source irq_src
 				= MAX77693_IRQ_GROUP_NR;
 
 		max77693_write_reg(info->max77693->regmap_muic,
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < num_init_data; i++) {
 		enum max77693_irq_source irq_src
 				= MAX77693_IRQ_GROUP_NR;
 
 		regmap_write(info->max77693->regmap_muic,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				init_data[i].addr,
 				init_data[i].data);
@@ -1420,7 +1538,12 @@ static int max77693_muic_probe(struct platform_device *pdev)
 
 	if (pdata && pdata->muic_data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct max77693_muic_platform_data *muic_pdata = pdata->muic_data;
+=======
+		struct max77693_muic_platform_data *muic_pdata
+						   = pdata->muic_data;
+>>>>>>> v3.18
 =======
 		struct max77693_muic_platform_data *muic_pdata
 						   = pdata->muic_data;
@@ -1460,17 +1583,23 @@ static int max77693_muic_probe(struct platform_device *pdev)
 
 	/* Check revision number of MUIC device*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = max77693_read_reg(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_ID, &id);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "failed to read revision number\n");
 		goto err_extcon;
 =======
+=======
+>>>>>>> v3.18
 	ret = regmap_read(info->max77693->regmap_muic,
 			MAX77693_MUIC_REG_ID, &id);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "failed to read revision number\n");
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	dev_info(info->dev, "device ID : 0x%x\n", id);
@@ -1488,6 +1617,7 @@ static int max77693_muic_probe(struct platform_device *pdev)
 	 */
 	INIT_DELAYED_WORK(&info->wq_detcable, max77693_muic_detect_cable_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&info->wq_detcable, delay_jiffies);
 
 	return ret;
@@ -1499,16 +1629,22 @@ err_irq:
 		free_irq(muic_irqs[i].virq, info);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	queue_delayed_work(system_power_efficient_wq, &info->wq_detcable,
 			delay_jiffies);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int max77693_muic_remove(struct platform_device *pdev)
 {
 	struct max77693_muic_info *info = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -1517,6 +1653,11 @@ static int max77693_muic_remove(struct platform_device *pdev)
 	cancel_work_sync(&info->irq_work);
 	input_unregister_device(info->dock);
 	extcon_dev_unregister(info->edev);
+=======
+
+	cancel_work_sync(&info->irq_work);
+	input_unregister_device(info->dock);
+>>>>>>> v3.18
 =======
 
 	cancel_work_sync(&info->irq_work);

@@ -645,14 +645,20 @@ enum tsi721_smsg_int_flag {
 #ifdef CONFIG_RAPIDIO_DMA_ENGINE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tsi721_tx_desc {
 	struct dma_async_tx_descriptor	txd;
 	struct tsi721_dma_desc		*hw_desc;
 =======
+=======
+>>>>>>> v3.18
 #define TSI721_BDMA_MAX_BCOUNT	(TSI721_DMAD_BCOUNT1 + 1)
 
 struct tsi721_tx_desc {
 	struct dma_async_tx_descriptor	txd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16				destid;
 	/* low 64-bits of 66-bit RIO address */
@@ -660,15 +666,21 @@ struct tsi721_tx_desc {
 	/* upper 2-bits of 66-bit RIO address */
 	u8				rio_addr_u;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool				interrupt;
 	struct list_head		desc_node;
 	struct list_head		tx_list;
 =======
+=======
+>>>>>>> v3.18
 	enum dma_rtype			rtype;
 	struct list_head		desc_node;
 	struct scatterlist		*sg;
 	unsigned int			sg_len;
 	enum dma_status			status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -676,7 +688,11 @@ struct tsi721_bdma_chan {
 	int		id;
 	void __iomem	*regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		bd_num;		/* number of buffer descriptors */
+=======
+	int		bd_num;		/* number of HW buffer descriptors */
+>>>>>>> v3.18
 =======
 	int		bd_num;		/* number of HW buffer descriptors */
 >>>>>>> v3.18
@@ -696,7 +712,10 @@ struct tsi721_bdma_chan {
 	struct list_head	queue;
 	struct list_head	free_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_cookie_t		completed_cookie;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tasklet_struct	tasklet;

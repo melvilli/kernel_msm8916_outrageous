@@ -35,7 +35,11 @@
 
 /* mpc5200 device tree match tables */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc5200_cdm_ids[] __initdata = {
+=======
+static const struct of_device_id mpc5200_cdm_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc5200_cdm_ids[] __initconst = {
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ static const struct of_device_id mpc5200_cdm_ids[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc5200_gpio_ids[] __initdata = {
+=======
+static const struct of_device_id mpc5200_gpio_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc5200_gpio_ids[] __initconst = {
 >>>>>>> v3.18

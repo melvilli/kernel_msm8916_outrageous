@@ -647,8 +647,13 @@ static const char *dac_deemph_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_deemph =
 	SOC_ENUM_SINGLE(WM8993_DAC_CTRL, 4, 4, dac_deemph_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_deemph,
+			    WM8993_DAC_CTRL, 4, dac_deemph_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_deemph,
 			    WM8993_DAC_CTRL, 4, dac_deemph_text);
@@ -662,8 +667,13 @@ static const char *adc_hpf_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adc_hpf =
 	SOC_ENUM_SINGLE(WM8993_ADC_CTRL, 5, 4, adc_hpf_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adc_hpf,
+			    WM8993_ADC_CTRL, 5, adc_hpf_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adc_hpf,
 			    WM8993_ADC_CTRL, 5, adc_hpf_text);
@@ -675,8 +685,13 @@ static const char *drc_path_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_path =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_1, 14, 2, drc_path_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_path,
+			    WM8993_DRC_CONTROL_1, 14, drc_path_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_path,
 			    WM8993_DRC_CONTROL_1, 14, drc_path_text);
@@ -692,8 +707,13 @@ static const char *drc_r0_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_r0 =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_3, 8, 6, drc_r0_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_r0,
+			    WM8993_DRC_CONTROL_3, 8, drc_r0_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_r0,
 			    WM8993_DRC_CONTROL_3, 8, drc_r0_text);
@@ -708,8 +728,13 @@ static const char *drc_r1_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_r1 =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_4, 13, 5, drc_r1_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_r1,
+			    WM8993_DRC_CONTROL_4, 13, drc_r1_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_r1,
 			    WM8993_DRC_CONTROL_4, 13, drc_r1_text);
@@ -731,8 +756,13 @@ static const char *drc_attack_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_attack =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_2, 12, 12, drc_attack_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_attack,
+			    WM8993_DRC_CONTROL_2, 12, drc_attack_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_attack,
 			    WM8993_DRC_CONTROL_2, 12, drc_attack_text);
@@ -751,8 +781,13 @@ static const char *drc_decay_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_decay =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_2, 8, 9, drc_decay_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_decay,
+			    WM8993_DRC_CONTROL_2, 8, drc_decay_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_decay,
 			    WM8993_DRC_CONTROL_2, 8, drc_decay_text);
@@ -764,8 +799,13 @@ static const char *drc_ff_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_ff =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_3, 7, 2, drc_ff_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_ff,
+			    WM8993_DRC_CONTROL_3, 7, drc_ff_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_ff,
 			    WM8993_DRC_CONTROL_3, 7, drc_ff_text);
@@ -778,8 +818,13 @@ static const char *drc_qr_rate_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_qr_rate =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_3, 0, 3, drc_qr_rate_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_qr_rate,
+			    WM8993_DRC_CONTROL_3, 0, drc_qr_rate_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_qr_rate,
 			    WM8993_DRC_CONTROL_3, 0, drc_qr_rate_text);
@@ -792,8 +837,13 @@ static const char *drc_smooth_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_smooth =
 	SOC_ENUM_SINGLE(WM8993_DRC_CONTROL_1, 4, 3, drc_smooth_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_smooth,
+			    WM8993_DRC_CONTROL_1, 4, drc_smooth_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_smooth,
 			    WM8993_DRC_CONTROL_1, 4, drc_smooth_text);
@@ -892,8 +942,13 @@ static const char *aif_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum aifoutl_enum =
 	SOC_ENUM_SINGLE(WM8993_AUDIO_INTERFACE_1, 15, 2, aif_text);
+=======
+static SOC_ENUM_SINGLE_DECL(aifoutl_enum,
+			    WM8993_AUDIO_INTERFACE_1, 15, aif_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(aifoutl_enum,
 			    WM8993_AUDIO_INTERFACE_1, 15, aif_text);
@@ -903,8 +958,13 @@ static const struct snd_kcontrol_new aifoutl_mux =
 	SOC_DAPM_ENUM("AIFOUTL Mux", aifoutl_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum aifoutr_enum =
 	SOC_ENUM_SINGLE(WM8993_AUDIO_INTERFACE_1, 14, 2, aif_text);
+=======
+static SOC_ENUM_SINGLE_DECL(aifoutr_enum,
+			    WM8993_AUDIO_INTERFACE_1, 14, aif_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(aifoutr_enum,
 			    WM8993_AUDIO_INTERFACE_1, 14, aif_text);
@@ -914,8 +974,13 @@ static const struct snd_kcontrol_new aifoutr_mux =
 	SOC_DAPM_ENUM("AIFOUTR Mux", aifoutr_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum aifinl_enum =
 	SOC_ENUM_SINGLE(WM8993_AUDIO_INTERFACE_2, 15, 2, aif_text);
+=======
+static SOC_ENUM_SINGLE_DECL(aifinl_enum,
+			    WM8993_AUDIO_INTERFACE_2, 15, aif_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(aifinl_enum,
 			    WM8993_AUDIO_INTERFACE_2, 15, aif_text);
@@ -925,8 +990,13 @@ static const struct snd_kcontrol_new aifinl_mux =
 	SOC_DAPM_ENUM("AIFINL Mux", aifinl_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum aifinr_enum =
 	SOC_ENUM_SINGLE(WM8993_AUDIO_INTERFACE_2, 14, 2, aif_text);
+=======
+static SOC_ENUM_SINGLE_DECL(aifinr_enum,
+			    WM8993_AUDIO_INTERFACE_2, 14, aif_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(aifinr_enum,
 			    WM8993_AUDIO_INTERFACE_2, 14, aif_text);
@@ -940,8 +1010,13 @@ static const char *sidetone_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum sidetonel_enum =
 	SOC_ENUM_SINGLE(WM8993_DIGITAL_SIDE_TONE, 2, 3, sidetone_text);
+=======
+static SOC_ENUM_SINGLE_DECL(sidetonel_enum,
+			    WM8993_DIGITAL_SIDE_TONE, 2, sidetone_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(sidetonel_enum,
 			    WM8993_DIGITAL_SIDE_TONE, 2, sidetone_text);
@@ -951,8 +1026,13 @@ static const struct snd_kcontrol_new sidetonel_mux =
 	SOC_DAPM_ENUM("Left Sidetone", sidetonel_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum sidetoner_enum =
 	SOC_ENUM_SINGLE(WM8993_DIGITAL_SIDE_TONE, 0, 3, sidetone_text);
+=======
+static SOC_ENUM_SINGLE_DECL(sidetoner_enum,
+			    WM8993_DIGITAL_SIDE_TONE, 0, sidetone_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(sidetoner_enum,
 			    WM8993_DIGITAL_SIDE_TONE, 0, sidetone_text);
@@ -1295,6 +1375,7 @@ static int wm8993_hw_params(struct snd_pcm_substream *substream,
 		wm8993->bclk *= wm8993->tdm_width * wm8993->tdm_slots;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (params_format(params)) {
 		case SNDRV_PCM_FORMAT_S16_LE:
 			wm8993->bclk *= 16;
@@ -1309,6 +1390,8 @@ static int wm8993_hw_params(struct snd_pcm_substream *substream,
 			break;
 		case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 		switch (params_width(params)) {
 		case 16:
 			wm8993->bclk *= 16;
@@ -1322,6 +1405,9 @@ static int wm8993_hw_params(struct snd_pcm_substream *substream,
 			aif1 |= 0x10;
 			break;
 		case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			wm8993->bclk *= 32;
 			aif1 |= 0x18;
@@ -1590,6 +1676,7 @@ static int wm8993_probe(struct snd_soc_codec *codec)
 	wm8993->hubs_data.series_startup = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = wm8993->regmap;
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_REGMAP);
 	if (ret != 0) {
@@ -1597,6 +1684,8 @@ static int wm8993_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Latch volume update bits and default ZC on */
@@ -1659,10 +1748,14 @@ static int wm8993_probe(struct snd_soc_codec *codec)
 static int wm8993_remove(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8993_priv *wm8993 = snd_soc_codec_get_drvdata(codec);
 
 	wm8993_set_bias_level(codec, SND_SOC_BIAS_OFF);
 	regulator_bulk_free(ARRAY_SIZE(wm8993->supplies), wm8993->supplies);
+=======
+	wm8993_set_bias_level(codec, SND_SOC_BIAS_OFF);
+>>>>>>> v3.18
 =======
 	wm8993_set_bias_level(codec, SND_SOC_BIAS_OFF);
 >>>>>>> v3.18

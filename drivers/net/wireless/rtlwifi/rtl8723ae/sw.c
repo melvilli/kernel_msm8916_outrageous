@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -32,9 +35,12 @@
 
 #include "../wifi.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
 #include <linux/module.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "../core.h"
@@ -44,6 +50,11 @@
 #include "phy.h"
 #include "dm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "fw.h"
+#include "../rtl8723com/fw_common.h"
+>>>>>>> v3.18
 =======
 #include "fw.h"
 #include "../rtl8723com/fw_common.h"
@@ -55,9 +66,12 @@
 #include "table.h"
 #include "hal_btc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void rtl8723ae_init_aspm_vars(struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 #include "../btcoexist/rtl_btc.h"
 #include "../rtl8723com/phy_common.h"
 
@@ -65,6 +79,9 @@ static void rtl8723ae_init_aspm_vars(struct ieee80211_hw *hw)
 #include <linux/module.h>
 
 static void rtl8723e_init_aspm_vars(struct ieee80211_hw *hw)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
@@ -73,7 +90,12 @@ static void rtl8723e_init_aspm_vars(struct ieee80211_hw *hw)
 	rtlpci->const_amdpci_aspm = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ASPM PS mode.
+=======
+	/**
+	 * ASPM PS mode.
+>>>>>>> v3.18
 =======
 	/**
 	 * ASPM PS mode.
@@ -94,7 +116,12 @@ static void rtl8723e_init_aspm_vars(struct ieee80211_hw *hw)
 	rtlpci->const_hostpci_aspm_setting = 0x02;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* In Hw/Sw Radio Off situation.
+=======
+	/**
+	 * In Hw/Sw Radio Off situation.
+>>>>>>> v3.18
 =======
 	/**
 	 * In Hw/Sw Radio Off situation.
@@ -108,7 +135,12 @@ static void rtl8723e_init_aspm_vars(struct ieee80211_hw *hw)
 	rtlpci->const_hwsw_rfoff_d3 = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This setting works for those device with
+=======
+	/**
+	 * This setting works for those device with
+>>>>>>> v3.18
 =======
 	/**
 	 * This setting works for those device with
@@ -122,7 +154,11 @@ static void rtl8723e_init_aspm_vars(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtl8723ae_init_sw_vars(struct ieee80211_hw *hw)
+=======
+int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -131,16 +167,22 @@ int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	rtl8723ae_bt_reg_init(hw);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 
 	rtl8723e_bt_reg_init(hw);
 
 	rtlpriv->btcoexist.btc_ops = rtl_btc_get_ops_pointer();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtlpriv->dm.dm_initialgain_enable = 1;
 	rtlpriv->dm.dm_flag = 0;
@@ -184,7 +226,13 @@ int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 		   0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlpci->irq_mask[1] = (u32)(PHIMR_RXFOVW | 0);
+=======
+	rtlpci->irq_mask[1]	=
+		 (u32)(PHIMR_RXFOVW |
+				0);
+>>>>>>> v3.18
 =======
 	rtlpci->irq_mask[1]	=
 		 (u32)(PHIMR_RXFOVW |
@@ -198,6 +246,7 @@ int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 	rtlpriv->psc.swctrl_lps = rtlpriv->cfg->mod_params->swctrl_lps;
 	rtlpriv->psc.fwctrl_lps = rtlpriv->cfg->mod_params->fwctrl_lps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlpriv->psc.reg_fwctrl_lps = 3;
 	rtlpriv->psc.reg_max_lps_awakeintvl = 5;
 	/* for ASPM, you can close aspm through
@@ -205,11 +254,16 @@ int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 	 */
 	rtl8723ae_init_aspm_vars(hw);
 =======
+=======
+>>>>>>> v3.18
 	if (rtlpriv->cfg->mod_params->disable_watchdog)
 		pr_info("watchdog disabled\n");
 	rtlpriv->psc.reg_fwctrl_lps = 3;
 	rtlpriv->psc.reg_max_lps_awakeintvl = 5;
 	rtl8723e_init_aspm_vars(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rtlpriv->psc.reg_fwctrl_lps == 1)
@@ -221,7 +275,11 @@ int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 
 	/* for firmware buf */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlpriv->rtlhal.pfirmware = vmalloc(0x6000);
+=======
+	rtlpriv->rtlhal.pfirmware = vzalloc(0x6000);
+>>>>>>> v3.18
 =======
 	rtlpriv->rtlhal.pfirmware = vzalloc(0x6000);
 >>>>>>> v3.18
@@ -250,7 +308,11 @@ int rtl8723e_init_sw_vars(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_deinit_sw_vars(struct ieee80211_hw *hw)
+=======
+void rtl8723e_deinit_sw_vars(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 void rtl8723e_deinit_sw_vars(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -263,6 +325,7 @@ void rtl8723e_deinit_sw_vars(struct ieee80211_hw *hw)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct rtl_hal_ops rtl8723ae_hal_ops = {
 	.init_sw_vars = rtl8723ae_init_sw_vars,
@@ -313,6 +376,8 @@ static struct rtl_hal_ops rtl8723ae_hal_ops = {
 
 static struct rtl_mod_params rtl8723ae_mod_params = {
 =======
+=======
+>>>>>>> v3.18
 /* get bt coexist status */
 bool rtl8723e_get_btc_status(void)
 {
@@ -376,6 +441,9 @@ static struct rtl_hal_ops rtl8723e_hal_ops = {
 };
 
 static struct rtl_mod_params rtl8723e_mod_params = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.sw_crypto = false,
 	.inactiveps = true,
@@ -385,6 +453,7 @@ static struct rtl_mod_params rtl8723e_mod_params = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rtl_hal_cfg rtl8723ae_hal_cfg = {
 	.bar_id = 2,
 	.write_readback = true,
@@ -393,6 +462,8 @@ static struct rtl_hal_cfg rtl8723ae_hal_cfg = {
 	.ops = &rtl8723ae_hal_ops,
 	.mod_params = &rtl8723ae_mod_params,
 =======
+=======
+>>>>>>> v3.18
 static struct rtl_hal_cfg rtl8723e_hal_cfg = {
 	.bar_id = 2,
 	.write_readback = true,
@@ -400,6 +471,9 @@ static struct rtl_hal_cfg rtl8723e_hal_cfg = {
 	.fw_name = "rtlwifi/rtl8723efw.bin",
 	.ops = &rtl8723e_hal_ops,
 	.mod_params = &rtl8723e_mod_params,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.maps[SYS_ISO_CTRL] = REG_SYS_ISO_CTRL,
 	.maps[SYS_FUNC_EN] = REG_SYS_FUNC_EN,
@@ -410,6 +484,11 @@ static struct rtl_hal_cfg rtl8723e_hal_cfg = {
 	.maps[MAC_RCR_ACF] = ACF,
 	.maps[MAC_RCR_AAP] = AAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.maps[MAC_HIMR] = REG_HIMR,
+	.maps[MAC_HIMRE] = REG_HIMRE,
+>>>>>>> v3.18
 =======
 	.maps[MAC_HIMR] = REG_HIMR,
 	.maps[MAC_HIMRE] = REG_HIMRE,
@@ -472,6 +551,7 @@ static struct rtl_hal_cfg rtl8723e_hal_cfg = {
 	.maps[RTL_IMR_VODOK] = PHIMR_VODOK,
 	.maps[RTL_IMR_ROK] = PHIMR_ROK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.maps[RTL_IBSS_INT_MASKS] = (PHIMR_BCNDMAINT0 |
 				     PHIMR_TXBCNOK | PHIMR_TXBCNERR),
 	.maps[RTL_IMR_C2HCMD] = PHIMR_C2HCMD,
@@ -515,6 +595,8 @@ module_param_named(ips, rtl8723ae_mod_params.inactiveps, bool, 0444);
 module_param_named(swlps, rtl8723ae_mod_params.swctrl_lps, bool, 0444);
 module_param_named(fwlps, rtl8723ae_mod_params.fwctrl_lps, bool, 0444);
 =======
+=======
+>>>>>>> v3.18
 	.maps[RTL_IBSS_INT_MASKS] =
 		(PHIMR_BCNDMAINT0 | PHIMR_TXBCNOK | PHIMR_TXBCNERR),
 	.maps[RTL_IMR_C2HCMD] = PHIMR_C2HCMD,
@@ -557,12 +639,16 @@ module_param_named(swlps, rtl8723e_mod_params.swctrl_lps, bool, 0444);
 module_param_named(fwlps, rtl8723e_mod_params.fwctrl_lps, bool, 0444);
 module_param_named(disable_watchdog, rtl8723e_mod_params.disable_watchdog,
 		   bool, 0444);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_PARM_DESC(swenc, "Set to 1 for software crypto (default 0)\n");
 MODULE_PARM_DESC(ips, "Set to 0 to not use link power save (default 1)\n");
 MODULE_PARM_DESC(swlps, "Set to 1 to use SW control power save (default 0)\n");
 MODULE_PARM_DESC(fwlps, "Set to 1 to use FW control power save (default 1)\n");
 MODULE_PARM_DESC(debug, "Set debug level (0-5) (default 0)");
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static SIMPLE_DEV_PM_OPS(rtlwifi_pm_ops, rtl_pci_suspend, rtl_pci_resume);
@@ -571,6 +657,8 @@ static struct pci_driver rtl8723ae_driver = {
 	.name = KBUILD_MODNAME,
 	.id_table = rtl8723ae_pci_ids,
 =======
+=======
+>>>>>>> v3.18
 MODULE_PARM_DESC(disable_watchdog, "Set to 1 to disable the watchdog (default 0)\n");
 
 static SIMPLE_DEV_PM_OPS(rtlwifi_pm_ops, rtl_pci_suspend, rtl_pci_resume);
@@ -578,6 +666,9 @@ static SIMPLE_DEV_PM_OPS(rtlwifi_pm_ops, rtl_pci_suspend, rtl_pci_resume);
 static struct pci_driver rtl8723e_driver = {
 	.name = KBUILD_MODNAME,
 	.id_table = rtl8723e_pci_ids,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.probe = rtl_pci_probe,
 	.remove = rtl_pci_disconnect,
@@ -585,7 +676,11 @@ static struct pci_driver rtl8723e_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_pci_driver(rtl8723ae_driver);
+=======
+module_pci_driver(rtl8723e_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(rtl8723e_driver);
 >>>>>>> v3.18

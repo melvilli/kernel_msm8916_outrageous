@@ -71,11 +71,14 @@ static struct quirk_entry quirk_asus_x55u = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct quirk_entry quirk_asus_x401u = {
 	.wapf = 4,
 };
 
 =======
+=======
+>>>>>>> v3.18
 static struct quirk_entry quirk_asus_wapf4 = {
 	.wapf = 4,
 };
@@ -84,6 +87,9 @@ static struct quirk_entry quirk_asus_x200ca = {
 	.wapf = 2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dmi_matched(const struct dmi_system_id *dmi)
 {
@@ -92,8 +98,11 @@ static int dmi_matched(const struct dmi_system_id *dmi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id asus_quirks[] = {
 =======
+=======
+>>>>>>> v3.18
 static const struct dmi_system_id asus_quirks[] = {
 	{
 		.callback = dmi_matched,
@@ -109,6 +118,9 @@ static const struct dmi_system_id asus_quirks[] = {
 		 */
 		.driver_data = &quirk_asus_wapf4,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.callback = dmi_matched,
@@ -127,7 +139,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X401A"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
+=======
+		.driver_data = &quirk_asus_wapf4,
+>>>>>>> v3.18
 =======
 		.driver_data = &quirk_asus_wapf4,
 >>>>>>> v3.18
@@ -140,7 +156,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X401A1"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
+=======
+		.driver_data = &quirk_asus_wapf4,
+>>>>>>> v3.18
 =======
 		.driver_data = &quirk_asus_wapf4,
 >>>>>>> v3.18
@@ -162,7 +182,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X501A"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
+=======
+		.driver_data = &quirk_asus_wapf4,
+>>>>>>> v3.18
 =======
 		.driver_data = &quirk_asus_wapf4,
 >>>>>>> v3.18
@@ -175,8 +199,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X501A1"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
 =======
+=======
+>>>>>>> v3.18
 		.driver_data = &quirk_asus_wapf4,
 	},
 	{
@@ -214,6 +241,9 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X550VB"),
 		},
 		.driver_data = &quirk_asus_wapf4,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -224,7 +254,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X55A"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
+=======
+		.driver_data = &quirk_asus_wapf4,
+>>>>>>> v3.18
 =======
 		.driver_data = &quirk_asus_wapf4,
 >>>>>>> v3.18
@@ -237,7 +271,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X55C"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
+=======
+		.driver_data = &quirk_asus_wapf4,
+>>>>>>> v3.18
 =======
 		.driver_data = &quirk_asus_wapf4,
 >>>>>>> v3.18
@@ -259,7 +297,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X55VD"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
+=======
+		.driver_data = &quirk_asus_wapf4,
+>>>>>>> v3.18
 =======
 		.driver_data = &quirk_asus_wapf4,
 >>>>>>> v3.18
@@ -272,8 +314,11 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X75A"),
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = &quirk_asus_x401u,
 =======
+=======
+>>>>>>> v3.18
 		.driver_data = &quirk_asus_wapf4,
 	},
 	{
@@ -311,6 +356,9 @@ static const struct dmi_system_id asus_quirks[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "X200CA"),
 		},
 		.driver_data = &quirk_asus_x200ca,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{},
@@ -390,6 +438,10 @@ static const struct key_entry asus_nb_wmi_keymap[] = {
 	{ KE_KEY, 0xC4, { KEY_KBDILLUMUP } },
 	{ KE_KEY, 0xC5, { KEY_KBDILLUMDOWN } },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ KE_IGNORE, 0xC6, },  /* Ambient Light Sensor notification */
+>>>>>>> v3.18
 =======
 	{ KE_IGNORE, 0xC6, },  /* Ambient Light Sensor notification */
 >>>>>>> v3.18

@@ -41,7 +41,10 @@
 #include "security.h"
 #include "netlabel.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "avc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -106,7 +109,10 @@ static struct netlbl_lsm_secattr *selinux_netlbl_sock_genattr(struct sock *sk)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * selinux_netlbl_sock_getattr - Get the cached NetLabel secattr
  * @sk: the socket
  * @sid: the SID
@@ -133,6 +139,9 @@ static struct netlbl_lsm_secattr *selinux_netlbl_sock_getattr(
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * selinux_netlbl_cache_invalidate - Invalidate the NetLabel cache
  *
@@ -258,7 +267,11 @@ int selinux_netlbl_skbuff_setsid(struct sk_buff *skb,
 		if (sksec->nlbl_state != NLBL_REQSKB)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		secattr = sksec->nlbl_secattr;
+=======
+		secattr = selinux_netlbl_sock_getattr(sk, sid);
+>>>>>>> v3.18
 =======
 		secattr = selinux_netlbl_sock_getattr(sk, sid);
 >>>>>>> v3.18
@@ -448,6 +461,12 @@ int selinux_netlbl_socket_setsockopt(struct socket *sock,
 		netlbl_secattr_init(&secattr);
 		lock_sock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* call the netlabel function directly as we want to see the
+		 * on-the-wire label that is assigned via the socket's options
+		 * and not the cached netlabel/lsm attributes */
+>>>>>>> v3.18
 =======
 		/* call the netlabel function directly as we want to see the
 		 * on-the-wire label that is assigned via the socket's options

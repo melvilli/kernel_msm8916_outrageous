@@ -15,6 +15,10 @@
 #include <asm/bootinfo.h>
 #include <asm/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/prom.h>
+>>>>>>> v3.18
 =======
 #include <asm/prom.h>
 >>>>>>> v3.18
@@ -75,7 +79,11 @@ void __init plat_mem_setup(void)
 	 * parsed resulting in our memory appearing
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__dt_setup_arch(&__dtb_start);
+=======
+	__dt_setup_arch(__dtb_start);
+>>>>>>> v3.18
 =======
 	__dt_setup_arch(__dtb_start);
 >>>>>>> v3.18
@@ -83,6 +91,7 @@ void __init plat_mem_setup(void)
 
 void __init device_tree_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long base, size;
 
@@ -96,6 +105,9 @@ void __init device_tree_init(void)
 	reserve_bootmem(base, size, BOOTMEM_DEFAULT);
 
 	unflatten_device_tree();
+=======
+	unflatten_and_copy_device_tree();
+>>>>>>> v3.18
 =======
 	unflatten_and_copy_device_tree();
 >>>>>>> v3.18
@@ -125,7 +137,11 @@ int __init plat_of_setup(void)
 		panic("device tree not present");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(of_ids[0].compatible, soc_info.compatible,
+=======
+	strlcpy(of_ids[0].compatible, soc_info.compatible,
+>>>>>>> v3.18
 =======
 	strlcpy(of_ids[0].compatible, soc_info.compatible,
 >>>>>>> v3.18

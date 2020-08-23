@@ -52,6 +52,7 @@ static inline int br_is_designated_port(const struct net_bridge_port *p)
 
 /* br_stp.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void br_become_root_bridge(struct net_bridge *br);
 extern void br_config_bpdu_generation(struct net_bridge *);
 extern void br_configuration_update(struct net_bridge *);
@@ -67,6 +68,8 @@ extern void br_topology_change_detection(struct net_bridge *br);
 extern void br_send_config_bpdu(struct net_bridge_port *, struct br_config_bpdu *);
 extern void br_send_tcn_bpdu(struct net_bridge_port *);
 =======
+=======
+>>>>>>> v3.18
 void br_become_root_bridge(struct net_bridge *br);
 void br_config_bpdu_generation(struct net_bridge *);
 void br_configuration_update(struct net_bridge *);
@@ -81,6 +84,9 @@ void br_topology_change_detection(struct net_bridge *br);
 /* br_stp_bpdu.c */
 void br_send_config_bpdu(struct net_bridge_port *, struct br_config_bpdu *);
 void br_send_tcn_bpdu(struct net_bridge_port *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

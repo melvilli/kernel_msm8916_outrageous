@@ -56,9 +56,15 @@ Struct Resources:
 	printed resource with ('R') or without ('r') a decoded flags member.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Physical addresses:
 
 	%pa	0x01234567 or 0x0123456789abcdef
+=======
+Physical addresses types phys_addr_t:
+
+	%pa[p]	0x01234567 or 0x0123456789abcdef
+>>>>>>> v3.18
 =======
 Physical addresses types phys_addr_t:
 
@@ -70,7 +76,10 @@ Physical addresses types phys_addr_t:
 	the width of the CPU data path. Passed by reference.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 DMA addresses types dma_addr_t:
 
 	%pad	0x01234567 or 0x0123456789abcdef
@@ -110,6 +119,9 @@ Raw buffer as an escaped string:
 
 	If field width is omitted the 1 byte only will be escaped.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Raw buffer as a hex string:
 	%*ph	00 01 02  ...  3f
@@ -146,7 +158,11 @@ IPv4 addresses:
 	%pI4	1.2.3.4
 	%pi4	001.002.003.004
 <<<<<<< HEAD
+<<<<<<< HEAD
 	%p[Ii][hnbl]
+=======
+	%p[Ii]4[hnbl]
+>>>>>>> v3.18
 =======
 	%p[Ii]4[hnbl]
 >>>>>>> v3.18
@@ -174,7 +190,10 @@ IPv6 addresses:
 	http://tools.ietf.org/html/rfc5952
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 IPv4/IPv6 addresses (generic, with port, flowinfo, scope):
 
 	%pIS	1.2.3.4		or 0001:0002:0003:0004:0005:0006:0007:0008
@@ -207,6 +226,9 @@ IPv4/IPv6 addresses (generic, with port, flowinfo, scope):
 	%pISsc		1.2.3.4		or [1:2:3:4:5:6:7:8]%1234567890
 	%pISpfc		1.2.3.4:12345	or [1:2:3:4:5:6:7:8]:12345/123456789
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 UUID/GUID addresses:
 
@@ -224,7 +246,10 @@ UUID/GUID addresses:
 	order with lower case hex characters will be printed.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 dentry names:
 	%pd{,2,3,4}
 	%pD{,2,3,4}
@@ -234,6 +259,9 @@ dentry names:
 	equivalent of %s dentry->d_name.name we used to use, %pd<n> prints
 	n last components.  %pD does the same thing for struct file.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct va_format:
 
@@ -251,6 +279,7 @@ struct va_format:
 	correctness of the format string and va_list arguments.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 SHOULD be printed with %llu/%llx, (unsigned long long):
 
 	printk("%llu", (unsigned long long)u64_var);
@@ -259,6 +288,8 @@ s64 SHOULD be printed with %lld/%llx, (long long):
 
 	printk("%lld", (long long)s64_var);
 =======
+=======
+>>>>>>> v3.18
 u64 SHOULD be printed with %llu/%llx:
 
 	printk("%llu", u64_var);
@@ -266,6 +297,9 @@ u64 SHOULD be printed with %llu/%llx:
 s64 SHOULD be printed with %lld/%llx:
 
 	printk("%lld", s64_var);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If <type> is dependent on a config option for its size (e.g., sector_t,

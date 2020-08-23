@@ -24,9 +24,13 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
 #include <linux/watchdog.h>
 #include <linux/init.h>
+=======
+#include <linux/watchdog.h>
+>>>>>>> v3.18
 =======
 #include <linux/watchdog.h>
 >>>>>>> v3.18
@@ -164,7 +168,11 @@ static int pnx4008_wdt_probe(struct platform_device *pdev)
 		return PTR_ERR(wdt_base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdt_clk = clk_get(&pdev->dev, NULL);
+=======
+	wdt_clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	wdt_clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -174,7 +182,11 @@ static int pnx4008_wdt_probe(struct platform_device *pdev)
 	ret = clk_enable(wdt_clk);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -199,8 +211,11 @@ static int pnx4008_wdt_probe(struct platform_device *pdev)
 disable_clk:
 	clk_disable(wdt_clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	clk_put(wdt_clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -212,7 +227,10 @@ static int pnx4008_wdt_remove(struct platform_device *pdev)
 
 	clk_disable(wdt_clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(wdt_clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -255,7 +273,10 @@ MODULE_PARM_DESC(nowayout,
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:pnx4008-watchdog");

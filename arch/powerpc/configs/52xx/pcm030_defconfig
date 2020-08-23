@@ -22,7 +22,10 @@ CONFIG_PPC_MPC52xx=y
 CONFIG_PPC_MPC5200_SIMPLE=y
 # CONFIG_PPC_PMAC is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_PPC_BESTCOMM=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_NO_HZ=y
@@ -49,7 +52,10 @@ CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 # CONFIG_FW_LOADER is not set
 CONFIG_MTD=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_PARTITIONS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_CMDLINE_PARTS=y
@@ -85,7 +91,10 @@ CONFIG_I2C_MPC=y
 # CONFIG_HWMON is not set
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set
@@ -97,6 +106,11 @@ CONFIG_USB_STORAGE=m
 CONFIG_RTC_CLASS=y
 CONFIG_RTC_DRV_PCF8563=m
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_DMADEVICES=y
+CONFIG_PPC_BESTCOMM=y
+>>>>>>> v3.18
 =======
 CONFIG_DMADEVICES=y
 CONFIG_PPC_BESTCOMM=y

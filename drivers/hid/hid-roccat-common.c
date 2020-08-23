@@ -123,7 +123,10 @@ int roccat_common2_send_with_status(struct usb_device *usb_dev,
 EXPORT_SYMBOL_GPL(roccat_common2_send_with_status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int roccat_common2_device_init_struct(struct usb_device *usb_dev,
 		struct roccat_common2_device *dev)
 {
@@ -177,6 +180,9 @@ ssize_t roccat_common2_sysfs_write(struct file *fp, struct kobject *kobj,
 }
 EXPORT_SYMBOL_GPL(roccat_common2_sysfs_write);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Stefan Achatz");
 MODULE_DESCRIPTION("USB Roccat common driver");

@@ -68,7 +68,10 @@
 
 			mdio {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "mdio";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				compatible = "fsl,ep8248e-mdio-bitbang";
@@ -80,7 +83,10 @@
 					interrupt-parent = <&PIC>;
 					reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -89,7 +95,10 @@
 					interrupt-parent = <&PIC>;
 					reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};

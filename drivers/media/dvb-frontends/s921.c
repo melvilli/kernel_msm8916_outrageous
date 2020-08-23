@@ -3,7 +3,11 @@
  *   This device is labeled as just S. 921 at the top of the frontend can
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) 2009-2010 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *   Copyright (C) 2009-2010 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *   Copyright (C) 2009-2010 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -544,7 +548,11 @@ static struct dvb_frontend_ops s921_ops = {
 
 MODULE_DESCRIPTION("DVB Frontend module for Sharp S921 hardware");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

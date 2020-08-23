@@ -1,5 +1,10 @@
 timestamping
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+txtimestamp
+hwtstamp_config
+>>>>>>> v3.18
 =======
 txtimestamp
 hwtstamp_config

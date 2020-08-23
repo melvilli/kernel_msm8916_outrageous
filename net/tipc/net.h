@@ -38,11 +38,15 @@
 #define _TIPC_NET_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern rwlock_t tipc_net_lock;
 
 void tipc_net_route_msg(struct sk_buff *buf);
 
 void tipc_net_start(u32 addr);
+=======
+int tipc_net_start(u32 addr);
+>>>>>>> v3.18
 =======
 int tipc_net_start(u32 addr);
 >>>>>>> v3.18

@@ -22,7 +22,11 @@
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18
@@ -125,6 +129,7 @@ static int __init am3517_evm_i2c_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct panel_generic_dpi_data lcd_panel = {
 	.name			= "sharp_lq",
 	.num_gpios		= 3,
@@ -176,6 +181,8 @@ static struct omap_dss_board_info am3517_evm_dss_data = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static const struct display_timing am3517_evm_lcd_videomode = {
 	.pixelclock	= { 0, 9000000, 0 },
 
@@ -265,6 +272,9 @@ static void __init am3517_evm_display_init(void)
 	platform_device_register(&am3517_evm_tv_connector_device);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Board initialization
@@ -320,12 +330,16 @@ static struct usbhs_phy_data phy_data[] __initdata = {
 static struct usbhs_omap_platform_data usbhs_bdata __initdata = {
 	.port_mode[0] = OMAP_EHCI_PORT_MODE_PHY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PANEL_SHARP_LQ043T1DG01) || \
 		defined(CONFIG_PANEL_SHARP_LQ043T1DG01_MODULE)
 	.port_mode[1] = OMAP_USBHS_PORT_MODE_UNUSED,
 #else
 	.port_mode[1] = OMAP_EHCI_PORT_MODE_PHY,
 #endif
+=======
+	.port_mode[1] = OMAP_EHCI_PORT_MODE_PHY,
+>>>>>>> v3.18
 =======
 	.port_mode[1] = OMAP_EHCI_PORT_MODE_PHY,
 >>>>>>> v3.18
@@ -396,7 +410,13 @@ static void __init am3517_evm_init(void)
 
 	am3517_evm_i2c_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_display_init(&am3517_evm_dss_data);
+=======
+
+	am3517_evm_display_init();
+
+>>>>>>> v3.18
 =======
 
 	am3517_evm_display_init();
@@ -437,7 +457,10 @@ MACHINE_START(OMAP3517EVM, "OMAP3517/AM3517 EVM")
 	.init_early	= am35xx_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= am3517_evm_init,

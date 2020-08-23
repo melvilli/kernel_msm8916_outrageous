@@ -72,11 +72,14 @@ static int __init ps3_rtc_probe(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __exit ps3_rtc_remove(struct platform_device *dev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver ps3_rtc_driver = {
@@ -85,7 +88,10 @@ static struct platform_driver ps3_rtc_driver = {
 		.owner = THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = __exit_p(ps3_rtc_remove),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

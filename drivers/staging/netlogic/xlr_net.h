@@ -1070,10 +1070,13 @@ enum tsv_rsv_reg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xlr_net_priv {
 	u32 __iomem *base_addr;
 	struct net_device *ndev;
 =======
+=======
+>>>>>>> v3.18
 struct xlr_adapter {
 	struct net_device *netdev[4];
 };
@@ -1082,6 +1085,9 @@ struct xlr_net_priv {
 	u32 __iomem *base_addr;
 	struct net_device *ndev;
 	struct xlr_adapter *adapter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mii_bus *mii_bus;
 	int num_rx_desc;
@@ -1089,6 +1095,10 @@ struct xlr_net_priv {
 	int pcs_id;	/* PCS id on MDIO bus */
 	int port_id;	/* Port(gmac/xgmac) number, i.e 0-7 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int tx_stnid;
+>>>>>>> v3.18
 =======
 	int tx_stnid;
 >>>>>>> v3.18

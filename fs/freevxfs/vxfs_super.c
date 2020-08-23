@@ -125,6 +125,10 @@ vxfs_statfs(struct dentry *dentry, struct kstatfs *bufp)
 static int vxfs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18

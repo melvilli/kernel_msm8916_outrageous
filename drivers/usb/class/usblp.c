@@ -53,7 +53,10 @@
 #include <linux/signal.h>
 #include <linux/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -874,6 +877,10 @@ static int usblp_wwait(struct usblp *usblp, int nonblock)
 	add_wait_queue(&usblp->wwait, &waita);
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		set_current_state(TASK_INTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 		set_current_state(TASK_INTERRUPTIBLE);
 >>>>>>> v3.18
@@ -882,7 +889,10 @@ static int usblp_wwait(struct usblp *usblp, int nonblock)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_current_state(TASK_INTERRUPTIBLE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rc = usblp_wtest(usblp, nonblock);

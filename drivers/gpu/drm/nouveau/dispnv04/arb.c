@@ -199,7 +199,11 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
+=======
+	struct nvif_device *device = &nouveau_drm(dev)->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 >>>>>>> v3.18
@@ -208,7 +212,11 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
 	int MClk = nouveau_hw_get_clock(dev, PLL_MEMORY);
 	int NVClk = nouveau_hw_get_clock(dev, PLL_CORE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t cfg1 = nv_rd32(device, NV04_PFB_CFG1);
+=======
+	uint32_t cfg1 = nvif_rd32(device, NV04_PFB_CFG1);
+>>>>>>> v3.18
 =======
 	uint32_t cfg1 = nvif_rd32(device, NV04_PFB_CFG1);
 >>>>>>> v3.18
@@ -219,8 +227,13 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
 	sim_data.bpp = bpp;
 	sim_data.two_heads = nv_two_heads(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((dev->pci_device & 0xffff) == 0x01a0 /*CHIPSET_NFORCE*/ ||
 	    (dev->pci_device & 0xffff) == 0x01f0 /*CHIPSET_NFORCE2*/) {
+=======
+	if ((dev->pdev->device & 0xffff) == 0x01a0 /*CHIPSET_NFORCE*/ ||
+	    (dev->pdev->device & 0xffff) == 0x01f0 /*CHIPSET_NFORCE2*/) {
+>>>>>>> v3.18
 =======
 	if ((dev->pdev->device & 0xffff) == 0x01a0 /*CHIPSET_NFORCE*/ ||
 	    (dev->pdev->device & 0xffff) == 0x01f0 /*CHIPSET_NFORCE2*/) {
@@ -235,8 +248,13 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
 		sim_data.mem_page_miss = 10;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sim_data.memory_type = nv_rd32(device, NV04_PFB_CFG0) & 0x1;
 		sim_data.memory_width = (nv_rd32(device, NV_PEXTDEV_BOOT_0) & 0x10) ? 128 : 64;
+=======
+		sim_data.memory_type = nvif_rd32(device, NV04_PFB_CFG0) & 0x1;
+		sim_data.memory_width = (nvif_rd32(device, NV_PEXTDEV_BOOT_0) & 0x10) ? 128 : 64;
+>>>>>>> v3.18
 =======
 		sim_data.memory_type = nvif_rd32(device, NV04_PFB_CFG0) & 0x1;
 		sim_data.memory_width = (nvif_rd32(device, NV_PEXTDEV_BOOT_0) & 0x10) ? 128 : 64;
@@ -246,7 +264,11 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type == NV_04)
+=======
+	if (drm->device.info.family == NV_DEVICE_INFO_V0_TNT)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_TNT)
 >>>>>>> v3.18
@@ -277,15 +299,21 @@ nouveau_calc_arb(struct drm_device *dev, int vclk, int bpp, int *burst, int *lwm
 	struct nouveau_drm *drm = nouveau_drm(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type < NV_20)
 		nv04_update_arb(dev, vclk, bpp, burst, lwm);
 	else if ((dev->pci_device & 0xfff0) == 0x0240 /*CHIPSET_C51*/ ||
 		 (dev->pci_device & 0xfff0) == 0x03d0 /*CHIPSET_C512*/) {
 =======
+=======
+>>>>>>> v3.18
 	if (drm->device.info.family < NV_DEVICE_INFO_V0_KELVIN)
 		nv04_update_arb(dev, vclk, bpp, burst, lwm);
 	else if ((dev->pdev->device & 0xfff0) == 0x0240 /*CHIPSET_C51*/ ||
 		 (dev->pdev->device & 0xfff0) == 0x03d0 /*CHIPSET_C512*/) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*burst = 128;
 		*lwm = 0x0480;

@@ -19,6 +19,7 @@ void show_regs(struct pt_regs *regs);
 void show_stacktrace(struct task_struct *tsk, struct pt_regs *regs);
 void show_kernel_fault_diag(const char *str, struct pt_regs *regs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    unsigned long address, unsigned long cause_reg);
 void die(const char *str, struct pt_regs *regs, unsigned long address,
 	 unsigned long cause_reg);
@@ -28,12 +29,17 @@ void die(const char *str, struct pt_regs *regs, unsigned long address,
 	pr_warn("Kernel BUG in %s: %s: %d!\n",	\
 		__FILE__, __func__,  __LINE__);	\
 =======
+=======
+>>>>>>> v3.18
 			    unsigned long address);
 void die(const char *str, struct pt_regs *regs, unsigned long address);
 
 #define BUG()	do {								\
 	pr_warn("BUG: failure at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
 	dump_stack();								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } while (0)
 

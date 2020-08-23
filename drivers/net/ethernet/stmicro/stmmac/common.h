@@ -30,7 +30,10 @@
 #include <linux/phy.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_VLAN_8021Q) || defined(CONFIG_VLAN_8021Q_MODULE)
@@ -42,6 +45,7 @@
 #include "mmc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef CHIP_DEBUG_PRINT
 /* Turn-on extra printk debug for MAC core, dma and descriptors */
 /* #define CHIP_DEBUG_PRINT */
@@ -52,6 +56,8 @@
 #define CHIP_DBG(fmt, args...)  do { } while (0)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Synopsys Core versions */
@@ -238,15 +244,21 @@ enum dma_irq_status {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	CORE_IRQ_TX_PATH_IN_LPI_MODE	(1 << 1)
 #define	CORE_IRQ_TX_PATH_EXIT_LPI_MODE	(1 << 2)
 #define	CORE_IRQ_RX_PATH_IN_LPI_MODE	(1 << 3)
 #define	CORE_IRQ_RX_PATH_EXIT_LPI_MODE	(1 << 4)
 =======
+=======
+>>>>>>> v3.18
 #define	CORE_IRQ_TX_PATH_IN_LPI_MODE	(1 << 0)
 #define	CORE_IRQ_TX_PATH_EXIT_LPI_MODE	(1 << 1)
 #define	CORE_IRQ_RX_PATH_IN_LPI_MODE	(1 << 2)
 #define	CORE_IRQ_RX_PATH_EXIT_LPI_MODE	(1 << 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	CORE_PCS_ANE_COMPLETE		(1 << 5)
@@ -312,7 +324,11 @@ struct dma_features {
 /* Default LPI timers */
 #define STMMAC_DEFAULT_LIT_LS	0x3E8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STMMAC_DEFAULT_TWT_LS	0x0
+=======
+#define STMMAC_DEFAULT_TWT_LS	0x1E
+>>>>>>> v3.18
 =======
 #define STMMAC_DEFAULT_TWT_LS	0x1E
 >>>>>>> v3.18
@@ -321,6 +337,11 @@ struct dma_features {
 #define STMMAC_RING_MODE	0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define JUMBO_LEN		9000
+
+>>>>>>> v3.18
 =======
 #define JUMBO_LEN		9000
 
@@ -400,6 +421,7 @@ struct stmmac_dma_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct stmmac_ops {
 	/* MAC core initialization */
 	void (*core_init) (void __iomem *ioaddr);
@@ -429,6 +451,8 @@ struct stmmac_ops {
 	void (*ctrl_ane) (void __iomem *ioaddr, bool restart);
 	void (*get_adv) (void __iomem *ioaddr, struct rgmii_adv *adv);
 =======
+=======
+>>>>>>> v3.18
 struct mac_device_info;
 
 struct stmmac_ops {
@@ -459,6 +483,9 @@ struct stmmac_ops {
 	void (*set_eee_pls)(struct mac_device_info *hw, int link);
 	void (*ctrl_ane)(struct mac_device_info *hw, bool restart);
 	void (*get_adv)(struct mac_device_info *hw, struct rgmii_adv *adv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -484,6 +511,7 @@ struct mii_regs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct stmmac_ring_mode_ops {
 	unsigned int (*is_jumbo_frm) (int len, int ehn_desc);
 	unsigned int (*jumbo_frm) (void *priv, struct sk_buff *skb, int csum);
@@ -499,6 +527,8 @@ struct stmmac_chain_mode_ops {
 	unsigned int (*is_jumbo_frm) (int len, int ehn_desc);
 	unsigned int (*jumbo_frm) (void *priv, struct sk_buff *skb, int csum);
 =======
+=======
+>>>>>>> v3.18
 struct stmmac_mode_ops {
 	void (*init) (void *des, dma_addr_t phy_addr, unsigned int size,
 		      unsigned int extend_desc);
@@ -506,6 +536,9 @@ struct stmmac_mode_ops {
 	int (*jumbo_frm)(void *priv, struct sk_buff *skb, int csum);
 	int (*set_16kib_bfsize)(int mtu);
 	void (*init_desc3)(struct dma_desc *p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*refill_desc3) (void *priv, struct dma_desc *p);
 	void (*clean_desc3) (void *priv, struct dma_desc *p);
@@ -516,8 +549,12 @@ struct mac_device_info {
 	const struct stmmac_desc_ops *desc;
 	const struct stmmac_dma_ops *dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct stmmac_ring_mode_ops *ring;
 	const struct stmmac_chain_mode_ops *chain;
+=======
+	const struct stmmac_mode_ops *mode;
+>>>>>>> v3.18
 =======
 	const struct stmmac_mode_ops *mode;
 >>>>>>> v3.18
@@ -525,6 +562,7 @@ struct mac_device_info {
 	struct mii_regs mii;	/* MII register Addresses */
 	struct mac_link link;
 	unsigned int synopsys_uid;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -542,6 +580,8 @@ extern void dwmac_dma_flush_tx_fifo(void __iomem *ioaddr);
 extern const struct stmmac_ring_mode_ops ring_mode_ops;
 extern const struct stmmac_chain_mode_ops chain_mode_ops;
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *pcsr;     /* vpointer to device CSRs */
 	int multicast_filter_bins;
 	int unicast_filter_entries;
@@ -563,6 +603,9 @@ void stmmac_set_mac(void __iomem *ioaddr, bool enable);
 void dwmac_dma_flush_tx_fifo(void __iomem *ioaddr);
 extern const struct stmmac_mode_ops ring_mode_ops;
 extern const struct stmmac_mode_ops chain_mode_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __COMMON_H__ */

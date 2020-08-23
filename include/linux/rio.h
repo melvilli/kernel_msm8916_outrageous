@@ -21,6 +21,10 @@
 #include <linux/device.h>
 #include <linux/rio_regs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mod_devicetable.h>
+>>>>>>> v3.18
 =======
 #include <linux/mod_devicetable.h>
 >>>>>>> v3.18
@@ -87,7 +91,11 @@
 
 extern struct bus_type rio_bus_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device rio_bus;
+=======
+extern struct class rio_mport_class;
+>>>>>>> v3.18
 =======
 extern struct class rio_mport_class;
 >>>>>>> v3.18
@@ -100,10 +108,13 @@ union rio_pw_msg;
  * struct rio_switch - RIO switch info
  * @node: Node in global list of switches
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @switchid: Switch ID that is unique across a network
  * @route_table: Copy of switch routing table
  * @port_ok: Status of each port (one bit per port) - OK=1 or UNINIT=0
 =======
+=======
+>>>>>>> v3.18
  * @route_table: Copy of switch routing table
  * @port_ok: Status of each port (one bit per port) - OK=1 or UNINIT=0
  * @ops: pointer to switch-specific operations
@@ -122,6 +133,9 @@ struct rio_switch {
 /**
  * struct rio_switch_ops - Per-switch operations
  * @owner: The module owner of this structure
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @add_entry: Callback for switch-specific route add function
  * @get_entry: Callback for switch-specific route get function
@@ -130,6 +144,7 @@ struct rio_switch {
  * @get_domain: Callback for switch-specific domain get function
  * @em_init: Callback for switch-specific error management init function
  * @em_handle: Callback for switch-specific error management handler function
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @sw_sysfs: Callback that initializes switch-specific sysfs attributes
  * @nextdev: Array of per-port pointers to the next attached device
@@ -140,12 +155,17 @@ struct rio_switch {
 	u8 *route_table;
 	u32 port_ok;
 =======
+=======
+>>>>>>> v3.18
  *
  * Defines the operations that are necessary to initialize/control
  * a particular RIO switch device.
  */
 struct rio_switch_ops {
 	struct module *owner;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*add_entry) (struct rio_mport *mport, u16 destid, u8 hopcount,
 			  u16 table, u16 route_destid, u8 route_port);
@@ -160,8 +180,11 @@ struct rio_switch_ops {
 	int (*em_init) (struct rio_dev *dev);
 	int (*em_handle) (struct rio_dev *dev, u8 swport);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*sw_sysfs) (struct rio_dev *dev, int create);
 	struct rio_dev *nextdev[0];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -172,6 +195,10 @@ struct rio_switch_ops {
  * @net_list: Node in list of RIO devices in a network
  * @net: Network this device is a part of
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @do_enum: Enumeration flag
+>>>>>>> v3.18
 =======
  * @do_enum: Enumeration flag
 >>>>>>> v3.18
@@ -204,6 +231,10 @@ struct rio_dev {
 	struct list_head net_list;	/* node in per net list */
 	struct rio_net *net;	/* RIO net this device resides in */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool do_enum;
+>>>>>>> v3.18
 =======
 	bool do_enum;
 >>>>>>> v3.18
@@ -237,6 +268,10 @@ struct rio_dev {
 #define	to_rio_dev(n) container_of(n, struct rio_dev, dev)
 #define sw_to_rio_dev(n) container_of(n, struct rio_dev, rswitch[0])
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	to_rio_mport(n) container_of(n, struct rio_mport, dev)
+>>>>>>> v3.18
 =======
 #define	to_rio_mport(n) container_of(n, struct rio_mport, dev)
 >>>>>>> v3.18
@@ -288,6 +323,10 @@ enum rio_phy_type {
  * @phys_efptr: RIO port extended features pointer
  * @name: Port name string
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @dev: device structure associated with an mport
+>>>>>>> v3.18
 =======
  * @dev: device structure associated with an mport
 >>>>>>> v3.18
@@ -316,6 +355,10 @@ struct rio_mport {
 	u32 phys_efptr;
 	unsigned char name[RIO_MAX_MPORT_NAME];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device dev;
+>>>>>>> v3.18
 =======
 	struct device dev;
 >>>>>>> v3.18
@@ -359,10 +402,13 @@ struct rio_net {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Definitions used by switch sysfs initialization callback */
 #define RIO_SW_SYSFS_CREATE	1	/* Create switch attributes */
 #define RIO_SW_SYSFS_REMOVE	0	/* Remove switch attributes */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Low-level architecture-dependent routines */
@@ -450,6 +496,7 @@ struct rio_driver {
 #define	to_rio_driver(drv) container_of(drv,struct rio_driver, driver)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct rio_device_id - RIO device identifier
  * @did: RIO device ID
@@ -479,6 +526,8 @@ struct rio_switch_ops {
 	int (*init_hook) (struct rio_dev *rdev, int do_enum);
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 union rio_pw_msg {
@@ -536,6 +585,10 @@ static inline struct rio_mport *dma_to_mport(struct dma_device *ddev)
 /**
  * struct rio_scan - RIO enumeration and discovery operations
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @owner: The module owner of this structure
+>>>>>>> v3.18
 =======
  * @owner: The module owner of this structure
 >>>>>>> v3.18
@@ -544,6 +597,10 @@ static inline struct rio_mport *dma_to_mport(struct dma_device *ddev)
  */
 struct rio_scan {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct module *owner;
+>>>>>>> v3.18
 =======
 	struct module *owner;
 >>>>>>> v3.18
@@ -552,7 +609,10 @@ struct rio_scan {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct rio_scan_node - list node to register RapidIO enumeration and
  * discovery methods with RapidIO core.
@@ -566,6 +626,9 @@ struct rio_scan_node {
 	struct rio_scan *ops;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Architecture and hardware-specific functions */
 extern int rio_register_mport(struct rio_mport *);

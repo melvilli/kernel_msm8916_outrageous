@@ -183,6 +183,7 @@ need_resched:
 	and3	r4, r4, #0x4000
 	beqz	r4, restore_all
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LDIMM	(r4, PREEMPT_ACTIVE)
 	st	r4, @(TI_PRE_COUNT, r8)
 	ENABLE_INTERRUPTS(r4)
@@ -190,6 +191,9 @@ need_resched:
 	ldi	r4, #0
 	st	r4, @(TI_PRE_COUNT, r8)
 	DISABLE_INTERRUPTS(r4)
+=======
+	bl	preempt_schedule_irq
+>>>>>>> v3.18
 =======
 	bl	preempt_schedule_irq
 >>>>>>> v3.18

@@ -3,9 +3,13 @@
  * from the LIO-Target Project.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
 #include <linux/configfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ctype.h>
+>>>>>>> v3.18
 =======
 #include <linux/ctype.h>
 >>>>>>> v3.18
@@ -87,18 +95,24 @@ static ssize_t lio_target_np_store_sctp(
 				struct iscsi_tpg_np, se_tpg_np);
 	struct iscsi_tpg_np *tpg_np_sctp = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endptr;
 	u32 op;
 	int ret;
 
 	op = simple_strtoul(page, &endptr, 0);
 =======
+=======
+>>>>>>> v3.18
 	u32 op;
 	int ret;
 
 	ret = kstrtou32(page, 0, &op);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((op != 1) && (op != 0)) {
 		pr_err("Illegal value for tpg_enable: %u\n", op);
@@ -281,9 +295,15 @@ static struct se_tpg_np *lio_target_call_addnptotpg(
 		port_str++; /* Skip over ":" */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = strict_strtoul(port_str, 0, &port);
 		if (ret < 0) {
 			pr_err("strict_strtoul() failed for port_str: %d\n", ret);
+=======
+		ret = kstrtoul(port_str, 0, &port);
+		if (ret < 0) {
+			pr_err("kstrtoul() failed for port_str: %d\n", ret);
+>>>>>>> v3.18
 =======
 		ret = kstrtoul(port_str, 0, &port);
 		if (ret < 0) {
@@ -312,9 +332,15 @@ static struct se_tpg_np *lio_target_call_addnptotpg(
 		port_str++; /* Skip over ":" */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = strict_strtoul(port_str, 0, &port);
 		if (ret < 0) {
 			pr_err("strict_strtoul() failed for port_str: %d\n", ret);
+=======
+		ret = kstrtoul(port_str, 0, &port);
+		if (ret < 0) {
+			pr_err("kstrtoul() failed for port_str: %d\n", ret);
+>>>>>>> v3.18
 =======
 		ret = kstrtoul(port_str, 0, &port);
 		if (ret < 0) {
@@ -402,7 +428,11 @@ static ssize_t iscsi_nacl_attrib_show_##name(				\
 					se_node_acl);			\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(page, "%u\n", ISCSI_NODE_ATTRIB(nacl)->name);	\
+=======
+	return sprintf(page, "%u\n", nacl->node_attrib.name);		\
+>>>>>>> v3.18
 =======
 	return sprintf(page, "%u\n", nacl->node_attrib.name);		\
 >>>>>>> v3.18
@@ -416,18 +446,24 @@ static ssize_t iscsi_nacl_attrib_store_##name(				\
 	struct iscsi_node_acl *nacl = container_of(se_nacl, struct iscsi_node_acl, \
 					se_node_acl);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endptr;							\
 	u32 val;							\
 	int ret;							\
 									\
 	val = simple_strtoul(page, &endptr, 0);				\
 =======
+=======
+>>>>>>> v3.18
 	u32 val;							\
 	int ret;							\
 									\
 	ret = kstrtou32(page, 0, &val);					\
 	if (ret)							\
 		return ret;						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = iscsit_na_##name(nacl, val);				\
 	if (ret < 0)							\
@@ -516,7 +552,12 @@ static ssize_t __iscsi_##prefix##_store_##name(				\
 	if (!capable(CAP_SYS_ADMIN))					\
 		return -EPERM;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 									\
+=======
+	if (count >= sizeof(auth->name))				\
+		return -EINVAL;						\
+>>>>>>> v3.18
 =======
 	if (count >= sizeof(auth->name))				\
 		return -EINVAL;						\
@@ -715,6 +756,7 @@ static ssize_t lio_target_nacl_show_info(
 		sess = se_sess->fabric_sess_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sess->sess_ops->InitiatorName)
 			rb += sprintf(page+rb, "InitiatorName: %s\n",
 				sess->sess_ops->InitiatorName);
@@ -722,10 +764,15 @@ static ssize_t lio_target_nacl_show_info(
 			rb += sprintf(page+rb, "InitiatorAlias: %s\n",
 				sess->sess_ops->InitiatorAlias);
 =======
+=======
+>>>>>>> v3.18
 		rb += sprintf(page+rb, "InitiatorName: %s\n",
 			sess->sess_ops->InitiatorName);
 		rb += sprintf(page+rb, "InitiatorAlias: %s\n",
 			sess->sess_ops->InitiatorAlias);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rb += sprintf(page+rb, "LIO Session ID: %u   "
@@ -844,18 +891,24 @@ static ssize_t lio_target_nacl_store_cmdsn_depth(
 			struct iscsi_portal_group, tpg_se_tpg);
 	struct config_item *acl_ci, *tpg_ci, *wwn_ci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endptr;
 	u32 cmdsn_depth = 0;
 	int ret;
 
 	cmdsn_depth = simple_strtoul(page, &endptr, 0);
 =======
+=======
+>>>>>>> v3.18
 	u32 cmdsn_depth = 0;
 	int ret;
 
 	ret = kstrtou32(page, 0, &cmdsn_depth);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cmdsn_depth > TA_DEFAULT_CMDSN_DEPTH_MAX) {
 		pr_err("Passed cmdsn_depth: %u exceeds"
@@ -959,7 +1012,11 @@ static struct se_node_acl *lio_target_make_nodeacl(
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmdsn_depth = ISCSI_TPG_ATTRIB(tpg)->default_cmdsn_depth;
+=======
+	cmdsn_depth = tpg->tpg_attrib.default_cmdsn_depth;
+>>>>>>> v3.18
 =======
 	cmdsn_depth = tpg->tpg_attrib.default_cmdsn_depth;
 >>>>>>> v3.18
@@ -986,9 +1043,15 @@ static struct se_node_acl *lio_target_make_nodeacl(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats_cg->default_groups[0] = &NODE_STAT_GRPS(acl)->iscsi_sess_stats_group;
 	stats_cg->default_groups[1] = NULL;
 	config_group_init_type_name(&NODE_STAT_GRPS(acl)->iscsi_sess_stats_group,
+=======
+	stats_cg->default_groups[0] = &acl->node_stat_grps.iscsi_sess_stats_group;
+	stats_cg->default_groups[1] = NULL;
+	config_group_init_type_name(&acl->node_stat_grps.iscsi_sess_stats_group,
+>>>>>>> v3.18
 =======
 	stats_cg->default_groups[0] = &acl->node_stat_grps.iscsi_sess_stats_group;
 	stats_cg->default_groups[1] = NULL;
@@ -1039,7 +1102,11 @@ static ssize_t iscsi_tpg_attrib_show_##name(				\
 		return -EINVAL;						\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rb = sprintf(page, "%u\n", ISCSI_TPG_ATTRIB(tpg)->name);	\
+=======
+	rb = sprintf(page, "%u\n", tpg->tpg_attrib.name);		\
+>>>>>>> v3.18
 =======
 	rb = sprintf(page, "%u\n", tpg->tpg_attrib.name);		\
 >>>>>>> v3.18
@@ -1055,7 +1122,10 @@ static ssize_t iscsi_tpg_attrib_store_##name(				\
 	struct iscsi_portal_group *tpg = container_of(se_tpg,		\
 			struct iscsi_portal_group, tpg_se_tpg);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endptr;							\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 val;							\
@@ -1065,7 +1135,13 @@ static ssize_t iscsi_tpg_attrib_store_##name(				\
 		return -EINVAL;						\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = simple_strtoul(page, &endptr, 0);				\
+=======
+	ret = kstrtou32(page, 0, &val);					\
+	if (ret)							\
+		goto out;						\
+>>>>>>> v3.18
 =======
 	ret = kstrtou32(page, 0, &val);					\
 	if (ret)							\
@@ -1125,7 +1201,10 @@ TPG_ATTR(demo_mode_write_protect, S_IRUGO | S_IWUSR);
 DEF_TPG_ATTRIB(prod_mode_write_protect);
 TPG_ATTR(prod_mode_write_protect, S_IRUGO | S_IWUSR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Define iscsi_tpg_attrib_s_demo_mode_discovery,
  */
@@ -1141,6 +1220,9 @@ TPG_ATTR(default_erl, S_IRUGO | S_IWUSR);
  */
 DEF_TPG_ATTRIB(t10_pi);
 TPG_ATTR(t10_pi, S_IRUGO | S_IWUSR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct configfs_attribute *lio_target_tpg_attrib_attrs[] = {
@@ -1153,6 +1235,12 @@ static struct configfs_attribute *lio_target_tpg_attrib_attrs[] = {
 	&iscsi_tpg_attrib_demo_mode_write_protect.attr,
 	&iscsi_tpg_attrib_prod_mode_write_protect.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&iscsi_tpg_attrib_demo_mode_discovery.attr,
+	&iscsi_tpg_attrib_default_erl.attr,
+	&iscsi_tpg_attrib_t10_pi.attr,
+>>>>>>> v3.18
 =======
 	&iscsi_tpg_attrib_demo_mode_discovery.attr,
 	&iscsi_tpg_attrib_default_erl.attr,
@@ -1164,7 +1252,10 @@ static struct configfs_attribute *lio_target_tpg_attrib_attrs[] = {
 /* End items for lio_target_tpg_attrib_cit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Start items for lio_target_tpg_auth_cit */
 
 #define __DEF_TPG_AUTH_STR(prefix, name, flags)					\
@@ -1290,6 +1381,9 @@ static struct configfs_attribute *lio_target_tpg_auth_attrs[] = {
 
 /* End items for lio_target_tpg_auth_cit */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Start items for lio_target_tpg_param_cit */
 
@@ -1326,7 +1420,11 @@ static ssize_t iscsi_tpg_param_store_##name(				\
 			struct iscsi_portal_group, tpg_se_tpg);		\
 	char *buf;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;							\
+=======
+	int ret, len;							\
+>>>>>>> v3.18
 =======
 	int ret, len;							\
 >>>>>>> v3.18
@@ -1335,8 +1433,14 @@ static ssize_t iscsi_tpg_param_store_##name(				\
 	if (!buf)							\
 		return -ENOMEM;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(buf, PAGE_SIZE, "%s=%s", __stringify(name), page);	\
 	buf[strlen(buf)-1] = '\0'; /* Kill newline */			\
+=======
+	len = snprintf(buf, PAGE_SIZE, "%s=%s", __stringify(name), page);	\
+	if (isspace(buf[len-1]))					\
+		buf[len-1] = '\0'; /* Kill newline */			\
+>>>>>>> v3.18
 =======
 	len = snprintf(buf, PAGE_SIZE, "%s=%s", __stringify(name), page);	\
 	if (isspace(buf[len-1]))					\
@@ -1479,18 +1583,24 @@ static ssize_t lio_target_tpg_store_enable(
 	struct iscsi_portal_group *tpg = container_of(se_tpg,
 			struct iscsi_portal_group, tpg_se_tpg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endptr;
 	u32 op;
 	int ret = 0;
 
 	op = simple_strtoul(page, &endptr, 0);
 =======
+=======
+>>>>>>> v3.18
 	u32 op;
 	int ret;
 
 	ret = kstrtou32(page, 0, &op);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((op != 1) && (op != 0)) {
 		pr_err("Illegal value for tpg_enable: %u\n", op);
@@ -1540,9 +1650,15 @@ static struct se_portal_group *lio_target_tiqn_addtpg(
 	struct iscsi_portal_group *tpg;
 	struct iscsi_tiqn *tiqn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *tpgt_str, *end_ptr;
 	int ret = 0;
 	unsigned short int tpgt;
+=======
+	char *tpgt_str;
+	int ret;
+	u16 tpgt;
+>>>>>>> v3.18
 =======
 	char *tpgt_str;
 	int ret;
@@ -1554,7 +1670,11 @@ static struct se_portal_group *lio_target_tiqn_addtpg(
 	 * Only tpgt_# directory groups can be created below
 	 * target/iscsi/iqn.superturodiskarry/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*/
+=======
+	 */
+>>>>>>> v3.18
 =======
 	 */
 >>>>>>> v3.18
@@ -1566,7 +1686,13 @@ static struct se_portal_group *lio_target_tiqn_addtpg(
 	}
 	tpgt_str += 5; /* Skip ahead of "tpgt_" */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tpgt = (unsigned short int) simple_strtoul(tpgt_str, &end_ptr, 0);
+=======
+	ret = kstrtou16(tpgt_str, 0, &tpgt);
+	if (ret)
+		return NULL;
+>>>>>>> v3.18
 =======
 	ret = kstrtou16(tpgt_str, 0, &tpgt);
 	if (ret)
@@ -1621,7 +1747,11 @@ static ssize_t lio_target_wwn_show_attr_lio_version(
 	char *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(page, "RisingTide Systems Linux-iSCSI Target "ISCSIT_VERSION"\n");
+=======
+	return sprintf(page, "Datera Inc. iSCSI Target "ISCSIT_VERSION"\n");
+>>>>>>> v3.18
 =======
 	return sprintf(page, "Datera Inc. iSCSI Target "ISCSIT_VERSION"\n");
 >>>>>>> v3.18
@@ -1660,6 +1790,7 @@ static struct se_wwn *lio_target_call_coreaddtiqn(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats_cg->default_groups[0] = &WWN_STAT_GRPS(tiqn)->iscsi_instance_group;
 	stats_cg->default_groups[1] = &WWN_STAT_GRPS(tiqn)->iscsi_sess_err_group;
 	stats_cg->default_groups[2] = &WWN_STAT_GRPS(tiqn)->iscsi_tgt_attr_group;
@@ -1676,6 +1807,8 @@ static struct se_wwn *lio_target_call_coreaddtiqn(
 			"iscsi_login_stats", &iscsi_stat_login_cit);
 	config_group_init_type_name(&WWN_STAT_GRPS(tiqn)->iscsi_logout_stats_group,
 =======
+=======
+>>>>>>> v3.18
 	stats_cg->default_groups[0] = &tiqn->tiqn_stat_grps.iscsi_instance_group;
 	stats_cg->default_groups[1] = &tiqn->tiqn_stat_grps.iscsi_sess_err_group;
 	stats_cg->default_groups[2] = &tiqn->tiqn_stat_grps.iscsi_tgt_attr_group;
@@ -1691,6 +1824,9 @@ static struct se_wwn *lio_target_call_coreaddtiqn(
 	config_group_init_type_name(&tiqn->tiqn_stat_grps.iscsi_login_stats_group,
 			"iscsi_login_stats", &iscsi_stat_login_cit);
 	config_group_init_type_name(&tiqn->tiqn_stat_grps.iscsi_logout_stats_group,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			"iscsi_logout_stats", &iscsi_stat_logout_cit);
 
@@ -1802,17 +1938,23 @@ static ssize_t iscsi_disc_store_enforce_discovery_auth(
 	struct iscsi_param *param;
 	struct iscsi_portal_group *discovery_tpg = iscsit_global->discovery_tpg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endptr;
 	u32 op;
 
 	op = simple_strtoul(page, &endptr, 0);
 =======
+=======
+>>>>>>> v3.18
 	u32 op;
 	int err;
 
 	err = kstrtou32(page, 0, &op);
 	if (err)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((op != 1) && (op != 0)) {
 		pr_err("Illegal value for enforce_discovery_auth:"
@@ -1965,7 +2107,11 @@ static int lio_queue_status(struct se_cmd *se_cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lio_queue_tm_rsp(struct se_cmd *se_cmd)
+=======
+static void lio_queue_tm_rsp(struct se_cmd *se_cmd)
+>>>>>>> v3.18
 =======
 static void lio_queue_tm_rsp(struct se_cmd *se_cmd)
 >>>>>>> v3.18
@@ -1975,8 +2121,11 @@ static void lio_queue_tm_rsp(struct se_cmd *se_cmd)
 	cmd->i_state = ISTATE_SEND_TASKMGTRSP;
 	iscsit_add_cmd_to_response_queue(cmd, cmd->conn, cmd->i_state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void lio_aborted_task(struct se_cmd *se_cmd)
@@ -1984,6 +2133,9 @@ static void lio_aborted_task(struct se_cmd *se_cmd)
 	struct iscsi_cmd *cmd = container_of(se_cmd, struct iscsi_cmd, se_cmd);
 
 	cmd->conn->conn_transport->iscsit_aborted_task(cmd->conn, cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2006,7 +2158,11 @@ static u32 lio_tpg_get_default_depth(struct se_portal_group *se_tpg)
 	struct iscsi_portal_group *tpg = se_tpg->se_tpg_fabric_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ISCSI_TPG_ATTRIB(tpg)->default_cmdsn_depth;
+=======
+	return tpg->tpg_attrib.default_cmdsn_depth;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.default_cmdsn_depth;
 >>>>>>> v3.18
@@ -2017,7 +2173,11 @@ static int lio_tpg_check_demo_mode(struct se_portal_group *se_tpg)
 	struct iscsi_portal_group *tpg = se_tpg->se_tpg_fabric_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ISCSI_TPG_ATTRIB(tpg)->generate_node_acls;
+=======
+	return tpg->tpg_attrib.generate_node_acls;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.generate_node_acls;
 >>>>>>> v3.18
@@ -2028,7 +2188,11 @@ static int lio_tpg_check_demo_mode_cache(struct se_portal_group *se_tpg)
 	struct iscsi_portal_group *tpg = se_tpg->se_tpg_fabric_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ISCSI_TPG_ATTRIB(tpg)->cache_dynamic_acls;
+=======
+	return tpg->tpg_attrib.cache_dynamic_acls;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.cache_dynamic_acls;
 >>>>>>> v3.18
@@ -2040,7 +2204,11 @@ static int lio_tpg_check_demo_mode_write_protect(
 	struct iscsi_portal_group *tpg = se_tpg->se_tpg_fabric_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ISCSI_TPG_ATTRIB(tpg)->demo_mode_write_protect;
+=======
+	return tpg->tpg_attrib.demo_mode_write_protect;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.demo_mode_write_protect;
 >>>>>>> v3.18
@@ -2052,7 +2220,11 @@ static int lio_tpg_check_prod_mode_write_protect(
 	struct iscsi_portal_group *tpg = se_tpg->se_tpg_fabric_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ISCSI_TPG_ATTRIB(tpg)->prod_mode_write_protect;
+=======
+	return tpg->tpg_attrib.prod_mode_write_protect;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.prod_mode_write_protect;
 >>>>>>> v3.18
@@ -2069,8 +2241,12 @@ static void lio_tpg_release_fabric_acl(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called with spin_lock_irq(struct se_portal_group->session_lock) held
  * or not held.
+=======
+ * Called with spin_lock_bh(struct se_portal_group->session_lock) held..
+>>>>>>> v3.18
 =======
  * Called with spin_lock_bh(struct se_portal_group->session_lock) held..
 >>>>>>> v3.18
@@ -2082,6 +2258,7 @@ static int lio_tpg_shutdown_session(struct se_session *se_sess)
 {
 	struct iscsi_session *sess = se_sess->fabric_sess_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct se_portal_group *se_tpg = se_sess->se_tpg;
 	bool local_lock = false;
 
@@ -2091,6 +2268,8 @@ static int lio_tpg_shutdown_session(struct se_session *se_sess)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	spin_lock(&sess->conn_lock);
 	if (atomic_read(&sess->session_fall_back_to_erl0) ||
@@ -2098,8 +2277,11 @@ static int lio_tpg_shutdown_session(struct se_session *se_sess)
 	    (sess->time2retain_timer_flags & ISCSI_TF_EXPIRED)) {
 		spin_unlock(&sess->conn_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (local_lock)
 			spin_unlock_irq(&sess->conn_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;
@@ -2109,11 +2291,15 @@ static int lio_tpg_shutdown_session(struct se_session *se_sess)
 
 	iscsit_stop_time2retain_timer(sess);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&se_tpg->session_lock);
 
 	iscsit_stop_session(sess, 1, 1);
 	if (!local_lock)
 		spin_lock_irq(&se_tpg->session_lock);
+=======
+	iscsit_stop_session(sess, 1, 1);
+>>>>>>> v3.18
 =======
 	iscsit_stop_session(sess, 1, 1);
 >>>>>>> v3.18
@@ -2147,16 +2333,22 @@ static void lio_set_default_node_attributes(struct se_node_acl *se_acl)
 	struct iscsi_node_acl *acl = container_of(se_acl, struct iscsi_node_acl,
 				se_node_acl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ISCSI_NODE_ATTRIB(acl)->nacl = acl;
 	iscsit_set_default_node_attribues(acl);
 =======
+=======
+>>>>>>> v3.18
 	struct se_portal_group *se_tpg = se_acl->se_tpg;
 	struct iscsi_portal_group *tpg = container_of(se_tpg,
 				struct iscsi_portal_group, tpg_se_tpg);
 
 	acl->node_attrib.nacl = acl;
 	iscsit_set_default_node_attribues(acl, tpg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2171,7 +2363,11 @@ static void lio_release_cmd(struct se_cmd *se_cmd)
 
 	pr_debug("Entering lio_release_cmd for se_cmd: %p\n", se_cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->release_cmd(cmd);
+=======
+	iscsit_release_cmd(cmd);
+>>>>>>> v3.18
 =======
 	iscsit_release_cmd(cmd);
 >>>>>>> v3.18
@@ -2230,6 +2426,10 @@ int iscsi_target_register_configfs(void)
 	fabric->tf_ops.queue_status = &lio_queue_status;
 	fabric->tf_ops.queue_tm_rsp = &lio_queue_tm_rsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fabric->tf_ops.aborted_task = &lio_aborted_task;
+>>>>>>> v3.18
 =======
 	fabric->tf_ops.aborted_task = &lio_aborted_task;
 >>>>>>> v3.18
@@ -2251,6 +2451,7 @@ int iscsi_target_register_configfs(void)
 	 * sturct config_item_type's
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TF_CIT_TMPL(fabric)->tfc_discovery_cit.ct_attrs = lio_target_discovery_auth_attrs;
 	TF_CIT_TMPL(fabric)->tfc_wwn_cit.ct_attrs = lio_target_wwn_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_base_cit.ct_attrs = lio_target_tpg_attrs;
@@ -2262,6 +2463,8 @@ int iscsi_target_register_configfs(void)
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_auth_cit.ct_attrs = lio_target_nacl_auth_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_param_cit.ct_attrs = lio_target_nacl_param_attrs;
 =======
+=======
+>>>>>>> v3.18
 	fabric->tf_cit_tmpl.tfc_discovery_cit.ct_attrs = lio_target_discovery_auth_attrs;
 	fabric->tf_cit_tmpl.tfc_wwn_cit.ct_attrs = lio_target_wwn_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_base_cit.ct_attrs = lio_target_tpg_attrs;
@@ -2273,6 +2476,9 @@ int iscsi_target_register_configfs(void)
 	fabric->tf_cit_tmpl.tfc_tpg_nacl_attrib_cit.ct_attrs = lio_target_nacl_attrib_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_nacl_auth_cit.ct_attrs = lio_target_nacl_auth_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_nacl_param_cit.ct_attrs = lio_target_nacl_param_attrs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = target_fabric_configfs_register(fabric);

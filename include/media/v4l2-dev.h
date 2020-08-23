@@ -25,7 +25,12 @@
 #define VFL_TYPE_RADIO		2
 #define VFL_TYPE_SUBDEV		3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VFL_TYPE_MAX		4
+=======
+#define VFL_TYPE_SDR		4
+#define VFL_TYPE_MAX		5
+>>>>>>> v3.18
 =======
 #define VFL_TYPE_SDR		4
 #define VFL_TYPE_MAX		5
@@ -49,8 +54,11 @@ struct v4l2_ctrl_handler;
 /* file->private_data points to struct v4l2_fh */
 #define V4L2_FL_USES_V4L2_FH	(1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Use the prio field of v4l2_fh for core priority checking */
 #define V4L2_FL_USE_FH_PRIO	(2)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -105,9 +113,15 @@ struct video_device
 	struct cdev *cdev;		/* character device */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set either parent or v4l2_dev if your driver uses v4l2_device */
 	struct device *parent;		/* device parent */
 	struct v4l2_device *v4l2_dev;	/* v4l2_device parent */
+=======
+	struct v4l2_device *v4l2_dev;	/* v4l2_device parent */
+	/* Only set parent if that can't be deduced from v4l2_dev */
+	struct device *dev_parent;	/* device parent */
+>>>>>>> v3.18
 =======
 	struct v4l2_device *v4l2_dev;	/* v4l2_device parent */
 	/* Only set parent if that can't be deduced from v4l2_dev */
@@ -144,7 +158,10 @@ struct video_device
 	/* Video standard vars */
 	v4l2_std_id tvnorms;		/* Supported tv norms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_std_id current_norm;	/* Current tvnorm */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

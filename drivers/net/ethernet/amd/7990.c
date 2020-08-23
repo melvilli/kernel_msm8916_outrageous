@@ -18,7 +18,10 @@
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -46,9 +49,15 @@
 #include "7990.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WRITERAP(lp,x) out_be16(lp->base + LANCE_RAP, (x))
 #define WRITERDP(lp,x) out_be16(lp->base + LANCE_RDP, (x))
 #define READRDP(lp) in_be16(lp->base + LANCE_RDP)
+=======
+#define WRITERAP(lp, x)	out_be16(lp->base + LANCE_RAP, (x))
+#define WRITERDP(lp, x)	out_be16(lp->base + LANCE_RDP, (x))
+#define READRDP(lp)	in_be16(lp->base + LANCE_RDP)
+>>>>>>> v3.18
 =======
 #define WRITERAP(lp, x)	out_be16(lp->base + LANCE_RAP, (x))
 #define WRITERDP(lp, x)	out_be16(lp->base + LANCE_RDP, (x))
@@ -66,9 +75,15 @@
 
 /* Lossage Factor Nine, Mr Sulu. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WRITERAP(lp,x) (lp->writerap(lp,x))
 #define WRITERDP(lp,x) (lp->writerdp(lp,x))
 #define READRDP(lp) (lp->readrdp(lp))
+=======
+#define WRITERAP(lp, x)	(lp->writerap(lp, x))
+#define WRITERDP(lp, x)	(lp->writerdp(lp, x))
+#define READRDP(lp)	(lp->readrdp(lp))
+>>>>>>> v3.18
 =======
 #define WRITERAP(lp, x)	(lp->writerap(lp, x))
 #define WRITERDP(lp, x)	(lp->writerdp(lp, x))
@@ -110,6 +125,7 @@ static inline __u16 READRDP(struct lance_private *lp)
 #define PRINT_RINGS() \
 do { \
 <<<<<<< HEAD
+<<<<<<< HEAD
         int t; \
         for (t=0; t < RX_RING_SIZE; t++) { \
                 printk("R%d: @(%02X %04X) len %04X, mblen %04X, bits %02X\n",\
@@ -124,6 +140,8 @@ do { \
                        ib->btx_ring[t].misc, ib->btx_ring[t].tmd1_bits);\
         }\
 =======
+=======
+>>>>>>> v3.18
 	int t; \
 	for (t = 0; t < RX_RING_SIZE; t++) { \
 		printk("R%d: @(%02X %04X) len %04X, mblen %04X, bits %02X\n", \
@@ -137,6 +155,9 @@ do { \
 		       ib->btx_ring[t].length, \
 		       ib->btx_ring[t].misc, ib->btx_ring[t].tmd1_bits); \
 	} \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } while (0)
 #else
@@ -144,6 +165,7 @@ do { \
 #endif
 
 /* Load the CSR registers. The LANCE has to be STOPped when we do this! */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void load_csrs (struct lance_private *lp)
 {
@@ -162,6 +184,8 @@ static void load_csrs (struct lance_private *lp)
         /* Point back to csr0 */
         WRITERAP(lp, LE_CSR0);
 =======
+=======
+>>>>>>> v3.18
 static void load_csrs(struct lance_private *lp)
 {
 	volatile struct lance_init_block *aib = lp->lance_init_block;
@@ -178,12 +202,16 @@ static void load_csrs(struct lance_private *lp)
 
 	/* Point back to csr0 */
 	WRITERAP(lp, LE_CSR0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* #define to 0 or 1 appropriately */
 #define DEBUG_IRING 0
 /* Set up the Lance Rx and Tx rings and the init block */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void lance_init_ring (struct net_device *dev)
 {
@@ -342,6 +370,8 @@ static int lance_rx (struct net_device *dev)
         }
         printk ("]");
 =======
+=======
+>>>>>>> v3.18
 static void lance_init_ring(struct net_device *dev)
 {
 	struct lance_private *lp = netdev_priv(dev);
@@ -498,11 +528,15 @@ static int lance_rx(struct net_device *dev)
 			      ib->brx_ring[i].rmd1_bits & LE_R1_OWN ? "." : "1");
 	}
 	printk("]");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_HP300
 	blinken_leds(0x40, 0);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
         WRITERDP(lp, LE_C0_RINT | LE_C0_INEA);     /* ack Rx int, reenable ints */
         for (rd = &ib->brx_ring [lp->rx_new];     /* For each Rx ring we own... */
@@ -562,6 +596,8 @@ static int lance_tx (struct net_device *dev)
         int i, j;
         int status;
 =======
+=======
+>>>>>>> v3.18
 	WRITERDP(lp, LE_C0_RINT | LE_C0_INEA);     /* ack Rx int, reenable ints */
 	for (rd = &ib->brx_ring[lp->rx_new];     /* For each Rx ring we own... */
 	     !((bits = rd->rmd1_bits) & LE_R1_OWN);
@@ -624,11 +660,15 @@ static int lance_tx(struct net_device *dev)
 	volatile struct lance_tx_desc *td;
 	int i, j;
 	int status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_HP300
 	blinken_leds(0x80, 0);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
         /* csr0 is 2f3 */
         WRITERDP(lp, LE_C0_TINT | LE_C0_INEA);
@@ -774,6 +814,8 @@ int lance_open (struct net_device *dev)
 	spin_lock_init(&lp->devlock);
 	netif_start_queue (dev);
 =======
+=======
+>>>>>>> v3.18
 	/* csr0 is 2f3 */
 	WRITERDP(lp, LE_C0_TINT | LE_C0_INEA);
 	/* csr0 is 73 */
@@ -920,12 +962,16 @@ int lance_open(struct net_device *dev)
 	res = lance_reset(dev);
 	spin_lock_init(&lp->devlock);
 	netif_start_queue(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
 }
 EXPORT_SYMBOL_GPL(lance_open);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int lance_close (struct net_device *dev)
 {
@@ -941,6 +987,8 @@ int lance_close (struct net_device *dev)
 
         return 0;
 =======
+=======
+>>>>>>> v3.18
 int lance_close(struct net_device *dev)
 {
 	struct lance_private *lp = netdev_priv(dev);
@@ -954,6 +1002,9 @@ int lance_close(struct net_device *dev)
 	free_irq(lp->irq, dev);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(lance_close);
@@ -963,6 +1014,7 @@ void lance_tx_timeout(struct net_device *dev)
 	printk("lance_tx_timeout\n");
 	lance_reset(dev);
 	dev->trans_start = jiffies; /* prevent tx timeout */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	netif_wake_queue (dev);
 }
@@ -1022,6 +1074,8 @@ int lance_start_xmit (struct sk_buff *skb, struct net_device *dev)
 
         return NETDEV_TX_OK;
 =======
+=======
+>>>>>>> v3.18
 	netif_wake_queue(dev);
 }
 EXPORT_SYMBOL_GPL(lance_tx_timeout);
@@ -1079,11 +1133,15 @@ int lance_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	spin_unlock_irqrestore(&lp->devlock, flags);
 
 	return NETDEV_TX_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(lance_start_xmit);
 
 /* taken from the depca driver via a2065.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void lance_load_multicast (struct net_device *dev)
 {
@@ -1117,6 +1175,8 @@ void lance_set_multicast (struct net_device *dev)
         struct lance_private *lp = netdev_priv(dev);
         volatile struct lance_init_block *ib = lp->init_block;
 =======
+=======
+>>>>>>> v3.18
 static void lance_load_multicast(struct net_device *dev)
 {
 	struct lance_private *lp = netdev_priv(dev);
@@ -1148,11 +1208,15 @@ void lance_set_multicast(struct net_device *dev)
 {
 	struct lance_private *lp = netdev_priv(dev);
 	volatile struct lance_init_block *ib = lp->init_block;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int stopped;
 
 	stopped = netif_queue_stopped(dev);
 	if (!stopped)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		netif_stop_queue (dev);
 
@@ -1175,6 +1239,8 @@ void lance_set_multicast(struct net_device *dev)
 	if (!stopped)
 		netif_start_queue (dev);
 =======
+=======
+>>>>>>> v3.18
 		netif_stop_queue(dev);
 
 	while (lp->tx_old != lp->tx_new)
@@ -1195,6 +1261,9 @@ void lance_set_multicast(struct net_device *dev)
 
 	if (!stopped)
 		netif_start_queue(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(lance_set_multicast);
@@ -1205,15 +1274,21 @@ void lance_poll(struct net_device *dev)
 	struct lance_private *lp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock (&lp->devlock);
 	WRITERAP(lp, LE_CSR0);
 	WRITERDP(lp, LE_C0_STRT);
 	spin_unlock (&lp->devlock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&lp->devlock);
 	WRITERAP(lp, LE_CSR0);
 	WRITERDP(lp, LE_C0_STRT);
 	spin_unlock(&lp->devlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lance_interrupt(dev->irq, dev);
 }

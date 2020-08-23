@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* linux arch/arm/mach-exynos4/hotplug.c
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -23,6 +27,7 @@
 #include <asm/cp15.h>
 #include <asm/smp_plat.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/regs-pmu.h>
 #include <plat/cpu.h>
@@ -82,6 +87,10 @@ static inline void cpu_enter_lowpower_a15(void)
 #include "common.h"
 #include "regs-pmu.h"
 >>>>>>> v3.18
+=======
+#include "common.h"
+#include "regs-pmu.h"
+>>>>>>> v3.18
 
 static inline void cpu_leave_lowpower(void)
 {
@@ -102,6 +111,7 @@ static inline void cpu_leave_lowpower(void)
 static inline void platform_do_lowpower(unsigned int cpu, int *spurious)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;;) {
 
 		/* make cpu1 to be turned off at next WFI command */
@@ -118,6 +128,8 @@ static inline void platform_do_lowpower(unsigned int cpu, int *spurious)
 
 		if (pen_release == cpu_logical_map(cpu)) {
 =======
+=======
+>>>>>>> v3.18
 	u32 mpidr = cpu_logical_map(cpu);
 	u32 core_id = MPIDR_AFFINITY_LEVEL(mpidr, 0);
 
@@ -129,6 +141,9 @@ static inline void platform_do_lowpower(unsigned int cpu, int *spurious)
 		wfi();
 
 		if (pen_release == core_id) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * OK, proper wakeup, we're done
@@ -156,6 +171,7 @@ void __ref exynos_cpu_die(unsigned int cpu)
 {
 	int spurious = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int primary_part = 0;
 
 	/*
@@ -169,6 +185,10 @@ void __ref exynos_cpu_die(unsigned int cpu)
 		cpu_enter_lowpower_a15();
 	else
 		cpu_enter_lowpower_a9();
+=======
+
+	v7_exit_coherency_flush(louis);
+>>>>>>> v3.18
 =======
 
 	v7_exit_coherency_flush(louis);

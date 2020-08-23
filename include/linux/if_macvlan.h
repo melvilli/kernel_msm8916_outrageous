@@ -3,6 +3,10 @@
 
 #include <linux/if_link.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_vlan.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_vlan.h>
 >>>>>>> v3.18
@@ -13,7 +17,11 @@
 #include <linux/u64_stats_sync.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MACVTAP) || defined(CONFIG_MACVTAP_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MACVTAP)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MACVTAP)
 >>>>>>> v3.18
@@ -32,6 +40,7 @@ static inline struct socket *macvtap_get_socket(struct file *f)
 struct macvlan_port;
 struct macvtap_queue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  *	struct macvlan_pcpu_stats - MACVLAN percpu stats
@@ -57,12 +66,18 @@ struct macvlan_pcpu_stats {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Maximum times a macvtap device can be opened. This can be used to
  * configure the number of receive queue, e.g. for multiqueue virtio.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_MACVTAP_QUEUES	(NR_CPUS < 16 ? NR_CPUS : 16)
+=======
+#define MAX_MACVTAP_QUEUES	16
+>>>>>>> v3.18
 =======
 #define MAX_MACVTAP_QUEUES	16
 >>>>>>> v3.18
@@ -77,6 +92,7 @@ struct macvlan_dev {
 	struct macvlan_port	*port;
 	struct net_device	*lowerdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct macvlan_pcpu_stats __percpu *pcpu_stats;
 
 	DECLARE_BITMAP(mc_filter, MACVLAN_MC_FILTER_SZ);
@@ -89,6 +105,8 @@ struct macvlan_dev {
 	int			numvtaps;
 	int			minor;
 =======
+=======
+>>>>>>> v3.18
 	void			*fwd_priv;
 	struct vlan_pcpu_stats __percpu *pcpu_stats;
 
@@ -110,6 +128,9 @@ struct macvlan_dev {
 	struct netpoll		*netpoll;
 #endif
 	unsigned int		macaddr_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -119,7 +140,11 @@ static inline void macvlan_count_rx(const struct macvlan_dev *vlan,
 {
 	if (likely(success)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct macvlan_pcpu_stats *pcpu_stats;
+=======
+		struct vlan_pcpu_stats *pcpu_stats;
+>>>>>>> v3.18
 =======
 		struct vlan_pcpu_stats *pcpu_stats;
 >>>>>>> v3.18
@@ -140,10 +165,14 @@ extern void macvlan_common_setup(struct net_device *dev);
 
 extern int macvlan_common_newlink(struct net *src_net, struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct nlattr *tb[], struct nlattr *data[],
 				  int (*receive)(struct sk_buff *skb),
 				  int (*forward)(struct net_device *dev,
 						 struct sk_buff *skb));
+=======
+				  struct nlattr *tb[], struct nlattr *data[]);
+>>>>>>> v3.18
 =======
 				  struct nlattr *tb[], struct nlattr *data[]);
 >>>>>>> v3.18
@@ -157,9 +186,12 @@ extern void macvlan_dellink(struct net_device *dev, struct list_head *head);
 extern int macvlan_link_register(struct rtnl_link_ops *ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern netdev_tx_t macvlan_start_xmit(struct sk_buff *skb,
 				      struct net_device *dev);
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_MACVLAN)
 static inline struct net_device *
 macvlan_dev_real_dev(const struct net_device *dev)
@@ -176,6 +208,9 @@ macvlan_dev_real_dev(const struct net_device *dev)
 	return NULL;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _LINUX_IF_MACVLAN_H */

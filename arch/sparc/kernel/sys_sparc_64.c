@@ -25,6 +25,10 @@
 #include <linux/random.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 
 #include "entry.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -48,9 +56,12 @@ asmlinkage unsigned long sys_getpagesize(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VA_EXCLUDE_START (0x0000080000000000UL - (1UL << 32UL))
 #define VA_EXCLUDE_END   (0xfffff80000000000UL + (1UL << 32UL))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Does addr --> addr+len fall within 4GB of the VA-space hole or
@@ -131,7 +142,11 @@ unsigned long arch_get_unmapped_area(struct file *filp, unsigned long addr, unsi
 		vma = find_vma(mm, addr);
 		if (task_size - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18
@@ -198,7 +213,11 @@ arch_get_unmapped_area_topdown(struct file *filp, const unsigned long addr0,
 		vma = find_vma(mm, addr);
 		if (task_size - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18
@@ -285,7 +304,11 @@ static unsigned long mmap_rnd(void)
 
 	if (current->flags & PF_RANDOMIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long val = get_random_long();
+=======
+		unsigned long val = get_random_int();
+>>>>>>> v3.18
 =======
 		unsigned long val = get_random_int();
 >>>>>>> v3.18
@@ -358,7 +381,11 @@ SYSCALL_DEFINE6(sparc_ipc, unsigned int, call, int, first, unsigned long, second
 
 	/* No need for backward compatibility. We can start fresh... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (call <= SEMTIMEDOP) {
+=======
+	if (call <= SEMCTL) {
+>>>>>>> v3.18
 =======
 	if (call <= SEMCTL) {
 >>>>>>> v3.18
@@ -442,7 +469,11 @@ out:
 SYSCALL_DEFINE1(sparc64_personality, unsigned long, personality)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long ret;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -531,6 +562,10 @@ asmlinkage unsigned long c_sys_nis_syscall(struct pt_regs *regs)
 asmlinkage void sparc_breakpoint(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -553,6 +588,10 @@ asmlinkage void sparc_breakpoint(struct pt_regs *regs)
 	printk ("TRAP: Returning to space: PC=%lx nPC=%lx\n", regs->tpc, regs->tnpc);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 	exception_exit(prev_state);
 >>>>>>> v3.18

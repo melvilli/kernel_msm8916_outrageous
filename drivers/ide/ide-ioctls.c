@@ -142,8 +142,13 @@ static int ide_cmd_ioctl(ide_drive_t *drive, unsigned long arg)
 		tf->nsect = args[3];
 		tf->lbal  = args[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tf->lbam  = 0x4f;
 		tf->lbah  = 0xc2;
+=======
+		tf->lbam  = ATA_SMART_LBAM_PASS;
+		tf->lbah  = ATA_SMART_LBAH_PASS;
+>>>>>>> v3.18
 =======
 		tf->lbam  = ATA_SMART_LBAM_PASS;
 		tf->lbah  = ATA_SMART_LBAH_PASS;

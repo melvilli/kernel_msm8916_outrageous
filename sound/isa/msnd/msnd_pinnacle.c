@@ -906,6 +906,7 @@ static int snd_msnd_isa_probe(struct device *pdev, unsigned int idx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[idx], id[idx], THIS_MODULE,
 			      sizeof(struct snd_msnd), &card);
 	if (err < 0)
@@ -913,11 +914,16 @@ static int snd_msnd_isa_probe(struct device *pdev, unsigned int idx)
 
 	snd_card_set_dev(card, pdev);
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(pdev, index[idx], id[idx], THIS_MODULE,
 			   sizeof(struct snd_msnd), &card);
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chip = card->private_data;
 	chip->card = card;
@@ -1075,7 +1081,10 @@ static int snd_msnd_isa_remove(struct device *pdev, unsigned int dev)
 {
 	snd_msnd_unload(dev_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1135,8 +1144,14 @@ static int snd_msnd_pnp_detect(struct pnp_card_link *pcard,
 	 * of detecting our hardware ...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_card_create(index[idx], id[idx], THIS_MODULE,
 			      sizeof(struct snd_msnd), &card);
+=======
+	ret = snd_card_new(&pcard->card->dev,
+			   index[idx], id[idx], THIS_MODULE,
+			   sizeof(struct snd_msnd), &card);
+>>>>>>> v3.18
 =======
 	ret = snd_card_new(&pcard->card->dev,
 			   index[idx], id[idx], THIS_MODULE,
@@ -1148,7 +1163,10 @@ static int snd_msnd_pnp_detect(struct pnp_card_link *pcard,
 	chip = card->private_data;
 	chip->card = card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -96,7 +96,10 @@ extern struct omap_hwmod_sysc_fields omap_hwmod_sysc_type3;
 #define MODULEMODE_SWCTRL		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DEBUG_OMAP2UART1_FLAGS	0
 #define DEBUG_OMAP2UART2_FLAGS	0
 #define DEBUG_OMAP2UART3_FLAGS	0
@@ -145,6 +148,9 @@ extern struct omap_hwmod_sysc_fields omap_hwmod_sysc_type3;
 #undef DEBUG_AM33XXUART1_FLAGS
 #define DEBUG_AM33XXUART1_FLAGS DEBUG_OMAPUART_FLAGS
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -518,6 +524,12 @@ struct omap_hwmod_omap4_prcm {
  *     out of idle, but rely on smart-idle to the put it back in idle,
  *     so the wakeups are still functional (Only known case for now is UART)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * HWMOD_RECONFIG_IO_CHAIN: omap_hwmod code needs to reconfigure wake-up 
+ *     events by calling _reconfigure_io_chain() when a device is enabled
+ *     or idled.
+>>>>>>> v3.18
 =======
  * HWMOD_RECONFIG_IO_CHAIN: omap_hwmod code needs to reconfigure wake-up 
  *     events by calling _reconfigure_io_chain() when a device is enabled
@@ -538,6 +550,10 @@ struct omap_hwmod_omap4_prcm {
 #define HWMOD_FORCE_MSTANDBY			(1 << 11)
 #define HWMOD_SWSUP_SIDLE_ACT			(1 << 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HWMOD_RECONFIG_IO_CHAIN			(1 << 13)
+>>>>>>> v3.18
 =======
 #define HWMOD_RECONFIG_IO_CHAIN			(1 << 13)
 >>>>>>> v3.18
@@ -630,6 +646,10 @@ struct omap_hwmod_link {
  * @dev_attr: arbitrary device attributes that can be passed to the driver
  * @_sysc_cache: internal-use hwmod flags
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @mpu_rt_idx: index of device address space for register target (for DT boot)
+>>>>>>> v3.18
 =======
  * @mpu_rt_idx: index of device address space for register target (for DT boot)
 >>>>>>> v3.18
@@ -683,6 +703,10 @@ struct omap_hwmod {
 	struct omap_hwmod_ocp_if	*_mpu_port;
 	u16				flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8				mpu_rt_idx;
+>>>>>>> v3.18
 =======
 	u8				mpu_rt_idx;
 >>>>>>> v3.18
@@ -769,12 +793,18 @@ extern int omap2430_hwmod_init(void);
 extern int omap3xxx_hwmod_init(void);
 extern int omap44xx_hwmod_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int am33xx_hwmod_init(void);
 =======
+=======
+>>>>>>> v3.18
 extern int omap54xx_hwmod_init(void);
 extern int am33xx_hwmod_init(void);
 extern int dra7xx_hwmod_init(void);
 int am43xx_hwmod_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int __init omap_hwmod_register_links(struct omap_hwmod_ocp_if **ois);

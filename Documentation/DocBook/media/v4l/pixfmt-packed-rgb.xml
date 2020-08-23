@@ -16,9 +16,12 @@ per pixel. These are all packed-pixel formats, meaning all the data
 for a pixel lie next to each other in memory.</para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <para>When one of these formats is used, drivers shall report the
 colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     <table pgwide="1" frame="none" id="rgb-formats">
@@ -125,6 +128,7 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>'RGB1'</entry>
 	    <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
 	    <entry>g<subscript>2</subscript></entry>
@@ -138,6 +142,8 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry><constant>V4L2_PIX_FMT_RGB444</constant></entry>
 	    <entry>'R444'</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>r<subscript>2</subscript></entry>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
@@ -150,6 +156,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	  <row id="V4L2-PIX-FMT-ARGB444">
 	    <entry><constant>V4L2_PIX_FMT_ARGB444</constant></entry>
 	    <entry>'AR12'</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry></entry>
 	    <entry>g<subscript>3</subscript></entry>
@@ -171,6 +180,7 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>r<subscript>0</subscript></entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <row id="V4L2-PIX-FMT-RGB555">
 	    <entry><constant>V4L2_PIX_FMT_RGB555</constant></entry>
 	    <entry>'RGBO'</entry>
@@ -180,6 +190,8 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>g<subscript>0</subscript></entry>
 	    <entry>r<subscript>4</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	  <row id="V4L2-PIX-FMT-XRGB444">
 	    <entry><constant>V4L2_PIX_FMT_XRGB444</constant></entry>
 	    <entry>'XR12'</entry>
@@ -197,15 +209,21 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>-</entry>
 	    <entry>-</entry>
 	    <entry>-</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>r<subscript>3</subscript></entry>
 	    <entry>r<subscript>2</subscript></entry>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry></entry>
 	    <entry>a</entry>
 =======
+=======
+>>>>>>> v3.18
 	  </row>
 	  <row id="V4L2-PIX-FMT-ARGB555">
 	    <entry><constant>V4L2_PIX_FMT_ARGB555</constant></entry>
@@ -214,12 +232,16 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>g<subscript>2</subscript></entry>
 	    <entry>g<subscript>1</subscript></entry>
 	    <entry>g<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>b<subscript>4</subscript></entry>
 	    <entry>b<subscript>3</subscript></entry>
 	    <entry>b<subscript>2</subscript></entry>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    <entry>g<subscript>4</subscript></entry>
 	    <entry>g<subscript>3</subscript></entry>
@@ -228,6 +250,8 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry><constant>V4L2_PIX_FMT_RGB565</constant></entry>
 	    <entry>'RGBP'</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry></entry>
 	    <entry>a</entry>
 	    <entry>r<subscript>4</subscript></entry>
@@ -241,13 +265,19 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	  <row id="V4L2-PIX-FMT-XRGB555">
 	    <entry><constant>V4L2_PIX_FMT_XRGB555</constant></entry>
 	    <entry>'XR15'</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry></entry>
 	    <entry>g<subscript>2</subscript></entry>
 	    <entry>g<subscript>1</subscript></entry>
 	    <entry>g<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry>b<subscript>4</subscript></entry>
 	    <entry>b<subscript>3</subscript></entry>
 	    <entry>b<subscript>2</subscript></entry>
@@ -255,6 +285,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>0</subscript></entry>
 	    <entry></entry>
 	    <entry>-</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>r<subscript>4</subscript></entry>
 	    <entry>r<subscript>3</subscript></entry>
@@ -262,8 +295,11 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry></entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>g<subscript>4</subscript></entry>
 	    <entry>g<subscript>3</subscript></entry>
 	  </row>
@@ -274,6 +310,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>g<subscript>2</subscript></entry>
 	    <entry>g<subscript>1</subscript></entry>
 	    <entry>g<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>b<subscript>4</subscript></entry>
 	    <entry>b<subscript>3</subscript></entry>
@@ -281,18 +320,25 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry></entry>
 	    <entry>r<subscript>4</subscript></entry>
 	    <entry>r<subscript>3</subscript></entry>
 	    <entry>r<subscript>2</subscript></entry>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>g<subscript>5</subscript></entry>
 	    <entry>g<subscript>4</subscript></entry>
 	    <entry>g<subscript>3</subscript></entry>
 	  </row>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  <row id="V4L2-PIX-FMT-RGB555X">
 	    <entry><constant>V4L2_PIX_FMT_RGB555X</constant></entry>
@@ -305,6 +351,8 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	  <row id="V4L2-PIX-FMT-ARGB555X">
 	    <entry><constant>V4L2_PIX_FMT_ARGB555X</constant></entry>
 	    <entry>'AR15' | (1 &lt;&lt; 31)</entry>
@@ -315,6 +363,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>r<subscript>2</subscript></entry>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>g<subscript>4</subscript></entry>
 	    <entry>g<subscript>3</subscript></entry>
@@ -323,7 +374,10 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>g<subscript>1</subscript></entry>
 	    <entry>g<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry>b<subscript>4</subscript></entry>
 	    <entry>b<subscript>3</subscript></entry>
 	    <entry>b<subscript>2</subscript></entry>
@@ -335,6 +389,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>'XR15' | (1 &lt;&lt; 31)</entry>
 	    <entry></entry>
 	    <entry>-</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>r<subscript>4</subscript></entry>
 	    <entry>r<subscript>3</subscript></entry>
@@ -342,18 +399,24 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  </row>
 	  <row id="V4L2-PIX-FMT-RGB565X">
 	    <entry><constant>V4L2_PIX_FMT_RGB565X</constant></entry>
 	    <entry>'RGBR'</entry>
 	    <entry></entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>g<subscript>4</subscript></entry>
 	    <entry>g<subscript>3</subscript></entry>
 	    <entry></entry>
 	    <entry>g<subscript>2</subscript></entry>
 	    <entry>g<subscript>1</subscript></entry>
 	    <entry>g<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>b<subscript>4</subscript></entry>
 	    <entry>b<subscript>3</subscript></entry>
@@ -361,7 +424,10 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  </row>
 	  <row id="V4L2-PIX-FMT-RGB565X">
 	    <entry><constant>V4L2_PIX_FMT_RGB565X</constant></entry>
@@ -372,6 +438,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>r<subscript>2</subscript></entry>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>g<subscript>5</subscript></entry>
 	    <entry>g<subscript>4</subscript></entry>
@@ -381,17 +450,23 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>g<subscript>1</subscript></entry>
 	    <entry>g<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>r<subscript>4</subscript></entry>
 	    <entry>r<subscript>3</subscript></entry>
 	    <entry>r<subscript>2</subscript></entry>
 	    <entry>r<subscript>1</subscript></entry>
 	    <entry>r<subscript>0</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>b<subscript>4</subscript></entry>
 	    <entry>b<subscript>3</subscript></entry>
 	    <entry>b<subscript>2</subscript></entry>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	  <row id="V4L2-PIX-FMT-BGR666">
@@ -496,9 +571,15 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>0</subscript></entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <row id="V4L2-PIX-FMT-BGR32">
 	    <entry><constant>V4L2_PIX_FMT_BGR32</constant></entry>
 	    <entry>'BGR4'</entry>
+=======
+	  <row id="V4L2-PIX-FMT-ABGR32">
+	    <entry><constant>V4L2_PIX_FMT_ABGR32</constant></entry>
+	    <entry>'AR24'</entry>
+>>>>>>> v3.18
 =======
 	  <row id="V4L2-PIX-FMT-ABGR32">
 	    <entry><constant>V4L2_PIX_FMT_ABGR32</constant></entry>
@@ -542,10 +623,13 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>a<subscript>0</subscript></entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <row id="V4L2-PIX-FMT-RGB32">
 	    <entry><constant>V4L2_PIX_FMT_RGB32</constant></entry>
 	    <entry>'RGB4'</entry>
 =======
+=======
+>>>>>>> v3.18
 	  <row id="V4L2-PIX-FMT-XBGR32">
 	    <entry><constant>V4L2_PIX_FMT_XBGR32</constant></entry>
 	    <entry>'XR24'</entry>
@@ -598,6 +682,9 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>a<subscript>2</subscript></entry>
 	    <entry>a<subscript>1</subscript></entry>
 	    <entry>a<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry></entry>
 	    <entry>r<subscript>7</subscript></entry>
@@ -627,6 +714,7 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry></entry>
 	    <entry>a<subscript>7</subscript></entry>
 	    <entry>a<subscript>6</subscript></entry>
@@ -637,6 +725,8 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>a<subscript>1</subscript></entry>
 	    <entry>a<subscript>0</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	  </row>
 	  <row id="V4L2-PIX-FMT-XRGB32">
 	    <entry><constant>V4L2_PIX_FMT_XRGB32</constant></entry>
@@ -677,12 +767,16 @@ colorspace <constant>V4L2_COLORSPACE_SRGB</constant>.</para>
 	    <entry>b<subscript>2</subscript></entry>
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	</tbody>
       </tgroup>
     </table>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     <para>Bit 7 is the most significant bit. The value of a = alpha
 bits is undefined when reading from the driver, ignored when writing
@@ -693,6 +787,8 @@ for a <link linkend="capture">Video Capture</link> by means of <link
 linkend="v4l2-alpha-component"> <constant>V4L2_CID_ALPHA_COMPONENT
 </constant> </link> control.</para>
 =======
+=======
+>>>>>>> v3.18
     <para>Bit 7 is the most significant bit.</para>
 
     <para>The usage and value of the alpha bits (a) in the ARGB and ABGR formats
@@ -719,6 +815,9 @@ linkend="v4l2-alpha-component"> <constant>V4L2_CID_ALPHA_COMPONENT
     devices and drivers must ignore those bits, for both <link
     linkend="capture">capture</link> and <link linkend="output">output</link>
     devices.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     <example>
@@ -800,6 +899,7 @@ image</title>
     </example>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <important>
       <para>Drivers may interpret these formats differently.</para>
     </important>
@@ -811,6 +911,8 @@ defined in error. Drivers may interpret them as in <xref
     <table pgwide="1" frame="none" id="rgb-formats-corrected">
       <title>Packed RGB Image Formats (corrected)</title>
 =======
+=======
+>>>>>>> v3.18
     <para>Formats defined in <xref linkend="rgb-formats-deprecated"/> are
     deprecated and must not be used by new drivers. They are documented here for
     reference. The meaning of their alpha bits (a) is ill-defined and
@@ -819,6 +921,9 @@ defined in error. Drivers may interpret them as in <xref
 
     <table pgwide="1" frame="none" id="rgb-formats-deprecated">
       <title>Deprecated Packed RGB Image Formats</title>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       <tgroup cols="37" align="center">
 	<colspec colname="id" align="left" />
@@ -917,6 +1022,7 @@ defined in error. Drivers may interpret them as in <xref
 	  </row>
 	</thead>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<tbody valign="top">
 	  <row><!-- id="V4L2-PIX-FMT-RGB332" -->
 	    <entry><constant>V4L2_PIX_FMT_RGB332</constant></entry>
@@ -932,6 +1038,10 @@ defined in error. Drivers may interpret them as in <xref
 	    <entry>b<subscript>0</subscript></entry>
 	  </row>
 	  <row><!-- id="V4L2-PIX-FMT-RGB444" -->
+=======
+	<tbody>
+	  <row id="V4L2-PIX-FMT-RGB444">
+>>>>>>> v3.18
 =======
 	<tbody>
 	  <row id="V4L2-PIX-FMT-RGB444">
@@ -958,7 +1068,11 @@ defined in error. Drivers may interpret them as in <xref
 	    <entry>r<subscript>0</subscript></entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <row><!-- id="V4L2-PIX-FMT-RGB555" -->
+=======
+	  <row id="V4L2-PIX-FMT-RGB555">
+>>>>>>> v3.18
 =======
 	  <row id="V4L2-PIX-FMT-RGB555">
 >>>>>>> v3.18
@@ -983,6 +1097,7 @@ defined in error. Drivers may interpret them as in <xref
 	    <entry>g<subscript>4</subscript></entry>
 	    <entry>g<subscript>3</subscript></entry>
 	  </row>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  <row><!-- id="V4L2-PIX-FMT-RGB565" -->
 	    <entry><constant>V4L2_PIX_FMT_RGB565</constant></entry>
@@ -1010,6 +1125,9 @@ defined in error. Drivers may interpret them as in <xref
 =======
 	  <row id="V4L2-PIX-FMT-RGB555X">
 >>>>>>> v3.18
+=======
+	  <row id="V4L2-PIX-FMT-RGB555X">
+>>>>>>> v3.18
 	    <entry><constant>V4L2_PIX_FMT_RGB555X</constant></entry>
 	    <entry>'RGBQ'</entry>
 	    <entry></entry>
@@ -1031,6 +1149,7 @@ defined in error. Drivers may interpret them as in <xref
 	    <entry>b<subscript>1</subscript></entry>
 	    <entry>b<subscript>0</subscript></entry>
 	  </row>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  <row><!-- id="V4L2-PIX-FMT-RGB565X" -->
 	    <entry><constant>V4L2_PIX_FMT_RGB565X</constant></entry>
@@ -1159,6 +1278,9 @@ defined in error. Drivers may interpret them as in <xref
 =======
 	  <row id="V4L2-PIX-FMT-BGR32">
 >>>>>>> v3.18
+=======
+	  <row id="V4L2-PIX-FMT-BGR32">
+>>>>>>> v3.18
 	    <entry><constant>V4L2_PIX_FMT_BGR32</constant></entry>
 	    <entry>'BGR4'</entry>
 	    <entry></entry>
@@ -1199,7 +1321,11 @@ defined in error. Drivers may interpret them as in <xref
 	    <entry>a<subscript>0</subscript></entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <row><!-- id="V4L2-PIX-FMT-RGB32" -->
+=======
+	  <row id="V4L2-PIX-FMT-RGB32">
+>>>>>>> v3.18
 =======
 	  <row id="V4L2-PIX-FMT-RGB32">
 >>>>>>> v3.18

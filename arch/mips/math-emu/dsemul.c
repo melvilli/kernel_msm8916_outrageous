@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/compiler.h>
 #include <linux/mm.h>
 #include <linux/signal.h>
@@ -27,6 +28,8 @@
 #define __mips 4
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/branch.h>
 #include <asm/cacheflush.h>
 #include <asm/fpu_emulator.h>
@@ -36,6 +39,9 @@
 
 #include "ieee754.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Emulate the arbritrary instruction ir at xcp->cp0_epc.  Required when
@@ -72,6 +78,7 @@ int mips_dsemul(struct pt_regs *regs, mips_instruction ir, unsigned long cpc)
 		/* NOP is easy */
 		regs->cp0_epc = cpc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regs->cp0_cause &= ~CAUSEF_BD;
 		return 0;
 	}
@@ -80,11 +87,16 @@ int mips_dsemul(struct pt_regs *regs, mips_instruction ir, unsigned long cpc)
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 		clear_delay_slot(regs);
 		return 0;
 	}
 
 	pr_debug("dsemul %lx %lx\n", regs->cp0_epc, cpc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -188,9 +200,14 @@ int do_dsemulret(struct pt_regs *xcp)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DSEMUL_TRACE
 	printk("dsemulret\n");
 #endif
+=======
+	pr_debug("dsemulret\n");
+
+>>>>>>> v3.18
 =======
 	pr_debug("dsemulret\n");
 

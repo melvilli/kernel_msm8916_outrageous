@@ -1,6 +1,7 @@
 menu "Generic Driver Options"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config UEVENT_HELPER_PATH
 	string "path to uevent helper"
 	depends on HOTPLUG
@@ -8,11 +9,16 @@ config UEVENT_HELPER_PATH
 	help
 	  Path to uevent helper program forked by the kernel for
 =======
+=======
+>>>>>>> v3.18
 config UEVENT_HELPER
 	bool "Support for uevent helper"
 	default y
 	help
 	  The uevent helper program is forked by the kernel for
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  every uevent.
 	  Before the switch to the netlink-based uevent source, this was
@@ -25,9 +31,12 @@ config UEVENT_HELPER
 	  it is known to create out-of-memory situations during bootup.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  To disable user space helper program execution at early boot
 	  time specify an empty string here. This setting can be altered
 =======
+=======
+>>>>>>> v3.18
 config UEVENT_HELPER_PATH
 	string "path to uevent helper"
 	depends on UEVENT_HELPER
@@ -35,6 +44,9 @@ config UEVENT_HELPER_PATH
 	help
 	  To disable user space helper program execution at by default
 	  specify an empty string here. This setting can still be altered
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  via /proc/sys/kernel/hotplug or via /sys/kernel/uevent_helper
 	  later at runtime.
@@ -42,7 +54,10 @@ config UEVENT_HELPER_PATH
 config DEVTMPFS
 	bool "Maintain a devtmpfs filesystem to mount at /dev"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -73,7 +88,11 @@ config DEVTMPFS_MOUNT
 	  This option does not affect initramfs based booting, here
 	  the devtmpfs filesystem always needs to be mounted manually
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  after the roots is mounted.
+=======
+	  after the rootfs is mounted.
+>>>>>>> v3.18
 =======
 	  after the rootfs is mounted.
 >>>>>>> v3.18
@@ -172,16 +191,22 @@ config EXTRA_FIRMWARE_DIR
 
 config FW_LOADER_USER_HELPER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Fallback user-helper invocation for firmware loading"
 	depends on FW_LOADER
 	default y
 =======
+=======
+>>>>>>> v3.18
 	bool
 
 config FW_LOADER_USER_HELPER_FALLBACK
 	bool "Fallback user-helper invocation for firmware loading"
 	depends on FW_LOADER
 	select FW_LOADER_USER_HELPER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This option enables / disables the invocation of user-helper
@@ -189,8 +214,11 @@ config FW_LOADER_USER_HELPER_FALLBACK
 	  direct file loading in kernel fails.  The user-mode helper is
 	  no longer required unless you have a special firmware file that
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  resides in a non-standard path.
 =======
+=======
+>>>>>>> v3.18
 	  resides in a non-standard path. Moreover, the udev support has
 	  been deprecated upstream.
 
@@ -219,6 +247,9 @@ config DEV_COREDUMP
 	bool
 	default y if WANT_DEV_COREDUMP
 	depends on ALLOW_DEV_COREDUMP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config DEBUG_DRIVER
@@ -253,6 +284,7 @@ config GENERIC_CPU_DEVICES
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_CPU_AUTOPROBE
 	def_bool ARCH_HAS_CPU_AUTOPROBE
 
@@ -260,6 +292,10 @@ config GENERIC_CPU_AUTOPROBE
 	bool
 	depends on !ARCH_HAS_CPU_AUTOPROBE
 	select HAVE_CPU_AUTOPROBE
+=======
+config GENERIC_CPU_AUTOPROBE
+	bool
+>>>>>>> v3.18
 =======
 config GENERIC_CPU_AUTOPROBE
 	bool
@@ -281,12 +317,15 @@ config DMA_SHARED_BUFFER
 	  driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CMA
 	bool "Contiguous Memory Allocator"
 	depends on HAVE_DMA_CONTIGUOUS && HAVE_MEMBLOCK
 	select MIGRATION
 	select MEMORY_ISOLATION
 =======
+=======
+>>>>>>> v3.18
 config FENCE_TRACE
 	bool "Enable verbose FENCE_TRACE messages"
 	depends on DMA_SHARED_BUFFER
@@ -299,12 +338,16 @@ config FENCE_TRACE
 config DMA_CMA
 	bool "DMA Contiguous Memory Allocator"
 	depends on HAVE_DMA_CONTIGUOUS && CMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This enables the Contiguous Memory Allocator which allows drivers
 	  to allocate big physically-contiguous blocks of memory for use with
 	  hardware components that do not support I/O map nor scatter-gather.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  For more information see <include/linux/dma-contiguous.h>.
 	  If unsure, say "n".
@@ -321,6 +364,8 @@ config CMA_DEBUG
 	  This option does not affect warning and error messages.
 
 =======
+=======
+>>>>>>> v3.18
 	  You can disable CMA by specifying "cma=0" on the kernel's command
 	  line.
 
@@ -328,6 +373,9 @@ config CMA_DEBUG
 	  If unsure, say "n".
 
 if  DMA_CMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "Default contiguous memory area size:"
 
@@ -368,7 +416,11 @@ endchoice
 config CMA_ALIGNMENT
 	int "Maximum PAGE_SIZE order of alignment for contiguous buffers"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	range 4 9
+=======
+	range 4 12
+>>>>>>> v3.18
 =======
 	range 4 12
 >>>>>>> v3.18
@@ -387,6 +439,7 @@ config CMA_ALIGNMENT
 
 	  If unsure, leave the default value "8".
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config CMA_AREAS
 	int "Maximum count of the CMA device-private areas"
@@ -411,6 +464,8 @@ config CMA_RESERVE_DEFAULT_AREA
 
 	  If unsure, say n.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

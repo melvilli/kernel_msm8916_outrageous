@@ -11,7 +11,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -27,10 +30,16 @@ void __weak pcibios_update_irq(struct pci_dev *dev, int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 pdev_fixup_irq(struct pci_dev *dev,
 	       u8 (*swizzle)(struct pci_dev *, u8 *),
 	       int (*map_irq)(const struct pci_dev *, u8, u8))
+=======
+static void pdev_fixup_irq(struct pci_dev *dev,
+			   u8 (*swizzle)(struct pci_dev *, u8 *),
+			   int (*map_irq)(const struct pci_dev *, u8, u8))
+>>>>>>> v3.18
 =======
 static void pdev_fixup_irq(struct pci_dev *dev,
 			   u8 (*swizzle)(struct pci_dev *, u8 *),
@@ -69,17 +78,23 @@ static void pdev_fixup_irq(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 pci_fixup_irqs(u8 (*swizzle)(struct pci_dev *, u8 *),
 	       int (*map_irq)(const struct pci_dev *, u8, u8))
 {
 	struct pci_dev *dev = NULL;
 =======
+=======
+>>>>>>> v3.18
 void pci_fixup_irqs(u8 (*swizzle)(struct pci_dev *, u8 *),
 		    int (*map_irq)(const struct pci_dev *, u8, u8))
 {
 	struct pci_dev *dev = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_pci_dev(dev)
 		pdev_fixup_irq(dev, swizzle, map_irq);

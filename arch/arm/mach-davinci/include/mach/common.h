@@ -73,7 +73,10 @@ struct davinci_soc_info {
 	struct davinci_gpio_controller	*gpio_ctlrs;
 	int				gpio_ctlrs_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device		*serial_dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct emac_platform_data	*emac_pdata;

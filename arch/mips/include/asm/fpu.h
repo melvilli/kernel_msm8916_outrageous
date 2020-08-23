@@ -18,15 +18,21 @@
 #include <asm/cpu.h>
 #include <asm/cpu-features.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/hazards.h>
 #include <asm/processor.h>
 #include <asm/current.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/fpu_emulator.h>
 #include <asm/hazards.h>
 #include <asm/processor.h>
 #include <asm/current.h>
 #include <asm/msa.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_MIPS_MT_FPAFF
@@ -37,7 +43,10 @@ struct sigcontext;
 struct sigcontext32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void fpu_emulator_init_fpu(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void _init_fpu(void);
@@ -45,12 +54,15 @@ extern void _save_fp(struct task_struct *);
 extern void _restore_fp(struct task_struct *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __enable_fpu()							\
 do {									\
 	set_c0_status(ST0_CU1);						\
 	enable_fpu_hazard();						\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 /*
  * This enum specifies a mode in which we want the FPU to operate, for cores
  * which implement the Status.FR bit. Note that FPU_32BIT & FPU_64BIT
@@ -95,6 +107,9 @@ static inline int __enable_fpu(enum fpu_mode mode)
 
 	return SIGFPE;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __disable_fpu()							\
@@ -103,6 +118,7 @@ do {									\
 	disable_fpu_hazard();						\
 } while (0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define enable_fpu()							\
 do {									\
@@ -119,6 +135,8 @@ do {									\
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define clear_fpu_owner()	clear_thread_flag(TIF_USEDFPU)
 
 static inline int __is_fpu_owner(void)
@@ -131,6 +149,7 @@ static inline int is_fpu_owner(void)
 	return cpu_has_fpu && __is_fpu_owner();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void __own_fpu(void)
 {
@@ -154,6 +173,8 @@ static inline void own_fpu(int restore)
 	own_fpu_inatomic(restore);
 	preempt_enable();
 =======
+=======
+>>>>>>> v3.18
 static inline int __own_fpu(void)
 {
 	enum fpu_mode mode;
@@ -194,12 +215,16 @@ static inline int own_fpu(int restore)
 	ret = own_fpu_inatomic(restore);
 	preempt_enable();
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void lose_fpu(int save)
 {
 	preempt_disable();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (is_fpu_owner()) {
 		if (save)
@@ -222,6 +247,8 @@ static inline void init_fpu(void)
 	}
 	preempt_enable();
 =======
+=======
+>>>>>>> v3.18
 	if (is_msa_enabled()) {
 		if (save) {
 			save_msa(current);
@@ -252,6 +279,9 @@ static inline int init_fpu(void)
 		fpu_emulator_init_fpu();
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -268,7 +298,11 @@ static inline void restore_fp(struct task_struct *tsk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline fpureg_t *get_fpu_regs(struct task_struct *tsk)
+=======
+static inline union fpureg *get_fpu_regs(struct task_struct *tsk)
+>>>>>>> v3.18
 =======
 static inline union fpureg *get_fpu_regs(struct task_struct *tsk)
 >>>>>>> v3.18

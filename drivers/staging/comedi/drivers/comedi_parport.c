@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/comedi_parport.c
     hardware driver for standard parallel port
 
@@ -114,6 +115,8 @@ static int parport_insn_a(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	data[1] = inb(dev->iobase + PARPORT_A);
 =======
+=======
+>>>>>>> v3.18
  * comedi_parport.c
  * Comedi driver for standard parallel port
  *
@@ -204,11 +207,15 @@ static int parport_data_reg_insn_bits(struct comedi_device *dev,
 		outb(s->state, dev->iobase + PARPORT_DATA_REG);
 
 	data[1] = inb(dev->iobase + PARPORT_DATA_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int parport_insn_config_a(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
@@ -238,6 +245,8 @@ static int parport_insn_b(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	data[1] = (inb(dev->iobase + PARPORT_B) >> 3);
 =======
+=======
+>>>>>>> v3.18
 static int parport_data_reg_insn_config(struct comedi_device *dev,
 					struct comedi_subdevice *s,
 					struct comedi_insn *insn,
@@ -266,11 +275,15 @@ static int parport_status_reg_insn_bits(struct comedi_device *dev,
 					unsigned int *data)
 {
 	data[1] = inb(dev->iobase + PARPORT_STATUS_REG) >> 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int parport_insn_c(struct comedi_device *dev, struct comedi_subdevice *s,
 			  struct comedi_insn *insn, unsigned int *data)
@@ -287,6 +300,8 @@ static int parport_insn_c(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	data[1] = devpriv->c_data & 0xf;
 =======
+=======
+>>>>>>> v3.18
 static int parport_ctrl_reg_insn_bits(struct comedi_device *dev,
 				      struct comedi_subdevice *s,
 				      struct comedi_insn *insn,
@@ -302,20 +317,29 @@ static int parport_ctrl_reg_insn_bits(struct comedi_device *dev,
 	}
 
 	data[1] = s->state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int parport_intr_insn(struct comedi_device *dev,
 			     struct comedi_subdevice *s,
 			     struct comedi_insn *insn, unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int parport_intr_insn_bits(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn,
 				  unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	data[1] = 0;
@@ -343,9 +367,12 @@ static int parport_intr_cmdtest(struct comedi_device *dev,
 	/* Step 2b : and mutually compatible */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
 		return 2;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Step 3: check if arguments are trivially valid */
@@ -354,7 +381,11 @@ static int parport_intr_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, 0);
 	err |= cfc_check_trigger_arg_is(&cmd->convert_arg, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, 1);
+=======
+	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
+>>>>>>> v3.18
 =======
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 >>>>>>> v3.18
@@ -364,10 +395,16 @@ static int parport_intr_cmdtest(struct comedi_device *dev,
 		return 3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* step 4: ignored */
 
 	if (err)
 		return 4;
+=======
+	/* Step 4: fix up any arguments */
+
+	/* Step 5: check channel list if it exists */
+>>>>>>> v3.18
 =======
 	/* Step 4: fix up any arguments */
 
@@ -381,6 +418,7 @@ static int parport_intr_cmd(struct comedi_device *dev,
 			    struct comedi_subdevice *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct parport_private *devpriv = dev->private;
 
 	devpriv->c_data |= 0x10;
@@ -388,11 +426,16 @@ static int parport_intr_cmd(struct comedi_device *dev,
 
 	devpriv->enable_irq = 1;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ctrl;
 
 	ctrl = inb(dev->iobase + PARPORT_CTRL_REG);
 	ctrl |= PARPORT_CTRL_IRQ_ENA;
 	outb(ctrl, dev->iobase + PARPORT_CTRL_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -402,6 +445,7 @@ static int parport_intr_cancel(struct comedi_device *dev,
 			       struct comedi_subdevice *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct parport_private *devpriv = dev->private;
 
 	devpriv->c_data &= ~0x10;
@@ -409,11 +453,16 @@ static int parport_intr_cancel(struct comedi_device *dev,
 
 	devpriv->enable_irq = 0;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ctrl;
 
 	ctrl = inb(dev->iobase + PARPORT_CTRL_REG);
 	ctrl &= ~PARPORT_CTRL_IRQ_ENA;
 	outb(ctrl, dev->iobase + PARPORT_CTRL_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -423,6 +472,7 @@ static irqreturn_t parport_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct parport_private *devpriv = dev->private;
 	struct comedi_subdevice *s = &dev->subdevices[3];
 
@@ -431,6 +481,8 @@ static irqreturn_t parport_interrupt(int irq, void *d)
 
 	comedi_buf_put(s->async, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s = dev->read_subdev;
 	unsigned int ctrl;
 
@@ -439,6 +491,9 @@ static irqreturn_t parport_interrupt(int irq, void *d)
 		return IRQ_NONE;
 
 	comedi_buf_put(s, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s->async->events |= COMEDI_CB_BLOCK | COMEDI_CB_EOS;
 
@@ -449,6 +504,7 @@ static irqreturn_t parport_interrupt(int irq, void *d)
 static int parport_attach(struct comedi_device *dev,
 			  struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct parport_private *devpriv;
 	struct comedi_subdevice *s;
@@ -525,6 +581,8 @@ static int parport_attach(struct comedi_device *dev,
 	devpriv->c_data = 0;
 	outb(devpriv->c_data, dev->iobase + PARPORT_C);
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s;
 	int ret;
 
@@ -589,6 +647,9 @@ static int parport_attach(struct comedi_device *dev,
 
 	outb(0, dev->iobase + PARPORT_DATA_REG);
 	outb(0, dev->iobase + PARPORT_CTRL_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -604,7 +665,11 @@ module_comedi_driver(parport_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi: Standard parallel port driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi: Standard parallel port driver");
 >>>>>>> v3.18

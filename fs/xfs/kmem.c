@@ -22,7 +22,10 @@
 #include <linux/blkdev.h>
 #include <linux/backing-dev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "time.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "kmem.h"
@@ -31,8 +34,11 @@
 /*
  * Greedy allocation.  May fail and may return vmalloced memory.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Must be freed using kmem_free_large.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -43,7 +49,11 @@ kmem_zalloc_greedy(size_t *size, size_t minsize, size_t maxsize)
 	size_t		kmsize = maxsize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!(ptr = kmem_zalloc_large(kmsize))) {
+=======
+	while (!(ptr = vzalloc(kmsize))) {
+>>>>>>> v3.18
 =======
 	while (!(ptr = vzalloc(kmsize))) {
 >>>>>>> v3.18
@@ -76,6 +86,7 @@ kmem_alloc(size_t size, xfs_km_flags_t flags)
 
 void *
 <<<<<<< HEAD
+<<<<<<< HEAD
 kmem_zalloc(size_t size, xfs_km_flags_t flags)
 {
 	void	*ptr;
@@ -84,6 +95,8 @@ kmem_zalloc(size_t size, xfs_km_flags_t flags)
 	if (ptr)
 		memset((char *)ptr, 0, (int)size);
 =======
+=======
+>>>>>>> v3.18
 kmem_zalloc_large(size_t size, xfs_km_flags_t flags)
 {
 	unsigned noio_flag = 0;
@@ -110,6 +123,9 @@ kmem_zalloc_large(size_t size, xfs_km_flags_t flags)
 	if ((current->flags & PF_FSTRANS) || (flags & KM_NOFS))
 		memalloc_noio_restore(noio_flag);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ptr;
 }
@@ -159,6 +175,7 @@ kmem_zone_alloc(kmem_zone_t *zone, xfs_km_flags_t flags)
 	} while (1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void *
 kmem_zone_zalloc(kmem_zone_t *zone, xfs_km_flags_t flags)
@@ -170,5 +187,7 @@ kmem_zone_zalloc(kmem_zone_t *zone, xfs_km_flags_t flags)
 		memset((char *)ptr, 0, kmem_cache_size(zone));
 	return ptr;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

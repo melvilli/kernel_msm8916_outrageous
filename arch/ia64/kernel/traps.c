@@ -300,7 +300,11 @@ handle_fpu_swa (int fp_fault, struct pt_regs *regs, unsigned long isr)
 	if (!(current->thread.flags & IA64_THREAD_FPEMU_NOPRINT))  {
 		unsigned long count, current_jiffies = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct fpu_swa_msg *cp = &__get_cpu_var(cpulast);
+=======
+		struct fpu_swa_msg *cp = this_cpu_ptr(&cpulast);
+>>>>>>> v3.18
 =======
 		struct fpu_swa_msg *cp = this_cpu_ptr(&cpulast);
 >>>>>>> v3.18
@@ -635,7 +639,11 @@ ia64_fault (unsigned long vector, unsigned long isr, unsigned long ifa,
 		       iip, ifa, isr);
 		force_sig(SIGSEGV, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18

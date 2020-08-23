@@ -25,6 +25,10 @@
 #include <linux/slab.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/poll.h>
+>>>>>>> v3.18
 =======
 #include <linux/poll.h>
 >>>>>>> v3.18
@@ -94,9 +98,13 @@ static void pty_unthrottle(struct tty_struct *tty)
  *	@to: tty we are writing into
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	The tty buffers allow 64K but we sneak a peak and clip at 8K this
  *	allows a lot of overspill room for echo and other fun messes to
  *	be handled properly
+=======
+ *	Limit the buffer space used by ptys to 8k.
+>>>>>>> v3.18
 =======
  *	Limit the buffer space used by ptys to 8k.
 >>>>>>> v3.18
@@ -105,10 +113,15 @@ static void pty_unthrottle(struct tty_struct *tty)
 static int pty_space(struct tty_struct *to)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n = 8192 - to->port->buf.memory_used;
 	if (n < 0)
 		return 0;
 	return n;
+=======
+	int n = tty_buffer_space_avail(to->port);
+	return min(n, 8192);
+>>>>>>> v3.18
 =======
 	int n = tty_buffer_space_avail(to->port);
 	return min(n, 8192);
@@ -139,10 +152,15 @@ static int pty_write(struct tty_struct *tty, const unsigned char *buf, int c)
 		c = tty_insert_flip_string(to->port, buf, c);
 		/* And shovel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (c) {
 			tty_flip_buffer_push(to->port);
 			tty_wakeup(tty);
 		}
+=======
+		if (c)
+			tty_flip_buffer_push(to->port);
+>>>>>>> v3.18
 =======
 		if (c)
 			tty_flip_buffer_push(to->port);
@@ -234,9 +252,12 @@ static int pty_signal(struct tty_struct *tty, int sig)
 	struct pid *pgrp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sig != SIGINT && sig != SIGQUIT && sig != SIGTSTP)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (tty->link) {
@@ -312,7 +333,11 @@ static int pty_resize(struct tty_struct *tty,  struct winsize *ws)
 
 	/* For a PTY we need to lock the tty side */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	mutex_lock(&tty->winsize_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&tty->winsize_mutex);
 >>>>>>> v3.18
@@ -343,7 +368,11 @@ static int pty_resize(struct tty_struct *tty,  struct winsize *ws)
 	pty->winsize = *ws;	/* Never used so will go away soon */
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	mutex_unlock(&tty->winsize_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&tty->winsize_mutex);
 >>>>>>> v3.18
@@ -352,11 +381,14 @@ done:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	pty_common_install		-	set up the pty pair
  *	@driver: the pty driver
  *	@tty: the tty being instantiated
  *	@bool: legacy, true if this is BSD style
 =======
+=======
+>>>>>>> v3.18
  *	pty_start - start() handler
  *	pty_stop  - stop() handler
  *	@tty: tty being flow-controlled
@@ -397,6 +429,9 @@ static void pty_stop(struct tty_struct *tty)
  *	@driver: the pty driver
  *	@tty: the tty being instantiated
  *	@legacy: true if this is BSD style
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *	Perform the initial set up for the tty/pty pair. Called from the
@@ -413,6 +448,7 @@ static int pty_common_install(struct tty_driver *driver, struct tty_struct *tty,
 	int retval = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	o_tty = alloc_tty_struct();
 	if (!o_tty)
 		goto err;
@@ -426,6 +462,8 @@ static int pty_common_install(struct tty_driver *driver, struct tty_struct *tty,
 	}
 	initialize_tty_struct(o_tty, driver->other, idx);
 =======
+=======
+>>>>>>> v3.18
 	ports[0] = kmalloc(sizeof **ports, GFP_KERNEL);
 	ports[1] = kmalloc(sizeof **ports, GFP_KERNEL);
 	if (!ports[0] || !ports[1])
@@ -437,6 +475,9 @@ static int pty_common_install(struct tty_driver *driver, struct tty_struct *tty,
 	o_tty = alloc_tty_struct(driver->other, idx);
 	if (!o_tty)
 		goto err_put_module;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (legacy) {
@@ -483,6 +524,7 @@ err_free_termios:
 err_deinit_tty:
 	deinitialize_tty_struct(o_tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_put(o_tty->driver->owner);
 err_free_tty:
 	kfree(ports[0]);
@@ -490,12 +532,17 @@ err_free_tty:
 	free_tty_struct(o_tty);
 err:
 =======
+=======
+>>>>>>> v3.18
 	free_tty_struct(o_tty);
 err_put_module:
 	module_put(driver->other->owner);
 err:
 	kfree(ports[0]);
 	kfree(ports[1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -577,6 +624,11 @@ static const struct tty_operations slave_pty_ops_bsd = {
 	.cleanup = pty_cleanup,
 	.resize = pty_resize,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.start = pty_start,
+	.stop = pty_stop,
+>>>>>>> v3.18
 =======
 	.start = pty_start,
 	.stop = pty_stop,
@@ -724,6 +776,7 @@ static void pty_unix98_remove(struct tty_driver *driver, struct tty_struct *tty)
 static void pty_unix98_shutdown(struct tty_struct *tty)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *ptmx_inode;
 
 	if (tty->driver->subtype == PTY_TYPE_MASTER)
@@ -732,6 +785,9 @@ static void pty_unix98_shutdown(struct tty_struct *tty)
 		ptmx_inode = tty->link->driver_data;
 	devpts_kill_index(ptmx_inode, tty->index);
 	devpts_del_ref(ptmx_inode);
+=======
+	devpts_kill_index(tty->driver_data, tty->index);
+>>>>>>> v3.18
 =======
 	devpts_kill_index(tty->driver_data, tty->index);
 >>>>>>> v3.18
@@ -768,6 +824,11 @@ static const struct tty_operations pty_unix98_ops = {
 	.unthrottle = pty_unthrottle,
 	.set_termios = pty_set_termios,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.start = pty_start,
+	.stop = pty_stop,
+>>>>>>> v3.18
 =======
 	.start = pty_start,
 	.stop = pty_stop,
@@ -831,6 +892,7 @@ static int ptmx_open(struct inode *inode, struct file *filp)
 	tty->driver_data = inode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * In the case where all references to ptmx inode are dropped and we
 	 * still have /dev/tty opened pointing to the master/slave pair (ptmx
@@ -843,6 +905,8 @@ static int ptmx_open(struct inode *inode, struct file *filp)
 	 */
 	devpts_add_ref(inode);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tty_add_file(tty, filp);

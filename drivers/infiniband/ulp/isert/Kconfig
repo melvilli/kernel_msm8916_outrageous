@@ -1,12 +1,18 @@
 config INFINIBAND_ISERT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "iSCSI Extentions for RDMA (iSER) target support"
 	depends on INET && INFINIBAND_ADDR_TRANS && TARGET_CORE && ISCSI_TARGET
 	---help---
 	Support for iSCSI Extentions for RDMA (iSER) Target on Infiniband fabrics.
 =======
+=======
+>>>>>>> v3.18
 	tristate "iSCSI Extensions for RDMA (iSER) target support"
 	depends on INET && INFINIBAND_ADDR_TRANS && TARGET_CORE && ISCSI_TARGET
 	---help---
 	Support for iSCSI Extensions for RDMA (iSER) Target on Infiniband fabrics.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

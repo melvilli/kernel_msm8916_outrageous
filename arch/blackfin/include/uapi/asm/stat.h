@@ -5,8 +5,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _BFIN_STAT_H
 #define _BFIN_STAT_H
+=======
+#ifndef _UAPI_BFIN_STAT_H
+#define _UAPI_BFIN_STAT_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_BFIN_STAT_H
 #define _UAPI_BFIN_STAT_H
@@ -72,7 +77,11 @@ struct stat64 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* _BFIN_STAT_H */
+=======
+#endif /* _UAPI_BFIN_STAT_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_BFIN_STAT_H */
 >>>>>>> v3.18

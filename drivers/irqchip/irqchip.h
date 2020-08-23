@@ -12,6 +12,11 @@
 #define _IRQCHIP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 
@@ -27,10 +32,14 @@
  * @fn: initialization function
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IRQCHIP_DECLARE(name,compstr,fn)				\
 	static const struct of_device_id irqchip_of_match_##name	\
 	__used __section(__irqchip_of_table)				\
 	= { .compatible = compstr, .data = fn }
+=======
+#define IRQCHIP_DECLARE(name, compat, fn) OF_DECLARE_2(irqchip, name, compat, fn)
+>>>>>>> v3.18
 =======
 #define IRQCHIP_DECLARE(name, compat, fn) OF_DECLARE_2(irqchip, name, compat, fn)
 >>>>>>> v3.18

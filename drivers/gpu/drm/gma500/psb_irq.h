@@ -33,7 +33,11 @@ void psb_irq_preinstall(struct drm_device *dev);
 int  psb_irq_postinstall(struct drm_device *dev);
 void psb_irq_uninstall(struct drm_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t psb_irq_handler(DRM_IRQ_ARGS);
+=======
+irqreturn_t psb_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 irqreturn_t psb_irq_handler(int irq, void *arg);
 >>>>>>> v3.18

@@ -154,7 +154,11 @@ uint oid_rt_get_rx_icv_err_hdl(struct oid_par_priv *poid_par_priv)
 		*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return RNDIS_STATUS_INVALID_LENGTH ;
+=======
+		return RNDIS_STATUS_INVALID_LENGTH;
+>>>>>>> v3.18
 =======
 		return RNDIS_STATUS_INVALID_LENGTH;
 >>>>>>> v3.18
@@ -174,7 +178,11 @@ uint oid_rt_get_preamble_mode_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *padapter = (struct _adapter *)
 				    (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 preamblemode = 0 ;
+=======
+	u32 preamblemode = 0;
+>>>>>>> v3.18
 =======
 	u32 preamblemode = 0;
 >>>>>>> v3.18
@@ -531,7 +539,11 @@ uint oid_rt_get_connect_state_hdl(struct oid_par_priv *poid_par_priv)
 		ulInfo = ADHOCMODE;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ulInfo = NOTASSOCIATED ;
+=======
+		ulInfo = NOTASSOCIATED;
+>>>>>>> v3.18
 =======
 		ulInfo = NOTASSOCIATED;
 >>>>>>> v3.18

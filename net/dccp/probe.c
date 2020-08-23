@@ -153,6 +153,7 @@ static const struct file_operations dccpprobe_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __init int setup_jprobe(void)
 {
 	int ret = register_jprobe(&dccp_send_probe);
@@ -164,6 +165,8 @@ static __init int setup_jprobe(void)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static __init int dccpprobe_init(void)
@@ -178,8 +181,11 @@ static __init int dccpprobe_init(void)
 		goto err0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = setup_jprobe();
 =======
+=======
+>>>>>>> v3.18
 	ret = register_jprobe(&dccp_send_probe);
 	if (ret) {
 		ret = request_module("dccp");
@@ -187,6 +193,9 @@ static __init int dccpprobe_init(void)
 			ret = register_jprobe(&dccp_send_probe);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto err1;

@@ -19,6 +19,7 @@
 #define	__XFS_TRANS_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_log_item;
 
 /*
@@ -306,6 +307,9 @@ struct xfs_log_item_desc {
 =======
 /* kernel only transaction subsystem defines */
 >>>>>>> v3.18
+=======
+/* kernel only transaction subsystem defines */
+>>>>>>> v3.18
 
 struct xfs_buf;
 struct xfs_buftarg;
@@ -318,6 +322,10 @@ struct xfs_log_item_desc;
 struct xfs_mount;
 struct xfs_trans;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct xfs_trans_res;
+>>>>>>> v3.18
 =======
 struct xfs_trans_res;
 >>>>>>> v3.18
@@ -354,8 +362,13 @@ typedef struct xfs_log_item {
 
 struct xfs_item_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint (*iop_size)(xfs_log_item_t *);
 	void (*iop_format)(xfs_log_item_t *, struct xfs_log_iovec *);
+=======
+	void (*iop_size)(xfs_log_item_t *, int *, int *);
+	void (*iop_format)(xfs_log_item_t *, struct xfs_log_vec *);
+>>>>>>> v3.18
 =======
 	void (*iop_size)(xfs_log_item_t *, int *, int *);
 	void (*iop_format)(xfs_log_item_t *, struct xfs_log_vec *);
@@ -369,6 +382,7 @@ struct xfs_item_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IOP_SIZE(ip)		(*(ip)->li_ops->iop_size)(ip)
 #define IOP_FORMAT(ip,vp)	(*(ip)->li_ops->iop_format)(ip, vp)
 #define IOP_PIN(ip)		(*(ip)->li_ops->iop_pin)(ip)
@@ -381,11 +395,16 @@ struct xfs_item_ops {
 /*
  * Return values for the IOP_PUSH() routines.
 =======
+=======
+>>>>>>> v3.18
 void	xfs_log_item_init(struct xfs_mount *mp, struct xfs_log_item *item,
 			  int type, const struct xfs_item_ops *ops);
 
 /*
  * Return values for the iop_push() routines.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define XFS_ITEM_SUCCESS	0
@@ -394,11 +413,14 @@ void	xfs_log_item_init(struct xfs_mount *mp, struct xfs_log_item *item,
 #define XFS_ITEM_FLUSHING	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This is the type of function which can be given to xfs_trans_callback()
  * to be called upon the transaction's commit to disk.
  */
 typedef void (*xfs_trans_callback_t)(struct xfs_trans *, void *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -408,7 +430,10 @@ typedef void (*xfs_trans_callback_t)(struct xfs_trans *, void *);
 typedef struct xfs_trans {
 	unsigned int		t_magic;	/* magic number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_log_callback_t	t_logcb;	/* log callback struct */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int		t_type;		/* transaction type */
@@ -447,7 +472,10 @@ typedef struct xfs_trans {
 	int64_t			t_rextslog_delta;/* superblocks rextslog chg */
 	struct list_head	t_items;	/* log item descriptors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_header_t	t_header;	/* header for in-log trans */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head	t_busy;		/* list of busy extents */
@@ -480,7 +508,11 @@ xfs_trans_t	*xfs_trans_alloc(struct xfs_mount *, uint);
 xfs_trans_t	*_xfs_trans_alloc(struct xfs_mount *, uint, xfs_km_flags_t);
 xfs_trans_t	*xfs_trans_dup(xfs_trans_t *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int		xfs_trans_reserve(xfs_trans_t *, uint, uint, uint,
+=======
+int		xfs_trans_reserve(struct xfs_trans *, struct xfs_trans_res *,
+>>>>>>> v3.18
 =======
 int		xfs_trans_reserve(struct xfs_trans *, struct xfs_trans_res *,
 >>>>>>> v3.18
@@ -538,6 +570,10 @@ void		xfs_trans_binval(xfs_trans_t *, struct xfs_buf *);
 void		xfs_trans_inode_buf(xfs_trans_t *, struct xfs_buf *);
 void		xfs_trans_stale_inode_buf(xfs_trans_t *, struct xfs_buf *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void		xfs_trans_ordered_buf(xfs_trans_t *, struct xfs_buf *);
+>>>>>>> v3.18
 =======
 void		xfs_trans_ordered_buf(xfs_trans_t *, struct xfs_buf *);
 >>>>>>> v3.18
@@ -562,6 +598,10 @@ void		xfs_trans_log_efd_extent(xfs_trans_t *,
 					 xfs_extlen_t);
 int		xfs_trans_commit(xfs_trans_t *, uint flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int		xfs_trans_roll(struct xfs_trans **, struct xfs_inode *);
+>>>>>>> v3.18
 =======
 int		xfs_trans_roll(struct xfs_trans **, struct xfs_inode *);
 >>>>>>> v3.18
@@ -569,6 +609,7 @@ void		xfs_trans_cancel(xfs_trans_t *, int);
 int		xfs_trans_ail_init(struct xfs_mount *);
 void		xfs_trans_ail_destroy(struct xfs_mount *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern kmem_zone_t	*xfs_trans_zone;
 extern kmem_zone_t	*xfs_log_item_desc_zone;
@@ -579,6 +620,8 @@ void		xfs_trans_init(struct xfs_mount *);
 int		xfs_trans_roll(struct xfs_trans **, struct xfs_inode *);
 
 =======
+=======
+>>>>>>> v3.18
 void		xfs_trans_buf_set_type(struct xfs_trans *, struct xfs_buf *,
 				       enum xfs_blft);
 void		xfs_trans_buf_copy_type(struct xfs_buf *dst_bp,
@@ -587,5 +630,8 @@ void		xfs_trans_buf_copy_type(struct xfs_buf *dst_bp,
 extern kmem_zone_t	*xfs_trans_zone;
 extern kmem_zone_t	*xfs_log_item_desc_zone;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __XFS_TRANS_H__ */

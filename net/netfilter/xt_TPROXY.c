@@ -16,7 +16,13 @@
 #include <net/checksum.h>
 #include <net/udp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/inet_sock.h>
+=======
+#include <net/tcp.h>
+#include <net/inet_sock.h>
+#include <net/inet_hashtables.h>
+>>>>>>> v3.18
 =======
 #include <net/tcp.h>
 #include <net/inet_sock.h>
@@ -33,6 +39,10 @@
 #include <net/if_inet6.h>
 #include <net/addrconf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/inet6_hashtables.h>
+>>>>>>> v3.18
 =======
 #include <net/inet6_hashtables.h>
 >>>>>>> v3.18
@@ -41,10 +51,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/netfilter/nf_tproxy_core.h>
 #include <linux/netfilter/xt_TPROXY.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/netfilter/xt_TPROXY.h>
 
 enum nf_tproxy_lookup_t {
@@ -52,6 +65,9 @@ enum nf_tproxy_lookup_t {
 	 NFT_LOOKUP_ESTABLISHED,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool tproxy_sk_is_transparent(struct sock *sk)
 {
@@ -89,7 +105,10 @@ tproxy_laddr4(struct sk_buff *skb, __be32 user_laddr, __be32 daddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is used when the user wants to intercept a connection matching
  * an explicit iptables rule. In this case the sockets are assumed
@@ -241,6 +260,9 @@ nf_tproxy_get_sock_v6(struct net *net, const u8 protocol,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * tproxy_handle_time_wait4 - handle IPv4 TCP TIME_WAIT reopen redirections
@@ -292,7 +314,10 @@ tproxy_handle_time_wait4(struct sk_buff *skb, __be32 laddr, __be16 lport,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* assign a socket to the skb -- consumes sk */
 static void
 nf_tproxy_assign_sock(struct sk_buff *skb, struct sock *sk)
@@ -302,6 +327,9 @@ nf_tproxy_assign_sock(struct sk_buff *skb, struct sock *sk)
 	skb->destructor = sock_edemux;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int
 tproxy_tg4(struct sk_buff *skb, __be32 laddr, __be16 lport,

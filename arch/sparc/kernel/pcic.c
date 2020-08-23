@@ -37,6 +37,10 @@
 #include <asm/irq_regs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -167,8 +171,13 @@ static struct linux_pcic pcic0;
 
 void __iomem *pcic_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 volatile int pcic_speculative;
 volatile int pcic_trapped;
+=======
+static volatile int pcic_speculative;
+static volatile int pcic_trapped;
+>>>>>>> v3.18
 =======
 static volatile int pcic_speculative;
 static volatile int pcic_trapped;
@@ -339,7 +348,11 @@ int __init pcic_probe(void)
 	pcic->pcic_res_cfg_addr.name = "pcic_cfg_addr";
 	if ((pcic->pcic_config_space_addr =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ioremap(regs[2].phys_addr, regs[2].reg_size * 2)) == 0) {
+=======
+	    ioremap(regs[2].phys_addr, regs[2].reg_size * 2)) == NULL) {
+>>>>>>> v3.18
 =======
 	    ioremap(regs[2].phys_addr, regs[2].reg_size * 2)) == NULL) {
 >>>>>>> v3.18
@@ -355,7 +368,11 @@ int __init pcic_probe(void)
 	pcic->pcic_res_cfg_data.name = "pcic_cfg_data";
 	if ((pcic->pcic_config_space_data =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ioremap(regs[3].phys_addr, regs[3].reg_size * 2)) == 0) {
+=======
+	    ioremap(regs[3].phys_addr, regs[3].reg_size * 2)) == NULL) {
+>>>>>>> v3.18
 =======
 	    ioremap(regs[3].phys_addr, regs[3].reg_size * 2)) == NULL) {
 >>>>>>> v3.18
@@ -371,7 +388,10 @@ int __init pcic_probe(void)
 
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		extern volatile int t_nmi[4];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		extern int pcic_nmi_trap_patch[4];
@@ -557,7 +577,11 @@ pcic_fill_irq(struct linux_pcic *pcic, struct pci_dev *dev, int node)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p = pcic->pcic_imap) == 0) {
+=======
+	if ((p = pcic->pcic_imap) == NULL) {
+>>>>>>> v3.18
 =======
 	if ((p = pcic->pcic_imap) == NULL) {
 >>>>>>> v3.18
@@ -695,6 +719,7 @@ void pcibios_fixup_bus(struct pci_bus *bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * pcic_pin_to_irq() is exported to bus probing code
  */
@@ -719,6 +744,8 @@ pcic_pin_to_irq(unsigned int pin, const char *name)
 	return irq;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Makes compiler happy */
@@ -811,7 +838,11 @@ void pcic_nmi(unsigned int pend, struct pt_regs *regs)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pend = flip_dword(pend);
+=======
+	pend = swab32(pend);
+>>>>>>> v3.18
 =======
 	pend = swab32(pend);
 >>>>>>> v3.18
@@ -907,6 +938,7 @@ void __init sun4m_pci_init_IRQ(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This probably belongs here rather than ioport.c because
  * we do not want this crud linked into SBus kernels.
@@ -985,6 +1017,8 @@ void insl(unsigned long addr, void *dst, unsigned long count)
 }
 EXPORT_SYMBOL(insl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 subsys_initcall(pcic_init);

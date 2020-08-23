@@ -49,7 +49,11 @@ static void l4f00242t03_reset(unsigned int gpio)
 static void l4f00242t03_lcd_init(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct l4f00242t03_pdata *pdata = spi->dev.platform_data;
+=======
+	struct l4f00242t03_pdata *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct l4f00242t03_pdata *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -93,7 +97,11 @@ static void l4f00242t03_lcd_init(struct spi_device *spi)
 static void l4f00242t03_lcd_powerdown(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct l4f00242t03_pdata *pdata = spi->dev.platform_data;
+=======
+	struct l4f00242t03_pdata *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct l4f00242t03_pdata *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -180,7 +188,11 @@ static int l4f00242t03_probe(struct spi_device *spi)
 {
 	struct l4f00242t03_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct l4f00242t03_pdata *pdata = spi->dev.platform_data;
+=======
+	struct l4f00242t03_pdata *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct l4f00242t03_pdata *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -194,11 +206,16 @@ static int l4f00242t03_probe(struct spi_device *spi)
 	priv = devm_kzalloc(&spi->dev, sizeof(struct l4f00242t03_priv),
 				GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (priv == NULL) {
 		dev_err(&spi->dev, "No memory for this device.\n");
 		return -ENOMEM;
 	}
+=======
+	if (priv == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (priv == NULL)
 		return -ENOMEM;
@@ -241,8 +258,13 @@ static int l4f00242t03_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->ld = lcd_device_register("l4f00242t03",
 					&spi->dev, priv, &l4f_ops);
+=======
+	priv->ld = devm_lcd_device_register(&spi->dev, "l4f00242t03", &spi->dev,
+					priv, &l4f_ops);
+>>>>>>> v3.18
 =======
 	priv->ld = devm_lcd_device_register(&spi->dev, "l4f00242t03", &spi->dev,
 					priv, &l4f_ops);
@@ -266,9 +288,12 @@ static int l4f00242t03_remove(struct spi_device *spi)
 
 	l4f00242t03_lcd_power_set(priv->ld, FB_BLANK_POWERDOWN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_device_unregister(priv->ld);
 	spi_set_drvdata(spi, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

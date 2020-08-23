@@ -37,6 +37,10 @@
 #include <linux/jiffies.h>
 #include <linux/timex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/timekeeping.h>
+>>>>>>> v3.18
 =======
 #include <linux/timekeeping.h>
 >>>>>>> v3.18
@@ -48,11 +52,17 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool use_ktime = true;
 module_param(use_ktime, bool, 0400);
 MODULE_PARM_DESC(use_ktime, "Use ktime for measuring I/O speed");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Option parsing.
@@ -170,7 +180,11 @@ static unsigned int get_time_pit(void)
 #define DELTA(x,y)	((y)-(x))
 #define TIME_NAME	"TSC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(__alpha__) || defined(CONFIG_MN10300) || defined(CONFIG_ARM) || defined(CONFIG_TILE)
+=======
+#elif defined(__alpha__) || defined(CONFIG_MN10300) || defined(CONFIG_ARM) || defined(CONFIG_ARM64) || defined(CONFIG_TILE)
+>>>>>>> v3.18
 =======
 #elif defined(__alpha__) || defined(CONFIG_MN10300) || defined(CONFIG_ARM) || defined(CONFIG_ARM64) || defined(CONFIG_TILE)
 >>>>>>> v3.18
@@ -187,7 +201,10 @@ static unsigned long analog_faketime = 0;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u64 get_time(void)
 {
 	if (use_ktime) {
@@ -207,6 +224,9 @@ static inline unsigned int delta(u64 x, u64 y)
 		return DELTA((unsigned int)x, (unsigned int)y);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * analog_decode() decodes analog joystick data and reports input events.
@@ -264,7 +284,12 @@ static int analog_cooked_read(struct analog_port *port)
 {
 	struct gameport *gameport = port->gameport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int time[4], start, loop, now, loopout, timeout;
+=======
+	u64 time[4], start, loop, now;
+	unsigned int loopout, timeout;
+>>>>>>> v3.18
 =======
 	u64 time[4], start, loop, now;
 	unsigned int loopout, timeout;
@@ -279,7 +304,11 @@ static int analog_cooked_read(struct analog_port *port)
 	local_irq_save(flags);
 	gameport_trigger(gameport);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	GET_TIME(now);
+=======
+	now = get_time();
+>>>>>>> v3.18
 =======
 	now = get_time();
 >>>>>>> v3.18
@@ -296,15 +325,21 @@ static int analog_cooked_read(struct analog_port *port)
 		local_irq_disable();
 		this = gameport_read(gameport) & port->mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		GET_TIME(now);
 		local_irq_restore(flags);
 
 		if ((last ^ this) && (DELTA(loop, now) < loopout)) {
 =======
+=======
+>>>>>>> v3.18
 		now = get_time();
 		local_irq_restore(flags);
 
 		if ((last ^ this) && (delta(loop, now) < loopout)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			data[i] = last ^ this;
 			time[i] = now;
@@ -312,7 +347,11 @@ static int analog_cooked_read(struct analog_port *port)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (this && (i < 4) && (DELTA(start, now) < timeout));
+=======
+	} while (this && (i < 4) && (delta(start, now) < timeout));
+>>>>>>> v3.18
 =======
 	} while (this && (i < 4) && (delta(start, now) < timeout));
 >>>>>>> v3.18
@@ -324,7 +363,11 @@ static int analog_cooked_read(struct analog_port *port)
 		for (j = 0; j < 4; j++)
 			if (data[i] & (1 << j))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				port->axes[j] = (DELTA(start, time[i]) << ANALOG_FUZZ_BITS) / port->loop;
+=======
+				port->axes[j] = (delta(start, time[i]) << ANALOG_FUZZ_BITS) / port->loop;
+>>>>>>> v3.18
 =======
 				port->axes[j] = (delta(start, time[i]) << ANALOG_FUZZ_BITS) / port->loop;
 >>>>>>> v3.18
@@ -427,6 +470,7 @@ static void analog_calibrate_timer(struct analog_port *port)
 {
 	struct gameport *gameport = port->gameport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i, t, tx, t1, t2, t3;
 	unsigned long flags;
 
@@ -442,6 +486,8 @@ static void analog_calibrate_timer(struct analog_port *port)
 
 	port->speed = DELTA(t1, t2) - DELTA(t2, t3);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i, t, tx;
 	u64 t1, t2, t3;
 	unsigned long flags;
@@ -461,12 +507,16 @@ static void analog_calibrate_timer(struct analog_port *port)
 
 		port->speed = delta(t1, t2) - delta(t2, t3);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tx = ~0;
 
 	for (i = 0; i < 50; i++) {
 		local_irq_save(flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		GET_TIME(t1);
 		for (t = 0; t < 50; t++) { gameport_read(gameport); GET_TIME(t2); }
@@ -475,6 +525,8 @@ static void analog_calibrate_timer(struct analog_port *port)
 		udelay(i);
 		t = DELTA(t1, t2) - DELTA(t2, t3);
 =======
+=======
+>>>>>>> v3.18
 		t1 = get_time();
 		for (t = 0; t < 50; t++) {
 			gameport_read(gameport);
@@ -484,6 +536,9 @@ static void analog_calibrate_timer(struct analog_port *port)
 		local_irq_restore(flags);
 		udelay(i);
 		t = delta(t1, t2) - delta(t2, t3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (t < tx) tx = t;
 	}

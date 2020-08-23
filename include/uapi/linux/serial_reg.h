@@ -33,7 +33,11 @@
 #define UART_IIR	2	/* In:  Interrupt ID Register */
 #define UART_IIR_NO_INT		0x01 /* No interrupts pending */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART_IIR_ID		0x06 /* Mask for the interrupt ID */
+=======
+#define UART_IIR_ID		0x0e /* Mask for the interrupt ID */
+>>>>>>> v3.18
 =======
 #define UART_IIR_ID		0x0e /* Mask for the interrupt ID */
 >>>>>>> v3.18
@@ -93,12 +97,18 @@
 #define UART_FCR7_64BYTE	0x20 /* Go into 64 byte mode (TI16C750) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define UART_FCR_R_TRIG_SHIFT		6
 #define UART_FCR_R_TRIG_BITS(x)		\
 	(((x) & UART_FCR_TRIGGER_MASK) >> UART_FCR_R_TRIG_SHIFT)
 #define UART_FCR_R_TRIG_MAX_STATE	4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UART_LCR	3	/* Out: Line Control Register */
 /*

@@ -153,7 +153,10 @@ static void arizona_irq_disable(struct irq_data *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int arizona_irq_set_wake(struct irq_data *data, unsigned int on)
 {
 	struct arizona *arizona = irq_data_get_irq_chip_data(data);
@@ -161,12 +164,19 @@ static int arizona_irq_set_wake(struct irq_data *data, unsigned int on)
 	return irq_set_irq_wake(arizona->irq, on);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct irq_chip arizona_irq_chip = {
 	.name			= "arizona",
 	.irq_disable		= arizona_irq_disable,
 	.irq_enable		= arizona_irq_enable,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_set_wake		= arizona_irq_set_wake,
+>>>>>>> v3.18
 =======
 	.irq_set_wake		= arizona_irq_set_wake,
 >>>>>>> v3.18
@@ -179,7 +189,11 @@ static int arizona_irq_map(struct irq_domain *h, unsigned int virq,
 
 	irq_set_chip_data(virq, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_set_chip_and_handler(virq, &arizona_irq_chip, handle_edge_irq);
+=======
+	irq_set_chip_and_handler(virq, &arizona_irq_chip, handle_simple_irq);
+>>>>>>> v3.18
 =======
 	irq_set_chip_and_handler(virq, &arizona_irq_chip, handle_simple_irq);
 >>>>>>> v3.18
@@ -207,14 +221,20 @@ int arizona_irq_init(struct arizona *arizona)
 	int ret, i;
 	const struct regmap_irq_chip *aod, *irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool ctrlif_error = true;
 	struct irq_data *irq_data;
 
 =======
+=======
+>>>>>>> v3.18
 	struct irq_data *irq_data;
 
 	arizona->ctrlif_error = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (arizona->type) {
 #ifdef CONFIG_MFD_WM5102
@@ -223,7 +243,11 @@ int arizona_irq_init(struct arizona *arizona)
 		irq = &wm5102_irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctrlif_error = false;
+=======
+		arizona->ctrlif_error = false;
+>>>>>>> v3.18
 =======
 		arizona->ctrlif_error = false;
 >>>>>>> v3.18
@@ -233,10 +257,13 @@ int arizona_irq_init(struct arizona *arizona)
 	case WM5110:
 		aod = &wm5110_aod;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq = &wm5110_irq;
 
 		ctrlif_error = false;
 =======
+=======
+>>>>>>> v3.18
 
 		switch (arizona->rev) {
 		case 0 ... 2:
@@ -256,6 +283,9 @@ int arizona_irq_init(struct arizona *arizona)
 		irq = &wm8997_irq;
 
 		arizona->ctrlif_error = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 #endif
@@ -317,7 +347,11 @@ int arizona_irq_init(struct arizona *arizona)
 	ret = regmap_add_irq_chip(arizona->regmap,
 				  irq_create_mapping(arizona->virq, 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  IRQF_ONESHOT, -1, aod,
+=======
+				  IRQF_ONESHOT, 0, aod,
+>>>>>>> v3.18
 =======
 				  IRQF_ONESHOT, 0, aod,
 >>>>>>> v3.18
@@ -330,15 +364,21 @@ int arizona_irq_init(struct arizona *arizona)
 	ret = regmap_add_irq_chip(arizona->regmap,
 				  irq_create_mapping(arizona->virq, 1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  IRQF_ONESHOT, -1, irq,
 				  &arizona->irq_chip);
 	if (ret != 0) {
 		dev_err(arizona->dev, "Failed to add AOD IRQs: %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 				  IRQF_ONESHOT, 0, irq,
 				  &arizona->irq_chip);
 	if (ret != 0) {
 		dev_err(arizona->dev, "Failed to add main IRQs: %d\n", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_aod;
 	}
@@ -355,7 +395,11 @@ int arizona_irq_init(struct arizona *arizona)
 
 	/* Handle control interface errors in the core */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctrlif_error) {
+=======
+	if (arizona->ctrlif_error) {
+>>>>>>> v3.18
 =======
 	if (arizona->ctrlif_error) {
 >>>>>>> v3.18
@@ -404,7 +448,13 @@ int arizona_irq_init(struct arizona *arizona)
 
 err_main_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(arizona_map_irq(arizona, ARIZONA_IRQ_CTRLIF_ERR), arizona);
+=======
+	if (arizona->ctrlif_error)
+		free_irq(arizona_map_irq(arizona, ARIZONA_IRQ_CTRLIF_ERR),
+			 arizona);
+>>>>>>> v3.18
 =======
 	if (arizona->ctrlif_error)
 		free_irq(arizona_map_irq(arizona, ARIZONA_IRQ_CTRLIF_ERR),
@@ -426,7 +476,13 @@ err:
 int arizona_irq_exit(struct arizona *arizona)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(arizona_map_irq(arizona, ARIZONA_IRQ_CTRLIF_ERR), arizona);
+=======
+	if (arizona->ctrlif_error)
+		free_irq(arizona_map_irq(arizona, ARIZONA_IRQ_CTRLIF_ERR),
+			 arizona);
+>>>>>>> v3.18
 =======
 	if (arizona->ctrlif_error)
 		free_irq(arizona_map_irq(arizona, ARIZONA_IRQ_CTRLIF_ERR),

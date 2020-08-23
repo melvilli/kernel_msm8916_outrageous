@@ -30,7 +30,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -50,7 +53,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/stmp_device.h>
@@ -64,6 +70,7 @@
 
 #define SG_MAXLEN		0xff00
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct mxs_spi {
 	struct mxs_ssp		ssp;
@@ -105,6 +112,8 @@ static int mxs_spi_setup_transfer(struct spi_device *dev,
 		     ((dev->mode & SPI_CPHA) ? BM_SSP_CTRL1_PHASE : 0),
 		     ssp->base + HW_SSP_CTRL1(ssp));
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flags for txrx functions.  More efficient that using an argument register for
  * each one.
@@ -152,6 +161,9 @@ static int mxs_spi_setup_transfer(struct spi_device *dev,
 	       ((dev->mode & SPI_CPOL) ? BM_SSP_CTRL1_POLARITY : 0) |
 	       ((dev->mode & SPI_CPHA) ? BM_SSP_CTRL1_PHASE : 0),
 	       ssp->base + HW_SSP_CTRL1(ssp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	writel(0x0, ssp->base + HW_SSP_CMD0);
@@ -160,6 +172,7 @@ static int mxs_spi_setup_transfer(struct spi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mxs_spi_setup(struct spi_device *dev)
 {
@@ -188,6 +201,11 @@ static u32 mxs_spi_cs_to_reg(unsigned cs)
 {
 	u32 select = 0;
 >>>>>>> v3.18
+=======
+static u32 mxs_spi_cs_to_reg(unsigned cs)
+{
+	u32 select = 0;
+>>>>>>> v3.18
 
 	/*
 	 * i.MX28 Datasheet: 17.10.1: HW_SSP_CTRL0
@@ -205,6 +223,7 @@ static u32 mxs_spi_cs_to_reg(unsigned cs)
 	return select;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void mxs_spi_set_cs(struct mxs_spi *spi, unsigned cs)
 {
@@ -240,12 +259,18 @@ static inline void mxs_spi_disable(struct mxs_spi *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int mxs_ssp_wait(struct mxs_spi *spi, int offset, int mask, bool set)
 {
 	const unsigned long timeout = jiffies + msecs_to_jiffies(SSP_TIMEOUT);
 	struct mxs_ssp *ssp = &spi->ssp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t reg;
+=======
+	u32 reg;
+>>>>>>> v3.18
 =======
 	u32 reg;
 >>>>>>> v3.18
@@ -269,6 +294,10 @@ static void mxs_ssp_dma_irq_callback(void *param)
 {
 	struct mxs_spi *spi = param;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -279,6 +308,10 @@ static irqreturn_t mxs_ssp_irq_handler(int irq, void *dev_id)
 {
 	struct mxs_ssp *ssp = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -290,9 +323,15 @@ static irqreturn_t mxs_ssp_irq_handler(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxs_spi_txrx_dma(struct mxs_spi *spi, int cs,
 			    unsigned char *buf, int len,
 			    int *first, int *last, int write)
+=======
+static int mxs_spi_txrx_dma(struct mxs_spi *spi,
+			    unsigned char *buf, int len,
+			    unsigned int flags)
+>>>>>>> v3.18
 =======
 static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 			    unsigned char *buf, int len,
@@ -307,17 +346,23 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 	int sg_count;
 	int min, ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t ctrl0;
 	struct page *vm_page;
 	void *sg_buf;
 	struct {
 		uint32_t		pio[4];
 =======
+=======
+>>>>>>> v3.18
 	u32 ctrl0;
 	struct page *vm_page;
 	void *sg_buf;
 	struct {
 		u32			pio[4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct scatterlist	sg;
 	} *dma_xfer;
@@ -325,6 +370,7 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 	if (!len)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dma_xfer = kzalloc(sizeof(*dma_xfer) * sgs, GFP_KERNEL);
 	if (!dma_xfer)
@@ -340,6 +386,8 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 		ctrl0 |= BM_SSP_CTRL0_LOCK_CS;
 	if (!write)
 =======
+=======
+>>>>>>> v3.18
 	dma_xfer = kcalloc(sgs, sizeof(*dma_xfer), GFP_KERNEL);
 	if (!dma_xfer)
 		return -ENOMEM;
@@ -353,17 +401,23 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 	ctrl0 |= BM_SSP_CTRL0_DATA_XFER;
 
 	if (!(flags & TXRX_WRITE))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ctrl0 |= BM_SSP_CTRL0_READ;
 
 	/* Queue the DMA data transfer. */
 	for (sg_count = 0; sg_count < sgs; sg_count++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		min = min(len, desc_len);
 
 		/* Prepare the transfer descriptor. */
 		if ((sg_count + 1 == sgs) && *last)
 =======
+=======
+>>>>>>> v3.18
 		/* Prepare the transfer descriptor. */
 		min = min(len, desc_len);
 
@@ -372,6 +426,9 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 		 * transfers will follow)
 		 */
 		if ((sg_count + 1 == sgs) && (flags & TXRX_DEASSERT_CS))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctrl0 |= BM_SSP_CTRL0_IGNORE_CRC;
 
@@ -398,7 +455,11 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 		sg_init_one(&dma_xfer[sg_count].sg, sg_buf, min);
 		ret = dma_map_sg(ssp->dev, &dma_xfer[sg_count].sg, 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			write ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+=======
+			(flags & TXRX_WRITE) ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+>>>>>>> v3.18
 =======
 			(flags & TXRX_WRITE) ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
 >>>>>>> v3.18
@@ -422,7 +483,11 @@ static int mxs_spi_txrx_dma(struct mxs_spi *spi,
 		desc = dmaengine_prep_slave_sg(ssp->dmach,
 				&dma_xfer[sg_count].sg, 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				write ? DMA_MEM_TO_DEV : DMA_DEV_TO_MEM,
+=======
+				(flags & TXRX_WRITE) ? DMA_MEM_TO_DEV : DMA_DEV_TO_MEM,
+>>>>>>> v3.18
 =======
 				(flags & TXRX_WRITE) ? DMA_MEM_TO_DEV : DMA_DEV_TO_MEM,
 >>>>>>> v3.18
@@ -463,7 +528,11 @@ err_vmalloc:
 err_mapped:
 		dma_unmap_sg(ssp->dev, &dma_xfer[sg_count].sg, 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			write ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+=======
+			(flags & TXRX_WRITE) ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+>>>>>>> v3.18
 =======
 			(flags & TXRX_WRITE) ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
 >>>>>>> v3.18
@@ -474,6 +543,7 @@ err_mapped:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mxs_spi_txrx_pio(struct mxs_spi *spi, int cs,
 			    unsigned char *buf, int len,
@@ -490,6 +560,8 @@ static int mxs_spi_txrx_pio(struct mxs_spi *spi, int cs,
 		if (*last && len == 0)
 			mxs_spi_disable(spi);
 =======
+=======
+>>>>>>> v3.18
 static int mxs_spi_txrx_pio(struct mxs_spi *spi,
 			    unsigned char *buf, int len,
 			    unsigned int flags)
@@ -503,6 +575,9 @@ static int mxs_spi_txrx_pio(struct mxs_spi *spi,
 		if (len == 0 && (flags & TXRX_DEASSERT_CS))
 			writel(BM_SSP_CTRL0_IGNORE_CRC,
 			       ssp->base + HW_SSP_CTRL0 + STMP_OFFSET_REG_SET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (ssp->devid == IMX23_SSP) {
@@ -515,7 +590,11 @@ static int mxs_spi_txrx_pio(struct mxs_spi *spi,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (write)
+=======
+		if (flags & TXRX_WRITE)
+>>>>>>> v3.18
 =======
 		if (flags & TXRX_WRITE)
 >>>>>>> v3.18
@@ -532,7 +611,11 @@ static int mxs_spi_txrx_pio(struct mxs_spi *spi,
 			return -ETIMEDOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (write)
+=======
+		if (flags & TXRX_WRITE)
+>>>>>>> v3.18
 =======
 		if (flags & TXRX_WRITE)
 >>>>>>> v3.18
@@ -542,7 +625,11 @@ static int mxs_spi_txrx_pio(struct mxs_spi *spi,
 			     ssp->base + HW_SSP_CTRL0 + STMP_OFFSET_REG_SET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!write) {
+=======
+		if (!(flags & TXRX_WRITE)) {
+>>>>>>> v3.18
 =======
 		if (!(flags & TXRX_WRITE)) {
 >>>>>>> v3.18
@@ -571,6 +658,7 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 	struct mxs_spi *spi = spi_master_get_devdata(master);
 	struct mxs_ssp *ssp = &spi->ssp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int first, last;
 	struct spi_transfer *t, *tmp_t;
 	int status = 0;
@@ -582,6 +670,8 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 
 	list_for_each_entry_safe(t, tmp_t, &m->transfers, transfer_list) {
 =======
+=======
+>>>>>>> v3.18
 	struct spi_transfer *t;
 	unsigned int flag;
 	int status = 0;
@@ -593,12 +683,16 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 	       ssp->base + HW_SSP_CTRL0 + STMP_OFFSET_REG_SET);
 
 	list_for_each_entry(t, &m->transfers, transfer_list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		status = mxs_spi_setup_transfer(m->spi, t);
 		if (status)
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (&t->transfer_list == m->transfers.next)
 			first = 1;
@@ -610,6 +704,11 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 			status = -EINVAL;
 			break;
 		}
+=======
+		/* De-assert on last transfer, inverted by cs_change flag */
+		flag = (&t->transfer_list == m->transfers.prev) ^ t->cs_change ?
+		       TXRX_DEASSERT_CS : 0;
+>>>>>>> v3.18
 =======
 		/* De-assert on last transfer, inverted by cs_change flag */
 		flag = (&t->transfer_list == m->transfers.prev) ^ t->cs_change ?
@@ -632,6 +731,7 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 
 			if (t->tx_buf)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = mxs_spi_txrx_pio(spi, cs,
 						(void *)t->tx_buf,
 						t->len, &first, &last, 1);
@@ -640,6 +740,8 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 						t->rx_buf, t->len,
 						&first, &last, 0);
 =======
+=======
+>>>>>>> v3.18
 				status = mxs_spi_txrx_pio(spi,
 						(void *)t->tx_buf,
 						t->len, flag | TXRX_WRITE);
@@ -647,6 +749,9 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 				status = mxs_spi_txrx_pio(spi,
 						t->rx_buf, t->len,
 						flag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			writel(BM_SSP_CTRL1_DMA_ENABLE,
@@ -654,6 +759,7 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 				STMP_OFFSET_REG_SET);
 
 			if (t->tx_buf)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				status = mxs_spi_txrx_dma(spi, cs,
 						(void *)t->tx_buf, t->len,
@@ -663,6 +769,8 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 						t->rx_buf, t->len,
 						&first, &last, 0);
 =======
+=======
+>>>>>>> v3.18
 				status = mxs_spi_txrx_dma(spi,
 						(void *)t->tx_buf, t->len,
 						flag | TXRX_WRITE);
@@ -670,6 +778,9 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 				status = mxs_spi_txrx_dma(spi,
 						t->rx_buf, t->len,
 						flag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -680,7 +791,10 @@ static int mxs_spi_transfer_one(struct spi_master *master,
 
 		m->actual_length += t->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		first = last = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -708,7 +822,10 @@ static int mxs_spi_probe(struct platform_device *pdev)
 	struct mxs_ssp *ssp;
 	struct resource *iores;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct clk *clk;
@@ -726,8 +843,13 @@ static int mxs_spi_probe(struct platform_device *pdev)
 	iores = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq_err = platform_get_irq(pdev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!iores || irq_err < 0)
 		return -EINVAL;
+=======
+	if (irq_err < 0)
+		return irq_err;
+>>>>>>> v3.18
 =======
 	if (irq_err < 0)
 		return irq_err;
@@ -738,10 +860,13 @@ static int mxs_spi_probe(struct platform_device *pdev)
 		return PTR_ERR(base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl))
 		return PTR_ERR(pinctrl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk = devm_clk_get(&pdev->dev, NULL);
@@ -760,7 +885,11 @@ static int mxs_spi_probe(struct platform_device *pdev)
 
 	master->transfer_one_message = mxs_spi_transfer_one;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = mxs_spi_setup;
+=======
+	master->bits_per_word_mask = SPI_BPW_MASK(8);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 >>>>>>> v3.18
@@ -791,6 +920,7 @@ static int mxs_spi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(ssp->clk);
 	clk_set_rate(ssp->clk, clk_freq);
 	ssp->clk_rate = clk_get_rate(ssp->clk) / 1000;
@@ -804,6 +934,8 @@ static int mxs_spi_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Cannot register SPI master, %d\n", ret);
 		goto out_free_dma;
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(ssp->clk);
 	if (ret)
 		goto out_dma_release;
@@ -820,20 +952,29 @@ static int mxs_spi_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Cannot register SPI master, %d\n", ret);
 		goto out_disable_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_dma:
 	dma_release_channel(ssp->dmach);
 	clk_disable_unprepare(ssp->clk);
 =======
+=======
+>>>>>>> v3.18
 out_disable_clk:
 	clk_disable_unprepare(ssp->clk);
 out_dma_release:
 	dma_release_channel(ssp->dmach);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_master_free:
 	spi_master_put(master);
@@ -847,6 +988,7 @@ static int mxs_spi_remove(struct platform_device *pdev)
 	struct mxs_ssp *ssp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = spi_master_get(platform_get_drvdata(pdev));
 	spi = spi_master_get_devdata(master);
 	ssp = &spi->ssp;
@@ -859,12 +1001,17 @@ static int mxs_spi_remove(struct platform_device *pdev)
 
 	spi_master_put(master);
 =======
+=======
+>>>>>>> v3.18
 	master = platform_get_drvdata(pdev);
 	spi = spi_master_get_devdata(master);
 	ssp = &spi->ssp;
 
 	clk_disable_unprepare(ssp->clk);
 	dma_release_channel(ssp->dmach);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

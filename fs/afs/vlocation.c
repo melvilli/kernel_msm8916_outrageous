@@ -131,7 +131,10 @@ static int afs_vlocation_access_vl_by_id(struct afs_vlocation *vl,
 					set_current_state(TASK_UNINTERRUPTIBLE);
 					schedule_timeout(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				}
@@ -312,7 +315,12 @@ static int afs_vlocation_fill_in_record(struct afs_vlocation *vl,
 #ifdef CONFIG_AFS_FSCACHE
 	vl->cache = fscache_acquire_cookie(vl->cell->cache,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   &afs_vlocation_cache_index_def, vl);
+=======
+					   &afs_vlocation_cache_index_def, vl,
+					   true);
+>>>>>>> v3.18
 =======
 					   &afs_vlocation_cache_index_def, vl,
 					   true);

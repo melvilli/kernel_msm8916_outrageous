@@ -22,7 +22,10 @@ typedef struct {
 #ifdef CONFIG_SMP
 	unsigned int irq_resched_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int irq_call_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

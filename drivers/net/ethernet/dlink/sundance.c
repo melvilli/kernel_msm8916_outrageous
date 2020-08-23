@@ -200,7 +200,11 @@ IVc. Errata
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sundance_pci_tbl) = {
+=======
+static const struct pci_device_id sundance_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sundance_pci_tbl[] = {
 >>>>>>> v3.18
@@ -474,7 +478,10 @@ static void sundance_reset(struct net_device *dev, unsigned long reset_cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_POLL_CONTROLLER
 static void sundance_poll_controller(struct net_device *dev)
 {
@@ -486,6 +493,9 @@ static void sundance_poll_controller(struct net_device *dev)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct net_device_ops netdev_ops = {
 	.ndo_open		= netdev_open,
@@ -499,6 +509,12 @@ static const struct net_device_ops netdev_ops = {
 	.ndo_set_mac_address 	= sundance_set_mac_addr,
 	.ndo_validate_addr	= eth_validate_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NET_POLL_CONTROLLER
+	.ndo_poll_controller 	= sundance_poll_controller,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NET_POLL_CONTROLLER
 	.ndo_poll_controller 	= sundance_poll_controller,
@@ -588,7 +604,11 @@ static int sundance_probe1(struct pci_dev *pdev,
 	/* The chip-specific entries in the device structure. */
 	dev->netdev_ops = &netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+	dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ethtool_ops;
 >>>>>>> v3.18
@@ -718,7 +738,10 @@ err_out_unmap_tx:
 		np->tx_ring, np->tx_ring_dma);
 err_out_cleardev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pdev, ioaddr);
@@ -1156,7 +1179,11 @@ start_tx (struct sk_buff *skb, struct net_device *dev)
 
 drop_frame:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1963,7 +1990,10 @@ static void sundance_remove1(struct pci_dev *pdev)
 	    pci_release_regions(pdev);
 	    free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

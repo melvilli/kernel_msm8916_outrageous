@@ -314,7 +314,11 @@ static void oxygen_restore_eeprom(struct oxygen *chip,
 				   OXYGEN_MISC_WRITE_PCI_SUBID);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_INFO "EEPROM ID restored\n");
+=======
+		dev_info(chip->card->dev, "EEPROM ID restored\n");
+>>>>>>> v3.18
 =======
 		dev_info(chip->card->dev, "EEPROM ID restored\n");
 >>>>>>> v3.18
@@ -600,7 +604,12 @@ int oxygen_pci_probe(struct pci_dev *pci, int index, char *id,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, owner, sizeof(*chip), &card);
+=======
+	err = snd_card_new(&pci->dev, index, id, owner,
+			   sizeof(*chip), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index, id, owner,
 			   sizeof(*chip), &card);
@@ -626,7 +635,11 @@ int oxygen_pci_probe(struct pci_dev *pci, int index, char *id,
 	err = pci_request_regions(pci, DRIVER);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "cannot reserve PCI resources\n");
+=======
+		dev_err(card->dev, "cannot reserve PCI resources\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot reserve PCI resources\n");
 >>>>>>> v3.18
@@ -636,7 +649,11 @@ int oxygen_pci_probe(struct pci_dev *pci, int index, char *id,
 	if (!(pci_resource_flags(pci, 0) & IORESOURCE_IO) ||
 	    pci_resource_len(pci, 0) < OXYGEN_IO_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid PCI I/O range\n");
+=======
+		dev_err(card->dev, "invalid PCI I/O range\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "invalid PCI I/O range\n");
 >>>>>>> v3.18
@@ -666,7 +683,10 @@ int oxygen_pci_probe(struct pci_dev *pci, int index, char *id,
 
 	pci_set_master(pci);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	card->private_free = oxygen_card_free;
@@ -679,7 +699,11 @@ int oxygen_pci_probe(struct pci_dev *pci, int index, char *id,
 			  KBUILD_MODNAME, chip);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "cannot grab interrupt %d\n", pci->irq);
+=======
+		dev_err(card->dev, "cannot grab interrupt %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot grab interrupt %d\n", pci->irq);
 >>>>>>> v3.18
@@ -747,7 +771,10 @@ void oxygen_pci_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -825,7 +852,11 @@ static int oxygen_pci_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "cannot reenable device");
+=======
+		dev_err(dev, "cannot reenable device");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "cannot reenable device");
 >>>>>>> v3.18

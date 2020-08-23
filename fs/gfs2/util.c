@@ -8,6 +8,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -36,22 +41,32 @@ mempool_t *gfs2_page_pool __read_mostly;
 void gfs2_assert_i(struct gfs2_sbd *sdp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_EMERG "GFS2: fsid=%s: fatal assertion failed\n",
 	       sdp->sd_fsname);
 }
 
 int gfs2_lm_withdraw(struct gfs2_sbd *sdp, char *fmt, ...)
 =======
+=======
+>>>>>>> v3.18
 	fs_emerg(sdp, "fatal assertion failed\n");
 }
 
 int gfs2_lm_withdraw(struct gfs2_sbd *sdp, const char *fmt, ...)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct lm_lockstruct *ls = &sdp->sd_lockstruct;
 	const struct lm_lockops *lm = ls->ls_ops;
 	va_list args;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct va_format vaf;
+>>>>>>> v3.18
 =======
 	struct va_format vaf;
 >>>>>>> v3.18
@@ -62,14 +77,20 @@ int gfs2_lm_withdraw(struct gfs2_sbd *sdp, const char *fmt, ...)
 
 	va_start(args, fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vprintk(fmt, args);
 =======
+=======
+>>>>>>> v3.18
 
 	vaf.fmt = fmt;
 	vaf.va = &args;
 
 	fs_err(sdp, "%pV", &vaf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	va_end(args);
 
@@ -92,7 +113,11 @@ int gfs2_lm_withdraw(struct gfs2_sbd *sdp, const char *fmt, ...)
 
 	if (sdp->sd_args.ar_errors == GFS2_ERRORS_PANIC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic("GFS2: fsid=%s: panic requested.\n", sdp->sd_fsname);
+=======
+		panic("GFS2: fsid=%s: panic requested\n", sdp->sd_fsname);
+>>>>>>> v3.18
 =======
 		panic("GFS2: fsid=%s: panic requested\n", sdp->sd_fsname);
 >>>>>>> v3.18
@@ -112,10 +137,16 @@ int gfs2_assert_withdraw_i(struct gfs2_sbd *sdp, char *assertion,
 	int me;
 	me = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: assertion \"%s\" failed\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
 		sdp->sd_fsname, assertion,
 		sdp->sd_fsname, function, file, line);
+=======
+			      "fatal: assertion \"%s\" failed\n"
+			      "   function = %s, file = %s, line = %u\n",
+			      assertion, function, file, line);
+>>>>>>> v3.18
 =======
 			      "fatal: assertion \"%s\" failed\n"
 			      "   function = %s, file = %s, line = %u\n",
@@ -141,11 +172,16 @@ int gfs2_assert_warn_i(struct gfs2_sbd *sdp, char *assertion,
 
 	if (sdp->sd_args.ar_errors == GFS2_ERRORS_WITHDRAW)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GFS2: fsid=%s: warning: assertion \"%s\" failed\n"
 		       "GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
 		       sdp->sd_fsname, assertion,
 		       sdp->sd_fsname, function, file, line);
+=======
+		fs_warn(sdp, "warning: assertion \"%s\" failed at function = %s, file = %s, line = %u\n",
+			assertion, function, file, line);
+>>>>>>> v3.18
 =======
 		fs_warn(sdp, "warning: assertion \"%s\" failed at function = %s, file = %s, line = %u\n",
 			assertion, function, file, line);
@@ -179,10 +215,15 @@ int gfs2_consist_i(struct gfs2_sbd *sdp, int cluster_wide, const char *function,
 	int rv;
 	rv = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: filesystem consistency error\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
 		sdp->sd_fsname,
 		sdp->sd_fsname, function, file, line);
+=======
+			      "fatal: filesystem consistency error - function = %s, file = %s, line = %u\n",
+			      function, file, line);
+>>>>>>> v3.18
 =======
 			      "fatal: filesystem consistency error - function = %s, file = %s, line = %u\n",
 			      function, file, line);
@@ -203,6 +244,7 @@ int gfs2_consist_inode_i(struct gfs2_inode *ip, int cluster_wide,
 	int rv;
 	rv = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: filesystem consistency error\n"
 		"GFS2: fsid=%s:   inode = %llu %llu\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
@@ -211,12 +253,17 @@ int gfs2_consist_inode_i(struct gfs2_inode *ip, int cluster_wide,
 		(unsigned long long)ip->i_no_addr,
 		sdp->sd_fsname, function, file, line);
 =======
+=======
+>>>>>>> v3.18
 			      "fatal: filesystem consistency error\n"
 			      "  inode = %llu %llu\n"
 			      "  function = %s, file = %s, line = %u\n",
 			      (unsigned long long)ip->i_no_formal_ino,
 			      (unsigned long long)ip->i_no_addr,
 			      function, file, line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rv;
 }
@@ -234,6 +281,7 @@ int gfs2_consist_rgrpd_i(struct gfs2_rgrpd *rgd, int cluster_wide,
 	int rv;
 	rv = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: filesystem consistency error\n"
 		"GFS2: fsid=%s:   RG = %llu\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
@@ -241,11 +289,16 @@ int gfs2_consist_rgrpd_i(struct gfs2_rgrpd *rgd, int cluster_wide,
 		sdp->sd_fsname, (unsigned long long)rgd->rd_addr,
 		sdp->sd_fsname, function, file, line);
 =======
+=======
+>>>>>>> v3.18
 			      "fatal: filesystem consistency error\n"
 			      "  RG = %llu\n"
 			      "  function = %s, file = %s, line = %u\n",
 			      (unsigned long long)rgd->rd_addr,
 			      function, file, line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rv;
 }
@@ -263,6 +316,7 @@ int gfs2_meta_check_ii(struct gfs2_sbd *sdp, struct buffer_head *bh,
 	int me;
 	me = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: invalid metadata block\n"
 		"GFS2: fsid=%s:   bh = %llu (%s)\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
@@ -270,11 +324,16 @@ int gfs2_meta_check_ii(struct gfs2_sbd *sdp, struct buffer_head *bh,
 		sdp->sd_fsname, (unsigned long long)bh->b_blocknr, type,
 		sdp->sd_fsname, function, file, line);
 =======
+=======
+>>>>>>> v3.18
 			      "fatal: invalid metadata block\n"
 			      "  bh = %llu (%s)\n"
 			      "  function = %s, file = %s, line = %u\n",
 			      (unsigned long long)bh->b_blocknr, type,
 			      function, file, line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (me) ? -1 : -2;
 }
@@ -292,6 +351,7 @@ int gfs2_metatype_check_ii(struct gfs2_sbd *sdp, struct buffer_head *bh,
 	int me;
 	me = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: invalid metadata block\n"
 		"GFS2: fsid=%s:   bh = %llu (type: exp=%u, found=%u)\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
@@ -299,11 +359,16 @@ int gfs2_metatype_check_ii(struct gfs2_sbd *sdp, struct buffer_head *bh,
 		sdp->sd_fsname, (unsigned long long)bh->b_blocknr, type, t,
 		sdp->sd_fsname, function, file, line);
 =======
+=======
+>>>>>>> v3.18
 			      "fatal: invalid metadata block\n"
 			      "  bh = %llu (type: exp=%u, found=%u)\n"
 			      "  function = %s, file = %s, line = %u\n",
 			      (unsigned long long)bh->b_blocknr, type, t,
 			      function, file, line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (me) ? -1 : -2;
 }
@@ -320,10 +385,16 @@ int gfs2_io_error_i(struct gfs2_sbd *sdp, const char *function, char *file,
 	int rv;
 	rv = gfs2_lm_withdraw(sdp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: I/O error\n"
 		"GFS2: fsid=%s:   function = %s, file = %s, line = %u\n",
 		sdp->sd_fsname,
 		sdp->sd_fsname, function, file, line);
+=======
+			      "fatal: I/O error\n"
+			      "  function = %s, file = %s, line = %u\n",
+			      function, file, line);
+>>>>>>> v3.18
 =======
 			      "fatal: I/O error\n"
 			      "  function = %s, file = %s, line = %u\n",
@@ -343,6 +414,7 @@ int gfs2_io_error_bh_i(struct gfs2_sbd *sdp, struct buffer_head *bh,
 {
 	int rv;
 	rv = gfs2_lm_withdraw(sdp,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		"GFS2: fsid=%s: fatal: I/O error\n"
 		"GFS2: fsid=%s:   block = %llu\n"
@@ -374,6 +446,8 @@ void gfs2_icbit_munge(struct gfs2_sbd *sdp, unsigned char **bitmap,
 }
 
 =======
+=======
+>>>>>>> v3.18
 			      "fatal: I/O error\n"
 			      "  block = %llu\n"
 			      "  function = %s, file = %s, line = %u\n",
@@ -382,4 +456,7 @@ void gfs2_icbit_munge(struct gfs2_sbd *sdp, unsigned char **bitmap,
 	return rv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

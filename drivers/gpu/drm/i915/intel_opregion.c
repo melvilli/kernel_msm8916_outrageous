@@ -29,7 +29,10 @@
 
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <acpi/video.h>
@@ -40,14 +43,20 @@
 #include "intel_drv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_ASLE 0xe4
 #define PCI_ASLS 0xfc
 =======
+=======
+>>>>>>> v3.18
 #define PCI_ASLE		0xe4
 #define PCI_ASLS		0xfc
 #define PCI_SWSCI		0xe8
 #define PCI_SWSCI_SCISEL	(1 << 15)
 #define PCI_SWSCI_GSSCIE	(1 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define OPREGION_HEADER_OFFSET 0
@@ -73,7 +82,11 @@ struct opregion_header {
 	u32 mboxes;
 	u8 reserved[164];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -99,7 +112,11 @@ struct opregion_acpi {
 	u32 nrdy;       /* driver status */
 	u8 rsvd2[60];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -111,7 +128,11 @@ struct opregion_swsci {
 	u32 dslp;       /* driver sleep time-out */
 	u8 rsvd[244];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -131,6 +152,7 @@ struct opregion_asle {
 	u8 plut[74];    /* panel LUT and identifier */
 	u32 pfmb;       /* PWM freq and min brightness */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rsvd[102];
 } __attribute__((packed));
 
@@ -147,6 +169,8 @@ struct opregion_asle {
 #define ASLE_PFIT_FAILED	(1<<14)
 #define ASLE_PWM_FREQ_FAILED	(1<<16)
 =======
+=======
+>>>>>>> v3.18
 	u32 cddv;       /* color correction default values */
 	u32 pcft;       /* power conservation features */
 	u32 srot;       /* supported rotation angles */
@@ -185,6 +209,9 @@ struct opregion_asle {
 #define ASLE_TCHE_BLC_EN	(1 << 1)
 #define ASLE_TCHE_PFIT_EN	(1 << 2)
 #define ASLE_TCHE_PFMB_EN	(1 << 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ASLE backlight brightness to set */
@@ -206,7 +233,10 @@ struct opregion_asle {
 #define ASLE_CBLV_VALID         (1<<31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* IUER */
 #define ASLE_IUER_DOCKING		(1 << 7)
 #define ASLE_IUER_CONVERTIBLE		(1 << 6)
@@ -261,6 +291,9 @@ struct opregion_asle {
 #define SWSCI_SBCB_POST_VBE_PM		SWSCI_FUNCTION_CODE(SWSCI_SBCB, 19)
 #define SWSCI_SBCB_ENABLE_DISABLE_AUDIO	SWSCI_FUNCTION_CODE(SWSCI_SBCB, 21)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ACPI_OTHER_OUTPUT (0<<8)
 #define ACPI_VGA_OUTPUT (1<<8)
@@ -268,6 +301,7 @@ struct opregion_asle {
 #define ACPI_DIGITAL_OUTPUT (3<<8)
 #define ACPI_LVDS_OUTPUT (4<<8)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ACPI
 static u32 asle_set_backlight(struct drm_device *dev, u32 bclp)
@@ -289,6 +323,8 @@ static u32 asle_set_backlight(struct drm_device *dev, u32 bclp)
 	intel_panel_set_backlight(dev, bclp * max / 255);
 	iowrite32((bclp*0x64)/0xff | ASLE_CBLV_VALID, &asle->cblv);
 =======
+=======
+>>>>>>> v3.18
 #define MAX_DSLP	1500
 
 #ifdef CONFIG_ACPI
@@ -502,6 +538,9 @@ static u32 asle_set_backlight(struct drm_device *dev, u32 bclp)
 
 	drm_modeset_unlock(&dev->mode_config.connection_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -512,7 +551,12 @@ static u32 asle_set_als_illum(struct drm_device *dev, u32 alsi)
 	/* alsi is the current ALS reading in lux. 0 indicates below sensor
 	   range, 0xffff indicates above sensor range. 1-0xfffe are valid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	DRM_DEBUG_DRIVER("Illum is not supported\n");
+	return ASLC_ALS_ILLUM_FAILED;
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_DRIVER("Illum is not supported\n");
 	return ASLC_ALS_ILLUM_FAILED;
@@ -521,6 +565,7 @@ static u32 asle_set_als_illum(struct drm_device *dev, u32 alsi)
 
 static u32 asle_set_pwm_freq(struct drm_device *dev, u32 pfmb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	if (pfmb & ASLE_PFMB_PWM_VALID) {
@@ -535,12 +580,17 @@ static u32 asle_set_pwm_freq(struct drm_device *dev, u32 pfmb)
 	DRM_DEBUG_DRIVER("PWM freq is not supported\n");
 	return ASLC_PWM_FREQ_FAILED;
 >>>>>>> v3.18
+=======
+	DRM_DEBUG_DRIVER("PWM freq is not supported\n");
+	return ASLC_PWM_FREQ_FAILED;
+>>>>>>> v3.18
 }
 
 static u32 asle_set_pfit(struct drm_device *dev, u32 pfit)
 {
 	/* Panel fitting is currently controlled by the X code, so this is a
 	   noop until modesetting support works fully */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(pfit & ASLE_PFIT_VALID))
 		return ASLE_PFIT_FAILED;
@@ -586,6 +636,8 @@ void intel_opregion_gse_intr(struct drm_device *dev)
 	u32 asle_stat = 0;
 	u32 asle_req;
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_DRIVER("Pfit is not supported\n");
 	return ASLC_PFIT_FAILED;
 }
@@ -650,11 +702,15 @@ static void asle_work(struct work_struct *work)
 	struct opregion_asle __iomem *asle = dev_priv->opregion.asle;
 	u32 aslc_stat = 0;
 	u32 aslc_req;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!asle)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	asle_req = ioread32(&asle->aslc) & ASLE_REQ_MSK;
 
@@ -703,6 +759,8 @@ void intel_opregion_enable_asle(struct drm_device *dev)
 		iowrite32(1, &asle->ardy);
 	}
 =======
+=======
+>>>>>>> v3.18
 	aslc_req = ioread32(&asle->aslc);
 
 	if (!(aslc_req & ASLC_REQ_MSK)) {
@@ -748,6 +806,9 @@ void intel_opregion_asle_intr(struct drm_device *dev)
 
 	if (dev_priv->opregion.asle)
 		schedule_work(&dev_priv->opregion.asle_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -809,7 +870,11 @@ static void intel_didl_outputs(struct drm_device *dev)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&dev->pdev->dev);
+=======
+	handle = ACPI_HANDLE(&dev->pdev->dev);
+>>>>>>> v3.18
 =======
 	handle = ACPI_HANDLE(&dev->pdev->dev);
 >>>>>>> v3.18
@@ -835,8 +900,13 @@ static void intel_didl_outputs(struct drm_device *dev)
 	list_for_each_entry(acpi_cdev, &acpi_video_bus->children, node) {
 		if (i >= 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_printk(KERN_ERR, &dev->pdev->dev,
 				    "More than 8 outputs detected\n");
+=======
+			dev_dbg(&dev->pdev->dev,
+				"More than 8 outputs detected via ACPI\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(&dev->pdev->dev,
 				"More than 8 outputs detected via ACPI\n");
@@ -867,8 +937,13 @@ blind_set:
 		int output_type = ACPI_OTHER_OUTPUT;
 		if (i >= 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_printk(KERN_ERR, &dev->pdev->dev,
 				    "More than 8 outputs detected\n");
+=======
+			dev_dbg(&dev->pdev->dev,
+				"More than 8 outputs in connector list\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(&dev->pdev->dev,
 				"More than 8 outputs in connector list\n");
@@ -949,13 +1024,19 @@ void intel_opregion_init(struct drm_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (opregion->asle)
 		intel_opregion_enable_asle(dev);
 =======
+=======
+>>>>>>> v3.18
 	if (opregion->asle) {
 		iowrite32(ASLE_TCHE_BLC_EN, &opregion->asle->tche);
 		iowrite32(ASLE_ARDY_READY, &opregion->asle->ardy);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -968,12 +1049,18 @@ void intel_opregion_fini(struct drm_device *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (opregion->asle)
 		iowrite32(ASLE_ARDY_NOT_READY, &opregion->asle->ardy);
 
 	cancel_work_sync(&dev_priv->opregion.asle_work);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (opregion->acpi) {
 		iowrite32(0, &opregion->acpi->drdy);
@@ -990,9 +1077,12 @@ void intel_opregion_fini(struct drm_device *dev)
 	opregion->asle = NULL;
 	opregion->vbt = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	opregion->lid_state = NULL;
 }
 
@@ -1055,6 +1145,9 @@ static void swsci_setup(struct drm_device *dev)
 #else /* CONFIG_ACPI */
 static inline void swsci_setup(struct drm_device *dev) {}
 #endif  /* CONFIG_ACPI */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int intel_opregion_setup(struct drm_device *dev)
@@ -1074,11 +1167,17 @@ int intel_opregion_setup(struct drm_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ACPI
 	INIT_WORK(&opregion->asle_work, asle_work);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	base = acpi_os_ioremap(asls, OPREGION_SIZE);
 	if (!base)
@@ -1106,6 +1205,10 @@ int intel_opregion_setup(struct drm_device *dev)
 		DRM_DEBUG_DRIVER("SWSCI supported\n");
 		opregion->swsci = base + OPREGION_SWSCI_OFFSET;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		swsci_setup(dev);
+>>>>>>> v3.18
 =======
 		swsci_setup(dev);
 >>>>>>> v3.18
@@ -1114,6 +1217,11 @@ int intel_opregion_setup(struct drm_device *dev)
 		DRM_DEBUG_DRIVER("ASLE supported\n");
 		opregion->asle = base + OPREGION_ASLE_OFFSET;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		iowrite32(ASLE_ARDY_NOT_READY, &opregion->asle->ardy);
+>>>>>>> v3.18
 =======
 
 		iowrite32(ASLE_ARDY_NOT_READY, &opregion->asle->ardy);

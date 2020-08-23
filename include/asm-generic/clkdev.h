@@ -16,6 +16,10 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_COMMON_CLK
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_COMMON_CLK
 >>>>>>> v3.18
@@ -24,6 +28,10 @@ struct clk;
 static inline int __clk_get(struct clk *clk) { return 1; }
 static inline void __clk_put(struct clk *clk) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 
 #define RSTOUTn_MASK		(BRIDGE_VIRT_BASE + 0x0108)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RSTOUTn_MASK_PHYS	(BRIDGE_PHYS_BASE + 0x0108)
+>>>>>>> v3.18
 =======
 #define RSTOUTn_MASK_PHYS	(BRIDGE_PHYS_BASE + 0x0108)
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #define  SOFT_RESET		0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BRIDGE_CAUSE		(BRIDGE_VIRT_BASE + 0x0110)
+>>>>>>> v3.18
 =======
 #define BRIDGE_CAUSE		(BRIDGE_VIRT_BASE + 0x0110)
 >>>>>>> v3.18

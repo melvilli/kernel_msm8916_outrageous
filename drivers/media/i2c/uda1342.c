@@ -70,7 +70,11 @@ static int uda1342_probe(struct i2c_client *client,
 		client->addr, adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd = kzalloc(sizeof(struct v4l2_subdev), GFP_KERNEL);
+=======
+	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
 >>>>>>> v3.18
@@ -94,7 +98,10 @@ static int uda1342_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

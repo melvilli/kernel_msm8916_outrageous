@@ -11,6 +11,7 @@ struct dma_coherent_mem {
 	void		*virt_base;
 	dma_addr_t	device_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t	pfn_base;
 	int		size;
 	int		flags;
@@ -21,6 +22,8 @@ int dma_declare_coherent_memory(struct device *dev, dma_addr_t bus_addr,
 				dma_addr_t device_addr, size_t size, int flags)
 {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long	pfn_base;
 	int		size;
 	int		flags;
@@ -33,6 +36,9 @@ static int dma_init_coherent_memory(phys_addr_t phys_addr, dma_addr_t device_add
 			     struct dma_coherent_mem **mem)
 {
 	struct dma_coherent_mem *dma_mem = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *mem_base = NULL;
 	int pages = size >> PAGE_SHIFT;
@@ -42,6 +48,7 @@ static int dma_init_coherent_memory(phys_addr_t phys_addr, dma_addr_t device_add
 		goto out;
 	if (!size)
 		goto out;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev->dma_mem)
 		goto out;
@@ -65,6 +72,8 @@ static int dma_init_coherent_memory(phys_addr_t phys_addr, dma_addr_t device_add
 	dev->dma_mem->size = pages;
 	dev->dma_mem->flags = flags;
 =======
+=======
+>>>>>>> v3.18
 
 	mem_base = ioremap(phys_addr, size);
 	if (!mem_base)
@@ -85,6 +94,9 @@ static int dma_init_coherent_memory(phys_addr_t phys_addr, dma_addr_t device_add
 	spin_lock_init(&dma_mem->spinlock);
 
 	*mem = dma_mem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (flags & DMA_MEMORY_MAP)
@@ -93,9 +105,14 @@ static int dma_init_coherent_memory(phys_addr_t phys_addr, dma_addr_t device_add
 	return DMA_MEMORY_IO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  free1_out:
 	kfree(dev->dma_mem);
  out:
+=======
+out:
+	kfree(dma_mem);
+>>>>>>> v3.18
 =======
 out:
 	kfree(dma_mem);
@@ -105,7 +122,10 @@ out:
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void dma_release_coherent_memory(struct dma_coherent_mem *mem)
 {
@@ -145,6 +165,9 @@ int dma_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
 	dma_release_coherent_memory(mem);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(dma_declare_coherent_memory);
 
@@ -155,10 +178,15 @@ void dma_release_declared_memory(struct device *dev)
 	if (!mem)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dma_mem = NULL;
 	iounmap(mem->virt_base);
 	kfree(mem->bitmap);
 	kfree(mem);
+=======
+	dma_release_coherent_memory(mem);
+	dev->dma_mem = NULL;
+>>>>>>> v3.18
 =======
 	dma_release_coherent_memory(mem);
 	dev->dma_mem = NULL;
@@ -171,6 +199,10 @@ void *dma_mark_declared_memory_occupied(struct device *dev,
 {
 	struct dma_coherent_mem *mem = dev->dma_mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -182,14 +214,20 @@ void *dma_mark_declared_memory_occupied(struct device *dev,
 		return ERR_PTR(-EINVAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = (device_addr - mem->device_base) >> PAGE_SHIFT;
 	err = bitmap_allocate_region(mem->bitmap, pos, get_order(size));
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&mem->spinlock, flags);
 	pos = (device_addr - mem->device_base) >> PAGE_SHIFT;
 	err = bitmap_allocate_region(mem->bitmap, pos, get_order(size));
 	spin_unlock_irqrestore(&mem->spinlock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err != 0)
 		return ERR_PTR(err);
@@ -218,6 +256,10 @@ int dma_alloc_from_coherent(struct device *dev, ssize_t size,
 	struct dma_coherent_mem *mem;
 	int order = get_order(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -231,6 +273,10 @@ int dma_alloc_from_coherent(struct device *dev, ssize_t size,
 
 	*ret = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&mem->spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&mem->spinlock, flags);
 >>>>>>> v3.18
@@ -249,6 +295,10 @@ int dma_alloc_from_coherent(struct device *dev, ssize_t size,
 	*ret = mem->virt_base + (pageno << PAGE_SHIFT);
 	memset(*ret, 0, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&mem->spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&mem->spinlock, flags);
 >>>>>>> v3.18
@@ -257,6 +307,10 @@ int dma_alloc_from_coherent(struct device *dev, ssize_t size,
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&mem->spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&mem->spinlock, flags);
 >>>>>>> v3.18
@@ -290,14 +344,20 @@ int dma_release_from_coherent(struct device *dev, int order, void *vaddr)
 		   (mem->virt_base + (mem->size << PAGE_SHIFT))) {
 		int page = (vaddr - mem->virt_base) >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		bitmap_release_region(mem->bitmap, page, order);
 =======
+=======
+>>>>>>> v3.18
 		unsigned long flags;
 
 		spin_lock_irqsave(&mem->spinlock, flags);
 		bitmap_release_region(mem->bitmap, page, order);
 		spin_unlock_irqrestore(&mem->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	}
@@ -335,7 +395,11 @@ int dma_mmap_from_coherent(struct device *dev, struct vm_area_struct *vma,
 		*ret = -ENXIO;
 		if (off < count && user_count <= count - off) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned pfn = mem->pfn_base + start + off;
+=======
+			unsigned long pfn = mem->pfn_base + start + off;
+>>>>>>> v3.18
 =======
 			unsigned long pfn = mem->pfn_base + start + off;
 >>>>>>> v3.18
@@ -349,7 +413,10 @@ int dma_mmap_from_coherent(struct device *dev, struct vm_area_struct *vma,
 }
 EXPORT_SYMBOL(dma_mmap_from_coherent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Support for reserved memory regions defined in device tree
@@ -408,4 +475,7 @@ static int __init rmem_dma_setup(struct reserved_mem *rmem)
 }
 RESERVEDMEM_OF_DECLARE(dma, "shared-dma-pool", rmem_dma_setup);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

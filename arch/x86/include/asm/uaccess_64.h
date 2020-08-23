@@ -47,6 +47,7 @@ copy_user_generic(void *to, const void *from, unsigned len)
 
 __must_check unsigned long
 <<<<<<< HEAD
+<<<<<<< HEAD
 _copy_to_user(void __user *to, const void *from, unsigned len);
 __must_check unsigned long
 _copy_from_user(void *to, const void __user *from, unsigned len);
@@ -77,6 +78,10 @@ int copy_to_user(void __user *dst, const void *src, unsigned size)
 	return _copy_to_user(dst, src, size);
 }
 
+=======
+copy_in_user(void __user *to, const void __user *from, unsigned len);
+
+>>>>>>> v3.18
 =======
 copy_in_user(void __user *to, const void __user *from, unsigned len);
 
@@ -238,7 +243,11 @@ static __must_check __always_inline int
 __copy_from_user_inatomic(void *dst, const void __user *src, unsigned size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __copy_from_user_nocheck(dst, (__force const void *)src, size);
+=======
+	return __copy_from_user_nocheck(dst, src, size);
+>>>>>>> v3.18
 =======
 	return __copy_from_user_nocheck(dst, src, size);
 >>>>>>> v3.18
@@ -248,7 +257,11 @@ static __must_check __always_inline int
 __copy_to_user_inatomic(void __user *dst, const void *src, unsigned size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __copy_to_user_nocheck((__force void *)dst, src, size);
+=======
+	return __copy_to_user_nocheck(dst, src, size);
+>>>>>>> v3.18
 =======
 	return __copy_to_user_nocheck(dst, src, size);
 >>>>>>> v3.18
@@ -261,7 +274,11 @@ static inline int
 __copy_from_user_nocache(void *dst, const void __user *src, unsigned size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18

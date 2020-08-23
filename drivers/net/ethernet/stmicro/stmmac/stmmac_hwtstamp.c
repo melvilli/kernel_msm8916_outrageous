@@ -46,8 +46,13 @@ static void stmmac_config_sub_second_increment(void __iomem *ioaddr)
 
 	/* 0.465ns accuracy */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (value & PTP_TCR_TSCTRLSSR)
 		data = (data * 100) / 465;
+=======
+	if (!(value & PTP_TCR_TSCTRLSSR))
+		data = (data * 1000) / 465;
+>>>>>>> v3.18
 =======
 	if (!(value & PTP_TCR_TSCTRLSSR))
 		data = (data * 1000) / 465;

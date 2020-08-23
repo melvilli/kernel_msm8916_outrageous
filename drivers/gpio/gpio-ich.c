@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Intel ICH6-10, Series 5 and 6 GPIO driver
+=======
+ * Intel ICH6-10, Series 5 and 6, Atom C2000 (Avoton/Rangeley) GPIO driver
+>>>>>>> v3.18
 =======
  * Intel ICH6-10, Series 5 and 6, Atom C2000 (Avoton/Rangeley) GPIO driver
 >>>>>>> v3.18
@@ -46,6 +50,7 @@ enum GPIO_REG {
 	GPIO_IO_SEL,
 	GPIO_LVL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const u8 ichx_regs[3][3] = {
@@ -53,6 +58,8 @@ static const u8 ichx_regs[3][3] = {
 	{0x04, 0x34, 0x44},	/* IO_SEL[1-3] offsets */
 	{0x0c, 0x38, 0x48},	/* LVL[1-3] offsets */
 =======
+=======
+>>>>>>> v3.18
 	GPO_BLINK
 };
 
@@ -61,6 +68,9 @@ static const u8 ichx_regs[4][3] = {
 	{0x04, 0x34, 0x44},	/* IO_SEL[1-3] offsets */
 	{0x0c, 0x38, 0x48},	/* LVL[1-3] offsets */
 	{0x18, 0x18, 0x18},	/* BLINK offset */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -69,7 +79,10 @@ static const u8 ichx_reglen[3] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const u8 avoton_regs[4][3] = {
 	{0x00, 0x80, 0x00},
 	{0x04, 0x84, 0x00},
@@ -80,6 +93,9 @@ static const u8 avoton_reglen[3] = {
 	0x10, 0x10, 0x00,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ICHX_WRITE(val, reg, base_res)	outl(val, (reg) + (base_res)->start)
 #define ICHX_READ(reg, base_res)	inl((reg) + (base_res)->start)
@@ -89,7 +105,10 @@ struct ichx_desc {
 	uint ngpio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* chipset registers */
 	const u8 (*regs)[3];
 	const u8 *reglen;
@@ -97,6 +116,9 @@ struct ichx_desc {
 	/* GPO_BLINK is available on this chipset */
 	bool have_blink;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Whether the chipset has GPIO in GPE0_STS in the PM IO region */
 	bool uses_gpe0;
@@ -108,13 +130,19 @@ struct ichx_desc {
 	int (*request)(struct gpio_chip *chip, unsigned offset);
 	int (*get)(struct gpio_chip *chip, unsigned offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Some chipsets don't let reading output values on GPIO_LVL register
 	 * this option allows driver caching written output values
 	 */
 	bool use_outlvl_cache;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -128,6 +156,10 @@ static struct {
 	u32 orig_gpio_ctrl;	/* Orig CTRL value, used to restore on exit */
 	u8 use_gpio;		/* Which GPIO groups are usable */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int outlvl_cache[3];	/* cached output values */
+>>>>>>> v3.18
 =======
 	int outlvl_cache[3];	/* cached output values */
 >>>>>>> v3.18
@@ -149,23 +181,32 @@ static int ichx_write_bit(int reg, unsigned nr, int val, int verify)
 	spin_lock_irqsave(&ichx_priv.lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = ICHX_READ(ichx_regs[reg][reg_nr], ichx_priv.gpio_base);
 =======
+=======
+>>>>>>> v3.18
 	if (reg == GPIO_LVL && ichx_priv.desc->use_outlvl_cache)
 		data = ichx_priv.outlvl_cache[reg_nr];
 	else
 		data = ICHX_READ(ichx_priv.desc->regs[reg][reg_nr],
 				 ichx_priv.gpio_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (val)
 		data |= 1 << bit;
 	else
 		data &= ~(1 << bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ICHX_WRITE(data, ichx_regs[reg][reg_nr], ichx_priv.gpio_base);
 	tmp = ICHX_READ(ichx_regs[reg][reg_nr], ichx_priv.gpio_base);
 =======
+=======
+>>>>>>> v3.18
 	ICHX_WRITE(data, ichx_priv.desc->regs[reg][reg_nr],
 			 ichx_priv.gpio_base);
 	if (reg == GPIO_LVL && ichx_priv.desc->use_outlvl_cache)
@@ -173,6 +214,9 @@ static int ichx_write_bit(int reg, unsigned nr, int val, int verify)
 
 	tmp = ICHX_READ(ichx_priv.desc->regs[reg][reg_nr],
 			ichx_priv.gpio_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (verify && data != tmp)
 		ret = -EPERM;
@@ -192,13 +236,19 @@ static int ichx_read_bit(int reg, unsigned nr)
 	spin_lock_irqsave(&ichx_priv.lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = ICHX_READ(ichx_regs[reg][reg_nr], ichx_priv.gpio_base);
 =======
+=======
+>>>>>>> v3.18
 	data = ICHX_READ(ichx_priv.desc->regs[reg][reg_nr],
 			 ichx_priv.gpio_base);
 
 	if (reg == GPIO_LVL && ichx_priv.desc->use_outlvl_cache)
 		data = ichx_priv.outlvl_cache[reg_nr] | data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&ichx_priv.lock, flags);
@@ -227,11 +277,17 @@ static int ichx_gpio_direction_output(struct gpio_chip *gpio, unsigned nr,
 					int val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Disable blink hardware which is available for GPIOs from 0 to 31. */
 	if (nr < 32 && ichx_priv.desc->have_blink)
 		ichx_write_bit(GPO_BLINK, nr, 0, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Set GPIO output value. */
 	ichx_write_bit(GPIO_LVL, nr, val, 0);
@@ -332,7 +388,11 @@ static void ichx_gpiolib_setup(struct gpio_chip *chip)
 	chip->base = modparam_gpiobase;
 	chip->ngpio = ichx_priv.desc->ngpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->can_sleep = 0;
+=======
+	chip->can_sleep = false;
+>>>>>>> v3.18
 =======
 	chip->can_sleep = false;
 >>>>>>> v3.18
@@ -350,6 +410,12 @@ static struct ichx_desc ich6_desc = {
 
 	.ngpio = 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.have_blink = true,
+	.regs = ichx_regs,
+	.reglen = ichx_reglen,
+>>>>>>> v3.18
 =======
 	.have_blink = true,
 	.regs = ichx_regs,
@@ -375,6 +441,11 @@ static struct ichx_desc i3100_desc = {
 
 	.ngpio = 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.regs = ichx_regs,
+	.reglen = ichx_reglen,
+>>>>>>> v3.18
 =======
 	.regs = ichx_regs,
 	.reglen = ichx_reglen,
@@ -385,6 +456,12 @@ static struct ichx_desc i3100_desc = {
 static struct ichx_desc ich7_desc = {
 	.ngpio = 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.have_blink = true,
+	.regs = ichx_regs,
+	.reglen = ichx_reglen,
+>>>>>>> v3.18
 =======
 	.have_blink = true,
 	.regs = ichx_regs,
@@ -396,6 +473,12 @@ static struct ichx_desc ich7_desc = {
 static struct ichx_desc ich9_desc = {
 	.ngpio = 61,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.have_blink = true,
+	.regs = ichx_regs,
+	.reglen = ichx_reglen,
+>>>>>>> v3.18
 =======
 	.have_blink = true,
 	.regs = ichx_regs,
@@ -407,10 +490,13 @@ static struct ichx_desc ich9_desc = {
 static struct ichx_desc ich10_cons_desc = {
 	.ngpio = 61,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 static struct ichx_desc ich10_corp_desc = {
 	.ngpio = 72,
 =======
+=======
+>>>>>>> v3.18
 	.have_blink = true,
 	.regs = ichx_regs,
 	.reglen = ichx_reglen,
@@ -420,6 +506,9 @@ static struct ichx_desc ich10_corp_desc = {
 	.have_blink = true,
 	.regs = ichx_regs,
 	.reglen = ichx_reglen,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -427,7 +516,10 @@ static struct ichx_desc ich10_corp_desc = {
 static struct ichx_desc intel5_desc = {
 	.ngpio = 76,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.regs = ichx_regs,
 	.reglen = ichx_reglen,
 };
@@ -441,6 +533,9 @@ static struct ichx_desc avoton_desc = {
 	.regs = avoton_regs,
 	.reglen = avoton_reglen,
 	.use_outlvl_cache = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -453,18 +548,24 @@ static int ichx_gpio_request_regions(struct resource *res_base,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(ichx_regs[0]); i++) {
 		if (!(use_gpio & (1 << i)))
 			continue;
 		if (!request_region(res_base->start + ichx_regs[0][i],
 				    ichx_reglen[i], name))
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(ichx_priv.desc->regs[0]); i++) {
 		if (!(use_gpio & (1 << i)))
 			continue;
 		if (!request_region(
 				res_base->start + ichx_priv.desc->regs[0][i],
 				ichx_priv.desc->reglen[i], name))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto request_err;
 	}
@@ -476,8 +577,13 @@ request_err:
 		if (!(use_gpio & (1 << i)))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		release_region(res_base->start + ichx_regs[0][i],
 			       ichx_reglen[i]);
+=======
+		release_region(res_base->start + ichx_priv.desc->regs[0][i],
+			       ichx_priv.desc->reglen[i]);
+>>>>>>> v3.18
 =======
 		release_region(res_base->start + ichx_priv.desc->regs[0][i],
 			       ichx_priv.desc->reglen[i]);
@@ -491,17 +597,23 @@ static void ichx_gpio_release_regions(struct resource *res_base, u8 use_gpio)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(ichx_regs[0]); i++) {
 		if (!(use_gpio & (1 << i)))
 			continue;
 		release_region(res_base->start + ichx_regs[0][i],
 			       ichx_reglen[i]);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(ichx_priv.desc->regs[0]); i++) {
 		if (!(use_gpio & (1 << i)))
 			continue;
 		release_region(res_base->start + ichx_priv.desc->regs[0][i],
 			       ichx_priv.desc->reglen[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -511,7 +623,11 @@ static int ichx_gpio_probe(struct platform_device *pdev)
 	struct resource *res_base, *res_pm;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpc_ich_info *ich_info = pdev->dev.platform_data;
+=======
+	struct lpc_ich_info *ich_info = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct lpc_ich_info *ich_info = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -544,6 +660,12 @@ static int ichx_gpio_probe(struct platform_device *pdev)
 		ichx_priv.desc = &ich10_cons_desc;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case AVOTON_GPIO:
+		ichx_priv.desc = &avoton_desc;
+		break;
+>>>>>>> v3.18
 =======
 	case AVOTON_GPIO:
 		ichx_priv.desc = &avoton_desc;
@@ -609,6 +731,7 @@ add_err:
 static int ichx_gpio_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = gpiochip_remove(&ichx_priv.chip);
@@ -617,6 +740,9 @@ static int ichx_gpio_remove(struct platform_device *pdev)
 				"gpiochip_remove()", err);
 		return err;
 	}
+=======
+	gpiochip_remove(&ichx_priv.chip);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&ichx_priv.chip);
 >>>>>>> v3.18

@@ -16,7 +16,11 @@
 #include "fimc-is-errno.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char * const fimc_is_param_strerr(unsigned int error)
+=======
+const char *fimc_is_param_strerr(unsigned int error)
+>>>>>>> v3.18
 =======
 const char *fimc_is_param_strerr(unsigned int error)
 >>>>>>> v3.18
@@ -151,7 +155,11 @@ const char *fimc_is_param_strerr(unsigned int error)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char * const fimc_is_strerr(unsigned int error)
+=======
+const char *fimc_is_strerr(unsigned int error)
+>>>>>>> v3.18
 =======
 const char *fimc_is_strerr(unsigned int error)
 >>>>>>> v3.18

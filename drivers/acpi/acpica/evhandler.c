@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -134,7 +138,11 @@ acpi_status acpi_ev_install_region_handlers(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -363,6 +371,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 		switch (space_id) {
 		case ACPI_ADR_SPACE_SYSTEM_MEMORY:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -372,6 +384,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 
 		case ACPI_ADR_SPACE_SYSTEM_IO:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -381,6 +397,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 
 		case ACPI_ADR_SPACE_PCI_CONFIG:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -390,6 +410,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 
 		case ACPI_ADR_SPACE_CMOS:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -399,6 +423,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 
 		case ACPI_ADR_SPACE_PCI_BAR_TARGET:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -408,6 +436,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 
 		case ACPI_ADR_SPACE_DATA_TABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -417,6 +449,10 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -561,7 +597,11 @@ acpi_ev_install_space_handler(struct acpi_namespace_node * node,
 					handler_obj, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18

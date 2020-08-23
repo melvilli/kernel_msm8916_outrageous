@@ -8,6 +8,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -70,6 +74,7 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ponkey = kzalloc(sizeof(struct ab8500_ponkey), GFP_KERNEL);
 	input = input_allocate_device();
 	if (!ponkey || !input) {
@@ -77,6 +82,8 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 		goto err_free_mem;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ponkey = devm_kzalloc(&pdev->dev, sizeof(struct ab8500_ponkey),
 			      GFP_KERNEL);
 	if (!ponkey)
@@ -85,6 +92,9 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 	input = devm_input_allocate_device(&pdev->dev);
 	if (!input)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ponkey->idev = input;
@@ -97,6 +107,7 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 
 	input_set_capability(input, EV_KEY, KEY_POWER);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	error = request_any_context_irq(ponkey->irq_dbf, ab8500_ponkey_handler,
 					0, "ab8500-ponkey-dbf", ponkey);
@@ -113,6 +124,8 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 			ponkey->irq_dbr, error);
 		goto err_free_dbf_irq;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_any_context_irq(&pdev->dev, ponkey->irq_dbf,
 					     ab8500_ponkey_handler, 0,
 					     "ab8500-ponkey-dbf", ponkey);
@@ -129,6 +142,9 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 		dev_err(ab8500->dev, "Failed to request dbr IRQ#%d: %d\n",
 			ponkey->irq_dbr, error);
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -136,7 +152,11 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(ab8500->dev, "Can't register input device: %d\n", error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_dbr_irq;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -144,6 +164,7 @@ static int ab8500_ponkey_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, ponkey);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_free_dbr_irq:
@@ -171,6 +192,8 @@ static int ab8500_ponkey_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_OF
@@ -188,7 +211,10 @@ static struct platform_driver ab8500_ponkey_driver = {
 	},
 	.probe		= ab8500_ponkey_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= ab8500_ponkey_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

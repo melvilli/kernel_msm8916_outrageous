@@ -19,19 +19,28 @@
 #include "ar-internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Time till a connection expires after last use (in seconds).
  */
 unsigned rxrpc_connection_expiry = 10 * 60;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rxrpc_connection_reaper(struct work_struct *work);
 
 LIST_HEAD(rxrpc_connections);
 DEFINE_RWLOCK(rxrpc_connection_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long rxrpc_connection_timeout = 10 * 60;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static DECLARE_DELAYED_WORK(rxrpc_connection_reap, rxrpc_connection_reaper);
@@ -393,6 +402,11 @@ static int rxrpc_connect_exclusive(struct rxrpc_sock *rx,
 		rxrpc_assign_connection_id(conn);
 		rx->conn = conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else {
+		spin_lock(&trans->client_lock);
+>>>>>>> v3.18
 =======
 	} else {
 		spin_lock(&trans->client_lock);
@@ -877,7 +891,11 @@ static void rxrpc_connection_reaper(struct work_struct *work)
 		spin_lock(&conn->trans->client_lock);
 		write_lock(&conn->trans->conn_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reap_time = conn->put_time + rxrpc_connection_timeout;
+=======
+		reap_time = conn->put_time + rxrpc_connection_expiry;
+>>>>>>> v3.18
 =======
 		reap_time = conn->put_time + rxrpc_connection_expiry;
 >>>>>>> v3.18
@@ -935,7 +953,11 @@ void __exit rxrpc_destroy_all_connections(void)
 	_enter("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxrpc_connection_timeout = 0;
+=======
+	rxrpc_connection_expiry = 0;
+>>>>>>> v3.18
 =======
 	rxrpc_connection_expiry = 0;
 >>>>>>> v3.18

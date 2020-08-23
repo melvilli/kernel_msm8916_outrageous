@@ -7,7 +7,11 @@
  */
 extern spinlock_t swap_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct swap_list_t swap_list;
+=======
+extern struct plist_head swap_active_head;
+>>>>>>> v3.18
 =======
 extern struct plist_head swap_active_head;
 >>>>>>> v3.18

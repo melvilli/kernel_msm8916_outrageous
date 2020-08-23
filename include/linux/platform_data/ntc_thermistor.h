@@ -27,6 +27,10 @@ enum ntc_thermistor_type {
 	TYPE_NCPXXWB473,
 	TYPE_NCPXXWL333,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TYPE_B57330V2103,
+>>>>>>> v3.18
 =======
 	TYPE_B57330V2103,
 >>>>>>> v3.18

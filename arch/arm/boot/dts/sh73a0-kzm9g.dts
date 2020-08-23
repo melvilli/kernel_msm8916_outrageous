@@ -10,7 +10,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "sh73a0.dtsi"
+=======
+#include "sh73a0.dtsi"
+>>>>>>> v3.18
 =======
 #include "sh73a0.dtsi"
 >>>>>>> v3.18
@@ -21,7 +25,11 @@
 
 	chosen {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel earlyprintk=sh-sci.4,115200";
+=======
+		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel earlyprintk=sh-sci.4,115200 rw";
+>>>>>>> v3.18
 =======
 		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel earlyprintk=sh-sci.4,115200 rw";
 >>>>>>> v3.18

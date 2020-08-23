@@ -83,12 +83,18 @@
 			regulator-compatible = "vmmc";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		vbb_reg: regulator@13 {
 			reg = <13>;
 			regulator-compatible = "vbb";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

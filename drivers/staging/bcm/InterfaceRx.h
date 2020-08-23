@@ -2,7 +2,11 @@
 #define _INTERFACE_RX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 BOOLEAN InterfaceRx(struct bcm_interface_adapter *Adapter);
+=======
+bool InterfaceRx(struct bcm_interface_adapter *Adapter);
+>>>>>>> v3.18
 =======
 bool InterfaceRx(struct bcm_interface_adapter *Adapter);
 >>>>>>> v3.18

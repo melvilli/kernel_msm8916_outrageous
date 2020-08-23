@@ -57,7 +57,11 @@ enum {
 	Opt_nodevmap,
 	/* Cache options */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Opt_cache_loose, Opt_fscache,
+=======
+	Opt_cache_loose, Opt_fscache, Opt_mmap,
+>>>>>>> v3.18
 =======
 	Opt_cache_loose, Opt_fscache, Opt_mmap,
 >>>>>>> v3.18
@@ -79,6 +83,10 @@ static const match_table_t tokens = {
 	{Opt_cache_loose, "loose"},
 	{Opt_fscache, "fscache"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{Opt_mmap, "mmap"},
+>>>>>>> v3.18
 =======
 	{Opt_mmap, "mmap"},
 >>>>>>> v3.18
@@ -100,6 +108,12 @@ static int get_cache_mode(char *s)
 		version = CACHE_FSCACHE;
 		p9_debug(P9_DEBUG_9P, "Cache mode: fscache\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if (!strcmp(s, "mmap")) {
+		version = CACHE_MMAP;
+		p9_debug(P9_DEBUG_9P, "Cache mode: mmap\n");
+>>>>>>> v3.18
 =======
 	} else if (!strcmp(s, "mmap")) {
 		version = CACHE_MMAP;
@@ -235,6 +249,12 @@ static int v9fs_parse_options(struct v9fs_session_info *v9ses, char *opts)
 			v9ses->cache = CACHE_FSCACHE;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case Opt_mmap:
+			v9ses->cache = CACHE_MMAP;
+			break;
+>>>>>>> v3.18
 =======
 		case Opt_mmap:
 			v9ses->cache = CACHE_MMAP;
@@ -551,7 +571,11 @@ static struct attribute_group v9fs_attr_group = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int v9fs_sysfs_init(void)
+=======
+static int __init v9fs_sysfs_init(void)
+>>>>>>> v3.18
 =======
 static int __init v9fs_sysfs_init(void)
 >>>>>>> v3.18
@@ -628,16 +652,22 @@ static int v9fs_cache_register(void)
 		return ret;
 #ifdef CONFIG_9P_FSCACHE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fscache_register_netfs(&v9fs_cache_netfs);
 #else
 	return ret;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	ret = fscache_register_netfs(&v9fs_cache_netfs);
 	if (ret < 0)
 		v9fs_destroy_inode_cache();
 #endif
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

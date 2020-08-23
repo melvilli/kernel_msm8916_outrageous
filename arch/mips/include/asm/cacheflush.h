@@ -114,13 +114,19 @@ unsigned long run_uncached(void *func);
 extern void *kmap_coherent(struct page *page, unsigned long addr);
 extern void kunmap_coherent(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void *kmap_noncoherent(struct page *page, unsigned long addr);
 
 static inline void kunmap_noncoherent(void)
 {
 	kunmap_coherent();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ARCH_HAS_FLUSH_KERNEL_DCACHE_PAGE

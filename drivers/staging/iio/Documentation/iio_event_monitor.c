@@ -47,6 +47,12 @@ static const char * const iio_chan_type_name_spec[] = {
 	[IIO_CAPACITANCE] = "capacitance",
 	[IIO_ALTVOLTAGE] = "altvoltage",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IIO_CCT] = "cct",
+	[IIO_PRESSURE] = "pressure",
+	[IIO_HUMIDITYRELATIVE] = "humidityrelative",
+>>>>>>> v3.18
 =======
 	[IIO_CCT] = "cct",
 	[IIO_PRESSURE] = "pressure",
@@ -77,6 +83,11 @@ static const char * const iio_modifier_names[] = {
 	[IIO_MOD_ROOT_SUM_SQUARED_X_Y] = "sqrt(x^2+y^2)",
 	[IIO_MOD_SUM_SQUARED_X_Y_Z] = "x^2+y^2+z^2",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IIO_MOD_LIGHT_BOTH] = "both",
+	[IIO_MOD_LIGHT_IR] = "ir",
+>>>>>>> v3.18
 =======
 	[IIO_MOD_LIGHT_BOTH] = "both",
 	[IIO_MOD_LIGHT_IR] = "ir",
@@ -112,6 +123,12 @@ static bool event_is_known(struct iio_event_data *event)
 	case IIO_CAPACITANCE:
 	case IIO_ALTVOLTAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IIO_CCT:
+	case IIO_PRESSURE:
+	case IIO_HUMIDITYRELATIVE:
+>>>>>>> v3.18
 =======
 	case IIO_CCT:
 	case IIO_PRESSURE:

@@ -83,7 +83,12 @@ struct media_devnode {
 #define to_media_devnode(cd) container_of(cd, struct media_devnode, dev)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check media_devnode_register(struct media_devnode *mdev);
+=======
+int __must_check media_devnode_register(struct media_devnode *mdev,
+					struct module *owner);
+>>>>>>> v3.18
 =======
 int __must_check media_devnode_register(struct media_devnode *mdev,
 					struct module *owner);

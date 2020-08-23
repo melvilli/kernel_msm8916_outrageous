@@ -42,7 +42,11 @@ ncp_get_fs_info(struct ncp_server * server, struct inode *inode,
 
 	if (info.version != NCP_GET_FS_INFO_VERSION) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("info.version invalid: %d\n", info.version);
+=======
+		ncp_dbg(1, "info.version invalid: %d\n", info.version);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "info.version invalid: %d\n", info.version);
 >>>>>>> v3.18
@@ -71,7 +75,11 @@ ncp_get_fs_info_v2(struct ncp_server * server, struct inode *inode,
 
 	if (info2.version != NCP_GET_FS_INFO_VERSION_V2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("info.version invalid: %d\n", info2.version);
+=======
+		ncp_dbg(1, "info.version invalid: %d\n", info2.version);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "info.version invalid: %d\n", info2.version);
 >>>>>>> v3.18
@@ -141,7 +149,11 @@ ncp_get_compat_fs_info_v2(struct ncp_server * server, struct inode *inode,
 
 	if (info2.version != NCP_GET_FS_INFO_VERSION_V2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("info.version invalid: %d\n", info2.version);
+=======
+		ncp_dbg(1, "info.version invalid: %d\n", info2.version);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "info.version invalid: %d\n", info2.version);
 >>>>>>> v3.18
@@ -321,8 +333,12 @@ static long __ncp_ioctl(struct inode *inode, unsigned int cmd, unsigned long arg
 			result = server->reply_size;
 		ncp_unlock_server(server);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("ncp_ioctl: copy %d bytes\n",
 			result);
+=======
+		ncp_dbg(1, "copy %d bytes\n", result);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "copy %d bytes\n", result);
 >>>>>>> v3.18
@@ -402,9 +418,15 @@ static long __ncp_ioctl(struct inode *inode, unsigned int cmd, unsigned long arg
 						result = 0;
 					} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 						DPRINTK("ncpfs: s_root->d_inode==NULL\n");
 				} else
 					DPRINTK("ncpfs: s_root==NULL\n");
+=======
+						ncp_dbg(1, "s_root->d_inode==NULL\n");
+				} else
+					ncp_dbg(1, "s_root==NULL\n");
+>>>>>>> v3.18
 =======
 						ncp_dbg(1, "s_root->d_inode==NULL\n");
 				} else
@@ -463,6 +485,7 @@ static long __ncp_ioctl(struct inode *inode, unsigned int cmd, unsigned long arg
 							server->root_setuped = 1;
 						} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 							DPRINTK("ncpfs: s_root->d_inode==NULL\n");
 							result = -EIO;
 						}
@@ -472,6 +495,8 @@ static long __ncp_ioctl(struct inode *inode, unsigned int cmd, unsigned long arg
 					}
 				}
 =======
+=======
+>>>>>>> v3.18
 							ncp_dbg(1, "s_root->d_inode==NULL\n");
 							result = -EIO;
 						}
@@ -481,6 +506,9 @@ static long __ncp_ioctl(struct inode *inode, unsigned int cmd, unsigned long arg
 					}
 				}
 				result = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			mutex_unlock(&server->root_setup_lock);

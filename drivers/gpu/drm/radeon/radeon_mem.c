@@ -244,7 +244,11 @@ int radeon_mem_alloc(struct drm_device *dev, void *data, struct drm_file *file_p
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_TO_USER(alloc->region_offset, &block->start,
+=======
+	if (copy_to_user(alloc->region_offset, &block->start,
+>>>>>>> v3.18
 =======
 	if (copy_to_user(alloc->region_offset, &block->start,
 >>>>>>> v3.18

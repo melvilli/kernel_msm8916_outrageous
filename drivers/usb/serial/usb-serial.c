@@ -38,6 +38,10 @@
 #include <linux/usb/serial.h>
 #include <linux/kfifo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/idr.h>
+>>>>>>> v3.18
 =======
 #include <linux/idr.h>
 >>>>>>> v3.18
@@ -47,6 +51,12 @@
 #define DRIVER_DESC "USB Serial Driver core"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_SERIAL_TTY_MAJOR	188
+#define USB_SERIAL_TTY_MINORS	512	/* should be enough for a while */
+
+>>>>>>> v3.18
 =======
 #define USB_SERIAL_TTY_MAJOR	188
 #define USB_SERIAL_TTY_MINORS	512	/* should be enough for a while */
@@ -60,7 +70,11 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_serial *serial_table[SERIAL_TTY_MINORS];
+=======
+static DEFINE_IDR(serial_minors);
+>>>>>>> v3.18
 =======
 static DEFINE_IDR(serial_minors);
 >>>>>>> v3.18
@@ -68,6 +82,7 @@ static DEFINE_MUTEX(table_lock);
 static LIST_HEAD(usb_serial_driver_list);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Look up the serial structure.  If it is found and it hasn't been
  * disconnected, return with its disc_mutex held and its refcount
@@ -133,6 +148,8 @@ static struct usb_serial *get_free_serial(struct usb_serial *serial,
 
 static void return_serial(struct usb_serial *serial)
 =======
+=======
+>>>>>>> v3.18
  * Look up the serial port structure.  If it is found and it hasn't been
  * disconnected, return with the parent usb_serial structure's disc_mutex held
  * and its refcount incremented.  Otherwise return NULL.
@@ -189,6 +206,9 @@ error:
 }
 
 static void release_minors(struct usb_serial *serial)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -196,8 +216,14 @@ static void release_minors(struct usb_serial *serial)
 	mutex_lock(&table_lock);
 	for (i = 0; i < serial->num_ports; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		serial_table[serial->minor + i] = NULL;
 	mutex_unlock(&table_lock);
+=======
+		idr_remove(&serial_minors, serial->port[i]->minor);
+	mutex_unlock(&table_lock);
+	serial->minors_reserved = 0;
+>>>>>>> v3.18
 =======
 		idr_remove(&serial_minors, serial->port[i]->minor);
 	mutex_unlock(&table_lock);
@@ -215,8 +241,13 @@ static void destroy_serial(struct kref *kref)
 
 	/* return the minor range that this device had */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (serial->minor != SERIAL_TTY_NO_MINOR)
 		return_serial(serial);
+=======
+	if (serial->minors_reserved)
+		release_minors(serial);
+>>>>>>> v3.18
 =======
 	if (serial->minors_reserved)
 		release_minors(serial);
@@ -270,6 +301,7 @@ static int serial_install(struct tty_driver *driver, struct tty_struct *tty)
 	int retval = -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	serial = usb_serial_get_by_index(idx);
 	if (!serial)
 		return retval;
@@ -278,11 +310,16 @@ static int serial_install(struct tty_driver *driver, struct tty_struct *tty)
 	if (!port)
 		goto error_no_port;
 =======
+=======
+>>>>>>> v3.18
 	port = usb_serial_port_get_by_minor(idx);
 	if (!port)
 		return retval;
 
 	serial = port->serial;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!try_module_get(serial->type->driver.owner))
 		goto error_module_get;
@@ -311,7 +348,10 @@ static int serial_install(struct tty_driver *driver, struct tty_struct *tty)
 	module_put(serial->type->driver.owner);
  error_module_get:
 <<<<<<< HEAD
+<<<<<<< HEAD
  error_no_port:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_serial_put(serial);
@@ -506,7 +546,11 @@ static int serial_ioctl(struct tty_struct *tty,
 	int retval = -ENOIOCTLCMD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(tty->dev, "%s - cmd 0x%.4x\n", __func__, cmd);
+=======
+	dev_dbg(tty->dev, "%s - cmd 0x%04x\n", __func__, cmd);
+>>>>>>> v3.18
 =======
 	dev_dbg(tty->dev, "%s - cmd 0x%04x\n", __func__, cmd);
 >>>>>>> v3.18
@@ -552,6 +596,10 @@ static int serial_proc_show(struct seq_file *m, void *v)
 {
 	struct usb_serial *serial;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_serial_port *port;
+>>>>>>> v3.18
 =======
 	struct usb_serial_port *port;
 >>>>>>> v3.18
@@ -560,16 +608,22 @@ static int serial_proc_show(struct seq_file *m, void *v)
 
 	seq_puts(m, "usbserinfo:1.0 driver:2.0\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < SERIAL_TTY_MINORS; ++i) {
 		serial = usb_serial_get_by_index(i);
 		if (serial == NULL)
 			continue;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < USB_SERIAL_TTY_MINORS; ++i) {
 		port = usb_serial_port_get_by_minor(i);
 		if (port == NULL)
 			continue;
 		serial = port->serial;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		seq_printf(m, "%d:", i);
@@ -583,7 +637,11 @@ static int serial_proc_show(struct seq_file *m, void *v)
 			le16_to_cpu(serial->dev->descriptor.idProduct));
 		seq_printf(m, " num_ports:%d", serial->num_ports);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(m, " port:%d", i - serial->minor + 1);
+=======
+		seq_printf(m, " port:%d", port->port_number);
+>>>>>>> v3.18
 =======
 		seq_printf(m, " port:%d", port->port_number);
 >>>>>>> v3.18
@@ -729,7 +787,11 @@ static struct usb_serial *create_serial(struct usb_device *dev,
 	kref_init(&serial->kref);
 	mutex_init(&serial->disc_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	serial->minor = SERIAL_TTY_NO_MINOR;
+=======
+	serial->minors_reserved = 0;
+>>>>>>> v3.18
 =======
 	serial->minors_reserved = 0;
 >>>>>>> v3.18
@@ -804,6 +866,7 @@ static void serial_port_dtr_rts(struct tty_port *port, int on)
 {
 	struct usb_serial_port *p = container_of(port, struct usb_serial_port, port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_serial *serial = p->serial;
 	struct usb_serial_driver *drv = serial->type;
 
@@ -819,10 +882,15 @@ static void serial_port_dtr_rts(struct tty_port *port, int on)
 		drv->dtr_rts(p, on);
 	mutex_unlock(&serial->disc_mutex);
 =======
+=======
+>>>>>>> v3.18
 	struct usb_serial_driver *drv = p->serial->type;
 
 	if (drv->dtr_rts)
 		drv->dtr_rts(p, on);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -849,7 +917,10 @@ static int usb_serial_probe(struct usb_interface *interface,
 	struct usb_serial_driver *type = NULL;
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int minor;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int buffer_size;
@@ -1029,7 +1100,11 @@ static int usb_serial_probe(struct usb_interface *interface,
 	serial->num_port_pointers = max_endpoints;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(ddev, "setting up %d port structures for this device", max_endpoints);
+=======
+	dev_dbg(ddev, "setting up %d port structure(s)\n", max_endpoints);
+>>>>>>> v3.18
 =======
 	dev_dbg(ddev, "setting up %d port structure(s)\n", max_endpoints);
 >>>>>>> v3.18
@@ -1088,9 +1163,14 @@ static int usb_serial_probe(struct usb_interface *interface,
 		if (kfifo_alloc(&port->write_fifo, PAGE_SIZE, GFP_KERNEL))
 			goto probe_error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buffer_size = serial->type->bulk_out_size;
 		if (!buffer_size)
 			buffer_size = usb_endpoint_maxp(endpoint);
+=======
+		buffer_size = max_t(int, serial->type->bulk_out_size,
+						usb_endpoint_maxp(endpoint));
+>>>>>>> v3.18
 =======
 		buffer_size = max_t(int, serial->type->bulk_out_size,
 						usb_endpoint_maxp(endpoint));
@@ -1195,24 +1275,35 @@ static int usb_serial_probe(struct usb_interface *interface,
 	serial->disconnected = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_free_serial(serial, num_ports, &minor) == NULL) {
 		dev_err(ddev, "No more free serial devices\n");
 		goto probe_error;
 	}
 	serial->minor = minor;
 =======
+=======
+>>>>>>> v3.18
 	if (allocate_minors(serial, num_ports)) {
 		dev_err(ddev, "No more free serial minor numbers\n");
 		goto probe_error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* register all of the individual ports with the driver core */
 	for (i = 0; i < num_ports; ++i) {
 		port = serial->port[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_name(&port->dev, "ttyUSB%d", port->number);
 		dev_dbg(ddev, "registering %s", dev_name(&port->dev));
+=======
+		dev_set_name(&port->dev, "ttyUSB%d", port->minor);
+		dev_dbg(ddev, "registering %s\n", dev_name(&port->dev));
+>>>>>>> v3.18
 =======
 		dev_set_name(&port->dev, "ttyUSB%d", port->minor);
 		dev_dbg(ddev, "registering %s\n", dev_name(&port->dev));
@@ -1227,7 +1318,11 @@ static int usb_serial_probe(struct usb_interface *interface,
 	serial->disconnected = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_serial_console_init(minor);
+=======
+	usb_serial_console_init(serial->port[0]->minor);
+>>>>>>> v3.18
 =======
 	usb_serial_console_init(serial->port[0]->minor);
 >>>>>>> v3.18
@@ -1248,6 +1343,10 @@ static void usb_serial_disconnect(struct usb_interface *interface)
 	struct device *dev = &interface->dev;
 	struct usb_serial_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tty_struct *tty;
+>>>>>>> v3.18
 =======
 	struct tty_struct *tty;
 >>>>>>> v3.18
@@ -1262,6 +1361,7 @@ static void usb_serial_disconnect(struct usb_interface *interface)
 	for (i = 0; i < serial->num_ports; ++i) {
 		port = serial->port[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (port) {
 			struct tty_struct *tty = tty_port_tty_get(&port->port);
 			if (tty) {
@@ -1275,6 +1375,8 @@ static void usb_serial_disconnect(struct usb_interface *interface)
 				device_del(&port->dev);
 		}
 =======
+=======
+>>>>>>> v3.18
 		tty = tty_port_tty_get(&port->port);
 		if (tty) {
 			tty_vhangup(tty);
@@ -1285,6 +1387,9 @@ static void usb_serial_disconnect(struct usb_interface *interface)
 		cancel_work_sync(&port->work);
 		if (device_is_registered(&port->dev))
 			device_del(&port->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (serial->type->disconnect)
@@ -1299,7 +1404,10 @@ int usb_serial_suspend(struct usb_interface *intf, pm_message_t message)
 {
 	struct usb_serial *serial = usb_get_intfdata(intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_serial_port *port;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, r = 0;
@@ -1320,12 +1428,17 @@ int usb_serial_suspend(struct usb_interface *intf, pm_message_t message)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < serial->num_ports; ++i) {
 		port = serial->port[i];
 		if (port)
 			usb_serial_port_poison_urbs(port);
 	}
 
+=======
+	for (i = 0; i < serial->num_ports; ++i)
+		usb_serial_port_poison_urbs(serial->port[i]);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < serial->num_ports; ++i)
 		usb_serial_port_poison_urbs(serial->port[i]);
@@ -1338,6 +1451,7 @@ EXPORT_SYMBOL(usb_serial_suspend);
 static void usb_serial_unpoison_port_urbs(struct usb_serial *serial)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_serial_port *port;
 	int i;
 
@@ -1347,10 +1461,15 @@ static void usb_serial_unpoison_port_urbs(struct usb_serial *serial)
 			usb_serial_port_unpoison_urbs(port);
 	}
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < serial->num_ports; ++i)
 		usb_serial_port_unpoison_urbs(serial->port[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1380,9 +1499,15 @@ static int usb_serial_reset_resume(struct usb_interface *intf)
 
 	serial->suspending = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (serial->type->reset_resume)
 		rv = serial->type->reset_resume(serial);
 	else {
+=======
+	if (serial->type->reset_resume) {
+		rv = serial->type->reset_resume(serial);
+	} else {
+>>>>>>> v3.18
 =======
 	if (serial->type->reset_resume) {
 		rv = serial->type->reset_resume(serial);
@@ -1433,10 +1558,16 @@ static struct usb_driver usb_serial_driver = {
 static int __init usb_serial_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	int result;
 
 	usb_serial_tty_driver = alloc_tty_driver(SERIAL_TTY_MINORS);
+=======
+	int result;
+
+	usb_serial_tty_driver = alloc_tty_driver(USB_SERIAL_TTY_MINORS);
+>>>>>>> v3.18
 =======
 	int result;
 
@@ -1447,9 +1578,12 @@ static int __init usb_serial_init(void)
 
 	/* Initialize our global data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < SERIAL_TTY_MINORS; ++i)
 		serial_table[i] = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	result = bus_register(&usb_serial_bus_type);
@@ -1461,7 +1595,11 @@ static int __init usb_serial_init(void)
 	usb_serial_tty_driver->driver_name = "usbserial";
 	usb_serial_tty_driver->name = "ttyUSB";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_serial_tty_driver->major = SERIAL_TTY_MAJOR;
+=======
+	usb_serial_tty_driver->major = USB_SERIAL_TTY_MAJOR;
+>>>>>>> v3.18
 =======
 	usb_serial_tty_driver->major = USB_SERIAL_TTY_MAJOR;
 >>>>>>> v3.18
@@ -1580,9 +1718,15 @@ static int usb_serial_register(struct usb_serial_driver *driver)
 		pr_err("problem %d when registering driver %s\n", retval, driver->description);
 		list_del(&driver->driver_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		pr_info("USB Serial support registered for %s\n", driver->description);
 
+=======
+	} else {
+		pr_info("USB Serial support registered for %s\n", driver->description);
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		pr_info("USB Serial support registered for %s\n", driver->description);
@@ -1656,7 +1800,11 @@ int usb_serial_register_drivers(struct usb_serial_driver *const serial_drivers[]
 	rc = usb_register(udriver);
 	if (rc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed_usb_register;
+=======
+		return rc;
+>>>>>>> v3.18
 =======
 		return rc;
 >>>>>>> v3.18
@@ -1678,8 +1826,11 @@ int usb_serial_register_drivers(struct usb_serial_driver *const serial_drivers[]
 		usb_serial_deregister(*sd);
 	usb_deregister(udriver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 failed_usb_register:
 	kfree(udriver);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return rc;

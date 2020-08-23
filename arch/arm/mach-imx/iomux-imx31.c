@@ -65,7 +65,10 @@ int mxc_iomux_mode(unsigned int pin_mode)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_mode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -94,7 +97,10 @@ void mxc_iomux_set_pad(enum iomux_pins pin, u32 config)
 	spin_unlock(&gpio_mux_lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_set_pad);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -123,7 +129,10 @@ int mxc_iomux_alloc_pin(unsigned int pin, const char *label)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_alloc_pin);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -147,7 +156,10 @@ setup_error:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_setup_multiple_pins);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -159,7 +171,10 @@ void mxc_iomux_release_pin(unsigned int pin)
 		clear_bit(pad, mxc_pin_alloc_map);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_release_pin);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -174,7 +189,10 @@ void mxc_iomux_release_multiple_pins(const unsigned int *pin_list, int count)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_release_multiple_pins);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -197,6 +215,9 @@ void mxc_iomux_set_gpr(enum iomux_gp_func gp, bool en)
 	spin_unlock(&gpio_mux_lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(mxc_iomux_set_gpr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

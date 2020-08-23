@@ -13,6 +13,10 @@
 #include <linux/slab.h>
 #include <linux/iio/iio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -81,7 +85,10 @@ void st_sensors_i2c_configure(struct iio_dev *indio_dev,
 EXPORT_SYMBOL(st_sensors_i2c_configure);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 /**
  * st_sensors_of_i2c_probe() - device tree probe for ST I2C sensors
@@ -111,6 +118,9 @@ void st_sensors_of_i2c_probe(struct i2c_client *client,
 EXPORT_SYMBOL(st_sensors_of_i2c_probe);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Denis Ciocca <denis.ciocca@st.com>");
 MODULE_DESCRIPTION("STMicroelectronics ST-sensors i2c driver");

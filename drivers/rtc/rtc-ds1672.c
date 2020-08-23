@@ -154,11 +154,14 @@ static const struct rtc_class_ops ds1672_rtc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ds1672_remove(struct i2c_client *client)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ds1672_probe(struct i2c_client *client,
@@ -186,8 +189,14 @@ static int ds1672_probe(struct i2c_client *client,
 	/* read control register */
 	err = ds1672_get_control(client, &control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
 		goto exit_devreg;
+=======
+	if (err) {
+		dev_warn(&client->dev, "Unable to read the control register\n");
+	}
+>>>>>>> v3.18
 =======
 	if (err) {
 		dev_warn(&client->dev, "Unable to read the control register\n");
@@ -202,6 +211,7 @@ static int ds1672_probe(struct i2c_client *client,
 	err = device_create_file(&client->dev, &dev_attr_control);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_devreg;
 
 	return 0;
@@ -209,10 +219,15 @@ static int ds1672_probe(struct i2c_client *client,
  exit_devreg:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&client->dev, "Unable to create sysfs entry: %s\n",
 			dev_attr_control.attr.name);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -227,7 +242,10 @@ static struct i2c_driver ds1672_driver = {
 		   },
 	.probe = &ds1672_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = &ds1672_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ds1672_id,

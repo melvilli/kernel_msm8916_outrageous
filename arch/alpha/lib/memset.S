@@ -20,12 +20,15 @@
 	.globl memset
 	.globl __memset
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.globl __memsetw
 	.globl __constant_c_memset
 	.ent __memset
 .align 5
 __memset:
 =======
+=======
+>>>>>>> v3.18
 	.globl ___memset
 	.globl __memsetw
 	.globl __constant_c_memset
@@ -33,6 +36,9 @@ __memset:
 	.ent ___memset
 .align 5
 ___memset:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.frame $30,0,$26,0
 	.prologue 0
@@ -114,7 +120,11 @@ within_one_quad:
 end:
 	ret $31,($26),1		/* E1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.end __memset
+=======
+	.end ___memset
+>>>>>>> v3.18
 =======
 	.end ___memset
 >>>>>>> v3.18
@@ -136,7 +146,12 @@ __memsetw:
 	.end __memsetw
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 memset = __memset
+=======
+memset = ___memset
+__memset = ___memset
+>>>>>>> v3.18
 =======
 memset = ___memset
 __memset = ___memset

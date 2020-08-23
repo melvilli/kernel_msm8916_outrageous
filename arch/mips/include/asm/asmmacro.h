@@ -10,6 +10,11 @@
 
 #include <asm/hazards.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/asm-offsets.h>
+#include <asm/msa.h>
+>>>>>>> v3.18
 =======
 #include <asm/asm-offsets.h>
 #include <asm/msa.h>
@@ -21,6 +26,7 @@
 #ifdef CONFIG_64BIT
 #include <asm/asmmacro-64.h>
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #include <asm/mipsmtregs.h>
@@ -46,6 +52,10 @@
 
 #ifdef CONFIG_CPU_MIPSR2
 >>>>>>> v3.18
+=======
+
+#ifdef CONFIG_CPU_MIPSR2
+>>>>>>> v3.18
 	.macro	local_irq_enable reg=t0
 	ei
 	irq_enable_hazard
@@ -65,12 +75,18 @@
 
 	.macro	local_irq_disable reg=t0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PREEMPT
 	lw      \reg, TI_PRE_COUNT($28)
 	addi    \reg, \reg, 1
 	sw      \reg, TI_PRE_COUNT($28)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfc0	\reg, CP0_STATUS
 	ori	\reg, \reg, 1
@@ -78,9 +94,12 @@
 	mtc0	\reg, CP0_STATUS
 	irq_disable_hazard
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.endm
 #endif /* CONFIG_MIPS_MT_SMTC */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PREEMPT
 	lw      \reg, TI_PRE_COUNT($28)
 	addi    \reg, \reg, -1
@@ -213,6 +232,9 @@
 	andi	\rd, \rd, (1 << \s) - 1
 	.endm
 #endif /* !CONFIG_CPU_MIPSR2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -243,7 +265,10 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef TOOLCHAIN_SUPPORTS_MSA
 	.macro	ld_d	wd, off, base
 	.set	push
@@ -500,5 +525,8 @@
 	.set	pop
 	.endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_ASMMACRO_H */

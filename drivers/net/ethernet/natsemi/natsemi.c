@@ -248,7 +248,11 @@ static struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(natsemi_pci_tbl) = {
+=======
+static const struct pci_device_id natsemi_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id natsemi_pci_tbl[] = {
 >>>>>>> v3.18
@@ -932,7 +936,11 @@ static int natsemi_probe1(struct pci_dev *pdev, const struct pci_device_id *ent)
 	dev->watchdog_timeo = TX_TIMEOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+	dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ethtool_ops;
 >>>>>>> v3.18
@@ -979,7 +987,10 @@ static int natsemi_probe1(struct pci_dev *pdev, const struct pci_device_id *ent)
  err_ioremap:
 	pci_release_regions(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3232,7 +3243,10 @@ static void natsemi_remove1(struct pci_dev *pdev)
 	iounmap(ioaddr);
 	free_netdev (dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

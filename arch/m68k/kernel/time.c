@@ -12,6 +12,10 @@
 
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -33,12 +37,18 @@
 #include <linux/profile.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 unsigned long (*mach_random_get_entropy)(void);
 EXPORT_SYMBOL_GPL(mach_random_get_entropy);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * timer_interrupt() needs to keep up the real-time clock,
@@ -103,7 +113,11 @@ static int __init rtc_init(void)
 
 	pdev = platform_device_register_simple("rtc-generic", -1, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(pdev);
+=======
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(pdev);
 >>>>>>> v3.18

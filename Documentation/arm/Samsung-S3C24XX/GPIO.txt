@@ -86,6 +86,7 @@ Headers
 -------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   See arch/arm/mach-s3c2410/include/mach/regs-gpio.h for the list
   of GPIO pins, and the configuration values for them. This
   is included by using #include <mach/regs-gpio.h>
@@ -102,10 +103,15 @@ Headers
   that the user supplied data to them is correct.
 
 =======
+=======
+>>>>>>> v3.18
   See arch/arm/mach-s3c24xx/include/mach/regs-gpio.h for the list
   of GPIO pins, and the configuration values for them. This
   is included by using #include <mach/regs-gpio.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 PIN Numbers

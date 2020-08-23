@@ -2,6 +2,10 @@
 #define __ASM_MICROBLAZE_SYSCALL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/audit.h>
 >>>>>>> v3.18
@@ -104,10 +108,16 @@ asmlinkage long do_syscall_trace_enter(struct pt_regs *regs);
 asmlinkage void do_syscall_trace_leave(struct pt_regs *regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int syscall_get_arch(void)
 {
 	return AUDIT_ARCH_MICROBLAZE;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_MICROBLAZE_SYSCALL_H */

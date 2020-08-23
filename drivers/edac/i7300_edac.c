@@ -6,7 +6,11 @@
  *
  * Copyright (c) 2010 by:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *	 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *	 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -1167,7 +1171,11 @@ static void i7300_remove_one(struct pci_dev *pdev)
  * Has only 8086:360c PCI ID
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i7300_pci_tbl) = {
+=======
+static const struct pci_device_id i7300_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i7300_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1218,7 +1226,11 @@ module_exit(i7300_exit);
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

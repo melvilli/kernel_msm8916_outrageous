@@ -150,9 +150,14 @@ void irq_ctx_exit(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_softirq(void)
 {
 	unsigned long flags;
+=======
+void do_softirq_own_stack(void)
+{
+>>>>>>> v3.18
 =======
 void do_softirq_own_stack(void)
 {
@@ -161,6 +166,7 @@ void do_softirq_own_stack(void)
 	union irq_ctx *irqctx;
 	u32 *isp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (in_interrupt())
 		return;
@@ -197,6 +203,8 @@ void do_softirq_own_stack(void)
 
 	local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
 	curctx = current_thread_info();
 	irqctx = softirq_ctx[smp_processor_id()];
 	irqctx->tinfo.task = curctx->task;
@@ -217,6 +225,9 @@ void do_softirq_own_stack(void)
 		: "memory", "r0", "r1", "r2", "r3", "r4",
 		  "r5", "r6", "r7", "r8", "r9", "r15", "t", "pr"
 	);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -261,6 +272,7 @@ void __init init_IRQ(void)
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 {
 	struct irq_desc *desc = irq_to_desc(irq);
@@ -274,6 +286,8 @@ static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 	raw_spin_unlock_irq(&desc->lock);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -297,11 +311,16 @@ void migrate_irqs(void)
 
 				cpumask_setall(data->affinity);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				newcpu = cpumask_any_and(data->affinity,
 							 cpu_online_mask);
 			}
 
 			route_irq(data, irq, newcpu);
+=======
+			}
+			irq_set_affinity(irq, data->affinity);
+>>>>>>> v3.18
 =======
 			}
 			irq_set_affinity(irq, data->affinity);

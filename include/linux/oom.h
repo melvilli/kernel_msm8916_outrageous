@@ -59,8 +59,13 @@ extern void oom_kill_process(struct task_struct *p, gfp_t gfp_mask, int order,
 			     const char *message);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int try_set_zonelist_oom(struct zonelist *zonelist, gfp_t gfp_flags);
 extern void clear_zonelist_oom(struct zonelist *zonelist, gfp_t gfp_flags);
+=======
+extern bool oom_zonelist_trylock(struct zonelist *zonelist, gfp_t gfp_flags);
+extern void oom_zonelist_unlock(struct zonelist *zonelist, gfp_t gfp_flags);
+>>>>>>> v3.18
 =======
 extern bool oom_zonelist_trylock(struct zonelist *zonelist, gfp_t gfp_flags);
 extern void oom_zonelist_unlock(struct zonelist *zonelist, gfp_t gfp_flags);
@@ -91,17 +96,23 @@ static inline void oom_killer_enable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct task_struct *find_lock_task_mm(struct task_struct *p);
 
 extern void dump_tasks(const struct mem_cgroup *memcg,
 		const nodemask_t *nodemask);
 =======
+=======
+>>>>>>> v3.18
 static inline bool oom_gfp_allowed(gfp_t gfp_mask)
 {
 	return (gfp_mask & __GFP_FS) && !(gfp_mask & __GFP_NORETRY);
 }
 
 extern struct task_struct *find_lock_task_mm(struct task_struct *p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* sysctls */

@@ -7,6 +7,10 @@ obj-$(CONFIG_UFS_FS) += ufs.o
 ufs-objs := balloc.o cylinder.o dir.o file.o ialloc.o inode.o \
 	    namei.o super.o symlink.o truncate.o util.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-$(CONFIG_UFS_DEBUG)    += -DDEBUG
+>>>>>>> v3.18
 =======
 ccflags-$(CONFIG_UFS_DEBUG)    += -DDEBUG
 >>>>>>> v3.18

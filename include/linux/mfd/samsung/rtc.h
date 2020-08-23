@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*  rtc.h
  *
  * Copyright (c) 2011 Samsung Electronics Co., Ltd
@@ -9,6 +10,8 @@
  *  Free Software Foundation;  either version 2 of the  License, or (at your
  *  option) any later version.
 =======
+=======
+>>>>>>> v3.18
 /* rtc.h
  *
  * Copyright (c) 2011-2014 Samsung Electronics Co., Ltd
@@ -23,6 +26,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  */
@@ -30,6 +36,7 @@
 #ifndef __LINUX_MFD_SEC_RTC_H
 #define __LINUX_MFD_SEC_RTC_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum sec_rtc_reg {
 	SEC_RTC_SEC,
@@ -62,6 +69,8 @@ enum sec_rtc_reg {
 	SEC_WTSR_SMPL_CNTL,
 	SEC_RTC_UDR_CON,
 =======
+=======
+>>>>>>> v3.18
 enum s5m_rtc_reg {
 	S5M_RTC_SEC,
 	S5M_RTC_MIN,
@@ -125,6 +134,9 @@ enum s2mps_rtc_reg {
 	S2MPS_OFFSRC,
 
 	S2MPS_RTC_REG_MAX,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -134,16 +146,22 @@ enum s2mps_rtc_reg {
 #define HOUR_AMPM		(1 << 6)
 #define HOUR_PM			(1 << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ALARM0_STATUS		(1 << 1)
 #define ALARM1_STATUS		(1 << 2)
 #define UPDATE_AD		(1 << 0)
 =======
+=======
+>>>>>>> v3.18
 #define S5M_ALARM0_STATUS	(1 << 1)
 #define S5M_ALARM1_STATUS	(1 << 2)
 #define S5M_UPDATE_AD		(1 << 0)
 
 #define S2MPS_ALARM0_STATUS	(1 << 2)
 #define S2MPS_ALARM1_STATUS	(1 << 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* RTC Control Register */
@@ -153,9 +171,12 @@ enum s2mps_rtc_reg {
 #define MODEL24_MASK		(1 << MODEL24_SHIFT)
 /* RTC Update Register1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTC_UDR_SHIFT		0
 #define RTC_UDR_MASK		(1 << RTC_UDR_SHIFT)
 =======
+=======
+>>>>>>> v3.18
 #define S5M_RTC_UDR_SHIFT	0
 #define S5M_RTC_UDR_MASK	(1 << S5M_RTC_UDR_SHIFT)
 #define S2MPS_RTC_WUDR_SHIFT	4
@@ -177,6 +198,9 @@ enum s2mps_rtc_reg {
 #define S5M_RTC_UDR_T_3660_US	(0x2 << S5M_RTC_UDR_T_SHIFT)
 #define S5M_RTC_UDR_T_450_US	(0x3 << S5M_RTC_UDR_T_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* RTC Hour register */
 #define HOUR_PM_SHIFT		6
@@ -186,13 +210,19 @@ enum s2mps_rtc_reg {
 #define ALARM_ENABLE_MASK	(1 << ALARM_ENABLE_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SMPL_ENABLE_SHIFT	7
 #define SMPL_ENABLE_MASK	(1 << SMPL_ENABLE_SHIFT)
 
 #define WTSR_ENABLE_SHIFT	6
 #define WTSR_ENABLE_MASK	(1 << WTSR_ENABLE_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	RTC_SEC = 0,

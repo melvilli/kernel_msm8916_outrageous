@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -26,9 +32,14 @@
 #include "bitfield.h"
 #include "efx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "spi.h"
 #include "nic.h"
 #include "regs.h"
+=======
+#include "nic.h"
+#include "farch_regs.h"
+>>>>>>> v3.18
 =======
 #include "nic.h"
 #include "farch_regs.h"
@@ -38,11 +49,14 @@
 #include "workarounds.h"
 #include "selftest.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Hardware control for SFC4000 (aka Falcon). */
 
 static int falcon_reset_hw(struct efx_nic *efx, enum reset_type method);
 =======
+=======
+>>>>>>> v3.18
 #include "mdio_10g.h"
 
 /* Hardware control for SFC4000 (aka Falcon). */
@@ -319,6 +333,9 @@ struct falcon_nvconfig {
 
 static int falcon_reset_hw(struct efx_nic *efx, enum reset_type method);
 static void falcon_reconfigure_mac_wrapper(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const unsigned int
@@ -437,7 +454,11 @@ static void falcon_prepare_flush(struct efx_nic *efx)
  * NB most hardware supports MSI interrupts
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void falcon_irq_ack_a1(struct efx_nic *efx)
+=======
+static inline void falcon_irq_ack_a1(struct efx_nic *efx)
+>>>>>>> v3.18
 =======
 static inline void falcon_irq_ack_a1(struct efx_nic *efx)
 >>>>>>> v3.18
@@ -450,8 +471,12 @@ static inline void falcon_irq_ack_a1(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id)
+=======
+static irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id)
+>>>>>>> v3.18
 =======
 static irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id)
 >>>>>>> v3.18
@@ -476,11 +501,14 @@ static irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id)
 		   irq, raw_smp_processor_id(), EFX_OWORD_VAL(*int_ker));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check to see if we have a serious error condition */
 	syserr = EFX_OWORD_FIELD(*int_ker, FSF_AZ_NET_IVEC_FATAL_INT);
 	if (unlikely(syserr))
 		return efx_nic_fatal_interrupt(efx);
 =======
+=======
+>>>>>>> v3.18
 	if (!likely(ACCESS_ONCE(efx->irq_soft_enabled)))
 		return IRQ_HANDLED;
 
@@ -488,6 +516,9 @@ static irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id)
 	syserr = EFX_OWORD_FIELD(*int_ker, FSF_AZ_NET_IVEC_FATAL_INT);
 	if (unlikely(syserr))
 		return efx_farch_fatal_interrupt(efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Determine interrupting queues, clear interrupt status
@@ -506,7 +537,10 @@ static irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id)
 	return IRQ_HANDLED;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**************************************************************************
  *
@@ -526,6 +560,9 @@ static void falcon_b0_rx_push_rss_config(struct efx_nic *efx)
 	efx_farch_rx_push_indir_table(efx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**************************************************************************
  *
@@ -572,14 +609,20 @@ static int falcon_spi_wait(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int falcon_spi_cmd(struct efx_nic *efx, const struct efx_spi_device *spi,
 		   unsigned int command, int address,
 		   const void *in, void *out, size_t len)
 =======
+=======
+>>>>>>> v3.18
 static int
 falcon_spi_cmd(struct efx_nic *efx, const struct falcon_spi_device *spi,
 	       unsigned int command, int address,
 	       const void *in, void *out, size_t len)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	bool addressed = (address >= 0);
@@ -635,6 +678,7 @@ falcon_spi_cmd(struct efx_nic *efx, const struct falcon_spi_device *spi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static size_t
 falcon_spi_write_limit(const struct efx_spi_device *spi, size_t start)
 {
@@ -650,10 +694,16 @@ static inline u8
 falcon_spi_munge_command(const struct falcon_spi_device *spi,
 			 const u8 command, const unsigned int address)
 >>>>>>> v3.18
+=======
+static inline u8
+falcon_spi_munge_command(const struct falcon_spi_device *spi,
+			 const u8 command, const unsigned int address)
+>>>>>>> v3.18
 {
 	return command | (((address >> 8) & spi->munge_address) << 3);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Wait up to 10 ms for buffered write completion */
 int
@@ -688,6 +738,11 @@ static int
 falcon_spi_read(struct efx_nic *efx, const struct falcon_spi_device *spi,
 		loff_t start, size_t len, size_t *retlen, u8 *buffer)
 >>>>>>> v3.18
+=======
+static int
+falcon_spi_read(struct efx_nic *efx, const struct falcon_spi_device *spi,
+		loff_t start, size_t len, size_t *retlen, u8 *buffer)
+>>>>>>> v3.18
 {
 	size_t block_len, pos = 0;
 	unsigned int command;
@@ -697,7 +752,11 @@ falcon_spi_read(struct efx_nic *efx, const struct falcon_spi_device *spi,
 		block_len = min(len - pos, FALCON_SPI_MAX_LEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		command = efx_spi_munge_command(spi, SPI_READ, start + pos);
+=======
+		command = falcon_spi_munge_command(spi, SPI_READ, start + pos);
+>>>>>>> v3.18
 =======
 		command = falcon_spi_munge_command(spi, SPI_READ, start + pos);
 >>>>>>> v3.18
@@ -721,9 +780,12 @@ falcon_spi_read(struct efx_nic *efx, const struct falcon_spi_device *spi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 falcon_spi_write(struct efx_nic *efx, const struct efx_spi_device *spi,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SFC_MTD
 
 struct falcon_mtd_partition {
@@ -770,6 +832,9 @@ falcon_spi_wait_write(struct efx_nic *efx, const struct falcon_spi_device *spi)
 
 static int
 falcon_spi_write(struct efx_nic *efx, const struct falcon_spi_device *spi,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 loff_t start, size_t len, size_t *retlen, const u8 *buffer)
 {
@@ -786,7 +851,11 @@ falcon_spi_write(struct efx_nic *efx, const struct falcon_spi_device *spi,
 		block_len = min(len - pos,
 				falcon_spi_write_limit(spi, start + pos));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		command = efx_spi_munge_command(spi, SPI_WRITE, start + pos);
+=======
+		command = falcon_spi_munge_command(spi, SPI_WRITE, start + pos);
+>>>>>>> v3.18
 =======
 		command = falcon_spi_munge_command(spi, SPI_WRITE, start + pos);
 >>>>>>> v3.18
@@ -800,7 +869,11 @@ falcon_spi_write(struct efx_nic *efx, const struct falcon_spi_device *spi,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		command = efx_spi_munge_command(spi, SPI_READ, start + pos);
+=======
+		command = falcon_spi_munge_command(spi, SPI_READ, start + pos);
+>>>>>>> v3.18
 =======
 		command = falcon_spi_munge_command(spi, SPI_READ, start + pos);
 >>>>>>> v3.18
@@ -827,7 +900,10 @@ falcon_spi_write(struct efx_nic *efx, const struct falcon_spi_device *spi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 falcon_spi_slow_wait(struct falcon_mtd_partition *part, bool uninterruptible)
 {
@@ -1342,6 +1418,9 @@ static void falcon_poll_xmac(struct efx_nic *efx)
 	falcon_ack_status_intr(efx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**************************************************************************
  *
@@ -1425,7 +1504,11 @@ static void falcon_reset_macs(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void falcon_drain_tx_fifo(struct efx_nic *efx)
+=======
+static void falcon_drain_tx_fifo(struct efx_nic *efx)
+>>>>>>> v3.18
 =======
 static void falcon_drain_tx_fifo(struct efx_nic *efx)
 >>>>>>> v3.18
@@ -1461,7 +1544,11 @@ static void falcon_deconfigure_mac_wrapper(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void falcon_reconfigure_mac_wrapper(struct efx_nic *efx)
+=======
+static void falcon_reconfigure_mac_wrapper(struct efx_nic *efx)
+>>>>>>> v3.18
 =======
 static void falcon_reconfigure_mac_wrapper(struct efx_nic *efx)
 >>>>>>> v3.18
@@ -1479,6 +1566,10 @@ static void falcon_reconfigure_mac_wrapper(struct efx_nic *efx)
 	default:    link_speed = 0; break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1490,7 +1581,11 @@ static void falcon_reconfigure_mac_wrapper(struct efx_nic *efx)
 			     FRF_AB_MAC_XOFF_VAL, 0xffff /* max pause time */,
 			     FRF_AB_MAC_BCAD_ACPT, 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     FRF_AB_MAC_UC_PROM, efx->promiscuous,
+=======
+			     FRF_AB_MAC_UC_PROM, !efx->unicast_filter,
+>>>>>>> v3.18
 =======
 			     FRF_AB_MAC_UC_PROM, !efx->unicast_filter,
 >>>>>>> v3.18
@@ -1527,10 +1622,14 @@ static void falcon_stats_request(struct efx_nic *efx)
 	WARN_ON(nic_data->stats_disable_count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nic_data->stats_dma_done == NULL)
 		return;	/* no mac selected */
 
 	*nic_data->stats_dma_done = FALCON_STATS_NOT_DONE;
+=======
+	FALCON_XMAC_STATS_DMA_FLAG(efx) = 0;
+>>>>>>> v3.18
 =======
 	FALCON_XMAC_STATS_DMA_FLAG(efx) = 0;
 >>>>>>> v3.18
@@ -1556,15 +1655,21 @@ static void falcon_stats_complete(struct efx_nic *efx)
 
 	nic_data->stats_pending = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*nic_data->stats_dma_done == FALCON_STATS_DONE) {
 		rmb(); /* read the done flag before the stats */
 		falcon_update_stats_xmac(efx);
 =======
+=======
+>>>>>>> v3.18
 	if (FALCON_XMAC_STATS_DMA_FLAG(efx)) {
 		rmb(); /* read the done flag before the stats */
 		efx_nic_update_stats(falcon_stat_desc, FALCON_STAT_COUNT,
 				     falcon_stat_mask, nic_data->stats,
 				     efx->stats_buffer.addr, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		netif_err(efx, hw, efx->net_dev,
@@ -1634,7 +1739,10 @@ static int falcon_reconfigure_port(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* TX flow control may automatically turn itself off if the link
  * partner (intermittently) stops responding to pause frames. There
  * isn't any indication that this has happened, so the best we do is
@@ -1657,6 +1765,9 @@ static void falcon_b0_prepare_enable_fc_tx(struct efx_nic *efx)
 	falcon_start_nic_stats(efx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**************************************************************************
  *
@@ -1842,7 +1953,11 @@ static int falcon_probe_port(struct efx_nic *efx)
 	/* Allocate buffer for stats */
 	rc = efx_nic_alloc_buffer(efx, &efx->stats_buffer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  FALCON_MAC_STATS_SIZE);
+=======
+				  FALCON_MAC_STATS_SIZE, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 				  FALCON_MAC_STATS_SIZE, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1854,7 +1969,10 @@ static int falcon_probe_port(struct efx_nic *efx)
 		  efx->stats_buffer.addr,
 		  (u64)virt_to_phys(efx->stats_buffer.addr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nic_data->stats_dma_done = efx->stats_buffer.addr + XgDmaDone_offset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1914,7 +2032,11 @@ falcon_read_nvram(struct efx_nic *efx, struct falcon_nvconfig *nvconfig_out)
 	struct falcon_nic_data *nic_data = efx->nic_data;
 	struct falcon_nvconfig *nvconfig;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct efx_spi_device *spi;
+=======
+	struct falcon_spi_device *spi;
+>>>>>>> v3.18
 =======
 	struct falcon_spi_device *spi;
 >>>>>>> v3.18
@@ -1924,9 +2046,15 @@ falcon_read_nvram(struct efx_nic *efx, struct falcon_nvconfig *nvconfig_out)
 	u32 csum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (efx_spi_present(&nic_data->spi_flash))
 		spi = &nic_data->spi_flash;
 	else if (efx_spi_present(&nic_data->spi_eeprom))
+=======
+	if (falcon_spi_present(&nic_data->spi_flash))
+		spi = &nic_data->spi_flash;
+	else if (falcon_spi_present(&nic_data->spi_eeprom))
+>>>>>>> v3.18
 =======
 	if (falcon_spi_present(&nic_data->spi_flash))
 		spi = &nic_data->spi_flash;
@@ -1947,7 +2075,11 @@ falcon_read_nvram(struct efx_nic *efx, struct falcon_nvconfig *nvconfig_out)
 	if (rc) {
 		netif_err(efx, hw, efx->net_dev, "Failed to read %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  efx_spi_present(&nic_data->spi_flash) ?
+=======
+			  falcon_spi_present(&nic_data->spi_flash) ?
+>>>>>>> v3.18
 =======
 			  falcon_spi_present(&nic_data->spi_flash) ?
 >>>>>>> v3.18
@@ -2000,7 +2132,11 @@ static int falcon_test_nvram(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct efx_nic_register_test falcon_b0_register_tests[] = {
+=======
+static const struct efx_farch_register_test falcon_b0_register_tests[] = {
+>>>>>>> v3.18
 =======
 static const struct efx_farch_register_test falcon_b0_register_tests[] = {
 >>>>>>> v3.18
@@ -2064,8 +2200,13 @@ falcon_b0_test_chip(struct efx_nic *efx, struct efx_self_tests *tests)
 
 	tests->registers =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		efx_nic_test_registers(efx, falcon_b0_register_tests,
 				       ARRAY_SIZE(falcon_b0_register_tests))
+=======
+		efx_farch_test_registers(efx, falcon_b0_register_tests,
+					 ARRAY_SIZE(falcon_b0_register_tests))
+>>>>>>> v3.18
 =======
 		efx_farch_test_registers(efx, falcon_b0_register_tests,
 					 ARRAY_SIZE(falcon_b0_register_tests))
@@ -2089,8 +2230,12 @@ static enum reset_type falcon_map_reset_reason(enum reset_type reason)
 	switch (reason) {
 	case RESET_TYPE_RX_RECOVERY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case RESET_TYPE_RX_DESC_FETCH:
 	case RESET_TYPE_TX_DESC_FETCH:
+=======
+	case RESET_TYPE_DMA_ERROR:
+>>>>>>> v3.18
 =======
 	case RESET_TYPE_DMA_ERROR:
 >>>>>>> v3.18
@@ -2309,7 +2454,11 @@ static int falcon_reset_sram(struct efx_nic *efx)
 
 static void falcon_spi_device_init(struct efx_nic *efx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct efx_spi_device *spi_device,
+=======
+				  struct falcon_spi_device *spi_device,
+>>>>>>> v3.18
 =======
 				  struct falcon_spi_device *spi_device,
 >>>>>>> v3.18
@@ -2367,7 +2516,11 @@ static int falcon_probe_nvconfig(struct efx_nic *efx)
 
 	/* Read the MAC addresses */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(efx->net_dev->perm_addr, nvconfig->mac_address[0], ETH_ALEN);
+=======
+	ether_addr_copy(efx->net_dev->perm_addr, nvconfig->mac_address[0]);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(efx->net_dev->perm_addr, nvconfig->mac_address[0]);
 >>>>>>> v3.18
@@ -2383,16 +2536,22 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void falcon_dimension_resources(struct efx_nic *efx)
 {
 	efx->rx_dc_base = 0x20000;
 	efx->tx_dc_base = 0x26000;
 =======
+=======
+>>>>>>> v3.18
 static int falcon_dimension_resources(struct efx_nic *efx)
 {
 	efx->rx_dc_base = 0x20000;
 	efx->tx_dc_base = 0x26000;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2441,7 +2600,10 @@ static void falcon_probe_spi_devices(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int falcon_a1_mem_map_size(struct efx_nic *efx)
 {
 	return 0x20000;
@@ -2456,6 +2618,9 @@ static unsigned int falcon_b0_mem_map_size(struct efx_nic *efx)
 		FR_BZ_RX_INDIRECTION_TBL_STEP * FR_BZ_RX_INDIRECTION_TBL_ROWS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int falcon_probe_nic(struct efx_nic *efx)
 {
@@ -2464,6 +2629,11 @@ static int falcon_probe_nic(struct efx_nic *efx)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	efx->primary = efx; /* only one usable function per controller */
+
+>>>>>>> v3.18
 =======
 	efx->primary = efx; /* only one usable function per controller */
 
@@ -2477,7 +2647,11 @@ static int falcon_probe_nic(struct efx_nic *efx)
 	rc = -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (efx_nic_fpga_ver(efx) != 0) {
+=======
+	if (efx_farch_fpga_ver(efx) != 0) {
+>>>>>>> v3.18
 =======
 	if (efx_farch_fpga_ver(efx) != 0) {
 >>>>>>> v3.18
@@ -2535,7 +2709,12 @@ static int falcon_probe_nic(struct efx_nic *efx)
 
 	/* Allocate memory for INT_KER */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = efx_nic_alloc_buffer(efx, &efx->irq_status, sizeof(efx_oword_t));
+=======
+	rc = efx_nic_alloc_buffer(efx, &efx->irq_status, sizeof(efx_oword_t),
+				  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rc = efx_nic_alloc_buffer(efx, &efx->irq_status, sizeof(efx_oword_t),
 				  GFP_KERNEL);
@@ -2561,6 +2740,11 @@ static int falcon_probe_nic(struct efx_nic *efx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	efx->max_channels = (efx_nic_rev(efx) <= EFX_REV_FALCON_A1 ? 4 :
+			     EFX_MAX_CHANNELS);
+>>>>>>> v3.18
 =======
 	efx->max_channels = (efx_nic_rev(efx) <= EFX_REV_FALCON_A1 ? 4 :
 			     EFX_MAX_CHANNELS);
@@ -2715,9 +2899,13 @@ static int falcon_init_nic(struct efx_nic *efx)
 
 	if (efx_nic_rev(efx) >= EFX_REV_FALCON_B0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Set hash key for IPv4 */
 		memcpy(&temp, efx->rx_hash_key, sizeof(temp));
 		efx_writeo(efx, &temp, FR_BZ_RX_RSS_TKEY);
+=======
+		falcon_b0_rx_push_rss_config(efx);
+>>>>>>> v3.18
 =======
 		falcon_b0_rx_push_rss_config(efx);
 >>>>>>> v3.18
@@ -2728,7 +2916,11 @@ static int falcon_init_nic(struct efx_nic *efx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_nic_init_common(efx);
+=======
+	efx_farch_init_common(efx);
+>>>>>>> v3.18
 =======
 	efx_farch_init_common(efx);
 >>>>>>> v3.18
@@ -2763,6 +2955,7 @@ static void falcon_remove_nic(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void falcon_update_nic_stats(struct efx_nic *efx)
 {
 	struct falcon_nic_data *nic_data = efx->nic_data;
@@ -2782,6 +2975,8 @@ static void falcon_update_nic_stats(struct efx_nic *efx)
 		falcon_update_stats_xmac(efx);
 	}
 =======
+=======
+>>>>>>> v3.18
 static size_t falcon_describe_nic_stats(struct efx_nic *efx, u8 *names)
 {
 	return efx_nic_describe_stats(falcon_stat_desc, FALCON_STAT_COUNT,
@@ -2844,6 +3039,9 @@ static size_t falcon_update_nic_stats(struct efx_nic *efx, u64 *full_stats,
 	}
 
 	return FALCON_STAT_COUNT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2858,7 +3056,10 @@ void falcon_start_nic_stats(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* We don't acutally pull stats on falcon. Wait 10ms so that
  * they arrive when we call this just after start_stats
  */
@@ -2867,6 +3068,9 @@ static void falcon_pull_nic_stats(struct efx_nic *efx)
 	msleep(10);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void falcon_stop_nic_stats(struct efx_nic *efx)
 {
@@ -2885,7 +3089,11 @@ void falcon_stop_nic_stats(struct efx_nic *efx)
 	 * complete. */
 	for (i = 0; i < 4 && nic_data->stats_pending; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*nic_data->stats_dma_done == FALCON_STATS_DONE)
+=======
+		if (FALCON_XMAC_STATS_DMA_FLAG(efx))
+>>>>>>> v3.18
 =======
 		if (FALCON_XMAC_STATS_DMA_FLAG(efx))
 >>>>>>> v3.18
@@ -2933,6 +3141,10 @@ static int falcon_set_wol(struct efx_nic *efx, u32 type)
 
 const struct efx_nic_type falcon_a1_nic_type = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.mem_map_size = falcon_a1_mem_map_size,
+>>>>>>> v3.18
 =======
 	.mem_map_size = falcon_a1_mem_map_size,
 >>>>>>> v3.18
@@ -2941,7 +3153,11 @@ const struct efx_nic_type falcon_a1_nic_type = {
 	.init = falcon_init_nic,
 	.dimension_resources = falcon_dimension_resources,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fini = efx_port_dummy_op_void,
+=======
+	.fini = falcon_irq_ack_a1,
+>>>>>>> v3.18
 =======
 	.fini = falcon_irq_ack_a1,
 >>>>>>> v3.18
@@ -2953,11 +3169,14 @@ const struct efx_nic_type falcon_a1_nic_type = {
 	.remove_port = falcon_remove_port,
 	.handle_global_event = falcon_handle_global_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.prepare_flush = falcon_prepare_flush,
 	.finish_flush = efx_port_dummy_op_void,
 	.update_stats = falcon_update_nic_stats,
 	.start_stats = falcon_start_nic_stats,
 =======
+=======
+>>>>>>> v3.18
 	.fini_dmaq = efx_farch_fini_dmaq,
 	.prepare_flush = falcon_prepare_flush,
 	.finish_flush = efx_port_dummy_op_void,
@@ -2967,12 +3186,19 @@ const struct efx_nic_type falcon_a1_nic_type = {
 	.update_stats = falcon_update_nic_stats,
 	.start_stats = falcon_start_nic_stats,
 	.pull_stats = falcon_pull_nic_stats,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.stop_stats = falcon_stop_nic_stats,
 	.set_id_led = falcon_set_id_led,
 	.push_irq_moderation = falcon_push_irq_moderation,
 	.reconfigure_port = falcon_reconfigure_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.prepare_enable_fc_tx = falcon_a1_prepare_enable_fc_tx,
+>>>>>>> v3.18
 =======
 	.prepare_enable_fc_tx = falcon_a1_prepare_enable_fc_tx,
 >>>>>>> v3.18
@@ -2983,10 +3209,13 @@ const struct efx_nic_type falcon_a1_nic_type = {
 	.resume_wol = efx_port_dummy_op_void,
 	.test_nvram = falcon_test_nvram,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.revision = EFX_REV_FALCON_A1,
 	.mem_map_size = 0x20000,
 =======
+=======
+>>>>>>> v3.18
 	.irq_enable_master = efx_farch_irq_enable_master,
 	.irq_test_generate = efx_farch_irq_test_generate,
 	.irq_disable_non_ev = efx_farch_irq_disable_master,
@@ -3035,6 +3264,9 @@ const struct efx_nic_type falcon_a1_nic_type = {
 #endif
 
 	.revision = EFX_REV_FALCON_A1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.txd_ptr_tbl_base = FR_AA_TX_DESC_PTR_TBL_KER,
 	.rxd_ptr_tbl_base = FR_AA_RX_DESC_PTR_TBL_KER,
@@ -3046,6 +3278,7 @@ const struct efx_nic_type falcon_a1_nic_type = {
 	.can_rx_scatter = false,
 	.max_interrupt_mode = EFX_INT_MODE_MSI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.phys_addr_channels = 4,
 	.timer_period_max =  1 << FRF_AB_TC_TIMER_VAL_WIDTH,
 	.offload_features = NETIF_F_IP_CSUM,
@@ -3053,6 +3286,8 @@ const struct efx_nic_type falcon_a1_nic_type = {
 
 const struct efx_nic_type falcon_b0_nic_type = {
 =======
+=======
+>>>>>>> v3.18
 	.timer_period_max =  1 << FRF_AB_TC_TIMER_VAL_WIDTH,
 	.offload_features = NETIF_F_IP_CSUM,
 	.mcdi_max_ver = -1,
@@ -3060,6 +3295,9 @@ const struct efx_nic_type falcon_b0_nic_type = {
 
 const struct efx_nic_type falcon_b0_nic_type = {
 	.mem_map_size = falcon_b0_mem_map_size,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.probe = falcon_probe_nic,
 	.remove = falcon_remove_nic,
@@ -3074,11 +3312,14 @@ const struct efx_nic_type falcon_b0_nic_type = {
 	.remove_port = falcon_remove_port,
 	.handle_global_event = falcon_handle_global_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.prepare_flush = falcon_prepare_flush,
 	.finish_flush = efx_port_dummy_op_void,
 	.update_stats = falcon_update_nic_stats,
 	.start_stats = falcon_start_nic_stats,
 =======
+=======
+>>>>>>> v3.18
 	.fini_dmaq = efx_farch_fini_dmaq,
 	.prepare_flush = falcon_prepare_flush,
 	.finish_flush = efx_port_dummy_op_void,
@@ -3088,12 +3329,19 @@ const struct efx_nic_type falcon_b0_nic_type = {
 	.update_stats = falcon_update_nic_stats,
 	.start_stats = falcon_start_nic_stats,
 	.pull_stats = falcon_pull_nic_stats,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.stop_stats = falcon_stop_nic_stats,
 	.set_id_led = falcon_set_id_led,
 	.push_irq_moderation = falcon_push_irq_moderation,
 	.reconfigure_port = falcon_reconfigure_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.prepare_enable_fc_tx = falcon_b0_prepare_enable_fc_tx,
+>>>>>>> v3.18
 =======
 	.prepare_enable_fc_tx = falcon_b0_prepare_enable_fc_tx,
 >>>>>>> v3.18
@@ -3105,6 +3353,7 @@ const struct efx_nic_type falcon_b0_nic_type = {
 	.test_chip = falcon_b0_test_chip,
 	.test_nvram = falcon_test_nvram,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.revision = EFX_REV_FALCON_B0,
 	/* Map everything up to and including the RSS indirection
@@ -3114,6 +3363,8 @@ const struct efx_nic_type falcon_b0_nic_type = {
 			 FR_BZ_RX_INDIRECTION_TBL_STEP *
 			 FR_BZ_RX_INDIRECTION_TBL_ROWS),
 =======
+=======
+>>>>>>> v3.18
 	.irq_enable_master = efx_farch_irq_enable_master,
 	.irq_test_generate = efx_farch_irq_test_generate,
 	.irq_disable_non_ev = efx_farch_irq_disable_master,
@@ -3161,6 +3412,9 @@ const struct efx_nic_type falcon_b0_nic_type = {
 #endif
 
 	.revision = EFX_REV_FALCON_B0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.txd_ptr_tbl_base = FR_BZ_TX_DESC_PTR_TBL,
 	.rxd_ptr_tbl_base = FR_BZ_RX_DESC_PTR_TBL,
@@ -3168,6 +3422,7 @@ const struct efx_nic_type falcon_b0_nic_type = {
 	.evq_ptr_tbl_base = FR_BZ_EVQ_PTR_TBL,
 	.evq_rptr_tbl_base = FR_BZ_EVQ_RPTR,
 	.max_dma_mask = DMA_BIT_MASK(FSF_AZ_TX_KER_BUF_ADDR_WIDTH),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.rx_buffer_hash_size = 0x10,
 	.rx_buffer_padding = 0,
@@ -3181,6 +3436,8 @@ const struct efx_nic_type falcon_b0_nic_type = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.rx_prefix_size = FS_BZ_RX_PREFIX_SIZE,
 	.rx_hash_offset = FS_BZ_RX_PREFIX_HASH_OFST,
 	.rx_buffer_padding = 0,
@@ -3191,4 +3448,7 @@ const struct efx_nic_type falcon_b0_nic_type = {
 	.mcdi_max_ver = -1,
 	.max_rx_ip_filters = FR_BZ_RX_FILTER_TBL0_ROWS,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

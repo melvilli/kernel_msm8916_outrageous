@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -208,8 +212,11 @@ int
 lpfc_els_abort(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LIST_HEAD(completions);
 	LIST_HEAD(txcmplq_completions);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	LIST_HEAD(abort_list);
@@ -223,6 +230,7 @@ lpfc_els_abort(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
 			 "Data: x%x x%x x%x\n",
 			 ndlp->nlp_DID, ndlp->nlp_flag, ndlp->nlp_state,
 			 ndlp->nlp_rpi);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	lpfc_fabric_abort_nport(ndlp);
@@ -251,6 +259,8 @@ lpfc_els_abort(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
 	spin_unlock_irq(&phba->hbalock);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Clean up all fabric IOs first.*/
 	lpfc_fabric_abort_nport(ndlp);
 
@@ -272,6 +282,9 @@ lpfc_els_abort(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
 	spin_unlock_irq(&phba->hbalock);
 
 	/* Abort the targeted IOs and remove them from the abort list. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry_safe(iocb, next_iocb, &abort_list, dlist) {
 			spin_lock_irq(&phba->hbalock);
@@ -281,10 +294,13 @@ lpfc_els_abort(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Cancel all the IOCBs from the completions list */
 	lpfc_sli_cancel_iocbs(phba, &completions, IOSTAT_LOCAL_REJECT,
 			      IOERR_SLI_ABORTED);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&abort_list);
 
 	/* Now process the txq */
@@ -307,6 +323,9 @@ lpfc_els_abort(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
 	/* Cancel all the IOCBs from the completions list */
 	lpfc_sli_cancel_iocbs(phba, &abort_list,
 			      IOSTAT_LOCAL_REJECT, IOERR_SLI_ABORTED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lpfc_cancel_retry_delay_tmo(phba->pport, ndlp);
@@ -747,12 +766,15 @@ lpfc_rcv_prli(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	ndlp->nlp_type &= ~(NLP_FCP_TARGET | NLP_FCP_INITIATOR);
 	ndlp->nlp_fcp_info &= ~NLP_FCP_2_DEVICE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (npr->prliType == PRLI_FCP_TYPE) {
 		if (npr->initiatorFunc)
 			ndlp->nlp_type |= NLP_FCP_INITIATOR;
 		if (npr->targetFunc)
 			ndlp->nlp_type |= NLP_FCP_TARGET;
 =======
+=======
+>>>>>>> v3.18
 	ndlp->nlp_flag &= ~NLP_FIRSTBURST;
 	if (npr->prliType == PRLI_FCP_TYPE) {
 		if (npr->initiatorFunc)
@@ -762,6 +784,9 @@ lpfc_rcv_prli(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 			if (npr->writeXferRdyDis)
 				ndlp->nlp_flag |= NLP_FIRSTBURST;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (npr->Retry)
 			ndlp->nlp_fcp_info |= NLP_FCP_2_DEVICE;
@@ -1084,6 +1109,11 @@ lpfc_cmpl_plogi_plogi_issue(struct lpfc_vport *vport,
 
 	prsp = list_get_first(&pcmd->list, struct lpfc_dmabuf, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!prsp)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (!prsp)
 		goto out;
@@ -1750,6 +1780,10 @@ lpfc_cmpl_prli_prli_issue(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	ndlp->nlp_type &= ~(NLP_FCP_TARGET | NLP_FCP_INITIATOR);
 	ndlp->nlp_fcp_info &= ~NLP_FCP_2_DEVICE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ndlp->nlp_flag &= ~NLP_FIRSTBURST;
+>>>>>>> v3.18
 =======
 	ndlp->nlp_flag &= ~NLP_FIRSTBURST;
 >>>>>>> v3.18
@@ -1758,14 +1792,20 @@ lpfc_cmpl_prli_prli_issue(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 		if (npr->initiatorFunc)
 			ndlp->nlp_type |= NLP_FCP_INITIATOR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (npr->targetFunc)
 			ndlp->nlp_type |= NLP_FCP_TARGET;
 =======
+=======
+>>>>>>> v3.18
 		if (npr->targetFunc) {
 			ndlp->nlp_type |= NLP_FCP_TARGET;
 			if (npr->writeXferRdyDis)
 				ndlp->nlp_flag |= NLP_FIRSTBURST;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (npr->Retry)
 			ndlp->nlp_fcp_info |= NLP_FCP_2_DEVICE;

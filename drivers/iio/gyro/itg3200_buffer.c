@@ -56,11 +56,16 @@ static irqreturn_t itg3200_trigger_handler(int irq, void *p)
 		goto error_ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (indio_dev->scan_timestamp)
 		memcpy(buf + indio_dev->scan_bytes - sizeof(s64),
 				&pf->timestamp, sizeof(pf->timestamp));
 
 	iio_push_to_buffers(indio_dev, (u8 *)buf);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, buf, pf->timestamp);
+
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(indio_dev, buf, pf->timestamp);
 

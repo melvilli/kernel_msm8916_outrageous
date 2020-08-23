@@ -109,7 +109,11 @@ need_resched:
 	cmp/eq	#(0xf0>>1), r0
 	bt	noresched
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov.l	3f, r0
+=======
+	mov.l	1f, r0
+>>>>>>> v3.18
 =======
 	mov.l	1f, r0
 >>>>>>> v3.18
@@ -124,9 +128,13 @@ noresched:
 
 	.align 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	.long	PREEMPT_ACTIVE
 2:	.long	schedule
 3:	.long	preempt_schedule_irq
+=======
+1:	.long	preempt_schedule_irq
+>>>>>>> v3.18
 =======
 1:	.long	preempt_schedule_irq
 >>>>>>> v3.18
@@ -204,15 +212,21 @@ syscall_trace_entry:
 	!   	    	    	parent may have modified them using
 	!   	    	    	ptrace(POKEUSR).  (Note that R0-R2 are
 <<<<<<< HEAD
+<<<<<<< HEAD
 	!   	    	    	used by the system call handler directly
 	!   	    	    	from the kernel stack anyway, so don't need
 	!   	    	    	to be reloaded here.)  This allows the parent
 	!   	    	    	to rewrite system calls and args on the fly.
 =======
+=======
+>>>>>>> v3.18
 	!   	    	    	reloaded from the kernel stack by syscall_call
 	!   	    	    	below, so don't need to be reloaded here.)
 	!   	    	    	This allows the parent to rewrite system calls
 	!   	    	    	and args on the fly.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov.l	@(OFF_R4,r15), r4   ! arg0
 	mov.l	@(OFF_R5,r15), r5
@@ -375,9 +389,12 @@ syscall_call:
 	add	r8, r3
 	mov.l	@r3, r8
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jsr	@r8	    	! jump to specific syscall handler
 	 nop
 =======
+=======
+>>>>>>> v3.18
 	mov.l	@(OFF_R2,r15), r2
 	mov.l	@(OFF_R1,r15), r1
 	mov.l	@(OFF_R0,r15), r0
@@ -387,6 +404,9 @@ syscall_call:
 	jsr	@r8	    	! jump to specific syscall handler
 	 nop
 	add	#12, r15
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov.l	@(OFF_R0,r15), r12		! save r0
 	mov.l	r0, @(OFF_R0,r15)		! save the return value

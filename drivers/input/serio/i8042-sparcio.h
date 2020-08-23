@@ -18,7 +18,10 @@ static int i8042_aux_irq = -1;
 
 static void __iomem *kbd_iobase;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource *kbd_res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -48,6 +51,11 @@ static inline void i8042_write_command(int val)
 #ifdef CONFIG_PCI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct resource *kbd_res;
+
+>>>>>>> v3.18
 =======
 static struct resource *kbd_res;
 

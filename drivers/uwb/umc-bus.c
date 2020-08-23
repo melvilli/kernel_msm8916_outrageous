@@ -86,7 +86,11 @@ int umc_match_pci_id(struct umc_driver *umc_drv, struct umc_dev *umc)
 	struct pci_dev *pci;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (umc->dev.parent->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(umc->dev.parent))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(umc->dev.parent))
 >>>>>>> v3.18
@@ -206,6 +210,10 @@ static ssize_t capability_id_show(struct device *dev, struct device_attribute *a
 	return sprintf(buf, "0x%02x\n", umc->cap_id);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(capability_id);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(capability_id);
 >>>>>>> v3.18
@@ -217,6 +225,7 @@ static ssize_t version_show(struct device *dev, struct device_attribute *attr, c
 	return sprintf(buf, "0x%04x\n", umc->version);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute umc_dev_attrs[] = {
 	__ATTR_RO(capability_id),
@@ -224,6 +233,8 @@ static struct device_attribute umc_dev_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(version);
 
 static struct attribute *umc_dev_attrs[] = {
@@ -232,6 +243,9 @@ static struct attribute *umc_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(umc_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bus_type umc_bus_type = {
@@ -242,7 +256,11 @@ struct bus_type umc_bus_type = {
 	.suspend        = umc_device_suspend,
 	.resume         = umc_device_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= umc_dev_attrs,
+=======
+	.dev_groups	= umc_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= umc_dev_groups,
 >>>>>>> v3.18

@@ -28,6 +28,10 @@
 #include <linux/ctype.h>
 #include <linux/efi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/suspend.h>
+>>>>>>> v3.18
 =======
 #include <linux/suspend.h>
 >>>>>>> v3.18
@@ -345,6 +349,11 @@ struct samsung_laptop {
 	struct samsung_quirks *quirks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct notifier_block pm_nb;
+
+>>>>>>> v3.18
 =======
 	struct notifier_block pm_nb;
 
@@ -358,6 +367,11 @@ struct samsung_laptop {
 struct samsung_quirks {
 	bool broken_acpi_video;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool four_kbd_backlight_levels;
+	bool enable_kbd_backlight;
+>>>>>>> v3.18
 =======
 	bool four_kbd_backlight_levels;
 	bool enable_kbd_backlight;
@@ -371,12 +385,18 @@ static struct samsung_quirks samsung_broken_acpi_video = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_quirks samsung_np740u3e = {
 	.four_kbd_backlight_levels = true,
 	.enable_kbd_backlight = true,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool force;
 module_param(force, bool, 0);
@@ -1074,6 +1094,11 @@ static int __init samsung_leds_init(struct samsung_laptop *samsung)
 		samsung->kbd_led.brightness_get = kbd_led_get;
 		samsung->kbd_led.max_brightness = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (samsung->quirks->four_kbd_backlight_levels)
+			samsung->kbd_led.max_brightness = 4;
+>>>>>>> v3.18
 =======
 		if (samsung->quirks->four_kbd_backlight_levels)
 			samsung->kbd_led.max_brightness = 4;
@@ -1442,7 +1467,10 @@ static void samsung_platform_exit(struct samsung_laptop *samsung)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int samsung_pm_notification(struct notifier_block *nb,
 				   unsigned long val, void *ptr)
 {
@@ -1456,6 +1484,9 @@ static int samsung_pm_notification(struct notifier_block *nb,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init samsung_platform_init(struct samsung_laptop *samsung)
 {
@@ -1578,7 +1609,10 @@ static struct dmi_system_id __initdata samsung_dmi_table[] = {
 	 .driver_data = &samsung_broken_acpi_video,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 	 .callback = samsung_dmi_matched,
 	 .ident = "NC210",
@@ -1598,6 +1632,9 @@ static struct dmi_system_id __initdata samsung_dmi_table[] = {
 		},
 	 .driver_data = &samsung_np740u3e,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -1674,6 +1711,12 @@ static int __init samsung_init(void)
 		goto error_debugfs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	samsung->pm_nb.notifier_call = samsung_pm_notification;
+	register_pm_notifier(&samsung->pm_nb);
+
+>>>>>>> v3.18
 =======
 	samsung->pm_nb.notifier_call = samsung_pm_notification;
 	register_pm_notifier(&samsung->pm_nb);
@@ -1705,6 +1748,10 @@ static void __exit samsung_exit(void)
 
 	samsung = platform_get_drvdata(samsung_platform_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unregister_pm_notifier(&samsung->pm_nb);
+>>>>>>> v3.18
 =======
 	unregister_pm_notifier(&samsung->pm_nb);
 >>>>>>> v3.18

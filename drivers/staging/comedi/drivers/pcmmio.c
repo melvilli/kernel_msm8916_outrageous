@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/pcmmio.c
     Driver for Winsystems PC-104 based multifunction IO board.
 
@@ -78,6 +79,8 @@ Configuration Options:
 */
 
 =======
+=======
+>>>>>>> v3.18
  * pcmmio.c
  * Driver for Winsystems PC-104 based multifunction IO board.
  *
@@ -152,6 +155,9 @@ Configuration Options:
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/slab.h>
@@ -160,6 +166,7 @@ Configuration Options:
 
 #include "comedi_fc.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* This stuff is all from pcmuio.c -- it refers to the DIO subdevices only */
 #define CHANS_PER_PORT   8
@@ -388,6 +395,8 @@ static int pcmmio_dio_insn_bits(struct comedi_device *dev,
 	printk(KERN_DEBUG "s->state %08x data_out %08x\n", s->state, data[1]);
 #endif
 =======
+=======
+>>>>>>> v3.18
 /*
  * Register I/O map
  */
@@ -590,11 +599,15 @@ static int pcmmio_dio_insn_bits(struct comedi_device *dev,
 
 	/* return the true state of the channels */
 	data[1] = ~val & chanmask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* The input or output configuration of each digital line is
  * configured by a special insn_config instruction.  chanspec
@@ -660,6 +673,8 @@ static int pcmmio_dio_insn_config(struct comedi_device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int pcmmio_dio_insn_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn,
@@ -675,11 +690,15 @@ static int pcmmio_dio_insn_config(struct comedi_device *dev,
 
 	if (data[0] == INSN_CONFIG_DIO_INPUT)
 		pcmmio_dio_write(dev, s->io_bits, 0, port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void switch_page(struct comedi_device *dev, int asic, int page)
 {
@@ -789,6 +808,8 @@ static void pcmmio_stop_intr(struct comedi_device *dev,
 		outb(0, devpriv->asics[asic].iobase + REG_ENAB0 + port);
 	}
 =======
+=======
+>>>>>>> v3.18
 static void pcmmio_reset(struct comedi_device *dev)
 {
 	/* Clear all the DIO port bits */
@@ -866,11 +887,15 @@ done:
 
 	if (oldevents != s->async->events)
 		comedi_event(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t interrupt_pcmmio(int irq, void *d)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int asic, got1 = 0;
 	struct comedi_device *dev = (struct comedi_device *)d;
@@ -1102,6 +1127,8 @@ static int pcmmio_start_intr(struct comedi_device *dev,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_device *dev = d;
 	struct comedi_subdevice *s = dev->read_subdev;
 	unsigned int triggered;
@@ -1150,11 +1177,15 @@ static void pcmmio_start_intr(struct comedi_device *dev,
 	/* set polarity and enable interrupts */
 	pcmmio_dio_write(dev, pol_bits, PCMMIO_PAGE_POL, 0);
 	pcmmio_dio_write(dev, bits, PCMMIO_PAGE_ENAB, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pcmmio_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -1163,6 +1194,8 @@ static int pcmmio_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 		pcmmio_stop_intr(dev, s);
 	spin_unlock_irqrestore(&subpriv->dio.intr.spinlock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct pcmmio_private *devpriv = dev->private;
 	unsigned long flags;
 
@@ -1170,11 +1203,15 @@ static int pcmmio_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 	if (devpriv->active)
 		pcmmio_stop_intr(dev, s);
 	spin_unlock_irqrestore(&devpriv->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Internal trigger function to start acquisition for an 'INTERRUPT' subdevice.
@@ -1198,6 +1235,8 @@ pcmmio_inttrig_start_intr(struct comedi_device *dev, struct comedi_subdevice *s,
 	if (event)
 		comedi_event(dev, s);
 =======
+=======
+>>>>>>> v3.18
 static int pcmmio_inttrig_start_intr(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     unsigned int trig_num)
@@ -1214,6 +1253,9 @@ static int pcmmio_inttrig_start_intr(struct comedi_device *dev,
 	if (devpriv->active)
 		pcmmio_start_intr(dev, s);
 	spin_unlock_irqrestore(&devpriv->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -1224,6 +1266,7 @@ static int pcmmio_inttrig_start_intr(struct comedi_device *dev,
  */
 static int pcmmio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct comedi_cmd *cmd = &s->async->cmd;
 	unsigned long flags;
@@ -1260,6 +1303,8 @@ static int pcmmio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	if (event)
 		comedi_event(dev, s);
 =======
+=======
+>>>>>>> v3.18
 	struct pcmmio_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
 	unsigned long flags;
@@ -1276,6 +1321,9 @@ static int pcmmio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		pcmmio_start_intr(dev, s);
 
 	spin_unlock_irqrestore(&devpriv->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1316,6 +1364,7 @@ static int pcmmio_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (cmd->stop_src) {
 	case TRIG_COUNT:
 		/* any count allowed */
@@ -1327,10 +1376,15 @@ static int pcmmio_cmdtest(struct comedi_device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
 	else	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
@@ -1343,6 +1397,7 @@ static int pcmmio_cmdtest(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int adc_wait_ready(unsigned long iobase)
 {
@@ -1514,6 +1569,8 @@ static int ao_winsn(struct comedi_device *dev, struct comedi_subdevice *s,
 	}
 	return n;
 =======
+=======
+>>>>>>> v3.18
 static int pcmmio_ai_eoc(struct comedi_device *dev,
 			 struct comedi_subdevice *s,
 			 struct comedi_insn *insn,
@@ -1660,6 +1717,9 @@ static int pcmmio_ao_insn_write(struct comedi_device *dev,
 	}
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1667,6 +1727,7 @@ static int pcmmio_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 	struct pcmmio_private *devpriv;
 	struct comedi_subdevice *s;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int sdev_no, chans_left, n_dio_subdevs, n_subdevs, port, asic,
 	    thisasic_chanct = 0;
@@ -1679,10 +1740,15 @@ static int pcmmio_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	int ret;
 
 >>>>>>> v3.18
+=======
+	int ret;
+
+>>>>>>> v3.18
 	ret = comedi_request_region(dev, it->options[0], 32);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -1850,6 +1916,8 @@ static void pcmmio_detach(struct comedi_device *dev)
 		kfree(devpriv->sprivs);
 	comedi_legacy_detach(dev);
 =======
+=======
+>>>>>>> v3.18
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
@@ -1941,6 +2009,9 @@ static void pcmmio_detach(struct comedi_device *dev)
 	s->insn_config	= pcmmio_dio_insn_config;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1949,7 +2020,11 @@ static struct comedi_driver pcmmio_driver = {
 	.module		= THIS_MODULE,
 	.attach		= pcmmio_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= pcmmio_detach,
+=======
+	.detach		= comedi_legacy_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_legacy_detach,
 >>>>>>> v3.18
@@ -1958,7 +2033,11 @@ module_comedi_driver(pcmmio_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for Winsystems PCM-MIO PC/104 board");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for Winsystems PCM-MIO PC/104 board");
 >>>>>>> v3.18

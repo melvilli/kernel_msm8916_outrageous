@@ -161,7 +161,11 @@ the stack pointer from the checkpointed state, rather than the speculated
 state.  This ensures that the signal context (written tm suspended) will be
 written below the stack required for the rollback.  The transaction is aborted
 <<<<<<< HEAD
+<<<<<<< HEAD
 becuase of the treclaim, so any memory written between the tbegin and the
+=======
+because of the treclaim, so any memory written between the tbegin and the
+>>>>>>> v3.18
 =======
 because of the treclaim, so any memory written between the tbegin and the
 >>>>>>> v3.18

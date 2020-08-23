@@ -220,6 +220,7 @@ struct at76_req_join {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct set_mib_buffer {
 	u8 type;
 	u8 size;
@@ -232,6 +233,8 @@ struct set_mib_buffer {
 	} data;
 } __packed;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mib_local {
@@ -338,7 +341,10 @@ struct mib_mdomain {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct set_mib_buffer {
 	u8 type;
 	u8 size;
@@ -352,6 +358,9 @@ struct set_mib_buffer {
 	} data;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct at76_fw_header {
 	__le32 crc;		/* CRC32 of the whole image */
@@ -437,6 +446,10 @@ struct at76_priv {
 	int scan_mode;		/* SCAN_TYPE_ACTIVE, SCAN_TYPE_PASSIVE */
 	int scan_need_any;	/* if set, need to scan for any ESSID */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool scanning;		/* if set, the scan is running */
+>>>>>>> v3.18
 =======
 	bool scanning;		/* if set, the scan is running */
 >>>>>>> v3.18

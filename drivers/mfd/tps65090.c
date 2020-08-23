@@ -33,6 +33,7 @@
 #define TOTAL_NUM_REG 0x18
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* interrupt status registers */
 #define TPS65090_INT_STS	0x0
 #define TPS65090_INT_STS2	0x1
@@ -41,6 +42,8 @@
 #define TPS65090_INT_MSK	0x2
 #define TPS65090_INT_MSK2	0x3
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TPS65090_INT1_MASK_VAC_STATUS_CHANGE		1
@@ -68,12 +71,15 @@ static struct resource charger_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell tps65090s[] = {
 	{
 		.name = "tps65090-pmic",
 	},
 	{
 =======
+=======
+>>>>>>> v3.18
 enum tps65090_cells {
 	PMIC = 0,
 	CHARGER = 1,
@@ -84,6 +90,9 @@ static struct mfd_cell tps65090s[] = {
 		.name = "tps65090-pmic",
 	},
 	[CHARGER] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name = "tps65090-charger",
 		.num_resources = ARRAY_SIZE(charger_resources),
@@ -156,8 +165,13 @@ static struct regmap_irq_chip tps65090_irq_chip = {
 	.num_irqs = ARRAY_SIZE(tps65090_irqs),
 	.num_regs = NUM_INT_REG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.status_base = TPS65090_INT_STS,
 	.mask_base = TPS65090_INT_MSK,
+=======
+	.status_base = TPS65090_REG_INTR_STS,
+	.mask_base = TPS65090_REG_INTR_MASK,
+>>>>>>> v3.18
 =======
 	.status_base = TPS65090_REG_INTR_STS,
 	.mask_base = TPS65090_REG_INTR_MASK,
@@ -168,11 +182,14 @@ static struct regmap_irq_chip tps65090_irq_chip = {
 static bool is_volatile_reg(struct device *dev, unsigned int reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((reg == TPS65090_INT_STS) || (reg == TPS65090_INT_STS2))
 		return true;
 	else
 		return false;
 =======
+=======
+>>>>>>> v3.18
 	/* Nearly all registers have status bits mixed in, except a few */
 	switch (reg) {
 	case TPS65090_REG_INTR_MASK:
@@ -186,6 +203,9 @@ static bool is_volatile_reg(struct device *dev, unsigned int reg)
 		return false;
 	}
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -210,7 +230,11 @@ static int tps65090_i2c_probe(struct i2c_client *client,
 					const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps65090_platform_data *pdata = client->dev.platform_data;
+=======
+	struct tps65090_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct tps65090_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -253,6 +277,12 @@ static int tps65090_i2c_probe(struct i2c_client *client,
 			return ret;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else {
+		/* Don't tell children they have an IRQ that'll never fire */
+		tps65090s[CHARGER].num_resources = 0;
+>>>>>>> v3.18
 =======
 	} else {
 		/* Don't tell children they have an IRQ that'll never fire */

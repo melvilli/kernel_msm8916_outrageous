@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -29,8 +32,12 @@
  * Larry Finger <Larry.Finger@lwfinger.net>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  ****************************************************************************
  */
+=======
+ *****************************************************************************/
+>>>>>>> v3.18
 =======
  *****************************************************************************/
 >>>>>>> v3.18
@@ -38,6 +45,7 @@
 #ifndef __RTL8723E_DEF_H__
 #define __RTL8723E_DEF_H__
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define HAL_PRIME_CHNL_OFFSET_LOWER			1
 
@@ -88,6 +96,8 @@ enum version_8723e {
 		? ((GET_CVID_CUT_VERSION(version) == B_CUT_VERSION) ? \
 		true : false) : false)
 =======
+=======
+>>>>>>> v3.18
 #define HAL_RETRY_LIMIT_INFRA				48
 #define HAL_RETRY_LIMIT_AP_ADHOC			7
 
@@ -222,6 +232,9 @@ enum version_8723e {
 #define IS_81xxC_VENDOR_UMC_B_CUT(version)	((IS_CHIP_VENDOR_UMC(version))\
 		? ((GET_CVID_CUT_VERSION(version) == \
 		B_CUT_VERSION) ? true : false) : false)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum rf_optype {
@@ -243,7 +256,11 @@ enum power_save_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum power_polocy_config {
+=======
+enum power_policy_config {
+>>>>>>> v3.18
 =======
 enum power_policy_config {
 >>>>>>> v3.18
@@ -297,7 +314,10 @@ enum rtl_desc_qsel {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum rtl_desc8723e_rate {
 	DESC92C_RATE1M = 0x00,
 	DESC92C_RATE2M = 0x01,
@@ -333,6 +353,9 @@ enum rtl_desc8723e_rate {
 	DESC92C_RATEMCS32 = 0x20,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct phy_sts_cck_8723e_t {
 	u8 adc_pwdb_X[4];

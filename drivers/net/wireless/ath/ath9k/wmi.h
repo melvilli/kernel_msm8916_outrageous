@@ -40,7 +40,11 @@ struct wmi_event_swba {
 	__be64 tsf;
 	u8 beacon_pending;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18

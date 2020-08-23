@@ -10,7 +10,10 @@
 #include <linux/kexec.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/numa.h>
@@ -252,7 +255,12 @@ void machine_kexec(struct kimage *image)
 	image->start = relocate_kernel_ptr((unsigned long)image->head,
 					   (unsigned long)page_list,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   image->start, cpu_has_pae,
+=======
+					   image->start,
+					   boot_cpu_has(X86_FEATURE_PAE),
+>>>>>>> v3.18
 =======
 					   image->start,
 					   boot_cpu_has(X86_FEATURE_PAE),

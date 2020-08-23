@@ -18,6 +18,10 @@
 #include <limits.h>
 #include <stdbool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <errno.h>
+>>>>>>> v3.18
 =======
 #include <errno.h>
 >>>>>>> v3.18
@@ -28,9 +32,15 @@
 
 /* Are we using CONFIG_MODVERSIONS? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int modversions = 0;
 /* Warn about undefined symbols? (do so if we have vmlinux) */
 int have_vmlinux = 0;
+=======
+static int modversions = 0;
+/* Warn about undefined symbols? (do so if we have vmlinux) */
+static int have_vmlinux = 0;
+>>>>>>> v3.18
 =======
 static int modversions = 0;
 /* Warn about undefined symbols? (do so if we have vmlinux) */
@@ -43,8 +53,11 @@ static int external_module = 0;
 /* Warn about section mismatch in vmlinux if set to 1 */
 static int vmlinux_section_warnings = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Exit with an error when there is a section mismatch if set to 1 */
 static int section_error_on_mismatch;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Only warn about unresolved symbols */
@@ -53,6 +66,11 @@ static int warn_unresolved = 0;
 static int sec_mismatch_count = 0;
 static int sec_mismatch_verbose = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ignore missing files */
+static int ignore_missing_files;
+>>>>>>> v3.18
 =======
 /* ignore missing files */
 static int ignore_missing_files;
@@ -182,7 +200,11 @@ struct symbol {
 	unsigned int kernel:1;     /* 1 if symbol is from kernel
 				    *  (only for external modules) **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int preloaded:1;  /* 1 if symbol from Module.symvers */
+=======
+	unsigned int preloaded:1;  /* 1 if symbol from Module.symvers, or crc */
+>>>>>>> v3.18
 =======
 	unsigned int preloaded:1;  /* 1 if symbol from Module.symvers, or crc */
 >>>>>>> v3.18
@@ -251,7 +273,11 @@ static struct symbol *find_symbol(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct {
+=======
+static const struct {
+>>>>>>> v3.18
 =======
 static const struct {
 >>>>>>> v3.18
@@ -342,7 +368,11 @@ static struct symbol *sym_add_exported(const char *name, struct module *mod,
 			     is_vmlinux(s->module->name) ?"":".ko");
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* In case Modules.symvers was out of date */
+=======
+			/* In case Module.symvers was out of date */
+>>>>>>> v3.18
 =======
 			/* In case Module.symvers was out of date */
 >>>>>>> v3.18
@@ -362,14 +392,20 @@ static void sym_update_crc(const char *name, struct module *mod,
 	struct symbol *s = find_symbol(name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!s)
 		s = new_symbol(name, mod, export);
 =======
+=======
+>>>>>>> v3.18
 	if (!s) {
 		s = new_symbol(name, mod, export);
 		/* Don't complain when we find it later. */
 		s->preloaded = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s->crc = crc;
 	s->crc_valid = 1;
@@ -448,12 +484,18 @@ static int parse_elf(struct elf_info *info, const char *filename)
 	hdr = grab_file(filename, &info->size);
 	if (!hdr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (ignore_missing_files) {
 			fprintf(stderr, "%s: %s (ignored)\n", filename,
 				strerror(errno));
 			return 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		perror(filename);
 		exit(1);
@@ -652,6 +694,7 @@ static void handle_modversions(struct module *mod, struct elf_info *info,
 		export = export_from_sec(info, get_secindex(info, sym));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (sym->st_shndx) {
 	case SHN_COMMON:
 		warn("\"%s\" [%s] is COMMON symbol\n", symname, mod->name);
@@ -664,6 +707,8 @@ static void handle_modversions(struct module *mod, struct elf_info *info,
 					export);
 		}
 =======
+=======
+>>>>>>> v3.18
 	/* CRC'd symbol */
 	if (strncmp(symname, CRC_PFX, strlen(CRC_PFX)) == 0) {
 		crc = (unsigned int) sym->st_value;
@@ -677,6 +722,9 @@ static void handle_modversions(struct module *mod, struct elf_info *info,
 			/* Should warn here, but modpost runs before the linker */
 		} else
 			warn("\"%s\" [%s] is COMMON symbol\n", symname, mod->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SHN_UNDEF:
@@ -824,6 +872,7 @@ static const char *sech_name(struct elf_info *elf, Elf_Shdr *sechdr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* if sym is empty or point to a string
  * like ".[0-9]+" then return 1.
  * This is the optional prefix added by ld to some sections
@@ -844,15 +893,20 @@ static int number_prefix(const char *sym)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* The pattern is an array of simple patterns.
  * "foo" will match an exact string equal to "foo"
  * "*foo" will match a string that ends with "foo"
  * "foo*" will match a string that begins with "foo"
 <<<<<<< HEAD
+<<<<<<< HEAD
  * "foo$" will match a string equal to "foo" or "foo.1"
  *   where the '1' can be any number including several digits.
  *   The $ syntax is for sections where ld append a dot number
  *   to make section name unique.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -874,6 +928,7 @@ static int match(const char *sym, const char * const pat[])
 				return 1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* "foo$" */
 		else if (*endp == '$') {
 			if (strncmp(sym, p, strlen(p) - 1) == 0) {
@@ -881,6 +936,8 @@ static int match(const char *sym, const char * const pat[])
 					return 1;
 			}
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* no wildcards */
@@ -895,16 +952,22 @@ static int match(const char *sym, const char * const pat[])
 
 /* sections that we do not want to do full section mismatch check on */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *section_white_list[] =
 {
 	".comment*",
 	".debug*",
 =======
+=======
+>>>>>>> v3.18
 static const char *const section_white_list[] =
 {
 	".comment*",
 	".debug*",
 	".cranges",		/* sh64 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	".zdebug*",		/* Compressed debug sections. */
 	".GCC-command-line",	/* mn10300 */
@@ -920,6 +983,10 @@ static const char *const section_white_list[] =
 	".arcextmap*",			/* arc */
 	".gnu.linkonce.arcext*",	/* arc : modules */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	".gnu.lto*",
+>>>>>>> v3.18
 =======
 	".gnu.lto*",
 >>>>>>> v3.18
@@ -933,7 +1000,11 @@ static const char *const section_white_list[] =
  */
 static void check_section(const char *modname, struct elf_info *elf,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           Elf_Shdr *sechdr)
+=======
+			  Elf_Shdr *sechdr)
+>>>>>>> v3.18
 =======
 			  Elf_Shdr *sechdr)
 >>>>>>> v3.18
@@ -955,6 +1026,7 @@ static void check_section(const char *modname, struct elf_info *elf,
 
 #define ALL_INIT_DATA_SECTIONS \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	".init.setup$", ".init.rodata$", \
 	".cpuinit.rodata$", ".meminit.rodata$", \
 	".init.data$", ".cpuinit.data$", ".meminit.data$"
@@ -974,6 +1046,8 @@ static void check_section(const char *modname, struct elf_info *elf,
 #define ALL_XXXINIT_SECTIONS CPU_INIT_SECTIONS, MEM_INIT_SECTIONS
 #define ALL_XXXEXIT_SECTIONS CPU_EXIT_SECTIONS, MEM_EXIT_SECTIONS
 =======
+=======
+>>>>>>> v3.18
 	".init.setup", ".init.rodata", ".meminit.rodata", \
 	".init.data", ".meminit.data"
 #define ALL_EXIT_DATA_SECTIONS \
@@ -991,11 +1065,15 @@ static void check_section(const char *modname, struct elf_info *elf,
 
 #define ALL_XXXINIT_SECTIONS MEM_INIT_SECTIONS
 #define ALL_XXXEXIT_SECTIONS MEM_EXIT_SECTIONS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ALL_INIT_SECTIONS INIT_SECTIONS, ALL_XXXINIT_SECTIONS
 #define ALL_EXIT_SECTIONS EXIT_SECTIONS, ALL_XXXEXIT_SECTIONS
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DATA_SECTIONS ".data$", ".data.rel$"
 #define TEXT_SECTIONS ".text$"
@@ -1021,6 +1099,8 @@ static const char *init_exit_sections[] =
 /* data section */
 static const char *data_sections[] = { DATA_SECTIONS, NULL };
 =======
+=======
+>>>>>>> v3.18
 #define DATA_SECTIONS ".data", ".data.rel"
 #define TEXT_SECTIONS ".text", ".text.unlikely"
 
@@ -1043,6 +1123,9 @@ static const char *const init_exit_sections[] =
 
 /* data section */
 static const char *const data_sections[] = { DATA_SECTIONS, NULL };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1058,8 +1141,13 @@ static const char *const data_sections[] = { DATA_SECTIONS, NULL };
 	"*_console"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *head_sections[] = { ".head.text*", NULL };
 static const char *linker_symbols[] =
+=======
+static const char *const head_sections[] = { ".head.text*", NULL };
+static const char *const linker_symbols[] =
+>>>>>>> v3.18
 =======
 static const char *const head_sections[] = { ".head.text*", NULL };
 static const char *const linker_symbols[] =
@@ -1086,7 +1174,11 @@ struct sectioncheck {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct sectioncheck sectioncheck[] = {
+=======
+static const struct sectioncheck sectioncheck[] = {
+>>>>>>> v3.18
 =======
 static const struct sectioncheck sectioncheck[] = {
 >>>>>>> v3.18
@@ -1127,7 +1219,11 @@ static const struct sectioncheck sectioncheck[] = {
 	.symbol_white_list = { DEFAULT_SYMBOL_WHITE_LIST, NULL },
 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Do not reference init code/data from cpuinit/meminit code/data */
+=======
+/* Do not reference init code/data from meminit code/data */
+>>>>>>> v3.18
 =======
 /* Do not reference init code/data from meminit code/data */
 >>>>>>> v3.18
@@ -1137,6 +1233,7 @@ static const struct sectioncheck sectioncheck[] = {
 	.mismatch = XXXINIT_TO_SOME_INIT,
 	.symbol_white_list = { DEFAULT_SYMBOL_WHITE_LIST, NULL },
 },
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Do not reference cpuinit code/data from meminit code/data */
 {
@@ -1156,12 +1253,16 @@ static const struct sectioncheck sectioncheck[] = {
 =======
 /* Do not reference exit code/data from memexit code/data */
 >>>>>>> v3.18
+=======
+/* Do not reference exit code/data from memexit code/data */
+>>>>>>> v3.18
 {
 	.fromsec = { ALL_XXXEXIT_SECTIONS, NULL },
 	.tosec   = { EXIT_SECTIONS, NULL },
 	.mismatch = XXXEXIT_TO_SOME_EXIT,
 	.symbol_white_list = { DEFAULT_SYMBOL_WHITE_LIST, NULL },
 },
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Do not reference cpuexit code/data from memexit code/data */
 {
@@ -1177,6 +1278,8 @@ static const struct sectioncheck sectioncheck[] = {
 	.mismatch = XXXEXIT_TO_SOME_EXIT,
 	.symbol_white_list = { DEFAULT_SYMBOL_WHITE_LIST, NULL },
 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Do not use exit code/data from init code */
@@ -1248,8 +1351,11 @@ static const struct sectioncheck *section_mismatch(
  *   Many drivers utilise a *driver container with references to
  *   add, remove, probe functions etc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   These functions may often be marked __cpuinit and we do not want to
  *   warn here.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *   the pattern is identified by:
@@ -1351,7 +1457,11 @@ static Elf_Sym *find_elf_symbol(struct elf_info *elf, Elf64_Sword addr,
 static inline int is_arm_mapping_symbol(const char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return str[0] == '$' && strchr("atd", str[1])
+=======
+	return str[0] == '$' && strchr("axtd", str[1])
+>>>>>>> v3.18
 =======
 	return str[0] == '$' && strchr("axtd", str[1])
 >>>>>>> v3.18
@@ -1415,7 +1525,10 @@ static Elf_Sym *find_elf_symbol2(struct elf_info *elf, Elf_Addr addr,
  * Convert a section name to the function/data attribute
  * .init.text => __init
 <<<<<<< HEAD
+<<<<<<< HEAD
  * .cpuinit.data => __cpudata
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * .memexitconst => __memconst
@@ -1480,6 +1593,7 @@ static void print_section_list(const char * const list[20])
 static void report_sec_mismatch(const char *modname,
 				const struct sectioncheck *mismatch,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 const char *fromsec,
                                 unsigned long long fromaddr,
                                 const char *fromsym,
@@ -1487,12 +1601,17 @@ static void report_sec_mismatch(const char *modname,
                                 const char *tosec, const char *tosym,
                                 int to_is_func)
 =======
+=======
+>>>>>>> v3.18
 				const char *fromsec,
 				unsigned long long fromaddr,
 				const char *fromsym,
 				int from_is_func,
 				const char *tosec, const char *tosym,
 				int to_is_func)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const char *from, *from_p;
@@ -1634,7 +1753,11 @@ static void report_sec_mismatch(const char *modname,
 
 static void check_section_mismatch(const char *modname, struct elf_info *elf,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                    Elf_Rela *r, Elf_Sym *sym, const char *fromsec)
+=======
+				   Elf_Rela *r, Elf_Sym *sym, const char *fromsec)
+>>>>>>> v3.18
 =======
 				   Elf_Rela *r, Elf_Sym *sym, const char *fromsec)
 >>>>>>> v3.18
@@ -1656,11 +1779,17 @@ static void check_section_mismatch(const char *modname, struct elf_info *elf,
 		tosym = sym_name(elf, to);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (!strncmp(fromsym, "reference___initcall",
 				sizeof("reference___initcall")-1))
 			return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* check whitelist - we may ignore it */
 		if (secref_whitelist(mismatch,
@@ -1710,7 +1839,10 @@ static int addend_386_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef	R_ARM_THM_CALL
 #define	R_ARM_THM_CALL		10
 #endif
@@ -1721,6 +1853,9 @@ static int addend_386_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 #define	R_ARM_THM_JUMP19	51
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int addend_arm_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 {
@@ -1731,7 +1866,11 @@ static int addend_arm_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 		/* From ARM ABI: (S + A) | T */
 		r->r_addend = (int)(long)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		              (elf->symtab_start + ELF_R_SYM(r->r_info));
+=======
+			      (elf->symtab_start + ELF_R_SYM(r->r_info));
+>>>>>>> v3.18
 =======
 			      (elf->symtab_start + ELF_R_SYM(r->r_info));
 >>>>>>> v3.18
@@ -1740,11 +1879,14 @@ static int addend_arm_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 	case R_ARM_CALL:
 	case R_ARM_JUMP24:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* From ARM ABI: ((S + A) | T) - P */
 		r->r_addend = (int)(long)(elf->hdr +
 		              sechdr->sh_offset +
 		              (r->r_offset - sechdr->sh_addr));
 =======
+=======
+>>>>>>> v3.18
 	case R_ARM_THM_CALL:
 	case R_ARM_THM_JUMP24:
 	case R_ARM_THM_JUMP19:
@@ -1752,6 +1894,9 @@ static int addend_arm_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 		r->r_addend = (int)(long)(elf->hdr +
 			      sechdr->sh_offset +
 			      (r->r_offset - sechdr->sh_addr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1785,7 +1930,11 @@ static int addend_mips_rel(struct elf_info *elf, Elf_Shdr *sechdr, Elf_Rela *r)
 
 static void section_rela(const char *modname, struct elf_info *elf,
 <<<<<<< HEAD
+<<<<<<< HEAD
                          Elf_Shdr *sechdr)
+=======
+			 Elf_Shdr *sechdr)
+>>>>>>> v3.18
 =======
 			 Elf_Shdr *sechdr)
 >>>>>>> v3.18
@@ -1833,7 +1982,11 @@ static void section_rela(const char *modname, struct elf_info *elf,
 
 static void section_rel(const char *modname, struct elf_info *elf,
 <<<<<<< HEAD
+<<<<<<< HEAD
                         Elf_Shdr *sechdr)
+=======
+			Elf_Shdr *sechdr)
+>>>>>>> v3.18
 =======
 			Elf_Shdr *sechdr)
 >>>>>>> v3.18
@@ -1907,7 +2060,11 @@ static void section_rel(const char *modname, struct elf_info *elf,
  **/
 static void check_sec_ref(struct module *mod, const char *modname,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           struct elf_info *elf)
+=======
+			  struct elf_info *elf)
+>>>>>>> v3.18
 =======
 			  struct elf_info *elf)
 >>>>>>> v3.18
@@ -1927,7 +2084,10 @@ static void check_sec_ref(struct module *mod, const char *modname,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static char *remove_dot(char *s)
 {
 	size_t n = strcspn(s, ".");
@@ -1940,6 +2100,9 @@ static char *remove_dot(char *s)
 	return s;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void read_symbols(char *modname)
 {
@@ -1980,7 +2143,11 @@ static void read_symbols(char *modname)
 
 	for (sym = info.symtab_start; sym < info.symtab_stop; sym++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		symname = info.strtab + sym->st_name;
+=======
+		symname = remove_dot(info.strtab + sym->st_name);
+>>>>>>> v3.18
 =======
 		symname = remove_dot(info.strtab + sym->st_name);
 >>>>>>> v3.18
@@ -2133,7 +2300,11 @@ static void add_header(struct buffer *b, struct module *mod)
 	buf_printf(b, "MODULE_INFO(vermagic, VERMAGIC_STRING);\n");
 	buf_printf(b, "\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf_printf(b, "struct module __this_module\n");
+=======
+	buf_printf(b, "__visible struct module __this_module\n");
+>>>>>>> v3.18
 =======
 	buf_printf(b, "__visible struct module __this_module\n");
 >>>>>>> v3.18
@@ -2181,7 +2352,11 @@ static int add_versions(struct buffer *b, struct module *mod)
 				} else {
 					merror("\"%s\" [%s.ko] undefined!\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					          s->name, mod->name);
+=======
+					       s->name, mod->name);
+>>>>>>> v3.18
 =======
 					       s->name, mod->name);
 >>>>>>> v3.18
@@ -2353,13 +2528,19 @@ static void read_dump(const char *fname, unsigned int kernel)
 		sym_update_crc(symname, mod, crc, export_no(export));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
 fail:
 =======
+=======
+>>>>>>> v3.18
 	release_file(file, size);
 	return;
 fail:
 	release_file(file, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fatal("parse error in symbol dump file\n");
 }
@@ -2414,7 +2595,11 @@ int main(int argc, char **argv)
 	struct ext_sym_list *extsym_start = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((opt = getopt(argc, argv, "i:I:e:msST:o:awM:K:E")) != -1) {
+=======
+	while ((opt = getopt(argc, argv, "i:I:e:mnsST:o:awM:K:")) != -1) {
+>>>>>>> v3.18
 =======
 	while ((opt = getopt(argc, argv, "i:I:e:mnsST:o:awM:K:")) != -1) {
 >>>>>>> v3.18
@@ -2438,6 +2623,12 @@ int main(int argc, char **argv)
 			modversions = 1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case 'n':
+			ignore_missing_files = 1;
+			break;
+>>>>>>> v3.18
 =======
 		case 'n':
 			ignore_missing_files = 1;
@@ -2462,9 +2653,12 @@ int main(int argc, char **argv)
 			warn_unresolved = 1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 'E':
 			section_error_on_mismatch = 1;
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -2499,7 +2693,11 @@ int main(int argc, char **argv)
 
 	for (mod = modules; mod; mod = mod->next) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char fname[strlen(mod->name) + 10];
+=======
+		char fname[PATH_MAX];
+>>>>>>> v3.18
 =======
 		char fname[PATH_MAX];
 >>>>>>> v3.18
@@ -2524,6 +2722,7 @@ int main(int argc, char **argv)
 	if (dump_write)
 		write_dump(dump_write);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (sec_mismatch_count && !sec_mismatch_verbose) {
 		merror(
@@ -2542,11 +2741,16 @@ int main(int argc, char **argv)
 		"(NOTE: This is not recommended)\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (sec_mismatch_count && !sec_mismatch_verbose)
 		warn("modpost: Found %d section mismatch(es).\n"
 		     "To see full details build your kernel with:\n"
 		     "'make CONFIG_DEBUG_SECTION_MISMATCH=y'\n",
 		     sec_mismatch_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;

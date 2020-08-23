@@ -62,6 +62,10 @@ enum conf_def_mode {
 #define T_OPT_DEFCONFIG_LIST	2
 #define T_OPT_ENV		3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define T_OPT_ALLNOCONFIG_Y	4
+>>>>>>> v3.18
 =======
 #define T_OPT_ALLNOCONFIG_Y	4
 >>>>>>> v3.18
@@ -91,7 +95,11 @@ char *conf_get_default_confname(void);
 void sym_set_change_count(int count);
 void sym_add_change_count(int count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void conf_set_all_new_symbols(enum conf_def_mode mode);
+=======
+bool conf_set_all_new_symbols(enum conf_def_mode mode);
+>>>>>>> v3.18
 =======
 bool conf_set_all_new_symbols(enum conf_def_mode mode);
 >>>>>>> v3.18

@@ -57,7 +57,10 @@ static int nx_xcbc_set_key(struct crypto_shash *desc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Based on RFC 3566, for a zero-length message:
  *
@@ -129,6 +132,9 @@ out:
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nx_xcbc_init(struct shash_desc *desc)
 {
@@ -163,6 +169,7 @@ static int nx_xcbc_update(struct shash_desc *desc,
 	struct nx_csbcpb *csbcpb = nx_ctx->csbcpb;
 	struct nx_sg *in_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 to_process, leftover;
 	int rc = 0;
 
@@ -173,6 +180,8 @@ static int nx_xcbc_update(struct shash_desc *desc,
 		       csbcpb->cpb.aes_xcbc.out_cv_mac, AES_BLOCK_SIZE);
 	}
 =======
+=======
+>>>>>>> v3.18
 	u32 to_process, leftover, total;
 	u32 max_sg_len;
 	unsigned long irq_flags;
@@ -182,6 +191,9 @@ static int nx_xcbc_update(struct shash_desc *desc,
 
 
 	total = sctx->count + len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 2 cases for total data len:
@@ -189,7 +201,11 @@ static int nx_xcbc_update(struct shash_desc *desc,
 	 *  2: > AES_BLOCK_SIZE: process X blocks, copy in leftover
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len + sctx->count <= AES_BLOCK_SIZE) {
+=======
+	if (total <= AES_BLOCK_SIZE) {
+>>>>>>> v3.18
 =======
 	if (total <= AES_BLOCK_SIZE) {
 >>>>>>> v3.18
@@ -198,6 +214,7 @@ static int nx_xcbc_update(struct shash_desc *desc,
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* to_process: the AES_BLOCK_SIZE data chunk to process in this
 	 * update */
@@ -250,6 +267,8 @@ static int nx_xcbc_update(struct shash_desc *desc,
 	NX_CPB_FDM(csbcpb) |= NX_FDM_CONTINUATION;
 out:
 =======
+=======
+>>>>>>> v3.18
 	in_sg = nx_ctx->in_sg;
 	max_sg_len = min_t(u32, nx_driver.of.max_sg_len/sizeof(struct nx_sg),
 				nx_ctx->ap->sglen);
@@ -323,6 +342,9 @@ out:
 
 out:
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -334,14 +356,20 @@ static int nx_xcbc_final(struct shash_desc *desc, u8 *out)
 	struct nx_csbcpb *csbcpb = nx_ctx->csbcpb;
 	struct nx_sg *in_sg, *out_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long irq_flags;
 	int rc = 0;
 
 	spin_lock_irqsave(&nx_ctx->lock, irq_flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (NX_CPB_FDM(csbcpb) & NX_FDM_CONTINUATION) {
 		/* we've hit the nx chip previously, now we're finalizing,
@@ -349,6 +377,7 @@ static int nx_xcbc_final(struct shash_desc *desc, u8 *out)
 		memcpy(csbcpb->cpb.aes_xcbc.cv,
 		       csbcpb->cpb.aes_xcbc.out_cv_mac, AES_BLOCK_SIZE);
 	} else if (sctx->count == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* we've never seen an update, so this is a 0 byte op. The
 		 * hardware cannot handle a 0 byte op, so just copy out the
@@ -358,12 +387,17 @@ static int nx_xcbc_final(struct shash_desc *desc, u8 *out)
 			      0x45, 0x73, 0xdf, 0xd5, 0x84, 0xd7, 0x9f, 0x29 };
 		memcpy(out, data, sizeof(data));
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * we've never seen an update, so this is a 0 byte op. The
 		 * hardware cannot handle a 0 byte op, so just ECB to
 		 * generate the hash.
 		 */
 		rc = nx_xcbc_empty(desc, out);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -395,6 +429,10 @@ static int nx_xcbc_final(struct shash_desc *desc, u8 *out)
 	memcpy(out, csbcpb->cpb.aes_xcbc.out_cv_mac, AES_BLOCK_SIZE);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
 >>>>>>> v3.18

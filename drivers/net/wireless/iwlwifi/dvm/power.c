@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/mac80211.h>
@@ -49,11 +56,17 @@
 #include "power.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool force_cam = true;
 module_param(force_cam, bool, 0644);
 MODULE_PARM_DESC(force_cam, "force continuously aware mode (no power saving at all)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Setting power level allows the card to go to sleep when not busy.
@@ -178,7 +191,11 @@ static void iwl_static_sleep_cmd(struct iwl_priv *priv,
 	u32 slp_itrvl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->adv_pm) {
+=======
+	if (priv->lib->adv_pm) {
+>>>>>>> v3.18
 =======
 	if (priv->lib->adv_pm) {
 >>>>>>> v3.18
@@ -236,7 +253,11 @@ static void iwl_static_sleep_cmd(struct iwl_priv *priv,
 
 	if (iwl_advanced_bt_coexist(priv)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!priv->cfg->bt_params->bt_sco_disable)
+=======
+		if (!priv->lib->bt_params->bt_sco_disable)
+>>>>>>> v3.18
 =======
 		if (!priv->lib->bt_params->bt_sco_disable)
 >>>>>>> v3.18
@@ -302,7 +323,11 @@ static int iwl_set_power(struct iwl_priv *priv, struct iwl_powertable_cmd *cmd)
 			le32_to_cpu(cmd->sleep_interval[4]));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_dvm_send_cmd_pdu(priv, POWER_TABLE_CMD, CMD_SYNC,
+=======
+	return iwl_dvm_send_cmd_pdu(priv, POWER_TABLE_CMD, 0,
+>>>>>>> v3.18
 =======
 	return iwl_dvm_send_cmd_pdu(priv, POWER_TABLE_CMD, 0,
 >>>>>>> v3.18
@@ -316,19 +341,29 @@ static void iwl_power_build_cmd(struct iwl_priv *priv,
 	int dtimper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (force_cam) {
 		iwl_power_sleep_cam_cmd(priv, cmd);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dtimper = priv->hw->conf.ps_dtim_period ?: 1;
 
 	if (priv->wowlan)
 		iwl_static_sleep_cmd(priv, cmd, IWL_POWER_INDEX_5, dtimper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (!priv->cfg->base_params->no_idle_support &&
+=======
+	else if (!priv->lib->no_idle_support &&
+>>>>>>> v3.18
 =======
 	else if (!priv->lib->no_idle_support &&
 >>>>>>> v3.18
@@ -401,7 +436,11 @@ int iwl_power_set_mode(struct iwl_priv *priv, struct iwl_powertable_cmd *cmd,
 		memcpy(&priv->power_data.sleep_cmd, cmd, sizeof(*cmd));
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IWL_ERR(priv, "set power fail, ret = %d", ret);
+=======
+		IWL_ERR(priv, "set power fail, ret = %d\n", ret);
+>>>>>>> v3.18
 =======
 		IWL_ERR(priv, "set power fail, ret = %d\n", ret);
 >>>>>>> v3.18

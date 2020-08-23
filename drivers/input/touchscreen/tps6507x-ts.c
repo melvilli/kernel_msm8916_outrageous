@@ -18,6 +18,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/input-polldev.h>
+>>>>>>> v3.18
 =======
 #include <linux/input-polldev.h>
 >>>>>>> v3.18
@@ -43,6 +47,7 @@ struct ts_event {
 
 struct tps6507x_ts {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct input_dev	*input_dev;
 	struct device		*dev;
 	char			phys[32];
@@ -58,6 +63,8 @@ struct tps6507x_ts {
 	u16			min_pressure;
 	int			vref;		/* non-zero to leave vref on */
 =======
+=======
+>>>>>>> v3.18
 	struct device		*dev;
 	struct input_polled_dev	*poll_dev;
 	struct tps6507x_dev	*mfd;
@@ -65,6 +72,9 @@ struct tps6507x_ts {
 	struct ts_event		tc;
 	u16			min_pressure;
 	bool			pendown;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -176,6 +186,7 @@ static s32 tps6507x_adc_standby(struct tps6507x_ts *tsc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tps6507x_ts_handler(struct work_struct *work)
 {
 	struct tps6507x_ts *tsc =  container_of(work,
@@ -189,6 +200,8 @@ static void tps6507x_ts_handler(struct work_struct *work)
 	ret =  tps6507x_adc_conversion(tsc, TPS6507X_TSCMODE_PRESSURE,
 				       &tsc->tc.pressure);
 =======
+=======
+>>>>>>> v3.18
 static void tps6507x_ts_poll(struct input_polled_dev *poll_dev)
 {
 	struct tps6507x_ts *tsc = poll_dev->private;
@@ -198,6 +211,9 @@ static void tps6507x_ts_poll(struct input_polled_dev *poll_dev)
 
 	ret = tps6507x_adc_conversion(tsc, TPS6507X_TSCMODE_PRESSURE,
 				      &tsc->tc.pressure);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto done;
@@ -210,7 +226,11 @@ static void tps6507x_ts_poll(struct input_polled_dev *poll_dev)
 		input_report_abs(input_dev, ABS_PRESSURE, 0);
 		input_sync(input_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsc->pendown = 0;
+=======
+		tsc->pendown = false;
+>>>>>>> v3.18
 =======
 		tsc->pendown = false;
 >>>>>>> v3.18
@@ -239,6 +259,7 @@ static void tps6507x_ts_poll(struct input_polled_dev *poll_dev)
 		input_report_abs(input_dev, ABS_PRESSURE, tsc->tc.pressure);
 		input_sync(input_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsc->pendown = 1;
 		poll = 1;
 	}
@@ -261,16 +282,22 @@ done:
 
 	ret = tps6507x_adc_standby(tsc);
 =======
+=======
+>>>>>>> v3.18
 		tsc->pendown = true;
 	}
 
 done:
 	tps6507x_adc_standby(tsc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int tps6507x_ts_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int error;
 	struct tps6507x_ts *tsc;
@@ -299,6 +326,8 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 	 */
 
 =======
+=======
+>>>>>>> v3.18
 	struct tps6507x_dev *tps6507x_dev = dev_get_drvdata(pdev->dev.parent);
 	const struct tps6507x_board *tps_board;
 	const struct touchscreen_init_data *init_data;
@@ -322,12 +351,16 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 	 * init_data points to array of regulator_init structures
 	 * coming from the board-evm file.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	init_data = tps_board->tps6507x_ts_init_data;
 
 	tsc = kzalloc(sizeof(struct tps6507x_ts), GFP_KERNEL);
 	if (!tsc) {
 		dev_err(tps6507x_dev->dev, "failed to allocate driver data\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = -ENOMEM;
 		goto err0;
@@ -344,6 +377,8 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
@@ -370,6 +405,9 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 			init_data->poll_period : TSC_DEFAULT_POLL_PERIOD;
 
 	input_dev = poll_dev->input;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	input_dev->evbit[0] = BIT_MASK(EV_KEY) | BIT_MASK(EV_ABS);
 	input_dev->keybit[BIT_WORD(BTN_TOUCH)] = BIT_MASK(BTN_TOUCH);
@@ -379,6 +417,7 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 	input_set_abs_params(input_dev, ABS_PRESSURE, 0, MAX_10BIT, 0, 0);
 
 	input_dev->name = "TPS6507x Touchscreen";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input_dev->id.bustype = BUS_I2C;
 	input_dev->dev.parent = tsc->dev;
@@ -406,6 +445,8 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 		tsc->poll_period = TSC_DEFAULT_POLL_PERIOD;
 		tsc->min_pressure = TPS_DEFAULT_MIN_PRESSURE;
 =======
+=======
+>>>>>>> v3.18
 	input_dev->phys = tsc->phys;
 	input_dev->dev.parent = tsc->dev;
 	input_dev->id.bustype = BUS_I2C;
@@ -413,11 +454,15 @@ static int tps6507x_ts_probe(struct platform_device *pdev)
 		input_dev->id.vendor = init_data->vendor;
 		input_dev->id.product = init_data->product;
 		input_dev->id.version = init_data->version;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	error = tps6507x_adc_standby(tsc);
 	if (error)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err2;
 
@@ -447,6 +492,8 @@ err1:
 	tps6507x_dev->ts = NULL;
 err0:
 =======
+=======
+>>>>>>> v3.18
 		goto err_free_polled_dev;
 
 	error = input_register_polled_device(poll_dev);
@@ -461,12 +508,16 @@ err_free_polled_dev:
 	input_free_polled_device(poll_dev);
 err_free_mem:
 	kfree(tsc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return error;
 }
 
 static int tps6507x_ts_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tps6507x_dev *tps6507x_dev = platform_get_drvdata(pdev);
 	struct tps6507x_ts *tsc = tps6507x_dev->ts;
@@ -478,12 +529,17 @@ static int tps6507x_ts_remove(struct platform_device *pdev)
 
 	tps6507x_dev->ts = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct tps6507x_ts *tsc = platform_get_drvdata(pdev);
 	struct input_polled_dev *poll_dev = tsc->poll_dev;
 
 	input_unregister_polled_device(poll_dev);
 	input_free_polled_device(poll_dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(tsc);
 

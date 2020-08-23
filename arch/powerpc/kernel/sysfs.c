@@ -52,8 +52,11 @@ static ssize_t store_smt_snooze_delay(struct device *dev,
 
 	per_cpu(smt_snooze_delay, cpu->dev.id) = snooze;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	update_smt_snooze_delay(cpu->dev.id, snooze);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return count;
@@ -90,7 +93,10 @@ __setup("smt-snooze-delay=", setup_smt_snooze_delay);
 #endif /* CONFIG_PPC64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 #define MAX_BIT				63
 
@@ -389,6 +395,9 @@ static DEVICE_ATTR(altivec_idle_wait_time, 0600,
 			store_altivec_idle_wait_time);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Enabling PMCs will slow partition context switch times so we only do
@@ -413,7 +422,11 @@ void ppc_enable_pmcs(void)
 EXPORT_SYMBOL(ppc_enable_pmcs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYSFS_PMCSETUP(NAME, ADDRESS) \
+=======
+#define __SYSFS_SPRSETUP_READ_WRITE(NAME, ADDRESS, EXTRA) \
+>>>>>>> v3.18
 =======
 #define __SYSFS_SPRSETUP_READ_WRITE(NAME, ADDRESS, EXTRA) \
 >>>>>>> v3.18
@@ -424,15 +437,21 @@ static void read_##NAME(void *val) \
 static void write_##NAME(void *val) \
 { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ppc_enable_pmcs(); \
 	mtspr(ADDRESS, *(unsigned long *)val);	\
 } \
 =======
+=======
+>>>>>>> v3.18
 	EXTRA; \
 	mtspr(ADDRESS, *(unsigned long *)val);	\
 }
 
 #define __SYSFS_SPRSETUP_SHOW_STORE(NAME) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t show_##NAME(struct device *dev, \
 			struct device_attribute *attr, \
@@ -457,7 +476,10 @@ static ssize_t __used \
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SYSFS_PMCSETUP(NAME, ADDRESS) \
 	__SYSFS_SPRSETUP_READ_WRITE(NAME, ADDRESS, ppc_enable_pmcs()) \
 	__SYSFS_SPRSETUP_SHOW_STORE(NAME)
@@ -467,6 +489,9 @@ static ssize_t __used \
 
 #define SYSFS_SPRSETUP_SHOW_STORE(NAME) \
 	__SYSFS_SPRSETUP_SHOW_STORE(NAME)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Let's define all possible registers, we'll only hook up the ones
@@ -504,10 +529,16 @@ SYSFS_PMCSETUP(pmc8, SPRN_PMC8);
 
 SYSFS_PMCSETUP(mmcra, SPRN_MMCRA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSFS_PMCSETUP(purr, SPRN_PURR);
 SYSFS_PMCSETUP(spurr, SPRN_SPURR);
 SYSFS_PMCSETUP(dscr, SPRN_DSCR);
 SYSFS_PMCSETUP(pir, SPRN_PIR);
+=======
+SYSFS_SPRSETUP(purr, SPRN_PURR);
+SYSFS_SPRSETUP(spurr, SPRN_SPURR);
+SYSFS_SPRSETUP(pir, SPRN_PIR);
+>>>>>>> v3.18
 =======
 SYSFS_SPRSETUP(purr, SPRN_PURR);
 SYSFS_SPRSETUP(spurr, SPRN_SPURR);
@@ -522,6 +553,7 @@ SYSFS_SPRSETUP(pir, SPRN_PIR);
 static DEVICE_ATTR(mmcra, 0600, show_mmcra, store_mmcra);
 static DEVICE_ATTR(spurr, 0400, show_spurr, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(dscr, 0600, show_dscr, store_dscr);
 static DEVICE_ATTR(purr, 0400, show_purr, store_purr);
 static DEVICE_ATTR(pir, 0400, show_pir, NULL);
@@ -529,6 +561,8 @@ static DEVICE_ATTR(pir, 0400, show_pir, NULL);
 unsigned long dscr_default = 0;
 EXPORT_SYMBOL(dscr_default);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(purr, 0400, show_purr, store_purr);
 static DEVICE_ATTR(pir, 0400, show_pir, NULL);
 
@@ -550,6 +584,9 @@ static void write_dscr(void *val)
 
 SYSFS_SPRSETUP_SHOW_STORE(dscr);
 static DEVICE_ATTR(dscr, 0600, show_dscr, store_dscr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void add_write_permission_dev_attr(struct device_attribute *attr)
@@ -564,6 +601,7 @@ static ssize_t show_dscr_default(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void update_dscr(void *dummy)
 {
 	if (!current->thread.dscr_inherit) {
@@ -572,6 +610,8 @@ static void update_dscr(void *dummy)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t __used store_dscr_default(struct device *dev,
@@ -587,7 +627,11 @@ static ssize_t __used store_dscr_default(struct device *dev,
 	dscr_default = val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	on_each_cpu(update_dscr, NULL, 1);
+=======
+	on_each_cpu(write_dscr, &val, 1);
+>>>>>>> v3.18
 =======
 	on_each_cpu(write_dscr, &val, 1);
 >>>>>>> v3.18
@@ -614,6 +658,7 @@ SYSFS_PMCSETUP(pa6t_pmc3, SPRN_PA6T_PMC3);
 SYSFS_PMCSETUP(pa6t_pmc4, SPRN_PA6T_PMC4);
 SYSFS_PMCSETUP(pa6t_pmc5, SPRN_PA6T_PMC5);
 #ifdef CONFIG_DEBUG_KERNEL
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSFS_PMCSETUP(hid0, SPRN_HID0);
 SYSFS_PMCSETUP(hid1, SPRN_HID1);
@@ -644,6 +689,8 @@ SYSFS_PMCSETUP(tsr1, SPRN_PA6T_TSR1);
 SYSFS_PMCSETUP(tsr2, SPRN_PA6T_TSR2);
 SYSFS_PMCSETUP(tsr3, SPRN_PA6T_TSR3);
 =======
+=======
+>>>>>>> v3.18
 SYSFS_SPRSETUP(hid0, SPRN_HID0);
 SYSFS_SPRSETUP(hid1, SPRN_HID1);
 SYSFS_SPRSETUP(hid4, SPRN_HID4);
@@ -672,6 +719,9 @@ SYSFS_SPRSETUP(tsr0, SPRN_PA6T_TSR0);
 SYSFS_SPRSETUP(tsr1, SPRN_PA6T_TSR1);
 SYSFS_SPRSETUP(tsr2, SPRN_PA6T_TSR2);
 SYSFS_SPRSETUP(tsr3, SPRN_PA6T_TSR3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_DEBUG_KERNEL */
 #endif /* HAS_PPC_PMC_PA6T */
@@ -749,7 +799,11 @@ static struct device_attribute pa6t_attrs[] = {
 #endif /* HAS_PPC_PMC_CLASSIC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit register_cpu_online(unsigned int cpu)
+=======
+static void register_cpu_online(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void register_cpu_online(unsigned int cpu)
 >>>>>>> v3.18
@@ -822,7 +876,10 @@ static void register_cpu_online(unsigned int cpu)
 #endif /* CONFIG_PPC64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 	if (PVR_VER(cur_cpu_spec->pvr_value) == PVR_VER_E6500) {
 		device_create_file(s, &dev_attr_pw20_state);
@@ -832,6 +889,9 @@ static void register_cpu_online(unsigned int cpu)
 		device_create_file(s, &dev_attr_altivec_idle_wait_time);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cacheinfo_cpu_online(cpu);
 }
@@ -906,7 +966,10 @@ static void unregister_cpu_online(unsigned int cpu)
 #endif /* CONFIG_PPC64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 	if (PVR_VER(cur_cpu_spec->pvr_value) == PVR_VER_E6500) {
 		device_remove_file(s, &dev_attr_pw20_state);
@@ -916,6 +979,9 @@ static void unregister_cpu_online(unsigned int cpu)
 		device_remove_file(s, &dev_attr_altivec_idle_wait_time);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cacheinfo_cpu_offline(cpu);
 }
@@ -941,7 +1007,11 @@ ssize_t arch_cpu_release(const char *buf, size_t count)
 #endif /* CONFIG_HOTPLUG_CPU */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit sysfs_cpu_notify(struct notifier_block *self,
+=======
+static int sysfs_cpu_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int sysfs_cpu_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -965,7 +1035,11 @@ static int sysfs_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata sysfs_cpu_nb = {
+=======
+static struct notifier_block sysfs_cpu_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block sysfs_cpu_nb = {
 >>>>>>> v3.18
@@ -1090,7 +1164,12 @@ static int __init topology_init(void)
 
 	register_nodes();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_cpu_notifier(&sysfs_cpu_nb);
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_begin();
@@ -1119,12 +1198,18 @@ static int __init topology_init(void)
 			register_cpu_online(cpu);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	__register_cpu_notifier(&sysfs_cpu_nb);
 
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC64
 	sysfs_create_dscr_default();

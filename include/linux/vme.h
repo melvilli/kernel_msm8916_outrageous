@@ -165,7 +165,12 @@ int vme_lm_detach(struct vme_resource *, int);
 void vme_lm_free(struct vme_resource *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vme_slot_get(struct vme_dev *);
+=======
+int vme_slot_num(struct vme_dev *);
+int vme_bus_num(struct vme_dev *);
+>>>>>>> v3.18
 =======
 int vme_slot_num(struct vme_dev *);
 int vme_bus_num(struct vme_dev *);

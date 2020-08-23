@@ -26,7 +26,11 @@ static void atm_push_raw(struct atm_vcc *vcc, struct sk_buff *skb)
 
 		skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18

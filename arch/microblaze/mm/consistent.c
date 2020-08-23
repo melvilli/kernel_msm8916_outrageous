@@ -118,7 +118,11 @@ void *consistent_alloc(gfp_t gfp, size_t size, dma_addr_t *dma_handle)
 
 	/* This gives us the real physical address of the first page. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*dma_handle = pa = virt_to_bus((void *)vaddr);
+=======
+	*dma_handle = pa = __virt_to_phys(vaddr);
+>>>>>>> v3.18
 =======
 	*dma_handle = pa = __virt_to_phys(vaddr);
 >>>>>>> v3.18
@@ -181,8 +185,12 @@ void consistent_free(size_t size, void *vaddr)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ClearPageReserved(page);
 		__free_page(page);
+=======
+		__free_reserved_page(page);
+>>>>>>> v3.18
 =======
 		__free_reserved_page(page);
 >>>>>>> v3.18
@@ -203,9 +211,13 @@ void consistent_free(size_t size, void *vaddr)
 			if (pfn_valid(pfn)) {
 				page = pfn_to_page(pfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				ClearPageReserved(page);
 				__free_page(page);
+=======
+				__free_reserved_page(page);
+>>>>>>> v3.18
 =======
 				__free_reserved_page(page);
 >>>>>>> v3.18

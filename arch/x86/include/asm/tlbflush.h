@@ -18,6 +18,7 @@
 static inline void __native_flush_tlb(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If current->mm == NULL then we borrow a mm which may change during a
 	 * task switch and therefore we must not be preempted while we write CR3
@@ -26,6 +27,9 @@ static inline void __native_flush_tlb(void)
 	preempt_disable();
 	native_write_cr3(native_read_cr3());
 	preempt_enable();
+=======
+	native_write_cr3(native_read_cr3());
+>>>>>>> v3.18
 =======
 	native_write_cr3(native_read_cr3());
 >>>>>>> v3.18
@@ -74,7 +78,12 @@ static inline void __flush_tlb_all(void)
 static inline void __flush_tlb_one(unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_tlb_single(addr);
+=======
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ONE);
+	__flush_tlb_single(addr);
+>>>>>>> v3.18
 =======
 	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ONE);
 	__flush_tlb_single(addr);
@@ -101,10 +110,13 @@ static inline void __flush_tlb_one(unsigned long addr)
 #ifndef CONFIG_SMP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flush_tlb() __flush_tlb()
 #define flush_tlb_all() __flush_tlb_all()
 #define local_flush_tlb() __flush_tlb()
 =======
+=======
+>>>>>>> v3.18
 /* "_up" is for UniProcessor.
  *
  * This is a helper for other header functions.  *Not* intended to be called
@@ -132,13 +144,20 @@ static inline void local_flush_tlb(void)
 {
 	__flush_tlb_up();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void flush_tlb_mm(struct mm_struct *mm)
 {
 	if (mm == current->active_mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_tlb();
+=======
+		__flush_tlb_up();
+>>>>>>> v3.18
 =======
 		__flush_tlb_up();
 >>>>>>> v3.18
@@ -156,7 +175,11 @@ static inline void flush_tlb_range(struct vm_area_struct *vma,
 {
 	if (vma->vm_mm == current->active_mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_tlb();
+=======
+		__flush_tlb_up();
+>>>>>>> v3.18
 =======
 		__flush_tlb_up();
 >>>>>>> v3.18
@@ -167,7 +190,11 @@ static inline void flush_tlb_mm_range(struct mm_struct *mm,
 {
 	if (mm == current->active_mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_tlb();
+=======
+		__flush_tlb_up();
+>>>>>>> v3.18
 =======
 		__flush_tlb_up();
 >>>>>>> v3.18

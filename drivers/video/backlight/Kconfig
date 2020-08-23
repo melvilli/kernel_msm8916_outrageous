@@ -30,7 +30,11 @@ if LCD_CLASS_DEVICE
 config LCD_CORGI
 	tristate "LCD Panel support for SHARP corgi/spitz model"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SPI_MASTER && PXA_SHARPSL
+=======
+	depends on SPI_MASTER && PXA_SHARPSL && BACKLIGHT_CLASS_DEVICE
+>>>>>>> v3.18
 =======
 	depends on SPI_MASTER && PXA_SHARPSL && BACKLIGHT_CLASS_DEVICE
 >>>>>>> v3.18
@@ -183,6 +187,7 @@ config BACKLIGHT_ATMEL_LCDC
 	  in unless the board's description says it's wired that way.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BACKLIGHT_ATMEL_PWM
 	tristate "Atmel PWM backlight control"
 	depends on ATMEL_PWM
@@ -194,6 +199,8 @@ config BACKLIGHT_ATMEL_PWM
 	  To compile this driver as a module, choose M here: the module will be
 	  called atmel-pwm-bl.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config BACKLIGHT_EP93XX
@@ -215,7 +222,10 @@ config BACKLIGHT_GENERIC
 	  SL-C7xx, SL-Cxx00 or SL-6000x say y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BACKLIGHT_IPAQ_MICRO
 	tristate "iPAQ microcontroller backlight driver"
 	depends on MFD_IPAQ_MICRO
@@ -225,6 +235,9 @@ config BACKLIGHT_IPAQ_MICRO
 	  computers. Say yes if you have one of the h3100/h3600/h3700
 	  machines.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config BACKLIGHT_LM3533
 	tristate "Backlight Driver for LM3533"
@@ -388,6 +401,7 @@ config BACKLIGHT_AAT2870
 	  backlight driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BACKLIGHT_LM3630
 	tristate "Backlight Driver for LM3630"
 	depends on BACKLIGHT_CLASS_DEVICE && I2C
@@ -395,12 +409,17 @@ config BACKLIGHT_LM3630
 	help
 	  This supports TI LM3630 Backlight Driver
 =======
+=======
+>>>>>>> v3.18
 config BACKLIGHT_LM3630A
 	tristate "Backlight Driver for LM3630A"
 	depends on BACKLIGHT_CLASS_DEVICE && I2C && PWM
 	select REGMAP_I2C
 	help
 	  This supports TI LM3630A Backlight Driver
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config BACKLIGHT_LM3639
@@ -415,6 +434,7 @@ config BACKLIGHT_LM3639
 config BACKLIGHT_LP855X
 	tristate "Backlight driver for TI LP855X"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on BACKLIGHT_CLASS_DEVICE && I2C
 	help
 	  This supports TI LP8550, LP8551, LP8552, LP8553, LP8556 and LP8557
@@ -424,6 +444,8 @@ config BACKLIGHT_LP8788
 	tristate "Backlight driver for TI LP8788 MFD"
 	depends on BACKLIGHT_CLASS_DEVICE && MFD_LP8788
 =======
+=======
+>>>>>>> v3.18
 	depends on BACKLIGHT_CLASS_DEVICE && I2C && PWM
 	help
 	  This supports TI LP8550, LP8551, LP8552, LP8553, LP8555, LP8556 and
@@ -432,6 +454,9 @@ config BACKLIGHT_LP8788
 config BACKLIGHT_LP8788
 	tristate "Backlight driver for TI LP8788 MFD"
 	depends on BACKLIGHT_CLASS_DEVICE && MFD_LP8788 && PWM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This supports TI LP8788 backlight driver.
@@ -465,7 +490,10 @@ config BACKLIGHT_AS3711
 	  backlight driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BACKLIGHT_GPIO
 	tristate "Generic GPIO based Backlight Driver"
 	depends on GPIOLIB
@@ -485,6 +513,9 @@ config BACKLIGHT_BD6107
 	help
 	  If you have a Rohm BD6107 say Y to enable the backlight driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # BACKLIGHT_CLASS_DEVICE
 

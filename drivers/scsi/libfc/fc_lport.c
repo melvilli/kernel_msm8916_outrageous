@@ -517,7 +517,11 @@ static void fc_lport_recv_rnid_req(struct fc_lport *lport,
  * @fp:	   The LOGO request frame
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Locking Note: The lport lock is exected to be held before calling
+=======
+ * Locking Note: The lport lock is expected to be held before calling
+>>>>>>> v3.18
 =======
  * Locking Note: The lport lock is expected to be held before calling
 >>>>>>> v3.18
@@ -1093,7 +1097,11 @@ static void fc_lport_error(struct fc_lport *lport, struct fc_frame *fp)
 	unsigned long delay = 0;
 	FC_LPORT_DBG(lport, "Error %ld in state %s, retries %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     PTR_ERR(fp), fc_lport_state(lport),
+=======
+		     IS_ERR(fp) ? -PTR_ERR(fp) : 0, fc_lport_state(lport),
+>>>>>>> v3.18
 =======
 		     IS_ERR(fp) ? -PTR_ERR(fp) : 0, fc_lport_state(lport),
 >>>>>>> v3.18

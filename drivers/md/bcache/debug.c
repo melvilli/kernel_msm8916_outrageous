@@ -9,7 +9,11 @@
 #include "btree.h"
 #include "debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "request.h"
+=======
+#include "extents.h"
+>>>>>>> v3.18
 =======
 #include "extents.h"
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 
 static struct dentry *debug;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const char *bch_ptr_status(struct cache_set *c, const struct bkey *k)
 {
@@ -176,6 +181,8 @@ void bch_btree_verify(struct btree *b, struct bset *new)
 				break;
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BCACHE_DEBUG
 
 #define for_each_written_bset(b, start, i)				\
@@ -252,12 +259,16 @@ void bch_btree_verify(struct btree *b)
 
 		printk(KERN_ERR "b->written %u\n", b->written);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		console_unlock();
 		panic("verify failed at %u\n", j);
 	}
 
 	mutex_unlock(&b->c->verify_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -313,6 +324,8 @@ void bch_data_verify(struct search *s)
 	__bio_for_each_segment(bv, check, i, 0)
 		__free_page(bv->bv_page);
 =======
+=======
+>>>>>>> v3.18
 	up(&b->io_mutex);
 }
 
@@ -350,6 +363,9 @@ void bch_data_verify(struct cached_dev *dc, struct bio *bio)
 
 	bio_for_each_segment_all(bv2, check, i)
 		__free_page(bv2->bv_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_put:
 	bio_put(check);
@@ -357,6 +373,7 @@ out_put:
 
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_BCACHE_EDEBUG
 
@@ -442,6 +459,8 @@ bug:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 
 /* XXX: cache set refcounting */
@@ -464,6 +483,10 @@ static ssize_t bch_dump_read(struct file *file, char __user *buf,
 	struct dump_iterator *i = file->private_data;
 	ssize_t ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char kbuf[80];
+>>>>>>> v3.18
 =======
 	char kbuf[80];
 >>>>>>> v3.18
@@ -486,18 +509,24 @@ static ssize_t bch_dump_read(struct file *file, char __user *buf,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		w = bch_keybuf_next_rescan(i->c, &i->keys, &MAX_KEY);
 		if (!w)
 			break;
 
 		i->bytes = snprintf(i->buf, PAGE_SIZE, "%s\n", pkey(&w->key));
 =======
+=======
+>>>>>>> v3.18
 		w = bch_keybuf_next_rescan(i->c, &i->keys, &MAX_KEY, dump_pred);
 		if (!w)
 			break;
 
 		bch_extent_to_text(kbuf, sizeof(kbuf), &w->key);
 		i->bytes = snprintf(i->buf, PAGE_SIZE, "%s\n", kbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bch_keybuf_del(&i->keys, w);
 	}
@@ -517,7 +546,11 @@ static int bch_dump_open(struct inode *inode, struct file *file)
 	file->private_data = i;
 	i->c = c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bch_keybuf_init(&i->keys, dump_pred);
+=======
+	bch_keybuf_init(&i->keys);
+>>>>>>> v3.18
 =======
 	bch_keybuf_init(&i->keys);
 >>>>>>> v3.18
@@ -552,6 +585,7 @@ void bch_debug_init_cache_set(struct cache_set *c)
 
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Fuzz tester has rotted: */
 #if 0
@@ -691,6 +725,8 @@ kobj_attribute_write(fuzz, btree_fuzz);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void bch_debug_exit(void)
 {
 	if (!IS_ERR_OR_NULL(debug))
@@ -701,11 +737,14 @@ int __init bch_debug_init(struct kobject *kobj)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 	ret = sysfs_create_file(kobj, &ksysfs_fuzz.attr);
 	if (ret)
 		return ret;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

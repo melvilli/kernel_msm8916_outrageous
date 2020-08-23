@@ -37,6 +37,10 @@
 
 #include "netns.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "procfs.h"
+>>>>>>> v3.18
 =======
 #include "procfs.h"
 >>>>>>> v3.18
@@ -142,11 +146,17 @@ lockd(void *vrqstp)
 	dprintk("NFS locking service started (ver " LOCKD_VERSION ").\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!nlm_timeout)
 		nlm_timeout = LOCKD_DFLT_TIMEO;
 	nlmsvc_timeout = nlm_timeout * HZ;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The main request loop. We don't terminate until the last
@@ -312,7 +322,11 @@ static int lockd_start_svc(struct svc_serv *serv)
 	serv->sv_maxconn = nlm_max_connections;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nlmsvc_task = kthread_run(lockd, nlmsvc_rqst, serv->sv_name);
+=======
+	nlmsvc_task = kthread_create(lockd, nlmsvc_rqst, "%s", serv->sv_name);
+>>>>>>> v3.18
 =======
 	nlmsvc_task = kthread_create(lockd, nlmsvc_rqst, "%s", serv->sv_name);
 >>>>>>> v3.18
@@ -323,6 +337,12 @@ static int lockd_start_svc(struct svc_serv *serv)
 		goto out_task;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nlmsvc_rqst->rq_task = nlmsvc_task;
+	wake_up_process(nlmsvc_task);
+
+>>>>>>> v3.18
 =======
 	nlmsvc_rqst->rq_task = nlmsvc_task;
 	wake_up_process(nlmsvc_task);
@@ -364,10 +384,13 @@ static struct svc_serv *lockd_create_svc(void)
 			"lockd_up: no pid, %d users??\n", nlmsvc_users);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nlm_timeout)
 		nlm_timeout = LOCKD_DFLT_TIMEO;
 	nlmsvc_timeout = nlm_timeout * HZ;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	serv = svc_create(&nlmsvc_program, LOCKD_BUFSIZE, NULL);
@@ -459,7 +482,11 @@ EXPORT_SYMBOL_GPL(lockd_down);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nlm_sysctls[] = {
+=======
+static struct ctl_table nlm_sysctls[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nlm_sysctls[] = {
 >>>>>>> v3.18
@@ -517,7 +544,11 @@ static struct ctl_table nlm_sysctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nlm_sysctl_dir[] = {
+=======
+static struct ctl_table nlm_sysctl_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nlm_sysctl_dir[] = {
 >>>>>>> v3.18
@@ -530,7 +561,11 @@ static struct ctl_table nlm_sysctl_dir[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nlm_sysctl_root[] = {
+=======
+static struct ctl_table nlm_sysctl_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nlm_sysctl_root[] = {
 >>>>>>> v3.18
@@ -618,9 +653,14 @@ static int lockd_init_net(struct net *net)
 
 	INIT_DELAYED_WORK(&ln->grace_period_end, grace_ender);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&ln->grace_list);
 	spin_lock_init(&ln->nsm_clnt_lock);
 	INIT_LIST_HEAD(&ln->nsm_handles);
+=======
+	INIT_LIST_HEAD(&ln->lockd_manager.list);
+	spin_lock_init(&ln->nsm_clnt_lock);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ln->lockd_manager.list);
 	spin_lock_init(&ln->nsm_clnt_lock);
@@ -658,6 +698,7 @@ static int __init init_nlm(void)
 	if (err)
 		goto err_pernet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 err_pernet:
@@ -666,6 +707,8 @@ err_pernet:
 #endif
 err_sysctl:
 =======
+=======
+>>>>>>> v3.18
 
 	err = lockd_create_procfs();
 	if (err)
@@ -680,6 +723,9 @@ err_pernet:
 	unregister_sysctl_table(nlm_sysctl_table);
 err_sysctl:
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -689,6 +735,10 @@ static void __exit exit_nlm(void)
 	/* FIXME: delete all NLM clients */
 	nlm_shutdown_hosts();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lockd_remove_procfs();
+>>>>>>> v3.18
 =======
 	lockd_remove_procfs();
 >>>>>>> v3.18

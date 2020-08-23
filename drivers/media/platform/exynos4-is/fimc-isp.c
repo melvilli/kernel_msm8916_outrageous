@@ -26,6 +26,10 @@
 
 #include "media-dev.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "fimc-isp-video.h"
+>>>>>>> v3.18
 =======
 #include "fimc-isp-video.h"
 >>>>>>> v3.18
@@ -35,8 +39,13 @@
 #include "fimc-is.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int debug;
 module_param_named(debug_isp, debug, int, S_IRUGO | S_IWUSR);
+=======
+int fimc_isp_debug;
+module_param_named(debug_isp, fimc_isp_debug, int, S_IRUGO | S_IWUSR);
+>>>>>>> v3.18
 =======
 int fimc_isp_debug;
 module_param_named(debug_isp, fimc_isp_debug, int, S_IRUGO | S_IWUSR);
@@ -103,8 +112,13 @@ void fimc_isp_irq_handler(struct fimc_is *is)
 
 	fimc_is_fw_clear_irq1(is, FIMC_IS_INT_FRAME_DONE_ISP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* TODO: Complete ISP DMA interrupt handler */
+=======
+	fimc_isp_video_irq_handler(is);
+
+>>>>>>> v3.18
 =======
 	fimc_isp_video_irq_handler(is);
 
@@ -143,6 +157,7 @@ static int fimc_isp_subdev_get_fmt(struct v4l2_subdev *sd,
 {
 	struct fimc_isp *isp = v4l2_get_subdevdata(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fimc_is *is = fimc_isp_to_is(isp);
 	struct v4l2_mbus_framefmt *mf = &fmt->format;
 	struct v4l2_mbus_framefmt cur_fmt;
@@ -151,10 +166,15 @@ static int fimc_isp_subdev_get_fmt(struct v4l2_subdev *sd,
 		mf = v4l2_subdev_get_try_format(fh, fmt->pad);
 		fmt->format = *mf;
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_mbus_framefmt *mf = &fmt->format;
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 		*mf = *v4l2_subdev_get_try_format(fh, fmt->pad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -162,6 +182,7 @@ static int fimc_isp_subdev_get_fmt(struct v4l2_subdev *sd,
 	mf->colorspace = V4L2_COLORSPACE_SRGB;
 
 	mutex_lock(&isp->subdev_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__is_get_frame_size(is, &cur_fmt);
 
@@ -176,6 +197,8 @@ static int fimc_isp_subdev_get_fmt(struct v4l2_subdev *sd,
 		mf->height = cur_fmt.height;
 		mf->code = V4L2_MBUS_FMT_YUV10_1X30;
 =======
+=======
+>>>>>>> v3.18
 
 	if (fmt->pad == FIMC_ISP_SD_PAD_SINK) {
 		/* ISP OTF input image format */
@@ -188,14 +211,22 @@ static int fimc_isp_subdev_get_fmt(struct v4l2_subdev *sd,
 			mf->colorspace = V4L2_COLORSPACE_JPEG;
 			mf->code = V4L2_MBUS_FMT_YUV10_1X30;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	mutex_unlock(&isp->subdev_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_dbg(1, debug, sd, "%s: pad%d: fmt: 0x%x, %dx%d\n",
 		 __func__, fmt->pad, mf->code, mf->width, mf->height);
+=======
+	isp_dbg(1, sd, "%s: pad%d: fmt: 0x%x, %dx%d\n", __func__,
+		fmt->pad, mf->code, mf->width, mf->height);
+>>>>>>> v3.18
 =======
 	isp_dbg(1, sd, "%s: pad%d: fmt: 0x%x, %dx%d\n", __func__,
 		fmt->pad, mf->code, mf->width, mf->height);
@@ -206,10 +237,13 @@ static int fimc_isp_subdev_get_fmt(struct v4l2_subdev *sd,
 
 static void __isp_subdev_try_format(struct fimc_isp *isp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct v4l2_subdev_format *fmt)
 {
 	struct v4l2_mbus_framefmt *mf = &fmt->format;
 =======
+=======
+>>>>>>> v3.18
 				    struct v4l2_subdev_fh *fh,
 				    struct v4l2_subdev_format *fmt)
 {
@@ -217,6 +251,9 @@ static void __isp_subdev_try_format(struct fimc_isp *isp,
 	struct v4l2_mbus_framefmt *format;
 
 	mf->colorspace = V4L2_COLORSPACE_SRGB;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (fmt->pad == FIMC_ISP_SD_PAD_SINK) {
@@ -225,6 +262,7 @@ static void __isp_subdev_try_format(struct fimc_isp *isp,
 				&mf->height, FIMC_ISP_SINK_HEIGHT_MIN,
 				FIMC_ISP_SINK_HEIGHT_MAX, 0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		isp->subdev_fmt = *mf;
 	} else {
 		/* Allow changing format only on sink pad */
@@ -232,6 +270,8 @@ static void __isp_subdev_try_format(struct fimc_isp *isp,
 		mf->height = isp->subdev_fmt.height - FIMC_ISP_CAC_MARGIN_HEIGHT;
 		mf->code = isp->subdev_fmt.code;
 =======
+=======
+>>>>>>> v3.18
 		mf->code = V4L2_MBUS_FMT_SGRBG10_1X10;
 	} else {
 		if (fmt->which == V4L2_SUBDEV_FORMAT_TRY)
@@ -250,6 +290,9 @@ static void __isp_subdev_try_format(struct fimc_isp *isp,
 		} else {
 			mf->code = format->code;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -264,6 +307,7 @@ static int fimc_isp_subdev_set_fmt(struct v4l2_subdev *sd,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_dbg(1, debug, sd, "%s: pad%d: code: 0x%x, %dx%d\n",
 		 __func__, fmt->pad, mf->code, mf->width, mf->height);
 
@@ -272,16 +316,22 @@ static int fimc_isp_subdev_set_fmt(struct v4l2_subdev *sd,
 	mutex_lock(&isp->subdev_lock);
 	__isp_subdev_try_format(isp, fmt);
 =======
+=======
+>>>>>>> v3.18
 	isp_dbg(1, sd, "%s: pad%d: code: 0x%x, %dx%d\n",
 		 __func__, fmt->pad, mf->code, mf->width, mf->height);
 
 	mutex_lock(&isp->subdev_lock);
 	__isp_subdev_try_format(isp, fh, fmt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 		mf = v4l2_subdev_get_try_format(fh, fmt->pad);
 		*mf = fmt->format;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mutex_unlock(&isp->subdev_lock);
 		return 0;
@@ -294,6 +344,8 @@ static int fimc_isp_subdev_set_fmt(struct v4l2_subdev *sd,
 	mutex_unlock(&isp->subdev_lock);
 
 =======
+=======
+>>>>>>> v3.18
 
 		/* Propagate format to the source pads */
 		if (fmt->pad == FIMC_ISP_SD_PAD_SINK) {
@@ -329,6 +381,9 @@ static int fimc_isp_subdev_set_fmt(struct v4l2_subdev *sd,
 	}
 
 	mutex_unlock(&isp->subdev_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -340,7 +395,11 @@ static int fimc_isp_subdev_s_stream(struct v4l2_subdev *sd, int on)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_dbg(1, debug, sd, "%s: on: %d\n", __func__, on);
+=======
+	isp_dbg(1, sd, "%s: on: %d\n", __func__, on);
+>>>>>>> v3.18
 =======
 	isp_dbg(1, sd, "%s: on: %d\n", __func__, on);
 >>>>>>> v3.18
@@ -358,8 +417,13 @@ static int fimc_isp_subdev_s_stream(struct v4l2_subdev *sd, int on)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v4l2_dbg(1, debug, sd, "changing mode to %d\n",
 						is->config_index);
+=======
+		isp_dbg(1, sd, "changing mode to %d\n", is->config_index);
+
+>>>>>>> v3.18
 =======
 		isp_dbg(1, sd, "changing mode to %d\n", is->config_index);
 
@@ -445,8 +509,13 @@ static int fimc_isp_subdev_s_power(struct v4l2_subdev *sd, int on)
 		clear_bit(IS_ST_INIT_DONE, &is->state);
 		is->state = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		is->config[is->config_index].p_region_index1 = 0;
 		is->config[is->config_index].p_region_index2 = 0;
+=======
+		is->config[is->config_index].p_region_index[0] = 0;
+		is->config[is->config_index].p_region_index[1] = 0;
+>>>>>>> v3.18
 =======
 		is->config[is->config_index].p_region_index[0] = 0;
 		is->config[is->config_index].p_region_index[1] = 0;
@@ -485,8 +554,11 @@ static int fimc_isp_subdev_open(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_internal_ops fimc_is_subdev_internal_ops = {
 =======
+=======
+>>>>>>> v3.18
 static int fimc_isp_subdev_registered(struct v4l2_subdev *sd)
 {
 	struct fimc_isp *isp = v4l2_get_subdevdata(sd);
@@ -514,6 +586,9 @@ static void fimc_isp_subdev_unregistered(struct v4l2_subdev *sd)
 static const struct v4l2_subdev_internal_ops fimc_is_subdev_internal_ops = {
 	.registered = fimc_isp_subdev_registered,
 	.unregistered = fimc_isp_subdev_unregistered,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = fimc_isp_subdev_open,
 };
@@ -638,7 +713,11 @@ static int __ctrl_set_metering(struct fimc_is *is, unsigned int value)
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -776,7 +855,10 @@ static const struct v4l2_ctrl_ops fimc_isp_ctrl_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __isp_subdev_set_default_format(struct fimc_isp *isp)
 {
 	struct fimc_is *is = fimc_isp_to_is(isp);
@@ -793,6 +875,9 @@ static void __isp_subdev_set_default_format(struct fimc_isp *isp)
 	__is_set_frame_size(is, &isp->src_fmt);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int fimc_isp_subdev_create(struct fimc_isp *isp)
 {
@@ -806,6 +891,11 @@ int fimc_isp_subdev_create(struct fimc_isp *isp)
 
 	v4l2_subdev_init(sd, &fimc_is_subdev_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	sd->owner = THIS_MODULE;
+>>>>>>> v3.18
 =======
 
 	sd->owner = THIS_MODULE;
@@ -880,6 +970,11 @@ int fimc_isp_subdev_create(struct fimc_isp *isp)
 	v4l2_set_subdevdata(sd, isp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__isp_subdev_set_default_format(isp);
+
+>>>>>>> v3.18
 =======
 	__isp_subdev_set_default_format(isp);
 

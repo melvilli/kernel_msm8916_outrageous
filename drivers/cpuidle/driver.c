@@ -11,6 +11,10 @@
 #include <linux/mutex.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 
 DEFINE_SPINLOCK(cpuidle_driver_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __cpuidle_set_cpu_driver(struct cpuidle_driver *drv, int cpu);
 static struct cpuidle_driver * __cpuidle_get_cpu_driver(int cpu);
@@ -65,6 +70,8 @@ static int __cpuidle_register_driver(struct cpuidle_driver *drv, int cpu)
 
 	__cpuidle_set_cpu_driver(drv, cpu);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_IDLE_MULTIPLE_DRIVERS
 
 static DEFINE_PER_CPU(struct cpuidle_driver *, cpuidle_drivers);
@@ -124,11 +131,15 @@ static inline int __cpuidle_set_driver(struct cpuidle_driver *drv)
 
 		per_cpu(cpuidle_drivers, cpu) = drv;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __cpuidle_unregister_driver(struct cpuidle_driver *drv, int cpu)
 {
@@ -247,6 +258,8 @@ static inline struct cpuidle_driver *__cpuidle_get_cpu_driver(int cpu)
 {
 	return cpuidle_curr_driver;
 =======
+=======
+>>>>>>> v3.18
 #else
 
 static struct cpuidle_driver *cpuidle_curr_driver;
@@ -433,11 +446,15 @@ static void __cpuidle_unregister_driver(struct cpuidle_driver *drv)
 	}
 
 	__cpuidle_unset_driver(drv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * cpuidle_register_driver - registers a driver
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @drv: the driver
  */
@@ -451,6 +468,8 @@ int cpuidle_register_driver(struct cpuidle_driver *drv)
 	spin_unlock(&cpuidle_driver_lock);
 	put_cpu();
 =======
+=======
+>>>>>>> v3.18
  * @drv: a pointer to a valid struct cpuidle_driver
  *
  * Register the driver under a lock to prevent concurrent attempts to
@@ -466,6 +485,9 @@ int cpuidle_register_driver(struct cpuidle_driver *drv)
 	spin_lock(&cpuidle_driver_lock);
 	ret = __cpuidle_register_driver(drv);
 	spin_unlock(&cpuidle_driver_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -474,6 +496,7 @@ EXPORT_SYMBOL_GPL(cpuidle_register_driver);
 
 /**
  * cpuidle_unregister_driver - unregisters a driver
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @drv: the driver
  */
@@ -493,6 +516,8 @@ EXPORT_SYMBOL_GPL(cpuidle_unregister_driver);
 /**
  * cpuidle_get_driver - return the current driver
 =======
+=======
+>>>>>>> v3.18
  * @drv: a pointer to a valid struct cpuidle_driver
  *
  * Unregisters the cpuidle driver under a lock to prevent concurrent attempts
@@ -511,6 +536,9 @@ EXPORT_SYMBOL_GPL(cpuidle_unregister_driver);
  * cpuidle_get_driver - return the driver tied to the current CPU.
  *
  * Returns a struct cpuidle_driver pointer, or NULL if no driver is registered.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct cpuidle_driver *cpuidle_get_driver(void)
@@ -528,13 +556,19 @@ EXPORT_SYMBOL_GPL(cpuidle_get_driver);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cpuidle_get_cpu_driver - return the driver tied with a cpu
 =======
+=======
+>>>>>>> v3.18
  * cpuidle_get_cpu_driver - return the driver registered for a CPU.
  * @dev: a valid pointer to a struct cpuidle_device
  *
  * Returns a struct cpuidle_driver pointer, or NULL if no driver is registered
  * for the CPU associated with @dev.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct cpuidle_driver *cpuidle_get_cpu_driver(struct cpuidle_device *dev)
@@ -547,7 +581,10 @@ struct cpuidle_driver *cpuidle_get_cpu_driver(struct cpuidle_device *dev)
 EXPORT_SYMBOL_GPL(cpuidle_get_cpu_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * cpuidle_driver_ref - get a reference to the driver.
  *
@@ -556,6 +593,9 @@ EXPORT_SYMBOL_GPL(cpuidle_get_cpu_driver);
  *
  * Returns a pointer to the driver, or NULL if the current CPU has no driver.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cpuidle_driver *cpuidle_driver_ref(void)
 {
@@ -572,6 +612,7 @@ struct cpuidle_driver *cpuidle_driver_ref(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cpuidle_driver_unref(void)
 {
 	struct cpuidle_driver *drv = cpuidle_get_driver();
@@ -579,6 +620,8 @@ void cpuidle_driver_unref(void)
 	spin_lock(&cpuidle_driver_lock);
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * cpuidle_driver_unref - puts down the refcount for the driver
  *
@@ -592,6 +635,9 @@ void cpuidle_driver_unref(void)
 	spin_lock(&cpuidle_driver_lock);
 
 	drv = cpuidle_get_driver();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (drv && !WARN_ON(drv->refcnt <= 0))
 		drv->refcnt--;

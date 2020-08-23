@@ -214,7 +214,11 @@ static int ipx_seq_socket_show(struct seq_file *seq, void *v)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(seq, "%08X  %08X  %02X     %03d\n",
+=======
+	seq_printf(seq, "%08X  %08X  %02X     %03u\n",
+>>>>>>> v3.18
 =======
 	seq_printf(seq, "%08X  %08X  %02X     %03u\n",
 >>>>>>> v3.18

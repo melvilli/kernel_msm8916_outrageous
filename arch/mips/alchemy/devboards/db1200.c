@@ -19,6 +19,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -40,6 +44,7 @@
 #include <linux/spi/flash.h>
 #include <linux/smc91x.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mach-au1x00/au1000.h>
 #include <asm/mach-au1x00/au1100_mmc.h>
 #include <asm/mach-au1x00/au1xxx_dbdma.h>
@@ -51,6 +56,8 @@
 #include "platform.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ata_platform.h>
 #include <asm/mach-au1x00/au1000.h>
 #include <asm/mach-au1x00/au1100_mmc.h>
@@ -108,6 +115,9 @@
 #define PB1200_SD1_EJECT_INT	(DB1200_INT_BEGIN + 15)
 #define DB1200_INT_END		(DB1200_INT_BEGIN + 15)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const char *get_system_type(void);
 
@@ -147,7 +157,10 @@ static int __init db1200_detect_board(void)
 int __init db1200_board_setup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long freq0, clksrc, div, pfc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short whoami;
@@ -157,7 +170,10 @@ int __init db1200_board_setup(void)
 
 	whoami = bcsr_read(BCSR_WHOAMI);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	switch (BCSR_WHOAMI_BOARD(whoami)) {
 	case BCSR_WHOAMI_PB1200_DDR1:
 	case BCSR_WHOAMI_PB1200_DDR2:
@@ -167,11 +183,15 @@ int __init db1200_board_setup(void)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk(KERN_INFO "Alchemy/AMD/RMI %s Board, CPLD Rev %d"
 		"  Board-ID %d	Daughtercard ID %d\n", get_system_type(),
 		(whoami >> 4) & 0xf, (whoami >> 8) & 0xf, whoami & 0xf);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* SMBus/SPI on PSC0, Audio on PSC1 */
 	pfc = __raw_readl((void __iomem *)SYS_PINFUNC);
@@ -201,6 +221,8 @@ int __init db1200_board_setup(void)
 	__raw_writel(clksrc, (void __iomem *)SYS_CLKSRC);
 	wmb();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -277,7 +299,11 @@ static void au1200_nand_cmd_ctrl(struct mtd_info *mtd, int cmd,
 static int au1200_nand_device_ready(struct mtd_info *mtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl((void __iomem *)MEM_STSTAT) & 1;
+=======
+	return alchemy_rdsmem(AU1000_MEM_STSTAT) & 1;
+>>>>>>> v3.18
 =======
 	return alchemy_rdsmem(AU1000_MEM_STSTAT) & 1;
 >>>>>>> v3.18
@@ -362,6 +388,7 @@ static struct platform_device db1200_eth_dev = {
 /**********************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource db1200_ide_res[] = {
 	[0] = {
 		.start	= DB1200_IDE_PHYS_ADDR,
@@ -370,6 +397,8 @@ static struct resource db1200_ide_res[] = {
 	},
 	[1] = {
 =======
+=======
+>>>>>>> v3.18
 static struct pata_platform_info db1200_ide_info = {
 	.ioport_shift	= DB1200_IDE_REG_SHIFT,
 };
@@ -387,11 +416,15 @@ static struct resource db1200_ide_res[] = {
 		.flags	= IORESOURCE_MEM,
 	},
 	[2] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.start	= DB1200_IDE_INT,
 		.end	= DB1200_IDE_INT,
 		.flags	= IORESOURCE_IRQ,
 	},
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[2] = {
 		.start	= AU1200_DSCR_CMD0_DMA_REQ1,
@@ -400,13 +433,19 @@ static struct resource db1200_ide_res[] = {
 	},
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 static u64 au1200_ide_dmamask = DMA_BIT_MASK(32);
 
 static struct platform_device db1200_ide_dev = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "au1200-ide",
+=======
+	.name		= "pata_platform",
+>>>>>>> v3.18
 =======
 	.name		= "pata_platform",
 >>>>>>> v3.18
@@ -415,6 +454,10 @@ static struct platform_device db1200_ide_dev = {
 		.dma_mask		= &au1200_ide_dmamask,
 		.coherent_dma_mask	= DMA_BIT_MASK(32),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.platform_data		= &db1200_ide_info,
+>>>>>>> v3.18
 =======
 		.platform_data		= &db1200_ide_info,
 >>>>>>> v3.18
@@ -903,6 +946,10 @@ int __init db1200_dev_setup(void)
 	unsigned short sw;
 	int swapped, bid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *c;
+>>>>>>> v3.18
 =======
 	struct clk *c;
 >>>>>>> v3.18
@@ -919,7 +966,10 @@ int __init db1200_dev_setup(void)
 	bcsr_init_irq(DB1200_INT_BEGIN, DB1200_INT_END, AU1200_GPIO7_INT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* SMBus/SPI on PSC0, Audio on PSC1 */
 	pfc = alchemy_rdsys(AU1000_SYS_PINFUNC);
 	pfc &= ~(SYS_PINFUNC_P0A | SYS_PINFUNC_P0B);
@@ -939,6 +989,9 @@ int __init db1200_dev_setup(void)
 		clk_put(c);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* insert/eject pairs: one of both is always screaming.	 To avoid
 	 * issues they must not be automatically enabled when initially
@@ -968,7 +1021,11 @@ int __init db1200_dev_setup(void)
 	 * it as an input pin which is pulled high on the boards).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pfc = __raw_readl((void __iomem *)SYS_PINFUNC) & ~SYS_PINFUNC_P0A;
+=======
+	pfc = alchemy_rdsys(AU1000_SYS_PINFUNC) & ~SYS_PINFUNC_P0A;
+>>>>>>> v3.18
 =======
 	pfc = alchemy_rdsys(AU1000_SYS_PINFUNC) & ~SYS_PINFUNC_P0A;
 >>>>>>> v3.18
@@ -998,8 +1055,12 @@ int __init db1200_dev_setup(void)
 		printk(KERN_INFO "   OTG port VBUS supply disabled\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(pfc, (void __iomem *)SYS_PINFUNC);
 	wmb();
+=======
+	alchemy_wrsys(pfc, AU1000_SYS_PINFUNC);
+>>>>>>> v3.18
 =======
 	alchemy_wrsys(pfc, AU1000_SYS_PINFUNC);
 >>>>>>> v3.18

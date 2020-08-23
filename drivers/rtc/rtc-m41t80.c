@@ -67,8 +67,11 @@
 #define M41T80_FEATURE_SQ_ALT	(1 << 4)	/* RSx bits are in reg 4 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION "0.05"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static DEFINE_MUTEX(m41t80_rtc_mutex);
@@ -84,6 +87,10 @@ static const struct i2c_device_id m41t80_id[] = {
 	{ "m41st85", M41T80_FEATURE_HT | M41T80_FEATURE_BL | M41T80_FEATURE_SQ },
 	{ "m41st87", M41T80_FEATURE_HT | M41T80_FEATURE_BL | M41T80_FEATURE_SQ },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "rv4162", M41T80_FEATURE_SQ | M41T80_FEATURE_WD | M41T80_FEATURE_SQ_ALT },
+>>>>>>> v3.18
 =======
 	{ "rv4162", M41T80_FEATURE_SQ | M41T80_FEATURE_WD | M41T80_FEATURE_SQ_ALT },
 >>>>>>> v3.18
@@ -176,7 +183,11 @@ static int m41t80_set_datetime(struct i2c_client *client, struct rtc_time *tm)
 		bin2bcd(tm->tm_min) | (buf[M41T80_REG_MIN] & ~0x7f);
 	buf[M41T80_REG_HOUR] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bin2bcd(tm->tm_hour) | (buf[M41T80_REG_HOUR] & ~0x3f) ;
+=======
+		bin2bcd(tm->tm_hour) | (buf[M41T80_REG_HOUR] & ~0x3f);
+>>>>>>> v3.18
 =======
 		bin2bcd(tm->tm_hour) | (buf[M41T80_REG_HOUR] & ~0x3f);
 >>>>>>> v3.18
@@ -244,7 +255,11 @@ static ssize_t m41t80_sysfs_show_flags(struct device *dev,
 	val = i2c_smbus_read_byte_data(client, M41T80_REG_FLAGS);
 	if (val < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		return val;
+>>>>>>> v3.18
 =======
 		return val;
 >>>>>>> v3.18
@@ -268,7 +283,11 @@ static ssize_t m41t80_sysfs_show_sqwfreq(struct device *dev,
 	val = i2c_smbus_read_byte_data(client, reg_sqw);
 	if (val < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		return val;
+>>>>>>> v3.18
 =======
 		return val;
 >>>>>>> v3.18
@@ -291,7 +310,11 @@ static ssize_t m41t80_sysfs_set_sqwfreq(struct device *dev,
 	struct i2c_client *client = to_i2c_client(dev);
 	struct m41t80_data *clientdata = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int almon, sqw, reg_sqw;
+=======
+	int almon, sqw, reg_sqw, rc;
+>>>>>>> v3.18
 =======
 	int almon, sqw, reg_sqw, rc;
 >>>>>>> v3.18
@@ -315,7 +338,11 @@ static ssize_t m41t80_sysfs_set_sqwfreq(struct device *dev,
 	almon = i2c_smbus_read_byte_data(client, M41T80_REG_ALARM_MON);
 	if (almon < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		return almon;
+>>>>>>> v3.18
 =======
 		return almon;
 >>>>>>> v3.18
@@ -324,6 +351,7 @@ static ssize_t m41t80_sysfs_set_sqwfreq(struct device *dev,
 		reg_sqw = M41T80_REG_WDAY;
 	sqw = i2c_smbus_read_byte_data(client, reg_sqw);
 	if (sqw < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -EIO;
 	sqw = (sqw & 0x0f) | (val << 4);
@@ -335,6 +363,8 @@ static ssize_t m41t80_sysfs_set_sqwfreq(struct device *dev,
 					     almon | M41T80_ALMON_SQWE) < 0)
 		return -EIO;
 =======
+=======
+>>>>>>> v3.18
 		return sqw;
 	sqw = (sqw & 0x0f) | (val << 4);
 
@@ -353,6 +383,9 @@ static ssize_t m41t80_sysfs_set_sqwfreq(struct device *dev,
 		if (rc <0)
 			return rc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -678,6 +711,7 @@ static int m41t80_probe(struct i2c_client *client,
 
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     | I2C_FUNC_SMBUS_BYTE_DATA)) {
 		rc = -ENODEV;
 		goto exit;
@@ -693,6 +727,8 @@ static int m41t80_probe(struct i2c_client *client,
 		goto exit;
 	}
 =======
+=======
+>>>>>>> v3.18
 				     | I2C_FUNC_SMBUS_BYTE_DATA))
 		return -ENODEV;
 
@@ -700,6 +736,9 @@ static int m41t80_probe(struct i2c_client *client,
 				GFP_KERNEL);
 	if (!clientdata)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clientdata->features = id->driver_data;
@@ -707,6 +746,7 @@ static int m41t80_probe(struct i2c_client *client,
 
 	rtc = devm_rtc_device_register(&client->dev, client->name,
 					&m41t80_rtc_ops, THIS_MODULE);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (IS_ERR(rtc)) {
 		rc = PTR_ERR(rtc);
@@ -717,16 +757,25 @@ static int m41t80_probe(struct i2c_client *client,
 	if (IS_ERR(rtc))
 		return PTR_ERR(rtc);
 >>>>>>> v3.18
+=======
+	if (IS_ERR(rtc))
+		return PTR_ERR(rtc);
+>>>>>>> v3.18
 
 	clientdata->rtc = rtc;
 
 	/* Make sure HT (Halt Update) bit is cleared */
 	rc = i2c_smbus_read_byte_data(client, M41T80_REG_ALARM_HOUR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc < 0)
 		goto ht_err;
 
 	if (rc & M41T80_ALHOUR_HT) {
+=======
+
+	if (rc >= 0 && rc & M41T80_ALHOUR_HT) {
+>>>>>>> v3.18
 =======
 
 	if (rc >= 0 && rc & M41T80_ALHOUR_HT) {
@@ -742,11 +791,14 @@ static int m41t80_probe(struct i2c_client *client,
 				 tm.tm_min, tm.tm_sec);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i2c_smbus_write_byte_data(client,
 					      M41T80_REG_ALARM_HOUR,
 					      rc & ~M41T80_ALHOUR_HT) < 0)
 			goto ht_err;
 =======
+=======
+>>>>>>> v3.18
 		rc = i2c_smbus_write_byte_data(client, M41T80_REG_ALARM_HOUR,
 					      rc & ~M41T80_ALHOUR_HT);
 	}
@@ -754,11 +806,15 @@ static int m41t80_probe(struct i2c_client *client,
 	if (rc < 0) {
 		dev_err(&client->dev, "Can't clear HT bit\n");
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Make sure ST (stop) bit is cleared */
 	rc = i2c_smbus_read_byte_data(client, M41T80_REG_SEC);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc < 0)
 		goto st_err;
@@ -768,6 +824,8 @@ static int m41t80_probe(struct i2c_client *client,
 					      rc & ~M41T80_SEC_ST) < 0)
 			goto st_err;
 =======
+=======
+>>>>>>> v3.18
 
 	if (rc >= 0 && rc & M41T80_SEC_ST)
 		rc = i2c_smbus_write_byte_data(client, M41T80_REG_SEC,
@@ -775,13 +833,20 @@ static int m41t80_probe(struct i2c_client *client,
 	if (rc < 0) {
 		dev_err(&client->dev, "Can't clear ST bit\n");
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	rc = m41t80_sysfs_register(&client->dev);
 	if (rc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit;
+=======
+		return rc;
+>>>>>>> v3.18
 =======
 		return rc;
 >>>>>>> v3.18
@@ -792,22 +857,29 @@ static int m41t80_probe(struct i2c_client *client,
 		rc = misc_register(&wdt_dev);
 		if (rc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto exit;
 		rc = register_reboot_notifier(&wdt_notifier);
 		if (rc) {
 			misc_deregister(&wdt_dev);
 			goto exit;
 =======
+=======
+>>>>>>> v3.18
 			return rc;
 		rc = register_reboot_notifier(&wdt_notifier);
 		if (rc) {
 			misc_deregister(&wdt_dev);
 			return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 #endif
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 st_err:
@@ -821,6 +893,8 @@ ht_err:
 
 exit:
 	return rc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -854,6 +928,9 @@ MODULE_AUTHOR("Alexander Bigga <ab@mycable.de>");
 MODULE_DESCRIPTION("ST Microelectronics M41T80 series RTC I2C Client Driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(DRV_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

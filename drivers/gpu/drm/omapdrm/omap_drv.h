@@ -27,6 +27,10 @@
 #include <drm/drm_crtc_helper.h>
 #include <drm/omap_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_gem.h>
 >>>>>>> v3.18
@@ -124,6 +128,7 @@ struct omap_drm_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* this should probably be in drm-core to standardize amongst drivers */
 #define DRM_ROTATE_0	0
 #define DRM_ROTATE_90	1
@@ -131,6 +136,8 @@ struct omap_drm_private {
 #define DRM_ROTATE_270	3
 #define DRM_REFLECT_X	4
 #define DRM_REFLECT_Y	5
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -149,17 +156,23 @@ int omap_gem_resume(struct device *dev);
 int omap_irq_enable_vblank(struct drm_device *dev, int crtc_id);
 void omap_irq_disable_vblank(struct drm_device *dev, int crtc_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t omap_irq_handler(DRM_IRQ_ARGS);
 void omap_irq_preinstall(struct drm_device *dev);
 int omap_irq_postinstall(struct drm_device *dev);
 void omap_irq_uninstall(struct drm_device *dev);
 =======
+=======
+>>>>>>> v3.18
 irqreturn_t omap_irq_handler(int irq, void *arg);
 void omap_irq_preinstall(struct drm_device *dev);
 int omap_irq_postinstall(struct drm_device *dev);
 void omap_irq_uninstall(struct drm_device *dev);
 void __omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq);
 void __omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq);
 void omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq);
@@ -174,14 +187,20 @@ enum omap_channel omap_crtc_channel(struct drm_crtc *crtc);
 int omap_crtc_apply(struct drm_crtc *crtc,
 		struct omap_drm_apply *apply);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_crtc *omap_crtc_init(struct drm_device *dev,
 		struct drm_plane *plane, enum omap_channel channel, int id);
 =======
+=======
+>>>>>>> v3.18
 void omap_crtc_pre_init(void);
 void omap_crtc_pre_uninit(void);
 struct drm_crtc *omap_crtc_init(struct drm_device *dev,
 		struct drm_plane *plane, enum omap_channel channel, int id);
 void omap_crtc_flush(struct drm_crtc *crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct drm_plane *omap_plane_init(struct drm_device *dev,
@@ -214,6 +233,10 @@ struct drm_encoder *omap_connector_attached_encoder(
 void omap_connector_flush(struct drm_connector *connector,
 		int x, int y, int w, int h);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool omap_connector_get_hdmi_mode(struct drm_connector *connector);
+>>>>>>> v3.18
 =======
 bool omap_connector_get_hdmi_mode(struct drm_connector *connector);
 >>>>>>> v3.18
@@ -231,9 +254,14 @@ struct drm_framebuffer *omap_framebuffer_init(struct drm_device *dev,
 		struct drm_mode_fb_cmd2 *mode_cmd, struct drm_gem_object **bos);
 struct drm_gem_object *omap_framebuffer_bo(struct drm_framebuffer *fb, int p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int omap_framebuffer_replace(struct drm_framebuffer *a,
 		struct drm_framebuffer *b, void *arg,
 		void (*unpin)(void *arg, struct drm_gem_object *bo));
+=======
+int omap_framebuffer_pin(struct drm_framebuffer *fb);
+int omap_framebuffer_unpin(struct drm_framebuffer *fb);
+>>>>>>> v3.18
 =======
 int omap_framebuffer_pin(struct drm_framebuffer *fb);
 int omap_framebuffer_unpin(struct drm_framebuffer *fb);
@@ -254,12 +282,18 @@ int omap_gem_new_handle(struct drm_device *dev, struct drm_file *file,
 		union omap_gem_size gsize, uint32_t flags, uint32_t *handle);
 void omap_gem_free_object(struct drm_gem_object *obj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int omap_gem_init_object(struct drm_gem_object *obj);
 void *omap_gem_vaddr(struct drm_gem_object *obj);
 int omap_gem_dumb_map_offset(struct drm_file *file, struct drm_device *dev,
 		uint32_t handle, uint64_t *offset);
 int omap_gem_dumb_destroy(struct drm_file *file, struct drm_device *dev,
 		uint32_t handle);
+=======
+void *omap_gem_vaddr(struct drm_gem_object *obj);
+int omap_gem_dumb_map_offset(struct drm_file *file, struct drm_device *dev,
+		uint32_t handle, uint64_t *offset);
+>>>>>>> v3.18
 =======
 void *omap_gem_vaddr(struct drm_gem_object *obj);
 int omap_gem_dumb_map_offset(struct drm_file *file, struct drm_device *dev,

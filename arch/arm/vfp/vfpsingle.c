@@ -916,6 +916,11 @@ vfp_single_multiply_accumulate(int sd, int sn, s32 m, u32 fpscr, u32 negate, cha
 	pr_debug("VFP: s%u = %08x\n", sd, v);
 	vfp_single_unpack(&vsn, v);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (vsn.exponent == 0 && vsn.significand)
+		vfp_single_normalise_denormal(&vsn);
+>>>>>>> v3.18
 =======
 	if (vsn.exponent == 0 && vsn.significand)
 		vfp_single_normalise_denormal(&vsn);

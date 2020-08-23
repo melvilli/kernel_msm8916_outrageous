@@ -20,10 +20,13 @@
 #include "c_can.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum c_can_pci_reg_align {
 	C_CAN_REG_ALIGN_16,
 	C_CAN_REG_ALIGN_32,
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_PCH_CAN	0x8818
 #define PCH_PCI_SOFT_RESET	0x01fc
 
@@ -31,6 +34,9 @@ enum c_can_pci_reg_align {
 	C_CAN_REG_ALIGN_16,
 	C_CAN_REG_ALIGN_32,
 	C_CAN_REG_32,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -42,11 +48,17 @@ struct c_can_pci_data {
 	/* Set the frequency */
 	unsigned int freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* PCI bar number */
 	int bar;
 	/* Callback for reset */
 	void (*init)(const struct c_can_priv *priv, bool enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -57,7 +69,11 @@ struct c_can_pci_data {
  * Handle the same by providing a common read/write interface.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 c_can_pci_read_reg_aligned_to_16bit(struct c_can_priv *priv,
+=======
+static u16 c_can_pci_read_reg_aligned_to_16bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static u16 c_can_pci_read_reg_aligned_to_16bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -67,7 +83,11 @@ static u16 c_can_pci_read_reg_aligned_to_16bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void c_can_pci_write_reg_aligned_to_16bit(struct c_can_priv *priv,
+=======
+static void c_can_pci_write_reg_aligned_to_16bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static void c_can_pci_write_reg_aligned_to_16bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -77,7 +97,11 @@ static void c_can_pci_write_reg_aligned_to_16bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 c_can_pci_read_reg_aligned_to_32bit(struct c_can_priv *priv,
+=======
+static u16 c_can_pci_read_reg_aligned_to_32bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static u16 c_can_pci_read_reg_aligned_to_32bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -87,7 +111,11 @@ static u16 c_can_pci_read_reg_aligned_to_32bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void c_can_pci_write_reg_aligned_to_32bit(struct c_can_priv *priv,
+=======
+static void c_can_pci_write_reg_aligned_to_32bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static void c_can_pci_write_reg_aligned_to_32bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -97,7 +125,10 @@ static void c_can_pci_write_reg_aligned_to_32bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u16 c_can_pci_read_reg_32bit(const struct c_can_priv *priv,
 				    enum reg index)
 {
@@ -138,6 +169,9 @@ static void c_can_pci_reset_pch(const struct c_can_priv *priv, bool enable)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int c_can_pci_probe(struct pci_dev *pdev,
 			   const struct pci_device_id *ent)
@@ -161,11 +195,14 @@ static int c_can_pci_probe(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_master(pdev);
 	pci_enable_msi(pdev);
 
 	addr = pci_iomap(pdev, 0, pci_resource_len(pdev, 0));
 =======
+=======
+>>>>>>> v3.18
 	ret = pci_enable_msi(pdev);
 	if (!ret) {
 		dev_info(&pdev->dev, "MSI enabled\n");
@@ -174,6 +211,9 @@ static int c_can_pci_probe(struct pci_dev *pdev,
 
 	addr = pci_iomap(pdev, c_can_pci_data->bar,
 			 pci_resource_len(pdev, c_can_pci_data->bar));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!addr) {
 		dev_err(&pdev->dev,
@@ -197,7 +237,10 @@ static int c_can_pci_probe(struct pci_dev *pdev,
 	dev->irq = pdev->irq;
 	priv->base = addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->device = &pdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -224,6 +267,11 @@ static int c_can_pci_probe(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->type = c_can_pci_data->type;
+
+>>>>>>> v3.18
 =======
 	priv->type = c_can_pci_data->type;
 
@@ -239,22 +287,34 @@ static int c_can_pci_probe(struct pci_dev *pdev,
 		priv->write_reg = c_can_pci_write_reg_aligned_to_16bit;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case C_CAN_REG_32:
 		priv->read_reg = c_can_pci_read_reg_32bit;
 		priv->write_reg = c_can_pci_write_reg_32bit;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		ret = -EINVAL;
 		goto out_free_c_can;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	priv->read_reg32 = c_can_pci_read_reg32;
 	priv->write_reg32 = c_can_pci_write_reg32;
 
 	priv->raminit = c_can_pci_data->init;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = register_c_can_dev(dev);
@@ -271,7 +331,10 @@ static int c_can_pci_probe(struct pci_dev *pdev,
 
 out_free_c_can:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_c_can_dev(dev);
@@ -295,7 +358,10 @@ static void c_can_pci_remove(struct pci_dev *pdev)
 	unregister_c_can_dev(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_c_can_dev(dev);
@@ -312,7 +378,10 @@ static struct c_can_pci_data c_can_sta2x11= {
 	.reg_align = C_CAN_REG_ALIGN_32,
 	.freq = 52000000, /* 52 Mhz */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.bar = 0,
 };
 
@@ -322,6 +391,9 @@ static struct c_can_pci_data c_can_pch = {
 	.freq = 50000000, /* 50 MHz */
 	.init = c_can_pci_reset_pch,
 	.bar = 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -330,16 +402,22 @@ static struct c_can_pci_data c_can_pch = {
 	.driver_data = (unsigned long)&_driverdata,	\
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(c_can_pci_tbl) = {
 	C_CAN_ID(PCI_VENDOR_ID_STMICRO, PCI_DEVICE_ID_STMICRO_CAN,
 		 c_can_sta2x11),
 =======
+=======
+>>>>>>> v3.18
 
 static const struct pci_device_id c_can_pci_tbl[] = {
 	C_CAN_ID(PCI_VENDOR_ID_STMICRO, PCI_DEVICE_ID_STMICRO_CAN,
 		 c_can_sta2x11),
 	C_CAN_ID(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_PCH_CAN,
 		 c_can_pch),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };

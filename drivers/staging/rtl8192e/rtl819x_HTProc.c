@@ -212,7 +212,10 @@ void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
 		     pHTInfoEle->BasicMSC[2], pHTInfoEle->BasicMSC[3],
 		     pHTInfoEle->BasicMSC[4]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -344,6 +347,10 @@ static void HTIOTPeerDetermine(struct rtllib_device *ieee)
 	struct rt_hi_throughput *pHTInfo = ieee->pHTInfo;
 	struct rtllib_network *net = &ieee->current_network;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -433,6 +440,10 @@ static void HTIOTActDetermineRaFunc(struct rtllib_device *ieee, bool bPeerRx2ss)
 {
 	struct rt_hi_throughput *pHTInfo = ieee->pHTInfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -469,6 +480,10 @@ void HTConstructCapabilityElement(struct rtllib_device *ieee, u8 *posHTCap,
 	if ((bAssoc) && (pHT->ePeerHTSpecVer == HT_SPEC_VER_EWC)) {
 		u8	EWC11NHTCap[] = {0x00, 0x90, 0x4c, 0x33};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -537,7 +552,10 @@ void HTConstructCapabilityElement(struct rtllib_device *ieee, u8 *posHTCap,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -548,6 +566,10 @@ void HTConstructInfoElement(struct rtllib_device *ieee, u8 *posHTInfo,
 	struct rt_hi_throughput *pHT = ieee->pHTInfo;
 	struct ht_info_ele *pHTInfoEle = (struct ht_info_ele *)posHTInfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -587,7 +609,10 @@ void HTConstructInfoElement(struct rtllib_device *ieee, u8 *posHTInfo,
 		*len = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -614,8 +639,11 @@ void HTConstructRT2RTAggElement(struct rtllib_device *ieee, u8 *posRT2RTAgg,
 
 	*len = 6 + 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -624,6 +652,10 @@ static u8 HT_PickMCSRate(struct rtllib_device *ieee, u8 *pOperateMCS)
 {
 	u8 i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -662,6 +694,10 @@ u8 HTGetHighestMCSRate(struct rtllib_device *ieee, u8 *pMCSRateSet,
 	u8		mcsRate = 0;
 	u8		availableMcsRate[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -883,6 +919,10 @@ void HTInitializeHTInfo(struct rtllib_device *ieee)
 	{
 		u8 *RegHTSuppRateSets = &(ieee->RegHTSuppRateSet[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1032,7 +1072,10 @@ void HTUseDefaultSetting(struct rtllib_device *ieee)
 		pHTInfo->bCurrentHTSupport = false;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1091,7 +1134,11 @@ void HTSetConnectBwMode(struct rtllib_device *ieee,
 
 	if (pHTInfo->bSwBwInProgress) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: bSwBwInProgress!!\n", __func__);
+=======
+		pr_info("%s: bSwBwInProgress!!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_info("%s: bSwBwInProgress!!\n", __func__);
 >>>>>>> v3.18
@@ -1115,7 +1162,11 @@ void HTSetConnectBwMode(struct rtllib_device *ieee,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "%s():pHTInfo->bCurBW40MHz:%x\n", __func__,
+=======
+	pr_info("%s():pHTInfo->bCurBW40MHz:%x\n", __func__,
+>>>>>>> v3.18
 =======
 	pr_info("%s():pHTInfo->bCurBW40MHz:%x\n", __func__,
 >>>>>>> v3.18

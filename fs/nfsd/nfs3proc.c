@@ -158,11 +158,15 @@ nfsd3_proc_read(struct svc_rqst *rqstp, struct nfsd3_readargs *argp,
 	 * + 1 (xdr opaque byte count) = 26
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	resp->count = argp->count;
 	if (max_blocksize < resp->count)
 		resp->count = max_blocksize;
 
+=======
+	resp->count = min(argp->count, max_blocksize);
+>>>>>>> v3.18
 =======
 	resp->count = min(argp->count, max_blocksize);
 >>>>>>> v3.18
@@ -232,11 +236,14 @@ nfsd3_proc_create(struct svc_rqst *rqstp, struct nfsd3_createargs *argp,
 	attr   = &argp->attrs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Get the directory inode */
 	nfserr = fh_verify(rqstp, dirfhp, S_IFDIR, NFSD_MAY_CREATE);
 	if (nfserr)
 		RETURN_STATUS(nfserr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Unfudge the mode bits */
@@ -294,8 +301,12 @@ nfsd3_proc_symlink(struct svc_rqst *rqstp, struct nfsd3_symlinkargs *argp,
 	fh_init(&resp->fh, NFS3_FHSIZE);
 	nfserr = nfsd_symlink(rqstp, &resp->dirfh, argp->fname, argp->flen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   argp->tname, argp->tlen,
 						   &resp->fh, &argp->attrs);
+=======
+						   argp->tname, &resp->fh);
+>>>>>>> v3.18
 =======
 						   argp->tname, &resp->fh);
 >>>>>>> v3.18
@@ -488,7 +499,10 @@ nfsd3_proc_readdirplus(struct svc_rqst *rqstp, struct nfsd3_readdirargs *argp,
 	resp->rqstp = rqstp;
 	offset = argp->cookie;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	nfserr = fh_verify(rqstp, &resp->fh, S_IFDIR, NFSD_MAY_NOP);
 	if (nfserr)
@@ -497,6 +511,9 @@ nfsd3_proc_readdirplus(struct svc_rqst *rqstp, struct nfsd3_readdirargs *argp,
 	if (resp->fh.fh_export->ex_flags & NFSEXP_NOREADDIRPLUS)
 		RETURN_STATUS(nfserr_notsupp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nfserr = nfsd_readdir(rqstp, &resp->fh,
 				     &offset,

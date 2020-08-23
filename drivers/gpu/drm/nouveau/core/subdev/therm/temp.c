@@ -193,17 +193,23 @@ alarm_timer_callback(struct nouveau_alarm *alarm)
 					     NOUVEAU_THERM_THRS_SHUTDOWN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* schedule the next poll in one second */
 	if (therm->temp_get(therm) >= 0 && list_empty(&alarm->head))
 		ptimer->alarm(ptimer, 1000 * 1000 * 1000, alarm);
 
 	spin_unlock_irqrestore(&priv->sensor.alarm_program_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&priv->sensor.alarm_program_lock, flags);
 
 	/* schedule the next poll in one second */
 	if (therm->temp_get(therm) >= 0 && list_empty(&alarm->head))
 		ptimer->alarm(ptimer, 1000000000ULL, alarm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -225,7 +231,10 @@ nouveau_therm_program_alarms_polling(struct nouveau_therm *therm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int
 nouveau_therm_sensor_init(struct nouveau_therm *therm)
 {
@@ -245,6 +254,9 @@ nouveau_therm_sensor_fini(struct nouveau_therm *therm, bool suspend)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void
 nouveau_therm_sensor_preinit(struct nouveau_therm *therm)

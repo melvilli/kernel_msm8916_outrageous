@@ -38,6 +38,7 @@
 #include <video/of_videomode.h>
 #include <video/videomode.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * drm_mode_debug_printmodeline - debug print a mode
@@ -48,6 +49,8 @@
  * None.
  *
 =======
+=======
+>>>>>>> v3.18
 #include <drm/drm_modes.h>
 
 #include "drm_crtc_internal.h"
@@ -56,6 +59,9 @@
  * drm_mode_debug_printmodeline - print a mode to dmesg
  * @mode: mode to print
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Describe @mode using DRM_DEBUG.
  */
@@ -73,6 +79,7 @@ EXPORT_SYMBOL(drm_mode_debug_printmodeline);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drm_cvt_mode -create a modeline based on CVT algorithm
  * @dev: DRM device
  * @hdisplay: hdisplay size
@@ -86,6 +93,8 @@ EXPORT_SYMBOL(drm_mode_debug_printmodeline);
  *
  * return the modeline based on CVT algorithm
 =======
+=======
+>>>>>>> v3.18
  * drm_mode_create - create a new display mode
  * @dev: DRM device
  *
@@ -157,6 +166,9 @@ EXPORT_SYMBOL(drm_mode_probed_add);
  * @reduced: whether to use reduced blanking
  * @interlaced: whether to compute an interlaced mode
  * @margins: whether to add margins (borders)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This function is called to generate the modeline based on CVT algorithm
@@ -168,21 +180,31 @@ EXPORT_SYMBOL(drm_mode_probed_add);
  * And it is copied from xf86CVTmode in xserver/hw/xfree86/modes/xf86cvt.c.
  * What I have done is to translate it by using integer calculation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define HV_FACTOR			1000
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns:
  * The modeline based on the CVT algorithm stored in a drm_display_mode object.
  * The display mode object is allocated with drm_mode_create(). Returns NULL
  * when no mode could be allocated.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct drm_display_mode *drm_cvt_mode(struct drm_device *dev, int hdisplay,
 				      int vdisplay, int vrefresh,
 				      bool reduced, bool interlaced, bool margins)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HV_FACTOR			1000
+>>>>>>> v3.18
 =======
 #define HV_FACTOR			1000
 >>>>>>> v3.18
@@ -380,6 +402,7 @@ EXPORT_SYMBOL(drm_cvt_mode);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drm_gtf_mode_complex - create the modeline based on full GTF algorithm
  *
  * @dev		:drm device
@@ -398,6 +421,8 @@ EXPORT_SYMBOL(drm_cvt_mode);
  * GTF feature blocks specify C and J in multiples of 0.5, so we pass them
  * in here multiplied by two.  For a C of 40, pass in 80.
 =======
+=======
+>>>>>>> v3.18
  * drm_gtf_mode_complex - create the modeline based on the full GTF algorithm
  * @dev: drm device
  * @hdisplay: hdisplay size
@@ -417,6 +442,9 @@ EXPORT_SYMBOL(drm_cvt_mode);
  * The modeline based on the full GTF algorithm stored in a drm_display_mode object.
  * The display mode object is allocated with drm_mode_create(). Returns NULL
  * when no mode could be allocated.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct drm_display_mode *
@@ -588,6 +616,7 @@ EXPORT_SYMBOL(drm_gtf_mode_complex);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drm_gtf_mode - create the modeline based on GTF algorithm
  *
  * @dev		:drm device
@@ -600,6 +629,8 @@ EXPORT_SYMBOL(drm_gtf_mode_complex);
  * LOCKING.
  * none.
 =======
+=======
+>>>>>>> v3.18
  * drm_gtf_mode - create the modeline based on the GTF algorithm
  * @dev: drm device
  * @hdisplay: hdisplay size
@@ -607,6 +638,9 @@ EXPORT_SYMBOL(drm_gtf_mode_complex);
  * @vrefresh: vrefresh rate.
  * @interlaced: whether to compute an interlaced mode
  * @margins: desired margin (borders) size
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * return the modeline based on GTF algorithm
@@ -627,6 +661,7 @@ EXPORT_SYMBOL(drm_gtf_mode_complex);
  * K = 128
  * J = 20
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct drm_display_mode *
 drm_gtf_mode(struct drm_device *dev, int hdisplay, int vdisplay, int vrefresh,
@@ -635,6 +670,8 @@ drm_gtf_mode(struct drm_device *dev, int hdisplay, int vdisplay, int vrefresh,
 	return drm_gtf_mode_complex(dev, hdisplay, vdisplay, vrefresh, lace,
 				    margins, 600, 40 * 2, 128, 20 * 2);
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns:
  * The modeline based on the GTF algorithm stored in a drm_display_mode object.
@@ -648,15 +685,21 @@ drm_gtf_mode(struct drm_device *dev, int hdisplay, int vdisplay, int vrefresh,
 	return drm_gtf_mode_complex(dev, hdisplay, vdisplay, vrefresh,
 				    interlaced, margins,
 				    600, 40 * 2, 128, 20 * 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(drm_gtf_mode);
 
 #ifdef CONFIG_VIDEOMODE_HELPERS
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_display_mode_from_videomode(const struct videomode *vm,
 				    struct drm_display_mode *dmode)
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_display_mode_from_videomode - fill in @dmode using @vm,
  * @vm: videomode structure to use as source
@@ -666,6 +709,9 @@ int drm_display_mode_from_videomode(const struct videomode *vm,
  */
 void drm_display_mode_from_videomode(const struct videomode *vm,
 				     struct drm_display_mode *dmode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	dmode->hdisplay = vm->hactive;
@@ -694,9 +740,15 @@ void drm_display_mode_from_videomode(const struct videomode *vm,
 	if (vm->flags & DISPLAY_FLAGS_DOUBLESCAN)
 		dmode->flags |= DRM_MODE_FLAG_DBLSCAN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_mode_set_name(dmode);
 
 	return 0;
+=======
+	if (vm->flags & DISPLAY_FLAGS_DOUBLECLK)
+		dmode->flags |= DRM_MODE_FLAG_DBLCLK;
+	drm_mode_set_name(dmode);
+>>>>>>> v3.18
 =======
 	if (vm->flags & DISPLAY_FLAGS_DOUBLECLK)
 		dmode->flags |= DRM_MODE_FLAG_DBLCLK;
@@ -716,6 +768,12 @@ EXPORT_SYMBOL_GPL(drm_display_mode_from_videomode);
  * read from DT. To get multiple modes start with of_get_display_timings and
  * work with that instead.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Returns:
+ * 0 on success, a negative errno code when no of videomode node was found.
+>>>>>>> v3.18
 =======
  *
  * Returns:
@@ -749,10 +807,15 @@ EXPORT_SYMBOL_GPL(of_get_drm_display_mode);
  * @mode: name will be set in this mode
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * LOCKING:
  * None.
  *
  * Set the name of @mode to a standard format.
+=======
+ * Set the name of @mode to a standard format which is <hdisplay>x<vdisplay>
+ * with an optional 'i' suffix for interlaced modes.
+>>>>>>> v3.18
 =======
  * Set the name of @mode to a standard format which is <hdisplay>x<vdisplay>
  * with an optional 'i' suffix for interlaced modes.
@@ -768,6 +831,7 @@ void drm_mode_set_name(struct drm_display_mode *mode)
 }
 EXPORT_SYMBOL(drm_mode_set_name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * drm_mode_list_concat - move modes from one list to another
@@ -839,12 +903,17 @@ EXPORT_SYMBOL(drm_mode_height);
  *
  * Return @modes's hsync rate in kHz, rounded to the nearest int.
 =======
+=======
+>>>>>>> v3.18
 /** drm_mode_hsync - get the hsync of a mode
  * @mode: mode
  *
  * Returns:
  * @modes's hsync rate in kHz, rounded to the nearest integer. Calculates the
  * value first if it is not yet set.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int drm_mode_hsync(const struct drm_display_mode *mode)
@@ -870,6 +939,7 @@ EXPORT_SYMBOL(drm_mode_hsync);
  * @mode: mode
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * LOCKING:
  * None.
  *
@@ -881,6 +951,11 @@ EXPORT_SYMBOL(drm_mode_hsync);
  * Vertical refresh rate. It will be the result of actual value plus 0.5.
  * If it is 70.288, it will return 70Hz.
  * If it is 59.6, it will return 60Hz.
+=======
+ * Returns:
+ * @modes's vrefresh rate in Hz, rounded to the nearest integer. Calculates the
+ * value first if it is not yet set.
+>>>>>>> v3.18
 =======
  * Returns:
  * @modes's vrefresh rate in Hz, rounded to the nearest integer. Calculates the
@@ -915,6 +990,7 @@ EXPORT_SYMBOL(drm_mode_vrefresh);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drm_mode_set_crtcinfo - set CRTC modesetting parameters
  * @p: mode
  * @adjust_flags: unused? (FIXME)
@@ -924,6 +1000,8 @@ EXPORT_SYMBOL(drm_mode_vrefresh);
  *
  * Setup the CRTC modesetting parameters for @p, adjusting if necessary.
 =======
+=======
+>>>>>>> v3.18
  * drm_mode_set_crtcinfo - set CRTC modesetting timing parameters
  * @p: mode
  * @adjust_flags: a combination of adjustment flags
@@ -935,6 +1013,9 @@ EXPORT_SYMBOL(drm_mode_vrefresh);
  * - The CRTC_STEREO_DOUBLE flag can be used to compute the timings for
  *   buffers containing two eyes (only adjust the timings when needed, eg. for
  *   "frame packing" or "side by side full").
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void drm_mode_set_crtcinfo(struct drm_display_mode *p, int adjust_flags)
@@ -943,6 +1024,10 @@ void drm_mode_set_crtcinfo(struct drm_display_mode *p, int adjust_flags)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	p->crtc_clock = p->clock;
+>>>>>>> v3.18
 =======
 	p->crtc_clock = p->clock;
 >>>>>>> v3.18
@@ -980,7 +1065,10 @@ void drm_mode_set_crtcinfo(struct drm_display_mode *p, int adjust_flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (adjust_flags & CRTC_STEREO_DOUBLE) {
 		unsigned int layout = p->flags & DRM_MODE_FLAG_3D_MASK;
 
@@ -995,6 +1083,9 @@ void drm_mode_set_crtcinfo(struct drm_display_mode *p, int adjust_flags)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p->crtc_vblank_start = min(p->crtc_vsync_start, p->crtc_vdisplay);
 	p->crtc_vblank_end = max(p->crtc_vsync_end, p->crtc_vtotal);
@@ -1004,7 +1095,10 @@ void drm_mode_set_crtcinfo(struct drm_display_mode *p, int adjust_flags)
 EXPORT_SYMBOL(drm_mode_set_crtcinfo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -1012,6 +1106,7 @@ EXPORT_SYMBOL(drm_mode_set_crtcinfo);
  * @dst: mode to overwrite
  * @src: mode to copy
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * LOCKING:
  * None.
@@ -1022,27 +1117,38 @@ EXPORT_SYMBOL(drm_mode_set_crtcinfo);
  * Copy an existing mode into another mode, preserving the object id and
  * list head of the destination mode.
 >>>>>>> v3.18
+=======
+ * Copy an existing mode into another mode, preserving the object id and
+ * list head of the destination mode.
+>>>>>>> v3.18
  */
 void drm_mode_copy(struct drm_display_mode *dst, const struct drm_display_mode *src)
 {
 	int id = dst->base.id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	*dst = *src;
 	dst->base.id = id;
 	INIT_LIST_HEAD(&dst->head);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head head = dst->head;
 
 	*dst = *src;
 	dst->base.id = id;
 	dst->head = head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(drm_mode_copy);
 
 /**
  * drm_mode_duplicate - allocate and duplicate an existing mode
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @m: mode to duplicate
  *
@@ -1052,6 +1158,8 @@ EXPORT_SYMBOL(drm_mode_copy);
  * Just allocate a new mode, copy the existing mode into it, and return
  * a pointer to it.  Used to create new instances of established modes.
 =======
+=======
+>>>>>>> v3.18
  * @dev: drm_device to allocate the duplicated mode for
  * @mode: mode to duplicate
  *
@@ -1060,6 +1168,9 @@ EXPORT_SYMBOL(drm_mode_copy);
  *
  * Returns:
  * Pointer to duplicated mode on success, NULL on error.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct drm_display_mode *drm_mode_duplicate(struct drm_device *dev,
@@ -1083,12 +1194,18 @@ EXPORT_SYMBOL(drm_mode_duplicate);
  * @mode2: second mode
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * LOCKING:
  * None.
  *
  * Check to see if @mode1 and @mode2 are equivalent.
  *
  * RETURNS:
+=======
+ * Check to see if @mode1 and @mode2 are equivalent.
+ *
+ * Returns:
+>>>>>>> v3.18
 =======
  * Check to see if @mode1 and @mode2 are equivalent.
  *
@@ -1107,18 +1224,25 @@ bool drm_mode_equal(const struct drm_display_mode *mode1, const struct drm_displ
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drm_mode_equal_no_clocks(mode1, mode2);
 =======
+=======
+>>>>>>> v3.18
 	if ((mode1->flags & DRM_MODE_FLAG_3D_MASK) !=
 	    (mode2->flags & DRM_MODE_FLAG_3D_MASK))
 		return false;
 
 	return drm_mode_equal_no_clocks_no_stereo(mode1, mode2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(drm_mode_equal);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * drm_mode_equal_no_clocks - test modes for equality
  * @mode1: first mode
@@ -1135,6 +1259,8 @@ EXPORT_SYMBOL(drm_mode_equal);
  */
 bool drm_mode_equal_no_clocks(const struct drm_display_mode *mode1, const struct drm_display_mode *mode2)
 =======
+=======
+>>>>>>> v3.18
  * drm_mode_equal_no_clocks_no_stereo - test modes for equality
  * @mode1: first mode
  * @mode2: second mode
@@ -1147,6 +1273,9 @@ bool drm_mode_equal_no_clocks(const struct drm_display_mode *mode1, const struct
  */
 bool drm_mode_equal_no_clocks_no_stereo(const struct drm_display_mode *mode1,
 					const struct drm_display_mode *mode2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (mode1->hdisplay == mode2->hdisplay &&
@@ -1160,7 +1289,12 @@ bool drm_mode_equal_no_clocks_no_stereo(const struct drm_display_mode *mode1,
 	    mode1->vtotal == mode2->vtotal &&
 	    mode1->vscan == mode2->vscan &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    mode1->flags == mode2->flags)
+=======
+	    (mode1->flags & ~DRM_MODE_FLAG_3D_MASK) ==
+	     (mode2->flags & ~DRM_MODE_FLAG_3D_MASK))
+>>>>>>> v3.18
 =======
 	    (mode1->flags & ~DRM_MODE_FLAG_3D_MASK) ==
 	     (mode2->flags & ~DRM_MODE_FLAG_3D_MASK))
@@ -1170,7 +1304,11 @@ bool drm_mode_equal_no_clocks_no_stereo(const struct drm_display_mode *mode1,
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_mode_equal_no_clocks);
+=======
+EXPORT_SYMBOL(drm_mode_equal_no_clocks_no_stereo);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(drm_mode_equal_no_clocks_no_stereo);
 >>>>>>> v3.18
@@ -1181,6 +1319,7 @@ EXPORT_SYMBOL(drm_mode_equal_no_clocks_no_stereo);
  * @mode_list: list of modes to check
  * @maxX: maximum width
  * @maxY: maximum height
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @maxPitch: max pitch
  *
@@ -1195,6 +1334,8 @@ void drm_mode_validate_size(struct drm_device *dev,
 			    struct list_head *mode_list,
 			    int maxX, int maxY, int maxPitch)
 =======
+=======
+>>>>>>> v3.18
  *
  * This function is a helper which can be used to validate modes against size
  * limitations of the DRM device/connector. If a mode is too big its status
@@ -1204,15 +1345,21 @@ void drm_mode_validate_size(struct drm_device *dev,
 void drm_mode_validate_size(struct drm_device *dev,
 			    struct list_head *mode_list,
 			    int maxX, int maxY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_display_mode *mode;
 
 	list_for_each_entry(mode, mode_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (maxPitch > 0 && mode->hdisplay > maxPitch)
 			mode->status = MODE_BAD_WIDTH;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (maxX > 0 && mode->hdisplay > maxX)
@@ -1225,6 +1372,7 @@ void drm_mode_validate_size(struct drm_device *dev,
 EXPORT_SYMBOL(drm_mode_validate_size);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * drm_mode_validate_clocks - validate modes against clock limits
  * @dev: DRM device
@@ -1265,11 +1413,14 @@ EXPORT_SYMBOL(drm_mode_validate_clocks);
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * drm_mode_prune_invalid - remove invalid modes from mode list
  * @dev: DRM device
  * @mode_list: list of modes to check
  * @verbose: be verbose about it
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * LOCKING:
  * Caller must hold a lock protecting @mode_list.
@@ -1278,10 +1429,15 @@ EXPORT_SYMBOL(drm_mode_validate_clocks);
  * remove invalid modes from a mode list.  If any of the modes have a
  * status other than %MODE_OK, they are removed from @mode_list and freed.
 =======
+=======
+>>>>>>> v3.18
  * This helper function can be used to prune a display mode list after
  * validation has been completed. All modes who's status is not MODE_OK will be
  * removed from the list, and if @verbose the status code and mode name is also
  * printed to dmesg.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void drm_mode_prune_invalid(struct drm_device *dev,
@@ -1310,6 +1466,7 @@ EXPORT_SYMBOL(drm_mode_prune_invalid);
  * @lh_b: list_head for second mode
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * LOCKING:
  * None.
  *
@@ -1318,10 +1475,15 @@ EXPORT_SYMBOL(drm_mode_prune_invalid);
  *
  * RETURNS:
 =======
+=======
+>>>>>>> v3.18
  * Compare two modes, given by @lh_a and @lh_b, returning a value indicating
  * which is better.
  *
  * Returns:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Negative if @lh_a is better than @lh_b, zero if they're equivalent, or
  * positive if @lh_b is better than @lh_a.
@@ -1340,12 +1502,18 @@ static int drm_mode_compare(void *priv, struct list_head *lh_a, struct list_head
 	if (diff)
 		return diff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	diff = b->vrefresh - a->vrefresh;
 	if (diff)
 		return diff;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	diff = b->clock - a->clock;
 	return diff;
@@ -1354,12 +1522,18 @@ static int drm_mode_compare(void *priv, struct list_head *lh_a, struct list_head
 /**
  * drm_mode_sort - sort mode list
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mode_list: list to sort
  *
  * LOCKING:
  * Caller must hold a lock protecting @mode_list.
  *
  * Sort @mode_list by favorability, putting good modes first.
+=======
+ * @mode_list: list of drm_display_mode structures to sort
+ *
+ * Sort @mode_list by favorability, moving good modes to the head of the list.
+>>>>>>> v3.18
 =======
  * @mode_list: list of drm_display_mode structures to sort
  *
@@ -1376,6 +1550,7 @@ EXPORT_SYMBOL(drm_mode_sort);
  * drm_mode_connector_list_update - update the mode list for the connector
  * @connector: the connector to update
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * LOCKING:
  * Caller must hold a lock protecting @mode_list.
@@ -1387,6 +1562,8 @@ EXPORT_SYMBOL(drm_mode_sort);
  */
 void drm_mode_connector_list_update(struct drm_connector *connector)
 =======
+=======
+>>>>>>> v3.18
  * @merge_type_bits: whether to merge or overright type bits.
  *
  * This moves the modes from the @connector probed_modes list
@@ -1398,6 +1575,9 @@ void drm_mode_connector_list_update(struct drm_connector *connector)
  */
 void drm_mode_connector_list_update(struct drm_connector *connector,
 				    bool merge_type_bits)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_display_mode *mode;
@@ -1405,6 +1585,11 @@ void drm_mode_connector_list_update(struct drm_connector *connector,
 	int found_it;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_ON(!mutex_is_locked(&connector->dev->mode_config.mutex));
+
+>>>>>>> v3.18
 =======
 	WARN_ON(!mutex_is_locked(&connector->dev->mode_config.mutex));
 
@@ -1420,12 +1605,18 @@ void drm_mode_connector_list_update(struct drm_connector *connector,
 				mode->status = pmode->status;
 				/* Merge type bits together */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mode->type |= pmode->type;
 =======
+=======
+>>>>>>> v3.18
 				if (merge_type_bits)
 					mode->type |= pmode->type;
 				else
 					mode->type = pmode->type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				list_del(&pmode->head);
 				drm_mode_destroy(connector->dev, pmode);
@@ -1442,6 +1633,7 @@ EXPORT_SYMBOL(drm_mode_connector_list_update);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drm_mode_parse_command_line_for_connector - parse command line for connector
  * @mode_option - per connector mode option
  * @connector - connector to parse line for
@@ -1454,6 +1646,8 @@ EXPORT_SYMBOL(drm_mode_connector_list_update);
  *
  * enable/enable Digital/disable bit at the end
 =======
+=======
+>>>>>>> v3.18
  * drm_mode_parse_command_line_for_connector - parse command line modeline for connector
  * @mode_option: optional per connector mode option
  * @connector: connector to parse modeline for
@@ -1473,6 +1667,9 @@ EXPORT_SYMBOL(drm_mode_connector_list_update);
  *
  * Returns:
  * True if a valid modeline has been parsed, false otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 bool drm_mode_parse_command_line_for_connector(const char *mode_option,
@@ -1627,7 +1824,10 @@ done:
 EXPORT_SYMBOL(drm_mode_parse_command_line_for_connector);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mode_create_from_cmdline_mode - convert a command line modeline into a DRM display mode
  * @dev: DRM device to create the new mode for
@@ -1636,6 +1836,9 @@ EXPORT_SYMBOL(drm_mode_parse_command_line_for_connector);
  * Returns:
  * Pointer to converted mode on success, NULL on error.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct drm_display_mode *
 drm_mode_create_from_cmdline_mode(struct drm_device *dev,
@@ -1659,6 +1862,10 @@ drm_mode_create_from_cmdline_mode(struct drm_device *dev,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mode->type |= DRM_MODE_TYPE_USERDEF;
+>>>>>>> v3.18
 =======
 	mode->type |= DRM_MODE_TYPE_USERDEF;
 >>>>>>> v3.18

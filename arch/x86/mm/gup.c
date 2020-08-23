@@ -84,13 +84,19 @@ static noinline int gup_pte_range(pmd_t pmd, unsigned long addr,
 		struct page *page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Similar to the PMD case, NUMA hinting must take slow path */
 		if (pte_numa(pte)) {
 			pte_unmap(ptep);
 			return 0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((pte_flags(pte) & (mask | _PAGE_SPECIAL)) != mask) {
 			pte_unmap(ptep);
@@ -112,8 +118,13 @@ static noinline int gup_pte_range(pmd_t pmd, unsigned long addr,
 static inline void get_head_page_multiple(struct page *page, int nr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(page != compound_head(page));
 	VM_BUG_ON(page_count(page) == 0);
+=======
+	VM_BUG_ON_PAGE(page != compound_head(page), page);
+	VM_BUG_ON_PAGE(page_count(page) == 0, page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(page != compound_head(page), page);
 	VM_BUG_ON_PAGE(page_count(page) == 0, page);
@@ -144,7 +155,11 @@ static noinline int gup_huge_pmd(pmd_t pmd, unsigned long addr,
 	page = head + ((addr & ~PMD_MASK) >> PAGE_SHIFT);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		VM_BUG_ON(compound_head(page) != head);
+=======
+		VM_BUG_ON_PAGE(compound_head(page) != head, page);
+>>>>>>> v3.18
 =======
 		VM_BUG_ON_PAGE(compound_head(page) != head, page);
 >>>>>>> v3.18
@@ -186,7 +201,10 @@ static int gup_pmd_range(pud_t pud, unsigned long addr, unsigned long end,
 			return 0;
 		if (unlikely(pmd_large(pmd))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * NUMA hinting faults need to be handled in the GUP
 			 * slowpath for accounting purposes and so that they
@@ -194,6 +212,9 @@ static int gup_pmd_range(pud_t pud, unsigned long addr, unsigned long end,
 			 */
 			if (pmd_numa(pmd))
 				return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!gup_huge_pmd(pmd, addr, next, write, pages, nr))
 				return 0;
@@ -228,7 +249,11 @@ static noinline int gup_huge_pud(pud_t pud, unsigned long addr,
 	page = head + ((addr & ~PUD_MASK) >> PAGE_SHIFT);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		VM_BUG_ON(compound_head(page) != head);
+=======
+		VM_BUG_ON_PAGE(compound_head(page) != head, page);
+>>>>>>> v3.18
 =======
 		VM_BUG_ON_PAGE(compound_head(page) != head, page);
 >>>>>>> v3.18

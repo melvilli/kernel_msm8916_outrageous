@@ -36,7 +36,11 @@
 
 /* Registers:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  r4: vcpu pointer
+=======
+ *  none
+>>>>>>> v3.18
 =======
  *  none
 >>>>>>> v3.18
@@ -62,15 +66,21 @@ BEGIN_FTR_SECTION
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_206)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Save host DABR */
 	mfspr	r3, SPRN_DABR
 	std	r3, HSTATE_DABR(r13)
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	/* Save host DABR */
 	mfspr	r3, SPRN_DABR
 	std	r3, HSTATE_DABR(r13)
 END_FTR_SECTION_IFCLR(CPU_FTR_ARCH_207S)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Hard-disable interrupts */
@@ -82,8 +92,11 @@ END_FTR_SECTION_IFCLR(CPU_FTR_ARCH_207S)
 
 	/* Save host PMU registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* R4 is live here (vcpu pointer) but not r3 or r5 */
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	/* Work around P8 PMAE bug */
 	li	r3, -1
@@ -92,6 +105,9 @@ BEGIN_FTR_SECTION
 	mtspr	SPRN_MMCR2, r3		/* freeze all counters using MMCR2 */
 	isync
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	li	r3, 1
 	sldi	r3, r3, 31		/* MMCR0_FC (freeze counters) bit */
@@ -110,10 +126,13 @@ END_FTR_SECTION_IFSET(CPU_FTR_ARCH_206)
 	beq	31f			/* skip if not */
 	mfspr	r5, SPRN_MMCR1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r7, HSTATE_MMCR(r13)
 	std	r5, HSTATE_MMCR + 8(r13)
 	std	r6, HSTATE_MMCR + 16(r13)
 =======
+=======
+>>>>>>> v3.18
 	mfspr	r9, SPRN_SIAR
 	mfspr	r10, SPRN_SDAR
 	std	r7, HSTATE_MMCR(r13)
@@ -126,6 +145,9 @@ BEGIN_FTR_SECTION
 	std	r8, HSTATE_MMCR + 40(r13)
 	std	r9, HSTATE_MMCR + 48(r13)
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfspr	r3, SPRN_PMC1
 	mfspr	r5, SPRN_PMC2
@@ -173,6 +195,10 @@ END_FTR_SECTION_IFSET(CPU_FTR_ARCH_201)
 	 */
 BEGIN_FTR_SECTION
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ld	r4, HSTATE_KVM_VCPU(r13)
+>>>>>>> v3.18
 =======
 	ld	r4, HSTATE_KVM_VCPU(r13)
 >>>>>>> v3.18
@@ -181,6 +207,7 @@ BEGIN_FTR_SECTION
 	oris	r7, r7, (1 << BOOK3S_IRQPRIO_EXTERNAL_LEVEL)@h
 	and.	r0, r0, r7
 	beq	32f
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mr	r31, r4
 	lhz	r3, PACAPACAINDEX(r13)
@@ -192,13 +219,22 @@ BEGIN_FTR_SECTION
 	bl	smp_send_reschedule
 	nop
 >>>>>>> v3.18
+=======
+	lhz	r3, PACAPACAINDEX(r13)
+	bl	smp_send_reschedule
+	nop
+>>>>>>> v3.18
 32:
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_201)
 #endif /* CONFIG_SMP */
 
 	/* Jump to partition switch code */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.kvmppc_hv_entry_trampoline
+=======
+	bl	kvmppc_hv_entry_trampoline
+>>>>>>> v3.18
 =======
 	bl	kvmppc_hv_entry_trampoline
 >>>>>>> v3.18
@@ -211,9 +247,12 @@ END_FTR_SECTION_IFSET(CPU_FTR_ARCH_201)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .global kvmppc_handler_highmem
 kvmppc_handler_highmem:
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

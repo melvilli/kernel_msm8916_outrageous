@@ -33,6 +33,11 @@ typedef u64 __nocast cputime_t;
 typedef u64 __nocast cputime64_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cmpxchg_cputime(ptr, old, new) cmpxchg(ptr, old, new)
+
+>>>>>>> v3.18
 =======
 #define cmpxchg_cputime(ptr, old, new) cmpxchg(ptr, old, new)
 
@@ -62,15 +67,21 @@ static inline cputime_t cputime_to_scaled(const cputime_t ct)
 {
 	if (cpu_has_feature(CPU_FTR_SPURR) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    __get_cpu_var(cputime_last_delta))
 		return (__force u64) ct *
 			__get_cpu_var(cputime_scaled_last_delta) /
 			__get_cpu_var(cputime_last_delta);
 =======
+=======
+>>>>>>> v3.18
 	    __this_cpu_read(cputime_last_delta))
 		return (__force u64) ct *
 			__this_cpu_read(cputime_scaled_last_delta) /
 			__this_cpu_read(cputime_last_delta);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ct;
 }

@@ -25,15 +25,21 @@
 #include <mach/at91_matrix.h>
 #include <mach/at91sam9_smc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "board.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include <mach/hardware.h>
 
 #include "board.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -841,7 +847,11 @@ void __init at91_add_device_can(struct at91_can_data *data) {}
 #if defined(CONFIG_FB_ATMEL) || defined(CONFIG_FB_ATMEL_MODULE)
 static u64 lcdc_dmamask = DMA_BIT_MASK(32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info lcdc_data;
+=======
+static struct atmel_lcdfb_pdata lcdc_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata lcdc_data;
 >>>>>>> v3.18
@@ -872,7 +882,11 @@ static struct platform_device at91_lcdc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
+>>>>>>> v3.18
 =======
 void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
 >>>>>>> v3.18
@@ -908,7 +922,11 @@ void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data) {}
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
+>>>>>>> v3.18
 =======
 void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
 >>>>>>> v3.18
@@ -1150,9 +1168,13 @@ static void __init at91_add_device_watchdog(void) {}
  * --------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ATMEL_PWM)
 static u32 pwm_mask;
 
+=======
+#if IS_ENABLED(CONFIG_PWM_ATMEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_PWM_ATMEL)
 >>>>>>> v3.18
@@ -1171,11 +1193,16 @@ static struct resource pwm_resources[] = {
 
 static struct platform_device at91sam9263_pwm0_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name	= "atmel_pwm",
 	.id	= -1,
 	.dev	= {
 		.platform_data		= &pwm_mask,
 	},
+=======
+	.name	= "at91sam9rl-pwm",
+	.id	= -1,
+>>>>>>> v3.18
 =======
 	.name	= "at91sam9rl-pwm",
 	.id	= -1,
@@ -1199,8 +1226,11 @@ void __init at91_add_device_pwm(u32 mask)
 		at91_set_B_periph(AT91_PIN_PB29, 1);	/* enable PWM3 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwm_mask = mask;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	platform_device_register(&at91sam9263_pwm0_device);

@@ -16,6 +16,10 @@
 #include <linux/kvm_host.h>
 #include <linux/perf_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/perf_event.h>
+>>>>>>> v3.18
 =======
 #include <asm/perf_event.h>
 >>>>>>> v3.18
@@ -113,12 +117,18 @@ static void kvm_perf_overflow(struct perf_event *perf_event,
 	struct kvm_pmc *pmc = perf_event->overflow_handler_context;
 	struct kvm_pmu *pmu = &pmc->vcpu->arch.pmu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__set_bit(pmc->idx, (unsigned long *)&pmu->global_status);
 =======
+=======
+>>>>>>> v3.18
 	if (!test_and_set_bit(pmc->idx, (unsigned long *)&pmu->reprogram_pmi)) {
 		__set_bit(pmc->idx, (unsigned long *)&pmu->global_status);
 		kvm_make_request(KVM_REQ_PMU, pmc->vcpu);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -129,7 +139,11 @@ static void kvm_perf_overflow_intr(struct perf_event *perf_event,
 	struct kvm_pmu *pmu = &pmc->vcpu->arch.pmu;
 	if (!test_and_set_bit(pmc->idx, (unsigned long *)&pmu->reprogram_pmi)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kvm_perf_overflow(perf_event, data, regs);
+=======
+		__set_bit(pmc->idx, (unsigned long *)&pmu->global_status);
+>>>>>>> v3.18
 =======
 		__set_bit(pmc->idx, (unsigned long *)&pmu->global_status);
 >>>>>>> v3.18
@@ -176,7 +190,11 @@ static void stop_counter(struct kvm_pmc *pmc)
 static void reprogram_counter(struct kvm_pmc *pmc, u32 type,
 		unsigned config, bool exclude_user, bool exclude_kernel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bool intr)
+=======
+		bool intr, bool in_tx, bool in_tx_cp)
+>>>>>>> v3.18
 =======
 		bool intr, bool in_tx, bool in_tx_cp)
 >>>>>>> v3.18
@@ -193,11 +211,17 @@ static void reprogram_counter(struct kvm_pmc *pmc, u32 type,
 		.config = config,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (in_tx)
 		attr.config |= HSW_IN_TX;
 	if (in_tx_cp)
 		attr.config |= HSW_IN_TX_CHECKPOINTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	attr.sample_period = (-pmc->counter) & pmc_bitmask(pmc);
@@ -253,7 +277,13 @@ static void reprogram_gp_counter(struct kvm_pmc *pmc, u64 eventsel)
 	if (!(eventsel & (ARCH_PERFMON_EVENTSEL_EDGE |
 				ARCH_PERFMON_EVENTSEL_INV |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ARCH_PERFMON_EVENTSEL_CMASK))) {
+=======
+				ARCH_PERFMON_EVENTSEL_CMASK |
+				HSW_IN_TX |
+				HSW_IN_TX_CHECKPOINTED))) {
+>>>>>>> v3.18
 =======
 				ARCH_PERFMON_EVENTSEL_CMASK |
 				HSW_IN_TX |
@@ -272,7 +302,13 @@ static void reprogram_gp_counter(struct kvm_pmc *pmc, u64 eventsel)
 			!(eventsel & ARCH_PERFMON_EVENTSEL_USR),
 			!(eventsel & ARCH_PERFMON_EVENTSEL_OS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			eventsel & ARCH_PERFMON_EVENTSEL_INT);
+=======
+			eventsel & ARCH_PERFMON_EVENTSEL_INT,
+			(eventsel & HSW_IN_TX),
+			(eventsel & HSW_IN_TX_CHECKPOINTED));
+>>>>>>> v3.18
 =======
 			eventsel & ARCH_PERFMON_EVENTSEL_INT,
 			(eventsel & HSW_IN_TX),
@@ -295,7 +331,11 @@ static void reprogram_fixed_counter(struct kvm_pmc *pmc, u8 en_pmi, int idx)
 			!(en & 0x2), /* exclude user */
 			!(en & 0x1), /* exclude kernel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pmi);
+=======
+			pmi, false, false);
+>>>>>>> v3.18
 =======
 			pmi, false, false);
 >>>>>>> v3.18
@@ -451,7 +491,11 @@ int kvm_pmu_set_msr(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
 			if (data == pmc->eventsel)
 				return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(data & 0xffffffff00200000ull)) {
+=======
+			if (!(data & pmu->reserved_bits)) {
+>>>>>>> v3.18
 =======
 			if (!(data & pmu->reserved_bits)) {
 >>>>>>> v3.18
@@ -464,7 +508,10 @@ int kvm_pmu_set_msr(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int kvm_pmu_check_pmc(struct kvm_vcpu *vcpu, unsigned pmc)
 {
 	struct kvm_pmu *pmu = &vcpu->arch.pmu;
@@ -474,6 +521,9 @@ int kvm_pmu_check_pmc(struct kvm_vcpu *vcpu, unsigned pmc)
 		(fixed && pmc >= pmu->nr_arch_fixed_counters);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvm_pmu_read_pmc(struct kvm_vcpu *vcpu, unsigned pmc, u64 *data)
 {
@@ -502,7 +552,12 @@ void kvm_pmu_cpuid_update(struct kvm_vcpu *vcpu)
 	struct kvm_pmu *pmu = &vcpu->arch.pmu;
 	struct kvm_cpuid_entry2 *entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned bitmap_len;
+=======
+	union cpuid10_eax eax;
+	union cpuid10_edx edx;
+>>>>>>> v3.18
 =======
 	union cpuid10_eax eax;
 	union cpuid10_edx edx;
@@ -514,6 +569,10 @@ void kvm_pmu_cpuid_update(struct kvm_vcpu *vcpu)
 	pmu->counter_bitmask[KVM_PMC_FIXED] = 0;
 	pmu->version = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pmu->reserved_bits = 0xffffffff00200000ull;
+>>>>>>> v3.18
 =======
 	pmu->reserved_bits = 0xffffffff00200000ull;
 >>>>>>> v3.18
@@ -521,6 +580,7 @@ void kvm_pmu_cpuid_update(struct kvm_vcpu *vcpu)
 	entry = kvm_find_cpuid_entry(vcpu, 0xa, 0);
 	if (!entry)
 		return;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	pmu->version = entry->eax & 0xff;
@@ -534,6 +594,8 @@ void kvm_pmu_cpuid_update(struct kvm_vcpu *vcpu)
 	bitmap_len = (entry->eax >> 24) & 0xff;
 	pmu->available_event_types = ~entry->ebx & ((1ull << bitmap_len) - 1);
 =======
+=======
+>>>>>>> v3.18
 	eax.full = entry->eax;
 	edx.full = entry->edx;
 
@@ -546,22 +608,31 @@ void kvm_pmu_cpuid_update(struct kvm_vcpu *vcpu)
 	pmu->counter_bitmask[KVM_PMC_GP] = ((u64)1 << eax.split.bit_width) - 1;
 	pmu->available_event_types = ~entry->ebx &
 					((1ull << eax.split.mask_length) - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pmu->version == 1) {
 		pmu->nr_arch_fixed_counters = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pmu->nr_arch_fixed_counters = min((int)(entry->edx & 0x1f),
 				INTEL_PMC_MAX_FIXED);
 		pmu->counter_bitmask[KVM_PMC_FIXED] =
 			((u64)1 << ((entry->edx >> 5) & 0xff)) - 1;
 =======
+=======
+>>>>>>> v3.18
 		pmu->nr_arch_fixed_counters =
 			min_t(int, edx.split.num_counters_fixed,
 				INTEL_PMC_MAX_FIXED);
 		pmu->counter_bitmask[KVM_PMC_FIXED] =
 			((u64)1 << edx.split.bit_width_fixed) - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -569,13 +640,19 @@ void kvm_pmu_cpuid_update(struct kvm_vcpu *vcpu)
 		(((1ull << pmu->nr_arch_fixed_counters) - 1) << INTEL_PMC_IDX_FIXED);
 	pmu->global_ctrl_mask = ~pmu->global_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	entry = kvm_find_cpuid_entry(vcpu, 7, 0);
 	if (entry &&
 	    (boot_cpu_has(X86_FEATURE_HLE) || boot_cpu_has(X86_FEATURE_RTM)) &&
 	    (entry->ebx & (X86_FEATURE_HLE|X86_FEATURE_RTM)))
 		pmu->reserved_bits ^= HSW_IN_TX|HSW_IN_TX_CHECKPOINTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

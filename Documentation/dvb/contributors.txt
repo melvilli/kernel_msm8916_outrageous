@@ -79,7 +79,11 @@ Wilson Michaels <wilsonmichaels@earthlink.net>
   for the lgdt330x frontend driver, and various bugfixes
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Michael Krufky <mkrufky@m1k.net>
+=======
+Michael Krufky <mkrufky@linuxtv.org>
+>>>>>>> v3.18
 =======
 Michael Krufky <mkrufky@linuxtv.org>
 >>>>>>> v3.18

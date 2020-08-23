@@ -24,7 +24,10 @@ BOOTCFLAGS    := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		 -fomit-frame-pointer -fno-builtin -fPIC -nostdinc \
 		 -isystem $(shell $(CROSS32CC) -print-file-name=include)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifdef CONFIG_PPC64_BOOT_WRAPPER
 BOOTCFLAGS	+= -m64
 endif
@@ -32,6 +35,9 @@ ifdef CONFIG_CPU_BIG_ENDIAN
 BOOTCFLAGS	+= -mbig-endian
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 BOOTAFLAGS	:= -D__ASSEMBLY__ $(BOOTCFLAGS) -traditional -nostdinc
 
@@ -57,6 +63,10 @@ $(obj)/treeboot-walnut.o: BOOTCFLAGS += -mcpu=405
 $(obj)/treeboot-iss4xx.o: BOOTCFLAGS += -mcpu=405
 $(obj)/treeboot-currituck.o: BOOTCFLAGS += -mcpu=405
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+$(obj)/treeboot-akebono.o: BOOTCFLAGS += -mcpu=405
+>>>>>>> v3.18
 =======
 $(obj)/treeboot-akebono.o: BOOTCFLAGS += -mcpu=405
 >>>>>>> v3.18
@@ -68,7 +78,11 @@ zlibheader := inffast.h inffixed.h inflate.h inftrees.h infutil.h
 zliblinuxheader := zlib.h zconf.h zutil.h
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(addprefix $(obj)/,$(zlib) cuboot-c2k.o gunzip_util.o main.o prpmc2800.o): \
+=======
+$(addprefix $(obj)/,$(zlib) cuboot-c2k.o gunzip_util.o main.o): \
+>>>>>>> v3.18
 =======
 $(addprefix $(obj)/,$(zlib) cuboot-c2k.o gunzip_util.o main.o): \
 >>>>>>> v3.18
@@ -89,17 +103,23 @@ src-wlib-y := string.S crt0.S crtsavres.S stdio.c main.c \
 src-wlib-$(CONFIG_40x) += 4xx.c planetcore.c
 src-wlib-$(CONFIG_44x) += 4xx.c ebony.c bamboo.c
 <<<<<<< HEAD
+<<<<<<< HEAD
 src-wlib-$(CONFIG_8xx) += mpc8xx.c planetcore.c
 src-wlib-$(CONFIG_PPC_82xx) += pq2.c fsl-soc.c planetcore.c
 src-wlib-$(CONFIG_EMBEDDED6xx) += mv64x60.c mv64x60_i2c.c ugecon.c
 
 src-plat-y := of.c
 =======
+=======
+>>>>>>> v3.18
 src-wlib-$(CONFIG_8xx) += mpc8xx.c planetcore.c fsl-soc.c
 src-wlib-$(CONFIG_PPC_82xx) += pq2.c fsl-soc.c planetcore.c
 src-wlib-$(CONFIG_EMBEDDED6xx) += mv64x60.c mv64x60_i2c.c ugecon.c fsl-soc.c
 
 src-plat-y := of.c epapr.c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 src-plat-$(CONFIG_40x) += fixed-head.S ep405.c cuboot-hotfoot.c \
 				treeboot-walnut.c cuboot-acadia.c \
@@ -112,6 +132,10 @@ src-plat-$(CONFIG_44x) += treeboot-ebony.c cuboot-ebony.c treeboot-bamboo.c \
 				cuboot-warp.c cuboot-yosemite.c \
 				treeboot-iss4xx.c treeboot-currituck.c \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				treeboot-akebono.c \
+>>>>>>> v3.18
 =======
 				treeboot-akebono.c \
 >>>>>>> v3.18
@@ -125,11 +149,14 @@ src-plat-$(CONFIG_EMBEDDED6xx) += cuboot-pq2.c cuboot-mpc7448hpc2.c \
 					cuboot-c2k.c gamecube-head.S \
 					gamecube.c wii-head.S wii.c holly.c \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					prpmc2800.c
 src-plat-$(CONFIG_AMIGAONE) += cuboot-amigaone.c
 src-plat-$(CONFIG_PPC_PS3) += ps3-head.S ps3-hvcall.S ps3.c
 src-plat-$(CONFIG_EPAPR_BOOT) += epapr.c
 =======
+=======
+>>>>>>> v3.18
 					fixed-head.S mvme5100.c
 src-plat-$(CONFIG_AMIGAONE) += cuboot-amigaone.c
 src-plat-$(CONFIG_PPC_PS3) += ps3-head.S ps3-hvcall.S ps3.c
@@ -139,6 +166,9 @@ src-plat-$(CONFIG_PPC_POWERNV) += pseries-head.S
 src-plat-$(CONFIG_PPC_IBM_CELL_BLADE) += pseries-head.S
 src-plat-$(CONFIG_PPC_CELLEB) += pseries-head.S
 src-plat-$(CONFIG_PPC_CELL_QPACE) += pseries-head.S
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 src-wlib := $(sort $(src-wlib-y))
@@ -179,13 +209,19 @@ $(obj)/empty.c:
 	@touch $@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj)/zImage.lds $(obj)/zImage.coff.lds $(obj)/zImage.ps3.lds: $(obj)/%: $(srctree)/$(src)/%.S
 =======
+=======
+>>>>>>> v3.18
 $(obj)/zImage.lds: $(obj)/%: $(srctree)/$(src)/%.S
 	$(CROSS32CC) $(cpp_flags) -E -Wp,-MD,$(depfile) -P -Upowerpc \
 		-D__ASSEMBLY__ -DLINKER_SCRIPT -o $@ $<
 
 $(obj)/zImage.coff.lds $(obj)/zImage.ps3.lds : $(obj)/%: $(srctree)/$(src)/%.S
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@cp $< $@
 
@@ -254,7 +290,10 @@ image-$(CONFIG_PPC_EFIKA)		+= zImage.chrp
 image-$(CONFIG_PPC_PMAC)		+= zImage.pmac
 image-$(CONFIG_PPC_HOLLY)		+= dtbImage.holly
 <<<<<<< HEAD
+<<<<<<< HEAD
 image-$(CONFIG_PPC_PRPMC2800)		+= dtbImage.prpmc2800
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 image-$(CONFIG_DEFAULT_UIMAGE)		+= uImage
@@ -289,6 +328,10 @@ image-$(CONFIG_ISS4xx)			+= treeImage.iss4xx \
 					   treeImage.iss4xx-mpic
 image-$(CONFIG_CURRITUCK)			+= treeImage.currituck
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+image-$(CONFIG_AKEBONO)			+= treeImage.akebono
+>>>>>>> v3.18
 =======
 image-$(CONFIG_AKEBONO)			+= treeImage.akebono
 >>>>>>> v3.18
@@ -343,6 +386,10 @@ image-$(CONFIG_PPC_C2K)			+= cuImage.c2k
 image-$(CONFIG_GAMECUBE)		+= dtbImage.gamecube
 image-$(CONFIG_WII)			+= dtbImage.wii
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+image-$(CONFIG_MVME5100)		+= dtbImage.mvme5100
+>>>>>>> v3.18
 =======
 image-$(CONFIG_MVME5100)		+= dtbImage.mvme5100
 >>>>>>> v3.18
@@ -376,8 +423,13 @@ $(obj)/zImage.initrd.%: vmlinux $(wrapperbits)
 	$(call if_changed,wrap,$*,,,$(obj)/ramdisk.image.gz)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj)/zImage.%: vmlinux $(wrapperbits)
 	$(call if_changed,wrap,$*)
+=======
+$(addprefix $(obj)/, $(sort $(filter zImage.%, $(image-y)))): vmlinux $(wrapperbits)
+	$(call if_changed,wrap,$(subst $(obj)/zImage.,,$@))
+>>>>>>> v3.18
 =======
 $(addprefix $(obj)/, $(sort $(filter zImage.%, $(image-y)))): vmlinux $(wrapperbits)
 	$(call if_changed,wrap,$(subst $(obj)/zImage.,,$@))
@@ -437,14 +489,20 @@ $(obj)/zImage.initrd:	$(addprefix $(obj)/, $(initrd-y))
 	@rm -f $@; ln $< $@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 install: $(CONFIGURE) $(addprefix $(obj)/, $(image-y))
 =======
+=======
+>>>>>>> v3.18
 # Only install the vmlinux
 install: $(CONFIGURE) $(addprefix $(obj)/, $(image-y))
 	sh -x $(srctree)/$(src)/install.sh "$(KERNELRELEASE)" vmlinux System.map "$(INSTALL_PATH)"
 
 # Install the vmlinux and other built boot targets.
 zInstall: $(CONFIGURE) $(addprefix $(obj)/, $(image-y))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sh -x $(srctree)/$(src)/install.sh "$(KERNELRELEASE)" vmlinux System.map "$(INSTALL_PATH)" $^
 

@@ -31,7 +31,11 @@
 
 /* Addresses to scan */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned short max1668_addr_list[] = {
+=======
+static const unsigned short max1668_addr_list[] = {
+>>>>>>> v3.18
 =======
 static const unsigned short max1668_addr_list[] = {
 >>>>>>> v3.18
@@ -71,7 +75,12 @@ enum chips { max1668, max1805, max1989 };
 
 struct max1668_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -92,8 +101,13 @@ struct max1668_data {
 static struct max1668_data *max1668_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max1668_data *data = i2c_get_clientdata(client);
+=======
+	struct max1668_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max1668_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -220,8 +234,13 @@ static ssize_t set_temp_max(struct device *dev,
 {
 	int index = to_sensor_dev_attr(devattr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max1668_data *data = i2c_get_clientdata(client);
+=======
+	struct max1668_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max1668_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -236,16 +255,22 @@ static ssize_t set_temp_max(struct device *dev,
 	mutex_lock(&data->update_lock);
 	data->temp_max[index] = clamp_val(temp/1000, -128, 127);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i2c_smbus_write_byte_data(client,
 					MAX1668_REG_LIMH_WR(index),
 					data->temp_max[index]))
 		count = -EIO;
 =======
+=======
+>>>>>>> v3.18
 	ret = i2c_smbus_write_byte_data(client,
 					MAX1668_REG_LIMH_WR(index),
 					data->temp_max[index]);
 	if (ret < 0)
 		count = ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 
@@ -258,8 +283,13 @@ static ssize_t set_temp_min(struct device *dev,
 {
 	int index = to_sensor_dev_attr(devattr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max1668_data *data = i2c_get_clientdata(client);
+=======
+	struct max1668_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max1668_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -274,16 +304,22 @@ static ssize_t set_temp_min(struct device *dev,
 	mutex_lock(&data->update_lock);
 	data->temp_min[index] = clamp_val(temp/1000, -128, 127);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i2c_smbus_write_byte_data(client,
 					MAX1668_REG_LIML_WR(index),
 					data->temp_min[index]))
 		count = -EIO;
 =======
+=======
+>>>>>>> v3.18
 	ret = i2c_smbus_write_byte_data(client,
 					MAX1668_REG_LIML_WR(index),
 					data->temp_min[index]);
 	if (ret < 0)
 		count = ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 
@@ -446,8 +482,14 @@ static int max1668_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adapter = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max1668_data *data;
 	int err;
+=======
+	struct device *dev = &client->dev;
+	struct device *hwmon_dev;
+	struct max1668_data *data;
+>>>>>>> v3.18
 =======
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
@@ -457,6 +499,7 @@ static int max1668_probe(struct i2c_client *client,
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(struct max1668_data),
 			    GFP_KERNEL);
@@ -507,6 +550,8 @@ static int max1668_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(struct max1668_data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -523,6 +568,9 @@ static int max1668_remove(struct i2c_client *client)
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data, data->groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -542,7 +590,10 @@ static struct i2c_driver max1668_driver = {
 		  },
 	.probe = max1668_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= max1668_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max1668_id,

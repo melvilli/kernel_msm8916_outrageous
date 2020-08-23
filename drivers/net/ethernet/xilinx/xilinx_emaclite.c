@@ -3,9 +3,15 @@
  *
  * This is a new flat driver which is based on the original emac_lite
 <<<<<<< HEAD
+<<<<<<< HEAD
  * driver from John Williams <john.williams@petalogix.com>.
  *
  * 2007-2009 (c) Xilinx, Inc.
+=======
+ * driver from John Williams <john.williams@xilinx.com>.
+ *
+ * 2007 - 2013 (c) Xilinx, Inc.
+>>>>>>> v3.18
 =======
  * driver from John Williams <john.williams@xilinx.com>.
  *
@@ -21,7 +27,10 @@
 #include <linux/module.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -41,7 +50,11 @@
 
 /* Register offsets for the EmacLite Core */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XEL_TXBUFF_OFFSET 	0x0		/* Transmit Buffer */
+=======
+#define XEL_TXBUFF_OFFSET	0x0		/* Transmit Buffer */
+>>>>>>> v3.18
 =======
 #define XEL_TXBUFF_OFFSET	0x0		/* Transmit Buffer */
 >>>>>>> v3.18
@@ -77,6 +90,7 @@
 
 /* Global Interrupt Enable Register (GIER) Bit Masks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XEL_GIER_GIE_MASK	0x80000000 	/* Global Enable */
 
 /* Transmit Status Register (TSR) Bit Masks */
@@ -85,6 +99,8 @@
 #define XEL_TSR_XMIT_IE_MASK	 0x00000008 	/* Tx interrupt enable bit */
 #define XEL_TSR_XMIT_ACTIVE_MASK 0x80000000 	/* Buffer is active, SW bit
 =======
+=======
+>>>>>>> v3.18
 #define XEL_GIER_GIE_MASK	0x80000000	/* Global Enable */
 
 /* Transmit Status Register (TSR) Bit Masks */
@@ -92,6 +108,9 @@
 #define XEL_TSR_PROGRAM_MASK	 0x00000002	/* Program the MAC address */
 #define XEL_TSR_XMIT_IE_MASK	 0x00000008	/* Tx interrupt enable bit */
 #define XEL_TSR_XMIT_ACTIVE_MASK 0x80000000	/* Buffer is active, SW bit
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						 * only. This is not documented
 						 * in the HW spec */
@@ -100,6 +119,7 @@
 #define XEL_TSR_PROG_MAC_ADDR	(XEL_TSR_XMIT_BUSY_MASK | XEL_TSR_PROGRAM_MASK)
 
 /* Receive Status Register (RSR) */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define XEL_RSR_RECV_DONE_MASK	0x00000001 	/* Rx complete */
 #define XEL_RSR_RECV_IE_MASK	0x00000008 	/* Rx interrupt enable bit */
@@ -117,6 +137,8 @@
 #define XEL_ARP_PACKET_SIZE		28 	/* Max ARP packet size */
 #define XEL_HEADER_IP_LENGTH_OFFSET	16 	/* IP Length Offset */
 =======
+=======
+>>>>>>> v3.18
 #define XEL_RSR_RECV_DONE_MASK	0x00000001	/* Rx complete */
 #define XEL_RSR_RECV_IE_MASK	0x00000008	/* Rx interrupt enable bit */
 
@@ -132,6 +154,9 @@
 /* General Ethernet Definitions */
 #define XEL_ARP_PACKET_SIZE		28	/* Max ARP packet size */
 #define XEL_HEADER_IP_LENGTH_OFFSET	16	/* IP Length Offset */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -201,6 +226,7 @@ static void xemaclite_enable_interrupts(struct net_local *drvdata)
 
 	/* Enable the Tx interrupts for the first Buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_data = in_be32(drvdata->base_addr + XEL_TSR_OFFSET);
 	out_be32(drvdata->base_addr + XEL_TSR_OFFSET,
 		 reg_data | XEL_TSR_XMIT_IE_MASK);
@@ -230,6 +256,8 @@ static void xemaclite_enable_interrupts(struct net_local *drvdata)
 	/* Enable the Global Interrupt Enable */
 	out_be32(drvdata->base_addr + XEL_GIER_OFFSET, XEL_GIER_GIE_MASK);
 =======
+=======
+>>>>>>> v3.18
 	reg_data = __raw_readl(drvdata->base_addr + XEL_TSR_OFFSET);
 	__raw_writel(reg_data | XEL_TSR_XMIT_IE_MASK,
 		     drvdata->base_addr + XEL_TSR_OFFSET);
@@ -239,6 +267,9 @@ static void xemaclite_enable_interrupts(struct net_local *drvdata)
 
 	/* Enable the Global Interrupt Enable */
 	__raw_writel(XEL_GIER_GIE_MASK, drvdata->base_addr + XEL_GIER_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -254,6 +285,7 @@ static void xemaclite_disable_interrupts(struct net_local *drvdata)
 	u32 reg_data;
 
 	/* Disable the Global Interrupt Enable */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	out_be32(drvdata->base_addr + XEL_GIER_OFFSET, XEL_GIER_GIE_MASK);
 
@@ -288,6 +320,8 @@ static void xemaclite_disable_interrupts(struct net_local *drvdata)
 			 reg_data & (~XEL_RSR_RECV_IE_MASK));
 	}
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(XEL_GIER_GIE_MASK, drvdata->base_addr + XEL_GIER_OFFSET);
 
 	/* Disable the Tx interrupts for the first buffer */
@@ -299,6 +333,9 @@ static void xemaclite_disable_interrupts(struct net_local *drvdata)
 	reg_data = __raw_readl(drvdata->base_addr + XEL_RSR_OFFSET);
 	__raw_writel(reg_data & (~XEL_RSR_RECV_IE_MASK),
 		     drvdata->base_addr + XEL_RSR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -328,7 +365,10 @@ static void xemaclite_aligned_write(void *src_ptr, u32 *dest_ptr,
 		*to_u16_ptr++ = *from_u16_ptr++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* This barrier resolves occasional issues seen around
 		 * cases where the data is not properly flushed out
 		 * from the processor store buffers to the destination
@@ -336,6 +376,9 @@ static void xemaclite_aligned_write(void *src_ptr, u32 *dest_ptr,
 		 */
 		wmb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Output a word */
 		*to_u32_ptr++ = align_buffer;
@@ -353,13 +396,19 @@ static void xemaclite_aligned_write(void *src_ptr, u32 *dest_ptr,
 			*to_u8_ptr++ = *from_u8_ptr++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* This barrier resolves occasional issues seen around
 		 * cases where the data is not properly flushed out
 		 * from the processor store buffers to the destination
 		 * memory locations.
 		 */
 		wmb();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*to_u32_ptr = align_buffer;
 	}
@@ -438,7 +487,11 @@ static int xemaclite_send_data(struct net_local *drvdata, u8 *data,
 
 	/* Check if the expected buffer is available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_data = in_be32(addr + XEL_TSR_OFFSET);
+=======
+	reg_data = __raw_readl(addr + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 	reg_data = __raw_readl(addr + XEL_TSR_OFFSET);
 >>>>>>> v3.18
@@ -455,7 +508,11 @@ static int xemaclite_send_data(struct net_local *drvdata, u8 *data,
 		addr = (void __iomem __force *)((u32 __force)addr ^
 						 XEL_BUFFER_OFFSET);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_data = in_be32(addr + XEL_TSR_OFFSET);
+=======
+		reg_data = __raw_readl(addr + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 		reg_data = __raw_readl(addr + XEL_TSR_OFFSET);
 >>>>>>> v3.18
@@ -470,7 +527,12 @@ static int xemaclite_send_data(struct net_local *drvdata, u8 *data,
 	xemaclite_aligned_write(data, (u32 __force *) addr, byte_count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be32(addr + XEL_TPLR_OFFSET, (byte_count & XEL_TPLR_LENGTH_MASK));
+=======
+	__raw_writel((byte_count & XEL_TPLR_LENGTH_MASK),
+		     addr + XEL_TPLR_OFFSET);
+>>>>>>> v3.18
 =======
 	__raw_writel((byte_count & XEL_TPLR_LENGTH_MASK),
 		     addr + XEL_TPLR_OFFSET);
@@ -481,9 +543,15 @@ static int xemaclite_send_data(struct net_local *drvdata, u8 *data,
 	 * is used by the interrupt handler to check whether a frame
 	 * has been transmitted */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_data = in_be32(addr + XEL_TSR_OFFSET);
 	reg_data |= (XEL_TSR_XMIT_BUSY_MASK | XEL_TSR_XMIT_ACTIVE_MASK);
 	out_be32(addr + XEL_TSR_OFFSET, reg_data);
+=======
+	reg_data = __raw_readl(addr + XEL_TSR_OFFSET);
+	reg_data |= (XEL_TSR_XMIT_BUSY_MASK | XEL_TSR_XMIT_ACTIVE_MASK);
+	__raw_writel(reg_data, addr + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 	reg_data = __raw_readl(addr + XEL_TSR_OFFSET);
 	reg_data |= (XEL_TSR_XMIT_BUSY_MASK | XEL_TSR_XMIT_ACTIVE_MASK);
@@ -504,7 +572,11 @@ static int xemaclite_send_data(struct net_local *drvdata, u8 *data,
  * Return:	Total number of bytes received
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data, int maxlen)
+=======
+static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
+>>>>>>> v3.18
 =======
 static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 >>>>>>> v3.18
@@ -518,7 +590,11 @@ static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 
 	/* Verify which buffer has valid data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_data = in_be32(addr + XEL_RSR_OFFSET);
+=======
+	reg_data = __raw_readl(addr + XEL_RSR_OFFSET);
+>>>>>>> v3.18
 =======
 	reg_data = __raw_readl(addr + XEL_RSR_OFFSET);
 >>>>>>> v3.18
@@ -539,7 +615,11 @@ static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 
 		/* Verify that buffer has valid data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_data = in_be32(addr + XEL_RSR_OFFSET);
+=======
+		reg_data = __raw_readl(addr + XEL_RSR_OFFSET);
+>>>>>>> v3.18
 =======
 		reg_data = __raw_readl(addr + XEL_RSR_OFFSET);
 >>>>>>> v3.18
@@ -550,7 +630,11 @@ static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 
 	/* Get the protocol type of the ethernet frame that arrived */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	proto_type = ((ntohl(in_be32(addr + XEL_HEADER_OFFSET +
+=======
+	proto_type = ((ntohl(__raw_readl(addr + XEL_HEADER_OFFSET +
+>>>>>>> v3.18
 =======
 	proto_type = ((ntohl(__raw_readl(addr + XEL_HEADER_OFFSET +
 >>>>>>> v3.18
@@ -560,22 +644,31 @@ static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 	/* Check if received ethernet frame is a raw ethernet frame
 	 * or an IP packet or an ARP packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (proto_type > ETH_DATA_LEN) {
 
 		if (proto_type == ETH_P_IP) {
 			length = ((ntohl(in_be32(addr +
 =======
+=======
+>>>>>>> v3.18
 	if (proto_type > (ETH_FRAME_LEN + ETH_FCS_LEN)) {
 
 		if (proto_type == ETH_P_IP) {
 			length = ((ntohl(__raw_readl(addr +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					XEL_HEADER_IP_LENGTH_OFFSET +
 					XEL_RXBUFF_OFFSET)) >>
 					XEL_HEADER_SHIFT) &
 					XEL_RPLR_LENGTH_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			length = min_t(u16, length, ETH_DATA_LEN);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			length += ETH_HLEN + ETH_FCS_LEN;
@@ -591,9 +684,12 @@ static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 		length = proto_type + ETH_HLEN + ETH_FCS_LEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(length > maxlen))
 		length = maxlen;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Read from the EmacLite device */
@@ -602,9 +698,15 @@ static u16 xemaclite_recv_data(struct net_local *drvdata, u8 *data)
 
 	/* Acknowledge the frame */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_data = in_be32(addr + XEL_RSR_OFFSET);
 	reg_data &= ~XEL_RSR_RECV_DONE_MASK;
 	out_be32(addr + XEL_RSR_OFFSET, reg_data);
+=======
+	reg_data = __raw_readl(addr + XEL_RSR_OFFSET);
+	reg_data &= ~XEL_RSR_RECV_DONE_MASK;
+	__raw_writel(reg_data, addr + XEL_RSR_OFFSET);
+>>>>>>> v3.18
 =======
 	reg_data = __raw_readl(addr + XEL_RSR_OFFSET);
 	reg_data &= ~XEL_RSR_RECV_DONE_MASK;
@@ -637,6 +739,7 @@ static void xemaclite_update_address(struct net_local *drvdata,
 	xemaclite_aligned_write(address_ptr, (u32 __force *) addr, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be32(addr + XEL_TPLR_OFFSET, ETH_ALEN);
 
 	/* Update the MAC address in the EmacLite */
@@ -646,6 +749,8 @@ static void xemaclite_update_address(struct net_local *drvdata,
 	/* Wait for EmacLite to finish with the MAC address update */
 	while ((in_be32(addr + XEL_TSR_OFFSET) &
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(ETH_ALEN, addr + XEL_TPLR_OFFSET);
 
 	/* Update the MAC address in the EmacLite */
@@ -654,6 +759,9 @@ static void xemaclite_update_address(struct net_local *drvdata,
 
 	/* Wait for EmacLite to finish with the MAC address update */
 	while ((__raw_readl(addr + XEL_TSR_OFFSET) &
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		XEL_TSR_PROG_MAC_ADDR) != 0)
 		;
@@ -788,7 +896,11 @@ static void xemaclite_rx_handler(struct net_device *dev)
 	skb_reserve(skb, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = xemaclite_recv_data(lp, (u8 *) skb->data, len);
+=======
+	len = xemaclite_recv_data(lp, (u8 *) skb->data);
+>>>>>>> v3.18
 =======
 	len = xemaclite_recv_data(lp, (u8 *) skb->data);
 >>>>>>> v3.18
@@ -829,8 +941,14 @@ static irqreturn_t xemaclite_interrupt(int irq, void *dev_id)
 
 	/* Check if there is Rx Data available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((in_be32(base_addr + XEL_RSR_OFFSET) & XEL_RSR_RECV_DONE_MASK) ||
 			(in_be32(base_addr + XEL_BUFFER_OFFSET + XEL_RSR_OFFSET)
+=======
+	if ((__raw_readl(base_addr + XEL_RSR_OFFSET) &
+			 XEL_RSR_RECV_DONE_MASK) ||
+	    (__raw_readl(base_addr + XEL_BUFFER_OFFSET + XEL_RSR_OFFSET)
+>>>>>>> v3.18
 =======
 	if ((__raw_readl(base_addr + XEL_RSR_OFFSET) &
 			 XEL_RSR_RECV_DONE_MASK) ||
@@ -842,7 +960,11 @@ static irqreturn_t xemaclite_interrupt(int irq, void *dev_id)
 
 	/* Check if the Transmission for the first buffer is completed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_status = in_be32(base_addr + XEL_TSR_OFFSET);
+=======
+	tx_status = __raw_readl(base_addr + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 	tx_status = __raw_readl(base_addr + XEL_TSR_OFFSET);
 >>>>>>> v3.18
@@ -851,7 +973,11 @@ static irqreturn_t xemaclite_interrupt(int irq, void *dev_id)
 
 		tx_status &= ~XEL_TSR_XMIT_ACTIVE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		out_be32(base_addr + XEL_TSR_OFFSET, tx_status);
+=======
+		__raw_writel(tx_status, base_addr + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 		__raw_writel(tx_status, base_addr + XEL_TSR_OFFSET);
 >>>>>>> v3.18
@@ -861,7 +987,11 @@ static irqreturn_t xemaclite_interrupt(int irq, void *dev_id)
 
 	/* Check if the Transmission for the second buffer is completed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_status = in_be32(base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET);
+=======
+	tx_status = __raw_readl(base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 	tx_status = __raw_readl(base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET);
 >>>>>>> v3.18
@@ -870,8 +1000,13 @@ static irqreturn_t xemaclite_interrupt(int irq, void *dev_id)
 
 		tx_status &= ~XEL_TSR_XMIT_ACTIVE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		out_be32(base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET,
 			 tx_status);
+=======
+		__raw_writel(tx_status, base_addr + XEL_BUFFER_OFFSET +
+			     XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 		__raw_writel(tx_status, base_addr + XEL_BUFFER_OFFSET +
 			     XEL_TSR_OFFSET);
@@ -904,7 +1039,11 @@ static irqreturn_t xemaclite_interrupt(int irq, void *dev_id)
 static int xemaclite_mdio_wait(struct net_local *lp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long end = jiffies + 2;
+=======
+	unsigned long end = jiffies + 2;
+>>>>>>> v3.18
 =======
 	unsigned long end = jiffies + 2;
 >>>>>>> v3.18
@@ -913,9 +1052,15 @@ static int xemaclite_mdio_wait(struct net_local *lp)
 	   after some time.
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (in_be32(lp->base_addr + XEL_MDIOCTRL_OFFSET) &
 			XEL_MDIOCTRL_MDIOSTS_MASK) {
 		if (end - jiffies <= 0) {
+=======
+	while (__raw_readl(lp->base_addr + XEL_MDIOCTRL_OFFSET) &
+			XEL_MDIOCTRL_MDIOSTS_MASK) {
+		if (time_before_eq(end, jiffies)) {
+>>>>>>> v3.18
 =======
 	while (__raw_readl(lp->base_addr + XEL_MDIOCTRL_OFFSET) &
 			XEL_MDIOCTRL_MDIOSTS_MASK) {
@@ -955,6 +1100,7 @@ static int xemaclite_mdio_read(struct mii_bus *bus, int phy_id, int reg)
 	 * register to start a MDIO read transaction.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrl_reg = in_be32(lp->base_addr + XEL_MDIOCTRL_OFFSET);
 	out_be32(lp->base_addr + XEL_MDIOADDR_OFFSET,
 		 XEL_MDIOADDR_OP_MASK |
@@ -962,19 +1108,28 @@ static int xemaclite_mdio_read(struct mii_bus *bus, int phy_id, int reg)
 	out_be32(lp->base_addr + XEL_MDIOCTRL_OFFSET,
 		 ctrl_reg | XEL_MDIOCTRL_MDIOSTS_MASK);
 =======
+=======
+>>>>>>> v3.18
 	ctrl_reg = __raw_readl(lp->base_addr + XEL_MDIOCTRL_OFFSET);
 	__raw_writel(XEL_MDIOADDR_OP_MASK |
 		     ((phy_id << XEL_MDIOADDR_PHYADR_SHIFT) | reg),
 		     lp->base_addr + XEL_MDIOADDR_OFFSET);
 	__raw_writel(ctrl_reg | XEL_MDIOCTRL_MDIOSTS_MASK,
 		     lp->base_addr + XEL_MDIOCTRL_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (xemaclite_mdio_wait(lp))
 		return -ETIMEDOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = in_be32(lp->base_addr + XEL_MDIORD_OFFSET);
+=======
+	rc = __raw_readl(lp->base_addr + XEL_MDIORD_OFFSET);
+>>>>>>> v3.18
 =======
 	rc = __raw_readl(lp->base_addr + XEL_MDIORD_OFFSET);
 >>>>>>> v3.18
@@ -1015,6 +1170,7 @@ static int xemaclite_mdio_write(struct mii_bus *bus, int phy_id, int reg,
 	 * register to start a MDIO write transaction.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrl_reg = in_be32(lp->base_addr + XEL_MDIOCTRL_OFFSET);
 	out_be32(lp->base_addr + XEL_MDIOADDR_OFFSET,
 		 ~XEL_MDIOADDR_OP_MASK &
@@ -1036,6 +1192,8 @@ static int xemaclite_mdio_write(struct mii_bus *bus, int phy_id, int reg,
 static int xemaclite_mdio_reset(struct mii_bus *bus)
 {
 =======
+=======
+>>>>>>> v3.18
 	ctrl_reg = __raw_readl(lp->base_addr + XEL_MDIOCTRL_OFFSET);
 	__raw_writel(~XEL_MDIOADDR_OP_MASK &
 		     ((phy_id << XEL_MDIOADDR_PHYADR_SHIFT) | reg),
@@ -1044,6 +1202,9 @@ static int xemaclite_mdio_reset(struct mii_bus *bus)
 	__raw_writel(ctrl_reg | XEL_MDIOCTRL_MDIOSTS_MASK,
 		     lp->base_addr + XEL_MDIOCTRL_OFFSET);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1065,6 +1226,10 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 	struct resource res;
 	struct device_node *np = of_get_parent(lp->phy_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *npp;
+>>>>>>> v3.18
 =======
 	struct device_node *npp;
 >>>>>>> v3.18
@@ -1073,9 +1238,12 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 	 * can't be found.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!np)
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	if (!np) {
 		dev_err(dev, "Failed to register mdio bus.\n");
 		return -ENODEV;
@@ -1091,11 +1259,15 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 				 "MDIO of the phy is not registered yet\n");
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Enable the MDIO bus by asserting the enable bit in MDIO Control
 	 * register.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	out_be32(lp->base_addr + XEL_MDIOCTRL_OFFSET,
 		 XEL_MDIOCTRL_MDIOEN_MASK);
@@ -1106,6 +1278,8 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 
 	of_address_to_resource(np, 0, &res);
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(XEL_MDIOCTRL_MDIOEN_MASK,
 		     lp->base_addr + XEL_MDIOCTRL_OFFSET);
 
@@ -1115,6 +1289,9 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snprintf(bus->id, MII_BUS_ID_SIZE, "%.8llx",
 		 (unsigned long long)res.start);
@@ -1123,7 +1300,10 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 	bus->read = xemaclite_mdio_read;
 	bus->write = xemaclite_mdio_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus->reset = xemaclite_mdio_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bus->parent = dev;
@@ -1133,13 +1313,19 @@ static int xemaclite_mdio_setup(struct net_local *lp, struct device *dev)
 
 	rc = of_mdiobus_register(bus, np);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		goto err_register;
 =======
+=======
+>>>>>>> v3.18
 	if (rc) {
 		dev_err(dev, "Failed to register mdio bus.\n");
 		goto err_register;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1157,7 +1343,11 @@ err_register:
  * state changes. We just print the status.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xemaclite_adjust_link(struct net_device *ndev)
+=======
+static void xemaclite_adjust_link(struct net_device *ndev)
+>>>>>>> v3.18
 =======
 static void xemaclite_adjust_link(struct net_device *ndev)
 >>>>>>> v3.18
@@ -1311,7 +1501,11 @@ static int xemaclite_send(struct sk_buff *orig_skb, struct net_device *dev)
 
 	dev->stats.tx_bytes += len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(new_skb);
+=======
+	dev_consume_skb_any(new_skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(new_skb);
 >>>>>>> v3.18
@@ -1330,10 +1524,13 @@ static void xemaclite_remove_ndev(struct net_device *ndev)
 {
 	if (ndev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct net_local *lp = netdev_priv(ndev);
 
 		if (lp->base_addr)
 			iounmap((void __iomem __force *) (lp->base_addr));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		free_netdev(ndev);
@@ -1382,8 +1579,12 @@ static struct net_device_ops xemaclite_netdev_ops;
 static int xemaclite_of_probe(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource r_irq; /* Interrupt resources */
 	struct resource r_mem; /* IO mem resources */
+=======
+	struct resource *res;
+>>>>>>> v3.18
 =======
 	struct resource *res;
 >>>>>>> v3.18
@@ -1396,6 +1597,7 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 
 	dev_info(dev, "Device Tree Probing\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get iospace for the device */
 	rc = of_address_to_resource(ofdev->dev.of_node, 0, &r_mem);
@@ -1413,6 +1615,8 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Create an ethernet device instance */
 	ndev = alloc_etherdev(sizeof(struct net_local));
 	if (!ndev)
@@ -1421,6 +1625,7 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 	dev_set_drvdata(dev, ndev);
 	SET_NETDEV_DEV(ndev, &ofdev->dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ndev->irq = r_irq.start;
 	ndev->mem_start = r_mem.start;
@@ -1447,6 +1652,8 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	lp = netdev_priv(ndev);
 	lp->ndev = ndev;
 
@@ -1469,6 +1676,9 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 	ndev->mem_start = res->start;
 	ndev->mem_end = res->end;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&lp->reset_lock);
 	lp->next_tx_buf_to_use = 0x0;
@@ -1480,7 +1690,11 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 	if (mac_address)
 		/* Set the MAC address. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(ndev->dev_addr, mac_address, 6);
+=======
+		memcpy(ndev->dev_addr, mac_address, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(ndev->dev_addr, mac_address, ETH_ALEN);
 >>>>>>> v3.18
@@ -1489,8 +1703,13 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 
 	/* Clear the Tx CSR's in case this is a restart */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be32(lp->base_addr + XEL_TSR_OFFSET, 0);
 	out_be32(lp->base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET, 0);
+=======
+	__raw_writel(0, lp->base_addr + XEL_TSR_OFFSET);
+	__raw_writel(0, lp->base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET);
+>>>>>>> v3.18
 =======
 	__raw_writel(0, lp->base_addr + XEL_TSR_OFFSET);
 	__raw_writel(0, lp->base_addr + XEL_BUFFER_OFFSET + XEL_TSR_OFFSET);
@@ -1516,7 +1735,11 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 		dev_err(dev,
 			"Cannot register network device, aborting\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error1;
+=======
+		goto error;
+>>>>>>> v3.18
 =======
 		goto error;
 >>>>>>> v3.18
@@ -1529,10 +1752,14 @@ static int xemaclite_of_probe(struct platform_device *ofdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error1:
 	release_mem_region(ndev->mem_start, resource_size(&r_mem));
 
 error2:
+=======
+error:
+>>>>>>> v3.18
 =======
 error:
 >>>>>>> v3.18
@@ -1553,8 +1780,12 @@ error:
 static int xemaclite_of_remove(struct platform_device *of_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = &of_dev->dev;
 	struct net_device *ndev = dev_get_drvdata(dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(of_dev);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(of_dev);
 >>>>>>> v3.18
@@ -1576,10 +1807,14 @@ static int xemaclite_of_remove(struct platform_device *of_dev)
 	lp->phy_node = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_mem_region(ndev->mem_start, ndev->mem_end-ndev->mem_start + 1);
 
 	xemaclite_remove_ndev(ndev);
 	dev_set_drvdata(dev, NULL);
+=======
+	xemaclite_remove_ndev(ndev);
+>>>>>>> v3.18
 =======
 	xemaclite_remove_ndev(ndev);
 >>>>>>> v3.18
@@ -1624,7 +1859,10 @@ static struct platform_driver xemaclite_of_driver = {
 	.driver = {
 		.name = DRIVER_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = xemaclite_of_match,

@@ -133,7 +133,10 @@ extern void __setup_vector_irq(int cpu);
 extern void ia64_send_ipi (int cpu, int vector, int delivery_mode, int redirect);
 extern void ia64_native_register_percpu_irq (ia64_vector vec, struct irqaction *action);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int check_irq_used (int irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void destroy_and_reserve_irq (unsigned int irq);
@@ -164,7 +167,11 @@ static inline unsigned int
 __ia64_local_vector_to_irq (ia64_vector vec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __get_cpu_var(vector_irq)[vec];
+=======
+	return __this_cpu_read(vector_irq[vec]);
+>>>>>>> v3.18
 =======
 	return __this_cpu_read(vector_irq[vec]);
 >>>>>>> v3.18

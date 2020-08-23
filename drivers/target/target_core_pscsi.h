@@ -46,7 +46,10 @@ struct pscsi_dev_virt {
 	struct block_device *pdv_bd;
 	struct scsi_device *pdv_sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct Scsi_Host *pdv_lld_host;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } ____cacheline_aligned;

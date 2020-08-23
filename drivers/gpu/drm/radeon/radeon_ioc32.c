@@ -400,7 +400,11 @@ long radeon_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		return drm_compat_ioctl(filp, cmd, arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nr < DRM_COMMAND_BASE + DRM_ARRAY_SIZE(radeon_compat_ioctls))
+=======
+	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(radeon_compat_ioctls))
+>>>>>>> v3.18
 =======
 	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(radeon_compat_ioctls))
 >>>>>>> v3.18
@@ -423,7 +427,11 @@ long radeon_kms_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long 
 		return drm_compat_ioctl(filp, cmd, arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = drm_ioctl(filp, cmd, arg);
+=======
+	ret = radeon_drm_ioctl(filp, cmd, arg);
+>>>>>>> v3.18
 =======
 	ret = radeon_drm_ioctl(filp, cmd, arg);
 >>>>>>> v3.18

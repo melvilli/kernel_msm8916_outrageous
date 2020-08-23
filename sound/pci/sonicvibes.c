@@ -243,7 +243,11 @@ struct sonicvibes {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_sonic_ids) = {
+=======
+static const struct pci_device_id snd_sonic_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_sonic_ids[] = {
 >>>>>>> v3.18
@@ -278,7 +282,11 @@ static inline void snd_sonicvibes_setdmaa(struct sonicvibes * sonic,
 	outb(0x18, sonic->dmaa_port + SV_DMA_MODE);
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "program dmaa: addr = 0x%x, paddr = 0x%x\n",
+=======
+	dev_dbg(sonic->card->dev, "program dmaa: addr = 0x%x, paddr = 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(sonic->card->dev, "program dmaa: addr = 0x%x, paddr = 0x%x\n",
 >>>>>>> v3.18
@@ -298,7 +306,11 @@ static inline void snd_sonicvibes_setdmac(struct sonicvibes * sonic,
 	outb(0x14, sonic->dmac_port + SV_DMA_MODE);
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "program dmac: addr = 0x%x, paddr = 0x%x\n",
+=======
+	dev_dbg(sonic->card->dev, "program dmac: addr = 0x%x, paddr = 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(sonic->card->dev, "program dmac: addr = 0x%x, paddr = 0x%x\n",
 >>>>>>> v3.18
@@ -369,6 +381,7 @@ static unsigned char snd_sonicvibes_in(struct sonicvibes * sonic, unsigned char 
 #if 0
 static void snd_sonicvibes_debug(struct sonicvibes * sonic)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk(KERN_DEBUG
 	       "SV REGS:          INDEX = 0x%02x  ", inb(SV_REG(sonic, INDEX)));
@@ -470,6 +483,8 @@ static void snd_sonicvibes_debug(struct sonicvibes * sonic)
 	       "  0x1f: PCM rate high   = 0x%02x  ", snd_sonicvibes_in(sonic, 0x1f));
 	printk("  0x3f: ---             = 0x%02x\n", snd_sonicvibes_in(sonic, 0x3f));
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(sonic->card->dev,
 		"SV REGS:          INDEX = 0x%02x                   STATUS = 0x%02x\n",
 		inb(SV_REG(sonic, INDEX)), inb(SV_REG(sonic, STATUS)));
@@ -569,6 +584,9 @@ static void snd_sonicvibes_debug(struct sonicvibes * sonic)
 	dev_dbg(sonic->card->dev,
 		"  0x1f: PCM rate high   = 0x%02x    0x3f: ---             = 0x%02x\n",
 		snd_sonicvibes_in(sonic, 0x1f), snd_sonicvibes_in(sonic, 0x3f));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -626,13 +644,19 @@ static void snd_sonicvibes_pll(unsigned int rate,
 	*res_n = n;
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "metric = %i, xm = %i, xn = %i\n", metric, xm, xn);
 	printk(KERN_DEBUG "pll: m = 0x%x, r = 0x%x, n = 0x%x\n", reg, m, r, n);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(sonic->card->dev,
 		"metric = %i, xm = %i, xn = %i\n", metric, xm, xn);
 	dev_dbg(sonic->card->dev,
 		"pll: m = 0x%x, r = 0x%x, n = 0x%x\n", reg, m, r, n);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -746,7 +770,12 @@ static irqreturn_t snd_sonicvibes_interrupt(int irq, void *dev_id)
 	if (status == 0xff) {	/* failure */
 		outb(sonic->irqmask = ~0, SV_REG(sonic, IRQMASK));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "IRQ failure - interrupts disabled!!\n");
+=======
+		dev_err(sonic->card->dev,
+			"IRQ failure - interrupts disabled!!\n");
+>>>>>>> v3.18
 =======
 		dev_err(sonic->card->dev,
 			"IRQ failure - interrupts disabled!!\n");
@@ -1325,7 +1354,12 @@ static int snd_sonicvibes_create_gameport(struct sonicvibes *sonic)
 	sonic->gameport = gp = gameport_allocate_port();
 	if (!gp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "sonicvibes: cannot allocate memory for gameport\n");
+=======
+		dev_err(sonic->card->dev,
+			"sonicvibes: cannot allocate memory for gameport\n");
+>>>>>>> v3.18
 =======
 		dev_err(sonic->card->dev,
 			"sonicvibes: cannot allocate memory for gameport\n");
@@ -1399,7 +1433,12 @@ static int snd_sonicvibes_create(struct snd_card *card,
         if (pci_set_dma_mask(pci, DMA_BIT_MASK(24)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(24)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support 24bit PCI busmaster DMA\n");
+=======
+		dev_err(card->dev,
+			"architecture does not support 24bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"architecture does not support 24bit PCI busmaster DMA\n");
@@ -1433,7 +1472,11 @@ static int snd_sonicvibes_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_sonicvibes_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, sonic)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -1451,7 +1494,13 @@ static int snd_sonicvibes_create(struct snd_card *card,
 		dmaa = dmaio;
 		dmaio += 0x10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_INFO "BIOS did not allocate DDMA channel A i/o, allocated at 0x%x\n", dmaa);
+=======
+		dev_info(card->dev,
+			 "BIOS did not allocate DDMA channel A i/o, allocated at 0x%x\n",
+			 dmaa);
+>>>>>>> v3.18
 =======
 		dev_info(card->dev,
 			 "BIOS did not allocate DDMA channel A i/o, allocated at 0x%x\n",
@@ -1462,7 +1511,13 @@ static int snd_sonicvibes_create(struct snd_card *card,
 		dmac = dmaio;
 		dmaio += 0x10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_INFO "BIOS did not allocate DDMA channel C i/o, allocated at 0x%x\n", dmac);
+=======
+		dev_info(card->dev,
+			 "BIOS did not allocate DDMA channel C i/o, allocated at 0x%x\n",
+			 dmac);
+>>>>>>> v3.18
 =======
 		dev_info(card->dev,
 			 "BIOS did not allocate DDMA channel C i/o, allocated at 0x%x\n",
@@ -1475,7 +1530,13 @@ static int snd_sonicvibes_create(struct snd_card *card,
 	if ((sonic->res_dmaa = request_region(dmaa, 0x10, "S3 SonicVibes DDMA-A")) == NULL) {
 		snd_sonicvibes_free(sonic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab DDMA-A port at 0x%x-0x%x\n", dmaa, dmaa + 0x10 - 1);
+=======
+		dev_err(card->dev,
+			"unable to grab DDMA-A port at 0x%x-0x%x\n",
+			dmaa, dmaa + 0x10 - 1);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"unable to grab DDMA-A port at 0x%x-0x%x\n",
@@ -1486,7 +1547,13 @@ static int snd_sonicvibes_create(struct snd_card *card,
 	if ((sonic->res_dmac = request_region(dmac, 0x10, "S3 SonicVibes DDMA-C")) == NULL) {
 		snd_sonicvibes_free(sonic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab DDMA-C port at 0x%x-0x%x\n", dmac, dmac + 0x10 - 1);
+=======
+		dev_err(card->dev,
+			"unable to grab DDMA-C port at 0x%x-0x%x\n",
+			dmac, dmac + 0x10 - 1);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"unable to grab DDMA-C port at 0x%x-0x%x\n",
@@ -1557,8 +1624,11 @@ static int snd_sonicvibes_create(struct snd_card *card,
 	snd_sonicvibes_proc_init(sonic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rsonic = sonic;
@@ -1627,7 +1697,12 @@ static int snd_sonic_probe(struct pci_dev *pci,
 	}
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -1701,7 +1776,10 @@ static void snd_sonic_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

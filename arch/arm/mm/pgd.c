@@ -24,7 +24,11 @@
 #define __pgd_free(pgd)	kfree(pgd)
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __pgd_alloc()	(pgd_t *)__get_free_pages(GFP_KERNEL, 2)
+=======
+#define __pgd_alloc()	(pgd_t *)__get_free_pages(GFP_KERNEL | __GFP_REPEAT, 2)
+>>>>>>> v3.18
 =======
 #define __pgd_alloc()	(pgd_t *)__get_free_pages(GFP_KERNEL | __GFP_REPEAT, 2)
 >>>>>>> v3.18

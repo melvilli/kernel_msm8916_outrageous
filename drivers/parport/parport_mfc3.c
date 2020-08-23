@@ -301,7 +301,11 @@ static int __init parport_mfc3_init(void)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pp = (struct pia *)ZTWO_VADDR(piabase);
+=======
+		pp = ZTWO_VADDR(piabase);
+>>>>>>> v3.18
 =======
 		pp = ZTWO_VADDR(piabase);
 >>>>>>> v3.18

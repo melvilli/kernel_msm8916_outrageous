@@ -10,6 +10,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 
 / {
@@ -19,6 +20,8 @@
 
 	clock: clock-controller@0x160000 {
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/clock/exynos5440.h>
 #include "skeleton.dtsi"
 
@@ -37,6 +40,9 @@
 	};
 
 	clock: clock-controller@160000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos5440-clock";
 		reg = <0x160000 0x1000>;
@@ -44,7 +50,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gic:interrupt-controller@2E0000 {
+=======
+	gic: interrupt-controller@2E0000 {
+>>>>>>> v3.18
 =======
 	gic: interrupt-controller@2E0000 {
 >>>>>>> v3.18
@@ -64,6 +74,10 @@
 
 		cpu@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_type = "cpu";
+>>>>>>> v3.18
 =======
 			device_type = "cpu";
 >>>>>>> v3.18
@@ -72,6 +86,10 @@
 		};
 		cpu@1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_type = "cpu";
+>>>>>>> v3.18
 =======
 			device_type = "cpu";
 >>>>>>> v3.18
@@ -80,6 +98,10 @@
 		};
 		cpu@2 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_type = "cpu";
+>>>>>>> v3.18
 =======
 			device_type = "cpu";
 >>>>>>> v3.18
@@ -88,6 +110,10 @@
 		};
 		cpu@3 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_type = "cpu";
+>>>>>>> v3.18
 =======
 			device_type = "cpu";
 >>>>>>> v3.18
@@ -121,9 +147,12 @@
 		operating-points = <
 				/* KHz	  uV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				1200000 1025000
 				1000000 975000
 =======
+=======
+>>>>>>> v3.18
 				1500000 1100000
 				1400000 1075000
 				1300000 1050000
@@ -131,11 +160,15 @@
 				1100000 1000000
 				1000000 975000
 				900000  950000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				800000  925000
 		>;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	serial@B0000 {
 		compatible = "samsung,exynos4210-uart";
@@ -167,6 +200,8 @@
 
 	pinctrl {
 =======
+=======
+>>>>>>> v3.18
 	serial_0: serial@B0000 {
 		compatible = "samsung,exynos4210-uart";
 		reg = <0xB0000 0x1000>;
@@ -196,6 +231,9 @@
 	};
 
 	pin_ctrl: pinctrl {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos5440-pinctrl";
 		reg = <0xE0000 0x1000>;
@@ -229,7 +267,11 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 21>;
+=======
+		clocks = <&clock CLK_B_125>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_B_125>;
 >>>>>>> v3.18
@@ -243,6 +285,7 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 21>;
 		clock-names = "i2c";
 	};
@@ -253,6 +296,8 @@
 		interrupts = <0 1 0>;
 		clocks = <&clock 21>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_B_125>;
 		clock-names = "i2c";
 	};
@@ -262,6 +307,9 @@
 		reg = <0x110000 0x1000>;
 		interrupts = <0 1 0>;
 		clocks = <&clock CLK_B_125>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clock-names = "watchdog";
 	};
@@ -274,7 +322,11 @@
 		interrupt-names = "macirq";
 		phy-mode = "sgmii";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 25>;
+=======
+		clocks = <&clock CLK_GMAC0>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_GMAC0>;
 >>>>>>> v3.18
@@ -287,6 +339,7 @@
 		compatible = "arm,amba-bus";
 		interrupt-parent = <&gic>;
 		ranges;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		pdma0: pdma@00121000 {
@@ -312,6 +365,8 @@
 		};
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	};
 
 	rtc {
@@ -319,9 +374,12 @@
 		reg = <0x130000 0x1000>;
 		interrupts = <0 17 0>, <0 16 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 21>;
 		clock-names = "rtc";
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_B_125>;
 		clock-names = "rtc";
 	};
@@ -413,6 +471,9 @@
 		interrupt-map-mask = <0 0 0 0>;
 		interrupt-map = <0x0 0 &gic 56>;
 		num-lanes = <4>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};

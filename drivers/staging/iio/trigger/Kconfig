@@ -13,6 +13,7 @@ config IIO_PERIODIC_RTC_TRIGGER
 	  clocks as IIO triggers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IIO_GPIO_TRIGGER
 	tristate "GPIO trigger"
 	depends on GPIOLIB
@@ -30,6 +31,8 @@ config IIO_SYSFS_TRIGGER
 	  To compile this driver as a module, choose M here: the
 	  module will be called iio-trig-sysfs.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config IIO_BFIN_TMR_TRIGGER

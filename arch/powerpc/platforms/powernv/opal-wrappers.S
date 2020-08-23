@@ -14,7 +14,10 @@
 #include <asm/asm-offsets.h>
 #include <asm/opal.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/jump_label.h>
 
 	.section	".text"
@@ -52,6 +55,9 @@ END_FTR_SECTION(0, 1);						\
 #else
 #define OPAL_BRANCH(LABEL)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* TODO:
@@ -59,6 +65,7 @@ END_FTR_SECTION(0, 1);						\
  * - Trace irqs in/off (needs saving/restoring all args, argh...)
  * - Get r11 feed up by Dave so I can have better register usage
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define OPAL_CALL(name, token)		\
  _GLOBAL(name);				\
@@ -79,6 +86,8 @@ END_FTR_SECTION(0, 1);						\
 	andc	r12,r12,r0;		\
 	li	r0,token;		\
 =======
+=======
+>>>>>>> v3.18
 
 #define OPAL_CALL(name, token)		\
  _GLOBAL_TOC(name);			\
@@ -99,6 +108,9 @@ END_FTR_SECTION(0, 1);						\
 	mtlr	r11;			\
 	li	r11,MSR_DR|MSR_IR|MSR_LE;\
 	andc	r12,r12,r11;		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtspr	SPRN_HSRR1,r12;		\
 	LOAD_REG_ADDR(r11,opal);	\
@@ -108,10 +120,13 @@ END_FTR_SECTION(0, 1);						\
 	hrfid
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(opal_return)
 	ld	r2,PACATOC(r13);
 	ld	r4,8(r1);
 =======
+=======
+>>>>>>> v3.18
 opal_return:
 	/*
 	 * Fixup endian on OPAL return... we should be able to simplify
@@ -122,6 +137,9 @@ opal_return:
 	FIXUP_ENDIAN
 	ld	r2,PACATOC(r13);
 	lwz	r4,8(r1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ld	r5,16(r1);
 	ld	r6,PACASAVEDMSR(r13);
@@ -131,7 +149,10 @@ opal_return:
 	rfid
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRACEPOINTS
 opal_tracepoint_entry:
 	stdu	r1,-STACKFRAMESIZE(r1)
@@ -191,6 +212,9 @@ opal_tracepoint_return:
 #endif
 
 OPAL_CALL(opal_invalid_call,			OPAL_INVALID_CALL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 OPAL_CALL(opal_console_write,			OPAL_CONSOLE_WRITE);
 OPAL_CALL(opal_console_read,			OPAL_CONSOLE_READ);
@@ -217,6 +241,11 @@ OPAL_CALL(opal_register_exception_handler,	OPAL_REGISTER_OPAL_EXCEPTION_HANDLER)
 OPAL_CALL(opal_pci_eeh_freeze_status,		OPAL_PCI_EEH_FREEZE_STATUS);
 OPAL_CALL(opal_pci_eeh_freeze_clear,		OPAL_PCI_EEH_FREEZE_CLEAR);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+OPAL_CALL(opal_pci_eeh_freeze_set,		OPAL_PCI_EEH_FREEZE_SET);
+OPAL_CALL(opal_pci_err_inject,			OPAL_PCI_ERR_INJECT);
+>>>>>>> v3.18
 =======
 OPAL_CALL(opal_pci_eeh_freeze_set,		OPAL_PCI_EEH_FREEZE_SET);
 OPAL_CALL(opal_pci_err_inject,			OPAL_PCI_ERR_INJECT);
@@ -251,8 +280,11 @@ OPAL_CALL(opal_set_slot_led_status,		OPAL_SET_SLOT_LED_STATUS);
 OPAL_CALL(opal_get_epow_status,			OPAL_GET_EPOW_STATUS);
 OPAL_CALL(opal_set_system_attention_led,	OPAL_SET_SYSTEM_ATTENTION_LED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 OPAL_CALL(opal_pci_msi_eoi,			OPAL_PCI_MSI_EOI);
 =======
+=======
+>>>>>>> v3.18
 OPAL_CALL(opal_pci_next_error,			OPAL_PCI_NEXT_ERROR);
 OPAL_CALL(opal_pci_poll,			OPAL_PCI_POLL);
 OPAL_CALL(opal_pci_msi_eoi,			OPAL_PCI_MSI_EOI);
@@ -289,4 +321,7 @@ OPAL_CALL(opal_handle_hmi,			OPAL_HANDLE_HMI);
 OPAL_CALL(opal_register_dump_region,		OPAL_REGISTER_DUMP_REGION);
 OPAL_CALL(opal_unregister_dump_region,		OPAL_UNREGISTER_DUMP_REGION);
 OPAL_CALL(opal_pci_set_phb_cxl_mode,		OPAL_PCI_SET_PHB_CXL_MODE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

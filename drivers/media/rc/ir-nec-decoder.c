@@ -1,7 +1,11 @@
 /* ir-nec-decoder.c - handle NEC IR Pulse/Space protocol
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (C) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (C) 2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -154,10 +158,13 @@ static int ir_nec_decode(struct rc_dev *dev, struct ir_raw_event ev)
 
 		data->state = STATE_TRAILER_SPACE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (data->is_nec_x)
 			goto rc_data;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;
@@ -169,7 +176,11 @@ static int ir_nec_decode(struct rc_dev *dev, struct ir_raw_event ev)
 		if (!geq_margin(ev.duration, NEC_TRAILER_SPACE, NEC_UNIT / 2))
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 rc_data:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -205,7 +216,11 @@ rc_data:
 			data->necx_repeat = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(dev, scancode, 0);
+=======
+		rc_keydown(dev, RC_TYPE_NEC, scancode, 0);
+>>>>>>> v3.18
 =======
 		rc_keydown(dev, RC_TYPE_NEC, scancode, 0);
 >>>>>>> v3.18
@@ -242,7 +257,11 @@ module_exit(ir_nec_decode_exit);
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

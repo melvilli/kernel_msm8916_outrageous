@@ -28,7 +28,10 @@
 
 #define  __ARCH_WANT_KPROBES_INSN_SLOT
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  ARCH_SUPPORTS_KPROBES_ON_FTRACE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,15 +56,21 @@ typedef u8 kprobe_opcode_t;
 
 /* optinsn template addresses */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern kprobe_opcode_t optprobe_template_entry;
 extern kprobe_opcode_t optprobe_template_val;
 extern kprobe_opcode_t optprobe_template_call;
 extern kprobe_opcode_t optprobe_template_end;
 =======
+=======
+>>>>>>> v3.18
 extern __visible kprobe_opcode_t optprobe_template_entry;
 extern __visible kprobe_opcode_t optprobe_template_val;
 extern __visible kprobe_opcode_t optprobe_template_call;
 extern __visible kprobe_opcode_t optprobe_template_end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_OPTIMIZED_LENGTH (MAX_INSN_SIZE + RELATIVE_ADDR_SIZE)
 #define MAX_OPTINSN_SIZE 				\
@@ -73,7 +82,11 @@ extern const int kretprobe_blacklist_size;
 
 void arch_remove_kprobe(struct kprobe *p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kretprobe_trampoline(void);
+=======
+asmlinkage void kretprobe_trampoline(void);
+>>>>>>> v3.18
 =======
 asmlinkage void kretprobe_trampoline(void);
 >>>>>>> v3.18
@@ -131,6 +144,11 @@ extern int kprobe_fault_handler(struct pt_regs *regs, int trapnr);
 extern int kprobe_exceptions_notify(struct notifier_block *self,
 				    unsigned long val, void *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int kprobe_int3_handler(struct pt_regs *regs);
+extern int kprobe_debug_handler(struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 extern int kprobe_int3_handler(struct pt_regs *regs);
 extern int kprobe_debug_handler(struct pt_regs *regs);

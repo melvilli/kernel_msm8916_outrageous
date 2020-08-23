@@ -37,6 +37,7 @@ struct of_irq_controller {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device_node *of_find_node_by_cpuid(int cpuid);
 extern int of_set_property(struct device_node *node, const char *name, void *val, int len);
 extern struct mutex of_set_property_mutex;
@@ -57,6 +58,8 @@ struct resource;
 extern void __iomem *of_ioremap(struct resource *res, unsigned long offset, unsigned long size, char *name);
 extern void of_iounmap(struct resource *res, void __iomem *base, unsigned long size);
 =======
+=======
+>>>>>>> v3.18
 struct device_node *of_find_node_by_cpuid(int cpuid);
 int of_set_property(struct device_node *node, const char *name, void *val, int len);
 extern struct mutex of_set_property_mutex;
@@ -72,12 +75,16 @@ void of_fill_in_cpu_data(void);
 struct resource;
 void __iomem *of_ioremap(struct resource *res, unsigned long offset, unsigned long size, char *name);
 void of_iounmap(struct resource *res, void __iomem *base, unsigned long size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct device_node *of_console_device;
 extern char *of_console_path;
 extern char *of_console_options;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void irq_trans_init(struct device_node *dp);
 extern char *build_path_component(struct device_node *dp);
@@ -89,6 +96,10 @@ extern int of_address_to_resource(struct device_node *dev, int index,
 
 void __iomem *of_iomap(struct device_node *node, int index);
 #define of_iomap of_iomap
+=======
+void irq_trans_init(struct device_node *dp);
+char *build_path_component(struct device_node *dp);
+>>>>>>> v3.18
 =======
 void irq_trans_init(struct device_node *dp);
 char *build_path_component(struct device_node *dp);

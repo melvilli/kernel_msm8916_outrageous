@@ -57,15 +57,21 @@ The dma_buf buffer sharing API usage contains the following steps:
 				     const char *exp_name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    If this succeeds, dma_buf_export allocates a dma_buf structure, and returns a
    pointer to the same. It also associates an anonymous file with this buffer,
    so it can be exported. On failure to allocate the dma_buf object, it returns
    NULL.
 =======
+=======
+>>>>>>> v3.18
    If this succeeds, dma_buf_export_named allocates a dma_buf structure, and
    returns a pointer to the same. It also associates an anonymous file with this
    buffer, so it can be exported. On failure to allocate the dma_buf object,
    it returns NULL.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
    'exp_name' is the name of exporter - to facilitate information while
@@ -74,7 +80,11 @@ The dma_buf buffer sharing API usage contains the following steps:
    Exporting modules which do not wish to provide any specific name may use the
    helper define 'dma_buf_export()', with the same arguments as above, but
 <<<<<<< HEAD
+<<<<<<< HEAD
    without the last argument; a __FILE__ pre-processor directive will be
+=======
+   without the last argument; a KBUILD_MODNAME pre-processor directive will be
+>>>>>>> v3.18
 =======
    without the last argument; a KBUILD_MODNAME pre-processor directive will be
 >>>>>>> v3.18
@@ -88,7 +98,11 @@ The dma_buf buffer sharing API usage contains the following steps:
 
    Interface:
 <<<<<<< HEAD
+<<<<<<< HEAD
       int dma_buf_fd(struct dma_buf *dmabuf)
+=======
+      int dma_buf_fd(struct dma_buf *dmabuf, int flags)
+>>>>>>> v3.18
 =======
       int dma_buf_fd(struct dma_buf *dmabuf, int flags)
 >>>>>>> v3.18
@@ -173,7 +187,13 @@ to request use of buffer for allocation.
 
    In struct dma_buf_ops, unmap_dma_buf is defined as
 <<<<<<< HEAD
+<<<<<<< HEAD
       void (*unmap_dma_buf)(struct dma_buf_attachment *, struct sg_table *);
+=======
+      void (*unmap_dma_buf)(struct dma_buf_attachment *,
+                            struct sg_table *,
+                            enum dma_data_direction);
+>>>>>>> v3.18
 =======
       void (*unmap_dma_buf)(struct dma_buf_attachment *,
                             struct sg_table *,
@@ -239,7 +259,11 @@ NOTES:
     from the migrated backing-storage.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    If the exporter cannot fulfil the backing-storage constraints of the new
+=======
+   If the exporter cannot fulfill the backing-storage constraints of the new
+>>>>>>> v3.18
 =======
    If the exporter cannot fulfill the backing-storage constraints of the new
 >>>>>>> v3.18
@@ -347,7 +371,11 @@ Access to a dma_buf from the kernel context involves three steps:
    When the importer is done accessing the range specified in begin_cpu_access,
    it needs to announce this to the exporter (to facilitate cache flushing and
 <<<<<<< HEAD
+<<<<<<< HEAD
    unpinning of any pinned resources). The result of of any dma_buf kmap calls
+=======
+   unpinning of any pinned resources). The result of any dma_buf kmap calls
+>>>>>>> v3.18
 =======
    unpinning of any pinned resources). The result of any dma_buf kmap calls
 >>>>>>> v3.18
@@ -382,7 +410,11 @@ Being able to mmap an export dma-buf buffer object has 2 main use-cases:
    No special interfaces, userspace simply calls mmap on the dma-buf fd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2. Supporting existing mmap interfaces in exporters
+=======
+2. Supporting existing mmap interfaces in importers
+>>>>>>> v3.18
 =======
 2. Supporting existing mmap interfaces in importers
 >>>>>>> v3.18
@@ -441,7 +473,10 @@ Being able to mmap an export dma-buf buffer object has 2 main use-cases:
    upon this implicit synchronization).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Other Interfaces Exposed to Userspace on the dma-buf FD
 ------------------------------------------------------
 
@@ -454,6 +489,9 @@ Other Interfaces Exposed to Userspace on the dma-buf FD
   cases. Userspace can use this to detect support for discovering the dma-buf
   size using llseek.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Miscellaneous notes
 -------------------

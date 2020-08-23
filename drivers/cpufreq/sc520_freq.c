@@ -34,9 +34,15 @@ static __u8 __iomem *cpuctl;
 
 static struct cpufreq_frequency_table sc520_freq_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x01,	100000},
 	{0x02,	133000},
 	{0,	CPUFREQ_TABLE_END},
+=======
+	{0, 0x01,	100000},
+	{0, 0x02,	133000},
+	{0, 0,	CPUFREQ_TABLE_END},
+>>>>>>> v3.18
 =======
 	{0, 0x01,	100000},
 	{0, 0x02,	133000},
@@ -60,6 +66,7 @@ static unsigned int sc520_freq_get_cpu_frequency(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sc520_freq_set_cpu_state(struct cpufreq_policy *policy,
 		unsigned int state)
 {
@@ -76,11 +83,16 @@ static void sc520_freq_set_cpu_state(struct cpufreq_policy *policy,
 			sc520_freq_table[state].frequency);
 
 =======
+=======
+>>>>>>> v3.18
 static int sc520_freq_target(struct cpufreq_policy *policy, unsigned int state)
 {
 
 	u8 clockspeed_reg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_disable();
 
@@ -89,6 +101,7 @@ static int sc520_freq_target(struct cpufreq_policy *policy, unsigned int state)
 
 	local_irq_enable();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 };
@@ -119,6 +132,11 @@ static int sc520_freq_target(struct cpufreq_policy *policy,
 }
 
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 /*
  *	Module init and exit code
  */
@@ -127,7 +145,10 @@ static int sc520_freq_cpu_init(struct cpufreq_policy *policy)
 {
 	struct cpuinfo_x86 *c = &cpu_data(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -138,6 +159,7 @@ static int sc520_freq_cpu_init(struct cpufreq_policy *policy)
 
 	/* cpuinfo and default policy values */
 	policy->cpuinfo.transition_latency = 1000000; /* 1ms */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cur = sc520_freq_get_cpu_frequency(0);
 
@@ -173,6 +195,8 @@ static struct cpufreq_driver sc520_freq_driver = {
 	.name	= "sc520_freq",
 	.attr	= sc520_freq_attr,
 =======
+=======
+>>>>>>> v3.18
 
 	return cpufreq_table_validate_and_show(policy, sc520_freq_table);
 }
@@ -185,6 +209,9 @@ static struct cpufreq_driver sc520_freq_driver = {
 	.init	= sc520_freq_cpu_init,
 	.name	= "sc520_freq",
 	.attr	= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

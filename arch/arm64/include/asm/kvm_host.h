@@ -23,6 +23,11 @@
 #define __ARM64_KVM_HOST_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+#include <linux/kvm_types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 #include <linux/kvm_types.h>
@@ -47,8 +52,12 @@
 #define KVM_VCPU_MAX_FEATURES 3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_vcpu;
 int kvm_target_cpu(void);
+=======
+int __attribute_const__ kvm_target_cpu(void);
+>>>>>>> v3.18
 =======
 int __attribute_const__ kvm_target_cpu(void);
 >>>>>>> v3.18
@@ -96,7 +105,11 @@ struct kvm_cpu_context {
 	union {
 		u64 sys_regs[NR_SYS_REGS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 cp15[NR_CP15_REGS];
+=======
+		u32 copro[NR_COPRO_REGS];
+>>>>>>> v3.18
 =======
 		u32 copro[NR_COPRO_REGS];
 >>>>>>> v3.18
@@ -115,6 +128,12 @@ struct kvm_vcpu_arch {
 	struct kvm_vcpu_fault_info fault;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Debug state */
+	u64 debug_flags;
+
+>>>>>>> v3.18
 =======
 	/* Debug state */
 	u64 debug_flags;
@@ -158,8 +177,11 @@ struct kvm_vcpu_arch {
 #define vcpu_gp_regs(v)		(&(v)->arch.ctxt.gp_regs)
 #define vcpu_sys_reg(v,r)	((v)->arch.ctxt.sys_regs[(r)])
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define vcpu_cp15(v,r)		((v)->arch.ctxt.cp15[(r)])
 =======
+=======
+>>>>>>> v3.18
 /*
  * CP14 and CP15 live in the same array, as they are backed by the
  * same system registers.
@@ -174,6 +196,9 @@ struct kvm_vcpu_arch {
 #define vcpu_cp15_64_high(v,r)	vcpu_cp15((v),(r) + 1)
 #define vcpu_cp15_64_low(v,r)	vcpu_cp15((v),(r))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct kvm_vm_stat {
@@ -185,7 +210,10 @@ struct kvm_vcpu_stat {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_vcpu_init;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kvm_vcpu_set_target(struct kvm_vcpu *vcpu,
@@ -194,7 +222,10 @@ int kvm_vcpu_preferred_target(struct kvm_vcpu_init *init);
 unsigned long kvm_arm_num_regs(struct kvm_vcpu *vcpu);
 int kvm_arm_copy_reg_indices(struct kvm_vcpu *vcpu, u64 __user *indices);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_one_reg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kvm_arm_get_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg);
@@ -202,7 +233,10 @@ int kvm_arm_set_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg);
 
 #define KVM_ARCH_WANT_MMU_NOTIFIER
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kvm_unmap_hva(struct kvm *kvm, unsigned long hva);
@@ -212,7 +246,12 @@ void kvm_set_spte_hva(struct kvm *kvm, unsigned long hva, pte_t pte);
 
 /* We do not have shadow page tables, hence the empty hooks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int kvm_age_hva(struct kvm *kvm, unsigned long hva)
+=======
+static inline int kvm_age_hva(struct kvm *kvm, unsigned long start,
+			      unsigned long end)
+>>>>>>> v3.18
 =======
 static inline int kvm_age_hva(struct kvm *kvm, unsigned long start,
 			      unsigned long end)
@@ -227,9 +266,12 @@ static inline int kvm_test_age_hva(struct kvm *kvm, unsigned long hva)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_vcpu *kvm_arm_get_running_vcpu(void);
 struct kvm_vcpu __percpu **kvm_get_running_vcpus(void);
 =======
+=======
+>>>>>>> v3.18
 static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
 							 unsigned long address)
 {
@@ -237,6 +279,9 @@ static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
 
 struct kvm_vcpu *kvm_arm_get_running_vcpu(void);
 struct kvm_vcpu * __percpu *kvm_get_running_vcpus(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 u64 kvm_call_hyp(void *hypfn, ...);
@@ -261,7 +306,10 @@ static inline void __cpu_init_hyp_mode(phys_addr_t boot_pgd_ptr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct vgic_sr_vectors {
 	void	*save_vgic;
 	void	*restore_vgic;
@@ -296,5 +344,8 @@ static inline void kvm_arch_sync_events(struct kvm *kvm) {}
 static inline void kvm_arch_vcpu_uninit(struct kvm_vcpu *vcpu) {}
 static inline void kvm_arch_sched_in(struct kvm_vcpu *vcpu, int cpu) {}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ARM64_KVM_HOST_H__ */

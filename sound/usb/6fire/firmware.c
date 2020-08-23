@@ -220,8 +220,13 @@ static int usb6fire_fw_ezusb_upload(
 	if (ret < 0) {
 		kfree(rec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "error requesting ezusb "
 				"firmware %s.\n", fwname);
+=======
+		dev_err(&intf->dev,
+			"error requesting ezusb firmware %s.\n", fwname);
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev,
 			"error requesting ezusb firmware %s.\n", fwname);
@@ -233,8 +238,13 @@ static int usb6fire_fw_ezusb_upload(
 		kfree(rec);
 		release_firmware(fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "error validating ezusb "
 				"firmware %s.\n", fwname);
+=======
+		dev_err(&intf->dev,
+			"error validating ezusb firmware %s.\n", fwname);
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev,
 			"error validating ezusb firmware %s.\n", fwname);
@@ -248,8 +258,14 @@ static int usb6fire_fw_ezusb_upload(
 		kfree(rec);
 		release_firmware(fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to upload ezusb "
 				"firmware %s: begin message.\n", fwname);
+=======
+		dev_err(&intf->dev,
+			"unable to upload ezusb firmware %s: begin message.\n",
+			fwname);
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev,
 			"unable to upload ezusb firmware %s: begin message.\n",
@@ -265,8 +281,14 @@ static int usb6fire_fw_ezusb_upload(
 			kfree(rec);
 			release_firmware(fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR PREFIX "unable to upload ezusb "
 					"firmware %s: data urb.\n", fwname);
+=======
+			dev_err(&intf->dev,
+				"unable to upload ezusb firmware %s: data urb.\n",
+				fwname);
+>>>>>>> v3.18
 =======
 			dev_err(&intf->dev,
 				"unable to upload ezusb firmware %s: data urb.\n",
@@ -283,8 +305,14 @@ static int usb6fire_fw_ezusb_upload(
 				postdata, postlen);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR PREFIX "unable to upload ezusb "
 					"firmware %s: post urb.\n", fwname);
+=======
+			dev_err(&intf->dev,
+				"unable to upload ezusb firmware %s: post urb.\n",
+				fwname);
+>>>>>>> v3.18
 =======
 			dev_err(&intf->dev,
 				"unable to upload ezusb firmware %s: post urb.\n",
@@ -298,8 +326,14 @@ static int usb6fire_fw_ezusb_upload(
 	ret = usb6fire_fw_ezusb_write(device, 0xa0, 0xe600, &data, 1);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to upload ezusb "
 				"firmware %s: end message.\n", fwname);
+=======
+		dev_err(&intf->dev,
+			"unable to upload ezusb firmware %s: end message.\n",
+			fwname);
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev,
 			"unable to upload ezusb firmware %s: end message.\n",
@@ -327,7 +361,11 @@ static int usb6fire_fw_fpga_upload(
 	ret = request_firmware(&fw, fwname, &device->dev);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to get fpga firmware %s.\n",
+=======
+		dev_err(&intf->dev, "unable to get fpga firmware %s.\n",
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev, "unable to get fpga firmware %s.\n",
 >>>>>>> v3.18
@@ -344,8 +382,13 @@ static int usb6fire_fw_fpga_upload(
 		kfree(buffer);
 		release_firmware(fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to upload fpga firmware: "
 				"begin urb.\n");
+=======
+		dev_err(&intf->dev,
+			"unable to upload fpga firmware: begin urb.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev,
 			"unable to upload fpga firmware: begin urb.\n");
@@ -362,8 +405,13 @@ static int usb6fire_fw_fpga_upload(
 			release_firmware(fw);
 			kfree(buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR PREFIX "unable to upload fpga "
 					"firmware: fw urb.\n");
+=======
+			dev_err(&intf->dev,
+				"unable to upload fpga firmware: fw urb.\n");
+>>>>>>> v3.18
 =======
 			dev_err(&intf->dev,
 				"unable to upload fpga firmware: fw urb.\n");
@@ -377,8 +425,13 @@ static int usb6fire_fw_fpga_upload(
 	ret = usb6fire_fw_ezusb_write(device, 9, 0, NULL, 0);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to upload fpga firmware: "
 				"end urb.\n");
+=======
+		dev_err(&intf->dev,
+			"unable to upload fpga firmware: end urb.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev,
 			"unable to upload fpga firmware: end urb.\n");
@@ -392,7 +445,11 @@ static int usb6fire_fw_fpga_upload(
  * is known by this driver. 'version' needs to have 4 bytes version
  * info data. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usb6fire_fw_check(u8 *version)
+=======
+static int usb6fire_fw_check(struct usb_interface *intf, const u8 *version)
+>>>>>>> v3.18
 =======
 static int usb6fire_fw_check(struct usb_interface *intf, const u8 *version)
 >>>>>>> v3.18
@@ -404,15 +461,21 @@ static int usb6fire_fw_check(struct usb_interface *intf, const u8 *version)
 			return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR PREFIX "invalid fimware version in device: %*ph. "
 			"please reconnect to power. if this failure "
 			"still happens, check your firmware installation.",
 			4, version);
 =======
+=======
+>>>>>>> v3.18
 	dev_err(&intf->dev, "invalid fimware version in device: %4ph. "
 			"please reconnect to power. if this failure "
 			"still happens, check your firmware installation.",
 			version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -EINVAL;
 }
@@ -429,6 +492,7 @@ int usb6fire_fw_init(struct usb_interface *intf)
 	ret = usb6fire_fw_ezusb_read(device, 1, 0, buffer, 8);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to receive device "
 				"firmware state.\n");
 		return ret;
@@ -440,6 +504,8 @@ int usb6fire_fw_init(struct usb_interface *intf)
 			snd_printk("%02x ", buffer[i]);
 		snd_printk("\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&intf->dev,
 			"unable to receive device firmware state.\n");
 		return ret;
@@ -450,6 +516,9 @@ int usb6fire_fw_init(struct usb_interface *intf)
 		for (i = 0; i < 8; i++)
 			printk(KERN_CONT "%02x ", buffer[i]);
 		printk(KERN_CONT "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
@@ -464,7 +533,11 @@ int usb6fire_fw_init(struct usb_interface *intf)
 	/* do we need fpga firmware and application ezusb firmware? */
 	else if (buffer[3] == 0x02) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = usb6fire_fw_check(buffer + 4);
+=======
+		ret = usb6fire_fw_check(intf, buffer + 4);
+>>>>>>> v3.18
 =======
 		ret = usb6fire_fw_check(intf, buffer + 4);
 >>>>>>> v3.18
@@ -484,6 +557,7 @@ int usb6fire_fw_init(struct usb_interface *intf)
 	/* all fw loaded? */
 	else if (buffer[3] == 0x03)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return usb6fire_fw_check(buffer + 4);
 	/* unknown data? */
 	else {
@@ -493,6 +567,8 @@ int usb6fire_fw_init(struct usb_interface *intf)
 			snd_printk("%02x ", buffer[i]);
 		snd_printk("\n");
 =======
+=======
+>>>>>>> v3.18
 		return usb6fire_fw_check(intf, buffer + 4);
 	/* unknown data? */
 	else {
@@ -501,6 +577,9 @@ int usb6fire_fw_init(struct usb_interface *intf)
 		for (i = 0; i < 8; i++)
 			printk(KERN_CONT "%02x ", buffer[i]);
 		printk(KERN_CONT "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}

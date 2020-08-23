@@ -36,7 +36,11 @@ void ipmmu_tlb_flush(struct shmobile_ipmmu *ipmmu)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ipmmu->flush_lock);
+=======
+	spin_lock(&ipmmu->flush_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&ipmmu->flush_lock);
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ void ipmmu_tlb_flush(struct shmobile_ipmmu *ipmmu)
 	else
 		ipmmu_reg_write(ipmmu, IMCTR1, IMCTR1_FLUSH);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ipmmu->flush_lock);
+=======
+	spin_unlock(&ipmmu->flush_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&ipmmu->flush_lock);
 >>>>>>> v3.18
@@ -58,7 +66,11 @@ void ipmmu_tlb_set(struct shmobile_ipmmu *ipmmu, unsigned long phys, int size,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ipmmu->flush_lock);
+=======
+	spin_lock(&ipmmu->flush_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&ipmmu->flush_lock);
 >>>>>>> v3.18
@@ -98,7 +110,11 @@ void ipmmu_tlb_set(struct shmobile_ipmmu *ipmmu, unsigned long phys, int size,
 	ipmmu_reg_write(ipmmu, IMTTBR, phys);
 	ipmmu_reg_write(ipmmu, IMASID, asid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ipmmu->flush_lock);
+=======
+	spin_unlock(&ipmmu->flush_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&ipmmu->flush_lock);
 >>>>>>> v3.18
@@ -111,6 +127,7 @@ static int ipmmu_probe(struct platform_device *pdev)
 	struct shmobile_ipmmu_platform_data *pdata = pdev->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "cannot get platform resources\n");
@@ -118,11 +135,14 @@ static int ipmmu_probe(struct platform_device *pdev)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ipmmu = devm_kzalloc(&pdev->dev, sizeof(*ipmmu), GFP_KERNEL);
 	if (!ipmmu) {
 		dev_err(&pdev->dev, "cannot allocate device data\n");
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_init(&ipmmu->flush_lock);
 	ipmmu->dev = &pdev->dev;
@@ -133,6 +153,8 @@ static int ipmmu_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&ipmmu->flush_lock);
 	ipmmu->dev = &pdev->dev;
 
@@ -141,6 +163,9 @@ static int ipmmu_probe(struct platform_device *pdev)
 	if (IS_ERR(ipmmu->ipmmu_base))
 		return PTR_ERR(ipmmu->ipmmu_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ipmmu->dev_names = pdata->dev_names;
 	ipmmu->num_dev_names = pdata->num_dev_names;
@@ -148,8 +173,12 @@ static int ipmmu_probe(struct platform_device *pdev)
 	ipmmu_reg_write(ipmmu, IMCTR1, 0x0); /* disable TLB */
 	ipmmu_reg_write(ipmmu, IMCTR2, 0x0); /* disable PMB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipmmu_iommu_init(ipmmu);
 	return 0;
+=======
+	return ipmmu_iommu_init(ipmmu);
+>>>>>>> v3.18
 =======
 	return ipmmu_iommu_init(ipmmu);
 >>>>>>> v3.18

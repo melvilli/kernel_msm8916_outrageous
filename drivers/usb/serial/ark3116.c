@@ -24,7 +24,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioctl.h>
@@ -75,7 +78,11 @@ struct ark3116_private {
 	__u32			hcr;	/* handshake control register (0x8)
 					 * value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32			mcr;	/* modem contol register value */
+=======
+	__u32			mcr;	/* modem control register value */
+>>>>>>> v3.18
 =======
 	__u32			mcr;	/* modem control register value */
 >>>>>>> v3.18
@@ -108,6 +115,7 @@ static int ark3116_read_reg(struct usb_serial *serial,
 				 0xfe, 0xc0, 0, reg,
 				 buf, 1, ARK_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (result < 1) {
 		dev_err(&serial->interface->dev,
 				"failed to read register %u: %d\n",
@@ -120,10 +128,15 @@ static int ark3116_read_reg(struct usb_serial *serial,
 
 	return buf[0];
 =======
+=======
+>>>>>>> v3.18
 	if (result < 0)
 		return result;
 	else
 		return buf[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -435,8 +448,13 @@ static int ark3116_ioctl(struct tty_struct *tty,
 		memset(&serstruct, 0, sizeof(serstruct));
 		serstruct.type = PORT_16654;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		serstruct.line = port->serial->minor;
 		serstruct.port = port->number;
+=======
+		serstruct.line = port->minor;
+		serstruct.port = port->port_number;
+>>>>>>> v3.18
 =======
 		serstruct.line = port->minor;
 		serstruct.port = port->port_number;
@@ -636,7 +654,11 @@ static void ark3116_read_int_callback(struct urb *urb)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Data comes in via the bulk (data) URB, erors/interrupts via the int URB.
+=======
+/* Data comes in via the bulk (data) URB, errors/interrupts via the int URB.
+>>>>>>> v3.18
 =======
 /* Data comes in via the bulk (data) URB, errors/interrupts via the int URB.
 >>>>>>> v3.18

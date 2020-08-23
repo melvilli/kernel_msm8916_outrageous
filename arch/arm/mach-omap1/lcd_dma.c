@@ -33,8 +33,11 @@
 #include <mach/lcdc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int omap_lcd_dma_running(void)

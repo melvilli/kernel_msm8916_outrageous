@@ -1,6 +1,7 @@
 
 generic-y += auxvec.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += clkdev.h
 generic-y += cputime.h
 generic-y += device.h
@@ -9,6 +10,8 @@ generic-y += exec.h
 generic-y += hw_irq.h
 generic-y += irq_regs.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += barrier.h
 generic-y += clkdev.h
 generic-y += cputime.h
@@ -20,6 +23,9 @@ generic-y += hash.h
 generic-y += hw_irq.h
 generic-y += irq_regs.h
 generic-y += irq_work.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 generic-y += kdebug.h
 generic-y += kvm_para.h
@@ -30,6 +36,12 @@ generic-y += mutex.h
 generic-y += param.h
 generic-y += percpu.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += poll.h
+generic-y += preempt.h
+generic-y += segment.h
+>>>>>>> v3.18
 =======
 generic-y += poll.h
 generic-y += preempt.h

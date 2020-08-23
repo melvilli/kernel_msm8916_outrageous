@@ -35,8 +35,11 @@ static inline void set_64bit(volatile u64 *ptr, u64 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __HAVE_ARCH_CMPXCHG 1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_CMPXCHG64

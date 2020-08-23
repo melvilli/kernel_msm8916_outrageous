@@ -101,7 +101,11 @@ void mips_clear_watch_registers(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __cpuinit void mips_probe_watch_registers(struct cpuinfo_mips *c)
+=======
+void mips_probe_watch_registers(struct cpuinfo_mips *c)
+>>>>>>> v3.18
 =======
 void mips_probe_watch_registers(struct cpuinfo_mips *c)
 >>>>>>> v3.18
@@ -116,6 +120,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 	 */
 	write_c0_watchlo0(7);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -130,6 +138,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 	t = read_c0_watchhi0();
 	write_c0_watchhi0(t | 0xff8);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -140,6 +152,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 
 	write_c0_watchlo1(7);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -152,6 +168,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 	t = read_c0_watchhi1();
 	write_c0_watchhi1(t | 0xff8);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -162,6 +182,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 
 	write_c0_watchlo2(7);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -174,6 +198,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 	t = read_c0_watchhi2();
 	write_c0_watchhi2(t | 0xff8);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -184,6 +212,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 
 	write_c0_watchlo3(7);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18
@@ -196,6 +228,10 @@ void mips_probe_watch_registers(struct cpuinfo_mips *c)
 	t = read_c0_watchhi3();
 	write_c0_watchhi3(t | 0xff8);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	back_to_back_c0_hazard();
+>>>>>>> v3.18
 =======
 	back_to_back_c0_hazard();
 >>>>>>> v3.18

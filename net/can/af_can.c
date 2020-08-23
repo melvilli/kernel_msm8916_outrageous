@@ -263,9 +263,12 @@ int can_send(struct sk_buff *skb, int loop)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->ip_summed = CHECKSUM_UNNECESSARY;
 
 	skb_reset_mac_header(skb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	skb_reset_network_header(skb);
@@ -345,7 +348,10 @@ static struct dev_rcv_lists *find_dev_rcv_lists(struct net_device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * effhash - hash function for 29 bit CAN identifier reduction
  * @can_id: 29 bit CAN identifier
  *
@@ -369,6 +375,9 @@ static unsigned int effhash(canid_t can_id)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * find_rcv_list - determine optimal filterlist inside device filter struct
  * @can_id: pointer to CAN identifier of a given can_filter
@@ -433,10 +442,15 @@ static struct hlist_head *find_rcv_list(canid_t *can_id, canid_t *mask,
 
 		if (*can_id & CAN_EFF_FLAG) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (*mask == (CAN_EFF_MASK | CAN_EFF_RTR_FLAGS)) {
 				/* RFC: a future use-case for hash-tables? */
 				return &d->rx[RX_EFF];
 			}
+=======
+			if (*mask == (CAN_EFF_MASK | CAN_EFF_RTR_FLAGS))
+				return &d->rx_eff[effhash(*can_id)];
+>>>>>>> v3.18
 =======
 			if (*mask == (CAN_EFF_MASK | CAN_EFF_RTR_FLAGS))
 				return &d->rx_eff[effhash(*can_id)];
@@ -459,8 +473,12 @@ static struct hlist_head *find_rcv_list(canid_t *can_id, canid_t *mask,
  * @func: callback function on filter match
  * @data: returned parameter for callback function
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ident: string for calling module indentification
  * @sk: socket pointer (might be NULL)
+=======
+ * @ident: string for calling module identification
+>>>>>>> v3.18
 =======
  * @ident: string for calling module identification
 >>>>>>> v3.18
@@ -488,7 +506,11 @@ static struct hlist_head *find_rcv_list(canid_t *can_id, canid_t *mask,
 int can_rx_register(struct net_device *dev, canid_t can_id, canid_t mask,
 		    void (*func)(struct sk_buff *, void *), void *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    char *ident, struct sock *sk)
+=======
+		    char *ident)
+>>>>>>> v3.18
 =======
 		    char *ident)
 >>>>>>> v3.18
@@ -520,7 +542,10 @@ int can_rx_register(struct net_device *dev, canid_t can_id, canid_t mask,
 		r->data    = data;
 		r->ident   = ident;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r->sk      = sk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -548,11 +573,16 @@ static void can_rx_delete_receiver(struct rcu_head *rp)
 {
 	struct receiver *r = container_of(rp, struct receiver, rcu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sock *sk = r->sk;
 
 	kmem_cache_free(rcv_cache, r);
 	if (sk)
 		sock_put(sk);
+=======
+
+	kmem_cache_free(rcv_cache, r);
+>>>>>>> v3.18
 =======
 
 	kmem_cache_free(rcv_cache, r);
@@ -632,11 +662,16 @@ void can_rx_unregister(struct net_device *dev, canid_t can_id, canid_t mask,
 
 	/* schedule the receiver item for deletion */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (r) {
 		if (r->sk)
 			sock_hold(r->sk);
 		call_rcu(&r->rcu, can_rx_delete_receiver);
 	}
+=======
+	if (r)
+		call_rcu(&r->rcu, can_rx_delete_receiver);
+>>>>>>> v3.18
 =======
 	if (r)
 		call_rcu(&r->rcu, can_rx_delete_receiver);
@@ -699,7 +734,11 @@ static int can_rcv_filter(struct dev_rcv_lists *d, struct sk_buff *skb)
 
 	if (can_id & CAN_EFF_FLAG) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_for_each_entry_rcu(r, &d->rx[RX_EFF], list) {
+=======
+		hlist_for_each_entry_rcu(r, &d->rx_eff[effhash(can_id)], list) {
+>>>>>>> v3.18
 =======
 		hlist_for_each_entry_rcu(r, &d->rx_eff[effhash(can_id)], list) {
 >>>>>>> v3.18
@@ -866,9 +905,15 @@ EXPORT_SYMBOL(can_proto_unregister);
  */
 static int can_notifier(struct notifier_block *nb, unsigned long msg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void *data)
 {
 	struct net_device *dev = (struct net_device *)data;
+=======
+			void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			void *ptr)
 {

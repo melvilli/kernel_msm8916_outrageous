@@ -19,12 +19,18 @@
 #include "common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MV78XX0_MBUS_PCIE_MEM_TARGET(port, lane) ((port) ? 8 : 4)
 #define MV78XX0_MBUS_PCIE_MEM_ATTR(port, lane)   (0xf8 & ~(0x10 << (lane)))
 #define MV78XX0_MBUS_PCIE_IO_TARGET(port, lane)  ((port) ? 8 : 4)
 #define MV78XX0_MBUS_PCIE_IO_ATTR(port, lane)    (0xf0 & ~(0x10 << (lane)))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pcie_port {
 	u8			maj;
@@ -80,7 +86,10 @@ static void __init mv78xx0_pcie_preinit(void)
 	for (i = 0; i < num_pcie_ports; i++) {
 		struct pcie_port *pp = pcie_port + i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char winname[MVEBU_MBUS_MAX_WINNAME_SZ];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -97,6 +106,7 @@ static void __init mv78xx0_pcie_preinit(void)
 			panic("can't allocate PCIe MEM sub-space");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(winname, sizeof(winname), "pcie%d.%d",
 			 pp->maj, pp->min);
 
@@ -109,12 +119,17 @@ static void __init mv78xx0_pcie_preinit(void)
 						  i * SZ_64K, SZ_64K,
 						  0, MVEBU_MBUS_PCI_IO);
 =======
+=======
+>>>>>>> v3.18
 		mvebu_mbus_add_window_by_id(MV78XX0_MBUS_PCIE_MEM_TARGET(pp->maj, pp->min),
 					    MV78XX0_MBUS_PCIE_MEM_ATTR(pp->maj, pp->min),
 					    pp->res.start, resource_size(&pp->res));
 		mvebu_mbus_add_window_remap_by_id(MV78XX0_MBUS_PCIE_IO_TARGET(pp->maj, pp->min),
 						  MV78XX0_MBUS_PCIE_IO_ATTR(pp->maj, pp->min),
 						  i * SZ_64K, SZ_64K, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

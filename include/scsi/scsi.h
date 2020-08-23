@@ -11,11 +11,14 @@
 #include <linux/types.h>
 #include <linux/scatterlist.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/device.h>
 
 struct scsi_cmnd;
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 
 struct scsi_cmnd;
@@ -24,6 +27,9 @@ enum scsi_timeouts {
 	SCSI_DEFAULT_EH_TIMEOUT		= 10 * HZ,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The maximum number of SG segments that we will put inside a
@@ -39,7 +45,11 @@ enum scsi_timeouts {
  * is totally arbitrary, a setting of 2048 will get you at least 8mb ios.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ARCH_HAS_SG_CHAIN
+=======
+#ifdef CONFIG_ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -156,6 +166,10 @@ enum scsi_timeouts {
 #define ACCESS_CONTROL_OUT    0x87
 #define READ_16               0x88
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define COMPARE_AND_WRITE     0x89
+>>>>>>> v3.18
 =======
 #define COMPARE_AND_WRITE     0x89
 >>>>>>> v3.18
@@ -170,6 +184,10 @@ enum scsi_timeouts {
 #define	SAI_READ_CAPACITY_16  0x10
 #define SAI_GET_LBA_STATUS    0x12
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SAI_REPORT_REFERRALS  0x13
+>>>>>>> v3.18
 =======
 #define SAI_REPORT_REFERRALS  0x13
 >>>>>>> v3.18
@@ -350,6 +368,10 @@ static inline int scsi_status_is_good(int status)
 #define TYPE_RBC	    0x0e
 #define TYPE_OSD            0x11
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TYPE_ZBC            0x14
+>>>>>>> v3.18
 =======
 #define TYPE_ZBC            0x14
 >>>>>>> v3.18
@@ -408,7 +430,11 @@ struct scsi_lun {
 #define SCSI_W_LUN_TARGET_LOG_PAGE (SCSI_W_LUN_BASE + 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int scsi_is_wlun(unsigned int lun)
+=======
+static inline int scsi_is_wlun(u64 lun)
+>>>>>>> v3.18
 =======
 static inline int scsi_is_wlun(u64 lun)
 >>>>>>> v3.18
@@ -486,6 +512,11 @@ static inline int scsi_is_wlun(u64 lun)
 #define DID_NEXUS_FAILURE 0x11  /* Permanent nexus failure, retry on other
 				 * paths might yield different results */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DID_ALLOC_FAILURE 0x12  /* Space allocation on the device failed */
+#define DID_MEDIUM_ERROR  0x13  /* Medium error */
+>>>>>>> v3.18
 =======
 #define DID_ALLOC_FAILURE 0x12  /* Space allocation on the device failed */
 #define DID_MEDIUM_ERROR  0x13  /* Medium error */
@@ -520,7 +551,10 @@ static inline int scsi_is_wlun(u64 lun)
 #define SCSI_RETURN_NOT_HANDLED   0x2008
 #define FAST_IO_FAIL	0x2009
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TARGET_ERROR    0x200A
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -589,7 +623,10 @@ static inline int scsi_is_wlun(u64 lun)
 #define SCSI_INQ_PQ_NOT_CAP     0x03
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Here are some scsi specific ioctl commands which are sometimes useful.
@@ -611,6 +648,9 @@ static inline int scsi_is_wlun(u64 lun)
 /* Used to obtain the PCI location of a device */
 #define SCSI_IOCTL_GET_PCI		0x5387
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Pull a u32 out of a SCSI message (using BE SCSI conventions) */
 static inline __u32 scsi_to_u32(__u8 *ptr)
@@ -619,11 +659,14 @@ static inline __u32 scsi_to_u32(__u8 *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct scsi_disk *scsi_disk_get_from_dev(struct device *dev);
 
 struct gendisk *scsi_gendisk_get_from_dev(struct device *dev);
 void scsi_gendisk_put(struct device *dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _SCSI_SCSI_H */

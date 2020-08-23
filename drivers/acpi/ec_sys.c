@@ -13,6 +13,10 @@
 #include <linux/debugfs.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -39,7 +43,10 @@ static ssize_t acpi_ec_read_io(struct file *f, char __user *buf,
 	 */
 	unsigned int size = EC_SPACE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *data = (u8 *) buf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	loff_t init_off = *off;
@@ -55,10 +62,13 @@ static ssize_t acpi_ec_read_io(struct file *f, char __user *buf,
 
 	while (size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ec_read(*off, &data[*off - init_off]);
 		if (err)
 			return err;
 =======
+=======
+>>>>>>> v3.18
 		u8 byte_read;
 		err = ec_read(*off, &byte_read);
 		if (err)
@@ -68,6 +78,9 @@ static ssize_t acpi_ec_read_io(struct file *f, char __user *buf,
 				return *off - init_off; /* partial read */
 			return -EFAULT;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*off += 1;
 		size--;
@@ -85,7 +98,10 @@ static ssize_t acpi_ec_write_io(struct file *f, const char __user *buf,
 	unsigned int size = count;
 	loff_t init_off = *off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *data = (u8 *) buf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err = 0;
@@ -99,14 +115,20 @@ static ssize_t acpi_ec_write_io(struct file *f, const char __user *buf,
 
 	while (size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 byte_write = data[*off - init_off];
 =======
+=======
+>>>>>>> v3.18
 		u8 byte_write;
 		if (get_user(byte_write, buf + *off - init_off)) {
 			if (*off - init_off)
 				return *off - init_off; /* partial write */
 			return -EFAULT;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = ec_write(*off, byte_write);
 		if (err)
@@ -127,7 +149,11 @@ static const struct file_operations acpi_ec_io_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_ec_add_debugfs(struct acpi_ec *ec, unsigned int ec_device_count)
+=======
+static int acpi_ec_add_debugfs(struct acpi_ec *ec, unsigned int ec_device_count)
+>>>>>>> v3.18
 =======
 static int acpi_ec_add_debugfs(struct acpi_ec *ec, unsigned int ec_device_count)
 >>>>>>> v3.18

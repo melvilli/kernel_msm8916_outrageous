@@ -17,6 +17,7 @@
 #define TIMER1_IRQ      4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm-generic/irq.h>
 
 extern void __init arc_init_IRQ(void);
@@ -24,6 +25,8 @@ extern int __init get_hw_config_num_irq(void);
 
 void __cpuinit arc_local_timer_setup(unsigned int cpu);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <asm-generic/irq.h>
 
@@ -32,6 +35,9 @@ void arc_local_timer_setup(void);
 void arc_request_percpu_irq(int irq, int cpu,
                             irqreturn_t (*isr)(int irq, void *dev),
                             const char *irq_nm, void *percpu_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

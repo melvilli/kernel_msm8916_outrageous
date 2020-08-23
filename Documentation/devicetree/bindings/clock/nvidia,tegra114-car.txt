@@ -13,6 +13,7 @@ Required properties :
   the 32 KHz "32k_in", and the board-specific oscillator "osc".
 - #clock-cells : Should be 1.
 <<<<<<< HEAD
+<<<<<<< HEAD
   In clock consumers, this cell represents the clock ID exposed by the CAR.
 
   The first 160 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
@@ -261,12 +262,17 @@ Required properties :
   264	dfll_ref
   265	dfll_soc
 =======
+=======
+>>>>>>> v3.18
   In clock consumers, this cell represents the clock ID exposed by the
   CAR. The assignments may be found in header file
   <dt-bindings/clock/tegra114-car.h>.
 - #reset-cells : Should be 1.
   In clock consumers, this cell represents the bit number in the CAR's
   array of CLK_RST_CONTROLLER_RST_DEVICES_* registers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example SoC include file:
@@ -277,16 +283,22 @@ Example SoC include file:
 		reg = <0x60006000 0x1000>;
 		#clock-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 
 	usb@c5004000 {
 		clocks = <&tegra_car 58>; /* usb2 */
 =======
+=======
+>>>>>>> v3.18
 		#reset-cells = <1>;
 	};
 
 	usb@c5004000 {
 		clocks = <&tegra_car TEGRA114_CLK_USB2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

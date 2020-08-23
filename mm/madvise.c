@@ -43,17 +43,23 @@ static int madvise_need_mmap_write(int behavior)
  * areas, each area with its own behavior.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long madvise_behavior(struct vm_area_struct * vma,
 		     struct vm_area_struct **prev,
 		     unsigned long start, unsigned long end, int behavior)
 {
 	struct mm_struct * mm = vma->vm_mm;
 =======
+=======
+>>>>>>> v3.18
 static long madvise_behavior(struct vm_area_struct *vma,
 		     struct vm_area_struct **prev,
 		     unsigned long start, unsigned long end, int behavior)
 {
 	struct mm_struct *mm = vma->vm_mm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int error = 0;
 	pgoff_t pgoff;
@@ -111,8 +117,12 @@ static long madvise_behavior(struct vm_area_struct *vma,
 	pgoff = vma->vm_pgoff + ((start - vma->vm_start) >> PAGE_SHIFT);
 	*prev = vma_merge(mm, *prev, start, end, new_flags, vma->anon_vma,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				vma->vm_file, pgoff, vma_policy(vma),
 				vma_get_anon_name(vma));
+=======
+				vma->vm_file, pgoff, vma_policy(vma));
+>>>>>>> v3.18
 =======
 				vma->vm_file, pgoff, vma_policy(vma));
 >>>>>>> v3.18
@@ -209,7 +219,11 @@ static void force_shm_swapin_readahead(struct vm_area_struct *vma,
 		index = ((start - vma->vm_start) >> PAGE_SHIFT) + vma->vm_pgoff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page = find_get_page(mapping, index);
+=======
+		page = find_get_entry(mapping, index);
+>>>>>>> v3.18
 =======
 		page = find_get_entry(mapping, index);
 >>>>>>> v3.18
@@ -233,8 +247,13 @@ static void force_shm_swapin_readahead(struct vm_area_struct *vma,
  * Schedule all required I/O operations.  Do not wait for completion.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long madvise_willneed(struct vm_area_struct * vma,
 			     struct vm_area_struct ** prev,
+=======
+static long madvise_willneed(struct vm_area_struct *vma,
+			     struct vm_area_struct **prev,
+>>>>>>> v3.18
 =======
 static long madvise_willneed(struct vm_area_struct *vma,
 			     struct vm_area_struct **prev,
@@ -293,8 +312,13 @@ static long madvise_willneed(struct vm_area_struct *vma,
  * dirty pages is already available as msync(MS_INVALIDATE).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long madvise_dontneed(struct vm_area_struct * vma,
 			     struct vm_area_struct ** prev,
+=======
+static long madvise_dontneed(struct vm_area_struct *vma,
+			     struct vm_area_struct **prev,
+>>>>>>> v3.18
 =======
 static long madvise_dontneed(struct vm_area_struct *vma,
 			     struct vm_area_struct **prev,
@@ -320,9 +344,12 @@ static long madvise_dontneed(struct vm_area_struct *vma,
  * Application wants to free up the pages and associated backing store.
  * This is effectively punching a hole into the middle of a file.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * NOTE: Currently, only shmfs/tmpfs is supported for this operation.
  * Other filesystems return -ENOSYS.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -374,6 +401,7 @@ static long madvise_remove(struct vm_area_struct *vma,
 static int madvise_hwpoison(int bhv, unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!capable(CAP_SYS_ADMIN))
@@ -393,6 +421,8 @@ static int madvise_hwpoison(int bhv, unsigned long start, unsigned long end)
 		}
 		printk(KERN_INFO "Injecting memory failure for page %lx at %lx\n",
 =======
+=======
+>>>>>>> v3.18
 	struct page *p;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
@@ -417,13 +447,20 @@ static int madvise_hwpoison(int bhv, unsigned long start, unsigned long end)
 			continue;
 		}
 		pr_info("Injecting memory failure for page %#lx at %#lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       page_to_pfn(p), start);
 		/* Ignore return value for now */
 		memory_failure(page_to_pfn(p), 0, MF_COUNT_INCREASED);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -521,7 +558,11 @@ SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)
 {
 	unsigned long end, tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vm_area_struct * vma, *prev;
+=======
+	struct vm_area_struct *vma, *prev;
+>>>>>>> v3.18
 =======
 	struct vm_area_struct *vma, *prev;
 >>>>>>> v3.18

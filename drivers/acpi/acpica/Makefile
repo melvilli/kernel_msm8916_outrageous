@@ -3,7 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-y			:= -Os
+=======
+ccflags-y			:= -Os -DBUILDING_ACPICA
+>>>>>>> v3.18
 =======
 ccflags-y			:= -Os -DBUILDING_ACPICA
 >>>>>>> v3.18
@@ -88,6 +92,10 @@ acpi-y +=		\
 	nsaccess.o	\
 	nsalloc.o	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nsarguments.o	\
+>>>>>>> v3.18
 =======
 	nsarguments.o	\
 >>>>>>> v3.18
@@ -130,6 +138,11 @@ acpi-y +=		\
 	rscalc.o	\
 	rscreate.o	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rsdump.o	\
+	rsdumpinfo.o	\
+>>>>>>> v3.18
 =======
 	rsdump.o	\
 	rsdumpinfo.o	\
@@ -145,6 +158,7 @@ acpi-y +=		\
 	rsxface.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi-$(ACPI_FUTURE_USAGE) += rsdump.o rsdumpinfo.o
 
 acpi-y +=		\
@@ -152,12 +166,17 @@ acpi-y +=		\
 	tbfind.o	\
 	tbinstal.o	\
 =======
+=======
+>>>>>>> v3.18
 acpi-y +=		\
 	tbdata.o	\
 	tbfadt.o	\
 	tbfind.o	\
 	tbinstal.o	\
 	tbprint.o	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tbutils.o	\
 	tbxface.o	\
@@ -168,6 +187,10 @@ acpi-y +=		\
 	utaddress.o	\
 	utalloc.o	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	utbuffer.o	\
+>>>>>>> v3.18
 =======
 	utbuffer.o	\
 >>>>>>> v3.18
@@ -177,13 +200,19 @@ acpi-y +=		\
 	utdecode.o	\
 	utdelete.o	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uteval.o	\
 	utglobal.o	\
 =======
+=======
+>>>>>>> v3.18
 	uterror.o	\
 	uteval.o	\
 	utglobal.o	\
 	uthex.o		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	utids.o		\
 	utinit.o	\
@@ -204,13 +233,19 @@ acpi-y +=		\
 	utxfmutex.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi-$(ACPI_FUTURE_USAGE) += uttrack.o utcache.o
 =======
+=======
+>>>>>>> v3.18
 acpi-$(ACPI_FUTURE_USAGE) +=	\
 	utcache.o		\
 	utfileio.o		\
 	utprint.o		\
 	uttrack.o		\
 	utuuid.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 

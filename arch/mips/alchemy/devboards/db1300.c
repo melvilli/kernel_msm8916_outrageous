@@ -5,6 +5,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 #include <linux/platform_device.h>
 #include <linux/smsc911x.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/wm97xx.h>
+>>>>>>> v3.18
 =======
 #include <linux/wm97xx.h>
 >>>>>>> v3.18
@@ -35,7 +43,10 @@
 #include <asm/mach-au1x00/au1xxx_dbdma.h>
 #include <asm/mach-au1x00/au1xxx_psc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mach-db1x00/db1300.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/mach-db1x00/bcsr.h>
@@ -44,7 +55,10 @@
 #include "platform.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* FPGA (external mux) interrupt sources */
 #define DB1300_FIRST_INT	(ALCHEMY_GPIC_INT_LAST + 1)
 #define DB1300_IDE_INT		(DB1300_FIRST_INT + 0)
@@ -78,6 +92,9 @@
 #define DB1300_NAND_PHYS_END	0x20000fff
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_board_info db1300_i2c_devs[] __initdata = {
 	{ I2C_BOARD_INFO("wm8731", 0x1b), },	/* I2S audio codec */
@@ -185,7 +202,11 @@ static void au1300_nand_cmd_ctrl(struct mtd_info *mtd, int cmd,
 static int au1300_nand_device_ready(struct mtd_info *mtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl((void __iomem *)MEM_STSTAT) & 1;
+=======
+	return alchemy_rdsmem(AU1000_MEM_STSTAT) & 1;
+>>>>>>> v3.18
 =======
 	return alchemy_rdsmem(AU1000_MEM_STSTAT) & 1;
 >>>>>>> v3.18
@@ -730,7 +751,10 @@ static struct platform_device db1300_lcd_dev = {
 /**********************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void db1300_wm97xx_irqen(struct wm97xx *wm, int enable)
 {
 	if (enable)
@@ -771,6 +795,9 @@ static struct platform_driver db1300_wm97xx_driver = {
 
 /**********************************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_device *db1300_dev[] __initdata = {
 	&db1300_eth_dev,
@@ -794,6 +821,10 @@ int __init db1300_dev_setup(void)
 {
 	int swapped, cpldirq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *c;
+>>>>>>> v3.18
 =======
 	struct clk *c;
 >>>>>>> v3.18
@@ -820,6 +851,12 @@ int __init db1300_dev_setup(void)
 				ARRAY_SIZE(db1300_i2c_devs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (platform_driver_register(&db1300_wm97xx_driver))
+		pr_warn("DB1300: failed to init touch pen irq support!\n");
+
+>>>>>>> v3.18
 =======
 	if (platform_driver_register(&db1300_wm97xx_driver))
 		pr_warn("DB1300: failed to init touch pen irq support!\n");
@@ -833,8 +870,11 @@ int __init db1300_dev_setup(void)
 	    (void __iomem *)KSEG1ADDR(AU1300_PSC2_PHYS_ADDR) + PSC_SEL_OFFSET);
 	wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* I2C uses internal 48MHz EXTCLK1 */
 =======
+=======
+>>>>>>> v3.18
 	/* I2C driver wants 50MHz, get as close as possible */
 	c = clk_get(NULL, "psc3_intclk");
 	if (!IS_ERR(c)) {
@@ -842,6 +882,9 @@ int __init db1300_dev_setup(void)
 		clk_prepare_enable(c);
 		clk_put(c);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__raw_writel(PSC_SEL_CLK_INTCLK,
 	    (void __iomem *)KSEG1ADDR(AU1300_PSC3_PHYS_ADDR) + PSC_SEL_OFFSET);
@@ -874,7 +917,10 @@ int __init db1300_board_setup(void)
 	unsigned short whoami;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	db1300_gpio_config();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bcsr_init(DB1300_BCSR_PHYS_ADDR,
@@ -882,12 +928,18 @@ int __init db1300_board_setup(void)
 
 	whoami = bcsr_read(BCSR_WHOAMI);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (BCSR_WHOAMI_BOARD(whoami) != BCSR_WHOAMI_DB1300)
 		return -ENODEV;
 
 	db1300_gpio_config();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk(KERN_INFO "NetLogic DBAu1300 Development Platform.\n\t"
 		"BoardID %d   CPLD Rev %d   DaughtercardID %d\n",

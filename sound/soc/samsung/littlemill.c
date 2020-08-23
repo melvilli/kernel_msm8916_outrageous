@@ -305,6 +305,7 @@ static int littlemill_probe(struct platform_device *pdev)
 	card->dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_card(card);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
@@ -323,12 +324,17 @@ static int littlemill_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_snd_soc_register_card(&pdev->dev, card);
 	if (ret)
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
 			ret);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -340,7 +346,10 @@ static struct platform_driver littlemill_driver = {
 	},
 	.probe = littlemill_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = littlemill_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

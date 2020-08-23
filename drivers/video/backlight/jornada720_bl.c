@@ -42,17 +42,23 @@ static int jornada_bl_get_brightness(struct backlight_device *bd)
 		jornada_ssp_end();
 		return -ETIMEDOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/* exchange txdummy for value */
 		ret = jornada_ssp_byte(TXDUMMY);
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* exchange txdummy for value */
 	ret = jornada_ssp_byte(TXDUMMY);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jornada_ssp_end();
 
@@ -124,14 +130,20 @@ static int jornada_bl_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = BL_MAX_BRIGHT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd = backlight_device_register(S1D_DEVICENAME, &pdev->dev, NULL,
 				       &jornada_bl_ops, &props);
 
 =======
+=======
+>>>>>>> v3.18
 
 	bd = devm_backlight_device_register(&pdev->dev, S1D_DEVICENAME,
 					&pdev->dev, NULL, &jornada_bl_ops,
 					&props);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(bd)) {
 		ret = PTR_ERR(bd);
@@ -155,6 +167,7 @@ static int jornada_bl_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jornada_bl_remove(struct platform_device *pdev)
 {
 	struct backlight_device *bd = platform_get_drvdata(pdev);
@@ -167,6 +180,10 @@ static int jornada_bl_remove(struct platform_device *pdev)
 static struct platform_driver jornada_bl_driver = {
 	.probe		= jornada_bl_probe,
 	.remove		= jornada_bl_remove,
+=======
+static struct platform_driver jornada_bl_driver = {
+	.probe		= jornada_bl_probe,
+>>>>>>> v3.18
 =======
 static struct platform_driver jornada_bl_driver = {
 	.probe		= jornada_bl_probe,

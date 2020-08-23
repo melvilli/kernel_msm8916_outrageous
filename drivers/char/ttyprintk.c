@@ -18,7 +18,11 @@
 #include <linux/serial.h>
 #include <linux/tty.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -215,6 +219,7 @@ static int __init ttyprintk_init(void)
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_unregister_driver(ttyprintk_driver);
 	put_tty_driver(ttyprintk_driver);
 	tty_port_destroy(&tpk_port.port);
@@ -223,6 +228,8 @@ error:
 }
 module_init(ttyprintk_init);
 =======
+=======
+>>>>>>> v3.18
 	put_tty_driver(ttyprintk_driver);
 	tty_port_destroy(&tpk_port.port);
 	return ret;
@@ -239,4 +246,7 @@ device_initcall(ttyprintk_init);
 module_exit(ttyprintk_exit);
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

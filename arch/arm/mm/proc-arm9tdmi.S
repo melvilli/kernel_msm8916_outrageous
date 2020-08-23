@@ -33,7 +33,11 @@ ENTRY(cpu_arm9tdmi_do_idle)
 ENTRY(cpu_arm9tdmi_dcache_clean_area)
 ENTRY(cpu_arm9tdmi_switch_mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ ENTRY(cpu_arm9tdmi_switch_mm)
  */
 ENTRY(cpu_arm9tdmi_proc_fin)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -56,6 +64,7 @@ ENTRY(cpu_arm9tdmi_proc_fin)
 		.pushsection	.idmap.text, "ax"
 ENTRY(cpu_arm9tdmi_reset)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, r0
 ENDPROC(cpu_arm9tdmi_reset)
 		.popsection
@@ -66,6 +75,8 @@ ENDPROC(cpu_arm9tdmi_reset)
 __arm9tdmi_setup:
 		mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 		ret	r0
 ENDPROC(cpu_arm9tdmi_reset)
 		.popsection
@@ -73,6 +84,9 @@ ENDPROC(cpu_arm9tdmi_reset)
 		.type	__arm9tdmi_setup, #function
 __arm9tdmi_setup:
 		ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.size	__arm9tdmi_setup, . - __arm9tdmi_setup
 

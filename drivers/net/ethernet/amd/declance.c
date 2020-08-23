@@ -345,8 +345,13 @@ static void cp_to_buf(const int type, void *to, const void *from, int len)
 
 		clen = len & 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtp = tp;
 		rfp = fp;
+=======
+		rtp = (unsigned char *)tp;
+		rfp = (const unsigned char *)fp;
+>>>>>>> v3.18
 =======
 		rtp = (unsigned char *)tp;
 		rfp = (const unsigned char *)fp;
@@ -378,8 +383,13 @@ static void cp_to_buf(const int type, void *to, const void *from, int len)
 		 */
 		clen = len & 15;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtp = (unsigned char *) tp;
 		rfp = (unsigned char *) fp;
+=======
+		rtp = (unsigned char *)tp;
+		rfp = (const unsigned char *)fp;
+>>>>>>> v3.18
 =======
 		rtp = (unsigned char *)tp;
 		rfp = (const unsigned char *)fp;
@@ -414,8 +424,13 @@ static void cp_from_buf(const int type, void *to, const void *from, int len)
 		clen = len & 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtp = tp;
 		rfp = fp;
+=======
+		rtp = (unsigned char *)tp;
+		rfp = (const unsigned char *)fp;
+>>>>>>> v3.18
 =======
 		rtp = (unsigned char *)tp;
 		rfp = (const unsigned char *)fp;
@@ -449,8 +464,13 @@ static void cp_from_buf(const int type, void *to, const void *from, int len)
 		 */
 		clen = len & 15;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtp = (unsigned char *) tp;
 		rfp = (unsigned char *) fp;
+=======
+		rtp = (unsigned char *)tp;
+		rfp = (const unsigned char *)fp;
+>>>>>>> v3.18
 =======
 		rtp = (unsigned char *)tp;
 		rfp = (const unsigned char *)fp;
@@ -496,7 +516,11 @@ static void lance_init_ring(struct net_device *dev)
 	if (ZERO)
 		printk("RX ptr: %8.8x(%8.8x)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       leptr, lib_off(brx_ring, lp->type));
+=======
+		       leptr, (uint)lib_off(brx_ring, lp->type));
+>>>>>>> v3.18
 =======
 		       leptr, (uint)lib_off(brx_ring, lp->type));
 >>>>>>> v3.18
@@ -509,7 +533,11 @@ static void lance_init_ring(struct net_device *dev)
 	if (ZERO)
 		printk("TX ptr: %8.8x(%8.8x)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       leptr, lib_off(btx_ring, lp->type));
+=======
+		       leptr, (uint)lib_off(btx_ring, lp->type));
+>>>>>>> v3.18
 =======
 		       leptr, (uint)lib_off(btx_ring, lp->type));
 >>>>>>> v3.18
@@ -528,8 +556,13 @@ static void lance_init_ring(struct net_device *dev)
 		*lib_ptr(ib, btx_ring[i].misc, lp->type) = 0;
 		if (i < 3 && ZERO)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("%d: 0x%8.8x(0x%8.8x)\n",
 			       i, leptr, (uint)lp->tx_buf_ptr_cpu[i]);
+=======
+			printk("%d: %8.8x(%p)\n",
+			       i, leptr, lp->tx_buf_ptr_cpu[i]);
+>>>>>>> v3.18
 =======
 			printk("%d: %8.8x(%p)\n",
 			       i, leptr, lp->tx_buf_ptr_cpu[i]);
@@ -550,8 +583,13 @@ static void lance_init_ring(struct net_device *dev)
 		*lib_ptr(ib, brx_ring[i].mblength, lp->type) = 0;
 		if (i < 3 && ZERO)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("%d: 0x%8.8x(0x%8.8x)\n",
 			       i, leptr, (uint)lp->rx_buf_ptr_cpu[i]);
+=======
+			printk("%d: %8.8x(%p)\n",
+			       i, leptr, lp->rx_buf_ptr_cpu[i]);
+>>>>>>> v3.18
 =======
 			printk("%d: %8.8x(%p)\n",
 			       i, leptr, lp->rx_buf_ptr_cpu[i]);
@@ -850,7 +888,11 @@ static int lance_open(struct net_device *dev)
 		unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (request_irq(lp->dma_irq, lance_dma_merr_int, 0,
+=======
+		if (request_irq(lp->dma_irq, lance_dma_merr_int, IRQF_ONESHOT,
+>>>>>>> v3.18
 =======
 		if (request_irq(lp->dma_irq, lance_dma_merr_int, IRQF_ONESHOT,
 >>>>>>> v3.18

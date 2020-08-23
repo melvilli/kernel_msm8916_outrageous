@@ -9,8 +9,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "imx6qdl.dtsi"
 #include "imx6dl-pinfunc.h"
+=======
+#include <dt-bindings/interrupt-controller/irq.h>
+#include "imx6dl-pinfunc.h"
+#include "imx6qdl.dtsi"
+>>>>>>> v3.18
 =======
 #include <dt-bindings/interrupt-controller/irq.h>
 #include "imx6dl-pinfunc.h"
@@ -28,7 +34,10 @@
 			reg = <0>;
 			next-level-cache = <&L2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			operating-points = <
 				/* kHz    uV */
 				996000  1275000
@@ -52,6 +61,9 @@
 			arm-supply = <&reg_arm>;
 			pu-supply = <&reg_pu>;
 			soc-supply = <&reg_soc>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -64,6 +76,7 @@
 	};
 
 	soc {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		aips1: aips-bus@02000000 {
 			iomuxc: iomuxc@020e0000 {
@@ -186,6 +199,8 @@
 
 
 =======
+=======
+>>>>>>> v3.18
 		ocram: sram@00900000 {
 			compatible = "mmio-sram";
 			reg = <0x00900000 0x20000>;
@@ -195,13 +210,20 @@
 		aips1: aips-bus@02000000 {
 			iomuxc: iomuxc@020e0000 {
 				compatible = "fsl,imx6dl-iomuxc";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
 			pxp: pxp@020f0000 {
 				reg = <0x020f0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 98 0x04>;
+=======
+				interrupts = <0 98 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 98 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -210,7 +232,11 @@
 			epdc: epdc@020f4000 {
 				reg = <0x020f4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 97 0x04>;
+=======
+				interrupts = <0 97 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 97 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -219,7 +245,11 @@
 			lcdif: lcdif@020f8000 {
 				reg = <0x020f8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 39 0x04>;
+=======
+				interrupts = <0 39 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 39 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -231,21 +261,30 @@
 				#address-cells = <1>;
 				#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				compatible = "fsl,imx1-i2c";
 				reg = <0x021f8000 0x4000>;
 				interrupts = <0 35 0x04>;
 =======
+=======
+>>>>>>> v3.18
 				compatible = "fsl,imx6q-i2c", "fsl,imx21-i2c";
 				reg = <0x021f8000 0x4000>;
 				interrupts = <0 35 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6DL_CLK_I2C4>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	display-subsystem {
 		compatible = "fsl,imx-display-subsystem";
@@ -264,5 +303,8 @@
 	clock-names = "di0_pll", "di1_pll",
 		      "di0_sel", "di1_sel",
 		      "di0", "di1";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -11,16 +11,22 @@
 #include <linux/etherdevice.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/netdevice.h>
 #include <linux/slab.h>
 #include "dsa_priv.h"
 
 netdev_tx_t trailer_xmit(struct sk_buff *skb, struct net_device *dev)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include "dsa_priv.h"
 
 static netdev_tx_t trailer_xmit(struct sk_buff *skb, struct net_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dsa_slave_priv *p = netdev_priv(dev);
@@ -122,9 +128,15 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct packet_type trailer_packet_type __read_mostly = {
 	.type	= cpu_to_be16(ETH_P_TRAILER),
 	.func	= trailer_rcv,
+=======
+const struct dsa_device_ops trailer_netdev_ops = {
+	.xmit	= trailer_xmit,
+	.rcv	= trailer_rcv,
+>>>>>>> v3.18
 =======
 const struct dsa_device_ops trailer_netdev_ops = {
 	.xmit	= trailer_xmit,

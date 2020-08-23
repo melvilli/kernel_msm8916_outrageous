@@ -10,6 +10,12 @@
 
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/interrupt.h>
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 #include <linux/interrupt.h>
@@ -80,6 +86,10 @@ static void bcma_gpio_free(struct gpio_chip *chip, unsigned gpio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_BUILTIN(CONFIG_BCM47XX)
+>>>>>>> v3.18
 =======
 #if IS_BUILTIN(CONFIG_BCM47XX)
 >>>>>>> v3.18
@@ -89,7 +99,11 @@ static int bcma_gpio_to_irq(struct gpio_chip *chip, unsigned gpio)
 
 	if (cc->core->bus->hosttype == BCMA_HOSTTYPE_SOC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return bcma_core_irq(cc->core);
+=======
+		return irq_find_mapping(cc->irq_domain, gpio);
+>>>>>>> v3.18
 =======
 		return irq_find_mapping(cc->irq_domain, gpio);
 >>>>>>> v3.18
@@ -98,10 +112,13 @@ static int bcma_gpio_to_irq(struct gpio_chip *chip, unsigned gpio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bcma_gpio_init(struct bcma_drv_cc *cc)
 {
 	struct gpio_chip *chip = &cc->gpio;
 =======
+=======
+>>>>>>> v3.18
 static void bcma_gpio_irq_unmask(struct irq_data *d)
 {
 	struct bcma_drv_cc *cc = irq_data_get_irq_chip_data(d);
@@ -221,6 +238,9 @@ int bcma_gpio_init(struct bcma_drv_cc *cc)
 {
 	struct gpio_chip *chip = &cc->gpio;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chip->label		= "bcma_gpio";
@@ -232,9 +252,12 @@ int bcma_gpio_init(struct bcma_drv_cc *cc)
 	chip->direction_input	= bcma_gpio_direction_input;
 	chip->direction_output	= bcma_gpio_direction_output;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->to_irq		= bcma_gpio_to_irq;
 	chip->ngpio		= 16;
 =======
+=======
+>>>>>>> v3.18
 #if IS_BUILTIN(CONFIG_BCM47XX)
 	chip->to_irq		= bcma_gpio_to_irq;
 #endif
@@ -251,6 +274,9 @@ int bcma_gpio_init(struct bcma_drv_cc *cc)
 		chip->ngpio	= 16;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* There is just one SoC in one device and its GPIO addresses should be
 	 * deterministic to address them more easily. The other buses could get
@@ -261,8 +287,11 @@ int bcma_gpio_init(struct bcma_drv_cc *cc)
 		chip->base		= -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_add(chip);
 =======
+=======
+>>>>>>> v3.18
 	err = bcma_gpio_irq_domain_init(cc);
 	if (err)
 		return err;
@@ -274,13 +303,22 @@ int bcma_gpio_init(struct bcma_drv_cc *cc)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int bcma_gpio_unregister(struct bcma_drv_cc *cc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&cc->gpio);
+=======
+	bcma_gpio_irq_domain_exit(cc);
+	gpiochip_remove(&cc->gpio);
+	return 0;
+>>>>>>> v3.18
 =======
 	bcma_gpio_irq_domain_exit(cc);
 	gpiochip_remove(&cc->gpio);

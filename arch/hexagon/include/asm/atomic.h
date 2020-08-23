@@ -25,10 +25,13 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ATOMIC_INIT(i)		{ (i) }
 #define atomic_set(v, i)	((v)->counter = (i))
 =======
+=======
+>>>>>>> v3.18
 #include <asm/barrier.h>
 
 #define ATOMIC_INIT(i)		{ (i) }
@@ -46,6 +49,9 @@ static inline void atomic_set(atomic_t *v, int new)
 		: "memory", "p0", "r6"
 	);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -101,6 +107,7 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int atomic_add_return(int i, atomic_t *v)
 {
 	int output;
@@ -137,6 +144,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 
 #define atomic_sub(i, v) atomic_sub_return(i, (v))
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op)							\
 static inline void atomic_##op(int i, atomic_t *v)			\
 {									\
@@ -178,6 +187,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -225,7 +237,10 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 #define atomic_add_negative(i, v) (atomic_add_return(i, (v)) < 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define atomic_inc_return(v) (atomic_add_return(1, v))

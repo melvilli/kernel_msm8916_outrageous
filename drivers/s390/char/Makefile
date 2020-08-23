@@ -4,7 +4,12 @@
 
 obj-y += ctrlchar.o keyboard.o defkeymap.o sclp.o sclp_rw.o sclp_quiesce.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 sclp_cmd.o sclp_config.o sclp_cpi_sys.o sclp_ocf.o
+=======
+	 sclp_cmd.o sclp_config.o sclp_cpi_sys.o sclp_ocf.o sclp_ctl.o \
+	 sclp_early.o
+>>>>>>> v3.18
 =======
 	 sclp_cmd.o sclp_config.o sclp_cpi_sys.o sclp_ocf.o sclp_ctl.o \
 	 sclp_early.o
@@ -24,7 +29,10 @@ obj-$(CONFIG_SCLP_CPI) += sclp_cpi.o
 obj-$(CONFIG_SCLP_ASYNC) += sclp_async.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ZVM_WATCHDOG) += vmwatchdog.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_VMLOGRDR) += vmlogrdr.o
@@ -41,10 +49,16 @@ obj-$(CONFIG_S390_VMUR) += vmur.o
 
 zcore_mod-objs := sclp_sdias.o zcore.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ZFCPDUMP) += zcore_mod.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_CRASH_DUMP) += zcore_mod.o
 
 hmcdrv-objs := hmcdrv_mod.o hmcdrv_dev.o hmcdrv_ftp.o hmcdrv_cache.o diag_ftp.o sclp_ftp.o
 obj-$(CONFIG_HMC_DRV) += hmcdrv.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

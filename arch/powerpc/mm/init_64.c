@@ -89,13 +89,19 @@ static void pgd_ctor(void *addr)
 static void pmd_ctor(void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(addr, 0, PMD_TABLE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	memset(addr, 0, PMD_TABLE_SIZE * 2);
 #else
 	memset(addr, 0, PMD_TABLE_SIZE);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -146,10 +152,16 @@ void pgtable_cache_init(void)
 {
 	pgtable_cache_add(PGD_INDEX_SIZE, pgd_ctor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_cache_add(PMD_INDEX_SIZE, pmd_ctor);
 	if (!PGT_CACHE(PGD_INDEX_SIZE) || !PGT_CACHE(PMD_INDEX_SIZE))
 		panic("Couldn't allocate pgtable caches");
 
+=======
+	pgtable_cache_add(PMD_CACHE_INDEX, pmd_ctor);
+	if (!PGT_CACHE(PGD_INDEX_SIZE) || !PGT_CACHE(PMD_CACHE_INDEX))
+		panic("Couldn't allocate pgtable caches");
+>>>>>>> v3.18
 =======
 	pgtable_cache_add(PMD_CACHE_INDEX, pmd_ctor);
 	if (!PGT_CACHE(PGD_INDEX_SIZE) || !PGT_CACHE(PMD_CACHE_INDEX))
@@ -187,14 +199,20 @@ static int __meminit vmemmap_populated(unsigned long start, int page_size)
 {
 	unsigned long end = start + page_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for (; start < end; start += (PAGES_PER_SECTION * sizeof(struct page)))
 		if (pfn_valid(vmemmap_section_start(start)))
 =======
+=======
+>>>>>>> v3.18
 	start = (unsigned long)(pfn_to_page(vmemmap_section_start(start)));
 
 	for (; start < end; start += (PAGES_PER_SECTION * sizeof(struct page)))
 		if (pfn_valid(page_to_pfn((struct page *)start)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 1;
 
@@ -231,7 +249,10 @@ static void __meminit vmemmap_create_mapping(unsigned long start,
 		BUG_ON(map_kernel_page(start + i, phys, flags));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MEMORY_HOTPLUG
 static void vmemmap_remove_mapping(unsigned long start,
@@ -239,6 +260,9 @@ static void vmemmap_remove_mapping(unsigned long start,
 {
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_PPC_BOOK3E */
 static void __meminit vmemmap_create_mapping(unsigned long start,
@@ -252,6 +276,7 @@ static void __meminit vmemmap_create_mapping(unsigned long start,
 	BUG_ON(mapped < 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PPC_BOOK3E */
 
 struct vmemmap_backing *vmemmap_list;
@@ -264,6 +289,8 @@ static __meminit struct vmemmap_backing * vmemmap_list_alloc(int node)
 	/* allocate a page when required and hand out chunks */
 	if (!next || !num_left) {
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MEMORY_HOTPLUG
 static void vmemmap_remove_mapping(unsigned long start,
@@ -297,6 +324,9 @@ static __meminit struct vmemmap_backing * vmemmap_list_alloc(int node)
 
 	/* allocate a page when required and hand out chunks */
 	if (!num_left) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		next = vmemmap_alloc_block(PAGE_SIZE, node);
 		if (unlikely(!next)) {
@@ -361,6 +391,7 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmemmap_free(unsigned long start, unsigned long end)
 {
 }
@@ -368,6 +399,8 @@ void vmemmap_free(unsigned long start, unsigned long end)
 #endif /* CONFIG_SPARSEMEM_VMEMMAP */
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MEMORY_HOTPLUG
 static unsigned long vmemmap_list_free(unsigned long start)
 {
@@ -502,4 +535,7 @@ struct page *realmode_pfn_to_page(unsigned long pfn)
 EXPORT_SYMBOL_GPL(realmode_pfn_to_page);
 
 #endif /* CONFIG_SPARSEMEM_VMEMMAP/CONFIG_FLATMEM */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

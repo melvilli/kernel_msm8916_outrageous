@@ -21,6 +21,10 @@
 #include <linux/reboot.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -47,13 +51,19 @@
 #include <asm/memctrl.h>
 #include <asm/cacheflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "entry.h"
 =======
+=======
+>>>>>>> v3.18
 #include <asm/setup.h>
 
 #include "entry.h"
 #include "kernel.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "kstack.h"
 
@@ -198,6 +208,10 @@ EXPORT_SYMBOL_GPL(unregister_dimm_printer);
 void spitfire_insn_access_exception(struct pt_regs *regs, unsigned long sfsr, unsigned long sfar)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -206,7 +220,11 @@ void spitfire_insn_access_exception(struct pt_regs *regs, unsigned long sfsr, un
 	if (notify_die(DIE_TRAP, "instruction access exception", regs,
 		       0, 0x8, SIGTRAP) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -227,6 +245,11 @@ void spitfire_insn_access_exception(struct pt_regs *regs, unsigned long sfsr, un
 	info.si_trapno = 0;
 	force_sig_info(SIGSEGV, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -285,6 +308,10 @@ void sun4v_insn_access_exception_tl1(struct pt_regs *regs, unsigned long addr, u
 void spitfire_data_access_exception(struct pt_regs *regs, unsigned long sfsr, unsigned long sfar)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -293,7 +320,11 @@ void spitfire_data_access_exception(struct pt_regs *regs, unsigned long sfsr, un
 	if (notify_die(DIE_TRAP, "data access exception", regs,
 		       0, 0x30, SIGTRAP) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -313,7 +344,11 @@ void spitfire_data_access_exception(struct pt_regs *regs, unsigned long sfsr, un
 			regs->tpc = entry->fixup;
 			regs->tnpc = regs->tpc + 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -331,6 +366,11 @@ void spitfire_data_access_exception(struct pt_regs *regs, unsigned long sfsr, un
 	info.si_trapno = 0;
 	force_sig_info(SIGSEGV, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -2036,6 +2076,10 @@ static void sun4v_log_error(struct pt_regs *regs, struct sun4v_error_entry *ent,
 void sun4v_resum_error(struct pt_regs *regs, unsigned long offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -2068,7 +2112,11 @@ void sun4v_resum_error(struct pt_regs *regs, unsigned long offset)
 			local_copy.err_secs);
 		orderly_poweroff(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -2078,6 +2126,11 @@ void sun4v_resum_error(struct pt_regs *regs, unsigned long offset)
 			KERN_ERR "RESUMABLE ERROR",
 			&sun4v_resum_oflow_cnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -2147,12 +2200,18 @@ void sun4v_nonresum_overflow(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void sun4v_tlb_error(struct pt_regs *regs)
 {
 	die_if_kernel("TLB/TSB error", regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned long sun4v_err_itlb_vaddr;
 unsigned long sun4v_err_itlb_ctx;
@@ -2162,8 +2221,12 @@ unsigned long sun4v_err_itlb_error;
 void sun4v_itlb_error_report(struct pt_regs *regs, int tl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tl > 1)
 		dump_tl1_traplog((struct tl1_traplog *)(regs + 1));
+=======
+	dump_tl1_traplog((struct tl1_traplog *)(regs + 1));
+>>>>>>> v3.18
 =======
 	dump_tl1_traplog((struct tl1_traplog *)(regs + 1));
 >>>>>>> v3.18
@@ -2180,7 +2243,11 @@ void sun4v_itlb_error_report(struct pt_regs *regs, int tl)
 	       sun4v_err_itlb_pte, sun4v_err_itlb_error);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom_halt();
+=======
+	sun4v_tlb_error(regs);
+>>>>>>> v3.18
 =======
 	sun4v_tlb_error(regs);
 >>>>>>> v3.18
@@ -2194,8 +2261,12 @@ unsigned long sun4v_err_dtlb_error;
 void sun4v_dtlb_error_report(struct pt_regs *regs, int tl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tl > 1)
 		dump_tl1_traplog((struct tl1_traplog *)(regs + 1));
+=======
+	dump_tl1_traplog((struct tl1_traplog *)(regs + 1));
+>>>>>>> v3.18
 =======
 	dump_tl1_traplog((struct tl1_traplog *)(regs + 1));
 >>>>>>> v3.18
@@ -2212,7 +2283,11 @@ void sun4v_dtlb_error_report(struct pt_regs *regs, int tl)
 	       sun4v_err_dtlb_pte, sun4v_err_dtlb_error);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom_halt();
+=======
+	sun4v_tlb_error(regs);
+>>>>>>> v3.18
 =======
 	sun4v_tlb_error(regs);
 >>>>>>> v3.18
@@ -2231,7 +2306,11 @@ void hypervisor_tlbop_error_xcall(unsigned long err, unsigned long op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_fpe_common(struct pt_regs *regs)
+=======
+static void do_fpe_common(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void do_fpe_common(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -2271,6 +2350,7 @@ static void do_fpe_common(struct pt_regs *regs)
 void do_fpieee(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (notify_die(DIE_TRAP, "fpu exception ieee", regs,
 		       0, 0x24, SIGFPE) == NOTIFY_STOP)
 		return;
@@ -2283,6 +2363,8 @@ extern int do_mathemu(struct pt_regs *, struct fpustate *, bool);
 void do_fpother(struct pt_regs *regs)
 {
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state = exception_enter();
 
 	if (notify_die(DIE_TRAP, "fpu exception ieee", regs,
@@ -2297,6 +2379,9 @@ out:
 void do_fpother(struct pt_regs *regs)
 {
 	enum ctx_state prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fpustate *f = FPUSTATE;
 	int ret = 0;
@@ -2304,7 +2389,11 @@ void do_fpother(struct pt_regs *regs)
 	if (notify_die(DIE_TRAP, "fpu exception other", regs,
 		       0, 0x25, SIGFPE) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -2317,19 +2406,29 @@ void do_fpother(struct pt_regs *regs)
 	}
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	do_fpe_common(regs);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	do_fpe_common(regs);
 out:
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void do_tof(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -2338,7 +2437,11 @@ void do_tof(struct pt_regs *regs)
 	if (notify_die(DIE_TRAP, "tagged arithmetic overflow", regs,
 		       0, 0x26, SIGEMT) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -2356,6 +2459,11 @@ void do_tof(struct pt_regs *regs)
 	info.si_trapno = 0;
 	force_sig_info(SIGEMT, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -2365,6 +2473,10 @@ out:
 void do_div0(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -2373,7 +2485,11 @@ void do_div0(struct pt_regs *regs)
 	if (notify_die(DIE_TRAP, "integer division by zero", regs,
 		       0, 0x28, SIGFPE) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -2391,6 +2507,11 @@ void do_div0(struct pt_regs *regs)
 	info.si_trapno = 0;
 	force_sig_info(SIGFPE, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -2497,7 +2618,11 @@ static inline struct reg_window *kernel_stack_up(struct reg_window *rw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void die_if_kernel(char *str, struct pt_regs *regs)
+=======
+void __noreturn die_if_kernel(char *str, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void __noreturn die_if_kernel(char *str, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -2551,11 +2676,17 @@ EXPORT_SYMBOL(die_if_kernel);
 #define VIS_OPCODE_VAL	((0x2 << 30) | (0x36 << 19))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int handle_popc(u32 insn, struct pt_regs *regs);
 extern int handle_ldf_stq(u32 insn, struct pt_regs *regs);
 
 void do_illegal_instruction(struct pt_regs *regs)
 {
+=======
+void do_illegal_instruction(struct pt_regs *regs)
+{
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 void do_illegal_instruction(struct pt_regs *regs)
 {
@@ -2569,7 +2700,11 @@ void do_illegal_instruction(struct pt_regs *regs)
 	if (notify_die(DIE_TRAP, "illegal instruction", regs,
 		       0, 0x10, SIGILL) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -2582,6 +2717,7 @@ void do_illegal_instruction(struct pt_regs *regs)
 		if ((insn & 0xc1ffc000) == 0x81700000) /* POPC */ {
 			if (handle_popc(insn, regs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return;
 		} else if ((insn & 0xc1580000) == 0xc1100000) /* LDQ/STQ */ {
 			if (handle_ldf_stq(insn, regs))
@@ -2591,6 +2727,8 @@ void do_illegal_instruction(struct pt_regs *regs)
 				if (!vis_emul(regs, insn))
 					return;
 =======
+=======
+>>>>>>> v3.18
 				goto out;
 		} else if ((insn & 0xc1580000) == 0xc1100000) /* LDQ/STQ */ {
 			if (handle_ldf_stq(insn, regs))
@@ -2599,6 +2737,9 @@ void do_illegal_instruction(struct pt_regs *regs)
 			if ((insn & VIS_OPCODE_MASK) == VIS_OPCODE_VAL) {
 				if (!vis_emul(regs, insn))
 					goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				struct fpustate *f = FPUSTATE;
@@ -2610,7 +2751,11 @@ void do_illegal_instruction(struct pt_regs *regs)
 				 */
 				if (do_mathemu(regs, f, true))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					return;
+=======
+					goto out;
+>>>>>>> v3.18
 =======
 					goto out;
 >>>>>>> v3.18
@@ -2624,6 +2769,7 @@ void do_illegal_instruction(struct pt_regs *regs)
 	info.si_trapno = 0;
 	force_sig_info(SIGILL, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 extern void kernel_unaligned_trap(struct pt_regs *regs, unsigned int insn);
@@ -2631,6 +2777,8 @@ extern void kernel_unaligned_trap(struct pt_regs *regs, unsigned int insn);
 void mem_address_unaligned(struct pt_regs *regs, unsigned long sfar, unsigned long sfsr)
 {
 =======
+=======
+>>>>>>> v3.18
 out:
 	exception_exit(prev_state);
 }
@@ -2638,11 +2786,15 @@ out:
 void mem_address_unaligned(struct pt_regs *regs, unsigned long sfar, unsigned long sfsr)
 {
 	enum ctx_state prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	siginfo_t info;
 
 	if (notify_die(DIE_TRAP, "memory address unaligned", regs,
 		       0, 0x34, SIGSEGV) == NOTIFY_STOP)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -2650,11 +2802,16 @@ void mem_address_unaligned(struct pt_regs *regs, unsigned long sfar, unsigned lo
 		kernel_unaligned_trap(regs, *((unsigned int *)regs->tpc));
 		return;
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 
 	if (regs->tstate & TSTATE_PRIV) {
 		kernel_unaligned_trap(regs, *((unsigned int *)regs->tpc));
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	info.si_signo = SIGBUS;
@@ -2664,6 +2821,11 @@ void mem_address_unaligned(struct pt_regs *regs, unsigned long sfar, unsigned lo
 	info.si_trapno = 0;
 	force_sig_info(SIGBUS, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -2693,6 +2855,10 @@ void sun4v_do_mna(struct pt_regs *regs, unsigned long addr, unsigned long type_c
 void do_privop(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -2701,7 +2867,11 @@ void do_privop(struct pt_regs *regs)
 	if (notify_die(DIE_TRAP, "privileged operation", regs,
 		       0, 0x11, SIGILL) == NOTIFY_STOP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -2717,6 +2887,11 @@ void do_privop(struct pt_regs *regs)
 	info.si_trapno = 0;
 	force_sig_info(SIGILL, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);
@@ -2732,6 +2907,10 @@ void do_privact(struct pt_regs *regs)
 void do_cee(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2741,6 +2920,10 @@ void do_cee(struct pt_regs *regs)
 void do_cee_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2751,6 +2934,10 @@ void do_cee_tl1(struct pt_regs *regs)
 void do_dae_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2761,6 +2948,10 @@ void do_dae_tl1(struct pt_regs *regs)
 void do_iae_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2771,6 +2962,10 @@ void do_iae_tl1(struct pt_regs *regs)
 void do_div0_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2781,6 +2976,10 @@ void do_div0_tl1(struct pt_regs *regs)
 void do_fpdis_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2791,6 +2990,10 @@ void do_fpdis_tl1(struct pt_regs *regs)
 void do_fpieee_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2801,6 +3004,10 @@ void do_fpieee_tl1(struct pt_regs *regs)
 void do_fpother_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2811,6 +3018,10 @@ void do_fpother_tl1(struct pt_regs *regs)
 void do_ill_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2821,6 +3032,10 @@ void do_ill_tl1(struct pt_regs *regs)
 void do_irq_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2831,6 +3046,10 @@ void do_irq_tl1(struct pt_regs *regs)
 void do_lddfmna_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2841,6 +3060,10 @@ void do_lddfmna_tl1(struct pt_regs *regs)
 void do_stdfmna_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2851,6 +3074,10 @@ void do_stdfmna_tl1(struct pt_regs *regs)
 void do_paw(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2860,6 +3087,10 @@ void do_paw(struct pt_regs *regs)
 void do_paw_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2870,6 +3101,10 @@ void do_paw_tl1(struct pt_regs *regs)
 void do_vaw(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2879,6 +3114,10 @@ void do_vaw(struct pt_regs *regs)
 void do_vaw_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18
@@ -2889,6 +3128,10 @@ void do_vaw_tl1(struct pt_regs *regs)
 void do_tof_tl1(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_enter();
+>>>>>>> v3.18
 =======
 	exception_enter();
 >>>>>>> v3.18

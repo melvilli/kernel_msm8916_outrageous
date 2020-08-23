@@ -26,6 +26,7 @@
 #include <linux/reboot.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tegra_assert_system_reset(enum reboot_mode mode, const char *cmd);
 
 void __init tegra_init_early(void);
@@ -55,6 +56,10 @@ int __init harmony_pcie_init(void);
 #else
 static inline int harmony_pcie_init(void) { return 0; }
 #endif
+=======
+void __init tegra_map_common_io(void);
+void __init tegra_init_irq(void);
+>>>>>>> v3.18
 =======
 void __init tegra_map_common_io(void);
 void __init tegra_init_irq(void);

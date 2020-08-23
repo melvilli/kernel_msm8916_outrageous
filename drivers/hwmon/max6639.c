@@ -36,7 +36,11 @@
 
 /* Addresses to scan */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned short normal_i2c[] = { 0x2c, 0x2e, 0x2f, I2C_CLIENT_END };
+=======
+static const unsigned short normal_i2c[] = { 0x2c, 0x2e, 0x2f, I2C_CLIENT_END };
+>>>>>>> v3.18
 =======
 static const unsigned short normal_i2c[] = { 0x2c, 0x2e, 0x2f, I2C_CLIENT_END };
 >>>>>>> v3.18
@@ -85,7 +89,11 @@ static const int rpm_ranges[] = { 2000, 4000, 8000, 16000 };
  */
 struct max6639_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -113,8 +121,13 @@ struct max6639_data {
 static struct max6639_data *max6639_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
+=======
+	struct max6639_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6639_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -205,9 +218,14 @@ static ssize_t show_temp_max(struct device *dev,
 			     struct device_attribute *dev_attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -221,9 +239,15 @@ static ssize_t set_temp_max(struct device *dev,
 			    const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -249,9 +273,14 @@ static ssize_t show_temp_crit(struct device *dev,
 			      struct device_attribute *dev_attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -265,9 +294,15 @@ static ssize_t set_temp_crit(struct device *dev,
 			     const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -294,9 +329,14 @@ static ssize_t show_temp_emergency(struct device *dev,
 				   char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -310,9 +350,15 @@ static ssize_t set_temp_emergency(struct device *dev,
 				  const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -338,9 +384,14 @@ static ssize_t show_pwm(struct device *dev,
 			struct device_attribute *dev_attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -354,9 +405,15 @@ static ssize_t set_pwm(struct device *dev,
 		       const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6639_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6639_data *data = dev_get_drvdata(dev);
@@ -436,7 +493,11 @@ static SENSOR_DEVICE_ATTR(temp2_emergency_alarm, S_IRUGO, show_alarm, NULL, 4);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *max6639_attributes[] = {
+=======
+static struct attribute *max6639_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *max6639_attrs[] = {
 >>>>>>> v3.18
@@ -465,10 +526,14 @@ static struct attribute *max6639_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group max6639_group = {
 	.attrs = max6639_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(max6639);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(max6639);
 >>>>>>> v3.18
@@ -490,17 +555,23 @@ static int rpm_range_to_reg(int range)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max6639_init_client(struct i2c_client *client)
 {
 	struct max6639_data *data = i2c_get_clientdata(client);
 	struct max6639_platform_data *max6639_info =
 		client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 static int max6639_init_client(struct i2c_client *client,
 			       struct max6639_data *data)
 {
 	struct max6639_platform_data *max6639_info =
 		dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 	int rpm_range = 1; /* default: 4000 RPM */
@@ -619,6 +690,7 @@ static int max6639_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max6639_data *data;
 	int err;
 
@@ -664,6 +736,8 @@ static int max6639_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct max6639_data *data;
 	struct device *hwmon_dev;
@@ -685,6 +759,9 @@ static int max6639_remove(struct i2c_client *client)
 							   data,
 							   max6639_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -720,9 +797,13 @@ static const struct i2c_device_id max6639_id[] = {
 MODULE_DEVICE_TABLE(i2c, max6639_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dev_pm_ops max6639_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(max6639_suspend, max6639_resume)
 };
+=======
+static SIMPLE_DEV_PM_OPS(max6639_pm_ops, max6639_suspend, max6639_resume);
+>>>>>>> v3.18
 =======
 static SIMPLE_DEV_PM_OPS(max6639_pm_ops, max6639_suspend, max6639_resume);
 >>>>>>> v3.18
@@ -735,7 +816,10 @@ static struct i2c_driver max6639_driver = {
 		   },
 	.probe = max6639_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max6639_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max6639_id,

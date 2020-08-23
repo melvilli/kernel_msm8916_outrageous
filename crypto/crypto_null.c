@@ -18,6 +18,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/null.h>
+>>>>>>> v3.18
 =======
 #include <crypto/null.h>
 >>>>>>> v3.18
@@ -29,11 +33,14 @@
 #include <linux/string.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NULL_KEY_SIZE		0
 #define NULL_BLOCK_SIZE		1
 #define NULL_DIGEST_SIZE	0
 #define NULL_IV_SIZE		0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int null_compress(struct crypto_tfm *tfm, const u8 *src,
@@ -157,9 +164,15 @@ static struct crypto_alg null_algs[3] = { {
 } };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("compress_null");
 MODULE_ALIAS_CRYPTO("digest_null");
 MODULE_ALIAS_CRYPTO("cipher_null");
+=======
+MODULE_ALIAS("compress_null");
+MODULE_ALIAS("digest_null");
+MODULE_ALIAS("cipher_null");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("compress_null");
 MODULE_ALIAS("digest_null");

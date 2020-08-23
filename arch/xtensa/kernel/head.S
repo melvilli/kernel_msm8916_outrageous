@@ -20,6 +20,10 @@
 #include <asm/cacheasm.h>
 #include <asm/initialize_mmu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mxregs.h>
+>>>>>>> v3.18
 =======
 #include <asm/mxregs.h>
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ ENTRY(_start)
 	/* Preserve the pointer to the boot parameter list in EXCSAVE_1 */
 	wsr     a2, excsave1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_j	_SetupMMU
+=======
+	_j	_SetupOCD
+>>>>>>> v3.18
 =======
 	_j	_SetupOCD
 >>>>>>> v3.18
@@ -71,7 +79,10 @@ ENTRY(_start)
 
 	.align	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 _SetupOCD:
 	/*
 	 * Initialize WB, WS, and clear PS.EXCM (to allow loop instructions).
@@ -89,6 +100,9 @@ _SetupOCD:
 	wsr	a1, ps
 	rsync
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.global _SetupMMU
 _SetupMMU:
@@ -114,7 +128,11 @@ _SetupMMU:
 ENDPROC(_start)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__INIT
+=======
+	__REF
+>>>>>>> v3.18
 =======
 	__REF
 >>>>>>> v3.18
@@ -122,6 +140,7 @@ ENDPROC(_start)
 
 ENTRY(_startup)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Disable interrupts and exceptions. */
 
@@ -136,6 +155,8 @@ ENTRY(_startup)
 	wsr	a0, windowbase
 	rsync
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set a0 to 0 for the remaining initialization. */
@@ -154,7 +175,11 @@ ENTRY(_startup)
 
 	.set	_index, 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rept	XCHAL_NUM_DBREAK
+=======
+	.rept	XCHAL_NUM_DBREAK - 1
+>>>>>>> v3.18
 =======
 	.rept	XCHAL_NUM_DBREAK - 1
 >>>>>>> v3.18
@@ -194,6 +219,7 @@ ENTRY(_startup)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set PS.INTLEVEL=LOCKLEVEL, PS.WOE=0, kernel stack, PS.EXCM=0
 	 *
 	 * Note: PS.EXCM must be cleared before using any loop
@@ -205,6 +231,8 @@ ENTRY(_startup)
 	wsr	a1, ps
 	rsync
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*  Initialize the caches.
@@ -225,7 +253,10 @@ ENTRY(_startup)
 	isync
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_SMP
 	movi	a2, CCON	# MX External Register to Configure Cache
 	movi	a3, 1
@@ -257,6 +288,9 @@ ENTRY(_startup)
 
 #endif  /* CONFIG_SMP */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Unpack data sections
 	 *
@@ -311,6 +345,7 @@ ENTRY(_startup)
 	isync
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Setup stack and enable window exceptions (keep irqs disabled) */
 
 	movi	a1, init_thread_union
@@ -332,6 +367,9 @@ ENTRY(_startup)
 =======
 	movi	a6, 0
 >>>>>>> v3.18
+=======
+	movi	a6, 0
+>>>>>>> v3.18
 	xsr	a6, excsave1
 
 	/* init_arch kick-starts the linux kernel */
@@ -346,9 +384,12 @@ should_never_return:
 	j	should_never_return
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(_startup)
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 .Lboot_secondary:
 
@@ -436,6 +477,9 @@ ENDPROC(cpu_restart)
 ENTRY(start_info)
         .long   init_thread_union + KERNEL_STACK_SIZE
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * BSS section

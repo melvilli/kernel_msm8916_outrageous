@@ -326,11 +326,15 @@ struct isp116x_ep {
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 #define DBG(stuff...)		printk(KERN_DEBUG "116x: " stuff)
 #else
 #define DBG(stuff...)		do{}while(0)
 #endif
+=======
+#define DBG(stuff...)		pr_debug("116x: " stuff)
+>>>>>>> v3.18
 =======
 #define DBG(stuff...)		pr_debug("116x: " stuff)
 >>>>>>> v3.18
@@ -363,6 +367,7 @@ struct isp116x_ep {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(DEBUG)
 #define	IRQ_TEST()	BUG_ON(!irqs_disabled())
 #else
@@ -372,6 +377,10 @@ struct isp116x_ep {
 static inline void isp116x_write_addr(struct isp116x *isp116x, unsigned reg)
 {
 	IRQ_TEST();
+=======
+static inline void isp116x_write_addr(struct isp116x *isp116x, unsigned reg)
+{
+>>>>>>> v3.18
 =======
 static inline void isp116x_write_addr(struct isp116x *isp116x, unsigned reg)
 {

@@ -556,7 +556,11 @@ void __init setup_arch (char **cmdline_p)
 	struct clk *cpu_clk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_mm.start_code = (unsigned long)_text;
+=======
+	init_mm.start_code = (unsigned long)_stext;
+>>>>>>> v3.18
 =======
 	init_mm.start_code = (unsigned long)_stext;
 >>>>>>> v3.18

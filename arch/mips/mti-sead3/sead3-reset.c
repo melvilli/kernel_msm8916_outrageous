@@ -10,7 +10,13 @@
 
 #include <asm/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mips-boards/generic.h>
+=======
+
+#define SOFTRES_REG	0x1f000050
+#define GORESET		0x4d
+>>>>>>> v3.18
 =======
 
 #define SOFTRES_REG	0x1f000050
@@ -42,7 +48,10 @@ static int __init mips_reboot_setup(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 arch_initcall(mips_reboot_setup);

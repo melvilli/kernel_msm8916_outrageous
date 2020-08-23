@@ -1,6 +1,11 @@
 00-INDEX
 	- this file: info on the kernel build process
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+headers_install.txt
+	- how to export Linux headers for use by userspace
+>>>>>>> v3.18
 =======
 headers_install.txt
 	- how to export Linux headers for use by userspace

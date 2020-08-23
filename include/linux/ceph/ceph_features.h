@@ -5,6 +5,7 @@
  * feature bits
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEPH_FEATURE_UID            (1<<0)
 #define CEPH_FEATURE_NOSRCADDR      (1<<1)
 #define CEPH_FEATURE_MONCLOCKCHECK  (1<<2)
@@ -37,6 +38,8 @@
 #define CEPH_FEATURE_MDSENC         (1<<29)
 #define CEPH_FEATURE_OSDHASHPSPOOL  (1<<30)
 =======
+=======
+>>>>>>> v3.18
 #define CEPH_FEATURE_UID            (1ULL<<0)
 #define CEPH_FEATURE_NOSRCADDR      (1ULL<<1)
 #define CEPH_FEATURE_MONCLOCKCHECK  (1ULL<<2)
@@ -106,13 +109,20 @@ static inline u64 ceph_sanitize_features(u64 features)
 		return features;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Features supported.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEPH_FEATURES_SUPPORTED_DEFAULT  \
+=======
+#define CEPH_FEATURES_SUPPORTED_DEFAULT		\
+>>>>>>> v3.18
 =======
 #define CEPH_FEATURES_SUPPORTED_DEFAULT		\
 >>>>>>> v3.18
@@ -125,8 +135,11 @@ static inline u64 ceph_sanitize_features(u64 features)
 	 CEPH_FEATURE_CRUSH_TUNABLES2 |		\
 	 CEPH_FEATURE_REPLY_CREATE_INODE |	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 CEPH_FEATURE_OSDHASHPSPOOL)
 =======
+=======
+>>>>>>> v3.18
 	 CEPH_FEATURE_OSDHASHPSPOOL |		\
 	 CEPH_FEATURE_OSD_CACHEPOOL |		\
 	 CEPH_FEATURE_CRUSH_V2 |		\
@@ -134,6 +147,9 @@ static inline u64 ceph_sanitize_features(u64 features)
 	 CEPH_FEATURE_OSDMAP_ENC |		\
 	 CEPH_FEATURE_CRUSH_TUNABLES3 |		\
 	 CEPH_FEATURE_OSD_PRIMARY_AFFINITY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CEPH_FEATURES_REQUIRED_DEFAULT   \
@@ -143,6 +159,10 @@ static inline u64 ceph_sanitize_features(u64 features)
 	 CEPH_FEATURE_PGPOOL3 |		 \
 	 CEPH_FEATURE_OSDENC)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/mc.h>
 
 struct nv50_mc_priv {
@@ -32,17 +33,23 @@ struct nv50_mc_priv {
 static const struct nouveau_mc_intr
 nv50_mc_intr[] = {
 =======
+=======
+>>>>>>> v3.18
 #include "nv04.h"
 
 const struct nouveau_mc_intr
 nv50_mc_intr[] = {
 	{ 0x04000000, NVDEV_ENGINE_DISP },  /* DISP before FIFO, so pageflip-timestamping works! */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x00000001, NVDEV_ENGINE_MPEG },
 	{ 0x00000100, NVDEV_ENGINE_FIFO },
 	{ 0x00001000, NVDEV_ENGINE_GR },
 	{ 0x00004000, NVDEV_ENGINE_CRYPT },	/* NV84- */
 	{ 0x00008000, NVDEV_ENGINE_BSP },	/* NV84- */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ 0x00100000, NVDEV_SUBDEV_TIMER },
 	{ 0x00200000, NVDEV_SUBDEV_GPIO },
@@ -68,6 +75,8 @@ nv50_mc_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	{ 0x00020000, NVDEV_ENGINE_VP },	/* NV84- */
 	{ 0x00100000, NVDEV_SUBDEV_TIMER },
 	{ 0x00200000, NVDEV_SUBDEV_GPIO },	/* PMGR->GPIO */
@@ -83,6 +92,9 @@ nv50_mc_msi_rearm(struct nouveau_mc *pmc)
 {
 	struct nouveau_device *device = nv_device(pmc);
 	pci_write_config_byte(device->pdev, 0x68, 0xff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -90,7 +102,11 @@ int
 nv50_mc_init(struct nouveau_object *object)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv50_mc_priv *priv = (void *)object;
+=======
+	struct nv04_mc_priv *priv = (void *)object;
+>>>>>>> v3.18
 =======
 	struct nv04_mc_priv *priv = (void *)object;
 >>>>>>> v3.18
@@ -99,24 +115,36 @@ nv50_mc_init(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_oclass
 nv50_mc_oclass = {
 	.handle = NV_SUBDEV(MC, 0x50),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv50_mc_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv50_mc_oclass = &(struct nouveau_mc_oclass) {
 	.base.handle = NV_SUBDEV(MC, 0x50),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_mc_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_mc_dtor,
 		.init = nv50_mc_init,
 		.fini = _nouveau_mc_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.intr = nv50_mc_intr,
+	.msi_rearm = nv50_mc_msi_rearm,
+}.base;
+>>>>>>> v3.18
 =======
 	.intr = nv50_mc_intr,
 	.msi_rearm = nv50_mc_msi_rearm,

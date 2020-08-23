@@ -13,6 +13,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <arch/chip.h>
 
 #include <linux/types.h>
@@ -21,11 +22,16 @@
 
 #undef memset
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/string.h>
 #include <linux/module.h>
 #include <arch/chip.h>
 #include "string-endian.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void *memset(void *s, int c, size_t n)
@@ -79,8 +85,12 @@ void *memset(void *s, int c, size_t n)
 
 	/* Tile input byte out to 64 bits. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* KLUDGE */
 	v64 = 0x0101010101010101ULL * (uint8_t)c;
+=======
+	v64 = copy_byte(c);
+>>>>>>> v3.18
 =======
 	v64 = copy_byte(c);
 >>>>>>> v3.18

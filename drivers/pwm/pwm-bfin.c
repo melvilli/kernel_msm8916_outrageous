@@ -150,6 +150,10 @@ static struct platform_driver bfin_pwm_driver = {
 	.driver = {
 		.name = "bfin-pwm",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 >>>>>>> v3.18

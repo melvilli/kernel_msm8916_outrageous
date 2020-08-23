@@ -20,7 +20,10 @@ source "arch/powerpc/platforms/44x/Kconfig"
 source "arch/powerpc/platforms/40x/Kconfig"
 source "arch/powerpc/platforms/amigaone/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "arch/powerpc/platforms/wsp/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -90,7 +93,10 @@ config MPIC
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MPIC_TIMER
 	bool "MPIC Global Timer"
 	depends on MPIC && FSL_SOC
@@ -112,6 +118,9 @@ config FSL_MPIC_TIMER_WAKEUP
 	  timer.
 	  e.g. "echo 5 > /sys/devices/system/mpic/timer_wakeup"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PPC_EPAPR_HV_PIC
 	bool
@@ -192,12 +201,18 @@ config IBMEBUS
 	  Bus device driver for GX bus based adapters.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config EEH
 	bool
 	depends on (PPC_POWERNV || PPC_PSERIES) && PCI
 	default y
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PPC_MPC106
 	bool
@@ -212,6 +227,7 @@ config PPC_P7_NAP
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PPC_INDIRECT_IO
 	bool
 	select GENERIC_IOMAP
@@ -224,12 +240,17 @@ config PPC_INDIRECT_MMIO
 	bool
 	select PPC_INDIRECT_IO
 =======
+=======
+>>>>>>> v3.18
 config PPC_INDIRECT_PIO
 	bool
 	select GENERIC_IOMAP
 
 config PPC_INDIRECT_MMIO
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config PPC_IO_WORKAROUNDS
@@ -237,6 +258,7 @@ config PPC_IO_WORKAROUNDS
 
 source "drivers/cpufreq/Kconfig"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 menu "CPU Frequency drivers"
 	depends on CPU_FREQ
@@ -266,6 +288,8 @@ config PPC_PASEMI_CPUFREQ
 
 endmenu
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 menu "CPUIdle driver"

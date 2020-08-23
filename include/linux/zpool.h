@@ -37,8 +37,12 @@ enum zpool_mapmode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct zpool *zpool_create_pool(char *type, char *name,
 			gfp_t gfp, struct zpool_ops *ops);
+=======
+struct zpool *zpool_create_pool(char *type, gfp_t gfp, struct zpool_ops *ops);
+>>>>>>> v3.18
 =======
 struct zpool *zpool_create_pool(char *type, gfp_t gfp, struct zpool_ops *ops);
 >>>>>>> v3.18
@@ -86,7 +90,11 @@ struct zpool_driver {
 	struct list_head list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *(*create)(char *name, gfp_t gfp, struct zpool_ops *ops);
+=======
+	void *(*create)(gfp_t gfp, struct zpool_ops *ops);
+>>>>>>> v3.18
 =======
 	void *(*create)(gfp_t gfp, struct zpool_ops *ops);
 >>>>>>> v3.18

@@ -135,8 +135,11 @@ void __init plat_mem_setup(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panic_timeout = 5;  /* For debug.  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	board_be_handler = swarm_be_handler;

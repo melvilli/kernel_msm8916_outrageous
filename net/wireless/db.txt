@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # This is the world regulatory domain
 country 00:
 	(2402 - 2472 @ 40), (3, 20)
@@ -1174,6 +1175,8 @@ country ZW:
 	(5490 - 5710 @ 80), (N/A, 27), DFS
 
 =======
+=======
+>>>>>>> v3.18
 #
 # This file is a placeholder to prevent accidental build breakage if someone
 # enables CONFIG_CFG80211_INTERNAL_REGDB.  Almost no one actually needs to
@@ -1191,4 +1194,7 @@ country ZW:
 #
 #   git://git.kernel.org/pub/scm/linux/kernel/git/linville/wireless-regdb.git
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

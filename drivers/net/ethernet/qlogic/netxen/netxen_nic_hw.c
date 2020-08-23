@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston,
  * MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -541,15 +545,21 @@ static void netxen_p2_nic_set_multi(struct net_device *netdev)
 	struct netxen_adapter *adapter = netdev_priv(netdev);
 	struct netdev_hw_addr *ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 null_addr[6];
 	int i;
 
 	memset(null_addr, 0, 6);
 =======
+=======
+>>>>>>> v3.18
 	u8 null_addr[ETH_ALEN];
 	int i;
 
 	memset(null_addr, 0, ETH_ALEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (netdev->flags & IFF_PROMISC) {
@@ -660,7 +670,11 @@ nx_p3_sre_macaddr_change(struct netxen_adapter *adapter, u8 *addr, unsigned op)
 	mac_req = (nx_mac_req_t *)&req.words[0];
 	mac_req->op = op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(mac_req->mac_addr, addr, 6);
+=======
+	memcpy(mac_req->mac_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(mac_req->mac_addr, addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -679,7 +693,11 @@ static int nx_p3_nic_add_mac(struct netxen_adapter *adapter,
 		cur = list_entry(head, nx_mac_list_t, list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(addr, cur->mac_addr, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(addr, cur->mac_addr)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(addr, cur->mac_addr)) {
 >>>>>>> v3.18
@@ -944,7 +962,11 @@ int netxen_config_ipaddr(struct netxen_adapter *adapter, __be32 ip, int cmd)
 	rv = netxen_send_cmd_descs(adapter, (struct cmd_desc_type0 *)&req, 1);
 	if (rv != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: could not notify %s IP 0x%x reuqest\n",
+=======
+		printk(KERN_ERR "%s: could not notify %s IP 0x%x request\n",
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR "%s: could not notify %s IP 0x%x request\n",
 >>>>>>> v3.18

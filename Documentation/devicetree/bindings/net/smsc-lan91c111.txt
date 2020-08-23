@@ -7,9 +7,12 @@ Required properties:
 
 Optional properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-device : phandle to Ethernet phy
 - local-mac-address : Ethernet mac address to use
 =======
+=======
+>>>>>>> v3.18
 - phy-device : see ethernet.txt file in the same directory
 - reg-io-width : Mask of sizes (in bytes) of the IO accesses that
   are supported on the device.  Valid value for SMSC LAN91c111 are
@@ -17,4 +20,7 @@ Optional properties:
   16-bit access only.
 - power-gpios: GPIO to control the PWRDWN pin
 - reset-gpios: GPIO to control the RESET pin
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

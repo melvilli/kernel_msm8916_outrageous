@@ -41,6 +41,10 @@
 #define RFCOMM_TTY_MINOR 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEFINE_MUTEX(rfcomm_ioctl_mutex);
+>>>>>>> v3.18
 =======
 static DEFINE_MUTEX(rfcomm_ioctl_mutex);
 >>>>>>> v3.18
@@ -56,6 +60,11 @@ struct rfcomm_dev {
 	int			err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long		status;		/* don't export to userspace */
+
+>>>>>>> v3.18
 =======
 	unsigned long		status;		/* don't export to userspace */
 
@@ -68,7 +77,10 @@ struct rfcomm_dev {
 
 	struct rfcomm_dlc	*dlc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t       wait;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -81,7 +93,11 @@ struct rfcomm_dev {
 
 static LIST_HEAD(rfcomm_dev_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_SPINLOCK(rfcomm_dev_lock);
+=======
+static DEFINE_MUTEX(rfcomm_dev_lock);
+>>>>>>> v3.18
 =======
 static DEFINE_MUTEX(rfcomm_dev_lock);
 >>>>>>> v3.18
@@ -93,6 +109,7 @@ static void rfcomm_dev_modem_status(struct rfcomm_dlc *dlc, u8 v24_sig);
 /* ---- Device functions ---- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The reason this isn't actually a race, as you no doubt have a little voice
  * screaming at you in your head, is that the refcount should never actually
@@ -102,11 +119,14 @@ static void rfcomm_dev_modem_status(struct rfcomm_dlc *dlc, u8 v24_sig);
  */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void rfcomm_dev_destruct(struct tty_port *port)
 {
 	struct rfcomm_dev *dev = container_of(port, struct rfcomm_dev, port);
 	struct rfcomm_dlc *dlc = dev->dlc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BT_DBG("dev %pK dlc %pK", dev, dlc);
 
@@ -114,6 +134,9 @@ static void rfcomm_dev_destruct(struct tty_port *port)
 	   which will have taken us off the list. Everything else are
 	   refcounting bugs. */
 	BUG_ON(!list_empty(&dev->list));
+=======
+	BT_DBG("dev %p dlc %p", dev, dlc);
+>>>>>>> v3.18
 =======
 	BT_DBG("dev %p dlc %p", dev, dlc);
 >>>>>>> v3.18
@@ -127,14 +150,20 @@ static void rfcomm_dev_destruct(struct tty_port *port)
 	rfcomm_dlc_put(dlc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_unregister_device(rfcomm_tty_driver, dev->id);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->tty_dev)
 		tty_unregister_device(rfcomm_tty_driver, dev->id);
 
 	mutex_lock(&rfcomm_dev_lock);
 	list_del(&dev->list);
 	mutex_unlock(&rfcomm_dev_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(dev);
@@ -145,12 +174,15 @@ static void rfcomm_dev_destruct(struct tty_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct tty_port_operations rfcomm_port_ops = {
 	.destruct = rfcomm_dev_destruct,
 };
 
 static struct rfcomm_dev *__rfcomm_dev_get(int id)
 =======
+=======
+>>>>>>> v3.18
 /* device-specific initialization: open the dlc */
 static int rfcomm_dev_activate(struct tty_port *port, struct tty_struct *tty)
 {
@@ -191,6 +223,9 @@ static const struct tty_port_operations rfcomm_port_ops = {
 };
 
 static struct rfcomm_dev *__rfcomm_dev_lookup(int id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rfcomm_dev *dev;
@@ -207,6 +242,7 @@ static struct rfcomm_dev *rfcomm_dev_get(int id)
 	struct rfcomm_dev *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&rfcomm_dev_lock);
 
 	dev = __rfcomm_dev_get(id);
@@ -220,6 +256,8 @@ static struct rfcomm_dev *rfcomm_dev_get(int id)
 
 	spin_unlock(&rfcomm_dev_lock);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&rfcomm_dev_lock);
 
 	dev = __rfcomm_dev_lookup(id);
@@ -228,13 +266,20 @@ static struct rfcomm_dev *rfcomm_dev_get(int id)
 		dev = NULL;
 
 	mutex_unlock(&rfcomm_dev_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return dev;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device *rfcomm_get_device(struct rfcomm_dev *dev)
+=======
+static void rfcomm_reparent_device(struct rfcomm_dev *dev)
+>>>>>>> v3.18
 =======
 static void rfcomm_reparent_device(struct rfcomm_dev *dev)
 >>>>>>> v3.18
@@ -245,6 +290,7 @@ static void rfcomm_reparent_device(struct rfcomm_dev *dev)
 	hdev = hci_get_route(&dev->dst, &dev->src);
 	if (!hdev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
 
 	conn = hci_conn_hash_lookup_ba(hdev, ACL_LINK, &dev->dst);
@@ -253,6 +299,8 @@ static void rfcomm_reparent_device(struct rfcomm_dev *dev)
 
 	return conn ? &conn->dev : NULL;
 =======
+=======
+>>>>>>> v3.18
 		return;
 
 	/* The lookup results are unsafe to access without the
@@ -269,6 +317,9 @@ static void rfcomm_reparent_device(struct rfcomm_dev *dev)
 
 	hci_dev_unlock(hdev);
 	hci_dev_put(hdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -288,7 +339,12 @@ static DEVICE_ATTR(address, S_IRUGO, show_address, NULL);
 static DEVICE_ATTR(channel, S_IRUGO, show_channel, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rfcomm_dev_add(struct rfcomm_dev_req *req, struct rfcomm_dlc *dlc)
+=======
+static struct rfcomm_dev *__rfcomm_dev_add(struct rfcomm_dev_req *req,
+					   struct rfcomm_dlc *dlc)
+>>>>>>> v3.18
 =======
 static struct rfcomm_dev *__rfcomm_dev_add(struct rfcomm_dev_req *req,
 					   struct rfcomm_dlc *dlc)
@@ -299,6 +355,7 @@ static struct rfcomm_dev *__rfcomm_dev_add(struct rfcomm_dev_req *req,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("id %d channel %d", req->dev_id, req->channel);
 
 	dev = kzalloc(sizeof(struct rfcomm_dev), GFP_KERNEL);
@@ -307,11 +364,16 @@ static struct rfcomm_dev *__rfcomm_dev_add(struct rfcomm_dev_req *req,
 
 	spin_lock(&rfcomm_dev_lock);
 =======
+=======
+>>>>>>> v3.18
 	dev = kzalloc(sizeof(struct rfcomm_dev), GFP_KERNEL);
 	if (!dev)
 		return ERR_PTR(-ENOMEM);
 
 	mutex_lock(&rfcomm_dev_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (req->dev_id < 0) {
@@ -359,7 +421,10 @@ static struct rfcomm_dev *__rfcomm_dev_add(struct rfcomm_dev_req *req,
 	tty_port_init(&dev->port);
 	dev->port.ops = &rfcomm_port_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&dev->wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -398,6 +463,7 @@ static struct rfcomm_dev *__rfcomm_dev_add(struct rfcomm_dev_req *req,
 	__module_get(THIS_MODULE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	spin_unlock(&rfcomm_dev_lock);
 
@@ -413,6 +479,8 @@ out:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&rfcomm_dev_lock);
 	return dev;
 
@@ -444,6 +512,9 @@ static int rfcomm_dev_add(struct rfcomm_dev_req *req, struct rfcomm_dlc *dlc)
 
 	dev->tty_dev = tty;
 	rfcomm_reparent_device(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_set_drvdata(dev->tty_dev, dev);
 
@@ -454,6 +525,7 @@ static int rfcomm_dev_add(struct rfcomm_dev_req *req, struct rfcomm_dlc *dlc)
 		BT_ERR("Failed to create channel attribute");
 
 	return dev->id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 free:
@@ -489,6 +561,8 @@ static inline unsigned int rfcomm_room(struct rfcomm_dlc *dlc)
 	   when tx_credits becomes nonzero, hence we'd never wake up */
 	return dlc->mtu * (dlc->tx_credits?:1);
 =======
+=======
+>>>>>>> v3.18
 }
 
 /* ---- Send buffer ---- */
@@ -500,6 +574,9 @@ static inline unsigned int rfcomm_room(struct rfcomm_dev *dev)
 	int pending = 40 - atomic_read(&dev->wmem_alloc);
 
 	return max(0, pending) * dlc->mtu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -507,10 +584,16 @@ static void rfcomm_wfree(struct sk_buff *skb)
 {
 	struct rfcomm_dev *dev = (void *) skb->sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tty_struct *tty = dev->port.tty;
 	atomic_sub(skb->truesize, &dev->wmem_alloc);
 	if (test_bit(RFCOMM_TTY_ATTACHED, &dev->flags) && tty)
 		tty_wakeup(tty);
+=======
+	atomic_dec(&dev->wmem_alloc);
+	if (test_bit(RFCOMM_TTY_ATTACHED, &dev->flags))
+		tty_port_tty_wakeup(&dev->port);
+>>>>>>> v3.18
 =======
 	atomic_dec(&dev->wmem_alloc);
 	if (test_bit(RFCOMM_TTY_ATTACHED, &dev->flags))
@@ -523,7 +606,11 @@ static void rfcomm_set_owner_w(struct sk_buff *skb, struct rfcomm_dev *dev)
 {
 	tty_port_get(&dev->port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_add(skb->truesize, &dev->wmem_alloc);
+=======
+	atomic_inc(&dev->wmem_alloc);
+>>>>>>> v3.18
 =======
 	atomic_inc(&dev->wmem_alloc);
 >>>>>>> v3.18
@@ -534,6 +621,7 @@ static void rfcomm_set_owner_w(struct sk_buff *skb, struct rfcomm_dev *dev)
 static struct sk_buff *rfcomm_wmalloc(struct rfcomm_dev *dev, unsigned long size, gfp_t priority)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_read(&dev->wmem_alloc) < rfcomm_room(dev->dlc)) {
 		struct sk_buff *skb = alloc_skb(size, priority);
 		if (skb) {
@@ -543,10 +631,15 @@ static struct sk_buff *rfcomm_wmalloc(struct rfcomm_dev *dev, unsigned long size
 	}
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *skb = alloc_skb(size, priority);
 	if (skb)
 		rfcomm_set_owner_w(skb, dev);
 	return skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -555,7 +648,11 @@ static struct sk_buff *rfcomm_wmalloc(struct rfcomm_dev *dev, unsigned long size
 #define NOCAP_FLAGS ((1 << RFCOMM_REUSE_DLC) | (1 << RFCOMM_RELEASE_ONHUP))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rfcomm_create_dev(struct sock *sk, void __user *arg)
+=======
+static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
+>>>>>>> v3.18
 =======
 static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
 >>>>>>> v3.18
@@ -568,7 +665,11 @@ static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK dev_id %d flags 0x%x", sk, req.dev_id, req.flags);
+=======
+	BT_DBG("sk %p dev_id %d flags 0x%x", sk, req.dev_id, req.flags);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p dev_id %d flags 0x%x", sk, req.dev_id, req.flags);
 >>>>>>> v3.18
@@ -585,7 +686,10 @@ static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
 		rfcomm_dlc_hold(dlc);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Validate the channel is unused */
 		dlc = rfcomm_dlc_exists(&req.src, &req.dst, req.channel);
 		if (IS_ERR(dlc))
@@ -594,6 +698,9 @@ static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
 			rfcomm_dlc_put(dlc);
 			return -EBUSY;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dlc = rfcomm_dlc_alloc(GFP_KERNEL);
 		if (!dlc)
@@ -602,10 +709,15 @@ static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
 
 	id = rfcomm_dev_add(&req, dlc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id < 0) {
 		rfcomm_dlc_put(dlc);
 		return id;
 	}
+=======
+	if (id < 0)
+		return id;
+>>>>>>> v3.18
 =======
 	if (id < 0)
 		return id;
@@ -621,16 +733,22 @@ static int __rfcomm_create_dev(struct sock *sk, void __user *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rfcomm_release_dev(void __user *arg)
 {
 	struct rfcomm_dev_req req;
 	struct rfcomm_dev *dev;
 =======
+=======
+>>>>>>> v3.18
 static int __rfcomm_release_dev(void __user *arg)
 {
 	struct rfcomm_dev_req req;
 	struct rfcomm_dev *dev;
 	struct tty_struct *tty;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (copy_from_user(&req, arg, sizeof(req)))
@@ -648,18 +766,25 @@ static int __rfcomm_release_dev(void __user *arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* only release once */
 	if (test_and_set_bit(RFCOMM_DEV_RELEASED, &dev->status)) {
 		tty_port_put(&dev->port);
 		return -EALREADY;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (req.flags & (1 << RFCOMM_HANGUP_NOW))
 		rfcomm_dlc_close(dev->dlc, 0);
 
 	/* Shut down TTY synchronously before freeing rfcomm_dev */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev->port.tty)
 		tty_vhangup(dev->port.tty);
@@ -667,6 +792,8 @@ static int __rfcomm_release_dev(void __user *arg)
 	if (!test_bit(RFCOMM_RELEASE_ONHUP, &dev->flags))
 		rfcomm_dev_del(dev);
 =======
+=======
+>>>>>>> v3.18
 	tty = tty_port_tty_get(&dev->port);
 	if (tty) {
 		tty_vhangup(tty);
@@ -676,13 +803,19 @@ static int __rfcomm_release_dev(void __user *arg)
 	if (!test_bit(RFCOMM_TTY_OWNED, &dev->status))
 		tty_port_put(&dev->port);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tty_port_put(&dev->port);
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rfcomm_create_dev(struct sock *sk, void __user *arg)
 {
 	int ret;
@@ -705,6 +838,9 @@ static int rfcomm_release_dev(void __user *arg)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rfcomm_get_dev_list(void __user *arg)
 {
@@ -731,15 +867,21 @@ static int rfcomm_get_dev_list(void __user *arg)
 	di = dl->dev_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&rfcomm_dev_lock);
 
 	list_for_each_entry(dev, &rfcomm_dev_list, list) {
 		if (test_bit(RFCOMM_TTY_RELEASED, &dev->flags))
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&rfcomm_dev_lock);
 
 	list_for_each_entry(dev, &rfcomm_dev_list, list) {
 		if (!tty_port_get(&dev->port))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		(di + n)->id      = dev->id;
@@ -749,6 +891,10 @@ static int rfcomm_get_dev_list(void __user *arg)
 		bacpy(&(di + n)->src, &dev->src);
 		bacpy(&(di + n)->dst, &dev->dst);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tty_port_put(&dev->port);
+>>>>>>> v3.18
 =======
 		tty_port_put(&dev->port);
 >>>>>>> v3.18
@@ -757,7 +903,11 @@ static int rfcomm_get_dev_list(void __user *arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&rfcomm_dev_lock);
+=======
+	mutex_unlock(&rfcomm_dev_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&rfcomm_dev_lock);
 >>>>>>> v3.18
@@ -802,7 +952,11 @@ static int rfcomm_get_dev_info(void __user *arg)
 int rfcomm_dev_ioctl(struct sock *sk, unsigned int cmd, void __user *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("cmd %d arg %pK", cmd, arg);
+=======
+	BT_DBG("cmd %d arg %p", cmd, arg);
+>>>>>>> v3.18
 =======
 	BT_DBG("cmd %d arg %p", cmd, arg);
 >>>>>>> v3.18
@@ -840,7 +994,11 @@ static void rfcomm_dev_data_ready(struct rfcomm_dlc *dlc, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("dlc %pK len %d", dlc, skb->len);
+=======
+	BT_DBG("dlc %p len %d", dlc, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("dlc %p len %d", dlc, skb->len);
 >>>>>>> v3.18
@@ -857,6 +1015,7 @@ static void rfcomm_dev_state_change(struct rfcomm_dlc *dlc, int err)
 	if (!dev)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BT_DBG("dlc %pK dev %pK err %d", dlc, dev, err);
 
@@ -887,6 +1046,8 @@ static void rfcomm_dev_state_change(struct rfcomm_dlc *dlc, int err)
 			tty_hangup(dev->port.tty);
 	}
 =======
+=======
+>>>>>>> v3.18
 	BT_DBG("dlc %p dev %p err %d", dlc, dev, err);
 
 	dev->err = err;
@@ -896,6 +1057,9 @@ static void rfcomm_dev_state_change(struct rfcomm_dlc *dlc, int err)
 		wake_up_interruptible(&dev->port.open_wait);
 	} else if (dlc->state == BT_CLOSED)
 		tty_port_tty_hangup(&dev->port, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -906,6 +1070,7 @@ static void rfcomm_dev_modem_status(struct rfcomm_dlc *dlc, u8 v24_sig)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("dlc %pK dev %pK v24_sig 0x%02x", dlc, dev, v24_sig);
 
 	if ((dev->modem_status & TIOCM_CD) && !(v24_sig & RFCOMM_V24_DV)) {
@@ -913,10 +1078,15 @@ static void rfcomm_dev_modem_status(struct rfcomm_dlc *dlc, u8 v24_sig)
 			tty_hangup(dev->port.tty);
 	}
 =======
+=======
+>>>>>>> v3.18
 	BT_DBG("dlc %p dev %p v24_sig 0x%02x", dlc, dev, v24_sig);
 
 	if ((dev->modem_status & TIOCM_CD) && !(v24_sig & RFCOMM_V24_DV))
 		tty_port_tty_hangup(&dev->port, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->modem_status =
@@ -933,7 +1103,11 @@ static void rfcomm_tty_copy_pending(struct rfcomm_dev *dev)
 	int inserted = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("dev %pK", dev);
+=======
+	BT_DBG("dev %p", dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("dev %p", dev);
 >>>>>>> v3.18
@@ -952,6 +1126,7 @@ static void rfcomm_tty_copy_pending(struct rfcomm_dev *dev)
 		tty_flip_buffer_push(&dev->port);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int rfcomm_tty_open(struct tty_struct *tty, struct file *filp)
 {
@@ -983,6 +1158,8 @@ static int rfcomm_tty_open(struct tty_struct *tty, struct file *filp)
 	}
 	spin_unlock_irqrestore(&dev->port.lock, flags);
 =======
+=======
+>>>>>>> v3.18
 /* do the reverse of install, clearing the tty fields and releasing the
  * reference to tty_port
  */
@@ -1018,11 +1195,15 @@ static int rfcomm_tty_install(struct tty_driver *driver, struct tty_struct *tty)
 	dev = rfcomm_dev_get(tty->index);
 	if (!dev)
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dlc = dev->dlc;
 
 	/* Attach TTY and open DLC */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	rfcomm_dlc_lock(dlc);
@@ -1065,6 +1246,8 @@ static int rfcomm_tty_install(struct tty_driver *driver, struct tty_struct *tty)
 			    DPM_ORDER_DEV_AFTER_PARENT);
 
 =======
+=======
+>>>>>>> v3.18
 	rfcomm_dlc_lock(dlc);
 	tty->driver_data = dev;
 	rfcomm_dlc_unlock(dlc);
@@ -1109,13 +1292,20 @@ static int rfcomm_tty_open(struct tty_struct *tty, struct file *filp)
 	 * received data. This hack will be unnecessary and can
 	 * be removed when that's implemented
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rfcomm_tty_copy_pending(dev);
 
 	rfcomm_dlc_unthrottle(dev->dlc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1124,6 +1314,7 @@ static int rfcomm_tty_open(struct tty_struct *tty, struct file *filp)
 static void rfcomm_tty_close(struct tty_struct *tty, struct file *filp)
 {
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -1161,11 +1352,16 @@ static void rfcomm_tty_close(struct tty_struct *tty, struct file *filp)
 
 	tty_port_put(&dev->port);
 =======
+=======
+>>>>>>> v3.18
 
 	BT_DBG("tty %p dev %p dlc %p opened %d", tty, dev, dev->dlc,
 						dev->port.count);
 
 	tty_port_close(&dev->port, tty, filp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1175,9 +1371,15 @@ static int rfcomm_tty_write(struct tty_struct *tty, const unsigned char *buf, in
 	struct rfcomm_dlc *dlc = dev->dlc;
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0, sent = 0, size;
 
 	BT_DBG("tty %pK count %d", tty, count);
+=======
+	int sent = 0, size;
+
+	BT_DBG("tty %p count %d", tty, count);
+>>>>>>> v3.18
 =======
 	int sent = 0, size;
 
@@ -1189,7 +1391,10 @@ static int rfcomm_tty_write(struct tty_struct *tty, const unsigned char *buf, in
 
 		skb = rfcomm_wmalloc(dev, size + RFCOMM_SKB_RESERVE, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!skb)
@@ -1200,11 +1405,15 @@ static int rfcomm_tty_write(struct tty_struct *tty, const unsigned char *buf, in
 		memcpy(skb_put(skb, size), buf + sent, size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = rfcomm_dlc_send(dlc, skb);
 		if (err < 0) {
 			kfree_skb(skb);
 			break;
 		}
+=======
+		rfcomm_dlc_send_noerror(dlc, skb);
+>>>>>>> v3.18
 =======
 		rfcomm_dlc_send_noerror(dlc, skb);
 >>>>>>> v3.18
@@ -1214,7 +1423,11 @@ static int rfcomm_tty_write(struct tty_struct *tty, const unsigned char *buf, in
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sent ? sent : err;
+=======
+	return sent;
+>>>>>>> v3.18
 =======
 	return sent;
 >>>>>>> v3.18
@@ -1223,6 +1436,7 @@ static int rfcomm_tty_write(struct tty_struct *tty, const unsigned char *buf, in
 static int rfcomm_tty_write_room(struct tty_struct *tty)
 {
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int room;
 
@@ -1235,12 +1449,17 @@ static int rfcomm_tty_write_room(struct tty_struct *tty)
 	if (room < 0)
 		room = 0;
 =======
+=======
+>>>>>>> v3.18
 	int room = 0;
 
 	if (dev && dev->dlc)
 		room = rfcomm_room(dev);
 
 	BT_DBG("tty %p room %d", tty, room);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return room;
@@ -1249,7 +1468,11 @@ static int rfcomm_tty_write_room(struct tty_struct *tty)
 static int rfcomm_tty_ioctl(struct tty_struct *tty, unsigned int cmd, unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK cmd 0x%02x", tty, cmd);
+=======
+	BT_DBG("tty %p cmd 0x%02x", tty, cmd);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p cmd 0x%02x", tty, cmd);
 >>>>>>> v3.18
@@ -1307,7 +1530,11 @@ static void rfcomm_tty_set_termios(struct tty_struct *tty, struct ktermios *old)
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK termios %pK", tty, old);
+=======
+	BT_DBG("tty %p termios %p", tty, old);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p termios %p", tty, old);
 >>>>>>> v3.18
@@ -1443,7 +1670,11 @@ static void rfcomm_tty_throttle(struct tty_struct *tty)
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK", tty, dev);
+=======
+	BT_DBG("tty %p dev %p", tty, dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p dev %p", tty, dev);
 >>>>>>> v3.18
@@ -1456,7 +1687,11 @@ static void rfcomm_tty_unthrottle(struct tty_struct *tty)
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK", tty, dev);
+=======
+	BT_DBG("tty %p dev %p", tty, dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p dev %p", tty, dev);
 >>>>>>> v3.18
@@ -1469,7 +1704,11 @@ static int rfcomm_tty_chars_in_buffer(struct tty_struct *tty)
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK", tty, dev);
+=======
+	BT_DBG("tty %p dev %p", tty, dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p dev %p", tty, dev);
 >>>>>>> v3.18
@@ -1488,7 +1727,11 @@ static void rfcomm_tty_flush_buffer(struct tty_struct *tty)
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK", tty, dev);
+=======
+	BT_DBG("tty %p dev %p", tty, dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p dev %p", tty, dev);
 >>>>>>> v3.18
@@ -1503,7 +1746,11 @@ static void rfcomm_tty_flush_buffer(struct tty_struct *tty)
 static void rfcomm_tty_send_xchar(struct tty_struct *tty, char ch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK ch %c", tty, ch);
+=======
+	BT_DBG("tty %p ch %c", tty, ch);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p ch %c", tty, ch);
 >>>>>>> v3.18
@@ -1512,7 +1759,11 @@ static void rfcomm_tty_send_xchar(struct tty_struct *tty, char ch)
 static void rfcomm_tty_wait_until_sent(struct tty_struct *tty, int timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK timeout %d", tty, timeout);
+=======
+	BT_DBG("tty %p timeout %d", tty, timeout);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p timeout %d", tty, timeout);
 >>>>>>> v3.18
@@ -1522,6 +1773,7 @@ static void rfcomm_tty_hangup(struct tty_struct *tty)
 {
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK", tty, dev);
 
@@ -1541,6 +1793,11 @@ static void rfcomm_tty_hangup(struct tty_struct *tty)
 
 	tty_port_hangup(&dev->port);
 >>>>>>> v3.18
+=======
+	BT_DBG("tty %p dev %p", tty, dev);
+
+	tty_port_hangup(&dev->port);
+>>>>>>> v3.18
 }
 
 static int rfcomm_tty_tiocmget(struct tty_struct *tty)
@@ -1548,7 +1805,11 @@ static int rfcomm_tty_tiocmget(struct tty_struct *tty)
 	struct rfcomm_dev *dev = (struct rfcomm_dev *) tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK", tty, dev);
+=======
+	BT_DBG("tty %p dev %p", tty, dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p dev %p", tty, dev);
 >>>>>>> v3.18
@@ -1563,7 +1824,11 @@ static int rfcomm_tty_tiocmset(struct tty_struct *tty, unsigned int set, unsigne
 	u8 v24_sig;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("tty %pK dev %pK set 0x%02x clear 0x%02x", tty, dev, set, clear);
+=======
+	BT_DBG("tty %p dev %p set 0x%02x clear 0x%02x", tty, dev, set, clear);
+>>>>>>> v3.18
 =======
 	BT_DBG("tty %p dev %p set 0x%02x clear 0x%02x", tty, dev, set, clear);
 >>>>>>> v3.18
@@ -1612,6 +1877,11 @@ static const struct tty_operations rfcomm_ops = {
 	.tiocmget		= rfcomm_tty_tiocmget,
 	.tiocmset		= rfcomm_tty_tiocmset,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.install                = rfcomm_tty_install,
+	.cleanup                = rfcomm_tty_cleanup,
+>>>>>>> v3.18
 =======
 	.install                = rfcomm_tty_install,
 	.cleanup                = rfcomm_tty_cleanup,
@@ -1635,7 +1905,11 @@ int __init rfcomm_init_ttys(void)
 	rfcomm_tty_driver->flags	= TTY_DRIVER_REAL_RAW | TTY_DRIVER_DYNAMIC_DEV;
 	rfcomm_tty_driver->init_termios	= tty_std_termios;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rfcomm_tty_driver->init_termios.c_cflag	= B9600 | CS8 | CREAD | HUPCL | CLOCAL;
+=======
+	rfcomm_tty_driver->init_termios.c_cflag	= B9600 | CS8 | CREAD | HUPCL;
+>>>>>>> v3.18
 =======
 	rfcomm_tty_driver->init_termios.c_cflag	= B9600 | CS8 | CREAD | HUPCL;
 >>>>>>> v3.18

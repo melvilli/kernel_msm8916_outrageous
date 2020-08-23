@@ -11,6 +11,7 @@
 
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
 #include <linux/of_irq.h>
@@ -24,6 +25,8 @@
 
 extern void __init mmp_dt_irq_init(void);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqchip.h>
 #include <linux/of_platform.h>
 #include <asm/mach/arch.h>
@@ -31,6 +34,9 @@ extern void __init mmp_dt_irq_init(void);
 
 #include "common.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void __init mmp_dt_init_timer(void);
 
@@ -60,7 +66,10 @@ static const char *mmp2_dt_board_compat[] __initdata = {
 DT_MACHINE_START(MMP2_DT, "Marvell MMP2 (Device Tree Support)")
 	.map_io		= mmp_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= mmp_dt_irq_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mmp_dt_init_timer,

@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/mach-kirkwood/include/mach/leds-netxbig.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Platform data structure for netxbig LED driver
@@ -12,8 +15,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __MACH_LEDS_NETXBIG_H
 #define __MACH_LEDS_NETXBIG_H
+=======
+#ifndef __LEDS_KIRKWOOD_NETXBIG_H
+#define __LEDS_KIRKWOOD_NETXBIG_H
+>>>>>>> v3.18
 =======
 #ifndef __LEDS_KIRKWOOD_NETXBIG_H
 #define __LEDS_KIRKWOOD_NETXBIG_H
@@ -61,7 +69,11 @@ struct netxbig_led_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __MACH_LEDS_NETXBIG_H */
+=======
+#endif /* __LEDS_KIRKWOOD_NETXBIG_H */
+>>>>>>> v3.18
 =======
 #endif /* __LEDS_KIRKWOOD_NETXBIG_H */
 >>>>>>> v3.18

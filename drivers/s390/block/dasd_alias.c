@@ -265,10 +265,15 @@ void dasd_alias_disconnect_device_from_lcu(struct dasd_device *device)
 		cancel_work_sync(&lcu->suc_data.worker);
 		spin_lock_irqsave(&lcu->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (device == lcu->suc_data.device) {
 			dasd_put_device(device);
 			lcu->suc_data.device = NULL;
 		}
+=======
+		if (device == lcu->suc_data.device)
+			lcu->suc_data.device = NULL;
+>>>>>>> v3.18
 =======
 		if (device == lcu->suc_data.device)
 			lcu->suc_data.device = NULL;
@@ -281,10 +286,15 @@ void dasd_alias_disconnect_device_from_lcu(struct dasd_device *device)
 		cancel_delayed_work_sync(&lcu->ruac_data.dwork);
 		spin_lock_irqsave(&lcu->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (device == lcu->ruac_data.device) {
 			dasd_put_device(device);
 			lcu->ruac_data.device = NULL;
 		}
+=======
+		if (device == lcu->ruac_data.device)
+			lcu->ruac_data.device = NULL;
+>>>>>>> v3.18
 =======
 		if (device == lcu->ruac_data.device)
 			lcu->ruac_data.device = NULL;
@@ -564,10 +574,15 @@ static void lcu_update_work(struct work_struct *work)
 		DBF_DEV_EVENT(DBF_WARNING, device, "could not update"
 			    " alias data in lcu (rc = %d), retry later", rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!schedule_delayed_work(&lcu->ruac_data.dwork, 30*HZ))
 			dasd_put_device(device);
 	} else {
 		dasd_put_device(device);
+=======
+		schedule_delayed_work(&lcu->ruac_data.dwork, 30*HZ);
+	} else {
+>>>>>>> v3.18
 =======
 		schedule_delayed_work(&lcu->ruac_data.dwork, 30*HZ);
 	} else {
@@ -615,10 +630,15 @@ static int _schedule_lcu_update(struct alias_lcu *lcu,
 	if (!usedev)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dasd_get_device(usedev);
 	lcu->ruac_data.device = usedev;
 	if (!schedule_delayed_work(&lcu->ruac_data.dwork, 0))
 		dasd_put_device(usedev);
+=======
+	lcu->ruac_data.device = usedev;
+	schedule_delayed_work(&lcu->ruac_data.dwork, 0);
+>>>>>>> v3.18
 =======
 	lcu->ruac_data.device = usedev;
 	schedule_delayed_work(&lcu->ruac_data.dwork, 0);
@@ -751,7 +771,11 @@ static int reset_summary_unit_check(struct alias_lcu *lcu,
 	ccw = cqr->cpaddr;
 	ccw->cmd_code = DASD_ECKD_CCW_RSCK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccw->flags = CCW_FLAG_SLI;
+=======
+	ccw->flags = 0 ;
+>>>>>>> v3.18
 =======
 	ccw->flags = 0 ;
 >>>>>>> v3.18
@@ -959,7 +983,10 @@ static void summary_unit_check_handling_work(struct work_struct *work)
 	_schedule_lcu_update(lcu, device);
 	lcu->suc_data.device = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dasd_put_device(device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&lcu->lock, flags);
@@ -1022,10 +1049,15 @@ void dasd_alias_handle_summary_unit_check(struct dasd_device *device,
 	lcu->suc_data.reason = reason;
 	lcu->suc_data.device = device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dasd_get_device(device);
 	spin_unlock(&lcu->lock);
 	if (!schedule_work(&lcu->suc_data.worker))
 		dasd_put_device(device);
+=======
+	spin_unlock(&lcu->lock);
+	schedule_work(&lcu->suc_data.worker);
+>>>>>>> v3.18
 =======
 	spin_unlock(&lcu->lock);
 	schedule_work(&lcu->suc_data.worker);

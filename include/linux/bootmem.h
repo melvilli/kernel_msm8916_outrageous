@@ -6,6 +6,10 @@
 
 #include <linux/mmzone.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mm_types.h>
+>>>>>>> v3.18
 =======
 #include <linux/mm_types.h>
 >>>>>>> v3.18
@@ -49,8 +53,13 @@ extern unsigned long init_bootmem_node(pg_data_t *pgdat,
 extern unsigned long init_bootmem(unsigned long addr, unsigned long memend);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long free_all_bootmem_node(pg_data_t *pgdat);
 extern unsigned long free_all_bootmem(void);
+=======
+extern unsigned long free_all_bootmem(void);
+extern void reset_node_managed_pages(pg_data_t *pgdat);
+>>>>>>> v3.18
 =======
 extern unsigned long free_all_bootmem(void);
 extern void reset_node_managed_pages(pg_data_t *pgdat);
@@ -63,7 +72,10 @@ extern void free_bootmem_node(pg_data_t *pgdat,
 extern void free_bootmem(unsigned long physaddr, unsigned long size);
 extern void free_bootmem_late(unsigned long physaddr, unsigned long size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __free_pages_bootmem(struct page *page, unsigned int order);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -72,9 +84,15 @@ extern void __free_pages_bootmem(struct page *page, unsigned int order);
  * the architecture-specific code should honor this).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If flags is 0, then the return value is always 0 (success). If
  * flags contains BOOTMEM_EXCLUSIVE, then -EBUSY is returned if the
  * memory already was reserved.
+=======
+ * If flags is BOOTMEM_DEFAULT, then the return value is always 0 (success).
+ * If flags contains BOOTMEM_EXCLUSIVE, then -EBUSY is returned if the memory
+ * already was reserved.
+>>>>>>> v3.18
 =======
  * If flags is BOOTMEM_DEFAULT, then the return value is always 0 (success).
  * If flags contains BOOTMEM_EXCLUSIVE, then -EBUSY is returned if the memory
@@ -162,7 +180,10 @@ extern void *__alloc_bootmem_low_node(pg_data_t *pgdat,
 	__alloc_bootmem_low_node(pgdat, x, PAGE_SIZE, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_HAVE_MEMBLOCK) && defined(CONFIG_NO_BOOTMEM)
 
@@ -351,6 +372,9 @@ static inline void __init memblock_free_late(
 }
 #endif /* defined(CONFIG_HAVE_MEMBLOCK) && defined(CONFIG_NO_BOOTMEM) */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARCH_ALLOC_REMAP
 extern void *alloc_remap(int nid, unsigned long size);

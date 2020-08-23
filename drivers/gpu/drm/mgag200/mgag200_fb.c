@@ -28,7 +28,11 @@ static void mga_dirty_update(struct mga_fbdev *mfbdev,
 	int src_offset, dst_offset;
 	int bpp = (mfbdev->mfb.base.bits_per_pixel + 7)/8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = -EBUSY;
+>>>>>>> v3.18
 =======
 	int ret = -EBUSY;
 >>>>>>> v3.18
@@ -46,7 +50,12 @@ static void mga_dirty_update(struct mga_fbdev *mfbdev,
 	 * store up the damage until later.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mgag200_bo_reserve(bo, true);
+=======
+	if (drm_can_sleep())
+		ret = mgag200_bo_reserve(bo, true);
+>>>>>>> v3.18
 =======
 	if (drm_can_sleep())
 		ret = mgag200_bo_reserve(bo, true);
@@ -167,7 +176,12 @@ static int mgag200fb_create(struct drm_fb_helper *helper,
 			   struct drm_fb_helper_surface_size *sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mga_fbdev *mfbdev = (struct mga_fbdev *)helper;
+=======
+	struct mga_fbdev *mfbdev =
+		container_of(helper, struct mga_fbdev, helper);
+>>>>>>> v3.18
 =======
 	struct mga_fbdev *mfbdev =
 		container_of(helper, struct mga_fbdev, helper);
@@ -286,7 +300,11 @@ static int mga_fbdev_destroy(struct drm_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs mga_fb_helper_funcs = {
+=======
+static const struct drm_fb_helper_funcs mga_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs mga_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -300,12 +318,18 @@ int mgag200_fbdev_init(struct mga_device *mdev)
 	struct mga_fbdev *mfbdev;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int bpp_sel = 32;
 
 	/* prefer 16bpp on low end gpus with limited VRAM */
 	if (IS_G200_SE(mdev) && mdev->mc.vram_size < (2048*1024))
 		bpp_sel = 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfbdev = devm_kzalloc(mdev->dev->dev, sizeof(struct mga_fbdev), GFP_KERNEL);
@@ -314,14 +338,20 @@ int mgag200_fbdev_init(struct mga_device *mdev)
 
 	mdev->mfbdev = mfbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfbdev->helper.funcs = &mga_fb_helper_funcs;
 	spin_lock_init(&mfbdev->dirty_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&mfbdev->dirty_lock);
 
 	drm_fb_helper_prepare(mdev->dev, &mfbdev->helper, &mga_fb_helper_funcs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = drm_fb_helper_init(mdev->dev, &mfbdev->helper,
 				 mdev->num_crtc, MGAG200FB_CONN_LIMIT);
@@ -334,7 +364,11 @@ int mgag200_fbdev_init(struct mga_device *mdev)
 	drm_helper_disable_unused_functions(mdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_fb_helper_initial_config(&mfbdev->helper, 32);
+=======
+	drm_fb_helper_initial_config(&mfbdev->helper, bpp_sel);
+>>>>>>> v3.18
 =======
 	drm_fb_helper_initial_config(&mfbdev->helper, bpp_sel);
 >>>>>>> v3.18

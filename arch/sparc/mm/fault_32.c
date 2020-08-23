@@ -27,6 +27,10 @@
 #include <asm/openprom.h>
 #include <asm/oplib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -35,10 +39,16 @@
 #include <asm/uaccess.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int show_unhandled_signals = 1;
 
 static void unhandled_fault(unsigned long, struct task_struct *,
 		struct pt_regs *) __attribute__ ((noreturn));
+=======
+#include "mm_32.h"
+
+int show_unhandled_signals = 1;
+>>>>>>> v3.18
 =======
 #include "mm_32.h"
 
@@ -152,9 +162,12 @@ static void __do_fault_siginfo(int code, int sig, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long safe_compute_effective_address(struct pt_regs *,
 						    unsigned int);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned long compute_si_addr(struct pt_regs *regs, int text_fault)
@@ -266,8 +279,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)

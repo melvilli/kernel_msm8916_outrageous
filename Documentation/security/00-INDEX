@@ -23,6 +23,11 @@ keys.txt
 tomoyo.txt
 	- documentation on the TOMOYO Linux Security Module.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+IMA-templates.txt
+	- documentation on the template management mechanism for IMA.
+>>>>>>> v3.18
 =======
 IMA-templates.txt
 	- documentation on the template management mechanism for IMA.

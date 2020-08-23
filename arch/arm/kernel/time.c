@@ -12,6 +12,7 @@
  *  reading the RTC at bootup, etc...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/kernel.h>
 #include <linux/interrupt.h>
@@ -32,6 +33,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk-provider.h>
 #include <linux/clocksource.h>
 #include <linux/errno.h>
@@ -52,6 +55,9 @@
 #include <asm/mach/time.h>
 #include <asm/stacktrace.h>
 #include <asm/thread_info.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_RTC_DRV_CMOS) || defined(CONFIG_RTC_DRV_CMOS_MODULE) || \
@@ -73,10 +79,14 @@ unsigned long profile_pc(struct pt_regs *regs)
 		return regs->ARM_pc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame.fp = regs->ARM_fp;
 	frame.sp = regs->ARM_sp;
 	frame.lr = regs->ARM_lr;
 	frame.pc = regs->ARM_pc;
+=======
+	arm_get_current_stackframe(regs, &frame);
+>>>>>>> v3.18
 =======
 	arm_get_current_stackframe(regs, &frame);
 >>>>>>> v3.18
@@ -144,11 +154,14 @@ int __init register_persistent_clock(clock_access_fn read_boot,
 void __init time_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (machine_desc->init_time)
 		machine_desc->init_time();
 	else
 		clocksource_of_init();
 =======
+=======
+>>>>>>> v3.18
 	if (machine_desc->init_time) {
 		machine_desc->init_time();
 	} else {
@@ -157,5 +170,8 @@ void __init time_init(void)
 #endif
 		clocksource_of_init();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

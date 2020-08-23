@@ -38,6 +38,11 @@
 #include <linux/clk.h>
 #include <linux/libata.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/phy/phy.h>
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/phy/phy.h>
 #include <linux/regulator/consumer.h>
@@ -57,6 +62,10 @@
 enum {
 	AHCI_MAX_PORTS		= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	AHCI_MAX_CLKS		= 5,
+>>>>>>> v3.18
 =======
 	AHCI_MAX_CLKS		= 5,
 >>>>>>> v3.18
@@ -101,6 +110,10 @@ enum {
 	HOST_RESET		= (1 << 0),  /* reset controller; self-clear */
 	HOST_IRQ_EN		= (1 << 1),  /* global IRQ enable */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HOST_MRSM		= (1 << 2),  /* MSI Revert to Single Message */
+>>>>>>> v3.18
 =======
 	HOST_MRSM		= (1 << 2),  /* MSI Revert to Single Message */
 >>>>>>> v3.18
@@ -246,6 +259,11 @@ enum {
 						        error-handling stage) */
 	AHCI_HFLAG_MULTI_MSI		= (1 << 16), /* multiple PCI MSIs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	AHCI_HFLAG_NO_DEVSLP		= (1 << 17), /* no device sleep */
+	AHCI_HFLAG_NO_FBS		= (1 << 18), /* no FBS */
+>>>>>>> v3.18
 =======
 	AHCI_HFLAG_NO_DEVSLP		= (1 << 17), /* no device sleep */
 	AHCI_HFLAG_NO_FBS		= (1 << 18), /* no FBS */
@@ -317,7 +335,11 @@ struct ahci_port_priv {
 	unsigned int		ncq_saw_dmas:1;
 	unsigned int		ncq_saw_sdb:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			intr_status;	/* interrupts to handle */
+=======
+	atomic_t		intr_status;	/* interrupts to handle */
+>>>>>>> v3.18
 =======
 	atomic_t		intr_status;	/* interrupts to handle */
 >>>>>>> v3.18
@@ -329,12 +351,15 @@ struct ahci_port_priv {
 	/* enclosure management info per PM slot */
 	struct ahci_em_priv	em_priv[EM_MAX_SLOTS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct ahci_host_priv {
 	void __iomem *		mmio;		/* bus-independent mem map */
 	unsigned int		flags;		/* AHCI_HFLAG_* */
 =======
+=======
+>>>>>>> v3.18
 	char			*irq_desc;	/* desc in /proc/interrupts */
 };
 
@@ -345,6 +370,9 @@ struct ahci_host_priv {
 	u32			mask_port_map;	/* mask out particular bits */
 
 	void __iomem *		mmio;		/* bus-independent mem map */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32			cap;		/* cap to use */
 	u32			cap2;		/* cap2 to use */
@@ -356,8 +384,11 @@ struct ahci_host_priv {
 	u32			em_buf_sz;	/* EM buffer size in byte */
 	u32			em_msg_type;	/* EM message type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk		*clk;		/* Only for platforms supporting clk */
 =======
+=======
+>>>>>>> v3.18
 	bool			got_runtime_pm; /* Did we do pm_runtime_get? */
 	struct clk		*clks[AHCI_MAX_CLKS]; /* Optional */
 	struct regulator	*target_pwr;	/* Optional */
@@ -374,6 +405,9 @@ struct ahci_host_priv {
 	 * be overridden anytime before the host is activated.
 	 */
 	void			(*start_engine)(struct ata_port *ap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -392,6 +426,10 @@ extern struct device_attribute *ahci_sdev_attrs[];
 
 extern struct ata_port_operations ahci_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct ata_port_operations ahci_platform_ops;
+>>>>>>> v3.18
 =======
 extern struct ata_port_operations ahci_platform_ops;
 >>>>>>> v3.18
@@ -402,9 +440,13 @@ void ahci_fill_cmd_slot(struct ahci_port_priv *pp, unsigned int tag,
 			u32 opts);
 void ahci_save_initial_config(struct device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct ahci_host_priv *hpriv,
 			      unsigned int force_port_map,
 			      unsigned int mask_port_map);
+=======
+			      struct ahci_host_priv *hpriv);
+>>>>>>> v3.18
 =======
 			      struct ahci_host_priv *hpriv);
 >>>>>>> v3.18
@@ -416,7 +458,13 @@ int ahci_do_softreset(struct ata_link *link, unsigned int *class,
 		      int (*check_ready)(struct ata_link *link));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ahci_stop_engine(struct ata_port *ap);
+=======
+unsigned int ahci_qc_issue(struct ata_queued_cmd *qc);
+int ahci_stop_engine(struct ata_port *ap);
+void ahci_start_fis_rx(struct ata_port *ap);
+>>>>>>> v3.18
 =======
 unsigned int ahci_qc_issue(struct ata_queued_cmd *qc);
 int ahci_stop_engine(struct ata_port *ap);
@@ -430,16 +478,22 @@ void ahci_set_em_messages(struct ahci_host_priv *hpriv,
 			  struct ata_port_info *pi);
 int ahci_reset_em(struct ata_host *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t ahci_interrupt(int irq, void *dev_instance);
 irqreturn_t ahci_hw_interrupt(int irq, void *dev_instance);
 irqreturn_t ahci_thread_fn(int irq, void *dev_instance);
 void ahci_print_info(struct ata_host *host, const char *scc_s);
 int ahci_host_activate(struct ata_host *host, int irq, unsigned int n_msis);
 =======
+=======
+>>>>>>> v3.18
 void ahci_print_info(struct ata_host *host, const char *scc_s);
 int ahci_host_activate(struct ata_host *host, int irq,
 		       struct scsi_host_template *sht);
 void ahci_error_handler(struct ata_port *ap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void __iomem *__ahci_port_base(struct ata_host *host,

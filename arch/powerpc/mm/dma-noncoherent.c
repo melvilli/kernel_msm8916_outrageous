@@ -34,6 +34,10 @@
 
 #include <asm/tlbflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dma.h>
+>>>>>>> v3.18
 =======
 #include <asm/dma.h>
 >>>>>>> v3.18
@@ -292,9 +296,13 @@ void __dma_free_coherent(size_t size, void *vaddr)
 			if (pfn_valid(pfn)) {
 				struct page *page = pfn_to_page(pfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				ClearPageReserved(page);
 				__free_page(page);
+=======
+				__free_reserved_page(page);
+>>>>>>> v3.18
 =======
 				__free_reserved_page(page);
 >>>>>>> v3.18

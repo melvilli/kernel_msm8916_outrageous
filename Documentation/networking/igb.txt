@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Linux* Base Driver for Intel(R) Network Connection
 ==================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2010 Intel Corporation.
 =======
+=======
+>>>>>>> v3.18
 Linux* Base Driver for Intel(R) Ethernet Network Connection
 ===========================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2013 Intel Corporation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Contents
@@ -45,7 +51,10 @@ This parameter adds support for SR-IOV.  It causes the driver to spawn up to
 max_vfs worth of virtual function.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Additional Configurations
@@ -67,15 +76,21 @@ Additional Configurations
     with the maximum Jumbo Frames size of 9234 bytes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   - Using Jumbo Frames at 10 or 100 Mbps may result in poor performance or
     loss of link.
 
   Ethtool
 =======
+=======
+>>>>>>> v3.18
   - Using Jumbo frames at 10 or 100 Mbps is not supported and may result in
     poor performance or loss of link.
 
   ethtool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   -------
   The driver utilizes the ethtool interface for driver configuration and
@@ -125,7 +140,10 @@ Additional Configurations
   Where n=the VF that attempted to do the spoofing.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   Setting MAC Address, VLAN and Rate Limit Using IProute2 Tool
   ------------------------------------------------------------
   You can set a MAC address of a Virtual Function (VF), a default VLAN and the
@@ -134,6 +152,9 @@ Additional Configurations
   features you require.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Support
 =======

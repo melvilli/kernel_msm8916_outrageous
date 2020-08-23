@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * drivers/net/phy/mdio_bus.c
  *
  * MDIO Bus interface
+=======
+/* MDIO Bus interface
+>>>>>>> v3.18
 =======
 /* MDIO Bus interface
 >>>>>>> v3.18
@@ -41,15 +45,21 @@
 #include <linux/ethtool.h>
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/io.h>
 #include <asm/irq.h>
 #include <asm/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/uaccess.h>
 
 #include <asm/irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -84,7 +94,10 @@ struct mii_bus *mdiobus_alloc_size(size_t size)
 EXPORT_SYMBOL(mdiobus_alloc_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void _devm_mdiobus_free(struct device *dev, void *res)
 {
 	mdiobus_free(*(struct mii_bus **)res);
@@ -152,6 +165,9 @@ void devm_mdiobus_free(struct device *dev, struct mii_bus *bus)
 }
 EXPORT_SYMBOL_GPL(devm_mdiobus_free);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * mdiobus_release - mii_bus device release callback
@@ -205,7 +221,10 @@ struct mii_bus *of_mdio_find_bus(struct device_node *mdio_bus_np)
 }
 EXPORT_SYMBOL(of_mdio_find_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Walk the list of subnodes of a mdio bus and look for a node that matches the
  * phy's address with its 'reg' property. If found, set the of_node pointer for
@@ -250,6 +269,9 @@ static inline void of_mdiobus_link_phydev(struct mii_bus *mdio,
 					  struct phy_device *phydev)
 {
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -268,8 +290,12 @@ int mdiobus_register(struct mii_bus *bus)
 
 	if (NULL == bus || NULL == bus->name ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			NULL == bus->read ||
 			NULL == bus->write)
+=======
+	    NULL == bus->read || NULL == bus->write)
+>>>>>>> v3.18
 =======
 	    NULL == bus->read || NULL == bus->write)
 >>>>>>> v3.18
@@ -287,6 +313,10 @@ int mdiobus_register(struct mii_bus *bus)
 	if (err) {
 		pr_err("mii_bus %s failed to register\n", bus->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		put_device(&bus->dev);
+>>>>>>> v3.18
 =======
 		put_device(&bus->dev);
 >>>>>>> v3.18
@@ -351,9 +381,13 @@ EXPORT_SYMBOL(mdiobus_unregister);
 void mdiobus_free(struct mii_bus *bus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * For compatibility with error handling in drivers.
 	 */
+=======
+	/* For compatibility with error handling in drivers. */
+>>>>>>> v3.18
 =======
 	/* For compatibility with error handling in drivers. */
 >>>>>>> v3.18
@@ -379,13 +413,19 @@ struct phy_device *mdiobus_scan(struct mii_bus *bus, int addr)
 		return phydev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * For DT, see if the auto-probed phy has a correspoding child
 	 * in the bus node, and set the of_node pointer in this case.
 	 */
 	of_mdiobus_link_phydev(bus, phydev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = phy_device_register(phydev);
 	if (err) {
@@ -466,8 +506,13 @@ static int mdio_bus_match(struct device *dev, struct device_driver *drv)
 		return phydrv->match_phy_device(phydev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((phydrv->phy_id & phydrv->phy_id_mask) ==
 		(phydev->phy_id & phydrv->phy_id_mask));
+=======
+	return (phydrv->phy_id & phydrv->phy_id_mask) ==
+		(phydev->phy_id & phydrv->phy_id_mask);
+>>>>>>> v3.18
 =======
 	return (phydrv->phy_id & phydrv->phy_id_mask) ==
 		(phydev->phy_id & phydrv->phy_id_mask);
@@ -490,8 +535,12 @@ static bool mdio_bus_phy_may_suspend(struct phy_device *phydev)
 		return true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Don't suspend PHY if the attched netdev parent may wakeup.
+=======
+	/* Don't suspend PHY if the attched netdev parent may wakeup.
+>>>>>>> v3.18
 =======
 	/* Don't suspend PHY if the attched netdev parent may wakeup.
 >>>>>>> v3.18
@@ -501,8 +550,12 @@ static bool mdio_bus_phy_may_suspend(struct phy_device *phydev)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Also don't suspend PHY if the netdev itself may wakeup. This
+=======
+	/* Also don't suspend PHY if the netdev itself may wakeup. This
+>>>>>>> v3.18
 =======
 	/* Also don't suspend PHY if the netdev itself may wakeup. This
 >>>>>>> v3.18
@@ -521,8 +574,12 @@ static int mdio_bus_suspend(struct device *dev)
 	struct phy_device *phydev = to_phy_device(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We must stop the state machine manually, otherwise it stops out of
+=======
+	/* We must stop the state machine manually, otherwise it stops out of
+>>>>>>> v3.18
 =======
 	/* We must stop the state machine manually, otherwise it stops out of
 >>>>>>> v3.18
@@ -555,7 +612,11 @@ static int mdio_bus_resume(struct device *dev)
 no_resume:
 	if (phydev->attached_dev && phydev->adjust_link)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_start_machine(phydev, NULL);
+=======
+		phy_start_machine(phydev);
+>>>>>>> v3.18
 =======
 		phy_start_machine(phydev);
 >>>>>>> v3.18
@@ -581,7 +642,11 @@ static int mdio_bus_restore(struct device *dev)
 	phydev->state = PHY_UP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_start_machine(phydev, NULL);
+=======
+	phy_start_machine(phydev);
+>>>>>>> v3.18
 =======
 	phy_start_machine(phydev);
 >>>>>>> v3.18
@@ -590,7 +655,11 @@ static int mdio_bus_restore(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dev_pm_ops mdio_bus_pm_ops = {
+=======
+static const struct dev_pm_ops mdio_bus_pm_ops = {
+>>>>>>> v3.18
 =======
 static const struct dev_pm_ops mdio_bus_pm_ops = {
 >>>>>>> v3.18
@@ -617,12 +686,15 @@ phy_id_show(struct device *dev, struct device_attribute *attr, char *buf)
 	return sprintf(buf, "0x%.8lx\n", (unsigned long)phydev->phy_id);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute mdio_dev_attrs[] = {
 	__ATTR_RO(phy_id),
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(phy_id);
 
 static ssize_t
@@ -656,6 +728,9 @@ static struct attribute *mdio_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(mdio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bus_type mdio_bus_type = {
@@ -663,7 +738,11 @@ struct bus_type mdio_bus_type = {
 	.match		= mdio_bus_match,
 	.pm		= MDIO_BUS_PM_OPS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= mdio_dev_attrs,
+=======
+	.dev_groups	= mdio_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= mdio_dev_groups,
 >>>>>>> v3.18

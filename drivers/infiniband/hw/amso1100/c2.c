@@ -605,8 +605,13 @@ static int c2_up(struct net_device *netdev)
 
 	c2_port->mem_size = tx_size + rx_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c2_port->mem = pci_alloc_consistent(c2dev->pcidev, c2_port->mem_size,
 					    &c2_port->dma);
+=======
+	c2_port->mem = pci_zalloc_consistent(c2dev->pcidev, c2_port->mem_size,
+					     &c2_port->dma);
+>>>>>>> v3.18
 =======
 	c2_port->mem = pci_zalloc_consistent(c2dev->pcidev, c2_port->mem_size,
 					     &c2_port->dma);
@@ -618,8 +623,11 @@ static int c2_up(struct net_device *netdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(c2_port->mem, 0, c2_port->mem_size);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Create the Rx host descriptor ring */
@@ -1091,6 +1099,10 @@ static int c2_probe(struct pci_dev *pcidev, const struct pci_device_id *ent)
 	/* Initialize network device */
 	if ((netdev = c2_devinit(c2dev, mmio_regs)) == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 >>>>>>> v3.18
@@ -1164,7 +1176,12 @@ static int c2_probe(struct pci_dev *pcidev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c2_register_device(c2dev))
+=======
+	ret = c2_register_device(c2dev);
+	if (ret)
+>>>>>>> v3.18
 =======
 	ret = c2_register_device(c2dev);
 	if (ret)

@@ -131,7 +131,11 @@ csum_partial_cfu_aligned(const unsigned long __user *src, unsigned long *dst,
 		checksum += carry;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) *errp = err;
+=======
+	if (err && errp) *errp = err;
+>>>>>>> v3.18
 =======
 	if (err && errp) *errp = err;
 >>>>>>> v3.18
@@ -190,7 +194,11 @@ csum_partial_cfu_dest_aligned(const unsigned long __user *src,
 		checksum += carry;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) *errp = err;
+=======
+	if (err && errp) *errp = err;
+>>>>>>> v3.18
 =======
 	if (err && errp) *errp = err;
 >>>>>>> v3.18
@@ -251,7 +259,11 @@ csum_partial_cfu_src_aligned(const unsigned long __user *src,
 out:
 	checksum += carry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) *errp = err;
+=======
+	if (err && errp) *errp = err;
+>>>>>>> v3.18
 =======
 	if (err && errp) *errp = err;
 >>>>>>> v3.18
@@ -338,7 +350,11 @@ csum_partial_cfu_unaligned(const unsigned long __user * src,
 		checksum += carry;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) *errp = err;
+=======
+	if (err && errp) *errp = err;
+>>>>>>> v3.18
 =======
 	if (err && errp) *errp = err;
 >>>>>>> v3.18
@@ -355,12 +371,18 @@ csum_partial_copy_from_user(const void __user *src, void *dst, int len,
 
 	if (len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (!access_ok(VERIFY_READ, src, len)) {
 			if (errp) *errp = -EFAULT;
 			memset(dst, 0, len);
 			return sum;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!doff) {
 			if (!soff)
@@ -398,9 +420,12 @@ __wsum
 csum_partial_copy_nocheck(const void *src, void *dst, int len, __wsum sum)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return csum_partial_copy_from_user((__force const void __user *)src,
 			dst, len, sum, NULL);
 =======
+=======
+>>>>>>> v3.18
 	__wsum checksum;
 	mm_segment_t oldfs = get_fs();
 	set_fs(KERNEL_DS);
@@ -408,5 +433,8 @@ csum_partial_copy_nocheck(const void *src, void *dst, int len, __wsum sum)
 						dst, len, sum, NULL);
 	set_fs(oldfs);
 	return checksum;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

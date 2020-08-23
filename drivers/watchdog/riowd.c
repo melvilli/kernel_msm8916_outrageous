@@ -11,7 +11,10 @@
 #include <linux/fs.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/miscdevice.h>
@@ -187,7 +190,11 @@ static int riowd_probe(struct platform_device *op)
 
 	err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = kzalloc(sizeof(*p), GFP_KERNEL);
+=======
+	p = devm_kzalloc(&op->dev, sizeof(*p), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	p = devm_kzalloc(&op->dev, sizeof(*p), GFP_KERNEL);
 >>>>>>> v3.18
@@ -200,7 +207,11 @@ static int riowd_probe(struct platform_device *op)
 	if (!p->regs) {
 		pr_err("Cannot map registers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -218,7 +229,11 @@ static int riowd_probe(struct platform_device *op)
 		riowd_timeout, p->regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, p);
+=======
+	platform_set_drvdata(op, p);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, p);
 >>>>>>> v3.18
@@ -229,9 +244,12 @@ out_iounmap:
 	of_iounmap(&op->resource[0], p->regs, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free:
 	kfree(p);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -241,16 +259,22 @@ out:
 static int riowd_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct riowd *p = dev_get_drvdata(&op->dev);
 
 	misc_deregister(&riowd_miscdev);
 	of_iounmap(&op->resource[0], p->regs, 2);
 	kfree(p);
 =======
+=======
+>>>>>>> v3.18
 	struct riowd *p = platform_get_drvdata(op);
 
 	misc_deregister(&riowd_miscdev);
 	of_iounmap(&op->resource[0], p->regs, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

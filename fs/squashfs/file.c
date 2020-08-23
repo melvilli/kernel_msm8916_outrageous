@@ -371,6 +371,7 @@ static int read_blocklist(struct inode *inode, int index, u64 *block)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int squashfs_readpage(struct file *file, struct page *page)
 {
@@ -443,6 +444,8 @@ static int squashfs_readpage(struct file *file, struct page *page)
 		offset = squashfs_i(inode)->fragment_offset;
 	}
 =======
+=======
+>>>>>>> v3.18
 /* Copy data into page cache  */
 void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
 	int bytes, int offset)
@@ -452,6 +455,9 @@ void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
 	void *pageaddr;
 	int i, mask = (1 << (msblk->block_log - PAGE_CACHE_SHIFT)) - 1;
 	int start_index = page->index & ~mask, end_index = start_index | mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -464,7 +470,11 @@ void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
 			bytes -= PAGE_CACHE_SIZE, offset += PAGE_CACHE_SIZE) {
 		struct page *push_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int avail = sparse ? 0 : min_t(int, bytes, PAGE_CACHE_SIZE);
+=======
+		int avail = buffer ? min_t(int, bytes, PAGE_CACHE_SIZE) : 0;
+>>>>>>> v3.18
 =======
 		int avail = buffer ? min_t(int, bytes, PAGE_CACHE_SIZE) : 0;
 >>>>>>> v3.18
@@ -492,12 +502,15 @@ skip_page:
 			page_cache_release(push_page);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!sparse)
 		squashfs_cache_put(buffer);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 }
 
 /* Read datablock stored packed inside a fragment (tail-end packed block) */
@@ -567,6 +580,9 @@ static int squashfs_readpage(struct file *file, struct page *page)
 
 	if (!res)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 error_out:

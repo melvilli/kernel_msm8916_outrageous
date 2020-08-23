@@ -3,6 +3,10 @@
  *
  * Copyright (c) 2009 Magnus Damm
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Glider bvba
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Glider bvba
 >>>>>>> v3.18
@@ -18,20 +22,27 @@
 #include <linux/completion.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dma-mapping.h>
 #include <linux/dmaengine.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
@@ -81,6 +92,8 @@ struct sh_msiof_spi_priv {
 #define STR_TEOF  (1 << 23)
 #define STR_REOF  (1 << 7)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
@@ -238,6 +251,9 @@ struct sh_msiof_spi_priv {
 #define IER_RFUDFE	0x00000010 /* Receive FIFO Underflow Enable */
 #define IER_RFOVFE	0x00000008 /* Receive FIFO Overflow Enable */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u32 sh_msiof_read(struct sh_msiof_spi_priv *p, int reg_offs)
@@ -303,6 +319,7 @@ static struct {
 	unsigned short scr;
 } const sh_msiof_spi_clk_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 1, 0x0007 },
 	{ 2, 0x0000 },
 	{ 4, 0x0001 },
@@ -320,6 +337,8 @@ static void sh_msiof_spi_set_clk_regs(struct sh_msiof_spi_priv *p,
 				      unsigned long parent_rate,
 				      unsigned long spi_hz)
 =======
+=======
+>>>>>>> v3.18
 	{ 1,	SCR_BRPS( 1) | SCR_BRDV_DIV_1 },
 	{ 2,	SCR_BRPS( 1) | SCR_BRDV_DIV_2 },
 	{ 4,	SCR_BRPS( 1) | SCR_BRDV_DIV_4 },
@@ -335,6 +354,9 @@ static void sh_msiof_spi_set_clk_regs(struct sh_msiof_spi_priv *p,
 
 static void sh_msiof_spi_set_clk_regs(struct sh_msiof_spi_priv *p,
 				      unsigned long parent_rate, u32 spi_hz)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long div = 1024;
@@ -342,7 +364,11 @@ static void sh_msiof_spi_set_clk_regs(struct sh_msiof_spi_priv *p,
 
 	if (!WARN_ON(!spi_hz || !parent_rate))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		div = parent_rate / spi_hz;
+=======
+		div = DIV_ROUND_UP(parent_rate, spi_hz);
+>>>>>>> v3.18
 =======
 		div = DIV_ROUND_UP(parent_rate, spi_hz);
 >>>>>>> v3.18
@@ -358,7 +384,12 @@ static void sh_msiof_spi_set_clk_regs(struct sh_msiof_spi_priv *p,
 
 	sh_msiof_write(p, TSCR, sh_msiof_spi_clk_table[k].scr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sh_msiof_write(p, RSCR, sh_msiof_spi_clk_table[k].scr);
+=======
+	if (!(p->chipdata->master_flags & SPI_MASTER_MUST_TX))
+		sh_msiof_write(p, RSCR, sh_msiof_spi_clk_table[k].scr);
+>>>>>>> v3.18
 =======
 	if (!(p->chipdata->master_flags & SPI_MASTER_MUST_TX))
 		sh_msiof_write(p, RSCR, sh_msiof_spi_clk_table[k].scr);
@@ -368,7 +399,11 @@ static void sh_msiof_spi_set_clk_regs(struct sh_msiof_spi_priv *p,
 static void sh_msiof_spi_set_pin_regs(struct sh_msiof_spi_priv *p,
 				      u32 cpol, u32 cpha,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      u32 tx_hi_z, u32 lsb_first)
+=======
+				      u32 tx_hi_z, u32 lsb_first, u32 cs_high)
+>>>>>>> v3.18
 =======
 				      u32 tx_hi_z, u32 lsb_first, u32 cs_high)
 >>>>>>> v3.18
@@ -384,6 +419,7 @@ static void sh_msiof_spi_set_pin_regs(struct sh_msiof_spi_priv *p,
 	 *    1    1         11     11    1    1
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sh_msiof_write(p, FCTR, 0);
 	sh_msiof_write(p, TMDR1, 0xe2000005 | (lsb_first << 24));
 	sh_msiof_write(p, RMDR1, 0x22000005 | (lsb_first << 24));
@@ -398,6 +434,8 @@ static void sh_msiof_spi_set_pin_regs(struct sh_msiof_spi_priv *p,
 	tmp |= edge << 26; /* REDG */
 	tmp |= (tx_hi_z ? 2 : 0) << 22; /* TXDIZ */
 =======
+=======
+>>>>>>> v3.18
 	tmp = MDR1_SYNCMD_SPI | 1 << MDR1_FLD_SHIFT | MDR1_XXSTP;
 	tmp |= !cs_high << MDR1_SYNCAC_SHIFT;
 	tmp |= lsb_first << MDR1_BITLSB_SHIFT;
@@ -417,6 +455,9 @@ static void sh_msiof_spi_set_pin_regs(struct sh_msiof_spi_priv *p,
 	tmp |= edge << CTR_TEDG_SHIFT;
 	tmp |= edge << CTR_REDG_SHIFT;
 	tmp |= tx_hi_z ? CTR_TXDIZ_HIZ : CTR_TXDIZ_LOW;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sh_msiof_write(p, CTR, tmp);
 }
@@ -425,6 +466,7 @@ static void sh_msiof_spi_set_mode_regs(struct sh_msiof_spi_priv *p,
 				       const void *tx_buf, void *rx_buf,
 				       u32 bits, u32 words)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 dr2 = ((bits - 1) << 24) | ((words - 1) << 16);
 
@@ -438,6 +480,8 @@ static void sh_msiof_spi_set_mode_regs(struct sh_msiof_spi_priv *p,
 
 	sh_msiof_write(p, IER, STR_TEOF | STR_REOF);
 =======
+=======
+>>>>>>> v3.18
 	u32 dr2 = MDR2_BITLEN1(bits) | MDR2_WDLEN1(words);
 
 	if (tx_buf || (p->chipdata->master_flags & SPI_MASTER_MUST_TX))
@@ -447,6 +491,9 @@ static void sh_msiof_spi_set_mode_regs(struct sh_msiof_spi_priv *p,
 
 	if (rx_buf)
 		sh_msiof_write(p, RMDR2, dr2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -596,6 +643,7 @@ static void sh_msiof_spi_read_fifo_s32u(struct sh_msiof_spi_priv *p,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_msiof_spi_bits(struct spi_device *spi, struct spi_transfer *t)
 {
 	int bits;
@@ -667,6 +715,8 @@ static void sh_msiof_spi_chipselect(struct spi_device *spi, int is_on)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 static int sh_msiof_spi_setup(struct spi_device *spi)
 {
 	struct device_node	*np = spi->master->dev.of_node;
@@ -740,6 +790,9 @@ static int sh_msiof_spi_stop(struct sh_msiof_spi_priv *p, void *rx_buf)
 		ret = sh_msiof_modify_ctr_wait(p, CTR_TSCKE, 0);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -764,21 +817,28 @@ static int sh_msiof_spi_txrx_once(struct sh_msiof_spi_priv *p,
 	fifo_shift = 32 - bits;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* setup msiof transfer mode registers */
 	sh_msiof_spi_set_mode_regs(p, tx_buf, rx_buf, bits, words);
 =======
+=======
+>>>>>>> v3.18
 	/* default FIFO watermarks for PIO */
 	sh_msiof_write(p, FCTR, 0);
 
 	/* setup msiof transfer mode registers */
 	sh_msiof_spi_set_mode_regs(p, tx_buf, rx_buf, bits, words);
 	sh_msiof_write(p, IER, IER_TEOFE | IER_REOFE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* write tx fifo */
 	if (tx_buf)
 		tx_fifo(p, tx_buf, words, fifo_shift);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* setup clock and rx/tx signals */
 	ret = sh_msiof_modify_ctr_wait(p, 0, CTR_TSCKE);
@@ -797,6 +857,8 @@ static int sh_msiof_spi_txrx_once(struct sh_msiof_spi_priv *p,
 	/* wait for tx fifo to be emptied / rx fifo to be filled */
 	wait_for_completion(&p->done);
 =======
+=======
+>>>>>>> v3.18
 	reinit_completion(&p->done);
 
 	ret = sh_msiof_spi_start(p, rx_buf);
@@ -812,6 +874,9 @@ static int sh_msiof_spi_txrx_once(struct sh_msiof_spi_priv *p,
 		ret = -ETIMEDOUT;
 		goto stop_reset;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* read rx fifo */
@@ -821,6 +886,7 @@ static int sh_msiof_spi_txrx_once(struct sh_msiof_spi_priv *p,
 	/* clear status bits */
 	sh_msiof_reset_str(p);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* shut down frame, tx/tx and clock signals */
 	ret = sh_msiof_modify_ctr_wait(p, CTR_TFSE, 0);
@@ -832,27 +898,39 @@ static int sh_msiof_spi_txrx_once(struct sh_msiof_spi_priv *p,
 		dev_err(&p->pdev->dev, "failed to shut down hardware\n");
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	ret = sh_msiof_spi_stop(p, rx_buf);
 	if (ret) {
 		dev_err(&p->pdev->dev, "failed to shut down hardware\n");
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return words;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  err:
 =======
+=======
+>>>>>>> v3.18
 stop_reset:
 	sh_msiof_reset_str(p);
 	sh_msiof_spi_stop(p, rx_buf);
 stop_ier:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sh_msiof_write(p, IER, 0);
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sh_msiof_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 {
@@ -870,6 +948,8 @@ static int sh_msiof_spi_txrx(struct spi_device *spi, struct spi_transfer *t)
 
 	if (bits <= 8 && t->len > 15 && !(t->len & 3)) {
 =======
+=======
+>>>>>>> v3.18
 static void sh_msiof_dma_complete(void *arg)
 {
 	struct sh_msiof_spi_priv *p = arg;
@@ -1096,6 +1176,9 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 	}
 
 	if (bits <= 8 && len > 15 && !(len & 3)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bits = 32;
 		swab = true;
@@ -1111,7 +1194,11 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 	} else if (bits <= 16) {
 		bytes_per_word = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((unsigned long)t->tx_buf & 0x01)
+=======
+		if ((unsigned long)tx_buf & 0x01)
+>>>>>>> v3.18
 =======
 		if ((unsigned long)tx_buf & 0x01)
 >>>>>>> v3.18
@@ -1120,7 +1207,11 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 			tx_fifo = sh_msiof_spi_write_fifo_16;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((unsigned long)t->rx_buf & 0x01)
+=======
+		if ((unsigned long)rx_buf & 0x01)
+>>>>>>> v3.18
 =======
 		if ((unsigned long)rx_buf & 0x01)
 >>>>>>> v3.18
@@ -1130,7 +1221,11 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 	} else if (swab) {
 		bytes_per_word = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((unsigned long)t->tx_buf & 0x03)
+=======
+		if ((unsigned long)tx_buf & 0x03)
+>>>>>>> v3.18
 =======
 		if ((unsigned long)tx_buf & 0x03)
 >>>>>>> v3.18
@@ -1139,7 +1234,11 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 			tx_fifo = sh_msiof_spi_write_fifo_s32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((unsigned long)t->rx_buf & 0x03)
+=======
+		if ((unsigned long)rx_buf & 0x03)
+>>>>>>> v3.18
 =======
 		if ((unsigned long)rx_buf & 0x03)
 >>>>>>> v3.18
@@ -1149,7 +1248,11 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 	} else {
 		bytes_per_word = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((unsigned long)t->tx_buf & 0x03)
+=======
+		if ((unsigned long)tx_buf & 0x03)
+>>>>>>> v3.18
 =======
 		if ((unsigned long)tx_buf & 0x03)
 >>>>>>> v3.18
@@ -1158,7 +1261,11 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 			tx_fifo = sh_msiof_spi_write_fifo_32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((unsigned long)t->rx_buf & 0x03)
+=======
+		if ((unsigned long)rx_buf & 0x03)
+>>>>>>> v3.18
 =======
 		if ((unsigned long)rx_buf & 0x03)
 >>>>>>> v3.18
@@ -1167,6 +1274,7 @@ static int sh_msiof_transfer_one(struct spi_master *master,
 			rx_fifo = sh_msiof_spi_read_fifo_32;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* setup clocks (clock already enabled in chipselect()) */
 	sh_msiof_spi_set_clk_regs(p, clk_get_rate(p->clk),
@@ -1201,6 +1309,8 @@ static u32 sh_msiof_spi_txrx_word(struct spi_device *spi, unsigned nsecs,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	/* transfer in fifo sized chunks */
 	words = len / bytes_per_word;
 
@@ -1244,12 +1354,16 @@ static const struct of_device_id sh_msiof_match[] = {
 };
 MODULE_DEVICE_TABLE(of, sh_msiof_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct sh_msiof_spi_info *sh_msiof_spi_parse_dt(struct device *dev)
 {
 	struct sh_msiof_spi_info *info;
 	struct device_node *np = dev->of_node;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 num_cs = 0;
 
@@ -1259,11 +1373,16 @@ static struct sh_msiof_spi_info *sh_msiof_spi_parse_dt(struct device *dev)
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	u32 num_cs = 1;
 
 	info = devm_kzalloc(dev, sizeof(struct sh_msiof_spi_info), GFP_KERNEL);
 	if (!info)
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Parse the MSIOF properties */
@@ -1285,7 +1404,10 @@ static struct sh_msiof_spi_info *sh_msiof_spi_parse_dt(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct dma_chan *sh_msiof_request_dma_chan(struct device *dev,
 	enum dma_transfer_direction dir, unsigned int id, dma_addr_t port_addr)
 {
@@ -1422,12 +1544,19 @@ static void sh_msiof_release_dma(struct sh_msiof_spi_priv *p)
 	dma_release_channel(master->dma_tx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sh_msiof_spi_probe(struct platform_device *pdev)
 {
 	struct resource	*r;
 	struct spi_master *master;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct of_device_id *of_id;
+>>>>>>> v3.18
 =======
 	const struct of_device_id *of_id;
 >>>>>>> v3.18
@@ -1439,8 +1568,12 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 	if (master == NULL) {
 		dev_err(&pdev->dev, "failed to allocate spi master\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto err0;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -1450,11 +1583,14 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.of_node)
 		p->info = sh_msiof_spi_parse_dt(&pdev->dev);
 	else
 		p->info = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	p->master = master;
 
 	of_id = of_match_device(sh_msiof_match, &pdev->dev);
@@ -1465,6 +1601,9 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 		p->chipdata = (const void *)pdev->id_entry->driver_data;
 		p->info = dev_get_platdata(&pdev->dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!p->info) {
@@ -1476,7 +1615,11 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 	init_completion(&p->done);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->clk = clk_get(&pdev->dev, NULL);
+=======
+	p->clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	p->clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -1486,6 +1629,7 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 		goto err1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	i = platform_get_irq(pdev, 0);
@@ -1507,6 +1651,8 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "unable to request irq\n");
 		goto err3;
 =======
+=======
+>>>>>>> v3.18
 	i = platform_get_irq(pdev, 0);
 	if (i < 0) {
 		dev_err(&pdev->dev, "cannot get platform IRQ\n");
@@ -1526,12 +1672,16 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "unable to request irq\n");
 		goto err1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	p->pdev = pdev;
 	pm_runtime_enable(&pdev->dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* The standard version of MSIOF use 64 word FIFOs */
 	p->tx_fifo_size = 64;
@@ -1543,11 +1693,17 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 	p->tx_fifo_size = p->chipdata->tx_fifo_size;
 	p->rx_fifo_size = p->chipdata->rx_fifo_size;
 >>>>>>> v3.18
+=======
+	/* Platform data may override FIFO sizes */
+	p->tx_fifo_size = p->chipdata->tx_fifo_size;
+	p->rx_fifo_size = p->chipdata->rx_fifo_size;
+>>>>>>> v3.18
 	if (p->info->tx_fifo_override)
 		p->tx_fifo_size = p->info->tx_fifo_override;
 	if (p->info->rx_fifo_override)
 		p->rx_fifo_size = p->info->rx_fifo_override;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* init master and bitbang code */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
@@ -1580,6 +1736,8 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 	spi_master_put(master);
  err0:
 =======
+=======
+>>>>>>> v3.18
 	/* init master code */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
 	master->mode_bits |= SPI_LSB_FIRST | SPI_3WIRE;
@@ -1610,6 +1768,9 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 	pm_runtime_disable(&pdev->dev);
  err1:
 	spi_master_put(master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1617,6 +1778,7 @@ static int sh_msiof_spi_probe(struct platform_device *pdev)
 static int sh_msiof_spi_remove(struct platform_device *pdev)
 {
 	struct sh_msiof_spi_priv *p = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -1657,6 +1819,8 @@ static struct dev_pm_ops sh_msiof_spi_dev_pm_ops = {
 	.runtime_resume = sh_msiof_spi_runtime_nop,
 };
 =======
+=======
+>>>>>>> v3.18
 
 	sh_msiof_release_dma(p);
 	pm_runtime_disable(&pdev->dev);
@@ -1673,21 +1837,30 @@ static struct platform_device_id spi_driver_ids[] = {
 	{},
 };
 MODULE_DEVICE_TABLE(platform, spi_driver_ids);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver sh_msiof_spi_drv = {
 	.probe		= sh_msiof_spi_probe,
 	.remove		= sh_msiof_spi_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver		= {
 		.name		= "spi_sh_msiof",
 		.owner		= THIS_MODULE,
 		.pm		= &sh_msiof_spi_dev_pm_ops,
 =======
+=======
+>>>>>>> v3.18
 	.id_table	= spi_driver_ids,
 	.driver		= {
 		.name		= "spi_sh_msiof",
 		.owner		= THIS_MODULE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.of_match_table = of_match_ptr(sh_msiof_match),
 	},

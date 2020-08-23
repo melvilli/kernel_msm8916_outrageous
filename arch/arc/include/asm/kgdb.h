@@ -32,7 +32,11 @@ static inline void arch_kgdb_breakpoint(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kgdb_trap(struct pt_regs *regs, int param);
+=======
+extern void kgdb_trap(struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 extern void kgdb_trap(struct pt_regs *regs);
 >>>>>>> v3.18
@@ -62,7 +66,11 @@ enum arc_linux_regnums {
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define kgdb_trap(regs, param)
+=======
+#define kgdb_trap(regs)
+>>>>>>> v3.18
 =======
 #define kgdb_trap(regs)
 >>>>>>> v3.18

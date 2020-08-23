@@ -35,11 +35,14 @@
 #include "tvnv17.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/device.h>
 
 #include <subdev/bios/gpio.h>
 #include <subdev/gpio.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_PARM_DESC(tv_norm, "Default TV norm.\n"
@@ -55,7 +58,11 @@ static uint32_t nv42_tv_sample_load(struct drm_encoder *encoder)
 	struct drm_device *dev = encoder->dev;
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_gpio *gpio = nouveau_gpio(drm->device);
+=======
+	struct nouveau_gpio *gpio = nvkm_gpio(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_gpio *gpio = nvkm_gpio(&drm->device);
 >>>>>>> v3.18
@@ -143,17 +150,23 @@ get_tv_detect_quirks(struct drm_device *dev, uint32_t *pin_mask)
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_object *device = drm->device;
 
 	/* Zotac FX5200 */
 	if (nv_device_match(device, 0x0322, 0x19da, 0x1035) ||
 	    nv_device_match(device, 0x0322, 0x19da, 0x2035)) {
 =======
+=======
+>>>>>>> v3.18
 	struct nvif_device *device = &drm->device;
 
 	/* Zotac FX5200 */
 	if (nv_device_match(nvkm_object(device), 0x0322, 0x19da, 0x1035) ||
 	    nv_device_match(nvkm_object(device), 0x0322, 0x19da, 0x2035)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*pin_mask = 0xc;
 		return false;
@@ -161,7 +174,11 @@ get_tv_detect_quirks(struct drm_device *dev, uint32_t *pin_mask)
 
 	/* MSI nForce2 IGP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device_match(device, 0x01f0, 0x1462, 0x5710)) {
+=======
+	if (nv_device_match(nvkm_object(device), 0x01f0, 0x1462, 0x5710)) {
+>>>>>>> v3.18
 =======
 	if (nv_device_match(nvkm_object(device), 0x01f0, 0x1462, 0x5710)) {
 >>>>>>> v3.18
@@ -187,8 +204,13 @@ nv17_tv_detect(struct drm_encoder *encoder, struct drm_connector *connector)
 
 	if (reliable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nv_device(drm->device)->chipset == 0x42 ||
 		    nv_device(drm->device)->chipset == 0x43)
+=======
+		if (drm->device.info.chipset == 0x42 ||
+		    drm->device.info.chipset == 0x43)
+>>>>>>> v3.18
 =======
 		if (drm->device.info.chipset == 0x42 ||
 		    drm->device.info.chipset == 0x43)
@@ -400,7 +422,11 @@ static void  nv17_tv_dpms(struct drm_encoder *encoder, int mode)
 	struct drm_device *dev = encoder->dev;
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_gpio *gpio = nouveau_gpio(drm->device);
+=======
+	struct nouveau_gpio *gpio = nvkm_gpio(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_gpio *gpio = nvkm_gpio(&drm->device);
 >>>>>>> v3.18
@@ -477,7 +503,11 @@ static void nv17_tv_prepare(struct drm_encoder *encoder)
 	dacclk = (NVReadRAMDAC(dev, 0, dacclk_off) & ~0x30) | 0x1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type == NV_40)
+=======
+	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
 >>>>>>> v3.18
@@ -538,7 +568,11 @@ static void nv17_tv_mode_set(struct drm_encoder *encoder,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nv_device(drm->device)->card_type >= NV_30) {
+=======
+		if (drm->device.info.family >= NV_DEVICE_INFO_V0_RANKINE) {
+>>>>>>> v3.18
 =======
 		if (drm->device.info.family >= NV_DEVICE_INFO_V0_RANKINE) {
 >>>>>>> v3.18
@@ -637,7 +671,11 @@ static void nv17_tv_commit(struct drm_encoder *encoder)
 
 	/* This could use refinement for flatpanels, but it should work */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset < 0x44)
+=======
+	if (drm->device.info.chipset < 0x44)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset < 0x44)
 >>>>>>> v3.18
@@ -653,8 +691,12 @@ static void nv17_tv_commit(struct drm_encoder *encoder)
 
 	NV_INFO(drm, "Output %s is running on CRTC %d using output %c\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_get_connector_name(
 			&nouveau_encoder_connector_get(nv_encoder)->base),
+=======
+		nouveau_encoder_connector_get(nv_encoder)->base.name,
+>>>>>>> v3.18
 =======
 		nouveau_encoder_connector_get(nv_encoder)->base.name,
 >>>>>>> v3.18

@@ -782,7 +782,10 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ocfs2_free_local_alloc_bits(struct ocfs2_super *osb,
 				handle_t *handle,
 				struct ocfs2_alloc_context *ac,
@@ -825,6 +828,9 @@ bail:
 	return status;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 ocfs2_local_alloc_count_bits(struct ocfs2_dinode *alloc)
 {
@@ -1128,7 +1134,11 @@ static int ocfs2_local_alloc_reserve_for_window(struct ocfs2_super *osb,
 
 retry_enospc:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(*ac)->ac_bits_wanted = osb->local_alloc_default_bits;
+=======
+	(*ac)->ac_bits_wanted = osb->local_alloc_bits;
+>>>>>>> v3.18
 =======
 	(*ac)->ac_bits_wanted = osb->local_alloc_bits;
 >>>>>>> v3.18
@@ -1204,7 +1214,11 @@ retry_enospc:
 			goto bail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ac->ac_bits_wanted = osb->local_alloc_default_bits;
+=======
+		ac->ac_bits_wanted = osb->local_alloc_bits;
+>>>>>>> v3.18
 =======
 		ac->ac_bits_wanted = osb->local_alloc_bits;
 >>>>>>> v3.18

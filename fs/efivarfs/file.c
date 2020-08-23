@@ -11,7 +11,10 @@
 #include <linux/fs.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mount.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -26,7 +29,11 @@ static ssize_t efivarfs_file_write(struct file *file,
 	struct inode *inode = file->f_mapping->host;
 	unsigned long datasize = count - sizeof(attributes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t bytes = 0;
+=======
+	ssize_t bytes;
+>>>>>>> v3.18
 =======
 	ssize_t bytes;
 >>>>>>> v3.18
@@ -42,6 +49,7 @@ static ssize_t efivarfs_file_write(struct file *file,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = kmalloc(datasize, GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -50,6 +58,11 @@ static ssize_t efivarfs_file_write(struct file *file,
 		bytes = -EFAULT;
 		goto out;
 	}
+=======
+	data = memdup_user(userbuf + sizeof(attributes), datasize);
+	if (IS_ERR(data))
+		return PTR_ERR(data);
+>>>>>>> v3.18
 =======
 	data = memdup_user(userbuf + sizeof(attributes), datasize);
 	if (IS_ERR(data))
@@ -123,6 +136,7 @@ out_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 efivarfs_ioc_getxflags(struct file *file, void __user *arg)
 {
@@ -194,13 +208,18 @@ efivarfs_file_ioctl(struct file *file, unsigned int cmd, unsigned long p)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 const struct file_operations efivarfs_file_operations = {
 	.open	= simple_open,
 	.read	= efivarfs_file_read,
 	.write	= efivarfs_file_write,
 	.llseek	= no_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.unlocked_ioctl = efivarfs_file_ioctl,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

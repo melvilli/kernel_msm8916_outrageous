@@ -120,7 +120,10 @@ static int rc5t583_regulator_probe(struct platform_device *pdev)
 	struct rc5t583 *rc5t583 = dev_get_drvdata(pdev->dev.parent);
 	struct rc5t583_platform_data *pdata = dev_get_platdata(rc5t583->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_init_data *reg_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regulator_config config = { };
@@ -139,6 +142,7 @@ static int rc5t583_regulator_probe(struct platform_device *pdev)
 	regs = devm_kzalloc(&pdev->dev, RC5T583_REGULATOR_MAX *
 			sizeof(struct rc5t583_regulator), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!regs) {
 		dev_err(&pdev->dev, "Memory allocation failed exiting..\n");
 		return -ENOMEM;
@@ -153,11 +157,16 @@ static int rc5t583_regulator_probe(struct platform_device *pdev)
 			continue;
 
 =======
+=======
+>>>>>>> v3.18
 	if (!regs)
 		return -ENOMEM;
 
 
 	for (id = 0; id < RC5T583_REGULATOR_MAX; ++id) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg = &regs[id];
 		ri = &rc5t583_reg_info[id];
@@ -181,6 +190,7 @@ static int rc5t583_regulator_probe(struct platform_device *pdev)
 skip_ext_pwr_config:
 		config.dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config.init_data = reg_data;
 		config.driver_data = reg;
 		config.regmap = rc5t583->regmap;
@@ -192,6 +202,8 @@ skip_ext_pwr_config:
 			ret = PTR_ERR(rdev);
 			goto clean_exit;
 =======
+=======
+>>>>>>> v3.18
 		config.init_data = pdata->reg_init_data[id];
 		config.driver_data = reg;
 		config.regmap = rc5t583->regmap;
@@ -201,12 +213,16 @@ skip_ext_pwr_config:
 			dev_err(&pdev->dev, "Failed to register regulator %s\n",
 						ri->desc.name);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		reg->rdev = rdev;
 	}
 	platform_set_drvdata(pdev, regs);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 clean_exit:
@@ -226,6 +242,8 @@ static int rc5t583_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver rc5t583_regulator_driver = {
@@ -235,7 +253,10 @@ static struct platform_driver rc5t583_regulator_driver = {
 	},
 	.probe		= rc5t583_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= rc5t583_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

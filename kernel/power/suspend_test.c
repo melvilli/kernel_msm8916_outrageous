@@ -23,6 +23,11 @@
 
 static unsigned long suspend_test_start_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 test_repeat_count_max = 1;
+static u32 test_repeat_count_current;
+>>>>>>> v3.18
 =======
 static u32 test_repeat_count_max = 1;
 static u32 test_repeat_count_current;
@@ -80,6 +85,10 @@ static void __init test_wakealarm(struct rtc_device *rtc, suspend_state_t state)
 
 	/* this may fail if the RTC hasn't been initialized */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+repeat:
+>>>>>>> v3.18
 =======
 repeat:
 >>>>>>> v3.18
@@ -102,7 +111,11 @@ repeat:
 
 	if (state == PM_SUSPEND_MEM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(info_test, pm_states[state].label);
+=======
+		printk(info_test, pm_states[state]);
+>>>>>>> v3.18
 =======
 		printk(info_test, pm_states[state]);
 >>>>>>> v3.18
@@ -112,6 +125,7 @@ repeat:
 	}
 	if (state == PM_SUSPEND_STANDBY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(info_test, pm_states[state].label);
 		status = pm_suspend(state);
 	}
@@ -119,6 +133,8 @@ repeat:
 		printk(err_suspend, status);
 
 =======
+=======
+>>>>>>> v3.18
 		printk(info_test, pm_states[state]);
 		status = pm_suspend(state);
 		if (status < 0)
@@ -136,6 +152,9 @@ repeat:
 	if (test_repeat_count_current < test_repeat_count_max)
 		goto repeat;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Some platforms can't detect that the alarm triggered the
 	 * wakeup, or (accordingly) disable it after it afterwards.
@@ -163,7 +182,11 @@ static int __init has_wakealarm(struct device *dev, const void *data)
  * we can't know which states really work on this particular system.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static suspend_state_t test_state __initdata = PM_SUSPEND_ON;
+=======
+static const char *test_state_label __initdata;
+>>>>>>> v3.18
 =======
 static const char *test_state_label __initdata;
 >>>>>>> v3.18
@@ -173,6 +196,7 @@ static char warn_bad_state[] __initdata =
 
 static int __init setup_test_suspend(char *value)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	suspend_state_t i;
 
@@ -186,6 +210,8 @@ static int __init setup_test_suspend(char *value)
 
 	printk(warn_bad_state, value);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	char *repeat;
 	char *suspend_type;
@@ -209,6 +235,9 @@ static int __init setup_test_suspend(char *value)
 		}
 
 	printk(warn_bad_state, suspend_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -222,6 +251,7 @@ static int __init test_suspend(void)
 	struct rtc_device	*rtc = NULL;
 	struct device		*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* PM is initialized by now; is that state testable? */
 	if (test_state == PM_SUSPEND_ON)
@@ -230,6 +260,8 @@ static int __init test_suspend(void)
 		printk(warn_bad_state, pm_states[test_state].label);
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 	suspend_state_t test_state;
 
 	/* PM is initialized by now; is that state testable? */
@@ -245,11 +277,15 @@ static int __init test_suspend(void)
 	if (test_state == PM_SUSPEND_MAX) {
 		printk(warn_bad_state, test_state_label);
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* RTCs have initialized by now too ... can we use one? */
 	dev = class_find_device(rtc_class, NULL, NULL, has_wakealarm);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev) {
 		rtc = rtc_class_open(dev_name(dev));
@@ -259,11 +295,16 @@ static int __init test_suspend(void)
 		printk(warn_no_rtc);
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 	if (dev)
 		rtc = rtc_class_open(dev_name(dev));
 	if (!rtc) {
 		printk(warn_no_rtc);
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -271,7 +312,10 @@ static int __init test_suspend(void)
 	test_wakealarm(rtc, test_state);
 	rtc_class_close(rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 done:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

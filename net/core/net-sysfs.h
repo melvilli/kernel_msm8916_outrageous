@@ -2,7 +2,11 @@
 #define __NET_SYSFS_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int netdev_kobject_init(void);
+=======
+int __init netdev_kobject_init(void);
+>>>>>>> v3.18
 =======
 int __init netdev_kobject_init(void);
 >>>>>>> v3.18

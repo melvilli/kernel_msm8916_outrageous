@@ -22,15 +22,21 @@
 
 /* Watchdog resources */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ICH_RES_IO_TCO	0
 #define ICH_RES_IO_SMI	1
 #define ICH_RES_MEM_OFF	2
 #define ICH_RES_MEM_GCS	0
 =======
+=======
+>>>>>>> v3.18
 #define ICH_RES_IO_TCO		0
 #define ICH_RES_IO_SMI		1
 #define ICH_RES_MEM_OFF		2
 #define ICH_RES_MEM_GCS_PMC	0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* GPIO resources */
@@ -38,6 +44,7 @@
 #define ICH_RES_GPE0	1
 
 /* GPIO compatibility */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ICH_I3100_GPIO		0x401
 #define ICH_V5_GPIO		0x501
@@ -47,6 +54,8 @@
 #define ICH_V10CORP_GPIO	0xa01
 #define ICH_V10CONS_GPIO	0xa11
 =======
+=======
+>>>>>>> v3.18
 enum {
 	ICH_I3100_GPIO,
 	ICH_V5_GPIO,
@@ -57,6 +66,9 @@ enum {
 	ICH_V10CONS_GPIO,
 	AVOTON_GPIO,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct lpc_ich_info {

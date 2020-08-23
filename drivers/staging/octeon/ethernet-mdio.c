@@ -117,8 +117,11 @@ int cvm_oct_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cvm_oct_adjust_link(struct net_device *dev)
 =======
+=======
+>>>>>>> v3.18
 static void cvm_oct_note_carrier(struct octeon_ethernet *priv,
 				 cvmx_helper_link_info_t li)
 {
@@ -147,6 +150,9 @@ void cvm_oct_set_carrier(struct octeon_ethernet *priv,
 }
 
 void cvm_oct_adjust_link(struct net_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct octeon_ethernet *priv = netdev_priv(dev);
@@ -158,6 +164,7 @@ void cvm_oct_adjust_link(struct net_device *dev)
 		link_info.s.link_up = priv->last_link ? 1 : 0;
 		link_info.s.full_duplex = priv->phydev->duplex ? 1 : 0;
 		link_info.s.speed = priv->phydev->speed;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cvmx_helper_link_set( priv->port, link_info);
 		if (priv->last_link) {
@@ -184,6 +191,8 @@ void cvm_oct_adjust_link(struct net_device *dev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 		cvmx_helper_link_set(priv->port, link_info);
 		cvm_oct_note_carrier(priv, link_info);
@@ -210,6 +219,9 @@ int cvm_oct_common_stop(struct net_device *dev)
 	}
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -226,17 +238,23 @@ int cvm_oct_phy_setup_device(struct net_device *dev)
 
 	if (!priv->of_node)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	phy_node = of_parse_phandle(priv->of_node, "phy-handle", 0);
 	if (!phy_node)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto no_phy;
 
 	phy_node = of_parse_phandle(priv->of_node, "phy-handle", 0);
 	if (!phy_node)
 		goto no_phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	priv->phydev = of_phy_connect(dev, phy_node, cvm_oct_adjust_link, 0,
@@ -250,12 +268,18 @@ int cvm_oct_phy_setup_device(struct net_device *dev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 no_phy:
 	/* If there is no phy, assume a direct MAC connection and that
 	 * the link is up.
 	 */
 	netif_carrier_on(dev);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

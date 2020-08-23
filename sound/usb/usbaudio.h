@@ -41,6 +41,10 @@ struct snd_usb_audio {
 	unsigned int shutdown:1;
 	unsigned int probing:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int in_pm:1;
+>>>>>>> v3.18
 =======
 	unsigned int in_pm:1;
 >>>>>>> v3.18
@@ -60,7 +64,10 @@ struct snd_usb_audio {
 
 	int setup;			/* from the 'device_setup' module param */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nrpacks;			/* from the 'nrpacks' module param */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool autoclock;			/* from the 'autoclock' module param */
@@ -69,7 +76,10 @@ struct snd_usb_audio {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define usb_audio_err(chip, fmt, args...) \
 	dev_err(&(chip)->dev->dev, fmt, ##args)
 #define usb_audio_warn(chip, fmt, args...) \
@@ -79,6 +89,9 @@ struct snd_usb_audio {
 #define usb_audio_dbg(chip, fmt, args...) \
 	dev_dbg(&(chip)->dev->dev, fmt, ##args)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Information about devices with broken descriptors
@@ -92,15 +105,21 @@ enum quirk_type {
 	QUIRK_IGNORE_INTERFACE,
 	QUIRK_COMPOSITE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QUIRK_MIDI_STANDARD_INTERFACE,
 	QUIRK_MIDI_FIXED_ENDPOINT,
 	QUIRK_MIDI_YAMAHA,
 =======
+=======
+>>>>>>> v3.18
 	QUIRK_AUTODETECT,
 	QUIRK_MIDI_STANDARD_INTERFACE,
 	QUIRK_MIDI_FIXED_ENDPOINT,
 	QUIRK_MIDI_YAMAHA,
 	QUIRK_MIDI_ROLAND,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	QUIRK_MIDI_MIDIMAN,
 	QUIRK_MIDI_NOVATION,
@@ -111,7 +130,10 @@ enum quirk_type {
 	QUIRK_MIDI_US122L,
 	QUIRK_MIDI_FTDI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QUIRK_MIDI_CH345,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	QUIRK_AUDIO_STANDARD_INTERFACE,

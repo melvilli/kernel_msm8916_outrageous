@@ -14,7 +14,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -303,6 +306,7 @@ static void da9034_touch_close(struct input_dev *dev)
 static int da9034_touch_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da9034_touch_pdata *pdata = pdev->dev.platform_data;
 	struct da9034_touch *touch;
 	struct input_dev *input_dev;
@@ -311,6 +315,8 @@ static int da9034_touch_probe(struct platform_device *pdev)
 	touch = kzalloc(sizeof(struct da9034_touch), GFP_KERNEL);
 	if (touch == NULL) {
 =======
+=======
+>>>>>>> v3.18
 	struct da9034_touch_pdata *pdata = dev_get_platdata(&pdev->dev);
 	struct da9034_touch *touch;
 	struct input_dev *input_dev;
@@ -319,6 +325,9 @@ static int da9034_touch_probe(struct platform_device *pdev)
 	touch = devm_kzalloc(&pdev->dev, sizeof(struct da9034_touch),
 			     GFP_KERNEL);
 	if (!touch) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&pdev->dev, "failed to allocate driver data\n");
 		return -ENOMEM;
@@ -331,19 +340,26 @@ static int da9034_touch_probe(struct platform_device *pdev)
 		touch->x_inverted	= pdata->x_inverted;
 		touch->y_inverted	= pdata->y_inverted;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		/* fallback into default */
 		touch->interval_ms	= 10;
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		/* fallback into default */
 		touch->interval_ms	= 10;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_DELAYED_WORK(&touch->tsi_work, da9034_tsi_work);
 	touch->notifier.notifier_call = da9034_touch_notifier;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input_dev = input_allocate_device();
 	if (!input_dev) {
@@ -351,10 +367,15 @@ static int da9034_touch_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err_free_touch;
 =======
+=======
+>>>>>>> v3.18
 	input_dev = devm_input_allocate_device(&pdev->dev);
 	if (!input_dev) {
 		dev_err(&pdev->dev, "failed to allocate input device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -375,6 +396,7 @@ static int da9034_touch_probe(struct platform_device *pdev)
 	touch->input_dev = input_dev;
 	input_set_drvdata(input_dev, touch);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = input_register_device(input_dev);
 	if (ret)
@@ -401,6 +423,11 @@ static int da9034_touch_remove(struct platform_device *pdev)
 	if (error)
 		return error;
 >>>>>>> v3.18
+=======
+	error = input_register_device(input_dev);
+	if (error)
+		return error;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -412,7 +439,10 @@ static struct platform_driver da9034_touch_driver = {
 	},
 	.probe		= da9034_touch_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= da9034_touch_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

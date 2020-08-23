@@ -197,10 +197,13 @@ cifs_reconnect_tcon(struct cifs_tcon *tcon, int smb_command)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * FIXME: check if wsize needs updated due to negotiated smb buffer
 	 * 	  size shrinking
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atomic_inc(&tconInfoReconnectCount);
@@ -371,7 +374,10 @@ vt2_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 decode_ext_sec_blob(struct cifs_ses *ses, NEGOTIATE_RSP *pSMBr)
 {
@@ -550,6 +556,9 @@ should_set_ext_sec_flag(enum securityEnum sectype)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
@@ -559,6 +568,7 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 	int rc = 0;
 	int bytes_returned;
 	int i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct TCP_Server_Info *server;
 	u16 count;
@@ -571,6 +581,8 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 		return rc;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct TCP_Server_Info *server = ses->server;
 	u16 count;
 
@@ -579,12 +591,16 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 		return -EIO;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = smb_init(SMB_COM_NEGOTIATE, 0, NULL /* no tcon yet */ ,
 		      (void **) &pSMB, (void **) &pSMBr);
 	if (rc)
 		return rc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* if any of auth flags (ie not sign or seal) are overriden use them */
 	if (ses->overrideSecFlg & (~(CIFSSEC_MUST_SIGN | CIFSSEC_MUST_SEAL)))
@@ -607,11 +623,16 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 	else if ((secFlags & CIFSSEC_AUTH_MASK) == CIFSSEC_MAY_NTLMSSP) {
 		cifs_dbg(FYI, "NTLMSSP only mechanism, enable extended security\n");
 =======
+=======
+>>>>>>> v3.18
 	pSMB->hdr.Mid = get_next_mid(server);
 	pSMB->hdr.Flags2 |= (SMBFLG2_UNICODE | SMBFLG2_ERR_STATUS);
 
 	if (should_set_ext_sec_flag(ses->sectype)) {
 		cifs_dbg(FYI, "Requesting extended security.");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pSMB->hdr.Flags2 |= SMBFLG2_EXT_SEC;
 	}
@@ -639,6 +660,7 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 		could not negotiate a common dialect */
 		rc = -EOPNOTSUPP;
 		goto neg_err_exit;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_CIFS_WEAK_PW_HASH
 	} else if ((pSMBr->hdr.WordCount == 13)
@@ -727,10 +749,15 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 #endif /* WEAK_PW_HASH */
 		goto neg_err_exit;
 =======
+=======
+>>>>>>> v3.18
 	} else if (pSMBr->hdr.WordCount == 13) {
 		server->negflavor = CIFS_NEGFLAVOR_LANMAN;
 		rc = decode_lanman_negprot_rsp(server, pSMBr);
 		goto signing_check;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (pSMBr->hdr.WordCount != 17) {
 		/* unknown wct */
@@ -738,7 +765,12 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 		goto neg_err_exit;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* else wct == 17 NTLM */
+=======
+	/* else wct == 17, NTLM or better */
+
+>>>>>>> v3.18
 =======
 	/* else wct == 17, NTLM or better */
 
@@ -747,6 +779,7 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 	if ((server->sec_mode & SECMODE_USER) == 0)
 		cifs_dbg(FYI, "share mode security\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((server->sec_mode & SECMODE_PW_ENCRYPT) == 0)
 #ifdef CONFIG_CIFS_WEAK_PW_HASH
@@ -775,6 +808,8 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* one byte, so no need to convert this or EncryptionKeyLen from
 	   little endian */
 	server->maxReq = min_t(unsigned int, le16_to_cpu(pSMBr->MaxMpxCount),
@@ -788,7 +823,13 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 	server->timeAdj = (int)(__s16)le16_to_cpu(pSMBr->ServerTimeZone);
 	server->timeAdj *= 60;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pSMBr->EncryptionKeyLength == CIFS_CRYPTO_KEY_SIZE) {
+=======
+
+	if (pSMBr->EncryptionKeyLength == CIFS_CRYPTO_KEY_SIZE) {
+		server->negflavor = CIFS_NEGFLAVOR_UNENCAP;
+>>>>>>> v3.18
 =======
 
 	if (pSMBr->EncryptionKeyLength == CIFS_CRYPTO_KEY_SIZE) {
@@ -799,6 +840,7 @@ CIFSSMBNegotiate(const unsigned int xid, struct cifs_ses *ses)
 	} else if ((pSMBr->hdr.Flags2 & SMBFLG2_EXT_SEC ||
 			server->capabilities & CAP_EXTENDED_SECURITY) &&
 				(pSMBr->EncryptionKeyLength == 0)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* decode security blob */
 		count = get_bcc(&pSMBr->hdr);
@@ -879,6 +921,8 @@ signing_check:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		server->negflavor = CIFS_NEGFLAVOR_EXTENDED;
 		rc = decode_ext_sec_blob(ses, pSMBr);
 	} else if (server->sec_mode & SECMODE_PW_ENCRYPT) {
@@ -891,6 +935,9 @@ signing_check:
 signing_check:
 	if (!rc)
 		rc = cifs_enable_signing(server, ses->sign);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 neg_err_exit:
 	cifs_buf_release(pSMB);
@@ -1017,9 +1064,14 @@ CIFSSMBLogoff(const unsigned int xid, struct cifs_ses *ses)
 	pSMB->hdr.Mid = get_next_mid(ses->server);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server->sec_mode &
 		   (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED))
 			pSMB->hdr.Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
+=======
+	if (ses->server->sign)
+		pSMB->hdr.Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
+>>>>>>> v3.18
 =======
 	if (ses->server->sign)
 		pSMB->hdr.Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
@@ -1126,7 +1178,11 @@ CIFSSMBDelFile(const unsigned int xid, struct cifs_tcon *tcon, const char *name,
 	int bytes_returned;
 	int name_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	int remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	int remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -1176,7 +1232,11 @@ CIFSSMBRmDir(const unsigned int xid, struct cifs_tcon *tcon, const char *name,
 	int bytes_returned;
 	int name_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	int remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	int remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -1225,7 +1285,11 @@ CIFSSMBMkDir(const unsigned int xid, struct cifs_tcon *tcon, const char *name,
 	int bytes_returned;
 	int name_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	int remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	int remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -1540,6 +1604,7 @@ OldOpenRetry:
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 CIFSSMBOpen(const unsigned int xid, struct cifs_tcon *tcon,
 	    const char *fileName, const int openDisposition,
 	    const int access_flags, const int create_options, __u16 *netfid,
@@ -1639,6 +1704,8 @@ openRetry:
 	if (rc == -EAGAIN)
 		goto openRetry;
 =======
+=======
+>>>>>>> v3.18
 CIFS_open(const unsigned int xid, struct cifs_open_parms *oparms, int *oplock,
 	  FILE_ALL_INFO *buf)
 {
@@ -1757,6 +1824,9 @@ openRetry:
 	}
 
 	cifs_buf_release(req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -1767,16 +1837,22 @@ openRetry:
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 discard_remaining_data(struct TCP_Server_Info *server)
 {
 	unsigned int rfclen = get_rfc1002_length(server->smallbuf);
 	int remaining = rfclen + 4 - server->total_read;
 =======
+=======
+>>>>>>> v3.18
 cifs_readv_discard(struct TCP_Server_Info *server, struct mid_q_entry *mid)
 {
 	unsigned int rfclen = get_rfc1002_length(server->smallbuf);
 	int remaining = rfclen + 4 - server->total_read;
 	struct cifs_readdata *rdata = mid->callback_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (remaining > 0) {
@@ -1792,6 +1868,7 @@ cifs_readv_discard(struct TCP_Server_Info *server, struct mid_q_entry *mid)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -1804,6 +1881,10 @@ cifs_readv_discard(struct TCP_Server_Info *server, struct mid_q_entry *mid)
 	length = discard_remaining_data(server);
 	dequeue_mid(mid, rdata->result);
 	return length;
+=======
+	dequeue_mid(mid, rdata->result);
+	return 0;
+>>>>>>> v3.18
 =======
 	dequeue_mid(mid, rdata->result);
 	return 0;
@@ -1839,12 +1920,15 @@ cifs_readv_receive(struct TCP_Server_Info *server, struct mid_q_entry *mid)
 	server->total_read += length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (server->ops->is_status_pending &&
 	    server->ops->is_status_pending(buf, server, 0)) {
 		discard_remaining_data(server);
 		return -1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Was the SMB read successful? */
@@ -1916,7 +2000,10 @@ cifs_readv_receive(struct TCP_Server_Info *server, struct mid_q_entry *mid)
 
 	server->total_read += length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdata->bytes = length;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1952,8 +2039,12 @@ cifs_readv_callback(struct mid_q_entry *mid)
 	case MID_RESPONSE_RECEIVED:
 		/* result already set, check signature */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (server->sec_mode &
 		    (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED)) {
+=======
+		if (server->sign) {
+>>>>>>> v3.18
 =======
 		if (server->sign) {
 >>>>>>> v3.18
@@ -1967,8 +2058,13 @@ cifs_readv_callback(struct mid_q_entry *mid)
 		}
 		/* FIXME: should this be counted toward the initiating task? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		task_io_account_read(rdata->bytes);
 		cifs_stats_bytes_read(tcon, rdata->bytes);
+=======
+		task_io_account_read(rdata->got_bytes);
+		cifs_stats_bytes_read(tcon, rdata->got_bytes);
+>>>>>>> v3.18
 =======
 		task_io_account_read(rdata->got_bytes);
 		cifs_stats_bytes_read(tcon, rdata->got_bytes);
@@ -1978,13 +2074,19 @@ cifs_readv_callback(struct mid_q_entry *mid)
 	case MID_RETRY_NEEDED:
 		rdata->result = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (server->sign && rdata->got_bytes)
 			/* reset bytes number since we can not check a sign */
 			rdata->got_bytes = 0;
 		/* FIXME: should this be counted toward the initiating task? */
 		task_io_account_read(rdata->got_bytes);
 		cifs_stats_bytes_read(tcon, rdata->got_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2155,10 +2257,14 @@ CIFSSMBRead(const unsigned int xid, struct cifs_io_parms *io_parms,
 /*	cifs_small_buf_release(pSMB); */ /* Freed earlier now in SendReceive2 */
 	if (*buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (resp_buf_type == CIFS_SMALL_BUFFER)
 			cifs_small_buf_release(iov[0].iov_base);
 		else if (resp_buf_type == CIFS_LARGE_BUFFER)
 			cifs_buf_release(iov[0].iov_base);
+=======
+		free_rsp_buf(resp_buf_type, iov[0].iov_base);
+>>>>>>> v3.18
 =======
 		free_rsp_buf(resp_buf_type, iov[0].iov_base);
 >>>>>>> v3.18
@@ -2324,6 +2430,7 @@ static void
 cifs_writev_requeue(struct cifs_writedata *wdata)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, rc;
 	struct inode *inode = wdata->cfile->dentry->d_inode;
 	struct TCP_Server_Info *server;
@@ -2347,6 +2454,8 @@ cifs_writev_requeue(struct cifs_writedata *wdata)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	int i, rc = 0;
 	struct inode *inode = wdata->cfile->dentry->d_inode;
 	struct TCP_Server_Info *server;
@@ -2421,6 +2530,9 @@ cifs_writev_requeue(struct cifs_writedata *wdata)
 		rest_len -= cur_len;
 		i += nr_pages;
 	} while (i < wdata->nr_pages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mapping_set_error(inode->i_mapping, rc);
@@ -2464,6 +2576,7 @@ cifs_writedata_alloc(unsigned int nr_pages, work_func_t complete)
 	struct cifs_writedata *wdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* this would overflow */
 	if (nr_pages == 0) {
 		cifs_dbg(VFS, "%s: called with nr_pages == 0!\n", __func__);
@@ -2473,6 +2586,11 @@ cifs_writedata_alloc(unsigned int nr_pages, work_func_t complete)
 	/* writedata + number of page pointers */
 	wdata = kzalloc(sizeof(*wdata) +
 			sizeof(struct page *) * (nr_pages - 1), GFP_NOFS);
+=======
+	/* writedata + number of page pointers */
+	wdata = kzalloc(sizeof(*wdata) +
+			sizeof(struct page *) * nr_pages, GFP_NOFS);
+>>>>>>> v3.18
 =======
 	/* writedata + number of page pointers */
 	wdata = kzalloc(sizeof(*wdata) +
@@ -2539,7 +2657,12 @@ cifs_writev_callback(struct mid_q_entry *mid)
 /* cifs_async_writev - send an async write, and set up mid to handle result */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cifs_async_writev(struct cifs_writedata *wdata)
+=======
+cifs_async_writev(struct cifs_writedata *wdata,
+		  void (*release)(struct kref *kref))
+>>>>>>> v3.18
 =======
 cifs_async_writev(struct cifs_writedata *wdata,
 		  void (*release)(struct kref *kref))
@@ -2618,7 +2741,11 @@ cifs_async_writev(struct cifs_writedata *wdata,
 		cifs_stats_inc(&tcon->stats.cifs_stats.num_writes);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kref_put(&wdata->refcount, cifs_writedata_release);
+=======
+		kref_put(&wdata->refcount, release);
+>>>>>>> v3.18
 =======
 		kref_put(&wdata->refcount, release);
 >>>>>>> v3.18
@@ -2725,10 +2852,14 @@ CIFSSMBWrite2(const unsigned int xid, struct cifs_io_parms *io_parms,
 
 /*	cifs_small_buf_release(pSMB); */ /* Freed earlier now in SendReceive2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (resp_buf_type == CIFS_SMALL_BUFFER)
 		cifs_small_buf_release(iov[0].iov_base);
 	else if (resp_buf_type == CIFS_LARGE_BUFFER)
 		cifs_buf_release(iov[0].iov_base);
+=======
+	free_rsp_buf(resp_buf_type, iov[0].iov_base);
+>>>>>>> v3.18
 =======
 	free_rsp_buf(resp_buf_type, iov[0].iov_base);
 >>>>>>> v3.18
@@ -2977,10 +3108,14 @@ plk_err_exit:
 		cifs_small_buf_release(pSMB);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (resp_buf_type == CIFS_SMALL_BUFFER)
 		cifs_small_buf_release(iov[0].iov_base);
 	else if (resp_buf_type == CIFS_LARGE_BUFFER)
 		cifs_buf_release(iov[0].iov_base);
+=======
+	free_rsp_buf(resp_buf_type, iov[0].iov_base);
+>>>>>>> v3.18
 =======
 	free_rsp_buf(resp_buf_type, iov[0].iov_base);
 >>>>>>> v3.18
@@ -3058,7 +3193,11 @@ CIFSSMBRename(const unsigned int xid, struct cifs_tcon *tcon,
 	int name_len, name_len2;
 	__u16 count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	int remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	int remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -3458,7 +3597,11 @@ CIFSCreateHardLink(const unsigned int xid, struct cifs_tcon *tcon,
 	int name_len, name_len2;
 	__u16 count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	int remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	int remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -3619,7 +3762,10 @@ querySymLinkRetry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CIFS_SYMLINK_EXPERIMENTAL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -3634,10 +3780,16 @@ querySymLinkRetry:
  */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 CIFSSMBQueryReparseLinkInfo(const unsigned int xid, struct cifs_tcon *tcon,
 			const unsigned char *searchName,
 			char *symlinkinfo, const int buflen, __u16 fid,
 			const struct nls_table *nls_codepage)
+=======
+CIFSSMBQuerySymLink(const unsigned int xid, struct cifs_tcon *tcon,
+		    __u16 fid, char **symlinkinfo,
+		    const struct nls_table *nls_codepage)
+>>>>>>> v3.18
 =======
 CIFSSMBQuerySymLink(const unsigned int xid, struct cifs_tcon *tcon,
 		    __u16 fid, char **symlinkinfo,
@@ -3649,10 +3801,13 @@ CIFSSMBQuerySymLink(const unsigned int xid, struct cifs_tcon *tcon,
 	struct smb_com_transaction_ioctl_req *pSMB;
 	struct smb_com_transaction_ioctl_rsp *pSMBr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cifs_dbg(FYI, "In Windows reparse style QueryLink for path %s\n",
 		 searchName);
 =======
+=======
+>>>>>>> v3.18
 	bool is_unicode;
 	unsigned int sub_len;
 	char *sub_start;
@@ -3662,6 +3817,9 @@ CIFSSMBQuerySymLink(const unsigned int xid, struct cifs_tcon *tcon,
 	char *end_of_smb;
 
 	cifs_dbg(FYI, "In Windows reparse style QueryLink for fid %u\n", fid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = smb_init(SMB_COM_NT_TRANSACT, 23, tcon, (void **) &pSMB,
 		      (void **) &pSMBr);
@@ -3691,6 +3849,7 @@ CIFSSMBQuerySymLink(const unsigned int xid, struct cifs_tcon *tcon,
 			 (struct smb_hdr *) pSMBr, &bytes_returned, 0);
 	if (rc) {
 		cifs_dbg(FYI, "Send error in QueryReparseLinkInfo = %d\n", rc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {		/* decode response */
 		__u32 data_offset = le32_to_cpu(pSMBr->DataOffset);
@@ -3753,6 +3912,8 @@ qreparse_out:
 }
 #endif /* CIFS_SYMLINK_EXPERIMENTAL */ /* BB temporarily unused */
 =======
+=======
+>>>>>>> v3.18
 		goto qreparse_out;
 	}
 
@@ -3883,6 +4044,9 @@ CIFSSMB_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_CIFS_POSIX
@@ -4456,10 +4620,14 @@ CIFSSMBGetCIFSACL(const unsigned int xid, struct cifs_tcon *tcon, __u16 fid,
 	}
 qsec_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (buf_type == CIFS_SMALL_BUFFER)
 		cifs_small_buf_release(iov[0].iov_base);
 	else if (buf_type == CIFS_LARGE_BUFFER)
 		cifs_buf_release(iov[0].iov_base);
+=======
+	free_rsp_buf(buf_type, iov[0].iov_base);
+>>>>>>> v3.18
 =======
 	free_rsp_buf(buf_type, iov[0].iov_base);
 >>>>>>> v3.18
@@ -4642,6 +4810,10 @@ QFileInfoRetry:
 	pSMB->Fid = netfid;
 	inc_rfc1001_len(pSMB, byte_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pSMB->t2.ByteCount = cpu_to_le16(byte_count);
+>>>>>>> v3.18
 =======
 	pSMB->t2.ByteCount = cpu_to_le16(byte_count);
 >>>>>>> v3.18
@@ -4650,7 +4822,11 @@ QFileInfoRetry:
 			 (struct smb_hdr *) pSMBr, &bytes_returned, 0);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(FYI, "Send error in QPathInfo = %d\n", rc);
+=======
+		cifs_dbg(FYI, "Send error in QFileInfo = %d", rc);
+>>>>>>> v3.18
 =======
 		cifs_dbg(FYI, "Send error in QFileInfo = %d", rc);
 >>>>>>> v3.18
@@ -4818,6 +4994,10 @@ UnixQFileInfoRetry:
 	pSMB->Fid = netfid;
 	inc_rfc1001_len(pSMB, byte_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pSMB->t2.ByteCount = cpu_to_le16(byte_count);
+>>>>>>> v3.18
 =======
 	pSMB->t2.ByteCount = cpu_to_le16(byte_count);
 >>>>>>> v3.18
@@ -4826,7 +5006,11 @@ UnixQFileInfoRetry:
 			 (struct smb_hdr *) pSMBr, &bytes_returned, 0);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(FYI, "Send error in QPathInfo = %d\n", rc);
+=======
+		cifs_dbg(FYI, "Send error in UnixQFileInfo = %d", rc);
+>>>>>>> v3.18
 =======
 		cifs_dbg(FYI, "Send error in UnixQFileInfo = %d", rc);
 >>>>>>> v3.18
@@ -4914,7 +5098,11 @@ UnixQPathInfoRetry:
 			 (struct smb_hdr *) pSMBr, &bytes_returned, 0);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(FYI, "Send error in QPathInfo = %d\n", rc);
+=======
+		cifs_dbg(FYI, "Send error in UnixQPathInfo = %d", rc);
+>>>>>>> v3.18
 =======
 		cifs_dbg(FYI, "Send error in UnixQPathInfo = %d", rc);
 >>>>>>> v3.18
@@ -4966,7 +5154,11 @@ findFirstRetry:
 
 	nls_codepage = cifs_sb->local_nls;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -5520,11 +5712,16 @@ getDFSRetry:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server) {
 		if (ses->server->sec_mode &
 		   (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED))
 			pSMB->hdr.Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
 	}
+=======
+	if (ses->server && ses->server->sign)
+		pSMB->hdr.Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
+>>>>>>> v3.18
 =======
 	if (ses->server && ses->server->sign)
 		pSMB->hdr.Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
@@ -6138,7 +6335,11 @@ CIFSSMBSetEOF(const unsigned int xid, struct cifs_tcon *tcon,
 	int rc = 0;
 	int bytes_returned = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
+=======
+	int remap = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 	int remap = cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -6853,6 +7054,12 @@ QAllEAsRetry:
 	if (list_len <= 8) {
 		cifs_dbg(FYI, "empty EA list returned from server\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* didn't find the named attribute */
+		if (ea_name)
+			rc = -ENODATA;
+>>>>>>> v3.18
 =======
 		/* didn't find the named attribute */
 		if (ea_name)

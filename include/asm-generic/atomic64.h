@@ -21,11 +21,14 @@ typedef struct {
 extern long long atomic64_read(const atomic64_t *v);
 extern void	 atomic64_set(atomic64_t *v, long long i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void	 atomic64_add(long long a, atomic64_t *v);
 extern long long atomic64_add_return(long long a, atomic64_t *v);
 extern void	 atomic64_sub(long long a, atomic64_t *v);
 extern long long atomic64_sub_return(long long a, atomic64_t *v);
 =======
+=======
+>>>>>>> v3.18
 
 #define ATOMIC64_OP(op)							\
 extern void	 atomic64_##op(long long a, atomic64_t *v);
@@ -42,6 +45,9 @@ ATOMIC64_OPS(sub)
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern long long atomic64_dec_if_positive(atomic64_t *v);
 extern long long atomic64_cmpxchg(atomic64_t *v, long long o, long long n);

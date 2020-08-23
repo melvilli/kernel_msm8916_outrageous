@@ -52,6 +52,7 @@
 #define ymm15_x xmm15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * AES-NI instructions do not support ymmX registers, so we need splitting and
  * merging.
@@ -62,6 +63,8 @@
 	vaesenclast zero##_x, tmp##_x, tmp##_x; \
 	vinserti128 $1, tmp##_x, yreg, yreg;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**********************************************************************
@@ -83,20 +86,27 @@
 	 */ \
 	vbroadcasti128 .Linv_shift_row, t4; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpbroadcastb .L0f0f0f0f, t7; \
 	vbroadcasti128 .Lpre_tf_lo_s1, t0; \
 	vbroadcasti128 .Lpre_tf_hi_s1, t1; \
 =======
+=======
+>>>>>>> v3.18
 	vpbroadcastd .L0f0f0f0f, t7; \
 	vbroadcasti128 .Lpre_tf_lo_s1, t5; \
 	vbroadcasti128 .Lpre_tf_hi_s1, t6; \
 	vbroadcasti128 .Lpre_tf_lo_s4, t2; \
 	vbroadcasti128 .Lpre_tf_hi_s4, t3; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	/* AES inverse shift rows */ \
 	vpshufb t4, x0, x0; \
 	vpshufb t4, x7, x7; \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vpshufb t4, x1, x1; \
 	vpshufb t4, x4, x4; \
@@ -132,6 +142,8 @@
 	vaesenclast256(t4, x3, t5); \
 	vaesenclast256(t4, x6, t5); \
 =======
+=======
+>>>>>>> v3.18
 	vpshufb t4, x3, x3; \
 	vpshufb t4, x6, x6; \
 	vpshufb t4, x2, x2; \
@@ -187,6 +199,9 @@
 	vaesenclast t4##_x, x4##_x, x4##_x; \
 	vaesenclast t4##_x, t2##_x, t2##_x; \
 	vinserti128 $1, t2##_x, x4, x4; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	/* postfilter sboxes 1 and 4 */ \
@@ -209,6 +224,7 @@
 	filter_8bit(x1, t4, t5, t7, t2); \
 	filter_8bit(x4, t4, t5, t7, t2); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	\
 	vpsrldq $1, t0, t1; \
 	vpsrldq $2, t0, t2; \
@@ -226,12 +242,17 @@
 	vpbroadcastb t5##_x, t5; \
 	vpbroadcastb t7##_x, t7; \
 =======
+=======
+>>>>>>> v3.18
 	vpxor t7, t7, t7; \
 	\
 	vpsrldq $1, t0, t1; \
 	vpsrldq $2, t0, t2; \
 	vpshufb t7, t1, t1; \
 	vpsrldq $3, t0, t3; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	/* P-function */ \
@@ -241,13 +262,19 @@
 	vpxor x4, x3, x3; \
 	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	vpshufb t7, t2, t2; \
 	vpsrldq $4, t0, t4; \
 	vpshufb t7, t3, t3; \
 	vpsrldq $5, t0, t5; \
 	vpshufb t7, t4, t4; \
 	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vpxor x2, x4, x4; \
 	vpxor x3, x5, x5; \
@@ -255,11 +282,17 @@
 	vpxor x1, x7, x7; \
 	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	vpsrldq $6, t0, t6; \
 	vpshufb t7, t5, t5; \
 	vpshufb t7, t6, t6; \
 	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vpxor x7, x0, x0; \
 	vpxor x4, x1, x1; \
@@ -274,6 +307,7 @@
 	/* Add key material and result to CD (x becomes new CD) */ \
 	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpxor t7, x0, x0; \
 	vpxor 4 * 32(mem_cd), x0, x0; \
 	\
@@ -281,6 +315,8 @@
 	vpxor 5 * 32(mem_cd), x1, x1; \
 	\
 =======
+=======
+>>>>>>> v3.18
 	vpxor t6, x1, x1; \
 	vpxor 5 * 32(mem_cd), x1, x1; \
 	\
@@ -291,6 +327,9 @@
 	vpxor t7, x0, x0; \
 	vpxor 4 * 32(mem_cd), x0, x0; \
 	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vpxor t5, x2, x2; \
 	vpxor 6 * 32(mem_cd), x2, x2; \
@@ -312,7 +351,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Size optimization... with inlined roundsm16 binary would be over 5 times
+=======
+ * Size optimization... with inlined roundsm32 binary would be over 5 times
+>>>>>>> v3.18
 =======
  * Size optimization... with inlined roundsm32 binary would be over 5 times
 >>>>>>> v3.18
@@ -436,6 +479,7 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpbroadcastd kll, t0; /* only lowest 32-bit used */ \
 	vpxor tt0, tt0, tt0; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpbroadcastb t0##_x, t3; \
 	vpsrldq $1, t0, t0; \
 	vpbroadcastb t0##_x, t2; \
@@ -444,6 +488,8 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpsrldq $1, t0, t0; \
 	vpbroadcastb t0##_x, t0; \
 =======
+=======
+>>>>>>> v3.18
 	vpshufb tt0, t0, t3; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t2; \
@@ -451,6 +497,9 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpshufb tt0, t0, t1; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t0; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	vpand l0, t0, t0; \
@@ -462,6 +511,10 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	\
 	vpxor l4, t0, l4; \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vpbroadcastd krr, t0; /* only lowest 32-bit used */ \
+>>>>>>> v3.18
 =======
 	vpbroadcastd krr, t0; /* only lowest 32-bit used */ \
 >>>>>>> v3.18
@@ -480,6 +533,7 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	 */ \
 	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpbroadcastd krr, t0; /* only lowest 32-bit used */ \
 	vpbroadcastb t0##_x, t3; \
 	vpsrldq $1, t0, t0; \
@@ -489,6 +543,8 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpsrldq $1, t0, t0; \
 	vpbroadcastb t0##_x, t0; \
 =======
+=======
+>>>>>>> v3.18
 	vpshufb tt0, t0, t3; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t2; \
@@ -496,6 +552,9 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpshufb tt0, t0, t1; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t0; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	vpor 4 * 32(r), t0, t0; \
@@ -509,6 +568,10 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpxor 3 * 32(r), t3, t3; \
 	vmovdqu t0, 0 * 32(r); \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vpbroadcastd krl, t0; /* only lowest 32-bit used */ \
+>>>>>>> v3.18
 =======
 	vpbroadcastd krl, t0; /* only lowest 32-bit used */ \
 >>>>>>> v3.18
@@ -522,6 +585,7 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	 * rr ^= rol32(t2, 1); \
 	 */ \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpbroadcastd krl, t0; /* only lowest 32-bit used */ \
 	vpbroadcastb t0##_x, t3; \
 	vpsrldq $1, t0, t0; \
@@ -531,6 +595,8 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpsrldq $1, t0, t0; \
 	vpbroadcastb t0##_x, t0; \
 =======
+=======
+>>>>>>> v3.18
 	vpshufb tt0, t0, t3; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t2; \
@@ -538,6 +604,9 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpshufb tt0, t0, t1; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t0; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	vpand 0 * 32(r), t0, t0; \
@@ -553,6 +622,10 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpxor 7 * 32(r), t3, t3; \
 	vmovdqu t0, 4 * 32(r); \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vpbroadcastd klr, t0; /* only lowest 32-bit used */ \
+>>>>>>> v3.18
 =======
 	vpbroadcastd klr, t0; /* only lowest 32-bit used */ \
 >>>>>>> v3.18
@@ -567,6 +640,7 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	 */ \
 	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpbroadcastd klr, t0; /* only lowest 32-bit used */ \
 	vpbroadcastb t0##_x, t3; \
 	vpsrldq $1, t0, t0; \
@@ -576,6 +650,8 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpsrldq $1, t0, t0; \
 	vpbroadcastb t0##_x, t0; \
 =======
+=======
+>>>>>>> v3.18
 	vpshufb tt0, t0, t3; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t2; \
@@ -583,6 +659,9 @@ ENDPROC(roundsm32_x4_x5_x6_x7_x0_x1_x2_x3_y4_y5_y6_y7_y0_y1_y2_y3_ab)
 	vpshufb tt0, t0, t1; \
 	vpsrldq $1, t0, t0; \
 	vpshufb tt0, t0, t0; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	\
 	vpor l4, t0, t0; \

@@ -9,7 +9,11 @@
 // URL: http://coccinelle.lip6.fr/
 // Comments: requires at least Coccinelle 0.2.4, lex or parse error otherwise
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 =======
 // Options: --no-includes --include-headers
 >>>>>>> v3.18

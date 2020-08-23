@@ -209,7 +209,10 @@ static int rionet_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 			rionet_queue_tx_msg(skb, ndev,
 					nets[rnet->mport->id].active[destid]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		else {
 			/*
 			 * If the target device was removed from the list of
@@ -221,6 +224,9 @@ static int rionet_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 			ndev->stats.tx_packets++;
 			ndev->stats.tx_bytes += skb->len;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -284,7 +290,11 @@ static void rionet_outb_msg_event(struct rio_mport *mport, void *dev_id, int mbo
 	struct rionet_private *rnet = netdev_priv(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&rnet->tx_lock);
+=======
+	spin_lock(&rnet->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&rnet->lock);
 >>>>>>> v3.18
@@ -307,7 +317,11 @@ static void rionet_outb_msg_event(struct rio_mport *mport, void *dev_id, int mbo
 		netif_wake_queue(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&rnet->tx_lock);
+=======
+	spin_unlock(&rnet->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&rnet->lock);
 >>>>>>> v3.18
@@ -408,6 +422,7 @@ static int rionet_close(struct net_device *ndev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rionet_remove(struct rio_dev *rdev)
 {
 	struct net_device *ndev = rio_get_drvdata(rdev);
@@ -427,6 +442,8 @@ static void rionet_remove(struct rio_dev *rdev)
 
 	free_netdev(ndev);
 =======
+=======
+>>>>>>> v3.18
 static int rionet_remove_dev(struct device *dev, struct subsys_interface *sif)
 {
 	struct rio_dev *rdev = to_rio_dev(dev);
@@ -449,6 +466,9 @@ static int rionet_remove_dev(struct device *dev, struct subsys_interface *sif)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -526,7 +546,12 @@ static int rionet_setup_netdev(struct rio_mport *mport, struct net_device *ndev)
 	ndev->mtu = RIO_MAX_MSG_SIZE - 14;
 	ndev->features = NETIF_F_LLTX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &rionet_ethtool_ops);
+=======
+	SET_NETDEV_DEV(ndev, &mport->dev);
+	ndev->ethtool_ops = &rionet_ethtool_ops;
+>>>>>>> v3.18
 =======
 	SET_NETDEV_DEV(ndev, &mport->dev);
 	ndev->ethtool_ops = &rionet_ethtool_ops;
@@ -556,7 +581,11 @@ static int rionet_setup_netdev(struct rio_mport *mport, struct net_device *ndev)
 static unsigned long net_table[RIONET_MAX_NETS/sizeof(unsigned long) + 1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rionet_probe(struct rio_dev *rdev, const struct rio_device_id *id)
+=======
+static int rionet_add_dev(struct device *dev, struct subsys_interface *sif)
+>>>>>>> v3.18
 =======
 static int rionet_add_dev(struct device *dev, struct subsys_interface *sif)
 >>>>>>> v3.18
@@ -566,6 +595,10 @@ static int rionet_add_dev(struct device *dev, struct subsys_interface *sif)
 	struct rionet_peer *peer;
 	struct net_device *ndev = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rio_dev *rdev = to_rio_dev(dev);
+>>>>>>> v3.18
 =======
 	struct rio_dev *rdev = to_rio_dev(dev);
 >>>>>>> v3.18
@@ -579,8 +612,14 @@ static int rionet_add_dev(struct device *dev, struct subsys_interface *sif)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * First time through, make sure local device is rionet
 	 * capable, setup netdev (will be skipped on later probes)
+=======
+	 * If first time through this net, make sure local device is rionet
+	 * capable and setup netdev (this step will be skipped in later probes
+	 * on the same net).
+>>>>>>> v3.18
 =======
 	 * If first time through this net, make sure local device is rionet
 	 * capable and setup netdev (this step will be skipped in later probes
@@ -608,13 +647,19 @@ static int rionet_add_dev(struct device *dev, struct subsys_interface *sif)
 		nets[netid].ndev = ndev;
 		rc = rionet_setup_netdev(rdev->net->hport, ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (rc) {
 			printk(KERN_ERR "%s: failed to setup netdev (rc=%d)\n",
 			       DRV_NAME, rc);
 			goto out;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		INIT_LIST_HEAD(&nets[netid].peers);
 		nets[netid].nact = 0;
@@ -635,6 +680,7 @@ static int rionet_add_dev(struct device *dev, struct subsys_interface *sif)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rio_set_drvdata(rdev, nets[netid].ndev);
 
       out:
@@ -651,6 +697,8 @@ static struct rio_driver rionet_driver = {
 	.probe = rionet_probe,
 	.remove = rionet_remove,
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 out:
 	return rc;
@@ -670,13 +718,20 @@ static struct subsys_interface rionet_interface = {
 	.subsys		= &rio_bus_type,
 	.add_dev	= rionet_add_dev,
 	.remove_dev	= rionet_remove_dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int __init rionet_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rio_register_driver(&rionet_driver);
+=======
+	return subsys_interface_register(&rionet_interface);
+>>>>>>> v3.18
 =======
 	return subsys_interface_register(&rionet_interface);
 >>>>>>> v3.18
@@ -685,8 +740,11 @@ static int __init rionet_init(void)
 static void __exit rionet_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rio_unregister_driver(&rionet_driver);
 =======
+=======
+>>>>>>> v3.18
 	struct rionet_private *rnet;
 	struct net_device *ndev;
 	struct rionet_peer *peer, *tmp;
@@ -714,6 +772,9 @@ static void __exit rionet_exit(void)
 	}
 
 	subsys_interface_unregister(&rionet_interface);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -2,7 +2,11 @@
  * Performance event support for s390x
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright IBM Corp. 2012
+=======
+ *  Copyright IBM Corp. 2012, 2013
+>>>>>>> v3.18
 =======
  *  Copyright IBM Corp. 2012, 2013
 >>>>>>> v3.18
@@ -18,21 +22,31 @@
 #include <linux/kernel.h>
 #include <linux/perf_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/percpu.h>
 #include <linux/export.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kvm_host.h>
 #include <linux/percpu.h>
 #include <linux/export.h>
 #include <linux/seq_file.h>
 #include <linux/spinlock.h>
 #include <linux/sysfs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/irq.h>
 #include <asm/cpu_mf.h>
 #include <asm/lowcore.h>
 #include <asm/processor.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/sysinfo.h>
+>>>>>>> v3.18
 =======
 #include <asm/sysinfo.h>
 >>>>>>> v3.18
@@ -41,7 +55,11 @@ const char *perf_pmu_name(void)
 {
 	if (cpum_cf_avail() || cpum_sf_avail())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return "CPU-measurement facilities (CPUMF)";
+=======
+		return "CPU-Measurement Facilities (CPU-MF)";
+>>>>>>> v3.18
 =======
 		return "CPU-Measurement Facilities (CPU-MF)";
 >>>>>>> v3.18
@@ -56,6 +74,11 @@ int perf_num_counters(void)
 	if (cpum_cf_avail())
 		num += PERF_CPUM_CF_MAX_CTR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpum_sf_avail())
+		num += PERF_CPUM_SF_MAX_CTR;
+>>>>>>> v3.18
 =======
 	if (cpum_sf_avail())
 		num += PERF_CPUM_SF_MAX_CTR;
@@ -65,6 +88,7 @@ int perf_num_counters(void)
 }
 EXPORT_SYMBOL(perf_num_counters);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void perf_event_print_debug(void)
 {
@@ -91,6 +115,8 @@ void perf_event_print_debug(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static struct kvm_s390_sie_block *sie_block(struct pt_regs *regs)
 {
 	struct stack_frame *stack = (struct stack_frame *) regs->gprs[15];
@@ -267,6 +293,9 @@ static int __init service_level_perf_register(void)
 }
 arch_initcall(service_level_perf_register);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* See also arch/s390/kernel/traps.c */
 static unsigned long __store_trace(struct perf_callchain_entry *entry,
@@ -328,7 +357,10 @@ void perf_callchain_kernel(struct perf_callchain_entry *entry,
 		      S390_lowcore.thread_info + THREAD_SIZE);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Perf defintions for PMU event attributes in sysfs */
 ssize_t cpumf_events_sysfs_show(struct device *dev,
@@ -370,4 +402,7 @@ void perf_release_sampling(void)
 	spin_unlock(&perf_hw_owner_lock);
 }
 EXPORT_SYMBOL(perf_release_sampling);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

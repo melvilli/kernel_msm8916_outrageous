@@ -29,7 +29,10 @@
 #include <linux/skbuff.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bitops.h>
@@ -142,7 +145,11 @@ static int link_status(struct xircom_private *card);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(xircom_pci_table) = {
+=======
+static const struct pci_device_id xircom_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id xircom_pci_table[] = {
 >>>>>>> v3.18
@@ -297,7 +304,10 @@ err_unmap:
 	pci_iounmap(pdev, private->ioaddr);
 reg_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dma_free_coherent(d, 8192, private->tx_buffer, private->tx_dma_handle);
@@ -328,7 +338,10 @@ static void xircom_remove(struct pci_dev *pdev)
 	unregister_netdev(dev);
 	pci_iounmap(pdev, card->ioaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dma_free_coherent(d, 8192, card->tx_buffer, card->tx_dma_handle);
@@ -1185,6 +1198,7 @@ investigate_write_descriptor(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init xircom_init(void)
 {
 	return pci_register_driver(&xircom_ops);
@@ -1198,6 +1212,9 @@ static void __exit xircom_exit(void)
 module_init(xircom_init)
 module_exit(xircom_exit)
 
+=======
+module_pci_driver(xircom_ops);
+>>>>>>> v3.18
 =======
 module_pci_driver(xircom_ops);
 >>>>>>> v3.18

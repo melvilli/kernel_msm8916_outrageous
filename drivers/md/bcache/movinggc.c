@@ -10,16 +10,22 @@
 #include "request.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct moving_io {
 	struct keybuf_key	*w;
 	struct search		s;
 =======
+=======
+>>>>>>> v3.18
 #include <trace/events/bcache.h>
 
 struct moving_io {
 	struct closure		cl;
 	struct keybuf_key	*w;
 	struct data_insert_op	op;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bbio		bio;
 };
@@ -31,6 +37,7 @@ static bool moving_pred(struct keybuf *buf, struct bkey *k)
 	unsigned i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < KEY_PTRS(k); i++) {
 		struct cache *ca = PTR_CACHE(c, k, i);
 		struct bucket *g = PTR_BUCKET(c, k, i);
@@ -39,10 +46,15 @@ static bool moving_pred(struct keybuf *buf, struct bkey *k)
 			return true;
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < KEY_PTRS(k); i++)
 		if (ptr_available(c, k, i) &&
 		    GC_MOVE(PTR_BUCKET(c, k, i)))
 			return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return false;
@@ -53,7 +65,11 @@ static bool moving_pred(struct keybuf *buf, struct bkey *k)
 static void moving_io_destructor(struct closure *cl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct moving_io *io = container_of(cl, struct moving_io, s.cl);
+=======
+	struct moving_io *io = container_of(cl, struct moving_io, cl);
+>>>>>>> v3.18
 =======
 	struct moving_io *io = container_of(cl, struct moving_io, cl);
 >>>>>>> v3.18
@@ -62,6 +78,7 @@ static void moving_io_destructor(struct closure *cl)
 
 static void write_moving_finish(struct closure *cl)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct moving_io *io = container_of(cl, struct moving_io, s.cl);
 	struct bio *bio = &io->bio.bio;
@@ -79,6 +96,8 @@ static void write_moving_finish(struct closure *cl)
 	atomic_dec_bug(&io->s.op.c->in_flight);
 	closure_wake_up(&io->s.op.c->moving_gc_wait);
 =======
+=======
+>>>>>>> v3.18
 	struct moving_io *io = container_of(cl, struct moving_io, cl);
 	struct bio *bio = &io->bio.bio;
 	struct bio_vec *bv;
@@ -93,6 +112,9 @@ static void write_moving_finish(struct closure *cl)
 	bch_keybuf_del(&io->op.c->moving_gc_keys, io->w);
 
 	up(&io->op.c->moving_in_flight);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	closure_return_with_destructor(cl, moving_io_destructor);
@@ -100,6 +122,7 @@ static void write_moving_finish(struct closure *cl)
 
 static void read_moving_endio(struct bio *bio, int error)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct moving_io *io = container_of(bio->bi_private,
 					    struct moving_io, s.cl);
@@ -109,6 +132,8 @@ static void read_moving_endio(struct bio *bio, int error)
 
 	bch_bbio_endio(io->s.op.c, bio, error, "reading data to move");
 =======
+=======
+>>>>>>> v3.18
 	struct bbio *b = container_of(bio, struct bbio, bio);
 	struct moving_io *io = container_of(bio->bi_private,
 					    struct moving_io, cl);
@@ -121,6 +146,9 @@ static void read_moving_endio(struct bio *bio, int error)
 	}
 
 	bch_bbio_endio(io->op.c, bio, error, "reading data to move");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -133,15 +161,21 @@ static void moving_init(struct moving_io *io)
 	bio_set_prio(bio, IOPRIO_PRIO_VALUE(IOPRIO_CLASS_IDLE, 0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_size		= KEY_SIZE(&io->w->key) << 9;
 	bio->bi_max_vecs	= DIV_ROUND_UP(KEY_SIZE(&io->w->key),
 					       PAGE_SECTORS);
 	bio->bi_private		= &io->s.cl;
 =======
+=======
+>>>>>>> v3.18
 	bio->bi_iter.bi_size	= KEY_SIZE(&io->w->key) << 9;
 	bio->bi_max_vecs	= DIV_ROUND_UP(KEY_SIZE(&io->w->key),
 					       PAGE_SECTORS);
 	bio->bi_private		= &io->cl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bio->bi_io_vec		= bio->bi_inline_vecs;
 	bch_bio_map(bio, NULL);
@@ -149,6 +183,7 @@ static void moving_init(struct moving_io *io)
 
 static void write_moving(struct closure *cl)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct search *s = container_of(cl, struct search, cl);
 	struct moving_io *io = container_of(s, struct moving_io, s);
@@ -175,6 +210,8 @@ static void write_moving(struct closure *cl)
 
 	continue_at(cl, write_moving_finish, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct moving_io *io = container_of(cl, struct moving_io, cl);
 	struct data_insert_op *op = &io->op;
 
@@ -195,11 +232,15 @@ static void write_moving(struct closure *cl)
 	}
 
 	continue_at(cl, write_moving_finish, op->wq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void read_moving_submit(struct closure *cl)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct search *s = container_of(cl, struct search, cl);
 	struct moving_io *io = container_of(s, struct moving_io, s);
@@ -218,6 +259,8 @@ static void read_moving(struct closure *cl)
 	struct moving_io *io;
 	struct bio *bio;
 =======
+=======
+>>>>>>> v3.18
 	struct moving_io *io = container_of(cl, struct moving_io, cl);
 	struct bio *bio = &io->bio.bio;
 
@@ -234,17 +277,23 @@ static void read_moving(struct cache_set *c)
 	struct closure cl;
 
 	closure_init_stack(&cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* XXX: if we error, background writeback could stall indefinitely */
 
 	while (!test_bit(CACHE_SET_STOPPING, &c->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		w = bch_keybuf_next_rescan(c, &c->moving_gc_keys, &MAX_KEY);
 		if (!w)
 			break;
 
 =======
+=======
+>>>>>>> v3.18
 		w = bch_keybuf_next_rescan(c, &c->moving_gc_keys,
 					   &MAX_KEY, moving_pred);
 		if (!w)
@@ -255,6 +304,9 @@ static void read_moving(struct cache_set *c)
 			continue;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		io = kzalloc(sizeof(struct moving_io) + sizeof(struct bio_vec)
 			     * DIV_ROUND_UP(KEY_SIZE(&w->key), PAGE_SECTORS),
@@ -265,8 +317,14 @@ static void read_moving(struct cache_set *c)
 		w->private	= io;
 		io->w		= w;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		io->s.op.inode	= KEY_INODE(&w->key);
 		io->s.op.c	= c;
+=======
+		io->op.inode	= KEY_INODE(&w->key);
+		io->op.c	= c;
+		io->op.wq	= c->moving_gc_wq;
+>>>>>>> v3.18
 =======
 		io->op.inode	= KEY_INODE(&w->key);
 		io->op.c	= c;
@@ -279,6 +337,7 @@ static void read_moving(struct cache_set *c)
 		bio->bi_rw	= READ;
 		bio->bi_end_io	= read_moving_endio;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (bch_bio_alloc_pages(bio, GFP_KERNEL))
 			goto err;
@@ -293,6 +352,8 @@ static void read_moving(struct cache_set *c)
 			continue_at(cl, read_moving, bch_gc_wq);
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (bio_alloc_pages(bio, GFP_KERNEL))
 			goto err;
 
@@ -300,6 +361,9 @@ static void read_moving(struct cache_set *c)
 
 		down(&c->moving_in_flight);
 		closure_call(&io->cl, read_moving_submit, NULL, &cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -311,7 +375,11 @@ err:		if (!IS_ERR_OR_NULL(w->private))
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	closure_return(cl);
+=======
+	closure_sync(&cl);
+>>>>>>> v3.18
 =======
 	closure_sync(&cl);
 >>>>>>> v3.18
@@ -325,6 +393,7 @@ static bool bucket_cmp(struct bucket *l, struct bucket *r)
 static unsigned bucket_heap_top(struct cache *ca)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return GC_SECTORS_USED(heap_peek(&ca->heap));
 }
 
@@ -332,12 +401,17 @@ void bch_moving_gc(struct closure *cl)
 {
 	struct cache_set *c = container_of(cl, struct cache_set, gc.cl);
 =======
+=======
+>>>>>>> v3.18
 	struct bucket *b;
 	return (b = heap_peek(&ca->heap)) ? GC_SECTORS_USED(b) : 0;
 }
 
 void bch_moving_gc(struct cache_set *c)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cache *ca;
 	struct bucket *b;
@@ -345,7 +419,11 @@ void bch_moving_gc(struct cache_set *c)
 
 	if (!c->copy_gc_enabled)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		closure_return(cl);
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -356,7 +434,11 @@ void bch_moving_gc(struct cache_set *c)
 		unsigned sectors_to_move = 0;
 		unsigned reserve_sectors = ca->sb.bucket_size *
 <<<<<<< HEAD
+<<<<<<< HEAD
 			min(fifo_used(&ca->free), ca->free.size / 2);
+=======
+			fifo_used(&ca->free[RESERVE_MOVINGGC]);
+>>>>>>> v3.18
 =======
 			fifo_used(&ca->free[RESERVE_MOVINGGC]);
 >>>>>>> v3.18
@@ -365,12 +447,18 @@ void bch_moving_gc(struct cache_set *c)
 
 		for_each_bucket(b, ca) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!GC_SECTORS_USED(b))
 =======
+=======
+>>>>>>> v3.18
 			if (GC_MARK(b) == GC_MARK_METADATA ||
 			    !GC_SECTORS_USED(b) ||
 			    GC_SECTORS_USED(b) == ca->sb.bucket_size ||
 			    atomic_read(&b->pin))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 
@@ -392,9 +480,14 @@ void bch_moving_gc(struct cache_set *c)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ca->gc_move_threshold = bucket_heap_top(ca);
 
 		pr_debug("threshold %u", ca->gc_move_threshold);
+=======
+		while (heap_pop(&ca->heap, b, bucket_cmp))
+			SET_GC_MOVE(b, 1);
+>>>>>>> v3.18
 =======
 		while (heap_pop(&ca->heap, b, bucket_cmp))
 			SET_GC_MOVE(b, 1);
@@ -406,10 +499,14 @@ void bch_moving_gc(struct cache_set *c)
 	c->moving_gc_keys.last_scanned = ZERO_KEY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	closure_init(&c->moving_gc, cl);
 	read_moving(&c->moving_gc);
 
 	closure_return(cl);
+=======
+	read_moving(c);
+>>>>>>> v3.18
 =======
 	read_moving(c);
 >>>>>>> v3.18
@@ -418,7 +515,12 @@ void bch_moving_gc(struct cache_set *c)
 void bch_moving_init_cache_set(struct cache_set *c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bch_keybuf_init(&c->moving_gc_keys, moving_pred);
+=======
+	bch_keybuf_init(&c->moving_gc_keys);
+	sema_init(&c->moving_in_flight, 64);
+>>>>>>> v3.18
 =======
 	bch_keybuf_init(&c->moving_gc_keys);
 	sema_init(&c->moving_in_flight, 64);

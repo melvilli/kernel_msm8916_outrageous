@@ -30,8 +30,13 @@
  *
  * Flush and invalidation of memory can normally be performed with the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __insn_flush(), __insn_inv(), and __insn_finv() instructions from
  * userspace.  The DCACHE option to the system call allows userspace
+=======
+ * __insn_flush() and __insn_finv() instructions from userspace.
+ * The DCACHE option to the system call allows userspace
+>>>>>>> v3.18
 =======
  * __insn_flush() and __insn_finv() instructions from userspace.
  * The DCACHE option to the system call allows userspace

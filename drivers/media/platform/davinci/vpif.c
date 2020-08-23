@@ -18,6 +18,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -31,6 +32,8 @@
 #include <mach/hardware.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/io.h>
@@ -41,12 +44,16 @@
 #include <linux/spinlock.h>
 #include <linux/v4l2-dv-timings.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "vpif.h"
 
 MODULE_DESCRIPTION("TI DaVinci Video Port Interface driver");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define VPIF_CH0_MAX_MODES	(22)
 #define VPIF_CH1_MAX_MODES	(02)
@@ -57,6 +64,8 @@ static resource_size_t	res_len;
 static struct resource	*res;
 spinlock_t vpif_lock;
 =======
+=======
+>>>>>>> v3.18
 #define VPIF_CH0_MAX_MODES	22
 #define VPIF_CH1_MAX_MODES	2
 #define VPIF_CH2_MAX_MODES	15
@@ -64,6 +73,9 @@ spinlock_t vpif_lock;
 
 spinlock_t vpif_lock;
 EXPORT_SYMBOL_GPL(vpif_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __iomem *vpif_base;
@@ -447,6 +459,7 @@ EXPORT_SYMBOL(vpif_channel_getfid);
 static int vpif_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status = 0;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -465,12 +478,17 @@ static int vpif_probe(struct platform_device *pdev)
 		goto fail;
 	}
 =======
+=======
+>>>>>>> v3.18
 	static struct resource	*res;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	vpif_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(vpif_base))
 		return PTR_ERR(vpif_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pm_runtime_enable(&pdev->dev);
@@ -480,10 +498,13 @@ static int vpif_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "vpif probe success\n");
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail:
 	release_mem_region(res->start, res_len);
 	return status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -492,8 +513,11 @@ static int vpif_remove(struct platform_device *pdev)
 {
 	pm_runtime_disable(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(vpif_base);
 	release_mem_region(res->start, res_len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -1,16 +1,22 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2i.h: Broadcom NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2012 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
 =======
+=======
+>>>>>>> v3.18
 /* bnx2i.h: QLogic NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2013 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,7 +25,12 @@
  *
  * Written by: Anil Veerabhadrappa (anilgv@broadcom.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+=======
+ * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+ * Maintained by: QLogic-Storage-Upstream@qlogic.com
+>>>>>>> v3.18
 =======
  * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
  * Maintained by: QLogic-Storage-Upstream@qlogic.com
@@ -79,7 +90,11 @@
 #define BNX2I_RESERVED_SLOW_PATH_CMD_SLOTS	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNX2I_5771X_DBELL_PAGE_SIZE	128
+=======
+#define BNX2X_DB_SHIFT			3
+>>>>>>> v3.18
 =======
 #define BNX2X_DB_SHIFT			3
 >>>>>>> v3.18

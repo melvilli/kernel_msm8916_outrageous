@@ -75,10 +75,13 @@
 #define	BRCM_BAND_ALL		3	/* all bands */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Values for PM */
 #define PM_OFF	0
 #define PM_MAX	1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Debug levels */
@@ -91,6 +94,10 @@
 #define BRCM_DL_HT		0x00000040
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Values for PM */
+>>>>>>> v3.18
 =======
 /* Values for PM */
 >>>>>>> v3.18

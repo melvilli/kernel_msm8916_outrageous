@@ -47,7 +47,11 @@ static unsigned long key_gc_flags;
  */
 struct key_type key_type_dead = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = ".dead",
+=======
+	.name = "dead",
+>>>>>>> v3.18
 =======
 	.name = "dead",
 >>>>>>> v3.18
@@ -97,6 +101,7 @@ static void key_gc_timer_func(unsigned long data)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * wait_on_bit() sleep function for uninterruptible waiting
  */
 static int key_gc_wait_bit(void *flags)
@@ -106,6 +111,8 @@ static int key_gc_wait_bit(void *flags)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Reap keys of dead type.
@@ -131,7 +138,11 @@ void key_gc_keytype(struct key_type *ktype)
 
 	kdebug("sleep");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_on_bit(&key_gc_flags, KEY_GC_REAPING_KEYTYPE, key_gc_wait_bit,
+=======
+	wait_on_bit(&key_gc_flags, KEY_GC_REAPING_KEYTYPE,
+>>>>>>> v3.18
 =======
 	wait_on_bit(&key_gc_flags, KEY_GC_REAPING_KEYTYPE,
 >>>>>>> v3.18
@@ -142,6 +153,7 @@ void key_gc_keytype(struct key_type *ktype)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Garbage collect pointers from a keyring.
  *
@@ -189,6 +201,8 @@ do_gc:
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Garbage collect a list of unreferenced, detached keys
  */
 static noinline void key_gc_unused_keys(struct list_head *keys)
@@ -202,12 +216,15 @@ static noinline void key_gc_unused_keys(struct list_head *keys)
 		key_check(key);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Throw away the key data if the key is instantiated */
 		if (test_bit(KEY_FLAG_INSTANTIATED, &key->flags) &&
 		    !test_bit(KEY_FLAG_NEGATIVE, &key->flags) &&
 		    key->type->destroy)
 			key->type->destroy(key);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		security_key_free(key);
@@ -227,11 +244,17 @@ static noinline void key_gc_unused_keys(struct list_head *keys)
 		key_user_put(key->user);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* now throw away the key memory */
 		if (key->type->destroy)
 			key->type->destroy(key);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(key->description);
 
@@ -419,8 +442,12 @@ found_unreferenced_key:
 found_keyring:
 	spin_unlock(&key_serial_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kdebug("scan keyring %d", key->serial);
 	key_gc_keyring(key, limit);
+=======
+	keyring_gc(key, limit);
+>>>>>>> v3.18
 =======
 	keyring_gc(key, limit);
 >>>>>>> v3.18

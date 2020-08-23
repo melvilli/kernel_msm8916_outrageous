@@ -22,6 +22,7 @@
  * This is to decouple pt_regs from user-space ABI, to be able to change it
  * w/o affecting the ABI.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Although the layout (initial padding) is similar to pt_regs to have some
  * optimizations when copying pt_regs to/from user_regs_struct.
  *
@@ -33,6 +34,8 @@ struct user_regs_struct {
 	struct {
 		long pad;
 =======
+=======
+>>>>>>> v3.18
  *
  * The intermediate pad,pad2 are relics of initial layout based on pt_regs
  * for optimizations when copying pt_regs to/from user_regs_struct.
@@ -46,6 +49,9 @@ struct user_regs_struct {
 
 	long pad;
 	struct {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		long bta, lp_start, lp_end, lp_count;
 		long status32, ret, blink, fp, gp;
@@ -53,8 +59,13 @@ struct user_regs_struct {
 		long sp;
 	} scratch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		long pad;
+=======
+	long pad2;
+	struct {
+>>>>>>> v3.18
 =======
 	long pad2;
 	struct {
@@ -64,7 +75,11 @@ struct user_regs_struct {
 	} callee;
 	long efa;	/* break pt addr, for break points in delay slots */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long stop_pc;	/* give dbg stop_pc directly after checking orig_r8 */
+=======
+	long stop_pc;	/* give dbg stop_pc after ensuring brkpt trap */
+>>>>>>> v3.18
 =======
 	long stop_pc;	/* give dbg stop_pc after ensuring brkpt trap */
 >>>>>>> v3.18

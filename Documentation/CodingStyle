@@ -390,7 +390,12 @@ used frequently by compilers in form of the unconditional jump instruction.
 
 The goto statement comes in handy when a function exits from multiple
 <<<<<<< HEAD
+<<<<<<< HEAD
 locations and some common work such as cleanup has to be done.
+=======
+locations and some common work such as cleanup has to be done.  If there is no
+cleanup needed then just return directly.
+>>>>>>> v3.18
 =======
 locations and some common work such as cleanup has to be done.  If there is no
 cleanup needed then just return directly.
@@ -665,6 +670,7 @@ which you should use to make sure messages are matched to the right device
 and driver, and are tagged with the right level:  dev_err(), dev_warn(),
 dev_info(), and so forth.  For messages that aren't associated with a
 <<<<<<< HEAD
+<<<<<<< HEAD
 particular device, <linux/printk.h> defines pr_debug() and pr_info().
 
 Coming up with good debugging messages can be quite a challenge; and once
@@ -675,6 +681,8 @@ that's automatic.  Many subsystems have Kconfig options to turn on -DDEBUG.
 A related convention uses VERBOSE_DEBUG to add dev_vdbg() messages to the
 ones already enabled by DEBUG.
 =======
+=======
+>>>>>>> v3.18
 particular device, <linux/printk.h> defines pr_notice(), pr_info(),
 pr_warn(), pr_err(), etc.
 
@@ -692,6 +700,9 @@ corresponding Makefile; in other cases specific files #define DEBUG.  And
 when a debug message should be unconditionally printed, such as if it is
 already inside a debug-related #ifdef section, printk(KERN_DEBUG ...) can be
 used.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

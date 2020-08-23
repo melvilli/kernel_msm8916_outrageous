@@ -17,8 +17,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -59,7 +63,11 @@
 #include <linux/mutex.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
+=======
+static int ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
+>>>>>>> v3.18
 =======
 static int ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 >>>>>>> v3.18
@@ -73,10 +81,16 @@ static int ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	struct xfrm_state *x;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type != ICMPV6_DEST_UNREACH &&
 	    type != ICMPV6_PKT_TOOBIG &&
 	    type != NDISC_REDIRECT)
 		return;
+=======
+	if (type != ICMPV6_PKT_TOOBIG &&
+	    type != NDISC_REDIRECT)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (type != ICMPV6_PKT_TOOBIG &&
 	    type != NDISC_REDIRECT)
@@ -88,6 +102,7 @@ static int ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 			      spi, IPPROTO_COMP, AF_INET6);
 	if (!x)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 
 	if (type == NDISC_REDIRECT)
@@ -96,6 +111,8 @@ static int ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		ip6_update_pmtu(skb, net, info, 0, 0);
 	xfrm_state_put(x);
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (type == NDISC_REDIRECT)
@@ -105,6 +122,9 @@ static int ipcomp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -203,15 +223,21 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct xfrm_type ipcomp6_type =
 {
 =======
+=======
+>>>>>>> v3.18
 static int ipcomp6_rcv_cb(struct sk_buff *skb, int err)
 {
 	return 0;
 }
 
 static const struct xfrm_type ipcomp6_type = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.description	= "IPCOMP6",
 	.owner		= THIS_MODULE,
@@ -224,17 +250,23 @@ static const struct xfrm_type ipcomp6_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct inet6_protocol ipcomp6_protocol =
 {
 	.handler	= xfrm6_rcv,
 	.err_handler	= ipcomp6_err,
 	.flags		= INET6_PROTO_NOPOLICY,
 =======
+=======
+>>>>>>> v3.18
 static struct xfrm6_protocol ipcomp6_protocol = {
 	.handler	= xfrm6_rcv,
 	.cb_handler	= ipcomp6_rcv_cb,
 	.err_handler	= ipcomp6_err,
 	.priority	= 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -245,7 +277,11 @@ static int __init ipcomp6_init(void)
 		return -EAGAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet6_add_protocol(&ipcomp6_protocol, IPPROTO_COMP) < 0) {
+=======
+	if (xfrm6_protocol_register(&ipcomp6_protocol, IPPROTO_COMP) < 0) {
+>>>>>>> v3.18
 =======
 	if (xfrm6_protocol_register(&ipcomp6_protocol, IPPROTO_COMP) < 0) {
 >>>>>>> v3.18
@@ -259,7 +295,11 @@ static int __init ipcomp6_init(void)
 static void __exit ipcomp6_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet6_del_protocol(&ipcomp6_protocol, IPPROTO_COMP) < 0)
+=======
+	if (xfrm6_protocol_deregister(&ipcomp6_protocol, IPPROTO_COMP) < 0)
+>>>>>>> v3.18
 =======
 	if (xfrm6_protocol_deregister(&ipcomp6_protocol, IPPROTO_COMP) < 0)
 >>>>>>> v3.18

@@ -26,7 +26,11 @@
 
 /* gpio1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata resource omap15xx_mpu_gpio_resources[] = {
+=======
+static struct resource omap15xx_mpu_gpio_resources[] = {
+>>>>>>> v3.18
 =======
 static struct resource omap15xx_mpu_gpio_resources[] = {
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ static struct omap_gpio_reg_offs omap15xx_mpuio_regs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata omap_gpio_platform_data omap15xx_mpu_gpio_config = {
+=======
+static struct omap_gpio_platform_data omap15xx_mpu_gpio_config = {
+>>>>>>> v3.18
 =======
 static struct omap_gpio_platform_data omap15xx_mpu_gpio_config = {
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ static struct platform_device omap15xx_mpu_gpio = {
 
 /* gpio2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata resource omap15xx_gpio_resources[] = {
+=======
+static struct resource omap15xx_gpio_resources[] = {
+>>>>>>> v3.18
 =======
 static struct resource omap15xx_gpio_resources[] = {
 >>>>>>> v3.18
@@ -103,7 +115,11 @@ static struct omap_gpio_reg_offs omap15xx_gpio_regs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata omap_gpio_platform_data omap15xx_gpio_config = {
+=======
+static struct omap_gpio_platform_data omap15xx_gpio_config = {
+>>>>>>> v3.18
 =======
 static struct omap_gpio_platform_data omap15xx_gpio_config = {
 >>>>>>> v3.18

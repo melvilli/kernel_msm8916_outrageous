@@ -183,6 +183,7 @@ extern int orinoco_debug;
 /********************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct orinoco_private *alloc_orinocodev(
 	int sizeof_card, struct device *device,
 	int (*hard_reset)(struct orinoco_private *),
@@ -201,6 +202,8 @@ extern irqreturn_t orinoco_interrupt(int irq, void *dev_id);
 extern void __orinoco_ev_info(struct net_device *dev, struct hermes *hw);
 extern void __orinoco_ev_rx(struct net_device *dev, struct hermes *hw);
 =======
+=======
+>>>>>>> v3.18
 struct orinoco_private *alloc_orinocodev(int sizeof_card, struct device *device,
 					 int (*hard_reset)(struct orinoco_private *),
 					 int (*stop_fw)(struct orinoco_private *, int));
@@ -215,6 +218,9 @@ irqreturn_t orinoco_interrupt(int irq, void *dev_id);
 
 void __orinoco_ev_info(struct net_device *dev, struct hermes *hw);
 void __orinoco_ev_rx(struct net_device *dev, struct hermes *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int orinoco_process_xmit_skb(struct sk_buff *skb,

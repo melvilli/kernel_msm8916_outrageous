@@ -8,6 +8,11 @@
 #define __ASM_SMP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/sigp.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/sigp.h>
 
@@ -20,7 +25,10 @@
 
 extern struct mutex smp_cpu_state_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct save_area *zfcpdump_save_areas[NR_CPUS + 1];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -37,10 +45,16 @@ extern int smp_store_status(int cpu);
 extern int smp_vcpu_scheduled(int cpu);
 extern void smp_yield_cpu(int cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void smp_yield(void);
 extern void smp_stop_cpu(void);
 extern void smp_cpu_set_polarization(int cpu, int val);
 extern int smp_cpu_get_polarization(int cpu);
+=======
+extern void smp_cpu_set_polarization(int cpu, int val);
+extern int smp_cpu_get_polarization(int cpu);
+extern void smp_fill_possible_mask(void);
+>>>>>>> v3.18
 =======
 extern void smp_cpu_set_polarization(int cpu, int val);
 extern int smp_cpu_get_polarization(int cpu);
@@ -64,12 +78,15 @@ static inline int smp_store_status(int cpu) { return 0; }
 static inline int smp_vcpu_scheduled(int cpu) { return 1; }
 static inline void smp_yield_cpu(int cpu) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void smp_yield(void) { }
 static inline void smp_stop_cpu(void) { }
 
 #endif /* CONFIG_SMP */
 
 =======
+=======
+>>>>>>> v3.18
 static inline void smp_fill_possible_mask(void) { }
 
 #endif /* CONFIG_SMP */
@@ -84,6 +101,9 @@ static inline void smp_stop_cpu(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
 extern int smp_rescan_cpus(void);

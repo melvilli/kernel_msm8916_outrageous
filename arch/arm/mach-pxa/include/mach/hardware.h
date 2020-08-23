@@ -20,8 +20,13 @@
  * The mapping is set in mach-pxa/generic.c.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UNCACHED_PHYS_0		0xff000000
 #define UNCACHED_ADDR		UNCACHED_PHYS_0
+=======
+#define UNCACHED_PHYS_0		0xfe000000
+#define UNCACHED_PHYS_0_SIZE	0x00100000
+>>>>>>> v3.18
 =======
 #define UNCACHED_PHYS_0		0xfe000000
 #define UNCACHED_PHYS_0_SIZE	0x00100000

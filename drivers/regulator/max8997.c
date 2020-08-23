@@ -39,7 +39,10 @@ struct max8997_data {
 	struct max8997_dev *iodev;
 	int num_regulators;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev **rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ramp_delay; /* in mV/us */
@@ -694,8 +697,14 @@ static int max8997_set_voltage_buck(struct regulator_dev *rdev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_warn(&rdev->dev, "MAX8997 GPIO-DVS Side Effect Warning: GPIO SET:"
 			" %d -> %d\n", max8997->buck125_gpioindex, tmp_idx);
+=======
+	dev_warn(&rdev->dev,
+		"MAX8997 GPIO-DVS Side Effect Warning: GPIO SET:  %d -> %d\n",
+		max8997->buck125_gpioindex, tmp_idx);
+>>>>>>> v3.18
 =======
 	dev_warn(&rdev->dev,
 		"MAX8997 GPIO-DVS Side Effect Warning: GPIO SET:  %d -> %d\n",
@@ -927,7 +936,11 @@ static int max8997_pmic_dt_parse_pdata(struct platform_device *pdev,
 	unsigned int i, dvs_voltage_nr = 1, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmic_np = of_node_get(iodev->dev->of_node);
+=======
+	pmic_np = iodev->dev->of_node;
+>>>>>>> v3.18
 =======
 	pmic_np = iodev->dev->of_node;
 >>>>>>> v3.18
@@ -937,7 +950,11 @@ static int max8997_pmic_dt_parse_pdata(struct platform_device *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulators_np = of_find_node_by_name(pmic_np, "regulators");
+=======
+	regulators_np = of_get_child_by_name(pmic_np, "regulators");
+>>>>>>> v3.18
 =======
 	regulators_np = of_get_child_by_name(pmic_np, "regulators");
 >>>>>>> v3.18
@@ -954,7 +971,10 @@ static int max8997_pmic_dt_parse_pdata(struct platform_device *pdev,
 	if (!rdata) {
 		of_node_put(regulators_np);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "could not allocate memory for regulator data\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -ENOMEM;
@@ -1050,15 +1070,21 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 	struct max8997_platform_data *pdata = iodev->pdata;
 	struct regulator_config config = { };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev **rdev;
 	struct max8997_data *max8997;
 	struct i2c_client *i2c;
 	int i, ret, size, nr_dvs;
 =======
+=======
+>>>>>>> v3.18
 	struct regulator_dev *rdev;
 	struct max8997_data *max8997;
 	struct i2c_client *i2c;
 	int i, ret, nr_dvs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 max_buck1 = 0, max_buck2 = 0, max_buck5 = 0;
 
@@ -1079,12 +1105,15 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = sizeof(struct regulator_dev *) * pdata->num_regulators;
 	max8997->rdev = devm_kzalloc(&pdev->dev, size, GFP_KERNEL);
 	if (!max8997->rdev)
 		return -ENOMEM;
 
 	rdev = max8997->rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	max8997->dev = &pdev->dev;
@@ -1112,7 +1141,11 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 					buck1245_voltage_map_desc.step);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1125,7 +1158,11 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 					buck1245_voltage_map_desc.step);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1138,7 +1175,11 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 					buck1245_voltage_map_desc.step);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1186,8 +1227,12 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 				!gpio_is_valid(pdata->buck125_gpios[2])) {
 			dev_err(&pdev->dev, "GPIO NOT VALID\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EINVAL;
 			goto err_out;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -1197,7 +1242,11 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 					"MAX8997 SET1");
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1206,7 +1255,11 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 					"MAX8997 SET2");
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1215,7 +1268,11 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 				"MAX8997 SET3");
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -1264,6 +1321,7 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 		config.of_node = pdata->regulators[i].reg_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev[i] = regulator_register(&regulators[id], &config);
 		if (IS_ERR(rdev[i])) {
 			ret = PTR_ERR(rdev[i]);
@@ -1272,17 +1330,23 @@ static int max8997_pmic_probe(struct platform_device *pdev)
 			rdev[i] = NULL;
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&pdev->dev, &regulators[id],
 					       &config);
 		if (IS_ERR(rdev)) {
 			dev_err(max8997->dev, "regulator init failed for %d\n",
 					id);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 err:
 	while (--i >= 0)
@@ -1302,6 +1366,8 @@ static int max8997_pmic_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct platform_device_id max8997_pmic_id[] = {
@@ -1317,7 +1383,10 @@ static struct platform_driver max8997_pmic_driver = {
 	},
 	.probe = max8997_pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max8997_pmic_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max8997_pmic_id,

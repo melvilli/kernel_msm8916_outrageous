@@ -21,7 +21,10 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 verify () {
 	if [ ! -f "$1" ]; then
 		echo ""                                                   1>&2
@@ -36,6 +39,9 @@ verify () {
 verify "$2"
 verify "$3"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # User may have a custom install script
 if [ -x ~/bin/${INSTALLKERNEL} ]; then exec ~/bin/${INSTALLKERNEL} "$@"; fi

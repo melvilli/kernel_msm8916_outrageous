@@ -22,6 +22,11 @@
 #include <linux/interrupt.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -968,7 +973,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 
 	fh->dev->std = id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder_call(fh->dev, core, s_std, id);
+=======
+	decoder_call(fh->dev, video, s_std, id);
+>>>>>>> v3.18
 =======
 	decoder_call(fh->dev, video, s_std, id);
 >>>>>>> v3.18
@@ -1485,7 +1494,10 @@ static struct video_device viu_template = {
 
 	.tvnorms        = V4L2_STD_NTSC_M | V4L2_STD_PAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.current_norm   = V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1499,6 +1511,10 @@ static int viu_of_probe(struct platform_device *op)
 	struct i2c_adapter *ad;
 	int ret, viu_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk;
 >>>>>>> v3.18
@@ -1563,6 +1579,10 @@ static int viu_of_probe(struct platform_device *op)
 	viu_dev->vidq.timeout.data     = (unsigned long)viu_dev;
 	init_timer(&viu_dev->vidq.timeout);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	viu_dev->std = V4L2_STD_NTSC_M;
+>>>>>>> v3.18
 =======
 	viu_dev->std = V4L2_STD_NTSC_M;
 >>>>>>> v3.18
@@ -1598,6 +1618,7 @@ static int viu_of_probe(struct platform_device *op)
 
 	/* enable VIU clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	viu_dev->clk = clk_get(&op->dev, "viu_clk");
 	if (IS_ERR(viu_dev->clk)) {
 		dev_err(&op->dev, "failed to find the clock module!\n");
@@ -1607,6 +1628,8 @@ static int viu_of_probe(struct platform_device *op)
 		clk_enable(viu_dev->clk);
 	}
 =======
+=======
+>>>>>>> v3.18
 	clk = devm_clk_get(&op->dev, "ipg");
 	if (IS_ERR(clk)) {
 		dev_err(&op->dev, "failed to lookup the clock!\n");
@@ -1619,6 +1642,9 @@ static int viu_of_probe(struct platform_device *op)
 		goto err_clk;
 	}
 	viu_dev->clk = clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* reset VIU module */
@@ -1638,8 +1664,12 @@ static int viu_of_probe(struct platform_device *op)
 
 err_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(viu_dev->clk);
 	clk_put(viu_dev->clk);
+=======
+	clk_disable_unprepare(viu_dev->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(viu_dev->clk);
 >>>>>>> v3.18
@@ -1666,8 +1696,12 @@ static int viu_of_remove(struct platform_device *op)
 	irq_dispose_mapping(dev->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(dev->clk);
 	clk_put(dev->clk);
+=======
+	clk_disable_unprepare(dev->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(dev->clk);
 >>>>>>> v3.18

@@ -11,9 +11,12 @@
 asflags-y += $(LINUXINCLUDE)
 ccflags-y += -O2 $(LINUXINCLUDE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ifdef CONFIG_ETRAX_AXISFLASHMAP
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 arch-$(CONFIG_ETRAX_ARCH_V10) = v10
@@ -35,11 +38,14 @@ $(obj)/rescue.bin: $(obj)/rescue.o FORCE
 	cp -p $(obj)/rescue.bin $(objtree)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 else
 $(obj)/rescue.bin:
 
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 $(obj)/testrescue.bin: $(obj)/testrescue.o

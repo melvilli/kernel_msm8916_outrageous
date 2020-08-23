@@ -20,6 +20,10 @@ DEFINE_PER_CPU(struct cpuinfo_metag, cpu_data);
 
 cpumask_t cpu_core_map[NR_CPUS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(cpu_core_map);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(cpu_core_map);
 >>>>>>> v3.18

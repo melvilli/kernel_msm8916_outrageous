@@ -1,6 +1,10 @@
 #define __32bit_syscall_numbers__
 #include <asm/unistd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18

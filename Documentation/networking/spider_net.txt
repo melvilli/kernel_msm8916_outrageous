@@ -74,7 +74,11 @@ all be pointing at the same descr, which should be "empty". All of the
 other descrs in the ring should be "empty" as well.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The show_rx_chain() routine will print out the the locations of the
+=======
+The show_rx_chain() routine will print out the locations of the
+>>>>>>> v3.18
 =======
 The show_rx_chain() routine will print out the locations of the
 >>>>>>> v3.18

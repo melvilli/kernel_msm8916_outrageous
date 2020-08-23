@@ -16,6 +16,10 @@ static inline int init_new_context(struct task_struct *tsk,
 				   struct mm_struct *mm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpumask_clear(&mm->context.cpu_attach_mask);
+>>>>>>> v3.18
 =======
 	cpumask_clear(&mm->context.cpu_attach_mask);
 >>>>>>> v3.18
@@ -25,6 +29,7 @@ static inline int init_new_context(struct task_struct *tsk,
 #ifdef CONFIG_64BIT
 	mm->context.asce_bits |= _ASCE_TYPE_REGION3;
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (current->mm && current->mm->context.alloc_pgste) {
 		/*
@@ -48,6 +53,10 @@ static inline int init_new_context(struct task_struct *tsk,
 	mm->context.has_pgste = 0;
 	mm->context.use_skey = 0;
 >>>>>>> v3.18
+=======
+	mm->context.has_pgste = 0;
+	mm->context.use_skey = 0;
+>>>>>>> v3.18
 	mm->context.asce_limit = STACK_TOP_MAX;
 	crst_table_init((unsigned long *) mm->pgd, pgd_entry_type(mm));
 	return 0;
@@ -55,6 +64,7 @@ static inline int init_new_context(struct task_struct *tsk,
 
 #define destroy_context(mm)             do { } while (0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_64BIT
 #define LCTL_OPCODE "lctl"
@@ -77,6 +87,8 @@ static inline void update_mm(struct mm_struct *mm, struct task_struct *tsk)
 			     : : "m" (S390_lowcore.user_asce) );
 	set_fs(current->thread.mm_segment);
 =======
+=======
+>>>>>>> v3.18
 static inline void set_user_asce(struct mm_struct *mm)
 {
 	S390_lowcore.user_asce = mm->context.asce_bits | __pa(mm->pgd);
@@ -101,12 +113,16 @@ static inline void load_kernel_asce(void)
 	if (asce != S390_lowcore.kernel_asce)
 		__ctl_load(S390_lowcore.kernel_asce, 1, 1);
 	set_cpu_flag(CIF_ASCE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 			     struct task_struct *tsk)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpumask_set_cpu(smp_processor_id(), mm_cpumask(next));
 	update_mm(next, tsk);
@@ -117,6 +133,8 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	if (next->context.flush_mm)
 		__tlb_flush_mm(next);
 =======
+=======
+>>>>>>> v3.18
 	int cpu = smp_processor_id();
 
 	if (prev == next)
@@ -151,6 +169,9 @@ static inline void finish_arch_post_lock_switch(void)
 		preempt_enable();
 	}
 	set_fs(current->thread.mm_segment);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -161,7 +182,13 @@ static inline void activate_mm(struct mm_struct *prev,
                                struct mm_struct *next)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         switch_mm(prev, next, current);
+=======
+	switch_mm(prev, next, current);
+	cpumask_set_cpu(smp_processor_id(), mm_cpumask(next));
+	set_user_asce(next);
+>>>>>>> v3.18
 =======
 	switch_mm(prev, next, current);
 	cpumask_set_cpu(smp_processor_id(), mm_cpumask(next));

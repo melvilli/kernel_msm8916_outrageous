@@ -26,6 +26,10 @@
 #include <linux/platform_data/spi-omap2-mcspi.h>
 #include <linux/platform_data/iommu-omap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/mailbox-omap.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/mailbox-omap.h>
 >>>>>>> v3.18
@@ -40,7 +44,10 @@
 #include "cm-regbits-34xx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "i2c.h"
@@ -498,7 +505,11 @@ static struct omap_hwmod omap3xxx_uart1_hwmod = {
 	.sdma_reqs	= omap2_uart1_sdma_reqs,
 	.main_clk	= "uart1_fck",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= HWMOD_SWSUP_SIDLE_ACT,
+=======
+	.flags		= DEBUG_TI81XXUART1_FLAGS | HWMOD_SWSUP_SIDLE,
+>>>>>>> v3.18
 =======
 	.flags		= DEBUG_TI81XXUART1_FLAGS | HWMOD_SWSUP_SIDLE,
 >>>>>>> v3.18
@@ -521,7 +532,11 @@ static struct omap_hwmod omap3xxx_uart2_hwmod = {
 	.sdma_reqs	= omap2_uart2_sdma_reqs,
 	.main_clk	= "uart2_fck",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= HWMOD_SWSUP_SIDLE_ACT,
+=======
+	.flags		= DEBUG_TI81XXUART2_FLAGS | HWMOD_SWSUP_SIDLE,
+>>>>>>> v3.18
 =======
 	.flags		= DEBUG_TI81XXUART2_FLAGS | HWMOD_SWSUP_SIDLE,
 >>>>>>> v3.18
@@ -544,7 +559,12 @@ static struct omap_hwmod omap3xxx_uart3_hwmod = {
 	.sdma_reqs	= omap2_uart3_sdma_reqs,
 	.main_clk	= "uart3_fck",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= HWMOD_SWSUP_SIDLE_ACT,
+=======
+	.flags		= DEBUG_OMAP3UART3_FLAGS | DEBUG_TI81XXUART3_FLAGS |
+				HWMOD_SWSUP_SIDLE,
+>>>>>>> v3.18
 =======
 	.flags		= DEBUG_OMAP3UART3_FLAGS | DEBUG_TI81XXUART3_FLAGS |
 				HWMOD_SWSUP_SIDLE,
@@ -569,8 +589,13 @@ static struct omap_hwmod_irq_info uart4_mpu_irqs[] = {
 
 static struct omap_hwmod_dma_info uart4_sdma_reqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "rx",	.dma_req = OMAP36XX_DMA_UART4_RX, },
 	{ .name = "tx",	.dma_req = OMAP36XX_DMA_UART4_TX, },
+=======
+	{ .name = "rx",	.dma_req = 82, },
+	{ .name = "tx",	.dma_req = 81, },
+>>>>>>> v3.18
 =======
 	{ .name = "rx",	.dma_req = 82, },
 	{ .name = "tx",	.dma_req = 81, },
@@ -584,7 +609,11 @@ static struct omap_hwmod omap36xx_uart4_hwmod = {
 	.sdma_reqs	= uart4_sdma_reqs,
 	.main_clk	= "uart4_fck",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= HWMOD_SWSUP_SIDLE_ACT,
+=======
+	.flags		= DEBUG_OMAP3UART4_FLAGS | HWMOD_SWSUP_SIDLE,
+>>>>>>> v3.18
 =======
 	.flags		= DEBUG_OMAP3UART4_FLAGS | HWMOD_SWSUP_SIDLE,
 >>>>>>> v3.18
@@ -607,8 +636,13 @@ static struct omap_hwmod_irq_info am35xx_uart4_mpu_irqs[] = {
 
 static struct omap_hwmod_dma_info am35xx_uart4_sdma_reqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "rx", .dma_req = AM35XX_DMA_UART4_RX, },
 	{ .name = "tx", .dma_req = AM35XX_DMA_UART4_TX, },
+=======
+	{ .name = "rx", .dma_req = 55, },
+	{ .name = "tx", .dma_req = 54, },
+>>>>>>> v3.18
 =======
 	{ .name = "rx", .dma_req = 55, },
 	{ .name = "tx", .dma_req = 54, },
@@ -892,8 +926,13 @@ static struct omap_hwmod_irq_info i2c3_mpu_irqs[] = {
 
 static struct omap_hwmod_dma_info i2c3_sdma_reqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "tx", .dma_req = OMAP34XX_DMA_I2C3_TX },
 	{ .name = "rx", .dma_req = OMAP34XX_DMA_I2C3_RX },
+=======
+	{ .name = "tx", .dma_req = 25 },
+	{ .name = "rx", .dma_req = 26 },
+>>>>>>> v3.18
 =======
 	{ .name = "tx", .dma_req = 25 },
 	{ .name = "rx", .dma_req = 26 },
@@ -1545,7 +1584,10 @@ static struct omap_hwmod_class omap3xxx_mailbox_hwmod_class = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct omap_mbox_dev_info omap3xxx_mailbox_info[] = {
 	{ .name = "dsp", .tx_id = 0, .rx_id = 1 },
 };
@@ -1557,6 +1599,9 @@ static struct omap_mbox_pdata omap3xxx_mailbox_attrs = {
 	.info		= omap3xxx_mailbox_info,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct omap_hwmod_irq_info omap3xxx_mailbox_irqs[] = {
 	{ .irq = 26 + OMAP_INTC_START, },
@@ -1578,6 +1623,10 @@ static struct omap_hwmod omap3xxx_mailbox_hwmod = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dev_attr	= &omap3xxx_mailbox_attrs,
+>>>>>>> v3.18
 =======
 	.dev_attr	= &omap3xxx_mailbox_attrs,
 >>>>>>> v3.18
@@ -1775,8 +1824,13 @@ static struct omap_hwmod omap3xxx_usbhsotg_hwmod = {
 	 * signal when MIDLEMODE is set to force-idle.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= HWMOD_NO_OCP_AUTOIDLE | HWMOD_SWSUP_SIDLE
 				| HWMOD_FORCE_MSTANDBY,
+=======
+	.flags		= HWMOD_NO_OCP_AUTOIDLE | HWMOD_SWSUP_SIDLE |
+			  HWMOD_FORCE_MSTANDBY | HWMOD_RECONFIG_IO_CHAIN,
+>>>>>>> v3.18
 =======
 	.flags		= HWMOD_NO_OCP_AUTOIDLE | HWMOD_SWSUP_SIDLE |
 			  HWMOD_FORCE_MSTANDBY | HWMOD_RECONFIG_IO_CHAIN,
@@ -2005,10 +2059,13 @@ static struct omap_hwmod_class omap3xxx_usb_host_hs_hwmod_class = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_opt_clk omap3xxx_usb_host_hs_opt_clks[] = {
 	  { .role = "ehci_logic_fck", .clk = "usbhost_120m_fck", },
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct omap_hwmod_irq_info omap3xxx_usb_host_hs_irqs[] = {
@@ -2034,8 +2091,11 @@ static struct omap_hwmod omap3xxx_usb_host_hs_hwmod = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.opt_clks	= omap3xxx_usb_host_hs_opt_clks,
 	.opt_clks_cnt	= ARRAY_SIZE(omap3xxx_usb_host_hs_opt_clks),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3048,8 +3108,11 @@ static struct omap_hwmod_class omap3xxx_mmu_hwmod_class = {
 
 static struct omap_mmu_dev_attr mmu_isp_dev_attr = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.da_start	= 0x0,
 	.da_end		= 0xfffff000,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.nr_tlb_entries = 8,
@@ -3088,6 +3151,7 @@ static struct omap_hwmod omap3xxx_mmu_isp_hwmod = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP_IOMMU_IVA2
 
 /* mmu iva */
@@ -3095,6 +3159,11 @@ static struct omap_hwmod omap3xxx_mmu_isp_hwmod = {
 static struct omap_mmu_dev_attr mmu_iva_dev_attr = {
 	.da_start	= 0x11000000,
 	.da_end		= 0xfffff000,
+=======
+/* mmu iva */
+
+static struct omap_mmu_dev_attr mmu_iva_dev_attr = {
+>>>>>>> v3.18
 =======
 /* mmu iva */
 
@@ -3135,6 +3204,10 @@ static struct omap_hwmod omap3xxx_mmu_iva_hwmod = {
 	.class		= &omap3xxx_mmu_hwmod_class,
 	.mpu_irqs	= omap3xxx_mmu_iva_irqs,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.clkdm_name	= "iva2_clkdm",
+>>>>>>> v3.18
 =======
 	.clkdm_name	= "iva2_clkdm",
 >>>>>>> v3.18
@@ -3145,6 +3218,12 @@ static struct omap_hwmod omap3xxx_mmu_iva_hwmod = {
 		.omap2 = {
 			.module_offs = OMAP3430_IVA2_MOD,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.module_bit = OMAP3430_CM_FCLKEN_IVA2_EN_IVA2_SHIFT,
+			.idlest_reg_id = 1,
+			.idlest_idle_bit = OMAP3430_ST_IVA2_SHIFT,
+>>>>>>> v3.18
 =======
 			.module_bit = OMAP3430_CM_FCLKEN_IVA2_EN_IVA2_SHIFT,
 			.idlest_reg_id = 1,
@@ -3157,8 +3236,11 @@ static struct omap_hwmod omap3xxx_mmu_iva_hwmod = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* l4_per -> gpio4 */
@@ -3665,7 +3747,11 @@ static struct omap_hwmod_irq_info omap3_sham_mpu_irqs[] = {
 
 static struct omap_hwmod_dma_info omap3_sham_sdma_reqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "rx", .dma_req = OMAP34XX_DMA_SHA1MD5_RX, },
+=======
+	{ .name = "rx", .dma_req = 69, },
+>>>>>>> v3.18
 =======
 	{ .name = "rx", .dma_req = 69, },
 >>>>>>> v3.18
@@ -3730,8 +3816,13 @@ static struct omap_hwmod_class omap3xxx_aes_class = {
 
 static struct omap_hwmod_dma_info omap3_aes_sdma_reqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "tx", .dma_req = OMAP34XX_DMA_AES2_TX, },
 	{ .name = "rx", .dma_req = OMAP34XX_DMA_AES2_RX, },
+=======
+	{ .name = "tx", .dma_req = 65, },
+	{ .name = "rx", .dma_req = 66, },
+>>>>>>> v3.18
 =======
 	{ .name = "tx", .dma_req = 65, },
 	{ .name = "rx", .dma_req = 66, },
@@ -3773,7 +3864,10 @@ static struct omap_hwmod_ocp_if omap3xxx_l4_core__aes = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * 'ssi' class
  * synchronous serial interface (multichannel and full-duplex serial if)
@@ -3818,6 +3912,9 @@ static struct omap_hwmod_ocp_if omap34xx_l4_core__ssi = {
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct omap_hwmod_ocp_if *omap3xxx_hwmod_ocp_ifs[] __initdata = {
 	&omap3xxx_l3_main__l4_core,
@@ -3942,9 +4039,14 @@ static struct omap_hwmod_ocp_if *omap34xx_hwmod_ocp_ifs[] __initdata = {
 	&omap3xxx_sad2d__l3,
 	&omap3xxx_l4_core__mmu_isp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP_IOMMU_IVA2
 	&omap3xxx_l3_main__mmu_iva,
 #endif
+=======
+	&omap3xxx_l3_main__mmu_iva,
+	&omap34xx_l4_core__ssi,
+>>>>>>> v3.18
 =======
 	&omap3xxx_l3_main__mmu_iva,
 	&omap34xx_l4_core__ssi,
@@ -3972,9 +4074,13 @@ static struct omap_hwmod_ocp_if *omap36xx_hwmod_ocp_ifs[] __initdata = {
 	&omap3xxx_sad2d__l3,
 	&omap3xxx_l4_core__mmu_isp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP_IOMMU_IVA2
 	&omap3xxx_l3_main__mmu_iva,
 #endif
+=======
+	&omap3xxx_l3_main__mmu_iva,
+>>>>>>> v3.18
 =======
 	&omap3xxx_l3_main__mmu_iva,
 >>>>>>> v3.18

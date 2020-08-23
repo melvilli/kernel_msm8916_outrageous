@@ -35,7 +35,10 @@
 
 #include "signal32.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "sys32.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

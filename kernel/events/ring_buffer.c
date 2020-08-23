@@ -13,6 +13,7 @@
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "internal.h"
 
@@ -48,10 +49,15 @@ static bool perf_output_space(struct ring_buffer *rb, unsigned long tail,
 }
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/circ_buf.h>
 
 #include "internal.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void perf_output_wakeup(struct perf_output_handle *handle)
 {
@@ -99,6 +105,7 @@ again:
 	 *   kernel				user
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *   READ ->data_tail			READ ->data_head
 	 *   smp_mb()	(A)			smp_rmb()	(C)
 	 *   WRITE $data			READ $data
@@ -113,6 +120,8 @@ again:
 	 *
 	 * OTOH, D needs to be a full barrier since it separates the data READ
 =======
+=======
+>>>>>>> v3.18
 	 *   if (LOAD ->data_tail) {		LOAD ->data_head
 	 *			(A)		smp_rmb()	(C)
 	 *	STORE $data			LOAD $data
@@ -127,6 +136,9 @@ again:
 	 * indicates there is no room in the buffer to store $data we do not.
 	 *
 	 * D needs to be a full barrier since it separates the data READ
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * from the tail WRITE.
 	 *
@@ -136,6 +148,7 @@ again:
 	 * See perf_output_begin().
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_wmb();
 	rb->user_page->data_head = head;
 
@@ -143,12 +156,17 @@ again:
 	 * Now check if we missed an update, rely on the (compiler)
 	 * barrier in atomic_dec_and_test() to re-read rb->head.
 =======
+=======
+>>>>>>> v3.18
 	smp_wmb(); /* B, matches C */
 	rb->user_page->data_head = head;
 
 	/*
 	 * Now check if we missed an update -- rely on previous implied
 	 * compiler barriers to force a re-read.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (unlikely(head != local_read(&rb->head))) {
@@ -169,8 +187,12 @@ int perf_output_begin(struct perf_output_handle *handle,
 	struct ring_buffer *rb;
 	unsigned long tail, offset, head;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int have_lost;
 	struct perf_sample_data sample_data;
+=======
+	int have_lost, page_shift;
+>>>>>>> v3.18
 =======
 	int have_lost, page_shift;
 >>>>>>> v3.18
@@ -189,6 +211,7 @@ int perf_output_begin(struct perf_output_handle *handle,
 
 	rb = rcu_dereference(event->rb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rb)
 		goto out;
 
@@ -205,6 +228,8 @@ int perf_output_begin(struct perf_output_handle *handle,
 					   event);
 		size += lost_event.header.size;
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!rb))
 		goto out;
 
@@ -219,12 +244,16 @@ int perf_output_begin(struct perf_output_handle *handle,
 		size += sizeof(lost_event);
 		if (event->attr.sample_id_all)
 			size += event->id_header_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	perf_output_get_handle(handle);
 
 	do {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * Userspace could choose to issue a mb() before updating the
@@ -253,6 +282,8 @@ int perf_output_begin(struct perf_output_handle *handle,
 
 	if (have_lost) {
 =======
+=======
+>>>>>>> v3.18
 		tail = ACCESS_ONCE(rb->user_page->data_tail);
 		offset = head = local_read(&rb->head);
 		if (!rb->overwrite &&
@@ -293,6 +324,9 @@ int perf_output_begin(struct perf_output_handle *handle,
 		struct perf_sample_data sample_data;
 
 		lost_event.header.size = sizeof(lost_event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lost_event.header.type = PERF_RECORD_LOST;
 		lost_event.header.misc = 0;
@@ -300,6 +334,11 @@ int perf_output_begin(struct perf_output_handle *handle,
 		lost_event.lost        = local_xchg(&rb->lost, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		perf_event_header__init_id(&lost_event.header,
+					   &sample_data, event);
+>>>>>>> v3.18
 =======
 		perf_event_header__init_id(&lost_event.header,
 					   &sample_data, event);

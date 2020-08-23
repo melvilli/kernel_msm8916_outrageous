@@ -3,15 +3,21 @@
 
 #ifdef CONFIG_DETECT_HUNG_TASK
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int  sysctl_hung_task_panic;
 extern unsigned long sysctl_hung_task_check_count;
 extern unsigned long sysctl_hung_task_timeout_secs;
 extern unsigned long sysctl_hung_task_warnings;
 =======
+=======
+>>>>>>> v3.18
 extern int	     sysctl_hung_task_check_count;
 extern unsigned int  sysctl_hung_task_panic;
 extern unsigned long sysctl_hung_task_timeout_secs;
 extern int sysctl_hung_task_warnings;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int proc_dohung_task_timeout_secs(struct ctl_table *table, int write,
 					 void __user *buffer,
@@ -33,11 +39,17 @@ enum { sysctl_hung_task_timeout_secs = 0 };
  * generating coredump, we need some margin. The number of extra sections is
  * 1-3 now and depends on arch. We use "5" as safe margin, here.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * ELF extended numbering allows more than 65535 sections, so 16-bit bound is
  * not a hard limit any more. Although some userspace tools can be surprised by
  * that.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MAPCOUNT_ELF_CORE_MARGIN	(5)
@@ -49,6 +61,7 @@ extern unsigned int sysctl_sched_latency;
 extern unsigned int sysctl_sched_min_granularity;
 extern unsigned int sysctl_sched_wakeup_granularity;
 extern unsigned int sysctl_sched_child_runs_first;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned int sysctl_sched_wake_to_idle;
 extern unsigned int sysctl_sched_wakeup_load_threshold;
@@ -88,6 +101,8 @@ extern unsigned int sysctl_sched_boost;
 #endif /* CONFIG_SCHED_HMP */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 enum sched_tunable_scaling {
 	SCHED_TUNABLESCALING_NONE,
@@ -101,9 +116,13 @@ extern unsigned int sysctl_numa_balancing_scan_delay;
 extern unsigned int sysctl_numa_balancing_scan_period_min;
 extern unsigned int sysctl_numa_balancing_scan_period_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int sysctl_numa_balancing_scan_period_reset;
 extern unsigned int sysctl_numa_balancing_scan_size;
 extern unsigned int sysctl_numa_balancing_settle_count;
+=======
+extern unsigned int sysctl_numa_balancing_scan_size;
+>>>>>>> v3.18
 =======
 extern unsigned int sysctl_numa_balancing_scan_size;
 >>>>>>> v3.18
@@ -120,6 +139,7 @@ int sched_proc_update_handler(struct ctl_table *table, int write,
 		loff_t *ppos);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern int sched_migrate_notify_proc_handler(struct ctl_table *table,
 		int write, void __user *buffer, size_t *lenp, loff_t *ppos);
@@ -133,6 +153,8 @@ extern int sched_boost_handler(struct ctl_table *table, int write,
 extern int sched_window_update_handler(struct ctl_table *table,
 		 int write, void __user *buffer, size_t *lenp, loff_t *ppos);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SCHED_DEBUG
@@ -175,10 +197,16 @@ extern int sched_rt_handler(struct ctl_table *table, int write,
 		loff_t *ppos);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int sysctl_numa_balancing(struct ctl_table *table, int write,
 				 void __user *buffer, size_t *lenp,
 				 loff_t *ppos);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _SCHED_SYSCTL_H */

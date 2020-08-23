@@ -39,6 +39,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * clear_bit() doesn't provide any barrier for the compiler.
  */
 #define smp_mb__before_clear_bit()	smp_mb__before_llsc()
@@ -46,6 +47,8 @@
 
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * These are the "slower" versions of the functions and are in bitops.c.
@@ -83,7 +86,11 @@ static inline void set_bit(unsigned long nr, volatile unsigned long *addr)
 	if (kernel_uses_llsc && R10000_LLSC_WAR) {
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -109,7 +116,11 @@ static inline void set_bit(unsigned long nr, volatile unsigned long *addr)
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -132,7 +143,11 @@ static inline void set_bit(unsigned long nr, volatile unsigned long *addr)
  * clear_bit() is atomic and may not be reordered.  However, it does
  * not contain a memory barrier, so if it is used for locking purposes,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * you should call smp_mb__before_clear_bit() and/or smp_mb__after_clear_bit()
+=======
+ * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
+>>>>>>> v3.18
 =======
  * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
 >>>>>>> v3.18
@@ -147,7 +162,11 @@ static inline void clear_bit(unsigned long nr, volatile unsigned long *addr)
 	if (kernel_uses_llsc && R10000_LLSC_WAR) {
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -173,7 +192,11 @@ static inline void clear_bit(unsigned long nr, volatile unsigned long *addr)
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -199,7 +222,11 @@ static inline void clear_bit(unsigned long nr, volatile unsigned long *addr)
 static inline void clear_bit_unlock(unsigned long nr, volatile unsigned long *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_mb__before_clear_bit();
+=======
+	smp_mb__before_atomic();
+>>>>>>> v3.18
 =======
 	smp_mb__before_atomic();
 >>>>>>> v3.18
@@ -225,7 +252,11 @@ static inline void change_bit(unsigned long nr, volatile unsigned long *addr)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3				\n"
+=======
+		"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -243,7 +274,11 @@ static inline void change_bit(unsigned long nr, volatile unsigned long *addr)
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -280,7 +315,11 @@ static inline int test_and_set_bit(unsigned long nr,
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -300,7 +339,11 @@ static inline int test_and_set_bit(unsigned long nr,
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -342,7 +385,11 @@ static inline int test_and_set_bit_lock(unsigned long nr,
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -362,7 +409,11 @@ static inline int test_and_set_bit_lock(unsigned long nr,
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -405,7 +456,11 @@ static inline int test_and_clear_bit(unsigned long nr,
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -442,7 +497,11 @@ static inline int test_and_clear_bit(unsigned long nr,
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -487,7 +546,11 @@ static inline int test_and_change_bit(unsigned long nr,
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -507,7 +570,11 @@ static inline int test_and_change_bit(unsigned long nr,
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -634,8 +701,11 @@ static inline int fls(int x)
 
 	if (__builtin_constant_p(cpu_has_clo_clz) && cpu_has_clo_clz) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__asm__("clz %0, %1" : "=r" (x) : "r" (x));
 =======
+=======
+>>>>>>> v3.18
 		__asm__(
 		"	.set	push					\n"
 		"	.set	mips32					\n"
@@ -643,6 +713,9 @@ static inline int fls(int x)
 		"	.set	pop					\n"
 		: "=r" (x)
 		: "r" (x));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return 32 - x;

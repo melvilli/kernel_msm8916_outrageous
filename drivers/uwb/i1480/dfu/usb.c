@@ -363,9 +363,12 @@ int i1480_usb_probe(struct usb_interface *iface, const struct usb_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iface->cur_altsetting->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	result = -ENOMEM;

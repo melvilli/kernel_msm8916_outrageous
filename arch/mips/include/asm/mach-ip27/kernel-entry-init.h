@@ -25,7 +25,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * TLB bits
  */
 #define PAGE_GLOBAL		(1 << 6)
@@ -73,6 +76,9 @@
 	.endm
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Intentionally empty macro, used in head.S. Override in
  * arch/mips/mach-xxx/kernel-entry-init.h when necessary.

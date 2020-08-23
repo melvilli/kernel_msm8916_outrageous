@@ -32,8 +32,13 @@ struct xfs_da_node_entry;
 struct xfs_dquot;
 struct xfs_log_item;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xlog_ticket;
 struct xlog;
+=======
+struct xlog;
+struct xlog_ticket;
+>>>>>>> v3.18
 =======
 struct xlog;
 struct xlog_ticket;
@@ -141,7 +146,10 @@ DEFINE_PERAG_REF_EVENT(xfs_perag_set_eofblocks);
 DEFINE_PERAG_REF_EVENT(xfs_perag_clear_eofblocks);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 DECLARE_EVENT_CLASS(xfs_ag_class,
 	TP_PROTO(struct xfs_mount *mp, xfs_agnumber_t agno),
 	TP_ARGS(mp, agno),
@@ -167,6 +175,9 @@ DEFINE_AG_EVENT(xfs_alloc_read_agf);
 DEFINE_AG_EVENT(xfs_read_agi);
 DEFINE_AG_EVENT(xfs_ialloc_read_agi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TRACE_EVENT(xfs_attr_list_node_descend,
 	TP_PROTO(struct xfs_attr_list_context *ctx,
@@ -358,7 +369,12 @@ DEFINE_BUF_EVENT(xfs_buf_hold);
 DEFINE_BUF_EVENT(xfs_buf_rele);
 DEFINE_BUF_EVENT(xfs_buf_iodone);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_BUF_EVENT(xfs_buf_iorequest);
+=======
+DEFINE_BUF_EVENT(xfs_buf_submit);
+DEFINE_BUF_EVENT(xfs_buf_submit_wait);
+>>>>>>> v3.18
 =======
 DEFINE_BUF_EVENT(xfs_buf_submit);
 DEFINE_BUF_EVENT(xfs_buf_submit_wait);
@@ -525,16 +541,22 @@ DEFINE_EVENT(xfs_buf_item_class, name, \
 	TP_ARGS(bip))
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_size_stale);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_format);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_format_stale);
 =======
+=======
+>>>>>>> v3.18
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_size_ordered);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_size_stale);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_format);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_format_ordered);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_format_stale);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_ordered);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_pin);
 DEFINE_BUF_ITEM_EVENT(xfs_buf_item_unpin);
@@ -556,7 +578,10 @@ DEFINE_BUF_ITEM_EVENT(xfs_trans_bhold);
 DEFINE_BUF_ITEM_EVENT(xfs_trans_bhold_release);
 DEFINE_BUF_ITEM_EVENT(xfs_trans_binval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 DEFINE_BUF_ITEM_EVENT(xfs_trans_buf_ordered);
 
 DECLARE_EVENT_CLASS(xfs_filestream_class,
@@ -616,6 +641,9 @@ TRACE_EVENT(xfs_filestream_pick,
 		  __entry->free,
 		  __entry->nscan)
 );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DECLARE_EVENT_CLASS(xfs_lock_class,
@@ -681,14 +709,20 @@ DEFINE_INODE_EVENT(xfs_getattr);
 DEFINE_INODE_EVENT(xfs_setattr);
 DEFINE_INODE_EVENT(xfs_readlink);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_INODE_EVENT(xfs_alloc_file_space);
 DEFINE_INODE_EVENT(xfs_free_file_space);
 =======
+=======
+>>>>>>> v3.18
 DEFINE_INODE_EVENT(xfs_inactive_symlink);
 DEFINE_INODE_EVENT(xfs_alloc_file_space);
 DEFINE_INODE_EVENT(xfs_free_file_space);
 DEFINE_INODE_EVENT(xfs_zero_file_space);
 DEFINE_INODE_EVENT(xfs_collapse_file_space);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DEFINE_INODE_EVENT(xfs_readdir);
 #ifdef CONFIG_XFS_POSIX_ACL
@@ -1051,7 +1085,10 @@ DEFINE_LOG_ITEM_EVENT(xfs_ail_locked);
 DEFINE_LOG_ITEM_EVENT(xfs_ail_flushing);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 DECLARE_EVENT_CLASS(xfs_ail_class,
 	TP_PROTO(struct xfs_log_item *lip, xfs_lsn_t old_lsn, xfs_lsn_t new_lsn),
 	TP_ARGS(lip, old_lsn, new_lsn),
@@ -1109,6 +1146,9 @@ TRACE_EVENT(xfs_log_assign_tail_lsn,
 		  CYCLE_LSN(__entry->old_lsn), BLOCK_LSN(__entry->old_lsn),
 		  CYCLE_LSN(__entry->last_sync_lsn), BLOCK_LSN(__entry->last_sync_lsn))
 )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DECLARE_EVENT_CLASS(xfs_file_class,
@@ -1149,17 +1189,23 @@ DEFINE_RW_EVENT(xfs_file_buffered_write);
 DEFINE_RW_EVENT(xfs_file_direct_write);
 DEFINE_RW_EVENT(xfs_file_splice_read);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_RW_EVENT(xfs_file_splice_write);
 
 DECLARE_EVENT_CLASS(xfs_page_class,
 	TP_PROTO(struct inode *inode, struct page *page, unsigned long off),
 	TP_ARGS(inode, page, off),
 =======
+=======
+>>>>>>> v3.18
 
 DECLARE_EVENT_CLASS(xfs_page_class,
 	TP_PROTO(struct inode *inode, struct page *page, unsigned long off,
 		 unsigned int len),
 	TP_ARGS(inode, page, off, len),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TP_STRUCT__entry(
 		__field(dev_t, dev)
@@ -1168,6 +1214,10 @@ DECLARE_EVENT_CLASS(xfs_page_class,
 		__field(loff_t, size)
 		__field(unsigned long, offset)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(unsigned int, length)
+>>>>>>> v3.18
 =======
 		__field(unsigned int, length)
 >>>>>>> v3.18
@@ -1185,6 +1235,10 @@ DECLARE_EVENT_CLASS(xfs_page_class,
 		__entry->size = i_size_read(inode);
 		__entry->offset = off;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__entry->length = len;
+>>>>>>> v3.18
 =======
 		__entry->length = len;
 >>>>>>> v3.18
@@ -1193,7 +1247,11 @@ DECLARE_EVENT_CLASS(xfs_page_class,
 	),
 	TP_printk("dev %d:%d ino 0x%llx pgoff 0x%lx size 0x%llx offset %lx "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "delalloc %d unwritten %d",
+=======
+		  "length %x delalloc %d unwritten %d",
+>>>>>>> v3.18
 =======
 		  "length %x delalloc %d unwritten %d",
 >>>>>>> v3.18
@@ -1203,6 +1261,10 @@ DECLARE_EVENT_CLASS(xfs_page_class,
 		  __entry->size,
 		  __entry->offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		  __entry->length,
+>>>>>>> v3.18
 =======
 		  __entry->length,
 >>>>>>> v3.18
@@ -1213,8 +1275,14 @@ DECLARE_EVENT_CLASS(xfs_page_class,
 #define DEFINE_PAGE_EVENT(name)		\
 DEFINE_EVENT(xfs_page_class, name,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct inode *inode, struct page *page, unsigned long off),	\
 	TP_ARGS(inode, page, off))
+=======
+	TP_PROTO(struct inode *inode, struct page *page, unsigned long off, \
+		 unsigned int len),	\
+	TP_ARGS(inode, page, off, len))
+>>>>>>> v3.18
 =======
 	TP_PROTO(struct inode *inode, struct page *page, unsigned long off, \
 		 unsigned int len),	\

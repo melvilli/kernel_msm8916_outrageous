@@ -38,6 +38,7 @@
  * ino_bucket->irq allocation is made during {sun4v_,}build_irq().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_IRQS    255
 
 extern void irq_install_pre_handler(int irq,
@@ -67,6 +68,8 @@ extern void irq_free(unsigned int irq);
 extern void __init init_IRQ(void);
 extern void fixup_irqs(void);
 =======
+=======
+>>>>>>> v3.18
 #define NR_IRQS		(2048)
 
 void irq_install_pre_handler(int irq,
@@ -92,6 +95,9 @@ void irq_free(unsigned int irq);
 
 void __init init_IRQ(void);
 void fixup_irqs(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void set_softint(unsigned long bits)
@@ -118,7 +124,11 @@ static inline unsigned long get_softint(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void arch_trigger_all_cpu_backtrace(void);
+=======
+void arch_trigger_all_cpu_backtrace(bool);
+>>>>>>> v3.18
 =======
 void arch_trigger_all_cpu_backtrace(bool);
 >>>>>>> v3.18

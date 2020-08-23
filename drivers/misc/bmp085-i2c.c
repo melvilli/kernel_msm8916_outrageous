@@ -50,7 +50,11 @@ static int bmp085_i2c_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bmp085_probe(&client->dev, regmap);
+=======
+	return bmp085_probe(&client->dev, regmap, client->irq);
+>>>>>>> v3.18
 =======
 	return bmp085_probe(&client->dev, regmap, client->irq);
 >>>>>>> v3.18

@@ -18,6 +18,10 @@ obj-$(CONFIG_MODULES)		+= proc-syms.o
 obj-$(CONFIG_ALIGNMENT_TRAP)	+= alignment.o
 obj-$(CONFIG_HIGHMEM)		+= highmem.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_HUGETLB_PAGE)	+= hugetlbpage.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_HUGETLB_PAGE)	+= hugetlbpage.o
 >>>>>>> v3.18
@@ -45,6 +49,10 @@ obj-$(CONFIG_CPU_CACHE_V6)	+= cache-v6.o
 obj-$(CONFIG_CPU_CACHE_V7)	+= cache-v7.o
 obj-$(CONFIG_CPU_CACHE_FA)	+= cache-fa.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_CPU_CACHE_NOP)	+= cache-nop.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CPU_CACHE_NOP)	+= cache-nop.o
 >>>>>>> v3.18
@@ -97,6 +105,10 @@ obj-$(CONFIG_CPU_V6)		+= proc-v6.o
 obj-$(CONFIG_CPU_V6K)		+= proc-v6.o
 obj-$(CONFIG_CPU_V7)		+= proc-v7.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_CPU_V7M)		+= proc-v7m.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CPU_V7M)		+= proc-v7m.o
 >>>>>>> v3.18
@@ -105,8 +117,14 @@ AFLAGS_proc-v6.o	:=-Wa,-march=armv6
 AFLAGS_proc-v7.o	:=-Wa,-march=armv7-a
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CACHE_FEROCEON_L2)	+= cache-feroceon-l2.o
 obj-$(CONFIG_CACHE_L2X0)	+= cache-l2x0.o
+=======
+obj-$(CONFIG_OUTER_CACHE)	+= l2c-common.o
+obj-$(CONFIG_CACHE_FEROCEON_L2)	+= cache-feroceon-l2.o
+obj-$(CONFIG_CACHE_L2X0)	+= cache-l2x0.o l2c-l2x0-resume.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_OUTER_CACHE)	+= l2c-common.o
 obj-$(CONFIG_CACHE_FEROCEON_L2)	+= cache-feroceon-l2.o

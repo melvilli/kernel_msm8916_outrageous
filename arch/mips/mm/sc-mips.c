@@ -7,6 +7,10 @@
 #include <linux/mm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -76,11 +80,14 @@ static inline int mips_sc_is_activated(struct cpuinfo_mips *c)
 
 	/* Check the bypass bit (L2B) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->cputype) {
 	case CPU_34K:
 	case CPU_74K:
 	case CPU_1004K:
 =======
+=======
+>>>>>>> v3.18
 	switch (current_cpu_type()) {
 	case CPU_34K:
 	case CPU_74K:
@@ -89,6 +96,9 @@ static inline int mips_sc_is_activated(struct cpuinfo_mips *c)
 	case CPU_INTERAPTIV:
 	case CPU_PROAPTIV:
 	case CPU_P5600:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_BMIPS5000:
 		if (config2 & (1 << 12))
@@ -148,7 +158,11 @@ static inline int __init mips_sc_probe(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit mips_sc_init(void)
+=======
+int mips_sc_init(void)
+>>>>>>> v3.18
 =======
 int mips_sc_init(void)
 >>>>>>> v3.18

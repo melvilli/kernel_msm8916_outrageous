@@ -9,13 +9,19 @@ static inline struct clk_lookup_alloc *__clkdev_alloc(size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __clk_put(clk)
 #define __clk_get(clk) ({ 1; })
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_COMMON_CLK
 #define __clk_put(clk)
 #define __clk_get(clk) ({ 1; })
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

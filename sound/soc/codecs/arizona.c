@@ -20,6 +20,10 @@
 
 #include <linux/mfd/arizona/core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mfd/arizona/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/mfd/arizona/gpio.h>
 >>>>>>> v3.18
@@ -57,7 +61,10 @@
 #define ARIZONA_AIF_FORCE_WRITE                 0x1B
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ARIZONA_FLL_VCO_CORNER 141900000
 #define ARIZONA_FLL_MAX_FREF   13500000
 #define ARIZONA_FLL_MIN_FVCO   90000000
@@ -66,6 +73,9 @@
 #define ARIZONA_FLL_MIN_OUTDIV 2
 #define ARIZONA_FLL_MAX_OUTDIV 7
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define arizona_fll_err(_fll, fmt, ...) \
 	dev_err(_fll->arizona->dev, "FLL%d: " fmt, _fll->id, ##__VA_ARGS__)
@@ -108,7 +118,11 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 	case SND_SOC_DAPM_PRE_PMU:
 		if (!priv->spk_ena && manual_ena) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_write(codec, 0x4f5, 0x25a);
+=======
+			regmap_write_async(arizona->regmap, 0x4f5, 0x25a);
+>>>>>>> v3.18
 =======
 			regmap_write_async(arizona->regmap, 0x4f5, 0x25a);
 >>>>>>> v3.18
@@ -118,7 +132,11 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 	case SND_SOC_DAPM_POST_PMU:
 		val = snd_soc_read(codec, ARIZONA_INTERRUPT_RAW_STATUS_3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (val & ARIZONA_SPK_SHUTDOWN_STS) {
+=======
+		if (val & ARIZONA_SPK_OVERHEAT_STS) {
+>>>>>>> v3.18
 =======
 		if (val & ARIZONA_SPK_OVERHEAT_STS) {
 >>>>>>> v3.18
@@ -128,6 +146,7 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_update_bits(codec, ARIZONA_OUTPUT_ENABLES_1,
 				    1 << w->shift, 1 << w->shift);
 
@@ -135,6 +154,8 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 			msleep(75);
 			snd_soc_write(codec, 0x4f5, 0xda);
 =======
+=======
+>>>>>>> v3.18
 		regmap_update_bits_async(arizona->regmap,
 					 ARIZONA_OUTPUT_ENABLES_1,
 					 1 << w->shift, 1 << w->shift);
@@ -142,6 +163,9 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 		if (priv->spk_ena_pending) {
 			msleep(75);
 			regmap_write_async(arizona->regmap, 0x4f5, 0xda);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			priv->spk_ena_pending = false;
 			priv->spk_ena++;
@@ -152,12 +176,15 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 			priv->spk_ena--;
 			if (!priv->spk_ena)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_soc_write(codec, 0x4f5, 0x25a);
 		}
 
 		snd_soc_update_bits(codec, ARIZONA_OUTPUT_ENABLES_1,
 				    1 << w->shift, 0);
 =======
+=======
+>>>>>>> v3.18
 				regmap_write_async(arizona->regmap,
 						   0x4f5, 0x25a);
 		}
@@ -165,13 +192,21 @@ static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 		regmap_update_bits_async(arizona->regmap,
 					 ARIZONA_OUTPUT_ENABLES_1,
 					 1 << w->shift, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SND_SOC_DAPM_POST_PMD:
 		if (manual_ena) {
 			if (!priv->spk_ena)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_soc_write(codec, 0x4f5, 0x0da);
+=======
+				regmap_write_async(arizona->regmap,
+						   0x4f5, 0x0da);
+>>>>>>> v3.18
 =======
 				regmap_write_async(arizona->regmap,
 						   0x4f5, 0x0da);
@@ -195,7 +230,11 @@ static irqreturn_t arizona_thermal_warn(int irq, void *data)
 		dev_err(arizona->dev, "Failed to read thermal status: %d\n",
 			ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (val & ARIZONA_SPK_SHUTDOWN_WARN_STS) {
+=======
+	} else if (val & ARIZONA_SPK_OVERHEAT_WARN_STS) {
+>>>>>>> v3.18
 =======
 	} else if (val & ARIZONA_SPK_OVERHEAT_WARN_STS) {
 >>>>>>> v3.18
@@ -217,7 +256,11 @@ static irqreturn_t arizona_thermal_shutdown(int irq, void *data)
 		dev_err(arizona->dev, "Failed to read thermal status: %d\n",
 			ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (val & ARIZONA_SPK_SHUTDOWN_STS) {
+=======
+	} else if (val & ARIZONA_SPK_OVERHEAT_STS) {
+>>>>>>> v3.18
 =======
 	} else if (val & ARIZONA_SPK_OVERHEAT_STS) {
 >>>>>>> v3.18
@@ -256,12 +299,15 @@ int arizona_init_spk(struct snd_soc_codec *codec)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_dapm_new_controls(&codec->dapm, &arizona_spkr, 1);
 	if (ret != 0)
 		return ret;
 
 	ret = arizona_request_irq(arizona, ARIZONA_IRQ_SPK_SHUTDOWN_WARN,
 =======
+=======
+>>>>>>> v3.18
 	switch (arizona->type) {
 	case WM8997:
 		break;
@@ -274,6 +320,9 @@ int arizona_init_spk(struct snd_soc_codec *codec)
 	}
 
 	ret = arizona_request_irq(arizona, ARIZONA_IRQ_SPK_OVERHEAT_WARN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  "Thermal warning", arizona_thermal_warn,
 				  arizona);
@@ -283,7 +332,11 @@ int arizona_init_spk(struct snd_soc_codec *codec)
 			ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = arizona_request_irq(arizona, ARIZONA_IRQ_SPK_SHUTDOWN,
+=======
+	ret = arizona_request_irq(arizona, ARIZONA_IRQ_SPK_OVERHEAT,
+>>>>>>> v3.18
 =======
 	ret = arizona_request_irq(arizona, ARIZONA_IRQ_SPK_OVERHEAT,
 >>>>>>> v3.18
@@ -299,7 +352,10 @@ int arizona_init_spk(struct snd_soc_codec *codec)
 EXPORT_SYMBOL_GPL(arizona_init_spk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_route arizona_mono_routes[] = {
 	{ "OUT1R", NULL, "OUT1L" },
 	{ "OUT2R", NULL, "OUT2L" },
@@ -360,6 +416,9 @@ int arizona_init_gpio(struct snd_soc_codec *codec)
 }
 EXPORT_SYMBOL_GPL(arizona_init_gpio);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const char *arizona_mixer_texts[ARIZONA_NUM_MIXER_INPUTS] = {
 	"None",
@@ -388,11 +447,17 @@ const char *arizona_mixer_texts[ARIZONA_NUM_MIXER_INPUTS] = {
 	"AIF2RX1",
 	"AIF2RX2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	"AIF2RX3",
 	"AIF2RX4",
 	"AIF2RX5",
 	"AIF2RX6",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"AIF3RX1",
 	"AIF3RX2",
@@ -498,11 +563,17 @@ int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS] = {
 	0x28,  /* AIF2RX1 */
 	0x29,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	0x2a,
 	0x2b,
 	0x2c,
 	0x2d,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x30,  /* AIF3RX1 */
 	0x31,
@@ -596,7 +667,10 @@ EXPORT_SYMBOL_GPL(arizona_rate_val);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 const struct soc_enum arizona_isrc_fsh[] = {
 	SOC_VALUE_ENUM_SINGLE(ARIZONA_ISRC_1_CTRL_1,
 			      ARIZONA_ISRC1_FSH_SHIFT, 0xf,
@@ -613,6 +687,9 @@ const struct soc_enum arizona_isrc_fsh[] = {
 };
 EXPORT_SYMBOL_GPL(arizona_isrc_fsh);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const struct soc_enum arizona_isrc_fsl[] = {
 	SOC_VALUE_ENUM_SINGLE(ARIZONA_ISRC_1_CTRL_2,
@@ -631,7 +708,10 @@ const struct soc_enum arizona_isrc_fsl[] = {
 EXPORT_SYMBOL_GPL(arizona_isrc_fsl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 const struct soc_enum arizona_asrc_rate1 =
 	SOC_VALUE_ENUM_SINGLE(ARIZONA_ASRC_RATE1,
 			      ARIZONA_ASRC_RATE1_SHIFT, 0xf,
@@ -639,12 +719,16 @@ const struct soc_enum arizona_asrc_rate1 =
 			      arizona_rate_text, arizona_rate_val);
 EXPORT_SYMBOL_GPL(arizona_asrc_rate1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *arizona_vol_ramp_text[] = {
 	"0ms/6dB", "0.5ms/6dB", "1ms/6dB", "2ms/6dB", "4ms/6dB", "8ms/6dB",
 	"15ms/6dB", "30ms/6dB",
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const struct soc_enum arizona_in_vd_ramp =
 	SOC_ENUM_SINGLE(ARIZONA_INPUT_VOLUME_RAMP,
@@ -665,6 +749,8 @@ const struct soc_enum arizona_out_vi_ramp =
 	SOC_ENUM_SINGLE(ARIZONA_OUTPUT_VOLUME_RAMP,
 			ARIZONA_OUT_VI_RAMP_SHIFT, 7, arizona_vol_ramp_text);
 =======
+=======
+>>>>>>> v3.18
 SOC_ENUM_SINGLE_DECL(arizona_in_vd_ramp,
 		     ARIZONA_INPUT_VOLUME_RAMP,
 		     ARIZONA_IN_VD_RAMP_SHIFT,
@@ -687,6 +773,9 @@ SOC_ENUM_SINGLE_DECL(arizona_out_vi_ramp,
 		     ARIZONA_OUTPUT_VOLUME_RAMP,
 		     ARIZONA_OUT_VI_RAMP_SHIFT,
 		     arizona_vol_ramp_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(arizona_out_vi_ramp);
 
@@ -694,6 +783,7 @@ static const char *arizona_lhpf_mode_text[] = {
 	"Low-pass", "High-pass"
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const struct soc_enum arizona_lhpf1_mode =
 	SOC_ENUM_SINGLE(ARIZONA_HPLPF1_1, ARIZONA_LHPF1_MODE_SHIFT, 2,
@@ -714,6 +804,8 @@ const struct soc_enum arizona_lhpf4_mode =
 	SOC_ENUM_SINGLE(ARIZONA_HPLPF4_1, ARIZONA_LHPF4_MODE_SHIFT, 2,
 			arizona_lhpf_mode_text);
 =======
+=======
+>>>>>>> v3.18
 SOC_ENUM_SINGLE_DECL(arizona_lhpf1_mode,
 		     ARIZONA_HPLPF1_1,
 		     ARIZONA_LHPF1_MODE_SHIFT,
@@ -736,6 +828,9 @@ SOC_ENUM_SINGLE_DECL(arizona_lhpf4_mode,
 		     ARIZONA_HPLPF4_1,
 		     ARIZONA_LHPF4_MODE_SHIFT,
 		     arizona_lhpf_mode_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(arizona_lhpf4_mode);
 
@@ -744,12 +839,15 @@ static const char *arizona_ng_hold_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct soc_enum arizona_ng_hold =
 	SOC_ENUM_SINGLE(ARIZONA_NOISE_GATE_CONTROL, ARIZONA_NGATE_HOLD_SHIFT,
 			4, arizona_ng_hold_text);
 EXPORT_SYMBOL_GPL(arizona_ng_hold);
 
 =======
+=======
+>>>>>>> v3.18
 SOC_ENUM_SINGLE_DECL(arizona_ng_hold,
 		     ARIZONA_NOISE_GATE_CONTROL,
 		     ARIZONA_NGATE_HOLD_SHIFT,
@@ -786,6 +884,9 @@ const struct soc_enum arizona_in_dmic_osr[] = {
 };
 EXPORT_SYMBOL_GPL(arizona_in_dmic_osr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void arizona_in_set_vu(struct snd_soc_codec *codec, int ena)
 {
@@ -877,6 +978,10 @@ int arizona_hp_ev(struct snd_soc_dapm_widget *w,
 {
 	struct arizona_priv *priv = snd_soc_codec_get_drvdata(w->codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct arizona *arizona = priv->arizona;
+>>>>>>> v3.18
 =======
 	struct arizona *arizona = priv->arizona;
 >>>>>>> v3.18
@@ -903,7 +1008,12 @@ int arizona_hp_ev(struct snd_soc_dapm_widget *w,
 		val = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(w->codec, ARIZONA_OUTPUT_ENABLES_1, mask, val);
+=======
+	regmap_update_bits_async(arizona->regmap, ARIZONA_OUTPUT_ENABLES_1,
+				 mask, val);
+>>>>>>> v3.18
 =======
 	regmap_update_bits_async(arizona->regmap, ARIZONA_OUTPUT_ENABLES_1,
 				 mask, val);
@@ -1063,6 +1173,11 @@ static int arizona_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 {
 	struct snd_soc_codec *codec = dai->codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct arizona_priv *priv = snd_soc_codec_get_drvdata(codec);
+	struct arizona *arizona = priv->arizona;
+>>>>>>> v3.18
 =======
 	struct arizona_priv *priv = snd_soc_codec_get_drvdata(codec);
 	struct arizona *arizona = priv->arizona;
@@ -1124,6 +1239,7 @@ static int arizona_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, base + ARIZONA_AIF_BCLK_CTRL,
 			    ARIZONA_AIF1_BCLK_INV | ARIZONA_AIF1_BCLK_MSTR,
 			    bclk);
@@ -1136,6 +1252,8 @@ static int arizona_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 	snd_soc_update_bits(codec, base + ARIZONA_AIF_FORMAT,
 			    ARIZONA_AIF1_FMT_MASK, mode);
 =======
+=======
+>>>>>>> v3.18
 	regmap_update_bits_async(arizona->regmap, base + ARIZONA_AIF_BCLK_CTRL,
 				 ARIZONA_AIF1_BCLK_INV |
 				 ARIZONA_AIF1_BCLK_MSTR,
@@ -1149,6 +1267,9 @@ static int arizona_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 				 ARIZONA_AIF1RX_LRCLK_MSTR, lrclk);
 	regmap_update_bits(arizona->regmap, base + ARIZONA_AIF_FORMAT,
 			   ARIZONA_AIF1_FMT_MASK, mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1297,7 +1418,10 @@ static int arizona_startup(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void arizona_wm5102_set_dac_comp(struct snd_soc_codec *codec,
 					unsigned int rate)
 {
@@ -1323,6 +1447,9 @@ static void arizona_wm5102_set_dac_comp(struct snd_soc_codec *codec,
 			       ARRAY_SIZE(dac_comp));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int arizona_hw_params_rate(struct snd_pcm_substream *substream,
 				  struct snd_pcm_hw_params *params,
@@ -1351,7 +1478,10 @@ static int arizona_hw_params_rate(struct snd_pcm_substream *substream,
 	switch (dai_priv->clk) {
 	case ARIZONA_CLK_SYSCLK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		switch (priv->arizona->type) {
 		case WM5102:
 			arizona_wm5102_set_dac_comp(codec,
@@ -1361,6 +1491,9 @@ static int arizona_hw_params_rate(struct snd_pcm_substream *substream,
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snd_soc_update_bits(codec, ARIZONA_SAMPLE_RATE_1,
 				    ARIZONA_SAMPLE_RATE_1_MASK, sr_val);
@@ -1371,7 +1504,11 @@ static int arizona_hw_params_rate(struct snd_pcm_substream *substream,
 	case ARIZONA_CLK_ASYNCCLK:
 		snd_soc_update_bits(codec, ARIZONA_ASYNC_SAMPLE_RATE_1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    ARIZONA_ASYNC_SAMPLE_RATE_MASK, sr_val);
+=======
+				    ARIZONA_ASYNC_SAMPLE_RATE_1_MASK, sr_val);
+>>>>>>> v3.18
 =======
 				    ARIZONA_ASYNC_SAMPLE_RATE_1_MASK, sr_val);
 >>>>>>> v3.18
@@ -1389,7 +1526,10 @@ static int arizona_hw_params_rate(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool arizona_aif_cfg_changed(struct snd_soc_codec *codec,
 				    int base, int bclk, int lrclk, int frame)
 {
@@ -1411,6 +1551,9 @@ static bool arizona_aif_cfg_changed(struct snd_soc_codec *codec,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int arizona_hw_params(struct snd_pcm_substream *substream,
 			     struct snd_pcm_hw_params *params,
@@ -1423,11 +1566,14 @@ static int arizona_hw_params(struct snd_pcm_substream *substream,
 	const int *rates;
 	int i, ret, val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int chan_limit = arizona->pdata.max_channels_clocked[dai->id - 1];
 	int bclk, lrclk, wl, frame, bclk_target;
 
 	if (params_rate(params) % 4000)
 =======
+=======
+>>>>>>> v3.18
 	int channels = params_channels(params);
 	int chan_limit = arizona->pdata.max_channels_clocked[dai->id - 1];
 	int tdm_width = arizona->tdm_width[dai->id - 1];
@@ -1437,11 +1583,15 @@ static int arizona_hw_params(struct snd_pcm_substream *substream,
 	unsigned int aif_tx_state, aif_rx_state;
 
 	if (params_rate(params) % 8000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rates = &arizona_44k1_bclk_rates[0];
 	else
 		rates = &arizona_48k_bclk_rates[0];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bclk_target = snd_soc_params_to_bclk(params);
 	if (chan_limit && chan_limit < params_channels(params)) {
@@ -1456,6 +1606,8 @@ static int arizona_hw_params(struct snd_pcm_substream *substream,
 		arizona_aif_dbg(dai, "Forcing stereo mode\n");
 		bclk_target *= 2;
 =======
+=======
+>>>>>>> v3.18
 	wl = snd_pcm_format_width(params_format(params));
 
 	if (tdm_slots) {
@@ -1480,6 +1632,9 @@ static int arizona_hw_params(struct snd_pcm_substream *substream,
 		arizona_aif_dbg(dai, "Forcing stereo mode\n");
 		bclk_target /= channels;
 		bclk_target *= channels + 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1501,6 +1656,7 @@ static int arizona_hw_params(struct snd_pcm_substream *substream,
 	arizona_aif_dbg(dai, "BCLK %dHz LRCLK %dHz\n",
 			rates[bclk], rates[bclk] / lrclk);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wl = snd_pcm_format_width(params_format(params));
 	frame = wl << ARIZONA_AIF1TX_WL_SHIFT | wl;
@@ -1524,6 +1680,8 @@ static int arizona_hw_params(struct snd_pcm_substream *substream,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	frame = wl << ARIZONA_AIF1TX_WL_SHIFT | tdm_width;
 
 	reconfig = arizona_aif_cfg_changed(codec, base, bclk, lrclk, frame);
@@ -1576,6 +1734,9 @@ restore_aif:
 				   0xff, aif_rx_state);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1652,10 +1813,13 @@ static int arizona_set_tristate(struct snd_soc_dai *dai, int tristate)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct snd_soc_dai_ops arizona_dai_ops = {
 	.startup = arizona_startup,
 	.set_fmt = arizona_set_fmt,
 =======
+=======
+>>>>>>> v3.18
 static void arizona_set_channels_to_mask(struct snd_soc_dai *dai,
 					 unsigned int base,
 					 int channels, unsigned int mask)
@@ -1713,6 +1877,9 @@ const struct snd_soc_dai_ops arizona_dai_ops = {
 	.startup = arizona_startup,
 	.set_fmt = arizona_set_fmt,
 	.set_tdm_slot = arizona_set_tdm_slot,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.hw_params = arizona_hw_params,
 	.set_sysclk = arizona_dai_set_sysclk,
@@ -1721,7 +1888,10 @@ const struct snd_soc_dai_ops arizona_dai_ops = {
 EXPORT_SYMBOL_GPL(arizona_dai_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 const struct snd_soc_dai_ops arizona_simple_dai_ops = {
 	.startup = arizona_startup,
 	.hw_params = arizona_hw_params_rate,
@@ -1729,6 +1899,9 @@ const struct snd_soc_dai_ops arizona_simple_dai_ops = {
 };
 EXPORT_SYMBOL_GPL(arizona_simple_dai_ops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int arizona_init_dai(struct arizona_priv *priv, int id)
 {
@@ -1785,6 +1958,7 @@ struct arizona_fll_cfg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int arizona_calc_fll(struct arizona_fll *fll,
 			    struct arizona_fll_cfg *cfg,
 			    unsigned int Fref,
@@ -1825,6 +1999,8 @@ static int arizona_calc_fll(struct arizona_fll *fll,
 	}
 	target = Fout * div / fll->vco_mult;
 =======
+=======
+>>>>>>> v3.18
 static int arizona_validate_fll(struct arizona_fll *fll,
 				unsigned int Fref,
 				unsigned int Fout)
@@ -1961,11 +2137,15 @@ static int arizona_calc_fll(struct arizona_fll *fll,
 			return -EINVAL;
 	}
 	target = fll->fout * div / fll->vco_mult;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg->outdiv = div;
 
 	arizona_fll_dbg(fll, "Fvco=%dHz\n", target);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Find an appropraite FLL_FRATIO and factor it out of the target */
 	for (i = 0; i < ARRAY_SIZE(fll_fratios); i++) {
@@ -1993,6 +2173,8 @@ static int arizona_calc_fll(struct arizona_fll *fll,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Find an appropriate FLL_FRATIO and refdiv */
 	ratio = arizona_calc_fratio(fll, cfg, target, Fref, sync);
 	if (ratio < 0)
@@ -2000,6 +2182,9 @@ static int arizona_calc_fll(struct arizona_fll *fll,
 
 	/* Apply the division for our remaining calculations */
 	Fref = Fref / (1 << cfg->refdiv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cfg->n = target / (ratio * Fref);
@@ -2026,7 +2211,10 @@ static int arizona_calc_fll(struct arizona_fll *fll,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(fll_gains); i++) {
 		if (fll_gains[i].min <= Fref && Fref <= fll_gains[i].max) {
 			cfg->gain = fll_gains[i].gain;
@@ -2039,6 +2227,9 @@ static int arizona_calc_fll(struct arizona_fll *fll,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	arizona_fll_dbg(fll, "N=%x THETA=%x LAMBDA=%x\n",
 			cfg->n, cfg->theta, cfg->lambda);
@@ -2054,6 +2245,7 @@ static void arizona_apply_fll(struct arizona *arizona, unsigned int base,
 			      struct arizona_fll_cfg *cfg, int source,
 			      bool sync)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	regmap_update_bits(arizona->regmap, base + 3,
 			   ARIZONA_FLL1_THETA_MASK, cfg->theta);
@@ -2084,6 +2276,8 @@ static void arizona_apply_fll(struct arizona *arizona, unsigned int base,
 
 static bool arizona_is_enabled_fll(struct arizona_fll *fll)
 =======
+=======
+>>>>>>> v3.18
 	regmap_update_bits_async(arizona->regmap, base + 3,
 				 ARIZONA_FLL1_THETA_MASK, cfg->theta);
 	regmap_update_bits_async(arizona->regmap, base + 4,
@@ -2116,6 +2310,9 @@ static bool arizona_is_enabled_fll(struct arizona_fll *fll)
 }
 
 static int arizona_is_enabled_fll(struct arizona_fll *fll)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct arizona *arizona = fll->arizona;
@@ -2133,6 +2330,7 @@ static int arizona_is_enabled_fll(struct arizona_fll *fll)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arizona_enable_fll(struct arizona_fll *fll,
 			      struct arizona_fll_cfg *ref,
 			      struct arizona_fll_cfg *sync)
@@ -2140,6 +2338,8 @@ static void arizona_enable_fll(struct arizona_fll *fll,
 	struct arizona *arizona = fll->arizona;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 static int arizona_enable_fll(struct arizona_fll *fll)
 {
 	struct arizona *arizona = fll->arizona;
@@ -2159,12 +2359,16 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 					 ARIZONA_FLL1_FREERUN,
 					 ARIZONA_FLL1_FREERUN);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * If we have both REFCLK and SYNCCLK then enable both,
 	 * otherwise apply the SYNCCLK settings to REFCLK.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (fll->ref_src >= 0 && fll->ref_src != fll->sync_src) {
 		regmap_update_bits(arizona->regmap, fll->base + 5,
@@ -2190,6 +2394,8 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 		arizona_fll_err(fll, "No clocks provided\n");
 		return;
 =======
+=======
+>>>>>>> v3.18
 	if (fll->ref_src >= 0 && fll->ref_freq &&
 	    fll->ref_src != fll->sync_src) {
 		arizona_calc_fll(fll, &cfg, fll->ref_freq, false);
@@ -2214,6 +2420,9 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 	} else {
 		arizona_fll_err(fll, "No clocks provided\n");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2221,6 +2430,7 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 	 * Increase the bandwidth if we're not using a low frequency
 	 * sync source.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (fll->sync_src >= 0 && fll->sync_freq > 100000)
 		regmap_update_bits(arizona->regmap, fll->base + 0x17,
@@ -2231,6 +2441,8 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 
 	if (!arizona_is_enabled_fll(fll))
 =======
+=======
+>>>>>>> v3.18
 	if (use_sync && fll->sync_freq > 100000)
 		regmap_update_bits_async(arizona->regmap, fll->base + 0x17,
 					 ARIZONA_FLL1_SYNC_BW, 0);
@@ -2240,12 +2452,16 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 					 ARIZONA_FLL1_SYNC_BW);
 
 	if (!already_enabled)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pm_runtime_get(arizona->dev);
 
 	/* Clear any pending completions */
 	try_wait_for_completion(&fll->ok);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	regmap_update_bits(arizona->regmap, fll->base + 1,
 			   ARIZONA_FLL1_FREERUN, 0);
@@ -2257,6 +2473,8 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 				   ARIZONA_FLL1_SYNC_ENA,
 				   ARIZONA_FLL1_SYNC_ENA);
 =======
+=======
+>>>>>>> v3.18
 	regmap_update_bits_async(arizona->regmap, fll->base + 1,
 				 ARIZONA_FLL1_ENA, ARIZONA_FLL1_ENA);
 	if (use_sync)
@@ -2267,6 +2485,9 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 	if (already_enabled)
 		regmap_update_bits_async(arizona->regmap, fll->base + 1,
 					 ARIZONA_FLL1_FREERUN, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = wait_for_completion_timeout(&fll->ok,
@@ -2274,6 +2495,11 @@ static int arizona_enable_fll(struct arizona_fll *fll)
 	if (ret == 0)
 		arizona_fll_warn(fll, "Timed out waiting for lock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -2286,8 +2512,13 @@ static void arizona_disable_fll(struct arizona_fll *fll)
 	bool change;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regmap_update_bits(arizona->regmap, fll->base + 1,
 			   ARIZONA_FLL1_FREERUN, ARIZONA_FLL1_FREERUN);
+=======
+	regmap_update_bits_async(arizona->regmap, fll->base + 1,
+				 ARIZONA_FLL1_FREERUN, ARIZONA_FLL1_FREERUN);
+>>>>>>> v3.18
 =======
 	regmap_update_bits_async(arizona->regmap, fll->base + 1,
 				 ARIZONA_FLL1_FREERUN, ARIZONA_FLL1_FREERUN);
@@ -2297,6 +2528,11 @@ static void arizona_disable_fll(struct arizona_fll *fll)
 	regmap_update_bits(arizona->regmap, fll->base + 0x11,
 			   ARIZONA_FLL1_SYNC_ENA, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	regmap_update_bits_async(arizona->regmap, fll->base + 1,
+				 ARIZONA_FLL1_FREERUN, 0);
+>>>>>>> v3.18
 =======
 	regmap_update_bits_async(arizona->regmap, fll->base + 1,
 				 ARIZONA_FLL1_FREERUN, 0);
@@ -2310,8 +2546,12 @@ int arizona_set_fll_refclk(struct arizona_fll *fll, int source,
 			   unsigned int Fref, unsigned int Fout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arizona_fll_cfg ref, sync;
 	int ret;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -2320,6 +2560,7 @@ int arizona_set_fll_refclk(struct arizona_fll *fll, int source,
 		return 0;
 
 	if (fll->fout && Fref > 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = arizona_calc_fll(fll, &ref, Fref, fll->fout);
 		if (ret != 0)
@@ -2336,6 +2577,11 @@ int arizona_set_fll_refclk(struct arizona_fll *fll, int source,
 		if (ret != 0)
 			return ret;
 >>>>>>> v3.18
+=======
+		ret = arizona_validate_fll(fll, Fref, fll->fout);
+		if (ret != 0)
+			return ret;
+>>>>>>> v3.18
 	}
 
 	fll->ref_src = source;
@@ -2343,15 +2589,21 @@ int arizona_set_fll_refclk(struct arizona_fll *fll, int source,
 
 	if (fll->fout && Fref > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		arizona_enable_fll(fll, &ref, &sync);
 	}
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		ret = arizona_enable_fll(fll);
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(arizona_set_fll_refclk);
@@ -2360,8 +2612,12 @@ int arizona_set_fll(struct arizona_fll *fll, int source,
 		    unsigned int Fref, unsigned int Fout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arizona_fll_cfg ref, sync;
 	int ret;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -2373,8 +2629,12 @@ int arizona_set_fll(struct arizona_fll *fll, int source,
 	if (Fout) {
 		if (fll->ref_src >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = arizona_calc_fll(fll, &ref, fll->ref_freq,
 					       Fout);
+=======
+			ret = arizona_validate_fll(fll, fll->ref_freq, Fout);
+>>>>>>> v3.18
 =======
 			ret = arizona_validate_fll(fll, fll->ref_freq, Fout);
 >>>>>>> v3.18
@@ -2383,7 +2643,11 @@ int arizona_set_fll(struct arizona_fll *fll, int source,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = arizona_calc_fll(fll, &sync, Fref, Fout);
+=======
+		ret = arizona_validate_fll(fll, Fref, Fout);
+>>>>>>> v3.18
 =======
 		ret = arizona_validate_fll(fll, Fref, Fout);
 >>>>>>> v3.18
@@ -2396,6 +2660,7 @@ int arizona_set_fll(struct arizona_fll *fll, int source,
 	fll->fout = Fout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (Fout) {
 		arizona_enable_fll(fll, &ref, &sync);
 	} else {
@@ -2404,12 +2669,17 @@ int arizona_set_fll(struct arizona_fll *fll, int source,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (Fout)
 		ret = arizona_enable_fll(fll);
 	else
 		arizona_disable_fll(fll);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(arizona_set_fll);

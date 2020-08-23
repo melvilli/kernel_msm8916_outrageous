@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -601,7 +605,13 @@ acpi_ev_initialize_region(union acpi_operand_object *region_obj,
 
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* Ignore other objects */
+=======
+
+				/* Ignore other objects */
+
+>>>>>>> v3.18
 =======
 
 				/* Ignore other objects */

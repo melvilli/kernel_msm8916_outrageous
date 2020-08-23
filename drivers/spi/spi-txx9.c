@@ -27,7 +27,11 @@
 #include <linux/io.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/gpio.h>
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -85,7 +89,10 @@ struct txx9spi {
 	int baseclk;
 	struct clk *clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 max_speed_hz, min_speed_hz;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int last_chipselect;
@@ -106,6 +113,10 @@ static void txx9spi_cs_func(struct spi_device *spi, struct txx9spi *c,
 {
 	int val = (spi->mode & SPI_CS_HIGH) ? on : !on;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -128,6 +139,7 @@ static int txx9spi_setup(struct spi_device *spi)
 {
 	struct txx9spi *c = spi_master_get_devdata(spi->master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 bits_per_word;
 
 	if (!spi->max_speed_hz
@@ -137,6 +149,10 @@ static int txx9spi_setup(struct spi_device *spi)
 
 	bits_per_word = spi->bits_per_word;
 	if (bits_per_word != 8 && bits_per_word != 16)
+=======
+
+	if (!spi->max_speed_hz)
+>>>>>>> v3.18
 =======
 
 	if (!spi->max_speed_hz)
@@ -199,7 +215,11 @@ static void txx9spi_work_one(struct txx9spi *c, struct spi_message *m)
 			TXx9_SPCR0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry (t, &m->transfers, transfer_list) {
+=======
+	list_for_each_entry(t, &m->transfers, transfer_list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(t, &m->transfers, transfer_list) {
 >>>>>>> v3.18
@@ -217,6 +237,10 @@ static void txx9spi_work_one(struct txx9spi *c, struct spi_message *m)
 				|| prev_bits_per_word != bits_per_word) {
 			int n = DIV_ROUND_UP(c->baseclk, speed_hz) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -295,7 +319,12 @@ static void txx9spi_work_one(struct txx9spi *c, struct spi_message *m)
 exit:
 	m->status = status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->complete(m->context);
+=======
+	if (m->complete)
+		m->complete(m->context);
+>>>>>>> v3.18
 =======
 	if (m->complete)
 		m->complete(m->context);
@@ -343,6 +372,7 @@ static int txx9spi_transfer(struct spi_device *spi, struct spi_message *m)
 
 	/* check each transfer's parameters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry (t, &m->transfers, transfer_list) {
 		u32 speed_hz = t->speed_hz ? : spi->max_speed_hz;
 		u8 bits_per_word = t->bits_per_word;
@@ -355,6 +385,11 @@ static int txx9spi_transfer(struct spi_device *spi, struct spi_message *m)
 			return -EINVAL;
 		if (speed_hz < c->min_speed_hz || speed_hz > c->max_speed_hz)
 			return -EINVAL;
+=======
+	list_for_each_entry(t, &m->transfers, transfer_list) {
+		if (!t->tx_buf && !t->rx_buf && t->len)
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 	list_for_each_entry(t, &m->transfers, transfer_list) {
 		if (!t->tx_buf && !t->rx_buf && t->len)
@@ -391,7 +426,11 @@ static int txx9spi_probe(struct platform_device *dev)
 	init_waitqueue_head(&c->waitq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->clk = clk_get(&dev->dev, "spi-baseclk");
+=======
+	c->clk = devm_clk_get(&dev->dev, "spi-baseclk");
+>>>>>>> v3.18
 =======
 	c->clk = devm_clk_get(&dev->dev, "spi-baseclk");
 >>>>>>> v3.18
@@ -403,13 +442,17 @@ static int txx9spi_probe(struct platform_device *dev)
 	ret = clk_enable(c->clk);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_put(c->clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		c->clk = NULL;
 		goto exit;
 	}
 	c->baseclk = clk_get_rate(c->clk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	c->min_speed_hz = DIV_ROUND_UP(c->baseclk, SPI_MAX_DIVIDER + 1);
 	c->max_speed_hz = c->baseclk / (SPI_MIN_DIVIDER + 1);
@@ -423,12 +466,17 @@ static int txx9spi_probe(struct platform_device *dev)
 	c->membase = devm_ioremap(&dev->dev, res->start, resource_size(res));
 	if (!c->membase)
 =======
+=======
+>>>>>>> v3.18
 	master->min_speed_hz = DIV_ROUND_UP(c->baseclk, SPI_MAX_DIVIDER + 1);
 	master->max_speed_hz = c->baseclk / (SPI_MIN_DIVIDER + 1);
 
 	res = platform_get_resource(dev, IORESOURCE_MEM, 0);
 	c->membase = devm_ioremap_resource(&dev->dev, res);
 	if (IS_ERR(c->membase))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto exit_busy;
 
@@ -463,8 +511,14 @@ static int txx9spi_probe(struct platform_device *dev)
 	master->transfer = txx9spi_transfer;
 	master->num_chipselect = (u16)UINT_MAX; /* any GPIO numbers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = spi_register_master(master);
+=======
+	master->bits_per_word_mask = SPI_BPW_MASK(8) | SPI_BPW_MASK(16);
+
+	ret = devm_spi_register_master(&dev->dev, master);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_MASK(8) | SPI_BPW_MASK(16);
 
@@ -479,11 +533,16 @@ exit:
 	if (c->workqueue)
 		destroy_workqueue(c->workqueue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->clk) {
 		clk_disable(c->clk);
 		clk_put(c->clk);
 	}
 	platform_set_drvdata(dev, NULL);
+=======
+	if (c->clk)
+		clk_disable(c->clk);
+>>>>>>> v3.18
 =======
 	if (c->clk)
 		clk_disable(c->clk);
@@ -495,6 +554,7 @@ exit:
 static int txx9spi_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *master = spi_master_get(platform_get_drvdata(dev));
 	struct txx9spi *c = spi_master_get_devdata(master);
 
@@ -505,11 +565,16 @@ static int txx9spi_remove(struct platform_device *dev)
 	clk_put(c->clk);
 	spi_master_put(master);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_master *master = platform_get_drvdata(dev);
 	struct txx9spi *c = spi_master_get_devdata(master);
 
 	destroy_workqueue(c->workqueue);
 	clk_disable(c->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -519,6 +584,10 @@ MODULE_ALIAS("platform:spi_txx9");
 
 static struct platform_driver txx9spi_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe = txx9spi_probe,
+>>>>>>> v3.18
 =======
 	.probe = txx9spi_probe,
 >>>>>>> v3.18
@@ -532,7 +601,11 @@ static struct platform_driver txx9spi_driver = {
 static int __init txx9spi_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return platform_driver_probe(&txx9spi_driver, txx9spi_probe);
+=======
+	return platform_driver_register(&txx9spi_driver);
+>>>>>>> v3.18
 =======
 	return platform_driver_register(&txx9spi_driver);
 >>>>>>> v3.18

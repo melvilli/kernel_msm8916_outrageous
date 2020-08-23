@@ -21,6 +21,7 @@ static inline void ceph_crypto_key_destroy(struct ceph_crypto_key *key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ceph_crypto_key_clone(struct ceph_crypto_key *dst,
 				 const struct ceph_crypto_key *src);
 extern int ceph_crypto_key_encode(struct ceph_crypto_key *key,
@@ -53,6 +54,8 @@ extern void ceph_crypto_shutdown(void);
 extern int ceph_armor(char *dst, const char *src, const char *end);
 extern int ceph_unarmor(char *dst, const char *src, const char *end);
 =======
+=======
+>>>>>>> v3.18
 int ceph_crypto_key_clone(struct ceph_crypto_key *dst,
 			  const struct ceph_crypto_key *src);
 int ceph_crypto_key_encode(struct ceph_crypto_key *key, void **p, void *end);
@@ -80,6 +83,9 @@ void ceph_crypto_shutdown(void);
 /* armor.c */
 int ceph_armor(char *dst, const char *src, const char *end);
 int ceph_unarmor(char *dst, const char *src, const char *end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

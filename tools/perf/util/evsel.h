@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <linux/perf_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
 #include "xyarray.h"
 #include "cgroup.h"
@@ -13,10 +14,15 @@
 #include "symbol.h"
  
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include "xyarray.h"
 #include "symbol.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct perf_counts_values {
 	union {
@@ -46,9 +52,12 @@ struct perf_sample_id {
 	u64		 	id;
 	struct perf_evsel	*evsel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Holds total ID period value for PERF_SAMPLE_READ processing. */
 	u64			period;
@@ -56,6 +65,9 @@ struct perf_sample_id {
 
 struct cgroup_sel;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** struct perf_evsel - event selector
  *
@@ -63,13 +75,19 @@ struct cgroup_sel;
  *         so that when showing results in tools such as 'perf stat', we
  *         show the name used, not some alias.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @id_pos: the position of the event id (PERF_SAMPLE_ID or
  *          PERF_SAMPLE_IDENTIFIER) in a sample event i.e. in the array of
  *          struct sample_event
  * @is_pos: the position (counting backwards) of the event id (PERF_SAMPLE_ID or
  *          PERF_SAMPLE_IDENTIFIER) in a non-sample event i.e. if sample_id_all
  *          is used there is an id sample appended to non-sample events
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct perf_evsel {
@@ -84,8 +102,14 @@ struct perf_evsel {
 	int			idx;
 	u32			ids;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hists		hists;
 	char			*name;
+=======
+	char			*name;
+	double			scale;
+	const char		*unit;
+>>>>>>> v3.18
 =======
 	char			*name;
 	double			scale;
@@ -97,6 +121,7 @@ struct perf_evsel {
 		off_t		id_offset;
 	};
 	struct cgroup_sel	*cgrp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct {
 		void		*func;
@@ -110,6 +135,8 @@ struct perf_evsel {
 	int			exclude_GH;
 	int			nr_members;
 =======
+=======
+>>>>>>> v3.18
 	void			*handler;
 	struct cpu_map		*cpus;
 	unsigned int		sample_size;
@@ -125,11 +152,15 @@ struct perf_evsel {
 	int			exclude_GH;
 	int			nr_members;
 	int			sample_read;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct perf_evsel	*leader;
 	char			*group_name;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define hists_to_evsel(h) container_of(h, struct perf_evsel, hists)
 
@@ -141,6 +172,8 @@ struct perf_record_opts;
 struct perf_evsel *perf_evsel__new(struct perf_event_attr *attr, int idx);
 struct perf_evsel *perf_evsel__newtp(const char *sys, const char *name, int idx);
 =======
+=======
+>>>>>>> v3.18
 union u64_swap {
 	u64 val64;
 	u32 val32[2];
@@ -169,6 +202,9 @@ static inline struct perf_evsel *perf_evsel__newtp(const char *sys, const char *
 {
 	return perf_evsel__newtp_idx(sys, name, 0);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct event_format *event_format__new(const char *sys, const char *name);
@@ -180,12 +216,18 @@ void perf_evsel__delete(struct perf_evsel *evsel);
 
 void perf_evsel__config(struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct perf_record_opts *opts);
 =======
+=======
+>>>>>>> v3.18
 			struct record_opts *opts);
 
 int __perf_evsel__sample_size(u64 sample_type);
 void perf_evsel__calc_id_pos(struct perf_evsel *evsel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 bool perf_evsel__is_cache_op_valid(u8 type, u8 op);
@@ -204,6 +246,7 @@ int __perf_evsel__hw_cache_type_op_res_name(u8 type, u8 op, u8 result,
 					    char *bf, size_t size);
 const char *perf_evsel__name(struct perf_evsel *evsel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char *perf_evsel__group_name(struct perf_evsel *evsel);
 int perf_evsel__group_desc(struct perf_evsel *evsel, char *buf, size_t size);
 
@@ -214,6 +257,8 @@ void perf_evsel__reset_counts(struct perf_evsel *evsel, int ncpus);
 void perf_evsel__free_fd(struct perf_evsel *evsel);
 void perf_evsel__free_id(struct perf_evsel *evsel);
 =======
+=======
+>>>>>>> v3.18
 
 const char *perf_evsel__group_name(struct perf_evsel *evsel);
 int perf_evsel__group_desc(struct perf_evsel *evsel, char *buf, size_t size);
@@ -221,6 +266,9 @@ int perf_evsel__group_desc(struct perf_evsel *evsel, char *buf, size_t size);
 int perf_evsel__alloc_id(struct perf_evsel *evsel, int ncpus, int nthreads);
 int perf_evsel__alloc_counts(struct perf_evsel *evsel, int ncpus);
 void perf_evsel__reset_counts(struct perf_evsel *evsel, int ncpus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void perf_evsel__free_counts(struct perf_evsel *evsel);
 void perf_evsel__close_fd(struct perf_evsel *evsel, int ncpus, int nthreads);
@@ -237,17 +285,23 @@ void __perf_evsel__reset_sample_bit(struct perf_evsel *evsel,
 	__perf_evsel__reset_sample_bit(evsel, PERF_SAMPLE_##bit)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void perf_evsel__set_sample_id(struct perf_evsel *evsel);
 
 int perf_evsel__set_filter(struct perf_evsel *evsel, int ncpus, int nthreads,
 			   const char *filter);
 =======
+=======
+>>>>>>> v3.18
 void perf_evsel__set_sample_id(struct perf_evsel *evsel,
 			       bool use_sample_identifier);
 
 int perf_evsel__set_filter(struct perf_evsel *evsel, int ncpus, int nthreads,
 			   const char *filter);
 int perf_evsel__enable(struct perf_evsel *evsel, int ncpus, int nthreads);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int perf_evsel__open_per_cpu(struct perf_evsel *evsel,
@@ -288,13 +342,19 @@ static inline bool perf_evsel__match2(struct perf_evsel *e1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define perf_evsel__cmp(a, b)			\
 	((a) &&					\
 	 (b) &&					\
 	 (a)->attr.type == (b)->attr.type &&	\
 	 (a)->attr.config == (b)->attr.config)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __perf_evsel__read_on_cpu(struct perf_evsel *evsel,
 			      int cpu, int thread, bool scale);
@@ -355,8 +415,11 @@ static inline int perf_evsel__read_scaled(struct perf_evsel *evsel,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hists__init(struct hists *hists);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int perf_evsel__parse_sample(struct perf_evsel *evsel, union perf_event *event,
@@ -368,12 +431,18 @@ static inline struct perf_evsel *perf_evsel__next(struct perf_evsel *evsel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct perf_evsel *perf_evsel__prev(struct perf_evsel *evsel)
 {
 	return list_entry(evsel->node.prev, struct perf_evsel, node);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * perf_evsel__is_group_leader - Return whether given evsel is a leader event
@@ -404,7 +473,10 @@ static inline bool perf_evsel__is_group_event(struct perf_evsel *evsel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * perf_evsel__is_function_event - Return whether given evsel is a function
  * trace event
@@ -423,6 +495,9 @@ static inline bool perf_evsel__is_function_event(struct perf_evsel *evsel)
 #undef FUNCTION_EVENT
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct perf_attr_details {
 	bool freq;
@@ -436,8 +511,12 @@ int perf_evsel__fprintf(struct perf_evsel *evsel,
 bool perf_evsel__fallback(struct perf_evsel *evsel, int err,
 			  char *msg, size_t msgsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_evsel__open_strerror(struct perf_evsel *evsel,
 			      struct perf_target *target,
+=======
+int perf_evsel__open_strerror(struct perf_evsel *evsel, struct target *target,
+>>>>>>> v3.18
 =======
 int perf_evsel__open_strerror(struct perf_evsel *evsel, struct target *target,
 >>>>>>> v3.18

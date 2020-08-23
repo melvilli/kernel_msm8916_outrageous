@@ -87,7 +87,11 @@ typedef uint64_t blkif_sector_t;
  * The backend can optionally provide three extra XenBus attributes to
  * further optimize the discard functionality:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 'discard-aligment' - Devices that support discard functionality may
+=======
+ * 'discard-alignment' - Devices that support discard functionality may
+>>>>>>> v3.18
 =======
  * 'discard-alignment' - Devices that support discard functionality may
 >>>>>>> v3.18
@@ -108,7 +112,10 @@ typedef uint64_t blkif_sector_t;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Recognized if "feature-max-indirect-segments" in present in the backend
  * xenbus info. The "feature-max-indirect-segments" node contains the maximum
  * number of segments allowed by the backend per request. If the node is
@@ -133,6 +140,9 @@ typedef uint64_t blkif_sector_t;
 #define BLKIF_OP_INDIRECT          6
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Maximum scatter/gather segments per request.
  * This is carefully chosen so that sizeof(struct blkif_ring) <= PAGE_SIZE.
@@ -141,11 +151,14 @@ typedef uint64_t blkif_sector_t;
 #define BLKIF_MAX_SEGMENTS_PER_REQUEST 11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct blkif_request_rw {
 	uint8_t        nr_segments;  /* number of segments                   */
 	blkif_vdev_t   handle;       /* only for read/write requests         */
 #ifdef CONFIG_X86_64
 =======
+=======
+>>>>>>> v3.18
 #define BLKIF_MAX_INDIRECT_PAGES_PER_REQUEST 8
 
 struct blkif_request_segment {
@@ -159,11 +172,15 @@ struct blkif_request_rw {
 	uint8_t        nr_segments;  /* number of segments                   */
 	blkif_vdev_t   handle;       /* only for read/write requests         */
 #ifndef CONFIG_X86_32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t       _pad1;	     /* offsetof(blkif_request,u.rw.id) == 8 */
 #endif
 	uint64_t       id;           /* private guest value, echoed in resp  */
 	blkif_sector_t sector_number;/* start sector idx on disk (r/w only)  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct blkif_request_segment {
 		grant_ref_t gref;        /* reference to I/O buffer frame        */
@@ -174,6 +191,9 @@ struct blkif_request_rw {
 =======
 	struct blkif_request_segment seg[BLKIF_MAX_SEGMENTS_PER_REQUEST];
 >>>>>>> v3.18
+=======
+	struct blkif_request_segment seg[BLKIF_MAX_SEGMENTS_PER_REQUEST];
+>>>>>>> v3.18
 } __attribute__((__packed__));
 
 struct blkif_request_discard {
@@ -181,7 +201,11 @@ struct blkif_request_discard {
 #define BLKIF_DISCARD_SECURE (1<<0)  /* ignored if discard-secure=0          */
 	blkif_vdev_t   _pad1;        /* only for read/write requests         */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
+=======
+#ifndef CONFIG_X86_32
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_X86_32
 >>>>>>> v3.18
@@ -197,7 +221,11 @@ struct blkif_request_other {
 	uint8_t      _pad1;
 	blkif_vdev_t _pad2;        /* only for read/write requests         */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
+=======
+#ifndef CONFIG_X86_32
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_X86_32
 >>>>>>> v3.18
@@ -207,7 +235,10 @@ struct blkif_request_other {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct blkif_request_indirect {
 	uint8_t        indirect_op;
 	uint16_t       nr_segments;
@@ -226,6 +257,9 @@ struct blkif_request_indirect {
 #endif
 } __attribute__((__packed__));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct blkif_request {
 	uint8_t        operation;    /* BLKIF_OP_???                         */
@@ -234,6 +268,10 @@ struct blkif_request {
 		struct blkif_request_discard discard;
 		struct blkif_request_other other;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct blkif_request_indirect indirect;
+>>>>>>> v3.18
 =======
 		struct blkif_request_indirect indirect;
 >>>>>>> v3.18

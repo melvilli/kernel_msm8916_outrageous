@@ -23,6 +23,10 @@
 #include <linux/sched.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -32,7 +36,12 @@
 #include <linux/ctype.h>
 #include <linux/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/device.h>
+=======
+#include <linux/completion.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 
@@ -55,7 +64,12 @@ static LIST_HEAD(shutdown_files);
 static const struct file_operations snd_shutdown_f_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int snd_cards_lock;	/* locked for registering/using */
+=======
+/* locked for registering/using */
+static DECLARE_BITMAP(snd_cards_lock, SNDRV_CARDS);
+>>>>>>> v3.18
 =======
 /* locked for registering/using */
 static DECLARE_BITMAP(snd_cards_lock, SNDRV_CARDS);
@@ -70,8 +84,11 @@ module_param_array(slots, charp, NULL, 0444);
 MODULE_PARM_DESC(slots, "Module names assigned to the slots.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SND_CARD_STATE_MAX_LEN 16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* return non-zero if the given index is reserved for the given
@@ -84,7 +101,11 @@ static int module_slot_match(struct module *module, int idx)
 	const char *s1, *s2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!module || !module->name || !slots[idx])
+=======
+	if (!module || !*module->name || !slots[idx])
+>>>>>>> v3.18
 =======
 	if (!module || !*module->name || !slots[idx])
 >>>>>>> v3.18
@@ -116,7 +137,11 @@ static int module_slot_match(struct module *module, int idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_MIXER_OSS) || defined(CONFIG_SND_MIXER_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_MIXER_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_MIXER_OSS)
 >>>>>>> v3.18
@@ -131,6 +156,7 @@ static void snd_card_id_read(struct snd_info_entry *entry,
 	snd_iprintf(buffer, "%s\n", entry->card->id);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t snd_card_state_read(struct snd_info_entry *entry,
 			       void *file_private_data, struct file *file,
@@ -174,6 +200,8 @@ static inline int init_info_for_card(struct snd_card *card)
 	if ((entry = snd_info_create_card_entry(card, "id", card->proc_root)) == NULL) {
 		snd_printd("unable to create card entry\n");
 =======
+=======
+>>>>>>> v3.18
 static inline int init_info_for_card(struct snd_card *card)
 {
 	int err;
@@ -185,6 +213,9 @@ static inline int init_info_for_card(struct snd_card *card)
 	}
 	if ((entry = snd_info_create_card_entry(card, "id", card->proc_root)) == NULL) {
 		dev_dbg(card->dev, "unable to create card entry\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return err;
 	}
@@ -194,6 +225,7 @@ static inline int init_info_for_card(struct snd_card *card)
 		entry = NULL;
 	}
 	card->proc_id = entry;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	entry_state = snd_info_create_card_entry(card, "state",
@@ -215,6 +247,8 @@ static inline int init_info_for_card(struct snd_card *card)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 #else /* !CONFIG_PROC_FS */
@@ -222,9 +256,12 @@ static inline int init_info_for_card(struct snd_card *card)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  *  snd_card_create - create and initialize a soundcard structure
 =======
+=======
+>>>>>>> v3.18
 static int check_empty_slot(struct module *module, int slot)
 {
 	return !slots[slot] || !*slots[slot];
@@ -261,6 +298,9 @@ static void release_card_device(struct device *dev)
 /**
  *  snd_card_new - create and initialize a soundcard structure
  *  @parent: the parent device object
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  @idx: card index (address) [0 ... (SNDRV_CARDS-1)]
  *  @xid: card identification (ASCII string)
@@ -277,7 +317,11 @@ static void release_card_device(struct device *dev)
  *  Return: Zero if successful or a negative error code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_card_create(int idx, const char *xid,
+=======
+int snd_card_new(struct device *parent, int idx, const char *xid,
+>>>>>>> v3.18
 =======
 int snd_card_new(struct device *parent, int idx, const char *xid,
 >>>>>>> v3.18
@@ -286,7 +330,11 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 {
 	struct snd_card *card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err, idx2;
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -301,6 +349,11 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	if (!card)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (extra_size > 0)
+		card->private_data = (char *)card + sizeof(struct snd_card);
+>>>>>>> v3.18
 =======
 	if (extra_size > 0)
 		card->private_data = (char *)card + sizeof(struct snd_card);
@@ -309,6 +362,7 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 		strlcpy(card->id, xid, sizeof(card->id));
 	err = 0;
 	mutex_lock(&snd_card_mutex);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (idx < 0) {
 		for (idx2 = 0; idx2 < SNDRV_CARDS; idx2++)
@@ -335,6 +389,8 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	else if (idx < snd_ecards_limit) {
 		if (snd_cards_lock & (1 << idx))
 =======
+=======
+>>>>>>> v3.18
 	if (idx < 0) /* first check the matching module-name slot */
 		idx = get_slot_from_bitmask(idx, module_slot_match, module);
 	if (idx < 0) /* if not matched, assign an empty slot */
@@ -343,12 +399,16 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 		err = -ENODEV;
 	else if (idx < snd_ecards_limit) {
 		if (test_bit(idx, snd_cards_lock))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = -EBUSY;	/* invalid */
 	} else if (idx >= SNDRV_CARDS)
 		err = -ENODEV;
 	if (err < 0) {
 		mutex_unlock(&snd_card_mutex);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		snd_printk(KERN_ERR "cannot find the slot for index %d (range 0-%i), error: %d\n",
 			 idx, snd_ecards_limit - 1, err);
@@ -359,6 +419,8 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 		snd_ecards_limit = idx + 1; /* increase the limit */
 	mutex_unlock(&snd_card_mutex);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(parent, "cannot find the slot for index %d (range 0-%i), error: %d\n",
 			 idx, snd_ecards_limit - 1, err);
 		kfree(card);
@@ -369,6 +431,9 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 		snd_ecards_limit = idx + 1; /* increase the limit */
 	mutex_unlock(&snd_card_mutex);
 	card->dev = parent;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	card->number = idx;
 	card->module = module;
@@ -381,8 +446,11 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	spin_lock_init(&card->files_lock);
 	INIT_LIST_HEAD(&card->files_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&card->shutdown_sleep);
 	atomic_set(&card->refcount, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PM
@@ -390,8 +458,11 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	init_waitqueue_head(&card->power_sleep);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&card->offline_poll_wait);
 =======
+=======
+>>>>>>> v3.18
 
 	device_initialize(&card->card_dev);
 	card->card_dev.parent = parent;
@@ -402,13 +473,20 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	if (err < 0)
 		goto __error;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* the control interface cannot be accessed from the user space until */
 	/* snd_cards_bitmask and snd_cards are set with snd_card_register */
 	err = snd_ctl_create(card);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to register control minors\n");
+=======
+		dev_err(parent, "unable to register control minors\n");
+>>>>>>> v3.18
 =======
 		dev_err(parent, "unable to register control minors\n");
 >>>>>>> v3.18
@@ -416,6 +494,7 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	}
 	err = snd_info_card_create(card);
 	if (err < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to create card info\n");
 		goto __error_ctl;
@@ -427,10 +506,16 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 		goto __error_ctl;
 	}
 >>>>>>> v3.18
+=======
+		dev_err(parent, "unable to create card info\n");
+		goto __error_ctl;
+	}
+>>>>>>> v3.18
 	*card_ret = card;
 	return 0;
 
       __error_ctl:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snd_device_free_all(card, SNDRV_DEV_CMD_PRE);
       __error:
@@ -439,12 +524,17 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 }
 EXPORT_SYMBOL(snd_card_create);
 =======
+=======
+>>>>>>> v3.18
 	snd_device_free_all(card);
       __error:
 	put_device(&card->card_dev);
   	return err;
 }
 EXPORT_SYMBOL(snd_card_new);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* return non-zero if a card is already locked */
@@ -454,7 +544,11 @@ int snd_card_locked(int card)
 
 	mutex_lock(&snd_card_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	locked = snd_cards_lock & (1 << card);
+=======
+	locked = test_bit(card, snd_cards_lock);
+>>>>>>> v3.18
 =======
 	locked = test_bit(card, snd_cards_lock);
 >>>>>>> v3.18
@@ -570,7 +664,11 @@ int snd_card_disconnect(struct snd_card *card)
 	mutex_lock(&snd_card_mutex);
 	snd_cards[card->number] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_cards_lock &= ~(1 << card->number);
+=======
+	clear_bit(card->number, snd_cards_lock);
+>>>>>>> v3.18
 =======
 	clear_bit(card->number, snd_cards_lock);
 >>>>>>> v3.18
@@ -597,7 +695,11 @@ int snd_card_disconnect(struct snd_card *card)
 	/* at this point, they cannot respond to any calls except release() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_MIXER_OSS) || defined(CONFIG_SND_MIXER_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_MIXER_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_MIXER_OSS)
 >>>>>>> v3.18
@@ -609,6 +711,7 @@ int snd_card_disconnect(struct snd_card *card)
 	err = snd_device_disconnect_all(card);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "not all devices for card %i can be disconnected\n", card->number);
 
 	snd_info_card_disconnect(card);
@@ -616,12 +719,17 @@ int snd_card_disconnect(struct snd_card *card)
 		device_unregister(card->card_dev);
 		card->card_dev = NULL;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(card->dev, "not all devices for card %i can be disconnected\n", card->number);
 
 	snd_info_card_disconnect(card);
 	if (card->registered) {
 		device_del(&card->card_dev);
 		card->registered = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #ifdef CONFIG_PM
@@ -646,6 +754,7 @@ EXPORT_SYMBOL(snd_card_disconnect);
 static int snd_card_do_free(struct snd_card *card)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_MIXER_OSS) || defined(CONFIG_SND_MIXER_OSS_MODULE)
 	if (snd_mixer_oss_notify_callback)
 		snd_mixer_oss_notify_callback(card, SND_MIXER_OSS_NOTIFY_FREE);
@@ -663,31 +772,43 @@ static int snd_card_do_free(struct snd_card *card)
 		/* Fatal, but this situation should never occur */
 	}
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SND_MIXER_OSS)
 	if (snd_mixer_oss_notify_callback)
 		snd_mixer_oss_notify_callback(card, SND_MIXER_OSS_NOTIFY_FREE);
 #endif
 	snd_device_free_all(card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (card->private_free)
 		card->private_free(card);
 	snd_info_free_entry(card->proc_id);
 	if (snd_info_card_free(card) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "unable to free card info\n");
 		/* Not fatal error */
 	}
 =======
+=======
+>>>>>>> v3.18
 		dev_warn(card->dev, "unable to free card info\n");
 		/* Not fatal error */
 	}
 	if (card->release_completion)
 		complete(card->release_completion);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(card);
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * snd_card_unref - release the reference counter
@@ -724,6 +845,8 @@ int snd_card_free_when_closed(struct snd_card *card)
 }
 
 =======
+=======
+>>>>>>> v3.18
 int snd_card_free_when_closed(struct snd_card *card)
 {
 	int ret = snd_card_disconnect(card);
@@ -732,11 +855,15 @@ int snd_card_free_when_closed(struct snd_card *card)
 	put_device(&card->card_dev);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(snd_card_free_when_closed);
 
 int snd_card_free(struct snd_card *card)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = snd_card_disconnect(card);
 	if (ret)
@@ -819,6 +946,8 @@ static void snd_card_set_id_no_lock(struct snd_card *card, const char *nid)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct completion released;
 	int ret;
 
@@ -927,6 +1056,9 @@ static void snd_card_set_id_no_lock(struct snd_card *card, const char *src,
 	dev_err(card->dev, "unable to set card id (%s)\n", id);
 	if (card->proc_root->name)
 		strlcpy(card->id, card->proc_root->name, sizeof(card->id));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -945,7 +1077,11 @@ void snd_card_set_id(struct snd_card *card, const char *nid)
 		return;
 	mutex_lock(&snd_card_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_id_no_lock(card, nid);
+=======
+	snd_card_set_id_no_lock(card, nid, nid);
+>>>>>>> v3.18
 =======
 	snd_card_set_id_no_lock(card, nid, nid);
 >>>>>>> v3.18
@@ -958,8 +1094,13 @@ card_id_show_attr(struct device *dev,
 		  struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_card *card = dev_get_drvdata(dev);
 	return snprintf(buf, PAGE_SIZE, "%s\n", card ? card->id : "(null)");
+=======
+	struct snd_card *card = container_of(dev, struct snd_card, card_dev);
+	return snprintf(buf, PAGE_SIZE, "%s\n", card->id);
+>>>>>>> v3.18
 =======
 	struct snd_card *card = container_of(dev, struct snd_card, card_dev);
 	return snprintf(buf, PAGE_SIZE, "%s\n", card->id);
@@ -971,7 +1112,11 @@ card_id_store_attr(struct device *dev, struct device_attribute *attr,
 		   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_card *card = dev_get_drvdata(dev);
+=======
+	struct snd_card *card = container_of(dev, struct snd_card, card_dev);
+>>>>>>> v3.18
 =======
 	struct snd_card *card = container_of(dev, struct snd_card, card_dev);
 >>>>>>> v3.18
@@ -990,6 +1135,7 @@ card_id_store_attr(struct device *dev, struct device_attribute *attr,
 	buf1[copy] = '\0';
 	mutex_lock(&snd_card_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!snd_info_check_reserved_words(buf1)) {
 	     __exist:
 		mutex_unlock(&snd_card_mutex);
@@ -1007,12 +1153,17 @@ card_id_store_attr(struct device *dev, struct device_attribute *attr,
 	snd_info_card_id_change(card);
 __ok:
 =======
+=======
+>>>>>>> v3.18
 	if (!card_id_ok(NULL, buf1)) {
 		mutex_unlock(&snd_card_mutex);
 		return -EEXIST;
 	}
 	strcpy(card->id, buf1);
 	snd_info_card_id_change(card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&snd_card_mutex);
 
@@ -1020,8 +1171,12 @@ __ok:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute card_id_attrs =
 	__ATTR(id, S_IRUGO | S_IWUSR, card_id_show_attr, card_id_store_attr);
+=======
+static DEVICE_ATTR(id, S_IRUGO | S_IWUSR, card_id_show_attr, card_id_store_attr);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(id, S_IRUGO | S_IWUSR, card_id_show_attr, card_id_store_attr);
 >>>>>>> v3.18
@@ -1031,6 +1186,7 @@ card_number_show_attr(struct device *dev,
 		     struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_card *card = dev_get_drvdata(dev);
 	return snprintf(buf, PAGE_SIZE, "%i\n", card ? card->number : -1);
 }
@@ -1038,6 +1194,8 @@ card_number_show_attr(struct device *dev,
 static struct device_attribute card_number_attrs =
 	__ATTR(number, S_IRUGO, card_number_show_attr, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_card *card = container_of(dev, struct snd_card, card_dev);
 	return snprintf(buf, PAGE_SIZE, "%i\n", card->number);
 }
@@ -1058,6 +1216,9 @@ static const struct attribute_group *card_dev_attr_groups[] = {
 	&card_dev_attr_group,
 	NULL
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1079,6 +1240,7 @@ int snd_card_register(struct snd_card *card)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!card->card_dev) {
 		card->card_dev = device_create(sound_class, card->dev,
 					       MKDEV(0, 0), card,
@@ -1086,11 +1248,16 @@ int snd_card_register(struct snd_card *card)
 		if (IS_ERR(card->card_dev))
 			card->card_dev = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (!card->registered) {
 		err = device_add(&card->card_dev);
 		if (err < 0)
 			return err;
 		card->registered = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1102,6 +1269,7 @@ int snd_card_register(struct snd_card *card)
 		mutex_unlock(&snd_card_mutex);
 		return 0;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snd_card_set_id_no_lock(card, card->id[0] == '\0' ? NULL : card->id);
 	snd_cards[card->number] = card;
@@ -1121,6 +1289,8 @@ int snd_card_register(struct snd_card *card)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (*card->id) {
 		/* make a unique id name from the given string */
 		char tmpid[sizeof(card->id)];
@@ -1140,6 +1310,9 @@ int snd_card_register(struct snd_card *card)
 	if (snd_mixer_oss_notify_callback)
 		snd_mixer_oss_notify_callback(card, SND_MIXER_OSS_NOTIFY_REGISTER);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1314,7 +1487,11 @@ int snd_card_file_add(struct snd_card *card, struct file *file)
 	}
 	list_add(&mfile->list, &card->files_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&card->refcount);
+=======
+	get_device(&card->card_dev);
+>>>>>>> v3.18
 =======
 	get_device(&card->card_dev);
 >>>>>>> v3.18
@@ -1357,23 +1534,30 @@ int snd_card_file_remove(struct snd_card *card, struct file *file)
 	spin_unlock(&card->files_lock);
 	if (!found) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ALSA card file remove problem (%p)\n", file);
 		return -ENOENT;
 	}
 	kfree(found);
 	snd_card_unref(card);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(card->dev, "card file remove problem (%p)\n", file);
 		return -ENOENT;
 	}
 	kfree(found);
 	put_device(&card->card_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 EXPORT_SYMBOL(snd_card_file_remove);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * snd_card_change_online_state - mark card's online/offline state
@@ -1404,6 +1588,8 @@ bool snd_card_is_online_state(struct snd_card *card)
 }
 EXPORT_SYMBOL(snd_card_is_online_state);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PM

@@ -45,7 +45,12 @@ int v4l2_device_register(struct device *dev, struct v4l2_device *v4l2_dev)
 	if (dev == NULL) {
 		/* If dev == NULL, then name must be filled in by the caller */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ON(!v4l2_dev->name[0]);
+=======
+		if (WARN_ON(!v4l2_dev->name[0]))
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 		if (WARN_ON(!v4l2_dev->name[0]))
 			return -EINVAL;
@@ -111,7 +116,13 @@ void v4l2_device_unregister(struct v4l2_device *v4l2_dev)
 	struct v4l2_subdev *sd, *next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v4l2_dev == NULL)
+=======
+	/* Just return if v4l2_dev is NULL or if it was already
+	 * unregistered before. */
+	if (v4l2_dev == NULL || !v4l2_dev->name[0])
+>>>>>>> v3.18
 =======
 	/* Just return if v4l2_dev is NULL or if it was already
 	 * unregistered before. */
@@ -147,6 +158,11 @@ void v4l2_device_unregister(struct v4l2_device *v4l2_dev)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Mark as unregistered, thus preventing duplicate unregistrations */
+	v4l2_dev->name[0] = '\0';
+>>>>>>> v3.18
 =======
 	/* Mark as unregistered, thus preventing duplicate unregistrations */
 	v4l2_dev->name[0] = '\0';
@@ -170,8 +186,11 @@ int v4l2_device_register_subdev(struct v4l2_device *v4l2_dev,
 	WARN_ON(sd->v4l2_dev != NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!try_module_get(sd->owner))
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The reason to acquire the module here is to avoid unloading
 	 * a module of sub-device which is registered to a media
@@ -183,6 +202,9 @@ int v4l2_device_register_subdev(struct v4l2_device *v4l2_dev,
 		sd->owner == v4l2_dev->dev->driver->owner;
 
 	if (!sd->owner_v4l2_dev && !try_module_get(sd->owner))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 
@@ -218,7 +240,12 @@ error_unregister:
 		sd->internal_ops->unregistered(sd);
 error_module:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_put(sd->owner);
+=======
+	if (!sd->owner_v4l2_dev)
+		module_put(sd->owner);
+>>>>>>> v3.18
 =======
 	if (!sd->owner_v4l2_dev)
 		module_put(sd->owner);
@@ -305,12 +332,15 @@ void v4l2_device_unregister_subdev(struct v4l2_subdev *sd)
 
 #if defined(CONFIG_MEDIA_CONTROLLER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v4l2_dev->mdev)
 		media_device_unregister_entity(&sd->entity);
 #endif
 	video_unregister_device(sd->devnode);
 	module_put(sd->owner);
 =======
+=======
+>>>>>>> v3.18
 	if (v4l2_dev->mdev) {
 		media_entity_remove_links(&sd->entity);
 		media_device_unregister_entity(&sd->entity);
@@ -319,6 +349,9 @@ void v4l2_device_unregister_subdev(struct v4l2_subdev *sd)
 	video_unregister_device(sd->devnode);
 	if (!sd->owner_v4l2_dev)
 		module_put(sd->owner);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(v4l2_device_unregister_subdev);

@@ -13,8 +13,11 @@
 #define USER_R (S_IFREG|S_IRUGO)
 #define USER_W (S_IFREG|S_IWUGO)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USER_RW (S_IFREG|S_IRUGO|S_IWUGO)
 #define ROOT_W (S_IFREG|S_IRUGO|S_IWUSR)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

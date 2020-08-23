@@ -23,6 +23,7 @@
 #define __ARCH_ARM_MACH_OMAP2_PRM_REGBITS_44XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Used by PRM_LDO_SRAM_CORE_SETUP, PRM_LDO_SRAM_IVA_SETUP,
@@ -2326,6 +2327,8 @@
 #define OMAP4430_Y_MINOR_SHIFT						0
 #define OMAP4430_Y_MINOR_MASK						(0x3f << 0)
 =======
+=======
+>>>>>>> v3.18
 #define OMAP4430_C2C_RST_SHIFT						10
 #define OMAP4430_CMDRA_VDD_CORE_L_MASK					(0xff << 0)
 #define OMAP4430_CMDRA_VDD_IVA_L_MASK					(0xff << 8)
@@ -2402,5 +2405,8 @@
 #define OMAP4430_WUCLK_CTRL_MASK					(1 << 8)
 #define OMAP4430_WUCLK_STATUS_SHIFT					9
 #define OMAP4430_WUCLK_STATUS_MASK					(1 << 9)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

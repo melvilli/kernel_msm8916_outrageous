@@ -16,6 +16,10 @@
 #include "util/evsel.h"
 #include "util/sort.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+>>>>>>> v3.18
 =======
 #include "util/data.h"
 >>>>>>> v3.18
@@ -29,6 +33,10 @@ static u64			nr_unordered;
 extern const struct option	record_options[];
 static bool			no_callchain;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool			latency_format;
+>>>>>>> v3.18
 =======
 static bool			latency_format;
 >>>>>>> v3.18
@@ -50,6 +58,11 @@ enum perf_output_field {
 	PERF_OUTPUT_ADDR            = 1U << 10,
 	PERF_OUTPUT_SYMOFFSET       = 1U << 11,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_OUTPUT_SRCLINE         = 1U << 12,
+	PERF_OUTPUT_PERIOD          = 1U << 13,
+>>>>>>> v3.18
 =======
 	PERF_OUTPUT_SRCLINE         = 1U << 12,
 	PERF_OUTPUT_PERIOD          = 1U << 13,
@@ -73,6 +86,11 @@ struct output_option {
 	{.str = "addr",  .field = PERF_OUTPUT_ADDR},
 	{.str = "symoff", .field = PERF_OUTPUT_SYMOFFSET},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{.str = "srcline", .field = PERF_OUTPUT_SRCLINE},
+	{.str = "period", .field = PERF_OUTPUT_PERIOD},
+>>>>>>> v3.18
 =======
 	{.str = "srcline", .field = PERF_OUTPUT_SRCLINE},
 	{.str = "period", .field = PERF_OUTPUT_PERIOD},
@@ -84,6 +102,10 @@ static struct {
 	bool user_set;
 	bool wildcard_set;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int print_ip_opts;
+>>>>>>> v3.18
 =======
 	unsigned int print_ip_opts;
 >>>>>>> v3.18
@@ -98,7 +120,12 @@ static struct {
 			      PERF_OUTPUT_CPU | PERF_OUTPUT_TIME |
 			      PERF_OUTPUT_EVNAME | PERF_OUTPUT_IP |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  PERF_OUTPUT_SYM | PERF_OUTPUT_DSO,
+=======
+			      PERF_OUTPUT_SYM | PERF_OUTPUT_DSO |
+			      PERF_OUTPUT_PERIOD,
+>>>>>>> v3.18
 =======
 			      PERF_OUTPUT_SYM | PERF_OUTPUT_DSO |
 			      PERF_OUTPUT_PERIOD,
@@ -114,7 +141,12 @@ static struct {
 			      PERF_OUTPUT_CPU | PERF_OUTPUT_TIME |
 			      PERF_OUTPUT_EVNAME | PERF_OUTPUT_IP |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  PERF_OUTPUT_SYM | PERF_OUTPUT_DSO,
+=======
+			      PERF_OUTPUT_SYM | PERF_OUTPUT_DSO |
+			      PERF_OUTPUT_PERIOD,
+>>>>>>> v3.18
 =======
 			      PERF_OUTPUT_SYM | PERF_OUTPUT_DSO |
 			      PERF_OUTPUT_PERIOD,
@@ -138,7 +170,12 @@ static struct {
 			      PERF_OUTPUT_CPU | PERF_OUTPUT_TIME |
 			      PERF_OUTPUT_EVNAME | PERF_OUTPUT_IP |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  PERF_OUTPUT_SYM | PERF_OUTPUT_DSO,
+=======
+			      PERF_OUTPUT_SYM | PERF_OUTPUT_DSO |
+			      PERF_OUTPUT_PERIOD,
+>>>>>>> v3.18
 =======
 			      PERF_OUTPUT_SYM | PERF_OUTPUT_DSO |
 			      PERF_OUTPUT_PERIOD,
@@ -217,10 +254,13 @@ static int perf_evsel__check_attr(struct perf_evsel *evsel,
 					    PERF_OUTPUT_IP))
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (!no_callchain &&
 		    !(attr->sample_type & PERF_SAMPLE_CALLCHAIN))
 			symbol_conf.use_callchain = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -248,12 +288,18 @@ static int perf_evsel__check_attr(struct perf_evsel *evsel,
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (PRINT_FIELD(SRCLINE) && !PRINT_FIELD(IP)) {
 		pr_err("Display of source line number requested but sample IP is not\n"
 		       "selected. Hence, no address to lookup the source line number.\n");
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((PRINT_FIELD(PID) || PRINT_FIELD(TID)) &&
@@ -272,10 +318,13 @@ static int perf_evsel__check_attr(struct perf_evsel *evsel,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (PRINT_FIELD(PERIOD) &&
 		perf_evsel__check_stype(evsel, PERF_SAMPLE_PERIOD, "PERIOD",
 					PERF_OUTPUT_PERIOD))
@@ -305,6 +354,9 @@ static void set_print_ip_opts(struct perf_event_attr *attr)
 		output[type].print_ip_opts |= PRINT_IP_OPT_SRCLINE;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * verify all user requested events exist and the samples
@@ -333,9 +385,12 @@ static int perf_session__check_output_opt(struct perf_session *session)
 			perf_evsel__check_attr(evsel, session))
 			return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 		if (evsel == NULL)
 			continue;
@@ -380,6 +435,9 @@ static int perf_session__check_output_opt(struct perf_session *session)
 	}
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -390,7 +448,10 @@ static void print_sample_start(struct perf_sample *sample,
 {
 	struct perf_event_attr *attr = &evsel->attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *evname = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long secs;
@@ -400,17 +461,23 @@ static void print_sample_start(struct perf_sample *sample,
 	if (PRINT_FIELD(COMM)) {
 		if (latency_format)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printf("%8.8s ", thread->comm);
 		else if (PRINT_FIELD(IP) && symbol_conf.use_callchain)
 			printf("%s ", thread->comm);
 		else
 			printf("%16s ", thread->comm);
 =======
+=======
+>>>>>>> v3.18
 			printf("%8.8s ", thread__comm_str(thread));
 		else if (PRINT_FIELD(IP) && symbol_conf.use_callchain)
 			printf("%s ", thread__comm_str(thread));
 		else
 			printf("%16s ", thread__comm_str(thread));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -435,6 +502,7 @@ static void print_sample_start(struct perf_sample *sample,
 		usecs = nsecs / NSECS_PER_USEC;
 		printf("%5lu.%06lu: ", secs, usecs);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (PRINT_FIELD(EVNAME)) {
@@ -464,6 +532,8 @@ static bool sample_addr_correlates_sym(struct perf_event_attr *attr)
 	return false;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static void print_sample_addr(union perf_event *event,
@@ -474,7 +544,10 @@ static void print_sample_addr(union perf_event *event,
 {
 	struct addr_location al;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 cpumode = event->header.misc & PERF_RECORD_MISC_CPUMODE_MASK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -483,6 +556,7 @@ static void print_sample_addr(union perf_event *event,
 	if (!sample_addr_correlates_sym(attr))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	thread__find_addr_map(thread, machine, cpumode, MAP__FUNCTION,
 			      sample->addr, &al);
@@ -495,6 +569,9 @@ static void print_sample_addr(union perf_event *event,
 
 	if (al.map)
 		al.sym = map__find_symbol(al.map, al.addr, NULL);
+=======
+	perf_event__preprocess_sample_addr(event, sample, machine, thread, &al);
+>>>>>>> v3.18
 =======
 	perf_event__preprocess_sample_addr(event, sample, machine, thread, &al);
 >>>>>>> v3.18
@@ -518,6 +595,7 @@ static void print_sample_bts(union perf_event *event,
 			     struct perf_sample *sample,
 			     struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     struct machine *machine,
 			     struct thread *thread)
 {
@@ -540,6 +618,8 @@ static void print_sample_bts(union perf_event *event,
 	if (PRINT_FIELD(ADDR))
 		print_sample_addr(event, sample, machine, thread, attr);
 =======
+=======
+>>>>>>> v3.18
 			     struct thread *thread,
 			     struct addr_location *al)
 {
@@ -573,6 +653,9 @@ static void print_sample_bts(union perf_event *event,
 
 	if (print_srcline_last)
 		map__fprintf_srcline(al->map, al->addr, "\n  ", stdout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printf("\n");
@@ -580,16 +663,22 @@ static void print_sample_bts(union perf_event *event,
 
 static void process_event(union perf_event *event, struct perf_sample *sample,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct perf_evsel *evsel, struct machine *machine,
 			  struct addr_location *al)
 {
 	struct perf_event_attr *attr = &evsel->attr;
 	struct thread *thread = al->thread;
 =======
+=======
+>>>>>>> v3.18
 			  struct perf_evsel *evsel, struct thread *thread,
 			  struct addr_location *al)
 {
 	struct perf_event_attr *attr = &evsel->attr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (output[attr->type].fields == 0)
@@ -598,9 +687,12 @@ static void process_event(union perf_event *event, struct perf_sample *sample,
 	print_sample_start(sample, thread, evsel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_bts_event(attr)) {
 		print_sample_bts(event, sample, evsel, machine, thread);
 =======
+=======
+>>>>>>> v3.18
 	if (PRINT_FIELD(PERIOD))
 		printf("%10" PRIu64 " ", sample->period);
 
@@ -611,6 +703,9 @@ static void process_event(union perf_event *event, struct perf_sample *sample,
 
 	if (is_bts_event(attr)) {
 		print_sample_bts(event, sample, evsel, thread, al);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -620,7 +715,11 @@ static void process_event(union perf_event *event, struct perf_sample *sample,
 				    sample->raw_data, sample->raw_size);
 	if (PRINT_FIELD(ADDR))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print_sample_addr(event, sample, machine, thread, attr);
+=======
+		print_sample_addr(event, sample, al->machine, thread, attr);
+>>>>>>> v3.18
 =======
 		print_sample_addr(event, sample, al->machine, thread, attr);
 >>>>>>> v3.18
@@ -631,14 +730,20 @@ static void process_event(union perf_event *event, struct perf_sample *sample,
 		else
 			printf("\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perf_evsel__print_ip(evsel, event, sample, machine,
 				     PRINT_FIELD(SYM), PRINT_FIELD(DSO),
 				     PRINT_FIELD(SYMOFFSET));
 =======
+=======
+>>>>>>> v3.18
 
 		perf_evsel__print_ip(evsel, sample, al,
 				     output[attr->type].print_ip_opts,
 				     PERF_MAX_STACK_DEPTH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -653,12 +758,18 @@ static int default_start_script(const char *script __maybe_unused,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int default_flush_script(void)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int default_stop_script(void)
 {
@@ -674,6 +785,10 @@ static int default_generate_script(struct pevent *pevent __maybe_unused,
 static struct scripting_ops default_scripting_ops = {
 	.start_script		= default_start_script,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flush_script		= default_flush_script,
+>>>>>>> v3.18
 =======
 	.flush_script		= default_flush_script,
 >>>>>>> v3.18
@@ -693,12 +808,18 @@ static void setup_scripting(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int flush_scripting(void)
 {
 	return scripting_ops->flush_script();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cleanup_scripting(void)
 {
@@ -715,7 +836,12 @@ static int process_sample_event(struct perf_tool *tool __maybe_unused,
 {
 	struct addr_location al;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, event->ip.tid);
+=======
+	struct thread *thread = machine__findnew_thread(machine, sample->pid,
+							sample->tid);
+>>>>>>> v3.18
 =======
 	struct thread *thread = machine__findnew_thread(machine, sample->pid,
 							sample->tid);
@@ -739,7 +865,11 @@ static int process_sample_event(struct perf_tool *tool __maybe_unused,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (perf_event__preprocess_sample(event, machine, &al, sample, 0) < 0) {
+=======
+	if (perf_event__preprocess_sample(event, machine, &al, sample) < 0) {
+>>>>>>> v3.18
 =======
 	if (perf_event__preprocess_sample(event, machine, &al, sample) < 0) {
 >>>>>>> v3.18
@@ -754,6 +884,7 @@ static int process_sample_event(struct perf_tool *tool __maybe_unused,
 	if (cpu_list && !test_bit(sample->cpu, cpu_bitmap))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	scripting_ops->process_event(event, sample, evsel, machine, &al);
 
@@ -777,6 +908,8 @@ static struct perf_tool perf_script = {
 
 extern volatile int session_done;
 =======
+=======
+>>>>>>> v3.18
 	scripting_ops->process_event(event, sample, evsel, thread, &al);
 
 	return 0;
@@ -973,6 +1106,9 @@ static int process_mmap2_event(struct perf_tool *tool,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void sig_handler(int sig __maybe_unused)
@@ -981,7 +1117,11 @@ static void sig_handler(int sig __maybe_unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cmd_script(struct perf_session *session)
+=======
+static int __cmd_script(struct perf_script *script)
+>>>>>>> v3.18
 =======
 static int __cmd_script(struct perf_script *script)
 >>>>>>> v3.18
@@ -991,8 +1131,11 @@ static int __cmd_script(struct perf_script *script)
 	signal(SIGINT, sig_handler);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = perf_session__process_events(session, &perf_script);
 =======
+=======
+>>>>>>> v3.18
 	/* override event processing functions */
 	if (script->show_task_events) {
 		script->tool.comm = process_comm_event;
@@ -1005,6 +1148,9 @@ static int __cmd_script(struct perf_script *script)
 	}
 
 	ret = perf_session__process_events(script->session, &script->tool);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (debug_mode)
@@ -1316,9 +1462,15 @@ static struct script_desc *script_desc__new(const char *name)
 static void script_desc__delete(struct script_desc *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(s->name);
 	free(s->half_liner);
 	free(s->args);
+=======
+	zfree(&s->name);
+	zfree(&s->half_liner);
+	zfree(&s->args);
+>>>>>>> v3.18
 =======
 	zfree(&s->name);
 	zfree(&s->half_liner);
@@ -1529,8 +1681,12 @@ static int check_ev_match(char *dir_name, char *scriptname,
 
 			match = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_for_each_entry(pos,
 					&session->evlist->entries, node) {
+=======
+			evlist__for_each(session->evlist, pos) {
+>>>>>>> v3.18
 =======
 			evlist__for_each(session->evlist, pos) {
 >>>>>>> v3.18
@@ -1565,11 +1721,14 @@ int find_scripts(char **scripts_array, char **scripts_path_array)
 	DIR *scripts_dir, *lang_dir;
 	struct perf_session *session;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *temp;
 	int i = 0;
 
 	session = perf_session__new(input_name, O_RDONLY, 0, false, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct perf_data_file file = {
 		.path = input_name,
 		.mode = PERF_DATA_MODE_READ,
@@ -1578,6 +1737,9 @@ int find_scripts(char **scripts_array, char **scripts_path_array)
 	int i = 0;
 
 	session = perf_session__new(&file, false, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!session)
 		return -1;
@@ -1723,6 +1885,12 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 {
 	bool show_full_info = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool header = false;
+	bool header_only = false;
+	bool script_started = false;
+>>>>>>> v3.18
 =======
 	bool header = false;
 	bool header_only = false;
@@ -1734,8 +1902,11 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	char *script_path = NULL;
 	const char **__argv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, err;
 =======
+=======
+>>>>>>> v3.18
 	int i, j, err = 0;
 	struct perf_script script = {
 		.tool = {
@@ -1752,6 +1923,9 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 			.ordering_requires_timestamps = true,
 		},
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct option options[] = {
 	OPT_BOOLEAN('D', "dump-raw-trace", &dump_trace,
@@ -1771,6 +1945,11 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_BOOLEAN('d', "debug-mode", &debug_mode,
 		   "do various checks like samples ordering and lost events"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OPT_BOOLEAN(0, "header", &header, "Show data header."),
+	OPT_BOOLEAN(0, "header-only", &header_only, "Show only data header."),
+>>>>>>> v3.18
 =======
 	OPT_BOOLEAN(0, "header", &header, "Show data header."),
 	OPT_BOOLEAN(0, "header-only", &header_only, "Show only data header."),
@@ -1788,7 +1967,11 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		     "Valid types: hw,sw,trace,raw. "
 		     "Fields: comm,tid,pid,time,cpu,event,trace,ip,sym,dso,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     "addr,symoff", parse_output_fields),
+=======
+		     "addr,symoff,period", parse_output_fields),
+>>>>>>> v3.18
 =======
 		     "addr,symoff,period", parse_output_fields),
 >>>>>>> v3.18
@@ -1804,11 +1987,17 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_BOOLEAN('\0', "show-kernel-path", &symbol_conf.show_kernel_path,
 		    "Show the path of [kernel.kallsyms]"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	OPT_BOOLEAN('\0', "show-task-events", &script.show_task_events,
 		    "Show the fork/comm/exit events"),
 	OPT_BOOLEAN('\0', "show-mmap-events", &script.show_mmap_events,
 		    "Show the mmap events"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPT_END()
 	};
@@ -1821,6 +2010,12 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		NULL
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct perf_data_file file = {
+		.mode = PERF_DATA_MODE_READ,
+	};
+>>>>>>> v3.18
 =======
 	struct perf_data_file file = {
 		.mode = PERF_DATA_MODE_READ,
@@ -1833,6 +2028,11 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 			     PARSE_OPT_STOP_AT_NON_OPTION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	file.path = input_name;
+
+>>>>>>> v3.18
 =======
 	file.path = input_name;
 
@@ -1996,6 +2196,7 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (symbol__init() < 0)
 		return -1;
 	if (!script_name)
@@ -2014,6 +2215,8 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	if (!script_name && !generate_script_lang)
 		perf_session__fprintf_info(session, stdout, show_full_info);
 =======
+=======
+>>>>>>> v3.18
 	if (!script_name)
 		setup_pager();
 
@@ -2037,6 +2240,9 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		if (err < 0)
 			goto out_delete;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!no_callchain)
@@ -2052,6 +2258,7 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 			fprintf(stderr,
 				"custom fields not supported for generated scripts");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -1;
 		}
 
@@ -2060,6 +2267,8 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 			perror("failed to open file");
 			return -1;
 =======
+=======
+>>>>>>> v3.18
 			err = -EINVAL;
 			goto out_delete;
 		}
@@ -2069,6 +2278,9 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 			err = -errno;
 			perror("failed to open file");
 			goto out_delete;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2076,7 +2288,11 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		if (err < 0) {
 			perror("failed to stat file");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -1;
+=======
+			goto out_delete;
+>>>>>>> v3.18
 =======
 			goto out_delete;
 >>>>>>> v3.18
@@ -2085,7 +2301,11 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		if (!perf_stat.st_size) {
 			fprintf(stderr, "zero-sized file, nothing to do!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			goto out_delete;
+>>>>>>> v3.18
 =======
 			goto out_delete;
 >>>>>>> v3.18
@@ -2095,6 +2315,7 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		if (!scripting_ops) {
 			fprintf(stderr, "invalid language specifier");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -1;
 		}
 
@@ -2102,6 +2323,8 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 						     "perf-script");
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 			err = -ENOENT;
 			goto out_delete;
 		}
@@ -2109,6 +2332,9 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		err = scripting_ops->generate_script(session->tevent.pevent,
 						     "perf-script");
 		goto out_delete;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2116,8 +2342,14 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 		err = scripting_ops->start_script(script_name, argc, argv);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
 		pr_debug("perf script started with script %s\n\n", script_name);
+=======
+			goto out_delete;
+		pr_debug("perf script started with script %s\n\n", script_name);
+		script_started = true;
+>>>>>>> v3.18
 =======
 			goto out_delete;
 		pr_debug("perf script started with script %s\n\n", script_name);
@@ -2129,6 +2361,7 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	err = perf_session__check_output_opt(session);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 
 	err = __cmd_script(session);
@@ -2136,6 +2369,8 @@ int cmd_script(int argc, const char **argv, const char *prefix __maybe_unused)
 	perf_session__delete(session);
 	cleanup_scripting();
 =======
+=======
+>>>>>>> v3.18
 		goto out_delete;
 
 	err = __cmd_script(&script);
@@ -2147,6 +2382,9 @@ out_delete:
 
 	if (script_started)
 		cleanup_scripting();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return err;

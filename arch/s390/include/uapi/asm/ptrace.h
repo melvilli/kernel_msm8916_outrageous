@@ -200,6 +200,10 @@ typedef struct
 {
 	__u32   fpc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u32	pad;
+>>>>>>> v3.18
 =======
 	__u32	pad;
 >>>>>>> v3.18
@@ -211,7 +215,10 @@ typedef struct
 #define FPC_DXC_MASK            0x0000FF00
 #define FPC_RM_MASK             0x00000003
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FPC_VALID_MASK          0xF8F8FF03
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -271,7 +278,11 @@ typedef struct
 #define PSW_MASK_BA		0x0000000080000000UL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PSW_MASK_USER		0x0000FF8180000000UL
+=======
+#define PSW_MASK_USER		0x0000FF0180000000UL
+>>>>>>> v3.18
 =======
 #define PSW_MASK_USER		0x0000FF0180000000UL
 >>>>>>> v3.18
@@ -412,7 +423,10 @@ typedef struct
 #define PTRACE_ENABLE_TE	      0x5009
 #define PTRACE_DISABLE_TE	      0x5010
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PTRACE_TE_ABORT_RAND	      0x5011
 
 /*
@@ -420,6 +434,9 @@ typedef struct
  * not overlap with any of the number assigned in <linux/ptrace.h>.
  */
 #define PTRACE_SINGLEBLOCK	12	/* resume execution until next branch */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

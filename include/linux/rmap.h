@@ -11,11 +11,14 @@
 #include <linux/memcontrol.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int isolate_lru_page(struct page *page);
 extern void putback_lru_page(struct page *page);
 extern unsigned long reclaim_pages_from_list(struct list_head *page_list,
 					     struct vm_area_struct *vma);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -81,10 +84,16 @@ struct anon_vma_chain {
 
 enum ttu_flags {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TTU_UNMAP = 0,			/* unmap mode */
 	TTU_MIGRATION = 1,		/* migration mode */
 	TTU_MUNLOCK = 2,		/* munlock mode */
 	TTU_ACTION_MASK = 0xff,
+=======
+	TTU_UNMAP = 1,			/* unmap mode */
+	TTU_MIGRATION = 2,		/* migration mode */
+	TTU_MUNLOCK = 4,		/* munlock mode */
+>>>>>>> v3.18
 =======
 	TTU_UNMAP = 1,			/* unmap mode */
 	TTU_MIGRATION = 2,		/* migration mode */
@@ -166,7 +175,11 @@ static inline void anon_vma_merge(struct vm_area_struct *vma,
 				  struct vm_area_struct *next)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(vma->anon_vma != next->anon_vma);
+=======
+	VM_BUG_ON_VMA(vma->anon_vma != next->anon_vma, vma);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_VMA(vma->anon_vma != next->anon_vma, vma);
 >>>>>>> v3.18
@@ -202,6 +215,7 @@ static inline void page_dup_rmap(struct page *page)
 int page_referenced(struct page *, int is_locked,
 			struct mem_cgroup *memcg, unsigned long *vm_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int page_referenced_one(struct page *, struct vm_area_struct *,
 	unsigned long address, unsigned int *mapcount, unsigned long *vm_flags);
 
@@ -212,10 +226,15 @@ int try_to_unmap(struct page *, enum ttu_flags flags,
 int try_to_unmap_one(struct page *, struct vm_area_struct *,
 			unsigned long address, enum ttu_flags flags);
 =======
+=======
+>>>>>>> v3.18
 
 #define TTU_ACTION(x) ((x) & TTU_ACTION_MASK)
 
 int try_to_unmap(struct page *, enum ttu_flags flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -263,11 +282,14 @@ int page_mapped_in_vma(struct page *page, struct vm_area_struct *vma);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called by migrate.c to remove migration ptes, but might be used more later.
  */
 int rmap_walk(struct page *page, int (*rmap_one)(struct page *,
 		struct vm_area_struct *, unsigned long, void *), void *arg);
 =======
+=======
+>>>>>>> v3.18
  * rmap_walk_control: To control rmap traversing for specific needs
  *
  * arg: passed to rmap_one() and invalid_vma()
@@ -288,6 +310,9 @@ struct rmap_walk_control {
 };
 
 int rmap_walk(struct page *page, struct rmap_walk_control *rwc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else	/* !CONFIG_MMU */
@@ -305,7 +330,11 @@ static inline int page_referenced(struct page *page, int is_locked,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define try_to_unmap(page, refs, vma) SWAP_FAIL
+=======
+#define try_to_unmap(page, refs) SWAP_FAIL
+>>>>>>> v3.18
 =======
 #define try_to_unmap(page, refs) SWAP_FAIL
 >>>>>>> v3.18

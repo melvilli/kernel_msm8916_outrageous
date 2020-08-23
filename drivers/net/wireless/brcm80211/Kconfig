@@ -5,18 +5,24 @@ config BRCMSMAC
 	tristate "Broadcom IEEE802.11n PCIe SoftMAC WLAN driver"
 	depends on MAC80211
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on BCMA
 	select BRCMUTIL
 	select FW_LOADER
 	select CRC_CCITT
 	select CRC8
 =======
+=======
+>>>>>>> v3.18
 	depends on BCMA_POSSIBLE
 	select BCMA
 	select NEW_LEDS if BCMA_DRIVER_GPIO
 	select LEDS_CLASS if BCMA_DRIVER_GPIO
 	select BRCMUTIL
 	select FW_LOADER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select CORDIC
 	---help---
@@ -36,11 +42,14 @@ config BRCMFMAC
 	  it'll be called brcmfmac.ko.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BRCMFMAC_SDIO
 	bool "SDIO bus interface support for FullMAC driver"
 	depends on MMC
 	depends on BRCMFMAC
 =======
+=======
+>>>>>>> v3.18
 config BRCMFMAC_PROTO_BCDC
 	bool
 
@@ -52,6 +61,9 @@ config BRCMFMAC_SDIO
 	depends on (MMC = y || MMC = BRCMFMAC)
 	depends on BRCMFMAC
 	select BRCMFMAC_PROTO_BCDC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select FW_LOADER
 	default y
@@ -63,8 +75,14 @@ config BRCMFMAC_SDIO
 config BRCMFMAC_USB
 	bool "USB bus interface support for FullMAC driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB
 	depends on BRCMFMAC
+=======
+	depends on (USB = y || USB = BRCMFMAC)
+	depends on BRCMFMAC
+	select BRCMFMAC_PROTO_BCDC
+>>>>>>> v3.18
 =======
 	depends on (USB = y || USB = BRCMFMAC)
 	depends on BRCMFMAC
@@ -77,7 +95,10 @@ config BRCMFMAC_USB
 	  use the driver for an USB wireless card.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BRCMFMAC_PCIE
 	bool "PCIE bus interface support for FullMAC driver"
 	depends on BRCMFMAC
@@ -90,6 +111,9 @@ config BRCMFMAC_PCIE
 	  IEEE802.11ac embedded FullMAC WLAN driver. Say Y if you want to
 	  use the driver for an PCIE wireless card.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config BRCM_TRACING
 	bool "Broadcom device tracing"

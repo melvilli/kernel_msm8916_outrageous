@@ -2,7 +2,10 @@
 
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/user_namespace.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nfsd.h"
@@ -29,7 +32,10 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 	int i;
 	int flags = nfsexp_flags(rqstp, exp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -37,7 +43,11 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 
 	/* discard any old override before preparing the new set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	revert_creds(get_cred(current->real_cred));
+=======
+	revert_creds(get_cred(current_real_cred()));
+>>>>>>> v3.18
 =======
 	revert_creds(get_cred(current_real_cred()));
 >>>>>>> v3.18
@@ -82,10 +92,15 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 		new->fsgid = exp->ex_anon_gid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = set_groups(new, gi);
 	put_group_info(gi);
 	if (ret < 0)
 		goto error;
+=======
+	set_groups(new, gi);
+	put_group_info(gi);
+>>>>>>> v3.18
 =======
 	set_groups(new, gi);
 	put_group_info(gi);
@@ -104,10 +119,15 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 
 oom:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENOMEM;
 error:
 	abort_creds(new);
 	return ret;
+=======
+	abort_creds(new);
+	return -ENOMEM;
+>>>>>>> v3.18
 =======
 	abort_creds(new);
 	return -ENOMEM;

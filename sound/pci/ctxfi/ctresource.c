@@ -135,7 +135,12 @@ static struct rsc_ops rsc_generic_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, void *hw)
+=======
+int
+rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw)
+>>>>>>> v3.18
 =======
 int
 rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw)
@@ -157,16 +162,22 @@ rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw)
 	switch (type) {
 	case SRC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ((struct hw *)hw)->src_rsc_get_ctrl_blk(&rsc->ctrl_blk);
 		break;
 	case AMIXER:
 		err = ((struct hw *)hw)->
 				amixer_rsc_get_ctrl_blk(&rsc->ctrl_blk);
 =======
+=======
+>>>>>>> v3.18
 		err = hw->src_rsc_get_ctrl_blk(&rsc->ctrl_blk);
 		break;
 	case AMIXER:
 		err = hw->amixer_rsc_get_ctrl_blk(&rsc->ctrl_blk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SRCIMP:
@@ -175,8 +186,13 @@ rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ctxfi: Invalid resource type value %d!\n", type);
+=======
+		dev_err(((struct hw *)hw)->card->dev,
+			"Invalid resource type value %d!\n", type);
+>>>>>>> v3.18
 =======
 		dev_err(((struct hw *)hw)->card->dev,
 			"Invalid resource type value %d!\n", type);
@@ -186,8 +202,13 @@ rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw)
 
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ctxfi: Failed to get resource control block!\n");
+=======
+		dev_err(((struct hw *)hw)->card->dev,
+			"Failed to get resource control block!\n");
+>>>>>>> v3.18
 =======
 		dev_err(((struct hw *)hw)->card->dev,
 			"Failed to get resource control block!\n");
@@ -204,6 +225,7 @@ int rsc_uninit(struct rsc *rsc)
 		switch (rsc->type) {
 		case SRC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((struct hw *)rsc->hw)->
 				src_rsc_put_ctrl_blk(rsc->ctrl_blk);
 			break;
@@ -211,10 +233,15 @@ int rsc_uninit(struct rsc *rsc)
 			((struct hw *)rsc->hw)->
 				amixer_rsc_put_ctrl_blk(rsc->ctrl_blk);
 =======
+=======
+>>>>>>> v3.18
 			rsc->hw->src_rsc_put_ctrl_blk(rsc->ctrl_blk);
 			break;
 		case AMIXER:
 			rsc->hw->amixer_rsc_put_ctrl_blk(rsc->ctrl_blk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case SUM:
@@ -222,8 +249,14 @@ int rsc_uninit(struct rsc *rsc)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "ctxfi: "
 			       "Invalid resource type value %d!\n", rsc->type);
+=======
+			dev_err(((struct hw *)rsc->hw)->card->dev,
+				"Invalid resource type value %d!\n",
+				rsc->type);
+>>>>>>> v3.18
 =======
 			dev_err(((struct hw *)rsc->hw)->card->dev,
 				"Invalid resource type value %d!\n",
@@ -244,10 +277,16 @@ int rsc_uninit(struct rsc *rsc)
 
 int rsc_mgr_init(struct rsc_mgr *mgr, enum RSCTYP type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 unsigned int amount, void *hw_obj)
 {
 	int err = 0;
 	struct hw *hw = hw_obj;
+=======
+		 unsigned int amount, struct hw *hw)
+{
+	int err = 0;
+>>>>>>> v3.18
 =======
 		 unsigned int amount, struct hw *hw)
 {
@@ -277,8 +316,13 @@ int rsc_mgr_init(struct rsc_mgr *mgr, enum RSCTYP type,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ctxfi: Invalid resource type value %d!\n", type);
+=======
+		dev_err(hw->card->dev,
+			"Invalid resource type value %d!\n", type);
+>>>>>>> v3.18
 =======
 		dev_err(hw->card->dev,
 			"Invalid resource type value %d!\n", type);
@@ -289,8 +333,13 @@ int rsc_mgr_init(struct rsc_mgr *mgr, enum RSCTYP type,
 
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ctxfi: Failed to get manager control block!\n");
+=======
+		dev_err(hw->card->dev,
+			"Failed to get manager control block!\n");
+>>>>>>> v3.18
 =======
 		dev_err(hw->card->dev,
 			"Failed to get manager control block!\n");
@@ -320,6 +369,7 @@ int rsc_mgr_uninit(struct rsc_mgr *mgr)
 		switch (mgr->type) {
 		case SRC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((struct hw *)mgr->hw)->
 				src_mgr_put_ctrl_blk(mgr->ctrl_blk);
 			break;
@@ -335,6 +385,8 @@ int rsc_mgr_uninit(struct rsc_mgr *mgr)
 			((struct hw *)mgr->hw)->
 				daio_mgr_put_ctrl_blk(mgr->ctrl_blk);
 =======
+=======
+>>>>>>> v3.18
 			mgr->hw->src_mgr_put_ctrl_blk(mgr->ctrl_blk);
 			break;
 		case SRCIMP:
@@ -345,14 +397,23 @@ int rsc_mgr_uninit(struct rsc_mgr *mgr)
 			break;
 		case DAIO:
 			mgr->hw->daio_mgr_put_ctrl_blk(mgr->ctrl_blk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case SUM:
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "ctxfi: "
 			       "Invalid resource type value %d!\n", mgr->type);
+=======
+			dev_err(((struct hw *)mgr->hw)->card->dev,
+				"Invalid resource type value %d!\n",
+				mgr->type);
+>>>>>>> v3.18
 =======
 			dev_err(((struct hw *)mgr->hw)->card->dev,
 				"Invalid resource type value %d!\n",

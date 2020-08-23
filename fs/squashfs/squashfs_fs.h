@@ -88,7 +88,11 @@
 						SQUASHFS_COMP_OPT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Max number of types and file types */
+=======
+/* Inode types including extended types */
+>>>>>>> v3.18
 =======
 /* Inode types including extended types */
 >>>>>>> v3.18
@@ -108,6 +112,12 @@
 #define SQUASHFS_LSOCKET_TYPE		14
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Max type value stored in directory entry */
+#define SQUASHFS_MAX_DIR_TYPE		7
+
+>>>>>>> v3.18
 =======
 /* Max type value stored in directory entry */
 #define SQUASHFS_MAX_DIR_TYPE		7

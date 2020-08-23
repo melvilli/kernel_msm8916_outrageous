@@ -73,6 +73,10 @@
 # unsigned int crc_pcl(u8 *buffer, int len, unsigned int crc_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+.text
+>>>>>>> v3.18
 =======
 .text
 >>>>>>> v3.18
@@ -221,6 +225,7 @@ LABEL crc_ %i
 	################################################################
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lea	(K_table-16)(%rip), bufp	# first entry is for idx 1
 	shlq    $3, %rax			# rax *= 8
 	subq    %rax, tmp			# tmp -= rax*8
@@ -231,11 +236,16 @@ LABEL crc_ %i
 
 	movdqa  (bufp), %xmm0			# 2 consts: K1:K2
 =======
+=======
+>>>>>>> v3.18
 	lea	(K_table-8)(%rip), bufp		# first entry is for idx 1
 	shlq    $3, %rax			# rax *= 8
 	pmovzxdq (bufp,%rax), %xmm0		# 2 consts: K1:K2
 	leal	(%eax,%eax,2), %eax		# rax *= 3 (total *24)
 	subq    %rax, tmp			# tmp -= rax*24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	movq    crc_init, %xmm1			# CRC for block 1
@@ -251,9 +261,15 @@ LABEL crc_ %i
 	crc32   %rax, crc_init
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ################################################################
 ## 5) Check for end:
 ################################################################
+=======
+	################################################################
+	## 5) Check for end:
+	################################################################
+>>>>>>> v3.18
 =======
 	################################################################
 	## 5) Check for end:
@@ -349,6 +365,7 @@ ENDPROC(crc_pcl)
 
 	################################################################
 	## PCLMULQDQ tables
+<<<<<<< HEAD
 <<<<<<< HEAD
 	## Table is 128 entries x 2 quad words each
 	################################################################
@@ -484,6 +501,8 @@ K_table:
         .quad 0x1a91647f2,0x169cf9eb0
         .quad 0x1a0f717c4,0x0170076fa
 =======
+=======
+>>>>>>> v3.18
 	## Table is 128 entries x 2 words (8 bytes) each
 	################################################################
 .section	.rotata, "a", %progbits
@@ -617,4 +636,7 @@ K_table:
 	.long 0x45cddf4e, 0xe0ac139e
 	.long 0xacfa3103, 0x6c23e841
 	.long 0xa51b6135, 0x170076fa
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

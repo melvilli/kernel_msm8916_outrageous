@@ -70,8 +70,13 @@ _GLOBAL(relocate)
 	 */
 	mtctr	r8
 <<<<<<< HEAD
+<<<<<<< HEAD
 5:	lwz	r0,12(9)	/* ELF64_R_TYPE(reloc->r_info) */
 	cmpwi	r0,R_PPC64_RELATIVE
+=======
+5:	ld	r0,8(9)		/* ELF64_R_TYPE(reloc->r_info) */
+	cmpdi	r0,R_PPC64_RELATIVE
+>>>>>>> v3.18
 =======
 5:	ld	r0,8(9)		/* ELF64_R_TYPE(reloc->r_info) */
 	cmpdi	r0,R_PPC64_RELATIVE

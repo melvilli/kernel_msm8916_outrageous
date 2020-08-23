@@ -6,7 +6,13 @@
 #include <linux/migrate_mode.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct page *new_page_t(struct page *, unsigned long private, int **);
+=======
+typedef struct page *new_page_t(struct page *page, unsigned long private,
+				int **reason);
+typedef void free_page_t(struct page *page, unsigned long private);
+>>>>>>> v3.18
 =======
 typedef struct page *new_page_t(struct page *page, unsigned long private,
 				int **reason);
@@ -17,6 +23,7 @@ typedef void free_page_t(struct page *page, unsigned long private);
  * Return values from addresss_space_operations.migratepage():
  * - negative errno on page migration failure;
  * - zero on page migration success;
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * The balloon page migration introduces this special case where a 'distinct'
@@ -35,6 +42,11 @@ typedef void free_page_t(struct page *page, unsigned long private);
 #define MIGRATEPAGE_SUCCESS		0
 
 >>>>>>> v3.18
+=======
+ */
+#define MIGRATEPAGE_SUCCESS		0
+
+>>>>>>> v3.18
 enum migrate_reason {
 	MR_COMPACTION,
 	MR_MEMORY_FAILURE,
@@ -48,6 +60,7 @@ enum migrate_reason {
 #ifdef CONFIG_MIGRATION
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void putback_lru_pages(struct list_head *l);
 extern void putback_movable_pages(struct list_head *l);
 extern int migrate_page(struct address_space *,
@@ -60,11 +73,16 @@ extern int migrate_huge_page(struct page *, new_page_t x,
 extern int fail_migrate_page(struct address_space *,
 			struct page *, struct page *);
 =======
+=======
+>>>>>>> v3.18
 extern void putback_movable_pages(struct list_head *l);
 extern int migrate_page(struct address_space *,
 			struct page *, struct page *, enum migrate_mode);
 extern int migrate_pages(struct list_head *l, new_page_t new, free_page_t free,
 		unsigned long private, enum migrate_mode mode, int reason);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int migrate_prep(void);
@@ -76,6 +94,7 @@ extern void migrate_page_copy(struct page *newpage, struct page *page);
 extern int migrate_huge_page_move_mapping(struct address_space *mapping,
 				  struct page *newpage, struct page *page);
 extern int migrate_page_move_mapping(struct address_space *mapping,
+<<<<<<< HEAD
 <<<<<<< HEAD
                struct page *newpage, struct page *page,
                struct buffer_head *head, enum migrate_mode mode);
@@ -89,6 +108,8 @@ static inline int migrate_pages(struct list_head *l, new_page_t x,
 static inline int migrate_huge_page(struct page *page, new_page_t x,
 		unsigned long private, enum migrate_mode mode)
 =======
+=======
+>>>>>>> v3.18
 		struct page *newpage, struct page *page,
 		struct buffer_head *head, enum migrate_mode mode,
 		int extra_count);
@@ -98,6 +119,9 @@ static inline void putback_movable_pages(struct list_head *l) {}
 static inline int migrate_pages(struct list_head *l, new_page_t new,
 		free_page_t free, unsigned long private, enum migrate_mode mode,
 		int reason)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ return -ENOSYS; }
 
@@ -121,6 +145,7 @@ static inline int migrate_huge_page_move_mapping(struct address_space *mapping,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Possible settings for the migrate_page() method in address_operations */
 #define migrate_page NULL
 #define fail_migrate_page NULL
@@ -134,6 +159,8 @@ extern bool migrate_ratelimited(int node);
 #else
 static inline int migrate_misplaced_page(struct page *page, int node)
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_MIGRATION */
 
 #ifdef CONFIG_NUMA_BALANCING
@@ -152,6 +179,9 @@ static inline void wait_migrate_huge_page(struct anon_vma *anon_vma, pmd_t *pmd)
 }
 static inline int migrate_misplaced_page(struct page *page,
 					 struct vm_area_struct *vma, int node)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -EAGAIN; /* can't migrate now */

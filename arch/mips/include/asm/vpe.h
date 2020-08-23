@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 MIPS Technologies, Inc.  All rights reserved.
  *
  *  This program is free software; you can distribute it and/or modify it
@@ -21,6 +22,8 @@
 #define _ASM_VPE_H
 
 =======
+=======
+>>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file "COPYING" in the main directory of this archive
  * for more details.
@@ -112,6 +115,9 @@ struct tc {
 	struct list_head list;	/* The global list of tc's */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct vpe_notifications {
 	void (*start)(int vpe);
@@ -120,6 +126,7 @@ struct vpe_notifications {
 	struct list_head list;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 extern int vpe_notify(int index, struct vpe_notifications *notify);
@@ -130,6 +137,8 @@ extern int vpe_getgid(int index);
 extern char *vpe_getcwd(int index);
 
 =======
+=======
+>>>>>>> v3.18
 struct vpe_control {
 	spinlock_t vpe_list_lock;
 	struct list_head vpe_list;      /* Virtual processing elements */
@@ -160,5 +169,8 @@ void cleanup_tc(struct tc *tc);
 
 int __init vpe_module_init(void);
 void __exit vpe_module_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_VPE_H */

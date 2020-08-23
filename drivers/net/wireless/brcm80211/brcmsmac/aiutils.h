@@ -173,6 +173,7 @@ struct si_info {
 
 /* AMBA Interconnect exported externs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 ai_core_cflags(struct bcma_device *core, u32 mask, u32 val);
 
 /* === exported functions === */
@@ -190,6 +191,8 @@ extern void ai_pci_up(struct si_pub *sih);
 /* Enable Ex-PA for 4313 */
 extern void ai_epa_4313war(struct si_pub *sih);
 =======
+=======
+>>>>>>> v3.18
 u32 ai_core_cflags(struct bcma_device *core, u32 mask, u32 val);
 
 /* === exported functions === */
@@ -203,6 +206,9 @@ bool ai_deviceremoved(struct si_pub *sih);
 
 /* Enable Ex-PA for 4313 */
 void ai_epa_4313war(struct si_pub *sih);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline u32 ai_get_cccaps(struct si_pub *sih)

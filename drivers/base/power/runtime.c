@@ -14,7 +14,10 @@
 #include "power.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RPM_GET_CALLBACK(dev, cb)				\
 ({								\
 	int (*__rpm_cb)(struct device *__d);			\
@@ -52,6 +55,9 @@ static int (*rpm_get_idle_cb(struct device *dev))(struct device *)
 	return RPM_GET_CALLBACK(dev, runtime_idle);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rpm_resume(struct device *dev, int rpmflags);
 static int rpm_suspend(struct device *dev, int rpmflags);
@@ -299,7 +305,12 @@ static int __rpm_callback(int (*cb)(struct device *), struct device *dev)
  * another idle notification has been started earlier, return immediately.  If
  * the RPM_ASYNC flag is set then queue an idle-notification request; otherwise
 <<<<<<< HEAD
+<<<<<<< HEAD
  * run the ->runtime_idle() callback directly.
+=======
+ * run the ->runtime_idle() callback directly. If the ->runtime_idle callback
+ * doesn't exist or if it returns 0, call rpm_suspend with the RPM_AUTO flag.
+>>>>>>> v3.18
 =======
  * run the ->runtime_idle() callback directly. If the ->runtime_idle callback
  * doesn't exist or if it returns 0, call rpm_suspend with the RPM_AUTO flag.
@@ -339,11 +350,16 @@ static int rpm_idle(struct device *dev, int rpmflags)
 	dev->power.request = RPM_REQ_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->power.no_callbacks) {
 		/* Assume ->runtime_idle() callback would have suspended. */
 		retval = rpm_suspend(dev, rpmflags);
 		goto out;
 	}
+=======
+	if (dev->power.no_callbacks)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (dev->power.no_callbacks)
 		goto out;
@@ -357,7 +373,12 @@ static int rpm_idle(struct device *dev, int rpmflags)
 			queue_work(pm_wq, &dev->power.work);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		trace_rpm_return_int(dev, _THIS_IP_, 0);
+		return 0;
+>>>>>>> v3.18
 =======
 		trace_rpm_return_int(dev, _THIS_IP_, 0);
 		return 0;
@@ -366,6 +387,7 @@ static int rpm_idle(struct device *dev, int rpmflags)
 
 	dev->power.idle_notification = true;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev->pm_domain)
 		callback = dev->pm_domain->ops.runtime_idle;
@@ -384,10 +406,15 @@ static int rpm_idle(struct device *dev, int rpmflags)
 	if (callback)
 		__rpm_callback(callback, dev);
 =======
+=======
+>>>>>>> v3.18
 	callback = rpm_get_idle_cb(dev);
 
 	if (callback)
 		retval = __rpm_callback(callback, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->power.idle_notification = false;
@@ -396,7 +423,11 @@ static int rpm_idle(struct device *dev, int rpmflags)
  out:
 	trace_rpm_return_int(dev, _THIS_IP_, retval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return retval;
+=======
+	return retval ? retval : rpm_suspend(dev, rpmflags | RPM_AUTO);
+>>>>>>> v3.18
 =======
 	return retval ? retval : rpm_suspend(dev, rpmflags | RPM_AUTO);
 >>>>>>> v3.18
@@ -560,6 +591,7 @@ static int rpm_suspend(struct device *dev, int rpmflags)
 	__update_runtime_status(dev, RPM_SUSPENDING);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->pm_domain)
 		callback = dev->pm_domain->ops.runtime_suspend;
 	else if (dev->type && dev->type->pm)
@@ -573,6 +605,9 @@ static int rpm_suspend(struct device *dev, int rpmflags)
 
 	if (!callback && dev->driver && dev->driver->pm)
 		callback = dev->driver->pm->runtime_suspend;
+=======
+	callback = rpm_get_suspend_cb(dev);
+>>>>>>> v3.18
 =======
 	callback = rpm_get_suspend_cb(dev);
 >>>>>>> v3.18
@@ -796,6 +831,7 @@ static int rpm_resume(struct device *dev, int rpmflags)
 	__update_runtime_status(dev, RPM_RESUMING);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->pm_domain)
 		callback = dev->pm_domain->ops.runtime_resume;
 	else if (dev->type && dev->type->pm)
@@ -809,6 +845,9 @@ static int rpm_resume(struct device *dev, int rpmflags)
 
 	if (!callback && dev->driver && dev->driver->pm)
 		callback = dev->driver->pm->runtime_resume;
+=======
+	callback = rpm_get_resume_cb(dev);
+>>>>>>> v3.18
 =======
 	callback = rpm_get_resume_cb(dev);
 >>>>>>> v3.18
@@ -1206,7 +1245,11 @@ EXPORT_SYMBOL_GPL(pm_runtime_barrier);
  * @check_resume: If set, check if there's a resume request for the device.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Increment power.disable_depth for the device and if was zero previously,
+=======
+ * Increment power.disable_depth for the device and if it was zero previously,
+>>>>>>> v3.18
 =======
  * Increment power.disable_depth for the device and if it was zero previously,
 >>>>>>> v3.18
@@ -1481,7 +1524,10 @@ void pm_runtime_remove(struct device *dev)
 		pm_runtime_put(dev->parent);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 /**
@@ -1565,4 +1611,7 @@ out:
 	return ret;
 }
 EXPORT_SYMBOL_GPL(pm_runtime_force_resume);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

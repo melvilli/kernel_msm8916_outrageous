@@ -88,6 +88,7 @@ void nfqnl_ct_seq_adjust(struct sk_buff *skb, struct nf_conn *ct,
 			 enum ip_conntrack_info ctinfo, int diff)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfq_ct_nat_hook *nfq_nat_ct;
 
 	nfq_nat_ct = rcu_dereference(nfq_ct_nat_hook);
@@ -97,6 +98,8 @@ void nfqnl_ct_seq_adjust(struct sk_buff *skb, struct nf_conn *ct,
 	if ((ct->status & IPS_NAT_MASK) && diff)
 		nfq_nat_ct->seq_adjust(skb, ct, ctinfo, diff);
 =======
+=======
+>>>>>>> v3.18
 	struct nfq_ct_hook *nfq_ct;
 
 	nfq_ct = rcu_dereference(nfq_ct_hook);
@@ -120,5 +123,8 @@ int nfqnl_attach_expect(struct nf_conn *ct, const struct nlattr *attr,
 		return -EOPNOTSUPP;
 
 	return nfq_ct->attach_expect(attr, ct, portid, report);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

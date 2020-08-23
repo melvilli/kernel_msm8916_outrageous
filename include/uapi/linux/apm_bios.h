@@ -68,6 +68,11 @@ struct apm_bios_info {
 #define APM_STANDBY_RESUME	0x000b
 #define APM_CAPABILITY_CHANGE	0x000c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define APM_USER_HIBERNATION	0x000d
+#define APM_HIBERNATION_RESUME	0x000e
+>>>>>>> v3.18
 =======
 #define APM_USER_HIBERNATION	0x000d
 #define APM_HIBERNATION_RESUME	0x000e

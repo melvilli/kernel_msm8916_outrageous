@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -39,6 +43,7 @@
  */
 #define DEFAULT_RSSI		-128
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Helper struct and macro to work with moving/walking averages.
@@ -78,6 +83,8 @@
 	__new; \
 })
 =======
+=======
+>>>>>>> v3.18
 /* Constants for EWMA calculations. */
 #define RT2X00_EWMA_FACTOR	1024
 #define RT2X00_EWMA_WEIGHT	8
@@ -92,6 +99,9 @@ static inline int rt2x00link_get_avg_rssi(struct ewma *ewma)
 
 	return DEFAULT_RSSI;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int rt2x00link_antenna_get_link_rssi(struct rt2x00_dev *rt2x00dev)
@@ -99,8 +109,14 @@ static int rt2x00link_antenna_get_link_rssi(struct rt2x00_dev *rt2x00dev)
 	struct link_ant *ant = &rt2x00dev->link.ant;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ant->rssi_ant.avg && rt2x00dev->link.qual.rx_success)
 		return ant->rssi_ant.avg;
+=======
+	if (rt2x00dev->link.qual.rx_success)
+		return rt2x00link_get_avg_rssi(&ant->rssi_ant);
+
+>>>>>>> v3.18
 =======
 	if (rt2x00dev->link.qual.rx_success)
 		return rt2x00link_get_avg_rssi(&ant->rssi_ant);
@@ -128,8 +144,13 @@ static void rt2x00link_antenna_update_rssi_history(struct rt2x00_dev *rt2x00dev,
 static void rt2x00link_antenna_reset(struct rt2x00_dev *rt2x00dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt2x00dev->link.ant.rssi_ant.avg = 0;
 	rt2x00dev->link.ant.rssi_ant.avg_weight = 0;
+=======
+	ewma_init(&rt2x00dev->link.ant.rssi_ant, RT2X00_EWMA_FACTOR,
+		  RT2X00_EWMA_WEIGHT);
+>>>>>>> v3.18
 =======
 	ewma_init(&rt2x00dev->link.ant.rssi_ant, RT2X00_EWMA_FACTOR,
 		  RT2X00_EWMA_WEIGHT);
@@ -282,7 +303,11 @@ void rt2x00link_update_stats(struct rt2x00_dev *rt2x00dev,
 	 * Update global RSSI
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	link->avg_rssi = MOVING_AVERAGE(link->avg_rssi, rxdesc->rssi);
+=======
+	ewma_add(&link->avg_rssi, -rxdesc->rssi);
+>>>>>>> v3.18
 =======
 	ewma_add(&link->avg_rssi, -rxdesc->rssi);
 >>>>>>> v3.18
@@ -291,7 +316,11 @@ void rt2x00link_update_stats(struct rt2x00_dev *rt2x00dev,
 	 * Update antenna RSSI
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ant->rssi_ant = MOVING_AVERAGE(ant->rssi_ant, rxdesc->rssi);
+=======
+	ewma_add(&ant->rssi_ant, -rxdesc->rssi);
+>>>>>>> v3.18
 =======
 	ewma_add(&ant->rssi_ant, -rxdesc->rssi);
 >>>>>>> v3.18
@@ -350,6 +379,11 @@ void rt2x00link_reset_tuner(struct rt2x00_dev *rt2x00dev, bool antenna)
 	rt2x00dev->link.count = 0;
 	memset(qual, 0, sizeof(*qual));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ewma_init(&rt2x00dev->link.avg_rssi, RT2X00_EWMA_FACTOR,
+		  RT2X00_EWMA_WEIGHT);
+>>>>>>> v3.18
 =======
 	ewma_init(&rt2x00dev->link.avg_rssi, RT2X00_EWMA_FACTOR,
 		  RT2X00_EWMA_WEIGHT);
@@ -409,15 +443,21 @@ static void rt2x00link_tuner(struct work_struct *work)
 	 * must fallback to the default RSSI value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!link->avg_rssi.avg || !qual->rx_success)
 		qual->rssi = DEFAULT_RSSI;
 	else
 		qual->rssi = link->avg_rssi.avg;
 =======
+=======
+>>>>>>> v3.18
 	if (!qual->rx_success)
 		qual->rssi = DEFAULT_RSSI;
 	else
 		qual->rssi = rt2x00link_get_avg_rssi(&link->avg_rssi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -426,7 +466,11 @@ static void rt2x00link_tuner(struct work_struct *work)
 	 * the feature from the EEPROM.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(CAPABILITY_LINK_TUNING, &rt2x00dev->cap_flags))
+=======
+	if (rt2x00_has_cap_link_tuning(rt2x00dev))
+>>>>>>> v3.18
 =======
 	if (rt2x00_has_cap_link_tuning(rt2x00dev))
 >>>>>>> v3.18
@@ -570,7 +614,11 @@ void rt2x00link_register(struct rt2x00_dev *rt2x00dev)
 {
 	INIT_DELAYED_WORK(&rt2x00dev->link.agc_work, rt2x00link_agc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(CAPABILITY_VCO_RECALIBRATION, &rt2x00dev->cap_flags))
+=======
+	if (rt2x00_has_cap_vco_recalibration(rt2x00dev))
+>>>>>>> v3.18
 =======
 	if (rt2x00_has_cap_vco_recalibration(rt2x00dev))
 >>>>>>> v3.18

@@ -21,6 +21,10 @@
 #include <linux/cache.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/profile.h>
+>>>>>>> v3.18
 =======
 #include <linux/profile.h>
 >>>>>>> v3.18
@@ -44,7 +48,11 @@
 #include "irq.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 volatile unsigned long cpu_callin_map[NR_CPUS] __cpuinitdata = {0,};
+=======
+volatile unsigned long cpu_callin_map[NR_CPUS] = {0,};
+>>>>>>> v3.18
 =======
 volatile unsigned long cpu_callin_map[NR_CPUS] = {0,};
 >>>>>>> v3.18
@@ -62,7 +70,11 @@ const struct sparc32_ipi_ops *sparc32_ipi_ops;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit smp_store_cpu_info(int id)
+=======
+void smp_store_cpu_info(int id)
+>>>>>>> v3.18
 =======
 void smp_store_cpu_info(int id)
 >>>>>>> v3.18
@@ -80,7 +92,11 @@ void smp_store_cpu_info(int id)
 
 	if (mid < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_NOTICE "No MID found for CPU%d at node 0x%08d", id, cpu_node);
+=======
+		printk(KERN_NOTICE "No MID found for CPU%d at node 0x%08x", id, cpu_node);
+>>>>>>> v3.18
 =======
 		printk(KERN_NOTICE "No MID found for CPU%d at node 0x%08x", id, cpu_node);
 >>>>>>> v3.18
@@ -92,8 +108,11 @@ void smp_store_cpu_info(int id)
 void __init smp_cpus_done(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void smp4m_smp_done(void);
 	extern void smp4d_smp_done(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long bogosum = 0;
@@ -140,7 +159,11 @@ void cpu_panic(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct linux_prom_registers smp_penguin_ctable __cpuinitdata = { 0 };
+=======
+struct linux_prom_registers smp_penguin_ctable = { 0 };
+>>>>>>> v3.18
 =======
 struct linux_prom_registers smp_penguin_ctable = { 0 };
 >>>>>>> v3.18
@@ -207,8 +230,11 @@ int setup_profiling_timer(unsigned int multiplier)
 void __init smp_prepare_cpus(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void __init smp4m_boot_cpus(void);
 	extern void __init smp4d_boot_cpus(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, cpuid, extra;
@@ -286,10 +312,15 @@ void __init smp_prepare_boot_cpu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
 {
 	extern int __cpuinit smp4m_boot_one_cpu(int, struct task_struct *);
 	extern int __cpuinit smp4d_boot_one_cpu(int, struct task_struct *);
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+{
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 {
@@ -329,7 +360,11 @@ int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit arch_cpu_pre_starting(void *arg)
+=======
+static void arch_cpu_pre_starting(void *arg)
+>>>>>>> v3.18
 =======
 static void arch_cpu_pre_starting(void *arg)
 >>>>>>> v3.18
@@ -353,7 +388,11 @@ static void arch_cpu_pre_starting(void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit arch_cpu_pre_online(void *arg)
+=======
+static void arch_cpu_pre_online(void *arg)
+>>>>>>> v3.18
 =======
 static void arch_cpu_pre_online(void *arg)
 >>>>>>> v3.18
@@ -384,7 +423,11 @@ static void arch_cpu_pre_online(void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit sparc_start_secondary(void *arg)
+=======
+static void sparc_start_secondary(void *arg)
+>>>>>>> v3.18
 =======
 static void sparc_start_secondary(void *arg)
 >>>>>>> v3.18
@@ -419,7 +462,11 @@ static void sparc_start_secondary(void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit smp_callin(void)
+=======
+void smp_callin(void)
+>>>>>>> v3.18
 =======
 void smp_callin(void)
 >>>>>>> v3.18

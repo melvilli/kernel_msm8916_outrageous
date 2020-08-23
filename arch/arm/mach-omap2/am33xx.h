@@ -22,6 +22,10 @@
 #define AM33XX_CTRL_BASE	AM33XX_SCM_BASE
 #define AM33XX_PRCM_BASE	0x44E00000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AM43XX_PRCM_BASE	0x44DF0000
+>>>>>>> v3.18
 =======
 #define AM43XX_PRCM_BASE	0x44DF0000
 >>>>>>> v3.18

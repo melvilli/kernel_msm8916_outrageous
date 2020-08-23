@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -46,7 +50,10 @@ struct lpfc_rport_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct lpfc_device_id {
 	struct lpfc_name vport_wwpn;
 	struct lpfc_name target_wwpn;
@@ -61,6 +68,9 @@ struct lpfc_device_data {
 	bool available;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct fcp_rsp {
 	uint32_t rspRsvd1;	/* FC Word 0, byte 0:3 */
@@ -95,6 +105,10 @@ struct fcp_rsp {
 #define RSP_TM_NOT_SUPPORTED 0x04	/* Task mgmt function not supported */
 #define RSP_TM_NOT_COMPLETED 0x05	/* Task mgmt function not performed */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RSP_TM_INVALID_LU    0x09	/* Task mgmt function to invalid LU */
+>>>>>>> v3.18
 =======
 #define RSP_TM_INVALID_LU    0x09	/* Task mgmt function to invalid LU */
 >>>>>>> v3.18
@@ -191,9 +205,15 @@ struct lpfc_scsi_buf {
 #define LPFC_BPL_SIZE          1024
 #define MDAC_DIRECT_CMD                  0x22
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define FIND_FIRST_OAS_LUN		 0
 #define NO_MORE_OAS_LUN			-1
 #define NOT_OAS_ENABLED_LUN		NO_MORE_OAS_LUN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

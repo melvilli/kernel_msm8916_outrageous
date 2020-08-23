@@ -35,7 +35,10 @@ struct oz_elt_info {
 	u8 data[sizeof(struct oz_elt) + OZ_MAX_ELT_PAYLOAD];
 	int length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned magic;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -48,6 +51,7 @@ struct oz_elt_buf {
 	struct list_head order_list;
 	struct list_head isoc_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *elt_pool;
 	int free_elts;
 	int max_free_elts;
@@ -56,10 +60,15 @@ struct oz_elt_buf {
 
 int oz_elt_buf_init(struct oz_elt_buf *buf);
 =======
+=======
+>>>>>>> v3.18
 	u8 tx_seq_num[OZ_NB_APPS];
 };
 
 void oz_elt_buf_init(struct oz_elt_buf *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void oz_elt_buf_term(struct oz_elt_buf *buf);
 struct oz_elt_info *oz_elt_info_alloc(struct oz_elt_buf *buf);
@@ -75,7 +84,10 @@ int oz_select_elts_for_tx(struct oz_elt_buf *buf, u8 isoc, unsigned *len,
 		unsigned max_len, struct list_head *list);
 int oz_are_elts_available(struct oz_elt_buf *buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void oz_trim_elt_pool(struct oz_elt_buf *buf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -15,7 +15,11 @@ enum irqreturn {
 
 typedef enum irqreturn irqreturn_t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IRQ_RETVAL(x)	((x) != IRQ_NONE)
+=======
+#define IRQ_RETVAL(x)	((x) ? IRQ_HANDLED : IRQ_NONE)
+>>>>>>> v3.18
 =======
 #define IRQ_RETVAL(x)	((x) ? IRQ_HANDLED : IRQ_NONE)
 >>>>>>> v3.18

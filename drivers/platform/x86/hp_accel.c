@@ -37,7 +37,13 @@
 #include <linux/leds.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+#include <linux/i8042.h>
+#include <linux/serio.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <linux/i8042.h>
@@ -80,9 +86,12 @@ static inline void delayed_sysfs_set(struct led_classdev *led_cdev,
 /* HP-specific accelerometer driver ------------------------------------ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* For automatic insertion of the module */
 static struct acpi_device_id lis3lv02d_device_ids[] = {
 =======
+=======
+>>>>>>> v3.18
 /* e0 25, e0 26, e0 27, e0 28 are scan codes that the accelerometer with acpi id
  * HPQ6000 sends through the keyboard bus */
 #define ACCEL_1 0x25
@@ -92,6 +101,9 @@ static struct acpi_device_id lis3lv02d_device_ids[] = {
 
 /* For automatic insertion of the module */
 static const struct acpi_device_id lis3lv02d_device_ids[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{"HPQ0004", 0}, /* HP Mobile Data Protection System PNP */
 	{"HPQ6000", 0}, /* HP Mobile Data Protection System PNP */
@@ -108,7 +120,11 @@ MODULE_DEVICE_TABLE(acpi, lis3lv02d_device_ids);
  * Returns 0 on success.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int lis3lv02d_acpi_init(struct lis3lv02d *lis3)
+=======
+static int lis3lv02d_acpi_init(struct lis3lv02d *lis3)
+>>>>>>> v3.18
 =======
 static int lis3lv02d_acpi_init(struct lis3lv02d *lis3)
 >>>>>>> v3.18
@@ -130,7 +146,11 @@ static int lis3lv02d_acpi_init(struct lis3lv02d *lis3)
  * Returns 0 on success.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int lis3lv02d_acpi_read(struct lis3lv02d *lis3, int reg, u8 *ret)
+=======
+static int lis3lv02d_acpi_read(struct lis3lv02d *lis3, int reg, u8 *ret)
+>>>>>>> v3.18
 =======
 static int lis3lv02d_acpi_read(struct lis3lv02d *lis3, int reg, u8 *ret)
 >>>>>>> v3.18
@@ -157,7 +177,11 @@ static int lis3lv02d_acpi_read(struct lis3lv02d *lis3, int reg, u8 *ret)
  * Returns 0 on success.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int lis3lv02d_acpi_write(struct lis3lv02d *lis3, int reg, u8 val)
+=======
+static int lis3lv02d_acpi_write(struct lis3lv02d *lis3, int reg, u8 val)
+>>>>>>> v3.18
 =======
 static int lis3lv02d_acpi_write(struct lis3lv02d *lis3, int reg, u8 val)
 >>>>>>> v3.18
@@ -223,7 +247,11 @@ DEFINE_CONV(xy_swap_yz_inverted, 2, -1, -3);
 	.driver_data = &lis3lv02d_axis_##_axis		\
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id lis3lv02d_dmi_ids[] = {
+=======
+static const struct dmi_system_id lis3lv02d_dmi_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id lis3lv02d_dmi_ids[] = {
 >>>>>>> v3.18
@@ -272,7 +300,10 @@ static const struct dmi_system_id lis3lv02d_dmi_ids[] = {
 	AXIS_DMI_MATCH("HPB64xx", "HP EliteBook 84", xy_swap),
 	AXIS_DMI_MATCH("HPB65xx", "HP ProBook 65", x_inverted),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	AXIS_DMI_MATCH("HPZBook15", "HP ZBook 15", x_inverted),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ NULL, }
@@ -333,7 +364,10 @@ static void lis3lv02d_enum_resources(struct acpi_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool hp_accel_i8042_filter(unsigned char data, unsigned char str,
 				  struct serio *port)
 {
@@ -363,6 +397,9 @@ static bool hp_accel_i8042_filter(unsigned char data, unsigned char str,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int lis3lv02d_add(struct acpi_device *device)
 {
@@ -397,12 +434,18 @@ static int lis3lv02d_add(struct acpi_device *device)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* filter to remove HPQ6000 accelerometer data
 	 * from keyboard bus stream */
 	if (strstr(dev_name(&device->dev), "HPQ6000"))
 		i8042_install_filter(hp_accel_i8042_filter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_WORK(&hpled_led.work, delayed_set_status_worker);
 	ret = led_classdev_register(NULL, &hpled_led.led_classdev);
@@ -422,6 +465,10 @@ static int lis3lv02d_remove(struct acpi_device *device)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i8042_remove_filter(hp_accel_i8042_filter);
+>>>>>>> v3.18
 =======
 	i8042_remove_filter(hp_accel_i8042_filter);
 >>>>>>> v3.18

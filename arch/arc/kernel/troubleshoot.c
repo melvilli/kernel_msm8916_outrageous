@@ -87,6 +87,10 @@ static void show_faulting_vma(unsigned long address, char *buf)
 	dev_t dev = 0;
 	char *nm = buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mm_struct *active_mm = current->active_mm;
+>>>>>>> v3.18
 =======
 	struct mm_struct *active_mm = current->active_mm;
 >>>>>>> v3.18
@@ -95,8 +99,13 @@ static void show_faulting_vma(unsigned long address, char *buf)
 	 * non-inclusive vma
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	vma = find_vma(current->active_mm, address);
+=======
+	down_read(&active_mm->mmap_sem);
+	vma = find_vma(active_mm, address);
+>>>>>>> v3.18
 =======
 	down_read(&active_mm->mmap_sem);
 	vma = find_vma(active_mm, address);
@@ -111,7 +120,11 @@ static void show_faulting_vma(unsigned long address, char *buf)
 			struct path *path = &file->f_path;
 			nm = d_path(path, buf, PAGE_SIZE - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			inode = vma->vm_file->f_path.dentry->d_inode;
+=======
+			inode = file_inode(vma->vm_file);
+>>>>>>> v3.18
 =======
 			inode = file_inode(vma->vm_file);
 >>>>>>> v3.18
@@ -124,19 +137,26 @@ static void show_faulting_vma(unsigned long address, char *buf)
 				address : address - vma->vm_start,
 			nm, vma->vm_start, vma->vm_end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		pr_info("    @No matching VMA found\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	} else
 		pr_info("    @No matching VMA found\n");
 
 	up_read(&active_mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void show_ecr_verbose(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int vec, cause_code, cause_reg;
 	unsigned long address;
@@ -144,15 +164,21 @@ static void show_ecr_verbose(struct pt_regs *regs)
 	cause_reg = current->thread.cause_code;
 	pr_info("\n[ECR   ]: 0x%08x => ", cause_reg);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int vec, cause_code;
 	unsigned long address;
 
 	pr_info("\n[ECR   ]: 0x%08lx => ", regs->event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* For Data fault, this is data address not instruction addr */
 	address = current->thread.fault_address;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vec = cause_reg >> 16;
 	cause_code = (cause_reg >> 8) & 0xFF;
@@ -163,6 +189,8 @@ static void show_ecr_verbose(struct pt_regs *regs)
 		       (cause_code == 0x01) ? "Read From" :
 		       ((cause_code == 0x02) ? "Write to" : "EX"),
 =======
+=======
+>>>>>>> v3.18
 	vec = regs->ecr_vec;
 	cause_code = regs->ecr_cause;
 
@@ -171,6 +199,9 @@ static void show_ecr_verbose(struct pt_regs *regs)
 		pr_cont("Invalid %s @ 0x%08lx by insn @ 0x%08lx\n",
 		       (cause_code == 0x01) ? "Read" :
 		       ((cause_code == 0x02) ? "Write" : "EX"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       address, regs->ret);
 	} else if (vec == ECR_V_ITLB_MISS) {
@@ -183,6 +214,7 @@ static void show_ecr_verbose(struct pt_regs *regs)
 		if (cause_code == ECR_C_PROTV_INST_FETCH)
 			pr_cont("Execute from Non-exec Page\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (cause_code == ECR_C_PROTV_LOAD)
 			pr_cont("Read from Non-readable Page\n");
 		else if (cause_code == ECR_C_PROTV_STORE)
@@ -192,12 +224,17 @@ static void show_ecr_verbose(struct pt_regs *regs)
 		else if (cause_code == ECR_C_PROTV_MISALIG_DATA)
 			pr_cont("Misaligned r/w from 0x%08lx\n", address);
 =======
+=======
+>>>>>>> v3.18
 		else if (cause_code == ECR_C_PROTV_MISALIG_DATA)
 			pr_cont("Misaligned r/w from 0x%08lx\n", address);
 		else
 			pr_cont("%s access not allowed on page\n",
 				(cause_code == 0x01) ? "Read" :
 				((cause_code == 0x02) ? "Write" : "EX"));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (vec == ECR_V_INSN_ERR) {
 		pr_cont("Illegal Insn\n");
@@ -224,8 +261,12 @@ void show_regs(struct pt_regs *regs)
 	show_regs_print_info(KERN_INFO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (current->thread.cause_code)
 		show_ecr_verbose(regs);
+=======
+	show_ecr_verbose(regs);
+>>>>>>> v3.18
 =======
 	show_ecr_verbose(regs);
 >>>>>>> v3.18
@@ -265,10 +306,16 @@ void show_regs(struct pt_regs *regs)
 
 void show_kernel_fault_diag(const char *str, struct pt_regs *regs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    unsigned long address, unsigned long cause_reg)
 {
 	current->thread.fault_address = address;
 	current->thread.cause_code = cause_reg;
+=======
+			    unsigned long address)
+{
+	current->thread.fault_address = address;
+>>>>>>> v3.18
 =======
 			    unsigned long address)
 {

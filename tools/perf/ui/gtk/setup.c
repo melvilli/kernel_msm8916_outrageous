@@ -9,7 +9,11 @@ int perf_gtk__init(void)
 	perf_error__register(&perf_gtk_eops);
 	perf_gtk__init_helpline();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_gtk__init_progress();
+=======
+	gtk_ui_progress__init();
+>>>>>>> v3.18
 =======
 	gtk_ui_progress__init();
 >>>>>>> v3.18

@@ -162,6 +162,7 @@ int iwctl_giwpower(struct net_device *dev,
 		   char *extra);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iwctl_giwscan(struct net_device *dev,
 		  struct iw_request_info *info,
 		  struct iw_point *wrq,
@@ -172,6 +173,8 @@ int iwctl_siwscan(struct net_device *dev,
 		  struct iw_param *wrq,
 		  char *extra);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 //2008-0409-07, <Add> by Einsn Liu
@@ -190,7 +193,11 @@ int iwctl_siwgenie(struct net_device *dev,
 		   struct iw_request_info *info,
 		   struct iw_point *wrq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   char *extra);
+=======
+		   char __user *extra);
+>>>>>>> v3.18
 =======
 		   char __user *extra);
 >>>>>>> v3.18
@@ -199,7 +206,11 @@ int iwctl_giwgenie(struct net_device *dev,
 		   struct iw_request_info *info,
 		   struct iw_point *wrq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   char *extra);
+=======
+		   char __user *extra);
+>>>>>>> v3.18
 =======
 		   char __user *extra);
 >>>>>>> v3.18
@@ -218,7 +229,11 @@ int iwctl_siwmlme(struct net_device *dev,
 		  struct iw_request_info *info,
 		  struct iw_point *wrq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  char *extra);
+=======
+		  char __user *extra);
+>>>>>>> v3.18
 =======
 		  char __user *extra);
 >>>>>>> v3.18
@@ -227,7 +242,11 @@ int iwctl_siwmlme(struct net_device *dev,
 
 extern const struct iw_handler_def	iwctl_handler_def;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct iw_priv_args	iwctl_private_args;
+=======
+extern struct iw_priv_args       iwctl_private_args[];
+>>>>>>> v3.18
 =======
 extern struct iw_priv_args       iwctl_private_args[];
 >>>>>>> v3.18

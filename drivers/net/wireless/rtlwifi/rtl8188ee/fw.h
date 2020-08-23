@@ -56,16 +56,22 @@
 
 /* Fw PS state for RPWM.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * BIT[2:0] = HW state
  * BIT[3] = Protocol PS state, 1: register active state, 0: register sleep state
  * BIT[4] = sub-state
  */
 =======
+=======
+>>>>>>> v3.18
 *BIT[2:0] = HW state
 *BIT[3] = Protocol PS state,
 *1: register active state , 0: register sleep state
 *BIT[4] = sub-state
 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	FW_PS_GO_ON			BIT(0)
 #define	FW_PS_TX_NULL			BIT(1)
@@ -107,11 +113,14 @@
 #define	FW_PS_STATE_S3			(FW_PS_ALL_ON)
 #define	FW_PS_STATE_S4			((FW_PS_ST_ACTIVE) | (FW_PS_ALL_ON))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define	FW_PS_STATE_ALL_ON_88E		(FW_PS_CLOCK_ON)
 #define	FW_PS_STATE_RF_ON_88E		(FW_PS_CLOCK_ON)
 #define	FW_PS_STATE_RF_OFF_88E		(FW_PS_CLOCK_ON)
 =======
+=======
+>>>>>>> v3.18
 /* ((FW_PS_RF_ON) | (FW_PS_REGISTER_ACTIVE))*/
 #define	FW_PS_STATE_ALL_ON_88E		(FW_PS_CLOCK_ON)
 /* (FW_PS_RF_ON)*/
@@ -119,6 +128,9 @@
 /* 0x0*/
 #define	FW_PS_STATE_RF_OFF_88E	(FW_PS_CLOCK_ON)
 /* (FW_PS_STATE_RF_OFF)*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	FW_PS_STATE_RF_OFF_LOW_PWR_88E	(FW_PS_CLOCK_OFF)
 
@@ -165,7 +177,11 @@ struct rtl92c_firmware_header {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum rtl8192c_h2c_cmd {
+=======
+enum rtl8188e_h2c_cmd {
+>>>>>>> v3.18
 =======
 enum rtl8188e_h2c_cmd {
 >>>>>>> v3.18
@@ -198,7 +214,11 @@ enum rtl8188e_h2c_cmd {
 	H2C_88E_AOAC_RSVDPAGE = 0x83,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Not defined in new 88E H2C CMD Format */
+=======
+	/*Not defined in new 88E H2C CMD Format*/
+>>>>>>> v3.18
 =======
 	/*Not defined in new 88E H2C CMD Format*/
 >>>>>>> v3.18
@@ -316,6 +336,7 @@ int rtl88e_download_fw(struct ieee80211_hw *hw,
 		       bool buse_wake_on_wlan_fw);
 void rtl88e_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 u32 cmd_len, u8 *p_cmdbuffer);
 void rtl88e_firmware_selfreset(struct ieee80211_hw *hw);
 void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode);
@@ -326,6 +347,8 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished);
 void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
 
 =======
+=======
+>>>>>>> v3.18
 			 u32 cmd_len, u8 *cmdbuffer);
 void rtl88e_firmware_selfreset(struct ieee80211_hw *hw);
 void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode);
@@ -334,5 +357,8 @@ void rtl88e_set_fw_ap_off_load_cmd(struct ieee80211_hw *hw,
 				   u8 ap_offload_enable);
 void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished);
 void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -41,6 +41,11 @@
  *
  * [__init_begin, __init_end] is the init section that may be freed after init
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * 	// __init_begin and __init_end should be page aligned, so that we can
+ *	// free the whole .init memory
+>>>>>>> v3.18
 =======
  * 	// __init_begin and __init_end should be page aligned, so that we can
  *	// free the whole .init memory
@@ -74,6 +79,7 @@
  * often happens at runtime)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG
 #define DEV_KEEP(sec)    *(.dev##sec)
 #define DEV_DISCARD(sec)
@@ -82,6 +88,8 @@
 #define DEV_DISCARD(sec) *(.dev##sec)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
@@ -126,7 +134,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KPROBES
 #define KPROBE_BLACKLIST()	. = ALIGN(8);				      \
 				VMLINUX_SYMBOL(__start_kprobe_blacklist) = .; \
@@ -136,6 +147,9 @@
 #define KPROBE_BLACKLIST()
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_EVENT_TRACING
 #define FTRACE_EVENTS()	. = ALIGN(8);					\
@@ -151,15 +165,21 @@
 			 *(__trace_printk_fmt) /* Trace_printk fmt' pointer */ \
 			 VMLINUX_SYMBOL(__stop___trace_bprintk_fmt) = .;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define TRACE_PRINTKS()
 =======
+=======
+>>>>>>> v3.18
 #define TRACEPOINT_STR() VMLINUX_SYMBOL(__start___tracepoint_str) = .;	\
 			 *(__tracepoint_str) /* Trace_printk fmt' pointer */ \
 			 VMLINUX_SYMBOL(__stop___tracepoint_str) = .;
 #else
 #define TRACE_PRINTKS()
 #define TRACEPOINT_STR()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -172,6 +192,7 @@
 #define TRACE_SYSCALLS()
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_CLKSRC_OF
 #define CLKSRC_OF_TABLES() . = ALIGN(8);				\
@@ -210,6 +231,8 @@
 #define CPU_METHOD_OF_TABLES()
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 #define ___OF_TABLE(cfg, name)	_OF_TABLE_##cfg(name)
 #define __OF_TABLE(cfg, name)	___OF_TABLE(cfg, name)
@@ -227,6 +250,9 @@
 #define RESERVEDMEM_OF_TABLES()	OF_TABLE(CONFIG_OF_RESERVED_MEM, reservedmem)
 #define CPU_METHOD_OF_TABLES()	OF_TABLE(CONFIG_SMP, cpu_method)
 #define EARLYCON_OF_TABLES()	OF_TABLE(CONFIG_SERIAL_EARLYCON, earlycon)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KERNEL_DTB()							\
@@ -241,10 +267,13 @@
 	*(.ref.data)							\
 	*(.data..shared_aligned) /* percpu related */			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEV_KEEP(init.data)						\
 	DEV_KEEP(exit.data)						\
 	CPU_KEEP(init.data)						\
 	CPU_KEEP(exit.data)						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MEM_KEEP(init.data)						\
@@ -264,7 +293,12 @@
 	LIKELY_PROFILE()		       				\
 	BRANCH_PROFILE()						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_PRINTKS()
+=======
+	TRACE_PRINTKS()							\
+	TRACEPOINT_STR()
+>>>>>>> v3.18
 =======
 	TRACE_PRINTKS()							\
 	TRACEPOINT_STR()
@@ -343,6 +377,12 @@
 		*(.pci_fixup_suspend)					\
 		VMLINUX_SYMBOL(__end_pci_fixups_suspend) = .;		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		VMLINUX_SYMBOL(__start_pci_fixups_suspend_late) = .;	\
+		*(.pci_fixup_suspend_late)				\
+		VMLINUX_SYMBOL(__end_pci_fixups_suspend_late) = .;	\
+>>>>>>> v3.18
 =======
 		VMLINUX_SYMBOL(__start_pci_fixups_suspend_late) = .;	\
 		*(.pci_fixup_suspend_late)				\
@@ -358,6 +398,7 @@
 	}								\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* RapidIO route ops */						\
 	.rio_ops        : AT(ADDR(.rio_ops) - LOAD_OFFSET) {		\
 		VMLINUX_SYMBOL(__start_rio_switch_ops) = .;		\
@@ -365,6 +406,8 @@
 		VMLINUX_SYMBOL(__end_rio_switch_ops) = .;		\
 	}								\
 									\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TRACEDATA							\
@@ -448,10 +491,13 @@
 	__init_rodata : AT(ADDR(__init_rodata) - LOAD_OFFSET) {		\
 		*(.ref.rodata)						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEV_KEEP(init.rodata)					\
 		DEV_KEEP(exit.rodata)					\
 		CPU_KEEP(init.rodata)					\
 		CPU_KEEP(exit.rodata)					\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		MEM_KEEP(init.rodata)					\
@@ -495,10 +541,13 @@
 		*(.text)						\
 		*(.ref.text)						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEV_KEEP(init.text)						\
 	DEV_KEEP(exit.text)						\
 	CPU_KEEP(init.text)						\
 	CPU_KEEP(exit.text)						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MEM_KEEP(init.text)						\
@@ -577,6 +626,10 @@
 			VMLINUX_SYMBOL(__ctors_start) = .; \
 			*(.ctors)			   \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			*(.init_array)			   \
+>>>>>>> v3.18
 =======
 			*(.init_array)			   \
 >>>>>>> v3.18
@@ -589,8 +642,11 @@
 #define INIT_DATA							\
 	*(.init.data)							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEV_DISCARD(init.data)						\
 	CPU_DISCARD(init.data)						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MEM_DISCARD(init.data)						\
@@ -599,6 +655,7 @@
 	*(.init.rodata)							\
 	FTRACE_EVENTS()							\
 	TRACE_SYSCALLS()						\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DEV_DISCARD(init.rodata)					\
 	CPU_DISCARD(init.rodata)					\
@@ -614,6 +671,8 @@
 	DEV_DISCARD(init.text)						\
 	CPU_DISCARD(init.text)						\
 =======
+=======
+>>>>>>> v3.18
 	KPROBE_BLACKLIST()						\
 	MEM_DISCARD(init.rodata)					\
 	CLK_OF_TABLES()							\
@@ -626,16 +685,22 @@
 
 #define INIT_TEXT							\
 	*(.init.text)							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MEM_DISCARD(init.text)
 
 #define EXIT_DATA							\
 	*(.exit.data)							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEV_DISCARD(exit.data)						\
 	DEV_DISCARD(exit.rodata)					\
 	CPU_DISCARD(exit.data)						\
 	CPU_DISCARD(exit.rodata)					\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MEM_DISCARD(exit.data)						\
@@ -644,8 +709,11 @@
 #define EXIT_TEXT							\
 	*(.exit.text)							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEV_DISCARD(exit.text)						\
 	CPU_DISCARD(exit.text)						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MEM_DISCARD(exit.text)
@@ -789,11 +857,14 @@
 		VMLINUX_SYMBOL(__security_initcall_end) = .;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPAT_EXPORTS							\
 		VMLINUX_SYMBOL(__compat_exports_start) = .;		\
 		*(.exportcompat.init)					\
 		VMLINUX_SYMBOL(__compat_exports_end) = .;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_INITRD
@@ -842,7 +913,11 @@
 	*(.data..percpu..page_aligned)					\
 	. = ALIGN(cacheline);						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*(.data..percpu..readmostly)					\
+=======
+	*(.data..percpu..read_mostly)					\
+>>>>>>> v3.18
 =======
 	*(.data..percpu..read_mostly)					\
 >>>>>>> v3.18

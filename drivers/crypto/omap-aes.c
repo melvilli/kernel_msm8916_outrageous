@@ -14,7 +14,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pr_fmt(fmt) "%s: " fmt, __func__
+=======
+#define pr_fmt(fmt) "%20s: " fmt, __func__
+#define prn(num) pr_debug(#num "=%d\n", num)
+#define prx(num) pr_debug(#num "=%x\n", num)
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "%20s: " fmt, __func__
 #define prn(num) pr_debug(#num "=%d\n", num)
@@ -45,6 +51,11 @@
 #define DMA_MIN				(DST_MAXBURST * sizeof(u32))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _calc_walked(inout) (dd->inout##_walk.offset - dd->inout##_sg->offset)
+
+>>>>>>> v3.18
 =======
 #define _calc_walked(inout) (dd->inout##_walk.offset - dd->inout##_sg->offset)
 
@@ -86,11 +97,17 @@
 #define AES_REG_LENGTH_N(x)		(0x54 + ((x) * 0x04))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AES_REG_IRQ_STATUS(dd)         ((dd)->pdata->irq_status_ofs)
 #define AES_REG_IRQ_ENABLE(dd)         ((dd)->pdata->irq_enable_ofs)
 #define AES_REG_IRQ_DATA_IN            BIT(1)
 #define AES_REG_IRQ_DATA_OUT           BIT(2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DEFAULT_TIMEOUT		(5*HZ)
 
@@ -105,6 +122,11 @@
 #define FLAGS_BUSY		BIT(6)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AES_BLOCK_WORDS		(AES_BLOCK_SIZE >> 2)
+
+>>>>>>> v3.18
 =======
 #define AES_BLOCK_WORDS		(AES_BLOCK_SIZE >> 2)
 
@@ -143,6 +165,11 @@ struct omap_aes_pdata {
 	u32		rev_ofs;
 	u32		mask_ofs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32             irq_enable_ofs;
+	u32             irq_status_ofs;
+>>>>>>> v3.18
 =======
 	u32             irq_enable_ofs;
 	u32             irq_status_ofs;
@@ -175,6 +202,7 @@ struct omap_aes_dev {
 
 	struct ablkcipher_request	*req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t				total;
 	struct scatterlist		*in_sg;
 	struct scatterlist		in_sgl;
@@ -195,6 +223,8 @@ struct omap_aes_dev {
 	dma_addr_t		dma_addr_out;
 
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * total is used by PIO mode for book keeping so introduce
@@ -221,6 +251,9 @@ struct omap_aes_dev {
 	int			in_sg_len;
 	int			out_sg_len;
 	int			pio_only;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct omap_aes_pdata	*pdata;
 };
@@ -230,7 +263,10 @@ static LIST_HEAD(dev_list);
 static DEFINE_SPINLOCK(list_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef DEBUG
 #define omap_aes_read(dd, offset)				\
 ({								\
@@ -241,14 +277,20 @@ static DEFINE_SPINLOCK(list_lock);
 	_read_ret;						\
 })
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u32 omap_aes_read(struct omap_aes_dev *dd, u32 offset)
 {
 	return __raw_readl(dd->io_base + offset);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifdef DEBUG
@@ -259,6 +301,9 @@ static inline u32 omap_aes_read(struct omap_aes_dev *dd, u32 offset)
 		__raw_writel(value, dd->io_base + offset);		\
 	} while (0)
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void omap_aes_write(struct omap_aes_dev *dd, u32 offset,
 				  u32 value)
@@ -266,6 +311,10 @@ static inline void omap_aes_write(struct omap_aes_dev *dd, u32 offset,
 	__raw_writel(value, dd->io_base + offset);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -291,6 +340,7 @@ static void omap_aes_write_n(struct omap_aes_dev *dd, u32 offset,
 static int omap_aes_hw_init(struct omap_aes_dev *dd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * clocks are enabled when request starts and disabled when finished.
 	 * It may be long delays between requests.
@@ -298,6 +348,8 @@ static int omap_aes_hw_init(struct omap_aes_dev *dd)
 	 */
 	pm_runtime_get_sync(dd->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!(dd->flags & FLAGS_INIT)) {
@@ -334,7 +386,11 @@ static int omap_aes_write_ctrl(struct omap_aes_dev *dd)
 		val |= AES_REG_CTRL_CBC;
 	if (dd->flags & FLAGS_CTR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val |= AES_REG_CTRL_CTR | AES_REG_CTRL_CTR_WIDTH_32;
+=======
+		val |= AES_REG_CTRL_CTR | AES_REG_CTRL_CTR_WIDTH_128;
+>>>>>>> v3.18
 =======
 		val |= AES_REG_CTRL_CTR | AES_REG_CTRL_CTR_WIDTH_128;
 >>>>>>> v3.18
@@ -425,6 +481,7 @@ static int omap_aes_dma_init(struct omap_aes_dev *dd)
 	dd->dma_lch_in = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dd->buf_in = (void *)__get_free_pages(GFP_KERNEL, OMAP_AES_CACHE_SIZE);
 	dd->buf_out = (void *)__get_free_pages(GFP_KERNEL, OMAP_AES_CACHE_SIZE);
 	dd->buflen = PAGE_SIZE << OMAP_AES_CACHE_SIZE;
@@ -454,6 +511,8 @@ static int omap_aes_dma_init(struct omap_aes_dev *dd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	dma_cap_zero(mask);
 	dma_cap_set(DMA_SLAVE, mask);
 
@@ -481,6 +540,7 @@ err_dma_out:
 	dma_release_channel(dd->dma_lch_in);
 err_dma_in:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_single(dd->dev, dd->dma_addr_out, dd->buflen,
 			 DMA_FROM_DEVICE);
 err_map_out:
@@ -489,6 +549,8 @@ err_map_in:
 	free_pages((unsigned long)dd->buf_out, OMAP_AES_CACHE_SIZE);
 	free_pages((unsigned long)dd->buf_in, OMAP_AES_CACHE_SIZE);
 err_alloc:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (err)
@@ -501,11 +563,14 @@ static void omap_aes_dma_cleanup(struct omap_aes_dev *dd)
 	dma_release_channel(dd->dma_lch_out);
 	dma_release_channel(dd->dma_lch_in);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_single(dd->dev, dd->dma_addr_out, dd->buflen,
 			 DMA_FROM_DEVICE);
 	dma_unmap_single(dd->dev, dd->dma_addr_in, dd->buflen, DMA_TO_DEVICE);
 	free_pages((unsigned long)dd->buf_out, OMAP_AES_CACHE_SIZE);
 	free_pages((unsigned long)dd->buf_in, OMAP_AES_CACHE_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -524,6 +589,7 @@ static void sg_copy_buf(void *buf, struct scatterlist *sg,
 	scatterwalk_done(&walk, out, 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sg_copy(struct scatterlist **sg, size_t *offset, void *buf,
 		   size_t buflen, size_t total, int out)
@@ -568,11 +634,17 @@ static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
 		struct scatterlist *in_sg, struct scatterlist *out_sg,
 		int in_sg_len, int out_sg_len)
 >>>>>>> v3.18
+=======
+static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
+		struct scatterlist *in_sg, struct scatterlist *out_sg,
+		int in_sg_len, int out_sg_len)
+>>>>>>> v3.18
 {
 	struct omap_aes_ctx *ctx = crypto_tfm_ctx(tfm);
 	struct omap_aes_dev *dd = ctx->dd;
 	struct dma_async_tx_descriptor *tx_in, *tx_out;
 	struct dma_slave_config cfg;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dma_addr_t dma_addr_in = sg_dma_address(in_sg);
 	int ret, length = sg_dma_len(in_sg);
@@ -585,6 +657,8 @@ static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
 		dma_sync_single_for_device(dd->dev, dma_addr_in, length,
 					   DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (dd->pio_only) {
@@ -598,6 +672,9 @@ static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
 	}
 
 	dma_sync_sg_for_device(dd->dev, dd->in_sg, in_sg_len, DMA_TO_DEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&cfg, 0, sizeof(cfg));
@@ -618,7 +695,11 @@ static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_in = dmaengine_prep_slave_sg(dd->dma_lch_in, in_sg, 1,
+=======
+	tx_in = dmaengine_prep_slave_sg(dd->dma_lch_in, in_sg, in_sg_len,
+>>>>>>> v3.18
 =======
 	tx_in = dmaengine_prep_slave_sg(dd->dma_lch_in, in_sg, in_sg_len,
 >>>>>>> v3.18
@@ -641,7 +722,11 @@ static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_out = dmaengine_prep_slave_sg(dd->dma_lch_out, out_sg, 1,
+=======
+	tx_out = dmaengine_prep_slave_sg(dd->dma_lch_out, out_sg, out_sg_len,
+>>>>>>> v3.18
 =======
 	tx_out = dmaengine_prep_slave_sg(dd->dma_lch_out, out_sg, out_sg_len,
 >>>>>>> v3.18
@@ -663,7 +748,11 @@ static int omap_aes_crypt_dma(struct crypto_tfm *tfm,
 
 	/* start DMA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dd->pdata->trigger(dd, length);
+=======
+	dd->pdata->trigger(dd, dd->total);
+>>>>>>> v3.18
 =======
 	dd->pdata->trigger(dd, dd->total);
 >>>>>>> v3.18
@@ -675,6 +764,7 @@ static int omap_aes_crypt_dma_start(struct omap_aes_dev *dd)
 {
 	struct crypto_tfm *tfm = crypto_ablkcipher_tfm(
 					crypto_ablkcipher_reqtfm(dd->req));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err, fast = 0, in, out;
 	size_t count;
@@ -705,6 +795,8 @@ static int omap_aes_crypt_dma_start(struct omap_aes_dev *dd)
 
 		err = dma_map_sg(dd->dev, dd->in_sg, 1, DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	pr_debug("total: %d\n", dd->total);
@@ -712,6 +804,7 @@ static int omap_aes_crypt_dma_start(struct omap_aes_dev *dd)
 	if (!dd->pio_only) {
 		err = dma_map_sg(dd->dev, dd->in_sg, dd->in_sg_len,
 				 DMA_TO_DEVICE);
+<<<<<<< HEAD
 >>>>>>> v3.18
 		if (!err) {
 			dev_err(dd->dev, "dma_map_sg() error\n");
@@ -774,6 +867,13 @@ static int omap_aes_crypt_dma_start(struct omap_aes_dev *dd)
 		dma_unmap_sg(dd->dev, dd->in_sg, 1, DMA_TO_DEVICE);
 		dma_unmap_sg(dd->dev, dd->out_sg, 1, DMA_TO_DEVICE);
 =======
+=======
+		if (!err) {
+			dev_err(dd->dev, "dma_map_sg() error\n");
+			return -EINVAL;
+		}
+
+>>>>>>> v3.18
 		err = dma_map_sg(dd->dev, dd->out_sg, dd->out_sg_len,
 				 DMA_FROM_DEVICE);
 		if (!err) {
@@ -788,6 +888,9 @@ static int omap_aes_crypt_dma_start(struct omap_aes_dev *dd)
 		dma_unmap_sg(dd->dev, dd->in_sg, dd->in_sg_len, DMA_TO_DEVICE);
 		dma_unmap_sg(dd->dev, dd->out_sg, dd->out_sg_len,
 			     DMA_FROM_DEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -801,7 +904,10 @@ static void omap_aes_finish_req(struct omap_aes_dev *dd, int err)
 	pr_debug("err: %d\n", err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_put(dd->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dd->flags &= ~FLAGS_BUSY;
@@ -813,7 +919,10 @@ static int omap_aes_crypt_dma_stop(struct omap_aes_dev *dd)
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -824,6 +933,7 @@ static int omap_aes_crypt_dma_stop(struct omap_aes_dev *dd)
 	dmaengine_terminate_all(dd->dma_lch_in);
 	dmaengine_terminate_all(dd->dma_lch_out);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dd->flags & FLAGS_FAST) {
 		dma_unmap_sg(dd->dev, dd->out_sg, 1, DMA_FROM_DEVICE);
@@ -843,6 +953,8 @@ static int omap_aes_crypt_dma_stop(struct omap_aes_dev *dd)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	return err;
 }
 
@@ -886,6 +998,9 @@ static int omap_aes_copy_sgs(struct omap_aes_dev *dd)
 	dd->out_sg = &dd->out_sgl;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -923,12 +1038,15 @@ static int omap_aes_handle_queue(struct omap_aes_dev *dd,
 	dd->req = req;
 	dd->total = req->nbytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dd->in_offset = 0;
 	dd->in_sg = req->src;
 	dd->out_offset = 0;
 	dd->out_sg = req->dst;
 
 =======
+=======
+>>>>>>> v3.18
 	dd->total_save = req->nbytes;
 	dd->in_sg = req->src;
 	dd->out_sg = req->dst;
@@ -946,6 +1064,9 @@ static int omap_aes_handle_queue(struct omap_aes_dev *dd,
 	dd->out_sg_len = scatterwalk_bytes_sglen(dd->out_sg, dd->total);
 	BUG_ON(dd->in_sg_len < 0 || dd->out_sg_len < 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rctx = ablkcipher_request_ctx(req);
 	ctx = crypto_ablkcipher_ctx(crypto_ablkcipher_reqtfm(req));
@@ -971,6 +1092,7 @@ static void omap_aes_done_task(unsigned long data)
 {
 	struct omap_aes_dev *dd = (struct omap_aes_dev *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	pr_debug("enter\n");
@@ -987,6 +1109,8 @@ static void omap_aes_done_task(unsigned long data)
 
 	omap_aes_finish_req(dd, err);
 =======
+=======
+>>>>>>> v3.18
 	void *buf_in, *buf_out;
 	int pages;
 
@@ -1013,6 +1137,9 @@ static void omap_aes_done_task(unsigned long data)
 	}
 
 	omap_aes_finish_req(dd, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	omap_aes_handle_queue(dd, NULL);
 
@@ -1103,8 +1230,11 @@ static int omap_aes_ctr_decrypt(struct ablkcipher_request *req)
 static int omap_aes_cra_init(struct crypto_tfm *tfm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("enter\n");
 =======
+=======
+>>>>>>> v3.18
 	struct omap_aes_dev *dd = NULL;
 	int err;
 
@@ -1121,6 +1251,9 @@ static int omap_aes_cra_init(struct crypto_tfm *tfm)
 			__func__, err);
 		return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tfm->crt_ablkcipher.reqsize = sizeof(struct omap_aes_reqctx);
@@ -1131,8 +1264,11 @@ static int omap_aes_cra_init(struct crypto_tfm *tfm)
 static void omap_aes_cra_exit(struct crypto_tfm *tfm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("enter\n");
 =======
+=======
+>>>>>>> v3.18
 	struct omap_aes_dev *dd = NULL;
 
 	/* Find AES device, currently picks the first device */
@@ -1143,6 +1279,9 @@ static void omap_aes_cra_exit(struct crypto_tfm *tfm)
 	spin_unlock_bh(&list_lock);
 
 	pm_runtime_put_sync(dd->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1291,6 +1430,11 @@ static const struct omap_aes_pdata omap_aes_pdata_omap4 = {
 	.rev_ofs	= 0x80,
 	.mask_ofs	= 0x84,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_status_ofs = 0x8c,
+	.irq_enable_ofs = 0x90,
+>>>>>>> v3.18
 =======
 	.irq_status_ofs = 0x8c,
 	.irq_enable_ofs = 0x90,
@@ -1304,7 +1448,10 @@ static const struct omap_aes_pdata omap_aes_pdata_omap4 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static irqreturn_t omap_aes_irq(int irq, void *dev_id)
 {
 	struct omap_aes_dev *dd = dev_id;
@@ -1389,6 +1536,9 @@ static irqreturn_t omap_aes_irq(int irq, void *dev_id)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct of_device_id omap_aes_of_match[] = {
 	{
@@ -1496,15 +1646,21 @@ static int omap_aes_probe(struct platform_device *pdev)
 	struct crypto_alg *algp;
 	struct resource res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = -ENOMEM, i, j;
 	u32 reg;
 
 	dd = kzalloc(sizeof(struct omap_aes_dev), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	int err = -ENOMEM, i, j, irq = -1;
 	u32 reg;
 
 	dd = devm_kzalloc(dev, sizeof(struct omap_aes_dev), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dd == NULL) {
 		dev_err(dev, "unable to alloc data struct.\n");
@@ -1522,10 +1678,16 @@ static int omap_aes_probe(struct platform_device *pdev)
 		goto err_res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dd->io_base = devm_request_and_ioremap(dev, &res);
 	if (!dd->io_base) {
 		dev_err(dev, "can't ioremap\n");
 		err = -ENOMEM;
+=======
+	dd->io_base = devm_ioremap_resource(dev, &res);
+	if (IS_ERR(dd->io_base)) {
+		err = PTR_ERR(dd->io_base);
+>>>>>>> v3.18
 =======
 	dd->io_base = devm_ioremap_resource(dev, &res);
 	if (IS_ERR(dd->io_base)) {
@@ -1537,14 +1699,20 @@ static int omap_aes_probe(struct platform_device *pdev)
 
 	pm_runtime_enable(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_get_sync(dev);
 =======
+=======
+>>>>>>> v3.18
 	err = pm_runtime_get_sync(dev);
 	if (err < 0) {
 		dev_err(dev, "%s: failed to get_sync(%d)\n",
 			__func__, err);
 		goto err_res;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	omap_aes_dma_stop(dd);
@@ -1562,9 +1730,12 @@ static int omap_aes_probe(struct platform_device *pdev)
 
 	err = omap_aes_dma_init(dd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
 		goto err_dma;
 =======
+=======
+>>>>>>> v3.18
 	if (err && AES_REG_IRQ_STATUS(dd) && AES_REG_IRQ_ENABLE(dd)) {
 		dd->pio_only = 1;
 
@@ -1582,6 +1753,9 @@ static int omap_aes_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_LIST_HEAD(&dd->list);
@@ -1611,8 +1785,14 @@ err_algs:
 			crypto_unregister_alg(
 					&dd->pdata->algs_info[i].algs_list[j]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_aes_dma_cleanup(dd);
 err_dma:
+=======
+	if (!dd->pio_only)
+		omap_aes_dma_cleanup(dd);
+err_irq:
+>>>>>>> v3.18
 =======
 	if (!dd->pio_only)
 		omap_aes_dma_cleanup(dd);
@@ -1623,7 +1803,10 @@ err_irq:
 	pm_runtime_disable(dev);
 err_res:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(dd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dd = NULL;
@@ -1654,7 +1837,10 @@ static int omap_aes_remove(struct platform_device *pdev)
 	omap_aes_dma_cleanup(dd);
 	pm_runtime_disable(dd->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(dd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dd = NULL;
@@ -1677,9 +1863,13 @@ static int omap_aes_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dev_pm_ops omap_aes_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(omap_aes_suspend, omap_aes_resume)
 };
+=======
+static SIMPLE_DEV_PM_OPS(omap_aes_pm_ops, omap_aes_suspend, omap_aes_resume);
+>>>>>>> v3.18
 =======
 static SIMPLE_DEV_PM_OPS(omap_aes_pm_ops, omap_aes_suspend, omap_aes_resume);
 >>>>>>> v3.18

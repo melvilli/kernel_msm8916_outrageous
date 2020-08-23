@@ -56,16 +56,22 @@
 #include <linux/syscalls.h>
 #include <linux/mount.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <asm/div64.h>
 #include <linux/blkdev.h> /* sector_div */
 #include <linux/pid_namespace.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <asm/div64.h>
 #include <linux/blkdev.h> /* sector_div */
 #include <linux/pid_namespace.h>
 #include <linux/fs_pin.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -84,6 +90,7 @@ int acct_parm[3] = {4, 2, 30};
  * External references and all of the globals.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void do_acct_process(struct bsd_acct_struct *acct,
 		struct pid_namespace *ns, struct file *);
 
@@ -94,16 +101,22 @@ static void do_acct_process(struct bsd_acct_struct *acct,
  */
 struct bsd_acct_struct {
 =======
+=======
+>>>>>>> v3.18
 static void do_acct_process(struct bsd_acct_struct *acct);
 
 struct bsd_acct_struct {
 	struct fs_pin		pin;
 	struct mutex		lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			active;
 	unsigned long		needcheck;
 	struct file		*file;
 	struct pid_namespace	*ns;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head	list;
 };
@@ -165,6 +178,8 @@ static int check_free_space(struct bsd_acct_struct *acct, struct file *file)
 			acct->active = 1;
 			printk(KERN_INFO "Process accounting resumed\n");
 =======
+=======
+>>>>>>> v3.18
 	struct work_struct	work;
 	struct completion	done;
 };
@@ -196,11 +211,15 @@ static int check_free_space(struct bsd_acct_struct *acct)
 		if (sbuf.f_bavail >= resume) {
 			acct->active = 1;
 			pr_info("Process accounting resumed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	acct->needcheck = jiffies + ACCT_TIMEOUT*HZ;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = acct->active;
 out:
@@ -243,6 +262,8 @@ static void acct_file_reopen(struct bsd_acct_struct *acct, struct file *file,
 		spin_lock(&acct_lock);
 	}
 =======
+=======
+>>>>>>> v3.18
 out:
 	return acct->active;
 }
@@ -313,12 +334,16 @@ static void acct_pin_kill(struct fs_pin *pin)
 		acct = NULL;
 	}
 	acct_kill(acct, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int acct_on(struct filename *pathname)
 {
 	struct file *file;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vfsmount *mnt;
 	struct pid_namespace *ns;
@@ -331,6 +356,8 @@ static int acct_on(struct filename *pathname)
 
 	if (!S_ISREG(file_inode(file)->i_mode)) {
 =======
+=======
+>>>>>>> v3.18
 	struct vfsmount *mnt, *internal;
 	struct pid_namespace *ns = task_active_pid_ns(current);
 	struct bsd_acct_struct *acct, *old;
@@ -349,12 +376,16 @@ static int acct_on(struct filename *pathname)
 
 	if (!S_ISREG(file_inode(file)->i_mode)) {
 		kfree(acct);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		filp_close(file, NULL);
 		return -EACCES;
 	}
 
 	if (!file->f_op->write) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		filp_close(file, NULL);
 		return -EIO;
@@ -387,6 +418,8 @@ static int acct_on(struct filename *pathname)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		kfree(acct);
 		filp_close(file, NULL);
 		return -EIO;
@@ -429,6 +462,9 @@ static int acct_on(struct filename *pathname)
 
 static DEFINE_MUTEX(acct_on_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * sys_acct - enable/disable process accounting
@@ -451,6 +487,7 @@ SYSCALL_DEFINE1(acct, const char __user *, name)
 	if (name) {
 		struct filename *tmp = getname(name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR(tmp))
 			return (PTR_ERR(tmp));
 		error = acct_on(tmp);
@@ -466,6 +503,8 @@ SYSCALL_DEFINE1(acct, const char __user *, name)
 		acct_file_reopen(acct, NULL, NULL);
 		spin_unlock(&acct_lock);
 =======
+=======
+>>>>>>> v3.18
 
 		if (IS_ERR(tmp))
 			return PTR_ERR(tmp);
@@ -475,12 +514,16 @@ SYSCALL_DEFINE1(acct, const char __user *, name)
 		putname(tmp);
 	} else {
 		acct_kill(acct_get(task_active_pid_ns(current)), NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * acct_auto_close - turn off a filesystem's accounting if it is on
@@ -542,6 +585,11 @@ void acct_exit_ns(struct pid_namespace *ns)
 {
 	acct_kill(acct_get(ns), NULL);
 >>>>>>> v3.18
+=======
+void acct_exit_ns(struct pid_namespace *ns)
+{
+	acct_kill(acct_get(ns), NULL);
+>>>>>>> v3.18
 }
 
 /*
@@ -584,7 +632,11 @@ static comp_t encode_comp_t(unsigned long value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if ACCT_VERSION==1 || ACCT_VERSION==2
+=======
+#if ACCT_VERSION == 1 || ACCT_VERSION == 2
+>>>>>>> v3.18
 =======
 #if ACCT_VERSION == 1 || ACCT_VERSION == 2
 >>>>>>> v3.18
@@ -601,7 +653,11 @@ static comp_t encode_comp_t(unsigned long value)
 #define EXPSIZE2        5                       /* 5 bit base 2 exponent. */
 #define MAXFRACT2       ((1ul << MANTSIZE2) - 1) /* Maximum fractional value. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAXEXP2         ((1 <<EXPSIZE2) - 1)    /* Maximum exponent. */
+=======
+#define MAXEXP2         ((1 << EXPSIZE2) - 1)    /* Maximum exponent. */
+>>>>>>> v3.18
 =======
 #define MAXEXP2         ((1 << EXPSIZE2) - 1)    /* Maximum exponent. */
 >>>>>>> v3.18
@@ -636,7 +692,11 @@ static comp2_t encode_comp2_t(u64 value)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if ACCT_VERSION==3
+=======
+#if ACCT_VERSION == 3
+>>>>>>> v3.18
 =======
 #if ACCT_VERSION == 3
 >>>>>>> v3.18
@@ -649,8 +709,14 @@ static u32 encode_float(u64 value)
 	unsigned u;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (value==0) return 0;
 	while ((s64)value > 0){
+=======
+	if (value == 0)
+		return 0;
+	while ((s64)value > 0) {
+>>>>>>> v3.18
 =======
 	if (value == 0)
 		return 0;
@@ -673,6 +739,7 @@ static u32 encode_float(u64 value)
  *  do_exit() or when switching to a different output file.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *  do_acct_process does all actual work. Caller holds the reference to file.
@@ -700,17 +767,23 @@ static void do_acct_process(struct bsd_acct_struct *acct,
 	if (!check_free_space(acct, file))
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 static void fill_ac(acct_t *ac)
 {
 	struct pacct_struct *pacct = &current->signal->pacct;
 	u64 elapsed, run_time;
 	struct tty_struct *tty;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Fill the accounting struct with the needed info as recorded
 	 * by the different kernel functions.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memset(&ac, 0, sizeof(acct_t));
 
@@ -757,6 +830,8 @@ static void fill_ac(acct_t *ac)
 	ac.ac_ppid = task_tgid_nr_ns(rcu_dereference(current->real_parent), ns);
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	memset(ac, 0, sizeof(acct_t));
 
 	ac->ac_version = ACCT_VERSION | ACCT_BYTEORDER;
@@ -786,11 +861,15 @@ static void fill_ac(acct_t *ac)
 	ac->ac_btime = get_seconds() - elapsed;
 #if ACCT_VERSION==2
 	ac->ac_ahz = AHZ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 	spin_lock_irq(&current->sighand->siglock);
 	tty = current->signal->tty;	/* Safe as we hold the siglock */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ac.ac_tty = tty ? old_encode_dev(tty_devnum(tty)) : 0;
 	ac.ac_utime = encode_comp_t(jiffies_to_AHZ(cputime_to_jiffies(pacct->ac_utime)));
@@ -829,6 +908,8 @@ static void fill_ac(acct_t *ac)
 	file_end_write(file);
 out:
 =======
+=======
+>>>>>>> v3.18
 	ac->ac_tty = tty ? old_encode_dev(tty_devnum(tty)) : 0;
 	ac->ac_utime = encode_comp_t(jiffies_to_AHZ(cputime_to_jiffies(pacct->ac_utime)));
 	ac->ac_stime = encode_comp_t(jiffies_to_AHZ(cputime_to_jiffies(pacct->ac_stime)));
@@ -896,6 +977,9 @@ static void do_acct_process(struct bsd_acct_struct *acct)
 	}
 out:
 	current->signal->rlim[RLIMIT_FSIZE].rlim_cur = flim;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	revert_creds(orig_cred);
 }
@@ -914,6 +998,10 @@ void acct_collect(long exitcode, int group_dead)
 	if (group_dead && current->mm) {
 		struct vm_area_struct *vma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -949,6 +1037,7 @@ void acct_collect(long exitcode, int group_dead)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void acct_process_in_ns(struct pid_namespace *ns)
 {
 	struct file *file = NULL;
@@ -978,6 +1067,8 @@ static void acct_process_in_ns(struct pid_namespace *ns)
  * acct_process - now just a wrapper around acct_process_in_ns,
  * which in turn is a wrapper around do_acct_process.
 =======
+=======
+>>>>>>> v3.18
 static void slow_acct_process(struct pid_namespace *ns)
 {
 	for ( ; ns; ns = ns->parent) {
@@ -992,6 +1083,9 @@ static void slow_acct_process(struct pid_namespace *ns)
 
 /**
  * acct_process
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * handles process accounting for an exiting task
@@ -1006,14 +1100,20 @@ void acct_process(void)
 	 * its parent.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ns = task_active_pid_ns(current); ns != NULL; ns = ns->parent)
 		acct_process_in_ns(ns);
 =======
+=======
+>>>>>>> v3.18
 	for (ns = task_active_pid_ns(current); ns != NULL; ns = ns->parent) {
 		if (ns->bacct)
 			break;
 	}
 	if (unlikely(ns))
 		slow_acct_process(ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

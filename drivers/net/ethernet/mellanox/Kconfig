@@ -20,6 +20,10 @@ if NET_VENDOR_MELLANOX
 
 source "drivers/net/ethernet/mellanox/mlx4/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/net/ethernet/mellanox/mlx5/core/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/ethernet/mellanox/mlx5/core/Kconfig"
 >>>>>>> v3.18

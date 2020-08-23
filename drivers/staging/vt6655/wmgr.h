@@ -84,8 +84,12 @@ typedef void (*TimerFunction)(unsigned long);
 
 typedef unsigned char NDIS_802_11_MAC_ADDRESS[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct _NDIS_802_11_AI_REQFI
 {
+=======
+typedef struct _NDIS_802_11_AI_REQFI {
+>>>>>>> v3.18
 =======
 typedef struct _NDIS_802_11_AI_REQFI {
 >>>>>>> v3.18
@@ -95,8 +99,12 @@ typedef struct _NDIS_802_11_AI_REQFI {
 } NDIS_802_11_AI_REQFI, *PNDIS_802_11_AI_REQFI;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct _NDIS_802_11_AI_RESFI
 {
+=======
+typedef struct _NDIS_802_11_AI_RESFI {
+>>>>>>> v3.18
 =======
 typedef struct _NDIS_802_11_AI_RESFI {
 >>>>>>> v3.18
@@ -106,8 +114,12 @@ typedef struct _NDIS_802_11_AI_RESFI {
 } NDIS_802_11_AI_RESFI, *PNDIS_802_11_AI_RESFI;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct _NDIS_802_11_ASSOCIATION_INFORMATION
 {
+=======
+typedef struct _NDIS_802_11_ASSOCIATION_INFORMATION {
+>>>>>>> v3.18
 =======
 typedef struct _NDIS_802_11_ASSOCIATION_INFORMATION {
 >>>>>>> v3.18
@@ -131,6 +143,7 @@ typedef struct tagSAssocInfo {
 } SAssocInfo, *PSAssocInfo;
 //---
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
   typedef enum tagWMAC_AUTHENTICATION_MODE {
@@ -158,6 +171,8 @@ typedef struct tagSAssocInfo {
   } WMAC_CONFIG_MODE, *PWMAC_CONFIG_MODE;
 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef enum tagWMAC_SCAN_TYPE {
@@ -220,7 +235,11 @@ typedef struct tagSTxMgmtPacket {
 typedef struct tagSRxMgmtPacket {
 	PUWLAN_80211HDR     p80211Header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QWORD               qwLocalTSF;
+=======
+	u64 qwLocalTSF;
+>>>>>>> v3.18
 =======
 	u64 qwLocalTSF;
 >>>>>>> v3.18
@@ -233,8 +252,12 @@ typedef struct tagSRxMgmtPacket {
 } SRxMgmtPacket, *PSRxMgmtPacket;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct tagSMgmtObject
 {
+=======
+typedef struct tagSMgmtObject {
+>>>>>>> v3.18
 =======
 typedef struct tagSMgmtObject {
 >>>>>>> v3.18
@@ -256,9 +279,12 @@ typedef struct tagSMgmtObject {
 	unsigned char byCSSPK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    unsigned char abyNewSuppRates[WLAN_IEHDR_LEN + WLAN_RATES_MAXLEN];
 //    unsigned char abyNewExtSuppRates[WLAN_IEHDR_LEN + WLAN_RATES_MAXLEN];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	// Current state vars
@@ -283,7 +309,10 @@ typedef struct tagSMgmtObject {
 
 	// Adhoc or AP configuration vars
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//unsigned char abyAdHocSSID[WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short wIBSSBeaconPeriod;

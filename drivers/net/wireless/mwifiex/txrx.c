@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: generic TX/RX data handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -45,6 +49,10 @@ int mwifiex_handle_rx_packet(struct mwifiex_adapter *adapter,
 	struct rxpd *local_rx_pd;
 	struct mwifiex_rxinfo *rx_info = MWIFIEX_SKB_RXCB(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -63,6 +71,10 @@ int mwifiex_handle_rx_packet(struct mwifiex_adapter *adapter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(rx_info, 0, sizeof(*rx_info));
+>>>>>>> v3.18
 =======
 	memset(rx_info, 0, sizeof(*rx_info));
 >>>>>>> v3.18
@@ -71,10 +83,13 @@ int mwifiex_handle_rx_packet(struct mwifiex_adapter *adapter,
 
 	if (priv->bss_role == MWIFIEX_BSS_ROLE_UAP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return mwifiex_process_uap_rx_packet(priv, skb);
 
 	return mwifiex_process_sta_rx_packet(priv, skb);
 =======
+=======
+>>>>>>> v3.18
 		ret = mwifiex_process_uap_rx_packet(priv, skb);
 	else
 		ret = mwifiex_process_sta_rx_packet(priv, skb);
@@ -84,6 +99,9 @@ int mwifiex_handle_rx_packet(struct mwifiex_adapter *adapter,
 		adapter->if_ops.data_complete(adapter);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(mwifiex_handle_rx_packet);
@@ -130,7 +148,11 @@ int mwifiex_process_tx(struct mwifiex_private *priv, struct sk_buff *skb,
 	switch (ret) {
 	case -ENOSR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(adapter->dev, "data: -ENOSR is returned\n");
+=======
+		dev_dbg(adapter->dev, "data: -ENOSR is returned\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(adapter->dev, "data: -ENOSR is returned\n");
 >>>>>>> v3.18
@@ -197,7 +219,11 @@ int mwifiex_write_data_complete(struct mwifiex_adapter *adapter,
 	if (!status) {
 		priv->stats.tx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->stats.tx_bytes += skb->len;
+=======
+		priv->stats.tx_bytes += tx_info->pkt_len;
+>>>>>>> v3.18
 =======
 		priv->stats.tx_bytes += tx_info->pkt_len;
 >>>>>>> v3.18

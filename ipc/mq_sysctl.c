@@ -15,7 +15,11 @@
 
 #ifdef CONFIG_PROC_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *get_mq(ctl_table *table)
+=======
+static void *get_mq(struct ctl_table *table)
+>>>>>>> v3.18
 =======
 static void *get_mq(struct ctl_table *table)
 >>>>>>> v3.18
@@ -27,7 +31,11 @@ static void *get_mq(struct ctl_table *table)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_mq_dointvec(ctl_table *table, int write,
+=======
+static int proc_mq_dointvec(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_mq_dointvec(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -41,7 +49,11 @@ static int proc_mq_dointvec(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_mq_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_mq_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_mq_dointvec_minmax(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -66,7 +78,11 @@ static int msg_maxsize_limit_min = MIN_MSGSIZEMAX;
 static int msg_maxsize_limit_max = HARD_MSGSIZEMAX;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table mq_sysctls[] = {
+=======
+static struct ctl_table mq_sysctls[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table mq_sysctls[] = {
 >>>>>>> v3.18
@@ -117,7 +133,11 @@ static struct ctl_table mq_sysctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table mq_sysctl_dir[] = {
+=======
+static struct ctl_table mq_sysctl_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table mq_sysctl_dir[] = {
 >>>>>>> v3.18
@@ -130,7 +150,11 @@ static struct ctl_table mq_sysctl_dir[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table mq_sysctl_root[] = {
+=======
+static struct ctl_table mq_sysctl_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table mq_sysctl_root[] = {
 >>>>>>> v3.18

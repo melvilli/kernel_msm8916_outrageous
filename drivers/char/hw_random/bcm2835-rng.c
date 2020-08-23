@@ -9,7 +9,10 @@
 
 #include <linux/hw_random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -66,17 +69,24 @@ static int bcm2835_rng_probe(struct platform_device *pdev)
 	bcm2835_rng_ops.priv = (unsigned long)rng_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* set warm-up count & enable */
 	__raw_writel(RNG_WARMUP_COUNT, rng_base + RNG_STATUS);
 	__raw_writel(RNG_RBGEN, rng_base + RNG_CTRL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* register driver */
 	err = hwrng_register(&bcm2835_rng_ops);
 	if (err) {
 		dev_err(dev, "hwrng registration failed\n");
 		iounmap(rng_base);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {
 		dev_info(dev, "hwrng registered\n");
@@ -85,6 +95,11 @@ static int bcm2835_rng_probe(struct platform_device *pdev)
 		__raw_writel(RNG_WARMUP_COUNT, rng_base + RNG_STATUS);
 		__raw_writel(RNG_RBGEN, rng_base + RNG_CTRL);
 	}
+=======
+	} else
+		dev_info(dev, "hwrng registered\n");
+
+>>>>>>> v3.18
 =======
 	} else
 		dev_info(dev, "hwrng registered\n");

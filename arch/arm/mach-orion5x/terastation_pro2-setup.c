@@ -78,7 +78,11 @@ static struct platform_device tsp2_nor_flash = {
 #define TSP2_PCI_SLOT0_IRQ_PIN		11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init tsp2_pci_preinit(void)
+=======
+static void __init tsp2_pci_preinit(void)
+>>>>>>> v3.18
 =======
 static void __init tsp2_pci_preinit(void)
 >>>>>>> v3.18
@@ -334,13 +338,19 @@ static void __init tsp2_init(void)
 	 * Configure peripherals.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", TSP2_NOR_BOOT_BASE,
 			      TSP2_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    TSP2_NOR_BOOT_BASE,
 				    TSP2_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&tsp2_nor_flash);
 
@@ -359,7 +369,11 @@ static void __init tsp2_init(void)
 	}
 	if (tsp2_i2c_rtc.irq == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("tsp2_init: failed to get RTC IRQ\n");
+=======
+		pr_warn("tsp2_init: failed to get RTC IRQ\n");
+>>>>>>> v3.18
 =======
 		pr_warn("tsp2_init: failed to get RTC IRQ\n");
 >>>>>>> v3.18

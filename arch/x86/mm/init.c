@@ -19,7 +19,10 @@
 #include <asm/microcode.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * We need to define the tracepoints somewhere, and tlb.c
  * is only compied when SMP=y.
@@ -27,6 +30,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/tlb.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "mm_internal.h"
 
@@ -64,7 +70,11 @@ __ref void *alloc_low_pages(unsigned int num)
 		unsigned long ret;
 		if (min_pfn_mapped >= max_pfn_mapped)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			panic("alloc_low_page: ran out of memory");
+=======
+			panic("alloc_low_pages: ran out of memory");
+>>>>>>> v3.18
 =======
 			panic("alloc_low_pages: ran out of memory");
 >>>>>>> v3.18
@@ -73,7 +83,11 @@ __ref void *alloc_low_pages(unsigned int num)
 					PAGE_SIZE * num , PAGE_SIZE);
 		if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			panic("alloc_low_page: can not alloc memory");
+=======
+			panic("alloc_low_pages: can not alloc memory");
+>>>>>>> v3.18
 =======
 			panic("alloc_low_pages: can not alloc memory");
 >>>>>>> v3.18
@@ -418,12 +432,15 @@ static unsigned long __init init_range_memory_mapping(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* (PUD_SHIFT-PMD_SHIFT)/2 */
 #define STEP_SIZE_SHIFT 5
 void __init init_mem_mapping(void)
 {
 	unsigned long end, real_end, start, last_start;
 =======
+=======
+>>>>>>> v3.18
 static unsigned long __init get_new_step_size(unsigned long step_size)
 {
 	/*
@@ -457,12 +474,16 @@ static void __init memory_map_top_down(unsigned long map_start,
 				       unsigned long map_end)
 {
 	unsigned long real_end, start, last_start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long step_size;
 	unsigned long addr;
 	unsigned long mapped_ram_size = 0;
 	unsigned long new_mapped_ram_size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	probe_page_size_mask();
 
@@ -477,6 +498,10 @@ static void __init memory_map_top_down(unsigned long map_start,
 
 	/* xen has big range in reserved near end of ram, skip it at first.*/
 	addr = memblock_find_in_range(ISA_END_ADDRESS, end, PMD_SIZE, PMD_SIZE);
+=======
+	/* xen has big range in reserved near end of ram, skip it at first.*/
+	addr = memblock_find_in_range(map_start, map_end, PMD_SIZE, PMD_SIZE);
+>>>>>>> v3.18
 =======
 	/* xen has big range in reserved near end of ram, skip it at first.*/
 	addr = memblock_find_in_range(map_start, map_end, PMD_SIZE, PMD_SIZE);
@@ -496,6 +521,7 @@ static void __init memory_map_top_down(unsigned long map_start,
 	 * for page table.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (last_start > ISA_END_ADDRESS) {
 		if (last_start > step_size) {
 			start = round_down(last_start - 1, step_size);
@@ -504,6 +530,8 @@ static void __init memory_map_top_down(unsigned long map_start,
 		} else
 			start = ISA_END_ADDRESS;
 =======
+=======
+>>>>>>> v3.18
 	while (last_start > map_start) {
 		if (last_start > step_size) {
 			start = round_down(last_start - 1, step_size);
@@ -511,6 +539,9 @@ static void __init memory_map_top_down(unsigned long map_start,
 				start = map_start;
 		} else
 			start = map_start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		new_mapped_ram_size = init_range_memory_mapping(start,
 							last_start);
@@ -519,6 +550,7 @@ static void __init memory_map_top_down(unsigned long map_start,
 		/* only increase step_size after big range get mapped */
 		if (new_mapped_ram_size > mapped_ram_size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			step_size <<= STEP_SIZE_SHIFT;
 		mapped_ram_size += new_mapped_ram_size;
 	}
@@ -526,6 +558,8 @@ static void __init memory_map_top_down(unsigned long map_start,
 	if (real_end < end)
 		init_range_memory_mapping(real_end, end);
 =======
+=======
+>>>>>>> v3.18
 			step_size = get_new_step_size(step_size);
 		mapped_ram_size += new_mapped_ram_size;
 	}
@@ -613,6 +647,9 @@ void __init init_mem_mapping(void)
 	} else {
 		memory_map_top_down(ISA_END_ADDRESS, end);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
@@ -634,6 +671,7 @@ void __init init_mem_mapping(void)
  * devmem_is_allowed() checks to see if /dev/mem access to a certain address
  * is valid. The argument is a physical page number.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * On x86, access has to be given to the first megabyte of RAM because that
  * area traditionally contains BIOS code and data regions used by X, dosemu,
@@ -670,6 +708,8 @@ int devmem_is_allowed(unsigned long pagenr)
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
  *
  * On x86, access has to be given to the first megabyte of ram because that area
  * contains bios code and data regions used by X and dosemu and similar apps.
@@ -685,13 +725,19 @@ int devmem_is_allowed(unsigned long pagenr)
 	if (!page_is_ram(pagenr))
 		return 1;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void free_init_pages(char *what, unsigned long begin, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long addr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long begin_aligned, end_aligned;
@@ -709,8 +755,11 @@ void free_init_pages(char *what, unsigned long begin, unsigned long end)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = begin;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -732,6 +781,7 @@ void free_init_pages(char *what, unsigned long begin, unsigned long end)
 	set_memory_rw(begin, (end - begin) >> PAGE_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Freeing %s: %luk freed\n", what, (end - begin) >> 10);
 
 	for (; addr < end; addr += PAGE_SIZE) {
@@ -741,13 +791,20 @@ void free_init_pages(char *what, unsigned long begin, unsigned long end)
 =======
 	free_reserved_area((void *)begin, (void *)end, POISON_FREE_INITMEM, what);
 >>>>>>> v3.18
+=======
+	free_reserved_area((void *)begin, (void *)end, POISON_FREE_INITMEM, what);
+>>>>>>> v3.18
 #endif
 }
 
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_init_pages("unused kernel memory",
+=======
+	free_init_pages("unused kernel",
+>>>>>>> v3.18
 =======
 	free_init_pages("unused kernel",
 >>>>>>> v3.18
@@ -777,7 +834,11 @@ void __init free_initrd_mem(unsigned long start, unsigned long end)
 	 * So here We can do PAGE_ALIGN() safely to get partial page to be freed
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_init_pages("initrd memory", start, PAGE_ALIGN(end));
+=======
+	free_init_pages("initrd", start, PAGE_ALIGN(end));
+>>>>>>> v3.18
 =======
 	free_init_pages("initrd", start, PAGE_ALIGN(end));
 >>>>>>> v3.18

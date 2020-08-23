@@ -19,6 +19,10 @@
 
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_fdt.h>
 >>>>>>> v3.18
@@ -33,6 +37,7 @@ extern u32 epapr_ev_idle_start[];
 #endif
 
 bool epapr_paravirt_enabled;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __init epapr_paravirt_init(void)
@@ -57,6 +62,8 @@ static int __init epapr_paravirt_init(void)
 #if !defined(CONFIG_64BIT) || defined(CONFIG_PPC_BOOK3E_64)
 		patch_instruction(epapr_ev_idle_start + i, insts[i]);
 =======
+=======
+>>>>>>> v3.18
 static bool __maybe_unused epapr_has_idle;
 
 static int __init early_init_dt_scan_epapr(unsigned long node,
@@ -79,14 +86,22 @@ static int __init early_init_dt_scan_epapr(unsigned long node,
 		patch_instruction(epapr_hypercall_start + i, inst);
 #if !defined(CONFIG_64BIT) || defined(CONFIG_PPC_BOOK3E_64)
 		patch_instruction(epapr_ev_idle_start + i, inst);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	}
 
 #if !defined(CONFIG_64BIT) || defined(CONFIG_PPC_BOOK3E_64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_get_property(hyper_node, "has-idle", NULL))
 		ppc_md.power_save = epapr_ev_idle;
+=======
+	if (of_get_flat_dt_prop(node, "has-idle", NULL))
+		epapr_has_idle = true;
+>>>>>>> v3.18
 =======
 	if (of_get_flat_dt_prop(node, "has-idle", NULL))
 		epapr_has_idle = true;
@@ -96,11 +111,14 @@ static int __init early_init_dt_scan_epapr(unsigned long node,
 	epapr_paravirt_enabled = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 early_initcall(epapr_paravirt_init);
 =======
+=======
+>>>>>>> v3.18
 	return 1;
 }
 
@@ -122,4 +140,7 @@ static int __init epapr_idle_init(void)
 }
 
 postcore_initcall(epapr_idle_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

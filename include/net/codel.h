@@ -47,7 +47,10 @@
 #include <net/pkt_sched.h>
 #include <net/inet_ecn.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reciprocal_div.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -71,7 +74,11 @@ typedef s32 codel_tdiff_t;
 static inline codel_time_t codel_get_time(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 ns = ktime_to_ns(ktime_get());
+=======
+	u64 ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	u64 ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -80,11 +87,14 @@ static inline codel_time_t codel_get_time(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define codel_time_after(a, b)		((s32)(a) - (s32)(b) > 0)
 #define codel_time_after_eq(a, b)	((s32)(a) - (s32)(b) >= 0)
 #define codel_time_before(a, b)		((s32)(a) - (s32)(b) < 0)
 #define codel_time_before_eq(a, b)	((s32)(a) - (s32)(b) <= 0)
 =======
+=======
+>>>>>>> v3.18
 /* Dealing with timer wrapping, according to RFC 1982, as desc in wikipedia:
  *  https://en.wikipedia.org/wiki/Serial_number_arithmetic#General_Solution
  * codel_time_after(a,b) returns true if the time a is after time b.
@@ -100,6 +110,9 @@ static inline codel_time_t codel_get_time(void)
 	 typecheck(codel_time_t, b) &&					\
 	 ((s32)((a) - (b)) >= 0))
 #define codel_time_before_eq(a, b)	codel_time_after_eq(b, a)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Qdiscs using codel plugin must use codel_skb_cb in their own cb[] */
@@ -226,10 +239,16 @@ static codel_time_t codel_control_law(codel_time_t t,
 				      u32 rec_inv_sqrt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return t + reciprocal_divide(interval, rec_inv_sqrt << REC_INV_SQRT_SHIFT);
 }
 
 
+=======
+	return t + reciprocal_scale(interval, rec_inv_sqrt << REC_INV_SQRT_SHIFT);
+}
+
+>>>>>>> v3.18
 =======
 	return t + reciprocal_scale(interval, rec_inv_sqrt << REC_INV_SQRT_SHIFT);
 }

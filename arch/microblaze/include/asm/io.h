@@ -16,13 +16,17 @@
 #include <linux/types.h>
 #include <linux/mm.h>          /* Get struct page {...} */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm-generic/iomap.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 #ifndef CONFIG_PCI
 #define _IO_BASE	0
 #define _ISA_MEM_BASE	0
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PCI_DRAM_OFFSET	0
 #else
@@ -229,6 +233,8 @@ static inline void __iomem *__ioremap(phys_addr_t address, unsigned long size,
  * Big Endian
  */
 =======
+=======
+>>>>>>> v3.18
 #else
 #define _IO_BASE	isa_io_base
 #define _ISA_MEM_BASE	isa_mem_base
@@ -257,6 +263,9 @@ extern void __iomem *ioremap(phys_addr_t address, unsigned long size);
 #endif /* CONFIG_MMU */
 
 /* Big Endian */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define out_be32(a, v) __raw_writel((v), (void __iomem __force *)(a))
 #define out_be16(a, v) __raw_writew((v), (a))
@@ -268,10 +277,14 @@ extern void __iomem *ioremap(phys_addr_t address, unsigned long size);
 #define readl_be(a)	in_be32((__force unsigned *)a)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Little endian
  */
 
+=======
+/* Little endian */
+>>>>>>> v3.18
 =======
 /* Little endian */
 >>>>>>> v3.18
@@ -285,6 +298,7 @@ extern void __iomem *ioremap(phys_addr_t address, unsigned long size);
 #define out_8(a, v) __raw_writeb((v), (a))
 #define in_8(a) __raw_readb(a)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define mmiowb()
 
@@ -381,6 +395,8 @@ static inline void outsl(unsigned long addr, const void *buffer, int count)
 #define iowrite32_rep(p, src, count) \
 	outsl((unsigned long) (p), (src), (count))
 =======
+=======
+>>>>>>> v3.18
 #include <asm-generic/io.h>
 
 #define readb_relaxed	readb
@@ -390,6 +406,9 @@ static inline void outsl(unsigned long addr, const void *buffer, int count)
 #define writeb_relaxed	writeb
 #define writew_relaxed	writew
 #define writel_relaxed	writel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_MICROBLAZE_IO_H */

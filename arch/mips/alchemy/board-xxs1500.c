@@ -50,7 +50,11 @@ void __init prom_init(void)
 
 	memsize_str = prom_getenv("memsize");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!memsize_str || strict_strtoul(memsize_str, 0, &memsize))
+=======
+	if (!memsize_str || kstrtoul(memsize_str, 0, &memsize))
+>>>>>>> v3.18
 =======
 	if (!memsize_str || kstrtoul(memsize_str, 0, &memsize))
 >>>>>>> v3.18
@@ -92,9 +96,15 @@ void __init board_setup(void)
 
 	/* Set multiple use pins (UART3/GPIO) to UART (it's used as UART too) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pin_func  = au_readl(SYS_PINFUNC) & ~SYS_PF_UR3;
 	pin_func |= SYS_PF_UR3;
 	au_writel(pin_func, SYS_PINFUNC);
+=======
+	pin_func  = alchemy_rdsys(AU1000_SYS_PINFUNC) & ~SYS_PF_UR3;
+	pin_func |= SYS_PF_UR3;
+	alchemy_wrsys(pin_func, AU1000_SYS_PINFUNC);
+>>>>>>> v3.18
 =======
 	pin_func  = alchemy_rdsys(AU1000_SYS_PINFUNC) & ~SYS_PF_UR3;
 	pin_func |= SYS_PF_UR3;

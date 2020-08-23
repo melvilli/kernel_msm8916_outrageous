@@ -62,6 +62,7 @@
 #include <linux/ptrace.h>
 #include <linux/sched/rt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/freezer.h>
 #include <linux/hugetlb.h>
 
@@ -69,6 +70,8 @@
 
 #include "rtmutex_common.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hugetlb.h>
 #include <linux/freezer.h>
 #include <linux/bootmem.h>
@@ -177,6 +180,9 @@
  * will do the additional required waiter count housekeeping. This is done for
  * double_lock_hb() and double_unlock_hb(), respectively.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_HAVE_FUTEX_CMPXCHG
@@ -184,8 +190,11 @@ int __read_mostly futex_cmpxchg_enabled;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FUTEX_HASHBITS (CONFIG_BASE_SMALL ? 4 : 8)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -264,12 +273,15 @@ static const struct futex_q futex_q_init = {
  */
 struct futex_hash_bucket {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;
 	struct plist_head chain;
 };
 
 static struct futex_hash_bucket futex_queues[1<<FUTEX_HASHBITS];
 =======
+=======
+>>>>>>> v3.18
 	atomic_t waiters;
 	spinlock_t lock;
 	struct plist_head chain;
@@ -323,6 +335,9 @@ static inline int hb_waiters_pending(struct futex_hash_bucket *hb)
 	return 1;
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -334,7 +349,11 @@ static struct futex_hash_bucket *hash_futex(union futex_key *key)
 			  (sizeof(key->both.word)+sizeof(key->both.ptr))/4,
 			  key->both.offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return &futex_queues[hash & ((1 << FUTEX_HASHBITS)-1)];
+=======
+	return &futex_queues[hash & (futex_hashsize - 1)];
+>>>>>>> v3.18
 =======
 	return &futex_queues[hash & (futex_hashsize - 1)];
 >>>>>>> v3.18
@@ -364,12 +383,15 @@ static void get_futex_key_refs(union futex_key *key)
 	switch (key->both.offset & (FUT_OFF_INODE|FUT_OFF_MMSHARED)) {
 	case FUT_OFF_INODE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ihold(key->shared.inode);
 		break;
 	case FUT_OFF_MMSHARED:
 		atomic_inc(&key->private.mm->mm_count);
 		break;
 =======
+=======
+>>>>>>> v3.18
 		ihold(key->shared.inode); /* implies MB (B) */
 		break;
 	case FUT_OFF_MMSHARED:
@@ -382,6 +404,9 @@ static void get_futex_key_refs(union futex_key *key)
 		 * is because we need the barrier for the lockless waiter check.
 		 */
 		smp_mb(); /* explicit MB (B) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -389,7 +414,13 @@ static void get_futex_key_refs(union futex_key *key)
 /*
  * Drop a reference to the resource addressed by a key.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The hash bucket spinlock must not be held.
+=======
+ * The hash bucket spinlock must not be held. This is
+ * a no-op for private futexes, see comment in the get
+ * counterpart.
+>>>>>>> v3.18
 =======
  * The hash bucket spinlock must not be held. This is
  * a no-op for private futexes, see comment in the get
@@ -449,6 +480,12 @@ get_futex_key(u32 __user *uaddr, int fshared, union futex_key *key, int rw)
 	address -= key->both.offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(!access_ok(rw, uaddr, sizeof(u32))))
+		return -EFAULT;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(!access_ok(rw, uaddr, sizeof(u32))))
 		return -EFAULT;
@@ -463,11 +500,17 @@ get_futex_key(u32 __user *uaddr, int fshared, union futex_key *key, int rw)
 	 */
 	if (!fshared) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unlikely(!access_ok(VERIFY_WRITE, uaddr, sizeof(u32))))
 			return -EFAULT;
 		key->private.mm = mm;
 		key->private.address = address;
 		get_futex_key_refs(key);
+=======
+		key->private.mm = mm;
+		key->private.address = address;
+		get_futex_key_refs(key);  /* implies MB (B) */
+>>>>>>> v3.18
 =======
 		key->private.mm = mm;
 		key->private.address = address;
@@ -580,7 +623,11 @@ again:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_futex_key_refs(key);
+=======
+	get_futex_key_refs(key); /* implies MB (B) */
+>>>>>>> v3.18
 =======
 	get_futex_key_refs(key); /* implies MB (B) */
 >>>>>>> v3.18
@@ -701,9 +748,12 @@ static struct futex_pi_state * alloc_pi_state(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void free_pi_state(struct futex_pi_state *pi_state)
 {
 =======
+=======
+>>>>>>> v3.18
 /*
  * Must be called with the hb lock held.
  */
@@ -712,6 +762,9 @@ static void free_pi_state(struct futex_pi_state *pi_state)
 	if (!pi_state)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!atomic_dec_and_test(&pi_state->refcount))
 		return;
@@ -865,6 +918,7 @@ void exit_pi_state_list(struct task_struct *curr)
  *	TID out of sync.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 lookup_pi_state(u32 uval, struct futex_hash_bucket *hb,
 		union futex_key *key, struct futex_pi_state **ps)
@@ -955,6 +1009,8 @@ lookup_pi_state(u32 uval, struct futex_hash_bucket *hb,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Validate that the existing waiter has a pi_state and sanity check
@@ -1038,6 +1094,9 @@ static int attach_to_pi_owner(u32 uval, union futex_key *key,
 	pid_t pid = uval & FUTEX_TID_MASK;
 	struct futex_pi_state *pi_state;
 	struct task_struct *p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1082,7 +1141,11 @@ static int attach_to_pi_owner(u32 uval, union futex_key *key,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Initialize the pi_mutex in locked state and make 'p'
+=======
+	 * Initialize the pi_mutex in locked state and make @p
+>>>>>>> v3.18
 =======
 	 * Initialize the pi_mutex in locked state and make @p
 >>>>>>> v3.18
@@ -1106,7 +1169,10 @@ static int attach_to_pi_owner(u32 uval, union futex_key *key,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int lookup_pi_state(u32 uval, struct futex_hash_bucket *hb,
 			   union futex_key *key, struct futex_pi_state **ps)
 {
@@ -1137,6 +1203,9 @@ static int lock_pi_update_atomic(u32 __user *uaddr, u32 uval, u32 newval)
 	return curval != uval ? -EAGAIN : 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * futex_lock_pi_atomic() - Atomic work required to acquire a pi aware futex
@@ -1162,6 +1231,7 @@ static int futex_lock_pi_atomic(u32 __user *uaddr, struct futex_hash_bucket *hb,
 				struct task_struct *task, int set_waiters)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int lock_taken, ret, force_take = 0;
 	u32 uval, newval, curval, vpid = task_pid_vnr(task);
 
@@ -1179,6 +1249,8 @@ retry:
 
 	if (unlikely(cmpxchg_futex_value_locked(&curval, uaddr, 0, newval)))
 =======
+=======
+>>>>>>> v3.18
 	u32 uval, newval, vpid = task_pid_vnr(task);
 	struct futex_q *match;
 	int ret;
@@ -1188,12 +1260,16 @@ retry:
 	 * things before proceeding further.
 	 */
 	if (get_futex_value_locked(&uval, uaddr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EFAULT;
 
 	/*
 	 * Detect deadlocks.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((unlikely((curval & FUTEX_TID_MASK) == vpid)))
 		return -EDEADLK;
@@ -1282,6 +1358,8 @@ retry:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if ((unlikely((uval & FUTEX_TID_MASK) == vpid)))
 		return -EDEADLK;
 
@@ -1331,6 +1409,9 @@ retry:
 	 * set the FUTEX_WAITERS bit in the user space variable.
 	 */
 	return attach_to_pi_owner(uval, key, ps);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1351,6 +1432,10 @@ static void __unqueue_futex(struct futex_q *q)
 	hb = container_of(q->lock_ptr, struct futex_hash_bucket, lock);
 	plist_del(&q->list, &hb->chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hb_waiters_dec(hb);
+>>>>>>> v3.18
 =======
 	hb_waiters_dec(hb);
 >>>>>>> v3.18
@@ -1359,11 +1444,17 @@ static void __unqueue_futex(struct futex_q *q)
 /*
  * The hash bucket lock must be held when this is called.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Afterwards, the futex_q must not be accessed. Callers
  * must ensure to later call wake_up_q() for the actual
  * wakeups to occur.
  */
 static void mark_wake_futex(struct wake_q_head *wake_q, struct futex_q *q)
+=======
+ * Afterwards, the futex_q must not be accessed.
+ */
+static void wake_futex(struct futex_q *q)
+>>>>>>> v3.18
 =======
  * Afterwards, the futex_q must not be accessed.
  */
@@ -1377,11 +1468,14 @@ static void wake_futex(struct futex_q *q)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Queue the task for later wakeup for after we've released
 	 * the hb->lock. wake_q_add() grabs reference to p.
 	 */
 	wake_q_add(wake_q, p);
 =======
+=======
+>>>>>>> v3.18
 	 * We set q->lock_ptr = NULL _before_ we wake up the task. If
 	 * a non-futex wake up happens on another CPU then the task
 	 * might exit and p would dereference a non-existing task
@@ -1390,6 +1484,9 @@ static void wake_futex(struct futex_q *q)
 	 */
 	get_task_struct(p);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__unqueue_futex(q);
 	/*
@@ -1401,25 +1498,34 @@ static void wake_futex(struct futex_q *q)
 	smp_wmb();
 	q->lock_ptr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static int wake_futex_pi(u32 __user *uaddr, u32 uval, struct futex_q *this,
 			 struct futex_hash_bucket *hb)
 =======
+=======
+>>>>>>> v3.18
 
 	wake_up_state(p, TASK_NORMAL);
 	put_task_struct(p);
 }
 
 static int wake_futex_pi(u32 __user *uaddr, u32 uval, struct futex_q *this)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct task_struct *new_owner;
 	struct futex_pi_state *pi_state = this->pi_state;
 	u32 uninitialized_var(curval), newval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WAKE_Q(wake_q);
 	bool deboost;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret = 0;
@@ -1474,6 +1580,7 @@ static int wake_futex_pi(u32 __user *uaddr, u32 uval, struct futex_q *this)
 
 	raw_spin_unlock(&pi_state->pi_mutex.wait_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	deboost = rt_mutex_futex_unlock(&pi_state->pi_mutex, &wake_q);
 
@@ -1503,6 +1610,9 @@ static int unlock_futex_pi(u32 __user *uaddr, u32 uval)
 		return -EFAULT;
 	if (oldval != uval)
 		return -EAGAIN;
+=======
+	rt_mutex_unlock(&pi_state->pi_mutex);
+>>>>>>> v3.18
 =======
 	rt_mutex_unlock(&pi_state->pi_mutex);
 >>>>>>> v3.18
@@ -1543,10 +1653,15 @@ futex_wake(u32 __user *uaddr, unsigned int flags, int nr_wake, u32 bitset)
 	struct futex_hash_bucket *hb;
 	struct futex_q *this, *next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plist_head *head;
 	union futex_key key = FUTEX_KEY_INIT;
 	int ret;
 	WAKE_Q(wake_q);
+=======
+	union futex_key key = FUTEX_KEY_INIT;
+	int ret;
+>>>>>>> v3.18
 =======
 	union futex_key key = FUTEX_KEY_INIT;
 	int ret;
@@ -1561,11 +1676,14 @@ futex_wake(u32 __user *uaddr, unsigned int flags, int nr_wake, u32 bitset)
 
 	hb = hash_futex(&key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&hb->lock);
 	head = &hb->chain;
 
 	plist_for_each_entry_safe(this, next, head, list) {
 =======
+=======
+>>>>>>> v3.18
 
 	/* Make sure we really have tasks to wakeup */
 	if (!hb_waiters_pending(hb))
@@ -1574,6 +1692,9 @@ futex_wake(u32 __user *uaddr, unsigned int flags, int nr_wake, u32 bitset)
 	spin_lock(&hb->lock);
 
 	plist_for_each_entry_safe(this, next, &hb->chain, list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (match_futex (&this->key, &key)) {
 			if (this->pi_state || this->rt_waiter) {
@@ -1586,7 +1707,11 @@ futex_wake(u32 __user *uaddr, unsigned int flags, int nr_wake, u32 bitset)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mark_wake_futex(&wake_q, this);
+=======
+			wake_futex(this);
+>>>>>>> v3.18
 =======
 			wake_futex(this);
 >>>>>>> v3.18
@@ -1597,7 +1722,11 @@ futex_wake(u32 __user *uaddr, unsigned int flags, int nr_wake, u32 bitset)
 
 	spin_unlock(&hb->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_q(&wake_q);
+=======
+out_put_key:
+>>>>>>> v3.18
 =======
 out_put_key:
 >>>>>>> v3.18
@@ -1617,10 +1746,15 @@ futex_wake_op(u32 __user *uaddr1, unsigned int flags, u32 __user *uaddr2,
 	union futex_key key1 = FUTEX_KEY_INIT, key2 = FUTEX_KEY_INIT;
 	struct futex_hash_bucket *hb1, *hb2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plist_head *head;
 	struct futex_q *this, *next;
 	int ret, op_ret;
 	WAKE_Q(wake_q);
+=======
+	struct futex_q *this, *next;
+	int ret, op_ret;
+>>>>>>> v3.18
 =======
 	struct futex_q *this, *next;
 	int ret, op_ret;
@@ -1671,9 +1805,13 @@ retry_private:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	head = &hb1->chain;
 
 	plist_for_each_entry_safe(this, next, head, list) {
+=======
+	plist_for_each_entry_safe(this, next, &hb1->chain, list) {
+>>>>>>> v3.18
 =======
 	plist_for_each_entry_safe(this, next, &hb1->chain, list) {
 >>>>>>> v3.18
@@ -1683,7 +1821,11 @@ retry_private:
 				goto out_unlock;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mark_wake_futex(&wake_q, this);
+=======
+			wake_futex(this);
+>>>>>>> v3.18
 =======
 			wake_futex(this);
 >>>>>>> v3.18
@@ -1694,10 +1836,15 @@ retry_private:
 
 	if (op_ret > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		head = &hb2->chain;
 
 		op_ret = 0;
 		plist_for_each_entry_safe(this, next, head, list) {
+=======
+		op_ret = 0;
+		plist_for_each_entry_safe(this, next, &hb2->chain, list) {
+>>>>>>> v3.18
 =======
 		op_ret = 0;
 		plist_for_each_entry_safe(this, next, &hb2->chain, list) {
@@ -1708,7 +1855,11 @@ retry_private:
 					goto out_unlock;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mark_wake_futex(&wake_q, this);
+=======
+				wake_futex(this);
+>>>>>>> v3.18
 =======
 				wake_futex(this);
 >>>>>>> v3.18
@@ -1722,7 +1873,10 @@ retry_private:
 out_unlock:
 	double_unlock_hb(hb1, hb2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_q(&wake_q);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_put_keys:
@@ -1752,7 +1906,13 @@ void requeue_futex(struct futex_q *q, struct futex_hash_bucket *hb1,
 	if (likely(&hb1->chain != &hb2->chain)) {
 		plist_del(&q->list, &hb1->chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		plist_add(&q->list, &hb2->chain);
+=======
+		hb_waiters_dec(hb1);
+		plist_add(&q->list, &hb2->chain);
+		hb_waiters_inc(hb2);
+>>>>>>> v3.18
 =======
 		hb_waiters_dec(hb1);
 		plist_add(&q->list, &hb2->chain);
@@ -1888,9 +2048,13 @@ static int futex_requeue(u32 __user *uaddr1, unsigned int flags,
 	struct futex_pi_state *pi_state = NULL;
 	struct futex_hash_bucket *hb1, *hb2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plist_head *head1;
 	struct futex_q *this, *next;
 	WAKE_Q(wake_q);
+=======
+	struct futex_q *this, *next;
+>>>>>>> v3.18
 =======
 	struct futex_q *this, *next;
 >>>>>>> v3.18
@@ -1925,6 +2089,7 @@ static int futex_requeue(u32 __user *uaddr1, unsigned int flags,
 
 retry:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pi_state != NULL) {
 		/*
 		 * We will have to lookup the pi_state again, so free this one
@@ -1934,6 +2099,8 @@ retry:
 		pi_state = NULL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = get_futex_key(uaddr1, flags & FLAGS_SHARED, &key1, VERIFY_READ);
@@ -1958,6 +2125,10 @@ retry:
 
 retry_private:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hb_waiters_inc(hb2);
+>>>>>>> v3.18
 =======
 	hb_waiters_inc(hb2);
 >>>>>>> v3.18
@@ -1971,6 +2142,10 @@ retry_private:
 		if (unlikely(ret)) {
 			double_unlock_hb(hb1, hb2);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			hb_waiters_dec(hb2);
+>>>>>>> v3.18
 =======
 			hb_waiters_dec(hb2);
 >>>>>>> v3.18
@@ -2032,12 +2207,18 @@ retry_private:
 			break;
 		case -EFAULT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			double_unlock_hb(hb1, hb2);
 =======
+=======
+>>>>>>> v3.18
 			free_pi_state(pi_state);
 			pi_state = NULL;
 			double_unlock_hb(hb1, hb2);
 			hb_waiters_dec(hb2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			put_futex_key(&key2);
 			put_futex_key(&key1);
@@ -2047,9 +2228,12 @@ retry_private:
 			goto out;
 		case -EAGAIN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* The owner was exiting, try again. */
 			double_unlock_hb(hb1, hb2);
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * Two reasons for this:
 			 * - Owner is exiting and we just wait for the
@@ -2060,6 +2244,9 @@ retry_private:
 			pi_state = NULL;
 			double_unlock_hb(hb1, hb2);
 			hb_waiters_dec(hb2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			put_futex_key(&key2);
 			put_futex_key(&key1);
@@ -2071,8 +2258,12 @@ retry_private:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	head1 = &hb1->chain;
 	plist_for_each_entry_safe(this, next, head1, list) {
+=======
+	plist_for_each_entry_safe(this, next, &hb1->chain, list) {
+>>>>>>> v3.18
 =======
 	plist_for_each_entry_safe(this, next, &hb1->chain, list) {
 >>>>>>> v3.18
@@ -2103,7 +2294,11 @@ retry_private:
 		 */
 		if (++task_count <= nr_wake && !requeue_pi) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mark_wake_futex(&wake_q, this);
+=======
+			wake_futex(this);
+>>>>>>> v3.18
 =======
 			wake_futex(this);
 >>>>>>> v3.18
@@ -2145,8 +2340,14 @@ retry_private:
 
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	double_unlock_hb(hb1, hb2);
 	wake_up_q(&wake_q);
+=======
+	free_pi_state(pi_state);
+	double_unlock_hb(hb1, hb2);
+	hb_waiters_dec(hb2);
+>>>>>>> v3.18
 =======
 	free_pi_state(pi_state);
 	double_unlock_hb(hb1, hb2);
@@ -2168,8 +2369,11 @@ out_put_key1:
 	put_futex_key(&key1);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pi_state != NULL)
 		free_pi_state(pi_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret ? ret : task_count;
@@ -2183,10 +2387,13 @@ static inline struct futex_hash_bucket *queue_lock(struct futex_q *q)
 
 	hb = hash_futex(&q->key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->lock_ptr = &hb->lock;
 
 	spin_lock(&hb->lock);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Increment the counter before taking the lock so that
@@ -2201,22 +2408,31 @@ static inline struct futex_hash_bucket *queue_lock(struct futex_q *q)
 	q->lock_ptr = &hb->lock;
 
 	spin_lock(&hb->lock); /* implies MB (A) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return hb;
 }
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 queue_unlock(struct futex_q *q, struct futex_hash_bucket *hb)
 	__releases(&hb->lock)
 {
 	spin_unlock(&hb->lock);
 =======
+=======
+>>>>>>> v3.18
 queue_unlock(struct futex_hash_bucket *hb)
 	__releases(&hb->lock)
 {
 	spin_unlock(&hb->lock);
 	hb_waiters_dec(hb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2588,7 +2804,11 @@ retry_private:
 
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_unlock(q, *hb);
+=======
+		queue_unlock(*hb);
+>>>>>>> v3.18
 =======
 		queue_unlock(*hb);
 >>>>>>> v3.18
@@ -2606,7 +2826,11 @@ retry_private:
 
 	if (uval != val) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_unlock(q, *hb);
+=======
+		queue_unlock(*hb);
+>>>>>>> v3.18
 =======
 		queue_unlock(*hb);
 >>>>>>> v3.18
@@ -2755,17 +2979,23 @@ retry_private:
 		case -EAGAIN:
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * Task is exiting and we just wait for the
 			 * exit to complete.
 			 */
 			queue_unlock(&q, hb);
 =======
+=======
+>>>>>>> v3.18
 			 * Two reasons for this:
 			 * - Task is exiting and we just wait for the
 			 *   exit to complete.
 			 * - The user space value changed.
 			 */
 			queue_unlock(hb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			put_futex_key(&q.key);
 			cond_resched();
@@ -2819,7 +3049,11 @@ retry_private:
 
 out_unlock_put_key:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue_unlock(&q, hb);
+=======
+	queue_unlock(hb);
+>>>>>>> v3.18
 =======
 	queue_unlock(hb);
 >>>>>>> v3.18
@@ -2833,7 +3067,11 @@ out:
 
 uaddr_faulted:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue_unlock(&q, hb);
+=======
+	queue_unlock(hb);
+>>>>>>> v3.18
 =======
 	queue_unlock(hb);
 >>>>>>> v3.18
@@ -2857,16 +3095,22 @@ uaddr_faulted:
 static int futex_unlock_pi(u32 __user *uaddr, unsigned int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct futex_hash_bucket *hb;
 	struct futex_q *this, *next;
 	struct plist_head *head;
 	union futex_key key = FUTEX_KEY_INIT;
 	u32 uval, vpid = task_pid_vnr(current);
 =======
+=======
+>>>>>>> v3.18
 	u32 uninitialized_var(curval), uval, vpid = task_pid_vnr(current);
 	union futex_key key = FUTEX_KEY_INIT;
 	struct futex_hash_bucket *hb;
 	struct futex_q *match;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -2881,8 +3125,13 @@ retry:
 
 	ret = get_futex_key(uaddr, flags & FLAGS_SHARED, &key, VERIFY_WRITE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(ret != 0))
 		goto out;
+=======
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	if (ret)
 		return ret;
@@ -2892,6 +3141,7 @@ retry:
 	spin_lock(&hb->lock);
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * To avoid races, try to do the TID -> 0 atomic transition
 	 * again. If it succeeds then we can return without waking
@@ -2951,6 +3201,8 @@ out_putkey:
 
 out:
 =======
+=======
+>>>>>>> v3.18
 	 * Check waiters first. We do not trust user space values at
 	 * all and we at least want to know if user space fiddled
 	 * with the futex value instead of blindly unlocking.
@@ -2985,6 +3237,9 @@ out:
 out_unlock:
 	spin_unlock(&hb->lock);
 	put_futex_key(&key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 
@@ -3037,6 +3292,10 @@ int handle_early_requeue_pi_wakeup(struct futex_hash_bucket *hb,
 		 */
 		plist_del(&q->list, &hb->chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		hb_waiters_dec(hb);
+>>>>>>> v3.18
 =======
 		hb_waiters_dec(hb);
 >>>>>>> v3.18
@@ -3098,6 +3357,10 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 	struct hrtimer_sleeper timeout, *to = NULL;
 	struct rt_mutex_waiter rt_waiter;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rt_mutex *pi_mutex = NULL;
+>>>>>>> v3.18
 =======
 	struct rt_mutex *pi_mutex = NULL;
 >>>>>>> v3.18
@@ -3128,6 +3391,11 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 	 */
 	debug_rt_mutex_init_waiter(&rt_waiter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RB_CLEAR_NODE(&rt_waiter.pi_tree_entry);
+	RB_CLEAR_NODE(&rt_waiter.tree_entry);
+>>>>>>> v3.18
 =======
 	RB_CLEAR_NODE(&rt_waiter.pi_tree_entry);
 	RB_CLEAR_NODE(&rt_waiter.tree_entry);
@@ -3156,6 +3424,10 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 	 */
 	if (match_futex(&q.key, &key2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		queue_unlock(hb);
+>>>>>>> v3.18
 =======
 		queue_unlock(hb);
 >>>>>>> v3.18
@@ -3191,6 +3463,7 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 			spin_lock(q.lock_ptr);
 			ret = fixup_pi_state_owner(uaddr2, &q, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ret && rt_mutex_owner(&q.pi_state->pi_mutex) == current)
 				rt_mutex_unlock(&q.pi_state->pi_mutex);
 			/*
@@ -3203,6 +3476,11 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 	} else {
 		struct rt_mutex *pi_mutex;
 
+=======
+			spin_unlock(q.lock_ptr);
+		}
+	} else {
+>>>>>>> v3.18
 =======
 			spin_unlock(q.lock_ptr);
 		}
@@ -3232,6 +3510,7 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 			ret = (res < 0) ? res : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * If fixup_pi_state_owner() faulted and was unable to handle
 		 * the fault, unlock the rt_mutex and return the fault to
@@ -3242,13 +3521,18 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		/* Unqueue and drop the lock. */
 		unqueue_me_pi(&q);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == -EINTR) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If fixup_pi_state_owner() faulted and was unable to handle the
 	 * fault, unlock the rt_mutex and return the fault to userspace.
@@ -3257,6 +3541,9 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 		if (pi_mutex && rt_mutex_owner(pi_mutex) == current)
 			rt_mutex_unlock(pi_mutex);
 	} else if (ret == -EINTR) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * We've already been requeued, but cannot restart by calling
@@ -3347,7 +3634,11 @@ SYSCALL_DEFINE3(get_robust_list, int, pid,
 
 	ret = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ptrace_may_access(p, PTRACE_MODE_READ_REALCREDS))
+=======
+	if (!ptrace_may_access(p, PTRACE_MODE_READ))
+>>>>>>> v3.18
 =======
 	if (!ptrace_may_access(p, PTRACE_MODE_READ))
 >>>>>>> v3.18
@@ -3617,12 +3908,15 @@ static void __init futex_detect_cmpxchg(void)
 static int __init futex_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	futex_detect_cmpxchg();
 
 	for (i = 0; i < ARRAY_SIZE(futex_queues); i++) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int futex_shift;
 	unsigned long i;
 
@@ -3643,6 +3937,9 @@ static int __init futex_init(void)
 
 	for (i = 0; i < futex_hashsize; i++) {
 		atomic_set(&futex_queues[i].waiters, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		plist_head_init(&futex_queues[i].chain);
 		spin_lock_init(&futex_queues[i].lock);
@@ -3651,7 +3948,11 @@ static int __init futex_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 core_initcall(futex_init);
+=======
+__initcall(futex_init);
+>>>>>>> v3.18
 =======
 __initcall(futex_init);
 >>>>>>> v3.18

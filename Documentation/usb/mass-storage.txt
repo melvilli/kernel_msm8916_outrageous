@@ -14,7 +14,11 @@
 
   Note that the driver is slightly non-portable in that it assumes
 <<<<<<< HEAD
+<<<<<<< HEAD
   a single memory/DMA buffer will be useable for bulk-in and bulk-out
+=======
+  a single memory/DMA buffer will be usable for bulk-in and bulk-out
+>>>>>>> v3.18
 =======
   a single memory/DMA buffer will be usable for bulk-in and bulk-out
 >>>>>>> v3.18

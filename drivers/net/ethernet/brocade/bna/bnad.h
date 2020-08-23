@@ -72,7 +72,11 @@ struct bnad_rx_ctrl {
 #define BNAD_NAME_LEN			64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNAD_VERSION			"3.1.2.1"
+=======
+#define BNAD_VERSION			"3.2.23.0"
+>>>>>>> v3.18
 =======
 #define BNAD_VERSION			"3.2.23.0"
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ struct bnad_rx_ctrl {
 
 #define BNAD_MIN_Q_DEPTH		512
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNAD_MAX_RXQ_DEPTH		2048
+=======
+#define BNAD_MAX_RXQ_DEPTH		16384
+>>>>>>> v3.18
 =======
 #define BNAD_MAX_RXQ_DEPTH		16384
 >>>>>>> v3.18
@@ -114,6 +122,12 @@ struct bnad_rx_ctrl {
 #define BNAD_NUM_RXP			(bnad->num_rx * bnad->num_rxp_per_rx)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BNAD_FRAME_SIZE(_mtu) \
+	(ETH_HLEN + VLAN_HLEN + (_mtu) + ETH_FCS_LEN)
+
+>>>>>>> v3.18
 =======
 #define BNAD_FRAME_SIZE(_mtu) \
 	(ETH_HLEN + VLAN_HLEN + (_mtu) + ETH_FCS_LEN)
@@ -234,6 +248,10 @@ struct bnad_rx_info {
 struct bnad_tx_vector {
 	DEFINE_DMA_UNMAP_ADDR(dma_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DEFINE_DMA_UNMAP_LEN(dma_len);
+>>>>>>> v3.18
 =======
 	DEFINE_DMA_UNMAP_LEN(dma_len);
 >>>>>>> v3.18
@@ -253,9 +271,15 @@ struct bnad_rx_vector {
 struct bnad_rx_unmap {
 	struct page		*page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			page_offset;
 	struct sk_buff		*skb;
 	struct bnad_rx_vector	vector;
+=======
+	struct sk_buff		*skb;
+	struct bnad_rx_vector	vector;
+	u32			page_offset;
+>>>>>>> v3.18
 =======
 	struct sk_buff		*skb;
 	struct bnad_rx_vector	vector;
@@ -266,6 +290,7 @@ struct bnad_rx_unmap {
 enum bnad_rxbuf_type {
 	BNAD_RXBUF_NONE		= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BNAD_RXBUF_SKB		= 1,
 	BNAD_RXBUF_PAGE		= 2,
 	BNAD_RXBUF_MULTI	= 3
@@ -273,6 +298,8 @@ enum bnad_rxbuf_type {
 
 #define BNAD_RXBUF_IS_PAGE(_type)	((_type) == BNAD_RXBUF_PAGE)
 =======
+=======
+>>>>>>> v3.18
 	BNAD_RXBUF_SK_BUFF	= 1,
 	BNAD_RXBUF_PAGE		= 2,
 	BNAD_RXBUF_MULTI_BUFF	= 3
@@ -280,6 +307,9 @@ enum bnad_rxbuf_type {
 
 #define BNAD_RXBUF_IS_SK_BUFF(_type)	((_type) == BNAD_RXBUF_SK_BUFF)
 #define BNAD_RXBUF_IS_MULTI_BUFF(_type)	((_type) == BNAD_RXBUF_MULTI_BUFF)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bnad_rx_unmap_q {
@@ -288,23 +318,34 @@ struct bnad_rx_unmap_q {
 	u32			map_size;
 	enum bnad_rxbuf_type	type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bnad_rx_unmap	unmap[0];
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct bnad_rx_unmap	unmap[0] ____cacheline_aligned;
 };
 
 #define BNAD_PCI_DEV_IS_CAT2(_bnad) \
 	((_bnad)->pcidev->device == BFA_PCI_DEVICE_ID_CT2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Bit mask values for bnad->cfg_flags */
 #define	BNAD_CF_DIM_ENABLED		0x01	/* DIM */
 #define	BNAD_CF_PROMISC			0x02
 #define BNAD_CF_ALLMULTI		0x04
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	BNAD_CF_MSIX			0x08	/* If in MSIx mode */
+=======
+#define	BNAD_CF_DEFAULT			0x08
+#define	BNAD_CF_MSIX			0x10	/* If in MSIx mode */
+>>>>>>> v3.18
 =======
 #define	BNAD_CF_DEFAULT			0x08
 #define	BNAD_CF_MSIX			0x10	/* If in MSIx mode */
@@ -416,13 +457,17 @@ struct bnad_drvinfo {
  */
 extern const struct firmware *bfi_fw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32		bnad_rxqs_per_cq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 /*
  * EXTERN PROTOTYPES
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern u32 *cna_get_firmware_buf(struct pci_dev *pdev);
 /* Netdev entry point prototypes */
@@ -457,6 +502,8 @@ extern void bnad_netdev_hwstats_fill(struct bnad *bnad,
 void	bnad_debugfs_init(struct bnad *bnad);
 void	bnad_debugfs_uninit(struct bnad *bnad);
 =======
+=======
+>>>>>>> v3.18
 u32 *cna_get_firmware_buf(struct pci_dev *pdev);
 /* Netdev entry point prototypes */
 void bnad_set_rx_mode(struct net_device *netdev);
@@ -488,6 +535,9 @@ void bnad_netdev_hwstats_fill(struct bnad *bnad,
 /* Debugfs */
 void bnad_debugfs_init(struct bnad *bnad);
 void bnad_debugfs_uninit(struct bnad *bnad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MACROS */

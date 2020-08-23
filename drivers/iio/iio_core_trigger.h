@@ -31,7 +31,11 @@ static int iio_device_register_trigger_consumer(struct iio_dev *indio_dev)
 {
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -43,12 +47,18 @@ static int iio_device_register_trigger_consumer(struct iio_dev *indio_dev)
 static void iio_device_unregister_trigger_consumer(struct iio_dev *indio_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #endif /* CONFIG_TRIGGER_CONSUMER */
 
 
 
+=======
+}
+
+#endif /* CONFIG_TRIGGER_CONSUMER */
+>>>>>>> v3.18
 =======
 }
 

@@ -104,9 +104,15 @@ u32 omap2xxx_sdrc_reprogram(u32 level, u32 force)
 	 */
 	if (cpu_is_omap2420())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writel(0xffff, OMAP2420_PRCM_VOLTSETUP);
 	else
 		__raw_writel(0xffff, OMAP2430_PRCM_VOLTSETUP);
+=======
+		writel_relaxed(0xffff, OMAP2420_PRCM_VOLTSETUP);
+	else
+		writel_relaxed(0xffff, OMAP2430_PRCM_VOLTSETUP);
+>>>>>>> v3.18
 =======
 		writel_relaxed(0xffff, OMAP2420_PRCM_VOLTSETUP);
 	else

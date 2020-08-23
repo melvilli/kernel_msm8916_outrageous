@@ -63,7 +63,11 @@ static int mlx4_en_ets_validate(struct mlx4_en_priv *priv, struct ieee_ets *ets)
 
 	for (i = 0; i < IEEE_8021QAZ_MAX_TCS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ets->prio_tc[i] > MLX4_EN_NUM_UP) {
+=======
+		if (ets->prio_tc[i] >= MLX4_EN_NUM_UP) {
+>>>>>>> v3.18
 =======
 		if (ets->prio_tc[i] >= MLX4_EN_NUM_UP) {
 >>>>>>> v3.18
@@ -165,6 +169,10 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 {
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mlx4_en_port_profile *prof = priv->prof;
+>>>>>>> v3.18
 =======
 	struct mlx4_en_port_profile *prof = priv->prof;
 >>>>>>> v3.18
@@ -178,6 +186,7 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 			pfc->delay);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->prof->rx_pause = priv->prof->tx_pause = !!pfc->pfc_en;
 	priv->prof->rx_ppp = priv->prof->tx_ppp = pfc->pfc_en;
 
@@ -188,6 +197,8 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 				    priv->prof->rx_pause,
 				    priv->prof->rx_ppp);
 =======
+=======
+>>>>>>> v3.18
 	prof->rx_pause = !pfc->pfc_en;
 	prof->tx_pause = !pfc->pfc_en;
 	prof->rx_ppp = pfc->pfc_en;
@@ -199,6 +210,9 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 				    prof->tx_ppp,
 				    prof->rx_pause,
 				    prof->rx_ppp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		en_err(priv, "Failed setting pause params\n");
@@ -230,9 +244,12 @@ static int mlx4_en_dcbnl_ieee_getmaxrate(struct net_device *dev,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!priv->maxrate)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < IEEE_8021QAZ_MAX_TCS; i++)

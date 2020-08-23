@@ -36,8 +36,13 @@
  * 	the attempted open will fail with ENODEV.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Required method.
  *     
+=======
+ *	Required method. Called with tty lock held.
+ *
+>>>>>>> v3.18
 =======
  *	Required method. Called with tty lock held.
  *
@@ -48,7 +53,11 @@
  *	Note: called even if the corresponding open() failed.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Required method.
+=======
+ *	Required method. Called with tty lock held.
+>>>>>>> v3.18
 =======
  *	Required method. Called with tty lock held.
 >>>>>>> v3.18
@@ -162,6 +171,11 @@
  * 	outputting characters to the tty device.  
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	Called with ->flow_lock held. Serialized with start() method.
+ *
+>>>>>>> v3.18
 =======
  *	Called with ->flow_lock held. Serialized with start() method.
  *
@@ -176,6 +190,11 @@
  *	characters to the tty device.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	Called with ->flow_lock held. Serialized with stop() method.
+ *
+>>>>>>> v3.18
 =======
  *	Called with ->flow_lock held. Serialized with stop() method.
  *
@@ -192,6 +211,11 @@
  *	Optional:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	Called with tty lock held.
+ *
+>>>>>>> v3.18
 =======
  *	Called with tty lock held.
  *

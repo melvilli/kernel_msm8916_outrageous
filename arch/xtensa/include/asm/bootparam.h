@@ -21,7 +21,11 @@
 #define BP_TAG_INITRD		0x1002	/* ramdisk addr and size (bp_meminfo) */
 #define BP_TAG_MEMORY		0x1003	/* memory addr and size (bp_meminfo) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BP_TAG_SERIAL_BAUSRATE	0x1004	/* baud rate of current console. */
+=======
+#define BP_TAG_SERIAL_BAUDRATE	0x1004	/* baud rate of current console. */
+>>>>>>> v3.18
 =======
 #define BP_TAG_SERIAL_BAUDRATE	0x1004	/* baud rate of current console. */
 >>>>>>> v3.18
@@ -42,6 +46,7 @@ typedef struct bp_tag {
 } bp_tag_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct meminfo {
 	unsigned long type;
 	unsigned long start;
@@ -50,16 +55,22 @@ typedef struct meminfo {
 
 #define SYSMEM_BANKS_MAX 5
 =======
+=======
+>>>>>>> v3.18
 struct bp_meminfo {
 	unsigned long type;
 	unsigned long start;
 	unsigned long end;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MEMORY_TYPE_CONVENTIONAL	0x1000
 #define MEMORY_TYPE_NONE		0x2000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef struct sysmem_info {
 	int nr_banks;
@@ -68,6 +79,8 @@ typedef struct sysmem_info {
 
 extern sysmem_info_t sysmem;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

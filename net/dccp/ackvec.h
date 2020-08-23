@@ -102,6 +102,7 @@ struct dccp_ackvec_record {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dccp_ackvec_init(void);
 extern void dccp_ackvec_exit(void);
 
@@ -113,6 +114,8 @@ extern int  dccp_ackvec_update_records(struct dccp_ackvec *av, u64 seq, u8 sum);
 extern void dccp_ackvec_clear_state(struct dccp_ackvec *av, const u64 ackno);
 extern u16  dccp_ackvec_buflen(const struct dccp_ackvec *av);
 =======
+=======
+>>>>>>> v3.18
 int dccp_ackvec_init(void);
 void dccp_ackvec_exit(void);
 
@@ -123,6 +126,9 @@ void dccp_ackvec_input(struct dccp_ackvec *av, struct sk_buff *skb);
 int dccp_ackvec_update_records(struct dccp_ackvec *av, u64 seq, u8 sum);
 void dccp_ackvec_clear_state(struct dccp_ackvec *av, const u64 ackno);
 u16 dccp_ackvec_buflen(const struct dccp_ackvec *av);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool dccp_ackvec_is_empty(const struct dccp_ackvec *av)
@@ -147,9 +153,14 @@ struct dccp_ackvec_parsed {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dccp_ackvec_parsed_add(struct list_head *head,
 				  u8 *vec, u8 len, u8 nonce);
 extern void dccp_ackvec_parsed_cleanup(struct list_head *parsed_chunks);
+=======
+int dccp_ackvec_parsed_add(struct list_head *head, u8 *vec, u8 len, u8 nonce);
+void dccp_ackvec_parsed_cleanup(struct list_head *parsed_chunks);
+>>>>>>> v3.18
 =======
 int dccp_ackvec_parsed_add(struct list_head *head, u8 *vec, u8 len, u8 nonce);
 void dccp_ackvec_parsed_cleanup(struct list_head *parsed_chunks);

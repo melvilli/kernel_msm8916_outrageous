@@ -41,7 +41,11 @@
 #include <asm/fixmap.h>
 #include <asm/apb_timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 =======
 #include <asm/intel-mid.h>
 >>>>>>> v3.18
@@ -151,7 +155,11 @@ static int __init apbt_clockevent_register(void)
 {
 	struct sfi_timer_table_entry *mtmr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct apbt_dev *adev = &__get_cpu_var(cpu_apbt_dev);
+=======
+	struct apbt_dev *adev = this_cpu_ptr(&cpu_apbt_dev);
+>>>>>>> v3.18
 =======
 	struct apbt_dev *adev = this_cpu_ptr(&cpu_apbt_dev);
 >>>>>>> v3.18
@@ -166,7 +174,11 @@ static int __init apbt_clockevent_register(void)
 	adev->num = smp_processor_id();
 	adev->timer = dw_apb_clockevent_init(smp_processor_id(), "apbt0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mrst_timer_options == MRST_TIMER_LAPIC_APBT ?
+=======
+		intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT ?
+>>>>>>> v3.18
 =======
 		intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT ?
 >>>>>>> v3.18
@@ -176,7 +188,11 @@ static int __init apbt_clockevent_register(void)
 	adev->timer->eoi = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mrst_timer_options == MRST_TIMER_LAPIC_APBT) {
+=======
+	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT) {
+>>>>>>> v3.18
 =======
 	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT) {
 >>>>>>> v3.18
@@ -202,8 +218,11 @@ static void apbt_setup_irq(struct apbt_dev *adev)
 	irq_modify_status(adev->irq, 0, IRQ_MOVE_PCNTXT);
 	irq_set_affinity(adev->irq, cpumask_of(adev->cpu));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* APB timer irqs are set up as mp_irqs, timer is edge type */
 	__irq_set_handler(adev->irq, handle_edge_irq, 0, "edge");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -220,7 +239,11 @@ void apbt_setup_secondary_clock(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adev = &__get_cpu_var(cpu_apbt_dev);
+=======
+	adev = this_cpu_ptr(&cpu_apbt_dev);
+>>>>>>> v3.18
 =======
 	adev = this_cpu_ptr(&cpu_apbt_dev);
 >>>>>>> v3.18
@@ -277,7 +300,11 @@ static int apbt_cpuhp_notify(struct notifier_block *n,
 static __init int apbt_late_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mrst_timer_options == MRST_TIMER_LAPIC_APBT ||
+=======
+	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT ||
+>>>>>>> v3.18
 =======
 	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT ||
 >>>>>>> v3.18
@@ -368,7 +395,11 @@ void __init apbt_time_init(void)
 #ifdef CONFIG_SMP
 	/* kernel cmdline disable apb timer, so we will use lapic timers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mrst_timer_options == MRST_TIMER_LAPIC_APBT) {
+=======
+	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT) {
+>>>>>>> v3.18
 =======
 	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT) {
 >>>>>>> v3.18

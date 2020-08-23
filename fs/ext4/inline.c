@@ -23,7 +23,11 @@
 #define EXT4_INLINE_DOTDOT_SIZE		4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext4_get_inline_size(struct inode *inode)
+=======
+static int ext4_get_inline_size(struct inode *inode)
+>>>>>>> v3.18
 =======
 static int ext4_get_inline_size(struct inode *inode)
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ static int get_max_inline_xattr_value_size(struct inode *inode,
 			((void *)raw_inode + EXT4_I(inode)->i_inline_off);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free += le32_to_cpu(entry->e_value_size);
+=======
+		free += EXT4_XATTR_SIZE(le32_to_cpu(entry->e_value_size));
+>>>>>>> v3.18
 =======
 		free += EXT4_XATTR_SIZE(le32_to_cpu(entry->e_value_size));
 >>>>>>> v3.18
@@ -129,12 +137,15 @@ int ext4_get_max_inline_size(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext4_has_inline_data(struct inode *inode)
 {
 	return ext4_test_inode_flag(inode, EXT4_INODE_INLINE_DATA) &&
 	       EXT4_I(inode)->i_inline_off;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -223,8 +234,13 @@ out:
  * That saves us one memcpy.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ext4_write_inline_data(struct inode *inode, struct ext4_iloc *iloc,
 			    void *buffer, loff_t pos, unsigned int len)
+=======
+static void ext4_write_inline_data(struct inode *inode, struct ext4_iloc *iloc,
+				   void *buffer, loff_t pos, unsigned int len)
+>>>>>>> v3.18
 =======
 static void ext4_write_inline_data(struct inode *inode, struct ext4_iloc *iloc,
 				   void *buffer, loff_t pos, unsigned int len)
@@ -281,6 +297,10 @@ static int ext4_create_inline_data(handle_t *handle,
 		return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(is.iloc.bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(is.iloc.bh, "get_write_access");
 >>>>>>> v3.18
@@ -360,10 +380,15 @@ static int ext4_update_inline_data(handle_t *handle, struct inode *inode,
 	len -= EXT4_MIN_INLINE_DATA_SIZE;
 	value = kzalloc(len, GFP_NOFS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!value) {
 		error = -ENOMEM;
 		goto out;
 	}
+=======
+	if (!value)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (!value)
 		goto out;
@@ -375,6 +400,10 @@ static int ext4_update_inline_data(handle_t *handle, struct inode *inode,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(is.iloc.bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(is.iloc.bh, "get_write_access");
 >>>>>>> v3.18
@@ -405,8 +434,13 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext4_prepare_inline_data(handle_t *handle, struct inode *inode,
 			     unsigned int len)
+=======
+static int ext4_prepare_inline_data(handle_t *handle, struct inode *inode,
+				    unsigned int len)
+>>>>>>> v3.18
 =======
 static int ext4_prepare_inline_data(handle_t *handle, struct inode *inode,
 				    unsigned int len)
@@ -461,6 +495,10 @@ static int ext4_destroy_inline_data_nolock(handle_t *handle,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(is.iloc.bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(is.iloc.bh, "get_write_access");
 >>>>>>> v3.18
@@ -638,6 +676,10 @@ retry:
 		unlock_page(page);
 		page_cache_release(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		page = NULL;
+>>>>>>> v3.18
 =======
 		page = NULL;
 >>>>>>> v3.18
@@ -661,7 +703,12 @@ retry:
 		goto retry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	block_commit_write(page, from, to);
+=======
+	if (page)
+		block_commit_write(page, from, to);
+>>>>>>> v3.18
 =======
 	if (page)
 		block_commit_write(page, from, to);
@@ -899,6 +946,10 @@ int ext4_da_write_inline_data_begin(struct address_space *mapping,
 	struct page *page;
 	struct ext4_iloc iloc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int retries;
+>>>>>>> v3.18
 =======
 	int retries;
 >>>>>>> v3.18
@@ -908,15 +959,21 @@ int ext4_da_write_inline_data_begin(struct address_space *mapping,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = ext4_journal_start(inode, EXT4_HT_INODE, 1);
 	if (IS_ERR(handle)) {
 		ret = PTR_ERR(handle);
 		handle = NULL;
 =======
+=======
+>>>>>>> v3.18
 retry_journal:
 	handle = ext4_journal_start(inode, EXT4_HT_INODE, 1);
 	if (IS_ERR(handle)) {
 		ret = PTR_ERR(handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -928,7 +985,11 @@ retry_journal:
 		ret = ext4_prepare_inline_data(handle, inode, pos + len);
 		if (ret && ret != -ENOSPC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			goto out_journal;
+>>>>>>> v3.18
 =======
 			goto out_journal;
 >>>>>>> v3.18
@@ -940,11 +1001,17 @@ retry_journal:
 							    flags,
 							    fsdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ext4_journal_stop(handle);
 		if (ret == -ENOSPC &&
 		    ext4_should_retry_alloc(inode->i_sb, &retries))
 			goto retry_journal;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -959,7 +1026,11 @@ retry_journal:
 	if (!page) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_journal;
+>>>>>>> v3.18
 =======
 		goto out_journal;
 >>>>>>> v3.18
@@ -980,7 +1051,10 @@ retry_journal:
 	up_read(&EXT4_I(inode)->xattr_sem);
 	*pagep = page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	brelse(iloc.bh);
@@ -990,9 +1064,15 @@ out_release_page:
 	unlock_page(page);
 	page_cache_release(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	if (handle)
 		ext4_journal_stop(handle);
+=======
+out_journal:
+	ext4_journal_stop(handle);
+out:
+>>>>>>> v3.18
 =======
 out_journal:
 	ext4_journal_stop(handle);
@@ -1079,11 +1159,17 @@ static int ext4_add_dirent_to_inline(handle_t *handle,
 	const char	*name = dentry->d_name.name;
 	int		namelen = dentry->d_name.len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short	reclen;
 	int		err;
 	struct ext4_dir_entry_2 *de;
 
 	reclen = EXT4_DIR_REC_LEN(namelen);
+=======
+	int		err;
+	struct ext4_dir_entry_2 *de;
+
+>>>>>>> v3.18
 =======
 	int		err;
 	struct ext4_dir_entry_2 *de;
@@ -1096,6 +1182,10 @@ static int ext4_add_dirent_to_inline(handle_t *handle,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(iloc->bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(iloc->bh, "get_write_access");
 >>>>>>> v3.18
@@ -1221,8 +1311,12 @@ static int ext4_finish_convert_inline_dir(handle_t *handle,
 		inline_size - EXT4_INLINE_DOTDOT_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (EXT4_HAS_RO_COMPAT_FEATURE(inode->i_sb,
 				       EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+	if (ext4_has_metadata_csum(inode->i_sb))
+>>>>>>> v3.18
 =======
 	if (ext4_has_metadata_csum(inode->i_sb))
 >>>>>>> v3.18
@@ -1244,14 +1338,20 @@ static int ext4_finish_convert_inline_dir(handle_t *handle,
 	err = ext4_handle_dirty_dirent_node(handle, inode, dir_block);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return err;
 	set_buffer_verified(dir_block);
 	return ext4_mark_inode_dirty(handle, inode);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	set_buffer_verified(dir_block);
 out:
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1277,7 +1377,10 @@ static int ext4_convert_inline_data_nolock(handle_t *handle,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Make sure the inline directory entries pass checks before we try to
 	 * convert them, so that we avoid touching stuff that needs fsck.
@@ -1290,6 +1393,9 @@ static int ext4_convert_inline_data_nolock(handle_t *handle,
 			goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = ext4_destroy_inline_data_nolock(handle, inode);
 	if (error)
@@ -1524,6 +1630,7 @@ out:
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext4_read_inline_dir(struct file *filp,
 			 void *dirent, filldir_t filldir,
 			 int *has_inline_data)
@@ -1535,6 +1642,8 @@ int ext4_read_inline_dir(struct file *filp,
 	struct super_block *sb;
 	struct inode *inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 int ext4_read_inline_dir(struct file *file,
 			 struct dir_context *ctx,
 			 int *has_inline_data)
@@ -1544,6 +1653,9 @@ int ext4_read_inline_dir(struct file *file,
 	struct ext4_dir_entry_2 *de;
 	struct super_block *sb;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret, inline_size = 0;
 	struct ext4_iloc iloc;
@@ -1575,15 +1687,21 @@ int ext4_read_inline_dir(struct file *file,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb = inode->i_sb;
 	stored = 0;
 	parent_ino = le32_to_cpu(((struct ext4_dir_entry_2 *)dir_buf)->inode);
 	offset = filp->f_pos;
 =======
+=======
+>>>>>>> v3.18
 	ret = 0;
 	sb = inode->i_sb;
 	parent_ino = le32_to_cpu(((struct ext4_dir_entry_2 *)dir_buf)->inode);
 	offset = ctx->pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1598,6 +1716,7 @@ int ext4_read_inline_dir(struct file *file,
 	extra_offset = dotdot_size - EXT4_INLINE_DOTDOT_SIZE;
 	extra_size = extra_offset + inline_size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (!error && !stored && filp->f_pos < extra_size) {
 revalidate:
@@ -1698,6 +1817,8 @@ revalidate:
 							      extra_size);
 		}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If the version has changed since the last call to
 	 * readdir(2), then we might be pointing to an invalid
@@ -1766,6 +1887,9 @@ revalidate:
 				goto out;
 		}
 		ctx->pos += ext4_rec_len_from_disk(de->rec_len, extra_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -1908,6 +2032,10 @@ int ext4_delete_inline_entry(handle_t *handle,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(bh, "get_write_access");
 >>>>>>> v3.18
@@ -2084,7 +2212,10 @@ int ext4_try_to_evict_inline_data(handle_t *handle,
 	int error;
 	struct ext4_xattr_entry *entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ext4_xattr_ibody_header *header;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ext4_inode *raw_inode;
@@ -2096,7 +2227,10 @@ int ext4_try_to_evict_inline_data(handle_t *handle,
 
 	raw_inode = ext4_raw_inode(&iloc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	header = IHDR(inode, raw_inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	entry = (struct ext4_xattr_entry *)((void *)raw_inode +

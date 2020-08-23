@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Intel Lynxpoint LPSS clocks.
+=======
+ * Intel Low Power Subsystem clocks.
+>>>>>>> v3.18
 =======
  * Intel Low Power Subsystem clocks.
 >>>>>>> v3.18
@@ -23,8 +27,11 @@
 #include <linux/platform_device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRV_CLOCK_PARAMS 0x800
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int lpt_clk_probe(struct platform_device *pdev)

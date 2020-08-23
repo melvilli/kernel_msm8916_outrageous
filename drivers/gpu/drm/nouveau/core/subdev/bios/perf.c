@@ -27,8 +27,14 @@
 #include <subdev/bios/perf.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16
 perf_table(struct nouveau_bios *bios, u8 *ver, u8 *hdr, u8 *cnt, u8 *len)
+=======
+u16
+nvbios_perf_table(struct nouveau_bios *bios, u8 *ver, u8 *hdr,
+		  u8 *cnt, u8 *len, u8 *snr, u8 *ssz)
+>>>>>>> v3.18
 =======
 u16
 nvbios_perf_table(struct nouveau_bios *bios, u8 *ver, u8 *hdr,
@@ -45,11 +51,14 @@ nvbios_perf_table(struct nouveau_bios *bios, u8 *ver, u8 *hdr,
 				*ver = nv_ro08(bios, perf + 0);
 				*hdr = nv_ro08(bios, perf + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 		} else
 			nv_error(bios, "unknown offset for perf in BIT P %d\n",
 				bit_P.version);
 =======
+=======
+>>>>>>> v3.18
 				if (*ver >= 0x40 && *ver < 0x41) {
 					*cnt = nv_ro08(bios, perf + 5);
 					*len = nv_ro08(bios, perf + 2);
@@ -66,6 +75,9 @@ nvbios_perf_table(struct nouveau_bios *bios, u8 *ver, u8 *hdr,
 				}
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -76,22 +88,31 @@ nvbios_perf_table(struct nouveau_bios *bios, u8 *ver, u8 *hdr,
 				*hdr = nv_ro08(bios, perf + 0);
 				*ver = nv_ro08(bios, perf + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				*cnt = nv_ro08(bios, perf + 2);
 				*len = nv_ro08(bios, perf + 3);
 				*snr = 0;
 				*ssz = 0;
 				return perf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return perf;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return 0x0000;
 }
 
@@ -203,14 +224,22 @@ nvbios_perfSp(struct nouveau_bios *bios, u32 perfE, int idx,
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 nvbios_perf_fan_parse(struct nouveau_bios *bios,
 		      struct nvbios_perf_fan *fan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ver = 0, hdr = 0, cnt = 0, len = 0;
 	u16 perf = perf_table(bios, &ver, &hdr, &cnt, &len);
+=======
+	u8  ver, hdr, cnt, len, snr, ssz;
+	u16 perf = nvbios_perf_table(bios, &ver, &hdr, &cnt, &len, &snr, &ssz);
+>>>>>>> v3.18
 =======
 	u8  ver, hdr, cnt, len, snr, ssz;
 	u16 perf = nvbios_perf_table(bios, &ver, &hdr, &cnt, &len, &snr, &ssz);

@@ -8,7 +8,11 @@ struct pwm_device;
 struct seq_file;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_PWM) || IS_ENABLED(CONFIG_HAVE_PWM)
+=======
+#if IS_ENABLED(CONFIG_PWM)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_PWM)
 >>>>>>> v3.18
@@ -81,6 +85,10 @@ enum {
 	PWMF_REQUESTED = 1 << 0,
 	PWMF_ENABLED = 1 << 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PWMF_EXPORTED = 1 << 2,
+>>>>>>> v3.18
 =======
 	PWMF_EXPORTED = 1 << 2,
 >>>>>>> v3.18
@@ -95,7 +103,13 @@ struct pwm_device {
 	void			*chip_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		period; /* in nanoseconds */
+=======
+	unsigned int		period; 	/* in nanoseconds */
+	unsigned int		duty_cycle;	/* in nanoseconds */
+	enum pwm_polarity	polarity;
+>>>>>>> v3.18
 =======
 	unsigned int		period; 	/* in nanoseconds */
 	unsigned int		duty_cycle;	/* in nanoseconds */
@@ -115,7 +129,10 @@ static inline unsigned int pwm_get_period(struct pwm_device *pwm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void pwm_set_duty_cycle(struct pwm_device *pwm, unsigned int duty)
 {
 	if (pwm)
@@ -127,6 +144,9 @@ static inline unsigned int pwm_get_duty_cycle(struct pwm_device *pwm)
 	return pwm ? pwm->duty_cycle : 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * pwm_set_polarity - configure the polarity of a PWM signal
@@ -206,16 +226,22 @@ struct pwm_device *of_pwm_xlate_with_flags(struct pwm_chip *pc,
 		const struct of_phandle_args *args);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pwm_device *of_pwm_get(struct device_node *np, const char *con_id);
 void pwm_put(struct pwm_device *pwm);
 
 struct pwm_device *devm_pwm_get(struct device *dev, const char *consumer);
 =======
+=======
+>>>>>>> v3.18
 struct pwm_device *pwm_get(struct device *dev, const char *con_id);
 struct pwm_device *of_pwm_get(struct device_node *np, const char *con_id);
 void pwm_put(struct pwm_device *pwm);
 
 struct pwm_device *devm_pwm_get(struct device *dev, const char *con_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pwm_device *devm_of_pwm_get(struct device *dev, struct device_node *np,
 				   const char *con_id);
@@ -223,8 +249,11 @@ void devm_pwm_put(struct device *dev, struct pwm_device *pwm);
 
 bool pwm_can_sleep(struct pwm_device *pwm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pwm_device *pwm_get(struct device *dev, const char *consumer);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
@@ -301,15 +330,21 @@ struct pwm_lookup {
 	const char *dev_id;
 	const char *con_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define PWM_LOOKUP(_provider, _index, _dev_id, _con_id)	\
 =======
+=======
+>>>>>>> v3.18
 	unsigned int period;
 	enum pwm_polarity polarity;
 };
 
 #define PWM_LOOKUP(_provider, _index, _dev_id, _con_id, _period, _polarity) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{						\
 		.provider = _provider,			\
@@ -317,6 +352,11 @@ struct pwm_lookup {
 		.dev_id = _dev_id,			\
 		.con_id = _con_id,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.period = _period,			\
+		.polarity = _polarity			\
+>>>>>>> v3.18
 =======
 		.period = _period,			\
 		.polarity = _polarity			\
@@ -332,7 +372,10 @@ static inline void pwm_add_table(struct pwm_lookup *table, size_t num)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PWM_SYSFS
 void pwmchip_sysfs_export(struct pwm_chip *chip);
 void pwmchip_sysfs_unexport(struct pwm_chip *chip);
@@ -346,5 +389,8 @@ static inline void pwmchip_sysfs_unexport(struct pwm_chip *chip)
 }
 #endif /* CONFIG_PWM_SYSFS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_PWM_H */

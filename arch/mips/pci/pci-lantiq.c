@@ -90,7 +90,11 @@ static inline u32 ltq_calc_bar11mask(void)
 
 	/* BAR11MASK value depends on available memory on system. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem = num_physpages * PAGE_SIZE;
+=======
+	mem = get_num_physpages() * PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	mem = get_num_physpages() * PAGE_SIZE;
 >>>>>>> v3.18
@@ -220,6 +224,7 @@ static int ltq_pci_probe(struct platform_device *pdev)
 	pci_clear_flags(PCI_PROBE_ONLY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res_cfg = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	res_bridge = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 	if (!res_cfg || !res_bridge) {
@@ -230,11 +235,18 @@ static int ltq_pci_probe(struct platform_device *pdev)
 =======
 	res_bridge = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 >>>>>>> v3.18
+=======
+	res_bridge = platform_get_resource(pdev, IORESOURCE_MEM, 1);
+>>>>>>> v3.18
 	ltq_pci_membase = devm_ioremap_resource(&pdev->dev, res_bridge);
 	if (IS_ERR(ltq_pci_membase))
 		return PTR_ERR(ltq_pci_membase);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res_cfg = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res_cfg = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18

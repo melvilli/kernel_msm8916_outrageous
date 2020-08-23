@@ -33,15 +33,21 @@
 #include <linux/blkpg.h>
 #include <linux/magic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 #include <linux/mtd/map.h>
 #include <linux/mtd/partitions.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/major.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 #include <linux/mtd/map.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/uaccess.h>
@@ -64,6 +70,7 @@ static loff_t mtdchar_lseek(struct file *file, loff_t offset, int orig)
 {
 	struct mtd_file_info *mfi = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mtd_info *mtd = mfi->mtd;
 
 	switch (orig) {
@@ -83,6 +90,9 @@ static loff_t mtdchar_lseek(struct file *file, loff_t offset, int orig)
 		return file->f_pos = offset;
 
 	return -EINVAL;
+=======
+	return fixed_size_llseek(file, offset, orig, mfi->mtd->size);
+>>>>>>> v3.18
 =======
 	return fixed_size_llseek(file, offset, orig, mfi->mtd->size);
 >>>>>>> v3.18
@@ -354,7 +364,10 @@ static ssize_t mtdchar_write(struct file *file, const char __user *buf, size_t c
 			ret = mtd_write(mtd, *ppos, len, &retlen, kbuf);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * Return -ENOSPC only if no data could be written at all.
@@ -364,6 +377,9 @@ static ssize_t mtdchar_write(struct file *file, const char __user *buf, size_t c
 		if ((ret == -ENOSPC) && (total_retlen))
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!ret) {
 			*ppos += retlen;
@@ -582,6 +598,12 @@ static int mtdchar_blkpg_ioctl(struct mtd_info *mtd,
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Sanitize user input */
+		p.devname[BLKPG_DEVNAMELTH - 1] = '\0';
+
+>>>>>>> v3.18
 =======
 		/* Sanitize user input */
 		p.devname[BLKPG_DEVNAMELTH - 1] = '\0';
@@ -607,6 +629,7 @@ static int mtdchar_write_ioctl(struct mtd_info *mtd,
 	struct mtd_write_req req;
 	struct mtd_oob_ops ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __user *usr_data, *usr_oob;
 	int ret;
 
@@ -615,6 +638,8 @@ static int mtdchar_write_ioctl(struct mtd_info *mtd,
 			!access_ok(VERIFY_READ, req.usr_oob, req.ooblen))
 		return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	const void __user *usr_data, *usr_oob;
 	int ret;
 
@@ -627,6 +652,9 @@ static int mtdchar_write_ioctl(struct mtd_info *mtd,
 	    !access_ok(VERIFY_READ, usr_oob, req.ooblen))
 		return -EFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!mtd->_write_oob)
 		return -EOPNOTSUPP;
@@ -637,10 +665,14 @@ static int mtdchar_write_ioctl(struct mtd_info *mtd,
 	ops.ooboffs = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usr_data = (void __user *)(uintptr_t)req.usr_data;
 	usr_oob = (void __user *)(uintptr_t)req.usr_oob;
 
 	if (req.usr_data) {
+=======
+	if (usr_data) {
+>>>>>>> v3.18
 =======
 	if (usr_data) {
 >>>>>>> v3.18
@@ -652,7 +684,11 @@ static int mtdchar_write_ioctl(struct mtd_info *mtd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req.usr_oob) {
+=======
+	if (usr_oob) {
+>>>>>>> v3.18
 =======
 	if (usr_oob) {
 >>>>>>> v3.18
@@ -960,6 +996,10 @@ static int mtdchar_ioctl(struct file *file, u_int cmd, u_long arg)
 	{
 		struct otp_info *buf = kmalloc(4096, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		size_t retlen;
+>>>>>>> v3.18
 =======
 		size_t retlen;
 >>>>>>> v3.18
@@ -968,21 +1008,28 @@ static int mtdchar_ioctl(struct file *file, u_int cmd, u_long arg)
 		switch (mfi->mode) {
 		case MTD_FILE_MODE_OTP_FACTORY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = mtd_get_fact_prot_info(mtd, buf, 4096);
 			break;
 		case MTD_FILE_MODE_OTP_USER:
 			ret = mtd_get_user_prot_info(mtd, buf, 4096);
 =======
+=======
+>>>>>>> v3.18
 			ret = mtd_get_fact_prot_info(mtd, 4096, &retlen, buf);
 			break;
 		case MTD_FILE_MODE_OTP_USER:
 			ret = mtd_get_user_prot_info(mtd, 4096, &retlen, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
 			ret = -EINVAL;
 			break;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ret >= 0) {
 			if (cmd == OTPGETREGIONCOUNT) {
@@ -991,12 +1038,17 @@ static int mtdchar_ioctl(struct file *file, u_int cmd, u_long arg)
 			} else
 				ret = copy_to_user(argp, buf, ret);
 =======
+=======
+>>>>>>> v3.18
 		if (!ret) {
 			if (cmd == OTPGETREGIONCOUNT) {
 				int nbr = retlen / sizeof(struct otp_info);
 				ret = copy_to_user(argp, &nbr, sizeof(int));
 			} else
 				ret = copy_to_user(argp, buf, retlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret)
 				ret = -EFAULT;
@@ -1040,9 +1092,12 @@ static int mtdchar_ioctl(struct file *file, u_int cmd, u_long arg)
 	case ECCGETSTATS:
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MTD_LAZYECCSTATS
 		part_fill_badblockstats(mtd);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (copy_to_user(argp, &mtd->ecc_stats,
@@ -1197,7 +1252,11 @@ static unsigned long mtdchar_get_unmapped_area(struct file *file,
 
 	ret = mtd_get_unmapped_area(mtd, len, offset, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret == -EOPNOTSUPP ? -ENOSYS : ret;
+=======
+	return ret == -EOPNOTSUPP ? -ENODEV : ret;
+>>>>>>> v3.18
 =======
 	return ret == -EOPNOTSUPP ? -ENODEV : ret;
 >>>>>>> v3.18
@@ -1226,9 +1285,15 @@ static int mtdchar_mmap(struct file *file, struct vm_area_struct *vma)
 		return vm_iomap_memory(vma, map->phys, map->size);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -ENOSYS;
 #else
 	return vma->vm_flags & VM_SHARED ? 0 : -ENOSYS;
+=======
+	return -ENODEV;
+#else
+	return vma->vm_flags & VM_SHARED ? 0 : -EACCES;
+>>>>>>> v3.18
 =======
 	return -ENODEV;
 #else

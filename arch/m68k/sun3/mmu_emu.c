@@ -7,6 +7,10 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 >>>>>>> v3.18
@@ -127,7 +131,11 @@ void print_pte_vaddr (unsigned long vaddr)
  * Initialise the MMU emulator.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mmu_emu_init(unsigned long bootmem_end)
+=======
+void __init mmu_emu_init(unsigned long bootmem_end)
+>>>>>>> v3.18
 =======
 void __init mmu_emu_init(unsigned long bootmem_end)
 >>>>>>> v3.18

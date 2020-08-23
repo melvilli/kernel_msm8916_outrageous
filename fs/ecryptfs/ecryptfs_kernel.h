@@ -262,12 +262,18 @@ struct ecryptfs_inode_info {
 struct ecryptfs_dentry_info {
 	struct path lower_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ecryptfs_crypt_stat *crypt_stat;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct ecryptfs_crypt_stat *crypt_stat;
 		struct rcu_head rcu;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -520,6 +526,7 @@ ecryptfs_dentry_to_lower(struct dentry *dentry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 ecryptfs_set_dentry_lower(struct dentry *dentry, struct dentry *lower_dentry)
 {
@@ -527,6 +534,8 @@ ecryptfs_set_dentry_lower(struct dentry *dentry, struct dentry *lower_dentry)
 		lower_dentry;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline struct vfsmount *
@@ -542,6 +551,7 @@ ecryptfs_dentry_to_lower_path(struct dentry *dentry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 ecryptfs_set_dentry_lower_mnt(struct dentry *dentry, struct vfsmount *lower_mnt)
 {
@@ -549,6 +559,8 @@ ecryptfs_set_dentry_lower_mnt(struct dentry *dentry, struct vfsmount *lower_mnt)
 		lower_mnt;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ecryptfs_printk(type, fmt, arg...) \
@@ -589,7 +601,11 @@ int ecryptfs_initialize_file(struct dentry *ecryptfs_dentry,
 int ecryptfs_decode_and_decrypt_filename(char **decrypted_name,
 					 size_t *decrypted_name_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 struct dentry *ecryptfs_dentry,
+=======
+					 struct super_block *sb,
+>>>>>>> v3.18
 =======
 					 struct super_block *sb,
 >>>>>>> v3.18

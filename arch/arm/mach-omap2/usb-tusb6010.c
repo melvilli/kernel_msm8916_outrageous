@@ -96,7 +96,10 @@ static int tusb_set_sync_mode(unsigned sysclk_ps)
 	dev_t.cyc_aavdh_we = 3;
 	dev_t.cyc_wpl = 6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_t.t_ce_rdyz = 7000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

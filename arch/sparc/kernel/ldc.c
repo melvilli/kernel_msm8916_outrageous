@@ -1079,7 +1079,12 @@ static void ldc_iommu_release(struct ldc_channel *lp)
 struct ldc_channel *ldc_alloc(unsigned long id,
 			      const struct ldc_channel_config *cfgp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      void *event_arg)
+=======
+			      void *event_arg,
+			      const char *name)
+>>>>>>> v3.18
 =======
 			      void *event_arg,
 			      const char *name)
@@ -1099,6 +1104,11 @@ struct ldc_channel *ldc_alloc(unsigned long id,
 	if (!cfgp)
 		goto out_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!name)
+		goto out_err;
+>>>>>>> v3.18
 =======
 	if (!name)
 		goto out_err;
@@ -1196,7 +1206,10 @@ struct ldc_channel *ldc_alloc(unsigned long id,
 	INIT_HLIST_HEAD(&lp->mh_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	snprintf(lp->rx_irq_name, LDC_IRQ_NAME_MAX, "%s RX", name);
 	snprintf(lp->tx_irq_name, LDC_IRQ_NAME_MAX, "%s TX", name);
 
@@ -1212,6 +1225,9 @@ struct ldc_channel *ldc_alloc(unsigned long id,
 		goto out_free_txq;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return lp;
 
@@ -1266,7 +1282,11 @@ EXPORT_SYMBOL(ldc_free);
  * that.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ldc_bind(struct ldc_channel *lp, const char *name)
+=======
+int ldc_bind(struct ldc_channel *lp)
+>>>>>>> v3.18
 =======
 int ldc_bind(struct ldc_channel *lp)
 >>>>>>> v3.18
@@ -1274,6 +1294,7 @@ int ldc_bind(struct ldc_channel *lp)
 	unsigned long hv_err, flags;
 	int err = -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!name ||
 	    (lp->state != LDC_STATE_INIT))
@@ -1295,6 +1316,11 @@ int ldc_bind(struct ldc_channel *lp)
 	}
 
 
+=======
+	if (lp->state != LDC_STATE_INIT)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (lp->state != LDC_STATE_INIT)
 		return -EINVAL;
@@ -2198,7 +2224,11 @@ int ldc_map_single(struct ldc_channel *lp,
 	state.nc = 0;
 	fill_cookies(&state, (pa & PAGE_MASK), (pa & ~PAGE_MASK), len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(state.nc != 1);
+=======
+	BUG_ON(state.nc > ncookies);
+>>>>>>> v3.18
 =======
 	BUG_ON(state.nc > ncookies);
 >>>>>>> v3.18
@@ -2349,7 +2379,11 @@ void *ldc_alloc_exp_dring(struct ldc_channel *lp, unsigned int len,
 		return ERR_PTR(-EINVAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = kzalloc(len, GFP_ATOMIC);
+=======
+	buf = kzalloc(len, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	buf = kzalloc(len, GFP_KERNEL);
 >>>>>>> v3.18

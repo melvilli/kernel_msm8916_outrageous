@@ -24,7 +24,10 @@
 #include <linux/kernel.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/percpu.h>
@@ -35,6 +38,11 @@
 #include <asm/bug.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <trace/events/thp.h>
+
+>>>>>>> v3.18
 =======
 #include <trace/events/thp.h>
 
@@ -192,8 +200,13 @@ void tlb_flush(struct mmu_gather *tlb)
  * with 4K HW pages on IO space.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Because of that usage pattern, it's only available with CONFIG_HOTPLUG
  * and is implemented for small size rather than speed.
+=======
+ * Because of that usage pattern, it is implemented for small size rather
+ * than speed.
+>>>>>>> v3.18
 =======
  * Because of that usage pattern, it is implemented for small size rather
  * than speed.
@@ -203,6 +216,10 @@ void __flush_hash_table_range(struct mm_struct *mm, unsigned long start,
 			      unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int hugepage_shift;
+>>>>>>> v3.18
 =======
 	int hugepage_shift;
 >>>>>>> v3.18
@@ -224,7 +241,12 @@ void __flush_hash_table_range(struct mm_struct *mm, unsigned long start,
 	arch_enter_lazy_mmu_mode();
 	for (; start < end; start += PAGE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_t *ptep = find_linux_pte(mm->pgd, start);
+=======
+		pte_t *ptep = find_linux_pte_or_hugepte(mm->pgd, start,
+							&hugepage_shift);
+>>>>>>> v3.18
 =======
 		pte_t *ptep = find_linux_pte_or_hugepte(mm->pgd, start,
 							&hugepage_shift);
@@ -235,10 +257,13 @@ void __flush_hash_table_range(struct mm_struct *mm, unsigned long start,
 			continue;
 		pte = pte_val(*ptep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(pte & _PAGE_HASHPTE))
 			continue;
 		hpte_need_flush(mm, start, ptep, pte, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (hugepage_shift)
 			trace_hugepage_invalidate(start, pte_val(pte));
 		if (!(pte & _PAGE_HASHPTE))
@@ -274,6 +299,9 @@ void flush_tlb_pmd_range(struct mm_struct *mm, pmd_t *pmd, unsigned long addr)
 		if (pteval & _PAGE_HASHPTE)
 			hpte_need_flush(mm, addr, pte, pteval, 0);
 		addr += PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	arch_leave_lazy_mmu_mode();

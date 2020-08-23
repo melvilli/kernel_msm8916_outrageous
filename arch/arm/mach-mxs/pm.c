@@ -16,6 +16,10 @@
 #include <linux/suspend.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "pm.h"
+>>>>>>> v3.18
 =======
 #include "pm.h"
 >>>>>>> v3.18

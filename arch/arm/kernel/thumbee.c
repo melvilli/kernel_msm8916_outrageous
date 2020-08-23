@@ -46,7 +46,11 @@ static int thumbee_notifier(struct notifier_block *self, unsigned long cmd, void
 	switch (cmd) {
 	case THREAD_NOTIFY_FLUSH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		thread->thumbee_state = 0;
+=======
+		teehbr_write(0);
+>>>>>>> v3.18
 =======
 		teehbr_write(0);
 >>>>>>> v3.18

@@ -233,7 +233,11 @@ void rds_iw_send_cq_comp_handler(struct ib_cq *cq, void *context)
 
 		if (wc.wr_id == RDS_IW_ACK_WR_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ic->i_ack_queued + HZ/2 < jiffies)
+=======
+			if (time_after(jiffies, ic->i_ack_queued + HZ/2))
+>>>>>>> v3.18
 =======
 			if (time_after(jiffies, ic->i_ack_queued + HZ/2))
 >>>>>>> v3.18
@@ -272,7 +276,11 @@ void rds_iw_send_cq_comp_handler(struct ib_cq *cq, void *context)
 			send->s_wr.opcode = 0xdead;
 			send->s_wr.num_sge = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (send->s_queued + HZ/2 < jiffies)
+=======
+			if (time_after(jiffies, send->s_queued + HZ/2))
+>>>>>>> v3.18
 =======
 			if (time_after(jiffies, send->s_queued + HZ/2))
 >>>>>>> v3.18

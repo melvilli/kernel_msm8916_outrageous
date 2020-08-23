@@ -87,6 +87,7 @@ static void pnv_pci_p5ioc2_dma_dev_setup(struct pnv_phb *phb,
 					 struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phb->p5ioc2.iommu_table.it_map == NULL)
 		iommu_init_table(&phb->p5ioc2.iommu_table, phb->hose->node);
 
@@ -99,6 +100,8 @@ static void __init pnv_pci_init_p5ioc2_phb(struct device_node *np,
 	struct pnv_phb *phb;
 	const u64 *prop64;
 =======
+=======
+>>>>>>> v3.18
 	if (phb->p5ioc2.iommu_table.it_map == NULL) {
 		iommu_init_table(&phb->p5ioc2.iommu_table, phb->hose->node);
 		iommu_register_group(&phb->p5ioc2.iommu_table,
@@ -113,6 +116,9 @@ static void __init pnv_pci_init_p5ioc2_phb(struct device_node *np, u64 hub_id,
 {
 	struct pnv_phb *phb;
 	const __be64 *prop64;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 phb_id;
 	int64_t rc;
@@ -151,6 +157,10 @@ static void __init pnv_pci_init_p5ioc2_phb(struct device_node *np, u64 hub_id,
 	phb->hose->last_busno = 0xff;
 	phb->hose->private_data = phb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phb->hub_id = hub_id;
+>>>>>>> v3.18
 =======
 	phb->hub_id = hub_id;
 >>>>>>> v3.18
@@ -190,7 +200,12 @@ static void __init pnv_pci_init_p5ioc2_phb(struct device_node *np, u64 hub_id,
 	phb->dma_dev_setup = pnv_pci_p5ioc2_dma_dev_setup;
 	pnv_pci_setup_iommu_table(&phb->p5ioc2.iommu_table,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  tce_mem, tce_size, 0);
+=======
+				  tce_mem, tce_size, 0,
+				  IOMMU_PAGE_SHIFT_4K);
+>>>>>>> v3.18
 =======
 				  tce_mem, tce_size, 0,
 				  IOMMU_PAGE_SHIFT_4K);
@@ -201,7 +216,11 @@ void __init pnv_pci_init_p5ioc2_hub(struct device_node *np)
 {
 	struct device_node *phbn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u64 *prop64;
+=======
+	const __be64 *prop64;
+>>>>>>> v3.18
 =======
 	const __be64 *prop64;
 >>>>>>> v3.18
@@ -257,7 +276,12 @@ void __init pnv_pci_init_p5ioc2_hub(struct device_node *np)
 		if (of_device_is_compatible(phbn, "ibm,p5ioc2-pcix") ||
 		    of_device_is_compatible(phbn, "ibm,p5ioc2-pciex")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pnv_pci_init_p5ioc2_phb(phbn, tce_mem, tce_per_phb);
+=======
+			pnv_pci_init_p5ioc2_phb(phbn, hub_id,
+					tce_mem, tce_per_phb);
+>>>>>>> v3.18
 =======
 			pnv_pci_init_p5ioc2_phb(phbn, hub_id,
 					tce_mem, tce_per_phb);

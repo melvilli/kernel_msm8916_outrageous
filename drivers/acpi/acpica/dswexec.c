@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -175,7 +179,11 @@ acpi_ds_get_predicate_value(struct acpi_walk_state *walk_state,
 	(void)acpi_ds_do_implicit_return(local_obj_desc, walk_state, TRUE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -336,6 +344,10 @@ acpi_ds_exec_begin_op(struct acpi_walk_state *walk_state,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -347,7 +359,11 @@ acpi_ds_exec_begin_op(struct acpi_walk_state *walk_state,
 	return_ACPI_STATUS(status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18
@@ -505,7 +521,10 @@ acpi_status acpi_ds_exec_end_op(struct acpi_walk_state *walk_state)
 
 		case AML_TYPE_METHOD_CALL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -602,7 +621,10 @@ acpi_status acpi_ds_exec_end_op(struct acpi_walk_state *walk_state)
 			switch (op->common.parent->common.aml_opcode) {
 			case AML_NAME_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				/*
@@ -746,7 +768,11 @@ acpi_status acpi_ds_exec_end_op(struct acpi_walk_state *walk_state)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

@@ -79,10 +79,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: generic_NCR5380.c,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* settings for DTC3181E card with only Mustek scanner attached */
@@ -465,7 +468,11 @@ int __init generic_NCR5380_detect(struct scsi_host_template * tpnt)
 		if (instance->irq != SCSI_IRQ_NONE)
 			if (request_irq(instance->irq, generic_NCR5380_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IRQF_DISABLED, "NCR5380", instance)) {
+=======
+					0, "NCR5380", instance)) {
+>>>>>>> v3.18
 =======
 					0, "NCR5380", instance)) {
 >>>>>>> v3.18
@@ -780,7 +787,11 @@ static void sprint_command(struct seq_file *m, unsigned char *command)
 static void sprint_Scsi_Cmnd(struct seq_file *m, Scsi_Cmnd * cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PRINTP("host number %d destination target %d, lun %d\n" ANDP cmd->device->host->host_no ANDP cmd->device->id ANDP cmd->device->lun);
+=======
+	PRINTP("host number %d destination target %d, lun %llu\n" ANDP cmd->device->host->host_no ANDP cmd->device->id ANDP cmd->device->lun);
+>>>>>>> v3.18
 =======
 	PRINTP("host number %d destination target %d, lun %llu\n" ANDP cmd->device->host->host_no ANDP cmd->device->id ANDP cmd->device->lun);
 >>>>>>> v3.18

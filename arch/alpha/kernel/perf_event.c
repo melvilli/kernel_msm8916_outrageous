@@ -84,6 +84,11 @@ struct alpha_pmu_t {
 	 /* Subroutine for allocation of PMCs.  Enforces constraints. */
 	int (*check_constraints)(struct perf_event **, unsigned long *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Subroutine for checking validity of a raw event for this PMU. */
+	int (*raw_event_valid)(u64 config);
+>>>>>>> v3.18
 =======
 	/* Subroutine for checking validity of a raw event for this PMU. */
 	int (*raw_event_valid)(u64 config);
@@ -209,13 +214,19 @@ success:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ev67_raw_event_valid(u64 config)
 {
 	return config >= EV67_CYCLES && config < EV67_LAST_ET;
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct alpha_pmu_t ev67_pmu = {
 	.event_map = ev67_perfmon_event_map,
@@ -226,7 +237,12 @@ static const struct alpha_pmu_t ev67_pmu = {
 	.pmc_max_period = {(1UL<<20) - 1, (1UL<<20) - 1, 0},
 	.pmc_left = {16, 4, 0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.check_constraints = ev67_check_constraints
+=======
+	.check_constraints = ev67_check_constraints,
+	.raw_event_valid = ev67_raw_event_valid,
+>>>>>>> v3.18
 =======
 	.check_constraints = ev67_check_constraints,
 	.raw_event_valid = ev67_raw_event_valid,
@@ -442,7 +458,11 @@ static void maybe_change_configuration(struct cpu_hw_events *cpuc)
 static int alpha_pmu_add(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -498,7 +518,11 @@ static int alpha_pmu_add(struct perf_event *event, int flags)
 static void alpha_pmu_del(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -550,7 +574,11 @@ static void alpha_pmu_stop(struct perf_event *event, int flags)
 {
 	struct hw_perf_event *hwc = &event->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -574,7 +602,11 @@ static void alpha_pmu_start(struct perf_event *event, int flags)
 {
 	struct hw_perf_event *hwc = &event->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -645,7 +677,13 @@ static int __hw_perf_event_init(struct perf_event *event)
 		return -EOPNOTSUPP;
 	} else if (attr->type == PERF_TYPE_RAW) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ev = attr->config & 0xff;
+=======
+		if (!alpha_pmu->raw_event_valid(attr->config))
+			return -EINVAL;
+		ev = attr->config;
+>>>>>>> v3.18
 =======
 		if (!alpha_pmu->raw_event_valid(attr->config))
 			return -EINVAL;
@@ -755,7 +793,11 @@ static int alpha_pmu_event_init(struct perf_event *event)
 static void alpha_pmu_enable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -785,7 +827,11 @@ static void alpha_pmu_enable(struct pmu *pmu)
 static void alpha_pmu_disable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -853,8 +899,13 @@ static void alpha_perf_event_irq_handler(unsigned long la_ptr,
 	int idx, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(irq_pmi_count)++;
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	__this_cpu_inc(irq_pmi_count);
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	__this_cpu_inc(irq_pmi_count);
 	cpuc = this_cpu_ptr(&cpu_hw_events);

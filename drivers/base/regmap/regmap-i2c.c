@@ -14,8 +14,11 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
 
 
 static int regmap_smbus_byte_reg_read(void *context, unsigned int reg,
@@ -89,6 +92,9 @@ static struct regmap_bus regmap_smbus_word = {
 	.reg_write = regmap_smbus_word_reg_write,
 	.reg_read = regmap_smbus_word_reg_read,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int regmap_i2c_write(void *context, const void *data, size_t count)
@@ -173,9 +179,12 @@ static struct regmap_bus regmap_i2c = {
 	.gather_write = regmap_i2c_gather_write,
 	.read = regmap_i2c_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.reg_format_endian_default = REGMAP_ENDIAN_BIG,
 	.val_format_endian_default = REGMAP_ENDIAN_BIG,
 };
@@ -197,6 +206,9 @@ static const struct regmap_bus *regmap_get_i2c_bus(struct i2c_client *i2c,
 	return ERR_PTR(-ENOTSUPP);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * regmap_init_i2c(): Initialise register map
@@ -211,14 +223,20 @@ struct regmap *regmap_init_i2c(struct i2c_client *i2c,
 			       const struct regmap_config *config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return regmap_init(&i2c->dev, &regmap_i2c, &i2c->dev, config);
 =======
+=======
+>>>>>>> v3.18
 	const struct regmap_bus *bus = regmap_get_i2c_bus(i2c, config);
 
 	if (IS_ERR(bus))
 		return ERR_CAST(bus);
 
 	return regmap_init(&i2c->dev, bus, &i2c->dev, config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(regmap_init_i2c);
@@ -237,14 +255,20 @@ struct regmap *devm_regmap_init_i2c(struct i2c_client *i2c,
 				    const struct regmap_config *config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return devm_regmap_init(&i2c->dev, &regmap_i2c, &i2c->dev, config);
 =======
+=======
+>>>>>>> v3.18
 	const struct regmap_bus *bus = regmap_get_i2c_bus(i2c, config);
 
 	if (IS_ERR(bus))
 		return ERR_CAST(bus);
 
 	return devm_regmap_init(&i2c->dev, bus, &i2c->dev, config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(devm_regmap_init_i2c);

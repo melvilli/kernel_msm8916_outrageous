@@ -9,7 +9,10 @@ Required properties:
 - reg : SRAM iomem address range
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Reserving sram areas:
 ---------------------
 
@@ -36,6 +39,9 @@ Optional properties in the area nodes:
 - compatible : standard definition, should contain a vendor specific string
                in the form <vendor>,[<device>-]<usage>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 
@@ -43,7 +49,10 @@ sram: sram@5c000000 {
 	compatible = "mmio-sram";
 	reg = <0x5c000000 0x40000>; /* 256 KiB SRAM at address 0x5c000000 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	#adress-cells = <1>;
 	#size-cells = <1>;
@@ -53,5 +62,8 @@ sram: sram@5c000000 {
 		compatible = "socvendor,smp-sram";
 		reg = <0x100 0x50>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

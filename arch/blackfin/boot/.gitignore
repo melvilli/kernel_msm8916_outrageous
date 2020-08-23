@@ -1,6 +1,10 @@
 vmImage*
 vmlinux*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+uImage*
+>>>>>>> v3.18
 =======
 uImage*
 >>>>>>> v3.18

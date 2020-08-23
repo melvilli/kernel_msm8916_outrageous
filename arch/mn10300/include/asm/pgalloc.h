@@ -47,6 +47,10 @@ static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
 static inline void pte_free(struct mm_struct *mm, struct page *pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pgtable_page_dtor(pte);
+>>>>>>> v3.18
 =======
 	pgtable_page_dtor(pte);
 >>>>>>> v3.18

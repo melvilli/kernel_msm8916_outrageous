@@ -75,7 +75,11 @@
 
 static bool kvm_patching_worked = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char kvm_tmp[1024 * 1024];
+=======
+char kvm_tmp[1024 * 1024];
+>>>>>>> v3.18
 =======
 char kvm_tmp[1024 * 1024];
 >>>>>>> v3.18
@@ -418,6 +422,7 @@ static void kvm_map_magic_page(void *data)
 	u32 *features = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ulong in[8];
 	ulong out[8];
 
@@ -426,6 +431,8 @@ static void kvm_map_magic_page(void *data)
 
 	kvm_hypercall(in, out, KVM_HCALL_TOKEN(KVM_HC_PPC_MAP_MAGIC_PAGE));
 =======
+=======
+>>>>>>> v3.18
 	ulong in[8] = {0};
 	ulong out[8];
 
@@ -433,6 +440,9 @@ static void kvm_map_magic_page(void *data)
 	in[1] = KVM_MAGIC_PAGE | MAGIC_PAGE_FLAG_NOT_MAPPED_NX;
 
 	epapr_hypercall(in, out, KVM_HCALL_TOKEN(KVM_HC_PPC_MAP_MAGIC_PAGE));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*features = out[0];
@@ -726,6 +736,7 @@ static void kvm_use_magic_page(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long kvm_hypercall(unsigned long *in,
 			    unsigned long *out,
 			    unsigned long nr)
@@ -773,10 +784,15 @@ static __init void kvm_free_tmp(void)
 	/* Free the tmp space we don't need */
 	free_reserved_area(start, end, 0, NULL);
 =======
+=======
+>>>>>>> v3.18
 static __init void kvm_free_tmp(void)
 {
 	free_reserved_area(&kvm_tmp[kvm_tmp_index],
 			   &kvm_tmp[ARRAY_SIZE(kvm_tmp)], -1, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

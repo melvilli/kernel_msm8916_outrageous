@@ -22,7 +22,10 @@
 #include "gcov.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GCOV_COUNTERS		5
 
 static struct gcov_info *gcov_info_head;
@@ -138,6 +141,9 @@ void gcov_info_unlink(struct gcov_info *prev, struct gcov_info *info)
 		gcov_info_head = info->next;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Symbolic links to be created for each profiling data file. */
 const struct gcov_link gcov_link[] = {

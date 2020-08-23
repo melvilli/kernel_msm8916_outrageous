@@ -39,7 +39,10 @@ extern int devfreq_add_governor(struct devfreq_governor *governor);
 extern int devfreq_remove_governor(struct devfreq_governor *governor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int devfreq_get_freq_level(struct devfreq *devfreq, unsigned long freq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _GOVERNOR_H */

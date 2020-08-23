@@ -22,7 +22,11 @@ static int __init proc_cpuinfo_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_cpuinfo_init);
+=======
+fs_initcall(proc_cpuinfo_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_cpuinfo_init);
 >>>>>>> v3.18

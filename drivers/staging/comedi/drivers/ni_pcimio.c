@@ -15,10 +15,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -114,6 +117,10 @@ Bugs:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -126,6 +133,7 @@ Bugs:
 #include "ni_stc.h"
 #include "mite.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* #define PCI_DEBUG */
 
@@ -142,6 +150,10 @@ Bugs:
 #define PCIDMA
 
 >>>>>>> v3.18
+=======
+#define PCIDMA
+
+>>>>>>> v3.18
 /* These are not all the possible ao ranges for 628x boards.
  They can do OFFSET +- REFERENCE where OFFSET can be
  0V, 5V, APFI<0,1>, or AO<0...3> and RANGE can
@@ -149,6 +161,7 @@ Bugs:
  63 different possibilities.  An AO channel
  can not act as it's own OFFSET or REFERENCE.
 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct comedi_lrange range_ni_M_628x_ao = { 8, {
 							     RANGE(-10, 10),
@@ -169,6 +182,8 @@ static const struct comedi_lrange range_ni_M_625x_ao = { 3, {
 							     RANGE_ext(-1, 1)
 							     }
 =======
+=======
+>>>>>>> v3.18
 static const struct comedi_lrange range_ni_M_628x_ao = {
 	8, {
 		BIP_RANGE(10),
@@ -189,6 +204,9 @@ static const struct comedi_lrange range_ni_M_625x_ao = {
 		BIP_RANGE(5),
 		RANGE_ext(-1, 1)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -257,7 +275,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-mio-16xe-50",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -267,10 +289,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 50000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 50000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0x0fff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 50000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0x0fff,
 		.ao_range_table	= &range_bipolar10,
@@ -282,7 +310,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-mio-16xe-10",	/*  aka pci-6030E */
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -292,6 +324,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 10000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -299,10 +332,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 10000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 10000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { dac8800, dac8043, ad8522 },
 	},
@@ -310,7 +348,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6014",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -320,10 +362,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 100000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0xffff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 100000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 		.ao_range_table	= &range_bipolar10,
@@ -335,7 +383,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6030e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -345,6 +397,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 10000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -352,10 +405,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 10000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 10000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { dac8800, dac8043, ad8522 },
 	},
@@ -363,7 +421,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-mio-16e-1",	/* aka pci-6070e */
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -372,6 +434,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -379,10 +442,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { mb88341 },
 	},
@@ -390,7 +458,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-mio-16e-4",	/* aka pci-6040e */
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -403,6 +475,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 2000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 512,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -410,10 +483,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 512,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug },	/* doc says mb88341 */
 	},
@@ -421,7 +499,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6040e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -430,6 +512,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 2000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 512,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -437,10 +520,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 512,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { mb88341 },
 	},
@@ -448,7 +536,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6031e",
 		.n_adchan	= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -458,6 +550,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 10000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -465,10 +558,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 10000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 10000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { dac8800, dac8043, ad8522 },
 	},
@@ -476,7 +574,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6032e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -485,7 +587,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.gainlkup	= ai_gain_14,
 		.ai_speed	= 10000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { dac8800, dac8043, ad8522 },
@@ -494,7 +599,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6033e",
 		.n_adchan	= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -503,7 +612,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.gainlkup	= ai_gain_14,
 		.ai_speed	= 10000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { dac8800, dac8043, ad8522 },
@@ -512,7 +624,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6071e",
 		.n_adchan	= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -522,6 +638,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -529,10 +646,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug },
 	},
@@ -540,16 +662,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6023e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
 		.ai_fifo_depth	= 512,
 		.gainlkup	= ai_gain_4,
 		.ai_speed	= 5000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ai_maxdata	= 0x0fff,
 		.ai_fifo_depth	= 512,
 		.gainlkup	= ai_gain_4,
 		.ai_speed	= 5000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug },	/* manual is wrong */
 	},
@@ -557,7 +685,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6024e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -566,10 +698,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 100000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0x0fff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 100000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0x0fff,
 		.ao_range_table	= &range_bipolar10,
@@ -581,7 +719,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6025e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -590,10 +732,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 100000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0x0fff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 100000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0x0fff,
 		.ao_range_table	= &range_bipolar10,
@@ -606,7 +754,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6025e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -615,11 +767,17 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_unipolar	= 1,
 		.ao_speed	= 100000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0x0fff,
+		.ao_range_table	= &range_ni_E_ao_ext,
+		.ao_speed	= 100000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0x0fff,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -632,7 +790,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6034e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -641,7 +803,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.gainlkup	= ai_gain_4,
 		.ai_speed	= 5000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug },
@@ -650,7 +815,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6035e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -660,10 +829,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 100000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0x0fff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 100000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0x0fff,
 		.ao_range_table	= &range_bipolar10,
@@ -675,7 +850,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6052e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -685,6 +864,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 3000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_unipolar	= 1,
 		.ao_fifo_depth	= 2048,
@@ -692,10 +872,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 3000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 3000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* manual is wrong */
 		.caldac		= { ad8804_debug, ad8804_debug, ad8522 },
@@ -704,7 +889,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6110",
 		.n_adchan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -714,7 +903,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 200,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -723,7 +916,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_fifo_depth	= 2048,
 		.ao_speed	= 250,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { ad8804, ad8804 },
@@ -732,7 +928,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6111",
 		.n_adchan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -741,7 +941,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 200,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -750,7 +954,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_fifo_depth	= 2048,
 		.ao_speed	= 250,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { ad8804, ad8804 },
@@ -761,7 +968,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6115",
 		.n_adchan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -770,16 +981,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 100,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_671x	= 1,
 		.ao_fifo_depth	= 2048,
 		.ao_speed	= 250,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_671x	= 1,
 		.ao_fifo_depth	= 2048,
 		.ao_speed	= 250,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_611x	= 1,
 		/* XXX */
@@ -791,7 +1008,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6115",
 		.n_adchan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -800,7 +1021,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 100,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -809,7 +1034,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 250,
 		.reg_611x	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* XXX */
@@ -820,7 +1048,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name = "pci-6711",
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
+=======
+		.ao_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -829,7 +1061,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6711,
@@ -839,16 +1074,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6711",
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6711,
 		.caldac		= { ad8804_debug },
@@ -857,16 +1098,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6713",
 		.n_aochan	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6713,
 		.caldac		= { ad8804_debug, ad8804_debug },
@@ -875,16 +1122,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6713",
 		.n_aochan	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6713,
 		.caldac		= { ad8804_debug, ad8804_debug },
@@ -893,16 +1146,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6731",
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 8192,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 8192,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6711,
 		.caldac		= { ad8804_debug },
@@ -912,10 +1171,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6731",
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 8192,
 		.ao_range_table	= &range_bipolar10,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0xffff,
+		.ao_fifo_depth	= 8192,
+		.ao_range_table	= &range_bipolar10,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 8192,
@@ -929,16 +1194,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6733",
 		.n_aochan	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6713,
 		.caldac		= { ad8804_debug, ad8804_debug },
@@ -947,16 +1218,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6733",
 		.n_aochan	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 16384,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_6713,
 		.caldac		= { ad8804_debug, ad8804_debug },
@@ -965,7 +1242,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6071e",
 		.n_adchan	= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -975,6 +1256,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -982,10 +1264,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug },
 	},
@@ -993,7 +1280,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6070e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 12,
+=======
+		.ai_maxdata	= 0x0fff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x0fff,
 >>>>>>> v3.18
@@ -1003,6 +1294,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 12,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -1010,10 +1302,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 1000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0x0fff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug },
 	},
@@ -1021,7 +1318,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6052e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1031,6 +1332,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 3000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_unipolar	= 1,
 		.ao_fifo_depth	= 2048,
@@ -1038,10 +1340,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 3000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 3000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { mb88341, mb88341, ad8522 },
 	},
@@ -1049,7 +1356,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6031e",
 		.n_adchan	= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1059,6 +1370,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 10000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
@@ -1066,10 +1378,15 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 10000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 2048,
 		.ao_range_table	= &range_ni_E_ao_ext,
 		.ao_speed	= 10000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { dac8800, dac8043, ad8522 },
 	},
@@ -1077,7 +1394,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name = "pci-6036e",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1087,10 +1408,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 5000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
 		.ao_range_table	= &range_bipolar10,
 		.ao_speed	= 100000,
 		.num_p0_dio_channels = 8,
+=======
+		.ao_maxdata	= 0xffff,
+		.ao_range_table	= &range_bipolar10,
+		.ao_speed	= 100000,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 		.ao_range_table	= &range_bipolar10,
@@ -1102,16 +1429,22 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6220",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
 		.ai_fifo_depth	= 512,		/* FIXME: guess */
 		.gainlkup	= ai_gain_622x,
 		.ai_speed	= 4000,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ai_maxdata	= 0xffff,
 		.ai_fifo_depth	= 512,		/* FIXME: guess */
 		.gainlkup	= ai_gain_622x,
 		.ai_speed	= 4000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.reg_type	= ni_reg_622x,
 		.caldac		= { caldac_none },
@@ -1120,7 +1453,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6221",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1129,7 +1466,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1138,7 +1479,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_622x,
 		.ao_speed	= 1200,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1147,7 +1491,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6221_37pin",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1156,7 +1504,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1165,7 +1517,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_622x,
 		.ao_speed	= 1200,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1174,7 +1529,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6224",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1183,7 +1542,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.reg_type	= ni_reg_622x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1193,7 +1556,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6224",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1202,7 +1569,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.reg_type	= ni_reg_622x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1212,7 +1583,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6225",
 		.n_adchan	= 80,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1221,7 +1596,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1230,7 +1609,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_622x,
 		.ao_speed	= 1200,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1240,7 +1623,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6225",
 		.n_adchan	= 80,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1249,7 +1636,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1258,7 +1649,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_622x,
 		.ao_speed	= 1200,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1268,7 +1663,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6229",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1277,7 +1676,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1286,7 +1689,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_622x,
 		.ao_speed	= 1200,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1296,7 +1703,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6250",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1305,7 +1716,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.reg_type	= ni_reg_625x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1314,7 +1728,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6251",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1323,7 +1741,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1332,7 +1754,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_625x,
 		.ao_speed	= 350,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1341,7 +1766,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pcie-6251",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1350,7 +1779,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1359,7 +1792,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_625x,
 		.ao_speed	= 350,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1368,7 +1804,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxie-6251",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1377,7 +1817,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1386,7 +1830,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_625x,
 		.ao_speed	= 350,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1395,7 +1842,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6254",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1404,7 +1855,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.reg_type	= ni_reg_625x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1414,7 +1869,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6259",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1423,7 +1882,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1432,7 +1895,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_625x,
 		.ao_speed	= 350,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1442,7 +1909,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pcie-6259",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1451,7 +1922,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 800,
 		.n_aochan	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.aobits		= 16,
+=======
+		.ao_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ao_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1460,7 +1935,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.reg_type	= ni_reg_625x,
 		.ao_speed	= 350,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1470,7 +1949,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6280",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 18,
+=======
+		.ai_maxdata	= 0x3ffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x3ffff,
 >>>>>>> v3.18
@@ -1480,7 +1963,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_fifo_depth	= 8191,
 		.reg_type	= ni_reg_628x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
@@ -1489,7 +1975,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6281",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 18,
+=======
+		.ai_maxdata	= 0x3ffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x3ffff,
 >>>>>>> v3.18
@@ -1497,6 +1987,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.gainlkup	= ai_gain_628x,
 		.ai_speed	= 1600,
 		.n_aochan	= 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 8191,
@@ -1506,11 +1997,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 350,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 8191,
 		.ao_range_table = &range_ni_M_628x_ao,
 		.reg_type	= ni_reg_628x,
 		.ao_speed	= 350,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
 	},
@@ -1518,7 +2014,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6281",
 		.n_adchan	= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 18,
+=======
+		.ai_maxdata	= 0x3ffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x3ffff,
 >>>>>>> v3.18
@@ -1526,6 +2026,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.gainlkup	= ai_gain_628x,
 		.ai_speed	= 1600,
 		.n_aochan	= 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 8191,
@@ -1535,11 +2036,16 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 350,
 		.num_p0_dio_channels = 8,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 8191,
 		.ao_range_table	= &range_ni_M_628x_ao,
 		.reg_type	= ni_reg_628x,
 		.ao_speed	= 350,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
 	},
@@ -1547,7 +2053,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6284",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 18,
+=======
+		.ai_maxdata	= 0x3ffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x3ffff,
 >>>>>>> v3.18
@@ -1556,7 +2066,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 1600,
 		.reg_type	= ni_reg_628x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 32,
+=======
+		.has_32dio_chan	= 1,
+>>>>>>> v3.18
 =======
 		.has_32dio_chan	= 1,
 >>>>>>> v3.18
@@ -1566,7 +2080,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6289",
 		.n_adchan	= 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 18,
+=======
+		.ai_maxdata	= 0x3ffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0x3ffff,
 >>>>>>> v3.18
@@ -1574,6 +2092,7 @@ static const struct ni_board_struct ni_boards[] = {
 		.gainlkup	= ai_gain_628x,
 		.ai_speed	= 1600,
 		.n_aochan	= 4,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.aobits		= 16,
 		.ao_fifo_depth	= 8191,
@@ -1583,12 +2102,17 @@ static const struct ni_board_struct ni_boards[] = {
 		.ao_speed	= 350,
 		.num_p0_dio_channels = 32,
 =======
+=======
+>>>>>>> v3.18
 		.ao_maxdata	= 0xffff,
 		.ao_fifo_depth	= 8191,
 		.ao_range_table	= &range_ni_M_628x_ao,
 		.reg_type	= ni_reg_628x,
 		.ao_speed	= 350,
 		.has_32dio_chan	= 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.caldac		= { caldac_none },
 	},
@@ -1596,7 +2120,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pci-6143",
 		.n_adchan	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1605,7 +2133,10 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.reg_type	= ni_reg_6143,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug, ad8804_debug },
@@ -1614,7 +2145,11 @@ static const struct ni_board_struct ni_boards[] = {
 		.name		= "pxi-6143",
 		.n_adchan	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.adbits		= 16,
+=======
+		.ai_maxdata	= 0xffff,
+>>>>>>> v3.18
 =======
 		.ai_maxdata	= 0xffff,
 >>>>>>> v3.18
@@ -1623,13 +2158,17 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 4000,
 		.reg_type	= ni_reg_6143,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_p0_dio_channels = 8,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.caldac		= { ad8804_debug, ad8804_debug },
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct ni_private {
 NI_PRIVATE_COMMON};
@@ -1970,6 +2509,8 @@ static int pcimio_dio_change(struct comedi_device *dev,
 			     struct comedi_subdevice *s,
 			     unsigned long new_size);
 =======
+=======
+>>>>>>> v3.18
 #include "ni_mio_common.c"
 
 static int pcimio_ai_change(struct comedi_device *dev,
@@ -2037,6 +2578,9 @@ static int pcimio_dio_change(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void m_series_init_eeprom_buffer(struct comedi_device *dev)
@@ -2065,7 +2609,11 @@ static void m_series_init_eeprom_buffer(struct comedi_device *dev)
 	for (i = 0; i < serial_number_eeprom_length; ++i) {
 		char *byte_ptr = (char *)&devpriv->serial_number + i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*byte_ptr = ni_readb(serial_number_eeprom_offset + i);
+=======
+		*byte_ptr = ni_readb(dev, serial_number_eeprom_offset + i);
+>>>>>>> v3.18
 =======
 		*byte_ptr = ni_readb(dev, serial_number_eeprom_offset + i);
 >>>>>>> v3.18
@@ -2074,7 +2622,11 @@ static void m_series_init_eeprom_buffer(struct comedi_device *dev)
 
 	for (i = 0; i < M_SERIES_EEPROM_SIZE; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		devpriv->eeprom_buffer[i] = ni_readb(Start_Cal_EEPROM + i);
+=======
+		devpriv->eeprom_buffer[i] = ni_readb(dev, Start_Cal_EEPROM + i);
+>>>>>>> v3.18
 =======
 		devpriv->eeprom_buffer[i] = ni_readb(dev, Start_Cal_EEPROM + i);
 >>>>>>> v3.18
@@ -2087,6 +2639,7 @@ static void m_series_init_eeprom_buffer(struct comedi_device *dev)
 
 static void init_6143(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct ni_board_struct *board = comedi_board(dev);
 	struct ni_private *devpriv = dev->private;
@@ -2108,6 +2661,8 @@ static void init_6143(struct comedi_device *dev)
 		  Calibration_Channel_6143);
 	ni_writew(devpriv->ai_calib_source, Calibration_Channel_6143);
 =======
+=======
+>>>>>>> v3.18
 	const struct ni_board_struct *board = dev->board_ptr;
 	struct ni_private *devpriv = dev->private;
 
@@ -2132,6 +2687,9 @@ static void init_6143(struct comedi_device *dev)
 		       Calibration_Channel_6143_RelayOff,
 		  Calibration_Channel_6143);
 	ni_writew(dev, devpriv->ai_calib_source, Calibration_Channel_6143);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2149,16 +2707,22 @@ static void pcimio_detach(struct comedi_device *dev)
 		mite_free_ring(devpriv->gpct_mite_ring[0]);
 		mite_free_ring(devpriv->gpct_mite_ring[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (devpriv->mite) {
 			mite_unsetup(devpriv->mite);
 			mite_free(devpriv->mite);
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 		mite_detach(devpriv->mite);
 	}
 	if (dev->mmio)
 		iounmap(dev->mmio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	comedi_pci_disable(dev);
 }
@@ -2170,6 +2734,10 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 	const struct ni_board_struct *board = NULL;
 	struct ni_private *devpriv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int irq;
+>>>>>>> v3.18
 =======
 	unsigned int irq;
 >>>>>>> v3.18
@@ -2196,6 +2764,7 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (board->reg_type & ni_reg_m_series_mask) {
 		devpriv->stc_writew = &m_series_stc_writew;
 		devpriv->stc_readw = &m_series_stc_readw;
@@ -2214,6 +2783,8 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (board->reg_type & ni_reg_m_series_mask)
 		devpriv->is_m_series = 1;
 	if (board->reg_type & ni_reg_6xxx_mask)
@@ -2238,6 +2809,9 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 	ret = mite_setup(dev, devpriv->mite);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	devpriv->ai_mite_ring = mite_alloc_ring(devpriv->mite);
@@ -2256,6 +2830,7 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 	if (devpriv->gpct_mite_ring[1] == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (board->reg_type & ni_reg_m_series_mask)
 		m_series_init_eeprom_buffer(dev);
@@ -2278,6 +2853,8 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 
 	ret = ni_E_init(dev);
 =======
+=======
+>>>>>>> v3.18
 	if (devpriv->is_m_series)
 		m_series_init_eeprom_buffer(dev);
 	if (devpriv->is_6143)
@@ -2292,6 +2869,9 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 	}
 
 	ret = ni_E_init(dev, 0, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -2302,6 +2882,7 @@ static int pcimio_auto_attach(struct comedi_device *dev,
 	dev->subdevices[NI_GPCT_SUBDEV(1)].buf_change = &pcimio_gpct1_change;
 	dev->subdevices[NI_DIO_SUBDEV].buf_change = &pcimio_dio_change;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ret;
 }
@@ -2372,6 +2953,8 @@ static int pcimio_dio_change(struct comedi_device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -2389,7 +2972,11 @@ static int ni_pcimio_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ni_pcimio_pci_table) = {
+=======
+static const struct pci_device_id ni_pcimio_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ni_pcimio_pci_table[] = {
 >>>>>>> v3.18

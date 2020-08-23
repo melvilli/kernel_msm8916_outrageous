@@ -48,10 +48,13 @@
 /*---------------------  Static Classes  ----------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Static Variables  --------------------------*/
 //static int          msglevel                =MSG_LEVEL_DEBUG;
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*---------------------  Static Functions  --------------------------*/
@@ -73,9 +76,15 @@ static int msglevel = MSG_LEVEL_INFO;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_enable_hostapd(PSDevice pDevice, int rtnl_locked)
 {
 	PSDevice apdev_priv;
+=======
+static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
+{
+	struct vnt_private *apdev_priv;
+>>>>>>> v3.18
 =======
 static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 {
@@ -88,9 +97,15 @@ static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: Enabling hostapd mode\n", dev->name);
 
 	pDevice->apdev = kzalloc(sizeof(struct net_device), GFP_KERNEL);
+=======
+	pr_debug("%s: Enabling hostapd mode\n", dev->name);
+
+	pDevice->apdev = alloc_etherdev(sizeof(*apdev_priv));
+>>>>>>> v3.18
 =======
 	pr_debug("%s: Enabling hostapd mode\n", dev->name);
 
@@ -102,7 +117,11 @@ static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 	apdev_priv = netdev_priv(pDevice->apdev);
 	*apdev_priv = *pDevice;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(pDevice->apdev->dev_addr, dev->dev_addr, ETH_ALEN);
+=======
+	eth_hw_addr_inherit(pDevice->apdev, dev);
+>>>>>>> v3.18
 =======
 	eth_hw_addr_inherit(pDevice->apdev, dev);
 >>>>>>> v3.18
@@ -122,6 +141,7 @@ static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 		ret = register_netdev(pDevice->apdev);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: register_netdevice(AP) failed!\n",
 			dev->name);
 		return -1;
@@ -130,6 +150,8 @@ static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: Registered netdevice %s for AP management\n",
 		dev->name, pDevice->apdev->name);
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("%s: register_netdevice(AP) failed!\n",
 			 dev->name);
 		free_netdev(pDevice->apdev);
@@ -139,6 +161,9 @@ static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 
 	pr_debug("%s: Registered netdevice %s for AP management\n",
 		 dev->name, pDevice->apdev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	KeyvInitTable(&pDevice->sKey, pDevice->PortOffset);
@@ -161,9 +186,15 @@ static int hostap_enable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_disable_hostapd(PSDevice pDevice, int rtnl_locked)
 {
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: disabling hostapd mode\n", pDevice->dev->name);
+=======
+static int hostap_disable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
+{
+	pr_debug("%s: disabling hostapd mode\n", pDevice->dev->name);
+>>>>>>> v3.18
 =======
 static int hostap_disable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 {
@@ -176,16 +207,22 @@ static int hostap_disable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 		else
 			unregister_netdev(pDevice->apdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: Netdevice %s unregistered\n",
 			pDevice->dev->name, pDevice->apdev->name);
 	}
 	kfree(pDevice->apdev);
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("%s: Netdevice %s unregistered\n",
 			 pDevice->dev->name, pDevice->apdev->name);
 	}
 	if (pDevice->apdev)
 		free_netdev(pDevice->apdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pDevice->apdev = NULL;
 	pDevice->bEnable8021x = false;
@@ -193,8 +230,13 @@ static int hostap_disable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
 	pDevice->bEncryptionEnable = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //4.2007-0118-03,<Add> by EinsnLiu
 //execute some clear work
+=======
+/* 4.2007-0118-03,<Add> by EinsnLiu */
+/* execute some clear work */
+>>>>>>> v3.18
 =======
 /* 4.2007-0118-03,<Add> by EinsnLiu */
 /* execute some clear work */
@@ -221,7 +263,12 @@ static int hostap_disable_hostapd(struct vnt_private *pDevice, int rtnl_locked)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vt6655_hostap_set_hostapd(PSDevice pDevice, int val, int rtnl_locked)
+=======
+int vt6655_hostap_set_hostapd(struct vnt_private *pDevice,
+			      int val, int rtnl_locked)
+>>>>>>> v3.18
 =======
 int vt6655_hostap_set_hostapd(struct vnt_private *pDevice,
 			      int val, int rtnl_locked)
@@ -255,7 +302,11 @@ int vt6655_hostap_set_hostapd(struct vnt_private *pDevice,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_remove_sta(PSDevice pDevice,
+=======
+static int hostap_remove_sta(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_remove_sta(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -264,17 +315,23 @@ static int hostap_remove_sta(struct vnt_private *pDevice,
 	unsigned int uNodeIndex;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BSSDBbIsSTAInNodeDB(pDevice->pMgmt, param->sta_addr, &uNodeIndex)) {
 		BSSvRemoveOneNode(pDevice, uNodeIndex);
 	} else {
 		return -ENOENT;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (BSSDBbIsSTAInNodeDB(pDevice->pMgmt, param->sta_addr, &uNodeIndex))
 		BSSvRemoveOneNode(pDevice, uNodeIndex);
 	else
 		return -ENOENT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -293,7 +350,11 @@ static int hostap_remove_sta(struct vnt_private *pDevice,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_add_sta(PSDevice pDevice,
+=======
+static int hostap_add_sta(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_add_sta(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -302,6 +363,7 @@ static int hostap_add_sta(struct vnt_private *pDevice,
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	unsigned int uNodeIndex;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!BSSDBbIsSTAInNodeDB(pMgmt, param->sta_addr, &uNodeIndex)) {
 		BSSvCreateOneNode((PSDevice)pDevice, &uNodeIndex);
@@ -321,6 +383,8 @@ static int hostap_add_sta(struct vnt_private *pDevice,
 	pMgmt->sNodeDBTable[uNodeIndex].wMaxBasicRate = RATE_2M;
 	// Todo: check sta preamble, if ap can't support, set status code
 =======
+=======
+>>>>>>> v3.18
 	if (!BSSDBbIsSTAInNodeDB(pMgmt, param->sta_addr, &uNodeIndex))
 		BSSvCreateOneNode(pDevice, &uNodeIndex);
 
@@ -337,6 +401,9 @@ static int hostap_add_sta(struct vnt_private *pDevice,
 	/* set max basic rate */
 	pMgmt->sNodeDBTable[uNodeIndex].wMaxBasicRate = RATE_2M;
 	/* Todo: check sta preamble, if ap can't support, set status code */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pMgmt->sNodeDBTable[uNodeIndex].bShortPreamble =
 		WLAN_GET_CAP_INFO_SHORTPREAMBLE(pMgmt->sNodeDBTable[uNodeIndex].wCapInfo);
@@ -345,6 +412,7 @@ static int hostap_add_sta(struct vnt_private *pDevice,
 
 	pMgmt->sNodeDBTable[uNodeIndex].ulLastRxJiffer = jiffies;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Add STA AID= %d \n", pMgmt->sNodeDBTable[uNodeIndex].wAID);
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "MAC=%2.2X:%2.2X:%2.2X:%2.2X:%2.2X:%2.2X \n",
@@ -358,10 +426,15 @@ static int hostap_add_sta(struct vnt_private *pDevice,
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Max Support rate = %d \n",
 		pMgmt->sNodeDBTable[uNodeIndex].wMaxSuppRate);
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("Add STA AID= %d\n", pMgmt->sNodeDBTable[uNodeIndex].wAID);
 	pr_debug("MAC=%pM\n", param->sta_addr);
 	pr_debug("Max Support rate = %d\n",
 		 pMgmt->sNodeDBTable[uNodeIndex].wMaxSuppRate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -382,7 +455,11 @@ static int hostap_add_sta(struct vnt_private *pDevice,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_get_info_sta(PSDevice pDevice,
+=======
+static int hostap_get_info_sta(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_get_info_sta(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -395,8 +472,11 @@ static int hostap_get_info_sta(struct vnt_private *pDevice,
 		param->u.get_info_sta.inactive_sec =
 			(jiffies - pMgmt->sNodeDBTable[uNodeIndex].ulLastRxJiffer) / HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		//param->u.get_info_sta.txexc = pMgmt->sNodeDBTable[uNodeIndex].uTxAttempts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -408,6 +488,7 @@ static int hostap_get_info_sta(struct vnt_private *pDevice,
 
 /*
  * Description:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *      reset txexec
  *
@@ -442,6 +523,8 @@ static int hostap_get_info_sta(struct vnt_private *pDevice,
  * Description:
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  *      set station flag
  *
  * Parameters:
@@ -454,7 +537,11 @@ static int hostap_get_info_sta(struct vnt_private *pDevice,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_set_flags_sta(PSDevice pDevice,
+=======
+static int hostap_set_flags_sta(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_set_flags_sta(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -467,8 +554,13 @@ static int hostap_set_flags_sta(struct vnt_private *pDevice,
 		pMgmt->sNodeDBTable[uNodeIndex].dwFlags |= param->u.set_flags_sta.flags_or;
 		pMgmt->sNodeDBTable[uNodeIndex].dwFlags &= param->u.set_flags_sta.flags_and;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " dwFlags = %x \n",
 			(unsigned int)pMgmt->sNodeDBTable[uNodeIndex].dwFlags);
+=======
+		pr_debug(" dwFlags = %x\n",
+			 (unsigned int)pMgmt->sNodeDBTable[uNodeIndex].dwFlags);
+>>>>>>> v3.18
 =======
 		pr_debug(" dwFlags = %x\n",
 			 (unsigned int)pMgmt->sNodeDBTable[uNodeIndex].dwFlags);
@@ -494,7 +586,11 @@ static int hostap_set_flags_sta(struct vnt_private *pDevice,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_set_generic_element(PSDevice pDevice,
+=======
+static int hostap_set_generic_element(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_set_generic_element(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -503,6 +599,12 @@ static int hostap_set_generic_element(struct vnt_private *pDevice,
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (param->u.generic_elem.len > sizeof(pMgmt->abyWPAIE))
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (param->u.generic_elem.len > sizeof(pMgmt->abyWPAIE))
 		return -EINVAL;
@@ -515,6 +617,7 @@ static int hostap_set_generic_element(struct vnt_private *pDevice,
 
 	pMgmt->wWPAIELen = param->u.generic_elem.len;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "pMgmt->wWPAIELen = %d\n", pMgmt->wWPAIELen);
 
@@ -529,6 +632,8 @@ static int hostap_set_generic_element(struct vnt_private *pDevice,
 			pMgmt->eAuthenMode = WMAC_AUTH_WPANONE;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Set WPAIE enable WPA\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("pMgmt->wWPAIELen = %d\n", pMgmt->wWPAIELen);
 
 	/* disable wpa */
@@ -541,6 +646,9 @@ static int hostap_set_generic_element(struct vnt_private *pDevice,
 		    (pMgmt->abyWPAIE[0] == WLAN_EID_RSN)) {
 			pMgmt->eAuthenMode = WMAC_AUTH_WPANONE;
 			pr_debug("Set WPAIE enable WPA\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			return -EINVAL;
@@ -563,6 +671,7 @@ static int hostap_set_generic_element(struct vnt_private *pDevice,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hostap_flush_sta(PSDevice pDevice)
 {
 	// reserved node index =0 for multicast node.
@@ -571,11 +680,16 @@ static void hostap_flush_sta(PSDevice pDevice)
 
 	return;
 =======
+=======
+>>>>>>> v3.18
 static void hostap_flush_sta(struct vnt_private *pDevice)
 {
 	/* reserved node index =0 for multicast node. */
 	BSSvClearNodeDBTable(pDevice, 1);
 	pDevice->uAssocCount = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -593,7 +707,11 @@ static void hostap_flush_sta(struct vnt_private *pDevice)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_set_encryption(PSDevice pDevice,
+=======
+static int hostap_set_encryption(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_set_encryption(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -605,9 +723,14 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 	unsigned char abyKey[MAX_KEY_LEN];
 	unsigned char abySeq[MAX_KEY_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NDIS_802_11_KEY_RSC   KeyRSC;
 	unsigned char byKeyDecMode = KEY_CTL_WEP;
 	int     ret = 0;
+=======
+	u64 KeyRSC;
+	unsigned char byKeyDecMode = KEY_CTL_WEP;
+>>>>>>> v3.18
 =======
 	u64 KeyRSC;
 	unsigned char byKeyDecMode = KEY_CTL_WEP;
@@ -619,12 +742,15 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 
 	param->u.crypt.err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
   if (param_len !=
   (int) ((char *) param->u.crypt.key - (char *) param) +
   param->u.crypt.key_len)
   return -EINVAL;
 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -634,7 +760,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 	if ((param->u.crypt.idx > 3) || (param->u.crypt.key_len > MAX_KEY_LEN)) {
 		param->u.crypt.err = HOSTAP_CRYPT_ERR_KEY_SET_FAILED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " HOSTAP_CRYPT_ERR_KEY_SET_FAILED\n");
+=======
+		pr_debug(" HOSTAP_CRYPT_ERR_KEY_SET_FAILED\n");
+>>>>>>> v3.18
 =======
 		pr_debug(" HOSTAP_CRYPT_ERR_KEY_SET_FAILED\n");
 >>>>>>> v3.18
@@ -649,6 +779,7 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 	} else {
 		if (BSSDBbIsSTAInNodeDB(pMgmt, param->sta_addr, &iNodeIndex) == false) {
 			param->u.crypt.err = HOSTAP_CRYPT_ERR_UNKNOWN_ADDR;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " HOSTAP_CRYPT_ERR_UNKNOWN_ADDR\n");
 			return -EINVAL;
@@ -665,6 +796,8 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 					  pDevice->PortOffset) == false) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "KeybRemoveKey fail \n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug(" HOSTAP_CRYPT_ERR_UNKNOWN_ADDR\n");
 			return -EINVAL;
 		}
@@ -679,6 +812,9 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 					  pMgmt->sNodeDBTable[iNodeIndex].dwKeyIndex,
 					  pDevice->PortOffset)) {
 				pr_debug("KeybRemoveKey fail\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			pMgmt->sNodeDBTable[iNodeIndex].bOnFly = false;
@@ -696,17 +832,23 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
 	}
 
 	memcpy(abyKey, param->u.crypt.key, param->u.crypt.key_len);
 	// copy to node key tbl
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 	}
 
 	memcpy(abyKey, param->u.crypt.key, param->u.crypt.key_len);
 	/* copy to node key tbl */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pMgmt->sNodeDBTable[iNodeIndex].byKeyIndex = param->u.crypt.idx;
 	pMgmt->sNodeDBTable[iNodeIndex].uWepKeyLength = param->u.crypt.key_len;
@@ -735,8 +877,13 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// 8021x enable, individual key
 			dwKeyIndex |= (1 << 30); // set pairwise key
+=======
+			/* 8021x enable, individual key */
+			dwKeyIndex |= (1 << 30); /* set pairwise key */
+>>>>>>> v3.18
 =======
 			/* 8021x enable, individual key */
 			dwKeyIndex |= (1 << 30); /* set pairwise key */
@@ -745,6 +892,7 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 				       &param->sta_addr[0],
 				       dwKeyIndex & ~(USE_KEYRSC),
 				       param->u.crypt.key_len,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				       (PQWORD) &(KeyRSC),
 				       (unsigned char *)abyKey,
@@ -756,6 +904,8 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 			} else {
 				// Key Table Full
 =======
+=======
+>>>>>>> v3.18
 				       (u64 *) &KeyRSC,
 				       (unsigned char *)abyKey,
 				       KEY_CTL_WEP,
@@ -765,6 +915,9 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 
 			} else {
 				/* Key Table Full */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pMgmt->sNodeDBTable[iNodeIndex].bOnFly = false;
 				bKeyTableFull = true;
@@ -777,7 +930,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 		pMgmt->sNodeDBTable[iNodeIndex].byCipherSuite = KEY_CTL_WEP;
 		pMgmt->sNodeDBTable[iNodeIndex].dwKeyIndex = dwKeyIndex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -787,7 +944,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 		memcpy(&abySeq, param->u.crypt.seq, 8);
 		for (ii = 0; ii < 8; ii++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			KeyRSC |= (unsigned long)abySeq[ii] << (ii * 8);
+=======
+			KeyRSC |= (u64)abySeq[ii] << (ii * 8);
+>>>>>>> v3.18
 =======
 			KeyRSC |= (u64)abySeq[ii] << (ii * 8);
 >>>>>>> v3.18
@@ -820,7 +981,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 				  dwKeyIndex,
 				  param->u.crypt.key_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  (PQWORD) &(KeyRSC),
+=======
+				  (u64 *) &KeyRSC,
+>>>>>>> v3.18
 =======
 				  (u64 *) &KeyRSC,
 >>>>>>> v3.18
@@ -832,7 +997,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dwKeyIndex |= (1 << 30); // set pairwise key
+=======
+		dwKeyIndex |= (1 << 30); /* set pairwise key */
+>>>>>>> v3.18
 =======
 		dwKeyIndex |= (1 << 30); /* set pairwise key */
 >>>>>>> v3.18
@@ -840,6 +1009,7 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 			       &param->sta_addr[0],
 			       dwKeyIndex,
 			       param->u.crypt.key_len,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       (PQWORD) &(KeyRSC),
 			       (unsigned char *)abyKey,
@@ -854,6 +1024,8 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 			bKeyTableFull = true;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " Key Table Full\n");
 =======
+=======
+>>>>>>> v3.18
 			       (u64 *) &KeyRSC,
 			       (unsigned char *)abyKey,
 			       byKeyDecMode,
@@ -866,11 +1038,15 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 			pMgmt->sNodeDBTable[iNodeIndex].bOnFly = false;
 			bKeyTableFull = true;
 			pr_debug(" Key Table Full\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (bKeyTableFull == true) {
 		wKeyCtl &= 0x7F00;              // clear all key control filed
@@ -894,6 +1070,8 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 
 	// set wep key
 =======
+=======
+>>>>>>> v3.18
 	if (bKeyTableFull) {
 		wKeyCtl &= 0x7F00;              /* clear all key control filed */
 		wKeyCtl |= (byKeyDecMode << 4);
@@ -914,6 +1092,9 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 		 pMgmt->sNodeDBTable[iNodeIndex].abyWepKey[4]);
 
 	/* set wep key */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pDevice->bEncryptionEnable = true;
 	pMgmt->sNodeDBTable[iNodeIndex].byCipherSuite = byKeyDecMode;
@@ -922,7 +1103,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
 	pMgmt->sNodeDBTable[iNodeIndex].wTSC15_0 = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -942,7 +1127,11 @@ static int hostap_set_encryption(struct vnt_private *pDevice,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostap_get_encryption(PSDevice pDevice,
+=======
+static int hostap_get_encryption(struct vnt_private *pDevice,
+>>>>>>> v3.18
 =======
 static int hostap_get_encryption(struct vnt_private *pDevice,
 >>>>>>> v3.18
@@ -951,7 +1140,10 @@ static int hostap_get_encryption(struct vnt_private *pDevice,
 {
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int     ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int     ii;
@@ -965,6 +1157,7 @@ static int hostap_get_encryption(struct vnt_private *pDevice,
 		if (BSSDBbIsSTAInNodeDB(pMgmt, param->sta_addr, &iNodeIndex) == false) {
 			param->u.crypt.err = HOSTAP_CRYPT_ERR_UNKNOWN_ADDR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "hostap_get_encryption: HOSTAP_CRYPT_ERR_UNKNOWN_ADDR\n");
 			return -EINVAL;
 		}
@@ -977,6 +1170,8 @@ static int hostap_get_encryption(struct vnt_private *pDevice,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("hostap_get_encryption: HOSTAP_CRYPT_ERR_UNKNOWN_ADDR\n");
 			return -EINVAL;
 		}
@@ -987,6 +1182,9 @@ static int hostap_get_encryption(struct vnt_private *pDevice,
 		param->u.crypt.seq[ii] = (unsigned char)pMgmt->sNodeDBTable[iNodeIndex].KeyRSC >> (ii * 8);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1004,8 +1202,12 @@ static int hostap_get_encryption(struct vnt_private *pDevice,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int vt6655_hostap_ioctl(PSDevice pDevice, struct iw_point *p)
+=======
+int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
+>>>>>>> v3.18
 =======
 int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 >>>>>>> v3.18
@@ -1019,7 +1221,11 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	param = kmalloc((int)p->length, (int)GFP_KERNEL);
+=======
+	param = kmalloc((int)p->length, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	param = kmalloc((int)p->length, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1034,7 +1240,11 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 	switch (param->cmd) {
 	case VIAWGET_HOSTAPD_SET_ENCRYPTION:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_SET_ENCRYPTION \n");
+=======
+		pr_debug("VIAWGET_HOSTAPD_SET_ENCRYPTION\n");
+>>>>>>> v3.18
 =======
 		pr_debug("VIAWGET_HOSTAPD_SET_ENCRYPTION\n");
 >>>>>>> v3.18
@@ -1044,7 +1254,11 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 		break;
 	case VIAWGET_HOSTAPD_GET_ENCRYPTION:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_GET_ENCRYPTION \n");
+=======
+		pr_debug("VIAWGET_HOSTAPD_GET_ENCRYPTION\n");
+>>>>>>> v3.18
 =======
 		pr_debug("VIAWGET_HOSTAPD_GET_ENCRYPTION\n");
 >>>>>>> v3.18
@@ -1054,17 +1268,23 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 		break;
 	case VIAWGET_HOSTAPD_SET_ASSOC_AP_ADDR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_SET_ASSOC_AP_ADDR \n");
 		return -EOPNOTSUPP;
 		break;
 	case VIAWGET_HOSTAPD_FLUSH:
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_FLUSH \n");
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("VIAWGET_HOSTAPD_SET_ASSOC_AP_ADDR\n");
 		ret = -EOPNOTSUPP;
 		goto out;
 	case VIAWGET_HOSTAPD_FLUSH:
 		pr_debug("VIAWGET_HOSTAPD_FLUSH\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock_irq(&pDevice->lock);
 		hostap_flush_sta(pDevice);
@@ -1072,7 +1292,11 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 		break;
 	case VIAWGET_HOSTAPD_ADD_STA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_ADD_STA \n");
+=======
+		pr_debug("VIAWGET_HOSTAPD_ADD_STA\n");
+>>>>>>> v3.18
 =======
 		pr_debug("VIAWGET_HOSTAPD_ADD_STA\n");
 >>>>>>> v3.18
@@ -1082,7 +1306,11 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 		break;
 	case VIAWGET_HOSTAPD_REMOVE_STA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_REMOVE_STA \n");
+=======
+		pr_debug("VIAWGET_HOSTAPD_REMOVE_STA\n");
+>>>>>>> v3.18
 =======
 		pr_debug("VIAWGET_HOSTAPD_REMOVE_STA\n");
 >>>>>>> v3.18
@@ -1091,6 +1319,7 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 		spin_unlock_irq(&pDevice->lock);
 		break;
 	case VIAWGET_HOSTAPD_GET_INFO_STA:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_HOSTAPD_GET_INFO_STA \n");
 		ret = hostap_get_info_sta(pDevice, param);
@@ -1137,6 +1366,8 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 			goto out;
 		}
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("VIAWGET_HOSTAPD_GET_INFO_STA\n");
 		ret = hostap_get_info_sta(pDevice, param);
 		ap_ioctl = 1;
@@ -1171,13 +1402,19 @@ int vt6655_hostap_ioctl(struct vnt_private *pDevice, struct iw_point *p)
 	if ((ret == 0) && ap_ioctl) {
 		if (copy_to_user(p->pointer, param, p->length))
 			ret = -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 out:
 	kfree(param);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

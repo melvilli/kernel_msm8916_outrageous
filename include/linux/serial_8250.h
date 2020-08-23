@@ -75,13 +75,19 @@ struct uart_8250_port {
 	unsigned short		capabilities;	/* port capabilities */
 	unsigned short		bugs;		/* port bugs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		tx_loadsz;	/* transmit fifo load size */
 	unsigned char		acr;
 =======
+=======
+>>>>>>> v3.18
 	bool			fifo_bug;	/* min RX trigger if enabled */
 	unsigned int		tx_loadsz;	/* transmit fifo load size */
 	unsigned char		acr;
 	unsigned char		fcr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char		ier;
 	unsigned char		lcr;
@@ -90,6 +96,10 @@ struct uart_8250_port {
 	unsigned char		mcr_force;	/* mask of forced bits */
 	unsigned char		cur_iotype;	/* Running I/O type */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		rpm_tx_active;
+>>>>>>> v3.18
 =======
 	unsigned int		rpm_tx_active;
 >>>>>>> v3.18
@@ -106,6 +116,10 @@ struct uart_8250_port {
 
 	struct uart_8250_dma	*dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct serial_rs485     rs485;
+>>>>>>> v3.18
 =======
 	struct serial_rs485     rs485;
 >>>>>>> v3.18
@@ -114,9 +128,12 @@ struct uart_8250_port {
 	int			(*dl_read)(struct uart_8250_port *);
 	void			(*dl_write)(struct uart_8250_port *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int			(*rs485_config)(struct uart_8250_port *,
 						struct serial_rs485 *rs485);
 };
@@ -126,6 +143,9 @@ static inline struct uart_8250_port *up_to_u8250p(struct uart_port *up)
 	return container_of(up, struct uart_8250_port, port);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int serial8250_register_8250_port(struct uart_8250_port *);
 void serial8250_unregister_port(int line);
@@ -142,6 +162,11 @@ extern int setup_early_serial8250_console(char *cmdline);
 extern void serial8250_do_set_termios(struct uart_port *port,
 		struct ktermios *termios, struct ktermios *old);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int serial8250_do_startup(struct uart_port *port);
+extern void serial8250_do_shutdown(struct uart_port *port);
+>>>>>>> v3.18
 =======
 extern int serial8250_do_startup(struct uart_port *port);
 extern void serial8250_do_shutdown(struct uart_port *port);

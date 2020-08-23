@@ -108,15 +108,21 @@ typedef u32 prom_arg_t;
 
 struct prom_args {
 <<<<<<< HEAD
+<<<<<<< HEAD
         u32 service;
         u32 nargs;
         u32 nret;
         prom_arg_t args[10];
 =======
+=======
+>>>>>>> v3.18
         __be32 service;
         __be32 nargs;
         __be32 nret;
         __be32 args[10];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -131,17 +137,23 @@ struct prom_t {
 
 struct mem_map_entry {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64	base;
 	u64	size;
 };
 
 typedef u32 cell_t;
 =======
+=======
+>>>>>>> v3.18
 	__be64	base;
 	__be64	size;
 };
 
 typedef __be32 cell_t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void __start(unsigned long r3, unsigned long r4, unsigned long r5,
@@ -212,6 +224,11 @@ static int __initdata mem_reserve_cnt;
 static cell_t __initdata regbuf[1024];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool rtas_has_query_cpu_stopped;
+
+>>>>>>> v3.18
 =======
 static bool rtas_has_query_cpu_stopped;
 
@@ -240,6 +257,7 @@ static int __init call_prom(const char *service, int nargs, int nret, ...)
 	va_list list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	args.service = ADDR(service);
 	args.nargs = nargs;
 	args.nret = nret;
@@ -248,6 +266,8 @@ static int __init call_prom(const char *service, int nargs, int nret, ...)
 	for (i = 0; i < nargs; i++)
 		args.args[i] = va_arg(list, prom_arg_t);
 =======
+=======
+>>>>>>> v3.18
 	args.service = cpu_to_be32(ADDR(service));
 	args.nargs = cpu_to_be32(nargs);
 	args.nret = cpu_to_be32(nret);
@@ -255,6 +275,9 @@ static int __init call_prom(const char *service, int nargs, int nret, ...)
 	va_start(list, nret);
 	for (i = 0; i < nargs; i++)
 		args.args[i] = cpu_to_be32(va_arg(list, prom_arg_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	va_end(list);
 
@@ -265,7 +288,11 @@ static int __init call_prom(const char *service, int nargs, int nret, ...)
 		return PROM_ERROR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (nret > 0) ? args.args[nargs] : 0;
+=======
+	return (nret > 0) ? be32_to_cpu(args.args[nargs]) : 0;
+>>>>>>> v3.18
 =======
 	return (nret > 0) ? be32_to_cpu(args.args[nargs]) : 0;
 >>>>>>> v3.18
@@ -279,6 +306,7 @@ static int __init call_prom_ret(const char *service, int nargs, int nret,
 	va_list list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	args.service = ADDR(service);
 	args.nargs = nargs;
 	args.nret = nret;
@@ -287,6 +315,8 @@ static int __init call_prom_ret(const char *service, int nargs, int nret,
 	for (i = 0; i < nargs; i++)
 		args.args[i] = va_arg(list, prom_arg_t);
 =======
+=======
+>>>>>>> v3.18
 	args.service = cpu_to_be32(ADDR(service));
 	args.nargs = cpu_to_be32(nargs);
 	args.nret = cpu_to_be32(nret);
@@ -294,6 +324,9 @@ static int __init call_prom_ret(const char *service, int nargs, int nret,
 	va_start(list, rets);
 	for (i = 0; i < nargs; i++)
 		args.args[i] = cpu_to_be32(va_arg(list, prom_arg_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	va_end(list);
 
@@ -306,9 +339,15 @@ static int __init call_prom_ret(const char *service, int nargs, int nret,
 	if (rets != NULL)
 		for (i = 1; i < nret; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rets[i-1] = args.args[nargs+i];
 
 	return (nret > 0) ? args.args[nargs] : 0;
+=======
+			rets[i-1] = be32_to_cpu(args.args[nargs+i]);
+
+	return (nret > 0) ? be32_to_cpu(args.args[nargs]) : 0;
+>>>>>>> v3.18
 =======
 			rets[i-1] = be32_to_cpu(args.args[nargs+i]);
 
@@ -578,7 +617,11 @@ static int __init prom_setprop(phandle node, const char *nodename,
 #define toupper(c)	(islower(c) ? ((c) - 'a' + 'A') : (c))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long prom_strtoul(const char *cp, const char **endp)
+=======
+static unsigned long prom_strtoul(const char *cp, const char **endp)
+>>>>>>> v3.18
 =======
 static unsigned long prom_strtoul(const char *cp, const char **endp)
 >>>>>>> v3.18
@@ -607,7 +650,11 @@ static unsigned long prom_strtoul(const char *cp, const char **endp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long prom_memparse(const char *ptr, const char **retptr)
+=======
+static unsigned long prom_memparse(const char *ptr, const char **retptr)
+>>>>>>> v3.18
 =======
 static unsigned long prom_memparse(const char *ptr, const char **retptr)
 >>>>>>> v3.18
@@ -703,7 +750,12 @@ unsigned char ibm_architecture_vec[] = {
 	W(0xffff0000), W(0x003e0000),	/* POWER6 */
 	W(0xffff0000), W(0x003f0000),	/* POWER7 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	W(0xffff0000), W(0x004b0000),	/* POWER8 */
+=======
+	W(0xffff0000), W(0x004b0000),	/* POWER8E */
+	W(0xffff0000), W(0x004d0000),	/* POWER8 */
+>>>>>>> v3.18
 =======
 	W(0xffff0000), W(0x004b0000),	/* POWER8E */
 	W(0xffff0000), W(0x004d0000),	/* POWER8 */
@@ -770,7 +822,11 @@ unsigned char ibm_architecture_vec[] = {
 	 * the structure layout changes.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IBM_ARCH_VEC_NRCORES_OFFSET	117
+=======
+#define IBM_ARCH_VEC_NRCORES_OFFSET	125
+>>>>>>> v3.18
 =======
 #define IBM_ARCH_VEC_NRCORES_OFFSET	125
 >>>>>>> v3.18
@@ -791,7 +847,12 @@ unsigned char ibm_architecture_vec[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Old method - ELF header with PT_NOTE sections */
+=======
+/* Old method - ELF header with PT_NOTE sections only works on BE */
+#ifdef __BIG_ENDIAN__
+>>>>>>> v3.18
 =======
 /* Old method - ELF header with PT_NOTE sections only works on BE */
 #ifdef __BIG_ENDIAN__
@@ -882,6 +943,10 @@ static struct fake_elf {
 	}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* __BIG_ENDIAN__ */
+>>>>>>> v3.18
 =======
 #endif /* __BIG_ENDIAN__ */
 >>>>>>> v3.18
@@ -928,14 +993,20 @@ static int __init prom_count_smt_threads(void)
 static void __init prom_send_capabilities(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ihandle elfloader, root;
 	prom_arg_t ret;
 	u32 *cores;
 =======
+=======
+>>>>>>> v3.18
 	ihandle root;
 	prom_arg_t ret;
 	u32 cores;
 	unsigned char *ptcores;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	root = call_prom("open", 1, 1, ADDR("/"));
@@ -947,6 +1018,7 @@ static void __init prom_send_capabilities(void)
 		 * divide NR_CPUS.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cores = (u32 *)&ibm_architecture_vec[IBM_ARCH_VEC_NRCORES_OFFSET];
 		if (*cores != NR_CPUS) {
 			prom_printf("WARNING ! "
@@ -957,6 +1029,8 @@ static void __init prom_send_capabilities(void)
 			prom_printf("Max number of cores passed to firmware: %lu (NR_CPUS = %lu)\n",
 				    *cores, NR_CPUS);
 =======
+=======
+>>>>>>> v3.18
 
 		/* The core value may start at an odd address. If such a word
 		 * access is made at a cache line boundary, this leads to an
@@ -981,6 +1055,9 @@ static void __init prom_send_capabilities(void)
 			ptcores[1] = (cores >> 16) & 0xff;
 			ptcores[2] = (cores >> 8) & 0xff;
 			ptcores[3] = cores & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1003,6 +1080,7 @@ static void __init prom_send_capabilities(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* no ibm,client-architecture-support call, try the old way */
 	elfloader = call_prom("open", 1, 1, ADDR("/packages/elf-loader"));
 	if (elfloader == 0) {
@@ -1015,6 +1093,8 @@ static void __init prom_send_capabilities(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef __BIG_ENDIAN__
 	{
 		ihandle elfloader;
@@ -1033,6 +1113,9 @@ static void __init prom_send_capabilities(void)
 #endif /* __BIG_ENDIAN__ */
 }
 #endif /* #if defined(CONFIG_PPC_PSERIES) || defined(CONFIG_PPC_POWERNV) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1181,17 +1264,23 @@ static unsigned long __init prom_next_cell(int s, cell_t **cellp)
 		s--;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = *p++;
 #ifdef CONFIG_PPC64
 	if (s > 1) {
 		r <<= 32;
 		r |= *(p++);
 =======
+=======
+>>>>>>> v3.18
 	r = be32_to_cpu(*p++);
 #ifdef CONFIG_PPC64
 	if (s > 1) {
 		r <<= 32;
 		r |= be32_to_cpu(*(p++));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
@@ -1226,8 +1315,13 @@ static void __init reserve_mem(u64 base, u64 size)
 	if (cnt >= (MEM_RESERVE_MAP_SIZE - 1))
 		prom_panic("Memory reserve map exhausted !\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_reserve_map[cnt].base = base;
 	mem_reserve_map[cnt].size = size;
+=======
+	mem_reserve_map[cnt].base = cpu_to_be64(base);
+	mem_reserve_map[cnt].size = cpu_to_be64(size);
+>>>>>>> v3.18
 =======
 	mem_reserve_map[cnt].base = cpu_to_be64(base);
 	mem_reserve_map[cnt].size = cpu_to_be64(size);
@@ -1246,6 +1340,10 @@ static void __init prom_init_mem(void)
 	unsigned int plen;
 	cell_t *p, *endp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be32 val;
+>>>>>>> v3.18
 =======
 	__be32 val;
 >>>>>>> v3.18
@@ -1257,6 +1355,7 @@ static void __init prom_init_mem(void)
 	 * 2) top of memory
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rac = 2;
 	prom_getprop(prom.root, "#address-cells", &rac, sizeof(rac));
 	rsc = 1;
@@ -1264,6 +1363,8 @@ static void __init prom_init_mem(void)
 	prom_debug("root_addr_cells: %x\n", (unsigned long) rac);
 	prom_debug("root_size_cells: %x\n", (unsigned long) rsc);
 =======
+=======
+>>>>>>> v3.18
 	val = cpu_to_be32(2);
 	prom_getprop(prom.root, "#address-cells", &val, sizeof(val));
 	rac = be32_to_cpu(val);
@@ -1272,6 +1373,9 @@ static void __init prom_init_mem(void)
 	rsc = be32_to_cpu(val);
 	prom_debug("root_addr_cells: %x\n", rac);
 	prom_debug("root_size_cells: %x\n", rsc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	prom_debug("scanning memory:\n");
@@ -1381,11 +1485,14 @@ static void __init prom_init_mem(void)
 static void __init prom_close_stdin(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ihandle val;
 
 	if (prom_getprop(prom.chosen, "stdin", &val, sizeof(val)) > 0)
 		call_prom("close", 1, 0, val);
 =======
+=======
+>>>>>>> v3.18
 	__be32 val;
 	ihandle stdin;
 
@@ -1393,11 +1500,15 @@ static void __init prom_close_stdin(void)
 		stdin = be32_to_cpu(val);
 		call_prom("close", 1, 0, stdin);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 #ifdef CONFIG_PPC_POWERNV
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u64 __initdata prom_opal_size;
 static u64 __initdata prom_opal_align;
@@ -1407,11 +1518,14 @@ static u64 __initdata prom_rtas_entry;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_EARLY_DEBUG_OPAL
 static u64 __initdata prom_opal_base;
 static u64 __initdata prom_opal_entry;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* XXX Don't change this structure without updating opal-takeover.S */
 static struct opal_secondary_data {
@@ -1600,6 +1714,8 @@ static void __init prom_opal_takeover(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Allocate room for and instantiate OPAL
  */
@@ -1610,6 +1726,10 @@ static void __init prom_instantiate_opal(void)
 	u64 base, entry;
 	u64 size = 0, align = 0x10000;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be64 val64;
+>>>>>>> v3.18
 =======
 	__be64 val64;
 >>>>>>> v3.18
@@ -1623,12 +1743,15 @@ static void __init prom_instantiate_opal(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom_getprop(opal_node, "opal-runtime-size", &size, sizeof(size));
 	if (size == 0)
 		return;
 	prom_getprop(opal_node, "opal-runtime-alignment", &align,
 		     sizeof(align));
 =======
+=======
+>>>>>>> v3.18
 	val64 = 0;
 	prom_getprop(opal_node, "opal-runtime-size", &val64, sizeof(val64));
 	size = be64_to_cpu(val64);
@@ -1637,6 +1760,9 @@ static void __init prom_instantiate_opal(void)
 	val64 = 0;
 	prom_getprop(opal_node, "opal-runtime-alignment", &val64,sizeof(val64));
 	align = be64_to_cpu(val64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	base = alloc_down(size, align, 0);
@@ -1695,6 +1821,10 @@ static void __init prom_instantiate_rtas(void)
 	ihandle rtas_inst;
 	u32 base, entry = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be32 val;
+>>>>>>> v3.18
 =======
 	__be32 val;
 >>>>>>> v3.18
@@ -1708,7 +1838,13 @@ static void __init prom_instantiate_rtas(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom_getprop(rtas_node, "rtas-size", &size, sizeof(size));
+=======
+	val = 0;
+	prom_getprop(rtas_node, "rtas-size", &val, sizeof(size));
+	size = be32_to_cpu(val);
+>>>>>>> v3.18
 =======
 	val = 0;
 	prom_getprop(rtas_node, "rtas-size", &val, sizeof(size));
@@ -1741,6 +1877,7 @@ static void __init prom_instantiate_rtas(void)
 	reserve_mem(base, size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom_setprop(rtas_node, "/rtas", "linux,rtas-base",
 		     &base, sizeof(base));
 	prom_setprop(rtas_node, "/rtas", "linux,rtas-entry",
@@ -1753,6 +1890,8 @@ static void __init prom_instantiate_rtas(void)
 	prom_getprop(rtas_node, "start-cpu", &prom_rtas_start_cpu, 4);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	val = cpu_to_be32(base);
 	prom_setprop(rtas_node, "/rtas", "linux,rtas-base",
 		     &val, sizeof(val));
@@ -1765,6 +1904,9 @@ static void __init prom_instantiate_rtas(void)
 			 &val, sizeof(val)) != PROM_ERROR)
 		rtas_has_query_cpu_stopped = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prom_debug("rtas base     = 0x%x\n", base);
 	prom_debug("rtas entry    = 0x%x\n", entry);
@@ -1835,6 +1977,10 @@ static void __init prom_instantiate_sml(void)
  * Allocate room for and initialize TCE tables
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __BIG_ENDIAN__
+>>>>>>> v3.18
 =======
 #ifdef __BIG_ENDIAN__
 >>>>>>> v3.18
@@ -1967,7 +2113,12 @@ static void __init prom_initialize_tce_table(void)
 	prom_debug("ending prom_initialize_tce_table\n");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* __BIG_ENDIAN__ */
+#endif /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #endif /* __BIG_ENDIAN__ */
 #endif /* CONFIG_PPC64 */
@@ -2001,7 +2152,10 @@ static void __init prom_hold_cpus(void)
 {
 	unsigned long i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int reg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	phandle node;
@@ -2013,7 +2167,10 @@ static void __init prom_hold_cpus(void)
 	unsigned long secondary_hold = LOW_ADDR(__secondary_hold);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * On pseries, if RTAS supports "query-cpu-stopped-state",
 	 * we skip this stage, the CPUs will be started by the
@@ -2026,6 +2183,9 @@ static void __init prom_hold_cpus(void)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prom_debug("prom_hold_cpus: start...\n");
 	prom_debug("    1) spinloop       = 0x%x\n", (unsigned long)spinloop);
@@ -2045,6 +2205,12 @@ static void __init prom_hold_cpus(void)
 	/* look for cpus */
 	for (node = 0; prom_next_node(&node); ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		unsigned int cpu_no;
+		__be32 reg;
+
+>>>>>>> v3.18
 =======
 		unsigned int cpu_no;
 		__be32 reg;
@@ -2061,16 +2227,22 @@ static void __init prom_hold_cpus(void)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = -1;
 		prom_getprop(node, "reg", &reg, sizeof(reg));
 
 		prom_debug("cpu hw idx   = %lu\n", reg);
 =======
+=======
+>>>>>>> v3.18
 		reg = cpu_to_be32(-1); /* make sparse happy */
 		prom_getprop(node, "reg", &reg, sizeof(reg));
 		cpu_no = be32_to_cpu(reg);
 
 		prom_debug("cpu hw idx   = %lu\n", cpu_no);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Init the acknowledge var which will be reset by
@@ -2080,17 +2252,23 @@ static void __init prom_hold_cpus(void)
 		*acknowledge = (unsigned long)-1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (reg != prom.cpu) {
 			/* Primary Thread of non-boot cpu or any thread */
 			prom_printf("starting cpu hw idx %lu... ", reg);
 			call_prom("start-cpu", 3, 0, node,
 				  secondary_hold, reg);
 =======
+=======
+>>>>>>> v3.18
 		if (cpu_no != prom.cpu) {
 			/* Primary Thread of non-boot cpu or any thread */
 			prom_printf("starting cpu hw idx %lu... ", cpu_no);
 			call_prom("start-cpu", 3, 0, node,
 				  secondary_hold, cpu_no);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			for (i = 0; (i < 100000000) && 
@@ -2098,7 +2276,11 @@ static void __init prom_hold_cpus(void)
 				mb();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (*acknowledge == reg)
+=======
+			if (*acknowledge == cpu_no)
+>>>>>>> v3.18
 =======
 			if (*acknowledge == cpu_no)
 >>>>>>> v3.18
@@ -2109,7 +2291,11 @@ static void __init prom_hold_cpus(void)
 #ifdef CONFIG_SMP
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			prom_printf("boot cpu hw idx %lu\n", reg);
+=======
+			prom_printf("boot cpu hw idx %lu\n", cpu_no);
+>>>>>>> v3.18
 =======
 			prom_printf("boot cpu hw idx %lu\n", cpu_no);
 >>>>>>> v3.18
@@ -2167,6 +2353,10 @@ static void __init prom_find_mmu(void)
 	prom_getprop(prom.chosen, "mmu", &prom.mmumap,
 		     sizeof(prom.mmumap));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prom.mmumap = be32_to_cpu(prom.mmumap);
+>>>>>>> v3.18
 =======
 	prom.mmumap = be32_to_cpu(prom.mmumap);
 >>>>>>> v3.18
@@ -2182,7 +2372,12 @@ static void __init prom_init_stdout(void)
 	char *path = of_stdout_device;
 	char type[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 val;
+=======
+	phandle stdout_node;
+	__be32 val;
+>>>>>>> v3.18
 =======
 	phandle stdout_node;
 	__be32 val;
@@ -2192,7 +2387,11 @@ static void __init prom_init_stdout(void)
 		prom_panic("cannot find stdout");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom.stdout = val;
+=======
+	prom.stdout = be32_to_cpu(val);
+>>>>>>> v3.18
 =======
 	prom.stdout = be32_to_cpu(val);
 >>>>>>> v3.18
@@ -2201,9 +2400,12 @@ static void __init prom_init_stdout(void)
 	memset(path, 0, 256);
 	call_prom("instance-to-path", 3, 1, prom.stdout, path, 255);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = call_prom("instance-to-package", 1, 1, prom.stdout);
 	prom_setprop(prom.chosen, "/chosen", "linux,stdout-package",
 		     &val, sizeof(val));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	prom_printf("OF stdout device is: %s\n", of_stdout_device);
@@ -2211,12 +2413,15 @@ static void __init prom_init_stdout(void)
 		     path, strlen(path) + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If it's a display, note it */
 	memset(type, 0, sizeof(type));
 	prom_getprop(val, "device_type", type, sizeof(type));
 	if (strcmp(type, "display") == 0)
 		prom_setprop(val, path, "linux,boot-display", NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	/* instance-to-package fails on PA-Semi */
 	stdout_node = call_prom("instance-to-package", 1, 1, prom.stdout);
 	if (stdout_node != PROM_ERROR) {
@@ -2230,6 +2435,9 @@ static void __init prom_init_stdout(void)
 		if (strcmp(type, "display") == 0)
 			prom_setprop(stdout_node, path, "linux,boot-display", NULL, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2386,7 +2594,10 @@ static void __init prom_check_displays(void)
 				break;
 #endif /* CONFIG_LOGO_LINUX_CLUT224 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_EARLY_DEBUG_BOOTX
 		if (prom_getprop(node, "linux,boot-display", NULL, 0) !=
@@ -2403,6 +2614,9 @@ static void __init prom_check_displays(void)
 			btext_setup_display(width, height, 8, pitch, addr);
 		}
 #endif /* CONFIG_PPC_EARLY_DEBUG_BOOTX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2440,13 +2654,19 @@ static void __init *make_room(unsigned long *mem_start, unsigned long *mem_end,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dt_push_token(token, mem_start, mem_end) \
 	do { *((u32 *)make_room(mem_start, mem_end, 4, 4)) = token; } while(0)
 =======
+=======
+>>>>>>> v3.18
 #define dt_push_token(token, mem_start, mem_end) do { 			\
 		void *room = make_room(mem_start, mem_end, 4, 4);	\
 		*(__be32 *)room = cpu_to_be32(token);			\
 	} while(0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned long __init dt_find_string(char *str)
@@ -2621,7 +2841,11 @@ static void __init scan_dt_build_struct(phandle node, unsigned long *mem_start,
 			dt_push_token(soff, mem_start, mem_end);
 			valp = make_room(mem_start, mem_end, 4, 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(u32 *)valp = node;
+=======
+			*(__be32 *)valp = cpu_to_be32(node);
+>>>>>>> v3.18
 =======
 			*(__be32 *)valp = cpu_to_be32(node);
 >>>>>>> v3.18
@@ -2698,6 +2922,7 @@ static void __init flatten_device_tree(void)
 
 	/* Finish header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdr->boot_cpuid_phys = prom.cpu;
 	hdr->magic = OF_DT_HEADER;
 	hdr->totalsize = dt_struct_end - dt_header_start;
@@ -2709,6 +2934,8 @@ static void __init flatten_device_tree(void)
 	/* Version 16 is not backward compatible */
 	hdr->last_comp_version = 0x10;
 =======
+=======
+>>>>>>> v3.18
 	hdr->boot_cpuid_phys = cpu_to_be32(prom.cpu);
 	hdr->magic = cpu_to_be32(OF_DT_HEADER);
 	hdr->totalsize = cpu_to_be32(dt_struct_end - dt_header_start);
@@ -2719,6 +2946,9 @@ static void __init flatten_device_tree(void)
 	hdr->version = cpu_to_be32(OF_DT_VERSION);
 	/* Version 16 is not backward compatible */
 	hdr->last_comp_version = cpu_to_be32(0x10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Copy the reserve map in */
@@ -2731,8 +2961,13 @@ static void __init flatten_device_tree(void)
 		for (i = 0; i < mem_reserve_cnt; i++)
 			prom_printf("  %x - %x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    mem_reserve_map[i].base,
 				    mem_reserve_map[i].size);
+=======
+				    be64_to_cpu(mem_reserve_map[i].base),
+				    be64_to_cpu(mem_reserve_map[i].size));
+>>>>>>> v3.18
 =======
 				    be64_to_cpu(mem_reserve_map[i].base),
 				    be64_to_cpu(mem_reserve_map[i].size));
@@ -2749,7 +2984,10 @@ static void __init flatten_device_tree(void)
 	prom_printf("Device tree struct  0x%x -> 0x%x\n",
 		    dt_struct_start, dt_struct_end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3085,6 +3323,7 @@ static void __init fixup_device_tree(void)
 static void __init prom_find_boot_cpu(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 getprop_rval;
 	ihandle prom_cpu;
 	phandle cpu_pkg;
@@ -3098,6 +3337,8 @@ static void __init prom_find_boot_cpu(void)
 	prom_getprop(cpu_pkg, "reg", &getprop_rval, sizeof(getprop_rval));
 	prom.cpu = getprop_rval;
 =======
+=======
+>>>>>>> v3.18
 	__be32 rval;
 	ihandle prom_cpu;
 	phandle cpu_pkg;
@@ -3111,6 +3352,9 @@ static void __init prom_find_boot_cpu(void)
 
 	prom_getprop(cpu_pkg, "reg", &rval, sizeof(rval));
 	prom.cpu = be32_to_cpu(rval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	prom_debug("Booting CPU hw index = %lu\n", prom.cpu);
@@ -3121,7 +3365,11 @@ static void __init prom_check_initrd(unsigned long r3, unsigned long r4)
 #ifdef CONFIG_BLK_DEV_INITRD
 	if (r3 && r4 && r4 != 0xdeadbeef) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long val;
+=======
+		__be64 val;
+>>>>>>> v3.18
 =======
 		__be64 val;
 >>>>>>> v3.18
@@ -3130,15 +3378,21 @@ static void __init prom_check_initrd(unsigned long r3, unsigned long r4)
 		prom_initrd_end = prom_initrd_start + r4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = prom_initrd_start;
 		prom_setprop(prom.chosen, "/chosen", "linux,initrd-start",
 			     &val, sizeof(val));
 		val = prom_initrd_end;
 =======
+=======
+>>>>>>> v3.18
 		val = cpu_to_be64(prom_initrd_start);
 		prom_setprop(prom.chosen, "/chosen", "linux,initrd-start",
 			     &val, sizeof(val));
 		val = cpu_to_be64(prom_initrd_end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		prom_setprop(prom.chosen, "/chosen", "linux,initrd-end",
 			     &val, sizeof(val));
@@ -3297,7 +3551,11 @@ unsigned long __init prom_init(unsigned long r3, unsigned long r4,
 	prom_check_displays();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC64
+=======
+#if defined(CONFIG_PPC64) && defined(__BIG_ENDIAN__)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_PPC64) && defined(__BIG_ENDIAN__)
 >>>>>>> v3.18
@@ -3320,6 +3578,7 @@ unsigned long __init prom_init(unsigned long r3, unsigned long r4,
 
 #ifdef CONFIG_PPC_POWERNV
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Detect HAL and try instanciating it & doing takeover */
 	if (of_platform == PLATFORM_PSERIES_LPAR) {
 		prom_query_opal();
@@ -3330,6 +3589,11 @@ unsigned long __init prom_init(unsigned long r3, unsigned long r4,
 	} else if (of_platform == PLATFORM_OPAL)
 		prom_instantiate_opal();
 #endif
+=======
+	if (of_platform == PLATFORM_OPAL)
+		prom_instantiate_opal();
+#endif /* CONFIG_PPC_POWERNV */
+>>>>>>> v3.18
 =======
 	if (of_platform == PLATFORM_OPAL)
 		prom_instantiate_opal();
@@ -3346,6 +3610,11 @@ unsigned long __init prom_init(unsigned long r3, unsigned long r4,
 	 *
 	 * PowerMacs use a different mechanism to spin CPUs
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 *
+	 * (This must be done after instanciating RTAS)
+>>>>>>> v3.18
 =======
 	 *
 	 * (This must be done after instanciating RTAS)
@@ -3359,16 +3628,22 @@ unsigned long __init prom_init(unsigned long r3, unsigned long r4,
 	 * Fill in some infos for use by the kernel later on
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (prom_memory_limit)
 		prom_setprop(prom.chosen, "/chosen", "linux,memory-limit",
 			     &prom_memory_limit,
 			     sizeof(prom_memory_limit));
 =======
+=======
+>>>>>>> v3.18
 	if (prom_memory_limit) {
 		__be64 val = cpu_to_be64(prom_memory_limit);
 		prom_setprop(prom.chosen, "/chosen", "linux,memory-limit",
 			     &val, sizeof(val));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC64
 	if (prom_iommu_off)

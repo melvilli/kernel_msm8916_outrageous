@@ -51,13 +51,19 @@ static inline void get_bit_address(struct super_block *s,
 				   unsigned int *offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* It is in the bitmap block number equal to the block
 	 * number divided by the number of bits in a block. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * It is in the bitmap block number equal to the block
 	 * number divided by the number of bits in a block.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*bmap_nr = block >> (s->s_blocksize_bits + 3);
 	/* Within that bitmap block it is located at bit offset *offset. */
@@ -79,17 +85,23 @@ int is_reusable(struct super_block *s, b_blocknr_t block, int bit_value)
 	get_bit_address(s, block, &bmap, &offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Old format filesystem? Unlikely, but the bitmaps are all up front so
 	 * we need to account for it. */
 	if (unlikely(test_bit(REISERFS_OLD_FORMAT,
 			      &(REISERFS_SB(s)->s_properties)))) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Old format filesystem? Unlikely, but the bitmaps are all
 	 * up front so we need to account for it.
 	 */
 	if (unlikely(test_bit(REISERFS_OLD_FORMAT,
 			      &REISERFS_SB(s)->s_properties))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		b_blocknr_t bmap1 = REISERFS_SB(s)->s_sbh->b_blocknr + 1;
 		if (block >= bmap1 &&
@@ -125,14 +137,20 @@ int is_reusable(struct super_block *s, b_blocknr_t block, int bit_value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* searches in journal structures for a given block number (bmap, off). If block
    is found in reiserfs journal it suggests next free block candidate to test. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Searches in journal structures for a given block number (bmap, off).
  * If block is found in reiserfs journal it suggests next free block
  * candidate to test.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int is_block_in_journal(struct super_block *s, unsigned int bmap,
 				      int off, int *next)
@@ -145,7 +163,11 @@ static inline int is_block_in_journal(struct super_block *s, unsigned int bmap,
 			PROC_INFO_INC(s, scan_bitmap.in_journal_hint);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(*next) = off + 1;	/* inc offset to avoid looping. */
+=======
+			(*next) = off + 1;  /* inc offset to avoid looping. */
+>>>>>>> v3.18
 =======
 			(*next) = off + 1;  /* inc offset to avoid looping. */
 >>>>>>> v3.18
@@ -158,13 +180,19 @@ static inline int is_block_in_journal(struct super_block *s, unsigned int bmap,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* it searches for a window of zero bits with given minimum and maximum lengths in one bitmap
  * block; */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Searches for a window of zero bits with given minimum and maximum
  * lengths in one bitmap block
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int scan_bitmap_block(struct reiserfs_transaction_handle *th,
 			     unsigned int bmap_n, int *beg, int boundary,
@@ -178,6 +206,7 @@ static int scan_bitmap_block(struct reiserfs_transaction_handle *th,
 
 	BUG_ON(!th->t_trans_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	RFALSE(bmap_n >= reiserfs_bmap_count(s), "Bitmap %u is out of "
 	       "range (0..%u)", bmap_n, reiserfs_bmap_count(s) - 1);
@@ -186,6 +215,11 @@ static int scan_bitmap_block(struct reiserfs_transaction_handle *th,
    work here for the reader.  Convey a sense of the design here. What
    is a window? */
 /* - I mean `a window of zero bits' as in description of this function - Zam. */
+=======
+	RFALSE(bmap_n >= reiserfs_bmap_count(s), "Bitmap %u is out of "
+	       "range (0..%u)", bmap_n, reiserfs_bmap_count(s) - 1);
+	PROC_INFO_INC(s, scan_bitmap.bmap);
+>>>>>>> v3.18
 =======
 	RFALSE(bmap_n >= reiserfs_bmap_count(s), "Bitmap %u is out of "
 	       "range (0..%u)", bmap_n, reiserfs_bmap_count(s) - 1);
@@ -204,15 +238,21 @@ static int scan_bitmap_block(struct reiserfs_transaction_handle *th,
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      cont:
 		if (bi->free_count < min) {
 			brelse(bh);
 			return 0;	// No free blocks in this bitmap
 =======
+=======
+>>>>>>> v3.18
 cont:
 		if (bi->free_count < min) {
 			brelse(bh);
 			return 0;	/* No free blocks in this bitmap */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -221,14 +261,20 @@ cont:
 		    ((unsigned long *)(bh->b_data), boundary, *beg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*beg + min > boundary) {	/* search for a zero bit fails or the rest of bitmap block
 						 * cannot contain a zero window of minimum size */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * search for a zero bit fails or the rest of bitmap block
 		 * cannot contain a zero window of minimum size
 		 */
 		if (*beg + min > boundary) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			brelse(bh);
 			return 0;
@@ -244,20 +290,27 @@ cont:
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* finding the other end of zero bit window requires looking into journal structures (in
 			 * case of searching for free blocks for unformatted nodes) */
 =======
+=======
+>>>>>>> v3.18
 
 			/*
 			 * finding the other end of zero bit window requires
 			 * looking into journal structures (in case of
 			 * searching for free blocks for unformatted nodes)
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (unfm && is_block_in_journal(s, bmap_n, end, &next))
 				break;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* now (*beg) points to beginning of zero bits window,
 		 * (end) points to one bit after the window end */
@@ -279,6 +332,8 @@ cont:
 					}
 					/* otherwise we clear all bit were set ... */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * now (*beg) points to beginning of zero bits window,
 		 * (end) points to one bit after the window end
@@ -316,6 +371,9 @@ cont:
 					 * otherwise we clear all bit
 					 * were set ...
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					while (--i >= *beg)
 						reiserfs_clear_le_bit
@@ -323,20 +381,30 @@ cont:
 					reiserfs_restore_prepared_buffer(s, bh);
 					*beg = org;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					/* ... and search again in current block from beginning */
 =======
+=======
+>>>>>>> v3.18
 
 					/*
 					 * Search again in current block
 					 * from beginning
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					goto cont;
 				}
 			}
 			bi->free_count -= (end - *beg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			journal_mark_dirty(th, s, bh);
+=======
+			journal_mark_dirty(th, bh);
+>>>>>>> v3.18
 =======
 			journal_mark_dirty(th, bh);
 >>>>>>> v3.18
@@ -347,7 +415,11 @@ cont:
 						     1);
 			PUT_SB_FREE_BLOCKS(s, SB_FREE_BLOCKS(s) - (end - *beg));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			journal_mark_dirty(th, s, SB_BUFFER_WITH_SB(s));
+=======
+			journal_mark_dirty(th, SB_BUFFER_WITH_SB(s));
+>>>>>>> v3.18
 =======
 			journal_mark_dirty(th, SB_BUFFER_WITH_SB(s));
 >>>>>>> v3.18
@@ -390,12 +462,15 @@ static inline int block_group_used(struct super_block *s, u32 id)
 	struct reiserfs_bitmap_info *info = &SB_AP_BITMAP(s)[bm];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If we don't have cached information on this bitmap block, we're
 	 * going to have to load it later anyway. Loading it here allows us
 	 * to make a better decision. This favors long-term performance gain
 	 * with a better on-disk layout vs. a short term gain of skipping the
 	 * read and potentially having a bad placement. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If we don't have cached information on this bitmap block, we're
 	 * going to have to load it later anyway. Loading it here allows us
@@ -403,6 +478,9 @@ static inline int block_group_used(struct super_block *s, u32 id)
 	 * with a better on-disk layout vs. a short term gain of skipping the
 	 * read and potentially having a bad placement.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (info->free_count == UINT_MAX) {
 		struct buffer_head *bh = reiserfs_read_bitmap_block(s, bm);
@@ -437,13 +515,19 @@ __le32 reiserfs_choose_packing(struct inode * dir)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Tries to find contiguous zero bit window (given size) in given region of
  * bitmap and place new blocks there. Returns number of allocated blocks. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Tries to find contiguous zero bit window (given size) in given region of
  * bitmap and place new blocks there. Returns number of allocated blocks.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int scan_bitmap(struct reiserfs_transaction_handle *th,
 		       b_blocknr_t * start, b_blocknr_t finish,
@@ -452,9 +536,12 @@ static int scan_bitmap(struct reiserfs_transaction_handle *th,
 	int nr_allocated = 0;
 	struct super_block *s = th->t_super;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* find every bm and bmap and bmap_nr in this file, and change them all to bitmap_blocknr
 	 * - Hans, it is not a block number - Zam. */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int bm, off;
@@ -463,16 +550,22 @@ static int scan_bitmap(struct reiserfs_transaction_handle *th,
 
 	BUG_ON(!th->t_trans_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	PROC_INFO_INC(s, scan_bitmap.call);
 	if (SB_FREE_BLOCKS(s) <= 0)
 		return 0;	// No point in looking for more free blocks
 =======
+=======
+>>>>>>> v3.18
 	PROC_INFO_INC(s, scan_bitmap.call);
 
 	/* No point in looking for more free blocks */
 	if (SB_FREE_BLOCKS(s) <= 0)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	get_bit_address(s, *start, &bm, &off);
@@ -483,7 +576,12 @@ static int scan_bitmap(struct reiserfs_transaction_handle *th,
 		end_bm = reiserfs_bmap_count(s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* When the bitmap is more than 10% free, anyone can allocate.
+=======
+	/*
+	 * When the bitmap is more than 10% free, anyone can allocate.
+>>>>>>> v3.18
 =======
 	/*
 	 * When the bitmap is more than 10% free, anyone can allocate.
@@ -526,7 +624,11 @@ static int scan_bitmap(struct reiserfs_transaction_handle *th,
 	    scan_bitmap_block(th, bm, &off, end_off + 1, min, max, unfm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       ret:
+=======
+ret:
+>>>>>>> v3.18
 =======
 ret:
 >>>>>>> v3.18
@@ -547,9 +649,13 @@ static void _reiserfs_free_block(struct reiserfs_transaction_handle *th,
 
 	BUG_ON(!th->t_trans_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	PROC_INFO_INC(s, free_block);
 
+=======
+	PROC_INFO_INC(s, free_block);
+>>>>>>> v3.18
 =======
 	PROC_INFO_INC(s, free_block);
 >>>>>>> v3.18
@@ -578,7 +684,11 @@ static void _reiserfs_free_block(struct reiserfs_transaction_handle *th,
 	}
 	apbi[nr].free_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	journal_mark_dirty(th, s, bmbh);
+=======
+	journal_mark_dirty(th, bmbh);
+>>>>>>> v3.18
 =======
 	journal_mark_dirty(th, bmbh);
 >>>>>>> v3.18
@@ -589,16 +699,22 @@ static void _reiserfs_free_block(struct reiserfs_transaction_handle *th,
 	set_sb_free_blocks(rs, sb_free_blocks(rs) + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	journal_mark_dirty(th, s, sbh);
 	if (for_unformatted)
 		dquot_free_block_nodirty(inode, 1);
 =======
+=======
+>>>>>>> v3.18
 	journal_mark_dirty(th, sbh);
 	if (for_unformatted) {
 		int depth = reiserfs_write_unlock_nested(s);
 		dquot_free_block_nodirty(inode, 1);
 		reiserfs_write_lock_nested(s, depth);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -608,8 +724,13 @@ void reiserfs_free_block(struct reiserfs_transaction_handle *th,
 {
 	struct super_block *s = th->t_super;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!th->t_trans_id);
 
+=======
+
+	BUG_ON(!th->t_trans_id);
+>>>>>>> v3.18
 =======
 
 	BUG_ON(!th->t_trans_id);
@@ -649,6 +770,10 @@ static void __discard_prealloc(struct reiserfs_transaction_handle *th,
 	int dirty = 0;
 	struct inode *inode = &ei->vfs_inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -668,7 +793,11 @@ static void __discard_prealloc(struct reiserfs_transaction_handle *th,
 		reiserfs_update_sd(th, inode);
 	ei->i_prealloc_block = save;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_del_init(&(ei->i_prealloc_list));
+=======
+	list_del_init(&ei->i_prealloc_list);
+>>>>>>> v3.18
 =======
 	list_del_init(&ei->i_prealloc_list);
 >>>>>>> v3.18
@@ -680,6 +809,10 @@ void reiserfs_discard_prealloc(struct reiserfs_transaction_handle *th,
 {
 	struct reiserfs_inode_info *ei = REISERFS_I(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -694,7 +827,10 @@ void reiserfs_discard_all_prealloc(struct reiserfs_transaction_handle *th)
 
 	BUG_ON(!th->t_trans_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (!list_empty(plist)) {
@@ -725,7 +861,12 @@ int reiserfs_parse_alloc_options(struct super_block *s, char *options)
 	char *this_char, *value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REISERFS_SB(s)->s_alloc_options.bits = 0;	/* clear default settings */
+=======
+	/* clear default settings */
+	REISERFS_SB(s)->s_alloc_options.bits = 0;
+>>>>>>> v3.18
 =======
 	/* clear default settings */
 	REISERFS_SB(s)->s_alloc_options.bits = 0;
@@ -760,7 +901,11 @@ int reiserfs_parse_alloc_options(struct super_block *s, char *options)
 			SET_OPTION(displacing_new_packing_localities);
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -931,6 +1076,10 @@ static inline void new_hashed_relocation(reiserfs_blocknr_hint_t * hint)
 {
 	char *hash_in;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -939,7 +1088,11 @@ static inline void new_hashed_relocation(reiserfs_blocknr_hint_t * hint)
 	} else {
 		if (!hint->inode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//hint->search_start = hint->beg;
+=======
+			/*hint->search_start = hint->beg;*/
+>>>>>>> v3.18
 =======
 			/*hint->search_start = hint->beg;*/
 >>>>>>> v3.18
@@ -967,6 +1120,10 @@ static void dirid_groups(reiserfs_blocknr_hint_t * hint)
 	int bm = 0;
 	struct super_block *sb = hint->th->t_super;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1000,7 +1157,12 @@ static void oid_groups(reiserfs_blocknr_hint_t * hint)
 		dirid = le32_to_cpu(INODE_PKEY(hint->inode)->k_dir_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* keep the root dir and it's first set of subdirs close to
+=======
+		/*
+		 * keep the root dir and it's first set of subdirs close to
+>>>>>>> v3.18
 =======
 		/*
 		 * keep the root dir and it's first set of subdirs close to
@@ -1019,7 +1181,12 @@ static void oid_groups(reiserfs_blocknr_hint_t * hint)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* returns 1 if it finds an indirect item and gets valid hint info
+=======
+/*
+ * returns 1 if it finds an indirect item and gets valid hint info
+>>>>>>> v3.18
 =======
 /*
  * returns 1 if it finds an indirect item and gets valid hint info
@@ -1036,20 +1203,27 @@ static int get_left_neighbor(reiserfs_blocknr_hint_t * hint)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hint->path)	/* reiserfs code can call this function w/o pointer to path
 				 * structure supplied; then we rely on supplied search_start */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * reiserfs code can call this function w/o pointer to path
 	 * structure supplied; then we rely on supplied search_start
 	 */
 	if (!hint->path)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
 	path = hint->path;
 	bh = get_last_bh(path);
 	RFALSE(!bh, "green-4002: Illegal path specified to get_left_neighbor");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ih = get_ih(path);
 	pos_in_item = path->pos_in_item;
@@ -1064,6 +1238,8 @@ static int get_left_neighbor(reiserfs_blocknr_hint_t * hint)
 			pos_in_item--;
 //          pos_in_item = I_UNFM_NUM (ih) - 1;
 =======
+=======
+>>>>>>> v3.18
 	ih = tp_item_head(path);
 	pos_in_item = path->pos_in_item;
 	item = tp_item_body(path);
@@ -1077,6 +1253,9 @@ static int get_left_neighbor(reiserfs_blocknr_hint_t * hint)
 	if (!hint->formatted_node && is_indirect_le_ih(ih)) {
 		if (pos_in_item == I_UNFM_NUM(ih))
 			pos_in_item--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		while (pos_in_item >= 0) {
 			int t = get_block_num(item, pos_in_item);
@@ -1094,17 +1273,23 @@ static int get_left_neighbor(reiserfs_blocknr_hint_t * hint)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* should be, if formatted node, then try to put on first part of the device
    specified as number of percent with mount option device, else try to put
    on last of device.  This is not to say it is good code to do so,
    but the effect should be measured.  */
 =======
+=======
+>>>>>>> v3.18
 /*
  * should be, if formatted node, then try to put on first part of the device
  * specified as number of percent with mount option device, else try to put
  * on last of device.  This is not to say it is good code to do so,
  * but the effect should be measured.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void set_border_in_hint(struct super_block *s,
 				      reiserfs_blocknr_hint_t * hint)
@@ -1232,41 +1417,59 @@ static void determine_search_start(reiserfs_blocknr_hint_t * hint,
 
 #ifdef DISPLACE_NEW_PACKING_LOCALITIES
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* whenever we create a new directory, we displace it.  At first we will
 	   hash for location, later we might look for a moderately empty place for
 	   it */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * whenever we create a new directory, we displace it.  At first
 	 * we will hash for location, later we might look for a moderately
 	 * empty place for it
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (displacing_new_packing_localities(s)
 	    && hint->th->displace_new_blocks) {
 		displace_new_packing_locality(hint);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* we do not continue determine_search_start,
 		 * if new packing locality is being displaced */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * we do not continue determine_search_start,
 		 * if new packing locality is being displaced
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* all persons should feel encouraged to add more special cases here and
 	 * test them */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * all persons should feel encouraged to add more special cases
 	 * here and test them
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (displacing_large_files(s) && !hint->formatted_node
@@ -1276,13 +1479,19 @@ static void determine_search_start(reiserfs_blocknr_hint_t * hint,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if none of our special cases is relevant, use the left neighbor in the
 	   tree order of the new node we are allocating for */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * if none of our special cases is relevant, use the left
 	 * neighbor in the tree order of the new node we are allocating for
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (hint->formatted_node && TEST_OPTION(hashed_formatted_nodes, s)) {
 		hash_formatted_node(hint);
@@ -1292,11 +1501,14 @@ static void determine_search_start(reiserfs_blocknr_hint_t * hint,
 	unfm_hint = get_left_neighbor(hint);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Mimic old block allocator behaviour, that is if VFS allowed for preallocation,
 	   new blocks are displaced based on directory ID. Also, if suggested search_start
 	   is less than last preallocated block, we start searching from it, assuming that
 	   HDD dataflow is faster in forward direction */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Mimic old block allocator behaviour, that is if VFS allowed for
 	 * preallocation, new blocks are displaced based on directory ID.
@@ -1304,6 +1516,9 @@ static void determine_search_start(reiserfs_blocknr_hint_t * hint,
 	 * block, we start searching from it, assuming that HDD dataflow
 	 * is faster in forward direction
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (TEST_OPTION(old_way, s)) {
 		if (!hint->formatted_node) {
@@ -1334,6 +1549,10 @@ static void determine_search_start(reiserfs_blocknr_hint_t * hint,
 		old_hashed_relocation(hint);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1343,6 +1562,10 @@ static void determine_search_start(reiserfs_blocknr_hint_t * hint,
 		new_hashed_relocation(hint);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1384,8 +1607,11 @@ static int determine_prealloc_size(reiserfs_blocknr_hint_t * hint)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* XXX I know it could be merged with upper-level function;
    but may be result function would be too complex. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int allocate_without_wrapping_disk(reiserfs_blocknr_hint_t * hint,
@@ -1416,12 +1642,18 @@ static inline int allocate_without_wrapping_disk(reiserfs_blocknr_hint_t * hint,
 		/* do we have something to fill prealloc. array also ? */
 		if (nr_allocated > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* it means prealloc_size was greater that 0 and we do preallocation */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * it means prealloc_size was greater that 0 and
 			 * we do preallocation
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			list_add(&REISERFS_I(hint->inode)->i_prealloc_list,
 				 &SB_JOURNAL(hint->th->t_super)->
@@ -1445,6 +1677,10 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 	int passno = 0;
 	int nr_allocated = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int depth;
+>>>>>>> v3.18
 =======
 	int depth;
 >>>>>>> v3.18
@@ -1458,11 +1694,14 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 			       amount_needed, hint->inode->i_uid);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		quota_ret =
 		    dquot_alloc_block_nodirty(hint->inode, amount_needed);
 		if (quota_ret)	/* Quota exceeded? */
 			return QUOTA_EXCEEDED;
 =======
+=======
+>>>>>>> v3.18
 		depth = reiserfs_write_unlock_nested(s);
 		quota_ret =
 		    dquot_alloc_block_nodirty(hint->inode, amount_needed);
@@ -1470,6 +1709,9 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 			reiserfs_write_lock_nested(s, depth);
 			return QUOTA_EXCEEDED;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (hint->preallocate && hint->prealloc_size) {
 #ifdef REISERQUOTA_DEBUG
@@ -1484,6 +1726,10 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 		}
 		/* for unformatted nodes, force large allocations */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		reiserfs_write_lock_nested(s, depth);
+>>>>>>> v3.18
 =======
 		reiserfs_write_lock_nested(s, depth);
 >>>>>>> v3.18
@@ -1504,7 +1750,12 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 			finish = hint->beg;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:	/* We've tried searching everywhere, not enough space */
+=======
+		default:
+			/* We've tried searching everywhere, not enough space */
+>>>>>>> v3.18
 =======
 		default:
 			/* We've tried searching everywhere, not enough space */
@@ -1521,15 +1772,21 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 #endif
 				/* Free not allocated blocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dquot_free_block_nodirty(hint->inode,
 					amount_needed + hint->prealloc_size -
 					nr_allocated);
 =======
+=======
+>>>>>>> v3.18
 				depth = reiserfs_write_unlock_nested(s);
 				dquot_free_block_nodirty(hint->inode,
 					amount_needed + hint->prealloc_size -
 					nr_allocated);
 				reiserfs_write_lock_nested(s, depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			while (nr_allocated--)
@@ -1562,6 +1819,11 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 			       hint->inode->i_uid);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		depth = reiserfs_write_unlock_nested(s);
+>>>>>>> v3.18
 =======
 
 		depth = reiserfs_write_unlock_nested(s);
@@ -1571,6 +1833,10 @@ static inline int blocknrs_and_prealloc_arrays_from_search_start
 					 REISERFS_I(hint->inode)->
 					 i_prealloc_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		reiserfs_write_lock_nested(s, depth);
+>>>>>>> v3.18
 =======
 		reiserfs_write_lock_nested(s, depth);
 >>>>>>> v3.18
@@ -1606,14 +1872,20 @@ static int use_preallocated_list_if_available(reiserfs_blocknr_hint_t * hint,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int reiserfs_allocate_blocknrs(reiserfs_blocknr_hint_t * hint, b_blocknr_t * new_blocknrs, int amount_needed, int reserved_by_us	/* Amount of blocks we have
 																	   already reserved */ )
 =======
+=======
+>>>>>>> v3.18
 int reiserfs_allocate_blocknrs(reiserfs_blocknr_hint_t *hint,
 			       b_blocknr_t *new_blocknrs,
 			       int amount_needed,
 			       /* Amount of blocks we have already reserved */
 			       int reserved_by_us)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int initial_amount_needed = amount_needed;
@@ -1627,30 +1899,42 @@ int reiserfs_allocate_blocknrs(reiserfs_blocknr_hint_t *hint,
 	/* should this be if !hint->inode &&  hint->preallocate? */
 	/* do you mean hint->formatted_node can be removed ? - Zam */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* hint->formatted_node cannot be removed because we try to access
 	   inode information here, and there is often no inode assotiated with
 	   metadata allocations - green */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * hint->formatted_node cannot be removed because we try to access
 	 * inode information here, and there is often no inode associated with
 	 * metadata allocations - green
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!hint->formatted_node && hint->preallocate) {
 		amount_needed = use_preallocated_list_if_available
 		    (hint, new_blocknrs, amount_needed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (amount_needed == 0)	/* all blocknrs we need we got from
 					   prealloc. list */
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * We have all the block numbers we need from the
 		 * prealloc list
 		 */
 		if (amount_needed == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return CARRY_ON;
 		new_blocknrs += (initial_amount_needed - amount_needed);
@@ -1666,17 +1950,23 @@ int reiserfs_allocate_blocknrs(reiserfs_blocknr_hint_t *hint,
 	    (hint, new_blocknrs, amount_needed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we used prealloc. list to fill (partially) new_blocknrs array. If final allocation fails we
 	 * need to return blocks back to prealloc. list or just free them. -- Zam (I chose second
 	 * variant) */
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We used prealloc. list to fill (partially) new_blocknrs array.
 	 * If final allocation fails we need to return blocks back to
 	 * prealloc. list or just free them. -- Zam (I chose second
 	 * variant)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret != CARRY_ON) {
 		while (amount_needed++ < initial_amount_needed) {
@@ -1717,17 +2007,23 @@ struct buffer_head *reiserfs_read_bitmap_block(struct super_block *sb,
 	struct buffer_head *bh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Way old format filesystems had the bitmaps packed up front.
 	 * I doubt there are any of these left, but just in case... */
 	if (unlikely(test_bit(REISERFS_OLD_FORMAT,
 	                      &(REISERFS_SB(sb)->s_properties))))
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Way old format filesystems had the bitmaps packed up front.
 	 * I doubt there are any of these left, but just in case...
 	 */
 	if (unlikely(test_bit(REISERFS_OLD_FORMAT,
 			      &REISERFS_SB(sb)->s_properties)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		block = REISERFS_SB(sb)->s_sbh->b_blocknr + 1 + bitmap;
 	else if (bitmap == 0)
@@ -1740,16 +2036,22 @@ struct buffer_head *reiserfs_read_bitmap_block(struct super_block *sb,
 	else {
 		if (buffer_locked(bh)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			PROC_INFO_INC(sb, scan_bitmap.wait);
 			reiserfs_write_unlock(sb);
 			__wait_on_buffer(bh);
 			reiserfs_write_lock(sb);
 =======
+=======
+>>>>>>> v3.18
 			int depth;
 			PROC_INFO_INC(sb, scan_bitmap.wait);
 			depth = reiserfs_write_unlock_nested(sb);
 			__wait_on_buffer(bh);
 			reiserfs_write_lock_nested(sb, depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		BUG_ON(!buffer_uptodate(bh));

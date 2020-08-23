@@ -29,6 +29,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __raw_spin_is_locked(x) ((x)->slock != 0)
 #define __raw_spin_unlock_wait(lock) \
 	do { while (__raw_spin_is_locked(lock)) cpu_relax(); } while (0)
@@ -37,6 +38,8 @@
 
 static inline void __raw_spin_lock(raw_spinlock_t *lock)
 =======
+=======
+>>>>>>> v3.18
 #define arch_spin_is_locked(x) ((x)->slock != 0)
 #define arch_spin_unlock_wait(lock) \
 	do { while (arch_spin_is_locked(lock)) cpu_relax(); } while (0)
@@ -44,6 +47,9 @@ static inline void __raw_spin_lock(raw_spinlock_t *lock)
 #define arch_spin_lock_flags(lock, flags) arch_spin_lock(lock)
 
 static inline void arch_spin_lock(arch_spinlock_t *lock)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long tmp;
@@ -62,7 +68,11 @@ static inline void arch_spin_lock(arch_spinlock_t *lock)
 /* Returns 1 if the lock is obtained, 0 otherwise. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __raw_spin_trylock(raw_spinlock_t *lock)
+=======
+static inline int arch_spin_trylock(arch_spinlock_t *lock)
+>>>>>>> v3.18
 =======
 static inline int arch_spin_trylock(arch_spinlock_t *lock)
 >>>>>>> v3.18
@@ -82,7 +92,11 @@ static inline int arch_spin_trylock(arch_spinlock_t *lock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_spin_unlock(raw_spinlock_t *lock)
+=======
+static inline void arch_spin_unlock(arch_spinlock_t *lock)
+>>>>>>> v3.18
 =======
 static inline void arch_spin_unlock(arch_spinlock_t *lock)
 >>>>>>> v3.18
@@ -115,9 +129,15 @@ static inline void arch_spin_unlock(arch_spinlock_t *lock)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __raw_write_can_lock(x)  ((x)->lock == 0)
 
 static inline void __raw_write_lock(raw_rwlock_t *rw)
+=======
+#define arch_write_can_lock(x)  ((x)->lock == 0)
+
+static inline void arch_write_lock(arch_rwlock_t *rw)
+>>>>>>> v3.18
 =======
 #define arch_write_can_lock(x)  ((x)->lock == 0)
 
@@ -141,7 +161,11 @@ static inline void arch_write_lock(arch_rwlock_t *rw)
 /* Returns 1 if the lock is obtained, 0 otherwise. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __raw_write_trylock(raw_rwlock_t *rw)
+=======
+static inline int arch_write_trylock(arch_rwlock_t *rw)
+>>>>>>> v3.18
 =======
 static inline int arch_write_trylock(arch_rwlock_t *rw)
 >>>>>>> v3.18
@@ -162,7 +186,11 @@ static inline int arch_write_trylock(arch_rwlock_t *rw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_write_unlock(raw_rwlock_t *rw)
+=======
+static inline void arch_write_unlock(arch_rwlock_t *rw)
+>>>>>>> v3.18
 =======
 static inline void arch_write_unlock(arch_rwlock_t *rw)
 >>>>>>> v3.18
@@ -178,7 +206,11 @@ static inline void arch_write_unlock(arch_rwlock_t *rw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_read_lock(raw_rwlock_t *rw)
+=======
+static inline void arch_read_lock(arch_rwlock_t *rw)
+>>>>>>> v3.18
 =======
 static inline void arch_read_lock(arch_rwlock_t *rw)
 >>>>>>> v3.18
@@ -201,7 +233,11 @@ static inline void arch_read_lock(arch_rwlock_t *rw)
 /* Returns 1 if the lock is obtained, 0 otherwise. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __raw_read_trylock(raw_rwlock_t *rw)
+=======
+static inline int arch_read_trylock(arch_rwlock_t *rw)
+>>>>>>> v3.18
 =======
 static inline int arch_read_trylock(arch_rwlock_t *rw)
 >>>>>>> v3.18
@@ -225,7 +261,11 @@ static inline int arch_read_trylock(arch_rwlock_t *rw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_read_unlock(raw_rwlock_t *rw)
+=======
+static inline void arch_read_unlock(arch_rwlock_t *rw)
+>>>>>>> v3.18
 =======
 static inline void arch_read_unlock(arch_rwlock_t *rw)
 >>>>>>> v3.18
@@ -244,6 +284,12 @@ static inline void arch_read_unlock(arch_rwlock_t *rw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define arch_read_lock_flags(lock, flags)	arch_read_lock(lock)
+#define arch_write_lock_flags(lock, flags)	arch_write_lock(lock)
+
+>>>>>>> v3.18
 =======
 #define arch_read_lock_flags(lock, flags)	arch_read_lock(lock)
 #define arch_write_lock_flags(lock, flags)	arch_write_lock(lock)

@@ -28,6 +28,7 @@
  * for unused gpio's, the expected value is -1.
  * @name:		name for the gpio rf kill instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @reset_gpio:		GPIO which is used for reseting rfkill switch
  * @shutdown_gpio:	GPIO which is used for shutdown of rfkill switch
  * @power_clk_name:	[optional] name of clk to turn off while blocked
@@ -35,10 +36,13 @@
  * @gpio_runtime_setup:	set up platform specific gpio configuration
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 
 struct rfkill_gpio_platform_data {
 	char			*name;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int			reset_gpio;
 	int			shutdown_gpio;
@@ -46,6 +50,9 @@ struct rfkill_gpio_platform_data {
 	enum rfkill_type	type;
 	void	(*gpio_runtime_close)(struct platform_device *);
 	int	(*gpio_runtime_setup)(struct platform_device *);
+=======
+	enum rfkill_type	type;
+>>>>>>> v3.18
 =======
 	enum rfkill_type	type;
 >>>>>>> v3.18

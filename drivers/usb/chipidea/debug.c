@@ -8,6 +8,12 @@
 #include <linux/usb/ch9.h>
 #include <linux/usb/gadget.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/usb/phy.h>
+#include <linux/usb/otg.h>
+#include <linux/usb/otg-fsm.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/phy.h>
 #include <linux/usb/otg.h>
@@ -19,6 +25,10 @@
 #include "bits.h"
 #include "debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "otg.h"
+>>>>>>> v3.18
 =======
 #include "otg.h"
 >>>>>>> v3.18
@@ -29,7 +39,11 @@
 static int ci_device_show(struct seq_file *s, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = s->private;
+=======
+	struct ci_hdrc *ci = s->private;
+>>>>>>> v3.18
 =======
 	struct ci_hdrc *ci = s->private;
 >>>>>>> v3.18
@@ -68,6 +82,7 @@ static const struct file_operations ci_device_fops = {
 };
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * dbg_usb_op_fail: prints USB Operation FAIL event
  * @addr: endpoint address
@@ -110,12 +125,18 @@ void dbg_usb_op_fail(u8 addr, const char *name,
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * ci_port_test_show: reads port test mode
  */
 static int ci_port_test_show(struct seq_file *s, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = s->private;
+=======
+	struct ci_hdrc *ci = s->private;
+>>>>>>> v3.18
 =======
 	struct ci_hdrc *ci = s->private;
 >>>>>>> v3.18
@@ -139,7 +160,11 @@ static ssize_t ci_port_test_write(struct file *file, const char __user *ubuf,
 {
 	struct seq_file *s = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = s->private;
+=======
+	struct ci_hdrc *ci = s->private;
+>>>>>>> v3.18
 =======
 	struct ci_hdrc *ci = s->private;
 >>>>>>> v3.18
@@ -180,7 +205,11 @@ static const struct file_operations ci_port_test_fops = {
 static int ci_qheads_show(struct seq_file *s, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = s->private;
+=======
+	struct ci_hdrc *ci = s->private;
+>>>>>>> v3.18
 =======
 	struct ci_hdrc *ci = s->private;
 >>>>>>> v3.18
@@ -195,6 +224,7 @@ static int ci_qheads_show(struct seq_file *s, void *data)
 	spin_lock_irqsave(&ci->lock, flags);
 	for (i = 0; i < ci->hw_ep_max/2; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ci13xxx_ep *mEpRx = &ci->ci13xxx_ep[i];
 		struct ci13xxx_ep *mEpTx =
 			&ci->ci13xxx_ep[i + ci->hw_ep_max/2];
@@ -205,6 +235,8 @@ static int ci_qheads_show(struct seq_file *s, void *data)
 				   *((u32 *)mEpRx->qh.ptr + j),
 				   *((u32 *)mEpTx->qh.ptr + j));
 =======
+=======
+>>>>>>> v3.18
 		struct ci_hw_ep *hweprx = &ci->ci_hw_ep[i];
 		struct ci_hw_ep *hweptx =
 			&ci->ci_hw_ep[i + ci->hw_ep_max/2];
@@ -214,6 +246,9 @@ static int ci_qheads_show(struct seq_file *s, void *data)
 			seq_printf(s, " %04X:    %08X    %08X\n", j,
 				   *((u32 *)hweprx->qh.ptr + j),
 				   *((u32 *)hweptx->qh.ptr + j));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock_irqrestore(&ci->lock, flags);
@@ -239,18 +274,24 @@ static const struct file_operations ci_qheads_fops = {
 static int ci_requests_show(struct seq_file *s, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = s->private;
 	unsigned long flags;
 	struct list_head   *ptr = NULL;
 	struct ci13xxx_req *req = NULL;
 	unsigned i, j, qsize = sizeof(struct ci13xxx_td)/sizeof(u32);
 =======
+=======
+>>>>>>> v3.18
 	struct ci_hdrc *ci = s->private;
 	unsigned long flags;
 	struct list_head   *ptr = NULL;
 	struct ci_hw_req *req = NULL;
 	struct td_node *node, *tmpnode;
 	unsigned i, j, qsize = sizeof(struct ci_hw_td)/sizeof(u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ci->role != CI_ROLE_GADGET) {
@@ -260,6 +301,7 @@ static int ci_requests_show(struct seq_file *s, void *data)
 
 	spin_lock_irqsave(&ci->lock, flags);
 	for (i = 0; i < ci->hw_ep_max; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		list_for_each(ptr, &ci->ci13xxx_ep[i].qh.queue) {
 			req = list_entry(ptr, struct ci13xxx_req, queue);
@@ -272,6 +314,8 @@ static int ci_requests_show(struct seq_file *s, void *data)
 				seq_printf(s, " %04X:    %08X\n", j,
 					   *((u32 *)req->ptr + j));
 =======
+=======
+>>>>>>> v3.18
 		list_for_each(ptr, &ci->ci_hw_ep[i].qh.queue) {
 			req = list_entry(ptr, struct ci_hw_req, queue);
 
@@ -286,6 +330,9 @@ static int ci_requests_show(struct seq_file *s, void *data)
 					seq_printf(s, " %04X:    %08X\n", j,
 						   *((u32 *)node->ptr + j));
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	spin_unlock_irqrestore(&ci->lock, flags);
@@ -306,6 +353,7 @@ static const struct file_operations ci_requests_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ci_role_show(struct seq_file *s, void *data)
 {
 	struct ci13xxx *ci = s->private;
@@ -313,6 +361,8 @@ static int ci_role_show(struct seq_file *s, void *data)
 	if (ci->role != CI_ROLE_END)
 		seq_printf(s, "%s\n", ci_role(ci)->name);
 =======
+=======
+>>>>>>> v3.18
 static int ci_otg_show(struct seq_file *s, void *unused)
 {
 	struct ci_hdrc *ci = s->private;
@@ -392,6 +442,9 @@ static int ci_role_show(struct seq_file *s, void *data)
 	struct ci_hdrc *ci = s->private;
 
 	seq_printf(s, "%s\n", ci_role(ci)->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -402,7 +455,11 @@ static ssize_t ci_role_write(struct file *file, const char __user *ubuf,
 {
 	struct seq_file *s = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = s->private;
+=======
+	struct ci_hdrc *ci = s->private;
+>>>>>>> v3.18
 =======
 	struct ci_hdrc *ci = s->private;
 >>>>>>> v3.18
@@ -441,6 +498,7 @@ static const struct file_operations ci_role_fops = {
 	.release	= single_release,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* EP# and Direction */
 static ssize_t ci_prime_write(struct file *file, const char __user *ubuf,
@@ -556,6 +614,8 @@ static const struct file_operations ci_wakeup_fops = {
 	.open		= simple_open,
 	.write		= ci_role_write,
 =======
+=======
+>>>>>>> v3.18
 static int ci_registers_show(struct seq_file *s, void *unused)
 {
 	struct ci_hdrc *ci = s->private;
@@ -598,6 +658,9 @@ static const struct file_operations ci_registers_fops = {
 	.read			= seq_read,
 	.llseek			= seq_lseek,
 	.release		= single_release,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -608,7 +671,11 @@ static const struct file_operations ci_registers_fops = {
  * This function returns an error code
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dbg_create_files(struct ci13xxx *ci)
+=======
+int dbg_create_files(struct ci_hdrc *ci)
+>>>>>>> v3.18
 =======
 int dbg_create_files(struct ci_hdrc *ci)
 >>>>>>> v3.18
@@ -640,6 +707,7 @@ int dbg_create_files(struct ci_hdrc *ci)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = debugfs_create_file("wakeup", S_IWUSR, ci->debugfs, ci,
 				   &ci_wakeup_fops);
 	if (retval)
@@ -658,6 +726,8 @@ int dbg_create_files(struct ci_hdrc *ci)
 	dent = debugfs_create_file("role", S_IRUGO | S_IWUSR, ci->debugfs, ci,
 				   &ci_role_fops);
 =======
+=======
+>>>>>>> v3.18
 	if (ci_otg_is_fsm_mode(ci)) {
 		dent = debugfs_create_file("otg", S_IRUGO, ci->debugfs, ci,
 					&ci_otg_fops);
@@ -673,6 +743,9 @@ int dbg_create_files(struct ci_hdrc *ci)
 	dent = debugfs_create_file("registers", S_IRUGO, ci->debugfs, ci,
 				&ci_registers_fops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dent)
 		return 0;
@@ -686,7 +759,11 @@ err:
  * @ci: device
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dbg_remove_files(struct ci13xxx *ci)
+=======
+void dbg_remove_files(struct ci_hdrc *ci)
+>>>>>>> v3.18
 =======
 void dbg_remove_files(struct ci_hdrc *ci)
 >>>>>>> v3.18

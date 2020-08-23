@@ -5,6 +5,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -15,10 +20,13 @@
 #include "conf_space.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_cmd_info {
 	u16 val;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct pci_bar_info {
@@ -30,6 +38,7 @@ struct pci_bar_info {
 #define is_enable_cmd(value) ((value)&(PCI_COMMAND_MEMORY|PCI_COMMAND_IO))
 #define is_master_cmd(value) ((value)&PCI_COMMAND_MASTER)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Bits guests are allowed to control in permissive mode. */
 #define PCI_COMMAND_GUEST (PCI_COMMAND_MASTER|PCI_COMMAND_SPECIAL| \
@@ -61,6 +70,8 @@ static int command_read(struct pci_dev *dev, int offset, u16 *value, void *data)
 	*value &= PCI_COMMAND_GUEST;
 	*value |= cmd->val & ~PCI_COMMAND_GUEST;
 =======
+=======
+>>>>>>> v3.18
 static int command_read(struct pci_dev *dev, int offset, u16 *value, void *data)
 {
 	int i;
@@ -76,6 +87,9 @@ static int command_read(struct pci_dev *dev, int offset, u16 *value, void *data)
 		if (dev->resource[i].flags & IORESOURCE_MEM)
 			*value |= PCI_COMMAND_MEMORY;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -86,8 +100,11 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 	struct xen_pcibk_dev_data *dev_data;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 val;
 	struct pci_cmd_info *cmd = data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -125,6 +142,7 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 		err = pci_set_mwi(dev);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       DRV_NAME ": %s: cannot enable "
 			       "memory-write-invalidate (%d)\n",
@@ -133,10 +151,15 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 			pr_warn("%s: cannot enable memory-write-invalidate (%d)\n",
 				pci_name(dev), err);
 >>>>>>> v3.18
+=======
+			pr_warn("%s: cannot enable memory-write-invalidate (%d)\n",
+				pci_name(dev), err);
+>>>>>>> v3.18
 			value &= ~PCI_COMMAND_INVALIDATE;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmd->val = value;
 
@@ -153,6 +176,8 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return pci_write_config_word(dev, offset, value);
 }
 
@@ -162,7 +187,11 @@ static int rom_write(struct pci_dev *dev, int offset, u32 value, void *data)
 
 	if (unlikely(!bar)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING DRV_NAME ": driver data not found for %s\n",
+=======
+		pr_warn(DRV_NAME ": driver data not found for %s\n",
+>>>>>>> v3.18
 =======
 		pr_warn(DRV_NAME ": driver data not found for %s\n",
 >>>>>>> v3.18
@@ -200,7 +229,11 @@ static int bar_write(struct pci_dev *dev, int offset, u32 value, void *data)
 
 	if (unlikely(!bar)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING DRV_NAME ": driver data not found for %s\n",
+=======
+		pr_warn(DRV_NAME ": driver data not found for %s\n",
+>>>>>>> v3.18
 =======
 		pr_warn(DRV_NAME ": driver data not found for %s\n",
 >>>>>>> v3.18
@@ -232,7 +265,11 @@ static int bar_read(struct pci_dev *dev, int offset, u32 * value, void *data)
 
 	if (unlikely(!bar)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING DRV_NAME ": driver data not found for %s\n",
+=======
+		pr_warn(DRV_NAME ": driver data not found for %s\n",
+>>>>>>> v3.18
 =======
 		pr_warn(DRV_NAME ": driver data not found for %s\n",
 >>>>>>> v3.18
@@ -365,8 +402,11 @@ static const struct config_field header_common[] = {
 	 .offset    = PCI_COMMAND,
 	 .size      = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 .init      = command_init,
 	 .release   = bar_release,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 .u.w.read  = command_read,
@@ -463,7 +503,11 @@ int xen_pcibk_config_header_add_fields(struct pci_dev *dev)
 	default:
 		err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR DRV_NAME ": %s: Unsupported header type %d!\n",
+=======
+		pr_err("%s: Unsupported header type %d!\n",
+>>>>>>> v3.18
 =======
 		pr_err("%s: Unsupported header type %d!\n",
 >>>>>>> v3.18

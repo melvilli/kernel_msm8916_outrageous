@@ -15,8 +15,12 @@
 
 static int devfreq_performance_func(struct devfreq *df,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    unsigned long *freq,
 				u32 *flag)
+=======
+				    unsigned long *freq)
+>>>>>>> v3.18
 =======
 				    unsigned long *freq)
 >>>>>>> v3.18
@@ -36,6 +40,7 @@ static int devfreq_performance_handler(struct devfreq *devfreq,
 				unsigned int event, void *data)
 {
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long freq;
 
@@ -58,6 +63,8 @@ static int devfreq_performance_handler(struct devfreq *devfreq,
 	}
 	mutex_unlock(&devfreq->lock);
 =======
+=======
+>>>>>>> v3.18
 
 	if (event == DEVFREQ_GOV_START) {
 		mutex_lock(&devfreq->lock);
@@ -65,6 +72,9 @@ static int devfreq_performance_handler(struct devfreq *devfreq,
 		mutex_unlock(&devfreq->lock);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

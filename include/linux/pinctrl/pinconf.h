@@ -31,7 +31,11 @@ struct seq_file;
  * @pin_config_group_get: get configurations for an entire pin group
  * @pin_config_group_set: configure all pins in a group
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pin_config_group_dbg_set: optional debugfs to modify a pin configuration
+=======
+ * @pin_config_dbg_parse_modify: optional debugfs to modify a pin configuration
+>>>>>>> v3.18
 =======
  * @pin_config_dbg_parse_modify: optional debugfs to modify a pin configuration
 >>>>>>> v3.18
@@ -52,7 +56,12 @@ struct pinconf_ops {
 	int (*pin_config_set) (struct pinctrl_dev *pctldev,
 			       unsigned pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       unsigned long config);
+=======
+			       unsigned long *configs,
+			       unsigned num_configs);
+>>>>>>> v3.18
 =======
 			       unsigned long *configs,
 			       unsigned num_configs);
@@ -63,7 +72,12 @@ struct pinconf_ops {
 	int (*pin_config_group_set) (struct pinctrl_dev *pctldev,
 				     unsigned selector,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     unsigned long config);
+=======
+				     unsigned long *configs,
+				     unsigned num_configs);
+>>>>>>> v3.18
 =======
 				     unsigned long *configs,
 				     unsigned num_configs);

@@ -24,8 +24,13 @@ int aoa_alsa_init(char *name, struct module *mod, struct device *dev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, name, mod, sizeof(struct aoa_card),
 			      &alsa_card);
+=======
+	err = snd_card_new(dev, index, name, mod, sizeof(struct aoa_card),
+			   &alsa_card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(dev, index, name, mod, sizeof(struct aoa_card),
 			   &alsa_card);
@@ -35,7 +40,10 @@ int aoa_alsa_init(char *name, struct module *mod, struct device *dev)
 	aoa_card = alsa_card->private_data;
 	aoa_card->alsa_card = alsa_card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alsa_card->dev = dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strlcpy(alsa_card->driver, "AppleOnbdAudio", sizeof(alsa_card->driver));
@@ -69,7 +77,11 @@ void aoa_alsa_cleanup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int aoa_snd_device_new(snd_device_type_t type,
+=======
+int aoa_snd_device_new(enum snd_device_type type,
+>>>>>>> v3.18
 =======
 int aoa_snd_device_new(enum snd_device_type type,
 >>>>>>> v3.18

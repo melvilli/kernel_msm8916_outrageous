@@ -1,13 +1,19 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* cnic.c: Broadcom CNIC core network driver.
  *
  * Copyright (c) 2006-2012 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* cnic.c: QLogic CNIC core network driver.
  *
  * Copyright (c) 2006-2014 Broadcom Corporation
  * Copyright (c) 2014 QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -5408,8 +5414,13 @@ struct tstorm_l5cm_tcp_flags {
 #define TSTORM_L5CM_TCP_FLAGS_VLAN_ID (0xFFF<<0)
 #define TSTORM_L5CM_TCP_FLAGS_VLAN_ID_SHIFT 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TSTORM_L5CM_TCP_FLAGS_RSRV0 (0x1<<12)
 #define TSTORM_L5CM_TCP_FLAGS_RSRV0_SHIFT 12
+=======
+#define TSTORM_L5CM_TCP_FLAGS_DELAYED_ACK_EN (0x1<<12)
+#define TSTORM_L5CM_TCP_FLAGS_DELAYED_ACK_SHIFT 12
+>>>>>>> v3.18
 =======
 #define TSTORM_L5CM_TCP_FLAGS_DELAYED_ACK_EN (0x1<<12)
 #define TSTORM_L5CM_TCP_FLAGS_DELAYED_ACK_SHIFT 12

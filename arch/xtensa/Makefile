@@ -5,6 +5,10 @@
 #
 # Copyright (C) 2001 - 2005  Tensilica Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# Copyright (C) 2014 Cadence Design Systems Inc.
+>>>>>>> v3.18
 =======
 # Copyright (C) 2014 Cadence Design Systems Inc.
 >>>>>>> v3.18
@@ -18,11 +22,15 @@
 # (Use VAR=<xtensa_config> to use another default compiler.)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 variant-$(CONFIG_XTENSA_VARIANT_FSF)		:= fsf
 variant-$(CONFIG_XTENSA_VARIANT_DC232B)		:= dc232b
 variant-$(CONFIG_XTENSA_VARIANT_DC233C)		:= dc233c
 variant-$(CONFIG_XTENSA_VARIANT_S6000)		:= s6000
 variant-$(CONFIG_XTENSA_VARIANT_LINUX_CUSTOM)	:= custom
+=======
+variant-y := $(patsubst "%",%,$(CONFIG_XTENSA_VARIANT_NAME))
+>>>>>>> v3.18
 =======
 variant-y := $(patsubst "%",%,$(CONFIG_XTENSA_VARIANT_NAME))
 >>>>>>> v3.18

@@ -64,7 +64,10 @@ static LIST_HEAD(uart_list);
 static u8 num_uarts;
 static u8 console_uart_id = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 no_console_suspend;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u8 uart_debug;
@@ -180,6 +183,12 @@ static char *cmdline_find_option(char *str)
 static int __init omap_serial_early_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_have_populated_dt())
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (of_have_populated_dt())
 		return -ENODEV;
@@ -216,6 +225,7 @@ static int __init omap_serial_early_init(void)
 					uart_name, uart->num);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			if (cmdline_find_option("no_console_suspend"))
 				no_console_suspend = true;
@@ -230,6 +240,8 @@ static int __init omap_serial_early_init(void)
 			 * early boot logs can stall the boot-up.
 			 */
 			oh->flags |= HWMOD_INIT_NO_IDLE | HWMOD_INIT_NO_RESET;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -305,9 +317,12 @@ void __init omap_serial_init_port(struct omap_board_data *bdata,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((console_uart_id == bdata->id) && no_console_suspend)
 		omap_device_disable_idle_on_suspend(pdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	oh->mux = omap_hwmod_mux_init(bdata->pads, bdata->pads_cnt);

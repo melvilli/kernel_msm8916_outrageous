@@ -96,7 +96,10 @@ nve0_ibus_intr(struct nouveau_subdev *subdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nve0_ibus_init(struct nouveau_object *object)
 {
 	struct nve0_ibus_priv *priv = (void *)object;
@@ -114,6 +117,9 @@ nve0_ibus_init(struct nouveau_object *object)
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nve0_ibus_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	       struct nouveau_oclass *oclass, void *data, u32 size,
@@ -138,7 +144,11 @@ nve0_ibus_oclass = {
 		.ctor = nve0_ibus_ctor,
 		.dtor = _nouveau_ibus_dtor,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init = _nouveau_ibus_init,
+=======
+		.init = nve0_ibus_init,
+>>>>>>> v3.18
 =======
 		.init = nve0_ibus_init,
 >>>>>>> v3.18

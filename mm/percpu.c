@@ -77,11 +77,17 @@
 #define PCPU_SLOT_BASE_SHIFT		5	/* 1-31 shares the same slot */
 #define PCPU_DFL_MAP_ALLOC		16	/* start a map with 16 ents */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PCPU_ATOMIC_MAP_MARGIN_LOW	32
 #define PCPU_ATOMIC_MAP_MARGIN_HIGH	64
 #define PCPU_EMPTY_POP_PAGES_LOW	2
 #define PCPU_EMPTY_POP_PAGES_HIGH	4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SMP
@@ -110,12 +116,15 @@ struct pcpu_chunk {
 	int			contig_hint;	/* max contiguous size hint */
 	void			*base_addr;	/* base address of this chunk */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			map_used;	/* # of map entries used */
 	int			map_alloc;	/* # of map entries allocated */
 	int			*map;		/* allocation map */
 	void			*data;		/* chunk data */
 	bool			immutable;	/* no [de]population allowed */
 =======
+=======
+>>>>>>> v3.18
 
 	int			map_used;	/* # of map entries used before the sentry */
 	int			map_alloc;	/* # of map entries allocated */
@@ -126,6 +135,9 @@ struct pcpu_chunk {
 	int			first_free;	/* no free below this */
 	bool			immutable;	/* no [de]population allowed */
 	int			nr_populated;	/* # of populated pages */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long		populated[];	/* populated bitmap */
 };
@@ -171,6 +183,7 @@ static struct pcpu_chunk *pcpu_reserved_chunk;
 static int pcpu_reserved_chunk_limit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Synchronization rules.
  *
@@ -204,6 +217,8 @@ static struct list_head *pcpu_slot __read_mostly; /* chunk list slots */
 static void pcpu_reclaim(struct work_struct *work);
 static DECLARE_WORK(pcpu_reclaim_work, pcpu_reclaim);
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(pcpu_lock);	/* all internal data structures */
 static DEFINE_MUTEX(pcpu_alloc_mutex);	/* chunk create/destroy, [de]pop */
 
@@ -231,6 +246,9 @@ static void pcpu_schedule_balance_work(void)
 	if (pcpu_async_enabled)
 		schedule_work(&pcpu_balance_work);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static bool pcpu_addr_in_first_chunk(void *addr)
@@ -365,7 +383,10 @@ static void pcpu_mem_free(void *ptr, size_t size)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pcpu_count_occupied_pages - count the number of pages an area occupies
  * @chunk: chunk of interest
  * @i: index of the area in question
@@ -398,6 +419,9 @@ static int pcpu_count_occupied_pages(struct pcpu_chunk *chunk, int i)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pcpu_chunk_relocate - put chunk in the appropriate chunk slot
  * @chunk: chunk of interest
@@ -427,10 +451,13 @@ static void pcpu_chunk_relocate(struct pcpu_chunk *chunk, int oslot)
  * pcpu_need_to_extend - determine whether chunk area map needs to be extended
  * @chunk: chunk of interest
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Determine whether area map of @chunk needs to be extended to
  * accommodate a new allocation.
 =======
+=======
+>>>>>>> v3.18
  * @is_atomic: the allocation context
  *
  * Determine whether area map of @chunk needs to be extended.  If
@@ -439,6 +466,9 @@ static void pcpu_chunk_relocate(struct pcpu_chunk *chunk, int oslot)
  * low.  If !@is_atomic, it aims for more empty space.  Combined, this
  * ensures that the map is likely to have enough available space to
  * accomodate atomic allocations which can't extend maps directly.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * CONTEXT:
@@ -448,6 +478,7 @@ static void pcpu_chunk_relocate(struct pcpu_chunk *chunk, int oslot)
  * New target map allocation length if extension is necessary, 0
  * otherwise.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pcpu_need_to_extend(struct pcpu_chunk *chunk)
 {
@@ -459,6 +490,8 @@ static int pcpu_need_to_extend(struct pcpu_chunk *chunk)
 	new_alloc = PCPU_DFL_MAP_ALLOC;
 	while (new_alloc < chunk->map_used + 2)
 =======
+=======
+>>>>>>> v3.18
 static int pcpu_need_to_extend(struct pcpu_chunk *chunk, bool is_atomic)
 {
 	int margin, new_alloc;
@@ -479,6 +512,9 @@ static int pcpu_need_to_extend(struct pcpu_chunk *chunk, bool is_atomic)
 
 	new_alloc = PCPU_DFL_MAP_ALLOC;
 	while (new_alloc < chunk->map_used + margin)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		new_alloc *= 2;
 
@@ -537,6 +573,7 @@ out_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * pcpu_split_block - split a map block
  * @chunk: chunk of interest
@@ -577,6 +614,8 @@ static void pcpu_split_block(struct pcpu_chunk *chunk, int i,
 		chunk->map[i++] -= tail;
 		chunk->map[i] = tail;
 =======
+=======
+>>>>>>> v3.18
 static void pcpu_map_extend_workfn(struct work_struct *work)
 {
 	struct pcpu_chunk *chunk = container_of(work, struct pcpu_chunk,
@@ -637,6 +676,9 @@ static int pcpu_fit_in_area(struct pcpu_chunk *chunk, int off, int this_size,
 		if (rs >= page_end)
 			return head;
 		cand_off = re * PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -647,6 +689,11 @@ static int pcpu_fit_in_area(struct pcpu_chunk *chunk, int off, int this_size,
  * @size: wanted size in bytes
  * @align: wanted align
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @pop_only: allocate only from the populated area
+ * @occ_pages_p: out param for the number of pages the area occupies
+>>>>>>> v3.18
 =======
  * @pop_only: allocate only from the populated area
  * @occ_pages_p: out param for the number of pages the area occupies
@@ -666,7 +713,12 @@ static int pcpu_fit_in_area(struct pcpu_chunk *chunk, int off, int this_size,
  * found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align)
+=======
+static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
+			   bool pop_only, int *occ_pages_p)
+>>>>>>> v3.18
 =======
 static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 			   bool pop_only, int *occ_pages_p)
@@ -675,6 +727,7 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 	int oslot = pcpu_chunk_slot(chunk);
 	int max_contig = 0;
 	int i, off;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	for (i = 0, off = 0; i < chunk->map_used; off += abs(chunk->map[i++])) {
@@ -690,6 +743,8 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 		if (chunk->map[i] < head + size) {
 			max_contig = max(chunk->map[i], max_contig);
 =======
+=======
+>>>>>>> v3.18
 	bool seen_free = false;
 	int *p;
 
@@ -711,6 +766,9 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 				seen_free = true;
 			}
 			max_contig = max(this_size, max_contig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -722,6 +780,7 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 		 * uncommon for percpu allocations.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (head && (head < sizeof(int) || chunk->map[i - 1] > 0)) {
 			if (chunk->map[i - 1] > 0)
 				chunk->map[i - 1] += head;
@@ -732,6 +791,8 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 			chunk->map[i] -= head;
 			off += head;
 =======
+=======
+>>>>>>> v3.18
 		if (head && (head < sizeof(int) || !(p[-1] & 1))) {
 			*p = off += head;
 			if (p[-1] & 1)
@@ -739,11 +800,15 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 			else
 				max_contig = max(*p - p[-1], max_contig);
 			this_size -= head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			head = 0;
 		}
 
 		/* if tail is small, just keep it around */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tail = chunk->map[i] - head - size;
 		if (tail < sizeof(int))
@@ -764,6 +829,8 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 		/* update hint and mark allocated */
 		if (is_last)
 =======
+=======
+>>>>>>> v3.18
 		tail = this_size - head - size;
 		if (tail < sizeof(int)) {
 			tail = 0;
@@ -799,6 +866,9 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 
 		/* update hint and mark allocated */
 		if (i + 1 == chunk->map_used)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			chunk->contig_hint = max_contig; /* fully scanned */
 		else
@@ -806,14 +876,20 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
 						 max_contig);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chunk->free_size -= chunk->map[i];
 		chunk->map[i] = -chunk->map[i];
 
 =======
+=======
+>>>>>>> v3.18
 		chunk->free_size -= size;
 		*p |= 1;
 
 		*occ_pages_p = pcpu_count_occupied_pages(chunk, i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pcpu_chunk_relocate(chunk, oslot);
 		return off;
@@ -831,6 +907,10 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
  * @chunk: chunk of interest
  * @freeme: offset of area to free
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @occ_pages_p: out param for the number of pages the area occupies
+>>>>>>> v3.18
 =======
  * @occ_pages_p: out param for the number of pages the area occupies
 >>>>>>> v3.18
@@ -842,6 +922,7 @@ static int pcpu_alloc_area(struct pcpu_chunk *chunk, int size, int align,
  * CONTEXT:
  * pcpu_lock.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pcpu_free_area(struct pcpu_chunk *chunk, int freeme)
 {
@@ -875,6 +956,8 @@ static void pcpu_free_area(struct pcpu_chunk *chunk, int freeme)
 
 	chunk->contig_hint = max(chunk->map[i], chunk->contig_hint);
 =======
+=======
+>>>>>>> v3.18
 static void pcpu_free_area(struct pcpu_chunk *chunk, int freeme,
 			   int *occ_pages_p)
 {
@@ -925,6 +1008,9 @@ static void pcpu_free_area(struct pcpu_chunk *chunk, int freeme,
 	}
 
 	chunk->contig_hint = max(chunk->map[i + 1] - chunk->map[i] - 1, chunk->contig_hint);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pcpu_chunk_relocate(chunk, oslot);
 }
@@ -946,16 +1032,22 @@ static struct pcpu_chunk *pcpu_alloc_chunk(void)
 
 	chunk->map_alloc = PCPU_DFL_MAP_ALLOC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chunk->map[chunk->map_used++] = pcpu_unit_size;
 
 	INIT_LIST_HEAD(&chunk->list);
 =======
+=======
+>>>>>>> v3.18
 	chunk->map[0] = 0;
 	chunk->map[1] = pcpu_unit_size | 1;
 	chunk->map_used = 1;
 
 	INIT_LIST_HEAD(&chunk->list);
 	INIT_WORK(&chunk->map_extend_work, pcpu_map_extend_workfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chunk->free_size = pcpu_unit_size;
 	chunk->contig_hint = pcpu_unit_size;
@@ -972,7 +1064,10 @@ static void pcpu_free_chunk(struct pcpu_chunk *chunk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * pcpu_chunk_populated - post-population bookkeeping
  * @chunk: pcpu_chunk which got populated
@@ -1017,6 +1112,9 @@ static void pcpu_chunk_depopulated(struct pcpu_chunk *chunk,
 	pcpu_nr_empty_pop_pages -= nr;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Chunk management implementation.
@@ -1080,23 +1178,34 @@ static struct pcpu_chunk *pcpu_chunk_addr_search(void *addr)
  * @align: alignment of area (max PAGE_SIZE)
  * @reserved: allocate from the reserved chunk if available
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Allocate percpu area of @size bytes aligned at @align.
  *
  * CONTEXT:
  * Does GFP_KERNEL allocation.
 =======
+=======
+>>>>>>> v3.18
  * @gfp: allocation flags
  *
  * Allocate percpu area of @size bytes aligned at @align.  If @gfp doesn't
  * contain %GFP_KERNEL, the allocation is atomic.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * RETURNS:
  * Percpu pointer to the allocated area on success, NULL on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved)
+=======
+static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved,
+				 gfp_t gfp)
+>>>>>>> v3.18
 =======
 static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved,
 				 gfp_t gfp)
@@ -1106,11 +1215,14 @@ static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved,
 	struct pcpu_chunk *chunk;
 	const char *err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int slot, off, new_alloc;
 	unsigned long flags;
 	void __percpu *ptr;
 
 =======
+=======
+>>>>>>> v3.18
 	bool is_atomic = (gfp & GFP_KERNEL) != GFP_KERNEL;
 	int occ_pages = 0;
 	int slot, off, new_alloc, cpu, ret;
@@ -1126,6 +1238,9 @@ static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved,
 
 	size = ALIGN(size, 2);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(!size || size > PCPU_MIN_UNIT_SIZE || align > PAGE_SIZE)) {
 		WARN(true, "illegal size (%zu) or align (%zu) for "
@@ -1134,7 +1249,10 @@ static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&pcpu_alloc_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&pcpu_lock, flags);
@@ -1149,25 +1267,36 @@ static void __percpu *pcpu_alloc(size_t size, size_t align, bool reserved,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((new_alloc = pcpu_need_to_extend(chunk))) {
 			spin_unlock_irqrestore(&pcpu_lock, flags);
 			if (pcpu_extend_area_map(chunk, new_alloc) < 0) {
 				err = "failed to extend area map of reserved chunk";
 				goto fail_unlock_mutex;
 =======
+=======
+>>>>>>> v3.18
 		while ((new_alloc = pcpu_need_to_extend(chunk, is_atomic))) {
 			spin_unlock_irqrestore(&pcpu_lock, flags);
 			if (is_atomic ||
 			    pcpu_extend_area_map(chunk, new_alloc) < 0) {
 				err = "failed to extend area map of reserved chunk";
 				goto fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			spin_lock_irqsave(&pcpu_lock, flags);
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		off = pcpu_alloc_area(chunk, size, align);
+=======
+		off = pcpu_alloc_area(chunk, size, align, is_atomic,
+				      &occ_pages);
+>>>>>>> v3.18
 =======
 		off = pcpu_alloc_area(chunk, size, align, is_atomic,
 				      &occ_pages);
@@ -1187,20 +1316,30 @@ restart:
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			new_alloc = pcpu_need_to_extend(chunk);
 			if (new_alloc) {
 =======
+=======
+>>>>>>> v3.18
 			new_alloc = pcpu_need_to_extend(chunk, is_atomic);
 			if (new_alloc) {
 				if (is_atomic)
 					continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				spin_unlock_irqrestore(&pcpu_lock, flags);
 				if (pcpu_extend_area_map(chunk,
 							 new_alloc) < 0) {
 					err = "failed to extend area map";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					goto fail_unlock_mutex;
+=======
+					goto fail;
+>>>>>>> v3.18
 =======
 					goto fail;
 >>>>>>> v3.18
@@ -1214,7 +1353,12 @@ restart:
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			off = pcpu_alloc_area(chunk, size, align);
+=======
+			off = pcpu_alloc_area(chunk, size, align, is_atomic,
+					      &occ_pages);
+>>>>>>> v3.18
 =======
 			off = pcpu_alloc_area(chunk, size, align, is_atomic,
 					      &occ_pages);
@@ -1224,6 +1368,7 @@ restart:
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* hmmm... no space left, create a new chunk */
 	spin_unlock_irqrestore(&pcpu_lock, flags);
@@ -1237,6 +1382,8 @@ restart:
 	spin_lock_irqsave(&pcpu_lock, flags);
 	pcpu_chunk_relocate(chunk, -1);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&pcpu_lock, flags);
 
 	/*
@@ -1264,12 +1411,16 @@ restart:
 	}
 
 	mutex_unlock(&pcpu_alloc_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	goto restart;
 
 area_found:
 	spin_unlock_irqrestore(&pcpu_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* populate, map and clear the area */
 	if (pcpu_populate_chunk(chunk, off, size)) {
@@ -1283,6 +1434,8 @@ area_found:
 
 	/* return address relative to base address */
 =======
+=======
+>>>>>>> v3.18
 	/* populate if not all pages are already there */
 	if (!is_atomic) {
 		int page_start, page_end, rs, re;
@@ -1321,6 +1474,9 @@ area_found:
 	for_each_possible_cpu(cpu)
 		memset((void *)pcpu_chunk_addr(chunk, cpu, 0) + off, 0, size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ptr = __addr_to_pcpu_ptr(chunk->base_addr + off);
 	kmemleak_alloc_percpu(ptr, size);
@@ -1329,33 +1485,46 @@ area_found:
 fail_unlock:
 	spin_unlock_irqrestore(&pcpu_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail_unlock_mutex:
 	mutex_unlock(&pcpu_alloc_mutex);
 	if (warn_limit) {
 		pr_warning("PERCPU: allocation failed, size=%zu align=%zu, "
 			   "%s\n", size, align, err);
 =======
+=======
+>>>>>>> v3.18
 fail:
 	if (!is_atomic && warn_limit) {
 		pr_warning("PERCPU: allocation failed, size=%zu align=%zu atomic=%d, %s\n",
 			   size, align, is_atomic, err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dump_stack();
 		if (!--warn_limit)
 			pr_info("PERCPU: limit reached, disable warning\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (is_atomic) {
 		/* see the flag handling in pcpu_blance_workfn() */
 		pcpu_atomic_alloc_failed = true;
 		pcpu_schedule_balance_work();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * __alloc_percpu - allocate dynamic percpu area
  * @size: size of area to allocate in bytes
@@ -1367,6 +1536,8 @@ fail:
  * CONTEXT:
  * Does GFP_KERNEL allocation.
 =======
+=======
+>>>>>>> v3.18
  * __alloc_percpu_gfp - allocate dynamic percpu area
  * @size: size of area to allocate in bytes
  * @align: alignment of area (max PAGE_SIZE)
@@ -1375,16 +1546,22 @@ fail:
  * Allocate zero-filled percpu area of @size bytes aligned at @align.  If
  * @gfp doesn't contain %GFP_KERNEL, the allocation doesn't block and can
  * be called from any context but is a lot more likely to fail.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * RETURNS:
  * Percpu pointer to the allocated area on success, NULL on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __percpu *__alloc_percpu(size_t size, size_t align)
 {
 	return pcpu_alloc(size, align, false);
 =======
+=======
+>>>>>>> v3.18
 void __percpu *__alloc_percpu_gfp(size_t size, size_t align, gfp_t gfp)
 {
 	return pcpu_alloc(size, align, false, gfp);
@@ -1401,6 +1578,9 @@ EXPORT_SYMBOL_GPL(__alloc_percpu_gfp);
 void __percpu *__alloc_percpu(size_t size, size_t align)
 {
 	return pcpu_alloc(size, align, false, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(__alloc_percpu);
@@ -1423,6 +1603,7 @@ EXPORT_SYMBOL_GPL(__alloc_percpu);
  */
 void __percpu *__alloc_reserved_percpu(size_t size, size_t align)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return pcpu_alloc(size, align, true);
 }
@@ -1454,6 +1635,8 @@ static void pcpu_reclaim(struct work_struct *work)
 
 		list_move(&chunk->list, &todo);
 =======
+=======
+>>>>>>> v3.18
 	return pcpu_alloc(size, align, true, GFP_KERNEL);
 }
 
@@ -1485,11 +1668,15 @@ static void pcpu_balance_workfn(struct work_struct *work)
 			continue;
 
 		list_move(&chunk->list, &to_free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	spin_unlock_irq(&pcpu_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry_safe(chunk, next, &todo, list) {
 		pcpu_depopulate_chunk(chunk, 0, pcpu_unit_size);
@@ -1497,6 +1684,8 @@ static void pcpu_balance_workfn(struct work_struct *work)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_safe(chunk, next, &to_free, list) {
 		int rs, re;
 
@@ -1577,6 +1766,9 @@ retry_pop:
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&pcpu_alloc_mutex);
 }
@@ -1596,7 +1788,11 @@ void free_percpu(void __percpu *ptr)
 	struct pcpu_chunk *chunk;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int off;
+=======
+	int off, occ_pages;
+>>>>>>> v3.18
 =======
 	int off, occ_pages;
 >>>>>>> v3.18
@@ -1614,12 +1810,18 @@ void free_percpu(void __percpu *ptr)
 	off = addr - chunk->base_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcpu_free_area(chunk, off);
 =======
+=======
+>>>>>>> v3.18
 	pcpu_free_area(chunk, off, &occ_pages);
 
 	if (chunk != pcpu_reserved_chunk)
 		pcpu_nr_empty_pop_pages += occ_pages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* if there are more than one fully free chunks, wake up grim reaper */
@@ -1629,7 +1831,11 @@ void free_percpu(void __percpu *ptr)
 		list_for_each_entry(pos, &pcpu_slot[pcpu_nr_slots - 1], list)
 			if (pos != chunk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				schedule_work(&pcpu_reclaim_work);
+=======
+				pcpu_schedule_balance_work();
+>>>>>>> v3.18
 =======
 				pcpu_schedule_balance_work();
 >>>>>>> v3.18
@@ -1759,7 +1965,11 @@ struct pcpu_alloc_info * __init pcpu_alloc_alloc_info(int nr_groups,
 	ai_size = base_size + nr_units * sizeof(ai->groups[0].cpu_map[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr = alloc_bootmem_nopanic(PFN_ALIGN(ai_size));
+=======
+	ptr = memblock_virt_alloc_nopanic(PFN_ALIGN(ai_size), 0);
+>>>>>>> v3.18
 =======
 	ptr = memblock_virt_alloc_nopanic(PFN_ALIGN(ai_size), 0);
 >>>>>>> v3.18
@@ -1788,7 +1998,11 @@ struct pcpu_alloc_info * __init pcpu_alloc_alloc_info(int nr_groups,
 void __init pcpu_free_alloc_info(struct pcpu_alloc_info *ai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_bootmem(__pa(ai), ai->__ai_size);
+=======
+	memblock_free_early(__pa(ai), ai->__ai_size);
+>>>>>>> v3.18
 =======
 	memblock_free_early(__pa(ai), ai->__ai_size);
 >>>>>>> v3.18
@@ -1950,17 +2164,23 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 
 	/* process group information and build config tables accordingly */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	group_offsets = alloc_bootmem(ai->nr_groups * sizeof(group_offsets[0]));
 	group_sizes = alloc_bootmem(ai->nr_groups * sizeof(group_sizes[0]));
 	unit_map = alloc_bootmem(nr_cpu_ids * sizeof(unit_map[0]));
 	unit_off = alloc_bootmem(nr_cpu_ids * sizeof(unit_off[0]));
 =======
+=======
+>>>>>>> v3.18
 	group_offsets = memblock_virt_alloc(ai->nr_groups *
 					     sizeof(group_offsets[0]), 0);
 	group_sizes = memblock_virt_alloc(ai->nr_groups *
 					   sizeof(group_sizes[0]), 0);
 	unit_map = memblock_virt_alloc(nr_cpu_ids * sizeof(unit_map[0]), 0);
 	unit_off = memblock_virt_alloc(nr_cpu_ids * sizeof(unit_off[0]), 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (cpu = 0; cpu < nr_cpu_ids; cpu++)
@@ -2024,7 +2244,12 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 	 */
 	pcpu_nr_slots = __pcpu_size_to_slot(pcpu_unit_size) + 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcpu_slot = alloc_bootmem(pcpu_nr_slots * sizeof(pcpu_slot[0]));
+=======
+	pcpu_slot = memblock_virt_alloc(
+			pcpu_nr_slots * sizeof(pcpu_slot[0]), 0);
+>>>>>>> v3.18
 =======
 	pcpu_slot = memblock_virt_alloc(
 			pcpu_nr_slots * sizeof(pcpu_slot[0]), 0);
@@ -2040,8 +2265,14 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 	 * static percpu allocation).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schunk = alloc_bootmem(pcpu_chunk_struct_size);
 	INIT_LIST_HEAD(&schunk->list);
+=======
+	schunk = memblock_virt_alloc(pcpu_chunk_struct_size, 0);
+	INIT_LIST_HEAD(&schunk->list);
+	INIT_WORK(&schunk->map_extend_work, pcpu_map_extend_workfn);
+>>>>>>> v3.18
 =======
 	schunk = memblock_virt_alloc(pcpu_chunk_struct_size, 0);
 	INIT_LIST_HEAD(&schunk->list);
@@ -2053,6 +2284,10 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 	schunk->immutable = true;
 	bitmap_fill(schunk->populated, pcpu_unit_pages);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	schunk->nr_populated = pcpu_unit_pages;
+>>>>>>> v3.18
 =======
 	schunk->nr_populated = pcpu_unit_pages;
 >>>>>>> v3.18
@@ -2068,6 +2303,7 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 	schunk->contig_hint = schunk->free_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schunk->map[schunk->map_used++] = -ai->static_size;
 	if (schunk->free_size)
 		schunk->map[schunk->map_used++] = schunk->free_size;
@@ -2077,6 +2313,8 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 		dchunk = alloc_bootmem(pcpu_chunk_struct_size);
 		INIT_LIST_HEAD(&dchunk->list);
 =======
+=======
+>>>>>>> v3.18
 	schunk->map[0] = 1;
 	schunk->map[1] = ai->static_size;
 	schunk->map_used = 1;
@@ -2090,6 +2328,9 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 		dchunk = memblock_virt_alloc(pcpu_chunk_struct_size, 0);
 		INIT_LIST_HEAD(&dchunk->list);
 		INIT_WORK(&dchunk->map_extend_work, pcpu_map_extend_workfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dchunk->base_addr = base_addr;
 		dchunk->map = dmap;
@@ -2097,11 +2338,14 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 		dchunk->immutable = true;
 		bitmap_fill(dchunk->populated, pcpu_unit_pages);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		dchunk->contig_hint = dchunk->free_size = dyn_size;
 		dchunk->map[dchunk->map_used++] = -pcpu_reserved_chunk_limit;
 		dchunk->map[dchunk->map_used++] = dchunk->free_size;
 =======
+=======
+>>>>>>> v3.18
 		dchunk->nr_populated = pcpu_unit_pages;
 
 		dchunk->contig_hint = dchunk->free_size = dyn_size;
@@ -2109,12 +2353,20 @@ int __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
 		dchunk->map[1] = pcpu_reserved_chunk_limit;
 		dchunk->map[2] = (pcpu_reserved_chunk_limit + dchunk->free_size) | 1;
 		dchunk->map_used = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* link the first chunk in */
 	pcpu_first_chunk = dchunk ?: schunk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pcpu_nr_empty_pop_pages +=
+		pcpu_count_occupied_pages(pcpu_first_chunk, 1);
+>>>>>>> v3.18
 =======
 	pcpu_nr_empty_pop_pages +=
 		pcpu_count_occupied_pages(pcpu_first_chunk, 1);
@@ -2385,7 +2637,11 @@ int __init pcpu_embed_first_chunk(size_t reserved_size, size_t dyn_size,
 	areas_size = PFN_ALIGN(ai->nr_groups * sizeof(void *));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	areas = alloc_bootmem_nopanic(areas_size);
+=======
+	areas = memblock_virt_alloc_nopanic(areas_size, 0);
+>>>>>>> v3.18
 =======
 	areas = memblock_virt_alloc_nopanic(areas_size, 0);
 >>>>>>> v3.18
@@ -2449,15 +2705,21 @@ int __init pcpu_embed_first_chunk(size_t reserved_size, size_t dyn_size,
 
 	/* warn if maximum distance is further than 75% of vmalloc space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (max_distance > (VMALLOC_END - VMALLOC_START) * 3 / 4) {
 		pr_warning("PERCPU: max_distance=0x%zx too large for vmalloc "
 			   "space 0x%lx\n", max_distance,
 			   (unsigned long)(VMALLOC_END - VMALLOC_START));
 =======
+=======
+>>>>>>> v3.18
 	if (max_distance > VMALLOC_TOTAL * 3 / 4) {
 		pr_warning("PERCPU: max_distance=0x%zx too large for vmalloc "
 			   "space 0x%lx\n", max_distance,
 			   VMALLOC_TOTAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_NEED_PER_CPU_PAGE_FIRST_CHUNK
 		/* and fail if we have fallback */
@@ -2476,6 +2738,7 @@ int __init pcpu_embed_first_chunk(size_t reserved_size, size_t dyn_size,
 out_free_areas:
 	for (group = 0; group < ai->nr_groups; group++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_fn(areas[group],
 			ai->groups[group].nr_units * ai->unit_size);
 out_free:
@@ -2483,6 +2746,8 @@ out_free:
 	if (areas)
 		free_bootmem(__pa(areas), areas_size);
 =======
+=======
+>>>>>>> v3.18
 		if (areas[group])
 			free_fn(areas[group],
 				ai->groups[group].nr_units * ai->unit_size);
@@ -2490,6 +2755,9 @@ out_free:
 	pcpu_free_alloc_info(ai);
 	if (areas)
 		memblock_free_early(__pa(areas), areas_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -2539,7 +2807,11 @@ int __init pcpu_page_first_chunk(size_t reserved_size,
 	pages_size = PFN_ALIGN(unit_pages * num_possible_cpus() *
 			       sizeof(pages[0]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pages = alloc_bootmem(pages_size);
+=======
+	pages = memblock_virt_alloc(pages_size, 0);
+>>>>>>> v3.18
 =======
 	pages = memblock_virt_alloc(pages_size, 0);
 >>>>>>> v3.18
@@ -2606,7 +2878,11 @@ enomem:
 	rc = -ENOMEM;
 out_free_ar:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_bootmem(__pa(pages), pages_size);
+=======
+	memblock_free_early(__pa(pages), pages_size);
+>>>>>>> v3.18
 =======
 	memblock_free_early(__pa(pages), pages_size);
 >>>>>>> v3.18
@@ -2635,7 +2911,12 @@ static void * __init pcpu_dfl_fc_alloc(unsigned int cpu, size_t size,
 				       size_t align)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __alloc_bootmem_nopanic(size, align, __pa(MAX_DMA_ADDRESS));
+=======
+	return  memblock_virt_alloc_from_nopanic(
+			size, align, __pa(MAX_DMA_ADDRESS));
+>>>>>>> v3.18
 =======
 	return  memblock_virt_alloc_from_nopanic(
 			size, align, __pa(MAX_DMA_ADDRESS));
@@ -2645,7 +2926,11 @@ static void * __init pcpu_dfl_fc_alloc(unsigned int cpu, size_t size,
 static void __init pcpu_dfl_fc_free(void *ptr, size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_bootmem(__pa(ptr), size);
+=======
+	memblock_free_early(__pa(ptr), size);
+>>>>>>> v3.18
 =======
 	memblock_free_early(__pa(ptr), size);
 >>>>>>> v3.18
@@ -2692,7 +2977,13 @@ void __init setup_per_cpu_areas(void)
 
 	ai = pcpu_alloc_alloc_info(1, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fc = __alloc_bootmem(unit_size, PAGE_SIZE, __pa(MAX_DMA_ADDRESS));
+=======
+	fc = memblock_virt_alloc_from_nopanic(unit_size,
+					      PAGE_SIZE,
+					      __pa(MAX_DMA_ADDRESS));
+>>>>>>> v3.18
 =======
 	fc = memblock_virt_alloc_from_nopanic(unit_size,
 					      PAGE_SIZE,
@@ -2746,7 +3037,10 @@ void __init percpu_init_late(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Percpu allocator is initialized early during boot when neither slab or
@@ -2759,4 +3053,7 @@ static int __init percpu_enable_async(void)
 	return 0;
 }
 subsys_initcall(percpu_enable_async);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

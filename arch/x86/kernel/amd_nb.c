@@ -23,6 +23,10 @@ const struct pci_device_id amd_nb_misc_ids[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_15H_M30H_NB_F3) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_16H_NB_F3) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_16H_M30H_NB_F3) },
+>>>>>>> v3.18
 =======
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_16H_M30H_NB_F3) },
 >>>>>>> v3.18
@@ -35,6 +39,10 @@ static const struct pci_device_id amd_nb_link_ids[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_15H_M30H_NB_F4) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_16H_NB_F4) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_16H_M30H_NB_F4) },
+>>>>>>> v3.18
 =======
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_16H_M30H_NB_F4) },
 >>>>>>> v3.18
@@ -76,8 +84,13 @@ int amd_cache_northbridges(void)
 		i++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!i)
 		return -ENODEV;
+=======
+	if (i == 0)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (i == 0)
 		return 0;
@@ -193,7 +206,11 @@ int amd_get_subcaches(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int amd_set_subcaches(int cpu, int mask)
+=======
+int amd_set_subcaches(int cpu, unsigned long mask)
+>>>>>>> v3.18
 =======
 int amd_set_subcaches(int cpu, unsigned long mask)
 >>>>>>> v3.18

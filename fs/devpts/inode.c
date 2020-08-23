@@ -11,6 +11,11 @@
  * ------------------------------------------------------------------------- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -154,15 +159,21 @@ static inline struct super_block *pts_sb_from_inode(struct inode *inode)
 /*
  * parse_mount_options():
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Set @opts to mount options specified in @data. If an option is not
  * 	specified in @data, set it to its default value. The exception is
  * 	'newinstance' option which can only be set/cleared on a mount (i.e.
  * 	cannot be changed during remount).
 =======
+=======
+>>>>>>> v3.18
  *	Set @opts to mount options specified in @data. If an option is not
  *	specified in @data, set it to its default value. The exception is
  *	'newinstance' option which can only be set/cleared on a mount (i.e.
  *	cannot be changed during remount).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Note: @data may be NULL (in which case all options are set to default).
@@ -238,7 +249,11 @@ static int parse_mount_options(char *data, int op, struct pts_mount_opts *opts)
 #endif
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "devpts: called with bogus options\n");
+=======
+			pr_err("called with bogus options\n");
+>>>>>>> v3.18
 =======
 			pr_err("called with bogus options\n");
 >>>>>>> v3.18
@@ -278,7 +293,11 @@ static int mknod_ptmx(struct super_block *sb)
 	dentry = d_alloc_name(root, "ptmx");
 	if (!dentry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_NOTICE "Unable to alloc dentry for ptmx node\n");
+=======
+		pr_err("Unable to alloc dentry for ptmx node\n");
+>>>>>>> v3.18
 =======
 		pr_err("Unable to alloc dentry for ptmx node\n");
 >>>>>>> v3.18
@@ -291,7 +310,11 @@ static int mknod_ptmx(struct super_block *sb)
 	inode = new_inode(sb);
 	if (!inode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Unable to alloc inode for ptmx node\n");
+=======
+		pr_err("Unable to alloc inode for ptmx node\n");
+>>>>>>> v3.18
 =======
 		pr_err("Unable to alloc inode for ptmx node\n");
 >>>>>>> v3.18
@@ -328,7 +351,11 @@ static void update_ptmx_mode(struct pts_fs_info *fsi)
 static inline void update_ptmx_mode(struct pts_fs_info *fsi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        return;
+=======
+	return;
+>>>>>>> v3.18
 =======
 	return;
 >>>>>>> v3.18
@@ -342,6 +369,10 @@ static int devpts_remount(struct super_block *sb, int *flags, char *data)
 	struct pts_mount_opts *opts = &fsi->mount_opts;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -365,15 +396,21 @@ static int devpts_show_options(struct seq_file *seq, struct dentry *root)
 
 	if (opts->setuid)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(seq, ",uid=%u", from_kuid_munged(&init_user_ns, opts->uid));
 	if (opts->setgid)
 		seq_printf(seq, ",gid=%u", from_kgid_munged(&init_user_ns, opts->gid));
 =======
+=======
+>>>>>>> v3.18
 		seq_printf(seq, ",uid=%u",
 			   from_kuid_munged(&init_user_ns, opts->uid));
 	if (opts->setgid)
 		seq_printf(seq, ",gid=%u",
 			   from_kgid_munged(&init_user_ns, opts->gid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_printf(seq, ",mode=%03o", opts->mode);
 #ifdef CONFIG_DEVPTS_MULTIPLE_INSTANCES
@@ -436,7 +473,11 @@ devpts_fill_super(struct super_block *s, void *data, int silent)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "devpts: get root dentry failed\n");
+=======
+	pr_err("get root dentry failed\n");
+>>>>>>> v3.18
 =======
 	pr_err("get root dentry failed\n");
 >>>>>>> v3.18
@@ -609,6 +650,7 @@ void devpts_kill_index(struct inode *ptmx_inode, int idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * pty code needs to hold extra references in case of last /dev/tty close
  */
@@ -629,6 +671,8 @@ void devpts_del_ref(struct inode *ptmx_inode)
 	deactivate_super(sb);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

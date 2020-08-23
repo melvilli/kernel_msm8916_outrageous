@@ -89,20 +89,27 @@ int aarch32_setup_vectors_page(struct linux_binprm *bprm, int uses_interp)
 	struct mm_struct *mm = current->mm;
 	unsigned long addr = AARCH32_VECTORS_BASE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	static struct vm_special_mapping spec = {
 		.name	= "[vectors]",
 		.pages	= vectors_page,
 
 	};
 	void *ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	down_write(&mm->mmap_sem);
 	current->mm->context.vdso = (void *)addr;
 
 	/* Map vectors page at the high address. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = install_special_mapping(mm, addr, PAGE_SIZE,
 				      VM_READ|VM_EXEC|VM_MAYREAD|VM_MAYEXEC,
@@ -115,6 +122,8 @@ int aarch32_setup_vectors_page(struct linux_binprm *bprm, int uses_interp)
 #endif /* CONFIG_COMPAT */
 
 =======
+=======
+>>>>>>> v3.18
 	ret = _install_special_mapping(mm, addr, PAGE_SIZE,
 				       VM_READ|VM_EXEC|VM_MAYREAD|VM_MAYEXEC,
 				       &spec);
@@ -127,6 +136,9 @@ int aarch32_setup_vectors_page(struct linux_binprm *bprm, int uses_interp)
 
 static struct vm_special_mapping vdso_spec[2];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init vdso_init(void)
 {
@@ -139,8 +151,13 @@ static int __init vdso_init(void)
 
 	vdso_pages = (&vdso_end - &vdso_start) >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("vdso: %ld pages (%ld code, %ld data) at base %p\n",
 		vdso_pages + 1, vdso_pages, 1L, &vdso_start);
+=======
+	pr_info("vdso: %ld pages (%ld code @ %p, %ld data @ %p)\n",
+		vdso_pages + 1, vdso_pages, &vdso_start, 1L, vdso_data);
+>>>>>>> v3.18
 =======
 	pr_info("vdso: %ld pages (%ld code @ %p, %ld data @ %p)\n",
 		vdso_pages + 1, vdso_pages, &vdso_start, 1L, vdso_data);
@@ -153,6 +170,7 @@ static int __init vdso_init(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Grab the vDSO code pages. */
 	for (i = 0; i < vdso_pages; i++)
 		vdso_pagelist[i] = virt_to_page(&vdso_start + i * PAGE_SIZE);
@@ -160,6 +178,8 @@ static int __init vdso_init(void)
 	/* Grab the vDSO data page. */
 	vdso_pagelist[i] = virt_to_page(vdso_data);
 =======
+=======
+>>>>>>> v3.18
 	/* Grab the vDSO data page. */
 	vdso_pagelist[0] = virt_to_page(vdso_data);
 
@@ -177,6 +197,9 @@ static int __init vdso_init(void)
 		.name	= "[vdso]",
 		.pages	= &vdso_pagelist[1],
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -188,23 +211,30 @@ int arch_setup_additional_pages(struct linux_binprm *bprm,
 {
 	struct mm_struct *mm = current->mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long vdso_base, vdso_mapping_len;
 	int ret;
 
 	/* Be sure to map the data page */
 	vdso_mapping_len = (vdso_pages + 1) << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long vdso_base, vdso_text_len, vdso_mapping_len;
 	void *ret;
 
 	vdso_text_len = vdso_pages << PAGE_SHIFT;
 	/* Be sure to map the data page */
 	vdso_mapping_len = vdso_text_len + PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	down_write(&mm->mmap_sem);
 	vdso_base = get_unmapped_area(NULL, 0, vdso_mapping_len, 0, 0);
 	if (IS_ERR_VALUE(vdso_base)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = vdso_base;
 		goto up_fail;
@@ -263,6 +293,8 @@ struct vm_area_struct *get_gate_vma(struct mm_struct *mm)
 {
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 		ret = ERR_PTR(vdso_base);
 		goto up_fail;
 	}
@@ -289,6 +321,9 @@ up_fail:
 	mm->context.vdso = NULL;
 	up_write(&mm->mmap_sem);
 	return PTR_ERR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -299,7 +334,11 @@ void update_vsyscall(struct timekeeper *tk)
 {
 	struct timespec xtime_coarse;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 use_syscall = strcmp(tk->clock->name, "arch_sys_counter");
+=======
+	u32 use_syscall = strcmp(tk->tkr.clock->name, "arch_sys_counter");
+>>>>>>> v3.18
 =======
 	u32 use_syscall = strcmp(tk->tkr.clock->name, "arch_sys_counter");
 >>>>>>> v3.18
@@ -316,17 +355,23 @@ void update_vsyscall(struct timekeeper *tk)
 
 	if (!use_syscall) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vdso_data->cs_cycle_last	= tk->clock->cycle_last;
 		vdso_data->xtime_clock_sec	= tk->xtime_sec;
 		vdso_data->xtime_clock_nsec	= tk->xtime_nsec;
 		vdso_data->cs_mult		= tk->mult;
 		vdso_data->cs_shift		= tk->shift;
 =======
+=======
+>>>>>>> v3.18
 		vdso_data->cs_cycle_last	= tk->tkr.cycle_last;
 		vdso_data->xtime_clock_sec	= tk->xtime_sec;
 		vdso_data->xtime_clock_nsec	= tk->tkr.xtime_nsec;
 		vdso_data->cs_mult		= tk->tkr.mult;
 		vdso_data->cs_shift		= tk->tkr.shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

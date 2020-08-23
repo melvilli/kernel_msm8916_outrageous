@@ -7,7 +7,11 @@ config NET_VENDOR_SMSC
 	default y
 	depends on ARM || ISA || MAC || ARM64 || MIPS || M32R || SUPERH || \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BLACKFIN || MN10300 || COLDFIRE || PCI || PCMCIA
+=======
+		BLACKFIN || MN10300 || COLDFIRE || XTENSA || PCI || PCMCIA
+>>>>>>> v3.18
 =======
 		BLACKFIN || MN10300 || COLDFIRE || XTENSA || PCI || PCMCIA
 >>>>>>> v3.18
@@ -42,10 +46,16 @@ config SMC91X
 	tristate "SMC 91C9x/91C1xxx support"
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
 	select MII
 	depends on (ARM || M32R || SUPERH || MIPS || BLACKFIN || \
 		    MN10300 || COLDFIRE || ARM64)
+=======
+	select MII
+	depends on (ARM || M32R || SUPERH || MIPS || BLACKFIN || \
+		    MN10300 || COLDFIRE || ARM64 || XTENSA)
+>>>>>>> v3.18
 =======
 	select MII
 	depends on (ARM || M32R || SUPERH || MIPS || BLACKFIN || \
@@ -68,7 +78,10 @@ config PCMCIA_SMC91C92
 	depends on PCMCIA
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -84,7 +97,10 @@ config EPIC100
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -98,7 +114,10 @@ config SMC911X
 	tristate "SMSC LAN911[5678] support"
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -117,9 +136,14 @@ config SMC911X
 config SMSC911X
 	tristate "SMSC LAN911x/LAN921x families embedded ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (ARM || SUPERH || BLACKFIN || MIPS || MN10300)
 	select CRC32
 	select NET_CORE
+=======
+	depends on HAS_IOMEM
+	select CRC32
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 	select CRC32

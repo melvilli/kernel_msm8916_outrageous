@@ -5,7 +5,11 @@
 obj-y				+= cache.o dma-default.o extable.o fault.o \
 				   gup.o init.o mmap.o page.o page-funcs.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   tlbex.o tlbex-fault.o uasm-mips.o
+=======
+				   tlbex.o tlbex-fault.o tlb-funcs.o uasm-mips.o
+>>>>>>> v3.18
 =======
 				   tlbex.o tlbex-fault.o tlb-funcs.o uasm-mips.o
 >>>>>>> v3.18

@@ -195,7 +195,10 @@ struct jffs2_inode_cache {
 
 #define INO_FLAGS_XATTR_CHECKED	0x01	/* has no duplicate xattr_ref */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INO_FLAGS_IS_DIR	0x02	/* is a directory */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -254,10 +257,14 @@ struct jffs2_readinode_info
 struct jffs2_full_dirent
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		struct jffs2_raw_node_ref *raw;
 		struct jffs2_inode_cache *ic; /* Just during part of build */
 	};
+=======
+	struct jffs2_raw_node_ref *raw;
+>>>>>>> v3.18
 =======
 	struct jffs2_raw_node_ref *raw;
 >>>>>>> v3.18

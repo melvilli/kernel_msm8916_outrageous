@@ -36,7 +36,10 @@
 #define MMU_GATHER_BUNDLE	8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_RCU_TABLE_FREE
 static inline void __tlb_remove_table(void *_table)
 {
@@ -60,6 +63,9 @@ extern void tlb_remove_table(struct mmu_gather *tlb, void *table);
 #define tlb_remove_entry(tlb, entry)	tlb_remove_page(tlb, entry)
 #endif /* CONFIG_HAVE_RCU_TABLE_FREE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * TLB handling.  This allows us to remove pages from the page
@@ -68,11 +74,17 @@ extern void tlb_remove_table(struct mmu_gather *tlb, void *table);
 struct mmu_gather {
 	struct mm_struct	*mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_RCU_TABLE_FREE
 	struct mmu_table_batch	*batch;
 	unsigned int		need_flush;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int		fullmm;
 	struct vm_area_struct	*vma;
@@ -132,10 +144,13 @@ static inline void __tlb_alloc_page(struct mmu_gather *tlb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void tlb_flush_mmu(struct mmu_gather *tlb)
 {
 	tlb_flush(tlb);
 =======
+=======
+>>>>>>> v3.18
 static inline void tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
 {
 	tlb_flush(tlb);
@@ -146,6 +161,9 @@ static inline void tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
 
 static inline void tlb_flush_mmu_free(struct mmu_gather *tlb)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_pages_and_swap_cache(tlb->pages, tlb->nr);
 	tlb->nr = 0;
@@ -154,13 +172,19 @@ static inline void tlb_flush_mmu_free(struct mmu_gather *tlb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void tlb_flush_mmu(struct mmu_gather *tlb)
 {
 	tlb_flush_mmu_tlbonly(tlb);
 	tlb_flush_mmu_free(tlb);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void
 tlb_gather_mmu(struct mmu_gather *tlb, struct mm_struct *mm, unsigned long start, unsigned long end)
@@ -175,11 +199,17 @@ tlb_gather_mmu(struct mmu_gather *tlb, struct mm_struct *mm, unsigned long start
 	tlb->nr = 0;
 	__tlb_alloc_page(tlb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_HAVE_RCU_TABLE_FREE
 	tlb->batch = NULL;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -258,7 +288,11 @@ static inline void __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tlb_remove_page(tlb, pte);
+=======
+	tlb_remove_entry(tlb, pte);
+>>>>>>> v3.18
 =======
 	tlb_remove_entry(tlb, pte);
 >>>>>>> v3.18
@@ -270,7 +304,11 @@ static inline void __pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmdp,
 #ifdef CONFIG_ARM_LPAE
 	tlb_add_flush(tlb, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tlb_remove_page(tlb, virt_to_page(pmdp));
+=======
+	tlb_remove_entry(tlb, virt_to_page(pmdp));
+>>>>>>> v3.18
 =======
 	tlb_remove_entry(tlb, virt_to_page(pmdp));
 >>>>>>> v3.18

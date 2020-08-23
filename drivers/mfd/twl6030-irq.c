@@ -32,7 +32,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/export.h>
@@ -45,6 +48,10 @@
 #include <linux/of.h>
 #include <linux/irqdomain.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -78,7 +85,11 @@ static int twl6030_interrupt_mapping[24] = {
 	SIMDETECT_INTR_OFFSET,	/* Bit 10	SIM			*/
 	MMCDETECT_INTR_OFFSET,	/* Bit 11	MMC			*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RSV_INTR_OFFSET,  	/* Bit 12	Reserved		*/
+=======
+	RSV_INTR_OFFSET,	/* Bit 12	Reserved		*/
+>>>>>>> v3.18
 =======
 	RSV_INTR_OFFSET,	/* Bit 12	Reserved		*/
 >>>>>>> v3.18
@@ -96,6 +107,7 @@ static int twl6030_interrupt_mapping[24] = {
 	RSV_INTR_OFFSET,	/* Bit 23	Reserved		*/
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*----------------------------------------------------------------------*/
 
 static unsigned twl6030_irq_base;
@@ -105,6 +117,8 @@ static bool twl_irq_wake_enabled;
 static struct completion irq_event;
 static atomic_t twl6030_wakeirqs = ATOMIC_INIT(0);
 =======
+=======
+>>>>>>> v3.18
 
 static int twl6032_interrupt_mapping[24] = {
 	PWR_INTR_OFFSET,	/* Bit 0	PWRON			*/
@@ -149,12 +163,16 @@ struct twl6030_irq {
 };
 
 static struct twl6030_irq *twl6030_irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int twl6030_irq_pm_notifier(struct notifier_block *notifier,
 				   unsigned long pm_event, void *unused)
 {
 	int chained_wakeups;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	switch (pm_event) {
@@ -177,6 +195,8 @@ static int twl6030_irq_pm_notifier(struct notifier_block *notifier,
 	case PM_POST_SUSPEND:
 		enable_irq(twl_irq);
 =======
+=======
+>>>>>>> v3.18
 	struct twl6030_irq *pdata = container_of(notifier, struct twl6030_irq,
 						  pm_nb);
 
@@ -199,6 +219,9 @@ static int twl6030_irq_pm_notifier(struct notifier_block *notifier,
 
 	case PM_POST_SUSPEND:
 		enable_irq(pdata->twl_irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -209,6 +232,7 @@ static int twl6030_irq_pm_notifier(struct notifier_block *notifier,
 	return NOTIFY_DONE;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct notifier_block twl6030_irq_pm_notifier_block = {
 	.notifier_call = twl6030_irq_pm_notifier,
@@ -305,6 +329,8 @@ static irqreturn_t handle_twl6030_pih(int irq, void *devid)
 	disable_irq_nosync(irq);
 	complete(devid);
 =======
+=======
+>>>>>>> v3.18
 /*
 * Threaded irq handler for the twl6030 interrupt.
 * We query the interrupt controller in the twl6030 to determine
@@ -365,12 +391,16 @@ static irqreturn_t twl6030_irq_thread(int irq, void *data)
 	if (ret)
 		pr_warn("twl6030_irq: I2C error in clearing PIH ISR\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
 /*----------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void activate_irq(int irq)
 {
@@ -392,6 +422,8 @@ static int twl6030_irq_set_wake(struct irq_data *d, unsigned int on)
 	else
 		atomic_dec(&twl6030_wakeirqs);
 =======
+=======
+>>>>>>> v3.18
 static int twl6030_irq_set_wake(struct irq_data *d, unsigned int on)
 {
 	struct twl6030_irq *pdata = irq_get_chip_data(d->irq);
@@ -400,6 +432,9 @@ static int twl6030_irq_set_wake(struct irq_data *d, unsigned int on)
 		atomic_inc(&pdata->wakeirqs);
 	else
 		atomic_dec(&pdata->wakeirqs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -410,6 +445,10 @@ int twl6030_interrupt_unmask(u8 bit_mask, u8 offset)
 	int ret;
 	u8 unmask_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -427,6 +466,10 @@ int twl6030_interrupt_mask(u8 bit_mask, u8 offset)
 	int ret;
 	u8 mask_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -484,7 +527,12 @@ int twl6030_mmc_card_detect_config(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return twl6030_irq_base + MMCDETECT_INTR_OFFSET;
+=======
+	return irq_find_mapping(twl6030_irq->irq_domain,
+				 MMCDETECT_INTR_OFFSET);
+>>>>>>> v3.18
 =======
 	return irq_find_mapping(twl6030_irq->irq_domain,
 				 MMCDETECT_INTR_OFFSET);
@@ -518,6 +566,7 @@ int twl6030_mmc_card_detect(struct device *dev, int slot)
 EXPORT_SYMBOL(twl6030_mmc_card_detect);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int twl6030_init_irq(struct device *dev, int irq_num)
 {
 	struct			device_node *node = dev->of_node;
@@ -541,6 +590,8 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 
 	irq_end = irq_base + nr_irqs;
 =======
+=======
+>>>>>>> v3.18
 static int twl6030_irq_map(struct irq_domain *d, unsigned int virq,
 			      irq_hw_number_t hwirq)
 {
@@ -607,6 +658,9 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 		dev_err(dev, "twl6030_irq: Memory allocation failed\n");
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mask[0] = 0xFF;
@@ -614,6 +668,7 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 	mask[2] = 0xFF;
 
 	/* mask all int lines */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	twl_i2c_write(TWL_MODULE_PIH, &mask[0], REG_INT_MSK_LINE_A, 3);
 	/* mask all int sts */
@@ -623,6 +678,8 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 
 	twl6030_irq_base = irq_base;
 =======
+=======
+>>>>>>> v3.18
 	status = twl_i2c_write(TWL_MODULE_PIH, &mask[0], REG_INT_MSK_LINE_A, 3);
 	/* mask all int sts */
 	status |= twl_i2c_write(TWL_MODULE_PIH, &mask[0], REG_INT_MSK_STS_A, 3);
@@ -633,12 +690,16 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 		dev_err(dev, "I2C err writing TWL_MODULE_PIH: %d\n", status);
 		return status;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * install an irq handler for each of the modules;
 	 * clone dummy irq_chip since PIH can't *do* anything
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	twl6030_irq_chip = dummy_irq_chip;
 	twl6030_irq_chip.name = "twl6030";
@@ -661,6 +722,8 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 	status = request_irq(irq_num, handle_twl6030_pih, 0, "TWL6030-PIH",
 			     &irq_event);
 =======
+=======
+>>>>>>> v3.18
 	twl6030_irq->irq_chip = dummy_irq_chip;
 	twl6030_irq->irq_chip.name = "twl6030";
 	twl6030_irq->irq_chip.irq_set_type = NULL;
@@ -683,12 +746,16 @@ int twl6030_init_irq(struct device *dev, int irq_num)
 	/* install an irq handler to demultiplex the TWL6030 interrupt */
 	status = request_threaded_irq(irq_num, NULL, twl6030_irq_thread,
 				      IRQF_ONESHOT, "TWL6030-PIH", twl6030_irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status < 0) {
 		dev_err(dev, "could not claim irq %d: %d\n", irq_num, status);
 		goto fail_irq;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	task = kthread_run(twl6030_irq_thread, (void *)irq_num, "twl6030-irq");
 	if (IS_ERR(task)) {
@@ -709,12 +776,17 @@ fail_irq:
 		irq_set_chip_and_handler(i, NULL, NULL);
 
 =======
+=======
+>>>>>>> v3.18
 	twl6030_irq->twl_irq = irq_num;
 	register_pm_notifier(&twl6030_irq->pm_nb);
 	return 0;
 
 fail_irq:
 	irq_domain_remove(twl6030_irq->irq_domain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -722,12 +794,15 @@ fail_irq:
 int twl6030_exit_irq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_pm_notifier(&twl6030_irq_pm_notifier_block);
 
 	if (twl6030_irq_base) {
 		pr_err("twl6030: can't yet clean up IRQs?\n");
 		return -ENOSYS;
 =======
+=======
+>>>>>>> v3.18
 	if (twl6030_irq && twl6030_irq->twl_irq) {
 		unregister_pm_notifier(&twl6030_irq->pm_nb);
 		free_irq(twl6030_irq->twl_irq, NULL);
@@ -740,6 +815,9 @@ int twl6030_exit_irq(void)
 		 * The same prevents us from using devm_request_threaded_irq()
 		 * in this module.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;

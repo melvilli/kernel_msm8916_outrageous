@@ -32,7 +32,11 @@ struct proto pingv6_prot = {
 	.init =		ping_init_sock,
 	.close =	ping_close,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.connect =	ip6_datagram_connect,
+=======
+	.connect =	ip6_datagram_connect_v6_only,
+>>>>>>> v3.18
 =======
 	.connect =	ip6_datagram_connect_v6_only,
 >>>>>>> v3.18
@@ -56,7 +60,10 @@ static struct inet_protosw pingv6_protosw = {
 	.prot =      &pingv6_prot,
 	.ops =       &inet6_dgram_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check =  UDP_CSUM_DEFAULT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags =     INET_PROTOSW_REUSE,
@@ -64,6 +71,7 @@ static struct inet_protosw pingv6_protosw = {
 
 
 /* Compatibility glue so we can support IPv6 when it's compiled as a module */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int dummy_ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len,
 			  int *addr_len)
@@ -84,6 +92,8 @@ void dummy_ipv6_icmp_error(struct sock *sk, struct sk_buff *skb, int err,
 int dummy_ipv6_chk_addr(struct net *net, const struct in6_addr *addr,
 			const struct net_device *dev, int strict)
 =======
+=======
+>>>>>>> v3.18
 static int dummy_ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len,
 				 int *addr_len)
 {
@@ -101,11 +111,15 @@ static void dummy_ipv6_icmp_error(struct sock *sk, struct sk_buff *skb, int err,
 				  __be16 port, u32 info, u8 *payload) {}
 static int dummy_ipv6_chk_addr(struct net *net, const struct in6_addr *addr,
 			       const struct net_device *dev, int strict)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __init pingv6_init(void)
 {
@@ -130,6 +144,8 @@ void pingv6_exit(void)
 	inet6_unregister_protosw(&pingv6_protosw);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
@@ -157,16 +173,22 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 
 	if (msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_in6 *u = (struct sockaddr_in6 *) msg->msg_name;
 		if (msg->msg_namelen < sizeof(*u))
 			return -EINVAL;
 		if (u->sin6_family != AF_INET6) {
 			return -EAFNOSUPPORT;
 =======
+=======
+>>>>>>> v3.18
 		DECLARE_SOCKADDR(struct sockaddr_in6 *, u, msg->msg_name);
 		if (msg->msg_namelen < sizeof(struct sockaddr_in6) ||
 		    u->sin6_family != AF_INET6) {
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (sk->sk_bound_dev_if &&
@@ -179,7 +201,11 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 		if (sk->sk_state != TCP_ESTABLISHED)
 			return -EDESTADDRREQ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		daddr = &np->daddr;
+=======
+		daddr = &sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 		daddr = &sk->sk_v6_daddr;
 >>>>>>> v3.18
@@ -205,7 +231,10 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 	fl6.fl6_icmp_type = user_icmph.icmp6_type;
 	fl6.fl6_icmp_code = user_icmph.icmp6_code;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl6.flowi6_uid = sock_i_uid(sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	security_sk_classify_flow(sk, flowi6_to_flowi(&fl6));
@@ -216,7 +245,11 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 		fl6.flowi6_oif = np->ucast_oif;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst = ip6_sk_dst_lookup_flow(sk, &fl6,  daddr, 1);
+=======
+	dst = ip6_sk_dst_lookup_flow(sk, &fl6,  daddr);
+>>>>>>> v3.18
 =======
 	dst = ip6_sk_dst_lookup_flow(sk, &fl6,  daddr);
 >>>>>>> v3.18
@@ -243,12 +276,16 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 	pfh.family = AF_INET6;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipv6_addr_is_multicast(&fl6.daddr))
 		hlimit = np->mcast_hops;
 	else
 		hlimit = np->hop_limit;
 	if (hlimit < 0)
 		hlimit = ip6_dst_hoplimit(dst);
+=======
+	hlimit = ip6_sk_dst_hoplimit(np, &fl6, dst);
+>>>>>>> v3.18
 =======
 	hlimit = ip6_sk_dst_hoplimit(np, &fl6, dst);
 >>>>>>> v3.18
@@ -261,8 +298,13 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ICMP6_INC_STATS_BH(sock_net(sk), rt->rt6i_idev,
 				   ICMP6_MIB_OUTERRORS);
+=======
+		ICMP6_INC_STATS(sock_net(sk), rt->rt6i_idev,
+				ICMP6_MIB_OUTERRORS);
+>>>>>>> v3.18
 =======
 		ICMP6_INC_STATS(sock_net(sk), rt->rt6i_idev,
 				ICMP6_MIB_OUTERRORS);
@@ -281,7 +323,10 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 	return len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PROC_FS
 static void *ping_v6_seq_start(struct seq_file *seq, loff_t *pos)
@@ -364,4 +409,7 @@ void pingv6_exit(void)
 #endif
 	inet6_unregister_protosw(&pingv6_protosw);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

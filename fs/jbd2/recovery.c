@@ -179,14 +179,20 @@ static int jbd2_descr_block_csum_verify(journal_t *j,
 {
 	struct jbd2_journal_block_tail *tail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 provided, calculated;
 
 	if (!JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 =======
+=======
+>>>>>>> v3.18
 	__be32 provided;
 	__u32 calculated;
 
 	if (!jbd2_journal_has_csum_v2or3(j))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 
@@ -198,8 +204,12 @@ static int jbd2_descr_block_csum_verify(journal_t *j,
 	tail->t_checksum = provided;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	provided = be32_to_cpu(provided);
 	return provided == calculated;
+=======
+	return provided == cpu_to_be32(calculated);
+>>>>>>> v3.18
 =======
 	return provided == cpu_to_be32(calculated);
 >>>>>>> v3.18
@@ -217,7 +227,11 @@ static int count_tags(journal_t *journal, struct buffer_head *bh)
 	int			tag_bytes = journal_tag_bytes(journal);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (JBD2_HAS_INCOMPAT_FEATURE(journal, JBD2_FEATURE_INCOMPAT_CSUM_V2))
+=======
+	if (jbd2_journal_has_csum_v2or3(journal))
+>>>>>>> v3.18
 =======
 	if (jbd2_journal_has_csum_v2or3(journal))
 >>>>>>> v3.18
@@ -354,16 +368,22 @@ int jbd2_journal_skip_recovery(journal_t *journal)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long long read_tag_block(int tag_bytes, journal_block_tag_t *tag)
 {
 	unsigned long long block = be32_to_cpu(tag->t_blocknr);
 	if (tag_bytes > JBD2_TAG_SIZE32)
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long long read_tag_block(journal_t *journal,
 						journal_block_tag_t *tag)
 {
 	unsigned long long block = be32_to_cpu(tag->t_blocknr);
 	if (JBD2_HAS_INCOMPAT_FEATURE(journal, JBD2_FEATURE_INCOMPAT_64BIT))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		block |= (u64)be32_to_cpu(tag->t_blocknr_high) << 32;
 	return block;
@@ -405,14 +425,20 @@ static int jbd2_commit_block_csum_verify(journal_t *j, void *buf)
 {
 	struct commit_header *h;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 provided, calculated;
 
 	if (!JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 =======
+=======
+>>>>>>> v3.18
 	__be32 provided;
 	__u32 calculated;
 
 	if (!jbd2_journal_has_csum_v2or3(j))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 
@@ -423,8 +449,12 @@ static int jbd2_commit_block_csum_verify(journal_t *j, void *buf)
 	h->h_chksum[0] = provided;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	provided = be32_to_cpu(provided);
 	return provided == calculated;
+=======
+	return provided == cpu_to_be32(calculated);
+>>>>>>> v3.18
 =======
 	return provided == cpu_to_be32(calculated);
 >>>>>>> v3.18
@@ -433,6 +463,7 @@ static int jbd2_commit_block_csum_verify(journal_t *j, void *buf)
 static int jbd2_block_tag_csum_verify(journal_t *j, journal_block_tag_t *tag,
 				      void *buf, __u32 sequence)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__u32 provided, calculated;
 
@@ -447,6 +478,8 @@ static int jbd2_block_tag_csum_verify(journal_t *j, journal_block_tag_t *tag,
 
 	return provided == cpu_to_be32(calculated);
 =======
+=======
+>>>>>>> v3.18
 	journal_block_tag3_t *tag3 = (journal_block_tag3_t *)tag;
 	__u32 csum32;
 	__be32 seq;
@@ -462,6 +495,9 @@ static int jbd2_block_tag_csum_verify(journal_t *j, journal_block_tag_t *tag,
 		return tag3->t_checksum == cpu_to_be32(csum32);
 	else
 		return tag->t_checksum == cpu_to_be16(csum32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -567,8 +603,12 @@ static int do_one_pass(journal_t *journal,
 		case JBD2_DESCRIPTOR_BLOCK:
 			/* Verify checksum first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (JBD2_HAS_INCOMPAT_FEATURE(journal,
 					JBD2_FEATURE_INCOMPAT_CSUM_V2))
+=======
+			if (jbd2_journal_has_csum_v2or3(journal))
+>>>>>>> v3.18
 =======
 			if (jbd2_journal_has_csum_v2or3(journal))
 >>>>>>> v3.18
@@ -634,7 +674,11 @@ static int do_one_pass(journal_t *journal,
 
 					J_ASSERT(obh != NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					blocknr = read_tag_block(tag_bytes,
+=======
+					blocknr = read_tag_block(journal,
+>>>>>>> v3.18
 =======
 					blocknr = read_tag_block(journal,
 >>>>>>> v3.18
@@ -658,7 +702,11 @@ static int do_one_pass(journal_t *journal,
 						brelse(obh);
 						success = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 						printk(KERN_ERR "JBD: Invalid "
+=======
+						printk(KERN_ERR "JBD2: Invalid "
+>>>>>>> v3.18
 =======
 						printk(KERN_ERR "JBD2: Invalid "
 >>>>>>> v3.18
@@ -878,14 +926,20 @@ static int jbd2_revoke_block_csum_verify(journal_t *j,
 {
 	struct jbd2_journal_revoke_tail *tail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 provided, calculated;
 
 	if (!JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 =======
+=======
+>>>>>>> v3.18
 	__be32 provided;
 	__u32 calculated;
 
 	if (!jbd2_journal_has_csum_v2or3(j))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 
@@ -897,8 +951,12 @@ static int jbd2_revoke_block_csum_verify(journal_t *j,
 	tail->r_checksum = provided;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	provided = be32_to_cpu(provided);
 	return provided == calculated;
+=======
+	return provided == cpu_to_be32(calculated);
+>>>>>>> v3.18
 =======
 	return provided == cpu_to_be32(calculated);
 >>>>>>> v3.18

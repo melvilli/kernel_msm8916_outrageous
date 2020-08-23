@@ -2,6 +2,10 @@ config VIDEO_ZORAN
 	tristate "Zoran ZR36057/36067 Video For Linux"
 	depends on PCI && I2C_ALGOBIT && VIDEO_V4L2 && VIRT_TO_BUS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on !ALPHA
+>>>>>>> v3.18
 =======
 	depends on !ALPHA
 >>>>>>> v3.18

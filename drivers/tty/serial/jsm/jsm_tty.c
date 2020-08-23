@@ -178,11 +178,14 @@ static void jsm_tty_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void jsm_tty_enable_ms(struct uart_port *port)
 {
 	/* Nothing needed */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void jsm_tty_break(struct uart_port *port, int break_state)
@@ -358,7 +361,10 @@ static struct uart_ops jsm_ops = {
 	.send_xchar	= jsm_tty_send_xchar,
 	.stop_rx	= jsm_tty_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= jsm_tty_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= jsm_tty_break,

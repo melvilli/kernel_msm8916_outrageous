@@ -19,7 +19,11 @@ static struct rpc_cred null_cred;
 
 static struct rpc_auth *
 <<<<<<< HEAD
+<<<<<<< HEAD
 nul_create(struct rpc_clnt *clnt, rpc_authflavor_t flavor)
+=======
+nul_create(struct rpc_auth_create_args *args, struct rpc_clnt *clnt)
+>>>>>>> v3.18
 =======
 nul_create(struct rpc_auth_create_args *args, struct rpc_clnt *clnt)
 >>>>>>> v3.18
@@ -40,6 +44,11 @@ static struct rpc_cred *
 nul_lookup_cred(struct rpc_auth *auth, struct auth_cred *acred, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (flags & RPCAUTH_LOOKUP_RCU)
+		return &null_cred;
+>>>>>>> v3.18
 =======
 	if (flags & RPCAUTH_LOOKUP_RCU)
 		return &null_cred;
@@ -98,7 +107,11 @@ nul_validate(struct rpc_task *task, __be32 *p)
 	if (flavor != RPC_AUTH_NULL) {
 		printk("RPC: bad verf flavor: %u\n", flavor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-EIO);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EIO);
 >>>>>>> v3.18
@@ -108,7 +121,11 @@ nul_validate(struct rpc_task *task, __be32 *p)
 	if (size != 0) {
 		printk("RPC: bad verf size: %u\n", size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-EIO);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EIO);
 >>>>>>> v3.18

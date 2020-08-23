@@ -5,7 +5,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/percpu.h>
@@ -57,7 +60,11 @@ out:
 void arch_enter_lazy_mmu_mode(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tlb_batch *tb = &__get_cpu_var(tlb_batch);
+=======
+	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
+>>>>>>> v3.18
 =======
 	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
 >>>>>>> v3.18
@@ -68,7 +75,11 @@ void arch_enter_lazy_mmu_mode(void)
 void arch_leave_lazy_mmu_mode(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tlb_batch *tb = &__get_cpu_var(tlb_batch);
+=======
+	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
+>>>>>>> v3.18
 =======
 	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
 >>>>>>> v3.18
@@ -147,7 +158,11 @@ no_cache_flush:
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 static void tlb_batch_pmd_scan(struct mm_struct *mm, unsigned long vaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       pmd_t pmd, bool exec)
+=======
+			       pmd_t pmd)
+>>>>>>> v3.18
 =======
 			       pmd_t pmd)
 >>>>>>> v3.18
@@ -159,14 +174,20 @@ static void tlb_batch_pmd_scan(struct mm_struct *mm, unsigned long vaddr,
 	end = vaddr + HPAGE_SIZE;
 	while (vaddr < end) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pte_val(*pte) & _PAGE_VALID)
 			tlb_batch_add_one(mm, vaddr, exec);
 =======
+=======
+>>>>>>> v3.18
 		if (pte_val(*pte) & _PAGE_VALID) {
 			bool exec = pte_exec(*pte);
 
 			tlb_batch_add_one(mm, vaddr, exec);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pte++;
 		vaddr += PAGE_SIZE;
@@ -185,8 +206,13 @@ void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pmd_val(pmd) ^ pmd_val(orig)) & PMD_ISHUGE) {
 		if (pmd_val(pmd) & PMD_ISHUGE)
+=======
+	if ((pmd_val(pmd) ^ pmd_val(orig)) & _PAGE_PMD_HUGE) {
+		if (pmd_val(pmd) & _PAGE_PMD_HUGE)
+>>>>>>> v3.18
 =======
 	if ((pmd_val(pmd) ^ pmd_val(orig)) & _PAGE_PMD_HUGE) {
 		if (pmd_val(pmd) & _PAGE_PMD_HUGE)
@@ -207,6 +233,7 @@ void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 
 	if (!pmd_none(orig)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bool exec = ((pmd_val(orig) & PMD_HUGE_EXEC) != 0);
 
 		addr &= HPAGE_MASK;
@@ -219,6 +246,8 @@ void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
 =======
+=======
+>>>>>>> v3.18
 		addr &= HPAGE_MASK;
 		if (pmd_trans_huge(orig)) {
 			pte_t orig_pte = __pte(pmd_val(orig));
@@ -245,6 +274,9 @@ void pmdp_invalidate(struct vm_area_struct *vma, unsigned long address,
 
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 				pgtable_t pgtable)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct list_head *lh = (struct list_head *) pgtable;
@@ -252,6 +284,7 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 	assert_spin_locked(&mm->page_table_lock);
 
 	/* FIFO */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!mm->pmd_huge_pte)
 		INIT_LIST_HEAD(lh);
@@ -262,6 +295,8 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
 =======
+=======
+>>>>>>> v3.18
 	if (!pmd_huge_pte(mm, pmdp))
 		INIT_LIST_HEAD(lh);
 	else
@@ -270,6 +305,9 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
 }
 
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct list_head *lh;
@@ -279,6 +317,7 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
 
 	/* FIFO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable = mm->pmd_huge_pte;
 	lh = (struct list_head *) pgtable;
 	if (list_empty(lh))
@@ -286,12 +325,17 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
 	else {
 		mm->pmd_huge_pte = (pgtable_t) lh->next;
 =======
+=======
+>>>>>>> v3.18
 	pgtable = pmd_huge_pte(mm, pmdp);
 	lh = (struct list_head *) pgtable;
 	if (list_empty(lh))
 		pmd_huge_pte(mm, pmdp) = NULL;
 	else {
 		pmd_huge_pte(mm, pmdp) = (pgtable_t) lh->next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_del(lh);
 	}

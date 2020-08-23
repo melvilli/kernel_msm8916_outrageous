@@ -32,7 +32,10 @@
 #include <tools/le_byteshift.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef EM_ARCOMPACT
 #define EM_ARCOMPACT	93
 #endif
@@ -41,17 +44,26 @@
 #define EM_XTENSA	94
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef EM_AARCH64
 #define EM_AARCH64	183
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef EM_MICROBLAZE
 #define EM_MICROBLAZE	189
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fd_map;	/* File descriptor for file being modified. */
 static int mmap_failed; /* Boolean flag. */
@@ -83,6 +95,7 @@ fail_file(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __attribute__((noreturn))
 succeed_file(void)
 {
@@ -91,6 +104,8 @@ succeed_file(void)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -182,7 +197,10 @@ static void (*w2)(uint16_t, uint16_t *);
 typedef void (*table_sort_t)(char *, int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Move reserved section indices SHN_LORESERVE..SHN_HIRESERVE out of
  * the way to -256..-1, to avoid conflicting with real section
@@ -207,6 +225,9 @@ static inline unsigned int get_secindex(unsigned int shndx,
 	return r(&symtab_shndx_start[sym_offs]);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 32 bit and 64 bit are very similar */
 #include "sortextable.h"
@@ -301,16 +322,22 @@ do_file(char const *const fname)
 		custom_sort = sort_relative_table;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case EM_ARM:
 	case EM_AARCH64:
 	case EM_MIPS:
 =======
+=======
+>>>>>>> v3.18
 	case EM_ARCOMPACT:
 	case EM_ARM:
 	case EM_AARCH64:
 	case EM_MICROBLAZE:
 	case EM_MIPS:
 	case EM_XTENSA:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}  /* end switch */

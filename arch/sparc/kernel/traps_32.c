@@ -45,7 +45,11 @@ static void instruction_dump(unsigned long *pc)
 #define __RESTORE __asm__ __volatile__("restore %g0, %g0, %g0\n\t")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void die_if_kernel(char *str, struct pt_regs *regs)
+=======
+void __noreturn die_if_kernel(char *str, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void __noreturn die_if_kernel(char *str, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -224,8 +228,11 @@ static unsigned long fake_queue[32] __attribute__ ((aligned (8)));
 static unsigned long fake_depth;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int do_mathemu(struct pt_regs *, struct task_struct *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void do_fpe_trap(struct pt_regs *regs, unsigned long pc, unsigned long npc,

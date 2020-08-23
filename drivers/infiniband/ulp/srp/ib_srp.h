@@ -58,6 +58,7 @@ enum {
 	SRP_DEF_SG_TABLESIZE	= 12,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SRP_RQ_SHIFT    	= 6,
 	SRP_RQ_SIZE		= 1 << SRP_RQ_SHIFT,
 
@@ -67,16 +68,22 @@ enum {
 	SRP_TSK_MGMT_SQ_SIZE	= 1,
 	SRP_CMD_SQ_SIZE		= SRP_REQ_SQ_SIZE - SRP_TSK_MGMT_SQ_SIZE,
 =======
+=======
+>>>>>>> v3.18
 	SRP_DEFAULT_QUEUE_SIZE	= 1 << 6,
 	SRP_RSP_SQ_SIZE		= 1,
 	SRP_TSK_MGMT_SQ_SIZE	= 1,
 	SRP_DEFAULT_CMD_SQ_SIZE = SRP_DEFAULT_QUEUE_SIZE - SRP_RSP_SQ_SIZE -
 				  SRP_TSK_MGMT_SQ_SIZE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SRP_TAG_NO_REQ		= ~0U,
 	SRP_TAG_TSK_MGMT	= 1U << 31,
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SRP_FMR_SIZE		= 512,
 	SRP_FMR_MIN_SIZE	= 128,
@@ -86,10 +93,15 @@ enum {
 	SRP_MAP_ALLOW_FMR	= 0,
 	SRP_MAP_NO_FMR		= 1,
 =======
+=======
+>>>>>>> v3.18
 	SRP_MAX_PAGES_PER_MR	= 512,
 
 	LOCAL_INV_WR_ID_MASK	= 1,
 	FAST_REG_WR_ID_MASK	= 2,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -105,13 +117,19 @@ enum srp_iu_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * @mr_page_mask: HCA memory registration page mask.
  * @mr_page_size: HCA memory registration page size.
  * @mr_max_size: Maximum size in bytes of a single FMR / FR registration
  *   request.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct srp_device {
 	struct list_head	dev_list;
@@ -119,11 +137,14 @@ struct srp_device {
 	struct ib_pd	       *pd;
 	struct ib_mr	       *mr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_fmr_pool     *fmr_pool;
 	u64			fmr_page_mask;
 	int			fmr_page_size;
 	int			fmr_max_size;
 =======
+=======
+>>>>>>> v3.18
 	u64			mr_page_mask;
 	int			mr_page_size;
 	int			mr_max_size;
@@ -131,6 +152,9 @@ struct srp_device {
 	bool			has_fmr;
 	bool			has_fr;
 	bool			use_fast_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -143,6 +167,10 @@ struct srp_host {
 	struct completion	released;
 	struct list_head	list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex		add_target_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex		add_target_mutex;
 >>>>>>> v3.18
@@ -153,12 +181,15 @@ struct srp_request {
 	struct scsi_cmnd       *scmnd;
 	struct srp_iu	       *cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_pool_fmr    **fmr_list;
 	u64		       *map_page;
 	struct srp_direct_buf  *indirect_desc;
 	dma_addr_t		indirect_dma_addr;
 	short			nfmr;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct ib_pool_fmr **fmr_list;
 		struct srp_fr_desc **fr_list;
@@ -167,6 +198,9 @@ struct srp_request {
 	struct srp_direct_buf  *indirect_desc;
 	dma_addr_t		indirect_dma_addr;
 	short			nmdesc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	short			index;
 };
@@ -183,11 +217,17 @@ struct srp_target_port {
 	struct ib_cq	       *recv_cq;
 	struct ib_qp	       *qp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct ib_fmr_pool     *fmr_pool;
 		struct srp_fr_pool     *fr_pool;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32			lkey;
 	u32			rkey;
@@ -197,7 +237,10 @@ struct srp_target_port {
 	unsigned int		indirect_size;
 	bool			allow_ext_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			transport_offline;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -213,10 +256,13 @@ struct srp_target_port {
 	struct srp_host	       *srp_host;
 	struct Scsi_Host       *scsi_host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			target_name[32];
 	unsigned int		scsi_id;
 	unsigned int		sg_tablesize;
 =======
+=======
+>>>>>>> v3.18
 	struct srp_rport       *rport;
 	char			target_name[32];
 	unsigned int		scsi_id;
@@ -225,6 +271,9 @@ struct srp_target_port {
 	int			req_ring_size;
 	int			comp_vector;
 	int			tl_retry_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct ib_sa_path_rec	path;
@@ -242,16 +291,22 @@ struct srp_target_port {
 	int			zero_req_lim;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct srp_iu	       *tx_ring[SRP_SQ_SIZE];
 	struct srp_iu	       *rx_ring[SRP_RQ_SIZE];
 	struct srp_request	req_ring[SRP_CMD_SQ_SIZE];
 
 =======
+=======
+>>>>>>> v3.18
 	struct srp_iu	       **tx_ring;
 	struct srp_iu	       **rx_ring;
 	struct srp_request	*req_ring;
 
 	struct work_struct	tl_err_work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct work_struct	remove_work;
 
@@ -273,6 +328,7 @@ struct srp_iu {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct srp_map_state {
 	struct ib_pool_fmr    **next_fmr;
 	struct srp_direct_buf  *desc;
@@ -283,6 +339,8 @@ struct srp_map_state {
 	unsigned int		npages;
 	unsigned int		nfmr;
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct srp_fr_desc - fast registration work request arguments
  * @entry: Entry in srp_fr_pool.free_list.
@@ -343,6 +401,9 @@ struct srp_map_state {
 	u32			total_len;
 	unsigned int		npages;
 	unsigned int		nmdesc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int		ndesc;
 	struct scatterlist     *unmapped_sg;

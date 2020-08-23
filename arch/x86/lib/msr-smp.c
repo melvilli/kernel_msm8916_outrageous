@@ -48,7 +48,10 @@ int rdmsr_on_cpu(unsigned int cpu, u32 msr_no, u32 *l, u32 *h)
 EXPORT_SYMBOL(rdmsr_on_cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rdmsrl_on_cpu(unsigned int cpu, u32 msr_no, u64 *q)
 {
 	int err;
@@ -64,6 +67,9 @@ int rdmsrl_on_cpu(unsigned int cpu, u32 msr_no, u64 *q)
 }
 EXPORT_SYMBOL(rdmsrl_on_cpu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int wrmsr_on_cpu(unsigned int cpu, u32 msr_no, u32 l, u32 h)
 {
@@ -82,7 +88,10 @@ int wrmsr_on_cpu(unsigned int cpu, u32 msr_no, u32 l, u32 h)
 EXPORT_SYMBOL(wrmsr_on_cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int wrmsrl_on_cpu(unsigned int cpu, u32 msr_no, u64 q)
 {
 	int err;
@@ -99,6 +108,9 @@ int wrmsrl_on_cpu(unsigned int cpu, u32 msr_no, u64 q)
 }
 EXPORT_SYMBOL(wrmsrl_on_cpu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __rwmsr_on_cpus(const struct cpumask *mask, u32 msr_no,
 			    struct msr *msrs,
@@ -197,7 +209,10 @@ int wrmsr_safe_on_cpu(unsigned int cpu, u32 msr_no, u32 l, u32 h)
 EXPORT_SYMBOL(wrmsr_safe_on_cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int wrmsrl_safe_on_cpu(unsigned int cpu, u32 msr_no, u64 q)
 {
 	int err;
@@ -229,6 +244,9 @@ int rdmsrl_safe_on_cpu(unsigned int cpu, u32 msr_no, u64 *q)
 }
 EXPORT_SYMBOL(rdmsrl_safe_on_cpu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * These variants are significantly slower, but allows control over

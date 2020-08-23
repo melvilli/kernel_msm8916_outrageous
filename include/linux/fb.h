@@ -48,6 +48,10 @@ struct device_node;
 #define FB_MISC_PRIM_COLOR	1
 #define FB_MISC_1ST_DETAIL	2	/* First Detailed Timing is preferred */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FB_MISC_HDMI		4
+>>>>>>> v3.18
 =======
 #define FB_MISC_HDMI		4
 >>>>>>> v3.18
@@ -464,9 +468,12 @@ struct fb_info {
 	struct list_head modelist;      /* mode list */
 	struct fb_videomode *mode;	/* current mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *file;		/* current file node */
 
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_FB_BACKLIGHT
 	/* assigned backlight device */
@@ -478,6 +485,9 @@ struct fb_info {
 	struct mutex bl_curve_mutex;	
 	u8 bl_curve[FB_BACKLIGHT_LEVELS];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_FB_DEFERRED_IO
 	struct delayed_work deferred_work;
@@ -562,7 +572,11 @@ static inline struct apertures_struct *alloc_apertures(unsigned int max_num) {
 #define fb_memcpy_tofb sbus_memcpy_toio
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(__i386__) || defined(__alpha__) || defined(__x86_64__) || defined(__hppa__) || defined(__sh__) || defined(__powerpc__) || defined(__avr32__) || defined(__bfin__)
+=======
+#elif defined(__i386__) || defined(__alpha__) || defined(__x86_64__) || defined(__hppa__) || defined(__sh__) || defined(__powerpc__) || defined(__avr32__) || defined(__bfin__) || defined(__arm__)
+>>>>>>> v3.18
 =======
 #elif defined(__i386__) || defined(__alpha__) || defined(__x86_64__) || defined(__hppa__) || defined(__sh__) || defined(__powerpc__) || defined(__avr32__) || defined(__bfin__) || defined(__arm__)
 >>>>>>> v3.18
@@ -627,8 +641,13 @@ extern int register_framebuffer(struct fb_info *fb_info);
 extern int unregister_framebuffer(struct fb_info *fb_info);
 extern int unlink_framebuffer(struct fb_info *fb_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void remove_conflicting_framebuffers(struct apertures_struct *a,
 				const char *name, bool primary);
+=======
+extern int remove_conflicting_framebuffers(struct apertures_struct *a,
+					   const char *name, bool primary);
+>>>>>>> v3.18
 =======
 extern int remove_conflicting_framebuffers(struct apertures_struct *a,
 					   const char *name, bool primary);
@@ -643,7 +662,11 @@ extern void fb_set_suspend(struct fb_info *info, int state);
 extern int fb_get_color_depth(struct fb_var_screeninfo *var,
 			      struct fb_fix_screeninfo *fix);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int fb_get_options(char *name, char **option);
+=======
+extern int fb_get_options(const char *name, char **option);
+>>>>>>> v3.18
 =======
 extern int fb_get_options(const char *name, char **option);
 >>>>>>> v3.18
@@ -664,7 +687,11 @@ static inline void __fb_pad_aligned_buffer(u8 *dst, u32 d_pitch,
 					   u8 *src, u32 s_pitch, u32 height)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j;
+=======
+	u32 i, j;
+>>>>>>> v3.18
 =======
 	u32 i, j;
 >>>>>>> v3.18
@@ -819,7 +846,10 @@ extern int fb_find_mode(struct fb_var_screeninfo *var,
 			unsigned int default_bpp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Convenience logging macros */
 #define fb_err(fb_info, fmt, ...)					\
 	pr_err("fb%d: " fmt, (fb_info)->node, ##__VA_ARGS__)
@@ -832,5 +862,8 @@ extern int fb_find_mode(struct fb_var_screeninfo *var,
 #define fb_dbg(fb_info, fmt, ...)					\
 	pr_debug("fb%d: " fmt, (fb_info)->node, ##__VA_ARGS__)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_FB_H */

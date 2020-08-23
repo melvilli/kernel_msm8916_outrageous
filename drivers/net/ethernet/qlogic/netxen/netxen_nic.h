@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston,
  * MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -58,8 +62,13 @@
 #define _NETXEN_NIC_LINUX_MAJOR 4
 #define _NETXEN_NIC_LINUX_MINOR 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _NETXEN_NIC_LINUX_SUBVERSION 80
 #define NETXEN_NIC_LINUX_VERSIONID  "4.0.80"
+=======
+#define _NETXEN_NIC_LINUX_SUBVERSION 82
+#define NETXEN_NIC_LINUX_VERSIONID  "4.0.82"
+>>>>>>> v3.18
 =======
 #define _NETXEN_NIC_LINUX_SUBVERSION 82
 #define NETXEN_NIC_LINUX_VERSIONID  "4.0.82"
@@ -1181,7 +1190,10 @@ typedef struct {
 #define NETXEN_DB_MAPSIZE_BYTES    	0x1000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NETXEN_NETDEV_WEIGHT 128
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NETXEN_ADAPTER_UP_MAGIC 777
@@ -1868,7 +1880,11 @@ static const struct netxen_brdinfo netxen_boards[] = {
 #define NUM_SUPPORTED_BOARDS ARRAY_SIZE(netxen_boards)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void get_brd_name_by_type(u32 type, char *name)
+=======
+static inline int netxen_nic_get_brd_name_by_type(u32 type, char *name)
+>>>>>>> v3.18
 =======
 static inline int netxen_nic_get_brd_name_by_type(u32 type, char *name)
 >>>>>>> v3.18
@@ -1881,11 +1897,14 @@ static inline int netxen_nic_get_brd_name_by_type(u32 type, char *name)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	}
 	if (!found)
 		name = "Unknown";
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	if (!found) {
@@ -1894,6 +1913,9 @@ static inline int netxen_nic_get_brd_name_by_type(u32 type, char *name)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1908,9 +1930,14 @@ static inline u32 netxen_tx_avail(struct nx_host_tx_ring *tx_ring)
 int netxen_get_flash_mac_addr(struct netxen_adapter *adapter, u64 *mac);
 int netxen_p3_get_mac_addr(struct netxen_adapter *adapter, u64 *mac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void netxen_change_ringparam(struct netxen_adapter *adapter);
 extern int netxen_rom_fast_read(struct netxen_adapter *adapter, int addr,
 				int *valp);
+=======
+void netxen_change_ringparam(struct netxen_adapter *adapter);
+int netxen_rom_fast_read(struct netxen_adapter *adapter, int addr, int *valp);
+>>>>>>> v3.18
 =======
 void netxen_change_ringparam(struct netxen_adapter *adapter);
 int netxen_rom_fast_read(struct netxen_adapter *adapter, int addr, int *valp);

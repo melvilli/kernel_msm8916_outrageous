@@ -102,7 +102,13 @@ struct snd_pcm_sw_params32 {
 	u32 silence_size;
 	u32 boundary;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char reserved[64];
+=======
+	u32 proto;
+	u32 tstamp_type;
+	unsigned char reserved[56];
+>>>>>>> v3.18
 =======
 	u32 proto;
 	u32 tstamp_type;
@@ -140,7 +146,13 @@ static int snd_pcm_ioctl_sw_params_compat(struct snd_pcm_substream *substream,
 	    get_user(params.stop_threshold, &src->stop_threshold) ||
 	    get_user(params.silence_threshold, &src->silence_threshold) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    get_user(params.silence_size, &src->silence_size))
+=======
+	    get_user(params.silence_size, &src->silence_size) ||
+	    get_user(params.tstamp_type, &src->tstamp_type) ||
+	    get_user(params.proto, &src->proto))
+>>>>>>> v3.18
 =======
 	    get_user(params.silence_size, &src->silence_size) ||
 	    get_user(params.tstamp_type, &src->tstamp_type) ||
@@ -249,6 +261,7 @@ static int snd_pcm_ioctl_hw_params_compat(struct snd_pcm_substream *substream,
 		return -ENOTTY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = kmalloc(sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -259,10 +272,15 @@ static int snd_pcm_ioctl_hw_params_compat(struct snd_pcm_substream *substream,
 		goto error;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* only fifo_size is different, so just copy all */
 	data = memdup_user(data32, sizeof(*data32));
 	if (IS_ERR(data))
 		return PTR_ERR(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (refine)
@@ -487,6 +505,7 @@ enum {
 	SNDRV_PCM_IOCTL_READN_FRAMES32 = _IOR('A', 0x53, struct snd_xfern32),
 	SNDRV_PCM_IOCTL_SYNC_PTR32 = _IOWR('A', 0x23, struct snd_pcm_sync_ptr32),
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static int snd_compressed_ioctl32(struct snd_pcm_substream *substream,
@@ -521,6 +540,10 @@ static int snd_user_ioctl32(struct snd_pcm_substream *substream,
 	return err;
 }
 
+=======
+
+};
+>>>>>>> v3.18
 =======
 
 };
@@ -594,11 +617,14 @@ static long snd_pcm_ioctl_compat(struct file *file, unsigned int cmd, unsigned l
 	case SNDRV_PCM_IOCTL_FORWARD32:
 		return snd_pcm_ioctl_forward_compat(substream, argp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
 		if (_IOC_TYPE(cmd) == 'C')
 			return snd_compressed_ioctl32(substream, cmd, argp);
 		else if (_IOC_TYPE(cmd) == 'U')
 			return snd_user_ioctl32(substream, cmd, argp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

@@ -16,10 +16,15 @@
 #include <linux/ioport.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqdomain.h>
 #include <linux/irqchip/chained_irq.h>
 #include <linux/bitops.h>
 #include <linux/workqueue.h>
+=======
+#include <linux/irqchip/chained_irq.h>
+#include <linux/bitops.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip/chained_irq.h>
 #include <linux/bitops.h>
@@ -59,7 +64,10 @@ struct pl061_gpio {
 
 	void __iomem		*base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_domain	*domain;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct gpio_chip	gc;
@@ -99,7 +107,11 @@ static int pl061_direction_input(struct gpio_chip *gc, unsigned offset)
 	spin_lock_irqsave(&chip->lock, flags);
 	gpiodir = readb(chip->base + GPIODIR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpiodir &= ~(1 << offset);
+=======
+	gpiodir &= ~(BIT(offset));
+>>>>>>> v3.18
 =======
 	gpiodir &= ~(BIT(offset));
 >>>>>>> v3.18
@@ -121,9 +133,15 @@ static int pl061_direction_output(struct gpio_chip *gc, unsigned offset,
 
 	spin_lock_irqsave(&chip->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeb(!!value << offset, chip->base + (1 << (offset + 2)));
 	gpiodir = readb(chip->base + GPIODIR);
 	gpiodir |= 1 << offset;
+=======
+	writeb(!!value << offset, chip->base + (BIT(offset + 2)));
+	gpiodir = readb(chip->base + GPIODIR);
+	gpiodir |= BIT(offset);
+>>>>>>> v3.18
 =======
 	writeb(!!value << offset, chip->base + (BIT(offset + 2)));
 	gpiodir = readb(chip->base + GPIODIR);
@@ -136,7 +154,11 @@ static int pl061_direction_output(struct gpio_chip *gc, unsigned offset,
 	 * a gpio pin before configuring it in OUT mode.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeb(!!value << offset, chip->base + (1 << (offset + 2)));
+=======
+	writeb(!!value << offset, chip->base + (BIT(offset + 2)));
+>>>>>>> v3.18
 =======
 	writeb(!!value << offset, chip->base + (BIT(offset + 2)));
 >>>>>>> v3.18
@@ -150,7 +172,11 @@ static int pl061_get_value(struct gpio_chip *gc, unsigned offset)
 	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return !!readb(chip->base + (1 << (offset + 2)));
+=======
+	return !!readb(chip->base + (BIT(offset + 2)));
+>>>>>>> v3.18
 =======
 	return !!readb(chip->base + (BIT(offset + 2)));
 >>>>>>> v3.18
@@ -160,6 +186,7 @@ static void pl061_set_value(struct gpio_chip *gc, unsigned offset, int value)
 {
 	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	writeb(!!value << offset, chip->base + (1 << (offset + 2)));
 }
@@ -172,22 +199,31 @@ static int pl061_to_irq(struct gpio_chip *gc, unsigned offset)
 =======
 	writeb(!!value << offset, chip->base + (BIT(offset + 2)));
 >>>>>>> v3.18
+=======
+	writeb(!!value << offset, chip->base + (BIT(offset + 2)));
+>>>>>>> v3.18
 }
 
 static int pl061_irq_type(struct irq_data *d, unsigned trigger)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pl061_gpio *chip = irq_data_get_irq_chip_data(d);
 	int offset = irqd_to_hwirq(d);
 	unsigned long flags;
 	u8 gpiois, gpioibe, gpioiev;
 =======
+=======
+>>>>>>> v3.18
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
 	int offset = irqd_to_hwirq(d);
 	unsigned long flags;
 	u8 gpiois, gpioibe, gpioiev;
 	u8 bit = BIT(offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (offset < 0 || offset >= PL061_GPIO_NR)
@@ -196,6 +232,7 @@ static int pl061_irq_type(struct irq_data *d, unsigned trigger)
 	spin_lock_irqsave(&chip->lock, flags);
 
 	gpioiev = readb(chip->base + GPIOIEV);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	gpiois = readb(chip->base + GPIOIS);
@@ -222,6 +259,8 @@ static int pl061_irq_type(struct irq_data *d, unsigned trigger)
 	writeb(gpioibe, chip->base + GPIOIBE);
 
 =======
+=======
+>>>>>>> v3.18
 	gpiois = readb(chip->base + GPIOIS);
 	gpioibe = readb(chip->base + GPIOIBE);
 
@@ -247,6 +286,9 @@ static int pl061_irq_type(struct irq_data *d, unsigned trigger)
 
 	writeb(gpiois, chip->base + GPIOIS);
 	writeb(gpioibe, chip->base + GPIOIBE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writeb(gpioiev, chip->base + GPIOIEV);
 
@@ -260,7 +302,12 @@ static void pl061_irq_handler(unsigned irq, struct irq_desc *desc)
 	unsigned long pending;
 	int offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pl061_gpio *chip = irq_desc_get_handler_data(desc);
+=======
+	struct gpio_chip *gc = irq_desc_get_handler_data(desc);
+	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_desc_get_handler_data(desc);
 	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
@@ -274,7 +321,12 @@ static void pl061_irq_handler(unsigned irq, struct irq_desc *desc)
 	if (pending) {
 		for_each_set_bit(offset, &pending, PL061_GPIO_NR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			generic_handle_irq(pl061_to_irq(&chip->gc, offset));
+=======
+			generic_handle_irq(irq_find_mapping(gc->irqdomain,
+							    offset));
+>>>>>>> v3.18
 =======
 			generic_handle_irq(irq_find_mapping(gc->irqdomain,
 							    offset));
@@ -287,8 +339,14 @@ static void pl061_irq_handler(unsigned irq, struct irq_desc *desc)
 static void pl061_irq_mask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pl061_gpio *chip = irq_data_get_irq_chip_data(d);
 	u8 mask = 1 << (irqd_to_hwirq(d) % PL061_GPIO_NR);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
+	u8 mask = BIT(irqd_to_hwirq(d) % PL061_GPIO_NR);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
@@ -305,8 +363,14 @@ static void pl061_irq_mask(struct irq_data *d)
 static void pl061_irq_unmask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pl061_gpio *chip = irq_data_get_irq_chip_data(d);
 	u8 mask = 1 << (irqd_to_hwirq(d) % PL061_GPIO_NR);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
+	u8 mask = BIT(irqd_to_hwirq(d) % PL061_GPIO_NR);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct pl061_gpio *chip = container_of(gc, struct pl061_gpio, gc);
@@ -322,7 +386,11 @@ static void pl061_irq_unmask(struct irq_data *d)
 
 static struct irq_chip pl061_irqchip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "pl061 gpio",
+=======
+	.name		= "pl061",
+>>>>>>> v3.18
 =======
 	.name		= "pl061",
 >>>>>>> v3.18
@@ -331,6 +399,7 @@ static struct irq_chip pl061_irqchip = {
 	.irq_set_type	= pl061_irq_type,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pl061_irq_map(struct irq_domain *d, unsigned int virq,
 			 irq_hw_number_t hw)
@@ -355,10 +424,15 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 	struct device *dev = &adev->dev;
 	struct pl061_platform_data *pdata = dev->platform_data;
 =======
+=======
+>>>>>>> v3.18
 static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 {
 	struct device *dev = &adev->dev;
 	struct pl061_platform_data *pdata = dev_get_platdata(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pl061_gpio *chip;
 	int ret, irq, i, irq_base;
@@ -371,19 +445,26 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 		chip->gc.base = pdata->gpio_base;
 		irq_base = pdata->irq_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (irq_base <= 0)
 			return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 		if (irq_base <= 0) {
 			dev_err(&adev->dev, "invalid IRQ base in pdata\n");
 			return -ENODEV;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		chip->gc.base = -1;
 		irq_base = 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!devm_request_mem_region(dev, adev->res.start,
 				     resource_size(&adev->res), "pl061"))
@@ -393,6 +474,11 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 				  resource_size(&adev->res));
 	if (!chip->base)
 		return -ENOMEM;
+=======
+	chip->base = devm_ioremap_resource(dev, &adev->res);
+	if (IS_ERR(chip->base))
+		return PTR_ERR(chip->base);
+>>>>>>> v3.18
 =======
 	chip->base = devm_ioremap_resource(dev, &adev->res);
 	if (IS_ERR(chip->base))
@@ -408,7 +494,10 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 	chip->gc.get = pl061_get_value;
 	chip->gc.set = pl061_set_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->gc.to_irq = pl061_to_irq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	chip->gc.ngpio = PL061_GPIO_NR;
@@ -425,6 +514,7 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 	 */
 	writeb(0, chip->base + GPIOIE); /* disable irqs */
 	irq = adev->irq[0];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (irq < 0)
 		return -ENODEV;
@@ -443,6 +533,8 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 				pl061_direction_output(&chip->gc, i,
 						pdata->values & (1 << i));
 =======
+=======
+>>>>>>> v3.18
 	if (irq < 0) {
 		dev_err(&adev->dev, "invalid IRQ\n");
 		return -ENODEV;
@@ -463,6 +555,9 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 			if (pdata->directions & (BIT(i)))
 				pl061_direction_output(&chip->gc, i,
 						pdata->values & (BIT(i)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			else
 				pl061_direction_input(&chip->gc, i);
@@ -471,6 +566,11 @@ static int pl061_probe(struct amba_device *adev, const struct amba_id *id)
 
 	amba_set_drvdata(adev, chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_info(&adev->dev, "PL061 GPIO chip @%pa registered\n",
+		 &adev->res.start);
+>>>>>>> v3.18
 =======
 	dev_info(&adev->dev, "PL061 GPIO chip @%pa registered\n",
 		 &adev->res.start);
@@ -494,7 +594,11 @@ static int pl061_suspend(struct device *dev)
 
 	for (offset = 0; offset < PL061_GPIO_NR; offset++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chip->csave_regs.gpio_dir & (1 << offset))
+=======
+		if (chip->csave_regs.gpio_dir & (BIT(offset)))
+>>>>>>> v3.18
 =======
 		if (chip->csave_regs.gpio_dir & (BIT(offset)))
 >>>>>>> v3.18
@@ -512,15 +616,21 @@ static int pl061_resume(struct device *dev)
 
 	for (offset = 0; offset < PL061_GPIO_NR; offset++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chip->csave_regs.gpio_dir & (1 << offset))
 			pl061_direction_output(&chip->gc, offset,
 					chip->csave_regs.gpio_data &
 					(1 << offset));
 =======
+=======
+>>>>>>> v3.18
 		if (chip->csave_regs.gpio_dir & (BIT(offset)))
 			pl061_direction_output(&chip->gc, offset,
 					chip->csave_regs.gpio_data &
 					(BIT(offset)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			pl061_direction_input(&chip->gc, offset);

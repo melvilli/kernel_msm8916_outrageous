@@ -17,6 +17,10 @@ uImage
 cuImage.*
 dtbImage.*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+*.dtb
+>>>>>>> v3.18
 =======
 *.dtb
 >>>>>>> v3.18
@@ -27,6 +31,10 @@ zImage.bin.*
 zImage.chrp
 zImage.coff
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+zImage.epapr
+>>>>>>> v3.18
 =======
 zImage.epapr
 >>>>>>> v3.18

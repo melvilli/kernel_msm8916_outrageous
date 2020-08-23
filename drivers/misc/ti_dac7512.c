@@ -21,11 +21,16 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/spi/spi.h>
 
 #define DAC7512_DRV_NAME	"dac7512"
 #define DRIVER_VERSION		"1.0"
+=======
+#include <linux/spi/spi.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/spi/spi.h>
 #include <linux/of.h>
@@ -39,15 +44,21 @@ static ssize_t dac7512_store_val(struct device *dev,
 	unsigned char tmp[2];
 	unsigned long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 10, &val) < 0)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 10, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tmp[0] = val >> 8;
@@ -87,6 +98,7 @@ static int dac7512_remove(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct spi_driver dac7512_driver = {
 	.driver = {
 		.name	= DAC7512_DRV_NAME,
@@ -95,6 +107,8 @@ static struct spi_driver dac7512_driver = {
 	.probe	= dac7512_probe,
 	.remove	= dac7512_remove,
 =======
+=======
+>>>>>>> v3.18
 static const struct spi_device_id dac7512_id_table[] = {
 	{ "dac7512", 0 },
 	{ }
@@ -118,6 +132,9 @@ static struct spi_driver dac7512_driver = {
 	.probe	= dac7512_probe,
 	.remove	= dac7512_remove,
 	.id_table = dac7512_id_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -127,6 +144,9 @@ MODULE_AUTHOR("Daniel Mack <daniel@caiaq.de>");
 MODULE_DESCRIPTION("DAC7512 16-bit DAC");
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(DRIVER_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

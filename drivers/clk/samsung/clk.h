@@ -20,7 +20,10 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "clk-pll.h"
 
 /**
@@ -34,6 +37,9 @@ struct samsung_clk_provider {
 	struct clk_onecell_data clk_data;
 	spinlock_t lock;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -56,6 +62,11 @@ struct samsung_clock_alias {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MHZ (1000 * 1000)
+
+>>>>>>> v3.18
 =======
 #define MHZ (1000 * 1000)
 
@@ -149,7 +160,11 @@ struct samsung_mux_clock {
 		.parent_names	= pnames,			\
 		.num_parents	= ARRAY_SIZE(pnames),		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags		= f,				\
+=======
+		.flags		= (f) | CLK_SET_RATE_NO_REPARENT, \
+>>>>>>> v3.18
 =======
 		.flags		= (f) | CLK_SET_RATE_NO_REPARENT, \
 >>>>>>> v3.18
@@ -170,6 +185,12 @@ struct samsung_mux_clock {
 	__MUX(_id, NULL, cname, pnames, o, s, w, f, mf, NULL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MUX_FA(_id, cname, pnames, o, s, w, f, mf, a)		\
+	__MUX(_id, NULL, cname, pnames, o, s, w, f, mf, a)
+
+>>>>>>> v3.18
 =======
 #define MUX_FA(_id, cname, pnames, o, s, w, f, mf, a)		\
 	__MUX(_id, NULL, cname, pnames, o, s, w, f, mf, a)
@@ -290,6 +311,7 @@ struct samsung_clk_reg_dump {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __init samsung_clk_init(struct device_node *np, void __iomem *base,
 		unsigned long nr_clks, unsigned long *rdump,
 		unsigned long nr_rdump, unsigned long *soc_rdump,
@@ -317,6 +339,8 @@ extern void __init samsung_clk_register_gate(
 extern unsigned long _get_rate(const char *clk_name);
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct samsung_pll_clock: information about pll clock
  * @id: platform specific id of the clock.
@@ -415,5 +439,8 @@ extern struct samsung_clk_reg_dump *samsung_clk_alloc_reg_dump(
 			const unsigned long *rdump,
 			unsigned long nr_rdump);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __SAMSUNG_CLK_H */

@@ -859,6 +859,7 @@ static int mthca_enable_msi_x(struct mthca_dev *mdev)
 	entries[2].entry = 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pci_enable_msix(mdev->pdev, entries, ARRAY_SIZE(entries));
 	if (err) {
 		if (err > 0)
@@ -866,6 +867,11 @@ static int mthca_enable_msi_x(struct mthca_dev *mdev)
 				   "not using MSI-X\n", err);
 		return err;
 	}
+=======
+	err = pci_enable_msix_exact(mdev->pdev, entries, ARRAY_SIZE(entries));
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	err = pci_enable_msix_exact(mdev->pdev, entries, ARRAY_SIZE(entries));
 	if (err)

@@ -15,8 +15,12 @@
    (1 << NF_BR_POST_ROUTING))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ebt_entries initial_chains[] =
 {
+=======
+static struct ebt_entries initial_chains[] = {
+>>>>>>> v3.18
 =======
 static struct ebt_entries initial_chains[] = {
 >>>>>>> v3.18
@@ -35,8 +39,12 @@ static struct ebt_entries initial_chains[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ebt_replace_kernel initial_table =
 {
+=======
+static struct ebt_replace_kernel initial_table = {
+>>>>>>> v3.18
 =======
 static struct ebt_replace_kernel initial_table = {
 >>>>>>> v3.18
@@ -59,8 +67,12 @@ static int check(const struct ebt_table_info *info, unsigned int valid_hooks)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ebt_table frame_nat =
 {
+=======
+static struct ebt_table frame_nat = {
+>>>>>>> v3.18
 =======
 static struct ebt_table frame_nat = {
 >>>>>>> v3.18
@@ -72,6 +84,7 @@ static struct ebt_table frame_nat = {
 };
 
 static unsigned int
+<<<<<<< HEAD
 <<<<<<< HEAD
 ebt_nat_in(unsigned int hook, struct sk_buff *skb, const struct net_device *in
    , const struct net_device *out, int (*okfn)(struct sk_buff *))
@@ -85,6 +98,8 @@ ebt_nat_out(unsigned int hook, struct sk_buff *skb, const struct net_device *in
 {
 	return ebt_do_table(hook, skb, in, out, dev_net(out)->xt.frame_nat);
 =======
+=======
+>>>>>>> v3.18
 ebt_nat_in(const struct nf_hook_ops *ops, struct sk_buff *skb,
 	   const struct net_device *in, const struct net_device *out,
 	   int (*okfn)(struct sk_buff *))
@@ -100,6 +115,9 @@ ebt_nat_out(const struct nf_hook_ops *ops, struct sk_buff *skb,
 {
 	return ebt_do_table(ops->hooknum, skb, in, out,
 			    dev_net(out)->xt.frame_nat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -131,7 +149,11 @@ static int __net_init frame_nat_net_init(struct net *net)
 {
 	net->xt.frame_nat = ebt_register_table(net, &frame_nat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->xt.frame_nat);
+=======
+	return PTR_ERR_OR_ZERO(net->xt.frame_nat);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->xt.frame_nat);
 >>>>>>> v3.18

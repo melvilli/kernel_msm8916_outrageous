@@ -1025,7 +1025,11 @@ static int hptiop_queuecommand_lck(struct scsi_cmnd *scp,
 	_req->scp = scp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("hptiop_queuecmd(scp=%p) %d/%d/%d/%d cdb=(%08x-%08x-%08x-%08x) "
+=======
+	dprintk("hptiop_queuecmd(scp=%p) %d/%d/%d/%llu cdb=(%08x-%08x-%08x-%08x) "
+>>>>>>> v3.18
 =======
 	dprintk("hptiop_queuecmd(scp=%p) %d/%d/%d/%llu cdb=(%08x-%08x-%08x-%08x) "
 >>>>>>> v3.18

@@ -12,6 +12,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 #include <linux/string.h>
 #include <linux/errno.h>
@@ -23,11 +24,16 @@
 #include <linux/skbuff.h>
 #include <linux/rcupdate.h>
 >>>>>>> v3.18
+=======
+#include <linux/skbuff.h>
+#include <linux/rcupdate.h>
+>>>>>>> v3.18
 #include <net/rtnetlink.h>
 #include <net/pkt_cls.h>
 #include <net/sock.h>
 #include <net/cls_cgroup.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct cgroup_cls_state *cgrp_cls_state(struct cgroup *cgrp)
 {
@@ -119,11 +125,18 @@ struct cgroup_subsys net_cls_subsys = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct cls_cgroup_head {
 	u32			handle;
 	struct tcf_exts		exts;
 	struct tcf_ematch_tree	ematches;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto	*tp;
+	struct rcu_head		rcu;
+>>>>>>> v3.18
 =======
 	struct tcf_proto	*tp;
 	struct rcu_head		rcu;
@@ -134,6 +147,7 @@ static int cls_cgroup_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 			       struct tcf_result *res)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cls_cgroup_head *head = tp->root;
 	u32 classid;
 
@@ -141,10 +155,15 @@ static int cls_cgroup_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 	classid = task_cls_state(current)->classid;
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	struct cls_cgroup_head *head = rcu_dereference_bh(tp->root);
 	u32 classid;
 
 	classid = task_cls_state(current)->classid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -190,6 +209,7 @@ static int cls_cgroup_init(struct tcf_proto *tp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct tcf_ext_map cgroup_ext_map = {
 	.action = TCA_CGROUP_ACT,
 	.police = TCA_CGROUP_POLICE,
@@ -197,10 +217,13 @@ static const struct tcf_ext_map cgroup_ext_map = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct nla_policy cgroup_policy[TCA_CGROUP_MAX + 1] = {
 	[TCA_CGROUP_EMATCHES]	= { .type = NLA_NESTED },
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cls_cgroup_change(struct net *net, struct sk_buff *in_skb,
 			     struct tcf_proto *tp, unsigned long base,
@@ -210,6 +233,8 @@ static int cls_cgroup_change(struct net *net, struct sk_buff *in_skb,
 	struct nlattr *tb[TCA_CGROUP_MAX + 1];
 	struct cls_cgroup_head *head = tp->root;
 =======
+=======
+>>>>>>> v3.18
 static void cls_cgroup_destroy_rcu(struct rcu_head *root)
 {
 	struct cls_cgroup_head *head = container_of(root,
@@ -229,6 +254,9 @@ static int cls_cgroup_change(struct net *net, struct sk_buff *in_skb,
 	struct nlattr *tb[TCA_CGROUP_MAX + 1];
 	struct cls_cgroup_head *head = rtnl_dereference(tp->root);
 	struct cls_cgroup_head *new;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tcf_ematch_tree t;
 	struct tcf_exts e;
@@ -237,6 +265,7 @@ static int cls_cgroup_change(struct net *net, struct sk_buff *in_skb,
 	if (!tca[TCA_OPTIONS])
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (head == NULL) {
 		if (!handle)
@@ -275,6 +304,8 @@ static int cls_cgroup_change(struct net *net, struct sk_buff *in_skb,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!head && !handle)
 		return -EINVAL;
 
@@ -318,11 +349,15 @@ static int cls_cgroup_change(struct net *net, struct sk_buff *in_skb,
 errout:
 	kfree(new);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void cls_cgroup_destroy(struct tcf_proto *tp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cls_cgroup_head *head = tp->root;
 
@@ -331,11 +366,16 @@ static void cls_cgroup_destroy(struct tcf_proto *tp)
 		tcf_em_tree_destroy(tp, &head->ematches);
 		kfree(head);
 =======
+=======
+>>>>>>> v3.18
 	struct cls_cgroup_head *head = rtnl_dereference(tp->root);
 
 	if (head) {
 		RCU_INIT_POINTER(tp->root, NULL);
 		call_rcu(&head->rcu, cls_cgroup_destroy_rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -348,7 +388,11 @@ static int cls_cgroup_delete(struct tcf_proto *tp, unsigned long arg)
 static void cls_cgroup_walk(struct tcf_proto *tp, struct tcf_walker *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cls_cgroup_head *head = tp->root;
+=======
+	struct cls_cgroup_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct cls_cgroup_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -365,15 +409,21 @@ skip:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cls_cgroup_dump(struct tcf_proto *tp, unsigned long fh,
 			   struct sk_buff *skb, struct tcmsg *t)
 {
 	struct cls_cgroup_head *head = tp->root;
 =======
+=======
+>>>>>>> v3.18
 static int cls_cgroup_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 			   struct sk_buff *skb, struct tcmsg *t)
 {
 	struct cls_cgroup_head *head = rtnl_dereference(tp->root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char *b = skb_tail_pointer(skb);
 	struct nlattr *nest;
@@ -385,7 +435,11 @@ static int cls_cgroup_dump(struct net *net, struct tcf_proto *tp, unsigned long 
 		goto nla_put_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_exts_dump(skb, &head->exts, &cgroup_ext_map) < 0 ||
+=======
+	if (tcf_exts_dump(skb, &head->exts) < 0 ||
+>>>>>>> v3.18
 =======
 	if (tcf_exts_dump(skb, &head->exts) < 0 ||
 >>>>>>> v3.18
@@ -395,7 +449,11 @@ static int cls_cgroup_dump(struct net *net, struct tcf_proto *tp, unsigned long 
 	nla_nest_end(skb, nest);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_exts_dump_stats(skb, &head->exts, &cgroup_ext_map) < 0)
+=======
+	if (tcf_exts_dump_stats(skb, &head->exts) < 0)
+>>>>>>> v3.18
 =======
 	if (tcf_exts_dump_stats(skb, &head->exts) < 0)
 >>>>>>> v3.18
@@ -425,6 +483,7 @@ static struct tcf_proto_ops cls_cgroup_ops __read_mostly = {
 static int __init init_cgroup_cls(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = cgroup_load_subsys(&net_cls_subsys);
@@ -440,14 +499,20 @@ out:
 =======
 	return register_tcf_proto_ops(&cls_cgroup_ops);
 >>>>>>> v3.18
+=======
+	return register_tcf_proto_ops(&cls_cgroup_ops);
+>>>>>>> v3.18
 }
 
 static void __exit exit_cgroup_cls(void)
 {
 	unregister_tcf_proto_ops(&cls_cgroup_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cgroup_unload_subsys(&net_cls_subsys);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

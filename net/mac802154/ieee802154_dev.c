@@ -28,6 +28,10 @@
 #include <linux/nl802154.h>
 #include <net/mac802154.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ieee802154_netdev.h>
+>>>>>>> v3.18
 =======
 #include <net/ieee802154_netdev.h>
 >>>>>>> v3.18
@@ -40,10 +44,13 @@ int mac802154_slave_open(struct net_device *dev)
 {
 	struct mac802154_sub_if_data *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mac802154_priv *ipriv = priv->hw;
 	int res = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	struct mac802154_sub_if_data *subif;
 	struct mac802154_priv *ipriv = priv->hw;
 	int res = 0;
@@ -66,6 +73,9 @@ int mac802154_slave_open(struct net_device *dev)
 	priv->running = true;
 	mutex_unlock(&priv->hw->slaves_mtx);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ipriv->open_count++ == 0) {
 		res = ipriv->ops->start(&ipriv->hw);
@@ -76,7 +86,13 @@ int mac802154_slave_open(struct net_device *dev)
 
 	if (ipriv->ops->ieee_addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		res = ipriv->ops->ieee_addr(&ipriv->hw, dev->dev_addr);
+=======
+		__le64 addr = ieee802154_devaddr_from_raw(dev->dev_addr);
+
+		res = ipriv->ops->ieee_addr(&ipriv->hw, addr);
+>>>>>>> v3.18
 =======
 		__le64 addr = ieee802154_devaddr_from_raw(dev->dev_addr);
 
@@ -102,9 +118,12 @@ int mac802154_slave_close(struct net_device *dev)
 	struct mac802154_priv *ipriv = priv->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_stop_queue(dev);
 
 =======
+=======
+>>>>>>> v3.18
 	ASSERT_RTNL();
 
 	netif_stop_queue(dev);
@@ -113,6 +132,9 @@ int mac802154_slave_close(struct net_device *dev)
 	priv->running = false;
 	mutex_unlock(&priv->hw->slaves_mtx);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!--ipriv->open_count)
 		ipriv->ops->stop(&ipriv->hw);
@@ -162,6 +184,10 @@ mac802154_del_iface(struct wpan_phy *phy, struct net_device *dev)
 {
 	struct mac802154_sub_if_data *sdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -189,12 +215,15 @@ mac802154_add_iface(struct wpan_phy *phy, const char *name, int type)
 	case IEEE802154_DEV_MONITOR:
 		dev = alloc_netdev(sizeof(struct mac802154_sub_if_data),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   name, mac802154_monitor_setup);
 		break;
 	case IEEE802154_DEV_WPAN:
 		dev = alloc_netdev(sizeof(struct mac802154_sub_if_data),
 				   name, mac802154_wpan_setup);
 =======
+=======
+>>>>>>> v3.18
 				   name, NET_NAME_UNKNOWN,
 				   mac802154_monitor_setup);
 		break;
@@ -202,6 +231,9 @@ mac802154_add_iface(struct wpan_phy *phy, const char *name, int type)
 		dev = alloc_netdev(sizeof(struct mac802154_sub_if_data),
 				   name, NET_NAME_UNKNOWN,
 				   mac802154_wpan_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -226,7 +258,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mac802154_set_txpower(struct wpan_phy *phy, int db)
 {
 	struct mac802154_priv *priv = wpan_phy_priv(phy);
@@ -270,6 +305,9 @@ static int mac802154_set_frame_retries(struct wpan_phy *phy, s8 retries)
 	return priv->ops->set_frame_retries(&priv->hw, retries);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ieee802154_dev *
 ieee802154_alloc_device(size_t priv_data_len, struct ieee802154_ops *ops)
@@ -281,8 +319,12 @@ ieee802154_alloc_device(size_t priv_data_len, struct ieee802154_ops *ops)
 	if (!ops || !ops->xmit || !ops->ed || !ops->start ||
 	    !ops->stop || !ops->set_channel) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "undefined IEEE802.15.4 device operations\n");
+=======
+		pr_err("undefined IEEE802.15.4 device operations\n");
+>>>>>>> v3.18
 =======
 		pr_err("undefined IEEE802.15.4 device operations\n");
 >>>>>>> v3.18
@@ -312,8 +354,12 @@ ieee802154_alloc_device(size_t priv_data_len, struct ieee802154_ops *ops)
 	phy = wpan_phy_alloc(priv_size);
 	if (!phy) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "failure to allocate master IEEE802.15.4 device\n");
+=======
+		pr_err("failure to allocate master IEEE802.15.4 device\n");
+>>>>>>> v3.18
 =======
 		pr_err("failure to allocate master IEEE802.15.4 device\n");
 >>>>>>> v3.18
@@ -322,7 +368,12 @@ ieee802154_alloc_device(size_t priv_data_len, struct ieee802154_ops *ops)
 
 	priv = wpan_phy_priv(phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->hw.phy = priv->phy = phy;
+=======
+	priv->phy = phy;
+	priv->hw.phy = priv->phy;
+>>>>>>> v3.18
 =======
 	priv->phy = phy;
 	priv->hw.phy = priv->phy;
@@ -353,6 +404,7 @@ int ieee802154_register_device(struct ieee802154_dev *dev)
 {
 	struct mac802154_priv *priv = mac802154_to_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = -ENOMEM;
 
 	priv->dev_workqueue =
@@ -360,6 +412,8 @@ int ieee802154_register_device(struct ieee802154_dev *dev)
 	if (!priv->dev_workqueue)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	int rc = -ENOSYS;
 
 	if (dev->flags & IEEE802154_HW_TXPOWER) {
@@ -410,6 +464,9 @@ int ieee802154_register_device(struct ieee802154_dev *dev)
 		rc = -ENOMEM;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wpan_phy_set_dev(priv->phy, priv->hw.parent);

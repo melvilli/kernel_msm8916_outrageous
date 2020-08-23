@@ -78,7 +78,10 @@ struct iio_channel_info {
 	unsigned be;
 	unsigned is_signed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned enabled;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned location;
@@ -323,7 +326,11 @@ inline int build_channel_array(const char *device_dir,
 				goto error_close_dir;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fscanf(sysfsfp, "%u", &ret);
+=======
+			fscanf(sysfsfp, "%i", &ret);
+>>>>>>> v3.18
 =======
 			fscanf(sysfsfp, "%i", &ret);
 >>>>>>> v3.18
@@ -343,6 +350,10 @@ inline int build_channel_array(const char *device_dir,
 		if (strcmp(ent->d_name + strlen(ent->d_name) - strlen("_en"),
 			   "_en") == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			int current_enabled = 0;
+>>>>>>> v3.18
 =======
 			int current_enabled = 0;
 >>>>>>> v3.18
@@ -362,15 +373,21 @@ inline int build_channel_array(const char *device_dir,
 				goto error_cleanup_array;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fscanf(sysfsfp, "%u", &current->enabled);
 			fclose(sysfsfp);
 
 			if (!current->enabled) {
 =======
+=======
+>>>>>>> v3.18
 			fscanf(sysfsfp, "%i", &current_enabled);
 			fclose(sysfsfp);
 
 			if (!current_enabled) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				free(filename);
 				count--;
@@ -521,7 +538,11 @@ inline int find_type_by_name(const char *name, const char *type)
 inline int _write_sysfs_int(char *filename, char *basedir, int val, int verify)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -656,7 +677,11 @@ error_free:
 int read_sysfs_float(char *filename, char *basedir, float *val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	float ret = 0;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -679,7 +704,10 @@ error_free:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int read_sysfs_string(const char *filename, const char *basedir, char *str)
 {
@@ -702,4 +730,7 @@ error_free:
 	free(temp);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

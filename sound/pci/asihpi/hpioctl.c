@@ -446,7 +446,10 @@ void asihpi_adapter_remove(struct pci_dev *pci_dev)
 		vfree(pa->p_buffer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (1)

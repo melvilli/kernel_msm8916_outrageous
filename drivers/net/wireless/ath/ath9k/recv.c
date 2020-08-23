@@ -16,16 +16,22 @@
 
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/relay.h>
 #include "ath9k.h"
 #include "ar9003_mac.h"
 
 #define SKB_CB_ATHBUF(__skb)	(*((struct ath_buf **)__skb->cb))
 =======
+=======
+>>>>>>> v3.18
 #include "ath9k.h"
 #include "ar9003_mac.h"
 
 #define SKB_CB_ATHBUF(__skb)	(*((struct ath_rxbuf **)__skb->cb))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool ath9k_check_auto_sleep(struct ath_softc *sc)
@@ -43,7 +49,12 @@ static inline bool ath9k_check_auto_sleep(struct ath_softc *sc)
  * to a sender if last desc is self-linked.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ath_rx_buf_link(struct ath_softc *sc, struct ath_buf *bf)
+=======
+static void ath_rx_buf_link(struct ath_softc *sc, struct ath_rxbuf *bf,
+			    bool flush)
+>>>>>>> v3.18
 =======
 static void ath_rx_buf_link(struct ath_softc *sc, struct ath_rxbuf *bf,
 			    bool flush)
@@ -73,31 +84,43 @@ static void ath_rx_buf_link(struct ath_softc *sc, struct ath_rxbuf *bf,
 			     0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sc->rx.rxlink == NULL)
 		ath9k_hw_putrxbuf(ah, bf->bf_daddr);
 	else
 		*sc->rx.rxlink = bf->bf_daddr;
 =======
+=======
+>>>>>>> v3.18
 	if (sc->rx.rxlink)
 		*sc->rx.rxlink = bf->bf_daddr;
 	else if (!flush)
 		ath9k_hw_putrxbuf(ah, bf->bf_daddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sc->rx.rxlink = &ds->ds_link;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ath_rx_buf_relink(struct ath_softc *sc, struct ath_buf *bf)
 {
 	if (sc->rx.buf_hold)
 		ath_rx_buf_link(sc, sc->rx.buf_hold);
 =======
+=======
+>>>>>>> v3.18
 static void ath_rx_buf_relink(struct ath_softc *sc, struct ath_rxbuf *bf,
 			      bool flush)
 {
 	if (sc->rx.buf_hold)
 		ath_rx_buf_link(sc, sc->rx.buf_hold, flush);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sc->rx.buf_hold = bf;
@@ -140,7 +163,11 @@ static bool ath_rx_edma_buf_link(struct ath_softc *sc,
 	struct ath_rx_edma *rx_edma;
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -150,7 +177,11 @@ static bool ath_rx_edma_buf_link(struct ath_softc *sc,
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bf = list_first_entry(&sc->rx.rxbuf, struct ath_buf, list);
+=======
+	bf = list_first_entry(&sc->rx.rxbuf, struct ath_rxbuf, list);
+>>>>>>> v3.18
 =======
 	bf = list_first_entry(&sc->rx.rxbuf, struct ath_rxbuf, list);
 >>>>>>> v3.18
@@ -174,7 +205,11 @@ static void ath_rx_addbuffer_edma(struct ath_softc *sc,
 {
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf, *tbf;
+=======
+	struct ath_rxbuf *bf, *tbf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf, *tbf;
 >>>>>>> v3.18
@@ -194,7 +229,11 @@ static void ath_rx_remove_buffer(struct ath_softc *sc,
 				 enum ath9k_rx_qtype qtype)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -215,7 +254,11 @@ static void ath_rx_edma_cleanup(struct ath_softc *sc)
 	struct ath_hw *ah = sc->sc_ah;
 	struct ath_common *common = ath9k_hw_common(ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -238,7 +281,11 @@ static void ath_rx_edma_cleanup(struct ath_softc *sc)
 static void ath_rx_edma_init_queue(struct ath_rx_edma *rx_edma, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_queue_head_init(&rx_edma->rx_fifo);
+=======
+	__skb_queue_head_init(&rx_edma->rx_fifo);
+>>>>>>> v3.18
 =======
 	__skb_queue_head_init(&rx_edma->rx_fifo);
 >>>>>>> v3.18
@@ -251,7 +298,11 @@ static int ath_rx_edma_init(struct ath_softc *sc, int nbufs)
 	struct ath_hw *ah = sc->sc_ah;
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -267,7 +318,11 @@ static int ath_rx_edma_init(struct ath_softc *sc, int nbufs)
 			       ah->caps.rx_hp_qdepth);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = sizeof(struct ath_buf) * nbufs;
+=======
+	size = sizeof(struct ath_rxbuf) * nbufs;
+>>>>>>> v3.18
 =======
 	size = sizeof(struct ath_rxbuf) * nbufs;
 >>>>>>> v3.18
@@ -318,7 +373,11 @@ static void ath_edma_start_recv(struct ath_softc *sc)
 	ath_rx_addbuffer_edma(sc, ATH9K_RX_QUEUE_LP);
 	ath_opmode_init(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath9k_hw_startpcureceive(sc->sc_ah, !!(sc->hw->conf.flags & IEEE80211_CONF_OFFCHANNEL));
+=======
+	ath9k_hw_startpcureceive(sc->sc_ah, sc->cur_chan->offchannel);
+>>>>>>> v3.18
 =======
 	ath9k_hw_startpcureceive(sc->sc_ah, sc->cur_chan->offchannel);
 >>>>>>> v3.18
@@ -335,7 +394,11 @@ int ath_rx_init(struct ath_softc *sc, int nbufs)
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -400,7 +463,11 @@ void ath_rx_cleanup(struct ath_softc *sc)
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -445,15 +512,21 @@ void ath_rx_cleanup(struct ath_softc *sc)
 u32 ath_calcrxfilter(struct ath_softc *sc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rfilt;
 
 =======
+=======
+>>>>>>> v3.18
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	u32 rfilt;
 
 	if (config_enabled(CONFIG_ATH9K_TX99))
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rfilt = ATH9K_RX_FILTER_UCAST | ATH9K_RX_FILTER_BCAST
 		| ATH9K_RX_FILTER_MCAST;
@@ -463,7 +536,13 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 		rfilt |= ATH9K_RX_FILTER_PHYRADAR | ATH9K_RX_FILTER_PHYERR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sc->rx.rxfilter & FIF_PROBE_REQ)
+=======
+	spin_lock_bh(&sc->chan_lock);
+
+	if (sc->cur_chan->rxfilter & FIF_PROBE_REQ)
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&sc->chan_lock);
 
@@ -480,6 +559,7 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 		rfilt |= ATH9K_RX_FILTER_PROM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sc->rx.rxfilter & FIF_CONTROL)
 		rfilt |= ATH9K_RX_FILTER_CONTROL;
 
@@ -487,6 +567,8 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 	    (sc->nvifs <= 1) &&
 	    !(sc->rx.rxfilter & FIF_BCN_PRBRESP_PROMISC))
 =======
+=======
+>>>>>>> v3.18
 	if ((sc->cur_chan->rxfilter & FIF_CONTROL) ||
 	    sc->sc_ah->dynack.enabled)
 		rfilt |= ATH9K_RX_FILTER_CONTROL;
@@ -494,12 +576,16 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 	if ((sc->sc_ah->opmode == NL80211_IFTYPE_STATION) &&
 	    (sc->cur_chan->nvifs <= 1) &&
 	    !(sc->cur_chan->rxfilter & FIF_BCN_PRBRESP_PROMISC))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rfilt |= ATH9K_RX_FILTER_MYBEACON;
 	else
 		rfilt |= ATH9K_RX_FILTER_BEACON;
 
 	if ((sc->sc_ah->opmode == NL80211_IFTYPE_AP) ||
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    (sc->rx.rxfilter & FIF_PSPOLL))
 		rfilt |= ATH9K_RX_FILTER_PSPOLL;
@@ -509,6 +595,8 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 
 	if (sc->nvifs > 1 || (sc->rx.rxfilter & FIF_OTHER_BSS)) {
 =======
+=======
+>>>>>>> v3.18
 	    (sc->cur_chan->rxfilter & FIF_PSPOLL))
 		rfilt |= ATH9K_RX_FILTER_PSPOLL;
 
@@ -516,6 +604,9 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 		rfilt |= ATH9K_RX_FILTER_COMP_BAR;
 
 	if (sc->cur_chan->nvifs > 1 || (sc->cur_chan->rxfilter & FIF_OTHER_BSS)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* This is needed for older chips */
 		if (sc->sc_ah->hw_version.macVersion <= AR_SREV_VERSION_9160)
@@ -524,10 +615,13 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (AR_SREV_9550(sc->sc_ah))
 		rfilt |= ATH9K_RX_FILTER_4ADDRESS;
 
 =======
+=======
+>>>>>>> v3.18
 	if (AR_SREV_9550(sc->sc_ah) || AR_SREV_9531(sc->sc_ah))
 		rfilt |= ATH9K_RX_FILTER_4ADDRESS;
 
@@ -537,11 +631,15 @@ u32 ath_calcrxfilter(struct ath_softc *sc)
 
 	spin_unlock_bh(&sc->chan_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rfilt;
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ath_startrecv(struct ath_softc *sc)
 {
@@ -552,6 +650,8 @@ int ath_startrecv(struct ath_softc *sc)
 		ath_edma_start_recv(sc);
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 void ath_startrecv(struct ath_softc *sc)
 {
 	struct ath_hw *ah = sc->sc_ah;
@@ -560,6 +660,9 @@ void ath_startrecv(struct ath_softc *sc)
 	if (ah->caps.hw_caps & ATH9K_HW_CAP_EDMA) {
 		ath_edma_start_recv(sc);
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -570,7 +673,11 @@ void ath_startrecv(struct ath_softc *sc)
 	sc->rx.rxlink = NULL;
 	list_for_each_entry_safe(bf, tbf, &sc->rx.rxbuf, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath_rx_buf_link(sc, bf);
+=======
+		ath_rx_buf_link(sc, bf, false);
+>>>>>>> v3.18
 =======
 		ath_rx_buf_link(sc, bf, false);
 >>>>>>> v3.18
@@ -581,7 +688,11 @@ void ath_startrecv(struct ath_softc *sc)
 		goto start_recv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bf = list_first_entry(&sc->rx.rxbuf, struct ath_buf, list);
+=======
+	bf = list_first_entry(&sc->rx.rxbuf, struct ath_rxbuf, list);
+>>>>>>> v3.18
 =======
 	bf = list_first_entry(&sc->rx.rxbuf, struct ath_rxbuf, list);
 >>>>>>> v3.18
@@ -591,9 +702,13 @@ void ath_startrecv(struct ath_softc *sc)
 start_recv:
 	ath_opmode_init(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath9k_hw_startpcureceive(ah, !!(sc->hw->conf.flags & IEEE80211_CONF_OFFCHANNEL));
 
 	return 0;
+=======
+	ath9k_hw_startpcureceive(ah, sc->cur_chan->offchannel);
+>>>>>>> v3.18
 =======
 	ath9k_hw_startpcureceive(ah, sc->cur_chan->offchannel);
 >>>>>>> v3.18
@@ -668,6 +783,10 @@ static void ath_rx_ps_beacon(struct ath_softc *sc, struct sk_buff *skb)
 {
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool skip_beacon = false;
+>>>>>>> v3.18
 =======
 	bool skip_beacon = false;
 >>>>>>> v3.18
@@ -682,8 +801,11 @@ static void ath_rx_ps_beacon(struct ath_softc *sc, struct sk_buff *skb)
 		ath_dbg(common, PS,
 			"Reconfigure beacon timers based on synchronized timestamp\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath9k_set_beacon(sc);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_ATH9K_CHANNEL_CONTEXT
 		if (ath9k_is_chanctx_enabled()) {
@@ -697,6 +819,9 @@ static void ath_rx_ps_beacon(struct ath_softc *sc, struct sk_buff *skb)
 			ath9k_set_beacon(sc);
 
 		ath9k_p2p_beacon_sync(sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -765,7 +890,11 @@ static bool ath_edma_get_buffers(struct ath_softc *sc,
 				 enum ath9k_rx_qtype qtype,
 				 struct ath_rx_status *rs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct ath_buf **dest)
+=======
+				 struct ath_rxbuf **dest)
+>>>>>>> v3.18
 =======
 				 struct ath_rxbuf **dest)
 >>>>>>> v3.18
@@ -775,7 +904,11 @@ static bool ath_edma_get_buffers(struct ath_softc *sc,
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -823,17 +956,23 @@ static bool ath_edma_get_buffers(struct ath_softc *sc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ath_buf *ath_edma_get_next_rx_buf(struct ath_softc *sc,
 						struct ath_rx_status *rs,
 						enum ath9k_rx_qtype qtype)
 {
 	struct ath_buf *bf = NULL;
 =======
+=======
+>>>>>>> v3.18
 static struct ath_rxbuf *ath_edma_get_next_rx_buf(struct ath_softc *sc,
 						struct ath_rx_status *rs,
 						enum ath9k_rx_qtype qtype)
 {
 	struct ath_rxbuf *bf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (ath_edma_get_buffers(sc, qtype, rs, &bf)) {
@@ -846,7 +985,11 @@ static struct ath_rxbuf *ath_edma_get_next_rx_buf(struct ath_softc *sc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ath_buf *ath_get_next_rx_buf(struct ath_softc *sc,
+=======
+static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
+>>>>>>> v3.18
 =======
 static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 >>>>>>> v3.18
@@ -856,7 +999,11 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct ath_desc *ds;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -868,7 +1015,11 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bf = list_first_entry(&sc->rx.rxbuf, struct ath_buf, list);
+=======
+	bf = list_first_entry(&sc->rx.rxbuf, struct ath_rxbuf, list);
+>>>>>>> v3.18
 =======
 	bf = list_first_entry(&sc->rx.rxbuf, struct ath_rxbuf, list);
 >>>>>>> v3.18
@@ -892,7 +1043,11 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 	if (ret == -EINPROGRESS) {
 		struct ath_rx_status trs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ath_buf *tbf;
+=======
+		struct ath_rxbuf *tbf;
+>>>>>>> v3.18
 =======
 		struct ath_rxbuf *tbf;
 >>>>>>> v3.18
@@ -905,7 +1060,11 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tbf = list_entry(bf->list.next, struct ath_buf, list);
+=======
+		tbf = list_entry(bf->list.next, struct ath_rxbuf, list);
+>>>>>>> v3.18
 =======
 		tbf = list_entry(bf->list.next, struct ath_rxbuf, list);
 >>>>>>> v3.18
@@ -928,12 +1087,15 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * mark descriptor as zero-length and set the 'more'
 		 * flag to ensure that both buffers get discarded
 		 */
 		rs->rs_datalen = 0;
 		rs->rs_more = true;
 =======
+=======
+>>>>>>> v3.18
 		 * Re-check previous descriptor, in case it has been filled
 		 * in the mean time.
 		 */
@@ -946,6 +1108,9 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 			rs->rs_datalen = 0;
 			rs->rs_more = true;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -965,6 +1130,7 @@ static struct ath_rxbuf *ath_get_next_rx_buf(struct ath_softc *sc,
 	return bf;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Assumes you've already done the endian to CPU conversion */
 static bool ath9k_rx_accept(struct ath_common *common,
@@ -1357,6 +1523,8 @@ static int ath_process_fft(struct ath_softc *sc, struct ieee80211_hdr *hdr,
 	return 0;
 #endif
 =======
+=======
+>>>>>>> v3.18
 static void ath9k_process_tsf(struct ath_rx_status *rs,
 			      struct ieee80211_rx_status *rxs,
 			      u64 tsf)
@@ -1545,6 +1713,9 @@ static void ath9k_antenna_check(struct ath_softc *sc,
 	} else {
 		ath_ant_comb_scan(sc, rs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1569,7 +1740,11 @@ static void ath9k_apply_ampdu_details(struct ath_softc *sc,
 int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+	struct ath_rxbuf *bf;
+>>>>>>> v3.18
 =======
 	struct ath_rxbuf *bf;
 >>>>>>> v3.18
@@ -1579,7 +1754,10 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct ieee80211_hw *hw = sc->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_hdr *hdr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int retval;
@@ -1588,17 +1766,23 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 	bool edma = !!(ah->caps.hw_caps & ATH9K_HW_CAP_EDMA);
 	int dma_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rx_status_len = ah->caps.rx_status_len;
 	u64 tsf = 0;
 	u32 tsf_lower = 0;
 	unsigned long flags;
 	dma_addr_t new_buf_addr;
 =======
+=======
+>>>>>>> v3.18
 	u64 tsf = 0;
 	unsigned long flags;
 	dma_addr_t new_buf_addr;
 	unsigned int budget = 512;
 	struct ieee80211_hdr *hdr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (edma)
@@ -1610,7 +1794,10 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 
 	tsf = ath9k_hw_gettsf64(ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsf_lower = tsf & 0xffffffff;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1639,6 +1826,7 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 		else
 			hdr_skb = skb;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hdr = (struct ieee80211_hdr *) (hdr_skb->data + rx_status_len);
 		rxs = IEEE80211_SKB_RXCB(hdr_skb);
@@ -1690,6 +1878,8 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 			ath_start_rx_poll(sc, 3);
 		}
 =======
+=======
+>>>>>>> v3.18
 		rxs = IEEE80211_SKB_RXCB(hdr_skb);
 		memset(rxs, 0, sizeof(struct ieee80211_rx_status));
 
@@ -1698,6 +1888,9 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 		if (retval)
 			goto requeue_drop_frag;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Ensure we always have an skb to requeue once we are done
 		 * processing the current buffer's skb */
@@ -1733,8 +1926,13 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 
 		if (!rs.rs_more)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ath9k_rx_skb_postprocess(common, hdr_skb, &rs,
 						 rxs, decrypt_error);
+=======
+			ath9k_cmn_rx_skb_postprocess(common, hdr_skb, &rs,
+						     rxs, decrypt_error);
+>>>>>>> v3.18
 =======
 			ath9k_cmn_rx_skb_postprocess(common, hdr_skb, &rs,
 						     rxs, decrypt_error);
@@ -1758,8 +1956,11 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 			goto requeue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rs.rs_status & ATH9K_RXERR_CORRUPT_DESC)
 			goto requeue_drop_frag;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1781,6 +1982,7 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (ah->caps.hw_caps & ATH9K_HW_CAP_ANT_DIV_COMB) {
 
@@ -1799,6 +2001,8 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		if (rxs->flag & RX_FLAG_MMIC_STRIPPED)
 			skb_trim(skb, skb->len - 8);
 
@@ -1811,11 +2015,14 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 		spin_unlock_irqrestore(&sc->sc_pm_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((ah->caps.hw_caps & ATH9K_HW_CAP_ANT_DIV_COMB) && sc->ant_rx == 3)
 			ath_ant_comb_scan(sc, &rs);
 
 		ath9k_apply_ampdu_details(sc, &rs, rxs);
 =======
+=======
+>>>>>>> v3.18
 		ath9k_antenna_check(sc, &rs);
 		ath9k_apply_ampdu_details(sc, &rs, rxs);
 		ath_debug_rate_stats(sc, &rs, skb);
@@ -1823,6 +2030,9 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 		hdr = (struct ieee80211_hdr *)skb->data;
 		if (ieee80211_is_ack(hdr->frame_control))
 			ath_dynack_sample_ack_ts(sc->sc_ah, skb, rs.rs_tstamp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ieee80211_rx(hw, skb);
@@ -1835,6 +2045,7 @@ requeue_drop_frag:
 requeue:
 		list_add_tail(&bf->list, &sc->rx.rxbuf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (flush)
 			continue;
 
@@ -1845,6 +2056,8 @@ requeue:
 			ath9k_hw_rxena(ah);
 		}
 =======
+=======
+>>>>>>> v3.18
 
 		if (!edma) {
 			ath_rx_buf_relink(sc, bf, flush);
@@ -1856,6 +2069,9 @@ requeue:
 
 		if (!budget--)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (1);
 

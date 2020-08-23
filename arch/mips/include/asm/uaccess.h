@@ -7,6 +7,10 @@
  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
  * Copyright (C) 2007  Maciej W. Rozycki
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014, Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014, Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -18,7 +22,11 @@
 #include <linux/errno.h>
 #include <linux/thread_info.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/string.h>
+=======
+#include <asm/asm-eva.h>
+>>>>>>> v3.18
 =======
 #include <asm/asm-eva.h>
 >>>>>>> v3.18
@@ -232,12 +240,15 @@ struct __large_struct { unsigned long buf[100]; };
  * for 32 bit mode and old iron.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_32BIT
 #define __GET_USER_DW(val, ptr) __get_user_asm_ll32(val, ptr)
 #endif
 #ifdef CONFIG_64BIT
 #define __GET_USER_DW(val, ptr) __get_user_asm(val, "ld", ptr)
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_EVA
 #define __get_kernel_common(val, size, ptr) __get_user_common(val, size, ptr)
 #else
@@ -276,6 +287,9 @@ do {									\
 #endif
 #ifdef CONFIG_64BIT
 #define __GET_DW(val, insn, ptr) __get_data_asm(val, insn, ptr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -285,15 +299,21 @@ extern void __get_user_unknown(void);
 do {									\
 	switch (size) {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 1: __get_user_asm(val, "lb", ptr); break;			\
 	case 2: __get_user_asm(val, "lh", ptr); break;			\
 	case 4: __get_user_asm(val, "lw", ptr); break;			\
 	case 8: __GET_USER_DW(val, ptr); break;				\
 =======
+=======
+>>>>>>> v3.18
 	case 1: __get_data_asm(val, user_lb, ptr); break;		\
 	case 2: __get_data_asm(val, user_lh, ptr); break;		\
 	case 4: __get_data_asm(val, user_lw, ptr); break;		\
 	case 8: __GET_DW(val, user_ld, ptr); break;			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default: __get_user_unknown(); break;				\
 	}								\
@@ -304,15 +324,21 @@ do {									\
 	int __gu_err;							\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__chk_user_ptr(ptr);						\
 	__get_user_common((x), size, ptr);				\
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {				\
 		__get_kernel_common((x), size, ptr);			\
 	} else {							\
 		__chk_user_ptr(ptr);					\
 		__get_user_common((x), size, ptr);			\
 	}								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__gu_err;							\
 })
@@ -324,9 +350,12 @@ do {									\
 									\
 	might_fault();							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_READ,  __gu_ptr, size)))		\
 		__get_user_common((x), size, __gu_ptr);			\
 =======
+=======
+>>>>>>> v3.18
 	if (likely(access_ok(VERIFY_READ,  __gu_ptr, size))) {		\
 		if (segment_eq(get_fs(), get_ds()))			\
 			__get_kernel_common((x), size, __gu_ptr);	\
@@ -334,13 +363,20 @@ do {									\
 			__get_user_common((x), size, __gu_ptr);		\
 	} else								\
 		(x) = 0;						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 									\
 	__gu_err;							\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __get_user_asm(val, insn, addr)					\
+=======
+#define __get_data_asm(val, insn, addr)					\
+>>>>>>> v3.18
 =======
 #define __get_data_asm(val, insn, addr)					\
 >>>>>>> v3.18
@@ -349,7 +385,11 @@ do {									\
 									\
 	__asm__ __volatile__(						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"1:	" insn "	%1, %3				\n"	\
+=======
+	"1:	"insn("%1", "%3")"				\n"	\
+>>>>>>> v3.18
 =======
 	"1:	"insn("%1", "%3")"				\n"	\
 >>>>>>> v3.18
@@ -358,6 +398,10 @@ do {									\
 	"	.section .fixup,\"ax\"				\n"	\
 	"3:	li	%0, %4					\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"	move	%1, $0					\n"	\
+>>>>>>> v3.18
 =======
 	"	move	%1, $0					\n"	\
 >>>>>>> v3.18
@@ -376,7 +420,11 @@ do {									\
  * Get a long long 64 using 32 bit registers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __get_user_asm_ll32(val, addr)					\
+=======
+#define __get_data_asm_ll32(val, insn, addr)				\
+>>>>>>> v3.18
 =======
 #define __get_data_asm_ll32(val, insn, addr)				\
 >>>>>>> v3.18
@@ -388,8 +436,13 @@ do {									\
 									\
 	__asm__ __volatile__(						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"1:	lw	%1, (%3)				\n"	\
 	"2:	lw	%D1, 4(%3)				\n"	\
+=======
+	"1:	" insn("%1", "(%3)")"				\n"	\
+	"2:	" insn("%D1", "4(%3)")"				\n"	\
+>>>>>>> v3.18
 =======
 	"1:	" insn("%1", "(%3)")"				\n"	\
 	"2:	" insn("%D1", "4(%3)")"				\n"	\
@@ -413,7 +466,10 @@ do {									\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_EVA
 #define __put_kernel_common(ptr, size) __put_user_common(ptr, size)
 #else
@@ -448,12 +504,16 @@ do {									\
 } while(0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Yuck.  We need two variants, one for 64bit operation and one
  * for 32 bit mode and old iron.
  */
 #ifdef CONFIG_32BIT
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __PUT_USER_DW(ptr) __put_user_asm_ll32(ptr)
 #endif
@@ -462,6 +522,8 @@ do {									\
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #define __PUT_DW(insn, ptr) __put_data_asm_ll32(insn, ptr)
 #endif
 #ifdef CONFIG_64BIT
@@ -479,12 +541,16 @@ do {									\
 	}								\
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __put_user_nocheck(x, ptr, size)				\
 ({									\
 	__typeof__(*(ptr)) __pu_val;					\
 	int __pu_err = 0;						\
 									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__chk_user_ptr(ptr);						\
 	__pu_val = (x);							\
@@ -495,12 +561,17 @@ do {									\
 	case 8: __PUT_USER_DW(ptr); break;				\
 	default: __put_user_unknown(); break;				\
 =======
+=======
+>>>>>>> v3.18
 	__pu_val = (x);							\
 	if (segment_eq(get_fs(), get_ds())) {				\
 		__put_kernel_common(ptr, size);				\
 	} else {							\
 		__chk_user_ptr(ptr);					\
 		__put_user_common(ptr, size);				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	__pu_err;							\
@@ -514,6 +585,7 @@ do {									\
 									\
 	might_fault();							\
 	if (likely(access_ok(VERIFY_WRITE,  __pu_addr, size))) {	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (size) {						\
 		case 1: __put_user_asm("sb", __pu_addr); break;		\
@@ -531,6 +603,8 @@ do {									\
 	__asm__ __volatile__(						\
 	"1:	" insn "	%z2, %3		# __put_user_asm\n"	\
 =======
+=======
+>>>>>>> v3.18
 		if (segment_eq(get_fs(), get_ds()))			\
 			__put_kernel_common(__pu_addr, size);		\
 		else							\
@@ -544,6 +618,9 @@ do {									\
 {									\
 	__asm__ __volatile__(						\
 	"1:	"insn("%z2", "%3")"	# __put_data_asm	\n"	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"2:							\n"	\
 	"	.insn						\n"	\
@@ -560,17 +637,23 @@ do {									\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __put_user_asm_ll32(ptr)					\
 {									\
 	__asm__ __volatile__(						\
 	"1:	sw	%2, (%3)	# __put_user_asm_ll32	\n"	\
 	"2:	sw	%D2, 4(%3)				\n"	\
 =======
+=======
+>>>>>>> v3.18
 #define __put_data_asm_ll32(insn, ptr)					\
 {									\
 	__asm__ __volatile__(						\
 	"1:	"insn("%2", "(%3)")"	# __put_data_asm_ll32	\n"	\
 	"2:	"insn("%D2", "4(%3)")"				\n"	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"3:							\n"	\
 	"	.insn						\n"	\
@@ -591,12 +674,18 @@ extern void __put_user_unknown(void);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ul{b,h,w} are macros and there are no equivalent macros for EVA.
  * EVA unaligned access is handled in the ADE exception handler.
  */
 #ifndef CONFIG_EVA
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * put_user_unaligned: - Write a simple value into user space.
  * @x:	 Value to copy to user space.
@@ -700,7 +789,11 @@ extern void __get_user_unaligned_unknown(void);
 do {									\
 	switch (size) {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 1: __get_user_asm(val, "lb", ptr); break;			\
+=======
+	case 1: __get_data_asm(val, "lb", ptr); break;			\
+>>>>>>> v3.18
 =======
 	case 1: __get_data_asm(val, "lb", ptr); break;			\
 >>>>>>> v3.18
@@ -731,7 +824,11 @@ do {									\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __get_user_unaligned_asm(val, insn, addr)			\
+=======
+#define __get_data_unaligned_asm(val, insn, addr)			\
+>>>>>>> v3.18
 =======
 #define __get_data_unaligned_asm(val, insn, addr)			\
 >>>>>>> v3.18
@@ -745,6 +842,10 @@ do {									\
 	"	.section .fixup,\"ax\"				\n"	\
 	"3:	li	%0, %4					\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"	move	%1, $0					\n"	\
+>>>>>>> v3.18
 =======
 	"	move	%1, $0					\n"	\
 >>>>>>> v3.18
@@ -802,7 +903,10 @@ do {									\
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __put_user_unaligned_common(ptr, size)				\
 do {									\
 	switch (size) {							\
@@ -813,6 +917,9 @@ do {									\
 	default: __put_user_unaligned_unknown(); break;			\
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __put_user_unaligned_nocheck(x,ptr,size)			\
 ({									\
@@ -821,6 +928,7 @@ do {									\
 									\
 	__pu_val = (x);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (size) {							\
 	case 1: __put_user_asm("sb", ptr); break;			\
 	case 2: __put_user_unaligned_asm("ush", ptr); break;		\
@@ -828,6 +936,9 @@ do {									\
 	case 8: __PUT_USER_UNALIGNED_DW(ptr); break;			\
 	default: __put_user_unaligned_unknown(); break;			\
 	}								\
+=======
+	__put_user_unaligned_common(ptr, size);				\
+>>>>>>> v3.18
 =======
 	__put_user_unaligned_common(ptr, size);				\
 >>>>>>> v3.18
@@ -841,6 +952,7 @@ do {									\
 	int __pu_err = -EFAULT;						\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_WRITE,  __pu_addr, size))) {	\
 		switch (size) {						\
 		case 1: __put_user_asm("sb", __pu_addr); break;		\
@@ -850,6 +962,11 @@ do {									\
 		default: __put_user_unaligned_unknown(); break;		\
 		}							\
 	}								\
+=======
+	if (likely(access_ok(VERIFY_WRITE,  __pu_addr, size)))		\
+		__put_user_unaligned_common(__pu_addr, size);		\
+									\
+>>>>>>> v3.18
 =======
 	if (likely(access_ok(VERIFY_WRITE,  __pu_addr, size)))		\
 		__put_user_unaligned_common(__pu_addr, size);		\
@@ -900,6 +1017,10 @@ do {									\
 
 extern void __put_user_unaligned_unknown(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -920,22 +1041,32 @@ extern void __put_user_unaligned_unknown(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_CPU_DADDI_WORKAROUNDS
 #define DADDI_SCRATCH "$0"
 #else
 #define DADDI_SCRATCH "$3"
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_DADDI_WORKAROUNDS) || (defined(CONFIG_EVA) &&	\
 					      defined(CONFIG_CPU_HAS_PREFETCH))
 #define DADDI_SCRATCH "$3"
 #else
 #define DADDI_SCRATCH "$0"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 extern size_t __copy_user(void *__to, const void *__from, size_t __n);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_EVA
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_EVA
 >>>>>>> v3.18
@@ -958,12 +1089,18 @@ extern size_t __copy_user(void *__to, const void *__from, size_t __n);
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __invoke_copy_to_kernel(to, from, n)				\
 	__invoke_copy_to_user(to, from, n)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * __copy_to_user: - Copy a block of data into user space, with less checking.
@@ -990,14 +1127,20 @@ extern size_t __copy_user(void *__to, const void *__from, size_t __n);
 	__cu_len = (n);							\
 	might_fault();							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__cu_len = __invoke_copy_to_user(__cu_to, __cu_from, __cu_len); \
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds()))				\
 		__cu_len = __invoke_copy_to_kernel(__cu_to, __cu_from,	\
 						   __cu_len);		\
 	else								\
 		__cu_len = __invoke_copy_to_user(__cu_to, __cu_from,	\
 						 __cu_len);		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__cu_len;							\
 })
@@ -1014,14 +1157,20 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 	__cu_from = (from);						\
 	__cu_len = (n);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__cu_len = __invoke_copy_to_user(__cu_to, __cu_from, __cu_len); \
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds()))				\
 		__cu_len = __invoke_copy_to_kernel(__cu_to, __cu_from,	\
 						   __cu_len);		\
 	else								\
 		__cu_len = __invoke_copy_to_user(__cu_to, __cu_from,	\
 						 __cu_len);		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__cu_len;							\
 })
@@ -1036,9 +1185,12 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 	__cu_from = (from);						\
 	__cu_len = (n);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__cu_len = __invoke_copy_from_user_inatomic(__cu_to, __cu_from, \
 						    __cu_len);		\
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds()))				\
 		__cu_len = __invoke_copy_from_kernel_inatomic(__cu_to,	\
 							      __cu_from,\
@@ -1047,6 +1199,9 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 		__cu_len = __invoke_copy_from_user_inatomic(__cu_to,	\
 							    __cu_from,	\
 							    __cu_len);	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__cu_len;							\
 })
@@ -1074,11 +1229,14 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 	__cu_from = (from);						\
 	__cu_len = (n);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (access_ok(VERIFY_WRITE, __cu_to, __cu_len)) {		\
 		might_fault();						\
 		__cu_len = __invoke_copy_to_user(__cu_to, __cu_from,	\
 						 __cu_len);		\
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {				\
 		__cu_len = __invoke_copy_to_kernel(__cu_to,		\
 						   __cu_from,		\
@@ -1090,12 +1248,20 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 							 __cu_from,	\
 							 __cu_len);     \
 		}							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	__cu_len;							\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_EVA
+
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_EVA
 
@@ -1124,7 +1290,10 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __invoke_copy_from_kernel(to, from, n)				\
 	__invoke_copy_from_user(to, from, n)
 
@@ -1136,6 +1305,9 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 #define ___invoke_copy_in_kernel(to, from, n)				\
 	__invoke_copy_from_user(to, from, n)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __invoke_copy_from_user_inatomic(to, from, n)			\
 ({									\
@@ -1161,7 +1333,10 @@ extern size_t __copy_user_inatomic(void *__to, const void *__from, size_t __n);
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __invoke_copy_from_kernel_inatomic(to, from, n)			\
 	__invoke_copy_from_user_inatomic(to, from, n)			\
 
@@ -1253,6 +1428,9 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 
 #endif /* CONFIG_EVA */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * __copy_from_user: - Copy a block of data from user space, with less checking.
@@ -1312,11 +1490,14 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 	__cu_from = (from);						\
 	__cu_len = (n);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (access_ok(VERIFY_READ, __cu_from, __cu_len)) {		\
 		might_fault();						\
 		__cu_len = __invoke_copy_from_user(__cu_to, __cu_from,	\
 						   __cu_len);		\
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {				\
 		__cu_len = __invoke_copy_from_kernel(__cu_to,		\
 						     __cu_from,		\
@@ -1328,6 +1509,9 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 							   __cu_from,	\
 							   __cu_len);   \
 		}							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	__cu_len;							\
@@ -1343,10 +1527,13 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 	__cu_from = (from);						\
 	__cu_len = (n);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_fault();							\
 	__cu_len = __invoke_copy_from_user(__cu_to, __cu_from,		\
 					   __cu_len);			\
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {				\
 		__cu_len = ___invoke_copy_in_kernel(__cu_to, __cu_from,	\
 						    __cu_len);		\
@@ -1355,6 +1542,9 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 		__cu_len = ___invoke_copy_in_user(__cu_to, __cu_from,	\
 						  __cu_len);		\
 	}								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__cu_len;							\
 })
@@ -1369,6 +1559,7 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 	__cu_from = (from);						\
 	__cu_len = (n);							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_READ, __cu_from, __cu_len) &&	\
 		   access_ok(VERIFY_WRITE, __cu_to, __cu_len))) {	\
 		might_fault();						\
@@ -1377,6 +1568,8 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 	} else {							\
 		memset(__cu_to, 0, __cu_len);				\
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {				\
 		__cu_len = ___invoke_copy_in_kernel(__cu_to,__cu_from,	\
 						    __cu_len);		\
@@ -1388,6 +1581,9 @@ extern size_t __copy_in_user_eva(void *__to, const void *__from, size_t __n);
 							  __cu_from,	\
 							  __cu_len);	\
 		}							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	__cu_len;							\
@@ -1459,6 +1655,7 @@ __strncpy_from_user(char *__to, const char __user *__from, long __len)
 	long res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_fault();
 	__asm__ __volatile__(
 		"move\t$4, %1\n\t"
@@ -1470,6 +1667,8 @@ __strncpy_from_user(char *__to, const char __user *__from, long __len)
 		: "r" (__to), "r" (__from), "r" (__len)
 		: "$2", "$3", "$4", "$5", "$6", __UA_t0, "$31", "memory");
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {
 		__asm__ __volatile__(
 			"move\t$4, %1\n\t"
@@ -1492,6 +1691,9 @@ __strncpy_from_user(char *__to, const char __user *__from, long __len)
 			: "r" (__to), "r" (__from), "r" (__len)
 			: "$2", "$3", "$4", "$5", "$6", __UA_t0, "$31", "memory");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
@@ -1521,6 +1723,7 @@ strncpy_from_user(char *__to, const char __user *__from, long __len)
 	long res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_fault();
 	__asm__ __volatile__(
 		"move\t$4, %1\n\t"
@@ -1532,6 +1735,8 @@ strncpy_from_user(char *__to, const char __user *__from, long __len)
 		: "r" (__to), "r" (__from), "r" (__len)
 		: "$2", "$3", "$4", "$5", "$6", __UA_t0, "$31", "memory");
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {
 		__asm__ __volatile__(
 			"move\t$4, %1\n\t"
@@ -1554,6 +1759,9 @@ strncpy_from_user(char *__to, const char __user *__from, long __len)
 			: "r" (__to), "r" (__from), "r" (__len)
 			: "$2", "$3", "$4", "$5", "$6", __UA_t0, "$31", "memory");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
@@ -1565,6 +1773,7 @@ static inline long __strlen_user(const char __user *s)
 	long res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_fault();
 	__asm__ __volatile__(
 		"move\t$4, %1\n\t"
@@ -1574,6 +1783,8 @@ static inline long __strlen_user(const char __user *s)
 		: "r" (s)
 		: "$2", "$4", __UA_t0, "$31");
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {
 		__asm__ __volatile__(
 			"move\t$4, %1\n\t"
@@ -1592,6 +1803,9 @@ static inline long __strlen_user(const char __user *s)
 			: "r" (s)
 			: "$2", "$4", __UA_t0, "$31");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
@@ -1616,6 +1830,7 @@ static inline long strlen_user(const char __user *s)
 	long res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_fault();
 	__asm__ __volatile__(
 		"move\t$4, %1\n\t"
@@ -1625,6 +1840,8 @@ static inline long strlen_user(const char __user *s)
 		: "r" (s)
 		: "$2", "$4", __UA_t0, "$31");
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {
 		__asm__ __volatile__(
 			"move\t$4, %1\n\t"
@@ -1643,6 +1860,9 @@ static inline long strlen_user(const char __user *s)
 			: "r" (s)
 			: "$2", "$4", __UA_t0, "$31");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
@@ -1654,6 +1874,7 @@ static inline long __strnlen_user(const char __user *s, long n)
 	long res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_fault();
 	__asm__ __volatile__(
 		"move\t$4, %1\n\t"
@@ -1664,6 +1885,8 @@ static inline long __strnlen_user(const char __user *s, long n)
 		: "r" (s), "r" (n)
 		: "$2", "$4", "$5", __UA_t0, "$31");
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {
 		__asm__ __volatile__(
 			"move\t$4, %1\n\t"
@@ -1684,6 +1907,9 @@ static inline long __strnlen_user(const char __user *s, long n)
 			: "r" (s), "r" (n)
 			: "$2", "$4", "$5", __UA_t0, "$31");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
@@ -1691,7 +1917,11 @@ static inline long __strnlen_user(const char __user *s, long n)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * strlen_user: - Get the size of a string in user space.
+=======
+ * strnlen_user: - Get the size of a string in user space.
+>>>>>>> v3.18
 =======
  * strnlen_user: - Get the size of a string in user space.
 >>>>>>> v3.18
@@ -1704,9 +1934,13 @@ static inline long __strnlen_user(const char __user *s, long n)
  * Returns the size of the string INCLUDING the terminating NUL.
  * On exception, returns 0.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * If there is a limit on the length of a valid string, you may wish to
  * consider using strnlen_user() instead.
+=======
+ * If the string is too long, returns a value greater than @n.
+>>>>>>> v3.18
 =======
  * If the string is too long, returns a value greater than @n.
 >>>>>>> v3.18
@@ -1717,6 +1951,7 @@ static inline long strnlen_user(const char __user *s, long n)
 
 	might_fault();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__asm__ __volatile__(
 		"move\t$4, %1\n\t"
 		"move\t$5, %2\n\t"
@@ -1726,6 +1961,8 @@ static inline long strnlen_user(const char __user *s, long n)
 		: "r" (s), "r" (n)
 		: "$2", "$4", "$5", __UA_t0, "$31");
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds())) {
 		__asm__ __volatile__(
 			"move\t$4, %1\n\t"
@@ -1745,6 +1982,9 @@ static inline long strnlen_user(const char __user *s, long n)
 			: "r" (s), "r" (n)
 			: "$2", "$4", "$5", __UA_t0, "$31");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;

@@ -1,7 +1,11 @@
 menuconfig ION
 	bool "Ion Memory Manager"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_MEMBLOCK
+=======
+	depends on HAVE_MEMBLOCK && HAS_DMA && MMU
+>>>>>>> v3.18
 =======
 	depends on HAVE_MEMBLOCK && HAS_DMA && MMU
 >>>>>>> v3.18
@@ -22,7 +26,10 @@ config ION_TEST
 	  kernel and device side ION functions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ION_DUMMY
 	bool "Dummy Ion driver"
 	depends on ION
@@ -33,6 +40,9 @@ config ION_DUMMY
 	  one doesn't have access to hardware drivers that
 	  use ION.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ION_TEGRA
 	tristate "Ion for Tegra"
@@ -40,6 +50,7 @@ config ION_TEGRA
 	help
 	  Choose this option if you wish to use ion on an nVidia Tegra.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ION_MSM
 	tristate "Ion for MSM"
@@ -53,5 +64,7 @@ config ALLOC_BUFFERS_IN_4K_CHUNKS
 	help
           Choose this option if you want ION to allocate buffers in
           only 4KB chunks.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

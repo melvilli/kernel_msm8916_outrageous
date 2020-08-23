@@ -15,6 +15,10 @@
 #include "s5p_mfc_common.h"
 #include "s5p_mfc_debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "s5p_mfc_cmd_v5.h"
+>>>>>>> v3.18
 =======
 #include "s5p_mfc_cmd_v5.h"
 >>>>>>> v3.18
@@ -116,7 +120,11 @@ static int s5p_mfc_open_inst_cmd_v5(struct s5p_mfc_ctx *ctx)
 	default:
 		h2r_args.arg[0] = S5P_FIMV_CODEC_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

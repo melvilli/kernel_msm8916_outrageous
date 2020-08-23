@@ -23,6 +23,11 @@
 #define _CIFSFS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hash.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/hash.h>
 
@@ -31,6 +36,7 @@
 
 /*
  * ino_t is 32-bits on 32-bit arch. We have to squash the 64-bit value down
+<<<<<<< HEAD
 <<<<<<< HEAD
  * so that it will fit.
  */
@@ -43,6 +49,8 @@ cifs_uniqueid_to_ino_t(u64 fileid)
 	return ino;
 }
 =======
+=======
+>>>>>>> v3.18
  * so that it will fit. We use hash_64 to convert the value to 31 bits, and
  * then add 1, to ensure that we don't end up with a 0 as the value.
  */
@@ -59,6 +67,9 @@ cifs_uniqueid_to_ino_t(u64 fileid)
 	return (ino_t)hash_64(fileid, (sizeof(ino_t) * 8) - 1) + 1;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct file_system_type cifs_fs_type;
@@ -85,8 +96,13 @@ extern int cifs_mknod(struct inode *, struct dentry *, umode_t, dev_t);
 extern int cifs_mkdir(struct inode *, struct dentry *, umode_t);
 extern int cifs_rmdir(struct inode *, struct dentry *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int cifs_rename(struct inode *, struct dentry *, struct inode *,
 		       struct dentry *);
+=======
+extern int cifs_rename2(struct inode *, struct dentry *, struct inode *,
+			struct dentry *, unsigned int);
+>>>>>>> v3.18
 =======
 extern int cifs_rename2(struct inode *, struct dentry *, struct inode *,
 			struct dentry *, unsigned int);
@@ -97,6 +113,11 @@ extern int cifs_revalidate_file(struct file *filp);
 extern int cifs_revalidate_dentry(struct dentry *);
 extern int cifs_invalidate_mapping(struct inode *inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int cifs_revalidate_mapping(struct inode *inode);
+extern int cifs_zap_mapping(struct inode *inode);
+>>>>>>> v3.18
 =======
 extern int cifs_revalidate_mapping(struct inode *inode);
 extern int cifs_zap_mapping(struct inode *inode);
@@ -120,6 +141,7 @@ extern int cifs_open(struct inode *inode, struct file *file);
 extern int cifs_close(struct inode *inode, struct file *file);
 extern int cifs_closedir(struct inode *inode, struct file *file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern ssize_t cifs_user_readv(struct kiocb *iocb, const struct iovec *iov,
 			       unsigned long nr_segs, loff_t pos);
 extern ssize_t cifs_strict_readv(struct kiocb *iocb, const struct iovec *iov,
@@ -129,10 +151,15 @@ extern ssize_t cifs_user_writev(struct kiocb *iocb, const struct iovec *iov,
 extern ssize_t cifs_strict_writev(struct kiocb *iocb, const struct iovec *iov,
 				  unsigned long nr_segs, loff_t pos);
 =======
+=======
+>>>>>>> v3.18
 extern ssize_t cifs_user_readv(struct kiocb *iocb, struct iov_iter *to);
 extern ssize_t cifs_strict_readv(struct kiocb *iocb, struct iov_iter *to);
 extern ssize_t cifs_user_writev(struct kiocb *iocb, struct iov_iter *from);
 extern ssize_t cifs_strict_writev(struct kiocb *iocb, struct iov_iter *from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int cifs_lock(struct file *, int, struct file_lock *);
 extern int cifs_fsync(struct file *, loff_t, loff_t, int);
@@ -143,7 +170,11 @@ extern int cifs_file_strict_mmap(struct file * , struct vm_area_struct *);
 extern const struct file_operations cifs_dir_ops;
 extern int cifs_dir_open(struct inode *inode, struct file *file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int cifs_readdir(struct file *file, void *direntry, filldir_t filldir);
+=======
+extern int cifs_readdir(struct file *file, struct dir_context *ctx);
+>>>>>>> v3.18
 =======
 extern int cifs_readdir(struct file *file, struct dir_context *ctx);
 >>>>>>> v3.18
@@ -161,8 +192,11 @@ extern struct vfsmount *cifs_dfs_d_automount(struct path *path);
 /* Functions related to symlinks */
 extern void *cifs_follow_link(struct dentry *direntry, struct nameidata *nd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cifs_put_link(struct dentry *direntry,
 			  struct nameidata *nd, void *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int cifs_readlink(struct dentry *direntry, char __user *buffer,
@@ -181,7 +215,11 @@ extern const struct export_operations cifs_export_ops;
 #endif /* CONFIG_CIFS_NFSD_EXPORT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CIFS_VERSION   "2.0"
+=======
+#define CIFS_VERSION   "2.05"
+>>>>>>> v3.18
 =======
 #define CIFS_VERSION   "2.05"
 >>>>>>> v3.18

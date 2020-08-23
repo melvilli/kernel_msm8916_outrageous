@@ -80,7 +80,11 @@ int via_final_context(struct drm_device *dev, int context)
 	/* Linux specific until context tracking code gets ported to BSD */
 	/* Last context, perform cleanup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->ctx_count == 1 && dev->dev_private) {
+=======
+	if (list_is_singular(&dev->ctxlist)) {
+>>>>>>> v3.18
 =======
 	if (list_is_singular(&dev->ctxlist)) {
 >>>>>>> v3.18
@@ -145,17 +149,23 @@ int via_mem_alloc(struct drm_device *dev, void *data,
 		retval = drm_mm_insert_node(&dev_priv->agp_mm,
 					    &item->mm_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    tmpSize, 0);
 	else
 		retval = drm_mm_insert_node(&dev_priv->vram_mm,
 					    &item->mm_node,
 					    tmpSize, 0);
 =======
+=======
+>>>>>>> v3.18
 					    tmpSize, 0, DRM_MM_SEARCH_DEFAULT);
 	else
 		retval = drm_mm_insert_node(&dev_priv->vram_mm,
 					    &item->mm_node,
 					    tmpSize, 0, DRM_MM_SEARCH_DEFAULT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (retval)
 		goto fail_alloc;
@@ -224,7 +234,11 @@ void via_reclaim_buffers_locked(struct drm_device *dev,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_idlelock_take(&file->master->lock);
+=======
+	drm_legacy_idlelock_take(&file->master->lock);
+>>>>>>> v3.18
 =======
 	drm_legacy_idlelock_take(&file->master->lock);
 >>>>>>> v3.18
@@ -233,7 +247,11 @@ void via_reclaim_buffers_locked(struct drm_device *dev,
 	if (list_empty(&file_priv->obj_list)) {
 		mutex_unlock(&dev->struct_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_idlelock_release(&file->master->lock);
+=======
+		drm_legacy_idlelock_release(&file->master->lock);
+>>>>>>> v3.18
 =======
 		drm_legacy_idlelock_release(&file->master->lock);
 >>>>>>> v3.18
@@ -252,7 +270,11 @@ void via_reclaim_buffers_locked(struct drm_device *dev,
 	mutex_unlock(&dev->struct_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_idlelock_release(&file->master->lock);
+=======
+	drm_legacy_idlelock_release(&file->master->lock);
+>>>>>>> v3.18
 =======
 	drm_legacy_idlelock_release(&file->master->lock);
 >>>>>>> v3.18

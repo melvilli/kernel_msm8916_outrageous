@@ -38,7 +38,11 @@
 #include "libata-transport.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ATA_PORT_ATTRS		2
+=======
+#define ATA_PORT_ATTRS		3
+>>>>>>> v3.18
 =======
 #define ATA_PORT_ATTRS		3
 >>>>>>> v3.18
@@ -221,6 +225,10 @@ static DEVICE_ATTR(name, S_IRUGO, show_ata_port_##name, NULL)
 ata_port_simple_attr(nr_pmp_links, nr_pmp_links, "%d\n", int);
 ata_port_simple_attr(stats.idle_irq, idle_irq, "%ld\n", unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ata_port_simple_attr(local_port_no, port_no, "%u\n", unsigned int);
+>>>>>>> v3.18
 =======
 ata_port_simple_attr(local_port_no, port_no, "%u\n", unsigned int);
 >>>>>>> v3.18
@@ -295,6 +303,10 @@ int ata_tport_add(struct device *parent,
 	dev_set_name(dev, "ata%d", ap->print_id);
 	transport_setup_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ata_acpi_bind_port(ap);
+>>>>>>> v3.18
 =======
 	ata_acpi_bind_port(ap);
 >>>>>>> v3.18
@@ -656,6 +668,10 @@ static int ata_tdev_add(struct ata_device *ata_dev)
 
 	transport_setup_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ata_acpi_bind_dev(ata_dev);
+>>>>>>> v3.18
 =======
 	ata_acpi_bind_dev(ata_dev);
 >>>>>>> v3.18
@@ -726,6 +742,10 @@ struct scsi_transport_template *ata_attach_transport(void)
 	SETUP_PORT_ATTRIBUTE(nr_pmp_links);
 	SETUP_PORT_ATTRIBUTE(idle_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SETUP_PORT_ATTRIBUTE(port_no);
+>>>>>>> v3.18
 =======
 	SETUP_PORT_ATTRIBUTE(port_no);
 >>>>>>> v3.18

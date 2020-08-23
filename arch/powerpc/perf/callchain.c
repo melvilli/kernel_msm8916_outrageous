@@ -244,7 +244,11 @@ static void perf_callchain_user_64(struct perf_callchain_entry *entry,
 	perf_callchain_store(entry, next_ip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (entry->nr < PERF_MAX_STACK_DEPTH) {
+=======
+	for (;;) {
+>>>>>>> v3.18
 =======
 	for (;;) {
 >>>>>>> v3.18

@@ -7,7 +7,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -40,8 +44,11 @@ struct map {
 	bool			erange_warned;
 	u32			priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64			pgoff;
 =======
+=======
+>>>>>>> v3.18
 	u32			prot;
 	u32			flags;
 	u64			pgoff;
@@ -49,6 +56,9 @@ struct map {
 	u32			maj, min; /* only valid for MMAP2 record */
 	u64			ino;      /* only valid for MMAP2 record */
 	u64			ino_generation;/* only valid for MMAP2 record */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ip -> dso rip */
@@ -70,9 +80,12 @@ struct map_groups {
 	struct list_head removed_maps[MAP__NR_TYPES];
 	struct machine	 *machine;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int		 refcnt;
 };
 
@@ -88,6 +101,9 @@ static inline struct map_groups *map_groups__get(struct map_groups *mg)
 
 void map_groups__put(struct map_groups *mg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct kmap *map__kmap(struct map *map)
 {
@@ -114,8 +130,11 @@ static inline u64 identity__map_ip(struct map *map __maybe_unused, u64 ip)
 u64 map__rip_2objdump(struct map *map, u64 rip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct symbol;
 =======
+=======
+>>>>>>> v3.18
 /* objdump address -> memory address */
 u64 map__objdump_2mem(struct map *map, u64 ip);
 
@@ -131,6 +150,9 @@ struct thread;
  */
 #define map__for_each_symbol(map, pos, n)	\
 	dso__for_each_symbol(map->dso, pos, n, map->type)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef int (*symbol_filter_t)(struct map *map, struct symbol *sym);
@@ -138,14 +160,20 @@ typedef int (*symbol_filter_t)(struct map *map, struct symbol *sym);
 void map__init(struct map *map, enum map_type type,
 	       u64 start, u64 end, u64 pgoff, struct dso *dso);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct map *map__new(struct list_head *dsos__list, u64 start, u64 len,
 		     u64 pgoff, u32 pid, char *filename,
 		     enum map_type type);
 =======
+=======
+>>>>>>> v3.18
 struct map *map__new(struct machine *machine, u64 start, u64 len,
 		     u64 pgoff, u32 pid, u32 d_maj, u32 d_min, u64 ino,
 		     u64 ino_gen, u32 prot, u32 flags,
 		     char *filename, enum map_type type, struct thread *thread);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct map *map__new2(u64 start, struct dso *dso, enum map_type type);
 void map__delete(struct map *map);
@@ -154,6 +182,11 @@ int map__overlap(struct map *l, struct map *r);
 size_t map__fprintf(struct map *map, FILE *fp);
 size_t map__fprintf_dsoname(struct map *map, FILE *fp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int map__fprintf_srcline(struct map *map, u64 addr, const char *prefix,
+			 FILE *fp);
+>>>>>>> v3.18
 =======
 int map__fprintf_srcline(struct map *map, u64 addr, const char *prefix,
 			 FILE *fp);
@@ -170,12 +203,15 @@ void map__fixup_end(struct map *map);
 void map__reloc_vmlinux(struct map *map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 size_t __map_groups__fprintf_maps(struct map_groups *mg,
 				  enum map_type type, int verbose, FILE *fp);
 void maps__insert(struct rb_root *maps, struct map *map);
 void maps__remove(struct rb_root *maps, struct map *map);
 struct map *maps__find(struct rb_root *maps, u64 addr);
 =======
+=======
+>>>>>>> v3.18
 size_t __map_groups__fprintf_maps(struct map_groups *mg, enum map_type type,
 				  FILE *fp);
 void maps__insert(struct rb_root *maps, struct map *map);
@@ -183,14 +219,21 @@ void maps__remove(struct rb_root *maps, struct map *map);
 struct map *maps__find(struct rb_root *maps, u64 addr);
 struct map *maps__first(struct rb_root *maps);
 struct map *maps__next(struct map *map);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void map_groups__init(struct map_groups *mg);
 void map_groups__exit(struct map_groups *mg);
 int map_groups__clone(struct map_groups *mg,
 		      struct map_groups *parent, enum map_type type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 size_t map_groups__fprintf(struct map_groups *mg, int verbose, FILE *fp);
 size_t map_groups__fprintf_maps(struct map_groups *mg, int verbose, FILE *fp);
+=======
+size_t map_groups__fprintf(struct map_groups *mg, FILE *fp);
+>>>>>>> v3.18
 =======
 size_t map_groups__fprintf(struct map_groups *mg, FILE *fp);
 >>>>>>> v3.18
@@ -216,7 +259,10 @@ static inline struct map *map_groups__find(struct map_groups *mg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct map *map_groups__first(struct map_groups *mg,
 					    enum map_type type)
 {
@@ -228,6 +274,9 @@ static inline struct map *map_groups__next(struct map *map)
 	return maps__next(map);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct symbol *map_groups__find_symbol(struct map_groups *mg,
 				       enum map_type type, u64 addr,
@@ -241,11 +290,17 @@ struct symbol *map_groups__find_symbol_by_name(struct map_groups *mg,
 					       symbol_filter_t filter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct addr_map_symbol;
 
 int map_groups__find_ams(struct addr_map_symbol *ams, symbol_filter_t filter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline
 struct symbol *map_groups__find_function_by_name(struct map_groups *mg,
@@ -257,7 +312,11 @@ struct symbol *map_groups__find_function_by_name(struct map_groups *mg,
 
 int map_groups__fixup_overlappings(struct map_groups *mg, struct map *map,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   int verbose, FILE *fp);
+=======
+				   FILE *fp);
+>>>>>>> v3.18
 =======
 				   FILE *fp);
 >>>>>>> v3.18

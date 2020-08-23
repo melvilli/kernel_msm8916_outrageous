@@ -26,9 +26,13 @@
 #include <core/os.h>
 #include <core/enum.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 #include <core/engctx.h>
 #include <core/falcon.h>
+=======
+#include <core/engctx.h>
+>>>>>>> v3.18
 =======
 #include <core/engctx.h>
 >>>>>>> v3.18
@@ -37,6 +41,10 @@
 #include <subdev/fb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <engine/falcon.h>
+>>>>>>> v3.18
 =======
 #include <engine/falcon.h>
 >>>>>>> v3.18
@@ -128,6 +136,7 @@ nv98_crypt_intr(struct nouveau_subdev *subdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv98_crypt_tlb_flush(struct nouveau_engine *engine)
 {
 	nv50_vm_flush_engine(&engine->base, 0x0a);
@@ -135,6 +144,8 @@ nv98_crypt_tlb_flush(struct nouveau_engine *engine)
 }
 
 static int
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 nv98_crypt_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -155,7 +166,10 @@ nv98_crypt_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_engine(priv)->cclass = &nv98_crypt_cclass;
 	nv_engine(priv)->sclass = nv98_crypt_sclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_engine(priv)->tlb_flush = nv98_crypt_tlb_flush;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nv_falcon(priv)->code.data = nv98_pcrypt_code;

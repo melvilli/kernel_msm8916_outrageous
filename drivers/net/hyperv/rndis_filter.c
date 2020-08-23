@@ -12,8 +12,12 @@
  *
  * You should have received a copy of the GNU General Public License along with
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place - Suite 330, Boston, MA 02111-1307 USA.
+=======
+ * this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -37,7 +41,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RNDIS_EXT_LEN 100
+=======
+#define RNDIS_EXT_LEN PAGE_SIZE
+>>>>>>> v3.18
 =======
 #define RNDIS_EXT_LEN PAGE_SIZE
 >>>>>>> v3.18
@@ -68,9 +76,12 @@ struct rndis_request {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rndis_filter_send_completion(void *ctx);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct rndis_device *get_rndis_device(void)
@@ -110,6 +121,11 @@ static struct rndis_request *get_rndis_request(struct rndis_device *dev,
 	rndis_msg->msg_len = msg_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	request->pkt.q_idx = 0;
+
+>>>>>>> v3.18
 =======
 	request->pkt.q_idx = 0;
 
@@ -255,7 +271,11 @@ static int rndis_filter_send_request(struct rndis_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	packet->completion.send.send_completion = NULL;
+=======
+	packet->send_completion = NULL;
+>>>>>>> v3.18
 =======
 	packet->send_completion = NULL;
 >>>>>>> v3.18
@@ -265,7 +285,10 @@ static int rndis_filter_send_request(struct rndis_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rndis_set_link_state(struct rndis_device *rdev,
 				 struct rndis_request *request)
 {
@@ -282,6 +305,9 @@ static void rndis_set_link_state(struct rndis_device *rdev,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rndis_filter_receive_response(struct rndis_device *dev,
 				       struct rndis_message *resp)
@@ -313,11 +339,17 @@ static void rndis_filter_receive_response(struct rndis_device *dev,
 			memcpy(&request->response_msg, resp,
 			       resp->msg_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (request->request_msg.ndis_msg_type ==
 			    RNDIS_MSG_QUERY && request->request_msg.msg.
 			    query_req.oid == RNDIS_OID_GEN_MEDIA_CONNECT_STATUS)
 				rndis_set_link_state(dev, request);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			netdev_err(ndev,
@@ -325,7 +357,11 @@ static void rndis_filter_receive_response(struct rndis_device *dev,
 				"detected (size %u max %zu)\n",
 				resp->msg_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sizeof(struct rndis_filter_packet));
+=======
+				sizeof(struct rndis_message));
+>>>>>>> v3.18
 =======
 				sizeof(struct rndis_message));
 >>>>>>> v3.18
@@ -353,6 +389,7 @@ static void rndis_filter_receive_response(struct rndis_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rndis_filter_receive_indicate_status(struct rndis_device *dev,
 					     struct rndis_message *resp)
 {
@@ -372,6 +409,8 @@ static void rndis_filter_receive_indicate_status(struct rndis_device *dev,
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -408,6 +447,10 @@ static void rndis_filter_receive_data(struct rndis_device *dev,
 	u32 data_offset;
 	struct ndis_pkt_8021q_info *vlan;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ndis_tcp_ip_checksum_info *csum_info;
+>>>>>>> v3.18
 =======
 	struct ndis_tcp_ip_checksum_info *csum_info;
 >>>>>>> v3.18
@@ -440,8 +483,11 @@ static void rndis_filter_receive_data(struct rndis_device *dev,
 	pkt->data = (void *)((unsigned long)pkt->data + data_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pkt->is_data_pkt = true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vlan = rndis_get_ppi(rndis_pkt, IEEE_8021Q_INFO);
@@ -453,7 +499,12 @@ static void rndis_filter_receive_data(struct rndis_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netvsc_recv_callback(dev->net_dev->dev, pkt);
+=======
+	csum_info = rndis_get_ppi(rndis_pkt, TCPIP_CHKSUM_PKTINFO);
+	netvsc_recv_callback(dev->net_dev->dev, pkt, csum_info);
+>>>>>>> v3.18
 =======
 	csum_info = rndis_get_ppi(rndis_pkt, TCPIP_CHKSUM_PKTINFO);
 	netvsc_recv_callback(dev->net_dev->dev, pkt, csum_info);
@@ -512,7 +563,11 @@ int rndis_filter_receive(struct hv_device *dev,
 	case RNDIS_MSG_INDICATE:
 		/* notification msgs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rndis_filter_receive_indicate_status(rndis_dev, rndis_msg);
+=======
+		netvsc_linkstatus_callback(dev, rndis_msg);
+>>>>>>> v3.18
 =======
 		netvsc_linkstatus_callback(dev, rndis_msg);
 >>>>>>> v3.18
@@ -561,7 +616,10 @@ static int rndis_filter_query_device(struct rndis_device *dev, u32 oid,
 	query->dev_vc_handle = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (oid == OID_GEN_RECEIVE_SCALE_CAPABILITIES) {
 		struct ndis_recv_scale_cap *cap;
 
@@ -575,6 +633,9 @@ static int rndis_filter_query_device(struct rndis_device *dev, u32 oid,
 		cap->hdr.size = sizeof(struct ndis_recv_scale_cap);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = rndis_filter_send_request(dev, request);
 	if (ret != 0)
@@ -697,7 +758,10 @@ cleanup:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rndis_filter_set_offload_params(struct hv_device *hdev,
 				struct ndis_offload_params *req_offloads)
 {
@@ -846,6 +910,9 @@ cleanup:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int rndis_filter_query_device_link_status(struct rndis_device *dev)
@@ -858,7 +925,10 @@ static int rndis_filter_query_device_link_status(struct rndis_device *dev)
 				      RNDIS_OID_GEN_MEDIA_CONNECT_STATUS,
 				      &link_status, &size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->link_state = (link_status != 0) ? true : false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1044,7 +1114,10 @@ static int rndis_filter_close_device(struct rndis_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void netvsc_sc_open(struct vmbus_channel *new_sc)
 {
 	struct netvsc_device *nvscdev;
@@ -1067,6 +1140,9 @@ static void netvsc_sc_open(struct vmbus_channel *new_sc)
 		nvscdev->chn_table[chn_index] = new_sc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int rndis_filter_device_add(struct hv_device *dev,
 				  void *additional_info)
@@ -1076,12 +1152,18 @@ int rndis_filter_device_add(struct hv_device *dev,
 	struct rndis_device *rndis_device;
 	struct netvsc_device_info *device_info = additional_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct ndis_offload_params offloads;
 	struct nvsp_message *init_packet;
 	int t;
 	struct ndis_recv_scale_cap rsscap;
 	u32 rsscap_size = sizeof(struct ndis_recv_scale_cap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rndis_device = get_rndis_device();
@@ -1103,6 +1185,10 @@ int rndis_filter_device_add(struct hv_device *dev,
 	/* Initialize the rndis device */
 	net_device = hv_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	net_device->num_chn = 1;
+>>>>>>> v3.18
 =======
 	net_device->num_chn = 1;
 >>>>>>> v3.18
@@ -1127,7 +1213,10 @@ int rndis_filter_device_add(struct hv_device *dev,
 	memcpy(device_info->mac_adr, rndis_device->hw_mac_adr, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Turn on the offloads; the host supports all of the relevant
 	 * offloads.
 	 */
@@ -1147,6 +1236,9 @@ int rndis_filter_device_add(struct hv_device *dev,
 	if (ret)
 		goto err_dev_remv;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rndis_filter_query_device_link_status(rndis_device);
 
@@ -1157,7 +1249,10 @@ int rndis_filter_device_add(struct hv_device *dev,
 		 device_info->link_state ? "down" : "up");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (net_device->nvsp_version < NVSP_PROTOCOL_VERSION_5)
 		return 0;
 
@@ -1221,6 +1316,9 @@ out:
 
 err_dev_remv:
 	rndis_filter_device_remove(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1259,6 +1357,7 @@ int rndis_filter_close(struct hv_device *dev)
 
 	return rndis_filter_close_device(nvdev->extension);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int rndis_filter_send(struct hv_device *dev,
@@ -1358,5 +1457,7 @@ static void rndis_filter_send_completion(void *ctx)
 	/* Pass it back to the original handler */
 	filter_pkt->completion(filter_pkt->completion_ctx);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

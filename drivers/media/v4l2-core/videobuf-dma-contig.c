@@ -304,6 +304,7 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 
 	/* Try to remap memory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	size = vma->vm_end - vma->vm_start;
 	size = (size < mem->size) ? size : mem->size;
@@ -313,6 +314,8 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 				 mem->dma_handle >> PAGE_SHIFT,
 				 size, vma->vm_page_prot);
 =======
+=======
+>>>>>>> v3.18
 	size = vma->vm_end - vma->vm_start;
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
 
@@ -325,6 +328,9 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 	vma->vm_pgoff = 0;
 
 	retval = vm_iomap_memory(vma, mem->dma_handle, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (retval) {
 		dev_err(q->dev, "mmap: remap failed with error %d. ",

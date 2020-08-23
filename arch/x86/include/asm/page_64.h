@@ -40,6 +40,11 @@ void copy_page(void *to, void *from);
 #endif	/* !__ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __HAVE_ARCH_GATE_AREA 1
+
+>>>>>>> v3.18
 =======
 #define __HAVE_ARCH_GATE_AREA 1
 

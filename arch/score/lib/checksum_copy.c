@@ -51,6 +51,10 @@ unsigned int csum_partial_copy_from_user(const char *src, char *dst,
 	return csum_partial(dst, len, sum);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(csum_partial_copy_from_user);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(csum_partial_copy_from_user);
 >>>>>>> v3.18

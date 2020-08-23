@@ -52,7 +52,11 @@ static void ast_dirty_update(struct ast_fbdev *afbdev,
 	int src_offset, dst_offset;
 	int bpp = (afbdev->afb.base.bits_per_pixel + 7)/8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = -EBUSY;
+>>>>>>> v3.18
 =======
 	int ret = -EBUSY;
 >>>>>>> v3.18
@@ -70,7 +74,12 @@ static void ast_dirty_update(struct ast_fbdev *afbdev,
 	 * store up the damage until later.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ast_bo_reserve(bo, true);
+=======
+	if (drm_can_sleep())
+		ret = ast_bo_reserve(bo, true);
+>>>>>>> v3.18
 =======
 	if (drm_can_sleep())
 		ret = ast_bo_reserve(bo, true);
@@ -195,7 +204,12 @@ static int astfb_create(struct drm_fb_helper *helper,
 			struct drm_fb_helper_surface_size *sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ast_fbdev *afbdev = (struct ast_fbdev *)helper;
+=======
+	struct ast_fbdev *afbdev =
+		container_of(helper, struct ast_fbdev, helper);
+>>>>>>> v3.18
 =======
 	struct ast_fbdev *afbdev =
 		container_of(helper, struct ast_fbdev, helper);
@@ -301,7 +315,11 @@ static void ast_fb_gamma_get(struct drm_crtc *crtc, u16 *red, u16 *green,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs ast_fb_helper_funcs = {
+=======
+static const struct drm_fb_helper_funcs ast_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs ast_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -346,13 +364,19 @@ int ast_fbdev_init(struct drm_device *dev)
 
 	ast->fbdev = afbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	afbdev->helper.funcs = &ast_fb_helper_funcs;
 	spin_lock_init(&afbdev->dirty_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&afbdev->dirty_lock);
 
 	drm_fb_helper_prepare(dev, &afbdev->helper, &ast_fb_helper_funcs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = drm_fb_helper_init(dev, &afbdev->helper,
 				 1, 1);
@@ -392,6 +416,7 @@ void ast_fbdev_set_suspend(struct drm_device *dev, int state)
 	fb_set_suspend(ast->fbdev->helper.fbdev, state);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void ast_fbdev_set_base(struct ast_private *ast, unsigned long gpu_addr)
 {
@@ -399,5 +424,7 @@ void ast_fbdev_set_base(struct ast_private *ast, unsigned long gpu_addr)
 		ast->fbdev->helper.fbdev->apertures->ranges[0].base + gpu_addr;
 	ast->fbdev->helper.fbdev->fix.smem_len = ast->vram_size - gpu_addr;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

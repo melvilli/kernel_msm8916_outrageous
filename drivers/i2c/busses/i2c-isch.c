@@ -15,10 +15,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -37,7 +40,10 @@
 #include <linux/ioport.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -282,7 +288,12 @@ static int smbus_sch_probe(struct platform_device *dev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!request_region(res->start, resource_size(res), dev->name)) {
+=======
+	if (!devm_request_region(&dev->dev, res->start, resource_size(res),
+				 dev->name)) {
+>>>>>>> v3.18
 =======
 	if (!devm_request_region(&dev->dev, res->start, resource_size(res),
 				 dev->name)) {
@@ -306,7 +317,10 @@ static int smbus_sch_probe(struct platform_device *dev)
 	if (retval) {
 		dev_err(&dev->dev, "Couldn't register adapter!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		release_region(res->start, resource_size(res));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sch_smba = 0;
@@ -318,11 +332,16 @@ static int smbus_sch_probe(struct platform_device *dev)
 static int smbus_sch_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res;
 	if (sch_smba) {
 		i2c_del_adapter(&sch_adapter);
 		res = platform_get_resource(pdev, IORESOURCE_IO, 0);
 		release_region(res->start, resource_size(res));
+=======
+	if (sch_smba) {
+		i2c_del_adapter(&sch_adapter);
+>>>>>>> v3.18
 =======
 	if (sch_smba) {
 		i2c_del_adapter(&sch_adapter);

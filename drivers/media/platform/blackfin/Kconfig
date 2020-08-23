@@ -2,6 +2,10 @@ config VIDEO_BLACKFIN_CAPTURE
 	tristate "Blackfin Video Capture Driver"
 	depends on VIDEO_V4L2 && BLACKFIN && I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18

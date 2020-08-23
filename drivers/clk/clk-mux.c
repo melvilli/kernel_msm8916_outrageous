@@ -43,7 +43,11 @@ static u8 clk_mux_get_parent(struct clk_hw *hw)
 	 * val = 0x4 really means "bit 2, index starts at bit 0"
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(mux->reg) >> mux->shift;
+=======
+	val = clk_readl(mux->reg) >> mux->shift;
+>>>>>>> v3.18
 =======
 	val = clk_readl(mux->reg) >> mux->shift;
 >>>>>>> v3.18
@@ -91,11 +95,14 @@ static int clk_mux_set_parent(struct clk_hw *hw, u8 index)
 		spin_lock_irqsave(mux->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(mux->reg);
 	val &= ~(mux->mask << mux->shift);
 	val |= index << mux->shift;
 	writel(val, mux->reg);
 =======
+=======
+>>>>>>> v3.18
 	if (mux->flags & CLK_MUX_HIWORD_MASK) {
 		val = mux->mask << (mux->shift + 16);
 	} else {
@@ -104,6 +111,9 @@ static int clk_mux_set_parent(struct clk_hw *hw, u8 index)
 	}
 	val |= index << mux->shift;
 	clk_writel(val, mux->reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mux->lock)
@@ -116,10 +126,13 @@ const struct clk_ops clk_mux_ops = {
 	.get_parent = clk_mux_get_parent,
 	.set_parent = clk_mux_set_parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 EXPORT_SYMBOL_GPL(clk_mux_ops);
 
 =======
+=======
+>>>>>>> v3.18
 	.determine_rate = __clk_mux_determine_rate,
 };
 EXPORT_SYMBOL_GPL(clk_mux_ops);
@@ -129,6 +142,9 @@ const struct clk_ops clk_mux_ro_ops = {
 };
 EXPORT_SYMBOL_GPL(clk_mux_ro_ops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct clk *clk_register_mux_table(struct device *dev, const char *name,
 		const char **parent_names, u8 num_parents, unsigned long flags,
@@ -139,7 +155,10 @@ struct clk *clk_register_mux_table(struct device *dev, const char *name,
 	struct clk *clk;
 	struct clk_init_data init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 width = 0;
 
 	if (clk_mux_flags & CLK_MUX_HIWORD_MASK) {
@@ -149,6 +168,9 @@ struct clk *clk_register_mux_table(struct device *dev, const char *name,
 			return ERR_PTR(-EINVAL);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* allocate the mux */
@@ -160,12 +182,18 @@ struct clk *clk_register_mux_table(struct device *dev, const char *name,
 
 	init.name = name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init.ops = &clk_mux_ops;
 =======
+=======
+>>>>>>> v3.18
 	if (clk_mux_flags & CLK_MUX_READ_ONLY)
 		init.ops = &clk_mux_ro_ops;
 	else
 		init.ops = &clk_mux_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	init.flags = flags | CLK_IS_BASIC;
 	init.parent_names = parent_names;
@@ -188,6 +216,10 @@ struct clk *clk_register_mux_table(struct device *dev, const char *name,
 	return clk;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(clk_register_mux_table);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(clk_register_mux_table);
 >>>>>>> v3.18
@@ -204,6 +236,10 @@ struct clk *clk_register_mux(struct device *dev, const char *name,
 				      NULL, lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(clk_register_mux);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(clk_register_mux);
 >>>>>>> v3.18

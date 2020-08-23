@@ -63,8 +63,13 @@ module_param(debug, int, 0644);    /* debug level (0,1,2) */
 /* ----------------------------------------------------------------------- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_key_haup_common(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw,
 			       int size, int offset)
+=======
+static int get_key_haup_common(struct IR_i2c *ir, enum rc_type *protocol,
+			       u32 *scancode, u8 *ptoggle, int size, int offset)
+>>>>>>> v3.18
 =======
 static int get_key_haup_common(struct IR_i2c *ir, enum rc_type *protocol,
 			       u32 *scancode, u8 *ptoggle, int size, int offset)
@@ -92,6 +97,7 @@ static int get_key_haup_common(struct IR_i2c *ir, enum rc_type *protocol,
 		/* no key pressed */
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Hauppauge remotes (black/silver) always use
 	 * specific device ids. If we do not filter the
@@ -106,10 +112,15 @@ static int get_key_haup_common(struct IR_i2c *ir, enum rc_type *protocol,
 	if ((ircode & 0x1fff)==0x1fff)
 		/* invalid key press */
 =======
+=======
+>>>>>>> v3.18
 
 	/* filter out invalid key presses */
 	ircode = (start << 12) | (toggle << 11) | (dev << 6) | code;
 	if ((ircode & 0x1fff) == 0x1fff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -119,6 +130,7 @@ static int get_key_haup_common(struct IR_i2c *ir, enum rc_type *protocol,
 	dprintk(1,"ir hauppauge (rc5): s%d r%d t%d dev=%d code=%d\n",
 		start, range, toggle, dev, code);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* return key */
 	*ir_key = (dev << 8) | code;
@@ -133,6 +145,8 @@ static int get_key_haup(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 
 static int get_key_haup_xvr(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 =======
+=======
+>>>>>>> v3.18
 	*protocol = RC_TYPE_RC5;
 	*scancode = RC_SCANCODE_RC5(dev, code);
 	*ptoggle = toggle;
@@ -147,6 +161,9 @@ static int get_key_haup(struct IR_i2c *ir, enum rc_type *protocol,
 
 static int get_key_haup_xvr(struct IR_i2c *ir, enum rc_type *protocol,
 			    u32 *scancode, u8 *toggle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
@@ -163,16 +180,22 @@ static int get_key_haup_xvr(struct IR_i2c *ir, enum rc_type *protocol,
 		return (ret < 0) ? ret : -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return get_key_haup_common (ir, ir_key, ir_raw, 6, 3);
 }
 
 static int get_key_pixelview(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 =======
+=======
+>>>>>>> v3.18
 	return get_key_haup_common(ir, protocol, scancode, toggle, 6, 3);
 }
 
 static int get_key_pixelview(struct IR_i2c *ir, enum rc_type *protocol,
 			     u32 *scancode, u8 *toggle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned char b;
@@ -183,6 +206,7 @@ static int get_key_pixelview(struct IR_i2c *ir, enum rc_type *protocol,
 		return -EIO;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = b;
 	*ir_raw = b;
 	return 1;
@@ -190,6 +214,8 @@ static int get_key_pixelview(struct IR_i2c *ir, enum rc_type *protocol,
 
 static int get_key_fusionhdtv(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 =======
+=======
+>>>>>>> v3.18
 
 	*protocol = RC_TYPE_OTHER;
 	*scancode = b;
@@ -199,6 +225,9 @@ static int get_key_fusionhdtv(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 
 static int get_key_fusionhdtv(struct IR_i2c *ir, enum rc_type *protocol,
 			      u32 *scancode, u8 *toggle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned char buf[4];
@@ -218,6 +247,7 @@ static int get_key_fusionhdtv(struct IR_i2c *ir, enum rc_type *protocol,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = buf[2];
 	*ir_raw = (buf[2] << 8) | buf[3];
 
@@ -226,6 +256,8 @@ static int get_key_fusionhdtv(struct IR_i2c *ir, enum rc_type *protocol,
 
 static int get_key_knc1(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 =======
+=======
+>>>>>>> v3.18
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = buf[2];
 	*toggle = 0;
@@ -234,6 +266,9 @@ static int get_key_knc1(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 
 static int get_key_knc1(struct IR_i2c *ir, enum rc_type *protocol,
 			u32 *scancode, u8 *toggle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned char b;
@@ -258,6 +293,7 @@ static int get_key_knc1(struct IR_i2c *ir, enum rc_type *protocol,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = b;
 	*ir_raw = b;
 	return 1;
@@ -266,6 +302,8 @@ static int get_key_knc1(struct IR_i2c *ir, enum rc_type *protocol,
 static int get_key_avermedia_cardbus(struct IR_i2c *ir,
 				     u32 *ir_key, u32 *ir_raw)
 =======
+=======
+>>>>>>> v3.18
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = b;
 	*toggle = 0;
@@ -274,6 +312,9 @@ static int get_key_avermedia_cardbus(struct IR_i2c *ir,
 
 static int get_key_avermedia_cardbus(struct IR_i2c *ir, enum rc_type *protocol,
 				     u32 *scancode, u8 *toggle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned char subaddr, key, keygroup;
@@ -309,6 +350,7 @@ static int get_key_avermedia_cardbus(struct IR_i2c *ir, enum rc_type *protocol,
 	key |= (keygroup & 1) << 6;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = key;
 	*ir_raw = key;
 	if (!strcmp(ir->ir_codes, RC_MAP_AVERMEDIA_M733A_RM_K6)) {
@@ -316,11 +358,16 @@ static int get_key_avermedia_cardbus(struct IR_i2c *ir, enum rc_type *protocol,
 		*ir_raw |= keygroup << 8;
 	}
 =======
+=======
+>>>>>>> v3.18
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = key;
 	if (ir->c->addr == 0x41) /* AVerMedia EM78P153 */
 		*scancode |= keygroup << 8;
 	*toggle = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -330,12 +377,15 @@ static int get_key_avermedia_cardbus(struct IR_i2c *ir, enum rc_type *protocol,
 static int ir_key_poll(struct IR_i2c *ir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static u32 ir_key, ir_raw;
 	int rc;
 
 	dprintk(3, "%s\n", __func__);
 	rc = ir->get_key(ir, &ir_key, &ir_raw);
 =======
+=======
+>>>>>>> v3.18
 	enum rc_type protocol;
 	u32 scancode;
 	u8 toggle;
@@ -343,6 +393,9 @@ static int ir_key_poll(struct IR_i2c *ir)
 
 	dprintk(3, "%s\n", __func__);
 	rc = ir->get_key(ir, &protocol, &scancode, &toggle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0) {
 		dprintk(2,"error\n");
@@ -351,8 +404,14 @@ static int ir_key_poll(struct IR_i2c *ir)
 
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk(1, "%s: keycode = 0x%04x\n", __func__, ir_key);
 		rc_keydown(ir->rc, ir_key, 0);
+=======
+		dprintk(1, "%s: proto = 0x%04x, scancode = 0x%08x\n",
+			__func__, protocol, scancode);
+		rc_keydown(ir->rc, protocol, scancode, toggle);
+>>>>>>> v3.18
 =======
 		dprintk(1, "%s: proto = 0x%04x, scancode = 0x%08x\n",
 			__func__, protocol, scancode);
@@ -391,7 +450,11 @@ static int ir_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir = kzalloc(sizeof(struct IR_i2c), GFP_KERNEL);
+=======
+	ir = devm_kzalloc(&client->dev, sizeof(*ir), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ir = devm_kzalloc(&client->dev, sizeof(*ir), GFP_KERNEL);
 >>>>>>> v3.18
@@ -427,7 +490,11 @@ static int ir_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		name        = "FusionHDTV";
 		ir->get_key = get_key_fusionhdtv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_type     = RC_BIT_RC5;
+=======
+		rc_type     = RC_BIT_UNKNOWN;
+>>>>>>> v3.18
 =======
 		rc_type     = RC_BIT_UNKNOWN;
 >>>>>>> v3.18
@@ -498,6 +565,7 @@ static int ir_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	if (!rc) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * If platform_data doesn't specify rc_dev, initilize it
 		 * internally
 		 */
@@ -507,12 +575,17 @@ static int ir_probe(struct i2c_client *client, const struct i2c_device_id *id)
 			goto err_out_free;
 		}
 =======
+=======
+>>>>>>> v3.18
 		 * If platform_data doesn't specify rc_dev, initialize it
 		 * internally
 		 */
 		rc = rc_allocate_device();
 		if (!rc)
 			return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	ir->rc = rc;
@@ -546,7 +619,11 @@ static int ir_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	 */
 	rc->map_name       = ir->ir_codes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->allowed_protos = rc_type;
+=======
+	rc->allowed_protocols = rc_type;
+>>>>>>> v3.18
 =======
 	rc->allowed_protocols = rc_type;
 >>>>>>> v3.18
@@ -571,7 +648,10 @@ static int ir_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	/* Only frees rc if it were allocated internally */
 	rc_free_device(rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(ir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -590,7 +670,10 @@ static int ir_remove(struct i2c_client *client)
 
 	/* free memory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(ir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

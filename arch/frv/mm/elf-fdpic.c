@@ -75,7 +75,11 @@ unsigned long arch_get_unmapped_area(struct file *filp, unsigned long addr, unsi
 		vma = find_vma(current->mm, addr);
 		if (TASK_SIZE - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18

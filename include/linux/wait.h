@@ -1,8 +1,14 @@
 #ifndef _LINUX_WAIT_H
 #define _LINUX_WAIT_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+/*
+ * Linux wait queue related types and methods
+ */
+>>>>>>> v3.18
 =======
 /*
  * Linux wait queue related types and methods
@@ -19,6 +25,7 @@ typedef int (*wait_queue_func_t)(wait_queue_t *wait, unsigned mode, int flags, v
 int default_wake_function(wait_queue_t *wait, unsigned mode, int flags, void *key);
 
 struct __wait_queue {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int flags;
 #define WQ_FLAG_EXCLUSIVE	0x01
@@ -41,6 +48,8 @@ struct __wait_queue_head {
 	spinlock_t lock;
 	struct list_head task_list;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		flags;
 #define WQ_FLAG_EXCLUSIVE	0x01
 	void			*private;
@@ -63,6 +72,9 @@ struct wait_bit_queue {
 struct __wait_queue_head {
 	spinlock_t		lock;
 	struct list_head	task_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 typedef struct __wait_queue_head wait_queue_head_t;
@@ -92,6 +104,12 @@ struct task_struct;
 	{ .flags = word, .bit_nr = bit, }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __WAIT_ATOMIC_T_KEY_INITIALIZER(p)				\
+	{ .flags = p, .bit_nr = WAIT_ATOMIC_T_BIT_NR, }
+
+>>>>>>> v3.18
 =======
 #define __WAIT_ATOMIC_T_KEY_INITIALIZER(p)				\
 	{ .flags = p, .bit_nr = WAIT_ATOMIC_T_BIT_NR, }
@@ -118,6 +136,7 @@ extern void __init_waitqueue_head(wait_queue_head_t *q, const char *name, struct
 static inline void init_waitqueue_entry(wait_queue_t *q, struct task_struct *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->flags = 0;
 	q->private = p;
 	q->func = default_wake_function;
@@ -130,6 +149,8 @@ static inline void init_waitqueue_func_entry(wait_queue_t *q,
 	q->private = NULL;
 	q->func = func;
 =======
+=======
+>>>>>>> v3.18
 	q->flags	= 0;
 	q->private	= p;
 	q->func		= default_wake_function;
@@ -141,6 +162,9 @@ init_waitqueue_func_entry(wait_queue_t *q, wait_queue_func_t func)
 	q->flags	= 0;
 	q->private	= NULL;
 	q->func		= func;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -162,8 +186,13 @@ static inline void __add_wait_queue(wait_queue_head_t *head, wait_queue_t *new)
  * Used for wake-one threads:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __add_wait_queue_exclusive(wait_queue_head_t *q,
 					      wait_queue_t *wait)
+=======
+static inline void
+__add_wait_queue_exclusive(wait_queue_head_t *q, wait_queue_t *wait)
+>>>>>>> v3.18
 =======
 static inline void
 __add_wait_queue_exclusive(wait_queue_head_t *q, wait_queue_t *wait)
@@ -180,8 +209,13 @@ static inline void __add_wait_queue_tail(wait_queue_head_t *head,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __add_wait_queue_tail_exclusive(wait_queue_head_t *q,
 					      wait_queue_t *wait)
+=======
+static inline void
+__add_wait_queue_tail_exclusive(wait_queue_head_t *q, wait_queue_t *wait)
+>>>>>>> v3.18
 =======
 static inline void
 __add_wait_queue_tail_exclusive(wait_queue_head_t *q, wait_queue_t *wait)
@@ -192,8 +226,13 @@ __add_wait_queue_tail_exclusive(wait_queue_head_t *q, wait_queue_t *wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __remove_wait_queue(wait_queue_head_t *head,
 							wait_queue_t *old)
+=======
+static inline void
+__remove_wait_queue(wait_queue_head_t *head, wait_queue_t *old)
+>>>>>>> v3.18
 =======
 static inline void
 __remove_wait_queue(wait_queue_head_t *head, wait_queue_t *old)
@@ -202,6 +241,7 @@ __remove_wait_queue(wait_queue_head_t *head, wait_queue_t *old)
 	list_del(&old->task_list);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __wake_up(wait_queue_head_t *q, unsigned int mode, int nr, void *key);
 void __wake_up_locked_key(wait_queue_head_t *q, unsigned int mode, void *key);
@@ -216,6 +256,8 @@ void wake_up_bit(void *, int);
 int out_of_line_wait_on_bit(void *, int, int (*)(void *), unsigned);
 int out_of_line_wait_on_bit_lock(void *, int, int (*)(void *), unsigned);
 =======
+=======
+>>>>>>> v3.18
 typedef int wait_bit_action_f(struct wait_bit_key *);
 void __wake_up(wait_queue_head_t *q, unsigned int mode, int nr, void *key);
 void __wake_up_locked_key(wait_queue_head_t *q, unsigned int mode, void *key);
@@ -231,6 +273,9 @@ int out_of_line_wait_on_bit(void *, int, wait_bit_action_f *, unsigned);
 int out_of_line_wait_on_bit_timeout(void *, int, wait_bit_action_f *, unsigned, unsigned long);
 int out_of_line_wait_on_bit_lock(void *, int, wait_bit_action_f *, unsigned);
 int out_of_line_wait_on_atomic_t(atomic_t *, int (*)(atomic_t *), unsigned);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 wait_queue_head_t *bit_waitqueue(void *, int);
 
@@ -249,22 +294,29 @@ wait_queue_head_t *bit_waitqueue(void *, int);
  * Wakeup macros to be used to report events to the targets.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define wake_up_poll(x, m)				\
 	__wake_up(x, TASK_NORMAL, 1, (void *) (m))
 #define wake_up_locked_poll(x, m)				\
 	__wake_up_locked_key((x), TASK_NORMAL, (void *) (m))
 #define wake_up_interruptible_poll(x, m)			\
 =======
+=======
+>>>>>>> v3.18
 #define wake_up_poll(x, m)						\
 	__wake_up(x, TASK_NORMAL, 1, (void *) (m))
 #define wake_up_locked_poll(x, m)					\
 	__wake_up_locked_key((x), TASK_NORMAL, (void *) (m))
 #define wake_up_interruptible_poll(x, m)				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__wake_up(x, TASK_INTERRUPTIBLE, 1, (void *) (m))
 #define wake_up_interruptible_sync_poll(x, m)				\
 	__wake_up_sync_key((x), TASK_INTERRUPTIBLE, 1, (void *) (m))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __wait_event(wq, condition) 					\
 do {									\
@@ -279,6 +331,8 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define ___wait_cond_timeout(condition)					\
 ({									\
 	bool __cond = (condition);					\
@@ -340,6 +394,9 @@ __out:	__ret;								\
 #define __wait_event(wq, condition)					\
 	(void)___wait_event(wq, condition, TASK_UNINTERRUPTIBLE, 0, 0,	\
 			    schedule())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -355,9 +412,15 @@ __out:	__ret;								\
  * change the result of the wait condition.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define wait_event(wq, condition) 					\
 do {									\
 	if (condition)	 						\
+=======
+#define wait_event(wq, condition)					\
+do {									\
+	if (condition)							\
+>>>>>>> v3.18
 =======
 #define wait_event(wq, condition)					\
 do {									\
@@ -367,6 +430,7 @@ do {									\
 	__wait_event(wq, condition);					\
 } while (0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __wait_event_timeout(wq, condition, ret)			\
 do {									\
@@ -385,10 +449,15 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define __wait_event_timeout(wq, condition, timeout)			\
 	___wait_event(wq, ___wait_cond_timeout(condition),		\
 		      TASK_UNINTERRUPTIBLE, 0, timeout,			\
 		      __ret = schedule_timeout(__ret))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -405,20 +474,27 @@ do {									\
  * change the result of the wait condition.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The function returns 0 if the @timeout elapsed, or the remaining
  * jiffies (at least 1) if the @condition evaluated to %true before
  * the @timeout elapsed.
 =======
+=======
+>>>>>>> v3.18
  * Returns:
  * 0 if the @condition evaluated to %false after the @timeout elapsed,
  * 1 if the @condition evaluated to %true after the @timeout elapsed,
  * or the remaining jiffies (at least 1) if the @condition evaluated
  * to %true before the @timeout elapsed.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define wait_event_timeout(wq, condition, timeout)			\
 ({									\
 	long __ret = timeout;						\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(condition)) 						\
 		__wait_event_timeout(wq, condition, __ret);		\
@@ -444,6 +520,8 @@ do {									\
 } while (0)
 
 =======
+=======
+>>>>>>> v3.18
 	if (!___wait_cond_timeout(condition))				\
 		__ret = __wait_event_timeout(wq, condition, timeout);	\
 	__ret;								\
@@ -478,6 +556,9 @@ do {									\
 	___wait_event(wq, condition, TASK_INTERRUPTIBLE, 0, 0,		\
 		      schedule())
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * wait_event_interruptible - sleep until a condition gets true
@@ -498,6 +579,7 @@ do {									\
 ({									\
 	int __ret = 0;							\
 	if (!(condition))						\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__wait_event_interruptible(wq, condition, __ret);	\
 	__ret;								\
@@ -525,6 +607,8 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 		__ret = __wait_event_interruptible(wq, condition);	\
 	__ret;								\
 })
@@ -533,6 +617,9 @@ do {									\
 	___wait_event(wq, ___wait_cond_timeout(condition),		\
 		      TASK_INTERRUPTIBLE, 0, timeout,			\
 		      __ret = schedule_timeout(__ret))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -550,23 +637,35 @@ do {									\
  *
  * Returns:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 0 if the @timeout elapsed, -%ERESTARTSYS if it was interrupted by
  * a signal, or the remaining jiffies (at least 1) if the @condition
  * evaluated to %true before the @timeout elapsed.
 =======
+=======
+>>>>>>> v3.18
  * 0 if the @condition evaluated to %false after the @timeout elapsed,
  * 1 if the @condition evaluated to %true after the @timeout elapsed,
  * the remaining jiffies (at least 1) if the @condition evaluated
  * to %true before the @timeout elapsed, or -%ERESTARTSYS if it was
  * interrupted by a signal.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define wait_event_interruptible_timeout(wq, condition, timeout)	\
 ({									\
 	long __ret = timeout;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(condition))						\
 		__wait_event_interruptible_timeout(wq, condition, __ret); \
+=======
+	if (!___wait_cond_timeout(condition))				\
+		__ret = __wait_event_interruptible_timeout(wq,		\
+						condition, timeout);	\
+>>>>>>> v3.18
 =======
 	if (!___wait_cond_timeout(condition))				\
 		__ret = __wait_event_interruptible_timeout(wq,		\
@@ -579,7 +678,10 @@ do {									\
 ({									\
 	int __ret = 0;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEFINE_WAIT(__wait);						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct hrtimer_sleeper __t;					\
@@ -593,6 +695,7 @@ do {									\
 				       HRTIMER_MODE_REL);		\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;;) {							\
 		prepare_to_wait(&wq, &__wait, state);			\
 		if (condition)						\
@@ -605,10 +708,14 @@ do {									\
 =======
 	__ret = ___wait_event(wq, condition, state, 0, 0,		\
 >>>>>>> v3.18
+=======
+	__ret = ___wait_event(wq, condition, state, 0, 0,		\
+>>>>>>> v3.18
 		if (!__t.task) {					\
 			__ret = -ETIME;					\
 			break;						\
 		}							\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		schedule();						\
 	}								\
@@ -617,10 +724,15 @@ do {									\
 	destroy_hrtimer_on_stack(&__t.timer);				\
 	finish_wait(&wq, &__wait);					\
 =======
+=======
+>>>>>>> v3.18
 		schedule());						\
 									\
 	hrtimer_cancel(&__t.timer);					\
 	destroy_hrtimer_on_stack(&__t.timer);				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__ret;								\
 })
@@ -675,6 +787,7 @@ do {									\
 	__ret;								\
 })
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __wait_io_event_interruptible(wq, condition, ret)		\
 do {									\
@@ -789,13 +902,22 @@ do {									\
 	___wait_event(wq, condition, TASK_INTERRUPTIBLE, 1, 0,		\
 		      schedule())
 >>>>>>> v3.18
+=======
+#define __wait_event_interruptible_exclusive(wq, condition)		\
+	___wait_event(wq, condition, TASK_INTERRUPTIBLE, 1, 0,		\
+		      schedule())
+>>>>>>> v3.18
 
 #define wait_event_interruptible_exclusive(wq, condition)		\
 ({									\
 	int __ret = 0;							\
 	if (!(condition))						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__wait_event_interruptible_exclusive(wq, condition, __ret);\
+=======
+		__ret = __wait_event_interruptible_exclusive(wq, condition);\
+>>>>>>> v3.18
 =======
 		__ret = __wait_event_interruptible_exclusive(wq, condition);\
 >>>>>>> v3.18
@@ -951,6 +1073,7 @@ do {									\
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define __wait_event_killable(wq, condition, ret)			\
 do {									\
@@ -969,6 +1092,10 @@ do {									\
 	}								\
 	finish_wait(&wq, &__wait);					\
 } while (0)
+=======
+#define __wait_event_killable(wq, condition)				\
+	___wait_event(wq, condition, TASK_KILLABLE, 0, 0, schedule())
+>>>>>>> v3.18
 =======
 #define __wait_event_killable(wq, condition)				\
 	___wait_event(wq, condition, TASK_KILLABLE, 0, 0, schedule())
@@ -994,7 +1121,11 @@ do {									\
 	int __ret = 0;							\
 	if (!(condition))						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__wait_event_killable(wq, condition, __ret);		\
+=======
+		__ret = __wait_event_killable(wq, condition);		\
+>>>>>>> v3.18
 =======
 		__ret = __wait_event_killable(wq, condition);		\
 >>>>>>> v3.18
@@ -1003,6 +1134,7 @@ do {									\
 
 
 #define __wait_event_lock_irq(wq, condition, lock, cmd)			\
+<<<<<<< HEAD
 <<<<<<< HEAD
 do {									\
 	DEFINE_WAIT(__wait);						\
@@ -1019,11 +1151,16 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 	(void)___wait_event(wq, condition, TASK_UNINTERRUPTIBLE, 0, 0,	\
 			    spin_unlock_irq(&lock);			\
 			    cmd;					\
 			    schedule();					\
 			    spin_lock_irq(&lock))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1085,6 +1222,7 @@ do {									\
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __wait_event_interruptible_lock_irq(wq, condition,		\
 					    lock, ret, cmd)		\
 do {									\
@@ -1106,12 +1244,17 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define __wait_event_interruptible_lock_irq(wq, condition, lock, cmd)	\
 	___wait_event(wq, condition, TASK_INTERRUPTIBLE, 0, 0,		\
 		      spin_unlock_irq(&lock);				\
 		      cmd;						\
 		      schedule();					\
 		      spin_lock_irq(&lock))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1143,10 +1286,16 @@ do {									\
 ({									\
 	int __ret = 0;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 									\
 	if (!(condition))						\
 		__wait_event_interruptible_lock_irq(wq, condition,	\
 						    lock, __ret, cmd);	\
+=======
+	if (!(condition))						\
+		__ret = __wait_event_interruptible_lock_irq(wq,		\
+						condition, lock, cmd);	\
+>>>>>>> v3.18
 =======
 	if (!(condition))						\
 		__ret = __wait_event_interruptible_lock_irq(wq,		\
@@ -1181,6 +1330,7 @@ do {									\
 ({									\
 	int __ret = 0;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 									\
 	if (!(condition))						\
 		__wait_event_interruptible_lock_irq(wq, condition,	\
@@ -1190,10 +1340,16 @@ do {									\
 		__ret = __wait_event_interruptible_lock_irq(wq,		\
 						condition, lock,);	\
 >>>>>>> v3.18
+=======
+	if (!(condition))						\
+		__ret = __wait_event_interruptible_lock_irq(wq,		\
+						condition, lock,);	\
+>>>>>>> v3.18
 	__ret;								\
 })
 
 #define __wait_event_interruptible_lock_irq_timeout(wq, condition,	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 						    lock, ret)		\
 do {									\
@@ -1221,6 +1377,8 @@ do {									\
  *		The condition is checked under the lock. This is expected
  *		to be called with the lock taken.
 =======
+=======
+>>>>>>> v3.18
 						    lock, timeout)	\
 	___wait_event(wq, ___wait_cond_timeout(condition),		\
 		      TASK_INTERRUPTIBLE, 0, timeout,			\
@@ -1232,6 +1390,9 @@ do {									\
  * wait_event_interruptible_lock_irq_timeout - sleep until a condition gets
  *		true or a timeout elapses. The condition is checked under
  *		the lock. This is expected to be called with the lock taken.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @wq: the waitqueue to wait on
  * @condition: a C expression for the event to wait for
@@ -1257,6 +1418,7 @@ do {									\
 						  timeout)		\
 ({									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int __ret = timeout;						\
 									\
 	if (!(condition))						\
@@ -1279,6 +1441,8 @@ extern long interruptible_sleep_on_timeout(wait_queue_head_t *q,
 					   signed long timeout);
 
 =======
+=======
+>>>>>>> v3.18
 	long __ret = timeout;						\
 	if (!___wait_cond_timeout(condition))				\
 		__ret = __wait_event_interruptible_lock_irq_timeout(	\
@@ -1286,6 +1450,9 @@ extern long interruptible_sleep_on_timeout(wait_queue_head_t *q,
 	__ret;								\
 })
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Waitqueues which are removed from the waitqueue_head at wakeup time
@@ -1293,9 +1460,15 @@ extern long interruptible_sleep_on_timeout(wait_queue_head_t *q,
 void prepare_to_wait(wait_queue_head_t *q, wait_queue_t *wait, int state);
 void prepare_to_wait_exclusive(wait_queue_head_t *q, wait_queue_t *wait, int state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void finish_wait(wait_queue_head_t *q, wait_queue_t *wait);
 void abort_exclusive_wait(wait_queue_head_t *q, wait_queue_t *wait,
 			unsigned int mode, void *key);
+=======
+long prepare_to_wait_event(wait_queue_head_t *q, wait_queue_t *wait, int state);
+void finish_wait(wait_queue_head_t *q, wait_queue_t *wait);
+void abort_exclusive_wait(wait_queue_head_t *q, wait_queue_t *wait, unsigned int mode, void *key);
+>>>>>>> v3.18
 =======
 long prepare_to_wait_event(wait_queue_head_t *q, wait_queue_t *wait, int state);
 void finish_wait(wait_queue_head_t *q, wait_queue_t *wait);
@@ -1333,20 +1506,29 @@ int wake_bit_function(wait_queue_t *wait, unsigned mode, int sync, void *key);
 	} while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 extern int bit_wait(struct wait_bit_key *);
 extern int bit_wait_io(struct wait_bit_key *);
 extern int bit_wait_timeout(struct wait_bit_key *);
 extern int bit_wait_io_timeout(struct wait_bit_key *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * wait_on_bit - wait for a bit to be cleared
  * @word: the word being waited on, a kernel virtual address
  * @bit: the bit of the word being waited on
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @action: the function used to sleep, which may take special actions
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @mode: the task state to sleep in
@@ -1358,10 +1540,13 @@ extern int bit_wait_io_timeout(struct wait_bit_key *);
  * One uses wait_on_bit() where one is waiting for the bit to clear,
  * but has no intention of setting it.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static inline int wait_on_bit(void *word, int bit,
 				int (*action)(void *), unsigned mode)
 =======
+=======
+>>>>>>> v3.18
  * Returned value will be zero if the bit was cleared, or non-zero
  * if the process received a signal and the mode permitted wakeup
  * on that signal.
@@ -1418,6 +1603,9 @@ wait_on_bit_io(void *word, int bit, unsigned mode)
  */
 static inline int
 wait_on_bit_action(void *word, int bit, wait_bit_action_f *action, unsigned mode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (!test_bit(bit, word))
@@ -1430,7 +1618,10 @@ wait_on_bit_action(void *word, int bit, wait_bit_action_f *action, unsigned mode
  * @word: the word being waited on, a kernel virtual address
  * @bit: the bit of the word being waited on
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @action: the function used to sleep, which may take special actions
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @mode: the task state to sleep in
@@ -1444,10 +1635,13 @@ wait_on_bit_action(void *word, int bit, wait_bit_action_f *action, unsigned mode
  * One uses wait_on_bit_lock() where one is waiting for the bit to
  * clear with the intention of setting it, and when done, clearing it.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static inline int wait_on_bit_lock(void *word, int bit,
 				int (*action)(void *), unsigned mode)
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns zero if the bit was (eventually) found to be clear and was
  * set.  Returns non-zero if a signal was delivered to the process and
@@ -1503,6 +1697,9 @@ wait_on_bit_lock_io(void *word, int bit, unsigned mode)
  */
 static inline int
 wait_on_bit_lock_action(void *word, int bit, wait_bit_action_f *action, unsigned mode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (!test_and_set_bit(bit, word))
@@ -1510,9 +1707,12 @@ wait_on_bit_lock_action(void *word, int bit, wait_bit_action_f *action, unsigned
 	return out_of_line_wait_on_bit_lock(word, bit, action, mode);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * wait_on_atomic_t - Wait for an atomic_t to become 0
@@ -1533,4 +1733,7 @@ int wait_on_atomic_t(atomic_t *val, int (*action)(atomic_t *), unsigned mode)
 }
 
 #endif /* _LINUX_WAIT_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -29,6 +29,10 @@
 #include <linux/gfp.h>
 #include <linux/jump_label.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/random.h>
+>>>>>>> v3.18
 =======
 #include <linux/random.h>
 >>>>>>> v3.18
@@ -48,7 +52,10 @@ do {							\
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RANDOMIZE_BASE
 static unsigned long module_load_offset;
 static int randomize_modules = 1;
@@ -86,21 +93,30 @@ static unsigned long int get_module_load_offset(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void *module_alloc(unsigned long size)
 {
 	if (PAGE_ALIGN(size) > MODULES_LEN)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __vmalloc_node_range(size, 1, MODULES_VADDR, MODULES_END,
 				GFP_KERNEL | __GFP_HIGHMEM, PAGE_KERNEL_EXEC,
 				NUMA_NO_NODE, __builtin_return_address(0));
 =======
+=======
+>>>>>>> v3.18
 	return __vmalloc_node_range(size, 1,
 				    MODULES_VADDR + get_module_load_offset(),
 				    MODULES_END, GFP_KERNEL | __GFP_HIGHMEM,
 				    PAGE_KERNEL_EXEC, NUMA_NO_NODE,
 				    __builtin_return_address(0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

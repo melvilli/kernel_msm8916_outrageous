@@ -34,7 +34,10 @@
 #include <media/adv7393.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -305,6 +308,7 @@ static int adv7393_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adv7393_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -315,6 +319,8 @@ static int adv7393_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct v4l2_ctrl_ops adv7393_ctrl_ops = {
 	.s_ctrl = adv7393_s_ctrl,
 };
@@ -322,7 +328,10 @@ static const struct v4l2_ctrl_ops adv7393_ctrl_ops = {
 static const struct v4l2_subdev_core_ops adv7393_core_ops = {
 	.log_status = adv7393_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = adv7393_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -420,7 +429,11 @@ static int adv7393_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct adv7393_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -458,7 +471,10 @@ static int adv7393_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -467,10 +483,15 @@ static int adv7393_probe(struct i2c_client *client,
 
 	err = adv7393_initialize(&state->sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		v4l2_ctrl_handler_free(&state->hdl);
 		kfree(state);
 	}
+=======
+	if (err)
+		v4l2_ctrl_handler_free(&state->hdl);
+>>>>>>> v3.18
 =======
 	if (err)
 		v4l2_ctrl_handler_free(&state->hdl);
@@ -486,7 +507,10 @@ static int adv7393_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

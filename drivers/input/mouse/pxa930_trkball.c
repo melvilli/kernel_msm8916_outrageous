@@ -11,7 +11,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -170,7 +173,11 @@ static int pxa930_trkball_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trkball->pdata = pdev->dev.platform_data;
+=======
+	trkball->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	trkball->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

@@ -240,6 +240,7 @@ static int timblogiw_querycap(struct file *file, void  *priv,
 
 	dev_dbg(&vdev->dev, "%s: Entry\n",  __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(cap, 0, sizeof(*cap));
 	strncpy(cap->card, TIMBLOGIWIN_NAME, sizeof(cap->card)-1);
 	strncpy(cap->driver, DRIVER_NAME, sizeof(cap->driver) - 1);
@@ -248,12 +249,17 @@ static int timblogiw_querycap(struct file *file, void  *priv,
 	cap->capabilities = V4L2_CAP_VIDEO_CAPTURE | V4L2_CAP_STREAMING |
 		V4L2_CAP_READWRITE;
 =======
+=======
+>>>>>>> v3.18
 	strncpy(cap->card, TIMBLOGIWIN_NAME, sizeof(cap->card)-1);
 	strncpy(cap->driver, DRIVER_NAME, sizeof(cap->driver) - 1);
 	snprintf(cap->bus_info, sizeof(cap->bus_info), "platform:%s", vdev->name);
 	cap->device_caps = V4L2_CAP_VIDEO_CAPTURE | V4L2_CAP_STREAMING |
 		V4L2_CAP_READWRITE;
 	cap->capabilities = cap->device_caps | V4L2_CAP_DEVICE_CAPS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -358,7 +364,11 @@ static int timblogiw_s_std(struct file *file, void  *priv, v4l2_std_id std)
 
 	if (TIMBLOGIW_HAS_DECODER(lw))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = v4l2_subdev_call(lw->sd_enc, core, s_std, std);
+=======
+		err = v4l2_subdev_call(lw->sd_enc, video, s_std, std);
+>>>>>>> v3.18
 =======
 		err = v4l2_subdev_call(lw->sd_enc, video, s_std, std);
 >>>>>>> v3.18
@@ -418,7 +428,11 @@ static int timblogiw_s_input(struct file *file, void  *priv, unsigned int input)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int timblogiw_streamon(struct file *file, void  *priv, unsigned int type)
+=======
+static int timblogiw_streamon(struct file *file, void  *priv, enum v4l2_buf_type type)
+>>>>>>> v3.18
 =======
 static int timblogiw_streamon(struct file *file, void  *priv, enum v4l2_buf_type type)
 >>>>>>> v3.18
@@ -439,7 +453,11 @@ static int timblogiw_streamon(struct file *file, void  *priv, enum v4l2_buf_type
 
 static int timblogiw_streamoff(struct file *file, void  *priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int type)
+=======
+	enum v4l2_buf_type type)
+>>>>>>> v3.18
 =======
 	enum v4l2_buf_type type)
 >>>>>>> v3.18
@@ -588,7 +606,11 @@ static void buffer_queue(struct videobuf_queue *vq, struct videobuf_buffer *vb)
 	desc = dmaengine_prep_slave_sg(fh->chan,
 		buf->sg, sg_elems, DMA_DEV_TO_MEM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_PREP_INTERRUPT | DMA_COMPL_SKIP_SRC_UNMAP);
+=======
+		DMA_PREP_INTERRUPT);
+>>>>>>> v3.18
 =======
 		DMA_PREP_INTERRUPT);
 >>>>>>> v3.18
@@ -827,7 +849,11 @@ static int timblogiw_probe(struct platform_device *pdev)
 		dev_info(&pdev->dev, "Running without decoder\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lw = kzalloc(sizeof(*lw), GFP_KERNEL);
+=======
+	lw = devm_kzalloc(&pdev->dev, sizeof(*lw), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	lw = devm_kzalloc(&pdev->dev, sizeof(*lw), GFP_KERNEL);
 >>>>>>> v3.18
@@ -851,7 +877,11 @@ static int timblogiw_probe(struct platform_device *pdev)
 	err = v4l2_device_register(NULL, &lw->v4l2_dev);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_register;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -868,6 +898,7 @@ static int timblogiw_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 
@@ -877,10 +908,15 @@ err_request:
 err_register:
 	kfree(lw);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 
 err_request:
 	v4l2_device_unregister(&lw->v4l2_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err:
 	dev_err(&pdev->dev, "Failed to register: %d\n", err);
@@ -897,10 +933,13 @@ static int timblogiw_remove(struct platform_device *pdev)
 	v4l2_device_unregister(&lw->v4l2_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(lw);
 
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

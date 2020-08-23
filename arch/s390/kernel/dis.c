@@ -24,6 +24,10 @@
 
 #include <asm/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dis.h>
+>>>>>>> v3.18
 =======
 #include <asm/dis.h>
 >>>>>>> v3.18
@@ -42,6 +46,7 @@
 #endif /* CONFIG_64BIT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OPERAND_GPR	0x1	/* Operand printed as %rx */
 #define OPERAND_FPR	0x2	/* Operand printed as %fx */
 #define OPERAND_AR	0x4	/* Operand printed as %ax */
@@ -53,6 +58,8 @@
 #define OPERAND_SIGNED	0x100	/* Operand printed as signed value */
 #define OPERAND_LENGTH	0x200	/* Operand printed as length (+1) */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum {
@@ -78,12 +85,18 @@ enum {
 	C_8,	/* Control reg. starting at position 8 */
 	C_12,	/* Control reg. starting at position 12 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	V_8,	/* Vector reg. starting at position 8, extension bit at 36 */
 	V_12,	/* Vector reg. starting at position 12, extension bit at 37 */
 	V_16,	/* Vector reg. starting at position 16, extension bit at 38 */
 	V_32,	/* Vector reg. starting at position 32, extension bit at 39 */
 	W_12,	/* Vector reg. at bit 12, extension at bit 37, used as index */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	B_16,	/* Base register starting at position 16 */
 	B_32,	/* Base register starting at position 32 */
@@ -108,6 +121,11 @@ enum {
 	U8_32,	/* 8 bit unsigned value starting at 32 */
 	I8_8,	/* 8 bit signed value starting at 8 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	I8_16,	/* 8 bit signed value starting at 16 */
+	I8_24,	/* 8 bit signed value starting at 24 */
+>>>>>>> v3.18
 =======
 	I8_16,	/* 8 bit signed value starting at 16 */
 	I8_24,	/* 8 bit signed value starting at 24 */
@@ -127,6 +145,12 @@ enum {
 	M_16,	/* 4 bit optional mask starting at 16 */
 	M_20,	/* 4 bit optional mask starting at 20 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	M_24,	/* 4 bit optional mask starting at 24 */
+	M_28,	/* 4 bit optional mask starting at 28 */
+	M_32,	/* 4 bit optional mask starting at 32 */
+>>>>>>> v3.18
 =======
 	M_24,	/* 4 bit optional mask starting at 24 */
 	M_28,	/* 4 bit optional mask starting at 28 */
@@ -167,7 +191,11 @@ enum {
 	INSTR_RS_AARD, INSTR_RS_CCRD, INSTR_RS_R0RD, INSTR_RS_RRRD,
 	INSTR_RS_RURD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INSTR_RXE_FRRD, INSTR_RXE_RRRD,
+=======
+	INSTR_RXE_FRRD, INSTR_RXE_RRRD, INSTR_RXE_RRRDM,
+>>>>>>> v3.18
 =======
 	INSTR_RXE_FRRD, INSTR_RXE_RRRD, INSTR_RXE_RRRDM,
 >>>>>>> v3.18
@@ -183,6 +211,7 @@ enum {
 	INSTR_SS_L0RDRD, INSTR_SS_LIRDRD, INSTR_SS_LLRDRD, INSTR_SS_RRRDRD,
 	INSTR_SS_RRRDRD2, INSTR_SS_RRRDRD3,
 	INSTR_S_00, INSTR_S_RD,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -200,6 +229,8 @@ struct insn {
 
 static const struct operand operands[] =
 =======
+=======
+>>>>>>> v3.18
 	INSTR_VRI_V0IM, INSTR_VRI_V0I0, INSTR_VRI_V0IIM, INSTR_VRI_VVIM,
 	INSTR_VRI_VVV0IM, INSTR_VRI_VVV0I0, INSTR_VRI_VVIMM,
 	INSTR_VRR_VV00MMM, INSTR_VRR_VV000MM, INSTR_VRR_VV0000M,
@@ -214,6 +245,9 @@ static const struct operand operands[] =
 };
 
 static const struct s390_operand operands[] =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	[UNUSED]  = { 0, 0, 0 },
@@ -238,12 +272,18 @@ static const struct s390_operand operands[] =
 	[C_8]	 = {  4,  8, OPERAND_CR },
 	[C_12]	 = {  4, 12, OPERAND_CR },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[V_8]	 = {  4,  8, OPERAND_VR },
 	[V_12]	 = {  4, 12, OPERAND_VR },
 	[V_16]	 = {  4, 16, OPERAND_VR },
 	[V_32]	 = {  4, 32, OPERAND_VR },
 	[W_12]	 = {  4, 12, OPERAND_INDEX | OPERAND_VR },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[B_16]	 = {  4, 16, OPERAND_BASE | OPERAND_GPR },
 	[B_32]	 = {  4, 32, OPERAND_BASE | OPERAND_GPR },
@@ -268,12 +308,18 @@ static const struct s390_operand operands[] =
 	[U8_32]  = {  8, 32, 0 },
 	[J12_12] = { 12, 12, OPERAND_PCREL },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[I8_8]	 = {  8,  8, OPERAND_SIGNED },
 	[I8_16]  = {  8, 16, OPERAND_SIGNED },
 	[I8_24]  = {  8, 24, OPERAND_SIGNED },
 	[I8_32]  = {  8, 32, OPERAND_SIGNED },
 	[I16_32] = { 16, 32, OPERAND_SIGNED },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[I16_16] = { 16, 16, OPERAND_SIGNED },
 	[U16_16] = { 16, 16, 0 },
@@ -288,6 +334,12 @@ static const struct s390_operand operands[] =
 	[M_16]	 = {  4, 16, 0 },
 	[M_20]	 = {  4, 20, 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[M_24]	 = {  4, 24, 0 },
+	[M_28]	 = {  4, 28, 0 },
+	[M_32]	 = {  4, 32, 0 },
+>>>>>>> v3.18
 =======
 	[M_24]	 = {  4, 24, 0 },
 	[M_28]	 = {  4, 28, 0 },
@@ -375,6 +427,10 @@ static const unsigned char formats[][7] = {
 	[INSTR_RXE_FRRD]  = { 0xff, F_8,D_20,X_12,B_16,0,0 },
 	[INSTR_RXE_RRRD]  = { 0xff, R_8,D_20,X_12,B_16,0,0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[INSTR_RXE_RRRDM] = { 0xff, R_8,D_20,X_12,B_16,M_32,0 },
+>>>>>>> v3.18
 =======
 	[INSTR_RXE_RRRDM] = { 0xff, R_8,D_20,X_12,B_16,M_32,0 },
 >>>>>>> v3.18
@@ -403,7 +459,10 @@ static const unsigned char formats[][7] = {
 	[INSTR_S_00]	  = { 0xff, 0,0,0,0,0,0 },
 	[INSTR_S_RD]	  = { 0xff, D_20,B_16,0,0,0,0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[INSTR_VRI_V0IM]  = { 0xff, V_8,I16_16,M_32,0,0,0 },
 	[INSTR_VRI_V0I0]  = { 0xff, V_8,I16_16,0,0,0,0 },
 	[INSTR_VRI_V0IIM] = { 0xff, V_8,I8_16,I8_24,M_32,0,0 },
@@ -435,6 +494,9 @@ static const unsigned char formats[][7] = {
 	[INSTR_VRV_VWRDM] = { 0xff, V_8,D_20,W_12,B_16,M_32,0 },
 	[INSTR_VRX_VRRDM] = { 0xff, V_8,D_20,X_12,B_16,M_32,0 },
 	[INSTR_VRX_VRRD0] = { 0xff, V_8,D_20,X_12,B_16,0,0 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -511,12 +573,18 @@ enum {
 	LONG_INSN_STPCIFC,
 	LONG_INSN_PCISTB,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	LONG_INSN_VPOPCT,
 	LONG_INSN_VERLLV,
 	LONG_INSN_VESRAV,
 	LONG_INSN_VESRLV,
 	LONG_INSN_VSBCBI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -593,10 +661,13 @@ static char *long_insn_name[] = {
 	[LONG_INSN_STPCIFC] = "stpcifc",
 	[LONG_INSN_PCISTB] = "pcistb",
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct insn opcode[] = {
 =======
+=======
+>>>>>>> v3.18
 	[LONG_INSN_VPOPCT] = "vpopct",
 	[LONG_INSN_VERLLV] = "verllv",
 	[LONG_INSN_VESRAV] = "vesrav",
@@ -605,6 +676,9 @@ static struct insn opcode[] = {
 };
 
 static struct s390_insn opcode[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_64BIT
 	{ "bprp", 0xc5, INSTR_MII_UPI },
@@ -795,7 +869,11 @@ static struct s390_insn opcode[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_01[] = {
+=======
+static struct s390_insn opcode_01[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_01[] = {
 >>>>>>> v3.18
@@ -815,7 +893,11 @@ static struct s390_insn opcode_01[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_a5[] = {
+=======
+static struct s390_insn opcode_a5[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_a5[] = {
 >>>>>>> v3.18
@@ -841,7 +923,11 @@ static struct s390_insn opcode_a5[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_a7[] = {
+=======
+static struct s390_insn opcode_a7[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_a7[] = {
 >>>>>>> v3.18
@@ -867,7 +953,11 @@ static struct s390_insn opcode_a7[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_aa[] = {
+=======
+static struct s390_insn opcode_aa[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_aa[] = {
 >>>>>>> v3.18
@@ -882,7 +972,11 @@ static struct s390_insn opcode_aa[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_b2[] = {
+=======
+static struct s390_insn opcode_b2[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_b2[] = {
 >>>>>>> v3.18
@@ -998,7 +1092,11 @@ static struct s390_insn opcode_b2[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_b3[] = {
+=======
+static struct s390_insn opcode_b3[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_b3[] = {
 >>>>>>> v3.18
@@ -1185,7 +1283,11 @@ static struct s390_insn opcode_b3[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_b9[] = {
+=======
+static struct s390_insn opcode_b9[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_b9[] = {
 >>>>>>> v3.18
@@ -1322,7 +1424,11 @@ static struct s390_insn opcode_b9[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_c0[] = {
+=======
+static struct s390_insn opcode_c0[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_c0[] = {
 >>>>>>> v3.18
@@ -1346,7 +1452,11 @@ static struct s390_insn opcode_c0[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_c2[] = {
+=======
+static struct s390_insn opcode_c2[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_c2[] = {
 >>>>>>> v3.18
@@ -1368,7 +1478,11 @@ static struct s390_insn opcode_c2[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_c4[] = {
+=======
+static struct s390_insn opcode_c4[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_c4[] = {
 >>>>>>> v3.18
@@ -1389,7 +1503,11 @@ static struct s390_insn opcode_c4[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_c6[] = {
+=======
+static struct s390_insn opcode_c6[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_c6[] = {
 >>>>>>> v3.18
@@ -1411,7 +1529,11 @@ static struct s390_insn opcode_c6[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_c8[] = {
+=======
+static struct s390_insn opcode_c8[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_c8[] = {
 >>>>>>> v3.18
@@ -1426,7 +1548,11 @@ static struct s390_insn opcode_c8[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_cc[] = {
+=======
+static struct s390_insn opcode_cc[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_cc[] = {
 >>>>>>> v3.18
@@ -1442,7 +1568,11 @@ static struct s390_insn opcode_cc[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_e3[] = {
+=======
+static struct s390_insn opcode_e3[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_e3[] = {
 >>>>>>> v3.18
@@ -1552,7 +1682,11 @@ static struct s390_insn opcode_e3[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_e5[] = {
+=======
+static struct s390_insn opcode_e5[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_e5[] = {
 >>>>>>> v3.18
@@ -1578,8 +1712,11 @@ static struct s390_insn opcode_e5[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_eb[] = {
 =======
+=======
+>>>>>>> v3.18
 static struct s390_insn opcode_e7[] = {
 #ifdef CONFIG_64BIT
 	{ "lcbb", 0x27, INSTR_RXE_RRRDM },
@@ -1725,6 +1862,9 @@ static struct s390_insn opcode_e7[] = {
 };
 
 static struct s390_insn opcode_eb[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_64BIT
 	{ "lmg", 0x04, INSTR_RSY_RRRD },
@@ -1800,7 +1940,11 @@ static struct s390_insn opcode_eb[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_ec[] = {
+=======
+static struct s390_insn opcode_ec[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_ec[] = {
 >>>>>>> v3.18
@@ -1843,7 +1987,11 @@ static struct s390_insn opcode_ec[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn opcode_ed[] = {
+=======
+static struct s390_insn opcode_ed[] = {
+>>>>>>> v3.18
 =======
 static struct s390_insn opcode_ed[] = {
 >>>>>>> v3.18
@@ -1915,8 +2063,14 @@ static struct s390_insn opcode_ed[] = {
 /* Extracts an operand value from an instruction.  */
 static unsigned int extract_operand(unsigned char *code,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    const struct operand *operand)
 {
+=======
+				    const struct s390_operand *operand)
+{
+	unsigned char *cp;
+>>>>>>> v3.18
 =======
 				    const struct s390_operand *operand)
 {
@@ -1927,7 +2081,11 @@ static unsigned int extract_operand(unsigned char *code,
 
 	/* Extract fragments of the operand byte for byte.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	code += operand->shift / 8;
+=======
+	cp = code + operand->shift / 8;
+>>>>>>> v3.18
 =======
 	cp = code + operand->shift / 8;
 >>>>>>> v3.18
@@ -1936,7 +2094,11 @@ static unsigned int extract_operand(unsigned char *code,
 	do {
 		val <<= 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val |= (unsigned int) *code++;
+=======
+		val |= (unsigned int) *cp++;
+>>>>>>> v3.18
 =======
 		val |= (unsigned int) *cp++;
 >>>>>>> v3.18
@@ -1950,7 +2112,10 @@ static unsigned int extract_operand(unsigned char *code,
 		val = (val & 0xff) << 12 | (val & 0xfff00) >> 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Check for register extensions bits for vector registers. */
 	if (operand->flags & OPERAND_VR) {
 		if (operand->shift == 8)
@@ -1963,6 +2128,9 @@ static unsigned int extract_operand(unsigned char *code,
 			val |= (code[4] & 1) << 4;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Sign extend value if the operand is signed or pc relative.  */
 	if ((operand->flags & (OPERAND_SIGNED | OPERAND_PCREL)) &&
@@ -1980,6 +2148,7 @@ static unsigned int extract_operand(unsigned char *code,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int insn_length(unsigned char code)
 {
 	return ((((int) code + 64) >> 7) + 1) << 1;
@@ -1991,11 +2160,16 @@ static struct insn *find_insn(unsigned char *code)
 	unsigned char opmask;
 	struct insn *table;
 =======
+=======
+>>>>>>> v3.18
 struct s390_insn *find_insn(unsigned char *code)
 {
 	unsigned char opfrag = code[1];
 	unsigned char opmask;
 	struct s390_insn *table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (code[0]) {
@@ -2046,11 +2220,17 @@ struct s390_insn *find_insn(unsigned char *code)
 		table = opcode_e5;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 0xe7:
 		table = opcode_e7;
 		opfrag = code[5];
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0xeb:
 		table = opcode_eb;
@@ -2093,7 +2273,11 @@ struct s390_insn *find_insn(unsigned char *code)
 int insn_to_mnemonic(unsigned char *instruction, char *buf, unsigned int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct insn *insn;
+=======
+	struct s390_insn *insn;
+>>>>>>> v3.18
 =======
 	struct s390_insn *insn;
 >>>>>>> v3.18
@@ -2113,9 +2297,15 @@ EXPORT_SYMBOL_GPL(insn_to_mnemonic);
 static int print_insn(char *buffer, unsigned char *code, unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct insn *insn;
 	const unsigned char *ops;
 	const struct operand *operand;
+=======
+	struct s390_insn *insn;
+	const unsigned char *ops;
+	const struct s390_operand *operand;
+>>>>>>> v3.18
 =======
 	struct s390_insn *insn;
 	const unsigned char *ops;
@@ -2158,6 +2348,11 @@ static int print_insn(char *buffer, unsigned char *code, unsigned long addr)
 			else if (operand->flags & OPERAND_CR)
 				ptr += sprintf(ptr, "%%c%i", value);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			else if (operand->flags & OPERAND_VR)
+				ptr += sprintf(ptr, "%%v%i", value);
+>>>>>>> v3.18
 =======
 			else if (operand->flags & OPERAND_VR)
 				ptr += sprintf(ptr, "%%v%i", value);

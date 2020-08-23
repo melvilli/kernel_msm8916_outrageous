@@ -17,6 +17,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -41,11 +45,17 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <plat/fb.h>
 
 #include <plat/clock.h>
+=======
+#include <linux/platform_data/i2c-s3c2410.h>
+#include <plat/fb.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <plat/fb.h>
@@ -97,7 +107,11 @@ static void __init ncp_map_io(void)
 {
 	s3c64xx_init_io(ncp_iodesc, ARRAY_SIZE(ncp_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+>>>>>>> v3.18
 =======
 	s3c64xx_set_xtal_freq(12000000);
 >>>>>>> v3.18
@@ -119,7 +133,10 @@ MACHINE_START(NCP, "NCP")
 	.map_io		= ncp_map_io,
 	.init_machine	= ncp_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= samsung_timer_init,

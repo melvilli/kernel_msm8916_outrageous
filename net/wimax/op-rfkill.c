@@ -412,6 +412,7 @@ void wimax_rfkill_rm(struct wimax_dev *wimax_dev)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct nla_policy wimax_gnl_rfkill_policy[WIMAX_GNL_ATTR_MAX + 1] = {
 	[WIMAX_GNL_RFKILL_IFIDX] = {
 		.type = NLA_U32,
@@ -425,6 +426,8 @@ static const struct nla_policy wimax_gnl_rfkill_policy[WIMAX_GNL_ATTR_MAX + 1] =
 static
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int wimax_gnl_doit_rfkill(struct sk_buff *skb, struct genl_info *info)
 {
 	int result, ifindex;
@@ -436,8 +439,12 @@ int wimax_gnl_doit_rfkill(struct sk_buff *skb, struct genl_info *info)
 	result = -ENODEV;
 	if (info->attrs[WIMAX_GNL_RFKILL_IFIDX] == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "WIMAX_GNL_OP_RFKILL: can't find IFIDX "
 			"attribute\n");
+=======
+		pr_err("WIMAX_GNL_OP_RFKILL: can't find IFIDX attribute\n");
+>>>>>>> v3.18
 =======
 		pr_err("WIMAX_GNL_OP_RFKILL: can't find IFIDX attribute\n");
 >>>>>>> v3.18
@@ -465,6 +472,7 @@ error_no_wimax_dev:
 	return result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 struct genl_ops wimax_gnl_rfkill = {
@@ -475,5 +483,7 @@ struct genl_ops wimax_gnl_rfkill = {
 	.dumpit = NULL,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

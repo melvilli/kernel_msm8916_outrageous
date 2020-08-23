@@ -508,6 +508,7 @@ static int s6e63m0_power_on(struct s6e63m0 *lcd)
 		dev_err(lcd->dev, "power_on is NULL.\n");
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		pd->power_on(lcd->ld, 1);
 		msleep(pd->power_on_delay);
@@ -522,6 +523,8 @@ static int s6e63m0_power_on(struct s6e63m0 *lcd)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	pd->power_on(lcd->ld, 1);
@@ -535,6 +538,9 @@ static int s6e63m0_power_on(struct s6e63m0 *lcd)
 	pd->reset(lcd->ld);
 	msleep(pd->reset_delay);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = s6e63m0_ldi_init(lcd);
 	if (ret) {
@@ -614,11 +620,14 @@ static int s6e63m0_get_power(struct lcd_device *ld)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s6e63m0_get_brightness(struct backlight_device *bd)
 {
 	return bd->props.brightness;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int s6e63m0_set_brightness(struct backlight_device *bd)
@@ -649,7 +658,10 @@ static struct lcd_ops s6e63m0_lcd_ops = {
 
 static const struct backlight_ops s6e63m0_backlight_ops  = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_brightness = s6e63m0_get_brightness,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.update_status = s6e63m0_set_brightness,
@@ -726,7 +738,11 @@ static ssize_t s6e63m0_sysfs_show_gamma_table(struct device *dev,
 	char temp[3];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(temp, "%d\n", lcd->gamma_table_count);
+=======
+	sprintf(temp, "%u\n", lcd->gamma_table_count);
+>>>>>>> v3.18
 =======
 	sprintf(temp, "%u\n", lcd->gamma_table_count);
 >>>>>>> v3.18
@@ -762,7 +778,11 @@ static int s6e63m0_probe(struct spi_device *spi)
 	lcd->dev = &spi->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd->lcd_pd = spi->dev.platform_data;
+=======
+	lcd->lcd_pd = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	lcd->lcd_pd = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -772,7 +792,12 @@ static int s6e63m0_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld = lcd_device_register("s6e63m0", &spi->dev, lcd, &s6e63m0_lcd_ops);
+=======
+	ld = devm_lcd_device_register(&spi->dev, "s6e63m0", &spi->dev, lcd,
+				&s6e63m0_lcd_ops);
+>>>>>>> v3.18
 =======
 	ld = devm_lcd_device_register(&spi->dev, "s6e63m0", &spi->dev, lcd,
 				&s6e63m0_lcd_ops);
@@ -787,6 +812,7 @@ static int s6e63m0_probe(struct spi_device *spi)
 	props.max_brightness = MAX_BRIGHTNESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd = backlight_device_register("s6e63m0bl-bl", &spi->dev, lcd,
 		&s6e63m0_backlight_ops, &props);
 	if (IS_ERR(bd)) {
@@ -794,11 +820,16 @@ static int s6e63m0_probe(struct spi_device *spi)
 		goto out_lcd_unregister;
 	}
 =======
+=======
+>>>>>>> v3.18
 	bd = devm_backlight_device_register(&spi->dev, "s6e63m0bl-bl",
 					&spi->dev, lcd, &s6e63m0_backlight_ops,
 					&props);
 	if (IS_ERR(bd))
 		return PTR_ERR(bd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bd->props.brightness = MAX_BRIGHTNESS;
@@ -842,10 +873,13 @@ static int s6e63m0_probe(struct spi_device *spi)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out_lcd_unregister:
 	lcd_device_unregister(ld);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -858,8 +892,11 @@ static int s6e63m0_remove(struct spi_device *spi)
 	device_remove_file(&spi->dev, &dev_attr_gamma_table);
 	device_remove_file(&spi->dev, &dev_attr_gamma_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(lcd->bd);
 	lcd_device_unregister(lcd->ld);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

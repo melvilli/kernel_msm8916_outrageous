@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -1294,6 +1297,7 @@ static inline unsigned MSeries_PFI_Output_Select_Source(unsigned channel,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum MSeries_Gi_DMA_Config_Bits {
 	Gi_DMA_BankSW_Error_Bit = 0x10,
 	Gi_DMA_Reset_Bit = 0x8,
@@ -1302,6 +1306,8 @@ enum MSeries_Gi_DMA_Config_Bits {
 	Gi_DMA_Enable_Bit = 0x1,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned MSeries_PFI_Filter_Select_Mask(unsigned channel)
@@ -1400,6 +1406,7 @@ enum Interrupt_C_Status_Bits {
 
 struct ni_board_struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int device_id;
 	int isapnp_id;
 	char *name;
@@ -1407,12 +1414,17 @@ struct ni_board_struct {
 	int n_adchan;
 	int adbits;
 =======
+=======
+>>>>>>> v3.18
 	const char *name;
 	int device_id;
 	int isapnp_id;
 
 	int n_adchan;
 	unsigned int ai_maxdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int ai_fifo_depth;
@@ -1422,7 +1434,11 @@ struct ni_board_struct {
 
 	int n_aochan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int aobits;
+=======
+	unsigned int ao_maxdata;
+>>>>>>> v3.18
 =======
 	unsigned int ao_maxdata;
 >>>>>>> v3.18
@@ -1430,6 +1446,7 @@ struct ni_board_struct {
 	const struct comedi_lrange *ao_range_table;
 	unsigned ao_speed;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned num_p0_dio_channels;
 
@@ -1442,10 +1459,16 @@ struct ni_board_struct {
 	unsigned int has_8255:1;
 	unsigned int has_32dio_chan:1;
 >>>>>>> v3.18
+=======
+	int reg_type;
+	unsigned int has_8255:1;
+	unsigned int has_32dio_chan:1;
+>>>>>>> v3.18
 
 	enum caldac_enum caldac[3];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MAX_N_AO_CHAN 8
 #define NUM_GPCT 2
@@ -1536,6 +1559,8 @@ struct ni_board_struct {
 	struct mite_dma_descriptor_ring *gpct_mite_ring[NUM_GPCT];
 
 =======
+=======
+>>>>>>> v3.18
 #define MAX_N_CALDACS	34
 #define MAX_N_AO_CHAN	8
 #define NUM_GPCT	2
@@ -1619,5 +1644,8 @@ struct ni_private {
 	unsigned int is_6713:1;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _COMEDI_NI_STC_H */

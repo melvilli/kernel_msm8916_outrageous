@@ -25,17 +25,23 @@
 
 /* PROT ** ICACHE line 2: More real fault processing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bgu,pn		%xcc, winfix_trampoline		! Yes, perform winfixup
 	 ldxa		[%g4] ASI_DMMU, %g5		! Put tagaccess in %g5
 	ba,pt		%xcc, sparc64_realfault_common	! Nope, normal fault
 	 mov		FAULT_CODE_DTLB | FAULT_CODE_WRITE, %g4
 	nop
 =======
+=======
+>>>>>>> v3.18
 	ldxa		[%g4] ASI_DMMU, %g5		! Put tagaccess in %g5
 	bgu,pn		%xcc, winfix_trampoline		! Yes, perform winfixup
 	 mov		FAULT_CODE_DTLB | FAULT_CODE_WRITE, %g4
 	ba,pt		%xcc, sparc64_realfault_common	! Nope, normal fault
 	 nop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nop
 	nop

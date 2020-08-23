@@ -18,9 +18,14 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
+=======
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+>>>>>>> v3.18
 =======
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"

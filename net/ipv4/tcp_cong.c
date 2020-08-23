@@ -16,8 +16,11 @@
 #include <net/tcp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sysctl_tcp_max_ssthresh = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static DEFINE_SPINLOCK(tcp_cong_list_lock);
@@ -80,7 +83,11 @@ EXPORT_SYMBOL_GPL(tcp_unregister_congestion_control);
 
 /* Assign choice of congestion control. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tcp_init_congestion_control(struct sock *sk)
+=======
+void tcp_assign_congestion_control(struct sock *sk)
+>>>>>>> v3.18
 =======
 void tcp_assign_congestion_control(struct sock *sk)
 >>>>>>> v3.18
@@ -88,6 +95,7 @@ void tcp_assign_congestion_control(struct sock *sk)
 	struct inet_connection_sock *icsk = inet_csk(sk);
 	struct tcp_congestion_ops *ca;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* if no choice made yet assign the current value set as default */
 	if (icsk->icsk_ca_ops == &tcp_init_congestion_ops) {
@@ -105,6 +113,8 @@ void tcp_assign_congestion_control(struct sock *sk)
 
 	tcp_sk(sk)->prior_ssthresh = 0;
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	list_for_each_entry_rcu(ca, &tcp_cong_list, list) {
 		if (likely(try_module_get(ca->owner))) {
@@ -129,6 +139,9 @@ void tcp_init_congestion_control(struct sock *sk)
 {
 	const struct inet_connection_sock *icsk = inet_csk(sk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (icsk->icsk_ca_ops->init)
 		icsk->icsk_ca_ops->init(sk);
@@ -180,7 +193,10 @@ static int __init tcp_congestion_default(void)
 late_initcall(tcp_congestion_default);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Build string with list of available congestion control values */
@@ -195,7 +211,10 @@ void tcp_get_available_congestion_control(char *buf, size_t maxlen)
 				 "%s%s",
 				 offs == 0 ? "" : " ", ca->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -230,7 +249,10 @@ void tcp_get_allowed_congestion_control(char *buf, size_t maxlen)
 				 "%s%s",
 				 offs == 0 ? "" : " ", ca->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -277,7 +299,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Change congestion control for socket */
@@ -325,6 +350,7 @@ int tcp_set_congestion_control(struct sock *sk, const char *name)
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* RFC2861 Check whether we are limited by application or congestion window
  * This is the inverse of cwnd check in tcp_tso_should_defer
@@ -377,6 +403,8 @@ void tcp_slow_start(struct tcp_sock *tp)
 	}
 	tp->snd_cwnd = min(snd_cwnd + delta, tp->snd_cwnd_clamp);
 =======
+=======
+>>>>>>> v3.18
 /* Slow start is used when congestion window is no greater than the slow start
  * threshold. We base on RFC2581 and also handle stretch ACKs properly.
  * We do not implement RFC3465 Appropriate Byte Counting (ABC) per se but
@@ -393,6 +421,9 @@ void tcp_slow_start(struct tcp_sock *tp, u32 acked)
 	if (cwnd > tp->snd_ssthresh)
 		cwnd = tp->snd_ssthresh + 1;
 	tp->snd_cwnd = min(cwnd, tp->snd_cwnd_clamp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(tcp_slow_start);
@@ -418,24 +449,34 @@ EXPORT_SYMBOL_GPL(tcp_cong_avoid_ai);
  * SIGCOMM '88, p. 328.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tcp_reno_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 {
 	struct tcp_sock *tp = tcp_sk(sk);
 
 	if (!tcp_is_cwnd_limited(sk, in_flight))
 =======
+=======
+>>>>>>> v3.18
 void tcp_reno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 {
 	struct tcp_sock *tp = tcp_sk(sk);
 
 	if (!tcp_is_cwnd_limited(sk))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
 	/* In "safe" area, increase. */
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_slow_start(tp);
+=======
+		tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 =======
 		tcp_slow_start(tp, acked);
 >>>>>>> v3.18
@@ -450,6 +491,10 @@ u32 tcp_reno_ssthresh(struct sock *sk)
 {
 	const struct tcp_sock *tp = tcp_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -457,6 +502,7 @@ u32 tcp_reno_ssthresh(struct sock *sk)
 }
 EXPORT_SYMBOL_GPL(tcp_reno_ssthresh);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Lower bound on congestion window with halving. */
 u32 tcp_reno_min_cwnd(const struct sock *sk)
@@ -468,12 +514,15 @@ EXPORT_SYMBOL_GPL(tcp_reno_min_cwnd);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct tcp_congestion_ops tcp_reno = {
 	.flags		= TCP_CONG_NON_RESTRICTED,
 	.name		= "reno",
 	.owner		= THIS_MODULE,
 	.ssthresh	= tcp_reno_ssthresh,
 	.cong_avoid	= tcp_reno_cong_avoid,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.min_cwnd	= tcp_reno_min_cwnd,
 };
@@ -490,6 +539,9 @@ struct tcp_congestion_ops tcp_init_congestion_ops  = {
 	.min_cwnd	= tcp_reno_min_cwnd,
 };
 EXPORT_SYMBOL_GPL(tcp_init_congestion_ops);
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18

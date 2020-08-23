@@ -232,6 +232,7 @@ static struct twl4030_keypad_data pandora_kp_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct panel_tpo_td043_data lcd_data = {
 	.nreset_gpio		= 157,
 };
@@ -261,6 +262,8 @@ static struct omap_dss_board_info pandora_dss_data = {
 	.devices	= pandora_dss_devices,
 	.default_device	= &pandora_lcd_device,
 =======
+=======
+>>>>>>> v3.18
 static struct connector_atv_platform_data pandora_tv_pdata = {
 	.name = "tv",
 	.source = "venc.0",
@@ -276,6 +279,9 @@ static struct platform_device pandora_tv_connector_device = {
 
 static struct omap_dss_board_info pandora_dss_data = {
 	.default_display_name = "lcd",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -362,6 +368,10 @@ static struct regulator_consumer_supply pandora_vdds_supplies[] = {
 	REGULATOR_SUPPLY("vdds_sdi", "omapdss"),
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
 >>>>>>> v3.18
@@ -370,17 +380,23 @@ static struct regulator_consumer_supply pandora_vdds_supplies[] = {
 
 static struct regulator_consumer_supply pandora_vcc_lcd_supply[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REGULATOR_SUPPLY("vcc", "display0"),
 };
 
 static struct regulator_consumer_supply pandora_usb_phy_supply[] = {
 	REGULATOR_SUPPLY("vcc", "nop_usb_xceiv.2"),	/* hsusb port 2 */
 =======
+=======
+>>>>>>> v3.18
 	REGULATOR_SUPPLY("vcc", "spi1.1"),
 };
 
 static struct regulator_consumer_supply pandora_usb_phy_supply[] = {
 	REGULATOR_SUPPLY("vcc", "usb_phy_gen_xceiv.2"),	/* hsusb port 2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -559,6 +575,7 @@ static int __init omap3pandora_i2c_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct spi_board_info omap3pandora_spi_board_info[] __initdata = {
 	{
 		.modalias		= "tpo_td043mtea1_panel_spi",
@@ -567,6 +584,8 @@ static struct spi_board_info omap3pandora_spi_board_info[] __initdata = {
 		.max_speed_hz		= 375000,
 		.platform_data		= &pandora_lcd_device,
 =======
+=======
+>>>>>>> v3.18
 static struct panel_tpo_td043mtea1_platform_data pandora_lcd_pdata = {
 	.name                   = "lcd",
 	.source                 = "dpi.0",
@@ -582,6 +601,9 @@ static struct spi_board_info omap3pandora_spi_board_info[] __initdata = {
 		.chip_select		= 1,
 		.max_speed_hz		= 375000,
 		.platform_data		= &pandora_lcd_pdata,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -589,7 +611,11 @@ static struct spi_board_info omap3pandora_spi_board_info[] __initdata = {
 static void __init pandora_wl1251_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wl12xx_platform_data pandora_wl1251_pdata;
+=======
+	struct wl1251_platform_data pandora_wl1251_pdata;
+>>>>>>> v3.18
 =======
 	struct wl1251_platform_data pandora_wl1251_pdata;
 >>>>>>> v3.18
@@ -598,6 +624,11 @@ static void __init pandora_wl1251_init(void)
 	memset(&pandora_wl1251_pdata, 0, sizeof(pandora_wl1251_pdata));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pandora_wl1251_pdata.power_gpio = -1;
+
+>>>>>>> v3.18
 =======
 	pandora_wl1251_pdata.power_gpio = -1;
 
@@ -612,7 +643,11 @@ static void __init pandora_wl1251_init(void)
 
 	pandora_wl1251_pdata.use_eeprom = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = wl12xx_set_platform_data(&pandora_wl1251_pdata);
+=======
+	ret = wl1251_set_platform_data(&pandora_wl1251_pdata);
+>>>>>>> v3.18
 =======
 	ret = wl1251_set_platform_data(&pandora_wl1251_pdata);
 >>>>>>> v3.18
@@ -641,6 +676,10 @@ static struct platform_device *omap3pandora_devices[] __initdata = {
 	&pandora_vwlan_device,
 	&pandora_backlight,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&pandora_tv_connector_device,
+>>>>>>> v3.18
 =======
 	&pandora_tv_connector_device,
 >>>>>>> v3.18
@@ -691,7 +730,10 @@ MACHINE_START(OMAP3_PANDORA, "Pandora Handheld Console")
 	.init_early	= omap35xx_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap3pandora_init,

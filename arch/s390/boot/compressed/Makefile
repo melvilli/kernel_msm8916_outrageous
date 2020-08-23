@@ -7,6 +7,7 @@
 BITS := $(if $(CONFIG_64BIT),64,31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 targets	:= vmlinux.lds vmlinux vmlinux.bin vmlinux.bin.gz vmlinux.bin.bz2 \
 	   vmlinux.bin.xz vmlinux.bin.lzma vmlinux.bin.lzo misc.o piggy.o \
 	   sizes.h head$(BITS).o
@@ -15,6 +16,8 @@ KBUILD_CFLAGS := -m$(BITS) -D__KERNEL__ $(LINUX_INCLUDE) -O2
 KBUILD_CFLAGS += -DDISABLE_BRANCH_PROFILING
 KBUILD_CFLAGS += $(cflags-y)
 =======
+=======
+>>>>>>> v3.18
 targets	:= vmlinux.lds vmlinux vmlinux.bin vmlinux.bin.gz vmlinux.bin.bz2
 targets += vmlinux.bin.xz vmlinux.bin.lzma vmlinux.bin.lzo vmlinux.bin.lz4
 targets += misc.o piggy.o sizes.h head$(BITS).o
@@ -22,6 +25,9 @@ targets += misc.o piggy.o sizes.h head$(BITS).o
 KBUILD_CFLAGS := -m$(BITS) -D__KERNEL__ $(LINUX_INCLUDE) -O2
 KBUILD_CFLAGS += -DDISABLE_BRANCH_PROFILING
 KBUILD_CFLAGS += $(cflags-y) -fno-delete-null-pointer-checks
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 KBUILD_CFLAGS += $(call cc-option,-mpacked-stack)
 KBUILD_CFLAGS += $(call cc-option,-ffreestanding)
@@ -59,6 +65,10 @@ vmlinux.bin.all-y := $(obj)/vmlinux.bin
 suffix-$(CONFIG_KERNEL_GZIP)  := gz
 suffix-$(CONFIG_KERNEL_BZIP2) := bz2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+suffix-$(CONFIG_KERNEL_LZ4)  := lz4
+>>>>>>> v3.18
 =======
 suffix-$(CONFIG_KERNEL_LZ4)  := lz4
 >>>>>>> v3.18
@@ -71,6 +81,11 @@ $(obj)/vmlinux.bin.gz: $(vmlinux.bin.all-y)
 $(obj)/vmlinux.bin.bz2: $(vmlinux.bin.all-y)
 	$(call if_changed,bzip2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+$(obj)/vmlinux.bin.lz4: $(vmlinux.bin.all-y)
+	$(call if_changed,lz4)
+>>>>>>> v3.18
 =======
 $(obj)/vmlinux.bin.lz4: $(vmlinux.bin.all-y)
 	$(call if_changed,lz4)

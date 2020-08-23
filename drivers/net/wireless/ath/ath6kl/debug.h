@@ -51,16 +51,22 @@ enum ATH6K_DEBUG_MASK {
 
 extern unsigned int debug_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __printf(2, 3)
 int ath6kl_printk(const char *level, const char *fmt, ...);
 extern __printf(1, 2) int ath6kl_info(const char *fmt, ...);
 extern __printf(1, 2) int ath6kl_err(const char *fmt, ...);
 extern __printf(1, 2) int ath6kl_warn(const char *fmt, ...);
 =======
+=======
+>>>>>>> v3.18
 __printf(2, 3) int ath6kl_printk(const char *level, const char *fmt, ...);
 __printf(1, 2) int ath6kl_info(const char *fmt, ...);
 __printf(1, 2) int ath6kl_err(const char *fmt, ...);
 __printf(1, 2) int ath6kl_warn(const char *fmt, ...);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum ath6kl_war {
@@ -106,8 +112,13 @@ static inline void ath6kl_dump_registers(struct ath6kl_device *dev,
 		struct ath6kl_irq_enable_reg *irq_en_reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }
+=======
+}
+
+>>>>>>> v3.18
 =======
 }
 

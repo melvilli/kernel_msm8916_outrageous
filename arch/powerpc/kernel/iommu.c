@@ -37,6 +37,11 @@
 #include <linux/fault-inject.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/iommu.h>
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/iommu.h>
 #include <linux/sched.h>
@@ -50,6 +55,10 @@
 #include <asm/fadump.h>
 #include <asm/vio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/tce.h>
+>>>>>>> v3.18
 =======
 #include <asm/tce.h>
 >>>>>>> v3.18
@@ -112,7 +121,11 @@ static int __init fail_iommu_debugfs(void)
 						       NULL, &fail_iommu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(dir);
+=======
+	return PTR_ERR_OR_ZERO(dir);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dir);
 >>>>>>> v3.18
@@ -262,6 +275,7 @@ again:
 	if (dev)
 		boundary_size = ALIGN(dma_get_seg_boundary(dev) + 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      1 << IOMMU_PAGE_SHIFT);
 	else
 		boundary_size = ALIGN(1UL << 32, 1 << IOMMU_PAGE_SHIFT);
@@ -271,6 +285,8 @@ again:
 			     tbl->it_offset, boundary_size >> IOMMU_PAGE_SHIFT,
 			     align_mask);
 =======
+=======
+>>>>>>> v3.18
 				      1 << tbl->it_page_shift);
 	else
 		boundary_size = ALIGN(1UL << 32, 1 << tbl->it_page_shift);
@@ -278,6 +294,9 @@ again:
 
 	n = iommu_area_alloc(tbl->it_map, limit, start, npages, tbl->it_offset,
 			     boundary_size >> tbl->it_page_shift, align_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (n == -1) {
 		if (likely(pass == 0)) {
@@ -341,6 +360,7 @@ static dma_addr_t iommu_alloc(struct device *dev, struct iommu_table *tbl,
 
 	entry += tbl->it_offset;	/* Offset into real TCE table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = entry << IOMMU_PAGE_SHIFT;	/* Set the return dma address */
 
 	/* Put the TCEs in the HW table */
@@ -348,12 +368,17 @@ static dma_addr_t iommu_alloc(struct device *dev, struct iommu_table *tbl,
 	                              (unsigned long)page & IOMMU_PAGE_MASK,
 	                              direction, attrs);
 =======
+=======
+>>>>>>> v3.18
 	ret = entry << tbl->it_page_shift;	/* Set the return dma address */
 
 	/* Put the TCEs in the HW table */
 	build_fail = ppc_md.tce_build(tbl, entry, npages,
 				      (unsigned long)page &
 				      IOMMU_PAGE_MASK(tbl), direction, attrs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ppc_md.tce_build() only returns non-zero for transient errors.
@@ -382,7 +407,11 @@ static bool iommu_free_check(struct iommu_table *tbl, dma_addr_t dma_addr,
 	unsigned long entry, free_entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry = dma_addr >> IOMMU_PAGE_SHIFT;
+=======
+	entry = dma_addr >> tbl->it_page_shift;
+>>>>>>> v3.18
 =======
 	entry = dma_addr >> tbl->it_page_shift;
 >>>>>>> v3.18
@@ -435,7 +464,11 @@ static void __iommu_free(struct iommu_table *tbl, dma_addr_t dma_addr,
 	struct iommu_pool *pool;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry = dma_addr >> IOMMU_PAGE_SHIFT;
+=======
+	entry = dma_addr >> tbl->it_page_shift;
+>>>>>>> v3.18
 =======
 	entry = dma_addr >> tbl->it_page_shift;
 >>>>>>> v3.18
@@ -506,6 +539,7 @@ int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
 		/* Allocate iommu entries for that segment */
 		vaddr = (unsigned long) sg_virt(s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		npages = iommu_num_pages(vaddr, slen, IOMMU_PAGE_SIZE);
 		align = 0;
 		if (IOMMU_PAGE_SHIFT < PAGE_SHIFT && slen >= PAGE_SIZE &&
@@ -514,6 +548,8 @@ int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
 		entry = iommu_range_alloc(dev, tbl, npages, &handle,
 					  mask >> IOMMU_PAGE_SHIFT, align);
 =======
+=======
+>>>>>>> v3.18
 		npages = iommu_num_pages(vaddr, slen, IOMMU_PAGE_SIZE(tbl));
 		align = 0;
 		if (tbl->it_page_shift < PAGE_SHIFT && slen >= PAGE_SIZE &&
@@ -521,6 +557,9 @@ int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
 			align = PAGE_SHIFT - tbl->it_page_shift;
 		entry = iommu_range_alloc(dev, tbl, npages, &handle,
 					  mask >> tbl->it_page_shift, align);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		DBG("  - vaddr: %lx, size: %lx\n", vaddr, slen);
@@ -537,8 +576,13 @@ int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
 		/* Convert entry to a dma_addr_t */
 		entry += tbl->it_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_addr = entry << IOMMU_PAGE_SHIFT;
 		dma_addr |= (s->offset & ~IOMMU_PAGE_MASK);
+=======
+		dma_addr = entry << tbl->it_page_shift;
+		dma_addr |= (s->offset & ~IOMMU_PAGE_MASK(tbl));
+>>>>>>> v3.18
 =======
 		dma_addr = entry << tbl->it_page_shift;
 		dma_addr |= (s->offset & ~IOMMU_PAGE_MASK(tbl));
@@ -550,8 +594,13 @@ int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
 		/* Insert into HW table */
 		build_fail = ppc_md.tce_build(tbl, entry, npages,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		                              vaddr & IOMMU_PAGE_MASK,
 		                              direction, attrs);
+=======
+					      vaddr & IOMMU_PAGE_MASK(tbl),
+					      direction, attrs);
+>>>>>>> v3.18
 =======
 					      vaddr & IOMMU_PAGE_MASK(tbl),
 					      direction, attrs);
@@ -617,9 +666,15 @@ int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
 			unsigned long vaddr, npages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vaddr = s->dma_address & IOMMU_PAGE_MASK;
 			npages = iommu_num_pages(s->dma_address, s->dma_length,
 						 IOMMU_PAGE_SIZE);
+=======
+			vaddr = s->dma_address & IOMMU_PAGE_MASK(tbl);
+			npages = iommu_num_pages(s->dma_address, s->dma_length,
+						 IOMMU_PAGE_SIZE(tbl));
+>>>>>>> v3.18
 =======
 			vaddr = s->dma_address & IOMMU_PAGE_MASK(tbl);
 			npages = iommu_num_pages(s->dma_address, s->dma_length,
@@ -656,7 +711,11 @@ void iommu_unmap_sg(struct iommu_table *tbl, struct scatterlist *sglist,
 			break;
 		npages = iommu_num_pages(dma_handle, sg->dma_length,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 IOMMU_PAGE_SIZE);
+=======
+					 IOMMU_PAGE_SIZE(tbl));
+>>>>>>> v3.18
 =======
 					 IOMMU_PAGE_SIZE(tbl));
 >>>>>>> v3.18
@@ -744,7 +803,11 @@ struct iommu_table *iommu_init_table(struct iommu_table *tbl, int nid)
 
 	/* We only split the IOMMU table if we have 1GB or more of space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((tbl->it_size << IOMMU_PAGE_SHIFT) >= (1UL * 1024 * 1024 * 1024))
+=======
+	if ((tbl->it_size << tbl->it_page_shift) >= (1UL * 1024 * 1024 * 1024))
+>>>>>>> v3.18
 =======
 	if ((tbl->it_size << tbl->it_page_shift) >= (1UL * 1024 * 1024 * 1024))
 >>>>>>> v3.18
@@ -799,7 +862,10 @@ void iommu_free_table(struct iommu_table *tbl, const char *node_name)
 		clear_bit(0, tbl->it_map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IOMMU_API
 	if (tbl->it_group) {
 		iommu_group_put(tbl->it_group);
@@ -807,6 +873,9 @@ void iommu_free_table(struct iommu_table *tbl, const char *node_name)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* verify that table contains no entries */
 	if (!bitmap_empty(tbl->it_map, tbl->it_size))
@@ -843,6 +912,7 @@ dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
 	vaddr = page_address(page) + offset;
 	uaddr = (unsigned long)vaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	npages = iommu_num_pages(uaddr, size, IOMMU_PAGE_SIZE);
 
 	if (tbl) {
@@ -854,6 +924,8 @@ dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
 		dma_handle = iommu_alloc(dev, tbl, vaddr, npages, direction,
 					 mask >> IOMMU_PAGE_SHIFT, align,
 =======
+=======
+>>>>>>> v3.18
 	npages = iommu_num_pages(uaddr, size, IOMMU_PAGE_SIZE(tbl));
 
 	if (tbl) {
@@ -864,6 +936,9 @@ dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
 
 		dma_handle = iommu_alloc(dev, tbl, vaddr, npages, direction,
 					 mask >> tbl->it_page_shift, align,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 attrs);
 		if (dma_handle == DMA_ERROR_CODE) {
@@ -874,7 +949,11 @@ dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
 			}
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_handle |= (uaddr & ~IOMMU_PAGE_MASK);
+=======
+			dma_handle |= (uaddr & ~IOMMU_PAGE_MASK(tbl));
+>>>>>>> v3.18
 =======
 			dma_handle |= (uaddr & ~IOMMU_PAGE_MASK(tbl));
 >>>>>>> v3.18
@@ -893,7 +972,12 @@ void iommu_unmap_page(struct iommu_table *tbl, dma_addr_t dma_handle,
 
 	if (tbl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		npages = iommu_num_pages(dma_handle, size, IOMMU_PAGE_SIZE);
+=======
+		npages = iommu_num_pages(dma_handle, size,
+					 IOMMU_PAGE_SIZE(tbl));
+>>>>>>> v3.18
 =======
 		npages = iommu_num_pages(dma_handle, size,
 					 IOMMU_PAGE_SIZE(tbl));
@@ -942,15 +1026,21 @@ void *iommu_alloc_coherent(struct device *dev, struct iommu_table *tbl,
 
 	/* Set up tces to cover the allocated range */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nio_pages = size >> IOMMU_PAGE_SHIFT;
 	io_order = get_iommu_order(size);
 	mapping = iommu_alloc(dev, tbl, ret, nio_pages, DMA_BIDIRECTIONAL,
 			      mask >> IOMMU_PAGE_SHIFT, io_order, NULL);
 =======
+=======
+>>>>>>> v3.18
 	nio_pages = size >> tbl->it_page_shift;
 	io_order = get_iommu_order(size, tbl);
 	mapping = iommu_alloc(dev, tbl, ret, nio_pages, DMA_BIDIRECTIONAL,
 			      mask >> tbl->it_page_shift, io_order, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mapping == DMA_ERROR_CODE) {
 		free_pages((unsigned long)ret, order);
@@ -968,7 +1058,11 @@ void iommu_free_coherent(struct iommu_table *tbl, size_t size,
 
 		size = PAGE_ALIGN(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nio_pages = size >> IOMMU_PAGE_SHIFT;
+=======
+		nio_pages = size >> tbl->it_page_shift;
+>>>>>>> v3.18
 =======
 		nio_pages = size >> tbl->it_page_shift;
 >>>>>>> v3.18
@@ -978,7 +1072,10 @@ void iommu_free_coherent(struct iommu_table *tbl, size_t size,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_IOMMU_API
 /*
@@ -1285,4 +1382,7 @@ void iommu_del_device(struct device *dev)
 EXPORT_SYMBOL_GPL(iommu_del_device);
 
 #endif /* CONFIG_IOMMU_API */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

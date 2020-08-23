@@ -923,7 +923,11 @@ static void __init get_mac_address(struct net_device *dev)
 	struct w90p910_ether *ether = netdev_priv(dev);
 	struct platform_device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char addr[6];
+=======
+	char addr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	char addr[ETH_ALEN];
 >>>>>>> v3.18
@@ -939,7 +943,11 @@ static void __init get_mac_address(struct net_device *dev)
 
 	if (is_valid_ether_addr(addr))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(dev->dev_addr, &addr, 0x06);
+=======
+		memcpy(dev->dev_addr, &addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(dev->dev_addr, &addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -952,7 +960,10 @@ static int w90p910_ether_setup(struct net_device *dev)
 	struct w90p910_ether *ether = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->netdev_ops = &w90p910_ether_netdev_ops;
@@ -1026,7 +1037,11 @@ static int w90p910_ether_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to get ether rx irq\n");
 		error = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed_free_txirq;
+=======
+		goto failed_free_io;
+>>>>>>> v3.18
 =======
 		goto failed_free_io;
 >>>>>>> v3.18
@@ -1039,7 +1054,11 @@ static int w90p910_ether_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to get ether clock\n");
 		error = PTR_ERR(ether->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed_free_rxirq;
+=======
+		goto failed_free_io;
+>>>>>>> v3.18
 =======
 		goto failed_free_io;
 >>>>>>> v3.18
@@ -1069,11 +1088,14 @@ failed_put_rmiiclk:
 failed_put_clk:
 	clk_put(ether->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 failed_free_rxirq:
 	free_irq(ether->rxirq, pdev);
 	platform_set_drvdata(pdev, NULL);
 failed_free_txirq:
 	free_irq(ether->txirq, pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 failed_free_io:
@@ -1099,11 +1121,15 @@ static int w90p910_ether_remove(struct platform_device *pdev)
 	release_mem_region(ether->res->start, resource_size(ether->res));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(ether->txirq, dev);
 	free_irq(ether->rxirq, dev);
 
 	del_timer_sync(&ether->check_timer);
 	platform_set_drvdata(pdev, NULL);
+=======
+	del_timer_sync(&ether->check_timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&ether->check_timer);
 >>>>>>> v3.18

@@ -72,7 +72,10 @@ static unsigned short keymap_Lifebook_Tseries[KEYMAP_LEN] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned short keymap_Lifebook_T901[KEYMAP_LEN] __initdata = {
 	KEY_RESERVED,
 	KEY_RESERVED,
@@ -111,6 +114,9 @@ static unsigned short keymap_Lifebook_T902[KEYMAP_LEN] __initdata = {
 	KEY_RESERVED,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned short keymap_Lifebook_U810[KEYMAP_LEN] __initdata = {
 	KEY_RESERVED,
@@ -319,7 +325,11 @@ static irqreturn_t fujitsu_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fujitsu_dmi_common(const struct dmi_system_id *dmi)
+=======
+static void __init fujitsu_dmi_common(const struct dmi_system_id *dmi)
+>>>>>>> v3.18
 =======
 static void __init fujitsu_dmi_common(const struct dmi_system_id *dmi)
 >>>>>>> v3.18
@@ -330,7 +340,11 @@ static void __init fujitsu_dmi_common(const struct dmi_system_id *dmi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fujitsu_dmi_lifebook(const struct dmi_system_id *dmi)
+=======
+static int __init fujitsu_dmi_lifebook(const struct dmi_system_id *dmi)
+>>>>>>> v3.18
 =======
 static int __init fujitsu_dmi_lifebook(const struct dmi_system_id *dmi)
 >>>>>>> v3.18
@@ -341,7 +355,11 @@ static int __init fujitsu_dmi_lifebook(const struct dmi_system_id *dmi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fujitsu_dmi_stylistic(const struct dmi_system_id *dmi)
+=======
+static int __init fujitsu_dmi_stylistic(const struct dmi_system_id *dmi)
+>>>>>>> v3.18
 =======
 static int __init fujitsu_dmi_stylistic(const struct dmi_system_id *dmi)
 >>>>>>> v3.18
@@ -356,7 +374,10 @@ static const struct dmi_system_id dmi_ids[] __initconst = {
 	{
 		.callback = fujitsu_dmi_lifebook,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.ident = "Fujitsu Lifebook T901",
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "FUJITSU"),
@@ -384,6 +405,9 @@ static const struct dmi_system_id dmi_ids[] __initconst = {
 	},
 	{
 		.callback = fujitsu_dmi_lifebook,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ident = "Fujitsu Siemens P/T Series",
 		.matches = {

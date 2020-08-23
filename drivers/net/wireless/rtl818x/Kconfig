@@ -3,17 +3,23 @@
 #
 config RTL8180
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Realtek 8180/8185 PCI support"
 	depends on MAC80211 && PCI
 	select EEPROM_93CX6
 	---help---
 	  This is a driver for RTL8180 and RTL8185 based cards.
 =======
+=======
+>>>>>>> v3.18
 	tristate "Realtek 8180/8185/8187SE PCI support"
 	depends on MAC80211 && PCI
 	select EEPROM_93CX6
 	---help---
 	  This is a driver for RTL8180, RTL8185 and RTL8187SE based cards.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  These are PCI based chips found in cards such as:
 

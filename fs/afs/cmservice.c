@@ -131,7 +131,10 @@ static void afs_cm_destructor(struct afs_call *call)
 	_enter("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Break the callbacks here so that we do it after the final ACK is
 	 * received.  The step number here must match the final number in
 	 * afs_deliver_cb_callback().
@@ -141,6 +144,9 @@ static void afs_cm_destructor(struct afs_call *call)
 		afs_break_callbacks(call->server, call->count, call->request);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	afs_put_server(call->server);
 	call->server = NULL;
@@ -285,7 +291,10 @@ static int afs_deliver_cb_callback(struct afs_call *call, struct sk_buff *skb,
 		if (skb->len != 0)
 			return -EBADMSG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Record that the message was unmarshalled successfully so
 		 * that the call destructor can know do the callback breaking
@@ -296,6 +305,9 @@ static int afs_deliver_cb_callback(struct afs_call *call, struct sk_buff *skb,
 		 */
 		call->unmarshall++;
 	case 6:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Amon support
  */
 
@@ -7,6 +8,8 @@ int amon_cpu_avail(int);
 void amon_cpu_start(int, unsigned long, unsigned long,
 		    unsigned long, unsigned long);
 =======
+=======
+>>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file "COPYING" in the main directory of this archive
  * for more details.
@@ -18,4 +21,7 @@ void amon_cpu_start(int, unsigned long, unsigned long,
 int amon_cpu_avail(int cpu);
 int amon_cpu_start(int cpu, unsigned long pc, unsigned long sp,
 		   unsigned long gp, unsigned long a0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

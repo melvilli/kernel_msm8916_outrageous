@@ -49,7 +49,11 @@ static int tc6387xb_suspend(struct platform_device *dev, pm_message_t state)
 {
 	struct tc6387xb *tc6387xb = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6387xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct tc6387xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tc6387xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ static int tc6387xb_resume(struct platform_device *dev)
 {
 	struct tc6387xb *tc6387xb = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6387xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct tc6387xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tc6387xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -135,7 +143,11 @@ static struct tmio_mmc_data tc6387xb_mmc_data = {
 /*--------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell tc6387xb_cells[] = {
+=======
+static const struct mfd_cell tc6387xb_cells[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell tc6387xb_cells[] = {
 >>>>>>> v3.18
@@ -153,7 +165,11 @@ static const struct mfd_cell tc6387xb_cells[] = {
 static int tc6387xb_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6387xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct tc6387xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tc6387xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -164,16 +180,22 @@ static int tc6387xb_probe(struct platform_device *dev)
 
 	iomem = platform_get_resource(dev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!iomem) {
 		return -EINVAL;
 	}
 
 	tc6387xb = kzalloc(sizeof *tc6387xb, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (!iomem)
 		return -EINVAL;
 
 	tc6387xb = kzalloc(sizeof(*tc6387xb), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!tc6387xb)
 		return -ENOMEM;
@@ -213,7 +235,11 @@ static int tc6387xb_probe(struct platform_device *dev)
 		pdata->enable(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Toshiba tc6387xb initialised\n");
+=======
+	dev_info(&dev->dev, "Toshiba tc6387xb initialised\n");
+>>>>>>> v3.18
 =======
 	dev_info(&dev->dev, "Toshiba tc6387xb initialised\n");
 >>>>>>> v3.18
@@ -245,7 +271,10 @@ static int tc6387xb_remove(struct platform_device *dev)
 	clk_disable(tc6387xb->clk32k);
 	clk_put(tc6387xb->clk32k);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(tc6387xb);

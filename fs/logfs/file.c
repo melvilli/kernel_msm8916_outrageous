@@ -160,7 +160,12 @@ static int logfs_writepage(struct page *page, struct writeback_control *wbc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void logfs_invalidatepage(struct page *page, unsigned long offset)
+=======
+static void logfs_invalidatepage(struct page *page, unsigned int offset,
+				 unsigned int length)
+>>>>>>> v3.18
 =======
 static void logfs_invalidatepage(struct page *page, unsigned int offset,
 				 unsigned int length)
@@ -269,8 +274,13 @@ const struct inode_operations logfs_reg_iops = {
 
 const struct file_operations logfs_reg_fops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.aio_read	= generic_file_aio_read,
 	.aio_write	= generic_file_aio_write,
+=======
+	.read_iter	= generic_file_read_iter,
+	.write_iter	= generic_file_write_iter,
+>>>>>>> v3.18
 =======
 	.read_iter	= generic_file_read_iter,
 	.write_iter	= generic_file_write_iter,
@@ -281,8 +291,13 @@ const struct file_operations logfs_reg_fops = {
 	.mmap		= generic_file_readonly_mmap,
 	.open		= generic_file_open,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
+=======
+	.read		= new_sync_read,
+	.write		= new_sync_write,
+>>>>>>> v3.18
 =======
 	.read		= new_sync_read,
 	.write		= new_sync_write,

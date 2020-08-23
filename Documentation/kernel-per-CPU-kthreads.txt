@@ -158,7 +158,10 @@ RCU_SOFTIRQ:  Do at least one of the following:
 		to execute elsewhere.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Name: kworker/%u:%d%s (cpu, id, priority)
 Purpose: Execute workqueue requests
 To reduce its OS jitter, do any of the following:
@@ -222,6 +225,9 @@ To reduce its OS jitter, do any of the following:
 		CONFIG_PMAC_RACKMETER=n to disable the CPU-meter,
 		avoiding OS jitter from rackmeter_do_timer().
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Name: rcuc/%u
 Purpose: Execute RCU callbacks in CONFIG_RCU_BOOST=y kernels.
@@ -252,7 +258,11 @@ To reduce its OS jitter, do at least one of the following:
 1.	Use affinity, cgroups, or other mechanism to force these kthreads
 	to execute on some other CPU.
 <<<<<<< HEAD
+<<<<<<< HEAD
 2.	Build with CONFIG_RCU_NOCB_CPUS=n, which will prevent these
+=======
+2.	Build with CONFIG_RCU_NOCB_CPU=n, which will prevent these
+>>>>>>> v3.18
 =======
 2.	Build with CONFIG_RCU_NOCB_CPU=n, which will prevent these
 >>>>>>> v3.18

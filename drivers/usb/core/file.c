@@ -9,7 +9,11 @@
  * (C) Copyright Randy Dunlap 2000
  * (C) Copyright David Brownell 2000-2001 (kernel hotplug, usb_device_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
  	more docs, etc)
+=======
+ *	more docs, etc)
+>>>>>>> v3.18
 =======
  *	more docs, etc)
 >>>>>>> v3.18
@@ -31,6 +35,7 @@
 static const struct file_operations *usb_minors[MAX_USB_MINORS];
 static DECLARE_RWSEM(minor_rwsem);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int usb_open(struct inode * inode, struct file * file)
 {
@@ -56,6 +61,8 @@ static int usb_open(struct inode * inode, struct file * file)
 	}
 	fops_put(old_fops);
 =======
+=======
+>>>>>>> v3.18
 static int usb_open(struct inode *inode, struct file *file)
 {
 	int err = -ENODEV;
@@ -71,6 +78,9 @@ static int usb_open(struct inode *inode, struct file *file)
 	/* Curiouser and curiouser... NULL ->open() as "no device" ? */
 	if (file->f_op->open)
 		err = file->f_op->open(inode, file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  done:
 	up_read(&minor_rwsem);
@@ -117,7 +127,11 @@ static int init_usb_class(void)
 	usb_class->class = class_create(THIS_MODULE, "usbmisc");
 	if (IS_ERR(usb_class->class)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = IS_ERR(usb_class->class);
+=======
+		result = PTR_ERR(usb_class->class);
+>>>>>>> v3.18
 =======
 		result = PTR_ERR(usb_class->class);
 >>>>>>> v3.18
@@ -180,7 +194,11 @@ void usb_major_cleanup(void)
  * the minor numbers given out by this function.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns -EINVAL if something bad happens with trying to register a
+=======
+ * Return: -EINVAL if something bad happens with trying to register a
+>>>>>>> v3.18
 =======
  * Return: -EINVAL if something bad happens with trying to register a
 >>>>>>> v3.18
@@ -197,7 +215,11 @@ int usb_register_dev(struct usb_interface *intf,
 
 #ifdef CONFIG_USB_DYNAMIC_MINORS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 
+=======
+	/*
+>>>>>>> v3.18
 =======
 	/*
 >>>>>>> v3.18

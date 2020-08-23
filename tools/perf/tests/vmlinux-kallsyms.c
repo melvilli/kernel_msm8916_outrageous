@@ -17,6 +17,11 @@ static int vmlinux_matches_kallsyms_filter(struct map *map __maybe_unused,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UM(x) kallsyms_map->unmap_ip(kallsyms_map, (x))
+
+>>>>>>> v3.18
 =======
 #define UM(x) kallsyms_map->unmap_ip(kallsyms_map, (x))
 
@@ -30,7 +35,11 @@ int test__vmlinux_matches_kallsyms(void)
 	struct machine kallsyms, vmlinux;
 	enum map_type type = MAP__FUNCTION;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ref_reloc_sym ref_reloc_sym = { .name = "_stext", };
+=======
+	u64 mem_start, mem_end;
+>>>>>>> v3.18
 =======
 	u64 mem_start, mem_end;
 >>>>>>> v3.18
@@ -77,6 +86,7 @@ int test__vmlinux_matches_kallsyms(void)
 	kallsyms_map = machine__kernel_map(&kallsyms, type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sym = map__find_symbol_by_name(kallsyms_map, ref_reloc_sym.name, NULL);
 	if (sym == NULL) {
 		pr_debug("dso__find_symbol_by_name ");
@@ -85,6 +95,8 @@ int test__vmlinux_matches_kallsyms(void)
 
 	ref_reloc_sym.addr = sym->start;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -99,7 +111,10 @@ int test__vmlinux_matches_kallsyms(void)
 
 	vmlinux_map = machine__kernel_map(&vmlinux, type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map__kmap(vmlinux_map)->ref_reloc_sym = &ref_reloc_sym;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -139,11 +154,14 @@ int test__vmlinux_matches_kallsyms(void)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		first_pair = machine__find_kernel_symbol(&kallsyms, type, sym->start, NULL, NULL);
 		pair = first_pair;
 
 		if (pair && pair->start == sym->start) {
 =======
+=======
+>>>>>>> v3.18
 		mem_start = vmlinux_map->unmap_ip(vmlinux_map, sym->start);
 		mem_end = vmlinux_map->unmap_ip(vmlinux_map, sym->end);
 
@@ -152,6 +170,9 @@ int test__vmlinux_matches_kallsyms(void)
 		pair = first_pair;
 
 		if (pair && UM(pair->start) == mem_start) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 next_pair:
 			if (strcmp(sym->name, pair->name) == 0) {
@@ -165,6 +186,7 @@ next_pair:
 				 * _really_ have a problem.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				s64 skew = sym->end - pair->end;
 				if (llabs(skew) < page_size)
 					continue;
@@ -172,6 +194,8 @@ next_pair:
 				pr_debug("%#" PRIx64 ": diff end addr for %s v: %#" PRIx64 " k: %#" PRIx64 "\n",
 					 sym->start, sym->name, sym->end, pair->end);
 =======
+=======
+>>>>>>> v3.18
 				s64 skew = mem_end - UM(pair->end);
 				if (llabs(skew) >= page_size)
 					pr_debug("%#" PRIx64 ": diff end addr for %s v: %#" PRIx64 " k: %#" PRIx64 "\n",
@@ -186,6 +210,9 @@ next_pair:
 				 */
 				continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				struct rb_node *nnd;
@@ -196,7 +223,11 @@ detour:
 					struct symbol *next = rb_entry(nnd, struct symbol, rb_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (next->start == sym->start) {
+=======
+					if (UM(next->start) == mem_start) {
+>>>>>>> v3.18
 =======
 					if (UM(next->start) == mem_start) {
 >>>>>>> v3.18
@@ -213,16 +244,22 @@ detour:
 
 				pr_debug("%#" PRIx64 ": diff name v: %s k: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 sym->start, sym->name, pair->name);
 			}
 		} else
 			pr_debug("%#" PRIx64 ": %s not on kallsyms\n", sym->start, sym->name);
 =======
+=======
+>>>>>>> v3.18
 					 mem_start, sym->name, pair->name);
 			}
 		} else
 			pr_debug("%#" PRIx64 ": %s not on kallsyms\n",
 				 mem_start, sym->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		err = -1;
@@ -257,6 +294,7 @@ detour:
 		struct map *pos = rb_entry(nd, struct map, rb_node), *pair;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pair = map_groups__find(&kallsyms.kmaps, type, pos->start);
 		if (pair == NULL || pair->priv)
 			continue;
@@ -268,6 +306,8 @@ detour:
 			if (pos->pgoff != pair->pgoff || pos->end != pair->end)
 				pr_info(": \n*%" PRIx64 "-%" PRIx64 " %" PRIx64 "",
 =======
+=======
+>>>>>>> v3.18
 		mem_start = vmlinux_map->unmap_ip(vmlinux_map, pos->start);
 		mem_end = vmlinux_map->unmap_ip(vmlinux_map, pos->end);
 
@@ -281,6 +321,9 @@ detour:
 				pos->start, pos->end, pos->pgoff, pos->dso->name);
 			if (mem_end != pair->end)
 				pr_info(":\n*%" PRIx64 "-%" PRIx64 " %" PRIx64,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					pair->start, pair->end, pair->pgoff);
 			pr_info(" %s\n", pair->dso->name);

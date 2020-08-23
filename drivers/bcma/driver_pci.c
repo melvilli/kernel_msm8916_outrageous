@@ -32,7 +32,11 @@ static void bcma_pcie_write(struct bcma_drv_pci *pc, u32 address, u32 data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bcma_pcie_mdio_set_phy(struct bcma_drv_pci *pc, u8 phy)
+=======
+static void bcma_pcie_mdio_set_phy(struct bcma_drv_pci *pc, u16 phy)
+>>>>>>> v3.18
 =======
 static void bcma_pcie_mdio_set_phy(struct bcma_drv_pci *pc, u16 phy)
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static void bcma_pcie_mdio_set_phy(struct bcma_drv_pci *pc, u16 phy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 bcma_pcie_mdio_read(struct bcma_drv_pci *pc, u8 device, u8 address)
+=======
+static u16 bcma_pcie_mdio_read(struct bcma_drv_pci *pc, u16 device, u8 address)
+>>>>>>> v3.18
 =======
 static u16 bcma_pcie_mdio_read(struct bcma_drv_pci *pc, u16 device, u8 address)
 >>>>>>> v3.18
@@ -107,7 +115,11 @@ static u16 bcma_pcie_mdio_read(struct bcma_drv_pci *pc, u16 device, u8 address)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bcma_pcie_mdio_write(struct bcma_drv_pci *pc, u8 device,
+=======
+static void bcma_pcie_mdio_write(struct bcma_drv_pci *pc, u16 device,
+>>>>>>> v3.18
 =======
 static void bcma_pcie_mdio_write(struct bcma_drv_pci *pc, u16 device,
 >>>>>>> v3.18
@@ -150,7 +162,10 @@ static void bcma_pcie_mdio_write(struct bcma_drv_pci *pc, u16 device,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u16 bcma_pcie_mdio_writeread(struct bcma_drv_pci *pc, u16 device,
 				    u8 address, u16 data)
 {
@@ -158,6 +173,9 @@ static u16 bcma_pcie_mdio_writeread(struct bcma_drv_pci *pc, u16 device,
 	return bcma_pcie_mdio_read(pc, device, address);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**************************************************
  * Workarounds.
@@ -252,7 +270,10 @@ void bcma_core_pci_init(struct bcma_drv_pci *pc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void bcma_core_pci_power_save(struct bcma_bus *bus, bool up)
 {
 	struct bcma_drv_pci *pc;
@@ -279,6 +300,9 @@ void bcma_core_pci_power_save(struct bcma_bus *bus, bool up)
 }
 EXPORT_SYMBOL_GPL(bcma_core_pci_power_save);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int bcma_core_pci_irq_ctl(struct bcma_drv_pci *pc, struct bcma_device *core,
 			  bool enable)
@@ -314,7 +338,11 @@ out:
 EXPORT_SYMBOL_GPL(bcma_core_pci_irq_ctl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bcma_core_pci_extend_L1timer(struct bcma_drv_pci *pc, bool extend)
+=======
+static void bcma_core_pci_extend_L1timer(struct bcma_drv_pci *pc, bool extend)
+>>>>>>> v3.18
 =======
 static void bcma_core_pci_extend_L1timer(struct bcma_drv_pci *pc, bool extend)
 >>>>>>> v3.18
@@ -330,8 +358,11 @@ static void bcma_core_pci_extend_L1timer(struct bcma_drv_pci *pc, bool extend)
 	bcma_pcie_read(pc, BCMA_CORE_PCI_DLLP_PMTHRESHREG);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(bcma_core_pci_extend_L1timer);
 =======
+=======
+>>>>>>> v3.18
 
 void bcma_core_pci_up(struct bcma_bus *bus)
 {
@@ -358,4 +389,7 @@ void bcma_core_pci_down(struct bcma_bus *bus)
 	bcma_core_pci_extend_L1timer(pc, false);
 }
 EXPORT_SYMBOL_GPL(bcma_core_pci_down);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

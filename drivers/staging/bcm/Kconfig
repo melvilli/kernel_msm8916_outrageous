@@ -2,7 +2,10 @@ config BCM_WIMAX
        tristate "Beceem BCS200/BCS220-3 and BCSM250 wimax support"
        depends on USB && NET
 <<<<<<< HEAD
+<<<<<<< HEAD
        default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
        help

@@ -4,7 +4,10 @@
 extern void timer_init(int irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __init icu_init_irq(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void __init mmp_map_io(void);

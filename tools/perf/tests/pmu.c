@@ -153,7 +153,11 @@ int test__pmu(void)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = perf_pmu__config_terms(&formats, &attr, terms);
+=======
+		ret = perf_pmu__config_terms(&formats, &attr, terms, false);
+>>>>>>> v3.18
 =======
 		ret = perf_pmu__config_terms(&formats, &attr, terms, false);
 >>>>>>> v3.18

@@ -92,8 +92,12 @@ void __init add_static_vm_early(struct static_vm *svm)
 
 	vm = &svm->vm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vm_area_check_early(vm))
 		vm_area_add_early(vm);
+=======
+	vm_area_add_early(vm);
+>>>>>>> v3.18
 =======
 	vm_area_add_early(vm);
 >>>>>>> v3.18
@@ -117,6 +121,7 @@ int ioremap_page(unsigned long virt, unsigned long phys,
 EXPORT_SYMBOL(ioremap_page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ioremap_pages(unsigned long virt, unsigned long phys, unsigned long size,
 		 const struct mem_type *mtype)
 {
@@ -125,6 +130,8 @@ int ioremap_pages(unsigned long virt, unsigned long phys, unsigned long size,
 }
 EXPORT_SYMBOL(ioremap_pages);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __check_vmalloc_seq(struct mm_struct *mm)
@@ -352,7 +359,11 @@ void __iomem *__arm_ioremap_caller(phys_addr_t phys_addr, size_t size,
 {
 	phys_addr_t last_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long offset = phys_addr & ~PAGE_MASK;
+=======
+ 	unsigned long offset = phys_addr & ~PAGE_MASK;
+>>>>>>> v3.18
 =======
  	unsigned long offset = phys_addr & ~PAGE_MASK;
 >>>>>>> v3.18
@@ -413,9 +424,15 @@ __arm_ioremap_exec(phys_addr_t phys_addr, size_t size, bool cached)
 
 	if (cached)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mtype = MT_MEMORY;
 	else
 		mtype = MT_MEMORY_NONCACHED;
+=======
+		mtype = MT_MEMORY_RWX;
+	else
+		mtype = MT_MEMORY_RWX_NONCACHED;
+>>>>>>> v3.18
 =======
 		mtype = MT_MEMORY_RWX;
 	else
@@ -465,7 +482,10 @@ EXPORT_SYMBOL(__arm_iounmap);
 
 #ifdef CONFIG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pci_ioremap_mem_type = MT_DEVICE;
 
 void pci_ioremap_set_mem_type(int mem_type)
@@ -473,6 +493,9 @@ void pci_ioremap_set_mem_type(int mem_type)
 	pci_ioremap_mem_type = mem_type;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int pci_ioremap_io(unsigned int offset, phys_addr_t phys_addr)
 {
@@ -482,7 +505,11 @@ int pci_ioremap_io(unsigned int offset, phys_addr_t phys_addr)
 				  PCI_IO_VIRT_BASE + offset + SZ_64K,
 				  phys_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  __pgprot(get_mem_type(MT_DEVICE)->prot_pte));
+=======
+				  __pgprot(get_mem_type(pci_ioremap_mem_type)->prot_pte));
+>>>>>>> v3.18
 =======
 				  __pgprot(get_mem_type(pci_ioremap_mem_type)->prot_pte));
 >>>>>>> v3.18

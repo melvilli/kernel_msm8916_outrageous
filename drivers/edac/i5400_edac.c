@@ -7,7 +7,11 @@
  * Copyright (c) 2008 by:
  *	 Ben Woodard <woodard@redhat.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *	 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *	 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -1413,6 +1417,11 @@ static void i5400_remove_one(struct pci_dev *pdev)
 	i5400_put_devices(mci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_disable_device(pdev);
+
+>>>>>>> v3.18
 =======
 	pci_disable_device(pdev);
 
@@ -1426,7 +1435,11 @@ static void i5400_remove_one(struct pci_dev *pdev)
  *	The "E500P" device is the first device supported.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i5400_pci_tbl) = {
+=======
+static const struct pci_device_id i5400_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i5400_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1481,7 +1494,11 @@ module_exit(i5400_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Ben Woodard <woodard@redhat.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

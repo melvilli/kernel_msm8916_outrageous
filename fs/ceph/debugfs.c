@@ -72,9 +72,15 @@ static int mdsc_show(struct seq_file *s, void *p)
 
 		if (req->r_got_unsafe)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(s, "\t(unsafe)");
 		else
 			seq_printf(s, "\t");
+=======
+			seq_puts(s, "\t(unsafe)");
+		else
+			seq_puts(s, "\t");
+>>>>>>> v3.18
 =======
 			seq_puts(s, "\t(unsafe)");
 		else
@@ -100,6 +106,11 @@ static int mdsc_show(struct seq_file *s, void *p)
 			seq_printf(s, " #%llx/%s", req->r_ino1.ino,
 				   req->r_path1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		} else {
+			seq_printf(s, " #%llx", req->r_ino1.ino);
+>>>>>>> v3.18
 =======
 		} else {
 			seq_printf(s, " #%llx", req->r_ino1.ino);
@@ -114,7 +125,12 @@ static int mdsc_show(struct seq_file *s, void *p)
 			spin_lock(&req->r_old_dentry->d_lock);
 			seq_printf(s, " #%llx/%.*s (%s)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   ceph_ino(req->r_old_dentry_dir),
+=======
+				   req->r_old_dentry_dir ?
+				   ceph_ino(req->r_old_dentry_dir) : 0,
+>>>>>>> v3.18
 =======
 				   req->r_old_dentry_dir ?
 				   ceph_ino(req->r_old_dentry_dir) : 0,
@@ -133,7 +149,11 @@ static int mdsc_show(struct seq_file *s, void *p)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, "\n");
+=======
+		seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 		seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -176,7 +196,10 @@ static int dentry_lru_show(struct seq_file *s, void *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mds_sessions_show(struct seq_file *s, void *ptr)
 {
 	struct ceph_fs_client *fsc = s->private;
@@ -213,12 +236,19 @@ static int mds_sessions_show(struct seq_file *s, void *ptr)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CEPH_DEFINE_SHOW_FUNC(mdsmap_show)
 CEPH_DEFINE_SHOW_FUNC(mdsc_show)
 CEPH_DEFINE_SHOW_FUNC(caps_show)
 CEPH_DEFINE_SHOW_FUNC(dentry_lru_show)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CEPH_DEFINE_SHOW_FUNC(mds_sessions_show)
+>>>>>>> v3.18
 =======
 CEPH_DEFINE_SHOW_FUNC(mds_sessions_show)
 >>>>>>> v3.18
@@ -254,6 +284,10 @@ void ceph_fs_debugfs_cleanup(struct ceph_fs_client *fsc)
 	debugfs_remove(fsc->debugfs_congestion_kb);
 	debugfs_remove(fsc->debugfs_mdsmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	debugfs_remove(fsc->debugfs_mds_sessions);
+>>>>>>> v3.18
 =======
 	debugfs_remove(fsc->debugfs_mds_sessions);
 >>>>>>> v3.18
@@ -296,7 +330,10 @@ int ceph_fs_debugfs_init(struct ceph_fs_client *fsc)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	fsc->debugfs_mds_sessions = debugfs_create_file("mds_sessions",
 					0600,
 					fsc->client->debugfs_dir,
@@ -305,6 +342,9 @@ int ceph_fs_debugfs_init(struct ceph_fs_client *fsc)
 	if (!fsc->debugfs_mds_sessions)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fsc->debugfs_mdsc = debugfs_create_file("mdsc",
 						0600,

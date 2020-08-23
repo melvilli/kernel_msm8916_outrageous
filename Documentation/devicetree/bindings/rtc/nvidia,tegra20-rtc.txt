@@ -10,6 +10,11 @@ Required properties:
 - reg : Specifies base physical address and size of the registers.
 - interrupts : A single interrupt specifier.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- clocks : Must contain one entry, for the module clock.
+  See ../clocks/clock-bindings.txt for details.
+>>>>>>> v3.18
 =======
 - clocks : Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
@@ -22,6 +27,10 @@ timer {
 	reg = <0x7000e000 0x100>;
 	interrupts = <0 2 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocks = <&tegra_car 4>;
+>>>>>>> v3.18
 =======
 	clocks = <&tegra_car 4>;
 >>>>>>> v3.18

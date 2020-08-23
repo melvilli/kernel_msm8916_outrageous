@@ -993,7 +993,12 @@ static ssize_t field##_show (struct device *dev, struct device_attribute *attr, 
 	struct pcmcia_device *p_dev = to_pcmcia_dev(dev);		\
 	return p_dev->test ? sprintf(buf, format, p_dev->field) : -ENODEV; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}									\
+static DEVICE_ATTR_RO(field);
+>>>>>>> v3.18
 =======
 }									\
 static DEVICE_ATTR_RO(field);
@@ -1005,9 +1010,15 @@ static ssize_t name##_show (struct device *dev, struct device_attribute *attr, c
 	struct pcmcia_device *p_dev = to_pcmcia_dev(dev);		\
 	return p_dev->field ? sprintf(buf, "%s\n", p_dev->field) : -ENODEV; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 pcmcia_device_attr(func, socket, "0x%02x\n");
+=======
+}									\
+static DEVICE_ATTR_RO(name);
+
+>>>>>>> v3.18
 =======
 }									\
 static DEVICE_ATTR_RO(name);
@@ -1022,9 +1033,12 @@ pcmcia_device_stringattr(prod_id3, prod_id[2]);
 pcmcia_device_stringattr(prod_id4, prod_id[3]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pcmcia_show_resources(struct device *dev,
 				     struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static ssize_t function_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
 {
@@ -1035,6 +1049,9 @@ static DEVICE_ATTR_RO(function);
 
 static ssize_t resources_show(struct device *dev,
 			      struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pcmcia_device *p_dev = to_pcmcia_dev(dev);
@@ -1047,8 +1064,14 @@ static ssize_t resources_show(struct device *dev,
 	return str - buf;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pcmcia_show_pm_state(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static DEVICE_ATTR_RO(resources);
+
+static ssize_t pm_state_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(resources);
 
@@ -1064,8 +1087,13 @@ static ssize_t pm_state_show(struct device *dev, struct device_attribute *attr, 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pcmcia_store_pm_state(struct device *dev, struct device_attribute *attr,
 				     const char *buf, size_t count)
+=======
+static ssize_t pm_state_store(struct device *dev, struct device_attribute *attr,
+			      const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t pm_state_store(struct device *dev, struct device_attribute *attr,
 			      const char *buf, size_t count)
@@ -1085,7 +1113,11 @@ static ssize_t pm_state_store(struct device *dev, struct device_attribute *attr,
 	return ret ? ret : count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+static DEVICE_ATTR_RW(pm_state);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(pm_state);
 >>>>>>> v3.18
@@ -1112,8 +1144,14 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr, 
 				hash[0], hash[1], hash[2], hash[3]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pcmcia_store_allow_func_id_match(struct device *dev,
+=======
+static DEVICE_ATTR_RO(modalias);
+
+static ssize_t allow_func_id_match_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(modalias);
 
@@ -1134,6 +1172,7 @@ static ssize_t allow_func_id_match_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute pcmcia_dev_attrs[] = {
 	__ATTR(function, 0444, func_show, NULL),
@@ -1151,6 +1190,8 @@ static struct device_attribute pcmcia_dev_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_WO(allow_func_id_match);
 
 static struct attribute *pcmcia_dev_attrs[] = {
@@ -1169,6 +1210,9 @@ static struct attribute *pcmcia_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(pcmcia_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* PM support, also needed for reset */
@@ -1456,7 +1500,11 @@ struct bus_type pcmcia_bus_type = {
 	.uevent = pcmcia_bus_uevent,
 	.match = pcmcia_bus_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = pcmcia_dev_attrs,
+=======
+	.dev_groups = pcmcia_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = pcmcia_dev_groups,
 >>>>>>> v3.18

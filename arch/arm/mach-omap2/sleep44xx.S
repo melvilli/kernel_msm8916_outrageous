@@ -11,6 +11,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -39,6 +43,11 @@ ppa_por_params:
 	.word		1, 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_ARCH_OMAP4
+
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_OMAP4
 
@@ -336,12 +345,15 @@ skip_l2en:
 	b	cpu_resume			@ Jump to generic resume
 ENDPROC(omap4_cpu_resume)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 #ifndef CONFIG_OMAP4_ERRATA_I688
 ENTRY(omap_bus_sync)
 	mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 #endif	/* CONFIG_ARCH_OMAP4 */
 
 #endif	/* defined(CONFIG_SMP) && defined(CONFIG_PM) */
@@ -349,6 +361,9 @@ ENTRY(omap_bus_sync)
 #ifndef CONFIG_OMAP4_ERRATA_I688
 ENTRY(omap_bus_sync)
 	ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(omap_bus_sync)
 #endif

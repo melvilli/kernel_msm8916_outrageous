@@ -1,9 +1,12 @@
 /*
  * Copyright (c) International Business Machines Corp., 2006
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014, Linux Foundation. All rights reserved.
  * Linux Foundation chooses to take subject only to the GPLv2
  * license terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -45,6 +48,7 @@
 #define UBI_MAX_ERASECOUNTER 0x7FFFFFFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The highest read counter value supported by this implementation */
 #define UBI_MAX_READCOUNTER 0x7FFFFFFD /* (0x7FFFFFFF - 2)*/
 
@@ -54,6 +58,8 @@
  */
 #define UBI_MAX_DT_THRESHOLD 0x7FFFFFFF
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* The initial CRC32 value used when calculating CRC checksums */
@@ -149,7 +155,10 @@ enum {
  * @data_offset: where the user data start
  * @image_seq: image sequence number
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @last_erase_time: time stamp of the last erase operation
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @padding2: reserved for future, zeroes
@@ -185,8 +194,12 @@ struct ubi_ec_hdr {
 	__be32  data_offset;
 	__be32  image_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be64  last_erase_time; /*curr time in sec == unsigned long time_t*/
 	__u8    padding2[24];
+=======
+	__u8    padding2[32];
+>>>>>>> v3.18
 =======
 	__u8    padding2[32];
 >>>>>>> v3.18
@@ -441,8 +454,11 @@ struct ubi_vtbl_record {
  * @block_loc: an array containing the location of all PEBs of the fastmap
  * @block_ec: the erase counter of each used PEB
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @block_rc: the read counter of each used PEB
  * @block_let: the last erase timestamp of each used PEB
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @sqnum: highest sequence number value at the time while taking the fastmap
@@ -457,8 +473,11 @@ struct ubi_fm_sb {
 	__be32 block_loc[UBI_FM_MAX_BLOCKS];
 	__be32 block_ec[UBI_FM_MAX_BLOCKS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be32 block_rc[UBI_FM_MAX_BLOCKS];
 	__be64 block_let[UBI_FM_MAX_BLOCKS];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__be64 sqnum;
@@ -507,6 +526,7 @@ struct ubi_fm_scan_pool {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct ubi_fm_ec - stores the erase/read counter of a PEB
  * @pnum: PEB number
  * @ec: ec of this PEB
@@ -517,13 +537,21 @@ struct ubi_fm_scan_pool {
  * @pnum: PEB number
  * @ec: ec of this PEB
 >>>>>>> v3.18
+=======
+ * struct ubi_fm_ec - stores the erase counter of a PEB
+ * @pnum: PEB number
+ * @ec: ec of this PEB
+>>>>>>> v3.18
  */
 struct ubi_fm_ec {
 	__be32 pnum;
 	__be32 ec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be32 rc;
 	__be64 last_erase_time;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } __packed;
@@ -557,7 +585,10 @@ struct ubi_fm_volhdr {
  * @reserved_pebs: number of table entries
  * @pnum: PEB number of LEB (LEB is the index)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @rc: Read counter of the LEBs PEB (LEB is the index)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -565,10 +596,14 @@ struct ubi_fm_eba {
 	__be32 magic;
 	__be32 reserved_pebs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		__be32 pnum;
 		__be32 rc;
 	} peb_data[0];
+=======
+	__be32 pnum[0];
+>>>>>>> v3.18
 =======
 	__be32 pnum[0];
 >>>>>>> v3.18

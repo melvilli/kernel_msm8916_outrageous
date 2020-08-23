@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -338,9 +342,12 @@
 #define QLA82XX_ROMUSB_GLB_CAS_RST		(ROMUSB_GLB + 0x0038)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Lock IDs for ROM lock */
 #define ROM_LOCK_DRIVER       0x0d417340
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define QLA82XX_PCI_CRB_WINDOWSIZE 0x00100000	 /* all are 1MB windows */
@@ -597,6 +604,10 @@
  */
 #define PCI_DEVICE_ID_QLOGIC_ISP8021		0x8021
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_QLOGIC_ISP8044		0x8044
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_QLOGIC_ISP8044		0x8044
 >>>>>>> v3.18
@@ -966,12 +977,18 @@ struct ct6_dsd {
 #define QLA82XX_TLHDR                  99
 #define QLA82XX_RDEND                  255
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define QLA8044_POLLRD			35
 #define QLA8044_RDMUX2			36
 #define QLA8044_L1DTG			8
 #define QLA8044_L1ITG			9
 #define QLA8044_POLLRDMWR		37
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1200,6 +1217,10 @@ static const int MD_MIU_TEST_AGT_RDDATA[] = { 0x410000A8, 0x410000AC,
 
 #define qla82xx_get_temp_val(x)          ((x) >> 16)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define qla82xx_get_temp_val1(x)          ((x) && 0x0000FFFF)
+>>>>>>> v3.18
 =======
 #define qla82xx_get_temp_val1(x)          ((x) && 0x0000FFFF)
 >>>>>>> v3.18
@@ -1215,10 +1236,16 @@ enum {
 	QLA82XX_TEMP_PANIC	   /* Fatal error, hardware has shut down. */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define LEG_INTR_PTR_OFFSET	0x38C0
 #define LEG_INTR_TRIG_OFFSET	0x38C4
 #define LEG_INTR_MASK_OFFSET	0x38C8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

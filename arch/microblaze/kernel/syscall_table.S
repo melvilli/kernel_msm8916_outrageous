@@ -193,7 +193,11 @@ ENTRY(sys_call_table)
 	.long sys_vfork		/* 190 */
 	.long sys_getrlimit
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_mmap_pgoff		/* mmap2 */
+=======
+	.long sys_mmap2
+>>>>>>> v3.18
 =======
 	.long sys_mmap2
 >>>>>>> v3.18
@@ -313,7 +317,11 @@ ENTRY(sys_call_table)
 	.long sys_fchmodat
 	.long sys_faccessat
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_ni_syscall /* pselect6 */
+=======
+	.long sys_pselect6
+>>>>>>> v3.18
 =======
 	.long sys_pselect6
 >>>>>>> v3.18
@@ -372,8 +380,13 @@ ENTRY(sys_call_table)
 	.long sys_recvmsg
 	.long sys_accept4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_ni_syscall
 	.long sys_ni_syscall
+=======
+	.long sys_preadv
+	.long sys_pwritev
+>>>>>>> v3.18
 =======
 	.long sys_preadv
 	.long sys_pwritev
@@ -394,8 +407,11 @@ ENTRY(sys_call_table)
 	.long sys_process_vm_writev
 	.long sys_kcmp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_finit_module
 =======
+=======
+>>>>>>> v3.18
 	.long sys_finit_module		/* 380 */
 	.long sys_sched_setattr
 	.long sys_sched_getattr
@@ -404,4 +420,7 @@ ENTRY(sys_call_table)
 	.long sys_getrandom		/* 385 */
 	.long sys_memfd_create
 	.long sys_bpf
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

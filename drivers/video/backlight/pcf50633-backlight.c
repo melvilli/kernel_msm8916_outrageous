@@ -91,6 +91,10 @@ static int pcf50633_bl_get_brightness(struct backlight_device *bl)
 {
 	struct pcf50633_bl *pcf_bl = bl_get_data(bl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ static int pcf50633_bl_probe(struct platform_device *pdev)
 	struct pcf50633_bl *pcf_bl;
 	struct device *parent = pdev->dev.parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcf50633_platform_data *pcf50633_data = parent->platform_data;
+=======
+	struct pcf50633_platform_data *pcf50633_data = dev_get_platdata(parent);
+>>>>>>> v3.18
 =======
 	struct pcf50633_platform_data *pcf50633_data = dev_get_platdata(parent);
 >>>>>>> v3.18
@@ -135,7 +143,12 @@ static int pcf50633_bl_probe(struct platform_device *pdev)
 	pcf_bl->pcf = dev_to_pcf50633(pdev->dev.parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcf_bl->bl = backlight_device_register(pdev->name, &pdev->dev, pcf_bl,
+=======
+	pcf_bl->bl = devm_backlight_device_register(&pdev->dev, pdev->name,
+						&pdev->dev, pcf_bl,
+>>>>>>> v3.18
 =======
 	pcf_bl->bl = devm_backlight_device_register(&pdev->dev, pdev->name,
 						&pdev->dev, pcf_bl,
@@ -161,6 +174,7 @@ static int pcf50633_bl_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcf50633_bl_remove(struct platform_device *pdev)
 {
 	struct pcf50633_bl *pcf_bl = platform_get_drvdata(pdev);
@@ -175,6 +189,10 @@ static int pcf50633_bl_remove(struct platform_device *pdev)
 static struct platform_driver pcf50633_bl_driver = {
 	.probe =	pcf50633_bl_probe,
 	.remove =	pcf50633_bl_remove,
+=======
+static struct platform_driver pcf50633_bl_driver = {
+	.probe =	pcf50633_bl_probe,
+>>>>>>> v3.18
 =======
 static struct platform_driver pcf50633_bl_driver = {
 	.probe =	pcf50633_bl_probe,

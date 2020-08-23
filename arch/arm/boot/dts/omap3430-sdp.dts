@@ -8,7 +8,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
+=======
+#include "omap34xx.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap34xx.dtsi"
 >>>>>>> v3.18
@@ -33,7 +37,12 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "twl4030.dtsi"
+=======
+#include "twl4030.dtsi"
+#include "twl4030_omap3.dtsi"
+>>>>>>> v3.18
 =======
 #include "twl4030.dtsi"
 #include "twl4030_omap3.dtsi"
@@ -43,11 +52,17 @@
 	vmmc-supply = <&vmmc1>;
 	vmmc_aux-supply = <&vsim>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * S6-3 must be in ON position for 8 bit mode to function
 	 * Else, use 4 bit mode
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bus-width = <8>;
 };
@@ -100,6 +115,7 @@
 			reg = <0 0x40000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		partition@0x40000 {
 			label = "params-nor";
 			reg = <0x40000 0x40000>;
@@ -110,6 +126,8 @@
 		};
 		partition@0x280000 {
 =======
+=======
+>>>>>>> v3.18
 		partition@40000 {
 			label = "params-nor";
 			reg = <0x40000 0x40000>;
@@ -119,6 +137,9 @@
 			reg = <0x80000 0x200000>;
 		};
 		partition@280000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			label = "filesystem-nor";
 			reg = <0x240000 0x7d80000>;
@@ -131,10 +152,15 @@
 		#size-cells = <1>;
 		reg = <1 0 0x08000000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nand-bus-width = <8>;
 
 		ti,nand-ecc-opt = "sw";
 		gpmc,device-nand;
+=======
+		ti,nand-ecc-opt = "sw";
+		nand-bus-width = <8>;
+>>>>>>> v3.18
 =======
 		ti,nand-ecc-opt = "sw";
 		nand-bus-width = <8>;
@@ -159,6 +185,7 @@
 			reg = <0 0x80000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		partition@0x80000 {
 			label = "bootloader-nand";
 			reg = <0x80000 0x140000>;
@@ -173,6 +200,8 @@
 		};
 		partition@0x780000 {
 =======
+=======
+>>>>>>> v3.18
 		partition@80000 {
 			label = "bootloader-nand";
 			reg = <0x80000 0x140000>;
@@ -186,6 +215,9 @@
 			reg = <0x280000 0x500000>;
 		};
 		partition@780000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			label = "filesystem-nand";
 			reg = <0x780000 0x7880000>;
@@ -220,6 +252,7 @@
 			reg = <0 0x80000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		partition@0x80000 {
 			label = "bootloader-onenand";
 			reg = <0x80000 0x40000>;
@@ -234,6 +267,8 @@
 		};
 		partition@0x2e0000 {
 =======
+=======
+>>>>>>> v3.18
 		partition@80000 {
 			label = "bootloader-onenand";
 			reg = <0x80000 0x40000>;
@@ -247,6 +282,9 @@
 			reg = <0xe0000 0x200000>;
 		};
 		partition@2e0000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			label = "filesystem-onenand";
 			reg = <0x2e0000 0xfd20000>;

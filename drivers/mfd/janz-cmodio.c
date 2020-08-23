@@ -14,7 +14,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -187,16 +190,22 @@ static int cmodio_pci_probe(struct pci_dev *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
 	if (!priv) {
 		dev_err(&dev->dev, "unable to allocate private data\n");
 		ret = -ENOMEM;
 		goto out_return;
 =======
+=======
+>>>>>>> v3.18
 	priv = devm_kzalloc(&dev->dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv) {
 		dev_err(&dev->dev, "unable to allocate private data\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -208,7 +217,11 @@ static int cmodio_pci_probe(struct pci_dev *dev,
 	if (ret) {
 		dev_err(&dev->dev, "unable to enable device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_priv;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -263,9 +276,13 @@ out_pci_release_regions:
 out_pci_disable_device:
 	pci_disable_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_priv:
 	kfree(priv);
 out_return:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -282,7 +299,10 @@ static void cmodio_pci_remove(struct pci_dev *dev)
 	pci_release_regions(dev);
 	pci_disable_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(priv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -291,7 +311,11 @@ static void cmodio_pci_remove(struct pci_dev *dev)
 
 /* The list of devices that this module will support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cmodio_pci_ids) = {
+=======
+static const struct pci_device_id cmodio_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cmodio_pci_ids[] = {
 >>>>>>> v3.18

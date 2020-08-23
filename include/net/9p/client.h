@@ -27,6 +27,11 @@
 #define NET_9P_CLIENT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/utsname.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/utsname.h>
 
@@ -71,7 +76,10 @@ enum p9_trans_status {
  * @REQ_STATUS_UNSENT: request waiting to be sent
  * @REQ_STATUS_SENT: request sent to server
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @REQ_STATUS_FLSH: a flush has been sent for this request
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @REQ_STATUS_RCVD: response received from server
@@ -90,7 +98,10 @@ enum p9_req_status_t {
 	REQ_STATUS_UNSENT,
 	REQ_STATUS_SENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REQ_STATUS_FLSH,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	REQ_STATUS_RCVD,
@@ -140,7 +151,10 @@ struct p9_req_t {
  * @trans_mod: module API instantiated with this client
  * @trans: tranport instance state and API
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @conn: connection state information used by trans_fd
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @fidpool: fid handle accounting for session
@@ -149,6 +163,10 @@ struct p9_req_t {
  * @reqs - 2D array of requests
  * @max_tag - current maximum tag id allocated
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @name - node name used as client id
+>>>>>>> v3.18
 =======
  * @name - node name used as client id
 >>>>>>> v3.18
@@ -175,7 +193,10 @@ struct p9_client {
 	enum p9_trans_status status;
 	void *trans;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct p9_conn *conn;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -186,6 +207,11 @@ struct p9_client {
 	struct p9_req_t *reqs[P9_ROW_MAXTAG];
 	int max_tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	char name[__NEW_UTS_LEN + 1];
+>>>>>>> v3.18
 =======
 
 	char name[__NEW_UTS_LEN + 1];
@@ -283,7 +309,11 @@ int p9_client_lock_dotl(struct p9_fid *fid, struct p9_flock *flock, u8 *status);
 int p9_client_getlock_dotl(struct p9_fid *fid, struct p9_getlock *fl);
 struct p9_req_t *p9_tag_lookup(struct p9_client *, u16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void p9_client_cb(struct p9_client *c, struct p9_req_t *req);
+=======
+void p9_client_cb(struct p9_client *c, struct p9_req_t *req, int status);
+>>>>>>> v3.18
 =======
 void p9_client_cb(struct p9_client *c, struct p9_req_t *req, int status);
 >>>>>>> v3.18

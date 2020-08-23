@@ -184,6 +184,7 @@ The relational-operators depend on the type of the field being tested:
 The operators available for numeric fields are:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ==, !=, <, <=, >, >=
 
 And for string fields they are:
@@ -192,6 +193,8 @@ And for string fields they are:
 
 Currently, only exact string matches are supported.
 =======
+=======
+>>>>>>> v3.18
 ==, !=, <, <=, >, >=, &
 
 And for string fields they are:
@@ -208,6 +211,9 @@ end of the string. For example:
 But does not allow for it to be within the string:
 
   prev_comm ~ "ba*sh"   <-- is invalid
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 5.2 Setting filters
@@ -298,7 +304,10 @@ prev_pid == 0
 # cat sched_wakeup/filter
 common_pid == 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 6. Event triggers
 =================
@@ -506,4 +515,7 @@ The following commands are supported:
 
   Note that there can be only one traceon or traceoff trigger per
   triggering event.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

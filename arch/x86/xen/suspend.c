@@ -13,13 +13,19 @@
 #include "mmu.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_arch_pre_suspend(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static void xen_pv_pre_suspend(void)
 {
 	xen_mm_pin_all();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xen_start_info->store_mfn = mfn_to_pfn(xen_start_info->store_mfn);
 	xen_start_info->console.domU.mfn =
@@ -34,6 +40,7 @@ static void xen_pv_pre_suspend(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_arch_hvm_post_suspend(int suspend_cancelled)
 {
 #ifdef CONFIG_XEN_PVHVM
@@ -41,11 +48,16 @@ void xen_arch_hvm_post_suspend(int suspend_cancelled)
 	if (!suspend_cancelled)
 	    xen_hvm_init_shared_info();
 =======
+=======
+>>>>>>> v3.18
 static void xen_hvm_post_suspend(int suspend_cancelled)
 {
 #ifdef CONFIG_XEN_PVHVM
 	int cpu;
 	xen_hvm_init_shared_info();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xen_callback_vector();
 	xen_unplug_emulated_devices();
@@ -58,7 +70,11 @@ static void xen_hvm_post_suspend(int suspend_cancelled)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_arch_post_suspend(int suspend_cancelled)
+=======
+static void xen_pv_post_suspend(int suspend_cancelled)
+>>>>>>> v3.18
 =======
 static void xen_pv_post_suspend(int suspend_cancelled)
 >>>>>>> v3.18
@@ -81,7 +97,10 @@ static void xen_pv_post_suspend(int suspend_cancelled)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	xen_mm_unpin_all();
 }
 
@@ -97,6 +116,9 @@ void xen_arch_post_suspend(int cancelled)
         xen_pv_post_suspend(cancelled);
     else
         xen_hvm_post_suspend(cancelled);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

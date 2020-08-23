@@ -124,7 +124,11 @@ static void fuse_destroy_inode(struct inode *inode)
 static void fuse_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -140,6 +144,10 @@ static void fuse_evict_inode(struct inode *inode)
 static int fuse_remount_fs(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -183,9 +191,15 @@ void fuse_change_attributes_common(struct inode *inode, struct fuse_attr *attr,
 		inode->i_mtime.tv_sec   = attr->mtime;
 		inode->i_mtime.tv_nsec  = attr->mtimensec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	inode->i_ctime.tv_sec   = attr->ctime;
 	inode->i_ctime.tv_nsec  = attr->ctimensec;
+=======
+		inode->i_ctime.tv_sec   = attr->ctime;
+		inode->i_ctime.tv_nsec  = attr->ctimensec;
+	}
+>>>>>>> v3.18
 =======
 		inode->i_ctime.tv_sec   = attr->ctime;
 		inode->i_ctime.tv_nsec  = attr->ctimensec;
@@ -243,7 +257,11 @@ void fuse_change_attributes(struct inode *inode, struct fuse_attr *attr,
 
 		if (oldsize != attr->size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			truncate_pagecache(inode, oldsize, attr->size);
+=======
+			truncate_pagecache(inode, attr->size);
+>>>>>>> v3.18
 =======
 			truncate_pagecache(inode, attr->size);
 >>>>>>> v3.18
@@ -274,6 +292,11 @@ static void fuse_init_inode(struct inode *inode, struct fuse_attr *attr)
 	inode->i_mtime.tv_sec  = attr->mtime;
 	inode->i_mtime.tv_nsec = attr->mtimensec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	inode->i_ctime.tv_sec  = attr->ctime;
+	inode->i_ctime.tv_nsec = attr->ctimensec;
+>>>>>>> v3.18
 =======
 	inode->i_ctime.tv_sec  = attr->ctime;
 	inode->i_ctime.tv_nsec = attr->ctimensec;
@@ -326,7 +349,11 @@ struct inode *fuse_iget(struct super_block *sb, u64 nodeid,
 	if ((inode->i_state & I_NEW)) {
 		inode->i_flags |= S_NOATIME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!fc->writeback_cache || !S_ISREG(inode->i_mode))
+=======
+		if (!fc->writeback_cache || !S_ISREG(attr->mode))
+>>>>>>> v3.18
 =======
 		if (!fc->writeback_cache || !S_ISREG(attr->mode))
 >>>>>>> v3.18
@@ -619,7 +646,10 @@ void fuse_conn_init(struct fuse_conn *fc)
 	memset(fc, 0, sizeof(*fc));
 	spin_lock_init(&fc->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&fc->inst_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	init_rwsem(&fc->killsb);
@@ -653,7 +683,10 @@ void fuse_conn_put(struct fuse_conn *fc)
 		if (fc->destroy_req)
 			fuse_request_free(fc->destroy_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_destroy(&fc->inst_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		fc->release(fc);
@@ -835,6 +868,10 @@ static const struct super_operations fuse_super_operations = {
 	.destroy_inode  = fuse_destroy_inode,
 	.evict_inode	= fuse_evict_inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.write_inode	= fuse_write_inode,
+>>>>>>> v3.18
 =======
 	.write_inode	= fuse_write_inode,
 >>>>>>> v3.18
@@ -941,6 +978,7 @@ static void process_init_reply(struct fuse_conn *fc, struct fuse_req *req)
 			if (arg->flags & FUSE_WRITEBACK_CACHE)
 				fc->writeback_cache = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (arg->flags & FUSE_SHORTCIRCUIT) {
 				fc->writeback_cache = 0;
 				fc->shortcircuit_io = 1;
@@ -952,6 +990,10 @@ static void process_init_reply(struct fuse_conn *fc, struct fuse_req *req)
 			else
 				fc->sb->s_time_gran = 1000000000;
 
+=======
+			if (arg->time_gran && arg->time_gran <= 1000000000)
+				fc->sb->s_time_gran = arg->time_gran;
+>>>>>>> v3.18
 =======
 			if (arg->time_gran && arg->time_gran <= 1000000000)
 				fc->sb->s_time_gran = arg->time_gran;
@@ -983,9 +1025,15 @@ static void fuse_send_init(struct fuse_conn *fc, struct fuse_req *req)
 		FUSE_EXPORT_SUPPORT | FUSE_BIG_WRITES | FUSE_DONT_MASK |
 		FUSE_SPLICE_WRITE | FUSE_SPLICE_MOVE | FUSE_SPLICE_READ |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		FUSE_FLOCK_LOCKS | FUSE_HAS_IOCTL_DIR | FUSE_AUTO_INVAL_DATA |
 		FUSE_DO_READDIRPLUS | FUSE_READDIRPLUS_AUTO | FUSE_ASYNC_DIO |
 		FUSE_WRITEBACK_CACHE;
+=======
+		FUSE_FLOCK_LOCKS | FUSE_IOCTL_DIR | FUSE_AUTO_INVAL_DATA |
+		FUSE_DO_READDIRPLUS | FUSE_READDIRPLUS_AUTO | FUSE_ASYNC_DIO |
+		FUSE_WRITEBACK_CACHE | FUSE_NO_OPEN_SUPPORT;
+>>>>>>> v3.18
 =======
 		FUSE_FLOCK_LOCKS | FUSE_IOCTL_DIR | FUSE_AUTO_INVAL_DATA |
 		FUSE_DO_READDIRPLUS | FUSE_READDIRPLUS_AUTO | FUSE_ASYNC_DIO |
@@ -1009,7 +1057,11 @@ static void fuse_send_init(struct fuse_conn *fc, struct fuse_req *req)
 static void fuse_free_conn(struct fuse_conn *fc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(fc);
+=======
+	kfree_rcu(fc, rcu);
+>>>>>>> v3.18
 =======
 	kfree_rcu(fc, rcu);
 >>>>>>> v3.18
@@ -1073,9 +1125,15 @@ static int fuse_fill_super(struct super_block *sb, void *data, int silent)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb->s_flags &= ~MS_NOSEC;
 
 	if (!parse_fuse_opt((char *) data, &d, is_bdev))
+=======
+	sb->s_flags &= ~(MS_NOSEC | MS_I_VERSION);
+
+	if (!parse_fuse_opt(data, &d, is_bdev))
+>>>>>>> v3.18
 =======
 	sb->s_flags &= ~(MS_NOSEC | MS_I_VERSION);
 
@@ -1115,7 +1173,10 @@ static int fuse_fill_super(struct super_block *sb, void *data, int silent)
 
 	fuse_conn_init(fc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fc->release = fuse_free_conn;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1133,6 +1194,10 @@ static int fuse_fill_super(struct super_block *sb, void *data, int silent)
 	sb->s_flags |= MS_POSIXACL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fc->release = fuse_free_conn;
+>>>>>>> v3.18
 =======
 	fc->release = fuse_free_conn;
 >>>>>>> v3.18

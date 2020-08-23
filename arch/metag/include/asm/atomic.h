@@ -5,6 +5,10 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -43,6 +47,7 @@
 
 #define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_dec_if_positive(v)       atomic_sub_if_positive(1, v)
 
 #define smp_mb__before_atomic_dec()	barrier()
@@ -53,11 +58,16 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 
 #endif
 
 #define atomic_dec_if_positive(v)       atomic_sub_if_positive(1, v)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/atomic64.h>
 

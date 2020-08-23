@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -125,7 +128,11 @@ static int w90p910_keypad_probe(struct platform_device *pdev)
 {
 	const struct w90p910_keypad_platform_data *pdata =
 <<<<<<< HEAD
+<<<<<<< HEAD
 						pdev->dev.platform_data;
+=======
+						dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 						dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -229,7 +236,11 @@ static int w90p910_keypad_probe(struct platform_device *pdev)
 
 failed_free_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(irq, pdev);
+=======
+	free_irq(irq, keypad);
+>>>>>>> v3.18
 =======
 	free_irq(irq, keypad);
 >>>>>>> v3.18
@@ -251,7 +262,11 @@ static int w90p910_keypad_remove(struct platform_device *pdev)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(keypad->irq, pdev);
+=======
+	free_irq(keypad->irq, keypad);
+>>>>>>> v3.18
 =======
 	free_irq(keypad->irq, keypad);
 >>>>>>> v3.18
@@ -265,7 +280,10 @@ static int w90p910_keypad_remove(struct platform_device *pdev)
 	release_mem_region(res->start, resource_size(res));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(keypad);

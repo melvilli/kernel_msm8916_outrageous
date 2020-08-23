@@ -86,7 +86,11 @@ static void mv64x60_udbg_init(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_compatible_node(np, "serial", "marvell,mv64360-mpsc") {
+=======
+	for_each_compatible_node(np, NULL, "marvell,mv64360-mpsc") {
+>>>>>>> v3.18
 =======
 	for_each_compatible_node(np, NULL, "marvell,mv64360-mpsc") {
 >>>>>>> v3.18

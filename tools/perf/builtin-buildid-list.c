@@ -16,6 +16,10 @@
 #include "util/session.h"
 #include "util/symbol.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+>>>>>>> v3.18
 =======
 #include "util/data.h"
 >>>>>>> v3.18
@@ -57,12 +61,18 @@ static int perf_session__list_build_ids(bool force, bool with_hits)
 {
 	struct perf_session *session;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct perf_data_file file = {
 		.path  = input_name,
 		.mode  = PERF_DATA_MODE_READ,
 		.force = force,
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	symbol__elf_init();
@@ -73,8 +83,12 @@ static int perf_session__list_build_ids(bool force, bool with_hits)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	session = perf_session__new(input_name, O_RDONLY, force, false,
 				    &build_id__mark_dso_hit_ops);
+=======
+	session = perf_session__new(&file, false, &build_id__mark_dso_hit_ops);
+>>>>>>> v3.18
 =======
 	session = perf_session__new(&file, false, &build_id__mark_dso_hit_ops);
 >>>>>>> v3.18
@@ -85,7 +99,11 @@ static int perf_session__list_build_ids(bool force, bool with_hits)
 	 * the record stream. Buildids are stored as RECORD_HEADER_BUILD_ID
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (with_hits || session->fd_pipe)
+=======
+	if (with_hits || perf_data_file__is_pipe(&file))
+>>>>>>> v3.18
 =======
 	if (with_hits || perf_data_file__is_pipe(&file))
 >>>>>>> v3.18

@@ -184,7 +184,11 @@ int omfs_sync_inode(struct inode *inode)
 static void omfs_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -311,9 +315,13 @@ static const struct super_operations omfs_sops = {
 static int omfs_get_imap(struct super_block *sb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bitmap_size;
 	int array_size;
 	int count;
+=======
+	unsigned int bitmap_size, count, array_size;
+>>>>>>> v3.18
 =======
 	unsigned int bitmap_size, count, array_size;
 >>>>>>> v3.18
@@ -330,7 +338,11 @@ static int omfs_get_imap(struct super_block *sb)
 
 	sbi->s_imap_size = array_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbi->s_imap = kzalloc(array_size * sizeof(unsigned long *), GFP_KERNEL);
+=======
+	sbi->s_imap = kcalloc(array_size, sizeof(unsigned long *), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sbi->s_imap = kcalloc(array_size, sizeof(unsigned long *), GFP_KERNEL);
 >>>>>>> v3.18
@@ -374,7 +386,11 @@ nomem:
 
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Opt_uid, Opt_gid, Opt_umask, Opt_dmask, Opt_fmask, Opt_err
+=======
+	Opt_uid, Opt_gid, Opt_umask, Opt_dmask, Opt_fmask
+>>>>>>> v3.18
 =======
 	Opt_uid, Opt_gid, Opt_umask, Opt_dmask, Opt_fmask
 >>>>>>> v3.18
@@ -387,7 +403,10 @@ static const match_table_t tokens = {
 	{Opt_dmask, "dmask=%o"},
 	{Opt_fmask, "fmask=%o"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{Opt_err, NULL},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -494,13 +513,19 @@ static int omfs_fill_super(struct super_block *sb, void *data, int silent)
 	mutex_init(&sbi->s_bitmap_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (sbi->s_num_blocks > OMFS_MAX_BLOCKS) {
 		printk(KERN_ERR "omfs: sysblock number (%llx) is out of range\n",
 		       (unsigned long long)sbi->s_num_blocks);
 		goto out_brelse_bh;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sbi->s_sys_blocksize > PAGE_SIZE) {
 		printk(KERN_ERR "omfs: sysblock size (%d) is out of range\n",

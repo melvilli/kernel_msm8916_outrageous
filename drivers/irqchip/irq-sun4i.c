@@ -37,6 +37,7 @@ static void __iomem *sun4i_irq_base;
 static struct irq_domain *sun4i_irq_domain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static asmlinkage void __exception_irq_entry sun4i_handle_irq(struct pt_regs *regs);
 
 void sun4i_irq_ack(struct irq_data *irqd)
@@ -50,6 +51,8 @@ void sun4i_irq_ack(struct irq_data *irqd)
 	writel(val | (1 << irq_off),
 	       sun4i_irq_base + SUN4I_IRQ_PENDING_REG(reg));
 =======
+=======
+>>>>>>> v3.18
 static void __exception_irq_entry sun4i_handle_irq(struct pt_regs *regs);
 
 static void sun4i_irq_ack(struct irq_data *irqd)
@@ -60,6 +63,9 @@ static void sun4i_irq_ack(struct irq_data *irqd)
 		return; /* Only IRQ 0 / the ENMI needs to be acked */
 
 	writel(BIT(0), sun4i_irq_base + SUN4I_IRQ_PENDING_REG(0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -90,14 +96,20 @@ static void sun4i_irq_unmask(struct irq_data *irqd)
 static struct irq_chip sun4i_irq_chip = {
 	.name		= "sun4i_irq",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.irq_ack	= sun4i_irq_ack,
 	.irq_mask	= sun4i_irq_mask,
 	.irq_unmask	= sun4i_irq_unmask,
 =======
+=======
+>>>>>>> v3.18
 	.irq_eoi	= sun4i_irq_ack,
 	.irq_mask	= sun4i_irq_mask,
 	.irq_unmask	= sun4i_irq_unmask,
 	.flags		= IRQCHIP_EOI_THREADED | IRQCHIP_EOI_IF_HANDLED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -105,8 +117,12 @@ static int sun4i_irq_map(struct irq_domain *d, unsigned int virq,
 			 irq_hw_number_t hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_set_chip_and_handler(virq, &sun4i_irq_chip,
 				 handle_level_irq);
+=======
+	irq_set_chip_and_handler(virq, &sun4i_irq_chip, handle_fasteoi_irq);
+>>>>>>> v3.18
 =======
 	irq_set_chip_and_handler(virq, &sun4i_irq_chip, handle_fasteoi_irq);
 >>>>>>> v3.18
@@ -134,7 +150,11 @@ static int __init sun4i_of_init(struct device_node *node,
 	writel(0, sun4i_irq_base + SUN4I_IRQ_ENABLE_REG(2));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Mask all the interrupts */
+=======
+	/* Unmask all the interrupts, ENABLE_REG(x) is used for masking */
+>>>>>>> v3.18
 =======
 	/* Unmask all the interrupts, ENABLE_REG(x) is used for masking */
 >>>>>>> v3.18
@@ -163,6 +183,7 @@ static int __init sun4i_of_init(struct device_node *node,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 IRQCHIP_DECLARE(allwinner_sun4i_ic, "allwinner,sun4i-ic", sun4i_of_init);
 
 static asmlinkage void __exception_irq_entry sun4i_handle_irq(struct pt_regs *regs)
@@ -176,6 +197,8 @@ static asmlinkage void __exception_irq_entry sun4i_handle_irq(struct pt_regs *re
 		hwirq = readl(sun4i_irq_base + SUN4I_IRQ_VECTOR_REG) >> 2;
 	}
 =======
+=======
+>>>>>>> v3.18
 IRQCHIP_DECLARE(allwinner_sun4i_ic, "allwinner,sun4i-a10-ic", sun4i_of_init);
 
 static void __exception_irq_entry sun4i_handle_irq(struct pt_regs *regs)
@@ -201,5 +224,8 @@ static void __exception_irq_entry sun4i_handle_irq(struct pt_regs *regs)
 		handle_domain_irq(sun4i_irq_domain, hwirq, regs);
 		hwirq = readl(sun4i_irq_base + SUN4I_IRQ_VECTOR_REG) >> 2;
 	} while (hwirq != 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

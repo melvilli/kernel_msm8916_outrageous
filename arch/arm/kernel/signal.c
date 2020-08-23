@@ -14,6 +14,10 @@
 #include <linux/uaccess.h>
 #include <linux/tracehook.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/uprobes.h>
+>>>>>>> v3.18
 =======
 #include <linux/uprobes.h>
 >>>>>>> v3.18
@@ -25,6 +29,7 @@
 #include <asm/unistd.h>
 #include <asm/vfp.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * For ARM syscalls, we encode the syscall number into the instruction.
@@ -49,6 +54,9 @@ static const unsigned long sigreturn_codes[7] = {
 	MOV_R7_NR_SIGRETURN,    SWI_SYS_SIGRETURN,    SWI_THUMB_SIGRETURN,
 	MOV_R7_NR_RT_SIGRETURN, SWI_SYS_RT_SIGRETURN, SWI_THUMB_RT_SIGRETURN,
 };
+=======
+extern const unsigned long sigreturn_codes[7];
+>>>>>>> v3.18
 =======
 extern const unsigned long sigreturn_codes[7];
 >>>>>>> v3.18
@@ -409,11 +417,17 @@ setup_return(struct pt_regs *regs, struct ksignal *ksig,
 			idx += 3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Put the sigreturn code on the stack no matter which return
 		 * mechanism we use in order to remain ABI compliant
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (__put_user(sigreturn_codes[idx],   rc) ||
 		    __put_user(sigreturn_codes[idx+1], rc+1))
@@ -423,6 +437,10 @@ setup_return(struct pt_regs *regs, struct ksignal *ksig,
 		if (cpsr & MODE32_BIT) {
 			struct mm_struct *mm = current->mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -627,6 +645,12 @@ do_work_pending(struct pt_regs *regs, unsigned int thread_flags, int syscall)
 				}
 				syscall = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			} else if (thread_flags & _TIF_UPROBE) {
+				clear_thread_flag(TIF_UPROBE);
+				uprobe_notify_resume(regs);
+>>>>>>> v3.18
 =======
 			} else if (thread_flags & _TIF_UPROBE) {
 				clear_thread_flag(TIF_UPROBE);

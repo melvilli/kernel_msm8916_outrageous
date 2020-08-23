@@ -29,7 +29,10 @@ typedef elf_fpreg_t elf_fpregset_t[ELF_NFPREG];
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * In order to be sure that we don't attempt to execute an O32 binary which
  * requires 64 bit FP (FR=1) on a system which does not support it we refuse
  * to execute any binary which has bits specified by the following macro set
@@ -42,6 +45,9 @@ typedef elf_fpreg_t elf_fpregset_t[ELF_NFPREG];
 #endif
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This is used to ensure we don't load something for the wrong architecture.
  */
@@ -60,6 +66,11 @@ typedef elf_fpreg_t elf_fpregset_t[ELF_NFPREG];
 	    ((__h->e_flags & EF_MIPS_ABI) != EF_MIPS_ABI_O32))		\
 		__res = 0;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (__h->e_flags & __MIPS_O32_FP64_MUST_BE_ZERO)		\
+		__res = 0;						\
+>>>>>>> v3.18
 =======
 	if (__h->e_flags & __MIPS_O32_FP64_MUST_BE_ZERO)		\
 		__res = 0;						\
@@ -79,6 +90,7 @@ typedef elf_fpreg_t elf_fpregset_t[ELF_NFPREG];
 #include <asm/processor.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These MUST be defined before elf.h gets included */
 extern void elf32_core_copy_regs(elf_gregset_t grp, struct pt_regs *regs);
 #define ELF_CORE_COPY_REGS(_dest, _regs) elf32_core_copy_regs(_dest, _regs);
@@ -89,6 +101,8 @@ extern void elf32_core_copy_regs(elf_gregset_t grp, struct pt_regs *regs);
 	__res;								\
 })
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -149,6 +163,7 @@ jiffies_to_compat_timeval(unsigned long jiffies, struct compat_timeval *value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void elf32_core_copy_regs(elf_gregset_t grp, struct pt_regs *regs)
 {
 	int i;
@@ -171,6 +186,8 @@ void elf32_core_copy_regs(elf_gregset_t grp, struct pt_regs *regs)
 #endif
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("Binary format loader for compatibility with o32 Linux/MIPS binaries");

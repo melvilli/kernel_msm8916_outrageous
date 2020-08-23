@@ -39,7 +39,10 @@
 #include <media/tvaudio.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -1842,6 +1845,7 @@ static int tvaudio_s_frequency(struct v4l2_subdev *sd, const struct v4l2_frequen
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tvaudio_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -1849,6 +1853,8 @@ static int tvaudio_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_TVAUDIO, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int tvaudio_log_status(struct v4l2_subdev *sd)
@@ -1870,7 +1876,10 @@ static const struct v4l2_ctrl_ops tvaudio_ctrl_ops = {
 static const struct v4l2_subdev_core_ops tvaudio_core_ops = {
 	.log_status = tvaudio_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = tvaudio_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -1881,7 +1890,10 @@ static const struct v4l2_subdev_core_ops tvaudio_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = tvaudio_s_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1898,17 +1910,27 @@ static const struct v4l2_subdev_audio_ops tvaudio_audio_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_video_ops tvaudio_video_ops = {
 	.s_std = tvaudio_s_std,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct v4l2_subdev_ops tvaudio_ops = {
 	.core = &tvaudio_core_ops,
 	.tuner = &tvaudio_tuner_ops,
 	.audio = &tvaudio_audio_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.video = &tvaudio_video_ops,
+>>>>>>> v3.18
 =======
 	.video = &tvaudio_video_ops,
 >>>>>>> v3.18
@@ -1934,7 +1956,11 @@ static int tvaudio_probe(struct i2c_client *client, const struct i2c_device_id *
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip = kzalloc(sizeof(*chip), GFP_KERNEL);
+=======
+	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1958,7 +1984,10 @@ static int tvaudio_probe(struct i2c_client *client, const struct i2c_device_id *
 	if (desc->name == NULL) {
 		v4l2_dbg(1, debug, sd, "no matching chip description found\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -EIO;
@@ -2032,7 +2061,10 @@ static int tvaudio_probe(struct i2c_client *client, const struct i2c_device_id *
 
 		v4l2_ctrl_handler_free(&chip->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -2054,7 +2086,12 @@ static int tvaudio_probe(struct i2c_client *client, const struct i2c_device_id *
 		chip->wt.function = chip_thread_wake;
 		chip->wt.data     = (unsigned long)chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chip->thread = kthread_run(chip_thread, chip, client->name);
+=======
+		chip->thread = kthread_run(chip_thread, chip, "%s",
+					   client->name);
+>>>>>>> v3.18
 =======
 		chip->thread = kthread_run(chip_thread, chip, "%s",
 					   client->name);
@@ -2082,7 +2119,10 @@ static int tvaudio_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&chip->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

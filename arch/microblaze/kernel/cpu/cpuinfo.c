@@ -9,6 +9,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -44,6 +48,12 @@ const struct cpu_ver_key cpu_ver_lookup[] = {
 	{"8.40.a", 0x18},
 	{"8.40.b", 0x19},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"8.50.a", 0x1a},
+	{"9.0", 0x1b},
+	{"9.1", 0x1d},
+>>>>>>> v3.18
 =======
 	{"8.50.a", 0x1a},
 	{"9.0", 0x1b},
@@ -77,16 +87,22 @@ const struct family_string_key family_string_lookup[] = {
 
 struct cpuinfo cpuinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __init setup_cpuinfo(void)
 {
 	struct device_node *cpu = NULL;
 
 =======
+=======
+>>>>>>> v3.18
 static struct device_node *cpu;
 
 void __init setup_cpuinfo(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpu = (struct device_node *) of_find_node_by_type(NULL, "cpu");
 	if (!cpu)
@@ -118,7 +134,10 @@ void __init setup_cpuinfo(void)
 			" - USERSPACE CAN LOCK THIS KERNEL!\n", __func__);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init setup_cpuinfo_clk(void)
 {
@@ -138,4 +157,7 @@ void __init setup_cpuinfo_clk(void)
 		BUG();
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

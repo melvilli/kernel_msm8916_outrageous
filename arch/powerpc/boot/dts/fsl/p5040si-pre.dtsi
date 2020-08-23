@@ -82,7 +82,13 @@
 			device_type = "cpu";
 			reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2_0>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2_0>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux0>;
 			next-level-cache = <&L2_0>;
@@ -96,7 +102,13 @@
 			device_type = "cpu";
 			reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2_1>;
+=======
+			clocks = <&mux1>;
+			next-level-cache = <&L2_1>;
+			fsl,portid-mapping = <0x40000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux1>;
 			next-level-cache = <&L2_1>;
@@ -110,7 +122,13 @@
 			device_type = "cpu";
 			reg = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2_2>;
+=======
+			clocks = <&mux2>;
+			next-level-cache = <&L2_2>;
+			fsl,portid-mapping = <0x20000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux2>;
 			next-level-cache = <&L2_2>;
@@ -124,7 +142,13 @@
 			device_type = "cpu";
 			reg = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2_3>;
+=======
+			clocks = <&mux3>;
+			next-level-cache = <&L2_3>;
+			fsl,portid-mapping = <0x10000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux3>;
 			next-level-cache = <&L2_3>;

@@ -14,10 +14,13 @@
 #include <linux/interrupt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AER_NONFATAL			0
 #define AER_FATAL			1
 #define AER_CORRECTABLE			2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SYSTEM_ERROR_INTR_ON_MESG_MASK	(PCI_EXP_RTCTL_SECEE|	\
@@ -80,6 +83,10 @@ struct aer_rpc {
 					 * root port hierarchy
 					 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wait_queue_head_t wait_release;
+>>>>>>> v3.18
 =======
 	wait_queue_head_t wait_release;
 >>>>>>> v3.18
@@ -117,7 +124,10 @@ static inline pci_ers_result_t merge_result(enum pci_ers_result orig,
 
 extern struct bus_type pcie_port_bus_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 void aer_do_secondary_bus_reset(struct pci_dev *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int aer_init(struct pcie_device *dev);

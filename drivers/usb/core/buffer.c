@@ -3,7 +3,11 @@
  *
  * This implementation plugs in through generic "usb_bus" level methods,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and should work with all USB controllers, regardles of bus type.
+=======
+ * and should work with all USB controllers, regardless of bus type.
+>>>>>>> v3.18
 =======
  * and should work with all USB controllers, regardless of bus type.
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 
 /* FIXME tune these based on pool statistics ... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static size_t pool_max[HCD_BUFFER_POOLS] = {
 	32, 128, 512, 2048,
 };
@@ -47,6 +52,8 @@ void __init usb_init_pool_max(void)
 		BUILD_BUG();		/* We don't allow this */
 }
 =======
+=======
+>>>>>>> v3.18
 static const size_t	pool_max[HCD_BUFFER_POOLS] = {
 	/* platforms without dma-friendly caches might need to
 	 * prevent cacheline sharing...
@@ -58,6 +65,9 @@ static const size_t	pool_max[HCD_BUFFER_POOLS] = {
 	/* bigger --> allocate pages */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* SETUP primitives */
@@ -70,16 +80,22 @@ static const size_t	pool_max[HCD_BUFFER_POOLS] = {
  * Call this as part of initializing a host controller that uses the dma
  * memory allocators.  It initializes some pools of dma-coherent memory that
 <<<<<<< HEAD
+<<<<<<< HEAD
  * will be shared by all drivers using that controller, or returns a negative
  * errno value on error.
  *
  * Call hcd_buffer_destroy() to clean up after using those pools.
 =======
+=======
+>>>>>>> v3.18
  * will be shared by all drivers using that controller.
  *
  * Call hcd_buffer_destroy() to clean up after using those pools.
  *
  * Return: 0 if successful. A negative errno value otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int hcd_buffer_create(struct usb_hcd *hcd)

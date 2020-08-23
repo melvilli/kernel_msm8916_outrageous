@@ -4,6 +4,10 @@ ubi-y += vtbl.o vmt.o upd.o build.o cdev.o kapi.o eba.o io.o wl.o attach.o
 ubi-y += misc.o debug.o
 ubi-$(CONFIG_MTD_UBI_FASTMAP) += fastmap.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ubi-$(CONFIG_MTD_UBI_BLOCK) += block.o
+>>>>>>> v3.18
 =======
 ubi-$(CONFIG_MTD_UBI_BLOCK) += block.o
 >>>>>>> v3.18

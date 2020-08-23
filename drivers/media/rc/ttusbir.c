@@ -303,6 +303,10 @@ static int ttusbir_probe(struct usb_interface *intf,
 
 	tt->led.name = "ttusbir:green:power";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tt->led.default_trigger = "rc-feedback";
+>>>>>>> v3.18
 =======
 	tt->led.default_trigger = "rc-feedback";
 >>>>>>> v3.18
@@ -322,7 +326,11 @@ static int ttusbir_probe(struct usb_interface *intf,
 	rc->dev.parent = &intf->dev;
 	rc->driver_type = RC_DRIVER_IR_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->allowed_protos = RC_BIT_ALL;
+=======
+	rc->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 =======
 	rc->allowed_protocols = RC_BIT_ALL;
 >>>>>>> v3.18

@@ -121,7 +121,10 @@ __vxge_hw_device_register_poll(void __iomem *reg, u64 mask, u32 max_millis)
 	u64 val64;
 	u32 i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status ret = VXGE_HW_FAIL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -143,7 +146,11 @@ __vxge_hw_device_register_poll(void __iomem *reg, u64 mask, u32 max_millis)
 	} while (++i <= max_millis);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return VXGE_HW_FAIL;
+>>>>>>> v3.18
 =======
 	return VXGE_HW_FAIL;
 >>>>>>> v3.18
@@ -1690,6 +1697,7 @@ enum vxge_hw_status vxge_hw_driver_stats_get(
 			struct vxge_hw_device_stats_sw_info *sw_stats)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status status = VXGE_HW_OK;
 
 	memcpy(sw_stats, &hldev->stats.sw_dev_info_stats,
@@ -1697,10 +1705,15 @@ enum vxge_hw_status vxge_hw_driver_stats_get(
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	memcpy(sw_stats, &hldev->stats.sw_dev_info_stats,
 		sizeof(struct vxge_hw_device_stats_sw_info));
 
 	return VXGE_HW_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2163,7 +2176,11 @@ __vxge_hw_ring_mempool_item_alloc(struct vxge_hw_mempool *mempoolh,
  * This function replenishes the RxDs from reserve array to work array
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum vxge_hw_status
+=======
+static enum vxge_hw_status
+>>>>>>> v3.18
 =======
 static enum vxge_hw_status
 >>>>>>> v3.18
@@ -3247,7 +3264,10 @@ vxge_hw_vpath_strip_fcs_check(struct __vxge_hw_device *hldev, u64 vpath_mask)
 {
 	struct vxge_hw_vpmgmt_reg       __iomem *vpmgmt_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status status = VXGE_HW_OK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i = 0, j = 0;
@@ -3263,7 +3283,11 @@ vxge_hw_vpath_strip_fcs_check(struct __vxge_hw_device *hldev, u64 vpath_mask)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return VXGE_HW_OK;
+>>>>>>> v3.18
 =======
 	return VXGE_HW_OK;
 >>>>>>> v3.18
@@ -4005,7 +4029,10 @@ __vxge_hw_vpath_mgmt_read(
 	u32 i, mtu = 0, max_pyld = 0;
 	u64 val64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status status = VXGE_HW_OK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4038,7 +4065,11 @@ __vxge_hw_vpath_mgmt_read(
 		VXGE_HW_DEVICE_LINK_STATE_SET(vpath->hldev, VXGE_HW_LINK_DOWN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return VXGE_HW_OK;
+>>>>>>> v3.18
 =======
 	return VXGE_HW_OK;
 >>>>>>> v3.18
@@ -4072,7 +4103,10 @@ __vxge_hw_vpath_reset(struct __vxge_hw_device *hldev, u32 vp_id)
 {
 	u64 val64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status status = VXGE_HW_OK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4082,7 +4116,11 @@ __vxge_hw_vpath_reset(struct __vxge_hw_device *hldev, u32 vp_id)
 				&hldev->common_reg->cmn_rsthdlr_cfg0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return VXGE_HW_OK;
+>>>>>>> v3.18
 =======
 	return VXGE_HW_OK;
 >>>>>>> v3.18
@@ -4267,7 +4305,10 @@ __vxge_hw_vpath_mac_configure(struct __vxge_hw_device *hldev, u32 vp_id)
 {
 	u64 val64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status status = VXGE_HW_OK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct __vxge_hw_virtualpath *vpath;
@@ -4326,7 +4367,11 @@ __vxge_hw_vpath_mac_configure(struct __vxge_hw_device *hldev, u32 vp_id)
 		writeq(val64, &vp_reg->rxmac_vcfg1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return VXGE_HW_OK;
+>>>>>>> v3.18
 =======
 	return VXGE_HW_OK;
 >>>>>>> v3.18
@@ -4342,7 +4387,10 @@ __vxge_hw_vpath_tim_configure(struct __vxge_hw_device *hldev, u32 vp_id)
 {
 	u64 val64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum vxge_hw_status status = VXGE_HW_OK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct __vxge_hw_virtualpath *vpath;
@@ -4595,7 +4643,11 @@ __vxge_hw_vpath_tim_configure(struct __vxge_hw_device *hldev, u32 vp_id)
 	writeq(val64, &vp_reg->tim_wrkld_clc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return VXGE_HW_OK;
+>>>>>>> v3.18
 =======
 	return VXGE_HW_OK;
 >>>>>>> v3.18

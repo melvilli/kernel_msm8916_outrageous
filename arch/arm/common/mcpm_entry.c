@@ -13,6 +13,10 @@
 #include <linux/init.h>
 #include <linux/irqflags.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpu_pm.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu_pm.h>
 >>>>>>> v3.18
@@ -22,6 +26,10 @@
 #include <asm/idmap.h>
 #include <asm/cputype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/suspend.h>
+>>>>>>> v3.18
 =======
 #include <asm/suspend.h>
 >>>>>>> v3.18
@@ -36,7 +44,10 @@ void mcpm_set_entry_vector(unsigned cpu, unsigned cluster, void *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long mcpm_entry_early_pokes[MAX_NR_CLUSTERS][MAX_CPUS_PER_CLUSTER][2];
 
 void mcpm_set_early_poke(unsigned cpu, unsigned cluster,
@@ -48,6 +59,9 @@ void mcpm_set_early_poke(unsigned cpu, unsigned cluster,
 	__sync_cache_range_w(poke, 2 * sizeof(*poke));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct mcpm_platform_ops *platform_ops;
 
@@ -60,12 +74,18 @@ int __init mcpm_platform_register(const struct mcpm_platform_ops *ops)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool mcpm_is_available(void)
 {
 	return (platform_ops) ? true : false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mcpm_cpu_power_up(unsigned int cpu, unsigned int cluster)
 {
@@ -82,7 +102,12 @@ void mcpm_cpu_power_down(void)
 	phys_reset_t phys_reset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!platform_ops);
+=======
+	if (WARN_ON_ONCE(!platform_ops || !platform_ops->power_down))
+		return;
+>>>>>>> v3.18
 =======
 	if (WARN_ON_ONCE(!platform_ops || !platform_ops->power_down))
 		return;
@@ -125,7 +150,10 @@ void mcpm_cpu_power_down(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mcpm_wait_for_cpu_powerdown(unsigned int cpu, unsigned int cluster)
 {
 	int ret;
@@ -141,13 +169,21 @@ int mcpm_wait_for_cpu_powerdown(unsigned int cpu, unsigned int cluster)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void mcpm_cpu_suspend(u64 expected_residency)
 {
 	phys_reset_t phys_reset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!platform_ops);
+=======
+	if (WARN_ON_ONCE(!platform_ops || !platform_ops->suspend))
+		return;
+>>>>>>> v3.18
 =======
 	if (WARN_ON_ONCE(!platform_ops || !platform_ops->suspend))
 		return;
@@ -172,7 +208,10 @@ int mcpm_cpu_powered_up(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_CPU_SUSPEND
 
 static int __init nocache_trampoline(unsigned long _arg)
@@ -223,6 +262,9 @@ int __init mcpm_loopback(void (*cache_disable)(void))
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sync_struct mcpm_sync;
 
@@ -250,7 +292,11 @@ void __mcpm_cpu_down(unsigned int cpu, unsigned int cluster)
 	mcpm_sync.clusters[cluster].cpus[cpu].cpu = CPU_DOWN;
 	sync_cache_w(&mcpm_sync.clusters[cluster].cpus[cpu].cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb_sev();
+=======
+	sev();
+>>>>>>> v3.18
 =======
 	sev();
 >>>>>>> v3.18
@@ -270,7 +316,11 @@ void __mcpm_outbound_leave_critical(unsigned int cluster, int state)
 	mcpm_sync.clusters[cluster].cluster = state;
 	sync_cache_w(&mcpm_sync.clusters[cluster].cluster);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb_sev();
+=======
+	sev();
+>>>>>>> v3.18
 =======
 	sev();
 >>>>>>> v3.18

@@ -46,7 +46,11 @@ tracing_sched_switch_trace(struct trace_array *tr,
 	entry->next_cpu	= task_cpu(next);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_check_discard(call, entry, buffer, event))
+=======
+	if (!call_filter_check_discard(call, entry, buffer, event))
+>>>>>>> v3.18
 =======
 	if (!call_filter_check_discard(call, entry, buffer, event))
 >>>>>>> v3.18
@@ -106,7 +110,11 @@ tracing_sched_wakeup_trace(struct trace_array *tr,
 	entry->next_cpu			= task_cpu(wakee);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_check_discard(call, entry, buffer, event))
+=======
+	if (!call_filter_check_discard(call, entry, buffer, event))
+>>>>>>> v3.18
 =======
 	if (!call_filter_check_discard(call, entry, buffer, event))
 >>>>>>> v3.18

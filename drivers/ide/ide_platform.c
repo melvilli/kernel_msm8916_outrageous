@@ -57,7 +57,11 @@ static int plat_ide_probe(struct platform_device *pdev)
 	struct ide_port_info d = platform_ide_port_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -136,6 +140,7 @@ static struct platform_driver platform_ide_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init platform_ide_init(void)
 {
 	return platform_driver_register(&platform_ide_driver);
@@ -148,13 +153,19 @@ static void __exit platform_ide_exit(void)
 =======
 module_platform_driver(platform_ide_driver);
 >>>>>>> v3.18
+=======
+module_platform_driver(platform_ide_driver);
+>>>>>>> v3.18
 
 MODULE_DESCRIPTION("Platform IDE driver");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:pata_platform");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(platform_ide_init);
 module_exit(platform_ide_exit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

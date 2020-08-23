@@ -25,6 +25,10 @@
 #include <linux/mtd/blktrans.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/major.h>
+>>>>>>> v3.18
 =======
 #include <linux/major.h>
 >>>>>>> v3.18
@@ -75,7 +79,11 @@ static void mtdblock_remove_dev(struct mtd_blktrans_dev *dev)
 static struct mtd_blktrans_ops mtdblock_tr = {
 	.name		= "mtdblock",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.major		= 31,
+=======
+	.major		= MTD_BLOCK_MAJOR,
+>>>>>>> v3.18
 =======
 	.major		= MTD_BLOCK_MAJOR,
 >>>>>>> v3.18

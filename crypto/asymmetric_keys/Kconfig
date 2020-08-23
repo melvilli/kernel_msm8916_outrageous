@@ -13,6 +13,11 @@ config ASYMMETRIC_PUBLIC_KEY_SUBTYPE
 	tristate "Asymmetric public-key crypto algorithm subtype"
 	select MPILIB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select PUBLIC_KEY_ALGO_RSA
+	select CRYPTO_HASH_INFO
+>>>>>>> v3.18
 =======
 	select PUBLIC_KEY_ALGO_RSA
 	select CRYPTO_HASH_INFO
@@ -26,8 +31,12 @@ config ASYMMETRIC_PUBLIC_KEY_SUBTYPE
 config PUBLIC_KEY_ALGO_RSA
 	tristate "RSA public-key algorithm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ASYMMETRIC_PUBLIC_KEY_SUBTYPE
 	select MPILIB_EXTRA
+=======
+	select MPILIB
+>>>>>>> v3.18
 =======
 	select MPILIB
 >>>>>>> v3.18
@@ -41,11 +50,14 @@ config X509_CERTIFICATE_PARSER
 	select OID_REGISTRY
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This option procides support for parsing X.509 format blobs for key
 	  data and provides the ability to instantiate a crypto key from a
 	  public key packet found inside the certificate.
 
 =======
+=======
+>>>>>>> v3.18
 	  This option provides support for parsing X.509 format blobs for key
 	  data and provides the ability to instantiate a crypto key from a
 	  public key packet found inside the certificate.
@@ -81,5 +93,8 @@ config SIGNED_PE_FILE_VERIFICATION
 	  This option provides support for verifying the signature(s) on a
 	  signed PE binary.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # ASYMMETRIC_KEY_TYPE

@@ -30,8 +30,14 @@
 #define __REALTEK_PCI92SE_TRX_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92se_tx_fill_desc(struct ieee80211_hw *hw, struct ieee80211_hdr *hdr,
 			  u8 *pdesc, struct ieee80211_tx_info *info,
+=======
+void rtl92se_tx_fill_desc(struct ieee80211_hw *hw,
+			  struct ieee80211_hdr *hdr, u8 *pdesc,
+			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
+>>>>>>> v3.18
 =======
 void rtl92se_tx_fill_desc(struct ieee80211_hw *hw,
 			  struct ieee80211_hdr *hdr, u8 *pdesc,
@@ -46,7 +52,12 @@ bool rtl92se_rx_query_desc(struct ieee80211_hw *hw, struct rtl_stats *stats,
 			   struct ieee80211_rx_status *rx_status, u8 *pdesc,
 			   struct sk_buff *skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92se_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val);
+=======
+void rtl92se_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
+		      u8 desc_name, u8 *val);
+>>>>>>> v3.18
 =======
 void rtl92se_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
 		      u8 desc_name, u8 *val);

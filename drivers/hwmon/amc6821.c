@@ -22,7 +22,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>	/* Needed for KERN_INFO */
@@ -37,7 +40,10 @@
 #include <linux/mutex.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -48,8 +54,11 @@ static const unsigned short normal_i2c[] = {0x18, 0x19, 0x1a, 0x2c, 0x2d, 0x2e,
 	0x4c, 0x4d, 0x4e, I2C_CLIENT_END};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -63,7 +72,10 @@ static int init = 1; /*Power-on initialization.*/
 module_param(init, int, S_IRUGO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum chips { amc6821 };
@@ -165,6 +177,7 @@ static const u8 fan_reg_hi[] = {AMC6821_REG_TDATA_HI,
 			AMC6821_REG_TACH_HLIMITH, };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int amc6821_probe(
 		struct i2c_client *client,
 		const struct i2c_device_id *id);
@@ -201,13 +214,19 @@ static struct i2c_driver amc6821_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Client data (each client gets its own)
  */
 
 struct amc6821_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -233,7 +252,10 @@ struct amc6821_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct amc6821_data *amc6821_update_device(struct device *dev)
 {
 	struct amc6821_data *data = dev_get_drvdata(dev);
@@ -336,6 +358,9 @@ static struct amc6821_data *amc6821_update_device(struct device *dev)
 	mutex_unlock(&data->update_lock);
 	return data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t get_temp(
@@ -350,8 +375,11 @@ static ssize_t get_temp(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t set_temp(
@@ -361,8 +389,13 @@ static ssize_t set_temp(
 		size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = i2c_get_clientdata(client);
+=======
+	struct amc6821_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -386,9 +419,12 @@ static ssize_t set_temp(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_temp_alarm(
@@ -430,9 +466,12 @@ static ssize_t get_temp_alarm(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_temp2_fault(
@@ -463,8 +502,13 @@ static ssize_t set_pwm1(
 		size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = i2c_get_clientdata(client);
+=======
+	struct amc6821_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -497,8 +541,13 @@ static ssize_t set_pwm1_enable(
 		size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = i2c_get_clientdata(client);
+=======
+	struct amc6821_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -509,6 +558,10 @@ static ssize_t set_pwm1_enable(
 		return config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&data->update_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&data->update_lock);
 >>>>>>> v3.18
@@ -517,7 +570,12 @@ static ssize_t set_pwm1_enable(
 			dev_err(&client->dev,
 			"Error reading configuration register, aborting.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -EIO;
+=======
+			count = config;
+			goto unlock;
+>>>>>>> v3.18
 =======
 			count = config;
 			goto unlock;
@@ -539,9 +597,15 @@ static ssize_t set_pwm1_enable(
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
 	}
 	mutex_lock(&data->update_lock);
+=======
+		count = -EINVAL;
+		goto unlock;
+	}
+>>>>>>> v3.18
 =======
 		count = -EINVAL;
 		goto unlock;
@@ -553,6 +617,10 @@ static ssize_t set_pwm1_enable(
 			count = -EIO;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unlock:
+>>>>>>> v3.18
 =======
 unlock:
 >>>>>>> v3.18
@@ -561,7 +629,10 @@ unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_pwm1_auto_channels_temp(
@@ -574,7 +645,10 @@ static ssize_t get_pwm1_auto_channels_temp(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_temp_auto_point_temp(
@@ -590,11 +664,17 @@ static ssize_t get_temp_auto_point_temp(
 		return sprintf(buf, "%d\n",
 			data->temp1_auto_point_temp[ix] * 1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case 2:
 		return sprintf(buf, "%d\n",
 			data->temp2_auto_point_temp[ix] * 1000);
 		break;
+=======
+	case 2:
+		return sprintf(buf, "%d\n",
+			data->temp2_auto_point_temp[ix] * 1000);
+>>>>>>> v3.18
 =======
 	case 2:
 		return sprintf(buf, "%d\n",
@@ -607,7 +687,10 @@ static ssize_t get_temp_auto_point_temp(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_pwm1_auto_point_pwm(
@@ -621,7 +704,10 @@ static ssize_t get_pwm1_auto_point_pwm(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline ssize_t set_slope_register(struct i2c_client *client,
@@ -647,8 +733,11 @@ static inline ssize_t set_slope_register(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t set_temp_auto_point_temp(
@@ -658,8 +747,13 @@ static ssize_t set_temp_auto_point_temp(
 		size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = amc6821_update_device(dev);
+=======
+	struct amc6821_data *data = amc6821_update_device(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = amc6821_update_device(dev);
 	struct i2c_client *client = data->client;
@@ -689,8 +783,14 @@ static ssize_t set_temp_auto_point_temp(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->valid = 0;
 	mutex_lock(&data->update_lock);
+=======
+	mutex_lock(&data->update_lock);
+	data->valid = 0;
+
+>>>>>>> v3.18
 =======
 	mutex_lock(&data->update_lock);
 	data->valid = 0;
@@ -713,7 +813,10 @@ static ssize_t set_temp_auto_point_temp(
 		}
 		goto EXIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case 1:
@@ -739,8 +842,11 @@ EXIT:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t set_pwm1_auto_point_pwm(
@@ -750,8 +856,13 @@ static ssize_t set_pwm1_auto_point_pwm(
 		size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = i2c_get_clientdata(client);
+=======
+	struct amc6821_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -801,8 +912,11 @@ static ssize_t get_fan(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_fan1_fault(
@@ -818,8 +932,11 @@ static ssize_t get_fan1_fault(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t set_fan(
@@ -828,8 +945,13 @@ static ssize_t set_fan(
 		const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = i2c_get_clientdata(client);
+=======
+	struct amc6821_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -860,8 +982,11 @@ EXIT:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t get_fan1_div(
@@ -879,8 +1004,13 @@ static ssize_t set_fan1_div(
 		const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct amc6821_data *data = i2c_get_clientdata(client);
+=======
+	struct amc6821_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct amc6821_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -891,6 +1021,10 @@ static ssize_t set_fan1_div(
 		return config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&data->update_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&data->update_lock);
 >>>>>>> v3.18
@@ -899,9 +1033,15 @@ static ssize_t set_fan1_div(
 		dev_err(&client->dev,
 			"Error reading configuration register, aborting.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
 	}
 	mutex_lock(&data->update_lock);
+=======
+		count = config;
+		goto EXIT;
+	}
+>>>>>>> v3.18
 =======
 		count = config;
 		goto EXIT;
@@ -931,8 +1071,11 @@ EXIT:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO,
@@ -1000,8 +1143,11 @@ static SENSOR_DEVICE_ATTR_2(temp2_auto_point3_temp, S_IWUSR | S_IRUGO,
 	get_temp_auto_point_temp, set_temp_auto_point_temp, 2, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct attribute *amc6821_attrs[] = {
@@ -1041,11 +1187,15 @@ static struct attribute *amc6821_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute_group amc6821_attr_grp = {
 	.attrs = amc6821_attrs,
 };
 
 
+=======
+ATTRIBUTE_GROUPS(amc6821);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(amc6821);
 >>>>>>> v3.18
@@ -1097,6 +1247,7 @@ static int amc6821_detect(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int amc6821_probe(
 	struct i2c_client *client,
 	const struct i2c_device_id *id)
@@ -1144,6 +1295,8 @@ static int amc6821_remove(struct i2c_client *client)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int amc6821_init_client(struct i2c_client *client)
@@ -1233,6 +1386,7 @@ static int amc6821_init_client(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct amc6821_data *amc6821_update_device(struct device *dev)
 {
@@ -1337,6 +1491,8 @@ static struct amc6821_data *amc6821_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 static int amc6821_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -1382,6 +1538,9 @@ static struct i2c_driver amc6821_driver = {
 	.detect = amc6821_detect,
 	.address_list = normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(amc6821_driver);

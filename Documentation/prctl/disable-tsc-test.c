@@ -30,7 +30,12 @@ const char *tsc_names[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 uint64_t rdtsc() {
+=======
+static uint64_t rdtsc(void)
+{
+>>>>>>> v3.18
 =======
 static uint64_t rdtsc(void)
 {
@@ -42,7 +47,11 @@ return (uint64_t)hi << 32 | lo;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sigsegv_cb(int sig)
+=======
+static void sigsegv_cb(int sig)
+>>>>>>> v3.18
 =======
 static void sigsegv_cb(int sig)
 >>>>>>> v3.18

@@ -294,7 +294,11 @@ static int pm860x_rtc_dt_init(struct platform_device *pdev,
 	if (!np)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np = of_find_node_by_name(np, "rtc");
+=======
+	np = of_get_child_by_name(np, "rtc");
+>>>>>>> v3.18
 =======
 	np = of_get_child_by_name(np, "rtc");
 >>>>>>> v3.18
@@ -306,6 +310,10 @@ static int pm860x_rtc_dt_init(struct platform_device *pdev,
 	if (ret)
 		info->vrtc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(np);
+>>>>>>> v3.18
 =======
 	of_node_put(np);
 >>>>>>> v3.18
@@ -325,7 +333,11 @@ static int pm860x_rtc_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -431,7 +443,10 @@ static int pm860x_rtc_remove(struct platform_device *pdev)
 #endif	/* VRTC_CALIBRATION */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

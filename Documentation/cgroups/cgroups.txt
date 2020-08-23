@@ -25,7 +25,10 @@ CONTENTS:
   2.2 Attaching processes
   2.3 Mounting hierarchies by name
 <<<<<<< HEAD
+<<<<<<< HEAD
   2.4 Notification API
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 3. Kernel API
@@ -476,6 +479,7 @@ The name of the subsystem appears as part of the hierarchy description
 in /proc/mounts and /proc/<pid>/cgroups.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2.4 Notification API
 --------------------
 
@@ -495,6 +499,8 @@ To unregister a notification handler just close eventfd.
 
 NOTE: Support of notifications should be implemented for the control
 file. See documentation for the subsystem.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -605,6 +611,7 @@ be called for a newly-created cgroup if an error occurs after this
 subsystem's create() method has been called for the new cgroup).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int allow_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 (cgroup_mutex held by caller)
 
@@ -614,6 +621,8 @@ to extend the permission checks - if all subsystems in a cgroup
 return 0, the attach will be allowed to proceed, even if the
 default permission check (root or same user) fails.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int can_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
@@ -638,7 +647,10 @@ while the caller holds cgroup_mutex and it is ensured that either
 attach() or cancel_attach() will be called in future.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void css_reset(struct cgroup_subsys_state *css)
 (cgroup_mutex held by caller)
 
@@ -653,6 +665,9 @@ This prevents unexpected resource control from a hidden css and
 ensures that the configuration is in the initial state when it is made
 visible again later.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void cancel_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 (cgroup_mutex held by caller)

@@ -12,7 +12,10 @@
 #define __XTENSA_XTAVNET_LCD_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_XTFPGA_LCD
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Display string STR at position POS on the LCD. */
@@ -21,6 +24,7 @@ void lcd_disp_at_pos(char *str, unsigned char pos);
 /* Shift the contents of the LCD display left or right. */
 void lcd_shiftleft(void);
 void lcd_shiftright(void);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 static inline void lcd_disp_at_pos(char *str, unsigned char pos)
@@ -36,6 +40,8 @@ static inline void lcd_shiftright(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

@@ -42,11 +42,15 @@
  * and PAGE_OFFSET - it must be within 128MB of the kernel text.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARM64_64K_PAGES
 #define VA_BITS			(42)
 #else
 #define VA_BITS			(39)
 #endif
+=======
+#define VA_BITS			(CONFIG_ARM64_VA_BITS)
+>>>>>>> v3.18
 =======
 #define VA_BITS			(CONFIG_ARM64_VA_BITS)
 >>>>>>> v3.18
@@ -61,6 +65,11 @@
 #define TASK_SIZE		(test_thread_flag(TIF_32BIT) ? \
 				TASK_SIZE_32 : TASK_SIZE_64)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TASK_SIZE_OF(tsk)	(test_tsk_thread_flag(tsk, TIF_32BIT) ? \
+				TASK_SIZE_32 : TASK_SIZE_64)
+>>>>>>> v3.18
 =======
 #define TASK_SIZE_OF(tsk)	(test_tsk_thread_flag(tsk, TIF_32BIT) ? \
 				TASK_SIZE_32 : TASK_SIZE_64)
@@ -154,7 +163,11 @@ static inline void *phys_to_virt(phys_addr_t x)
  *  virt_addr_valid(k)	indicates whether a virtual address is valid
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCH_PFN_OFFSET		PHYS_PFN_OFFSET
+=======
+#define ARCH_PFN_OFFSET		((unsigned long)PHYS_PFN_OFFSET)
+>>>>>>> v3.18
 =======
 #define ARCH_PFN_OFFSET		((unsigned long)PHYS_PFN_OFFSET)
 >>>>>>> v3.18

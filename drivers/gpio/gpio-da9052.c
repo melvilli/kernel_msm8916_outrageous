@@ -201,7 +201,11 @@ static struct gpio_chip reference_gp = {
 	.direction_output = da9052_gpio_direction_output,
 	.to_irq = da9052_gpio_to_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep = 1,
+=======
+	.can_sleep = true,
+>>>>>>> v3.18
 =======
 	.can_sleep = true,
 >>>>>>> v3.18
@@ -221,7 +225,11 @@ static int da9052_gpio_probe(struct platform_device *pdev)
 
 	gpio->da9052 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = gpio->da9052->dev->platform_data;
+=======
+	pdata = dev_get_platdata(gpio->da9052->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(gpio->da9052->dev);
 >>>>>>> v3.18
@@ -246,7 +254,12 @@ static int da9052_gpio_remove(struct platform_device *pdev)
 	struct da9052_gpio *gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&gpio->gp);
+=======
+	gpiochip_remove(&gpio->gp);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&gpio->gp);
 	return 0;

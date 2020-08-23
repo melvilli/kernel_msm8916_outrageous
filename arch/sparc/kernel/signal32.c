@@ -32,6 +32,10 @@
 
 #include "sigutil.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -150,7 +154,11 @@ void do_sigreturn32(struct pt_regs *regs)
 	unsigned pc, npc;
 	sigset_t set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned seta[_COMPAT_NSIG_WORDS];
+=======
+	compat_sigset_t seta;
+>>>>>>> v3.18
 =======
 	compat_sigset_t seta;
 >>>>>>> v3.18
@@ -218,6 +226,7 @@ void do_sigreturn32(struct pt_regs *regs)
 			goto segv;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= __get_user(seta[0], &sf->info.si_mask);
 	err |= copy_from_user(seta+1, &sf->extramask,
 			      (_COMPAT_NSIG_WORDS - 1) * sizeof(unsigned int));
@@ -230,6 +239,8 @@ void do_sigreturn32(struct pt_regs *regs)
 		case 1: set.sig[0] = seta[0] + (((long)seta[1]) << 32);
 	}
 =======
+=======
+>>>>>>> v3.18
 	err |= __get_user(seta.sig[0], &sf->info.si_mask);
 	err |= copy_from_user(&seta.sig[1], &sf->extramask,
 			      (_COMPAT_NSIG_WORDS - 1) * sizeof(unsigned int));
@@ -237,6 +248,9 @@ void do_sigreturn32(struct pt_regs *regs)
 	    	goto segv;
 
 	set.sig[0] = seta.sig[0] + (((long)seta.sig[1]) << 32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_current_blocked(&set);
 	return;
@@ -322,12 +336,16 @@ asmlinkage void do_rt_sigreturn32(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (_NSIG_WORDS) {
 		case 4: set.sig[3] = seta.sig[6] + (((long)seta.sig[7]) << 32);
 		case 3: set.sig[2] = seta.sig[4] + (((long)seta.sig[5]) << 32);
 		case 2: set.sig[1] = seta.sig[2] + (((long)seta.sig[3]) << 32);
 		case 1: set.sig[0] = seta.sig[0] + (((long)seta.sig[1]) << 32);
 	}
+=======
+	set.sig[0] = seta.sig[0] + (((long)seta.sig[1]) << 32);
+>>>>>>> v3.18
 =======
 	set.sig[0] = seta.sig[0] + (((long)seta.sig[1]) << 32);
 >>>>>>> v3.18
@@ -440,7 +458,11 @@ static int setup_frame32(struct ksignal *ksig, struct pt_regs *regs,
 	int sigframe_size;
 	u32 psr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int seta[_COMPAT_NSIG_WORDS];
+=======
+	compat_sigset_t seta;
+>>>>>>> v3.18
 =======
 	compat_sigset_t seta;
 >>>>>>> v3.18
@@ -508,6 +530,7 @@ static int setup_frame32(struct ksignal *ksig, struct pt_regs *regs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (_NSIG_WORDS) {
 	case 4: seta[7] = (oldset->sig[3] >> 32);
 	        seta[6] = oldset->sig[3];
@@ -521,6 +544,8 @@ static int setup_frame32(struct ksignal *ksig, struct pt_regs *regs,
 	err |= __put_user(seta[0], &sf->info.si_mask);
 	err |= __copy_to_user(sf->extramask, seta + 1,
 =======
+=======
+>>>>>>> v3.18
 	/* If these change we need to know - assignments to seta relies on these sizes */
 	BUILD_BUG_ON(_NSIG_WORDS != 1);
 	BUILD_BUG_ON(_COMPAT_NSIG_WORDS != 2);
@@ -529,6 +554,9 @@ static int setup_frame32(struct ksignal *ksig, struct pt_regs *regs,
 
 	err |= __put_user(seta.sig[0], &sf->info.si_mask);
 	err |= __copy_to_user(sf->extramask, &seta.sig[1],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      (_COMPAT_NSIG_WORDS - 1) * sizeof(unsigned int));
 
@@ -660,6 +688,7 @@ static int setup_rt_frame32(struct ksignal *ksig, struct pt_regs *regs,
 	err |= __compat_save_altstack(&sf->stack, regs->u_regs[UREG_FP]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (_NSIG_WORDS) {
 	case 4: seta.sig[7] = (oldset->sig[3] >> 32);
 		seta.sig[6] = oldset->sig[3];
@@ -670,6 +699,10 @@ static int setup_rt_frame32(struct ksignal *ksig, struct pt_regs *regs,
 	case 1: seta.sig[1] = (oldset->sig[0] >> 32);
 		seta.sig[0] = oldset->sig[0];
 	}
+=======
+	seta.sig[1] = (oldset->sig[0] >> 32);
+	seta.sig[0] = oldset->sig[0];
+>>>>>>> v3.18
 =======
 	seta.sig[1] = (oldset->sig[0] >> 32);
 	seta.sig[0] = oldset->sig[0];

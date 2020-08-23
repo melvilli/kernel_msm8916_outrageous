@@ -29,6 +29,7 @@
 #include "hid-sensor-trigger.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hid_sensor_data_rdy_trigger_set_state(struct iio_trigger *trig,
 						bool state)
 {
@@ -56,6 +57,8 @@ void hid_sensor_remove_trigger(struct iio_dev *indio_dev)
 	iio_trigger_free(indio_dev->trig);
 	indio_dev->trig = NULL;
 =======
+=======
+>>>>>>> v3.18
 int hid_sensor_power_state(struct hid_sensor_common *st, bool state)
 {
 	int state_val;
@@ -120,6 +123,9 @@ void hid_sensor_remove_trigger(struct hid_sensor_common *attrb)
 {
 	iio_trigger_unregister(attrb->trigger);
 	iio_trigger_free(attrb->trigger);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(hid_sensor_remove_trigger);
@@ -152,7 +158,12 @@ int hid_sensor_setup_trigger(struct iio_dev *indio_dev, const char *name,
 		goto error_free_trig;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev->trig = trig;
+=======
+	attrb->trigger = trig;
+	indio_dev->trig = iio_trigger_get(trig);
+>>>>>>> v3.18
 =======
 	attrb->trigger = trig;
 	indio_dev->trig = iio_trigger_get(trig);

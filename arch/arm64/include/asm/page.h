@@ -29,6 +29,7 @@
 #define PAGE_MASK		(~(PAGE_SIZE-1))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We do define AT_SYSINFO_EHDR but don't use the gate mechanism */
 #define __HAVE_ARCH_GATE_AREA		1
 
@@ -41,6 +42,8 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * The idmap and swapper page tables need some space reserved in the kernel
  * image. Both require pgd, pud (4 levels only) and pmd tables to (section)
@@ -61,6 +64,9 @@
 
 #include <asm/pgtable-types.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void __cpu_clear_user_page(void *p, unsigned long user);
 extern void __cpu_copy_user_page(void *to, const void *from,

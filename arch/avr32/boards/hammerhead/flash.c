@@ -191,6 +191,7 @@ static int __init hammerhead_usbh_init(void)
 	/* setup gclk0 to run from osc1 */
 	gclk = clk_get(NULL, "gclk0");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(gclk))
 		goto err_gclk;
 
@@ -200,6 +201,8 @@ static int __init hammerhead_usbh_init(void)
 
 	if (clk_set_parent(gclk, osc)) {
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(gclk)) {
 		ret = PTR_ERR(gclk);
 		goto err_gclk;
@@ -213,6 +216,9 @@ static int __init hammerhead_usbh_init(void)
 
 	ret = clk_set_parent(gclk, osc);
 	if (ret < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_debug("hammerhead: failed to set osc1 for USBH clock\n");
 		goto err_set_clk;

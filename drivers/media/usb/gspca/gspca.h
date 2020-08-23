@@ -79,8 +79,13 @@ typedef int (*cam_get_reg_op) (struct gspca_dev *,
 typedef int (*cam_set_reg_op) (struct gspca_dev *,
 				const struct v4l2_dbg_register *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef int (*cam_ident_op) (struct gspca_dev *,
 				struct v4l2_dbg_chip_ident *);
+=======
+typedef int (*cam_chip_info_op) (struct gspca_dev *,
+				struct v4l2_dbg_chip_info *);
+>>>>>>> v3.18
 =======
 typedef int (*cam_chip_info_op) (struct gspca_dev *,
 				struct v4l2_dbg_chip_info *);
@@ -94,11 +99,17 @@ typedef int (*cam_int_pkt_op) (struct gspca_dev *gspca_dev,
 				u8 *data,
 				int len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef void (*cam_format_op) (struct gspca_dev *gspca_dev,
 				struct v4l2_format *fmt);
 typedef int (*cam_frmsize_op) (struct gspca_dev *gspca_dev,
 				struct v4l2_frmsizeenum *fsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* subdriver description */
@@ -122,12 +133,15 @@ struct sd_desc {
 	cam_streamparm_op get_streamparm;
 	cam_streamparm_op set_streamparm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	cam_set_reg_op set_register;
 	cam_get_reg_op get_register;
 #endif
 	cam_ident_op get_chip_ident;
 =======
+=======
+>>>>>>> v3.18
 	cam_format_op try_fmt;
 	cam_frmsize_op enum_framesizes;
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -135,6 +149,9 @@ struct sd_desc {
 	cam_get_reg_op get_register;
 	cam_chip_info_op get_chip_info;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if IS_ENABLED(CONFIG_INPUT)
 	cam_int_pkt_op int_pkt_scan;
@@ -206,9 +223,13 @@ struct gspca_dev {
 
 	__u8 curr_mode;			/* current camera mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 pixfmt;			/* current mode parameters */
 	__u16 width;
 	__u16 height;
+=======
+	struct v4l2_pix_format pixfmt;	/* current mode parameters */
+>>>>>>> v3.18
 =======
 	struct v4l2_pix_format pixfmt;	/* current mode parameters */
 >>>>>>> v3.18
@@ -228,6 +249,10 @@ struct gspca_dev {
 	__u8 iface;			/* USB interface number */
 	__u8 alt;			/* USB alternate setting */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int xfer_ep;			/* USB transfer endpoint address */
+>>>>>>> v3.18
 =======
 	int xfer_ep;			/* USB transfer endpoint address */
 >>>>>>> v3.18
@@ -261,7 +286,11 @@ int gspca_expo_autogain(struct gspca_dev *gspca_dev, int avg_lum,
 	int desired_avg_lum, int deadzone, int gain_knee, int exposure_knee);
 int gspca_coarse_grained_expo_autogain(struct gspca_dev *gspca_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
         int avg_lum, int desired_avg_lum, int deadzone);
+=======
+	int avg_lum, int desired_avg_lum, int deadzone);
+>>>>>>> v3.18
 =======
 	int avg_lum, int desired_avg_lum, int deadzone);
 >>>>>>> v3.18

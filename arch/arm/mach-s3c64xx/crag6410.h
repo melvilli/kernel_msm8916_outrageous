@@ -12,10 +12,16 @@
 #define MACH_CRAG6410_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 
 #define GLENFARCLAS_PMIC_IRQ_BASE	IRQ_BOARD_START
 #define BANFF_PMIC_IRQ_BASE		(IRQ_BOARD_START + 64)
+=======
+#include <mach/gpio-samsung.h>
+
+#define GLENFARCLAS_PMIC_IRQ_BASE	IRQ_BOARD_START
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 

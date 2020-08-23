@@ -30,7 +30,10 @@
 
 #include <asm/processor.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/pci/bridge.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/sn/addrs.h>
@@ -57,6 +60,7 @@
 
 extern asmlinkage void ip27_irq(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct bridge_controller *irq_to_bridge[];
 extern int irq_to_slot[];
@@ -102,6 +106,8 @@ static inline int find_level(cpuid_t *cpunum, int irq)
 	panic("Could not identify cpu/level for irq %d", irq);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -210,6 +216,7 @@ static void ip27_hub_error(void)
 	panic("CPU %d got a hub error interrupt", smp_processor_id());
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int intr_connect_level(int cpu, int bit)
 {
@@ -380,6 +387,8 @@ int request_bridge_irq(struct bridge_controller *bc)
 	return irq;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 asmlinkage void plat_irq_dispatch(void)

@@ -22,6 +22,11 @@
 #include <linux/io.h>
 #include <linux/pxa2xx_ssp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/dmaengine.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/dmaengine.h>
@@ -36,9 +41,13 @@
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/dma.h>
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -89,6 +98,7 @@ static void pxa_ssp_disable(struct ssp_device *ssp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pxa2xx_pcm_dma_data {
 	struct pxa2xx_pcm_dma_params params;
 	char name[20];
@@ -111,6 +121,8 @@ static void pxa_ssp_set_dma_params(struct ssp_device *ssp, int width4,
 			(width4 ? DCMD_WIDTH4 : DCMD_WIDTH2) | DCMD_BURST16;
 	dma->params.dev_addr = ssp->phys_base + SSDR;
 =======
+=======
+>>>>>>> v3.18
 static void pxa_ssp_set_dma_params(struct ssp_device *ssp, int width4,
 			int out, struct snd_dmaengine_dai_dma_data *dma)
 {
@@ -118,6 +130,9 @@ static void pxa_ssp_set_dma_params(struct ssp_device *ssp, int width4,
 				   DMA_SLAVE_BUSWIDTH_2_BYTES;
 	dma->maxburst = 16;
 	dma->addr = ssp->phys_base + SSDR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -127,7 +142,11 @@ static int pxa_ssp_startup(struct snd_pcm_substream *substream,
 	struct ssp_priv *priv = snd_soc_dai_get_drvdata(cpu_dai);
 	struct ssp_device *ssp = priv->ssp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_data *dma;
+=======
+	struct snd_dmaengine_dai_dma_data *dma;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma;
 >>>>>>> v3.18
@@ -139,11 +158,14 @@ static int pxa_ssp_startup(struct snd_pcm_substream *substream,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma = kzalloc(sizeof(struct pxa2xx_pcm_dma_data), GFP_KERNEL);
 	if (!dma)
 		return -ENOMEM;
 	snd_soc_dai_set_dma_data(cpu_dai, substream, &dma->params);
 =======
+=======
+>>>>>>> v3.18
 	dma = kzalloc(sizeof(struct snd_dmaengine_dai_dma_data), GFP_KERNEL);
 	if (!dma)
 		return -ENOMEM;
@@ -152,6 +174,9 @@ static int pxa_ssp_startup(struct snd_pcm_substream *substream,
 				&ssp->drcmr_tx : &ssp->drcmr_rx;
 
 	snd_soc_dai_set_dma_data(cpu_dai, substream, dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -594,7 +619,11 @@ static int pxa_ssp_hw_params(struct snd_pcm_substream *substream,
 	int width = snd_pcm_format_physical_width(params_format(params));
 	int ttsa = pxa_ssp_read_reg(ssp, SSTSA) & 0xf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma_data;
+=======
+	struct snd_dmaengine_dai_dma_data *dma_data;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma_data;
 >>>>>>> v3.18
@@ -758,6 +787,10 @@ static int pxa_ssp_trigger(struct snd_pcm_substream *substream, int cmd,
 static int pxa_ssp_probe(struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = dai->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = dai->dev;
 >>>>>>> v3.18
@@ -769,11 +802,14 @@ static int pxa_ssp_probe(struct snd_soc_dai *dai)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->ssp = pxa_ssp_request(dai->id + 1, "SoC audio");
 	if (priv->ssp == NULL) {
 		ret = -ENODEV;
 		goto err_priv;
 =======
+=======
+>>>>>>> v3.18
 	if (dev->of_node) {
 		struct device_node *ssp_handle;
 
@@ -795,6 +831,9 @@ static int pxa_ssp_probe(struct snd_soc_dai *dai)
 			ret = -ENODEV;
 			goto err_priv;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -863,7 +902,10 @@ static const struct snd_soc_component_driver pxa_ssp_component = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id pxa_ssp_of_ids[] = {
 	{ .compatible = "mrvl,pxa-ssp-dai" },
@@ -871,6 +913,9 @@ static const struct of_device_id pxa_ssp_of_ids[] = {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int asoc_ssp_probe(struct platform_device *pdev)
 {
@@ -887,8 +932,14 @@ static int asoc_ssp_remove(struct platform_device *pdev)
 static struct platform_driver asoc_ssp_driver = {
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.name = "pxa-ssp-dai",
 			.owner = THIS_MODULE,
+=======
+		.name = "pxa-ssp-dai",
+		.owner = THIS_MODULE,
+		.of_match_table = of_match_ptr(pxa_ssp_of_ids),
+>>>>>>> v3.18
 =======
 		.name = "pxa-ssp-dai",
 		.owner = THIS_MODULE,

@@ -403,7 +403,13 @@ __tapechar_ioctl(struct tape_device *device,
 		get.mt_type = MT_ISUNKNOWN;
 		get.mt_resid = 0 /* device->devstat.rescnt */;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get.mt_dsreg = device->tape_state;
+=======
+		get.mt_dsreg =
+			((device->char_data.block_size << MT_ST_BLKSIZE_SHIFT)
+			 & MT_ST_BLKSIZE_MASK);
+>>>>>>> v3.18
 =======
 		get.mt_dsreg =
 			((device->char_data.block_size << MT_ST_BLKSIZE_SHIFT)

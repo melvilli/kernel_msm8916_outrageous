@@ -724,15 +724,21 @@ int cx231xx_set_mode(struct cx231xx *dev, enum cx231xx_mode set_mode)
 		case CX231XX_BOARD_CNXT_RDE_253S:
 		case CX231XX_BOARD_CNXT_RDU_253S:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case CX231XX_BOARD_PV_PLAYTV_USB_HYBRID:
 			errCode = cx231xx_set_agc_analog_digital_mux_select(dev, 1);
 			break;
 		case CX231XX_BOARD_HAUPPAUGE_EXETER:
 =======
+=======
+>>>>>>> v3.18
 			errCode = cx231xx_set_agc_analog_digital_mux_select(dev, 1);
 			break;
 		case CX231XX_BOARD_HAUPPAUGE_EXETER:
 		case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			errCode = cx231xx_set_power_mode(dev,
 						POLARIS_AVMODE_DIGITAL);
@@ -753,16 +759,22 @@ int cx231xx_set_mode(struct cx231xx *dev, enum cx231xx_mode set_mode)
 		case CX231XX_BOARD_CNXT_RDU_253S:
 		case CX231XX_BOARD_HAUPPAUGE_EXETER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case CX231XX_BOARD_PV_PLAYTV_USB_HYBRID:
 		case CX231XX_BOARD_HAUPPAUGE_USB2_FM_PAL:
 		case CX231XX_BOARD_HAUPPAUGE_USB2_FM_NTSC:
 			errCode = cx231xx_set_agc_analog_digital_mux_select(dev, 0);
 =======
+=======
+>>>>>>> v3.18
 		case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
 		case CX231XX_BOARD_PV_PLAYTV_USB_HYBRID:
 		case CX231XX_BOARD_HAUPPAUGE_USB2_FM_PAL:
 		case CX231XX_BOARD_HAUPPAUGE_USB2_FM_NTSC:
 		errCode = cx231xx_set_agc_analog_digital_mux_select(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -1396,6 +1408,10 @@ int cx231xx_dev_init(struct cx231xx *dev)
 	case CX231XX_BOARD_CNXT_RDU_253S:
 	case CX231XX_BOARD_HAUPPAUGE_EXETER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
+>>>>>>> v3.18
 =======
 	case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
 >>>>>>> v3.18
@@ -1509,7 +1525,11 @@ int cx231xx_mode_register(struct cx231xx *dev, u16 address, u32 mode)
 		return status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = le32_to_cpu(*((u32 *) value));
+=======
+	tmp = le32_to_cpu(*((__le32 *) value));
+>>>>>>> v3.18
 =======
 	tmp = le32_to_cpu(*((__le32 *) value));
 >>>>>>> v3.18

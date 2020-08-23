@@ -297,7 +297,10 @@ enum rtattr_type_t {
 	RTA_TABLE,
 	RTA_MARK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RTA_UID,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	RTA_MFC_STATS,
@@ -391,6 +394,11 @@ enum {
 	RTAX_INITRWND,
 #define RTAX_INITRWND RTAX_INITRWND
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RTAX_QUICKACK,
+#define RTAX_QUICKACK RTAX_QUICKACK
+>>>>>>> v3.18
 =======
 	RTAX_QUICKACK,
 #define RTAX_QUICKACK RTAX_QUICKACK

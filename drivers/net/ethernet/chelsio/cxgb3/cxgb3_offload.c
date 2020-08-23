@@ -183,15 +183,21 @@ static struct net_device *get_iff_from_mac(struct adapter *adapter,
 		struct net_device *dev = adapter->port[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!memcmp(dev->dev_addr, mac, ETH_ALEN)) {
 			rcu_read_lock();
 			if (vlan && vlan != VLAN_VID_MASK) {
 				dev = __vlan_find_dev_deep(dev, htons(ETH_P_8021Q), vlan);
 =======
+=======
+>>>>>>> v3.18
 		if (ether_addr_equal(dev->dev_addr, mac)) {
 			rcu_read_lock();
 			if (vlan && vlan != VLAN_VID_MASK) {
 				dev = __vlan_find_dev_deep_rcu(dev, htons(ETH_P_8021Q), vlan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else if (netif_is_bond_slave(dev)) {
 				struct net_device *upper_dev;
@@ -1165,7 +1171,11 @@ static void cxgb_redirect(struct dst_entry *old, struct dst_entry *new,
 void *cxgb_alloc_mem(unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *p = kzalloc(size, GFP_KERNEL);
+=======
+	void *p = kzalloc(size, GFP_KERNEL | __GFP_NOWARN);
+>>>>>>> v3.18
 =======
 	void *p = kzalloc(size, GFP_KERNEL | __GFP_NOWARN);
 >>>>>>> v3.18
@@ -1258,6 +1268,10 @@ int cxgb3_offload_activate(struct adapter *adapter)
 	struct mtutab mtutab;
 	unsigned int l2t_capacity;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct l2t_data *l2td;
+>>>>>>> v3.18
 =======
 	struct l2t_data *l2td;
 >>>>>>> v3.18
@@ -1277,8 +1291,13 @@ int cxgb3_offload_activate(struct adapter *adapter)
 
 	err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RCU_INIT_POINTER(dev->l2opt, t3_init_l2t(l2t_capacity));
 	if (!L2DATA(dev))
+=======
+	l2td = t3_init_l2t(l2t_capacity);
+	if (!l2td)
+>>>>>>> v3.18
 =======
 	l2td = t3_init_l2t(l2t_capacity);
 	if (!l2td)
@@ -1300,6 +1319,10 @@ int cxgb3_offload_activate(struct adapter *adapter)
 	t->dev = dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RCU_INIT_POINTER(dev->l2opt, l2td);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(dev->l2opt, l2td);
 >>>>>>> v3.18
@@ -1319,8 +1342,12 @@ int cxgb3_offload_activate(struct adapter *adapter)
 
 out_free_l2t:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t3_free_l2t(L2DATA(dev));
 	RCU_INIT_POINTER(dev->l2opt, NULL);
+=======
+	t3_free_l2t(l2td);
+>>>>>>> v3.18
 =======
 	t3_free_l2t(l2td);
 >>>>>>> v3.18

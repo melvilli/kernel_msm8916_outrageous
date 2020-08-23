@@ -17,6 +17,7 @@
 #include <linux/io.h>
 #include <linux/cpufreq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reboot.h>
 #include <linux/regulator/consumer.h>
 #include <linux/suspend.h>
@@ -29,6 +30,8 @@ static struct clk *dmc0_clk;
 static struct clk *dmc1_clk;
 static struct cpufreq_freqs freqs;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/platform_device.h>
@@ -96,6 +99,9 @@ static void __iomem *dmc_base[2];
 
 static struct clk *dmc0_clk;
 static struct clk *dmc1_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_MUTEX(set_freq_lock);
 
@@ -107,6 +113,7 @@ static DEFINE_MUTEX(set_freq_lock);
 #define SLEEP_FREQ	(800 * 1000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * relation has an additional symantics other than the standard of cpufreq
  * DISALBE_FURTHER_CPUFREQ: disable further access to target
@@ -117,6 +124,9 @@ enum cpufreq_access {
 	ENABLE_FURTHER_CPUFREQ = 0x20,
 };
 
+=======
+/* Tracks if cpu freqency can be updated anymore */
+>>>>>>> v3.18
 =======
 /* Tracks if cpu freqency can be updated anymore */
 >>>>>>> v3.18
@@ -151,6 +161,7 @@ enum s5pv210_dmc_port {
 
 static struct cpufreq_frequency_table s5pv210_freq_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{L0, 1000*1000},
 	{L1, 800*1000},
 	{L2, 400*1000},
@@ -158,12 +169,17 @@ static struct cpufreq_frequency_table s5pv210_freq_table[] = {
 	{L4, 100*1000},
 	{0, CPUFREQ_TABLE_END},
 =======
+=======
+>>>>>>> v3.18
 	{0, L0, 1000*1000},
 	{0, L1, 800*1000},
 	{0, L2, 400*1000},
 	{0, L3, 200*1000},
 	{0, L4, 100*1000},
 	{0, 0, CPUFREQ_TABLE_END},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -238,9 +254,15 @@ static void s5pv210_set_refresh(enum s5pv210_dmc_port ch, unsigned long freq)
 
 	if (ch == DMC0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = (S5P_VA_DMC0 + 0x30);
 	} else if (ch == DMC1) {
 		reg = (S5P_VA_DMC1 + 0x30);
+=======
+		reg = (dmc_base[0] + 0x30);
+	} else if (ch == DMC1) {
+		reg = (dmc_base[1] + 0x30);
+>>>>>>> v3.18
 =======
 		reg = (dmc_base[0] + 0x30);
 	} else if (ch == DMC1) {
@@ -263,6 +285,7 @@ static void s5pv210_set_refresh(enum s5pv210_dmc_port ch, unsigned long freq)
 	__raw_writel(tmp1, reg);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int s5pv210_verify_speed(struct cpufreq_policy *policy)
 {
@@ -289,6 +312,8 @@ static int s5pv210_target(struct cpufreq_policy *policy,
 	unsigned int pll_changing = 0;
 	unsigned int bus_speed_changing = 0;
 =======
+=======
+>>>>>>> v3.18
 static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	unsigned long reg;
@@ -296,12 +321,16 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 	unsigned int pll_changing = 0;
 	unsigned int bus_speed_changing = 0;
 	unsigned int old_freq, new_freq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int arm_volt, int_volt;
 	int ret = 0;
 
 	mutex_lock(&set_freq_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (relation & ENABLE_FURTHER_CPUFREQ)
 		no_cpufreq_access = false;
@@ -330,10 +359,16 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 
 	if (cpufreq_frequency_table_target(policy, s5pv210_freq_table,
 					   target_freq, relation, &index)) {
+=======
+	if (no_cpufreq_access) {
+		pr_err("Denied access to %s as it is disabled temporarily\n",
+		       __func__);
+>>>>>>> v3.18
 		ret = -EINVAL;
 		goto exit;
 	}
 
+<<<<<<< HEAD
 	freqs.new = s5pv210_freq_table[index].frequency;
 
 	if (freqs.new == freqs.old)
@@ -343,6 +378,8 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 	if (cpufreq_frequency_table_target(policy, s5pv210_freq_table,
 					   freqs.old, relation, &priv_index)) {
 =======
+=======
+>>>>>>> v3.18
 	old_freq = policy->cur;
 	new_freq = s5pv210_freq_table[index].frequency;
 
@@ -350,6 +387,9 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 	if (cpufreq_frequency_table_target(policy, s5pv210_freq_table,
 					   old_freq, CPUFREQ_RELATION_H,
 					   &priv_index)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -EINVAL;
 		goto exit;
@@ -359,7 +399,11 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 	int_volt = dvs_conf[index].int_volt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (freqs.new > freqs.old) {
+=======
+	if (new_freq > old_freq) {
+>>>>>>> v3.18
 =======
 	if (new_freq > old_freq) {
 >>>>>>> v3.18
@@ -375,8 +419,11 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Check if there need to change PLL */
@@ -590,9 +637,13 @@ static int s5pv210_target(struct cpufreq_policy *policy, unsigned int index)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
 	if (freqs.new < freqs.old) {
+=======
+	if (new_freq < old_freq) {
+>>>>>>> v3.18
 =======
 	if (new_freq < old_freq) {
 >>>>>>> v3.18
@@ -611,6 +662,7 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int s5pv210_cpufreq_suspend(struct cpufreq_policy *policy)
 {
@@ -625,6 +677,8 @@ static int s5pv210_cpufreq_resume(struct cpufreq_policy *policy)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int check_mem_type(void __iomem *dmc_reg)
 {
 	unsigned long val;
@@ -636,7 +690,11 @@ static int check_mem_type(void __iomem *dmc_reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init s5pv210_cpu_init(struct cpufreq_policy *policy)
+=======
+static int s5pv210_cpu_init(struct cpufreq_policy *policy)
+>>>>>>> v3.18
 =======
 static int s5pv210_cpu_init(struct cpufreq_policy *policy)
 >>>>>>> v3.18
@@ -645,9 +703,15 @@ static int s5pv210_cpu_init(struct cpufreq_policy *policy)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_clk = clk_get(NULL, "armclk");
 	if (IS_ERR(cpu_clk))
 		return PTR_ERR(cpu_clk);
+=======
+	policy->clk = clk_get(NULL, "armclk");
+	if (IS_ERR(policy->clk))
+		return PTR_ERR(policy->clk);
+>>>>>>> v3.18
 =======
 	policy->clk = clk_get(NULL, "armclk");
 	if (IS_ERR(policy->clk))
@@ -676,7 +740,11 @@ static int s5pv210_cpu_init(struct cpufreq_policy *policy)
 	 * other memory type is not supported.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_type = check_mem_type(S5P_VA_DMC0);
+=======
+	mem_type = check_mem_type(dmc_base[0]);
+>>>>>>> v3.18
 =======
 	mem_type = check_mem_type(dmc_base[0]);
 >>>>>>> v3.18
@@ -688,6 +756,7 @@ static int s5pv210_cpu_init(struct cpufreq_policy *policy)
 	}
 
 	/* Find current refresh counter and frequency each DMC */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s5pv210_dram_conf[0].refresh = (__raw_readl(S5P_VA_DMC0 + 0x30) * 1000);
 	s5pv210_dram_conf[0].freq = clk_get_rate(dmc0_clk);
@@ -703,6 +772,8 @@ static int s5pv210_cpu_init(struct cpufreq_policy *policy)
 
 	return cpufreq_frequency_table_cpuinfo(policy, s5pv210_freq_table);
 =======
+=======
+>>>>>>> v3.18
 	s5pv210_dram_conf[0].refresh = (__raw_readl(dmc_base[0] + 0x30) * 1000);
 	s5pv210_dram_conf[0].freq = clk_get_rate(dmc0_clk);
 
@@ -711,11 +782,15 @@ static int s5pv210_cpu_init(struct cpufreq_policy *policy)
 
 	policy->suspend_freq = SLEEP_FREQ;
 	return cpufreq_generic_init(policy, s5pv210_freq_table, 40000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out_dmc1:
 	clk_put(dmc0_clk);
 out_dmc0:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_put(cpu_clk);
 	return ret;
@@ -746,10 +821,15 @@ static int s5pv210_cpufreq_notifier_event(struct notifier_block *this,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	clk_put(policy->clk);
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int s5pv210_cpufreq_reboot_notifier_event(struct notifier_block *this,
 						 unsigned long event, void *ptr)
@@ -757,22 +837,29 @@ static int s5pv210_cpufreq_reboot_notifier_event(struct notifier_block *this,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = cpufreq_driver_target(cpufreq_cpu_get(0), SLEEP_FREQ,
 				    DISABLE_FURTHER_CPUFREQ);
 	if (ret < 0)
 		return NOTIFY_BAD;
 
 =======
+=======
+>>>>>>> v3.18
 	ret = cpufreq_driver_target(cpufreq_cpu_get(0), SLEEP_FREQ, 0);
 	if (ret < 0)
 		return NOTIFY_BAD;
 
 	no_cpufreq_access = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NOTIFY_DONE;
 }
 
 static struct cpufreq_driver s5pv210_driver = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.flags		= CPUFREQ_STICKY,
 	.verify		= s5pv210_verify_speed,
@@ -791,6 +878,8 @@ static struct notifier_block s5pv210_cpufreq_notifier = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.flags		= CPUFREQ_STICKY | CPUFREQ_NEED_INITIAL_FREQ_CHECK,
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= s5pv210_target,
@@ -803,15 +892,21 @@ static struct notifier_block s5pv210_cpufreq_notifier = {
 #endif
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct notifier_block s5pv210_cpufreq_reboot_notifier = {
 	.notifier_call = s5pv210_cpufreq_reboot_notifier_event,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init s5pv210_cpufreq_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static int s5pv210_cpufreq_probe(struct platform_device *pdev)
 {
 	struct device_node *np;
@@ -861,6 +956,9 @@ static int s5pv210_cpufreq_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	arm_regulator = regulator_get(NULL, "vddarm");
 	if (IS_ERR(arm_regulator)) {
@@ -876,7 +974,10 @@ static int s5pv210_cpufreq_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_pm_notifier(&s5pv210_cpufreq_notifier);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	register_reboot_notifier(&s5pv210_cpufreq_reboot_notifier);
@@ -885,8 +986,11 @@ static int s5pv210_cpufreq_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 late_initcall(s5pv210_cpufreq_init);
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver s5pv210_cpufreq_platdrv = {
 	.driver = {
 		.name	= "s5pv210-cpufreq",
@@ -895,4 +999,7 @@ static struct platform_driver s5pv210_cpufreq_platdrv = {
 	.probe = s5pv210_cpufreq_probe,
 };
 module_platform_driver(s5pv210_cpufreq_platdrv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

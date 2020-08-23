@@ -18,7 +18,12 @@ void exynos_plane_commit(struct drm_plane *plane);
 void exynos_plane_dpms(struct drm_plane *plane, int mode);
 struct drm_plane *exynos_plane_init(struct drm_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    unsigned int possible_crtcs, bool priv);
+=======
+				    unsigned long possible_crtcs,
+				    enum drm_plane_type type);
+>>>>>>> v3.18
 =======
 				    unsigned long possible_crtcs,
 				    enum drm_plane_type type);

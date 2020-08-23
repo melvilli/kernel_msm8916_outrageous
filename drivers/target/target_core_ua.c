@@ -4,7 +4,11 @@
  * This file contains logic for SPC-3 Unit Attention emulation
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2009-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2009-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2009-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -103,7 +107,10 @@ int core_scsi3_ua_allocate(
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&ua->ua_dev_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&ua->ua_nacl_list);
@@ -170,8 +177,12 @@ int core_scsi3_ua_allocate(
 		spin_unlock_irq(&nacl->device_list_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_inc(&deve->ua_count);
 		smp_mb__after_atomic();
+=======
+		atomic_inc_mb(&deve->ua_count);
+>>>>>>> v3.18
 =======
 		atomic_inc_mb(&deve->ua_count);
 >>>>>>> v3.18
@@ -187,8 +198,12 @@ int core_scsi3_ua_allocate(
 		asc, ascq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&deve->ua_count);
 	smp_mb__after_atomic();
+=======
+	atomic_inc_mb(&deve->ua_count);
+>>>>>>> v3.18
 =======
 	atomic_inc_mb(&deve->ua_count);
 >>>>>>> v3.18
@@ -206,8 +221,12 @@ void core_scsi3_ua_release_all(
 		kmem_cache_free(se_ua_cache, ua);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_dec(&deve->ua_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&deve->ua_count);
+>>>>>>> v3.18
 =======
 		atomic_dec_mb(&deve->ua_count);
 >>>>>>> v3.18
@@ -271,8 +290,12 @@ void core_scsi3_ua_for_check_condition(
 		kmem_cache_free(se_ua_cache, ua);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_dec(&deve->ua_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&deve->ua_count);
+>>>>>>> v3.18
 =======
 		atomic_dec_mb(&deve->ua_count);
 >>>>>>> v3.18
@@ -334,8 +357,12 @@ int core_scsi3_ua_clear_for_request_sense(
 		kmem_cache_free(se_ua_cache, ua);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_dec(&deve->ua_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&deve->ua_count);
+>>>>>>> v3.18
 =======
 		atomic_dec_mb(&deve->ua_count);
 >>>>>>> v3.18

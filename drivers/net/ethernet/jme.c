@@ -310,7 +310,11 @@ jme_load_macaddr(struct net_device *netdev)
 {
 	struct jme_adapter *jme = netdev_priv(netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char macaddr[6];
+=======
+	unsigned char macaddr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	unsigned char macaddr[ETH_ALEN];
 >>>>>>> v3.18
@@ -326,7 +330,11 @@ jme_load_macaddr(struct net_device *netdev)
 	macaddr[4] = (val >>  0) & 0xFF;
 	macaddr[5] = (val >>  8) & 0xFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(netdev->dev_addr, macaddr, 6);
+=======
+	memcpy(netdev->dev_addr, macaddr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(netdev->dev_addr, macaddr, ETH_ALEN);
 >>>>>>> v3.18
@@ -1997,7 +2005,11 @@ jme_alloc_txdesc(struct jme_adapter *jme,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -2018,6 +2030,12 @@ jme_fill_tx_map(struct pci_dev *pdev,
 				PCI_DMA_TODEVICE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(pci_dma_mapping_error(pdev, dmaaddr)))
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(pci_dma_mapping_error(pdev, dmaaddr)))
 		return -EINVAL;
@@ -2040,10 +2058,13 @@ jme_fill_tx_map(struct pci_dev *pdev,
 	txbi->mapping = dmaaddr;
 	txbi->len = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -2068,6 +2089,9 @@ static void jme_drop_tx_map(struct jme_adapter *jme, int startidx, int count)
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 jme_map_tx_skb(struct jme_adapter *jme, struct sk_buff *skb, int idx)
 {
@@ -2080,6 +2104,10 @@ jme_map_tx_skb(struct jme_adapter *jme, struct sk_buff *skb, int idx)
 	const struct skb_frag_struct *frag;
 	u32 len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -2090,10 +2118,13 @@ jme_map_tx_skb(struct jme_adapter *jme, struct sk_buff *skb, int idx)
 		ctxbi = txbi + ((idx + i + 2) & (mask));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jme_fill_tx_map(jme->pdev, ctxdesc, ctxbi,
 				skb_frag_page(frag),
 				frag->page_offset, skb_frag_size(frag), hidma);
 =======
+=======
+>>>>>>> v3.18
 		ret = jme_fill_tx_map(jme->pdev, ctxdesc, ctxbi,
 				skb_frag_page(frag),
 				frag->page_offset, skb_frag_size(frag), hidma);
@@ -2102,12 +2133,16 @@ jme_map_tx_skb(struct jme_adapter *jme, struct sk_buff *skb, int idx)
 			goto out;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	len = skb_is_nonlinear(skb) ? skb_headlen(skb) : skb->len;
 	ctxdesc = txdesc + ((idx + 1) & (mask));
 	ctxbi = txbi + ((idx + 1) & (mask));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	jme_fill_tx_map(jme->pdev, ctxdesc, ctxbi, virt_to_page(skb->data),
 			offset_in_page(skb->data), len, hidma);
@@ -2128,6 +2163,8 @@ jme_expand_header(struct jme_adapter *jme, struct sk_buff *skb)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	ret = jme_fill_tx_map(jme->pdev, ctxdesc, ctxbi, virt_to_page(skb->data),
 			offset_in_page(skb->data), len, hidma);
 	if (ret)
@@ -2139,6 +2176,9 @@ out:
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 jme_tx_tso(struct sk_buff *skb, __le16 *mss, u8 *flags)
@@ -2219,6 +2259,10 @@ jme_fill_tx_desc(struct jme_adapter *jme, struct sk_buff *skb, int idx)
 	struct jme_buffer_info *txbi;
 	u8 flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -2247,12 +2291,18 @@ jme_fill_tx_desc(struct jme_adapter *jme, struct sk_buff *skb, int idx)
 		jme_tx_csum(jme, skb, &flags);
 	jme_tx_vlan(skb, &txdesc->desc1.vlan, &flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jme_map_tx_skb(jme, skb, idx);
 =======
+=======
+>>>>>>> v3.18
 	ret = jme_map_tx_skb(jme, skb, idx);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	txdesc->desc1.flags = flags;
 	/*
@@ -2311,7 +2361,12 @@ jme_start_xmit(struct sk_buff *skb, struct net_device *netdev)
 	int idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(jme_expand_header(jme, skb))) {
+=======
+	if (unlikely(skb_is_gso(skb) && skb_cow_head(skb, 0))) {
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	if (unlikely(skb_is_gso(skb) && skb_cow_head(skb, 0))) {
 		dev_kfree_skb_any(skb);
@@ -2331,7 +2386,12 @@ jme_start_xmit(struct sk_buff *skb, struct net_device *netdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jme_fill_tx_desc(jme, skb, idx);
+=======
+	if (jme_fill_tx_desc(jme, skb, idx))
+		return NETDEV_TX_OK;
+>>>>>>> v3.18
 =======
 	if (jme_fill_tx_desc(jme, skb, idx))
 		return NETDEV_TX_OK;
@@ -3165,7 +3225,11 @@ jme_init_one(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NETIF_NAPI_SET(netdev, &jme->napi, jme_poll, jme->rx_ring_size >> 2)
+=======
+	NETIF_NAPI_SET(netdev, &jme->napi, jme_poll, NAPI_POLL_WEIGHT)
+>>>>>>> v3.18
 =======
 	NETIF_NAPI_SET(netdev, &jme->napi, jme_poll, NAPI_POLL_WEIGHT)
 >>>>>>> v3.18
@@ -3248,7 +3312,10 @@ jme_init_one(struct pci_dev *pdev,
 
 	jme_clear_pm(jme);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(jme->pdev, PCI_D0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_set_wakeup_enable(&pdev->dev, true);
@@ -3296,7 +3363,10 @@ err_out_unmap:
 	iounmap(jme->regs);
 err_out_free_netdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);
@@ -3317,7 +3387,10 @@ jme_remove_one(struct pci_dev *pdev)
 	unregister_netdev(netdev);
 	iounmap(jme->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);
@@ -3399,6 +3472,10 @@ jme_resume(struct device *dev)
 	jme_phy_calibration(jme);
 	jme_phy_setEA(jme);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	jme_start_irq(jme);
+>>>>>>> v3.18
 =======
 	jme_start_irq(jme);
 >>>>>>> v3.18
@@ -3409,8 +3486,11 @@ jme_resume(struct device *dev)
 	jme_reset_link(jme);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jme_start_irq(jme);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -3425,7 +3505,11 @@ static SIMPLE_DEV_PM_OPS(jme_pm_ops, jme_suspend, jme_resume);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(jme_pci_tbl) = {
+=======
+static const struct pci_device_id jme_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id jme_pci_tbl[] = {
 >>>>>>> v3.18

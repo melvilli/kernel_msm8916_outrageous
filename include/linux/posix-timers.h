@@ -8,6 +8,7 @@
 #include <linux/alarmtimer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 union cpu_time_count {
 	cputime_t cpu;
 	unsigned long long sched;
@@ -17,6 +18,8 @@ struct cpu_timer_list {
 	struct list_head entry;
 	union cpu_time_count expires, incr;
 =======
+=======
+>>>>>>> v3.18
 
 static inline unsigned long long cputime_to_expires(cputime_t expires)
 {
@@ -31,6 +34,9 @@ static inline cputime_t expires_to_cputime(unsigned long long expires)
 struct cpu_timer_list {
 	struct list_head entry;
 	unsigned long long expires, incr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct task_struct *task;
 	int firing;

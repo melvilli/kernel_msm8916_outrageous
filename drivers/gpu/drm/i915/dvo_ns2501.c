@@ -61,6 +61,7 @@
 #define NS2501_REGC 0x0c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ns2501_priv {
 	//I2CDevRec d;
 	bool quiet;
@@ -72,6 +73,8 @@ struct ns2501_priv {
 	int srcdim;
 	int fw_blc;
 =======
+=======
+>>>>>>> v3.18
 enum {
 	MODE_640x480,
 	MODE_800x600,
@@ -363,6 +366,9 @@ static const struct ns2501_reg regs_init[] = {
 struct ns2501_priv {
 	bool quiet;
 	const struct ns2501_reg *regs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -381,6 +387,7 @@ struct ns2501_priv {
  * when switching the resolution.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void enable_dvo(struct intel_dvo_device *dvo)
 {
@@ -427,6 +434,8 @@ static void restore_dvo(struct intel_dvo_device *dvo)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
 ** Read a register from the ns2501.
 ** Returns true if successful, false otherwise.
@@ -462,7 +471,11 @@ static bool ns2501_readb(struct intel_dvo_device *dvo, int addr, uint8_t * ch)
 		*ch = in_buf[0];
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -550,11 +563,17 @@ static bool ns2501_init(struct intel_dvo_device *dvo,
 	}
 	ns->quiet = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ns->reg_8_set = 0;
 	ns->reg_8_shadow =
 	    NS2501_8_PD | NS2501_8_BPAS | NS2501_8_VEN | NS2501_8_HEN;
 
 	DRM_DEBUG_KMS("init ns2501 dvo controller successfully!\n");
+=======
+
+	DRM_DEBUG_KMS("init ns2501 dvo controller successfully!\n");
+
+>>>>>>> v3.18
 =======
 
 	DRM_DEBUG_KMS("init ns2501 dvo controller successfully!\n");
@@ -584,9 +603,14 @@ static enum drm_mode_status ns2501_mode_valid(struct intel_dvo_device *dvo,
 {
 	DRM_DEBUG_KMS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ("%s: is mode valid (hdisplay=%d,htotal=%d,vdisplay=%d,vtotal=%d)\n",
 	     __FUNCTION__, mode->hdisplay, mode->htotal, mode->vdisplay,
 	     mode->vtotal);
+=======
+	    ("is mode valid (hdisplay=%d,htotal=%d,vdisplay=%d,vtotal=%d)\n",
+	     mode->hdisplay, mode->htotal, mode->vdisplay, mode->vtotal);
+>>>>>>> v3.18
 =======
 	    ("is mode valid (hdisplay=%d,htotal=%d,vdisplay=%d,vtotal=%d)\n",
 	     mode->hdisplay, mode->htotal, mode->vdisplay, mode->vtotal);
@@ -599,9 +623,15 @@ static enum drm_mode_status ns2501_mode_valid(struct intel_dvo_device *dvo,
 	 * by disabling the scaler.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((mode->hdisplay == 800 && mode->vdisplay == 600) ||
 	    (mode->hdisplay == 640 && mode->vdisplay == 480) ||
 	    (mode->hdisplay == 1024 && mode->vdisplay == 768)) {
+=======
+	if ((mode->hdisplay == 640 && mode->vdisplay == 480 && mode->clock == 25175) ||
+	    (mode->hdisplay == 800 && mode->vdisplay == 600 && mode->clock == 40000) ||
+	    (mode->hdisplay == 1024 && mode->vdisplay == 768 && mode->clock == 65000)) {
+>>>>>>> v3.18
 =======
 	if ((mode->hdisplay == 640 && mode->vdisplay == 480 && mode->clock == 25175) ||
 	    (mode->hdisplay == 800 && mode->vdisplay == 600 && mode->clock == 40000) ||
@@ -617,6 +647,7 @@ static void ns2501_mode_set(struct intel_dvo_device *dvo,
 			    struct drm_display_mode *mode,
 			    struct drm_display_mode *adjusted_mode)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool ok;
 	bool restore = false;
@@ -810,6 +841,8 @@ static void ns2501_mode_set(struct intel_dvo_device *dvo,
 	if (restore)
 		restore_dvo(dvo);
 =======
+=======
+>>>>>>> v3.18
 	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
 	int mode_idx, i;
 
@@ -834,6 +867,9 @@ static void ns2501_mode_set(struct intel_dvo_device *dvo,
 
 	for (i = 0; i < 84; i++)
 		ns2501_writeb(dvo, ns->regs[i].offset, ns->regs[i].value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -846,10 +882,14 @@ static bool ns2501_get_hw_state(struct intel_dvo_device *dvo)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ch & NS2501_8_PD)
 		return true;
 	else
 		return false;
+=======
+	return ch & NS2501_8_PD;
+>>>>>>> v3.18
 =======
 	return ch & NS2501_8_PD;
 >>>>>>> v3.18
@@ -858,6 +898,7 @@ static bool ns2501_get_hw_state(struct intel_dvo_device *dvo)
 /* set the NS2501 power state */
 static void ns2501_dpms(struct intel_dvo_device *dvo, bool enable)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool ok;
 	bool restore = false;
@@ -915,6 +956,8 @@ static void ns2501_dump_regs(struct intel_dvo_device *dvo)
 	ns2501_readb(dvo, NS2501_REGC, &val);
 	DRM_LOG_KMS("NS2501_REGC: 0x%02x\n", val);
 =======
+=======
+>>>>>>> v3.18
 	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
 
 	DRM_DEBUG_KMS("Trying set the dpms of the DVO to %i\n", enable);
@@ -949,6 +992,9 @@ static void ns2501_dump_regs(struct intel_dvo_device *dvo)
 
 		ns2501_writeb(dvo, 0x34, 0x00);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -970,7 +1016,10 @@ struct intel_dvo_dev_ops ns2501_ops = {
 	.dpms = ns2501_dpms,
 	.get_hw_state = ns2501_get_hw_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dump_regs = ns2501_dump_regs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.destroy = ns2501_destroy,

@@ -16,6 +16,11 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmi.h>
+#include <linux/dell-led.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmi.h>
 #include <linux/dell-led.h>
@@ -27,6 +32,10 @@ MODULE_LICENSE("GPL");
 
 #define DELL_LED_BIOS_GUID "F6E4FE6E-909D-47cb-8BAB-C9F6F2F8D396"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DELL_APP_GUID "A80593CE-A997-11DA-B012-B622A1EF5492"
+>>>>>>> v3.18
 =======
 #define DELL_APP_GUID "A80593CE-A997-11DA-B012-B622A1EF5492"
 >>>>>>> v3.18
@@ -49,7 +58,10 @@ MODULE_ALIAS("wmi:" DELL_LED_BIOS_GUID);
 #define CMD_LED_BLINK	18
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct app_wmi_args {
 	u16 class;
 	u16 selector;
@@ -193,6 +205,9 @@ static int __init dell_micmute_led_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bios_args {
 	unsigned char length;
@@ -337,6 +352,7 @@ static int __init dell_led_init(void)
 	int error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!wmi_has_guid(DELL_LED_BIOS_GUID))
 		return -ENODEV;
 
@@ -346,6 +362,8 @@ static int __init dell_led_init(void)
 
 	return led_classdev_register(NULL, &dell_led);
 =======
+=======
+>>>>>>> v3.18
 	if (!wmi_has_guid(DELL_LED_BIOS_GUID) && !wmi_has_guid(DELL_APP_GUID))
 		return -ENODEV;
 
@@ -361,16 +379,22 @@ static int __init dell_led_init(void)
 	}
 
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit dell_led_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	led_classdev_unregister(&dell_led);
 
 	led_off();
 =======
+=======
+>>>>>>> v3.18
 	int error = 0;
 
 	if (wmi_has_guid(DELL_LED_BIOS_GUID)) {
@@ -378,6 +402,9 @@ static void __exit dell_led_exit(void)
 		if (error == 0)
 			led_classdev_unregister(&dell_led);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

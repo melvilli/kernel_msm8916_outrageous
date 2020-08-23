@@ -322,8 +322,12 @@ static void hpcd_final_uli5288(struct pci_dev *dev)
 	struct pci_controller *hose = pci_bus_to_host(dev->bus);
 	struct device_node *hosenode = hose ? hose->dn : NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq oirq;
 	int virq, pin = 2;
+=======
+	struct of_phandle_args oirq;
+>>>>>>> v3.18
 =======
 	struct of_phandle_args oirq;
 >>>>>>> v3.18
@@ -336,6 +340,7 @@ static void hpcd_final_uli5288(struct pci_dev *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	laddr[0] = (hose->first_busno << 16) | (PCI_DEVFN(31, 0) << 8);
 	laddr[1] = laddr[2] = 0;
 	of_irq_map_raw(hosenode, &pin, 1, laddr, &oirq);
@@ -343,6 +348,8 @@ static void hpcd_final_uli5288(struct pci_dev *dev)
 				     oirq.size);
 	dev->irq = virq;
 =======
+=======
+>>>>>>> v3.18
 	oirq.np = hosenode;
 	oirq.args[0] = 2;
 	oirq.args_count = 1;
@@ -350,6 +357,9 @@ static void hpcd_final_uli5288(struct pci_dev *dev)
 	laddr[1] = laddr[2] = 0;
 	of_irq_parse_raw(laddr, &oirq);
 	dev->irq = irq_create_of_mapping(&oirq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -359,7 +359,10 @@ ret:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ath9k_htc_fw_panic_report(struct htc_target *htc_handle,
 				      struct sk_buff *skb)
 {
@@ -390,6 +393,9 @@ static void ath9k_htc_fw_panic_report(struct htc_target *htc_handle,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * HTC Messages are handled directly here and the obtained SKB
@@ -413,13 +419,19 @@ void ath9k_htc_rx_msg(struct htc_target *htc_handle,
 	epid = htc_hdr->endpoint_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (epid == 0x99) {
 		ath9k_htc_fw_panic_report(htc_handle, skb);
 		kfree_skb(skb);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (epid >= ENDPOINT_MAX) {
 		if (pipe_id != USB_REG_IN_PIPE)

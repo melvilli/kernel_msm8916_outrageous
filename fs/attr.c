@@ -168,8 +168,11 @@ void setattr_copy(struct inode *inode, const struct iattr *attr)
 EXPORT_SYMBOL(setattr_copy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int notify_change2(struct vfsmount *mnt, struct dentry * dentry, struct iattr * attr)
 =======
+=======
+>>>>>>> v3.18
 /**
  * notify_change - modify attributes of a filesytem object
  * @dentry:	object affected
@@ -191,6 +194,9 @@ int notify_change2(struct vfsmount *mnt, struct dentry * dentry, struct iattr * 
  * that case.
  */
 int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **delegated_inode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct inode *inode = dentry->d_inode;
@@ -263,16 +269,22 @@ int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **de
 	if (error)
 		return error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (mnt && inode->i_op->setattr2)
 		error = inode->i_op->setattr2(mnt, dentry, attr);
 	else if (inode->i_op->setattr)
 =======
+=======
+>>>>>>> v3.18
 	error = try_break_deleg(inode, delegated_inode);
 	if (error)
 		return error;
 
 	if (inode->i_op->setattr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		error = inode->i_op->setattr(dentry, attr);
 	else
@@ -287,12 +299,15 @@ int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **de
 	return error;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(notify_change2);
 
 int notify_change(struct dentry * dentry, struct iattr * attr)
 {
 	return notify_change2(NULL, dentry, attr);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(notify_change);

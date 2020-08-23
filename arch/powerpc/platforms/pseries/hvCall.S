@@ -13,10 +13,13 @@
 #include <asm/asm-offsets.h>
 #include <asm/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 #ifdef CONFIG_TRACEPOINTS
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/jump_label.h>
 
 	.section	".text"
@@ -24,6 +27,9 @@
 #ifdef CONFIG_TRACEPOINTS
 
 #ifndef CONFIG_JUMP_LABEL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.section	".toc","aw"
 
@@ -32,6 +38,7 @@ hcall_tracepoint_refcount:
 	.llong	0
 
 	.section	".text"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -49,6 +56,8 @@ END_FTR_SECTION(0, 1);						\
 	cmpdi	r12,0;						\
 	beq+	1f;						\
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 /*
@@ -56,6 +65,9 @@ END_FTR_SECTION(0, 1);						\
  * areas to save snapshots and opcode.
  */
 #define HCALL_INST_PRECALL(FIRST_REG)				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mflr	r0;						\
 	std	r3,STK_PARAM(R3)(r1);				\
@@ -69,6 +81,7 @@ END_FTR_SECTION(0, 1);						\
 	std	r0,16(r1);					\
 	addi	r4,r1,STK_PARAM(FIRST_REG);			\
 	stdu	r1,-STACK_FRAME_OVERHEAD(r1);			\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.__trace_hcall_entry;				\
 	addi	r1,r1,STACK_FRAME_OVERHEAD;			\
@@ -111,6 +124,8 @@ END_FTR_SECTION(0, 1);						\
 	mtlr	r0;						\
 1:
 =======
+=======
+>>>>>>> v3.18
 	bl	__trace_hcall_entry;				\
 	ld	r3,STACK_FRAME_OVERHEAD+STK_PARAM(R3)(r1);	\
 	ld	r4,STACK_FRAME_OVERHEAD+STK_PARAM(R4)(r1);	\
@@ -135,6 +150,9 @@ END_FTR_SECTION(0, 1);						\
 	addi	r1,r1,STACK_FRAME_OVERHEAD;			\
 	ld	r3,STK_PARAM(R3)(r1);				\
 	mtlr	r0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define HCALL_INST_POSTCALL_NORETS				\
@@ -146,7 +164,10 @@ END_FTR_SECTION(0, 1);						\
 	__HCALL_INST_POSTCALL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_JUMP_LABEL
 #define HCALL_BRANCH(LABEL)					\
 	ARCH_STATIC_BRANCH(LABEL, hcall_tracepoint_key)
@@ -167,11 +188,15 @@ END_FTR_SECTION(0, 1);						\
 1:
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define HCALL_INST_PRECALL(FIRST_ARG)
 #define HCALL_INST_POSTCALL_NORETS
 #define HCALL_INST_POSTCALL(BUFREG)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -179,15 +204,21 @@ END_FTR_SECTION(0, 1);						\
 
 _GLOBAL(plpar_hcall_norets)
 =======
+=======
+>>>>>>> v3.18
 #define HCALL_BRANCH(LABEL)
 #endif
 
 _GLOBAL_TOC(plpar_hcall_norets)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	HMT_MEDIUM
 
 	mfcr	r0
 	stw	r0,8(r1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	HCALL_INST_PRECALL(R4)
@@ -201,13 +232,21 @@ _GLOBAL_TOC(plpar_hcall_norets)
 	HVSC				/* invoke the hypervisor */
 
 >>>>>>> v3.18
+=======
+	HCALL_BRANCH(plpar_hcall_norets_trace)
+	HVSC				/* invoke the hypervisor */
+
+>>>>>>> v3.18
 	lwz	r0,8(r1)
 	mtcrf	0xff,r0
 	blr				/* return r3 = status */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(plpar_hcall)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRACEPOINTS
 plpar_hcall_norets_trace:
 	HCALL_INST_PRECALL(R4)
@@ -219,6 +258,9 @@ plpar_hcall_norets_trace:
 #endif
 
 _GLOBAL_TOC(plpar_hcall)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	HMT_MEDIUM
 
@@ -226,7 +268,11 @@ _GLOBAL_TOC(plpar_hcall)
 	stw	r0,8(r1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HCALL_INST_PRECALL(R5)
+=======
+	HCALL_BRANCH(plpar_hcall_trace)
+>>>>>>> v3.18
 =======
 	HCALL_BRANCH(plpar_hcall_trace)
 >>>>>>> v3.18
@@ -249,7 +295,10 @@ _GLOBAL_TOC(plpar_hcall)
 	std	r7, 24(r12)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	lwz	r0,8(r1)
 	mtcrf	0xff,r0
 
@@ -277,6 +326,9 @@ plpar_hcall_trace:
 	std	r6,16(r12)
 	std	r7,24(r12)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	HCALL_INST_POSTCALL(r12)
 
@@ -284,7 +336,12 @@ plpar_hcall_trace:
 	mtcrf	0xff,r0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blr				/* return r3 = status */
+=======
+	blr
+#endif
+>>>>>>> v3.18
 =======
 	blr
 #endif
@@ -325,7 +382,11 @@ _GLOBAL(plpar_hcall_raw)
 	blr				/* return r3 = status */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(plpar_hcall9)
+=======
+_GLOBAL_TOC(plpar_hcall9)
+>>>>>>> v3.18
 =======
 _GLOBAL_TOC(plpar_hcall9)
 >>>>>>> v3.18
@@ -335,7 +396,11 @@ _GLOBAL_TOC(plpar_hcall9)
 	stw	r0,8(r1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HCALL_INST_PRECALL(R5)
+=======
+	HCALL_BRANCH(plpar_hcall9_trace)
+>>>>>>> v3.18
 =======
 	HCALL_BRANCH(plpar_hcall9_trace)
 >>>>>>> v3.18
@@ -367,7 +432,10 @@ _GLOBAL_TOC(plpar_hcall9)
 	std	r0, 64(r12)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	lwz	r0,8(r1)
 	mtcrf	0xff,r0
 
@@ -404,6 +472,9 @@ plpar_hcall9_trace:
 	std	r11,56(r12)
 	std	r0,64(r12)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	HCALL_INST_POSTCALL(r12)
 
@@ -411,7 +482,12 @@ plpar_hcall9_trace:
 	mtcrf	0xff,r0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blr				/* return r3 = status */
+=======
+	blr
+#endif
+>>>>>>> v3.18
 =======
 	blr
 #endif

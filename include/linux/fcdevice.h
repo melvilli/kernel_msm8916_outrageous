@@ -28,7 +28,11 @@
 
 #ifdef __KERNEL__
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct net_device *alloc_fcdev(int sizeof_priv);
+=======
+struct net_device *alloc_fcdev(int sizeof_priv);
+>>>>>>> v3.18
 =======
 struct net_device *alloc_fcdev(int sizeof_priv);
 >>>>>>> v3.18

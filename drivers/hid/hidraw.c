@@ -7,7 +7,11 @@
  * use a transport-specific userspace libhid/libusb libraries.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2007 Jiri Kosina
+=======
+ *  Copyright (c) 2007-2014 Jiri Kosina
+>>>>>>> v3.18
 =======
  *  Copyright (c) 2007-2014 Jiri Kosina
 >>>>>>> v3.18
@@ -109,14 +113,20 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The first byte is expected to be a report number.
  * This function is to be called with the minors_lock mutex held */
 =======
+=======
+>>>>>>> v3.18
 /*
  * The first byte of the report buffer is expected to be a report number.
  *
  * This function is to be called with the minors_lock mutex held.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t hidraw_send_report(struct file *file, const char __user *buffer, size_t count, unsigned char report_type)
 {
@@ -133,10 +143,13 @@ static ssize_t hidraw_send_report(struct file *file, const char __user *buffer, 
 	dev = hidraw_table[minor]->hid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->hid_output_raw_report) {
 		ret = -ENODEV;
 		goto out;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -166,8 +179,11 @@ static ssize_t hidraw_send_report(struct file *file, const char __user *buffer, 
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dev->hid_output_raw_report(dev, buf, count, report_type);
 =======
+=======
+>>>>>>> v3.18
 	if ((report_type == HID_OUTPUT_REPORT) &&
 	    !(dev->quirks & HID_QUIRK_NO_OUTPUT_REPORTS_ON_INTR_EP)) {
 		ret = hid_hw_output_report(dev, buf, count);
@@ -183,6 +199,9 @@ static ssize_t hidraw_send_report(struct file *file, const char __user *buffer, 
 	ret = hid_hw_raw_request(dev, buf[0], buf, count, report_type,
 				HID_REQ_SET_REPORT);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_free:
 	kfree(buf);
@@ -191,7 +210,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* the first byte is expected to be a report number */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t hidraw_write(struct file *file, const char __user *buffer, size_t count, loff_t *ppos)
@@ -205,6 +227,7 @@ static ssize_t hidraw_write(struct file *file, const char __user *buffer, size_t
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This function performs a Get_Report transfer over the control endpoint
  * per section 7.2.1 of the HID specification, version 1.1.  The first byte
  * of buffer is the report number to request, or 0x0 if the defice does not
@@ -212,6 +235,8 @@ static ssize_t hidraw_write(struct file *file, const char __user *buffer, size_t
  * or HID_INPUT_REPORT.  This function is to be called with the minors_lock
  *  mutex held. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * This function performs a Get_Report transfer over the control endpoint
  * per section 7.2.1 of the HID specification, version 1.1.  The first byte
@@ -221,6 +246,9 @@ static ssize_t hidraw_write(struct file *file, const char __user *buffer, size_t
  *
  * This function is to be called with the minors_lock mutex held.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t hidraw_get_report(struct file *file, char __user *buffer, size_t count, unsigned char report_type)
 {
@@ -233,7 +261,11 @@ static ssize_t hidraw_get_report(struct file *file, char __user *buffer, size_t 
 	dev = hidraw_table[minor]->hid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->hid_get_raw_report) {
+=======
+	if (!dev->ll_driver->raw_request) {
+>>>>>>> v3.18
 =======
 	if (!dev->ll_driver->raw_request) {
 >>>>>>> v3.18
@@ -262,13 +294,19 @@ static ssize_t hidraw_get_report(struct file *file, char __user *buffer, size_t 
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Read the first byte from the user. This is the report number,
 	 * which is passed to dev->hid_get_raw_report(). */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Read the first byte from the user. This is the report number,
 	 * which is passed to hid_hw_raw_request().
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (copy_from_user(&report_number, buffer, 1)) {
 		ret = -EFAULT;
@@ -276,7 +314,12 @@ static ssize_t hidraw_get_report(struct file *file, char __user *buffer, size_t 
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dev->hid_get_raw_report(dev, report_number, buf, count, report_type);
+=======
+	ret = hid_hw_raw_request(dev, report_number, buf, count, report_type,
+				 HID_REQ_GET_REPORT);
+>>>>>>> v3.18
 =======
 	ret = hid_hw_raw_request(dev, report_number, buf, count, report_type,
 				 HID_REQ_GET_REPORT);
@@ -318,6 +361,10 @@ static int hidraw_open(struct inode *inode, struct file *file)
 	struct hidraw *dev;
 	struct hidraw_list *list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -335,11 +382,14 @@ static int hidraw_open(struct inode *inode, struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list->hidraw = hidraw_table[minor];
 	mutex_init(&list->read_mutex);
 	list_add_tail(&list->node, &hidraw_table[minor]->list);
 	file->private_data = list;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev = hidraw_table[minor];
@@ -355,10 +405,13 @@ static int hidraw_open(struct inode *inode, struct file *file)
 			hid_hw_power(dev->hid, PM_HINT_NORMAL);
 			dev->open--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			goto out_unlock;
 		}
 	}
@@ -369,6 +422,9 @@ static int hidraw_open(struct inode *inode, struct file *file)
 	list_add_tail(&list->node, &hidraw_table[minor]->list);
 	spin_unlock_irqrestore(&hidraw_table[minor]->list_lock, flags);
 	file->private_data = list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_unlock:
 	mutex_unlock(&minors_lock);
@@ -390,6 +446,7 @@ static void drop_ref(struct hidraw *hidraw, int exists_bit)
 {
 	if (exists_bit) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hid_hw_close(hidraw->hid);
 		hidraw->exist = 0;
 		if (hidraw->open)
@@ -403,6 +460,8 @@ static void drop_ref(struct hidraw *hidraw, int exists_bit)
 		hidraw_table[hidraw->minor] = NULL;
 		kfree(hidraw);
 =======
+=======
+>>>>>>> v3.18
 		hidraw->exist = 0;
 		if (hidraw->open) {
 			hid_hw_close(hidraw->hid);
@@ -422,6 +481,9 @@ static void drop_ref(struct hidraw *hidraw, int exists_bit)
 			hid_hw_power(hidraw->hid, PM_HINT_NORMAL);
 			hid_hw_close(hidraw->hid);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -431,11 +493,14 @@ static int hidraw_release(struct inode * inode, struct file * file)
 	unsigned int minor = iminor(inode);
 	struct hidraw_list *list = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_lock(&minors_lock);
 
 	list_del(&list->node);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	mutex_lock(&minors_lock);
@@ -443,6 +508,9 @@ static int hidraw_release(struct inode * inode, struct file * file)
 	spin_lock_irqsave(&hidraw_table[minor]->list_lock, flags);
 	list_del(&list->node);
 	spin_unlock_irqrestore(&hidraw_table[minor]->list_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(list);
 
@@ -573,7 +641,13 @@ int hidraw_report_event(struct hid_device *hid, u8 *data, int len)
 	struct hidraw_list *list;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&dev->list_lock, flags);
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 
@@ -594,6 +668,10 @@ int hidraw_report_event(struct hid_device *hid, u8 *data, int len)
 		kill_fasync(&list->fasync, SIGIO, POLL_IN);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&dev->list_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&dev->list_lock, flags);
 >>>>>>> v3.18
@@ -609,7 +687,11 @@ int hidraw_connect(struct hid_device *hid)
 	struct hidraw *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we accept any HID device, no matter the applications */
+=======
+	/* we accept any HID device, all applications */
+>>>>>>> v3.18
 =======
 	/* we accept any HID device, all applications */
 >>>>>>> v3.18
@@ -648,8 +730,13 @@ int hidraw_connect(struct hid_device *hid)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&minors_lock);
 	init_waitqueue_head(&dev->wait);
+=======
+	init_waitqueue_head(&dev->wait);
+	spin_lock_init(&dev->list_lock);
+>>>>>>> v3.18
 =======
 	init_waitqueue_head(&dev->wait);
 	spin_lock_init(&dev->list_lock);
@@ -663,6 +750,10 @@ int hidraw_connect(struct hid_device *hid)
 	hid->hidraw = dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&minors_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&minors_lock);
 >>>>>>> v3.18

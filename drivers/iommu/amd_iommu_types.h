@@ -26,6 +26,10 @@
 #include <linux/spinlock.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqreturn.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqreturn.h>
 >>>>>>> v3.18
@@ -43,9 +47,12 @@
 #define RLOOKUP_TABLE_ENTRY_SIZE	(sizeof(void *))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Length of the MMIO region for the AMD IOMMU */
 #define MMIO_REGION_LENGTH       0x4000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Capability offsets used by the driver */
@@ -86,11 +93,17 @@
 #define MMIO_PPR_HEAD_OFFSET	0x2030
 #define MMIO_PPR_TAIL_OFFSET	0x2038
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MMIO_CNTR_CONF_OFFSET	0x4000
 #define MMIO_CNTR_REG_OFFSET	0x40000
 #define MMIO_REG_END_OFFSET	0x80000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -112,14 +125,20 @@
 #define FEATURE_GLXVAL_MASK	(0x03ULL << FEATURE_GLXVAL_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PASID_MASK		0x000fffff
 =======
+=======
+>>>>>>> v3.18
 /* Note:
  * The current driver only support 16-bit PASID.
  * Currently, hardware only implement upto 16-bit PASID
  * even though the spec says it could have upto 20 bits.
  */
 #define PASID_MASK		0x0000ffff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MMIO status bits */
@@ -306,7 +325,10 @@
 #define IOMMU_PTE_IW (1ULL << 62)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DTE_FLAG_MASK	(0x3ffULL << 32)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DTE_FLAG_IOTLB	(0x01UL << 32)
@@ -411,12 +433,15 @@ struct amd_iommu_fault {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PPR_FAULT_EXEC	(1 << 1)
 #define PPR_FAULT_READ  (1 << 2)
 #define PPR_FAULT_WRITE (1 << 5)
 #define PPR_FAULT_USER  (1 << 6)
 #define PPR_FAULT_RSVD  (1 << 7)
 #define PPR_FAULT_GN    (1 << 8)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -448,6 +473,7 @@ struct protection_domain {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This struct contains device specific data for the IOMMU
  */
 struct iommu_dev_data {
@@ -470,6 +496,8 @@ struct iommu_dev_data {
 };
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * For dynamic growth the aperture size is split into ranges of 128MB of
@@ -541,11 +569,17 @@ struct amd_iommu {
 	/* physical address of MMIO space */
 	u64 mmio_phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* physical end address of MMIO space */
 	u64 mmio_phys_end;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* virtual address of MMIO space */
 	u8 __iomem *mmio_base;
@@ -608,6 +642,12 @@ struct amd_iommu {
 	struct dma_ops_domain *default_dom;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* IOMMU sysfs device */
+	struct device *iommu_dev;
+
+>>>>>>> v3.18
 =======
 	/* IOMMU sysfs device */
 	struct device *iommu_dev;
@@ -631,11 +671,17 @@ struct amd_iommu {
 	/* The l2 indirect registers */
 	u32 stored_l2[0x83];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* The maximum PC banks and counters/bank (PCSup=1) */
 	u8 max_banks;
 	u8 max_counters;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -741,8 +787,13 @@ extern unsigned long *amd_iommu_pd_alloc_bitmap;
 extern u32 amd_iommu_unmap_flush;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Smallest number of PASIDs supported by any IOMMU in the system */
 extern u32 amd_iommu_max_pasids;
+=======
+/* Smallest max PASID supported by any IOMMU in the system */
+extern u32 amd_iommu_max_pasid;
+>>>>>>> v3.18
 =======
 /* Smallest max PASID supported by any IOMMU in the system */
 extern u32 amd_iommu_max_pasid;

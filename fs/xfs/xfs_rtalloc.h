@@ -19,6 +19,7 @@
 #define	__XFS_RTALLOC_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_mount;
 struct xfs_trans;
 
@@ -72,11 +73,16 @@ struct xfs_trans;
 #ifdef __KERNEL__
 
 =======
+=======
+>>>>>>> v3.18
 /* kernel only definitions and functions */
 
 struct xfs_mount;
 struct xfs_trans;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_XFS_RT
 /*
@@ -151,7 +157,10 @@ xfs_growfs_rt(
 	xfs_growfs_rt_t		*in);	/* user supplied growfs struct */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * From xfs_rtbitmap.c
  */
@@ -180,6 +189,9 @@ int xfs_rtfree_range(struct xfs_mount *mp, struct xfs_trans *tp,
 		     struct xfs_buf **rbpp, xfs_fsblock_t *rsb);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 # define xfs_rtallocate_extent(t,b,min,max,l,a,f,p,rb)  (ENOSYS)
@@ -195,7 +207,11 @@ xfs_rtmount_init(
 
 	xfs_warn(mp, "Not built with CONFIG_XFS_RT");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ENOSYS;
+=======
+	return -ENOSYS;
+>>>>>>> v3.18
 =======
 	return -ENOSYS;
 >>>>>>> v3.18
@@ -205,8 +221,11 @@ xfs_rtmount_init(
 #endif	/* CONFIG_XFS_RT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* __XFS_RTALLOC_H__ */

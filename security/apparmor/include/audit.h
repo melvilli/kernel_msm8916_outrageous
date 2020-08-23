@@ -28,7 +28,10 @@ struct aa_profile;
 extern const char *const audit_mode_names[];
 #define AUDIT_MAX_INDEX 5
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum audit_mode {
@@ -114,7 +117,10 @@ struct apparmor_audit_data {
 	const char *name;
 	const char *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	union {

@@ -207,7 +207,11 @@ ebsa110_timer_interrupt(int irq, void *dev_id)
 static struct irqaction ebsa110_timer_irq = {
 	.name		= "EBSA110 Timer Tick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -326,7 +330,10 @@ MACHINE_START(EBSA110, "EBSA110")
 	.reserve_lp0	= 1,
 	.reserve_lp2	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.restart_mode	= 's',
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.map_io		= ebsa110_map_io,

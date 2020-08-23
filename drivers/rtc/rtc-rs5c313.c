@@ -48,15 +48,21 @@
 #include <linux/bcd.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>
 
 #define DRV_NAME	"rs5c313"
 #define DRV_VERSION 	"1.13"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 
 #define DRV_NAME	"rs5c313"
 #define DRV_VERSION	"1.13"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SH_LANDISK
@@ -309,7 +315,11 @@ static int rs5c313_rtc_set_time(struct device *dev, struct rtc_time *tm)
 
 	data = bin2bcd(tm->tm_min);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rs5c313_write_reg(RS5C313_ADDR_MIN, data );
+=======
+	rs5c313_write_reg(RS5C313_ADDR_MIN, data);
+>>>>>>> v3.18
 =======
 	rs5c313_write_reg(RS5C313_ADDR_MIN, data);
 >>>>>>> v3.18
@@ -322,7 +332,11 @@ static int rs5c313_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	data = bin2bcd(tm->tm_mday);
 	rs5c313_write_reg(RS5C313_ADDR_DAY, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rs5c313_write_reg(RS5C313_ADDR_DAY10, (data>> 4));
+=======
+	rs5c313_write_reg(RS5C313_ADDR_DAY10, (data >> 4));
+>>>>>>> v3.18
 =======
 	rs5c313_write_reg(RS5C313_ADDR_DAY10, (data >> 4));
 >>>>>>> v3.18
@@ -365,9 +379,15 @@ static void rs5c313_check_xstp_bit(void)
 
 		memset(&tm, 0, sizeof(struct rtc_time));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tm.tm_mday 	= 1;
 		tm.tm_mon 	= 1 - 1;
 		tm.tm_year 	= 2000 - 1900;
+=======
+		tm.tm_mday	= 1;
+		tm.tm_mon	= 1 - 1;
+		tm.tm_year	= 2000 - 1900;
+>>>>>>> v3.18
 =======
 		tm.tm_mday	= 1;
 		tm.tm_mon	= 1 - 1;
@@ -400,11 +420,14 @@ static int rs5c313_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rs5c313_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver rs5c313_rtc_platform_driver = {
@@ -413,8 +436,12 @@ static struct platform_driver rs5c313_rtc_platform_driver = {
 		.owner  = THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe 	= rs5c313_rtc_probe,
 	.remove = rs5c313_rtc_remove,
+=======
+	.probe	= rs5c313_rtc_probe,
+>>>>>>> v3.18
 =======
 	.probe	= rs5c313_rtc_probe,
 >>>>>>> v3.18
@@ -437,7 +464,11 @@ static int __init rs5c313_rtc_init(void)
 static void __exit rs5c313_rtc_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_driver_unregister( &rs5c313_rtc_platform_driver );
+=======
+	platform_driver_unregister(&rs5c313_rtc_platform_driver);
+>>>>>>> v3.18
 =======
 	platform_driver_unregister(&rs5c313_rtc_platform_driver);
 >>>>>>> v3.18

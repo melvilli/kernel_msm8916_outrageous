@@ -18,6 +18,10 @@
  * MA 02110-1301, USA.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/component.h>
+>>>>>>> v3.18
 =======
 #include <linux/component.h>
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
 #include <linux/device.h>
 #include <linux/platform_device.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <drm/drm_fb_helper.h>
 #include <drm/drm_crtc_helper.h>
@@ -61,6 +66,8 @@ struct ipu_crtc {
 	int			enabled;
 	struct ipu_priv		*ipu_priv;
 =======
+=======
+>>>>>>> v3.18
 #include <drm/drm_crtc_helper.h>
 #include <linux/fb.h>
 #include <linux/clk.h>
@@ -85,6 +92,9 @@ struct ipu_crtc {
 	struct ipu_dc		*dc;
 	struct ipu_di		*di;
 	int			enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drm_pending_vblank_event *page_flip_event;
 	struct drm_framebuffer	*newfb;
@@ -97,6 +107,7 @@ struct ipu_crtc {
 
 #define to_ipu_crtc(x) container_of(x, struct ipu_crtc, base)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int calc_vref(struct drm_display_mode *mode)
 {
@@ -128,6 +139,8 @@ static void ipu_fb_enable(struct ipu_crtc *ipu_crtc)
 	if (ipu_crtc->dp)
 		ipu_dp_enable_channel(ipu_crtc->dp);
 =======
+=======
+>>>>>>> v3.18
 static void ipu_fb_enable(struct ipu_crtc *ipu_crtc)
 {
 	struct ipu_soc *ipu = dev_get_drvdata(ipu_crtc->dev->parent);
@@ -140,6 +153,9 @@ static void ipu_fb_enable(struct ipu_crtc *ipu_crtc)
 	/* Start DC channel and DI after IDMAC */
 	ipu_dc_enable_channel(ipu_crtc->dc);
 	ipu_di_enable(ipu_crtc->di);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipu_crtc->enabled = 1;
@@ -147,6 +163,7 @@ static void ipu_fb_enable(struct ipu_crtc *ipu_crtc)
 
 static void ipu_fb_disable(struct ipu_crtc *ipu_crtc)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ipu_crtc->enabled)
 		return;
@@ -158,6 +175,8 @@ static void ipu_fb_disable(struct ipu_crtc *ipu_crtc)
 	ipu_dmfc_disable_channel(ipu_crtc->dmfc);
 	ipu_di_disable(ipu_crtc->di);
 =======
+=======
+>>>>>>> v3.18
 	struct ipu_soc *ipu = dev_get_drvdata(ipu_crtc->dev->parent);
 
 	if (!ipu_crtc->enabled)
@@ -168,6 +187,9 @@ static void ipu_fb_disable(struct ipu_crtc *ipu_crtc)
 	ipu_di_disable(ipu_crtc->di);
 	ipu_plane_disable(ipu_crtc->plane[0]);
 	ipu_dc_disable(ipu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipu_crtc->enabled = 0;
@@ -194,7 +216,12 @@ static void ipu_crtc_dpms(struct drm_crtc *crtc, int mode)
 static int ipu_page_flip(struct drm_crtc *crtc,
 		struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct drm_pending_vblank_event *event)
+=======
+		struct drm_pending_vblank_event *event,
+		uint32_t page_flip_flags)
+>>>>>>> v3.18
 =======
 		struct drm_pending_vblank_event *event,
 		uint32_t page_flip_flags)
@@ -217,6 +244,10 @@ static int ipu_page_flip(struct drm_crtc *crtc,
 	ipu_crtc->newfb = fb;
 	ipu_crtc->page_flip_event = event;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	crtc->primary->fb = fb;
+>>>>>>> v3.18
 =======
 	crtc->primary->fb = fb;
 >>>>>>> v3.18
@@ -230,6 +261,7 @@ static const struct drm_crtc_funcs ipu_crtc_funcs = {
 	.page_flip = ipu_page_flip,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ipu_drm_set_base(struct drm_crtc *crtc, int x, int y)
 {
@@ -260,6 +292,8 @@ static int ipu_drm_set_base(struct drm_crtc *crtc, int x, int y)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 			       struct drm_display_mode *orig_mode,
 			       struct drm_display_mode *mode,
@@ -267,6 +301,7 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 			       struct drm_framebuffer *old_fb)
 {
 	struct ipu_crtc *ipu_crtc = to_ipu_crtc(crtc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drm_framebuffer *fb = ipu_crtc->base.fb;
 	int ret;
@@ -280,12 +315,18 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 	struct ipu_di_signal_cfg sig_cfg = {};
 	u32 out_pixel_fmt;
 >>>>>>> v3.18
+=======
+	int ret;
+	struct ipu_di_signal_cfg sig_cfg = {};
+	u32 out_pixel_fmt;
+>>>>>>> v3.18
 
 	dev_dbg(ipu_crtc->dev, "%s: mode->hdisplay: %d\n", __func__,
 			mode->hdisplay);
 	dev_dbg(ipu_crtc->dev, "%s: mode->vdisplay: %d\n", __func__,
 			mode->vdisplay);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ipu_ch_param_zero(cpmem);
 
@@ -309,6 +350,8 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	out_pixel_fmt = ipu_crtc->interface_pix_fmt;
@@ -341,6 +384,7 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 	sig_cfg.vsync_pin = ipu_crtc->di_vsync_pin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipu_crtc->dp) {
 		ret = ipu_dp_setup_channel(ipu_crtc->dp, IPUV3_COLORSPACE_RGB,
 				IPUV3_COLORSPACE_RGB);
@@ -353,6 +397,8 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 		ipu_dp_set_global_alpha(ipu_crtc->dp, 1, 0, 1);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = ipu_dc_init_sync(ipu_crtc->dc, ipu_crtc->di, sig_cfg.interlaced,
@@ -371,6 +417,7 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ipu_cpmem_set_resolution(cpmem, mode->hdisplay, mode->vdisplay);
 	ipu_cpmem_set_fmt(cpmem, v4l2_fmt);
@@ -397,10 +444,15 @@ static int ipu_crtc_mode_set(struct drm_crtc *crtc,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return ipu_plane_mode_set(ipu_crtc->plane[0], crtc, mode,
 				  crtc->primary->fb,
 				  0, 0, mode->hdisplay, mode->vdisplay,
 				  x, y, mode->hdisplay, mode->vdisplay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -425,15 +477,21 @@ static irqreturn_t ipu_irq_handler(int irq, void *dev_id)
 
 	if (ipu_crtc->newfb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ipu_crtc->base.fb = ipu_crtc->newfb;
 		ipu_crtc->newfb = NULL;
 		ipu_drm_set_base(&ipu_crtc->base, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 		struct ipu_plane *plane = ipu_crtc->plane[0];
 
 		ipu_crtc->newfb = NULL;
 		ipu_plane_set_base(plane, ipu_crtc->base.primary->fb,
 				   plane->x, plane->y);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ipu_crtc_handle_pageflip(ipu_crtc);
 	}
@@ -463,10 +521,13 @@ static void ipu_crtc_commit(struct drm_crtc *crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ipu_crtc_load_lut(struct drm_crtc *crtc)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct drm_crtc_helper_funcs ipu_helper_funcs = {
@@ -476,7 +537,10 @@ static struct drm_crtc_helper_funcs ipu_helper_funcs = {
 	.prepare = ipu_crtc_prepare,
 	.commit = ipu_crtc_commit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.load_lut = ipu_crtc_load_lut,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -484,10 +548,13 @@ static struct drm_crtc_helper_funcs ipu_helper_funcs = {
 static int ipu_enable_vblank(struct drm_crtc *crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipu_crtc *ipu_crtc = to_ipu_crtc(crtc);
 
 	enable_irq(ipu_crtc->irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -498,7 +565,12 @@ static void ipu_disable_vblank(struct drm_crtc *crtc)
 	struct ipu_crtc *ipu_crtc = to_ipu_crtc(crtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disable_irq(ipu_crtc->irq);
+=======
+	ipu_crtc->page_flip_event = NULL;
+	ipu_crtc->newfb = NULL;
+>>>>>>> v3.18
 =======
 	ipu_crtc->page_flip_event = NULL;
 	ipu_crtc->newfb = NULL;
@@ -522,6 +594,10 @@ static int ipu_set_interface_pix_fmt(struct drm_crtc *crtc, u32 encoder_type,
 			IPU_DI_CLKMODE_EXT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case DRM_MODE_ENCODER_TMDS:
+>>>>>>> v3.18
 =======
 	case DRM_MODE_ENCODER_TMDS:
 >>>>>>> v3.18
@@ -544,12 +620,17 @@ static const struct imx_drm_crtc_helper_funcs ipu_crtc_helper_funcs = {
 static void ipu_put_resources(struct ipu_crtc *ipu_crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR_OR_NULL(ipu_crtc->ipu_ch))
 		ipu_idmac_put(ipu_crtc->ipu_ch);
 	if (!IS_ERR_OR_NULL(ipu_crtc->dmfc))
 		ipu_dmfc_put(ipu_crtc->dmfc);
 	if (!IS_ERR_OR_NULL(ipu_crtc->dp))
 		ipu_dp_put(ipu_crtc->dp);
+=======
+	if (!IS_ERR_OR_NULL(ipu_crtc->dc))
+		ipu_dc_put(ipu_crtc->dc);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR_OR_NULL(ipu_crtc->dc))
 		ipu_dc_put(ipu_crtc->dc);
@@ -565,6 +646,7 @@ static int ipu_get_resources(struct ipu_crtc *ipu_crtc,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipu_crtc->ipu_ch = ipu_idmac_get(ipu, pdata->dma[0]);
 	if (IS_ERR(ipu_crtc->ipu_ch)) {
 		ret = PTR_ERR(ipu_crtc->ipu_ch);
@@ -573,12 +655,15 @@ static int ipu_get_resources(struct ipu_crtc *ipu_crtc,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ipu_crtc->dc = ipu_dc_get(ipu, pdata->dc);
 	if (IS_ERR(ipu_crtc->dc)) {
 		ret = PTR_ERR(ipu_crtc->dc);
 		goto err_out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ipu_crtc->dmfc = ipu_dmfc_get(ipu, pdata->dma[0]);
 	if (IS_ERR(ipu_crtc->dmfc)) {
@@ -596,6 +681,8 @@ static int ipu_get_resources(struct ipu_crtc *ipu_crtc,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ipu_crtc->di = ipu_di_get(ipu, pdata->di);
 	if (IS_ERR(ipu_crtc->di)) {
 		ret = PTR_ERR(ipu_crtc->di);
@@ -611,17 +698,23 @@ err_out:
 
 static int ipu_crtc_init(struct ipu_crtc *ipu_crtc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ipu_client_platformdata *pdata)
 {
 	struct ipu_soc *ipu = dev_get_drvdata(ipu_crtc->dev->parent);
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	struct ipu_client_platformdata *pdata, struct drm_device *drm)
 {
 	struct ipu_soc *ipu = dev_get_drvdata(ipu_crtc->dev->parent);
 	int dp = -EINVAL;
 	int ret;
 	int id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ipu_get_resources(ipu_crtc, pdata);
@@ -632,10 +725,15 @@ static int ipu_crtc_init(struct ipu_crtc *ipu_crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = imx_drm_add_crtc(&ipu_crtc->base,
 			&ipu_crtc->imx_crtc,
 			&ipu_crtc_helper_funcs, THIS_MODULE,
 			ipu_crtc->dev->parent->of_node, pdata->di);
+=======
+	ret = imx_drm_add_crtc(drm, &ipu_crtc->base, &ipu_crtc->imx_crtc,
+			&ipu_crtc_helper_funcs, ipu_crtc->dev->of_node);
+>>>>>>> v3.18
 =======
 	ret = imx_drm_add_crtc(drm, &ipu_crtc->base, &ipu_crtc->imx_crtc,
 			&ipu_crtc_helper_funcs, ipu_crtc->dev->of_node);
@@ -646,9 +744,12 @@ static int ipu_crtc_init(struct ipu_crtc *ipu_crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipu_crtc->irq = ipu_idmac_channel_irq(ipu, ipu_crtc->ipu_ch,
 			IPU_IRQ_EOF);
 =======
+=======
+>>>>>>> v3.18
 	if (pdata->dp >= 0)
 		dp = IPU_DP_FLOW_SYNC_BG;
 	id = imx_drm_crtc_id(ipu_crtc->imx_crtc);
@@ -672,11 +773,15 @@ static int ipu_crtc_init(struct ipu_crtc *ipu_crtc,
 	}
 
 	ipu_crtc->irq = ipu_plane_irq(ipu_crtc->plane[0]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = devm_request_irq(ipu_crtc->dev, ipu_crtc->irq, ipu_irq_handler, 0,
 			"imx_drm", ipu_crtc);
 	if (ret < 0) {
 		dev_err(ipu_crtc->dev, "irq request failed with %d.\n", ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_put_resources;
 	}
@@ -686,6 +791,8 @@ static int ipu_crtc_init(struct ipu_crtc *ipu_crtc,
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 		goto err_put_plane_res;
 	}
 
@@ -695,6 +802,9 @@ err_put_plane_res:
 	ipu_plane_put_resources(ipu_crtc->plane[0]);
 err_remove_crtc:
 	imx_drm_remove_crtc(ipu_crtc->imx_crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_put_resources:
 	ipu_put_resources(ipu_crtc);
@@ -702,6 +812,7 @@ err_put_resources:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ipu_drm_probe(struct platform_device *pdev)
 {
@@ -726,6 +837,8 @@ static int ipu_drm_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, ipu_crtc);
 =======
+=======
+>>>>>>> v3.18
 static struct device_node *ipu_drm_get_port_by_id(struct device_node *parent,
 						  int port_id)
 {
@@ -766,11 +879,15 @@ static int ipu_drm_bind(struct device *dev, struct device *master, void *data)
 		return ret;
 
 	dev_set_drvdata(dev, ipu_crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ipu_drm_remove(struct platform_device *pdev)
 {
@@ -781,6 +898,8 @@ static int ipu_drm_remove(struct platform_device *pdev)
 	ipu_put_resources(ipu_crtc);
 
 =======
+=======
+>>>>>>> v3.18
 static void ipu_drm_unbind(struct device *dev, struct device *master,
 	void *data)
 {
@@ -827,6 +946,9 @@ static int ipu_drm_probe(struct platform_device *pdev)
 static int ipu_drm_remove(struct platform_device *pdev)
 {
 	component_del(&pdev->dev, &ipu_crtc_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -844,6 +966,10 @@ MODULE_AUTHOR("Sascha Hauer <s.hauer@pengutronix.de>");
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:imx-ipuv3-crtc");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:imx-ipuv3-crtc");
 >>>>>>> v3.18

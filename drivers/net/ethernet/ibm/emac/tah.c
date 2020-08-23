@@ -19,6 +19,10 @@
  * option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -30,7 +34,11 @@
 int tah_attach(struct platform_device *ofdev, int channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tah_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct tah_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct tah_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -46,7 +54,11 @@ int tah_attach(struct platform_device *ofdev, int channel)
 void tah_detach(struct platform_device *ofdev, int channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tah_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct tah_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct tah_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -59,7 +71,11 @@ void tah_detach(struct platform_device *ofdev, int channel)
 void tah_reset(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tah_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct tah_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct tah_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -91,7 +107,11 @@ int tah_get_regs_len(struct platform_device *ofdev)
 void *tah_dump_regs(struct platform_device *ofdev, void *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tah_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct tah_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct tah_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -139,7 +159,11 @@ static int tah_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 >>>>>>> v3.18
@@ -162,9 +186,13 @@ static int tah_probe(struct platform_device *ofdev)
 static int tah_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tah_instance *dev = dev_get_drvdata(&ofdev->dev);
 
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+	struct tah_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct tah_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18

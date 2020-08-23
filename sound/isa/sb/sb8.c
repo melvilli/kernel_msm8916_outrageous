@@ -103,8 +103,13 @@ static int snd_sb8_probe(struct device *pdev, unsigned int dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_sb8), &card);
+=======
+	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_sb8), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_sb8), &card);
@@ -198,8 +203,11 @@ static int snd_sb8_probe(struct device *pdev, unsigned int dev)
 		irq[dev], dma8[dev]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, pdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_card_register(card)) < 0)
@@ -217,7 +225,10 @@ static int snd_sb8_remove(struct device *pdev, unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

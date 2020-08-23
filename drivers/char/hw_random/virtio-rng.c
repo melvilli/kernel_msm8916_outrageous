@@ -26,6 +26,7 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct virtqueue *vq;
 static unsigned int data_avail;
 static DECLARE_COMPLETION(have_data);
@@ -43,6 +44,8 @@ static void random_recv_done(struct virtqueue *vq)
 /* The host will fill any buffer we give it with sweet, sweet randomness. */
 static void register_buffer(u8 *buf, size_t size)
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_IDA(rng_index_ida);
 
 struct virtrng_info {
@@ -71,6 +74,9 @@ static void random_recv_done(struct virtqueue *vq)
 
 /* The host will fill any buffer we give it with sweet, sweet randomness. */
 static void register_buffer(struct virtrng_info *vi, u8 *buf, size_t size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct scatterlist sg;
@@ -79,10 +85,16 @@ static void register_buffer(struct virtrng_info *vi, u8 *buf, size_t size)
 
 	/* There should always be room for one buffer. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (virtqueue_add_inbuf(vq, &sg, 1, buf, GFP_KERNEL) < 0)
 		BUG();
 
 	virtqueue_kick(vq);
+=======
+	virtqueue_add_inbuf(vi->vq, &sg, 1, buf, GFP_KERNEL);
+
+	virtqueue_kick(vi->vq);
+>>>>>>> v3.18
 =======
 	virtqueue_add_inbuf(vi->vq, &sg, 1, buf, GFP_KERNEL);
 
@@ -94,12 +106,15 @@ static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!busy) {
 		busy = true;
 		init_completion(&have_data);
 		register_buffer(buf, size);
 =======
+=======
+>>>>>>> v3.18
 	struct virtrng_info *vi = (struct virtrng_info *)rng->priv;
 
 	if (vi->hwrng_removed)
@@ -109,12 +124,16 @@ static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
 		vi->busy = true;
 		init_completion(&vi->have_data);
 		register_buffer(vi, buf, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (!wait)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = wait_for_completion_killable(&have_data);
 	if (ret < 0)
@@ -124,6 +143,8 @@ static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
 
 	return data_avail;
 =======
+=======
+>>>>>>> v3.18
 	ret = wait_for_completion_killable(&vi->have_data);
 	if (ret < 0)
 		return ret;
@@ -131,11 +152,15 @@ static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
 	vi->busy = false;
 
 	return vi->data_avail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void virtio_cleanup(struct hwrng *rng)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (busy)
 		wait_for_completion(&have_data);
@@ -173,6 +198,8 @@ static int probe_common(struct virtio_device *vdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct virtrng_info *vi = (struct virtrng_info *)rng->priv;
 
 	if (vi->busy)
@@ -219,11 +246,15 @@ err_find:
 err_ida:
 	kfree(vi);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void remove_common(struct virtio_device *vdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vdev->config->reset(vdev);
 	busy = false;
@@ -231,6 +262,8 @@ static void remove_common(struct virtio_device *vdev)
 	vdev->config->del_vqs(vdev);
 	vq = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct virtrng_info *vi = vdev->priv;
 
 	vi->hwrng_removed = true;
@@ -243,6 +276,9 @@ static void remove_common(struct virtio_device *vdev)
 	vdev->config->del_vqs(vdev);
 	ida_simple_remove(&rng_index_ida, vi->index);
 	kfree(vi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -257,8 +293,11 @@ static void virtrng_remove(struct virtio_device *vdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 =======
+=======
+>>>>>>> v3.18
 static void virtrng_scan(struct virtio_device *vdev)
 {
 	struct virtrng_info *vi = vdev->priv;
@@ -270,6 +309,9 @@ static void virtrng_scan(struct virtio_device *vdev)
 }
 
 #ifdef CONFIG_PM_SLEEP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int virtrng_freeze(struct virtio_device *vdev)
 {
@@ -295,7 +337,12 @@ static struct virtio_driver virtio_rng_driver = {
 	.probe =	virtrng_probe,
 	.remove =	virtrng_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+	.scan =		virtrng_scan,
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 	.scan =		virtrng_scan,
 #ifdef CONFIG_PM_SLEEP

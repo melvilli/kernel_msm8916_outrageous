@@ -196,6 +196,7 @@ struct lm49453_priv {
 static const char *lm49453_mic2mode_text[] = {"Single Ended", "Differential"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SOC_ENUM_SINGLE_DECL(lm49453_mic2mode_enum, LM49453_P0_MICR_REG, 5,
 				  lm49453_mic2mode_text);
 
@@ -209,6 +210,8 @@ static const SOC_ENUM_SINGLE_DECL(lm49453_dmic34_cfg_enum,
 				  LM49453_P0_DIGITAL_MIC2_CONFIG_REG,
 				  7, lm49453_dmic_cfg_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(lm49453_mic2mode_enum, LM49453_P0_MICR_REG, 5,
 			    lm49453_mic2mode_text);
 
@@ -221,6 +224,9 @@ static SOC_ENUM_SINGLE_DECL(lm49453_dmic12_cfg_enum,
 static SOC_ENUM_SINGLE_DECL(lm49453_dmic34_cfg_enum,
 			    LM49453_P0_DIGITAL_MIC2_CONFIG_REG, 7,
 			    lm49453_dmic_cfg_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MUX Controls */
@@ -228,6 +234,7 @@ static const char *lm49453_adcl_mux_text[] = { "MIC1", "Aux_L" };
 
 static const char *lm49453_adcr_mux_text[] = { "MIC2", "Aux_R" };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum lm49453_adcl_enum =
 	SOC_ENUM_SINGLE(LM49453_P0_ANALOG_MIXER_ADC_REG, 0,
@@ -239,6 +246,8 @@ static const struct soc_enum lm49453_adcr_enum =
 			ARRAY_SIZE(lm49453_adcr_mux_text),
 			lm49453_adcr_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(lm49453_adcl_enum,
 			    LM49453_P0_ANALOG_MIXER_ADC_REG, 0,
 			    lm49453_adcl_mux_text);
@@ -246,6 +255,9 @@ static SOC_ENUM_SINGLE_DECL(lm49453_adcl_enum,
 static SOC_ENUM_SINGLE_DECL(lm49453_adcr_enum,
 			    LM49453_P0_ANALOG_MIXER_ADC_REG, 1,
 			    lm49453_adcr_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new lm49453_adcl_mux_control =
@@ -1423,6 +1435,7 @@ static struct snd_soc_dai_driver lm49453_dai[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lm49453_suspend(struct snd_soc_codec *codec)
 {
 	lm49453_set_bias_level(codec, SND_SOC_BIAS_OFF);
@@ -1453,6 +1466,8 @@ static int lm49453_probe(struct snd_soc_codec *codec)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* power down chip */
 static int lm49453_remove(struct snd_soc_codec *codec)
 {
@@ -1462,10 +1477,14 @@ static int lm49453_remove(struct snd_soc_codec *codec)
 
 static struct snd_soc_codec_driver soc_codec_dev_lm49453 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe = lm49453_probe,
 	.remove = lm49453_remove,
 	.suspend = lm49453_suspend,
 	.resume = lm49453_resume,
+=======
+	.remove = lm49453_remove,
+>>>>>>> v3.18
 =======
 	.remove = lm49453_remove,
 >>>>>>> v3.18

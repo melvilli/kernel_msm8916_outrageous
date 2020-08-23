@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -33,6 +41,7 @@
 #include "soft-interface.h"
 #include "hard-interface.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "vis.h"
 #include "gateway_common.h"
 #include "originator.h"
@@ -40,12 +49,17 @@
 
 #include <linux/if_ether.h>
 =======
+=======
+>>>>>>> v3.18
 #include "gateway_common.h"
 #include "gateway_client.h"
 #include "originator.h"
 #include "network-coding.h"
 #include "fragmentation.h"
 #include "multicast.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void batadv_send_outstanding_bcast_packet(struct work_struct *work);
@@ -79,6 +93,7 @@ int batadv_send_skb_packet(struct sk_buff *skb,
 	skb_reset_mac_header(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
 	memcpy(ethhdr->h_source, hard_iface->net_dev->dev_addr, ETH_ALEN);
 	memcpy(ethhdr->h_dest, dst_addr, ETH_ALEN);
@@ -88,6 +103,8 @@ int batadv_send_skb_packet(struct sk_buff *skb,
 	skb->priority = TC_PRIO_CONTROL;
 	skb->protocol = __constant_htons(ETH_P_BATMAN);
 =======
+=======
+>>>>>>> v3.18
 	ethhdr = eth_hdr(skb);
 	ether_addr_copy(ethhdr->h_source, hard_iface->net_dev->dev_addr);
 	ether_addr_copy(ethhdr->h_dest, dst_addr);
@@ -95,6 +112,9 @@ int batadv_send_skb_packet(struct sk_buff *skb,
 
 	skb_set_network_header(skb, ETH_HLEN);
 	skb->protocol = htons(ETH_P_BATMAN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb->dev = hard_iface->net_dev;
@@ -124,6 +144,7 @@ send_skb_err:
  * attempted.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns TRUE on success; FALSE otherwise.
  */
 bool batadv_send_skb_to_orig(struct sk_buff *skb,
@@ -133,6 +154,8 @@ bool batadv_send_skb_to_orig(struct sk_buff *skb,
 	struct batadv_priv *bat_priv = orig_node->bat_priv;
 	struct batadv_neigh_node *neigh_node;
 =======
+=======
+>>>>>>> v3.18
  * Returns NET_XMIT_SUCCESS on success, NET_XMIT_DROP on failure, or
  * NET_XMIT_POLICED if the skb is buffered for later transmit.
  */
@@ -143,11 +166,15 @@ int batadv_send_skb_to_orig(struct sk_buff *skb,
 	struct batadv_priv *bat_priv = orig_node->bat_priv;
 	struct batadv_neigh_node *neigh_node;
 	int ret = NET_XMIT_DROP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* batadv_find_router() increases neigh_nodes refcount if found. */
 	neigh_node = batadv_find_router(bat_priv, orig_node, recv_if);
 	if (!neigh_node)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return false;
 
@@ -156,6 +183,8 @@ int batadv_send_skb_to_orig(struct sk_buff *skb,
 
 	batadv_neigh_node_free_ref(neigh_node);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 
 	/* Check if the skb is too large to send in one piece and fragment
@@ -218,13 +247,19 @@ batadv_send_skb_push_fill_unicast(struct sk_buff *skb, int hdr_size,
 	ether_addr_copy(unicast_packet->dest, orig_node->orig);
 	/* set the destination tt version number */
 	unicast_packet->ttvn = ttvn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_send_skb_prepare_unicast - encapsulate an skb with a unicast header
  * @skb: the skb containing the payload to encapsulate
@@ -419,6 +454,9 @@ int batadv_send_skb_via_gw(struct batadv_priv *bat_priv, struct sk_buff *skb,
 				       orig_node, vid);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void batadv_schedule_bat_ogm(struct batadv_hard_iface *hard_iface)
 {
@@ -447,6 +485,11 @@ static void batadv_forw_packet_free(struct batadv_forw_packet *forw_packet)
 	if (forw_packet->if_incoming)
 		batadv_hardif_free_ref(forw_packet->if_incoming);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (forw_packet->if_outgoing)
+		batadv_hardif_free_ref(forw_packet->if_outgoing);
+>>>>>>> v3.18
 =======
 	if (forw_packet->if_outgoing)
 		batadv_hardif_free_ref(forw_packet->if_outgoing);
@@ -460,8 +503,11 @@ _batadv_add_bcast_packet_to_list(struct batadv_priv *bat_priv,
 				 unsigned long send_time)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_HLIST_NODE(&forw_packet->list);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* add new packet to packet list */
@@ -514,7 +560,11 @@ int batadv_add_bcast_packet_to_list(struct batadv_priv *bat_priv,
 	/* as we have a copy now, it is safe to decrease the TTL */
 	bcast_packet = (struct batadv_bcast_packet *)newskb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcast_packet->header.ttl--;
+=======
+	bcast_packet->ttl--;
+>>>>>>> v3.18
 =======
 	bcast_packet->ttl--;
 >>>>>>> v3.18
@@ -524,6 +574,10 @@ int batadv_add_bcast_packet_to_list(struct batadv_priv *bat_priv,
 	forw_packet->skb = newskb;
 	forw_packet->if_incoming = primary_if;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	forw_packet->if_outgoing = NULL;
+>>>>>>> v3.18
 =======
 	forw_packet->if_outgoing = NULL;
 >>>>>>> v3.18
@@ -579,6 +633,12 @@ static void batadv_send_outstanding_bcast_packet(struct work_struct *work)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (forw_packet->num_packets >= hard_iface->num_bcasts)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (forw_packet->num_packets >= hard_iface->num_bcasts)
 			continue;
@@ -596,7 +656,11 @@ static void batadv_send_outstanding_bcast_packet(struct work_struct *work)
 
 	/* if we still have some more bcasts to send */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (forw_packet->num_packets < 3) {
+=======
+	if (forw_packet->num_packets < BATADV_NUM_BCASTS_MAX) {
+>>>>>>> v3.18
 =======
 	if (forw_packet->num_packets < BATADV_NUM_BCASTS_MAX) {
 >>>>>>> v3.18
@@ -630,12 +694,15 @@ void batadv_send_outstanding_bat_ogm_packet(struct work_struct *work)
 	bat_priv->bat_algo_ops->bat_ogm_emit(forw_packet);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we have to have at least one packet in the queue
 	 * to determine the queues wake up time unless we are
 	 * shutting down
 	 */
 	if (forw_packet->own)
 =======
+=======
+>>>>>>> v3.18
 	/* we have to have at least one packet in the queue to determine the
 	 * queues wake up time unless we are shutting down.
 	 *
@@ -646,6 +713,9 @@ void batadv_send_outstanding_bat_ogm_packet(struct work_struct *work)
 	 */
 	if (forw_packet->own &&
 	    forw_packet->if_incoming == forw_packet->if_outgoing)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		batadv_schedule_bat_ogm(forw_packet->if_incoming);
 
@@ -695,9 +765,12 @@ batadv_purge_outstanding_packets(struct batadv_priv *bat_priv,
 		if (pending) {
 			hlist_del(&forw_packet->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!forw_packet->own)
 				atomic_inc(&bat_priv->batman_queue_left);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			batadv_forw_packet_free(forw_packet);
@@ -714,7 +787,12 @@ batadv_purge_outstanding_packets(struct batadv_priv *bat_priv,
 		 */
 		if ((hard_iface) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (forw_packet->if_incoming != hard_iface))
+=======
+		    (forw_packet->if_incoming != hard_iface) &&
+		    (forw_packet->if_outgoing != hard_iface))
+>>>>>>> v3.18
 =======
 		    (forw_packet->if_incoming != hard_iface) &&
 		    (forw_packet->if_outgoing != hard_iface))
@@ -732,9 +810,12 @@ batadv_purge_outstanding_packets(struct batadv_priv *bat_priv,
 		if (pending) {
 			hlist_del(&forw_packet->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!forw_packet->own)
 				atomic_inc(&bat_priv->bcast_queue_left);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			batadv_forw_packet_free(forw_packet);

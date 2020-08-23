@@ -59,7 +59,10 @@ config USB_GADGET_DEBUG
 	   production build.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_GADGET_VERBOSE
 	bool "Verbose debugging Messages (DEVELOPMENT)"
 	depends on USB_GADGET_DEBUG
@@ -74,6 +77,9 @@ config USB_GADGET_VERBOSE
 	   trying to track down.  Never enable these messages for a
 	   production build.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_GADGET_DEBUG_FILES
 	boolean "Debugging information files (DEVELOPMENT)"
@@ -101,7 +107,11 @@ config USB_GADGET_VBUS_DRAW
 	int "Maximum VBUS Power usage (2-500 mA)"
 	range 2 500
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default 500
+=======
+	default 2
+>>>>>>> v3.18
 =======
 	default 2
 >>>>>>> v3.18
@@ -134,6 +144,7 @@ config USB_GADGET_STORAGE_NUM_BUFFERS
 	   a module parameter as well.
 	   If unsure, say 2.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #
 # USB Peripheral Controller Support
@@ -587,6 +598,8 @@ config USB_F_SERIAL
 
 config USB_F_OBEX
 =======
+=======
+>>>>>>> v3.18
 source "drivers/usb/gadget/udc/Kconfig"
 
 #
@@ -648,6 +661,9 @@ config USB_F_UAC2
 	tristate
 
 config USB_F_UVC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tristate
 
@@ -672,6 +688,7 @@ choice
 
 # this first set of drivers all depend on bulk-capable hardware.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config USB_ZERO
 	tristate "Gadget Zero (DEVELOPMENT)"
@@ -780,6 +797,8 @@ config USB_ETH_RNDIS
 	select USB_LIBCOMPOSITE
 	default y
 =======
+=======
+>>>>>>> v3.18
 config USB_CONFIGFS
 	tristate "USB functions configurable through configfs"
 	select USB_LIBCOMPOSITE
@@ -860,6 +879,9 @@ config USB_CONFIGFS_RNDIS
 	depends on NET
 	select USB_U_ETHER
 	select USB_F_RNDIS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	   Microsoft Windows XP bundles the "Remote NDIS" (RNDIS) protocol,
@@ -867,10 +889,13 @@ config USB_CONFIGFS_RNDIS
 	   older versions of Windows.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   If you say "y" here, the Ethernet gadget driver will try to provide
 	   a second device configuration, supporting RNDIS to talk to such
 	   Microsoft USB hosts.
 	   
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	   To make MS-Windows work with this, use Documentation/usb/linux.inf
@@ -878,6 +903,7 @@ config USB_CONFIGFS_RNDIS
 	   XP, you'll need to download drivers from Microsoft's website; a URL
 	   is given in comments found in that info file.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config USB_ETH_EEM
        bool "Ethernet Emulation Model (EEM) support"
@@ -965,6 +991,8 @@ config USB_MASS_STORAGE
 	depends on BLOCK
 	select USB_LIBCOMPOSITE
 =======
+=======
+>>>>>>> v3.18
 config USB_CONFIGFS_EEM
 	bool "Ethernet Emulation Model (EEM)"
 	depends on USB_CONFIGFS
@@ -995,6 +1023,9 @@ config USB_CONFIGFS_MASS_STORAGE
 	depends on USB_CONFIGFS
 	depends on BLOCK
 	select USB_F_MASS_STORAGE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  The Mass Storage Gadget acts as a USB Mass Storage disk drive.
@@ -1002,6 +1033,7 @@ config USB_CONFIGFS_MASS_STORAGE
 	  device (in much the same way as the "loop" device driver),
 	  specified as a module parameter or sysfs option.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  This driver is a replacement for now removed File-backed
 	  Storage Gadget (g_file_storage).
@@ -1325,6 +1357,8 @@ config RMNET_SDIO_SMD_DATA_CHANNEL
 	  Data SMD channel for transferring network data
 
 =======
+=======
+>>>>>>> v3.18
 config USB_CONFIGFS_F_LB_SS
 	boolean "Loopback and sourcesink function (for testing)"
 	depends on USB_CONFIGFS
@@ -1354,5 +1388,8 @@ source "drivers/usb/gadget/legacy/Kconfig"
 
 endchoice
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # USB_GADGET

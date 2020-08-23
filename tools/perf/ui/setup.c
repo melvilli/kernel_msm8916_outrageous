@@ -1,5 +1,9 @@
 #include <pthread.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dlfcn.h>
+>>>>>>> v3.18
 =======
 #include <dlfcn.h>
 >>>>>>> v3.18
@@ -10,7 +14,10 @@
 
 pthread_mutex_t ui__lock = PTHREAD_MUTEX_INITIALIZER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void *perf_gtk_handle;
 
 #ifdef HAVE_GTK2_SUPPORT
@@ -64,6 +71,9 @@ out_close:
 static inline int setup_gtk_browser(void) { return -1; }
 static inline void exit_gtk_browser(bool wait_for_ok __maybe_unused) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void setup_browser(bool fallback_to_pager)
@@ -78,14 +88,20 @@ void setup_browser(bool fallback_to_pager)
 	switch (use_browser) {
 	case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (perf_gtk__init() == 0)
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (setup_gtk_browser() == 0)
 			break;
 		printf("GTK browser requested but could not find %s\n",
 		       PERF_GTK_DSO);
 		sleep(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* fall through */
 	case 1:
@@ -98,9 +114,12 @@ void setup_browser(bool fallback_to_pager)
 		if (fallback_to_pager)
 			setup_pager();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		perf_hpp__column_enable(PERF_HPP__OVERHEAD);
 		perf_hpp__init();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -112,7 +131,11 @@ void exit_browser(bool wait_for_ok)
 	switch (use_browser) {
 	case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perf_gtk__exit(wait_for_ok);
+=======
+		exit_gtk_browser(wait_for_ok);
+>>>>>>> v3.18
 =======
 		exit_gtk_browser(wait_for_ok);
 >>>>>>> v3.18

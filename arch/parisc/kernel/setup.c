@@ -157,7 +157,11 @@ void __init setup_arch(char **cmdline_p)
 
 #if defined(CONFIG_VT) && defined(CONFIG_DUMMY_CONSOLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conswitchp = &dummy_con;	/* we use take_over_console() later ! */
+=======
+	conswitchp = &dummy_con;	/* we use do_take_over_console() later ! */
+>>>>>>> v3.18
 =======
 	conswitchp = &dummy_con;	/* we use do_take_over_console() later ! */
 >>>>>>> v3.18
@@ -323,15 +327,21 @@ static int __init parisc_init(void)
 	
 	processor_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "CPU(s): %d x %s at %d.%06d MHz\n",
 			num_present_cpus(),
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	pr_info("CPU(s): %d out of %d %s at %d.%06d MHz online\n",
 		num_online_cpus(), num_present_cpus(),
 #else
 	pr_info("CPU(s): 1 x %s at %d.%06d MHz\n",
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			boot_cpu_data.cpu_name,
 			boot_cpu_data.cpu_hz / 1000000,

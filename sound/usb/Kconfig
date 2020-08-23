@@ -117,7 +117,10 @@ config SND_USB_6FIRE
           http://sixfireusb.sourceforge.net
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SND_USB_HIFACE
         tristate "M2Tech hiFace USB-SPDIF driver"
         select SND_PCM
@@ -162,6 +165,9 @@ config SND_BCD2000
 	  To compile this driver as a module, choose M here: the module
 	  will be called snd-bcd2000.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif	# SND_USB
 

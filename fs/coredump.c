@@ -2,7 +2,10 @@
 #include <linux/file.h>
 #include <linux/fdtable.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/freezer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -45,7 +48,10 @@
 #include <trace/events/task.h>
 #include "internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "coredump.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,8 +59,14 @@
 
 int core_uses_pid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 char core_pattern[CORENAME_MAX_SIZE] = "core";
 unsigned int core_pipe_limit;
+=======
+unsigned int core_pipe_limit;
+char core_pattern[CORENAME_MAX_SIZE] = "core";
+static int core_name_size = CORENAME_MAX_SIZE;
+>>>>>>> v3.18
 =======
 unsigned int core_pipe_limit;
 char core_pattern[CORENAME_MAX_SIZE] = "core";
@@ -65,6 +77,7 @@ struct core_name {
 	char *corename;
 	int used, size;
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 static atomic_t call_count = ATOMIC_INIT(1);
 
@@ -123,6 +136,8 @@ static void cn_escape(char *str)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 /* The maximal length of core_pattern is also specified in sysctl.c */
 
@@ -193,6 +208,9 @@ static int cn_esc_printf(struct core_name *cn, const char *fmt, ...)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cn_print_exe_file(struct core_name *cn)
 {
@@ -202,12 +220,17 @@ static int cn_print_exe_file(struct core_name *cn)
 
 	exe_file = get_mm_exe_file(current->mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!exe_file) {
 		char *commstart = cn->corename + cn->used;
 		ret = cn_printf(cn, "%s (path unknown)", current->comm);
 		cn_escape(commstart);
 		return ret;
 	}
+=======
+	if (!exe_file)
+		return cn_esc_printf(cn, "%s (path unknown)", current->comm);
+>>>>>>> v3.18
 =======
 	if (!exe_file)
 		return cn_esc_printf(cn, "%s (path unknown)", current->comm);
@@ -226,9 +249,13 @@ static int cn_print_exe_file(struct core_name *cn)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_escape(path);
 
 	ret = cn_printf(cn, "%s", path);
+=======
+	ret = cn_esc_printf(cn, "%s", path);
+>>>>>>> v3.18
 =======
 	ret = cn_esc_printf(cn, "%s", path);
 >>>>>>> v3.18
@@ -253,6 +280,7 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn->size = CORENAME_MAX_SIZE * atomic_read(&call_count);
 	cn->corename = kmalloc(cn->size, GFP_KERNEL);
 	cn->used = 0;
@@ -260,6 +288,8 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 	if (!cn->corename)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	cn->used = 0;
 	cn->corename = NULL;
 	if (expand_corename(cn, core_name_size))
@@ -268,6 +298,9 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 
 	if (ispipe)
 		++pat_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Repeat as long as we have more pattern to process and more output
@@ -275,8 +308,11 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 	while (*pat_ptr) {
 		if (*pat_ptr != '%') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (*pat_ptr == 0)
 				goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			err = cn_printf(cn, "%c", *pat_ptr++);
@@ -296,7 +332,10 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 					      task_tgid_vnr(current));
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* global pid */
 			case 'P':
 				err = cn_printf(cn, "%d",
@@ -310,6 +349,9 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 				err = cn_printf(cn, "%d",
 					      task_pid_nr(current));
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* uid */
 			case 'u':
@@ -336,6 +378,7 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 			}
 			/* hostname */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case 'h': {
 				char *namestart = cn->corename + cn->used;
 				down_read(&uts_sem);
@@ -353,6 +396,8 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 				break;
 			}
 =======
+=======
+>>>>>>> v3.18
 			case 'h':
 				down_read(&uts_sem);
 				err = cn_esc_printf(cn, "%s",
@@ -363,6 +408,9 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 			case 'e':
 				err = cn_esc_printf(cn, "%s", current->comm);
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			case 'E':
 				err = cn_print_exe_file(cn);
@@ -383,6 +431,10 @@ static int format_corename(struct core_name *cn, struct coredump_params *cprm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -397,7 +449,10 @@ out:
 			return err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ispipe;
@@ -521,9 +576,13 @@ static int coredump_wait(int exit_code, struct core_state *core_state)
 		struct core_thread *ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		freezer_do_not_count();
 		wait_for_completion(&core_state->startup);
 		freezer_count();
+=======
+		wait_for_completion(&core_state->startup);
+>>>>>>> v3.18
 =======
 		wait_for_completion(&core_state->startup);
 >>>>>>> v3.18
@@ -634,7 +693,11 @@ static int umh_pipe_setup(struct subprocess_info *info, struct cred *new)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_coredump(siginfo_t *siginfo)
+=======
+void do_coredump(const siginfo_t *siginfo)
+>>>>>>> v3.18
 =======
 void do_coredump(const siginfo_t *siginfo)
 >>>>>>> v3.18
@@ -647,15 +710,21 @@ void do_coredump(const siginfo_t *siginfo)
 	struct cred *cred;
 	int retval = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ispipe;
 	struct files_struct *displaced;
 	/* require nonrelative corefile path and be extra careful */
 	bool need_suid_safe = false;
 =======
+=======
+>>>>>>> v3.18
 	int flag = 0;
 	int ispipe;
 	struct files_struct *displaced;
 	bool need_nonrelative = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool core_dumped = false;
 	static atomic_t core_dump_count = ATOMIC_INIT(0);
@@ -691,8 +760,14 @@ void do_coredump(const siginfo_t *siginfo)
 	if (__get_dumpable(cprm.mm_flags) == SUID_DUMP_ROOT) {
 		/* Setuid core dump mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cred->fsuid = GLOBAL_ROOT_UID;	/* Dump root private */
 		need_suid_safe = true;
+=======
+		flag = O_EXCL;		/* Stop rewrite attacks */
+		cred->fsuid = GLOBAL_ROOT_UID;	/* Dump root private */
+		need_nonrelative = true;
+>>>>>>> v3.18
 =======
 		flag = O_EXCL;		/* Stop rewrite attacks */
 		cred->fsuid = GLOBAL_ROOT_UID;	/* Dump root private */
@@ -717,7 +792,11 @@ void do_coredump(const siginfo_t *siginfo)
 			printk(KERN_WARNING "format_corename failed\n");
 			printk(KERN_WARNING "Aborting core\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail_corename;
+=======
+			goto fail_unlock;
+>>>>>>> v3.18
 =======
 			goto fail_unlock;
 >>>>>>> v3.18
@@ -756,7 +835,11 @@ void do_coredump(const siginfo_t *siginfo)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		helper_argv = argv_split(GFP_KERNEL, cn.corename+1, NULL);
+=======
+		helper_argv = argv_split(GFP_KERNEL, cn.corename, NULL);
+>>>>>>> v3.18
 =======
 		helper_argv = argv_split(GFP_KERNEL, cn.corename, NULL);
 >>>>>>> v3.18
@@ -777,7 +860,11 @@ void do_coredump(const siginfo_t *siginfo)
 		argv_free(helper_argv);
 		if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "Core dump to %s pipe failed\n",
+=======
+			printk(KERN_INFO "Core dump to |%s pipe failed\n",
+>>>>>>> v3.18
 =======
 			printk(KERN_INFO "Core dump to |%s pipe failed\n",
 >>>>>>> v3.18
@@ -791,7 +878,11 @@ void do_coredump(const siginfo_t *siginfo)
 			goto fail_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (need_suid_safe && cn.corename[0] != '/') {
+=======
+		if (need_nonrelative && cn.corename[0] != '/') {
+>>>>>>> v3.18
 =======
 		if (need_nonrelative && cn.corename[0] != '/') {
 >>>>>>> v3.18
@@ -802,6 +893,7 @@ void do_coredump(const siginfo_t *siginfo)
 			goto fail_unlock;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * Unlink the file if it exists unless this is a SUID
@@ -836,6 +928,10 @@ void do_coredump(const siginfo_t *siginfo)
 		cprm.file = filp_open(cn.corename,
 				 O_CREAT | 2 | O_NOFOLLOW | O_LARGEFILE | flag,
 >>>>>>> v3.18
+=======
+		cprm.file = filp_open(cn.corename,
+				 O_CREAT | 2 | O_NOFOLLOW | O_LARGEFILE | flag,
+>>>>>>> v3.18
 				 0600);
 		if (IS_ERR(cprm.file))
 			goto fail_unlock;
@@ -858,9 +954,15 @@ void do_coredump(const siginfo_t *siginfo)
 		if (!uid_eq(inode->i_uid, current_fsuid()))
 			goto close_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cprm.file->f_op || !cprm.file->f_op->write)
 			goto close_fail;
 		if (do_truncate2(cprm.file->f_path.mnt, cprm.file->f_path.dentry, 0, 0, cprm.file))
+=======
+		if (!cprm.file->f_op->write)
+			goto close_fail;
+		if (do_truncate(cprm.file->f_path.dentry, 0, 0, cprm.file))
+>>>>>>> v3.18
 =======
 		if (!cprm.file->f_op->write)
 			goto close_fail;
@@ -891,7 +993,10 @@ fail_dropcount:
 fail_unlock:
 	kfree(cn.corename);
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail_corename:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	coredump_finish(mm, core_dumped);
@@ -907,6 +1012,7 @@ fail:
  * do on a core-file: use only these functions to write out all the
  * necessary info.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int dump_write(struct file *file, const void *addr, int nr)
 {
@@ -946,6 +1052,8 @@ int dump_seek(struct file *file, loff_t off)
 }
 EXPORT_SYMBOL(dump_seek);
 =======
+=======
+>>>>>>> v3.18
 int dump_emit(struct coredump_params *cprm, const void *addr, int nr)
 {
 	struct file *file = cprm->file;
@@ -998,4 +1106,7 @@ int dump_align(struct coredump_params *cprm, int align)
 	return mod ? dump_skip(cprm, align - mod) : 1;
 }
 EXPORT_SYMBOL(dump_align);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

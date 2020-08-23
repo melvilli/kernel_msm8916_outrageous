@@ -31,6 +31,7 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void storage_key_init_range(unsigned long start, unsigned long end);
 
 static inline unsigned long pfmf(unsigned long function, unsigned long address)
@@ -42,11 +43,16 @@ static inline unsigned long pfmf(unsigned long function, unsigned long address)
 		: "memory");
 	return address;
 =======
+=======
+>>>>>>> v3.18
 static inline void storage_key_init_range(unsigned long start, unsigned long end)
 {
 #if PAGE_DEFAULT_KEY
 	__storage_key_init_range(start, end);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -61,6 +67,7 @@ static inline void clear_page(void *page)
 		: "memory", "cc");
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void copy_page(void *to, void *from)
 {
@@ -90,6 +97,8 @@ static inline void copy_page(void *to, void *from)
 			"	mvc	3840(256,%0),3840(%1)\n"
 			: : "a" (to), "a" (from) : "memory");
 =======
+=======
+>>>>>>> v3.18
 /*
  * copy_page uses the mvcl instruction with 0xb0 padding byte in order to
  * bypass caches when copying a page. Especially when copying huge pages
@@ -105,6 +114,9 @@ static inline void copy_page(void *to, void *from)
 		"	mvcl	2,4"
 		: "+d" (reg2), "+d" (reg3), "+d" (reg4), "+d" (reg5)
 		: : "memory", "cc");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -177,6 +189,7 @@ static inline int page_reset_referenced(unsigned long addr)
 #define _PAGE_ACC_BITS		0xf0	/* HW access control bits	*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Test and clear referenced bit in storage key.
  */
@@ -186,6 +199,8 @@ static inline int page_test_and_clear_young(unsigned long pfn)
 	return page_reset_referenced(pfn << PAGE_SHIFT);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct page;
@@ -218,8 +233,11 @@ static inline int devmem_is_allowed(unsigned long pfn)
 #include <asm-generic/getorder.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __HAVE_ARCH_GATE_AREA 1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _S390_PAGE_H */

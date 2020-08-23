@@ -2,6 +2,11 @@
 # ADC drivers
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 =======
 # When adding new entries keep the list in alphabetical order
 
@@ -24,7 +29,10 @@ config AD7266
 	  ADCs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AD7291
 	tristate "Analog Devices AD7291 ADC driver"
 	depends on I2C
@@ -35,6 +43,9 @@ config AD7291
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad7291.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config AD7298
 	tristate "Analog Devices AD7298 ADC driver"
@@ -49,8 +60,13 @@ config AD7298
 	  module will be called ad7298.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config AD7923
 	tristate "Analog Devices AD7923 and similar ADCs driver"
+=======
+config AD7476
+	tristate "Analog Devices AD7476 and similar 1-channel ADCs driver"
+>>>>>>> v3.18
 =======
 config AD7476
 	tristate "Analog Devices AD7476 and similar 1-channel ADCs driver"
@@ -60,12 +76,15 @@ config AD7476
 	select IIO_TRIGGERED_BUFFER
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Say yes here to build support for Analog Devices
 	  AD7904, AD7914, AD7923, AD7924 4 Channel ADCs.
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad7923.
 =======
+=======
+>>>>>>> v3.18
 	  Say yes here to build support for Analog Devices AD7273, AD7274, AD7276,
 	  AD7277, AD7278, AD7475, AD7476, AD7477, AD7478, AD7466, AD7467, AD7468,
 	  AD7495, AD7910, AD7920, AD7920 SPI analog to digital converters (ADC).
@@ -74,6 +93,9 @@ config AD7476
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad7476.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config AD7791
@@ -101,8 +123,13 @@ config AD7793
 	  module will be called AD7793.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config AD7476
 	tristate "Analog Devices AD7476 and similar 1-channel ADCs driver"
+=======
+config AD7887
+	tristate "Analog Devices AD7887 ADC driver"
+>>>>>>> v3.18
 =======
 config AD7887
 	tristate "Analog Devices AD7887 ADC driver"
@@ -111,6 +138,7 @@ config AD7887
 	select IIO_BUFFER
 	select IIO_TRIGGERED_BUFFER
 	help
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  Say yes here to build support for Analog Devices AD7273, AD7274, AD7276,
 	  AD7277, AD7278, AD7475, AD7476, AD7477, AD7478, AD7466, AD7467, AD7468,
@@ -124,6 +152,8 @@ config AD7887
 config AD7887
 	tristate "Analog Devices AD7887 ADC driver"
 =======
+=======
+>>>>>>> v3.18
 	  Say yes here to build support for Analog Devices
 	  AD7887 SPI analog to digital converter (ADC).
 	  If unsure, say N (but it's safe to say "Y").
@@ -133,6 +163,9 @@ config AD7887
 
 config AD7923
 	tristate "Analog Devices AD7923 and similar ADCs driver"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on SPI
 	select IIO_BUFFER
@@ -140,12 +173,15 @@ config AD7923
 	help
 	  Say yes here to build support for Analog Devices
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  AD7887 SPI analog to digital converter (ADC).
 	  If unsure, say N (but it's safe to say "Y").
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad7887.
 =======
+=======
+>>>>>>> v3.18
 	  AD7904, AD7914, AD7923, AD7924 4 Channel ADCs.
 
 	  To compile this driver as a module, choose M here: the
@@ -161,12 +197,19 @@ config AD799X
 	  ad7991, ad7995, ad7999, ad7992, ad7993, ad7994, ad7997, ad7998
 	  i2c analog to digital converters (ADC). Provides direct access
 	  via sysfs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config AT91_ADC
 	tristate "Atmel AT91 ADC"
 	depends on ARCH_AT91
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on INPUT
+>>>>>>> v3.18
 =======
 	depends on INPUT
 >>>>>>> v3.18
@@ -178,8 +221,13 @@ config AT91_ADC
 
 config EXYNOS_ADC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Exynos ADC driver support"
 	depends on OF
+=======
+	tristate "Exynos ADC driver support"
+	depends on ARCH_EXYNOS || ARCH_S3C24XX || ARCH_S3C64XX || (OF && COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	tristate "Exynos ADC driver support"
 	depends on ARCH_EXYNOS || ARCH_S3C24XX || ARCH_S3C64XX || (OF && COMPILE_TEST)
@@ -191,7 +239,11 @@ config EXYNOS_ADC
 
 config LP8788_ADC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "LP8788 ADC driver"
+=======
+	tristate "LP8788 ADC driver"
+>>>>>>> v3.18
 =======
 	tristate "LP8788 ADC driver"
 >>>>>>> v3.18
@@ -200,7 +252,10 @@ config LP8788_ADC
 	  Say yes here to build support for TI LP8788 ADC.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MAX1027
 	tristate "Maxim max1027 ADC driver"
 	depends on SPI
@@ -210,6 +265,9 @@ config MAX1027
 	  Say yes here to build support for Maxim SPI ADC models
 	  max1027, max1029 and max1031.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MAX1363
 	tristate "Maxim max1363 ADC driver"
@@ -228,7 +286,10 @@ config MAX1363
 	  data via the iio dev interface.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MCP320X
 	tristate "Microchip Technology MCP3204/08"
 	depends on SPI
@@ -279,6 +340,9 @@ config ROCKCHIP_SARADC
 	  To compile this driver as a module, choose M here: the
 	  module will be called rockchip_saradc.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TI_ADC081C
 	tristate "Texas Instruments ADC081C021/027"
@@ -291,10 +355,13 @@ config TI_ADC081C
 	  called ti-adc081c.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TI_AM335X_ADC
 	tristate "TI's ADC driver"
 	depends on MFD_TI_AM335X_TSCADC
 =======
+=======
+>>>>>>> v3.18
 config TI_ADC128S052
 	tristate "Texas Instruments ADC128S052"
 	depends on SPI
@@ -310,13 +377,19 @@ config TI_AM335X_ADC
 	depends on MFD_TI_AM335X_TSCADC
 	select IIO_BUFFER
 	select IIO_KFIFO_BUF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say yes here to build support for Texas Instruments ADC
 	  driver which is also a MFD client.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TWL4030_MADC
 	tristate "TWL4030 MADC (Monitoring A/D Converter)"
 	depends on TWL4030_CORE
@@ -351,6 +424,9 @@ config VF610_ADC
 	  This driver can also be built as a module. If so, the module will be
 	  called vf610_adc.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VIPERBOARD_ADC
 	tristate "Viperboard ADC support"
@@ -360,7 +436,10 @@ config VIPERBOARD_ADC
 	  Technologies Viperboard.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config XILINX_XADC
 	tristate "Xilinx XADC driver"
 	depends on ARCH_ZYNQ || MICROBLAZE || COMPILE_TEST
@@ -374,5 +453,8 @@ config XILINX_XADC
 	  The driver can also be build as a module. If so, the module will be called
 	  xilinx-xadc.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

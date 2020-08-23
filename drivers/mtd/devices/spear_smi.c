@@ -7,7 +7,11 @@
  * Copyright © 2010 STMicroelectronics.
  * Ashish Priyadarshi
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18
@@ -555,7 +559,11 @@ static int spear_mtd_read(struct mtd_info *mtd, loff_t from, size_t len,
 	struct spear_snor_flash *flash = get_flash_data(mtd);
 	struct spear_smi *dev = mtd->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *src;
+=======
+	void __iomem *src;
+>>>>>>> v3.18
 =======
 	void __iomem *src;
 >>>>>>> v3.18
@@ -592,7 +600,11 @@ static int spear_mtd_read(struct mtd_info *mtd, loff_t from, size_t len,
 	writel(val, dev->io_base + SMI_CR1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy_fromio(buf, (u8 *)src, len);
+=======
+	memcpy_fromio(buf, src, len);
+>>>>>>> v3.18
 =======
 	memcpy_fromio(buf, src, len);
 >>>>>>> v3.18
@@ -609,7 +621,11 @@ static int spear_mtd_read(struct mtd_info *mtd, loff_t from, size_t len,
 
 static inline int spear_smi_cpy_toio(struct spear_smi *dev, u32 bank,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void *dest, const void *src, size_t len)
+=======
+		void __iomem *dest, const void *src, size_t len)
+>>>>>>> v3.18
 =======
 		void __iomem *dest, const void *src, size_t len)
 >>>>>>> v3.18
@@ -660,7 +676,11 @@ static int spear_mtd_write(struct mtd_info *mtd, loff_t to, size_t len,
 	struct spear_snor_flash *flash = get_flash_data(mtd);
 	struct spear_smi *dev = mtd->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *dest;
+=======
+	void __iomem *dest;
+>>>>>>> v3.18
 =======
 	void __iomem *dest;
 >>>>>>> v3.18
@@ -934,7 +954,10 @@ static int spear_smi_probe(struct platform_device *pdev)
 		pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 		if (!pdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("%s: ERROR: no memory", __func__);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ret = -ENOMEM;
@@ -967,7 +990,10 @@ static int spear_smi_probe(struct platform_device *pdev)
 	if (!dev) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "mem alloc fail\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto err;
@@ -1022,7 +1048,11 @@ static int spear_smi_probe(struct platform_device *pdev)
 		if (ret) {
 			dev_err(&dev->pdev->dev, "bank setup failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_bank_setup;
+=======
+			goto err_irq;
+>>>>>>> v3.18
 =======
 			goto err_irq;
 >>>>>>> v3.18
@@ -1032,8 +1062,11 @@ static int spear_smi_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_bank_setup:
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_irq:
@@ -1074,7 +1107,10 @@ static int spear_smi_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(dev->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1082,7 +1118,11 @@ static int spear_smi_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1109,9 +1149,15 @@ static int spear_smi_resume(struct device *dev)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static SIMPLE_DEV_PM_OPS(spear_smi_pm_ops, spear_smi_suspend, spear_smi_resume);
 #endif
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(spear_smi_pm_ops, spear_smi_suspend, spear_smi_resume);
+>>>>>>> v3.18
 =======
 #endif
 
@@ -1133,9 +1179,13 @@ static struct platform_driver spear_smi_driver = {
 		.owner = THIS_MODULE,
 		.of_match_table = of_match_ptr(spear_smi_id_table),
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm = &spear_smi_pm_ops,
 #endif
+=======
+		.pm = &spear_smi_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm = &spear_smi_pm_ops,
 >>>>>>> v3.18
@@ -1147,7 +1197,11 @@ module_platform_driver(spear_smi_driver);
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Ashish Priyadarshi, Shiraz Hashim <shiraz.hashim@st.com>");
+=======
+MODULE_AUTHOR("Ashish Priyadarshi, Shiraz Hashim <shiraz.linux.kernel@gmail.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Ashish Priyadarshi, Shiraz Hashim <shiraz.linux.kernel@gmail.com>");
 >>>>>>> v3.18

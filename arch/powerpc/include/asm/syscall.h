@@ -14,12 +14,15 @@
 #define _ASM_SYSCALL_H	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sched.h>
 
 /* ftrace syscalls requires exporting the sys_call_table */
 #ifdef CONFIG_FTRACE_SYSCALLS
 extern const unsigned long *sys_call_table;
 =======
+=======
+>>>>>>> v3.18
 #include <uapi/linux/audit.h>
 #include <linux/sched.h>
 #include <linux/thread_info.h>
@@ -27,6 +30,9 @@ extern const unsigned long *sys_call_table;
 /* ftrace syscalls requires exporting the sys_call_table */
 #ifdef CONFIG_FTRACE_SYSCALLS
 extern const unsigned long sys_call_table[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_FTRACE_SYSCALLS */
 
@@ -97,10 +103,16 @@ static inline void syscall_set_arguments(struct task_struct *task,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int syscall_get_arch(void)
 {
 	return is_32bit_task() ? AUDIT_ARCH_PPC : AUDIT_ARCH_PPC64;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* _ASM_SYSCALL_H */

@@ -34,6 +34,10 @@
 #include "ioctl.h"
 #include "iocmd.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "iwctl.h"
+>>>>>>> v3.18
 =======
 #include "iwctl.h"
 >>>>>>> v3.18
@@ -70,10 +74,13 @@ static const long frequency_list[] = {
 
 /*---------------------  Static Classes  ----------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 //static int          msglevel                =MSG_LEVEL_DEBUG;
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*---------------------  Static Variables  --------------------------*/
@@ -84,15 +91,21 @@ static int msglevel = MSG_LEVEL_INFO;
 struct iw_statistics *iwctl_get_wireless_stats(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice pDevice = netdev_priv(dev);
 	long ldBm;
 
 	pDevice->wstats.status = pDevice->eOPMode;
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	long ldBm;
 
 	pDevice->wstats.status = pDevice->op_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef Calcu_LinkQual
 	if (pDevice->scStatistic.LinkQuality > 100)
@@ -104,7 +117,10 @@ struct iw_statistics *iwctl_get_wireless_stats(struct net_device *dev)
 	RFvRSSITodBm(pDevice, (unsigned char)(pDevice->uCurrRSSI), &ldBm);
 	pDevice->wstats.qual.level = ldBm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//pDevice->wstats.qual.level = 0x100 - pDevice->uCurrRSSI;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pDevice->wstats.qual.noise = 0;
@@ -127,7 +143,11 @@ static int iwctl_commit(struct net_device *dev,
 			char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWCOMMIT \n");
+=======
+	pr_debug(" SIOCSIWCOMMIT\n");
+>>>>>>> v3.18
 =======
 	pr_debug(" SIOCSIWCOMMIT\n");
 >>>>>>> v3.18
@@ -152,7 +172,11 @@ int iwctl_giwname(struct net_device *dev,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iwctl_siwscan(struct net_device *dev,
+=======
+static int iwctl_siwscan(struct net_device *dev,
+>>>>>>> v3.18
 =======
 static int iwctl_siwscan(struct net_device *dev,
 >>>>>>> v3.18
@@ -161,7 +185,11 @@ static int iwctl_siwscan(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -170,7 +198,12 @@ static int iwctl_siwscan(struct net_device *dev,
 	unsigned char abyScanSSID[WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1];
 	PWLAN_IE_SSID pItemSSID = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWSCAN \n");
+=======
+
+	pr_debug(" SIOCSIWSCAN\n");
+>>>>>>> v3.18
 =======
 
 	pr_debug(" SIOCSIWSCAN\n");
@@ -180,6 +213,10 @@ static int iwctl_siwscan(struct net_device *dev,
 //send scan event to wpa_Supplicant
 		union iwreq_data wrqu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -230,7 +267,11 @@ static int iwctl_siwscan(struct net_device *dev,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iwctl_giwscan(struct net_device *dev,
+=======
+static int iwctl_giwscan(struct net_device *dev,
+>>>>>>> v3.18
 =======
 static int iwctl_giwscan(struct net_device *dev,
 >>>>>>> v3.18
@@ -240,7 +281,11 @@ static int iwctl_giwscan(struct net_device *dev,
 {
 	int ii, jj, kk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -256,7 +301,11 @@ static int iwctl_giwscan(struct net_device *dev,
 	char buf[MAX_WPA_IE_LEN * 2 + 30];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWSCAN \n");
+=======
+	pr_debug(" SIOCGIWSCAN\n");
+>>>>>>> v3.18
 =======
 	pr_debug(" SIOCGIWSCAN\n");
 >>>>>>> v3.18
@@ -288,17 +337,23 @@ static int iwctl_giwscan(struct net_device *dev,
 			memset(&iwe, 0, sizeof(iwe));
 			iwe.cmd = SIOCGIWMODE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (WLAN_GET_CAP_INFO_ESS(pBSS->wCapInfo)) {
 				iwe.u.mode = IW_MODE_INFRA;
 			} else {
 				iwe.u.mode = IW_MODE_ADHOC;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (WLAN_GET_CAP_INFO_ESS(pBSS->wCapInfo))
 				iwe.u.mode = IW_MODE_INFRA;
 			else
 				iwe.u.mode = IW_MODE_ADHOC;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			iwe.len = IW_EV_UINT_LEN;
 			current_ev = iwe_stream_add_event(info, current_ev, end_buf, &iwe, IW_EV_UINT_LEN);
@@ -315,6 +370,10 @@ static int iwctl_giwscan(struct net_device *dev,
 			{
 				int f = (int)pBSS->uChannel - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -331,6 +390,7 @@ static int iwctl_giwscan(struct net_device *dev,
 			iwe.u.qual.noise = 0;
 //2008-0409-01, <Add> by Einsn Liu
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (-ldBm < 50) {
 				iwe.u.qual.qual = 100;
 			} else if (-ldBm > 90) {
@@ -342,6 +402,8 @@ static int iwctl_giwscan(struct net_device *dev,
 
 			//  iwe.u.qual.qual = 0;
 =======
+=======
+>>>>>>> v3.18
 			if (-ldBm < 50)
 				iwe.u.qual.qual = 100;
 			else if (-ldBm > 90)
@@ -351,6 +413,9 @@ static int iwctl_giwscan(struct net_device *dev,
 
 			iwe.u.qual.updated = 7;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			current_ev = iwe_stream_add_event(info, current_ev, end_buf, &iwe, IW_EV_QUAL_LEN);
 
@@ -358,17 +423,23 @@ static int iwctl_giwscan(struct net_device *dev,
 			iwe.cmd = SIOCGIWENCODE;
 			iwe.u.data.length = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (WLAN_GET_CAP_INFO_PRIVACY(pBSS->wCapInfo)) {
 				iwe.u.data.flags = IW_ENCODE_ENABLED | IW_ENCODE_NOKEY;
 			} else {
 				iwe.u.data.flags = IW_ENCODE_DISABLED;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (WLAN_GET_CAP_INFO_PRIVACY(pBSS->wCapInfo))
 				iwe.u.data.flags = IW_ENCODE_ENABLED | IW_ENCODE_NOKEY;
 			else
 				iwe.u.data.flags = IW_ENCODE_DISABLED;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			current_ev = iwe_stream_add_point(info, current_ev, end_buf, &iwe, pItemSSID->abySSID);
 
@@ -432,15 +503,21 @@ int iwctl_siwfreq(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	int rc = 0;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWFREQ \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	int rc = 0;
 
 	pr_debug(" SIOCSIWFREQ\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	// If setting by frequency, convert to a channel
@@ -450,6 +527,10 @@ int iwctl_siwfreq(struct net_device *dev,
 		int f = wrq->m / 100000;
 		int c = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -464,6 +545,7 @@ int iwctl_siwfreq(struct net_device *dev,
 	else {
 		int channel = wrq->m;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((channel < 1) || (channel > 14)) {
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: New channel value of %d is invalid!\n", dev->name, wrq->m);
 			rc = -EINVAL;
@@ -471,6 +553,8 @@ int iwctl_siwfreq(struct net_device *dev,
 			// Yes ! We can set it !!!
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " Set to channel = %d\n", channel);
 =======
+=======
+>>>>>>> v3.18
 
 		if ((channel < 1) || (channel > 14)) {
 			pr_debug("%s: New channel value of %d is invalid!\n",
@@ -479,6 +563,9 @@ int iwctl_siwfreq(struct net_device *dev,
 		} else {
 			// Yes ! We can set it !!!
 			pr_debug(" Set to channel = %d\n", channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pDevice->uChannel = channel;
 			//2007-0207-04,<Add> by EinsnLiu
@@ -500,15 +587,21 @@ int iwctl_giwfreq(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWFREQ \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 	pr_debug(" SIOCGIWFREQ\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef WEXT_USECHANNELS
@@ -518,6 +611,10 @@ int iwctl_giwfreq(struct net_device *dev,
 	{
 		int f = (int)pMgmt->uCurrChannel - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -541,6 +638,7 @@ int iwctl_siwmode(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	int rc = 0;
@@ -550,6 +648,8 @@ int iwctl_siwmode(struct net_device *dev,
 	if (pMgmt->eCurrMode == WMAC_MODE_ESS_AP && pDevice->bEnableHostapd) {
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Can't set operation mode, hostapd is running \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	int rc = 0;
@@ -558,6 +658,9 @@ int iwctl_siwmode(struct net_device *dev,
 
 	if (pMgmt->eCurrMode == WMAC_MODE_ESS_AP && pDevice->bEnableHostapd) {
 		pr_debug("Can't set operation mode, hostapd is running\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return rc;
 	}
@@ -567,17 +670,23 @@ int iwctl_siwmode(struct net_device *dev,
 		if (pMgmt->eConfigMode != WMAC_CONFIG_IBSS_STA) {
 			pMgmt->eConfigMode = WMAC_CONFIG_IBSS_STA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pDevice->flags & DEVICE_FLAGS_OPENED) {
 				pDevice->bCommit = true;
 			}
 		}
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "set mode to ad-hoc \n");
 =======
+=======
+>>>>>>> v3.18
 			if (pDevice->flags & DEVICE_FLAGS_OPENED)
 				pDevice->bCommit = true;
 
 		}
 		pr_debug("set mode to ad-hoc\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IW_MODE_AUTO:
@@ -585,17 +694,23 @@ int iwctl_siwmode(struct net_device *dev,
 		if (pMgmt->eConfigMode != WMAC_CONFIG_ESS_STA) {
 			pMgmt->eConfigMode = WMAC_CONFIG_ESS_STA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pDevice->flags & DEVICE_FLAGS_OPENED) {
 				pDevice->bCommit = true;
 			}
 		}
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "set mode to infrastructure \n");
 =======
+=======
+>>>>>>> v3.18
 			if (pDevice->flags & DEVICE_FLAGS_OPENED)
 				pDevice->bCommit = true;
 
 		}
 		pr_debug("set mode to infrastructure\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IW_MODE_MASTER:
@@ -607,17 +722,23 @@ int iwctl_siwmode(struct net_device *dev,
 		if (pMgmt->eConfigMode != WMAC_CONFIG_AP) {
 			pMgmt->eConfigMode = WMAC_CONFIG_AP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pDevice->flags & DEVICE_FLAGS_OPENED) {
 				pDevice->bCommit = true;
 			}
 		}
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "set mode to Access Point \n");
 =======
+=======
+>>>>>>> v3.18
 			if (pDevice->flags & DEVICE_FLAGS_OPENED)
 				pDevice->bCommit = true;
 
 		}
 		pr_debug("set mode to Access Point\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -642,15 +763,21 @@ int iwctl_giwmode(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWMODE \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 	pr_debug(" SIOCGIWMODE\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	// If not managed, assume it's ad-hoc
 	switch (pMgmt->eConfigMode) {
@@ -687,7 +814,11 @@ int iwctl_giwrange(struct net_device *dev,
 	unsigned char abySupportedRates[13] = {0x02, 0x04, 0x0B, 0x16, 0x0c, 0x12, 0x18, 0x24, 0x30, 0x48, 0x60, 0x6C, 0x90};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWRANGE \n");
+=======
+	pr_debug(" SIOCGIWRANGE\n");
+>>>>>>> v3.18
 =======
 	pr_debug(" SIOCGIWRANGE\n");
 >>>>>>> v3.18
@@ -793,7 +924,11 @@ int iwctl_siwap(struct net_device *dev,
 		char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -802,16 +937,22 @@ int iwctl_siwap(struct net_device *dev,
 	unsigned char ZeroBSSID[WLAN_BSSID_LEN] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWAP \n");
 	if (pMgmt->eScanState ==  WMAC_IS_SCANNING) {
 		// In scanning..
 		printk("SIOCSIWAP(??)-->In scanning...\n");
 		//  return -EAGAIN;
 =======
+=======
+>>>>>>> v3.18
 	pr_debug(" SIOCSIWAP\n");
 	if (pMgmt->eScanState ==  WMAC_IS_SCANNING) {
 		// In scanning..
 		pr_debug("SIOCSIWAP(??)-->In scanning..\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (wrq->sa_family != ARPHRD_ETHER)
@@ -834,15 +975,21 @@ int iwctl_siwap(struct net_device *dev,
 		{
 			unsigned int ii, uSameBssidNum = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (ii = 0; ii < MAX_BSS_NUM; ii++) {
 				if (pMgmt->sBSSList[ii].bActive &&
 				    !compare_ether_addr(pMgmt->sBSSList[ii].abyBSSID, pMgmt->abyDesireBSSID)) {
 =======
+=======
+>>>>>>> v3.18
 
 			for (ii = 0; ii < MAX_BSS_NUM; ii++) {
 				if (pMgmt->sBSSList[ii].bActive &&
 				    ether_addr_equal(pMgmt->sBSSList[ii].abyBSSID,
 						     pMgmt->abyDesireBSSID)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					uSameBssidNum++;
 				}
@@ -854,9 +1001,15 @@ int iwctl_siwap(struct net_device *dev,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pDevice->flags & DEVICE_FLAGS_OPENED) {
 			pDevice->bCommit = true;
 		}
+=======
+		if (pDevice->flags & DEVICE_FLAGS_OPENED)
+			pDevice->bCommit = true;
+
+>>>>>>> v3.18
 =======
 		if (pDevice->flags & DEVICE_FLAGS_OPENED)
 			pDevice->bCommit = true;
@@ -876,15 +1029,21 @@ int iwctl_giwap(struct net_device *dev,
 		char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWAP \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 	pr_debug(" SIOCGIWAP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(wrq->sa_data, pMgmt->abyCurrBSSID, 6);
@@ -893,9 +1052,14 @@ int iwctl_giwap(struct net_device *dev,
 		memset(wrq->sa_data, 0, 6);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pMgmt->eCurrMode == WMAC_MODE_ESS_AP) {
 		memcpy(wrq->sa_data, pMgmt->abyCurrBSSID, 6);
 	}
+=======
+	if (pMgmt->eCurrMode == WMAC_MODE_ESS_AP)
+		memcpy(wrq->sa_data, pMgmt->abyCurrBSSID, 6);
+>>>>>>> v3.18
 =======
 	if (pMgmt->eCurrMode == WMAC_MODE_ESS_AP)
 		memcpy(wrq->sa_data, pMgmt->abyCurrBSSID, 6);
@@ -916,6 +1080,7 @@ int iwctl_giwaplist(struct net_device *dev,
 		    char *extra)
 {
 	int ii, jj, rc = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sockaddr sock[IW_MAX_AP];
 	struct iw_quality qual[IW_MAX_AP];
@@ -954,6 +1119,8 @@ int iwctl_giwaplist(struct net_device *dev,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct sockaddr *sock	= NULL;
 	struct sockaddr *s	= NULL;
 	struct iw_quality *qual	= NULL;
@@ -1014,6 +1181,9 @@ int iwctl_giwaplist(struct net_device *dev,
 exit:
 	kfree(sock);
 	kfree(qual);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -1028,7 +1198,11 @@ int iwctl_siwessid(struct net_device *dev,
 		   char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1038,6 +1212,7 @@ int iwctl_siwessid(struct net_device *dev,
 	unsigned char len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWESSID \n");
 	pDevice->fWPA_Authened = false;
 	if (pMgmt->eScanState ==  WMAC_IS_SCANNING) {
@@ -1045,11 +1220,16 @@ int iwctl_siwessid(struct net_device *dev,
 		printk("SIOCSIWESSID(??)-->In scanning...\n");
 		//  return -EAGAIN;
 =======
+=======
+>>>>>>> v3.18
 	pr_debug(" SIOCSIWESSID\n");
 	pDevice->fWPA_Authened = false;
 	if (pMgmt->eScanState ==  WMAC_IS_SCANNING) {
 		// In scanning..
 		pr_debug("SIOCSIWESSID(??)-->In scanning..\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	// Check if we asked for `any'
@@ -1058,7 +1238,11 @@ int iwctl_siwessid(struct net_device *dev,
 		memset(pMgmt->abyDesireSSID, 0, WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1);
 		memset(pMgmt->abyDesireBSSID, 0xFF, 6);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PRINT_K("set essid to 'any' \n");
+=======
+		PRINT_K("set essid to 'any'\n");
+>>>>>>> v3.18
 =======
 		PRINT_K("set essid to 'any'\n");
 >>>>>>> v3.18
@@ -1078,7 +1262,11 @@ int iwctl_siwessid(struct net_device *dev,
 		} else
 			pItemSSID->len = wrq->length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("set essid to %s \n", pItemSSID->abySSID);
+=======
+		pr_debug("set essid to %s\n", pItemSSID->abySSID);
+>>>>>>> v3.18
 =======
 		pr_debug("set essid to %s\n", pItemSSID->abySSID);
 >>>>>>> v3.18
@@ -1122,7 +1310,12 @@ int iwctl_siwessid(struct net_device *dev,
 					for (ii = 0; ii < MAX_BSS_NUM; ii++) {
 						if (pMgmt->sBSSList[ii].bActive &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    !compare_ether_addr(pMgmt->sBSSList[ii].abyBSSID, pCurr->abyBSSID)) {
+=======
+						    ether_addr_equal(pMgmt->sBSSList[ii].abyBSSID,
+								     pCurr->abyBSSID)) {
+>>>>>>> v3.18
 =======
 						    ether_addr_equal(pMgmt->sBSSList[ii].abyBSSID,
 								     pCurr->abyBSSID)) {
@@ -1132,7 +1325,11 @@ int iwctl_siwessid(struct net_device *dev,
 					}
 					if (uSameBssidNum >= 2) {  //hit: desired AP is in hidden ssid mode!!!
 <<<<<<< HEAD
+<<<<<<< HEAD
 						printk("SIOCSIWESSID:hidden ssid directly associate.......\n");
+=======
+						pr_debug("SIOCSIWESSID:hidden ssid directly associate.......\n");
+>>>>>>> v3.18
 =======
 						pr_debug("SIOCSIWESSID:hidden ssid directly associate.......\n");
 >>>>>>> v3.18
@@ -1148,6 +1345,7 @@ int iwctl_siwessid(struct net_device *dev,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "set essid = %s \n", pItemSSID->abySSID);
 	}
 
@@ -1155,11 +1353,16 @@ int iwctl_siwessid(struct net_device *dev,
 		pDevice->bCommit = true;
 	}
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("set essid = %s\n", pItemSSID->abySSID);
 	}
 
 	if (pDevice->flags & DEVICE_FLAGS_OPENED)
 		pDevice->bCommit = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1175,17 +1378,23 @@ int iwctl_giwessid(struct net_device *dev,
 		   char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	PWLAN_IE_SSID       pItemSSID;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWESSID \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	PWLAN_IE_SSID       pItemSSID;
 
 	pr_debug(" SIOCGIWESSID\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	// Note : if wrq->u.data.flags != 0, we should
@@ -1194,7 +1403,10 @@ int iwctl_giwessid(struct net_device *dev,
 	// Get the current SSID
 	pItemSSID = (PWLAN_IE_SSID)pMgmt->abyCurrSSID;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//pItemSSID = (PWLAN_IE_SSID)pMgmt->abyDesireSSID;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memcpy(extra, pItemSSID->abySSID , pItemSSID->len);
@@ -1217,7 +1429,11 @@ int iwctl_siwrate(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1227,7 +1443,11 @@ int iwctl_siwrate(struct net_device *dev,
 	unsigned char abySupportedRates[13] = {0x02, 0x04, 0x0B, 0x16, 0x0c, 0x12, 0x18, 0x24, 0x30, 0x48, 0x60, 0x6C, 0x90};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWRATE \n");
+=======
+	pr_debug(" SIOCSIWRATE\n");
+>>>>>>> v3.18
 =======
 	pr_debug(" SIOCSIWRATE\n");
 >>>>>>> v3.18
@@ -1279,7 +1499,11 @@ int iwctl_siwrate(struct net_device *dev,
 		// Fixed mode
 		// One rate, fixed
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Rate Fix\n");
+=======
+		pr_debug("Rate Fix\n");
+>>>>>>> v3.18
 =======
 		pr_debug("Rate Fix\n");
 >>>>>>> v3.18
@@ -1289,7 +1513,12 @@ int iwctl_siwrate(struct net_device *dev,
 		} else {
 			pDevice->uConnectionRate = brate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Fixed to Rate %d \n", pDevice->uConnectionRate);
+=======
+			pr_debug("Fixed to Rate %d\n",
+				 pDevice->uConnectionRate);
+>>>>>>> v3.18
 =======
 			pr_debug("Fixed to Rate %d\n",
 				 pDevice->uConnectionRate);
@@ -1300,7 +1529,11 @@ int iwctl_siwrate(struct net_device *dev,
 		pDevice->bFixRate = false;
 		pDevice->uConnectionRate = 13;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("auto rate:connection_rate is 13\n");
+=======
+		pr_debug("auto rate:connection_rate is 13\n");
+>>>>>>> v3.18
 =======
 		pr_debug("auto rate:connection_rate is 13\n");
 >>>>>>> v3.18
@@ -1319,7 +1552,11 @@ int iwctl_giwrate(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1328,7 +1565,11 @@ int iwctl_giwrate(struct net_device *dev,
 //    PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWRATE \n");
+=======
+	pr_debug(" SIOCGIWRATE\n");
+>>>>>>> v3.18
 =======
 	pr_debug(" SIOCGIWRATE\n");
 >>>>>>> v3.18
@@ -1353,6 +1594,7 @@ int iwctl_giwrate(struct net_device *dev,
 			}
 		} else brate = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 //2007-0118-05,<Mark> by EinsnLiu
 //Mark the unnecessary sentences.
 /*
@@ -1368,6 +1610,9 @@ int iwctl_giwrate(struct net_device *dev,
 
 //		if (pDevice->uConnectionRate == 13)
 //                brate = abySupportedRates[pDevice->wCurrentRate];
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1390,6 +1635,7 @@ int iwctl_siwrts(struct net_device *dev,
 		 char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	int rc = 0;
 
@@ -1405,6 +1651,8 @@ int iwctl_siwrts(struct net_device *dev,
 			pDevice->wRTSThreshold = rthr;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	int rc = 0;
 
@@ -1420,6 +1668,9 @@ int iwctl_siwrts(struct net_device *dev,
 			rc = -EINVAL;
 		else
 			pDevice->wRTSThreshold = rthr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1436,9 +1687,15 @@ int iwctl_giwrts(struct net_device *dev,
 		 char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWRTS \n");
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+
+	pr_debug(" SIOCGIWRTS\n");
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 
@@ -1461,17 +1718,23 @@ int iwctl_siwfrag(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	int rc = 0;
 	int fthr = wrq->value;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWFRAG \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	int rc = 0;
 	int fthr = wrq->value;
 
 	pr_debug(" SIOCSIWFRAG\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (wrq->disabled)
@@ -1496,9 +1759,15 @@ int iwctl_giwfrag(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWFRAG \n");
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+
+	pr_debug(" SIOCGIWFRAG\n");
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 
@@ -1520,15 +1789,21 @@ int iwctl_siwretry(struct net_device *dev,
 		   char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	int rc = 0;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWRETRY \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	int rc = 0;
 
 	pr_debug(" SIOCSIWRETRY\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (wrq->disabled) {
@@ -1548,9 +1823,14 @@ int iwctl_siwretry(struct net_device *dev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wrq->flags & IW_RETRY_LIFETIME) {
 		pDevice->wMaxTransmitMSDULifetime = wrq->value;
 	}
+=======
+	if (wrq->flags & IW_RETRY_LIFETIME)
+		pDevice->wMaxTransmitMSDULifetime = wrq->value;
+>>>>>>> v3.18
 =======
 	if (wrq->flags & IW_RETRY_LIFETIME)
 		pDevice->wMaxTransmitMSDULifetime = wrq->value;
@@ -1568,8 +1848,14 @@ int iwctl_giwretry(struct net_device *dev,
 		   char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWRETRY \n");
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+
+	pr_debug(" SIOCGIWRETRY\n");
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 
@@ -1603,7 +1889,11 @@ int iwctl_siwencode(struct net_device *dev,
 		    char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1624,7 +1914,11 @@ int iwctl_siwencode(struct net_device *dev,
 	PSKeyTable pkeytab;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWENCODE \n");
+=======
+	pr_debug(" SIOCSIWENCODE\n");
+>>>>>>> v3.18
 =======
 	pr_debug(" SIOCSIWENCODE\n");
 >>>>>>> v3.18
@@ -1639,11 +1933,14 @@ int iwctl_siwencode(struct net_device *dev,
 
 		if (dwKeyIndex < 1 && ((wrq->flags & IW_ENCODE_NOKEY) == 0)) {//set default key
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pDevice->byKeyIndex < WLAN_WEP_NKEYS) {
 				dwKeyIndex = pDevice->byKeyIndex;
 			} else dwKeyIndex = 0;
 		} else dwKeyIndex--;
 =======
+=======
+>>>>>>> v3.18
 			if (pDevice->byKeyIndex < WLAN_WEP_NKEYS)
 				dwKeyIndex = pDevice->byKeyIndex;
 			else
@@ -1651,6 +1948,9 @@ int iwctl_siwencode(struct net_device *dev,
 		} else {
 			dwKeyIndex--;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		// Check the size of the key
@@ -1663,18 +1963,24 @@ int iwctl_siwencode(struct net_device *dev,
 
 			if (wrq->length ==  WLAN_WEP232_KEYLEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Set 232 bit wep key\n");
 			} else if (wrq->length ==  WLAN_WEP104_KEYLEN) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Set 104 bit wep key\n");
 			} else if (wrq->length == WLAN_WEP40_KEYLEN) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Set 40 bit wep key, index= %d\n", (int)dwKeyIndex);
 =======
+=======
+>>>>>>> v3.18
 				pr_debug("Set 232 bit wep key\n");
 			} else if (wrq->length ==  WLAN_WEP104_KEYLEN) {
 				pr_debug("Set 104 bit wep key\n");
 			} else if (wrq->length == WLAN_WEP40_KEYLEN) {
 				pr_debug("Set 40 bit wep key, index= %d\n",
 					 (int)dwKeyIndex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {//no support length
 				rc = -EINVAL;
@@ -1684,10 +1990,16 @@ int iwctl_siwencode(struct net_device *dev,
 			memcpy(pDevice->abyKey, extra, wrq->length);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "abyKey: ");
 			for (ii = 0; ii < wrq->length; ii++) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%02x ", pDevice->abyKey[ii]);
 			}
+=======
+			pr_debug("abyKey: ");
+			for (ii = 0; ii < wrq->length; ii++)
+				pr_debug("%02x ", pDevice->abyKey[ii]);
+>>>>>>> v3.18
 =======
 			pr_debug("abyKey: ");
 			for (ii = 0; ii < wrq->length; ii++)
@@ -1721,15 +2033,21 @@ int iwctl_siwencode(struct net_device *dev,
 				return rc;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Just set Default key Index:\n");
 			pkeytab = &(pDevice->sKey.KeyTable[MAX_KEY_TABLE - 1]);
 			if (pkeytab->GroupKey[(unsigned char)dwKeyIndex].uKeyLength == 0) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Default key len is 0\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("Just set Default key Index:\n");
 			pkeytab = &(pDevice->sKey.KeyTable[MAX_KEY_TABLE - 1]);
 			if (pkeytab->GroupKey[(unsigned char)dwKeyIndex].uKeyLength == 0) {
 				pr_debug("Default key len is 0\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				rc = -EINVAL;
 				return rc;
@@ -1741,7 +2059,11 @@ int iwctl_siwencode(struct net_device *dev,
 
 	} else {//disable the key
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Disable WEP function\n");
+=======
+		pr_debug("Disable WEP function\n");
+>>>>>>> v3.18
 =======
 		pr_debug("Disable WEP function\n");
 >>>>>>> v3.18
@@ -1759,6 +2081,7 @@ int iwctl_siwencode(struct net_device *dev,
 	}
 //End Modify,Einsn
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
   DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWENCODE \n");
@@ -1843,18 +2166,24 @@ int iwctl_siwencode(struct net_device *dev,
 	if (wrq->flags & IW_ENCODE_OPEN) {
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Enable WEP & Open System\n");
 =======
+=======
+>>>>>>> v3.18
 	if (wrq->flags & IW_ENCODE_RESTRICTED) {
 		pr_debug("Enable WEP & ShareKey System\n");
 		pMgmt->bShareKeyAlgorithm = true;
 	}
 	if (wrq->flags & IW_ENCODE_OPEN) {
 		pr_debug("Enable WEP & Open System\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pMgmt->bShareKeyAlgorithm = false;
 	}
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Wireless Handler : get encode mode
@@ -1929,13 +2258,19 @@ return 0;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int iwctl_giwencode(struct net_device *dev,
 		    struct iw_request_info *info,
 		    struct iw_point *wrq,
 		    char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice			pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -1945,6 +2280,7 @@ int iwctl_giwencode(struct net_device *dev,
 	unsigned int index = (unsigned int)(wrq->flags & IW_ENCODE_INDEX);
 	PSKeyItem	pKey = NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWENCODE\n");
 
@@ -1959,6 +2295,8 @@ int iwctl_giwencode(struct net_device *dev,
 	} else
 		index--;
 =======
+=======
+>>>>>>> v3.18
 	pr_debug(" SIOCGIWENCODE\n");
 
 	if (index > WLAN_WEP_NKEYS)
@@ -1972,6 +2310,9 @@ int iwctl_giwencode(struct net_device *dev,
 	} else {
 		index--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(abyKey, 0, WLAN_WEP232_KEYLEN);
@@ -2016,17 +2357,23 @@ int iwctl_siwpower(struct net_device *dev,
 		   char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice            pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	int rc = 0;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWPOWER \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	int rc = 0;
 
 	pr_debug(" SIOCSIWPOWER\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(pDevice->flags & DEVICE_FLAGS_OPENED)) {
@@ -2050,6 +2397,7 @@ int iwctl_siwpower(struct net_device *dev,
 	switch (wrq->flags & IW_POWER_MODE) {
 	case IW_POWER_UNICAST_R:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWPOWER: IW_POWER_UNICAST_R \n");
 		rc = -EINVAL;
 		break;
@@ -2059,6 +2407,8 @@ int iwctl_siwpower(struct net_device *dev,
 	case IW_POWER_ON:
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWPOWER: IW_POWER_ON \n");
 =======
+=======
+>>>>>>> v3.18
 		pr_debug(" SIOCSIWPOWER: IW_POWER_UNICAST_R\n");
 		rc = -EINVAL;
 		break;
@@ -2067,6 +2417,9 @@ int iwctl_siwpower(struct net_device *dev,
 		rc = -EINVAL;
 	case IW_POWER_ON:
 		pr_debug(" SIOCSIWPOWER: IW_POWER_ON\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2085,17 +2438,23 @@ int iwctl_giwpower(struct net_device *dev,
 		   char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice            pDevice = (PSDevice)netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	int mode = pDevice->ePSMode;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWPOWER \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	PSMgmtObject        pMgmt = &(pDevice->sMgmtObj);
 	int mode = pDevice->ePSMode;
 
 	pr_debug(" SIOCGIWPOWER\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wrq->disabled = (mode == WMAC_POWER_CAM);
@@ -2123,15 +2482,21 @@ int iwctl_giwsens(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	long ldBm;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCGIWSENS \n");
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	long ldBm;
 
 	pr_debug(" SIOCGIWSENS\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pDevice->bLinkPass == true) {
 		RFvRSSITodBm(pDevice, (unsigned char)(pDevice->uCurrRSSI), &ldBm);
@@ -2139,7 +2504,11 @@ int iwctl_giwsens(struct net_device *dev,
 	} else {
 		wrq->value = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -2158,7 +2527,11 @@ int iwctl_siwauth(struct net_device *dev,
 		  char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice			pDevice = (PSDevice)netdev_priv(dev);
+=======
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = netdev_priv(dev);
 >>>>>>> v3.18
@@ -2167,6 +2540,7 @@ int iwctl_siwauth(struct net_device *dev,
 	static int wpa_version = 0;  //must be static to save the last value,einsn liu
 	static int pairwise = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " SIOCSIWAUTH \n");
 	switch (wrq->flags & IW_AUTH_INDEX) {
@@ -2194,6 +2568,8 @@ int iwctl_siwauth(struct net_device *dev,
 			//do nothing,einsn liu
 		} else pDevice->eEncryptionStatus = Ndis802_11EncryptionDisabled;
 =======
+=======
+>>>>>>> v3.18
 	pr_debug(" SIOCSIWAUTH\n");
 	switch (wrq->flags & IW_AUTH_INDEX) {
 	case IW_AUTH_WPA_VERSION:
@@ -2218,6 +2594,9 @@ int iwctl_siwauth(struct net_device *dev,
 			; /* do nothing,einsn liu */
 		else
 			pDevice->eEncryptionStatus = Ndis802_11EncryptionDisabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		break;
@@ -2226,16 +2605,22 @@ int iwctl_siwauth(struct net_device *dev,
 			break;
 		if (pairwise == IW_AUTH_CIPHER_NONE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (wrq->value == IW_AUTH_CIPHER_CCMP) {
 				pDevice->eEncryptionStatus = Ndis802_11Encryption3Enabled;
 			} else {
 				pDevice->eEncryptionStatus = Ndis802_11Encryption2Enabled;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (wrq->value == IW_AUTH_CIPHER_CCMP)
 				pDevice->eEncryptionStatus = Ndis802_11Encryption3Enabled;
 			else
 				pDevice->eEncryptionStatus = Ndis802_11Encryption2Enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -2245,6 +2630,7 @@ int iwctl_siwauth(struct net_device *dev,
 			if (wrq->value == IW_AUTH_KEY_MGMT_PSK)
 				pMgmt->eAuthenMode = WMAC_AUTH_WPA2PSK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else pMgmt->eAuthenMode = WMAC_AUTH_WPA2;
 		} else if (wpa_version == IW_AUTH_WPA_VERSION_WPA) {
 			if (wrq->value == 0) {
@@ -2253,6 +2639,8 @@ int iwctl_siwauth(struct net_device *dev,
 				pMgmt->eAuthenMode = WMAC_AUTH_WPAPSK;
 			else pMgmt->eAuthenMode = WMAC_AUTH_WPA;
 =======
+=======
+>>>>>>> v3.18
 			else
 				pMgmt->eAuthenMode = WMAC_AUTH_WPA2;
 		} else if (wpa_version == IW_AUTH_WPA_VERSION_WPA) {
@@ -2262,6 +2650,9 @@ int iwctl_siwauth(struct net_device *dev,
 				pMgmt->eAuthenMode = WMAC_AUTH_WPAPSK;
 			else
 				pMgmt->eAuthenMode = WMAC_AUTH_WPA;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2272,6 +2663,7 @@ int iwctl_siwauth(struct net_device *dev,
 		break;
 	case IW_AUTH_80211_AUTH_ALG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (wrq->value == IW_AUTH_ALG_OPEN_SYSTEM) {
 			pMgmt->bShareKeyAlgorithm = false;
 		} else if (wrq->value == IW_AUTH_ALG_SHARED_KEY) {
@@ -2281,6 +2673,8 @@ int iwctl_siwauth(struct net_device *dev,
 	case IW_AUTH_WPA_ENABLED:
 		//pDevice->bWPADevEnable = !! wrq->value;
 =======
+=======
+>>>>>>> v3.18
 		if (wrq->value == IW_AUTH_ALG_OPEN_SYSTEM)
 			pMgmt->bShareKeyAlgorithm = false;
 		else if (wrq->value == IW_AUTH_ALG_SHARED_KEY)
@@ -2288,6 +2682,9 @@ int iwctl_siwauth(struct net_device *dev,
 
 		break;
 	case IW_AUTH_WPA_ENABLED:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IW_AUTH_RX_UNENCRYPTED_EAPOL:
@@ -2304,7 +2701,10 @@ int iwctl_siwauth(struct net_device *dev,
 			pMgmt->bShareKeyAlgorithm = false;
 			pMgmt->eAuthenMode = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//pDevice->bWPADevEnable = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -2315,6 +2715,7 @@ int iwctl_siwauth(struct net_device *dev,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
   DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "wpa_version = %d\n",wpa_version);
   DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "pairwise = %d\n",pairwise);
@@ -2324,6 +2725,9 @@ int iwctl_siwauth(struct net_device *dev,
   DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "pDevice->bEncryptionEnable = %s\n",pDevice->bEncryptionEnable?"true":"false");
   DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "pDevice->bWPADevEnable = %s\n",pDevice->bWPADevEnable?"true":"false");
 */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2342,6 +2746,7 @@ int iwctl_siwgenie(struct net_device *dev,
 		   struct iw_request_info *info,
 		   struct iw_point *wrq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   char *extra)
 {
 	PSDevice			pDevice = (PSDevice)netdev_priv(dev);
@@ -2354,6 +2759,8 @@ int iwctl_siwgenie(struct net_device *dev,
 			goto out;
 		}
 =======
+=======
+>>>>>>> v3.18
 		   char __user *extra)
 {
 	struct vnt_private *pDevice = netdev_priv(dev);
@@ -2372,6 +2779,9 @@ int iwctl_siwgenie(struct net_device *dev,
 		if (length + 2 != wrq->length)
 			return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (wrq->length > MAX_WPA_IE_LEN) {
 			ret = -ENOMEM;
@@ -2396,9 +2806,15 @@ int iwctl_giwgenie(struct net_device *dev,
 		   struct iw_request_info *info,
 		   struct iw_point *wrq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   char *extra)
 {
 	PSDevice			pDevice = (PSDevice)netdev_priv(dev);
+=======
+		   char __user *extra)
+{
+	struct vnt_private *pDevice = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 		   char __user *extra)
 {
@@ -2413,18 +2829,24 @@ int iwctl_giwgenie(struct net_device *dev,
 		wrq->length = pMgmt->wWPAIELen;
 		if (pMgmt->wWPAIELen <= space) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (copy_to_user(extra, pMgmt->abyWPAIE, pMgmt->wWPAIELen)) {
 				ret = -EFAULT;
 			}
 		} else
 			ret = -E2BIG;
 =======
+=======
+>>>>>>> v3.18
 			if (copy_to_user(extra, pMgmt->abyWPAIE, pMgmt->wWPAIELen))
 				ret = -EFAULT;
 
 		} else {
 			ret = -E2BIG;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2437,23 +2859,30 @@ int iwctl_siwencodeext(struct net_device *dev,
 		       char *extra)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice	        pDevice = (PSDevice)netdev_priv(dev);
 	struct iw_encode_ext *ext = (struct iw_encode_ext *)extra;
 	struct viawget_wpa_param *param = NULL;
 //original member
 	wpa_alg alg_name;
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = netdev_priv(dev);
 	struct iw_encode_ext *ext = (struct iw_encode_ext *)extra;
 	struct viawget_wpa_param *param = NULL;
 //original member
 	enum wpa_alg alg_name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8  addr[6];
 	int key_idx, set_tx = 0;
 	u8  seq[IW_ENCODE_SEQ_MAX_SIZE];
 	u8 key[64];
 	size_t seq_len = 0, key_len = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 //
 	// int ii;
@@ -2471,6 +2900,8 @@ int iwctl_siwencodeext(struct net_device *dev,
 	memset(buf, 0, blen);
 	param = (struct viawget_wpa_param *)buf;
 =======
+=======
+>>>>>>> v3.18
 
 	u8 key_array[64];
 	int ret = 0;
@@ -2480,6 +2911,9 @@ int iwctl_siwencodeext(struct net_device *dev,
 	param = kzalloc(sizeof(*param), GFP_KERNEL);
 	if (param == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 //recover alg_name
@@ -2543,6 +2977,7 @@ int iwctl_siwencodeext(struct net_device *dev,
 //****this method is so foolish,but there is no other way???
 	if (param->u.wpa_key.alg_name == WPA_ALG_NONE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (param->u.wpa_key.key_index == 0) {
 			pDevice->bwextcount++;
 		}
@@ -2559,6 +2994,8 @@ int iwctl_siwencodeext(struct net_device *dev,
 	if (pDevice->bwextcount == 4) {
 		printk("SIOCSIWENCODEEXT:Enable WPA WEXT SUPPORT!!!!!\n");
 =======
+=======
+>>>>>>> v3.18
 		if (param->u.wpa_key.key_index == 0)
 			pDevice->bwextcount++;
 
@@ -2574,6 +3011,9 @@ int iwctl_siwencodeext(struct net_device *dev,
 	}
 	if (pDevice->bwextcount == 4) {
 		pr_debug("SIOCSIWENCODEEXT:Enable WPA WEXT SUPPORT!!!!!\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pDevice->bwextcount = 0;
 		pDevice->bWPASuppWextEnabled = true;
@@ -2601,6 +3041,7 @@ int iwctl_siwmlme(struct net_device *dev,
 		  struct iw_request_info *info,
 		  struct iw_point *wrq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  char *extra)
 {
 	PSDevice			pDevice = (PSDevice)netdev_priv(dev);
@@ -2615,6 +3056,8 @@ int iwctl_siwmlme(struct net_device *dev,
 	}
 	switch (mlme->cmd) {
 =======
+=======
+>>>>>>> v3.18
 		  char __user *extra)
 {
 	struct vnt_private *pDevice = netdev_priv(dev);
@@ -2632,6 +3075,9 @@ int iwctl_siwmlme(struct net_device *dev,
 		return ret;
 	}
 	switch (mime.cmd) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IW_MLME_DEAUTH:
 		//this command seems to be not complete,please test it --einsnliu
@@ -2640,7 +3086,11 @@ int iwctl_siwmlme(struct net_device *dev,
 	case IW_MLME_DISASSOC:
 		if (pDevice->bLinkPass == true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("iwctl_siwmlme--->send DISASSOCIATE\n");
+=======
+			pr_debug("iwctl_siwmlme--->send DISASSOCIATE\n");
+>>>>>>> v3.18
 =======
 			pr_debug("iwctl_siwmlme--->send DISASSOCIATE\n");
 >>>>>>> v3.18
@@ -2664,6 +3114,7 @@ int iwctl_siwmlme(struct net_device *dev,
  * Structures to export the Wireless Handlers
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
   static const iw_handler		iwctl_handler[] =
@@ -2728,6 +3179,8 @@ int iwctl_siwmlme(struct net_device *dev,
   };
 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const iw_handler		iwctl_handler[] =
@@ -2808,6 +3261,7 @@ const struct iw_handler_def	iwctl_handler_def =
 	.get_wireless_stats = &iwctl_get_wireless_stats,
 	.num_standard	= sizeof(iwctl_handler)/sizeof(iw_handler),
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	.num_private	= sizeof(iwctl_private_handler)/sizeof(iw_handler),
 //	.num_private_args = sizeof(iwctl_private_args)/sizeof(struct iw_priv_args),
 	.num_private	= 0,
@@ -2815,6 +3269,11 @@ const struct iw_handler_def	iwctl_handler_def =
 	.standard	= (iw_handler *)iwctl_handler,
 //	.private	= (iw_handler *) iwctl_private_handler,
 //	.private_args	= (struct iw_priv_args *)iwctl_private_args,
+=======
+	.num_private	= 0,
+	.num_private_args = 0,
+	.standard	= (iw_handler *)iwctl_handler,
+>>>>>>> v3.18
 =======
 	.num_private	= 0,
 	.num_private_args = 0,

@@ -49,7 +49,11 @@ static int ip175c_config_init(struct phy_device *phydev)
 {
 	int err, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int full_reset_performed = 0;
+=======
+	static int full_reset_performed;
+>>>>>>> v3.18
 =======
 	static int full_reset_performed;
 >>>>>>> v3.18

@@ -125,7 +125,12 @@ static int decode_hsr(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 		      struct kvm_exit_mmio *mmio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long rt, len;
+=======
+	unsigned long rt;
+	int len;
+>>>>>>> v3.18
 =======
 	unsigned long rt;
 	int len;
@@ -153,12 +158,15 @@ static int decode_hsr(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	rt = kvm_vcpu_dabt_get_rd(vcpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kvm_vcpu_reg_is_pc(vcpu, rt)) {
 		/* IO memory trying to read/write pc */
 		kvm_inject_pabt(vcpu, kvm_vcpu_get_hfar(vcpu));
 		return 1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mmio->is_write = is_write;

@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -47,7 +51,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -93,7 +102,11 @@ acpi_evaluate_object_typed(acpi_handle handle,
 {
 	acpi_status status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 must_free = FALSE;
+=======
+	u8 free_buffer_on_error = FALSE;
+>>>>>>> v3.18
 =======
 	u8 free_buffer_on_error = FALSE;
 >>>>>>> v3.18
@@ -108,7 +121,11 @@ acpi_evaluate_object_typed(acpi_handle handle,
 
 	if (return_buffer->length == ACPI_ALLOCATE_BUFFER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		must_free = TRUE;
+=======
+		free_buffer_on_error = TRUE;
+>>>>>>> v3.18
 =======
 		free_buffer_on_error = TRUE;
 >>>>>>> v3.18
@@ -117,9 +134,14 @@ acpi_evaluate_object_typed(acpi_handle handle,
 	/* Evaluate the object */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status =
 	    acpi_evaluate_object(handle, pathname, external_params,
 				 return_buffer);
+=======
+	status = acpi_evaluate_object(handle, pathname,
+				      external_params, return_buffer);
+>>>>>>> v3.18
 =======
 	status = acpi_evaluate_object(handle, pathname,
 				      external_params, return_buffer);
@@ -157,12 +179,15 @@ acpi_evaluate_object_typed(acpi_handle handle,
 		    acpi_ut_get_type_name(return_type)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (must_free) {
 
 		/* Caller used ACPI_ALLOCATE_BUFFER, free the return buffer */
 
 		ACPI_FREE(return_buffer->pointer);
 =======
+=======
+>>>>>>> v3.18
 	if (free_buffer_on_error) {
 		/*
 		 * Free a buffer created via ACPI_ALLOCATE_BUFFER.
@@ -172,6 +197,9 @@ acpi_evaluate_object_typed(acpi_handle handle,
 		 * only want to track internal allocations.
 		 */
 		acpi_os_free(return_buffer->pointer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return_buffer->pointer = NULL;
 	}
@@ -222,8 +250,11 @@ acpi_evaluate_object(acpi_handle handle,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->pathname = pathname;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Convert and validate the device handle */
@@ -236,11 +267,14 @@ acpi_evaluate_object(acpi_handle handle,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * If there are parameters to be passed to a control method, the external
 	 * objects must all be converted to internal objects
 	 */
 	if (external_params && external_params->count) {
 =======
+=======
+>>>>>>> v3.18
 	 * Get the actual namespace node for the target object.
 	 * Handles these cases:
 	 *
@@ -293,15 +327,23 @@ acpi_evaluate_object(acpi_handle handle,
 			info->param_count = ACPI_METHOD_NUM_ARGS;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Allocate a new parameter block for the internal objects
 		 * Add 1 to count to allow for null terminated internal list
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->parameters = ACPI_ALLOCATE_ZEROED(((acpi_size)
 							 external_params->
 							 count +
+=======
+		info->parameters = ACPI_ALLOCATE_ZEROED(((acpi_size) info->
+							 param_count +
+>>>>>>> v3.18
 =======
 		info->parameters = ACPI_ALLOCATE_ZEROED(((acpi_size) info->
 							 param_count +
@@ -315,7 +357,11 @@ acpi_evaluate_object(acpi_handle handle,
 		/* Convert each external object in the list to an internal object */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < external_params->count; i++) {
+=======
+		for (i = 0; i < info->param_count; i++) {
+>>>>>>> v3.18
 =======
 		for (i = 0; i < info->param_count; i++) {
 >>>>>>> v3.18
@@ -328,6 +374,7 @@ acpi_evaluate_object(acpi_handle handle,
 				goto cleanup;
 			}
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		info->parameters[external_params->count] = NULL;
 	}
@@ -367,6 +414,8 @@ acpi_evaluate_object(acpi_handle handle,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 		info->parameters[info->param_count] = NULL;
 	}
@@ -457,6 +506,9 @@ acpi_evaluate_object(acpi_handle handle,
 
 	status = acpi_ns_evaluate(info);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If we are expecting a return value, and all went well above,
@@ -538,7 +590,11 @@ acpi_evaluate_object(acpi_handle handle,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -612,6 +668,10 @@ static void acpi_ns_resolve_references(struct acpi_evaluate_info *info)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -637,9 +697,15 @@ static void acpi_ns_resolve_references(struct acpi_evaluate_info *info)
  *              start_object        - Handle in namespace where search begins
  *              max_depth           - Depth to which search is to reach
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              pre_order_visit     - Called during tree pre-order visit
  *                                    when an object of "Type" is found
  *              post_order_visit    - Called during tree post-order visit
+=======
+ *              descending_callback - Called during tree descent
+ *                                    when an object of "Type" is found
+ *              ascending_callback  - Called during tree ascent
+>>>>>>> v3.18
 =======
  *              descending_callback - Called during tree descent
  *                                    when an object of "Type" is found
@@ -673,8 +739,13 @@ acpi_walk_namespace(acpi_object_type type,
 		    acpi_handle start_object,
 		    u32 max_depth,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    acpi_walk_callback pre_order_visit,
 		    acpi_walk_callback post_order_visit,
+=======
+		    acpi_walk_callback descending_callback,
+		    acpi_walk_callback ascending_callback,
+>>>>>>> v3.18
 =======
 		    acpi_walk_callback descending_callback,
 		    acpi_walk_callback ascending_callback,
@@ -689,7 +760,11 @@ acpi_walk_namespace(acpi_object_type type,
 
 	if ((type > ACPI_TYPE_LOCAL_MAX) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (!max_depth) || (!pre_order_visit && !post_order_visit)) {
+=======
+	    (!max_depth) || (!descending_callback && !ascending_callback)) {
+>>>>>>> v3.18
 =======
 	    (!max_depth) || (!descending_callback && !ascending_callback)) {
 >>>>>>> v3.18
@@ -724,6 +799,7 @@ acpi_walk_namespace(acpi_object_type type,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_ns_walk_namespace(type, start_object, max_depth,
 					ACPI_NS_WALK_UNLOCK, pre_order_visit,
 					post_order_visit, context,
@@ -733,6 +809,8 @@ acpi_walk_namespace(acpi_object_type type,
 
       unlock_and_exit:
 =======
+=======
+>>>>>>> v3.18
 	/* Now we can validate the starting node */
 
 	if (!acpi_ns_validate_handle(start_object)) {
@@ -749,6 +827,9 @@ unlock_and_exit2:
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
 unlock_and_exit:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	(void)acpi_ut_release_read_lock(&acpi_gbl_namespace_rw_lock);
 	return_ACPI_STATUS(status);
@@ -994,7 +1075,11 @@ acpi_attach_data(acpi_handle obj_handle,
 	status = acpi_ns_attach_data(node, handler, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -1044,7 +1129,11 @@ acpi_detach_data(acpi_handle obj_handle, acpi_object_handler handler)
 	status = acpi_ns_detach_data(node, handler);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -1057,7 +1146,11 @@ ACPI_EXPORT_SYMBOL(acpi_detach_data)
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FUNCTION:    acpi_get_data
+=======
+ * FUNCTION:    acpi_get_data_full
+>>>>>>> v3.18
 =======
  * FUNCTION:    acpi_get_data_full
 >>>>>>> v3.18
@@ -1065,6 +1158,7 @@ ACPI_EXPORT_SYMBOL(acpi_detach_data)
  * PARAMETERS:  obj_handle          - Namespace node
  *              handler             - Handler used in call to attach_data
  *              data                - Where the data is returned
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * RETURN:      Status
@@ -1075,6 +1169,8 @@ ACPI_EXPORT_SYMBOL(acpi_detach_data)
 acpi_status
 acpi_get_data(acpi_handle obj_handle, acpi_object_handler handler, void **data)
 =======
+=======
+>>>>>>> v3.18
  *              callback            - function to execute before returning
  *
  * RETURN:      Status
@@ -1086,6 +1182,9 @@ acpi_get_data(acpi_handle obj_handle, acpi_object_handler handler, void **data)
 acpi_status
 acpi_get_data_full(acpi_handle obj_handle, acpi_object_handler handler,
 		   void **data, void (*callback)(void *))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct acpi_namespace_node *node;
@@ -1112,21 +1211,30 @@ acpi_get_data_full(acpi_handle obj_handle, acpi_object_handler handler,
 
 	status = acpi_ns_get_attached_data(node, handler, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       unlock_and_exit:
 =======
+=======
+>>>>>>> v3.18
 	if (ACPI_SUCCESS(status) && callback) {
 		callback(*data);
 	}
 
 unlock_and_exit:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 	return (status);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXPORT_SYMBOL(acpi_get_data_full)
 
 /*******************************************************************************
@@ -1148,5 +1256,8 @@ acpi_get_data(acpi_handle obj_handle, acpi_object_handler handler, void **data)
 	return acpi_get_data_full(obj_handle, handler, data, NULL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ACPI_EXPORT_SYMBOL(acpi_get_data)

@@ -40,12 +40,18 @@
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uDataLen, unsigned int uNodeIndex);
 
 #endif // __WROUTE_H__
 =======
+=======
+>>>>>>> v3.18
 bool ROUTEbRelay(struct vnt_private *pDevice, unsigned char *pbySkbData,
 		 unsigned int uDataLen, unsigned int uNodeIndex);
 
 #endif /* __WROUTE_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

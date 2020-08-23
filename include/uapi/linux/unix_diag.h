@@ -32,6 +32,10 @@ struct unix_diag_msg {
 
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* UNIX_DIAG_NONE, standard nl API requires this attribute!  */
+>>>>>>> v3.18
 =======
 	/* UNIX_DIAG_NONE, standard nl API requires this attribute!  */
 >>>>>>> v3.18

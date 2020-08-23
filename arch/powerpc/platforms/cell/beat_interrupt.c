@@ -240,7 +240,11 @@ void __init beatic_init_IRQ(void)
 
 	/* Allocate an irq host */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beatic_host = irq_domain_add_nomap(NULL, 0, &beatic_pic_host_ops, NULL);
+=======
+	beatic_host = irq_domain_add_nomap(NULL, ~0, &beatic_pic_host_ops, NULL);
+>>>>>>> v3.18
 =======
 	beatic_host = irq_domain_add_nomap(NULL, ~0, &beatic_pic_host_ops, NULL);
 >>>>>>> v3.18

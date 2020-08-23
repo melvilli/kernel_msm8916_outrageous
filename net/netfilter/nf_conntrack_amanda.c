@@ -55,7 +55,10 @@ enum amanda_strings {
 	SEARCH_MESG,
 	SEARCH_INDEX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SEARCH_CTL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -86,10 +89,13 @@ static struct {
 		.len	= 6,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[SEARCH_CTL] = {
 		.string = "CTL ",
 		.len	= 4,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -139,7 +145,11 @@ static int amanda_help(struct sk_buff *skb,
 	stop += start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = SEARCH_DATA; i <= SEARCH_CTL; i++) {
+=======
+	for (i = SEARCH_DATA; i <= SEARCH_INDEX; i++) {
+>>>>>>> v3.18
 =======
 	for (i = SEARCH_DATA; i <= SEARCH_INDEX; i++) {
 >>>>>>> v3.18

@@ -41,7 +41,11 @@ EXPORT_SYMBOL_GPL(nlm_debug);
 
 static struct ctl_table_header *sunrpc_table_header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table		sunrpc_table[];
+=======
+static struct ctl_table sunrpc_table[];
+>>>>>>> v3.18
 =======
 static struct ctl_table sunrpc_table[];
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ rpc_unregister_sysctl(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_do_xprt(ctl_table *table, int write,
+=======
+static int proc_do_xprt(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_do_xprt(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -82,7 +90,11 @@ static int proc_do_xprt(struct ctl_table *table, int write,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 proc_dodebug(ctl_table *table, int write,
+=======
+proc_dodebug(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 proc_dodebug(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -148,7 +160,11 @@ done:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table debug_table[] = {
+=======
+static struct ctl_table debug_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table debug_table[] = {
 >>>>>>> v3.18
@@ -190,7 +206,11 @@ static struct ctl_table debug_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table sunrpc_table[] = {
+=======
+static struct ctl_table sunrpc_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table sunrpc_table[] = {
 >>>>>>> v3.18

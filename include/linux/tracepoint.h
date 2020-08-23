@@ -7,7 +7,11 @@
  * See Documentation/trace/tracepoints.txt.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (C) Copyright 2008 Mathieu Desnoyers <mathieu.desnoyers@polymtl.ca>
+=======
+ * Copyright (C) 2008-2014 Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2008-2014 Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
 >>>>>>> v3.18
@@ -19,11 +23,16 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/smp.h>
 #include <linux/errno.h>
 #include <linux/types.h>
 #include <linux/percpu.h>
 #include <linux/cpumask.h>
+=======
+#include <linux/errno.h>
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/errno.h>
 #include <linux/types.h>
@@ -34,6 +43,10 @@
 struct module;
 struct tracepoint;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct notifier_block;
+>>>>>>> v3.18
 =======
 struct notifier_block;
 >>>>>>> v3.18
@@ -51,6 +64,7 @@ struct tracepoint {
 	struct tracepoint_func __rcu *funcs;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Connect a probe to a tracepoint.
@@ -71,6 +85,8 @@ extern int tracepoint_probe_unregister_noupdate(const char *name, void *probe,
 						void *data);
 extern void tracepoint_probe_update_all(void);
 =======
+=======
+>>>>>>> v3.18
 extern int
 tracepoint_probe_register(struct tracepoint *tp, void *probe, void *data);
 extern int
@@ -78,29 +94,39 @@ tracepoint_probe_unregister(struct tracepoint *tp, void *probe, void *data);
 extern void
 for_each_kernel_tracepoint(void (*fct)(struct tracepoint *tp, void *priv),
 		void *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_MODULES
 struct tp_module {
 	struct list_head list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int num_tracepoints;
 	struct tracepoint * const *tracepoints_ptrs;
 };
 bool trace_module_has_bad_taint(struct module *mod);
 =======
+=======
+>>>>>>> v3.18
 	struct module *mod;
 };
 
 bool trace_module_has_bad_taint(struct module *mod);
 extern int register_tracepoint_module_notifier(struct notifier_block *nb);
 extern int unregister_tracepoint_module_notifier(struct notifier_block *nb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline bool trace_module_has_bad_taint(struct module *mod)
 {
 	return false;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif /* CONFIG_MODULES */
 
@@ -117,6 +143,8 @@ extern void tracepoint_iter_stop(struct tracepoint_iter *iter);
 extern void tracepoint_iter_reset(struct tracepoint_iter *iter);
 
 =======
+=======
+>>>>>>> v3.18
 static inline
 int register_tracepoint_module_notifier(struct notifier_block *nb)
 {
@@ -129,6 +157,9 @@ int unregister_tracepoint_module_notifier(struct notifier_block *nb)
 }
 #endif /* CONFIG_MODULES */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * tracepoint_synchronize_unregister must be called between the last tracepoint
@@ -141,12 +172,18 @@ static inline void tracepoint_synchronize_unregister(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_SYSCALL_TRACEPOINTS
 extern void syscall_regfunc(void);
 extern void syscall_unregfunc(void);
 #endif /* CONFIG_HAVE_SYSCALL_TRACEPOINTS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PARAMS(args...) args
 
@@ -221,13 +258,19 @@ extern void syscall_unregfunc(void);
  * not add unwanted padding between the beginning of the section and the
  * structure. Force alignment to the same alignment as the section start.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * When lockdep is enabled, we make sure to always do the RCU portions of
  * the tracepoint code, regardless of whether tracing is on or we match the
  * condition.  This lets us find RCU issues triggered with tracepoints even
  * when this tracepoint is off.  This code has no purpose other than poking
  * RCU a bit.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define __DECLARE_TRACE(name, proto, args, cond, data_proto, data_args) \
@@ -240,12 +283,18 @@ extern void syscall_unregfunc(void);
 				TP_ARGS(data_args),			\
 				TP_CONDITION(cond),,);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (IS_ENABLED(CONFIG_LOCKDEP)) {			\
 			rcu_read_lock_sched_notrace();			\
 			rcu_dereference_sched(__tracepoint_##name.funcs);\
 			rcu_read_unlock_sched_notrace();		\
 		}							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	__DECLARE_TRACE_RCU(name, PARAMS(proto), PARAMS(args),		\
@@ -254,8 +303,13 @@ extern void syscall_unregfunc(void);
 	register_trace_##name(void (*probe)(data_proto), void *data)	\
 	{								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return tracepoint_probe_register(#name, (void *)probe,	\
 						 data);			\
+=======
+		return tracepoint_probe_register(&__tracepoint_##name,	\
+						(void *)probe, data);	\
+>>>>>>> v3.18
 =======
 		return tracepoint_probe_register(&__tracepoint_##name,	\
 						(void *)probe, data);	\
@@ -265,8 +319,13 @@ extern void syscall_unregfunc(void);
 	unregister_trace_##name(void (*probe)(data_proto), void *data)	\
 	{								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return tracepoint_probe_unregister(#name, (void *)probe, \
 						   data);		\
+=======
+		return tracepoint_probe_unregister(&__tracepoint_##name,\
+						(void *)probe, data);	\
+>>>>>>> v3.18
 =======
 		return tracepoint_probe_unregister(&__tracepoint_##name,\
 						(void *)probe, data);	\
@@ -276,12 +335,18 @@ extern void syscall_unregfunc(void);
 	check_trace_callback_type_##name(void (*cb)(data_proto))	\
 	{								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}								\
 	static inline bool						\
 	trace_##name##_enabled(void)					\
 	{								\
 		return static_key_false(&__tracepoint_##name.key);	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -329,12 +394,18 @@ extern void syscall_unregfunc(void);
 	static inline void check_trace_callback_type_##name(void (*cb)(data_proto)) \
 	{								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}								\
 	static inline bool						\
 	trace_##name##_enabled(void)					\
 	{								\
 		return false;						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -346,7 +417,10 @@ extern void syscall_unregfunc(void);
 #endif /* CONFIG_TRACEPOINTS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRACING
 /**
  * tracepoint_string - register constant persistent string to trace system
@@ -391,6 +465,9 @@ extern void syscall_unregfunc(void);
 # define __tracepoint_string
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The need for the DECLARE_TRACE_NOARGS() is to handle the prototype
@@ -408,6 +485,7 @@ extern void syscall_unregfunc(void);
  */
 #define DECLARE_TRACE_NOARGS(name)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__DECLARE_TRACE(name, void, ,					\
 			cpu_online(raw_smp_processor_id()),		\
 			void *__data, __data)
@@ -422,6 +500,8 @@ extern void syscall_unregfunc(void);
 	__DECLARE_TRACE(name, PARAMS(proto), PARAMS(args),		\
 			cpu_online(raw_smp_processor_id()) && (PARAMS(cond)), \
 =======
+=======
+>>>>>>> v3.18
 		__DECLARE_TRACE(name, void, , 1, void *__data, __data)
 
 #define DECLARE_TRACE(name, proto, args)				\
@@ -431,6 +511,9 @@ extern void syscall_unregfunc(void);
 
 #define DECLARE_TRACE_CONDITION(name, proto, args, cond)		\
 	__DECLARE_TRACE(name, PARAMS(proto), PARAMS(args), PARAMS(cond), \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			PARAMS(void *__data, proto),			\
 			PARAMS(__data, args))
@@ -438,6 +521,11 @@ extern void syscall_unregfunc(void);
 #define TRACE_EVENT_FLAGS(event, flag)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TRACE_EVENT_PERF_PERM(event, expr...)
+
+>>>>>>> v3.18
 =======
 #define TRACE_EVENT_PERF_PERM(event, expr...)
 
@@ -450,7 +538,11 @@ extern void syscall_unregfunc(void);
  *
  * We define a tracepoint, its arguments, its printk format
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and its 'fast binay record' layout.
+=======
+ * and its 'fast binary record' layout.
+>>>>>>> v3.18
 =======
  * and its 'fast binary record' layout.
 >>>>>>> v3.18
@@ -558,6 +650,11 @@ extern void syscall_unregfunc(void);
 #define DEFINE_EVENT(template, name, proto, args)		\
 	DECLARE_TRACE(name, PARAMS(proto), PARAMS(args))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DEFINE_EVENT_FN(template, name, proto, args, reg, unreg)\
+	DECLARE_TRACE(name, PARAMS(proto), PARAMS(args))
+>>>>>>> v3.18
 =======
 #define DEFINE_EVENT_FN(template, name, proto, args, reg, unreg)\
 	DECLARE_TRACE(name, PARAMS(proto), PARAMS(args))
@@ -582,6 +679,11 @@ extern void syscall_unregfunc(void);
 #define TRACE_EVENT_FLAGS(event, flag)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TRACE_EVENT_PERF_PERM(event, expr...)
+
+>>>>>>> v3.18
 =======
 #define TRACE_EVENT_PERF_PERM(event, expr...)
 

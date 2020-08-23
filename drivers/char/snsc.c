@@ -109,8 +109,12 @@ scdrv_open(struct inode *inode, struct file *file)
 	mutex_lock(&scdrv_mutex);
 	rv = request_irq(SGI_UART_VECTOR, scdrv_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 IRQF_SHARED | IRQF_DISABLED,
 			 SYSCTL_BASENAME, sd);
+=======
+			 IRQF_SHARED, SYSCTL_BASENAME, sd);
+>>>>>>> v3.18
 =======
 			 IRQF_SHARED, SYSCTL_BASENAME, sd);
 >>>>>>> v3.18

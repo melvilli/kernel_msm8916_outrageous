@@ -7,9 +7,12 @@ ccflags-$(CONFIG_ARCH_MULTIPLATFORM) := -I$(srctree)/arch/arm/plat-omap/include
 # Common support
 obj-y := sram.o dma.o counter_32k.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-m :=
 obj-n :=
 obj-  :=
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -21,8 +24,11 @@ i2c-omap-$(CONFIG_I2C_OMAP) := i2c.o
 obj-y += $(i2c-omap-m) $(i2c-omap-y)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # OMAP mailbox framework
 obj-$(CONFIG_OMAP_MBOX_FWK) += mailbox.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

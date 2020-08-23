@@ -73,6 +73,10 @@ struct vnic_rq_buf {
 	unsigned int index;
 	void *desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint64_t wr_id;
+>>>>>>> v3.18
 =======
 	uint64_t wr_id;
 >>>>>>> v3.18
@@ -89,7 +93,10 @@ struct vnic_rq {
 	void *os_buf_head;
 	unsigned int pkts_outstanding;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 #define ENIC_POLL_STATE_IDLE		0
 #define ENIC_POLL_STATE_NAPI		(1 << 0) /* NAPI owns this poll */
@@ -105,6 +112,9 @@ struct vnic_rq {
 	unsigned int bpoll_state;
 	spinlock_t bpoll_lock;
 #endif /* CONFIG_NET_RX_BUSY_POLL */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -133,7 +143,12 @@ static inline unsigned int vnic_rq_next_index(struct vnic_rq *rq)
 static inline void vnic_rq_post(struct vnic_rq *rq,
 	void *os_buf, unsigned int os_buf_index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t dma_addr, unsigned int len)
+=======
+	dma_addr_t dma_addr, unsigned int len,
+	uint64_t wrid)
+>>>>>>> v3.18
 =======
 	dma_addr_t dma_addr, unsigned int len,
 	uint64_t wrid)
@@ -146,6 +161,10 @@ static inline void vnic_rq_post(struct vnic_rq *rq,
 	buf->dma_addr = dma_addr;
 	buf->len = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	buf->wr_id = wrid;
+>>>>>>> v3.18
 =======
 	buf->wr_id = wrid;
 >>>>>>> v3.18
@@ -226,7 +245,10 @@ static inline int vnic_rq_fill(struct vnic_rq *rq,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 static inline void enic_busy_poll_init_lock(struct vnic_rq *rq)
 {
@@ -334,6 +356,9 @@ static inline bool enic_poll_ll_polling(struct vnic_rq *rq)
 }
 #endif /* CONFIG_NET_RX_BUSY_POLL */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void vnic_rq_free(struct vnic_rq *rq);
 int vnic_rq_alloc(struct vnic_dev *vdev, struct vnic_rq *rq, unsigned int index,

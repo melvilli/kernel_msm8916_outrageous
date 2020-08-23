@@ -11,6 +11,7 @@
 
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "clk.h"
 #include "clk-pll.h"
 
@@ -18,6 +19,8 @@
  * PLL35xx Clock Type
  */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hrtimer.h>
 #include <linux/delay.h>
 #include "clk.h"
@@ -138,11 +141,15 @@ static const struct clk_ops samsung_pll3000_clk_ops = {
  */
 /* Maximum lock time can be 270 * PDIV cycles */
 #define PLL35XX_LOCK_FACTOR	(270)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PLL35XX_MDIV_MASK       (0x3FF)
 #define PLL35XX_PDIV_MASK       (0x3F)
 #define PLL35XX_SDIV_MASK       (0x7)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PLL35XX_MDIV_SHIFT      (16)
 #define PLL35XX_PDIV_SHIFT      (8)
@@ -155,18 +162,27 @@ struct samsung_clk_pll35xx {
 
 #define to_clk_pll35xx(_hw) container_of(_hw, struct samsung_clk_pll35xx, hw)
 =======
+=======
+>>>>>>> v3.18
 #define PLL35XX_LOCK_STAT_MASK	(0x1)
 #define PLL35XX_MDIV_SHIFT      (16)
 #define PLL35XX_PDIV_SHIFT      (8)
 #define PLL35XX_SDIV_SHIFT      (0)
 #define PLL35XX_LOCK_STAT_SHIFT	(29)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned long samsung_pll35xx_recalc_rate(struct clk_hw *hw,
 				unsigned long parent_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct samsung_clk_pll35xx *pll = to_clk_pll35xx(hw);
+=======
+	struct samsung_clk_pll *pll = to_clk_pll(hw);
+>>>>>>> v3.18
 =======
 	struct samsung_clk_pll *pll = to_clk_pll(hw);
 >>>>>>> v3.18
@@ -184,6 +200,7 @@ static unsigned long samsung_pll35xx_recalc_rate(struct clk_hw *hw,
 	return (unsigned long)fvco;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct clk_ops samsung_pll35xx_clk_ops = {
 	.recalc_rate = samsung_pll35xx_recalc_rate,
@@ -228,6 +245,8 @@ struct clk * __init samsung_clk_register_pll35xx(const char *name,
  * PLL36xx Clock Type
  */
 =======
+=======
+>>>>>>> v3.18
 static inline bool samsung_pll35xx_mp_change(
 		const struct samsung_pll_rate_table *rate, u32 pll_con)
 {
@@ -302,6 +321,9 @@ static const struct clk_ops samsung_pll35xx_clk_min_ops = {
  */
 /* Maximum lock time can be 3000 * PDIV cycles */
 #define PLL36XX_LOCK_FACTOR    (3000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PLL36XX_KDIV_MASK	(0xFFFF)
@@ -311,6 +333,7 @@ static const struct clk_ops samsung_pll35xx_clk_min_ops = {
 #define PLL36XX_MDIV_SHIFT	(16)
 #define PLL36XX_PDIV_SHIFT	(8)
 #define PLL36XX_SDIV_SHIFT	(0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct samsung_clk_pll36xx {
@@ -323,12 +346,20 @@ struct samsung_clk_pll36xx {
 #define PLL36XX_KDIV_SHIFT	(0)
 #define PLL36XX_LOCK_STAT_SHIFT	(29)
 >>>>>>> v3.18
+=======
+#define PLL36XX_KDIV_SHIFT	(0)
+#define PLL36XX_LOCK_STAT_SHIFT	(29)
+>>>>>>> v3.18
 
 static unsigned long samsung_pll36xx_recalc_rate(struct clk_hw *hw,
 				unsigned long parent_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct samsung_clk_pll36xx *pll = to_clk_pll36xx(hw);
+=======
+	struct samsung_clk_pll *pll = to_clk_pll(hw);
+>>>>>>> v3.18
 =======
 	struct samsung_clk_pll *pll = to_clk_pll(hw);
 >>>>>>> v3.18
@@ -350,6 +381,7 @@ static unsigned long samsung_pll36xx_recalc_rate(struct clk_hw *hw,
 	return (unsigned long)fvco;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct clk_ops samsung_pll36xx_clk_ops = {
 	.recalc_rate = samsung_pll36xx_recalc_rate,
@@ -394,6 +426,8 @@ struct clk * __init samsung_clk_register_pll36xx(const char *name,
  * PLL45xx Clock Type
  */
 =======
+=======
+>>>>>>> v3.18
 static inline bool samsung_pll36xx_mpk_change(
 	const struct samsung_pll_rate_table *rate, u32 pll_con0, u32 pll_con1)
 {
@@ -473,11 +507,15 @@ static const struct clk_ops samsung_pll36xx_clk_min_ops = {
  */
 #define PLL4502_LOCK_FACTOR	400
 #define PLL4508_LOCK_FACTOR	240
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PLL45XX_MDIV_MASK	(0x3FF)
 #define PLL45XX_PDIV_MASK	(0x3F)
 #define PLL45XX_SDIV_MASK	(0x7)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PLL45XX_MDIV_SHIFT	(16)
 #define PLL45XX_PDIV_SHIFT	(8)
@@ -491,6 +529,8 @@ struct samsung_clk_pll45xx {
 
 #define to_clk_pll45xx(_hw) container_of(_hw, struct samsung_clk_pll45xx, hw)
 =======
+=======
+>>>>>>> v3.18
 #define PLL45XX_AFC_MASK	(0x1F)
 #define PLL45XX_MDIV_SHIFT	(16)
 #define PLL45XX_PDIV_SHIFT	(8)
@@ -499,13 +539,20 @@ struct samsung_clk_pll45xx {
 
 #define PLL45XX_ENABLE		BIT(31)
 #define PLL45XX_LOCKED		BIT(29)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned long samsung_pll45xx_recalc_rate(struct clk_hw *hw,
 				unsigned long parent_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct samsung_clk_pll45xx *pll = to_clk_pll45xx(hw);
+=======
+	struct samsung_clk_pll *pll = to_clk_pll(hw);
+>>>>>>> v3.18
 =======
 	struct samsung_clk_pll *pll = to_clk_pll(hw);
 >>>>>>> v3.18
@@ -526,6 +573,7 @@ static unsigned long samsung_pll45xx_recalc_rate(struct clk_hw *hw,
 	return (unsigned long)fvco;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct clk_ops samsung_pll45xx_clk_ops = {
 	.recalc_rate = samsung_pll45xx_recalc_rate,
@@ -576,6 +624,8 @@ struct clk * __init samsung_clk_register_pll45xx(const char *name,
 #define PLL46XX_PDIV_MASK	(0x3F)
 #define PLL46XX_SDIV_MASK	(0x7)
 =======
+=======
+>>>>>>> v3.18
 static bool samsung_pll45xx_mp_change(u32 pll_con0, u32 pll_con1,
 				const struct samsung_pll_rate_table *rate)
 {
@@ -683,6 +733,9 @@ static const struct clk_ops samsung_pll45xx_clk_min_ops = {
 #define PLL46XX_PDIV_MASK	(0x3F)
 #define PLL46XX_SDIV_MASK	(0x7)
 #define PLL46XX_VSEL_SHIFT	(27)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PLL46XX_MDIV_SHIFT	(16)
 #define PLL46XX_PDIV_SHIFT	(8)
@@ -691,6 +744,7 @@ static const struct clk_ops samsung_pll45xx_clk_min_ops = {
 #define PLL46XX_KDIV_MASK	(0xFFFF)
 #define PLL4650C_KDIV_MASK	(0xFFF)
 #define PLL46XX_KDIV_SHIFT	(0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct samsung_clk_pll46xx {
@@ -701,6 +755,8 @@ struct samsung_clk_pll46xx {
 
 #define to_clk_pll46xx(_hw) container_of(_hw, struct samsung_clk_pll46xx, hw)
 =======
+=======
+>>>>>>> v3.18
 #define PLL46XX_MFR_MASK	(0x3F)
 #define PLL46XX_MRR_MASK	(0x1F)
 #define PLL46XX_KDIV_SHIFT	(0)
@@ -710,13 +766,20 @@ struct samsung_clk_pll46xx {
 #define PLL46XX_ENABLE		BIT(31)
 #define PLL46XX_LOCKED		BIT(29)
 #define PLL46XX_VSEL		BIT(27)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned long samsung_pll46xx_recalc_rate(struct clk_hw *hw,
 				unsigned long parent_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct samsung_clk_pll46xx *pll = to_clk_pll46xx(hw);
+=======
+	struct samsung_clk_pll *pll = to_clk_pll(hw);
+>>>>>>> v3.18
 =======
 	struct samsung_clk_pll *pll = to_clk_pll(hw);
 >>>>>>> v3.18
@@ -739,6 +802,7 @@ static unsigned long samsung_pll46xx_recalc_rate(struct clk_hw *hw,
 	return (unsigned long)fvco;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct clk_ops samsung_pll46xx_clk_ops = {
 	.recalc_rate = samsung_pll46xx_recalc_rate,
@@ -782,6 +846,8 @@ struct clk * __init samsung_clk_register_pll46xx(const char *name,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static bool samsung_pll46xx_mpk_change(u32 pll_con0, u32 pll_con1,
 				const struct samsung_pll_rate_table *rate)
 {
@@ -1121,6 +1187,9 @@ static const struct clk_ops samsung_s3c2440_mpll_clk_ops = {
 	.set_rate = samsung_s3c2410_pll_set_rate,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * PLL2550x Clock Type
@@ -1205,7 +1274,10 @@ struct clk * __init samsung_clk_register_pll2550x(const char *name,
 	return clk;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * PLL2550xx Clock Type
@@ -1556,4 +1628,7 @@ void __init samsung_clk_register_pll(struct samsung_clk_provider *ctx,
 	for (cnt = 0; cnt < nr_pll; cnt++)
 		_samsung_clk_register_pll(ctx, &pll_list[cnt], base);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

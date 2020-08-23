@@ -108,8 +108,11 @@ static struct omap_i2c_dev_attr i2c_dev_attr = {
 static struct omap_hwmod omap2420_i2c1_hwmod = {
 	.name		= "i2c1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mpu_irqs	= omap2_i2c1_mpu_irqs,
 	.sdma_reqs	= omap2_i2c1_sdma_reqs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.main_clk	= "i2c1_fck",
@@ -136,8 +139,11 @@ static struct omap_hwmod omap2420_i2c1_hwmod = {
 static struct omap_hwmod omap2420_i2c2_hwmod = {
 	.name		= "i2c2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mpu_irqs	= omap2_i2c2_mpu_irqs,
 	.sdma_reqs	= omap2_i2c2_sdma_reqs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.main_clk	= "i2c2_fck",
@@ -173,6 +179,7 @@ static struct omap_hwmod omap2420_dma_system_hwmod = {
 
 /* mailbox */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_irq_info omap2420_mailbox_irqs[] = {
 	{ .name = "dsp", .irq = 26 + OMAP_INTC_START, },
 	{ .name = "iva", .irq = 34 + OMAP_INTC_START, },
@@ -183,6 +190,11 @@ static struct omap_hwmod omap2420_mailbox_hwmod = {
 	.name		= "mailbox",
 	.class		= &omap2xxx_mailbox_hwmod_class,
 	.mpu_irqs	= omap2420_mailbox_irqs,
+=======
+static struct omap_hwmod omap2420_mailbox_hwmod = {
+	.name		= "mailbox",
+	.class		= &omap2xxx_mailbox_hwmod_class,
+>>>>>>> v3.18
 =======
 static struct omap_hwmod omap2420_mailbox_hwmod = {
 	.name		= "mailbox",
@@ -216,6 +228,7 @@ static struct omap_hwmod_opt_clk mcbsp_opt_clks[] = {
 
 /* mcbsp1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_irq_info omap2420_mcbsp1_irqs[] = {
 	{ .name = "tx", .irq = 59 + OMAP_INTC_START, },
 	{ .name = "rx", .irq = 60 + OMAP_INTC_START, },
@@ -227,6 +240,11 @@ static struct omap_hwmod omap2420_mcbsp1_hwmod = {
 	.class		= &omap2420_mcbsp_hwmod_class,
 	.mpu_irqs	= omap2420_mcbsp1_irqs,
 	.sdma_reqs	= omap2_mcbsp1_sdma_reqs,
+=======
+static struct omap_hwmod omap2420_mcbsp1_hwmod = {
+	.name		= "mcbsp1",
+	.class		= &omap2420_mcbsp_hwmod_class,
+>>>>>>> v3.18
 =======
 static struct omap_hwmod omap2420_mcbsp1_hwmod = {
 	.name		= "mcbsp1",
@@ -248,6 +266,7 @@ static struct omap_hwmod omap2420_mcbsp1_hwmod = {
 
 /* mcbsp2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_irq_info omap2420_mcbsp2_irqs[] = {
 	{ .name = "tx", .irq = 62 + OMAP_INTC_START, },
 	{ .name = "rx", .irq = 63 + OMAP_INTC_START, },
@@ -259,6 +278,11 @@ static struct omap_hwmod omap2420_mcbsp2_hwmod = {
 	.class		= &omap2420_mcbsp_hwmod_class,
 	.mpu_irqs	= omap2420_mcbsp2_irqs,
 	.sdma_reqs	= omap2_mcbsp2_sdma_reqs,
+=======
+static struct omap_hwmod omap2420_mcbsp2_hwmod = {
+	.name		= "mcbsp2",
+	.class		= &omap2420_mcbsp_hwmod_class,
+>>>>>>> v3.18
 =======
 static struct omap_hwmod omap2420_mcbsp2_hwmod = {
 	.name		= "mcbsp2",
@@ -294,6 +318,7 @@ static struct omap_hwmod_class omap2420_msdi_hwmod_class = {
 
 /* msdi1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_irq_info omap2420_msdi1_irqs[] = {
 	{ .irq = 83 + OMAP_INTC_START, },
 	{ .irq = -1 },
@@ -310,6 +335,11 @@ static struct omap_hwmod omap2420_msdi1_hwmod = {
 	.class		= &omap2420_msdi_hwmod_class,
 	.mpu_irqs	= omap2420_msdi1_irqs,
 	.sdma_reqs	= omap2420_msdi1_sdma_reqs,
+=======
+static struct omap_hwmod omap2420_msdi1_hwmod = {
+	.name		= "msdi1",
+	.class		= &omap2420_msdi_hwmod_class,
+>>>>>>> v3.18
 =======
 static struct omap_hwmod omap2420_msdi1_hwmod = {
 	.name		= "msdi1",
@@ -332,7 +362,10 @@ static struct omap_hwmod omap2420_msdi1_hwmod = {
 static struct omap_hwmod omap2420_hdq1w_hwmod = {
 	.name		= "hdq1w",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mpu_irqs	= omap2_hdq1w_mpu_irqs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.main_clk	= "hdq_fck",
@@ -358,7 +391,10 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__i2c1 = {
 	.slave		= &omap2420_i2c1_hwmod,
 	.clk		= "i2c1_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_i2c1_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -370,7 +406,10 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__i2c2 = {
 	.slave		= &omap2420_i2c2_hwmod,
 	.clk		= "i2c2_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_i2c2_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -393,6 +432,7 @@ static struct omap_hwmod_ocp_if omap2420_l3__dsp = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_timer1_addrs[] = {
 	{
 		.pa_start	= 0x48028000,
@@ -404,19 +444,25 @@ static struct omap_hwmod_addr_space omap2420_timer1_addrs[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* l4_wkup -> timer1 */
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__timer1 = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_timer1_hwmod,
 	.clk		= "gpt1_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_timer1_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
 };
 
 /* l4_wkup -> wd_timer2 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_wd_timer2_addrs[] = {
 	{
@@ -429,18 +475,24 @@ static struct omap_hwmod_addr_space omap2420_wd_timer2_addrs[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__wd_timer2 = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_wd_timer2_hwmod,
 	.clk		= "mpu_wdt_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_wd_timer2_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
 };
 
 /* l4_wkup -> gpio1 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_gpio1_addr_space[] = {
 	{
@@ -453,18 +505,24 @@ static struct omap_hwmod_addr_space omap2420_gpio1_addr_space[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__gpio1 = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_gpio1_hwmod,
 	.clk		= "gpios_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_gpio1_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
 };
 
 /* l4_wkup -> gpio2 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_gpio2_addr_space[] = {
 	{
@@ -477,18 +535,24 @@ static struct omap_hwmod_addr_space omap2420_gpio2_addr_space[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__gpio2 = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_gpio2_hwmod,
 	.clk		= "gpios_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_gpio2_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
 };
 
 /* l4_wkup -> gpio3 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_gpio3_addr_space[] = {
 	{
@@ -501,18 +565,24 @@ static struct omap_hwmod_addr_space omap2420_gpio3_addr_space[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__gpio3 = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_gpio3_hwmod,
 	.clk		= "gpios_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_gpio3_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
 };
 
 /* l4_wkup -> gpio4 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_gpio4_addr_space[] = {
 	{
@@ -525,12 +595,17 @@ static struct omap_hwmod_addr_space omap2420_gpio4_addr_space[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__gpio4 = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_gpio4_hwmod,
 	.clk		= "gpios_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_gpio4_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -558,7 +633,10 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__mailbox = {
 	.master		= &omap2xxx_l4_core_hwmod,
 	.slave		= &omap2420_mailbox_hwmod,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_mailbox_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -570,7 +648,10 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__mcbsp1 = {
 	.slave		= &omap2420_mcbsp1_hwmod,
 	.clk		= "mcbsp1_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_mcbsp1_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -581,6 +662,7 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__mcbsp2 = {
 	.master		= &omap2xxx_l4_core_hwmod,
 	.slave		= &omap2420_mcbsp2_hwmod,
 	.clk		= "mcbsp2_ick",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.addr		= omap2xxx_mcbsp2_addrs,
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -600,13 +682,21 @@ static struct omap_hwmod_addr_space omap2420_msdi1_addrs[] = {
 };
 
 >>>>>>> v3.18
+=======
+	.user		= OCP_USER_MPU | OCP_USER_SDMA,
+};
+
+>>>>>>> v3.18
 /* l4_core -> msdi1 */
 static struct omap_hwmod_ocp_if omap2420_l4_core__msdi1 = {
 	.master		= &omap2xxx_l4_core_hwmod,
 	.slave		= &omap2420_msdi1_hwmod,
 	.clk		= "mmc_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_msdi1_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -618,7 +708,10 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__hdq1w = {
 	.slave		= &omap2420_hdq1w_hwmod,
 	.clk		= "hdq_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_hdq1w_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -627,6 +720,7 @@ static struct omap_hwmod_ocp_if omap2420_l4_core__hdq1w = {
 
 
 /* l4_wkup -> 32ksync_counter */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2420_counter_32k_addrs[] = {
 	{
@@ -648,12 +742,17 @@ static struct omap_hwmod_addr_space omap2420_gpmc_addrs[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct omap_hwmod_ocp_if omap2420_l4_wkup__counter_32k = {
 	.master		= &omap2xxx_l4_wkup_hwmod,
 	.slave		= &omap2xxx_counter_32k_hwmod,
 	.clk		= "sync_32k_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_counter_32k_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -664,7 +763,10 @@ static struct omap_hwmod_ocp_if omap2420_l3__gpmc = {
 	.slave		= &omap2xxx_gpmc_hwmod,
 	.clk		= "core_l3_ck",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2420_gpmc_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,

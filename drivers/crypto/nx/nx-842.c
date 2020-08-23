@@ -159,7 +159,10 @@ static inline unsigned long nx842_get_scatterlist_size(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long nx842_get_pa(void *addr)
 {
 	if (is_vmalloc_addr(addr))
@@ -169,6 +172,9 @@ static inline unsigned long nx842_get_pa(void *addr)
 		return __pa(addr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nx842_build_scatterlist(unsigned long buf, int len,
 			struct nx842_scatterlist *sl)
@@ -181,7 +187,11 @@ static int nx842_build_scatterlist(unsigned long buf, int len,
 	entry = sl->entries;
 	while (len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->ptr = __pa(buf);
+=======
+		entry->ptr = nx842_get_pa((void *)buf);
+>>>>>>> v3.18
 =======
 		entry->ptr = nx842_get_pa((void *)buf);
 >>>>>>> v3.18
@@ -387,8 +397,13 @@ int nx842_compress(const unsigned char *in, unsigned int inlen,
 	csbcpb = &workmem->csbcpb;
 	memset(csbcpb, 0, sizeof(*csbcpb));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	op.csbcpb = __pa(csbcpb);
 	op.out = __pa(slout.entries);
+=======
+	op.csbcpb = nx842_get_pa(csbcpb);
+	op.out = nx842_get_pa(slout.entries);
+>>>>>>> v3.18
 =======
 	op.csbcpb = nx842_get_pa(csbcpb);
 	op.out = nx842_get_pa(slout.entries);
@@ -423,7 +438,11 @@ int nx842_compress(const unsigned char *in, unsigned int inlen,
 		if (likely(max_sync_size == NX842_HW_PAGE_SIZE)) {
 			/* Create direct DDE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			op.in = __pa(inbuf);
+=======
+			op.in = nx842_get_pa((void *)inbuf);
+>>>>>>> v3.18
 =======
 			op.in = nx842_get_pa((void *)inbuf);
 >>>>>>> v3.18
@@ -433,7 +452,11 @@ int nx842_compress(const unsigned char *in, unsigned int inlen,
 			/* Create indirect DDE (scatterlist) */
 			nx842_build_scatterlist(inbuf, max_sync_size, &slin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			op.in = __pa(slin.entries);
+=======
+			op.in = nx842_get_pa(slin.entries);
+>>>>>>> v3.18
 =======
 			op.in = nx842_get_pa(slin.entries);
 >>>>>>> v3.18
@@ -595,7 +618,11 @@ int nx842_decompress(const unsigned char *in, unsigned int inlen,
 	csbcpb = &workmem->csbcpb;
 	memset(csbcpb, 0, sizeof(*csbcpb));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	op.csbcpb = __pa(csbcpb);
+=======
+	op.csbcpb = nx842_get_pa(csbcpb);
+>>>>>>> v3.18
 =======
 	op.csbcpb = nx842_get_pa(csbcpb);
 >>>>>>> v3.18
@@ -631,7 +658,11 @@ int nx842_decompress(const unsigned char *in, unsigned int inlen,
 			((inbuf + hdr->sizes[i] - 1) & NX842_HW_PAGE_MASK))) {
 			/* Create direct DDE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			op.in = __pa(inbuf);
+=======
+			op.in = nx842_get_pa((void *)inbuf);
+>>>>>>> v3.18
 =======
 			op.in = nx842_get_pa((void *)inbuf);
 >>>>>>> v3.18
@@ -640,7 +671,11 @@ int nx842_decompress(const unsigned char *in, unsigned int inlen,
 			/* Create indirect DDE (scatterlist) */
 			nx842_build_scatterlist(inbuf, hdr->sizes[i] , &slin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			op.in = __pa(slin.entries);
+=======
+			op.in = nx842_get_pa(slin.entries);
+>>>>>>> v3.18
 =======
 			op.in = nx842_get_pa(slin.entries);
 >>>>>>> v3.18
@@ -655,7 +690,11 @@ int nx842_decompress(const unsigned char *in, unsigned int inlen,
 		if (likely(max_sync_size == NX842_HW_PAGE_SIZE)) {
 			/* Create direct DDE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			op.out = __pa(outbuf);
+=======
+			op.out = nx842_get_pa((void *)outbuf);
+>>>>>>> v3.18
 =======
 			op.out = nx842_get_pa((void *)outbuf);
 >>>>>>> v3.18
@@ -664,7 +703,11 @@ int nx842_decompress(const unsigned char *in, unsigned int inlen,
 			/* Create indirect DDE (scatterlist) */
 			nx842_build_scatterlist(outbuf, max_sync_size, &slout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			op.out = __pa(slout.entries);
+=======
+			op.out = nx842_get_pa(slout.entries);
+>>>>>>> v3.18
 =======
 			op.out = nx842_get_pa(slout.entries);
 >>>>>>> v3.18
@@ -977,6 +1020,7 @@ static int nx842_OF_upd(struct property *new_prop)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set ptr to new property if provided */
 	if (new_prop) {
 		/* Single property */
@@ -1000,6 +1044,8 @@ static int nx842_OF_upd(struct property *new_prop)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If this is a property update, there are only certain properties that
 	 * we care about. Bail if it isn't in the below list
@@ -1008,6 +1054,9 @@ static int nx842_OF_upd(struct property *new_prop)
 		         strncmp(new_prop->name, "ibm,max-sg-len", new_prop->length) ||
 		         strncmp(new_prop->name, "ibm,max-sync-cop", new_prop->length)))
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Perform property updates */
@@ -1249,12 +1298,16 @@ static int __init nx842_probe(struct vio_dev *viodev,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev_set_drvdata(&viodev->dev, rcu_dereference(devdata))) {
 		rcu_read_unlock();
 		dev_err(&viodev->dev, "failed to set driver data for device\n");
 		ret = -1;
 		goto error;
 	}
+=======
+	dev_set_drvdata(&viodev->dev, rcu_dereference(devdata));
+>>>>>>> v3.18
 =======
 	dev_set_drvdata(&viodev->dev, rcu_dereference(devdata));
 >>>>>>> v3.18
@@ -1290,7 +1343,11 @@ static int __exit nx842_remove(struct vio_dev *viodev)
 			lockdep_is_held(&devdata_mutex));
 	of_reconfig_notifier_unregister(&nx842_of_nb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(devdata, NULL);
+=======
+	RCU_INIT_POINTER(devdata, NULL);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(devdata, NULL);
 >>>>>>> v3.18
@@ -1312,7 +1369,11 @@ static struct vio_driver nx842_driver = {
 	.name = MODULE_NAME,
 	.probe = nx842_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = nx842_remove,
+=======
+	.remove = __exit_p(nx842_remove),
+>>>>>>> v3.18
 =======
 	.remove = __exit_p(nx842_remove),
 >>>>>>> v3.18
@@ -1349,7 +1410,11 @@ static void __exit nx842_exit(void)
 	old_devdata = rcu_dereference_check(devdata,
 			lockdep_is_held(&devdata_mutex));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(devdata, NULL);
+=======
+	RCU_INIT_POINTER(devdata, NULL);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(devdata, NULL);
 >>>>>>> v3.18

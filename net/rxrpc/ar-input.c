@@ -26,8 +26,11 @@
 #include "ar-internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long rxrpc_ack_timeout = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 const char *rxrpc_pkts[] = {
@@ -51,7 +54,11 @@ int rxrpc_queue_rcv_skb(struct rxrpc_call *call, struct sk_buff *skb,
 	struct rxrpc_sock *rx = call->socket;
 	struct sock *sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int skb_len, ret;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -111,6 +118,7 @@ int rxrpc_queue_rcv_skb(struct rxrpc_call *call, struct sk_buff *skb,
 			spin_unlock_bh(&sk->sk_receive_queue.lock);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			/* Cache the SKB length before we tack it onto the
 			 * receive queue.  Once it is added it no longer
@@ -120,13 +128,19 @@ int rxrpc_queue_rcv_skb(struct rxrpc_call *call, struct sk_buff *skb,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 			_net("post skb %p", skb);
 			__skb_queue_tail(&sk->sk_receive_queue, skb);
 			spin_unlock_bh(&sk->sk_receive_queue.lock);
 
 			if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sk->sk_data_ready(sk, skb_len);
+=======
+				sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 				sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -364,8 +378,12 @@ void rxrpc_fast_process_packet(struct rxrpc_call *call, struct sk_buff *skb)
 	if (sp->hdr.flags & RXRPC_REQUEST_ACK) {
 		_proto("ACK Requested on %%%u", serial);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rxrpc_propose_ACK(call, RXRPC_ACK_REQUESTED, sp->hdr.serial,
 				  !(sp->hdr.flags & RXRPC_MORE_PACKETS));
+=======
+		rxrpc_propose_ACK(call, RXRPC_ACK_REQUESTED, sp->hdr.serial, false);
+>>>>>>> v3.18
 =======
 		rxrpc_propose_ACK(call, RXRPC_ACK_REQUESTED, sp->hdr.serial, false);
 >>>>>>> v3.18
@@ -545,6 +563,7 @@ protocol_error:
  * - must get rid of the sk_buff, either by freeing it or by queuing it
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rxrpc_post_packet_to_call(struct rxrpc_connection *conn,
 				      struct sk_buff *skb)
 {
@@ -567,6 +586,8 @@ static void rxrpc_post_packet_to_call(struct rxrpc_connection *conn,
 	_debug("extant call [%d]", call->state);
 	ASSERTCMP(call->conn, ==, conn);
 =======
+=======
+>>>>>>> v3.18
 static void rxrpc_post_packet_to_call(struct rxrpc_call *call,
 				      struct sk_buff *skb)
 {
@@ -577,11 +598,15 @@ static void rxrpc_post_packet_to_call(struct rxrpc_call *call,
 	sp = rxrpc_skb(skb);
 
 	_debug("extant call [%d]", call->state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	read_lock(&call->state_lock);
 	switch (call->state) {
 	case RXRPC_CALL_LOCALLY_ABORTED:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!test_and_set_bit(RXRPC_CALL_ABORT, &call->events))
 			rxrpc_queue_call(call);
@@ -589,6 +614,8 @@ static void rxrpc_post_packet_to_call(struct rxrpc_call *call,
 	case RXRPC_CALL_NETWORK_ERROR:
 	case RXRPC_CALL_DEAD:
 =======
+=======
+>>>>>>> v3.18
 		if (!test_and_set_bit(RXRPC_CALL_ABORT, &call->events)) {
 			rxrpc_queue_call(call);
 			goto free_unlock;
@@ -607,6 +634,9 @@ static void rxrpc_post_packet_to_call(struct rxrpc_call *call,
 		rxrpc_get_call(call);
 		set_bit(RXRPC_CALL_ACK_FINAL, &call->events);
 		rxrpc_queue_call(call);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto free_unlock;
 	default:
@@ -616,7 +646,10 @@ static void rxrpc_post_packet_to_call(struct rxrpc_call *call,
 	read_unlock(&call->state_lock);
 	rxrpc_get_call(call);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_unlock_bh(&conn->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -629,6 +662,7 @@ static void rxrpc_post_packet_to_call(struct rxrpc_call *call,
 	rxrpc_put_call(call);
 	goto done;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 call_not_extant:
 	/* search the completed calls in case what we're dealing with is
@@ -703,6 +737,8 @@ free_unlock:
 	read_unlock_bh(&conn->lock);
 	rxrpc_free_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 dead_call:
 	if (sp->hdr.type != RXRPC_PACKET_TYPE_ABORT) {
 		skb->priority = RX_CALL_DEAD;
@@ -713,6 +749,9 @@ free_unlock:
 	rxrpc_free_skb(skb);
 unlock:
 	read_unlock(&call->state_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 done:
 	_leave("");
@@ -733,7 +772,10 @@ static void rxrpc_post_packet_to_conn(struct rxrpc_connection *conn,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct rxrpc_connection *rxrpc_conn_from_local(struct rxrpc_local *local,
 					       struct sk_buff *skb,
 					       struct rxrpc_skb_priv *sp)
@@ -762,11 +804,15 @@ cant_find_conn:
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * handle data received on the local endpoint
  * - may be called in interrupt context
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rxrpc_data_ready(struct sock *sk, int count)
 {
@@ -780,6 +826,8 @@ void rxrpc_data_ready(struct sock *sk, int count)
 
 	_enter("%p, %d", sk, count);
 =======
+=======
+>>>>>>> v3.18
 void rxrpc_data_ready(struct sock *sk)
 {
 	struct rxrpc_skb_priv *sp;
@@ -788,6 +836,9 @@ void rxrpc_data_ready(struct sock *sk)
 	int ret;
 
 	_enter("%p", sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ASSERT(!irqs_disabled());
@@ -860,6 +911,7 @@ void rxrpc_data_ready(struct sock *sk)
 		goto bad_message;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	peer = rxrpc_find_peer(local, ip_hdr(skb)->saddr, udp_hdr(skb)->source);
 	if (IS_ERR(peer))
 		goto cant_route_call;
@@ -882,6 +934,8 @@ void rxrpc_data_ready(struct sock *sk)
 		rxrpc_post_packet_to_call(conn, skb);
 	rxrpc_put_connection(conn);
 =======
+=======
+>>>>>>> v3.18
 	if (sp->hdr.callNumber == 0) {
 		/* This is a connection-level packet. These should be
 		 * fairly rare, so the extra overhead of looking them up the
@@ -910,6 +964,9 @@ void rxrpc_data_ready(struct sock *sk)
 		else
 			goto cant_route_call;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rxrpc_put_local(local);
 	return;
@@ -932,13 +989,19 @@ cant_route_call:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_debug("reject");
 	rxrpc_reject_packet(local, skb);
 =======
+=======
+>>>>>>> v3.18
 	if (sp->hdr.type != RXRPC_PACKET_TYPE_ABORT) {
 		_debug("reject type %d",sp->hdr.type);
 		rxrpc_reject_packet(local, skb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rxrpc_put_local(local);
 	_leave(" [no call]");

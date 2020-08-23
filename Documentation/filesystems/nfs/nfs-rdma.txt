@@ -139,9 +139,15 @@ Installation
 
     The NFS/RDMA code will be enabled automatically if NFS and RDMA
 <<<<<<< HEAD
+<<<<<<< HEAD
     are turned on. The NFS/RDMA client and server are configured via the hidden
     SUNRPC_XPRT_RDMA config option that depends on SUNRPC and INFINIBAND. The
     value of SUNRPC_XPRT_RDMA will be:
+=======
+    are turned on. The NFS/RDMA client and server are configured via the
+    SUNRPC_XPRT_RDMA_CLIENT and SUNRPC_XPRT_RDMA_SERVER config options that both
+    depend on SUNRPC and INFINIBAND. The default value of both options will be:
+>>>>>>> v3.18
 =======
     are turned on. The NFS/RDMA client and server are configured via the
     SUNRPC_XPRT_RDMA_CLIENT and SUNRPC_XPRT_RDMA_SERVER config options that both
@@ -242,8 +248,14 @@ NFS/RDMA Setup
   - Start the NFS server
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     If the NFS/RDMA server was built as a module (CONFIG_SUNRPC_XPRT_RDMA=m in
     kernel config), load the RDMA transport module:
+=======
+    If the NFS/RDMA server was built as a module
+    (CONFIG_SUNRPC_XPRT_RDMA_SERVER=m in kernel config), load the RDMA
+    transport module:
+>>>>>>> v3.18
 =======
     If the NFS/RDMA server was built as a module
     (CONFIG_SUNRPC_XPRT_RDMA_SERVER=m in kernel config), load the RDMA
@@ -268,8 +280,14 @@ NFS/RDMA Setup
   - On the client system
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     If the NFS/RDMA client was built as a module (CONFIG_SUNRPC_XPRT_RDMA=m in
     kernel config), load the RDMA client module:
+=======
+    If the NFS/RDMA client was built as a module
+    (CONFIG_SUNRPC_XPRT_RDMA_CLIENT=m in kernel config), load the RDMA client
+    module:
+>>>>>>> v3.18
 =======
     If the NFS/RDMA client was built as a module
     (CONFIG_SUNRPC_XPRT_RDMA_CLIENT=m in kernel config), load the RDMA client

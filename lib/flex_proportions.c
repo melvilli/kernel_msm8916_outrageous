@@ -35,7 +35,11 @@
 #include <linux/flex_proportions.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fprop_global_init(struct fprop_global *p)
+=======
+int fprop_global_init(struct fprop_global *p, gfp_t gfp)
+>>>>>>> v3.18
 =======
 int fprop_global_init(struct fprop_global *p, gfp_t gfp)
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ int fprop_global_init(struct fprop_global *p, gfp_t gfp)
 	p->period = 0;
 	/* Use 1 to avoid dealing with periods with 0 events... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = percpu_counter_init(&p->events, 1);
+=======
+	err = percpu_counter_init(&p->events, 1, gfp);
+>>>>>>> v3.18
 =======
 	err = percpu_counter_init(&p->events, 1, gfp);
 >>>>>>> v3.18
@@ -177,17 +185,23 @@ void fprop_fraction_single(struct fprop_global *p,
 #define PROP_BATCH (8*(1+ilog2(nr_cpu_ids)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fprop_local_init_percpu(struct fprop_local_percpu *pl)
 {
 	int err;
 
 	err = percpu_counter_init(&pl->events, 0);
 =======
+=======
+>>>>>>> v3.18
 int fprop_local_init_percpu(struct fprop_local_percpu *pl, gfp_t gfp)
 {
 	int err;
 
 	err = percpu_counter_init(&pl->events, 0, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		return err;

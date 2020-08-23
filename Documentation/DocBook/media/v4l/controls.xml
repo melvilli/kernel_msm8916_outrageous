@@ -14,7 +14,10 @@ correctly with any device.</para>
 several IDs for specific purposes. Drivers can also implement their
 own custom controls using <constant>V4L2_CID_PRIVATE_BASE</constant>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 <footnote><para>The use of <constant>V4L2_CID_PRIVATE_BASE</constant>
 is problematic because different drivers may use the same
 <constant>V4L2_CID_PRIVATE_BASE</constant> ID for different controls.
@@ -28,6 +31,9 @@ IDs.</para>
 IDs instead of using &VIDIOC-QUERYCTRL; with the <constant>V4L2_CTRL_FLAG_NEXT_CTRL</constant>
 flag to enumerate all IDs, so support for <constant>V4L2_CID_PRIVATE_BASE</constant>
 is still around.</para></footnote>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 and higher values. The pre-defined control IDs have the prefix
 <constant>V4L2_CID_</constant>, and are listed in <xref
@@ -47,6 +53,7 @@ the current video input or output, tuner or modulator, or audio input
 or output. Different in the sense of other bounds, another default and
 current value, step size or other menu items. A control with a certain
 <emphasis>custom</emphasis> ID can also change name and
+<<<<<<< HEAD
 <<<<<<< HEAD
 type.<footnote>
 	<para>It will be more convenient for applications if drivers
@@ -68,6 +75,8 @@ readability until any ioctl (querying the properties) is
 called.</para>
       </footnote></para>
 =======
+=======
+>>>>>>> v3.18
 type.</para>
 
     <para>If a control is not applicable to the current configuration
@@ -84,6 +93,9 @@ application request.</para>
 when controls change value (see &VIDIOC-SUBSCRIBE-EVENT;, event
 <constant>V4L2_EVENT_CTRL</constant>), panel applications might want to make
 use of that in order to always reflect the correct control value.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     <para>
@@ -434,6 +446,7 @@ to work.</entry>
 	    <entry><constant>V4L2_CID_ALPHA_COMPONENT</constant></entry>
 	    <entry>integer</entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry> Sets the alpha color component on the capture device or on
 	    the capture buffer queue of a mem-to-mem device. When a mem-to-mem
 	    device produces frame format that includes an alpha component
@@ -443,6 +456,8 @@ to work.</entry>
 	    pixels. It is applicable to any pixel format that contains an alpha
 	    component.
 =======
+=======
+>>>>>>> v3.18
 	    <entry>Sets the alpha color component. When a capture device (or
 	    capture queue of a mem-to-mem device) produces a frame format that
 	    includes an alpha component
@@ -454,6 +469,9 @@ to work.</entry>
 	    component and the device supports alpha channel processing this
 	    control lets you set the alpha component value of all pixels for
 	    further processing in the device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    </entry>
 	  </row>
@@ -484,8 +502,13 @@ controls, <constant>VIDIOC_QUERYMENU</constant> when it has one or
 more menu type controls.</para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <example>
       <title>Enumerating all controls</title>
+=======
+    <example id="enum_all_controls">
+      <title>Enumerating all user controls</title>
+>>>>>>> v3.18
 =======
     <example id="enum_all_controls">
       <title>Enumerating all user controls</title>
@@ -496,6 +519,7 @@ more menu type controls.</para>
 &v4l2-querymenu; querymenu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 enumerate_menu (void)
 {
@@ -503,20 +527,31 @@ enumerate_menu (void)
 
 	memset (&amp;querymenu, 0, sizeof (querymenu));
 =======
+=======
+>>>>>>> v3.18
 static void enumerate_menu(void)
 {
 	printf("  Menu items:\n");
 
 	memset(&amp;querymenu, 0, sizeof(querymenu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	querymenu.id = queryctrl.id;
 
 	for (querymenu.index = queryctrl.minimum;
 	     querymenu.index &lt;= queryctrl.maximum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      querymenu.index++) {
 		if (0 == ioctl (fd, &VIDIOC-QUERYMENU;, &amp;querymenu)) {
 			printf ("  %s\n", querymenu.name);
+=======
+	     querymenu.index++) {
+		if (0 == ioctl(fd, &VIDIOC-QUERYMENU;, &amp;querymenu)) {
+			printf("  %s\n", querymenu.name);
+>>>>>>> v3.18
 =======
 	     querymenu.index++) {
 		if (0 == ioctl(fd, &VIDIOC-QUERYMENU;, &amp;querymenu)) {
@@ -527,7 +562,11 @@ static void enumerate_menu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 memset (&amp;queryctrl, 0, sizeof (queryctrl));
+=======
+memset(&amp;queryctrl, 0, sizeof(queryctrl));
+>>>>>>> v3.18
 =======
 memset(&amp;queryctrl, 0, sizeof(queryctrl));
 >>>>>>> v3.18
@@ -535,6 +574,7 @@ memset(&amp;queryctrl, 0, sizeof(queryctrl));
 for (queryctrl.id = V4L2_CID_BASE;
      queryctrl.id &lt; V4L2_CID_LASTP1;
      queryctrl.id++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (0 == ioctl (fd, &VIDIOC-QUERYCTRL;, &amp;queryctrl)) {
 		if (queryctrl.flags &amp; V4L2_CTRL_FLAG_DISABLED)
@@ -545,6 +585,8 @@ for (queryctrl.id = V4L2_CID_BASE;
 		if (queryctrl.type == V4L2_CTRL_TYPE_MENU)
 			enumerate_menu ();
 =======
+=======
+>>>>>>> v3.18
 	if (0 == ioctl(fd, &VIDIOC-QUERYCTRL;, &amp;queryctrl)) {
 		if (queryctrl.flags &amp; V4L2_CTRL_FLAG_DISABLED)
 			continue;
@@ -553,14 +595,22 @@ for (queryctrl.id = V4L2_CID_BASE;
 
 		if (queryctrl.type == V4L2_CTRL_TYPE_MENU)
 			enumerate_menu();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (errno == EINVAL)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perror ("VIDIOC_QUERYCTRL");
 		exit (EXIT_FAILURE);
+=======
+		perror("VIDIOC_QUERYCTRL");
+		exit(EXIT_FAILURE);
+>>>>>>> v3.18
 =======
 		perror("VIDIOC_QUERYCTRL");
 		exit(EXIT_FAILURE);
@@ -571,6 +621,7 @@ for (queryctrl.id = V4L2_CID_BASE;
 for (queryctrl.id = V4L2_CID_PRIVATE_BASE;;
      queryctrl.id++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (0 == ioctl (fd, &VIDIOC-QUERYCTRL;, &amp;queryctrl)) {
 		if (queryctrl.flags &amp; V4L2_CTRL_FLAG_DISABLED)
 			continue;
@@ -580,6 +631,8 @@ for (queryctrl.id = V4L2_CID_PRIVATE_BASE;;
 		if (queryctrl.type == V4L2_CTRL_TYPE_MENU)
 			enumerate_menu ();
 =======
+=======
+>>>>>>> v3.18
 	if (0 == ioctl(fd, &VIDIOC-QUERYCTRL;, &amp;queryctrl)) {
 		if (queryctrl.flags &amp; V4L2_CTRL_FLAG_DISABLED)
 			continue;
@@ -588,14 +641,22 @@ for (queryctrl.id = V4L2_CID_PRIVATE_BASE;;
 
 		if (queryctrl.type == V4L2_CTRL_TYPE_MENU)
 			enumerate_menu();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (errno == EINVAL)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perror ("VIDIOC_QUERYCTRL");
 		exit (EXIT_FAILURE);
+=======
+		perror("VIDIOC_QUERYCTRL");
+		exit(EXIT_FAILURE);
+>>>>>>> v3.18
 =======
 		perror("VIDIOC_QUERYCTRL");
 		exit(EXIT_FAILURE);
@@ -607,7 +668,10 @@ for (queryctrl.id = V4L2_CID_PRIVATE_BASE;;
 
     <example>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <title>Enumerating all user controls (alternative)</title>
 	<programlisting>
 memset(&amp;queryctrl, 0, sizeof(queryctrl));
@@ -634,6 +698,9 @@ if (errno != EINVAL) {
     </example>
 
     <example>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       <title>Changing controls</title>
 
@@ -641,6 +708,7 @@ if (errno != EINVAL) {
 &v4l2-queryctrl; queryctrl;
 &v4l2-control; control;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 memset (&amp;queryctrl, 0, sizeof (queryctrl));
 queryctrl.id = V4L2_CID_BRIGHTNESS;
@@ -670,6 +738,8 @@ control.id = V4L2_CID_CONTRAST;
 
 if (0 == ioctl (fd, &VIDIOC-G-CTRL;, &amp;control)) {
 =======
+=======
+>>>>>>> v3.18
 memset(&amp;queryctrl, 0, sizeof(queryctrl));
 queryctrl.id = V4L2_CID_BRIGHTNESS;
 
@@ -697,11 +767,15 @@ memset(&amp;control, 0, sizeof(control));
 control.id = V4L2_CID_CONTRAST;
 
 if (0 == ioctl(fd, &VIDIOC-G-CTRL;, &amp;control)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	control.value += 1;
 
 	/* The driver may clamp the value or return ERANGE, ignored here */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (-1 == ioctl (fd, &VIDIOC-S-CTRL;, &amp;control)
 	    &amp;&amp; errno != ERANGE) {
@@ -720,6 +794,8 @@ control.value = TRUE; /* silence */
 /* Errors ignored */
 ioctl (fd, VIDIOC_S_CTRL, &amp;control);
 =======
+=======
+>>>>>>> v3.18
 	if (-1 == ioctl(fd, &VIDIOC-S-CTRL;, &amp;control)
 	    &amp;&amp; errno != ERANGE) {
 		perror("VIDIOC_S_CTRL");
@@ -736,6 +812,9 @@ control.value = 1; /* silence */
 
 /* Errors ignored */
 ioctl(fd, VIDIOC_S_CTRL, &amp;control);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 </programlisting>
     </example>
@@ -808,6 +887,7 @@ supported.</para>
 values and pointers to be passed.</para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       <para>It is important to realize that due to the flexibility of
 controls it is necessary to check whether the control you want to set
 actually is supported in the driver and what the valid range of values
@@ -819,6 +899,8 @@ return an error). A good example is the list of supported MPEG audio
 bitrates. Some drivers only support one or two bitrates, others
 support a wider range.</para>
 =======
+=======
+>>>>>>> v3.18
       <para>Since the &v4l2-ext-control; supports pointers it is now
 also possible to have controls with compound types such as N-dimensional arrays
 and/or structures. You need to specify the <constant>V4L2_CTRL_FLAG_NEXT_COMPOUND</constant>
@@ -842,6 +924,9 @@ that some of the menu indices in a control of type
 (<constant>VIDIOC_QUERYMENU</constant> will return an error). A good
 example is the list of supported MPEG audio bitrates. Some drivers only
 support one or two bitrates, others support a wider range.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
       <para>
@@ -884,6 +969,7 @@ control class is found:</para>
 	<programlisting>
 qctrl.id = V4L2_CTRL_CLASS_MPEG | V4L2_CTRL_FLAG_NEXT_CTRL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 while (0 == ioctl (fd, &VIDIOC-QUERYCTRL;, &amp;qctrl)) {
 	if (V4L2_CTRL_ID2CLASS (qctrl.id) != V4L2_CTRL_CLASS_MPEG)
 		break;
@@ -891,12 +977,17 @@ while (0 == ioctl (fd, &VIDIOC-QUERYCTRL;, &amp;qctrl)) {
 		qctrl.id |= V4L2_CTRL_FLAG_NEXT_CTRL;
 	}
 =======
+=======
+>>>>>>> v3.18
 while (0 == ioctl(fd, &VIDIOC-QUERYCTRL;, &amp;qctrl)) {
 	if (V4L2_CTRL_ID2CLASS(qctrl.id) != V4L2_CTRL_CLASS_MPEG)
 		break;
 		/* ... */
 	qctrl.id |= V4L2_CTRL_FLAG_NEXT_CTRL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 </programlisting>
       </informalexample>
@@ -918,7 +1009,11 @@ ID based on a control ID.</para>
 combination with <constant>V4L2_CTRL_FLAG_NEXT_CTRL</constant>. In
 that case the old method of enumerating control should be used (see
 <<<<<<< HEAD
+<<<<<<< HEAD
 1.8). But if it is supported, then it is guaranteed to enumerate over
+=======
+<xref linkend="enum_all_controls" />). But if it is supported, then it is guaranteed to enumerate over
+>>>>>>> v3.18
 =======
 <xref linkend="enum_all_controls" />). But if it is supported, then it is guaranteed to enumerate over
 >>>>>>> v3.18
@@ -944,6 +1039,7 @@ for more details.</para>
 
     <section id="mpeg-controls">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <title>MPEG Control Reference</title>
 
       <para>Below all controls within the MPEG control class are
@@ -956,6 +1052,8 @@ certain hardware.</para>
 	<table pgwide="1" frame="none" id="mpeg-control-id">
 	  <title>MPEG Control IDs</title>
 =======
+=======
+>>>>>>> v3.18
       <title>Codec Control Reference</title>
 
       <para>Below all controls within the Codec control class are
@@ -972,6 +1070,9 @@ extended to cover all encoding formats.</para>
 
 	<table pgwide="1" frame="none" id="mpeg-control-id">
 	  <title>Codec Control IDs</title>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  <tgroup cols="4">
 	    <colspec colname="c1" colwidth="1*" />
@@ -993,7 +1094,11 @@ extended to cover all encoding formats.</para>
 		<entry spanname="id"><constant>V4L2_CID_MPEG_CLASS</constant>&nbsp;</entry>
 		<entry>class</entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      </row><row><entry spanname="descr">The MPEG class
+=======
+	      </row><row><entry spanname="descr">The Codec class
+>>>>>>> v3.18
 =======
 	      </row><row><entry spanname="descr">The Codec class
 >>>>>>> v3.18
@@ -2498,7 +2603,10 @@ VBV buffer control.</entry>
 	      </row>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		  <row><entry></entry></row>
 	      <row id="v4l2-mpeg-video-hor-search-range">
 		<entry spanname="id"><constant>V4L2_CID_MPEG_VIDEO_MV_H_SEARCH_RANGE</constant>&nbsp;</entry>
@@ -2519,6 +2627,9 @@ to search and match for the present Macroblock (MB) in the reference picture. Th
 vertical search range for motion estimation module in video encoder.</entry>
 	      </row>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <row><entry></entry></row>
 	      <row>
@@ -3277,7 +3388,10 @@ in by the application. 0 = do not insert, 1 = insert packets.</entry>
 	</table>
       </section>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
     <section>
       <title>VPX Control Reference</title>
@@ -3472,6 +3586,9 @@ Acceptable values are 0, 1, 2 and 3 corresponding to encoder profiles 0, 1, 2 an
       </table>
 
       </section>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     </section>
 
@@ -3612,7 +3729,11 @@ giving priority to the center of the metered area.</entry>
 in several points of the frame and the the results are combined. The
 algorithm of the zones selection and their significance in calculating the
 <<<<<<< HEAD
+<<<<<<< HEAD
 final value is device dependant.</entry>
+=======
+final value is device dependent.</entry>
+>>>>>>> v3.18
 =======
 final value is device dependent.</entry>
 >>>>>>> v3.18
@@ -4164,7 +4285,10 @@ by exposure, white balance or focus controls.</entry>
 	  <row><entry></entry></row>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry spanname="id"><constant>V4L2_CID_PAN_SPEED</constant>&nbsp;</entry>
 	    <entry>integer</entry>
@@ -4186,6 +4310,9 @@ stops the motion if one is in progress and has no effect otherwise.</entry>
 	  </row>
 	  <row><entry></entry></row>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	</tbody>
       </tgroup>
@@ -4274,7 +4401,10 @@ with steps of 32 or 64 characters. The result is it must always contain a string
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry spanname="id"><constant>V4L2_CID_RDS_TX_MONO_STEREO</constant>&nbsp;</entry>
 	    <entry>boolean</entry>
 	  </row>
@@ -4337,6 +4467,9 @@ for up to 25 frequencies to be defined. Drivers may support fewer frequencies so
 the array size.</entry>
 	  </row>
 	  <row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry spanname="id"><constant>V4L2_CID_AUDIO_LIMITER_ENABLED</constant>&nbsp;</entry>
 	    <entry>boolean</entry>
@@ -4729,7 +4862,10 @@ interface and may change in the future.</para>
     		  circuit condition on the indicator LED.</entry>
     		</row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		<row>
 		  <entry><constant>V4L2_FLASH_FAULT_UNDER_VOLTAGE</constant></entry>
 		  <entry>Flash controller voltage to the flash LED
@@ -4748,6 +4884,9 @@ interface and may change in the future.</para>
 		  <entry>The temperature of the LED has exceeded its
 		  allowed upper limit.</entry>
 		</row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     	      </tbody>
     	    </entrytbl>
@@ -5019,7 +5158,10 @@ interface and may change in the future.</para>
 	    </entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry spanname="id"><constant>V4L2_CID_TEST_PATTERN_RED</constant></entry>
 	    <entry>integer</entry>
@@ -5054,6 +5196,9 @@ interface and may change in the future.</para>
 	    colour component.
 	    </entry>
 	  </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  <row><entry></entry></row>
 	</tbody>
@@ -5355,7 +5500,10 @@ description of this control class.</entry>
 	  reception by the radio tuner</entry>
           </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry spanname="id"><constant>V4L2_CID_RDS_RX_PTY</constant>&nbsp;</entry>
 	    <entry>integer</entry>
@@ -5407,6 +5555,9 @@ with steps of 32 or 64 characters. The result is it must always contain a string
 	  <row><entry spanname="descr">If set, then this channel broadcasts music. If cleared, then it
 broadcasts speech. If the transmitter doesn't make this distinction, then it will be set.</entry>
 	  </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
           <row>
 	    <entry spanname="id"><constant>V4L2_CID_TUNE_DEEMPHASIS</constant>&nbsp;</entry>
@@ -5440,9 +5591,12 @@ defines possible values for de-emphasis. Here they are:</entry>
       </tgroup>
       </table>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       </section>
 =======
+=======
+>>>>>>> v3.18
     </section>
 
     <section id="detect-controls">
@@ -5679,5 +5833,8 @@ receiving given frequency when that control is set. This is a read-only control.
         </tgroup>
       </table>
     </section>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 </section>

@@ -52,14 +52,20 @@ struct user_namespace init_user_ns = {
 	.group = GLOBAL_ROOT_GID,
 	.proc_inum = PROC_USER_INIT_INO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = USERNS_INIT_FLAGS,
 	.may_mount_sysfs = true,
 	.may_mount_proc = true,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PERSISTENT_KEYRINGS
 	.persistent_keyring_register_sem =
 	__RWSEM_INITIALIZER(init_user_ns.persistent_keyring_register_sem),
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(init_user_ns);
@@ -94,7 +100,10 @@ struct user_struct root_user = {
 	.__count	= ATOMIC_INIT(1),
 	.processes	= ATOMIC_INIT(1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.files		= ATOMIC_INIT(0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.sigpending	= ATOMIC_INIT(0),
@@ -232,8 +241,12 @@ static int __init uid_cache_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(uid_cache_init);
+=======
+subsys_initcall(uid_cache_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(uid_cache_init);
 >>>>>>> v3.18

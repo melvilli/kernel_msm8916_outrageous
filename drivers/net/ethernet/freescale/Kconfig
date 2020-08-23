@@ -68,6 +68,10 @@ config FSL_XGMAC_MDIO
 	depends on FSL_SOC
 	select PHYLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select OF_MDIO
+>>>>>>> v3.18
 =======
 	select OF_MDIO
 >>>>>>> v3.18

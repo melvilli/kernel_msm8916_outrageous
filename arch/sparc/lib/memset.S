@@ -4,8 +4,14 @@
  * Copyright (C) 1996 David S. Miller (davem@caip.rutgers.edu)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 0, if ok, and number of bytes not yet set if exception
  * occurs and we were called as clear_user.
+=======
+ * Calls to memset returns initial %o0. Calls to bzero returns 0, if ok, and
+ * number of bytes not yet set if exception occurs and we were called as
+ * clear_user.
+>>>>>>> v3.18
 =======
  * Calls to memset returns initial %o0. Calls to bzero returns 0, if ok, and
  * number of bytes not yet set if exception occurs and we were called as
@@ -72,6 +78,11 @@ __bzero_begin:
 __memset_start:
 memset:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mov	%o0, %g1
+	mov	1, %g4
+>>>>>>> v3.18
 =======
 	mov	%o0, %g1
 	mov	1, %g4
@@ -101,6 +112,10 @@ memset:
 
 __bzero:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clr	%g4
+>>>>>>> v3.18
 =======
 	clr	%g4
 >>>>>>> v3.18
@@ -167,8 +182,13 @@ __bzero:
 	 EX(stb	%g3, [%o0], and %o1, 1)
 8:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retl
 	 clr	%o0
+=======
+	b	0f
+	 nop
+>>>>>>> v3.18
 =======
 	b	0f
 	 nop
@@ -185,13 +205,19 @@ __bzero:
 	 EX(stb	%g3, [%o0 - 1], add %o1, 1)
 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	andcc	%g4, 1, %g0
 	be	5f
 	 nop
 	retl
 	 mov	%g1, %o0
 5:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	retl
 	 clr	%o0

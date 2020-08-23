@@ -23,9 +23,13 @@
  * 
  *     You should have received a copy of the GNU General Public License 
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software 
  *     Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
  *     MA 02111-1307 USA
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *     along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -110,6 +114,7 @@ void ircomm_tty_start(struct tty_struct *tty);
 void ircomm_tty_check_modem_status(struct ircomm_tty_cb *self);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ircomm_tty_tiocmget(struct tty_struct *tty);
 extern int ircomm_tty_tiocmset(struct tty_struct *tty,
 			       unsigned int set, unsigned int clear);
@@ -118,6 +123,8 @@ extern int ircomm_tty_ioctl(struct tty_struct *tty,
 extern void ircomm_tty_set_termios(struct tty_struct *tty, 
 				   struct ktermios *old_termios);
 =======
+=======
+>>>>>>> v3.18
 int ircomm_tty_tiocmget(struct tty_struct *tty);
 int ircomm_tty_tiocmset(struct tty_struct *tty, unsigned int set,
 			unsigned int clear);
@@ -125,6 +132,9 @@ int ircomm_tty_ioctl(struct tty_struct *tty, unsigned int cmd,
 		     unsigned long arg);
 void ircomm_tty_set_termios(struct tty_struct *tty,
 			    struct ktermios *old_termios);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

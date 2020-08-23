@@ -21,7 +21,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -33,8 +36,13 @@
 #include <asm/lppaca.h>
 #include <asm/debug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+#include <asm/machdep.h>
+>>>>>>> v3.18
 =======
 #include <asm/plpar_wrappers.h>
 #include <asm/machdep.h>
@@ -96,7 +104,11 @@ static void consume_dtle(struct dtl_entry *dtle, u64 index)
 
 	/* check for hypervisor ring buffer overflow, ignore this entry if so */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (index + N_DISPATCH_LOG < vpa->dtl_idx)
+=======
+	if (index + N_DISPATCH_LOG < be64_to_cpu(vpa->dtl_idx))
+>>>>>>> v3.18
 =======
 	if (index + N_DISPATCH_LOG < be64_to_cpu(vpa->dtl_idx))
 >>>>>>> v3.18
@@ -406,7 +418,11 @@ err:
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 arch_initcall(dtl_init);
+=======
+machine_arch_initcall(pseries, dtl_init);
+>>>>>>> v3.18
 =======
 machine_arch_initcall(pseries, dtl_init);
 >>>>>>> v3.18

@@ -46,6 +46,7 @@ int dialog_yesno(const char *title, const char *prompt, int height, int width)
 
 do_resize:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (getmaxy(stdscr) < (height + 4))
 		return -ERRDISPLAYTOOSMALL;
 	if (getmaxx(stdscr) < (width + 4))
@@ -55,6 +56,8 @@ do_resize:
 	x = (COLS - width) / 2;
 	y = (LINES - height) / 2;
 =======
+=======
+>>>>>>> v3.18
 	if (getmaxy(stdscr) < (height + YESNO_HEIGTH_MIN))
 		return -ERRDISPLAYTOOSMALL;
 	if (getmaxx(stdscr) < (width + YESNO_WIDTH_MIN))
@@ -63,6 +66,9 @@ do_resize:
 	/* center dialog box on screen */
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	draw_shadow(stdscr, y, x, height, width);

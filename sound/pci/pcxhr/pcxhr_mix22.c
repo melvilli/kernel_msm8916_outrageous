@@ -23,6 +23,10 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 >>>>>>> v3.18
@@ -295,7 +299,12 @@ int hr222_sub_init(struct pcxhr_mgr *mgr)
 	if (reg & PCXHR_STAT_MIC_CAPS)
 		mgr->board_has_mic = 1;	/* microphone available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("MIC input available = %d\n", mgr->board_has_mic);
+=======
+	dev_dbg(&mgr->pci->dev,
+		"MIC input available = %d\n", mgr->board_has_mic);
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev,
 		"MIC input available = %d\n", mgr->board_has_mic);
@@ -415,7 +424,11 @@ int hr222_sub_set_clock(struct pcxhr_mgr *mgr,
 	hr222_config_akm(mgr, AKM_UNMUTE_CMD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("set_clock to %dHz (realfreq=%d pllreg=%x)\n",
+=======
+	dev_dbg(&mgr->pci->dev, "set_clock to %dHz (realfreq=%d pllreg=%x)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "set_clock to %dHz (realfreq=%d pllreg=%x)\n",
 >>>>>>> v3.18
@@ -445,7 +458,12 @@ int hr222_get_external_clock(struct pcxhr_mgr *mgr,
 
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("get_external_clock : type %d not supported\n",
+=======
+		dev_dbg(&mgr->pci->dev,
+			"get_external_clock : type %d not supported\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(&mgr->pci->dev,
 			"get_external_clock : type %d not supported\n",
@@ -456,7 +474,12 @@ int hr222_get_external_clock(struct pcxhr_mgr *mgr,
 
 	if ((PCXHR_INPB(mgr, PCXHR_XLX_CSUER) & mask) != mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("get_external_clock(%d) = 0 Hz\n", clock_type);
+=======
+		dev_dbg(&mgr->pci->dev,
+			"get_external_clock(%d) = 0 Hz\n", clock_type);
+>>>>>>> v3.18
 =======
 		dev_dbg(&mgr->pci->dev,
 			"get_external_clock(%d) = 0 Hz\n", clock_type);
@@ -519,7 +542,11 @@ int hr222_get_external_clock(struct pcxhr_mgr *mgr,
 		rate = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("External clock is at %d Hz (measured %d Hz)\n",
+=======
+	dev_dbg(&mgr->pci->dev, "External clock is at %d Hz (measured %d Hz)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "External clock is at %d Hz (measured %d Hz)\n",
 >>>>>>> v3.18
@@ -570,7 +597,12 @@ int hr222_update_analog_audio_level(struct snd_pcxhr *chip,
 				    int is_capture, int channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("hr222_update_analog_audio_level(%s chan=%d)\n",
+=======
+	dev_dbg(chip->card->dev,
+		"hr222_update_analog_audio_level(%s chan=%d)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev,
 		"hr222_update_analog_audio_level(%s chan=%d)\n",
@@ -675,7 +707,11 @@ int hr222_iec958_capture_byte(struct snd_pcxhr *chip,
 			temp |= 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("read iec958 AES %d byte %d = 0x%x\n",
+=======
+	dev_dbg(chip->card->dev, "read iec958 AES %d byte %d = 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "read iec958 AES %d byte %d = 0x%x\n",
 >>>>>>> v3.18
@@ -721,7 +757,11 @@ static void hr222_micro_boost(struct pcxhr_mgr *mgr, int level)
 	PCXHR_OUTPB(mgr, PCXHR_XLX_SELMIC, mgr->xlx_selmic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("hr222_micro_boost : set %x\n", boost_mask);
+=======
+	dev_dbg(&mgr->pci->dev, "hr222_micro_boost : set %x\n", boost_mask);
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "hr222_micro_boost : set %x\n", boost_mask);
 >>>>>>> v3.18
@@ -737,7 +777,11 @@ static void hr222_phantom_power(struct pcxhr_mgr *mgr, int power)
 	PCXHR_OUTPB(mgr, PCXHR_XLX_SELMIC, mgr->xlx_selmic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("hr222_phantom_power : set %d\n", power);
+=======
+	dev_dbg(&mgr->pci->dev, "hr222_phantom_power : set %d\n", power);
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "hr222_phantom_power : set %d\n", power);
 >>>>>>> v3.18

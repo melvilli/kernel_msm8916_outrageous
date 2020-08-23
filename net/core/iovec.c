@@ -76,6 +76,7 @@ int verify_iovec(struct msghdr *m, struct iovec *iov, struct sockaddr_storage *a
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Copy kernel to iovec. Returns -EFAULT on error.
  */
 
@@ -135,6 +136,8 @@ int memcpy_fromiovecend(unsigned char *kdata, const struct iovec *iov,
 EXPORT_SYMBOL(memcpy_fromiovecend);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	And now for the all-in-one: copy and checksum from a user iovec
@@ -221,7 +224,10 @@ out_fault:
 }
 EXPORT_SYMBOL(csum_partial_copy_fromiovecend);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 unsigned long iov_pages(const struct iovec *iov, int offset,
 			unsigned long nr_segs)
@@ -246,4 +252,7 @@ unsigned long iov_pages(const struct iovec *iov, int offset,
 	return pages;
 }
 EXPORT_SYMBOL(iov_pages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -244,6 +244,10 @@ static int jffs2_remount_fs(struct super_block *sb, int *flags, char *data)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18

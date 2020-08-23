@@ -105,6 +105,7 @@ turn_on_mmu:
  */
 #define EXCEPTION_PROLOG	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtspr	SPRN_SPRG_SCRATCH0,r10;	\
 	mtspr	SPRN_SPRG_SCRATCH1,r11;	\
 	mfcr	r10;		\
@@ -112,6 +113,8 @@ turn_on_mmu:
 	EXCEPTION_PROLOG_2
 
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_PROLOG_0;	\
 	EXCEPTION_PROLOG_1;	\
 	EXCEPTION_PROLOG_2
@@ -121,6 +124,9 @@ turn_on_mmu:
 	mtspr	SPRN_SPRG_SCRATCH1,r11;	\
 	mfcr	r10
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EXCEPTION_PROLOG_1	\
 	mfspr	r11,SPRN_SRR1;		/* check whether user or kernel */ \
@@ -158,7 +164,10 @@ turn_on_mmu:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Exception exit code.
  */
 #define EXCEPTION_EPILOG_0	\
@@ -167,6 +176,9 @@ turn_on_mmu:
 	mfspr	r11,SPRN_SPRG_SCRATCH1
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Note: code which follows this uses cr0.eq (set if from kernel),
  * r11, r12 (SRR0), and r9 (SRR1).
@@ -317,6 +329,7 @@ InstructionTLBMiss:
 	stw	r3, 8(r0)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DO_8xx_CPU6(0x3f80, r3)
 	mtspr	SPRN_M_TW, r10	/* Save a couple of working registers */
 	mfcr	r10
@@ -327,6 +340,10 @@ InstructionTLBMiss:
 	mtspr	SPRN_DAR, r10
 	mtspr	SPRN_SPRG2, r11
 #endif
+=======
+	EXCEPTION_PROLOG_0
+	mtspr	SPRN_SPRG_SCRATCH2, r10
+>>>>>>> v3.18
 =======
 	EXCEPTION_PROLOG_0
 	mtspr	SPRN_SPRG_SCRATCH2, r10
@@ -388,6 +405,7 @@ InstructionTLBMiss:
 
 	/* Restore registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_8xx_CPU6
 	mfspr	r10, SPRN_DAR
 	mtcr	r10
@@ -401,11 +419,16 @@ InstructionTLBMiss:
 #endif
 	mfspr	r10, SPRN_M_TW
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx_CPU6
 	lwz	r3, 8(r0)
 #endif
 	mfspr	r10, SPRN_SPRG_SCRATCH2
 	EXCEPTION_EPILOG_0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rfi
 2:
@@ -417,6 +440,7 @@ InstructionTLBMiss:
 	mtspr	SPRN_SRR1, r11
 
 	/* Restore registers */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_8xx_CPU6
 	mfspr	r10, SPRN_DAR
@@ -432,11 +456,16 @@ InstructionTLBMiss:
 #endif
 	mfspr	r10, SPRN_M_TW
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx_CPU6
 	lwz	r3, 8(r0)
 #endif
 	mfspr	r10, SPRN_SPRG_SCRATCH2
 	EXCEPTION_EPILOG_0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	InstructionAccess
 
@@ -445,6 +474,7 @@ DataStoreTLBMiss:
 #ifdef CONFIG_8xx_CPU6
 	stw	r3, 8(r0)
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DO_8xx_CPU6(0x3f80, r3)
 	mtspr	SPRN_M_TW, r10	/* Save a couple of working registers */
@@ -456,6 +486,10 @@ DataStoreTLBMiss:
 	mtspr	SPRN_DAR, r10
 	mtspr	SPRN_SPRG2, r11
 #endif
+=======
+	EXCEPTION_PROLOG_0
+	mtspr	SPRN_SPRG_SCRATCH2, r10
+>>>>>>> v3.18
 =======
 	EXCEPTION_PROLOG_0
 	mtspr	SPRN_SPRG_SCRATCH2, r10
@@ -533,6 +567,7 @@ DataStoreTLBMiss:
 
 	/* Restore registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_8xx_CPU6
 	mfspr	r10, SPRN_DAR
 	mtcr	r10
@@ -547,12 +582,17 @@ DataStoreTLBMiss:
 #endif
 	mfspr	r10, SPRN_M_TW
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx_CPU6
 	lwz	r3, 8(r0)
 #endif
 	mtspr	SPRN_DAR, r11	/* Tag DAR */
 	mfspr	r10, SPRN_SPRG_SCRATCH2
 	EXCEPTION_EPILOG_0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rfi
 
@@ -565,6 +605,7 @@ InstructionTLBError:
 	b	InstructionAccess
 
 /* This is the data TLB error on the MPC8xx.  This could be due to
+<<<<<<< HEAD
 <<<<<<< HEAD
  * many reasons, including a dirty update to a pte.  We can catch that
  * one here, but anything else is an error.  First, we track down the
@@ -596,6 +637,8 @@ DARFixed:/* Return from dcbx instruction bug workaround, r10 holds value of DAR 
 	lwz	r3, 8(r0)
 #endif
 =======
+=======
+>>>>>>> v3.18
  * many reasons, including a dirty update to a pte.  We bail out to
  * a higher level function that can handle it.
  */
@@ -608,6 +651,9 @@ DataTLBError:
 	beq-	FixupDAR	/* must be a buggy dcbX, icbi insn. */
 DARFixed:/* Return from dcbx instruction bug workaround */
 	EXCEPTION_EPILOG_0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	DataAccess
 
@@ -633,7 +679,11 @@ DARFixed:/* Return from dcbx instruction bug workaround */
 /* This is the procedure to calculate the data EA for buggy dcbx,dcbi instructions
  * by decoding the registers used by the dcbx instruction and adding them.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * DAR is set to the calculated address and r10 also holds the EA on exit.
+=======
+ * DAR is set to the calculated address.
+>>>>>>> v3.18
 =======
  * DAR is set to the calculated address.
 >>>>>>> v3.18
@@ -642,11 +692,17 @@ DARFixed:/* Return from dcbx instruction bug workaround */
 #define NO_SELF_MODIFYING_CODE
 FixupDAR:/* Entry point for dcbx workaround. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx_CPU6
 	stw	r3, 8(r0)
 #endif
 	mtspr	SPRN_SPRG_SCRATCH2, r10
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* fetch instruction from memory. */
 	mfspr	r10, SPRN_SRR0
@@ -664,6 +720,12 @@ FixupDAR:/* Entry point for dcbx workaround. */
 	mfspr	r11, SPRN_MD_TWC	/* ....and get the pte address */
 	lwz	r11, 0(r11)	/* Get the pte */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_8xx_CPU6
+	lwz	r3, 8(r0)	/* restore r3 from memory */
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_8xx_CPU6
 	lwz	r3, 8(r0)	/* restore r3 from memory */
@@ -676,10 +738,15 @@ FixupDAR:/* Entry point for dcbx workaround. */
 /* dcbt and dcbtst does not generate DTLB Misses/Errors,
  * no need to include them here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srwi	r10, r11, 26	/* check if major OP code is 31 */
 	cmpwi	cr0, r10, 31
 	bne-	141f
 	rlwinm	r10, r11, 0, 21, 30
+=======
+	xoris	r10, r11, 0x7c00	/* check if major OP code is 31 */
+	rlwinm	r10, r10, 0, 21, 5
+>>>>>>> v3.18
 =======
 	xoris	r10, r11, 0x7c00	/* check if major OP code is 31 */
 	rlwinm	r10, r10, 0, 21, 5
@@ -695,7 +762,11 @@ FixupDAR:/* Entry point for dcbx workaround. */
 	cmpwi	cr0, r10, 1964	/* Is icbi? */
 	beq+	142f
 <<<<<<< HEAD
+<<<<<<< HEAD
 141:	mfspr	r10, SPRN_DAR	/* r10 must hold DAR at exit */
+=======
+141:	mfspr	r10,SPRN_SPRG_SCRATCH2
+>>>>>>> v3.18
 =======
 141:	mfspr	r10,SPRN_SPRG_SCRATCH2
 >>>>>>> v3.18
@@ -706,9 +777,12 @@ FixupDAR:/* Entry point for dcbx workaround. */
 	mtspr	SPRN_DSISR, r10
 142:	/* continue, it was a dcbx, dcbi instruction. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_8xx_CPU6
 	lwz	r3, 8(r0)	/* restore r3 from memory */
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef NO_SELF_MODIFYING_CODE
@@ -722,8 +796,13 @@ FixupDAR:/* Entry point for dcbx workaround. */
 	dcbf	0,r10		/* flush new instr. to memory. */
 	icbi	0,r10		/* invalidate instr. cache line */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lwz	r11, 4(r0)	/* restore r11 from memory */
 	mfspr	r10, SPRN_M_TW	/* restore r10 from M_TW */
+=======
+	mfspr	r11, SPRN_SPRG_SCRATCH1	/* restore r11 */
+	mfspr	r10, SPRN_SPRG_SCRATCH0	/* restore r10 */
+>>>>>>> v3.18
 =======
 	mfspr	r11, SPRN_SPRG_SCRATCH1	/* restore r11 */
 	mfspr	r10, SPRN_SPRG_SCRATCH0	/* restore r10 */
@@ -735,6 +814,10 @@ modified_instr:
 	subf	r10,r0,r10	/* r10=r10-r0, only if reg RA is r0 */
 143:	mtdar	r10		/* store faulting EA in DAR */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mfspr	r10,SPRN_SPRG_SCRATCH2
+>>>>>>> v3.18
 =======
 	mfspr	r10,SPRN_SPRG_SCRATCH2
 >>>>>>> v3.18
@@ -792,6 +875,7 @@ modified_instr:
 	mtctr	r11			/* restore ctr reg from DAR */
 	mtdar	r10			/* save fault EA to DAR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	DARFixed		/* Go back to normal TLB handling */
 
 	/* special handling for r10,r11 since these are modified already */
@@ -800,6 +884,8 @@ modified_instr:
 154:	mfspr	r11, SPRN_M_TW	/* load r10 from M_TW */
 155:	add	r10, r10, r11	/* add it */
 =======
+=======
+>>>>>>> v3.18
 	mfspr	r10,SPRN_SPRG_SCRATCH2
 	b	DARFixed		/* Go back to normal TLB handling */
 
@@ -810,16 +896,22 @@ modified_instr:
 	b	151b
 154:	mfspr	r11, SPRN_SPRG_SCRATCH0	/* load r10 from SPRN_SPRG_SCRATCH0 */
 	add	r10, r10, r11	/* add it */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfctr	r11		/* restore r11 */
 	b	151b
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.globl	giveup_fpu
 giveup_fpu:
 	blr
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -990,6 +1082,12 @@ initial_mmu:
 	mtspr	SPRN_MD_RPN, r11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	addi	r10, r10, 0x0100
+	mtspr	SPRN_MD_CTR, r10
+
+>>>>>>> v3.18
 =======
 	addi	r10, r10, 0x0100
 	mtspr	SPRN_MD_CTR, r10

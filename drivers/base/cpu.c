@@ -14,6 +14,10 @@
 #include <linux/slab.h>
 #include <linux/percpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 
 #include "base.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct bus_type cpu_subsys = {
 	.name = "cpu",
@@ -32,6 +37,8 @@ EXPORT_SYMBOL_GPL(cpu_subsys);
 static DEFINE_PER_CPU(struct device *, cpu_sys_devices);
 
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_PER_CPU(struct device *, cpu_sys_devices);
 
 static int cpu_subsys_match(struct device *dev, struct device_driver *drv)
@@ -43,6 +50,9 @@ static int cpu_subsys_match(struct device *dev, struct device_driver *drv)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
 static void change_cpu_under_node(struct cpu *cpu,
@@ -54,6 +64,7 @@ static void change_cpu_under_node(struct cpu *cpu,
 	cpu->node_id = to_nid;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t show_online(struct device *dev,
 			   struct device_attribute *attr,
@@ -111,6 +122,8 @@ static void __cpuinit register_cpu_control(struct cpu *cpu)
 	device_create_file(&cpu->dev, &dev_attr_online);
 }
 =======
+=======
+>>>>>>> v3.18
 static int __ref cpu_subsys_online(struct device *dev)
 {
 	struct cpu *cpu = container_of(dev, struct cpu, dev);
@@ -139,6 +152,9 @@ static int cpu_subsys_offline(struct device *dev)
 	return cpu_down(dev->id);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void unregister_cpu(struct cpu *cpu)
 {
@@ -147,8 +163,11 @@ void unregister_cpu(struct cpu *cpu)
 	unregister_cpu_under_node(logical_cpu, cpu_to_node(logical_cpu));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(&cpu->dev, &dev_attr_online);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_unregister(&cpu->dev);
@@ -163,8 +182,11 @@ static ssize_t cpu_probe_store(struct device *dev,
 			       size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return arch_cpu_probe(buf, count);
 =======
+=======
+>>>>>>> v3.18
 	ssize_t cnt;
 	int ret;
 
@@ -176,6 +198,9 @@ static ssize_t cpu_probe_store(struct device *dev,
 
 	unlock_device_hotplug();
 	return cnt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -185,8 +210,11 @@ static ssize_t cpu_release_store(struct device *dev,
 				 size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return arch_cpu_release(buf, count);
 =======
+=======
+>>>>>>> v3.18
 	ssize_t cnt;
 	int ret;
 
@@ -198,12 +226,16 @@ static ssize_t cpu_release_store(struct device *dev,
 
 	unlock_device_hotplug();
 	return cnt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static DEVICE_ATTR(probe, S_IWUSR, NULL, cpu_probe_store);
 static DEVICE_ATTR(release, S_IWUSR, NULL, cpu_release_store);
 #endif /* CONFIG_ARCH_CPU_PROBE_RELEASE */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #else /* ... !CONFIG_HOTPLUG_CPU */
@@ -213,6 +245,8 @@ static inline void register_cpu_control(struct cpu *cpu)
 #endif /* CONFIG_HOTPLUG_CPU */
 
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_HOTPLUG_CPU */
 
 struct bus_type cpu_subsys = {
@@ -226,6 +260,9 @@ struct bus_type cpu_subsys = {
 };
 EXPORT_SYMBOL_GPL(cpu_subsys);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KEXEC
 #include <linux/kexec.h>
@@ -263,9 +300,12 @@ static ssize_t show_crash_notes_size(struct device *dev,
 }
 static DEVICE_ATTR(crash_notes_size, 0400, show_crash_notes_size, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 
 static struct attribute *crash_note_cpu_attrs[] = {
 	&dev_attr_crash_notes.attr,
@@ -292,6 +332,9 @@ static const struct attribute_group *hotplugable_cpu_attr_groups[] = {
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Print cpu online, possible, present, and system maps
@@ -388,7 +431,10 @@ static void cpu_device_release(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_CPU_AUTOPROBE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_GENERIC_CPU_AUTOPROBE
@@ -414,9 +460,12 @@ static ssize_t print_cpu_modalias(struct device *dev,
 	return n;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define print_cpu_modalias	arch_print_cpu_modalias
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -441,7 +490,11 @@ static int cpu_uevent(struct device *dev, struct kobj_uevent_env *env)
  * Initialize and register the CPU device.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit register_cpu(struct cpu *cpu, int num)
+=======
+int register_cpu(struct cpu *cpu, int num)
+>>>>>>> v3.18
 =======
 int register_cpu(struct cpu *cpu, int num)
 >>>>>>> v3.18
@@ -454,6 +507,7 @@ int register_cpu(struct cpu *cpu, int num)
 	cpu->dev.bus = &cpu_subsys;
 	cpu->dev.release = cpu_device_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu->dev.of_node = of_get_cpu_node(num, NULL);
 #ifdef CONFIG_HAVE_CPU_AUTOPROBE
 	cpu->dev.bus->uevent = cpu_uevent;
@@ -462,6 +516,8 @@ int register_cpu(struct cpu *cpu, int num)
 	if (!error && cpu->hotpluggable)
 		register_cpu_control(cpu);
 =======
+=======
+>>>>>>> v3.18
 	cpu->dev.offline_disabled = !cpu->hotpluggable;
 	cpu->dev.offline = !cpu_online(num);
 	cpu->dev.of_node = of_get_cpu_node(num, NULL);
@@ -472,12 +528,16 @@ int register_cpu(struct cpu *cpu, int num)
 	if (cpu->hotpluggable)
 		cpu->dev.groups = hotplugable_cpu_attr_groups;
 	error = device_register(&cpu->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!error)
 		per_cpu(cpu_sys_devices, num) = &cpu->dev;
 	if (!error)
 		register_cpu_under_node(num, cpu_to_node(num));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_KEXEC
 	if (!error)
@@ -486,6 +546,8 @@ int register_cpu(struct cpu *cpu, int num)
 		error = device_create_file(&cpu->dev,
 					   &dev_attr_crash_notes_size);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return error;
@@ -501,7 +563,11 @@ struct device *get_cpu_device(unsigned cpu)
 EXPORT_SYMBOL_GPL(get_cpu_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_CPU_AUTOPROBE
+=======
+#ifdef CONFIG_GENERIC_CPU_AUTOPROBE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_GENERIC_CPU_AUTOPROBE
 >>>>>>> v3.18
@@ -519,7 +585,11 @@ static struct attribute *cpu_root_attrs[] = {
 	&dev_attr_kernel_max.attr,
 	&dev_attr_offline.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_CPU_AUTOPROBE
+=======
+#ifdef CONFIG_GENERIC_CPU_AUTOPROBE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_GENERIC_CPU_AUTOPROBE
 >>>>>>> v3.18

@@ -58,6 +58,7 @@
 #define _PAGE_ACCESSED      (1<<1)	/* Page is accessed (S) */
 #define _PAGE_CACHEABLE     (1<<2)	/* Page is cached (H) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PAGE_U_EXECUTE     (1<<3)	/* Page has user execute perm (H) */
 #define _PAGE_U_WRITE       (1<<4)	/* Page has user write perm (H) */
 #define _PAGE_U_READ        (1<<5)	/* Page has user read perm (H) */
@@ -96,6 +97,8 @@
 /* Kernel allowed all permissions for all pages */
 #define _K_PAGE_PERMS  (_PAGE_K_EXECUTE | _PAGE_K_WRITE | _PAGE_K_READ | \
 =======
+=======
+>>>>>>> v3.18
 #define _PAGE_EXECUTE       (1<<3)	/* Page has user execute perm (H) */
 #define _PAGE_WRITE         (1<<4)	/* Page has user write perm (H) */
 #define _PAGE_READ          (1<<5)	/* Page has user read perm (H) */
@@ -121,6 +124,9 @@
 
 /* vmalloc permissions */
 #define _K_PAGE_PERMS  (_PAGE_EXECUTE | _PAGE_WRITE | _PAGE_READ | \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			_PAGE_GLOBAL | _PAGE_PRESENT)
 
@@ -138,10 +144,13 @@
 #define ___DEF (_PAGE_PRESENT | _PAGE_DEF_CACHEABLE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PAGE_READ	(_PAGE_U_READ    | _PAGE_K_READ)
 #define _PAGE_WRITE	(_PAGE_U_WRITE   | _PAGE_K_WRITE)
 #define _PAGE_EXECUTE	(_PAGE_U_EXECUTE | _PAGE_K_EXECUTE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Set of bits not changed in pte_modify */
@@ -158,8 +167,13 @@
 #define PAGE_SHARED	PAGE_U_W_R
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* While kernel runs out of unstrslated space, vmalloc/modules use a chunk of
  * kernel vaddr space - visible in all addr spaces, but kernel mode only
+=======
+/* While kernel runs out of unstranslated space, vmalloc/modules use a chunk of
+ * user vaddr space - visible in all addr spaces, but kernel mode only
+>>>>>>> v3.18
 =======
 /* While kernel runs out of unstranslated space, vmalloc/modules use a chunk of
  * user vaddr space - visible in all addr spaces, but kernel mode only
@@ -172,12 +186,18 @@
 #define PAGE_KERNEL_NO_CACHE __pgprot(_K_PAGE_PERMS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Masks for actual TLB "PD"s */
 #define PTE_BITS_IN_PD0		(_PAGE_GLOBAL | _PAGE_PRESENT)
 #define PTE_BITS_RWX		(_PAGE_EXECUTE | _PAGE_WRITE | _PAGE_READ)
 #define PTE_BITS_NON_RWX_IN_PD1	(PAGE_MASK | _PAGE_CACHEABLE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**************************************************************************
  * Mapping of vm_flags (Generic VM) to PTE flags (arch specific)
@@ -315,8 +335,12 @@ static inline void pmd_set(pmd_t *pmdp, pte_t *ptep)
 
 #define pte_page(x) (mem_map + \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(unsigned long)(((pte_val(x) - CONFIG_LINUX_LINK_BASE) >> \
 				PAGE_SHIFT)))
+=======
+		(unsigned long)(((pte_val(x) - PAGE_OFFSET) >> PAGE_SHIFT)))
+>>>>>>> v3.18
 =======
 		(unsigned long)(((pte_val(x) - PAGE_OFFSET) >> PAGE_SHIFT)))
 >>>>>>> v3.18

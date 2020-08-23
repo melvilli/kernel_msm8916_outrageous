@@ -8,6 +8,7 @@ Required properties:
 
 The clock consumer should specify the desired clock by having the clock
 <<<<<<< HEAD
+<<<<<<< HEAD
 ID in its "clocks" phandle cell.  The following is a full list of i.MX6Q
 clocks and IDs.
 
@@ -213,6 +214,8 @@ clocks and IDs.
 Examples:
 
 =======
+=======
+>>>>>>> v3.18
 ID in its "clocks" phandle cell.  See include/dt-bindings/clock/imx6qdl-clock.h
 for the full list of i.MX6 Quad and DualLite clock IDs.
 
@@ -220,6 +223,9 @@ Examples:
 
 #include <dt-bindings/clock/imx6qdl-clock.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 clks: ccm@020c4000 {
 	compatible = "fsl,imx6q-ccm";
@@ -233,7 +239,11 @@ uart1: serial@02020000 {
 	reg = <0x02020000 0x4000>;
 	interrupts = <0 26 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clocks = <&clks 160>, <&clks 161>;
+=======
+	clocks = <&clks IMX6QDL_CLK_UART_IPG>, <&clks IMX6QDL_CLK_UART_SERIAL>;
+>>>>>>> v3.18
 =======
 	clocks = <&clks IMX6QDL_CLK_UART_IPG>, <&clks IMX6QDL_CLK_UART_SERIAL>;
 >>>>>>> v3.18

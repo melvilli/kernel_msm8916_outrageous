@@ -713,6 +713,7 @@ static inline void __set_fixmap(unsigned /* enum fixed_addresses */ idx,
 #if defined(CONFIG_SMP) && defined(CONFIG_PARAVIRT_SPINLOCKS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int arch_spin_is_locked(struct arch_spinlock *lock)
 {
 	return PVOP_CALL1(int, pv_lock_ops.spin_is_locked, lock);
@@ -744,6 +745,8 @@ static __always_inline void arch_spin_unlock(struct arch_spinlock *lock)
 {
 	PVOP_VCALL1(pv_lock_ops.spin_unlock, lock);
 =======
+=======
+>>>>>>> v3.18
 static __always_inline void __ticket_lock_spinning(struct arch_spinlock *lock,
 							__ticket_t ticket)
 {
@@ -754,6 +757,9 @@ static __always_inline void __ticket_unlock_kick(struct arch_spinlock *lock,
 							__ticket_t ticket)
 {
 	PVOP_VCALL2(pv_lock_ops.unlock_kick, lock, ticket);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -815,9 +821,15 @@ static __always_inline void __ticket_unlock_kick(struct arch_spinlock *lock,
 #define PV_CALLEE_SAVE_REGS_THUNK(func)					\
 	extern typeof(func) __raw_callee_save_##func;			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static void *__##func##__ __used = func;			\
 									\
 	asm(".pushsection .text;"					\
+=======
+									\
+	asm(".pushsection .text;"					\
+	    ".globl __raw_callee_save_" #func " ; "			\
+>>>>>>> v3.18
 =======
 									\
 	asm(".pushsection .text;"					\

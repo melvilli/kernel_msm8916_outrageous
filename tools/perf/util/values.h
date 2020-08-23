@@ -2,7 +2,11 @@
 #define __PERF_VALUES_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18

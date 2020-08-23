@@ -32,9 +32,15 @@
 
 #define AP_DEVICES 64		/* Number of AP devices. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AP_DOMAINS 16		/* Number of AP domains. */
 #define AP_MAX_RESET 90		/* Maximum number of resets. */
 #define AP_RESET_TIMEOUT (HZ/2)	/* Time in ticks for reset timeouts. */
+=======
+#define AP_DOMAINS 256		/* Number of AP domains. */
+#define AP_MAX_RESET 90		/* Maximum number of resets. */
+#define AP_RESET_TIMEOUT (HZ*0.7)	/* Time in ticks for reset timeouts. */
+>>>>>>> v3.18
 =======
 #define AP_DOMAINS 256		/* Number of AP domains. */
 #define AP_MAX_RESET 90		/* Maximum number of resets. */
@@ -52,9 +58,15 @@ extern int ap_domain_index;
 typedef unsigned int ap_qid_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AP_MKQID(_device,_queue) (((_device) & 63) << 8 | ((_queue) & 15))
 #define AP_QID_DEVICE(_qid) (((_qid) >> 8) & 63)
 #define AP_QID_QUEUE(_qid) ((_qid) & 15)
+=======
+#define AP_MKQID(_device, _queue) (((_device) & 63) << 8 | ((_queue) & 255))
+#define AP_QID_DEVICE(_qid) (((_qid) >> 8) & 63)
+#define AP_QID_QUEUE(_qid) ((_qid) & 255)
+>>>>>>> v3.18
 =======
 #define AP_MKQID(_device, _queue) (((_device) & 63) << 8 | ((_queue) & 255))
 #define AP_QID_DEVICE(_qid) (((_qid) >> 8) & 63)
@@ -138,6 +150,11 @@ static inline int ap_test_bit(unsigned int *ptr, unsigned int nr)
 #define AP_FUNC_COPRO 3
 #define AP_FUNC_ACCEL 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AP_FUNC_EP11  5
+#define AP_FUNC_APXA  6
+>>>>>>> v3.18
 =======
 #define AP_FUNC_EP11  5
 #define AP_FUNC_APXA  6
@@ -177,6 +194,10 @@ struct ap_device {
 	int queue_depth;		/* AP queue depth.*/
 	int device_type;		/* AP device type. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int raw_hwtype;			/* AP raw hardware type. */
+>>>>>>> v3.18
 =======
 	int raw_hwtype;			/* AP raw hardware type. */
 >>>>>>> v3.18

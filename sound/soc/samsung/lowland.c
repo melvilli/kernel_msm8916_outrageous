@@ -188,6 +188,7 @@ static int lowland_probe(struct platform_device *pdev)
 	card->dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_card(card);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
@@ -206,12 +207,17 @@ static int lowland_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_snd_soc_register_card(&pdev->dev, card);
 	if (ret)
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
 			ret);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -223,7 +229,10 @@ static struct platform_driver lowland_driver = {
 	},
 	.probe = lowland_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = lowland_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

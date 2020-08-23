@@ -2,7 +2,11 @@
  * net/tipc/name_distr.c: TIPC name distribution code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2006, Ericsson AB
+=======
+ * Copyright (c) 2000-2006, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2006, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -43,6 +47,7 @@
 #include "name_distr.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ITEM_SIZE sizeof(struct distr_item)
 
 /**
@@ -71,6 +76,8 @@ struct distr_item {
 	__be32 key;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -107,7 +114,10 @@ static struct publ_list *publ_lists[] = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int sysctl_tipc_named_timeout __read_mostly = 2000;
 
 /**
@@ -123,6 +133,9 @@ struct distr_queue_item {
 	struct list_head next;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * publ_to_item - add publication info to a publication message
@@ -153,6 +166,7 @@ static struct sk_buff *named_prepare_buf(u32 type, u32 size, u32 dest)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void named_cluster_distribute(struct sk_buff *buf)
 {
 	struct sk_buff *buf_copy;
@@ -168,6 +182,8 @@ static void named_cluster_distribute(struct sk_buff *buf)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 void named_cluster_distribute(struct sk_buff *buf)
 {
 	struct sk_buff *obuf;
@@ -188,6 +204,9 @@ void named_cluster_distribute(struct sk_buff *buf)
 		tipc_link_xmit(obuf, dnode, dnode);
 	}
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree_skb(buf);
@@ -197,7 +216,11 @@ void named_cluster_distribute(struct sk_buff *buf)
  * tipc_named_publish - tell other nodes about a new publication by this node
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_named_publish(struct publication *publ)
+=======
+struct sk_buff *tipc_named_publish(struct publication *publ)
+>>>>>>> v3.18
 =======
 struct sk_buff *tipc_named_publish(struct publication *publ)
 >>>>>>> v3.18
@@ -210,7 +233,11 @@ struct sk_buff *tipc_named_publish(struct publication *publ)
 
 	if (publ->scope == TIPC_NODE_SCOPE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -219,7 +246,11 @@ struct sk_buff *tipc_named_publish(struct publication *publ)
 	if (!buf) {
 		pr_warn("Publication distribution failure\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -228,7 +259,11 @@ struct sk_buff *tipc_named_publish(struct publication *publ)
 	item = (struct distr_item *)msg_data(buf_msg(buf));
 	publ_to_item(item, publ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	named_cluster_distribute(buf);
+=======
+	return buf;
+>>>>>>> v3.18
 =======
 	return buf;
 >>>>>>> v3.18
@@ -238,7 +273,11 @@ struct sk_buff *tipc_named_publish(struct publication *publ)
  * tipc_named_withdraw - tell other nodes about a withdrawn publication by this node
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_named_withdraw(struct publication *publ)
+=======
+struct sk_buff *tipc_named_withdraw(struct publication *publ)
+>>>>>>> v3.18
 =======
 struct sk_buff *tipc_named_withdraw(struct publication *publ)
 >>>>>>> v3.18
@@ -251,7 +290,11 @@ struct sk_buff *tipc_named_withdraw(struct publication *publ)
 
 	if (publ->scope == TIPC_NODE_SCOPE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -260,7 +303,11 @@ struct sk_buff *tipc_named_withdraw(struct publication *publ)
 	if (!buf) {
 		pr_warn("Withdrawal distribution failure\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -268,6 +315,7 @@ struct sk_buff *tipc_named_withdraw(struct publication *publ)
 
 	item = (struct distr_item *)msg_data(buf_msg(buf));
 	publ_to_item(item, publ);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	named_cluster_distribute(buf);
 }
@@ -278,6 +326,8 @@ struct sk_buff *tipc_named_withdraw(struct publication *publ)
 static void named_distribute(struct list_head *message_list, u32 node,
 			     struct publ_list *pls, u32 max_item_buf)
 =======
+=======
+>>>>>>> v3.18
 	return buf;
 }
 
@@ -289,11 +339,15 @@ static void named_distribute(struct list_head *message_list, u32 node,
  */
 static void named_distribute(struct list_head *msg_list, u32 dnode,
 			     struct publ_list *pls)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct publication *publ;
 	struct sk_buff *buf = NULL;
 	struct distr_item *item = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 left = 0;
 	u32 rest = pls->size * ITEM_SIZE;
@@ -304,6 +358,8 @@ static void named_distribute(struct list_head *msg_list, u32 dnode,
 			rest -= left;
 			buf = named_prepare_buf(PUBLICATION, left, node);
 =======
+=======
+>>>>>>> v3.18
 	uint dsz = pls->size * ITEM_SIZE;
 	uint msg_dsz = (tipc_node_get_mtu(dnode, 0) / ITEM_SIZE) * ITEM_SIZE;
 	uint rem = dsz;
@@ -315,6 +371,9 @@ static void named_distribute(struct list_head *msg_list, u32 dnode,
 			msg_rem = min_t(uint, rem, msg_dsz);
 			rem -= msg_rem;
 			buf = named_prepare_buf(PUBLICATION, msg_rem, dnode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!buf) {
 				pr_warn("Bulk publication failure\n");
@@ -323,12 +382,15 @@ static void named_distribute(struct list_head *msg_list, u32 dnode,
 			item = (struct distr_item *)msg_data(buf_msg(buf));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		publ_to_item(item, publ);
 		item++;
 		left -= ITEM_SIZE;
 		if (!left) {
 			list_add_tail((struct list_head *)buf, message_list);
 =======
+=======
+>>>>>>> v3.18
 
 		/* Pack publication into message: */
 		publ_to_item(item, publ);
@@ -338,6 +400,9 @@ static void named_distribute(struct list_head *msg_list, u32 dnode,
 		/* Append full buffer to list: */
 		if (!msg_rem) {
 			list_add_tail((struct list_head *)buf, msg_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			buf = NULL;
 		}
@@ -347,6 +412,7 @@ static void named_distribute(struct list_head *msg_list, u32 dnode,
 /**
  * tipc_named_node_up - tell specified node about all publications by this node
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void tipc_named_node_up(unsigned long nodearg)
 {
@@ -381,6 +447,8 @@ void tipc_named_node_up(unsigned long nodearg)
 
 	tipc_link_send_names(&message_list, node);
 =======
+=======
+>>>>>>> v3.18
 void tipc_named_node_up(u32 dnode)
 {
 	LIST_HEAD(msg_list);
@@ -395,6 +463,9 @@ void tipc_named_node_up(u32 dnode)
 	buf_chain = (struct sk_buff *)msg_list.next;
 	((struct sk_buff *)msg_list.prev)->next = NULL;
 	tipc_link_xmit(buf_chain, dnode, dnode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -426,6 +497,7 @@ static void named_purge_publ(struct publication *publ)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * tipc_named_recv - process name table update message sent by another node
  */
@@ -476,6 +548,8 @@ void tipc_named_recv(struct sk_buff *buf)
 		item++;
 	}
 =======
+=======
+>>>>>>> v3.18
  * tipc_update_nametbl - try to process a nametable update and notify
  *			 subscribers
  *
@@ -575,6 +649,9 @@ void tipc_named_rcv(struct sk_buff *buf)
 		item++;
 	}
 	tipc_named_process_backlog();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	write_unlock_bh(&tipc_nametbl_lock);
 	kfree_skb(buf);

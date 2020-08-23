@@ -66,7 +66,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * User Peripheral physical base addresses.
  */
 #define SAMA5D3_BASE_USART0	0xf001c000
@@ -75,6 +78,9 @@
 #define SAMA5D3_BASE_USART3	0xf8024000
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * System Peripherals
  */

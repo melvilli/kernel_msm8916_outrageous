@@ -27,6 +27,7 @@ static inline void xen_dma_map_page(struct device *hwdev, struct page *page,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void xen_dma_unmap_page(struct device *hwdev, dma_addr_t handle,
 		size_t size, enum dma_data_direction dir,
 		struct dma_attrs *attrs)
@@ -49,6 +50,8 @@ static inline void xen_dma_sync_single_for_device(struct device *hwdev,
 		__generic_dma_ops(hwdev)->sync_single_for_device(hwdev, handle, size, dir);
 }
 =======
+=======
+>>>>>>> v3.18
 void xen_dma_unmap_page(struct device *hwdev, dma_addr_t handle,
 		size_t size, enum dma_data_direction dir,
 		struct dma_attrs *attrs);
@@ -59,5 +62,8 @@ void xen_dma_sync_single_for_cpu(struct device *hwdev,
 void xen_dma_sync_single_for_device(struct device *hwdev,
 		dma_addr_t handle, size_t size, enum dma_data_direction dir);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_ARM_XEN_PAGE_COHERENT_H */

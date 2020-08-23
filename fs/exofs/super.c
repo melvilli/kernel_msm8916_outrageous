@@ -3,7 +3,11 @@
  * Avishay Traeger (avishay@gmail.com)
  * Copyright (C) 2008, 2009
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  * Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -548,7 +552,11 @@ static int exofs_devs_2_odi(struct exofs_dt_device_info *dt_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __alloc_dev_table(struct exofs_sb_info *sbi, unsigned numdevs,
+=======
+static int __alloc_dev_table(struct exofs_sb_info *sbi, unsigned numdevs,
+>>>>>>> v3.18
 =======
 static int __alloc_dev_table(struct exofs_sb_info *sbi, unsigned numdevs,
 >>>>>>> v3.18

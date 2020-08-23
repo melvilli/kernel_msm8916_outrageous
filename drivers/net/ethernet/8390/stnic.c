@@ -70,12 +70,18 @@ static void stnic_block_output (struct net_device *dev, int count,
 static void stnic_init (struct net_device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 stnic_msg_enable;
 
 module_param_named(msg_enable, stnic_msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
 MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SH7750 specific read/write io. */
 static inline void
@@ -109,6 +115,10 @@ static int __init stnic_probe(void)
   struct net_device *dev;
   int i, err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  struct ei_device *ei_local;
+>>>>>>> v3.18
 =======
   struct ei_device *ei_local;
 >>>>>>> v3.18
@@ -138,15 +148,21 @@ static int __init stnic_probe(void)
   err = request_irq (dev->irq, ei_interrupt, 0, DRV_NAME, dev);
   if (err)  {
 <<<<<<< HEAD
+<<<<<<< HEAD
       printk (KERN_EMERG " unable to get IRQ %d.\n", dev->irq);
       free_netdev(dev);
       return err;
     }
 =======
+=======
+>>>>>>> v3.18
 	netdev_emerg(dev, " unable to get IRQ %d.\n", dev->irq);
 	free_netdev(dev);
 	return err;
   }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   ei_status.name = dev->name;
@@ -167,6 +183,11 @@ static int __init stnic_probe(void)
 
   stnic_init (dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  ei_local = netdev_priv(dev);
+  ei_local->msg_enable = stnic_msg_enable;
+>>>>>>> v3.18
 =======
   ei_local = netdev_priv(dev);
   ei_local->msg_enable = stnic_msg_enable;
@@ -181,7 +202,11 @@ static int __init stnic_probe(void)
   stnic_dev = dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   printk (KERN_INFO "NS ST-NIC 83902A\n");
+=======
+  netdev_info(dev, "NS ST-NIC 83902A\n");
+>>>>>>> v3.18
 =======
   netdev_info(dev, "NS ST-NIC 83902A\n");
 >>>>>>> v3.18
@@ -193,16 +218,22 @@ static void
 stnic_reset (struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   *(vhalf *) PA_83902_RST = 0;
   udelay (5);
   if (ei_debug > 1)
     printk (KERN_WARNING "8390 reset done (%ld).\n", jiffies);
 =======
+=======
+>>>>>>> v3.18
   struct ei_device *ei_local = netdev_priv(dev);
 
   *(vhalf *) PA_83902_RST = 0;
   udelay (5);
   netif_warn(ei_local, hw, dev, "8390 reset done (%ld).\n", jiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   *(vhalf *) PA_83902_RST = ~0;
   udelay (5);
@@ -213,6 +244,11 @@ stnic_get_hdr (struct net_device *dev, struct e8390_pkt_hdr *hdr,
 	       int ring_page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  struct ei_device *ei_local = netdev_priv(dev);
+
+>>>>>>> v3.18
 =======
   struct ei_device *ei_local = netdev_priv(dev);
 
@@ -238,8 +274,12 @@ stnic_get_hdr (struct net_device *dev, struct e8390_pkt_hdr *hdr,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   if (ei_debug > 1)
     printk (KERN_DEBUG "ring %x status %02x next %02x count %04x.\n",
+=======
+  netif_dbg(ei_local, probe, dev, "ring %x status %02x next %02x count %04x.\n",
+>>>>>>> v3.18
 =======
   netif_dbg(ei_local, probe, dev, "ring %x status %02x next %02x count %04x.\n",
 >>>>>>> v3.18

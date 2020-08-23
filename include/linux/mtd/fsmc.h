@@ -138,6 +138,10 @@ enum access_mode {
 /**
  * fsmc_nand_platform_data - platform specific NAND controller config
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @nand_timings: timing setup for the physical NAND interface
+>>>>>>> v3.18
 =======
  * @nand_timings: timing setup for the physical NAND interface
 >>>>>>> v3.18

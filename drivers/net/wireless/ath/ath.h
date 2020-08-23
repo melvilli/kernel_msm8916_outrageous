@@ -18,6 +18,10 @@
 #define ATH_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -60,7 +64,10 @@ enum ath_device_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ath_op_flags {
 	ATH_OP_INVALID,
 	ATH_OP_BEACONS,
@@ -71,6 +78,9 @@ enum ath_op_flags {
 	ATH_OP_MULTI_CHANNEL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum ath_bus_type {
 	ATH_PCI,
@@ -80,7 +90,11 @@ enum ath_bus_type {
 
 struct reg_dmn_pair_mapping {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 regDmnEnum;
+=======
+	u16 reg_domain;
+>>>>>>> v3.18
 =======
 	u16 reg_domain;
 >>>>>>> v3.18
@@ -91,6 +105,10 @@ struct reg_dmn_pair_mapping {
 struct ath_regulatory {
 	char alpha2[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum nl80211_dfs_regions region;
+>>>>>>> v3.18
 =======
 	enum nl80211_dfs_regions region;
 >>>>>>> v3.18
@@ -155,6 +173,10 @@ struct ath_common {
 	int debug_mask;
 	enum ath_device_state state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long op_flags;
+>>>>>>> v3.18
 =======
 	unsigned long op_flags;
 >>>>>>> v3.18
@@ -189,12 +211,18 @@ struct ath_common {
 	bool btcoex_enabled;
 	bool disable_ani;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool antenna_diversity;
 =======
+=======
+>>>>>>> v3.18
 	bool bt_ant_diversity;
 
 	int last_rssi;
 	struct ieee80211_supported_band sbands[IEEE80211_NUM_BANDS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -202,6 +230,10 @@ struct sk_buff *ath_rxbuf_alloc(struct ath_common *common,
 				u32 len,
 				gfp_t gfp_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool ath_is_mybeacon(struct ath_common *common, struct ieee80211_hdr *hdr);
+>>>>>>> v3.18
 =======
 bool ath_is_mybeacon(struct ath_common *common, struct ieee80211_hdr *hdr);
 >>>>>>> v3.18
@@ -259,6 +291,10 @@ void ath_printk(const char *level, const struct ath_common *common,
  * @ATH_DBG_DFS: radar datection
  * @ATH_DBG_WOW: Wake on Wireless
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ATH_DBG_DYNACK: dynack handling
+>>>>>>> v3.18
 =======
  * @ATH_DBG_DYNACK: dynack handling
 >>>>>>> v3.18
@@ -284,6 +320,7 @@ enum ATH_DEBUG {
 	ATH_DBG_FATAL		= 0x00000400,
 	ATH_DBG_PS		= 0x00000800,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ATH_DBG_HWTIMER		= 0x00001000,
 	ATH_DBG_BTCOEX		= 0x00002000,
 	ATH_DBG_WMI		= 0x00004000,
@@ -292,6 +329,8 @@ enum ATH_DEBUG {
 	ATH_DBG_DFS		= 0x00020000,
 	ATH_DBG_WOW		= 0x00040000,
 =======
+=======
+>>>>>>> v3.18
 	ATH_DBG_BTCOEX		= 0x00001000,
 	ATH_DBG_WMI		= 0x00002000,
 	ATH_DBG_BSTUCK		= 0x00004000,
@@ -300,12 +339,19 @@ enum ATH_DEBUG {
 	ATH_DBG_WOW		= 0x00020000,
 	ATH_DBG_CHAN_CTX	= 0x00040000,
 	ATH_DBG_DYNACK		= 0x00080000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ATH_DBG_ANY		= 0xffffffff
 };
 
 #define ATH_DBG_DEFAULT (ATH_DBG_FATAL)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ATH_DBG_MAX_LEN 512
+>>>>>>> v3.18
 =======
 #define ATH_DBG_MAX_LEN 512
 >>>>>>> v3.18

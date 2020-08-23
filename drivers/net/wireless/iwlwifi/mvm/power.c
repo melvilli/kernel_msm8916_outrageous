@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -75,7 +85,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -88,6 +101,7 @@
 
 #define POWER_KEEP_ALIVE_PERIOD_SEC    25
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void iwl_mvm_power_log(struct iwl_mvm *mvm,
 			      struct iwl_powertable_cmd *cmd)
@@ -118,6 +132,8 @@ void iwl_mvm_power_build_cmd(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 	int keep_alive;
 	bool radar_detect = false;
 =======
+=======
+>>>>>>> v3.18
 static
 int iwl_mvm_beacon_filter_send_cmd(struct iwl_mvm *mvm,
 				   struct iwl_beacon_filter_cmd *cmd,
@@ -359,11 +375,15 @@ static void iwl_mvm_power_build_cmd(struct iwl_mvm *mvm,
 	cmd->id_and_color = cpu_to_le32(FW_CMD_ID_AND_COLOR(mvmvif->id,
 							    mvmvif->color));
 	dtimper = vif->bss_conf.dtim_period;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Regardless of power management state the driver must set
 	 * keep alive period. FW will use it for sending keep alive NDPs
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * immediately after association.
 	 */
@@ -371,6 +391,8 @@ static void iwl_mvm_power_build_cmd(struct iwl_mvm *mvm,
 
 	if (iwlmvm_mod_params.power_scheme == IWL_POWER_SCHEME_CAM)
 =======
+=======
+>>>>>>> v3.18
 	 * immediately after association. Check that keep alive period
 	 * is at least 3 * DTIM
 	 */
@@ -381,13 +403,21 @@ static void iwl_mvm_power_build_cmd(struct iwl_mvm *mvm,
 	cmd->keep_alive_seconds = cpu_to_le16(keep_alive);
 
 	if (mvm->ps_disabled)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
 	cmd->flags |= cpu_to_le16(POWER_FLAGS_POWER_SAVE_ENA_MSK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vif->bss_conf.ps)
+=======
+	if (!vif->bss_conf.ps || iwl_mvm_vif_low_latency(mvmvif) ||
+	    !mvmvif->pm_enabled || iwl_mvm_tdls_sta_count(mvm, vif))
+>>>>>>> v3.18
 =======
 	if (!vif->bss_conf.ps || iwl_mvm_vif_low_latency(mvmvif) ||
 	    !mvmvif->pm_enabled || iwl_mvm_tdls_sta_count(mvm, vif))
@@ -396,6 +426,7 @@ static void iwl_mvm_power_build_cmd(struct iwl_mvm *mvm,
 
 	cmd->flags |= cpu_to_le16(POWER_FLAGS_POWER_MANAGEMENT_ENA_MSK);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dtimper = hw->conf.ps_dtim_period ?: 1;
 
@@ -443,6 +474,8 @@ int iwl_mvm_power_disable(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 {
 	struct iwl_powertable_cmd cmd = {};
 =======
+=======
+>>>>>>> v3.18
 	if (vif->bss_conf.beacon_rate &&
 	    (vif->bss_conf.beacon_rate->bitrate == 10 ||
 	     vif->bss_conf.beacon_rate->bitrate == 60)) {
@@ -934,11 +967,15 @@ int iwl_mvm_disable_beacon_filter(struct iwl_mvm *mvm,
 	struct iwl_beacon_filter_cmd cmd = {};
 	struct iwl_mvm_vif *mvmvif = iwl_mvm_vif_from_mac80211(vif);
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (vif->type != NL80211_IFTYPE_STATION || vif->p2p)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (iwlmvm_mod_params.power_scheme != IWL_POWER_SCHEME_CAM)
 		cmd.flags |= cpu_to_le16(POWER_FLAGS_POWER_SAVE_ENA_MSK);
@@ -948,6 +985,8 @@ int iwl_mvm_disable_beacon_filter(struct iwl_mvm *mvm,
 	return iwl_mvm_send_cmd_pdu(mvm, POWER_TABLE_CMD, CMD_ASYNC,
 				    sizeof(cmd), &cmd);
 =======
+=======
+>>>>>>> v3.18
 	ret = iwl_mvm_beacon_filter_send_cmd(mvm, &cmd, flags);
 
 	if (!ret)
@@ -1119,5 +1158,8 @@ int iwl_mvm_update_d0i3_power_mode(struct iwl_mvm *mvm,
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -13,6 +13,11 @@
 #include <linux/list.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/irqchip/mmp.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 #include <linux/irqchip/mmp.h>
@@ -29,6 +34,11 @@
 #include <mach/mfp.h>
 #include <mach/devices.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/pm-pxa910.h>
+#include <mach/pxa910.h>
+>>>>>>> v3.18
 =======
 #include <mach/pm-pxa910.h>
 #include <mach/pxa910.h>
@@ -90,6 +100,12 @@ void __init pxa910_init_irq(void)
 {
 	icu_init_irq();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+	icu_irq_chip.irq_set_wake = pxa910_set_wake;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 	icu_irq_chip.irq_set_wake = pxa910_set_wake;

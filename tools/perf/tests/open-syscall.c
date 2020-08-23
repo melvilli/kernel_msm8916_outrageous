@@ -10,6 +10,10 @@ int test__open_syscall_event(void)
 	unsigned int nr_open_calls = 111, i;
 	struct thread_map *threads = thread_map__new(-1, getpid(), UINT_MAX);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -20,7 +24,11 @@ int test__open_syscall_event(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	evsel = perf_evsel__newtp("syscalls", "sys_enter_open", 0);
+=======
+	evsel = perf_evsel__newtp("syscalls", "sys_enter_open");
+>>>>>>> v3.18
 =======
 	evsel = perf_evsel__newtp("syscalls", "sys_enter_open");
 >>>>>>> v3.18
@@ -33,7 +41,11 @@ int test__open_syscall_event(void)
 		pr_debug("failed to open counter: %s, "
 			 "tweak /proc/sys/kernel/perf_event_paranoid?\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 strerror(errno));
+=======
+			 strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 			 strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18

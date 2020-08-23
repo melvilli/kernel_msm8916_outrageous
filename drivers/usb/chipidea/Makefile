@@ -3,6 +3,7 @@ ccflags-$(CONFIG_USB_CHIPIDEA_DEBUG) := -DDEBUG
 obj-$(CONFIG_USB_CHIPIDEA)		+= ci_hdrc.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ci_hdrc-y				:= core.o
 ci_hdrc-$(CONFIG_USB_CHIPIDEA_UDC)	+= udc.o
 ci_hdrc-$(CONFIG_USB_CHIPIDEA_HOST)	+= host.o
@@ -20,6 +21,8 @@ endif
 ifneq ($(CONFIG_OF_DEVICE),)
 	obj-$(CONFIG_USB_CHIPIDEA)	+= ci13xxx_imx.o usbmisc_imx.o
 =======
+=======
+>>>>>>> v3.18
 ci_hdrc-y				:= core.o otg.o
 ci_hdrc-$(CONFIG_USB_CHIPIDEA_UDC)	+= udc.o
 ci_hdrc-$(CONFIG_USB_CHIPIDEA_HOST)	+= host.o
@@ -38,5 +41,8 @@ endif
 
 ifneq ($(CONFIG_OF),)
 	obj-$(CONFIG_USB_CHIPIDEA)	+= usbmisc_imx.o ci_hdrc_imx.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

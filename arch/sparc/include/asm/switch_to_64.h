@@ -49,8 +49,13 @@ do {	save_and_clear_fpu();						\
 	"brz,pt %%o7, switch_to_pc\n\t"					\
 	" mov	%%g7, %0\n\t"						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"sethi	%%hi(ret_from_syscall), %%g1\n\t"			\
 	"jmpl	%%g1 + %%lo(ret_from_syscall), %%g0\n\t"		\
+=======
+	"sethi	%%hi(ret_from_fork), %%g1\n\t"				\
+	"jmpl	%%g1 + %%lo(ret_from_fork), %%g0\n\t"			\
+>>>>>>> v3.18
 =======
 	"sethi	%%hi(ret_from_fork), %%g1\n\t"				\
 	"jmpl	%%g1 + %%lo(ret_from_fork), %%g0\n\t"			\
@@ -71,8 +76,13 @@ do {	save_and_clear_fpu();						\
 } while(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void synchronize_user_stack(void);
 extern void fault_in_user_windows(void);
+=======
+void synchronize_user_stack(void);
+void fault_in_user_windows(void);
+>>>>>>> v3.18
 =======
 void synchronize_user_stack(void);
 void fault_in_user_windows(void);

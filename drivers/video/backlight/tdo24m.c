@@ -301,6 +301,10 @@ static int tdo24m_set_power(struct lcd_device *ld, int power)
 {
 	struct tdo24m *lcd = lcd_get_data(ld);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -311,6 +315,10 @@ static int tdo24m_get_power(struct lcd_device *ld)
 {
 	struct tdo24m *lcd = lcd_get_data(ld);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -347,7 +355,11 @@ static int tdo24m_probe(struct spi_device *spi)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -398,8 +410,13 @@ static int tdo24m_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd->lcd_dev = lcd_device_register("tdo24m", &spi->dev,
 					lcd, &tdo24m_ops);
+=======
+	lcd->lcd_dev = devm_lcd_device_register(&spi->dev, "tdo24m", &spi->dev,
+						lcd, &tdo24m_ops);
+>>>>>>> v3.18
 =======
 	lcd->lcd_dev = devm_lcd_device_register(&spi->dev, "tdo24m", &spi->dev,
 						lcd, &tdo24m_ops);
@@ -410,6 +427,7 @@ static int tdo24m_probe(struct spi_device *spi)
 	spi_set_drvdata(spi, lcd);
 	err = tdo24m_power(lcd, FB_BLANK_UNBLANK);
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_unregister;
 
@@ -423,6 +441,11 @@ out_unregister:
 
 	return 0;
 >>>>>>> v3.18
+=======
+		return err;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int tdo24m_remove(struct spi_device *spi)
@@ -431,8 +454,11 @@ static int tdo24m_remove(struct spi_device *spi)
 
 	tdo24m_power(lcd, FB_BLANK_POWERDOWN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_device_unregister(lcd->lcd_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

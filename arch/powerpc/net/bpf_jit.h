@@ -40,6 +40,10 @@
 #define r_addr		6
 #define r_scratch1	7
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define r_scratch2	8
+>>>>>>> v3.18
 =======
 #define r_scratch2	8
 >>>>>>> v3.18
@@ -97,6 +101,11 @@ DECLARE_LOAD_FUNC(sk_load_byte_msh);
 #define PPC_LHZ(r, base, i)	EMIT(PPC_INST_LHZ | ___PPC_RT(r) |	      \
 				     ___PPC_RA(base) | IMM_L(i))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_LHBRX(r, base, b)	EMIT(PPC_INST_LHBRX | ___PPC_RT(r) |	      \
+				     ___PPC_RA(base) | ___PPC_RB(b))
+>>>>>>> v3.18
 =======
 #define PPC_LHBRX(r, base, b)	EMIT(PPC_INST_LHBRX | ___PPC_RT(r) |	      \
 				     ___PPC_RA(base) | ___PPC_RB(b))
@@ -196,7 +205,10 @@ DECLARE_LOAD_FUNC(sk_load_byte_msh);
 		} } while (0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PPC_LHBRX_OFFS(r, base, i) \
 		do { PPC_LI32(r, i); PPC_LHBRX(r, r, base); } while(0)
 #ifdef __LITTLE_ENDIAN__
@@ -205,6 +217,9 @@ DECLARE_LOAD_FUNC(sk_load_byte_msh);
 #define PPC_NTOHS_OFFS(r, base, i)	PPC_LHZ_OFFS(r, base, i)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool is_nearbranch(int offset)
 {

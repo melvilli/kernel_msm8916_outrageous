@@ -12,7 +12,10 @@
 #define __ASM_S390_PROCESSOR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CIF_MCCK_PENDING	0	/* machine check handling is pending */
 #define CIF_ASCE		1	/* user asce needs fixup / uaccess */
 #define CIF_NOHZ_DELAY		2	/* delay HZ disable for a tick */
@@ -22,6 +25,9 @@
 #define _CIF_NOHZ_DELAY		(1<<CIF_NOHZ_DELAY)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
@@ -34,7 +40,10 @@
 #include <asm/runtime_instr.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void set_cpu_flag(int flag)
 {
 	S390_lowcore.cpu_flags |= (1U << flag);
@@ -52,6 +61,9 @@ static inline int test_cpu_flag(int flag)
 
 #define arch_needs_cpu() test_cpu_flag(CIF_NOHZ_DELAY)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Default implementation of macro that returns current
@@ -81,8 +93,12 @@ extern void execve_tail(void);
 #else /* CONFIG_64BIT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TASK_SIZE_OF(tsk)	((tsk)->mm ? \
 				 (tsk)->mm->context.asce_limit : TASK_MAX_SIZE)
+=======
+#define TASK_SIZE_OF(tsk)	((tsk)->mm->context.asce_limit)
+>>>>>>> v3.18
 =======
 #define TASK_SIZE_OF(tsk)	((tsk)->mm->context.asce_limit)
 >>>>>>> v3.18
@@ -117,6 +133,10 @@ struct thread_struct {
 	mm_segment_t mm_segment;
 	unsigned long gmap_addr;	/* address of last gmap fault. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int gmap_pfault;	/* signal of a pending guest pfault */
+>>>>>>> v3.18
 =======
 	unsigned int gmap_pfault;	/* signal of a pending guest pfault */
 >>>>>>> v3.18
@@ -132,11 +152,14 @@ struct thread_struct {
 #ifdef CONFIG_64BIT
 	unsigned char trap_tdb[256];	/* Transaction abort diagnose block */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 };
 
 #define PER_FLAG_NO_TE		1UL	/* Flag to disable transactions. */
 =======
+=======
+>>>>>>> v3.18
 	__vector128 *vxrs;		/* Vector register save area */
 #endif
 };
@@ -150,6 +173,9 @@ struct thread_struct {
  * - abort random transactions at a random instruction if cleared.
  */
 #define PER_FLAG_TE_ABORT_RAND_TEND	4UL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef struct thread_struct thread_struct;
@@ -184,7 +210,11 @@ struct stack_frame {
  */
 #define start_thread(regs, new_psw, new_stackp) do {			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->psw.mask	= psw_user_bits | PSW_MASK_EA | PSW_MASK_BA;	\
+=======
+	regs->psw.mask	= PSW_USER_BITS | PSW_MASK_EA | PSW_MASK_BA;	\
+>>>>>>> v3.18
 =======
 	regs->psw.mask	= PSW_USER_BITS | PSW_MASK_EA | PSW_MASK_BA;	\
 >>>>>>> v3.18
@@ -195,6 +225,7 @@ struct stack_frame {
 
 #define start_thread31(regs, new_psw, new_stackp) do {			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->psw.mask	= psw_user_bits | PSW_MASK_BA;			\
 	regs->psw.addr	= new_psw | PSW_ADDR_AMODE;			\
 	regs->gprs[15]	= new_stackp;					\
@@ -202,10 +233,15 @@ struct stack_frame {
 	crst_table_downgrade(current->mm, 1UL << 31);			\
 	update_mm(current->mm, current);				\
 =======
+=======
+>>>>>>> v3.18
 	regs->psw.mask	= PSW_USER_BITS | PSW_MASK_BA;			\
 	regs->psw.addr	= new_psw | PSW_ADDR_AMODE;			\
 	regs->gprs[15]	= new_stackp;					\
 	crst_table_downgrade(current->mm, 1UL << 31);			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	execve_tail();							\
 } while (0)
@@ -230,11 +266,14 @@ extern void release_thread(struct task_struct *);
 extern unsigned long thread_saved_pc(struct task_struct *t);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void show_code(struct pt_regs *regs);
 extern void print_fn_code(unsigned char *code, unsigned long len);
 extern int insn_to_mnemonic(unsigned char *instruction, char *buf,
 			    unsigned int len);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned long get_wchan(struct task_struct *p);
@@ -244,6 +283,12 @@ unsigned long get_wchan(struct task_struct *p);
 #define KSTK_ESP(tsk)	(task_pt_regs(tsk)->gprs[15])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Has task runtime instrumentation enabled ? */
+#define is_ri_task(tsk) (!!(tsk)->thread.ri_cb)
+
+>>>>>>> v3.18
 =======
 /* Has task runtime instrumentation enabled ? */
 #define is_ri_task(tsk) (!!(tsk)->thread.ri_cb)
@@ -268,6 +313,11 @@ static inline void cpu_relax(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()  barrier()
+
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency()  barrier()
 
@@ -339,14 +389,20 @@ static inline unsigned long __rewind_psw(psw_t psw, unsigned long ilc)
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
  
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Function to stop a processor until the next interrupt occurs
  */
 void enabled_wait(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Function to drop a processor into disabled wait state
@@ -430,9 +486,15 @@ __set_psw_mask(unsigned long mask)
 
 #define local_mcck_enable() \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__set_psw_mask(psw_kernel_bits | PSW_MASK_DAT | PSW_MASK_MCHECK)
 #define local_mcck_disable() \
 	__set_psw_mask(psw_kernel_bits | PSW_MASK_DAT)
+=======
+	__set_psw_mask(PSW_KERNEL_BITS | PSW_MASK_DAT | PSW_MASK_MCHECK)
+#define local_mcck_disable() \
+	__set_psw_mask(PSW_KERNEL_BITS | PSW_MASK_DAT)
+>>>>>>> v3.18
 =======
 	__set_psw_mask(PSW_KERNEL_BITS | PSW_MASK_DAT | PSW_MASK_MCHECK)
 #define local_mcck_disable() \

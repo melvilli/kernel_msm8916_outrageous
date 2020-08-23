@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -28,6 +29,8 @@
 #include "xfs_trans_priv.h"
 #include "xfs_extfree_item.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
 #include "xfs_sb.h"
@@ -38,6 +41,9 @@
 #include "xfs_buf_item.h"
 #include "xfs_extfree_item.h"
 #include "xfs_log.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -87,12 +93,15 @@ __xfs_efi_release(
  * structure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC uint
 xfs_efi_item_size(
 	struct xfs_log_item	*lip)
 {
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 static inline int
 xfs_efi_item_sizeof(
 	struct xfs_efi_log_item *efip)
@@ -109,6 +118,9 @@ xfs_efi_item_size(
 {
 	*nvecs += 1;
 	*nbytes += xfs_efi_item_sizeof(EFI_ITEM(lip));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -123,21 +135,28 @@ STATIC void
 xfs_efi_item_format(
 	struct xfs_log_item	*lip,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_log_iovec	*log_vector)
 {
 	struct xfs_efi_log_item	*efip = EFI_ITEM(lip);
 	uint			size;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_log_vec	*lv)
 {
 	struct xfs_efi_log_item	*efip = EFI_ITEM(lip);
 	struct xfs_log_iovec	*vecp = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ASSERT(atomic_read(&efip->efi_next_extent) ==
 				efip->efi_format.efi_nextents);
 
 	efip->efi_format.efi_type = XFS_LI_EFI;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	size = sizeof(xfs_efi_log_format_t);
@@ -149,11 +168,16 @@ xfs_efi_item_format(
 	log_vector->i_type = XLOG_REG_TYPE_EFI_FORMAT;
 	ASSERT(size >= sizeof(xfs_efi_log_format_t));
 =======
+=======
+>>>>>>> v3.18
 	efip->efi_format.efi_size = 1;
 
 	xlog_copy_iovec(lv, &vecp, XLOG_REG_TYPE_EFI_FORMAT,
 			&efip->efi_format,
 			xfs_efi_item_sizeof(efip));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -338,7 +362,11 @@ xfs_efi_copy_format(xfs_log_iovec_t *buf, xfs_efi_log_format_t *dst_efi_fmt)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return EFSCORRUPTED;
+=======
+	return -EFSCORRUPTED;
+>>>>>>> v3.18
 =======
 	return -EFSCORRUPTED;
 >>>>>>> v3.18
@@ -385,12 +413,15 @@ xfs_efd_item_free(struct xfs_efd_log_item *efdp)
  * structure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC uint
 xfs_efd_item_size(
 	struct xfs_log_item	*lip)
 {
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 static inline int
 xfs_efd_item_sizeof(
 	struct xfs_efd_log_item *efdp)
@@ -407,6 +438,9 @@ xfs_efd_item_size(
 {
 	*nvecs += 1;
 	*nbytes += xfs_efd_item_sizeof(EFD_ITEM(lip));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -421,20 +455,27 @@ STATIC void
 xfs_efd_item_format(
 	struct xfs_log_item	*lip,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_log_iovec	*log_vector)
 {
 	struct xfs_efd_log_item	*efdp = EFD_ITEM(lip);
 	uint			size;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_log_vec	*lv)
 {
 	struct xfs_efd_log_item	*efdp = EFD_ITEM(lip);
 	struct xfs_log_iovec	*vecp = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ASSERT(efdp->efd_next_extent == efdp->efd_format.efd_nextents);
 
 	efdp->efd_format.efd_type = XFS_LI_EFD;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	size = sizeof(xfs_efd_log_format_t);
@@ -446,11 +487,16 @@ xfs_efd_item_format(
 	log_vector->i_type = XLOG_REG_TYPE_EFD_FORMAT;
 	ASSERT(size >= sizeof(xfs_efd_log_format_t));
 =======
+=======
+>>>>>>> v3.18
 	efdp->efd_format.efd_size = 1;
 
 	xlog_copy_iovec(lv, &vecp, XLOG_REG_TYPE_EFD_FORMAT,
 			&efdp->efd_format,
 			xfs_efd_item_sizeof(efdp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

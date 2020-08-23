@@ -71,7 +71,11 @@ extern bool __virt_addr_valid(unsigned long kaddr);
 #include <asm-generic/getorder.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __HAVE_ARCH_GATE_AREA 1
+=======
+#define HAVE_ARCH_HUGETLB_UNMAPPED_AREA
+>>>>>>> v3.18
 =======
 #define HAVE_ARCH_HUGETLB_UNMAPPED_AREA
 >>>>>>> v3.18

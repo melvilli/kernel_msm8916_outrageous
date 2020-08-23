@@ -197,6 +197,10 @@
  *		23 Oct 2006	macro		Big-endian host support.
  *		14 Dec 2006	macro		TURBOchannel support.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *		01 Jul 2014	macro		Fixes for DMA on 64-bit hosts.
+>>>>>>> v3.18
 =======
  *		01 Jul 2014	macro		Fixes for DMA on 64-bit hosts.
 >>>>>>> v3.18
@@ -211,7 +215,10 @@
 #include <linux/errno.h>
 #include <linux/fddidevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -233,8 +240,13 @@
 /* Version information string should be updated prior to each new release!  */
 #define DRV_NAME "defxx"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION "v1.10"
 #define DRV_RELDATE "2006/12/14"
+=======
+#define DRV_VERSION "v1.11"
+#define DRV_RELDATE "2014/07/01"
+>>>>>>> v3.18
 =======
 #define DRV_VERSION "v1.11"
 #define DRV_RELDATE "2014/07/01"
@@ -254,12 +266,15 @@ static char version[] =
 #define NEW_SKB_SIZE (PI_RCV_DATA_K_SIZE_MAX+128)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 #define DFX_BUS_PCI(dev) (dev->bus == &pci_bus_type)
 #else
 #define DFX_BUS_PCI(dev) 0
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_EISA
@@ -314,13 +329,19 @@ static int		dfx_hw_dma_uninit(DFX_board_t *bp, PI_UINT32 type);
 static int		dfx_rcv_init(DFX_board_t *bp, int get_buffers);
 static void		dfx_rcv_queue_process(DFX_board_t *bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void		dfx_rcv_flush(DFX_board_t *bp);
 =======
+=======
+>>>>>>> v3.18
 #ifdef DYNAMIC_BUFFERS
 static void		dfx_rcv_flush(DFX_board_t *bp);
 #else
 static inline void	dfx_rcv_flush(DFX_board_t *bp) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
@@ -460,7 +481,11 @@ static void dfx_get_bars(struct device *bdev,
 			 resource_size_t *bar_start, resource_size_t *bar_len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -496,7 +521,12 @@ static void dfx_get_bars(struct device *bdev,
 		} else {
 			*bar_start = base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*bar_len = PI_ESIC_K_CSR_IO_LEN;
+=======
+			*bar_len = PI_ESIC_K_CSR_IO_LEN +
+				   PI_ESIC_K_BURST_HOLDOFF_LEN;
+>>>>>>> v3.18
 =======
 			*bar_len = PI_ESIC_K_CSR_IO_LEN +
 				   PI_ESIC_K_BURST_HOLDOFF_LEN;
@@ -551,7 +581,11 @@ static int dfx_register(struct device *bdev)
 {
 	static int version_disp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -704,7 +738,11 @@ static void dfx_bus_init(struct net_device *dev)
 	DFX_board_t *bp = netdev_priv(dev);
 	struct device *bdev = bp->bus_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -726,6 +764,12 @@ static void dfx_bus_init(struct net_device *dev)
 		unsigned long base_addr = to_eisa_device(bdev)->base_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Disable the board before fiddling with the decoders.  */
+		outb(0, base_addr + PI_ESIC_K_SLOT_CNTRL);
+
+>>>>>>> v3.18
 =======
 		/* Disable the board before fiddling with the decoders.  */
 		outb(0, base_addr + PI_ESIC_K_SLOT_CNTRL);
@@ -758,6 +802,7 @@ static void dfx_bus_init(struct net_device *dev)
 		 * Enable memory decoding (MEMCS0) and/or port decoding
 		 * (IOCS1/IOCS0) as appropriate in Function Control
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Register.  One of the port chip selects seems to be
 		 * used for the Burst Holdoff register, but this bit of
 		 * documentation is missing and as yet it has not been
@@ -778,6 +823,8 @@ static void dfx_bus_init(struct net_device *dev)
 		outb(base_addr + PI_ESIC_K_IO_ADD_MASK_1_1, (val >> 8) & 0xff);
 		outb(base_addr + PI_ESIC_K_IO_ADD_MASK_1_0, val & 0xff);
 =======
+=======
+>>>>>>> v3.18
 		 * Register.  IOCS0 is used for PDQ registers, taking 16
 		 * 32-bit words, while IOCS1 is used for the Burst Holdoff
 		 * register, taking a single 32-bit word only.  We use the
@@ -805,6 +852,9 @@ static void dfx_bus_init(struct net_device *dev)
 		outb(val, base_addr + PI_ESIC_K_IO_ADD_MASK_1_1);
 		val = (PI_ESIC_K_BURST_HOLDOFF_LEN - 1) & ~3;
 		outb(val, base_addr + PI_ESIC_K_IO_ADD_MASK_1_0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Enable the decoders.  */
@@ -812,7 +862,11 @@ static void dfx_bus_init(struct net_device *dev)
 		if (dfx_use_mmio)
 			val |= PI_FUNCTION_CNTRL_M_MEMCS0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(base_addr + PI_ESIC_K_FUNCTION_CNTRL, val);
+=======
+		outb(val, base_addr + PI_ESIC_K_FUNCTION_CNTRL);
+>>>>>>> v3.18
 =======
 		outb(val, base_addr + PI_ESIC_K_FUNCTION_CNTRL);
 >>>>>>> v3.18
@@ -823,7 +877,11 @@ static void dfx_bus_init(struct net_device *dev)
 		 */
 		val = PI_SLOT_CNTRL_M_ENB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(base_addr + PI_ESIC_K_SLOT_CNTRL, val);
+=======
+		outb(val, base_addr + PI_ESIC_K_SLOT_CNTRL);
+>>>>>>> v3.18
 =======
 		outb(val, base_addr + PI_ESIC_K_SLOT_CNTRL);
 >>>>>>> v3.18
@@ -835,22 +893,32 @@ static void dfx_bus_init(struct net_device *dev)
 		val = inb(base_addr + PI_DEFEA_K_BURST_HOLDOFF);
 		if (dfx_use_mmio)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val |= PI_BURST_HOLDOFF_V_MEM_MAP;
 		else
 			val &= ~PI_BURST_HOLDOFF_V_MEM_MAP;
 		outb(base_addr + PI_DEFEA_K_BURST_HOLDOFF, val);
 =======
+=======
+>>>>>>> v3.18
 			val |= PI_BURST_HOLDOFF_M_MEM_MAP;
 		else
 			val &= ~PI_BURST_HOLDOFF_M_MEM_MAP;
 		outb(val, base_addr + PI_DEFEA_K_BURST_HOLDOFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Enable interrupts at EISA bus interface chip (ESIC) */
 		val = inb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 		val |= PI_CONFIG_STAT_0_M_INT_ENB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0, val);
+=======
+		outb(val, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
+>>>>>>> v3.18
 =======
 		outb(val, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 >>>>>>> v3.18
@@ -909,7 +977,11 @@ static void dfx_bus_uninit(struct net_device *dev)
 	DFX_board_t *bp = netdev_priv(dev);
 	struct device *bdev = bp->bus_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -927,7 +999,11 @@ static void dfx_bus_uninit(struct net_device *dev)
 		val = inb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 		val &= ~PI_CONFIG_STAT_0_M_INT_ENB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0, val);
+=======
+		outb(val, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
+>>>>>>> v3.18
 =======
 		outb(val, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 >>>>>>> v3.18
@@ -1071,7 +1147,11 @@ static int dfx_driver_init(struct net_device *dev, const char *print_name,
 	DFX_board_t *bp = netdev_priv(dev);
 	struct device *bdev = bp->bus_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -1176,9 +1256,15 @@ static int dfx_driver_init(struct net_device *dev, const char *print_name,
 					sizeof(PI_CONSUMER_BLOCK) +
 					(PI_ALIGN_K_DESC_BLK - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->kmalloced = top_v = dma_alloc_coherent(bp->bus_dev, alloc_size,
 						   &bp->kmalloced_dma,
 						   GFP_ATOMIC | __GFP_ZERO);
+=======
+	bp->kmalloced = top_v = dma_zalloc_coherent(bp->bus_dev, alloc_size,
+						    &bp->kmalloced_dma,
+						    GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	bp->kmalloced = top_v = dma_zalloc_coherent(bp->bus_dev, alloc_size,
 						    &bp->kmalloced_dma,
@@ -1243,6 +1329,7 @@ static int dfx_driver_init(struct net_device *dev, const char *print_name,
 	/* Display virtual and physical addresses if debug driver */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_printk("%s: Descriptor block virt = %0lX, phys = %0X\n",
 		   print_name,
 		   (long)bp->descr_block_virt, bp->descr_block_phys);
@@ -1255,6 +1342,8 @@ static int dfx_driver_init(struct net_device *dev, const char *print_name,
 	DBG_printk("%s: Consumer block virt = %0lX, phys = %0X\n",
 		   print_name, (long)bp->cons_block_virt, bp->cons_block_phys);
 =======
+=======
+>>>>>>> v3.18
 	DBG_printk("%s: Descriptor block virt = %p, phys = %pad\n",
 		   print_name, bp->descr_block_virt, &bp->descr_block_phys);
 	DBG_printk("%s: Command Request buffer virt = %p, phys = %pad\n",
@@ -1265,6 +1354,9 @@ static int dfx_driver_init(struct net_device *dev, const char *print_name,
 		   print_name, bp->rcv_block_virt, &bp->rcv_block_phys);
 	DBG_printk("%s: Consumer block virt = %p, phys = %pad\n",
 		   print_name, bp->cons_block_virt, &bp->cons_block_phys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return DFX_K_SUCCESS;
@@ -2004,7 +2096,11 @@ static irqreturn_t dfx_interrupt(int irq, void *dev_id)
 	DFX_board_t *bp = netdev_priv(dev);
 	struct device *bdev = bp->bus_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -2051,7 +2147,11 @@ static irqreturn_t dfx_interrupt(int irq, void *dev_id)
 		/* Disable interrupts at the ESIC */
 		status &= ~PI_CONFIG_STAT_0_M_INT_ENB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0, status);
+=======
+		outb(status, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
+>>>>>>> v3.18
 =======
 		outb(status, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 >>>>>>> v3.18
@@ -2063,7 +2163,11 @@ static irqreturn_t dfx_interrupt(int irq, void *dev_id)
 		status = inb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 		status |= PI_CONFIG_STAT_0_M_INT_ENB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(base_addr + PI_ESIC_K_IO_CONFIG_STAT_0, status);
+=======
+		outb(status, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
+>>>>>>> v3.18
 =======
 		outb(status, base_addr + PI_ESIC_K_IO_CONFIG_STAT_0);
 >>>>>>> v3.18
@@ -2995,7 +3099,11 @@ static int dfx_hw_dma_uninit(DFX_board_t *bp, PI_UINT32 type)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#ifdef DYNAMIC_BUFFERS
+>>>>>>> v3.18
 =======
 #ifdef DYNAMIC_BUFFERS
 >>>>>>> v3.18
@@ -3009,7 +3117,11 @@ static void my_skb_align(struct sk_buff *skb, int n)
 	skb_reserve(skb, v - x);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -3077,12 +3189,15 @@ static int dfx_rcv_init(DFX_board_t *bp, int get_buffers)
 		for (j = 0; (i + j) < (int)PI_RCV_DATA_K_NUM_ENTRIES; j += bp->rcv_bufs_to_post)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct sk_buff *newskb = __netdev_alloc_skb(bp->dev, NEW_SKB_SIZE, GFP_NOIO);
 			if (!newskb)
 				return -ENOMEM;
 			bp->descr_block_virt->rcv_data[i+j].long_0 = (u32) (PI_RCV_DESCR_M_SOP |
 				((PI_RCV_DATA_K_SIZE_MAX / PI_ALIGN_K_RCV_DATA_BUFF) << PI_RCV_DESCR_V_SEG_LEN));
 =======
+=======
+>>>>>>> v3.18
 			struct sk_buff *newskb;
 			dma_addr_t dma_addr;
 
@@ -3090,6 +3205,9 @@ static int dfx_rcv_init(DFX_board_t *bp, int get_buffers)
 						    GFP_NOIO);
 			if (!newskb)
 				return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * align to 128 bytes for compatibility with
@@ -3098,11 +3216,14 @@ static int dfx_rcv_init(DFX_board_t *bp, int get_buffers)
 
 			my_skb_align(newskb, 128);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bp->descr_block_virt->rcv_data[i + j].long_1 =
 				(u32)dma_map_single(bp->bus_dev, newskb->data,
 						    NEW_SKB_SIZE,
 						    DMA_FROM_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 			dma_addr = dma_map_single(bp->bus_dev,
 						  newskb->data,
 						  PI_RCV_DATA_K_SIZE_MAX,
@@ -3119,6 +3240,9 @@ static int dfx_rcv_init(DFX_board_t *bp, int get_buffers)
 			bp->descr_block_virt->rcv_data[i + j].long_1 =
 				(u32)dma_addr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * p_rcv_buff_va is only used inside the
@@ -3187,7 +3311,11 @@ static void dfx_rcv_queue_process(
 	char				*p_buff;			/* ptr to start of packet receive buffer (FMC descriptor) */
 	u32					descr, pkt_len;		/* FMC descriptor field and packet length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff		*skb;				/* pointer to a sk_buff to hold incoming packet data */
+=======
+	struct sk_buff		*skb = NULL;			/* pointer to a sk_buff to hold incoming packet data */
+>>>>>>> v3.18
 =======
 	struct sk_buff		*skb = NULL;			/* pointer to a sk_buff to hold incoming packet data */
 >>>>>>> v3.18
@@ -3199,7 +3327,11 @@ static void dfx_rcv_queue_process(
 		{
 		/* Process any errors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+		dma_addr_t dma_addr;
+>>>>>>> v3.18
 =======
 		dma_addr_t dma_addr;
 >>>>>>> v3.18
@@ -3212,12 +3344,18 @@ static void dfx_rcv_queue_process(
 		p_buff = bp->p_rcv_buff_va[entry];
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		dma_addr = bp->descr_block_virt->rcv_data[entry].long_1;
 		dma_sync_single_for_cpu(bp->bus_dev,
 					dma_addr + RCV_BUFF_K_DESCR,
 					sizeof(u32),
 					DMA_FROM_DEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(&descr, p_buff + RCV_BUFF_K_DESCR, sizeof(u32));
 
@@ -3240,6 +3378,7 @@ static void dfx_rcv_queue_process(
 				bp->rcv_length_errors++;
 			else{
 #ifdef DYNAMIC_BUFFERS
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (pkt_len > SKBUFF_RX_COPYBREAK) {
 					struct sk_buff *newskb;
@@ -3267,6 +3406,8 @@ static void dfx_rcv_queue_process(
 #endif
 					skb = dev_alloc_skb(pkt_len+3);	/* alloc new buffer to pass up, add room for PRH */
 =======
+=======
+>>>>>>> v3.18
 				struct sk_buff *newskb = NULL;
 
 				if (pkt_len > SKBUFF_RX_COPYBREAK) {
@@ -3307,6 +3448,9 @@ static void dfx_rcv_queue_process(
 					 * add room for PRH. */
 					skb = netdev_alloc_skb(bp->dev,
 							       pkt_len + 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (skb == NULL)
 					{
@@ -3316,12 +3460,15 @@ static void dfx_rcv_queue_process(
 					}
 				else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef DYNAMIC_BUFFERS
 					if (! rx_in_place)
 #endif
 					{
 						/* Receive buffer allocated, pass receive packet up */
 =======
+=======
+>>>>>>> v3.18
 					if (!rx_in_place) {
 						/* Receive buffer allocated, pass receive packet up */
 						dma_sync_single_for_cpu(
@@ -3330,6 +3477,9 @@ static void dfx_rcv_queue_process(
 							RCV_BUFF_K_PADDING,
 							pkt_len + 3,
 							DMA_FROM_DEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 						skb_copy_to_linear_data(skb,
@@ -3434,6 +3584,10 @@ static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
 	PI_XMT_DESCR		*p_xmt_descr;		/* ptr to transmit descriptor block entry */
 	XMT_DRIVER_DESCR	*p_xmt_drv_descr;	/* ptr to transmit driver descriptor */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma_addr_t		dma_addr;
+>>>>>>> v3.18
 =======
 	dma_addr_t		dma_addr;
 >>>>>>> v3.18
@@ -3485,7 +3639,10 @@ static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Write the three PRH bytes immediately before the FC byte */
 
 	skb_push(skb, 3);
@@ -3500,6 +3657,9 @@ static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
 		return NETDEV_TX_BUSY;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&bp->lock, flags);
 
@@ -3522,6 +3682,7 @@ static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
 	p_xmt_drv_descr = &(bp->xmt_drv_descr_blk[prod++]);	/* also bump producer index */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Write the three PRH bytes immediately before the FC byte */
 
 	skb_push(skb,3);
@@ -3529,6 +3690,8 @@ static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
 	skb->data[1] = DFX_PRH1_BYTE;	/* in the Motorola FDDI MAC chip */
 	skb->data[2] = DFX_PRH2_BYTE;	/* specification */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -3560,8 +3723,12 @@ static netdev_tx_t dfx_xmt_queue_pkt(struct sk_buff *skb,
 
 	p_xmt_descr->long_0	= (u32) (PI_XMT_DESCR_M_SOP | PI_XMT_DESCR_M_EOP | ((skb->len) << PI_XMT_DESCR_V_SEG_LEN));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_xmt_descr->long_1 = (u32)dma_map_single(bp->bus_dev, skb->data,
 						  skb->len, DMA_TO_DEVICE);
+=======
+	p_xmt_descr->long_1 = (u32)dma_addr;
+>>>>>>> v3.18
 =======
 	p_xmt_descr->long_1 = (u32)dma_addr;
 >>>>>>> v3.18
@@ -3728,9 +3895,12 @@ static void dfx_rcv_flush( DFX_board_t *bp )
 			struct sk_buff *skb;
 			skb = (struct sk_buff *)bp->p_rcv_buff_va[i+j];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (skb)
 				dev_kfree_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 			if (skb) {
 				dma_unmap_single(bp->bus_dev,
 						 bp->descr_block_virt->rcv_data[i+j].long_1,
@@ -3738,16 +3908,22 @@ static void dfx_rcv_flush( DFX_board_t *bp )
 						 DMA_FROM_DEVICE);
 				dev_kfree_skb(skb);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bp->p_rcv_buff_va[i+j] = NULL;
 		}
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline void dfx_rcv_flush( DFX_board_t *bp )
 {
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* DYNAMIC_BUFFERS */
@@ -3866,7 +4042,11 @@ static void dfx_unregister(struct device *bdev)
 	struct net_device *dev = dev_get_drvdata(bdev);
 	DFX_board_t *bp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dfx_bus_pci = DFX_BUS_PCI(bdev);
+=======
+	int dfx_bus_pci = dev_is_pci(bdev);
+>>>>>>> v3.18
 =======
 	int dfx_bus_pci = dev_is_pci(bdev);
 >>>>>>> v3.18
@@ -3913,7 +4093,11 @@ static int dfx_pci_register(struct pci_dev *, const struct pci_device_id *);
 static void dfx_pci_unregister(struct pci_dev *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dfx_pci_table) = {
+=======
+static const struct pci_device_id dfx_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id dfx_pci_table[] = {
 >>>>>>> v3.18

@@ -68,7 +68,11 @@ static void print_pll(struct device *dev, struct smiapp_pll *pll)
 	dev_dbg(dev, "pre_pll_clk_div\t%d\n",  pll->pre_pll_clk_div);
 	dev_dbg(dev, "pll_multiplier \t%d\n",  pll->pll_multiplier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(pll->flags & SMIAPP_PLL_FLAG_NO_OP_CLOCKS)) {
+=======
+	if (pll->flags != SMIAPP_PLL_FLAG_NO_OP_CLOCKS) {
+>>>>>>> v3.18
 =======
 	if (pll->flags != SMIAPP_PLL_FLAG_NO_OP_CLOCKS) {
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ static void print_pll(struct device *dev, struct smiapp_pll *pll)
 	dev_dbg(dev, "pll_ip_clk_freq_hz \t%d\n", pll->pll_ip_clk_freq_hz);
 	dev_dbg(dev, "pll_op_clk_freq_hz \t%d\n", pll->pll_op_clk_freq_hz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(pll->flags & SMIAPP_PLL_FLAG_NO_OP_CLOCKS)) {
+=======
+	if (pll->flags & SMIAPP_PLL_FLAG_NO_OP_CLOCKS) {
+>>>>>>> v3.18
 =======
 	if (pll->flags & SMIAPP_PLL_FLAG_NO_OP_CLOCKS) {
 >>>>>>> v3.18
@@ -96,7 +104,10 @@ static void print_pll(struct device *dev, struct smiapp_pll *pll)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Heuristically guess the PLL tree for a given common multiplier and
  * divisor. Begin with the operational timing and continue to video
@@ -108,6 +119,9 @@ static void print_pll(struct device *dev, struct smiapp_pll *pll)
  *
  * @return Zero on success, error code on error.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __smiapp_pll_calculate(struct device *dev,
 				  const struct smiapp_pll_limits *limits,
@@ -118,13 +132,19 @@ static int __smiapp_pll_calculate(struct device *dev,
 	uint32_t best_pix_div = INT_MAX >> 1;
 	uint32_t vt_op_binning_div;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Higher multipliers (and divisors) are often required than
 	 * necessitated by the external clock and the output clocks.
 	 * There are limits for all values in the clock tree. These
 	 * are the minimum and maximum multiplier for mul.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t more_mul_min, more_mul_max;
 	uint32_t more_mul_factor;

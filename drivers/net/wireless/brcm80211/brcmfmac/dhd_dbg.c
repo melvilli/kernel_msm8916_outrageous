@@ -23,7 +23,10 @@
 #include "dhd_bus.h"
 #include "dhd_dbg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tracepoint.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -46,7 +49,10 @@ void brcmf_debugfs_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int brcmf_debugfs_chipinfo_read(struct seq_file *seq, void *data)
 {
 	struct brcmf_bus *bus = dev_get_drvdata(seq->private);
@@ -56,6 +62,9 @@ static int brcmf_debugfs_chipinfo_read(struct seq_file *seq, void *data)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int brcmf_debugfs_attach(struct brcmf_pub *drvr)
 {
@@ -66,7 +75,13 @@ int brcmf_debugfs_attach(struct brcmf_pub *drvr)
 
 	drvr->dbgfs_dir = debugfs_create_dir(dev_name(dev), root_folder);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(drvr->dbgfs_dir);
+=======
+	brcmf_debugfs_add_entry(drvr, "chipinfo", brcmf_debugfs_chipinfo_read);
+
+	return PTR_ERR_OR_ZERO(drvr->dbgfs_dir);
+>>>>>>> v3.18
 =======
 	brcmf_debugfs_add_entry(drvr, "chipinfo", brcmf_debugfs_chipinfo_read);
 
@@ -85,6 +100,7 @@ struct dentry *brcmf_debugfs_get_devdir(struct brcmf_pub *drvr)
 	return drvr->dbgfs_dir;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static
 ssize_t brcmf_debugfs_sdio_counter_read(struct file *f, char __user *data,
@@ -225,6 +241,8 @@ void brcmf_debugfs_create_fws_stats(struct brcmf_pub *drvr,
 		debugfs_create_file("fws_stats", S_IRUGO, dentry,
 				    stats, &brcmf_debugfs_fws_stats_ops);
 =======
+=======
+>>>>>>> v3.18
 struct brcmf_debugfs_entry {
 	int (*read)(struct seq_file *seq, void *data);
 	struct brcmf_pub *drvr;
@@ -265,5 +283,8 @@ int brcmf_debugfs_add_entry(struct brcmf_pub *drvr, const char *fn,
 				     &brcmf_debugfs_def_ops);
 
 	return PTR_ERR_OR_ZERO(dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

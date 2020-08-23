@@ -24,7 +24,11 @@
 #include <linux/i2c.h>
 #include <linux/i2c-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18
@@ -229,6 +233,7 @@ static struct ep93xx_spi_chip_ops vision_spi_flash_hw = {
 #define VISION_SPI_MMC_CD	EP93XX_GPIO_LINE_EGPIO15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct gpio vision_spi_mmc_gpios[] = {
 	{ VISION_SPI_MMC_WP, GPIOF_DIR_IN, "mmc_spi:wp" },
 	{ VISION_SPI_MMC_CD, GPIOF_DIR_IN, "mmc_spi:cd" },
@@ -286,6 +291,8 @@ static struct mmc_spi_platform_data vision_spi_mmc_data = {
 	.powerup_msecs	= 100,
 	.ocr_mask	= MMC_VDD_32_33 | MMC_VDD_33_34,
 =======
+=======
+>>>>>>> v3.18
 static struct mmc_spi_platform_data vision_spi_mmc_data = {
 	.detect_delay	= 100,
 	.powerup_msecs	= 100,
@@ -295,6 +302,9 @@ static struct mmc_spi_platform_data vision_spi_mmc_data = {
 	.cd_debounce	= 1,
 	.ro_gpio	= VISION_SPI_MMC_WP,
 	.caps2		= MMC_CAP2_RO_ACTIVE_HIGH,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

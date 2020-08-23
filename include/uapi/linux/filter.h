@@ -8,7 +8,11 @@
 #include <linux/compiler.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/bpf_common.h>
+>>>>>>> v3.18
 =======
 #include <linux/bpf_common.h>
 >>>>>>> v3.18
@@ -36,6 +40,7 @@ struct sock_fprog {	/* Required for SO_ATTACH_FILTER. */
 	struct sock_filter __user *filter;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Instruction classes
@@ -89,6 +94,8 @@ struct sock_fprog {	/* Required for SO_ATTACH_FILTER. */
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* ret - BPF_K and BPF_X also apply */
 #define BPF_RVAL(code)  ((code) & 0x18)
 #define         BPF_A           0x10
@@ -99,10 +106,13 @@ struct sock_fprog {	/* Required for SO_ATTACH_FILTER. */
 #define         BPF_TXA         0x80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef BPF_MAXINSNS
 #define BPF_MAXINSNS 4096
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -141,7 +151,12 @@ struct sock_fprog {	/* Required for SO_ATTACH_FILTER. */
 #define SKF_AD_VLAN_TAG_PRESENT 48
 #define SKF_AD_PAY_OFFSET	52
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SKF_AD_MAX	56
+=======
+#define SKF_AD_RANDOM	56
+#define SKF_AD_MAX	60
+>>>>>>> v3.18
 =======
 #define SKF_AD_RANDOM	56
 #define SKF_AD_MAX	60

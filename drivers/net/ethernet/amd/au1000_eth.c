@@ -28,8 +28,12 @@
  *
  *  You should have received a copy of the GNU General Public License along
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
+=======
+ *  with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *  with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -53,7 +57,10 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -99,7 +106,10 @@ MODULE_LICENSE("GPL");
 MODULE_VERSION(DRV_VERSION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* AU1000 MAC registers and bits */
 #define MAC_CONTROL		0x0
 #  define MAC_RX_ENABLE		(1 << 2)
@@ -218,6 +228,9 @@ MODULE_VERSION(DRV_VERSION);
 #define MAC_RX_BUFF3_STATUS	0x30
 #define MAC_RX_BUFF3_ADDR	0x34
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Theory of operation
@@ -283,17 +296,23 @@ static void au1000_enable_mac(struct net_device *dev, int force_reset)
 	if (force_reset || (!aup->mac_enabled)) {
 		writel(MAC_EN_CLOCK_ENABLE, aup->enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync_delay(2);
 		writel((MAC_EN_RESET0 | MAC_EN_RESET1 | MAC_EN_RESET2
 				| MAC_EN_CLOCK_ENABLE), aup->enable);
 		au_sync_delay(2);
 =======
+=======
+>>>>>>> v3.18
 		wmb(); /* drain writebuffer */
 		mdelay(2);
 		writel((MAC_EN_RESET0 | MAC_EN_RESET1 | MAC_EN_RESET2
 				| MAC_EN_CLOCK_ENABLE), aup->enable);
 		wmb(); /* drain writebuffer */
 		mdelay(2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		aup->mac_enabled = 1;
@@ -413,7 +432,12 @@ static void au1000_hard_stop(struct net_device *dev)
 	reg &= ~(MAC_RX_ENABLE | MAC_TX_ENABLE);
 	writel(reg, &aup->mac->control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync_delay(10);
+=======
+	wmb(); /* drain writebuffer */
+	mdelay(10);
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 	mdelay(10);
@@ -431,7 +455,12 @@ static void au1000_enable_rx_tx(struct net_device *dev)
 	reg |= (MAC_RX_ENABLE | MAC_TX_ENABLE);
 	writel(reg, &aup->mac->control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync_delay(10);
+=======
+	wmb(); /* drain writebuffer */
+	mdelay(10);
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 	mdelay(10);
@@ -486,7 +515,12 @@ au1000_adjust_link(struct net_device *dev)
 		}
 		writel(reg, &aup->mac->control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync_delay(1);
+=======
+		wmb(); /* drain writebuffer */
+		mdelay(1);
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 		mdelay(1);
@@ -655,15 +689,21 @@ static void au1000_reset_mac_unlocked(struct net_device *dev)
 
 	writel(MAC_EN_CLOCK_ENABLE, aup->enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync_delay(2);
 	writel(0, aup->enable);
 	au_sync_delay(2);
 =======
+=======
+>>>>>>> v3.18
 	wmb(); /* drain writebuffer */
 	mdelay(2);
 	writel(0, aup->enable);
 	wmb(); /* drain writebuffer */
 	mdelay(2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	aup->tx_full = 0;
@@ -815,7 +855,11 @@ static int au1000_init(struct net_device *dev)
 		aup->rx_dma_ring[i]->buff_stat |= RX_DMA_ENABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -836,7 +880,11 @@ static int au1000_init(struct net_device *dev)
 	writel(control, &aup->mac->control);
 	writel(0x8100, &aup->mac->vlan1_tag); /* activate vlan support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -931,7 +979,11 @@ static int au1000_rx(struct net_device *dev)
 		prxd->buff_stat = (u32)(pDB->dma_addr | RX_DMA_ENABLE);
 		aup->rx_head = (aup->rx_head + 1) & (NUM_RX_DMA - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -983,7 +1035,11 @@ static void au1000_tx_ack(struct net_device *dev)
 		ptxd->buff_stat &= ~TX_T_DONE;
 		ptxd->len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -1118,7 +1174,11 @@ static netdev_tx_t au1000_tx(struct sk_buff *skb, struct net_device *dev)
 
 	ptxd->buff_stat = pDB->dma_addr | TX_DMA_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -1198,7 +1258,10 @@ static const struct net_device_ops au1000_netdev_ops = {
 static int au1000_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static unsigned version_printed;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct au1000_private *aup = NULL;
@@ -1315,7 +1378,11 @@ static int au1000_probe(struct platform_device *pdev)
 	aup->mac_enabled = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd = pdev->dev.platform_data;
+=======
+	pd = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pd = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1326,7 +1393,11 @@ static int au1000_probe(struct platform_device *pdev)
 	} else {
 		if (is_valid_ether_addr(pd->mac)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(dev->dev_addr, pd->mac, 6);
+=======
+			memcpy(dev->dev_addr, pd->mac, ETH_ALEN);
+>>>>>>> v3.18
 =======
 			memcpy(dev->dev_addr, pd->mac, ETH_ALEN);
 >>>>>>> v3.18
@@ -1423,7 +1494,11 @@ static int au1000_probe(struct platform_device *pdev)
 	dev->irq = irq;
 	dev->netdev_ops = &au1000_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &au1000_ethtool_ops);
+=======
+	dev->ethtool_ops = &au1000_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &au1000_ethtool_ops;
 >>>>>>> v3.18
@@ -1444,9 +1519,14 @@ static int au1000_probe(struct platform_device *pdev)
 	netdev_info(dev, "Au1xx0 Ethernet found at 0x%lx, irq %d\n",
 			(unsigned long)base->start, irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (version_printed++ == 0)
 		pr_info("%s version %s %s\n",
 					DRV_NAME, DRV_VERSION, DRV_AUTHOR);
+=======
+
+	pr_info_once("%s version %s %s\n", DRV_NAME, DRV_VERSION, DRV_AUTHOR);
+>>>>>>> v3.18
 =======
 
 	pr_info_once("%s version %s %s\n", DRV_NAME, DRV_VERSION, DRV_AUTHOR);
@@ -1502,8 +1582,11 @@ static int au1000_remove(struct platform_device *pdev)
 	struct resource *base, *macen;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unregister_netdev(dev);

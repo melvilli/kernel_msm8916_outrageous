@@ -406,8 +406,11 @@ struct bfa_lps_s {
 	u16		pdusz;		/*  max receive PDU size	*/
 	u16		pr_bbcred;	/*  BB_CREDIT from peer		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		pr_bbscn;	/*  BB_SCN from peer		*/
 	u8		bb_scn;		/*  local BB_SCN		*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8		lsrjt_rsn;	/*  LSRJT reason		*/
@@ -514,7 +517,10 @@ struct bfa_fcport_s {
 	bfa_boolean_t		beacon; /*  port beacon status */
 	bfa_boolean_t		link_e2e_beacon; /*  link beacon status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa_boolean_t		bbsc_op_state;	/* Cred recov Oper State */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct bfa_fcport_trunk_s trunk;
@@ -522,6 +528,11 @@ struct bfa_fcport_s {
 	struct bfa_mem_dma_s	fcport_dma;
 	bfa_boolean_t		stats_dma_ready;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bfa_bbcr_attr_s	bbcr_attr;
+	enum bfa_fec_state_s	fec_state;
+>>>>>>> v3.18
 =======
 	struct bfa_bbcr_attr_s	bbcr_attr;
 	enum bfa_fec_state_s	fec_state;
@@ -564,6 +575,10 @@ void bfa_fcport_event_register(struct bfa_s *bfa,
 bfa_boolean_t bfa_fcport_is_disabled(struct bfa_s *bfa);
 bfa_boolean_t bfa_fcport_is_dport(struct bfa_s *bfa);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bfa_boolean_t bfa_fcport_is_ddport(struct bfa_s *bfa);
+>>>>>>> v3.18
 =======
 bfa_boolean_t bfa_fcport_is_ddport(struct bfa_s *bfa);
 >>>>>>> v3.18
@@ -572,7 +587,11 @@ bfa_status_t bfa_fcport_set_qos_bw(struct bfa_s *bfa,
 enum bfa_port_speed bfa_fcport_get_ratelim_speed(struct bfa_s *bfa);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bfa_fcport_set_tx_bbcredit(struct bfa_s *bfa, u16 tx_bbcredit, u8 bb_scn);
+=======
+void bfa_fcport_set_tx_bbcredit(struct bfa_s *bfa, u16 tx_bbcredit);
+>>>>>>> v3.18
 =======
 void bfa_fcport_set_tx_bbcredit(struct bfa_s *bfa, u16 tx_bbcredit);
 >>>>>>> v3.18
@@ -591,11 +610,17 @@ void bfa_fcport_dportdisable(struct bfa_s *bfa);
 bfa_status_t bfa_fcport_is_pbcdisabled(struct bfa_s *bfa);
 void bfa_fcport_cfg_faa(struct bfa_s *bfa, u8 state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bfa_status_t bfa_fcport_cfg_bbcr(struct bfa_s *bfa,
 			bfa_boolean_t on_off, u8 bb_scn);
 bfa_status_t bfa_fcport_get_bbcr_attr(struct bfa_s *bfa,
 			struct bfa_bbcr_attr_s *bbcr_attr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -694,7 +719,11 @@ void bfa_lps_delete(struct bfa_lps_s *lps);
 void bfa_lps_flogi(struct bfa_lps_s *lps, void *uarg, u8 alpa,
 		   u16 pdusz, wwn_t pwwn, wwn_t nwwn,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   bfa_boolean_t auth_en, u8 bb_scn);
+=======
+		   bfa_boolean_t auth_en);
+>>>>>>> v3.18
 =======
 		   bfa_boolean_t auth_en);
 >>>>>>> v3.18
@@ -743,11 +772,14 @@ struct bfa_dport_s {
 	struct bfa_s	*bfa;		/* Back pointer to BFA	*/
 	bfa_sm_t	sm;		/* finite state machine */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32		msgtag;		/* firmware msg tag for reply */
 	struct bfa_reqq_wait_s reqq_wait;
 	bfa_cb_diag_t	cbfn;
 	void		*cbarg;
 =======
+=======
+>>>>>>> v3.18
 	struct bfa_reqq_wait_s reqq_wait;
 	bfa_cb_diag_t	cbfn;
 	void		*cbarg;
@@ -760,6 +792,9 @@ struct bfa_dport_s {
 	wwn_t		rp_pwwn;
 	wwn_t		rp_nwwn;
 	struct bfa_diag_dport_result_s result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -785,6 +820,7 @@ bfa_status_t	bfa_fcdiag_queuetest(struct bfa_s *bfa, u32 ignore,
 			bfa_cb_diag_t cbfn, void *cbarg);
 bfa_status_t	bfa_fcdiag_lb_is_running(struct bfa_s *bfa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 bfa_status_t	bfa_dport_enable(struct bfa_s *bfa, bfa_cb_diag_t cbfn,
 				 void *cbarg);
 bfa_status_t	bfa_dport_disable(struct bfa_s *bfa, bfa_cb_diag_t cbfn,
@@ -792,6 +828,8 @@ bfa_status_t	bfa_dport_disable(struct bfa_s *bfa, bfa_cb_diag_t cbfn,
 bfa_status_t	bfa_dport_get_state(struct bfa_s *bfa,
 				    enum bfa_dport_state *state);
 =======
+=======
+>>>>>>> v3.18
 bfa_status_t	bfa_dport_enable(struct bfa_s *bfa, u32 lpcnt, u32 pat,
 					bfa_cb_diag_t cbfn, void *cbarg);
 bfa_status_t	bfa_dport_disable(struct bfa_s *bfa, bfa_cb_diag_t cbfn,
@@ -800,6 +838,9 @@ bfa_status_t	bfa_dport_start(struct bfa_s *bfa, u32 lpcnt, u32 pat,
 				bfa_cb_diag_t cbfn, void *cbarg);
 bfa_status_t	bfa_dport_show(struct bfa_s *bfa,
 				struct bfa_diag_dport_result_s *result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __BFA_SVC_H__ */

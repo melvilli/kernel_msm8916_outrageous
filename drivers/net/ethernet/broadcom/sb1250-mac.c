@@ -14,8 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -41,7 +45,10 @@
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bitops.h>
@@ -2205,7 +2212,11 @@ static const struct net_device_ops sbmac_netdev_ops = {
 static int sbmac_init(struct platform_device *pldev, long long base)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pldev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pldev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pldev);
 >>>>>>> v3.18
@@ -2287,7 +2298,11 @@ static int sbmac_init(struct platform_device *pldev, long long base)
 		goto free_mdio;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pldev->dev, sc->mii_bus);
+=======
+	platform_set_drvdata(pldev, sc->mii_bus);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pldev, sc->mii_bus);
 >>>>>>> v3.18
@@ -2316,7 +2331,10 @@ static int sbmac_init(struct platform_device *pldev, long long base)
 unreg_mdio:
 	mdiobus_unregister(sc->mii_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pldev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 free_mdio:
@@ -2643,7 +2661,11 @@ static int sbmac_probe(struct platform_device *pldev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pldev->dev, dev);
+=======
+	platform_set_drvdata(pldev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pldev, dev);
 >>>>>>> v3.18
@@ -2672,7 +2694,11 @@ out_out:
 static int __exit sbmac_remove(struct platform_device *pldev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pldev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pldev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pldev);
 >>>>>>> v3.18

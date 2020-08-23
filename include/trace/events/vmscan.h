@@ -192,6 +192,10 @@ TRACE_EVENT(mm_shrink_slab_start,
 		__field(struct shrinker *, shr)
 		__field(void *, shrink)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(int, nid)
+>>>>>>> v3.18
 =======
 		__field(int, nid)
 >>>>>>> v3.18
@@ -207,7 +211,12 @@ TRACE_EVENT(mm_shrink_slab_start,
 	TP_fast_assign(
 		__entry->shr = shr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->shrink = shr->shrink;
+=======
+		__entry->shrink = shr->scan_objects;
+		__entry->nid = sc->nid;
+>>>>>>> v3.18
 =======
 		__entry->shrink = shr->scan_objects;
 		__entry->nid = sc->nid;
@@ -222,14 +231,20 @@ TRACE_EVENT(mm_shrink_slab_start,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("%pF %p: objects to shrink %ld gfp_flags %s pgs_scanned %ld lru_pgs %ld cache items %ld delta %lld total_scan %ld",
 		__entry->shrink,
 		__entry->shr,
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("%pF %p: nid: %d objects to shrink %ld gfp_flags %s pgs_scanned %ld lru_pgs %ld cache items %ld delta %lld total_scan %ld",
 		__entry->shrink,
 		__entry->shr,
 		__entry->nid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__entry->nr_objects_to_shrink,
 		show_gfp_flags(__entry->gfp_flags),
@@ -242,6 +257,7 @@ TRACE_EVENT(mm_shrink_slab_start,
 
 TRACE_EVENT(mm_shrink_slab_end,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct shrinker *shr, int shrinker_retval,
 		long unused_scan_cnt, long new_scan_cnt),
 
@@ -250,6 +266,8 @@ TRACE_EVENT(mm_shrink_slab_end,
 	TP_STRUCT__entry(
 		__field(struct shrinker *, shr)
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(struct shrinker *shr, int nid, int shrinker_retval,
 		long unused_scan_cnt, long new_scan_cnt, long total_scan),
 
@@ -259,6 +277,9 @@ TRACE_EVENT(mm_shrink_slab_end,
 	TP_STRUCT__entry(
 		__field(struct shrinker *, shr)
 		__field(int, nid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__field(void *, shrink)
 		__field(long, unused_scan)
@@ -269,6 +290,7 @@ TRACE_EVENT(mm_shrink_slab_end,
 
 	TP_fast_assign(
 		__entry->shr = shr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->shrink = shr->shrink;
 		__entry->unused_scan = unused_scan_cnt;
@@ -281,6 +303,8 @@ TRACE_EVENT(mm_shrink_slab_end,
 		__entry->shrink,
 		__entry->shr,
 =======
+=======
+>>>>>>> v3.18
 		__entry->nid = nid;
 		__entry->shrink = shr->scan_objects;
 		__entry->unused_scan = unused_scan_cnt;
@@ -293,6 +317,9 @@ TRACE_EVENT(mm_shrink_slab_end,
 		__entry->shrink,
 		__entry->shr,
 		__entry->nid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__entry->unused_scan,
 		__entry->new_scan,

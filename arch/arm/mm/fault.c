@@ -26,6 +26,7 @@
 #include <asm/system_info.h>
 #include <asm/tlbflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_MSM_SCORPION) && !defined(CONFIG_MSM_SMP)
 #include <asm/io.h>
 #include <mach/msm_iomap.h>
@@ -35,6 +36,11 @@
 
 #include <trace/events/exception.h>
 
+=======
+
+#include "fault.h"
+
+>>>>>>> v3.18
 =======
 
 #include "fault.h"
@@ -177,8 +183,11 @@ __do_user_fault(struct task_struct *tsk, unsigned long addr,
 	struct siginfo si;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_user_fault(tsk, addr, fsr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_USER
@@ -292,15 +301,21 @@ do_page_fault(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * If we're in an interrupt, or have no irqs, or have no user
 	 * context, we must not take the fault..
 	 */
 	if (in_atomic() || irqs_disabled() || !mm)
 =======
+=======
+>>>>>>> v3.18
 	 * If we're in an interrupt or have no user
 	 * context, we must not take the fault..
 	 */
 	if (in_atomic() || !mm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto no_context;
 
@@ -519,6 +534,10 @@ do_translation_fault(unsigned long addr, unsigned int fsr,
  * They can happen due to a __{get,put}_user during an oops.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_ARM_LPAE
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_ARM_LPAE
 >>>>>>> v3.18
@@ -529,6 +548,10 @@ do_sect_fault(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_ARM_LPAE */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_ARM_LPAE */
 >>>>>>> v3.18
@@ -542,6 +565,7 @@ do_bad(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	return 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_ARCH_MSM_SCORPION) && !defined(CONFIG_MSM_SMP)
 #define __str(x) #x
@@ -588,6 +612,8 @@ do_imprecise_ext(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct fsr_info {
 	int	(*fn)(unsigned long addr, unsigned int fsr, struct pt_regs *regs);
 	int	sig;
@@ -628,8 +654,11 @@ do_DataAbort(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_unhandled_abort(regs, addr, fsr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk(KERN_ALERT "Unhandled fault: %s (0x%03x) at 0x%08lx\n",
@@ -665,8 +694,11 @@ do_PrefetchAbort(unsigned long addr, unsigned int ifsr, struct pt_regs *regs)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_unhandled_abort(regs, addr, ifsr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk(KERN_ALERT "Unhandled prefetch abort: %s (0x%03x) at 0x%08lx\n",

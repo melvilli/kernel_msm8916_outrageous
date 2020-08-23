@@ -4,15 +4,21 @@ help:
 	@echo 'Possible targets:'
 	@echo ''
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@echo '  cgroup     - cgroup tools'
 	@echo '  cpupower   - a tool for all things x86 CPU power'
 	@echo '  firewire   - the userspace part of nosy, an IEEE-1394 traffic sniffer'
 =======
+=======
+>>>>>>> v3.18
 	@echo '  acpi       - ACPI tools'
 	@echo '  cgroup     - cgroup tools'
 	@echo '  cpupower   - a tool for all things x86 CPU power'
 	@echo '  firewire   - the userspace part of nosy, an IEEE-1394 traffic sniffer'
 	@echo '  hv         - tools used when in Hyper-V clients'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@echo '  lguest     - a minimal 32-bit x86 hypervisor'
 	@echo '  perf       - Linux performance measurement and analysis tool'
@@ -24,6 +30,10 @@ help:
 	@echo '  vm         - misc vm tools'
 	@echo '  x86_energy_perf_policy - Intel energy policy tool'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	@echo '  tmon       - thermal monitoring and tuning tool'
+>>>>>>> v3.18
 =======
 	@echo '  tmon       - thermal monitoring and tuning tool'
 >>>>>>> v3.18
@@ -35,10 +45,13 @@ help:
 	@echo '  the tools above'
 	@echo ''
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@echo '  $$ make tools/all'
 	@echo ''
 	@echo '  builds all tools.'
 	@echo ''
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	@echo '  $$ make tools/install'
@@ -52,6 +65,7 @@ help:
 	@echo '  clean: a summary clean target to clean _all_ folders'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cpupower: FORCE
 	$(call descend,power/$@)
 
@@ -63,6 +77,8 @@ liblk: FORCE
 
 perf: liblk FORCE
 =======
+=======
+>>>>>>> v3.18
 acpi: FORCE
 	$(call descend,power/$@)
 
@@ -79,6 +95,9 @@ libapikfs: FORCE
 	$(call descend,lib/api)
 
 perf: libapikfs FORCE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	$(call descend,$@)
 
@@ -89,22 +108,32 @@ turbostat x86_energy_perf_policy: FORCE
 	$(call descend,power/x86/$@)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 all: cgroup cpupower firewire lguest \
 		perf selftests turbostat usb \
 		virtio vm net x86_energy_perf_policy
 =======
+=======
+>>>>>>> v3.18
 tmon: FORCE
 	$(call descend,thermal/$@)
 
 acpi_install:
 	$(call descend,power/$(@:_install=),install)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cpupower_install:
 	$(call descend,power/$(@:_install=),install)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cgroup_install firewire_install lguest_install perf_install usb_install virtio_install vm_install net_install:
+=======
+cgroup_install firewire_install hv_install lguest_install perf_install usb_install virtio_install vm_install net_install:
+>>>>>>> v3.18
 =======
 cgroup_install firewire_install hv_install lguest_install perf_install usb_install virtio_install vm_install net_install:
 >>>>>>> v3.18
@@ -117,10 +146,13 @@ turbostat_install x86_energy_perf_policy_install:
 	$(call descend,power/x86/$(@:_install=),install)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 install: cgroup_install cpupower_install firewire_install lguest_install \
 		perf_install selftests_install turbostat_install usb_install \
 		virtio_install vm_install net_install x86_energy_perf_policy_install
 =======
+=======
+>>>>>>> v3.18
 tmon_install:
 	$(call descend,thermal/$(@:_install=),install)
 
@@ -131,11 +163,15 @@ install: acpi_install cgroup_install cpupower_install hv_install firewire_instal
 
 acpi_clean:
 	$(call descend,power/acpi,clean)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cpupower_clean:
 	$(call descend,power/cpupower,clean)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 cgroup_clean firewire_clean lguest_clean usb_clean virtio_clean vm_clean net_clean:
 	$(call descend,$(@:_clean=),clean)
@@ -145,6 +181,8 @@ liblk_clean:
 
 perf_clean: liblk_clean
 =======
+=======
+>>>>>>> v3.18
 cgroup_clean hv_clean firewire_clean lguest_clean usb_clean virtio_clean vm_clean net_clean:
 	$(call descend,$(@:_clean=),clean)
 
@@ -155,6 +193,9 @@ libapikfs_clean:
 	$(call descend,lib/api,clean)
 
 perf_clean: libapikfs_clean
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	$(call descend,$(@:_clean=),clean)
 
@@ -165,16 +206,22 @@ turbostat_clean x86_energy_perf_policy_clean:
 	$(call descend,power/x86/$(@:_clean=),clean)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 clean: cgroup_clean cpupower_clean firewire_clean lguest_clean perf_clean \
 		selftests_clean turbostat_clean usb_clean virtio_clean \
 		vm_clean net_clean x86_energy_perf_policy_clean
 =======
+=======
+>>>>>>> v3.18
 tmon_clean:
 	$(call descend,thermal/tmon,clean)
 
 clean: acpi_clean cgroup_clean cpupower_clean hv_clean firewire_clean lguest_clean \
 		perf_clean selftests_clean turbostat_clean usb_clean virtio_clean \
 		vm_clean net_clean x86_energy_perf_policy_clean tmon_clean
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 .PHONY: FORCE

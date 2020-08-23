@@ -118,7 +118,10 @@
 #define SYS_SCRTCH3				0x4c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* PLL registers XLP2XX */
 #define SYS_CPU_PLL_CTRL0(core)			(0x1c0 + (core * 4))
 #define SYS_CPU_PLL_CTRL1(core)			(0x1c1 + (core * 4))
@@ -188,16 +191,22 @@
 /* XLP 9XX fuse block registers */
 #define FUSE_9XX_DEVCFG6			0xc6
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #define nlm_read_sys_reg(b, r)		nlm_read_reg(b, r)
 #define nlm_write_sys_reg(b, r, v)	nlm_write_reg(b, r, v)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nlm_get_sys_pcibase(node) nlm_pcicfg_base(XLP_IO_SYS_OFFSET(node))
 #define nlm_get_sys_regbase(node) (nlm_get_sys_pcibase(node) + XLP_IO_PCI_HDRSZ)
 
 =======
+=======
+>>>>>>> v3.18
 #define nlm_get_sys_pcibase(node)	nlm_pcicfg_base(cpu_is_xlp9xx() ? \
 		XLP9XX_IO_SYS_OFFSET(node) : XLP_IO_SYS_OFFSET(node))
 #define nlm_get_sys_regbase(node) (nlm_get_sys_pcibase(node) + XLP_IO_PCI_HDRSZ)
@@ -214,6 +223,9 @@
 			(nlm_get_clock_pcibase(node) + XLP_IO_PCI_HDRSZ)
 
 unsigned int nlm_get_pic_frequency(int node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif

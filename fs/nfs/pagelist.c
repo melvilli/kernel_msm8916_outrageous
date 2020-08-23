@@ -25,16 +25,22 @@
 #include "pnfs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache *nfs_page_cachep;
 
 bool nfs_pgarray_set(struct nfs_page_array *p, unsigned int pagecount)
 =======
+=======
+>>>>>>> v3.18
 #define NFSDBG_FACILITY		NFSDBG_PAGECACHE
 
 static struct kmem_cache *nfs_page_cachep;
 static const struct rpc_call_ops nfs_pgio_common_ops;
 
 static bool nfs_pgarray_set(struct nfs_page_array *p, unsigned int pagecount)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	p->npages = pagecount;
@@ -70,8 +76,13 @@ void nfs_set_pgio_error(struct nfs_pgio_header *hdr, int error, loff_t pos)
 {
 	spin_lock(&hdr->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_and_set_bit(NFS_IOHDR_ERROR, &hdr->flags)
 	    || pos < hdr->io_start + hdr->good_bytes) {
+=======
+	if (pos < hdr->io_start + hdr->good_bytes) {
+		set_bit(NFS_IOHDR_ERROR, &hdr->flags);
+>>>>>>> v3.18
 =======
 	if (pos < hdr->io_start + hdr->good_bytes) {
 		set_bit(NFS_IOHDR_ERROR, &hdr->flags);
@@ -127,8 +138,13 @@ __nfs_iocounter_wait(struct nfs_io_counter *c)
 		if (atomic_read(&c->io_count) == 0)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = nfs_wait_bit_killable(&c->flags);
 	} while (atomic_read(&c->io_count) != 0);
+=======
+		ret = nfs_wait_bit_killable(&q.key);
+	} while (atomic_read(&c->io_count) != 0 && !ret);
+>>>>>>> v3.18
 =======
 		ret = nfs_wait_bit_killable(&q.key);
 	} while (atomic_read(&c->io_count) != 0 && !ret);
@@ -153,12 +169,15 @@ nfs_iocounter_wait(struct nfs_io_counter *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * nfs_create_request - Create an NFS read/write request.
  * @ctx: open context to use
  * @inode: inode to which the request is attached
  * @page: page to write
 =======
+=======
+>>>>>>> v3.18
 /*
  * nfs_page_group_lock - lock the head of the page group
  * @req - request in group that is to be locked
@@ -345,6 +364,9 @@ nfs_page_group_destroy(struct kref *kref)
  * @ctx: open context to use
  * @page: page to write
  * @last: last nfs request created for this page group or NULL if head
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @offset: starting offset within the page for the write
  * @count: number of bytes to read/write
@@ -355,9 +377,15 @@ nfs_page_group_destroy(struct kref *kref)
  */
 struct nfs_page *
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfs_create_request(struct nfs_open_context *ctx, struct inode *inode,
 		   struct page *page,
 		   unsigned int offset, unsigned int count)
+=======
+nfs_create_request(struct nfs_open_context *ctx, struct page *page,
+		   struct nfs_page *last, unsigned int offset,
+		   unsigned int count)
+>>>>>>> v3.18
 =======
 nfs_create_request(struct nfs_open_context *ctx, struct page *page,
 		   struct nfs_page *last, unsigned int offset,
@@ -395,6 +423,10 @@ nfs_create_request(struct nfs_open_context *ctx, struct page *page,
 	req->wb_context = get_nfs_open_context(ctx);
 	kref_init(&req->wb_kref);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nfs_page_group_init(req, last);
+>>>>>>> v3.18
 =======
 	nfs_page_group_init(req, last);
 >>>>>>> v3.18
@@ -456,7 +488,10 @@ static void nfs_clear_request(struct nfs_page *req)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -466,10 +501,13 @@ static void nfs_clear_request(struct nfs_page *req)
  * Note: Should never be called with the spinlock held!
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nfs_free_request(struct kref *kref)
 {
 	struct nfs_page *req = container_of(kref, struct nfs_page, wb_kref);
 =======
+=======
+>>>>>>> v3.18
 void nfs_free_request(struct nfs_page *req)
 {
 	WARN_ON_ONCE(req->wb_this_page != req);
@@ -480,6 +518,9 @@ void nfs_free_request(struct nfs_page *req)
 	WARN_ON_ONCE(test_bit(PG_UPTODATE, &req->wb_flags));
 	WARN_ON_ONCE(test_bit(PG_WB_END, &req->wb_flags));
 	WARN_ON_ONCE(test_bit(PG_REMOVE, &req->wb_flags));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Release struct file and open context */
@@ -490,6 +531,7 @@ void nfs_free_request(struct nfs_page *req)
 void nfs_release_request(struct nfs_page *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_put(&req->wb_kref, nfs_free_request);
 }
 
@@ -497,6 +539,9 @@ static int nfs_wait_bit_uninterruptible(void *word)
 {
 	io_schedule();
 	return 0;
+=======
+	kref_put(&req->wb_kref, nfs_page_group_destroy);
+>>>>>>> v3.18
 =======
 	kref_put(&req->wb_kref, nfs_page_group_destroy);
 >>>>>>> v3.18
@@ -512,6 +557,7 @@ static int nfs_wait_bit_uninterruptible(void *word)
 int
 nfs_wait_on_request(struct nfs_page *req)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return wait_on_bit(&req->wb_flags, PG_BUSY,
 			nfs_wait_bit_uninterruptible,
@@ -535,6 +581,8 @@ bool nfs_generic_pg_test(struct nfs_pageio_descriptor *desc, struct nfs_page *pr
 EXPORT_SYMBOL_GPL(nfs_generic_pg_test);
 
 =======
+=======
+>>>>>>> v3.18
 	return wait_on_bit_io(&req->wb_flags, PG_BUSY,
 			      TASK_UNINTERRUPTIBLE);
 }
@@ -741,6 +789,9 @@ static void nfs_pgio_release(void *calldata)
 	hdr->completion_ops->completion(hdr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * nfs_pageio_init - initialise a page io descriptor
@@ -755,6 +806,10 @@ void nfs_pageio_init(struct nfs_pageio_descriptor *desc,
 		     const struct nfs_pageio_ops *pg_ops,
 		     const struct nfs_pgio_completion_ops *compl_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		     const struct nfs_rw_ops *rw_ops,
+>>>>>>> v3.18
 =======
 		     const struct nfs_rw_ops *rw_ops,
 >>>>>>> v3.18
@@ -772,6 +827,10 @@ void nfs_pageio_init(struct nfs_pageio_descriptor *desc,
 	desc->pg_ops = pg_ops;
 	desc->pg_completion_ops = compl_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	desc->pg_rw_ops = rw_ops;
+>>>>>>> v3.18
 =======
 	desc->pg_rw_ops = rw_ops;
 >>>>>>> v3.18
@@ -785,7 +844,10 @@ EXPORT_SYMBOL_GPL(nfs_pageio_init);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * nfs_pgio_result - Basic pageio error handling
  * @task: The task that ran
  * @calldata: Pageio header to check
@@ -891,6 +953,9 @@ static bool nfs_match_lock_context(const struct nfs_lock_context *l1,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * nfs_can_coalesce_requests - test two requests for compatibility
  * @prev: pointer to nfs_page
@@ -906,6 +971,7 @@ static bool nfs_can_coalesce_requests(struct nfs_page *prev,
 				      struct nfs_page *req,
 				      struct nfs_pageio_descriptor *pgio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (req->wb_context->cred != prev->wb_context->cred)
 		return false;
@@ -923,6 +989,8 @@ static bool nfs_can_coalesce_requests(struct nfs_page *prev,
 		return false;
 	return pgio->pg_ops->pg_test(pgio, prev, req);
 =======
+=======
+>>>>>>> v3.18
 	size_t size;
 
 	if (prev) {
@@ -948,6 +1016,9 @@ static bool nfs_can_coalesce_requests(struct nfs_page *prev,
 	if (size && size < req->wb_bytes)
 		req->wb_bytes = size;
 	return size > 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -963,6 +1034,7 @@ static int nfs_pageio_do_add_request(struct nfs_pageio_descriptor *desc,
 				     struct nfs_page *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (desc->pg_count != 0) {
 		struct nfs_page *prev;
 
@@ -974,12 +1046,22 @@ static int nfs_pageio_do_add_request(struct nfs_pageio_descriptor *desc,
 	if (desc->pg_count != 0) {
 		prev = nfs_list_entry(desc->pg_list.prev);
 >>>>>>> v3.18
+=======
+	struct nfs_page *prev = NULL;
+	if (desc->pg_count != 0) {
+		prev = nfs_list_entry(desc->pg_list.prev);
+>>>>>>> v3.18
 	} else {
 		if (desc->pg_ops->pg_init)
 			desc->pg_ops->pg_init(desc, req);
 		desc->pg_base = req->wb_pgbase;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!nfs_can_coalesce_requests(prev, req, desc))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (!nfs_can_coalesce_requests(prev, req, desc))
 		return 0;
@@ -1014,6 +1096,12 @@ static void nfs_pageio_doio(struct nfs_pageio_descriptor *desc)
  * @req: request
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * This may split a request into subrequests which are all part of the
+ * same page group.
+ *
+>>>>>>> v3.18
 =======
  * This may split a request into subrequests which are all part of the
  * same page group.
@@ -1026,6 +1114,7 @@ static int __nfs_pageio_add_request(struct nfs_pageio_descriptor *desc,
 			   struct nfs_page *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!nfs_pageio_do_add_request(desc, req)) {
 		desc->pg_moreio = 1;
 		nfs_pageio_doio(desc);
@@ -1037,6 +1126,8 @@ static int __nfs_pageio_add_request(struct nfs_pageio_descriptor *desc,
 	}
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_page *subreq;
 	unsigned int bytes_left = 0;
 	unsigned int offset, pgbase;
@@ -1094,6 +1185,9 @@ err_ptr:
 	desc->pg_error = PTR_ERR(subreq);
 	nfs_page_group_unlock(req);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1108,6 +1202,10 @@ static int nfs_do_recoalesce(struct nfs_pageio_descriptor *desc)
 		desc->pg_base = 0;
 		desc->pg_recoalesce = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		desc->pg_moreio = 0;
+>>>>>>> v3.18
 =======
 		desc->pg_moreio = 0;
 >>>>>>> v3.18
@@ -1143,8 +1241,11 @@ int nfs_pageio_add_request(struct nfs_pageio_descriptor *desc,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(nfs_pageio_add_request);
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * nfs_pageio_resend - Transfer requests to new descriptor and resend
@@ -1177,6 +1278,9 @@ int nfs_pageio_resend(struct nfs_pageio_descriptor *desc,
 	return 0;
 }
 EXPORT_SYMBOL_GPL(nfs_pageio_resend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1194,7 +1298,10 @@ void nfs_pageio_complete(struct nfs_pageio_descriptor *desc)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(nfs_pageio_complete);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1236,7 +1343,10 @@ void nfs_destroy_nfspagecache(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct rpc_call_ops nfs_pgio_common_ops = {
 	.rpc_call_prepare = nfs_pgio_prepare,
 	.rpc_call_done = nfs_pgio_result,
@@ -1247,4 +1357,7 @@ const struct nfs_pageio_ops nfs_pgio_rw_ops = {
 	.pg_test = nfs_generic_pg_test,
 	.pg_doio = nfs_generic_pg_pgios,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

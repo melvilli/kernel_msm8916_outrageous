@@ -39,7 +39,11 @@ static int load_em86(struct linux_binprm *bprm)
 	if ((elf_ex.e_type != ET_EXEC && elf_ex.e_type != ET_DYN) ||
 		(!((elf_ex.e_machine == EM_386) || (elf_ex.e_machine == EM_486))) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(!bprm->file->f_op || !bprm->file->f_op->mmap)) {
+=======
+		!bprm->file->f_op->mmap) {
+>>>>>>> v3.18
 =======
 		!bprm->file->f_op->mmap) {
 >>>>>>> v3.18

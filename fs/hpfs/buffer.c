@@ -8,9 +8,12 @@
 #include <linux/sched.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hpfs_fn.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include "hpfs_fn.h"
 
@@ -42,6 +45,9 @@ void hpfs_prefetch_sectors(struct super_block *s, unsigned secno, int n)
 	blk_finish_plug(&plug);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Map a sector into a buffer and return pointers to it and to the buffer. */
 
@@ -53,6 +59,11 @@ void *hpfs_map_sector(struct super_block *s, unsigned secno, struct buffer_head 
 	hpfs_lock_assert(s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hpfs_prefetch_sectors(s, secno, ahead);
+
+>>>>>>> v3.18
 =======
 	hpfs_prefetch_sectors(s, secno, ahead);
 
@@ -64,7 +75,11 @@ void *hpfs_map_sector(struct super_block *s, unsigned secno, struct buffer_head 
 		return bh->b_data;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: hpfs_map_sector: read error\n");
+=======
+		pr_err("%s(): read error\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_err("%s(): read error\n", __func__);
 >>>>>>> v3.18
@@ -89,7 +104,11 @@ void *hpfs_get_sector(struct super_block *s, unsigned secno, struct buffer_head 
 		return bh->b_data;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: hpfs_get_sector: getblk failed\n");
+=======
+		pr_err("%s(): getblk failed\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_err("%s(): getblk failed\n", __func__);
 >>>>>>> v3.18
@@ -103,7 +122,10 @@ void *hpfs_map_4sectors(struct super_block *s, unsigned secno, struct quad_buffe
 		   int ahead)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct buffer_head *bh;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *data;
@@ -113,6 +135,7 @@ void *hpfs_map_4sectors(struct super_block *s, unsigned secno, struct quad_buffe
 	cond_resched();
 
 	if (secno & 3) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("HPFS: hpfs_map_4sectors: unaligned read\n");
 		return NULL;
@@ -147,6 +170,8 @@ void *hpfs_map_4sectors(struct super_block *s, unsigned secno, struct quad_buffe
 	return data;
 
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%s(): unaligned read\n", __func__);
 		return NULL;
 	}
@@ -179,6 +204,9 @@ void *hpfs_map_4sectors(struct super_block *s, unsigned secno, struct quad_buffe
 
  bail4:
 	brelse(qbh->bh[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  bail3:
 	brelse(qbh->bh[2]);
@@ -188,9 +216,12 @@ void *hpfs_map_4sectors(struct super_block *s, unsigned secno, struct quad_buffe
 	brelse(qbh->bh[0]);
  bail0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(data);
 	printk("HPFS: hpfs_map_4sectors: read error\n");
  bail:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return NULL;
@@ -206,6 +237,7 @@ void *hpfs_get_4sectors(struct super_block *s, unsigned secno,
 	hpfs_lock_assert(s);
 
 	if (secno & 3) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("HPFS: hpfs_get_4sectors: unaligned read\n");
 		return NULL;
@@ -231,6 +263,8 @@ void *hpfs_get_4sectors(struct super_block *s, unsigned secno,
 	bail1:	brelse(qbh->bh[0]);
 	bail0:
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%s(): unaligned read\n", __func__);
 		return NULL;
 	}
@@ -261,6 +295,9 @@ bail2:
 bail1:
 	brelse(qbh->bh[0]);
 bail0:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -269,35 +306,47 @@ bail0:
 void hpfs_brelse4(struct quad_buffer_head *qbh)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brelse(qbh->bh[3]);
 	brelse(qbh->bh[2]);
 	brelse(qbh->bh[1]);
 	brelse(qbh->bh[0]);
 	kfree(qbh->data);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(qbh->data != qbh->bh[0]->b_data))
 		kfree(qbh->data);
 	brelse(qbh->bh[0]);
 	brelse(qbh->bh[1]);
 	brelse(qbh->bh[2]);
 	brelse(qbh->bh[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }	
 
 void hpfs_mark_4buffers_dirty(struct quad_buffer_head *qbh)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(qbh->bh[0]->b_data, qbh->data, 512);
 	memcpy(qbh->bh[1]->b_data, qbh->data + 512, 512);
 	memcpy(qbh->bh[2]->b_data, qbh->data + 2 * 512, 512);
 	memcpy(qbh->bh[3]->b_data, qbh->data + 3 * 512, 512);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(qbh->data != qbh->bh[0]->b_data)) {
 		memcpy(qbh->bh[0]->b_data, qbh->data + 0 * 512, 512);
 		memcpy(qbh->bh[1]->b_data, qbh->data + 1 * 512, 512);
 		memcpy(qbh->bh[2]->b_data, qbh->data + 2 * 512, 512);
 		memcpy(qbh->bh[3]->b_data, qbh->data + 3 * 512, 512);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mark_buffer_dirty(qbh->bh[0]);
 	mark_buffer_dirty(qbh->bh[1]);

@@ -5,6 +5,10 @@
 #include <linux/sock_diag.h>
 #include <linux/netlink_diag.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rhashtable.h>
+>>>>>>> v3.18
 =======
 #include <linux/rhashtable.h>
 >>>>>>> v3.18
@@ -106,15 +110,21 @@ static int __netlink_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,
 {
 	struct netlink_table *tbl = &nl_table[protocol];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nl_portid_hash *hash = &tbl->hash;
 	struct net *net = sock_net(skb->sk);
 	struct netlink_diag_req *req;
 =======
+=======
+>>>>>>> v3.18
 	struct rhashtable *ht = &tbl->hash;
 	const struct bucket_table *htbl = rht_dereference(ht->tbl, ht);
 	struct net *net = sock_net(skb->sk);
 	struct netlink_diag_req *req;
 	struct netlink_sock *nlsk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sock *sk;
 	int ret = 0, num = 0, i;
@@ -122,13 +132,19 @@ static int __netlink_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,
 	req = nlmsg_data(cb->nlh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i <= hash->mask; i++) {
 		sk_for_each(sk, &hash->table[i]) {
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < htbl->size; i++) {
 		rht_for_each_entry(nlsk, htbl->buckets[i], ht, node) {
 			sk = (struct sock *)nlsk;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!net_eq(sock_net(sk), net))
 				continue;
@@ -185,6 +201,10 @@ static int netlink_diag_dump(struct sk_buff *skb, struct netlink_callback *cb)
 	req = nlmsg_data(cb->nlh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&nl_sk_hash_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&nl_sk_hash_lock);
 >>>>>>> v3.18
@@ -202,6 +222,10 @@ static int netlink_diag_dump(struct sk_buff *skb, struct netlink_callback *cb)
 		if (req->sdiag_protocol >= MAX_LINKS) {
 			read_unlock(&nl_table_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			mutex_unlock(&nl_sk_hash_lock);
+>>>>>>> v3.18
 =======
 			mutex_unlock(&nl_sk_hash_lock);
 >>>>>>> v3.18
@@ -213,6 +237,10 @@ static int netlink_diag_dump(struct sk_buff *skb, struct netlink_callback *cb)
 
 	read_unlock(&nl_table_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&nl_sk_hash_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&nl_sk_hash_lock);
 >>>>>>> v3.18

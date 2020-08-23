@@ -113,13 +113,19 @@ static unsigned int steal_context_smp(unsigned int id)
 		for_each_cpu(cpu, mm_cpumask(mm)) {
 			for (i = cpu_first_thread_sibling(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     i <= cpu_last_thread_sibling(cpu); i++)
 				__set_bit(id, stale_map[i]);
 =======
+=======
+>>>>>>> v3.18
 			     i <= cpu_last_thread_sibling(cpu); i++) {
 				if (stale_map[i])
 					__set_bit(id, stale_map[i]);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cpu = i - 1;
 		}
@@ -280,7 +286,12 @@ void switch_mmu_context(struct mm_struct *prev, struct mm_struct *next)
 		for (i = cpu_first_thread_sibling(cpu);
 		     i <= cpu_last_thread_sibling(cpu); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__clear_bit(id, stale_map[i]);
+=======
+			if (stale_map[i])
+				__clear_bit(id, stale_map[i]);
+>>>>>>> v3.18
 =======
 			if (stale_map[i])
 				__clear_bit(id, stale_map[i]);
@@ -342,8 +353,13 @@ void destroy_context(struct mm_struct *mm)
 #ifdef CONFIG_SMP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit mmu_context_cpu_notify(struct notifier_block *self,
 					    unsigned long action, void *hcpu)
+=======
+static int mmu_context_cpu_notify(struct notifier_block *self,
+				  unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int mmu_context_cpu_notify(struct notifier_block *self,
 				  unsigned long action, void *hcpu)
@@ -381,7 +397,11 @@ static int mmu_context_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata mmu_context_cpu_nb = {
+=======
+static struct notifier_block mmu_context_cpu_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block mmu_context_cpu_nb = {
 >>>>>>> v3.18
@@ -429,6 +449,7 @@ void __init mmu_context_init(void)
 		first_context = 1;
 		last_context = 65535;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 #ifdef CONFIG_PPC_BOOK3E_MMU
 	if (mmu_has_feature(MMU_FTR_TYPE_3E)) {
@@ -440,6 +461,9 @@ void __init mmu_context_init(void)
 	} else
 #endif
 	{
+=======
+	} else {
+>>>>>>> v3.18
 =======
 	} else {
 >>>>>>> v3.18

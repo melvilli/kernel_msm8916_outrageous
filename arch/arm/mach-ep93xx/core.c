@@ -22,6 +22,10 @@
 #include <linux/interrupt.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sys_soc.h>
+>>>>>>> v3.18
 =======
 #include <linux/sys_soc.h>
 >>>>>>> v3.18
@@ -41,6 +45,10 @@
 #include <linux/irqchip/arm-vic.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/usb/ohci_pdriver.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/ohci_pdriver.h>
 >>>>>>> v3.18
@@ -52,6 +60,10 @@
 #include <mach/gpio-ep93xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mach/arch.h>
+>>>>>>> v3.18
 =======
 #include <asm/mach/arch.h>
 >>>>>>> v3.18
@@ -127,7 +139,11 @@ void __init ep93xx_map_io(void)
 
 #define TIMER1_RELOAD			((EP93XX_TIMER123_CLOCK / HZ) - 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMER4_TICKS_PER_JIFFY		DIV_ROUND_CLOSEST(CLOCK_TICK_RATE, HZ)
+=======
+#define TIMER4_TICKS_PER_JIFFY		DIV_ROUND_CLOSEST(EP93XX_TIMER4_CLOCK, HZ)
+>>>>>>> v3.18
 =======
 #define TIMER4_TICKS_PER_JIFFY		DIV_ROUND_CLOSEST(EP93XX_TIMER4_CLOCK, HZ)
 >>>>>>> v3.18
@@ -153,7 +169,11 @@ static irqreturn_t ep93xx_timer_interrupt(int irq, void *dev_id)
 static struct irqaction ep93xx_timer_irq = {
 	.name		= "ep93xx timer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -260,6 +280,10 @@ unsigned int ep93xx_chip_revision(void)
 	return v;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ep93xx_chip_revision);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ep93xx_chip_revision);
 >>>>>>> v3.18
@@ -306,7 +330,11 @@ static AMBA_APB_DEVICE(uart1, "apb:uart1", 0x00041010, EP93XX_UART1_PHYS_BASE,
 
 static AMBA_APB_DEVICE(uart2, "apb:uart2", 0x00041010, EP93XX_UART2_PHYS_BASE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ IRQ_EP93XX_UART2 }, &ep93xx_uart_data);
+=======
+	{ IRQ_EP93XX_UART2 }, NULL);
+>>>>>>> v3.18
 =======
 	{ IRQ_EP93XX_UART2 }, NULL);
 >>>>>>> v3.18
@@ -326,7 +354,10 @@ static struct platform_device ep93xx_rtc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*************************************************************************
  * EP93xx OHCI USB Host
  *************************************************************************/
@@ -354,6 +385,9 @@ static struct usb_ohci_pdata ep93xx_ohci_pdata = {
 	.power_off	= ep93xx_ohci_power_off,
 	.power_suspend	= ep93xx_ohci_power_off,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct resource ep93xx_ohci_resources[] = {
@@ -361,6 +395,7 @@ static struct resource ep93xx_ohci_resources[] = {
 	DEFINE_RES_IRQ(IRQ_EP93XX_USB),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct platform_device ep93xx_ohci_device = {
@@ -376,6 +411,8 @@ static struct platform_device ep93xx_ohci_device = {
 
 
 =======
+=======
+>>>>>>> v3.18
 static u64 ep93xx_ohci_dma_mask = DMA_BIT_MASK(32);
 
 static struct platform_device ep93xx_ohci_device = {
@@ -390,6 +427,9 @@ static struct platform_device ep93xx_ohci_device = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*************************************************************************
  * EP93xx physmap'ed flash
@@ -972,9 +1012,12 @@ void ep93xx_ide_release_gpio(struct platform_device *pdev)
 EXPORT_SYMBOL(ep93xx_ide_release_gpio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init ep93xx_init_devices(void)
 {
 =======
+=======
+>>>>>>> v3.18
 /*************************************************************************
  * EP93xx Security peripheral
  *************************************************************************/
@@ -1077,6 +1120,9 @@ struct device __init *ep93xx_init_devices(void)
 {
 	struct device *parent;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Disallow access to MaverickCrunch initially */
 	ep93xx_devcfg_clear_bits(EP93XX_SYSCON_DEVCFG_CPENA);
@@ -1089,6 +1135,11 @@ struct device __init *ep93xx_init_devices(void)
 			       EP93XX_SYSCON_DEVCFG_HONIDE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	parent = ep93xx_init_soc();
+
+>>>>>>> v3.18
 =======
 	parent = ep93xx_init_soc();
 
@@ -1106,6 +1157,11 @@ struct device __init *ep93xx_init_devices(void)
 
 	gpio_led_register_device(-1, &ep93xx_led_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return parent;
+>>>>>>> v3.18
 =======
 
 	return parent;

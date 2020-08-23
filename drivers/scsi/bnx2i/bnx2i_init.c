@@ -1,16 +1,22 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2i.c: Broadcom NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2012 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
 =======
+=======
+>>>>>>> v3.18
 /* bnx2i.c: QLogic NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2013 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,7 +25,12 @@
  *
  * Written by: Anil Veerabhadrappa (anilgv@broadcom.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+=======
+ * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+ * Maintained by: QLogic-Storage-Upstream@qlogic.com
+>>>>>>> v3.18
 =======
  * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
  * Maintained by: QLogic-Storage-Upstream@qlogic.com
@@ -33,17 +44,23 @@ static u32 adapter_count;
 
 #define DRV_MODULE_NAME		"bnx2i"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_MODULE_VERSION	"2.7.2.2"
 #define DRV_MODULE_RELDATE	"Apr 25, 2012"
 
 static char version[] =
 		"Broadcom NetXtreme II iSCSI Driver " DRV_MODULE_NAME \
 =======
+=======
+>>>>>>> v3.18
 #define DRV_MODULE_VERSION	"2.7.10.1"
 #define DRV_MODULE_RELDATE	"Jul 16, 2014"
 
 static char version[] =
 		"QLogic NetXtreme II iSCSI Driver " DRV_MODULE_NAME \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		" v" DRV_MODULE_VERSION " (" DRV_MODULE_RELDATE ")\n";
 
@@ -52,7 +69,11 @@ MODULE_AUTHOR("Anil Veerabhadrappa <anilgv@broadcom.com> and "
 	      "Eddie Wai <eddie.wai@broadcom.com>");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Broadcom NetXtreme II BCM5706/5708/5709/57710/57711/57712"
+=======
+MODULE_DESCRIPTION("QLogic NetXtreme II BCM5706/5708/5709/57710/57711/57712"
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("QLogic NetXtreme II BCM5706/5708/5709/57710/57711/57712"
 >>>>>>> v3.18
@@ -199,6 +220,7 @@ void bnx2i_start(void *handle)
 	int i = HZ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We should never register devices that don't support iSCSI
 	 * (see bnx2i_init_one), so something is wrong if we try to
@@ -210,6 +232,8 @@ void bnx2i_start(void *handle)
 	bnx2i_send_fw_iscsi_init_msg(hba);
 	while (!test_bit(ADAPTER_STATE_UP, &hba->adapter_state) && i--)
 =======
+=======
+>>>>>>> v3.18
 	/* On some bnx2x devices, it is possible that iSCSI is no
 	 * longer supported after firmware is downloaded.  In that
 	 * case, the iscsi_init_msg will return failure.
@@ -218,6 +242,9 @@ void bnx2i_start(void *handle)
 	bnx2i_send_fw_iscsi_init_msg(hba);
 	while (!test_bit(ADAPTER_STATE_UP, &hba->adapter_state) &&
 	       !test_bit(ADAPTER_STATE_INIT_FAILED, &hba->adapter_state) && i--)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		msleep(BNX2I_INIT_POLL_TIME);
 }
@@ -577,6 +604,11 @@ static int __init bnx2i_mod_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -586,7 +618,13 @@ static int __init bnx2i_mod_init(void)
 
 	/* Initialize per CPU interrupt thread */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&bnx2i_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&bnx2i_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&bnx2i_cpu_notifier);
 
@@ -632,7 +670,11 @@ static void __exit bnx2i_mod_exit(void)
 	mutex_unlock(&bnx2i_dev_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&bnx2i_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -641,11 +683,17 @@ static void __exit bnx2i_mod_exit(void)
 		bnx2i_percpu_thread_destroy(cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__unregister_hotcpu_notifier(&bnx2i_cpu_notifier);
 
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iscsi_unregister_transport(&bnx2i_iscsi_transport);
 	cnic_unregister_driver(CNIC_ULP_ISCSI);

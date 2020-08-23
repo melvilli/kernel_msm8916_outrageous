@@ -49,6 +49,7 @@ static inline int is_span_boundary(unsigned long entry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long iommu_range_alloc(struct device *dev,
 				       struct iommu *iommu,
 				       unsigned long npages,
@@ -57,6 +58,8 @@ extern void iommu_range_free(struct iommu *iommu,
 			     dma_addr_t dma_addr,
 			     unsigned long npages);
 =======
+=======
+>>>>>>> v3.18
 unsigned long iommu_range_alloc(struct device *dev,
 				struct iommu *iommu,
 				unsigned long npages,
@@ -64,6 +67,9 @@ unsigned long iommu_range_alloc(struct device *dev,
 void iommu_range_free(struct iommu *iommu,
 		      dma_addr_t dma_addr,
 		      unsigned long npages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _IOMMU_COMMON_H */

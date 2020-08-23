@@ -225,7 +225,11 @@ static void save_previous_kprobe(struct kprobe_ctlblk *kcb)
 static void restore_previous_kprobe(struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = kcb->prev_kprobe.kp;
+=======
+	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
 >>>>>>> v3.18
@@ -239,7 +243,11 @@ static void set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
 			       struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = p;
+=======
+	__this_cpu_write(current_kprobe, p);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, p);
 >>>>>>> v3.18
@@ -394,7 +402,11 @@ static int __kprobes kprobe_handler(struct pt_regs *regs)
 				goto no_kprobe;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p = __get_cpu_var(current_kprobe);
+=======
+			p = __this_cpu_read(current_kprobe);
+>>>>>>> v3.18
 =======
 			p = __this_cpu_read(current_kprobe);
 >>>>>>> v3.18

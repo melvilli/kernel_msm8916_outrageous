@@ -21,8 +21,13 @@
 #include <linux/if_ether.h>	/* For the statistics structure. */
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 

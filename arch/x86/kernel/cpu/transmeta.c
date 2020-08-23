@@ -1,7 +1,10 @@
 #include <linux/kernel.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/processor.h>
@@ -9,7 +12,11 @@
 #include "cpu.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit early_init_transmeta(struct cpuinfo_x86 *c)
+=======
+static void early_init_transmeta(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void early_init_transmeta(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -25,7 +32,11 @@ static void early_init_transmeta(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_transmeta(struct cpuinfo_x86 *c)
+=======
+static void init_transmeta(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void init_transmeta(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -110,7 +121,11 @@ static void init_transmeta(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev __cpuinitconst transmeta_cpu_dev = {
+=======
+static const struct cpu_dev transmeta_cpu_dev = {
+>>>>>>> v3.18
 =======
 static const struct cpu_dev transmeta_cpu_dev = {
 >>>>>>> v3.18

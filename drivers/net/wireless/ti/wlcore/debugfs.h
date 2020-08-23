@@ -27,8 +27,13 @@
 #include "wlcore.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __printf(4, 5) int wl1271_format_buffer(char __user *userbuf, size_t count,
 					loff_t *ppos, char *fmt, ...);
+=======
+int wl1271_format_buffer(char __user *userbuf, size_t count,
+			 loff_t *ppos, char *fmt, ...);
+>>>>>>> v3.18
 =======
 int wl1271_format_buffer(char __user *userbuf, size_t count,
 			 loff_t *ppos, char *fmt, ...);
@@ -63,7 +68,11 @@ static const struct file_operations name## _ops = {			\
 		if (!entry || IS_ERR(entry))				\
 			goto err;					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (0);
+=======
+	} while (0)
+>>>>>>> v3.18
 =======
 	} while (0)
 >>>>>>> v3.18
@@ -76,7 +85,11 @@ static const struct file_operations name## _ops = {			\
 		if (!entry || IS_ERR(entry))				\
 			goto err;					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (0);
+=======
+	} while (0)
+>>>>>>> v3.18
 =======
 	} while (0)
 >>>>>>> v3.18

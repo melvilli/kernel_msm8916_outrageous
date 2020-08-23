@@ -282,7 +282,11 @@ static void nv04_dfp_mode_set(struct drm_encoder *encoder,
 {
 	struct drm_device *dev = encoder->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
+=======
+	struct nvif_device *device = &nouveau_drm(dev)->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 >>>>>>> v3.18
@@ -340,7 +344,11 @@ static void nv04_dfp_mode_set(struct drm_encoder *encoder,
 	else /* gpu needs to scale */
 		regp->fp_control |= NV_PRAMDAC_FP_TG_CONTROL_MODE_SCALE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_rd32(device, NV_PEXTDEV_BOOT_0) & NV_PEXTDEV_BOOT_0_STRAP_FP_IFACE_12BIT)
+=======
+	if (nvif_rd32(device, NV_PEXTDEV_BOOT_0) & NV_PEXTDEV_BOOT_0_STRAP_FP_IFACE_12BIT)
+>>>>>>> v3.18
 =======
 	if (nvif_rd32(device, NV_PEXTDEV_BOOT_0) & NV_PEXTDEV_BOOT_0_STRAP_FP_IFACE_12BIT)
 >>>>>>> v3.18
@@ -424,8 +432,13 @@ static void nv04_dfp_mode_set(struct drm_encoder *encoder,
 	if ((nv_connector->dithering_mode == DITHERING_MODE_ON) ||
 	    (nv_connector->dithering_mode == DITHERING_MODE_AUTO &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     encoder->crtc->fb->depth > connector->display_info.bpc * 3)) {
 		if (nv_device(drm->device)->chipset == 0x11)
+=======
+	     encoder->crtc->primary->fb->depth > connector->display_info.bpc * 3)) {
+		if (drm->device.info.chipset == 0x11)
+>>>>>>> v3.18
 =======
 	     encoder->crtc->primary->fb->depth > connector->display_info.bpc * 3)) {
 		if (drm->device.info.chipset == 0x11)
@@ -441,7 +454,11 @@ static void nv04_dfp_mode_set(struct drm_encoder *encoder,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nv_device(drm->device)->chipset != 0x11) {
+=======
+		if (drm->device.info.chipset != 0x11) {
+>>>>>>> v3.18
 =======
 		if (drm->device.info.chipset != 0x11) {
 >>>>>>> v3.18
@@ -481,7 +498,11 @@ static void nv04_dfp_commit(struct drm_encoder *encoder)
 
 	/* This could use refinement for flatpanels, but it should work this way */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset < 0x44)
+=======
+	if (drm->device.info.chipset < 0x44)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset < 0x44)
 >>>>>>> v3.18
@@ -499,7 +520,11 @@ static void nv04_dfp_commit(struct drm_encoder *encoder)
 
 	NV_DEBUG(drm, "Output %s is running on CRTC %d using output %c\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 drm_get_connector_name(&nouveau_encoder_connector_get(nv_encoder)->base),
+=======
+		 nouveau_encoder_connector_get(nv_encoder)->base.name,
+>>>>>>> v3.18
 =======
 		 nouveau_encoder_connector_get(nv_encoder)->base.name,
 >>>>>>> v3.18
@@ -511,7 +536,11 @@ static void nv04_dfp_update_backlight(struct drm_encoder *encoder, int mode)
 #ifdef __powerpc__
 	struct drm_device *dev = encoder->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
+=======
+	struct nvif_device *device = &nouveau_drm(dev)->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 >>>>>>> v3.18
@@ -520,15 +549,21 @@ static void nv04_dfp_update_backlight(struct drm_encoder *encoder, int mode)
 	 * Apple for your consistency.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->pci_device == 0x0174 || dev->pci_device == 0x0179 ||
 	    dev->pci_device == 0x0189 || dev->pci_device == 0x0329) {
 		if (mode == DRM_MODE_DPMS_ON) {
 			nv_mask(device, NV_PBUS_DEBUG_DUALHEAD_CTL, 0, 1 << 31);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->pdev->device == 0x0174 || dev->pdev->device == 0x0179 ||
 	    dev->pdev->device == 0x0189 || dev->pdev->device == 0x0329) {
 		if (mode == DRM_MODE_DPMS_ON) {
 			nv_mask(device, NV_PBUS_DEBUG_DUALHEAD_CTL, 1 << 31, 1 << 31);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nv_mask(device, NV_PCRTC_GPIO_EXT, 3, 1);
 		} else {
@@ -660,6 +695,7 @@ static void nv04_tmds_slave_init(struct drm_encoder *encoder)
 	struct dcb_output *dcb = nouveau_encoder(encoder)->dcb;
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_i2c *i2c = nouveau_i2c(drm->device);
 	struct nouveau_i2c_port *port = i2c->find(i2c, 2);
 	struct i2c_board_info info[] = {
@@ -670,6 +706,8 @@ static void nv04_tmds_slave_init(struct drm_encoder *encoder)
 				SIL164_INPUT_EDGE_RISING
 			}
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_i2c *i2c = nvkm_i2c(&drm->device);
 	struct nouveau_i2c_port *port = i2c->find(i2c, 2);
 	struct nouveau_i2c_board_info info[] = {
@@ -681,6 +719,9 @@ static void nv04_tmds_slave_init(struct drm_encoder *encoder)
 		            SIL164_INPUT_EDGE_RISING
 		         }
 		    }, 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		},
 		{ }
@@ -692,7 +733,11 @@ static void nv04_tmds_slave_init(struct drm_encoder *encoder)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	type = i2c->identify(i2c, 2, "TMDS transmitter", info, NULL);
+=======
+	type = i2c->identify(i2c, 2, "TMDS transmitter", info, NULL, NULL);
+>>>>>>> v3.18
 =======
 	type = i2c->identify(i2c, 2, "TMDS transmitter", info, NULL, NULL);
 >>>>>>> v3.18
@@ -701,7 +746,11 @@ static void nv04_tmds_slave_init(struct drm_encoder *encoder)
 
 	drm_i2c_encoder_init(dev, to_encoder_slave(encoder),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     &port->adapter, &info[type]);
+=======
+			     &port->adapter, &info[type].dev);
+>>>>>>> v3.18
 =======
 			     &port->adapter, &info[type].dev);
 >>>>>>> v3.18

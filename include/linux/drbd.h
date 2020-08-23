@@ -53,7 +53,11 @@
 
 extern const char *drbd_buildtag(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REL_VERSION "8.4.3"
+=======
+#define REL_VERSION "8.4.5"
+>>>>>>> v3.18
 =======
 #define REL_VERSION "8.4.5"
 >>>>>>> v3.18
@@ -182,13 +186,19 @@ enum drbd_ret_code {
 	ERR_NEED_ALLOW_TWO_PRI  = 164,
 	ERR_MD_UNCLEAN          = 165,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	ERR_MD_LAYOUT_CONNECTED = 166,
 	ERR_MD_LAYOUT_TOO_BIG   = 167,
 	ERR_MD_LAYOUT_TOO_SMALL = 168,
 	ERR_MD_LAYOUT_NO_FIT    = 169,
 	ERR_IMPLICIT_SHRINK     = 170,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* insert new ones above this line */
 	AFTER_LAST_ERR_CODE
@@ -254,7 +264,11 @@ enum drbd_disk_state {
 	D_ATTACHING,      /* In the process of reading the meta-data */
 	D_FAILED,         /* Becomes D_DISKLESS as soon as we told it the peer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* when >= D_FAILED it is legal to access mdev->bc */
+=======
+			  /* when >= D_FAILED it is legal to access mdev->ldev */
+>>>>>>> v3.18
 =======
 			  /* when >= D_FAILED it is legal to access mdev->ldev */
 >>>>>>> v3.18
@@ -340,12 +354,15 @@ enum drbd_state_rv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* from drbd_strings.c */
 extern const char *drbd_conn_str(enum drbd_conns);
 extern const char *drbd_role_str(enum drbd_role);
 extern const char *drbd_disk_str(enum drbd_disk_state);
 extern const char *drbd_set_st_err_str(enum drbd_state_rv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SHARED_SECRET_MAX 64
@@ -398,6 +415,11 @@ enum drbd_timeout_flag {
 #define DRBD_MD_INDEX_FLEX_INT -3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRBD_CPU_MASK_SIZE 32
+
+>>>>>>> v3.18
 =======
 #define DRBD_CPU_MASK_SIZE 32
 

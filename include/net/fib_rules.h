@@ -11,13 +11,17 @@
 struct fib_rule {
 	struct list_head	list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t		refcnt;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			iifindex;
 	int			oifindex;
 	u32			mark;
 	u32			mark_mask;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32			pref;
 	u32			flags;
@@ -32,6 +36,8 @@ struct fib_rule {
 	struct rcu_head		rcu;
 	struct net *		fr_net;
 =======
+=======
+>>>>>>> v3.18
 	u32			flags;
 	u32			table;
 	u8			action;
@@ -47,6 +53,9 @@ struct fib_rule {
 	char			iifname[IFNAMSIZ];
 	char			oifname[IFNAMSIZ];
 	struct rcu_head		rcu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -70,6 +79,11 @@ struct fib_rules_ops {
 					  struct flowi *, int,
 					  struct fib_lookup_arg *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			(*suppress)(struct fib_rule *,
+					    struct fib_lookup_arg *);
+>>>>>>> v3.18
 =======
 	bool			(*suppress)(struct fib_rule *,
 					    struct fib_lookup_arg *);
@@ -109,9 +123,15 @@ struct fib_rules_ops {
 	[FRA_FWMASK]	= { .type = NLA_U32 }, \
 	[FRA_TABLE]     = { .type = NLA_U32 }, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[FRA_GOTO]	= { .type = NLA_U32 }, \
 	[FRA_UID_START]	= { .type = NLA_U32 }, \
 	[FRA_UID_END]	= { .type = NLA_U32 }
+=======
+	[FRA_SUPPRESS_PREFIXLEN] = { .type = NLA_U32 }, \
+	[FRA_SUPPRESS_IFGROUP] = { .type = NLA_U32 }, \
+	[FRA_GOTO]	= { .type = NLA_U32 }
+>>>>>>> v3.18
 =======
 	[FRA_SUPPRESS_PREFIXLEN] = { .type = NLA_U32 }, \
 	[FRA_SUPPRESS_IFGROUP] = { .type = NLA_U32 }, \
@@ -144,6 +164,7 @@ static inline u32 frh_get_table(struct fib_rule_hdr *frh, struct nlattr **nla)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct fib_rules_ops *fib_rules_register(const struct fib_rules_ops *, struct net *);
 extern void fib_rules_unregister(struct fib_rules_ops *);
 
@@ -155,6 +176,8 @@ extern int			fib_default_rule_add(struct fib_rules_ops *,
 						     u32 flags);
 extern u32			fib_default_rule_pref(struct fib_rules_ops *ops);
 =======
+=======
+>>>>>>> v3.18
 struct fib_rules_ops *fib_rules_register(const struct fib_rules_ops *,
 					 struct net *);
 void fib_rules_unregister(struct fib_rules_ops *);
@@ -164,5 +187,8 @@ int fib_rules_lookup(struct fib_rules_ops *, struct flowi *, int flags,
 int fib_default_rule_add(struct fib_rules_ops *, u32 pref, u32 table,
 			 u32 flags);
 u32 fib_default_rule_pref(struct fib_rules_ops *ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -11,7 +11,10 @@
 #include <linux/errno.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -33,6 +36,7 @@ enum {
 
 struct cpufreq_frequency_table loongson2_clockmod_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{DC_RESV, CPUFREQ_ENTRY_INVALID},
 	{DC_ZERO, CPUFREQ_ENTRY_INVALID},
 	{DC_25PT, 0},
@@ -44,6 +48,8 @@ struct cpufreq_frequency_table loongson2_clockmod_table[] = {
 	{DC_DISABLE, 0},
 	{DC_RESV, CPUFREQ_TABLE_END},
 =======
+=======
+>>>>>>> v3.18
 	{0, DC_RESV, CPUFREQ_ENTRY_INVALID},
 	{0, DC_ZERO, CPUFREQ_ENTRY_INVALID},
 	{0, DC_25PT, 0},
@@ -54,6 +60,9 @@ struct cpufreq_frequency_table loongson2_clockmod_table[] = {
 	{0, DC_87PT, 0},
 	{0, DC_DISABLE, 0},
 	{0, DC_RESV, CPUFREQ_TABLE_END},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(loongson2_clockmod_table);
@@ -109,14 +118,20 @@ EXPORT_SYMBOL(clk_put);
 int clk_set_rate(struct clk *clk, unsigned long rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	int regval;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int rate_khz = rate / 1000;
 	struct cpufreq_frequency_table *pos;
 	int ret = 0;
 	int regval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (likely(clk->ops && clk->ops->set_rate)) {
@@ -131,6 +146,7 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 		propagate_rate(clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; loongson2_clockmod_table[i].frequency != CPUFREQ_TABLE_END;
 	     i++) {
 		if (loongson2_clockmod_table[i].frequency ==
@@ -141,20 +157,31 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 	}
 	if (rate != loongson2_clockmod_table[i].frequency)
 =======
+=======
+>>>>>>> v3.18
 	cpufreq_for_each_valid_entry(pos, loongson2_clockmod_table)
 		if (rate_khz == pos->frequency)
 			break;
 	if (rate_khz != pos->frequency)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOTSUPP;
 
 	clk->rate = rate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regval = LOONGSON_CHIPCFG0;
 	regval = (regval & ~0x7) |
 		(loongson2_clockmod_table[i].driver_data - 1);
 	LOONGSON_CHIPCFG0 = regval;
+=======
+	regval = LOONGSON_CHIPCFG(0);
+	regval = (regval & ~0x7) | (pos->driver_data - 1);
+	LOONGSON_CHIPCFG(0) = regval;
+>>>>>>> v3.18
 =======
 	regval = LOONGSON_CHIPCFG(0);
 	regval = (regval & ~0x7) | (pos->driver_data - 1);

@@ -61,6 +61,7 @@ static inline int __gen_sigismember(sigset_t *set, int _sig)
 	 __gen_sigismember(set,sig))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sigfindinword(unsigned long word)
 {
 	asm ("bfffo %1{#0,#0},%0"
@@ -70,6 +71,8 @@ static inline int sigfindinword(unsigned long word)
 	return word ^ 31;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* !CONFIG_CPU_HAS_NO_BITFIELDS */

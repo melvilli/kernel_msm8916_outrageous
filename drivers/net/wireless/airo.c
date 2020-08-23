@@ -37,7 +37,11 @@
 #include <linux/scatterlist.h>
 #include <linux/crypto.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -50,17 +54,23 @@
 #include <linux/ioport.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <linux/kthread.h>
 #include <linux/freezer.h>
 
 #include <linux/ieee80211.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <linux/kthread.h>
 #include <linux/freezer.h>
 
 #include <net/cfg80211.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <net/iw_handler.h>
 
@@ -70,7 +80,11 @@
 
 #ifdef CONFIG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(card_ids) = {
+=======
+static const struct pci_device_id card_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id card_ids[] = {
 >>>>>>> v3.18
@@ -1910,7 +1924,12 @@ static int airo_open(struct net_device *dev) {
 	if (ai->wifidev != dev) {
 		clear_bit(JOB_DIE, &ai->jobs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ai->airo_thread_task = kthread_run(airo_thread, dev, dev->name);
+=======
+		ai->airo_thread_task = kthread_run(airo_thread, dev, "%s",
+						   dev->name);
+>>>>>>> v3.18
 =======
 		ai->airo_thread_task = kthread_run(airo_thread, dev, "%s",
 						   dev->name);
@@ -2706,7 +2725,12 @@ static struct net_device *init_wifidev(struct airo_info *ai,
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = alloc_netdev(0, "wifi%d", wifi_setup);
+=======
+	struct net_device *dev = alloc_netdev(0, "wifi%d", NET_NAME_UNKNOWN,
+					      wifi_setup);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = alloc_netdev(0, "wifi%d", NET_NAME_UNKNOWN,
 					      wifi_setup);
@@ -2719,7 +2743,11 @@ static struct net_device *init_wifidev(struct airo_info *ai,
 	dev->wireless_data = ethdev->wireless_data;
 	SET_NETDEV_DEV(dev, ethdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, ethdev->dev_addr, dev->addr_len);
+=======
+	eth_hw_addr_inherit(dev, ethdev);
+>>>>>>> v3.18
 =======
 	eth_hw_addr_inherit(dev, ethdev);
 >>>>>>> v3.18
@@ -2815,7 +2843,11 @@ static struct net_device *_init_airo_card( unsigned short irq, int port,
 
 	/* Create the network device object. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(*ai), "", ether_setup);
+=======
+	dev = alloc_netdev(sizeof(*ai), "", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(*ai), "", NET_NAME_UNKNOWN, ether_setup);
 >>>>>>> v3.18
@@ -5604,7 +5636,10 @@ static void airo_pci_remove(struct pci_dev *pdev)
 	stop_airo_card(dev, 1);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -5835,7 +5870,11 @@ static int airo_set_freq(struct net_device *dev,
 		/* Hack to fall through... */
 		fwrq->e = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fwrq->m = ieee80211_freq_to_dsss_chan(f);
+=======
+		fwrq->m = ieee80211_frequency_to_channel(f);
+>>>>>>> v3.18
 =======
 		fwrq->m = ieee80211_frequency_to_channel(f);
 >>>>>>> v3.18
@@ -5883,7 +5922,12 @@ static int airo_get_freq(struct net_device *dev,
 	ch = le16_to_cpu(status_rid.channel);
 	if((ch > 0) && (ch < 15)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fwrq->m = ieee80211_dsss_chan_to_freq(ch) * 100000;
+=======
+		fwrq->m = 100000 *
+			ieee80211_channel_to_frequency(ch, IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 		fwrq->m = 100000 *
 			ieee80211_channel_to_frequency(ch, IEEE80211_BAND_2GHZ);
@@ -6945,7 +6989,12 @@ static int airo_get_range(struct net_device *dev,
 	for(i = 0; i < 14; i++) {
 		range->freq[k].i = i + 1; /* List index */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		range->freq[k].m = ieee80211_dsss_chan_to_freq(i + 1) * 100000;
+=======
+		range->freq[k].m = 100000 *
+		     ieee80211_channel_to_frequency(i + 1, IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 		range->freq[k].m = 100000 *
 		     ieee80211_channel_to_frequency(i + 1, IEEE80211_BAND_2GHZ);
@@ -7349,7 +7398,12 @@ static inline char *airo_translate_scan(struct net_device *dev,
 	iwe.cmd = SIOCGIWFREQ;
 	iwe.u.freq.m = le16_to_cpu(bss->dsChannel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwe.u.freq.m = ieee80211_dsss_chan_to_freq(iwe.u.freq.m) * 100000;
+=======
+	iwe.u.freq.m = 100000 *
+	      ieee80211_channel_to_frequency(iwe.u.freq.m, IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 	iwe.u.freq.m = 100000 *
 	      ieee80211_channel_to_frequency(iwe.u.freq.m, IEEE80211_BAND_2GHZ);
@@ -7871,7 +7925,10 @@ static int readrids(struct net_device *dev, aironet_ioctl *comp) {
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

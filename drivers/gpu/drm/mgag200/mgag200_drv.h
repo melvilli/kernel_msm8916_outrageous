@@ -23,6 +23,11 @@
 #include <drm/ttm/ttm_module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_gem.h>
 
@@ -155,7 +160,10 @@ struct mga_connector {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mga_cursor {
 	/*
 	   We have to have 2 buffers for the cursor to avoid occasional
@@ -171,6 +179,9 @@ struct mga_cursor {
 	/* The previously displayed icon */
 	struct mgag200_bo *pixels_prev;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mga_mc {
@@ -199,8 +210,11 @@ struct mga_device {
 	void __iomem			*rmmio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_local_map_t			*framebuffer;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mga_mc			mc;
@@ -208,6 +222,10 @@ struct mga_device {
 
 	struct mga_fbdev *mfbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mga_cursor cursor;
+>>>>>>> v3.18
 =======
 	struct mga_cursor cursor;
 >>>>>>> v3.18
@@ -239,7 +257,11 @@ struct mgag200_bo {
 	struct ttm_bo_kmap_obj kmap;
 	struct drm_gem_object gem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 placements[3];
+=======
+	struct ttm_place placements[3];
+>>>>>>> v3.18
 =======
 	struct ttm_place placements[3];
 >>>>>>> v3.18
@@ -279,6 +301,7 @@ int mgag200_gem_create(struct drm_device *dev,
 		   u32 size, bool iskernel,
 		       struct drm_gem_object **obj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mgag200_gem_init_object(struct drm_gem_object *obj);
 int mgag200_dumb_create(struct drm_file *file,
 			struct drm_device *dev,
@@ -286,6 +309,11 @@ int mgag200_dumb_create(struct drm_file *file,
 int mgag200_dumb_destroy(struct drm_file *file,
 			 struct drm_device *dev,
 			 uint32_t handle);
+=======
+int mgag200_dumb_create(struct drm_file *file,
+			struct drm_device *dev,
+			struct drm_mode_create_dumb *args);
+>>>>>>> v3.18
 =======
 int mgag200_dumb_create(struct drm_file *file,
 			struct drm_device *dev,
@@ -305,9 +333,12 @@ void mgag200_i2c_destroy(struct mga_i2c_chan *i2c);
 void mgag200_ttm_placement(struct mgag200_bo *bo, int domain);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mgag200_bo_reserve(struct mgag200_bo *bo, bool no_wait);
 void mgag200_bo_unreserve(struct mgag200_bo *bo);
 =======
+=======
+>>>>>>> v3.18
 static inline int mgag200_bo_reserve(struct mgag200_bo *bo, bool no_wait)
 {
 	int ret;
@@ -326,6 +357,9 @@ static inline void mgag200_bo_unreserve(struct mgag200_bo *bo)
 	ttm_bo_unreserve(&bo->bo);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mgag200_bo_create(struct drm_device *dev, int size, int align,
 		      uint32_t flags, struct mgag200_bo **pastbo);
@@ -336,11 +370,17 @@ int mgag200_bo_pin(struct mgag200_bo *bo, u32 pl_flag, u64 *gpu_addr);
 int mgag200_bo_unpin(struct mgag200_bo *bo);
 int mgag200_bo_push_sysram(struct mgag200_bo *bo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			   /* mgag200_cursor.c */
 int mga_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
 						uint32_t handle, uint32_t width, uint32_t height);
 int mga_crtc_cursor_move(struct drm_crtc *crtc, int x, int y);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __MGAG200_DRV_H__ */

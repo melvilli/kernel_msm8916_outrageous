@@ -46,6 +46,10 @@ struct device;
  * @lock:	Entities list lock
  * @graph_mutex: Entities graph operation lock
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @link_notify: Link state change notification callback
+>>>>>>> v3.18
 =======
  * @link_notify: Link state change notification callback
 >>>>>>> v3.18
@@ -80,6 +84,7 @@ struct media_device {
 	struct mutex graph_mutex;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*link_notify)(struct media_pad *source,
 			   struct media_pad *sink, u32 flags);
 };
@@ -89,6 +94,8 @@ struct media_device {
 
 int __must_check media_device_register(struct media_device *mdev);
 =======
+=======
+>>>>>>> v3.18
 	int (*link_notify)(struct media_link *link, u32 flags,
 			   unsigned int notification);
 };
@@ -103,6 +110,9 @@ int __must_check media_device_register(struct media_device *mdev);
 int __must_check __media_device_register(struct media_device *mdev,
 					 struct module *owner);
 #define media_device_register(mdev) __media_device_register(mdev, THIS_MODULE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void media_device_unregister(struct media_device *mdev);
 

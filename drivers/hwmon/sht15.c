@@ -941,17 +941,23 @@ static int sht15_probe(struct platform_device *pdev)
 	init_waitqueue_head(&data->wait_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.platform_data == NULL) {
 		dev_err(&pdev->dev, "no platform data supplied\n");
 		return -EINVAL;
 	}
 	data->pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	if (dev_get_platdata(&pdev->dev) == NULL) {
 		dev_err(&pdev->dev, "no platform data supplied\n");
 		return -EINVAL;
 	}
 	data->pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->supply_uv = data->pdata->supply_mv * 1000;
 	if (data->pdata->checksum)
@@ -966,7 +972,11 @@ static int sht15_probe(struct platform_device *pdev)
 	 * query what the supply voltage actually is!
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->reg = devm_regulator_get(data->dev, "vcc");
+=======
+	data->reg = devm_regulator_get_optional(data->dev, "vcc");
+>>>>>>> v3.18
 =======
 	data->reg = devm_regulator_get_optional(data->dev, "vcc");
 >>>>>>> v3.18

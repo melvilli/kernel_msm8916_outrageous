@@ -12,6 +12,7 @@
 #define _LINUX_ZORRO_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/device.h>
 
 
@@ -114,10 +115,15 @@ struct ConfigDev {
 #ifdef __KERNEL__
 
 =======
+=======
+>>>>>>> v3.18
 
 #include <uapi/linux/zorro.h>
 
 #include <linux/device.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/ioport.h>
@@ -183,8 +189,11 @@ static inline struct zorro_driver *zorro_dev_driver(const struct zorro_dev *z)
 
 extern unsigned int zorro_num_autocon;	/* # of autoconfig devices found */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct zorro_dev zorro_autocon[ZORRO_NUM_AUTO];
 =======
+=======
+>>>>>>> v3.18
 extern struct zorro_dev *zorro_autocon;
 
 
@@ -202,6 +211,9 @@ struct zorro_dev_init {
 };
 
 extern struct zorro_dev_init zorro_autocon_init[ZORRO_NUM_AUTO] __initdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -257,8 +269,11 @@ extern DECLARE_BITMAP(zorro_unused_z2ram, 128);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _LINUX_ZORRO_H */

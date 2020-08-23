@@ -12,7 +12,11 @@ config SPEAKUP
 		There is also a mailing list at the above url that you
 		can subscribe to.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -24,7 +28,11 @@ config SPEAKUP
 		synthesizers, Speakout, transport, and a dummy module
 		that can be used with a plain text terminal.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -35,6 +43,7 @@ config SPEAKUP
 		the synthesizer drivers below can only be built as
 		modules.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		These drivers are not standalone drivers, but must be
 		used in conjunction with Speakup.  Think of them as
@@ -42,19 +51,28 @@ config SPEAKUP
 		
 		
 =======
+=======
+>>>>>>> v3.18
 
 		These drivers are not standalone drivers, but must be
 		used in conjunction with Speakup.  Think of them as
 		video cards for blind people.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		The Dectalk pc driver can only be built as a module, and
 		requires software to be pre-loaded on to the card before
 		the module can be loaded.  See the decpc choice below
 		for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -73,6 +91,10 @@ config SPEAKUP_SYNTH_ACNTSA
 config SPEAKUP_SYNTH_ACNTPC
 	tristate "Accent PC synthesizer support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ISA || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ISA || COMPILE_TEST
 >>>>>>> v3.18
@@ -110,7 +132,11 @@ config SPEAKUP_SYNTH_DECTLK
 	tristate "DECtalk Express synthesizer support"
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -123,7 +149,11 @@ config SPEAKUP_SYNTH_DECEXT
 	tristate "DECtalk External (old) synthesizer support"
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -136,21 +166,31 @@ config SPEAKUP_SYNTH_DECEXT
 config SPEAKUP_SYNTH_DECPC
 	depends on m
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "DECtalk PC (big ISA card) synthesizer support"
 	---help---
 		
 =======
+=======
+>>>>>>> v3.18
 	depends on ISA || COMPILE_TEST
 	tristate "DECtalk PC (big ISA card) synthesizer support"
 	---help---
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		This is the Speakup driver for the DecTalk PC (full
 		length ISA) synthesizer.  You can say m to build it as
 		a module.  See the configuration help on the Speakup
 		choice above for more info.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -163,7 +203,11 @@ config SPEAKUP_SYNTH_DECPC
 		loaded until the file system is mounted and the DecTalk
 		PC software has been pre-loaded on to the board.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -173,8 +217,14 @@ config SPEAKUP_SYNTH_DECPC
 config SPEAKUP_SYNTH_DTLK
 	tristate "DoubleTalk PC synthesizer support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	---help---
 		
+=======
+	depends on ISA || COMPILE_TEST
+	---help---
+
+>>>>>>> v3.18
 =======
 	depends on ISA || COMPILE_TEST
 	---help---
@@ -189,8 +239,14 @@ config SPEAKUP_SYNTH_DTLK
 config SPEAKUP_SYNTH_KEYPC
 	tristate "Keynote Gold PC synthesizer support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	---help---
 		
+=======
+	depends on ISA || COMPILE_TEST
+	---help---
+
+>>>>>>> v3.18
 =======
 	depends on ISA || COMPILE_TEST
 	---help---
@@ -227,7 +283,11 @@ config SPEAKUP_SYNTH_SPKOUT
 	tristate "Speak Out synthesizer support"
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -240,7 +300,11 @@ config SPEAKUP_SYNTH_TXPRT
 	tristate "Transport synthesizer support"
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -253,7 +317,11 @@ config SPEAKUP_SYNTH_DUMMY
 	tristate "Dummy synthesizer driver (for testing)"
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

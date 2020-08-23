@@ -37,6 +37,10 @@ struct ip6_tnl {
 	struct ip6_tnl __rcu *next;	/* next tunnel in list */
 	struct net_device *dev;	/* virtual device associated with tunnel */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net;	/* netns for packet i/o */
+>>>>>>> v3.18
 =======
 	struct net *net;	/* netns for packet i/o */
 >>>>>>> v3.18
@@ -79,8 +83,11 @@ static inline void ip6tunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 	int pkt_len, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_reset(skb);
 	memset(skb->cb, 0, sizeof(struct inet6_skb_parm));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pkt_len = skb->len;
@@ -88,7 +95,11 @@ static inline void ip6tunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	if (net_xmit_eval(err) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct pcpu_tstats *tstats = this_cpu_ptr(dev->tstats);
+=======
+		struct pcpu_sw_netstats *tstats = this_cpu_ptr(dev->tstats);
+>>>>>>> v3.18
 =======
 		struct pcpu_sw_netstats *tstats = this_cpu_ptr(dev->tstats);
 >>>>>>> v3.18

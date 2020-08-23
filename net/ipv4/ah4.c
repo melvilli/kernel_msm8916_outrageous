@@ -156,11 +156,17 @@ static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
 	struct ip_auth_hdr *ah;
 	struct ah_data *ahp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int seqhi_len = 0;
 	__be32 *seqhi;
 	int sglists = 0;
 	struct scatterlist *seqhisg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ahp = x->data;
@@ -175,6 +181,7 @@ static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
 	ihl = ip_hdrlen(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -ENOMEM;
 	iph = ah_alloc_tmp(ahash, nfrags, ihl);
 	if (!iph)
@@ -184,6 +191,8 @@ static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 =======
+=======
+>>>>>>> v3.18
 	if (x->props.flags & XFRM_STATE_ESN) {
 		sglists = 1;
 		seqhi_len = sizeof(*seqhi);
@@ -197,6 +206,9 @@ static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 	seqhisg = sg + nfrags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(ah->auth_data, 0, ahp->icv_trunc_len);
@@ -234,11 +246,14 @@ static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
 	ah->seq_no = htonl(XFRM_SKB_CB(skb)->seq.output.low);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sg_init_table(sg, nfrags);
 	skb_to_sgvec(skb, sg, 0, skb->len);
 
 	ahash_request_set_crypt(req, sg, icv, skb->len);
 =======
+=======
+>>>>>>> v3.18
 	sg_init_table(sg, nfrags + sglists);
 	skb_to_sgvec_nomark(skb, sg, 0, skb->len);
 
@@ -248,6 +263,9 @@ static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
 		sg_set_buf(seqhisg, seqhi, seqhi_len);
 	}
 	ahash_request_set_crypt(req, sg, icv, skb->len + seqhi_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahash_request_set_callback(req, 0, ah_output_done, skb);
 
@@ -331,11 +349,17 @@ static int ah_input(struct xfrm_state *x, struct sk_buff *skb)
 	struct ah_data *ahp;
 	int err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int seqhi_len = 0;
 	__be32 *seqhi;
 	int sglists = 0;
 	struct scatterlist *seqhisg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pskb_may_pull(skb, sizeof(*ah)))
@@ -378,6 +402,7 @@ static int ah_input(struct xfrm_state *x, struct sk_buff *skb)
 	ihl = ip_hdrlen(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	work_iph = ah_alloc_tmp(ahash, nfrags, ihl + ahp->icv_trunc_len);
 	if (!work_iph)
 		goto out;
@@ -387,6 +412,8 @@ static int ah_input(struct xfrm_state *x, struct sk_buff *skb)
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 =======
+=======
+>>>>>>> v3.18
 	if (x->props.flags & XFRM_STATE_ESN) {
 		sglists = 1;
 		seqhi_len = sizeof(*seqhi);
@@ -403,6 +430,9 @@ static int ah_input(struct xfrm_state *x, struct sk_buff *skb)
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 	seqhisg = sg + nfrags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(work_iph, iph, ihl);
@@ -423,11 +453,14 @@ static int ah_input(struct xfrm_state *x, struct sk_buff *skb)
 	skb_push(skb, ihl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sg_init_table(sg, nfrags);
 	skb_to_sgvec(skb, sg, 0, skb->len);
 
 	ahash_request_set_crypt(req, sg, icv, skb->len);
 =======
+=======
+>>>>>>> v3.18
 	sg_init_table(sg, nfrags + sglists);
 	skb_to_sgvec_nomark(skb, sg, 0, skb->len);
 
@@ -437,6 +470,9 @@ static int ah_input(struct xfrm_state *x, struct sk_buff *skb)
 		sg_set_buf(seqhisg, seqhi, seqhi_len);
 	}
 	ahash_request_set_crypt(req, sg, icv, skb->len + seqhi_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahash_request_set_callback(req, 0, ah_input_done, skb);
 
@@ -471,7 +507,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ah4_err(struct sk_buff *skb, u32 info)
+=======
+static int ah4_err(struct sk_buff *skb, u32 info)
+>>>>>>> v3.18
 =======
 static int ah4_err(struct sk_buff *skb, u32 info)
 >>>>>>> v3.18
@@ -485,23 +525,30 @@ static int ah4_err(struct sk_buff *skb, u32 info)
 	case ICMP_DEST_UNREACH:
 		if (icmp_hdr(skb)->code != ICMP_FRAG_NEEDED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
 	case ICMP_REDIRECT:
 		break;
 	default:
 		return;
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 	case ICMP_REDIRECT:
 		break;
 	default:
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	x = xfrm_state_lookup(net, skb->mark, (const xfrm_address_t *)&iph->daddr,
 			      ah->spi, IPPROTO_AH, AF_INET);
 	if (!x)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -514,6 +561,8 @@ static int ah4_err(struct sk_buff *skb, u32 info)
 		ipv4_redirect(skb, net, 0, 0, IPPROTO_AH, 0);
 	xfrm_state_put(x);
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (icmp_hdr(skb)->type == ICMP_DEST_UNREACH)
@@ -523,6 +572,9 @@ static int ah4_err(struct sk_buff *skb, u32 info)
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -573,8 +625,11 @@ static int ah_init_state(struct xfrm_state *x)
 	ahp->icv_trunc_len = x->aalg->alg_trunc_len/8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(ahp->icv_trunc_len > MAX_AH_AUTH_LEN);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (x->props.flags & XFRM_STATE_ALIGN4)
@@ -609,11 +664,17 @@ static void ah_destroy(struct xfrm_state *x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ah4_rcv_cb(struct sk_buff *skb, int err)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct xfrm_type ah_type =
@@ -629,18 +690,24 @@ static const struct xfrm_type ah_type =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_protocol ah4_protocol = {
 	.handler	=	xfrm4_rcv,
 	.err_handler	=	ah4_err,
 	.no_policy	=	1,
 	.netns_ok	=	1,
 =======
+=======
+>>>>>>> v3.18
 static struct xfrm4_protocol ah4_protocol = {
 	.handler	=	xfrm4_rcv,
 	.input_handler	=	xfrm_input,
 	.cb_handler	=	ah4_rcv_cb,
 	.err_handler	=	ah4_err,
 	.priority	=	0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -651,7 +718,11 @@ static int __init ah4_init(void)
 		return -EAGAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet_add_protocol(&ah4_protocol, IPPROTO_AH) < 0) {
+=======
+	if (xfrm4_protocol_register(&ah4_protocol, IPPROTO_AH) < 0) {
+>>>>>>> v3.18
 =======
 	if (xfrm4_protocol_register(&ah4_protocol, IPPROTO_AH) < 0) {
 >>>>>>> v3.18
@@ -665,7 +736,11 @@ static int __init ah4_init(void)
 static void __exit ah4_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet_del_protocol(&ah4_protocol, IPPROTO_AH) < 0)
+=======
+	if (xfrm4_protocol_deregister(&ah4_protocol, IPPROTO_AH) < 0)
+>>>>>>> v3.18
 =======
 	if (xfrm4_protocol_deregister(&ah4_protocol, IPPROTO_AH) < 0)
 >>>>>>> v3.18

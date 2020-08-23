@@ -244,6 +244,7 @@ static int nbd_send_req(struct nbd_device *nbd, struct request *req)
 	unsigned long size = blk_rq_bytes(req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	request.magic = htonl(NBD_REQUEST_MAGIC);
 	request.type = htonl(nbd_cmd(req));
 
@@ -253,11 +254,16 @@ static int nbd_send_req(struct nbd_device *nbd, struct request *req)
 		request.len = 0;
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	memset(&request, 0, sizeof(request));
 	request.magic = htonl(NBD_REQUEST_MAGIC);
 	request.type = htonl(nbd_cmd(req));
 
 	if (nbd_cmd(req) != NBD_CMD_FLUSH && nbd_cmd(req) != NBD_CMD_DISC) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		request.from = cpu_to_be64((u64)blk_rq_pos(req) << 9);
 		request.len = htonl(size);
@@ -280,7 +286,11 @@ static int nbd_send_req(struct nbd_device *nbd, struct request *req)
 	if (nbd_cmd(req) == NBD_CMD_WRITE) {
 		struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct bio_vec *bvec;
+=======
+		struct bio_vec bvec;
+>>>>>>> v3.18
 =======
 		struct bio_vec bvec;
 >>>>>>> v3.18
@@ -291,17 +301,23 @@ static int nbd_send_req(struct nbd_device *nbd, struct request *req)
 		rq_for_each_segment(bvec, req, iter) {
 			flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!rq_iter_last(req, iter))
 				flags = MSG_MORE;
 			dprintk(DBG_TX, "%s: request %p: sending %d bytes data\n",
 					nbd->disk->disk_name, req, bvec->bv_len);
 			result = sock_send_bvec(nbd, bvec, flags);
 =======
+=======
+>>>>>>> v3.18
 			if (!rq_iter_last(bvec, iter))
 				flags = MSG_MORE;
 			dprintk(DBG_TX, "%s: request %p: sending %d bytes data\n",
 					nbd->disk->disk_name, req, bvec.bv_len);
 			result = sock_send_bvec(nbd, &bvec, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (result <= 0) {
 				dev_err(disk_to_dev(nbd->disk),
@@ -399,15 +415,21 @@ static struct request *nbd_read_stat(struct nbd_device *nbd)
 	if (nbd_cmd(req) == NBD_CMD_READ) {
 		struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct bio_vec *bvec;
 
 		rq_for_each_segment(bvec, req, iter) {
 			result = sock_recv_bvec(nbd, bvec);
 =======
+=======
+>>>>>>> v3.18
 		struct bio_vec bvec;
 
 		rq_for_each_segment(bvec, req, iter) {
 			result = sock_recv_bvec(nbd, &bvec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (result <= 0) {
 				dev_err(disk_to_dev(nbd->disk), "Receive data failed (result %d)\n",
@@ -417,7 +439,11 @@ static struct request *nbd_read_stat(struct nbd_device *nbd)
 			}
 			dprintk(DBG_RX, "%s: request %p: got %d bytes data\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nbd->disk->disk_name, req, bvec->bv_len);
+=======
+				nbd->disk->disk_name, req, bvec.bv_len);
+>>>>>>> v3.18
 =======
 				nbd->disk->disk_name, req, bvec.bv_len);
 >>>>>>> v3.18
@@ -565,7 +591,11 @@ static int nbd_thread(void *data)
 	struct request *req;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -617,8 +647,13 @@ static void do_nbd_request(struct request_queue *q)
 
 		if (unlikely(!nbd->sock)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err_ratelimited(disk_to_dev(nbd->disk),
 					    "Attempted send on closed socket\n");
+=======
+			dev_err(disk_to_dev(nbd->disk),
+				"Attempted send on closed socket\n");
+>>>>>>> v3.18
 =======
 			dev_err(disk_to_dev(nbd->disk),
 				"Attempted send on closed socket\n");
@@ -671,6 +706,7 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
  
 	case NBD_CLEAR_SOCK: {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct file *file;
 
 		nbd->sock = NULL;
@@ -680,13 +716,22 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 		struct socket *sock = nbd->sock;
 		nbd->sock = NULL;
 >>>>>>> v3.18
+=======
+		struct socket *sock = nbd->sock;
+		nbd->sock = NULL;
+>>>>>>> v3.18
 		nbd_clear_que(nbd);
 		BUG_ON(!list_empty(&nbd->queue_head));
 		BUG_ON(!list_empty(&nbd->waiting_queue));
 		kill_bdev(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (file)
 			fput(file);
+=======
+		if (sock)
+			sockfd_put(sock);
+>>>>>>> v3.18
 =======
 		if (sock)
 			sockfd_put(sock);
@@ -695,6 +740,7 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 	}
 
 	case NBD_SET_SOCK: {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct file *file;
 		if (nbd->file)
@@ -713,6 +759,8 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 				fput(file);
 			}
 =======
+=======
+>>>>>>> v3.18
 		struct socket *sock;
 		int err;
 		if (nbd->sock)
@@ -724,6 +772,9 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 				bdev->bd_invalidated = 1;
 			nbd->disconnect = 0; /* we're connected now */
 			return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return -EINVAL;
@@ -762,7 +813,11 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 	case NBD_DO_IT: {
 		struct task_struct *thread;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct file *file;
+=======
+		struct socket *sock;
+>>>>>>> v3.18
 =======
 		struct socket *sock;
 >>>>>>> v3.18
@@ -771,7 +826,11 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 		if (nbd->pid)
 			return -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!nbd->file)
+=======
+		if (!nbd->sock)
+>>>>>>> v3.18
 =======
 		if (!nbd->sock)
 >>>>>>> v3.18
@@ -804,8 +863,13 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 			return error;
 		sock_shutdown(nbd, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		file = nbd->file;
 		nbd->file = NULL;
+=======
+		sock = nbd->sock;
+		nbd->sock = NULL;
+>>>>>>> v3.18
 =======
 		sock = nbd->sock;
 		nbd->sock = NULL;
@@ -816,8 +880,13 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 		queue_flag_clear_unlocked(QUEUE_FLAG_DISCARD, nbd->disk->queue);
 		set_device_ro(bdev, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (file)
 			fput(file);
+=======
+		if (sock)
+			sockfd_put(sock);
+>>>>>>> v3.18
 =======
 		if (sock)
 			sockfd_put(sock);
@@ -839,7 +908,10 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
 		 * by NBD_DO_IT or NBD_CLEAR_SOCK.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(!nbd->sock && !list_empty(&nbd->queue_head));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;
@@ -901,11 +973,17 @@ static int __init nbd_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	nbd_dev = kcalloc(nbds_max, sizeof(*nbd_dev), GFP_KERNEL);
 	if (!nbd_dev)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	part_shift = 0;
 	if (max_part > 0) {
@@ -929,10 +1007,13 @@ static int __init nbd_init(void)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nbd_dev = kcalloc(nbds_max, sizeof(*nbd_dev), GFP_KERNEL);
 	if (!nbd_dev)
 		return -ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < nbds_max; i++) {
@@ -955,6 +1036,10 @@ static int __init nbd_init(void)
 		 */
 		queue_flag_set_unlocked(QUEUE_FLAG_NONROT, disk->queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, disk->queue);
+>>>>>>> v3.18
 =======
 		queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, disk->queue);
 >>>>>>> v3.18
@@ -976,9 +1061,13 @@ static int __init nbd_init(void)
 	for (i = 0; i < nbds_max; i++) {
 		struct gendisk *disk = nbd_dev[i].disk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nbd_dev[i].file = NULL;
 		nbd_dev[i].magic = NBD_MAGIC;
 		nbd_dev[i].flags = 0;
+=======
+		nbd_dev[i].magic = NBD_MAGIC;
+>>>>>>> v3.18
 =======
 		nbd_dev[i].magic = NBD_MAGIC;
 >>>>>>> v3.18

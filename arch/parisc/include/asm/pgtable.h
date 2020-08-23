@@ -512,6 +512,10 @@ static inline void ptep_set_wrprotect(struct mm_struct *mm, unsigned long addr, 
 
 #define HAVE_ARCH_UNMAPPED_AREA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HAVE_ARCH_UNMAPPED_AREA_TOPDOWN
+>>>>>>> v3.18
 =======
 #define HAVE_ARCH_UNMAPPED_AREA_TOPDOWN
 >>>>>>> v3.18

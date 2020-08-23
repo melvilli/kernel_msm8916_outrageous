@@ -757,6 +757,10 @@ static const struct {
 	{ ACPI_SIG_IBFT },
 	{ "iBFT" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "BIFT" },	/* Broadcom iSCSI Offload */
+>>>>>>> v3.18
 =======
 	{ "BIFT" },	/* Broadcom iSCSI Offload */
 >>>>>>> v3.18

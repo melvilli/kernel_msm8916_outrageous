@@ -105,6 +105,10 @@ enum qeth_ipa_cmds {
 	IPA_CMD_SETADAPTERPARMS		= 0xb8,
 	IPA_CMD_SET_DIAG_ASS		= 0xb9,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IPA_CMD_SETBRIDGEPORT		= 0xbe,
+>>>>>>> v3.18
 =======
 	IPA_CMD_SETBRIDGEPORT		= 0xbe,
 >>>>>>> v3.18
@@ -113,6 +117,10 @@ enum qeth_ipa_cmds {
 	IPA_CMD_REGISTER_LOCAL_ADDR	= 0xd1,
 	IPA_CMD_UNREGISTER_LOCAL_ADDR	= 0xd2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IPA_CMD_ADDRESS_CHANGE_NOTIF	= 0xd3,
+>>>>>>> v3.18
 =======
 	IPA_CMD_ADDRESS_CHANGE_NOTIF	= 0xd3,
 >>>>>>> v3.18
@@ -249,6 +257,10 @@ enum qeth_ipa_setadp_cmd {
 	IPA_SETADP_SET_ACCESS_CONTROL		= 0x00010000L,
 	IPA_SETADP_QUERY_OAT			= 0x00080000L,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IPA_SETADP_QUERY_SWITCH_ATTRIBUTES	= 0x00100000L,
+>>>>>>> v3.18
 =======
 	IPA_SETADP_QUERY_SWITCH_ATTRIBUTES	= 0x00100000L,
 >>>>>>> v3.18
@@ -287,8 +299,11 @@ enum qeth_ipa_set_access_mode_rc {
 	SET_ACCESS_CTRL_RC_REFLREL_DEACT_FAILED	= 0x0028,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 enum qeth_card_info_card_type {
 	CARD_INFO_TYPE_1G_COPPER_A	= 0x61,
 	CARD_INFO_TYPE_1G_FIBRE_A	= 0x71,
@@ -307,6 +322,9 @@ enum qeth_card_info_port_speed {
 	CARD_INFO_PORTS_1G		= 0x00000007,
 	CARD_INFO_PORTS_10G		= 0x00000008,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* (SET)DELIP(M) IPA stuff ***************************************************/
@@ -438,7 +456,10 @@ struct qeth_qoat_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qeth_query_card_info {
 	__u8	card_type;
 	__u8	reserved1;
@@ -462,6 +483,9 @@ struct qeth_query_switch_attributes {
 	__u8  reserved3[8];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qeth_ipacmd_setadpparms_hdr {
 	__u32 supp_hw_cmds;
@@ -484,6 +508,11 @@ struct qeth_ipacmd_setadpparms {
 		struct qeth_set_access_ctrl set_access_ctrl;
 		struct qeth_query_oat query_oat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct qeth_query_card_info card_info;
+		struct qeth_query_switch_attributes query_switch_attributes;
+>>>>>>> v3.18
 =======
 		struct qeth_query_card_info card_info;
 		struct qeth_query_switch_attributes query_switch_attributes;
@@ -539,7 +568,10 @@ struct qeth_ipacmd_diagass {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* SETBRIDGEPORT IPA Command:	 *********************************************/
 enum qeth_ipa_sbp_cmd {
 	IPA_SBP_QUERY_COMMANDS_SUPPORTED	= 0x00000000L,
@@ -658,6 +690,9 @@ struct qeth_ipacmd_addr_change {
 	struct qeth_ipacmd_addr_change_entry entry[];
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Header for each IPA command */
 struct qeth_ipacmd_hdr {
@@ -689,6 +724,11 @@ struct qeth_ipa_cmd {
 		struct qeth_set_routing			setrtg;
 		struct qeth_ipacmd_diagass		diagass;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct qeth_ipacmd_setbridgeport	sbp;
+		struct qeth_ipacmd_addr_change		addrchange;
+>>>>>>> v3.18
 =======
 		struct qeth_ipacmd_setbridgeport	sbp;
 		struct qeth_ipacmd_addr_change		addrchange;

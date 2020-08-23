@@ -7,6 +7,10 @@ config PMC_MSP4200_EVAL
 	select IRQ_MSP_SLP
 	select HW_HAS_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MIPS_L1_CACHE_SHIFT_4
+>>>>>>> v3.18
 =======
 	select MIPS_L1_CACHE_SHIFT_4
 >>>>>>> v3.18

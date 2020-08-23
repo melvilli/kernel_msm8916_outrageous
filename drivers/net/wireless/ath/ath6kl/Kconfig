@@ -1,7 +1,10 @@
 config ATH6KL
 	tristate "Atheros mobile chipsets support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	depends on CFG80211
         ---help---
 	  This module adds core support for wireless adapters based on
@@ -11,6 +14,9 @@ config ATH6KL
 	  If you choose to build it as a module, it will be called
 	  ath6kl_core. Please note that AR6002 and AR6001 are not
 	  supported by this driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ATH6KL_SDIO
@@ -18,7 +24,10 @@ config ATH6KL_SDIO
 	depends on ATH6KL
 	depends on MMC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CFG80211
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -33,6 +42,7 @@ config ATH6KL_USB
 	depends on ATH6KL
 	depends on USB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CFG80211
 	---help---
 	  This module adds support for wireless adapters based on
@@ -40,11 +50,16 @@ config ATH6KL_USB
 	  implementation and it isn't functional. If you choose to
 	  build it as a module, it will be called ath6kl_usb.
 =======
+=======
+>>>>>>> v3.18
 	---help---
 	  This module adds support for wireless adapters based on
 	  Atheros AR6004 chipset and chipsets based on it running over
 	  USB. If you choose to build it as a module, it will be
 	  called ath6kl_usb.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ATH6KL_DEBUG
@@ -52,13 +67,19 @@ config ATH6KL_DEBUG
 	depends on ATH6KL
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Enables debug support
 =======
+=======
+>>>>>>> v3.18
 	  Enables ath6kl debug support, including debug messages
 	  enabled with debug_mask module parameter and debugfs
 	  interface.
 
 	  If unsure, say Y to make it easier to debug problems.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ATH6KL_TRACING
@@ -67,12 +88,18 @@ config ATH6KL_TRACING
 	depends on EVENT_TRACING
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Select this to ath6kl use tracing infrastructure.
 =======
+=======
+>>>>>>> v3.18
 	  Select this to ath6kl use tracing infrastructure which, for
 	  example, can be enabled with help of trace-cmd. All debug
 	  messages and commands are delivered to using individually
 	  enablable trace points.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If unsure, say Y to make it easier to debug problems.
@@ -86,6 +113,11 @@ config ATH6KL_REGDOMAIN
 	  the firmware. This can be only enabled if regulatory requirements
 	  are taken into account.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	  If unsure, say N.
+>>>>>>> v3.18
 =======
 
 	  If unsure, say N.

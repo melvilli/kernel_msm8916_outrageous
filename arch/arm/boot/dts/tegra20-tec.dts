@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "tegra20-tamonten.dtsi"
+=======
+#include "tegra20-tamonten.dtsi"
+>>>>>>> v3.18
 =======
 #include "tegra20-tamonten.dtsi"
 >>>>>>> v3.18
@@ -11,8 +15,13 @@
 	compatible = "ad,tec", "ad,tamonten", "nvidia,tegra20";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host1x {
 		hdmi {
+=======
+	host1x@50000000 {
+		hdmi@54280000 {
+>>>>>>> v3.18
 =======
 	host1x@50000000 {
 		hdmi@54280000 {
@@ -27,7 +36,11 @@
 			reg = <0x1a>;
 			interrupt-parent = <&gpio>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <187 0x04>;
+=======
+			interrupts = <TEGRA_GPIO(X, 3) IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <TEGRA_GPIO(X, 3) IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -46,7 +59,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pcie-controller@80003000 {
 		status = "okay";
 
@@ -55,6 +71,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sound {
 		compatible = "ad,tegra-audio-wm8903-tec",
@@ -75,6 +94,7 @@
 		nvidia,audio-codec = <&wm8903>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nvidia,spkr-en-gpios = <&wm8903 2 0>;
 		nvidia,hp-det-gpios = <&gpio 178 0>; /* gpio PW2 */
 
@@ -82,6 +102,8 @@
 		clock-names = "pll_a", "pll_a_out0", "mclk";
 	};
 =======
+=======
+>>>>>>> v3.18
 		nvidia,spkr-en-gpios = <&wm8903 2 GPIO_ACTIVE_HIGH>;
 		nvidia,hp-det-gpios = <&gpio TEGRA_GPIO(W, 2)
 			GPIO_ACTIVE_HIGH>;
@@ -132,5 +154,8 @@
 			regulator-always-on;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -36,10 +36,13 @@ void prom_init_loongson_uart_base(void)
 	case MACH_LEMOTE_NAS:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The CPU provided serial port */
 		loongson_uart_base = LOONGSON_LIO1_BASE + 0x3f8;
 		break;
 =======
+=======
+>>>>>>> v3.18
 		/* The CPU provided serial port (LPC) */
 		loongson_uart_base = LOONGSON_LIO1_BASE + 0x3f8;
 		break;
@@ -50,6 +53,9 @@ void prom_init_loongson_uart_base(void)
 		/* The CPU provided serial port (CPU) */
 		loongson_uart_base = LOONGSON_REG_BASE + 0x1e0;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

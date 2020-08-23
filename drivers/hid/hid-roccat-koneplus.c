@@ -157,7 +157,12 @@ KONEPLUS_SYSFS_R(thingy, THINGY)
 
 #define KONEPLUS_BIN_ATTRIBUTE_RW(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+KONEPLUS_SYSFS_RW(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 KONEPLUS_SYSFS_RW(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -170,7 +175,12 @@ static struct bin_attribute bin_attr_##thingy = { \
 
 #define KONEPLUS_BIN_ATTRIBUTE_R(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+KONEPLUS_SYSFS_R(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 KONEPLUS_SYSFS_R(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -182,7 +192,12 @@ static struct bin_attribute bin_attr_##thingy = { \
 
 #define KONEPLUS_BIN_ATTRIBUTE_W(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+KONEPLUS_SYSFS_W(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 KONEPLUS_SYSFS_W(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -191,6 +206,7 @@ static struct bin_attribute bin_attr_##thingy = { \
 	.size = KONEPLUS_SIZE_ ## THINGY, \
 	.write = koneplus_sysfs_write_ ## thingy \
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 KONEPLUS_SYSFS_W(control, CONTROL)
@@ -203,6 +219,8 @@ KONEPLUS_SYSFS_R(tcu_image, TCU_IMAGE)
 KONEPLUS_SYSFS_RW(profile_settings, PROFILE_SETTINGS)
 KONEPLUS_SYSFS_RW(profile_buttons, PROFILE_BUTTONS)
 =======
+=======
+>>>>>>> v3.18
 KONEPLUS_BIN_ATTRIBUTE_W(control, CONTROL);
 KONEPLUS_BIN_ATTRIBUTE_W(talk, TALK);
 KONEPLUS_BIN_ATTRIBUTE_W(macro, MACRO);
@@ -212,6 +230,9 @@ KONEPLUS_BIN_ATTRIBUTE_RW(sensor, SENSOR);
 KONEPLUS_BIN_ATTRIBUTE_RW(tcu, TCU);
 KONEPLUS_BIN_ATTRIBUTE_RW(profile_settings, PROFILE_SETTINGS);
 KONEPLUS_BIN_ATTRIBUTE_RW(profile_buttons, PROFILE_BUTTONS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t koneplus_sysfs_read_profilex_settings(struct file *fp,
@@ -253,7 +274,10 @@ static ssize_t koneplus_sysfs_read_profilex_buttons(struct file *fp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PROFILE_ATTR(number)						\
 static struct bin_attribute bin_attr_profile##number##_settings = {	\
 	.attr = { .name = "profile" #number "_settings", .mode = 0440 },	\
@@ -273,6 +297,9 @@ PROFILE_ATTR(3);
 PROFILE_ATTR(4);
 PROFILE_ATTR(5);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t koneplus_sysfs_show_actual_profile(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -296,7 +323,11 @@ static ssize_t koneplus_sysfs_set_actual_profile(struct device *dev,
 	usb_dev = interface_to_usbdev(to_usb_interface(dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &profile);
+=======
+	retval = kstrtoul(buf, 10, &profile);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &profile);
 >>>>>>> v3.18
@@ -328,13 +359,19 @@ static ssize_t koneplus_sysfs_set_actual_profile(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(actual_profile, 0660,
 		   koneplus_sysfs_show_actual_profile,
 		   koneplus_sysfs_set_actual_profile);
 static DEVICE_ATTR(startup_profile, 0660,
 		   koneplus_sysfs_show_actual_profile,
 		   koneplus_sysfs_set_actual_profile);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t koneplus_sysfs_show_firmware_version(struct device *dev,
@@ -355,6 +392,7 @@ static ssize_t koneplus_sysfs_show_firmware_version(struct device *dev,
 
 	return snprintf(buf, PAGE_SIZE, "%d\n", info.firmware_version);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute koneplus_attributes[] = {
@@ -441,6 +479,8 @@ static struct bin_attribute koneplus_bin_attributes[] = {
 	},
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(firmware_version, 0440,
 		   koneplus_sysfs_show_firmware_version, NULL);
 
@@ -482,6 +522,9 @@ static const struct attribute_group koneplus_group = {
 static const struct attribute_group *koneplus_groups[] = {
 	&koneplus_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -679,8 +722,12 @@ static int __init koneplus_init(void)
 	if (IS_ERR(koneplus_class))
 		return PTR_ERR(koneplus_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	koneplus_class->dev_attrs = koneplus_attributes;
 	koneplus_class->dev_bin_attrs = koneplus_bin_attributes;
+=======
+	koneplus_class->dev_groups = koneplus_groups;
+>>>>>>> v3.18
 =======
 	koneplus_class->dev_groups = koneplus_groups;
 >>>>>>> v3.18

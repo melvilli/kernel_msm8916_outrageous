@@ -28,8 +28,12 @@
 #include <cs5536/cs5536_mfgpt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SPINLOCK(mfgpt_lock);
 EXPORT_SYMBOL(mfgpt_lock);
+=======
+static DEFINE_RAW_SPINLOCK(mfgpt_lock);
+>>>>>>> v3.18
 =======
 static DEFINE_RAW_SPINLOCK(mfgpt_lock);
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static void init_mfgpt_timer(enum clock_event_mode mode,
 			     struct clock_event_device *evt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&mfgpt_lock);
+=======
+	raw_spin_lock(&mfgpt_lock);
+>>>>>>> v3.18
 =======
 	raw_spin_lock(&mfgpt_lock);
 >>>>>>> v3.18
@@ -88,7 +96,11 @@ static void init_mfgpt_timer(enum clock_event_mode mode,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&mfgpt_lock);
+=======
+	raw_spin_unlock(&mfgpt_lock);
+>>>>>>> v3.18
 =======
 	raw_spin_unlock(&mfgpt_lock);
 >>>>>>> v3.18
@@ -170,7 +182,11 @@ static cycle_t mfgpt_read(struct clocksource *cs)
 	static u32 old_jifs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&mfgpt_lock, flags);
+=======
+	raw_spin_lock_irqsave(&mfgpt_lock, flags);
+>>>>>>> v3.18
 =======
 	raw_spin_lock_irqsave(&mfgpt_lock, flags);
 >>>>>>> v3.18
@@ -208,7 +224,11 @@ static cycle_t mfgpt_read(struct clocksource *cs)
 	old_jifs = jifs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&mfgpt_lock, flags);
+=======
+	raw_spin_unlock_irqrestore(&mfgpt_lock, flags);
+>>>>>>> v3.18
 =======
 	raw_spin_unlock_irqrestore(&mfgpt_lock, flags);
 >>>>>>> v3.18

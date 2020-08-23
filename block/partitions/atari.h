@@ -12,6 +12,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 
@@ -35,7 +40,11 @@ struct rootsector
   u32 bsl_cnt;			/* length of bad sector list */
   u16 checksum;			/* checksum for bootable disks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((__packed__));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18

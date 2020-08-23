@@ -286,7 +286,11 @@ static int chnl_net_open(struct net_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lldev = dev_get_by_index(dev_net(dev), llifindex);
+=======
+		lldev = __dev_get_by_index(dev_net(dev), llifindex);
+>>>>>>> v3.18
 =======
 		lldev = __dev_get_by_index(dev_net(dev), llifindex);
 >>>>>>> v3.18
@@ -312,7 +316,10 @@ static int chnl_net_open(struct net_device *dev)
 		mtu = min_t(int, GPRS_PDP_MTU, mtu);
 		dev_set_mtu(dev, mtu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_put(lldev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -25,8 +25,11 @@ struct pacct_struct;
 struct pid_namespace;
 extern int acct_parm[]; /* for sysctl */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void acct_auto_close_mnt(struct vfsmount *m);
 extern void acct_auto_close(struct super_block *sb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void acct_collect(long exitcode, int group_dead);
@@ -34,8 +37,11 @@ extern void acct_process(void);
 extern void acct_exit_ns(struct pid_namespace *);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define acct_auto_close_mnt(x)	do { } while (0)
 #define acct_auto_close(x)	do { } while (0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define acct_collect(x,y)	do { } while (0)

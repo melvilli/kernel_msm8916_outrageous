@@ -235,7 +235,11 @@ static int wm8753_get_dai(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec =  snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -249,7 +253,11 @@ static int wm8753_set_dai(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec =  snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -260,7 +268,11 @@ static int wm8753_set_dai(struct snd_kcontrol *kcontrol,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (codec->active)
+=======
+	if (snd_soc_codec_is_active(codec))
+>>>>>>> v3.18
 =======
 	if (snd_soc_codec_is_active(codec))
 >>>>>>> v3.18
@@ -950,6 +962,7 @@ static int wm8753_pcm_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -961,6 +974,8 @@ static int wm8753_pcm_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -971,6 +986,9 @@ static int wm8753_pcm_hw_params(struct snd_pcm_substream *substream,
 		voice |= 0x0008;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		voice |= 0x000c;
 		break;
@@ -1202,6 +1220,7 @@ static int wm8753_i2s_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -1213,6 +1232,8 @@ static int wm8753_i2s_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -1223,6 +1244,9 @@ static int wm8753_i2s_hw_params(struct snd_pcm_substream *substream,
 		hifi |= 0x0008;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hifi |= 0x000c;
 		break;
@@ -1353,7 +1377,11 @@ static int wm8753_mute(struct snd_soc_dai *dai, int mute)
 	 * make sure we check if they are not both active when we mute */
 	if (mute && wm8753->dai_func == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!codec->active)
+=======
+		if (!snd_soc_codec_is_active(codec))
+>>>>>>> v3.18
 =======
 		if (!snd_soc_codec_is_active(codec))
 >>>>>>> v3.18
@@ -1476,7 +1504,11 @@ static void wm8753_work(struct work_struct *work)
 		container_of(work, struct snd_soc_dapm_context,
 			     delayed_work.work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = dapm->codec;
+=======
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(dapm);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(dapm);
 >>>>>>> v3.18
@@ -1487,7 +1519,10 @@ static int wm8753_suspend(struct snd_soc_codec *codec)
 {
 	wm8753_set_bias_level(codec, SND_SOC_BIAS_OFF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->cache_sync = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1506,8 +1541,14 @@ static int wm8753_resume(struct snd_soc_codec *codec)
 		wm8753_set_bias_level(codec, SND_SOC_BIAS_PREPARE);
 		codec->dapm.bias_level = SND_SOC_BIAS_ON;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&codec->dapm.delayed_work,
 			msecs_to_jiffies(caps_charge));
+=======
+		queue_delayed_work(system_power_efficient_wq,
+				   &codec->dapm.delayed_work,
+				   msecs_to_jiffies(caps_charge));
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq,
 				   &codec->dapm.delayed_work,
@@ -1526,6 +1567,7 @@ static int wm8753_probe(struct snd_soc_codec *codec)
 	INIT_DELAYED_WORK(&codec->dapm.delayed_work, wm8753_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = wm8753->regmap;
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret < 0) {
@@ -1533,6 +1575,8 @@ static int wm8753_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = wm8753_reset(codec);
@@ -1654,7 +1698,11 @@ static struct spi_driver wm8753_spi_driver = {
 #endif /* CONFIG_SPI_MASTER */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -1715,7 +1763,11 @@ static int __init wm8753_modinit(void)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -1739,7 +1791,11 @@ module_init(wm8753_modinit);
 static void __exit wm8753_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

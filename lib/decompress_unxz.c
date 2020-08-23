@@ -249,15 +249,21 @@ void *memmove(void *dest, const void *src, size_t size)
  * fill() and flush() won't be used.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC int INIT unxz(unsigned char *in, int in_size,
 		     int (*fill)(void *dest, unsigned int size),
 		     int (*flush)(void *src, unsigned int size),
 		     unsigned char *out, int *in_used,
 =======
+=======
+>>>>>>> v3.18
 STATIC int INIT unxz(unsigned char *in, long in_size,
 		     long (*fill)(void *dest, unsigned long size),
 		     long (*flush)(void *src, unsigned long size),
 		     unsigned char *out, long *in_used,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     void (*error)(char *x))
 {
@@ -337,7 +343,11 @@ STATIC int INIT unxz(unsigned char *in, long in_size,
 				 * it's not too bad.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (flush(b.out, b.out_pos) != (int)b.out_pos)
+=======
+				if (flush(b.out, b.out_pos) != (long)b.out_pos)
+>>>>>>> v3.18
 =======
 				if (flush(b.out, b.out_pos) != (long)b.out_pos)
 >>>>>>> v3.18

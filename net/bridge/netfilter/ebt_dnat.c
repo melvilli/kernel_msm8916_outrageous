@@ -23,7 +23,11 @@ ebt_dnat_tg(struct sk_buff *skb, const struct xt_action_param *par)
 		return EBT_DROP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eth_hdr(skb)->h_dest, info->mac, ETH_ALEN);
+=======
+	ether_addr_copy(eth_hdr(skb)->h_dest, info->mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(eth_hdr(skb)->h_dest, info->mac);
 >>>>>>> v3.18

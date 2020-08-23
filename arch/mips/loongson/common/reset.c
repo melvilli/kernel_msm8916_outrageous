@@ -17,6 +17,10 @@
 
 #include <loongson.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <boot_param.h>
+>>>>>>> v3.18
 =======
 #include <boot_param.h>
 >>>>>>> v3.18
@@ -42,6 +46,10 @@ static inline void loongson_reboot(void)
 static void loongson_restart(char *command)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_LEFI_FIRMWARE_INTERFACE
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_LEFI_FIRMWARE_INTERFACE
 >>>>>>> v3.18
@@ -51,7 +59,10 @@ static void loongson_restart(char *command)
 	/* reboot via jumping to boot base address */
 	loongson_reboot();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 	void (*fw_restart)(void) = (void *)loongson_sysconf.restart_addr;
 
@@ -61,15 +72,21 @@ static void loongson_restart(char *command)
 			cpu_wait();
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void loongson_poweroff(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mach_prepare_shutdown();
 	unreachable();
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_LEFI_FIRMWARE_INTERFACE
 	mach_prepare_shutdown();
 	unreachable();
@@ -82,6 +99,9 @@ static void loongson_poweroff(void)
 			cpu_wait();
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

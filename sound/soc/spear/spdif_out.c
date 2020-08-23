@@ -19,6 +19,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -27,6 +31,10 @@
 #include <sound/spear_spdif.h>
 #include "spdif_out_regs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "spear_pcm.h"
+>>>>>>> v3.18
 =======
 #include "spear_pcm.h"
 >>>>>>> v3.18
@@ -44,6 +52,11 @@ struct spdif_out_dev {
 	u32 running;
 	void __iomem *io_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_dmaengine_dai_dma_data dma_params_tx;
+	struct snd_dmaengine_pcm_config config;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data dma_params_tx;
 	struct snd_dmaengine_pcm_config config;
@@ -76,8 +89,11 @@ static int spdif_out_startup(struct snd_pcm_substream *substream,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dai_set_dma_data(cpu_dai, substream, (void *)&host->dma_params);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = clk_enable(host->clk);
@@ -101,7 +117,10 @@ static void spdif_out_shutdown(struct snd_pcm_substream *substream,
 	clk_disable(host->clk);
 	host->running = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dai_set_dma_data(dai, substream, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -232,10 +251,14 @@ static int spdif_mute_get(struct snd_kcontrol *kcontrol,
 		struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_card *card = codec->card;
 	struct snd_soc_pcm_runtime *rtd = card->rtd;
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+=======
+	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -249,10 +272,14 @@ static int spdif_mute_put(struct snd_kcontrol *kcontrol,
 		struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_card *card = codec->card;
 	struct snd_soc_pcm_runtime *rtd = card->rtd;
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+=======
+	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -271,9 +298,12 @@ static const struct snd_kcontrol_new spdif_out_controls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int spdif_soc_dai_probe(struct snd_soc_dai *dai)
 {
 =======
+=======
+>>>>>>> v3.18
 static int spdif_soc_dai_probe(struct snd_soc_dai *dai)
 {
 	struct spdif_out_dev *host = snd_soc_dai_get_drvdata(dai);
@@ -281,6 +311,9 @@ static int spdif_soc_dai_probe(struct snd_soc_dai *dai)
 	host->dma_params_tx.filter_data = &host->dma_params;
 	dai->playback_dma_data = &host->dma_params_tx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return snd_soc_add_dai_controls(dai, spdif_out_controls,
 				ARRAY_SIZE(spdif_out_controls));
@@ -319,6 +352,7 @@ static int spdif_out_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -EINVAL;
@@ -331,12 +365,15 @@ static int spdif_out_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	host = devm_kzalloc(&pdev->dev, sizeof(*host), GFP_KERNEL);
 	if (!host) {
 		dev_warn(&pdev->dev, "kzalloc fail\n");
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	host->io_base = devm_ioremap(&pdev->dev, res->start,
 				resource_size(res));
@@ -347,12 +384,17 @@ static int spdif_out_probe(struct platform_device *pdev)
 
 	host->clk = clk_get(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	host->io_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(host->io_base))
 		return PTR_ERR(host->io_base);
 
 	host->clk = devm_clk_get(&pdev->dev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(host->clk))
 		return PTR_ERR(host->clk);
@@ -363,6 +405,7 @@ static int spdif_out_probe(struct platform_device *pdev)
 	host->dma_params.addr = res->start + SPDIF_OUT_FIFO_DATA;
 	host->dma_params.max_burst = 16;
 	host->dma_params.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	host->dma_params.filter = pdata->filter;
 
@@ -389,6 +432,8 @@ static int spdif_out_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	dev_set_drvdata(&pdev->dev, host);
 
@@ -399,6 +444,9 @@ static int spdif_out_remove(struct platform_device *pdev)
 
 	return devm_spear_pcm_platform_register(&pdev->dev, &host->config,
 						pdata->filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -441,7 +489,10 @@ static SIMPLE_DEV_PM_OPS(spdif_out_dev_pm_ops, spdif_out_suspend, \
 static struct platform_driver spdif_out_driver = {
 	.probe		= spdif_out_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= spdif_out_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

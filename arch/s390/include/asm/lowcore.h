@@ -12,6 +12,10 @@
 #include <asm/ptrace.h>
 #include <asm/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/types.h>
+>>>>>>> v3.18
 =======
 #include <asm/types.h>
 >>>>>>> v3.18
@@ -36,12 +40,18 @@ struct save_area {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct save_area_ext {
 	struct save_area	sa;
 	__vector128		vx_regs[32];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct _lowcore {
 	psw_t	restart_psw;			/* 0x0000 */
@@ -69,7 +79,12 @@ struct _lowcore {
 	__u32	trans_exc_code;			/* 0x0090 */
 	__u16	mon_class_num;			/* 0x0094 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16	per_perc_atmid;			/* 0x0096 */
+=======
+	__u8	per_code;			/* 0x0096 */
+	__u8	per_atmid;			/* 0x0097 */
+>>>>>>> v3.18
 =======
 	__u8	per_code;			/* 0x0096 */
 	__u8	per_atmid;			/* 0x0097 */
@@ -80,7 +95,11 @@ struct _lowcore {
 	__u8	per_access_id;			/* 0x00a1 */
 	__u8	op_access_id;			/* 0x00a2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	ar_access_id;			/* 0x00a3 */
+=======
+	__u8	ar_mode_id;			/* 0x00a3 */
+>>>>>>> v3.18
 =======
 	__u8	ar_mode_id;			/* 0x00a3 */
 >>>>>>> v3.18
@@ -115,7 +134,13 @@ struct _lowcore {
 	__u32	save_area_async[8];		/* 0x0220 */
 	__u32	save_area_restart[1];		/* 0x0240 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	pad_0x0244[0x0248-0x0244];	/* 0x0244 */
+=======
+
+	/* CPU flags. */
+	__u32	cpu_flags;			/* 0x0244 */
+>>>>>>> v3.18
 =======
 
 	/* CPU flags. */
@@ -167,12 +192,18 @@ struct _lowcore {
 	__u32	machine_flags;			/* 0x02f4 */
 	__u32	ftrace_func;			/* 0x02f8 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	pad_0x02fc[0x0300-0x02fc];	/* 0x02fc */
 
 	/* Interrupt response block */
 	__u8	irb[96];			/* 0x0300 */
 
 	__u8	pad_0x0360[0x0e00-0x0360];	/* 0x0360 */
+=======
+	__u32	spinlock_lockval;		/* 0x02fc */
+
+	__u8	pad_0x0300[0x0e00-0x0300];	/* 0x0300 */
+>>>>>>> v3.18
 =======
 	__u32	spinlock_lockval;		/* 0x02fc */
 
@@ -217,12 +248,18 @@ struct save_area {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct save_area_ext {
 	struct save_area	sa;
 	__vector128		vx_regs[32];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct _lowcore {
 	__u8	pad_0x0000[0x0014-0x0000];	/* 0x0000 */
@@ -238,7 +275,12 @@ struct _lowcore {
 	__u32	data_exc_code;			/* 0x0090 */
 	__u16	mon_class_num;			/* 0x0094 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16	per_perc_atmid;			/* 0x0096 */
+=======
+	__u8	per_code;			/* 0x0096 */
+	__u8	per_atmid;			/* 0x0097 */
+>>>>>>> v3.18
 =======
 	__u8	per_code;			/* 0x0096 */
 	__u8	per_atmid;			/* 0x0097 */
@@ -248,7 +290,11 @@ struct _lowcore {
 	__u8	per_access_id;			/* 0x00a1 */
 	__u8	op_access_id;			/* 0x00a2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	ar_access_id;			/* 0x00a3 */
+=======
+	__u8	ar_mode_id;			/* 0x00a3 */
+>>>>>>> v3.18
 =======
 	__u8	ar_mode_id;			/* 0x00a3 */
 >>>>>>> v3.18
@@ -288,7 +334,13 @@ struct _lowcore {
 	__u64	save_area_async[8];		/* 0x0240 */
 	__u64	save_area_restart[1];		/* 0x0280 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	pad_0x0288[0x0290-0x0288];	/* 0x0288 */
+=======
+
+	/* CPU flags. */
+	__u64	cpu_flags;			/* 0x0288 */
+>>>>>>> v3.18
 =======
 
 	/* CPU flags. */
@@ -342,6 +394,7 @@ struct _lowcore {
 	__u64	ftrace_func;			/* 0x0390 */
 	__u64	gmap;				/* 0x0398 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	pad_0x03a0[0x0400-0x03a0];	/* 0x03a0 */
 
 	/* Interrupt response block. */
@@ -353,6 +406,8 @@ struct _lowcore {
 
 	__u8	pad_0x04c0[0x0e00-0x04c0];	/* 0x04c0 */
 =======
+=======
+>>>>>>> v3.18
 	__u32	spinlock_lockval;		/* 0x03a0 */
 	__u8	pad_0x03a0[0x0400-0x03a4];	/* 0x03a4 */
 
@@ -360,6 +415,9 @@ struct _lowcore {
 	__u32	paste[16];			/* 0x0400 */
 
 	__u8	pad_0x04c0[0x0e00-0x0440];	/* 0x0440 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -377,12 +435,18 @@ struct _lowcore {
 	/* Extended facility list */
 	__u64	stfle_fac_list[32];		/* 0x0f00 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	pad_0x1000[0x11b8-0x1000];	/* 0x1000 */
 =======
+=======
+>>>>>>> v3.18
 	__u8	pad_0x1000[0x11b0-0x1000];	/* 0x1000 */
 
 	/* Pointer to vector register save area */
 	__u64	vector_save_area_addr;		/* 0x11b0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 64 bit extparam used for pfault/diag 250: defined by architecture */
@@ -408,14 +472,20 @@ struct _lowcore {
 	/* Transaction abort diagnostic block */
 	__u8	pgm_tdb[256];			/* 0x1800 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* align to the top of the prefix area */
 	__u8	pad_0x1900[0x2000-0x1900];	/* 0x1900 */
 =======
+=======
+>>>>>>> v3.18
 	__u8	pad_0x1900[0x1c00-0x1900];	/* 0x1900 */
 
 	/* Software defined save area for vector registers */
 	__u8	vector_save_area[1024];		/* 0x1c00 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 

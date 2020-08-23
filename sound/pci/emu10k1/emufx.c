@@ -1183,6 +1183,7 @@ static int _snd_emu10k1_audigy_init_efx(struct snd_emu10k1 *emu)
 	mm_segment_t seg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((icode = kzalloc(sizeof(*icode), GFP_KERNEL)) == NULL ||
 	    (icode->gpr_map = (u_int32_t __user *)
 	     kcalloc(512 + 256 + 256 + 2 * 1024, sizeof(u_int32_t),
@@ -1193,6 +1194,8 @@ static int _snd_emu10k1_audigy_init_efx(struct snd_emu10k1 *emu)
 		goto __err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	err = -ENOMEM;
 	icode = kzalloc(sizeof(*icode), GFP_KERNEL);
 	if (!icode)
@@ -1207,6 +1210,9 @@ static int _snd_emu10k1_audigy_init_efx(struct snd_emu10k1 *emu)
 	if (!controls)
 		goto __err_ctrls;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpr_map = (u32 __force *)icode->gpr_map;
 
@@ -1560,7 +1566,11 @@ A_OP(icode, &ptr, iMAC0, A_GPR(var), A_GPR(var), A_GPR(vol), A_EXTIN(input))
 	if (emu->card_capabilities->emu_model) {
 		/* EMU1010 Outputs from PCM Front, Rear, Center, LFE, Side */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_INFO "EMU outputs on\n");
+=======
+		dev_info(emu->card->dev, "EMU outputs on\n");
+>>>>>>> v3.18
 =======
 		dev_info(emu->card->dev, "EMU outputs on\n");
 >>>>>>> v3.18
@@ -1588,7 +1598,13 @@ A_OP(icode, &ptr, iMAC0, A_GPR(var), A_GPR(var), A_GPR(vol), A_EXTIN(input))
 		if ((z==1) && (emu->card_capabilities->spdif_bug)) {
 			/* Due to a SPDIF output bug on some Audigy cards, this code delays the Right channel by 1 sample */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_INFO "Installing spdif_bug patch: %s\n", emu->card_capabilities->name);
+=======
+			dev_info(emu->card->dev,
+				 "Installing spdif_bug patch: %s\n",
+				 emu->card_capabilities->name);
+>>>>>>> v3.18
 =======
 			dev_info(emu->card->dev,
 				 "Installing spdif_bug patch: %s\n",
@@ -1618,7 +1634,11 @@ A_OP(icode, &ptr, iMAC0, A_GPR(var), A_GPR(var), A_GPR(vol), A_EXTIN(input))
 	if (emu->card_capabilities->emu_model) {
 		if (emu->card_capabilities->ca0108_chip) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_INFO "EMU2 inputs on\n");
+=======
+			dev_info(emu->card->dev, "EMU2 inputs on\n");
+>>>>>>> v3.18
 =======
 			dev_info(emu->card->dev, "EMU2 inputs on\n");
 >>>>>>> v3.18
@@ -1630,17 +1650,23 @@ A_OP(icode, &ptr, iMAC0, A_GPR(var), A_GPR(var), A_GPR(vol), A_EXTIN(input))
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_INFO "EMU inputs on\n");
 			/* Capture 16 (originally 8) channels of S32_LE sound */
 
 			/*
 			printk(KERN_DEBUG "emufx.c: gpr=0x%x, tmp=0x%x\n",
 =======
+=======
+>>>>>>> v3.18
 			dev_info(emu->card->dev, "EMU inputs on\n");
 			/* Capture 16 (originally 8) channels of S32_LE sound */
 
 			/*
 			dev_dbg(emu->card->dev, "emufx.c: gpr=0x%x, tmp=0x%x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       gpr, tmp);
 			*/
@@ -1781,6 +1807,7 @@ A_OP(icode, &ptr, iMAC0, A_GPR(var), A_GPR(var), A_GPR(vol), A_EXTIN(input))
 	snd_leave_user(seg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  __err:
 	kfree(controls);
 	if (icode != NULL) {
@@ -1788,12 +1815,17 @@ A_OP(icode, &ptr, iMAC0, A_GPR(var), A_GPR(var), A_GPR(vol), A_EXTIN(input))
 		kfree(icode);
 	}
 =======
+=======
+>>>>>>> v3.18
 __err:
 	kfree(controls);
 __err_ctrls:
 	kfree((void __force *)icode->gpr_map);
 __err_gpr:
 	kfree(icode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1862,6 +1894,7 @@ static int _snd_emu10k1_init_efx(struct snd_emu10k1 *emu)
 	mm_segment_t seg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((icode = kzalloc(sizeof(*icode), GFP_KERNEL)) == NULL)
 		return -ENOMEM;
 	if ((icode->gpr_map = (u_int32_t __user *)
@@ -1875,6 +1908,8 @@ static int _snd_emu10k1_init_efx(struct snd_emu10k1 *emu)
 		goto __err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	err = -ENOMEM;
 	icode = kzalloc(sizeof(*icode), GFP_KERNEL);
 	if (!icode)
@@ -1895,6 +1930,9 @@ static int _snd_emu10k1_init_efx(struct snd_emu10k1 *emu)
 	if (!ipcm)
 		goto __err_ipcm;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpr_map = (u32 __force *)icode->gpr_map;
 
@@ -2435,6 +2473,7 @@ static int _snd_emu10k1_init_efx(struct snd_emu10k1 *emu)
 	if (err >= 0)
 		err = snd_emu10k1_ipcm_poke(emu, ipcm);
 <<<<<<< HEAD
+<<<<<<< HEAD
       __err:
 	kfree(ipcm);
 	kfree(controls);
@@ -2443,6 +2482,8 @@ static int _snd_emu10k1_init_efx(struct snd_emu10k1 *emu)
 		kfree(icode);
 	}
 =======
+=======
+>>>>>>> v3.18
 __err:
 	kfree(ipcm);
 __err_ipcm:
@@ -2451,6 +2492,9 @@ __err_ctrls:
 	kfree((void __force *)icode->gpr_map);
 __err_gpr:
 	kfree(icode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

@@ -196,7 +196,11 @@ static inline void ax25_hold_route(ax25_route *ax25_rt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __ax25_put_route(ax25_route *ax25_rt);
+=======
+void __ax25_put_route(ax25_route *ax25_rt);
+>>>>>>> v3.18
 =======
 void __ax25_put_route(ax25_route *ax25_rt);
 >>>>>>> v3.18
@@ -277,6 +281,7 @@ static inline __be16 ax25_type_trans(struct sk_buff *skb, struct net_device *dev
 extern struct hlist_head ax25_list;
 extern spinlock_t ax25_list_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ax25_cb_add(ax25_cb *);
 struct sock *ax25_find_listener(ax25_address *, int, struct net_device *, int);
 struct sock *ax25_get_socket(ax25_address *, ax25_address *, int);
@@ -287,6 +292,8 @@ extern ax25_cb * __must_check ax25_create_cb(void);
 extern void ax25_fillin_cb(ax25_cb *, ax25_dev *);
 extern struct sock *ax25_make_new(struct sock *, struct ax25_dev *);
 =======
+=======
+>>>>>>> v3.18
 void ax25_cb_add(ax25_cb *);
 struct sock *ax25_find_listener(ax25_address *, int, struct net_device *, int);
 struct sock *ax25_get_socket(ax25_address *, ax25_address *, int);
@@ -297,12 +304,16 @@ void ax25_destroy_socket(ax25_cb *);
 ax25_cb * __must_check ax25_create_cb(void);
 void ax25_fillin_cb(ax25_cb *, ax25_dev *);
 struct sock *ax25_make_new(struct sock *, struct ax25_dev *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ax25_addr.c */
 extern const ax25_address ax25_bcast;
 extern const ax25_address ax25_defaddr;
 extern const ax25_address null_ax25_address;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern char *ax2asc(char *buf, const ax25_address *);
 extern void asc2ax(ax25_address *addr, const char *callsign);
@@ -315,6 +326,8 @@ extern int  ax25_addr_build(unsigned char *, const ax25_address *,
 extern int  ax25_addr_size(const ax25_digi *);
 extern void ax25_digi_invert(const ax25_digi *, ax25_digi *);
 =======
+=======
+>>>>>>> v3.18
 char *ax2asc(char *buf, const ax25_address *);
 void asc2ax(ax25_address *addr, const char *callsign);
 int ax25cmp(const ax25_address *, const ax25_address *);
@@ -325,6 +338,9 @@ int ax25_addr_build(unsigned char *, const ax25_address *,
 		    const ax25_address *, const ax25_digi *, int, int);
 int ax25_addr_size(const ax25_digi *);
 void ax25_digi_invert(const ax25_digi *, ax25_digi *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ax25_dev.c */
@@ -336,6 +352,7 @@ static inline ax25_dev *ax25_dev_ax25dev(struct net_device *dev)
 	return dev->ax25_ptr;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern ax25_dev *ax25_addr_ax25dev(ax25_address *);
 extern void ax25_dev_device_up(struct net_device *);
@@ -365,6 +382,8 @@ extern void ax25_ds_heartbeat_expiry(ax25_cb *);
 extern void ax25_ds_t3timer_expiry(ax25_cb *);
 extern void ax25_ds_idletimer_expiry(ax25_cb *);
 =======
+=======
+>>>>>>> v3.18
 ax25_dev *ax25_addr_ax25dev(ax25_address *);
 void ax25_dev_device_up(struct net_device *);
 void ax25_dev_device_down(struct net_device *);
@@ -392,6 +411,9 @@ void ax25_ds_t1_timeout(ax25_cb *);
 void ax25_ds_heartbeat_expiry(ax25_cb *);
 void ax25_ds_t3timer_expiry(ax25_cb *);
 void ax25_ds_idletimer_expiry(ax25_cb *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ax25_iface.c */
@@ -403,8 +425,13 @@ struct ax25_protocol {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ax25_register_pid(struct ax25_protocol *ap);
 extern void ax25_protocol_release(unsigned int);
+=======
+void ax25_register_pid(struct ax25_protocol *ap);
+void ax25_protocol_release(unsigned int);
+>>>>>>> v3.18
 =======
 void ax25_register_pid(struct ax25_protocol *ap);
 void ax25_protocol_release(unsigned int);
@@ -415,6 +442,7 @@ struct ax25_linkfail {
 	void (*func)(ax25_cb *, int);
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void ax25_linkfail_register(struct ax25_linkfail *lf);
 extern void ax25_linkfail_release(struct ax25_linkfail *lf);
@@ -510,6 +538,8 @@ extern void ax25_uid_free(void);
 extern int ax25_register_dev_sysctl(ax25_dev *ax25_dev);
 extern void ax25_unregister_dev_sysctl(ax25_dev *ax25_dev);
 =======
+=======
+>>>>>>> v3.18
 void ax25_linkfail_register(struct ax25_linkfail *lf);
 void ax25_linkfail_release(struct ax25_linkfail *lf);
 int __must_check ax25_listen_register(ax25_address *, struct net_device *);
@@ -605,6 +635,9 @@ void ax25_uid_free(void);
 #ifdef CONFIG_SYSCTL
 int ax25_register_dev_sysctl(ax25_dev *ax25_dev);
 void ax25_unregister_dev_sysctl(ax25_dev *ax25_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int ax25_register_dev_sysctl(ax25_dev *ax25_dev) { return 0; }

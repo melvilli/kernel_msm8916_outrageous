@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/plat-omap/include/mach/mcbsp.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Defines for Multi-Channel Buffered Serial Port
@@ -25,8 +28,13 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_OMAP_MCBSP_H
 #define __ASM_ARCH_OMAP_MCBSP_H
+=======
+#ifndef __ASOC_TI_MCBSP_H
+#define __ASOC_TI_MCBSP_H
+>>>>>>> v3.18
 =======
 #ifndef __ASOC_TI_MCBSP_H
 #define __ASOC_TI_MCBSP_H

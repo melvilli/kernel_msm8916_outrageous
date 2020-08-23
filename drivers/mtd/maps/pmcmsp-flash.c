@@ -76,6 +76,7 @@ static int __init init_msp_flash(void)
 	printk(KERN_NOTICE "Found %d PMC flash devices\n", fcnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msp_flash = kcalloc(fcnt, sizeof(*msp_flash), GFP_KERNEL);
 	if (!msp_flash)
 		return -ENOMEM;
@@ -86,6 +87,8 @@ static int __init init_msp_flash(void)
 
 	msp_maps = kcalloc(fcnt, sizeof(*msp_maps), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	msp_flash = kmalloc(fcnt * sizeof(struct map_info *), GFP_KERNEL);
 	if (!msp_flash)
 		return -ENOMEM;
@@ -95,6 +98,9 @@ static int __init init_msp_flash(void)
 		goto free_msp_flash;
 
 	msp_maps = kcalloc(fcnt, sizeof(struct mtd_info), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!msp_maps)
 		goto free_msp_parts;
@@ -152,7 +158,11 @@ static int __init init_msp_flash(void)
 
 		msp_maps[i].bankwidth = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msp_maps[i].name = kstrndup(flash_name, 7, GFP_KERNEL);
+=======
+		msp_maps[i].name = kmalloc(7, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		msp_maps[i].name = kmalloc(7, GFP_KERNEL);
 >>>>>>> v3.18
@@ -163,6 +173,11 @@ static int __init init_msp_flash(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		msp_maps[i].name = strncpy(msp_maps[i].name, flash_name, 7);
+
+>>>>>>> v3.18
 =======
 		msp_maps[i].name = strncpy(msp_maps[i].name, flash_name, 7);
 

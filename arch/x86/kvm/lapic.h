@@ -66,7 +66,11 @@ bool kvm_irq_delivery_to_apic_fast(struct kvm *kvm, struct kvm_lapic *src,
 
 u64 kvm_get_apic_base(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_set_apic_base(struct kvm_vcpu *vcpu, u64 data);
+=======
+int kvm_set_apic_base(struct kvm_vcpu *vcpu, struct msr_data *msr_info);
+>>>>>>> v3.18
 =======
 int kvm_set_apic_base(struct kvm_vcpu *vcpu, struct msr_data *msr_info);
 >>>>>>> v3.18
@@ -170,7 +174,11 @@ static inline u16 apic_logical_id(struct kvm_apic_map *map, u32 ldr)
 static inline bool kvm_apic_has_events(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return kvm_vcpu_has_lapic(vcpu) && vcpu->arch.apic->pending_events;
+=======
+	return vcpu->arch.apic->pending_events;
+>>>>>>> v3.18
 =======
 	return vcpu->arch.apic->pending_events;
 >>>>>>> v3.18

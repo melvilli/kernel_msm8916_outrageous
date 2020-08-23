@@ -102,9 +102,15 @@ int snd_seq_dump_var_event(const struct snd_seq_event *event,
 		}
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} if (! (event->data.ext.len & SNDRV_SEQ_EXT_CHAINED)) {
 		return func(private_data, event->data.ext.ptr, len);
 	}
+=======
+	}
+	if (!(event->data.ext.len & SNDRV_SEQ_EXT_CHAINED))
+		return func(private_data, event->data.ext.ptr, len);
+>>>>>>> v3.18
 =======
 	}
 	if (!(event->data.ext.len & SNDRV_SEQ_EXT_CHAINED))
@@ -243,7 +249,11 @@ static int snd_seq_cell_alloc(struct snd_seq_pool *pool,
 	spin_lock_irqsave(&pool->lock, flags);
 	if (pool->ptr == NULL) {	/* not initialized */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("seq: pool is not initialized\n");
+=======
+		pr_debug("ALSA: seq: pool is not initialized\n");
+>>>>>>> v3.18
 =======
 		pr_debug("ALSA: seq: pool is not initialized\n");
 >>>>>>> v3.18
@@ -399,7 +409,11 @@ int snd_seq_pool_init(struct snd_seq_pool *pool)
 	pool->ptr = vmalloc(sizeof(struct snd_seq_event_cell) * pool->size);
 	if (pool->ptr == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("seq: malloc for sequencer events failed\n");
+=======
+		pr_debug("ALSA: seq: malloc for sequencer events failed\n");
+>>>>>>> v3.18
 =======
 		pr_debug("ALSA: seq: malloc for sequencer events failed\n");
 >>>>>>> v3.18
@@ -426,6 +440,7 @@ int snd_seq_pool_init(struct snd_seq_pool *pool)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* refuse the further insertion to the pool */
 void snd_seq_pool_mark_closing(struct snd_seq_pool *pool)
 {
@@ -440,12 +455,18 @@ void snd_seq_pool_mark_closing(struct snd_seq_pool *pool)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* remove events */
 int snd_seq_pool_done(struct snd_seq_pool *pool)
 {
 	unsigned long flags;
 	struct snd_seq_event_cell *ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int max_count = 5 * HZ;
+>>>>>>> v3.18
 =======
 	int max_count = 5 * HZ;
 >>>>>>> v3.18
@@ -455,12 +476,15 @@ int snd_seq_pool_done(struct snd_seq_pool *pool)
 
 	/* wait for closing all threads */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (waitqueue_active(&pool->output_sleep))
 		wake_up(&pool->output_sleep);
 
 	while (atomic_read(&pool->counter) > 0)
 		schedule_timeout_uninterruptible(1);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&pool->lock, flags);
 	pool->closing = 1;
 	spin_unlock_irqrestore(&pool->lock, flags);
@@ -476,6 +500,9 @@ int snd_seq_pool_done(struct snd_seq_pool *pool)
 		schedule_timeout_uninterruptible(1);
 		max_count--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	
 	/* release all resources */
@@ -505,7 +532,11 @@ struct snd_seq_pool *snd_seq_pool_new(int poolsize)
 	pool = kzalloc(sizeof(*pool), GFP_KERNEL);
 	if (pool == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("seq: malloc failed for pool\n");
+=======
+		pr_debug("ALSA: seq: malloc failed for pool\n");
+>>>>>>> v3.18
 =======
 		pr_debug("ALSA: seq: malloc failed for pool\n");
 >>>>>>> v3.18
@@ -535,7 +566,10 @@ int snd_seq_pool_delete(struct snd_seq_pool **ppool)
 	if (pool == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_seq_pool_mark_closing(pool);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_seq_pool_done(pool);

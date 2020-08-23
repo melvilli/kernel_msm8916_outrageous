@@ -48,6 +48,10 @@ struct ed {
 	struct ed		*ed_prev;	/* for non-interrupt EDs */
 	struct list_head	td_list;	/* "shadow list" of our TDs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	in_use_list;
+>>>>>>> v3.18
 =======
 	struct list_head	in_use_list;
 >>>>>>> v3.18
@@ -71,7 +75,10 @@ struct ed {
 	/* HC may see EDs on rm_list until next frame (frame_no == tick) */
 	u16			tick;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Detect TDs not added to the done queue */
 	unsigned		takeback_wdh_cnt;
@@ -79,6 +86,9 @@ struct ed {
 #define	OKAY_TO_TAKEBACK(ohci, ed)			\
 		((int) (ohci->wdh_cnt - ed->takeback_wdh_cnt) >= 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((aligned(16)));
 
@@ -395,7 +405,13 @@ struct ohci_hcd {
 	struct dma_pool		*ed_cache;
 	struct td		*td_hash [TD_HASH_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	pending;
+=======
+	struct td		*dl_start, *dl_end;	/* the done list */
+	struct list_head	pending;
+	struct list_head	eds_in_use;	/* all EDs with at least 1 TD */
+>>>>>>> v3.18
 =======
 	struct td		*dl_start, *dl_end;	/* the done list */
 	struct list_head	pending;
@@ -413,6 +429,11 @@ struct ohci_hcd {
 	u32			fminterval;		/* saved register */
 	unsigned		autostop:1;	/* rh auto stopping/stopped */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		working:1;
+	unsigned		restart_work:1;
+>>>>>>> v3.18
 =======
 	unsigned		working:1;
 	unsigned		restart_work:1;
@@ -435,6 +456,7 @@ struct ohci_hcd {
 	// there are also chip quirks/bugs in init logic
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct	nec_work;	/* Worker for NEC quirk */
 
 	/* Needed for ZF Micro quirk */
@@ -445,6 +467,8 @@ struct ohci_hcd {
 
 #ifdef DEBUG
 =======
+=======
+>>>>>>> v3.18
 	unsigned		prev_frame_no;
 	unsigned		wdh_cnt, prev_wdh_cnt;
 	u32			prev_donehead;
@@ -452,18 +476,27 @@ struct ohci_hcd {
 
 	struct work_struct	nec_work;	/* Worker for NEC quirk */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dentry		*debug_dir;
 	struct dentry		*debug_async;
 	struct dentry		*debug_periodic;
 	struct dentry		*debug_registers;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 	/* platform-specific data -- must come last */
 	unsigned long           priv[0] __aligned(sizeof(s64));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -516,10 +549,13 @@ static inline struct usb_hcd *ohci_to_hcd (const struct ohci_hcd *ohci)
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef DEBUG
 #define STUB_DEBUG_FILES
 #endif	/* DEBUG */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ohci_dbg(ohci, fmt, args...) \
@@ -532,12 +568,15 @@ static inline struct usb_hcd *ohci_to_hcd (const struct ohci_hcd *ohci)
 	dev_warn (ohci_to_hcd(ohci)->self.controller , fmt , ## args )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OHCI_VERBOSE_DEBUG
 #	define ohci_vdbg ohci_dbg
 #else
 #	define ohci_vdbg(ohci, fmt, args...) do { } while (0)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*-------------------------------------------------------------------------*/
@@ -769,7 +808,10 @@ static inline u32 roothub_status (struct ohci_hcd *hc)
 static inline u32 roothub_portstatus (struct ohci_hcd *hc, int i)
 	{ return read_roothub (hc, portstatus [i], 0xffe0fce0); }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Declarations of things exported for use by ohci platform drivers */
 
@@ -790,4 +832,7 @@ extern int	ohci_resume(struct usb_hcd *hcd, bool hibernated);
 extern int	ohci_hub_control(struct usb_hcd	*hcd, u16 typeReq, u16 wValue,
 				 u16 wIndex, char *buf, u16 wLength);
 extern int	ohci_hub_status_data(struct usb_hcd *hcd, char *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

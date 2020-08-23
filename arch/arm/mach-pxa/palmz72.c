@@ -141,7 +141,11 @@ static unsigned long palmz72_pin_config[] __initdata = {
  ******************************************************************************/
 #if defined(CONFIG_KEYBOARD_PXA27x) || defined(CONFIG_KEYBOARD_PXA27x_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int palmz72_matrix_keys[] = {
+=======
+static const unsigned int palmz72_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int palmz72_matrix_keys[] = {
 >>>>>>> v3.18
@@ -161,12 +165,15 @@ static const unsigned int palmz72_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data palmz72_keypad_platform_data = {
 	.matrix_key_rows	= 4,
 	.matrix_key_cols	= 3,
 	.matrix_key_map		= palmz72_matrix_keys,
 	.matrix_key_map_size	= ARRAY_SIZE(palmz72_matrix_keys),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data almz72_matrix_keymap_data = {
 	.keymap			= palmz72_matrix_keys,
 	.keymap_size		= ARRAY_SIZE(palmz72_matrix_keys),
@@ -176,6 +183,9 @@ static struct pxa27x_keypad_platform_data palmz72_keypad_platform_data = {
 	.matrix_key_rows	= 4,
 	.matrix_key_cols	= 3,
 	.matrix_keymap_data	= &almz72_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.debounce_interval	= 30,

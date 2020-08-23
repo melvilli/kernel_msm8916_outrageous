@@ -19,11 +19,17 @@
 #define INITVALS_9330_1P1_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ar9331_1p1_baseband_core_txfir_coeff_japan_2484 ar9300_2p2_baseband_core_txfir_coeff_japan_2484
 
 #define ar9331_modes_high_power_tx_gain_1p1 ar9331_modes_lowest_ob_db_tx_gain_1p1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u32 ar9331_1p1_baseband_postamble[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
@@ -63,7 +69,11 @@ static const u32 ar9331_1p1_baseband_postamble[][5] = {
 	{0x0000a288, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 	{0x0000a28c, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a2c4, 0x00158d18, 0x00158d18, 0x00158d18, 0x00158d18},
+=======
+	{0x0000a2c4, 0x00158d18, 0x00158d18, 0x00058d18, 0x00058d18},
+>>>>>>> v3.18
 =======
 	{0x0000a2c4, 0x00158d18, 0x00158d18, 0x00058d18, 0x00058d18},
 >>>>>>> v3.18
@@ -264,7 +274,11 @@ static const u32 ar9331_modes_low_ob_db_tx_gain_1p1[][5] = {
 	{0x0000a2e4, 0xfffff000, 0xfffff000, 0xfffff000, 0xfffff000},
 	{0x0000a2e8, 0xfffe0000, 0xfffe0000, 0xfffe0000, 0xfffe0000},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a410, 0x000050d7, 0x000050d7, 0x000050d0, 0x000050d0},
+=======
+	{0x0000a410, 0x000050d7, 0x000050d7, 0x000050d4, 0x000050d4},
+>>>>>>> v3.18
 =======
 	{0x0000a410, 0x000050d7, 0x000050d7, 0x000050d4, 0x000050d4},
 >>>>>>> v3.18
@@ -353,8 +367,11 @@ static const u32 ar9331_modes_low_ob_db_tx_gain_1p1[][5] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9331_1p1_baseband_core_txfir_coeff_japan_2484 ar9462_2p0_baseband_core_txfir_coeff_japan_2484
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9331_1p1_xtal_25M[][2] = {
@@ -392,7 +409,11 @@ static const u32 ar9331_1p1_radio_core[][2] = {
 	{0x000160c0, 0x006db6db},
 	{0x000160c4, 0x0186db60},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x000160c8, 0x6db4db6c},
+=======
+	{0x000160c8, 0x6db6db6c},
+>>>>>>> v3.18
 =======
 	{0x000160c8, 0x6db6db6c},
 >>>>>>> v3.18
@@ -403,15 +424,21 @@ static const u32 ar9331_1p1_radio_core[][2] = {
 	{0x00016108, 0x00080010},
 	{0x0001610c, 0x00170000},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x00016140, 0x10800000},
 	{0x00016144, 0x01884080},
 	{0x00016148, 0x000080c0},
 	{0x00016280, 0x01000015},
 =======
+=======
+>>>>>>> v3.18
 	{0x00016140, 0x50804000},
 	{0x00016144, 0x01884080},
 	{0x00016148, 0x000080c0},
 	{0x00016280, 0x01001015},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x00016284, 0x14d20000},
 	{0x00016288, 0x00318000},
@@ -620,7 +647,11 @@ static const u32 ar9331_1p1_baseband_core[][2] = {
 	{0x00009e34, 0x6af6532f},
 	{0x00009e38, 0x0cc80c00},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x00009e40, 0x0d261820},
+=======
+	{0x00009e40, 0x0d261800},
+>>>>>>> v3.18
 =======
 	{0x00009e40, 0x0d261800},
 >>>>>>> v3.18
@@ -656,6 +687,7 @@ static const u32 ar9331_1p1_baseband_core[][2] = {
 	{0x0000a390, 0x00000001},
 	{0x0000a394, 0x00000444},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a398, 0x001f0e0f},
 	{0x0000a39c, 0x0075393f},
 	{0x0000a3a0, 0xb79f6427},
@@ -663,12 +695,17 @@ static const u32 ar9331_1p1_baseband_core[][2] = {
 	{0x0000a3a8, 0xaaaaaaaa},
 	{0x0000a3ac, 0x3c466478},
 =======
+=======
+>>>>>>> v3.18
 	{0x0000a398, 0x00000000},
 	{0x0000a39c, 0x210d0401},
 	{0x0000a3a0, 0xab9a7144},
 	{0x0000a3a4, 0x00000011},
 	{0x0000a3a8, 0x3c3c003d},
 	{0x0000a3ac, 0x30310030},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000a3c0, 0x20202020},
 	{0x0000a3c4, 0x22222220},
@@ -728,6 +765,7 @@ static const u32 ar9331_1p1_baseband_core[][2] = {
 	{0x0000a7dc, 0x00000001},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const u32 ar9331_modes_high_power_tx_gain_1p1[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
@@ -824,6 +862,8 @@ static const u32 ar9331_modes_high_power_tx_gain_1p1[][5] = {
 #define ar9331_1p1_mac_postamble ar9300_2p2_mac_postamble
 
 =======
+=======
+>>>>>>> v3.18
 static const u32 ar9331_1p1_mac_postamble[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x00001030, 0x00000230, 0x00000460, 0x000002c0, 0x00000160},
@@ -836,6 +876,9 @@ static const u32 ar9331_1p1_mac_postamble[][5] = {
 	{0x00008318, 0x00003e80, 0x00007d00, 0x00006880, 0x00003440},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u32 ar9331_1p1_soc_preamble[][2] = {
 	/* Addr      allmodes  */

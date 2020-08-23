@@ -91,7 +91,11 @@ static int mmio_print_pcidev(struct trace_seq *s, const struct pci_dev *dev)
 		ret += trace_seq_printf(s, " %s\n", drv->name);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret += trace_seq_printf(s, " \n");
+=======
+		ret += trace_seq_puts(s, " \n");
+>>>>>>> v3.18
 =======
 		ret += trace_seq_puts(s, " \n");
 >>>>>>> v3.18
@@ -112,7 +116,11 @@ static void mmio_pipe_open(struct trace_iterator *iter)
 	struct trace_seq *s = &iter->seq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_seq_printf(s, "VERSION 20070824\n");
+=======
+	trace_seq_puts(s, "VERSION 20070824\n");
+>>>>>>> v3.18
 =======
 	trace_seq_puts(s, "VERSION 20070824\n");
 >>>>>>> v3.18
@@ -218,7 +226,11 @@ static enum print_line_t mmio_print_rw(struct trace_iterator *iter)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = trace_seq_printf(s, "rw what?\n");
+=======
+		ret = trace_seq_puts(s, "rw what?\n");
+>>>>>>> v3.18
 =======
 		ret = trace_seq_puts(s, "rw what?\n");
 >>>>>>> v3.18
@@ -258,7 +270,11 @@ static enum print_line_t mmio_print_map(struct trace_iterator *iter)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = trace_seq_printf(s, "map what?\n");
+=======
+		ret = trace_seq_puts(s, "map what?\n");
+>>>>>>> v3.18
 =======
 		ret = trace_seq_puts(s, "map what?\n");
 >>>>>>> v3.18
@@ -340,7 +356,11 @@ static void __trace_mmiotrace_rw(struct trace_array *tr,
 	entry->rw			= *rw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_check_discard(call, entry, buffer, event))
+=======
+	if (!call_filter_check_discard(call, entry, buffer, event))
+>>>>>>> v3.18
 =======
 	if (!call_filter_check_discard(call, entry, buffer, event))
 >>>>>>> v3.18
@@ -374,7 +394,11 @@ static void __trace_mmiotrace_map(struct trace_array *tr,
 	entry->map			= *map;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_check_discard(call, entry, buffer, event))
+=======
+	if (!call_filter_check_discard(call, entry, buffer, event))
+>>>>>>> v3.18
 =======
 	if (!call_filter_check_discard(call, entry, buffer, event))
 >>>>>>> v3.18

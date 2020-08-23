@@ -38,7 +38,10 @@ static void arizona_haptics_work(struct work_struct *work)
 						       work);
 	struct arizona *arizona = haptics->arizona;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex *dapm_mutex = &arizona->dapm->card->dapm_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -71,8 +74,11 @@ static void arizona_haptics_work(struct work_struct *work)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock_nested(dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = snd_soc_dapm_enable_pin(arizona->dapm, "HAPTICS");
@@ -80,12 +86,18 @@ static void arizona_haptics_work(struct work_struct *work)
 			dev_err(arizona->dev, "Failed to start HAPTICS: %d\n",
 				ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(dapm_mutex);
 			return;
 		}
 
 		mutex_unlock(dapm_mutex);
 
+=======
+			return;
+		}
+
+>>>>>>> v3.18
 =======
 			return;
 		}
@@ -100,8 +112,11 @@ static void arizona_haptics_work(struct work_struct *work)
 	} else {
 		/* This disable sequence will be a noop if already enabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock_nested(dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = snd_soc_dapm_disable_pin(arizona->dapm, "HAPTICS");
@@ -109,12 +124,18 @@ static void arizona_haptics_work(struct work_struct *work)
 			dev_err(arizona->dev, "Failed to disable HAPTICS: %d\n",
 				ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(dapm_mutex);
 			return;
 		}
 
 		mutex_unlock(dapm_mutex);
 
+=======
+			return;
+		}
+
+>>>>>>> v3.18
 =======
 			return;
 		}
@@ -174,6 +195,7 @@ static void arizona_haptics_close(struct input_dev *input)
 {
 	struct arizona_haptics *haptics = input_get_drvdata(input);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex *dapm_mutex = &haptics->arizona->dapm->card->dapm_mutex;
 
 	cancel_work_sync(&haptics->work);
@@ -185,11 +207,16 @@ static void arizona_haptics_close(struct input_dev *input)
 
 	mutex_unlock(dapm_mutex);
 =======
+=======
+>>>>>>> v3.18
 
 	cancel_work_sync(&haptics->work);
 
 	if (haptics->arizona->dapm)
 		snd_soc_dapm_disable_pin(haptics->arizona->dapm, "HAPTICS");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

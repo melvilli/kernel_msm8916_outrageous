@@ -24,6 +24,10 @@
 #include <linux/spinlock.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/core.h>
+>>>>>>> v3.18
 =======
 #include <sound/core.h>
 >>>>>>> v3.18
@@ -90,6 +94,10 @@ struct src_desc {
 struct src_mgr {
 	struct rsc_mgr mgr;	/* Basic resource manager info */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_card *card;	/* pointer to this card */
+>>>>>>> v3.18
 =======
 	struct snd_card *card;	/* pointer to this card */
 >>>>>>> v3.18
@@ -132,6 +140,10 @@ struct srcimp_desc {
 struct srcimp_mgr {
 	struct rsc_mgr mgr;	/* Basic resource manager info */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_card *card;	/* pointer to this card */
+>>>>>>> v3.18
 =======
 	struct snd_card *card;	/* pointer to this card */
 >>>>>>> v3.18
@@ -153,15 +165,21 @@ struct srcimp_mgr {
 
 /* Constructor and destructor of SRC resource manager */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int src_mgr_create(void *hw, struct src_mgr **rsrc_mgr);
 int src_mgr_destroy(struct src_mgr *src_mgr);
 /* Constructor and destructor of SRCIMP resource manager */
 int srcimp_mgr_create(void *hw, struct srcimp_mgr **rsrc_mgr);
 =======
+=======
+>>>>>>> v3.18
 int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr);
 int src_mgr_destroy(struct src_mgr *src_mgr);
 /* Constructor and destructor of SRCIMP resource manager */
 int srcimp_mgr_create(struct hw *hw, struct srcimp_mgr **rsrc_mgr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int srcimp_mgr_destroy(struct srcimp_mgr *srcimp_mgr);
 

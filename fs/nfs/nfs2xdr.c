@@ -104,7 +104,11 @@ static void print_overflow_msg(const char *func, const struct xdr_stream *xdr)
  *	typedef opaque	nfsdata<>;
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int decode_nfsdata(struct xdr_stream *xdr, struct nfs_readres *result)
+=======
+static int decode_nfsdata(struct xdr_stream *xdr, struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 static int decode_nfsdata(struct xdr_stream *xdr, struct nfs_pgio_res *result)
 >>>>>>> v3.18
@@ -618,7 +622,11 @@ static void nfs2_xdr_enc_readlinkargs(struct rpc_rqst *req,
  */
 static void encode_readargs(struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    const struct nfs_readargs *args)
+=======
+			    const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 			    const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -638,7 +646,11 @@ static void encode_readargs(struct xdr_stream *xdr,
 static void nfs2_xdr_enc_readargs(struct rpc_rqst *req,
 				  struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const struct nfs_readargs *args)
+=======
+				  const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 				  const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -662,7 +674,11 @@ static void nfs2_xdr_enc_readargs(struct rpc_rqst *req,
  */
 static void encode_writeargs(struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     const struct nfs_writeargs *args)
+=======
+			     const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 			     const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -686,7 +702,11 @@ static void encode_writeargs(struct xdr_stream *xdr,
 static void nfs2_xdr_enc_writeargs(struct rpc_rqst *req,
 				   struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   const struct nfs_writeargs *args)
+=======
+				   const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 				   const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -878,7 +898,11 @@ out_default:
  */
 static int nfs2_xdr_dec_readres(struct rpc_rqst *req, struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct nfs_readres *result)
+=======
+				struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 				struct nfs_pgio_res *result)
 >>>>>>> v3.18
@@ -903,7 +927,11 @@ out_default:
 
 static int nfs2_xdr_dec_writeres(struct rpc_rqst *req, struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct nfs_writeres *result)
+=======
+				 struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 				 struct nfs_pgio_res *result)
 >>>>>>> v3.18

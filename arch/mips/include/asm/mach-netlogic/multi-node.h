@@ -48,10 +48,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NLM_CORES_PER_NODE	8
 #define NLM_THREADS_PER_CORE	4
 #define NLM_CPUS_PER_NODE	(NLM_CORES_PER_NODE * NLM_THREADS_PER_CORE)
 =======
+=======
+>>>>>>> v3.18
 #define NLM_THREADS_PER_CORE	4
 #ifdef CONFIG_CPU_XLR
 #define nlm_cores_per_node()	8
@@ -84,6 +87,9 @@ extern struct nlm_soc_info nlm_nodes[NLM_NR_NODES];
 #define nlm_current_node()	(&nlm_nodes[nlm_nodeid()])
 #endif
 void nlm_node_init(int node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

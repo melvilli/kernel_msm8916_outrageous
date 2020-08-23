@@ -1,7 +1,11 @@
 /* linux/arch/arm/mach-s5pv210/pm.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010 Samsung Electronics Co., Ltd.
+=======
+ * Copyright (c) 2010-2014 Samsung Electronics Co., Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010-2014 Samsung Electronics Co., Ltd.
 >>>>>>> v3.18
@@ -23,6 +27,7 @@
 #include <linux/syscore_ops.h>
 #include <linux/io.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <plat/cpu.h>
 #include <plat/pm.h>
@@ -94,6 +99,8 @@ static struct sleep_save s5pv210_core_save[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cacheflush.h>
 #include <asm/suspend.h>
 
@@ -115,6 +122,9 @@ static u32 s5pv210_irqwake_intmask = 0xffffffff;
 /*
  * Suspend helpers.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int s5pv210_cpu_suspend(unsigned long arg)
 {
@@ -141,15 +151,21 @@ static void s5pv210_pm_prepare(void)
 	unsigned int tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ensure at least INFORM0 has the resume address */
 	__raw_writel(virt_to_phys(s3c_cpu_resume), S5P_INFORM0);
 =======
+=======
+>>>>>>> v3.18
 	/* Set wake-up mask registers */
 	__raw_writel(exynos_get_eint_wake_mask(), S5P_EINT_WAKEUP_MASK);
 	__raw_writel(s5pv210_irqwake_intmask, S5P_WAKEUP_MASK);
 
 	/* ensure at least INFORM0 has the resume address */
 	__raw_writel(virt_to_phys(s5pv210_cpu_resume), S5P_INFORM0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tmp = __raw_readl(S5P_SLEEP_CFG);
@@ -171,11 +187,14 @@ static void s5pv210_pm_prepare(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s5pv210_pm_add(struct device *dev, struct subsys_interface *sif)
 {
 	pm_cpu_prep = s5pv210_pm_prepare;
 	pm_cpu_sleep = s5pv210_cpu_suspend;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Suspend operations.
  */
@@ -214,11 +233,15 @@ static int s5pv210_suspend_enter(suspend_state_t state)
 	s3c_pm_check_restore();
 
 	S3C_PMDBG("%s: resuming the system...\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct subsys_interface s5pv210_pm_interface = {
 	.name		= "s5pv210_pm",
@@ -233,6 +256,8 @@ static __init int s5pv210_pm_drvinit(void)
 arch_initcall(s5pv210_pm_drvinit);
 
 =======
+=======
+>>>>>>> v3.18
 static int s5pv210_suspend_prepare(void)
 {
 	s3c_pm_check_prepare();
@@ -255,6 +280,9 @@ static const struct platform_suspend_ops s5pv210_suspend_ops = {
 /*
  * Syscore operations used to delay restore of certain registers.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void s5pv210_pm_resume(void)
 {
@@ -273,6 +301,7 @@ static struct syscore_ops s5pv210_pm_syscore_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __init int s5pv210_pm_syscore_init(void)
 {
 	register_syscore_ops(&s5pv210_pm_syscore_ops);
@@ -280,6 +309,8 @@ static __init int s5pv210_pm_syscore_init(void)
 }
 arch_initcall(s5pv210_pm_syscore_init);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Initialization entry point.
  */
@@ -288,4 +319,7 @@ void __init s5pv210_pm_init(void)
 	register_syscore_ops(&s5pv210_pm_syscore_ops);
 	suspend_set_ops(&s5pv210_suspend_ops);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -4,7 +4,11 @@
  * Copyright (C) 2003 Greg Kroah-Hartman <greg@kroah.com>
  * Copyright (C) 2003 IBM Corp.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2004 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -22,9 +26,14 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/device.h>
@@ -170,6 +179,7 @@ static int eeprom_probe(struct i2c_client *client,
 	struct i2c_adapter *adapter = client->adapter;
 	struct eeprom_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	if (!(data = kzalloc(sizeof(struct eeprom_data), GFP_KERNEL))) {
@@ -177,11 +187,16 @@ static int eeprom_probe(struct i2c_client *client,
 		goto exit;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	data = devm_kzalloc(&client->dev, sizeof(struct eeprom_data),
 			    GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(data->data, 0xff, EEPROM_SIZE);
@@ -209,6 +224,7 @@ static int eeprom_probe(struct i2c_client *client,
 
 	/* create the sysfs eeprom file */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = sysfs_create_bin_file(&client->dev.kobj, &eeprom_attr);
 	if (err)
 		goto exit_kfree;
@@ -222,13 +238,19 @@ exit:
 =======
 	return sysfs_create_bin_file(&client->dev.kobj, &eeprom_attr);
 >>>>>>> v3.18
+=======
+	return sysfs_create_bin_file(&client->dev.kobj, &eeprom_attr);
+>>>>>>> v3.18
 }
 
 static int eeprom_remove(struct i2c_client *client)
 {
 	sysfs_remove_bin_file(&client->dev.kobj, &eeprom_attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(i2c_get_clientdata(client));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

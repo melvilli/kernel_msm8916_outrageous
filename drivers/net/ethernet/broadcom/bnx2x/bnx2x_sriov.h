@@ -13,9 +13,15 @@
  * consent.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
  * Written by: Shmulik Ravid <shmulikr@broadcom.com>
  *	       Ariel Elior <ariele@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+ * Written by: Shmulik Ravid
+ *	       Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
  * Written by: Shmulik Ravid
@@ -37,6 +43,11 @@ enum sample_bulletin_result {
 #ifdef CONFIG_BNX2X_SRIOV
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct workqueue_struct *bnx2x_iov_wq;
+
+>>>>>>> v3.18
 =======
 extern struct workqueue_struct *bnx2x_iov_wq;
 
@@ -86,6 +97,10 @@ struct bnx2x_vf_queue {
 	struct bnx2x_vlan_mac_obj	vlan_obj;
 	atomic_t vlan_count;		/* 0 means vlan-0 is set  ~ untagged */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long accept_flags;	/* last accept flags configured */
+>>>>>>> v3.18
 =======
 	unsigned long accept_flags;	/* last accept flags configured */
 >>>>>>> v3.18
@@ -97,6 +112,7 @@ struct bnx2x_vf_queue {
 	u16 index;
 	u16 sb_idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* struct bnx2x_vfop_qctor_params - prepare queue construction parameters:
@@ -104,6 +120,8 @@ struct bnx2x_vf_queue {
  */
 struct bnx2x_vfop_qctor_params {
 =======
+=======
+>>>>>>> v3.18
 	bool is_leading;
 	bool sp_initialized;
 };
@@ -112,11 +130,15 @@ struct bnx2x_vfop_qctor_params {
  * parameters: q-init, q-setup and SB index
  */
 struct bnx2x_vf_queue_construct_params {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bnx2x_queue_state_params		qstate;
 	struct bnx2x_queue_setup_params		prep_qsetup;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* VFOP parameters (one copy per VF) */
 union bnx2x_vfop_params {
@@ -129,10 +151,13 @@ union bnx2x_vfop_params {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* forward */
 struct bnx2x_virtf;
 
 /* VFOP definitions */
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef void (*vfop_handler_t)(struct bnx2x *bp, struct bnx2x_virtf *vf);
 
@@ -148,11 +173,16 @@ struct bnx2x_vfop_filter {
 #define BNX2X_VFOP_FILTER_MAC	1
 #define BNX2X_VFOP_FILTER_VLAN	2
 =======
+=======
+>>>>>>> v3.18
 
 struct bnx2x_vf_mac_vlan_filter {
 	int type;
 #define BNX2X_VF_FILTER_MAC	1
 #define BNX2X_VF_FILTER_VLAN	2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bool add;
@@ -160,6 +190,7 @@ struct bnx2x_vf_mac_vlan_filter {
 	u16 vid;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct bnx2x_vfop_filters {
 	int add_cnt;
@@ -226,6 +257,11 @@ struct bnx2x_vf_mac_vlan_filters {
 	int count;
 	struct bnx2x_vf_mac_vlan_filter filters[];
 >>>>>>> v3.18
+=======
+struct bnx2x_vf_mac_vlan_filters {
+	int count;
+	struct bnx2x_vf_mac_vlan_filter filters[];
+>>>>>>> v3.18
 };
 
 /* vf context */
@@ -237,6 +273,7 @@ struct bnx2x_virtf {
 #define VF_CFG_INT_SIMD		0x0008
 #define VF_CACHE_LINE		0x0010
 #define VF_CFG_VLAN		0x0020
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	u8 state;
@@ -258,6 +295,8 @@ struct bnx2x_virtf {
 	/* dma */
 	dma_addr_t fw_stat_map;		/* valid iff VF_CFG_STATS */
 =======
+=======
+>>>>>>> v3.18
 #define VF_CFG_STATS_COALESCE	0x0040
 #define VF_CFG_EXT_BULLETIN	0x0080
 	u8 link_cfg;		/* IFLA_VF_LINK_STATE_AUTO
@@ -275,6 +314,9 @@ struct bnx2x_virtf {
 	/* dma */
 	dma_addr_t fw_stat_map;		/* valid iff VF_CFG_STATS */
 	u16 stats_stride;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_addr_t spq_map;
 	dma_addr_t bulletin_map;
@@ -298,6 +340,11 @@ struct bnx2x_virtf {
 #define vf_vlan_rules_cnt(vf)		((vf)->alloc_resc.num_vlan_filters)
 #define vf_mc_rules_cnt(vf)		((vf)->alloc_resc.num_mc_filters)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Hide a single vlan filter credit for the hypervisor */
+#define vf_vlan_rules_visible_cnt(vf)	(vf_vlan_rules_cnt(vf) - 1)
+>>>>>>> v3.18
 =======
 	/* Hide a single vlan filter credit for the hypervisor */
 #define vf_vlan_rules_visible_cnt(vf)	(vf_vlan_rules_cnt(vf) - 1)
@@ -308,12 +355,18 @@ struct bnx2x_virtf {
 
 	struct bnx2x_vf_queue	*vfqs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bnx2x_vfq(vf, nr, var)	((vf)->vfqs[(nr)].var)
 =======
+=======
+>>>>>>> v3.18
 #define LEADING_IDX			0
 #define bnx2x_vfq_is_leading(vfq)	((vfq)->index == LEADING_IDX)
 #define bnx2x_vfq(vf, nr, var)		((vf)->vfqs[(nr)].var)
 #define bnx2x_leading_vfq(vf, var)	((vf)->vfqs[LEADING_IDX].var)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u8 index;	/* index in the vf array */
@@ -338,6 +391,10 @@ struct bnx2x_virtf {
 
 	/* MCAST object */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int mcast_list_len;
+>>>>>>> v3.18
 =======
 	int mcast_list_len;
 >>>>>>> v3.18
@@ -348,11 +405,14 @@ struct bnx2x_virtf {
 
 	/* slow-path operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t			op_in_progress;
 	int				op_rc;
 	bool				op_wait_blocking;
 	struct list_head		op_list_head;
 	union bnx2x_vfop_params		op_params;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mutex			op_mutex; /* one vfop at a time mutex */
@@ -413,11 +473,14 @@ struct bnx2x_vf_mbx {
 
 	struct vfpf_first_tlv first_tlv;	/* saved VF request header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u8 flags;
 #define VF_MSG_INPROCESS	0x1	/* failsafe - the FW should prevent
 					 * more then one pending msg
 					 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -444,11 +507,17 @@ struct bnx2x_vf_sp {
 		struct client_update_ramrod_data update_data;
 	} q_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	union {
 		struct eth_rss_update_ramrod_data e2;
 	} rss_rdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -463,8 +532,14 @@ struct bnx2x_vfdb {
 	/* vf array */
 	struct bnx2x_virtf	*vfs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BP_VF(bp, idx)		(&((bp)->vfdb->vfs[(idx)]))
 #define bnx2x_vf(bp, idx, var)	((bp)->vfdb->vfs[(idx)].var)
+=======
+#define BP_VF(bp, idx)		((BP_VFDB(bp) && (bp)->vfdb->vfs) ? \
+					&((bp)->vfdb->vfs[idx]) : NULL)
+#define bnx2x_vf(bp, idx, var)	((bp)->vfdb->vfs[idx].var)
+>>>>>>> v3.18
 =======
 #define BP_VF(bp, idx)		((BP_VFDB(bp) && (bp)->vfdb->vfs) ? \
 					&((bp)->vfdb->vfs[idx]) : NULL)
@@ -477,7 +552,11 @@ struct bnx2x_vfdb {
 	/* vf HW contexts */
 	struct hw_dma		context[BNX2X_VF_CIDS/ILT_PAGE_CIDS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	BP_VF_CXT_PAGE(bp, i)	(&(bp)->vfdb->context[(i)])
+=======
+#define	BP_VF_CXT_PAGE(bp, i)	(&(bp)->vfdb->context[i])
+>>>>>>> v3.18
 =======
 #define	BP_VF_CXT_PAGE(bp, i)	(&(bp)->vfdb->context[i])
 >>>>>>> v3.18
@@ -488,7 +567,11 @@ struct bnx2x_vfdb {
 #define BP_VF_MBX_DMA(bp)	(&((bp)->vfdb->mbx_dma))
 	struct bnx2x_vf_mbx	mbxs[BNX2X_MAX_NUM_OF_VFS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BP_VF_MBX(bp, vfid)	(&((bp)->vfdb->mbxs[(vfid)]))
+=======
+#define BP_VF_MBX(bp, vfid)	(&((bp)->vfdb->mbxs[vfid]))
+>>>>>>> v3.18
 =======
 #define BP_VF_MBX(bp, vfid)	(&((bp)->vfdb->mbxs[vfid]))
 >>>>>>> v3.18
@@ -510,7 +593,10 @@ struct bnx2x_vfdb {
 #define FLRD_VFS_DWORDS (BNX2X_MAX_NUM_OF_VFS / 32)
 	u32 flrd_vfs[FLRD_VFS_DWORDS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* the number of msix vectors belonging to this PF designated for VFs */
 	u16 vf_sbs_pool;
@@ -522,6 +608,9 @@ struct bnx2x_vfdb {
 
 	/* bulletin board update synchronization */
 	struct mutex			bulletin_mutex;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -532,11 +621,14 @@ static inline struct bnx2x_vf_queue *vfq_get(struct bnx2x_virtf *vf, u8 index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool vfq_is_leading(struct bnx2x_vf_queue *vfq)
 {
 	return (vfq->index == 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* FW ids */
@@ -558,12 +650,18 @@ static u8 vfq_cl_id(struct bnx2x_virtf *vf, struct bnx2x_vf_queue *q)
 static inline u8 vfq_stat_id(struct bnx2x_virtf *vf, struct bnx2x_vf_queue *q)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return vfq_cl_id(vf, q);
 =======
+=======
+>>>>>>> v3.18
 	if (vf->cfg_flags & VF_CFG_STATS_COALESCE)
 		return vf->leading_rss;
 	else
 		return vfq_cl_id(vf, q);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -585,6 +683,7 @@ void bnx2x_iov_init_dmae(struct bnx2x *bp);
 void bnx2x_iov_set_queue_sp_obj(struct bnx2x *bp, int vf_cid,
 				struct bnx2x_queue_sp_obj **q_obj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_iov_sp_event(struct bnx2x *bp, int vf_cid, bool queue_work);
 int bnx2x_iov_eq_sp_event(struct bnx2x *bp, union event_ring_elem *elem);
 void bnx2x_iov_adjust_stats_req(struct bnx2x *bp);
@@ -593,6 +692,8 @@ void bnx2x_iov_sp_task(struct bnx2x *bp);
 /* global vf mailbox routines */
 void bnx2x_vf_mbx(struct bnx2x *bp, struct vf_pf_event_data *vfpf_event);
 =======
+=======
+>>>>>>> v3.18
 int bnx2x_iov_eq_sp_event(struct bnx2x *bp, union event_ring_elem *elem);
 void bnx2x_iov_adjust_stats_req(struct bnx2x *bp);
 void bnx2x_iov_storm_stats_update(struct bnx2x *bp);
@@ -600,6 +701,9 @@ void bnx2x_iov_storm_stats_update(struct bnx2x *bp);
 void bnx2x_vf_mbx(struct bnx2x *bp);
 void bnx2x_vf_mbx_schedule(struct bnx2x *bp,
 			   struct vf_pf_event_data *vfpf_event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void bnx2x_vf_enable_mbx(struct bnx2x *bp, u8 abs_vfid);
 
@@ -613,6 +717,7 @@ int bnx2x_vf_acquire(struct bnx2x *bp, struct bnx2x_virtf *vf,
 int bnx2x_vf_init(struct bnx2x *bp, struct bnx2x_virtf *vf,
 		  dma_addr_t *sb_map);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* VFOP generic helpers */
 #define bnx2x_vfop_default(state) do {				\
@@ -772,6 +877,8 @@ static inline int bnx2x_vfop_transition(struct bnx2x *bp,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* VFOP queue construction helpers */
 void bnx2x_vfop_qctor_dump_tx(struct bnx2x *bp, struct bnx2x_virtf *vf,
 			    struct bnx2x_queue_init_params *init_params,
@@ -786,6 +893,7 @@ void bnx2x_vfop_qctor_dump_rx(struct bnx2x *bp, struct bnx2x_virtf *vf,
 void bnx2x_vfop_qctor_prep(struct bnx2x *bp,
 			   struct bnx2x_virtf *vf,
 			   struct bnx2x_vf_queue *q,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			   struct bnx2x_vfop_qctor_params *p,
 			   unsigned long q_type);
@@ -835,6 +943,8 @@ int bnx2x_vfop_release_cmd(struct bnx2x *bp,
 			   struct bnx2x_virtf *vf,
 			   struct bnx2x_vfop_cmd *cmd);
 =======
+=======
+>>>>>>> v3.18
 			   struct bnx2x_vf_queue_construct_params *p,
 			   unsigned long q_type);
 
@@ -863,6 +973,9 @@ int bnx2x_vf_rss_update(struct bnx2x *bp, struct bnx2x_virtf *vf,
 int bnx2x_vf_tpa_update(struct bnx2x *bp, struct bnx2x_virtf *vf,
 			struct vfpf_tpa_tlv *tlv,
 			struct bnx2x_queue_update_tpa_params *params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* VF release ~ VF close + VF release-resources
@@ -871,7 +984,11 @@ int bnx2x_vf_tpa_update(struct bnx2x *bp, struct bnx2x_virtf *vf,
  * irrecoverable error is encountered.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_vf_release(struct bnx2x *bp, struct bnx2x_virtf *vf, bool block);
+=======
+int bnx2x_vf_release(struct bnx2x *bp, struct bnx2x_virtf *vf);
+>>>>>>> v3.18
 =======
 int bnx2x_vf_release(struct bnx2x *bp, struct bnx2x_virtf *vf);
 >>>>>>> v3.18
@@ -888,6 +1005,7 @@ void bnx2x_vf_enable_access(struct bnx2x *bp, u8 abs_vfid);
 void bnx2x_vf_handle_flr_event(struct bnx2x *bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_add_tlv(struct bnx2x *bp, void *tlvs_list, u16 offset, u16 type,
 		   u16 length);
 void bnx2x_vfpf_prep(struct bnx2x *bp, struct vfpf_first_tlv *first_tlv,
@@ -902,12 +1020,17 @@ u32 bnx2x_crc_vf_bulletin(struct bnx2x *bp,
 int bnx2x_post_vf_bulletin(struct bnx2x *bp, int vf);
 
 =======
+=======
+>>>>>>> v3.18
 bool bnx2x_tlv_supported(u16 tlvtype);
 
 u32 bnx2x_crc_vf_bulletin(struct pf_vf_bulletin_content *bulletin);
 int bnx2x_post_vf_bulletin(struct bnx2x *bp, int vf);
 void bnx2x_vf_bulletin_finalize(struct pf_vf_bulletin_content *bulletin,
 				bool support_long);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum sample_bulletin_result bnx2x_sample_bulletin(struct bnx2x *bp);
@@ -919,15 +1042,21 @@ int bnx2x_vfpf_release(struct bnx2x *bp);
 int bnx2x_vfpf_init(struct bnx2x *bp);
 void bnx2x_vfpf_close_vf(struct bnx2x *bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_vfpf_setup_q(struct bnx2x *bp, int fp_idx);
 int bnx2x_vfpf_teardown_queue(struct bnx2x *bp, int qidx);
 int bnx2x_vfpf_config_mac(struct bnx2x *bp, u8 *addr, u8 vf_qid, bool set);
 =======
+=======
+>>>>>>> v3.18
 int bnx2x_vfpf_setup_q(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 		       bool is_leading);
 int bnx2x_vfpf_config_mac(struct bnx2x *bp, u8 *addr, u8 vf_qid, bool set);
 int bnx2x_vfpf_config_rss(struct bnx2x *bp,
 			  struct bnx2x_config_rss_params *params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int bnx2x_vfpf_set_mcast(struct net_device *dev);
 int bnx2x_vfpf_storm_rx_mode(struct bnx2x *bp);
@@ -948,7 +1077,13 @@ static inline int bnx2x_vf_ustorm_prods_offset(struct bnx2x *bp,
 
 enum sample_bulletin_result bnx2x_sample_bulletin(struct bnx2x *bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem *bnx2x_vf_doorbells(struct bnx2x *bp);
+=======
+void bnx2x_timer_sriov(struct bnx2x *bp);
+void __iomem *bnx2x_vf_doorbells(struct bnx2x *bp);
+void bnx2x_vf_pci_dealloc(struct bnx2x *bp);
+>>>>>>> v3.18
 =======
 void bnx2x_timer_sriov(struct bnx2x *bp);
 void __iomem *bnx2x_vf_doorbells(struct bnx2x *bp);
@@ -960,12 +1095,15 @@ void bnx2x_disable_sriov(struct bnx2x *bp);
 static inline int bnx2x_vf_headroom(struct bnx2x *bp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bp->vfdb->sriov.nr_virtfn * BNX2X_CLIENTS_PER_VF;
 }
 void bnx2x_pf_set_vfs_vlan(struct bnx2x *bp);
 int bnx2x_sriov_configure(struct pci_dev *dev, int num_vfs);
 int bnx2x_open_epilog(struct bnx2x *bp);
 =======
+=======
+>>>>>>> v3.18
 	return bp->vfdb->sriov.nr_virtfn * BNX2X_CIDS_PER_VF;
 }
 void bnx2x_pf_set_vfs_vlan(struct bnx2x *bp);
@@ -980,12 +1118,16 @@ void bnx2x_iov_link_update(struct bnx2x *bp);
 int bnx2x_iov_link_update_vf(struct bnx2x *bp, int idx);
 
 int bnx2x_set_vf_link_state(struct net_device *dev, int vf, int link_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else /* CONFIG_BNX2X_SRIOV */
 
 static inline void bnx2x_iov_set_queue_sp_obj(struct bnx2x *bp, int vf_cid,
 				struct bnx2x_queue_sp_obj **q_obj) {}
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void bnx2x_iov_sp_event(struct bnx2x *bp, int vf_cid,
 				      bool queue_work) {}
@@ -996,12 +1138,17 @@ static inline void bnx2x_iov_sp_task(struct bnx2x *bp) {}
 static inline void bnx2x_vf_mbx(struct bnx2x *bp,
 				struct vf_pf_event_data *vfpf_event) {}
 =======
+=======
+>>>>>>> v3.18
 static inline void bnx2x_vf_handle_flr_event(struct bnx2x *bp) {}
 static inline int bnx2x_iov_eq_sp_event(struct bnx2x *bp,
 					union event_ring_elem *elem) {return 1; }
 static inline void bnx2x_vf_mbx(struct bnx2x *bp) {}
 static inline void bnx2x_vf_mbx_schedule(struct bnx2x *bp,
 					 struct vf_pf_event_data *vfpf_event) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int bnx2x_iov_init_ilt(struct bnx2x *bp, u16 line) {return line; }
 static inline void bnx2x_iov_init_dq(struct bnx2x *bp) {}
@@ -1020,16 +1167,22 @@ static inline int bnx2x_vfpf_release(struct bnx2x *bp) {return 0; }
 static inline int bnx2x_vfpf_init(struct bnx2x *bp) {return 0; }
 static inline void bnx2x_vfpf_close_vf(struct bnx2x *bp) {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bnx2x_vfpf_setup_q(struct bnx2x *bp, int fp_idx) {return 0; }
 static inline int bnx2x_vfpf_teardown_queue(struct bnx2x *bp, int qidx) {return 0; }
 static inline int bnx2x_vfpf_config_mac(struct bnx2x *bp, u8 *addr,
 					u8 vf_qid, bool set) {return 0; }
 =======
+=======
+>>>>>>> v3.18
 static inline int bnx2x_vfpf_setup_q(struct bnx2x *bp, struct bnx2x_fastpath *fp, bool is_leading) {return 0; }
 static inline int bnx2x_vfpf_config_mac(struct bnx2x *bp, u8 *addr,
 					u8 vf_qid, bool set) {return 0; }
 static inline int bnx2x_vfpf_config_rss(struct bnx2x *bp,
 					struct bnx2x_config_rss_params *params) {return 0; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int bnx2x_vfpf_set_mcast(struct net_device *dev) {return 0; }
 static inline int bnx2x_vfpf_storm_rx_mode(struct bnx2x *bp) {return 0; }
@@ -1045,6 +1198,10 @@ static inline enum sample_bulletin_result bnx2x_sample_bulletin(struct bnx2x *bp
 	return PFVF_BULLETIN_UNCHANGED;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void bnx2x_timer_sriov(struct bnx2x *bp) {}
+>>>>>>> v3.18
 =======
 static inline void bnx2x_timer_sriov(struct bnx2x *bp) {}
 >>>>>>> v3.18
@@ -1055,11 +1212,14 @@ static inline void __iomem *bnx2x_vf_doorbells(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bnx2x_vf_pci_alloc(struct bnx2x *bp) {return 0; }
 static inline void bnx2x_pf_set_vfs_vlan(struct bnx2x *bp) {}
 static inline int bnx2x_sriov_configure(struct pci_dev *dev, int num_vfs) {return 0; }
 static inline int bnx2x_open_epilog(struct bnx2x *bp) {return 0; }
 =======
+=======
+>>>>>>> v3.18
 static inline void bnx2x_vf_pci_dealloc(struct bnx2x *bp) {}
 static inline int bnx2x_vf_pci_alloc(struct bnx2x *bp) {return 0; }
 static inline void bnx2x_pf_set_vfs_vlan(struct bnx2x *bp) {}
@@ -1076,6 +1236,9 @@ static inline int bnx2x_set_vf_link_state(struct net_device *dev, int vf,
 struct pf_vf_bulletin_content;
 static inline void bnx2x_vf_bulletin_finalize(struct pf_vf_bulletin_content *bulletin,
 					      bool support_long) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_BNX2X_SRIOV */

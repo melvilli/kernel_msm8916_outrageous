@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_fs.h"
 #include "xfs_types.h"
 #include "xfs_log.h"
@@ -29,6 +30,8 @@
 #include "xfs_inode.h"
 #include "xfs_utils.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_fs.h"
 #include "xfs_log_format.h"
@@ -36,11 +39,15 @@
 #include "xfs_sb.h"
 #include "xfs_ag.h"
 #include "xfs_mount.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_error.h"
 
 #ifdef DEBUG
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int	xfs_etrap[XFS_ERROR_NTRAP] = {
 	0,
@@ -65,6 +72,8 @@ xfs_error_trap(int e)
 	return e;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int	xfs_etest[XFS_NUM_INJECT_ERROR];
@@ -174,7 +183,11 @@ xfs_error_report(
 	if (level <= xfs_error_level) {
 		xfs_alert_tag(mp, XFS_PTAG_ERROR_REPORT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Internal error %s at line %d of file %s.  Caller 0x%p\n",
+=======
+		"Internal error %s at line %d of file %s.  Caller %pF",
+>>>>>>> v3.18
 =======
 		"Internal error %s at line %d of file %s.  Caller %pF",
 >>>>>>> v3.18
@@ -200,7 +213,10 @@ xfs_corruption_error(
 	xfs_alert(mp, "Corruption detected. Unmount and run xfs_repair");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Warnings specifically for verifier errors.  Differentiate CRC vs. invalid
@@ -226,4 +242,7 @@ xfs_verifier_error(
 	if (xfs_error_level >= XFS_ERRLEVEL_HIGH)
 		xfs_stack_trace();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -12,11 +12,14 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -87,6 +90,7 @@ sampling rate. If you sample two channels you get 4kHz and so on.
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* generates loads of debug info */
 /* #define NOISY_DUX_DEBUGBUG */
 
@@ -97,13 +101,20 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 #include <linux/kernel.h>
 #include <linux/module.h>
 >>>>>>> v3.18
+=======
+#include <linux/kernel.h>
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/usb.h>
 #include <linux/fcntl.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/firmware.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -111,6 +122,7 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 
 #include "comedi_fc.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* timeout for the USB-transfer in ms*/
 #define BULK_TIMEOUT 1000
@@ -149,6 +161,8 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 /* Output endpoint for PWM */
 #define PWM_EP         4
 =======
+=======
+>>>>>>> v3.18
 /* constants for firmware upload and download */
 #define USBDUX_FIRMWARE		"usbdux_firmware.bin"
 #define USBDUX_FIRMWARE_MAX_LEN	0x2000
@@ -170,6 +184,9 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 
 /* timeout for the USB-transfer in ms */
 #define BULK_TIMEOUT		1000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 300Hz max frequ under PWM */
@@ -179,11 +196,16 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 #define PWM_DEFAULT_PERIOD ((long)(1E9/100))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Number of channels */
 #define NUMCHANNELS       8
 
 /* Size of one A/D value */
 #define SIZEADIN          ((sizeof(int16_t)))
+=======
+/* Size of one A/D value */
+#define SIZEADIN          ((sizeof(uint16_t)))
+>>>>>>> v3.18
 =======
 /* Size of one A/D value */
 #define SIZEADIN          ((sizeof(uint16_t)))
@@ -199,11 +221,16 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 #define SIZEINSNBUF       16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Number of DA channels */
 #define NUMOUTCHANNELS    8
 
 /* size of one value for the D/A converter: channel and value */
 #define SIZEDAOUT          ((sizeof(int8_t)+sizeof(int16_t)))
+=======
+/* size of one value for the D/A converter: channel and value */
+#define SIZEDAOUT          ((sizeof(uint8_t)+sizeof(uint16_t)))
+>>>>>>> v3.18
 =======
 /* size of one value for the D/A converter: channel and value */
 #define SIZEDAOUT          ((sizeof(uint8_t)+sizeof(uint16_t)))
@@ -236,6 +263,7 @@ sampling rate. If you sample two channels you get 4kHz and so on.
 /* must have more buffers due to buggy USB ctr */
 #define NUMOFOUTBUFFERSHIGH    10
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Total number of usbdux devices */
 #define NUMUSBDUX             16
@@ -333,6 +361,8 @@ struct usbduxsub {
 	short int ai_continous;
 	short int ao_continous;
 =======
+=======
+>>>>>>> v3.18
 /* number of retries to get the right dux command */
 #define RETRIES 10
 
@@ -378,6 +408,9 @@ struct usbdux_private {
 	unsigned int ao_cmd_running:1;
 	unsigned int pwm_cmd_running:1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* number of samples to acquire */
 	int ai_sample_count;
@@ -390,6 +423,7 @@ struct usbdux_private {
 	unsigned int ao_counter;
 	/* interval in frames/uframes */
 	unsigned int ai_interval;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* D/A commands */
 	int8_t *dac_commands;
@@ -486,6 +520,8 @@ static int usbdux_ai_cancel(struct comedi_device *dev,
 	up(&this_usbduxsub->sem);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	/* commands */
 	uint8_t *dux_commands;
 	struct semaphore sem;
@@ -521,12 +557,16 @@ static int usbdux_ai_cancel(struct comedi_device *dev,
 	up(&devpriv->sem);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* analogue IN - interrupt service routine */
 static void usbduxsub_ai_isoc_irq(struct urb *urb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i, err, n;
 	struct usbduxsub *this_usbduxsub;
@@ -540,11 +580,16 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	/* subdevice which is the AD converter */
 	s = &this_comedidev->subdevices[SUBDEV_AD];
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_device *dev = urb->context;
 	struct comedi_subdevice *s = dev->read_subdev;
 	struct usbdux_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
 	int i, err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* first we test if something unusual has just happened */
@@ -552,8 +597,12 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	case 0:
 		/* copy the result in the transfer buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(this_usbduxsub->in_buffer,
 		       urb->transfer_buffer, SIZEINBUF);
+=======
+		memcpy(devpriv->in_buf, urb->transfer_buffer, SIZEINBUF);
+>>>>>>> v3.18
 =======
 		memcpy(devpriv->in_buf, urb->transfer_buffer, SIZEINBUF);
 >>>>>>> v3.18
@@ -563,10 +612,14 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 		/* we don't copy the data into the transfer buffer */
 		/* and recycle the last data byte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&urb->dev->dev,
 			"comedi%d: usbdux: CRC error in ISO IN stream.\n",
 			this_usbduxsub->comedidev->minor);
 
+=======
+		dev_dbg(dev->class_dev, "CRC error in ISO IN stream\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->class_dev, "CRC error in ISO IN stream\n");
 >>>>>>> v3.18
@@ -578,6 +631,7 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	case -ECONNABORTED:
 		/* happens after an unlink command */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (this_usbduxsub->ai_cmd_running) {
 			/* we are still running a command */
 			/* tell this comedi */
@@ -587,12 +641,17 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 			/* stop the transfer w/o unlink */
 			usbdux_ai_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (devpriv->ai_cmd_running) {
 			s->async->events |= COMEDI_CB_EOA;
 			s->async->events |= COMEDI_CB_ERROR;
 			comedi_event(dev, s);
 			/* stop the transfer w/o unlink */
 			usbdux_ai_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
@@ -600,6 +659,7 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	default:
 		/* a real error on the bus */
 		/* pass error to comedi if we are really running a command */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (this_usbduxsub->ai_cmd_running) {
 			dev_err(&urb->dev->dev,
@@ -611,6 +671,8 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 			/* don't do an unlink here */
 			usbdux_ai_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (devpriv->ai_cmd_running) {
 			dev_err(dev->class_dev,
 				"Non-zero urb status received in ai intr context: %d\n",
@@ -620,6 +682,9 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 			comedi_event(dev, s);
 			/* don't do an unlink here */
 			usbdux_ai_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
@@ -630,7 +695,11 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	 * are we running a command?
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely((!(this_usbduxsub->ai_cmd_running)))) {
+=======
+	if (unlikely(!devpriv->ai_cmd_running)) {
+>>>>>>> v3.18
 =======
 	if (unlikely(!devpriv->ai_cmd_running)) {
 >>>>>>> v3.18
@@ -642,7 +711,11 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	urb->dev = this_usbduxsub->usbdev;
+=======
+	urb->dev = comedi_to_usb_dev(dev);
+>>>>>>> v3.18
 =======
 	urb->dev = comedi_to_usb_dev(dev);
 >>>>>>> v3.18
@@ -650,6 +723,7 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 	/* resubmit the urb */
 	err = usb_submit_urb(urb, GFP_ATOMIC);
 	if (unlikely(err < 0)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_err(&urb->dev->dev,
 			"comedi_: urb resubmit failed in int-context! err=%d\n",
@@ -685,6 +759,8 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 			s->async->events |= COMEDI_CB_EOA;
 			comedi_event(this_usbduxsub->comedidev, s);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev->class_dev,
 			"urb resubmit failed in int-context! err=%d\n", err);
 		if (err == -EL2NSYNC)
@@ -716,11 +792,15 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 			/* say comedi that the acquistion is over */
 			s->async->events |= COMEDI_CB_EOA;
 			comedi_event(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 		}
 	}
 	/* get the data from the USB bus and hand it over to comedi */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	n = s->async->cmd.chanlist_len;
 	for (i = 0; i < n; i++) {
@@ -738,6 +818,8 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 			/* buffer overflow */
 			usbdux_ai_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < cmd->chanlist_len; i++) {
 		unsigned int range = CR_RANGE(cmd->chanlist[i]);
 		uint16_t val = le16_to_cpu(devpriv->in_buf[i]);
@@ -751,12 +833,16 @@ static void usbduxsub_ai_isoc_irq(struct urb *urb)
 		if (unlikely(err == 0)) {
 			/* buffer overflow */
 			usbdux_ai_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 		}
 	}
 	/* tell comedi that data is there */
 	s->async->events |= COMEDI_CB_BLOCK | COMEDI_CB_EOS;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	comedi_event(this_usbduxsub->comedidev, s);
 }
@@ -819,6 +905,8 @@ static int usbdux_ao_cancel(struct comedi_device *dev,
 	up(&this_usbduxsub->sem);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	comedi_event(dev, s);
 }
 
@@ -844,11 +932,15 @@ static int usbdux_ao_cancel(struct comedi_device *dev,
 	up(&devpriv->sem);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void usbduxsub_ao_isoc_irq(struct urb *urb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i, ret;
 	int8_t *datap;
@@ -863,6 +955,8 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 
 	s = &this_comedidev->subdevices[SUBDEV_DA];
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_device *dev = urb->context;
 	struct comedi_subdevice *s = dev->write_subdev;
 	struct usbdux_private *devpriv = dev->private;
@@ -870,6 +964,9 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 	uint8_t *datap;
 	int ret;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (urb->status) {
@@ -884,21 +981,28 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 		/* after an unlink command, unplug, ... etc */
 		/* no unlink needed here. Already shutting down. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (this_usbduxsub->ao_cmd_running) {
 			s->async->events |= COMEDI_CB_EOA;
 			comedi_event(this_usbduxsub->comedidev, s);
 			usbdux_ao_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (devpriv->ao_cmd_running) {
 			s->async->events |= COMEDI_CB_EOA;
 			comedi_event(dev, s);
 			usbdux_ao_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
 
 	default:
 		/* a real error */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (this_usbduxsub->ao_cmd_running) {
 			dev_err(&urb->dev->dev,
@@ -910,6 +1014,8 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 			/* we do an unlink if we are in the high speed mode */
 			usbdux_ao_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (devpriv->ao_cmd_running) {
 			dev_err(dev->class_dev,
 				"Non-zero urb status received in ao intr context: %d\n",
@@ -919,12 +1025,16 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 			comedi_event(dev, s);
 			/* we do an unlink if we are in the high speed mode */
 			usbdux_ao_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
 	}
 
 	/* are we actually running? */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(this_usbduxsub->ao_cmd_running))
 		return;
@@ -945,6 +1055,8 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 				s->async->events |= COMEDI_CB_EOA;
 				comedi_event(this_usbduxsub->comedidev, s);
 =======
+=======
+>>>>>>> v3.18
 	if (!devpriv->ao_cmd_running)
 		return;
 
@@ -963,11 +1075,15 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 				usbdux_ao_stop(dev, 0);
 				s->async->events |= COMEDI_CB_EOA;
 				comedi_event(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* no resubmit of the urb */
 				return;
 			}
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* transmit data to the USB bus */
 		((uint8_t *) (urb->transfer_buffer))[0] =
@@ -1010,6 +1126,8 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 			urb->interval = 1;
 		}
 =======
+=======
+>>>>>>> v3.18
 
 		/* transmit data to the USB bus */
 		datap = urb->transfer_buffer;
@@ -1042,6 +1160,9 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 			urb->interval = 8;	/* uframes */
 		else
 			urb->interval = 1;	/* frames */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		urb->number_of_packets = 1;
 		urb->iso_frame_desc[0].offset = 0;
@@ -1049,6 +1170,7 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 		urb->iso_frame_desc[0].status = 0;
 		ret = usb_submit_urb(urb, GFP_ATOMIC);
 		if (ret < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dev_err(&urb->dev->dev,
 				"comedi_: ao urb resubm failed in int-cont. "
@@ -1064,6 +1186,8 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 			/* don't do an unlink here */
 			usbdux_ao_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 			dev_err(dev->class_dev,
 				"ao urb resubm failed in int-cont. ret=%d",
 				ret);
@@ -1076,6 +1200,7 @@ static void usbduxsub_ao_isoc_irq(struct urb *urb)
 			comedi_event(dev, s);
 			/* don't do an unlink here */
 			usbdux_ao_stop(dev, 0);
+<<<<<<< HEAD
 >>>>>>> v3.18
 		}
 	}
@@ -1287,6 +1412,12 @@ static int usbduxsub_submit_outurbs(struct usbduxsub *usbduxsub)
 			return err_flag;
 		}
 =======
+=======
+		}
+	}
+}
+
+>>>>>>> v3.18
 static int usbdux_submit_urbs(struct comedi_device *dev,
 			      struct urb **urbs, int num_urbs,
 			      int input_urb)
@@ -1312,6 +1443,9 @@ static int usbdux_submit_urbs(struct comedi_device *dev,
 		ret = usb_submit_urb(urb, GFP_ATOMIC);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1321,6 +1455,7 @@ static int usbdux_ai_cmdtest(struct comedi_device *dev,
 			     struct comedi_subdevice *s, struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usbduxsub *this_usbduxsub = dev->private;
 	int err = 0, i;
 	unsigned int tmp_timer;
@@ -1329,10 +1464,15 @@ static int usbdux_ai_cmdtest(struct comedi_device *dev,
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	struct usbdux_private *this_usbduxsub = dev->private;
 	int err = 0, i;
 	unsigned int tmp_timer;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Step 1 : check if triggers are trivially valid */
 
@@ -1400,6 +1540,7 @@ static int usbdux_ai_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->stop_src == TRIG_COUNT) {
 		/* any count is allowed */
 	} else {
@@ -1407,10 +1548,15 @@ static int usbdux_ai_cmdtest(struct comedi_device *dev,
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
 	else	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
@@ -1423,6 +1569,7 @@ static int usbdux_ai_cmdtest(struct comedi_device *dev,
  * creates the ADC command for the MAX1271
  * range is the range value from comedi
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int8_t create_adc_command(unsigned int chan, int range)
 {
@@ -1472,6 +1619,8 @@ static int receive_dux_commands(struct usbduxsub *this_usbduxsub, int command)
 {
 	int result = (-EFAULT);
 =======
+=======
+>>>>>>> v3.18
 static uint8_t create_adc_command(unsigned int chan, unsigned int range)
 {
 	uint8_t p = (range <= 1);
@@ -1498,11 +1647,15 @@ static int receive_dux_commands(struct comedi_device *dev, unsigned int command)
 	struct usb_device *usb = comedi_to_usb_dev(dev);
 	struct usbdux_private *devpriv = dev->private;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int nrec;
 	int i;
 
 	for (i = 0; i < RETRIES; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		result = usb_bulk_msg(this_usbduxsub->usbdev,
 				      usb_rcvbulkpipe(this_usbduxsub->usbdev,
@@ -1525,6 +1678,8 @@ static int receive_dux_commands(struct comedi_device *dev, unsigned int command)
 		this_usbduxsub->comedidev->minor, command,
 		le16_to_cpu(this_usbduxsub->insn_buffer[0]));
 =======
+=======
+>>>>>>> v3.18
 		ret = usb_bulk_msg(usb, usb_rcvbulkpipe(usb, 8),
 				      devpriv->insn_buf, SIZEINSNBUF,
 				      &nrec, BULK_TIMEOUT);
@@ -1534,11 +1689,15 @@ static int receive_dux_commands(struct comedi_device *dev, unsigned int command)
 			return ret;
 	}
 	/* command not received */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -EFAULT;
 }
 
 static int usbdux_ai_inttrig(struct comedi_device *dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			     struct comedi_subdevice *s, unsigned int trignum)
 {
@@ -1582,6 +1741,8 @@ static int usbdux_ai_inttrig(struct comedi_device *dev,
 	up(&this_usbduxsub->sem);
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 			     struct comedi_subdevice *s,
 			     unsigned int trig_num)
 {
@@ -1610,11 +1771,15 @@ static int usbdux_ai_inttrig(struct comedi_device *dev,
 ai_trig_exit:
 	up(&devpriv->sem);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct comedi_cmd *cmd = &s->async->cmd;
 	unsigned int chan, range;
@@ -1671,6 +1836,8 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 
 	if (this_usbduxsub->high_speed) {
 =======
+=======
+>>>>>>> v3.18
 	struct usbdux_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
 	int len = cmd->chanlist_len;
@@ -1699,12 +1866,16 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		goto ai_cmd_exit;
 
 	if (devpriv->high_speed) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * every channel gets a time window of 125us. Thus, if we
 		 * sample all 8 channels we need 1ms. If we sample only one
 		 * channel we need only 125us
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		this_usbduxsub->ai_interval = 1;
 		/* find a power of 2 for the interval */
@@ -1739,6 +1910,8 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		this_usbduxsub->ai_continous = 1;
 		this_usbduxsub->ai_sample_count = 0;
 =======
+=======
+>>>>>>> v3.18
 		devpriv->ai_interval = 1;
 		/* find a power of 2 for the interval */
 		while (devpriv->ai_interval < len)
@@ -1764,11 +1937,15 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	} else {
 		/* continous acquisition */
 		devpriv->ai_sample_count = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (cmd->start_src == TRIG_NOW) {
 		/* enable this acquisition operation */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		this_usbduxsub->ai_cmd_running = 1;
 		ret = usbduxsub_submit_inurbs(this_usbduxsub);
@@ -1778,6 +1955,8 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 			up(&this_usbduxsub->sem);
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 		devpriv->ai_cmd_running = 1;
 		ret = usbdux_submit_urbs(dev, devpriv->ai_urbs,
 					 devpriv->n_ai_urbs, 1);
@@ -1785,6 +1964,9 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 			devpriv->ai_cmd_running = 0;
 			/* fixme: unlink here?? */
 			goto ai_cmd_exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		s->async->inttrig = NULL;
@@ -1795,20 +1977,27 @@ static int usbdux_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		s->async->inttrig = usbdux_ai_inttrig;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	up(&this_usbduxsub->sem);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 ai_cmd_exit:
 	up(&devpriv->sem);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* Mode 0 is used to get a single conversion on demand */
 static int usbdux_ai_insn_read(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       struct comedi_insn *insn, unsigned int *data)
 {
@@ -1892,6 +2081,8 @@ static int usbdux_ao_insn_read(struct comedi_device *dev,
 	up(&this_usbduxsub->sem);
 	return i;
 =======
+=======
+>>>>>>> v3.18
 			       struct comedi_insn *insn,
 			       unsigned int *data)
 {
@@ -1948,11 +2139,15 @@ static int usbdux_ao_insn_read(struct comedi_device *dev,
 	up(&devpriv->sem);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int usbdux_ao_insn_write(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
@@ -2044,6 +2239,8 @@ static int usbdux_ao_inttrig(struct comedi_device *dev,
 	up(&this_usbduxsub->sem);
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
@@ -2112,6 +2309,9 @@ static int usbdux_ao_inttrig(struct comedi_device *dev,
 ao_trig_exit:
 	up(&devpriv->sem);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2119,7 +2319,11 @@ static int usbdux_ao_cmdtest(struct comedi_device *dev,
 			     struct comedi_subdevice *s, struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usbduxsub *this_usbduxsub = dev->private;
+=======
+	struct usbdux_private *this_usbduxsub = dev->private;
+>>>>>>> v3.18
 =======
 	struct usbdux_private *this_usbduxsub = dev->private;
 >>>>>>> v3.18
@@ -2130,9 +2334,12 @@ static int usbdux_ao_cmdtest(struct comedi_device *dev,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(this_usbduxsub->probed))
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Step 1 : check if triggers are trivially valid */
@@ -2197,6 +2404,7 @@ static int usbdux_ao_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->stop_src == TRIG_COUNT) {
 		/* any count is allowed */
 	} else {
@@ -2204,10 +2412,15 @@ static int usbdux_ao_cmdtest(struct comedi_device *dev,
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
 	else	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
@@ -2218,6 +2431,7 @@ static int usbdux_ao_cmdtest(struct comedi_device *dev,
 
 static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct comedi_cmd *cmd = &s->async->cmd;
 	unsigned int chan, gain;
@@ -2283,6 +2497,8 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	}
 	this_usbduxsub->ao_counter = this_usbduxsub->ao_timer;
 =======
+=======
+>>>>>>> v3.18
 	struct usbdux_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
 	int ret = -EBUSY;
@@ -2312,6 +2528,9 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	}
 
 	devpriv->ao_counter = devpriv->ao_timer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cmd->stop_src == TRIG_COUNT) {
@@ -2319,9 +2538,15 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		/* counter */
 		/* high speed also scans everything at once */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (0) {	/* (this_usbduxsub->high_speed) */
 			this_usbduxsub->ao_sample_count =
 			    (cmd->stop_arg) * (cmd->scan_end_arg);
+=======
+		if (0) {	/* (devpriv->high_speed) */
+			devpriv->ao_sample_count = cmd->stop_arg *
+						   cmd->scan_end_arg;
+>>>>>>> v3.18
 =======
 		if (0) {	/* (devpriv->high_speed) */
 			devpriv->ao_sample_count = cmd->stop_arg *
@@ -2332,6 +2557,7 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 			/* perf inside the FX2 */
 			/* data arrives as one packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			this_usbduxsub->ao_sample_count = cmd->stop_arg;
 		}
 		this_usbduxsub->ao_continous = 0;
@@ -2340,16 +2566,22 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		this_usbduxsub->ao_continous = 1;
 		this_usbduxsub->ao_sample_count = 0;
 =======
+=======
+>>>>>>> v3.18
 			devpriv->ao_sample_count = cmd->stop_arg;
 		}
 	} else {
 		/* continous acquisition */
 		devpriv->ao_sample_count = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (cmd->start_src == TRIG_NOW) {
 		/* enable this acquisition operation */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		this_usbduxsub->ao_cmd_running = 1;
 		ret = usbduxsub_submit_outurbs(this_usbduxsub);
@@ -2359,6 +2591,8 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 			up(&this_usbduxsub->sem);
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 		devpriv->ao_cmd_running = 1;
 		ret = usbdux_submit_urbs(dev, devpriv->ao_urbs,
 					 devpriv->n_ao_urbs, 0);
@@ -2366,6 +2600,9 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 			devpriv->ao_cmd_running = 0;
 			/* fixme: unlink here?? */
 			goto ao_cmd_exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		s->async->inttrig = NULL;
@@ -2377,18 +2614,25 @@ static int usbdux_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	up(&this_usbduxsub->sem);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 ao_cmd_exit:
 	up(&devpriv->sem);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int usbdux_dio_insn_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				  struct comedi_insn *insn, unsigned int *data)
 {
@@ -2417,6 +2661,8 @@ static int usbdux_dio_insn_config(struct comedi_device *dev,
 	/* we don't tell the firmware here as it would take 8 frames */
 	/* to submit the information. We do it in the insn_bits. */
 =======
+=======
+>>>>>>> v3.18
 				  struct comedi_insn *insn,
 				  unsigned int *data)
 {
@@ -2430,12 +2676,16 @@ static int usbdux_dio_insn_config(struct comedi_device *dev,
 	 * We don't tell the firmware here as it would take 8 frames
 	 * to submit the information. We do it in the insn_bits.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return insn->n;
 }
 
 static int usbdux_dio_insn_bits(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
@@ -2513,6 +2763,8 @@ static int usbdux_counter_read(struct comedi_device *dev,
 	up(&this_usbduxsub->sem);
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
@@ -2574,11 +2826,15 @@ counter_read_exit:
 	up(&devpriv->sem);
 
 	return ret ? ret : insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int usbdux_counter_write(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
@@ -2608,6 +2864,8 @@ static int usbdux_counter_write(struct comedi_device *dev,
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
@@ -2632,6 +2890,9 @@ static int usbdux_counter_write(struct comedi_device *dev,
 	up(&devpriv->sem);
 
 	return ret ? ret : insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2643,6 +2904,7 @@ static int usbdux_counter_config(struct comedi_device *dev,
 	return 2;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /***********************************/
 /* PWM */
@@ -2695,6 +2957,8 @@ static int usbdux_pwm_cancel(struct comedi_device *dev,
 
 	return send_dux_commands(this_usbduxsub, SENDPWMOFF);
 =======
+=======
+>>>>>>> v3.18
 static void usbduxsub_unlink_pwm_urbs(struct comedi_device *dev)
 {
 	struct usbdux_private *devpriv = dev->private;
@@ -2725,11 +2989,15 @@ static int usbdux_pwm_cancel(struct comedi_device *dev,
 	up(&devpriv->sem);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void usbduxsub_pwm_irq(struct urb *urb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	struct usbduxsub *this_usbduxsub;
@@ -2744,6 +3012,11 @@ static void usbduxsub_pwm_irq(struct urb *urb)
 	this_usbduxsub = this_comedidev->private;
 
 	s = &this_comedidev->subdevices[SUBDEV_DA];
+=======
+	struct comedi_device *dev = urb->context;
+	struct usbdux_private *devpriv = dev->private;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct comedi_device *dev = urb->context;
 	struct usbdux_private *devpriv = dev->private;
@@ -2764,8 +3037,13 @@ static void usbduxsub_pwm_irq(struct urb *urb)
 		 * no unlink needed here. Already shutting down.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (this_usbduxsub->pwm_cmd_running)
 			usbdux_pwm_stop(this_usbduxsub, 0);
+=======
+		if (devpriv->pwm_cmd_running)
+			usbdux_pwm_stop(dev, 0);
+>>>>>>> v3.18
 =======
 		if (devpriv->pwm_cmd_running)
 			usbdux_pwm_stop(dev, 0);
@@ -2776,23 +3054,30 @@ static void usbduxsub_pwm_irq(struct urb *urb)
 	default:
 		/* a real error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (this_usbduxsub->pwm_cmd_running) {
 			dev_err(&this_usbduxsub->interface->dev,
 				"comedi_: Non-zero urb status received in "
 				"pwm intr context: %d\n", urb->status);
 			usbdux_pwm_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (devpriv->pwm_cmd_running) {
 			dev_err(dev->class_dev,
 				"Non-zero urb status received in pwm intr context: %d\n",
 				urb->status);
 			usbdux_pwm_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
 	}
 
 	/* are we actually running? */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(this_usbduxsub->pwm_cmd_running))
 		return;
@@ -2814,6 +3099,8 @@ static void usbduxsub_pwm_irq(struct urb *urb)
 			/* don't do an unlink here */
 			usbdux_pwm_stop(this_usbduxsub, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (!devpriv->pwm_cmd_running)
 		return;
 
@@ -2832,11 +3119,15 @@ static void usbduxsub_pwm_irq(struct urb *urb)
 
 			/* don't do an unlink here */
 			usbdux_pwm_stop(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int usbduxsub_submit_pwm_urbs(struct usbduxsub *usbduxsub)
 {
@@ -2967,6 +3258,8 @@ static int usbdux_pwm_pattern(struct comedi_device *dev,
 	}
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 static int usbduxsub_submit_pwm_urbs(struct comedi_device *dev)
 {
 	struct usb_device *usb = comedi_to_usb_dev(dev);
@@ -3058,11 +3351,15 @@ static void usbdux_pwm_pattern(struct comedi_device *dev,
 			c |= sgn_mask;
 		*buf++ = c;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int usbdux_pwm_write(struct comedi_device *dev,
 			    struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			    struct comedi_insn *insn, unsigned int *data)
 {
@@ -3107,6 +3404,8 @@ static int usbdux_pwm_config(struct comedi_device *dev,
 		dev_dbg(&this_usbduxsub->interface->dev,
 			"comedi%d: %s: pwm on\n", dev->minor, __func__);
 =======
+=======
+>>>>>>> v3.18
 			    struct comedi_insn *insn,
 			    unsigned int *data)
 {
@@ -3138,6 +3437,9 @@ static int usbdux_pwm_config(struct comedi_device *dev,
 
 	switch (data[0]) {
 	case INSN_CONFIG_ARM:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * if not zero the PWM is limited to a certain time which is
@@ -3147,6 +3449,7 @@ static int usbdux_pwm_config(struct comedi_device *dev,
 			return -EINVAL;
 		return usbdux_pwm_start(dev, s);
 	case INSN_CONFIG_DISARM:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_dbg(&this_usbduxsub->interface->dev,
 			"comedi%d: %s: pwm off\n", dev->minor, __func__);
@@ -3176,6 +3479,8 @@ static int usbdux_pwm_config(struct comedi_device *dev,
 					  /* just a sign */
 					  (data[2] != 0));
 =======
+=======
+>>>>>>> v3.18
 		return usbdux_pwm_cancel(dev, s);
 	case INSN_CONFIG_GET_PWM_STATUS:
 		data[1] = devpriv->pwm_cmd_running;
@@ -3192,6 +3497,9 @@ static int usbdux_pwm_config(struct comedi_device *dev,
 		 */
 		usbdux_pwm_pattern(dev, s, chan, data[1], (data[2] != 0));
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case INSN_CONFIG_PWM_GET_H_BRIDGE:
 		/* values are not kept in this driver, nothing to return here */
@@ -3200,6 +3508,7 @@ static int usbdux_pwm_config(struct comedi_device *dev,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* end of PWM */
 /*****************************************************************/
@@ -3401,6 +3710,8 @@ static int usbdux_attach_common(struct comedi_device *dev,
 	dev_info(&udev->interface->dev, "comedi%d: attached to usbdux.\n",
 		 dev->minor);
 =======
+=======
+>>>>>>> v3.18
 static int usbdux_firmware_upload(struct comedi_device *dev,
 				  const u8 *data, size_t size,
 				  unsigned long context)
@@ -3552,11 +3863,15 @@ static int usbdux_alloc_usb_buffers(struct comedi_device *dev)
 		if (!urb->transfer_buffer)
 			return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int usbdux_auto_attach(struct comedi_device *dev,
 			      unsigned long context_unused)
@@ -3897,6 +4212,8 @@ static void usbdux_usb_disconnect(struct usb_interface *intf)
 	up(&start_stop_sem);
 	dev_dbg(&intf->dev, "comedi_: disconnected from the usb\n");
 =======
+=======
+>>>>>>> v3.18
 static void usbdux_free_usb_buffers(struct comedi_device *dev)
 {
 	struct usbdux_private *devpriv = dev->private;
@@ -4084,6 +4401,9 @@ static int usbdux_usb_probe(struct usb_interface *intf,
 			    const struct usb_device_id *id)
 {
 	return comedi_usb_auto_config(intf, &usbdux_driver, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4093,7 +4413,10 @@ static const struct usb_device_id usbdux_usb_table[] = {
 	{ }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_DEVICE_TABLE(usb, usbdux_usb_table);
@@ -4102,7 +4425,11 @@ static struct usb_driver usbdux_usb_driver = {
 	.name		= "usbdux",
 	.probe		= usbdux_usb_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.disconnect	= usbdux_usb_disconnect,
+=======
+	.disconnect	= comedi_usb_auto_unconfig,
+>>>>>>> v3.18
 =======
 	.disconnect	= comedi_usb_auto_unconfig,
 >>>>>>> v3.18
@@ -4114,7 +4441,11 @@ MODULE_AUTHOR("Bernd Porr, BerndPorr@f2s.com");
 MODULE_DESCRIPTION("Stirling/ITL USB-DUX -- Bernd.Porr@f2s.com");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_FIRMWARE(FIRMWARE);
+=======
+MODULE_FIRMWARE(USBDUX_FIRMWARE);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(USBDUX_FIRMWARE);
 >>>>>>> v3.18

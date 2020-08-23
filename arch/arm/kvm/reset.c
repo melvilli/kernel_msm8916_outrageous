@@ -28,6 +28,7 @@
 #include <asm/kvm_coproc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******************************************************************************
  * Cortex-A15 Reset Values
  */
@@ -39,6 +40,8 @@ static struct kvm_regs a15_regs_reset = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include <kvm/arm_arch_timer.h>
 
 /******************************************************************************
@@ -54,6 +57,9 @@ static const struct kvm_irq_level cortexa_vtimer_irq = {
 	.level = 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
@@ -70,6 +76,7 @@ static const struct kvm_irq_level cortexa_vtimer_irq = {
 int kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_regs *cpu_reset;
 
 	switch (vcpu->arch.target) {
@@ -79,6 +86,8 @@ int kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 		cpu_reset = &a15_regs_reset;
 		vcpu->arch.midr = read_cpuid_id();
 =======
+=======
+>>>>>>> v3.18
 	struct kvm_regs *reset_regs;
 	const struct kvm_irq_level *cpu_vtimer_irq;
 
@@ -88,6 +97,9 @@ int kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 		reset_regs = &cortexa_regs_reset;
 		vcpu->arch.midr = read_cpuid_id();
 		cpu_vtimer_irq = &cortexa_vtimer_irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -96,7 +108,11 @@ int kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 
 	/* Reset core registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&vcpu->arch.regs, cpu_reset, sizeof(vcpu->arch.regs));
+=======
+	memcpy(&vcpu->arch.regs, reset_regs, sizeof(vcpu->arch.regs));
+>>>>>>> v3.18
 =======
 	memcpy(&vcpu->arch.regs, reset_regs, sizeof(vcpu->arch.regs));
 >>>>>>> v3.18
@@ -105,6 +121,12 @@ int kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 	kvm_reset_coprocs(vcpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Reset arch_timer context */
+	kvm_timer_vcpu_reset(vcpu, cpu_vtimer_irq);
+
+>>>>>>> v3.18
 =======
 	/* Reset arch_timer context */
 	kvm_timer_vcpu_reset(vcpu, cpu_vtimer_irq);

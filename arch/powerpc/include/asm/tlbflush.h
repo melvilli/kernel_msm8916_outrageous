@@ -166,7 +166,12 @@ static inline void flush_tlb_kernel_range(unsigned long start,
 extern void __flush_hash_table_range(struct mm_struct *mm, unsigned long start,
 				     unsigned long end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+extern void flush_tlb_pmd_range(struct mm_struct *mm, pmd_t *pmd,
+				unsigned long addr);
+>>>>>>> v3.18
 =======
 extern void flush_tlb_pmd_range(struct mm_struct *mm, pmd_t *pmd,
 				unsigned long addr);

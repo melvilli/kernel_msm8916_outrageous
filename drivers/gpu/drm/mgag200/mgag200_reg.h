@@ -236,13 +236,19 @@
 #define MGAREG_CRTCEXT_DATA	0x1fdf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 /* Cursor X and Y position */
 #define MGA_CURPOSXL 0x3c0c
 #define MGA_CURPOSXH 0x3c0d
 #define MGA_CURPOSYL 0x3c0e
 #define MGA_CURPOSYH 0x3c0f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MGA bits for registers PCI_OPTION_REG */

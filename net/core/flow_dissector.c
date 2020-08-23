@@ -14,7 +14,11 @@
 #include <linux/ppp_defs.h>
 #include <net/flow_keys.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/net_map.h>
+=======
+#include <scsi/fc/fc_fcoe.h>
+>>>>>>> v3.18
 =======
 #include <scsi/fc/fc_fcoe.h>
 >>>>>>> v3.18
@@ -31,12 +35,15 @@ static void iph_to_flow_copy_addrs(struct flow_keys *flow, const struct iphdr *i
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool skb_flow_dissect(const struct sk_buff *skb, struct flow_keys *flow)
 {
 	int poff, nhoff = skb_network_offset(skb);
 	u8 ip_proto;
 	__be16 proto = skb->protocol;
 =======
+=======
+>>>>>>> v3.18
 /**
  * __skb_flow_get_ports - extract the upper layer ports and return them
  * @skb: sk_buff to extract the ports from
@@ -93,12 +100,16 @@ bool __skb_flow_dissect(const struct sk_buff *skb, struct flow_keys *flow,
 		nhoff = skb_network_offset(skb);
 		hlen = skb_headlen(skb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(flow, 0, sizeof(*flow));
 
 again:
 	switch (proto) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case __constant_htons(ETH_P_IP): {
 		const struct iphdr *iph;
@@ -122,6 +133,8 @@ ip:
 ipv6:
 		iph = skb_header_pointer(skb, nhoff, sizeof(_iph), &_iph);
 =======
+=======
+>>>>>>> v3.18
 	case htons(ETH_P_IP): {
 		const struct iphdr *iph;
 		struct iphdr _iph;
@@ -152,11 +165,15 @@ ip:
 
 ipv6:
 		iph = __skb_header_pointer(skb, nhoff, sizeof(_iph), data, hlen, &_iph);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!iph)
 			return false;
 
 		ip_proto = iph->nexthdr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		flow->src = (__force __be32)ipv6_addr_hash(&iph->saddr);
 		flow->dst = (__force __be32)ipv6_addr_hash(&iph->daddr);
@@ -169,6 +186,8 @@ ipv6:
 
 		vlan = skb_header_pointer(skb, nhoff, sizeof(_vlan), &_vlan);
 =======
+=======
+>>>>>>> v3.18
 		nhoff += sizeof(struct ipv6hdr);
 
 		/* see comment above in IPv4 section */
@@ -200,6 +219,9 @@ ipv6:
 		struct vlan_hdr _vlan;
 
 		vlan = __skb_header_pointer(skb, nhoff, sizeof(_vlan), data, hlen, &_vlan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!vlan)
 			return false;
@@ -209,7 +231,11 @@ ipv6:
 		goto again;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case __constant_htons(ETH_P_PPP_SES): {
+=======
+	case htons(ETH_P_PPP_SES): {
+>>>>>>> v3.18
 =======
 	case htons(ETH_P_PPP_SES): {
 >>>>>>> v3.18
@@ -218,7 +244,11 @@ ipv6:
 			__be16 proto;
 		} *hdr, _hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hdr = skb_header_pointer(skb, nhoff, sizeof(_hdr), &_hdr);
+=======
+		hdr = __skb_header_pointer(skb, nhoff, sizeof(_hdr), data, hlen, &_hdr);
+>>>>>>> v3.18
 =======
 		hdr = __skb_header_pointer(skb, nhoff, sizeof(_hdr), data, hlen, &_hdr);
 >>>>>>> v3.18
@@ -227,6 +257,7 @@ ipv6:
 		proto = hdr->proto;
 		nhoff += PPPOE_SES_HLEN;
 		switch (proto) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case __constant_htons(PPP_IP):
 			goto ip;
@@ -270,12 +301,23 @@ ipv6:
 			goto ip;
 		case htons(PPP_IPV6):
 >>>>>>> v3.18
+=======
+		case htons(PPP_IP):
+			goto ip;
+		case htons(PPP_IPV6):
+>>>>>>> v3.18
 			goto ipv6;
 		default:
 			return false;
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case htons(ETH_P_FCOE):
+		flow->thoff = (u16)(nhoff + FCOE_HEADER_LEN);
+		/* fall through */
+>>>>>>> v3.18
 =======
 	case htons(ETH_P_FCOE):
 		flow->thoff = (u16)(nhoff + FCOE_HEADER_LEN);
@@ -293,7 +335,11 @@ ipv6:
 		} *hdr, _hdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hdr = skb_header_pointer(skb, nhoff, sizeof(_hdr), &_hdr);
+=======
+		hdr = __skb_header_pointer(skb, nhoff, sizeof(_hdr), data, hlen, &_hdr);
+>>>>>>> v3.18
 =======
 		hdr = __skb_header_pointer(skb, nhoff, sizeof(_hdr), data, hlen, &_hdr);
 >>>>>>> v3.18
@@ -317,8 +363,14 @@ ipv6:
 				struct ethhdr _eth;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				eth = skb_header_pointer(skb, nhoff,
 							 sizeof(_eth), &_eth);
+=======
+				eth = __skb_header_pointer(skb, nhoff,
+							   sizeof(_eth),
+							   data, hlen, &_eth);
+>>>>>>> v3.18
 =======
 				eth = __skb_header_pointer(skb, nhoff,
 							   sizeof(_eth),
@@ -335,18 +387,25 @@ ipv6:
 	}
 	case IPPROTO_IPIP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto again;
 =======
+=======
+>>>>>>> v3.18
 		proto = htons(ETH_P_IP);
 		goto ip;
 	case IPPROTO_IPV6:
 		proto = htons(ETH_P_IPV6);
 		goto ipv6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	flow->ip_proto = ip_proto;
 	poff = proto_ports_offset(ip_proto);
@@ -378,6 +437,8 @@ void __skb_get_rxhash(struct sk_buff *skb)
 	struct flow_keys keys;
 	u32 hash;
 =======
+=======
+>>>>>>> v3.18
 	flow->n_proto = proto;
 	flow->ip_proto = ip_proto;
 	flow->thoff = (u16) nhoff;
@@ -439,12 +500,16 @@ EXPORT_SYMBOL(flow_hash_from_keys);
 void __skb_get_hash(struct sk_buff *skb)
 {
 	struct flow_keys keys;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!skb_flow_dissect(skb, &keys))
 		return;
 
 	if (keys.ports)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		skb->l4_rxhash = 1;
 
@@ -466,6 +531,8 @@ void __skb_get_hash(struct sk_buff *skb)
 }
 EXPORT_SYMBOL(__skb_get_rxhash);
 =======
+=======
+>>>>>>> v3.18
 		skb->l4_hash = 1;
 
 	skb->sw_hash = 1;
@@ -473,6 +540,9 @@ EXPORT_SYMBOL(__skb_get_rxhash);
 	skb->hash = __flow_hash_from_keys(&keys);
 }
 EXPORT_SYMBOL(__skb_get_hash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -480,7 +550,11 @@ EXPORT_SYMBOL(__skb_get_hash);
  * to be used as a distribution range.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 __skb_tx_hash(const struct net_device *dev, const struct sk_buff *skb,
+=======
+u16 __skb_tx_hash(const struct net_device *dev, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 u16 __skb_tx_hash(const struct net_device *dev, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -503,6 +577,7 @@ u16 __skb_tx_hash(const struct net_device *dev, struct sk_buff *skb,
 		qcount = dev->tc_to_txq[tc].count;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (skb->sk && skb->sk->sk_hash)
 		hash = skb->sk->sk_hash;
@@ -539,6 +614,8 @@ u32 __skb_get_poff(const struct sk_buff *skb)
 
 		poff += max_t(u32, sizeof(struct tcphdr), tcph->doff * 4);
 =======
+=======
+>>>>>>> v3.18
 	return (u16) reciprocal_scale(skb_get_hash(skb), qcount) + qoffset;
 }
 EXPORT_SYMBOL(__skb_tx_hash);
@@ -560,6 +637,9 @@ u32 __skb_get_poff(const struct sk_buff *skb, void *data,
 			return poff;
 
 		poff += max_t(u32, sizeof(struct tcphdr), (*doff & 0xF0) >> 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -591,6 +671,7 @@ u32 __skb_get_poff(const struct sk_buff *skb, void *data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u16 dev_cap_txqueue(struct net_device *dev, u16 queue_index)
 {
 	if (unlikely(queue_index >= dev->real_num_tx_queues)) {
@@ -601,6 +682,8 @@ static inline u16 dev_cap_txqueue(struct net_device *dev, u16 queue_index)
 	}
 	return queue_index;
 =======
+=======
+>>>>>>> v3.18
 /* skb_get_poff() returns the offset to the payload as far as it could
  * be dissected. The main user is currently BPF, so that we can dynamically
  * truncate packets without needing to push actual payload to the user
@@ -614,6 +697,9 @@ u32 skb_get_poff(const struct sk_buff *skb)
 		return 0;
 
 	return __skb_get_poff(skb, skb->data, &keys, skb_headlen(skb));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -633,6 +719,7 @@ static inline int get_xps_queue(struct net_device *dev, struct sk_buff *skb)
 			if (map->len == 1)
 				queue_index = map->queues[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else {
 				u32 hash;
 				if (skb->sk && skb->sk->sk_hash)
@@ -644,6 +731,11 @@ static inline int get_xps_queue(struct net_device *dev, struct sk_buff *skb)
 				queue_index = map->queues[
 				    ((u64)hash * map->len) >> 32];
 			}
+=======
+			else
+				queue_index = map->queues[reciprocal_scale(skb_get_hash(skb),
+									   map->len)];
+>>>>>>> v3.18
 =======
 			else
 				queue_index = map->queues[reciprocal_scale(skb_get_hash(skb),
@@ -662,7 +754,11 @@ static inline int get_xps_queue(struct net_device *dev, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 __netdev_pick_tx(struct net_device *dev, struct sk_buff *skb)
+=======
+static u16 __netdev_pick_tx(struct net_device *dev, struct sk_buff *skb)
+>>>>>>> v3.18
 =======
 static u16 __netdev_pick_tx(struct net_device *dev, struct sk_buff *skb)
 >>>>>>> v3.18
@@ -686,15 +782,21 @@ static u16 __netdev_pick_tx(struct net_device *dev, struct sk_buff *skb)
 	return queue_index;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__netdev_pick_tx);
 
 struct netdev_queue *netdev_pick_tx(struct net_device *dev,
 				    struct sk_buff *skb)
 =======
+=======
+>>>>>>> v3.18
 
 struct netdev_queue *netdev_pick_tx(struct net_device *dev,
 				    struct sk_buff *skb,
 				    void *accel_priv)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int queue_index = 0;
@@ -703,11 +805,14 @@ struct netdev_queue *netdev_pick_tx(struct net_device *dev,
 		const struct net_device_ops *ops = dev->netdev_ops;
 		if (ops->ndo_select_queue)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			queue_index = ops->ndo_select_queue(dev, skb);
 		else
 			queue_index = __netdev_pick_tx(dev, skb);
 		queue_index = dev_cap_txqueue(dev, queue_index);
 =======
+=======
+>>>>>>> v3.18
 			queue_index = ops->ndo_select_queue(dev, skb, accel_priv,
 							    __netdev_pick_tx);
 		else
@@ -715,12 +820,16 @@ struct netdev_queue *netdev_pick_tx(struct net_device *dev,
 
 		if (!accel_priv)
 			queue_index = netdev_cap_txqueue(dev, queue_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	skb_set_queue_mapping(skb, queue_index);
 	return netdev_get_tx_queue(dev, queue_index);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __init initialize_hashrnd(void)
@@ -730,5 +839,7 @@ static int __init initialize_hashrnd(void)
 }
 
 late_initcall_sync(initialize_hashrnd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

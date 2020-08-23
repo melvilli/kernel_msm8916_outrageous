@@ -28,10 +28,13 @@ struct pt_regs {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define isa_mode(regs) \
 	((((regs)->ARM_cpsr & PSR_J_BIT) >> 23) | \
 	 (((regs)->ARM_cpsr & PSR_T_BIT) >> 5))
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_CPU_V7M
 #define isa_mode(regs) \
 	((((regs)->ARM_cpsr & PSR_J_BIT) >> (__ffs(PSR_J_BIT) - 1)) | \
@@ -39,6 +42,9 @@ struct pt_regs {
 #else
 #define isa_mode(regs) 1 /* Thumb */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define processor_mode(regs) \
@@ -56,6 +62,10 @@ struct pt_regs {
 static inline int valid_user_regs(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_CPU_V7M
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_CPU_V7M
 >>>>>>> v3.18
@@ -82,6 +92,12 @@ static inline int valid_user_regs(struct pt_regs *regs)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else /* ifndef CONFIG_CPU_V7M */
+	return 1;
+#endif
+>>>>>>> v3.18
 =======
 #else /* ifndef CONFIG_CPU_V7M */
 	return 1;
@@ -97,7 +113,10 @@ static inline long regs_return_value(struct pt_regs *regs)
 #define instruction_pointer(regs)	(regs)->ARM_pc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_THUMB2_KERNEL
 #define frame_pointer(regs) (regs)->ARM_r7
 #else
@@ -110,6 +129,9 @@ static inline void instruction_pointer_set(struct pt_regs *regs,
 	instruction_pointer(regs) = val;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
 extern unsigned long profile_pc(struct pt_regs *regs);

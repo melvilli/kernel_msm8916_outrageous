@@ -10,7 +10,11 @@
  * 2 of the Licence, or (at your option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/uaccess.h>
+=======
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <asm/uaccess.h>
 >>>>>>> v3.18
@@ -29,8 +33,11 @@ __generic_copy_from_user(void *to, const void *from, unsigned long n)
 	if (access_ok(VERIFY_READ, from, n))
 		__copy_user_zeroing(to, from, n);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		memset(to, 0, n);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return n;

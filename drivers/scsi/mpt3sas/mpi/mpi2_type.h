@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2000-2007 LSI Corporation.
+=======
+ *  Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
 =======
  *  Copyright (c) 2000-2014 LSI Corporation.
 >>>>>>> v3.18

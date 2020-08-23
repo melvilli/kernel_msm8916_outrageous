@@ -19,7 +19,11 @@
 #include <linux/string.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -41,7 +45,11 @@ coda_file_read(struct file *coda_file, char __user *buf, size_t count, loff_t *p
 	host_file = cfi->cfi_container;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host_file->f_op || !host_file->f_op->read)
+=======
+	if (!host_file->f_op->read)
+>>>>>>> v3.18
 =======
 	if (!host_file->f_op->read)
 >>>>>>> v3.18
@@ -84,7 +92,11 @@ coda_file_write(struct file *coda_file, const char __user *buf, size_t count, lo
 	host_file = cfi->cfi_container;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host_file->f_op || !host_file->f_op->write)
+=======
+	if (!host_file->f_op->write)
+>>>>>>> v3.18
 =======
 	if (!host_file->f_op->write)
 >>>>>>> v3.18
@@ -118,7 +130,11 @@ coda_file_mmap(struct file *coda_file, struct vm_area_struct *vma)
 	host_file = cfi->cfi_container;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host_file->f_op || !host_file->f_op->mmap)
+=======
+	if (!host_file->f_op->mmap)
+>>>>>>> v3.18
 =======
 	if (!host_file->f_op->mmap)
 >>>>>>> v3.18

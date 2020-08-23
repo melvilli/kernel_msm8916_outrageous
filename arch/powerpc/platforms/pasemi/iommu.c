@@ -139,14 +139,20 @@ static void iommu_table_iobmap_setup(void)
 	iommu_table_iobmap.it_busno = 0;
 	iommu_table_iobmap.it_offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* it_size is in number of entries */
 	iommu_table_iobmap.it_size = 0x80000000 >> IOBMAP_PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	iommu_table_iobmap.it_page_shift = IOBMAP_PAGE_SHIFT;
 
 	/* it_size is in number of entries */
 	iommu_table_iobmap.it_size =
 		0x80000000 >> iommu_table_iobmap.it_page_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Initialize the common IOMMU code */

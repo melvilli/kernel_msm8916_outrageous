@@ -555,7 +555,11 @@ void tick_check_oneshot_broadcast_this_cpu(void)
 {
 	if (cpumask_test_cpu(smp_processor_id(), tick_broadcast_oneshot_mask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct tick_device *td = &__get_cpu_var(tick_cpu_device);
+=======
+		struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
+>>>>>>> v3.18
 =======
 		struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
 >>>>>>> v3.18
@@ -845,9 +849,12 @@ void tick_broadcast_setup_oneshot(struct clock_event_device *bc)
 	int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bc)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set it up only once ! */

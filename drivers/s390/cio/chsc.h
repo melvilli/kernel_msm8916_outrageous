@@ -8,6 +8,7 @@
 #include <asm/chsc.h>
 #include <asm/schid.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define CHSC_SDA_OC_MSS   0x2
 
@@ -17,10 +18,15 @@ struct chsc_header {
 } __attribute__ ((packed));
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/qdio.h>
 
 #define CHSC_SDA_OC_MSS   0x2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NR_MEASUREMENT_CHARS 5
 struct cmg_chars {
@@ -33,6 +39,7 @@ struct cmg_entry {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct channel_path_desc {
 	u8 flags;
 	u8 lsn;
@@ -44,6 +51,8 @@ struct channel_path_desc {
 	u8 chpp;
 } __attribute__ ((packed));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct channel_path_desc_fmt1 {
@@ -76,7 +85,13 @@ struct css_chsc_char {
 	u32 scssc : 1;  /* bit 107 */
 	u32 scsscf : 1; /* bit 108 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 : 19;
+=======
+	u32:7;
+	u32 pnso:1; /* bit 116 */
+	u32:11;
+>>>>>>> v3.18
 =======
 	u32:7;
 	u32 pnso:1; /* bit 116 */
@@ -94,7 +109,10 @@ struct chsc_ssd_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct chsc_ssqd_area {
 	struct chsc_header request;
 	u16:10;
@@ -129,6 +147,9 @@ struct chsc_scssc_area {
 	u32:32;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct chsc_scpd {
 	struct chsc_header request;
@@ -170,7 +191,13 @@ void chsc_chp_online(struct chp_id chpid);
 void chsc_chp_offline(struct chp_id chpid);
 int chsc_get_channel_measurement_chars(struct channel_path *chp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+int chsc_ssqd(struct subchannel_id schid, struct chsc_ssqd_area *ssqd);
+int chsc_sadc(struct subchannel_id schid, struct chsc_scssc_area *scssc,
+	      u64 summary_indicator_addr, u64 subchannel_indicator_addr);
+>>>>>>> v3.18
 =======
 int chsc_ssqd(struct subchannel_id schid, struct chsc_ssqd_area *ssqd);
 int chsc_sadc(struct subchannel_id schid, struct chsc_scssc_area *scssc,
@@ -216,7 +243,10 @@ struct chsc_scm_info {
 int chsc_scm_info(struct chsc_scm_info *scm_area, u64 token);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct chsc_brinfo_resume_token {
 	u64 t1;
 	u64 t2;
@@ -264,6 +294,9 @@ int chsc_pnso_brinfo(struct subchannel_id schid,
 		struct chsc_brinfo_resume_token resume_token,
 		int cnc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SCM_BUS
 int scm_update_information(void);

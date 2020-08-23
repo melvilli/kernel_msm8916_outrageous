@@ -11,6 +11,11 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio/driver.h>
+#include <linux/gpio/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/driver.h>
 #include <linux/gpio/consumer.h>
@@ -31,7 +36,11 @@
 
 #ifndef ARCH_NR_GPIOS
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCH_NR_GPIOS		1024
+=======
+#define ARCH_NR_GPIOS		512
+>>>>>>> v3.18
 =======
 #define ARCH_NR_GPIOS		512
 >>>>>>> v3.18
@@ -58,6 +67,7 @@ struct module;
 struct device_node;
 struct gpio_desc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct gpio_chip - abstract a GPIO controller
@@ -176,11 +186,16 @@ extern struct gpio_chip *gpiochip_find(void *data,
 						     void *data));
 
 =======
+=======
+>>>>>>> v3.18
 /* caller holds gpio_lock *OR* gpio is marked as requested */
 static inline struct gpio_chip *gpio_to_chip(unsigned gpio)
 {
 	return gpiod_to_chip(gpio_to_desc(gpio));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Always use the library code for GPIO management calls,
@@ -190,6 +205,7 @@ extern int gpio_request(unsigned gpio, const char *label);
 extern void gpio_free(unsigned gpio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gpio_direction_input(unsigned gpio);
 extern int gpio_direction_output(unsigned gpio, int value);
 
@@ -198,6 +214,8 @@ extern int gpio_set_debounce(unsigned gpio, unsigned debounce);
 extern int gpio_get_value_cansleep(unsigned gpio);
 extern void gpio_set_value_cansleep(unsigned gpio, int value);
 =======
+=======
+>>>>>>> v3.18
 static inline int gpio_direction_input(unsigned gpio)
 {
 	return gpiod_direction_input(gpio_to_desc(gpio));
@@ -220,6 +238,9 @@ static inline void gpio_set_value_cansleep(unsigned gpio, int value)
 {
 	return gpiod_set_raw_value_cansleep(gpio_to_desc(gpio), value);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -228,6 +249,7 @@ static inline void gpio_set_value_cansleep(unsigned gpio, int value)
  * giving direct access to chip registers and tight bitbanging loops.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __gpio_get_value(unsigned gpio);
 extern void __gpio_set_value(unsigned gpio, int value);
 
@@ -235,6 +257,8 @@ extern int __gpio_cansleep(unsigned gpio);
 
 extern int __gpio_to_irq(unsigned gpio);
 =======
+=======
+>>>>>>> v3.18
 static inline int __gpio_get_value(unsigned gpio)
 {
 	return gpiod_get_raw_value(gpio_to_desc(gpio));
@@ -253,6 +277,9 @@ static inline int __gpio_to_irq(unsigned gpio)
 {
 	return gpiod_to_irq(gpio_to_desc(gpio));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int gpio_request_one(unsigned gpio, unsigned long flags, const char *label);
@@ -260,14 +287,18 @@ extern int gpio_request_array(const struct gpio *array, size_t num);
 extern void gpio_free_array(const struct gpio *array, size_t num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_GPIO_SYSFS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
  * A sysfs interface can be exported by individual drivers if they want,
  * but more typically is configured entirely from userspace.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int gpio_export(unsigned gpio, bool direction_may_change);
 extern int gpio_export_link(struct device *dev, const char *name,
@@ -277,6 +308,8 @@ extern void gpio_unexport(unsigned gpio);
 
 #endif	/* CONFIG_GPIO_SYSFS */
 =======
+=======
+>>>>>>> v3.18
 static inline int gpio_export(unsigned gpio, bool direction_may_change)
 {
 	return gpiod_export(gpio_to_desc(gpio), direction_may_change);
@@ -297,6 +330,9 @@ static inline void gpio_unexport(unsigned gpio)
 {
 	gpiod_unexport(gpio_to_desc(gpio));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PINCTRL
@@ -318,6 +354,12 @@ int gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
 			   unsigned int gpio_offset, unsigned int pin_offset,
 			   unsigned int npins);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int gpiochip_add_pingroup_range(struct gpio_chip *chip,
+			struct pinctrl_dev *pctldev,
+			unsigned int gpio_offset, const char *pin_group);
+>>>>>>> v3.18
 =======
 int gpiochip_add_pingroup_range(struct gpio_chip *chip,
 			struct pinctrl_dev *pctldev,
@@ -335,7 +377,10 @@ gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 gpiochip_add_pingroup_range(struct gpio_chip *chip,
 			struct pinctrl_dev *pctldev,
@@ -343,6 +388,9 @@ gpiochip_add_pingroup_range(struct gpio_chip *chip,
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void
@@ -384,6 +432,7 @@ static inline void gpio_set_value_cansleep(unsigned gpio, int value)
 #endif /* !CONFIG_GPIOLIB */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_GPIO_SYSFS
 
 struct device;
@@ -411,6 +460,8 @@ static inline void gpio_unexport(unsigned gpio)
 }
 #endif	/* CONFIG_GPIO_SYSFS */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_GENERIC_GPIO_H */

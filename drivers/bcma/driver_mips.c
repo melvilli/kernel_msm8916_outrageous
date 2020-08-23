@@ -22,7 +22,10 @@
 #include <linux/time.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum bcma_boot_dev {
 	BCMA_BOOT_DEV_UNK = 0,
 	BCMA_BOOT_DEV_ROM,
@@ -31,6 +34,9 @@ enum bcma_boot_dev {
 	BCMA_BOOT_DEV_NAND,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char * const part_probes[] = { "bcm47xxpart", NULL };
 
@@ -241,7 +247,10 @@ u32 bcma_cpu_clock(struct bcma_drv_mips *mcore)
 EXPORT_SYMBOL(bcma_cpu_clock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static enum bcma_boot_dev bcma_boot_dev(struct bcma_bus *bus)
 {
 	struct bcma_drv_cc *cc = &bus->drv_cc;
@@ -281,6 +290,9 @@ static enum bcma_boot_dev bcma_boot_dev(struct bcma_bus *bus)
 	return BCMA_BOOT_DEV_SERIAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void bcma_core_mips_flash_detect(struct bcma_drv_mips *mcore)
 {
@@ -288,6 +300,10 @@ static void bcma_core_mips_flash_detect(struct bcma_drv_mips *mcore)
 	struct bcma_drv_cc *cc = &bus->drv_cc;
 	struct bcma_pflash *pflash = &cc->pflash;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum bcma_boot_dev boot_dev;
+>>>>>>> v3.18
 =======
 	enum bcma_boot_dev boot_dev;
 >>>>>>> v3.18
@@ -327,7 +343,10 @@ static void bcma_core_mips_flash_detect(struct bcma_drv_mips *mcore)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Determine flash type this SoC boots from */
 	boot_dev = bcma_boot_dev(bus);
@@ -342,6 +361,9 @@ static void bcma_core_mips_flash_detect(struct bcma_drv_mips *mcore)
 	default:
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

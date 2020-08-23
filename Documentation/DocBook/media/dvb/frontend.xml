@@ -234,7 +234,11 @@ typedef enum fe_status {
 </row><row>
 <entry align="char">FE_HAS_SYNC</entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <entry align="char">Syncronization bytes was found</entry>
+=======
+<entry align="char">Synchronization bytes was found</entry>
+>>>>>>> v3.18
 =======
 <entry align="char">Synchronization bytes was found</entry>
 >>>>>>> v3.18
@@ -749,7 +753,11 @@ typedef enum fe_hierarchy {
 <informaltable><tgroup cols="1"><tbody><row><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>int ioctl(int fd, int request = <link linkend="FE_READ_SNR">FE_READ_SNR</link>, int16_t
+=======
+<para>int ioctl(int fd, int request = <link linkend="FE_READ_SNR">FE_READ_SNR</link>, uint16_t
+>>>>>>> v3.18
 =======
 <para>int ioctl(int fd, int request = <link linkend="FE_READ_SNR">FE_READ_SNR</link>, uint16_t
 >>>>>>> v3.18
@@ -775,7 +783,11 @@ typedef enum fe_hierarchy {
  </row><row><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>int16_t *snr</para>
+=======
+<para>uint16_t *snr</para>
+>>>>>>> v3.18
 =======
 <para>uint16_t *snr</para>
 >>>>>>> v3.18
@@ -804,7 +816,11 @@ typedef enum fe_hierarchy {
  align="char">
 <para>int ioctl( int fd, int request =
 <<<<<<< HEAD
+<<<<<<< HEAD
  <link linkend="FE_READ_SIGNAL_STRENGTH">FE_READ_SIGNAL_STRENGTH</link>, int16_t &#x22C6;strength);</para>
+=======
+ <link linkend="FE_READ_SIGNAL_STRENGTH">FE_READ_SIGNAL_STRENGTH</link>, uint16_t &#x22C6;strength);</para>
+>>>>>>> v3.18
 =======
  <link linkend="FE_READ_SIGNAL_STRENGTH">FE_READ_SIGNAL_STRENGTH</link>, uint16_t &#x22C6;strength);</para>
 >>>>>>> v3.18
@@ -831,7 +847,11 @@ typedef enum fe_hierarchy {
  </row><row><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>int16_t *strength</para>
+=======
+<para>uint16_t *strength</para>
+>>>>>>> v3.18
 =======
 <para>uint16_t *strength</para>
 >>>>>>> v3.18

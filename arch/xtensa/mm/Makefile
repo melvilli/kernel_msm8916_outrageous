@@ -5,6 +5,10 @@
 obj-y			:= init.o cache.o misc.o
 obj-$(CONFIG_MMU)	+= fault.o mmu.o tlb.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_HIGHMEM)	+= highmem.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_HIGHMEM)	+= highmem.o
 >>>>>>> v3.18

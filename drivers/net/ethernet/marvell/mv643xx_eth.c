@@ -34,8 +34,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -48,6 +52,10 @@
 #include <linux/in.h>
 #include <linux/ip.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/tso.h>
+>>>>>>> v3.18
 =======
 #include <net/tso.h>
 >>>>>>> v3.18
@@ -69,11 +77,17 @@
 #include <linux/slab.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_irq.h>
 #include <linux/of_net.h>
 #include <linux/of_mdio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static char mv643xx_eth_driver_name[] = "mv643xx_eth";
@@ -131,6 +145,11 @@ static char mv643xx_eth_driver_version[] = "1.4";
 #define TXQ_COMMAND			0x0048
 #define TXQ_FIX_PRIO_CONF		0x004c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PORT_SERIAL_CONTROL1		0x004c
+#define  CLK125_BYPASS_EN		0x00000010
+>>>>>>> v3.18
 =======
 #define PORT_SERIAL_CONTROL1		0x004c
 #define  CLK125_BYPASS_EN		0x00000010
@@ -195,11 +214,14 @@ static char mv643xx_eth_driver_version[] = "1.4";
  */
 #define DEFAULT_RX_QUEUE_SIZE	128
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFAULT_TX_QUEUE_SIZE	256
 #define SKB_DMA_REALIGN		((PAGE_SIZE - NET_SKB_PAD) % SMP_CACHE_BYTES)
 
 
 =======
+=======
+>>>>>>> v3.18
 #define DEFAULT_TX_QUEUE_SIZE	512
 #define SKB_DMA_REALIGN		((PAGE_SIZE - NET_SKB_PAD) % SMP_CACHE_BYTES)
 
@@ -212,6 +234,9 @@ static char mv643xx_eth_driver_version[] = "1.4";
 #define IS_TSO_HEADER(txq, addr) \
 	((addr >= txq->tso_hdrs_dma) && \
 	 (addr < txq->tso_hdrs_dma + txq->tx_ring_size * TSO_HEADER_SIZE))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * RX/TX descriptors.
@@ -281,6 +306,10 @@ struct tx_desc {
 #define UDP_FRAME			0x00010000
 #define MAC_HDR_EXTRA_4_BYTES		0x00008000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GEN_TCP_UDP_CHK_FULL		0x00000400
+>>>>>>> v3.18
 =======
 #define GEN_TCP_UDP_CHK_FULL		0x00000400
 >>>>>>> v3.18
@@ -380,13 +409,19 @@ struct tx_queue {
 	int tx_used_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int tx_stop_threshold;
 	int tx_wake_threshold;
 
 	char *tso_hdrs;
 	dma_addr_t tso_hdrs_dma;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tx_desc *tx_desc_area;
 	dma_addr_t tx_desc_dma;
@@ -535,7 +570,11 @@ static void txq_maybe_wake(struct tx_queue *txq)
 	if (netif_tx_queue_stopped(nq)) {
 		__netif_tx_lock(nq, smp_processor_id());
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (txq->tx_ring_size - txq->tx_desc_count >= MAX_SKB_FRAGS + 1)
+=======
+		if (txq->tx_desc_count <= txq->tx_wake_threshold)
+>>>>>>> v3.18
 =======
 		if (txq->tx_desc_count <= txq->tx_wake_threshold)
 >>>>>>> v3.18
@@ -668,7 +707,11 @@ static int rxq_refill(struct rx_queue *rxq, int budget)
 		rx_desc = rxq->rx_desc_area + rx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size = skb->end - skb->data;
+=======
+		size = skb_end_pointer(skb) - skb->data;
+>>>>>>> v3.18
 =======
 		size = skb_end_pointer(skb) - skb->data;
 >>>>>>> v3.18
@@ -713,7 +756,10 @@ static inline unsigned int has_tiny_unaligned_frags(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline __be16 sum16_as_be(__sum16 sum)
 {
 	return (__force __be16)sum;
@@ -906,6 +952,9 @@ err_release:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void txq_submit_frag_skb(struct tx_queue *txq, struct sk_buff *skb)
 {
@@ -918,13 +967,19 @@ static void txq_submit_frag_skb(struct tx_queue *txq, struct sk_buff *skb)
 		int tx_index;
 		struct tx_desc *desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		this_frag = &skb_shinfo(skb)->frags[frag];
 =======
+=======
+>>>>>>> v3.18
 		void *addr;
 
 		this_frag = &skb_shinfo(skb)->frags[frag];
 		addr = page_address(this_frag->page.p) + this_frag->page_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tx_index = txq->tx_curr_desc++;
 		if (txq->tx_curr_desc == txq->tx_ring_size)
@@ -946,6 +1001,7 @@ static void txq_submit_frag_skb(struct tx_queue *txq, struct sk_buff *skb)
 		desc->l4i_chk = 0;
 		desc->byte_cnt = skb_frag_size(this_frag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc->buf_ptr = skb_frag_dma_map(mp->dev->dev.parent,
 						 this_frag, 0,
 						 skb_frag_size(this_frag),
@@ -960,6 +1016,8 @@ static inline __be16 sum16_as_be(__sum16 sum)
 
 static int txq_submit_skb(struct tx_queue *txq, struct sk_buff *skb)
 =======
+=======
+>>>>>>> v3.18
 		desc->buf_ptr = dma_map_single(mp->dev->dev.parent, addr,
 					       desc->byte_cnt, DMA_TO_DEVICE);
 	}
@@ -967,6 +1025,9 @@ static int txq_submit_skb(struct tx_queue *txq, struct sk_buff *skb)
 
 static int txq_submit_skb(struct tx_queue *txq, struct sk_buff *skb,
 			  struct net_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mv643xx_eth_private *mp = txq_to_mp(txq);
@@ -975,6 +1036,7 @@ static int txq_submit_skb(struct tx_queue *txq, struct sk_buff *skb,
 	struct tx_desc *desc;
 	u32 cmd_sts;
 	u16 l4i_chk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int length;
 
@@ -1025,6 +1087,8 @@ no_csum:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	int length, ret;
 
 	cmd_sts = 0;
@@ -1041,6 +1105,9 @@ no_csum:
 		return ret;
 	cmd_sts |= TX_FIRST_DESC | GEN_CRC | BUFFER_OWNED_BY_DMA;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tx_index = txq->tx_curr_desc++;
 	if (txq->tx_curr_desc == txq->tx_ring_size)
@@ -1084,7 +1151,11 @@ static netdev_tx_t mv643xx_eth_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 	struct mv643xx_eth_private *mp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int length, queue;
+=======
+	int length, queue, ret;
+>>>>>>> v3.18
 =======
 	int length, queue, ret;
 >>>>>>> v3.18
@@ -1097,7 +1168,10 @@ static netdev_tx_t mv643xx_eth_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	if (has_tiny_unaligned_frags(skb) && __skb_linearize(skb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txq->tx_dropped++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		netdev_printk(KERN_DEBUG, dev,
@@ -1105,6 +1179,7 @@ static netdev_tx_t mv643xx_eth_xmit(struct sk_buff *skb, struct net_device *dev)
 		return NETDEV_TX_BUSY;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (txq->tx_ring_size - txq->tx_desc_count < MAX_SKB_FRAGS + 1) {
 		if (net_ratelimit())
@@ -1125,6 +1200,8 @@ static netdev_tx_t mv643xx_eth_xmit(struct sk_buff *skb, struct net_device *dev)
 		if (entries_left < MAX_SKB_FRAGS + 1)
 			netif_tx_stop_queue(nq);
 =======
+=======
+>>>>>>> v3.18
 	length = skb->len;
 
 	if (skb_is_gso(skb))
@@ -1140,6 +1217,9 @@ static netdev_tx_t mv643xx_eth_xmit(struct sk_buff *skb, struct net_device *dev)
 	} else {
 		txq->tx_dropped++;
 		dev_kfree_skb_any(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1187,7 +1267,10 @@ static int txq_reclaim(struct tx_queue *txq, int budget, int force)
 		struct tx_desc *desc;
 		u32 cmd_sts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sk_buff *skb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1209,10 +1292,13 @@ static int txq_reclaim(struct tx_queue *txq, int budget, int force)
 		txq->tx_desc_count--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb = NULL;
 		if (cmd_sts & TX_LAST_DESC)
 			skb = __skb_dequeue(&txq->tx_skb);
 =======
+=======
+>>>>>>> v3.18
 		if (!IS_TSO_HEADER(txq, desc->buf_ptr))
 			dma_unmap_single(mp->dev->dev.parent, desc->buf_ptr,
 					 desc->byte_cnt, DMA_TO_DEVICE);
@@ -1223,6 +1309,9 @@ static int txq_reclaim(struct tx_queue *txq, int budget, int force)
 			if (!WARN_ON(!skb))
 				dev_kfree_skb(skb);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (cmd_sts & ERROR_SUMMARY) {
@@ -1230,6 +1319,7 @@ static int txq_reclaim(struct tx_queue *txq, int budget, int force)
 			mp->dev->stats.tx_errors++;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (cmd_sts & TX_FIRST_DESC) {
 			dma_unmap_single(mp->dev->dev.parent, desc->buf_ptr,
@@ -1240,6 +1330,8 @@ static int txq_reclaim(struct tx_queue *txq, int budget, int force)
 		}
 
 		dev_kfree_skb(skb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1337,8 +1429,14 @@ static void txq_set_fixed_prio_mode(struct tx_queue *txq)
 
 /* mii management interface *************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mv643xx_adjust_pscr(struct mv643xx_eth_private *mp)
 {
+=======
+static void mv643xx_eth_adjust_link(struct net_device *dev)
+{
+	struct mv643xx_eth_private *mp = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 static void mv643xx_eth_adjust_link(struct net_device *dev)
 {
@@ -1720,7 +1818,11 @@ mv643xx_eth_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 	ret = phy_ethtool_sset(mp->phy, cmd);
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mv643xx_adjust_pscr(mp);
+=======
+		mv643xx_eth_adjust_link(dev);
+>>>>>>> v3.18
 =======
 		mv643xx_eth_adjust_link(dev);
 >>>>>>> v3.18
@@ -1793,13 +1895,19 @@ mv643xx_eth_set_ringparam(struct net_device *dev, struct ethtool_ringparam *er)
 
 	mp->rx_ring_size = er->rx_pending < 4096 ? er->rx_pending : 4096;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp->tx_ring_size = er->tx_pending < 4096 ? er->tx_pending : 4096;
 =======
+=======
+>>>>>>> v3.18
 	mp->tx_ring_size = clamp_t(unsigned int, er->tx_pending,
 				   MV643XX_MAX_SKB_DESCS * 2, 4096);
 	if (mp->tx_ring_size != er->tx_pending)
 		netdev_warn(dev, "TX queue size set to %u (requested %u)\n",
 			    mp->tx_ring_size, er->tx_pending);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (netif_running(dev)) {
@@ -2177,7 +2285,10 @@ static int txq_init(struct mv643xx_eth_private *mp, int index)
 	txq->tx_ring_size = mp->tx_ring_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* A queue must always have room for at least one skb.
 	 * Therefore, stop the queue when the free entries reaches
 	 * the maximum number of descriptors per skb.
@@ -2185,6 +2296,9 @@ static int txq_init(struct mv643xx_eth_private *mp, int index)
 	txq->tx_stop_threshold = txq->tx_ring_size - MV643XX_MAX_SKB_DESCS;
 	txq->tx_wake_threshold = txq->tx_stop_threshold / 2;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	txq->tx_desc_count = 0;
 	txq->tx_curr_desc = 0;
@@ -2226,7 +2340,10 @@ static int txq_init(struct mv643xx_eth_private *mp, int index)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Allocate DMA buffers for TSO MAC/IP/TCP headers */
 	txq->tso_hdrs = dma_alloc_coherent(mp->dev->dev.parent,
 					   txq->tx_ring_size * TSO_HEADER_SIZE,
@@ -2236,6 +2353,9 @@ static int txq_init(struct mv643xx_eth_private *mp, int index)
 				  txq->tx_desc_area, txq->tx_desc_dma);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_queue_head_init(&txq->tx_skb);
 
@@ -2258,11 +2378,17 @@ static void txq_deinit(struct tx_queue *txq)
 		dma_free_coherent(mp->dev->dev.parent, txq->tx_desc_area_size,
 				  txq->tx_desc_area, txq->tx_desc_dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (txq->tso_hdrs)
 		dma_free_coherent(mp->dev->dev.parent,
 				  txq->tx_ring_size * TSO_HEADER_SIZE,
 				  txq->tso_hdrs, txq->tso_hdrs_dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2440,6 +2566,7 @@ static inline void oom_timer_wrapper(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void phy_reset(struct mv643xx_eth_private *mp)
 {
 	int data;
@@ -2459,6 +2586,8 @@ static void phy_reset(struct mv643xx_eth_private *mp)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void port_start(struct mv643xx_eth_private *mp)
 {
 	u32 pscr;
@@ -2472,8 +2601,14 @@ static void port_start(struct mv643xx_eth_private *mp)
 
 		mv643xx_eth_get_settings(mp->dev, &cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_reset(mp);
 		mv643xx_eth_set_settings(mp->dev, &cmd);
+=======
+		phy_init_hw(mp->phy);
+		mv643xx_eth_set_settings(mp->dev, &cmd);
+		phy_start(mp->phy);
+>>>>>>> v3.18
 =======
 		phy_init_hw(mp->phy);
 		mv643xx_eth_set_settings(mp->dev, &cmd);
@@ -2675,7 +2810,12 @@ static int mv643xx_eth_stop(struct net_device *dev)
 
 	netif_carrier_off(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	if (mp->phy)
+		phy_stop(mp->phy);
+>>>>>>> v3.18
 =======
 	if (mp->phy)
 		phy_stop(mp->phy);
@@ -2706,7 +2846,11 @@ static int mv643xx_eth_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 	ret = phy_mii_ioctl(mp->phy, ifr, cmd);
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mv643xx_adjust_pscr(mp);
+=======
+		mv643xx_eth_adjust_link(dev);
+>>>>>>> v3.18
 =======
 		mv643xx_eth_adjust_link(dev);
 >>>>>>> v3.18
@@ -2846,6 +2990,7 @@ static void infer_hw_params(struct mv643xx_eth_shared_private *msp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mv643xx_eth_shared_probe(struct platform_device *pdev)
 {
 	static int mv643xx_eth_version_printed;
@@ -2854,6 +2999,8 @@ static int mv643xx_eth_shared_probe(struct platform_device *pdev)
 	const struct mbus_dram_target_info *dram;
 	struct resource *res;
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 static const struct of_device_id mv643xx_eth_shared_ids[] = {
 	{ .compatible = "marvell,orion-eth", },
@@ -3008,6 +3155,9 @@ static int mv643xx_eth_shared_probe(struct platform_device *pdev)
 	const struct mbus_dram_target_info *dram;
 	struct resource *res;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!mv643xx_eth_version_printed++)
@@ -3022,8 +3172,14 @@ static int mv643xx_eth_shared_probe(struct platform_device *pdev)
 	if (msp == NULL)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	msp->base = ioremap(res->start, resource_size(res));
+=======
+	platform_set_drvdata(pdev, msp);
+
+	msp->base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, msp);
 
@@ -3044,20 +3200,29 @@ static int mv643xx_eth_shared_probe(struct platform_device *pdev)
 		mv643xx_eth_conf_mbus_windows(msp, dram);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = mv643xx_eth_shared_of_probe(pdev);
 	if (ret)
 		return ret;
 	pd = dev_get_platdata(&pdev->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msp->tx_csum_limit = (pd != NULL && pd->tx_csum_limit) ?
 					pd->tx_csum_limit : 9 * 1024;
 	infer_hw_params(msp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, msp);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -3068,10 +3233,16 @@ static int mv643xx_eth_shared_remove(struct platform_device *pdev)
 	struct mv643xx_eth_shared_private *msp = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(msp->base);
 	if (!IS_ERR(msp->clk))
 		clk_disable_unprepare(msp->clk);
 
+=======
+	mv643xx_eth_shared_of_remove();
+	if (!IS_ERR(msp->clk))
+		clk_disable_unprepare(msp->clk);
+>>>>>>> v3.18
 =======
 	mv643xx_eth_shared_of_remove();
 	if (!IS_ERR(msp->clk))
@@ -3087,6 +3258,10 @@ static struct platform_driver mv643xx_eth_shared_driver = {
 		.name	= MV643XX_ETH_SHARED_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(mv643xx_eth_shared_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(mv643xx_eth_shared_ids),
 >>>>>>> v3.18
@@ -3118,14 +3293,20 @@ static void set_params(struct mv643xx_eth_private *mp,
 {
 	struct net_device *dev = mp->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (is_valid_ether_addr(pd->mac_addr))
 		memcpy(dev->dev_addr, pd->mac_addr, 6);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int tx_ring_size;
 
 	if (is_valid_ether_addr(pd->mac_addr))
 		memcpy(dev->dev_addr, pd->mac_addr, ETH_ALEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		uc_addr_get(mp, dev->dev_addr);
@@ -3139,10 +3320,13 @@ static void set_params(struct mv643xx_eth_private *mp,
 	mp->rxq_count = pd->rx_queue_count ? : 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp->tx_ring_size = DEFAULT_TX_QUEUE_SIZE;
 	if (pd->tx_queue_size)
 		mp->tx_ring_size = pd->tx_queue_size;
 =======
+=======
+>>>>>>> v3.18
 	tx_ring_size = DEFAULT_TX_QUEUE_SIZE;
 	if (pd->tx_queue_size)
 		tx_ring_size = pd->tx_queue_size;
@@ -3153,6 +3337,9 @@ static void set_params(struct mv643xx_eth_private *mp,
 		netdev_warn(dev, "TX queue size set to %u (requested %u)\n",
 			    mp->tx_ring_size, tx_ring_size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mp->tx_desc_sram_addr = pd->tx_sram_addr;
 	mp->tx_desc_sram_size = pd->tx_sram_size;
@@ -3161,6 +3348,7 @@ static void set_params(struct mv643xx_eth_private *mp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mv643xx_eth_adjust_link(struct net_device *dev)
 {
 	struct mv643xx_eth_private *mp = netdev_priv(dev);
@@ -3168,6 +3356,8 @@ static void mv643xx_eth_adjust_link(struct net_device *dev)
 	mv643xx_adjust_pscr(mp);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct phy_device *phy_scan(struct mv643xx_eth_private *mp,
@@ -3211,8 +3401,11 @@ static void phy_init(struct mv643xx_eth_private *mp, int speed, int duplex)
 	struct phy_device *phy = mp->phy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_reset(mp);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (speed == 0) {
@@ -3283,7 +3476,11 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd = pdev->dev.platform_data;
+=======
+	pd = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pd = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -3311,7 +3508,10 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 	mp->dev = dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Kirkwood resets some registers on gated clocks. Especially
 	 * CLK125_BYPASS_EN must be cleared but is not available on
 	 * all other SoCs/System Controllers using this driver.
@@ -3321,6 +3521,9 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 		wrlp(mp, PORT_SERIAL_CONTROL1,
 		     rdlp(mp, PORT_SERIAL_CONTROL1) & ~CLK125_BYPASS_EN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Start with a default rate, and if there is a clock, allow
@@ -3332,6 +3535,11 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 		clk_prepare_enable(mp->clk);
 		mp->t_clk = clk_get_rate(mp->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if (!IS_ERR(mp->shared->clk)) {
+		mp->t_clk = clk_get_rate(mp->shared->clk);
+>>>>>>> v3.18
 =======
 	} else if (!IS_ERR(mp->shared->clk)) {
 		mp->t_clk = clk_get_rate(mp->shared->clk);
@@ -3342,6 +3550,7 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 	netif_set_real_num_tx_queues(dev, mp->txq_count);
 	netif_set_real_num_rx_queues(dev, mp->rxq_count);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pd->phy_addr != MV643XX_ETH_PHY_NONE) {
 		mp->phy = phy_scan(mp, pd->phy_addr);
@@ -3357,6 +3566,8 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 
 	SET_ETHTOOL_OPS(dev, &mv643xx_eth_ethtool_ops);
 =======
+=======
+>>>>>>> v3.18
 	err = 0;
 	if (pd->phy_node) {
 		mp->phy = of_phy_connect(mp->dev, pd->phy_node,
@@ -3382,6 +3593,9 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 		goto out;
 
 	dev->ethtool_ops = &mv643xx_eth_ethtool_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	init_pscr(mp, pd->speed, pd->duplex);
@@ -3415,12 +3629,15 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 	dev->base_addr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->hw_features = NETIF_F_SG | NETIF_F_IP_CSUM | NETIF_F_RXCSUM;
 	dev->features = NETIF_F_SG | NETIF_F_IP_CSUM | NETIF_F_RXCSUM;
 	dev->vlan_features = NETIF_F_SG | NETIF_F_IP_CSUM;
 
 	dev->priv_flags |= IFF_UNICAST_FLT;
 =======
+=======
+>>>>>>> v3.18
 	dev->features = NETIF_F_SG | NETIF_F_IP_CSUM | NETIF_F_TSO;
 	dev->vlan_features = dev->features;
 
@@ -3429,6 +3646,9 @@ static int mv643xx_eth_probe(struct platform_device *pdev)
 
 	dev->priv_flags |= IFF_UNICAST_FLT;
 	dev->gso_max_segs = MV643XX_MAX_TSO_SEGS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SET_NETDEV_DEV(dev, &pdev->dev);
@@ -3470,7 +3690,11 @@ static int mv643xx_eth_remove(struct platform_device *pdev)
 	unregister_netdev(mp->dev);
 	if (mp->phy != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_detach(mp->phy);
+=======
+		phy_disconnect(mp->phy);
+>>>>>>> v3.18
 =======
 		phy_disconnect(mp->phy);
 >>>>>>> v3.18
@@ -3482,8 +3706,11 @@ static int mv643xx_eth_remove(struct platform_device *pdev)
 	free_netdev(mp->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

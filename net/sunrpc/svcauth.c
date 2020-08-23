@@ -55,6 +55,11 @@ svc_authenticate(struct svc_rqst *rqstp, __be32 *authp)
 	spin_unlock(&authtab_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rqstp->rq_auth_slack = 0;
+
+>>>>>>> v3.18
 =======
 	rqstp->rq_auth_slack = 0;
 

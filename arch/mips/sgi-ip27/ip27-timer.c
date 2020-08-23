@@ -107,7 +107,11 @@ struct irqaction hub_rt_irqaction = {
 #define CYCLES_PER_SEC		(NSEC_PER_SEC / NSEC_PER_CYCLE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit hub_rt_clock_event_init(void)
+=======
+void hub_rt_clock_event_init(void)
+>>>>>>> v3.18
 =======
 void hub_rt_clock_event_init(void)
 >>>>>>> v3.18
@@ -178,7 +182,11 @@ void __init plat_time_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_time_init(void)
+=======
+void cpu_time_init(void)
+>>>>>>> v3.18
 =======
 void cpu_time_init(void)
 >>>>>>> v3.18
@@ -203,7 +211,11 @@ void cpu_time_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit hub_rtc_init(cnodeid_t cnode)
+=======
+void hub_rtc_init(cnodeid_t cnode)
+>>>>>>> v3.18
 =======
 void hub_rtc_init(cnodeid_t cnode)
 >>>>>>> v3.18

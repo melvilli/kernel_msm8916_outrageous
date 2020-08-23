@@ -28,7 +28,10 @@ static ZFCP_DEV_ATTR(_feat, _name, S_IRUGO,				       \
 		     zfcp_sysfs_##_feat##_##_name##_show, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ZFCP_DEFINE_ATTR_CONST(_feat, _name, _format, _value)		       \
 static ssize_t zfcp_sysfs_##_feat##_##_name##_show(struct device *dev,	       \
 						   struct device_attribute *at,\
@@ -39,6 +42,9 @@ static ssize_t zfcp_sysfs_##_feat##_##_name##_show(struct device *dev,	       \
 static ZFCP_DEV_ATTR(_feat, _name, S_IRUGO,				       \
 		     zfcp_sysfs_##_feat##_##_name##_show, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ZFCP_DEFINE_A_ATTR(_name, _format, _value)			     \
 static ssize_t zfcp_sysfs_adapter_##_name##_show(struct device *dev,	     \
@@ -89,12 +95,17 @@ ZFCP_DEFINE_ATTR(zfcp_unit, unit, access_denied, "%d\n",
 		 (zfcp_unit_sdev_status(unit) &
 		  ZFCP_STATUS_COMMON_ACCESS_DENIED) != 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ZFCP_DEFINE_ATTR(zfcp_unit, unit, access_shared, "%d\n",
 		 (zfcp_unit_sdev_status(unit) &
 		  ZFCP_STATUS_LUN_SHARED) != 0);
 ZFCP_DEFINE_ATTR(zfcp_unit, unit, access_readonly, "%d\n",
 		 (zfcp_unit_sdev_status(unit) &
 		  ZFCP_STATUS_LUN_READONLY) != 0);
+=======
+ZFCP_DEFINE_ATTR_CONST(unit, access_shared, "%d\n", 0);
+ZFCP_DEFINE_ATTR_CONST(unit, access_readonly, "%d\n", 0);
+>>>>>>> v3.18
 =======
 ZFCP_DEFINE_ATTR_CONST(unit, access_shared, "%d\n", 0);
 ZFCP_DEFINE_ATTR_CONST(unit, access_readonly, "%d\n", 0);
@@ -120,7 +131,11 @@ static ssize_t zfcp_sysfs_port_failed_store(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) || val != 0)
+=======
+	if (kstrtoul(buf, 0, &val) || val != 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val) || val != 0)
 >>>>>>> v3.18
@@ -163,7 +178,11 @@ static ssize_t zfcp_sysfs_unit_failed_store(struct device *dev,
 	struct scsi_device *sdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) || val != 0)
+=======
+	if (kstrtoul(buf, 0, &val) || val != 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val) || val != 0)
 >>>>>>> v3.18
@@ -217,7 +236,11 @@ static ssize_t zfcp_sysfs_adapter_failed_store(struct device *dev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) || val != 0) {
+=======
+	if (kstrtoul(buf, 0, &val) || val != 0) {
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val) || val != 0) {
 >>>>>>> v3.18
@@ -273,7 +296,11 @@ static ssize_t zfcp_sysfs_port_remove_store(struct device *dev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, (unsigned long long *) &wwpn))
+=======
+	if (kstrtoull(buf, 0, (unsigned long long *) &wwpn))
+>>>>>>> v3.18
 =======
 	if (kstrtoull(buf, 0, (unsigned long long *) &wwpn))
 >>>>>>> v3.18
@@ -303,7 +330,11 @@ static ssize_t zfcp_sysfs_port_remove_store(struct device *dev,
 
 	zfcp_erp_port_shutdown(port, 0, "syprs_1");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zfcp_device_unregister(&port->dev, &zfcp_sysfs_port_attrs);
+=======
+	device_unregister(&port->dev);
+>>>>>>> v3.18
 =======
 	device_unregister(&port->dev);
 >>>>>>> v3.18
@@ -342,7 +373,11 @@ static ssize_t zfcp_sysfs_unit_add_store(struct device *dev,
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, (unsigned long long *) &fcp_lun))
+=======
+	if (kstrtoull(buf, 0, (unsigned long long *) &fcp_lun))
+>>>>>>> v3.18
 =======
 	if (kstrtoull(buf, 0, (unsigned long long *) &fcp_lun))
 >>>>>>> v3.18
@@ -364,7 +399,11 @@ static ssize_t zfcp_sysfs_unit_remove_store(struct device *dev,
 	u64 fcp_lun;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, (unsigned long long *) &fcp_lun))
+=======
+	if (kstrtoull(buf, 0, (unsigned long long *) &fcp_lun))
+>>>>>>> v3.18
 =======
 	if (kstrtoull(buf, 0, (unsigned long long *) &fcp_lun))
 >>>>>>> v3.18
@@ -387,6 +426,7 @@ static struct attribute *zfcp_port_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * zfcp_sysfs_port_attrs - sysfs attributes for all other ports
@@ -395,6 +435,8 @@ struct attribute_group zfcp_sysfs_port_attrs = {
 	.attrs = zfcp_port_attrs,
 };
 =======
+=======
+>>>>>>> v3.18
 static struct attribute_group zfcp_port_attr_group = {
 	.attrs = zfcp_port_attrs,
 };
@@ -402,6 +444,9 @@ const struct attribute_group *zfcp_port_attr_groups[] = {
 	&zfcp_port_attr_group,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct attribute *zfcp_unit_attrs[] = {
@@ -414,11 +459,14 @@ static struct attribute *zfcp_unit_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct attribute_group zfcp_sysfs_unit_attrs = {
 	.attrs = zfcp_unit_attrs,
 };
 =======
+=======
+>>>>>>> v3.18
 static struct attribute_group zfcp_unit_attr_group = {
 	.attrs = zfcp_unit_attrs,
 };
@@ -426,6 +474,9 @@ const struct attribute_group *zfcp_unit_attr_groups[] = {
 	&zfcp_unit_attr_group,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ZFCP_DEFINE_LATENCY_ATTR(_name) 				\

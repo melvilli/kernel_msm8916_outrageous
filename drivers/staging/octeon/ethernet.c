@@ -27,7 +27,10 @@
 #include <linux/platform_device.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -60,6 +63,7 @@
 #include <asm/octeon/cvmx-smix-defs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CAVIUM_OCTEON_NUM_PACKET_BUFFERS) \
 	&& CONFIG_CAVIUM_OCTEON_NUM_PACKET_BUFFERS
 int num_packet_buffers = CONFIG_CAVIUM_OCTEON_NUM_PACKET_BUFFERS;
@@ -72,11 +76,16 @@ MODULE_PARM_DESC(num_packet_buffers, "\n"
 	"\tFPA. By default, 1024 packet buffers are used unless\n"
 	"\tCONFIG_CAVIUM_OCTEON_NUM_PACKET_BUFFERS is defined.");
 =======
+=======
+>>>>>>> v3.18
 static int num_packet_buffers = 1024;
 module_param(num_packet_buffers, int, 0444);
 MODULE_PARM_DESC(num_packet_buffers, "\n"
 	"\tNumber of packet buffers to allocate and store in the\n"
 	"\tFPA. By default, 1024 packet buffers are used.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int pow_receive_group = 15;
@@ -175,12 +184,15 @@ static void cvm_oct_periodic_worker(struct work_struct *work)
 		priv->poll(cvm_oct_device[priv->port]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cvm_oct_device[priv->port]->netdev_ops->ndo_get_stats(cvm_oct_device[priv->port]);
 
 	if (!atomic_read(&cvm_oct_poll_queue_stopping))
 		queue_delayed_work(cvm_oct_poll_queue, &priv->port_periodic_work, HZ);
  }
 =======
+=======
+>>>>>>> v3.18
 	cvm_oct_device[priv->port]->netdev_ops->ndo_get_stats(
 						cvm_oct_device[priv->port]);
 
@@ -188,6 +200,9 @@ static void cvm_oct_periodic_worker(struct work_struct *work)
 		queue_delayed_work(cvm_oct_poll_queue,
 						&priv->port_periodic_work, HZ);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void cvm_oct_configure_common_hw(void)
@@ -332,6 +347,10 @@ static int cvm_oct_common_change_mtu(struct net_device *dev, int new_mtu)
 			 */
 			union cvmx_pip_frm_len_chkx frm_len_chk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -368,6 +387,10 @@ static void cvm_oct_common_set_multicast_list(struct net_device *dev)
 		CVMX_HELPER_INTERFACE_MODE_SPI)) {
 		union cvmx_gmxx_rxx_adr_ctl control;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -432,6 +455,10 @@ static int cvm_oct_set_mac_filter(struct net_device *dev)
 		uint8_t *ptr = dev->dev_addr;
 		uint64_t mac = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -487,7 +514,11 @@ int cvm_oct_common_init(struct net_device *dev)
 		mac = of_get_mac_address(priv->of_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mac && is_valid_ether_addr(mac))
+=======
+	if (mac)
+>>>>>>> v3.18
 =======
 	if (mac)
 >>>>>>> v3.18
@@ -512,9 +543,14 @@ int cvm_oct_common_init(struct net_device *dev)
 	/* We do our own locking, Linux doesn't need to */
 	dev->features |= NETIF_F_LLTX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &cvm_oct_ethtool_ops);
 
 	cvm_oct_phy_setup_device(dev);
+=======
+	dev->ethtool_ops = &cvm_oct_ethtool_ops;
+
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &cvm_oct_ethtool_ops;
 
@@ -627,8 +663,13 @@ static const struct net_device_ops cvm_oct_pow_netdev_ops = {
 extern void octeon_mdiobus_force_mod_depencency(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_node *cvm_oct_of_get_child(const struct device_node *parent,
 							   int reg_val)
+=======
+static struct device_node *cvm_oct_of_get_child(
+				const struct device_node *parent, int reg_val)
+>>>>>>> v3.18
 =======
 static struct device_node *cvm_oct_of_get_child(
 				const struct device_node *parent, int reg_val)
@@ -651,7 +692,11 @@ static struct device_node *cvm_oct_of_get_child(
 
 static struct device_node *cvm_oct_node_for_port(struct device_node *pip,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							    int interface, int port)
+=======
+							int interface, int port)
+>>>>>>> v3.18
 =======
 							int interface, int port)
 >>>>>>> v3.18
@@ -706,6 +751,10 @@ static int cvm_oct_probe(struct platform_device *pdev)
 		     port++) {
 			union cvmx_pip_prt_tagx pip_prt_tagx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -733,6 +782,10 @@ static int cvm_oct_probe(struct platform_device *pdev)
 	if ((pow_send_group != -1)) {
 		struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -773,7 +826,12 @@ static int cvm_oct_probe(struct platform_device *pdev)
 		int port_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (port_index = 0, port = cvmx_helper_get_ipd_port(interface, 0);
+=======
+		for (port_index = 0,
+		     port = cvmx_helper_get_ipd_port(interface, 0);
+>>>>>>> v3.18
 =======
 		for (port_index = 0,
 		     port = cvmx_helper_get_ipd_port(interface, 0);
@@ -785,7 +843,12 @@ static int cvm_oct_probe(struct platform_device *pdev)
 			    alloc_etherdev(sizeof(struct octeon_ethernet));
 			if (!dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_err("Failed to allocate ethernet device for port %d\n", port);
+=======
+				pr_err("Failed to allocate ethernet device for port %d\n",
+				       port);
+>>>>>>> v3.18
 =======
 				pr_err("Failed to allocate ethernet device for port %d\n",
 				       port);
@@ -796,7 +859,13 @@ static int cvm_oct_probe(struct platform_device *pdev)
 			/* Initialize the device private structure. */
 			priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->of_node = cvm_oct_node_for_port(pip, interface, port_index);
+=======
+			priv->netdev = dev;
+			priv->of_node = cvm_oct_node_for_port(pip, interface,
+								port_index);
+>>>>>>> v3.18
 =======
 			priv->netdev = dev;
 			priv->of_node = cvm_oct_node_for_port(pip, interface,
@@ -859,8 +928,12 @@ static int cvm_oct_probe(struct platform_device *pdev)
 				free_netdev(dev);
 			} else if (register_netdev(dev) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_err("Failed to register ethernet device "
 					 "for interface %d, port %d\n",
+=======
+				pr_err("Failed to register ethernet device for interface %d, port %d\n",
+>>>>>>> v3.18
 =======
 				pr_err("Failed to register ethernet device for interface %d, port %d\n",
 >>>>>>> v3.18
@@ -873,7 +946,11 @@ static int cvm_oct_probe(struct platform_device *pdev)
 				    sizeof(uint32_t);
 				queue_delayed_work(cvm_oct_poll_queue,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   &priv->port_periodic_work, HZ);
+=======
+						&priv->port_periodic_work, HZ);
+>>>>>>> v3.18
 =======
 						&priv->port_periodic_work, HZ);
 >>>>>>> v3.18
@@ -920,6 +997,10 @@ static int cvm_oct_remove(struct platform_device *pdev)
 			struct net_device *dev = cvm_oct_device[port];
 			struct octeon_ethernet *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

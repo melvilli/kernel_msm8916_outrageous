@@ -19,6 +19,10 @@
 #include <linux/pm.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -35,6 +39,7 @@
 #include "wm8991.h"
 
 struct wm8991_priv {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enum snd_soc_control_type control_type;
 	unsigned int pcmclk;
@@ -108,6 +113,8 @@ static const u16 wm8991_reg_defs[] = {
 
 #define wm8991_reset(c) snd_soc_write(c, WM8991_RESET, 0)
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap;
 	unsigned int pcmclk;
 };
@@ -186,6 +193,9 @@ static bool wm8991_volatile(struct device *dev, unsigned int reg)
 		return false;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const unsigned int rec_mix_tlv[] = {
@@ -232,7 +242,11 @@ static int wm899x_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
 				      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -253,6 +267,7 @@ static const char *wm8991_digital_sidetone[] =
 {"None", "Left ADC", "Right ADC", "Reserved"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8991_left_digital_sidetone_enum =
 	SOC_ENUM_SINGLE(WM8991_DIGITAL_SIDE_TONE,
 			WM8991_ADC_TO_DACL_SHIFT,
@@ -265,6 +280,8 @@ static const struct soc_enum wm8991_right_digital_sidetone_enum =
 			WM8991_ADC_TO_DACR_MASK,
 			wm8991_digital_sidetone);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(wm8991_left_digital_sidetone_enum,
 			    WM8991_DIGITAL_SIDE_TONE,
 			    WM8991_ADC_TO_DACL_SHIFT,
@@ -274,11 +291,15 @@ static SOC_ENUM_SINGLE_DECL(wm8991_right_digital_sidetone_enum,
 			    WM8991_DIGITAL_SIDE_TONE,
 			    WM8991_ADC_TO_DACR_SHIFT,
 			    wm8991_digital_sidetone);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *wm8991_adcmode[] =
 {"Hi-fi mode", "Voice mode 1", "Voice mode 2", "Voice mode 3"};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum wm8991_right_adcmode_enum =
 	SOC_ENUM_SINGLE(WM8991_ADC_CTRL,
@@ -286,10 +307,15 @@ static const struct soc_enum wm8991_right_adcmode_enum =
 			WM8991_ADC_HPF_CUT_MASK,
 			wm8991_adcmode);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(wm8991_right_adcmode_enum,
 			    WM8991_ADC_CTRL,
 			    WM8991_ADC_HPF_CUT_SHIFT,
 			    wm8991_adcmode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8991_snd_controls[] = {
@@ -483,6 +509,7 @@ static const struct snd_kcontrol_new wm8991_snd_controls[] = {
  * _DAPM_ Controls
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int inmixer_event(struct snd_soc_dapm_widget *w,
 			 struct snd_kcontrol *kcontrol, int event)
 {
@@ -507,6 +534,8 @@ static int inmixer_event(struct snd_soc_dapm_widget *w,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int outmixer_event(struct snd_soc_dapm_widget *w,
@@ -614,9 +643,15 @@ static const char *wm8991_ainlmux[] =
 {"INMIXL Mix", "RXVOICE Mix", "DIFFINL Mix"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8991_ainlmux_enum =
 	SOC_ENUM_SINGLE(WM8991_INPUT_MIXER1, WM8991_AINLMODE_SHIFT,
 			ARRAY_SIZE(wm8991_ainlmux), wm8991_ainlmux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8991_ainlmux_enum,
+			    WM8991_INPUT_MIXER1, WM8991_AINLMODE_SHIFT,
+			    wm8991_ainlmux);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8991_ainlmux_enum,
 			    WM8991_INPUT_MIXER1, WM8991_AINLMODE_SHIFT,
@@ -633,9 +668,15 @@ static const char *wm8991_ainrmux[] =
 {"INMIXR Mix", "RXVOICE Mix", "DIFFINR Mix"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8991_ainrmux_enum =
 	SOC_ENUM_SINGLE(WM8991_INPUT_MIXER1, WM8991_AINRMODE_SHIFT,
 			ARRAY_SIZE(wm8991_ainrmux), wm8991_ainrmux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8991_ainrmux_enum,
+			    WM8991_INPUT_MIXER1, WM8991_AINRMODE_SHIFT,
+			    wm8991_ainrmux);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8991_ainrmux_enum,
 			    WM8991_INPUT_MIXER1, WM8991_AINRMODE_SHIFT,
@@ -779,12 +820,18 @@ static const struct snd_soc_dapm_widget wm8991_dapm_widgets[] = {
 	SND_SOC_DAPM_INPUT("Internal ADC Source"),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SND_SOC_DAPM_SUPPLY("INL", WM8991_POWER_MANAGEMENT_2,
 			    WM8991_AINL_ENA_BIT, 0, NULL, 0),
 	SND_SOC_DAPM_SUPPLY("INR", WM8991_POWER_MANAGEMENT_2,
 			    WM8991_AINR_ENA_BIT, 0, NULL, 0),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* DACs */
 	SND_SOC_DAPM_ADC("Left ADC", "Left Capture", WM8991_POWER_MANAGEMENT_2,
@@ -808,6 +855,7 @@ static const struct snd_soc_dapm_widget wm8991_dapm_widgets[] = {
 
 	/* INMIXL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_SOC_DAPM_MIXER_E("INMIXL", WM8991_INTDRIVBITS, WM8991_INMIXL_PWR_BIT, 0,
 		&wm8991_dapm_inmixl_controls[0],
 		ARRAY_SIZE(wm8991_dapm_inmixl_controls),
@@ -829,6 +877,8 @@ static const struct snd_soc_dapm_widget wm8991_dapm_widgets[] = {
 		&wm8991_dapm_ainrmux_controls, inmixer_event,
 		SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD),
 =======
+=======
+>>>>>>> v3.18
 	SND_SOC_DAPM_MIXER("INMIXL", SND_SOC_NOPM, 0, 0,
 		&wm8991_dapm_inmixl_controls[0],
 		ARRAY_SIZE(wm8991_dapm_inmixl_controls)),
@@ -845,6 +895,9 @@ static const struct snd_soc_dapm_widget wm8991_dapm_widgets[] = {
 	/* AINRMUX */
 	SND_SOC_DAPM_MUX("AINRMUX", SND_SOC_NOPM, 0, 0,
 		&wm8991_dapm_ainrmux_controls),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Output Side */
@@ -938,7 +991,11 @@ static const struct snd_soc_dapm_widget wm8991_dapm_widgets[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct snd_soc_dapm_route audio_map[] = {
+=======
+static const struct snd_soc_dapm_route wm8991_dapm_routes[] = {
+>>>>>>> v3.18
 =======
 static const struct snd_soc_dapm_route wm8991_dapm_routes[] = {
 >>>>>>> v3.18
@@ -952,11 +1009,17 @@ static const struct snd_soc_dapm_route wm8991_dapm_routes[] = {
 
 	/* Input Side */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{"INMIXL", NULL, "INL"},
 	{"AINLMUX", NULL, "INL"},
 	{"INMIXR", NULL, "INR"},
 	{"AINRMUX", NULL, "INR"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* LIN12 PGA */
 	{"LIN12 PGA", "LIN1 Switch", "LIN1"},
@@ -1257,6 +1320,7 @@ static int wm8991_hw_params(struct snd_pcm_substream *substream,
 	audio1 &= ~WM8991_AIF_WL_MASK;
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -1268,6 +1332,8 @@ static int wm8991_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -1278,6 +1344,9 @@ static int wm8991_hw_params(struct snd_pcm_substream *substream,
 		audio1 |= WM8991_AIF_WL_24BITS;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		audio1 |= WM8991_AIF_WL_32BITS;
 		break;
@@ -1304,6 +1373,10 @@ static int wm8991_set_bias_level(struct snd_soc_codec *codec,
 				 enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct wm8991_priv *wm8991 = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct wm8991_priv *wm8991 = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -1323,7 +1396,11 @@ static int wm8991_set_bias_level(struct snd_soc_codec *codec,
 	case SND_SOC_BIAS_STANDBY:
 		if (codec->dapm.bias_level == SND_SOC_BIAS_OFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_cache_sync(codec);
+=======
+			regcache_sync(wm8991->regmap);
+>>>>>>> v3.18
 =======
 			regcache_sync(wm8991->regmap);
 >>>>>>> v3.18
@@ -1415,7 +1492,11 @@ static int wm8991_set_bias_level(struct snd_soc_codec *codec,
 		/* disable POBCTRL, SOFT_ST and BUFDCOPEN */
 		snd_soc_write(codec, WM8991_ANTIPOP2, 0x0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		codec->cache_sync = 1;
+=======
+		regcache_mark_dirty(wm8991->regmap);
+>>>>>>> v3.18
 =======
 		regcache_mark_dirty(wm8991->regmap);
 >>>>>>> v3.18
@@ -1447,6 +1528,7 @@ static int wm8991_remove(struct snd_soc_codec *codec)
 
 static int wm8991_probe(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct wm8991_priv *wm8991;
 	int ret;
@@ -1491,6 +1573,10 @@ static int wm8991_probe(struct snd_soc_codec *codec)
 				  ARRAY_SIZE(wm8991_dapm_widgets));
 	snd_soc_dapm_add_routes(&codec->dapm, audio_map,
 				ARRAY_SIZE(audio_map));
+=======
+	wm8991_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
+
+>>>>>>> v3.18
 =======
 	wm8991_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
@@ -1544,10 +1630,13 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8991 = {
 	.resume = wm8991_resume,
 	.set_bias_level = wm8991_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size = WM8991_MAX_REGISTER + 1,
 	.reg_word_size = sizeof(u16),
 	.reg_cache_default = wm8991_reg_defs
 =======
+=======
+>>>>>>> v3.18
 	.controls = wm8991_snd_controls,
 	.num_controls = ARRAY_SIZE(wm8991_snd_controls),
 	.dapm_widgets = wm8991_dapm_widgets,
@@ -1565,6 +1654,9 @@ static const struct regmap_config wm8991_regmap = {
 	.reg_defaults = wm8991_reg_defaults,
 	.num_reg_defaults = ARRAY_SIZE(wm8991_reg_defaults),
 	.cache_type = REGCACHE_RBTREE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1573,6 +1665,10 @@ static int wm8991_i2c_probe(struct i2c_client *i2c,
 {
 	struct wm8991_priv *wm8991;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int val;
+>>>>>>> v3.18
 =======
 	unsigned int val;
 >>>>>>> v3.18
@@ -1583,10 +1679,13 @@ static int wm8991_i2c_probe(struct i2c_client *i2c,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wm8991->control_type = SND_SOC_I2C;
 	i2c_set_clientdata(i2c, wm8991);
 
 =======
+=======
+>>>>>>> v3.18
 	wm8991->regmap = devm_regmap_init_i2c(i2c, &wm8991_regmap);
 	if (IS_ERR(wm8991->regmap))
 		return PTR_ERR(wm8991->regmap);
@@ -1628,6 +1727,9 @@ static int wm8991_i2c_probe(struct i2c_client *i2c,
 	regmap_write(wm8991->regmap, WM8991_RIGHT_OUTPUT_VOLUME,
 		     0x50 | (1<<8));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_codec(&i2c->dev,
 				     &soc_codec_dev_wm8991, &wm8991_dai, 1);

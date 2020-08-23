@@ -20,6 +20,10 @@
 #define __BTRFS_I__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hash.h>
+>>>>>>> v3.18
 =======
 #include <linux/hash.h>
 >>>>>>> v3.18
@@ -47,7 +51,10 @@
 #define BTRFS_INODE_IN_DELALLOC_LIST		9
 #define BTRFS_INODE_READDIO_NEED_LOCK		10
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BTRFS_INODE_HAS_PROPS		        11
 /*
  * The following 3 bits are meant only for the btree inode.
@@ -60,6 +67,9 @@
 #define BTRFS_INODE_BTREE_ERR		        12
 #define BTRFS_INODE_BTREE_LOG1_ERR		13
 #define BTRFS_INODE_BTREE_LOG2_ERR		14
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* in memory btrfs inode */
@@ -102,12 +112,15 @@ struct btrfs_inode {
 	struct list_head delalloc_inodes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * list for tracking inodes that must be sent to disk before a
 	 * rename or truncate commit
 	 */
 	struct list_head ordered_operations;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* node for the red-black tree that links inodes in subvolume root */
@@ -130,6 +143,7 @@ struct btrfs_inode {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * log transid when this inode was last modified
 	 */
 	u64 last_sub_trans;
@@ -139,6 +153,8 @@ struct btrfs_inode {
 	 */
 	u64 logged_trans;
 =======
+=======
+>>>>>>> v3.18
 	 * transid that last logged this inode
 	 */
 	u64 logged_trans;
@@ -150,6 +166,9 @@ struct btrfs_inode {
 
 	/* a local copy of root's last_log_commit */
 	int last_log_commit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* total number of bytes pending delalloc, used by stat to calc the
@@ -159,13 +178,19 @@ struct btrfs_inode {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * total number of bytes pending defrag, used by stat to check whether
 	 * it needs COW.
 	 */
 	u64 defrag_bytes;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * the size of the file stored in the metadata on disk.  data=ordered
 	 * means the in-memory i_size might be larger than the size on disk
@@ -180,6 +205,12 @@ struct btrfs_inode {
 	u64 index_cnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Cache the directory index number to speed the dir/file remove */
+	u64 dir_index;
+
+>>>>>>> v3.18
 =======
 	/* Cache the directory index number to speed the dir/file remove */
 	u64 dir_index;
@@ -202,9 +233,12 @@ struct btrfs_inode {
 	u32 flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* a local copy of root's last_log_commit */
 	unsigned long last_log_commit;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -234,7 +268,10 @@ static inline struct btrfs_inode *BTRFS_I(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long btrfs_inode_hash(u64 objectid,
 					     const struct btrfs_root *root)
 {
@@ -254,6 +291,9 @@ static inline void btrfs_insert_inode_hash(struct inode *inode)
 	__insert_inode_hash(inode, h);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u64 btrfs_ino(struct inode *inode)
 {
@@ -290,12 +330,15 @@ static inline int btrfs_inode_in_log(struct inode *inode, u64 generation)
 {
 	if (BTRFS_I(inode)->logged_trans == generation &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    BTRFS_I(inode)->last_sub_trans <= BTRFS_I(inode)->last_log_commit)
 		return 1;
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	    BTRFS_I(inode)->last_sub_trans <=
 	    BTRFS_I(inode)->last_log_commit &&
 	    BTRFS_I(inode)->last_sub_trans <=
@@ -342,6 +385,9 @@ struct btrfs_dio_private {
 	int (*subio_endio)(struct inode *, struct btrfs_io_bio *, int);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Disable DIO read nolock optimization, so new dio readers will be forced
@@ -362,6 +408,11 @@ static inline void btrfs_inode_resume_unlocked_dio(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool btrfs_page_exists_in_range(struct inode *inode, loff_t start, loff_t end);
+
+>>>>>>> v3.18
 =======
 bool btrfs_page_exists_in_range(struct inode *inode, loff_t start, loff_t end);
 

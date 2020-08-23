@@ -168,6 +168,7 @@ enum s2mps11_regulators {
 	S2MPS11_BUCK9,
 	S2MPS11_BUCK10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	S2MPS11_AP_EN32KHZ,
 	S2MPS11_CP_EN32KHZ,
 	S2MPS11_BT_EN32KHZ,
@@ -185,10 +186,15 @@ enum s2mps11_regulators {
 #define S2MPS11_LDO_STEP1	50000
 #define S2MPS11_LDO_STEP2	25000
 =======
+=======
+>>>>>>> v3.18
 
 	S2MPS11_REGULATOR_MAX,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define S2MPS11_LDO_VSEL_MASK	0x3F
 #define S2MPS11_BUCK_VSEL_MASK	0xFF
@@ -197,10 +203,13 @@ enum s2mps11_regulators {
 #define S2MPS11_LDO_N_VOLTAGES	(S2MPS11_LDO_VSEL_MASK + 1)
 #define S2MPS11_BUCK_N_VOLTAGES (S2MPS11_BUCK_VSEL_MASK + 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define S2MPS11_PMIC_EN_SHIFT	6
 #define S2MPS11_REGULATOR_MAX (S2MPS11_REG_MAX - 3)
 =======
+=======
+>>>>>>> v3.18
 #define S2MPS11_RAMP_DELAY	25000		/* uV/us */
 
 
@@ -215,6 +224,9 @@ enum s2mps11_regulators {
 #define S2MPS11_BUCK4_RAMP_EN_SHIFT	1
 #define S2MPS11_BUCK6_RAMP_EN_SHIFT	0
 #define S2MPS11_PMIC_EN_SHIFT	6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /*  __LINUX_MFD_S2MPS11_H */

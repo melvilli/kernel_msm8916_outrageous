@@ -23,7 +23,10 @@
 #include <linux/bcd.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_runtime.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -263,6 +266,11 @@ static int tps65910_rtc_probe(struct platform_device *pdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_set_drvdata(pdev, tps_rtc);
+
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, tps_rtc);
 
@@ -293,8 +301,11 @@ static int tps65910_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, tps_rtc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

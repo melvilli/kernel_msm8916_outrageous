@@ -88,7 +88,10 @@ static int __init orion_nand_probe(struct platform_device *pdev)
 	nc = kzalloc(sizeof(struct nand_chip) + sizeof(struct mtd_info), GFP_KERNEL);
 	if (!nc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "orion_nand: failed to allocate device structure.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;
@@ -105,7 +108,11 @@ static int __init orion_nand_probe(struct platform_device *pdev)
 	io_base = ioremap(res->start, resource_size(res));
 	if (!io_base) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "orion_nand: ioremap failed\n");
+=======
+		dev_err(&pdev->dev, "ioremap failed\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "ioremap failed\n");
 >>>>>>> v3.18
@@ -118,7 +125,10 @@ static int __init orion_nand_probe(struct platform_device *pdev)
 					GFP_KERNEL);
 		if (!board) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "orion_nand: failed to allocate board structure.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ret = -ENOMEM;
@@ -141,8 +151,14 @@ static int __init orion_nand_probe(struct platform_device *pdev)
 						"chip-delay", &val))
 			board->chip_delay = (u8)val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		board = pdev->dev.platform_data;
+=======
+	} else {
+		board = dev_get_platdata(&pdev->dev);
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		board = dev_get_platdata(&pdev->dev);
@@ -203,7 +219,10 @@ no_dev:
 		clk_put(clk);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(io_base);
@@ -236,7 +255,11 @@ static int orion_nand_remove(struct platform_device *pdev)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id orion_nand_of_match_table[] = {
+=======
+static const struct of_device_id orion_nand_of_match_table[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id orion_nand_of_match_table[] = {
 >>>>>>> v3.18

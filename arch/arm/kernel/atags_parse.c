@@ -131,7 +131,11 @@ static int __init parse_tag_cmdline(const struct tag *tag)
 		COMMAND_LINE_SIZE);
 #elif defined(CONFIG_CMDLINE_FORCE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("Ignoring tag cmdline (using the default kernel command line)\n");
+=======
+	pr_warn("Ignoring tag cmdline (using the default kernel command line)\n");
+>>>>>>> v3.18
 =======
 	pr_warn("Ignoring tag cmdline (using the default kernel command line)\n");
 >>>>>>> v3.18

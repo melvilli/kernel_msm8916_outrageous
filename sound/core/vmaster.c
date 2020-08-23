@@ -102,7 +102,11 @@ static int slave_init(struct link_slave *slave)
 	    (slave->info.type != SNDRV_CTL_ELEM_TYPE_INTEGER &&
 	     slave->info.type != SNDRV_CTL_ELEM_TYPE_BOOLEAN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid slave element\n");
+=======
+		pr_err("ALSA: vmaster: invalid slave element\n");
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: vmaster: invalid slave element\n");
 >>>>>>> v3.18
@@ -315,6 +319,7 @@ static int master_get(struct snd_kcontrol *kcontrol,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int master_put(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol)
 {
@@ -330,10 +335,15 @@ static int master_put(struct snd_kcontrol *kcontrol,
 	if (ucontrol->value.integer.value[0] == old_val)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 static int sync_slaves(struct link_master *master, int old_val, int new_val)
 {
 	struct link_slave *slave;
 	struct snd_ctl_elem_value *uval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uval = kmalloc(sizeof(*uval), GFP_KERNEL);
@@ -344,12 +354,15 @@ static int sync_slaves(struct link_master *master, int old_val, int new_val)
 		uval->id = slave->slave.id;
 		slave_get_val(slave, uval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		master->val = ucontrol->value.integer.value[0];
 		slave_put_val(slave, uval);
 	}
 	kfree(uval);
 	if (master->hook && !err)
 =======
+=======
+>>>>>>> v3.18
 		master->val = new_val;
 		slave_put_val(slave, uval);
 	}
@@ -377,6 +390,9 @@ static int master_put(struct snd_kcontrol *kcontrol,
 	if (err < 0)
 		return err;
 	if (master->hook && !first_init)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		master->hook(master->hook_private_data, master->val);
 	return 1;
@@ -484,6 +500,7 @@ EXPORT_SYMBOL_GPL(snd_ctl_add_vmaster_hook);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * snd_ctl_sync_vmaster_hook - Sync the vmaster hook
  * @kcontrol: vmaster kctl element
  *
@@ -502,6 +519,8 @@ void snd_ctl_sync_vmaster_hook(struct snd_kcontrol *kcontrol)
 }
 EXPORT_SYMBOL_GPL(snd_ctl_sync_vmaster_hook);
 =======
+=======
+>>>>>>> v3.18
  * snd_ctl_sync_vmaster - Sync the vmaster slaves and hook
  * @kcontrol: vmaster kctl element
  * @hook_only: sync only the hook
@@ -532,4 +551,7 @@ void snd_ctl_sync_vmaster(struct snd_kcontrol *kcontrol, bool hook_only)
 		master->hook(master->hook_private_data, master->val);
 }
 EXPORT_SYMBOL_GPL(snd_ctl_sync_vmaster);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

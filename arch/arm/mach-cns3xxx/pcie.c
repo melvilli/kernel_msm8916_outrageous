@@ -24,6 +24,7 @@
 #include "core.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum cns3xxx_access_type {
 	CNS3XXX_HOST_TYPE = 0,
 	CNS3XXX_CFG0_TYPE,
@@ -34,10 +35,15 @@ enum cns3xxx_access_type {
 struct cns3xxx_pcie {
 	struct map_desc cfg_bases[CNS3XXX_NUM_ACCESS_TYPES];
 =======
+=======
+>>>>>>> v3.18
 struct cns3xxx_pcie {
 	void __iomem *host_regs; /* PCI config registers for host bridge */
 	void __iomem *cfg0_regs; /* PCI Type 0 config registers */
 	void __iomem *cfg1_regs; /* PCI Type 1 config registers */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int irqs[2];
 	struct resource res_io;
@@ -73,6 +79,7 @@ static void __iomem *cns3xxx_pci_cfg_base(struct pci_bus *bus,
 	int busno = bus->number;
 	int slot = PCI_SLOT(devfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int offset;
 	enum cns3xxx_access_type type;
 	void __iomem *base;
@@ -80,10 +87,15 @@ static void __iomem *cns3xxx_pci_cfg_base(struct pci_bus *bus,
 	/* If there is no link, just show the CNS PCI bridge. */
 	if (!cnspci->linked && (busno > 0 || slot > 0))
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *base;
 
 	/* If there is no link, just show the CNS PCI bridge. */
 	if (!cnspci->linked && busno > 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 
@@ -92,6 +104,7 @@ static void __iomem *cns3xxx_pci_cfg_base(struct pci_bus *bus,
 	 * we still want to access it. For this to work, we must place
 	 * the first device on the same bus as the CNS PCI bridge.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (busno == 0) {
 		if (slot > 1)
@@ -106,6 +119,8 @@ static void __iomem *cns3xxx_pci_cfg_base(struct pci_bus *bus,
 
 	return base + offset;
 =======
+=======
+>>>>>>> v3.18
 	if (busno == 0) { /* internal PCIe bus, host bridge device */
 		if (devfn == 0) /* device# and function# are ignored by hw */
 			base = cnspci->host_regs;
@@ -121,6 +136,9 @@ static void __iomem *cns3xxx_pci_cfg_base(struct pci_bus *bus,
 		base = cnspci->cfg1_regs + ((busno & 0xf) << 20);
 
 	return base + (where & 0xffc) + (devfn << 12);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -202,7 +220,11 @@ static int cns3xxx_pcie_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
 {
 	struct cns3xxx_pcie *cnspci = pdev_to_cnspci(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq = cnspci->irqs[slot];
+=======
+	int irq = cnspci->irqs[!!dev->bus->number];
+>>>>>>> v3.18
 =======
 	int irq = cnspci->irqs[!!dev->bus->number];
 >>>>>>> v3.18
@@ -216,6 +238,7 @@ static int cns3xxx_pcie_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
 
 static struct cns3xxx_pcie cns3xxx_pcie[] = {
 	[0] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.cfg_bases = {
 			[CNS3XXX_HOST_TYPE] = {
@@ -242,6 +265,8 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 			.start = CNS3XXX_PCIE0_IO_BASE,
 			.end = CNS3XXX_PCIE0_IO_BASE + SZ_16M - 1,
 =======
+=======
+>>>>>>> v3.18
 		.host_regs = (void __iomem *)CNS3XXX_PCIE0_HOST_BASE_VIRT,
 		.cfg0_regs = (void __iomem *)CNS3XXX_PCIE0_CFG0_BASE_VIRT,
 		.cfg1_regs = (void __iomem *)CNS3XXX_PCIE0_CFG1_BASE_VIRT,
@@ -249,6 +274,9 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 			.name = "PCIe0 I/O space",
 			.start = CNS3XXX_PCIE0_IO_BASE,
 			.end = CNS3XXX_PCIE0_CFG0_BASE - 1, /* 16 MiB */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.flags = IORESOURCE_IO,
 		},
@@ -256,7 +284,11 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 			.name = "PCIe0 non-prefetchable",
 			.start = CNS3XXX_PCIE0_MEM_BASE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.end = CNS3XXX_PCIE0_MEM_BASE + SZ_16M - 1,
+=======
+			.end = CNS3XXX_PCIE0_HOST_BASE - 1, /* 176 MiB */
+>>>>>>> v3.18
 =======
 			.end = CNS3XXX_PCIE0_HOST_BASE - 1, /* 176 MiB */
 >>>>>>> v3.18
@@ -272,6 +304,7 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 		},
 	},
 	[1] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.cfg_bases = {
 			[CNS3XXX_HOST_TYPE] = {
@@ -298,6 +331,8 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 			.start = CNS3XXX_PCIE1_IO_BASE,
 			.end = CNS3XXX_PCIE1_IO_BASE + SZ_16M - 1,
 =======
+=======
+>>>>>>> v3.18
 		.host_regs = (void __iomem *)CNS3XXX_PCIE1_HOST_BASE_VIRT,
 		.cfg0_regs = (void __iomem *)CNS3XXX_PCIE1_CFG0_BASE_VIRT,
 		.cfg1_regs = (void __iomem *)CNS3XXX_PCIE1_CFG1_BASE_VIRT,
@@ -305,6 +340,9 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 			.name = "PCIe1 I/O space",
 			.start = CNS3XXX_PCIE1_IO_BASE,
 			.end = CNS3XXX_PCIE1_CFG0_BASE - 1, /* 16 MiB */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.flags = IORESOURCE_IO,
 		},
@@ -312,7 +350,11 @@ static struct cns3xxx_pcie cns3xxx_pcie[] = {
 			.name = "PCIe1 non-prefetchable",
 			.start = CNS3XXX_PCIE1_MEM_BASE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.end = CNS3XXX_PCIE1_MEM_BASE + SZ_16M - 1,
+=======
+			.end = CNS3XXX_PCIE1_HOST_BASE - 1, /* 176 MiB */
+>>>>>>> v3.18
 =======
 			.end = CNS3XXX_PCIE1_HOST_BASE - 1, /* 176 MiB */
 >>>>>>> v3.18
@@ -372,15 +414,21 @@ static void __init cns3xxx_pcie_hw_init(struct cns3xxx_pcie *cnspci)
 		.sysdata = &sd,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 io_base = cnspci->res_io.start >> 16;
 	u32 mem_base = cnspci->res_mem.start >> 16;
 	u32 host_base = cnspci->cfg_bases[CNS3XXX_HOST_TYPE].pfn;
 	u32 cfg0_base = cnspci->cfg_bases[CNS3XXX_CFG0_TYPE].pfn;
 =======
+=======
+>>>>>>> v3.18
 	u16 mem_base  = cnspci->res_mem.start >> 16;
 	u16 mem_limit = cnspci->res_mem.end   >> 16;
 	u16 io_base   = cnspci->res_io.start  >> 16;
 	u16 io_limit  = cnspci->res_io.end    >> 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 devfn = 0;
 	u8 tmp8;
@@ -388,9 +436,12 @@ static void __init cns3xxx_pcie_hw_init(struct cns3xxx_pcie *cnspci)
 	u16 dc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host_base = (__pfn_to_phys(host_base) - 1) >> 16;
 	cfg0_base = (__pfn_to_phys(cfg0_base) - 1) >> 16;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_bus_write_config_byte(&bus, devfn, PCI_PRIMARY_BUS, 0);
@@ -403,9 +454,15 @@ static void __init cns3xxx_pcie_hw_init(struct cns3xxx_pcie *cnspci)
 
 	pci_bus_write_config_word(&bus, devfn, PCI_MEMORY_BASE, mem_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_bus_write_config_word(&bus, devfn, PCI_MEMORY_LIMIT, host_base);
 	pci_bus_write_config_word(&bus, devfn, PCI_IO_BASE_UPPER16, io_base);
 	pci_bus_write_config_word(&bus, devfn, PCI_IO_LIMIT_UPPER16, cfg0_base);
+=======
+	pci_bus_write_config_word(&bus, devfn, PCI_MEMORY_LIMIT, mem_limit);
+	pci_bus_write_config_word(&bus, devfn, PCI_IO_BASE_UPPER16, io_base);
+	pci_bus_write_config_word(&bus, devfn, PCI_IO_LIMIT_UPPER16, io_limit);
+>>>>>>> v3.18
 =======
 	pci_bus_write_config_word(&bus, devfn, PCI_MEMORY_LIMIT, mem_limit);
 	pci_bus_write_config_word(&bus, devfn, PCI_IO_BASE_UPPER16, io_base);
@@ -417,6 +474,7 @@ static void __init cns3xxx_pcie_hw_init(struct cns3xxx_pcie *cnspci)
 
 	/* Set Device Max_Read_Request_Size to 128 byte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devfn = PCI_DEVFN(1, 0);
 	pos = pci_bus_find_capability(&bus, devfn, PCI_CAP_ID_EXP);
 	pci_bus_read_config_word(&bus, devfn, pos + PCI_EXP_DEVCTL, &dc);
@@ -427,6 +485,8 @@ static void __init cns3xxx_pcie_hw_init(struct cns3xxx_pcie *cnspci)
 		pr_info("PCIe: Set Device Max_Read_Request_Size to 128 byte\n");
 
 =======
+=======
+>>>>>>> v3.18
 	bus.number = 1; /* directly connected PCIe device */
 	devfn = PCI_DEVFN(0, 0);
 	pos = pci_bus_find_capability(&bus, devfn, PCI_CAP_ID_EXP);
@@ -440,6 +500,9 @@ static void __init cns3xxx_pcie_hw_init(struct cns3xxx_pcie *cnspci)
 		else
 			pr_info("PCIe: Max_Read_Request_Size set to 128 bytes\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Disable PCIe0 Interrupt Mask INTA to INTD */
 	__raw_writel(~0x3FFF, MISC_PCIE_INT_MASK(port));
@@ -454,7 +517,11 @@ static int cns3xxx_pcie_abort_handler(unsigned long addr, unsigned int fsr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init cns3xxx_pcie_init(void)
+=======
+void __init cns3xxx_pcie_init_late(void)
+>>>>>>> v3.18
 =======
 void __init cns3xxx_pcie_init_late(void)
 >>>>>>> v3.18
@@ -469,8 +536,11 @@ void __init cns3xxx_pcie_init_late(void)
 
 	for (i = 0; i < ARRAY_SIZE(cns3xxx_pcie); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iotable_init(cns3xxx_pcie[i].cfg_bases,
 			     ARRAY_SIZE(cns3xxx_pcie[i].cfg_bases));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		cns3xxx_pwr_clk_en(0x1 << PM_CLK_GATE_REG_OFFSET_PCIE(i));
@@ -482,10 +552,14 @@ void __init cns3xxx_pcie_init_late(void)
 
 	pci_assign_unassigned_resources();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
 device_initcall(cns3xxx_pcie_init);
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18

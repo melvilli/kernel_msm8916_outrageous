@@ -23,20 +23,27 @@ static const char *get_perf_dir(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HAVE_STRLCPY
 size_t strlcpy(char *dest, const char *src, size_t size)
 =======
+=======
+>>>>>>> v3.18
 /*
  * If libc has strlcpy() then that version will override this
  * implementation:
  */
 size_t __weak strlcpy(char *dest, const char *src, size_t size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	size_t ret = strlen(src);
 
 	if (size) {
 		size_t len = (ret >= size) ? size - 1 : ret;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		memcpy(dest, src, len);
 		dest[len] = '\0';
@@ -45,6 +52,8 @@ size_t __weak strlcpy(char *dest, const char *src, size_t size)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 		memcpy(dest, src, len);
 		dest[len] = '\0';
@@ -52,6 +61,9 @@ size_t __weak strlcpy(char *dest, const char *src, size_t size)
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static char *get_pathname(void)

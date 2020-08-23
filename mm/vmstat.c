@@ -8,6 +8,10 @@
  *  Copyright (C) 2006 Silicon Graphics, Inc.,
  *		Christoph Lameter <christoph@lameter.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  Copyright (C) 2008-2014 Christoph Lameter
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2008-2014 Christoph Lameter
 >>>>>>> v3.18
@@ -19,6 +23,10 @@
 #include <linux/slab.h>
 #include <linux/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpumask.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpumask.h>
 >>>>>>> v3.18
@@ -209,7 +217,11 @@ void set_pgdat_percpu_threshold(pg_data_t *pgdat,
 
 		threshold = (*calculate_pressure)(zone);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for_each_possible_cpu(cpu)
+=======
+		for_each_online_cpu(cpu)
+>>>>>>> v3.18
 =======
 		for_each_online_cpu(cpu)
 >>>>>>> v3.18
@@ -220,7 +232,13 @@ void set_pgdat_percpu_threshold(pg_data_t *pgdat,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * For use when we know that interrupts are disabled.
+=======
+ * For use when we know that interrupts are disabled,
+ * or when we know that preemption is disabled and that
+ * particular counter cannot be updated from interrupt context.
+>>>>>>> v3.18
 =======
  * For use when we know that interrupts are disabled,
  * or when we know that preemption is disabled and that
@@ -436,6 +454,7 @@ EXPORT_SYMBOL(dec_zone_page_state);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Update the zone counters for one cpu.
  *
@@ -443,6 +462,8 @@ EXPORT_SYMBOL(dec_zone_page_state);
  * is not online. If it is the current cpu then the execution thread must
  * be pinned to the current cpu.
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Fold a differential into the global counters.
@@ -463,6 +484,9 @@ static int fold_diff(int *diff)
 
 /*
  * Update the zone counters for the current cpu.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Note that refresh_cpu_vm_stats strives to only access
@@ -476,18 +500,25 @@ static int fold_diff(int *diff)
  * with the global counters. These could cause remote node cache line
  * bouncing and will have to be only done when necessary.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 void refresh_cpu_vm_stats(int cpu)
 =======
+=======
+>>>>>>> v3.18
  *
  * The function returns the number of global counters updated.
  */
 static int refresh_cpu_vm_stats(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct zone *zone;
 	int i;
 	int global_diff[NR_VM_ZONE_STAT_ITEMS] = { 0, };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	for_each_populated_zone(zone) {
@@ -505,6 +536,8 @@ static int refresh_cpu_vm_stats(void)
 				p->vm_stat_diff[i] = 0;
 				local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
 	int changes = 0;
 
 	for_each_populated_zone(zone) {
@@ -516,20 +549,29 @@ static int refresh_cpu_vm_stats(void)
 			v = this_cpu_xchg(p->vm_stat_diff[i], 0);
 			if (v) {
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				atomic_long_add(v, &zone->vm_stat[i]);
 				global_diff[i] += v;
 #ifdef CONFIG_NUMA
 				/* 3 seconds idle till flush */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				p->expire = 3;
 #endif
 			}
 =======
+=======
+>>>>>>> v3.18
 				__this_cpu_write(p->expire, 3);
 #endif
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cond_resched();
 #ifdef CONFIG_NUMA
@@ -541,7 +583,12 @@ static int refresh_cpu_vm_stats(void)
 		 * if not then there is nothing to expire.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!p->expire || !p->pcp.count)
+=======
+		if (!__this_cpu_read(p->expire) ||
+			       !__this_cpu_read(p->pcp.count))
+>>>>>>> v3.18
 =======
 		if (!__this_cpu_read(p->expire) ||
 			       !__this_cpu_read(p->pcp.count))
@@ -552,6 +599,7 @@ static int refresh_cpu_vm_stats(void)
 		 * We never drain zones local to this processor.
 		 */
 		if (zone_to_nid(zone) == numa_node_id()) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			p->expire = 0;
 			continue;
@@ -570,6 +618,8 @@ static int refresh_cpu_vm_stats(void)
 		if (global_diff[i])
 			atomic_long_add(global_diff[i], &vm_stat[i]);
 =======
+=======
+>>>>>>> v3.18
 			__this_cpu_write(p->expire, 0);
 			continue;
 		}
@@ -615,6 +665,9 @@ void cpu_vm_stats_fold(int cpu)
 	}
 
 	fold_diff(global_diff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -827,8 +880,14 @@ static void walk_zones_in_node(struct seq_file *m, pg_data_t *pgdat,
 
 const char * const vmstat_text[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Zoned VM counters */
 	"nr_free_pages",
+=======
+	/* enum zone_stat_item countes */
+	"nr_free_pages",
+	"nr_alloc_batch",
+>>>>>>> v3.18
 =======
 	/* enum zone_stat_item countes */
 	"nr_free_pages",
@@ -860,6 +919,10 @@ const char * const vmstat_text[] = {
 	"nr_dirtied",
 	"nr_written",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"nr_pages_scanned",
+>>>>>>> v3.18
 =======
 	"nr_pages_scanned",
 >>>>>>> v3.18
@@ -873,15 +936,21 @@ const char * const vmstat_text[] = {
 	"numa_other",
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"nr_anon_transparent_hugepages",
 	"nr_free_cma",
 	"nr_swapcache",
 =======
+=======
+>>>>>>> v3.18
 	"workingset_refault",
 	"workingset_activate",
 	"workingset_nodereclaim",
 	"nr_anon_transparent_hugepages",
 	"nr_free_cma",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* enum writeback_stat_item counters */
@@ -890,6 +959,10 @@ const char * const vmstat_text[] = {
 
 #ifdef CONFIG_VM_EVENT_COUNTERS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* enum vm_event_item counters */
+>>>>>>> v3.18
 =======
 	/* enum vm_event_item counters */
 >>>>>>> v3.18
@@ -928,6 +1001,12 @@ const char * const vmstat_text[] = {
 	"pgrotated",
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"drop_pagecache",
+	"drop_slab",
+
+>>>>>>> v3.18
 =======
 	"drop_pagecache",
 	"drop_slab",
@@ -975,8 +1054,11 @@ const char * const vmstat_text[] = {
 	"thp_zero_page_alloc_failed",
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MEMORY_BALLOON
 	"balloon_inflate",
 	"balloon_deflate",
@@ -997,6 +1079,9 @@ const char * const vmstat_text[] = {
 	"vmacache_find_calls",
 	"vmacache_find_hits",
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_VM_EVENTS_COUNTERS */
 };
@@ -1117,6 +1202,7 @@ static int pagetypeinfo_showblockcount(struct seq_file *m, void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PAGE_OWNER
 static void pagetypeinfo_showmixedcount_print(struct seq_file *m,
 							pg_data_t *pgdat,
@@ -1213,6 +1299,8 @@ static void pagetypeinfo_showmixedcount(struct seq_file *m, pg_data_t *pgdat)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * This prints out statistics in relation to grouping pages by mobility.
  * It is expensive to collect so do not constantly read the file.
@@ -1231,7 +1319,10 @@ static int pagetypeinfo_show(struct seq_file *m, void *arg)
 	pagetypeinfo_showfree(m, pgdat);
 	pagetypeinfo_showblockcount(m, pgdat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pagetypeinfo_showmixedcount(m, pgdat);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1295,7 +1386,11 @@ static void zoneinfo_show_print(struct seq_file *m, pg_data_t *pgdat,
 		   low_wmark_pages(zone),
 		   high_wmark_pages(zone),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   zone->pages_scanned,
+=======
+		   zone_page_state(zone, NR_PAGES_SCANNED),
+>>>>>>> v3.18
 =======
 		   zone_page_state(zone, NR_PAGES_SCANNED),
 >>>>>>> v3.18
@@ -1309,15 +1404,21 @@ static void zoneinfo_show_print(struct seq_file *m, pg_data_t *pgdat,
 
 	seq_printf(m,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   "\n        protection: (%lu",
 		   zone->lowmem_reserve[0]);
 	for (i = 1; i < ARRAY_SIZE(zone->lowmem_reserve); i++)
 		seq_printf(m, ", %lu", zone->lowmem_reserve[i]);
 =======
+=======
+>>>>>>> v3.18
 		   "\n        protection: (%ld",
 		   zone->lowmem_reserve[0]);
 	for (i = 1; i < ARRAY_SIZE(zone->lowmem_reserve); i++)
 		seq_printf(m, ", %ld", zone->lowmem_reserve[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_printf(m,
 		   ")"
@@ -1467,6 +1568,7 @@ static const struct file_operations proc_vmstat_file_operations = {
 static DEFINE_PER_CPU(struct delayed_work, vmstat_work);
 int sysctl_stat_interval __read_mostly = HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void vmstat_update(struct work_struct *w)
 {
@@ -1483,6 +1585,8 @@ static void __cpuinit start_cpu_timer(int cpu)
 	INIT_DEFERRABLE_WORK(work, vmstat_update);
 	schedule_delayed_work_on(cpu, work, __round_jiffies_relative(HZ, cpu));
 =======
+=======
+>>>>>>> v3.18
 static cpumask_var_t cpu_stat_off;
 
 static void vmstat_update(struct work_struct *w)
@@ -1599,6 +1703,9 @@ static void vmstat_cpu_dead(int node)
 	node_clear_state(node, N_CPU);
 end:
 	put_online_cpus();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1607,7 +1714,11 @@ end:
  * when necessary.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit vmstat_cpuup_callback(struct notifier_block *nfb,
+=======
+static int vmstat_cpuup_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 =======
 static int vmstat_cpuup_callback(struct notifier_block *nfb,
 >>>>>>> v3.18
@@ -1621,8 +1732,13 @@ static int vmstat_cpuup_callback(struct notifier_block *nfb,
 	case CPU_ONLINE_FROZEN:
 		refresh_zone_stat_thresholds();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start_cpu_timer(cpu);
 		node_set_state(cpu_to_node(cpu), N_CPU);
+=======
+		node_set_state(cpu_to_node(cpu), N_CPU);
+		cpumask_set_cpu(cpu, cpu_stat_off);
+>>>>>>> v3.18
 =======
 		node_set_state(cpu_to_node(cpu), N_CPU);
 		cpumask_set_cpu(cpu, cpu_stat_off);
@@ -1632,23 +1748,33 @@ static int vmstat_cpuup_callback(struct notifier_block *nfb,
 	case CPU_DOWN_PREPARE_FROZEN:
 		cancel_delayed_work_sync(&per_cpu(vmstat_work, cpu));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		per_cpu(vmstat_work, cpu).work.func = NULL;
 		break;
 	case CPU_DOWN_FAILED:
 	case CPU_DOWN_FAILED_FROZEN:
 		start_cpu_timer(cpu);
 =======
+=======
+>>>>>>> v3.18
 		cpumask_clear_cpu(cpu, cpu_stat_off);
 		break;
 	case CPU_DOWN_FAILED:
 	case CPU_DOWN_FAILED_FROZEN:
 		cpumask_set_cpu(cpu, cpu_stat_off);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CPU_DEAD:
 	case CPU_DEAD_FROZEN:
 		refresh_zone_stat_thresholds();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vmstat_cpu_dead(cpu_to_node(cpu));
+>>>>>>> v3.18
 =======
 		vmstat_cpu_dead(cpu_to_node(cpu));
 >>>>>>> v3.18
@@ -1660,7 +1786,11 @@ static int vmstat_cpuup_callback(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata vmstat_notifier =
+=======
+static struct notifier_block vmstat_notifier =
+>>>>>>> v3.18
 =======
 static struct notifier_block vmstat_notifier =
 >>>>>>> v3.18
@@ -1671,6 +1801,7 @@ static int __init setup_vmstat(void)
 {
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cpu;
 
 	cpu_notifier_register_begin();
@@ -1679,10 +1810,15 @@ static int __init setup_vmstat(void)
 	for_each_online_cpu(cpu)
 		start_cpu_timer(cpu);
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 	__register_cpu_notifier(&vmstat_notifier);
 
 	start_shepherd_timer();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpu_notifier_register_done();
 #endif

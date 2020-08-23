@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -25,8 +31,12 @@
 #include "efx.h"
 #include "nic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "spi.h"
 #include "regs.h"
+=======
+#include "farch_regs.h"
+>>>>>>> v3.18
 =======
 #include "farch_regs.h"
 >>>>>>> v3.18
@@ -41,7 +51,10 @@
 
 static void siena_init_wol(struct efx_nic *efx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int siena_reset_hw(struct efx_nic *efx, enum reset_type method);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -65,6 +78,7 @@ static void siena_push_irq_moderation(struct efx_channel *channel)
 			       channel->channel);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int siena_mdio_write(struct net_device *net_dev,
 			    int prtad, int devad, u16 addr, u16 value)
@@ -143,6 +157,8 @@ static void siena_remove_port(struct efx_nic *efx)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void siena_prepare_flush(struct efx_nic *efx)
 {
 	if (efx->fc_disable++ == 0)
@@ -156,7 +172,11 @@ void siena_finish_flush(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct efx_nic_register_test siena_register_tests[] = {
+=======
+static const struct efx_farch_register_test siena_register_tests[] = {
+>>>>>>> v3.18
 =======
 static const struct efx_farch_register_test siena_register_tests[] = {
 >>>>>>> v3.18
@@ -199,7 +219,11 @@ static int siena_test_chip(struct efx_nic *efx, struct efx_self_tests *tests)
 	 * quiescent regardless of what any VF driver does.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = siena_reset_hw(efx, reset_method);
+=======
+	rc = efx_mcdi_reset(efx, reset_method);
+>>>>>>> v3.18
 =======
 	rc = efx_mcdi_reset(efx, reset_method);
 >>>>>>> v3.18
@@ -208,17 +232,23 @@ static int siena_test_chip(struct efx_nic *efx, struct efx_self_tests *tests)
 
 	tests->registers =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		efx_nic_test_registers(efx, siena_register_tests,
 				       ARRAY_SIZE(siena_register_tests))
 		? -1 : 1;
 
 	rc = siena_reset_hw(efx, reset_method);
 =======
+=======
+>>>>>>> v3.18
 		efx_farch_test_registers(efx, siena_register_tests,
 					 ARRAY_SIZE(siena_register_tests))
 		? -1 : 1;
 
 	rc = efx_mcdi_reset(efx, reset_method);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	rc2 = efx_reset_up(efx, reset_method, rc == 0);
@@ -228,7 +258,11 @@ out:
 /**************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Device reset
+=======
+ * PTP
+>>>>>>> v3.18
 =======
  * PTP
 >>>>>>> v3.18
@@ -237,12 +271,15 @@ out:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static enum reset_type siena_map_reset_reason(enum reset_type reason)
 {
 	return RESET_TYPE_RECOVER_OR_ALL;
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void siena_ptp_write_host_time(struct efx_nic *efx, u32 host_time)
 {
 	_efx_writed(efx, cpu_to_le32(host_time),
@@ -291,6 +328,9 @@ static int siena_ptp_set_ts_config(struct efx_nic *efx,
  **************************************************************************
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int siena_map_reset_flags(u32 *flags)
 {
@@ -318,6 +358,7 @@ static int siena_map_reset_flags(u32 *flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int siena_reset_hw(struct efx_nic *efx, enum reset_type method)
 {
 	int rc;
@@ -333,6 +374,8 @@ static int siena_reset_hw(struct efx_nic *efx, enum reset_type method)
 		return efx_mcdi_reset_port(efx);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_EEH
@@ -365,7 +408,11 @@ static int siena_probe_nvconfig(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void siena_dimension_resources(struct efx_nic *efx)
+=======
+static int siena_dimension_resources(struct efx_nic *efx)
+>>>>>>> v3.18
 =======
 static int siena_dimension_resources(struct efx_nic *efx)
 >>>>>>> v3.18
@@ -375,8 +422,11 @@ static int siena_dimension_resources(struct efx_nic *efx)
 	 * map both blocks to one port, but we don't.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_nic_dimension_resources(efx, FR_CZ_BUF_FULL_TBL_ROWS / 2);
 =======
+=======
+>>>>>>> v3.18
 	efx_farch_dimension_resources(efx, FR_CZ_BUF_FULL_TBL_ROWS / 2);
 	return 0;
 }
@@ -385,6 +435,9 @@ static unsigned int siena_mem_map_size(struct efx_nic *efx)
 {
 	return FR_CZ_MC_TREG_SMEM +
 		FR_CZ_MC_TREG_SMEM_STEP * FR_CZ_MC_TREG_SMEM_ROWS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -392,7 +445,10 @@ static int siena_probe_nic(struct efx_nic *efx)
 {
 	struct siena_nic_data *nic_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool already_attached = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	efx_oword_t reg;
@@ -405,7 +461,11 @@ static int siena_probe_nic(struct efx_nic *efx)
 	efx->nic_data = nic_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (efx_nic_fpga_ver(efx) != 0) {
+=======
+	if (efx_farch_fpga_ver(efx) != 0) {
+>>>>>>> v3.18
 =======
 	if (efx_farch_fpga_ver(efx) != 0) {
 >>>>>>> v3.18
@@ -415,6 +475,7 @@ static int siena_probe_nic(struct efx_nic *efx)
 		goto fail1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	efx_reado(efx, &reg, FR_AZ_CS_DEBUG);
 	efx->net_dev->dev_id = EFX_OWORD_FIELD(reg, FRF_CZ_CS_PORT_NUM) - 1;
@@ -442,6 +503,8 @@ static int siena_probe_nic(struct efx_nic *efx)
 	/* Now we can reset the NIC */
 	rc = siena_reset_hw(efx, RESET_TYPE_ALL);
 =======
+=======
+>>>>>>> v3.18
 	efx->max_channels = EFX_MAX_CHANNELS;
 
 	efx_reado(efx, &reg, FR_AZ_CS_DEBUG);
@@ -453,6 +516,9 @@ static int siena_probe_nic(struct efx_nic *efx)
 
 	/* Now we can reset the NIC */
 	rc = efx_mcdi_reset(efx, RESET_TYPE_ALL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc) {
 		netif_err(efx, probe, efx->net_dev, "failed to reset NIC\n");
@@ -463,7 +529,12 @@ static int siena_probe_nic(struct efx_nic *efx)
 
 	/* Allocate memory for INT_KER */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = efx_nic_alloc_buffer(efx, &efx->irq_status, sizeof(efx_oword_t));
+=======
+	rc = efx_nic_alloc_buffer(efx, &efx->irq_status, sizeof(efx_oword_t),
+				  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rc = efx_nic_alloc_buffer(efx, &efx->irq_status, sizeof(efx_oword_t),
 				  GFP_KERNEL);
@@ -495,7 +566,11 @@ static int siena_probe_nic(struct efx_nic *efx)
 
 	efx_sriov_probe(efx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_ptp_probe(efx);
+=======
+	efx_ptp_defer_probe_with_channel(efx);
+>>>>>>> v3.18
 =======
 	efx_ptp_defer_probe_with_channel(efx);
 >>>>>>> v3.18
@@ -507,8 +582,12 @@ fail5:
 fail4:
 fail3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_mcdi_drv_attach(efx, false, NULL);
 fail2:
+=======
+	efx_mcdi_fini(efx);
+>>>>>>> v3.18
 =======
 	efx_mcdi_fini(efx);
 >>>>>>> v3.18
@@ -518,7 +597,10 @@ fail1:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void siena_rx_push_rss_config(struct efx_nic *efx)
 {
 	efx_oword_t temp;
@@ -544,6 +626,9 @@ static void siena_rx_push_rss_config(struct efx_nic *efx)
 	efx_farch_rx_push_indir_table(efx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This call performs hardware-specific global initialisation, such as
  * defining the descriptor cache sizes and number of RSS channels.
@@ -586,6 +671,7 @@ static int siena_init_nic(struct efx_nic *efx)
 	efx_writeo(efx, &temp, FR_AZ_RX_CFG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set hash key for IPv4 */
 	memcpy(&temp, efx->rx_hash_key, sizeof(temp));
 	efx_writeo(efx, &temp, FR_BZ_RX_RSS_TKEY);
@@ -606,6 +692,9 @@ static int siena_init_nic(struct efx_nic *efx)
 =======
 	siena_rx_push_rss_config(efx);
 >>>>>>> v3.18
+=======
+	siena_rx_push_rss_config(efx);
+>>>>>>> v3.18
 
 	/* Enable event logging */
 	rc = efx_mcdi_log_ctrl(efx, true, false, 0);
@@ -620,7 +709,11 @@ static int siena_init_nic(struct efx_nic *efx)
 	efx_writeo(efx, &temp, FR_CZ_USR_EV_CFG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_nic_init_common(efx);
+=======
+	efx_farch_init_common(efx);
+>>>>>>> v3.18
 =======
 	efx_farch_init_common(efx);
 >>>>>>> v3.18
@@ -634,10 +727,16 @@ static void siena_remove_nic(struct efx_nic *efx)
 	efx_nic_free_buffer(efx, &efx->irq_status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siena_reset_hw(efx, RESET_TYPE_ALL);
 
 	/* Relinquish the device back to the BMC */
 	efx_mcdi_drv_attach(efx, false, NULL);
+=======
+	efx_mcdi_reset(efx, RESET_TYPE_ALL);
+
+	efx_mcdi_fini(efx);
+>>>>>>> v3.18
 =======
 	efx_mcdi_reset(efx, RESET_TYPE_ALL);
 
@@ -649,6 +748,7 @@ static void siena_remove_nic(struct efx_nic *efx)
 	efx->nic_data = NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define STATS_GENERATION_INVALID ((__force __le64)(-1))
 
@@ -743,6 +843,8 @@ static int siena_try_update_nic_stats(struct efx_nic *efx)
 #undef MAC_STAT
 
 =======
+=======
+>>>>>>> v3.18
 #define SIENA_DMA_STAT(ext_name, mcdi_name)			\
 	[SIENA_STAT_ ## ext_name] =				\
 	{ #ext_name, 64, 8 * MC_CMD_MAC_ ## mcdi_name }
@@ -837,6 +939,9 @@ static int siena_try_update_nic_stats(struct efx_nic *efx)
 	rmb();
 	efx_nic_update_stats(siena_stat_desc, SIENA_STAT_COUNT, siena_stat_mask,
 			     stats, efx->stats_buffer.addr, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rmb();
 	generation_start = dma_stats[MC_CMD_MAC_GENERATION_START];
@@ -844,12 +949,15 @@ static int siena_try_update_nic_stats(struct efx_nic *efx)
 		return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 static void siena_update_nic_stats(struct efx_nic *efx)
 {
 =======
+=======
+>>>>>>> v3.18
 	/* Update derived statistics */
 	efx_nic_fix_nodesc_drop_stat(efx,
 				     &stats[SIENA_STAT_rx_nodesc_drop_cnt]);
@@ -873,6 +981,9 @@ static size_t siena_update_nic_stats(struct efx_nic *efx, u64 *full_stats,
 {
 	struct siena_nic_data *nic_data = efx->nic_data;
 	u64 *stats = nic_data->stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int retry;
 
@@ -880,6 +991,7 @@ static size_t siena_update_nic_stats(struct efx_nic *efx, u64 *full_stats,
 	 * up to 10ms for it to finish (typically takes <500us) */
 	for (retry = 0; retry < 100; ++retry) {
 		if (siena_try_update_nic_stats(efx) == 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return;
 		udelay(100);
@@ -902,6 +1014,8 @@ static void siena_stop_nic_stats(struct efx_nic *efx)
 {
 	efx_mcdi_mac_stats(efx, efx->stats_buffer.dma_addr, 0, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 			break;
 		udelay(100);
 	}
@@ -960,6 +1074,9 @@ static int siena_mac_reconfigure(struct efx_nic *efx)
 	       efx->multicast_hash.byte, sizeof(efx->multicast_hash));
 	return efx_mcdi_rpc(efx, MC_CMD_SET_MCAST_HASH,
 			    inbuf, sizeof(inbuf), NULL, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1035,7 +1152,10 @@ static void siena_init_wol(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**************************************************************************
  *
  * MCDI
@@ -1258,6 +1378,9 @@ fail:
 }
 
 #endif /* CONFIG_SFC_MTD */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**************************************************************************
@@ -1269,6 +1392,10 @@ fail:
 
 const struct efx_nic_type siena_a0_nic_type = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.mem_map_size = siena_mem_map_size,
+>>>>>>> v3.18
 =======
 	.mem_map_size = siena_mem_map_size,
 >>>>>>> v3.18
@@ -1282,6 +1409,7 @@ const struct efx_nic_type siena_a0_nic_type = {
 #else
 	.monitor = NULL,
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.map_reset_reason = siena_map_reset_reason,
 	.map_reset_flags = siena_map_reset_flags,
@@ -1299,6 +1427,8 @@ const struct efx_nic_type siena_a0_nic_type = {
 	.check_mac_fault = efx_mcdi_mac_check_fault,
 	.reconfigure_port = efx_mcdi_phy_reconfigure,
 =======
+=======
+>>>>>>> v3.18
 	.map_reset_reason = efx_mcdi_map_reset_reason,
 	.map_reset_flags = siena_map_reset_flags,
 	.reset = efx_mcdi_reset,
@@ -1319,6 +1449,9 @@ const struct efx_nic_type siena_a0_nic_type = {
 	.reconfigure_mac = siena_mac_reconfigure,
 	.check_mac_fault = efx_mcdi_mac_check_fault,
 	.reconfigure_port = efx_mcdi_port_reconfigure,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.get_wol = siena_get_wol,
 	.set_wol = siena_set_wol,
@@ -1326,11 +1459,14 @@ const struct efx_nic_type siena_a0_nic_type = {
 	.test_chip = siena_test_chip,
 	.test_nvram = efx_mcdi_nvram_test_all,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.revision = EFX_REV_SIENA_A0,
 	.mem_map_size = (FR_CZ_MC_TREG_SMEM +
 			 FR_CZ_MC_TREG_SMEM_STEP * FR_CZ_MC_TREG_SMEM_ROWS),
 =======
+=======
+>>>>>>> v3.18
 	.mcdi_request = siena_mcdi_request,
 	.mcdi_poll_response = siena_mcdi_poll_response,
 	.mcdi_read_response = siena_mcdi_read_response,
@@ -1384,6 +1520,9 @@ const struct efx_nic_type siena_a0_nic_type = {
 	.ptp_set_ts_config = siena_ptp_set_ts_config,
 
 	.revision = EFX_REV_SIENA_A0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.txd_ptr_tbl_base = FR_BZ_TX_DESC_PTR_TBL,
 	.rxd_ptr_tbl_base = FR_BZ_RX_DESC_PTR_TBL,
@@ -1391,6 +1530,7 @@ const struct efx_nic_type siena_a0_nic_type = {
 	.evq_ptr_tbl_base = FR_BZ_EVQ_PTR_TBL,
 	.evq_rptr_tbl_base = FR_BZ_EVQ_RPTR,
 	.max_dma_mask = DMA_BIT_MASK(FSF_AZ_TX_KER_BUF_ADDR_WIDTH),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.rx_buffer_hash_size = 0x10,
 	.rx_buffer_padding = 0,
@@ -1403,6 +1543,8 @@ const struct efx_nic_type siena_a0_nic_type = {
 	.offload_features = (NETIF_F_IP_CSUM | NETIF_F_IPV6_CSUM |
 			     NETIF_F_RXHASH | NETIF_F_NTUPLE),
 =======
+=======
+>>>>>>> v3.18
 	.rx_prefix_size = FS_BZ_RX_PREFIX_SIZE,
 	.rx_hash_offset = FS_BZ_RX_PREFIX_HASH_OFST,
 	.rx_buffer_padding = 0,
@@ -1420,5 +1562,8 @@ const struct efx_nic_type siena_a0_nic_type = {
 			     1 << HWTSTAMP_FILTER_PTP_V2_L4_EVENT |
 			     1 << HWTSTAMP_FILTER_PTP_V2_L4_SYNC |
 			     1 << HWTSTAMP_FILTER_PTP_V2_L4_DELAY_REQ),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

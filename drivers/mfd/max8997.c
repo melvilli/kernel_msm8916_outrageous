@@ -25,6 +25,10 @@
 #include <linux/slab.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -44,7 +48,11 @@
 #define I2C_ADDR_HAPTIC	(0x90 >> 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell max8997_devs[] = {
+=======
+static const struct mfd_cell max8997_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell max8997_devs[] = {
 >>>>>>> v3.18
@@ -59,8 +67,13 @@ static const struct mfd_cell max8997_devs[] = {
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id max8997_pmic_dt_match[] = {
 	{ .compatible = "maxim,max8997-pmic", .data = TYPE_MAX8997 },
+=======
+static const struct of_device_id max8997_pmic_dt_match[] = {
+	{ .compatible = "maxim,max8997-pmic", .data = (void *)TYPE_MAX8997 },
+>>>>>>> v3.18
 =======
 static const struct of_device_id max8997_pmic_dt_match[] = {
 	{ .compatible = "maxim,max8997-pmic", .data = (void *)TYPE_MAX8997 },
@@ -146,7 +159,10 @@ int max8997_update_reg(struct i2c_client *i2c, u8 reg, u8 val, u8 mask)
 EXPORT_SYMBOL_GPL(max8997_update_reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -180,6 +196,7 @@ static struct max8997_platform_data *max8997_i2c_parse_dt_pdata(
 	return pd;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static struct max8997_platform_data *max8997_i2c_parse_dt_pdata(
 					struct device *dev)
@@ -200,6 +217,8 @@ static inline int max8997_i2c_get_driver_data(struct i2c_client *i2c,
 #endif
 	return (int)id->driver_data;
 =======
+=======
+>>>>>>> v3.18
 
 static inline unsigned long max8997_i2c_get_driver_data(struct i2c_client *i2c,
 						const struct i2c_device_id *id)
@@ -210,6 +229,9 @@ static inline unsigned long max8997_i2c_get_driver_data(struct i2c_client *i2c,
 		return (unsigned long)match->data;
 	}
 	return id->driver_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -218,16 +240,22 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 {
 	struct max8997_dev *max8997;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max8997_platform_data *pdata = i2c->dev.platform_data;
 	int ret = 0;
 
 	max8997 = kzalloc(sizeof(struct max8997_dev), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct max8997_platform_data *pdata = dev_get_platdata(&i2c->dev);
 	int ret = 0;
 
 	max8997 = devm_kzalloc(&i2c->dev, sizeof(struct max8997_dev),
 				GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (max8997 == NULL)
 		return -ENOMEM;
@@ -238,6 +266,7 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 	max8997->type = max8997_i2c_get_driver_data(i2c, id);
 	max8997->irq = i2c->irq;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (max8997->dev->of_node) {
 		pdata = max8997_i2c_parse_dt_pdata(max8997->dev);
@@ -250,6 +279,8 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 	if (!pdata)
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OF) && max8997->dev->of_node) {
 		pdata = max8997_i2c_parse_dt_pdata(max8997->dev);
 		if (IS_ERR(pdata))
@@ -258,6 +289,9 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 
 	if (!pdata)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	max8997->pdata = pdata;
@@ -293,10 +327,13 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 	max8997_irq_init(max8997);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfd_add_devices(max8997->dev, -1, max8997_devs,
 			ARRAY_SIZE(max8997_devs),
 			NULL, 0, NULL);
 =======
+=======
+>>>>>>> v3.18
 	ret = mfd_add_devices(max8997->dev, -1, max8997_devs,
 			ARRAY_SIZE(max8997_devs),
 			NULL, 0, NULL);
@@ -304,6 +341,9 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 		dev_err(max8997->dev, "failed to add MFD devices %d\n", ret);
 		goto err_mfd;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -312,9 +352,12 @@ static int max8997_i2c_probe(struct i2c_client *i2c,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0)
 		goto err_mfd;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* MAX8997 has a power button input. */
@@ -330,8 +373,11 @@ err_i2c_muic:
 err_i2c_haptic:
 	i2c_unregister_device(max8997->rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err:
 	kfree(max8997);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -346,7 +392,10 @@ static int max8997_i2c_remove(struct i2c_client *i2c)
 	i2c_unregister_device(max8997->haptic);
 	i2c_unregister_device(max8997->rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(max8997);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -740,7 +740,11 @@ ccw_device_irq(struct ccw_device *cdev, enum dev_event dev_event)
 	int is_cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irb = (struct irb *)&S390_lowcore.irb;
+=======
+	irb = this_cpu_ptr(&cio_irb);
+>>>>>>> v3.18
 =======
 	irb = this_cpu_ptr(&cio_irb);
 >>>>>>> v3.18
@@ -810,7 +814,11 @@ ccw_device_w4sense(struct ccw_device *cdev, enum dev_event dev_event)
 	struct irb *irb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irb = (struct irb *)&S390_lowcore.irb;
+=======
+	irb = this_cpu_ptr(&cio_irb);
+>>>>>>> v3.18
 =======
 	irb = this_cpu_ptr(&cio_irb);
 >>>>>>> v3.18

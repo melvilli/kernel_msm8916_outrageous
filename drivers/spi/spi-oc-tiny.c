@@ -16,7 +16,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -157,6 +160,7 @@ static int tiny_spi_txrx_bufs(struct spi_device *spi, struct spi_transfer *t)
 
 		wait_for_completion(&hw->done);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (txp && rxp) {
 		/* we need to tighten the transfer loop */
 		writeb(*txp++, hw->base + TINY_SPI_TXDATA);
@@ -214,6 +218,8 @@ static int tiny_spi_txrx_bufs(struct spi_device *spi, struct spi_transfer *t)
 		tiny_spi_wait_txe(hw);
 	}
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		/* we need to tighten the transfer loop */
 		writeb(txp ? *txp++ : 0, hw->base + TINY_SPI_TXDATA);
@@ -230,6 +236,9 @@ static int tiny_spi_txrx_bufs(struct spi_device *spi, struct spi_transfer *t)
 			*rxp++ = readb(hw->base + TINY_SPI_RXDATA);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return t->len;
 }
@@ -308,7 +317,11 @@ static int tiny_spi_of_probe(struct platform_device *pdev)
 static int tiny_spi_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tiny_spi_platform_data *platp = pdev->dev.platform_data;
+=======
+	struct tiny_spi_platform_data *platp = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct tiny_spi_platform_data *platp = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -333,9 +346,13 @@ static int tiny_spi_probe(struct platform_device *pdev)
 
 	/* setup the state for the bitbang driver */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->bitbang.master = spi_master_get(master);
 	if (!hw->bitbang.master)
 		return err;
+=======
+	hw->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	hw->bitbang.master = master;
 >>>>>>> v3.18
@@ -345,6 +362,7 @@ static int tiny_spi_probe(struct platform_device *pdev)
 
 	/* find and map our resources */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res)
 		goto exit_busy;
@@ -356,11 +374,16 @@ static int tiny_spi_probe(struct platform_device *pdev)
 	if (!hw->base)
 		goto exit_busy;
 =======
+=======
+>>>>>>> v3.18
 	hw->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(hw->base)) {
 		err = PTR_ERR(hw->base);
 		goto exit;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* irq is optional */
 	hw->irq = platform_get_irq(pdev, 0);
@@ -376,13 +399,19 @@ static int tiny_spi_probe(struct platform_device *pdev)
 		hw->gpio_cs_count = platp->gpio_cs_count;
 		hw->gpio_cs = platp->gpio_cs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (platp->gpio_cs_count && !platp->gpio_cs)
 			goto exit_busy;
 =======
+=======
+>>>>>>> v3.18
 		if (platp->gpio_cs_count && !platp->gpio_cs) {
 			err = -EBUSY;
 			goto exit;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hw->freq = platp->freq;
 		hw->baudwidth = platp->baudwidth;
@@ -411,10 +440,14 @@ exit_gpio:
 	while (i-- > 0)
 		gpio_free(hw->gpio_cs[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_busy:
 	err = -EBUSY;
 exit:
 	platform_set_drvdata(pdev, NULL);
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -432,7 +465,10 @@ static int tiny_spi_remove(struct platform_device *pdev)
 	for (i = 0; i < hw->gpio_cs_count; i++)
 		gpio_free(hw->gpio_cs[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_master_put(master);

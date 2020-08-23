@@ -76,6 +76,10 @@ struct pid_namespace init_pid_ns = {
 	},
 	.last_pid = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.nr_hashed = PIDNS_HASH_ADDING,
+>>>>>>> v3.18
 =======
 	.nr_hashed = PIDNS_HASH_ADDING,
 >>>>>>> v3.18
@@ -277,12 +281,18 @@ void free_pid(struct pid *pid)
 			wake_up_process(ns->child_reaper);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case PIDNS_HASH_ADDING:
 			/* Handle a fork failure of the first process */
 			WARN_ON(ns->child_reaper);
 			ns->nr_hashed = 0;
 			/* fall through */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 0:
 			schedule_work(&ns->proc_work);
@@ -348,8 +358,11 @@ out:
 out_unlock:
 	spin_unlock_irq(&pidmap_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_pid_ns(ns);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_free:
@@ -392,6 +405,7 @@ EXPORT_SYMBOL_GPL(find_vpid);
  * attach_pid() must be called with the tasklist_lock write-held.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void attach_pid(struct task_struct *task, enum pid_type type,
 		struct pid *pid)
 {
@@ -401,10 +415,15 @@ void attach_pid(struct task_struct *task, enum pid_type type,
 	link->pid = pid;
 	hlist_add_head_rcu(&link->node, &pid->tasks[type]);
 =======
+=======
+>>>>>>> v3.18
 void attach_pid(struct task_struct *task, enum pid_type type)
 {
 	struct pid_link *link = &task->pids[type];
 	hlist_add_head_rcu(&link->node, &link->pid->tasks[type]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -438,7 +457,11 @@ void change_pid(struct task_struct *task, enum pid_type type,
 {
 	__change_pid(task, type, pid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	attach_pid(task, type, pid);
+=======
+	attach_pid(task, type);
+>>>>>>> v3.18
 =======
 	attach_pid(task, type);
 >>>>>>> v3.18
@@ -482,7 +505,10 @@ struct task_struct *find_task_by_vpid(pid_t vnr)
 	return find_task_by_pid_ns(vnr, task_active_pid_ns(current));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(find_task_by_vpid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -628,7 +654,10 @@ void __init pidmap_init(void)
 	set_bit(0, init_pid_ns.pidmap[0].page);
 	atomic_dec(&init_pid_ns.pidmap[0].nr_free);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_pid_ns.nr_hashed = PIDNS_HASH_ADDING;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

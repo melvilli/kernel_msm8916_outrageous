@@ -18,10 +18,15 @@
 #include <linux/kernel_stat.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_irq.h>
 #include <linux/export.h>
 
 #include <asm/prom.h>
+=======
+#include <linux/irqchip.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip.h>
 #include <linux/of_irq.h>
@@ -53,11 +58,17 @@ next_irq:
 	trace_hardirqs_on();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init init_IRQ(void)
 {
 	/* process the entire interrupt tree in one go */
 	irqchip_init();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

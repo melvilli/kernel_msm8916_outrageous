@@ -46,7 +46,11 @@ static volatile u32 lnkget_testdata[16] __initdata __aligned(64);
 #define LNKGET_CONSTANT 0xdeadbeef
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init metag_lnkget_probe(void)
+=======
+static void __init metag_lnkget_probe(void)
+>>>>>>> v3.18
 =======
 static void __init metag_lnkget_probe(void)
 >>>>>>> v3.18

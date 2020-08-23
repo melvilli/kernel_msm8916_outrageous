@@ -62,7 +62,10 @@
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -136,7 +139,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(acenic_pci_tbl) = {
+=======
+static const struct pci_device_id acenic_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id acenic_pci_tbl[] = {
 >>>>>>> v3.18
@@ -485,7 +492,11 @@ static int acenic_probe_one(struct pci_dev *pdev,
 
 	dev->netdev_ops = &ace_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ace_ethtool_ops);
+=======
+	dev->ethtool_ops = &ace_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ace_ethtool_ops;
 >>>>>>> v3.18
@@ -714,6 +725,7 @@ static struct pci_driver acenic_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init acenic_init(void)
 {
 	return pci_register_driver(&acenic_pci_driver);
@@ -727,6 +739,8 @@ static void __exit acenic_exit(void)
 module_init(acenic_init);
 module_exit(acenic_exit);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ace_free_descriptors(struct net_device *dev)
@@ -3214,6 +3228,11 @@ static int read_eeprom_byte(struct net_device *dev, unsigned long offset)
 	goto out;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+module_pci_driver(acenic_pci_driver);
+>>>>>>> v3.18
 =======
 
 module_pci_driver(acenic_pci_driver);

@@ -9,6 +9,7 @@
  * option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/delay.h>
 #include <linux/irq.h>
@@ -21,6 +22,8 @@
 #include <linux/interrupt.h>
 #include <linux/err.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/err.h>
 #include <linux/fsl_devices.h>
@@ -34,6 +37,9 @@
 #include <linux/of_platform.h>
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sysdev/fsl_soc.h>
 
@@ -161,10 +167,13 @@ static int fsl_espi_setup_transfer(struct spi_device *spi,
 		bits_per_word = spi->bits_per_word;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure its a bit width we support [4..16] */
 	if ((bits_per_word < 4) || (bits_per_word > 16))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!hz)
@@ -177,6 +186,7 @@ static int fsl_espi_setup_transfer(struct spi_device *spi,
 	if (bits_per_word <= 8) {
 		cs->rx_shift = 8 - bits_per_word;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (bits_per_word <= 16) {
 		cs->rx_shift = 16 - bits_per_word;
 		if (spi->mode & SPI_LSB_FIRST)
@@ -184,10 +194,15 @@ static int fsl_espi_setup_transfer(struct spi_device *spi,
 	} else {
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		cs->rx_shift = 16 - bits_per_word;
 		if (spi->mode & SPI_LSB_FIRST)
 			cs->get_tx = fsl_espi_tx_buf_lsb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -250,6 +265,7 @@ static int fsl_espi_bufs(struct spi_device *spi, struct spi_transfer *t)
 	struct fsl_espi_reg *reg_base = mpc8xxx_spi->reg_base;
 	unsigned int len = t->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 bits_per_word;
 	int ret;
 
@@ -261,6 +277,10 @@ static int fsl_espi_bufs(struct spi_device *spi, struct spi_transfer *t)
 	int ret;
 
 >>>>>>> v3.18
+=======
+	int ret;
+
+>>>>>>> v3.18
 	mpc8xxx_spi->len = t->len;
 	len = roundup(len, 4) / 4;
 
@@ -268,7 +288,11 @@ static int fsl_espi_bufs(struct spi_device *spi, struct spi_transfer *t)
 	mpc8xxx_spi->rx = t->rx_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(mpc8xxx_spi->done);
+=======
+	reinit_completion(&mpc8xxx_spi->done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&mpc8xxx_spi->done);
 >>>>>>> v3.18
@@ -331,8 +355,13 @@ static void fsl_espi_do_trans(struct spi_message *m,
 			(first->speed_hz != t->speed_hz)) {
 			espi_trans->status = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(mspi->dev, "bits_per_word/speed_hz should be"
 					" same for the same SPI transfer\n");
+=======
+			dev_err(mspi->dev,
+				"bits_per_word/speed_hz should be same for the same SPI transfer\n");
+>>>>>>> v3.18
 =======
 			dev_err(mspi->dev,
 				"bits_per_word/speed_hz should be same for the same SPI transfer\n");
@@ -398,7 +427,11 @@ static void fsl_espi_cmd_trans(struct spi_message *m,
 
 	espi_trans->tx_buf = local_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	espi_trans->rx_buf = local_buf + espi_trans->n_tx;
+=======
+	espi_trans->rx_buf = local_buf;
+>>>>>>> v3.18
 =======
 	espi_trans->rx_buf = local_buf;
 >>>>>>> v3.18
@@ -451,7 +484,11 @@ static void fsl_espi_rw_trans(struct spi_message *m,
 		espi_trans->len = trans_len + n_tx;
 		espi_trans->tx_buf = local_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		espi_trans->rx_buf = local_buf + n_tx;
+=======
+		espi_trans->rx_buf = local_buf;
+>>>>>>> v3.18
 =======
 		espi_trans->rx_buf = local_buf;
 >>>>>>> v3.18
@@ -499,7 +536,12 @@ static void fsl_espi_do_one_msg(struct spi_message *m)
 	m->actual_length = espi_trans.actual_length;
 	m->status = espi_trans.status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->complete(m->context);
+=======
+	if (m->complete)
+		m->complete(m->context);
+>>>>>>> v3.18
 =======
 	if (m->complete)
 		m->complete(m->context);
@@ -514,7 +556,11 @@ static int fsl_espi_setup(struct spi_device *spi)
 	u32 hw_mode;
 	u32 loop_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_mpc8xxx_cs *cs = spi->controller_state;
+=======
+	struct spi_mpc8xxx_cs *cs = spi_get_ctldata(spi);
+>>>>>>> v3.18
 =======
 	struct spi_mpc8xxx_cs *cs = spi_get_ctldata(spi);
 >>>>>>> v3.18
@@ -524,15 +570,21 @@ static int fsl_espi_setup(struct spi_device *spi)
 
 	if (!cs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cs = kzalloc(sizeof *cs, GFP_KERNEL);
 		if (!cs)
 			return -ENOMEM;
 		spi->controller_state = cs;
 =======
+=======
+>>>>>>> v3.18
 		cs = kzalloc(sizeof(*cs), GFP_KERNEL);
 		if (!cs)
 			return -ENOMEM;
 		spi_set_ctldata(spi, cs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -569,7 +621,10 @@ static int fsl_espi_setup(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void fsl_espi_cleanup(struct spi_device *spi)
 {
 	struct spi_mpc8xxx_cs *cs = spi_get_ctldata(spi);
@@ -578,6 +633,9 @@ static void fsl_espi_cleanup(struct spi_device *spi)
 	spi_set_ctldata(spi, NULL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void fsl_espi_cpu_irq(struct mpc8xxx_spi *mspi, u32 events)
 {
@@ -666,6 +724,7 @@ static struct spi_master * fsl_espi_probe(struct device *dev,
 		struct resource *mem, unsigned int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
 	struct spi_master *master;
 	struct mpc8xxx_spi *mpc8xxx_spi;
@@ -673,6 +732,8 @@ static struct spi_master * fsl_espi_probe(struct device *dev,
 	u32 regval;
 	int i, ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 	struct spi_master *master;
 	struct mpc8xxx_spi *mpc8xxx_spi;
@@ -681,6 +742,9 @@ static struct spi_master * fsl_espi_probe(struct device *dev,
 	const __be32 *prop;
 	u32 regval, csmode;
 	int i, len, ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	master = spi_alloc_master(dev, sizeof(struct mpc8xxx_spi));
@@ -696,7 +760,13 @@ static struct spi_master * fsl_espi_probe(struct device *dev,
 		goto err_probe;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = fsl_espi_setup;
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 16);
+	master->setup = fsl_espi_setup;
+	master->cleanup = fsl_espi_cleanup;
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 16);
 	master->setup = fsl_espi_setup;
@@ -734,9 +804,12 @@ static struct spi_master * fsl_espi_probe(struct device *dev,
 
 	/* Init eSPI CS mode register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < pdata->max_chipselect; i++)
 		mpc8xxx_spi_write_reg(&reg_base->csmode[i], CSMODE_INIT_VAL);
 =======
+=======
+>>>>>>> v3.18
 	for_each_available_child_of_node(master->dev.of_node, nc) {
 		/* get chip select */
 		prop = of_get_property(nc, "reg", &len);
@@ -763,6 +836,9 @@ static struct spi_master * fsl_espi_probe(struct device *dev,
 
 		dev_info(dev, "cs=%d, init_csmode=0x%x\n", i, csmode);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Enable SPI interface */
@@ -792,7 +868,11 @@ static int of_fsl_espi_get_chipselects(struct device *dev)
 {
 	struct device_node *np = dev->of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -818,7 +898,11 @@ static int of_fsl_espi_probe(struct platform_device *ofdev)
 	struct spi_master *master;
 	struct resource mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource irq;
+=======
+	unsigned int irq;
+>>>>>>> v3.18
 =======
 	unsigned int irq;
 >>>>>>> v3.18
@@ -837,8 +921,13 @@ static int of_fsl_espi_probe(struct platform_device *ofdev)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = of_irq_to_resource(np, 0, &irq);
 	if (!ret) {
+=======
+	irq = irq_of_parse_and_map(np, 0);
+	if (!irq) {
+>>>>>>> v3.18
 =======
 	irq = irq_of_parse_and_map(np, 0);
 	if (!irq) {
@@ -848,7 +937,11 @@ static int of_fsl_espi_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = fsl_espi_probe(dev, &mem, irq.start);
+=======
+	master = fsl_espi_probe(dev, &mem, irq);
+>>>>>>> v3.18
 =======
 	master = fsl_espi_probe(dev, &mem, irq);
 >>>>>>> v3.18
@@ -869,7 +962,10 @@ static int of_fsl_espi_remove(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int of_fsl_espi_suspend(struct device *dev)
 {
@@ -930,6 +1026,9 @@ static const struct dev_pm_ops espi_pm = {
 	SET_SYSTEM_SLEEP_PM_OPS(of_fsl_espi_suspend, of_fsl_espi_resume)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct of_device_id of_fsl_espi_match[] = {
 	{ .compatible = "fsl,mpc8536-espi" },
@@ -943,6 +1042,10 @@ static struct platform_driver fsl_espi_driver = {
 		.owner = THIS_MODULE,
 		.of_match_table = of_fsl_espi_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm = &espi_pm,
+>>>>>>> v3.18
 =======
 		.pm = &espi_pm,
 >>>>>>> v3.18

@@ -75,8 +75,11 @@ static char    *pas_model_names[] = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void     mix_write(unsigned char data, int ioaddr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned char pas_read(int ioaddr)

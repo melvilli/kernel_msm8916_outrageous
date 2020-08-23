@@ -15,6 +15,7 @@
 #include <linux/rculist.h>
 #include <linux/cgroupstats.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/prio_heap.h>
 #include <linux/rwsem.h>
 #include <linux/idr.h>
@@ -31,6 +32,8 @@ struct cgroup;
 struct css_id;
 struct eventfd_ctx;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/rwsem.h>
 #include <linux/idr.h>
 #include <linux/workqueue.h>
@@ -45,12 +48,16 @@ struct eventfd_ctx;
 struct cgroup_root;
 struct cgroup_subsys;
 struct cgroup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int cgroup_init_early(void);
 extern int cgroup_init(void);
 extern void cgroup_fork(struct task_struct *p);
 extern void cgroup_post_fork(struct task_struct *p);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void cgroup_exit(struct task_struct *p, int run_callbacks);
 extern int cgroupstats_build(struct cgroupstats *stats,
@@ -78,6 +85,8 @@ enum cgroup_subsys_id {
 #include <linux/cgroup_subsys.h>
 #undef IS_SUBSYS_ENABLED
 =======
+=======
+>>>>>>> v3.18
 extern void cgroup_exit(struct task_struct *p);
 extern int cgroupstats_build(struct cgroupstats *stats,
 				struct dentry *dentry);
@@ -89,11 +98,15 @@ extern int proc_cgroup_show(struct seq_file *m, struct pid_namespace *ns,
 #define SUBSYS(_x) _x ## _cgrp_id,
 enum cgroup_subsys_id {
 #include <linux/cgroup_subsys.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CGROUP_SUBSYS_COUNT,
 };
 #undef SUBSYS
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Per-subsystem/per-cgroup state maintained by the system. */
 struct cgroup_subsys_state {
@@ -119,6 +132,8 @@ struct cgroup_subsys_state {
 	/* Used to put @cgroup->dentry on the last css_put() */
 	struct work_struct dput_work;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Per-subsystem/per-cgroup state maintained by the system.  This is the
  * fundamental structural building block that controllers deal with.
@@ -162,11 +177,15 @@ struct cgroup_subsys_state {
 	/* percpu_ref killing and RCU release */
 	struct rcu_head rcu_head;
 	struct work_struct destroy_work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* bits in struct cgroup_subsys_state flags field */
 enum {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CSS_ROOT	= (1 << 0), /* this CSS is the root of the subsystem */
 	CSS_ONLINE	= (1 << 1), /* between ->css_online() and ->css_offline() */
@@ -217,6 +236,8 @@ static inline void css_put(struct cgroup_subsys_state *css)
 	if (!(css->flags & CSS_ROOT))
 		__css_put(css);
 =======
+=======
+>>>>>>> v3.18
 	CSS_NO_REF	= (1 << 0), /* no reference counting for this css */
 	CSS_ONLINE	= (1 << 1), /* between ->css_online() and ->css_offline() */
 	CSS_RELEASED	= (1 << 2), /* refcnt reached zero, released */
@@ -279,11 +300,15 @@ static inline void css_put(struct cgroup_subsys_state *css)
 {
 	if (!(css->flags & CSS_NO_REF))
 		percpu_ref_put(&css->refcnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* bits in struct cgroup flags field */
 enum {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Control Group is dead */
 	CGRP_REMOVED,
@@ -294,6 +319,8 @@ enum {
 	CGRP_RELEASABLE,
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Control Group requires release notifications to userspace */
 	CGRP_NOTIFY_ON_RELEASE,
 	/*
@@ -302,6 +329,7 @@ enum {
 	 * specified at mount time and thus is implemented here.
 	 */
 	CGRP_CPUSET_CLONE_CHILDREN,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* see the comment above CGRP_ROOT_SANE_BEHAVIOR for details */
 	CGRP_SANE_BEHAVIOR,
@@ -368,6 +396,8 @@ struct cgroup {
 	 */
 	struct list_head release_list;
 =======
+=======
+>>>>>>> v3.18
 };
 
 struct cgroup {
@@ -427,6 +457,9 @@ struct cgroup {
 	 * for the given subsystem.
 	 */
 	struct list_head e_csets[CGROUP_SUBSYS_COUNT];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -436,6 +469,7 @@ struct cgroup {
 	struct list_head pidlists;
 	struct mutex pidlist_mutex;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* For RCU-protected deletion */
 	struct rcu_head rcu_head;
@@ -448,16 +482,22 @@ struct cgroup {
 	/* directory xattrs */
 	struct simple_xattrs xattrs;
 =======
+=======
+>>>>>>> v3.18
 	/* used to wait for offlining of csses */
 	wait_queue_head_t offline_waitq;
 
 	/* used to schedule release agent */
 	struct work_struct release_agent_work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define MAX_CGROUP_ROOT_NAMELEN 64
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* cgroupfs_root->flags */
 enum {
@@ -500,11 +540,17 @@ enum {
 enum {
 	CGRP_ROOT_SANE_BEHAVIOR	= (1 << 0), /* __DEVEL__sane_behavior specified */
 >>>>>>> v3.18
+=======
+/* cgroup_root->flags */
+enum {
+	CGRP_ROOT_SANE_BEHAVIOR	= (1 << 0), /* __DEVEL__sane_behavior specified */
+>>>>>>> v3.18
 	CGRP_ROOT_NOPREFIX	= (1 << 1), /* mounted subsystems have no named prefix */
 	CGRP_ROOT_XATTR		= (1 << 2), /* supports extended attributes */
 };
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * A cgroupfs_root represents the root of a cgroup hierarchy, and may be
  * associated with a superblock to form an active hierarchy.  This is
@@ -519,6 +565,8 @@ struct cgroupfs_root {
 	 */
 	unsigned long subsys_mask;
 =======
+=======
+>>>>>>> v3.18
  * A cgroup_root represents the root of a cgroup hierarchy, and may be
  * associated with a kernfs_root to form an active hierarchy.  This is
  * internal to cgroup core.  Don't access directly from controllers.
@@ -528,11 +576,15 @@ struct cgroup_root {
 
 	/* The bitmask of subsystems attached to this hierarchy */
 	unsigned int subsys_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Unique id for this hierarchy. */
 	int hierarchy_id;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* The bitmask of subsystems currently attached to this hierarchy */
 	unsigned long actual_subsys_mask;
@@ -546,16 +598,22 @@ struct cgroup_root {
 	/* Tracks how many cgroups are currently defined in hierarchy.*/
 	int number_of_cgroups;
 =======
+=======
+>>>>>>> v3.18
 	/* The root cgroup.  Root is destroyed on its release. */
 	struct cgroup cgrp;
 
 	/* Number of cgroups in the hierarchy, used only for /proc/cgroups */
 	atomic_t nr_cgrps;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* A list running through the active hierarchies */
 	struct list_head root_list;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* All cgroups on this root, cgroup_mutex protected */
 	struct list_head allcg_list;
@@ -566,11 +624,16 @@ struct cgroup_root {
 	/* IDs for cgroups in this hierarchy */
 	struct ida cgroup_ida;
 =======
+=======
+>>>>>>> v3.18
 	/* Hierarchy-specific flags */
 	unsigned int flags;
 
 	/* IDs for cgroups in this hierarchy */
 	struct idr cgroup_idr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* The path to use for release notifications. */
@@ -600,6 +663,7 @@ struct css_set {
 	struct hlist_node hlist;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * List running through all tasks using this cgroup
 	 * group. Protected by css_set_lock
@@ -634,6 +698,8 @@ struct cgroup_map_cb {
 	int (*fill)(struct cgroup_map_cb *cb, const char *key, u64 value);
 	void *state;
 =======
+=======
+>>>>>>> v3.18
 	 * Lists running through all tasks using this cgroup group.
 	 * mg_tasks lists tasks which belong to this cset but are in the
 	 * process of being migrated out or in.  Protected by
@@ -687,6 +753,9 @@ struct cgroup_map_cb {
 
 	/* For RCU-protected deletion */
 	struct rcu_head rcu_head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -700,10 +769,13 @@ struct cgroup_map_cb {
 
 /* cftype->flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CFTYPE_ONLY_ON_ROOT	(1U << 0)	/* only create on root cg */
 #define CFTYPE_NOT_ON_ROOT	(1U << 1)	/* don't create on root cg */
 #define CFTYPE_INSANE		(1U << 2)	/* don't create if sane_behavior */
 =======
+=======
+>>>>>>> v3.18
 enum {
 	CFTYPE_ONLY_ON_ROOT	= (1 << 0),	/* only create on root cgrp */
 	CFTYPE_NOT_ON_ROOT	= (1 << 1),	/* don't create on root cgrp */
@@ -713,6 +785,9 @@ enum {
 	__CFTYPE_ONLY_ON_DFL	= (1 << 16),	/* only on default hierarchy */
 	__CFTYPE_NOT_ON_DFL	= (1 << 17),	/* not on default hierarchy */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MAX_CFTYPE_NAME		64
@@ -733,8 +808,13 @@ struct cftype {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * If non-zero, defines the maximum length of string that can
 	 * be passed to write_string; defaults to 64
+=======
+	 * The maximum length of string, excluding trailing nul, that can
+	 * be passed to write.  If < PAGE_SIZE-1, PAGE_SIZE-1 is assumed.
+>>>>>>> v3.18
 =======
 	 * The maximum length of string, excluding trailing nul, that can
 	 * be passed to write.  If < PAGE_SIZE-1, PAGE_SIZE-1 is assumed.
@@ -746,11 +826,14 @@ struct cftype {
 	unsigned int flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*open)(struct inode *inode, struct file *file);
 	ssize_t (*read)(struct cgroup *cgrp, struct cftype *cft,
 			struct file *file,
 			char __user *buf, size_t nbytes, loff_t *ppos);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Fields used for internal bookkeeping.  Initialized automatically
 	 * during registration.
@@ -759,11 +842,15 @@ struct cftype {
 	struct list_head node;		/* anchored at ss->cfts */
 	struct kernfs_ops *kf_ops;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * read_u64() is a shortcut for the common case of returning a
 	 * single integer. Use it in place of read()
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u64 (*read_u64)(struct cgroup *cgrp, struct cftype *cft);
 	/*
@@ -789,6 +876,8 @@ struct cftype {
 			 struct file *file,
 			 const char __user *buf, size_t nbytes, loff_t *ppos);
 =======
+=======
+>>>>>>> v3.18
 	u64 (*read_u64)(struct cgroup_subsys_state *css, struct cftype *cft);
 	/*
 	 * read_s64() is a signed version of read_u64()
@@ -802,6 +891,9 @@ struct cftype {
 	void *(*seq_start)(struct seq_file *sf, loff_t *ppos);
 	void *(*seq_next)(struct seq_file *sf, void *v, loff_t *ppos);
 	void (*seq_stop)(struct seq_file *sf, void *v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -809,6 +901,7 @@ struct cftype {
 	 * a single integer (as parsed by simple_strtoull) from
 	 * userspace. Use in place of write(); return 0 or error.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*write_u64)(struct cgroup *cgrp, struct cftype *cft, u64 val);
 	/*
@@ -895,6 +988,8 @@ int cgroup_path(const struct cgroup *cgrp, char *buf, int buflen);
 
 int cgroup_task_count(const struct cgroup *cgrp);
 =======
+=======
+>>>>>>> v3.18
 	int (*write_u64)(struct cgroup_subsys_state *css, struct cftype *cft,
 			 u64 val);
 	/*
@@ -1042,6 +1137,9 @@ int cgroup_add_legacy_cftypes(struct cgroup_subsys *ss, struct cftype *cfts);
 int cgroup_rm_cftypes(struct cftype *cfts);
 
 bool cgroup_is_descendant(struct cgroup *cgrp, struct cgroup *ancestor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1052,14 +1150,18 @@ struct cgroup_taskset;
 struct task_struct *cgroup_taskset_first(struct cgroup_taskset *tset);
 struct task_struct *cgroup_taskset_next(struct cgroup_taskset *tset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cgroup *cgroup_taskset_cur_cgroup(struct cgroup_taskset *tset);
 int cgroup_taskset_size(struct cgroup_taskset *tset);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 /**
  * cgroup_taskset_for_each - iterate cgroup_taskset
  * @task: the loop cursor
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @skip_cgrp: skip if task's cgroup matches this, %NULL to iterate through all
  * @tset: taskset to iterate
@@ -1070,11 +1172,16 @@ int cgroup_taskset_size(struct cgroup_taskset *tset);
 		if (!(skip_cgrp) ||					\
 		    cgroup_taskset_cur_cgroup((tset)) != (skip_cgrp))
 =======
+=======
+>>>>>>> v3.18
  * @tset: taskset to iterate
  */
 #define cgroup_taskset_for_each(task, tset)				\
 	for ((task) = cgroup_taskset_first((tset)); (task);		\
 	     (task) = cgroup_taskset_next((tset)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1083,6 +1190,7 @@ int cgroup_taskset_size(struct cgroup_taskset *tset);
  */
 
 struct cgroup_subsys {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cgroup_subsys_state *(*css_alloc)(struct cgroup *cgrp);
 	int (*css_online)(struct cgroup *cgrp);
@@ -1107,6 +1215,8 @@ struct cgroup_subsys {
 	 */
 	bool use_id;
 =======
+=======
+>>>>>>> v3.18
 	struct cgroup_subsys_state *(*css_alloc)(struct cgroup_subsys_state *parent_css);
 	int (*css_online)(struct cgroup_subsys_state *css);
 	void (*css_offline)(struct cgroup_subsys_state *css);
@@ -1127,6 +1237,9 @@ struct cgroup_subsys {
 
 	int disabled;
 	int early_init;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1144,6 +1257,7 @@ struct cgroup_subsys {
 	bool broken_hierarchy;
 	bool warned_broken_hierarchy;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MAX_CGROUP_TYPE_NAMELEN 32
 	const char *name;
@@ -1182,6 +1296,8 @@ static inline struct cgroup_subsys_state *cgroup_subsys_state(
 }
 
 =======
+=======
+>>>>>>> v3.18
 	/* the following two fields are initialized automtically during boot */
 	int id;
 #define MAX_CGROUP_TYPE_NAMELEN 32
@@ -1220,6 +1336,9 @@ static inline struct cgroup_subsys_state *cgroup_subsys_state(
 #include <linux/cgroup_subsys.h>
 #undef SUBSYS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * task_css_set_check - obtain a task's css_set with extra access conditions
@@ -1237,17 +1356,23 @@ static inline struct cgroup_subsys_state *cgroup_subsys_state(
 #ifdef CONFIG_PROVE_RCU
 extern struct mutex cgroup_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define task_css_set_check(task, __c)					\
 	rcu_dereference_check((task)->cgroups,				\
 		lockdep_is_held(&(task)->alloc_lock) ||			\
 		lockdep_is_held(&cgroup_mutex) || (__c))
 =======
+=======
+>>>>>>> v3.18
 extern struct rw_semaphore css_set_rwsem;
 #define task_css_set_check(task, __c)					\
 	rcu_dereference_check((task)->cgroups,				\
 		lockdep_is_held(&cgroup_mutex) ||			\
 		lockdep_is_held(&css_set_rwsem) ||			\
 		((task)->flags & PF_EXITING) || (__c))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define task_css_set_check(task, __c)					\
@@ -1256,7 +1381,11 @@ extern struct rw_semaphore css_set_rwsem;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * task_subsys_state_check - obtain css for (task, subsys) w/ extra access conds
+=======
+ * task_css_check - obtain css for (task, subsys) w/ extra access conds
+>>>>>>> v3.18
 =======
  * task_css_check - obtain css for (task, subsys) w/ extra access conds
 >>>>>>> v3.18
@@ -1268,7 +1397,11 @@ extern struct rw_semaphore css_set_rwsem;
  * synchronization rules are the same as task_css_set_check().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define task_subsys_state_check(task, subsys_id, __c)			\
+=======
+#define task_css_check(task, subsys_id, __c)				\
+>>>>>>> v3.18
 =======
 #define task_css_check(task, subsys_id, __c)				\
 >>>>>>> v3.18
@@ -1286,6 +1419,7 @@ static inline struct css_set *task_css_set(struct task_struct *task)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * task_subsys_state - obtain css for (task, subsys)
  * @task: the target task
@@ -1361,6 +1495,8 @@ struct cgroup *cgroup_rightmost_descendant(struct cgroup *pos);
  *		Lock @pos;
  *		Verify @pos is alive and inherit state from @pos->parent;
 =======
+=======
+>>>>>>> v3.18
  * task_css - obtain css for (task, subsys)
  * @task: the target task
  * @subsys_id: the target subsystem ID
@@ -1460,6 +1596,9 @@ css_rightmost_descendant(struct cgroup_subsys_state *pos);
  *			Update @css's state;
  *		else
  *			Verify @pos is alive and inherit state from its parent;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *		Unlock @pos;
  *	}
@@ -1472,8 +1611,12 @@ css_rightmost_descendant(struct cgroup_subsys_state *pos);
  * same @pos are atomic to each other, multiple updates racing each other
  * still result in the correct state.  It's guaranateed that at least one
 <<<<<<< HEAD
+<<<<<<< HEAD
  * inheritance happens for any cgroup after the latest update to its
  * parent.
+=======
+ * inheritance happens for any css after the latest update to its parent.
+>>>>>>> v3.18
 =======
  * inheritance happens for any css after the latest update to its parent.
 >>>>>>> v3.18
@@ -1484,6 +1627,7 @@ css_rightmost_descendant(struct cgroup_subsys_state *pos);
  * Alternatively, a subsystem may choose to use a single global lock to
  * synchronize ->css_online() and ->css_offline() against tree-walking
  * operations.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 #define cgroup_for_each_descendant_pre(pos, cgroup)			\
@@ -1578,6 +1722,8 @@ int subsys_cgroup_allow_attach(struct cgroup *cgrp,
 			       struct cgroup_taskset *tset);
 
 =======
+=======
+>>>>>>> v3.18
  *
  * It is allowed to temporarily drop RCU read lock during iteration.  The
  * caller is responsible for ensuring that @pos remains accessible until
@@ -1638,6 +1784,9 @@ int cgroup_transfer_tasks(struct cgroup *to, struct cgroup *from);
 
 struct cgroup_subsys_state *css_tryget_online_from_dir(struct dentry *dentry,
 						       struct cgroup_subsys *ss);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else /* !CONFIG_CGROUPS */
@@ -1647,10 +1796,15 @@ static inline int cgroup_init(void) { return 0; }
 static inline void cgroup_fork(struct task_struct *p) {}
 static inline void cgroup_post_fork(struct task_struct *p) {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void cgroup_exit(struct task_struct *p, int callbacks) {}
 
 static inline void cgroup_lock(void) {}
 static inline void cgroup_unlock(void) {}
+=======
+static inline void cgroup_exit(struct task_struct *p) {}
+
+>>>>>>> v3.18
 =======
 static inline void cgroup_exit(struct task_struct *p) {}
 
@@ -1669,11 +1823,14 @@ static inline int cgroup_attach_task_all(struct task_struct *from,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int subsys_cgroup_allow_attach(struct cgroup *cgrp,
 					     struct cgroup_taskset *tset)
 {
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* !CONFIG_CGROUPS */

@@ -17,8 +17,11 @@
 #define __ASM_MACH_JZ4740_DMA_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct jz4740_dma_chan;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum jz4740_dma_request_type {
@@ -28,8 +31,11 @@ enum jz4740_dma_request_type {
 	JZ4740_DMA_TYPE_SPI_TRANSMIT	= 22,
 	JZ4740_DMA_TYPE_SPI_RECEIVE	= 23,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	JZ4740_DMA_TYPE_AIC_TRANSMIT	= 24,
 	JZ4740_DMA_TYPE_AIC_RECEIVE	= 25,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	JZ4740_DMA_TYPE_MMC_TRANSMIT	= 26,
@@ -39,6 +45,7 @@ enum jz4740_dma_request_type {
 	JZ4740_DMA_TYPE_SLCD		= 30,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum jz4740_dma_width {
 	JZ4740_DMA_WIDTH_32BIT	= 0,
@@ -94,6 +101,8 @@ uint32_t jz4740_dma_get_residue(const struct jz4740_dma_chan *dma);
 void jz4740_dma_set_complete_cb(struct jz4740_dma_chan *dma,
 	jz4740_dma_complete_callback_t cb);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* __ASM_JZ4740_DMA_H__ */

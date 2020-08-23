@@ -324,7 +324,12 @@ void flush_dcache_page(struct page *page)
 
 		flush_tlb_page(mpnt, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (old_addr == 0 || (old_addr & (SHMLBA - 1)) != (addr & (SHMLBA - 1))) {
+=======
+		if (old_addr == 0 || (old_addr & (SHM_COLOUR - 1))
+				      != (addr & (SHM_COLOUR - 1))) {
+>>>>>>> v3.18
 =======
 		if (old_addr == 0 || (old_addr & (SHM_COLOUR - 1))
 				      != (addr & (SHM_COLOUR - 1))) {
@@ -587,6 +592,7 @@ flush_cache_page(struct vm_area_struct *vma, unsigned long vmaddr, unsigned long
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PARISC_TMPALIAS
 
@@ -651,5 +657,7 @@ void copy_user_highpage(struct page *to, struct page *from,
 }
 
 #endif /* CONFIG_PARISC_TMPALIAS */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

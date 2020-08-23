@@ -34,7 +34,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -185,6 +188,7 @@ static int max11801_ts_probe(struct i2c_client *client,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = kzalloc(sizeof(struct max11801_data), GFP_KERNEL);
 	input_dev = input_allocate_device();
 	if (!data || !input_dev) {
@@ -192,11 +196,16 @@ static int max11801_ts_probe(struct i2c_client *client,
 		error = -ENOMEM;
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	input_dev = devm_input_allocate_device(&client->dev);
 	if (!data || !input_dev) {
 		dev_err(&client->dev, "Failed to allocate memory\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -217,6 +226,7 @@ static int max11801_ts_probe(struct i2c_client *client,
 	max11801_ts_phy_init(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_threaded_irq(client->irq, NULL, max11801_ts_interrupt,
 				     IRQF_TRIGGER_LOW | IRQF_ONESHOT,
 				     "max11801_ts", data);
@@ -224,6 +234,8 @@ static int max11801_ts_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Failed to register interrupt\n");
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_threaded_irq(&client->dev, client->irq, NULL,
 					  max11801_ts_interrupt,
 					  IRQF_TRIGGER_LOW | IRQF_ONESHOT,
@@ -231,11 +243,15 @@ static int max11801_ts_probe(struct i2c_client *client,
 	if (error) {
 		dev_err(&client->dev, "Failed to register interrupt\n");
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	error = input_register_device(data->input_dev);
 	if (error)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free_irq;
 
@@ -260,10 +276,15 @@ static int max11801_ts_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return error;
 
 	i2c_set_clientdata(client, data);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -281,7 +302,10 @@ static struct i2c_driver max11801_ts_driver = {
 	.id_table	= max11801_ts_id,
 	.probe		= max11801_ts_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max11801_ts_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

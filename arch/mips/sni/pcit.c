@@ -129,6 +129,7 @@ static struct resource pcit_io_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource sni_mem_resource = {
 	.start	= 0x18000000UL,
 	.end	= 0x1fbfffffUL,
@@ -136,6 +137,8 @@ static struct resource sni_mem_resource = {
 	.flags	= IORESOURCE_MEM
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __init sni_pcit_resource_init(void)
@@ -151,7 +154,10 @@ static void __init sni_pcit_resource_init(void)
 extern struct pci_ops sni_pcit_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 static struct resource sni_mem_resource = {
 	.start	= 0x18000000UL,
@@ -160,6 +166,9 @@ static struct resource sni_mem_resource = {
 	.flags	= IORESOURCE_MEM
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pci_controller sni_pcit_controller = {
 	.pci_ops	= &sni_pcit_ops,
@@ -170,6 +179,10 @@ static struct pci_controller sni_pcit_controller = {
 	.io_map_base	= SNI_PORT_BASE
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PCI */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PCI */
 >>>>>>> v3.18

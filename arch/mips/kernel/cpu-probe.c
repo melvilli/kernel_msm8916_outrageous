@@ -21,6 +21,7 @@
 #include <asm/bugs.h>
 #include <asm/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/fpu.h>
 #include <asm/mipsregs.h>
 #include <asm/watch.h>
@@ -30,6 +31,8 @@
 
 static int __cpuinitdata mips_fpu_disabled;
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cpu-type.h>
 #include <asm/fpu.h>
 #include <asm/mipsregs.h>
@@ -42,6 +45,9 @@ static int __cpuinitdata mips_fpu_disabled;
 #include <asm/uaccess.h>
 
 static int mips_fpu_disabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init fpu_disable(char *s)
@@ -55,7 +61,11 @@ static int __init fpu_disable(char *s)
 __setup("nofpu", fpu_disable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinitdata mips_dsp_disabled;
+=======
+int mips_dsp_disabled;
+>>>>>>> v3.18
 =======
 int mips_dsp_disabled;
 >>>>>>> v3.18
@@ -71,7 +81,10 @@ static int __init dsp_disable(char *s)
 __setup("nodsp", dsp_disable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mips_htw_disabled;
 
 static int __init htw_disable(char *s)
@@ -86,11 +99,15 @@ static int __init htw_disable(char *s)
 
 __setup("nohtw", htw_disable);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void check_errata(void)
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (c->cputype) {
 	case CPU_34K:
@@ -98,11 +115,16 @@ static inline void check_errata(void)
 		 * Erratum "RPS May Cause Incorrect Instruction Execution"
 		 * This code only handles VPE0, any SMP/SMTC/RTOS code
 =======
+=======
+>>>>>>> v3.18
 	switch (current_cpu_type()) {
 	case CPU_34K:
 		/*
 		 * Erratum "RPS May Cause Incorrect Instruction Execution"
 		 * This code only handles VPE0, any SMP/RTOS code
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * making use of VPE1 will be responsable for that VPE.
 		 */
@@ -156,7 +178,11 @@ static inline unsigned long cpu_get_fpu_id(void)
 
 	tmp = read_c0_status();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__enable_fpu();
+=======
+	__enable_fpu(FPU_AS_IS);
+>>>>>>> v3.18
 =======
 	__enable_fpu(FPU_AS_IS);
 >>>>>>> v3.18
@@ -171,8 +197,11 @@ static inline unsigned long cpu_get_fpu_id(void)
 static inline int __cpu_has_fpu(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((cpu_get_fpu_id() & 0xff00) != FPIR_IMP_NONE);
 =======
+=======
+>>>>>>> v3.18
 	return ((cpu_get_fpu_id() & FPIR_IMP_MASK) != FPIR_IMP_NONE);
 }
 
@@ -187,6 +216,9 @@ static inline unsigned long cpu_get_msa_id(void)
 	disable_msa();
 	write_c0_status(status);
 	return msa_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -200,7 +232,11 @@ static inline void cpu_probe_vmbits(struct cpuinfo_mips *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit set_isa(struct cpuinfo_mips *c, unsigned int isa)
+=======
+static void set_isa(struct cpuinfo_mips *c, unsigned int isa)
+>>>>>>> v3.18
 =======
 static void set_isa(struct cpuinfo_mips *c, unsigned int isa)
 >>>>>>> v3.18
@@ -216,8 +252,12 @@ static void set_isa(struct cpuinfo_mips *c, unsigned int isa)
 		c->isa_level |= MIPS_CPU_ISA_IV;
 	case MIPS_CPU_ISA_III:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c->isa_level |= MIPS_CPU_ISA_I | MIPS_CPU_ISA_II |
 				MIPS_CPU_ISA_III;
+=======
+		c->isa_level |= MIPS_CPU_ISA_II | MIPS_CPU_ISA_III;
+>>>>>>> v3.18
 =======
 		c->isa_level |= MIPS_CPU_ISA_II | MIPS_CPU_ISA_III;
 >>>>>>> v3.18
@@ -230,8 +270,11 @@ static void set_isa(struct cpuinfo_mips *c, unsigned int isa)
 	case MIPS_CPU_ISA_II:
 		c->isa_level |= MIPS_CPU_ISA_II;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case MIPS_CPU_ISA_I:
 		c->isa_level |= MIPS_CPU_ISA_I;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -239,10 +282,13 @@ static void set_isa(struct cpuinfo_mips *c, unsigned int isa)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char unknown_isa[] __cpuinitdata = KERN_ERR \
 	"Unsupported ISA type, c0.config0: %d.";
 
 =======
+=======
+>>>>>>> v3.18
 static char unknown_isa[] = KERN_ERR \
 	"Unsupported ISA type, c0.config0: %d.";
 
@@ -298,6 +344,9 @@ static void set_ftlb_enable(struct cpuinfo_mips *c, int enable)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int decode_config0(struct cpuinfo_mips *c)
 {
@@ -307,9 +356,12 @@ static inline unsigned int decode_config0(struct cpuinfo_mips *c)
 	config0 = read_c0_config();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((config0 & MIPS_CONF_MT) >> 7) == 1)
 		c->options |= MIPS_CPU_TLB;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Look for Standard TLB or Dual VTLB and FTLB
 	 */
@@ -317,6 +369,9 @@ static inline unsigned int decode_config0(struct cpuinfo_mips *c)
 	    (((config0 & MIPS_CONF_MT) >> 7) == 4))
 		c->options |= MIPS_CPU_TLB;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	isa = (config0 & MIPS_CONF_AT) >> 13;
 	switch (isa) {
@@ -373,14 +428,20 @@ static inline unsigned int decode_config1(struct cpuinfo_mips *c)
 		c->options |= MIPS_CPU_32FPR;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_tlb)
 		c->tlbsize = ((config1 & MIPS_CONF1_TLBS) >> 25) + 1;
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_has_tlb) {
 		c->tlbsize = ((config1 & MIPS_CONF1_TLBS) >> 25) + 1;
 		c->tlbsizevtlb = c->tlbsize;
 		c->tlbsizeftlbsets = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return config1 & MIPS_CONF_M;
@@ -425,12 +486,15 @@ static inline unsigned int decode_config3(struct cpuinfo_mips *c)
 	if (config3 & MIPS_CONF3_ISA)
 		c->options |= MIPS_CPU_MICROMIPS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_MICROMIPS
 	write_c0_config3(read_c0_config3() | MIPS_CONF3_ISA_OE);
 #endif
 	if (config3 & MIPS_CONF3_VZ)
 		c->ases |= MIPS_ASE_VZ;
 =======
+=======
+>>>>>>> v3.18
 	if (config3 & MIPS_CONF3_VZ)
 		c->ases |= MIPS_ASE_VZ;
 	if (config3 & MIPS_CONF3_SC)
@@ -440,6 +504,9 @@ static inline unsigned int decode_config3(struct cpuinfo_mips *c)
 	/* Only tested on 32-bit cores */
 	if ((config3 & MIPS_CONF3_PW) && config_enabled(CONFIG_32BIT))
 		c->options |= MIPS_CPU_HTW;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return config3 & MIPS_CONF_M;
@@ -449,6 +516,7 @@ static inline unsigned int decode_config4(struct cpuinfo_mips *c)
 {
 	unsigned int config4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	config4 = read_c0_config4();
 
@@ -456,6 +524,8 @@ static inline unsigned int decode_config4(struct cpuinfo_mips *c)
 	    && cpu_has_tlb)
 		c->tlbsize += (config4 & MIPS_CONF4_MMUSIZEEXT) * 0x40;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int newcf4;
 	unsigned int mmuextdef;
 	unsigned int ftlb_page = MIPS_CONF4_FTLBPAGESIZE;
@@ -501,6 +571,9 @@ static inline unsigned int decode_config4(struct cpuinfo_mips *c)
 			break;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	c->kscratch_mask = (config4 >> 16) & 0xff;
@@ -509,8 +582,11 @@ static inline unsigned int decode_config4(struct cpuinfo_mips *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit decode_configs(struct cpuinfo_mips *c)
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int decode_config5(struct cpuinfo_mips *c)
 {
 	unsigned int config5;
@@ -528,6 +604,9 @@ static inline unsigned int decode_config5(struct cpuinfo_mips *c)
 }
 
 static void decode_configs(struct cpuinfo_mips *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ok;
@@ -539,6 +618,12 @@ static void decode_configs(struct cpuinfo_mips *c)
 	c->scache.flags = MIPS_CACHE_NOT_PRESENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Enable FTLB if present */
+	set_ftlb_enable(c, 1);
+
+>>>>>>> v3.18
 =======
 	/* Enable FTLB if present */
 	set_ftlb_enable(c, 1);
@@ -555,12 +640,15 @@ static void decode_configs(struct cpuinfo_mips *c)
 	if (ok)
 		ok = decode_config4(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mips_probe_watch_registers(c);
 
 	if (cpu_has_mips_r2)
 		c->core = read_c0_ebase() & 0x3ff;
 =======
+=======
+>>>>>>> v3.18
 	if (ok)
 		ok = decode_config5(c);
 
@@ -582,6 +670,9 @@ static void decode_configs(struct cpuinfo_mips *c)
 			c->core >>= fls(core_nvpes()) - 1;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -591,16 +682,22 @@ static void decode_configs(struct cpuinfo_mips *c)
 static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
 	case PRID_IMP_R2000:
 		c->cputype = CPU_R2000;
 		__cpu_name[cpu] = "R2000";
 		set_isa(c, MIPS_CPU_ISA_I);
 =======
+=======
+>>>>>>> v3.18
 	switch (c->processor_id & PRID_IMP_MASK) {
 	case PRID_IMP_R2000:
 		c->cputype = CPU_R2000;
 		__cpu_name[cpu] = "R2000";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		c->options = MIPS_CPU_TLB | MIPS_CPU_3K_CACHE |
 			     MIPS_CPU_NOFPUEX;
@@ -610,7 +707,11 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 		break;
 	case PRID_IMP_R3000:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((c->processor_id & 0xff) == PRID_REV_R3000A) {
+=======
+		if ((c->processor_id & PRID_REV_MASK) == PRID_REV_R3000A) {
+>>>>>>> v3.18
 =======
 		if ((c->processor_id & PRID_REV_MASK) == PRID_REV_R3000A) {
 >>>>>>> v3.18
@@ -626,7 +727,10 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 			__cpu_name[cpu] = "R3000";
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_isa(c, MIPS_CPU_ISA_I);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		c->options = MIPS_CPU_TLB | MIPS_CPU_3K_CACHE |
@@ -638,7 +742,12 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_R4000:
 		if (read_c0_config() & CONF_SC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((c->processor_id & 0xff) >= PRID_REV_R4400) {
+=======
+			if ((c->processor_id & PRID_REV_MASK) >=
+			    PRID_REV_R4400) {
+>>>>>>> v3.18
 =======
 			if ((c->processor_id & PRID_REV_MASK) >=
 			    PRID_REV_R4400) {
@@ -651,6 +760,7 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((c->processor_id & 0xff) >= PRID_REV_R4400) {
 				c->cputype = CPU_R4400SC;
 				__cpu_name[cpu] = "R4400SC";
@@ -658,6 +768,8 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 				c->cputype = CPU_R4000SC;
 				__cpu_name[cpu] = "R4000SC";
 =======
+=======
+>>>>>>> v3.18
 			int cca = read_c0_config() & CONF_CM_CMASK;
 			int mc;
 
@@ -685,6 +797,9 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 			} else {
 				c->cputype = mc ? CPU_R4000MC : CPU_R4000SC;
 				__cpu_name[cpu] = mc ? "R4000MC" : "R4000SC";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -767,7 +882,10 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 	#endif
 	case PRID_IMP_TX39:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_isa(c, MIPS_CPU_ISA_I);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		c->options = MIPS_CPU_TLB | MIPS_CPU_TX39_CACHE;
@@ -778,7 +896,11 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 			c->tlbsize = 64;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			switch (c->processor_id & 0xff) {
+=======
+			switch (c->processor_id & PRID_REV_MASK) {
+>>>>>>> v3.18
 =======
 			switch (c->processor_id & PRID_REV_MASK) {
 >>>>>>> v3.18
@@ -877,6 +999,7 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 		c->tlbsize = (read_c0_info() & (1 << 29)) ? 64 : 48;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PRID_IMP_RM9000:
 		c->cputype = CPU_RM9000;
 		__cpu_name[cpu] = "RM9000";
@@ -892,6 +1015,8 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 		 */
 		c->tlbsize = (read_c0_info() & (1 << 29)) ? 64 : 48;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case PRID_IMP_R8000:
@@ -934,6 +1059,7 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 		c->tlbsize = 64;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PRID_IMP_LOONGSON2:
 		c->cputype = CPU_LOONGSON2;
 		__cpu_name[cpu] = "ICT Loongson-2";
@@ -949,6 +1075,8 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 
 		set_isa(c, MIPS_CPU_ISA_III);
 =======
+=======
+>>>>>>> v3.18
 	case PRID_IMP_LOONGSON_64:  /* Loongson-2/3 */
 		switch (c->processor_id & PRID_REV_MASK) {
 		case PRID_REV_LOONGSON2E:
@@ -978,14 +1106,23 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		c->options = R4K_OPTS |
 			     MIPS_CPU_FPU | MIPS_CPU_LLSC |
 			     MIPS_CPU_32FPR;
 		c->tlbsize = 64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case PRID_IMP_LOONGSON1:
+=======
+		c->writecombine = _CACHE_UNCACHED_ACCELERATED;
+		break;
+	case PRID_IMP_LOONGSON_32:  /* Loongson-1 */
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED_ACCELERATED;
 		break;
@@ -1008,16 +1145,22 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decode_configs(c);
 	switch (c->processor_id & 0xff00) {
 	case PRID_IMP_4KC:
 		c->cputype = CPU_4KC;
 =======
+=======
+>>>>>>> v3.18
 	c->writecombine = _CACHE_UNCACHED_ACCELERATED;
 	switch (c->processor_id & PRID_IMP_MASK) {
 	case PRID_IMP_4KC:
 		c->cputype = CPU_4KC;
 		c->writecombine = _CACHE_UNCACHED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__cpu_name[cpu] = "MIPS 4Kc";
 		break;
@@ -1025,6 +1168,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_4KECR2:
 		c->cputype = CPU_4KEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1034,6 +1181,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_4KSD:
 		c->cputype = CPU_4KSC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1042,6 +1193,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_5KC:
 		c->cputype = CPU_5KC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1050,6 +1205,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_5KE:
 		c->cputype = CPU_5KE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1058,6 +1217,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_20KC:
 		c->cputype = CPU_20KC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1066,6 +1229,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_24K:
 		c->cputype = CPU_24K;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1074,6 +1241,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_24KE:
 		c->cputype = CPU_24K;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1082,6 +1253,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_25KF:
 		c->cputype = CPU_25KF;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1090,6 +1265,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_34K:
 		c->cputype = CPU_34K;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1098,6 +1277,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_74K:
 		c->cputype = CPU_74K;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1106,6 +1289,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_M14KC:
 		c->cputype = CPU_M14KC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1114,6 +1301,10 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	case PRID_IMP_M14KEC:
 		c->cputype = CPU_M14KEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		c->writecombine = _CACHE_UNCACHED;
+>>>>>>> v3.18
 =======
 		c->writecombine = _CACHE_UNCACHED;
 >>>>>>> v3.18
@@ -1121,6 +1312,7 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 		break;
 	case PRID_IMP_1004K:
 		c->cputype = CPU_1004K;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__cpu_name[cpu] = "MIPS 1004Kc";
 		break;
@@ -1131,6 +1323,8 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		c->writecombine = _CACHE_UNCACHED;
 		__cpu_name[cpu] = "MIPS 1004Kc";
 		break;
@@ -1167,6 +1361,9 @@ static inline void cpu_probe_mips(struct cpuinfo_mips *c, unsigned int cpu)
 
 	decode_configs(c);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spram_config();
 }
@@ -1175,7 +1372,11 @@ static inline void cpu_probe_alchemy(struct cpuinfo_mips *c, unsigned int cpu)
 {
 	decode_configs(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
+=======
+	switch (c->processor_id & PRID_IMP_MASK) {
+>>>>>>> v3.18
 =======
 	switch (c->processor_id & PRID_IMP_MASK) {
 >>>>>>> v3.18
@@ -1198,7 +1399,11 @@ static inline void cpu_probe_alchemy(struct cpuinfo_mips *c, unsigned int cpu)
 		case 4:
 			__cpu_name[cpu] = "Au1200";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((c->processor_id & 0xff) == 2)
+=======
+			if ((c->processor_id & PRID_REV_MASK) == 2)
+>>>>>>> v3.18
 =======
 			if ((c->processor_id & PRID_REV_MASK) == 2)
 >>>>>>> v3.18
@@ -1220,7 +1425,12 @@ static inline void cpu_probe_sibyte(struct cpuinfo_mips *c, unsigned int cpu)
 	decode_configs(c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
+=======
+	c->writecombine = _CACHE_UNCACHED_ACCELERATED;
+	switch (c->processor_id & PRID_IMP_MASK) {
+>>>>>>> v3.18
 =======
 	c->writecombine = _CACHE_UNCACHED_ACCELERATED;
 	switch (c->processor_id & PRID_IMP_MASK) {
@@ -1230,7 +1440,11 @@ static inline void cpu_probe_sibyte(struct cpuinfo_mips *c, unsigned int cpu)
 		__cpu_name[cpu] = "SiByte SB1";
 		/* FPU in pass1 is known to have issues. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((c->processor_id & 0xff) < 0x02)
+=======
+		if ((c->processor_id & PRID_REV_MASK) < 0x02)
+>>>>>>> v3.18
 =======
 		if ((c->processor_id & PRID_REV_MASK) < 0x02)
 >>>>>>> v3.18
@@ -1247,7 +1461,11 @@ static inline void cpu_probe_sandcraft(struct cpuinfo_mips *c, unsigned int cpu)
 {
 	decode_configs(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
+=======
+	switch (c->processor_id & PRID_IMP_MASK) {
+>>>>>>> v3.18
 =======
 	switch (c->processor_id & PRID_IMP_MASK) {
 >>>>>>> v3.18
@@ -1264,7 +1482,11 @@ static inline void cpu_probe_nxp(struct cpuinfo_mips *c, unsigned int cpu)
 {
 	decode_configs(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
+=======
+	switch (c->processor_id & PRID_IMP_MASK) {
+>>>>>>> v3.18
 =======
 	switch (c->processor_id & PRID_IMP_MASK) {
 >>>>>>> v3.18
@@ -1280,7 +1502,11 @@ static inline void cpu_probe_broadcom(struct cpuinfo_mips *c, unsigned int cpu)
 {
 	decode_configs(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
+=======
+	switch (c->processor_id & PRID_IMP_MASK) {
+>>>>>>> v3.18
 =======
 	switch (c->processor_id & PRID_IMP_MASK) {
 >>>>>>> v3.18
@@ -1299,7 +1525,11 @@ static inline void cpu_probe_broadcom(struct cpuinfo_mips *c, unsigned int cpu)
 		break;
 	case PRID_IMP_BMIPS43XX: {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int rev = c->processor_id & 0xff;
+=======
+		int rev = c->processor_id & PRID_REV_MASK;
+>>>>>>> v3.18
 =======
 		int rev = c->processor_id & PRID_REV_MASK;
 >>>>>>> v3.18
@@ -1329,7 +1559,11 @@ static inline void cpu_probe_cavium(struct cpuinfo_mips *c, unsigned int cpu)
 {
 	decode_configs(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
+=======
+	switch (c->processor_id & PRID_IMP_MASK) {
+>>>>>>> v3.18
 =======
 	switch (c->processor_id & PRID_IMP_MASK) {
 >>>>>>> v3.18
@@ -1353,6 +1587,10 @@ platform:
 	case PRID_IMP_CAVIUM_CN66XX:
 	case PRID_IMP_CAVIUM_CN68XX:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case PRID_IMP_CAVIUM_CNF71XX:
+>>>>>>> v3.18
 =======
 	case PRID_IMP_CAVIUM_CNF71XX:
 >>>>>>> v3.18
@@ -1361,13 +1599,19 @@ platform:
 		set_elf_platform(cpu, "octeon2");
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case PRID_IMP_CAVIUM_CN70XX:
 	case PRID_IMP_CAVIUM_CN78XX:
 		c->cputype = CPU_CAVIUM_OCTEON3;
 		__cpu_name[cpu] = "Cavium Octeon III";
 		set_elf_platform(cpu, "octeon3");
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		printk(KERN_INFO "Unknown Octeon chip!\n");
@@ -1382,15 +1626,21 @@ static inline void cpu_probe_ingenic(struct cpuinfo_mips *c, unsigned int cpu)
 	/* JZRISC does not implement the CP0 counter. */
 	c->options &= ~MIPS_CPU_COUNTER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
 	case PRID_IMP_JZRISC:
 		c->cputype = CPU_JZRISC;
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(!__builtin_constant_p(cpu_has_counter) || cpu_has_counter);
 	switch (c->processor_id & PRID_IMP_MASK) {
 	case PRID_IMP_JZRISC:
 		c->cputype = CPU_JZRISC;
 		c->writecombine = _CACHE_UNCACHED_ACCELERATED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__cpu_name[cpu] = "Ingenic JZRISC";
 		break;
@@ -1405,7 +1655,11 @@ static inline void cpu_probe_netlogic(struct cpuinfo_mips *c, int cpu)
 	decode_configs(c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((c->processor_id & 0xff00) == PRID_IMP_NETLOGIC_AU13XX) {
+=======
+	if ((c->processor_id & PRID_IMP_MASK) == PRID_IMP_NETLOGIC_AU13XX) {
+>>>>>>> v3.18
 =======
 	if ((c->processor_id & PRID_IMP_MASK) == PRID_IMP_NETLOGIC_AU13XX) {
 >>>>>>> v3.18
@@ -1424,8 +1678,11 @@ static inline void cpu_probe_netlogic(struct cpuinfo_mips *c, int cpu)
 			MIPS_CPU_LLSC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->processor_id & 0xff00) {
 =======
+=======
+>>>>>>> v3.18
 	switch (c->processor_id & PRID_IMP_MASK) {
 	case PRID_IMP_NETLOGIC_XLP2XX:
 	case PRID_IMP_NETLOGIC_XLP9XX:
@@ -1434,6 +1691,9 @@ static inline void cpu_probe_netlogic(struct cpuinfo_mips *c, int cpu)
 		__cpu_name[cpu] = "Broadcom XLPII";
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case PRID_IMP_NETLOGIC_XLP8XX:
 	case PRID_IMP_NETLOGIC_XLP3XX:
@@ -1487,6 +1747,10 @@ static inline void cpu_probe_netlogic(struct cpuinfo_mips *c, int cpu)
 		c->tlbsize = ((read_c0_config1() >> 25) & 0x3f) + 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	c->kscratch_mask = 0xf;
+>>>>>>> v3.18
 =======
 	c->kscratch_mask = 0xf;
 >>>>>>> v3.18
@@ -1502,7 +1766,11 @@ const char *__cpu_name[NR_CPUS];
 const char *__elf_platform;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __cpuinit void cpu_probe(void)
+=======
+void cpu_probe(void)
+>>>>>>> v3.18
 =======
 void cpu_probe(void)
 >>>>>>> v3.18
@@ -1514,14 +1782,20 @@ void cpu_probe(void)
 	c->fpu_id	= FPIR_IMP_NONE;
 	c->cputype	= CPU_UNKNOWN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	c->processor_id = read_c0_prid();
 	switch (c->processor_id & 0xff0000) {
 =======
+=======
+>>>>>>> v3.18
 	c->writecombine = _CACHE_UNCACHED;
 
 	c->processor_id = read_c0_prid();
 	switch (c->processor_id & PRID_COMP_MASK) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case PRID_COMP_LEGACY:
 		cpu_probe_legacy(c, cpu);
@@ -1572,13 +1846,19 @@ void cpu_probe(void)
 		c->ases &= ~(MIPS_ASE_DSP | MIPS_ASE_DSP2P);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (mips_htw_disabled) {
 		c->options &= ~MIPS_CPU_HTW;
 		write_c0_pwctl(read_c0_pwctl() &
 			       ~(1 << MIPS_PWCTL_PWEN_SHIFT));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (c->options & MIPS_CPU_FPU) {
 		c->fpu_id = cpu_get_fpu_id();
@@ -1599,13 +1879,19 @@ void cpu_probe(void)
 		c->srsets = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_has_msa) {
 		c->msa_id = cpu_get_msa_id();
 		WARN(c->msa_id & MSA_IR_WRPF,
 		     "Vector register partitioning unimplemented!");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpu_probe_vmbits(c);
 
@@ -1616,6 +1902,7 @@ void cpu_probe(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __cpuinit void cpu_report(void)
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
@@ -1625,6 +1912,8 @@ __cpuinit void cpu_report(void)
 	if (c->options & MIPS_CPU_FPU)
 		printk(KERN_INFO "FPU revision is: %08x\n", c->fpu_id);
 =======
+=======
+>>>>>>> v3.18
 void cpu_report(void)
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
@@ -1635,5 +1924,8 @@ void cpu_report(void)
 		printk(KERN_INFO "FPU revision is: %08x\n", c->fpu_id);
 	if (cpu_has_msa)
 		pr_info("MSA revision is: %08x\n", c->msa_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

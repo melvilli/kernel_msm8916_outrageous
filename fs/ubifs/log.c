@@ -245,6 +245,10 @@ int ubifs_add_bud_to_log(struct ubifs_info *c, int jhead, int lnum, int offs)
 	if (c->lhead_offs > c->leb_size - c->ref_node_alsz) {
 		c->lhead_lnum = ubifs_next_log_lnum(c, c->lhead_lnum);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ubifs_assert(c->lhead_lnum != c->ltail_lnum);
+>>>>>>> v3.18
 =======
 		ubifs_assert(c->lhead_lnum != c->ltail_lnum);
 >>>>>>> v3.18
@@ -413,6 +417,7 @@ int ubifs_log_start_commit(struct ubifs_info *c, int *ltail_lnum)
 	if (c->lhead_offs) {
 		c->lhead_lnum = ubifs_next_log_lnum(c, c->lhead_lnum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c->lhead_offs = 0;
 	}
 
@@ -423,6 +428,8 @@ int ubifs_log_start_commit(struct ubifs_info *c, int *ltail_lnum)
 			goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 		ubifs_assert(c->lhead_lnum != c->ltail_lnum);
 		c->lhead_offs = 0;
 	}
@@ -431,6 +438,9 @@ int ubifs_log_start_commit(struct ubifs_info *c, int *ltail_lnum)
 	err = ubifs_leb_unmap(c, c->lhead_lnum);
 	if (err)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	len = ALIGN(len, c->min_io_size);
@@ -599,6 +609,7 @@ static int done_already(struct rb_root *done_tree, int lnum)
 static void destroy_done_tree(struct rb_root *done_tree)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node *this = done_tree->rb_node;
 	struct done_ref *dr;
 
@@ -621,10 +632,15 @@ static void destroy_done_tree(struct rb_root *done_tree)
 		kfree(dr);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct done_ref *dr, *n;
 
 	rbtree_postorder_for_each_entry_safe(dr, n, done_tree, rb)
 		kfree(dr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -736,7 +752,11 @@ int ubifs_consolidate_log(struct ubifs_info *c)
 	vfree(buf);
 	if (write_lnum == c->lhead_lnum) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("log is too full", c->vi.ubi_num);
+=======
+		ubifs_err("log is too full");
+>>>>>>> v3.18
 =======
 		ubifs_err("log is too full");
 >>>>>>> v3.18
@@ -787,7 +807,11 @@ static int dbg_check_bud_bytes(struct ubifs_info *c)
 
 	if (c->bud_bytes != bud_bytes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad bud_bytes %lld, calculated %lld", c->vi.ubi_num,
+=======
+		ubifs_err("bad bud_bytes %lld, calculated %lld",
+>>>>>>> v3.18
 =======
 		ubifs_err("bad bud_bytes %lld, calculated %lld",
 >>>>>>> v3.18

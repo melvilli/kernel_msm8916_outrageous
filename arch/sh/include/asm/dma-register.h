@@ -14,6 +14,7 @@
 #define DMA_REGISTER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* DMA register */
 #define SAR	0x00
 #define DAR	0x04
@@ -26,6 +27,8 @@
 #define DMAOR_NMIF	0x00000002
 #define DMAOR_DME	0x00000001
 =======
+=======
+>>>>>>> v3.18
 /* DMA registers */
 #define SAR	0x00	/* Source Address Register */
 #define DAR	0x04	/* Destination Address Register */
@@ -37,6 +40,9 @@
 #define DMAOR_AE	0x00000004	/* Address Error Flag */
 #define DMAOR_NMIF	0x00000002
 #define DMAOR_DME	0x00000001	/* DMA Master Enable */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Definitions for the SuperH DMAC */
@@ -48,6 +54,7 @@
 #define ACK_W	0x00020000
 #define ACK_H	0x00000000
 #define ACK_L	0x00010000
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DM_INC	0x00004000
 #define DM_DEC	0x00008000
@@ -63,6 +70,8 @@
 #define CHCR_TE	0x00000002
 #define CHCR_IE	0x00000004
 =======
+=======
+>>>>>>> v3.18
 #define DM_INC	0x00004000	/* Destination addresses are incremented */
 #define DM_DEC	0x00008000	/* Destination addresses are decremented */
 #define DM_FIX	0x0000c000	/* Destination address is fixed */
@@ -78,6 +87,9 @@
 #define CHCR_DE	0x00000001	/* DMA Enable */
 #define CHCR_TE	0x00000002	/* Transfer End Flag */
 #define CHCR_IE	0x00000004	/* Interrupt Enable */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

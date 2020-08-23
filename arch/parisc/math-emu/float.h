@@ -485,7 +485,10 @@ typedef int VOID;
  * +-------+-------+-------+-------+-------+-------+-------+-------+
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define Allexception(object) (object)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define Greaterthanbit(object) Bitfield_extract( 27, 1,object)

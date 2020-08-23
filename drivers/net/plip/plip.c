@@ -548,9 +548,15 @@ static __be16 plip_type_trans(struct sk_buff *skb, struct net_device *dev)
 	eth = eth_hdr(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(*eth->h_dest&1)
 	{
 		if(memcmp(eth->h_dest,dev->broadcast, ETH_ALEN)==0)
+=======
+	if(is_multicast_ether_addr(eth->h_dest))
+	{
+		if(ether_addr_equal_64bits(eth->h_dest, dev->broadcast))
+>>>>>>> v3.18
 =======
 	if(is_multicast_ether_addr(eth->h_dest))
 	{
@@ -1009,7 +1015,11 @@ plip_rewrite_address(const struct net_device *dev, struct ethhdr *eth)
 		const struct in_ifaddr *ifa = in_dev->ifa_list;
 		if (ifa) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(eth->h_source, dev->dev_addr, 6);
+=======
+			memcpy(eth->h_source, dev->dev_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 			memcpy(eth->h_source, dev->dev_addr, ETH_ALEN);
 >>>>>>> v3.18

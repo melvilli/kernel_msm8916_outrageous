@@ -867,6 +867,11 @@ vfp_double_multiply_accumulate(int dd, int dn, int dm, u32 fpscr, u32 negate, ch
 
 	vfp_double_unpack(&vdn, vfp_get_double(dd));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (vdn.exponent == 0 && vdn.significand)
+		vfp_double_normalise_denormal(&vdn);
+>>>>>>> v3.18
 =======
 	if (vdn.exponent == 0 && vdn.significand)
 		vfp_double_normalise_denormal(&vdn);

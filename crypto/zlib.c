@@ -169,7 +169,11 @@ static int zlib_compress_update(struct crypto_pcomp *tfm,
 
 	ret = req->avail_out - stream->avail_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("avail_in %u, avail_out %u (consumed %u, produced %u)\n",
+=======
+	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
 >>>>>>> v3.18
@@ -203,7 +207,11 @@ static int zlib_compress_final(struct crypto_pcomp *tfm,
 
 	ret = req->avail_out - stream->avail_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("avail_in %u, avail_out %u (consumed %u, produced %u)\n",
+=======
+	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
 >>>>>>> v3.18
@@ -292,7 +300,11 @@ static int zlib_decompress_update(struct crypto_pcomp *tfm,
 
 	ret = req->avail_out - stream->avail_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("avail_in %u, avail_out %u (consumed %u, produced %u)\n",
+=======
+	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
 >>>>>>> v3.18
@@ -344,7 +356,11 @@ static int zlib_decompress_final(struct crypto_pcomp *tfm,
 
 	ret = req->avail_out - stream->avail_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("avail_in %u, avail_out %u (consumed %u, produced %u)\n",
+=======
+	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("avail_in %lu, avail_out %lu (consumed %lu, produced %u)\n",
 >>>>>>> v3.18
@@ -395,6 +411,9 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Zlib Compression Algorithm");
 MODULE_AUTHOR("Sony Corporation");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("zlib");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -1,12 +1,17 @@
 config ARCH_VT8500
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
 	select ARCH_REQUIRE_GPIOLIB
 	select CLKDEV_LOOKUP
 	select CLKSRC_OF
 	select GENERIC_CLOCKEVENTS
 	select HAVE_CLK
+=======
+	select ARCH_REQUIRE_GPIOLIB
+	select CLKDEV_LOOKUP
+>>>>>>> v3.18
 =======
 	select ARCH_REQUIRE_GPIOLIB
 	select CLKDEV_LOOKUP
@@ -28,7 +33,10 @@ config ARCH_WM8750
 	depends on ARCH_MULTI_V6
 	select ARCH_VT8500
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_V6
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -39,7 +47,10 @@ config ARCH_WM8850
 	depends on ARCH_MULTI_V7
 	select ARCH_VT8500
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_V7
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help

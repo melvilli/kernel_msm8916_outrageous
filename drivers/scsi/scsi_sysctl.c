@@ -13,7 +13,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table scsi_table[] = {
+=======
+static struct ctl_table scsi_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table scsi_table[] = {
 >>>>>>> v3.18
@@ -26,7 +30,11 @@ static struct ctl_table scsi_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table scsi_dir_table[] = {
+=======
+static struct ctl_table scsi_dir_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table scsi_dir_table[] = {
 >>>>>>> v3.18
@@ -37,7 +45,11 @@ static struct ctl_table scsi_dir_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table scsi_root_table[] = {
+=======
+static struct ctl_table scsi_root_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table scsi_root_table[] = {
 >>>>>>> v3.18

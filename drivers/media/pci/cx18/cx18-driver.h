@@ -263,7 +263,11 @@ struct cx18_options {
 
 /* per-mdl bit flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CX18_F_M_NEED_SWAP  0	/* mdl buffer data must be endianess swapped */
+=======
+#define CX18_F_M_NEED_SWAP  0	/* mdl buffer data must be endianness swapped */
+>>>>>>> v3.18
 =======
 #define CX18_F_M_NEED_SWAP  0	/* mdl buffer data must be endianness swapped */
 >>>>>>> v3.18

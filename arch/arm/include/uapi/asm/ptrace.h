@@ -35,6 +35,10 @@
 /*
  * PSR bits
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Note on V7M there is no mode contained in the PSR
+>>>>>>> v3.18
 =======
  * Note on V7M there is no mode contained in the PSR
 >>>>>>> v3.18
@@ -44,11 +48,14 @@
 #define IRQ26_MODE	0x00000002
 #define SVC26_MODE	0x00000003
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USR_MODE	0x00000010
 #define FIQ_MODE	0x00000011
 #define IRQ_MODE	0x00000012
 #define SVC_MODE	0x00000013
 =======
+=======
+>>>>>>> v3.18
 #if defined(__KERNEL__) && defined(CONFIG_CPU_V7M)
 /*
  * Use 0 here to get code right that creates a userspace
@@ -62,6 +69,9 @@
 #endif
 #define FIQ_MODE	0x00000011
 #define IRQ_MODE	0x00000012
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ABT_MODE	0x00000017
 #define HYP_MODE	0x0000001a
@@ -69,6 +79,7 @@
 #define SYSTEM_MODE	0x0000001f
 #define MODE32_BIT	0x00000010
 #define MODE_MASK	0x0000001f
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PSR_T_BIT	0x00000020
 #define PSR_F_BIT	0x00000040
@@ -78,6 +89,8 @@
 #define PSR_J_BIT	0x01000000
 #define PSR_Q_BIT	0x08000000
 =======
+=======
+>>>>>>> v3.18
 
 #define V4_PSR_T_BIT	0x00000020	/* >= V4T, but not V7M */
 #define V7M_PSR_T_BIT	0x01000000
@@ -94,6 +107,9 @@
 #define PSR_E_BIT	0x00000200	/* >= V6, but not V7M */
 #define PSR_J_BIT	0x01000000	/* >= V5J, but not V7M */
 #define PSR_Q_BIT	0x08000000	/* >= V5E, including V7M */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PSR_V_BIT	0x10000000
 #define PSR_C_BIT	0x20000000

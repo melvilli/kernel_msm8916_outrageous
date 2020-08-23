@@ -19,6 +19,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
@@ -26,11 +27,14 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 */
 
 #ifndef AMPLC_DIO200_H_INCLUDED
 #define AMPLC_DIO200_H_INCLUDED
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* 200 series register area sizes */
 #define DIO200_IO_SIZE		0x20
@@ -50,6 +54,8 @@ struct dio200_region {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Subdevice types.
  */
@@ -58,6 +64,7 @@ enum dio200_sdtype { sd_none, sd_intr, sd_8255, sd_8254, sd_timer };
 #define DIO200_MAX_SUBDEVS	8
 #define DIO200_MAX_ISNS		6
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Board descriptions.
@@ -69,11 +76,17 @@ struct dio200_board {
 	const char *name;
 	unsigned char mainbar;
 >>>>>>> v3.18
+=======
+struct dio200_board {
+	const char *name;
+	unsigned char mainbar;
+>>>>>>> v3.18
 	unsigned short n_subdevs;	/* number of subdevices */
 	unsigned char sdtype[DIO200_MAX_SUBDEVS];	/* enum dio200_sdtype */
 	unsigned char sdinfo[DIO200_MAX_SUBDEVS];	/* depends on sdtype */
 	bool has_int_sce:1;		/* has interrupt enable/status reg */
 	bool has_clk_gat_sce:1;		/* has clock/gate selection registers */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool has_enhancements:1;	/* has enhanced features */
 };
@@ -98,14 +111,20 @@ struct dio200_private {
 =======
 	bool is_pcie:1;			/* has enhanced features */
 >>>>>>> v3.18
+=======
+	bool is_pcie:1;			/* has enhanced features */
+>>>>>>> v3.18
 };
 
 int amplc_dio200_common_attach(struct comedi_device *dev, unsigned int irq,
 			       unsigned long req_irq_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void amplc_dio200_common_detach(struct comedi_device *dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Used by initialization of PCIe boards. */

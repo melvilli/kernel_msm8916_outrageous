@@ -48,6 +48,12 @@ static inline void enic_queue_wq_desc_ex(struct vnic_wq *wq,
 {
 	struct wq_enet_desc *desc = vnic_wq_next_desc(wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 desc_skip_cnt = 1;
+	u8 compressed_send = 0;
+	u64 wrid = 0;
+>>>>>>> v3.18
 =======
 	u8 desc_skip_cnt = 1;
 	u8 compressed_send = 0;
@@ -66,7 +72,12 @@ static inline void enic_queue_wq_desc_ex(struct vnic_wq *wq,
 		(u8)loopback);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vnic_wq_post(wq, os_buf, dma_addr, len, sop, eop);
+=======
+	vnic_wq_post(wq, os_buf, dma_addr, len, sop, eop, desc_skip_cnt,
+			(u8)cq_entry, compressed_send, wrid);
+>>>>>>> v3.18
 =======
 	vnic_wq_post(wq, os_buf, dma_addr, len, sop, eop, desc_skip_cnt,
 			(u8)cq_entry, compressed_send, wrid);
@@ -132,6 +143,10 @@ static inline void enic_queue_rq_desc(struct vnic_rq *rq,
 {
 	struct rq_enet_desc *desc = vnic_rq_next_desc(rq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 wrid = 0;
+>>>>>>> v3.18
 =======
 	u64 wrid = 0;
 >>>>>>> v3.18
@@ -143,7 +158,11 @@ static inline void enic_queue_rq_desc(struct vnic_rq *rq,
 		type, (u16)len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vnic_rq_post(rq, os_buf, os_buf_index, dma_addr, len);
+=======
+	vnic_rq_post(rq, os_buf, os_buf_index, dma_addr, len, wrid);
+>>>>>>> v3.18
 =======
 	vnic_rq_post(rq, os_buf, os_buf_index, dma_addr, len, wrid);
 >>>>>>> v3.18

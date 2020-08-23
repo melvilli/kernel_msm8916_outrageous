@@ -16,7 +16,11 @@ void outsb(unsigned long __addr, const void *src, unsigned long count)
 
 	while (count--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(*p++, addr);
+=======
+		__raw_writeb(*p++, addr);
+>>>>>>> v3.18
 =======
 		__raw_writeb(*p++, addr);
 >>>>>>> v3.18
@@ -98,7 +102,11 @@ void insb(unsigned long __addr, void *dst, unsigned long count)
 
 		while ((((unsigned long)pb) & 0x3) && count--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*pb++ = inb(addr);
+=======
+			*pb++ = __raw_readb(addr);
+>>>>>>> v3.18
 =======
 			*pb++ = __raw_readb(addr);
 >>>>>>> v3.18
@@ -107,15 +115,21 @@ void insb(unsigned long __addr, void *dst, unsigned long count)
 			u32 w;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			w  = (inb(addr) << 24);
 			w |= (inb(addr) << 16);
 			w |= (inb(addr) << 8);
 			w |= (inb(addr) << 0);
 =======
+=======
+>>>>>>> v3.18
 			w  = (__raw_readb(addr) << 24);
 			w |= (__raw_readb(addr) << 16);
 			w |= (__raw_readb(addr) << 8);
 			w |= (__raw_readb(addr) << 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			*pi++ = w;
 			count -= 4;
@@ -123,7 +137,11 @@ void insb(unsigned long __addr, void *dst, unsigned long count)
 		pb = (u8 *)pi;
 		while (count--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*pb++ = inb(addr);
+=======
+			*pb++ = __raw_readb(addr);
+>>>>>>> v3.18
 =======
 			*pb++ = __raw_readb(addr);
 >>>>>>> v3.18
@@ -141,7 +159,11 @@ void insw(unsigned long __addr, void *dst, unsigned long count)
 
 		if (((unsigned long)ps) & 0x2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*ps++ = le16_to_cpu(inw(addr));
+=======
+			*ps++ = __raw_readw(addr);
+>>>>>>> v3.18
 =======
 			*ps++ = __raw_readw(addr);
 >>>>>>> v3.18
@@ -152,8 +174,13 @@ void insw(unsigned long __addr, void *dst, unsigned long count)
 			u32 w;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			w  = (le16_to_cpu(inw(addr)) << 16);
 			w |= (le16_to_cpu(inw(addr)) << 0);
+=======
+			w  = __raw_readw(addr) << 16;
+			w |= __raw_readw(addr) << 0;
+>>>>>>> v3.18
 =======
 			w  = __raw_readw(addr) << 16;
 			w |= __raw_readw(addr) << 0;
@@ -164,7 +191,11 @@ void insw(unsigned long __addr, void *dst, unsigned long count)
 		ps = (u16 *)pi;
 		if (count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*ps = le16_to_cpu(inw(addr));
+=======
+			*ps = __raw_readw(addr);
+>>>>>>> v3.18
 =======
 			*ps = __raw_readw(addr);
 >>>>>>> v3.18
@@ -181,7 +212,11 @@ void insl(unsigned long __addr, void *dst, unsigned long count)
 			u32 *pi = dst;
 			while (count--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				*pi++ = le32_to_cpu(inl(addr));
+=======
+				*pi++ = __raw_readl(addr);
+>>>>>>> v3.18
 =======
 				*pi++ = __raw_readl(addr);
 >>>>>>> v3.18
@@ -195,17 +230,23 @@ void insl(unsigned long __addr, void *dst, unsigned long count)
 				ps = dst;
 				count -= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				l = le32_to_cpu(inl(addr));
 				*ps++ = l;
 				pi = (u32 *)ps;
 				while (count--) {
 					l2 = le32_to_cpu(inl(addr));
 =======
+=======
+>>>>>>> v3.18
 				l = __raw_readl(addr);
 				*ps++ = l;
 				pi = (u32 *)ps;
 				while (count--) {
 					l2 = __raw_readl(addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					*pi++ = (l << 16) | (l2 >> 16);
 					l = l2;
@@ -218,7 +259,11 @@ void insl(unsigned long __addr, void *dst, unsigned long count)
 				pb = dst;
 				count -= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				l = le32_to_cpu(inl(addr));
+=======
+				l = __raw_readl(addr);
+>>>>>>> v3.18
 =======
 				l = __raw_readl(addr);
 >>>>>>> v3.18
@@ -228,7 +273,11 @@ void insl(unsigned long __addr, void *dst, unsigned long count)
 				pi = (u32 *)ps;
 				while (count--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					l2 = le32_to_cpu(inl(addr));
+=======
+					l2 = __raw_readl(addr);
+>>>>>>> v3.18
 =======
 					l2 = __raw_readl(addr);
 >>>>>>> v3.18
@@ -243,17 +292,23 @@ void insl(unsigned long __addr, void *dst, unsigned long count)
 				pb = (u8 *)dst;
 				count -= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				l = le32_to_cpu(inl(addr));
 				*pb++ = l >> 24;
 				pi = (u32 *)pb;
 				while (count--) {
 					l2 = le32_to_cpu(inl(addr));
 =======
+=======
+>>>>>>> v3.18
 				l = __raw_readl(addr);
 				*pb++ = l >> 24;
 				pi = (u32 *)pb;
 				while (count--) {
 					l2 = __raw_readl(addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					*pi++ = (l << 8) | (l2 >> 24);
 					l = l2;

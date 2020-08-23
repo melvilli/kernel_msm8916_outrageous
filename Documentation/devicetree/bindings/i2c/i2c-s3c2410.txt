@@ -11,6 +11,11 @@ Required properties:
       (d) "samsung, exynos5440-i2c", for s3c2440-like i2c used
 	   on EXYNOS5440 which does not need GPIO configuration.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      (e) "samsung, exynos5-sata-phy-i2c", for s3c2440-like i2c used as
+	   a host to SATA PHY controller on an internal bus.
+>>>>>>> v3.18
 =======
       (e) "samsung, exynos5-sata-phy-i2c", for s3c2440-like i2c used as
 	   a host to SATA PHY controller on an internal bus.

@@ -3,16 +3,22 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define   RF_DATA				0x1d4					// FW will write RF data in the register.
 
 //Register   //duplicate register due to connection: RF_Mode, TRxRN, NumOf L-STF
 //page 1
 =======
+=======
+>>>>>>> v3.18
 #define   RF_DATA				0x1d4					/* FW will write RF data in the register.*/
 
 /* Register duplicate register due to connection: RF_Mode, TRxRN, NumOf L-STF
  * page 1
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define rPMAC_Reset				0x100
 #define rPMAC_TxStart				0x104
@@ -43,8 +49,13 @@
 #define rPMAC_TxStatus				0x18c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page8
 #define rFPGA0_RFMOD				0x800  //RF mode & CCK TxSC
+=======
+/* page8 */
+#define rFPGA0_RFMOD				0x800  /* RF mode & CCK TxSC */
+>>>>>>> v3.18
 =======
 /* page8 */
 #define rFPGA0_RFMOD				0x800  /* RF mode & CCK TxSC */
@@ -55,8 +66,14 @@
 #define rFPGA0_RFTiming1			0x810
 #define rFPGA0_RFTiming2			0x814
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#define rFPGA0_XC_RFTiming			0x818
 //#define rFPGA0_XD_RFTiming			0x81c
+=======
+/* #define rFPGA0_XC_RFTiming			0x818
+ * #define rFPGA0_XD_RFTiming			0x81c
+ */
+>>>>>>> v3.18
 =======
 /* #define rFPGA0_XC_RFTiming			0x818
  * #define rFPGA0_XD_RFTiming			0x81c
@@ -99,8 +116,13 @@
 #define rFPGA0_XCD_RFInterfaceRB	0x8e4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page 9
 #define rFPGA1_RFMOD				0x900  //RF mode & OFDM TxSC
+=======
+/* page 9 */
+#define rFPGA1_RFMOD				0x900  /* RF mode & OFDM TxSC */
+>>>>>>> v3.18
 =======
 /* page 9 */
 #define rFPGA1_RFMOD				0x900  /* RF mode & OFDM TxSC */
@@ -109,6 +131,7 @@
 #define rFPGA1_DebugSelect			0x908
 #define rFPGA1_TxInfo				0x90c
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //page a
 #define rCCK0_System				0xa00
@@ -130,6 +153,8 @@
 
 //page c
 =======
+=======
+>>>>>>> v3.18
 /* page a */
 #define rCCK0_System				0xa00
 #define rCCK0_AFESetting			0xa04
@@ -149,14 +174,22 @@
 #define rCCK0_FACounterUpper		0xa58  /* 0xa5c */
 
 /* page c */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define rOFDM0_LSTF				0xc00
 #define rOFDM0_TRxPathEnable		0xc04
 #define rOFDM0_TRMuxPar				0xc08
 #define rOFDM0_TRSWIsolation			0xc0c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define rOFDM0_XARxAFE				0xc10  //RxIQ DC offset, Rx digital filter, DC notch filter
 #define rOFDM0_XARxIQImbalance		0xc14  //RxIQ imblance matrix
+=======
+#define rOFDM0_XARxAFE				0xc10  /* RxIQ DC offset, Rx digital filter, DC notch filter */
+#define rOFDM0_XARxIQImbalance		0xc14  /* RxIQ imblance matrix */
+>>>>>>> v3.18
 =======
 #define rOFDM0_XARxAFE				0xc10  /* RxIQ DC offset, Rx digital filter, DC notch filter */
 #define rOFDM0_XARxIQImbalance		0xc14  /* RxIQ imblance matrix */
@@ -168,6 +201,7 @@
 #define rOFDM0_XDRxAFE				0xc28
 #define rOFDM0_XDRxIQImbalance		0xc2c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define rOFDM0_RxDetector1			0xc30  //PD,BW & SBD
 #define rOFDM0_RxDetector2			0xc34  //SBD & Fame Sync.
 #define rOFDM0_RxDetector3			0xc38  //Frame Sync.
@@ -177,6 +211,8 @@
 #define rOFDM0_CCADropThreshold		0xc48 //CCA Drop threshold
 #define rOFDM0_ECCAThreshold		0xc4c // energy CCA
 =======
+=======
+>>>>>>> v3.18
 #define rOFDM0_RxDetector1			0xc30  /* PD,BW & SBD */
 #define rOFDM0_RxDetector2			0xc34  /* SBD & Fame Sync.*/
 #define rOFDM0_RxDetector3			0xc38  /* Frame Sync.*/
@@ -185,6 +221,9 @@
 #define rOFDM0_CFOandDAGC		0xc44  /* CFO & DAGC */
 #define rOFDM0_CCADropThreshold		0xc48 /* CCA Drop threshold */
 #define rOFDM0_ECCAThreshold		0xc4c /* energy CCA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define rOFDM0_XAAGCCore1		0xc50
 #define rOFDM0_XAAGCCore2		0xc54
@@ -219,7 +258,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page d
+=======
+/* page d */
+>>>>>>> v3.18
 =======
 /* page d */
 >>>>>>> v3.18
@@ -236,14 +279,20 @@
 #define rOFDM1_PseudoNoiseStateCD 0xd54
 #define rOFDM1_RxPseudoNoiseWgt   0xd58
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define rOFDM_PHYCounter1			0xda0  //cca, parity fail
 #define rOFDM_PHYCounter2			0xda4  //rate illegal, crc8 fail
 #define rOFDM_PHYCounter3			0xda8  //MCS not support
 =======
+=======
+>>>>>>> v3.18
 #define rOFDM_PHYCounter1			0xda0  /* cca, parity fail */
 #define rOFDM_PHYCounter2			0xda4  /* rate illegal, crc8 fail */
 
 #define rOFDM_PHYCounter3			0xda8  /* MCS not support */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define rOFDM_ShortCFOAB			0xdac
 #define rOFDM_ShortCFOCD			0xdb0
@@ -260,7 +309,11 @@
 #define rOFDM_SIGReport				0xddc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page e
+=======
+/* page e */
+>>>>>>> v3.18
 =======
 /* page e */
 >>>>>>> v3.18
@@ -274,8 +327,14 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //RF
 //Zebra1
+=======
+/* RF
+ * Zebra1
+ */
+>>>>>>> v3.18
 =======
 /* RF
  * Zebra1
@@ -293,7 +352,11 @@
 #define rZebra1_RxHPFCorner		0xc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Zebra4
+=======
+/* Zebra4 */
+>>>>>>> v3.18
 =======
 /* Zebra4 */
 >>>>>>> v3.18
@@ -302,7 +365,11 @@
 #define rRTL8256_RxLPF				11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //RTL8258
+=======
+/* RTL8258 */
+>>>>>>> v3.18
 =======
 /* RTL8258 */
 >>>>>>> v3.18
@@ -311,8 +378,14 @@
 #define rRTL8258_RSSILPF		0xa
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Bit Mask
 //page-1
+=======
+/* Bit Mask
+ * page-1
+ */
+>>>>>>> v3.18
 =======
 /* Bit Mask
  * page-1
@@ -364,7 +437,11 @@
 #define bOFDMTxStatus				0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page-8
+=======
+/* page-8 */
+>>>>>>> v3.18
 =======
 /* page-8 */
 >>>>>>> v3.18
@@ -385,6 +462,7 @@
 #define bBBStart					0x000000f0
 #define bBBCCKStart				0x0000000f
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bPAEnd						0xf          //Reg0x814
 #define bTREnd						0x0f000000
 #define bRFEnd						0x000f0000
@@ -394,6 +472,8 @@
 #define bHSSI_T2RDelay				0xf80000
 #define bContTxHSSI				0x400     //chane gain at continue Tx
 =======
+=======
+>>>>>>> v3.18
 #define bPAEnd						0xf     /* Reg0x814 */
 #define bTREnd						0x0f000000
 #define bRFEnd						0x000f0000
@@ -402,6 +482,9 @@
 #define bHSSI_R2TDelay				0xf8000000
 #define bHSSI_T2RDelay				0xf80000
 #define bContTxHSSI				0x400     /* chane gain at continue Tx */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define bIGFromCCK				0x200
 #define bAGCAddress				0x3f
@@ -414,7 +497,11 @@
 #define b3WireAddressLength			0x400
 #define b3WireRFPowerDown			0x1
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#define bHWSISelect				0x8
+=======
+/* #define bHWSISelect				0x8 */
+>>>>>>> v3.18
 =======
 /* #define bHWSISelect				0x8 */
 >>>>>>> v3.18
@@ -429,7 +516,11 @@
 #define bRFSI_3WireLoad				0x4
 #define bRFSI_3WireRW				0x8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bRFSI_3Wire					0xf  //3-wire total control
+=======
+#define bRFSI_3Wire					0xf  /* 3-wire total control */
+>>>>>>> v3.18
 =======
 #define bRFSI_3Wire					0xf  /* 3-wire total control */
 >>>>>>> v3.18
@@ -458,6 +549,7 @@
 #define bLSIG_Parity					0x20
 #define bCCKRxPhase				0x4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bLSSIReadAddress			0x3f000000   //LSSI "Read" Address
 #define bLSSIReadEdge				0x80000000   //LSSI "Read" edge signal
 #define bLSSIReadBackData			0xfff
@@ -465,11 +557,16 @@
 #define bCCKSampleRate				0x8       //0: 44MHz, 1:88MHz
 
 =======
+=======
+>>>>>>> v3.18
 #define bLSSIReadAddress			0x3f000000   /* LSSI "Read" Address */
 #define bLSSIReadEdge				0x80000000   /* LSSI "Read" edge signal */
 #define bLSSIReadBackData			0xfff
 #define bLSSIReadOKFlag				0x1000
 #define bCCKSampleRate				0x8	/* 0: 44MHz, 1:88MHz */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define bRegulator0Standby			0x1
 #define bRegulatorPLLStandby			0x2
@@ -524,6 +621,7 @@
 #define bPSDReport					0xffff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page-9
 #define bOFDMTxSC				0x30000000
 #define bCCKTxOn					0x1
@@ -531,12 +629,17 @@
 #define bDebugPage				0xfff  //reset debug page and also HWord, LWord
 #define bDebugItem				0xff   //reset debug page and LWord
 =======
+=======
+>>>>>>> v3.18
 /* page-9 */
 #define bOFDMTxSC				0x30000000
 #define bCCKTxOn					0x1
 #define bOFDMTxOn				0x2
 #define bDebugPage				0xfff  /* reset debug page and also HWord, LWord */
 #define bDebugItem				0xff   /* reset debug page and LWord */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define bAntL					0x10
 #define bAntNonHT					0x100
@@ -546,7 +649,11 @@
 #define bAntNonHTS1				0x1000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page-a
+=======
+/* page-a */
+>>>>>>> v3.18
 =======
 /* page-a */
 >>>>>>> v3.18
@@ -571,7 +678,11 @@
 #define bCCKCCAMask				0x40000000
 #define bCCKTxDACPhase			0x4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bCCKRxADCPhase			0x20000000   //r_rx_clk
+=======
+#define bCCKRxADCPhase			0x20000000   /* r_rx_clk */
+>>>>>>> v3.18
 =======
 #define bCCKRxADCPhase			0x20000000   /* r_rx_clk */
 >>>>>>> v3.18
@@ -589,6 +700,7 @@
 #define bCCKLNAPolarity				0x800000
 #define bCCKRx1stGain				0x7f0000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bCCKRFExtend				0x20000000 //CCK Rx initial gain polarity
 #define bCCKRxAGCSatLevel			0x1f000000
 #define bCCKRxAGCSatCount			0xe0
@@ -596,12 +708,17 @@
 #define bCCKFixedRxAGC				0x8000
 //#define bCCKRxAGCFormat			0x4000   //remove to HSSI register 0x824
 =======
+=======
+>>>>>>> v3.18
 #define bCCKRFExtend				0x20000000 /* CCK Rx initial gain polarity */
 #define bCCKRxAGCSatLevel			0x1f000000
 #define bCCKRxAGCSatCount			0xe0
 #define bCCKRxRFSettle				0x1f       /* AGCsamp_dly */
 #define bCCKFixedRxAGC				0x8000
 /* #define bCCKRxAGCFormat			0x4000 */   /* remove to HSSI register 0x824 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define bCCKAntennaPolarity			0x2000
 #define bCCKTxFilterType			0x0c00
@@ -644,7 +761,11 @@
 #define bCCKOptionRxPath			0x3000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page c
+=======
+/* page c */
+>>>>>>> v3.18
 =======
 /* page c */
 >>>>>>> v3.18
@@ -750,8 +871,13 @@
 #define bRxHP_BBP2               0x70000
 #define bRxHP_BBP3               0x700000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bRSSI_H                  0x7f0000     //the threshold for high power
 #define bRSSI_Gen                0x7f000000   //the threshold for ant diversity
+=======
+#define bRSSI_H                  0x7f0000     /* the threshold for high power */
+#define bRSSI_Gen                0x7f000000   /* the threshold for ant diversity */
+>>>>>>> v3.18
 =======
 #define bRSSI_H                  0x7f0000     /* the threshold for high power */
 #define bRSSI_Gen                0x7f000000   /* the threshold for ant diversity */
@@ -790,7 +916,11 @@
 #define bRxPD_Delay_TH2          0x1c0
 #define bRxPD_DC_COUNT_MAX       0x600
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#define bRxMF_Hold               0x3800
+=======
+/* #define bRxMF_Hold               0x3800 */
+>>>>>>> v3.18
 =======
 /* #define bRxMF_Hold               0x3800 */
 >>>>>>> v3.18
@@ -820,7 +950,11 @@
 #define bExtLNAGain              0x7c00
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page d
+=======
+/* page d */
+>>>>>>> v3.18
 =======
 /* page d */
 >>>>>>> v3.18
@@ -834,6 +968,7 @@
 #define bOFDMSingleCarrier       0x20000000
 #define bOFDMSingleTone          0x40000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#define bRxPath1                 0x01
 //#define bRxPath2                 0x02
 //#define bRxPath3                 0x04
@@ -841,6 +976,8 @@
 //#define bTxPath1                 0x10
 //#define bTxPath2                 0x20
 =======
+=======
+>>>>>>> v3.18
 /* #define bRxPath1                 0x01
  * #define bRxPath2                 0x02
  * #define bRxPath3                 0x04
@@ -848,6 +985,9 @@
  * #define bTxPath1                 0x10
  * #define bTxPath2                 0x20
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define bHTDetect                0x100
 #define bCFOEn                   0x10000
@@ -862,8 +1002,13 @@
 #define bCounter_FastSync        0xffff
 #define bShortCFO                0xfff
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bShortCFOTLength         12   //total
 #define bShortCFOFLength         11   //fraction
+=======
+#define bShortCFOTLength         12   /* total */
+#define bShortCFOFLength         11   /* fraction */
+>>>>>>> v3.18
 =======
 #define bShortCFOTLength         12   /* total */
 #define bShortCFOFLength         11   /* fraction */
@@ -945,7 +1090,11 @@
 #define bUpdEqz                  0x8000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //page e
+=======
+/* page e */
+>>>>>>> v3.18
 =======
 /* page e */
 >>>>>>> v3.18
@@ -960,7 +1109,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Rx Pseduo noise
+=======
+/* Rx Pseduo noise */
+>>>>>>> v3.18
 =======
 /* Rx Pseduo noise */
 >>>>>>> v3.18
@@ -975,8 +1128,14 @@
 #define bPesudoNoiseState_D      0xffff0000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //RF
 //Zebra1
+=======
+/* RF
+ * Zebra1
+ */
+>>>>>>> v3.18
 =======
 /* RF
  * Zebra1
@@ -993,7 +1152,11 @@
 #define bZebra1_RxLPFBW           0x600
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Zebra4
+=======
+/* Zebra4 */
+>>>>>>> v3.18
 =======
 /* Zebra4 */
 >>>>>>> v3.18
@@ -1003,7 +1166,11 @@
 #define bRTL8256_RxLPFBW          0x600
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //RTL8258
+=======
+/* RTL8258 */
+>>>>>>> v3.18
 =======
 /* RTL8258 */
 >>>>>>> v3.18
@@ -1012,7 +1179,11 @@
 #define bRTL8258_RSSILPFBW        0xc0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //byte endable for sb_write
+=======
+/* byte endable for sb_write */
+>>>>>>> v3.18
 =======
 /* byte endable for sb_write */
 >>>>>>> v3.18
@@ -1025,7 +1196,11 @@
 #define bDWord                    0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //for PutRegsetting & GetRegSetting BitMask
+=======
+/* for PutRegsetting & GetRegSetting BitMask */
+>>>>>>> v3.18
 =======
 /* for PutRegsetting & GetRegSetting BitMask */
 >>>>>>> v3.18
@@ -1038,7 +1213,11 @@
 #define bMaskDWord                0xffffffff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //for PutRFRegsetting & GetRFRegSetting BitMask
+=======
+/* for PutRFRegsetting & GetRFRegSetting BitMask */
+>>>>>>> v3.18
 =======
 /* for PutRFRegsetting & GetRFRegSetting BitMask */
 >>>>>>> v3.18
@@ -1051,8 +1230,13 @@
 #define RightAntenna              0x1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define tCheckTxStatus            500   //500ms
 #define tUpdateRxCounter          100   //100ms
+=======
+#define tCheckTxStatus            500   /* 500ms */
+#define tUpdateRxCounter          100   /* 100ms */
+>>>>>>> v3.18
 =======
 #define tCheckTxStatus            500   /* 500ms */
 #define tUpdateRxCounter          100   /* 100ms */
@@ -1063,7 +1247,11 @@
 #define rateHT      2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //define Register-End
+=======
+/* define Register-End */
+>>>>>>> v3.18
 =======
 /* define Register-End */
 >>>>>>> v3.18
@@ -1075,6 +1263,7 @@
 #define bOFDMPHY1_End             0xdff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //define max debug item in each debug page
 //#define bMaxItem_FPGA_PHY0        0x9
 //#define bMaxItem_FPGA_PHY1        0x3
@@ -1082,6 +1271,8 @@
 //#define bMaxItem_OFDM_PHY0        0x29
 //#define bMaxItem_OFDM_PHY1        0x0
 =======
+=======
+>>>>>>> v3.18
 /* define max debug item in each debug page
  * #define bMaxItem_FPGA_PHY0        0x9
  * #define bMaxItem_FPGA_PHY1        0x3
@@ -1089,6 +1280,9 @@
  * #define bMaxItem_OFDM_PHY0        0x29
  * #define bMaxItem_OFDM_PHY1        0x0
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define bPMACControl              0x0
@@ -1108,7 +1302,11 @@
 #define		bRTL8256TxBBBW			0x18
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	//__INC_HAL8190PCIPHYREG_H
+=======
+#endif	/* __INC_HAL8190PCIPHYREG_H */
+>>>>>>> v3.18
 =======
 #endif	/* __INC_HAL8190PCIPHYREG_H */
 >>>>>>> v3.18

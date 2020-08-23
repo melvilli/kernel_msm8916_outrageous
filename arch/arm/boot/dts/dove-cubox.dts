@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "dove.dtsi"
+=======
+#include "dove.dtsi"
+>>>>>>> v3.18
 =======
 #include "dove.dtsi"
 >>>>>>> v3.18
@@ -28,7 +32,11 @@
 			label = "Power";
 			gpios = <&gpio0 18 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,default-trigger = "default-on";
+=======
+			default-state = "keep";
+>>>>>>> v3.18
 =======
 			default-state = "keep";
 >>>>>>> v3.18
@@ -51,9 +59,12 @@
 			regulator-boot-on;
 			gpio = <&gpio0 1 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 	};
 =======
+=======
+>>>>>>> v3.18
 			pinctrl-0 = <&pmx_gpio_1>;
 			pinctrl-names = "default";
 		};
@@ -74,11 +85,15 @@
 		pinctrl-0 = <&pmx_gpio_19>;
 		pinctrl-names = "default";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &uart0 { status = "okay"; };
 &sata0 { status = "okay"; };
+<<<<<<< HEAD
 <<<<<<< HEAD
 &i2c0 { status = "okay"; };
 
@@ -87,6 +102,8 @@
 	/* sdio0 card detect is connected to wrong pin on CuBox */
 	cd-gpios = <&gpio0 12 1>;
 =======
+=======
+>>>>>>> v3.18
 &mdio { status = "okay"; };
 &eth { status = "okay"; };
 
@@ -132,6 +149,9 @@
 
 &sdio0 {
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -146,6 +166,7 @@
 	};
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 &pinctrl {
 	pinctrl-0 = <&pmx_gpio_1 &pmx_gpio_12>;
@@ -166,11 +187,16 @@
 		marvell,function = "gpio";
 	};
 =======
+=======
+>>>>>>> v3.18
 &audio1 {
 	status = "okay";
 	clocks = <&gate_clk 13>, <&si5351 2>;
 	clock-names = "internal", "extclk";
 	pinctrl-0 = <&pmx_audio1_i2s1_spdifo &pmx_audio1_extclk>;
 	pinctrl-names = "default";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

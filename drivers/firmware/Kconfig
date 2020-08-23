@@ -65,6 +65,10 @@ config DELL_RBU
 	depends on X86
 	select FW_LOADER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select FW_LOADER_USER_HELPER
+>>>>>>> v3.18
 =======
 	select FW_LOADER_USER_HELPER
 >>>>>>> v3.18
@@ -112,16 +116,22 @@ config DMI_SYSFS
 	  loaded.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ISCSI_IBFT_FIND
 	bool "iSCSI Boot Firmware Table Attributes"
 	depends on X86
 =======
+=======
+>>>>>>> v3.18
 config DMI_SCAN_MACHINE_NON_EFI_FALLBACK
 	bool
 
 config ISCSI_IBFT_FIND
 	bool "iSCSI Boot Firmware Table Attributes"
 	depends on X86 && ACPI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default n
 	help
@@ -144,7 +154,10 @@ config ISCSI_IBFT
 source "drivers/firmware/google/Kconfig"
 source "drivers/firmware/efi/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/firmware/qcom/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

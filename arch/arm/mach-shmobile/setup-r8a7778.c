@@ -25,6 +25,11 @@
 #include <linux/of.h>
 #include <linux/of_platform.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/dma-rcar-hpbdma.h>
+#include <linux/platform_data/gpio-rcar.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/dma-rcar-hpbdma.h>
 #include <linux/platform_data/gpio-rcar.h>
@@ -34,6 +39,7 @@
 #include <linux/irqchip.h>
 #include <linux/serial_sci.h>
 #include <linux/sh_timer.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/irqs.h>
 #include <mach/r8a7778.h>
@@ -91,6 +97,8 @@ static struct resource ether_resources[] = {
 	DEFINE_RES_MEM(0xfde00000, 0x400),
 	DEFINE_RES_IRQ(gic_iid(0x89)),
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <linux/usb/phy.h>
 #include <linux/usb/hcd.h>
@@ -142,13 +150,20 @@ static struct resource sh_tmu0_resources[] = {
 	DEFINE_RES_IRQ(gic_iid(0x40)),
 	DEFINE_RES_IRQ(gic_iid(0x41)),
 	DEFINE_RES_IRQ(gic_iid(0x42)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define r8a7778_register_tmu(idx)			\
 	platform_device_register_resndata(		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		&platform_bus, "sh_tmu", idx,		\
+=======
+		NULL, "sh-tmu", idx,			\
+>>>>>>> v3.18
 =======
 		NULL, "sh-tmu", idx,			\
 >>>>>>> v3.18
@@ -158,11 +173,14 @@ static struct resource sh_tmu0_resources[] = {
 		sizeof(sh_tmu##idx##_platform_data))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init r8a7778_add_standard_devices(void)
 {
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 int r8a7778_usb_phy_power(bool enable)
 {
 	static struct usb_phy *phy = NULL;
@@ -353,11 +371,15 @@ static void __init r8a7778_register_hspi(int id)
 
 void __init r8a7778_add_dt_devices(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CACHE_L2X0
 	void __iomem *base = ioremap_nocache(0xf0100000, 0x1000);
 	if (base) {
 		/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * Early BRESP enable, Shared attribute override enable, 64K*16way
 		 * don't call iounmap(base)
@@ -385,6 +407,8 @@ void __init r8a7778_add_ether_device(struct sh_eth_plat_data *pdata)
 
 static struct renesas_intc_irqpin_config irqpin_platform_data = {
 =======
+=======
+>>>>>>> v3.18
 		 * Shared attribute override enable, 64K*16way
 		 * don't call iounmap(base)
 		 */
@@ -625,13 +649,20 @@ void __init r8a7778_init_late(void)
 }
 
 static struct renesas_intc_irqpin_config irqpin_platform_data __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.irq_base = irq_pin(0), /* IRQ0 -> IRQ3 */
 	.sense_bitfield_width = 2,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource irqpin_resources[] = {
+=======
+static struct resource irqpin_resources[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct resource irqpin_resources[] __initdata = {
 >>>>>>> v3.18
@@ -647,7 +678,11 @@ static struct resource irqpin_resources[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init r8a7778_init_irq_extpin(int irlm)
+=======
+void __init r8a7778_init_irq_extpin_dt(int irlm)
+>>>>>>> v3.18
 =======
 void __init r8a7778_init_irq_extpin_dt(int irlm)
 >>>>>>> v3.18
@@ -669,11 +704,14 @@ void __init r8a7778_init_irq_extpin_dt(int irlm)
 	iowrite32(tmp, icr0);
 	iounmap(icr0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (irlm)
 		platform_device_register_resndata(
 			&platform_bus, "renesas_intc_irqpin", -1,
 =======
+=======
+>>>>>>> v3.18
 }
 
 void __init r8a7778_init_irq_extpin(int irlm)
@@ -682,19 +720,28 @@ void __init r8a7778_init_irq_extpin(int irlm)
 	if (irlm)
 		platform_device_register_resndata(
 			NULL, "renesas_intc_irqpin", -1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			irqpin_resources, ARRAY_SIZE(irqpin_resources),
 			&irqpin_platform_data, sizeof(irqpin_platform_data));
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __init r8a7778_init_delay(void)
 {
 	shmobile_init_delay();
 }
 
 #ifdef CONFIG_USE_OF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define INT2SMSKCR0	0x82288 /* 0xfe782288 */
 #define INT2SMSKCR1	0x8228c /* 0xfe78228c */
@@ -702,7 +749,11 @@ void __init r8a7778_init_delay(void)
 #define INT2NTSR0	0x00018 /* 0xfe700018 */
 #define INT2NTSR1	0x0002c /* 0xfe70002c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init r8a7778_init_irq_common(void)
+=======
+void __init r8a7778_init_irq_dt(void)
+>>>>>>> v3.18
 =======
 void __init r8a7778_init_irq_dt(void)
 >>>>>>> v3.18
@@ -712,6 +763,11 @@ void __init r8a7778_init_irq_dt(void)
 	BUG_ON(!base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	irqchip_init();
+
+>>>>>>> v3.18
 =======
 	irqchip_init();
 
@@ -727,6 +783,7 @@ void __init r8a7778_init_irq_dt(void)
 	iounmap(base);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init r8a7778_init_irq(void)
 {
@@ -767,6 +824,8 @@ void __init r8a7778_add_standard_devices_dt(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const char *r8a7778_compat_dt[] __initdata = {
 	"renesas,r8a7778",
 	NULL,
@@ -776,8 +835,12 @@ DT_MACHINE_START(R8A7778_DT, "Generic R8A7778 (Flattened Device Tree)")
 	.init_early	= r8a7778_init_delay,
 	.init_irq	= r8a7778_init_irq_dt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_machine	= r8a7778_add_standard_devices_dt,
 	.init_time	= shmobile_timer_init,
+=======
+	.init_late	= shmobile_init_late,
+>>>>>>> v3.18
 =======
 	.init_late	= shmobile_init_late,
 >>>>>>> v3.18

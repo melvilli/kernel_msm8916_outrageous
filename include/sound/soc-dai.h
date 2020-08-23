@@ -106,6 +106,11 @@ int snd_soc_dai_set_pll(struct snd_soc_dai *dai,
 	int pll_id, int source, unsigned int freq_in, unsigned int freq_out);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int snd_soc_dai_set_bclk_ratio(struct snd_soc_dai *dai, unsigned int ratio);
+
+>>>>>>> v3.18
 =======
 int snd_soc_dai_set_bclk_ratio(struct snd_soc_dai *dai, unsigned int ratio);
 
@@ -127,10 +132,14 @@ int snd_soc_dai_digital_mute(struct snd_soc_dai *dai, int mute,
 			     int direction);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_soc_dai_get_channel_map(struct snd_soc_dai *dai,
 	unsigned int *tx_num, unsigned int *tx_slot,
 	unsigned int *rx_num, unsigned int *rx_slot);
 
+=======
+int snd_soc_dai_is_dummy(struct snd_soc_dai *dai);
+>>>>>>> v3.18
 =======
 int snd_soc_dai_is_dummy(struct snd_soc_dai *dai);
 >>>>>>> v3.18
@@ -146,6 +155,10 @@ struct snd_soc_dai_ops {
 		unsigned int freq_in, unsigned int freq_out);
 	int (*set_clkdiv)(struct snd_soc_dai *dai, int div_id, int div);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*set_bclk_ratio)(struct snd_soc_dai *dai, unsigned int ratio);
+>>>>>>> v3.18
 =======
 	int (*set_bclk_ratio)(struct snd_soc_dai *dai, unsigned int ratio);
 >>>>>>> v3.18
@@ -156,6 +169,11 @@ struct snd_soc_dai_ops {
 	 */
 	int (*set_fmt)(struct snd_soc_dai *dai, unsigned int fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*xlate_tdm_slot_mask)(unsigned int slots,
+		unsigned int *tx_mask, unsigned int *rx_mask);
+>>>>>>> v3.18
 =======
 	int (*xlate_tdm_slot_mask)(unsigned int slots,
 		unsigned int *tx_mask, unsigned int *rx_mask);
@@ -168,10 +186,13 @@ struct snd_soc_dai_ops {
 		unsigned int rx_num, unsigned int *rx_slot);
 	int (*set_tristate)(struct snd_soc_dai *dai, int tristate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*get_channel_map)(struct snd_soc_dai *dai,
 		unsigned int *tx_num, unsigned int *tx_slot,
 		unsigned int *rx_num, unsigned int *rx_slot);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -197,7 +218,10 @@ struct snd_soc_dai_ops {
 	int (*prepare)(struct snd_pcm_substream *,
 		struct snd_soc_dai *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * NOTE: Commands passed to the trigger function are not necessarily
 	 * compatible with the current state of the dai. For example this
@@ -205,6 +229,9 @@ struct snd_soc_dai_ops {
 	 * So do not unconditionally use refcounting functions in the trigger
 	 * function, e.g. clk_enable/disable.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*trigger)(struct snd_pcm_substream *, int,
 		struct snd_soc_dai *);
@@ -251,6 +278,11 @@ struct snd_soc_dai_driver {
 	struct snd_soc_pcm_stream playback;
 	unsigned int symmetric_rates:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int symmetric_channels:1;
+	unsigned int symmetric_samplebits:1;
+>>>>>>> v3.18
 =======
 	unsigned int symmetric_channels:1;
 	unsigned int symmetric_samplebits:1;
@@ -280,7 +312,12 @@ struct snd_soc_dai {
 	unsigned int playback_active:1;		/* stream is in use */
 	unsigned int symmetric_rates:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_runtime *runtime;
+=======
+	unsigned int symmetric_channels:1;
+	unsigned int symmetric_samplebits:1;
+>>>>>>> v3.18
 =======
 	unsigned int symmetric_channels:1;
 	unsigned int symmetric_samplebits:1;
@@ -291,7 +328,10 @@ struct snd_soc_dai {
 	struct snd_soc_dapm_widget *playback_widget;
 	struct snd_soc_dapm_widget *capture_widget;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_context dapm;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -302,6 +342,11 @@ struct snd_soc_dai {
 	/* Symmetry data - only valid if symmetry is being enforced */
 	unsigned int rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int channels;
+	unsigned int sample_bits;
+>>>>>>> v3.18
 =======
 	unsigned int channels;
 	unsigned int sample_bits;
@@ -311,19 +356,28 @@ struct snd_soc_dai {
 	struct snd_soc_platform *platform;
 	struct snd_soc_codec *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component;
 
 	/* CODEC TDM slot masks and params (for fixup) */
 	unsigned int tx_mask;
 	unsigned int rx_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct snd_soc_card *card;
 
 	struct list_head list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head card_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -346,7 +400,10 @@ static inline void snd_soc_dai_set_dma_data(struct snd_soc_dai *dai,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void snd_soc_dai_init_dma_data(struct snd_soc_dai *dai,
 					     void *playback, void *capture)
 {
@@ -354,6 +411,9 @@ static inline void snd_soc_dai_init_dma_data(struct snd_soc_dai *dai,
 	dai->capture_dma_data = capture;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void snd_soc_dai_set_drvdata(struct snd_soc_dai *dai,
 		void *data)

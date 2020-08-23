@@ -15,12 +15,15 @@
 #define __ASM_ARC_PROCESSOR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 #ifndef __ASSEMBLY__
 
 #include <asm/arcregs.h>	/* for STATUS_E1_MASK et all */
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #include <asm/ptrace.h>
@@ -33,6 +36,9 @@ struct arc_fpu {
 	} aux_dpfp[2];
 };
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Arch specific stuff which needs to be saved per task.
@@ -44,10 +50,13 @@ struct thread_struct {
 	unsigned long callee_reg;	/* pointer to callee regs */
 	unsigned long fault_address;	/* dbls as brkpt holder as well */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long cause_code;	/* Exception Cause Code (ECR) */
 #ifdef CONFIG_ARC_CURR_IN_REG
 	unsigned long user_r25;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ARC_FPU_SAVE_RESTORE
@@ -63,6 +72,7 @@ struct thread_struct {
 struct task_struct;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Return saved PC of a blocked thread.
  */
@@ -73,6 +83,8 @@ unsigned long thread_saved_pc(struct task_struct *t);
 
 /* Free all resources held by a thread. */
 =======
+=======
+>>>>>>> v3.18
 /* Return saved PC of a blocked thread  */
 unsigned long thread_saved_pc(struct task_struct *t);
 
@@ -80,6 +92,9 @@ unsigned long thread_saved_pc(struct task_struct *t);
 	((struct pt_regs *)(THREAD_SIZE + (void *)task_stack_page(p)) - 1)
 
 /* Free all resources held by a thread */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define release_thread(thread) do { } while (0)
 
@@ -97,6 +112,11 @@ unsigned long thread_saved_pc(struct task_struct *t);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 
@@ -108,6 +128,7 @@ unsigned long thread_saved_pc(struct task_struct *t);
 
 /*
  * Where abouts of Task's sp, fp, blink when it was last seen in kernel mode.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * These can't be derived from pt_regs as that would give correp user-mode val
  */
@@ -136,6 +157,8 @@ do {								\
 	(_regs)->lp_end = 0x80;					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
  * Look in process.c for details of kernel stack layout
  */
 #define KSTK_ESP(tsk)   (tsk->thread.ksp)
@@ -148,6 +171,9 @@ do {								\
 
 extern void start_thread(struct pt_regs * regs, unsigned long pc,
 			 unsigned long usp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern unsigned int get_wchan(struct task_struct *p);
@@ -195,8 +221,11 @@ extern unsigned int get_wchan(struct task_struct *p);
 #define TASK_UNMAPPED_BASE      (TASK_SIZE / 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASM_ARC_PROCESSOR_H */

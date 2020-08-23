@@ -51,6 +51,10 @@
 #define VM_FAULT_BADACCESS	0x040000
 #define VM_FAULT_SIGNAL		0x080000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VM_FAULT_PFAULT		0x100000
+>>>>>>> v3.18
 =======
 #define VM_FAULT_PFAULT		0x100000
 >>>>>>> v3.18
@@ -110,18 +114,25 @@ void bust_spinlocks(int yes)
  * Returns 0 for kernel space and 1 for user space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int user_space_fault(unsigned long trans_exc_code)
 {
 =======
+=======
+>>>>>>> v3.18
 static inline int user_space_fault(struct pt_regs *regs)
 {
 	unsigned long trans_exc_code;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The lowest two bits of the translation exception
 	 * identification indicate which paging table was used.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	trans_exc_code &= 3;
 	if (trans_exc_code == 2)
@@ -138,6 +149,8 @@ static inline int user_space_fault(struct pt_regs *regs)
 	 */
 	return trans_exc_code != 3;
 =======
+=======
+>>>>>>> v3.18
 	trans_exc_code = regs->int_parm_long & 3;
 	if (trans_exc_code == 3) /* home space -> kernel */
 		return 0;
@@ -275,6 +288,9 @@ static void dump_fault_info(struct pt_regs *regs)
 	}
 	pr_cont("ASCE.\n");
 	dump_pagetable(asce, regs->int_parm_long & __FAIL_ADDR_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -291,8 +307,14 @@ static inline void report_user_fault(struct pt_regs *regs, long signr)
 	print_vma_addr(KERN_CONT "in ", regs->psw.addr & PSW_ADDR_INSN);
 	printk(KERN_CONT "\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ALERT "failing address: %lX\n",
 	       regs->int_parm_long & __FAIL_ADDR_MASK);
+=======
+	printk(KERN_ALERT "failing address: %016lx TEID: %016lx\n",
+	       regs->int_parm_long & __FAIL_ADDR_MASK, regs->int_parm_long);
+	dump_fault_info(regs);
+>>>>>>> v3.18
 =======
 	printk(KERN_ALERT "failing address: %016lx TEID: %016lx\n",
 	       regs->int_parm_long & __FAIL_ADDR_MASK, regs->int_parm_long);
@@ -334,6 +356,7 @@ static noinline void do_no_context(struct pt_regs *regs)
 	 */
 	address = regs->int_parm_long & __FAIL_ADDR_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!user_space_fault(regs->int_parm_long))
 		printk(KERN_ALERT "Unable to handle kernel pointer dereference"
 		       " at virtual kernel address %p\n", (void *)address);
@@ -342,6 +365,8 @@ static noinline void do_no_context(struct pt_regs *regs)
 		       " at virtual user address %p\n", (void *)address);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!user_space_fault(regs))
 		printk(KERN_ALERT "Unable to handle kernel pointer dereference"
 		       " in virtual kernel address space\n");
@@ -351,6 +376,9 @@ static noinline void do_no_context(struct pt_regs *regs)
 	printk(KERN_ALERT "failing address: %016lx TEID: %016lx\n",
 	       regs->int_parm_long & __FAIL_ADDR_MASK, regs->int_parm_long);
 	dump_fault_info(regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	die(regs, "Oops");
 	do_exit(SIGKILL);
@@ -402,6 +430,10 @@ static noinline void do_fault_error(struct pt_regs *regs, int fault)
 		}
 	case VM_FAULT_BADCONTEXT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case VM_FAULT_PFAULT:
+>>>>>>> v3.18
 =======
 	case VM_FAULT_PFAULT:
 >>>>>>> v3.18
@@ -418,12 +450,15 @@ static noinline void do_fault_error(struct pt_regs *regs, int fault)
 			else
 				pagefault_out_of_memory();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (fault & VM_FAULT_SIGSEGV) {
 			/* Kernel mode? Handle exceptions or die */
 			if (!user_mode(regs))
 				do_no_context(regs);
 			else
 				do_sigsegv(regs, SEGV_MAPERR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		} else if (fault & VM_FAULT_SIGBUS) {
@@ -452,6 +487,12 @@ static noinline void do_fault_error(struct pt_regs *regs, int fault)
 static inline int do_exception(struct pt_regs *regs, int access)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PGSTE
+	struct gmap *gmap;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PGSTE
 	struct gmap *gmap;
@@ -471,7 +512,11 @@ static inline int do_exception(struct pt_regs *regs, int access)
 	 * been nullified. Don't signal single step via SIGTRAP.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_tsk_thread_flag(tsk, TIF_PER_TRAP);
+=======
+	clear_pt_regs_flag(regs, PIF_PER_TRAP);
+>>>>>>> v3.18
 =======
 	clear_pt_regs_flag(regs, PIF_PER_TRAP);
 >>>>>>> v3.18
@@ -489,7 +534,11 @@ static inline int do_exception(struct pt_regs *regs, int access)
 	 */
 	fault = VM_FAULT_BADCONTEXT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!user_space_fault(trans_exc_code) || in_atomic() || !mm))
+=======
+	if (unlikely(!user_space_fault(regs) || in_atomic() || !mm))
+>>>>>>> v3.18
 =======
 	if (unlikely(!user_space_fault(regs) || in_atomic() || !mm))
 >>>>>>> v3.18
@@ -506,25 +555,36 @@ static inline int do_exception(struct pt_regs *regs, int access)
 
 #ifdef CONFIG_PGSTE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((current->flags & PF_VCPU) && S390_lowcore.gmap) {
 		address = __gmap_fault(address,
 				     (struct gmap *) S390_lowcore.gmap);
 =======
+=======
+>>>>>>> v3.18
 	gmap = (current->flags & PF_VCPU) ?
 		(struct gmap *) S390_lowcore.gmap : NULL;
 	if (gmap) {
 		current->thread.gmap_addr = address;
 		address = __gmap_translate(gmap, address);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (address == -EFAULT) {
 			fault = VM_FAULT_BADMAP;
 			goto out_up;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (address == -ENOMEM) {
 			fault = VM_FAULT_OOM;
 			goto out_up;
 		}
+=======
+		if (gmap->pfault_enabled)
+			flags |= FAULT_FLAG_RETRY_NOWAIT;
+>>>>>>> v3.18
 =======
 		if (gmap->pfault_enabled)
 			flags |= FAULT_FLAG_RETRY_NOWAIT;
@@ -586,10 +646,13 @@ retry:
 		}
 		if (fault & VM_FAULT_RETRY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Clear FAULT_FLAG_ALLOW_RETRY to avoid any risk
 			 * of starvation. */
 			flags &= ~FAULT_FLAG_ALLOW_RETRY;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PGSTE
 			if (gmap && (flags & FAULT_FLAG_RETRY_NOWAIT)) {
 				/* FAULT_FLAG_RETRY_NOWAIT has been set,
@@ -603,6 +666,9 @@ retry:
 			 * of starvation. */
 			flags &= ~(FAULT_FLAG_ALLOW_RETRY |
 				   FAULT_FLAG_RETRY_NOWAIT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			flags |= FAULT_FLAG_TRIED;
 			down_read(&mm->mmap_sem);
@@ -610,7 +676,10 @@ retry:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PGSTE
 	if (gmap) {
 		address =  __gmap_link(gmap, current->thread.gmap_addr,
@@ -625,6 +694,9 @@ retry:
 		}
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fault = 0;
 out_up:
@@ -670,6 +742,7 @@ void __kprobes do_dat_exception(struct pt_regs *regs)
 		do_fault_error(regs, fault);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_64BIT
 void __kprobes do_asce_exception(struct pt_regs *regs)
@@ -732,6 +805,8 @@ int __handle_fault(unsigned long uaddr, unsigned long pgm_int_code, int write)
 	return fault ? -EFAULT : 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PFAULT 
@@ -887,8 +962,13 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit pfault_cpu_notify(struct notifier_block *self,
 				       unsigned long action, void *hcpu)
+=======
+static int pfault_cpu_notify(struct notifier_block *self, unsigned long action,
+			     void *hcpu)
+>>>>>>> v3.18
 =======
 static int pfault_cpu_notify(struct notifier_block *self, unsigned long action,
 			     void *hcpu)
@@ -920,7 +1000,11 @@ static int __init pfault_irq_init(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = register_external_interrupt(0x2603, pfault_interrupt);
+=======
+	rc = register_external_irq(EXT_IRQ_CP_SERVICE, pfault_interrupt);
+>>>>>>> v3.18
 =======
 	rc = register_external_irq(EXT_IRQ_CP_SERVICE, pfault_interrupt);
 >>>>>>> v3.18
@@ -930,7 +1014,11 @@ static int __init pfault_irq_init(void)
 	if (rc)
 		goto out_pfault;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	service_subclass_irq_register();
+=======
+	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
+>>>>>>> v3.18
 =======
 	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
 >>>>>>> v3.18
@@ -939,7 +1027,11 @@ static int __init pfault_irq_init(void)
 
 out_pfault:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_external_interrupt(0x2603, pfault_interrupt);
+=======
+	unregister_external_irq(EXT_IRQ_CP_SERVICE, pfault_interrupt);
+>>>>>>> v3.18
 =======
 	unregister_external_irq(EXT_IRQ_CP_SERVICE, pfault_interrupt);
 >>>>>>> v3.18

@@ -138,6 +138,10 @@ void mcp_enable(struct mcp *mcp)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

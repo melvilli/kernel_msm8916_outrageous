@@ -246,7 +246,11 @@ static irqreturn_t mpc52xx_lpbfifo_irq(int irq, void *dev_id)
 	if (dma && !write) {
 		spin_unlock_irqrestore(&lpbfifo.lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("bogus LPBFIFO IRQ (dma and not writting)\n");
+=======
+		pr_err("bogus LPBFIFO IRQ (dma and not writing)\n");
+>>>>>>> v3.18
 =======
 		pr_err("bogus LPBFIFO IRQ (dma and not writing)\n");
 >>>>>>> v3.18
@@ -569,7 +573,11 @@ static int mpc52xx_lpbfifo_remove(struct platform_device *op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_lpbfifo_match[] = {
+=======
+static const struct of_device_id mpc52xx_lpbfifo_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_lpbfifo_match[] = {
 >>>>>>> v3.18

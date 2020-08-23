@@ -7,6 +7,10 @@
 
 #include <linux/mbus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@ struct mv643xx_eth_shared_platform_data {
 #define MV643XX_ETH_PHY_NONE		0xff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct device_node;
+>>>>>>> v3.18
 =======
 struct device_node;
 >>>>>>> v3.18
@@ -50,6 +58,10 @@ struct mv643xx_eth_platform_data {
 	 */
 	int			phy_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node	*phy_node;
+>>>>>>> v3.18
 =======
 	struct device_node	*phy_node;
 >>>>>>> v3.18
@@ -59,7 +71,11 @@ struct mv643xx_eth_platform_data {
 	 * address that is already in the hardware.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			mac_addr[6];
+=======
+	u8			mac_addr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8			mac_addr[ETH_ALEN];
 >>>>>>> v3.18

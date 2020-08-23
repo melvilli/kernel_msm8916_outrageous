@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: 802.11n RX Re-ordering
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -26,6 +30,11 @@
 
 #define MIN_FLUSH_TIMER_MS		50
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MIN_FLUSH_TIMER_15_MS		15
+#define MWIFIEX_BA_WIN_SIZE_32		32
+>>>>>>> v3.18
 =======
 #define MIN_FLUSH_TIMER_15_MS		15
 #define MWIFIEX_BA_WIN_SIZE_32		32
@@ -52,7 +61,12 @@
 
 enum mwifiex_rxreor_flags {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RXREOR_FORCE_NO_DROP	= 1<<0,
+=======
+	RXREOR_FORCE_NO_DROP		= 1<<0,
+	RXREOR_INIT_WINDOW_SHIFT	= 1<<1,
+>>>>>>> v3.18
 =======
 	RXREOR_FORCE_NO_DROP		= 1<<0,
 	RXREOR_INIT_WINDOW_SHIFT	= 1<<1,

@@ -46,7 +46,11 @@ static void ucb1400_gpio_set(struct gpio_chip *gc, unsigned off, int val)
 static int ucb1400_gpio_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ucb1400_gpio *ucb = dev->dev.platform_data;
+=======
+	struct ucb1400_gpio *ucb = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct ucb1400_gpio *ucb = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -69,7 +73,11 @@ static int ucb1400_gpio_probe(struct platform_device *dev)
 	ucb->gc.get = ucb1400_gpio_get;
 	ucb->gc.set = ucb1400_gpio_set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ucb->gc.can_sleep = 1;
+=======
+	ucb->gc.can_sleep = true;
+>>>>>>> v3.18
 =======
 	ucb->gc.can_sleep = true;
 >>>>>>> v3.18
@@ -79,7 +87,11 @@ static int ucb1400_gpio_probe(struct platform_device *dev)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ucb && ucb->gpio_setup)
+=======
+	if (ucb->gpio_setup)
+>>>>>>> v3.18
 =======
 	if (ucb->gpio_setup)
 >>>>>>> v3.18
@@ -102,7 +114,11 @@ static int ucb1400_gpio_remove(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = gpiochip_remove(&ucb->gc);
+=======
+	gpiochip_remove(&ucb->gc);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&ucb->gc);
 >>>>>>> v3.18
@@ -122,6 +138,10 @@ module_platform_driver(ucb1400_gpio_driver);
 MODULE_DESCRIPTION("Philips UCB1400 GPIO driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:ucb1400_gpio");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:ucb1400_gpio");
 >>>>>>> v3.18

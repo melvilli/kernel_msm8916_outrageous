@@ -125,6 +125,11 @@ enum {
 	L2TP_ATTR_IP6_SADDR,		/* struct in6_addr */
 	L2TP_ATTR_IP6_DADDR,		/* struct in6_addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	L2TP_ATTR_UDP_ZERO_CSUM6_TX,	/* u8 */
+	L2TP_ATTR_UDP_ZERO_CSUM6_RX,	/* u8 */
+>>>>>>> v3.18
 =======
 	L2TP_ATTR_UDP_ZERO_CSUM6_TX,	/* u8 */
 	L2TP_ATTR_UDP_ZERO_CSUM6_RX,	/* u8 */

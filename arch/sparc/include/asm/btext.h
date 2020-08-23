@@ -2,7 +2,11 @@
 #define _SPARC_BTEXT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int btext_find_display(void);
+=======
+int btext_find_display(void);
+>>>>>>> v3.18
 =======
 int btext_find_display(void);
 >>>>>>> v3.18

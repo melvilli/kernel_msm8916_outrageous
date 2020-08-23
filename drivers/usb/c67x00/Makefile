@@ -3,8 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-$(CONFIG_USB_DEBUG) := -DDEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_USB_C67X00_HCD)	+= c67x00.o

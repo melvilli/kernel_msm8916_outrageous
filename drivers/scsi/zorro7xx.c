@@ -105,7 +105,11 @@ static int zorro7xx_init_one(struct zorro_dev *z,
 		hostdata->base = ioremap(ioaddr, zorro_resource_len(z));
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hostdata->base = (void __iomem *)ZTWO_VADDR(ioaddr);
+=======
+		hostdata->base = ZTWO_VADDR(ioaddr);
+>>>>>>> v3.18
 =======
 		hostdata->base = ZTWO_VADDR(ioaddr);
 >>>>>>> v3.18

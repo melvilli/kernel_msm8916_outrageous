@@ -31,10 +31,16 @@
 #include <linux/seq_file.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PWMS 1024
 
 /* flags in the third cell of the DT PWM specifier */
 #define PWM_SPEC_POLARITY	(1 << 0)
+=======
+#include <dt-bindings/pwm/pwm.h>
+
+#define MAX_PWMS 1024
+>>>>>>> v3.18
 =======
 #include <dt-bindings/pwm/pwm.h>
 
@@ -156,7 +162,11 @@ of_pwm_xlate_with_flags(struct pwm_chip *pc, const struct of_phandle_args *args)
 	pwm_set_period(pwm, args->args[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (args->args[2] & PWM_SPEC_POLARITY)
+=======
+	if (args->args[2] & PWM_POLARITY_INVERTED)
+>>>>>>> v3.18
 =======
 	if (args->args[2] & PWM_POLARITY_INVERTED)
 >>>>>>> v3.18
@@ -248,7 +258,11 @@ int pwmchip_add(struct pwm_chip *chip)
 
 	if (!chip || !chip->dev || !chip->ops || !chip->ops->config ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !chip->ops->enable || !chip->ops->disable)
+=======
+	    !chip->ops->enable || !chip->ops->disable || !chip->npwm)
+>>>>>>> v3.18
 =======
 	    !chip->ops->enable || !chip->ops->disable || !chip->npwm)
 >>>>>>> v3.18
@@ -289,6 +303,11 @@ int pwmchip_add(struct pwm_chip *chip)
 		of_pwmchip_add(chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pwmchip_sysfs_export(chip);
+
+>>>>>>> v3.18
 =======
 	pwmchip_sysfs_export(chip);
 
@@ -330,6 +349,11 @@ int pwmchip_remove(struct pwm_chip *chip)
 	free_pwms(chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pwmchip_sysfs_unexport(chip);
+
+>>>>>>> v3.18
 =======
 	pwmchip_sysfs_unexport(chip);
 
@@ -427,11 +451,14 @@ EXPORT_SYMBOL_GPL(pwm_free);
 int pwm_config(struct pwm_device *pwm, int duty_ns, int period_ns)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pwm || duty_ns < 0 || period_ns <= 0 || duty_ns > period_ns)
 		return -EINVAL;
 
 	return pwm->chip->ops->config(pwm->chip, pwm, duty_ns, period_ns);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	if (!pwm || duty_ns < 0 || period_ns <= 0 || duty_ns > period_ns)
@@ -445,6 +472,9 @@ int pwm_config(struct pwm_device *pwm, int duty_ns, int period_ns)
 	pwm->period = period_ns;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(pwm_config);
@@ -459,6 +489,11 @@ EXPORT_SYMBOL_GPL(pwm_config);
 int pwm_set_polarity(struct pwm_device *pwm, enum pwm_polarity polarity)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+
+>>>>>>> v3.18
 =======
 	int err;
 
@@ -473,8 +508,11 @@ int pwm_set_polarity(struct pwm_device *pwm, enum pwm_polarity polarity)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pwm->chip->ops->set_polarity(pwm->chip, pwm, polarity);
 =======
+=======
+>>>>>>> v3.18
 	err = pwm->chip->ops->set_polarity(pwm->chip, pwm, polarity);
 	if (err)
 		return err;
@@ -482,6 +520,9 @@ int pwm_set_polarity(struct pwm_device *pwm, enum pwm_polarity polarity)
 	pwm->polarity = polarity;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(pwm_set_polarity);
@@ -638,9 +679,14 @@ struct pwm_device *pwm_get(struct device *dev, const char *con_id)
 	const char *dev_id = dev ? dev_name(dev) : NULL;
 	struct pwm_chip *chip = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int index = 0;
 	unsigned int best = 0;
 	struct pwm_lookup *p;
+=======
+	unsigned int best = 0;
+	struct pwm_lookup *p, *chosen = NULL;
+>>>>>>> v3.18
 =======
 	unsigned int best = 0;
 	struct pwm_lookup *p, *chosen = NULL;
@@ -692,8 +738,12 @@ struct pwm_device *pwm_get(struct device *dev, const char *con_id)
 
 		if (match > best) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			chip = pwmchip_find_by_name(p->provider);
 			index = p->index;
+=======
+			chosen = p;
+>>>>>>> v3.18
 =======
 			chosen = p;
 >>>>>>> v3.18
@@ -706,12 +756,15 @@ struct pwm_device *pwm_get(struct device *dev, const char *con_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chip)
 		pwm = pwm_request_from_chip(chip, index, con_id ?: dev_id);
 
 	mutex_unlock(&pwm_lookup_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!chosen)
 		goto out;
 
@@ -728,6 +781,9 @@ struct pwm_device *pwm_get(struct device *dev, const char *con_id)
 
 out:
 	mutex_unlock(&pwm_lookup_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pwm;
 }
@@ -778,7 +834,11 @@ struct pwm_device *devm_pwm_get(struct device *dev, const char *con_id)
 	struct pwm_device **ptr, *pwm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr = devres_alloc(devm_pwm_release, sizeof(**ptr), GFP_KERNEL);
+=======
+	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
 >>>>>>> v3.18
@@ -812,7 +872,11 @@ struct pwm_device *devm_of_pwm_get(struct device *dev, struct device_node *np,
 	struct pwm_device **ptr, *pwm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr = devres_alloc(devm_pwm_release, sizeof(**ptr), GFP_KERNEL);
+=======
+	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
 >>>>>>> v3.18
@@ -880,6 +944,7 @@ static void pwm_dbg_show(struct pwm_chip *chip, struct seq_file *s)
 
 		if (test_bit(PWMF_REQUESTED, &pwm->flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(s, " requested");
 
 		if (test_bit(PWMF_ENABLED, &pwm->flags))
@@ -887,12 +952,17 @@ static void pwm_dbg_show(struct pwm_chip *chip, struct seq_file *s)
 
 		seq_printf(s, "\n");
 =======
+=======
+>>>>>>> v3.18
 			seq_puts(s, " requested");
 
 		if (test_bit(PWMF_ENABLED, &pwm->flags))
 			seq_puts(s, " enabled");
 
 		seq_puts(s, "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

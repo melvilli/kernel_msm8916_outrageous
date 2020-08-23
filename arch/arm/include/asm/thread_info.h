@@ -17,12 +17,16 @@
 #include <asm/page.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_4KSTACKS
 #define THREAD_SIZE_ORDER	1
 #else
 #define THREAD_SIZE_ORDER	0
 #endif
 
+=======
+#define THREAD_SIZE_ORDER	1
+>>>>>>> v3.18
 =======
 #define THREAD_SIZE_ORDER	1
 >>>>>>> v3.18
@@ -114,9 +118,12 @@ static inline struct thread_info *current_thread_info(void)
 #define thread_saved_sp(tsk)	\
 	((unsigned long)(task_thread_info(tsk)->cpu_context.sp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define thread_saved_fp(tsk)	\
 	((unsigned long)(task_thread_info(tsk)->cpu_context.fp))
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_THUMB2_KERNEL
 #define thread_saved_fp(tsk)	\
@@ -125,6 +132,9 @@ static inline struct thread_info *current_thread_info(void)
 #define thread_saved_fp(tsk)	\
 	((unsigned long)(task_thread_info(tsk)->cpu_context.r7))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void crunch_task_disable(struct thread_info *);
@@ -152,12 +162,15 @@ extern int vfp_restore_user_hwstate(struct user_vfp __user *,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * We use bit 30 of the preempt_count to indicate that kernel
  * preemption is occurring.  See <asm/hardirq.h>.
  */
 #define PREEMPT_ACTIVE	0x40000000
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * thread information flags:
@@ -173,6 +186,10 @@ extern int vfp_restore_user_hwstate(struct user_vfp __user *,
 #define TIF_NEED_RESCHED	1
 #define TIF_NOTIFY_RESUME	2	/* callback before returning to user */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIF_UPROBE		7
+>>>>>>> v3.18
 =======
 #define TIF_UPROBE		7
 >>>>>>> v3.18
@@ -185,7 +202,10 @@ extern int vfp_restore_user_hwstate(struct user_vfp __user *,
 #define TIF_MEMDIE		18	/* is terminating due to OOM killer */
 #define TIF_RESTORE_SIGMASK	20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIF_MM_RELEASED		23	/* task MM has been released */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -193,6 +213,10 @@ extern int vfp_restore_user_hwstate(struct user_vfp __user *,
 #define _TIF_NEED_RESCHED	(1 << TIF_NEED_RESCHED)
 #define _TIF_NOTIFY_RESUME	(1 << TIF_NOTIFY_RESUME)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _TIF_UPROBE		(1 << TIF_UPROBE)
+>>>>>>> v3.18
 =======
 #define _TIF_UPROBE		(1 << TIF_UPROBE)
 >>>>>>> v3.18
@@ -210,7 +234,12 @@ extern int vfp_restore_user_hwstate(struct user_vfp __user *,
  * Change these and you break ASM code in entry-common.S
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _TIF_WORK_MASK		(_TIF_NEED_RESCHED | _TIF_SIGPENDING | _TIF_NOTIFY_RESUME)
+=======
+#define _TIF_WORK_MASK		(_TIF_NEED_RESCHED | _TIF_SIGPENDING | \
+				 _TIF_NOTIFY_RESUME | _TIF_UPROBE)
+>>>>>>> v3.18
 =======
 #define _TIF_WORK_MASK		(_TIF_NEED_RESCHED | _TIF_SIGPENDING | \
 				 _TIF_NOTIFY_RESUME | _TIF_UPROBE)

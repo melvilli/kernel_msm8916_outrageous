@@ -164,7 +164,10 @@ struct tps6507x_dev {
 	/* Client devices */
 	struct tps6507x_pmic *pmic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps6507x_ts *ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

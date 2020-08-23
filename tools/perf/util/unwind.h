@@ -2,14 +2,20 @@
 #define __UNWIND_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
 #include "event.h"
 #include "symbol.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include "event.h"
 #include "symbol.h"
 #include "thread.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct unwind_entry {
@@ -21,6 +27,7 @@ struct unwind_entry {
 typedef int (*unwind_entry_cb_t)(struct unwind_entry *entry, void *arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBUNWIND_SUPPORT
 int unwind__get_entries(unwind_entry_cb_t cb, void *arg,
 			struct machine *machine,
@@ -29,6 +36,8 @@ int unwind__get_entries(unwind_entry_cb_t cb, void *arg,
 			struct perf_sample *data);
 int unwind__arch_reg_id(int regnum);
 =======
+=======
+>>>>>>> v3.18
 #ifdef HAVE_DWARF_UNWIND_SUPPORT
 int unwind__get_entries(unwind_entry_cb_t cb, void *arg,
 			struct machine *machine,
@@ -49,6 +58,9 @@ static inline int unwind__prepare_access(struct thread *thread __maybe_unused)
 static inline void unwind__flush_access(struct thread *thread __maybe_unused) {}
 static inline void unwind__finish_access(struct thread *thread __maybe_unused) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int
@@ -57,6 +69,7 @@ unwind__get_entries(unwind_entry_cb_t cb __maybe_unused,
 		    struct machine *machine __maybe_unused,
 		    struct thread *thread __maybe_unused,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    u64 sample_uregs __maybe_unused,
 		    struct perf_sample *data __maybe_unused)
 {
@@ -64,6 +77,8 @@ unwind__get_entries(unwind_entry_cb_t cb __maybe_unused,
 }
 #endif /* LIBUNWIND_SUPPORT */
 =======
+=======
+>>>>>>> v3.18
 		    struct perf_sample *data __maybe_unused,
 		    int max_stack __maybe_unused)
 {
@@ -78,5 +93,8 @@ static inline int unwind__prepare_access(struct thread *thread __maybe_unused)
 static inline void unwind__flush_access(struct thread *thread __maybe_unused) {}
 static inline void unwind__finish_access(struct thread *thread __maybe_unused) {}
 #endif /* HAVE_DWARF_UNWIND_SUPPORT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __UNWIND_H */

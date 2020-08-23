@@ -1,6 +1,10 @@
 menuconfig UIO
 	tristate "Userspace I/O drivers"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on MMU
+>>>>>>> v3.18
 =======
 	depends on MMU
 >>>>>>> v3.18
@@ -28,6 +32,7 @@ config UIO_CIF
 	  will be called uio_cif.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config UIO_PDRV
 	tristate "Userspace I/O platform driver"
 	help
@@ -35,6 +40,8 @@ config UIO_PDRV
 
 	  If you don't know what to do here, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config UIO_PDRV_GENIRQ
@@ -136,6 +143,7 @@ config UIO_PRUSS
 	  will be called uio_pruss.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config UIO_MSM_SHAREDMEM
 	bool "MSM shared memory driver"
 	default n
@@ -143,6 +151,8 @@ config UIO_MSM_SHAREDMEM
 	  Provides the clients with their respective alloted shared memory
 	  addresses which are used as transport buffer.
 =======
+=======
+>>>>>>> v3.18
 config UIO_MF624
 	tristate "Humusoft MF624 DAQ PCI card driver"
 	depends on PCI
@@ -155,6 +165,9 @@ config UIO_MF624
 	    git clone git://rtime.felk.cvut.cz/mf6xx.git
 
 	  If you compile this as a module, it will be called uio_mf624.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif

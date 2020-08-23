@@ -781,7 +781,11 @@ void carl9170_usb_stop(struct ar9170 *ar)
 
 	/* This is required to prevent an early completion on _start */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(ar->cmd_wait);
+=======
+	reinit_completion(&ar->cmd_wait);
+>>>>>>> v3.18
 =======
 	reinit_completion(&ar->cmd_wait);
 >>>>>>> v3.18
@@ -1104,9 +1108,12 @@ static int carl9170_usb_probe(struct usb_interface *intf,
 	carl9170_set_state(ar, CARL9170_STOPPED);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return request_firmware_nowait(THIS_MODULE, 1, CARL9170FW_NAME,
 		&ar->udev->dev, GFP_KERNEL, ar, carl9170_usb_firmware_step2);
 =======
+=======
+>>>>>>> v3.18
 	err = request_firmware_nowait(THIS_MODULE, 1, CARL9170FW_NAME,
 		&ar->udev->dev, GFP_KERNEL, ar, carl9170_usb_firmware_step2);
 	if (err) {
@@ -1115,6 +1122,9 @@ static int carl9170_usb_probe(struct usb_interface *intf,
 		carl9170_free(ar);
 	}
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

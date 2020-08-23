@@ -17,7 +17,10 @@ config CEPH_FS
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 if CEPH_FS
 config CEPH_FSCACHE
 	bool "Enable Ceph client caching support"
@@ -40,4 +43,7 @@ config CEPH_FS_POSIX_ACL
 	  Linux website <http://acl.bestbits.at/>.
 
 	  If you don't know what Access Control Lists are, say N
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -104,6 +104,7 @@
 #define IMX6Q_GPR1_EXC_MON_OKAY			0x0
 #define IMX6Q_GPR1_EXC_MON_SLVE			BIT(22)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMX6Q_GPR1_MIPI_IPU2_SEL_MASK		BIT(21)
 #define IMX6Q_GPR1_MIPI_IPU2_SEL_GASKET		0x0
 #define IMX6Q_GPR1_MIPI_IPU2_SEL_IOMUX		BIT(21)
@@ -114,6 +115,8 @@
 #define IMX6Q_GPR1_MIPI_IPU2_MUX_GASKET		0x0
 #define IMX6Q_GPR1_MIPI_IPU2_MUX_IOMUX		BIT(19)
 =======
+=======
+>>>>>>> v3.18
 #define IMX6Q_GPR1_ENET_CLK_SEL_MASK		BIT(21)
 #define IMX6Q_GPR1_ENET_CLK_SEL_PAD		0
 #define IMX6Q_GPR1_ENET_CLK_SEL_ANATOP		BIT(21)
@@ -123,6 +126,9 @@
 #define IMX6Q_GPR1_MIPI_IPU1_MUX_MASK		BIT(19)
 #define IMX6Q_GPR1_MIPI_IPU1_MUX_GASKET		0x0
 #define IMX6Q_GPR1_MIPI_IPU1_MUX_IOMUX		BIT(19)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IMX6Q_GPR1_PCIE_TEST_PD			BIT(18)
 #define IMX6Q_GPR1_IPU_VPU_MUX_MASK		BIT(17)
@@ -225,6 +231,10 @@
 #define IMX6Q_GPR3_MIPI_MUX_CTL_IPU2_DI0	(0x2 << 4)
 #define IMX6Q_GPR3_MIPI_MUX_CTL_IPU2_DI1	(0x3 << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMX6Q_GPR3_HDMI_MUX_CTL_SHIFT		2
+>>>>>>> v3.18
 =======
 #define IMX6Q_GPR3_HDMI_MUX_CTL_SHIFT		2
 >>>>>>> v3.18
@@ -258,7 +268,10 @@
 #define IMX6Q_GPR5_L2_CLK_STOP			BIT(8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IMX6Q_GPR6_IPU1_ID00_WR_QOS_MASK	(0xf << 0)
 #define IMX6Q_GPR6_IPU1_ID01_WR_QOS_MASK	(0xf << 4)
 #define IMX6Q_GPR6_IPU1_ID10_WR_QOS_MASK	(0xf << 8)
@@ -283,6 +296,9 @@
 #define IMX6Q_GPR8_TX_DEEMPH_GEN2_3P5DB		(0x3f << 6)
 #define IMX6Q_GPR8_TX_DEEMPH_GEN1		(0x3f << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IMX6Q_GPR9_TZASC2_BYP			BIT(1)
 #define IMX6Q_GPR9_TZASC1_BYP			BIT(0)
@@ -317,7 +333,13 @@
 #define IMX6Q_GPR12_ARMP_ATB_CLK_EN		BIT(25)
 #define IMX6Q_GPR12_ARMP_APB_CLK_EN		BIT(24)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMX6Q_GPR12_PCIE_CTL_2			BIT(10)
+=======
+#define IMX6Q_GPR12_DEVICE_TYPE			(0xf << 12)
+#define IMX6Q_GPR12_PCIE_CTL_2			BIT(10)
+#define IMX6Q_GPR12_LOS_LEVEL			(0x1f << 4)
+>>>>>>> v3.18
 =======
 #define IMX6Q_GPR12_DEVICE_TYPE			(0xf << 12)
 #define IMX6Q_GPR12_PCIE_CTL_2			BIT(10)
@@ -328,6 +350,7 @@
 #define IMX6Q_GPR13_CAN2_STOP_REQ		BIT(29)
 #define IMX6Q_GPR13_CAN1_STOP_REQ		BIT(28)
 #define IMX6Q_GPR13_ENET_STOP_REQ		BIT(27)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IMX6Q_GPR13_SATA_PHY_8_MASK		(0x7 << 24)
 #define IMX6Q_GPR13_SATA_PHY_8_0_5_DB		(0x0 << 24)
@@ -366,6 +389,8 @@
 #define IMX6Q_GPR13_SATA_PHY_1_MED		(0x1 << 0)
 #define IMX6Q_GPR13_SATA_PHY_1_SLOW		(0x2 << 0)
 =======
+=======
+>>>>>>> v3.18
 #define IMX6Q_GPR13_SATA_RX_EQ_VAL_MASK		(0x7 << 24)
 #define IMX6Q_GPR13_SATA_RX_EQ_VAL_0_5_DB	(0x0 << 24)
 #define IMX6Q_GPR13_SATA_RX_EQ_VAL_1_0_DB	(0x1 << 24)
@@ -454,6 +479,9 @@
 /* For imx6sl iomux gpr register field define */
 #define IMX6SL_GPR1_FEC_CLOCK_MUX1_SEL_MASK    (0x3 << 17)
 #define IMX6SL_GPR1_FEC_CLOCK_MUX2_SEL_MASK    (0x1 << 14)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __LINUX_IMX6Q_IOMUXC_GPR_H */

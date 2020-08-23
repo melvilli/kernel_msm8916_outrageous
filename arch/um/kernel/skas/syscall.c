@@ -19,10 +19,14 @@ void handle_syscall(struct uml_pt_regs *r)
 	int syscall;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (syscall_trace_enter(regs)) {
 		result = -ENOSYS;
 		goto out;
 	}
+=======
+	syscall_trace_enter(regs);
+>>>>>>> v3.18
 =======
 	syscall_trace_enter(regs);
 >>>>>>> v3.18
@@ -42,7 +46,10 @@ void handle_syscall(struct uml_pt_regs *r)
 	else result = EXECUTE_SYSCALL(syscall, regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PT_REGS_SET_SYSCALL_RETURN(regs, result);

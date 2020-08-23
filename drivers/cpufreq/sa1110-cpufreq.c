@@ -230,6 +230,7 @@ sdram_update_refresh(u_int cpu_khz, struct sdram_params *sdram)
  * Ok, set the CPU frequency.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sa1110_target(struct cpufreq_policy *policy,
 			 unsigned int target_freq,
 			 unsigned int relation)
@@ -261,6 +262,8 @@ static int sa1110_target(struct cpufreq_policy *policy,
 
 	sdram_calculate_timing(&sd, freqs.new, sdram);
 =======
+=======
+>>>>>>> v3.18
 static int sa1110_target(struct cpufreq_policy *policy, unsigned int ppcr)
 {
 	struct sdram_params *sdram = &sdram_params;
@@ -269,6 +272,9 @@ static int sa1110_target(struct cpufreq_policy *policy, unsigned int ppcr)
 	unsigned int unused;
 
 	sdram_calculate_timing(&sd, sa11x0_freq_table[ppcr].frequency, sdram);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if 0
@@ -289,8 +295,11 @@ static int sa1110_target(struct cpufreq_policy *policy, unsigned int ppcr)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -338,9 +347,13 @@ static int sa1110_target(struct cpufreq_policy *policy, unsigned int ppcr)
 	 * Now, return the SDRAM refresh back to normal.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdram_update_refresh(freqs.new, sdram);
 
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+	sdram_update_refresh(sa11x0_freq_table[ppcr].frequency, sdram);
+>>>>>>> v3.18
 =======
 	sdram_update_refresh(sa11x0_freq_table[ppcr].frequency, sdram);
 >>>>>>> v3.18
@@ -350,6 +363,7 @@ static int sa1110_target(struct cpufreq_policy *policy, unsigned int ppcr)
 
 static int __init sa1110_cpu_init(struct cpufreq_policy *policy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (policy->cpu != 0)
 		return -EINVAL;
@@ -361,15 +375,24 @@ static int __init sa1110_cpu_init(struct cpufreq_policy *policy)
 =======
 	return cpufreq_generic_init(policy, sa11x0_freq_table, CPUFREQ_ETERNAL);
 >>>>>>> v3.18
+=======
+	return cpufreq_generic_init(policy, sa11x0_freq_table, CPUFREQ_ETERNAL);
+>>>>>>> v3.18
 }
 
 /* sa1110_driver needs __refdata because it must remain after init registers
  * it with cpufreq_register_driver() */
 static struct cpufreq_driver sa1110_driver __refdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= CPUFREQ_STICKY,
 	.verify		= sa11x0_verify_speed,
 	.target		= sa1110_target,
+=======
+	.flags		= CPUFREQ_STICKY | CPUFREQ_NEED_INITIAL_FREQ_CHECK,
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= sa1110_target,
+>>>>>>> v3.18
 =======
 	.flags		= CPUFREQ_STICKY | CPUFREQ_NEED_INITIAL_FREQ_CHECK,
 	.verify		= cpufreq_generic_frequency_table_verify,
@@ -410,7 +433,11 @@ static int __init sa1110_clk_init(void)
 		if (machine_is_h3100())
 			name = "KM416S4030CT";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (machine_is_jornada720())
+=======
+		if (machine_is_jornada720() || machine_is_h3600())
+>>>>>>> v3.18
 =======
 		if (machine_is_jornada720() || machine_is_h3600())
 >>>>>>> v3.18

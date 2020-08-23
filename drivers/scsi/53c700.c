@@ -1006,7 +1006,11 @@ process_script_interrupt(__u32 dsps, __u32 dsp, struct scsi_cmnd *SCp,
 
 				cmnd[0] = REQUEST_SENSE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cmnd[1] = (SCp->device->lun & 0x7) << 5;
+=======
+				cmnd[1] = (lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 				cmnd[1] = (lun & 0x7) << 5;
 >>>>>>> v3.18
@@ -1401,7 +1405,12 @@ NCR_700_start_command(struct scsi_cmnd *SCp)
 		(struct NCR_700_Host_Parameters *)SCp->device->host->hostdata[0];
 	__u16 count = 1;	/* for IDENTIFY message */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+	u8 lun = SCp->device->lun;
+
+>>>>>>> v3.18
 =======
 	u8 lun = SCp->device->lun;
 
@@ -1425,7 +1434,11 @@ NCR_700_start_command(struct scsi_cmnd *SCp)
 	hostdata->msgout[0] = NCR_700_identify((SCp->cmnd[0] != REQUEST_SENSE &&
 						slot->flags != NCR_700_FLAG_AUTOSENSE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       SCp->device->lun);
+=======
+					       lun);
+>>>>>>> v3.18
 =======
 					       lun);
 >>>>>>> v3.18

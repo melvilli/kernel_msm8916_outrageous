@@ -28,6 +28,7 @@
 #include <linux/init.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <linux/thermal.h>
 #include <acpi/acpi_bus.h>
@@ -41,11 +42,16 @@
 #define _COMPONENT		ACPI_FAN_COMPONENT
 ACPI_MODULE_NAME("fan");
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <linux/thermal.h>
 #include <linux/acpi.h>
 #include <linux/platform_device.h>
 #include <linux/sort.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Paul Diefenbaugh");
@@ -53,18 +59,24 @@ MODULE_DESCRIPTION("ACPI Fan Driver");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acpi_fan_add(struct acpi_device *device);
 static int acpi_fan_remove(struct acpi_device *device);
 
 static const struct acpi_device_id fan_device_ids[] = {
 	{"PNP0C0B", 0},
 =======
+=======
+>>>>>>> v3.18
 static int acpi_fan_probe(struct platform_device *pdev);
 static int acpi_fan_remove(struct platform_device *pdev);
 
 static const struct acpi_device_id fan_device_ids[] = {
 	{"PNP0C0B", 0},
 	{"INT3404", 0},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{"", 0},
 };
@@ -73,6 +85,7 @@ MODULE_DEVICE_TABLE(acpi, fan_device_ids);
 #ifdef CONFIG_PM_SLEEP
 static int acpi_fan_suspend(struct device *dev);
 static int acpi_fan_resume(struct device *dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 static SIMPLE_DEV_PM_OPS(acpi_fan_pm, acpi_fan_suspend, acpi_fan_resume);
@@ -87,6 +100,8 @@ static struct acpi_driver acpi_fan_driver = {
 		},
 	.drv.pm = &acpi_fan_pm,
 =======
+=======
+>>>>>>> v3.18
 static struct dev_pm_ops acpi_fan_pm = {
 	.resume = acpi_fan_resume,
 	.freeze = acpi_fan_suspend,
@@ -129,6 +144,9 @@ static struct platform_driver acpi_fan_driver = {
 		.acpi_match_table = fan_device_ids,
 		.pm = FAN_PM_OPS_PTR,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -136,6 +154,7 @@ static struct platform_driver acpi_fan_driver = {
 static int fan_get_max_state(struct thermal_cooling_device *cdev, unsigned long
 			     *state)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* ACPI fan device only support two states: ON/OFF */
 	*state = 1;
@@ -158,6 +177,8 @@ static int fan_get_cur_state(struct thermal_cooling_device *cdev, unsigned long
 
 	*state = (acpi_state == ACPI_STATE_D3 ? 0 :
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *device = cdev->devdata;
 	struct acpi_fan *fan = acpi_driver_data(device);
 
@@ -219,11 +240,15 @@ static int fan_get_state(struct acpi_device *device, unsigned long *state)
 		return result;
 
 	*state = (acpi_state == ACPI_STATE_D3_COLD ? 0 :
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 (acpi_state == ACPI_STATE_D0 ? 1 : -1));
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 fan_set_cur_state(struct thermal_cooling_device *cdev, unsigned long state)
@@ -241,6 +266,8 @@ fan_set_cur_state(struct thermal_cooling_device *cdev, unsigned long state)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int fan_get_cur_state(struct thermal_cooling_device *cdev, unsigned long
 			     *state)
 {
@@ -292,6 +319,9 @@ fan_set_cur_state(struct thermal_cooling_device *cdev, unsigned long state)
 		return fan_set_state(device, state);
  }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct thermal_cooling_device_ops fan_cooling_ops = {
 	.get_max_state = fan_get_max_state,
@@ -300,6 +330,7 @@ static const struct thermal_cooling_device_ops fan_cooling_ops = {
 };
 
 /* --------------------------------------------------------------------------
+<<<<<<< HEAD
 <<<<<<< HEAD
                                  Driver Interface
    -------------------------------------------------------------------------- */
@@ -320,6 +351,8 @@ static int acpi_fan_add(struct acpi_device *device)
 		printk(KERN_ERR PREFIX "Setting initial power state\n");
 		goto end;
 =======
+=======
+>>>>>>> v3.18
  *                               Driver Interface
  * --------------------------------------------------------------------------
 */
@@ -443,6 +476,9 @@ static int acpi_fan_probe(struct platform_device *pdev)
 			dev_err(&device->dev, "Setting initial power state\n");
 			goto end;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -453,6 +489,7 @@ static int acpi_fan_probe(struct platform_device *pdev)
 		goto end;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(&device->dev, "registered as cooling_device%d\n", cdev->id);
 
@@ -494,6 +531,8 @@ static int acpi_fan_remove(struct acpi_device *device)
 	sysfs_remove_link(&cdev->device.kobj, "device");
 	thermal_cooling_device_unregister(cdev);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&pdev->dev, "registered as cooling_device%d\n", cdev->id);
 
 	fan->cdev = cdev;
@@ -520,6 +559,9 @@ static int acpi_fan_remove(struct platform_device *pdev)
 	sysfs_remove_link(&pdev->dev.kobj, "thermal_cooling");
 	sysfs_remove_link(&fan->cdev->device.kobj, "device");
 	thermal_cooling_device_unregister(fan->cdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -529,16 +571,22 @@ static int acpi_fan_remove(struct platform_device *pdev)
 static int acpi_fan_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev)
 		return -EINVAL;
 
 	acpi_bus_set_power(to_acpi_device(dev)->handle, ACPI_STATE_D0);
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_fan *fan = dev_get_drvdata(dev);
 	if (fan->acpi4)
 		return 0;
 
 	acpi_device_set_power(ACPI_COMPANION(dev), ACPI_STATE_D0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return AE_OK;
@@ -548,6 +596,7 @@ static int acpi_fan_resume(struct device *dev)
 {
 	int result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!dev)
 		return -EINVAL;
@@ -556,6 +605,8 @@ static int acpi_fan_resume(struct device *dev)
 	if (result)
 		printk(KERN_ERR PREFIX "Error updating fan power state\n");
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_fan *fan = dev_get_drvdata(dev);
 
 	if (fan->acpi4)
@@ -564,6 +615,9 @@ static int acpi_fan_resume(struct device *dev)
 	result = acpi_device_update_power(ACPI_COMPANION(dev), NULL);
 	if (result)
 		dev_err(dev, "Error updating fan power state\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return result;
@@ -571,7 +625,11 @@ static int acpi_fan_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_acpi_driver(acpi_fan_driver);
+=======
+module_platform_driver(acpi_fan_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(acpi_fan_driver);
 >>>>>>> v3.18

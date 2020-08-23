@@ -10,6 +10,10 @@
 
 #include <linux/bootmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/smp-ops.h>
+>>>>>>> v3.18
 =======
 #include <asm/smp-ops.h>
 >>>>>>> v3.18
@@ -22,10 +26,13 @@ unsigned long __maybe_unused _loongson_addrwincfg_base;
 void __init prom_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* init base address of io space */
 	set_io_port_base((unsigned long)
 		ioremap(LOONGSON_PCIIO_BASE, LOONGSON_PCIIO_SIZE));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_CPU_SUPPORTS_ADDRWINCFG
@@ -36,11 +43,14 @@ void __init prom_init(void)
 	prom_init_cmdline();
 	prom_init_env();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prom_init_memory();
 
 	/*init the uart base address */
 	prom_init_uart_base();
 =======
+=======
+>>>>>>> v3.18
 
 	/* init base address of io space */
 	set_io_port_base((unsigned long)
@@ -55,6 +65,9 @@ void __init prom_init(void)
 	/*init the uart base address */
 	prom_init_uart_base();
 	register_smp_ops(&loongson3_smp_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

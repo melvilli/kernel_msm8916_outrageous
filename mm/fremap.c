@@ -24,27 +24,39 @@
 #include "internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mm_counter(struct page *page)
 {
 	return PageAnon(page) ? MM_ANONPAGES : MM_FILEPAGES;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void zap_pte(struct mm_struct *mm, struct vm_area_struct *vma,
 			unsigned long addr, pte_t *ptep)
 {
 	pte_t pte = *ptep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (pte_present(pte)) {
 		struct page *page;
 
 =======
+=======
+>>>>>>> v3.18
 	struct page *page;
 	swp_entry_t entry;
 
 	if (pte_present(pte)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		flush_cache_page(vma, addr, pte_pfn(pte));
 		pte = ptep_clear_flush(vma, addr, ptep);
@@ -52,6 +64,7 @@ static void zap_pte(struct mm_struct *mm, struct vm_area_struct *vma,
 		if (page) {
 			if (pte_dirty(pte))
 				set_page_dirty(page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			page_remove_rmap(page);
 			page_cache_release(page);
@@ -62,6 +75,8 @@ static void zap_pte(struct mm_struct *mm, struct vm_area_struct *vma,
 		if (!pte_file(pte))
 			free_swap_and_cache(pte_to_swp_entry(pte));
 =======
+=======
+>>>>>>> v3.18
 			update_hiwater_rss(mm);
 			dec_mm_counter(mm, mm_counter(page));
 			page_remove_rmap(page);
@@ -81,6 +96,9 @@ static void zap_pte(struct mm_struct *mm, struct vm_area_struct *vma,
 				dec_mm_counter(mm, MM_SWAPENTS);
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pte_clear_not_present_full(mm, addr, ptep, 0);
 	}
@@ -95,7 +113,11 @@ static int install_file_pte(struct mm_struct *mm, struct vm_area_struct *vma,
 {
 	int err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_t *pte;
+=======
+	pte_t *pte, ptfile;
+>>>>>>> v3.18
 =======
 	pte_t *pte, ptfile;
 >>>>>>> v3.18
@@ -106,17 +128,23 @@ static int install_file_pte(struct mm_struct *mm, struct vm_area_struct *vma,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pte_none(*pte))
 		zap_pte(mm, vma, addr, pte);
 
 	set_pte_at(mm, addr, pte, pgoff_to_pte(pgoff));
 =======
+=======
+>>>>>>> v3.18
 	ptfile = pgoff_to_pte(pgoff);
 
 	if (!pte_none(*pte))
 		zap_pte(mm, vma, addr, pte);
 
 	set_pte_at(mm, addr, pte, pte_file_mksoft_dirty(ptfile));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * We don't need to run update_mmu_cache() here because the "file pte"
@@ -182,11 +210,17 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
 	vm_flags_t vm_flags = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pr_warn_once("%s (%d) uses deprecated remap_file_pages() syscall. "
 			"See Documentation/vm/remap_file_pages.txt.\n",
 			current->comm, current->pid);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (prot)
 		return err;

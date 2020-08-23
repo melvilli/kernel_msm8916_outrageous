@@ -14,7 +14,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mutex.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -98,6 +101,10 @@ static int mc13xxx_spi_write(void *context, const void *data, size_t count)
 	struct device *dev = context;
 	struct spi_device *spi = to_spi_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *reg = data;
+>>>>>>> v3.18
 =======
 	const char *reg = data;
 >>>>>>> v3.18
@@ -106,11 +113,17 @@ static int mc13xxx_spi_write(void *context, const void *data, size_t count)
 		return -ENOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* include errata fix for spi audio problems */
 	if (*reg == MC13783_AUDIO_CODEC || *reg == MC13783_AUDIO_DAC)
 		spi_write(spi, data, count);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return spi_write(spi, data, count);
 }
@@ -139,7 +152,10 @@ static int mc13xxx_spi_probe(struct spi_device *spi)
 {
 	struct mc13xxx *mc13xxx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc13xxx_platform_data *pdata = dev_get_platdata(&spi->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -149,12 +165,15 @@ static int mc13xxx_spi_probe(struct spi_device *spi)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, mc13xxx);
 	spi->mode = SPI_MODE_0 | SPI_CS_HIGH;
 
 	mc13xxx->dev = &spi->dev;
 	mutex_init(&mc13xxx->lock);
 =======
+=======
+>>>>>>> v3.18
 	dev_set_drvdata(&spi->dev, mc13xxx);
 
 	spi->mode = SPI_MODE_0 | SPI_CS_HIGH;
@@ -165,6 +184,9 @@ static int mc13xxx_spi_probe(struct spi_device *spi)
 	ret = spi_setup(spi);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mc13xxx->regmap = devm_regmap_init(&spi->dev, &regmap_mc13xxx_bus,
@@ -173,9 +195,13 @@ static int mc13xxx_spi_probe(struct spi_device *spi)
 	if (IS_ERR(mc13xxx->regmap)) {
 		ret = PTR_ERR(mc13xxx->regmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mc13xxx->dev, "Failed to initialize register map: %d\n",
 				ret);
 		spi_set_drvdata(spi, NULL);
+=======
+		dev_err(&spi->dev, "Failed to initialize regmap: %d\n", ret);
+>>>>>>> v3.18
 =======
 		dev_err(&spi->dev, "Failed to initialize regmap: %d\n", ret);
 >>>>>>> v3.18
@@ -194,7 +220,11 @@ static int mc13xxx_spi_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mc13xxx_common_init(mc13xxx, pdata, spi->irq);
+=======
+	return mc13xxx_common_init(&spi->dev);
+>>>>>>> v3.18
 =======
 	return mc13xxx_common_init(&spi->dev);
 >>>>>>> v3.18
@@ -203,11 +233,15 @@ static int mc13xxx_spi_probe(struct spi_device *spi)
 static int mc13xxx_spi_remove(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc13xxx *mc13xxx = spi_get_drvdata(spi);
 
 	mc13xxx_common_cleanup(mc13xxx);
 
 	return 0;
+=======
+	return mc13xxx_common_exit(&spi->dev);
+>>>>>>> v3.18
 =======
 	return mc13xxx_common_exit(&spi->dev);
 >>>>>>> v3.18

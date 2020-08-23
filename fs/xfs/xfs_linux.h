@@ -22,6 +22,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * XFS_BIG_BLKNOS needs block layer disk addresses to be 64 bits.
  * XFS_BIG_INUMS requires XFS_BIG_BLKNOS to be set.
  */
@@ -32,6 +33,8 @@
 # define XFS_BIG_BLKNOS	0
 # define XFS_BIG_INUMS	0
 =======
+=======
+>>>>>>> v3.18
  * Kernel specific type declarations for XFS
  */
 typedef signed char		__int8_t;
@@ -61,6 +64,9 @@ typedef __int64_t __psint_t;
 typedef __uint64_t __psunsigned_t;
 #else
 #error BITS_PER_LONG must be 32 or 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -69,7 +75,10 @@ typedef __uint64_t __psunsigned_t;
 #include "kmem.h"
 #include "mrlock.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "time.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "uuid.h"
@@ -117,7 +126,11 @@ typedef __uint64_t __psunsigned_t;
 #include <asm/unaligned.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_vnode.h"
+=======
+#include "xfs_fs.h"
+>>>>>>> v3.18
 =======
 #include "xfs_fs.h"
 >>>>>>> v3.18
@@ -127,6 +140,10 @@ typedef __uint64_t __psunsigned_t;
 #include "xfs_aops.h"
 #include "xfs_super.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "xfs_cksum.h"
+>>>>>>> v3.18
 =======
 #include "xfs_cksum.h"
 >>>>>>> v3.18
@@ -158,8 +175,11 @@ typedef __uint64_t __psunsigned_t;
 #define xfs_inherit_nodump	xfs_params.inherit_nodump.val
 #define xfs_inherit_noatime	xfs_params.inherit_noatim.val
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define xfs_buf_timer_centisecs	xfs_params.xfs_buf_timer.val
 #define xfs_buf_age_centisecs	xfs_params.xfs_buf_age.val
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define xfs_inherit_nosymlinks	xfs_params.inherit_nosym.val
@@ -195,6 +215,10 @@ typedef __uint64_t __psunsigned_t;
 #define EWRONGFS	EINVAL		/* Mount with wrong filesystem type */
 #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+>>>>>>> v3.18
 =======
 #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
 >>>>>>> v3.18
@@ -210,7 +234,10 @@ typedef __uint64_t __psunsigned_t;
 #define howmany(x, y)	(((x)+((y)-1))/(y))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void delay(long ticks)
 {
 	schedule_timeout_uninterruptible(ticks);
@@ -253,6 +280,9 @@ static inline kgid_t xfs_gid_to_kgid(__uint32_t gid)
 	return make_kgid(&init_user_ns, gid);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Various platform dependent calls that don't fit anywhere else
@@ -369,7 +399,11 @@ static inline __uint64_t roundup_64(__uint64_t x, __uint32_t y)
 	x += y - 1;
 	do_div(x, y);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return(x * y);
+=======
+	return x * y;
+>>>>>>> v3.18
 =======
 	return x * y;
 >>>>>>> v3.18

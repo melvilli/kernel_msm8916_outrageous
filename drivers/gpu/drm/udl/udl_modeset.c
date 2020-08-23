@@ -311,7 +311,11 @@ static int udl_crtc_mode_set(struct drm_crtc *crtc,
 {
 	struct drm_device *dev = crtc->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct udl_framebuffer *ufb = to_udl_fb(crtc->fb);
+=======
+	struct udl_framebuffer *ufb = to_udl_fb(crtc->primary->fb);
+>>>>>>> v3.18
 =======
 	struct udl_framebuffer *ufb = to_udl_fb(crtc->primary->fb);
 >>>>>>> v3.18
@@ -368,9 +372,12 @@ static void udl_crtc_destroy(struct drm_crtc *crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void udl_load_lut(struct drm_crtc *crtc)
 {
 =======
+=======
+>>>>>>> v3.18
 static int udl_crtc_page_flip(struct drm_crtc *crtc,
 			      struct drm_framebuffer *fb,
 			      struct drm_pending_vblank_event *event,
@@ -389,6 +396,9 @@ static int udl_crtc_page_flip(struct drm_crtc *crtc,
 	crtc->primary->fb = fb;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -409,7 +419,10 @@ static struct drm_crtc_helper_funcs udl_helper_funcs = {
 	.commit = udl_crtc_commit,
 	.disable = udl_crtc_disable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.load_lut = udl_load_lut,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -418,6 +431,10 @@ static const struct drm_crtc_funcs udl_crtc_funcs = {
 	.set_config = drm_crtc_helper_set_config,
 	.destroy = udl_crtc_destroy,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.page_flip = udl_crtc_page_flip,
+>>>>>>> v3.18
 =======
 	.page_flip = udl_crtc_page_flip,
 >>>>>>> v3.18

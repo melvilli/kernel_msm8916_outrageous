@@ -85,11 +85,14 @@ static const char * vendor_labels[CH_TYPES-4] = {
 // module_param_string_array(vendor_labels, NULL, 0444);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DPRINTK(fmt, arg...)						\
 do {									\
 	if (debug)							\
 		printk(KERN_DEBUG "%s: " fmt, ch->name, ##arg);		\
 =======
+=======
+>>>>>>> v3.18
 #define ch_printk(prefix, ch, fmt, a...) \
 	sdev_printk(prefix, (ch)->device, "[%s] " fmt, \
 		    (ch)->name, ##a)
@@ -98,13 +101,20 @@ do {									\
 do {									\
 	if (debug)							\
 		ch_printk(KERN_DEBUG, ch, fmt, ##arg);			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } while (0)
 #define VPRINTK(level, fmt, arg...)					\
 do {									\
 	if (verbose)							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(level "%s: " fmt, ch->name, ##arg);		\
+=======
+		ch_printk(level, ch, fmt, ##arg);			\
+>>>>>>> v3.18
 =======
 		ch_printk(level, ch, fmt, ##arg);			\
 >>>>>>> v3.18
@@ -212,7 +222,11 @@ ch_do_scsi(scsi_changer *ch, unsigned char *cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         result = scsi_execute_req(ch->device, cmd, direction, buffer,
+=======
+	result = scsi_execute_req(ch->device, cmd, direction, buffer,
+>>>>>>> v3.18
 =======
 	result = scsi_execute_req(ch->device, cmd, direction, buffer,
 >>>>>>> v3.18
@@ -267,7 +281,11 @@ ch_read_element_status(scsi_changer *ch, u_int elem, char *data)
 	memset(cmd,0,sizeof(cmd));
 	cmd[0] = READ_ELEMENT_STATUS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1] = (ch->device->lun << 5) |
+=======
+	cmd[1] = ((ch->device->lun & 0x7) << 5) |
+>>>>>>> v3.18
 =======
 	cmd[1] = ((ch->device->lun & 0x7) << 5) |
 >>>>>>> v3.18
@@ -307,7 +325,11 @@ ch_init_elem(scsi_changer *ch)
 	memset(cmd,0,sizeof(cmd));
 	cmd[0] = INITIALIZE_ELEMENT_STATUS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1] = ch->device->lun << 5;
+=======
+	cmd[1] = (ch->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 	cmd[1] = (ch->device->lun & 0x7) << 5;
 >>>>>>> v3.18
@@ -331,7 +353,11 @@ ch_readconfig(scsi_changer *ch)
 	memset(cmd,0,sizeof(cmd));
 	cmd[0] = MODE_SENSE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1] = ch->device->lun << 5;
+=======
+	cmd[1] = (ch->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 	cmd[1] = (ch->device->lun & 0x7) << 5;
 >>>>>>> v3.18
@@ -460,7 +486,11 @@ ch_position(scsi_changer *ch, u_int trans, u_int elem, int rotate)
 	memset(cmd,0,sizeof(cmd));
 	cmd[0]  = POSITION_TO_ELEMENT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1]  = ch->device->lun << 5;
+=======
+	cmd[1]  = (ch->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 	cmd[1]  = (ch->device->lun & 0x7) << 5;
 >>>>>>> v3.18
@@ -483,7 +513,11 @@ ch_move(scsi_changer *ch, u_int trans, u_int src, u_int dest, int rotate)
 	memset(cmd,0,sizeof(cmd));
 	cmd[0]  = MOVE_MEDIUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1]  = ch->device->lun << 5;
+=======
+	cmd[1]  = (ch->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 	cmd[1]  = (ch->device->lun & 0x7) << 5;
 >>>>>>> v3.18
@@ -510,7 +544,11 @@ ch_exchange(scsi_changer *ch, u_int trans, u_int src,
 	memset(cmd,0,sizeof(cmd));
 	cmd[0]  = EXCHANGE_MEDIUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1]  = ch->device->lun << 5;
+=======
+	cmd[1]  = (ch->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 	cmd[1]  = (ch->device->lun & 0x7) << 5;
 >>>>>>> v3.18
@@ -562,7 +600,11 @@ ch_set_voltag(scsi_changer *ch, u_int elem,
 	memset(cmd,0,sizeof(cmd));
 	cmd[0]  = SEND_VOLUME_TAG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd[1] = (ch->device->lun << 5) |
+=======
+	cmd[1] = ((ch->device->lun & 0x7) << 5) |
+>>>>>>> v3.18
 =======
 	cmd[1] = ((ch->device->lun & 0x7) << 5) |
 >>>>>>> v3.18
@@ -802,7 +844,11 @@ static long ch_ioctl(struct file *file,
 		memset(ch_cmd, 0, sizeof(ch_cmd));
 		ch_cmd[0] = READ_ELEMENT_STATUS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ch_cmd[1] = (ch->device->lun << 5) |
+=======
+		ch_cmd[1] = ((ch->device->lun & 0x7) << 5) |
+>>>>>>> v3.18
 =======
 		ch_cmd[1] = ((ch->device->lun & 0x7) << 5) |
 >>>>>>> v3.18
@@ -976,8 +1022,13 @@ static int ch_probe(struct device *dev)
 				  "s%s", ch->name);
 	if (IS_ERR(class_dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "ch%d: device_create failed\n",
 		       ch->minor);
+=======
+		sdev_printk(KERN_WARNING, sd, "ch%d: device_create failed\n",
+			    ch->minor);
+>>>>>>> v3.18
 =======
 		sdev_printk(KERN_WARNING, sd, "ch%d: device_create failed\n",
 			    ch->minor);

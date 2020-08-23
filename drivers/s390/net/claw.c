@@ -482,7 +482,10 @@ claw_open(struct net_device *dev)
 			get_ccwdev_lock(privptr->channel[i].cdev), saveflags);
                 schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
                 remove_wait_queue(&privptr->channel[i].wait, &wait);
@@ -832,7 +835,10 @@ claw_release(struct net_device *dev)
 			get_ccwdev_lock(privptr->channel[i].cdev), saveflags);
 	        schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	        remove_wait_queue(&privptr->channel[i].wait, &wait);
@@ -2922,7 +2928,11 @@ claw_new_device(struct ccwgroup_device *cgdev)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(0,"claw%d",claw_init_netdevice);
+=======
+	dev = alloc_netdev(0, "claw%d", NET_NAME_UNKNOWN, claw_init_netdevice);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(0, "claw%d", NET_NAME_UNKNOWN, claw_init_netdevice);
 >>>>>>> v3.18
@@ -3359,7 +3369,11 @@ static int __init claw_init(void)
 	CLAW_DBF_TEXT(2, setup, "init_mod");
 	claw_root_dev = root_device_register("claw");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = IS_ERR(claw_root_dev) ? PTR_ERR(claw_root_dev) : 0;
+=======
+	ret = PTR_ERR_OR_ZERO(claw_root_dev);
+>>>>>>> v3.18
 =======
 	ret = PTR_ERR_OR_ZERO(claw_root_dev);
 >>>>>>> v3.18

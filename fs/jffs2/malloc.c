@@ -289,6 +289,11 @@ struct jffs2_xattr_datum *jffs2_alloc_xattr_datum(void)
 	xd = kmem_cache_zalloc(xattr_datum_cache, GFP_KERNEL);
 	dbg_memalloc("%p\n", xd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!xd)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!xd)
 		return NULL;
@@ -312,6 +317,11 @@ struct jffs2_xattr_ref *jffs2_alloc_xattr_ref(void)
 	ref = kmem_cache_zalloc(xattr_ref_cache, GFP_KERNEL);
 	dbg_memalloc("%p\n", ref);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!ref)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!ref)
 		return NULL;

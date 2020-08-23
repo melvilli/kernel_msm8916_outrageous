@@ -79,9 +79,13 @@ static void devm_usb_phy_release(struct device *dev, void *res)
 static int devm_usb_phy_match(struct device *dev, void *res, void *match_data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_phy **phy = res;
 
 	return *phy == match_data;
+=======
+	return res == match_data;
+>>>>>>> v3.18
 =======
 	return res == match_data;
 >>>>>>> v3.18
@@ -105,7 +109,11 @@ struct usb_phy *devm_usb_get_phy(struct device *dev, enum usb_phy_type type)
 	ptr = devres_alloc(devm_usb_phy_release, sizeof(*ptr), GFP_KERNEL);
 	if (!ptr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-ENOMEM);
 >>>>>>> v3.18
@@ -141,14 +149,20 @@ struct usb_phy *usb_get_phy(enum usb_phy_type type)
 	phy = __usb_find_phy(&phy_list, type);
 	if (IS_ERR(phy) || !try_module_get(phy->dev->driver->owner)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("unable to find transceiver of type %s\n",
 			usb_phy_type_string(type));
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("PHY: unable to find transceiver of type %s\n",
 			usb_phy_type_string(type));
 		if (!IS_ERR(phy))
 			phy = ERR_PTR(-ENODEV);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err0;
 	}
@@ -163,7 +177,11 @@ err0:
 EXPORT_SYMBOL_GPL(usb_get_phy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  /**
+=======
+/**
+>>>>>>> v3.18
 =======
 /**
 >>>>>>> v3.18
@@ -251,12 +269,18 @@ struct usb_phy *usb_get_phy_dev(struct device *dev, u8 index)
 	phy = __usb_find_phy_dev(dev, &phy_bind_list, index);
 	if (IS_ERR(phy) || !try_module_get(phy->dev->driver->owner)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("unable to find transceiver\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev, "unable to find transceiver\n");
 		if (!IS_ERR(phy))
 			phy = ERR_PTR(-ENODEV);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err0;
 	}
@@ -454,10 +478,15 @@ int usb_bind_phy(const char *dev_name, u8 index,
 
 	phy_bind = kzalloc(sizeof(*phy_bind), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!phy_bind) {
 		pr_err("phy_bind(): No memory for phy_bind");
 		return -ENOMEM;
 	}
+=======
+	if (!phy_bind)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!phy_bind)
 		return -ENOMEM;

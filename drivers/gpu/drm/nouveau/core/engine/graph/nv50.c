@@ -24,7 +24,10 @@
 
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/client.h>
@@ -190,6 +193,7 @@ nv50_graph_cclass = {
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nv50_graph_tlb_flush(struct nouveau_engine *engine)
 {
@@ -197,6 +201,8 @@ nv50_graph_tlb_flush(struct nouveau_engine *engine)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct nouveau_bitfield nv50_pgraph_status[] = {
@@ -210,6 +216,7 @@ static const struct nouveau_bitfield nv50_pgraph_status[] = {
 	{ 0x00000080, "UNK7" },
 	{ 0x00000100, "CTXPROG" },
 	{ 0x00000200, "VFETCH" },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ 0x00000400, "CCACHE_UNK4" },
 	{ 0x00000800, "STRMOUT_GSCHED_UNK5" },
@@ -226,6 +233,8 @@ static const struct nouveau_bitfield nv50_pgraph_status[] = {
 	{ 0x00400000, "TPVP" },
 	{ 0x00800000, "MP" },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x00000400, "CCACHE_PREGEOM" },
 	{ 0x00000800, "STRMOUT_VATTR_POSTGEOM" },
 	{ 0x00001000, "VCLIP" },
@@ -240,12 +249,16 @@ static const struct nouveau_bitfield nv50_pgraph_status[] = {
 	{ 0x00200000, "TPC_TEX" },
 	{ 0x00400000, "TPC_GEOM" },
 	{ 0x00800000, "TPC_MP" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x01000000, "ROP" },
 	{}
 };
 
 static const char *const nv50_pgraph_vstatus_0[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	"VFETCH", "CCACHE", "UNK4", "UNK5", "GSCHED", "STRMOUT", "UNK14XX", NULL
 };
@@ -257,6 +270,8 @@ static const char *const nv50_pgraph_vstatus_1[] = {
 static const char *const nv50_pgraph_vstatus_2[] = {
 	"UNK24XX", "CSCHED", "UNK1CXX", "CLIPID", "ZCULL", "ENG2D", "UNK34XX",
 =======
+=======
+>>>>>>> v3.18
 	"VFETCH", "CCACHE", "PREGEOM", "POSTGEOM", "VATTR", "STRMOUT", "VCLIP",
 	NULL
 };
@@ -267,6 +282,9 @@ static const char *const nv50_pgraph_vstatus_1[] = {
 
 static const char *const nv50_pgraph_vstatus_2[] = {
 	"RATTR", "APLANE", "TRAST", "CLIPID", "ZCULL", "ENG2D", "RMASK",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"ROP", NULL
 };
@@ -339,19 +357,26 @@ nv84_graph_tlb_flush(struct nouveau_engine *engine)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv50_vm_flush_engine(&engine->base, 0x00);
 
 =======
+=======
+>>>>>>> v3.18
 
 	nv_wr32(priv, 0x100c80, 0x00000001);
 	if (!nv_wait(priv, 0x100c80, 0x00000001, 0x00000000))
 		nv_error(priv, "vm flush timeout\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_mask(priv, 0x400500, 0x00000001, 0x00000001);
 	spin_unlock_irqrestore(&priv->lock, flags);
 	return timeout ? -EBUSY : 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct nouveau_enum nv50_mp_exec_error_names[] = {
 	{ 3, "STACK_UNDERFLOW", NULL },
@@ -360,6 +385,8 @@ static const struct nouveau_enum nv50_mp_exec_error_names[] = {
 	{ 0x10, "INVALID_OPCODE", NULL },
 	{ 0x40, "BREAKPOINT", NULL },
 =======
+=======
+>>>>>>> v3.18
 static const struct nouveau_bitfield nv50_mp_exec_errors[] = {
 	{ 0x01, "STACK_UNDERFLOW" },
 	{ 0x02, "STACK_MISMATCH" },
@@ -391,6 +418,9 @@ static const struct nouveau_bitfield nv50_tex_traps[] = {
 	{ 0x00000004, "STORAGE_TYPE_MISMATCH" },
 	{ 0x00000008, "LINEAR_MISMATCH" },
 	{ 0x00000020, "WRONG_MEMTYPE" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -479,7 +509,10 @@ static const struct nouveau_bitfield nv50_graph_intr_name[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct nouveau_bitfield nv50_graph_trap_prop[] = {
 	{ 0x00000004, "SURF_WIDTH_OVERRUN" },
 	{ 0x00000008, "SURF_HEIGHT_OVERRUN" },
@@ -534,6 +567,9 @@ nv50_priv_prop_trap(struct nv50_graph_priv *priv,
 		 tp, e0c, e18, e1c, e20, e24);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 nv50_priv_mp_trap(struct nv50_graph_priv *priv, int tpid, int display)
@@ -560,8 +596,13 @@ nv50_priv_mp_trap(struct nv50_graph_priv *priv, int tpid, int display)
 			ophigh = nv_rd32(priv, addr + 0x74);
 			nv_error(priv, "TRAP_MP_EXEC - "
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"TP %d MP %d: ", tpid, i);
 			nouveau_enum_print(nv50_mp_exec_error_names, status);
+=======
+					"TP %d MP %d:", tpid, i);
+			nouveau_bitfield_print(nv50_mp_exec_errors, status);
+>>>>>>> v3.18
 =======
 					"TP %d MP %d:", tpid, i);
 			nouveau_bitfield_print(nv50_mp_exec_errors, status);
@@ -606,7 +647,10 @@ nv50_priv_tp_trap(struct nv50_graph_priv *priv, int type, u32 ustatus_old,
 					nv_error(priv, "\t0x%08x: 0x%08x\n", r,
 						nv_rd32(priv, r));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				if (ustatus) {
 					nv_error(priv, "%s - TP%d:", name, i);
 					nouveau_bitfield_print(nv50_tex_traps,
@@ -614,6 +658,9 @@ nv50_priv_tp_trap(struct nv50_graph_priv *priv, int type, u32 ustatus_old,
 					pr_cont("\n");
 					ustatus = 0;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -622,6 +669,7 @@ nv50_priv_tp_trap(struct nv50_graph_priv *priv, int type, u32 ustatus_old,
 				nv50_priv_mp_trap(priv, i, display);
 				ustatus &= ~0x04030000;
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			break;
 		case 8: /* TPDMA error */
@@ -678,6 +726,8 @@ nv50_priv_tp_trap(struct nv50_graph_priv *priv, int type, u32 ustatus_old,
 			}
 			break;
 =======
+=======
+>>>>>>> v3.18
 			if (ustatus && display) {
 				nv_error(priv, "%s - TP%d:", name, i);
 				nouveau_bitfield_print(nv50_mpc_traps, ustatus);
@@ -691,6 +741,9 @@ nv50_priv_tp_trap(struct nv50_graph_priv *priv, int type, u32 ustatus_old,
 						priv, ustatus_addr, ustatus, i);
 			ustatus = 0;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (ustatus) {
@@ -898,17 +951,23 @@ nv50_graph_trap_handler(struct nv50_graph_priv *priv, u32 display,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TPDMA:  Handles TP-initiated uncached memory accesses:
 	 * l[], g[], stack, 2d surfaces, render targets. */
 	if (status & 0x100) {
 		nv50_priv_tp_trap(priv, 8, 0x408e08, 0x408708, display,
 				    "TRAP_TPDMA");
 =======
+=======
+>>>>>>> v3.18
 	/* PROP:  Handles TP-initiated uncached memory accesses:
 	 * l[], g[], stack, 2d surfaces, render targets. */
 	if (status & 0x100) {
 		nv50_priv_tp_trap(priv, 8, 0x408e08, 0x408708, display,
 				    "TRAP_PROP");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nv_wr32(priv, 0x400108, 0x100);
 		status &= ~0x100;
@@ -939,7 +998,11 @@ nv50_graph_intr(struct nouveau_subdev *subdev)
 	u32 data = nv_rd32(priv, 0x400708);
 	u32 class = nv_rd32(priv, 0x400814);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 show = stat;
+=======
+	u32 show = stat, show_bitfield = stat;
+>>>>>>> v3.18
 =======
 	u32 show = stat, show_bitfield = stat;
 >>>>>>> v3.18
@@ -961,6 +1024,10 @@ nv50_graph_intr(struct nouveau_subdev *subdev)
 		nouveau_enum_print(nv50_data_error_names, ecode);
 		pr_cont("\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		show_bitfield &= ~0x00100000;
+>>>>>>> v3.18
 =======
 		show_bitfield &= ~0x00100000;
 >>>>>>> v3.18
@@ -971,6 +1038,10 @@ nv50_graph_intr(struct nouveau_subdev *subdev)
 				engctx))
 			show &= ~0x00200000;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		show_bitfield &= ~0x00200000;
+>>>>>>> v3.18
 =======
 		show_bitfield &= ~0x00200000;
 >>>>>>> v3.18
@@ -981,16 +1052,22 @@ nv50_graph_intr(struct nouveau_subdev *subdev)
 
 	if (show) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_error(priv, "%s", "");
 		nouveau_bitfield_print(nv50_graph_intr_name, show);
 		pr_cont("\n");
 =======
+=======
+>>>>>>> v3.18
 		show &= show_bitfield;
 		if (show) {
 			nv_error(priv, "%s", "");
 			nouveau_bitfield_print(nv50_graph_intr_name, show);
 			pr_cont("\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nv_error(priv,
 			 "ch %d [0x%010llx %s] subc %d class 0x%04x mthd 0x%04x data 0x%08x\n",
@@ -1050,6 +1127,7 @@ nv50_graph_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 
 	if (nv_device(priv)->chipset == 0x50 ||
@@ -1057,11 +1135,16 @@ nv50_graph_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		nv_engine(priv)->tlb_flush = nv50_graph_tlb_flush;
 	else
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* unfortunate hw bug workaround... */
 	if (nv_device(priv)->chipset != 0x50 &&
 	    nv_device(priv)->chipset != 0xac)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nv_engine(priv)->tlb_flush = nv84_graph_tlb_flush;
 
@@ -1134,7 +1217,10 @@ nv50_graph_init(struct nouveau_object *object)
 	case 0xa0:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, 0x402cc0, 0x00000000);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (nv_device(priv)->chipset == 0xa0 ||
@@ -1152,15 +1238,21 @@ nv50_graph_init(struct nouveau_object *object)
 	/* zero out zcull regions */
 	for (i = 0; i < 8; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, 0x402c20 + (i * 8), 0x00000000);
 		nv_wr32(priv, 0x402c24 + (i * 8), 0x00000000);
 		nv_wr32(priv, 0x402c28 + (i * 8), 0x00000000);
 		nv_wr32(priv, 0x402c2c + (i * 8), 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 		nv_wr32(priv, 0x402c20 + (i * 0x10), 0x00000000);
 		nv_wr32(priv, 0x402c24 + (i * 0x10), 0x00000000);
 		nv_wr32(priv, 0x402c28 + (i * 0x10), 0x00000000);
 		nv_wr32(priv, 0x402c2c + (i * 0x10), 0x00000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;

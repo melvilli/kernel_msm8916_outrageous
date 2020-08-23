@@ -22,7 +22,11 @@
 
 #if !defined(CONFIG_HPDCA) && !defined(CONFIG_HPAPCI)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #warning CONFIG_8250 defined but neither CONFIG_HPDCA nor CONFIG_HPAPCI defined, are you sure?
+=======
+#warning CONFIG_SERIAL_8250 defined but neither CONFIG_HPDCA nor CONFIG_HPAPCI defined, are you sure?
+>>>>>>> v3.18
 =======
 #warning CONFIG_SERIAL_8250 defined but neither CONFIG_HPDCA nor CONFIG_HPAPCI defined, are you sure?
 >>>>>>> v3.18

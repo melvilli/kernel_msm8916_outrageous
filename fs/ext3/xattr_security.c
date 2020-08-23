@@ -44,8 +44,14 @@ ext3_xattr_security_set(struct dentry *dentry, const char *name,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext3_initxattrs(struct inode *inode, const struct xattr *xattr_array,
 		    void *fs_info)
+=======
+static int ext3_initxattrs(struct inode *inode,
+			   const struct xattr *xattr_array,
+			   void *fs_info)
+>>>>>>> v3.18
 =======
 static int ext3_initxattrs(struct inode *inode,
 			   const struct xattr *xattr_array,

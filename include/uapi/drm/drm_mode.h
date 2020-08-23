@@ -45,6 +45,7 @@
 /* Video mode flags */
 /* bit compatible with the xorg definitions. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_MODE_FLAG_PHSYNC	(1<<0)
 #define DRM_MODE_FLAG_NHSYNC	(1<<1)
 #define DRM_MODE_FLAG_PVSYNC	(1<<2)
@@ -60,6 +61,8 @@
 #define DRM_MODE_FLAG_DBLCLK	(1<<12)
 #define DRM_MODE_FLAG_CLKDIV2	(1<<13)
 =======
+=======
+>>>>>>> v3.18
 #define DRM_MODE_FLAG_PHSYNC			(1<<0)
 #define DRM_MODE_FLAG_NHSYNC			(1<<1)
 #define DRM_MODE_FLAG_PVSYNC			(1<<2)
@@ -89,6 +92,9 @@
 #define  DRM_MODE_FLAG_3D_TOP_AND_BOTTOM	(7<<14)
 #define  DRM_MODE_FLAG_3D_SIDE_BY_SIDE_HALF	(8<<14)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DPMS flags */
@@ -106,12 +112,18 @@
 #define DRM_MODE_SCALE_ASPECT		3 /* Full screen, preserve aspect */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Picture aspect ratio options */
 #define DRM_MODE_PICTURE_ASPECT_NONE	0
 #define DRM_MODE_PICTURE_ASPECT_4_3	1
 #define DRM_MODE_PICTURE_ASPECT_16_9	2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Dithering mode options */
 #define DRM_MODE_DITHERING_OFF	0
@@ -206,6 +218,11 @@ struct drm_mode_get_plane_res {
 #define DRM_MODE_ENCODER_TVDAC	4
 #define DRM_MODE_ENCODER_VIRTUAL 5
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_MODE_ENCODER_DSI	6
+#define DRM_MODE_ENCODER_DPMST	7
+>>>>>>> v3.18
 =======
 #define DRM_MODE_ENCODER_DSI	6
 #define DRM_MODE_ENCODER_DPMST	7
@@ -249,6 +266,10 @@ struct drm_mode_get_encoder {
 #define DRM_MODE_CONNECTOR_eDP		14
 #define DRM_MODE_CONNECTOR_VIRTUAL      15
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_MODE_CONNECTOR_DSI		16
+>>>>>>> v3.18
 =======
 #define DRM_MODE_CONNECTOR_DSI		16
 >>>>>>> v3.18
@@ -284,7 +305,10 @@ struct drm_mode_get_connector {
 #define DRM_MODE_PROP_BITMASK	(1<<5) /* bitmask of enumerated types */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* non-extended types: legacy bitmask, one bit per type: */
 #define DRM_MODE_PROP_LEGACY_TYPE  ( \
 		DRM_MODE_PROP_RANGE | \
@@ -300,6 +324,9 @@ struct drm_mode_get_connector {
 #define DRM_MODE_PROP_OBJECT		DRM_MODE_PROP_TYPE(1)
 #define DRM_MODE_PROP_SIGNED_RANGE	DRM_MODE_PROP_TYPE(2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct drm_mode_property_enum {
 	__u64 value;
@@ -458,7 +485,10 @@ struct drm_mode_cursor {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct drm_mode_cursor2 {
 	__u32 flags;
 	__u32 crtc_id;
@@ -472,6 +502,9 @@ struct drm_mode_cursor2 {
 	__s32 hot_y;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct drm_mode_crtc_lut {
 	__u32 crtc_id;
@@ -485,7 +518,12 @@ struct drm_mode_crtc_lut {
 
 #define DRM_MODE_PAGE_FLIP_EVENT 0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_MODE_PAGE_FLIP_FLAGS DRM_MODE_PAGE_FLIP_EVENT
+=======
+#define DRM_MODE_PAGE_FLIP_ASYNC 0x02
+#define DRM_MODE_PAGE_FLIP_FLAGS (DRM_MODE_PAGE_FLIP_EVENT|DRM_MODE_PAGE_FLIP_ASYNC)
+>>>>>>> v3.18
 =======
 #define DRM_MODE_PAGE_FLIP_ASYNC 0x02
 #define DRM_MODE_PAGE_FLIP_FLAGS (DRM_MODE_PAGE_FLIP_EVENT|DRM_MODE_PAGE_FLIP_ASYNC)
@@ -504,12 +542,15 @@ struct drm_mode_crtc_lut {
  * returned.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The ioctl supports one flag, DRM_MODE_PAGE_FLIP_EVENT, which will
  * request that drm sends back a vblank event (see drm.h: struct
  * drm_event_vblank) when the page flip is done.  The user_data field
  * passed in with this ioctl will be returned as the user_data field
  * in the vblank event struct.
 =======
+=======
+>>>>>>> v3.18
  * Flag DRM_MODE_PAGE_FLIP_EVENT requests that drm sends back a vblank
  * event (see drm.h: struct drm_event_vblank) when the page flip is
  * done.  The user_data field passed in with this ioctl will be
@@ -518,6 +559,9 @@ struct drm_mode_crtc_lut {
  * Flag DRM_MODE_PAGE_FLIP_ASYNC requests that the flip happen
  * 'as soon as possible', meaning that it not delay waiting for vblank.
  * This may cause tearing on the screen.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * The reserved field must be zero until we figure out something

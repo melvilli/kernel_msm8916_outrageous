@@ -226,6 +226,12 @@ static int hdmiphy_dv_timings_cap(struct v4l2_subdev *sd,
 	struct v4l2_dv_timings_cap *cap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cap->pad != 0)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (cap->pad != 0)
 		return -EINVAL;
@@ -266,6 +272,7 @@ static const struct v4l2_subdev_core_ops hdmiphy_core_ops = {
 static const struct v4l2_subdev_video_ops hdmiphy_video_ops = {
 	.s_dv_timings = hdmiphy_s_dv_timings,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dv_timings_cap = hdmiphy_dv_timings_cap,
 	.s_stream =  hdmiphy_s_stream,
 };
@@ -274,6 +281,8 @@ static const struct v4l2_subdev_ops hdmiphy_ops = {
 	.core = &hdmiphy_core_ops,
 	.video = &hdmiphy_video_ops,
 =======
+=======
+>>>>>>> v3.18
 	.s_stream =  hdmiphy_s_stream,
 };
 
@@ -285,6 +294,9 @@ static const struct v4l2_subdev_ops hdmiphy_ops = {
 	.core = &hdmiphy_core_ops,
 	.video = &hdmiphy_video_ops,
 	.pad = &hdmiphy_pad_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -218,7 +218,11 @@ static int knc_pmu_handle_irq(struct pt_regs *regs)
 	u64 status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18

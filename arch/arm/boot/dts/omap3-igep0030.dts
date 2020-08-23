@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Device Tree Source for IGEP COM Module
+=======
+ * Device Tree Source for IGEP COM MODULE (TI OMAP AM/DM37x)
+>>>>>>> v3.18
 =======
  * Device Tree Source for IGEP COM MODULE (TI OMAP AM/DM37x)
 >>>>>>> v3.18
@@ -14,6 +18,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap3-igep.dtsi"
 
 / {
@@ -26,6 +31,8 @@
 			 label = "omap3:green:boot";
 			 gpios = <&twl_gpio 13 1>;
 =======
+=======
+>>>>>>> v3.18
 #include "omap3-igep.dtsi"
 
 / {
@@ -40,6 +47,9 @@
 		boot {
 			 label = "omap3:green:boot";
 			 gpios = <&twl_gpio 13 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 default-state = "on";
 		};
@@ -47,7 +57,11 @@
 		user0 {
 			 label = "omap3:red:user0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 gpios = <&twl_gpio 18 1>; /* LEDA */
+=======
+			 gpios = <&twl_gpio 18 GPIO_ACTIVE_LOW>; /* LEDA */
+>>>>>>> v3.18
 =======
 			 gpios = <&twl_gpio 18 GPIO_ACTIVE_LOW>; /* LEDA */
 >>>>>>> v3.18
@@ -57,7 +71,11 @@
 		user1 {
 			 label = "omap3:green:user1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 gpios = <&twl_gpio 19 1>; /* LEDB */
+=======
+			 gpios = <&twl_gpio 19 GPIO_ACTIVE_LOW>; /* LEDB */
+>>>>>>> v3.18
 =======
 			 gpios = <&twl_gpio 19 GPIO_ACTIVE_LOW>; /* LEDB */
 >>>>>>> v3.18
@@ -67,7 +85,11 @@
 		user2 {
 			 label = "omap3:red:user1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 gpios = <&gpio1 16 1>;
+=======
+			 gpios = <&gpio1 16 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			 gpios = <&gpio1 16 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -76,7 +98,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &omap3_pmx_core2 {
 	leds_pins: pinmux_leds_pins {
@@ -135,4 +160,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

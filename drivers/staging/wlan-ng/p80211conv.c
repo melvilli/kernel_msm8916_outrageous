@@ -196,10 +196,16 @@ int skb_ether_to_p80211(wlandevice_t *wlandev, u32 ethconv,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "Error: Converting eth to wlan in unknown mode.\n");
 		return 1;
 		break;
+=======
+		netdev_err(wlandev->netdev,
+			   "Error: Converting eth to wlan in unknown mode.\n");
+		return 1;
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Error: Converting eth to wlan in unknown mode.\n");
@@ -220,7 +226,11 @@ int skb_ether_to_p80211(wlandevice_t *wlandev, u32 ethconv,
 				  p80211_wep->iv, p80211_wep->icv);
 		if (foo) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
+=======
+			netdev_warn(wlandev->netdev,
+>>>>>>> v3.18
 =======
 			netdev_warn(wlandev->netdev,
 >>>>>>> v3.18
@@ -321,7 +331,11 @@ int skb_p80211_to_ether(wlandevice_t *wlandev, u32 ethconv,
 		payload_offset = WLAN_HDR_A4_LEN;
 		if (payload_length < WLAN_HDR_A4_LEN - WLAN_HDR_A3_LEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "A4 frame too short!\n");
+=======
+			netdev_err(netdev, "A4 frame too short!\n");
+>>>>>>> v3.18
 =======
 			netdev_err(netdev, "A4 frame too short!\n");
 >>>>>>> v3.18
@@ -337,8 +351,13 @@ int skb_p80211_to_ether(wlandevice_t *wlandev, u32 ethconv,
 	    && (wlandev->hostwep & HOSTWEP_DECRYPT)) {
 		if (payload_length <= 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "WEP frame too short (%u).\n",
 			       skb->len);
+=======
+			netdev_err(netdev,
+				   "WEP frame too short (%u).\n", skb->len);
+>>>>>>> v3.18
 =======
 			netdev_err(netdev,
 				   "WEP frame too short (%u).\n", skb->len);
@@ -387,7 +406,11 @@ int skb_p80211_to_ether(wlandevice_t *wlandev, u32 ethconv,
 			/* A bogus length ethfrm has been encap'd. */
 			/* Is someone trying an oflow attack? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "ENCAP frame too large (%d > %d)\n",
+=======
+			netdev_err(netdev, "ENCAP frame too large (%d > %d)\n",
+>>>>>>> v3.18
 =======
 			netdev_err(netdev, "ENCAP frame too large (%d > %d)\n",
 >>>>>>> v3.18
@@ -420,7 +443,11 @@ int skb_p80211_to_ether(wlandevice_t *wlandev, u32 ethconv,
 			/* A bogus length ethfrm has been sent. */
 			/* Is someone trying an oflow attack? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "SNAP frame too large (%d > %d)\n",
+=======
+			netdev_err(netdev, "SNAP frame too large (%d > %d)\n",
+>>>>>>> v3.18
 =======
 			netdev_err(netdev, "SNAP frame too large (%d > %d)\n",
 >>>>>>> v3.18
@@ -456,7 +483,11 @@ int skb_p80211_to_ether(wlandevice_t *wlandev, u32 ethconv,
 			/* A bogus length ethfrm has been sent. */
 			/* Is someone trying an oflow attack? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "DIXII frame too large (%ld > %d)\n",
+=======
+			netdev_err(netdev, "DIXII frame too large (%ld > %d)\n",
+>>>>>>> v3.18
 =======
 			netdev_err(netdev, "DIXII frame too large (%ld > %d)\n",
 >>>>>>> v3.18
@@ -495,7 +526,11 @@ int skb_p80211_to_ether(wlandevice_t *wlandev, u32 ethconv,
 			/* A bogus length ethfrm has been sent. */
 			/* Is someone trying an oflow attack? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "OTHER frame too large (%d > %d)\n",
+=======
+			netdev_err(netdev, "OTHER frame too large (%d > %d)\n",
+>>>>>>> v3.18
 =======
 			netdev_err(netdev, "OTHER frame too large (%d > %d)\n",
 >>>>>>> v3.18
@@ -639,8 +674,13 @@ int p80211skb_rxmeta_attach(struct wlandevice *wlandev, struct sk_buff *skb)
 	/* If these already have metadata, we error out! */
 	if (P80211SKB_RXMETA(skb) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: RXmeta already attached!\n",
 		       wlandev->name);
+=======
+		netdev_err(wlandev->netdev,
+			   "%s: RXmeta already attached!\n", wlandev->name);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "%s: RXmeta already attached!\n", wlandev->name);
@@ -654,8 +694,13 @@ int p80211skb_rxmeta_attach(struct wlandevice *wlandev, struct sk_buff *skb)
 
 	if (rxmeta == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: Failed to allocate rxmeta.\n",
 		       wlandev->name);
+=======
+		netdev_err(wlandev->netdev,
+			   "%s: Failed to allocate rxmeta.\n", wlandev->name);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "%s: Failed to allocate rxmeta.\n", wlandev->name);
@@ -702,7 +747,12 @@ void p80211skb_free(struct wlandevice *wlandev, struct sk_buff *skb)
 		p80211skb_rxmeta_detach(skb);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Freeing an skb (%p) w/ no frmmeta.\n", skb);
+=======
+		netdev_err(wlandev->netdev,
+			   "Freeing an skb (%p) w/ no frmmeta.\n", skb);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Freeing an skb (%p) w/ no frmmeta.\n", skb);

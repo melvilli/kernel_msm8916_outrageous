@@ -71,13 +71,19 @@ static unsigned long read_pmc(int idx)
 		val = mfpmr(PMRN_PMC3);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 4:
 		val = mfpmr(PMRN_PMC4);
 		break;
 	case 5:
 		val = mfpmr(PMRN_PMC5);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		printk(KERN_ERR "oops trying to read PMC%d\n", idx);
@@ -105,13 +111,19 @@ static void write_pmc(int idx, unsigned long val)
 		mtpmr(PMRN_PMC3, val);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 4:
 		mtpmr(PMRN_PMC4, val);
 		break;
 	case 5:
 		mtpmr(PMRN_PMC5, val);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		printk(KERN_ERR "oops trying to write PMC%d\n", idx);
@@ -139,13 +151,19 @@ static void write_pmlca(int idx, unsigned long val)
 		mtpmr(PMRN_PMLCA3, val);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 4:
 		mtpmr(PMRN_PMLCA4, val);
 		break;
 	case 5:
 		mtpmr(PMRN_PMLCA5, val);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		printk(KERN_ERR "oops trying to write PMLCA%d\n", idx);
@@ -173,13 +191,19 @@ static void write_pmlcb(int idx, unsigned long val)
 		mtpmr(PMRN_PMLCB3, val);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 4:
 		mtpmr(PMRN_PMLCB4, val);
 		break;
 	case 5:
 		mtpmr(PMRN_PMLCB5, val);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		printk(KERN_ERR "oops trying to write PMLCB%d\n", idx);
@@ -499,13 +523,19 @@ static int fsl_emb_pmu_event_init(struct perf_event *event)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ppmu->n_counter > MAX_HWEVENTS) {
 		WARN(1, "No. of perf counters (%d) is higher than max array size(%d)\n",
 			ppmu->n_counter, MAX_HWEVENTS);
 		ppmu->n_counter = MAX_HWEVENTS;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (event->attr.type) {
 	case PERF_TYPE_HARDWARE:

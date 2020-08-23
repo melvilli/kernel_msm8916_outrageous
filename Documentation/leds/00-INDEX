@@ -1,9 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 00-INDEX
 	- This file
 leds-blinkm.txt
 	- Driver for BlinkM LED-devices.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 leds-class.txt
 	- documents LED handling under Linux.
@@ -20,9 +26,15 @@ leds-lp55xx.txt
 leds-lm3556.txt
 	- notes on how to use the leds-lm3556 driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ledtrig-oneshot.txt
 	- One-shot LED trigger for both sporadic and dense events.
 ledtrig-transient.txt
 	- LED Transient Trigger, one shot timer activation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

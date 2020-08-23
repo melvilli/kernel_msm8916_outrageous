@@ -33,6 +33,10 @@
 #include <linux/irq.h>
 #include <linux/completion.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -271,7 +275,11 @@ static struct nand_ecclayout nandv2_hw_eccoob_4k = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char const *part_probes[] = {
+=======
+static const char * const part_probes[] = {
+>>>>>>> v3.18
 =======
 static const char * const part_probes[] = {
 >>>>>>> v3.18
@@ -404,7 +412,11 @@ static void wait_op_done(struct mxc_nand_host *host, int useirq)
 	if (useirq) {
 		if (!host->devtype_data->check_int(host)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			INIT_COMPLETION(host->op_completion);
+=======
+			reinit_completion(&host->op_completion);
+>>>>>>> v3.18
 =======
 			reinit_completion(&host->op_completion);
 >>>>>>> v3.18
@@ -1411,6 +1423,7 @@ static int mxcnd_probe(struct platform_device *pdev)
 
 	/* Allocate memory for MTD device structure and private data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = devm_kzalloc(&pdev->dev, sizeof(struct mxc_nand_host) +
 			NAND_MAX_PAGESIZE + NAND_MAX_OOBSIZE, GFP_KERNEL);
 	if (!host)
@@ -1418,6 +1431,8 @@ static int mxcnd_probe(struct platform_device *pdev)
 
 	host->data_buf = (uint8_t *)(host + 1);
 =======
+=======
+>>>>>>> v3.18
 	host = devm_kzalloc(&pdev->dev, sizeof(struct mxc_nand_host),
 			GFP_KERNEL);
 	if (!host)
@@ -1427,6 +1442,9 @@ static int mxcnd_probe(struct platform_device *pdev)
 	host->data_buf = devm_kzalloc(&pdev->dev, PAGE_SIZE, GFP_KERNEL);
 	if (!host->data_buf)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	host->dev = &pdev->dev;
@@ -1456,7 +1474,12 @@ static int mxcnd_probe(struct platform_device *pdev)
 	err = mxcnd_probe_dt(host);
 	if (err > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct mxc_nand_platform_data *pdata = pdev->dev.platform_data;
+=======
+		struct mxc_nand_platform_data *pdata =
+					dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		struct mxc_nand_platform_data *pdata =
 					dev_get_platdata(&pdev->dev);
@@ -1475,8 +1498,11 @@ static int mxcnd_probe(struct platform_device *pdev)
 	if (host->devtype_data->needs_ip) {
 		res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!res)
 			return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		host->regs_ip = devm_ioremap_resource(&pdev->dev, res);
@@ -1489,9 +1515,12 @@ static int mxcnd_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->base = devm_ioremap_resource(&pdev->dev, res);
@@ -1537,6 +1566,11 @@ static int mxcnd_probe(struct platform_device *pdev)
 
 	host->irq = platform_get_irq(pdev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (host->irq < 0)
+		return host->irq;
+>>>>>>> v3.18
 =======
 	if (host->irq < 0)
 		return host->irq;
@@ -1551,12 +1585,15 @@ static int mxcnd_probe(struct platform_device *pdev)
 
 	err = devm_request_irq(&pdev->dev, host->irq, mxc_nfc_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, DRIVER_NAME, host);
 	if (err)
 		return err;
 
 	clk_prepare_enable(host->clk);
 =======
+=======
+>>>>>>> v3.18
 			0, DRIVER_NAME, host);
 	if (err)
 		return err;
@@ -1564,6 +1601,9 @@ static int mxcnd_probe(struct platform_device *pdev)
 	err = clk_prepare_enable(host->clk);
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host->clk_act = 1;
 
@@ -1584,7 +1624,10 @@ static int mxcnd_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* allocate the right size buffer now */
 	devm_kfree(&pdev->dev, (void *)host->data_buf);
 	host->data_buf = devm_kzalloc(&pdev->dev, mtd->writesize + mtd->oobsize,
@@ -1594,6 +1637,9 @@ static int mxcnd_probe(struct platform_device *pdev)
 		goto escan;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Call preset again, with correct writesize this time */
 	host->devtype_data->preset(mtd);
@@ -1640,9 +1686,15 @@ static int mxcnd_remove(struct platform_device *pdev)
 	struct mxc_nand_host *host = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
 	nand_release(&host->mtd);
+=======
+	nand_release(&host->mtd);
+	if (host->clk_act)
+		clk_disable_unprepare(host->clk);
+>>>>>>> v3.18
 =======
 	nand_release(&host->mtd);
 	if (host->clk_act)

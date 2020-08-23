@@ -30,6 +30,11 @@
 #include <asm/ppc-opcode.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <misc/cxl.h>
+
+>>>>>>> v3.18
 =======
 #include <misc/cxl.h>
 
@@ -41,13 +46,19 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HPTE_LOCK_BIT 3
 =======
+=======
+>>>>>>> v3.18
 #ifdef __BIG_ENDIAN__
 #define HPTE_LOCK_BIT 3
 #else
 #define HPTE_LOCK_BIT (56+3)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DEFINE_RAW_SPINLOCK(native_tlbie_lock);
@@ -57,6 +68,10 @@ static inline void __tlbie(unsigned long vpn, int psize, int apsize, int ssize)
 	unsigned long va;
 	unsigned int penc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long sllp;
+>>>>>>> v3.18
 =======
 	unsigned long sllp;
 >>>>>>> v3.18
@@ -82,7 +97,13 @@ static inline void __tlbie(unsigned long vpn, int psize, int apsize, int ssize)
 		va &= ~((1ul << (64 - 52)) - 1);
 		va |= ssize << 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		va |= mmu_psize_defs[apsize].sllp << 6;
+=======
+		sllp = ((mmu_psize_defs[apsize].sllp & SLB_VSID_L) >> 6) |
+			((mmu_psize_defs[apsize].sllp & SLB_VSID_LP) >> 4);
+		va |= sllp << 5;
+>>>>>>> v3.18
 =======
 		sllp = ((mmu_psize_defs[apsize].sllp & SLB_VSID_L) >> 6) |
 			((mmu_psize_defs[apsize].sllp & SLB_VSID_LP) >> 4);
@@ -99,6 +120,7 @@ static inline void __tlbie(unsigned long vpn, int psize, int apsize, int ssize)
 		va |= penc << 12;
 		va |= ssize << 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Add AVAL part */
 		if (psize != apsize) {
 			/*
@@ -111,6 +133,8 @@ static inline void __tlbie(unsigned long vpn, int psize, int apsize, int ssize)
 			va |= (vpn & 0xfe);
 		}
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * AVAL bits:
 		 * We don't need all the bits, but rest of the bits
@@ -119,6 +143,9 @@ static inline void __tlbie(unsigned long vpn, int psize, int apsize, int ssize)
 		 * 58..64 bits of va.
 		 */
 		va |= (vpn & 0xfe); /* AVAL */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		va |= 1; /* L */
 		asm volatile(ASM_FTR_IFCLR("tlbie %0,1", PPC_TLBIE(%1,%0), %2)
@@ -133,6 +160,10 @@ static inline void __tlbiel(unsigned long vpn, int psize, int apsize, int ssize)
 	unsigned long va;
 	unsigned int penc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long sllp;
+>>>>>>> v3.18
 =======
 	unsigned long sllp;
 >>>>>>> v3.18
@@ -152,7 +183,13 @@ static inline void __tlbiel(unsigned long vpn, int psize, int apsize, int ssize)
 		va &= ~((1ul << (64 - 52)) - 1);
 		va |= ssize << 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		va |= mmu_psize_defs[apsize].sllp << 6;
+=======
+		sllp = ((mmu_psize_defs[apsize].sllp & SLB_VSID_L) >> 6) |
+			((mmu_psize_defs[apsize].sllp & SLB_VSID_LP) >> 4);
+		va |= sllp << 5;
+>>>>>>> v3.18
 =======
 		sllp = ((mmu_psize_defs[apsize].sllp & SLB_VSID_L) >> 6) |
 			((mmu_psize_defs[apsize].sllp & SLB_VSID_LP) >> 4);
@@ -168,6 +205,7 @@ static inline void __tlbiel(unsigned long vpn, int psize, int apsize, int ssize)
 		va |= penc << 12;
 		va |= ssize << 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Add AVAL part */
 		if (psize != apsize) {
 			/*
@@ -180,6 +218,8 @@ static inline void __tlbiel(unsigned long vpn, int psize, int apsize, int ssize)
 			va |= (vpn & 0xfe);
 		}
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * AVAL bits:
 		 * We don't need all the bits, but rest of the bits
@@ -188,6 +228,9 @@ static inline void __tlbiel(unsigned long vpn, int psize, int apsize, int ssize)
 		 * 58..64 bits of va.
 		 */
 		va |= (vpn & 0xfe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		va |= 1; /* L */
 		asm volatile(".long 0x7c000224 | (%0 << 11) | (1 << 21)"
@@ -201,15 +244,21 @@ static inline void tlbie(unsigned long vpn, int psize, int apsize,
 			 int ssize, int local)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int use_local = local && mmu_has_feature(MMU_FTR_TLBIEL);
 	int lock_tlbie = !mmu_has_feature(MMU_FTR_LOCKLESS_TLBIE);
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int use_local;
 	int lock_tlbie = !mmu_has_feature(MMU_FTR_LOCKLESS_TLBIE);
 
 	use_local = local && mmu_has_feature(MMU_FTR_TLBIEL) && !cxl_ctx_in_use();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (use_local)
 		use_local = mmu_psize_defs[psize].tlbiel;
@@ -230,7 +279,11 @@ static inline void tlbie(unsigned long vpn, int psize, int apsize,
 static inline void native_lock_hpte(struct hash_pte *hptep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *word = &hptep->v;
+=======
+	unsigned long *word = (unsigned long *)&hptep->v;
+>>>>>>> v3.18
 =======
 	unsigned long *word = (unsigned long *)&hptep->v;
 >>>>>>> v3.18
@@ -246,7 +299,11 @@ static inline void native_lock_hpte(struct hash_pte *hptep)
 static inline void native_unlock_hpte(struct hash_pte *hptep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *word = &hptep->v;
+=======
+	unsigned long *word = (unsigned long *)&hptep->v;
+>>>>>>> v3.18
 =======
 	unsigned long *word = (unsigned long *)&hptep->v;
 >>>>>>> v3.18
@@ -270,15 +327,21 @@ static long native_hpte_insert(unsigned long hpte_group, unsigned long vpn,
 
 	for (i = 0; i < HPTES_PER_GROUP; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (! (hptep->v & HPTE_V_VALID)) {
 			/* retry with lock held */
 			native_lock_hpte(hptep);
 			if (! (hptep->v & HPTE_V_VALID))
 =======
+=======
+>>>>>>> v3.18
 		if (! (be64_to_cpu(hptep->v) & HPTE_V_VALID)) {
 			/* retry with lock held */
 			native_lock_hpte(hptep);
 			if (! (be64_to_cpu(hptep->v) & HPTE_V_VALID))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			native_unlock_hpte(hptep);
@@ -299,7 +362,11 @@ static long native_hpte_insert(unsigned long hpte_group, unsigned long vpn,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hptep->r = hpte_r;
+=======
+	hptep->r = cpu_to_be64(hpte_r);
+>>>>>>> v3.18
 =======
 	hptep->r = cpu_to_be64(hpte_r);
 >>>>>>> v3.18
@@ -310,7 +377,11 @@ static long native_hpte_insert(unsigned long hpte_group, unsigned long vpn,
 	 * NOTE: this also unlocks the hpte
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hptep->v = hpte_v;
+=======
+	hptep->v = cpu_to_be64(hpte_v);
+>>>>>>> v3.18
 =======
 	hptep->v = cpu_to_be64(hpte_v);
 >>>>>>> v3.18
@@ -335,7 +406,11 @@ static long native_hpte_remove(unsigned long hpte_group)
 	for (i = 0; i < HPTES_PER_GROUP; i++) {
 		hptep = htab_address + hpte_group + slot_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpte_v = hptep->v;
+=======
+		hpte_v = be64_to_cpu(hptep->v);
+>>>>>>> v3.18
 =======
 		hpte_v = be64_to_cpu(hptep->v);
 >>>>>>> v3.18
@@ -344,7 +419,11 @@ static long native_hpte_remove(unsigned long hpte_group)
 			/* retry with lock held */
 			native_lock_hpte(hptep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hpte_v = hptep->v;
+=======
+			hpte_v = be64_to_cpu(hptep->v);
+>>>>>>> v3.18
 =======
 			hpte_v = be64_to_cpu(hptep->v);
 >>>>>>> v3.18
@@ -367,6 +446,7 @@ static long native_hpte_remove(unsigned long hpte_group)
 	return i;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int __hpte_actual_psize(unsigned int lp, int psize)
 {
@@ -421,14 +501,24 @@ static long native_hpte_updatepp(unsigned long slot, unsigned long newpp,
 				 unsigned long vpn, int bpsize,
 				 int apsize, int ssize, int local)
 >>>>>>> v3.18
+=======
+static long native_hpte_updatepp(unsigned long slot, unsigned long newpp,
+				 unsigned long vpn, int bpsize,
+				 int apsize, int ssize, int local)
+>>>>>>> v3.18
 {
 	struct hash_pte *hptep = htab_address + slot;
 	unsigned long hpte_v, want_v;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int actual_psize;
 
 	want_v = hpte_encode_avpn(vpn, psize, ssize);
+=======
+
+	want_v = hpte_encode_avpn(vpn, bpsize, ssize);
+>>>>>>> v3.18
 =======
 
 	want_v = hpte_encode_avpn(vpn, bpsize, ssize);
@@ -440,8 +530,12 @@ static long native_hpte_updatepp(unsigned long slot, unsigned long newpp,
 	native_lock_hpte(hptep);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpte_v = hptep->v;
 	actual_psize = hpte_actual_psize(hptep, psize);
+=======
+	hpte_v = be64_to_cpu(hptep->v);
+>>>>>>> v3.18
 =======
 	hpte_v = be64_to_cpu(hptep->v);
 >>>>>>> v3.18
@@ -453,6 +547,7 @@ static long native_hpte_updatepp(unsigned long slot, unsigned long newpp,
 	 * technically "valid".
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (actual_psize < 0) {
 		actual_psize = psize;
 		ret = -1;
@@ -462,11 +557,15 @@ static long native_hpte_updatepp(unsigned long slot, unsigned long newpp,
 =======
 	if (!HPTE_V_COMPARE(hpte_v, want_v) || !(hpte_v & HPTE_V_VALID)) {
 >>>>>>> v3.18
+=======
+	if (!HPTE_V_COMPARE(hpte_v, want_v) || !(hpte_v & HPTE_V_VALID)) {
+>>>>>>> v3.18
 		DBG_LOW(" -> miss\n");
 		ret = -1;
 	} else {
 		DBG_LOW(" -> hit\n");
 		/* Update the HPTE */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hptep->r = (hptep->r & ~(HPTE_R_PP | HPTE_R_N)) |
 			(newpp & (HPTE_R_PP | HPTE_R_N | HPTE_R_C));
@@ -477,6 +576,8 @@ err_out:
 	/* Ensure it is out of the tlb too. */
 	tlbie(vpn, psize, actual_psize, ssize, local);
 =======
+=======
+>>>>>>> v3.18
 		hptep->r = cpu_to_be64((be64_to_cpu(hptep->r) & ~(HPTE_R_PP | HPTE_R_N)) |
 			(newpp & (HPTE_R_PP | HPTE_R_N | HPTE_R_C)));
 	}
@@ -484,6 +585,9 @@ err_out:
 
 	/* Ensure it is out of the tlb too. */
 	tlbie(vpn, bpsize, apsize, ssize, local);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -505,7 +609,11 @@ static long native_hpte_find(unsigned long vpn, int psize, int ssize)
 	for (i = 0; i < HPTES_PER_GROUP; i++) {
 		hptep = htab_address + slot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpte_v = hptep->v;
+=======
+		hpte_v = be64_to_cpu(hptep->v);
+>>>>>>> v3.18
 =======
 		hpte_v = be64_to_cpu(hptep->v);
 >>>>>>> v3.18
@@ -530,7 +638,10 @@ static void native_hpte_updateboltedpp(unsigned long newpp, unsigned long ea,
 				       int psize, int ssize)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int actual_psize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long vpn;
@@ -545,6 +656,7 @@ static void native_hpte_updateboltedpp(unsigned long newpp, unsigned long ea,
 	if (slot == -1)
 		panic("could not find page to bolt\n");
 	hptep = htab_address + slot;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	actual_psize = hpte_actual_psize(hptep, psize);
 	if (actual_psize < 0)
@@ -561,6 +673,8 @@ static void native_hpte_updateboltedpp(unsigned long newpp, unsigned long ea,
 static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 				   int psize, int ssize, int local)
 =======
+=======
+>>>>>>> v3.18
 
 	/* Update the HPTE */
 	hptep->r = cpu_to_be64((be64_to_cpu(hptep->r) &
@@ -575,6 +689,9 @@ static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 
 static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 				   int bpsize, int apsize, int ssize, int local)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hash_pte *hptep = htab_address + slot;
@@ -582,7 +699,10 @@ static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 	unsigned long want_v;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int actual_psize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -591,16 +711,22 @@ static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 	DBG_LOW("    invalidate(vpn=%016lx, hash: %lx)\n", vpn, slot);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	want_v = hpte_encode_avpn(vpn, psize, ssize);
 	native_lock_hpte(hptep);
 	hpte_v = hptep->v;
 
 	actual_psize = hpte_actual_psize(hptep, psize);
 =======
+=======
+>>>>>>> v3.18
 	want_v = hpte_encode_avpn(vpn, bpsize, ssize);
 	native_lock_hpte(hptep);
 	hpte_v = be64_to_cpu(hptep->v);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * We need to invalidate the TLB always because hpte_remove doesn't do
@@ -609,6 +735,7 @@ static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 	 * (hpte_remove) because we assume the old translation is still
 	 * technically "valid".
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (actual_psize < 0) {
 		actual_psize = psize;
@@ -619,11 +746,15 @@ static void native_hpte_invalidate(unsigned long slot, unsigned long vpn,
 =======
 	if (!HPTE_V_COMPARE(hpte_v, want_v) || !(hpte_v & HPTE_V_VALID))
 >>>>>>> v3.18
+=======
+	if (!HPTE_V_COMPARE(hpte_v, want_v) || !(hpte_v & HPTE_V_VALID))
+>>>>>>> v3.18
 		native_unlock_hpte(hptep);
 	else
 		/* Invalidate the hpte. NOTE: this also unlocks it */
 		hptep->v = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_out:
 	/* Invalidate the TLB */
@@ -632,6 +763,8 @@ err_out:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	/* Invalidate the TLB */
 	tlbie(vpn, bpsize, apsize, ssize, local);
 
@@ -722,11 +855,15 @@ static inline int __hpte_actual_psize(unsigned int lp, int psize)
 	return -1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void hpte_decode(struct hash_pte *hpte, unsigned long slot,
 			int *psize, int *apsize, int *ssize, unsigned long *vpn)
 {
 	unsigned long avpn, pteg, vpi;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long hpte_v = hpte->v;
 	unsigned long vsid, seg_off;
@@ -734,12 +871,17 @@ static void hpte_decode(struct hash_pte *hpte, unsigned long slot,
 	/* Look at the 8 bit LP value */
 	unsigned int lp = (hpte->r >> LP_SHIFT) & ((1 << LP_BITS) - 1);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long hpte_v = be64_to_cpu(hpte->v);
 	unsigned long hpte_r = be64_to_cpu(hpte->r);
 	unsigned long vsid, seg_off;
 	int size, a_size, shift;
 	/* Look at the 8 bit LP value */
 	unsigned int lp = (hpte_r >> LP_SHIFT) & ((1 << LP_BITS) - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(hpte_v & HPTE_V_LARGE)) {
@@ -778,6 +920,10 @@ static void hpte_decode(struct hash_pte *hpte, unsigned long slot,
 		}
 		*vpn = vsid << (SID_SHIFT - VPN_SHIFT) | seg_off >> VPN_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -791,6 +937,10 @@ static void hpte_decode(struct hash_pte *hpte, unsigned long slot,
 		}
 		*vpn = vsid << (SID_SHIFT_1T - VPN_SHIFT) | seg_off >> VPN_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -836,7 +986,11 @@ static void native_hpte_clear(void)
 		 * don't want to wait for a maybe bad cpu.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpte_v = hptep->v;
+=======
+		hpte_v = be64_to_cpu(hptep->v);
+>>>>>>> v3.18
 =======
 		hpte_v = be64_to_cpu(hptep->v);
 >>>>>>> v3.18
@@ -892,7 +1046,11 @@ static void native_flush_hash_range(unsigned long number, int local)
 			want_v = hpte_encode_avpn(vpn, psize, ssize);
 			native_lock_hpte(hptep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hpte_v = hptep->v;
+=======
+			hpte_v = be64_to_cpu(hptep->v);
+>>>>>>> v3.18
 =======
 			hpte_v = be64_to_cpu(hptep->v);
 >>>>>>> v3.18
@@ -952,6 +1110,10 @@ void __init hpte_init_native(void)
 	ppc_md.hpte_clear_all	= native_hpte_clear;
 	ppc_md.flush_hash_range = native_flush_hash_range;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ppc_md.hugepage_invalidate   = native_hugepage_invalidate;
+>>>>>>> v3.18
 =======
 	ppc_md.hugepage_invalidate   = native_hugepage_invalidate;
 >>>>>>> v3.18

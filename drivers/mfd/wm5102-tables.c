@@ -66,7 +66,12 @@ static const struct reg_default wm5102_revb_patch[] = {
 	{ 0x420, 0xa080 },
 	{ 0x428, 0xe000 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x443, 0xDC1A },
+=======
+	{ 0x442, 0x3F0A },
+	{ 0x443, 0xDC1F },
+>>>>>>> v3.18
 =======
 	{ 0x442, 0x3F0A },
 	{ 0x443, 0xDC1F },
@@ -78,6 +83,10 @@ static const struct reg_default wm5102_revb_patch[] = {
 	{ 0x35E, 0x000C },
 	{ 0x2D4, 0x0000 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x4DC, 0x0900 },
+>>>>>>> v3.18
 =======
 	{ 0x4DC, 0x0900 },
 >>>>>>> v3.18
@@ -89,8 +98,12 @@ int wm5102_patch(struct arizona *arizona)
 {
 	const struct reg_default *wm5102_patch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	int i, patch_size;
+=======
+	int patch_size;
+>>>>>>> v3.18
 =======
 	int patch_size;
 >>>>>>> v3.18
@@ -100,6 +113,10 @@ int wm5102_patch(struct arizona *arizona)
 		wm5102_patch = wm5102_reva_patch;
 		patch_size = ARRAY_SIZE(wm5102_reva_patch);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -108,6 +125,7 @@ int wm5102_patch(struct arizona *arizona)
 		patch_size = ARRAY_SIZE(wm5102_revb_patch);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	regcache_cache_bypass(arizona->regmap, true);
 
@@ -124,6 +142,11 @@ int wm5102_patch(struct arizona *arizona)
 out:
 	regcache_cache_bypass(arizona->regmap, false);
 	return ret;
+=======
+	return regmap_multi_reg_write_bypassed(arizona->regmap,
+					       wm5102_patch,
+					       patch_size);
+>>>>>>> v3.18
 =======
 	return regmap_multi_reg_write_bypassed(arizona->regmap,
 					       wm5102_patch,
@@ -173,17 +196,23 @@ static const struct regmap_irq wm5102_irqs[ARIZONA_NUM_IRQ] = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[ARIZONA_IRQ_SPK_SHUTDOWN_WARN] = {
 		.reg_offset = 2, .mask = ARIZONA_SPK_SHUTDOWN_WARN_EINT1
 	},
 	[ARIZONA_IRQ_SPK_SHUTDOWN] = {
 		.reg_offset = 2, .mask = ARIZONA_SPK_SHUTDOWN_EINT1
 =======
+=======
+>>>>>>> v3.18
 	[ARIZONA_IRQ_SPK_OVERHEAT_WARN] = {
 		.reg_offset = 2, .mask = ARIZONA_SPK_OVERHEAT_WARN_EINT1
 	},
 	[ARIZONA_IRQ_SPK_OVERHEAT] = {
 		.reg_offset = 2, .mask = ARIZONA_SPK_OVERHEAT_EINT1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[ARIZONA_IRQ_HPDET] = {
@@ -288,9 +317,12 @@ static const struct reg_default wm5102_reg_default[] = {
 	{ 0x00000008, 0x0019 },   /* R8     - Ctrl IF SPI CFG 1 */ 
 	{ 0x00000009, 0x0001 },   /* R9     - Ctrl IF I2C1 CFG 1 */ 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x00000016, 0x0000 },   /* R22    - Write Sequencer Ctrl 0 */ 
 	{ 0x00000017, 0x0000 },   /* R23    - Write Sequencer Ctrl 1 */ 
 	{ 0x00000018, 0x0000 },   /* R24    - Write Sequencer Ctrl 2 */ 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0x00000020, 0x0000 },   /* R32    - Tone Generator 1 */ 
@@ -379,7 +411,11 @@ static const struct reg_default wm5102_reg_default[] = {
 	{ 0x00000200, 0x0006 },   /* R512   - Mic Charge Pump 1 */ 
 	{ 0x00000210, 0x00D4 },   /* R528   - LDO1 Control 1 */ 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x00000212, 0x0001 },   /* R530   - LDO1 Control 2 */
+=======
+	{ 0x00000212, 0x0000 },   /* R530   - LDO1 Control 2 */
+>>>>>>> v3.18
 =======
 	{ 0x00000212, 0x0000 },   /* R530   - LDO1 Control 2 */
 >>>>>>> v3.18
@@ -463,6 +499,12 @@ static const struct reg_default wm5102_reg_default[] = {
 	{ 0x00000436, 0x0081 },   /* R1078  - DAC Volume Limit 5R */
 	{ 0x00000437, 0x0200 },   /* R1079  - Noise Gate Select 5R */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x00000440, 0x8FFF },   /* R1088  - DRE Enable */
+	{ 0x00000442, 0x3F0A },   /* R1090  - DRE Control 2 */
+	{ 0x00000443, 0xDC1F },   /* R1090  - DRE Control 3 */
+>>>>>>> v3.18
 =======
 	{ 0x00000440, 0x8FFF },   /* R1088  - DRE Enable */
 	{ 0x00000442, 0x3F0A },   /* R1090  - DRE Control 2 */
@@ -944,7 +986,10 @@ static const struct reg_default wm5102_reg_default[] = {
 	{ 0x00000D1C, 0xFFFF },   /* R3356  - IRQ2 Status 5 Mask */ 
 	{ 0x00000D1F, 0x0000 },   /* R3359  - IRQ2 Control */ 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x00000D50, 0x0000 },   /* R3408  - AOD wkup and trig */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0x00000D53, 0xFFFF },   /* R3411  - AOD IRQ Mask IRQ1 */ 
@@ -1073,6 +1118,10 @@ static bool wm5102_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_WRITE_SEQUENCER_CTRL_1:
 	case ARIZONA_WRITE_SEQUENCER_CTRL_2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ARIZONA_WRITE_SEQUENCER_CTRL_3:
+>>>>>>> v3.18
 =======
 	case ARIZONA_WRITE_SEQUENCER_CTRL_3:
 >>>>>>> v3.18
@@ -1098,6 +1147,11 @@ static bool wm5102_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_ALWAYS_ON_TRIGGERS_SEQUENCE_SELECT_5:
 	case ARIZONA_ALWAYS_ON_TRIGGERS_SEQUENCE_SELECT_6:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ARIZONA_ALWAYS_ON_TRIGGERS_SEQUENCE_SELECT_7:
+	case ARIZONA_ALWAYS_ON_TRIGGERS_SEQUENCE_SELECT_8:
+>>>>>>> v3.18
 =======
 	case ARIZONA_ALWAYS_ON_TRIGGERS_SEQUENCE_SELECT_7:
 	case ARIZONA_ALWAYS_ON_TRIGGERS_SEQUENCE_SELECT_8:
@@ -1124,6 +1178,11 @@ static bool wm5102_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_ASYNC_SAMPLE_RATE_1:
 	case ARIZONA_ASYNC_SAMPLE_RATE_1_STATUS:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ARIZONA_ASYNC_SAMPLE_RATE_2:
+	case ARIZONA_ASYNC_SAMPLE_RATE_2_STATUS:
+>>>>>>> v3.18
 =======
 	case ARIZONA_ASYNC_SAMPLE_RATE_2:
 	case ARIZONA_ASYNC_SAMPLE_RATE_2_STATUS:
@@ -1259,6 +1318,12 @@ static bool wm5102_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_DAC_VOLUME_LIMIT_5R:
 	case ARIZONA_NOISE_GATE_SELECT_5R:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ARIZONA_DRE_ENABLE:
+	case ARIZONA_DRE_CONTROL_2:
+	case ARIZONA_DRE_CONTROL_3:
+>>>>>>> v3.18
 =======
 	case ARIZONA_DRE_ENABLE:
 	case ARIZONA_DRE_CONTROL_2:
@@ -1914,7 +1979,10 @@ static bool wm5102_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_DSP1_STATUS_2:
 	case ARIZONA_DSP1_STATUS_3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ARIZONA_DSP1_WDMA_BUFFER_1:
 	case ARIZONA_DSP1_WDMA_BUFFER_2:
 	case ARIZONA_DSP1_WDMA_BUFFER_3:
@@ -1932,6 +2000,9 @@ static bool wm5102_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_DSP1_WDMA_CONFIG_1:
 	case ARIZONA_DSP1_WDMA_CONFIG_2:
 	case ARIZONA_DSP1_RDMA_CONFIG_1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ARIZONA_DSP1_SCRATCH_0:
 	case ARIZONA_DSP1_SCRATCH_1:
@@ -1955,11 +2026,17 @@ static bool wm5102_volatile_register(struct device *dev, unsigned int reg)
 	case ARIZONA_SOFTWARE_RESET:
 	case ARIZONA_DEVICE_REVISION:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ARIZONA_WRITE_SEQUENCER_CTRL_0:
 	case ARIZONA_WRITE_SEQUENCER_CTRL_1:
 	case ARIZONA_WRITE_SEQUENCER_CTRL_2:
 	case ARIZONA_WRITE_SEQUENCER_CTRL_3:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ARIZONA_OUTPUT_STATUS_1:
 	case ARIZONA_RAW_OUTPUT_STATUS_1:
@@ -1971,9 +2048,12 @@ static bool wm5102_volatile_register(struct device *dev, unsigned int reg)
 	case ARIZONA_HAPTICS_STATUS:
 	case ARIZONA_ASYNC_SAMPLE_RATE_1_STATUS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ARIZONA_FLL1_NCO_TEST_0:
 	case ARIZONA_FLL2_NCO_TEST_0:
 =======
+=======
+>>>>>>> v3.18
 	case ARIZONA_ASYNC_SAMPLE_RATE_2_STATUS:
 	case ARIZONA_FLL1_NCO_TEST_0:
 	case ARIZONA_FLL2_NCO_TEST_0:
@@ -1981,6 +2061,9 @@ static bool wm5102_volatile_register(struct device *dev, unsigned int reg)
 	case ARIZONA_DAC_COMP_2:
 	case ARIZONA_DAC_COMP_3:
 	case ARIZONA_DAC_COMP_4:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ARIZONA_FX_CTRL2:
 	case ARIZONA_INTERRUPT_STATUS_1:
@@ -2006,10 +2089,13 @@ static bool wm5102_volatile_register(struct device *dev, unsigned int reg)
 	case ARIZONA_AOD_IRQ2:
 	case ARIZONA_AOD_IRQ_RAW_STATUS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ARIZONA_DSP1_STATUS_1:
 	case ARIZONA_DSP1_STATUS_2:
 	case ARIZONA_DSP1_STATUS_3:
 =======
+=======
+>>>>>>> v3.18
 	case ARIZONA_DSP1_CLOCKING_1:
 	case ARIZONA_DSP1_STATUS_1:
 	case ARIZONA_DSP1_STATUS_2:
@@ -2031,6 +2117,9 @@ static bool wm5102_volatile_register(struct device *dev, unsigned int reg)
 	case ARIZONA_DSP1_WDMA_CONFIG_1:
 	case ARIZONA_DSP1_WDMA_CONFIG_2:
 	case ARIZONA_DSP1_RDMA_CONFIG_1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ARIZONA_DSP1_SCRATCH_0:
 	case ARIZONA_DSP1_SCRATCH_1:

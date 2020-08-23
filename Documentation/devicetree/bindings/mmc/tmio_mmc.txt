@@ -10,6 +10,7 @@ described in mmc.txt, can be used. Additionally the following tmio_mmc-specific
 optional bindings can be used.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Optional properties:
 - toshiba,mmc-wrprotect-disable: write-protect detection is unavailable
 
@@ -20,6 +21,8 @@ configure various model-specific properties:
 "renesas,r8a7740-sdhi":	compatible with R8A7740: certain MMC/SD commands have to
 			wait for the interface to become idle.
 =======
+=======
+>>>>>>> v3.18
 Required properties:
 - compatible:	"renesas,sdhi-shmobile" - a generic sh-mobile SDHI unit
 		"renesas,sdhi-sh7372" - SDHI IP on SH7372 SoC
@@ -36,4 +39,7 @@ Required properties:
 
 Optional properties:
 - toshiba,mmc-wrprotect-disable: write-protect detection is unavailable
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

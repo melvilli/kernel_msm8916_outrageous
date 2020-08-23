@@ -2,6 +2,7 @@
 # USB Core configuration
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_DEBUG
 	bool "USB verbose debug messages"
 	help
@@ -12,6 +13,10 @@ config USB_DEBUG
 config USB_ANNOUNCE_NEW_DEVICES
 	bool "USB announce new devices"
 	default N
+=======
+config USB_ANNOUNCE_NEW_DEVICES
+	bool "USB announce new devices"
+>>>>>>> v3.18
 =======
 config USB_ANNOUNCE_NEW_DEVICES
 	bool "USB announce new devices"
@@ -34,7 +39,11 @@ config USB_DEFAULT_PERSIST
 	default y
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Say N here if you don't want USB power session persistance
+=======
+	  Say N here if you don't want USB power session persistence
+>>>>>>> v3.18
 =======
 	  Say N here if you don't want USB power session persistence
 >>>>>>> v3.18
@@ -74,9 +83,14 @@ config USB_OTG
 
 config USB_OTG_WHITELIST
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Rely on OTG Targeted Peripherals List"
 	depends on USB_OTG || EXPERT
 	default y if USB_OTG
+=======
+	bool "Rely on OTG and EH Targeted Peripherals List"
+	depends on USB
+>>>>>>> v3.18
 =======
 	bool "Rely on OTG and EH Targeted Peripherals List"
 	depends on USB
@@ -85,6 +99,7 @@ config USB_OTG_WHITELIST
 	  If you say Y here, the "otg_whitelist.h" file will be used as a
 	  product whitelist, so USB peripherals not listed there will be
 	  rejected during enumeration.  This behavior is required by the
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  USB OTG specification for all devices not on your product's
 	  "Targeted Peripherals List".  "Embedded Hosts" are likewise
@@ -96,10 +111,15 @@ config USB_OTG_WHITELIST
 	  convenient for many stages of product development.
 
 =======
+=======
+>>>>>>> v3.18
 	  USB OTG and EH specification for all devices not on your product's
 	  "Targeted Peripherals List".  "Embedded Hosts" are likewise
 	  allowed to support only a limited number of peripherals.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_OTG_BLACKLIST_HUB
 	bool "Disable external hubs"
@@ -111,7 +131,10 @@ config USB_OTG_BLACKLIST_HUB
 	  are "Embedded Hosts" that don't offer OTG support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_OTG_FSM
 	tristate "USB 2.0 OTG FSM implementation"
 	depends on USB
@@ -121,4 +144,7 @@ config USB_OTG_FSM
 	  Implements OTG Finite State Machine as specified in On-The-Go
 	  and Embedded Host Supplement to the USB Revision 2.0 Specification.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

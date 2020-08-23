@@ -61,10 +61,13 @@ static struct buffer_head *qnx4_find_entry(int len, struct inode *dir,
 
 	*res_dir = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dir->i_sb) {
 		printk(KERN_WARNING "qnx4: no superblock on dir.\n");
 		return NULL;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bh = NULL;

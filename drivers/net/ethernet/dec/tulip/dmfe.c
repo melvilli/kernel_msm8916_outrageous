@@ -329,15 +329,21 @@ static void update_cr6(u32, void __iomem *);
 static void send_filter_frame(struct DEVICE *);
 static void dm9132_id_table(struct DEVICE *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 phy_read(void __iomem *, u8, u8, u32);
 static void phy_write(void __iomem *, u8, u8, u16, u32);
 static void phy_write_1bit(void __iomem *, u32);
 static u16 phy_read_1bit(void __iomem *);
 =======
+=======
+>>>>>>> v3.18
 static u16 dmfe_phy_read(void __iomem *, u8, u8, u32);
 static void dmfe_phy_write(void __iomem *, u8, u8, u16, u32);
 static void dmfe_phy_write_1bit(void __iomem *, u32);
 static u16 dmfe_phy_read_1bit(void __iomem *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u8 dmfe_sense_speed(struct dmfe_board_info *);
 static void dmfe_process_mode(struct dmfe_board_info *);
@@ -531,7 +537,10 @@ err_out_disable:
 	pci_disable_device(pdev);
 err_out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -559,8 +568,11 @@ static void dmfe_remove_one(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		free_netdev(dev);	/* free board information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -713,7 +725,11 @@ static netdev_tx_t dmfe_start_xmit(struct sk_buff *skb,
 	if (skb->len > MAX_PACKET_SIZE) {
 		pr_err("big packet = %d\n", (u16)skb->len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -764,7 +780,11 @@ static netdev_tx_t dmfe_start_xmit(struct sk_buff *skb,
 
 	/* free this SKB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -795,7 +815,11 @@ static int dmfe_stop(struct DEVICE *dev)
 	dw32(DCR0, DM910X_RESET);
 	udelay(100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_write(ioaddr, db->phy_addr, 0, 0x8000, db->chip_id);
+=======
+	dmfe_phy_write(ioaddr, db->phy_addr, 0, 0x8000, db->chip_id);
+>>>>>>> v3.18
 =======
 	dmfe_phy_write(ioaddr, db->phy_addr, 0, 0x8000, db->chip_id);
 >>>>>>> v3.18
@@ -1183,7 +1207,11 @@ static void dmfe_timer(unsigned long data)
 			db->cr6_data &= ~0x40000;
 			update_cr6(db->cr6_data, ioaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phy_write(ioaddr, db->phy_addr, 0, 0x1000, db->chip_id);
+=======
+			dmfe_phy_write(ioaddr, db->phy_addr, 0, 0x1000, db->chip_id);
+>>>>>>> v3.18
 =======
 			dmfe_phy_write(ioaddr, db->phy_addr, 0, 0x1000, db->chip_id);
 >>>>>>> v3.18
@@ -1263,9 +1291,15 @@ static void dmfe_timer(unsigned long data)
 
 	/* need a dummy read because of PHY's register latch*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_read (db->ioaddr, db->phy_addr, 1, db->chip_id);
 	link_ok_phy = (phy_read (db->ioaddr,
 		       db->phy_addr, 1, db->chip_id) & 0x4) ? 1 : 0;
+=======
+	dmfe_phy_read (db->ioaddr, db->phy_addr, 1, db->chip_id);
+	link_ok_phy = (dmfe_phy_read (db->ioaddr,
+				      db->phy_addr, 1, db->chip_id) & 0x4) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	dmfe_phy_read (db->ioaddr, db->phy_addr, 1, db->chip_id);
 	link_ok_phy = (dmfe_phy_read (db->ioaddr,
@@ -1286,8 +1320,13 @@ static void dmfe_timer(unsigned long data)
 		/* AUTO or force 1M Homerun/Longrun don't need */
 		if ( !(db->media_mode & 0x38) )
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phy_write(db->ioaddr, db->phy_addr,
 				  0, 0x1000, db->chip_id);
+=======
+			dmfe_phy_write(db->ioaddr, db->phy_addr,
+				       0, 0x1000, db->chip_id);
+>>>>>>> v3.18
 =======
 			dmfe_phy_write(db->ioaddr, db->phy_addr,
 				       0, 0x1000, db->chip_id);
@@ -1693,6 +1732,7 @@ static u8 dmfe_sense_speed(struct dmfe_board_info *db)
 	update_cr6(db->cr6_data & ~0x40000, ioaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_mode = phy_read(db->ioaddr, db->phy_addr, 1, db->chip_id);
 	phy_mode = phy_read(db->ioaddr, db->phy_addr, 1, db->chip_id);
 
@@ -1704,6 +1744,8 @@ static u8 dmfe_sense_speed(struct dmfe_board_info *db)
 			phy_mode = phy_read(db->ioaddr,
 				    db->phy_addr, 17, db->chip_id) & 0xf000;
 =======
+=======
+>>>>>>> v3.18
 	phy_mode = dmfe_phy_read(db->ioaddr, db->phy_addr, 1, db->chip_id);
 	phy_mode = dmfe_phy_read(db->ioaddr, db->phy_addr, 1, db->chip_id);
 
@@ -1714,6 +1756,9 @@ static u8 dmfe_sense_speed(struct dmfe_board_info *db)
 		else 				/* DM9102/DM9102A */
 			phy_mode = dmfe_phy_read(db->ioaddr,
 						 db->phy_addr, 17, db->chip_id) & 0xf000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch (phy_mode) {
 		case 0x1000: db->op_mode = DMFE_10MHF; break;
@@ -1752,6 +1797,7 @@ static void dmfe_set_phyxcer(struct dmfe_board_info *db)
 	/* DM9009 Chip: Phyxcer reg18 bit12=0 */
 	if (db->chip_id == PCI_DM9009_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_reg = phy_read(db->ioaddr,
 				   db->phy_addr, 18, db->chip_id) & ~0x1000;
 
@@ -1762,6 +1808,8 @@ static void dmfe_set_phyxcer(struct dmfe_board_info *db)
 	/* Phyxcer capability setting */
 	phy_reg = phy_read(db->ioaddr, db->phy_addr, 4, db->chip_id) & ~0x01e0;
 =======
+=======
+>>>>>>> v3.18
 		phy_reg = dmfe_phy_read(db->ioaddr,
 					db->phy_addr, 18, db->chip_id) & ~0x1000;
 
@@ -1771,6 +1819,9 @@ static void dmfe_set_phyxcer(struct dmfe_board_info *db)
 
 	/* Phyxcer capability setting */
 	phy_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 4, db->chip_id) & ~0x01e0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (db->media_mode & DMFE_AUTO) {
@@ -1793,6 +1844,7 @@ static void dmfe_set_phyxcer(struct dmfe_board_info *db)
 		db->media_mode|=DMFE_AUTO;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_write(db->ioaddr, db->phy_addr, 4, phy_reg, db->chip_id);
 
  	/* Restart Auto-Negotiation */
@@ -1801,6 +1853,8 @@ static void dmfe_set_phyxcer(struct dmfe_board_info *db)
 	if ( !db->chip_type )
 		phy_write(db->ioaddr, db->phy_addr, 0, 0x1200, db->chip_id);
 =======
+=======
+>>>>>>> v3.18
 	dmfe_phy_write(db->ioaddr, db->phy_addr, 4, phy_reg, db->chip_id);
 
  	/* Restart Auto-Negotiation */
@@ -1808,6 +1862,9 @@ static void dmfe_set_phyxcer(struct dmfe_board_info *db)
 		dmfe_phy_write(db->ioaddr, db->phy_addr, 0, 0x1800, db->chip_id);
 	if ( !db->chip_type )
 		dmfe_phy_write(db->ioaddr, db->phy_addr, 0, 0x1200, db->chip_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1841,7 +1898,11 @@ static void dmfe_process_mode(struct dmfe_board_info *db)
 	if ( !(db->media_mode & 0x18)) {
 		/* Forece Mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_reg = phy_read(db->ioaddr, db->phy_addr, 6, db->chip_id);
+=======
+		phy_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 6, db->chip_id);
+>>>>>>> v3.18
 =======
 		phy_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 6, db->chip_id);
 >>>>>>> v3.18
@@ -1855,6 +1916,7 @@ static void dmfe_process_mode(struct dmfe_board_info *db)
 			case DMFE_100MFD: phy_reg = 0x2100; break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phy_write(db->ioaddr,
 				  db->phy_addr, 0, phy_reg, db->chip_id);
        			if ( db->chip_type && (db->chip_id == PCI_DM9102_ID) )
@@ -1862,12 +1924,17 @@ static void dmfe_process_mode(struct dmfe_board_info *db)
 			phy_write(db->ioaddr,
 				  db->phy_addr, 0, phy_reg, db->chip_id);
 =======
+=======
+>>>>>>> v3.18
 			dmfe_phy_write(db->ioaddr,
 				       db->phy_addr, 0, phy_reg, db->chip_id);
        			if ( db->chip_type && (db->chip_id == PCI_DM9102_ID) )
 				mdelay(20);
 			dmfe_phy_write(db->ioaddr,
 				       db->phy_addr, 0, phy_reg, db->chip_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1879,8 +1946,13 @@ static void dmfe_process_mode(struct dmfe_board_info *db)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
 		      u16 phy_data, u32 chip_id)
+=======
+static void dmfe_phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
+			   u16 phy_data, u32 chip_id)
+>>>>>>> v3.18
 =======
 static void dmfe_phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
 			   u16 phy_data, u32 chip_id)
@@ -1895,6 +1967,7 @@ static void dmfe_phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
 
 		/* Send 33 synchronization clock to Phy controller */
 		for (i = 0; i < 35; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			phy_write_1bit(ioaddr, PHY_DATA_1);
 
@@ -1925,6 +1998,8 @@ static void dmfe_phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
 			phy_write_1bit(ioaddr,
 				       phy_data & i ? PHY_DATA_1 : PHY_DATA_0);
 =======
+=======
+>>>>>>> v3.18
 			dmfe_phy_write_1bit(ioaddr, PHY_DATA_1);
 
 		/* Send start command(01) to Phy */
@@ -1953,6 +2028,9 @@ static void dmfe_phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
 		for ( i = 0x8000; i > 0; i >>= 1)
 			dmfe_phy_write_1bit(ioaddr,
 					    phy_data & i ? PHY_DATA_1 : PHY_DATA_0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1963,7 +2041,11 @@ static void dmfe_phy_write(void __iomem *ioaddr, u8 phy_addr, u8 offset,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_id)
+=======
+static u16 dmfe_phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_id)
+>>>>>>> v3.18
 =======
 static u16 dmfe_phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_id)
 >>>>>>> v3.18
@@ -1979,6 +2061,7 @@ static u16 dmfe_phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_
 
 		/* Send 33 synchronization clock to Phy controller */
 		for (i = 0; i < 35; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			phy_write_1bit(ioaddr, PHY_DATA_1);
 
@@ -2003,6 +2086,8 @@ static u16 dmfe_phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_
 		/* Skip transition state */
 		phy_read_1bit(ioaddr);
 =======
+=======
+>>>>>>> v3.18
 			dmfe_phy_write_1bit(ioaddr, PHY_DATA_1);
 
 		/* Send start command(01) to Phy */
@@ -2025,13 +2110,20 @@ static u16 dmfe_phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_
 
 		/* Skip transition state */
 		dmfe_phy_read_1bit(ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* read 16bit data */
 		for (phy_data = 0, i = 0; i < 16; i++) {
 			phy_data <<= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phy_data |= phy_read_1bit(ioaddr);
+=======
+			phy_data |= dmfe_phy_read_1bit(ioaddr);
+>>>>>>> v3.18
 =======
 			phy_data |= dmfe_phy_read_1bit(ioaddr);
 >>>>>>> v3.18
@@ -2047,7 +2139,11 @@ static u16 dmfe_phy_read(void __iomem *ioaddr, u8 phy_addr, u8 offset, u32 chip_
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void phy_write_1bit(void __iomem *ioaddr, u32 phy_data)
+=======
+static void dmfe_phy_write_1bit(void __iomem *ioaddr, u32 phy_data)
+>>>>>>> v3.18
 =======
 static void dmfe_phy_write_1bit(void __iomem *ioaddr, u32 phy_data)
 >>>>>>> v3.18
@@ -2066,7 +2162,11 @@ static void dmfe_phy_write_1bit(void __iomem *ioaddr, u32 phy_data)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 phy_read_1bit(void __iomem *ioaddr)
+=======
+static u16 dmfe_phy_read_1bit(void __iomem *ioaddr)
+>>>>>>> v3.18
 =======
 static u16 dmfe_phy_read_1bit(void __iomem *ioaddr)
 >>>>>>> v3.18
@@ -2164,17 +2264,23 @@ static void dmfe_parse_srom(struct dmfe_board_info * db)
 	db->HPNA_present = 0;
 	update_cr6(db->cr6_data | 0x40000, db->ioaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp_reg = phy_read(db->ioaddr, db->phy_addr, 3, db->chip_id);
 	if ( ( tmp_reg & 0xfff0 ) == 0xb900 ) {
 		/* DM9801 or DM9802 present */
 		db->HPNA_timer = 8;
 		if ( phy_read(db->ioaddr, db->phy_addr, 31, db->chip_id) == 0x4404) {
 =======
+=======
+>>>>>>> v3.18
 	tmp_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 3, db->chip_id);
 	if ( ( tmp_reg & 0xfff0 ) == 0xb900 ) {
 		/* DM9801 or DM9802 present */
 		db->HPNA_timer = 8;
 		if ( dmfe_phy_read(db->ioaddr, db->phy_addr, 31, db->chip_id) == 0x4404) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* DM9801 HomeRun */
 			db->HPNA_present = 1;
@@ -2202,6 +2308,7 @@ static void dmfe_program_DM9801(struct dmfe_board_info * db, int HPNA_rev)
 	case 0xb900: /* DM9801 E3 */
 		db->HPNA_command |= 0x1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg25 = phy_read(db->ioaddr, db->phy_addr, 24, db->chip_id);
 		reg25 = ( (reg25 + HPNA_NoiseFloor) & 0xff) | 0xf000;
 		reg17 = phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id);
@@ -2211,6 +2318,8 @@ static void dmfe_program_DM9801(struct dmfe_board_info * db, int HPNA_rev)
 		reg25 = (reg25 & 0xff00) + HPNA_NoiseFloor;
 		reg17 = phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id);
 =======
+=======
+>>>>>>> v3.18
 		reg25 = dmfe_phy_read(db->ioaddr, db->phy_addr, 24, db->chip_id);
 		reg25 = ( (reg25 + HPNA_NoiseFloor) & 0xff) | 0xf000;
 		reg17 = dmfe_phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id);
@@ -2219,6 +2328,9 @@ static void dmfe_program_DM9801(struct dmfe_board_info * db, int HPNA_rev)
 		reg25 = dmfe_phy_read(db->ioaddr, db->phy_addr, 25, db->chip_id);
 		reg25 = (reg25 & 0xff00) + HPNA_NoiseFloor;
 		reg17 = dmfe_phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg17 = (reg17 & 0xfff0) + HPNA_NoiseFloor + 3;
 		break;
@@ -2226,6 +2338,7 @@ static void dmfe_program_DM9801(struct dmfe_board_info * db, int HPNA_rev)
 	case 0xb903: /* DM9801 E6 */
 	default:
 		db->HPNA_command |= 0x1000;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		reg25 = phy_read(db->ioaddr, db->phy_addr, 25, db->chip_id);
 		reg25 = (reg25 & 0xff00) + HPNA_NoiseFloor - 5;
@@ -2237,6 +2350,8 @@ static void dmfe_program_DM9801(struct dmfe_board_info * db, int HPNA_rev)
 	phy_write(db->ioaddr, db->phy_addr, 17, reg17, db->chip_id);
 	phy_write(db->ioaddr, db->phy_addr, 25, reg25, db->chip_id);
 =======
+=======
+>>>>>>> v3.18
 		reg25 = dmfe_phy_read(db->ioaddr, db->phy_addr, 25, db->chip_id);
 		reg25 = (reg25 & 0xff00) + HPNA_NoiseFloor - 5;
 		reg17 = dmfe_phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id);
@@ -2246,6 +2361,9 @@ static void dmfe_program_DM9801(struct dmfe_board_info * db, int HPNA_rev)
 	dmfe_phy_write(db->ioaddr, db->phy_addr, 16, db->HPNA_command, db->chip_id);
 	dmfe_phy_write(db->ioaddr, db->phy_addr, 17, reg17, db->chip_id);
 	dmfe_phy_write(db->ioaddr, db->phy_addr, 25, reg25, db->chip_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2260,15 +2378,21 @@ static void dmfe_program_DM9802(struct dmfe_board_info * db)
 
 	if ( !HPNA_NoiseFloor ) HPNA_NoiseFloor = DM9802_NOISE_FLOOR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_write(db->ioaddr, db->phy_addr, 16, db->HPNA_command, db->chip_id);
 	phy_reg = phy_read(db->ioaddr, db->phy_addr, 25, db->chip_id);
 	phy_reg = ( phy_reg & 0xff00) + HPNA_NoiseFloor;
 	phy_write(db->ioaddr, db->phy_addr, 25, phy_reg, db->chip_id);
 =======
+=======
+>>>>>>> v3.18
 	dmfe_phy_write(db->ioaddr, db->phy_addr, 16, db->HPNA_command, db->chip_id);
 	phy_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 25, db->chip_id);
 	phy_reg = ( phy_reg & 0xff00) + HPNA_NoiseFloor;
 	dmfe_phy_write(db->ioaddr, db->phy_addr, 25, phy_reg, db->chip_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2284,7 +2408,11 @@ static void dmfe_HPNA_remote_cmd_chk(struct dmfe_board_info * db)
 
 	/* Got remote device status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_reg = phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id) & 0x60;
+=======
+	phy_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id) & 0x60;
+>>>>>>> v3.18
 =======
 	phy_reg = dmfe_phy_read(db->ioaddr, db->phy_addr, 17, db->chip_id) & 0x60;
 >>>>>>> v3.18
@@ -2298,8 +2426,13 @@ static void dmfe_HPNA_remote_cmd_chk(struct dmfe_board_info * db)
 	/* Check remote device status match our setting ot not */
 	if ( phy_reg != (db->HPNA_command & 0x0f00) ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy_write(db->ioaddr, db->phy_addr, 16, db->HPNA_command,
 			  db->chip_id);
+=======
+		dmfe_phy_write(db->ioaddr, db->phy_addr, 16, db->HPNA_command,
+			       db->chip_id);
+>>>>>>> v3.18
 =======
 		dmfe_phy_write(db->ioaddr, db->phy_addr, 16, db->HPNA_command,
 			       db->chip_id);
@@ -2312,7 +2445,11 @@ static void dmfe_HPNA_remote_cmd_chk(struct dmfe_board_info * db)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dmfe_pci_tbl) = {
+=======
+static const struct pci_device_id dmfe_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id dmfe_pci_tbl[] = {
 >>>>>>> v3.18

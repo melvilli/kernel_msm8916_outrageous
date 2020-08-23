@@ -13,8 +13,13 @@
 #include <linux/slab.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
 #include <acpi/acpiosxf.h>
+=======
+
+#include "internal.h"
+>>>>>>> v3.18
 =======
 
 #include "internal.h"
@@ -145,8 +150,13 @@ void suspend_nvs_free(void)
 					entry->unmap = false;
 				} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					acpi_os_unmap_memory(entry->kaddr,
 							     entry->size);
+=======
+					acpi_os_unmap_iomem(entry->kaddr,
+							    entry->size);
+>>>>>>> v3.18
 =======
 					acpi_os_unmap_iomem(entry->kaddr,
 							    entry->size);

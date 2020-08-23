@@ -54,8 +54,14 @@ static int init_mp_priv(struct mp_priv *pmp_priv)
 	_init_queue(&pmp_priv->free_mp_xmitqueue);
 	pmp_priv->pallocated_mp_xmitframe_buf = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmp_priv->pallocated_mp_xmitframe_buf = _malloc(NR_MP_XMITFRAME *
 					 sizeof(struct mp_xmit_frame) + 4);
+=======
+	pmp_priv->pallocated_mp_xmitframe_buf = kmalloc(NR_MP_XMITFRAME *
+				sizeof(struct mp_xmit_frame) + 4,
+				GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	pmp_priv->pallocated_mp_xmitframe_buf = kmalloc(NR_MP_XMITFRAME *
 				sizeof(struct mp_xmit_frame) + 4,
@@ -71,8 +77,13 @@ static int init_mp_priv(struct mp_priv *pmp_priv)
 	pmp_xmitframe = (struct mp_xmit_frame *)pmp_priv->pmp_xmtframe_buf;
 	for (i = 0; i < NR_MP_XMITFRAME; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_init_listhead(&(pmp_xmitframe->list));
 		list_insert_tail(&(pmp_xmitframe->list),
+=======
+		INIT_LIST_HEAD(&(pmp_xmitframe->list));
+		list_add_tail(&(pmp_xmitframe->list),
+>>>>>>> v3.18
 =======
 		INIT_LIST_HEAD(&(pmp_xmitframe->list));
 		list_add_tail(&(pmp_xmitframe->list),
@@ -92,9 +103,14 @@ _exit_init_mp_priv:
 static int free_mp_priv(struct mp_priv *pmp_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int res = 0;
 	kfree(pmp_priv->pallocated_mp_xmitframe_buf);
 	return res;
+=======
+	kfree(pmp_priv->pallocated_mp_xmitframe_buf);
+	return 0;
+>>>>>>> v3.18
 =======
 	kfree(pmp_priv->pallocated_mp_xmitframe_buf);
 	return 0;
@@ -127,7 +143,11 @@ static u32 fw_iocmd_read(struct _adapter *pAdapter, struct IOCMD_STRUCT iocmd)
 	u8 iocmd_idx	= iocmd.index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd32 = (iocmd_class << 24) | (iocmd_value << 8) | iocmd_idx ;
+=======
+	cmd32 = (iocmd_class << 24) | (iocmd_value << 8) | iocmd_idx;
+>>>>>>> v3.18
 =======
 	cmd32 = (iocmd_class << 24) | (iocmd_value << 8) | iocmd_idx;
 >>>>>>> v3.18
@@ -149,7 +169,11 @@ static u8 fw_iocmd_write(struct _adapter *pAdapter,
 	r8712_fw_cmd_data(pAdapter, &value, 0);
 	msleep(100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd32 = (iocmd_class << 24) | (iocmd_value << 8) | iocmd_idx ;
+=======
+	cmd32 = (iocmd_class << 24) | (iocmd_value << 8) | iocmd_idx;
+>>>>>>> v3.18
 =======
 	cmd32 = (iocmd_class << 24) | (iocmd_value << 8) | iocmd_idx;
 >>>>>>> v3.18
@@ -171,6 +195,10 @@ u32 r8712_bb_reg_read(struct _adapter *pAdapter, u16 offset)
 	if (shift != 0) {
 		u32 bb_val2 = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -215,6 +243,7 @@ u32 r8712_rf_reg_read(struct _adapter *pAdapter, u8 path, u8 offset)
 {
 	u16 rf_addr = (path << 8) | offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rf_data;
 	struct IOCMD_STRUCT iocmd;
 
@@ -224,12 +253,17 @@ u32 r8712_rf_reg_read(struct _adapter *pAdapter, u8 path, u8 offset)
 	rf_data = fw_iocmd_read(pAdapter, iocmd);
 	return rf_data;
 =======
+=======
+>>>>>>> v3.18
 	struct IOCMD_STRUCT iocmd;
 
 	iocmd.cmdclass	= IOCMD_CLASS_BB_RF;
 	iocmd.value	= rf_addr;
 	iocmd.index	= IOCMD_RF_READ_IDX;
 	return fw_iocmd_read(pAdapter, iocmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -319,16 +353,22 @@ void r8712_SetChannel(struct _adapter *pAdapter)
 	u16 code = GEN_CMD_CODE(_SetChannel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcmd = (struct cmd_obj *)_malloc(sizeof(struct cmd_obj));
 	if (pcmd == NULL)
 		return;
 	pparm = (struct SetChannel_parm *)_malloc(sizeof(struct
 					 SetChannel_parm));
 =======
+=======
+>>>>>>> v3.18
 	pcmd = kmalloc(sizeof(*pcmd), GFP_ATOMIC);
 	if (pcmd == NULL)
 		return;
 	pparm = kmalloc(sizeof(*pparm), GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pparm == NULL) {
 		kfree(pcmd);
@@ -364,6 +404,10 @@ void r8712_SetTxPower(struct _adapter *pAdapter)
 {
 	u8 TxPower = pAdapter->mppriv.curr_txpoweridx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -554,11 +598,16 @@ static void TriggerRFThermalMeter(struct _adapter *pAdapter)
 static u32 ReadRFThermalMeter(struct _adapter *pAdapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ThermalValue = 0;
 
 	/* 0x24: RF Reg[4:0] */
 	ThermalValue = get_rf_reg(pAdapter, RF_PATH_A, RF_T_METER, 0x1F);
 	return ThermalValue;
+=======
+	/* 0x24: RF Reg[4:0] */
+	return get_rf_reg(pAdapter, RF_PATH_A, RF_T_METER, 0x1F);
+>>>>>>> v3.18
 =======
 	/* 0x24: RF Reg[4:0] */
 	return get_rf_reg(pAdapter, RF_PATH_A, RF_T_METER, 0x1F);
@@ -604,6 +653,10 @@ void r8712_SetSingleToneTx(struct _adapter *pAdapter, u8 bStart)
 {
 	u8 rfPath = pAdapter->mppriv.curr_rfpath;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

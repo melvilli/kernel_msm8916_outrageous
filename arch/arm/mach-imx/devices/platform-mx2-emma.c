@@ -13,7 +13,11 @@
 	{								\
 		.iobase = soc ## _EMMAPRP_BASE_ADDR,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.iosize = SZ_32,					\
+=======
+		.iosize = SZ_256,					\
+>>>>>>> v3.18
 =======
 		.iosize = SZ_256,					\
 >>>>>>> v3.18

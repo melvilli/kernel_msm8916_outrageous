@@ -58,7 +58,11 @@ V_FUNCTION_BEGIN(__kernel_get_syscall_map)
 	mtlr	r12
 	addi	r3,r3,CFG_SYSCALL_MAP64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpldi	cr0,r4,0
+=======
+	cmpli	cr0,r4,0
+>>>>>>> v3.18
 =======
 	cmpli	cr0,r4,0
 >>>>>>> v3.18

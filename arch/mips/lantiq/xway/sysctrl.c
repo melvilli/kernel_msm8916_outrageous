@@ -129,7 +129,11 @@ static int pmu_enable(struct clk *clk)
 
 	if (!retry)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic("activating PMU module failed!\n");
+=======
+		panic("activating PMU module failed!");
+>>>>>>> v3.18
 =======
 		panic("activating PMU module failed!");
 >>>>>>> v3.18
@@ -323,7 +327,11 @@ void __init ltq_soc_init(void)
 		(request_mem_region(res_ebu.start, resource_size(&res_ebu),
 				res_ebu.name) < 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Failed to request core reources");
+=======
+		pr_err("Failed to request core resources");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to request core resources");
 >>>>>>> v3.18

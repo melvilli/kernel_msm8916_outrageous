@@ -120,10 +120,13 @@ static void indy_local0_irqdispatch(void)
 		irq = lc0msk_to_irqnr[mask];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if irq == 0, then the interrupt has already been cleared */
 	if (irq)
 		do_IRQ(irq);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * workaround for INT2 bug; if irq == 0, INT2 has seen a fifo full
 	 * irq, but failed to latch it into status register
@@ -132,6 +135,9 @@ static void indy_local0_irqdispatch(void)
 		do_IRQ(irq);
 	else
 		do_IRQ(SGINT_LOCAL0 + 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -160,7 +166,11 @@ static void __irq_entry indy_buserror_irq(void)
 
 	irq_enter();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kstat_incr_irqs_this_cpu(irq, irq_to_desc(irq));
+=======
+	kstat_incr_irq_this_cpu(irq);
+>>>>>>> v3.18
 =======
 	kstat_incr_irq_this_cpu(irq);
 >>>>>>> v3.18

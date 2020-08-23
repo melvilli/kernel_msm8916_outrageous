@@ -28,6 +28,11 @@
 #include <linux/mtd/partitions.h>
 #include <linux/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio_keys.h>
+#include <linux/input.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio_keys.h>
 #include <linux/input.h>
@@ -47,6 +52,10 @@
 #include <asm/mach/flash.h>
 #include <asm/mach/map.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mach/irda.h>
+>>>>>>> v3.18
 =======
 #include <asm/mach/irda.h>
 >>>>>>> v3.18
@@ -104,7 +113,10 @@ static struct mcp_plat_data collie_mcp_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int collie_ir_startup(struct device *dev)
 {
 	int rc = gpio_request(COLLIE_GPIO_IR_ON, "IrDA");
@@ -136,6 +148,9 @@ static struct irda_platform_data collie_ir_data = {
 	.set_power = collie_ir_set_power,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Collie AC IN
@@ -286,7 +301,10 @@ struct platform_device collie_locomo_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct gpio_keys_button collie_gpio_keys[] = {
 	{
 		.type	= EV_PWR,
@@ -319,12 +337,19 @@ static struct platform_device collie_gpio_keys_device = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_device *devices[] __initdata = {
 	&collie_locomo_device,
 	&colliescoop_device,
 	&collie_power_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&collie_gpio_keys_device,
+>>>>>>> v3.18
 =======
 	&collie_gpio_keys_device,
 >>>>>>> v3.18
@@ -345,12 +370,18 @@ static struct mtd_partition collie_partitions[] = {
 		.offset 	= MTDPART_OFS_APPEND,
 		.size		= 0x00e20000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.name		= "bootblock",
 		.offset		= MTDPART_OFS_APPEND,
 		.size		= 0x00020000,
 		.mask_flags	= MTD_WRITEABLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -456,6 +487,10 @@ static void __init collie_init(void)
 			    ARRAY_SIZE(collie_flash_resources));
 	sa11x0_register_mcp(&collie_mcp_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sa11x0_register_irda(&collie_ir_data);
+>>>>>>> v3.18
 =======
 	sa11x0_register_irda(&collie_ir_data);
 >>>>>>> v3.18

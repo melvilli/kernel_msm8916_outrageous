@@ -14,8 +14,13 @@
  *
  * Stack layout in 'ret_from_system_call':
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	ptrace needs to have all regs on the stack.
  *	if the order here is changed, it needs to be 
+=======
+ *	ptrace needs to have all regs on the stack.
+ *	if the order here is changed, it needs to be
+>>>>>>> v3.18
 =======
  *	ptrace needs to have all regs on the stack.
  *	if the order here is changed, it needs to be
@@ -37,7 +42,11 @@
 
 	;; functions exported from this file
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -56,15 +65,21 @@
 	.globl gdb_handle_breakpoint
 	.globl sys_call_table
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	;; below are various parts of system_call which are not in the fast-path
 	
 #ifdef CONFIG_PREEMPT	
 =======
+=======
+>>>>>>> v3.18
 
 	;; below are various parts of system_call which are not in the fast-path
 
 #ifdef CONFIG_PREEMPT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	; Check if preemptive kernel scheduling should be done
 _resume_kernel:
@@ -91,7 +106,11 @@ _need_resched:
 #else
 #define _resume_kernel _Rexit
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -112,6 +131,7 @@ ret_from_kernel_thread:
 
 ret_from_intr:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; check for resched if preemptive kernel or if we're going back to user-mode 
 	;; this test matches the user_regs(regs) macro
 	;; we cannot simply test $dccr, because that does not necessarily
@@ -123,6 +143,8 @@ ret_from_intr:
 	; Note that di below is in delay slot 
 	
 =======
+=======
+>>>>>>> v3.18
 	;; check for resched if preemptive kernel or if we're going back to user-mode
 	;; this test matches the user_regs(regs) macro
 	;; we cannot simply test $dccr, because that does not necessarily
@@ -133,6 +155,9 @@ ret_from_intr:
 	bpl     _resume_kernel
 	; Note that di below is in delay slot
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 _resume_userspace:
 	di			; so need_resched and sigpending don't change
@@ -147,7 +172,11 @@ _resume_userspace:
 	ba	_Rexit
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -161,7 +190,11 @@ _resume_userspace:
 	;; Since we can't have system calls inside interrupts, it should not matter
 	;; that we don't stack IRP.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; 
+=======
+	;;
+>>>>>>> v3.18
 =======
 	;;
 >>>>>>> v3.18
@@ -182,7 +215,11 @@ system_call:
 	push	$r10		; push orig_r10
 	clear.d [$sp=$sp-4]	; frametype == 0, normal stackframe
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -193,6 +230,7 @@ system_call:
 
 	movs.w	-8192, $r0	; THREAD_SIZE == 8192
 	and.d	$sp, $r0
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	move.d	[$r0+TI_flags], $r0
@@ -206,6 +244,8 @@ _syscall_traced:
 	
 	cmpu.w	NR_syscalls, $r9	
 =======
+=======
+>>>>>>> v3.18
 
 	move.d	[$r0+TI_flags], $r0
 	btstq   TIF_SYSCALL_TRACE, $r0
@@ -217,6 +257,9 @@ _syscall_traced:
 	;; check for sanity in the requested syscall number
 
 	cmpu.w	NR_syscalls, $r9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bcc	ret_from_sys_call
 	lslq	2, $r9		;  multiply by 4, in the delay slot
@@ -226,9 +269,15 @@ _syscall_traced:
 
 	push	$sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	;; the parameter carrying registers r10, r11, r12 and 13 are intact.
 	;; the fifth and sixth parameters (if any) was in mof and srp 
+=======
+
+	;; the parameter carrying registers r10, r11, r12 and 13 are intact.
+	;; the fifth and sixth parameters (if any) was in mof and srp
+>>>>>>> v3.18
 =======
 
 	;; the parameter carrying registers r10, r11, r12 and 13 are intact.
@@ -239,7 +288,11 @@ _syscall_traced:
 	push	$srp
 	push	$mof
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -248,6 +301,7 @@ _syscall_traced:
 	move.d	$r10, [$sp+PT_r10]	; save the return value
 
 	moveq	1, $r9		; "parameter" to ret_from_sys_call to show it was a sys call
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	;; fall through into ret_from_sys_call to return
@@ -259,6 +313,8 @@ ret_from_sys_call:
 
 	movs.w	-8192, $r0	; THREAD_SIZE == 8192 
 =======
+=======
+>>>>>>> v3.18
 
 	;; fall through into ret_from_sys_call to return
 
@@ -268,6 +324,9 @@ ret_from_sys_call:
 	;; get the current task-struct pointer (see top for defs)
 
 	movs.w	-8192, $r0	; THREAD_SIZE == 8192
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	and.d	$sp, $r0
 
@@ -284,7 +343,11 @@ _Rexit:
 	addq	4, $sp		; skip orig_r10, in delayslot
 	movem	[$sp+], $r13	; registers r0-r13
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pop	$mof		; multiply overflow register 
+=======
+	pop	$mof		; multiply overflow register
+>>>>>>> v3.18
 =======
 	pop	$mof		; multiply overflow register
 >>>>>>> v3.18
@@ -302,7 +365,11 @@ _Rexit:
 _RBFexit:
 	movem	[$sp+], $r13	; registers r0-r13, in delay slot
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pop	$mof		; multiply overflow register 
+=======
+	pop	$mof		; multiply overflow register
+>>>>>>> v3.18
 =======
 	pop	$mof		; multiply overflow register
 >>>>>>> v3.18
@@ -313,7 +380,11 @@ _RBFexit:
 	;; We get here after doing a syscall if extra work might need to be done
 	;; perform syscall exit tracing if needed
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -325,7 +396,11 @@ _syscall_exit_work:
 	bpl	_work_pending
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -335,15 +410,21 @@ _syscall_exit_work:
 	jsr	do_syscall_trace
 	move.d	$r1, $r9
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	ba	_resume_userspace
 	nop
 	
 =======
+=======
+>>>>>>> v3.18
 
 	ba	_resume_userspace
 	nop
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 _work_pending:
 	move.d  [$r0+TI_flags], $r1
@@ -351,7 +432,11 @@ _work_pending:
 	bpl	_work_notifysig	; was neither trace nor sched, must be signal/notify
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -377,7 +462,11 @@ _work_notifysig:
 	move.d  $r1, $r12	; the thread_info_flags parameter
 	jsr	do_notify_resume
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -388,15 +477,21 @@ _work_notifysig:
 	;; trace-bit set. We need to call do_syscall_trace and then continue
 	;; with the call.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 _syscall_trace_entry:
 	;; PT_r10 in the frame contains -ENOSYS as required, at this point
 	
 =======
+=======
+>>>>>>> v3.18
 
 _syscall_trace_entry:
 	;; PT_r10 in the frame contains -ENOSYS as required, at this point
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jsr	do_syscall_trace
 
@@ -412,15 +507,21 @@ _syscall_trace_entry:
 	move	[$sp+PT_mof],      $mof
 	move	[$sp+PT_srp],      $srp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	ba	_syscall_traced
 	nop
 	
 =======
+=======
+>>>>>>> v3.18
 
 	ba	_syscall_traced
 	nop
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	;; resume performs the actual task-switching, by switching stack pointers
 	;; input arguments: r10 = prev, r11 = next, r12 = thread offset in task struct
@@ -430,8 +531,13 @@ _syscall_trace_entry:
 	;;        could really be an inline asm of this.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 resume:	
 	push	$srp		         ; we keep the old/new PC on the stack 
+=======
+resume:
+	push	$srp		         ; we keep the old/new PC on the stack
+>>>>>>> v3.18
 =======
 resume:
 	push	$srp		         ; we keep the old/new PC on the stack
@@ -441,6 +547,7 @@ resume:
 	di
 
 	move	$usp, [$r10+ THREAD_usp] ; save user-mode stackpointer
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	;; See copy_thread for the reason why register R9 is saved.
@@ -452,6 +559,8 @@ resume:
 	and.d   -8192, $r10	         ; get thread_info from stackpointer
 	move.d  [$r10+TI_task], $r10     ; get task  
 =======
+=======
+>>>>>>> v3.18
 
 	;; See copy_thread for the reason why register R9 is saved.
 	subq	10*4, $sp
@@ -461,6 +570,9 @@ resume:
 	move.d	$sp, $r10		 ; return last running task in r10
 	and.d   -8192, $r10	         ; get thread_info from stackpointer
 	move.d  [$r10+TI_task], $r10     ; get task
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add.d	$r12, $r11		 ; find the new tasks tss
 	move.d	[$r11+THREAD_ksp], $sp	 ; switch into the new stackframe by restoring kernel sp
@@ -469,7 +581,11 @@ resume:
 
 	move	[$r11+THREAD_usp], $usp ; restore user-mode stackpointer
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -549,7 +665,11 @@ mmu_bus_fault:
 
 	move.d	$sp, $r10	; pt_regs argument to handle_mmu_bus_fault
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -562,15 +682,21 @@ mmu_bus_fault:
 
 	moveq	0, $r9		; busfault is equivalent to an irq
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 	ba	ret_from_intr
 	nop
 		
 =======
+=======
+>>>>>>> v3.18
 
 	ba	ret_from_intr
 	nop
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	;; special handlers for breakpoint and NMI
 hwbreakpoint:
@@ -588,7 +714,11 @@ hwbreakpoint:
 	retb
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -620,7 +750,11 @@ IRQ1_interrupt:
 	nop
 wdog:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ETRAX_WATCHDOG) && !defined(CONFIG_SVINTO_SIM)
+=======
+#if defined(CONFIG_ETRAX_WATCHDOG)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ETRAX_WATCHDOG)
 >>>>>>> v3.18
@@ -667,7 +801,11 @@ Watchdog_bite:
 
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -694,9 +832,15 @@ _watchdogmsg:
 	.previous
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_ETRAX_WATCHDOG and not CONFIG_SVINTO_SIM */
 
 spurious_interrupt:	
+=======
+#endif /* CONFIG_ETRAX_WATCHDOG */
+
+spurious_interrupt:
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_ETRAX_WATCHDOG */
 
@@ -709,7 +853,11 @@ spurious_interrupt:
 	;; we jump to the first set interrupt bit in a priority fashion
 	;; the hardware will call the unserved interrupts after the handler finishes
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -732,7 +880,11 @@ multiple_interrupt:
 
 do_sigtrap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; 
+=======
+	;;
+>>>>>>> v3.18
 =======
 	;;
 >>>>>>> v3.18
@@ -752,6 +904,7 @@ do_sigtrap:
 	movs.w	-8192,$r9		; THREAD_SIZE == 8192
 	and.d	$sp, $r9
 	move.d  [$r9+TI_task], $r10
+<<<<<<< HEAD
 <<<<<<< HEAD
 	move.d  [$r10+TASK_pid], $r10	; current->pid as arg1. 
 	moveq	5, $r11			; SIGTRAP as arg2.
@@ -778,6 +931,8 @@ _ugdb_handle_breakpoint:
 	pop	$r0			; Restore r0. 
 	ba	do_sigtrap		; SIGTRAP the offending process. 
 =======
+=======
+>>>>>>> v3.18
 	move.d  [$r10+TASK_pid], $r10	; current->pid as arg1.
 	moveq	5, $r11			; SIGTRAP as arg2.
 	jsr	sys_kill
@@ -802,6 +957,9 @@ _ugdb_handle_breakpoint:
 	move	$r0, $brp
 	pop	$r0			; Restore r0.
 	ba	do_sigtrap		; SIGTRAP the offending process.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pop	$dccr			; Restore dccr in delay slot.
 
@@ -814,7 +972,11 @@ hw_bp_trig_ptr:
 
 	.section .rodata,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
 sys_call_table:	
+=======
+sys_call_table:
+>>>>>>> v3.18
 =======
 sys_call_table:
 >>>>>>> v3.18
@@ -929,7 +1091,11 @@ sys_call_table:
 	.long sys_newfstat
 	.long sys_ni_syscall	/* old sys_uname holder */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_ni_syscall	/* sys_iopl in i386 */
+=======
+	.long sys_ni_syscall	/* 110 */ /* sys_iopl in i386 */
+>>>>>>> v3.18
 =======
 	.long sys_ni_syscall	/* 110 */ /* sys_iopl in i386 */
 >>>>>>> v3.18
@@ -950,7 +1116,11 @@ sys_call_table:
 	.long sys_mprotect	/* 125 */
 	.long sys_sigprocmask
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_ni_syscall	/* old "create_module" */ 
+=======
+	.long sys_ni_syscall	/* old "create_module" */
+>>>>>>> v3.18
 =======
 	.long sys_ni_syscall	/* old "create_module" */
 >>>>>>> v3.18
@@ -1019,7 +1189,11 @@ sys_call_table:
 	.long sys_vfork		/* 190 */
 	.long sys_getrlimit
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_mmap2
+=======
+	.long sys_mmap2		/* mmap_pgoff */
+>>>>>>> v3.18
 =======
 	.long sys_mmap2		/* mmap_pgoff */
 >>>>>>> v3.18
@@ -1089,6 +1263,7 @@ sys_call_table:
 	.long sys_epoll_wait
 	.long sys_remap_file_pages
 <<<<<<< HEAD
+<<<<<<< HEAD
  	.long sys_set_tid_address
  	.long sys_timer_create
  	.long sys_timer_settime		/* 260 */
@@ -1105,6 +1280,8 @@ sys_call_table:
 	.long sys_utimes
  	.long sys_fadvise64_64
 =======
+=======
+>>>>>>> v3.18
 	.long sys_set_tid_address
 	.long sys_timer_create
 	.long sys_timer_settime		/* 260 */
@@ -1120,6 +1297,9 @@ sys_call_table:
 	.long sys_tgkill		/* 270 */
 	.long sys_utimes
 	.long sys_fadvise64_64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.long sys_ni_syscall	/* sys_vserver */
 	.long sys_ni_syscall	/* sys_mbind */
@@ -1132,7 +1312,11 @@ sys_call_table:
 	.long sys_mq_notify
 	.long sys_mq_getsetattr
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long sys_ni_syscall		/* reserved for kexec */
+=======
+	.long sys_ni_syscall
+>>>>>>> v3.18
 =======
 	.long sys_ni_syscall
 >>>>>>> v3.18
@@ -1189,7 +1373,10 @@ sys_call_table:
 	.long sys_pwritev
 	.long sys_setns			/* 335 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.long sys_name_to_handle_at
 	.long sys_open_by_handle_at
 	.long sys_rt_tgsigqueueinfo
@@ -1206,6 +1393,9 @@ sys_call_table:
 	.long sys_process_vm_writev
 	.long sys_kcmp			/* 350 */
 	.long sys_finit_module
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
         /*
@@ -1219,7 +1409,11 @@ sys_call_table:
 		.long sys_ni_syscall
 	.endr
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

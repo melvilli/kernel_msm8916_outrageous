@@ -167,7 +167,11 @@ struct reg_protocol_rd {
 	u32 Byte2Access:1;
 	u32 Byte1Access:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 BurstMode:1 ;
+=======
+	u32 BurstMode:1;
+>>>>>>> v3.18
 =======
 	u32 BurstMode:1;
 >>>>>>> v3.18
@@ -240,6 +244,10 @@ static inline u32 _RND4(u32 sz)
 {
 	u32	val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

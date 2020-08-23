@@ -269,7 +269,10 @@ static __u8 easypen_m610x_rdesc_fixed[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __u8 *kye_consumer_control_fixup(struct hid_device *hdev, __u8 *rdesc,
 		unsigned int *rsize, int offset, const char *device_name) {
 	/*
@@ -290,6 +293,9 @@ static __u8 *kye_consumer_control_fixup(struct hid_device *hdev, __u8 *rdesc,
 	return rdesc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __u8 *kye_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		unsigned int *rsize)
@@ -327,7 +333,10 @@ static __u8 *kye_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		break;
 	case USB_DEVICE_ID_KYE_MOUSEPEN_I608X:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case USB_DEVICE_ID_KYE_MOUSEPEN_I608X_2:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (*rsize == MOUSEPEN_I608X_RDESC_ORIG_SIZE) {
@@ -342,7 +351,10 @@ static __u8 *kye_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case USB_DEVICE_ID_GENIUS_GILA_GAMING_MOUSE:
 		rdesc = kye_consumer_control_fixup(hdev, rdesc, rsize, 104,
 					"Genius Gila Gaming Mouse");
@@ -355,6 +367,9 @@ static __u8 *kye_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		rdesc = kye_consumer_control_fixup(hdev, rdesc, rsize, 104,
 					"Genius Manticore Keyboard");
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return rdesc;
@@ -426,7 +441,10 @@ static int kye_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	case USB_DEVICE_ID_KYE_EASYPEN_I405X:
 	case USB_DEVICE_ID_KYE_MOUSEPEN_I608X:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case USB_DEVICE_ID_KYE_MOUSEPEN_I608X_2:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case USB_DEVICE_ID_KYE_EASYPEN_M610X:
@@ -437,7 +455,10 @@ static int kye_probe(struct hid_device *hdev, const struct hid_device_id *id)
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case USB_DEVICE_ID_GENIUS_MANTICORE:
 		/*
 		 * The manticore keyboard needs to have all the interfaces
@@ -446,6 +467,9 @@ static int kye_probe(struct hid_device *hdev, const struct hid_device_id *id)
 		if (hid_hw_open(hdev))
 			hid_hw_close(hdev);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -464,10 +488,13 @@ static const struct hid_device_id kye_devices[] = {
 				USB_DEVICE_ID_KYE_MOUSEPEN_I608X) },
 	{ HID_USB_DEVICE(USB_VENDOR_ID_KYE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				USB_DEVICE_ID_KYE_MOUSEPEN_I608X_2) },
 	{ HID_USB_DEVICE(USB_VENDOR_ID_KYE,
 				USB_DEVICE_ID_KYE_EASYPEN_M610X) },
 =======
+=======
+>>>>>>> v3.18
 				USB_DEVICE_ID_KYE_EASYPEN_M610X) },
 	{ HID_USB_DEVICE(USB_VENDOR_ID_KYE,
 				USB_DEVICE_ID_GENIUS_GILA_GAMING_MOUSE) },
@@ -475,6 +502,9 @@ static const struct hid_device_id kye_devices[] = {
 				USB_DEVICE_ID_GENIUS_GX_IMPERATOR) },
 	{ HID_USB_DEVICE(USB_VENDOR_ID_KYE,
 				USB_DEVICE_ID_GENIUS_MANTICORE) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };

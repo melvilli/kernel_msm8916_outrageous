@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 / {
@@ -15,7 +18,10 @@
 	chosen {
 		bootargs = "console=ttyS0,115200n8";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		stdout-path = &uart0;
 	};
 
@@ -27,6 +33,9 @@
 				status = "okay";
 			};
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -42,6 +51,7 @@
 		};
 		serial@12000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clock-frequency = <200000000>;
 			status = "okay";
 		};
@@ -50,6 +60,8 @@
 			status = "okay";
 		};
 =======
+=======
+>>>>>>> v3.18
 			status = "okay";
 		};
 		serial@12100 {
@@ -60,6 +72,9 @@
 			reg = <0x12000 0x100>;
 			clocks = <&gate_clk 7>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spi@10600 {
 			status = "okay";
@@ -102,6 +117,11 @@
 		};
 		sata@80000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pinctrl-0 = <&pmx_sata0 &pmx_sata1>;
+			pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&pmx_sata0 &pmx_sata1>;
 			pinctrl-names = "default";
@@ -112,7 +132,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &mdio {
 	status = "okay";
@@ -128,4 +151,7 @@
 		phy-handle = <&ethphy0>;
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -954,7 +954,11 @@ static void nfs3_xdr_enc_readlink3args(struct rpc_rqst *req,
  */
 static void encode_read3args(struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     const struct nfs_readargs *args)
+=======
+			     const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 			     const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -971,7 +975,11 @@ static void encode_read3args(struct xdr_stream *xdr,
 static void nfs3_xdr_enc_read3args(struct rpc_rqst *req,
 				   struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   const struct nfs_readargs *args)
+=======
+				   const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 				   const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -1001,7 +1009,11 @@ static void nfs3_xdr_enc_read3args(struct rpc_rqst *req,
  */
 static void encode_write3args(struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      const struct nfs_writeargs *args)
+=======
+			      const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 			      const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -1021,7 +1033,11 @@ static void encode_write3args(struct xdr_stream *xdr,
 static void nfs3_xdr_enc_write3args(struct rpc_rqst *req,
 				    struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    const struct nfs_writeargs *args)
+=======
+				    const struct nfs_pgio_args *args)
+>>>>>>> v3.18
 =======
 				    const struct nfs_pgio_args *args)
 >>>>>>> v3.18
@@ -1359,7 +1375,11 @@ static void nfs3_xdr_enc_setacl3args(struct rpc_rqst *req,
 		xdr_write_pages(xdr, args->pages, 0, args->len);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xdr_reserve_space(xdr, args->len);
+=======
+		xdr_reserve_space(xdr, NFS_ACL_INLINE_BUFSIZE);
+>>>>>>> v3.18
 =======
 		xdr_reserve_space(xdr, NFS_ACL_INLINE_BUFSIZE);
 >>>>>>> v3.18
@@ -1610,7 +1630,11 @@ out_default:
  */
 static int decode_read3resok(struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     struct nfs_readres *result)
+=======
+			     struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 			     struct nfs_pgio_res *result)
 >>>>>>> v3.18
@@ -1650,7 +1674,11 @@ out_overflow:
 
 static int nfs3_xdr_dec_read3res(struct rpc_rqst *req, struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct nfs_readres *result)
+=======
+				 struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 				 struct nfs_pgio_res *result)
 >>>>>>> v3.18
@@ -1702,7 +1730,11 @@ out_status:
  */
 static int decode_write3resok(struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct nfs_writeres *result)
+=======
+			      struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 			      struct nfs_pgio_res *result)
 >>>>>>> v3.18
@@ -1730,7 +1762,11 @@ out_eio:
 
 static int nfs3_xdr_dec_write3res(struct rpc_rqst *req, struct xdr_stream *xdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct nfs_writeres *result)
+=======
+				  struct nfs_pgio_res *result)
+>>>>>>> v3.18
 =======
 				  struct nfs_pgio_res *result)
 >>>>>>> v3.18

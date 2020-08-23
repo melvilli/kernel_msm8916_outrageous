@@ -12,7 +12,11 @@ INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_sect
 			UINT offset, UINT numOfBytes);
 INT vendorextnWriteSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_section_val SectionVal,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			UINT offset, UINT numOfBytes, BOOLEAN bVerify);
+=======
+			UINT offset, UINT numOfBytes, bool bVerify);
+>>>>>>> v3.18
 =======
 			UINT offset, UINT numOfBytes, bool bVerify);
 >>>>>>> v3.18

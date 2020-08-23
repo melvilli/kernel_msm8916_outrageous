@@ -44,7 +44,11 @@ int ibnl_remove_client(int index);
  */
 void *ibnl_put_msg(struct sk_buff *skb, struct nlmsghdr **nlh, int seq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   int len, int client, int op);
+=======
+		   int len, int client, int op, int flags);
+>>>>>>> v3.18
 =======
 		   int len, int client, int op, int flags);
 >>>>>>> v3.18
@@ -61,7 +65,10 @@ int ibnl_put_attr(struct sk_buff *skb, struct nlmsghdr *nlh,
 		  int len, void *data, int type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * Send the supplied skb to a specific userspace PID.
  * @skb: The netlink skb
@@ -83,5 +90,8 @@ int ibnl_unicast(struct sk_buff *skb, struct nlmsghdr *nlh,
 int ibnl_multicast(struct sk_buff *skb, struct nlmsghdr *nlh,
 			unsigned int group, gfp_t flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _RDMA_NETLINK_H */

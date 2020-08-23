@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston,
  * MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -106,7 +110,11 @@ static int netxen_nic_set_mac(struct net_device *netdev, void *p);
 	.class = PCI_CLASS_NETWORK_ETHERNET << 8, .class_mask = ~0}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(netxen_pci_tbl) = {
+=======
+static const struct pci_device_id netxen_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id netxen_pci_tbl[] = {
 >>>>>>> v3.18
@@ -206,7 +214,11 @@ netxen_napi_add(struct netxen_adapter *adapter, struct net_device *netdev)
 		sds_ring = &recv_ctx->sds_rings[ring];
 		netif_napi_add(netdev, &sds_ring->napi,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				netxen_nic_poll, NETXEN_NETDEV_WEIGHT);
+=======
+				netxen_nic_poll, NAPI_POLL_WEIGHT);
+>>>>>>> v3.18
 =======
 				netxen_nic_poll, NAPI_POLL_WEIGHT);
 >>>>>>> v3.18
@@ -472,6 +484,7 @@ static void netxen_set_msix_bit(struct pci_dev *pdev, int enable)
 {
 	u32 control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pos;
 
 	pos = pci_find_capability(pdev, PCI_CAP_ID_MSIX);
@@ -482,12 +495,21 @@ static void netxen_set_msix_bit(struct pci_dev *pdev, int enable)
 	if (pdev->msix_cap) {
 		pci_read_config_dword(pdev, pdev->msix_cap, &control);
 >>>>>>> v3.18
+=======
+
+	if (pdev->msix_cap) {
+		pci_read_config_dword(pdev, pdev->msix_cap, &control);
+>>>>>>> v3.18
 		if (enable)
 			control |= PCI_MSIX_FLAGS_ENABLE;
 		else
 			control = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_write_config_dword(pdev, pos, control);
+=======
+		pci_write_config_dword(pdev, pdev->msix_cap, control);
+>>>>>>> v3.18
 =======
 		pci_write_config_dword(pdev, pdev->msix_cap, control);
 >>>>>>> v3.18
@@ -615,6 +637,7 @@ static const struct net_device_ops netxen_netdev_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 netxen_setup_intr(struct netxen_adapter *adapter)
 {
@@ -632,6 +655,8 @@ netxen_setup_intr(struct netxen_adapter *adapter)
 
 	adapter->flags &= ~(NETXEN_NIC_MSI_ENABLED | NETXEN_NIC_MSIX_ENABLED);
 =======
+=======
+>>>>>>> v3.18
 static inline bool netxen_function_zero(struct pci_dev *pdev)
 {
 	return (PCI_FUNC(pdev->devfn) == 0) ? true : false;
@@ -653,6 +678,9 @@ netxen_initialize_interrupt_registers(struct netxen_adapter *adapter)
 {
 	struct netxen_legacy_intr_set *legacy_intrp;
 	u32 tgt_status_reg, int_state_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (adapter->ahw.revision_id >= NX_P3_B0)
@@ -660,6 +688,7 @@ netxen_initialize_interrupt_registers(struct netxen_adapter *adapter)
 	else
 		legacy_intrp = &legacy_intr[0];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	adapter->int_vec_bit = legacy_intrp->int_vec_bit;
 	adapter->tgt_status_reg = netxen_get_ioaddr(adapter,
@@ -669,6 +698,8 @@ netxen_initialize_interrupt_registers(struct netxen_adapter *adapter)
 	adapter->pci_int_reg = netxen_get_ioaddr(adapter,
 			legacy_intrp->pci_int_reg);
 =======
+=======
+>>>>>>> v3.18
 	tgt_status_reg = legacy_intrp->tgt_status_reg;
 	int_state_reg = ISR_INT_STATE_REG;
 
@@ -678,11 +709,15 @@ netxen_initialize_interrupt_registers(struct netxen_adapter *adapter)
 						  legacy_intrp->tgt_mask_reg);
 	adapter->pci_int_reg = netxen_get_ioaddr(adapter,
 						 legacy_intrp->pci_int_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adapter->isr_int_vec = netxen_get_ioaddr(adapter, ISR_INT_VECTOR);
 
 	if (adapter->ahw.revision_id >= NX_P3_B1)
 		adapter->crb_int_state_reg = netxen_get_ioaddr(adapter,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ISR_INT_STATE_REG);
 	else
@@ -697,6 +732,8 @@ netxen_initialize_interrupt_registers(struct netxen_adapter *adapter)
 		err = pci_enable_msix(pdev, adapter->msix_entries, num_msix);
 		if (err == 0) {
 =======
+=======
+>>>>>>> v3.18
 							       int_state_reg);
 	else
 		adapter->crb_int_state_reg = netxen_get_ioaddr(adapter,
@@ -715,6 +752,9 @@ static int netxen_setup_msi_interrupts(struct netxen_adapter *adapter,
 		err = pci_enable_msix_range(pdev, adapter->msix_entries,
 					    num_msix, num_msix);
 		if (err > 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			adapter->flags |= NETXEN_NIC_MSIX_ENABLED;
 			netxen_set_msix_bit(pdev, 1);
@@ -723,6 +763,7 @@ static int netxen_setup_msi_interrupts(struct netxen_adapter *adapter,
 				adapter->max_sds_rings = num_msix;
 
 			dev_info(&pdev->dev, "using msi-x interrupts\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return;
 		}
@@ -734,10 +775,15 @@ static int netxen_setup_msi_interrupts(struct netxen_adapter *adapter,
 			return 0;
 		}
 >>>>>>> v3.18
+=======
+			return 0;
+		}
+>>>>>>> v3.18
 		/* fall through for msi */
 	}
 
 	if (use_msi && !pci_enable_msi(pdev)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		adapter->flags |= NETXEN_NIC_MSI_ENABLED;
 		adapter->tgt_status_reg = netxen_get_ioaddr(adapter,
@@ -750,6 +796,8 @@ static int netxen_setup_msi_interrupts(struct netxen_adapter *adapter,
 	dev_info(&pdev->dev, "using legacy interrupts\n");
 	adapter->msix_entries[0].vector = pdev->irq;
 =======
+=======
+>>>>>>> v3.18
 		value = msi_tgt_status[adapter->ahw.pci_func];
 		adapter->flags |= NETXEN_NIC_MSI_ENABLED;
 		adapter->tgt_status_reg = netxen_get_ioaddr(adapter, value);
@@ -797,6 +845,9 @@ static int netxen_setup_intr(struct netxen_adapter *adapter)
 		dev_info(&pdev->dev, "using legacy interrupts\n");
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -976,7 +1027,13 @@ netxen_check_options(struct netxen_adapter *adapter)
 
 	if (adapter->portnum == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get_brd_name_by_type(adapter->ahw.board_type, brd_name);
+=======
+		if (netxen_nic_get_brd_name_by_type(adapter->ahw.board_type,
+						    brd_name))
+			strcpy(serial_num, "Unknown");
+>>>>>>> v3.18
 =======
 		if (netxen_nic_get_brd_name_by_type(adapter->ahw.board_type,
 						    brd_name))
@@ -1001,9 +1058,15 @@ netxen_check_options(struct netxen_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&pdev->dev, "firmware v%d.%d.%d [%s]\n",
 			fw_major, fw_minor, fw_build,
 			adapter->ahw.cut_through ? "cut-through" : "legacy");
+=======
+	dev_info(&pdev->dev, "Driver v%s, firmware v%d.%d.%d [%s]\n",
+		 NETXEN_NIC_LINUX_VERSIONID, fw_major, fw_minor, fw_build,
+		 adapter->ahw.cut_through ? "cut-through" : "legacy");
+>>>>>>> v3.18
 =======
 	dev_info(&pdev->dev, "Driver v%s, firmware v%d.%d.%d [%s]\n",
 		 NETXEN_NIC_LINUX_VERSIONID, fw_major, fw_minor, fw_build,
@@ -1289,7 +1352,10 @@ __netxen_nic_down(struct netxen_adapter *adapter, struct net_device *netdev)
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&adapter->tx_clean_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netif_carrier_off(netdev);
@@ -1310,7 +1376,10 @@ __netxen_nic_down(struct netxen_adapter *adapter, struct net_device *netdev)
 
 	netxen_release_tx_buffers(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&adapter->tx_clean_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1482,7 +1551,11 @@ netxen_setup_netdev(struct netxen_adapter *adapter,
 	netxen_nic_change_mtu(netdev, netdev->mtu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &netxen_nic_ethtool_ops);
+=======
+	netdev->ethtool_ops = &netxen_nic_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &netxen_nic_ethtool_ops;
 >>>>>>> v3.18
@@ -1527,7 +1600,10 @@ netxen_setup_netdev(struct netxen_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define NETXEN_ULA_ADAPTER_KEY		(0xdaddad01)
 #define NETXEN_NON_ULA_ADAPTER_KEY	(0xdaddad00)
 
@@ -1554,6 +1630,9 @@ static void netxen_read_ula_info(struct netxen_adapter *adapter)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PCIEAER
 static void netxen_mask_aer_correctable(struct netxen_adapter *adapter)
@@ -1593,9 +1672,14 @@ netxen_nic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	if (pdev->revision >= NX_P3_A0 && pdev->revision <= NX_P3_B1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: chip revisions between 0x%x-0x%x "
 				"will not be enabled.\n",
 				module_name(THIS_MODULE), NX_P3_A0, NX_P3_B1);
+=======
+		pr_warn("%s: chip revisions between 0x%x-0x%x will not be enabled\n",
+			module_name(THIS_MODULE), NX_P3_A0, NX_P3_B1);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: chip revisions between 0x%x-0x%x will not be enabled\n",
 			module_name(THIS_MODULE), NX_P3_A0, NX_P3_B1);
@@ -1699,8 +1783,11 @@ netxen_nic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	netxen_nic_clear_stats(adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netxen_setup_intr(adapter);
 =======
+=======
+>>>>>>> v3.18
 	err = netxen_setup_intr(adapter);
 
 	if (err) {
@@ -1710,6 +1797,9 @@ netxen_nic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 	netxen_read_ula_info(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = netxen_setup_netdev(adapter, netdev);
@@ -1754,7 +1844,10 @@ err_out_free_res:
 
 err_out_disable_pdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_disable_device(pdev);
@@ -1802,7 +1895,11 @@ static void netxen_nic_remove(struct pci_dev *pdev)
 
 	netxen_teardown_intr(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	netxen_set_interrupt_mode(adapter, 0);
+>>>>>>> v3.18
 =======
 	netxen_set_interrupt_mode(adapter, 0);
 >>>>>>> v3.18
@@ -1820,7 +1917,10 @@ static void netxen_nic_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2528,10 +2628,14 @@ static int netxen_nic_poll(struct napi_struct *napi, int budget)
 	work_done = netxen_process_rcv_ring(sds_ring, budget);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tx_complete)
 		work_done = budget;
 
 	if (work_done < budget) {
+=======
+	if ((work_done < budget) && tx_complete) {
+>>>>>>> v3.18
 =======
 	if ((work_done < budget) && tx_complete) {
 >>>>>>> v3.18
@@ -2909,7 +3013,12 @@ netxen_fw_poll_work(struct work_struct *work)
 		goto reschedule;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(__NX_DEV_UP, &adapter->state)) {
+=======
+	if (test_bit(__NX_DEV_UP, &adapter->state) &&
+	    !(adapter->capabilities & NX_FW_CAPABILITY_LINK_NOTIFICATION)) {
+>>>>>>> v3.18
 =======
 	if (test_bit(__NX_DEV_UP, &adapter->state) &&
 	    !(adapter->capabilities & NX_FW_CAPABILITY_LINK_NOTIFICATION)) {
@@ -2946,7 +3055,11 @@ netxen_store_bridged_mode(struct device *dev,
 		goto err_out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 2, &new))
+=======
+	if (kstrtoul(buf, 2, &new))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 2, &new))
 >>>>>>> v3.18
@@ -2989,7 +3102,11 @@ netxen_store_diag_mode(struct device *dev,
 	unsigned long new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 2, &new))
+=======
+	if (kstrtoul(buf, 2, &new))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 2, &new))
 >>>>>>> v3.18
@@ -3544,7 +3661,11 @@ static int netxen_netdev_event(struct notifier_block *this,
 {
 	struct netxen_adapter *adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18

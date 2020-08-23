@@ -63,7 +63,11 @@ static void nop_trace_reset(struct trace_array *tr)
  * automatically accepted.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nop_set_flag(u32 old_flags, u32 bit, int set)
+=======
+static int nop_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
+>>>>>>> v3.18
 =======
 static int nop_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
 >>>>>>> v3.18
@@ -96,7 +100,10 @@ struct tracer nop_trace __read_mostly =
 	.init		= nop_trace_init,
 	.reset		= nop_trace_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.wait_pipe	= poll_wait_pipe,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_FTRACE_SELFTEST
@@ -104,7 +111,12 @@ struct tracer nop_trace __read_mostly =
 #endif
 	.flags		= &nop_flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_flag	= nop_set_flag
+=======
+	.set_flag	= nop_set_flag,
+	.allow_instances = true,
+>>>>>>> v3.18
 =======
 	.set_flag	= nop_set_flag,
 	.allow_instances = true,

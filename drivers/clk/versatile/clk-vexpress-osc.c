@@ -12,8 +12,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pr_fmt(fmt) "vexpress-osc: " fmt
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clkdev.h>
@@ -26,7 +29,11 @@
 
 struct vexpress_osc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vexpress_config_func *func;
+=======
+	struct regmap *reg;
+>>>>>>> v3.18
 =======
 	struct regmap *reg;
 >>>>>>> v3.18
@@ -44,7 +51,11 @@ static unsigned long vexpress_osc_recalc_rate(struct clk_hw *hw,
 	u32 rate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vexpress_config_read(osc->func, 0, &rate);
+=======
+	regmap_read(osc->reg, 0, &rate);
+>>>>>>> v3.18
 =======
 	regmap_read(osc->reg, 0, &rate);
 >>>>>>> v3.18
@@ -72,7 +83,11 @@ static int vexpress_osc_set_rate(struct clk_hw *hw, unsigned long rate,
 	struct vexpress_osc *osc = to_vexpress_osc(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return vexpress_config_write(osc->func, 0, rate);
+=======
+	return regmap_write(osc->reg, 0, rate);
+>>>>>>> v3.18
 =======
 	return regmap_write(osc->reg, 0, rate);
 >>>>>>> v3.18
@@ -85,6 +100,7 @@ static struct clk_ops vexpress_osc_ops = {
 };
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct clk * __init vexpress_osc_setup(struct device *dev)
 {
@@ -116,11 +132,17 @@ static int vexpress_osc_probe(struct platform_device *pdev)
 {
 	struct clk_lookup *cl = pdev->dev.platform_data; /* Non-DT lookup */
 >>>>>>> v3.18
+=======
+static int vexpress_osc_probe(struct platform_device *pdev)
+{
+	struct clk_lookup *cl = pdev->dev.platform_data; /* Non-DT lookup */
+>>>>>>> v3.18
 	struct clk_init_data init;
 	struct vexpress_osc *osc;
 	struct clk *clk;
 	u32 range[2];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	osc = kzalloc(sizeof(*osc), GFP_KERNEL);
 	if (!osc)
@@ -135,6 +157,8 @@ static int vexpress_osc_probe(struct platform_device *pdev)
 
 	if (of_property_read_u32_array(node, "freq-range", range,
 =======
+=======
+>>>>>>> v3.18
 	osc = devm_kzalloc(&pdev->dev, sizeof(*osc), GFP_KERNEL);
 	if (!osc)
 		return -ENOMEM;
@@ -144,6 +168,9 @@ static int vexpress_osc_probe(struct platform_device *pdev)
 		return PTR_ERR(osc->reg);
 
 	if (of_property_read_u32_array(pdev->dev.of_node, "freq-range", range,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ARRAY_SIZE(range)) == 0) {
 		osc->rate_min = range[0];
@@ -151,9 +178,15 @@ static int vexpress_osc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_property_read_string(node, "clock-output-names", &init.name);
 	if (!init.name)
 		init.name = node->name;
+=======
+	if (of_property_read_string(pdev->dev.of_node, "clock-output-names",
+			&init.name) != 0)
+		init.name = dev_name(&pdev->dev);
+>>>>>>> v3.18
 =======
 	if (of_property_read_string(pdev->dev.of_node, "clock-output-names",
 			&init.name) != 0)
@@ -167,6 +200,7 @@ static int vexpress_osc_probe(struct platform_device *pdev)
 	osc->hw.init = &init;
 
 	clk = clk_register(NULL, &osc->hw);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (IS_ERR(clk)) {
 		pr_err("Failed to register clock '%s'!\n", init.name);
@@ -186,6 +220,8 @@ error:
 }
 CLK_OF_DECLARE(vexpress_soc, "arm,vexpress-osc", vexpress_osc_of_setup);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(clk))
 		return PTR_ERR(clk);
 
@@ -220,4 +256,7 @@ static int __init vexpress_osc_init(void)
 	return platform_driver_register(&vexpress_osc_driver);
 }
 core_initcall(vexpress_osc_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

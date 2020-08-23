@@ -7,6 +7,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/thread_info.h>
 #include <linux/linkage.h>
 #include <linux/list.h>
@@ -92,6 +93,8 @@ do { \
 do { \
 	inc_preempt_count_notrace(); \
 =======
+=======
+>>>>>>> v3.18
 #include <linux/linkage.h>
 #include <linux/list.h>
 
@@ -161,6 +164,9 @@ do { \
 #define preempt_disable_notrace() \
 do { \
 	__preempt_count_inc(); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	barrier(); \
 } while (0)
@@ -168,6 +174,7 @@ do { \
 #define preempt_enable_no_resched_notrace() \
 do { \
 	barrier(); \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dec_preempt_count_notrace(); \
 } while (0)
@@ -180,6 +187,8 @@ do { \
 	preempt_check_resched_context(); \
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 	__preempt_count_dec(); \
 } while (0)
 
@@ -202,6 +211,9 @@ do { \
 	__preempt_count_dec(); \
 } while (0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else /* !CONFIG_PREEMPT_COUNT */
@@ -213,16 +225,22 @@ do { \
  * region.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define preempt_disable()		barrier()
 #define sched_preempt_enable_no_resched()	barrier()
 #define preempt_enable_no_resched()	barrier()
 #define preempt_enable()		barrier()
 =======
+=======
+>>>>>>> v3.18
 #define preempt_disable()			barrier()
 #define sched_preempt_enable_no_resched()	barrier()
 #define preempt_enable_no_resched()		barrier()
 #define preempt_enable()			barrier()
 #define preempt_check_resched()			do { } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define preempt_disable_notrace()		barrier()
@@ -232,7 +250,10 @@ do { \
 #endif /* CONFIG_PREEMPT_COUNT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef MODULE
 /*
  * Modules have no business playing preemption tricks.
@@ -253,6 +274,9 @@ do { \
 		set_preempt_need_resched(); \
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PREEMPT_NOTIFIERS
 

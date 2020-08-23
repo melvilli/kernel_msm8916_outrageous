@@ -2,6 +2,10 @@ config STA2X11_VIP
 	tristate "STA2X11 VIP Video For Linux"
 	depends on STA2X11
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18

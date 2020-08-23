@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/timex.h>
@@ -21,7 +24,11 @@ void platform_calibrate_ccount(void)
 		"	beq %0, %1, 1b ;"
 		: "=&a"(u) : "a"(t), "a"(tstamp));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		b = xtensa_get_ccount();
+=======
+		b = get_ccount();
+>>>>>>> v3.18
 =======
 		b = get_ccount();
 >>>>>>> v3.18
@@ -30,8 +37,12 @@ void platform_calibrate_ccount(void)
 	} while (--i >= 0);
 	b -= a;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nsec_per_ccount = (LOOPS * 10000) / b;
 	ccount_per_jiffy = b * (100000UL / (LOOPS * HZ));
+=======
+	ccount_freq = b * (100000UL / LOOPS);
+>>>>>>> v3.18
 =======
 	ccount_freq = b * (100000UL / LOOPS);
 >>>>>>> v3.18

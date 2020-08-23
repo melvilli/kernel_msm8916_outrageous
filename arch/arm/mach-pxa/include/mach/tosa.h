@@ -14,6 +14,11 @@
 #define _ASM_ARCH_TOSA_H_ 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
+
+>>>>>>> v3.18
 =======
 #include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
 

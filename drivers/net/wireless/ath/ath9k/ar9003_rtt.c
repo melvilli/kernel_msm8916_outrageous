@@ -119,7 +119,10 @@ void ar9003_hw_rtt_load_hist(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ar9003_hw_patch_rtt(struct ath_hw *ah, int index, int chain)
 {
 	int agc, caldac;
@@ -141,6 +144,9 @@ static void ar9003_hw_patch_rtt(struct ath_hw *ah, int index, int chain)
 	ah->caldata->rtt_table[chain][index] |= (caldac << 4);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ar9003_hw_rtt_fill_hist_entry(struct ath_hw *ah, u8 chain, u32 index)
 {
@@ -180,6 +186,12 @@ void ar9003_hw_rtt_fill_hist(struct ath_hw *ah)
 			ah->caldata->rtt_table[chain][i] =
 				ar9003_hw_rtt_fill_hist_entry(ah, chain, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+			ar9003_hw_patch_rtt(ah, i, chain);
+
+>>>>>>> v3.18
 =======
 
 			ar9003_hw_patch_rtt(ah, i, chain);
@@ -192,7 +204,11 @@ void ar9003_hw_rtt_fill_hist(struct ath_hw *ah)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->caldata->rtt_done = true;
+=======
+	set_bit(RTT_DONE, &ah->caldata->cal_flags);
+>>>>>>> v3.18
 =======
 	set_bit(RTT_DONE, &ah->caldata->cal_flags);
 >>>>>>> v3.18
@@ -211,7 +227,11 @@ void ar9003_hw_rtt_clear_hist(struct ath_hw *ah)
 
 	if (ah->caldata)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ah->caldata->rtt_done = false;
+=======
+		clear_bit(RTT_DONE, &ah->caldata->cal_flags);
+>>>>>>> v3.18
 =======
 		clear_bit(RTT_DONE, &ah->caldata->cal_flags);
 >>>>>>> v3.18
@@ -225,12 +245,15 @@ bool ar9003_hw_rtt_restore(struct ath_hw *ah, struct ath9k_channel *chan)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ah->caldata->rtt_done)
 		return false;
 
 	ar9003_hw_rtt_enable(ah);
 	ar9003_hw_rtt_set_mask(ah, 0x10);
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(SW_PKDET_DONE, &ah->caldata->cal_flags)) {
 		if (IS_CHAN_2GHZ(chan)){
 			REG_RMW_FIELD(ah, AR_PHY_65NM_RXRF_AGC(0),
@@ -262,6 +285,9 @@ bool ar9003_hw_rtt_restore(struct ath_hw *ah, struct ath9k_channel *chan)
 		ar9003_hw_rtt_set_mask(ah, 0x30);
 	else
 		ar9003_hw_rtt_set_mask(ah, 0x10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ath9k_hw_rfbus_req(ah)) {

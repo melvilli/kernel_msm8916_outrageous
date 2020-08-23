@@ -2,7 +2,11 @@
  * intel_idle.c - native hardware idle loop for modern Intel processors
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010, Intel Corporation.
+=======
+ * Copyright (c) 2013, Intel Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013, Intel Corporation.
 >>>>>>> v3.18
@@ -94,6 +98,10 @@ struct idle_cpu {
 	 */
 	unsigned long auto_demotion_disable_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool byt_auto_demotion_disable_flag;
+>>>>>>> v3.18
 =======
 	bool byt_auto_demotion_disable_flag;
 >>>>>>> v3.18
@@ -132,7 +140,11 @@ static struct cpuidle_state *cpuidle_state_table;
  * Thus C0 is a dummy.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpuidle_state nehalem_cstates[CPUIDLE_STATE_MAX] = {
+=======
+static struct cpuidle_state nehalem_cstates[] = {
+>>>>>>> v3.18
 =======
 static struct cpuidle_state nehalem_cstates[] = {
 >>>>>>> v3.18
@@ -169,7 +181,11 @@ static struct cpuidle_state nehalem_cstates[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpuidle_state snb_cstates[CPUIDLE_STATE_MAX] = {
+=======
+static struct cpuidle_state snb_cstates[] = {
+>>>>>>> v3.18
 =======
 static struct cpuidle_state snb_cstates[] = {
 >>>>>>> v3.18
@@ -213,8 +229,11 @@ static struct cpuidle_state snb_cstates[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpuidle_state ivb_cstates[CPUIDLE_STATE_MAX] = {
 =======
+=======
+>>>>>>> v3.18
 static struct cpuidle_state byt_cstates[] = {
 	{
 		.name = "C1-BYT",
@@ -263,6 +282,9 @@ static struct cpuidle_state byt_cstates[] = {
 };
 
 static struct cpuidle_state ivb_cstates[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.name = "C1-IVB",
@@ -304,8 +326,11 @@ static struct cpuidle_state ivb_cstates[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpuidle_state hsw_cstates[CPUIDLE_STATE_MAX] = {
 =======
+=======
+>>>>>>> v3.18
 static struct cpuidle_state ivt_cstates[] = {
 	{
 		.name = "C1-IVT",
@@ -406,6 +431,9 @@ static struct cpuidle_state ivt_cstates_8s[] = {
 };
 
 static struct cpuidle_state hsw_cstates[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.name = "C1-HSW",
@@ -467,9 +495,12 @@ static struct cpuidle_state hsw_cstates[] = {
 		.enter = NULL }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct cpuidle_state atom_cstates[CPUIDLE_STATE_MAX] = {
 =======
+=======
+>>>>>>> v3.18
 static struct cpuidle_state bdw_cstates[] = {
 	{
 		.name = "C1-BDW",
@@ -532,6 +563,9 @@ static struct cpuidle_state bdw_cstates[] = {
 };
 
 static struct cpuidle_state atom_cstates[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.name = "C1E-ATM",
@@ -565,7 +599,10 @@ static struct cpuidle_state atom_cstates[] = {
 		.enter = NULL }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct cpuidle_state avn_cstates[] = {
 	{
 		.name = "C1-AVN",
@@ -584,6 +621,9 @@ static struct cpuidle_state avn_cstates[] = {
 	{
 		.enter = NULL }
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -616,6 +656,7 @@ static int intel_idle(struct cpuidle_device *dev,
 		clockevents_notify(CLOCK_EVT_NOTIFY_BROADCAST_ENTER, &cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!current_set_polling_and_test()) {
 
 		if (this_cpu_has(X86_FEATURE_CLFLUSH_MONITOR))
@@ -626,6 +667,9 @@ static int intel_idle(struct cpuidle_device *dev,
 		if (!need_resched())
 			__mwait(eax, ecx);
 	}
+=======
+	mwait_idle_with_hints(eax, ecx);
+>>>>>>> v3.18
 =======
 	mwait_idle_with_hints(eax, ecx);
 >>>>>>> v3.18
@@ -654,7 +698,11 @@ static int cpu_hotplug_notify(struct notifier_block *n,
 	struct cpuidle_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (action & 0xf) {
+=======
+	switch (action & ~CPU_TASKS_FROZEN) {
+>>>>>>> v3.18
 =======
 	switch (action & ~CPU_TASKS_FROZEN) {
 >>>>>>> v3.18
@@ -720,13 +768,19 @@ static const struct idle_cpu idle_cpu_snb = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct idle_cpu idle_cpu_byt = {
 	.state_table = byt_cstates,
 	.disable_promotion_to_c1e = true,
 	.byt_auto_demotion_disable_flag = true,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct idle_cpu idle_cpu_ivb = {
 	.state_table = ivb_cstates,
@@ -734,12 +788,18 @@ static const struct idle_cpu idle_cpu_ivb = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct idle_cpu idle_cpu_ivt = {
 	.state_table = ivt_cstates,
 	.disable_promotion_to_c1e = true,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct idle_cpu idle_cpu_hsw = {
 	.state_table = hsw_cstates,
@@ -747,7 +807,10 @@ static const struct idle_cpu idle_cpu_hsw = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct idle_cpu idle_cpu_bdw = {
 	.state_table = bdw_cstates,
 	.disable_promotion_to_c1e = true,
@@ -758,6 +821,9 @@ static const struct idle_cpu idle_cpu_avn = {
 	.disable_promotion_to_c1e = true,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ICPU(model, cpu) \
 	{ X86_VENDOR_INTEL, 6, model, X86_FEATURE_MWAIT, (unsigned long)&cpu }
@@ -775,24 +841,36 @@ static const struct x86_cpu_id intel_idle_ids[] = {
 	ICPU(0x2a, idle_cpu_snb),
 	ICPU(0x2d, idle_cpu_snb),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ICPU(0x3a, idle_cpu_ivb),
 	ICPU(0x3e, idle_cpu_ivb),
 =======
+=======
+>>>>>>> v3.18
 	ICPU(0x36, idle_cpu_atom),
 	ICPU(0x37, idle_cpu_byt),
 	ICPU(0x3a, idle_cpu_ivb),
 	ICPU(0x3e, idle_cpu_ivt),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ICPU(0x3c, idle_cpu_hsw),
 	ICPU(0x3f, idle_cpu_hsw),
 	ICPU(0x45, idle_cpu_hsw),
 	ICPU(0x46, idle_cpu_hsw),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ICPU(0x4d, idle_cpu_avn),
 	ICPU(0x3d, idle_cpu_bdw),
 	ICPU(0x4f, idle_cpu_bdw),
 	ICPU(0x56, idle_cpu_bdw),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -802,7 +880,11 @@ MODULE_DEVICE_TABLE(x86cpu, intel_idle_ids);
  * intel_idle_probe()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int intel_idle_probe(void)
+=======
+static int __init intel_idle_probe(void)
+>>>>>>> v3.18
 =======
 static int __init intel_idle_probe(void)
 >>>>>>> v3.18
@@ -870,7 +952,10 @@ static void intel_idle_cpuidle_devices_uninit(void)
 	return;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * intel_idle_state_table_update()
@@ -905,13 +990,20 @@ void intel_idle_state_table_update(void)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * intel_idle_cpuidle_driver_init()
  * allocate, initialize cpuidle_states
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int intel_idle_cpuidle_driver_init(void)
+=======
+static int __init intel_idle_cpuidle_driver_init(void)
+>>>>>>> v3.18
 =======
 static int __init intel_idle_cpuidle_driver_init(void)
 >>>>>>> v3.18
@@ -920,17 +1012,23 @@ static int __init intel_idle_cpuidle_driver_init(void)
 	struct cpuidle_driver *drv = &intel_idle_driver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv->state_count = 1;
 
 	for (cstate = 0; cstate < CPUIDLE_STATE_MAX; ++cstate) {
 		int num_substates, mwait_hint, mwait_cstate, mwait_substate;
 =======
+=======
+>>>>>>> v3.18
 	intel_idle_state_table_update();
 
 	drv->state_count = 1;
 
 	for (cstate = 0; cstate < CPUIDLE_STATE_MAX; ++cstate) {
 		int num_substates, mwait_hint, mwait_cstate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (cpuidle_state_table[cstate].enter == NULL)
@@ -945,6 +1043,7 @@ static int __init intel_idle_cpuidle_driver_init(void)
 		mwait_hint = flg2MWAIT(cpuidle_state_table[cstate].flags);
 		mwait_cstate = MWAIT_HINT2CSTATE(mwait_hint);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mwait_substate = MWAIT_HINT2SUBSTATE(mwait_hint);
 
 		/* does the state exist in CPUID.MWAIT? */
@@ -954,6 +1053,8 @@ static int __init intel_idle_cpuidle_driver_init(void)
 		/* if sub-state in table is not enumerated by CPUID */
 		if ((mwait_substate + 1) > num_substates)
 =======
+=======
+>>>>>>> v3.18
 
 		/* number of sub-states for this state in CPUID.MWAIT */
 		num_substates = (mwait_substates >> ((mwait_cstate + 1) * 4))
@@ -961,6 +1062,9 @@ static int __init intel_idle_cpuidle_driver_init(void)
 
 		/* if NO sub-states for this state in CPUID, skip it */
 		if (num_substates == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -979,12 +1083,18 @@ static int __init intel_idle_cpuidle_driver_init(void)
 		on_each_cpu(auto_demotion_disable, NULL, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (icpu->byt_auto_demotion_disable_flag) {
 		wrmsrl(MSR_CC6_DEMOTION_POLICY_CONFIG, 0);
 		wrmsrl(MSR_MC6_DEMOTION_POLICY_CONFIG, 0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (icpu->disable_promotion_to_c1e)	/* each-cpu is redundant */
 		on_each_cpu(c1e_promotion_disable, NULL, 1);
@@ -1001,13 +1111,17 @@ static int __init intel_idle_cpuidle_driver_init(void)
 static int intel_idle_cpu_init(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cstate;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cpuidle_device *dev;
 
 	dev = per_cpu_ptr(intel_idle_cpuidle_devices, cpu);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->state_count = 1;
 
@@ -1039,6 +1153,8 @@ static int intel_idle_cpu_init(int cpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	dev->cpu = cpu;
 
 	if (cpuidle_register_device(dev)) {
@@ -1051,6 +1167,12 @@ static int intel_idle_cpu_init(int cpu)
 		smp_call_function_single(cpu, auto_demotion_disable, NULL, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (icpu->disable_promotion_to_c1e)
+		smp_call_function_single(cpu, c1e_promotion_disable, NULL, 1);
+
+>>>>>>> v3.18
 =======
 	if (icpu->disable_promotion_to_c1e)
 		smp_call_function_single(cpu, c1e_promotion_disable, NULL, 1);
@@ -1085,23 +1207,35 @@ static int __init intel_idle_init(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_online_cpu(i) {
 		retval = intel_idle_cpu_init(i);
 		if (retval) {
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 
 	for_each_online_cpu(i) {
 		retval = intel_idle_cpu_init(i);
 		if (retval) {
 			cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cpuidle_unregister_driver(&intel_idle_driver);
 			return retval;
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_cpu_notifier(&cpu_hotplug_notifier);
+=======
+	__register_cpu_notifier(&cpu_hotplug_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_cpu_notifier(&cpu_hotplug_notifier);
 
@@ -1117,11 +1251,14 @@ static void __exit intel_idle_exit(void)
 	cpuidle_unregister_driver(&intel_idle_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (lapic_timer_reliable_states != LAPIC_TIMER_ALWAYS_RELIABLE)
 		on_each_cpu(__setup_broadcast_timer, (void *)false, 1);
 	unregister_cpu_notifier(&cpu_hotplug_notifier);
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 
 	if (lapic_timer_reliable_states != LAPIC_TIMER_ALWAYS_RELIABLE)
@@ -1129,6 +1266,9 @@ static void __exit intel_idle_exit(void)
 	__unregister_cpu_notifier(&cpu_hotplug_notifier);
 
 	cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;

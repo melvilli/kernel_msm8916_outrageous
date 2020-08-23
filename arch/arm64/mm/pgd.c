@@ -31,6 +31,11 @@
 #define PGD_SIZE	(PTRS_PER_PGD * sizeof(pgd_t))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct kmem_cache *pgd_cache;
+
+>>>>>>> v3.18
 =======
 static struct kmem_cache *pgd_cache;
 
@@ -41,7 +46,11 @@ pgd_t *pgd_alloc(struct mm_struct *mm)
 		return (pgd_t *)get_zeroed_page(GFP_KERNEL);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return kzalloc(PGD_SIZE, GFP_KERNEL);
+=======
+		return kmem_cache_zalloc(pgd_cache, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		return kmem_cache_zalloc(pgd_cache, GFP_KERNEL);
 >>>>>>> v3.18
@@ -53,9 +62,12 @@ void pgd_free(struct mm_struct *mm, pgd_t *pgd)
 		free_page((unsigned long)pgd);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(pgd);
 }
 =======
+=======
+>>>>>>> v3.18
 		kmem_cache_free(pgd_cache, pgd);
 }
 
@@ -70,4 +82,7 @@ static int __init pgd_cache_init(void)
 	return 0;
 }
 core_initcall(pgd_cache_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -18,6 +18,7 @@
 
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/platform_device.h>
 #include <linux/platform_data/tegra_usb.h>
@@ -49,6 +50,8 @@ struct tegra_ehci_hcd {
 	struct usb_phy *transceiver;
 	int host_resumed;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dma-mapping.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
@@ -88,12 +91,16 @@ struct tegra_ehci_hcd {
 	struct tegra_usb_phy *phy;
 	struct clk *clk;
 	struct reset_control *rst;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int port_resuming;
 	bool needs_double_reset;
 	enum tegra_usb_phy_port_speed port_speed;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tegra_ehci_power_up(struct usb_hcd *hcd)
 {
@@ -112,6 +119,8 @@ static void tegra_ehci_power_down(struct usb_hcd *hcd)
 	usb_phy_set_suspend(hcd->phy, 1);
 	clk_disable_unprepare(tegra->clk);
 =======
+=======
+>>>>>>> v3.18
 /*
  * The 1st USB controller contains some UTMI pad registers that are global for
  * all the controllers on the chip. Those registers are also cleared when
@@ -165,6 +174,9 @@ static int tegra_reset_usb_controller(struct platform_device *pdev)
 	of_node_put(phy_np);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -243,8 +255,13 @@ static int tegra_ehci_hub_control(
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ehci_hcd	*ehci = hcd_to_ehci(hcd);
 	struct tegra_ehci_hcd *tegra = dev_get_drvdata(hcd->self.controller);
+=======
+	struct ehci_hcd *ehci = hcd_to_ehci(hcd);
+	struct tegra_ehci_hcd *tegra = (struct tegra_ehci_hcd *)ehci->priv;
+>>>>>>> v3.18
 =======
 	struct ehci_hcd *ehci = hcd_to_ehci(hcd);
 	struct tegra_ehci_hcd *tegra = (struct tegra_ehci_hcd *)ehci->priv;
@@ -264,7 +281,11 @@ static int tegra_ehci_hub_control(
 			/* Resume completed, re-enable disconnect detection */
 			tegra->port_resuming = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tegra_usb_phy_postresume(hcd->phy);
+=======
+			tegra_usb_phy_postresume(hcd->usb_phy);
+>>>>>>> v3.18
 =======
 			tegra_usb_phy_postresume(hcd->usb_phy);
 >>>>>>> v3.18
@@ -287,7 +308,11 @@ static int tegra_ehci_hub_control(
 		 * suspending the port. Poll until the port is suspended.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (handshake(ehci, status_reg, PORT_SUSPEND,
+=======
+		if (ehci_handshake(ehci, status_reg, PORT_SUSPEND,
+>>>>>>> v3.18
 =======
 		if (ehci_handshake(ehci, status_reg, PORT_SUSPEND,
 >>>>>>> v3.18
@@ -325,7 +350,11 @@ static int tegra_ehci_hub_control(
 
 		/* Disable disconnect detection during port resume */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tegra_usb_phy_preresume(hcd->phy);
+=======
+		tegra_usb_phy_preresume(hcd->usb_phy);
+>>>>>>> v3.18
 =======
 		tegra_usb_phy_preresume(hcd->usb_phy);
 >>>>>>> v3.18
@@ -343,9 +372,15 @@ static int tegra_ehci_hub_control(
 
 		/* Poll until the controller clears RESUME and SUSPEND */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (handshake(ehci, status_reg, PORT_RESUME, 0, 2000))
 			pr_err("%s: timeout waiting for RESUME\n", __func__);
 		if (handshake(ehci, status_reg, PORT_SUSPEND, 0, 2000))
+=======
+		if (ehci_handshake(ehci, status_reg, PORT_RESUME, 0, 2000))
+			pr_err("%s: timeout waiting for RESUME\n", __func__);
+		if (ehci_handshake(ehci, status_reg, PORT_SUSPEND, 0, 2000))
+>>>>>>> v3.18
 =======
 		if (ehci_handshake(ehci, status_reg, PORT_RESUME, 0, 2000))
 			pr_err("%s: timeout waiting for RESUME\n", __func__);
@@ -365,6 +400,10 @@ static int tegra_ehci_hub_control(
 	/* Handle the hub control events here */
 	return ehci_hub_control(hcd, typeReq, wValue, wIndex, buf, wLength);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -373,6 +412,7 @@ done:
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tegra_ehci_restart(struct usb_hcd *hcd)
 {
@@ -420,6 +460,8 @@ static int tegra_ehci_setup(struct usb_hcd *hcd)
 	return ehci_setup(hcd);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dma_aligned_buffer {
@@ -501,6 +543,7 @@ static void tegra_ehci_unmap_urb_for_dma(struct usb_hcd *hcd, struct urb *urb)
 	free_dma_aligned_buffer(urb);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct hc_driver tegra_ehci_hc_driver = {
 	.description		= hcd_name,
@@ -783,6 +826,8 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 static const struct tegra_ehci_soc_config tegra30_soc_config = {
 	.has_hostpc = true,
 };
@@ -815,12 +860,16 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 	soc_config = match->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Right now device-tree probed devices don't get dma_mask set.
 	 * Since shared usb code relies on it, set it here for now.
 	 * Once we have dma capability bindings this can go away.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!pdev->dev.dma_mask)
 		pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
@@ -838,6 +887,11 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 	if (err)
 		return err;
 >>>>>>> v3.18
+=======
+	err = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	hcd = usb_create_hcd(&tegra_ehci_hc_driver, &pdev->dev,
 					dev_name(&pdev->dev));
@@ -846,14 +900,20 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	platform_set_drvdata(pdev, tegra);
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, hcd);
 	ehci = hcd_to_ehci(hcd);
 	tegra = (struct tegra_ehci_hcd *)ehci->priv;
 
 	hcd->has_tt = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tegra->clk = devm_clk_get(&pdev->dev, NULL);
@@ -861,8 +921,11 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Can't get ehci clock\n");
 		err = PTR_ERR(tegra->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_clk;
 =======
+=======
+>>>>>>> v3.18
 		goto cleanup_hcd_create;
 	}
 
@@ -871,11 +934,15 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Can't get ehci reset\n");
 		err = PTR_ERR(tegra->rst);
 		goto cleanup_hcd_create;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = clk_prepare_enable(tegra->clk);
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_clk;
 
@@ -883,6 +950,8 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 	udelay(1);
 	tegra_periph_reset_deassert(tegra->clk);
 =======
+=======
+>>>>>>> v3.18
 		goto cleanup_hcd_create;
 
 	err = tegra_reset_usb_controller(pdev);
@@ -895,6 +964,9 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		goto cleanup_clk_en;
 	}
 	hcd->usb_phy = u_phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tegra->needs_double_reset = of_property_read_bool(pdev->dev.of_node,
@@ -904,6 +976,7 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 	if (!res) {
 		dev_err(&pdev->dev, "Failed to get I/O memory\n");
 		err = -ENXIO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_io;
 	}
@@ -953,6 +1026,8 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 	usb_phy_init(hcd->phy);
 
 =======
+=======
+>>>>>>> v3.18
 		goto cleanup_clk_en;
 	}
 	hcd->rsrc_start = res->start;
@@ -971,12 +1046,16 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		goto cleanup_clk_en;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u_phy->otg = devm_kzalloc(&pdev->dev, sizeof(struct usb_otg),
 			     GFP_KERNEL);
 	if (!u_phy->otg) {
 		dev_err(&pdev->dev, "Failed to alloc memory for otg\n");
 		err = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_io;
 	}
@@ -992,6 +1071,8 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 	tegra->ehci = hcd_to_ehci(hcd);
 
 =======
+=======
+>>>>>>> v3.18
 		goto cleanup_phy;
 	}
 	u_phy->otg->host = hcd_to_bus(hcd);
@@ -1002,11 +1083,15 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		goto cleanup_phy;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
 	if (!irq) {
 		dev_err(&pdev->dev, "Failed to get IRQ\n");
 		err = -ENODEV;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_phy;
 	}
@@ -1020,15 +1105,21 @@ static int tegra_ehci_probe(struct platform_device *pdev)
 		tegra->transceiver = ERR_PTR(-ENODEV);
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto cleanup_phy;
 	}
 
 	otg_set_host(u_phy->otg, &hcd->self);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = usb_add_hcd(hcd, irq, IRQF_SHARED);
 	if (err) {
 		dev_err(&pdev->dev, "Failed to add USB HCD\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail;
 	}
@@ -1052,6 +1143,8 @@ fail_io:
 	clk_disable_unprepare(tegra->clk);
 fail_clk:
 =======
+=======
+>>>>>>> v3.18
 		goto cleanup_otg_set_host;
 	}
 	device_wakeup_enable(hcd->self.controller);
@@ -1065,6 +1158,9 @@ cleanup_phy:
 cleanup_clk_en:
 	clk_disable_unprepare(tegra->clk);
 cleanup_hcd_create:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb_put_hcd(hcd);
 	return err;
@@ -1072,6 +1168,7 @@ cleanup_hcd_create:
 
 static int tegra_ehci_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tegra_ehci_hcd *tegra = platform_get_drvdata(pdev);
 	struct usb_hcd *hcd = ehci_to_hcd(tegra->ehci);
@@ -1090,6 +1187,8 @@ static int tegra_ehci_remove(struct platform_device *pdev)
 	clk_disable_unprepare(tegra->clk);
 
 =======
+=======
+>>>>>>> v3.18
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 	struct tegra_ehci_hcd *tegra =
 		(struct tegra_ehci_hcd *)hcd_to_ehci(hcd)->priv;
@@ -1103,6 +1202,9 @@ static int tegra_ehci_remove(struct platform_device *pdev)
 
 	usb_put_hcd(hcd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1110,8 +1212,12 @@ static int tegra_ehci_remove(struct platform_device *pdev)
 static void tegra_ehci_hcd_shutdown(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tegra_ehci_hcd *tegra = platform_get_drvdata(pdev);
 	struct usb_hcd *hcd = ehci_to_hcd(tegra->ehci);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1121,6 +1227,7 @@ static void tegra_ehci_hcd_shutdown(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id tegra_ehci_of_match[] = {
 	{ .compatible = "nvidia,tegra20-ehci", },
 	{ },
@@ -1128,11 +1235,14 @@ static struct of_device_id tegra_ehci_of_match[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver tegra_ehci_driver = {
 	.probe		= tegra_ehci_probe,
 	.remove		= tegra_ehci_remove,
 	.shutdown	= tegra_ehci_hcd_shutdown,
 	.driver		= {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.name	= "tegra-ehci",
 		.of_match_table = tegra_ehci_of_match,
@@ -1142,6 +1252,8 @@ static struct platform_driver tegra_ehci_driver = {
 	}
 };
 =======
+=======
+>>>>>>> v3.18
 		.name	= DRV_NAME,
 		.of_match_table = tegra_ehci_of_match,
 	}
@@ -1210,4 +1322,7 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:" DRV_NAME);
 MODULE_DEVICE_TABLE(of, tegra_ehci_of_match);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

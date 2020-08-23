@@ -108,7 +108,11 @@ ENTRY(cpu_resume_mmu)
 	mov	r0, r0
 	mov	r0, r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r3			@ jump to virtual address
+=======
+	ret	r3			@ jump to virtual address
+>>>>>>> v3.18
 =======
 	ret	r3			@ jump to virtual address
 >>>>>>> v3.18
@@ -131,12 +135,18 @@ ENDPROC(cpu_resume_after_mmu)
 	.align
 ENTRY(cpu_resume)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ARM_BE8(setend be)			@ ensure we are in BE mode
 #ifdef CONFIG_ARM_VIRT_EXT
 	bl	__hyp_stub_install_secondary
 #endif
 	safe_svcmode_maskall r1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov	r1, #0
 	ALT_SMP(mrc p15, 0, r0, c0, c0, 5)
@@ -156,7 +166,10 @@ ARM_BE8(setend be)			@ ensure we are in BE mode
 	ldr	r0, [r0, r1, lsl #2]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setmode	PSR_I_BIT | PSR_F_BIT | SVC_MODE, r1  @ set SVC, irqs off
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	@ load phys pgd, stack, resume fn

@@ -6,7 +6,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -14,6 +17,10 @@
 #include <linux/string.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqflags.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqflags.h>
 >>>>>>> v3.18
@@ -28,7 +35,10 @@ struct {
 	long prom_callback;			/* 0x00 */
 	void (*prom_cif_handler)(long *);	/* 0x08 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long prom_cif_stack;		/* 0x10 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } p1275buf;
@@ -48,8 +58,13 @@ void p1275_cmd_direct(unsigned long *args)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_local_save_flags(flags);
 	raw_local_irq_restore((unsigned long)PIL_NMI);
+=======
+	local_save_flags(flags);
+	local_irq_restore((unsigned long)PIL_NMI);
+>>>>>>> v3.18
 =======
 	local_save_flags(flags);
 	local_irq_restore((unsigned long)PIL_NMI);
@@ -62,7 +77,11 @@ void p1275_cmd_direct(unsigned long *args)
 
 	raw_spin_unlock(&prom_entry_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_local_irq_restore(flags);
+=======
+	local_irq_restore(flags);
+>>>>>>> v3.18
 =======
 	local_irq_restore(flags);
 >>>>>>> v3.18
@@ -72,7 +91,10 @@ void prom_cif_init(void *cif_handler, void *cif_stack)
 {
 	p1275buf.prom_cif_handler = (void (*)(long *))cif_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p1275buf.prom_cif_stack = (unsigned long)cif_stack;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

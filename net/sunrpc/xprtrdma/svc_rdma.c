@@ -85,7 +85,11 @@ struct workqueue_struct *svc_rdma_wq;
  * current value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int read_reset_stat(ctl_table *table, int write,
+=======
+static int read_reset_stat(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int read_reset_stat(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -124,7 +128,11 @@ static int read_reset_stat(struct ctl_table *table, int write,
 
 static struct ctl_table_header *svcrdma_table_header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table svcrdma_parm_table[] = {
+=======
+static struct ctl_table svcrdma_parm_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table svcrdma_parm_table[] = {
 >>>>>>> v3.18
@@ -223,7 +231,11 @@ static struct ctl_table svcrdma_parm_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table svcrdma_table[] = {
+=======
+static struct ctl_table svcrdma_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table svcrdma_table[] = {
 >>>>>>> v3.18
@@ -236,7 +248,11 @@ static struct ctl_table svcrdma_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table svcrdma_root_table[] = {
+=======
+static struct ctl_table svcrdma_root_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table svcrdma_root_table[] = {
 >>>>>>> v3.18

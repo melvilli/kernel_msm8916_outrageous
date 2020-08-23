@@ -32,7 +32,11 @@ extern void __iomem *omap2_sms_base;
 static inline void sdrc_write_reg(u32 val, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP_SDRC_REGADDR(reg));
+=======
+	writel_relaxed(val, OMAP_SDRC_REGADDR(reg));
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, OMAP_SDRC_REGADDR(reg));
 >>>>>>> v3.18
@@ -41,7 +45,11 @@ static inline void sdrc_write_reg(u32 val, u16 reg)
 static inline u32 sdrc_read_reg(u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(OMAP_SDRC_REGADDR(reg));
+=======
+	return readl_relaxed(OMAP_SDRC_REGADDR(reg));
+>>>>>>> v3.18
 =======
 	return readl_relaxed(OMAP_SDRC_REGADDR(reg));
 >>>>>>> v3.18
@@ -52,7 +60,11 @@ static inline u32 sdrc_read_reg(u16 reg)
 static inline void sms_write_reg(u32 val, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP_SMS_REGADDR(reg));
+=======
+	writel_relaxed(val, OMAP_SMS_REGADDR(reg));
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, OMAP_SMS_REGADDR(reg));
 >>>>>>> v3.18
@@ -61,7 +73,11 @@ static inline void sms_write_reg(u32 val, u16 reg)
 static inline u32 sms_read_reg(u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(OMAP_SMS_REGADDR(reg));
+=======
+	return readl_relaxed(OMAP_SMS_REGADDR(reg));
+>>>>>>> v3.18
 =======
 	return readl_relaxed(OMAP_SMS_REGADDR(reg));
 >>>>>>> v3.18

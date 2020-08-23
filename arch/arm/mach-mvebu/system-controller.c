@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * System controller support for Armada 370 and XP platforms.
+=======
+ * System controller support for Armada 370, 375 and XP platforms.
+>>>>>>> v3.18
 =======
  * System controller support for Armada 370, 375 and XP platforms.
 >>>>>>> v3.18
@@ -16,7 +20,11 @@
  * warranty of any kind, whether express or implied.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The Armada 370 and Armada XP SoCs both have a range of
+=======
+ * The Armada 370, 375 and Armada XP SoCs have a range of
+>>>>>>> v3.18
 =======
  * The Armada 370, 375 and Armada XP SoCs have a range of
 >>>>>>> v3.18
@@ -36,9 +44,12 @@
 #include <linux/io.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void __iomem *system_controller_base;
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "mvebu-soc-id.h"
 #include "pmsu.h"
@@ -48,6 +59,9 @@ static void __iomem *system_controller_base;
 
 static void __iomem *system_controller_base;
 static phys_addr_t system_controller_phys_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mvebu_system_controller {
@@ -57,11 +71,14 @@ struct mvebu_system_controller {
 	u32 rstoutn_mask_reset_out_en;
 	u32 system_soft_reset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 static struct mvebu_system_controller *mvebu_sc;
 
 const struct mvebu_system_controller armada_370_xp_system_controller = {
 =======
+=======
+>>>>>>> v3.18
 
 	u32 resume_boot_addr;
 
@@ -71,16 +88,22 @@ const struct mvebu_system_controller armada_370_xp_system_controller = {
 static struct mvebu_system_controller *mvebu_sc;
 
 static const struct mvebu_system_controller armada_370_xp_system_controller = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.rstoutn_mask_offset = 0x60,
 	.system_soft_reset_offset = 0x64,
 	.rstoutn_mask_reset_out_en = 0x1,
 	.system_soft_reset = 0x1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 const struct mvebu_system_controller orion_system_controller = {
 =======
+=======
+>>>>>>> v3.18
 	.dev_id = 0x38,
 	.rev_id = 0x3c,
 };
@@ -96,6 +119,9 @@ static const struct mvebu_system_controller armada_375_system_controller = {
 };
 
 static const struct mvebu_system_controller orion_system_controller = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.rstoutn_mask_offset = 0x108,
 	.system_soft_reset_offset = 0x10c,
@@ -104,7 +130,11 @@ static const struct mvebu_system_controller orion_system_controller = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id of_system_controller_table[] = {
+=======
+static const struct of_device_id of_system_controller_table[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_system_controller_table[] = {
 >>>>>>> v3.18
@@ -115,6 +145,12 @@ static const struct of_device_id of_system_controller_table[] = {
 		.compatible = "marvell,armada-370-xp-system-controller",
 		.data = (void *) &armada_370_xp_system_controller,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	}, {
+		.compatible = "marvell,armada-375-system-controller",
+		.data = (void *) &armada_375_system_controller,
+>>>>>>> v3.18
 =======
 	}, {
 		.compatible = "marvell,armada-375-system-controller",
@@ -148,6 +184,7 @@ void mvebu_restart(enum reboot_mode mode, const char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init mvebu_system_controller_init(void)
 {
 	struct device_node *np;
@@ -160,6 +197,8 @@ static int __init mvebu_system_controller_init(void)
 		system_controller_base = of_iomap(np, 0);
 		mvebu_sc = (struct mvebu_system_controller *)match->data;
 =======
+=======
+>>>>>>> v3.18
 int mvebu_system_controller_get_soc_id(u32 *dev, u32 *rev)
 {
 	if (of_machine_is_compatible("marvell,armada380") &&
@@ -218,6 +257,9 @@ static int __init mvebu_system_controller_init(void)
 		system_controller_phys_base = res.start;
 		mvebu_sc = (struct mvebu_system_controller *)match->data;
 		of_node_put(np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -225,7 +267,11 @@ static int __init mvebu_system_controller_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 arch_initcall(mvebu_system_controller_init);
+=======
+early_initcall(mvebu_system_controller_init);
+>>>>>>> v3.18
 =======
 early_initcall(mvebu_system_controller_init);
 >>>>>>> v3.18

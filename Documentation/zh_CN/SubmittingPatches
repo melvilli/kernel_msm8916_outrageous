@@ -83,10 +83,13 @@ Quilt:
 http://savannah.nongnu.org/projects/quilt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Andrew Morton 的补丁脚本:
 http://userweb.kernel.org/~akpm/stuff/patch-scripts.tar.gz
 作为这些脚本的替代，quilt 是值得推荐的补丁管理工具(看上面的链接)。
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 2)描述你的改动。
@@ -150,7 +153,11 @@ Majordomo lists of VGER.KERNEL.ORG at:
 
 如果改动影响了用户空间和内核之间的接口，请给 MAN-PAGES 的维护者（列在
 <<<<<<< HEAD
+<<<<<<< HEAD
 MAITAINERS 文件里的）发送一个手册页（man-pages）补丁，或者至少通知一下改
+=======
+MAINTAINERS 文件里的）发送一个手册页（man-pages）补丁，或者至少通知一下改
+>>>>>>> v3.18
 =======
 MAINTAINERS 文件里的）发送一个手册页（man-pages）补丁，或者至少通知一下改
 >>>>>>> v3.18
@@ -402,7 +409,11 @@ Static inline 函数相比宏来说，是好得多的选择。Static inline 函�
 
 Andrew Morton, "The perfect patch" (tpp).
 <<<<<<< HEAD
+<<<<<<< HEAD
   <http://userweb.kernel.org/~akpm/stuff/tpp.txt>
+=======
+  <http://www.ozlabs.org/~akpm/stuff/tpp.txt>
+>>>>>>> v3.18
 =======
   <http://www.ozlabs.org/~akpm/stuff/tpp.txt>
 >>>>>>> v3.18
@@ -418,7 +429,11 @@ Greg Kroah-Hartman, "How to piss off a kernel subsystem maintainer".
 
 NO!!!! No more huge patch bombs to linux-kernel@vger.kernel.org people!
 <<<<<<< HEAD
+<<<<<<< HEAD
   <http://marc.theaimsgroup.com/?l=linux-kernel&m=112112749912944&w=2>
+=======
+  <https://lkml.org/lkml/2005/7/11/336>
+>>>>>>> v3.18
 =======
   <https://lkml.org/lkml/2005/7/11/336>
 >>>>>>> v3.18

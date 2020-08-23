@@ -12,6 +12,10 @@
 #include <linux/proc_fs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../mount.h"
+>>>>>>> v3.18
 =======
 #include "../mount.h"
 >>>>>>> v3.18
@@ -53,8 +57,14 @@ static int seq_show(struct seq_file *m, void *v)
 
 	if (!ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 seq_printf(m, "pos:\t%lli\nflags:\t0%o\n",
 			   (long long)file->f_pos, f_flags);
+=======
+		seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\n",
+			   (long long)file->f_pos, f_flags,
+			   real_mount(file->f_path.mnt)->mnt_id);
+>>>>>>> v3.18
 =======
 		seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\n",
 			   (long long)file->f_pos, f_flags,
@@ -138,8 +148,11 @@ static int tid_fd_revalidate(struct dentry *dentry, unsigned int flags)
 		put_task_struct(task);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	d_drop(dentry);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -181,16 +194,22 @@ static int proc_fd_link(struct dentry *dentry, struct path *path)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *
 proc_fd_instantiate(struct inode *dir, struct dentry *dentry,
 		    struct task_struct *task, const void *ptr)
 {
 	struct dentry *error = ERR_PTR(-ENOENT);
 =======
+=======
+>>>>>>> v3.18
 static int
 proc_fd_instantiate(struct inode *dir, struct dentry *dentry,
 		    struct task_struct *task, const void *ptr)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned fd = (unsigned long)ptr;
 	struct proc_inode *ei;
@@ -215,9 +234,15 @@ proc_fd_instantiate(struct inode *dir, struct dentry *dentry,
 	/* Close the race of the process dying before we return the dentry */
 	if (tid_fd_revalidate(dentry, 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = NULL;
  out:
 	return error;
+=======
+		return 0;
+ out:
+	return -ENOENT;
+>>>>>>> v3.18
 =======
 		return 0;
  out:
@@ -231,8 +256,13 @@ static struct dentry *proc_lookupfd_common(struct inode *dir,
 {
 	struct task_struct *task = get_proc_task(dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *result = ERR_PTR(-ENOENT);
 	unsigned fd = name_to_int(dentry);
+=======
+	int result = -ENOENT;
+	unsigned fd = name_to_int(&dentry->d_name);
+>>>>>>> v3.18
 =======
 	int result = -ENOENT;
 	unsigned fd = name_to_int(&dentry->d_name);
@@ -247,6 +277,7 @@ static struct dentry *proc_lookupfd_common(struct inode *dir,
 out:
 	put_task_struct(task);
 out_no_task:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return result;
 }
@@ -315,6 +346,8 @@ static int proc_readfd(struct file *filp, void *dirent, filldir_t filldir)
 {
 	return proc_readfd_common(filp, dirent, filldir, proc_fd_instantiate);
 =======
+=======
+>>>>>>> v3.18
 	return ERR_PTR(result);
 }
 
@@ -363,13 +396,20 @@ out:
 static int proc_readfd(struct file *file, struct dir_context *ctx)
 {
 	return proc_readfd_common(file, ctx, proc_fd_instantiate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 const struct file_operations proc_fd_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= proc_readfd,
+=======
+	.iterate	= proc_readfd,
+>>>>>>> v3.18
 =======
 	.iterate	= proc_readfd,
 >>>>>>> v3.18
@@ -389,6 +429,7 @@ static struct dentry *proc_lookupfd(struct inode *dir, struct dentry *dentry,
 int proc_fd_permission(struct inode *inode, int mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *p;
 	int rv;
 
@@ -403,11 +444,16 @@ int proc_fd_permission(struct inode *inode, int mask)
 	rcu_read_unlock();
 
 =======
+=======
+>>>>>>> v3.18
 	int rv = generic_permission(inode, mask);
 	if (rv == 0)
 		return 0;
 	if (task_tgid(current) == proc_pid(inode))
 		rv = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rv;
 }
@@ -419,16 +465,22 @@ const struct inode_operations proc_fd_inode_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *
 proc_fdinfo_instantiate(struct inode *dir, struct dentry *dentry,
 			struct task_struct *task, const void *ptr)
 {
 	struct dentry *error = ERR_PTR(-ENOENT);
 =======
+=======
+>>>>>>> v3.18
 static int
 proc_fdinfo_instantiate(struct inode *dir, struct dentry *dentry,
 			struct task_struct *task, const void *ptr)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned fd = (unsigned long)ptr;
 	struct proc_inode *ei;
@@ -450,9 +502,15 @@ proc_fdinfo_instantiate(struct inode *dir, struct dentry *dentry,
 	/* Close the race of the process dying before we return the dentry */
 	if (tid_fd_revalidate(dentry, 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = NULL;
  out:
 	return error;
+=======
+		return 0;
+ out:
+	return -ENOENT;
+>>>>>>> v3.18
 =======
 		return 0;
  out:
@@ -467,9 +525,15 @@ proc_lookupfdinfo(struct inode *dir, struct dentry *dentry, unsigned int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_readfdinfo(struct file *filp, void *dirent, filldir_t filldir)
 {
 	return proc_readfd_common(filp, dirent, filldir,
+=======
+static int proc_readfdinfo(struct file *file, struct dir_context *ctx)
+{
+	return proc_readfd_common(file, ctx,
+>>>>>>> v3.18
 =======
 static int proc_readfdinfo(struct file *file, struct dir_context *ctx)
 {
@@ -486,7 +550,11 @@ const struct inode_operations proc_fdinfo_inode_operations = {
 const struct file_operations proc_fdinfo_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= proc_readfdinfo,
+=======
+	.iterate	= proc_readfdinfo,
+>>>>>>> v3.18
 =======
 	.iterate	= proc_readfdinfo,
 >>>>>>> v3.18

@@ -93,11 +93,14 @@ static int __init sun4v_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __exit sun4v_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver sun4v_rtc_driver = {
@@ -106,7 +109,10 @@ static struct platform_driver sun4v_rtc_driver = {
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= __exit_p(sun4v_rtc_remove),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

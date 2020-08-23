@@ -140,7 +140,11 @@ static int siu_pcm_wr_set(struct siu_port *port_info,
 	desc->callback = siu_dma_tx_complete;
 	desc->callback_param = siu_stream;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cookie = desc->tx_submit(desc);
+=======
+	cookie = dmaengine_submit(desc);
+>>>>>>> v3.18
 =======
 	cookie = dmaengine_submit(desc);
 >>>>>>> v3.18
@@ -194,7 +198,11 @@ static int siu_pcm_rd_set(struct siu_port *port_info,
 	desc->callback = siu_dma_tx_complete;
 	desc->callback_param = siu_stream;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cookie = desc->tx_submit(desc);
+=======
+	cookie = dmaengine_submit(desc);
+>>>>>>> v3.18
 =======
 	cookie = dmaengine_submit(desc);
 >>>>>>> v3.18

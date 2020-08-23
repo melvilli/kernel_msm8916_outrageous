@@ -266,7 +266,11 @@ static int cc770_isa_probe(struct platform_device *pdev)
 		priv->clkout = COR_DEFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, dev);
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, dev);
 >>>>>>> v3.18
@@ -298,7 +302,11 @@ static int cc770_isa_probe(struct platform_device *pdev)
 static int cc770_isa_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -307,7 +315,10 @@ static int cc770_isa_remove(struct platform_device *pdev)
 
 	unregister_cc770dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

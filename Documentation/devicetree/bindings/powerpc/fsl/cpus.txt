@@ -21,7 +21,10 @@ PROPERTIES
 	name with all uppercase letters converted to lowercase, indicates that
 	the category is supported by the implementation.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
     - fsl,portid-mapping
 	Usage: optional
@@ -33,4 +36,7 @@ PROPERTIES
 	these registers should be set if the coresponding CPU should be
 	snooped.  This property defines a bitmask which selects the bit
 	that should be set if this cpu should be snooped.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

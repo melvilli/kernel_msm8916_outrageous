@@ -63,8 +63,11 @@ config SIR_BFIN_PIO
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 comment "Dongle support"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SH_SIR
@@ -78,6 +81,11 @@ config SH_SIR
 	  devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+comment "Dongle support"
+
+>>>>>>> v3.18
 =======
 comment "Dongle support"
 
@@ -219,6 +227,7 @@ config KINGSUN_DONGLE
 	  kingsun-sir.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config EP7211_DONGLE
 	tristate "Cirrus Logic clps711x I/R support"
 	depends on IRTTY_SIR && ARCH_CLPS711X && IRDA
@@ -226,6 +235,8 @@ config EP7211_DONGLE
 	  Say Y here if you want to build support for the Cirrus logic
 	  EP7211 chipset's infrared module.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config KSDAZZLE_DONGLE
@@ -415,7 +426,12 @@ config MCS_FIR
 config SH_IRDA
 	tristate "SuperH IrDA driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on IRDA && ARCH_SHMOBILE
+=======
+	depends on IRDA
+	depends on (ARCH_SHMOBILE || COMPILE_TEST) && HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on IRDA
 	depends on (ARCH_SHMOBILE || COMPILE_TEST) && HAS_IOMEM

@@ -292,7 +292,12 @@ static struct sk_buff *bcsp_dequeue(struct hci_uart *hu)
 	   since they have priority */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((skb = skb_dequeue(&bcsp->unrel)) != NULL) {
+=======
+	skb = skb_dequeue(&bcsp->unrel);
+	if (skb != NULL) {
+>>>>>>> v3.18
 =======
 	skb = skb_dequeue(&bcsp->unrel);
 	if (skb != NULL) {
@@ -314,6 +319,7 @@ static struct sk_buff *bcsp_dequeue(struct hci_uart *hu)
 	spin_lock_irqsave_nested(&bcsp->unack.lock, flags, SINGLE_DEPTH_NESTING);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bcsp->unack.qlen < BCSP_TXWINSIZE && (skb = skb_dequeue(&bcsp->rel)) != NULL) {
 		struct sk_buff *nskb = bcsp_prepare_pkt(bcsp, skb->data, skb->len, bt_cb(skb)->pkt_type);
 		if (nskb) {
@@ -325,6 +331,8 @@ static struct sk_buff *bcsp_dequeue(struct hci_uart *hu)
 			skb_queue_head(&bcsp->rel, skb);
 			BT_ERR("Could not dequeue pkt because alloc_skb failed");
 =======
+=======
+>>>>>>> v3.18
 	if (bcsp->unack.qlen < BCSP_TXWINSIZE) {
 		skb = skb_dequeue(&bcsp->rel);
 		if (skb != NULL) {
@@ -339,6 +347,9 @@ static struct sk_buff *bcsp_dequeue(struct hci_uart *hu)
 				skb_queue_head(&bcsp->rel, skb);
 				BT_ERR("Could not dequeue pkt because alloc_skb failed");
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -545,7 +556,11 @@ static void bcsp_complete_rx_pkt(struct hci_uart *hu)
 				bt_cb(bcsp->rx_skb)->pkt_type = HCI_EVENT_PKT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hci_recv_frame(bcsp->rx_skb);
+=======
+				hci_recv_frame(hu->hdev, bcsp->rx_skb);
+>>>>>>> v3.18
 =======
 				hci_recv_frame(hu->hdev, bcsp->rx_skb);
 >>>>>>> v3.18
@@ -563,7 +578,11 @@ static void bcsp_complete_rx_pkt(struct hci_uart *hu)
 		skb_pull(bcsp->rx_skb, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hci_recv_frame(bcsp->rx_skb);
+=======
+		hci_recv_frame(hu->hdev, bcsp->rx_skb);
+>>>>>>> v3.18
 =======
 		hci_recv_frame(hu->hdev, bcsp->rx_skb);
 >>>>>>> v3.18
@@ -686,7 +705,10 @@ static int bcsp_recv(struct hci_uart *hu, void *data, int count)
 					return 0;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				bcsp->rx_skb->dev = (void *) hu->hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				break;
@@ -750,6 +772,12 @@ static int bcsp_close(struct hci_uart *hu)
 {
 	struct bcsp_struct *bcsp = hu->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	del_timer_sync(&bcsp->tbcsp);
+
+>>>>>>> v3.18
 =======
 
 	del_timer_sync(&bcsp->tbcsp);
@@ -763,7 +791,10 @@ static int bcsp_close(struct hci_uart *hu)
 	skb_queue_purge(&bcsp->rel);
 	skb_queue_purge(&bcsp->unrel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&bcsp->tbcsp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

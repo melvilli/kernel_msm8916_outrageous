@@ -1077,7 +1077,10 @@ static void pt1_remove(struct pci_dev *pdev)
 	pt1_cleanup_adapters(pt1);
 	i2c_del_adapter(&pt1->i2c_adap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(pt1);
@@ -1202,7 +1205,10 @@ err_pt1_cleanup_adapters:
 	pt1_cleanup_adapters(pt1);
 err_kfree:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(pt1);
@@ -1232,6 +1238,7 @@ static struct pci_driver pt1_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __init pt1_init(void)
 {
@@ -1246,6 +1253,9 @@ static void __exit pt1_cleanup(void)
 
 module_init(pt1_init);
 module_exit(pt1_cleanup);
+=======
+module_pci_driver(pt1_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(pt1_driver);
 >>>>>>> v3.18

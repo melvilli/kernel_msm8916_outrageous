@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/pcl724.c
 
     Michal Dobes <dobes@tesnet.cz>
@@ -149,6 +150,8 @@ static int pcl724_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 					 || (it->options[1] == 96)))
 		n_subdevices = 4;	/*  PCL-724 in 96 DIO configuration */
 =======
+=======
+>>>>>>> v3.18
  * pcl724.c
  * Comedi driver for 8255 based ISA and PC/104 DIO boards
  *
@@ -269,6 +272,9 @@ static int pcl724_attach(struct comedi_device *dev,
 	ret = comedi_request_region(dev, it->options[0], iorange);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, n_subdevices);
@@ -279,6 +285,7 @@ static int pcl724_attach(struct comedi_device *dev,
 		s = &dev->subdevices[i];
 		if (board->is_pet48) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			subdev_8255_init(dev, s, subdev_8255mapped_cb,
 					 (unsigned long)(dev->iobase +
 							 i * 0x1000));
@@ -287,6 +294,8 @@ static int pcl724_attach(struct comedi_device *dev,
 					 (unsigned long)(dev->iobase +
 							 SIZE_8255 * i));
 =======
+=======
+>>>>>>> v3.18
 			iobase = dev->iobase + (i * 0x1000);
 			ret = subdev_8255_init(dev, s, pcl724_8255mapped_io,
 					       iobase);
@@ -295,12 +304,16 @@ static int pcl724_attach(struct comedi_device *dev,
 		}
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pcl724_detach(struct comedi_device *dev)
 {
@@ -322,12 +335,18 @@ static const struct pcl724_board boardtypes[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct comedi_driver pcl724_driver = {
 	.driver_name	= "pcl724",
 	.module		= THIS_MODULE,
 	.attach		= pcl724_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= pcl724_detach,
+=======
+	.detach		= comedi_legacy_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_legacy_detach,
 >>>>>>> v3.18
@@ -339,7 +358,11 @@ module_comedi_driver(pcl724_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for 8255 based ISA and PC/104 DIO boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for 8255 based ISA and PC/104 DIO boards");
 >>>>>>> v3.18

@@ -97,7 +97,10 @@ static void show_all(struct host1x *m, struct output *o)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_FS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void show_all_no_fifo(struct host1x *host1x, struct output *o)
@@ -157,7 +160,11 @@ static const struct file_operations host1x_debug_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void host1x_debug_init(struct host1x *host1x)
+=======
+static void host1x_debugfs_init(struct host1x *host1x)
+>>>>>>> v3.18
 =======
 static void host1x_debugfs_init(struct host1x *host1x)
 >>>>>>> v3.18
@@ -188,6 +195,7 @@ static void host1x_debugfs_init(struct host1x *host1x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void host1x_debug_deinit(struct host1x *host1x)
 {
 	debugfs_remove_recursive(host1x->debugfs);
@@ -201,6 +209,8 @@ void host1x_debug_deinit(struct host1x *host1x)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 static void host1x_debugfs_exit(struct host1x *host1x)
 {
 	debugfs_remove_recursive(host1x->debugfs);
@@ -217,6 +227,9 @@ void host1x_debug_deinit(struct host1x *host1x)
 	if (IS_ENABLED(CONFIG_DEBUG_FS))
 		host1x_debugfs_exit(host1x);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void host1x_debug_dump(struct host1x *host1x)

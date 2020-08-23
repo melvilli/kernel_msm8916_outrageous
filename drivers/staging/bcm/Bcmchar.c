@@ -2,7 +2,10 @@
 
 #include "headers.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int bcm_handle_nvm_read_cmd(struct bcm_mini_adapter *ad,
 				   PUCHAR read_data,
@@ -92,6 +95,9 @@ static int handle_flash2x_adapter(struct bcm_mini_adapter *ad,
 	return STATUS_SUCCESS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /***************************************************************
 * Function	  - bcm_char_open()
@@ -105,6 +111,7 @@ static int handle_flash2x_adapter(struct bcm_mini_adapter *ad,
 * Returns	  - Zero(Success)
 ****************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int bcm_char_open(struct inode *inode, struct file * filp)
 {
@@ -2185,6 +2192,115 @@ cntrlEnd:
 	case IOCTL_CLOSE_NOTIFICATION:
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, OSAL_DBG, DBG_LVL_ALL, "IOCTL_CLOSE_NOTIFICATION");
 =======
+=======
+static int bcm_char_open(struct inode *inode, struct file *filp)
+{
+	struct bcm_mini_adapter *ad = NULL;
+	struct bcm_tarang_data *tarang = NULL;
+
+	ad = GET_BCM_ADAPTER(gblpnetdev);
+	tarang = kzalloc(sizeof(struct bcm_tarang_data), GFP_KERNEL);
+	if (!tarang)
+		return -ENOMEM;
+
+	tarang->Adapter = ad;
+	tarang->RxCntrlMsgBitMask = 0xFFFFFFFF & ~(1 << 0xB);
+
+	down(&ad->RxAppControlQueuelock);
+	tarang->next = ad->pTarangs;
+	ad->pTarangs = tarang;
+	up(&ad->RxAppControlQueuelock);
+
+	/* Store the Adapter structure */
+	filp->private_data = tarang;
+
+	/* Start Queuing the control response Packets */
+	atomic_inc(&ad->ApplicationRunning);
+
+	nonseekable_open(inode, filp);
+	return 0;
+}
+
+static int bcm_char_release(struct inode *inode, struct file *filp)
+{
+	struct bcm_tarang_data *tarang, *tmp, *ptmp;
+	struct bcm_mini_adapter *ad = NULL;
+	struct sk_buff *pkt, *npkt;
+
+	tarang = (struct bcm_tarang_data *)filp->private_data;
+
+	if (tarang == NULL)
+		return 0;
+
+	ad = tarang->Adapter;
+
+	down(&ad->RxAppControlQueuelock);
+
+	tmp = ad->pTarangs;
+	for (ptmp = NULL; tmp; ptmp = tmp, tmp = tmp->next) {
+		if (tmp == tarang)
+			break;
+	}
+
+	if (tmp) {
+		if (!ptmp)
+			ad->pTarangs = tmp->next;
+		else
+			ptmp->next = tmp->next;
+	} else {
+		up(&ad->RxAppControlQueuelock);
+		return 0;
+	}
+
+	pkt = tarang->RxAppControlHead;
+	while (pkt) {
+		npkt = pkt->next;
+		kfree_skb(pkt);
+		pkt = npkt;
+	}
+
+	up(&ad->RxAppControlQueuelock);
+
+	/* Stop Queuing the control response Packets */
+	atomic_dec(&ad->ApplicationRunning);
+
+	kfree(tarang);
+
+	/* remove this filp from the asynchronously notified filp's */
+	filp->private_data = NULL;
+	return 0;
+}
+
+static ssize_t bcm_char_read(struct file *filp,
+			     char __user *buf,
+			     size_t size,
+			     loff_t *f_pos)
+{
+	struct bcm_tarang_data *tarang = filp->private_data;
+	struct bcm_mini_adapter *ad = tarang->Adapter;
+	struct sk_buff *packet = NULL;
+	ssize_t pkt_len = 0;
+	int wait_ret_val = 0;
+	unsigned long ret = 0;
+
+	wait_ret_val = wait_event_interruptible(
+				ad->process_read_wait_queue,
+				(tarang->RxAppControlHead ||
+				ad->device_removed));
+
+	if ((wait_ret_val == -ERESTARTSYS)) {
+		BCM_DEBUG_PRINT(ad, DBG_TYPE_OTHERS, OSAL_DBG, DBG_LVL_ALL,
+				"Exiting as i've been asked to exit!!!\n");
+		return wait_ret_val;
+	}
+
+	if (ad->device_removed) {
+		BCM_DEBUG_PRINT(ad, DBG_TYPE_OTHERS, OSAL_DBG, DBG_LVL_ALL,
+				"Device Removed... Killing the Apps...\n");
+		return -ENODEV;
+	}
+
+>>>>>>> v3.18
 	if (false == ad->fw_download_done)
 		return -EACCES;
 
@@ -4573,21 +4689,30 @@ static long bcm_char_ioctl(struct file *filp, UINT cmd, ULONG arg)
 	case IOCTL_CLOSE_NOTIFICATION:
 		BCM_DEBUG_PRINT(ad, DBG_TYPE_OTHERS, OSAL_DBG, DBG_LVL_ALL,
 				"IOCTL_CLOSE_NOTIFICATION");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	default:
 		pr_info(DRV_NAME ": unknown ioctl cmd=%#x\n", cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Status = STATUS_FAILURE;
 		break;
 	}
 	return Status;
 =======
+=======
+>>>>>>> v3.18
 		status = STATUS_FAILURE;
 		break;
 	}
 	return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4601,6 +4726,7 @@ static const struct file_operations bcm_fops = {
 	.llseek = no_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int register_control_device_interface(struct bcm_mini_adapter *Adapter)
 {
@@ -4623,6 +4749,8 @@ int register_control_device_interface(struct bcm_mini_adapter *Adapter)
 		unregister_chrdev(Adapter->major, DEV_NAME);
 		return PTR_ERR(Adapter->pstCreatedClassDevice);
 =======
+=======
+>>>>>>> v3.18
 int register_control_device_interface(struct bcm_mini_adapter *ad)
 {
 
@@ -4643,6 +4771,9 @@ int register_control_device_interface(struct bcm_mini_adapter *ad)
 		pr_err(DRV_NAME ": class device create failed\n");
 		unregister_chrdev(ad->major, DEV_NAME);
 		return PTR_ERR(ad->pstCreatedClassDevice);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4650,17 +4781,23 @@ int register_control_device_interface(struct bcm_mini_adapter *ad)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void unregister_control_device_interface(struct bcm_mini_adapter *Adapter)
 {
 	if (Adapter->major > 0) {
 		device_destroy(bcm_class, MKDEV(Adapter->major, 0));
 		unregister_chrdev(Adapter->major, DEV_NAME);
 =======
+=======
+>>>>>>> v3.18
 void unregister_control_device_interface(struct bcm_mini_adapter *ad)
 {
 	if (ad->major > 0) {
 		device_destroy(bcm_class, MKDEV(ad->major, 0));
 		unregister_chrdev(ad->major, DEV_NAME);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

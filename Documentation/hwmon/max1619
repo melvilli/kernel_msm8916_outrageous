@@ -11,7 +11,11 @@ Supported chips:
 Authors:
         Oleksij Rempel <bug-track@fisher-privat.net>,
 <<<<<<< HEAD
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>
+=======
+        Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
         Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

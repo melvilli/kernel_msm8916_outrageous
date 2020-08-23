@@ -422,7 +422,11 @@ static int pb0100_set_autogain_target(struct gspca_dev *gspca_dev, __s32 val)
 	/* Number of pixels counted by the sensor when subsampling the pixels.
 	 * Slightly larger than the real value to avoid oscillation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	totalpixels = gspca_dev->width * gspca_dev->height;
+=======
+	totalpixels = gspca_dev->pixfmt.width * gspca_dev->pixfmt.height;
+>>>>>>> v3.18
 =======
 	totalpixels = gspca_dev->pixfmt.width * gspca_dev->pixfmt.height;
 >>>>>>> v3.18

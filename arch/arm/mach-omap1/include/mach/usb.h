@@ -9,6 +9,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct omap_usb_config {
 	/* Configure drivers according to the connectors on your board:
 	 *  - "A" connector (rectagular)
@@ -46,6 +47,9 @@ struct omap_usb_config {
 
 	int (*ocpi_enable)(void);
 };
+=======
+#include <linux/platform_data/usb-omap1.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/usb-omap1.h>
 >>>>>>> v3.18

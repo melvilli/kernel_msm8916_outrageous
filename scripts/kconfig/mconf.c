@@ -26,7 +26,11 @@ static const char mconf_readme[] = N_(
 "Overview\n"
 "--------\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "This interface let you select features and parameters for the build.\n"
+=======
+"This interface lets you select features and parameters for the build.\n"
+>>>>>>> v3.18
 =======
 "This interface lets you select features and parameters for the build.\n"
 >>>>>>> v3.18
@@ -44,8 +48,13 @@ static const char mconf_readme[] = N_(
 "To change any of these features, highlight it with the cursor\n"
 "keys and press <Y> to build it in, <M> to make it a module or\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "<N> to removed it.  You may also press the <Space Bar> to cycle\n"
 "through the available options (ie. Y->N->M->Y).\n"
+=======
+"<N> to remove it.  You may also press the <Space Bar> to cycle\n"
+"through the available options (i.e. Y->N->M->Y).\n"
+>>>>>>> v3.18
 =======
 "<N> to remove it.  You may also press the <Space Bar> to cycle\n"
 "through the available options (i.e. Y->N->M->Y).\n"
@@ -56,9 +65,15 @@ static const char mconf_readme[] = N_(
 "Menus\n"
 "----------\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "o  Use the Up/Down arrow keys (cursor keys) to highlight the item\n"
 "   you wish to change or submenu wish to select and press <Enter>.\n"
 "   Submenus are designated by \"--->\".\n"
+=======
+"o  Use the Up/Down arrow keys (cursor keys) to highlight the item you\n"
+"   wish to change or the submenu you wish to select and press <Enter>.\n"
+"   Submenus are designated by \"--->\", empty ones by \"----\".\n"
+>>>>>>> v3.18
 =======
 "o  Use the Up/Down arrow keys (cursor keys) to highlight the item you\n"
 "   wish to change or the submenu you wish to select and press <Enter>.\n"
@@ -81,7 +96,11 @@ static const char mconf_readme[] = N_(
 "\n"
 "   Also, the <TAB> and cursor keys will cycle between <Select>,\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "   <Exit> and <Help>.\n"
+=======
+"   <Exit>, <Help>, <Save>, and <Load>.\n"
+>>>>>>> v3.18
 =======
 "   <Exit>, <Help>, <Save>, and <Load>.\n"
 >>>>>>> v3.18
@@ -125,7 +144,11 @@ static const char mconf_readme[] = N_(
 "--------\n"
 "o  Use the cursor keys to scroll up/down/left/right.  The VI editor\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "   keys h,j,k,l function here as do <u>, <d>, <SPACE BAR> and <B> for \n"
+=======
+"   keys h,j,k,l function here as do <u>, <d>, <SPACE BAR> and <B> for\n"
+>>>>>>> v3.18
 =======
 "   keys h,j,k,l function here as do <u>, <d>, <SPACE BAR> and <B> for\n"
 >>>>>>> v3.18
@@ -140,6 +163,7 @@ static const char mconf_readme[] = N_(
 "those who, for various reasons, find it necessary to switch\n"
 "between different configurations.\n"
 "\n"
+<<<<<<< HEAD
 <<<<<<< HEAD
 "At the end of the main menu you will find two options.  One is\n"
 "for saving the current configuration to a file of your choosing.\n"
@@ -159,6 +183,8 @@ static const char mconf_readme[] = N_(
 "Otherwise, Menuconfig will look rather bad.  Menuconfig will not\n"
 "display correctly in a RXVT window because rxvt displays only one\n"
 =======
+=======
+>>>>>>> v3.18
 "The <Save> button will let you save the current configuration to\n"
 "a file of your choosing.  Use the <Load> button to load a previously\n"
 "saved alternate configuration.\n"
@@ -174,6 +200,9 @@ static const char mconf_readme[] = N_(
 "$TERM variable set to point to an xterm definition which supports\n"
 "color.  Otherwise, Menuconfig will look rather bad.  Menuconfig will\n"
 "not display correctly in an RXVT window because rxvt displays only one\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 "intensity of color, bright.\n"
 "\n"
@@ -190,8 +219,13 @@ static const char mconf_readme[] = N_(
 "Optional personality available\n"
 "------------------------------\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "If you prefer to have all of the options listed in a single menu, rather\n"
 "than the default multimenu hierarchy, run the menuconfig with\n"
+=======
+"If you prefer to have all of the options listed in a single menu,\n"
+"rather than the default multimenu hierarchy, run the menuconfig with\n"
+>>>>>>> v3.18
 =======
 "If you prefer to have all of the options listed in a single menu,\n"
 "rather than the default multimenu hierarchy, run the menuconfig with\n"
@@ -219,17 +253,23 @@ static const char mconf_readme[] = N_(
 " blackbg    => selects a color scheme with black background\n"
 " classic    => theme with blue background. The classic look\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 " bluetitle  => a LCD friendly version of classic. (default)\n"
 "\n"),
 menu_instructions[] = N_(
 	"Arrow keys navigate the menu.  "
 	"<Enter> selects submenus --->.  "
 =======
+=======
+>>>>>>> v3.18
 " bluetitle  => an LCD friendly version of classic. (default)\n"
 "\n"),
 menu_instructions[] = N_(
 	"Arrow keys navigate the menu.  "
 	"<Enter> selects submenus ---> (or empty submenus ----).  "
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"Highlighted letters are hotkeys.  "
 	"Pressing <Y> includes, <N> excludes, <M> modularizes features.  "
@@ -293,8 +333,11 @@ search_help[] = N_(
 	"Type  : tristate\n"
 	"Prompt: Foo bus is used to drive the bar HW\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"  Defined at drivers/pci/Kconfig:47\n"
 	"  Depends on: X86_LOCAL_APIC && X86_IO_APIC || IA64\n"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	"  Location:\n"
@@ -302,13 +345,19 @@ search_help[] = N_(
 	"      -> PCI support (PCI [=y])\n"
 	"(1)     -> PCI access mode (<choice> [=y])\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"  Selects: LIBCRC32\n"
 	"  Selected by: BAR\n"
 =======
+=======
+>>>>>>> v3.18
 	"  Defined at drivers/pci/Kconfig:47\n"
 	"  Depends on: X86_LOCAL_APIC && X86_IO_APIC || IA64\n"
 	"  Selects: LIBCRC32\n"
 	"  Selected by: BAR [=n]\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"-----------------------------------------------------------------\n"
 	"o The line 'Type:' shows the type of the configuration option for\n"
@@ -316,17 +365,23 @@ search_help[] = N_(
 	"o The line 'Prompt:' shows the text used in the menu structure for\n"
 	"  this symbol\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"o The 'Defined at' line tell at what file / line number the symbol\n"
 	"  is defined\n"
 	"o The 'Depends on:' line tell what symbols needs to be defined for\n"
 	"  this symbol to be visible in the menu (selectable)\n"
 	"o The 'Location:' lines tell where in the menu structure this symbol\n"
 =======
+=======
+>>>>>>> v3.18
 	"o The 'Defined at' line tells at what file / line number the symbol\n"
 	"  is defined\n"
 	"o The 'Depends on:' line tells what symbols need to be defined for\n"
 	"  this symbol to be visible in the menu (selectable)\n"
 	"o The 'Location:' lines tells where in the menu structure this symbol\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"  is located\n"
 	"    A location followed by a [=y] indicates that this is a\n"
@@ -336,9 +391,15 @@ search_help[] = N_(
 	"    location. You will be returned to the current search results\n"
 	"    after exiting this new menu.\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"o The 'Selects:' line tell what symbol will be automatically\n"
 	"  selected if this symbol is selected (y or m)\n"
 	"o The 'Selected by' line tell what symbol has selected this symbol\n"
+=======
+	"o The 'Selects:' line tells what symbols will be automatically\n"
+	"  selected if this symbol is selected (y or m)\n"
+	"o The 'Selected by' line tells what symbol has selected this symbol\n"
+>>>>>>> v3.18
 =======
 	"o The 'Selects:' line tells what symbols will be automatically\n"
 	"  selected if this symbol is selected (y or m)\n"
@@ -380,7 +441,11 @@ static void set_config_filename(const char *config_filename)
 
 	size = snprintf(menu_backtitle, sizeof(menu_backtitle),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                "%s - %s", config_filename, rootmenu.prompt->text);
+=======
+			"%s - %s", config_filename, rootmenu.prompt->text);
+>>>>>>> v3.18
 =======
 			"%s - %s", config_filename, rootmenu.prompt->text);
 >>>>>>> v3.18
@@ -484,8 +549,13 @@ static void search_conf(void)
 
 	title = str_new();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	str_printf( &title, _("Enter %s (sub)string to search for "
 			      "(with or without \"%s\")"), CONFIG_, CONFIG_);
+=======
+	str_printf( &title, _("Enter (sub)string or regexp to search for "
+			      "(with or without \"%s\")"), CONFIG_);
+>>>>>>> v3.18
 =======
 	str_printf( &title, _("Enter (sub)string or regexp to search for "
 			      "(with or without \"%s\")"), CONFIG_);
@@ -586,8 +656,14 @@ static void build_conf(struct menu *menu)
 						  indent + 1, ' ', prompt);
 				} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 					item_make("   %*c%s  --->", indent + 1, ' ', prompt);
 
+=======
+					item_make("   %*c%s  %s",
+						  indent + 1, ' ', prompt,
+						  menu_is_empty(menu) ? "----" : "--->");
+>>>>>>> v3.18
 =======
 					item_make("   %*c%s  %s",
 						  indent + 1, ' ', prompt,
@@ -724,7 +800,11 @@ static void build_conf(struct menu *menu)
 			  "" : _(" (NEW)"));
 		if (menu->prompt->type == P_MENU) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			item_add_str("  --->");
+=======
+			item_add_str("  %s", menu_is_empty(menu) ? "----" : "--->");
+>>>>>>> v3.18
 =======
 			item_add_str("  %s", menu_is_empty(menu) ? "----" : "--->");
 >>>>>>> v3.18
@@ -924,7 +1004,13 @@ static void conf_choice(struct menu *menu)
 		res = dialog_checklist(prompt ? _(prompt) : _("Main Menu"),
 					_(radiolist_instructions),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 15, 70, 6);
+=======
+					MENUBOX_HEIGTH_MIN,
+					MENUBOX_WIDTH_MIN,
+					CHECKLIST_HEIGTH_MIN);
+>>>>>>> v3.18
 =======
 					MENUBOX_HEIGTH_MIN,
 					MENUBOX_WIDTH_MIN,
@@ -1061,8 +1147,13 @@ static int handle_exit(void)
 	if (conf_get_changed())
 		res = dialog_yesno(NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   _("Do you wish to save your new configuration ?\n"
 				     "<ESC><ESC> to continue."),
+=======
+				   _("Do you wish to save your new configuration?\n"
+				     "(Press <ESC><ESC> to continue kernel configuration.)"),
+>>>>>>> v3.18
 =======
 				   _("Do you wish to save your new configuration?\n"
 				     "(Press <ESC><ESC> to continue kernel configuration.)"),
@@ -1142,6 +1233,9 @@ int main(int ac, char **av)
 	return res;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

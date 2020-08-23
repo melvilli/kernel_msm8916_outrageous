@@ -25,6 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/ethtool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ static inline u32 zmii_mode_mask(int mode, int input)
 int zmii_attach(struct platform_device *ofdev, int input, int *mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -159,7 +167,11 @@ int zmii_attach(struct platform_device *ofdev, int input, int *mode)
 void zmii_get_mdio(struct platform_device *ofdev, int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -176,7 +188,11 @@ void zmii_get_mdio(struct platform_device *ofdev, int input)
 void zmii_put_mdio(struct platform_device *ofdev, int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -189,7 +205,11 @@ void zmii_put_mdio(struct platform_device *ofdev, int input)
 void zmii_set_speed(struct platform_device *ofdev, int input, int speed)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -214,7 +234,11 @@ void zmii_set_speed(struct platform_device *ofdev, int input, int speed)
 void zmii_detach(struct platform_device *ofdev, int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -243,7 +267,11 @@ int zmii_get_regs_len(struct platform_device *ofdev)
 void *zmii_dump_regs(struct platform_device *ofdev, void *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -301,7 +329,11 @@ static int zmii_probe(struct platform_device *ofdev)
 	       "ZMII %s initialized\n", ofdev->dev.of_node->full_name);
 	wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 >>>>>>> v3.18
@@ -317,9 +349,13 @@ static int zmii_probe(struct platform_device *ofdev)
 static int zmii_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zmii_instance *dev = dev_get_drvdata(&ofdev->dev);
 
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+	struct zmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct zmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18

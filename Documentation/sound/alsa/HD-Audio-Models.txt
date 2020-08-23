@@ -22,6 +22,7 @@ ALC267/268
   inv-dmic	Inverted internal mic workaround
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ALC269/270/275/276/280/282
 ======
   laptop-amic	Laptops with analog-mic input
@@ -46,6 +47,8 @@ ALC662/663/272
   asus-mode8	ASUS
   inv-dmic	Inverted internal mic workaround
 =======
+=======
+>>>>>>> v3.18
 ALC269/270/275/276/28x/29x
 ======
   laptop-amic		Laptops with analog-mic input
@@ -70,6 +73,9 @@ ALC66x/67x/892
   asus-mode7		ASUS
   asus-mode8		ASUS
   inv-dmic		Inverted internal mic workaround
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   dell-headset-multi	Headset jack, which can also be used as mic-in
 
@@ -78,7 +84,11 @@ ALC680
   N/A
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ALC882/883/885/888/889
+=======
+ALC88x/898/1150
+>>>>>>> v3.18
 =======
 ALC88x/898/1150
 >>>>>>> v3.18
@@ -87,7 +97,11 @@ ALC88x/898/1150
   acer-aspire-8930g	Acer Aspire 8330G/6935G
   acer-aspire		Acer Aspire others
 <<<<<<< HEAD
+<<<<<<< HEAD
   inv-dmic	Inverted internal mic workaround
+=======
+  inv-dmic		Inverted internal mic workaround
+>>>>>>> v3.18
 =======
   inv-dmic		Inverted internal mic workaround
 >>>>>>> v3.18
@@ -280,6 +294,10 @@ STAC9227/9228/9229/927x
   dell-3stack	Dell Dimension E520
   dell-bios	Fixes with Dell BIOS setup
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  dell-bios-amic Fixes with Dell BIOS setup including analog mic
+>>>>>>> v3.18
 =======
   dell-bios-amic Fixes with Dell BIOS setup including analog mic
 >>>>>>> v3.18
@@ -322,9 +340,12 @@ STAC92HD83*
   hp-led	HP with broken BIOS for mute LED
   hp-inv-led	HP with broken BIOS for inverted mute LED
 <<<<<<< HEAD
+<<<<<<< HEAD
   auto		BIOS setup (default)
 
 =======
+=======
+>>>>>>> v3.18
   hp-mic-led	HP with mic-mute LED
   headset-jack	Dell Latitude with a 4-pin headset jack
   hp-envy-bass	Pin fixup for HP Envy bass speaker (NID 0x0f)
@@ -337,6 +358,9 @@ STAC92HD95
   hp-led	LED support for HP laptops
   hp-bass	Bass HPF setup for HP Spectre 13
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 STAC9872
 ========
@@ -350,13 +374,19 @@ Cirrus Logic CS4206/4207
   auto		BIOS setup (default)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Cirrus Logic CS4208
 ===================
   mba6		MacBook Air 6,1 and 6,2
   gpio0		Enable GPIO 0 amp
   auto		BIOS setup (default)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 VIA VT17xx/VT18xx/VT20xx
 ========================

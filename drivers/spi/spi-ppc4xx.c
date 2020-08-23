@@ -25,7 +25,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -33,6 +36,11 @@
 #include <linux/errno.h>
 #include <linux/wait.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -199,12 +207,15 @@ static int spi_ppc4xx_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bits_per_word != 8) {
 		dev_err(&spi->dev, "invalid bits-per-word (%d)\n",
 				bits_per_word);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!speed || (speed > spi->max_speed_hz)) {
@@ -241,12 +252,15 @@ static int spi_ppc4xx_setup(struct spi_device *spi)
 	struct spi_ppc4xx_cs *cs = spi->controller_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi->bits_per_word != 8) {
 		dev_err(&spi->dev, "invalid bits-per-word (%d)\n",
 			spi->bits_per_word);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!spi->max_speed_hz) {
@@ -421,9 +435,15 @@ static int spi_ppc4xx_of_probe(struct platform_device *op)
 		return -ENOMEM;
 	master->dev.of_node = np;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, master);
 	hw = spi_master_get_devdata(master);
 	hw->master = spi_master_get(master);
+=======
+	platform_set_drvdata(op, master);
+	hw = spi_master_get_devdata(master);
+	hw->master = master;
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, master);
 	hw = spi_master_get_devdata(master);
@@ -486,6 +506,10 @@ static int spi_ppc4xx_of_probe(struct platform_device *op)
 	bbp->master->setup = spi_ppc4xx_setup;
 	bbp->master->cleanup = spi_ppc4xx_cleanup;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bbp->master->bits_per_word_mask = SPI_BPW_MASK(8);
+>>>>>>> v3.18
 =======
 	bbp->master->bits_per_word_mask = SPI_BPW_MASK(8);
 >>>>>>> v3.18
@@ -578,7 +602,10 @@ free_gpios:
 	free_gpios(hw);
 free_master:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_master_put(master);
@@ -590,22 +617,32 @@ free_master:
 static int spi_ppc4xx_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *master = dev_get_drvdata(&op->dev);
 	struct ppc4xx_spi *hw = spi_master_get_devdata(master);
 
 	spi_bitbang_stop(&hw->bitbang);
 	dev_set_drvdata(&op->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_master *master = platform_get_drvdata(op);
 	struct ppc4xx_spi *hw = spi_master_get_devdata(master);
 
 	spi_bitbang_stop(&hw->bitbang);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	release_mem_region(hw->mapbase, hw->mapsize);
 	free_irq(hw->irqnum, hw);
 	iounmap(hw->regs);
 	free_gpios(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spi_master_put(master);
+>>>>>>> v3.18
 =======
 	spi_master_put(master);
 >>>>>>> v3.18

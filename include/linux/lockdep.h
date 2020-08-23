@@ -5,7 +5,11 @@
  *  Copyright (C) 2007 Red Hat, Inc., Peter Zijlstra <pzijlstr@redhat.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * see Documentation/lockdep-design.txt for more details.
+=======
+ * see Documentation/locking/lockdep-design.txt for more details.
+>>>>>>> v3.18
 =======
  * see Documentation/locking/lockdep-design.txt for more details.
 >>>>>>> v3.18
@@ -257,9 +261,15 @@ struct held_lock {
 
 	unsigned int read:2;        /* see lock_acquire() comment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int check:2;       /* see lock_acquire() comment */
 	unsigned int hardirqs_off:1;
 	unsigned int references:11;					/* 32 bits */
+=======
+	unsigned int check:1;       /* see lock_acquire() comment */
+	unsigned int hardirqs_off:1;
+	unsigned int references:12;					/* 32 bits */
+>>>>>>> v3.18
 =======
 	unsigned int check:1;       /* see lock_acquire() comment */
 	unsigned int hardirqs_off:1;
@@ -276,7 +286,11 @@ extern void lockdep_reset(void);
 extern void lockdep_reset_lock(struct lockdep_map *lock);
 extern void lockdep_free_key_range(void *start, unsigned long size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void lockdep_sys_exit(void);
+=======
+extern asmlinkage void lockdep_sys_exit(void);
+>>>>>>> v3.18
 =======
 extern asmlinkage void lockdep_sys_exit(void);
 >>>>>>> v3.18
@@ -318,7 +332,11 @@ extern void lockdep_init_map(struct lockdep_map *lock, const char *name,
 
 #define lockdep_set_novalidate_class(lock) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockdep_set_class(lock, &__lockdep_no_validate__)
+=======
+	lockdep_set_class_and_name(lock, &__lockdep_no_validate__, #lock)
+>>>>>>> v3.18
 =======
 	lockdep_set_class_and_name(lock, &__lockdep_no_validate__, #lock)
 >>>>>>> v3.18
@@ -345,9 +363,14 @@ static inline int lockdep_match_key(struct lockdep_map *lock,
  * Values for check:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   0: disabled
  *   1: simple checks (freeing, held-at-exit-time, etc.)
  *   2: full validation
+=======
+ *   0: simple checks (freeing, held-at-exit-time, etc.)
+ *   1: full validation
+>>>>>>> v3.18
 =======
  *   0: simple checks (freeing, held-at-exit-time, etc.)
  *   1: full validation
@@ -387,10 +410,13 @@ extern void lockdep_trace_alloc(gfp_t mask);
 	} while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define lockdep_recursing(tsk)	((tsk)->lockdep_recursion)
 
 #else /* !LOCKDEP */
 =======
+=======
+>>>>>>> v3.18
 #define lockdep_assert_held_once(l)	do {				\
 		WARN_ON_ONCE(debug_locks && !lockdep_is_held(l));	\
 	} while (0)
@@ -398,6 +424,9 @@ extern void lockdep_trace_alloc(gfp_t mask);
 #define lockdep_recursing(tsk)	((tsk)->lockdep_recursion)
 
 #else /* !CONFIG_LOCKDEP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void lockdep_off(void)
@@ -447,6 +476,10 @@ struct lock_class_key { };
 
 #define lockdep_assert_held(l)			do { (void)(l); } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define lockdep_assert_held_once(l)		do { (void)(l); } while (0)
+>>>>>>> v3.18
 =======
 #define lockdep_assert_held_once(l)		do { (void)(l); } while (0)
 >>>>>>> v3.18
@@ -516,6 +549,7 @@ static inline void print_irqtrace_events(struct task_struct *curr)
  * on the per lock-class debug mode:
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 # ifdef CONFIG_PROVE_LOCKING
@@ -594,6 +628,8 @@ static inline void print_irqtrace_events(struct task_struct *curr)
 # define lock_map_release(l)			do { } while (0)
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define lock_acquire_exclusive(l, s, t, n, i)		lock_acquire(l, s, t, 0, 1, n, i)
 #define lock_acquire_shared(l, s, t, n, i)		lock_acquire(l, s, t, 1, 1, n, i)
 #define lock_acquire_shared_recursive(l, s, t, n, i)	lock_acquire(l, s, t, 2, 1, n, i)
@@ -623,6 +659,9 @@ static inline void print_irqtrace_events(struct task_struct *curr)
 #define lock_map_acquire_read(l)		lock_acquire_shared_recursive(l, 0, 0, NULL, _THIS_IP_)
 #define lock_map_acquire_tryread(l)		lock_acquire_shared_recursive(l, 0, 1, NULL, _THIS_IP_)
 #define lock_map_release(l)			lock_release(l, 1, _THIS_IP_)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PROVE_LOCKING
@@ -630,7 +669,11 @@ static inline void print_irqtrace_events(struct task_struct *curr)
 do {									\
 	typecheck(struct lockdep_map *, &(lock)->dep_map);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_acquire(&(lock)->dep_map, 0, 0, 0, 2, NULL, _THIS_IP_);	\
+=======
+	lock_acquire(&(lock)->dep_map, 0, 0, 0, 1, NULL, _THIS_IP_);	\
+>>>>>>> v3.18
 =======
 	lock_acquire(&(lock)->dep_map, 0, 0, 0, 1, NULL, _THIS_IP_);	\
 >>>>>>> v3.18
@@ -640,7 +683,11 @@ do {									\
 do {									\
 	typecheck(struct lockdep_map *, &(lock)->dep_map);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_acquire(&(lock)->dep_map, 0, 0, 1, 2, NULL, _THIS_IP_);	\
+=======
+	lock_acquire(&(lock)->dep_map, 0, 0, 1, 1, NULL, _THIS_IP_);	\
+>>>>>>> v3.18
 =======
 	lock_acquire(&(lock)->dep_map, 0, 0, 1, 1, NULL, _THIS_IP_);	\
 >>>>>>> v3.18

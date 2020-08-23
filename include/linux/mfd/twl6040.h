@@ -29,6 +29,10 @@
 #include <linux/mfd/core.h>
 #include <linux/regulator/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -130,9 +134,12 @@
 #define TWL6040_HSDACENA		(1 << 0)
 #define TWL6040_HSDACMODE		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TWL6040_HSDRVMODE		(1 << 3)
 
 =======
+=======
+>>>>>>> v3.18
 #define TWL6040_HSDRVENA		(1 << 2)
 #define TWL6040_HSDRVMODE		(1 << 3)
 
@@ -142,6 +149,9 @@
 #define TWL6040_HFPGAENA		(1 << 1)
 #define TWL6040_HFDRVENA		(1 << 4)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* VIBCTLL/R (0x18/0x1A) fields */
 
@@ -167,6 +177,10 @@
 #define TWL6040_RESETSPLIT		0x04
 #define TWL6040_INTCLRMODE		0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TWL6040_I2CMODE(x)		((x & 0x3) << 4)
+>>>>>>> v3.18
 =======
 #define TWL6040_I2CMODE(x)		((x & 0x3) << 4)
 >>>>>>> v3.18
@@ -199,6 +213,10 @@
 #define TWL6040_GPO_MAX	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* TODO: All platform data struct can be removed */
+>>>>>>> v3.18
 =======
 /* TODO: All platform data struct can be removed */
 >>>>>>> v3.18
@@ -239,6 +257,10 @@ struct twl6040 {
 	struct regmap_irq_chip_data *irq_data;
 	struct regulator_bulk_data supplies[2]; /* supplies for vio, v2v1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk32k;
+>>>>>>> v3.18
 =======
 	struct clk *clk32k;
 >>>>>>> v3.18
@@ -251,7 +273,10 @@ struct twl6040 {
 	int power_count;
 	int rev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 vibra_ctrl_cache[2];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

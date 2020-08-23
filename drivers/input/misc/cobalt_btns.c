@@ -18,7 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input-polldev.h>
@@ -135,7 +138,10 @@ static int cobalt_buttons_probe(struct platform_device *pdev)
 	input_free_polled_device(poll_dev);
 	kfree(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return error;
@@ -151,7 +157,10 @@ static int cobalt_buttons_remove(struct platform_device *pdev)
 	iounmap(bdev->reg);
 	kfree(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

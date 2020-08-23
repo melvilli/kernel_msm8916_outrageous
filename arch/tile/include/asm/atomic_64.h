@@ -33,6 +33,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int atomic_cmpxchg(atomic_t *v, int o, int n)
 {
 	int val;
@@ -52,6 +53,8 @@ static inline int atomic_xchg(atomic_t *v, int n)
 	return val;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void atomic_add(int i, atomic_t *v)
@@ -76,7 +79,11 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 			break;
 		guess = oldval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oldval = atomic_cmpxchg(v, guess, guess + a);
+=======
+		oldval = cmpxchg(&v->counter, guess, guess + a);
+>>>>>>> v3.18
 =======
 		oldval = cmpxchg(&v->counter, guess, guess + a);
 >>>>>>> v3.18
@@ -91,6 +98,7 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 #define atomic64_read(v)		((v)->counter)
 #define atomic64_set(v, i) ((v)->counter = (i))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline long atomic64_cmpxchg(atomic64_t *v, long o, long n)
 {
@@ -111,6 +119,8 @@ static inline long atomic64_xchg(atomic64_t *v, long n)
 	return val;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void atomic64_add(long i, atomic64_t *v)
@@ -135,7 +145,11 @@ static inline long atomic64_add_unless(atomic64_t *v, long a, long u)
 			break;
 		guess = oldval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oldval = atomic64_cmpxchg(v, guess, guess + a);
+=======
+		oldval = cmpxchg(&v->counter, guess, guess + a);
+>>>>>>> v3.18
 =======
 		oldval = cmpxchg(&v->counter, guess, guess + a);
 >>>>>>> v3.18
@@ -158,12 +172,15 @@ static inline long atomic64_add_unless(atomic64_t *v, long a, long u)
 #define atomic64_inc_not_zero(v)	atomic64_add_unless((v), 1, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomic dec and inc don't implement barrier, so provide them if needed. */
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
 #define smp_mb__after_atomic_inc()	smp_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Define this to indicate that cmpxchg is an efficient operation. */

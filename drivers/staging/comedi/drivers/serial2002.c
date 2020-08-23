@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -35,15 +38,21 @@ Status: in development
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #include <linux/delay.h>
 #include <linux/ioport.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include "../comedidev.h"
 
 #include <linux/delay.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/slab.h>
@@ -190,6 +199,10 @@ static int serial2002_tty_read(struct file *f, int timeout)
 			/* Device does not support poll, busy wait */
 			int retries = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -331,6 +344,10 @@ static void serial2002_write(struct file *f, struct serial_data data)
 		unsigned char ch[6];
 		int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -383,7 +400,12 @@ static int serial2002_setup_subdevice(struct comedi_subdevice *s,
 	s->maxdata = 0;
 	kfree(s->maxdata_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	maxdata_list = kmalloc(sizeof(unsigned int) * s->n_chan, GFP_KERNEL);
+=======
+	maxdata_list = kmalloc_array(s->n_chan, sizeof(unsigned int),
+				     GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	maxdata_list = kmalloc_array(s->n_chan, sizeof(unsigned int),
 				     GFP_KERNEL);
@@ -398,9 +420,14 @@ static int serial2002_setup_subdevice(struct comedi_subdevice *s,
 		s->range_table = &range_digital;
 	} else if (range) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		range_table_list =
 			kmalloc(sizeof(struct serial2002_range_table_t) *
 				s->n_chan, GFP_KERNEL);
+=======
+		range_table_list = kmalloc_array(s->n_chan, sizeof(*range),
+						 GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		range_table_list = kmalloc_array(s->n_chan, sizeof(*range),
 						 GFP_KERNEL);
@@ -453,6 +480,7 @@ static int serial2002_setup_subdevs(struct comedi_device *dev)
 	serial2002_tty_setspeed(devpriv->tty, devpriv->speed);
 	serial2002_poll_channel(devpriv->tty, 31);
 	while (1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct serial_data data;
 
@@ -516,6 +544,8 @@ static int serial2002_setup_subdevs(struct comedi_device *dev)
 				break;
 			}
 =======
+=======
+>>>>>>> v3.18
 		struct serial_data data = serial2002_read(devpriv->tty, 1000);
 		int kind = S2002_CFG_KIND(data.value);
 		int channel = S2002_CFG_CHAN(data.value);
@@ -575,6 +605,9 @@ static int serial2002_setup_subdevs(struct comedi_device *dev)
 			else
 				cfg[channel].max = range;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -815,10 +848,16 @@ static int serial2002_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)

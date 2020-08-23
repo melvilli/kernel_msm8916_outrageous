@@ -21,6 +21,10 @@
 #include <linux/fs.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -32,16 +36,22 @@
 #include <linux/spinlock.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/log2.h>
 
 #include <asm/div64.h>
 #include <asm/io.h>
 #include <asm/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <linux/log2.h>
 
 #include <asm/div64.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Yoichi Yuasa <yuasa@linux-mips.org>");
@@ -115,7 +125,11 @@ static inline unsigned long read_elapsed_second(void)
 		second_high = rtc1_read(ETIMEHREG);
 	} while (first_low != second_low || first_mid != second_mid ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	         first_high != second_high);
+=======
+		 first_high != second_high);
+>>>>>>> v3.18
 =======
 		 first_high != second_high);
 >>>>>>> v3.18
@@ -170,7 +184,11 @@ static int vr41xx_rtc_set_time(struct device *dev, struct rtc_time *time)
 	epoch_sec = mktime(epoch, 1, 1, 0, 0, 0);
 	current_sec = mktime(time->tm_year + 1900, time->tm_mon + 1, time->tm_mday,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                     time->tm_hour, time->tm_min, time->tm_sec);
+=======
+			     time->tm_hour, time->tm_min, time->tm_sec);
+>>>>>>> v3.18
 =======
 			     time->tm_hour, time->tm_min, time->tm_sec);
 >>>>>>> v3.18
@@ -206,7 +224,11 @@ static int vr41xx_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *wkalrm)
 
 	alarm_sec = mktime(time->tm_year + 1900, time->tm_mon + 1, time->tm_mday,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                   time->tm_hour, time->tm_min, time->tm_sec);
+=======
+			   time->tm_hour, time->tm_min, time->tm_sec);
+>>>>>>> v3.18
 =======
 			   time->tm_hour, time->tm_min, time->tm_sec);
 >>>>>>> v3.18
@@ -296,6 +318,7 @@ static irqreturn_t rtclong1_interrupt(int irq, void *dev_id)
 
 static const struct rtc_class_ops vr41xx_rtc_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release		= vr41xx_rtc_release,
 	.ioctl			= vr41xx_rtc_ioctl,
 	.read_time		= vr41xx_rtc_read_time,
@@ -304,12 +327,17 @@ static const struct rtc_class_ops vr41xx_rtc_ops = {
 	.set_alarm		= vr41xx_rtc_set_alarm,
 	.alarm_irq_enable	= vr41xx_rtc_alarm_irq_enable,
 =======
+=======
+>>>>>>> v3.18
 	.release	= vr41xx_rtc_release,
 	.ioctl		= vr41xx_rtc_ioctl,
 	.read_time	= vr41xx_rtc_read_time,
 	.set_time	= vr41xx_rtc_set_time,
 	.read_alarm	= vr41xx_rtc_read_alarm,
 	.set_alarm	= vr41xx_rtc_set_alarm,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -327,7 +355,11 @@ static int rtc_probe(struct platform_device *pdev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc1_base = ioremap(res->start, resource_size(res));
+=======
+	rtc1_base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
+>>>>>>> v3.18
 =======
 	rtc1_base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 >>>>>>> v3.18
@@ -341,7 +373,11 @@ static int rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc2_base = ioremap(res->start, resource_size(res));
+=======
+	rtc2_base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
+>>>>>>> v3.18
 =======
 	rtc2_base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 >>>>>>> v3.18
@@ -351,7 +387,12 @@ static int rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc = rtc_device_register(rtc_name, &pdev->dev, &vr41xx_rtc_ops, THIS_MODULE);
+=======
+	rtc = devm_rtc_device_register(&pdev->dev, rtc_name, &vr41xx_rtc_ops,
+					THIS_MODULE);
+>>>>>>> v3.18
 =======
 	rtc = devm_rtc_device_register(&pdev->dev, rtc_name, &vr41xx_rtc_ops,
 					THIS_MODULE);
@@ -377,6 +418,7 @@ static int rtc_probe(struct platform_device *pdev)
 	if (aie_irq <= 0) {
 		retval = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_device_unregister;
 	}
 
@@ -394,6 +436,8 @@ static int rtc_probe(struct platform_device *pdev)
 	if (retval < 0)
 		goto err_free_irq;
 =======
+=======
+>>>>>>> v3.18
 		goto err_iounmap_all;
 	}
 
@@ -412,6 +456,9 @@ static int rtc_probe(struct platform_device *pdev)
 				"rtclong1", pdev);
 	if (retval < 0)
 		goto err_iounmap_all;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, rtc);
@@ -423,6 +470,7 @@ static int rtc_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_free_irq:
 	free_irq(aie_irq, pdev);
@@ -442,11 +490,18 @@ err_iounmap_all:
 
 err_rtc1_iounmap:
 >>>>>>> v3.18
+=======
+err_iounmap_all:
+	rtc2_base = NULL;
+
+err_rtc1_iounmap:
+>>>>>>> v3.18
 	rtc1_base = NULL;
 
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int rtc_remove(struct platform_device *pdev)
 {
@@ -470,13 +525,18 @@ static int rtc_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* work with hotplug and coldplug */
 MODULE_ALIAS("platform:RTC");
 
 static struct platform_driver rtc_platform_driver = {
 	.probe		= rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

@@ -29,6 +29,7 @@
 #define _PCI_HOTPLUG_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These values come from the PCI Express Spec */
 enum pcie_link_width {
 	PCIE_LNK_WIDTH_RESRV	= 0x00,
@@ -44,6 +45,8 @@ enum pcie_link_width {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * struct hotplug_slot_ops -the callbacks that the hotplug pci core can use
  * @owner: The module owner of this structure
@@ -56,8 +59,13 @@ enum pcie_link_width {
  * slot.
  * @get_power_status: Called to get the current power status of a slot.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	If this field is NULL, the value passed in the struct hotplug_slot_info
  * 	will be used when this value is requested by a user.
+=======
+ *	If this field is NULL, the value passed in the struct hotplug_slot_info
+ *	will be used when this value is requested by a user.
+>>>>>>> v3.18
 =======
  *	If this field is NULL, the value passed in the struct hotplug_slot_info
  *	will be used when this value is requested by a user.
@@ -72,6 +80,12 @@ enum pcie_link_width {
  *	If this field is NULL, the value passed in the struct hotplug_slot_info
  *	will be used when this value is requested by a user.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @reset_slot: Optional interface to allow override of a bus reset for the
+ *	slot for cases where a secondary bus reset can result in spurious
+ *	hotplug events or where a slot can be reset independent of the bus.
+>>>>>>> v3.18
 =======
  * @reset_slot: Optional interface to allow override of a bus reset for the
  *	slot for cases where a secondary bus reset can result in spurious
@@ -95,6 +109,10 @@ struct hotplug_slot_ops {
 	int (*get_latch_status)		(struct hotplug_slot *slot, u8 *value);
 	int (*get_adapter_status)	(struct hotplug_slot *slot, u8 *value);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*reset_slot)		(struct hotplug_slot *slot, int probe);
+>>>>>>> v3.18
 =======
 	int (*reset_slot)		(struct hotplug_slot *slot, int probe);
 >>>>>>> v3.18
@@ -203,8 +221,12 @@ struct hotplug_params {
 
 #ifdef CONFIG_ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -220,10 +242,14 @@ static inline int pci_get_hp_params(struct pci_dev *dev,
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void pci_configure_slot(struct pci_dev *dev);
 #endif
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_acl.h"
 #include "xfs_attr.h"
 #include "xfs_bmap_btree.h"
@@ -25,6 +26,8 @@
 #include "xfs_sb.h"
 #include "xfs_mount.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -34,6 +37,9 @@
 #include "xfs_inode.h"
 #include "xfs_acl.h"
 #include "xfs_attr.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_trace.h"
 #include <linux/slab.h>
@@ -81,13 +87,19 @@ xfs_acl_from_disk(
 		switch (acl_e->e_tag) {
 		case ACL_USER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case ACL_GROUP:
 			acl_e->e_id = be32_to_cpu(ace->ae_id);
 =======
+=======
+>>>>>>> v3.18
 			acl_e->e_uid = xfs_uid_to_kuid(be32_to_cpu(ace->ae_id));
 			break;
 		case ACL_GROUP:
 			acl_e->e_gid = xfs_gid_to_kgid(be32_to_cpu(ace->ae_id));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case ACL_USER_OBJ:
@@ -95,7 +107,10 @@ xfs_acl_from_disk(
 		case ACL_MASK:
 		case ACL_OTHER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acl_e->e_id = ACL_UNDEFINED_ID;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break;
@@ -124,8 +139,11 @@ xfs_acl_to_disk(struct xfs_acl *aclp, const struct posix_acl *acl)
 
 		ace->ae_tag = cpu_to_be32(acl_e->e_tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ace->ae_id = cpu_to_be32(acl_e->e_id);
 =======
+=======
+>>>>>>> v3.18
 		switch (acl_e->e_tag) {
 		case ACL_USER:
 			ace->ae_id = cpu_to_be32(xfs_kuid_to_uid(acl_e->e_uid));
@@ -138,6 +156,9 @@ xfs_acl_to_disk(struct xfs_acl *aclp, const struct posix_acl *acl)
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ace->ae_perm = cpu_to_be16(acl_e->e_perm);
 	}
@@ -148,7 +169,11 @@ xfs_get_acl(struct inode *inode, int type)
 {
 	struct xfs_inode *ip = XFS_I(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct posix_acl *acl;
+=======
+	struct posix_acl *acl = NULL;
+>>>>>>> v3.18
 =======
 	struct posix_acl *acl = NULL;
 >>>>>>> v3.18
@@ -158,10 +183,13 @@ xfs_get_acl(struct inode *inode, int type)
 	int len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acl = get_cached_acl(inode, type);
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	trace_xfs_get_acl(ip);
@@ -183,17 +211,23 @@ xfs_get_acl(struct inode *inode, int type)
 	 */
 	len = XFS_ACL_MAX_SIZE(ip->i_mount);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_acl = kzalloc(len, GFP_KERNEL);
 	if (!xfs_acl)
 		return ERR_PTR(-ENOMEM);
 
 	error = -xfs_attr_get(ip, ea_name, (unsigned char *)xfs_acl,
 =======
+=======
+>>>>>>> v3.18
 	xfs_acl = kmem_zalloc_large(len, KM_SLEEP);
 	if (!xfs_acl)
 		return ERR_PTR(-ENOMEM);
 
 	error = xfs_attr_get(ip, ea_name, (unsigned char *)xfs_acl,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							&len, ATTR_ROOT);
 	if (error) {
@@ -203,10 +237,15 @@ xfs_get_acl(struct inode *inode, int type)
 		 * leave the cache entry as ACL_NOT_CACHED.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (error == -ENOATTR) {
 			acl = NULL;
 			goto out_update_cache;
 		}
+=======
+		if (error == -ENOATTR)
+			goto out_update_cache;
+>>>>>>> v3.18
 =======
 		if (error == -ENOATTR)
 			goto out_update_cache;
@@ -219,22 +258,32 @@ xfs_get_acl(struct inode *inode, int type)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  out_update_cache:
 	set_cached_acl(inode, type, acl);
  out:
 	kfree(xfs_acl);
 =======
+=======
+>>>>>>> v3.18
 out_update_cache:
 	set_cached_acl(inode, type, acl);
 out:
 	kmem_free(xfs_acl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return acl;
 }
 
 STATIC int
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs_set_acl(struct inode *inode, int type, struct posix_acl *acl)
+=======
+__xfs_set_acl(struct inode *inode, int type, struct posix_acl *acl)
+>>>>>>> v3.18
 =======
 __xfs_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 >>>>>>> v3.18
@@ -244,9 +293,12 @@ __xfs_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (S_ISLNK(inode->i_mode))
 		return -EOPNOTSUPP;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -267,7 +319,11 @@ __xfs_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 		int len = XFS_ACL_MAX_SIZE(ip->i_mount);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xfs_acl = kzalloc(len, GFP_KERNEL);
+=======
+		xfs_acl = kmem_zalloc_large(len, KM_SLEEP);
+>>>>>>> v3.18
 =======
 		xfs_acl = kmem_zalloc_large(len, KM_SLEEP);
 >>>>>>> v3.18
@@ -281,22 +337,32 @@ __xfs_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 			 (XFS_ACL_MAX_ENTRIES(ip->i_mount) - acl->a_count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -xfs_attr_set(ip, ea_name, (unsigned char *)xfs_acl,
 				len, ATTR_ROOT);
 
 		kfree(xfs_acl);
 =======
+=======
+>>>>>>> v3.18
 		error = xfs_attr_set(ip, ea_name, (unsigned char *)xfs_acl,
 				len, ATTR_ROOT);
 
 		kmem_free(xfs_acl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/*
 		 * A NULL ACL argument means we want to remove the ACL.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -xfs_attr_remove(ip, ea_name, ATTR_ROOT);
+=======
+		error = xfs_attr_remove(ip, ea_name, ATTR_ROOT);
+>>>>>>> v3.18
 =======
 		error = xfs_attr_remove(ip, ea_name, ATTR_ROOT);
 >>>>>>> v3.18
@@ -326,7 +392,11 @@ xfs_set_mode(struct inode *inode, umode_t mode)
 		iattr.ia_ctime = current_fs_time(inode->i_sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -xfs_setattr_nonsize(XFS_I(inode), &iattr, XFS_ATTR_NOACL);
+=======
+		error = xfs_setattr_nonsize(XFS_I(inode), &iattr, XFS_ATTR_NOACL);
+>>>>>>> v3.18
 =======
 		error = xfs_setattr_nonsize(XFS_I(inode), &iattr, XFS_ATTR_NOACL);
 >>>>>>> v3.18
@@ -358,6 +428,7 @@ posix_acl_default_exists(struct inode *inode)
 	return xfs_acl_exists(inode, SGI_ACL_DEFAULT);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * No need for i_mutex because the inode is not yet exposed to the VFS.
@@ -515,6 +586,8 @@ const struct xattr_handler xfs_xattr_acl_default_handler = {
 	.set	= xfs_xattr_acl_set,
 };
 =======
+=======
+>>>>>>> v3.18
 int
 xfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
@@ -546,4 +619,7 @@ xfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
  set_acl:
 	return __xfs_set_acl(inode, type, acl);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

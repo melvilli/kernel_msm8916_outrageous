@@ -2,6 +2,10 @@
 #define _UAPI__LINUX_NETLINK_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -31,7 +35,11 @@
 #define NETLINK_RDMA		20
 #define NETLINK_CRYPTO		21	/* Crypto layer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NETLINK_SOCKEV		22	/* Socket Administrative Events */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

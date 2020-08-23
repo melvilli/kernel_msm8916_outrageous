@@ -7,7 +7,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -16,6 +19,11 @@
 #include <linux/slab.h>
 #include <linux/pm_clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+#include <linux/pm_domain.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <linux/pm_domain.h>
@@ -92,7 +100,10 @@ int dev_pm_put_subsys_data(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(dev_pm_put_subsys_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * dev_pm_domain_attach - Attach a device to its PM domain.
@@ -143,4 +154,7 @@ void dev_pm_domain_detach(struct device *dev, bool power_off)
 		dev->pm_domain->detach(dev, power_off);
 }
 EXPORT_SYMBOL_GPL(dev_pm_domain_detach);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

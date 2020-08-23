@@ -290,7 +290,11 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 		p->thread.cpu_context.r0 = arg;
 		p->thread.cpu_context.r1 = usp; /* fn */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->thread.cpu_context.r2 = syscall_return;
+=======
+		p->thread.cpu_context.r2 = (unsigned long)syscall_return;
+>>>>>>> v3.18
 =======
 		p->thread.cpu_context.r2 = (unsigned long)syscall_return;
 >>>>>>> v3.18
@@ -346,7 +350,11 @@ unsigned long get_wchan(struct task_struct *p)
 		 * determine the frame size automatically at build
 		 * time by doing this:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 *   - compile sched.c
+=======
+		 *   - compile sched/core.c
+>>>>>>> v3.18
 =======
 		 *   - compile sched/core.c
 >>>>>>> v3.18

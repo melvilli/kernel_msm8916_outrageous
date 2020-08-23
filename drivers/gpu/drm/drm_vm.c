@@ -36,6 +36,10 @@
 #include <drm/drmP.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/seq_file.h>
+>>>>>>> v3.18
 =======
 #include <linux/seq_file.h>
 >>>>>>> v3.18
@@ -44,7 +48,10 @@
 #include <linux/slab.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/pgtable.h>
 #include "drm_legacy.h"
 
@@ -53,11 +60,15 @@ struct drm_vma_entry {
 	struct vm_area_struct *vma;
 	pid_t pid;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void drm_vm_open(struct vm_area_struct *vma);
 static void drm_vm_close(struct vm_area_struct *vma);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static pgprot_t drm_io_prot(uint32_t map_type, struct vm_area_struct *vma)
 {
@@ -73,6 +84,8 @@ static pgprot_t drm_io_prot(uint32_t map_type, struct vm_area_struct *vma)
 	if (map_type == _DRM_REGISTERS)
 		pgprot_val(tmp) |= _PAGE_GUARDED;
 =======
+=======
+>>>>>>> v3.18
 static pgprot_t drm_io_prot(struct drm_local_map *map,
 			    struct vm_area_struct *vma)
 {
@@ -83,6 +96,9 @@ static pgprot_t drm_io_prot(struct drm_local_map *map,
 		tmp = pgprot_noncached(tmp);
 	else
 		tmp = pgprot_writecombine(tmp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #elif defined(__ia64__)
 	if (efi_range_is_wc(vma->vm_start, vma->vm_end -
@@ -129,7 +145,11 @@ static int drm_do_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	 * Find the right map
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!drm_core_has_AGP(dev))
+=======
+	if (!dev->agp)
+>>>>>>> v3.18
 =======
 	if (!dev->agp)
 >>>>>>> v3.18
@@ -252,7 +272,10 @@ static void drm_vm_shm_close(struct vm_area_struct *vma)
 	DRM_DEBUG("0x%08lx,0x%08lx\n",
 		  vma->vm_start, vma->vm_end - vma->vm_start);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&dev->vma_count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -286,6 +309,7 @@ static void drm_vm_shm_close(struct vm_area_struct *vma)
 			case _DRM_REGISTERS:
 			case _DRM_FRAME_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (drm_core_has_MTRR(dev) && map->mtrr >= 0) {
 					int retcode;
 					retcode = mtrr_del(map->mtrr,
@@ -293,6 +317,9 @@ static void drm_vm_shm_close(struct vm_area_struct *vma)
 							   map->size);
 					DRM_DEBUG("mtrr_del = %d\n", retcode);
 				}
+=======
+				arch_phys_wc_del(map->mtrr);
+>>>>>>> v3.18
 =======
 				arch_phys_wc_del(map->mtrr);
 >>>>>>> v3.18
@@ -309,10 +336,14 @@ static void drm_vm_shm_close(struct vm_area_struct *vma)
 				dmah.busaddr = map->offset;
 				dmah.size = map->size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__drm_pci_free(dev, &dmah);
 				break;
 			case _DRM_GEM:
 				DRM_ERROR("tried to rmmap GEM object\n");
+=======
+				__drm_legacy_pci_free(dev, &dmah);
+>>>>>>> v3.18
 =======
 				__drm_legacy_pci_free(dev, &dmah);
 >>>>>>> v3.18
@@ -350,7 +381,11 @@ static int drm_do_vm_dma_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	offset = (unsigned long)vmf->virtual_address - vma->vm_start;	/* vm_[pg]off[set] should be 0 */
 	page_nr = offset >> PAGE_SHIFT; /* page_nr could just be vmf->pgoff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page = virt_to_page((dma->pagelist[page_nr] + (offset & (~PAGE_MASK))));
+=======
+	page = virt_to_page((void *)dma->pagelist[page_nr]);
+>>>>>>> v3.18
 =======
 	page = virt_to_page((void *)dma->pagelist[page_nr]);
 >>>>>>> v3.18
@@ -461,7 +496,10 @@ void drm_vm_open_locked(struct drm_device *dev,
 	DRM_DEBUG("0x%08lx,0x%08lx\n",
 		  vma->vm_start, vma->vm_end - vma->vm_start);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&dev->vma_count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -473,7 +511,10 @@ void drm_vm_open_locked(struct drm_device *dev,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(drm_vm_open_locked);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -495,7 +536,10 @@ void drm_vm_close_locked(struct drm_device *dev,
 	DRM_DEBUG("0x%08lx,0x%08lx\n",
 		  vma->vm_start, vma->vm_end - vma->vm_start);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&dev->vma_count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -600,7 +644,11 @@ static resource_size_t drm_core_get_reg_ofs(struct drm_device *dev)
  * pointer and calls vm_open().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_mmap_locked(struct file *filp, struct vm_area_struct *vma)
+=======
+static int drm_mmap_locked(struct file *filp, struct vm_area_struct *vma)
+>>>>>>> v3.18
 =======
 static int drm_mmap_locked(struct file *filp, struct vm_area_struct *vma)
 >>>>>>> v3.18
@@ -661,7 +709,11 @@ static int drm_mmap_locked(struct file *filp, struct vm_area_struct *vma)
 #if !defined(__arm__)
 	case _DRM_AGP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (drm_core_has_AGP(dev) && dev->agp->cant_use_aperture) {
+=======
+		if (dev->agp && dev->agp->cant_use_aperture) {
+>>>>>>> v3.18
 =======
 		if (dev->agp && dev->agp->cant_use_aperture) {
 >>>>>>> v3.18
@@ -682,8 +734,12 @@ static int drm_mmap_locked(struct file *filp, struct vm_area_struct *vma)
 	case _DRM_REGISTERS:
 		offset = drm_core_get_reg_ofs(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vma->vm_flags |= VM_IO;	/* not in core dump */
 		vma->vm_page_prot = drm_io_prot(map->type, vma);
+=======
+		vma->vm_page_prot = drm_io_prot(map, vma);
+>>>>>>> v3.18
 =======
 		vma->vm_page_prot = drm_io_prot(map, vma);
 >>>>>>> v3.18
@@ -727,7 +783,11 @@ static int drm_mmap_locked(struct file *filp, struct vm_area_struct *vma)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_mmap(struct file *filp, struct vm_area_struct *vma)
+=======
+int drm_legacy_mmap(struct file *filp, struct vm_area_struct *vma)
+>>>>>>> v3.18
 =======
 int drm_legacy_mmap(struct file *filp, struct vm_area_struct *vma)
 >>>>>>> v3.18
@@ -746,8 +806,11 @@ int drm_legacy_mmap(struct file *filp, struct vm_area_struct *vma)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_mmap);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(drm_legacy_mmap);
 
 void drm_legacy_vma_flush(struct drm_device *dev)
@@ -814,4 +877,7 @@ int drm_vma_info(struct seq_file *m, void *data)
 	mutex_unlock(&dev->struct_mutex);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

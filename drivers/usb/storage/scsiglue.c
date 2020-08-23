@@ -242,7 +242,11 @@ static int slave_configure(struct scsi_device *sdev)
 		/* Some USB cardreaders have trouble reading an sdcard's last
 		 * sector in a larger then 1 sector read, since the performance
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * impact is negible we set this flag for all USB disks */
+=======
+		 * impact is negligible we set this flag for all USB disks */
+>>>>>>> v3.18
 =======
 		 * impact is negligible we set this flag for all USB disks */
 >>>>>>> v3.18
@@ -261,10 +265,16 @@ static int slave_configure(struct scsi_device *sdev)
 			sdev->wce_default_on = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (us->sdev_autosuspend_delay >= 0) {
 			sdev->use_rpm_auto = 1;
 			sdev->autosuspend_delay = us->sdev_autosuspend_delay;
 		}
+=======
+		/* A few buggy USB-ATA bridges don't understand FUA */
+		if (us->fflags & US_FL_BROKEN_FUA)
+			sdev->broken_fua = 1;
+>>>>>>> v3.18
 =======
 		/* A few buggy USB-ATA bridges don't understand FUA */
 		if (us->fflags & US_FL_BROKEN_FUA)
@@ -340,7 +350,11 @@ static int queuecommand_lck(struct scsi_cmnd *srb,
 	/* check for state-transition errors */
 	if (us->srb != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR USB_STORAGE "Error in %s: us->srb = %pK\n",
+=======
+		printk(KERN_ERR USB_STORAGE "Error in %s: us->srb = %p\n",
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR USB_STORAGE "Error in %s: us->srb = %p\n",
 >>>>>>> v3.18
@@ -525,7 +539,11 @@ US_DO_ALL_FLAGS
 
 /* Output routine for the sysfs max_sectors file */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_max_sectors(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t max_sectors_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t max_sectors_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -537,7 +555,11 @@ static ssize_t max_sectors_show(struct device *dev, struct device_attribute *att
 
 /* Input routine for the sysfs max_sectors file */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_max_sectors(struct device *dev, struct device_attribute *attr, const char *buf,
+=======
+static ssize_t max_sectors_store(struct device *dev, struct device_attribute *attr, const char *buf,
+>>>>>>> v3.18
 =======
 static ssize_t max_sectors_store(struct device *dev, struct device_attribute *attr, const char *buf,
 >>>>>>> v3.18
@@ -551,6 +573,7 @@ static ssize_t max_sectors_store(struct device *dev, struct device_attribute *at
 		return count;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -EINVAL;	
 }
 
@@ -562,6 +585,8 @@ static struct device_attribute *sysfs_device_attr_list[] = {
 		NULL,
 		};
 =======
+=======
+>>>>>>> v3.18
 	return -EINVAL;
 }
 static DEVICE_ATTR_RW(max_sectors);
@@ -570,6 +595,9 @@ static struct device_attribute *sysfs_device_attr_list[] = {
 	&dev_attr_max_sectors,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

@@ -109,7 +109,11 @@ static inline void cmtp_add_msgpart(struct cmtp_session *session, int id, const 
 	int size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK buf %pK count %d", session, buf, count);
+=======
+	BT_DBG("session %p buf %p count %d", session, buf, count);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p buf %p count %d", session, buf, count);
 >>>>>>> v3.18
@@ -138,7 +142,11 @@ static inline int cmtp_recv_frame(struct cmtp_session *session, struct sk_buff *
 	__u16 len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK skb %pK len %d", session, skb, skb->len);
+=======
+	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
 >>>>>>> v3.18
@@ -205,7 +213,11 @@ static int cmtp_send_frame(struct cmtp_session *session, unsigned char *data, in
 	struct msghdr msg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK data %pK len %d", session, data, len);
+=======
+	BT_DBG("session %p data %p len %d", session, data, len);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p data %p len %d", session, data, len);
 >>>>>>> v3.18
@@ -225,7 +237,11 @@ static void cmtp_process_transmit(struct cmtp_session *session)
 	unsigned int size, tail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK", session);
+=======
+	BT_DBG("session %p", session);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p", session);
 >>>>>>> v3.18
@@ -299,7 +315,11 @@ static int cmtp_session(void *arg)
 	wait_queue_t wait;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("session %pK", session);
+=======
+	BT_DBG("session %p", session);
+>>>>>>> v3.18
 =======
 	BT_DBG("session %p", session);
 >>>>>>> v3.18
@@ -355,9 +375,12 @@ int cmtp_add_connection(struct cmtp_connadd_req *req, struct socket *sock)
 	BT_DBG("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!l2cap_is_socket(sock))
 		return -EBADFD;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	session = kzalloc(sizeof(struct cmtp_session), GFP_KERNEL);
@@ -367,7 +390,11 @@ int cmtp_add_connection(struct cmtp_connadd_req *req, struct socket *sock)
 	down_write(&cmtp_session_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s = __cmtp_get_session(&bt_sk(sock->sk)->dst);
+=======
+	s = __cmtp_get_session(&l2cap_pi(sock->sk)->chan->dst);
+>>>>>>> v3.18
 =======
 	s = __cmtp_get_session(&l2cap_pi(sock->sk)->chan->dst);
 >>>>>>> v3.18
@@ -377,7 +404,11 @@ int cmtp_add_connection(struct cmtp_connadd_req *req, struct socket *sock)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bacpy(&session->bdaddr, &bt_sk(sock->sk)->dst);
+=======
+	bacpy(&session->bdaddr, &l2cap_pi(sock->sk)->chan->dst);
+>>>>>>> v3.18
 =======
 	bacpy(&session->bdaddr, &l2cap_pi(sock->sk)->chan->dst);
 >>>>>>> v3.18
@@ -388,7 +419,11 @@ int cmtp_add_connection(struct cmtp_connadd_req *req, struct socket *sock)
 	BT_DBG("mtu %d", session->mtu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(session->name, "%pMR", &bt_sk(sock->sk)->dst);
+=======
+	sprintf(session->name, "%pMR", &session->bdaddr);
+>>>>>>> v3.18
 =======
 	sprintf(session->name, "%pMR", &session->bdaddr);
 >>>>>>> v3.18

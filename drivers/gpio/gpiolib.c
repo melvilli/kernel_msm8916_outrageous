@@ -13,17 +13,24 @@
 #include <linux/idr.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/gpio/driver.h>
 #include <linux/gpio/machine.h>
 
 #include "gpiolib.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/gpio.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Optional implementation infrastructure for GPIO interfaces.
  *
@@ -1429,6 +1436,151 @@ EXPORT_SYMBOL_GPL(gpiochip_find);
 
 #ifdef CONFIG_PINCTRL
 =======
+=======
+/* Implementation infrastructure for GPIO interfaces.
+ *
+ * The GPIO programming interface allows for inlining speed-critical
+ * get/set operations for common cases, so that access to SOC-integrated
+ * GPIOs can sometimes cost only an instruction or two per bit.
+ */
+
+
+/* When debugging, extend minimal trust to callers and platform code.
+ * Also emit diagnostic messages that may help initial bringup, when
+ * board setup or driver bugs are most common.
+ *
+ * Otherwise, minimize overhead in what may be bitbanging codepaths.
+ */
+#ifdef	DEBUG
+#define	extra_checks	1
+#else
+#define	extra_checks	0
+#endif
+
+/* gpio_lock prevents conflicts during gpio_desc[] table updates.
+ * While any GPIO is requested, its gpio_chip is not removable;
+ * each GPIO's "requested" flag serves as a lock and refcount.
+ */
+DEFINE_SPINLOCK(gpio_lock);
+
+static struct gpio_desc gpio_desc[ARCH_NR_GPIOS];
+
+#define GPIO_OFFSET_VALID(chip, offset) (offset >= 0 && offset < chip->ngpio)
+
+static DEFINE_MUTEX(gpio_lookup_lock);
+static LIST_HEAD(gpio_lookup_list);
+LIST_HEAD(gpio_chips);
+
+static inline void desc_set_label(struct gpio_desc *d, const char *label)
+{
+	d->label = label;
+}
+
+/**
+ * Convert a GPIO number to its descriptor
+ */
+struct gpio_desc *gpio_to_desc(unsigned gpio)
+{
+	if (WARN(!gpio_is_valid(gpio), "invalid GPIO %d\n", gpio))
+		return NULL;
+	else
+		return &gpio_desc[gpio];
+}
+EXPORT_SYMBOL_GPL(gpio_to_desc);
+
+/**
+ * Get the GPIO descriptor corresponding to the given hw number for this chip.
+ */
+struct gpio_desc *gpiochip_get_desc(struct gpio_chip *chip,
+				    u16 hwnum)
+{
+	if (hwnum >= chip->ngpio)
+		return ERR_PTR(-EINVAL);
+
+	return &chip->desc[hwnum];
+}
+
+/**
+ * Convert a GPIO descriptor to the integer namespace.
+ * This should disappear in the future but is needed since we still
+ * use GPIO numbers for error messages and sysfs nodes
+ */
+int desc_to_gpio(const struct gpio_desc *desc)
+{
+	return desc - &gpio_desc[0];
+}
+EXPORT_SYMBOL_GPL(desc_to_gpio);
+
+
+/**
+ * gpiod_to_chip - Return the GPIO chip to which a GPIO descriptor belongs
+ * @desc:	descriptor to return the chip of
+ */
+struct gpio_chip *gpiod_to_chip(const struct gpio_desc *desc)
+{
+	return desc ? desc->chip : NULL;
+}
+EXPORT_SYMBOL_GPL(gpiod_to_chip);
+
+/* dynamic allocation of GPIOs, e.g. on a hotplugged device */
+static int gpiochip_find_base(int ngpio)
+{
+	struct gpio_chip *chip;
+	int base = ARCH_NR_GPIOS - ngpio;
+
+	list_for_each_entry_reverse(chip, &gpio_chips, list) {
+		/* found a free space? */
+		if (chip->base + chip->ngpio <= base)
+			break;
+		else
+			/* nope, check the space right before the chip */
+			base = chip->base - ngpio;
+	}
+
+	if (gpio_is_valid(base)) {
+		pr_debug("%s: found new base at %d\n", __func__, base);
+		return base;
+	} else {
+		pr_err("%s: cannot find free range\n", __func__);
+		return -ENOSPC;
+	}
+}
+
+/**
+ * gpiod_get_direction - return the current direction of a GPIO
+ * @desc:	GPIO to get the direction of
+ *
+ * Return GPIOF_DIR_IN or GPIOF_DIR_OUT, or an error code in case of error.
+ *
+ * This function may sleep if gpiod_cansleep() is true.
+ */
+int gpiod_get_direction(const struct gpio_desc *desc)
+{
+	struct gpio_chip	*chip;
+	unsigned		offset;
+	int			status = -EINVAL;
+
+	chip = gpiod_to_chip(desc);
+	offset = gpio_chip_hwgpio(desc);
+
+	if (!chip->get_direction)
+		return status;
+
+	status = chip->get_direction(chip, offset);
+	if (status > 0) {
+		/* GPIOF_DIR_IN, or other positive */
+		status = 1;
+		/* FLAG_IS_OUT is just a cache of the result of get_direction(),
+		 * so it does not affect constness per se */
+		clear_bit(FLAG_IS_OUT, &((struct gpio_desc *)desc)->flags);
+	}
+	if (status == 0) {
+		/* GPIOF_DIR_OUT */
+		set_bit(FLAG_IS_OUT, &((struct gpio_desc *)desc)->flags);
+	}
+	return status;
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(gpiod_get_direction);
 
 /*
@@ -1947,6 +2099,9 @@ int gpiochip_add_pingroup_range(struct gpio_chip *chip,
 	return 0;
 }
 EXPORT_SYMBOL_GPL(gpiochip_add_pingroup_range);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1968,8 +2123,12 @@ int gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
 	pin_range = kzalloc(sizeof(*pin_range), GFP_KERNEL);
 	if (!pin_range) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: GPIO chip: failed to allocate pin ranges\n",
 				chip->label);
+=======
+		chip_err(chip, "failed to allocate pin ranges\n");
+>>>>>>> v3.18
 =======
 		chip_err(chip, "failed to allocate pin ranges\n");
 >>>>>>> v3.18
@@ -1988,6 +2147,7 @@ int gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
 	if (IS_ERR(pin_range->pctldev)) {
 		ret = PTR_ERR(pin_range->pctldev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: GPIO chip: could not create pin range\n",
 		       chip->label);
 		kfree(pin_range);
@@ -1996,12 +2156,17 @@ int gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
 	pr_debug("GPIO chip %s: created GPIO range %d->%d ==> %s PIN %d->%d\n",
 		 chip->label, gpio_offset, gpio_offset + npins - 1,
 =======
+=======
+>>>>>>> v3.18
 		chip_err(chip, "could not create pin range\n");
 		kfree(pin_range);
 		return ret;
 	}
 	chip_dbg(chip, "created GPIO range %d->%d ==> %s PIN %d->%d\n",
 		 gpio_offset, gpio_offset + npins - 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 pinctl_name,
 		 pin_offset, pin_offset + npins - 1);
@@ -2036,6 +2201,7 @@ EXPORT_SYMBOL_GPL(gpiochip_remove_pin_ranges);
  * They're called even less than the "set direction" calls.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gpiod_request(struct gpio_desc *desc, const char *label)
 {
 	struct gpio_chip	*chip;
@@ -2057,6 +2223,8 @@ static int gpiod_request(struct gpio_desc *desc, const char *label)
 		goto done;
 
 =======
+=======
+>>>>>>> v3.18
 static int __gpiod_request(struct gpio_desc *desc, const char *label)
 {
 	struct gpio_chip	*chip = desc->chip;
@@ -2065,6 +2233,9 @@ static int __gpiod_request(struct gpio_desc *desc, const char *label)
 
 	spin_lock_irqsave(&gpio_lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* NOTE:  gpio_request() can be called in early boot,
 	 * before IRQs are enabled, for non-sleeping (SOC) GPIOs.
@@ -2076,7 +2247,10 @@ static int __gpiod_request(struct gpio_desc *desc, const char *label)
 	} else {
 		status = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		module_put(chip->owner);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto done;
@@ -2091,7 +2265,10 @@ static int __gpiod_request(struct gpio_desc *desc, const char *label)
 		if (status < 0) {
 			desc_set_label(desc, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			module_put(chip->owner);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			clear_bit(FLAG_REQUESTED, &desc->flags);
@@ -2105,6 +2282,7 @@ static int __gpiod_request(struct gpio_desc *desc, const char *label)
 		spin_lock_irqsave(&gpio_lock, flags);
 	}
 done:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (status)
 		pr_debug("_gpio_request: gpio-%d (%s) status %d\n",
@@ -2125,6 +2303,12 @@ EXPORT_SYMBOL_GPL(gpio_request);
 static void gpiod_free(struct gpio_desc *desc)
 {
 =======
+=======
+	spin_unlock_irqrestore(&gpio_lock, flags);
+	return status;
+}
+
+>>>>>>> v3.18
 int gpiod_request(struct gpio_desc *desc, const char *label)
 {
 	int status = -EPROBE_DEFER;
@@ -2155,6 +2339,9 @@ done:
 static bool __gpiod_free(struct gpio_desc *desc)
 {
 	bool			ret = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long		flags;
 	struct gpio_chip	*chip;
@@ -2162,11 +2349,14 @@ static bool __gpiod_free(struct gpio_desc *desc)
 	might_sleep();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		WARN_ON(extra_checks);
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gpiod_unexport(desc);
@@ -2183,13 +2373,17 @@ static bool __gpiod_free(struct gpio_desc *desc)
 		}
 		desc_set_label(desc, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		module_put(desc->chip->owner);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		clear_bit(FLAG_ACTIVE_LOW, &desc->flags);
 		clear_bit(FLAG_REQUESTED, &desc->flags);
 		clear_bit(FLAG_OPEN_DRAIN, &desc->flags);
 		clear_bit(FLAG_OPEN_SOURCE, &desc->flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else
 		WARN_ON(extra_checks);
@@ -2284,6 +2478,8 @@ void gpio_free_array(const struct gpio *array, size_t num)
 }
 EXPORT_SYMBOL_GPL(gpio_free_array);
 =======
+=======
+>>>>>>> v3.18
 		ret = true;
 	}
 
@@ -2298,6 +2494,9 @@ void gpiod_free(struct gpio_desc *desc)
 	else
 		WARN_ON(extra_checks);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -2307,8 +2506,13 @@ void gpiod_free(struct gpio_desc *desc)
  *
  * Returns NULL if the GPIO is not currently requested, else a string.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If debugfs support is enabled, the string returned is the label passed
  * to gpio_request(); otherwise it is a meaningless constant.
+=======
+ * The string returned is the label passed to gpio_request(); if none has been
+ * passed it is a meaningless, non-NULL constant.
+>>>>>>> v3.18
 =======
  * The string returned is the label passed to gpio_request(); if none has been
  * passed it is a meaningless, non-NULL constant.
@@ -2330,6 +2534,7 @@ const char *gpiochip_is_requested(struct gpio_chip *chip, unsigned offset)
 	if (test_bit(FLAG_REQUESTED, &desc->flags) == 0)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_FS
 	return desc->label;
 #else
@@ -2339,6 +2544,8 @@ const char *gpiochip_is_requested(struct gpio_chip *chip, unsigned offset)
 EXPORT_SYMBOL_GPL(gpiochip_is_requested);
 
 =======
+=======
+>>>>>>> v3.18
 	return desc->label;
 }
 EXPORT_SYMBOL_GPL(gpiochip_is_requested);
@@ -2386,6 +2593,9 @@ void gpiochip_free_own_desc(struct gpio_desc *desc)
 		__gpiod_free(desc);
 }
 EXPORT_SYMBOL_GPL(gpiochip_free_own_desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Drivers MUST set GPIO direction before making get/set calls.  In
@@ -2398,6 +2608,7 @@ EXPORT_SYMBOL_GPL(gpiochip_free_own_desc);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gpiod_direction_input(struct gpio_desc *desc)
 {
 	unsigned long		flags;
@@ -2407,6 +2618,8 @@ static int gpiod_direction_input(struct gpio_desc *desc)
 
 	if (!desc) {
 =======
+=======
+>>>>>>> v3.18
 /**
  * gpiod_direction_input - set the GPIO direction to input
  * @desc:	GPIO to set to input
@@ -2422,11 +2635,15 @@ int gpiod_direction_input(struct gpio_desc *desc)
 	int			status = -EINVAL;
 
 	if (!desc || !desc->chip) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_warn("%s: invalid GPIO\n", __func__);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&gpio_lock, flags);
 
@@ -2458,6 +2675,8 @@ int gpiod_direction_input(struct gpio_desc *desc)
 
 	status = chip->direction_input(chip, offset);
 =======
+=======
+>>>>>>> v3.18
 	chip = desc->chip;
 	if (!chip->get || !chip->direction_input) {
 		gpiod_warn(desc,
@@ -2467,11 +2686,15 @@ int gpiod_direction_input(struct gpio_desc *desc)
 	}
 
 	status = chip->direction_input(chip, gpio_chip_hwgpio(desc));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status == 0)
 		clear_bit(FLAG_IS_OUT, &desc->flags);
 
 	trace_gpio_direction(desc_to_gpio(desc), 1, status);
+<<<<<<< HEAD
 <<<<<<< HEAD
 lose:
 	return status;
@@ -2500,6 +2723,8 @@ static int gpiod_direction_output(struct gpio_desc *desc, int value)
 		pr_warn("%s: invalid GPIO\n", __func__);
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 
 	return status;
 }
@@ -2516,6 +2741,9 @@ static int _gpiod_direction_output_raw(struct gpio_desc *desc, int value)
 			  "%s: tried to set a GPIO tied to an IRQ as output\n",
 			  __func__);
 		return -EIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2527,6 +2755,7 @@ static int _gpiod_direction_output_raw(struct gpio_desc *desc, int value)
 	if (!value && test_bit(FLAG_OPEN_SOURCE,  &desc->flags))
 		return gpiod_direction_input(desc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&gpio_lock, flags);
 
@@ -2558,6 +2787,8 @@ static int _gpiod_direction_output_raw(struct gpio_desc *desc, int value)
 
 	status = chip->direction_output(chip, offset, value);
 =======
+=======
+>>>>>>> v3.18
 	chip = desc->chip;
 	if (!chip->set || !chip->direction_output) {
 		gpiod_warn(desc,
@@ -2567,11 +2798,15 @@ static int _gpiod_direction_output_raw(struct gpio_desc *desc, int value)
 	}
 
 	status = chip->direction_output(chip, gpio_chip_hwgpio(desc), value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status == 0)
 		set_bit(FLAG_IS_OUT, &desc->flags);
 	trace_gpio_value(desc_to_gpio(desc), 0, value);
 	trace_gpio_direction(desc_to_gpio(desc), 0, status);
+<<<<<<< HEAD
 <<<<<<< HEAD
 lose:
 	return status;
@@ -2603,6 +2838,8 @@ static int gpiod_set_debounce(struct gpio_desc *desc, unsigned debounce)
 
 	if (!desc) {
 =======
+=======
+>>>>>>> v3.18
 	return status;
 }
 
@@ -2664,11 +2901,15 @@ int gpiod_set_debounce(struct gpio_desc *desc, unsigned debounce)
 	struct gpio_chip	*chip;
 
 	if (!desc || !desc->chip) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_warn("%s: invalid GPIO\n", __func__);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&gpio_lock, flags);
 
@@ -2704,6 +2945,8 @@ int gpio_set_debounce(unsigned gpio, unsigned debounce)
 }
 EXPORT_SYMBOL_GPL(gpio_set_debounce);
 =======
+=======
+>>>>>>> v3.18
 	chip = desc->chip;
 	if (!chip->set || !chip->set_debounce) {
 		gpiod_dbg(desc,
@@ -2727,6 +2970,9 @@ int gpiod_is_active_low(const struct gpio_desc *desc)
 	return test_bit(FLAG_ACTIVE_LOW, &desc->flags);
 }
 EXPORT_SYMBOL_GPL(gpiod_is_active_low);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* I/O calls are only valid after configuration completed; the relevant
@@ -2752,6 +2998,7 @@ EXPORT_SYMBOL_GPL(gpiod_is_active_low);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * __gpio_get_value() - return a gpio's value
  * @gpio: gpio whose value will be returned
@@ -2775,6 +3022,8 @@ static int gpiod_get_value(const struct gpio_desc *desc)
 	WARN_ON(chip->can_sleep);
 	value = chip->get ? chip->get(chip, offset) : 0;
 =======
+=======
+>>>>>>> v3.18
 static bool _gpiod_get_raw_value(const struct gpio_desc *desc)
 {
 	struct gpio_chip	*chip;
@@ -2784,11 +3033,15 @@ static bool _gpiod_get_raw_value(const struct gpio_desc *desc)
 	chip = desc->chip;
 	offset = gpio_chip_hwgpio(desc);
 	value = chip->get ? chip->get(chip, offset) : false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_gpio_value(desc_to_gpio(desc), 1, value);
 	return value;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __gpio_get_value(unsigned gpio)
 {
@@ -2804,6 +3057,8 @@ EXPORT_SYMBOL_GPL(__gpio_get_value);
  */
 static void _gpio_set_open_drain_value(struct gpio_desc *desc, int value)
 =======
+=======
+>>>>>>> v3.18
 /**
  * gpiod_get_raw_value() - return a gpio's raw value
  * @desc: gpio whose value will be returned
@@ -2856,6 +3111,9 @@ EXPORT_SYMBOL_GPL(gpiod_get_value);
  * @value: Non-zero for setting it HIGH otherise it will set to LOW.
  */
 static void _gpio_set_open_drain_value(struct gpio_desc *desc, bool value)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err = 0;
@@ -2874,6 +3132,7 @@ static void _gpio_set_open_drain_value(struct gpio_desc *desc, bool value)
 	trace_gpio_direction(desc_to_gpio(desc), value, err);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: Error in set_value for open drain gpio%d err %d\n",
 					__func__, desc_to_gpio(desc), err);
 }
@@ -2886,6 +3145,8 @@ static void _gpio_set_open_drain_value(struct gpio_desc *desc, bool value)
  */
 static void _gpio_set_open_source_value(struct gpio_desc *desc, int value)
 =======
+=======
+>>>>>>> v3.18
 		gpiod_err(desc,
 			  "%s: Error in set_value for open drain err %d\n",
 			  __func__, err);
@@ -2897,6 +3158,9 @@ static void _gpio_set_open_source_value(struct gpio_desc *desc, int value)
  * @value: Non-zero for setting it HIGH otherise it will set to LOW.
  */
 static void _gpio_set_open_source_value(struct gpio_desc *desc, bool value)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err = 0;
@@ -2914,6 +3178,7 @@ static void _gpio_set_open_source_value(struct gpio_desc *desc, bool value)
 	}
 	trace_gpio_direction(desc_to_gpio(desc), !value, err);
 	if (err < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_err("%s: Error in set_value for open source gpio%d err %d\n",
 					__func__, desc_to_gpio(desc), err);
@@ -2938,6 +3203,8 @@ static void gpiod_set_value(struct gpio_desc *desc, int value)
 	/* Should be using gpio_set_value_cansleep() */
 	WARN_ON(chip->can_sleep);
 =======
+=======
+>>>>>>> v3.18
 		gpiod_err(desc,
 			  "%s: Error in set_value for open source err %d\n",
 			  __func__, err);
@@ -2948,6 +3215,9 @@ static void _gpiod_set_raw_value(struct gpio_desc *desc, bool value)
 	struct gpio_chip	*chip;
 
 	chip = desc->chip;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_gpio_value(desc_to_gpio(desc), 0, value);
 	if (test_bit(FLAG_OPEN_DRAIN, &desc->flags))
@@ -2958,6 +3228,7 @@ static void _gpiod_set_raw_value(struct gpio_desc *desc, bool value)
 		chip->set(chip, gpio_chip_hwgpio(desc), value);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __gpio_set_value(unsigned gpio, int value)
 {
@@ -2998,6 +3269,8 @@ EXPORT_SYMBOL_GPL(__gpio_cansleep);
  */
 static int gpiod_to_irq(const struct gpio_desc *desc)
 =======
+=======
+>>>>>>> v3.18
 /**
  * gpiod_set_raw_value() - assign a gpio's raw value
  * @desc: gpio whose value will be assigned
@@ -3063,6 +3336,9 @@ EXPORT_SYMBOL_GPL(gpiod_cansleep);
  * error.
  */
 int gpiod_to_irq(const struct gpio_desc *desc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct gpio_chip	*chip;
@@ -3074,6 +3350,7 @@ int gpiod_to_irq(const struct gpio_desc *desc)
 	offset = gpio_chip_hwgpio(desc);
 	return chip->to_irq ? chip->to_irq(chip, offset) : -ENXIO;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int __gpio_to_irq(unsigned gpio)
@@ -3093,6 +3370,8 @@ static int gpiod_get_value_cansleep(const struct gpio_desc *desc)
 	int value;
 	int offset;
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(gpiod_to_irq);
 
 /**
@@ -3167,11 +3446,15 @@ EXPORT_SYMBOL_GPL(gpiod_get_raw_value_cansleep);
 int gpiod_get_value_cansleep(const struct gpio_desc *desc)
 {
 	int value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	might_sleep_if(extra_checks);
 	if (!desc)
 		return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	chip = desc->chip;
 	offset = gpio_chip_hwgpio(desc);
@@ -3209,6 +3492,8 @@ void gpio_set_value_cansleep(unsigned gpio, int value)
 }
 EXPORT_SYMBOL_GPL(gpio_set_value_cansleep);
 =======
+=======
+>>>>>>> v3.18
 
 	value = _gpiod_get_raw_value(desc);
 	if (test_bit(FLAG_ACTIVE_LOW, &desc->flags))
@@ -3554,6 +3839,9 @@ void gpiod_put(struct gpio_desc *desc)
 	gpiod_free(desc);
 }
 EXPORT_SYMBOL_GPL(gpiod_put);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_DEBUG_FS
@@ -3565,6 +3853,10 @@ static void gpiolib_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 	struct gpio_desc	*gdesc = &chip->desc[0];
 	int			is_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			is_irq;
+>>>>>>> v3.18
 =======
 	int			is_irq;
 >>>>>>> v3.18
@@ -3576,7 +3868,12 @@ static void gpiolib_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 		gpiod_get_direction(gdesc);
 		is_out = test_bit(FLAG_IS_OUT, &gdesc->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, " gpio-%-3d (%-20.20s) %s %s",
+=======
+		is_irq = test_bit(FLAG_USED_AS_IRQ, &gdesc->flags);
+		seq_printf(s, " gpio-%-3d (%-20.20s) %s %s %s",
+>>>>>>> v3.18
 =======
 		is_irq = test_bit(FLAG_USED_AS_IRQ, &gdesc->flags);
 		seq_printf(s, " gpio-%-3d (%-20.20s) %s %s %s",
@@ -3586,7 +3883,12 @@ static void gpiolib_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 			chip->get
 				? (chip->get(chip, i) ? "hi" : "lo")
 <<<<<<< HEAD
+<<<<<<< HEAD
 				: "?  ");
+=======
+				: "?  ",
+			is_irq ? "IRQ" : "   ");
+>>>>>>> v3.18
 =======
 				: "?  ",
 			is_irq ? "IRQ" : "   ");

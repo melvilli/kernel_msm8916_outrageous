@@ -38,6 +38,7 @@
 #endif /* CONFIG_PPC_PMAC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* from radeon_encoder.c */
 extern uint32_t
 radeon_get_encoder_enum(struct drm_device *dev, uint32_t supported_device,
@@ -54,6 +55,8 @@ radeon_add_legacy_connector(struct drm_device *dev,
 			    uint16_t connector_object_id,
 			    struct radeon_hpd *hpd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* from radeon_legacy_encoder.c */
@@ -136,7 +139,11 @@ enum radeon_combios_connector {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const int legacy_connector_convert[] = {
+=======
+static const int legacy_connector_convert[] = {
+>>>>>>> v3.18
 =======
 static const int legacy_connector_convert[] = {
 >>>>>>> v3.18
@@ -1279,6 +1286,7 @@ struct radeon_encoder_lvds *radeon_combios_get_lvds_info(struct radeon_encoder
 			if ((RBIOS16(tmp) == lvds->native_mode.hdisplay) &&
 			    (RBIOS16(tmp + 2) == lvds->native_mode.vdisplay)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u32 hss = (RBIOS16(tmp + 21) - RBIOS16(tmp + 19) - 1) * 8;
 
 				if (hss > lvds->native_mode.hdisplay)
@@ -1289,10 +1297,15 @@ struct radeon_encoder_lvds *radeon_combios_get_lvds_info(struct radeon_encoder
 				lvds->native_mode.hsync_start = lvds->native_mode.hdisplay +
 					hss;
 =======
+=======
+>>>>>>> v3.18
 				lvds->native_mode.htotal = lvds->native_mode.hdisplay +
 					(RBIOS16(tmp + 17) - RBIOS16(tmp + 19)) * 8;
 				lvds->native_mode.hsync_start = lvds->native_mode.hdisplay +
 					(RBIOS16(tmp + 21) - RBIOS16(tmp + 19) - 1) * 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				lvds->native_mode.hsync_end = lvds->native_mode.hsync_start +
 					(RBIOS8(tmp + 23) * 8);
@@ -3418,6 +3431,7 @@ void radeon_combios_asic_init(struct drm_device *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* quirk for rs4xx HP Compaq dc5750 Small Form Factor to make it resume
 	 * - it hangs on resume inside the dynclk 1 table.
 	 */
@@ -3426,6 +3440,8 @@ void radeon_combios_asic_init(struct drm_device *dev)
 	    rdev->pdev->subsystem_device == 0x280a)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* DYN CLK 1 */

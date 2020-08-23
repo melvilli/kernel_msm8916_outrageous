@@ -6,8 +6,13 @@
 #include <linux/dmi.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/vgaarb.h>
+=======
+#include <linux/vgaarb.h>
+#include <asm/hpet.h>
+>>>>>>> v3.18
 =======
 #include <linux/vgaarb.h>
 #include <asm/hpet.h>
@@ -32,9 +37,15 @@ static void pci_fixup_i450nx(struct pci_dev *d)
 			suba, subb);
 		if (busno)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_scan_bus_with_sysdata(busno);	/* Bus A */
 		if (suba < subb)
 			pci_scan_bus_with_sysdata(suba+1);	/* Bus B */
+=======
+			pcibios_scan_root(busno);	/* Bus A */
+		if (suba < subb)
+			pcibios_scan_root(suba+1);	/* Bus B */
+>>>>>>> v3.18
 =======
 			pcibios_scan_root(busno);	/* Bus A */
 		if (suba < subb)
@@ -55,7 +66,11 @@ static void pci_fixup_i450gx(struct pci_dev *d)
 	pci_read_config_byte(d, 0x4a, &busno);
 	dev_info(&d->dev, "i440KX/GX host bridge; secondary bus %02x\n", busno);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_scan_bus_with_sysdata(busno);
+=======
+	pcibios_scan_root(busno);
+>>>>>>> v3.18
 =======
 	pcibios_scan_root(busno);
 >>>>>>> v3.18
@@ -247,7 +262,11 @@ static int quirk_pcie_aspm_write(struct pci_bus *bus, unsigned int devfn, int wh
 
 	if ((offset) && (where == offset))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = value & 0xfffffffc;
+=======
+		value = value & ~PCI_EXP_LNKCTL_ASPMC;
+>>>>>>> v3.18
 =======
 		value = value & ~PCI_EXP_LNKCTL_ASPMC;
 >>>>>>> v3.18
@@ -272,7 +291,11 @@ static struct pci_ops quirk_pcie_aspm_ops = {
 static void pcie_rootport_aspm_quirk(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cap_base, i;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -302,7 +325,11 @@ static void pcie_rootport_aspm_quirk(struct pci_dev *pdev)
 			quirk_aspm_offset[i] = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pbus->ops = pbus->parent->ops;
+=======
+		pci_bus_set_ops(pbus, pbus->parent->ops);
+>>>>>>> v3.18
 =======
 		pci_bus_set_ops(pbus, pbus->parent->ops);
 >>>>>>> v3.18
@@ -314,6 +341,7 @@ static void pcie_rootport_aspm_quirk(struct pci_dev *pdev)
 		 * bus ops.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_for_each_entry(dev, &pbus->devices, bus_list) {
 			/* There are 0 to 8 devices attached to this bus */
 			cap_base = pci_find_capability(dev, PCI_CAP_ID_EXP);
@@ -322,6 +350,8 @@ static void pcie_rootport_aspm_quirk(struct pci_dev *pdev)
 		pbus->ops = &quirk_pcie_aspm_ops;
 	}
 =======
+=======
+>>>>>>> v3.18
 		list_for_each_entry(dev, &pbus->devices, bus_list)
 			/* There are 0 to 8 devices attached to this bus */
 			quirk_aspm_offset[GET_INDEX(pdev->device, dev->devfn)] =
@@ -331,6 +361,9 @@ static void pcie_rootport_aspm_quirk(struct pci_dev *pdev)
 		dev_info(&pbus->dev, "writes to ASPM control bits will be ignored\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL,	PCI_DEVICE_ID_INTEL_MCH_PA,	pcie_rootport_aspm_quirk);
@@ -352,14 +385,20 @@ DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL,	PCI_DEVICE_ID_INTEL_MCH_PC1,	pcie_r
  * card with this copy. On laptops this copy has to be used since
  * the main ROM may be compressed or combined with another image.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See pci_map_rom() for use of this flag. IORESOURCE_ROM_SHADOW
  * is marked here since the boot video device will be the only enabled
  * video device at this point.
 =======
+=======
+>>>>>>> v3.18
  * See pci_map_rom() for use of this flag. Before marking the device
  * with IORESOURCE_ROM_SHADOW check if a vga_default_device is already set
  * by either arch cde or vga-arbitration, if so only apply the fixup to this
  * already determined primary video card.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -382,9 +421,13 @@ static void pci_fixup_video(struct pci_dev *pdev)
 		 * PCI header type NORMAL.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bridge
 		    && ((bridge->hdr_type == PCI_HEADER_TYPE_BRIDGE)
 		       || (bridge->hdr_type == PCI_HEADER_TYPE_CARDBUS))) {
+=======
+		if (bridge && (pci_is_bridge(bridge))) {
+>>>>>>> v3.18
 =======
 		if (bridge && (pci_is_bridge(bridge))) {
 >>>>>>> v3.18
@@ -396,6 +439,7 @@ static void pci_fixup_video(struct pci_dev *pdev)
 		bus = bus->parent;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(pdev, PCI_COMMAND, &config);
 	if (config & (PCI_COMMAND_IO | PCI_COMMAND_MEMORY)) {
 		pdev->resource[PCI_ROM_RESOURCE].flags |= IORESOURCE_ROM_SHADOW;
@@ -403,12 +447,17 @@ static void pci_fixup_video(struct pci_dev *pdev)
 		if (!vga_default_device())
 			vga_set_default_device(pdev);
 =======
+=======
+>>>>>>> v3.18
 	if (!vga_default_device() || pdev == vga_default_device()) {
 		pci_read_config_word(pdev, PCI_COMMAND, &config);
 		if (config & (PCI_COMMAND_IO | PCI_COMMAND_MEMORY)) {
 			pdev->resource[PCI_ROM_RESOURCE].flags |= IORESOURCE_ROM_SHADOW;
 			dev_printk(KERN_DEBUG, &pdev->dev, "Video device with shadowed ROM\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -583,7 +632,10 @@ static void sb600_disable_hpet_bar(struct pci_dev *dev)
 DECLARE_PCI_FIXUP_EARLY(PCI_VENDOR_ID_ATI, 0x4385, sb600_disable_hpet_bar);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HPET_TIMER
 static void sb600_hpet_quirk(struct pci_dev *dev)
 {
@@ -597,6 +649,9 @@ static void sb600_hpet_quirk(struct pci_dev *dev)
 DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_ATI, 0x4385, sb600_hpet_quirk);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Twinhead H12Y needs us to block out a region otherwise we map devices

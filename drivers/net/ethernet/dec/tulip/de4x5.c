@@ -1322,7 +1322,11 @@ de4x5_open(struct net_device *dev)
 		                                     lp->adapter_name, dev)) {
 	printk("de4x5_open(): Requested IRQ%d is busy - attemping FAST/SHARE...", dev->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(dev->irq, de4x5_interrupt, IRQF_DISABLED | IRQF_SHARED,
+=======
+	if (request_irq(dev->irq, de4x5_interrupt, IRQF_SHARED,
+>>>>>>> v3.18
 =======
 	if (request_irq(dev->irq, de4x5_interrupt, IRQF_SHARED,
 >>>>>>> v3.18
@@ -2324,7 +2328,11 @@ static void de4x5_pci_remove(struct pci_dev *pdev)
 	u_long iobase;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = dev_get_drvdata(&pdev->dev);
+=======
+	dev = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	dev = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -2337,7 +2345,11 @@ static void de4x5_pci_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_device_id de4x5_pci_tbl[] = {
+=======
+static const struct pci_device_id de4x5_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id de4x5_pci_tbl[] = {
 >>>>>>> v3.18
@@ -3263,7 +3275,10 @@ srom_map_media(struct net_device *dev)
 	                                                  lp->infoblock_media);
 	return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     }

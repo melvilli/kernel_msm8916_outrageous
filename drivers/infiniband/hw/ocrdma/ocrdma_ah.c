@@ -30,7 +30,10 @@
 
 #include <rdma/ib_addr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <rdma/ib_cache.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -40,6 +43,7 @@
 #include "ocrdma_hw.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int set_av_attr(struct ocrdma_ah *ah,
 				struct ib_ah_attr *attr, int pdid)
 {
@@ -47,6 +51,8 @@ static inline int set_av_attr(struct ocrdma_ah *ah,
 	u16 vlan_tag; bool vlan_enabled = false;
 	struct ocrdma_dev *dev = ah->dev;
 =======
+=======
+>>>>>>> v3.18
 #define OCRDMA_VID_PCP_SHIFT	0xD
 
 static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
@@ -54,6 +60,9 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 {
 	int status = 0;
 	u16 vlan_tag; bool vlan_enabled = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ocrdma_eth_vlan eth;
 	struct ocrdma_grh grh;
@@ -63,6 +72,7 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 	memset(&grh, 0, sizeof(grh));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->sgid_index = attr->grh.sgid_index;
 
 	vlan_tag = rdma_get_vlan_id(&attr->grh.dgid);
@@ -71,6 +81,8 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 		eth.roce_eth_type = cpu_to_be16(OCRDMA_ROCE_ETH_TYPE);
 		vlan_tag |= (attr->sl & 7) << 13;
 =======
+=======
+>>>>>>> v3.18
 	/* VLAN */
 	vlan_tag = attr->vlan_id;
 	if (!vlan_tag || (vlan_tag > 0xFFF))
@@ -79,6 +91,9 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 		eth.eth_type = cpu_to_be16(0x8100);
 		eth.roce_eth_type = cpu_to_be16(OCRDMA_ROCE_ETH_TYPE);
 		vlan_tag |= (dev->sl & 0x07) << OCRDMA_VID_PCP_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		eth.vlan_tag = cpu_to_be16(vlan_tag);
 		eth_sz = sizeof(struct ocrdma_eth_vlan);
@@ -87,6 +102,7 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 		eth.eth_type = cpu_to_be16(OCRDMA_ROCE_ETH_TYPE);
 		eth_sz = sizeof(struct ocrdma_eth_basic);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memcpy(&eth.smac[0], &dev->nic_info.mac_addr[0], ETH_ALEN);
 	status = ocrdma_resolve_dgid(dev, &attr->grh.dgid, &eth.dmac[0]);
@@ -97,6 +113,8 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 	if (status)
 		return status;
 =======
+=======
+>>>>>>> v3.18
 	/* MAC */
 	memcpy(&eth.smac[0], &dev->nic_info.mac_addr[0], ETH_ALEN);
 	status = ocrdma_resolve_dmac(dev, attr, &eth.dmac[0]);
@@ -105,6 +123,9 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 	ah->sgid_index = attr->grh.sgid_index;
 	memcpy(&grh.sgid[0], sgid->raw, sizeof(union ib_gid));
 	memcpy(&grh.dgid[0], attr->grh.dgid.raw, sizeof(attr->grh.dgid.raw));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	grh.tclass_flow = cpu_to_be32((6 << 28) |
@@ -114,8 +135,12 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 	grh.pdid_hoplimit = cpu_to_be32((pdid << 16) |
 			(0x1b << 8) | attr->grh.hop_limit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	memcpy(&grh.dgid[0], attr->grh.dgid.raw, sizeof(attr->grh.dgid.raw));
+=======
+	/* Eth HDR */
+>>>>>>> v3.18
 =======
 	/* Eth HDR */
 >>>>>>> v3.18
@@ -124,6 +149,10 @@ static inline int set_av_attr(struct ocrdma_dev *dev, struct ocrdma_ah *ah,
 	if (vlan_enabled)
 		ah->av->valid |= OCRDMA_AV_VLAN_VALID;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ah->av->valid = cpu_to_le32(ah->av->valid);
+>>>>>>> v3.18
 =======
 	ah->av->valid = cpu_to_le32(ah->av->valid);
 >>>>>>> v3.18
@@ -137,7 +166,13 @@ struct ib_ah *ocrdma_create_ah(struct ib_pd *ibpd, struct ib_ah_attr *attr)
 	struct ocrdma_ah *ah;
 	struct ocrdma_pd *pd = get_ocrdma_pd(ibpd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocrdma_dev *dev = pd->dev;
+=======
+	struct ocrdma_dev *dev = get_ocrdma_dev(ibpd->device);
+	union ib_gid sgid;
+	u8 zmac[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	struct ocrdma_dev *dev = get_ocrdma_dev(ibpd->device);
 	union ib_gid sgid;
@@ -148,24 +183,33 @@ struct ib_ah *ocrdma_create_ah(struct ib_pd *ibpd, struct ib_ah_attr *attr)
 		return ERR_PTR(-EINVAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah = kzalloc(sizeof *ah, GFP_ATOMIC);
 	if (!ah)
 		return ERR_PTR(-ENOMEM);
 	ah->dev = pd->dev;
 =======
+=======
+>>>>>>> v3.18
 	if (atomic_cmpxchg(&dev->update_sl, 1, 0))
 		ocrdma_init_service_level(dev);
 	ah = kzalloc(sizeof(*ah), GFP_ATOMIC);
 	if (!ah)
 		return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	status = ocrdma_alloc_av(dev, ah);
 	if (status)
 		goto av_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = set_av_attr(ah, attr, pd->id);
 =======
+=======
+>>>>>>> v3.18
 
 	status = ocrdma_query_gid(&dev->ibdev, 1, attr->grh.sgid_index, &sgid);
 	if (status) {
@@ -187,6 +231,9 @@ struct ib_ah *ocrdma_create_ah(struct ib_pd *ibpd, struct ib_ah_attr *attr)
 	}
 
 	status = set_av_attr(dev, ah, attr, &sgid, pd->id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status)
 		goto av_conf_err;
@@ -209,7 +256,13 @@ int ocrdma_destroy_ah(struct ib_ah *ibah)
 {
 	struct ocrdma_ah *ah = get_ocrdma_ah(ibah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocrdma_free_av(ah->dev, ah);
+=======
+	struct ocrdma_dev *dev = get_ocrdma_dev(ibah->device);
+
+	ocrdma_free_av(dev, ah);
+>>>>>>> v3.18
 =======
 	struct ocrdma_dev *dev = get_ocrdma_dev(ibah->device);
 
@@ -226,7 +279,11 @@ int ocrdma_query_ah(struct ib_ah *ibah, struct ib_ah_attr *attr)
 	struct ocrdma_grh *grh;
 	attr->ah_flags |= IB_AH_GRH;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ah->av->valid & Bit(1)) {
+=======
+	if (ah->av->valid & OCRDMA_AV_VALID) {
+>>>>>>> v3.18
 =======
 	if (ah->av->valid & OCRDMA_AV_VALID) {
 >>>>>>> v3.18

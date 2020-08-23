@@ -427,7 +427,12 @@ static int max8997_muic_adc_handler(struct max8997_muic_info *info)
 	case MAX8997_MUIC_ADC_FACTORY_MODE_USB_OFF:
 	case MAX8997_MUIC_ADC_FACTORY_MODE_USB_ON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = max8997_muic_handle_usb(info, MAX8997_USB_DEVICE, attached);
+=======
+		ret = max8997_muic_handle_usb(info,
+					     MAX8997_USB_DEVICE, attached);
+>>>>>>> v3.18
 =======
 		ret = max8997_muic_handle_usb(info,
 					     MAX8997_USB_DEVICE, attached);
@@ -510,7 +515,12 @@ static int max8997_muic_chg_handler(struct max8997_muic_info *info)
 		break;
 	case MAX8997_CHARGER_TYPE_DOWNSTREAM_PORT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		extcon_set_cable_state(info->edev, "Charge-downstream", attached);
+=======
+		extcon_set_cable_state(info->edev,
+				      "Charge-downstream", attached);
+>>>>>>> v3.18
 =======
 		extcon_set_cable_state(info->edev,
 				      "Charge-downstream", attached);
@@ -548,7 +558,11 @@ static void max8997_muic_irq_work(struct work_struct *work)
 	mutex_lock(&info->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; i < ARRAY_SIZE(muic_irqs) ; i++)
+=======
+	for (i = 0; i < ARRAY_SIZE(muic_irqs); i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ARRAY_SIZE(muic_irqs); i++)
 >>>>>>> v3.18
@@ -674,10 +688,15 @@ static int max8997_muic_probe(struct platform_device *pdev)
 	info = devm_kzalloc(&pdev->dev, sizeof(struct max8997_muic_info),
 			    GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!info) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!info)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!info)
 		return -ENOMEM;
@@ -717,9 +736,14 @@ static int max8997_muic_probe(struct platform_device *pdev)
 
 	/* External connector */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->edev = devm_kzalloc(&pdev->dev, sizeof(struct extcon_dev),
 				  GFP_KERNEL);
 	if (!info->edev) {
+=======
+	info->edev = devm_extcon_dev_allocate(&pdev->dev, max8997_extcon_cable);
+	if (IS_ERR(info->edev)) {
+>>>>>>> v3.18
 =======
 	info->edev = devm_extcon_dev_allocate(&pdev->dev, max8997_extcon_cable);
 	if (IS_ERR(info->edev)) {
@@ -730,8 +754,13 @@ static int max8997_muic_probe(struct platform_device *pdev)
 	}
 	info->edev->name = DEV_NAME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->edev->supported_cable = max8997_extcon_cable;
 	ret = extcon_dev_register(info->edev, NULL);
+=======
+
+	ret = devm_extcon_dev_register(&pdev->dev, info->edev);
+>>>>>>> v3.18
 =======
 
 	ret = devm_extcon_dev_register(&pdev->dev, info->edev);
@@ -797,7 +826,12 @@ static int max8997_muic_probe(struct platform_device *pdev)
 	 */
 	INIT_DELAYED_WORK(&info->wq_detcable, max8997_muic_detect_cable_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&info->wq_detcable, delay_jiffies);
+=======
+	queue_delayed_work(system_power_efficient_wq, &info->wq_detcable,
+			delay_jiffies);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq, &info->wq_detcable,
 			delay_jiffies);
@@ -821,8 +855,11 @@ static int max8997_muic_remove(struct platform_device *pdev)
 	cancel_work_sync(&info->irq_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extcon_dev_unregister(info->edev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

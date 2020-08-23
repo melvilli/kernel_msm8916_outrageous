@@ -231,6 +231,7 @@ struct register_image
 } registers;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /************** Prototypes for local library functions ***********************/
 
 /* Copy of strcpy from libc. */
@@ -273,6 +274,8 @@ static int read_register (char regno, unsigned int *valptr);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Serial port, reads one character. ETRAX 100 specific. from debugport.c */
 int getDebugChar (void);
 
@@ -281,6 +284,7 @@ void putDebugChar (int val);
 
 void enableDebugIRQ (void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Returns the integer equivalent of a hexadecimal character. */
 static int hex (char ch);
@@ -320,6 +324,8 @@ static void kill_restart (void);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /******************** Prototypes for global functions. ***********************/
 
 /* The string str is prepended with the GDB printout token and sent. */
@@ -343,10 +349,13 @@ extern unsigned char executing_task;
 #define HEXCHARS_IN_THREAD_ID 16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Avoid warning as the internal_stack is not used in the C-code. */
 #define USEDVAR(name)    { if (name) { ; } }
 #define USEDFUN(name) { void (*pf)(void) = (void *)name; USEDVAR(pf) }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /********************************** Packet I/O ******************************/
@@ -415,7 +424,11 @@ static int register_size[] =
 /* Contains the register image of the executing thread in the assembler
    part of the code in order to avoid horrible addressing modes. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static registers reg;
+=======
+registers cris_reg;
+>>>>>>> v3.18
 =======
 registers cris_reg;
 >>>>>>> v3.18
@@ -427,7 +440,11 @@ static int consistency_status = SUCCESS;
 
 /********************************** Handle exceptions ************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The variable reg contains the register image associated with the
+=======
+/* The variable cris_reg contains the register image associated with the
+>>>>>>> v3.18
 =======
 /* The variable cris_reg contains the register image associated with the
 >>>>>>> v3.18
@@ -438,6 +455,7 @@ static int consistency_status = SUCCESS;
    in order to provide access mainly for 'g', 'G' and 'P'.
 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Need two task id pointers in order to handle Hct and Hgt commands. */
 static int current_thread_c = 0;
@@ -452,10 +470,15 @@ static registers reg_g;
 #define INTERNAL_STACK_SIZE 1024
 static char internal_stack[INTERNAL_STACK_SIZE];
 =======
+=======
+>>>>>>> v3.18
 /********************************** Breakpoint *******************************/
 /* Use an internal stack in the breakpoint and interrupt response routines */
 #define INTERNAL_STACK_SIZE 1024
 char internal_stack[INTERNAL_STACK_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Due to the breakpoint return pointer, a state variable is needed to keep
@@ -524,6 +547,7 @@ gdb_cris_strtol (const char *s, char **endptr, int base)
 	return x;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /********************************* Register image ****************************/
 /* Copy the content of a register image into another. The size n is
@@ -685,6 +709,8 @@ read_register (char regno, unsigned int *valptr)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /********************************** Packet I/O ******************************/
 /* Returns the integer equivalent of a hexadecimal character. */
 static int
@@ -704,8 +730,11 @@ hex (char ch)
    in buf (null). */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_printk = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char *
@@ -792,7 +821,11 @@ getpacket (char *buffer)
 		count = 0;
 		/* Read until a # or the end of the buffer is reached */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (count < BUFMAX) {
+=======
+		while (count < BUFMAX - 1) {
+>>>>>>> v3.18
 =======
 		while (count < BUFMAX - 1) {
 >>>>>>> v3.18
@@ -880,7 +913,10 @@ putDebugString (const unsigned char *str, int length)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /********************************* Register image ****************************/
 /* Write a value to a specified register in the register image of the current
    thread. Returns status code SUCCESS, E02 or E05. */
@@ -956,6 +992,9 @@ read_register (char regno, unsigned int *valptr)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /********************************** Handle exceptions ************************/
 /* Build and send a response packet in order to inform the host the
@@ -1004,6 +1043,7 @@ stub_is_stopped(int sigval)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PROCESS_SUPPORT
 	/* Store the registers of the executing thread. Assume that both step,
 	   continue, and register content requests are with respect to this
@@ -1026,6 +1066,8 @@ stub_is_stopped(int sigval)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* null-terminate and send it off */
 
 	*ptr = 0;
@@ -1033,6 +1075,7 @@ stub_is_stopped(int sigval)
 	putpacket (remcomOutBuffer);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* All expected commands are sent from remote.c. Send a response according
    to the description in remote.c. */
@@ -1045,6 +1088,8 @@ handle_exception (int sigval)
 	USEDVAR(internal_stack[0]);
 
 =======
+=======
+>>>>>>> v3.18
 /* Performs a complete re-start from scratch. */
 static void
 kill_restart (void)
@@ -1057,6 +1102,9 @@ kill_restart (void)
 void
 handle_exception (int sigval)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Send response. */
 
@@ -1074,6 +1122,7 @@ handle_exception (int sigval)
 				   Failure: void. */
 				
 <<<<<<< HEAD
+<<<<<<< HEAD
 				{
 #ifdef PROCESS_SUPPORT
 					/* Use the special register content in the executing thread. */
@@ -1090,6 +1139,9 @@ handle_exception (int sigval)
 =======
 				mem2hex(remcomOutBuffer, (char *)&cris_reg, sizeof(registers));
 >>>>>>> v3.18
+=======
+				mem2hex(remcomOutBuffer, (char *)&cris_reg, sizeof(registers));
+>>>>>>> v3.18
 				break;
 				
 			case 'G':
@@ -1097,6 +1149,7 @@ handle_exception (int sigval)
 				   Each byte of register data  is described by two hex digits.
 				   Success: OK
 				   Failure: void. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef PROCESS_SUPPORT
 				hex2mem ((unsigned char *)&reg_g, &remcomInBuffer[1], sizeof(registers));
@@ -1109,6 +1162,9 @@ handle_exception (int sigval)
 #else
 				hex2mem((char *)&reg, &remcomInBuffer[1], sizeof(registers));
 #endif
+=======
+				hex2mem((char *)&cris_reg, &remcomInBuffer[1], sizeof(registers));
+>>>>>>> v3.18
 =======
 				hex2mem((char *)&cris_reg, &remcomInBuffer[1], sizeof(registers));
 >>>>>>> v3.18
@@ -1128,12 +1184,16 @@ handle_exception (int sigval)
 					int regno = gdb_cris_strtol (&remcomInBuffer[1], &suffix, 16);
 					int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PROCESS_SUPPORT
 					if (current_thread_g != executing_task)
 						status = write_stack_register (current_thread_g, regno, suffix+1);
 					else
 #endif
 						status = write_register (regno, suffix+1);
+=======
+					status = write_register (regno, suffix+1);
+>>>>>>> v3.18
 =======
 					status = write_register (regno, suffix+1);
 >>>>>>> v3.18
@@ -1216,7 +1276,11 @@ handle_exception (int sigval)
 				   Failure: will never know. */
 				if (remcomInBuffer[1] != '\0') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					reg.pc = gdb_cris_strtol (&remcomInBuffer[1], 0, 16);
+=======
+					cris_reg.pc = gdb_cris_strtol (&remcomInBuffer[1], 0, 16);
+>>>>>>> v3.18
 =======
 					cris_reg.pc = gdb_cris_strtol (&remcomInBuffer[1], 0, 16);
 >>>>>>> v3.18
@@ -1275,6 +1339,7 @@ handle_exception (int sigval)
 				   Not supported: E04 */
 				gdb_cris_strcpy (remcomOutBuffer, error_message[E04]);
 				break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef PROCESS_SUPPORT
 
@@ -1391,6 +1456,8 @@ handle_exception (int sigval)
 #endif /* PROCESS_SUPPORT */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 				
 			default:
 				/* The stub should ignore other request and send an empty
@@ -1404,6 +1471,7 @@ handle_exception (int sigval)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Performs a complete re-start from scratch. */
 static void
 kill_restart ()
@@ -1411,6 +1479,8 @@ kill_restart ()
 	machine_restart("");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /********************************** Breakpoint *******************************/
@@ -1422,6 +1492,7 @@ kill_restart ()
 
 void kgdb_handle_breakpoint(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 asm ("
   .global kgdb_handle_breakpoint
@@ -1511,6 +1582,8 @@ is_static:
    nop                       ;
 ");
 =======
+=======
+>>>>>>> v3.18
 asm ("\n"
 "  .global kgdb_handle_breakpoint\n"
 "kgdb_handle_breakpoint:\n"
@@ -1598,6 +1671,9 @@ asm ("\n"
 "   jump    [cris_reg+0x62]       ; A jump to the content in register BRP works.\n"
 "   nop                       ;\n"
 "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* The hook for an interrupt generated by GDB. An internal stack is used
@@ -1609,6 +1685,7 @@ asm ("\n"
 
 void kgdb_handle_serial(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 asm ("
   .global kgdb_handle_serial
@@ -1699,6 +1776,8 @@ goback:
    nop
 ");
 =======
+=======
+>>>>>>> v3.18
 asm ("\n"
 "  .global kgdb_handle_serial\n"
 "kgdb_handle_serial:\n"
@@ -1787,6 +1866,9 @@ asm ("\n"
 "   reti                      ; Return from the interrupt routine\n"
 "   nop\n"
 "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Use this static breakpoint in the start-up only. */

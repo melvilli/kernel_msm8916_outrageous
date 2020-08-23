@@ -282,6 +282,9 @@ void dt_to_source(FILE *f, struct boot_info *bi)
 	write_tree_source_node(f, bi->dt, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -34,15 +34,21 @@ struct pingv6_ops {
 	int (*ipv6_recv_error)(struct sock *sk, struct msghdr *msg, int len,
 			       int *addr_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*ip6_datagram_recv_ctl)(struct sock *sk, struct msghdr *msg,
 				     struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 	void (*ip6_datagram_recv_common_ctl)(struct sock *sk,
 					     struct msghdr *msg,
 					     struct sk_buff *skb);
 	void (*ip6_datagram_recv_specific_ctl)(struct sock *sk,
 					       struct msghdr *msg,
 					       struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*icmpv6_err_convert)(u8 type, u8 code, int *err);
 	void (*ipv6_icmp_error)(struct sock *sk, struct sk_buff *skb, int err,
@@ -51,6 +57,7 @@ struct pingv6_ops {
 			     const struct net_device *dev, int strict);
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct ping_table {
 	struct hlist_nulls_head	hash[PING_HTABLE_SIZE];
@@ -65,6 +72,8 @@ struct ping_iter_state {
 extern struct proto ping_prot;
 extern struct ping_table ping_table;
 =======
+=======
+>>>>>>> v3.18
 struct ping_iter_state {
 	struct seq_net_private  p;
 	int			bucket;
@@ -72,6 +81,9 @@ struct ping_iter_state {
 };
 
 extern struct proto ping_prot;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if IS_ENABLED(CONFIG_IPV6)
 extern struct pingv6_ops pingv6_ops;
@@ -100,8 +112,11 @@ int  ping_recvmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 int  ping_common_sendmsg(int family, struct msghdr *msg, size_t len,
 			 void *user_icmph, size_t icmph_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  ping_v4_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 		     size_t len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int  ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
@@ -111,9 +126,12 @@ void ping_rcv(struct sk_buff *skb);
 
 #ifdef CONFIG_PROC_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __init ping_proc_init(void);
 extern void ping_proc_exit(void);
 =======
+=======
+>>>>>>> v3.18
 struct ping_seq_afinfo {
 	char				*name;
 	sa_family_t			family;
@@ -131,6 +149,9 @@ void ping_proc_unregister(struct net *net, struct ping_seq_afinfo *afinfo);
 
 int __init ping_proc_init(void);
 void ping_proc_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

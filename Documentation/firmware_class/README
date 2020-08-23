@@ -65,7 +65,11 @@
 	 if(request_firmware(&fw_entry, $FIRMWARE, device) == 0)
 	 	copy_fw_to_device(fw_entry->data, fw_entry->size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 release(fw_entry);
+=======
+	 release_firmware(fw_entry);
+>>>>>>> v3.18
 =======
 	 release_firmware(fw_entry);
 >>>>>>> v3.18
@@ -79,7 +83,11 @@
 
 	echo 1 > /sys/$DEVPATH/loading
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cat $HOTPLUG_FW_DIR/$FIRMWARE > /sysfs/$DEVPATH/data
+=======
+	cat $HOTPLUG_FW_DIR/$FIRMWARE > /sys/$DEVPATH/data
+>>>>>>> v3.18
 =======
 	cat $HOTPLUG_FW_DIR/$FIRMWARE > /sys/$DEVPATH/data
 >>>>>>> v3.18
@@ -132,7 +140,11 @@
  After firmware cache mechanism is introduced during system sleep,
  request_firmware can be called safely inside device's suspend and
 <<<<<<< HEAD
+<<<<<<< HEAD
  resume callback, and callers need't cache the firmware by
+=======
+ resume callback, and callers needn't cache the firmware by
+>>>>>>> v3.18
 =======
  resume callback, and callers needn't cache the firmware by
 >>>>>>> v3.18

@@ -31,7 +31,11 @@
 #define __RTL92CE_HW_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u8 _rtl92c_get_chnl_group(u8 chnl)
+=======
+static inline u8 rtl92c_get_chnl_group(u8 chnl)
+>>>>>>> v3.18
 =======
 static inline u8 rtl92c_get_chnl_group(u8 chnl)
 >>>>>>> v3.18
@@ -81,8 +85,11 @@ void rtl8192ce_bt_hw_init(struct ieee80211_hw *hw);
 void rtl92ce_suspend(struct ieee80211_hw *hw);
 void rtl92ce_resume(struct ieee80211_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92ce_allow_all_destaddr(struct ieee80211_hw *hw,
 				bool allow_all_da, bool write_into_reg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

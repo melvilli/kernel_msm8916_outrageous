@@ -59,6 +59,7 @@ static int davinci_verify_speed(struct cpufreq_policy *policy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int davinci_getspeed(unsigned int cpu)
 {
 	if (cpu)
@@ -87,6 +88,8 @@ static int davinci_target(struct cpufreq_policy *policy, unsigned int idx)
 		if (ret)
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 static int davinci_target(struct cpufreq_policy *policy, unsigned int idx)
 {
 	struct davinci_cpufreq_config *pdata = cpufreq.dev->platform_data;
@@ -102,13 +105,20 @@ static int davinci_target(struct cpufreq_policy *policy, unsigned int idx)
 		ret = pdata->set_voltage(idx);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ret = clk_set_rate(armclk, idx);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -116,6 +126,7 @@ static int davinci_target(struct cpufreq_policy *policy, unsigned int idx)
 	if (cpufreq.asyncclk) {
 		ret = clk_set_rate(cpufreq.asyncclk, cpufreq.asyncrate);
 		if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			goto out;
 	}
@@ -129,6 +140,8 @@ out:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 			return ret;
 	}
 
@@ -137,6 +150,9 @@ out:
 		pdata->set_voltage(idx);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -157,6 +173,7 @@ static int davinci_cpu_init(struct cpufreq_policy *policy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = davinci_getspeed(0);
 
 	result = cpufreq_frequency_table_cpuinfo(policy, freq_table);
@@ -170,6 +187,9 @@ static int davinci_cpu_init(struct cpufreq_policy *policy)
 =======
 	policy->clk = cpufreq.armclk;
 >>>>>>> v3.18
+=======
+	policy->clk = cpufreq.armclk;
+>>>>>>> v3.18
 
 	/*
 	 * Time measurement across the target() function yields ~1500-1800us
@@ -177,6 +197,7 @@ static int davinci_cpu_init(struct cpufreq_policy *policy)
 	 * Setting the latency to 2000 us to accommodate addition of drivers
 	 * to pre/post change notification list.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cpuinfo.transition_latency = 2000 * 1000;
 	return 0;
@@ -203,6 +224,8 @@ static struct cpufreq_driver davinci_driver = {
 	.name		= "davinci",
 	.attr		= davinci_cpufreq_attr,
 =======
+=======
+>>>>>>> v3.18
 	return cpufreq_generic_init(policy, freq_table, 2000 * 1000);
 }
 
@@ -214,6 +237,9 @@ static struct cpufreq_driver davinci_driver = {
 	.init		= davinci_cpu_init,
 	.name		= "davinci",
 	.attr		= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -28,11 +28,14 @@
 /* SCO defaults */
 #define SCO_DEFAULT_MTU		500
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCO_DEFAULT_FLUSH_TO	0xFFFF
 
 #define SCO_CONN_TIMEOUT	(HZ * 40)
 #define SCO_DISCONN_TIMEOUT	(HZ * 2)
 #define SCO_CONN_IDLE_TIMEOUT	(HZ * 60)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -41,7 +44,10 @@ struct sockaddr_sco {
 	sa_family_t	sco_family;
 	bdaddr_t	sco_bdaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16		sco_pkt_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -58,6 +64,7 @@ struct sco_conninfo {
 	__u8  dev_class[3];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* ---- SCO connections ---- */
 struct sco_conn {
@@ -85,6 +92,8 @@ struct sco_pinfo {
 	struct sco_conn	*conn;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __SCO_H */

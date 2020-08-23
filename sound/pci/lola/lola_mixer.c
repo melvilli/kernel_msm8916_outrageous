@@ -38,7 +38,11 @@ static int lola_init_pin(struct lola *chip, struct lola_pin *pin,
 	err = lola_read_param(chip, nid, LOLA_PAR_AUDIO_WIDGET_CAP, &val);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Can't read wcaps for 0x%x\n", nid);
+=======
+		dev_err(chip->card->dev, "Can't read wcaps for 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Can't read wcaps for 0x%x\n", nid);
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ static int lola_init_pin(struct lola *chip, struct lola_pin *pin,
 		pin->is_analog = true;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Invalid wcaps 0x%x for 0x%x\n", val, nid);
+=======
+		dev_err(chip->card->dev, "Invalid wcaps 0x%x for 0x%x\n", val, nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Invalid wcaps 0x%x for 0x%x\n", val, nid);
 >>>>>>> v3.18
@@ -71,7 +79,11 @@ static int lola_init_pin(struct lola *chip, struct lola_pin *pin,
 		err = lola_read_param(chip, nid, LOLA_PAR_AMP_IN_CAP, &val);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Can't read AMP-caps for 0x%x\n", nid);
+=======
+		dev_err(chip->card->dev, "Can't read AMP-caps for 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Can't read AMP-caps for 0x%x\n", nid);
 >>>>>>> v3.18
@@ -92,7 +104,11 @@ static int lola_init_pin(struct lola *chip, struct lola_pin *pin,
 			      NULL);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Can't get MAX_LEVEL 0x%x\n", nid);
+=======
+		dev_err(chip->card->dev, "Can't get MAX_LEVEL 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Can't get MAX_LEVEL 0x%x\n", nid);
 >>>>>>> v3.18
@@ -136,7 +152,11 @@ int lola_init_mixer_widget(struct lola *chip, int nid)
 	err = lola_read_param(chip, nid, LOLA_PAR_AUDIO_WIDGET_CAP, &val);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Can't read wcaps for 0x%x\n", nid);
+=======
+		dev_err(chip->card->dev, "Can't read wcaps for 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Can't read wcaps for 0x%x\n", nid);
 >>>>>>> v3.18
@@ -145,7 +165,11 @@ int lola_init_mixer_widget(struct lola *chip, int nid)
 
 	if ((val & 0xfff00000) != 0x02f00000) { /* test SubType and Type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("No valid mixer widget\n");
+=======
+		dev_dbg(chip->card->dev, "No valid mixer widget\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "No valid mixer widget\n");
 >>>>>>> v3.18
@@ -227,7 +251,11 @@ int lola_init_mixer_widget(struct lola *chip, int nid)
 	if (chip->mixer.src_stream_out_ofs > MAX_AUDIO_INOUT_COUNT ||
 	    chip->mixer.dest_phys_out_ofs > MAX_STREAM_IN_COUNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Invalid mixer widget size\n");
+=======
+		dev_err(chip->card->dev, "Invalid mixer widget size\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Invalid mixer widget size\n");
 >>>>>>> v3.18
@@ -242,7 +270,11 @@ int lola_init_mixer_widget(struct lola *chip, int nid)
 		 << chip->mixer.dest_phys_out_ofs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("Mixer src_mask=%x, dest_mask=%x\n",
+=======
+	dev_dbg(chip->card->dev, "Mixer src_mask=%x, dest_mask=%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "Mixer src_mask=%x, dest_mask=%x\n",
 >>>>>>> v3.18
@@ -269,7 +301,12 @@ static int lola_mixer_set_src_gain(struct lola *chip, unsigned int id,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("lola_mixer_set_src_gain (id=%d, gain=%d) enable=%x\n",
+=======
+	dev_dbg(chip->card->dev,
+		"lola_mixer_set_src_gain (id=%d, gain=%d) enable=%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev,
 		"lola_mixer_set_src_gain (id=%d, gain=%d) enable=%x\n",
@@ -447,7 +484,12 @@ static int set_analog_volume(struct lola *chip, int dir,
 	if (external_call)
 		lola_codec_flush(chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("set_analog_volume (dir=%d idx=%d, volume=%d)\n",
+=======
+	dev_dbg(chip->card->dev,
+		"set_analog_volume (dir=%d idx=%d, volume=%d)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev,
 		"set_analog_volume (dir=%d idx=%d, volume=%d)\n",

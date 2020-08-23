@@ -13,6 +13,10 @@
 #include <linux/serial.h>
 #include <linux/serial_sci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sh_eth.h>
+>>>>>>> v3.18
 =======
 #include <linux/sh_eth.h>
 >>>>>>> v3.18
@@ -65,6 +69,7 @@ static DECLARE_INTC_DESC(intc_desc, "sh7619", vectors, NULL,
 
 static struct plat_sci_port scif0_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xf8400000,
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -72,6 +77,8 @@ static struct plat_sci_port scif0_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(88),
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -80,6 +87,9 @@ static struct plat_sci_port scif0_platform_data = {
 static struct resource scif0_resources[] = {
 	DEFINE_RES_MEM(0xf8400000, 0x100),
 	DEFINE_RES_IRQ(88),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -87,6 +97,11 @@ static struct platform_device scif0_device = {
 	.name		= "sh-sci",
 	.id		= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif0_resources,
+	.num_resources	= ARRAY_SIZE(scif0_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif0_resources,
 	.num_resources	= ARRAY_SIZE(scif0_resources),
@@ -98,6 +113,7 @@ static struct platform_device scif0_device = {
 
 static struct plat_sci_port scif1_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xf8410000,
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -105,6 +121,8 @@ static struct plat_sci_port scif1_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(92),
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -113,6 +131,9 @@ static struct plat_sci_port scif1_platform_data = {
 static struct resource scif1_resources[] = {
 	DEFINE_RES_MEM(0xf8410000, 0x100),
 	DEFINE_RES_IRQ(92),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -120,6 +141,11 @@ static struct platform_device scif1_device = {
 	.name		= "sh-sci",
 	.id		= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif1_resources,
+	.num_resources	= ARRAY_SIZE(scif1_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif1_resources,
 	.num_resources	= ARRAY_SIZE(scif1_resources),
@@ -131,6 +157,7 @@ static struct platform_device scif1_device = {
 
 static struct plat_sci_port scif2_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xf8420000,
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -138,6 +165,8 @@ static struct plat_sci_port scif2_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(96),
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -146,6 +175,9 @@ static struct plat_sci_port scif2_platform_data = {
 static struct resource scif2_resources[] = {
 	DEFINE_RES_MEM(0xf8420000, 0x100),
 	DEFINE_RES_IRQ(96),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -153,6 +185,11 @@ static struct platform_device scif2_device = {
 	.name		= "sh-sci",
 	.id		= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif2_resources,
+	.num_resources	= ARRAY_SIZE(scif2_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif2_resources,
 	.num_resources	= ARRAY_SIZE(scif2_resources),
@@ -163,11 +200,14 @@ static struct platform_device scif2_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource eth_resources[] = {
 	[0] = {
 		.start = 0xfb000000,
 		.end =   0xfb0001c8,
 =======
+=======
+>>>>>>> v3.18
 static struct sh_eth_plat_data eth_platform_data = {
 	.phy		= 1,
 	.edmac_endian	= EDMAC_LITTLE_ENDIAN,
@@ -178,6 +218,9 @@ static struct resource eth_resources[] = {
 	[0] = {
 		.start = 0xfb000000,
 		.end = 0xfb0001c7,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.flags = IORESOURCE_MEM,
 	},
@@ -190,21 +233,28 @@ static struct resource eth_resources[] = {
 
 static struct platform_device eth_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "sh-eth",
 	.id	= -1,
 	.dev = {
 		.platform_data = (void *)1,
 =======
+=======
+>>>>>>> v3.18
 	.name = "sh7619-ether",
 	.id = -1,
 	.dev = {
 		.platform_data = &eth_platform_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.num_resources = ARRAY_SIZE(eth_resources),
 	.resource = eth_resources,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sh_timer_config cmt0_platform_data = {
 	.channel_offset = 0x02,
@@ -263,6 +313,8 @@ static struct platform_device cmt1_device = {
 	.resource	= cmt1_resources,
 	.num_resources	= ARRAY_SIZE(cmt1_resources),
 =======
+=======
+>>>>>>> v3.18
 static struct sh_timer_config cmt_platform_data = {
 	.channels_mask = 3,
 };
@@ -281,6 +333,9 @@ static struct platform_device cmt_device = {
 	},
 	.resource	= cmt_resources,
 	.num_resources	= ARRAY_SIZE(cmt_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -290,8 +345,12 @@ static struct platform_device *sh7619_devices[] __initdata = {
 	&scif2_device,
 	&eth_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&cmt0_device,
 	&cmt1_device,
+=======
+	&cmt_device,
+>>>>>>> v3.18
 =======
 	&cmt_device,
 >>>>>>> v3.18
@@ -314,8 +373,12 @@ static struct platform_device *sh7619_early_devices[] __initdata = {
 	&scif1_device,
 	&scif2_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&cmt0_device,
 	&cmt1_device,
+=======
+	&cmt_device,
+>>>>>>> v3.18
 =======
 	&cmt_device,
 >>>>>>> v3.18

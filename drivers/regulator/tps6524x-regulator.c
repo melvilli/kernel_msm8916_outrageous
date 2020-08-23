@@ -578,6 +578,7 @@ static struct regulator_ops regulator_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pmic_remove(struct spi_device *spi)
 {
 	struct tps6524x *hw = spi_get_drvdata(spi);
@@ -595,6 +596,8 @@ static int pmic_remove(struct spi_device *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int pmic_probe(struct spi_device *spi)
 {
 	struct tps6524x *hw;
@@ -603,9 +606,15 @@ static int pmic_probe(struct spi_device *spi)
 	struct regulator_init_data *init_data;
 	struct regulator_config config = { };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0, i;
 
 	init_data = dev->platform_data;
+=======
+	int i;
+
+	init_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	int i;
 
@@ -618,10 +627,16 @@ static int pmic_probe(struct spi_device *spi)
 
 	hw = devm_kzalloc(&spi->dev, sizeof(struct tps6524x), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hw) {
 		dev_err(dev, "cannot allocate regulator private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!hw)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!hw)
 		return -ENOMEM;
@@ -648,6 +663,7 @@ static int pmic_probe(struct spi_device *spi)
 		config.driver_data = hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw->rdev[i] = regulator_register(&hw->desc[i], &config);
 		if (IS_ERR(hw->rdev[i])) {
 			ret = PTR_ERR(hw->rdev[i]);
@@ -662,6 +678,8 @@ fail:
 	pmic_remove(spi);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		hw->rdev[i] = devm_regulator_register(dev, &hw->desc[i],
 						      &config);
 		if (IS_ERR(hw->rdev[i]))
@@ -669,13 +687,19 @@ fail:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct spi_driver pmic_driver = {
 	.probe		= pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= pmic_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

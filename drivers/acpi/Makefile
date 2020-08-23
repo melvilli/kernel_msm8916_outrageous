@@ -3,6 +3,10 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-y			:= -Os
+>>>>>>> v3.18
 =======
 ccflags-y			:= -Os
 >>>>>>> v3.18
@@ -38,6 +42,7 @@ acpi-y				+= bus.o glue.o
 acpi-y				+= scan.o
 acpi-y				+= resource.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi-y				+= processor_core.o
 acpi-y				+= ec.o
 acpi-$(CONFIG_ACPI_DOCK)	+= dock.o
@@ -45,6 +50,8 @@ acpi-y				+= pci_root.o pci_link.o pci_irq.o
 acpi-$(CONFIG_X86_INTEL_LPSS)	+= acpi_lpss.o
 acpi-y				+= acpi_platform.o
 =======
+=======
+>>>>>>> v3.18
 acpi-y				+= acpi_processor.o
 acpi-y				+= processor_core.o
 acpi-$(CONFIG_ARCH_MIGHT_HAVE_ACPI_PDC) += processor_pdc.o
@@ -55,6 +62,9 @@ acpi-y				+= acpi_lpss.o
 acpi-y				+= acpi_platform.o
 acpi-y				+= acpi_pnp.o
 acpi-y				+= int340x_thermal.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 acpi-y				+= power.o
 acpi-y				+= event.o
@@ -79,9 +89,15 @@ obj-$(CONFIG_ACPI_VIDEO)	+= video.o
 obj-$(CONFIG_ACPI_PCI_SLOT)	+= pci_slot.o
 obj-$(CONFIG_ACPI_PROCESSOR)	+= processor.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ACPI_CONTAINER)	+= container.o
 obj-$(CONFIG_ACPI_THERMAL)	+= thermal.o
 obj-$(CONFIG_ACPI_HOTPLUG_MEMORY) += acpi_memhotplug.o
+=======
+obj-y				+= container.o
+obj-$(CONFIG_ACPI_THERMAL)	+= thermal.o
+obj-y				+= acpi_memhotplug.o
+>>>>>>> v3.18
 =======
 obj-y				+= container.o
 obj-$(CONFIG_ACPI_THERMAL)	+= thermal.o
@@ -95,7 +111,10 @@ obj-$(CONFIG_ACPI_EC_DEBUGFS)	+= ec_sys.o
 obj-$(CONFIG_ACPI_CUSTOM_METHOD)+= custom_method.o
 obj-$(CONFIG_ACPI_BGRT)		+= bgrt.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ACPI_I2C)		+= acpi_i2c.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -108,6 +127,11 @@ obj-$(CONFIG_ACPI_PROCESSOR_AGGREGATOR) += acpi_pad.o
 
 obj-$(CONFIG_ACPI_APEI)		+= apei/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_ACPI_EXTLOG)	+= acpi_extlog.o
+>>>>>>> v3.18
 =======
 
 obj-$(CONFIG_ACPI_EXTLOG)	+= acpi_extlog.o

@@ -6,7 +6,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/if.h>
@@ -44,7 +47,11 @@ struct hostap_pci_priv {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(prism2_pci_id_table) = {
+=======
+static const struct pci_device_id prism2_pci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id prism2_pci_id_table[] = {
 >>>>>>> v3.18

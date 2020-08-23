@@ -502,10 +502,15 @@ int snd_opl3_hwdep_new(struct snd_opl3 * opl3,
 	hw->exclusive = 1;
 #ifdef CONFIG_SND_OSSEMUL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device == 0) {
 		hw->oss_type = SNDRV_OSS_DEVICE_TYPE_DMFM;
 		sprintf(hw->oss_dev, "dmfm%i", card->number);
 	}
+=======
+	if (device == 0)
+		hw->oss_type = SNDRV_OSS_DEVICE_TYPE_DMFM;
+>>>>>>> v3.18
 =======
 	if (device == 0)
 		hw->oss_type = SNDRV_OSS_DEVICE_TYPE_DMFM;

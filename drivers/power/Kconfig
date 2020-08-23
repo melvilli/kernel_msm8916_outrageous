@@ -138,7 +138,10 @@ config BATTERY_COLLIE
 	  SL-5500 (collie) models.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BATTERY_IPAQ_MICRO
 	tristate "iPAQ Atmel Micro ASIC battery driver"
 	depends on MFD_IPAQ_MICRO
@@ -146,6 +149,9 @@ config BATTERY_IPAQ_MICRO
 	  Choose this option if you want to monitor battery status on
 	  Compaq/HP iPAQ h3100 and h3600.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config BATTERY_WM97XX
 	bool "WM97xx generic battery driver"
@@ -207,6 +213,10 @@ config BATTERY_MAX17042
 	tristate "Maxim MAX17042/17047/17050/8997/8966 Fuel Gauge"
 	depends on I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_I2C
+>>>>>>> v3.18
 =======
 	select REGMAP_I2C
 >>>>>>> v3.18
@@ -231,7 +241,10 @@ config BATTERY_S3C_ADC
 	  Say Y here to enable support for iPAQ h1930/h1940/rx1950 battery
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BATTERY_TWL4030_MADC
 	tristate "TWL4030 MADC battery driver"
 	depends on TWL4030_MADC
@@ -239,6 +252,9 @@ config BATTERY_TWL4030_MADC
 	  Say Y here to enable this dumb driver for batteries managed
 	  through the TWL4030 MADC.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CHARGER_88PM860X
 	tristate "Marvell 88PM860x Charger driver"
@@ -334,7 +350,10 @@ config CHARGER_MANAGER
           with help of suspend_again support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CHARGER_MAX14577
 	tristate "Maxim MAX14577/77836 battery charger driver"
 	depends on MFD_MAX14577
@@ -343,6 +362,9 @@ config CHARGER_MAX14577
 	  Say Y to enable support for the battery charger control sysfs and
 	  platform data of MAX14577/77836 MUICs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CHARGER_MAX8997
 	tristate "Maxim MAX8997/MAX8966 PMIC battery charger driver"
@@ -368,6 +390,7 @@ config CHARGER_BQ2415X
 	  You'll need this driver to charge batteries on e.g. Nokia
 	  RX-51/N900.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config BATTERY_MSM_FAKE
 	tristate "Fake MSM battery"
@@ -515,6 +538,8 @@ config BATTERY_BCL
 	  thermal daemon enables BCL.
 	  It will notify thermal daemon if IBat crosses Imax threshold.
 =======
+=======
+>>>>>>> v3.18
 config CHARGER_BQ24190
 	tristate "TI BQ24190 battery charger driver"
 	depends on I2C && GPIOLIB
@@ -526,6 +551,9 @@ config CHARGER_BQ24735
 	depends on I2C && GPIOLIB
 	help
 	  Say Y to enable support for the TI BQ24735 battery charger.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config CHARGER_SMB347
@@ -552,6 +580,11 @@ config AB8500_BM
 config BATTERY_GOLDFISH
 	tristate "Goldfish battery driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on GOLDFISH || COMPILE_TEST
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on GOLDFISH || COMPILE_TEST
 	depends on HAS_IOMEM
@@ -560,6 +593,7 @@ config BATTERY_GOLDFISH
 	  Say Y to enable support for the battery and AC power in the
 	  Goldfish emulator.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config QPNP_VM_BMS
 	tristate "QPNP Voltage-Mode Battery Monitoring System driver"
@@ -617,12 +651,17 @@ config OPPO_CHARGER
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 source "drivers/power/reset/Kconfig"
 
 endif # POWER_SUPPLY
 
 source "drivers/power/avs/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/power/qcom/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

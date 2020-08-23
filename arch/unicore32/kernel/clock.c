@@ -180,7 +180,11 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 #ifdef CONFIG_CPU_FREQ
 	if (clk == &clk_mclk_clk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 pll_rate, divstatus = PM_DIVSTATUS;
+=======
+		u32 pll_rate, divstatus = readl(PM_DIVSTATUS);
+>>>>>>> v3.18
 =======
 		u32 pll_rate, divstatus = readl(PM_DIVSTATUS);
 >>>>>>> v3.18
@@ -206,15 +210,21 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 
 		/* set pll sys cfg reg. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PM_PLLSYSCFG = pll_rate;
 
 		PM_PMCR = PM_PMCR_CFBSYS;
 		while ((PM_PLLDFCDONE & PM_PLLDFCDONE_SYSDFC)
 =======
+=======
+>>>>>>> v3.18
 		writel(pll_rate, PM_PLLSYSCFG);
 
 		writel(PM_PMCR_CFBSYS, PM_PMCR);
 		while ((readl(PM_PLLDFCDONE) & PM_PLLDFCDONE_SYSDFC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				!= PM_PLLDFCDONE_SYSDFC)
 			udelay(100);

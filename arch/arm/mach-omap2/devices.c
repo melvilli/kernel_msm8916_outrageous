@@ -19,9 +19,13 @@
 #include <linux/of.h>
 #include <linux/pinctrl/machine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/omap4-keypad.h>
 #include <linux/platform_data/omap_ocp2scp.h>
 #include <linux/usb/omap_control_usb.h>
+=======
+#include <linux/platform_data/mailbox-omap.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/mailbox-omap.h>
 >>>>>>> v3.18
@@ -35,7 +39,10 @@
 #include "omap_hwmod.h"
 #include "omap_device.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "omap4-keypad.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -45,7 +52,11 @@
 #include "control.h"
 #include "devices.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+#include "display.h"
+>>>>>>> v3.18
 =======
 #include "display.h"
 >>>>>>> v3.18
@@ -78,7 +89,11 @@ static int __init omap3_l3_init(void)
 	WARN(IS_ERR(pdev), "could not build omap_device for %s\n", oh_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR(pdev) ? PTR_ERR(pdev) : 0;
+=======
+	return PTR_RET(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_RET(pdev);
 >>>>>>> v3.18
@@ -116,7 +131,11 @@ static int __init omap4_l3_init(void)
 	WARN(IS_ERR(pdev), "could not build omap_device for %s\n", oh_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR(pdev) ? PTR_ERR(pdev) : 0;
+=======
+	return PTR_RET(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_RET(pdev);
 >>>>>>> v3.18
@@ -250,6 +269,12 @@ static struct omap_iommu_arch_data omap3_isp_iommu = {
 int omap3_init_camera(struct isp_platform_data *pdata)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_have_populated_dt())
+		omap3_isp_iommu.name = "480bd400.mmu";
+
+>>>>>>> v3.18
 =======
 	if (of_have_populated_dt())
 		omap3_isp_iommu.name = "480bd400.mmu";
@@ -278,6 +303,7 @@ static inline void omap_init_camera(void)
 #endif
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if IS_ENABLED(CONFIG_OMAP_CONTROL_USB)
 static struct omap_control_usb_platform_data omap4_control_usb_pdata = {
@@ -357,11 +383,18 @@ int __init omap4_keyboard_init(struct omap4_keypad_platform_data
 =======
 #if defined(CONFIG_OMAP2PLUS_MBOX) || defined(CONFIG_OMAP2PLUS_MBOX_MODULE)
 >>>>>>> v3.18
+=======
+#if defined(CONFIG_OMAP2PLUS_MBOX) || defined(CONFIG_OMAP2PLUS_MBOX_MODULE)
+>>>>>>> v3.18
 static inline void __init omap_init_mbox(void)
 {
 	struct omap_hwmod *oh;
 	struct platform_device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct omap_mbox_pdata *pdata;
+>>>>>>> v3.18
 =======
 	struct omap_mbox_pdata *pdata;
 >>>>>>> v3.18
@@ -372,9 +405,12 @@ static inline void __init omap_init_mbox(void)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pdev = omap_device_build("omap-mailbox", -1, oh, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (!oh->dev_attr) {
 		pr_err("%s: hwmod doesn't have valid attrs\n", __func__);
 		return;
@@ -382,6 +418,9 @@ static inline void __init omap_init_mbox(void)
 
 	pdata = (struct omap_mbox_pdata *)oh->dev_attr;
 	pdev = omap_device_build("omap-mailbox", -1, oh, pdata, sizeof(*pdata));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WARN(IS_ERR(pdev), "%s: could not build device, err %ld\n",
 						__func__, PTR_ERR(pdev));
@@ -389,7 +428,11 @@ static inline void __init omap_init_mbox(void)
 #else
 static inline void omap_init_mbox(void) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_OMAP_MBOX_FWK */
+=======
+#endif /* CONFIG_OMAP2PLUS_MBOX */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_OMAP2PLUS_MBOX */
 >>>>>>> v3.18
@@ -412,6 +455,7 @@ static void omap_init_audio(void)
 static inline void omap_init_audio(void) {}
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_SND_OMAP_SOC_MCPDM) || \
 		defined(CONFIG_SND_OMAP_SOC_MCPDM_MODULE)
@@ -484,6 +528,8 @@ static void __init omap_init_hdmi_audio(void)
 static inline void omap_init_hdmi_audio(void) {}
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_SPI_OMAP24XX) || defined(CONFIG_SPI_OMAP24XX_MODULE)
@@ -599,6 +645,7 @@ static struct platform_device omap_vout_device = {
 	.id		= -1,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void omap_init_vout(void)
 {
 	if (platform_device_register(&omap_vout_device) < 0)
@@ -683,6 +730,8 @@ static void __init omap_init_ocp2scp(void)
 #else
 static inline void omap_init_ocp2scp(void) { }
 =======
+=======
+>>>>>>> v3.18
 
 int __init omap_init_vout(void)
 {
@@ -690,6 +739,9 @@ int __init omap_init_vout(void)
 }
 #else
 int __init omap_init_vout(void) { return 0; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -708,6 +760,7 @@ static int __init omap2_init_devices(void)
 	omap_init_audio();
 	omap_init_camera();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_init_hdmi_audio();
 	omap_init_mbox();
 	/* If dtb is there, the devices will be created dynamically */
@@ -724,6 +777,8 @@ static int __init omap2_init_devices(void)
 	omap_init_vout();
 	omap_init_ocp2scp();
 =======
+=======
+>>>>>>> v3.18
 	/* If dtb is there, the devices will be created dynamically */
 	if (!of_have_populated_dt()) {
 		omap_init_mbox();
@@ -733,6 +788,9 @@ static int __init omap2_init_devices(void)
 		omap_init_rng();
 	}
 	omap_init_sti();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

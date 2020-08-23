@@ -32,7 +32,10 @@ int uwbd_evt_handle_rc_ie_rcv(struct uwb_event *evt)
 	struct device *dev = &evt->rc->uwb_dev.dev;
 	struct uwb_rc_evt_ie_rcv *iercv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t iesize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -45,7 +48,10 @@ int uwbd_evt_handle_rc_ie_rcv(struct uwb_event *evt)
 	}
 	iercv = container_of(evt->notif.rceb, struct uwb_rc_evt_ie_rcv, rceb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iesize = le16_to_cpu(iercv->wIELength);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -25,6 +25,10 @@ enum {
 	NDA_VNI,
 	NDA_IFINDEX,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NDA_MASTER,
+>>>>>>> v3.18
 =======
 	NDA_MASTER,
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ enum {
 /* NUD_NOARP & NUD_PERMANENT are pseudostates, they never change
    and make no address resolution or NUD.
 <<<<<<< HEAD
+<<<<<<< HEAD
    NUD_PERMANENT is also cannot be deleted by garbage collectors.
+=======
+   NUD_PERMANENT also cannot be deleted by garbage collectors.
+>>>>>>> v3.18
 =======
    NUD_PERMANENT also cannot be deleted by garbage collectors.
 >>>>>>> v3.18

@@ -55,6 +55,10 @@ static struct platform_pwm_backlight_data ezx_backlight_data = {
 	.dft_brightness	= 1023,
 	.pwm_period_ns	= 78770,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -397,7 +401,11 @@ static unsigned long e6_pin_config[] __initdata = {
 /* KEYPAD */
 #ifdef CONFIG_MACH_EZX_A780
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int a780_key_map[] = {
+=======
+static const unsigned int a780_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int a780_key_map[] = {
 >>>>>>> v3.18
@@ -433,12 +441,15 @@ static const unsigned int a780_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data a780_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 5,
 	.matrix_key_map = a780_key_map,
 	.matrix_key_map_size = ARRAY_SIZE(a780_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data a780_matrix_keymap_data = {
 	.keymap			= a780_key_map,
 	.keymap_size		= ARRAY_SIZE(a780_key_map),
@@ -448,6 +459,9 @@ static struct pxa27x_keypad_platform_data a780_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 5,
 	.matrix_keymap_data = &a780_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.direct_key_map = { KEY_CAMERA },
@@ -459,7 +473,11 @@ static struct pxa27x_keypad_platform_data a780_keypad_platform_data = {
 
 #ifdef CONFIG_MACH_EZX_E680
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int e680_key_map[] = {
+=======
+static const unsigned int e680_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int e680_key_map[] = {
 >>>>>>> v3.18
@@ -480,12 +498,15 @@ static const unsigned int e680_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data e680_keypad_platform_data = {
 	.matrix_key_rows = 3,
 	.matrix_key_cols = 4,
 	.matrix_key_map = e680_key_map,
 	.matrix_key_map_size = ARRAY_SIZE(e680_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data e680_matrix_keymap_data = {
 	.keymap			= e680_key_map,
 	.keymap_size		= ARRAY_SIZE(e680_key_map),
@@ -495,6 +516,9 @@ static struct pxa27x_keypad_platform_data e680_keypad_platform_data = {
 	.matrix_key_rows = 3,
 	.matrix_key_cols = 4,
 	.matrix_keymap_data = &e680_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.direct_key_map = {
@@ -513,7 +537,11 @@ static struct pxa27x_keypad_platform_data e680_keypad_platform_data = {
 
 #ifdef CONFIG_MACH_EZX_A1200
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int a1200_key_map[] = {
+=======
+static const unsigned int a1200_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int a1200_key_map[] = {
 >>>>>>> v3.18
@@ -554,12 +582,15 @@ static const unsigned int a1200_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data a1200_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_key_map = a1200_key_map,
 	.matrix_key_map_size = ARRAY_SIZE(a1200_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data a1200_matrix_keymap_data = {
 	.keymap			= a1200_key_map,
 	.keymap_size		= ARRAY_SIZE(a1200_key_map),
@@ -569,6 +600,9 @@ static struct pxa27x_keypad_platform_data a1200_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_keymap_data = &a1200_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.debounce_interval = 30,
@@ -577,7 +611,11 @@ static struct pxa27x_keypad_platform_data a1200_keypad_platform_data = {
 
 #ifdef CONFIG_MACH_EZX_E6
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int e6_key_map[] = {
+=======
+static const unsigned int e6_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int e6_key_map[] = {
 >>>>>>> v3.18
@@ -618,12 +656,15 @@ static const unsigned int e6_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data e6_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_key_map = e6_key_map,
 	.matrix_key_map_size = ARRAY_SIZE(e6_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data e6_keymap_data = {
 	.keymap			= e6_key_map,
 	.keymap_size		= ARRAY_SIZE(e6_key_map),
@@ -633,6 +674,9 @@ static struct pxa27x_keypad_platform_data e6_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_keymap_data = &e6_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.debounce_interval = 30,
@@ -641,7 +685,11 @@ static struct pxa27x_keypad_platform_data e6_keypad_platform_data = {
 
 #ifdef CONFIG_MACH_EZX_A910
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int a910_key_map[] = {
+=======
+static const unsigned int a910_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int a910_key_map[] = {
 >>>>>>> v3.18
@@ -682,12 +730,15 @@ static const unsigned int a910_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data a910_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_key_map = a910_key_map,
 	.matrix_key_map_size = ARRAY_SIZE(a910_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data a910_matrix_keymap_data = {
 	.keymap			= a910_key_map,
 	.keymap_size		= ARRAY_SIZE(a910_key_map),
@@ -697,6 +748,9 @@ static struct pxa27x_keypad_platform_data a910_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_keymap_data = &a910_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.debounce_interval = 30,
@@ -705,7 +759,11 @@ static struct pxa27x_keypad_platform_data a910_keypad_platform_data = {
 
 #ifdef CONFIG_MACH_EZX_E2
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int e2_key_map[] = {
+=======
+static const unsigned int e2_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int e2_key_map[] = {
 >>>>>>> v3.18
@@ -746,12 +804,15 @@ static const unsigned int e2_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data e2_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_key_map = e2_key_map,
 	.matrix_key_map_size = ARRAY_SIZE(e2_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data e2_matrix_keymap_data = {
 	.keymap			= e2_key_map,
 	.keymap_size		= ARRAY_SIZE(e2_key_map),
@@ -761,6 +822,9 @@ static struct pxa27x_keypad_platform_data e2_keypad_platform_data = {
 	.matrix_key_rows = 5,
 	.matrix_key_cols = 6,
 	.matrix_keymap_data = &e2_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.debounce_interval = 30,

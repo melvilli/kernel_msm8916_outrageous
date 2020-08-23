@@ -73,7 +73,11 @@ struct posix_acl *jfs_get_acl(struct inode *inode, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jfs_set_acl(tid_t tid, struct inode *inode, int type,
+=======
+static int __jfs_set_acl(tid_t tid, struct inode *inode, int type,
+>>>>>>> v3.18
 =======
 static int __jfs_set_acl(tid_t tid, struct inode *inode, int type,
 >>>>>>> v3.18
@@ -84,6 +88,7 @@ static int __jfs_set_acl(tid_t tid, struct inode *inode, int type,
 	int size = 0;
 	char *value = NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (S_ISLNK(inode->i_mode))
 		return -EOPNOTSUPP;
@@ -101,6 +106,8 @@ static int __jfs_set_acl(tid_t tid, struct inode *inode, int type,
 			return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		ea_name = POSIX_ACL_XATTR_ACCESS;
@@ -121,6 +128,9 @@ static int __jfs_set_acl(tid_t tid, struct inode *inode, int type,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (acl) {
 		size = posix_acl_xattr_size(acl->a_count);
@@ -141,6 +151,7 @@ out:
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int jfs_init_acl(tid_t tid, struct inode *inode, struct inode *dir)
 {
@@ -170,6 +181,8 @@ cleanup:
 	} else
 		inode->i_mode &= ~current_umask();
 =======
+=======
+>>>>>>> v3.18
 int jfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
 	int rc;
@@ -204,6 +217,9 @@ int jfs_init_acl(tid_t tid, struct inode *inode, struct inode *dir)
 			rc = __jfs_set_acl(tid, inode, ACL_TYPE_ACCESS, acl);
 		posix_acl_release(acl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	JFS_IP(inode)->mode2 = (JFS_IP(inode)->mode2 & 0xffff0000) |
@@ -211,6 +227,7 @@ int jfs_init_acl(tid_t tid, struct inode *inode, struct inode *dir)
 
 	return rc;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int jfs_acl_chmod(struct inode *inode)
@@ -241,5 +258,7 @@ int jfs_acl_chmod(struct inode *inode)
 	posix_acl_release(acl);
 	return rc;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

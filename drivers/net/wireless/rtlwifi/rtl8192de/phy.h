@@ -40,9 +40,13 @@
 #define HIGHPOWER_RADIOA_ARRAYLEN		22
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IQK_ADDA_REG_NUM			16
 #define MAX_TOLERANCE				5
 #define	IQK_DELAY_TIME				1
+=======
+#define MAX_TOLERANCE				5
+>>>>>>> v3.18
 =======
 #define MAX_TOLERANCE				5
 >>>>>>> v3.18
@@ -132,6 +136,7 @@ static inline void rtl92d_release_cckandrw_pagea_ctl(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 rtl92d_phy_query_bb_reg(struct ieee80211_hw *hw,
 				   u32 regaddr, u32 bitmask);
 extern void rtl92d_phy_set_bb_reg(struct ieee80211_hw *hw,
@@ -155,6 +160,8 @@ extern void rtl92d_phy_set_bw_mode(struct ieee80211_hw *hw,
 				   enum nl80211_channel_type ch_type);
 extern u8 rtl92d_phy_sw_chnl(struct ieee80211_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 u32 rtl92d_phy_query_bb_reg(struct ieee80211_hw *hw,
 			    u32 regaddr, u32 bitmask);
 void rtl92d_phy_set_bb_reg(struct ieee80211_hw *hw,
@@ -175,14 +182,22 @@ void rtl92d_phy_set_txpower_level(struct ieee80211_hw *hw, u8 channel);
 void rtl92d_phy_set_bw_mode(struct ieee80211_hw *hw,
 			    enum nl80211_channel_type ch_type);
 u8 rtl92d_phy_sw_chnl(struct ieee80211_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool rtl92d_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 					  enum rf_content content,
 					  enum radio_path rfpath);
 bool rtl92d_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool rtl92d_phy_set_rf_power_state(struct ieee80211_hw *hw,
 					  enum rf_pwrstate rfpwr_state);
+=======
+bool rtl92d_phy_set_rf_power_state(struct ieee80211_hw *hw,
+				   enum rf_pwrstate rfpwr_state);
+>>>>>>> v3.18
 =======
 bool rtl92d_phy_set_rf_power_state(struct ieee80211_hw *hw,
 				   enum rf_pwrstate rfpwr_state);
@@ -206,7 +221,10 @@ void rtl92d_acquire_cckandrw_pagea_ctl(struct ieee80211_hw *hw,
 u8 rtl92d_get_rightchnlplace_for_iqk(u8 chnl);
 void rtl92d_phy_reload_iqk_setting(struct ieee80211_hw *hw, u8 channel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92d_phy_iq_calibrate(struct ieee80211_hw *hw);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

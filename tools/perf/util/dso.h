@@ -4,14 +4,20 @@
 #include <linux/types.h>
 #include <linux/rbtree.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
 #include "map.h"
 =======
+=======
+>>>>>>> v3.18
 #include <stdbool.h>
 #include <linux/types.h>
 #include <linux/bitops.h>
 #include "map.h"
 #include "build-id.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum dso_binary_type {
@@ -29,6 +35,12 @@ enum dso_binary_type {
 	DSO_BINARY_TYPE__GUEST_KMODULE,
 	DSO_BINARY_TYPE__SYSTEM_PATH_KMODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DSO_BINARY_TYPE__KCORE,
+	DSO_BINARY_TYPE__GUEST_KCORE,
+	DSO_BINARY_TYPE__OPENEMBEDDED_DEBUGINFO,
+>>>>>>> v3.18
 =======
 	DSO_BINARY_TYPE__KCORE,
 	DSO_BINARY_TYPE__GUEST_KCORE,
@@ -50,7 +62,10 @@ enum dso_swap_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum dso_data_status {
 	DSO_DATA_STATUS_ERROR	= -1,
 	DSO_DATA_STATUS_UNKNOWN	= 0,
@@ -68,6 +83,9 @@ enum dso_type {
 	DSO__TYPE_X32BIT,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DSO__SWAP(dso, type, val)			\
 ({							\
@@ -102,6 +120,7 @@ struct dso_cache {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dso {
 	struct list_head node;
 	struct rb_root	 symbols[MAP__NR_TYPES];
@@ -128,6 +147,8 @@ struct dso {
 };
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * DSOs are put into both a list for fast iteration and rbtree for fast
  * long name lookup.
@@ -189,6 +210,9 @@ struct dso {
 #define dso__for_each_symbol(dso, pos, n, type)	\
 	symbols__for_each_entry(&(dso)->symbols[(type)], pos, n)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void dso__set_loaded(struct dso *dso, enum map_type type)
 {
@@ -199,8 +223,13 @@ struct dso *dso__new(const char *name);
 void dso__delete(struct dso *dso);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dso__set_short_name(struct dso *dso, const char *name);
 void dso__set_long_name(struct dso *dso, char *name);
+=======
+void dso__set_short_name(struct dso *dso, const char *name, bool name_allocated);
+void dso__set_long_name(struct dso *dso, const char *name, bool name_allocated);
+>>>>>>> v3.18
 =======
 void dso__set_short_name(struct dso *dso, const char *name, bool name_allocated);
 void dso__set_long_name(struct dso *dso, const char *name, bool name_allocated);
@@ -222,11 +251,14 @@ int dso__kernel_module_get_build_id(struct dso *dso, const char *root_dir);
 
 char dso__symtab_origin(const struct dso *dso);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dso__binary_type_file(struct dso *dso, enum dso_binary_type type,
 			  char *root_dir, char *file, size_t size);
 
 int dso__data_fd(struct dso *dso, struct machine *machine);
 =======
+=======
+>>>>>>> v3.18
 int dso__read_binary_type_filename(const struct dso *dso, enum dso_binary_type type,
 				   char *root_dir, char *filename, size_t size);
 
@@ -273,6 +305,9 @@ int dso__data_fd(struct dso *dso, struct machine *machine);
 void dso__data_close(struct dso *dso);
 
 off_t dso__data_size(struct dso *dso, struct machine *machine);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ssize_t dso__data_read_offset(struct dso *dso, struct machine *machine,
 			      u64 offset, u8 *data, ssize_t size);
@@ -280,6 +315,10 @@ ssize_t dso__data_read_addr(struct dso *dso, struct map *map,
 			    struct machine *machine, u64 addr,
 			    u8 *data, ssize_t size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool dso__data_status_seen(struct dso *dso, enum dso_data_status_seen by);
+>>>>>>> v3.18
 =======
 bool dso__data_status_seen(struct dso *dso, enum dso_data_status_seen by);
 >>>>>>> v3.18
@@ -289,14 +328,20 @@ struct dso *dso__kernel_findnew(struct machine *machine, const char *name,
 				const char *short_name, int dso_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dsos__add(struct list_head *head, struct dso *dso);
 struct dso *dsos__find(struct list_head *head, const char *name);
 struct dso *__dsos__findnew(struct list_head *head, const char *name);
 =======
+=======
+>>>>>>> v3.18
 void dsos__add(struct dsos *dsos, struct dso *dso);
 struct dso *dsos__find(const struct dsos *dsos, const char *name,
 		       bool cmp_short);
 struct dso *__dsos__findnew(struct dsos *dsos, const char *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool __dsos__read_build_ids(struct list_head *head, bool with_hits);
 
@@ -309,7 +354,10 @@ size_t dso__fprintf_symbols_by_name(struct dso *dso,
 				    enum map_type type, FILE *fp);
 size_t dso__fprintf(struct dso *dso, enum map_type type, FILE *fp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline bool dso__is_vmlinux(struct dso *dso)
 {
@@ -327,5 +375,8 @@ void dso__free_a2l(struct dso *dso);
 
 enum dso_type dso__type(struct dso *dso, struct machine *machine);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PERF_DSO */

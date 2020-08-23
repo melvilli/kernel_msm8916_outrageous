@@ -125,11 +125,14 @@
 #define TSL2X7X_MAX_TIMER_CNT          (0xFF)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*Common device IIO EventMask */
 #define TSL2X7X_EVENT_MASK \
 		(IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_RISING) | \
 		IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_FALLING)),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TSL2X7X_MIN_ITIME 3
@@ -361,7 +364,11 @@ static int tsl2x7x_get_lux(struct iio_dev *indio_dev)
 		dev_err(&chip->client->dev, "%s: device is not enabled\n",
 				__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EBUSY ;
+=======
+		ret = -EBUSY;
+>>>>>>> v3.18
 =======
 		ret = -EBUSY;
 >>>>>>> v3.18
@@ -558,7 +565,11 @@ static void tsl2x7x_defaults(struct tsl2X7X_chip *chip)
 {
 	/* If Operational settings defined elsewhere.. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chip->pdata && chip->pdata->platform_default_settings != 0)
+=======
+	if (chip->pdata && chip->pdata->platform_default_settings)
+>>>>>>> v3.18
 =======
 	if (chip->pdata && chip->pdata->platform_default_settings)
 >>>>>>> v3.18
@@ -967,7 +978,10 @@ static ssize_t tsl2x7x_gain_available_show(struct device *dev,
 	case tmd2771:
 		return snprintf(buf, PAGE_SIZE, "%s\n", "1 8 16 128");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1242,7 +1256,13 @@ static ssize_t tsl2x7x_do_prox_calibrate(struct device *dev,
 
 static int tsl2x7x_read_interrupt_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 u64 event_code)
+=======
+					 const struct iio_chan_spec *chan,
+					 enum iio_event_type type,
+					 enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 					 const struct iio_chan_spec *chan,
 					 enum iio_event_type type,
@@ -1253,7 +1273,11 @@ static int tsl2x7x_read_interrupt_config(struct iio_dev *indio_dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code) == IIO_INTENSITY)
+=======
+	if (chan->type == IIO_INTENSITY)
+>>>>>>> v3.18
 =======
 	if (chan->type == IIO_INTENSITY)
 >>>>>>> v3.18
@@ -1266,7 +1290,13 @@ static int tsl2x7x_read_interrupt_config(struct iio_dev *indio_dev,
 
 static int tsl2x7x_write_interrupt_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  u64 event_code,
+=======
+					  const struct iio_chan_spec *chan,
+					  enum iio_event_type type,
+					  enum iio_event_direction dir,
+>>>>>>> v3.18
 =======
 					  const struct iio_chan_spec *chan,
 					  enum iio_event_type type,
@@ -1277,7 +1307,11 @@ static int tsl2x7x_write_interrupt_config(struct iio_dev *indio_dev,
 	struct tsl2X7X_chip *chip = iio_priv(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code) == IIO_INTENSITY) {
+=======
+	if (chan->type == IIO_INTENSITY) {
+>>>>>>> v3.18
 =======
 	if (chan->type == IIO_INTENSITY) {
 >>>>>>> v3.18
@@ -1299,6 +1333,7 @@ static int tsl2x7x_write_interrupt_config(struct iio_dev *indio_dev,
 
 static int tsl2x7x_write_thresh(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  u64 event_code,
 				  int val)
 {
@@ -1307,6 +1342,8 @@ static int tsl2x7x_write_thresh(struct iio_dev *indio_dev,
 	if (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code) == IIO_INTENSITY) {
 		switch (IIO_EVENT_CODE_EXTRACT_DIR(event_code)) {
 =======
+=======
+>>>>>>> v3.18
 				const struct iio_chan_spec *chan,
 				enum iio_event_type type,
 				enum iio_event_direction dir,
@@ -1317,6 +1354,9 @@ static int tsl2x7x_write_thresh(struct iio_dev *indio_dev,
 
 	if (chan->type == IIO_INTENSITY) {
 		switch (dir) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case IIO_EV_DIR_RISING:
 			chip->tsl2x7x_settings.als_thresh_high = val;
@@ -1329,7 +1369,11 @@ static int tsl2x7x_write_thresh(struct iio_dev *indio_dev,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (IIO_EVENT_CODE_EXTRACT_DIR(event_code)) {
+=======
+		switch (dir) {
+>>>>>>> v3.18
 =======
 		switch (dir) {
 >>>>>>> v3.18
@@ -1351,6 +1395,7 @@ static int tsl2x7x_write_thresh(struct iio_dev *indio_dev,
 
 static int tsl2x7x_read_thresh(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       u64 event_code,
 			       int *val)
 {
@@ -1359,6 +1404,8 @@ static int tsl2x7x_read_thresh(struct iio_dev *indio_dev,
 	if (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code) == IIO_INTENSITY) {
 		switch (IIO_EVENT_CODE_EXTRACT_DIR(event_code)) {
 =======
+=======
+>>>>>>> v3.18
 			       const struct iio_chan_spec *chan,
 			       enum iio_event_type type,
 			       enum iio_event_direction dir,
@@ -1369,6 +1416,9 @@ static int tsl2x7x_read_thresh(struct iio_dev *indio_dev,
 
 	if (chan->type == IIO_INTENSITY) {
 		switch (dir) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case IIO_EV_DIR_RISING:
 			*val = chip->tsl2x7x_settings.als_thresh_high;
@@ -1381,7 +1431,11 @@ static int tsl2x7x_read_thresh(struct iio_dev *indio_dev,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (IIO_EVENT_CODE_EXTRACT_DIR(event_code)) {
+=======
+		switch (dir) {
+>>>>>>> v3.18
 =======
 		switch (dir) {
 >>>>>>> v3.18
@@ -1397,7 +1451,11 @@ static int tsl2x7x_read_thresh(struct iio_dev *indio_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return IIO_VAL_INT;
+>>>>>>> v3.18
 =======
 	return IIO_VAL_INT;
 >>>>>>> v3.18
@@ -1423,7 +1481,10 @@ static int tsl2x7x_read_raw(struct iio_dev *indio_dev,
 		default:
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -1446,7 +1507,10 @@ static int tsl2x7x_read_raw(struct iio_dev *indio_dev,
 		default:
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -1502,7 +1566,10 @@ static int tsl2x7x_write_raw(struct iio_dev *indio_dev,
 				case tmd2772:
 					return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				}
@@ -1517,7 +1584,10 @@ static int tsl2x7x_write_raw(struct iio_dev *indio_dev,
 				case tmd2771:
 					return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				}
@@ -1596,6 +1666,7 @@ static int tsl2x7x_device_id(unsigned char *id, int target)
 	case tsl2671:
 	case tsl2771:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ((*id & 0xf0) == TRITON_ID);
 	break;
 	case tmd2671:
@@ -1603,10 +1674,15 @@ static int tsl2x7x_device_id(unsigned char *id, int target)
 		return ((*id & 0xf0) == HALIBUT_ID);
 	break;
 =======
+=======
+>>>>>>> v3.18
 		return (*id & 0xf0) == TRITON_ID;
 	case tmd2671:
 	case tmd2771:
 		return (*id & 0xf0) == HALIBUT_ID;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case tsl2572:
 	case tsl2672:
@@ -1614,8 +1690,12 @@ static int tsl2x7x_device_id(unsigned char *id, int target)
 	case tsl2772:
 	case tmd2772:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ((*id & 0xf0) == SWORDFISH_ID);
 	break;
+=======
+		return (*id & 0xf0) == SWORDFISH_ID;
+>>>>>>> v3.18
 =======
 		return (*id & 0xf0) == SWORDFISH_ID;
 >>>>>>> v3.18
@@ -1826,7 +1906,10 @@ static const struct iio_info tsl2X7X_device_info[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_event_spec tsl2x7x_events[] = {
 	{
 		.type = IIO_EV_TYPE_THRESH,
@@ -1841,6 +1924,9 @@ static const struct iio_event_spec tsl2x7x_events[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 	[ALS] = {
@@ -1858,7 +1944,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 				BIT(IIO_CHAN_INFO_CALIBSCALE) |
 				BIT(IIO_CHAN_INFO_CALIBBIAS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -1880,7 +1971,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 			.channel = 0,
 			.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -1905,7 +2001,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 				BIT(IIO_CHAN_INFO_CALIBSCALE) |
 				BIT(IIO_CHAN_INFO_CALIBBIAS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -1921,7 +2022,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 			.channel = 0,
 			.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -1940,7 +2046,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 			.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
 				BIT(IIO_CHAN_INFO_CALIBSCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -1965,7 +2076,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 				BIT(IIO_CHAN_INFO_CALIBSCALE) |
 				BIT(IIO_CHAN_INFO_CALIBBIAS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -1982,7 +2098,12 @@ static const struct tsl2x7x_chip_info tsl2x7x_chip_info_tbl[] = {
 			.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
 				BIT(IIO_CHAN_INFO_CALIBSCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_mask = TSL2X7X_EVENT_MASK
+=======
+			.event_spec = tsl2x7x_events,
+			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
+>>>>>>> v3.18
 =======
 			.event_spec = tsl2x7x_events,
 			.num_event_specs = ARRAY_SIZE(tsl2x7x_events),
@@ -2003,7 +2124,11 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 	struct tsl2X7X_chip *chip;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
+=======
+	indio_dev = devm_iio_device_alloc(&clientp->dev, sizeof(*chip));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&clientp->dev, sizeof(*chip));
 >>>>>>> v3.18
@@ -2018,7 +2143,11 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 		TSL2X7X_CHIPID, &device_id);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -2029,8 +2158,12 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 				"%s: i2c device found does not match expected id\n",
 				__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto fail1;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -2041,7 +2174,11 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 		dev_err(&clientp->dev, "%s: write to cmd reg failed. err = %d\n",
 				__func__, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -2067,6 +2204,7 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 
 	if (clientp->irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_threaded_irq(clientp->irq,
 					   NULL,
 					   &tsl2x7x_event_handler,
@@ -2078,6 +2216,8 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 				"%s: irq request failed", __func__);
 			goto fail1;
 =======
+=======
+>>>>>>> v3.18
 		ret = devm_request_threaded_irq(&clientp->dev, clientp->irq,
 						NULL,
 						&tsl2x7x_event_handler,
@@ -2089,6 +2229,9 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 			dev_err(&clientp->dev,
 				"%s: irq request failed", __func__);
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2103,7 +2246,11 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 		dev_err(&clientp->dev,
 			"%s: iio registration failed\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail2;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -2113,6 +2260,7 @@ static int tsl2x7x_probe(struct i2c_client *clientp,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail2:
 	if (clientp->irq)
@@ -2121,6 +2269,8 @@ fail1:
 	iio_device_free(indio_dev);
 
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2139,6 +2289,10 @@ static int tsl2x7x_suspend(struct device *dev)
 	if (chip->pdata && chip->pdata->platform_power) {
 		pm_message_t pmm = {PM_EVENT_SUSPEND};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2157,6 +2311,10 @@ static int tsl2x7x_resume(struct device *dev)
 	if (chip->pdata && chip->pdata->platform_power) {
 		pm_message_t pmm = {PM_EVENT_RESUME};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2177,10 +2335,13 @@ static int tsl2x7x_remove(struct i2c_client *client)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (client->irq)
 		free_irq(client->irq, indio_dev);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

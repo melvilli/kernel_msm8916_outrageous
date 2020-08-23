@@ -81,7 +81,11 @@ static int mgag200_ttm_global_init(struct mga_device *ast)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ static void mgag200_bo_ttm_destroy(struct ttm_buffer_object *tbo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool mgag200_ttm_bo_is_mgag200_bo(struct ttm_buffer_object *bo)
+=======
+static bool mgag200_ttm_bo_is_mgag200_bo(struct ttm_buffer_object *bo)
+>>>>>>> v3.18
 =======
 static bool mgag200_ttm_bo_is_mgag200_bo(struct ttm_buffer_object *bo)
 >>>>>>> v3.18
@@ -157,7 +165,13 @@ mgag200_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
 static int mgag200_bo_verify_access(struct ttm_buffer_object *bo, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	struct mgag200_bo *mgabo = mgag200_bo(bo);
+
+	return drm_vma_node_verify_access(&mgabo->gem.vma_node, filp);
+>>>>>>> v3.18
 =======
 	struct mgag200_bo *mgabo = mgag200_bo(bo);
 
@@ -221,7 +235,11 @@ static struct ttm_backend_func mgag200_tt_backend_func = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ttm_tt *mgag200_ttm_tt_create(struct ttm_bo_device *bdev,
+=======
+static struct ttm_tt *mgag200_ttm_tt_create(struct ttm_bo_device *bdev,
+>>>>>>> v3.18
 =======
 static struct ttm_tt *mgag200_ttm_tt_create(struct ttm_bo_device *bdev,
 >>>>>>> v3.18
@@ -276,7 +294,13 @@ int mgag200_mm_init(struct mga_device *mdev)
 	ret = ttm_bo_device_init(&mdev->ttm.bdev,
 				 mdev->ttm.bo_global_ref.ref.object,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 &mgag200_bo_driver, DRM_FILE_PAGE_OFFSET,
+=======
+				 &mgag200_bo_driver,
+				 dev->anon_inode->i_mapping,
+				 DRM_FILE_PAGE_OFFSET,
+>>>>>>> v3.18
 =======
 				 &mgag200_bo_driver,
 				 dev->anon_inode->i_mapping,
@@ -295,9 +319,14 @@ int mgag200_mm_init(struct mga_device *mdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdev->fb_mtrr = drm_mtrr_add(pci_resource_start(dev->pdev, 0),
 				    pci_resource_len(dev->pdev, 0),
 				    DRM_MTRR_WC);
+=======
+	mdev->fb_mtrr = arch_phys_wc_add(pci_resource_start(dev->pdev, 0),
+					 pci_resource_len(dev->pdev, 0));
+>>>>>>> v3.18
 =======
 	mdev->fb_mtrr = arch_phys_wc_add(pci_resource_start(dev->pdev, 0),
 					 pci_resource_len(dev->pdev, 0));
@@ -309,13 +338,17 @@ int mgag200_mm_init(struct mga_device *mdev)
 void mgag200_mm_fini(struct mga_device *mdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *dev = mdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ttm_bo_device_release(&mdev->ttm.bdev);
 
 	mgag200_ttm_global_release(mdev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mdev->fb_mtrr >= 0) {
 		drm_mtrr_del(mdev->fb_mtrr,
@@ -327,11 +360,16 @@ void mgag200_mm_fini(struct mga_device *mdev)
 	arch_phys_wc_del(mdev->fb_mtrr);
 	mdev->fb_mtrr = 0;
 >>>>>>> v3.18
+=======
+	arch_phys_wc_del(mdev->fb_mtrr);
+	mdev->fb_mtrr = 0;
+>>>>>>> v3.18
 }
 
 void mgag200_ttm_placement(struct mgag200_bo *bo, int domain)
 {
 	u32 c = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bo->placement.fpfn = 0;
 	bo->placement.lpfn = 0;
@@ -364,6 +402,8 @@ void mgag200_bo_unreserve(struct mgag200_bo *bo)
 {
 	ttm_bo_unreserve(&bo->bo);
 =======
+=======
+>>>>>>> v3.18
 	unsigned i;
 
 	bo->placement.placement = bo->placements;
@@ -380,6 +420,9 @@ void mgag200_bo_unreserve(struct mgag200_bo *bo)
 		bo->placements[i].fpfn = 0;
 		bo->placements[i].lpfn = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -402,9 +445,13 @@ int mgag200_bo_create(struct drm_device *dev, int size, int align,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mgabo->gem.driver_private = NULL;
 	mgabo->bo.bdev = &mdev->ttm.bdev;
 	mgabo->bo.bdev->dev_mapping = dev->dev_mapping;
+=======
+	mgabo->bo.bdev = &mdev->ttm.bdev;
+>>>>>>> v3.18
 =======
 	mgabo->bo.bdev = &mdev->ttm.bdev;
 >>>>>>> v3.18
@@ -418,7 +465,11 @@ int mgag200_bo_create(struct drm_device *dev, int size, int align,
 			  ttm_bo_type_device, &mgabo->placement,
 			  align >> PAGE_SHIFT, false, NULL, acc_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  NULL, mgag200_bo_ttm_destroy);
+=======
+			  NULL, NULL, mgag200_bo_ttm_destroy);
+>>>>>>> v3.18
 =======
 			  NULL, NULL, mgag200_bo_ttm_destroy);
 >>>>>>> v3.18
@@ -443,6 +494,10 @@ int mgag200_bo_pin(struct mgag200_bo *bo, u32 pl_flag, u64 *gpu_addr)
 		if (gpu_addr)
 			*gpu_addr = mgag200_bo_gpu_offset(bo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -451,7 +506,11 @@ int mgag200_bo_pin(struct mgag200_bo *bo, u32 pl_flag, u64 *gpu_addr)
 	mgag200_ttm_placement(bo, pl_flag);
 	for (i = 0; i < bo->placement.num_placement; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -478,7 +537,11 @@ int mgag200_bo_unpin(struct mgag200_bo *bo)
 
 	for (i = 0; i < bo->placement.num_placement ; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] &= ~TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -506,7 +569,11 @@ int mgag200_bo_push_sysram(struct mgag200_bo *bo)
 	mgag200_ttm_placement(bo, TTM_PL_FLAG_SYSTEM);
 	for (i = 0; i < bo->placement.num_placement ; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -526,7 +593,11 @@ int mgag200_mmap(struct file *filp, struct vm_area_struct *vma)
 
 	if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return drm_mmap(filp, vma);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18

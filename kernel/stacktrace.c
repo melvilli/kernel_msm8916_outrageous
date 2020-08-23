@@ -12,6 +12,7 @@
 #include <linux/stacktrace.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snprint_stack_trace(char *buf, int buf_len, struct stack_trace *trace,
 			int spaces)
 {
@@ -35,6 +36,8 @@ int snprint_stack_trace(char *buf, int buf_len, struct stack_trace *trace,
 }
 EXPORT_SYMBOL_GPL(snprint_stack_trace);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void print_stack_trace(struct stack_trace *trace, int spaces)

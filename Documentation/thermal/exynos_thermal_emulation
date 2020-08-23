@@ -21,7 +21,11 @@ The sysfs node, 'emul_node', will contain value 0 for the initial state. When yo
 temperature you want to update to sysfs node, it automatically enable emulation mode and
 current temperature will be changed into it.
 <<<<<<< HEAD
+<<<<<<< HEAD
 (Exynos also supports user changable delay time which would be used to delay of
+=======
+(Exynos also supports user changeable delay time which would be used to delay of
+>>>>>>> v3.18
 =======
 (Exynos also supports user changeable delay time which would be used to delay of
 >>>>>>> v3.18

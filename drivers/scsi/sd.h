@@ -14,13 +14,19 @@
 #define SD_TIMEOUT		(30 * HZ)
 #define SD_MOD_TIMEOUT		(75 * HZ)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SD_FLUSH_TIMEOUT	(60 * HZ)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flush timeout is a multiplier over the standard device timeout which is
  * user modifiable via sysfs but initially set to SD_TIMEOUT
  */
 #define SD_FLUSH_TIMEOUT_MULTIPLIER	2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SD_WRITE_SAME_TIMEOUT	(120 * HZ)
 
@@ -49,6 +55,11 @@ enum {
 
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SD_DEF_XFER_BLOCKS = 0xffff,
+	SD_MAX_XFER_BLOCKS = 0xffffffff,
+>>>>>>> v3.18
 =======
 	SD_DEF_XFER_BLOCKS = 0xffff,
 	SD_MAX_XFER_BLOCKS = 0xffffffff,
@@ -74,6 +85,10 @@ struct scsi_disk {
 	atomic_t	openers;
 	sector_t	capacity;	/* size in 512-byte sectors */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32		max_xfer_blocks;
+>>>>>>> v3.18
 =======
 	u32		max_xfer_blocks;
 >>>>>>> v3.18
@@ -118,13 +133,19 @@ static inline struct scsi_disk *scsi_disk(struct gendisk *disk)
 	sdev_printk(prefix, (sdsk)->device, fmt, ##a)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define sd_first_printk(prefix, sdsk, fmt, a...)			\
 	do {								\
 		if ((sdkp)->first_scan)					\
 			sd_printk(prefix, sdsk, fmt, ##a);		\
 	} while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int scsi_medium_access_command(struct scsi_cmnd *scmd)
 {
@@ -181,7 +202,10 @@ enum sd_dif_target_protection_types {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Look up the DIX operation based on whether the command is read or
  * write and whether dix and dif are enabled.
  */
@@ -244,6 +268,9 @@ static inline unsigned int sd_prot_flag_mask(unsigned int prot_op)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Data Integrity Field tuple.
  */
@@ -257,7 +284,11 @@ struct sd_dif_tuple {
 
 extern void sd_dif_config_host(struct scsi_disk *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sd_dif_prepare(struct request *rq, sector_t, unsigned int);
+=======
+extern void sd_dif_prepare(struct scsi_cmnd *scmd);
+>>>>>>> v3.18
 =======
 extern void sd_dif_prepare(struct scsi_cmnd *scmd);
 >>>>>>> v3.18
@@ -269,7 +300,11 @@ static inline void sd_dif_config_host(struct scsi_disk *disk)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sd_dif_prepare(struct request *rq, sector_t s, unsigned int a)
+=======
+static inline int sd_dif_prepare(struct scsi_cmnd *scmd)
+>>>>>>> v3.18
 =======
 static inline int sd_dif_prepare(struct scsi_cmnd *scmd)
 >>>>>>> v3.18

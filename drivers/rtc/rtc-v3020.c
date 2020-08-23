@@ -17,7 +17,11 @@
  *
  *  ??-???-2004: Someone at Compulab
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  			- Initial driver creation.
+=======
+ *			- Initial driver creation.
+>>>>>>> v3.18
 =======
  *			- Initial driver creation.
 >>>>>>> v3.18
@@ -283,6 +287,7 @@ static int v3020_set_time(struct device *dev, struct rtc_time *dt)
 
 	/* Write all the values to ram... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3020_set_reg(chip, V3020_SECONDS, 	bin2bcd(dt->tm_sec));
 	v3020_set_reg(chip, V3020_MINUTES, 	bin2bcd(dt->tm_min));
 	v3020_set_reg(chip, V3020_HOURS, 	bin2bcd(dt->tm_hour));
@@ -291,6 +296,8 @@ static int v3020_set_time(struct device *dev, struct rtc_time *dt)
 	v3020_set_reg(chip, V3020_WEEK_DAY, 	bin2bcd(dt->tm_wday));
 	v3020_set_reg(chip, V3020_YEAR, 	bin2bcd(dt->tm_year % 100));
 =======
+=======
+>>>>>>> v3.18
 	v3020_set_reg(chip, V3020_SECONDS,	bin2bcd(dt->tm_sec));
 	v3020_set_reg(chip, V3020_MINUTES,	bin2bcd(dt->tm_min));
 	v3020_set_reg(chip, V3020_HOURS,	bin2bcd(dt->tm_hour));
@@ -298,6 +305,9 @@ static int v3020_set_time(struct device *dev, struct rtc_time *dt)
 	v3020_set_reg(chip, V3020_MONTH,	bin2bcd(dt->tm_mon + 1));
 	v3020_set_reg(chip, V3020_WEEK_DAY,	bin2bcd(dt->tm_wday));
 	v3020_set_reg(chip, V3020_YEAR,		bin2bcd(dt->tm_year % 100));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ...and set the clock. */
@@ -318,7 +328,11 @@ static const struct rtc_class_ops v3020_rtc_ops = {
 static int rtc_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v3020_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct v3020_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct v3020_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -339,7 +353,11 @@ static int rtc_probe(struct platform_device *pdev)
 	retval = chip->ops->map_io(chip, pdev, pdata);
 	if (retval)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_chip;
+=======
+		return retval;
+>>>>>>> v3.18
 =======
 		return retval;
 >>>>>>> v3.18
@@ -387,7 +405,11 @@ static int rtc_probe(struct platform_device *pdev)
 err_io:
 	chip->ops->unmap_io(chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_chip:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

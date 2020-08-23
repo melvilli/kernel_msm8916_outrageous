@@ -75,6 +75,10 @@
 #include <asm/mtrr.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/busy_poll.h>
+>>>>>>> v3.18
 =======
 #include <net/busy_poll.h>
 >>>>>>> v3.18
@@ -199,7 +203,10 @@ struct myri10ge_slice_state {
 	__be32 __iomem *dca_tag;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	unsigned int state;
 #define SLICE_STATE_IDLE	0
@@ -215,6 +222,9 @@ struct myri10ge_slice_state {
 	unsigned long busy_poll_miss;
 	unsigned long busy_poll_cnt;
 #endif /* CONFIG_NET_RX_BUSY_POLL */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char irq_desc[32];
 };
@@ -267,7 +277,11 @@ struct myri10ge_priv {
 	int fw_ver_tiny;
 	int adopted_rx_filter_bug;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mac_addr[6];		/* eeprom mac address */
+=======
+	u8 mac_addr[ETH_ALEN];		/* eeprom mac address */
+>>>>>>> v3.18
 =======
 	u8 mac_addr[ETH_ALEN];		/* eeprom mac address */
 >>>>>>> v3.18
@@ -585,6 +599,10 @@ myri10ge_validate_firmware(struct myri10ge_priv *mgp,
 	/* save firmware version for ethtool */
 	strncpy(mgp->fw_version, hdr->version, sizeof(mgp->fw_version));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mgp->fw_version[sizeof(mgp->fw_version) - 1] = '\0';
+>>>>>>> v3.18
 =======
 	mgp->fw_version[sizeof(mgp->fw_version) - 1] = '\0';
 >>>>>>> v3.18
@@ -944,7 +962,10 @@ abort:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 static inline void myri10ge_ss_init_lock(struct myri10ge_slice_state *ss)
 {
@@ -1031,6 +1052,9 @@ static inline bool myri10ge_ss_busy_polling(struct myri10ge_slice_state *ss)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int myri10ge_reset(struct myri10ge_priv *mgp)
 {
@@ -1435,6 +1459,11 @@ myri10ge_vlan_rx(struct net_device *dev, void *addr, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MYRI10GE_HLEN 64 /* Bytes to copy from page to skb linear memory */
+
+>>>>>>> v3.18
 =======
 #define MYRI10GE_HLEN 64 /* Bytes to copy from page to skb linear memory */
 
@@ -1451,6 +1480,10 @@ myri10ge_rx_done(struct myri10ge_slice_state *ss, int len, __wsum csum)
 	struct net_device *dev = mgp->dev;
 	u8 *va;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool polling;
+>>>>>>> v3.18
 =======
 	bool polling;
 >>>>>>> v3.18
@@ -1469,8 +1502,11 @@ myri10ge_rx_done(struct myri10ge_slice_state *ss, int len, __wsum csum)
 	prefetch(va);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = napi_get_frags(&ss->napi);
 =======
+=======
+>>>>>>> v3.18
 	/* When busy polling in user context, allocate skb and copy headers to
 	 * skb's linear memory ourselves.  When not busy polling, use the napi
 	 * gro api.
@@ -1480,6 +1516,9 @@ myri10ge_rx_done(struct myri10ge_slice_state *ss, int len, __wsum csum)
 		skb = netdev_alloc_skb(dev, MYRI10GE_HLEN + 16);
 	else
 		skb = napi_get_frags(&ss->napi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(skb == NULL)) {
 		ss->stats.rx_dropped++;
@@ -1520,9 +1559,12 @@ myri10ge_rx_done(struct myri10ge_slice_state *ss, int len, __wsum csum)
 	myri10ge_vlan_rx(mgp->dev, va, skb);
 	skb_record_rx_queue(skb, ss - &mgp->ss[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	napi_gro_frags(&ss->napi);
 =======
+=======
+>>>>>>> v3.18
 	skb_mark_napi_id(skb, &ss->napi);
 
 	if (polling) {
@@ -1546,6 +1588,9 @@ myri10ge_rx_done(struct myri10ge_slice_state *ss, int len, __wsum csum)
 	else
 		napi_gro_frags(&ss->napi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -1706,6 +1751,12 @@ static int myri10ge_poll(struct napi_struct *napi, int budget)
 		myri10ge_update_dca(ss);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Try later if the busy_poll handler is running. */
+	if (!myri10ge_ss_lock_napi(ss))
+		return budget;
+>>>>>>> v3.18
 =======
 	/* Try later if the busy_poll handler is running. */
 	if (!myri10ge_ss_lock_napi(ss))
@@ -1716,6 +1767,10 @@ static int myri10ge_poll(struct napi_struct *napi, int budget)
 	work_done = myri10ge_clean_rx_done(ss, budget);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	myri10ge_ss_unlock_napi(ss);
+>>>>>>> v3.18
 =======
 	myri10ge_ss_unlock_napi(ss);
 >>>>>>> v3.18
@@ -1727,7 +1782,10 @@ static int myri10ge_poll(struct napi_struct *napi, int budget)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 static int myri10ge_busy_poll(struct napi_struct *napi)
 {
@@ -1756,6 +1814,9 @@ static int myri10ge_busy_poll(struct napi_struct *napi)
 }
 #endif /* CONFIG_NET_RX_BUSY_POLL */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t myri10ge_intr(int irq, void *arg)
 {
@@ -1965,11 +2026,17 @@ static const char myri10ge_gstrings_slice_stats[][ETH_GSTRING_LEN] = {
 	"rx_small_cnt", "rx_big_cnt",
 	"wake_queue", "stop_queue", "tx_linearized",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	"rx_lock_napi_yield", "rx_lock_poll_yield", "rx_busy_poll_miss",
 	"rx_busy_poll_cnt",
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2072,13 +2139,19 @@ myri10ge_get_ethtool_stats(struct net_device *netdev,
 		data[i++] = (unsigned int)ss->tx.stop_queue;
 		data[i++] = (unsigned int)ss->tx.linearized;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 		data[i++] = ss->lock_napi_yield;
 		data[i++] = ss->lock_poll_yield;
 		data[i++] = ss->busy_poll_miss;
 		data[i++] = ss->busy_poll_cnt;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2392,6 +2465,7 @@ static int myri10ge_request_irq(struct myri10ge_priv *mgp)
 	if (myri10ge_msi) {
 		if (mgp->num_slices > 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status =
 			    pci_enable_msix(pdev, mgp->msix_vectors,
 					    mgp->num_slices);
@@ -2403,11 +2477,20 @@ static int myri10ge_request_irq(struct myri10ge_priv *mgp)
 					mgp->num_slices, mgp->num_slices);
 			if (status < 0) {
 >>>>>>> v3.18
+=======
+			status = pci_enable_msix_range(pdev, mgp->msix_vectors,
+					mgp->num_slices, mgp->num_slices);
+			if (status < 0) {
+>>>>>>> v3.18
 				dev_err(&pdev->dev,
 					"Error %d setting up MSI-X\n", status);
 				return status;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			mgp->msix_enabled = 1;
+>>>>>>> v3.18
 =======
 			mgp->msix_enabled = 1;
 >>>>>>> v3.18
@@ -2654,6 +2737,12 @@ static int myri10ge_open(struct net_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Initialize the slice spinlock and state used for polling */
+		myri10ge_ss_init_lock(ss);
+
+>>>>>>> v3.18
 =======
 		/* Initialize the slice spinlock and state used for polling */
 		myri10ge_ss_init_lock(ss);
@@ -2736,10 +2825,13 @@ static int myri10ge_close(struct net_device *dev)
 	del_timer_sync(&mgp->watchdog_timer);
 	mgp->running = MYRI10GE_ETH_STOPPING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < mgp->num_slices; i++) {
 		napi_disable(&mgp->ss[i].napi);
 	}
 =======
+=======
+>>>>>>> v3.18
 	local_bh_disable(); /* myri10ge_ss_lock_napi needs bh disabled */
 	for (i = 0; i < mgp->num_slices; i++) {
 		napi_disable(&mgp->ss[i].napi);
@@ -2753,6 +2845,9 @@ static int myri10ge_close(struct net_device *dev)
 		}
 	}
 	local_bh_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	netif_carrier_off(dev);
 
@@ -3259,7 +3354,11 @@ static void myri10ge_set_multicast_list(struct net_device *dev)
 	/* Walk the multicast list, and add each address */
 	netdev_for_each_mc_addr(ha, dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(data, &ha->addr, 6);
+=======
+		memcpy(data, &ha->addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(data, &ha->addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -3306,7 +3405,11 @@ static int myri10ge_set_mac_address(struct net_device *dev, void *addr)
 
 	/* change the dev structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, sa->sa_data, 6);
+=======
+	memcpy(dev->dev_addr, sa->sa_data, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, sa->sa_data, ETH_ALEN);
 >>>>>>> v3.18
@@ -3591,7 +3694,11 @@ static int myri10ge_resume(struct pci_dev *pdev)
 		return -EINVAL;
 	netdev = mgp->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(pdev, 0);	/* zeros conf space as a side effect */
+=======
+	pci_set_power_state(pdev, PCI_D0);	/* zeros conf space as a side effect */
+>>>>>>> v3.18
 =======
 	pci_set_power_state(pdev, PCI_D0);	/* zeros conf space as a side effect */
 >>>>>>> v3.18
@@ -3865,14 +3972,20 @@ static void myri10ge_free_slices(struct myri10ge_priv *mgp)
 			ss->fw_stats = NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netif_napi_del(&ss->napi);
 	}
 =======
+=======
+>>>>>>> v3.18
 		napi_hash_del(&ss->napi);
 		netif_napi_del(&ss->napi);
 	}
 	/* Wait till napi structs are no longer used, and then free ss. */
 	synchronize_rcu();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(mgp->ss);
 	mgp->ss = NULL;
@@ -3895,9 +4008,15 @@ static int myri10ge_alloc_slices(struct myri10ge_priv *mgp)
 		ss = &mgp->ss[i];
 		bytes = mgp->max_intr_slots * sizeof(*ss->rx_done.entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ss->rx_done.entry = dma_alloc_coherent(&pdev->dev, bytes,
 						       &ss->rx_done.bus,
 						       GFP_KERNEL | __GFP_ZERO);
+=======
+		ss->rx_done.entry = dma_zalloc_coherent(&pdev->dev, bytes,
+							&ss->rx_done.bus,
+							GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		ss->rx_done.entry = dma_zalloc_coherent(&pdev->dev, bytes,
 							&ss->rx_done.bus,
@@ -3916,6 +4035,10 @@ static int myri10ge_alloc_slices(struct myri10ge_priv *mgp)
 		netif_napi_add(ss->dev, &ss->napi, myri10ge_poll,
 			       myri10ge_napi_weight);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		napi_hash_add(&ss->napi);
+>>>>>>> v3.18
 =======
 		napi_hash_add(&ss->napi);
 >>>>>>> v3.18
@@ -3939,6 +4062,7 @@ static void myri10ge_probe_slices(struct myri10ge_priv *mgp)
 	char *old_fw;
 	bool old_allocated;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, status, ncpus, msix_cap;
 
 	mgp->num_slices = 1;
@@ -3947,12 +4071,17 @@ static void myri10ge_probe_slices(struct myri10ge_priv *mgp)
 
 	if (myri10ge_max_slices == 1 || msix_cap == 0 ||
 =======
+=======
+>>>>>>> v3.18
 	int i, status, ncpus;
 
 	mgp->num_slices = 1;
 	ncpus = netif_get_num_default_rss_queues();
 
 	if (myri10ge_max_slices == 1 || !pdev->msix_cap ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    (myri10ge_max_slices == -1 && ncpus < 2))
 		return;
@@ -4026,7 +4155,11 @@ static void myri10ge_probe_slices(struct myri10ge_priv *mgp)
 				    GFP_KERNEL);
 	if (mgp->msix_vectors == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto disable_msix;
+=======
+		goto no_msix;
+>>>>>>> v3.18
 =======
 		goto no_msix;
 >>>>>>> v3.18
@@ -4035,6 +4168,7 @@ static void myri10ge_probe_slices(struct myri10ge_priv *mgp)
 	}
 
 	while (mgp->num_slices > 1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* make sure it is a power of two */
 		while (!is_power_of_2(mgp->num_slices))
@@ -4057,6 +4191,8 @@ static void myri10ge_probe_slices(struct myri10ge_priv *mgp)
 
 disable_msix:
 =======
+=======
+>>>>>>> v3.18
 		mgp->num_slices = rounddown_pow_of_two(mgp->num_slices);
 		if (mgp->num_slices == 1)
 			goto no_msix;
@@ -4079,6 +4215,9 @@ disable_msix:
 	}
 
 no_msix:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mgp->msix_vectors != NULL) {
 		kfree(mgp->msix_vectors);
@@ -4101,6 +4240,12 @@ static const struct net_device_ops myri10ge_netdev_ops = {
 	.ndo_set_rx_mode	= myri10ge_set_multicast_list,
 	.ndo_set_mac_address	= myri10ge_set_mac_address,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NET_RX_BUSY_POLL
+	.ndo_busy_poll		= myri10ge_busy_poll,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	.ndo_busy_poll		= myri10ge_busy_poll,
@@ -4275,7 +4420,11 @@ static int myri10ge_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		    (unsigned long)mgp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &myri10ge_ethtool_ops);
+=======
+	netdev->ethtool_ops = &myri10ge_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &myri10ge_ethtool_ops;
 >>>>>>> v3.18
@@ -4375,7 +4524,10 @@ static void myri10ge_remove(struct pci_dev *pdev)
 	free_netdev(netdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4384,7 +4536,11 @@ static void myri10ge_remove(struct pci_dev *pdev)
 #define PCI_DEVICE_ID_MYRICOM_MYRI10GE_Z8E_9	0x0009
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(myri10ge_pci_tbl) = {
+=======
+static const struct pci_device_id myri10ge_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id myri10ge_pci_tbl[] = {
 >>>>>>> v3.18

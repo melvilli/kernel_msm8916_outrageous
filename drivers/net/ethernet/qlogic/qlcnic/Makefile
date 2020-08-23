@@ -9,13 +9,19 @@ qlcnic-y := qlcnic_hw.o qlcnic_main.o qlcnic_init.o \
 	qlcnic_sysfs.o qlcnic_minidump.o qlcnic_83xx_hw.o \
 	qlcnic_83xx_init.o qlcnic_83xx_vnic.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_minidump.o qlcnic_sriov_common.o
 
 qlcnic-$(CONFIG_QLCNIC_SRIOV) += qlcnic_sriov_pf.o
 =======
+=======
+>>>>>>> v3.18
 	qlcnic_sriov_common.o
 
 qlcnic-$(CONFIG_QLCNIC_SRIOV) += qlcnic_sriov_pf.o
 
 qlcnic-$(CONFIG_QLCNIC_DCB) += qlcnic_dcb.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

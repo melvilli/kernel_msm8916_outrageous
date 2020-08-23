@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Fairchild Semiconductor FAN53555 regulator
 
 The FAN53555 is a step-down switching voltage regulator that delivers a
@@ -56,6 +57,8 @@ Example:
 			fairchild,disable-suspend;
 		};
 =======
+=======
+>>>>>>> v3.18
 Binding for Fairchild FAN53555 regulators
 
 Required properties:
@@ -78,5 +81,8 @@ Example:
 		regulator-max-microvolt = <1800000>;
 		vin-supply = <&parent_reg>;
 		fcs,suspend-voltage-selector = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

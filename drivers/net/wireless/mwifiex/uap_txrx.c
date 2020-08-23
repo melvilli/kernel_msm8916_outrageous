@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: AP TX and RX data handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012, Marvell International Ltd.
+=======
+ * Copyright (C) 2012-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -29,7 +33,10 @@
 #include "11n_rxreorder.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function checks if particular RA list has packets more than low bridge
  * packet threshold and then deletes packet from this RA list.
  * Function deletes packets from such RA list and returns true. If no such list
@@ -93,6 +100,9 @@ static void mwifiex_uap_cleanup_tx_queues(struct mwifiex_private *priv)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 					 struct sk_buff *skb)
@@ -104,9 +114,13 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 	struct mwifiex_txinfo *tx_info;
 	int hdr_chop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timeval tv;
 	struct ethhdr *p_ethhdr;
 	u8 rfc1042_eth_hdr[ETH_ALEN] = { 0xaa, 0xaa, 0x03, 0x00, 0x00, 0x00 };
+=======
+	struct ethhdr *p_ethhdr;
+>>>>>>> v3.18
 =======
 	struct ethhdr *p_ethhdr;
 >>>>>>> v3.18
@@ -115,6 +129,7 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 	rx_pkt_hdr = (void *)uap_rx_pd + le16_to_cpu(uap_rx_pd->rx_pkt_offset);
 
 	if ((atomic_read(&adapter->pending_bridged_pkts) >=
+<<<<<<< HEAD
 <<<<<<< HEAD
 					     MWIFIEX_BRIDGED_PKTS_THRESHOLD)) {
 		dev_err(priv->adapter->dev,
@@ -126,6 +141,8 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 	if (!memcmp(&rx_pkt_hdr->rfc1042_hdr,
 		    rfc1042_eth_hdr, sizeof(rfc1042_eth_hdr))) {
 =======
+=======
+>>>>>>> v3.18
 					     MWIFIEX_BRIDGED_PKTS_THR_HIGH)) {
 		dev_err(priv->adapter->dev,
 			"Tx: Bridge packet limit reached. Drop packet!\n");
@@ -140,6 +157,9 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 		     sizeof(rfc1042_header)) &&
 	     ntohs(rx_pkt_hdr->rfc1042_hdr.snap_type) != ETH_P_AARP &&
 	     ntohs(rx_pkt_hdr->rfc1042_hdr.snap_type) != ETH_P_IPX)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Replace the 803 header and rfc1042 header (llc/snap) with
 		 * an Ethernet II header, keep the src/dst and snap_type
@@ -172,7 +192,11 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Chop off the leading header bytes so the it points
+=======
+	/* Chop off the leading header bytes so that it points
+>>>>>>> v3.18
 =======
 	/* Chop off the leading header bytes so that it points
 >>>>>>> v3.18
@@ -204,6 +228,10 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 
 	tx_info = MWIFIEX_SKB_TXCB(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(tx_info, 0, sizeof(*tx_info));
+>>>>>>> v3.18
 =======
 	memset(tx_info, 0, sizeof(*tx_info));
 >>>>>>> v3.18
@@ -212,9 +240,12 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 	tx_info->flags |= MWIFIEX_BUF_FLAG_BRIDGED_PKT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_gettimeofday(&tv);
 	skb->tstamp = timeval_to_ktime(tv);
 =======
+=======
+>>>>>>> v3.18
 	if (is_unicast_ether_addr(rx_pkt_hdr->eth803_hdr.h_dest)) {
 		/* Update bridge packet statistics as the
 		 * packet is not going to kernel/upper layer.
@@ -229,16 +260,22 @@ static void mwifiex_uap_queue_bridged_pkt(struct mwifiex_private *priv,
 	}
 
 	__net_timestamp(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mwifiex_wmm_add_buf_txqueue(priv, skb);
 	atomic_inc(&adapter->tx_pending);
 	atomic_inc(&adapter->pending_bridged_pkts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((atomic_read(&adapter->tx_pending) >= MAX_TX_PENDING)) {
 		mwifiex_set_trans_start(priv->netdev);
 		mwifiex_stop_net_dev_queue(priv->netdev, priv->adapter);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return;
@@ -324,6 +361,7 @@ int mwifiex_process_uap_rx_packet(struct mwifiex_private *priv,
 			le16_to_cpu(uap_rx_pd->rx_pkt_length));
 		priv->stats.rx_dropped++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (adapter->if_ops.data_complete)
 			adapter->if_ops.data_complete(adapter, skb);
@@ -355,11 +393,16 @@ int mwifiex_process_uap_rx_packet(struct mwifiex_private *priv,
 		return 0;
 	} else if (rx_pkt_type == PKT_TYPE_MGMT) {
 =======
+=======
+>>>>>>> v3.18
 		dev_kfree_skb_any(skb);
 		return 0;
 	}
 
 	if (rx_pkt_type == PKT_TYPE_MGMT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = mwifiex_process_mgmt_packet(priv, skb);
 		if (ret)
@@ -391,12 +434,17 @@ int mwifiex_process_uap_rx_packet(struct mwifiex_private *priv,
 					 skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret || (rx_pkt_type == PKT_TYPE_BAR)) {
 		if (adapter->if_ops.data_complete)
 			adapter->if_ops.data_complete(adapter, skb);
 		else
 			dev_kfree_skb_any(skb);
 	}
+=======
+	if (ret || (rx_pkt_type == PKT_TYPE_BAR))
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	if (ret || (rx_pkt_type == PKT_TYPE_BAR))
 		dev_kfree_skb_any(skb);

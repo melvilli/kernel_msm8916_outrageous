@@ -5,7 +5,11 @@
 #include <asm/prom.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void of_console_init(void);
+=======
+void of_console_init(void);
+>>>>>>> v3.18
 =======
 void of_console_init(void);
 >>>>>>> v3.18

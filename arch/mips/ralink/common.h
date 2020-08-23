@@ -47,6 +47,11 @@ extern void ralink_clk_init(void);
 extern void ralink_clk_add(const char *dev, unsigned long rate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void ralink_rst_init(void);
+
+>>>>>>> v3.18
 =======
 extern void ralink_rst_init(void);
 

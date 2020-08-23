@@ -101,11 +101,17 @@ static inline void __raw_writel(u32 w, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define readb_relaxed readb
 #define readw_relaxed readw
 #define readl_relaxed readl
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/io.h>
 

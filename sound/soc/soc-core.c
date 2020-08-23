@@ -31,16 +31,22 @@
 #include <linux/debugfs.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ctype.h>
 #include <linux/slab.h>
 #include <linux/of.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pinctrl/consumer.h>
 #include <linux/ctype.h>
 #include <linux/slab.h>
 #include <linux/of.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sound/ac97_codec.h>
 #include <sound/core.h>
@@ -57,8 +63,11 @@
 #define NAME_SIZE	32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DECLARE_WAIT_QUEUE_HEAD(soc_pm_waitq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
@@ -68,7 +77,10 @@ EXPORT_SYMBOL_GPL(snd_soc_debugfs_root);
 
 static DEFINE_MUTEX(client_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static LIST_HEAD(dai_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static LIST_HEAD(platform_list);
@@ -85,7 +97,10 @@ module_param(pmdown_time, int, 0);
 MODULE_PARM_DESC(pmdown_time, "DAPM stream powerdown time (msecs)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct snd_ac97_reset_cfg {
 	struct pinctrl *pctl;
 	struct pinctrl_state *pstate_reset;
@@ -96,6 +111,9 @@ struct snd_ac97_reset_cfg {
 	int gpio_reset;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* returns the minimum number of bytes needed to represent
  * a particular given value */
@@ -173,6 +191,7 @@ static ssize_t soc_codec_reg_show(struct snd_soc_codec *codec, char *buf,
 
 	for (i = 0; i < codec->driver->reg_cache_size; i += step) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!snd_soc_codec_readable_register(codec, i))
 			continue;
 		if (codec->driver->display_register) {
@@ -190,6 +209,8 @@ static ssize_t soc_codec_reg_show(struct snd_soc_codec *codec, char *buf,
 			p += len;
 		}
 =======
+=======
+>>>>>>> v3.18
 		/* only support larger than PAGE_SIZE bytes debugfs
 		 * entries for the default case */
 		if (p >= pos) {
@@ -199,6 +220,9 @@ static ssize_t soc_codec_reg_show(struct snd_soc_codec *codec, char *buf,
 			total += len;
 		}
 		p += len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -233,7 +257,11 @@ static ssize_t pmdown_time_set(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &rtd->pmdown_time);
+=======
+	ret = kstrtol(buf, 10, &rtd->pmdown_time);
+>>>>>>> v3.18
 =======
 	ret = kstrtol(buf, 10, &rtd->pmdown_time);
 >>>>>>> v3.18
@@ -282,6 +310,10 @@ static ssize_t codec_reg_write_file(struct file *file,
 	unsigned long reg, value;
 	struct snd_soc_codec *codec = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -297,8 +329,14 @@ static ssize_t codec_reg_write_file(struct file *file,
 	while (*start == ' ')
 		start++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(start, 16, &value))
 		return -EINVAL;
+=======
+	ret = kstrtoul(start, 16, &value);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(start, 16, &value);
 	if (ret)
@@ -319,6 +357,7 @@ static const struct file_operations codec_reg_fops = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void soc_init_codec_debugfs(struct snd_soc_codec *codec)
 {
@@ -372,6 +411,8 @@ static void soc_cleanup_platform_debugfs(struct snd_soc_platform *platform)
 {
 	debugfs_remove_recursive(platform->debugfs_platform_root);
 =======
+=======
+>>>>>>> v3.18
 static void soc_init_component_debugfs(struct snd_soc_component *component)
 {
 	if (component->debugfs_prefix) {
@@ -420,6 +461,9 @@ static void soc_init_codec_debugfs(struct snd_soc_component *component)
 	if (!codec->debugfs_reg)
 		dev_warn(codec->dev,
 			"ASoC: Failed to create codec register debugfs file\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -436,7 +480,11 @@ static ssize_t codec_list_read_file(struct file *file, char __user *user_buf,
 	list_for_each_entry(codec, &codec_list, list) {
 		len = snprintf(buf + ret, PAGE_SIZE - ret, "%s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       codec->name);
+=======
+			       codec->component.name);
+>>>>>>> v3.18
 =======
 			       codec->component.name);
 >>>>>>> v3.18
@@ -467,6 +515,10 @@ static ssize_t dai_list_read_file(struct file *file, char __user *user_buf,
 	char *buf = kmalloc(PAGE_SIZE, GFP_KERNEL);
 	ssize_t len, ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_soc_component *component;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component;
 >>>>>>> v3.18
@@ -476,6 +528,7 @@ static ssize_t dai_list_read_file(struct file *file, char __user *user_buf,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(dai, &dai_list, list) {
 		len = snprintf(buf + ret, PAGE_SIZE - ret, "%s\n", dai->name);
 		if (len >= 0)
@@ -484,6 +537,8 @@ static ssize_t dai_list_read_file(struct file *file, char __user *user_buf,
 			ret = PAGE_SIZE;
 			break;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(component, &component_list, list) {
 		list_for_each_entry(dai, &component->dai_list, list) {
 			len = snprintf(buf + ret, PAGE_SIZE - ret, "%s\n",
@@ -494,6 +549,9 @@ static ssize_t dai_list_read_file(struct file *file, char __user *user_buf,
 				ret = PAGE_SIZE;
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -524,7 +582,11 @@ static ssize_t platform_list_read_file(struct file *file,
 	list_for_each_entry(platform, &platform_list, list) {
 		len = snprintf(buf + ret, PAGE_SIZE - ret, "%s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       platform->name);
+=======
+			       platform->component.name);
+>>>>>>> v3.18
 =======
 			       platform->component.name);
 >>>>>>> v3.18
@@ -574,6 +636,7 @@ static void soc_cleanup_card_debugfs(struct snd_soc_card *card)
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void soc_init_codec_debugfs(struct snd_soc_codec *codec)
 {
 }
@@ -588,6 +651,8 @@ static inline void soc_init_platform_debugfs(struct snd_soc_platform *platform)
 
 static inline void soc_cleanup_platform_debugfs(struct snd_soc_platform *platform)
 =======
+=======
+>>>>>>> v3.18
 #define soc_init_codec_debugfs NULL
 
 static inline void soc_init_component_debugfs(
@@ -597,6 +662,9 @@ static inline void soc_init_component_debugfs(
 
 static inline void soc_cleanup_component_debugfs(
 	struct snd_soc_component *component)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
@@ -658,18 +726,24 @@ static int soc_ac97_dev_register(struct snd_soc_codec *codec)
 
 	codec->ac97->dev.bus = &ac97_bus_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->ac97->dev.parent = codec->card->dev;
 	codec->ac97->dev.release = soc_ac97_device_release;
 
 	dev_set_name(&codec->ac97->dev, "%d-%d:%s",
 		     codec->card->snd_card->number, 0, codec->name);
 =======
+=======
+>>>>>>> v3.18
 	codec->ac97->dev.parent = codec->component.card->dev;
 	codec->ac97->dev.release = soc_ac97_device_release;
 
 	dev_set_name(&codec->ac97->dev, "%d-%d:%s",
 		     codec->component.card->snd_card->number, 0,
 		     codec->component.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = device_register(&codec->ac97->dev);
 	if (err < 0) {
@@ -682,7 +756,10 @@ static int soc_ac97_dev_register(struct snd_soc_codec *codec)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void codec2codec_close_delayed_work(struct work_struct *work)
 {
 	/* Currently nothing to do for c2c links
@@ -692,6 +769,9 @@ static void codec2codec_close_delayed_work(struct work_struct *work)
 	 */
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 /* powers down audio subsystem for suspend */
@@ -700,6 +780,7 @@ int snd_soc_suspend(struct device *dev)
 	struct snd_soc_card *card = dev_get_drvdata(dev);
 	struct snd_soc_codec *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	/* If the initialization of this soc device failed, there is no codec
@@ -707,10 +788,15 @@ int snd_soc_suspend(struct device *dev)
 	 */
 	if (list_empty(&card->codec_dev_list))
 =======
+=======
+>>>>>>> v3.18
 	int i, j;
 
 	/* If the card is not initialized yet there is nothing to do */
 	if (!card->instantiated)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -727,8 +813,11 @@ int snd_soc_suspend(struct device *dev)
 	/* mute any active DACs */
 	for (i = 0; i < card->num_rtd; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct snd_soc_dai *dai = card->rtd[i].codec_dai;
 		struct snd_soc_dai_driver *drv = dai->driver;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -736,9 +825,12 @@ int snd_soc_suspend(struct device *dev)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (drv->ops->digital_mute && dai->playback_active)
 			drv->ops->digital_mute(dai, 1);
 =======
+=======
+>>>>>>> v3.18
 		for (j = 0; j < card->rtd[i].num_codecs; j++) {
 			struct snd_soc_dai *dai = card->rtd[i].codec_dais[j];
 			struct snd_soc_dai_driver *drv = dai->driver;
@@ -746,6 +838,9 @@ int snd_soc_suspend(struct device *dev)
 			if (drv->ops->digital_mute && dai->playback_active)
 				drv->ops->digital_mute(dai, 1);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -778,15 +873,21 @@ int snd_soc_suspend(struct device *dev)
 	/* close any waiting streams and save state */
 	for (i = 0; i < card->num_rtd; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flush_delayed_work(&card->rtd[i].delayed_work);
 		card->rtd[i].codec->dapm.suspend_bias_level = card->rtd[i].codec->dapm.bias_level;
 =======
+=======
+>>>>>>> v3.18
 		struct snd_soc_dai **codec_dais = card->rtd[i].codec_dais;
 		flush_delayed_work(&card->rtd[i].delayed_work);
 		for (j = 0; j < card->rtd[i].num_codecs; j++) {
 			codec_dais[j]->codec->dapm.suspend_bias_level =
 					codec_dais[j]->codec->dapm.bias_level;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -813,7 +914,11 @@ int snd_soc_suspend(struct device *dev)
 		/* If there are paths active then the CODEC will be held with
 		 * bias _ON and should not be suspended. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!codec->suspended && codec->driver->suspend) {
+=======
+		if (!codec->suspended) {
+>>>>>>> v3.18
 =======
 		if (!codec->suspended) {
 >>>>>>> v3.18
@@ -827,6 +932,7 @@ int snd_soc_suspend(struct device *dev)
 				 */
 				if (codec->dapm.idle_bias_off) {
 					dev_dbg(codec->dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 						"ASoC: idle_bias_off CODEC on"
 						" over suspend\n");
@@ -843,6 +949,8 @@ int snd_soc_suspend(struct device *dev)
 				dev_dbg(codec->dev, "ASoC: CODEC is on"
 					" over suspend\n");
 =======
+=======
+>>>>>>> v3.18
 						"ASoC: idle_bias_off CODEC on over suspend\n");
 					break;
 				}
@@ -860,6 +968,9 @@ int snd_soc_suspend(struct device *dev)
 			default:
 				dev_dbg(codec->dev,
 					"ASoC: CODEC is on over suspend\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -875,6 +986,12 @@ int snd_soc_suspend(struct device *dev)
 		if (cpu_dai->driver->suspend && cpu_dai->driver->ac97_control)
 			cpu_dai->driver->suspend(cpu_dai);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		/* deactivate pins to sleep state */
+		pinctrl_pm_select_sleep_state(cpu_dai->dev);
+>>>>>>> v3.18
 =======
 
 		/* deactivate pins to sleep state */
@@ -898,7 +1015,11 @@ static void soc_resume_deferred(struct work_struct *work)
 			container_of(work, struct snd_soc_card, deferred_resume_work);
 	struct snd_soc_codec *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	int i, j;
+>>>>>>> v3.18
 =======
 	int i, j;
 >>>>>>> v3.18
@@ -932,6 +1053,7 @@ static void soc_resume_deferred(struct work_struct *work)
 		 * resume.  Otherwise the suspend was suppressed.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (codec->driver->resume && codec->suspended) {
 			switch (codec->dapm.bias_level) {
 			case SND_SOC_BIAS_STANDBY:
@@ -943,6 +1065,8 @@ static void soc_resume_deferred(struct work_struct *work)
 				dev_dbg(codec->dev, "ASoC: CODEC was on over"
 					" suspend\n");
 =======
+=======
+>>>>>>> v3.18
 		if (codec->suspended) {
 			switch (codec->dapm.bias_level) {
 			case SND_SOC_BIAS_STANDBY:
@@ -954,6 +1078,9 @@ static void soc_resume_deferred(struct work_struct *work)
 			default:
 				dev_dbg(codec->dev,
 					"ASoC: CODEC was on over suspend\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -977,8 +1104,11 @@ static void soc_resume_deferred(struct work_struct *work)
 	/* unmute any active DACs */
 	for (i = 0; i < card->num_rtd; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct snd_soc_dai *dai = card->rtd[i].codec_dai;
 		struct snd_soc_dai_driver *drv = dai->driver;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -986,9 +1116,12 @@ static void soc_resume_deferred(struct work_struct *work)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (drv->ops->digital_mute && dai->playback_active)
 			drv->ops->digital_mute(dai, 0);
 =======
+=======
+>>>>>>> v3.18
 		for (j = 0; j < card->rtd[i].num_codecs; j++) {
 			struct snd_soc_dai *dai = card->rtd[i].codec_dais[j];
 			struct snd_soc_dai_driver *drv = dai->driver;
@@ -996,6 +1129,9 @@ static void soc_resume_deferred(struct work_struct *work)
 			if (drv->ops->digital_mute && dai->playback_active)
 				drv->ops->digital_mute(dai, 0);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1034,6 +1170,7 @@ int snd_soc_resume(struct device *dev)
 	int i, ac97_control = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If the initialization of this soc device failed, there is no codec
 	 * associated with it. Just bail out in this case.
 	 */
@@ -1041,6 +1178,8 @@ int snd_soc_resume(struct device *dev)
 		return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	/* If the card is not initialized yet there is nothing to do */
 	if (!card->instantiated)
 		return 0;
@@ -1062,6 +1201,9 @@ int snd_soc_resume(struct device *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* AC97 devices might have other drivers hanging off them so
 	 * need to resume immediately.  Other drivers don't have that
@@ -1093,6 +1235,7 @@ static const struct snd_soc_dai_ops null_dai_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 {
 	struct snd_soc_dai_link *dai_link = &card->dai_link[num];
@@ -1120,6 +1263,8 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_component *soc_find_component(
 	const struct device_node *of_node, const char *name)
 {
@@ -1177,6 +1322,9 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 	cpu_dai_component.of_node = dai_link->cpu_of_node;
 	cpu_dai_component.dai_name = dai_link->cpu_dai_name;
 	rtd->cpu_dai = snd_soc_find_dai(&cpu_dai_component);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!rtd->cpu_dai) {
 		dev_err(card->dev, "ASoC: CPU DAI %s not registered\n",
@@ -1184,6 +1332,7 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 		return -EPROBE_DEFER;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Find CODEC from registered CODECs */
 	list_for_each_entry(codec, &codec_list, list) {
@@ -1214,6 +1363,8 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 			dev_err(card->dev, "ASoC: CODEC DAI %s not registered\n",
 				dai_link->codec_dai_name);
 =======
+=======
+>>>>>>> v3.18
 	rtd->num_codecs = dai_link->num_codecs;
 
 	/* Find CODEC from registered CODECs */
@@ -1222,17 +1373,26 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 		if (!codec_dais[i]) {
 			dev_err(card->dev, "ASoC: CODEC DAI %s not registered\n",
 				codecs[i].dai_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EPROBE_DEFER;
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rtd->codec) {
 		dev_err(card->dev, "ASoC: CODEC %s not registered\n",
 			dai_link->codec_name);
 		return -EPROBE_DEFER;
 	}
+=======
+	/* Single codec links expect codec and codec_dai in runtime data */
+	rtd->codec_dai = codec_dais[0];
+	rtd->codec = rtd->codec_dai->codec;
+>>>>>>> v3.18
 =======
 	/* Single codec links expect codec and codec_dai in runtime data */
 	rtd->codec_dai = codec_dais[0];
@@ -1252,7 +1412,11 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 				continue;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (strcmp(platform->name, platform_name))
+=======
+			if (strcmp(platform->component.name, platform_name))
+>>>>>>> v3.18
 =======
 			if (strcmp(platform->component.name, platform_name))
 >>>>>>> v3.18
@@ -1272,6 +1436,7 @@ static int soc_bind_dai_link(struct snd_soc_card *card, int num)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int soc_remove_platform(struct snd_soc_platform *platform)
 {
@@ -1313,6 +1478,8 @@ static void soc_remove_codec(struct snd_soc_codec *codec)
 	list_del(&codec->card_list);
 	module_put(codec->dev->driver->owner);
 =======
+=======
+>>>>>>> v3.18
 static void soc_remove_component(struct snd_soc_component *component)
 {
 	if (!component->probed)
@@ -1347,6 +1514,9 @@ static void soc_remove_dai(struct snd_soc_dai *dai, int order)
 		}
 		dai->probed = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1354,8 +1524,12 @@ static void soc_remove_link_dais(struct snd_soc_card *card, int num, int order)
 {
 	struct snd_soc_pcm_runtime *rtd = &card->rtd[num];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dai *codec_dai = rtd->codec_dai, *cpu_dai = rtd->cpu_dai;
 	int err;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -1369,6 +1543,7 @@ static void soc_remove_link_dais(struct snd_soc_card *card, int num, int order)
 	}
 
 	/* remove the CODEC DAI */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (codec_dai && codec_dai->probed &&
 			codec_dai->driver->remove_order == order) {
@@ -1402,10 +1577,15 @@ static void soc_remove_link_dais(struct snd_soc_card *card, int num, int order)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < rtd->num_codecs; i++)
 		soc_remove_dai(rtd->codec_dais[i], order);
 
 	soc_remove_dai(rtd->cpu_dai, order);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1414,6 +1594,7 @@ static void soc_remove_link_components(struct snd_soc_card *card, int num,
 {
 	struct snd_soc_pcm_runtime *rtd = &card->rtd[num];
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
 	struct snd_soc_platform *platform = rtd->platform;
@@ -1432,6 +1613,8 @@ static void soc_remove_link_components(struct snd_soc_card *card, int num,
 		    codec->driver->remove_order == order)
 			soc_remove_codec(codec);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_platform *platform = rtd->platform;
 	struct snd_soc_component *component;
 	int i;
@@ -1445,16 +1628,24 @@ static void soc_remove_link_components(struct snd_soc_card *card, int num,
 		component = rtd->codec_dais[i]->component;
 		if (component->driver->remove_order == order)
 			soc_remove_component(component);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* remove any CPU-side CODEC */
 	if (cpu_dai) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		codec = cpu_dai->codec;
 		if (codec && codec->probed &&
 		    codec->driver->remove_order == order)
 			soc_remove_codec(codec);
+=======
+		if (cpu_dai->component->driver->remove_order == order)
+			soc_remove_component(cpu_dai->component);
+>>>>>>> v3.18
 =======
 		if (cpu_dai->component->driver->remove_order == order)
 			soc_remove_component(cpu_dai->component);
@@ -1483,7 +1674,11 @@ static void soc_remove_dai_links(struct snd_soc_card *card)
 
 static void soc_set_name_prefix(struct snd_soc_card *card,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct snd_soc_codec *codec)
+=======
+				struct snd_soc_component *component)
+>>>>>>> v3.18
 =======
 				struct snd_soc_component *component)
 >>>>>>> v3.18
@@ -1495,6 +1690,7 @@ static void soc_set_name_prefix(struct snd_soc_card *card,
 
 	for (i = 0; i < card->num_configs; i++) {
 		struct snd_soc_codec_conf *map = &card->codec_conf[i];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (map->dev_name && !strcmp(codec->name, map->dev_name)) {
 			codec->name_prefix = map->name_prefix;
@@ -1621,6 +1817,8 @@ static int soc_probe_platform(struct snd_soc_card *card,
 	list_add(&platform->card_list, &card->platform_dev_list);
 	list_add(&platform->dapm.list, &card->dapm_list);
 =======
+=======
+>>>>>>> v3.18
 		if (map->of_node && component->dev->of_node != map->of_node)
 			continue;
 		if (map->dev_name && strcmp(component->name, map->dev_name))
@@ -1696,14 +1894,22 @@ static int soc_probe_component(struct snd_soc_card *card,
 	/* This is a HACK and will be removed soon */
 	if (component->codec)
 		list_add(&component->codec->card_list, &card->codec_dev_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 
 err_probe:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_cleanup_platform_debugfs(platform);
 	module_put(platform->dev->driver->owner);
+=======
+	soc_cleanup_component_debugfs(component);
+	module_put(component->dev->driver->owner);
+>>>>>>> v3.18
 =======
 	soc_cleanup_component_debugfs(component);
 	module_put(component->dev->driver->owner);
@@ -1717,6 +1923,7 @@ static void rtd_release(struct device *dev)
 	kfree(dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int soc_post_component_init(struct snd_soc_card *card,
 				   struct snd_soc_codec *codec,
@@ -1761,21 +1968,32 @@ static int soc_post_component_init(struct snd_soc_card *card,
 	rtd->codec = codec;
 
 =======
+=======
+>>>>>>> v3.18
 static int soc_post_component_init(struct snd_soc_pcm_runtime *rtd,
 	const char *name)
 {
 	int ret = 0;
 
 	/* register the rtd device */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtd->dev = kzalloc(sizeof(struct device), GFP_KERNEL);
 	if (!rtd->dev)
 		return -ENOMEM;
 	device_initialize(rtd->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtd->dev->parent = card->dev;
 	rtd->dev->release = rtd_release;
 	rtd->dev->init_name = name;
+=======
+	rtd->dev->parent = rtd->card->dev;
+	rtd->dev->release = rtd_release;
+	dev_set_name(rtd->dev, "%s", name);
+>>>>>>> v3.18
 =======
 	rtd->dev->parent = rtd->card->dev;
 	rtd->dev->release = rtd_release;
@@ -1792,7 +2010,11 @@ static int soc_post_component_init(struct snd_soc_pcm_runtime *rtd,
 		/* calling put_device() here to free the rtd->dev */
 		put_device(rtd->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(card->dev,
+=======
+		dev_err(rtd->card->dev,
+>>>>>>> v3.18
 =======
 		dev_err(rtd->card->dev,
 >>>>>>> v3.18
@@ -1801,6 +2023,7 @@ static int soc_post_component_init(struct snd_soc_pcm_runtime *rtd,
 	}
 	rtd->dev_registered = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* add DAPM sysfs entries for this codec */
 	ret = snd_soc_dapm_sys_add(rtd->dev);
@@ -1826,6 +2049,8 @@ static int soc_post_component_init(struct snd_soc_pcm_runtime *rtd,
 out:
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (rtd->codec) {
 		/* add DAPM sysfs entries for this codec */
 		ret = snd_soc_dapm_sys_add(rtd->dev);
@@ -1842,6 +2067,9 @@ out:
 				ret);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1850,6 +2078,7 @@ static int soc_probe_link_components(struct snd_soc_card *card, int num,
 				     int order)
 {
 	struct snd_soc_pcm_runtime *rtd = &card->rtd[num];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
@@ -1862,6 +2091,8 @@ static int soc_probe_link_components(struct snd_soc_card *card, int num,
 	    cpu_dai->codec->driver->probe_order == order) {
 		ret = soc_probe_codec(card, cpu_dai->codec);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_platform *platform = rtd->platform;
 	struct snd_soc_component *component;
 	int i, ret;
@@ -1870,6 +2101,7 @@ static int soc_probe_link_components(struct snd_soc_card *card, int num,
 	component = rtd->cpu_dai->component;
 	if (component->driver->probe_order == order) {
 		ret = soc_probe_component(card, component);
+<<<<<<< HEAD
 >>>>>>> v3.18
 		if (ret < 0)
 			return ret;
@@ -1880,15 +2112,20 @@ static int soc_probe_link_components(struct snd_soc_card *card, int num,
 	if (!codec_dai->codec->probed &&
 	    codec_dai->codec->driver->probe_order == order) {
 		ret = soc_probe_codec(card, codec_dai->codec);
+=======
+>>>>>>> v3.18
 		if (ret < 0)
 			return ret;
 	}
 
+<<<<<<< HEAD
 	/* probe the platform */
 	if (!platform->probed &&
 	    platform->driver->probe_order == order) {
 		ret = soc_probe_platform(card, platform);
 =======
+=======
+>>>>>>> v3.18
 	/* probe the CODEC-side components */
 	for (i = 0; i < rtd->num_codecs; i++) {
 		component = rtd->codec_dais[i]->component;
@@ -1902,6 +2139,9 @@ static int soc_probe_link_components(struct snd_soc_card *card, int num,
 	/* probe the platform */
 	if (platform->component.driver->probe_order == order) {
 		ret = soc_probe_component(card, &platform->component);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret < 0)
 			return ret;
@@ -1910,6 +2150,7 @@ static int soc_probe_link_components(struct snd_soc_card *card, int num,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 {
@@ -1949,6 +2190,11 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 static int soc_probe_codec_dai(struct snd_soc_card *card,
 			       struct snd_soc_dai *codec_dai,
 			       int order)
+=======
+static int soc_probe_codec_dai(struct snd_soc_card *card,
+			       struct snd_soc_dai *codec_dai,
+			       int order)
+>>>>>>> v3.18
 {
 	int ret;
 
@@ -2033,6 +2279,9 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 	/* probe the cpu_dai */
 	if (!cpu_dai->probed &&
 			cpu_dai->driver->probe_order == order) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (cpu_dai->driver->probe) {
 			ret = cpu_dai->driver->probe(cpu_dai);
@@ -2041,13 +2290,17 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 					"ASoC: failed to probe CPU DAI %s: %d\n",
 					cpu_dai->name, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				module_put(cpu_dai->dev->driver->owner);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				return ret;
 			}
 		}
 		cpu_dai->probed = 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* mark cpu_dai as probed and add to card dai list */
 		list_add(&cpu_dai->card_list, &card->dai_dev_list);
@@ -2069,6 +2322,8 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 		codec_dai->probed = 1;
 		list_add(&codec_dai->card_list, &card->dai_dev_list);
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* probe the CODEC DAI */
@@ -2076,6 +2331,9 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 		ret = soc_probe_codec_dai(card, rtd->codec_dais[i], order);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2084,11 +2342,14 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = soc_post_component_init(card, codec, num, 0);
 	if (ret)
 		return ret;
 
 =======
+=======
+>>>>>>> v3.18
 	/* do machine specific initialization */
 	if (dai_link->init) {
 		ret = dai_link->init(rtd);
@@ -2116,6 +2377,9 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = device_create_file(rtd->dev, &dev_attr_pmdown_time);
 	if (ret < 0)
@@ -2142,6 +2406,7 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* link the DAI widgets */
 			play_w = codec_dai->playback_widget;
 			capture_w = cpu_dai->capture_widget;
@@ -2167,6 +2432,8 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 				}
 			}
 =======
+=======
+>>>>>>> v3.18
 			INIT_DELAYED_WORK(&rtd->delayed_work,
 						codec2codec_close_delayed_work);
 
@@ -2174,20 +2441,29 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 			ret = soc_link_dai_widgets(card, dai_link, rtd);
 			if (ret)
 				return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	/* add platform data for AC97 devices */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtd->codec_dai->driver->ac97_control)
 		snd_ac97_dev_add_pdata(codec->ac97, rtd->cpu_dai->ac97_pdata);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < rtd->num_codecs; i++) {
 		if (rtd->codec_dais[i]->driver->ac97_control)
 			snd_ac97_dev_add_pdata(rtd->codec_dais[i]->codec->ac97,
 					       rtd->cpu_dai->ac97_pdata);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2195,7 +2471,12 @@ static int soc_probe_link_dais(struct snd_soc_card *card, int num, int order)
 
 #ifdef CONFIG_SND_SOC_AC97_BUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int soc_register_ac97_dai_link(struct snd_soc_pcm_runtime *rtd)
+=======
+static int soc_register_ac97_codec(struct snd_soc_codec *codec,
+				   struct snd_soc_dai *codec_dai)
+>>>>>>> v3.18
 =======
 static int soc_register_ac97_codec(struct snd_soc_codec *codec,
 				   struct snd_soc_dai *codec_dai)
@@ -2207,7 +2488,11 @@ static int soc_register_ac97_codec(struct snd_soc_codec *codec,
 	 * for the generic AC97 subsystem.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtd->codec_dai->driver->ac97_control && !rtd->codec->ac97_registered) {
+=======
+	if (codec_dai->driver->ac97_control && !codec->ac97_registered) {
+>>>>>>> v3.18
 =======
 	if (codec_dai->driver->ac97_control && !codec->ac97_registered) {
 >>>>>>> v3.18
@@ -2220,6 +2505,7 @@ static int soc_register_ac97_codec(struct snd_soc_codec *codec,
 		 * In those cases we don't try to register the device again.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!rtd->codec->ac97_created)
 			return 0;
 
@@ -2227,19 +2513,28 @@ static int soc_register_ac97_codec(struct snd_soc_codec *codec,
 		if (ret < 0) {
 			dev_err(rtd->codec->dev,
 =======
+=======
+>>>>>>> v3.18
 		if (!codec->ac97_created)
 			return 0;
 
 		ret = soc_ac97_dev_register(codec);
 		if (ret < 0) {
 			dev_err(codec->dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				"ASoC: AC97 device register failed: %d\n", ret);
 			return ret;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtd->codec->ac97_registered = 1;
+=======
+		codec->ac97_registered = 1;
+>>>>>>> v3.18
 =======
 		codec->ac97_registered = 1;
 >>>>>>> v3.18
@@ -2248,7 +2543,11 @@ static int soc_register_ac97_codec(struct snd_soc_codec *codec,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void soc_unregister_ac97_dai_link(struct snd_soc_codec *codec)
+=======
+static void soc_unregister_ac97_codec(struct snd_soc_codec *codec)
+>>>>>>> v3.18
 =======
 static void soc_unregister_ac97_codec(struct snd_soc_codec *codec)
 >>>>>>> v3.18
@@ -2258,6 +2557,7 @@ static void soc_unregister_ac97_codec(struct snd_soc_codec *codec)
 		codec->ac97_registered = 0;
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -2325,6 +2625,8 @@ found:
 out:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 static int soc_register_ac97_dai_link(struct snd_soc_pcm_runtime *rtd)
 {
@@ -2399,6 +2701,9 @@ static int soc_probe_aux_dev(struct snd_soc_card *card, int num)
 	}
 
 	return soc_post_component_init(rtd, aux_dev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2406,7 +2711,11 @@ static void soc_remove_aux_dev(struct snd_soc_card *card, int num)
 {
 	struct snd_soc_pcm_runtime *rtd = &card->rtd_aux[num];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
+=======
+	struct snd_soc_component *component = rtd->component;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = rtd->component;
 >>>>>>> v3.18
@@ -2419,6 +2728,7 @@ static void soc_remove_aux_dev(struct snd_soc_card *card, int num)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (codec && codec->probed)
 		soc_remove_codec(codec);
 }
@@ -2426,11 +2736,16 @@ static void soc_remove_aux_dev(struct snd_soc_card *card, int num)
 static int snd_soc_init_codec_cache(struct snd_soc_codec *codec,
 				    enum snd_soc_compress_type compress_type)
 =======
+=======
+>>>>>>> v3.18
 	if (component && component->probed)
 		soc_remove_component(component);
 }
 
 static int snd_soc_init_codec_cache(struct snd_soc_codec *codec)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
@@ -2438,6 +2753,7 @@ static int snd_soc_init_codec_cache(struct snd_soc_codec *codec)
 	if (codec->cache_init)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* override the compress_type if necessary */
 	if (compress_type && codec->compress_type != compress_type)
@@ -2447,11 +2763,16 @@ static int snd_soc_init_codec_cache(struct snd_soc_codec *codec)
 		dev_err(codec->dev, "ASoC: Failed to set cache compression"
 			" type: %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_cache_init(codec);
 	if (ret < 0) {
 		dev_err(codec->dev,
 			"ASoC: Failed to set cache compression type: %d\n",
 			ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -2463,8 +2784,11 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 {
 	struct snd_soc_codec *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec_conf *codec_conf;
 	enum snd_soc_compress_type compress_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct snd_soc_dai_link *dai_link;
@@ -2480,9 +2804,15 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* check aux_devs too */
 	for (i = 0; i < card->num_aux_devs; i++) {
 		ret = soc_check_aux_dev(card, i);
+=======
+	/* bind aux_devs too */
+	for (i = 0; i < card->num_aux_devs; i++) {
+		ret = soc_bind_aux_dev(card, i);
+>>>>>>> v3.18
 =======
 	/* bind aux_devs too */
 	for (i = 0; i < card->num_aux_devs; i++) {
@@ -2496,6 +2826,7 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 	list_for_each_entry(codec, &codec_list, list) {
 		if (codec->cache_init)
 			continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* by default we don't override the compress_type */
 		compress_type = 0;
@@ -2513,11 +2844,15 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 =======
 		ret = snd_soc_init_codec_cache(codec);
 >>>>>>> v3.18
+=======
+		ret = snd_soc_init_codec_cache(codec);
+>>>>>>> v3.18
 		if (ret < 0)
 			goto base_error;
 	}
 
 	/* card bind complete so register a sound card */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			card->owner, 0, &card->snd_card);
@@ -2528,6 +2863,8 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 	}
 	card->snd_card->dev = card->dev;
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_card_new(card->dev, SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			card->owner, 0, &card->snd_card);
 	if (ret < 0) {
@@ -2536,6 +2873,9 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 			card->name, ret);
 		goto base_error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	card->dapm.bias_level = SND_SOC_BIAS_OFF;
@@ -2603,6 +2943,10 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 
 	snd_soc_dapm_link_dai_widgets(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	snd_soc_dapm_connect_dai_link_widgets(card);
+>>>>>>> v3.18
 =======
 	snd_soc_dapm_connect_dai_link_widgets(card);
 >>>>>>> v3.18
@@ -2615,9 +2959,14 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 					card->num_dapm_routes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_new_widgets(&card->dapm);
 
 	for (i = 0; i < card->num_links; i++) {
+=======
+	for (i = 0; i < card->num_links; i++) {
+		struct snd_soc_pcm_runtime *rtd = &card->rtd[i];
+>>>>>>> v3.18
 =======
 	for (i = 0; i < card->num_links; i++) {
 		struct snd_soc_pcm_runtime *rtd = &card->rtd[i];
@@ -2627,6 +2976,7 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 
 		if (dai_fmt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snd_soc_dai_set_fmt(card->rtd[i].codec_dai,
 						  dai_fmt);
 			if (ret != 0 && ret != -ENOTSUPP)
@@ -2634,6 +2984,8 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 					 "ASoC: Failed to set DAI format: %d\n",
 					 ret);
 =======
+=======
+>>>>>>> v3.18
 			struct snd_soc_dai **codec_dais = rtd->codec_dais;
 			int j;
 
@@ -2646,6 +2998,9 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 						 "ASoC: Failed to set DAI format: %d\n",
 						 ret);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2715,16 +3070,22 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_new_widgets(&card->dapm);
 
 	if (card->fully_routed)
 		list_for_each_entry(codec, &card->codec_dev_list, card_list)
 			snd_soc_dapm_auto_nc_codec_pins(codec);
 =======
+=======
+>>>>>>> v3.18
 	if (card->fully_routed)
 		snd_soc_dapm_auto_nc_pins(card);
 
 	snd_soc_dapm_new_widgets(card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = snd_card_register(card->snd_card);
@@ -2740,15 +3101,21 @@ static int snd_soc_instantiate_card(struct snd_soc_card *card)
 		ret = soc_register_ac97_dai_link(&card->rtd[i]);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(card->dev, "ASoC: failed to register AC97:"
 				" %d\n", ret);
 			while (--i >= 0)
 				soc_unregister_ac97_dai_link(card->rtd[i].codec);
 =======
+=======
+>>>>>>> v3.18
 			dev_err(card->dev,
 				"ASoC: failed to register AC97: %d\n", ret);
 			while (--i >= 0)
 				soc_unregister_ac97_dai_link(&card->rtd[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto probe_aux_dev_err;
 		}
@@ -2859,7 +3226,10 @@ int snd_soc_poweroff(struct device *dev)
 	snd_soc_dapm_shutdown(card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* deactivate pins to sleep state */
 	for (i = 0; i < card->num_rtd; i++) {
 		struct snd_soc_pcm_runtime *rtd = &card->rtd[i];
@@ -2873,6 +3243,9 @@ int snd_soc_poweroff(struct device *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2900,6 +3273,7 @@ static struct platform_driver soc_driver = {
 };
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * snd_soc_codec_volatile_register: Report if a register is volatile.
  *
@@ -2989,6 +3363,8 @@ EXPORT_SYMBOL_GPL(snd_soc_platform_write);
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * snd_soc_new_ac97_codec - initailise AC97 device
  * @codec: audio codec
  * @ops: AC97 bus operations
@@ -2999,6 +3375,7 @@ EXPORT_SYMBOL_GPL(snd_soc_platform_write);
 int snd_soc_new_ac97_codec(struct snd_soc_codec *codec,
 	struct snd_ac97_bus_ops *ops, int num)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&codec->mutex);
 
@@ -3012,13 +3389,21 @@ int snd_soc_new_ac97_codec(struct snd_soc_codec *codec,
 	if (codec->ac97 == NULL)
 		return -ENOMEM;
 >>>>>>> v3.18
+=======
+	codec->ac97 = kzalloc(sizeof(struct snd_ac97), GFP_KERNEL);
+	if (codec->ac97 == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	codec->ac97->bus = kzalloc(sizeof(struct snd_ac97_bus), GFP_KERNEL);
 	if (codec->ac97->bus == NULL) {
 		kfree(codec->ac97);
 		codec->ac97 = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&codec->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -ENOMEM;
@@ -3034,13 +3419,17 @@ int snd_soc_new_ac97_codec(struct snd_soc_codec *codec,
 	codec->ac97_created = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&codec->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_soc_new_ac97_codec);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * snd_soc_free_ac97_codec - free AC97 codec device
@@ -3214,6 +3603,8 @@ int snd_soc_set_runtime_hwparams(struct snd_pcm_substream *substream,
 }
 EXPORT_SYMBOL_GPL(snd_soc_set_runtime_hwparams);
 =======
+=======
+>>>>>>> v3.18
 static struct snd_ac97_reset_cfg snd_ac97_rst_cfg;
 
 static void snd_soc_ac97_warm_reset(struct snd_ac97 *ac97)
@@ -3388,6 +3779,9 @@ void snd_soc_free_ac97_codec(struct snd_soc_codec *codec)
 	codec->ac97_created = 0;
 }
 EXPORT_SYMBOL_GPL(snd_soc_free_ac97_codec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -3409,7 +3803,10 @@ struct snd_kcontrol *snd_soc_cnew(const struct snd_kcontrol_new *_template,
 	struct snd_kcontrol *kcontrol;
 	char *name = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int name_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3421,6 +3818,7 @@ struct snd_kcontrol *snd_soc_cnew(const struct snd_kcontrol_new *_template,
 
 	if (prefix) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name_len = strlen(long_name) + strlen(prefix) + 2;
 		name = kmalloc(name_len, GFP_KERNEL);
 		if (!name)
@@ -3429,10 +3827,15 @@ struct snd_kcontrol *snd_soc_cnew(const struct snd_kcontrol_new *_template,
 		snprintf(name, name_len, "%s %s", prefix, long_name);
 
 =======
+=======
+>>>>>>> v3.18
 		name = kasprintf(GFP_KERNEL, "%s %s", prefix, long_name);
 		if (!name)
 			return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		template.name = name;
 	} else {
@@ -3468,7 +3871,10 @@ static int snd_soc_add_controls(struct snd_card *card, struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct snd_kcontrol *snd_soc_card_get_kcontrol(struct snd_soc_card *soc_card,
 					       const char *name)
 {
@@ -3504,6 +3910,9 @@ int snd_soc_add_component_controls(struct snd_soc_component *component,
 }
 EXPORT_SYMBOL_GPL(snd_soc_add_component_controls);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * snd_soc_add_codec_controls - add an array of controls to a codec.
@@ -3518,6 +3927,7 @@ EXPORT_SYMBOL_GPL(snd_soc_add_component_controls);
  */
 int snd_soc_add_codec_controls(struct snd_soc_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct snd_kcontrol_new *controls, int num_controls)
 {
 	struct snd_card *card = codec->card->snd_card;
@@ -3525,10 +3935,15 @@ int snd_soc_add_codec_controls(struct snd_soc_codec *codec,
 	return snd_soc_add_controls(card, codec->dev, controls, num_controls,
 			codec->name_prefix, codec);
 =======
+=======
+>>>>>>> v3.18
 	const struct snd_kcontrol_new *controls, unsigned int num_controls)
 {
 	return snd_soc_add_component_controls(&codec->component, controls,
 		num_controls);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_add_codec_controls);
@@ -3545,6 +3960,7 @@ EXPORT_SYMBOL_GPL(snd_soc_add_codec_controls);
  */
 int snd_soc_add_platform_controls(struct snd_soc_platform *platform,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct snd_kcontrol_new *controls, int num_controls)
 {
 	struct snd_card *card = platform->card->snd_card;
@@ -3552,10 +3968,15 @@ int snd_soc_add_platform_controls(struct snd_soc_platform *platform,
 	return snd_soc_add_controls(card, platform->dev, controls, num_controls,
 			NULL, platform);
 =======
+=======
+>>>>>>> v3.18
 	const struct snd_kcontrol_new *controls, unsigned int num_controls)
 {
 	return snd_soc_add_component_controls(&platform->component, controls,
 		num_controls);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_add_platform_controls);
@@ -3618,6 +4039,7 @@ int snd_soc_info_enum_double(struct snd_kcontrol *kcontrol,
 	uinfo->type = SNDRV_CTL_ELEM_TYPE_ENUMERATED;
 	uinfo->count = e->shift_l == e->shift_r ? 1 : 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uinfo->value.enumerated.items = e->max;
 
 	if (uinfo->value.enumerated.item > e->max - 1)
@@ -3625,6 +4047,8 @@ int snd_soc_info_enum_double(struct snd_kcontrol *kcontrol,
 	strcpy(uinfo->value.enumerated.name,
 		e->texts[uinfo->value.enumerated.item]);
 =======
+=======
+>>>>>>> v3.18
 	uinfo->value.enumerated.items = e->items;
 
 	if (uinfo->value.enumerated.item >= e->items)
@@ -3632,6 +4056,9 @@ int snd_soc_info_enum_double(struct snd_kcontrol *kcontrol,
 	strlcpy(uinfo->value.enumerated.name,
 		e->texts[uinfo->value.enumerated.item],
 		sizeof(uinfo->value.enumerated.name));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -3650,6 +4077,7 @@ int snd_soc_get_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
 	unsigned int val;
@@ -3661,6 +4089,8 @@ int snd_soc_get_enum_double(struct snd_kcontrol *kcontrol,
 		ucontrol->value.enumerated.item[1] =
 			(val >> e->shift_r) & e->mask;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
 	unsigned int val, item;
@@ -3678,6 +4108,9 @@ int snd_soc_get_enum_double(struct snd_kcontrol *kcontrol,
 		item = snd_soc_enum_val_to_item(e, val);
 		ucontrol->value.enumerated.item[1] = item;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -3696,6 +4129,7 @@ EXPORT_SYMBOL_GPL(snd_soc_get_enum_double);
 int snd_soc_put_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
@@ -3729,15 +4163,35 @@ int snd_soc_put_enum_double(struct snd_kcontrol *kcontrol,
 		if (item[1] >= e->items)
 			return -EINVAL;
 		val |= snd_soc_enum_item_to_val(e, item[1]) << e->shift_r;
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
+	unsigned int *item = ucontrol->value.enumerated.item;
+	unsigned int val;
+	unsigned int mask;
+
+	if (item[0] >= e->items)
+		return -EINVAL;
+	val = snd_soc_enum_item_to_val(e, item[0]) << e->shift_l;
+	mask = e->mask << e->shift_l;
+	if (e->shift_l != e->shift_r) {
+		if (item[1] >= e->items)
+			return -EINVAL;
+		val |= snd_soc_enum_item_to_val(e, item[1]) << e->shift_r;
+>>>>>>> v3.18
 		mask |= e->mask << e->shift_r;
 	}
 
 	return snd_soc_component_update_bits(component, e->reg, mask, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_put_enum_double);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * snd_soc_get_value_enum_double - semi enumerated double mixer get callback
  * @kcontrol: mixer control
@@ -3865,6 +4319,8 @@ int snd_soc_info_volsw_ext(struct snd_kcontrol *kcontrol,
 }
 EXPORT_SYMBOL_GPL(snd_soc_info_volsw_ext);
 =======
+=======
+>>>>>>> v3.18
  * snd_soc_read_signed - Read a codec register and interprete as signed value
  * @component: component
  * @reg: Register to read
@@ -3917,6 +4373,9 @@ static int snd_soc_read_signed(struct snd_soc_component *component,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -3948,10 +4407,14 @@ int snd_soc_info_volsw(struct snd_kcontrol *kcontrol,
 	uinfo->count = snd_soc_volsw_is_stereo(mc) ? 2 : 1;
 	uinfo->value.integer.min = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mc->min < 0 && (uinfo->type == SNDRV_CTL_ELEM_TYPE_INTEGER))
 		uinfo->value.integer.max = platform_max - mc->min;
 	else
 		uinfo->value.integer.max = platform_max;
+=======
+	uinfo->value.integer.max = platform_max - mc->min;
+>>>>>>> v3.18
 =======
 	uinfo->value.integer.max = platform_max - mc->min;
 >>>>>>> v3.18
@@ -3973,9 +4436,15 @@ int snd_soc_get_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
@@ -3987,12 +4456,15 @@ int snd_soc_get_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int rshift = mc->rshift;
 	int max = mc->max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
 
 	ucontrol->value.integer.value[0] =
 		(snd_soc_read(codec, reg) >> shift) & mask;
 =======
+=======
+>>>>>>> v3.18
 	int min = mc->min;
 	int sign_bit = mc->sign_bit;
 	unsigned int mask = (1 << fls(max)) - 1;
@@ -4008,6 +4480,9 @@ int snd_soc_get_volsw(struct snd_kcontrol *kcontrol,
 		return ret;
 
 	ucontrol->value.integer.value[0] = val - min;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (invert)
 		ucontrol->value.integer.value[0] =
@@ -4016,12 +4491,15 @@ int snd_soc_get_volsw(struct snd_kcontrol *kcontrol,
 	if (snd_soc_volsw_is_stereo(mc)) {
 		if (reg == reg2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ucontrol->value.integer.value[1] =
 				(snd_soc_read(codec, reg) >> rshift) & mask;
 		else
 			ucontrol->value.integer.value[1] =
 				(snd_soc_read(codec, reg2) >> shift) & mask;
 =======
+=======
+>>>>>>> v3.18
 			ret = snd_soc_read_signed(component, reg, mask, rshift,
 				sign_bit, &val);
 		else
@@ -4031,6 +4509,9 @@ int snd_soc_get_volsw(struct snd_kcontrol *kcontrol,
 			return ret;
 
 		ucontrol->value.integer.value[1] = val - min;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (invert)
 			ucontrol->value.integer.value[1] =
@@ -4055,9 +4536,15 @@ int snd_soc_put_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
@@ -4069,6 +4556,7 @@ int snd_soc_put_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int rshift = mc->rshift;
 	int max = mc->max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
 	int err;
@@ -4078,6 +4566,8 @@ int snd_soc_put_volsw(struct snd_kcontrol *kcontrol,
 
 	val = (ucontrol->value.integer.value[0] & mask);
 =======
+=======
+>>>>>>> v3.18
 	int min = mc->min;
 	unsigned int sign_bit = mc->sign_bit;
 	unsigned int mask = (1 << fls(max)) - 1;
@@ -4091,6 +4581,9 @@ int snd_soc_put_volsw(struct snd_kcontrol *kcontrol,
 		mask = BIT(sign_bit + 1) - 1;
 
 	val = ((ucontrol->value.integer.value[0] + min) & mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (invert)
 		val = max - val;
@@ -4098,7 +4591,11 @@ int snd_soc_put_volsw(struct snd_kcontrol *kcontrol,
 	val = val << shift;
 	if (snd_soc_volsw_is_stereo(mc)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val2 = (ucontrol->value.integer.value[1] & mask);
+=======
+		val2 = ((ucontrol->value.integer.value[1] + min) & mask);
+>>>>>>> v3.18
 =======
 		val2 = ((ucontrol->value.integer.value[1] + min) & mask);
 >>>>>>> v3.18
@@ -4110,22 +4607,33 @@ int snd_soc_put_volsw(struct snd_kcontrol *kcontrol,
 		} else {
 			val2 = val2 << shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			type_2r = 1;
 		}
 	}
 	err = snd_soc_update_bits_locked(codec, reg, val_mask, val);
 =======
+=======
+>>>>>>> v3.18
 			type_2r = true;
 		}
 	}
 	err = snd_soc_component_update_bits(component, reg, val_mask, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		return err;
 
 	if (type_2r)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = snd_soc_update_bits_locked(codec, reg2, val_mask, val2);
+=======
+		err = snd_soc_component_update_bits(component, reg2, val_mask,
+			val2);
+>>>>>>> v3.18
 =======
 		err = snd_soc_component_update_bits(component, reg2, val_mask,
 			val2);
@@ -4149,10 +4657,16 @@ int snd_soc_get_volsw_sx(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
 	    (struct soc_mixer_control *)kcontrol->private_value;
 
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_mixer_control *mc =
+	    (struct soc_mixer_control *)kcontrol->private_value;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
@@ -4166,6 +4680,7 @@ int snd_soc_get_volsw_sx(struct snd_kcontrol *kcontrol,
 	int min = mc->min;
 	int mask = (1 << (fls(min + max) - 1)) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ucontrol->value.integer.value[0] =
 	    ((snd_soc_read(codec, reg) >> shift) - min) & mask;
@@ -4174,6 +4689,8 @@ int snd_soc_get_volsw_sx(struct snd_kcontrol *kcontrol,
 		ucontrol->value.integer.value[1] =
 			((snd_soc_read(codec, reg2) >> rshift) - min) & mask;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 	int ret;
 
@@ -4191,6 +4708,9 @@ int snd_soc_get_volsw_sx(struct snd_kcontrol *kcontrol,
 		val = ((val >> rshift) - min) & mask;
 		ucontrol->value.integer.value[1] = val;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -4210,7 +4730,11 @@ int snd_soc_put_volsw_sx(struct snd_kcontrol *kcontrol,
 			 struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -4226,7 +4750,11 @@ int snd_soc_put_volsw_sx(struct snd_kcontrol *kcontrol,
 	int mask = (1 << (fls(min + max) - 1)) - 1;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short val, val_mask, val2 = 0;
+=======
+	unsigned int val, val_mask, val2 = 0;
+>>>>>>> v3.18
 =======
 	unsigned int val, val_mask, val2 = 0;
 >>>>>>> v3.18
@@ -4236,7 +4764,11 @@ int snd_soc_put_volsw_sx(struct snd_kcontrol *kcontrol,
 	val = val << shift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_soc_update_bits_locked(codec, reg, val_mask, val);
+=======
+	err = snd_soc_component_update_bits(component, reg, val_mask, val);
+>>>>>>> v3.18
 =======
 	err = snd_soc_component_update_bits(component, reg, val_mask, val);
 >>>>>>> v3.18
@@ -4249,15 +4781,21 @@ int snd_soc_put_volsw_sx(struct snd_kcontrol *kcontrol,
 		val2 = val2 << rshift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (snd_soc_update_bits_locked(codec, reg2, val_mask, val2))
 			return err;
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		err = snd_soc_component_update_bits(component, reg2, val_mask,
 			val2);
 	}
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_put_volsw_sx);
@@ -4306,11 +4844,14 @@ int snd_soc_get_volsw_s8(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	unsigned int reg = mc->reg;
 	int min = mc->min;
 	int val = snd_soc_read(codec, reg);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	unsigned int reg = mc->reg;
 	unsigned int val;
@@ -4320,6 +4861,9 @@ int snd_soc_get_volsw_s8(struct snd_kcontrol *kcontrol,
 	ret = snd_soc_component_read(component, reg, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ucontrol->value.integer.value[0] =
@@ -4345,7 +4889,11 @@ int snd_soc_put_volsw_s8(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -4357,7 +4905,11 @@ int snd_soc_put_volsw_s8(struct snd_kcontrol *kcontrol,
 	val |= ((ucontrol->value.integer.value[1]+min) & 0xff) << 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_soc_update_bits_locked(codec, reg, 0xffff, val);
+=======
+	return snd_soc_component_update_bits(component, reg, 0xffff, val);
+>>>>>>> v3.18
 =======
 	return snd_soc_component_update_bits(component, reg, 0xffff, val);
 >>>>>>> v3.18
@@ -4410,7 +4962,11 @@ int snd_soc_put_volsw_range(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -4425,6 +4981,7 @@ int snd_soc_put_volsw_range(struct snd_kcontrol *kcontrol,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = ((ucontrol->value.integer.value[0] + min) & mask);
 	if (invert)
 		val = max - val;
@@ -4433,6 +4990,8 @@ int snd_soc_put_volsw_range(struct snd_kcontrol *kcontrol,
 
 	ret = snd_soc_update_bits_locked(codec, reg, val_mask, val);
 =======
+=======
+>>>>>>> v3.18
 	if (invert)
 		val = (max - ucontrol->value.integer.value[0]) & mask;
 	else
@@ -4441,11 +5000,15 @@ int snd_soc_put_volsw_range(struct snd_kcontrol *kcontrol,
 	val = val << shift;
 
 	ret = snd_soc_component_update_bits(component, reg, val_mask, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
 	if (snd_soc_volsw_is_stereo(mc)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		val = ((ucontrol->value.integer.value[1] + min) & mask);
 		if (invert)
@@ -4455,6 +5018,8 @@ int snd_soc_put_volsw_range(struct snd_kcontrol *kcontrol,
 
 		ret = snd_soc_update_bits_locked(codec, rreg, val_mask, val);
 =======
+=======
+>>>>>>> v3.18
 		if (invert)
 			val = (max - ucontrol->value.integer.value[1]) & mask;
 		else
@@ -4464,6 +5029,9 @@ int snd_soc_put_volsw_range(struct snd_kcontrol *kcontrol,
 
 		ret = snd_soc_component_update_bits(component, rreg, val_mask,
 			val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4484,9 +5052,15 @@ int snd_soc_get_volsw_range(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
@@ -4499,6 +5073,7 @@ int snd_soc_get_volsw_range(struct snd_kcontrol *kcontrol,
 	int max = mc->max;
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	ucontrol->value.integer.value[0] =
@@ -4518,6 +5093,8 @@ int snd_soc_get_volsw_range(struct snd_kcontrol *kcontrol,
 		ucontrol->value.integer.value[1] =
 			ucontrol->value.integer.value[1] - min;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 	int ret;
 
@@ -4545,6 +5122,9 @@ int snd_soc_get_volsw_range(struct snd_kcontrol *kcontrol,
 		else
 			ucontrol->value.integer.value[1] =
 				ucontrol->value.integer.value[1] - min;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4565,7 +5145,11 @@ int snd_soc_limit_volume(struct snd_soc_codec *codec,
 	const char *name, int max)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_card *card = codec->card->snd_card;
+=======
+	struct snd_card *card = codec->component.card->snd_card;
+>>>>>>> v3.18
 =======
 	struct snd_card *card = codec->component.card->snd_card;
 >>>>>>> v3.18
@@ -4599,17 +5183,23 @@ int snd_soc_bytes_info(struct snd_kcontrol *kcontrol,
 		       struct snd_ctl_elem_info *uinfo)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct soc_bytes *params = (void *)kcontrol->private_value;
 
 	uinfo->type = SNDRV_CTL_ELEM_TYPE_BYTES;
 	uinfo->count = params->num_regs * codec->val_bytes;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_bytes *params = (void *)kcontrol->private_value;
 
 	uinfo->type = SNDRV_CTL_ELEM_TYPE_BYTES;
 	uinfo->count = params->num_regs * component->val_bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -4620,6 +5210,7 @@ int snd_soc_bytes_get(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_bytes *params = (void *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	int ret;
@@ -4629,6 +5220,8 @@ int snd_soc_bytes_get(struct snd_kcontrol *kcontrol,
 				      ucontrol->value.bytes.data,
 				      params->num_regs * codec->val_bytes);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_bytes *params = (void *)kcontrol->private_value;
 	int ret;
@@ -4637,6 +5230,9 @@ int snd_soc_bytes_get(struct snd_kcontrol *kcontrol,
 		ret = regmap_raw_read(component->regmap, params->base,
 				      ucontrol->value.bytes.data,
 				      params->num_regs * component->val_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		ret = -EINVAL;
@@ -4644,7 +5240,11 @@ int snd_soc_bytes_get(struct snd_kcontrol *kcontrol,
 	/* Hide any masked bytes to ensure consistent data reporting */
 	if (ret == 0 && params->mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (codec->val_bytes) {
+=======
+		switch (component->val_bytes) {
+>>>>>>> v3.18
 =======
 		switch (component->val_bytes) {
 >>>>>>> v3.18
@@ -4654,17 +5254,23 @@ int snd_soc_bytes_get(struct snd_kcontrol *kcontrol,
 		case 2:
 			((u16 *)(&ucontrol->value.bytes.data))[0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&= ~params->mask;
 			break;
 		case 4:
 			((u32 *)(&ucontrol->value.bytes.data))[0]
 				&= ~params->mask;
 =======
+=======
+>>>>>>> v3.18
 				&= cpu_to_be16(~params->mask);
 			break;
 		case 4:
 			((u32 *)(&ucontrol->value.bytes.data))[0]
 				&= cpu_to_be32(~params->mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -4680,6 +5286,7 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_bytes *params = (void *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	int ret, len;
@@ -4691,6 +5298,8 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 
 	len = params->num_regs * codec->val_bytes;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_bytes *params = (void *)kcontrol->private_value;
 	int ret, len;
@@ -4701,6 +5310,9 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 		return -EINVAL;
 
 	len = params->num_regs * component->val_bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data = kmemdup(ucontrol->value.bytes.data, len, GFP_KERNEL | GFP_DMA);
@@ -4714,7 +5326,11 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 	 */
 	if (params->mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = regmap_read(codec->control_data, params->base, &val);
+=======
+		ret = regmap_read(component->regmap, params->base, &val);
+>>>>>>> v3.18
 =======
 		ret = regmap_read(component->regmap, params->base, &val);
 >>>>>>> v3.18
@@ -4724,7 +5340,11 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 		val &= params->mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (codec->val_bytes) {
+=======
+		switch (component->val_bytes) {
+>>>>>>> v3.18
 =======
 		switch (component->val_bytes) {
 >>>>>>> v3.18
@@ -4734,6 +5354,7 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 			break;
 		case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((u16 *)data)[0] &= cpu_to_be16(~params->mask);
 			((u16 *)data)[0] |= cpu_to_be16(val);
 			break;
@@ -4741,6 +5362,8 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 			((u32 *)data)[0] &= cpu_to_be32(~params->mask);
 			((u32 *)data)[0] |= cpu_to_be32(val);
 =======
+=======
+>>>>>>> v3.18
 			mask = ~params->mask;
 			ret = regmap_parse_val(component->regmap,
 							&mask, &mask);
@@ -4771,6 +5394,9 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 				goto out;
 
 			((u32 *)data)[0] |= val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -4780,7 +5406,11 @@ int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regmap_raw_write(codec->control_data, params->base,
+=======
+	ret = regmap_raw_write(component->regmap, params->base,
+>>>>>>> v3.18
 =======
 	ret = regmap_raw_write(component->regmap, params->base,
 >>>>>>> v3.18
@@ -4794,7 +5424,10 @@ out:
 EXPORT_SYMBOL_GPL(snd_soc_bytes_put);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int snd_soc_bytes_info_ext(struct snd_kcontrol *kcontrol,
 			struct snd_ctl_elem_info *ucontrol)
 {
@@ -4828,6 +5461,9 @@ int snd_soc_bytes_tlv_callback(struct snd_kcontrol *kcontrol, int op_flag,
 }
 EXPORT_SYMBOL_GPL(snd_soc_bytes_tlv_callback);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * snd_soc_info_xr_sx - signed multi register info callback
@@ -4871,6 +5507,7 @@ int snd_soc_get_xr_sx(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mreg_control *mc =
 		(struct soc_mreg_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
@@ -4878,12 +5515,17 @@ int snd_soc_get_xr_sx(struct snd_kcontrol *kcontrol,
 	unsigned int regcount = mc->regcount;
 	unsigned int regwshift = codec->driver->reg_word_size * BITS_PER_BYTE;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mreg_control *mc =
 		(struct soc_mreg_control *)kcontrol->private_value;
 	unsigned int regbase = mc->regbase;
 	unsigned int regcount = mc->regcount;
 	unsigned int regwshift = component->val_bytes * BITS_PER_BYTE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int regwmask = (1<<regwshift)-1;
 	unsigned int invert = mc->invert;
@@ -4892,6 +5534,7 @@ int snd_soc_get_xr_sx(struct snd_kcontrol *kcontrol,
 	long max = mc->max;
 	long val = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long regval;
 	unsigned int i;
 
@@ -4899,6 +5542,8 @@ int snd_soc_get_xr_sx(struct snd_kcontrol *kcontrol,
 		regval = snd_soc_read(codec, regbase+i) & regwmask;
 		val |= regval << (regwshift*(regcount-i-1));
 =======
+=======
+>>>>>>> v3.18
 	unsigned int regval;
 	unsigned int i;
 	int ret;
@@ -4908,6 +5553,9 @@ int snd_soc_get_xr_sx(struct snd_kcontrol *kcontrol,
 		if (ret)
 			return ret;
 		val |= (regval & regwmask) << (regwshift*(regcount-i-1));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	val &= mask;
@@ -4938,6 +5586,7 @@ int snd_soc_put_xr_sx(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mreg_control *mc =
 		(struct soc_mreg_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
@@ -4945,12 +5594,17 @@ int snd_soc_put_xr_sx(struct snd_kcontrol *kcontrol,
 	unsigned int regcount = mc->regcount;
 	unsigned int regwshift = codec->driver->reg_word_size * BITS_PER_BYTE;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mreg_control *mc =
 		(struct soc_mreg_control *)kcontrol->private_value;
 	unsigned int regbase = mc->regbase;
 	unsigned int regcount = mc->regcount;
 	unsigned int regwshift = component->val_bytes * BITS_PER_BYTE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int regwmask = (1<<regwshift)-1;
 	unsigned int invert = mc->invert;
@@ -4967,7 +5621,11 @@ int snd_soc_put_xr_sx(struct snd_kcontrol *kcontrol,
 		regval = (val >> (regwshift*(regcount-i-1))) & regwmask;
 		regmask = (mask >> (regwshift*(regcount-i-1))) & regwmask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = snd_soc_update_bits_locked(codec, regbase+i,
+=======
+		err = snd_soc_component_update_bits(component, regbase+i,
+>>>>>>> v3.18
 =======
 		err = snd_soc_component_update_bits(component, regbase+i,
 >>>>>>> v3.18
@@ -4993,9 +5651,15 @@ int snd_soc_get_strobe(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
@@ -5006,8 +5670,11 @@ int snd_soc_get_strobe(struct snd_kcontrol *kcontrol,
 	unsigned int mask = 1 << shift;
 	unsigned int invert = mc->invert != 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val = snd_soc_read(codec, reg) & mask;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 	int ret;
 
@@ -5016,6 +5683,9 @@ int snd_soc_get_strobe(struct snd_kcontrol *kcontrol,
 		return ret;
 
 	val &= mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (shift != 0 && val != 0)
@@ -5040,9 +5710,15 @@ int snd_soc_put_strobe(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
 	struct soc_mixer_control *mc =
@@ -5058,6 +5734,7 @@ int snd_soc_put_strobe(struct snd_kcontrol *kcontrol,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_soc_update_bits_locked(codec, reg, mask, val1);
 	if (err < 0)
 		return err;
@@ -5065,11 +5742,16 @@ int snd_soc_put_strobe(struct snd_kcontrol *kcontrol,
 	err = snd_soc_update_bits_locked(codec, reg, mask, val2);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	err = snd_soc_component_update_bits(component, reg, mask, val1);
 	if (err < 0)
 		return err;
 
 	return snd_soc_component_update_bits(component, reg, mask, val2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_put_strobe);
@@ -5093,7 +5775,11 @@ int snd_soc_dai_set_sysclk(struct snd_soc_dai *dai, int clk_id,
 						      freq, dir);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -ENOTSUPP;
+>>>>>>> v3.18
 =======
 		return -ENOTSUPP;
 >>>>>>> v3.18
@@ -5118,7 +5804,11 @@ int snd_soc_codec_set_sysclk(struct snd_soc_codec *codec, int clk_id,
 						 freq, dir);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -ENOTSUPP;
+>>>>>>> v3.18
 =======
 		return -ENOTSUPP;
 >>>>>>> v3.18
@@ -5192,7 +5882,10 @@ EXPORT_SYMBOL_GPL(snd_soc_codec_set_pll);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * snd_soc_dai_set_bclk_ratio - configure BCLK to sample rate ratio.
  * @dai: DAI
  * @ratio Ratio of BCLK to Sample rate.
@@ -5209,6 +5902,9 @@ int snd_soc_dai_set_bclk_ratio(struct snd_soc_dai *dai, unsigned int ratio)
 EXPORT_SYMBOL_GPL(snd_soc_dai_set_bclk_ratio);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * snd_soc_dai_set_fmt - configure DAI hardware audio format.
  * @dai: DAI
@@ -5228,7 +5924,10 @@ EXPORT_SYMBOL_GPL(snd_soc_dai_set_fmt);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * snd_soc_xlate_tdm_slot - generate tx/rx slot mask.
  * @slots: Number of slots in use.
  * @tx_mask: bitmask representing active TX slots.
@@ -5253,6 +5952,9 @@ static int snd_soc_xlate_tdm_slot_mask(unsigned int slots,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * snd_soc_dai_set_tdm_slot - configure DAI TDM.
  * @dai: DAI
@@ -5268,7 +5970,10 @@ int snd_soc_dai_set_tdm_slot(struct snd_soc_dai *dai,
 	unsigned int tx_mask, unsigned int rx_mask, int slots, int slot_width)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dai->driver && dai->driver->ops->xlate_tdm_slot_mask)
 		dai->driver->ops->xlate_tdm_slot_mask(slots,
 						&tx_mask, &rx_mask);
@@ -5278,13 +5983,20 @@ int snd_soc_dai_set_tdm_slot(struct snd_soc_dai *dai,
 	dai->tx_mask = tx_mask;
 	dai->rx_mask = rx_mask;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dai->driver && dai->driver->ops->set_tdm_slot)
 		return dai->driver->ops->set_tdm_slot(dai, tx_mask, rx_mask,
 				slots, slot_width);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -ENOTSUPP;
+>>>>>>> v3.18
 =======
 		return -ENOTSUPP;
 >>>>>>> v3.18
@@ -5348,7 +6060,12 @@ int snd_soc_dai_digital_mute(struct snd_soc_dai *dai, int mute,
 	if (dai->driver->ops->mute_stream)
 		return dai->driver->ops->mute_stream(dai, mute, direction);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (dai->driver->ops->digital_mute)
+=======
+	else if (direction == SNDRV_PCM_STREAM_PLAYBACK &&
+		 dai->driver->ops->digital_mute)
+>>>>>>> v3.18
 =======
 	else if (direction == SNDRV_PCM_STREAM_PLAYBACK &&
 		 dai->driver->ops->digital_mute)
@@ -5360,6 +6077,7 @@ int snd_soc_dai_digital_mute(struct snd_soc_dai *dai, int mute,
 EXPORT_SYMBOL_GPL(snd_soc_dai_digital_mute);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * snd_soc_register_card - Register a card with the ASoC core
  *
@@ -5370,6 +6088,8 @@ int snd_soc_register_card(struct snd_soc_card *card)
 {
 	int i, ret;
 =======
+=======
+>>>>>>> v3.18
 static int snd_soc_init_multicodec(struct snd_soc_card *card,
 				   struct snd_soc_dai_link *dai_link)
 {
@@ -5406,6 +6126,9 @@ static int snd_soc_init_multicodec(struct snd_soc_card *card,
 int snd_soc_register_card(struct snd_soc_card *card)
 {
 	int i, j, ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!card->name || !card->dev)
@@ -5414,6 +6137,7 @@ int snd_soc_register_card(struct snd_soc_card *card)
 	for (i = 0; i < card->num_links; i++) {
 		struct snd_soc_dai_link *link = &card->dai_link[i];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * Codec must be specified by 1 of name or OF node,
@@ -5430,6 +6154,8 @@ int snd_soc_register_card(struct snd_soc_card *card)
 				" set for %s\n", link->name);
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		ret = snd_soc_init_multicodec(card, link);
 		if (ret) {
 			dev_err(card->dev, "ASoC: failed to init multicodec\n");
@@ -5453,6 +6179,9 @@ int snd_soc_register_card(struct snd_soc_card *card)
 					link->name);
 				return -EINVAL;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -5462,8 +6191,14 @@ int snd_soc_register_card(struct snd_soc_card *card)
 		 */
 		if (link->platform_name && link->platform_of_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(card->dev, "ASoC: Both platform name/of_node"
 				" are set for %s\n", link->name);
+=======
+			dev_err(card->dev,
+				"ASoC: Both platform name/of_node are set for %s\n",
+				link->name);
+>>>>>>> v3.18
 =======
 			dev_err(card->dev,
 				"ASoC: Both platform name/of_node are set for %s\n",
@@ -5479,8 +6214,14 @@ int snd_soc_register_card(struct snd_soc_card *card)
 		 */
 		if (link->cpu_name && link->cpu_of_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(card->dev, "ASoC: Neither/both "
 				"cpu name/of_node are set for %s\n",link->name);
+=======
+			dev_err(card->dev,
+				"ASoC: Neither/both cpu name/of_node are set for %s\n",
+				link->name);
+>>>>>>> v3.18
 =======
 			dev_err(card->dev,
 				"ASoC: Neither/both cpu name/of_node are set for %s\n",
@@ -5495,8 +6236,14 @@ int snd_soc_register_card(struct snd_soc_card *card)
 		if (!link->cpu_dai_name &&
 		    !(link->cpu_name || link->cpu_of_node)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(card->dev, "ASoC: Neither cpu_dai_name nor "
 				"cpu_name/of_node are set for %s\n", link->name);
+=======
+			dev_err(card->dev,
+				"ASoC: Neither cpu_dai_name nor cpu_name/of_node are set for %s\n",
+				link->name);
+>>>>>>> v3.18
 =======
 			dev_err(card->dev,
 				"ASoC: Neither cpu_dai_name nor cpu_name/of_node are set for %s\n",
@@ -5522,11 +6269,14 @@ int snd_soc_register_card(struct snd_soc_card *card)
 	card->rtd_aux = &card->rtd[card->num_links];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < card->num_links; i++)
 		card->rtd[i].dai_link = &card->dai_link[i];
 
 	INIT_LIST_HEAD(&card->list);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < card->num_links; i++) {
 		card->rtd[i].card = card;
 		card->rtd[i].dai_link = &card->dai_link[i];
@@ -5541,13 +6291,20 @@ int snd_soc_register_card(struct snd_soc_card *card)
 	for (i = 0; i < card->num_aux_devs; i++)
 		card->rtd_aux[i].card = card;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&card->dapm_dirty);
 	card->instantiated = 0;
 	mutex_init(&card->mutex);
 	mutex_init(&card->dapm_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&card->dapm_power_mutex);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -5556,7 +6313,10 @@ int snd_soc_register_card(struct snd_soc_card *card)
 		soc_cleanup_card_debugfs(card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* deactivate pins to sleep state */
 	for (i = 0; i < card->num_rtd; i++) {
 		struct snd_soc_pcm_runtime *rtd = &card->rtd[i];
@@ -5573,6 +6333,9 @@ int snd_soc_register_card(struct snd_soc_card *card)
 			pinctrl_pm_select_sleep_state(cpu_dai->dev);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -5587,14 +6350,20 @@ EXPORT_SYMBOL_GPL(snd_soc_register_card);
 int snd_soc_unregister_card(struct snd_soc_card *card)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (card->instantiated)
 		soc_cleanup_card_resources(card);
 =======
+=======
+>>>>>>> v3.18
 	if (card->instantiated) {
 		card->instantiated = false;
 		snd_soc_dapm_shutdown(card);
 		soc_cleanup_card_resources(card);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_dbg(card->dev, "ASoC: Unregistered card '%s'\n", card->name);
 
@@ -5654,8 +6423,14 @@ static inline char *fmt_multiple_name(struct device *dev,
 {
 	if (dai_drv->name == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "ASoC: error - multiple DAI %s registered with"
 				" no name\n", dev_name(dev));
+=======
+		dev_err(dev,
+			"ASoC: error - multiple DAI %s registered with no name\n",
+			dev_name(dev));
+>>>>>>> v3.18
 =======
 		dev_err(dev,
 			"ASoC: error - multiple DAI %s registered with no name\n",
@@ -5668,6 +6443,7 @@ static inline char *fmt_multiple_name(struct device *dev,
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * snd_soc_register_dai - Register a DAI with the ASoC core
  *
@@ -5762,6 +6538,8 @@ static int snd_soc_register_dais(struct device *dev,
 	dev_dbg(dev, "ASoC: dai register %s #%Zu\n", dev_name(dev), count);
 
 =======
+=======
+>>>>>>> v3.18
  * snd_soc_unregister_dai - Unregister DAIs from the ASoC core
  *
  * @component: The component for which the DAIs should be unregistered
@@ -5802,6 +6580,9 @@ static int snd_soc_register_dais(struct snd_soc_component *component,
 	component->dai_drv = dai_drv;
 	component->num_dai = count;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < count; i++) {
 
@@ -5811,6 +6592,7 @@ static int snd_soc_register_dais(struct snd_soc_component *component,
 			goto err;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* create DAI component name */
 		dai->name = fmt_multiple_name(dev, &dai_drv[i]);
@@ -5873,6 +6655,8 @@ static void snd_soc_unregister_dais(struct device *dev, size_t count)
 	for (i = 0; i < count; i++)
 		snd_soc_unregister_dai(dev);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Back in the old days when we still had component-less DAIs,
 		 * instead of having a static name, component-less DAIs would
@@ -6090,6 +6874,9 @@ static void snd_soc_platform_drv_remove(struct snd_soc_component *component)
 	struct snd_soc_platform *platform = snd_soc_component_to_platform(component);
 
 	platform->driver->remove(platform);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -6102,6 +6889,7 @@ static void snd_soc_platform_drv_remove(struct snd_soc_component *component)
 int snd_soc_add_platform(struct device *dev, struct snd_soc_platform *platform,
 		const struct snd_soc_platform_driver *platform_drv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* create platform component name */
 	platform->name = fmt_single_name(dev, &platform->id);
@@ -6123,6 +6911,8 @@ int snd_soc_add_platform(struct device *dev, struct snd_soc_platform *platform,
 
 	dev_dbg(dev, "ASoC: Registered platform '%s'\n", platform->name);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = snd_soc_component_initialize(&platform->component,
@@ -6149,6 +6939,9 @@ int snd_soc_add_platform(struct device *dev, struct snd_soc_platform *platform,
 
 	dev_dbg(dev, "ASoC: Registered platform '%s'\n",
 		platform->component.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -6187,6 +6980,7 @@ EXPORT_SYMBOL_GPL(snd_soc_register_platform);
 void snd_soc_remove_platform(struct snd_soc_platform *platform)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&client_mutex);
 	list_del(&platform->list);
 	mutex_unlock(&client_mutex);
@@ -6195,6 +6989,8 @@ void snd_soc_remove_platform(struct snd_soc_platform *platform)
 		platform->name);
 	kfree(platform->name);
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&client_mutex);
 	list_del(&platform->list);
@@ -6205,6 +7001,9 @@ void snd_soc_remove_platform(struct snd_soc_platform *platform)
 		platform->component.name);
 
 	snd_soc_component_cleanup(&platform->component);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_remove_platform);
@@ -6274,6 +7073,7 @@ static void fixup_codec_formats(struct snd_soc_pcm_stream *stream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * snd_soc_card_change_online_state - Mark if soc card is online/offline
  *
@@ -6285,6 +7085,8 @@ void snd_soc_card_change_online_state(struct snd_soc_card *soc_card, int online)
 }
 EXPORT_SYMBOL(snd_soc_card_change_online_state);
 =======
+=======
+>>>>>>> v3.18
 static int snd_soc_codec_drv_probe(struct snd_soc_component *component)
 {
 	struct snd_soc_codec *codec = snd_soc_component_to_codec(component);
@@ -6324,6 +7126,9 @@ static int snd_soc_codec_set_bias_level(struct snd_soc_dapm_context *dapm,
 
 	return codec->driver->set_bias_level(codec, level);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -6337,8 +7142,13 @@ int snd_soc_register_codec(struct device *dev,
 			   int num_dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t reg_size;
 	struct snd_soc_codec *codec;
+=======
+	struct snd_soc_codec *codec;
+	struct snd_soc_dai *dai;
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec;
 	struct snd_soc_dai *dai;
@@ -6351,6 +7161,7 @@ int snd_soc_register_codec(struct device *dev,
 	if (codec == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* create CODEC component name */
 	codec->name = fmt_single_name(dev, &codec->id);
@@ -6409,6 +7220,8 @@ int snd_soc_register_codec(struct device *dev,
 			codec->writable_register = snd_soc_default_writable_register;
 	}
 =======
+=======
+>>>>>>> v3.18
 	codec->component.dapm_ptr = &codec->dapm;
 	codec->component.codec = codec;
 
@@ -6457,6 +7270,9 @@ int snd_soc_register_codec(struct device *dev,
 
 	if (codec_drv->get_regmap)
 		codec->component.regmap = codec_drv->get_regmap(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < num_dai; i++) {
@@ -6464,6 +7280,7 @@ int snd_soc_register_codec(struct device *dev,
 		fixup_codec_formats(&dai_drv[i].capture);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&client_mutex);
 	list_add(&codec->list, &codec_list);
@@ -6487,6 +7304,8 @@ fail_codec_name:
 	kfree(codec->name);
 fail_codec:
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_register_dais(&codec->component, dai_drv, num_dai, false);
 	if (ret < 0) {
 		dev_err(dev, "ASoC: Failed to regster DAIs: %d\n", ret);
@@ -6508,6 +7327,9 @@ fail_codec:
 err_cleanup:
 	snd_soc_component_cleanup(&codec->component);
 err_free:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(codec);
 	return ret;
@@ -6531,6 +7353,7 @@ void snd_soc_unregister_codec(struct device *dev)
 
 found:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_unregister_dais(dev, codec->num_dai);
 
 	mutex_lock(&client_mutex);
@@ -6543,6 +7366,8 @@ found:
 	kfree(codec->reg_def_copy);
 	kfree(codec->name);
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&client_mutex);
 	list_del(&codec->list);
@@ -6554,11 +7379,15 @@ found:
 
 	snd_soc_component_cleanup(&codec->component);
 	snd_soc_cache_exit(codec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(codec);
 }
 EXPORT_SYMBOL_GPL(snd_soc_unregister_codec);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -6665,6 +7494,8 @@ int snd_soc_of_parse_card_name(struct snd_soc_card *card,
 			propname, ret);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 /* Retrieve a card's name from device tree */
 int snd_soc_of_parse_card_name(struct snd_soc_card *card,
 			       const char *propname)
@@ -6806,13 +7637,20 @@ int snd_soc_of_parse_tdm_slot(struct device_node *np,
 
 		if (slot_width)
 			*slot_width = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(snd_soc_of_parse_card_name);
+=======
+EXPORT_SYMBOL_GPL(snd_soc_of_parse_tdm_slot);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_soc_of_parse_tdm_slot);
 >>>>>>> v3.18
@@ -6828,8 +7666,14 @@ int snd_soc_of_parse_audio_routing(struct snd_soc_card *card,
 	num_routes = of_property_count_strings(np, propname);
 	if (num_routes < 0 || num_routes & 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(card->dev, "ASoC: Property '%s' does not exist or its"
 			" length is not even\n", propname);
+=======
+		dev_err(card->dev,
+			"ASoC: Property '%s' does not exist or its length is not even\n",
+			propname);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"ASoC: Property '%s' does not exist or its length is not even\n",
@@ -6880,7 +7724,13 @@ EXPORT_SYMBOL_GPL(snd_soc_of_parse_audio_routing);
 
 unsigned int snd_soc_of_parse_daifmt(struct device_node *np,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     const char *prefix)
+=======
+				     const char *prefix,
+				     struct device_node **bitclkmaster,
+				     struct device_node **framemaster)
+>>>>>>> v3.18
 =======
 				     const char *prefix,
 				     struct device_node **bitclkmaster,
@@ -6969,10 +7819,13 @@ unsigned int snd_soc_of_parse_daifmt(struct device_node *np,
 	snprintf(prop, sizeof(prop), "%sbitclock-master", prefix);
 	bit = !!of_get_property(np, prop, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	snprintf(prop, sizeof(prop), "%sframe-master", prefix);
 	frame = !!of_get_property(np, prop, NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (bit && bitclkmaster)
 		*bitclkmaster = of_parse_phandle(np, prop, 0);
 
@@ -6980,6 +7833,9 @@ unsigned int snd_soc_of_parse_daifmt(struct device_node *np,
 	frame = !!of_get_property(np, prop, NULL);
 	if (frame && framemaster)
 		*framemaster = of_parse_phandle(np, prop, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch ((bit << 4) + frame) {
@@ -7001,6 +7857,7 @@ unsigned int snd_soc_of_parse_daifmt(struct device_node *np,
 }
 EXPORT_SYMBOL_GPL(snd_soc_of_parse_daifmt);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * snd_soc_info_multi_ext - external single mixer info callback
@@ -7058,6 +7915,8 @@ int snd_soc_dai_get_channel_map(struct snd_soc_dai *dai,
 }
 EXPORT_SYMBOL_GPL(snd_soc_dai_get_channel_map);
 =======
+=======
+>>>>>>> v3.18
 int snd_soc_of_get_dai_name(struct device_node *of_node,
 			    const char **dai_name)
 {
@@ -7116,6 +7975,9 @@ int snd_soc_of_get_dai_name(struct device_node *of_node,
 }
 EXPORT_SYMBOL_GPL(snd_soc_of_get_dai_name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init snd_soc_init(void)
 {

@@ -26,7 +26,11 @@
 
   Few modifications for Realtek's Wi-Fi drivers by
 <<<<<<< HEAD
+<<<<<<< HEAD
   Andrea Merello <andreamrl@tiscali.it>
+=======
+  Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
   Andrea Merello <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -188,7 +192,11 @@ int ieee80211_encrypt_fragment(
 	int hdr_len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_crypt_data* crypt = ieee->crypt[ieee->tx_keyidx];
+=======
+	struct ieee80211_crypt_data *crypt = ieee->crypt[ieee->tx_keyidx];
+>>>>>>> v3.18
 =======
 	struct ieee80211_crypt_data *crypt = ieee->crypt[ieee->tx_keyidx];
 >>>>>>> v3.18
@@ -196,6 +204,7 @@ int ieee80211_encrypt_fragment(
 
 	if (!(crypt && crypt->ops))
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("=========>%s(), crypt is null\n", __FUNCTION__);
 		return -1;
@@ -208,6 +217,8 @@ int ieee80211_encrypt_fragment(
 		header = (struct ieee80211_hdr *) frag->data;
 		if (net_ratelimit()) {
 =======
+=======
+>>>>>>> v3.18
 		printk("=========>%s(), crypt is null\n", __func__);
 		return -1;
 	}
@@ -218,6 +229,9 @@ int ieee80211_encrypt_fragment(
 			struct ieee80211_hdr_3addrqos *header;
 
 			header = (struct ieee80211_hdr_3addrqos *)frag->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk(KERN_DEBUG "%s: TKIP countermeasures: dropped "
 			       "TX packet to %pM\n",
@@ -226,7 +240,11 @@ int ieee80211_encrypt_fragment(
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -262,21 +280,31 @@ void ieee80211_txb_free(struct ieee80211_txb *txb) {
 	kfree(txb);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct ieee80211_txb *ieee80211_alloc_txb(int nr_frags, int txb_size,
 					  int gfp_mask)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(ieee80211_txb_free);
 
 static struct ieee80211_txb *ieee80211_alloc_txb(int nr_frags, int txb_size,
 						 gfp_t gfp_mask)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ieee80211_txb *txb;
 	int i;
 	txb = kmalloc(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sizeof(struct ieee80211_txb) + (sizeof(u8*) * nr_frags),
+=======
+		sizeof(struct ieee80211_txb) + (sizeof(u8 *) * nr_frags),
+>>>>>>> v3.18
 =======
 		sizeof(struct ieee80211_txb) + (sizeof(u8 *) * nr_frags),
 >>>>>>> v3.18
@@ -340,18 +368,24 @@ ieee80211_classify(struct sk_buff *skb, struct ieee80211_network *network)
 
 #define SN_LESS(a, b)		(((a-b)&0x800)!=0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_tx_query_agg_cap(struct ieee80211_device* ieee, struct sk_buff* skb, cb_desc* tcb_desc)
 {
 	PRT_HIGH_THROUGHPUT	pHTInfo = ieee->pHTInfo;
 	PTX_TS_RECORD			pTxTs = NULL;
 	struct ieee80211_hdr_1addr* hdr = (struct ieee80211_hdr_1addr*)skb->data;
 =======
+=======
+>>>>>>> v3.18
 static void ieee80211_tx_query_agg_cap(struct ieee80211_device *ieee,
 				       struct sk_buff *skb, cb_desc *tcb_desc)
 {
 	PRT_HIGH_THROUGHPUT	pHTInfo = ieee->pHTInfo;
 	PTX_TS_RECORD			pTxTs = NULL;
 	struct ieee80211_hdr_1addr *hdr = (struct ieee80211_hdr_1addr *)skb->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pHTInfo->bCurrentHTSupport||!pHTInfo->bEnableHT)
@@ -376,7 +410,11 @@ static void ieee80211_tx_query_agg_cap(struct ieee80211_device *ieee,
 	if(pHTInfo->bCurrentAMPDUEnable)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!GetTs(ieee, (PTS_COMMON_INFO*)(&pTxTs), hdr->addr1, skb->priority, TX_DIR, true))
+=======
+		if (!GetTs(ieee, (PTS_COMMON_INFO *)(&pTxTs), hdr->addr1, skb->priority, TX_DIR, true))
+>>>>>>> v3.18
 =======
 		if (!GetTs(ieee, (PTS_COMMON_INFO *)(&pTxTs), hdr->addr1, skb->priority, TX_DIR, true))
 >>>>>>> v3.18
@@ -406,7 +444,11 @@ static void ieee80211_tx_query_agg_cap(struct ieee80211_device *ieee,
 	}
 FORCED_AGG_SETTING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(pHTInfo->ForcedAMPDUMode )
+=======
+	switch (pHTInfo->ForcedAMPDUMode )
+>>>>>>> v3.18
 =======
 	switch (pHTInfo->ForcedAMPDUMode )
 >>>>>>> v3.18
@@ -431,7 +473,12 @@ FORCED_AGG_SETTING:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ieee80211_qurey_ShortPreambleMode(struct ieee80211_device* ieee, cb_desc* tcb_desc)
+=======
+static void ieee80211_qurey_ShortPreambleMode(struct ieee80211_device *ieee,
+					      cb_desc *tcb_desc)
+>>>>>>> v3.18
 =======
 static void ieee80211_qurey_ShortPreambleMode(struct ieee80211_device *ieee,
 					      cb_desc *tcb_desc)
@@ -449,7 +496,11 @@ static void ieee80211_qurey_ShortPreambleMode(struct ieee80211_device *ieee,
 	return;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern	void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -475,7 +526,12 @@ ieee80211_query_HTCapShortGI(struct ieee80211_device *ieee, cb_desc *tcb_desc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_query_BandwidthMode(struct ieee80211_device* ieee, cb_desc *tcb_desc)
+=======
+static void ieee80211_query_BandwidthMode(struct ieee80211_device *ieee,
+					  cb_desc *tcb_desc)
+>>>>>>> v3.18
 =======
 static void ieee80211_query_BandwidthMode(struct ieee80211_device *ieee,
 					  cb_desc *tcb_desc)
@@ -500,7 +556,13 @@ static void ieee80211_query_BandwidthMode(struct ieee80211_device *ieee,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_query_protectionmode(struct ieee80211_device* ieee, cb_desc* tcb_desc, struct sk_buff* skb)
+=======
+static void ieee80211_query_protectionmode(struct ieee80211_device *ieee,
+					   cb_desc *tcb_desc,
+					   struct sk_buff *skb)
+>>>>>>> v3.18
 =======
 static void ieee80211_query_protectionmode(struct ieee80211_device *ieee,
 					   cb_desc *tcb_desc,
@@ -617,7 +679,12 @@ NO_PROTECTION:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_txrate_selectmode(struct ieee80211_device* ieee, cb_desc* tcb_desc)
+=======
+static void ieee80211_txrate_selectmode(struct ieee80211_device *ieee,
+					cb_desc *tcb_desc)
+>>>>>>> v3.18
 =======
 static void ieee80211_txrate_selectmode(struct ieee80211_device *ieee,
 					cb_desc *tcb_desc)
@@ -652,7 +719,12 @@ static void ieee80211_txrate_selectmode(struct ieee80211_device *ieee,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_query_seqnum(struct ieee80211_device*ieee, struct sk_buff* skb, u8* dst)
+=======
+static void ieee80211_query_seqnum(struct ieee80211_device *ieee,
+				   struct sk_buff *skb, u8 *dst)
+>>>>>>> v3.18
 =======
 static void ieee80211_query_seqnum(struct ieee80211_device *ieee,
 				   struct sk_buff *skb, u8 *dst)
@@ -664,7 +736,11 @@ static void ieee80211_query_seqnum(struct ieee80211_device *ieee,
 	{
 		PTX_TS_RECORD pTS = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!GetTs(ieee, (PTS_COMMON_INFO*)(&pTS), dst, skb->priority, TX_DIR, true))
+=======
+		if (!GetTs(ieee, (PTS_COMMON_INFO *)(&pTS), dst, skb->priority, TX_DIR, true))
+>>>>>>> v3.18
 =======
 		if (!GetTs(ieee, (PTS_COMMON_INFO *)(&pTS), dst, skb->priority, TX_DIR, true))
 >>>>>>> v3.18
@@ -695,7 +771,11 @@ int ieee80211_xmit(struct sk_buff *skb, struct net_device *dev)
 	int qos_actived = ieee->current_network.qos_data.active;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_crypt_data* crypt;
+=======
+	struct ieee80211_crypt_data *crypt;
+>>>>>>> v3.18
 =======
 	struct ieee80211_crypt_data *crypt;
 >>>>>>> v3.18
@@ -960,7 +1040,11 @@ int ieee80211_xmit(struct sk_buff *skb, struct net_device *dev)
 			tcb_desc->bBroadcast = 1;
 		ieee80211_txrate_selectmode(ieee, tcb_desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( tcb_desc->bMulticast ||  tcb_desc->bBroadcast)
+=======
+		if (tcb_desc->bMulticast ||  tcb_desc->bBroadcast)
+>>>>>>> v3.18
 =======
 		if (tcb_desc->bMulticast ||  tcb_desc->bBroadcast)
 >>>>>>> v3.18
@@ -1002,7 +1086,10 @@ int ieee80211_xmit(struct sk_buff *skb, struct net_device *dev)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(ieee80211_txb_free);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

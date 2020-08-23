@@ -18,6 +18,10 @@
 #include <linux/err.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -37,7 +41,10 @@
 
 static const struct omap_prcm_irq omap4_prcm_irqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OMAP_PRCM_IRQ("wkup",   0,      0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	OMAP_PRCM_IRQ("io",     9,      1),
@@ -55,6 +62,10 @@ static struct omap_prcm_irq_setup omap4_prcm_irq_setup = {
 	.save_and_clear_irqen	= &omap44xx_prm_save_and_clear_irqen,
 	.restore_irqen		= &omap44xx_prm_restore_irqen,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.reconfigure_io_chain	= &omap44xx_prm_reconfigure_io_chain,
+>>>>>>> v3.18
 =======
 	.reconfigure_io_chain	= &omap44xx_prm_reconfigure_io_chain,
 >>>>>>> v3.18
@@ -93,7 +104,11 @@ static struct prm_reset_src_map omap44xx_prm_reset_src_map[] = {
 u32 omap4_prm_read_inst_reg(s16 inst, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(prm_base + inst + reg);
+=======
+	return readl_relaxed(prm_base + inst + reg);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(prm_base + inst + reg);
 >>>>>>> v3.18
@@ -103,7 +118,11 @@ u32 omap4_prm_read_inst_reg(s16 inst, u16 reg)
 void omap4_prm_write_inst_reg(u32 val, s16 inst, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, prm_base + inst + reg);
+=======
+	writel_relaxed(val, prm_base + inst + reg);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, prm_base + inst + reg);
 >>>>>>> v3.18
@@ -173,9 +192,12 @@ void omap4_prm_vp_clear_txdone(u8 vp_id)
 u32 omap4_prm_vcvp_read(u8 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return omap4_prminst_read_inst_reg(OMAP4430_PRM_PARTITION,
 					   OMAP4430_PRM_DEVICE_INST, offset);
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
@@ -183,15 +205,21 @@ u32 omap4_prm_vcvp_read(u8 offset)
 
 	return omap4_prminst_read_inst_reg(OMAP4430_PRM_PARTITION,
 					   inst, offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void omap4_prm_vcvp_write(u32 val, u8 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap4_prminst_write_inst_reg(val, OMAP4430_PRM_PARTITION,
 				     OMAP4430_PRM_DEVICE_INST, offset);
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
@@ -199,16 +227,22 @@ void omap4_prm_vcvp_write(u32 val, u8 offset)
 
 	omap4_prminst_write_inst_reg(val, OMAP4430_PRM_PARTITION,
 				     inst, offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 u32 omap4_prm_vcvp_rmw(u32 mask, u32 bits, u8 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return omap4_prminst_rmw_inst_reg_bits(mask, bits,
 					       OMAP4430_PRM_PARTITION,
 					       OMAP4430_PRM_DEVICE_INST,
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
@@ -217,6 +251,9 @@ u32 omap4_prm_vcvp_rmw(u32 mask, u32 bits, u8 offset)
 	return omap4_prminst_rmw_inst_reg_bits(mask, bits,
 					       OMAP4430_PRM_PARTITION,
 					       inst,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					       offset);
 }
@@ -325,26 +362,38 @@ void omap44xx_prm_reconfigure_io_chain(void)
 {
 	int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Trigger WUCLKIN enable */
 	omap4_prm_rmw_inst_reg_bits(OMAP4430_WUCLK_CTRL_MASK,
 				    OMAP4430_WUCLK_CTRL_MASK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    OMAP4430_PRM_DEVICE_INST,
 				    OMAP4_PRM_IO_PMCTRL_OFFSET);
 	omap_test_timeout(
 		(((omap4_prm_read_inst_reg(OMAP4430_PRM_DEVICE_INST,
 =======
+=======
+>>>>>>> v3.18
 				    inst,
 				    OMAP4_PRM_IO_PMCTRL_OFFSET);
 	omap_test_timeout(
 		(((omap4_prm_read_inst_reg(inst,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   OMAP4_PRM_IO_PMCTRL_OFFSET) &
 		   OMAP4430_WUCLK_STATUS_MASK) >>
@@ -356,15 +405,21 @@ void omap44xx_prm_reconfigure_io_chain(void)
 	/* Trigger WUCLKIN disable */
 	omap4_prm_rmw_inst_reg_bits(OMAP4430_WUCLK_CTRL_MASK, 0x0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    OMAP4430_PRM_DEVICE_INST,
 				    OMAP4_PRM_IO_PMCTRL_OFFSET);
 	omap_test_timeout(
 		(((omap4_prm_read_inst_reg(OMAP4430_PRM_DEVICE_INST,
 =======
+=======
+>>>>>>> v3.18
 				    inst,
 				    OMAP4_PRM_IO_PMCTRL_OFFSET);
 	omap_test_timeout(
 		(((omap4_prm_read_inst_reg(inst,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   OMAP4_PRM_IO_PMCTRL_OFFSET) &
 		   OMAP4430_WUCLK_STATUS_MASK) >>
@@ -387,10 +442,13 @@ void omap44xx_prm_reconfigure_io_chain(void)
 static void __init omap44xx_prm_enable_io_wakeup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap4_prm_rmw_inst_reg_bits(OMAP4430_GLOBAL_WUEN_MASK,
 				    OMAP4430_GLOBAL_WUEN_MASK,
 				    OMAP4430_PRM_DEVICE_INST,
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
@@ -399,6 +457,9 @@ static void __init omap44xx_prm_enable_io_wakeup(void)
 	omap4_prm_rmw_inst_reg_bits(OMAP4430_GLOBAL_WUEN_MASK,
 				    OMAP4430_GLOBAL_WUEN_MASK,
 				    inst,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    OMAP4_PRM_IO_PMCTRL_OFFSET);
 }
@@ -415,9 +476,12 @@ static u32 omap44xx_prm_read_reset_sources(void)
 	u32 r = 0;
 	u32 v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	v = omap4_prm_read_inst_reg(OMAP4430_PRM_DEVICE_INST,
 =======
+=======
+>>>>>>> v3.18
 	s32 inst = omap4_prmst_get_prm_dev_inst();
 
 	if (inst == PRM_INSTANCE_UNKNOWN)
@@ -425,6 +489,9 @@ static u32 omap44xx_prm_read_reset_sources(void)
 
 
 	v = omap4_prm_read_inst_reg(inst,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    OMAP4_RM_RSTST);
 
@@ -713,7 +780,10 @@ static int omap4_pwrdm_wait_transition(struct powerdomain *pwrdm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int omap4_check_vcvp(void)
 {
 	/* No VC/VP on dra7xx devices */
@@ -723,6 +793,9 @@ static int omap4_check_vcvp(void)
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pwrdm_ops omap4_pwrdm_operations = {
 	.pwrdm_set_next_pwrst	= omap4_pwrdm_set_next_pwrst,
@@ -742,14 +815,20 @@ struct pwrdm_ops omap4_pwrdm_operations = {
 	.pwrdm_set_mem_retst	= omap4_pwrdm_set_mem_retst,
 	.pwrdm_wait_transition	= omap4_pwrdm_wait_transition,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.pwrdm_has_voltdm	= omap4_check_vcvp,
 };
 
 static int omap44xx_prm_late_init(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * XXX document
@@ -759,6 +838,10 @@ static struct prm_ll_data omap44xx_prm_ll_data = {
 	.was_any_context_lost_old = &omap44xx_prm_was_any_context_lost_old,
 	.clear_context_loss_flags_old = &omap44xx_prm_clear_context_loss_flags_old,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.late_init = &omap44xx_prm_late_init,
+>>>>>>> v3.18
 =======
 	.late_init = &omap44xx_prm_late_init,
 >>>>>>> v3.18
@@ -767,8 +850,13 @@ static struct prm_ll_data omap44xx_prm_ll_data = {
 int __init omap44xx_prm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap44xx() && !soc_is_omap54xx())
 		return 0;
+=======
+	if (cpu_is_omap44xx() || soc_is_omap54xx() || soc_is_dra7xx())
+		prm_features |= PRM_HAS_IO_WAKEUP;
+>>>>>>> v3.18
 =======
 	if (cpu_is_omap44xx() || soc_is_omap54xx() || soc_is_dra7xx())
 		prm_features |= PRM_HAS_IO_WAKEUP;
@@ -778,12 +866,15 @@ int __init omap44xx_prm_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init omap44xx_prm_late_init(void)
 {
 	if (!cpu_is_omap44xx())
 		return 0;
 
 =======
+=======
+>>>>>>> v3.18
 static struct of_device_id omap_prm_dt_match_table[] = {
 	{ .compatible = "ti,omap4-prm" },
 	{ .compatible = "ti,omap5-prm" },
@@ -828,11 +919,15 @@ static int omap44xx_prm_late_init(void)
 			omap4_prcm_irq_setup.irq = irq_num;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	omap44xx_prm_enable_io_wakeup();
 
 	return omap_prcm_register_chain_handler(&omap4_prcm_irq_setup);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 omap_subsys_initcall(omap44xx_prm_late_init);
 
@@ -845,10 +940,15 @@ static void __exit omap44xx_prm_exit(void)
 	WARN(prm_unregister(&omap44xx_prm_ll_data),
 	     "%s: prm_ll_data function pointer mismatch\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 
 static void __exit omap44xx_prm_exit(void)
 {
 	prm_unregister(&omap44xx_prm_ll_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 __exitcall(omap44xx_prm_exit);

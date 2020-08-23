@@ -33,7 +33,13 @@
 #include "s5h1411.h"
 #include "lgdt3305.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mb86a20s.h"
+=======
+#include "si2165.h"
+#include "mb86a20s.h"
+#include "si2157.h"
+>>>>>>> v3.18
 =======
 #include "si2165.h"
 #include "mb86a20s.h"
@@ -74,6 +80,10 @@ struct cx231xx_dvb {
 	struct dmx_frontend fe_mem;
 	struct dvb_net net;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct i2c_client *i2c_client_tuner;
+>>>>>>> v3.18
 =======
 	struct i2c_client *i2c_client_tuner;
 >>>>>>> v3.18
@@ -162,7 +172,10 @@ static struct tda18271_config pv_tda18271_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct si2165_config hauppauge_930C_HD_1113xx_si2165_config = {
 	.i2c_addr	= 0x64,
 	.chip_mode	= SI2165_MODE_PLL_XTAL,
@@ -175,6 +188,9 @@ static const struct si2165_config pctv_quatro_stick_1114xx_si2165_config = {
 	.ref_freq_Hz	= 24000000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void print_err_status(struct cx231xx *dev, int packet, int status)
 {
@@ -414,8 +430,11 @@ static int attach_xc5000(u8 addr, struct cx231xx *dev)
 int cx231xx_set_analog_freq(struct cx231xx *dev, u32 freq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((dev->dvb != NULL) && (dev->dvb->frontend != NULL)) {
@@ -437,7 +456,11 @@ int cx231xx_set_analog_freq(struct cx231xx *dev, u32 freq)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -582,6 +605,10 @@ fail_adapter:
 static void unregister_dvb(struct cx231xx_dvb *dvb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -591,13 +618,19 @@ static void unregister_dvb(struct cx231xx_dvb *dvb)
 	dvb_dmxdev_release(&dvb->dmxdev);
 	dvb_dmx_release(&dvb->demux);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	client = dvb->i2c_client_tuner;
 	/* remove I2C tuner */
 	if (client) {
 		module_put(client->dev.driver->owner);
 		i2c_unregister_device(client);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dvb_unregister_frontend(dvb->frontend);
 	dvb_frontend_detach(dvb->frontend);
@@ -703,6 +736,10 @@ static int dvb_init(struct cx231xx *dev)
 		break;
 	case CX231XX_BOARD_CNXT_RDU_253S:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CX231XX_BOARD_KWORLD_UB445_USB_HYBRID:
+>>>>>>> v3.18
 =======
 	case CX231XX_BOARD_KWORLD_UB445_USB_HYBRID:
 >>>>>>> v3.18
@@ -753,7 +790,10 @@ static int dvb_init(struct cx231xx *dev)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
 
 		dev->dvb->frontend = dvb_attach(si2165_attach,
@@ -837,6 +877,9 @@ static int dvb_init(struct cx231xx *dev)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CX231XX_BOARD_PV_PLAYTV_USB_HYBRID:
 	case CX231XX_BOARD_KWORLD_UB430_USB_HYBRID:

@@ -16,10 +16,13 @@ ip_default_ttl - INTEGER
 	Default: 64 (as recommended by RFC1700)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_no_pmtu_disc - BOOLEAN
 	Disable Path MTU Discovery.
 	default FALSE
 =======
+=======
+>>>>>>> v3.18
 ip_no_pmtu_disc - INTEGER
 	Disable Path MTU Discovery. If enabled in mode 1 and a
 	fragmentation-required ICMP is received, the PMTU to this
@@ -44,13 +47,19 @@ ip_no_pmtu_disc - INTEGER
 
 	Possible values: 0-3
 	Default: FALSE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 min_pmtu - INTEGER
 	default 552 - minimum discovered Path MTU
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ip_forward_use_pmtu - BOOLEAN
 	By default we don't trust protocol path MTUs while forwarding
 	because they could be easily forged and can lead to unwanted
@@ -64,15 +73,22 @@ ip_forward_use_pmtu - BOOLEAN
 	0 - disabled
 	1 - enabled
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fwmark_reflect - BOOLEAN
 	Controls the fwmark of kernel-generated IPv4 reply packets that are not
 	associated with a socket for example, TCP RSTs or ICMP echo replies).
 	If unset, these packets have a fwmark of zero. If set, they have the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fwmark of the packet they are replying to. Similarly affects the fwmark
 	used by internal routing lookups triggered by incoming packets, such as
 	the ones used for Path MTU Discovery.
+=======
+	fwmark of the packet they are replying to.
+>>>>>>> v3.18
 =======
 	fwmark of the packet they are replying to.
 >>>>>>> v3.18
@@ -88,13 +104,19 @@ neigh/default/gc_thresh1 - INTEGER
 	Default: 128
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 neigh/default/gc_thresh2 - INTEGER
 	Threshold when garbage collector becomes more aggressive about
 	purging entries. Entries older than 5 seconds will be cleared
 	when over this number.
 	Default: 512
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 neigh/default/gc_thresh3 - INTEGER
 	Maximum number of neighbor entries allowed.  Increase this
@@ -133,11 +155,14 @@ ipfrag_high_thresh - INTEGER
 	ipfrag_high_thresh bytes of memory is allocated for this purpose,
 	the fragment handler will toss packets until ipfrag_low_thresh
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is reached.
 
 ipfrag_low_thresh - INTEGER
 	See ipfrag_high_thresh
 =======
+=======
+>>>>>>> v3.18
 	is reached. This also serves as a maximum limit to namespaces
 	different from the initial one.
 
@@ -145,17 +170,23 @@ ipfrag_low_thresh - INTEGER
 	Maximum memory used to reassemble IP fragments before the kernel
 	begins to remove incomplete fragment queues to free up resources.
 	The kernel still accepts new fragments for defragmentation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ipfrag_time - INTEGER
 	Time in seconds to keep an IP fragment in memory.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ipfrag_secret_interval - INTEGER
 	Regeneration interval (in seconds) of the hash secret (or lifetime
 	for the hash secret) for IP fragments.
 	Default: 600
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ipfrag_max_dist - INTEGER
@@ -235,7 +266,10 @@ tcp_app_win - INTEGER
 	Default: 31
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 tcp_autocorking - BOOLEAN
 	Enable TCP auto corking :
 	When applications do consecutive small write()/sendmsg() system calls,
@@ -246,6 +280,9 @@ tcp_autocorking - BOOLEAN
 	when they know how/when to uncork their sockets.
 	Default : 1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 tcp_available_congestion_control - STRING
 	Shows the available congestion control choices that are registered.
@@ -275,7 +312,11 @@ tcp_early_retrans - INTEGER
 	small and when no previously unsent data can be transmitted (such
 	that limited transmit could be used). Also controls the use of
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Tail loss probe (TLP) that converts RTOs occuring due to tail
+=======
+	Tail loss probe (TLP) that converts RTOs occurring due to tail
+>>>>>>> v3.18
 =======
 	Tail loss probe (TLP) that converts RTOs occurring due to tail
 >>>>>>> v3.18
@@ -363,6 +404,7 @@ tcp_max_orphans - INTEGER
 	up to ~64K of unswappable memory.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 tcp_max_ssthresh - INTEGER
 	Limited Slow-Start for TCP with large congestion windows (cwnd) defined in
 	RFC3742. Limited slow-start is a mechanism to limit growth of the cwnd
@@ -374,6 +416,8 @@ tcp_max_ssthresh - INTEGER
 	tcp_max_ssthresh to improve performance for new TCP connection.
 	Default: 0 (off)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 tcp_max_syn_backlog - INTEGER
@@ -539,11 +583,17 @@ tcp_syncookies - BOOLEAN
 	is seriously misconfigured.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	If you want to test which effects syncookies have to your
 	network connections you can set this knob to 2 to enable
 	unconditionally generation of syncookies.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 tcp_fastopen - INTEGER
 	Enable TCP Fast Open feature (draft-ietf-tcpm-fastopen) to send data
@@ -553,7 +603,11 @@ tcp_fastopen - INTEGER
 
 	The values (bitmap) are
 <<<<<<< HEAD
+<<<<<<< HEAD
 	1: Enables sending data in the opening SYN on the client.
+=======
+	1: Enables sending data in the opening SYN on the client w/ MSG_FASTOPEN.
+>>>>>>> v3.18
 =======
 	1: Enables sending data in the opening SYN on the client w/ MSG_FASTOPEN.
 >>>>>>> v3.18
@@ -570,7 +624,11 @@ tcp_fastopen - INTEGER
 	   option.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Default: 0
+=======
+	Default: 1
+>>>>>>> v3.18
 =======
 	Default: 1
 >>>>>>> v3.18
@@ -582,6 +640,7 @@ tcp_fastopen - INTEGER
 	See include/net/tcp.h and the code for more details.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 tcp_fwmark_accept - BOOLEAN
 	If set, incoming connections to listening sockets that do not have a
 	socket mark will set the mark of the accepting socket to the fwmark of
@@ -592,6 +651,8 @@ tcp_fwmark_accept - BOOLEAN
 	unaffected.
 	Default: 0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 tcp_syn_retries - INTEGER
@@ -652,7 +713,10 @@ tcp_wmem - vector of 3 INTEGERs: min, default, max
 	Default: between 64K and 4MB, depending on RAM size.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 tcp_notsent_lowat - UNSIGNED INTEGER
 	A TCP socket can control the amount of unsent bytes in its write queue,
 	thanks to TCP_NOTSENT_LOWAT socket option. poll()/select()/epoll()
@@ -666,6 +730,9 @@ tcp_notsent_lowat - UNSIGNED INTEGER
 
 	Default: UINT_MAX (0xFFFFFFFF)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 tcp_workaround_signed_windows - BOOLEAN
 	If set, assume no receipt of a window scaling option means the
@@ -675,12 +742,15 @@ tcp_workaround_signed_windows - BOOLEAN
 	Default: 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 tcp_dma_copybreak - INTEGER
 	Lower limit, in bytes, of the size of socket reads that will be
 	offloaded to a DMA copy engine, if one is present in the system
 	and CONFIG_NET_DMA is enabled.
 	Default: 4096
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 tcp_thin_linear_timeouts - BOOLEAN
@@ -837,7 +907,10 @@ ip_dynaddr - BOOLEAN
 	Default: 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ip_early_demux - BOOLEAN
 	Optimize input packet processing down to one demux for
 	certain kinds of local sockets.  Currently we only do this
@@ -847,6 +920,9 @@ ip_early_demux - BOOLEAN
 	reduces overall throughput, in such case you should disable it.
 	Default: 1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 icmp_echo_ignore_all - BOOLEAN
 	If set non-zero, then the kernel will ignore all ICMP ECHO
@@ -864,9 +940,12 @@ icmp_ratelimit - INTEGER
 	0 to disable any limiting,
 	otherwise the minimal space between responses in milliseconds.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Default: 1000
 
 =======
+=======
+>>>>>>> v3.18
 	Note that another sysctl, icmp_msgs_per_sec limits the number
 	of ICMP packets	sent on all targets.
 	Default: 1000
@@ -882,6 +961,9 @@ icmp_msgs_burst - INTEGER
 	while icmp_msgs_burst controls the burst size of these packets.
 	Default: 50
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 icmp_ratemask - INTEGER
 	Mask made of ICMP types for which rates are being limited.
@@ -911,7 +993,11 @@ icmp_ignore_bogus_error_responses - BOOLEAN
 	If this is set to TRUE, the kernel will not give such warnings, which
 	will avoid log file clutter.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Default: FALSE
+=======
+	Default: 1
+>>>>>>> v3.18
 =======
 	Default: 1
 >>>>>>> v3.18
@@ -961,12 +1047,18 @@ igmp_max_memberships - INTEGER
 	conf/all/*	  is special, changes the settings for all interfaces
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 igmp_qrv - INTEGER
 	 Controls the IGMP query robustness variable (see RFC2236 8.1).
 	 Default: 2 (as specified by RFC2236 8.1)
 	 Minimum: 1 (as specified by RFC6636 4.5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 log_martians - BOOLEAN
 	Log packets with impossible addresses to kernel log.
@@ -1072,6 +1164,7 @@ accept_source_route - BOOLEAN
 
 accept_local - BOOLEAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Accept packets with local source addresses. In combination
 	with suitable routing, this can be used to direct packets
 	between two local interfaces over the wire and have them
@@ -1080,6 +1173,11 @@ accept_local - BOOLEAN
 	rp_filter must be set to a non-zero value in order for
 	accept_local to have an effect.
 
+=======
+	Accept packets with local source addresses. In combination with
+	suitable routing, this can be used to direct packets between two
+	local interfaces over the wire and have them accepted properly.
+>>>>>>> v3.18
 =======
 	Accept packets with local source addresses. In combination with
 	suitable routing, this can be used to direct packets between two
@@ -1223,13 +1321,19 @@ igmpv3_unsolicited_report_interval - INTEGER
 	Default: 1000 (1 seconds)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 promote_secondaries - BOOLEAN
 	When a primary IP address is removed from this interface
 	promote a corresponding secondary IP address instead of
 	removing all the corresponding secondary IP addresses.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 tag - INTEGER
 	Allows you to write a number, which can be used as required.
@@ -1262,7 +1366,10 @@ bindv6only - BOOLEAN
 	Default: FALSE (as specified in RFC3493)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 flowlabel_consistency - BOOLEAN
 	Protect the consistency (and unicity) of flow label.
 	You have to disable it to use IPV6_FL_F_REFLECT flag on the
@@ -1292,6 +1399,9 @@ mld_qrv - INTEGER
 	Default: 2 (as specified by RFC3810 9.1)
 	Minimum: 1 (as specified by RFC6636 4.5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 IPv6 Fragmentation:
 
@@ -1308,11 +1418,14 @@ ip6frag_time - INTEGER
 	Time in seconds to keep an IPv6 fragment in memory.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip6frag_secret_interval - INTEGER
 	Regeneration interval (in seconds) of the hash secret (or lifetime
 	for the hash secret) for IPv6 fragments.
 	Default: 600
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 conf/default/*:
@@ -1336,6 +1449,7 @@ conf/all/forwarding - BOOLEAN
 	This referred to as global forwarding.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 proxy_ndp - INTEGER
 	Do proxy ndp.
 
@@ -1350,14 +1464,23 @@ proxy_ndp - BOOLEAN
 	Do proxy ndp.
 
 >>>>>>> v3.18
+=======
+proxy_ndp - BOOLEAN
+	Do proxy ndp.
+
+>>>>>>> v3.18
 fwmark_reflect - BOOLEAN
 	Controls the fwmark of kernel-generated IPv6 reply packets that are not
 	associated with a socket for example, TCP RSTs or ICMPv6 echo replies).
 	If unset, these packets have a fwmark of zero. If set, they have the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fwmark of the packet they are replying to. Similarly affects the fwmark
 	used by internal routing lookups triggered by incoming packets, such as
 	the ones used for Path MTU Discovery.
+=======
+	fwmark of the packet they are replying to.
+>>>>>>> v3.18
 =======
 	fwmark of the packet they are replying to.
 >>>>>>> v3.18
@@ -1393,7 +1516,10 @@ accept_ra_defrtr - BOOLEAN
 			    disabled if accept_ra is disabled.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 accept_ra_from_local - BOOLEAN
 	Accept RA with source-address that is found on local machine
         if the RA is otherwise proper and able to be accepted.
@@ -1406,6 +1532,9 @@ accept_ra_from_local - BOOLEAN
 	   disabled if accept_ra_from_local is disabled
                on a specific interface.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 accept_ra_pinfo - BOOLEAN
 	Learn Prefix Information in Router Advertisement.
@@ -1429,6 +1558,7 @@ accept_ra_rtr_pref - BOOLEAN
 			    disabled if accept_ra is disabled.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 accept_ra_prefix_route - BOOLEAN
 	Set the prefix route for the autoconfigured interface address
 
@@ -1441,6 +1571,8 @@ accept_ra_mtu - BOOLEAN
 	Functional default: enabled if accept_ra is enabled.
 			    disabled if accept_ra is disabled.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 accept_redirects - BOOLEAN
@@ -1531,6 +1663,7 @@ router_solicitations - INTEGER
 	Default: 3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use_oif_addrs_only - BOOLEAN
 	When enabled, the candidate source addresses for destinations
 	routed via this interface are restricted to the set of addresses
@@ -1538,6 +1671,8 @@ use_oif_addrs_only - BOOLEAN
 
 	Default: false
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 use_tempaddr - INTEGER
@@ -1622,6 +1757,7 @@ ndisc_notify - BOOLEAN
 	    up or hardware address changes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 optimistic_dad - BOOLEAN
 	Whether to perform Optimistic Duplicate Address Detection (RFC 4429).
 		0: disabled (default)
@@ -1636,6 +1772,8 @@ use_optimistic - BOOLEAN
 		1: enabled
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 mldv1_unsolicited_report_interval - INTEGER
 	The interval in milliseconds in which the next unsolicited
 	MLDv1 report retransmit will take place.
@@ -1647,7 +1785,10 @@ mldv2_unsolicited_report_interval - INTEGER
 	Default: 1000 (1 second)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 force_mld_version - INTEGER
 	0 - (default) No enforcement of a MLD version, MLDv1 fallback allowed
 	1 - Enforce to use MLD version 1
@@ -1659,6 +1800,9 @@ suppress_frag_ndisc - INTEGER
 	1 - (default) discard fragmented neighbor discovery packets
 	0 - allow fragmented neighbor discovery packets
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 icmp/*:
 ratelimit - INTEGER

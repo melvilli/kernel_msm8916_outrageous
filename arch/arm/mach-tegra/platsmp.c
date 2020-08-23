@@ -12,6 +12,7 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/errno.h>
 #include <linux/delay.h>
@@ -38,6 +39,8 @@ static cpumask_t tegra_cpu_init_mask;
 
 static void __cpuinit tegra_secondary_init(unsigned int cpu)
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/clk/tegra.h>
 #include <linux/delay.h>
@@ -64,6 +67,9 @@ static void __cpuinit tegra_secondary_init(unsigned int cpu)
 static cpumask_t tegra_cpu_init_mask;
 
 static void tegra_secondary_init(unsigned int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	cpumask_set_cpu(cpu, &tegra_cpu_init_mask);
@@ -144,7 +150,11 @@ static int tegra30_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		/* Wait for the power to come up. */
 		timeout = jiffies + msecs_to_jiffies(100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (tegra_pmc_cpu_is_powered(cpu)) {
+=======
+		while (!tegra_pmc_cpu_is_powered(cpu)) {
+>>>>>>> v3.18
 =======
 		while (!tegra_pmc_cpu_is_powered(cpu)) {
 >>>>>>> v3.18
@@ -174,6 +184,7 @@ remove_clamps:
 static int tegra114_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu = cpu_logical_map(cpu);
 	return tegra_pmc_cpu_power_on(cpu);
 }
@@ -187,6 +198,8 @@ static int __cpuinit tegra_boot_secondary(unsigned int cpu,
 		return tegra30_boot_secondary(cpu, idle);
 	if (IS_ENABLED(CONFIG_ARCH_TEGRA_114_SOC) && tegra_chip_id == TEGRA114)
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 
 	cpu = cpu_logical_map(cpu);
@@ -224,6 +237,9 @@ static int tegra_boot_secondary(unsigned int cpu,
 	if (IS_ENABLED(CONFIG_ARCH_TEGRA_114_SOC) && tegra_get_chip_id() == TEGRA114)
 		return tegra114_boot_secondary(cpu, idle);
 	if (IS_ENABLED(CONFIG_ARCH_TEGRA_124_SOC) && tegra_get_chip_id() == TEGRA124)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return tegra114_boot_secondary(cpu, idle);
 

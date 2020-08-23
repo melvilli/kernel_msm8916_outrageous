@@ -33,15 +33,21 @@
 /* A future safe maximum remap size. */
 #define VMW_PPN_PER_REMAP ((31 * 1024) / VMW_PPN_SIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int vmw_gmr2_bind(struct vmw_private *dev_priv,
 			 struct page *pages[],
 =======
+=======
+>>>>>>> v3.18
 #define DMA_ADDR_INVALID ((dma_addr_t) 0)
 #define DMA_PAGE_INVALID 0UL
 
 static int vmw_gmr2_bind(struct vmw_private *dev_priv,
 			 struct vmw_piter *iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 unsigned long num_pages,
 			 int gmr_id)
@@ -90,12 +96,15 @@ static int vmw_gmr2_bind(struct vmw_private *dev_priv,
 		for (i = 0; i < nr; ++i) {
 			if (VMW_PPN_SIZE <= 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				*cmd = page_to_pfn(*pages++);
 			else
 				*((uint64_t *)cmd) = page_to_pfn(*pages++);
 
 			cmd += VMW_PPN_SIZE / sizeof(*cmd);
 =======
+=======
+>>>>>>> v3.18
 				*cmd = vmw_piter_dma_addr(iter) >> PAGE_SHIFT;
 			else
 				*((uint64_t *)cmd) = vmw_piter_dma_addr(iter) >>
@@ -103,6 +112,9 @@ static int vmw_gmr2_bind(struct vmw_private *dev_priv,
 
 			cmd += VMW_PPN_SIZE / sizeof(*cmd);
 			vmw_piter_next(iter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -138,6 +150,7 @@ static void vmw_gmr2_unbind(struct vmw_private *dev_priv,
 	vmw_fifo_commit(dev_priv, define_size);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * FIXME: Adjust to the ttm lowmem / highmem storage to minimize
@@ -301,6 +314,8 @@ int vmw_gmr_bind(struct vmw_private *dev_priv,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 int vmw_gmr_bind(struct vmw_private *dev_priv,
 		 const struct vmw_sg_table *vsgt,
@@ -318,12 +333,16 @@ int vmw_gmr_bind(struct vmw_private *dev_priv,
 		return -EINVAL;
 
 	return vmw_gmr2_bind(dev_priv, &data_iter, num_pages, gmr_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 void vmw_gmr_unbind(struct vmw_private *dev_priv, int gmr_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (likely(dev_priv->capabilities & SVGA_CAP_GMR2)) {
 		vmw_gmr2_unbind(dev_priv, gmr_id);
@@ -336,6 +355,10 @@ void vmw_gmr_unbind(struct vmw_private *dev_priv, int gmr_id)
 	vmw_write(dev_priv, SVGA_REG_GMR_DESCRIPTOR, 0);
 	mb();
 	mutex_unlock(&dev_priv->hw_mutex);
+=======
+	if (likely(dev_priv->capabilities & SVGA_CAP_GMR2))
+		vmw_gmr2_unbind(dev_priv, gmr_id);
+>>>>>>> v3.18
 =======
 	if (likely(dev_priv->capabilities & SVGA_CAP_GMR2))
 		vmw_gmr2_unbind(dev_priv, gmr_id);

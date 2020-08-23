@@ -7,6 +7,7 @@
  */
 #include <linux/bitops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* UART Register Offset Define */
 #define SIRFUART_LINE_CTRL			0x0040
@@ -33,6 +34,8 @@
 
 /* UART Line Control Register */
 =======
+=======
+>>>>>>> v3.18
 struct sirfsoc_uart_param {
 	const char *uart_name;
 	const char *port_name;
@@ -287,6 +290,9 @@ struct sirfsoc_uart_register sirfsoc_uart = {
 	},
 };
 /* uart io ctrl */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SIRFUART_DATA_BIT_LEN_MASK		0x3
 #define SIRFUART_DATA_BIT_LEN_5			BIT(0)
@@ -307,6 +313,7 @@ struct sirfsoc_uart_register sirfsoc_uart = {
 #define SIRFUART_LOOP_BACK			BIT(7)
 #define SIRFUART_PARITY_MASK			(7 << 3)
 #define SIRFUART_DUMMY_READ			BIT(16)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define SIRFSOC_UART_RX_TIMEOUT(br, to)	(((br) * (((to) + 999) / 1000)) / 1000)
@@ -401,6 +408,8 @@ struct sirfsoc_uart_register sirfsoc_uart = {
 #define SIRFSOC_PORT_TYPE			0xa5
 
 =======
+=======
+>>>>>>> v3.18
 #define SIRFUART_AFC_CTRL_RX_THD		0x70
 #define SIRFUART_AFC_RX_EN			BIT(8)
 #define SIRFUART_AFC_TX_EN			BIT(9)
@@ -421,6 +430,9 @@ struct sirfsoc_uart_register sirfsoc_uart = {
 
 /* Macro Specific*/
 #define SIRFUART_INT_EN_CLR                    0x0060
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Baud Rate Calculation */
 #define SIRF_MIN_SAMPLE_DIV			0xf
@@ -432,7 +444,10 @@ struct sirfsoc_uart_register sirfsoc_uart = {
 #define SIRF_BAUD_RATE_SUPPORT_NR		18
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* USP SPEC */
 #define SIRFSOC_USP_ENDIAN_CTRL_LSBF		BIT(4)
 #define SIRFSOC_USP_EN				BIT(5)
@@ -517,6 +532,9 @@ struct sirfsoc_uart_register sirfsoc_uart = {
 /* Indicate how many buffers used */
 #define SIRFSOC_RX_LOOP_BUF_CNT		2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* For Fast Baud Rate Calculation */
 struct sirfsoc_baudrate_to_regv {
@@ -524,6 +542,7 @@ struct sirfsoc_baudrate_to_regv {
 	unsigned int reg_val;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct sirfsoc_uart_port {
 	unsigned char			hw_flow_ctrl;
@@ -543,6 +562,8 @@ struct sirfsoc_uart_port {
 #define rd_regl(port, reg)		(__raw_readl(portaddr(port, reg)))
 #define wr_regb(port, reg, val)		__raw_writeb(val, portaddr(port, reg))
 =======
+=======
+>>>>>>> v3.18
 enum sirfsoc_tx_state {
 	TX_DMA_IDLE,
 	TX_DMA_RUNNING,
@@ -585,6 +606,9 @@ struct sirfsoc_uart_port {
 /* Register Access Control */
 #define portaddr(port, reg)		((port)->membase + (reg))
 #define rd_regl(port, reg)		(__raw_readl(portaddr(port, reg)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define wr_regl(port, reg, val)		__raw_writel(val, portaddr(port, reg))
 
@@ -596,7 +620,11 @@ struct sirfsoc_uart_port {
 /* I/O Mode */
 #define SIRFSOC_UART_IO_RX_MAX_CNT		256
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIRFSOC_UART_IO_TX_REASONABLE_CNT	6
+=======
+#define SIRFSOC_UART_IO_TX_REASONABLE_CNT	256
+>>>>>>> v3.18
 =======
 #define SIRFSOC_UART_IO_TX_REASONABLE_CNT	256
 >>>>>>> v3.18

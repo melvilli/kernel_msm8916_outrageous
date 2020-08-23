@@ -978,12 +978,15 @@ static int saa717x_s_video_routing(struct v4l2_subdev *sd,
 static int saa717x_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->val = saa717x_read(sd, reg->reg);
@@ -994,6 +997,7 @@ static int saa717x_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 static int saa717x_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	u16 addr = reg->reg & 0xffff;
 	u8 val = reg->val & 0xff;
@@ -1002,6 +1006,11 @@ static int saa717x_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regi
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+	u16 addr = reg->reg & 0xffff;
+	u8 val = reg->val & 0xff;
+
+>>>>>>> v3.18
 =======
 	u16 addr = reg->reg & 0xffff;
 	u8 val = reg->val & 0xff;
@@ -1219,7 +1228,10 @@ static const struct v4l2_subdev_core_ops saa717x_core_ops = {
 	.s_register = saa717x_s_register,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = saa717x_s_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -1240,6 +1252,10 @@ static const struct v4l2_subdev_tuner_ops saa717x_tuner_ops = {
 
 static const struct v4l2_subdev_video_ops saa717x_video_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.s_std = saa717x_s_std,
+>>>>>>> v3.18
 =======
 	.s_std = saa717x_s_std,
 >>>>>>> v3.18
@@ -1279,7 +1295,11 @@ static int saa717x_probe(struct i2c_client *client,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder = kzalloc(sizeof(struct saa717x_state), GFP_KERNEL);
+=======
+	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1297,7 +1317,10 @@ static int saa717x_probe(struct i2c_client *client,
 	if (id != 0xc2 && id != 0x32 && id != 0xf2 && id != 0x6c) {
 		v4l2_dbg(1, debug, sd, "saa717x not found (id=%02x)\n", id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -ENODEV;
@@ -1340,7 +1363,10 @@ static int saa717x_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -1380,7 +1406,10 @@ static int saa717x_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(sd->ctrl_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

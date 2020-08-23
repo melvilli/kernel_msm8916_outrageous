@@ -14,6 +14,10 @@
 /dts-v1/;
 /include/ "sun5i-a13.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/include/ "sunxi-common-regulators.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "sunxi-common-regulators.dtsi"
 >>>>>>> v3.18
@@ -23,6 +27,7 @@
 	compatible = "olimex,a13-olinuxino", "allwinner,sun5i-a13";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chosen {
 		bootargs = "earlyprintk console=ttyS0,115200";
 	};
@@ -30,6 +35,8 @@
 	soc@01c20000 {
 		pinctrl@01c20800 {
 =======
+=======
+>>>>>>> v3.18
 	soc@01c00000 {
 		mmc0: mmc@01c0f000 {
 			pinctrl-names = "default";
@@ -62,6 +69,9 @@
 				allwinner,pull = <1>;
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			led_pins_olinuxino: led_pins@0 {
 				allwinner,pins = "PG9";
@@ -70,7 +80,10 @@
 				allwinner,pull = <0>;
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			usb1_vbus_pin_olinuxino: usb1_vbus_pin@0 {
 				allwinner,pins = "PG11";
@@ -78,6 +91,9 @@
 				allwinner,drive = <0>;
 				allwinner,pull = <0>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -87,7 +103,10 @@
 			status = "okay";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		i2c0: i2c@01c2ac00 {
 			pinctrl-names = "default";
@@ -106,6 +125,9 @@
 			pinctrl-0 = <&i2c2_pins_a>;
 			status = "okay";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -120,12 +142,18 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	reg_usb1_vbus: usb1-vbus {
 		pinctrl-0 = <&usb1_vbus_pin_olinuxino>;
 		gpio = <&pio 6 11 0>;
 		status = "okay";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

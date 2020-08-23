@@ -12,6 +12,7 @@
 #define __SH_PFC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/stringify.h>
 #include <asm-generic/gpio.h>
 
@@ -23,21 +24,29 @@ enum {
 	PINMUX_TYPE_NONE,
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bug.h>
 #include <linux/stringify.h>
 
 enum {
 	PINMUX_TYPE_NONE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PINMUX_TYPE_FUNCTION,
 	PINMUX_TYPE_GPIO,
 	PINMUX_TYPE_OUTPUT,
 	PINMUX_TYPE_INPUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINMUX_TYPE_INPUT_PULLUP,
 	PINMUX_TYPE_INPUT_PULLDOWN,
 
 	PINMUX_FLAG_TYPE,	/* must be last */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -47,15 +56,21 @@ enum {
 #define SH_PFC_PIN_CFG_PULL_UP		(1 << 2)
 #define SH_PFC_PIN_CFG_PULL_DOWN	(1 << 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct sh_pfc_pin {
 	const pinmux_enum_t enum_id;
 =======
+=======
+>>>>>>> v3.18
 #define SH_PFC_PIN_CFG_NO_GPIO		(1 << 31)
 
 struct sh_pfc_pin {
 	u16 pin;
 	u16 enum_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char *name;
 	unsigned int configs;
@@ -91,6 +106,7 @@ struct sh_pfc_function {
 
 struct pinmux_func {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const pinmux_enum_t enum_id;
 	const char *name;
 };
@@ -112,6 +128,8 @@ struct pinmux_cfg_reg {
 	unsigned long reg, reg_width, field_width;
 	const pinmux_enum_t *enum_ids;
 =======
+=======
+>>>>>>> v3.18
 	u16 enum_id;
 	const char *name;
 };
@@ -119,12 +137,16 @@ struct pinmux_cfg_reg {
 struct pinmux_cfg_reg {
 	unsigned long reg, reg_width, field_width;
 	const u16 *enum_ids;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const unsigned long *var_field_width;
 };
 
 #define PINMUX_CFG_REG(name, r, r_width, f_width) \
 	.reg = r, .reg_width = r_width, .field_width = f_width,		\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.enum_ids = (pinmux_enum_t [(r_width / f_width) * (1 << f_width)])
 
@@ -137,6 +159,8 @@ struct pinmux_data_reg {
 	unsigned long reg, reg_width;
 	const pinmux_enum_t *enum_ids;
 =======
+=======
+>>>>>>> v3.18
 	.enum_ids = (const u16 [(r_width / f_width) * (1 << f_width)])
 
 #define PINMUX_CFG_REG_VAR(name, r, r_width, var_fw0, var_fwn...) \
@@ -148,11 +172,15 @@ struct pinmux_data_reg {
 struct pinmux_data_reg {
 	unsigned long reg, reg_width;
 	const u16 *enum_ids;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define PINMUX_DATA_REG(name, r, r_width) \
 	.reg = r, .reg_width = r_width,	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.enum_ids = (pinmux_enum_t [r_width]) \
 
@@ -169,6 +197,8 @@ struct pinmux_range {
 	pinmux_enum_t end;
 	pinmux_enum_t force;
 =======
+=======
+>>>>>>> v3.18
 	.enum_ids = (const u16 [r_width]) \
 
 struct pinmux_irq {
@@ -188,6 +218,9 @@ struct pinmux_range {
 	u16 begin;
 	u16 end;
 	u16 force;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -195,6 +228,10 @@ struct sh_pfc;
 
 struct sh_pfc_soc_operations {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*init)(struct sh_pfc *pfc);
+>>>>>>> v3.18
 =======
 	int (*init)(struct sh_pfc *pfc);
 >>>>>>> v3.18
@@ -209,8 +246,11 @@ struct sh_pfc_soc_info {
 
 	struct pinmux_range input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinmux_range input_pd;
 	struct pinmux_range input_pu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct pinmux_range output;
@@ -219,8 +259,11 @@ struct sh_pfc_soc_info {
 	const struct sh_pfc_pin *pins;
 	unsigned int nr_pins;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pinmux_range *ranges;
 	unsigned int nr_ranges;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const struct sh_pfc_pin_group *groups;
@@ -235,7 +278,11 @@ struct sh_pfc_soc_info {
 	const struct pinmux_data_reg *data_regs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const pinmux_enum_t *gpio_data;
+=======
+	const u16 *gpio_data;
+>>>>>>> v3.18
 =======
 	const u16 *gpio_data;
 >>>>>>> v3.18
@@ -247,6 +294,7 @@ struct sh_pfc_soc_info {
 	unsigned long unlock_reg;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum { GPIO_CFG_REQ, GPIO_CFG_FREE };
 
@@ -327,6 +375,8 @@ enum { GPIO_CFG_REQ, GPIO_CFG_FREE };
 
 /* helper macro for top 4 bits in PORTnCR */
 =======
+=======
+>>>>>>> v3.18
 /* -----------------------------------------------------------------------------
  * Helper macros to create pin and port lists
  */
@@ -476,6 +526,9 @@ enum { GPIO_CFG_REQ, GPIO_CFG_FREE };
 /*
  * PORTnCR macro
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _PCRH(in, in_pd, in_pu, out)	\
 	0, (out), (in), 0,		\
@@ -487,8 +540,12 @@ enum { GPIO_CFG_REQ, GPIO_CFG_FREE };
 	{								\
 		PINMUX_CFG_REG("PORT" nr "CR", reg, 8, 4) {		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_PCRH(PORT##nr##_IN, PORT##nr##_IN_PD,		\
 			      PORT##nr##_IN_PU, PORT##nr##_OUT),	\
+=======
+			_PCRH(PORT##nr##_IN, 0, 0, PORT##nr##_OUT),	\
+>>>>>>> v3.18
 =======
 			_PCRH(PORT##nr##_IN, 0, 0, PORT##nr##_OUT),	\
 >>>>>>> v3.18

@@ -11,16 +11,22 @@
  * Copyright (C) 2002, 2003, 2004, 2005, 2007  Maciej W. Rozycki
  * Copyright (C) 2000, 2001, 2012 MIPS Technologies, Inc.  All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #include <linux/bug.h>
 #include <linux/compiler.h>
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) 2014, Imagination Technologies Ltd.
  */
 #include <linux/bug.h>
 #include <linux/compiler.h>
 #include <linux/context_tracking.h>
 #include <linux/cpu_pm.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kexec.h>
 #include <linux/init.h>
@@ -48,6 +54,10 @@
 #include <asm/cop2.h>
 #include <asm/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -59,6 +69,10 @@
 #include <asm/mipsmtregs.h>
 #include <asm/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/msa.h>
+>>>>>>> v3.18
 =======
 #include <asm/msa.h>
 >>>>>>> v3.18
@@ -93,12 +107,18 @@ extern asmlinkage void handle_cpu(void);
 extern asmlinkage void handle_ov(void);
 extern asmlinkage void handle_tr(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern asmlinkage void handle_fpe(void);
 =======
+=======
+>>>>>>> v3.18
 extern asmlinkage void handle_msa_fpe(void);
 extern asmlinkage void handle_fpe(void);
 extern asmlinkage void handle_ftlb(void);
 extern asmlinkage void handle_msa(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern asmlinkage void handle_mdmx(void);
 extern asmlinkage void handle_watch(void);
@@ -107,6 +127,10 @@ extern asmlinkage void handle_dsp(void);
 extern asmlinkage void handle_mcheck(void);
 extern asmlinkage void handle_reserved(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void tlb_do_page_fault_0(void);
+>>>>>>> v3.18
 =======
 extern void tlb_do_page_fault_0(void);
 >>>>>>> v3.18
@@ -118,7 +142,11 @@ void (*board_ejtag_handler_setup)(void);
 void (*board_bind_eic_interrupt)(int irq, int regset);
 void (*board_ebase_setup)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinitdata(*board_cache_error_setup)(void);
+=======
+void(*board_cache_error_setup)(void);
+>>>>>>> v3.18
 =======
 void(*board_cache_error_setup)(void);
 >>>>>>> v3.18
@@ -297,7 +325,11 @@ static void __show_regs(const struct pt_regs *regs)
 	printk("Status: %08x	", (uint32_t) regs->cp0_status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (current_cpu_data.isa_level == MIPS_CPU_ISA_I) {
+=======
+	if (cpu_has_3kex) {
+>>>>>>> v3.18
 =======
 	if (cpu_has_3kex) {
 >>>>>>> v3.18
@@ -314,7 +346,11 @@ static void __show_regs(const struct pt_regs *regs)
 		if (regs->cp0_status & ST0_IEC)
 			printk("IEc ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
+=======
+	} else if (cpu_has_4kex) {
+>>>>>>> v3.18
 =======
 	} else if (cpu_has_4kex) {
 >>>>>>> v3.18
@@ -369,6 +405,10 @@ void show_registers(struct pt_regs *regs)
 {
 	const int field = 2 * sizeof(unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mm_segment_t old_fs = get_fs();
+>>>>>>> v3.18
 =======
 	mm_segment_t old_fs = get_fs();
 >>>>>>> v3.18
@@ -387,10 +427,13 @@ void show_registers(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	show_stacktrace(current, regs);
 	show_code((unsigned int __user *) regs->cp0_epc);
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 	if (!user_mode(regs))
 		/* Necessary for getting the correct stack content */
 		set_fs(KERNEL_DS);
@@ -398,6 +441,9 @@ void show_registers(struct pt_regs *regs)
 	show_code((unsigned int __user *) regs->cp0_epc);
 	printk("\n");
 	set_fs(old_fs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -413,6 +459,7 @@ void __noreturn die(const char *str, struct pt_regs *regs)
 	static int die_counter;
 	int sig = SIGSEGV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long dvpret;
 #endif /* CONFIG_MIPS_MT_SMTC */
@@ -421,16 +468,22 @@ void __noreturn die(const char *str, struct pt_regs *regs)
 
 	if (notify_die(DIE_OOPS, str, regs, 0, regs_to_trapnr(regs), SIGSEGV) == NOTIFY_STOP)
 =======
+=======
+>>>>>>> v3.18
 
 	oops_enter();
 
 	if (notify_die(DIE_OOPS, str, regs, 0, regs_to_trapnr(regs),
 		       SIGSEGV) == NOTIFY_STOP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sig = 0;
 
 	console_verbose();
 	raw_spin_lock_irq(&die_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	dvpret = dvpe();
@@ -439,6 +492,9 @@ void __noreturn die(const char *str, struct pt_regs *regs)
 #ifdef CONFIG_MIPS_MT_SMTC
 	mips_mt_regdump(dvpret);
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+	bust_spinlocks(1);
+>>>>>>> v3.18
 =======
 	bust_spinlocks(1);
 >>>>>>> v3.18
@@ -490,7 +546,13 @@ asmlinkage void do_be(struct pt_regs *regs)
 	int data = regs->cp0_cause & 4;
 	int action = MIPS_BE_FATAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	enum ctx_state prev_state;
+
+	prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state;
 
@@ -509,17 +571,23 @@ asmlinkage void do_be(struct pt_regs *regs)
 	switch (action) {
 	case MIPS_BE_DISCARD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	case MIPS_BE_FIXUP:
 		if (fixup) {
 			regs->cp0_epc = fixup->nextinsn;
 			return;
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	case MIPS_BE_FIXUP:
 		if (fixup) {
 			regs->cp0_epc = fixup->nextinsn;
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -534,6 +602,7 @@ asmlinkage void do_be(struct pt_regs *regs)
 	       data ? "Data" : "Instruction",
 	       field, regs->cp0_epc, field, regs->regs[31]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (notify_die(DIE_OOPS, "bus error", regs, 0, regs_to_trapnr(regs), SIGBUS)
 	    == NOTIFY_STOP)
 		return;
@@ -541,6 +610,8 @@ asmlinkage void do_be(struct pt_regs *regs)
 	die_if_kernel("Oops", regs);
 	force_sig(SIGBUS, current);
 =======
+=======
+>>>>>>> v3.18
 	if (notify_die(DIE_OOPS, "bus error", regs, 0, regs_to_trapnr(regs),
 		       SIGBUS) == NOTIFY_STOP)
 		goto out;
@@ -550,6 +621,9 @@ asmlinkage void do_be(struct pt_regs *regs)
 
 out:
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -709,7 +783,11 @@ static int simulate_rdhwr(struct pt_regs *regs, int rd, int rt)
 		return 0;
 	case 3:		/* Count register resolution */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (current_cpu_data.cputype) {
+=======
+		switch (current_cpu_type()) {
+>>>>>>> v3.18
 =======
 		switch (current_cpu_type()) {
 >>>>>>> v3.18
@@ -770,13 +848,19 @@ static int simulate_sync(struct pt_regs *regs, unsigned int opcode)
 asmlinkage void do_ov(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 	siginfo_t info;
 
 	prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	die_if_kernel("Integer overflow", regs);
 
@@ -786,6 +870,10 @@ asmlinkage void do_ov(struct pt_regs *regs)
 	info.si_addr = (void __user *) regs->cp0_epc;
 	force_sig_info(SIGFPE, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 	exception_exit(prev_state);
 >>>>>>> v3.18
@@ -799,6 +887,10 @@ int process_fpemu_return(int sig, void __user *fault_addr)
 		si.si_signo = sig;
 		if (sig == SIGSEGV) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			down_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 			down_read(&current->mm->mmap_sem);
 >>>>>>> v3.18
@@ -807,6 +899,10 @@ int process_fpemu_return(int sig, void __user *fault_addr)
 			else
 				si.si_code = SEGV_MAPERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			up_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 			up_read(&current->mm->mmap_sem);
 >>>>>>> v3.18
@@ -829,12 +925,15 @@ int process_fpemu_return(int sig, void __user *fault_addr)
 asmlinkage void do_fpe(struct pt_regs *regs, unsigned long fcr31)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info = {0};
 
 	if (notify_die(DIE_FP, "FP exception", regs, 0, regs_to_trapnr(regs), SIGFPE)
 	    == NOTIFY_STOP)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 	siginfo_t info = {0};
 
@@ -842,6 +941,9 @@ asmlinkage void do_fpe(struct pt_regs *regs, unsigned long fcr31)
 	if (notify_die(DIE_FP, "FP exception", regs, 0, regs_to_trapnr(regs),
 		       SIGFPE) == NOTIFY_STOP)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	die_if_kernel("FP exception in kernel code", regs);
 
@@ -879,7 +981,11 @@ asmlinkage void do_fpe(struct pt_regs *regs, unsigned long fcr31)
 		process_fpemu_return(sig, fault_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -900,6 +1006,12 @@ asmlinkage void do_fpe(struct pt_regs *regs, unsigned long fcr31)
 	info.si_addr = (void __user *) regs->cp0_epc;
 	force_sig_info(SIGFPE, &info, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 
 out:
@@ -919,7 +1031,12 @@ static void do_trap_or_bp(struct pt_regs *regs, unsigned int code,
 #endif /* CONFIG_KGDB_LOW_LEVEL_TRAP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (notify_die(DIE_TRAP, str, regs, code, regs_to_trapnr(regs), SIGTRAP) == NOTIFY_STOP)
+=======
+	if (notify_die(DIE_TRAP, str, regs, code, regs_to_trapnr(regs),
+		       SIGTRAP) == NOTIFY_STOP)
+>>>>>>> v3.18
 =======
 	if (notify_die(DIE_TRAP, str, regs, code, regs_to_trapnr(regs),
 		       SIGTRAP) == NOTIFY_STOP)
@@ -976,10 +1093,13 @@ asmlinkage void do_bp(struct pt_regs *regs)
 {
 	unsigned int opcode, bcode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long epc;
 	u16 instr[2];
 
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 	unsigned long epc;
 	u16 instr[2];
@@ -990,6 +1110,9 @@ asmlinkage void do_bp(struct pt_regs *regs)
 		set_fs(KERNEL_DS);
 
 	prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (get_isa16_mode(regs->cp0_epc)) {
 		/* Calculate EPC. */
@@ -998,6 +1121,7 @@ asmlinkage void do_bp(struct pt_regs *regs)
 			if ((__get_user(instr[0], (u16 __user *)msk_isa16_mode(epc)) ||
 			    (__get_user(instr[1], (u16 __user *)msk_isa16_mode(epc + 2)))))
 				goto out_sigsegv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		    opcode = (instr[0] << 16) | instr[1];
 		} else {
@@ -1011,6 +1135,8 @@ asmlinkage void do_bp(struct pt_regs *regs)
 	} else {
 		if (__get_user(opcode, (unsigned int __user *) exception_epc(regs)))
 =======
+=======
+>>>>>>> v3.18
 			opcode = (instr[0] << 16) | instr[1];
 		} else {
 			/* MIPS16e mode */
@@ -1024,6 +1150,9 @@ asmlinkage void do_bp(struct pt_regs *regs)
 	} else {
 		if (__get_user(opcode,
 			       (unsigned int __user *) exception_epc(regs)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out_sigsegv;
 	}
@@ -1045,6 +1174,7 @@ asmlinkage void do_bp(struct pt_regs *regs)
 	switch (bcode) {
 	case BRK_KPROBE_BP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (notify_die(DIE_BREAK, "debug", regs, bcode, regs_to_trapnr(regs), SIGTRAP) == NOTIFY_STOP)
 			return;
 		else
@@ -1053,6 +1183,8 @@ asmlinkage void do_bp(struct pt_regs *regs)
 		if (notify_die(DIE_SSTEPBP, "single_step", regs, bcode, regs_to_trapnr(regs), SIGTRAP) == NOTIFY_STOP)
 			return;
 =======
+=======
+>>>>>>> v3.18
 		if (notify_die(DIE_BREAK, "debug", regs, bcode,
 			       regs_to_trapnr(regs), SIGTRAP) == NOTIFY_STOP)
 			goto out;
@@ -1062,6 +1194,9 @@ asmlinkage void do_bp(struct pt_regs *regs)
 		if (notify_die(DIE_SSTEPBP, "single_step", regs, bcode,
 			       regs_to_trapnr(regs), SIGTRAP) == NOTIFY_STOP)
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			break;
@@ -1071,17 +1206,27 @@ asmlinkage void do_bp(struct pt_regs *regs)
 
 	do_trap_or_bp(regs, bcode, "Break");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 out:
 	set_fs(seg);
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 
 out_sigsegv:
 	force_sig(SIGSEGV, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	goto out;
+>>>>>>> v3.18
 =======
 	goto out;
 >>>>>>> v3.18
@@ -1091,10 +1236,13 @@ asmlinkage void do_tr(struct pt_regs *regs)
 {
 	u32 opcode, tcode = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 instr[2];
 	unsigned long epc = msk_isa16_mode(exception_epc(regs));
 
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 	u16 instr[2];
 	mm_segment_t seg;
@@ -1105,6 +1253,9 @@ asmlinkage void do_tr(struct pt_regs *regs)
 		set_fs(get_ds());
 
 	prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (get_isa16_mode(regs->cp0_epc)) {
 		if (__get_user(instr[0], (u16 __user *)(epc + 0)) ||
@@ -1124,17 +1275,27 @@ asmlinkage void do_tr(struct pt_regs *regs)
 
 	do_trap_or_bp(regs, tcode, "Trap");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 out:
 	set_fs(seg);
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 
 out_sigsegv:
 	force_sig(SIGSEGV, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	goto out;
+>>>>>>> v3.18
 =======
 	goto out;
 >>>>>>> v3.18
@@ -1146,6 +1307,7 @@ asmlinkage void do_ri(struct pt_regs *regs)
 	unsigned long old_epc = regs->cp0_epc;
 	unsigned long old31 = regs->regs[31];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int opcode = 0;
 	int status = -1;
 
@@ -1153,6 +1315,8 @@ asmlinkage void do_ri(struct pt_regs *regs)
 	    == NOTIFY_STOP)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 	unsigned int opcode = 0;
 	int status = -1;
@@ -1161,13 +1325,20 @@ asmlinkage void do_ri(struct pt_regs *regs)
 	if (notify_die(DIE_RI, "RI Fault", regs, 0, regs_to_trapnr(regs),
 		       SIGILL) == NOTIFY_STOP)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	die_if_kernel("Reserved instruction in kernel code", regs);
 
 	if (unlikely(compute_return_epc(regs) < 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -1206,6 +1377,12 @@ asmlinkage void do_ri(struct pt_regs *regs)
 		force_sig(status, current);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 
 out:
@@ -1263,6 +1440,7 @@ static int default_cu2_call(struct notifier_block *nfb, unsigned long action,
 	struct pt_regs *regs = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (action) {
 	default:
 		die_if_kernel("Unhandled kernel unaligned access or invalid "
@@ -1275,6 +1453,8 @@ static int default_cu2_call(struct notifier_block *nfb, unsigned long action,
 
 	return NOTIFY_OK;
 =======
+=======
+>>>>>>> v3.18
 	die_if_kernel("COP2: Unhandled kernel unaligned access or invalid "
 			      "instruction", regs);
 	force_sig(SIGILL, current);
@@ -1386,12 +1566,19 @@ out:
 	preempt_enable();
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 asmlinkage void do_cpu(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state;
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state;
 >>>>>>> v3.18
@@ -1399,6 +1586,7 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 	unsigned long old_epc, old31;
 	unsigned int opcode;
 	unsigned int cpid;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int status;
 	unsigned long __maybe_unused flags;
@@ -1408,6 +1596,8 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 	cpid = (regs->cp0_cause >> CAUSEB_CE) & 3;
 
 =======
+=======
+>>>>>>> v3.18
 	int status, err;
 	unsigned long __maybe_unused flags;
 
@@ -1417,6 +1607,9 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 	if (cpid != 2)
 		die_if_kernel("do_cpu invoked from kernel context!", regs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (cpid) {
 	case 0:
@@ -1428,7 +1621,11 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 
 		if (unlikely(compute_return_epc(regs) < 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -1465,7 +1662,11 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -1490,6 +1691,7 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 
 	case 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (used_math())	/* Using the FPU again.	 */
 			own_fpu(1);
 		else {			/* First time FPU user.	 */
@@ -1503,11 +1705,17 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 
 		if (!raw_cpu_has_fpu || err) {
 >>>>>>> v3.18
+=======
+		err = enable_restore_fp_context(0);
+
+		if (!raw_cpu_has_fpu || err) {
+>>>>>>> v3.18
 			int sig;
 			void __user *fault_addr = NULL;
 			sig = fpu_emulator_cop1Handler(regs,
 						       &current->thread.fpu,
 						       0, &fault_addr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (!process_fpemu_return(sig, fault_addr))
 				mt_ase_fp_affinity();
@@ -1522,6 +1730,8 @@ asmlinkage void do_cpu(struct pt_regs *regs)
 
 	force_sig(SIGILL, current);
 =======
+=======
+>>>>>>> v3.18
 			if (!process_fpemu_return(sig, fault_addr) && !err)
 				mt_ase_fp_affinity();
 		}
@@ -1568,19 +1778,28 @@ asmlinkage void do_msa(struct pt_regs *regs)
 		force_sig(SIGILL, current);
 out:
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 asmlinkage void do_mdmx(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	force_sig(SIGILL, current);
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 
 	prev_state = exception_enter();
 	force_sig(SIGILL, current);
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1590,13 +1809,19 @@ asmlinkage void do_mdmx(struct pt_regs *regs)
 asmlinkage void do_watch(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 cause;
 
 =======
+=======
+>>>>>>> v3.18
 	enum ctx_state prev_state;
 	u32 cause;
 
 	prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Clear WP (bit 22) bit of cause register so we don't loop
@@ -1620,6 +1845,10 @@ asmlinkage void do_watch(struct pt_regs *regs)
 		local_irq_enable();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 	exception_exit(prev_state);
 >>>>>>> v3.18
@@ -1630,7 +1859,13 @@ asmlinkage void do_mcheck(struct pt_regs *regs)
 	const int field = 2 * sizeof(unsigned long);
 	int multi_match = regs->cp0_status & ST0_TS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	enum ctx_state prev_state;
+
+	prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state;
 
@@ -1742,11 +1977,17 @@ static inline void parity_protection_init(void)
 	case CPU_74K:
 	case CPU_1004K:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_1074K:
 	case CPU_INTERAPTIV:
 	case CPU_PROAPTIV:
 	case CPU_P5600:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		{
 #define ERRCTL_PE	0x80000000
@@ -1838,6 +2079,7 @@ asmlinkage void cache_parity_error(void)
 	       reg_val & (1<<30) ? "secondary" : "primary",
 	       reg_val & (1<<31) ? "data" : "insn");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Error bits: %s%s%s%s%s%s%s\n",
 	       reg_val & (1<<29) ? "ED " : "",
 	       reg_val & (1<<28) ? "ET " : "",
@@ -1847,6 +2089,8 @@ asmlinkage void cache_parity_error(void)
 	       reg_val & (1<<23) ? "E1 " : "",
 	       reg_val & (1<<22) ? "E0 " : "");
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_has_mips_r2 &&
 	    ((current_cpu_data.processor_id & 0xff0000) == PRID_COMP_MIPS)) {
 		pr_err("Error bits: %s%s%s%s%s%s%s%s\n",
@@ -1868,6 +2112,9 @@ asmlinkage void cache_parity_error(void)
 			reg_val & (1<<23) ? "E1 " : "",
 			reg_val & (1<<22) ? "E0 " : "");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk("IDX: 0x%08x\n", reg_val & ((1<<22)-1));
 
@@ -1883,7 +2130,10 @@ asmlinkage void cache_parity_error(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 asmlinkage void do_ftlb(void)
 {
 	const int field = 2 * sizeof(unsigned long);
@@ -1912,6 +2162,9 @@ asmlinkage void do_ftlb(void)
 	cache_parity_error();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * SDBBP EJTAG debug exception handler.
@@ -1965,11 +2218,14 @@ int register_nmi_notifier(struct notifier_block *nb)
 void __noreturn nmi_exception_handler(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_notifier_call_chain(&nmi_chain, 0, regs);
 	bust_spinlocks(1);
 	printk("NMI taken!!!!\n");
 	die("NMI", regs);
 =======
+=======
+>>>>>>> v3.18
 	char str[100];
 
 	raw_notifier_call_chain(&nmi_chain, 0, regs);
@@ -1978,6 +2234,9 @@ void __noreturn nmi_exception_handler(struct pt_regs *regs)
 		 smp_processor_id(), regs->cp0_epc);
 	regs->cp0_epc = read_c0_errorepc();
 	die(str, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2042,7 +2301,10 @@ static void *set_vi_srs_handler(int n, vi_handler_t addr, int srs)
 
 	BUG_ON(!cpu_has_veic && !cpu_has_vint);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON((n < 0) && (n > 9));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2078,6 +2340,7 @@ static void *set_vi_srs_handler(int n, vi_handler_t addr, int srs)
 		char *vec_start = using_rollback_handler() ?
 			&rollback_except_vec_vi : &except_vec_vi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		/*
 		 * We need to provide the SMTC vectored interrupt handler
@@ -2091,6 +2354,8 @@ static void *set_vi_srs_handler(int n, vi_handler_t addr, int srs)
 		const int mori_offset = &except_vec_vi_mori - vec_start;
 #endif
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_CPU_MICROMIPS) || defined(CONFIG_CPU_BIG_ENDIAN)
@@ -2117,12 +2382,15 @@ static void *set_vi_srs_handler(int n, vi_handler_t addr, int srs)
 				handler_len);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		BUG_ON(n > 7);	/* Vector index %d exceeds SMTC maximum. */
 
 		h = (u16 *)(b + mori_offset);
 		*h = (0x100 << n);
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		h = (u16 *)(b + lui_offset);
@@ -2165,7 +2433,10 @@ void *set_vi_handler(int n, vi_handler_t addr)
 
 extern void tlb_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_tlb_handlers(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2183,7 +2454,11 @@ int cp0_perfcount_irq;
 EXPORT_SYMBOL_GPL(cp0_perfcount_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinitdata noulri;
+=======
+static int noulri;
+>>>>>>> v3.18
 =======
 static int noulri;
 >>>>>>> v3.18
@@ -2197,6 +2472,7 @@ static int __init ulri_disable(char *s)
 }
 __setup("noulri", ulri_disable);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __cpuinit per_cpu_trap_init(bool is_boot_cpu)
 {
@@ -2223,6 +2499,11 @@ void __cpuinit per_cpu_trap_init(bool is_boot_cpu)
 static void configure_status(void)
 {
 >>>>>>> v3.18
+=======
+/* configure STATUS register */
+static void configure_status(void)
+{
+>>>>>>> v3.18
 	/*
 	 * Disable coprocessors and select 32-bit or 64-bit addressing
 	 * and the 16/32 or 32/32 FPR register model.  Reset the BEV
@@ -2230,6 +2511,10 @@ static void configure_status(void)
 	 * IP27).  Set XX for ISA IV code to work.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int status_set = ST0_CU0;
+>>>>>>> v3.18
 =======
 	unsigned int status_set = ST0_CU0;
 >>>>>>> v3.18
@@ -2244,13 +2529,19 @@ static void configure_status(void)
 	change_c0_status(ST0_CU|ST0_MX|ST0_RE|ST0_FR|ST0_BEV|ST0_TS|ST0_KX|ST0_SX|ST0_UX,
 			 status_set);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 /* configure HWRENA register */
 static void configure_hwrena(void)
 {
 	unsigned int hwrena = cpu_hwrena_impl_bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cpu_has_mips_r2)
@@ -2262,16 +2553,22 @@ static void configure_hwrena(void)
 	if (hwrena)
 		write_c0_hwrena(hwrena);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_MIPS_MT_SMTC
 	if (!secondaryTC) {
 #endif /* CONFIG_MIPS_MT_SMTC */
 
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void configure_exception_vector(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpu_has_veic || cpu_has_vint) {
 		unsigned long sr = set_c0_status(ST0_BEV);
@@ -2289,7 +2586,10 @@ static void configure_exception_vector(void)
 			set_c0_cause(CAUSEF_IV);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 void per_cpu_trap_init(bool is_boot_cpu)
@@ -2300,6 +2600,9 @@ void per_cpu_trap_init(bool is_boot_cpu)
 	configure_hwrena();
 
 	configure_exception_vector();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2321,10 +2624,13 @@ void per_cpu_trap_init(bool is_boot_cpu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	}
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!cpu_data[cpu].asid_cache)
@@ -2336,15 +2642,19 @@ void per_cpu_trap_init(bool is_boot_cpu)
 	enter_lazy_tlb(&init_mm, current);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	if (bootTC) {
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Boot CPU's cache setup in setup_arch(). */
 		if (!is_boot_cpu)
 			cpu_cache_init();
 		tlb_init();
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	} else if (!secondaryTC) {
@@ -2358,12 +2668,18 @@ void per_cpu_trap_init(bool is_boot_cpu)
 #endif /* CONFIG_MIPS_MT_SMTC */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	TLBMISS_HANDLER_SETUP();
 }
 
 /* Install CPU exception handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit set_handler(unsigned long offset, void *addr, unsigned long size)
+=======
+void set_handler(unsigned long offset, void *addr, unsigned long size)
+>>>>>>> v3.18
 =======
 void set_handler(unsigned long offset, void *addr, unsigned long size)
 >>>>>>> v3.18
@@ -2377,7 +2693,11 @@ void set_handler(unsigned long offset, void *addr, unsigned long size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char panic_null_cerr[] __cpuinitdata =
+=======
+static char panic_null_cerr[] =
+>>>>>>> v3.18
 =======
 static char panic_null_cerr[] =
 >>>>>>> v3.18
@@ -2389,7 +2709,11 @@ static char panic_null_cerr[] =
  * exception handler that is being run uncached.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit set_uncached_handler(unsigned long offset, void *addr,
+=======
+void set_uncached_handler(unsigned long offset, void *addr,
+>>>>>>> v3.18
 =======
 void set_uncached_handler(unsigned long offset, void *addr,
 >>>>>>> v3.18
@@ -2442,7 +2766,10 @@ void __init trap_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_has_mmips) {
 		unsigned int config3 = read_c0_config3();
 
@@ -2452,6 +2779,9 @@ void __init trap_init(void)
 			write_c0_config3(config3 & ~MIPS_CONF3_ISA_OE);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (board_ebase_setup)
 		board_ebase_setup();
@@ -2529,6 +2859,10 @@ void __init trap_init(void)
 	set_except_vector(12, handle_ov);
 	set_except_vector(13, handle_tr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_except_vector(14, handle_msa_fpe);
+>>>>>>> v3.18
 =======
 	set_except_vector(14, handle_msa_fpe);
 >>>>>>> v3.18
@@ -2555,7 +2889,10 @@ void __init trap_init(void)
 		set_except_vector(15, handle_fpe);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	set_except_vector(16, handle_ftlb);
 
 	if (cpu_has_rixiex) {
@@ -2564,6 +2901,9 @@ void __init trap_init(void)
 	}
 
 	set_except_vector(21, handle_msa);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_except_vector(22, handle_mdmx);
 
@@ -2588,7 +2928,10 @@ void __init trap_init(void)
 
 	local_flush_icache_range(ebase, ebase + 0x400);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_tlb_handlers();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2597,7 +2940,10 @@ void __init trap_init(void)
 	cu2_notifier(default_cu2_call, 0x80000000);	/* Run last  */
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int trap_pm_notifier(struct notifier_block *self, unsigned long cmd,
 			    void *v)
@@ -2627,4 +2973,7 @@ static int __init trap_pm_init(void)
 	return cpu_pm_register_notifier(&trap_pm_notifier_block);
 }
 arch_initcall(trap_pm_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

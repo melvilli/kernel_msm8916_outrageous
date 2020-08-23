@@ -16,7 +16,10 @@
 #include <linux/kernel.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,7 +56,11 @@
 #include "uasm.c"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn insn_table[] __uasminitdata = {
+=======
+static struct insn insn_table[] = {
+>>>>>>> v3.18
 =======
 static struct insn insn_table[] = {
 >>>>>>> v3.18
@@ -76,6 +83,10 @@ static struct insn insn_table[] = {
 	{ insn_dinsm, M(spec3_op, 0, 0, 0, 0, dinsm_op), RS | RT | RD | RE },
 	{ insn_dins, M(spec3_op, 0, 0, 0, 0, dins_op), RS | RT | RD | RE },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ insn_divu, M(spec_op, 0, 0, 0, 0, divu_op), RS | RT },
+>>>>>>> v3.18
 =======
 	{ insn_divu, M(spec_op, 0, 0, 0, 0, divu_op), RS | RT },
 >>>>>>> v3.18
@@ -95,11 +106,14 @@ static struct insn insn_table[] = {
 	{ insn_j,  M(j_op, 0, 0, 0, 0, 0),  JIMM },
 	{ insn_jal,  M(jal_op, 0, 0, 0, 0, 0),	JIMM },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_j,  M(j_op, 0, 0, 0, 0, 0),  JIMM },
 	{ insn_jr,  M(spec_op, 0, 0, 0, 0, jr_op),  RS },
 	{ insn_ld,  M(ld_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
 	{ insn_ldx, M(spec3_op, 0, 0, 0, ldx_op, lx_op), RS | RT | RD },
 =======
+=======
+>>>>>>> v3.18
 	{ insn_jalr,  M(spec_op, 0, 0, 0, 0, jalr_op), RS | RD },
 	{ insn_j,  M(j_op, 0, 0, 0, 0, 0),  JIMM },
 	{ insn_jr,  M(spec_op, 0, 0, 0, 0, jr_op),  RS },
@@ -107,6 +121,9 @@ static struct insn insn_table[] = {
 	{ insn_ld,  M(ld_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
 	{ insn_ldx, M(spec3_op, 0, 0, 0, ldx_op, lx_op), RS | RT | RD },
 	{ insn_lh,  M(lh_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_lld,  M(lld_op, 0, 0, 0, 0, 0),	RS | RT | SIMM },
 	{ insn_ll,  M(ll_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
@@ -115,12 +132,18 @@ static struct insn insn_table[] = {
 	{ insn_lwx, M(spec3_op, 0, 0, 0, lwx_op, lx_op), RS | RT | RD },
 	{ insn_mfc0,  M(cop0_op, mfc_op, 0, 0, 0, 0),  RT | RD | SET},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_mtc0,  M(cop0_op, mtc_op, 0, 0, 0, 0),  RT | RD | SET},
 =======
+=======
+>>>>>>> v3.18
 	{ insn_mfhi,  M(spec_op, 0, 0, 0, 0, mfhi_op), RD },
 	{ insn_mflo,  M(spec_op, 0, 0, 0, 0, mflo_op), RD },
 	{ insn_mtc0,  M(cop0_op, mtc_op, 0, 0, 0, 0),  RT | RD | SET},
 	{ insn_mul, M(spec2_op, 0, 0, 0, 0, mul_op), RS | RT | RD},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_ori,  M(ori_op, 0, 0, 0, 0, 0),	RS | RT | UIMM },
 	{ insn_or,  M(spec_op, 0, 0, 0, 0, or_op),  RS | RT | RD },
@@ -132,11 +155,14 @@ static struct insn insn_table[] = {
 	{ insn_sd,  M(sd_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
 	{ insn_sll,  M(spec_op, 0, 0, 0, 0, sll_op),  RT | RD | RE },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_sra,  M(spec_op, 0, 0, 0, 0, sra_op),  RT | RD | RE },
 	{ insn_srl,  M(spec_op, 0, 0, 0, 0, srl_op),  RT | RD | RE },
 	{ insn_subu,  M(spec_op, 0, 0, 0, 0, subu_op),	RS | RT | RD },
 	{ insn_sw,  M(sw_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
 =======
+=======
+>>>>>>> v3.18
 	{ insn_sllv,  M(spec_op, 0, 0, 0, 0, sllv_op),  RS | RT | RD },
 	{ insn_slt,  M(spec_op, 0, 0, 0, 0, slt_op),  RS | RT | RD },
 	{ insn_sltiu, M(sltiu_op, 0, 0, 0, 0, 0), RS | RT | SIMM },
@@ -147,6 +173,9 @@ static struct insn insn_table[] = {
 	{ insn_subu,  M(spec_op, 0, 0, 0, 0, subu_op),	RS | RT | RD },
 	{ insn_sw,  M(sw_op, 0, 0, 0, 0, 0),  RS | RT | SIMM },
 	{ insn_sync, M(spec_op, 0, 0, 0, 0, sync_op), RE },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_syscall, M(spec_op, 0, 0, 0, 0, syscall_op), SCIMM},
 	{ insn_tlbp,  M(cop0_op, cop_op, 0, 0, 0, tlbp_op),  0 },
@@ -154,14 +183,20 @@ static struct insn insn_table[] = {
 	{ insn_tlbwi,  M(cop0_op, cop_op, 0, 0, 0, tlbwi_op),  0 },
 	{ insn_tlbwr,  M(cop0_op, cop_op, 0, 0, 0, tlbwr_op),  0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_xori,  M(xori_op, 0, 0, 0, 0, 0),  RS | RT | UIMM },
 	{ insn_xor,  M(spec_op, 0, 0, 0, 0, xor_op),  RS | RT | RD },
 =======
+=======
+>>>>>>> v3.18
 	{ insn_wait, M(cop0_op, cop_op, 0, 0, 0, wait_op), SCIMM },
 	{ insn_wsbh, M(spec3_op, 0, 0, 0, wsbh_op, bshfl_op), RT | RD },
 	{ insn_xori,  M(xori_op, 0, 0, 0, 0, 0),  RS | RT | UIMM },
 	{ insn_xor,  M(spec_op, 0, 0, 0, 0, xor_op),  RS | RT | RD },
 	{ insn_yield, M(spec3_op, 0, 0, 0, 0, yield_op), RS | RD },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_invalid, 0, 0 }
 };
@@ -169,7 +204,11 @@ static struct insn insn_table[] = {
 #undef M
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_bimm(s32 arg)
+=======
+static inline u32 build_bimm(s32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_bimm(s32 arg)
 >>>>>>> v3.18
@@ -183,7 +222,11 @@ static inline u32 build_bimm(s32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_jimm(u32 arg)
+=======
+static inline u32 build_jimm(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_jimm(u32 arg)
 >>>>>>> v3.18
@@ -199,7 +242,11 @@ static inline u32 build_jimm(u32 arg)
  * starting with RS and ending with FUNC or IMM.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __uasminit build_insn(u32 **buf, enum opcode opc, ...)
+=======
+static void build_insn(u32 **buf, enum opcode opc, ...)
+>>>>>>> v3.18
 =======
 static void build_insn(u32 **buf, enum opcode opc, ...)
 >>>>>>> v3.18
@@ -249,7 +296,11 @@ static void build_insn(u32 **buf, enum opcode opc, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __uasminit
+=======
+static inline void
+>>>>>>> v3.18
 =======
 static inline void
 >>>>>>> v3.18

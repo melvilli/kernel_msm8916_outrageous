@@ -25,14 +25,20 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-mediabus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <media/exynos-fimc.h>
 
 extern int fimc_isp_debug;
 
 #define isp_dbg(level, dev, fmt, arg...) \
 	v4l2_dbg(level, fimc_isp_debug, dev, fmt, ## arg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* FIXME: revisit these constraints */
@@ -40,7 +46,11 @@ extern int fimc_isp_debug;
 #define FIMC_ISP_SINK_HEIGHT_MIN	(12 + 8)
 #define FIMC_ISP_SOURCE_WIDTH_MIN	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIMC_ISP_SOURC_HEIGHT_MIN	8
+=======
+#define FIMC_ISP_SOURCE_HEIGHT_MIN	8
+>>>>>>> v3.18
 =======
 #define FIMC_ISP_SOURCE_HEIGHT_MIN	8
 >>>>>>> v3.18
@@ -51,16 +61,22 @@ extern int fimc_isp_debug;
 #define FIMC_ISP_SINK_HEIGHT_MAX	(4000 + 12)
 #define FIMC_ISP_SOURCE_WIDTH_MAX	4000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIMC_ISP_SOURC_HEIGHT_MAX	4000
 
 #define FIMC_ISP_NUM_FORMATS		3
 #define FIMC_ISP_REQ_BUFS_MIN		2
 =======
+=======
+>>>>>>> v3.18
 #define FIMC_ISP_SOURCE_HEIGHT_MAX	4000
 
 #define FIMC_ISP_NUM_FORMATS		3
 #define FIMC_ISP_REQ_BUFS_MIN		2
 #define FIMC_ISP_REQ_BUFS_MAX		32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FIMC_ISP_SD_PAD_SINK		0
@@ -117,7 +133,10 @@ struct fimc_isp_ctrls {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct isp_video_buf {
 	struct vb2_buffer vb;
 	dma_addr_t dma_addr[FIMC_ISP_MAX_PLANES];
@@ -128,6 +147,9 @@ struct isp_video_buf {
 
 #define FIMC_ISP_MAX_BUFS	4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct fimc_is_video - fimc-is video device structure
@@ -144,7 +166,11 @@ struct isp_video_buf {
  */
 struct fimc_is_video {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct video_device	vdev;
+=======
+	struct exynos_video_entity ve;
+>>>>>>> v3.18
 =======
 	struct exynos_video_entity ve;
 >>>>>>> v3.18
@@ -154,6 +180,7 @@ struct fimc_is_video {
 	struct list_head	active_buf_q;
 	struct vb2_queue	vb_queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		frame_count;
 	unsigned int		reqbufs_count;
 	int			streaming;
@@ -162,6 +189,8 @@ struct fimc_is_video {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		reqbufs_count;
 	unsigned int		buf_count;
 	unsigned int		buf_mask;
@@ -176,6 +205,9 @@ struct fimc_is_video {
 #define ST_ISP_VID_CAP_BUF_PREP		0
 #define ST_ISP_VID_CAP_STREAMING	1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct fimc_isp - FIMC-IS ISP data structure
@@ -183,6 +215,7 @@ struct fimc_is_video {
  * @alloc_ctx: videobuf2 memory allocator context
  * @subdev: ISP v4l2_subdev
  * @subdev_pads: the ISP subdev media pads
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @ctrl_handler: v4l2 controls handler
  * @test_pattern: test pattern controls
@@ -193,6 +226,11 @@ struct fimc_is_video {
  * @inp_frame: camera input frame structure
  * @out_frame: DMA output frame structure
  * @source_subdev_grp_id: group id of remote source subdev
+=======
+ * @test_pattern: test pattern controls
+ * @ctrls: v4l2 controls structure
+ * @video_lock: mutex serializing video device and the subdev operations
+>>>>>>> v3.18
 =======
  * @test_pattern: test pattern controls
  * @ctrls: v4l2 controls structure
@@ -209,7 +247,12 @@ struct fimc_isp {
 	struct v4l2_subdev		subdev;
 	struct media_pad		subdev_pads[FIMC_ISP_SD_PADS_NUM];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_mbus_framefmt	subdev_fmt;
+=======
+	struct v4l2_mbus_framefmt	src_fmt;
+	struct v4l2_mbus_framefmt	sink_fmt;
+>>>>>>> v3.18
 =======
 	struct v4l2_mbus_framefmt	src_fmt;
 	struct v4l2_mbus_framefmt	sink_fmt;
@@ -221,10 +264,13 @@ struct fimc_isp {
 	struct mutex			subdev_lock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fimc_isp_frame		inp_frame;
 	struct fimc_isp_frame		out_frame;
 	unsigned int			source_subdev_grp_id;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int			cac_margin_x;

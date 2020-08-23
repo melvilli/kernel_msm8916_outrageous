@@ -36,7 +36,11 @@ typedef __kernel_gid16_t        gid16_t;
 typedef unsigned long		uintptr_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_UID16
+=======
+#ifdef CONFIG_UID16
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UID16
 >>>>>>> v3.18
@@ -147,6 +151,10 @@ typedef unsigned long blkcnt_t;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* A dma_addr_t can hold any valid DMA or bus address for the platform */
+>>>>>>> v3.18
 =======
 /* A dma_addr_t can hold any valid DMA or bus address for the platform */
 >>>>>>> v3.18

@@ -17,7 +17,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -191,6 +195,7 @@ static int jornada680kbd_probe(struct platform_device *pdev)
 	int i, error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jornadakbd = kzalloc(sizeof(struct jornadakbd), GFP_KERNEL);
 	if (!jornadakbd)
 		return -ENOMEM;
@@ -200,6 +205,8 @@ static int jornada680kbd_probe(struct platform_device *pdev)
 		error = -ENOMEM;
 		goto failed;
 =======
+=======
+>>>>>>> v3.18
 	jornadakbd = devm_kzalloc(&pdev->dev, sizeof(struct jornadakbd),
 				  GFP_KERNEL);
 	if (!jornadakbd)
@@ -209,6 +216,9 @@ static int jornada680kbd_probe(struct platform_device *pdev)
 	if (!poll_dev) {
 		dev_err(&pdev->dev, "failed to allocate polled input device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -242,6 +252,7 @@ static int jornada680kbd_probe(struct platform_device *pdev)
 
 	error = input_register_polled_device(jornadakbd->poll_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (error)
 		goto failed;
 
@@ -266,10 +277,15 @@ static int jornada680kbd_remove(struct platform_device *pdev)
 	input_free_polled_device(jornadakbd->poll_dev);
 	kfree(jornadakbd);
 =======
+=======
+>>>>>>> v3.18
 	if (error) {
 		dev_err(&pdev->dev, "failed to register polled input device\n");
 		return error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -282,7 +298,10 @@ static struct platform_driver jornada680kbd_driver = {
 	},
 	.probe	= jornada680kbd_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= jornada680kbd_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

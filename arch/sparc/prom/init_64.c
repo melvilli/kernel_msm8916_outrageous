@@ -27,6 +27,7 @@ phandle prom_chosen_node;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void prom_cif_init(void *, void *);
 
 void __init prom_init(void *cif_handler, void *cif_stack)
@@ -35,6 +36,8 @@ void __init prom_init(void *cif_handler, void *cif_stack)
 
 	prom_cif_init(cif_handler, cif_stack);
 =======
+=======
+>>>>>>> v3.18
 extern void prom_cif_init(void *);
 
 void __init prom_init(void *cif_handler)
@@ -42,6 +45,9 @@ void __init prom_init(void *cif_handler)
 	phandle node;
 
 	prom_cif_init(cif_handler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	prom_chosen_node = prom_finddevice(prom_chosen_path);

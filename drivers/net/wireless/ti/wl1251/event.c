@@ -47,7 +47,10 @@ static int wl1251_event_scan_complete(struct wl1251 *wl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define WL1251_PSM_ENTRY_RETRIES  3
 static int wl1251_event_ps_report(struct wl1251 *wl,
 				  struct event_mailbox *mbox)
@@ -85,6 +88,9 @@ static int wl1251_event_ps_report(struct wl1251 *wl,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void wl1251_event_mbox_dump(struct event_mailbox *mbox)
 {
@@ -121,7 +127,10 @@ static int wl1251_event_process(struct wl1251 *wl, struct event_mailbox *mbox)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (vector & PS_REPORT_EVENT_ID) {
 		wl1251_debug(DEBUG_EVENT, "PS_REPORT_EVENT");
 		ret = wl1251_event_ps_report(wl, mbox);
@@ -129,13 +138,21 @@ static int wl1251_event_process(struct wl1251 *wl, struct event_mailbox *mbox)
 			return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (vector & SYNCHRONIZATION_TIMEOUT_EVENT_ID) {
 		wl1251_debug(DEBUG_EVENT, "SYNCHRONIZATION_TIMEOUT_EVENT");
 
 		/* indicate to the stack, that beacons have been lost */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ieee80211_beacon_loss(wl->vif);
+=======
+		if (wl->vif && wl->vif->type == NL80211_IFTYPE_STATION)
+			ieee80211_beacon_loss(wl->vif);
+>>>>>>> v3.18
 =======
 		if (wl->vif && wl->vif->type == NL80211_IFTYPE_STATION)
 			ieee80211_beacon_loss(wl->vif);

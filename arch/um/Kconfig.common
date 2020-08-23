@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEFCONFIG_LIST
 	string
 	option defconfig_list
@@ -10,11 +11,16 @@ config UML
 	select HAVE_UID16
 	select HAVE_FUTEX_CMPXCHG if FUTEX
 =======
+=======
+>>>>>>> v3.18
 config UML
 	bool
 	default y
 	select HAVE_ARCH_AUDITSYSCALL
 	select HAVE_UID16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select GENERIC_IRQ_SHOW
 	select GENERIC_CPU_DEVICES
@@ -53,7 +59,12 @@ config LOCKDEP_SUPPORT
 config STACKTRACE_SUPPORT
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default n
+=======
+	default y
+	select STACKTRACE
+>>>>>>> v3.18
 =======
 	default y
 	select STACKTRACE

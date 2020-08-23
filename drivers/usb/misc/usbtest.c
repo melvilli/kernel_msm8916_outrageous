@@ -55,6 +55,10 @@ struct usbtest_info {
 	unsigned		ctrl_out:1;
 	unsigned		iso:1;		/* try iso in/out */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		intr:1;		/* try interrupt in/out */
+>>>>>>> v3.18
 =======
 	unsigned		intr:1;		/* try interrupt in/out */
 >>>>>>> v3.18
@@ -75,12 +79,18 @@ struct usbtest_dev {
 	int			in_iso_pipe;
 	int			out_iso_pipe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_endpoint_descriptor	*iso_in, *iso_out;
 =======
+=======
+>>>>>>> v3.18
 	int			in_int_pipe;
 	int			out_int_pipe;
 	struct usb_endpoint_descriptor	*iso_in, *iso_out;
 	struct usb_endpoint_descriptor	*int_in, *int_out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex		lock;
 
@@ -113,6 +123,10 @@ get_endpoints(struct usbtest_dev *dev, struct usb_interface *intf)
 	struct usb_host_endpoint	*in, *out;
 	struct usb_host_endpoint	*iso_in, *iso_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_host_endpoint	*int_in, *int_out;
+>>>>>>> v3.18
 =======
 	struct usb_host_endpoint	*int_in, *int_out;
 >>>>>>> v3.18
@@ -124,6 +138,10 @@ get_endpoints(struct usbtest_dev *dev, struct usb_interface *intf)
 		in = out = NULL;
 		iso_in = iso_out = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		int_in = int_out = NULL;
+>>>>>>> v3.18
 =======
 		int_in = int_out = NULL;
 >>>>>>> v3.18
@@ -141,16 +159,22 @@ get_endpoints(struct usbtest_dev *dev, struct usb_interface *intf)
 
 			e = alt->endpoint + ep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			switch (e->desc.bmAttributes) {
 			case USB_ENDPOINT_XFER_BULK:
 				break;
 =======
+=======
+>>>>>>> v3.18
 			switch (usb_endpoint_type(&e->desc)) {
 			case USB_ENDPOINT_XFER_BULK:
 				break;
 			case USB_ENDPOINT_XFER_INT:
 				if (dev->info->intr)
 					goto try_intr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			case USB_ENDPOINT_XFER_ISOC:
 				if (dev->info->iso)
@@ -168,7 +192,10 @@ get_endpoints(struct usbtest_dev *dev, struct usb_interface *intf)
 			}
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 try_intr:
 			if (usb_endpoint_dir_in(&e->desc)) {
 				if (!int_in)
@@ -178,6 +205,9 @@ try_intr:
 					int_out = e;
 			}
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 try_iso:
 			if (usb_endpoint_dir_in(&e->desc)) {
@@ -189,7 +219,11 @@ try_iso:
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((in && out)  ||  iso_in || iso_out)
+=======
+		if ((in && out)  ||  iso_in || iso_out || int_in || int_out)
+>>>>>>> v3.18
 =======
 		if ((in && out)  ||  iso_in || iso_out || int_in || int_out)
 >>>>>>> v3.18
@@ -228,7 +262,10 @@ found:
 					& USB_ENDPOINT_NUMBER_MASK);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (int_in) {
 		dev->int_in = &int_in->desc;
@@ -243,6 +280,9 @@ found:
 				int_out->desc.bEndpointAddress
 					& USB_ENDPOINT_NUMBER_MASK);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -267,7 +307,12 @@ static struct urb *usbtest_alloc_urb(
 	unsigned long		bytes,
 	unsigned		transfer_flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		offset)
+=======
+	unsigned		offset,
+	u8			bInterval)
+>>>>>>> v3.18
 =======
 	unsigned		offset,
 	u8			bInterval)
@@ -279,8 +324,11 @@ static struct urb *usbtest_alloc_urb(
 	if (!urb)
 		return urb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_fill_bulk_urb(urb, udev, pipe, NULL, bytes, simple_callback, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	if (bInterval)
 		usb_fill_int_urb(urb, udev, pipe, NULL, bytes, simple_callback,
@@ -289,6 +337,9 @@ static struct urb *usbtest_alloc_urb(
 		usb_fill_bulk_urb(urb, udev, pipe, NULL, bytes, simple_callback,
 				NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	urb->interval = (udev->speed == USB_SPEED_HIGH)
 			? (INTERRUPT_RATE << 3)
@@ -329,15 +380,21 @@ static struct urb *simple_alloc_urb(
 	struct usb_device	*udev,
 	int			pipe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		bytes)
 {
 	return usbtest_alloc_urb(udev, pipe, bytes, URB_NO_TRANSFER_DMA_MAP, 0);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		bytes,
 	u8			bInterval)
 {
 	return usbtest_alloc_urb(udev, pipe, bytes, URB_NO_TRANSFER_DMA_MAP, 0,
 			bInterval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -531,7 +588,11 @@ alloc_sglist(int nents, int max, int vary)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sg = kmalloc_array(nents, sizeof *sg, GFP_KERNEL);
+=======
+	sg = kmalloc_array(nents, sizeof(*sg), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sg = kmalloc_array(nents, sizeof(*sg), GFP_KERNEL);
 >>>>>>> v3.18
@@ -685,7 +746,11 @@ static int is_good_config(struct usbtest_dev *tdev, int len)
 	struct usb_config_descriptor	*config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len < sizeof *config)
+=======
+	if (len < sizeof(*config))
+>>>>>>> v3.18
 =======
 	if (len < sizeof(*config))
 >>>>>>> v3.18
@@ -722,7 +787,10 @@ static int is_good_config(struct usbtest_dev *tdev, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int is_good_ext(struct usbtest_dev *tdev, u8 *buf)
 {
 	struct usb_ext_cap_descriptor *ext;
@@ -793,6 +861,9 @@ static int is_good_con_id(struct usbtest_dev *tdev, u8 *buf)
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* sanity test for standard requests working with usb_control_mesg() and some
  * of the utility functions which use it.
@@ -872,8 +943,13 @@ static int ch9_postconfig(struct usbtest_dev *dev)
 	/* there's always [9.4.3] a device descriptor [9.6.1] */
 	retval = usb_get_descriptor(udev, USB_DT_DEVICE, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev->buf, sizeof udev->descriptor);
 	if (retval != sizeof udev->descriptor) {
+=======
+			dev->buf, sizeof(udev->descriptor));
+	if (retval != sizeof(udev->descriptor)) {
+>>>>>>> v3.18
 =======
 			dev->buf, sizeof(udev->descriptor));
 	if (retval != sizeof(udev->descriptor)) {
@@ -883,7 +959,10 @@ static int ch9_postconfig(struct usbtest_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * there's always [9.4.3] a bos device descriptor [9.6.2] in USB
 	 * 3.0 spec
@@ -968,6 +1047,9 @@ static int ch9_postconfig(struct usbtest_dev *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* there's always [9.4.3] at least one config descriptor [9.6.3] */
 	for (i = 0; i < udev->descriptor.bNumConfigurations; i++) {
@@ -1028,9 +1110,15 @@ static int ch9_postconfig(struct usbtest_dev *dev)
 	/* [9.4.5] get_status always works */
 	retval = usb_get_status(udev, USB_RECIP_DEVICE, 0, dev->buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval != 2) {
 		dev_err(&iface->dev, "get dev status --> %d\n", retval);
 		return (retval < 0) ? retval : -EDOM;
+=======
+	if (retval) {
+		dev_err(&iface->dev, "get dev status --> %d\n", retval);
+		return retval;
+>>>>>>> v3.18
 =======
 	if (retval) {
 		dev_err(&iface->dev, "get dev status --> %d\n", retval);
@@ -1045,9 +1133,15 @@ static int ch9_postconfig(struct usbtest_dev *dev)
 	retval = usb_get_status(udev, USB_RECIP_INTERFACE,
 			iface->altsetting[0].desc.bInterfaceNumber, dev->buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval != 2) {
 		dev_err(&iface->dev, "get interface status --> %d\n", retval);
 		return (retval < 0) ? retval : -EDOM;
+=======
+	if (retval) {
+		dev_err(&iface->dev, "get interface status --> %d\n", retval);
+		return retval;
+>>>>>>> v3.18
 =======
 	if (retval) {
 		dev_err(&iface->dev, "get interface status --> %d\n", retval);
@@ -1083,7 +1177,11 @@ struct ctrl_ctx {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NUM_SUBCASES	15		/* how many test subcases here? */
+=======
+#define NUM_SUBCASES	16		/* how many test subcases here? */
+>>>>>>> v3.18
 =======
 #define NUM_SUBCASES	16		/* how many test subcases here? */
 >>>>>>> v3.18
@@ -1251,7 +1349,11 @@ test_ctrl_queue(struct usbtest_dev *dev, struct usbtest_param *param)
 		 * or short reads.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(&req, 0, sizeof req);
+=======
+		memset(&req, 0, sizeof(req));
+>>>>>>> v3.18
 =======
 		memset(&req, 0, sizeof(req));
 >>>>>>> v3.18
@@ -1365,7 +1467,10 @@ test_ctrl_queue(struct usbtest_dev *dev, struct usbtest_param *param)
 			expected = -EREMOTEIO;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 15:
 			req.wValue = cpu_to_le16(USB_DT_BOS << 8);
 			if (udev->bos)
@@ -1375,6 +1480,9 @@ test_ctrl_queue(struct usbtest_dev *dev, struct usbtest_param *param)
 			if (le16_to_cpu(udev->descriptor.bcdUSB) < 0x0201)
 				expected = -EPIPE;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			ERROR(dev, "bogus number of ctrl queue testcases!\n");
@@ -1383,17 +1491,23 @@ test_ctrl_queue(struct usbtest_dev *dev, struct usbtest_param *param)
 		}
 		req.wLength = cpu_to_le16(len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb[i] = u = simple_alloc_urb(udev, pipe, len);
 		if (!u)
 			goto cleanup;
 
 		reqp = kmalloc(sizeof *reqp, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 		urb[i] = u = simple_alloc_urb(udev, pipe, len, 0);
 		if (!u)
 			goto cleanup;
 
 		reqp = kmalloc(sizeof(*reqp), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!reqp)
 			goto cleanup;
@@ -1464,7 +1578,11 @@ static int unlink1(struct usbtest_dev *dev, int pipe, int size, int async)
 
 	init_completion(&completion);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	urb = simple_alloc_urb(testdev_to_usbdev(dev), pipe, size);
+=======
+	urb = simple_alloc_urb(testdev_to_usbdev(dev), pipe, size, 0);
+>>>>>>> v3.18
 =======
 	urb = simple_alloc_urb(testdev_to_usbdev(dev), pipe, size, 0);
 >>>>>>> v3.18
@@ -1499,6 +1617,12 @@ static int unlink1(struct usbtest_dev *dev, int pipe, int size, int async)
 			retval = usb_unlink_urb(urb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (retval == 0 && usb_pipein(urb->pipe))
+				retval = simple_check_buf(dev, urb);
+
+>>>>>>> v3.18
 =======
 			if (retval == 0 && usb_pipein(urb->pipe))
 				retval = simple_check_buf(dev, urb);
@@ -1692,7 +1816,10 @@ static int verify_halted(struct usbtest_dev *tdev, int ep, struct urb *urb)
 		return retval;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	le16_to_cpus(&status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (status != 1) {
@@ -1728,9 +1855,12 @@ static int test_halt(struct usbtest_dev *tdev, int ep, struct urb *urb)
 	}
 	retval = verify_halted(tdev, ep, urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0)
 		return retval;
 =======
+=======
+>>>>>>> v3.18
 	if (retval < 0) {
 		int ret;
 
@@ -1742,6 +1872,9 @@ static int test_halt(struct usbtest_dev *tdev, int ep, struct urb *urb)
 
 		return retval;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* clear halt (tests API + protocol), verify it worked */
@@ -1768,9 +1901,15 @@ static int halt_simple(struct usbtest_dev *dev)
 
 	if (udev->speed == USB_SPEED_SUPER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb = simple_alloc_urb(udev, 0, 1024);
 	else
 		urb = simple_alloc_urb(udev, 0, 512);
+=======
+		urb = simple_alloc_urb(udev, 0, 1024, 0);
+	else
+		urb = simple_alloc_urb(udev, 0, 512, 0);
+>>>>>>> v3.18
 =======
 		urb = simple_alloc_urb(udev, 0, 1024, 0);
 	else
@@ -2032,7 +2171,11 @@ test_iso_queue(struct usbtest_dev *dev, struct usbtest_param *param,
 		return -EDOM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&context, 0, sizeof context);
+=======
+	memset(&context, 0, sizeof(context));
+>>>>>>> v3.18
 =======
 	memset(&context, 0, sizeof(context));
 >>>>>>> v3.18
@@ -2042,7 +2185,11 @@ test_iso_queue(struct usbtest_dev *dev, struct usbtest_param *param,
 	spin_lock_init(&context.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(urbs, 0, sizeof urbs);
+=======
+	memset(urbs, 0, sizeof(urbs));
+>>>>>>> v3.18
 =======
 	memset(urbs, 0, sizeof(urbs));
 >>>>>>> v3.18
@@ -2128,7 +2275,11 @@ static int test_unaligned_bulk(
 	int retval;
 	struct urb *urb = usbtest_alloc_urb(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		testdev_to_usbdev(tdev), pipe, length, transfer_flags, 1);
+=======
+		testdev_to_usbdev(tdev), pipe, length, transfer_flags, 1, 0);
+>>>>>>> v3.18
 =======
 		testdev_to_usbdev(tdev), pipe, length, transfer_flags, 1, 0);
 >>>>>>> v3.18
@@ -2159,7 +2310,11 @@ static int test_unaligned_bulk(
  * WARNING:  Because usbfs grabs udev->dev.sem before calling this ioctl(),
  * it locks out usbcore in certain code paths.  Notably, if you disconnect
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the device-under-test, khubd will wait block forever waiting for the
+=======
+ * the device-under-test, hub_wq will wait block forever waiting for the
+>>>>>>> v3.18
 =======
  * the device-under-test, hub_wq will wait block forever waiting for the
 >>>>>>> v3.18
@@ -2242,7 +2397,11 @@ usbtest_ioctl(struct usb_interface *intf, unsigned int code, void *buf)
 				"TEST 1:  write %d bytes %u times\n",
 				param->length, param->iterations);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb = simple_alloc_urb(udev, dev->out_pipe, param->length);
+=======
+		urb = simple_alloc_urb(udev, dev->out_pipe, param->length, 0);
+>>>>>>> v3.18
 =======
 		urb = simple_alloc_urb(udev, dev->out_pipe, param->length, 0);
 >>>>>>> v3.18
@@ -2261,7 +2420,11 @@ usbtest_ioctl(struct usb_interface *intf, unsigned int code, void *buf)
 				"TEST 2:  read %d bytes %u times\n",
 				param->length, param->iterations);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb = simple_alloc_urb(udev, dev->in_pipe, param->length);
+=======
+		urb = simple_alloc_urb(udev, dev->in_pipe, param->length, 0);
+>>>>>>> v3.18
 =======
 		urb = simple_alloc_urb(udev, dev->in_pipe, param->length, 0);
 >>>>>>> v3.18
@@ -2280,7 +2443,11 @@ usbtest_ioctl(struct usb_interface *intf, unsigned int code, void *buf)
 				"TEST 3:  write/%d 0..%d bytes %u times\n",
 				param->vary, param->length, param->iterations);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb = simple_alloc_urb(udev, dev->out_pipe, param->length);
+=======
+		urb = simple_alloc_urb(udev, dev->out_pipe, param->length, 0);
+>>>>>>> v3.18
 =======
 		urb = simple_alloc_urb(udev, dev->out_pipe, param->length, 0);
 >>>>>>> v3.18
@@ -2300,7 +2467,11 @@ usbtest_ioctl(struct usb_interface *intf, unsigned int code, void *buf)
 				"TEST 4:  read/%d 0..%d bytes %u times\n",
 				param->vary, param->length, param->iterations);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb = simple_alloc_urb(udev, dev->in_pipe, param->length);
+=======
+		urb = simple_alloc_urb(udev, dev->in_pipe, param->length, 0);
+>>>>>>> v3.18
 =======
 		urb = simple_alloc_urb(udev, dev->in_pipe, param->length, 0);
 >>>>>>> v3.18
@@ -2601,7 +2772,10 @@ usbtest_ioctl(struct usb_interface *intf, unsigned int code, void *buf)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Simple non-queued interrupt I/O tests */
 	case 25:
 		if (dev->out_int_pipe == 0)
@@ -2635,6 +2809,9 @@ usbtest_ioctl(struct usb_interface *intf, unsigned int code, void *buf)
 		retval = simple_io(dev, urb, param->iterations, 0, 0, "test26");
 		simple_free_urb(urb);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	do_gettimeofday(&param->duration);
@@ -2673,6 +2850,10 @@ usbtest_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	char			*rtest, *wtest;
 	char			*irtest, *iwtest;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char			*intrtest, *intwtest;
+>>>>>>> v3.18
 =======
 	char			*intrtest, *intwtest;
 >>>>>>> v3.18
@@ -2717,6 +2898,10 @@ usbtest_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	rtest = wtest = "";
 	irtest = iwtest = "";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	intrtest = intwtest = "";
+>>>>>>> v3.18
 =======
 	intrtest = intwtest = "";
 >>>>>>> v3.18
@@ -2759,18 +2944,28 @@ usbtest_probe(struct usb_interface *intf, const struct usb_device_id *id)
 		if (dev->out_iso_pipe)
 			iwtest = " iso-out";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (dev->in_int_pipe)
 			intrtest = " int-in";
 		if (dev->out_int_pipe)
 			intwtest = " int-out";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	usb_set_intfdata(intf, dev);
 	dev_info(&intf->dev, "%s\n", info->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&intf->dev, "%s {control%s%s%s%s%s} tests%s\n",
+=======
+	dev_info(&intf->dev, "%s {control%s%s%s%s%s%s%s} tests%s\n",
+>>>>>>> v3.18
 =======
 	dev_info(&intf->dev, "%s {control%s%s%s%s%s%s%s} tests%s\n",
 >>>>>>> v3.18
@@ -2779,6 +2974,10 @@ usbtest_probe(struct usb_interface *intf, const struct usb_device_id *id)
 			rtest, wtest,
 			irtest, iwtest,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			intrtest, intwtest,
+>>>>>>> v3.18
 =======
 			intrtest, intwtest,
 >>>>>>> v3.18
@@ -2856,6 +3055,10 @@ static struct usbtest_info gz_info = {
 	.ctrl_out	= 1,
 	.iso		= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.intr		= 1,
+>>>>>>> v3.18
 =======
 	.intr		= 1,
 >>>>>>> v3.18

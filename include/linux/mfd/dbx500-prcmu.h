@@ -13,6 +13,11 @@
 #include <linux/err.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/mfd/dbx500-prcmu.h> /* For clock identifiers */
+
+>>>>>>> v3.18
 =======
 #include <dt-bindings/mfd/dbx500-prcmu.h> /* For clock identifiers */
 
@@ -100,6 +105,7 @@ enum prcmu_wakeup_index {
 #define PRCMU_CLKSRC_HDMICLK		0x47
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Clock identifiers.
  */
@@ -156,6 +162,8 @@ enum prcmu_clock {
 	PRCMU_DSI2ESCCLK,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -246,8 +254,11 @@ struct prcmu_pdata
 	bool enable_ape_opp_100_voltage;
 	struct ab8500_platform_data *ab_platdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ab_irq;
 	int irq_base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 version_offset;

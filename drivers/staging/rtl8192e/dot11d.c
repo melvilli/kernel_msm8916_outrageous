@@ -50,6 +50,10 @@ void dot11d_init(struct rtllib_device *ieee)
 {
 	struct rt_dot11d_info *pDot11dInfo = GET_DOT11D_INFO(ieee);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -138,8 +142,12 @@ void Dot11d_UpdateCountryIe(struct rtllib_device *dev, u8 *pTaddr,
 	for (i = 0; i < NumTriples; i++) {
 		if (MaxChnlNum >= pTriple->FirstChnl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "Dot11d_UpdateCountryIe(): Invalid"
 			       " country IE, skip it........1\n");
+=======
+			netdev_info(dev->dev, "Dot11d_UpdateCountryIe(): Invalid country IE, skip it........1\n");
+>>>>>>> v3.18
 =======
 			netdev_info(dev->dev, "Dot11d_UpdateCountryIe(): Invalid country IE, skip it........1\n");
 >>>>>>> v3.18
@@ -148,6 +156,7 @@ void Dot11d_UpdateCountryIe(struct rtllib_device *dev, u8 *pTaddr,
 		if (MAX_CHANNEL_NUMBER < (pTriple->FirstChnl +
 		    pTriple->NumChnls)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "Dot11d_UpdateCountryIe(): Invalid "
 			       "country IE, skip it........2\n");
 			return;
@@ -155,11 +164,16 @@ void Dot11d_UpdateCountryIe(struct rtllib_device *dev, u8 *pTaddr,
 
 		for (j = 0 ; j < pTriple->NumChnls; j++) {
 =======
+=======
+>>>>>>> v3.18
 			netdev_info(dev->dev, "Dot11d_UpdateCountryIe(): Invalid country IE, skip it........2\n");
 			return;
 		}
 
 		for (j = 0; j < pTriple->NumChnls; j++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pDot11dInfo->channel_map[pTriple->FirstChnl + j] = 1;
 			pDot11dInfo->MaxTxPwrDbmList[pTriple->FirstChnl + j] =
@@ -168,7 +182,11 @@ void Dot11d_UpdateCountryIe(struct rtllib_device *dev, u8 *pTaddr,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pTriple = (struct chnl_txpow_triple *)((u8*)pTriple + 3);
+=======
+		pTriple = (struct chnl_txpow_triple *)((u8 *)pTriple + 3);
+>>>>>>> v3.18
 =======
 		pTriple = (struct chnl_txpow_triple *)((u8 *)pTriple + 3);
 >>>>>>> v3.18
@@ -188,8 +206,12 @@ u8 DOT11D_GetMaxTxPwrInDbm(struct rtllib_device *dev, u8 Channel)
 
 	if (MAX_CHANNEL_NUMBER < Channel) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "DOT11D_GetMaxTxPwrInDbm(): Invalid "
 		       "Channel\n");
+=======
+		netdev_info(dev->dev, "DOT11D_GetMaxTxPwrInDbm(): Invalid Channel\n");
+>>>>>>> v3.18
 =======
 		netdev_info(dev->dev, "DOT11D_GetMaxTxPwrInDbm(): Invalid Channel\n");
 >>>>>>> v3.18
@@ -232,7 +254,11 @@ int ToLegalChannel(struct rtllib_device *dev, u8 channel)
 
 	if (MAX_CHANNEL_NUMBER < channel) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s(): Invalid Channel\n", __func__);
+=======
+		netdev_err(dev->dev, "%s(): Invalid Channel\n", __func__);
+>>>>>>> v3.18
 =======
 		netdev_err(dev->dev, "%s(): Invalid Channel\n", __func__);
 >>>>>>> v3.18

@@ -296,6 +296,9 @@ module_exit(crypto_pcbc_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("PCBC block cipher algorithm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("pcbc");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

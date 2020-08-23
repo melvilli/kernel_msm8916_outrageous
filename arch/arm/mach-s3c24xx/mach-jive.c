@@ -20,6 +20,10 @@
 #include <linux/syscore_ops.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #include <asm/mach/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/mtd-nand-s3c2410.h>
@@ -46,6 +53,10 @@
 #include <mach/regs-lcd.h>
 #include <mach/fb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -59,7 +70,10 @@
 
 #include <plat/gpio-cfg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/devs.h>
@@ -257,7 +271,11 @@ static int __init jive_mtdset(char *options)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(options, 10, &set)) {
+=======
+	if (kstrtoul(options, 10, &set)) {
+>>>>>>> v3.18
 =======
 	if (kstrtoul(options, 10, &set)) {
 >>>>>>> v3.18
@@ -485,6 +503,10 @@ static struct platform_device *jive_devices[] __initdata = {
 	&s3c_device_nand,
 	&s3c_device_usbgadget,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&s3c2412_device_dma,
+>>>>>>> v3.18
 =======
 	&s3c2412_device_dma,
 >>>>>>> v3.18
@@ -528,7 +550,10 @@ static void __init jive_map_io(void)
 {
 	s3c24xx_init_io(jive_iodesc, ARRAY_SIZE(jive_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(jive_uartcfgs, ARRAY_SIZE(jive_uartcfgs));
@@ -536,13 +561,19 @@ static void __init jive_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init jive_init_time(void)
 {
 	s3c2412_init_clocks(12000000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void jive_power_off(void)
 {
@@ -698,8 +729,12 @@ MACHINE_START(JIVE, "JIVE")
 	.map_io		= jive_map_io,
 	.init_machine	= jive_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c2412_restart,
+=======
+	.init_time	= jive_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= jive_init_time,
 >>>>>>> v3.18

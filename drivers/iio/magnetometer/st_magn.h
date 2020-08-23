@@ -19,7 +19,12 @@
 #define LIS3MDL_MAGN_DEV_NAME		"lis3mdl"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int st_magn_common_probe(struct iio_dev *indio_dev);
+=======
+int st_magn_common_probe(struct iio_dev *indio_dev,
+					struct st_sensors_platform_data *pdata);
+>>>>>>> v3.18
 =======
 int st_magn_common_probe(struct iio_dev *indio_dev,
 					struct st_sensors_platform_data *pdata);

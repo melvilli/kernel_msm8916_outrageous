@@ -132,14 +132,20 @@ static int hfsplus_system_write_inode(struct inode *inode)
 	if (tree) {
 		int err = hfs_btree_write(tree);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err) {
 			pr_err("b-tree write err: %d, ino %lu\n",
 					err, inode->i_ino);
 =======
+=======
+>>>>>>> v3.18
 
 		if (err) {
 			pr_err("b-tree write err: %d, ino %lu\n",
 			       err, inode->i_ino);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return err;
 		}
@@ -169,7 +175,11 @@ static void hfsplus_evict_inode(struct inode *inode)
 {
 	hfs_dbg(INODE, "hfsplus_evict_inode: %lu\n", inode->i_ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -335,6 +345,10 @@ static int hfsplus_statfs(struct dentry *dentry, struct kstatfs *buf)
 static int hfsplus_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -490,6 +504,10 @@ static int hfsplus_fill_super(struct super_block *sb, void *data, int silent)
 		goto out_close_ext_tree;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_set(&sbi->attr_tree_state, HFSPLUS_EMPTY_ATTR_TREE);
+>>>>>>> v3.18
 =======
 	atomic_set(&sbi->attr_tree_state, HFSPLUS_EMPTY_ATTR_TREE);
 >>>>>>> v3.18
@@ -500,6 +518,10 @@ static int hfsplus_fill_super(struct super_block *sb, void *data, int silent)
 			goto out_close_cat_tree;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic_set(&sbi->attr_tree_state, HFSPLUS_VALID_ATTR_TREE);
+>>>>>>> v3.18
 =======
 		atomic_set(&sbi->attr_tree_state, HFSPLUS_VALID_ATTR_TREE);
 >>>>>>> v3.18

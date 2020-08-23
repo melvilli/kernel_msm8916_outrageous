@@ -58,7 +58,11 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 
 	/* Need platform data for setup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = (struct fsl_usb2_platform_data *)pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -107,6 +111,7 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 	hcd->rsrc_start = res->start;
 	hcd->rsrc_len = resource_size(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!request_mem_region(hcd->rsrc_start, hcd->rsrc_len,
 				driver->description)) {
 		dev_dbg(&pdev->dev, "controller already in use\n");
@@ -121,11 +126,16 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 		goto err3;
 	}
 =======
+=======
+>>>>>>> v3.18
 	hcd->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(hcd->regs)) {
 		retval = PTR_ERR(hcd->regs);
 		goto err2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdata->regs = hcd->regs;
@@ -139,7 +149,11 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 	if (pdata->init && pdata->init(pdev)) {
 		retval = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err4;
+=======
+		goto err2;
+>>>>>>> v3.18
 =======
 		goto err2;
 >>>>>>> v3.18
@@ -154,7 +168,12 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 	retval = usb_add_hcd(hcd, irq, IRQF_SHARED);
 	if (retval != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err4;
+=======
+		goto err2;
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 		goto err2;
 	device_wakeup_enable(hcd->self.controller);
@@ -164,6 +183,7 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 	if (pdata->operating_mode == FSL_USB2_DR_OTG) {
 		struct ehci_hcd *ehci = hcd_to_ehci(hcd);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hcd->phy = usb_get_phy(USB_PHY_TYPE_USB2);
 		dev_dbg(&pdev->dev, "hcd=0x%pK  ehci=0x%pK, phy=0x%pK\n",
@@ -176,6 +196,8 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 				usb_put_phy(hcd->phy);
 				goto err4;
 =======
+=======
+>>>>>>> v3.18
 		hcd->usb_phy = usb_get_phy(USB_PHY_TYPE_USB2);
 		dev_dbg(&pdev->dev, "hcd=0x%p  ehci=0x%p, phy=0x%p\n",
 			hcd, ehci, hcd->usb_phy);
@@ -186,13 +208,20 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 			if (retval) {
 				usb_put_phy(hcd->usb_phy);
 				goto err2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		} else {
 			dev_err(&pdev->dev, "can't find phy\n");
 			retval = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err4;
+=======
+			goto err2;
+>>>>>>> v3.18
 =======
 			goto err2;
 >>>>>>> v3.18
@@ -202,10 +231,13 @@ static int usb_hcd_fsl_probe(const struct hc_driver *driver,
 	return retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       err4:
 	iounmap(hcd->regs);
       err3:
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
       err2:
@@ -232,17 +264,23 @@ static void usb_hcd_fsl_remove(struct usb_hcd *hcd,
 			       struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_usb2_platform_data *pdata = pdev->dev.platform_data;
 
 	if (!IS_ERR_OR_NULL(hcd->phy)) {
 		otg_set_host(hcd->phy->otg, NULL);
 		usb_put_phy(hcd->phy);
 =======
+=======
+>>>>>>> v3.18
 	struct fsl_usb2_platform_data *pdata = dev_get_platdata(&pdev->dev);
 
 	if (!IS_ERR_OR_NULL(hcd->usb_phy)) {
 		otg_set_host(hcd->usb_phy->otg, NULL);
 		usb_put_phy(hcd->usb_phy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -255,8 +293,11 @@ static void usb_hcd_fsl_remove(struct usb_hcd *hcd,
 	if (pdata->exit)
 		pdata->exit(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_put_hcd(hcd);
@@ -271,7 +312,11 @@ static int ehci_fsl_setup_phy(struct usb_hcd *hcd,
 	void __iomem *non_ehci = hcd->regs;
 	struct device *dev = hcd->self.controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_usb2_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_usb2_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_usb2_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -322,14 +367,20 @@ static int ehci_fsl_setup_phy(struct usb_hcd *hcd,
 	    (phy_mode == FSL_USB2_PHY_ULPI)) {
 		/* check PHY_CLK_VALID to get phy clk valid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!spin_event_timeout(in_be32(non_ehci + FSL_SOC_USB_CTRL) &
 				PHY_CLK_VALID, FSL_USB_PHY_CLK_TIMEOUT, 0)) {
 			printk(KERN_WARNING "fsl-ehci: USB PHY clock invalid\n");
 =======
+=======
+>>>>>>> v3.18
 		if (!(spin_event_timeout(in_be32(non_ehci + FSL_SOC_USB_CTRL) &
 				PHY_CLK_VALID, FSL_USB_PHY_CLK_TIMEOUT, 0) ||
 				in_be32(non_ehci + FSL_SOC_USB_PRICTRL))) {
 			dev_warn(hcd->self.controller, "USB PHY clock invalid\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		}
@@ -350,7 +401,11 @@ static int ehci_fsl_usb_setup(struct ehci_hcd *ehci)
 	void __iomem *non_ehci = hcd->regs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = hcd->self.controller->platform_data;
+=======
+	pdata = dev_get_platdata(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(hcd->self.controller);
 >>>>>>> v3.18
@@ -426,7 +481,11 @@ static int ehci_fsl_setup(struct usb_hcd *hcd)
 
 	dev = hcd->self.controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = hcd->self.controller->platform_data;
+=======
+	pdata = dev_get_platdata(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(hcd->self.controller);
 >>>>>>> v3.18
@@ -482,15 +541,21 @@ static int ehci_fsl_mpc512x_drv_suspend(struct device *dev)
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
 	struct ehci_hcd *ehci = hcd_to_ehci(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_usb2_platform_data *pdata = dev->platform_data;
 	u32 tmp;
 
 #ifdef DEBUG
 =======
+=======
+>>>>>>> v3.18
 	struct fsl_usb2_platform_data *pdata = dev_get_platdata(dev);
 	u32 tmp;
 
 #ifdef CONFIG_DYNAMIC_DEBUG
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 mode = ehci_readl(ehci, hcd->regs + FSL_SOC_USB_USBMODE);
 	mode &= USBMODE_CM_MASK;
@@ -558,7 +623,11 @@ static int ehci_fsl_mpc512x_drv_resume(struct device *dev)
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
 	struct ehci_hcd *ehci = hcd_to_ehci(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_usb2_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_usb2_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_usb2_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -722,7 +791,11 @@ static int ehci_start_port_reset(struct usb_hcd *hcd, unsigned port)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* khubd will finish the reset later */
+=======
+	/* hub_wq will finish the reset later */
+>>>>>>> v3.18
 =======
 	/* hub_wq will finish the reset later */
 >>>>>>> v3.18
@@ -751,7 +824,11 @@ static const struct hc_driver ehci_fsl_hc_driver = {
 	 */
 	.irq = ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = HCD_USB2 | HCD_MEMORY,
+=======
+	.flags = HCD_USB2 | HCD_MEMORY | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags = HCD_USB2 | HCD_MEMORY | HCD_BH,
 >>>>>>> v3.18
@@ -818,6 +895,10 @@ static struct platform_driver ehci_fsl_driver = {
 	.driver = {
 		.name = "fsl-ehci",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner	= THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner	= THIS_MODULE,
 >>>>>>> v3.18

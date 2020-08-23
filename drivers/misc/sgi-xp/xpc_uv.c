@@ -241,7 +241,11 @@ xpc_create_gru_mq_uv(unsigned int mq_size, int cpu, char *irq_name,
 	nid = cpu_to_node(cpu);
 	page = alloc_pages_exact_node(nid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      GFP_KERNEL | __GFP_ZERO | GFP_THISNODE,
+=======
+				      GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
+>>>>>>> v3.18
 =======
 				      GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
 >>>>>>> v3.18

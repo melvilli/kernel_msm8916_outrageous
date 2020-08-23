@@ -166,6 +166,11 @@ static const struct hid_usage_entry hid_usage_table[] = {
     {0, 0x54, "ContactCount"},
     {0, 0x55, "ContactMaximumNumber"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    {0, 0x5A, "SecondaryBarrelSwitch"},
+    {0, 0x5B, "TransducerSerialNumber"},
+>>>>>>> v3.18
 =======
     {0, 0x5A, "SecondaryBarrelSwitch"},
     {0, 0x5B, "TransducerSerialNumber"},
@@ -278,7 +283,10 @@ static const struct hid_usage_entry hid_usage_table[] = {
     {0, 0xAB, "Create_New_Effect_Report"},
     {0, 0xAC, "RAM_Pool_Available"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   {  0x20, 0, "Sensor" },
     { 0x20, 0x01, "Sensor" },
     { 0x20, 0x10, "Biometric" },
@@ -358,6 +366,9 @@ static const struct hid_usage_entry hid_usage_table[] = {
       { 0x20, 0xE1, "OtherCustom" },
       { 0x20, 0xE2, "OtherGeneric" },
       { 0x20, 0xE3, "OtherGenericEnumerator" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   { 0x84, 0, "Power Device" },
     { 0x84, 0x02, "PresentStatus" },
@@ -953,13 +964,19 @@ static const char *keys[KEY_MAX + 1] = {
 	[KEY_BRIGHTNESS_MAX] = "BrightnessMax",
 	[KEY_BRIGHTNESS_AUTO] = "BrightnessAuto",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[KEY_KBDINPUTASSIST_PREV] = "KbdInputAssistPrev",
 	[KEY_KBDINPUTASSIST_NEXT] = "KbdInputAssistNext",
 	[KEY_KBDINPUTASSIST_PREVGROUP] = "KbdInputAssistPrevGroup",
 	[KEY_KBDINPUTASSIST_NEXTGROUP] = "KbdInputAssistNextGroup",
 	[KEY_KBDINPUTASSIST_ACCEPT] = "KbdInputAssistAccept",
 	[KEY_KBDINPUTASSIST_CANCEL] = "KbdInputAssistCancel",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

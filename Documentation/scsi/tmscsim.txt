@@ -318,8 +318,11 @@ Each of the parameters is a number, containing the described information:
  (*)5	 0x20	   32	  Check for LUNs >= 1.
   
 <<<<<<< HEAD
+<<<<<<< HEAD
   The default for LUN Check depends on CONFIG_SCSI_MULTI_LUN.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 * TaggedCmnds is a number indicating the maximum number of Tagged Commands.

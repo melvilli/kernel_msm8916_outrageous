@@ -328,6 +328,11 @@ int t4vf_port_init(struct adapter *adapter, int pidx)
 	if (word & FW_PORT_CAP_SPEED_10G)
 		v |= SUPPORTED_10000baseT_Full;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (word & FW_PORT_CAP_SPEED_40G)
+		v |= SUPPORTED_40000baseSR4_Full;
+>>>>>>> v3.18
 =======
 	if (word & FW_PORT_CAP_SPEED_40G)
 		v |= SUPPORTED_40000baseSR4_Full;
@@ -369,8 +374,13 @@ int t4vf_fw_reset(struct adapter *adapter)
  *	can be queried at once.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int t4vf_query_params(struct adapter *adapter, unsigned int nparams,
 		      const u32 *params, u32 *vals)
+=======
+static int t4vf_query_params(struct adapter *adapter, unsigned int nparams,
+			     const u32 *params, u32 *vals)
+>>>>>>> v3.18
 =======
 static int t4vf_query_params(struct adapter *adapter, unsigned int nparams,
 			     const u32 *params, u32 *vals)
@@ -477,6 +487,7 @@ int t4vf_get_sge_params(struct adapter *adapter)
 	sge_params->sge_timer_value_4_and_5 = vals[6];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	params[0] = (FW_PARAMS_MNEM(FW_PARAMS_MNEM_REG) |
 		     FW_PARAMS_PARAM_XYZ(SGE_INGRESS_RX_THRESHOLD));
 	v = t4vf_query_params(adapter, 1, params, vals);
@@ -484,6 +495,8 @@ int t4vf_get_sge_params(struct adapter *adapter)
 		return v;
 	sge_params->sge_ingress_rx_threshold = vals[0];
 =======
+=======
+>>>>>>> v3.18
 	/* T4 uses a single control field to specify both the PCIe Padding and
 	 * Packing Boundary.  T5 introduced the ability to specify these
 	 * separately with the Padding Boundary in SGE_CONTROL and and Packing
@@ -516,6 +529,9 @@ int t4vf_get_sge_params(struct adapter *adapter)
 		return v;
 	sge_params->sge_ingress_rx_threshold = vals[0];
 	sge_params->sge_congestion_control = vals[1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1073,7 +1089,11 @@ int t4vf_alloc_mac_filt(struct adapter *adapter, unsigned int viid, bool free,
 	unsigned int rem = naddr;
 	struct fw_vi_mac_cmd cmd, rpl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int max_naddr = is_t4(adapter->chip) ?
+=======
+	unsigned int max_naddr = is_t4(adapter->params.chip) ?
+>>>>>>> v3.18
 =======
 	unsigned int max_naddr = is_t4(adapter->params.chip) ?
 >>>>>>> v3.18
@@ -1171,7 +1191,11 @@ int t4vf_change_mac(struct adapter *adapter, unsigned int viid,
 	size_t len16 = DIV_ROUND_UP(offsetof(struct fw_vi_mac_cmd,
 					     u.exact[1]), 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int max_naddr = is_t4(adapter->chip) ?
+=======
+	unsigned int max_naddr = is_t4(adapter->params.chip) ?
+>>>>>>> v3.18
 =======
 	unsigned int max_naddr = is_t4(adapter->params.chip) ?
 >>>>>>> v3.18
@@ -1406,12 +1430,15 @@ int t4vf_handle_fw_rpl(struct adapter *adapter, const __be64 *rpl)
 			fc |= PAUSE_TX;
 		if (word & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_100M))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			speed = SPEED_100;
 		else if (word & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_1G))
 			speed = SPEED_1000;
 		else if (word & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_10G))
 			speed = SPEED_10000;
 =======
+=======
+>>>>>>> v3.18
 			speed = 100;
 		else if (word & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_1G))
 			speed = 1000;
@@ -1419,6 +1446,9 @@ int t4vf_handle_fw_rpl(struct adapter *adapter, const __be64 *rpl)
 			speed = 10000;
 		else if (word & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_40G))
 			speed = 40000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*

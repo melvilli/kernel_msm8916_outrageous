@@ -16,6 +16,7 @@
 #define __ASM_POWERPC_REG_BOOKE_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Machine State Register (MSR) Fields */
 #define MSR_GS		(1<<28) /* Guest state */
 #define MSR_UCLE	(1<<26)	/* User-mode cache lock enable */
@@ -27,6 +28,8 @@
 #define MSR_PMM		(1<<2)	/* Performance monitor mark bit */
 #define MSR_CM		(1<<31) /* Computation Mode (0=32-bit, 1=64-bit) */
 =======
+=======
+>>>>>>> v3.18
 #include <asm/ppc-opcode.h>
 
 /* Machine State Register (MSR) Fields */
@@ -49,21 +52,30 @@
 #define MSR_DS		__MASK(MSR_DS_LG)
 #define MSR_PMM		__MASK(MSR_PMM_LG)
 #define MSR_CM		__MASK(MSR_CM_LG)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_PPC_BOOK3E_64)
 #define MSR_64BIT	MSR_CM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MSR_		MSR_ME | MSR_CE
 #define MSR_KERNEL	MSR_ | MSR_64BIT
 #define MSR_USER32	MSR_ | MSR_PR | MSR_EE
 #define MSR_USER64	MSR_USER32 | MSR_64BIT
 =======
+=======
+>>>>>>> v3.18
 #define MSR_		(MSR_ME | MSR_CE)
 #define MSR_KERNEL	(MSR_ | MSR_64BIT)
 #define MSR_USER32	(MSR_ | MSR_PR | MSR_EE)
 #define MSR_USER64	(MSR_USER32 | MSR_64BIT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #elif defined (CONFIG_40x)
 #define MSR_KERNEL	(MSR_ME|MSR_RI|MSR_IR|MSR_DR|MSR_CE)
@@ -134,6 +146,10 @@
 #define SPRN_IVOR40	0x1B2	/* Interrupt Vector Offset Register 40 */
 #define SPRN_IVOR41	0x1B3	/* Interrupt Vector Offset Register 41 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SPRN_IVOR42	0x1B4	/* Interrupt Vector Offset Register 42 */
+>>>>>>> v3.18
 =======
 #define SPRN_IVOR42	0x1B4	/* Interrupt Vector Offset Register 42 */
 >>>>>>> v3.18
@@ -207,6 +223,10 @@
 #define SPRN_DCCR	0x3FA	/* Data Cache Cacheability Register */
 #define SPRN_ICCR	0x3FB	/* Instruction Cache Cacheability Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SPRN_PWRMGTCR0	0x3FB	/* Power management control register 0 */
+>>>>>>> v3.18
 =======
 #define SPRN_PWRMGTCR0	0x3FB	/* Power management control register 0 */
 >>>>>>> v3.18
@@ -257,7 +277,10 @@
 #define	CCR1_TCS	0x00000080 /* Timer Clock Select */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bit definitions for PWRMGTCR0. */
 #define PWRMGTCR0_PW20_WAIT		(1 << 14) /* PW20 state enable bit */
 #define PWRMGTCR0_PW20_ENT_SHIFT	8
@@ -266,6 +289,9 @@
 #define PWRMGTCR0_AV_IDLE_CNT_SHIFT	16
 #define PWRMGTCR0_AV_IDLE_CNT		0x3F0000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Bit definitions for the MCSR. */
 #define MCSR_MCS	0x80000000 /* Machine Check Summary */
@@ -302,7 +328,11 @@
 /* e500mc */
 #define MCSR_DCPERR_MC	0x20000000UL /* D-Cache Parity Error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCSR_L2MMU_MHIT	0x04000000UL /* Hit on multiple TLB entries */
+=======
+#define MCSR_L2MMU_MHIT	0x08000000UL /* Hit on multiple TLB entries */
+>>>>>>> v3.18
 =======
 #define MCSR_L2MMU_MHIT	0x08000000UL /* Hit on multiple TLB entries */
 >>>>>>> v3.18
@@ -353,6 +383,11 @@
  */
 #ifdef CONFIG_BOOKE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DBSR_IDE	0x80000000	/* Imprecise Debug Event */
+#define DBSR_MRR	0x30000000	/* Most Recent Reset */
+>>>>>>> v3.18
 =======
 #define DBSR_IDE	0x80000000	/* Imprecise Debug Event */
 #define DBSR_MRR	0x30000000	/* Most Recent Reset */
@@ -442,7 +477,11 @@
 #define DBCR0_FT	0x00000001	/* Freeze Timers on debug event */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dbcr_iac_range(task)	((task)->thread.dbcr0)
+=======
+#define dbcr_iac_range(task)	((task)->thread.debug.dbcr0)
+>>>>>>> v3.18
 =======
 #define dbcr_iac_range(task)	((task)->thread.debug.dbcr0)
 >>>>>>> v3.18
@@ -460,7 +499,11 @@
 #define DBCR1_DAC2W	0x10000000	/* DAC2 Write Debug Event */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dbcr_dac(task)	((task)->thread.dbcr1)
+=======
+#define dbcr_dac(task)	((task)->thread.debug.dbcr1)
+>>>>>>> v3.18
 =======
 #define dbcr_dac(task)	((task)->thread.debug.dbcr1)
 >>>>>>> v3.18
@@ -510,7 +553,11 @@
 #define DBCR0_FT	0x00000001	/* Freeze Timers on debug event */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dbcr_dac(task)	((task)->thread.dbcr0)
+=======
+#define dbcr_dac(task)	((task)->thread.debug.dbcr0)
+>>>>>>> v3.18
 =======
 #define dbcr_dac(task)	((task)->thread.debug.dbcr0)
 >>>>>>> v3.18
@@ -548,7 +595,11 @@
 #define DBCR1_IAC34AT	0x00000001	/* Instr Addr 3-4 range Toggle */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dbcr_iac_range(task)	((task)->thread.dbcr1)
+=======
+#define dbcr_iac_range(task)	((task)->thread.debug.dbcr1)
+>>>>>>> v3.18
 =======
 #define dbcr_iac_range(task)	((task)->thread.debug.dbcr1)
 >>>>>>> v3.18
@@ -650,6 +701,10 @@
 /* Bit definitions for L1CSR0. */
 #define L1CSR0_CPE	0x00010000	/* Data Cache Parity Enable */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define L1CSR0_CUL	0x00000400	/* Data Cache Unable to Lock */
+>>>>>>> v3.18
 =======
 #define L1CSR0_CUL	0x00000400	/* Data Cache Unable to Lock */
 >>>>>>> v3.18
@@ -668,7 +723,10 @@
 #define L1CSR2_DCWS	0x40000000	/* Data Cache write shadow */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bit definitions for BUCSR. */
 #define BUCSR_STAC_EN	0x01000000	/* Segment Target Address Cache */
 #define BUCSR_LS_EN	0x00400000	/* Link Stack */
@@ -676,6 +734,9 @@
 #define BUCSR_BPEN	0x00000001	/* Branch prediction enable */
 #define BUCSR_INIT	(BUCSR_STAC_EN | BUCSR_LS_EN | BUCSR_BBFI | BUCSR_BPEN)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Bit definitions for L2CSR0. */
 #define L2CSR0_L2E	0x80000000	/* L2 Cache Enable */
@@ -801,7 +862,10 @@
 #define MMUBE1_VBE5		0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TMRN_IMSR0	0x120	/* Initial MSR Register 0 (e6500) */
 #define TMRN_IMSR1	0x121	/* Initial MSR Register 1 (e6500) */
 #define TMRN_INIA0	0x140	/* Next Instruction Address Register 0 */
@@ -820,6 +884,9 @@
 				     : "memory")
 #endif /* !__ASSEMBLY__ */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_POWERPC_REG_BOOKE_H__ */
 #endif /* __KERNEL__ */

@@ -78,6 +78,7 @@ static inline struct thread_info *current_thread_info(void)
  * thread information flags bit numbers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIF_SYSCALL		0	/* inside a system call */
 #define TIF_NOTIFY_RESUME	1	/* callback before returning to user */
 #define TIF_SIGPENDING		2	/* signal pending */
@@ -100,6 +101,8 @@ static inline struct thread_info *current_thread_info(void)
 #define _TIF_PER_TRAP		(1<<TIF_PER_TRAP)
 #define _TIF_MCCK_PENDING	(1<<TIF_MCCK_PENDING)
 =======
+=======
+>>>>>>> v3.18
 #define TIF_NOTIFY_RESUME	0	/* callback before returning to user */
 #define TIF_SIGPENDING		1	/* signal pending */
 #define TIF_NEED_RESCHED	2	/* rescheduling necessary */
@@ -118,12 +121,19 @@ static inline struct thread_info *current_thread_info(void)
 #define _TIF_NOTIFY_RESUME	(1<<TIF_NOTIFY_RESUME)
 #define _TIF_SIGPENDING		(1<<TIF_SIGPENDING)
 #define _TIF_NEED_RESCHED	(1<<TIF_NEED_RESCHED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _TIF_SYSCALL_TRACE	(1<<TIF_SYSCALL_TRACE)
 #define _TIF_SYSCALL_AUDIT	(1<<TIF_SYSCALL_AUDIT)
 #define _TIF_SECCOMP		(1<<TIF_SECCOMP)
 #define _TIF_SYSCALL_TRACEPOINT	(1<<TIF_SYSCALL_TRACEPOINT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _TIF_UPROBE		(1<<TIF_UPROBE)
+>>>>>>> v3.18
 =======
 #define _TIF_UPROBE		(1<<TIF_UPROBE)
 >>>>>>> v3.18
@@ -137,8 +147,11 @@ static inline struct thread_info *current_thread_info(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x4000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_THREAD_INFO_H */

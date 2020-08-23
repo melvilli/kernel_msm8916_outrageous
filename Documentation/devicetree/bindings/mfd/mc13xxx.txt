@@ -11,10 +11,13 @@ Optional properties:
 
 Sub-nodes:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - regulators : Contain the regulator nodes. The regulators are bound using
   their names as listed below with their registers and bits for enabling.
 
 =======
+=======
+>>>>>>> v3.18
 - codec: Contain the Audio Codec node.
   - adc-port: Contain PMIC SSI port number used for ADC.
   - dac-port: Contain PMIC SSI port number used for DAC.
@@ -56,6 +59,9 @@ MC34708 LED IDs:
     0  : Charger Red
     1  : Charger Green
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MC13783 regulators:
     sw1a      : regulator SW1A      (register 24, bit 0)
@@ -134,7 +140,10 @@ ecspi@70010000 { /* ECSPI1 */
 		interrupts = <8>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		leds {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -147,6 +156,9 @@ ecspi@70010000 { /* ECSPI1 */
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		regulators {
 			sw1_reg: mc13892__sw1 {

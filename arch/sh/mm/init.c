@@ -232,7 +232,11 @@ static void __init bootmem_init_one_node(unsigned int nid)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end_pfn = p->node_start_pfn + p->node_spanned_pages;
+=======
+	end_pfn = pgdat_end_pfn(p);
+>>>>>>> v3.18
 =======
 	end_pfn = pgdat_end_pfn(p);
 >>>>>>> v3.18
@@ -412,6 +416,7 @@ unsigned int mem_init_done = 0;
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codesize, datasize, initsize;
 	int nid;
 
@@ -437,6 +442,8 @@ void __init mem_init(void)
 			high_memory = node_high_memory;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pg_data_t *pgdat;
 
 	iommu_init();
@@ -447,6 +454,9 @@ void __init mem_init(void)
 				    __va(pgdat_end_pfn(pgdat) << PAGE_SHIFT));
 
 	free_all_bootmem();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set this up early, so we can take care of the zero page */
@@ -458,6 +468,7 @@ void __init mem_init(void)
 
 	vsyscall_init();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	codesize =  (unsigned long) &_etext - (unsigned long) &_text;
 	datasize =  (unsigned long) &_edata - (unsigned long) &_etext;
@@ -472,6 +483,10 @@ void __init mem_init(void)
 		initsize >> 10);
 
 	printk(KERN_INFO "virtual kernel memory layout:\n"
+=======
+	mem_init_print_info(NULL);
+	pr_info("virtual kernel memory layout:\n"
+>>>>>>> v3.18
 =======
 	mem_init_print_info(NULL);
 	pr_info("virtual kernel memory layout:\n"
@@ -522,7 +537,11 @@ void __init mem_init(void)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -532,7 +551,11 @@ void free_initmem(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -551,8 +574,14 @@ int arch_add_memory(int nid, u64 start, u64 size)
 
 	/* We only have ZONE_NORMAL, so this is easy.. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = __add_pages(nid, pgdat->node_zones + ZONE_NORMAL,
 				start_pfn, nr_pages);
+=======
+	ret = __add_pages(nid, pgdat->node_zones +
+			zone_for_memory(nid, start, size, ZONE_NORMAL),
+			start_pfn, nr_pages);
+>>>>>>> v3.18
 =======
 	ret = __add_pages(nid, pgdat->node_zones +
 			zone_for_memory(nid, start, size, ZONE_NORMAL),

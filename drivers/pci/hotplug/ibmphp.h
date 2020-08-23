@@ -60,7 +60,11 @@ extern int ibmphp_debug;
 
 /************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 *  RESOURE TYPE                                             *
+=======
+*  RESOURCE TYPE                                             *
+>>>>>>> v3.18
 =======
 *  RESOURCE TYPE                                             *
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ extern int ibmphp_debug;
 
 struct rio_table_hdr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ver_num; 
+=======
+	u8 ver_num;
+>>>>>>> v3.18
 =======
 	u8 ver_num;
 >>>>>>> v3.18
@@ -136,7 +144,11 @@ struct scal_detail {
 
 //--------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 // RIO DETAIL 
+=======
+// RIO DETAIL
+>>>>>>> v3.18
 =======
 // RIO DETAIL
 >>>>>>> v3.18
@@ -165,7 +177,11 @@ struct opt_rio {
 	u8 middle_num;
 	struct list_head opt_rio_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };	
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -178,7 +194,11 @@ struct opt_rio_lo {
 	u8 pack_count;
 	struct list_head opt_rio_lo_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };	
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -595,7 +615,11 @@ void ibmphp_hpc_stop_poll_thread(void);
 
 //----------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 // HPC_CTLR_WROKING status return codes
+=======
+// HPC_CTLR_WORKING status return codes
+>>>>>>> v3.18
 =======
 // HPC_CTLR_WORKING status return codes
 >>>>>>> v3.18

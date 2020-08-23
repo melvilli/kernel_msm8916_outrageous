@@ -8,6 +8,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -88,7 +93,11 @@ static int __init xenfs_init(void)
 		return register_filesystem(&xenfs_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "XENFS: not registering filesystem on non-xen platform\n");
+=======
+	pr_info("not registering filesystem on non-xen platform\n");
+>>>>>>> v3.18
 =======
 	pr_info("not registering filesystem on non-xen platform\n");
 >>>>>>> v3.18

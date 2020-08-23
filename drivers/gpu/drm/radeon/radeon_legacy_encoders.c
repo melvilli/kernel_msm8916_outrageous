@@ -393,7 +393,11 @@ void radeon_legacy_backlight_init(struct radeon_encoder *radeon_encoder,
 	snprintf(bl_name, sizeof(bl_name),
 		 "radeon_bl%d", dev->primary->index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd = backlight_device_register(bl_name, &drm_connector->kdev,
+=======
+	bd = backlight_device_register(bl_name, drm_connector->kdev,
+>>>>>>> v3.18
 =======
 	bd = backlight_device_register(bl_name, drm_connector->kdev,
 >>>>>>> v3.18

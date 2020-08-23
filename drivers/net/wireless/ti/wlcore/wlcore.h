@@ -74,6 +74,11 @@ struct wlcore_ops {
 	int (*hw_init)(struct wl1271 *wl);
 	int (*init_vif)(struct wl1271 *wl, struct wl12xx_vif *wlvif);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*convert_fw_status)(struct wl1271 *wl, void *raw_fw_status,
+				  struct wl_fw_status *fw_status);
+>>>>>>> v3.18
 =======
 	void (*convert_fw_status)(struct wl1271 *wl, void *raw_fw_status,
 				  struct wl_fw_status *fw_status);
@@ -99,7 +104,11 @@ struct wlcore_ops {
 	int (*sched_scan_start)(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 				struct cfg80211_sched_scan_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct ieee80211_sched_scan_ies *ies);
+=======
+				struct ieee80211_scan_ies *ies);
+>>>>>>> v3.18
 =======
 				struct ieee80211_scan_ies *ies);
 >>>>>>> v3.18
@@ -120,6 +129,10 @@ struct wlcore_ops {
 			    bool allow_ht_operation,
 			    u32 rate_set, u8 hlid);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 (*convert_hwaddr)(struct wl1271 *wl, u32 hwaddr);
+>>>>>>> v3.18
 =======
 	u32 (*convert_hwaddr)(struct wl1271 *wl, u32 hwaddr);
 >>>>>>> v3.18
@@ -128,11 +141,17 @@ struct wlcore_ops {
 	bool (*lnk_low_prio)(struct wl1271 *wl, u8 hlid,
 			     struct wl1271_link *lnk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int (*smart_config_start)(struct wl1271 *wl, u32 group_bitmap);
 	int (*smart_config_stop)(struct wl1271 *wl);
 	int (*smart_config_set_group_key)(struct wl1271 *wl, u16 group_id,
 					  u8 key_len, u8 *key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -240,7 +259,11 @@ struct wl1271 {
 	u8 system_hlid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long links_map[BITS_TO_LONGS(WL12XX_MAX_LINKS)];
+=======
+	unsigned long links_map[BITS_TO_LONGS(WLCORE_MAX_LINKS)];
+>>>>>>> v3.18
 =======
 	unsigned long links_map[BITS_TO_LONGS(WLCORE_MAX_LINKS)];
 >>>>>>> v3.18
@@ -252,7 +275,11 @@ struct wl1271 {
 			BITS_TO_LONGS(WLCORE_MAX_KLV_TEMPLATES)];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 session_ids[WL12XX_MAX_LINKS];
+=======
+	u8 session_ids[WLCORE_MAX_LINKS];
+>>>>>>> v3.18
 =======
 	u8 session_ids[WLCORE_MAX_LINKS];
 >>>>>>> v3.18
@@ -319,13 +346,19 @@ struct wl1271 {
 	ssize_t fwlog_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* FW log end marker */
 	u32 fwlog_end;
 
 	/* FW memory block size */
 	u32 fw_mem_block_size;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Sysfs FW log entry readers wait queue */
 	wait_queue_head_t fwlog_waitq;
@@ -345,6 +378,11 @@ struct wl1271 {
 	/* The mbox event mask */
 	u32 event_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* events to unmask only when ap interface is up */
+	u32 ap_event_mask;
+>>>>>>> v3.18
 =======
 	/* events to unmask only when ap interface is up */
 	u32 ap_event_mask;
@@ -380,8 +418,13 @@ struct wl1271 {
 	u32 buffer_busyword[WL1271_BUSY_WORD_CNT];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wl_fw_status_1 *fw_status_1;
 	struct wl_fw_status_2 *fw_status_2;
+=======
+	void *raw_fw_status;
+	struct wl_fw_status *fw_status;
+>>>>>>> v3.18
 =======
 	void *raw_fw_status;
 	struct wl_fw_status *fw_status;
@@ -415,7 +458,11 @@ struct wl1271 {
 	 * are always active.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wl1271_link links[WL12XX_MAX_LINKS];
+=======
+	struct wl1271_link links[WLCORE_MAX_LINKS];
+>>>>>>> v3.18
 =======
 	struct wl1271_link links[WLCORE_MAX_LINKS];
 >>>>>>> v3.18
@@ -425,15 +472,21 @@ struct wl1271 {
 
 	/* Fast/slow links bitmap according to FW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 fw_fast_lnk_map;
 
 	/* AP-mode - a bitmap of links currently in PS mode according to FW */
 	u32 ap_fw_ps_map;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long fw_fast_lnk_map;
 
 	/* AP-mode - a bitmap of links currently in PS mode according to FW */
 	unsigned long ap_fw_ps_map;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* AP-mode - a bitmap of links currently in PS mode in mac80211 */
@@ -455,6 +508,12 @@ struct wl1271 {
 	int active_sta_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Flag determining whether AP should broadcast OFDM-only rates */
+	bool ofdm_only_ap;
+
+>>>>>>> v3.18
 =======
 	/* Flag determining whether AP should broadcast OFDM-only rates */
 	bool ofdm_only_ap;
@@ -490,11 +549,17 @@ struct wl1271 {
 	/* number of RX descriptors the HW supports. */
 	u32 num_rx_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* number of links the HW supports */
 	u8 num_links;
 	/* max stations a single AP can support */
 	u8 max_ap_stations;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* translate HW Tx rates to standard rate-indices */
@@ -511,16 +576,22 @@ struct wl1271 {
 
 	/* size of the private FW status data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t fw_status_priv_len;
 
 	/* RX Data filter rule state - enabled/disabled */
 	bool rx_filter_enabled[WL1271_MAX_RX_FILTERS];
 =======
+=======
+>>>>>>> v3.18
 	size_t fw_status_len;
 	size_t fw_status_priv_len;
 
 	/* RX Data filter rule state - enabled/disabled */
 	unsigned long rx_filter_enabled[BITS_TO_LONGS(WL1271_MAX_RX_FILTERS)];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* size of the private static data */
@@ -547,8 +618,14 @@ struct wl1271 {
 	struct completion nvs_loading_complete;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* number of concurrent channels the HW supports */
 	u32 num_channels;
+=======
+	/* interface combinations supported by the hw */
+	const struct ieee80211_iface_combination *iface_combinations;
+	u8 n_iface_combinations;
+>>>>>>> v3.18
 =======
 	/* interface combinations supported by the hw */
 	const struct ieee80211_iface_combination *iface_combinations;
@@ -567,6 +644,11 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
 		   struct ieee80211_key_conf *key_conf);
 void wlcore_regdomain_config(struct wl1271 *wl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void wlcore_update_inconn_sta(struct wl1271 *wl, struct wl12xx_vif *wlvif,
+			      struct wl1271_station *wl_sta, bool in_conn);
+>>>>>>> v3.18
 =======
 void wlcore_update_inconn_sta(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			      struct wl1271_station *wl_sta, bool in_conn);

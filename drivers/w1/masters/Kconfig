@@ -37,7 +37,11 @@ config W1_MASTER_DS2482
 config W1_MASTER_MXC
 	tristate "Freescale MXC 1-wire busmaster"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on W1 && ARCH_MXC
+=======
+	depends on ARCH_MXC || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_MXC || COMPILE_TEST
 >>>>>>> v3.18
@@ -47,7 +51,10 @@ config W1_MASTER_MXC
 config W1_MASTER_DS1WM
 	tristate "Maxim DS1WM 1-wire busmaster"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on W1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help

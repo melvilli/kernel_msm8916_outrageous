@@ -27,7 +27,11 @@
 #include "phy_common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 r2057_rev4_init[42][2] = {
+=======
+static u16 r2057_rev4_init[][2] = {
+>>>>>>> v3.18
 =======
 static u16 r2057_rev4_init[][2] = {
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ static u16 r2057_rev4_init[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 r2057_rev5_init[44][2] = {
+=======
+static u16 r2057_rev5_init[][2] = {
+>>>>>>> v3.18
 =======
 static u16 r2057_rev5_init[][2] = {
 >>>>>>> v3.18
@@ -63,7 +71,11 @@ static u16 r2057_rev5_init[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 r2057_rev5a_init[45][2] = {
+=======
+static u16 r2057_rev5a_init[][2] = {
+>>>>>>> v3.18
 =======
 static u16 r2057_rev5a_init[][2] = {
 >>>>>>> v3.18
@@ -82,7 +94,11 @@ static u16 r2057_rev5a_init[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 r2057_rev7_init[54][2] = {
+=======
+static u16 r2057_rev7_init[][2] = {
+>>>>>>> v3.18
 =======
 static u16 r2057_rev7_init[][2] = {
 >>>>>>> v3.18
@@ -103,7 +119,12 @@ static u16 r2057_rev7_init[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 r2057_rev8_init[54][2] = {
+=======
+/* TODO: Which devices should use it?
+static u16 r2057_rev8_init[][2] = {
+>>>>>>> v3.18
 =======
 /* TODO: Which devices should use it?
 static u16 r2057_rev8_init[][2] = {
@@ -124,7 +145,10 @@ static u16 r2057_rev8_init[][2] = {
 	{ 0x1B7, 0x05 }, { 0x1C2, 0xa0 },
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 */
 
 /* Extracted from MMIO dump of 6.30.223.141 */
@@ -555,6 +579,9 @@ static const struct b43_nphy_chantabent_rev7 b43_nphy_chantab_phy_rev16_radio_re
 		PHYREGS(0x091e, 0x091a, 0x0916, 0x01c1, 0x01c2, 0x01c3),
 	},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void r2057_upload_inittabs(struct b43_wldev *dev)
@@ -563,6 +590,7 @@ void r2057_upload_inittabs(struct b43_wldev *dev)
 	u16 *table = NULL;
 	u16 size, i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (phy->rev == 7) {
 		table = r2057_rev4_init[0];
@@ -593,6 +621,8 @@ void r2057_upload_inittabs(struct b43_wldev *dev)
 			table++;
 		}
 =======
+=======
+>>>>>>> v3.18
 	switch (phy->rev) {
 	case 7:
 		table = r2057_rev4_init[0];
@@ -686,6 +716,9 @@ void r2057_get_chantabent_rev7(struct b43_wldev *dev, u16 freq,
 		}
 	} else {
 		B43_WARN_ON(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

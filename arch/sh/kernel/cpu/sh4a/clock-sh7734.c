@@ -202,6 +202,7 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_ICK_ID("sci_fck", "sh-sci.5", &mstp_clks[MSTP021]),
 	CLKDEV_CON_ID("hscif", &mstp_clks[MSTP019]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.0", &mstp_clks[MSTP016]),
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.1", &mstp_clks[MSTP016]),
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.2", &mstp_clks[MSTP016]),
@@ -211,6 +212,11 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.6", &mstp_clks[MSTP014]),
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.7", &mstp_clks[MSTP014]),
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.8", &mstp_clks[MSTP014]),
+=======
+	CLKDEV_ICK_ID("fck", "sh-tmu.0", &mstp_clks[MSTP016]),
+	CLKDEV_ICK_ID("fck", "sh-tmu.1", &mstp_clks[MSTP015]),
+	CLKDEV_ICK_ID("fck", "sh-tmu.2", &mstp_clks[MSTP014]),
+>>>>>>> v3.18
 =======
 	CLKDEV_ICK_ID("fck", "sh-tmu.0", &mstp_clks[MSTP016]),
 	CLKDEV_ICK_ID("fck", "sh-tmu.1", &mstp_clks[MSTP015]),
@@ -245,7 +251,11 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_CON_ID("mtu0", &mstp_clks[MSTP312]),
 	CLKDEV_CON_ID("iebus0", &mstp_clks[MSTP304]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_DEV_ID("sh-eth.0", &mstp_clks[MSTP114]),
+=======
+	CLKDEV_DEV_ID("sh7734-gether.0", &mstp_clks[MSTP114]),
+>>>>>>> v3.18
 =======
 	CLKDEV_DEV_ID("sh7734-gether.0", &mstp_clks[MSTP114]),
 >>>>>>> v3.18

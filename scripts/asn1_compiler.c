@@ -1458,8 +1458,12 @@ dont_render_tag:
 		render_element(out, e->type->type->element, tag);
 		if (e->action)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			render_opcode(out, "ASN1_OP_%sACT,\n",
 				      skippable ? "MAYBE_" : "");
+=======
+			render_opcode(out, "ASN1_OP_ACT,\n");
+>>>>>>> v3.18
 =======
 			render_opcode(out, "ASN1_OP_ACT,\n");
 >>>>>>> v3.18

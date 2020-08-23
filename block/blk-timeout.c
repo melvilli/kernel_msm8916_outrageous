@@ -8,6 +8,10 @@
 
 #include "blk.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "blk-mq.h"
+>>>>>>> v3.18
 =======
 #include "blk-mq.h"
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ static int __init fail_io_timeout_debugfs(void)
 						NULL, &fail_io_timeout);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR(dir) ? PTR_ERR(dir) : 0;
+=======
+	return PTR_ERR_OR_ZERO(dir);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dir);
 >>>>>>> v3.18
@@ -91,12 +99,15 @@ static void blk_rq_timed_out(struct request *req)
 {
 	struct request_queue *q = req->q;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum blk_eh_timer_return ret;
 
 	ret = q->rq_timed_out_fn(req);
 	switch (ret) {
 	case BLK_EH_HANDLED:
 =======
+=======
+>>>>>>> v3.18
 	enum blk_eh_timer_return ret = BLK_EH_RESET_TIMER;
 
 	if (q->rq_timed_out_fn)
@@ -104,6 +115,9 @@ static void blk_rq_timed_out(struct request *req)
 	switch (ret) {
 	case BLK_EH_HANDLED:
 		/* Can we use req->errors here? */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__blk_complete_request(req);
 		break;
@@ -126,7 +140,10 @@ static void blk_rq_timed_out(struct request *req)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void blk_rq_check_expired(struct request *rq, unsigned long *next_timeout,
 			  unsigned int *next_set)
 {
@@ -144,6 +161,9 @@ static void blk_rq_check_expired(struct request *rq, unsigned long *next_timeout
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void blk_rq_timed_out_timer(unsigned long data)
 {
@@ -154,6 +174,7 @@ void blk_rq_timed_out_timer(unsigned long data)
 
 	spin_lock_irqsave(q->queue_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry_safe(rq, tmp, &q->timeout_list, timeout_list) {
 		if (time_after_eq(jiffies, rq->deadline)) {
@@ -170,6 +191,10 @@ void blk_rq_timed_out_timer(unsigned long data)
 			next_set = 1;
 		}
 	}
+=======
+	list_for_each_entry_safe(rq, tmp, &q->timeout_list, timeout_list)
+		blk_rq_check_expired(rq, &next, &next_set);
+>>>>>>> v3.18
 =======
 	list_for_each_entry_safe(rq, tmp, &q->timeout_list, timeout_list)
 		blk_rq_check_expired(rq, &next, &next_set);
@@ -196,11 +221,14 @@ void blk_abort_request(struct request *req)
 		return;
 	blk_delete_timer(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_rq_timed_out(req);
 }
 EXPORT_SYMBOL_GPL(blk_abort_request);
 
 =======
+=======
+>>>>>>> v3.18
 	if (req->q->mq_ops)
 		blk_mq_rq_timed_out(req, false);
 	else
@@ -219,6 +247,9 @@ unsigned long blk_rq_timeout(unsigned long timeout)
 	return timeout;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * blk_add_timer - Start timeout timer for a single request
@@ -234,7 +265,12 @@ void blk_add_timer(struct request *req)
 	unsigned long expiry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!q->rq_timed_out_fn)
+=======
+	/* blk-mq has its own handler, so we don't need ->rq_timed_out_fn */
+	if (!q->mq_ops && !q->rq_timed_out_fn)
+>>>>>>> v3.18
 =======
 	/* blk-mq has its own handler, so we don't need ->rq_timed_out_fn */
 	if (!q->mq_ops && !q->rq_timed_out_fn)
@@ -252,7 +288,12 @@ void blk_add_timer(struct request *req)
 
 	req->deadline = jiffies + req->timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_tail(&req->timeout_list, &q->timeout_list);
+=======
+	if (!q->mq_ops)
+		list_add_tail(&req->timeout_list, &req->q->timeout_list);
+>>>>>>> v3.18
 =======
 	if (!q->mq_ops)
 		list_add_tail(&req->timeout_list, &req->q->timeout_list);
@@ -264,6 +305,7 @@ void blk_add_timer(struct request *req)
 	 * second.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	expiry = round_jiffies_up(req->deadline);
 
 	if (!timer_pending(&q->timeout) ||
@@ -272,6 +314,8 @@ void blk_add_timer(struct request *req)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	expiry = blk_rq_timeout(round_jiffies_up(req->deadline));
 
 	if (!timer_pending(&q->timeout) ||
@@ -290,4 +334,7 @@ void blk_add_timer(struct request *req)
 	}
 
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

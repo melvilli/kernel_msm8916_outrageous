@@ -77,7 +77,11 @@
 #define THIN_SUPERBLOCK_MAGIC 27022010
 #define THIN_SUPERBLOCK_LOCATION 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define THIN_VERSION 1
+=======
+#define THIN_VERSION 2
+>>>>>>> v3.18
 =======
 #define THIN_VERSION 2
 >>>>>>> v3.18
@@ -197,7 +201,10 @@ struct dm_pool_metadata {
 	 */
 	bool fail_io:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Reading the space map roots can fail, so we read it into these
@@ -205,6 +212,9 @@ struct dm_pool_metadata {
 	 */
 	__u8 data_space_map_root[SPACE_MAP_ROOT_SIZE];
 	__u8 metadata_space_map_root[SPACE_MAP_ROOT_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -446,7 +456,10 @@ static void __setup_btree_details(struct dm_pool_metadata *pmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int save_sm_roots(struct dm_pool_metadata *pmd)
 {
 	int r;
@@ -479,13 +492,19 @@ static void copy_sm_roots(struct dm_pool_metadata *pmd,
 	       sizeof(pmd->data_space_map_root));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __write_initial_superblock(struct dm_pool_metadata *pmd)
 {
 	int r;
 	struct dm_block *sblock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t metadata_len, data_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct thin_disk_superblock *disk_super;
@@ -494,6 +513,7 @@ static int __write_initial_superblock(struct dm_pool_metadata *pmd)
 	if (bdev_size > THIN_METADATA_MAX_SECTORS)
 		bdev_size = THIN_METADATA_MAX_SECTORS;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = dm_sm_root_size(pmd->metadata_sm, &metadata_len);
 	if (r < 0)
@@ -505,11 +525,16 @@ static int __write_initial_superblock(struct dm_pool_metadata *pmd)
 
 	r = dm_sm_commit(pmd->data_sm);
 =======
+=======
+>>>>>>> v3.18
 	r = dm_sm_commit(pmd->data_sm);
 	if (r < 0)
 		return r;
 
 	r = save_sm_roots(pmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (r < 0)
 		return r;
@@ -532,6 +557,7 @@ static int __write_initial_superblock(struct dm_pool_metadata *pmd)
 	disk_super->held_root = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = dm_sm_copy_root(pmd->metadata_sm, &disk_super->metadata_space_map_root,
 			    metadata_len);
 	if (r < 0)
@@ -546,21 +572,29 @@ static int __write_initial_superblock(struct dm_pool_metadata *pmd)
 	disk_super->device_details_root = cpu_to_le64(pmd->details_root);
 	disk_super->metadata_block_size = cpu_to_le32(THIN_METADATA_BLOCK_SIZE >> SECTOR_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	copy_sm_roots(pmd, disk_super);
 
 	disk_super->data_mapping_root = cpu_to_le64(pmd->root);
 	disk_super->device_details_root = cpu_to_le64(pmd->details_root);
 	disk_super->metadata_block_size = cpu_to_le32(THIN_METADATA_BLOCK_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	disk_super->metadata_nr_blocks = cpu_to_le64(bdev_size >> SECTOR_TO_BLOCK_SHIFT);
 	disk_super->data_block_size = cpu_to_le32(pmd->data_block_size);
 
 	return dm_tm_commit(pmd->tm, sblock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 bad_locked:
 	dm_bm_unlock(sblock);
 	return r;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -732,7 +766,11 @@ static int __create_persistent_data_objects(struct dm_pool_metadata *pmd, bool f
 	int r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd->bm = dm_block_manager_create(pmd->bdev, THIN_METADATA_BLOCK_SIZE,
+=======
+	pmd->bm = dm_block_manager_create(pmd->bdev, THIN_METADATA_BLOCK_SIZE << SECTOR_SHIFT,
+>>>>>>> v3.18
 =======
 	pmd->bm = dm_block_manager_create(pmd->bdev, THIN_METADATA_BLOCK_SIZE << SECTOR_SHIFT,
 >>>>>>> v3.18
@@ -854,11 +892,17 @@ static int __commit_transaction(struct dm_pool_metadata *pmd)
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	r = save_sm_roots(pmd);
 	if (r < 0)
 		return r;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r = superblock_lock(pmd, &sblock);
 	if (r)
@@ -871,6 +915,7 @@ static int __commit_transaction(struct dm_pool_metadata *pmd)
 	disk_super->trans_id = cpu_to_le64(pmd->trans_id);
 	disk_super->flags = cpu_to_le32(pmd->flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = dm_sm_copy_root(pmd->metadata_sm, &disk_super->metadata_space_map_root,
 			    metadata_len);
@@ -887,6 +932,11 @@ static int __commit_transaction(struct dm_pool_metadata *pmd)
 out_locked:
 	dm_bm_unlock(sblock);
 	return r;
+=======
+	copy_sm_roots(pmd, disk_super);
+
+	return dm_tm_commit(pmd->tm, sblock);
+>>>>>>> v3.18
 =======
 	copy_sm_roots(pmd, disk_super);
 
@@ -1280,12 +1330,15 @@ static int __reserve_metadata_snap(struct dm_pool_metadata *pmd)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * We commit to ensure the btree roots which we increment in a
 	 * moment are up to date.
 	 */
 	__commit_transaction(pmd);
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * Copy the superblock.
@@ -1379,8 +1432,13 @@ static int __release_metadata_snap(struct dm_pool_metadata *pmd)
 
 	disk_super = dm_block_data(copy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dm_btree_del(&pmd->info, le64_to_cpu(disk_super->data_mapping_root));
 	dm_btree_del(&pmd->details_info, le64_to_cpu(disk_super->device_details_root));
+=======
+	dm_sm_dec_block(pmd->metadata_sm, le64_to_cpu(disk_super->data_mapping_root));
+	dm_sm_dec_block(pmd->metadata_sm, le64_to_cpu(disk_super->device_details_root));
+>>>>>>> v3.18
 =======
 	dm_sm_dec_block(pmd->metadata_sm, le64_to_cpu(disk_super->data_mapping_root));
 	dm_sm_dec_block(pmd->metadata_sm, le64_to_cpu(disk_super->device_details_root));
@@ -1846,7 +1904,10 @@ void dm_pool_metadata_read_only(struct dm_pool_metadata *pmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void dm_pool_metadata_read_write(struct dm_pool_metadata *pmd)
 {
 	down_write(&pmd->root_lock);
@@ -1855,6 +1916,9 @@ void dm_pool_metadata_read_write(struct dm_pool_metadata *pmd)
 	up_write(&pmd->root_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int dm_pool_register_metadata_threshold(struct dm_pool_metadata *pmd,
 					dm_block_t threshold,
@@ -1870,7 +1934,10 @@ int dm_pool_register_metadata_threshold(struct dm_pool_metadata *pmd,
 	return r;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int dm_pool_metadata_set_needs_check(struct dm_pool_metadata *pmd)
 {
@@ -1906,4 +1973,7 @@ bool dm_pool_metadata_needs_check(struct dm_pool_metadata *pmd)
 
 	return needs_check;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

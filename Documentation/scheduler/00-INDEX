@@ -3,6 +3,11 @@
 sched-arch.txt
 	- CPU Scheduler implementation hints for architecture specific code.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+sched-bwc.txt
+	- CFS bandwidth control overview.
+>>>>>>> v3.18
 =======
 sched-bwc.txt
 	- CFS bandwidth control overview.
@@ -16,6 +21,11 @@ sched-nice-design.txt
 sched-rt-group.txt
 	- real-time group scheduling.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+sched-deadline.txt
+	- deadline scheduling.
+>>>>>>> v3.18
 =======
 sched-deadline.txt
 	- deadline scheduling.

@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2013 Red Hat Inc.
+=======
+ * Copyright 2013-2014 Red Hat Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014 Red Hat Inc.
 >>>>>>> v3.18
@@ -24,6 +28,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <core/os.h>
 #include <core/event.h>
@@ -94,6 +99,8 @@ nouveau_event_destroy(struct nouveau_event **pevent)
 		kfree(event);
 		*pevent = NULL;
 =======
+=======
+>>>>>>> v3.18
 #include <core/object.h>
 #include <core/event.h>
 
@@ -152,11 +159,15 @@ nvkm_event_fini(struct nvkm_event *event)
 	if (event->refs) {
 		kfree(event->refs);
 		event->refs = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nouveau_event_create(int index_nr, struct nouveau_event **pevent)
 {
@@ -173,6 +184,8 @@ nouveau_event_create(int index_nr, struct nouveau_event **pevent)
 		INIT_LIST_HEAD(&event->index[i].list);
 	event->index_nr = index_nr;
 =======
+=======
+>>>>>>> v3.18
 nvkm_event_init(const struct nvkm_event_func *func, int types_nr, int index_nr,
 		struct nvkm_event *event)
 {
@@ -187,6 +200,9 @@ nvkm_event_init(const struct nvkm_event_func *func, int types_nr, int index_nr,
 	spin_lock_init(&event->refs_lock);
 	spin_lock_init(&event->list_lock);
 	INIT_LIST_HEAD(&event->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

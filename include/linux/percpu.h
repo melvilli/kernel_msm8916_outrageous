@@ -2,6 +2,10 @@
 #define __LINUX_PERCPU_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmdebug.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmdebug.h>
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
 	 PERCPU_MODULE_RESERVE)
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Must be an lvalue. Since @var must be a simple identifier,
@@ -55,6 +60,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* minimum unit size, also is the maximum supported allocation size */
 #define PCPU_MIN_UNIT_SIZE		PFN_ALIGN(32 << 10)
 
@@ -81,9 +88,15 @@
  */
 #if BITS_PER_LONG > 32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PERCPU_DYNAMIC_RESERVE		(20 << 10)
 #else
 #define PERCPU_DYNAMIC_RESERVE		(12 << 10)
+=======
+#define PERCPU_DYNAMIC_RESERVE		(28 << 10)
+#else
+#define PERCPU_DYNAMIC_RESERVE		(20 << 10)
+>>>>>>> v3.18
 =======
 #define PERCPU_DYNAMIC_RESERVE		(28 << 10)
 #else
@@ -153,6 +166,7 @@ extern int __init pcpu_page_first_chunk(size_t reserved_size,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Use this to get to a cpu's version of the per-cpu object
  * dynamically allocated. Non-atomic access to the current CPU's
@@ -166,6 +180,8 @@ extern int __init pcpu_page_first_chunk(size_t reserved_size,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 extern void __percpu *__alloc_reserved_percpu(size_t size, size_t align);
 extern bool is_kernel_percpu_address(unsigned long addr);
 
@@ -175,6 +191,10 @@ extern void __init setup_per_cpu_areas(void);
 extern void __init percpu_init_late(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __percpu *__alloc_percpu_gfp(size_t size, size_t align, gfp_t gfp);
+>>>>>>> v3.18
 =======
 extern void __percpu *__alloc_percpu_gfp(size_t size, size_t align, gfp_t gfp);
 >>>>>>> v3.18
@@ -182,6 +202,7 @@ extern void __percpu *__alloc_percpu(size_t size, size_t align);
 extern void free_percpu(void __percpu *__pdata);
 extern phys_addr_t per_cpu_ptr_to_phys(void *addr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define alloc_percpu(type)	\
 	(typeof(type) __percpu *)__alloc_percpu(sizeof(type), __alignof__(type))
@@ -776,12 +797,17 @@ do {									\
 	__pcpu_double_call_return_bool(__this_cpu_cmpxchg_double_, (pcp1), (pcp2), (oval1), (oval2), (nval1), (nval2))
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define alloc_percpu_gfp(type, gfp)					\
 	(typeof(type) __percpu *)__alloc_percpu_gfp(sizeof(type),	\
 						__alignof__(type), gfp)
 #define alloc_percpu(type)						\
 	(typeof(type) __percpu *)__alloc_percpu(sizeof(type),		\
 						__alignof__(type))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __LINUX_PERCPU_H */

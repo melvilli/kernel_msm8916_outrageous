@@ -18,6 +18,10 @@
 #include <linux/slab.h>
 #include <linux/pm_domain.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -27,8 +31,13 @@
 #include <linux/sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/regs-pmu.h>
 #include <plat/devs.h>
+=======
+#define INT_LOCAL_PWR_EN	0x7
+#define MAX_CLK_PER_DOMAIN	4
+>>>>>>> v3.18
 =======
 #define INT_LOCAL_PWR_EN	0x7
 #define MAX_CLK_PER_DOMAIN	4
@@ -43,6 +52,12 @@ struct exynos_pm_domain {
 	bool is_off;
 	struct generic_pm_domain pd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *oscclk;
+	struct clk *clk[MAX_CLK_PER_DOMAIN];
+	struct clk *pclk[MAX_CLK_PER_DOMAIN];
+>>>>>>> v3.18
 =======
 	struct clk *oscclk;
 	struct clk *clk[MAX_CLK_PER_DOMAIN];
@@ -61,8 +76,11 @@ static int exynos_pd_power(struct generic_pm_domain *domain, bool power_on)
 	base = pd->base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwr = power_on ? S5P_INT_LOCAL_PWR_EN : 0;
 =======
+=======
+>>>>>>> v3.18
 	/* Set oscclk before powering off a domain*/
 	if (!power_on) {
 		int i;
@@ -77,6 +95,9 @@ static int exynos_pd_power(struct generic_pm_domain *domain, bool power_on)
 	}
 
 	pwr = power_on ? INT_LOCAL_PWR_EN : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__raw_writel(pwr, base);
 
@@ -84,7 +105,11 @@ static int exynos_pd_power(struct generic_pm_domain *domain, bool power_on)
 	timeout = 10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((__raw_readl(base + 0x4) & S5P_INT_LOCAL_PWR_EN)	!= pwr) {
+=======
+	while ((__raw_readl(base + 0x4) & INT_LOCAL_PWR_EN) != pwr) {
+>>>>>>> v3.18
 =======
 	while ((__raw_readl(base + 0x4) & INT_LOCAL_PWR_EN) != pwr) {
 >>>>>>> v3.18
@@ -98,7 +123,10 @@ static int exynos_pd_power(struct generic_pm_domain *domain, bool power_on)
 		usleep_range(80, 100);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Restore clocks after powering on a domain*/
 	if (power_on) {
@@ -113,6 +141,9 @@ static int exynos_pd_power(struct generic_pm_domain *domain, bool power_on)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -127,6 +158,7 @@ static int exynos_pd_power_off(struct generic_pm_domain *domain)
 	return exynos_pd_power(domain, false);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXYNOS_GPD(PD, BASE, NAME)			\
 static struct exynos_pm_domain PD = {			\
@@ -215,6 +247,9 @@ static __init int exynos_pm_dt_parse_domains(void)
 =======
 static __init int exynos4_pm_init_power_domain(void)
 >>>>>>> v3.18
+=======
+static __init int exynos4_pm_init_power_domain(void)
+>>>>>>> v3.18
 {
 	struct platform_device *pdev;
 	struct device_node *np;
@@ -222,15 +257,21 @@ static __init int exynos4_pm_init_power_domain(void)
 	for_each_compatible_node(np, NULL, "samsung,exynos4210-pd") {
 		struct exynos_pm_domain *pd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int on;
 
 		pdev = of_find_device_by_node(np);
 =======
+=======
+>>>>>>> v3.18
 		int on, i;
 		struct device *dev;
 
 		pdev = of_find_device_by_node(np);
 		dev = &pdev->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		pd = kzalloc(sizeof(*pd), GFP_KERNEL);
@@ -245,6 +286,7 @@ static __init int exynos4_pm_init_power_domain(void)
 		pd->base = of_iomap(np, 0);
 		pd->pd.power_off = exynos_pd_power_off;
 		pd->pd.power_on = exynos_pd_power_on;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pd->pd.of_node = np;
 
@@ -355,6 +397,8 @@ int __init exynos_pm_late_initcall(void)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 
 		pd->oscclk = clk_get(dev, "oscclk");
 		if (IS_ERR(pd->oscclk))
@@ -389,4 +433,7 @@ no_clk:
 	return 0;
 }
 arch_initcall(exynos4_pm_init_power_domain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

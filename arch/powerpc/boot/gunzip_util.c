@@ -113,15 +113,21 @@ int gunzip_partial(struct gunzip_state *state, void *dst, int dstlen)
 		if (r != Z_OK && r != Z_STREAM_END)
 			fatal("inflate returned %d msg: %s\n\r", r, state->s.msg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = state->s.next_out - (unsigned char *)dst;
 	} else {
 		/* uncompressed image */
 		len = min(state->s.avail_in, (unsigned)dstlen);
 =======
+=======
+>>>>>>> v3.18
 		len = state->s.next_out - (Byte *)dst;
 	} else {
 		/* uncompressed image */
 		len = min(state->s.avail_in, (uLong)dstlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(dst, state->s.next_in, len);
 		state->s.next_in += len;

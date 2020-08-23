@@ -24,7 +24,11 @@
 
 /* MPC5200 device tree match tables */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_xlb_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_xlb_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_xlb_ids[] __initconst = {
 >>>>>>> v3.18
@@ -33,7 +37,11 @@ static const struct of_device_id mpc52xx_xlb_ids[] __initconst = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_bus_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_bus_ids[] __initconst = {
 >>>>>>> v3.18
@@ -117,7 +125,11 @@ void __init mpc52xx_declare_of_platform_devices(void)
  * match tables used by mpc52xx_map_common_devices()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_gpt_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_gpt_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_gpt_ids[] __initconst = {
 >>>>>>> v3.18
@@ -126,7 +138,11 @@ static const struct of_device_id mpc52xx_gpt_ids[] __initconst = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_cdm_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_cdm_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_cdm_ids[] __initconst = {
 >>>>>>> v3.18
@@ -135,17 +151,23 @@ static const struct of_device_id mpc52xx_cdm_ids[] __initconst = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id mpc52xx_gpio_simple[] = {
 	{ .compatible = "fsl,mpc5200-gpio", },
 	{}
 };
 static const struct of_device_id mpc52xx_gpio_wkup[] = {
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id mpc52xx_gpio_simple[] __initconst = {
 	{ .compatible = "fsl,mpc5200-gpio", },
 	{}
 };
 static const struct of_device_id mpc52xx_gpio_wkup[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-gpio-wkup", },
 	{}

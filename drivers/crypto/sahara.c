@@ -418,7 +418,11 @@ static void sahara_aes_done_task(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sahara_watchdog(unsigned long data)
+=======
+static void sahara_watchdog(unsigned long data)
+>>>>>>> v3.18
 =======
 static void sahara_watchdog(unsigned long data)
 >>>>>>> v3.18
@@ -733,7 +737,11 @@ static int sahara_aes_cbc_decrypt(struct ablkcipher_request *req)
 static int sahara_aes_cra_init(struct crypto_tfm *tfm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *name = tfm->__crt_alg->cra_name;
+=======
+	const char *name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 =======
 	const char *name = crypto_tfm_alg_name(tfm);
 >>>>>>> v3.18
@@ -894,6 +902,7 @@ static int sahara_probe(struct platform_device *pdev)
 	/* Get the base address */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "failed to get memory region resource\n");
 		return -ENODEV;
@@ -915,6 +924,11 @@ static int sahara_probe(struct platform_device *pdev)
 	if (IS_ERR(dev->regs_base))
 		return PTR_ERR(dev->regs_base);
 >>>>>>> v3.18
+=======
+	dev->regs_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(dev->regs_base))
+		return PTR_ERR(dev->regs_base);
+>>>>>>> v3.18
 
 	/* Get the IRQ */
 	irq = platform_get_irq(pdev,  0);
@@ -924,16 +938,22 @@ static int sahara_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (devm_request_irq(&pdev->dev, irq, sahara_irq_handler,
 		0, SAHARA_NAME, dev) < 0) {
 		dev_err(&pdev->dev, "failed to request irq\n");
 		return -ENOENT;
 =======
+=======
+>>>>>>> v3.18
 	err = devm_request_irq(&pdev->dev, irq, sahara_irq_handler,
 			       0, dev_name(&pdev->dev), dev);
 	if (err) {
 		dev_err(&pdev->dev, "failed to request irq\n");
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -978,7 +998,11 @@ static int sahara_probe(struct platform_device *pdev)
 			SAHARA_MAX_HW_LINK * sizeof(struct sahara_hw_link),
 			&dev->hw_phys_link[0], GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->hw_link) {
+=======
+	if (!dev->hw_link[0]) {
+>>>>>>> v3.18
 =======
 	if (!dev->hw_link[0]) {
 >>>>>>> v3.18
@@ -1085,7 +1109,11 @@ static struct platform_driver sahara_driver = {
 		.name	= SAHARA_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(sahara_dt_ids),
+=======
+		.of_match_table = sahara_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = sahara_dt_ids,
 >>>>>>> v3.18

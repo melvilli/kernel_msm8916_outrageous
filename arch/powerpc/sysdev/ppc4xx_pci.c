@@ -177,15 +177,21 @@ static int __init ppc4xx_parse_dma_ranges(struct pci_controller *hose,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check that we are fully contained within 32 bits space */
 	if (res->end > 0xffffffff) {
 =======
+=======
+>>>>>>> v3.18
 	/* Check that we are fully contained within 32 bits space if we are not
 	 * running on a 460sx or 476fpe which have 64 bit bus addresses.
 	 */
 	if (res->end > 0xffffffff &&
 	    !(of_device_is_compatible(hose->dn, "ibm,plb-pciex-460sx")
 	      || of_device_is_compatible(hose->dn, "ibm,plb-pciex-476fpe"))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "%s: dma-ranges outside of 32 bits space\n",
 		       hose->dn->full_name);
@@ -1068,7 +1074,11 @@ static int __init apm821xx_pciex_core_init(struct device_node *np)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int apm821xx_pciex_init_port_hw(struct ppc4xx_pciex_port *port)
+=======
+static int __init apm821xx_pciex_init_port_hw(struct ppc4xx_pciex_port *port)
+>>>>>>> v3.18
 =======
 static int __init apm821xx_pciex_init_port_hw(struct ppc4xx_pciex_port *port)
 >>>>>>> v3.18
@@ -1454,7 +1464,12 @@ static int __init ppc4xx_pciex_check_core_init(struct device_node *np)
 #endif
 #ifdef CONFIG_476FPE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_device_is_compatible(np, "ibm,plb-pciex-476fpe"))
+=======
+	if (of_device_is_compatible(np, "ibm,plb-pciex-476fpe")
+		|| of_device_is_compatible(np, "ibm,plb-pciex-476gtr"))
+>>>>>>> v3.18
 =======
 	if (of_device_is_compatible(np, "ibm,plb-pciex-476fpe")
 		|| of_device_is_compatible(np, "ibm,plb-pciex-476gtr"))
@@ -1770,12 +1785,18 @@ static int __init ppc4xx_setup_one_pciex_POM(struct ppc4xx_pciex_port	*port,
 				sa | DCRO_PEGPL_460SX_OMR1MSKL_UOT
 					| DCRO_PEGPL_OMRxMSKL_VAL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (of_device_is_compatible(port->node, "ibm,plb-pciex-476fpe"))
 =======
+=======
+>>>>>>> v3.18
 		else if (of_device_is_compatible(
 				port->node, "ibm,plb-pciex-476fpe") ||
 			of_device_is_compatible(
 				port->node, "ibm,plb-pciex-476gtr"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dcr_write(port->dcrs, DCRO_PEGPL_OMR1MSKL,
 				sa | DCRO_PEGPL_476FPE_OMR1MSKL_UOT
@@ -1907,12 +1928,18 @@ static void __init ppc4xx_configure_pciex_PIMs(struct ppc4xx_pciex_port *port,
 
 		if (of_device_is_compatible(port->node, "ibm,plb-pciex-460sx") ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    of_device_is_compatible(port->node, "ibm,plb-pciex-476fpe"))
 =======
+=======
+>>>>>>> v3.18
 		    of_device_is_compatible(
 			    port->node, "ibm,plb-pciex-476fpe") ||
 		    of_device_is_compatible(
 			    port->node, "ibm,plb-pciex-476gtr"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sa |= PCI_BASE_ADDRESS_MEM_TYPE_64;
 

@@ -10,7 +10,11 @@
 #define NFSDBG_FACILITY		NFSDBG_CLIENT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh)
+=======
+int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh, bool auth_probe)
+>>>>>>> v3.18
 =======
 int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh, bool auth_probe)
 >>>>>>> v3.18
@@ -26,7 +30,11 @@ int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh, bool auth_p
 
 	/* Start by getting the root filehandle from the server */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nfs4_proc_get_rootfh(server, mntfh, &fsinfo);
+=======
+	ret = nfs4_proc_get_rootfh(server, mntfh, &fsinfo, auth_probe);
+>>>>>>> v3.18
 =======
 	ret = nfs4_proc_get_rootfh(server, mntfh, &fsinfo, auth_probe);
 >>>>>>> v3.18

@@ -17,7 +17,10 @@ codec: wm8731@1a {
 	reg = <0x1a>;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Available audio endpoints for an audio-routing table:
  * LOUT: Left Channel Line Output
@@ -27,4 +30,7 @@ Available audio endpoints for an audio-routing table:
  * LLINEIN: Left Channel Line Input
  * RLINEIN: Right Channel Line Input
  * MICIN: Microphone Input
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -540,6 +540,7 @@ static int lpc32xx_write_page_lowlevel(struct mtd_info *mtd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lpc32xx_write_page(struct mtd_info *mtd, struct nand_chip *chip,
 			uint32_t offset, int data_len, const uint8_t *buf,
 			int oob_required, int page, int cached, int raw)
@@ -554,6 +555,8 @@ static int lpc32xx_write_page(struct mtd_info *mtd, struct nand_chip *chip,
 	return res;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int lpc32xx_read_oob(struct mtd_info *mtd, struct nand_chip *chip,
@@ -631,10 +634,15 @@ static struct lpc32xx_nand_cfg_mlc *lpc32xx_parse_dt(struct device *dev)
 
 	ncfg = devm_kzalloc(dev, sizeof(*ncfg), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ncfg) {
 		dev_err(dev, "could not allocate memory for platform data\n");
 		return NULL;
 	}
+=======
+	if (!ncfg)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!ncfg)
 		return NULL;
@@ -675,10 +683,15 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	/* Allocate memory for the device structure (and zero it) */
 	host = devm_kzalloc(&pdev->dev, sizeof(*host), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host) {
 		dev_err(&pdev->dev, "failed to allocate device structure.\n");
 		return -ENOMEM;
 	}
+=======
+	if (!host)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!host)
 		return -ENOMEM;
@@ -710,7 +723,11 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	lpc32xx_wp_disable(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->pdata = pdev->dev.platform_data;
+=======
+	host->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	host->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -750,9 +767,15 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	nand_chip->ecc.read_oob = lpc32xx_read_oob;
 	nand_chip->ecc.strength = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nand_chip->write_page = lpc32xx_write_page;
 	nand_chip->waitfunc = lpc32xx_waitfunc;
 
+=======
+	nand_chip->waitfunc = lpc32xx_waitfunc;
+
+	nand_chip->options = NAND_NO_SUBPAGE_WRITE;
+>>>>>>> v3.18
 =======
 	nand_chip->waitfunc = lpc32xx_waitfunc;
 
@@ -763,12 +786,15 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	nand_chip->bbt_md = &lpc32xx_nand_bbt_mirror;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* bitflip_threshold's default is defined as ecc_strength anyway.
 	 * Unfortunately, it is set only later at add_mtd_device(). Meanwhile
 	 * being 0, it causes bad block table scanning errors in
 	 * nand_scan_tail(), so preparing it here. */
 	mtd->bitflip_threshold = nand_chip->ecc.strength;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (use_dma) {
@@ -791,7 +817,10 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	host->dma_buf = devm_kzalloc(&pdev->dev, mtd->writesize, GFP_KERNEL);
 	if (!host->dma_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "Error allocating dma_buf memory\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		res = -ENOMEM;
@@ -801,7 +830,10 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	host->dummy_buf = devm_kzalloc(&pdev->dev, mtd->writesize, GFP_KERNEL);
 	if (!host->dummy_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "Error allocating dummy_buf memory\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		res = -ENOMEM;
@@ -861,7 +893,10 @@ err_exit2:
 	clk_disable(host->clk);
 	clk_put(host->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_exit1:
@@ -887,7 +922,10 @@ static int lpc32xx_nand_remove(struct platform_device *pdev)
 	clk_disable(host->clk);
 	clk_put(host->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -946,7 +984,11 @@ static struct platform_driver lpc32xx_nand_driver = {
 		.name	= DRV_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(lpc32xx_nand_match),
+=======
+		.of_match_table = lpc32xx_nand_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = lpc32xx_nand_match,
 >>>>>>> v3.18

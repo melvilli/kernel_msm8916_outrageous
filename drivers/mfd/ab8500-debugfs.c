@@ -136,15 +136,21 @@ struct ab8500_prcmu_ranges {
 struct hwreg_cfg {
 	u32  bank;      /* target bank */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32  addr;      /* target address */
 	uint fmt;       /* format */
 	uint mask;      /* read/write mask, applied before any bit shift */
 	int  shift;     /* bit shift (read:right shift, write:left shift */
 =======
+=======
+>>>>>>> v3.18
 	unsigned long addr;      /* target address */
 	uint fmt;       /* format */
 	unsigned long mask; /* read/write mask, applied before any bit shift */
 	long shift;     /* bit shift (read:right shift, write:left shift */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 /* fmt bit #0: 0=hexa, 1=dec */
@@ -167,7 +173,11 @@ static struct hwreg_cfg hwreg_cfg = {
 static struct ab8500_prcmu_ranges *debug_ranges;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ab8500_prcmu_ranges ab8500_debug_ranges[AB8500_NUM_BANKS] = {
+=======
+static struct ab8500_prcmu_ranges ab8500_debug_ranges[AB8500_NUM_BANKS] = {
+>>>>>>> v3.18
 =======
 static struct ab8500_prcmu_ranges ab8500_debug_ranges[AB8500_NUM_BANKS] = {
 >>>>>>> v3.18
@@ -500,7 +510,11 @@ static struct ab8500_prcmu_ranges ab8500_debug_ranges[AB8500_NUM_BANKS] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ab8500_prcmu_ranges ab8505_debug_ranges[AB8500_NUM_BANKS] = {
+=======
+static struct ab8500_prcmu_ranges ab8505_debug_ranges[AB8500_NUM_BANKS] = {
+>>>>>>> v3.18
 =======
 static struct ab8500_prcmu_ranges ab8505_debug_ranges[AB8500_NUM_BANKS] = {
 >>>>>>> v3.18
@@ -863,7 +877,11 @@ static struct ab8500_prcmu_ranges ab8505_debug_ranges[AB8500_NUM_BANKS] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ab8500_prcmu_ranges ab8540_debug_ranges[AB8500_NUM_BANKS] = {
+=======
+static struct ab8500_prcmu_ranges ab8540_debug_ranges[AB8500_NUM_BANKS] = {
+>>>>>>> v3.18
 =======
 static struct ab8500_prcmu_ranges ab8540_debug_ranges[AB8500_NUM_BANKS] = {
 >>>>>>> v3.18
@@ -1324,8 +1342,14 @@ static int ab8500_registers_print(struct device *dev, u32 bank,
 
 			if (s) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				err = seq_printf(s, "  [0x%02X/0x%02X]: 0x%02X\n",
 					bank, reg, value);
+=======
+				err = seq_printf(s,
+						 "  [0x%02X/0x%02X]: 0x%02X\n",
+						 bank, reg, value);
+>>>>>>> v3.18
 =======
 				err = seq_printf(s,
 						 "  [0x%02X/0x%02X]: 0x%02X\n",
@@ -1338,8 +1362,13 @@ static int ab8500_registers_print(struct device *dev, u32 bank,
 				}
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO" [0x%02X/0x%02X]: 0x%02X\n",
 					bank, reg, value);
+=======
+				dev_info(dev, " [0x%02X/0x%02X]: 0x%02X\n",
+					 bank, reg, value);
+>>>>>>> v3.18
 =======
 				dev_info(dev, " [0x%02X/0x%02X]: 0x%02X\n",
 					 bank, reg, value);
@@ -1356,7 +1385,11 @@ static int ab8500_print_bank_registers(struct seq_file *s, void *p)
 	u32 bank = debug_bank;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, AB8500_NAME_STRING " register values:\n");
+=======
+	seq_puts(s, AB8500_NAME_STRING " register values:\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, AB8500_NAME_STRING " register values:\n");
 >>>>>>> v3.18
@@ -1385,6 +1418,7 @@ static int ab8500_print_all_banks(struct seq_file *s, void *p)
 	struct device *dev = s->private;
 	unsigned int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	seq_printf(s, AB8500_NAME_STRING " register values:\n");
@@ -1392,11 +1426,16 @@ static int ab8500_print_all_banks(struct seq_file *s, void *p)
 	for (i = 0; i < AB8500_NUM_BANKS; i++) {
 		err = seq_printf(s, " bank 0x%02X:\n", i);
 =======
+=======
+>>>>>>> v3.18
 
 	seq_puts(s, AB8500_NAME_STRING " register values:\n");
 
 	for (i = 0; i < AB8500_NUM_BANKS; i++) {
 		seq_printf(s, " bank 0x%02X:\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ab8500_registers_print(dev, i, s);
@@ -1410,15 +1449,21 @@ void ab8500_dump_all_banks(struct device *dev)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO"ab8500 register values:\n");
 
 	for (i = 1; i < AB8500_NUM_BANKS; i++) {
 		printk(KERN_INFO" bank 0x%02X:\n", i);
 =======
+=======
+>>>>>>> v3.18
 	dev_info(dev, "ab8500 register values:\n");
 
 	for (i = 1; i < AB8500_NUM_BANKS; i++) {
 		dev_info(dev, " bank 0x%02X:\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ab8500_registers_print(dev, i, NULL);
 	}
@@ -1427,7 +1472,11 @@ void ab8500_dump_all_banks(struct device *dev)
 /* Space for 500 registers. */
 #define DUMP_MAX_REGS 700
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ab8500_register_dump
+=======
+static struct ab8500_register_dump
+>>>>>>> v3.18
 =======
 static struct ab8500_register_dump
 >>>>>>> v3.18
@@ -1438,8 +1487,11 @@ static struct ab8500_register_dump
 } ab8500_complete_register_dump[DUMP_MAX_REGS];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int prcmu_abb_read(u8 slave, u8 reg, u8 *value, u8 size);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* This shall only be called upon kernel panic! */
@@ -1450,8 +1502,12 @@ void ab8500_dump_all_banks_to_mem(void)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Saving all ABB registers at \"ab8500_complete_register_dump\" "
 		"for crash analyze.\n");
+=======
+	pr_info("Saving all ABB registers for crash analysis.\n");
+>>>>>>> v3.18
 =======
 	pr_info("Saving all ABB registers for crash analysis.\n");
 >>>>>>> v3.18
@@ -1625,7 +1681,11 @@ static ssize_t ab8500_val_write(struct file *file,
 		(u8)debug_bank, debug_address, (u8)user_val);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "abx500_set_reg failed %d, %d", err, __LINE__);
+=======
+		pr_err("abx500_set_reg failed %d, %d", err, __LINE__);
+>>>>>>> v3.18
 =======
 		pr_err("abx500_set_reg failed %d, %d", err, __LINE__);
 >>>>>>> v3.18
@@ -1661,16 +1721,22 @@ static int ab8500_interrupts_print(struct seq_file *s, void *p)
 	int line;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "name: number:  number of: wake:\n");
 
 	for (line = 0; line < num_interrupt_lines; line++) {
 		struct irq_desc *desc = irq_to_desc(line + irq_first);
 		struct irqaction *action = desc->action;
 =======
+=======
+>>>>>>> v3.18
 	seq_puts(s, "name: number:  number of: wake:\n");
 
 	for (line = 0; line < num_interrupt_lines; line++) {
 		struct irq_desc *desc = irq_to_desc(line + irq_first);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		seq_printf(s, "%3i:  %6i %4i", line,
@@ -1680,7 +1746,13 @@ static int ab8500_interrupts_print(struct seq_file *s, void *p)
 		if (desc && desc->name)
 			seq_printf(s, "-%-8s", desc->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (action) {
+=======
+		if (desc && desc->action) {
+			struct irqaction *action = desc->action;
+
+>>>>>>> v3.18
 =======
 		if (desc && desc->action) {
 			struct irqaction *action = desc->action;
@@ -1799,7 +1871,12 @@ static int ab8500_print_modem_registers(struct seq_file *s, void *p)
 static int ab8500_modem_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, ab8500_print_modem_registers, inode->i_private);
+=======
+	return single_open(file, ab8500_print_modem_registers,
+			   inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, ab8500_print_modem_registers,
 			   inode->i_private);
@@ -1833,7 +1910,12 @@ static int ab8500_gpadc_bat_ctrl_print(struct seq_file *s, void *p)
 static int ab8500_gpadc_bat_ctrl_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, ab8500_gpadc_bat_ctrl_print, inode->i_private);
+=======
+	return single_open(file, ab8500_gpadc_bat_ctrl_print,
+			   inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, ab8500_gpadc_bat_ctrl_print,
 			   inode->i_private);
@@ -1868,7 +1950,12 @@ static int ab8500_gpadc_btemp_ball_open(struct inode *inode,
 					struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, ab8500_gpadc_btemp_ball_print, inode->i_private);
+=======
+	return single_open(file, ab8500_gpadc_btemp_ball_print,
+			   inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, ab8500_gpadc_btemp_ball_print,
 			   inode->i_private);
@@ -2054,7 +2141,12 @@ static int ab8500_gpadc_main_bat_v_open(struct inode *inode,
 					struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, ab8500_gpadc_main_bat_v_print, inode->i_private);
+=======
+	return single_open(file, ab8500_gpadc_main_bat_v_print,
+			   inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, ab8500_gpadc_main_bat_v_print,
 			   inode->i_private);
@@ -2179,7 +2271,12 @@ static int ab8500_gpadc_bk_bat_v_print(struct seq_file *s, void *p)
 static int ab8500_gpadc_bk_bat_v_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, ab8500_gpadc_bk_bat_v_print, inode->i_private);
+=======
+	return single_open(file, ab8500_gpadc_bk_bat_v_print,
+			   inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, ab8500_gpadc_bk_bat_v_print,
 			   inode->i_private);
@@ -2213,7 +2310,12 @@ static int ab8500_gpadc_die_temp_print(struct seq_file *s, void *p)
 static int ab8500_gpadc_die_temp_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, ab8500_gpadc_die_temp_print, inode->i_private);
+=======
+	return single_open(file, ab8500_gpadc_die_temp_print,
+			   inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, ab8500_gpadc_die_temp_print,
 			   inode->i_private);
@@ -2297,8 +2399,14 @@ static int ab8540_gpadc_vbat_true_meas_print(struct seq_file *s, void *p)
 	vbat_true_meas_raw = ab8500_gpadc_read_raw(gpadc, VBAT_TRUE_MEAS,
 		avg_sample, trig_edge, trig_timer, conv_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vbat_true_meas_convert = ab8500_gpadc_ad_to_voltage(gpadc, VBAT_TRUE_MEAS,
 		vbat_true_meas_raw);
+=======
+	vbat_true_meas_convert =
+		ab8500_gpadc_ad_to_voltage(gpadc, VBAT_TRUE_MEAS,
+					   vbat_true_meas_raw);
+>>>>>>> v3.18
 =======
 	vbat_true_meas_convert =
 		ab8500_gpadc_ad_to_voltage(gpadc, VBAT_TRUE_MEAS,
@@ -2398,7 +2506,12 @@ static const struct file_operations ab8540_gpadc_vbat_meas_and_ibat_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ab8540_gpadc_vbat_true_meas_and_ibat_print(struct seq_file *s, void *p)
+=======
+static int ab8540_gpadc_vbat_true_meas_and_ibat_print(struct seq_file *s,
+						      void *p)
+>>>>>>> v3.18
 =======
 static int ab8540_gpadc_vbat_true_meas_and_ibat_print(struct seq_file *s,
 						      void *p)
@@ -2432,7 +2545,12 @@ static int ab8540_gpadc_vbat_true_meas_and_ibat_open(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct file_operations ab8540_gpadc_vbat_true_meas_and_ibat_fops = {
+=======
+static const struct file_operations
+ab8540_gpadc_vbat_true_meas_and_ibat_fops = {
+>>>>>>> v3.18
 =======
 static const struct file_operations
 ab8540_gpadc_vbat_true_meas_and_ibat_fops = {
@@ -2491,6 +2609,7 @@ static int ab8540_gpadc_otp_cal_print(struct seq_file *s, void *p)
 			&vbat_l, &vbat_h, &ibat_l, &ibat_h);
 	return seq_printf(s, "VMAIN_L:0x%X\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"VMAIN_H:0x%X\n"
 		"BTEMP_L:0x%X\n"
 		"BTEMP_H:0x%X\n"
@@ -2500,6 +2619,8 @@ static int ab8540_gpadc_otp_cal_print(struct seq_file *s, void *p)
 		"IBAT_H:0x%X\n",
 		vmain_l, vmain_h, btemp_l, btemp_h, vbat_l, vbat_h, ibat_l, ibat_h);
 =======
+=======
+>>>>>>> v3.18
 			  "VMAIN_H:0x%X\n"
 			  "BTEMP_L:0x%X\n"
 			  "BTEMP_H:0x%X\n"
@@ -2509,6 +2630,9 @@ static int ab8540_gpadc_otp_cal_print(struct seq_file *s, void *p)
 			  "IBAT_H:0x%X\n",
 			  vmain_l, vmain_h, btemp_l, btemp_h,
 			  vbat_l, vbat_h, ibat_l, ibat_h);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2554,8 +2678,13 @@ static ssize_t ab8500_gpadc_avg_sample_write(struct file *file,
 		avg_sample = (u8) user_avg_sample;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "debugfs error input: "
 			"should be egal to 1, 4, 8 or 16\n");
+=======
+		dev_err(dev,
+			"debugfs err input: should be egal to 1, 4, 8 or 16\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev,
 			"debugfs err input: should be egal to 1, 4, 8 or 16\n");
@@ -2644,6 +2773,7 @@ static ssize_t ab8500_gpadc_trig_timer_write(struct file *file,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((user_trig_timer >= 0) && (user_trig_timer <= 255)) {
 		trig_timer = (u8) user_trig_timer;
 	} else {
@@ -2653,6 +2783,8 @@ static ssize_t ab8500_gpadc_trig_timer_write(struct file *file,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (user_trig_timer & ~0xFF) {
 		dev_err(dev,
 			"debugfs error input: should be beetween 0 to 255\n");
@@ -2661,6 +2793,9 @@ static ssize_t ab8500_gpadc_trig_timer_write(struct file *file,
 
 	trig_timer = (u8) user_trig_timer;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -2730,6 +2865,10 @@ static int strval_len(char *b)
 {
 	char *s = b;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2798,7 +2937,13 @@ static ssize_t hwreg_common_write(char *b, struct hwreg_cfg *cfg,
 			if (strval_len(b) == 0)
 				return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			loc.mask = simple_strtoul(b, &b, 0);
+=======
+			ret = kstrtoul(b, 0, &loc.mask);
+			if (ret)
+				return ret;
+>>>>>>> v3.18
 =======
 			ret = kstrtoul(b, 0, &loc.mask);
 			if (ret)
@@ -2810,7 +2955,13 @@ static ssize_t hwreg_common_write(char *b, struct hwreg_cfg *cfg,
 			if (strval_len(b) == 0)
 				return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			loc.shift = simple_strtol(b, &b, 0);
+=======
+			ret = kstrtol(b, 0, &loc.shift);
+			if (ret)
+				return ret;
+>>>>>>> v3.18
 =======
 			ret = kstrtol(b, 0, &loc.shift);
 			if (ret)
@@ -2824,7 +2975,13 @@ static ssize_t hwreg_common_write(char *b, struct hwreg_cfg *cfg,
 	if (strval_len(b) == 0)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loc.bank = simple_strtoul(b, &b, 0);
+=======
+	ret = kstrtouint(b, 0, &loc.bank);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtouint(b, 0, &loc.bank);
 	if (ret)
@@ -2835,7 +2992,13 @@ static ssize_t hwreg_common_write(char *b, struct hwreg_cfg *cfg,
 	if (strval_len(b) == 0)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loc.addr = simple_strtoul(b, &b, 0);
+=======
+	ret = kstrtoul(b, 0, &loc.addr);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(b, 0, &loc.addr);
 	if (ret)
@@ -2848,7 +3011,13 @@ static ssize_t hwreg_common_write(char *b, struct hwreg_cfg *cfg,
 		if (strval_len(b) == 0)
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = simple_strtoul(b, &b, 0);
+=======
+		ret = kstrtouint(b, 0, &val);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 =======
 		ret = kstrtouint(b, 0, &val);
 		if (ret)
@@ -2861,16 +3030,22 @@ static ssize_t hwreg_common_write(char *b, struct hwreg_cfg *cfg,
 
 #ifdef ABB_HWREG_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warn("HWREG request: %s, %s, addr=0x%08X, mask=0x%X, shift=%d"
 			"value=0x%X\n", (write) ? "write" : "read",
 			REG_FMT_DEC(cfg) ? "decimal" : "hexa",
 			cfg->addr, cfg->mask, cfg->shift, val);
 =======
+=======
+>>>>>>> v3.18
 	pr_warn("HWREG request: %s, %s,\n"
 		"  addr=0x%08X, mask=0x%X, shift=%d" "value=0x%X\n",
 		(write) ? "write" : "read",
 		REG_FMT_DEC(cfg) ? "decimal" : "hexa",
 		cfg->addr, cfg->mask, cfg->shift, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -2951,7 +3126,11 @@ static ssize_t show_irq(struct device *dev,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(attr->attr.name, 0, &name);
+=======
+	err = kstrtoul(attr->attr.name, 0, &name);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(attr->attr.name, 0, &name);
 >>>>>>> v3.18
@@ -2962,8 +3141,13 @@ static ssize_t show_irq(struct device *dev,
 	if (irq_index >= num_irqs)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return sprintf(buf, "%u\n", irq_count[irq_index]);
+=======
+
+	return sprintf(buf, "%u\n", irq_count[irq_index]);
+>>>>>>> v3.18
 =======
 
 	return sprintf(buf, "%u\n", irq_count[irq_index]);
@@ -3003,8 +3187,11 @@ static ssize_t ab8500_subscribe_write(struct file *file,
 	dev_attr[irq_index] = kmalloc(sizeof(struct device_attribute),
 		GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event_name[irq_index] = kmalloc(count, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (!dev_attr[irq_index])
 		return -ENOMEM;
 
@@ -3012,6 +3199,9 @@ static ssize_t ab8500_subscribe_write(struct file *file,
 	if (!event_name[irq_index])
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sprintf(event_name[irq_index], "%lu", user_val);
 	dev_attr[irq_index]->show = show_irq;
@@ -3021,7 +3211,11 @@ static ssize_t ab8500_subscribe_write(struct file *file,
 	err = sysfs_create_file(&dev->kobj, &dev_attr[irq_index]->attr);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "sysfs_create_file failed %d\n", err);
+=======
+		pr_info("sysfs_create_file failed %d\n", err);
+>>>>>>> v3.18
 =======
 		pr_info("sysfs_create_file failed %d\n", err);
 >>>>>>> v3.18
@@ -3033,8 +3227,13 @@ static ssize_t ab8500_subscribe_write(struct file *file,
 				   "ab8500-debug", &dev->kobj);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "request_threaded_irq failed %d, %lu\n",
                        err, user_val);
+=======
+		pr_info("request_threaded_irq failed %d, %lu\n",
+			err, user_val);
+>>>>>>> v3.18
 =======
 		pr_info("request_threaded_irq failed %d, %lu\n",
 			err, user_val);
@@ -3159,9 +3358,15 @@ static int ab8500_debug_probe(struct platform_device *plf)
 {
 	struct dentry *file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -ENOMEM;
 	struct ab8500 *ab8500;
 	struct resource *res;
+=======
+	struct ab8500 *ab8500;
+	struct resource *res;
+
+>>>>>>> v3.18
 =======
 	struct ab8500 *ab8500;
 	struct resource *res;
@@ -3173,6 +3378,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	ab8500 = dev_get_drvdata(plf->dev.parent);
 	num_irqs = ab8500->mask_size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	irq_count = kzalloc(sizeof(*irq_count)*num_irqs, GFP_KERNEL);
 	if (!irq_count)
@@ -3193,6 +3399,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		ret = -ENXIO;
 		goto out_freeevent_name;
 =======
+=======
+>>>>>>> v3.18
 	irq_count = devm_kzalloc(&plf->dev,
 				 sizeof(*irq_count)*num_irqs, GFP_KERNEL);
 	if (!irq_count)
@@ -3212,12 +3420,16 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	if (!res) {
 		dev_err(&plf->dev, "AB8500 irq not found, err %d\n", irq_first);
 		return -ENXIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	irq_ab8500 = res->start;
 
 	irq_first = platform_get_irq_byname(plf, "IRQ_FIRST");
 	if (irq_first < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_err(&plf->dev, "First irq not found, err %d\n",
 			irq_first);
@@ -3227,15 +3439,24 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		dev_err(&plf->dev, "First irq not found, err %d\n", irq_first);
 		return irq_first;
 >>>>>>> v3.18
+=======
+		dev_err(&plf->dev, "First irq not found, err %d\n", irq_first);
+		return irq_first;
+>>>>>>> v3.18
 	}
 
 	irq_last = platform_get_irq_byname(plf, "IRQ_LAST");
 	if (irq_last < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&plf->dev, "Last irq not found, err %d\n",
 			irq_last);
 		ret = irq_last;
 		goto out_freeevent_name;
+=======
+		dev_err(&plf->dev, "Last irq not found, err %d\n", irq_last);
+		return irq_last;
+>>>>>>> v3.18
 =======
 		dev_err(&plf->dev, "Last irq not found, err %d\n", irq_last);
 		return irq_last;
@@ -3247,6 +3468,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		goto err;
 
 	ab8500_gpadc_dir = debugfs_create_dir(AB8500_ADC_NAME_STRING,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ab8500_dir);
 	if (!ab8500_gpadc_dir)
@@ -3280,6 +3502,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("irq-subscribe", (S_IRUGO | S_IWUSR | S_IWGRP),
 		ab8500_dir, &plf->dev, &ab8500_subscribe_fops);
 =======
+=======
+>>>>>>> v3.18
 					      ab8500_dir);
 	if (!ab8500_gpadc_dir)
 		goto err;
@@ -3315,6 +3539,9 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("irq-subscribe",
 				   (S_IRUGO | S_IWUSR | S_IWGRP), ab8500_dir,
 				   &plf->dev, &ab8500_subscribe_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!file)
 		goto err;
@@ -3334,6 +3561,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file = debugfs_create_file("interrupts", (S_IRUGO),
 		ab8500_dir, &plf->dev, &ab8500_interrupts_fops);
 	if (!file)
@@ -3342,6 +3570,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("irq-unsubscribe", (S_IRUGO | S_IWUSR | S_IWGRP),
 		ab8500_dir, &plf->dev, &ab8500_unsubscribe_fops);
 =======
+=======
+>>>>>>> v3.18
 	file = debugfs_create_file("interrupts", (S_IRUGO), ab8500_dir,
 				   &plf->dev, &ab8500_interrupts_fops);
 	if (!file)
@@ -3350,11 +3580,15 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("irq-unsubscribe",
 				   (S_IRUGO | S_IWUSR | S_IWGRP), ab8500_dir,
 				   &plf->dev, &ab8500_unsubscribe_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!file)
 		goto err;
 
 	file = debugfs_create_file("hwreg", (S_IRUGO | S_IWUSR | S_IWGRP),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ab8500_dir, &plf->dev, &ab8500_hwreg_fops);
 	if (!file)
@@ -3363,6 +3597,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("all-modem-registers", (S_IRUGO | S_IWUSR | S_IWGRP),
 		ab8500_dir, &plf->dev, &ab8500_modem_fops);
 =======
+=======
+>>>>>>> v3.18
 				   ab8500_dir, &plf->dev, &ab8500_hwreg_fops);
 	if (!file)
 		goto err;
@@ -3370,13 +3606,21 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("all-modem-registers",
 				   (S_IRUGO | S_IWUSR | S_IWGRP),
 				   ab8500_dir, &plf->dev, &ab8500_modem_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!file)
 		goto err;
 
 	file = debugfs_create_file("bat_ctrl", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_bat_ctrl_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_bat_ctrl_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_bat_ctrl_fops);
@@ -3385,6 +3629,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		goto err;
 
 	file = debugfs_create_file("btemp_ball", (S_IRUGO | S_IWUSR | S_IWGRP),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_btemp_ball_fops);
 	if (!file)
@@ -3403,6 +3648,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("acc_detect2", (S_IRUGO | S_IWUSR | S_IWGRP),
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_acc_detect2_fops);
 =======
+=======
+>>>>>>> v3.18
 				   ab8500_gpadc_dir,
 				   &plf->dev, &ab8500_gpadc_btemp_ball_fops);
 	if (!file)
@@ -3426,13 +3673,21 @@ static int ab8500_debug_probe(struct platform_device *plf)
 				   (S_IRUGO | S_IWUSR | S_IWGRP),
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_acc_detect2_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!file)
 		goto err;
 
 	file = debugfs_create_file("adc_aux1", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_aux1_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_aux1_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_aux1_fops);
@@ -3442,7 +3697,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("adc_aux2", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_aux2_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_aux2_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_aux2_fops);
@@ -3452,7 +3712,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("main_bat_v", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_main_bat_v_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_main_bat_v_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_main_bat_v_fops);
@@ -3461,6 +3726,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		goto err;
 
 	file = debugfs_create_file("vbus_v", (S_IRUGO | S_IWUSR | S_IWGRP),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_vbus_v_fops);
 	if (!file)
@@ -3474,6 +3740,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	file = debugfs_create_file("usb_charger_c", (S_IRUGO | S_IWUSR | S_IWGRP),
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_usb_charger_c_fops);
 =======
+=======
+>>>>>>> v3.18
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_vbus_v_fops);
 	if (!file)
@@ -3490,13 +3758,21 @@ static int ab8500_debug_probe(struct platform_device *plf)
 				   (S_IRUGO | S_IWUSR | S_IWGRP),
 				   ab8500_gpadc_dir,
 				   &plf->dev, &ab8500_gpadc_usb_charger_c_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!file)
 		goto err;
 
 	file = debugfs_create_file("bk_bat_v", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_bk_bat_v_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_bk_bat_v_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_bk_bat_v_fops);
@@ -3506,7 +3782,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("die_temp", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_die_temp_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_die_temp_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_die_temp_fops);
@@ -3516,7 +3797,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("usb_id", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_usb_id_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_usb_id_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_usb_id_fops);
@@ -3525,6 +3811,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		goto err;
 
 	if (is_ab8540(ab8500)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		file = debugfs_create_file("xtal_temp", (S_IRUGO | S_IWUSR | S_IWGRP),
 			ab8500_gpadc_dir, &plf->dev, &ab8540_gpadc_xtal_temp_fops);
@@ -3560,6 +3847,8 @@ static int ab8500_debug_probe(struct platform_device *plf)
 		file = debugfs_create_file("otp_calib", (S_IRUGO | S_IWUSR | S_IWGRP),
 			ab8500_gpadc_dir, &plf->dev, &ab8540_gpadc_otp_calib_fops);
 =======
+=======
+>>>>>>> v3.18
 		file = debugfs_create_file("xtal_temp",
 					   (S_IRUGO | S_IWUSR | S_IWGRP),
 					   ab8500_gpadc_dir, &plf->dev,
@@ -3602,13 +3891,21 @@ static int ab8500_debug_probe(struct platform_device *plf)
 				(S_IRUGO | S_IWUSR | S_IWGRP),
 				ab8500_gpadc_dir,
 				&plf->dev, &ab8540_gpadc_otp_calib_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!file)
 			goto err;
 	}
 	file = debugfs_create_file("avg_sample", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_avg_sample_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_avg_sample_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_avg_sample_fops);
@@ -3618,7 +3915,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("trig_edge", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_trig_edge_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_trig_edge_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_trig_edge_fops);
@@ -3628,7 +3930,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("trig_timer", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_trig_timer_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_trig_timer_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_trig_timer_fops);
@@ -3638,7 +3945,12 @@ static int ab8500_debug_probe(struct platform_device *plf)
 
 	file = debugfs_create_file("conv_type", (S_IRUGO | S_IWUSR | S_IWGRP),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ab8500_gpadc_dir, &plf->dev, &ab8500_gpadc_conv_type_fops);
+=======
+				   ab8500_gpadc_dir, &plf->dev,
+				   &ab8500_gpadc_conv_type_fops);
+>>>>>>> v3.18
 =======
 				   ab8500_gpadc_dir, &plf->dev,
 				   &ab8500_gpadc_conv_type_fops);
@@ -3649,6 +3961,7 @@ static int ab8500_debug_probe(struct platform_device *plf)
 	return 0;
 
 err:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ab8500_dir)
 		debugfs_remove_recursive(ab8500_dir);
@@ -3662,10 +3975,15 @@ out_freeirq_count:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	debugfs_remove_recursive(ab8500_dir);
 	dev_err(&plf->dev, "failed to create debugfs entries.\n");
 
 	return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3673,9 +3991,12 @@ static int ab8500_debug_remove(struct platform_device *plf)
 {
 	debugfs_remove_recursive(ab8500_dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(event_name);
 	kfree(dev_attr);
 	kfree(irq_count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

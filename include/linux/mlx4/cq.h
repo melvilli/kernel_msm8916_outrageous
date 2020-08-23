@@ -35,6 +35,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/if_ether.h>
 >>>>>>> v3.18
@@ -48,11 +52,14 @@ struct mlx4_cqe {
 	__be32			g_mlpath_rqpn;
 	__be16			sl_vid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be16			rlid;
 	__be16			status;
 	u8			ipv6_ext_mask;
 	u8			badfcs_enc;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct {
 			__be16	rlid;
@@ -62,6 +69,9 @@ struct mlx4_cqe {
 		};
 		u8  smac[ETH_ALEN];
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__be32			byte_cnt;
 	__be16			wqe_index;
@@ -98,9 +108,12 @@ struct mlx4_ts_cqe {
 
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MLX4_CQE_VLAN_PRESENT_MASK	= 1 << 29,
 	MLX4_CQE_QPN_MASK		= 0xffffff,
 =======
+=======
+>>>>>>> v3.18
 	MLX4_CQE_L2_TUNNEL_IPOK		= 1 << 31,
 	MLX4_CQE_VLAN_PRESENT_MASK	= 1 << 29,
 	MLX4_CQE_L2_TUNNEL		= 1 << 27,
@@ -109,6 +122,9 @@ enum {
 
 	MLX4_CQE_QPN_MASK		= 0xffffff,
 	MLX4_CQE_VID_MASK		= 0xfff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

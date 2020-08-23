@@ -81,7 +81,10 @@ isac_ph_state_bh(struct dchannel *dch)
 		break;
 	case ISAC_IND_DR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ISAC_IND_DR6:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dch->state = 3;
@@ -665,7 +668,10 @@ isac_l1cmd(struct dchannel *dch, u32 cmd)
 		if ((isac->state == ISAC_IND_EI) ||
 		    (isac->state == ISAC_IND_DR) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (isac->state == ISAC_IND_DR6) ||
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		    (isac->state == ISAC_IND_RS))

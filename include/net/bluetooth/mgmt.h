@@ -88,7 +88,11 @@ struct mgmt_rp_read_index_list {
 #define MGMT_SETTING_FAST_CONNECTABLE	0x00000004
 #define MGMT_SETTING_DISCOVERABLE	0x00000008
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MGMT_SETTING_PAIRABLE		0x00000010
+=======
+#define MGMT_SETTING_BONDABLE		0x00000010
+>>>>>>> v3.18
 =======
 #define MGMT_SETTING_BONDABLE		0x00000010
 >>>>>>> v3.18
@@ -98,12 +102,18 @@ struct mgmt_rp_read_index_list {
 #define MGMT_SETTING_HS			0x00000100
 #define MGMT_SETTING_LE			0x00000200
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MGMT_SETTING_ADVERTISING	0x00000400
 #define MGMT_SETTING_SECURE_CONN	0x00000800
 #define MGMT_SETTING_DEBUG_KEYS		0x00001000
 #define MGMT_SETTING_PRIVACY		0x00002000
 #define MGMT_SETTING_CONFIGURATION	0x00004000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MGMT_OP_READ_INFO		0x0004
@@ -139,7 +149,11 @@ struct mgmt_cp_set_discoverable {
 #define MGMT_OP_SET_FAST_CONNECTABLE	0x0008
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MGMT_OP_SET_PAIRABLE		0x0009
+=======
+#define MGMT_OP_SET_BONDABLE		0x0009
+>>>>>>> v3.18
 =======
 #define MGMT_OP_SET_BONDABLE		0x0009
 >>>>>>> v3.18
@@ -194,6 +208,7 @@ struct mgmt_cp_load_link_keys {
 #define MGMT_LOAD_LINK_KEYS_SIZE	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mgmt_ltk_info {
 	struct mgmt_addr_info addr;
 	__u8	authenticated;
@@ -202,6 +217,8 @@ struct mgmt_ltk_info {
 	__le16	ediv;
 	__u8	rand[8];
 =======
+=======
+>>>>>>> v3.18
 #define MGMT_LTK_UNAUTHENTICATED	0x00
 #define MGMT_LTK_AUTHENTICATED		0x01
 
@@ -212,6 +229,9 @@ struct mgmt_ltk_info {
 	__u8	enc_size;
 	__le16	ediv;
 	__le64	rand;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u8	val[16];
 } __packed;
@@ -323,13 +343,19 @@ struct mgmt_rp_read_local_oob_data {
 	__u8	randomizer[16];
 } __packed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mgmt_rp_read_local_oob_ext_data {
 	__u8	hash192[16];
 	__u8	randomizer192[16];
 	__u8	hash256[16];
 	__u8	randomizer256[16];
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MGMT_OP_ADD_REMOTE_OOB_DATA	0x0021
@@ -340,7 +366,10 @@ struct mgmt_cp_add_remote_oob_data {
 } __packed;
 #define MGMT_ADD_REMOTE_OOB_DATA_SIZE	(MGMT_ADDR_INFO_SIZE + 32)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mgmt_cp_add_remote_oob_ext_data {
 	struct mgmt_addr_info addr;
 	__u8	hash192[16];
@@ -349,6 +378,9 @@ struct mgmt_cp_add_remote_oob_ext_data {
 	__u8	randomizer256[16];
 } __packed;
 #define MGMT_ADD_REMOTE_OOB_EXT_DATA_SIZE (MGMT_ADDR_INFO_SIZE + 64)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MGMT_OP_REMOVE_REMOTE_OOB_DATA	0x0022
@@ -401,7 +433,10 @@ struct mgmt_cp_set_device_id {
 #define MGMT_SET_DEVICE_ID_SIZE		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MGMT_OP_SET_ADVERTISING		0x0029
 
 #define MGMT_OP_SET_BREDR		0x002A
@@ -524,6 +559,9 @@ struct mgmt_cp_set_public_address {
 } __packed;
 #define MGMT_SET_PUBLIC_ADDRESS_SIZE	6
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MGMT_EV_CMD_COMPLETE		0x0001
 struct mgmt_ev_cmd_complete {
@@ -624,6 +662,10 @@ struct mgmt_ev_auth_failed {
 #define MGMT_DEV_FOUND_CONFIRM_NAME    0x01
 #define MGMT_DEV_FOUND_LEGACY_PAIRING  0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MGMT_DEV_FOUND_NOT_CONNECTABLE 0x04
+>>>>>>> v3.18
 =======
 #define MGMT_DEV_FOUND_NOT_CONNECTABLE 0x04
 >>>>>>> v3.18
@@ -665,7 +707,10 @@ struct mgmt_ev_passkey_notify {
 	__u8	entered;
 } __packed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define MGMT_EV_NEW_IRK			0x0018
 struct mgmt_ev_new_irk {
@@ -712,4 +757,7 @@ struct mgmt_ev_new_conn_param {
 #define MGMT_EV_UNCONF_INDEX_REMOVED	0x001e
 
 #define MGMT_EV_NEW_CONFIG_OPTIONS	0x001f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

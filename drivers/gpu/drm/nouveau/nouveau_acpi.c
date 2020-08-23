@@ -2,6 +2,7 @@
 #include <linux/acpi.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/video.h>
@@ -12,10 +13,15 @@
 
 #include <drm/drm_edid.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mxm-wmi.h>
 #include <linux/vga_switcheroo.h>
 #include <drm/drm_edid.h>
 #include <acpi/video.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "nouveau_drm.h"
@@ -33,9 +39,12 @@
 #define NOUVEAU_DSM_POWER_STAMINA 0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NOUVEAU_DSM_OPTIMUS_FN 0x1A
 #define NOUVEAU_DSM_OPTIMUS_ARGS 0x03000001
 =======
+=======
+>>>>>>> v3.18
 #define NOUVEAU_DSM_OPTIMUS_CAPS 0x1A
 #define NOUVEAU_DSM_OPTIMUS_FLAGS 0x1B
 
@@ -57,6 +66,9 @@
 
 #define OPTIMUS_AUDIO_CAPS_MASK (3 << 27)
 #define OPTIMUS_HDA_CODEC_MASK (2 << 27) /* hda bios control */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct nouveau_dsm_priv {
@@ -78,6 +90,10 @@ bool nouveau_is_v1_dsm(void) {
 #define NOUVEAU_DSM_HAS_OPT 0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_VGA_SWITCHEROO
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_VGA_SWITCHEROO
 >>>>>>> v3.18
@@ -93,6 +109,7 @@ static const char nouveau_op_dsm_muid[] = {
 
 static int nouveau_optimus_dsm(acpi_handle handle, int func, int arg, uint32_t *result)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct acpi_buffer output = { ACPI_ALLOCATE_BUFFER, NULL };
 	struct acpi_object_list input;
@@ -134,6 +151,8 @@ static int nouveau_optimus_dsm(acpi_handle handle, int func, int arg, uint32_t *
 		if (obj->buffer.length == 4 && result) {
 			*result = 0;
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	union acpi_object *obj;
 	char args_buff[4];
@@ -155,12 +174,16 @@ static int nouveau_optimus_dsm(acpi_handle handle, int func, int arg, uint32_t *
 		return AE_ERROR;
 	} else {
 		if (obj->buffer.length == 4) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			*result |= obj->buffer.pointer[0];
 			*result |= (obj->buffer.pointer[1] << 8);
 			*result |= (obj->buffer.pointer[2] << 16);
 			*result |= (obj->buffer.pointer[3] << 24);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -230,6 +253,8 @@ static int nouveau_test_dsm(acpi_handle test_handle,
 	 * the n-th bit is enabled, function n is supported */
 	return result & 1 && result & (1 << sfnc);
 =======
+=======
+>>>>>>> v3.18
 		ACPI_FREE(obj);
 	}
 
@@ -280,6 +305,9 @@ static int nouveau_dsm(acpi_handle handle, int func, int arg)
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -288,7 +316,11 @@ static int nouveau_dsm_switch_mux(acpi_handle handle, int mux_id)
 	mxm_wmi_call_mxmx(mux_id == NOUVEAU_DSM_LED_STAMINA ? MXM_MXDS_ADAPTER_IGD : MXM_MXDS_ADAPTER_0);
 	mxm_wmi_call_mxds(mux_id == NOUVEAU_DSM_LED_STAMINA ? MXM_MXDS_ADAPTER_IGD : MXM_MXDS_ADAPTER_0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nouveau_dsm(handle, NOUVEAU_DSM_LED, mux_id, NULL);
+=======
+	return nouveau_dsm(handle, NOUVEAU_DSM_LED, mux_id);
+>>>>>>> v3.18
 =======
 	return nouveau_dsm(handle, NOUVEAU_DSM_LED, mux_id);
 >>>>>>> v3.18
@@ -302,7 +334,11 @@ static int nouveau_dsm_set_discrete_state(acpi_handle handle, enum vga_switchero
 	else
 		arg = NOUVEAU_DSM_POWER_STAMINA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_dsm(handle, NOUVEAU_DSM_POWER, arg, NULL);
+=======
+	nouveau_dsm(handle, NOUVEAU_DSM_POWER, arg);
+>>>>>>> v3.18
 =======
 	nouveau_dsm(handle, NOUVEAU_DSM_POWER, arg);
 >>>>>>> v3.18
@@ -355,6 +391,7 @@ static struct vga_switcheroo_handler nouveau_dsm_handler = {
 static int nouveau_dsm_pci_probe(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle dhandle, nvidia_handle;
 	acpi_status status;
 	int retval = 0;
@@ -376,6 +413,8 @@ static int nouveau_dsm_pci_probe(struct pci_dev *pdev)
 		retval |= NOUVEAU_DSM_HAS_OPT;
 
 =======
+=======
+>>>>>>> v3.18
 	acpi_handle dhandle;
 	int retval = 0;
 
@@ -402,6 +441,9 @@ static int nouveau_dsm_pci_probe(struct pci_dev *pdev)
 			 (result & OPTIMUS_DYNAMIC_PWR_CAP) ? "dynamic power, " : "",
 			 (result & OPTIMUS_HDA_CODEC_MASK) ? "hda bios codec supported" : "");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (retval)
 		nouveau_dsm_priv.dhandle = dhandle;
@@ -439,7 +481,10 @@ static bool nouveau_dsm_detect(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	while ((pdev = pci_get_class(PCI_CLASS_DISPLAY_3D << 8, pdev)) != NULL) {
 		vga_count++;
 
@@ -450,6 +495,9 @@ static bool nouveau_dsm_detect(void)
 			has_optimus = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* find the optimus DSM or the old v1 DSM */
 	if (has_optimus == 1) {
@@ -491,15 +539,21 @@ void nouveau_switcheroo_optimus_dsm(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_optimus_dsm(nouveau_dsm_priv.dhandle, NOUVEAU_DSM_OPTIMUS_FN,
 		NOUVEAU_DSM_OPTIMUS_ARGS, &result);
 =======
+=======
+>>>>>>> v3.18
 	nouveau_optimus_dsm(nouveau_dsm_priv.dhandle, NOUVEAU_DSM_OPTIMUS_FLAGS,
 			    0x3, &result);
 
 	nouveau_optimus_dsm(nouveau_dsm_priv.dhandle, NOUVEAU_DSM_OPTIMUS_CAPS,
 		NOUVEAU_DSM_OPTIMUS_SET_POWERDOWN, &result);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -509,12 +563,18 @@ void nouveau_unregister_dsm_handler(void)
 		vga_switcheroo_unregister_handler();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 void nouveau_register_dsm_handler(void) {}
 void nouveau_unregister_dsm_handler(void) {}
 void nouveau_switcheroo_optimus_dsm(void) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* retrieve the ROM in 4k blocks */
@@ -552,7 +612,11 @@ bool nouveau_acpi_rom_supported(struct pci_dev *pdev)
 	acpi_handle dhandle, rom_handle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dhandle = DEVICE_ACPI_HANDLE(&pdev->dev);
+=======
+	dhandle = ACPI_HANDLE(&pdev->dev);
+>>>>>>> v3.18
 =======
 	dhandle = ACPI_HANDLE(&pdev->dev);
 >>>>>>> v3.18
@@ -590,7 +654,11 @@ nouveau_acpi_edid(struct drm_device *dev, struct drm_connector *connector)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&dev->pdev->dev);
+=======
+	handle = ACPI_HANDLE(&dev->pdev->dev);
+>>>>>>> v3.18
 =======
 	handle = ACPI_HANDLE(&dev->pdev->dev);
 >>>>>>> v3.18

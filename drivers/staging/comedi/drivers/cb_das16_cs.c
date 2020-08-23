@@ -16,10 +16,13 @@
     GNU General Public License for more details.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     PCMCIA support code for this driver is adapted from the dummy_cs.c
@@ -42,8 +45,13 @@ Status: experimental
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/interrupt.h>
@@ -59,8 +67,11 @@ Status: experimental
 #include "8253.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DAS16CS_SIZE			18
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DAS16CS_ADC_DATA		0
@@ -97,7 +108,10 @@ static const struct das16cs_board das16cs_boards[] = {
 
 struct das16cs_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ao_readback[2];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short status1;
@@ -114,11 +128,14 @@ static const struct comedi_lrange das16cs_ai_range = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t das16cs_interrupt(int irq, void *d)
 {
 	/* struct comedi_device *dev = d; */
 	return IRQ_HANDLED;
 =======
+=======
+>>>>>>> v3.18
 static int das16cs_ai_eoc(struct comedi_device *dev,
 			  struct comedi_subdevice *s,
 			  struct comedi_insn *insn,
@@ -130,6 +147,9 @@ static int das16cs_ai_eoc(struct comedi_device *dev,
 	if (status & 0x0080)
 		return 0;
 	return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -142,8 +162,13 @@ static int das16cs_ai_rinsn(struct comedi_device *dev,
 	int range = CR_RANGE(insn->chanspec);
 	int aref = CR_AREF(insn->chanspec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	int to;
+=======
+	int ret;
+	int i;
+>>>>>>> v3.18
 =======
 	int ret;
 	int i;
@@ -176,6 +201,7 @@ static int das16cs_ai_rinsn(struct comedi_device *dev,
 		outw(0, dev->iobase + DAS16CS_ADC_DATA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMEOUT 1000
 		for (to = 0; to < TIMEOUT; to++) {
 			if (inw(dev->iobase + DAS16CS_MISC1) & 0x0080)
@@ -186,10 +212,15 @@ static int das16cs_ai_rinsn(struct comedi_device *dev,
 			return -ETIME;
 		}
 =======
+=======
+>>>>>>> v3.18
 		ret = comedi_timeout(dev, s, insn, das16cs_ai_eoc, 0);
 		if (ret)
 			return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data[i] = inw(dev->iobase + DAS16CS_ADC_DATA);
 	}
@@ -197,6 +228,7 @@ static int das16cs_ai_rinsn(struct comedi_device *dev,
 	return i;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int das16cs_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
@@ -324,6 +356,8 @@ static int das16cs_ao_winsn(struct comedi_device *dev,
 		devpriv->ao_readback[chan] = data[i];
 		d = data[i];
 =======
+=======
+>>>>>>> v3.18
 static int das16cs_ao_insn_write(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
 				 struct comedi_insn *insn,
@@ -338,6 +372,9 @@ static int das16cs_ao_insn_write(struct comedi_device *dev,
 
 	for (i = 0; i < insn->n; i++) {
 		val = data[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		outw(devpriv->status1, dev->iobase + DAS16CS_MISC1);
@@ -354,7 +391,12 @@ static int das16cs_ao_insn_write(struct comedi_device *dev,
 
 		for (bit = 15; bit >= 0; bit--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int b = (d >> bit) & 0x1;
+=======
+			int b = (val >> bit) & 0x1;
+
+>>>>>>> v3.18
 =======
 			int b = (val >> bit) & 0x1;
 
@@ -371,6 +413,7 @@ static int das16cs_ao_insn_write(struct comedi_device *dev,
 		 */
 		outw(status1 | 0x9, dev->iobase + DAS16CS_MISC1);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return i;
@@ -393,10 +436,16 @@ static int das16cs_ao_rinsn(struct comedi_device *dev,
 
 	return insn->n;
 >>>>>>> v3.18
+=======
+	s->readback[chan] = val;
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 static int das16cs_dio_insn_bits(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 struct comedi_insn *insn, unsigned int *data)
 {
@@ -407,11 +456,16 @@ static int das16cs_dio_insn_bits(struct comedi_device *dev,
 		outw(s->state, dev->iobase + DAS16CS_DIO);
 	}
 =======
+=======
+>>>>>>> v3.18
 				 struct comedi_insn *insn,
 				 unsigned int *data)
 {
 	if (comedi_dio_update_state(s, data))
 		outw(s->state, dev->iobase + DAS16CS_DIO);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = inw(dev->iobase + DAS16CS_DIO);
@@ -421,6 +475,7 @@ static int das16cs_dio_insn_bits(struct comedi_device *dev,
 
 static int das16cs_dio_insn_config(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   struct comedi_insn *insn, unsigned int *data)
 {
@@ -450,6 +505,8 @@ static int das16cs_dio_insn_config(struct comedi_device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 				   struct comedi_insn *insn,
 				   unsigned int *data)
 {
@@ -466,6 +523,9 @@ static int das16cs_dio_insn_config(struct comedi_device *dev,
 	ret = comedi_dio_insn_config(dev, s, insn, data, mask);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	devpriv->status2 &= ~0x00c0;
@@ -515,6 +575,7 @@ static int das16cs_auto_attach(struct comedi_device *dev,
 
 	link->priv = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pcmcia_request_irq(link, das16cs_interrupt);
 	if (ret)
 		return ret;
@@ -525,10 +586,15 @@ static int das16cs_auto_attach(struct comedi_device *dev,
 		return -ENOMEM;
 	dev->private = devpriv;
 =======
+=======
+>>>>>>> v3.18
 
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 3);
@@ -537,7 +603,10 @@ static int das16cs_auto_attach(struct comedi_device *dev,
 
 	s = &dev->subdevices[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->read_subdev = s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* analog input subdevice */
@@ -549,8 +618,11 @@ static int das16cs_auto_attach(struct comedi_device *dev,
 	s->len_chanlist	= 16;
 	s->insn_read	= das16cs_ai_rinsn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->do_cmd	= das16cs_ai_cmd;
 	s->do_cmdtest	= das16cs_ai_cmdtest;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -563,15 +635,21 @@ static int das16cs_auto_attach(struct comedi_device *dev,
 		s->maxdata	= 0xffff;
 		s->range_table	= &range_bipolar10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s->insn_write	= &das16cs_ao_winsn;
 		s->insn_read	= &das16cs_ao_rinsn;
 =======
+=======
+>>>>>>> v3.18
 		s->insn_write	= &das16cs_ao_insn_write;
 		s->insn_read	= comedi_readback_insn_read;
 
 		ret = comedi_alloc_subdev_readback(s);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		s->type		= COMEDI_SUBD_UNUSED;
@@ -588,10 +666,13 @@ static int das16cs_auto_attach(struct comedi_device *dev,
 	s->insn_config	= das16cs_dio_insn_config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s: %s, I/O base=0x%04lx, irq=%u\n",
 		dev->driver->driver_name, dev->board_name,
 		dev->iobase, dev->irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

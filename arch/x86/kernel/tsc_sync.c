@@ -17,7 +17,10 @@
 #include <linux/spinlock.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/smp.h>
@@ -29,8 +32,13 @@
  * run the measurement code at once:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinitdata atomic_t start_count;
 static __cpuinitdata atomic_t stop_count;
+=======
+static atomic_t start_count;
+static atomic_t stop_count;
+>>>>>>> v3.18
 =======
 static atomic_t start_count;
 static atomic_t stop_count;
@@ -42,24 +50,34 @@ static atomic_t stop_count;
  * of a critical section, to be able to prove TSC time-warps:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinitdata arch_spinlock_t sync_lock = __ARCH_SPIN_LOCK_UNLOCKED;
 
 static __cpuinitdata cycles_t last_tsc;
 static __cpuinitdata cycles_t max_warp;
 static __cpuinitdata int nr_warps;
 =======
+=======
+>>>>>>> v3.18
 static arch_spinlock_t sync_lock = __ARCH_SPIN_LOCK_UNLOCKED;
 
 static cycles_t last_tsc;
 static cycles_t max_warp;
 static int nr_warps;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * TSC-warp measurement loop running on both CPUs:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void check_tsc_warp(unsigned int timeout)
+=======
+static void check_tsc_warp(unsigned int timeout)
+>>>>>>> v3.18
 =======
 static void check_tsc_warp(unsigned int timeout)
 >>>>>>> v3.18
@@ -142,7 +160,11 @@ static inline unsigned int loop_timeout(int cpu)
  * target CPU to arrive and then starts the measurement:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit check_tsc_sync_source(int cpu)
+=======
+void check_tsc_sync_source(int cpu)
+>>>>>>> v3.18
 =======
 void check_tsc_sync_source(int cpu)
 >>>>>>> v3.18
@@ -212,7 +234,11 @@ void check_tsc_sync_source(int cpu)
  * Freshly booted CPUs call into this:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit check_tsc_sync_target(void)
+=======
+void check_tsc_sync_target(void)
+>>>>>>> v3.18
 =======
 void check_tsc_sync_target(void)
 >>>>>>> v3.18

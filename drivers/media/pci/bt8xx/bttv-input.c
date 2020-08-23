@@ -74,7 +74,11 @@ static void ir_handle_key(struct bttv *btv)
 	if ((ir->mask_keydown && (gpio & ir->mask_keydown)) ||
 	    (ir->mask_keyup   && !(gpio & ir->mask_keyup))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown_notimeout(ir->dev, data, 0);
+=======
+		rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 		rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -83,7 +87,11 @@ static void ir_handle_key(struct bttv *btv)
 		   for this board */
 		if (btv->c.type == BTTV_BOARD_WINFAST2000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc_keydown_notimeout(ir->dev, data, 0);
+=======
+			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -112,7 +120,11 @@ static void ir_enltv_handle_key(struct bttv *btv)
 			(gpio & ir->mask_keyup) ? " up" : "up/down");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown_notimeout(ir->dev, data, 0);
+=======
+		rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 		rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -130,7 +142,11 @@ static void ir_enltv_handle_key(struct bttv *btv)
 			rc_keyup(ir->dev);
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc_keydown_notimeout(ir->dev, data, 0);
+=======
+			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -171,15 +187,21 @@ static void bttv_input_timer(unsigned long data)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RC5_START(x)	(((x) >> 12) & 3)
 #define RC5_TOGGLE(x)	(((x) >> 11) & 1)
 #define RC5_ADDR(x)	(((x) >> 6) & 31)
 #define RC5_INSTR(x)	((x) & 63)
 =======
+=======
+>>>>>>> v3.18
 #define RC5_START(x)	(((x) >> 12) & 0x03)
 #define RC5_TOGGLE(x)	(((x) >> 11) & 0x01)
 #define RC5_ADDR(x)	(((x) >> 6)  & 0x1f)
 #define RC5_INSTR(x)	(((x) >> 0)  & 0x3f)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* decode raw bit pattern to RC5 code */
@@ -219,8 +241,13 @@ static void bttv_rc5_timer_end(unsigned long data)
 	struct bttv_ir *ir = (struct bttv_ir *)data;
 	struct timeval tv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 gap;
 	u32 rc5 = 0;
+=======
+	u32 gap, rc5, scancode;
+	u8 toggle, command, system;
+>>>>>>> v3.18
 =======
 	u32 gap, rc5, scancode;
 	u8 toggle, command, system;
@@ -250,6 +277,7 @@ static void bttv_rc5_timer_end(unsigned long data)
 		/* ignore spurious codes (caused by light/other remotes) */
 		dprintk("short code: %x\n", ir->code);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		ir->code = (ir->code << ir->shift_by) | 1;
 		rc5 = bttv_rc5_decode(ir->code);
@@ -271,6 +299,8 @@ static void bttv_rc5_timer_end(unsigned long data)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 		return;
 	}
 
@@ -294,6 +324,9 @@ static void bttv_rc5_timer_end(unsigned long data)
 	scancode = RC_SCANCODE_RC5(system, command);
 	rc_keydown(ir->dev, RC_TYPE_RC5, scancode, toggle);
 	dprintk("scancode %x, toggle %x\n", scancode, toggle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -365,8 +398,11 @@ static void bttv_ir_start(struct bttv *btv, struct bttv_ir *ir)
 		setup_timer(&ir->timer, bttv_rc5_timer_end, (unsigned long)ir);
 		ir->shift_by = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ir->start = 3;
 		ir->addr = 0x0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ir->rc5_remote_gap = ir_rc5_remote_gap;
@@ -393,7 +429,12 @@ static void bttv_ir_stop(struct bttv *btv)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_key_pv951(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
+=======
+static int get_key_pv951(struct IR_i2c *ir, enum rc_type *protocol,
+			 u32 *scancode, u8 *toggle)
+>>>>>>> v3.18
 =======
 static int get_key_pv951(struct IR_i2c *ir, enum rc_type *protocol,
 			 u32 *scancode, u8 *toggle)
@@ -425,8 +466,14 @@ static int get_key_pv951(struct IR_i2c *ir, enum rc_type *protocol,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = b;
 	*ir_raw = b;
+=======
+	*protocol = RC_TYPE_UNKNOWN;
+	*scancode = b;
+	*toggle = 0;
+>>>>>>> v3.18
 =======
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = b;
@@ -552,6 +599,10 @@ int bttv_input_init(struct bttv *btv)
 	case BTTV_BOARD_CONCEPTRONIC_CTVFMI2:
 	case BTTV_BOARD_CONTVFMI:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BTTV_BOARD_KWORLD_VSTREAM_XPERT:
+>>>>>>> v3.18
 =======
 	case BTTV_BOARD_KWORLD_VSTREAM_XPERT:
 >>>>>>> v3.18
@@ -562,8 +613,13 @@ int bttv_input_init(struct bttv *btv)
 		break;
 	case BTTV_BOARD_NEBULA_DIGITV:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ir_codes = RC_MAP_NEBULA;
 		ir->rc5_gpio = true;
+=======
+		ir_codes         = RC_MAP_NEBULA;
+		ir->rc5_gpio     = true;
+>>>>>>> v3.18
 =======
 		ir_codes         = RC_MAP_NEBULA;
 		ir->rc5_gpio     = true;
@@ -591,7 +647,12 @@ int bttv_input_init(struct bttv *btv)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (NULL == ir_codes) {
+=======
+
+	if (!ir_codes) {
+>>>>>>> v3.18
 =======
 
 	if (!ir_codes) {

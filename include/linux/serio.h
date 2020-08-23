@@ -24,6 +24,10 @@ struct serio {
 	char name[32];
 	char phys[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char firmware_id[128];
+>>>>>>> v3.18
 =======
 	char firmware_id[128];
 >>>>>>> v3.18
@@ -33,8 +37,12 @@ struct serio {
 	struct serio_device_id id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Protects critical sections from port's interrupt handler */
 	spinlock_t lock;
+=======
+	spinlock_t lock;		/* protects critical sections from port's interrupt handler */
+>>>>>>> v3.18
 =======
 	spinlock_t lock;		/* protects critical sections from port's interrupt handler */
 >>>>>>> v3.18
@@ -46,6 +54,7 @@ struct serio {
 	void (*stop)(struct serio *);
 
 	struct serio *parent;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Entry in parent->children list */
 	struct list_head child_node;
@@ -61,17 +70,23 @@ struct serio {
 	/* Protects serio->drv so attributes can pin current driver */
 	struct mutex drv_mutex;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head child_node;	/* Entry in parent->children list */
 	struct list_head children;
 	unsigned int depth;		/* level of nesting in serio hierarchy */
 
 	struct serio_driver *drv;	/* accessed from interrupt, must be protected by serio->lock and serio->sem */
 	struct mutex drv_mutex;		/* protects serio->drv so attributes can pin driver */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct device dev;
 
 	struct list_head node;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -79,6 +94,8 @@ struct serio {
 	 * may get indigestion when exposed to concurrent access (i8042).
 	 */
 	struct mutex *ps2_cmd_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -18,7 +18,11 @@ OBJS		:= misc.o
 # font.c and font.o
 CFLAGS_font.o	:= -Dstatic=
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj)/font.c: $(srctree)/drivers/video/console/font_8x8.c
+=======
+$(obj)/font.c: $(srctree)/lib/fonts/font_8x8.c
+>>>>>>> v3.18
 =======
 $(obj)/font.c: $(srctree)/lib/fonts/font_8x8.c
 >>>>>>> v3.18

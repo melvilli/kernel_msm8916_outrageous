@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "tegra20.dtsi"
+=======
+#include "tegra20.dtsi"
+>>>>>>> v3.18
 =======
 #include "tegra20.dtsi"
 >>>>>>> v3.18
@@ -9,20 +13,31 @@
 	compatible = "toradex,colibri_t20-512", "nvidia,tegra20";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		rtc0 = "/i2c@7000d000/tps6586x@34";
 		rtc1 = "/rtc@7000e000";
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memory {
 		reg = <0x00000000 0x20000000>;
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host1x {
 		hdmi {
+=======
+	host1x@50000000 {
+		hdmi@54280000 {
+>>>>>>> v3.18
 =======
 	host1x@50000000 {
 		hdmi@54280000 {
@@ -32,18 +47,24 @@
 
 			nvidia,ddc-i2c-bus = <&i2c_ddc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nvidia,hpd-gpio = <&gpio 111 0>; /* PN7 */
 		};
 	};
 
 	pinmux {
 =======
+=======
+>>>>>>> v3.18
 			nvidia,hpd-gpio = <&gpio TEGRA_GPIO(N, 7)
 				GPIO_ACTIVE_HIGH>;
 		};
 	};
 
 	pinmux@70000014 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&state_default>;
@@ -53,8 +74,13 @@
 				nvidia,pins = "cdev1";
 				nvidia,function = "plla_out";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -64,8 +90,13 @@
 				nvidia,pins = "crtp";
 				nvidia,function = "crt";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -75,8 +106,13 @@
 				nvidia,pins = "dap3";
 				nvidia,function = "dap3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -91,7 +127,11 @@
 					"lsc1", "lsck", "lsda", "lspi", "lvs";
 				nvidia,function = "displaya";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,tristate = <1>;
+=======
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
 >>>>>>> v3.18
@@ -100,8 +140,13 @@
 				nvidia,pins = "dte";
 				nvidia,function = "rsvd1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -113,8 +158,13 @@
 					"irtx", "spia", "spib", "spic";
 				nvidia,function = "gmi";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -124,8 +174,13 @@
 				nvidia,pins = "pta";
 				nvidia,function = "rsvd4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -135,8 +190,13 @@
 				nvidia,pins = "uac";
 				nvidia,function = "rsvd2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -146,7 +206,11 @@
 				nvidia,pins = "hdint";
 				nvidia,function = "hdmi";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,tristate = <1>;
+=======
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
 >>>>>>> v3.18
@@ -155,8 +219,13 @@
 				nvidia,pins = "rm";
 				nvidia,function = "i2c1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -166,8 +235,13 @@
 				nvidia,pins = "dtf";
 				nvidia,function = "i2c3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -177,8 +251,13 @@
 				nvidia,pins = "ddc";
 				nvidia,function = "i2c2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <2>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_UP>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -188,8 +267,13 @@
 				nvidia,pins = "i2cp";
 				nvidia,function = "i2cp";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -199,8 +283,13 @@
 				nvidia,pins = "uad";
 				nvidia,function = "irda";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -211,8 +300,13 @@
 					"kbce", "kbcf";
 				nvidia,function = "nand";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -222,8 +316,13 @@
 				nvidia,pins = "owc";
 				nvidia,function = "owr";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -233,7 +332,11 @@
 				nvidia,pins = "pmc";
 				nvidia,function = "pwr_on";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,tristate = <0>;
+=======
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
 >>>>>>> v3.18
@@ -242,7 +345,11 @@
 				nvidia,pins = "sdb", "sdc", "sdd";
 				nvidia,function = "pwm";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,tristate = <1>;
+=======
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
 >>>>>>> v3.18
@@ -251,8 +358,13 @@
 				nvidia,pins = "atb", "gma", "gme";
 				nvidia,function = "sdio4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -262,8 +374,13 @@
 				nvidia,pins = "spid", "spie", "spif";
 				nvidia,function = "spi1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -273,8 +390,13 @@
 				nvidia,pins = "slxa", "slxc", "slxd", "slxk";
 				nvidia,function = "spi4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -284,8 +406,13 @@
 				nvidia,pins = "sdio1";
 				nvidia,function = "uarta";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -295,8 +422,13 @@
 				nvidia,pins = "gmc";
 				nvidia,function = "uartd";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -306,8 +438,13 @@
 				nvidia,pins = "uaa", "uab", "uda";
 				nvidia,function = "ulpi";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -317,8 +454,13 @@
 				nvidia,pins = "cdev2";
 				nvidia,function = "pllp_out4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -328,8 +470,13 @@
 				nvidia,pins = "spig", "spih";
 				nvidia,function = "spi2_alt";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -339,8 +486,13 @@
 				nvidia,pins = "dta", "dtb", "dtc", "dtd";
 				nvidia,function = "vi";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -350,8 +502,13 @@
 				nvidia,pins = "csus";
 				nvidia,function = "vi_sensor_clk";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -361,7 +518,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ac97: ac97@70002000 {
 		status = "okay";
 		nvidia,codec-reset-gpio = <&gpio TEGRA_GPIO(V, 0)
@@ -370,6 +530,9 @@
 			GPIO_ACTIVE_HIGH>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c@7000c000 {
 		clock-frequency = <400000>;
@@ -391,7 +554,11 @@
 			compatible = "ti,tps6586x";
 			reg = <0x34>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 86 0x4>;
+=======
+			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -402,7 +569,11 @@
 			gpio-controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sys-supply = <&vdd_5v0_reg>;
+=======
+			sys-supply = <&vdd_3v3_reg>;
+>>>>>>> v3.18
 =======
 			sys-supply = <&vdd_3v3_reg>;
 >>>>>>> v3.18
@@ -411,15 +582,21 @@
 			vin-sm2-supply = <&sys_reg>;
 			vinldo01-supply = <&sm2_reg>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vinldo23-supply = <&sm2_reg>;
 			vinldo4-supply = <&sm2_reg>;
 			vinldo678-supply = <&sm2_reg>;
 			vinldo9-supply = <&sm2_reg>;
 =======
+=======
+>>>>>>> v3.18
 			vinldo23-supply = <&vdd_3v3_reg>;
 			vinldo4-supply = <&vdd_3v3_reg>;
 			vinldo678-supply = <&vdd_3v3_reg>;
 			vinldo9-supply = <&vdd_3v3_reg>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			regulators {
@@ -438,8 +615,13 @@
 					regulator-compatible = "sm0";
 					regulator-name = "vdd_sm0,vdd_core";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					regulator-min-microvolt = <1275000>;
 					regulator-max-microvolt = <1275000>;
+=======
+					regulator-min-microvolt = <1200000>;
+					regulator-max-microvolt = <1200000>;
+>>>>>>> v3.18
 =======
 					regulator-min-microvolt = <1200000>;
 					regulator-max-microvolt = <1200000>;
@@ -452,8 +634,13 @@
 					regulator-compatible = "sm1";
 					regulator-name = "vdd_sm1,vdd_cpu";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					regulator-min-microvolt = <1100000>;
 					regulator-max-microvolt = <1100000>;
+=======
+					regulator-min-microvolt = <1000000>;
+					regulator-max-microvolt = <1000000>;
+>>>>>>> v3.18
 =======
 					regulator-min-microvolt = <1000000>;
 					regulator-max-microvolt = <1000000>;
@@ -466,8 +653,13 @@
 					regulator-compatible = "sm2";
 					regulator-name = "vdd_sm2,vin_ldo*";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					regulator-min-microvolt = <3700000>;
 					regulator-max-microvolt = <3700000>;
+=======
+					regulator-min-microvolt = <1800000>;
+					regulator-max-microvolt = <1800000>;
+>>>>>>> v3.18
 =======
 					regulator-min-microvolt = <1800000>;
 					regulator-max-microvolt = <1800000>;
@@ -519,8 +711,13 @@
 					regulator-compatible = "ldo6";
 					regulator-name = "vdd_ldo6,avdd_vdac,vddio_vi,vddio_cam";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					regulator-min-microvolt = <1800000>;
 					regulator-max-microvolt = <1800000>;
+=======
+					regulator-min-microvolt = <2850000>;
+					regulator-max-microvolt = <2850000>;
+>>>>>>> v3.18
 =======
 					regulator-min-microvolt = <2850000>;
 					regulator-max-microvolt = <2850000>;
@@ -570,8 +767,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmc {
 		nvidia,suspend-mode = <2>;
+=======
+	pmc@7000e400 {
+		nvidia,suspend-mode = <1>;
+>>>>>>> v3.18
 =======
 	pmc@7000e400 {
 		nvidia,suspend-mode = <1>;
@@ -655,6 +857,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ac97: ac97 {
 		status = "okay";
 		nvidia,codec-reset-gpio = <&gpio 168 0>; /* gpio PV0 */
@@ -669,6 +872,8 @@
 	sdhci@c8000600 {
 		cd-gpios = <&gpio 23 1>; /* gpio PC7 */
 =======
+=======
+>>>>>>> v3.18
 	usb@c5004000 {
 		status = "okay";
 		nvidia,phy-reset-gpio = <&gpio TEGRA_GPIO(V, 1)
@@ -683,6 +888,9 @@
 
 	sdhci@c8000600 {
 		cd-gpios = <&gpio TEGRA_GPIO(C, 7) GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -692,7 +900,11 @@
 		#size-cells = <0>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk32k_in: clock {
+=======
+		clk32k_in: clock@0 {
+>>>>>>> v3.18
 =======
 		clk32k_in: clock@0 {
 >>>>>>> v3.18
@@ -703,6 +915,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sound {
 		compatible = "nvidia,tegra-audio-wm9712-colibri_t20",
@@ -724,11 +937,14 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	regulators {
 		compatible = "simple-bus";
 		#address-cells = <1>;
 		#size-cells = <0>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		vdd_5v0_reg: regulator@100 {
 			compatible = "regulator-fixed";
@@ -737,12 +953,17 @@
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
 =======
+=======
+>>>>>>> v3.18
 		vdd_3v3_reg: regulator@100 {
 			compatible = "regulator-fixed";
 			reg = <100>;
 			regulator-name = "vdd_3v3";
 			regulator-min-microvolt = <3300000>;
 			regulator-max-microvolt = <3300000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-always-on;
 		};
@@ -757,10 +978,13 @@
 			regulator-boot-on;
 			regulator-always-on;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&gpio 217 0>;
 		};
 	};
 =======
+=======
+>>>>>>> v3.18
 			gpio = <&gpio TEGRA_GPIO(BB, 1) GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -784,5 +1008,8 @@
 			 <&tegra_car TEGRA20_CLK_CDEV1>;
 		clock-names = "pll_a", "pll_a_out0", "mclk";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

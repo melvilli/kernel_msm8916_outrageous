@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dtb-$(CONFIG_ARCH_THUNDER) += thunder-88xx.dtb
+>>>>>>> v3.18
 =======
 dtb-$(CONFIG_ARCH_THUNDER) += thunder-88xx.dtb
 >>>>>>> v3.18
@@ -6,6 +10,7 @@ dtb-$(CONFIG_ARCH_VEXPRESS) += rtsm_ve-aemv8a.dtb foundation-v8.dtb
 dtb-$(CONFIG_ARCH_XGENE) += apm-mustang.dtb
 
 targets += dtbs
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #used for cleaning - not building
@@ -16,9 +21,14 @@ dtbs: $(addprefix $(obj)/, $(DTB_LIST))
 
 clean-files := dts/*.dtb *.dtb
 =======
+=======
+>>>>>>> v3.18
 targets += $(dtb-y)
 
 dtbs: $(addprefix $(obj)/, $(dtb-y))
 
 clean-files := *.dtb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

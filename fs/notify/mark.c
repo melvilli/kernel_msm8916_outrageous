@@ -21,6 +21,7 @@
  *
  * REFCNT:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The mark->refcnt tells how many "things" in the kernel currently are
  * referencing this object.  The object typically will live inside the kernel
  * with a refcnt of 2, one for each list it is on (i_list, g_list).  Any task
@@ -44,6 +45,8 @@
  * free_g_list, which when used is anchored by a private list on the stack of the
  * task which held the group->mark_lock.
 =======
+=======
+>>>>>>> v3.18
  * The group->recnt and mark->refcnt tell how many "things" in the kernel
  * currently are referencing the objects. Both kind of objects typically will
  * live inside the kernel with a refcnt of 2, one for its creation and one for
@@ -67,6 +70,9 @@
  * Furthermore it protects the access to a reference of the group that the mark
  * is assigned to as well as the access to a reference of the inode/vfsmount
  * that is being watched by the mark.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * inode->i_lock protects the i_fsnotify_marks list anchored inside a
@@ -91,6 +97,7 @@
  * mark on the list we take a reference (so the mark can't disappear under us).
  * We remove that mark form the inode's list of marks and we add this mark to a
 <<<<<<< HEAD
+<<<<<<< HEAD
  * private list anchored on the stack using i_free_list;  At this point we no
  * longer fear anything finding the mark using the inode's list of marks.
  *
@@ -104,11 +111,16 @@
  * from the inode.  When the ref hits 0 we can free the mark.
  *
 =======
+=======
+>>>>>>> v3.18
  * private list anchored on the stack using i_free_list; we walk i_free_list
  * and before we destroy the mark we make sure that we dont race with a
  * concurrent destroy_group by getting a ref to the marks group and taking the
  * groups mutex.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Very similarly for freeing by group, except we use free_g_list.
  *
@@ -251,7 +263,10 @@ void fsnotify_set_mark_ignored_mask_locked(struct fsnotify_mark *mark, __u32 mas
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Sorting function for lists of fsnotify marks.
  *
  * Fanotify supports different notification classes (reflected as priority of
@@ -288,6 +303,9 @@ int fsnotify_compare_groups(struct fsnotify_group *a, struct fsnotify_group *b)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Attach an initialized mark to a given group and fs object.
  * These marks may be used for the fsnotify backend to determine which
@@ -373,6 +391,7 @@ void fsnotify_clear_marks_by_group_flags(struct fsnotify_group *group,
 {
 	struct fsnotify_mark *lmark, *mark;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LIST_HEAD(to_free);
 
 	/*
@@ -404,6 +423,8 @@ void fsnotify_clear_marks_by_group_flags(struct fsnotify_group *group,
 		fsnotify_put_mark(mark);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock_nested(&group->mark_mutex, SINGLE_DEPTH_NESTING);
 	list_for_each_entry_safe(mark, lmark, &group->marks_list, g_list) {
@@ -414,6 +435,9 @@ void fsnotify_clear_marks_by_group_flags(struct fsnotify_group *group,
 		}
 	}
 	mutex_unlock(&group->mark_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -453,7 +477,11 @@ static int fsnotify_mark_destroy(void *ignored)
 {
 	struct fsnotify_mark *mark, *next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LIST_HEAD(private_destroy_list);
+=======
+	struct list_head private_destroy_list;
+>>>>>>> v3.18
 =======
 	struct list_head private_destroy_list;
 >>>>>>> v3.18

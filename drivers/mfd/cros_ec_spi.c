@@ -19,6 +19,10 @@
 #include <linux/mfd/cros_ec.h>
 #include <linux/mfd/cros_ec_commands.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -43,6 +47,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
   * We must get a response from the EC in 5ms. This is a very long
   * time, but the flash write command can take 2-3ms. The EC command
   * processing is currently not very fast (about 500us). We could
@@ -52,6 +57,8 @@
   */
 #define EC_MSG_DEADLINE_MS		5
 =======
+=======
+>>>>>>> v3.18
  * Allow for a long time for the EC to respond.  We support i2c
  * tunneling and support fairly long messages for the tunnel (249
  * bytes long at the moment).  If we're talking to a 100 kHz device
@@ -68,17 +75,23 @@
  * for this, clocking in at 2-3ms.
  */
 #define EC_MSG_DEADLINE_MS		100
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
   * Time between raising the SPI chip select (for the end of a
   * transaction) and dropping it again (for the next transaction).
 <<<<<<< HEAD
+<<<<<<< HEAD
   * If we go too fast, the EC will miss the transaction. It seems
   * that 50us is enough with the 16MHz STM32 EC.
   */
 #define EC_SPI_RECOVERY_TIME_NS	(50 * 1000)
 =======
+=======
+>>>>>>> v3.18
   * If we go too fast, the EC will miss the transaction. We know that we
   * need at least 70 us with the 16 MHz STM32 EC, so go with 200 us to be
   * safe.
@@ -90,6 +103,9 @@
  * simple delay to make sure that the bus stays locked.
  */
 #define EC_REBOOT_DELAY_MS	50
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -99,6 +115,11 @@
  * @last_transfer_ns: time that we last finished a transfer, or 0 if there
  *	if no record
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @end_of_msg_delay: used to set the delay_usecs on the spi_transfer that
+ *      is sent when we want to turn off CS at the end of a transaction.
+>>>>>>> v3.18
 =======
  * @end_of_msg_delay: used to set the delay_usecs on the spi_transfer that
  *      is sent when we want to turn off CS at the end of a transaction.
@@ -108,6 +129,10 @@ struct cros_ec_spi {
 	struct spi_device *spi;
 	s64 last_transfer_ns;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int end_of_msg_delay;
+>>>>>>> v3.18
 =======
 	unsigned int end_of_msg_delay;
 >>>>>>> v3.18
@@ -122,7 +147,13 @@ static void debug_packet(struct device *dev, const char *name, u8 *ptr,
 	dev_dbg(dev, "%s: ", name);
 	for (i = 0; i < len; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_cont(dev, " %02x", ptr[i]);
+=======
+		pr_cont(" %02x", ptr[i]);
+
+	pr_cont("\n");
+>>>>>>> v3.18
 =======
 		pr_cont(" %02x", ptr[i]);
 
@@ -157,13 +188,19 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
 	/* Receive data until we see the header byte */
 	deadline = jiffies + msecs_to_jiffies(EC_MSG_DEADLINE_MS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do {
 		memset(&trans, '\0', sizeof(trans));
 =======
+=======
+>>>>>>> v3.18
 	while (true) {
 		unsigned long start_jiffies = jiffies;
 
 		memset(&trans, 0, sizeof(trans));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		trans.cs_change = 1;
 		trans.rx_buf = ptr = ec_dev->din;
@@ -185,6 +222,7 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (time_after(jiffies, deadline)) {
 			dev_warn(ec_dev->dev, "EC failed to respond in time\n");
@@ -192,6 +230,8 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
 		}
 	} while (ptr == end);
 =======
+=======
+>>>>>>> v3.18
 		if (ptr != end)
 			break;
 
@@ -205,6 +245,9 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
 			return -ETIMEDOUT;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -233,7 +276,11 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
 			todo, need_len, ptr - ec_dev->din);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(&trans, '\0', sizeof(trans));
+=======
+		memset(&trans, 0, sizeof(trans));
+>>>>>>> v3.18
 =======
 		memset(&trans, 0, sizeof(trans));
 >>>>>>> v3.18
@@ -264,7 +311,11 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cros_ec_command_spi_xfer - Transfer a message over SPI and receive the reply
+=======
+ * cros_ec_cmd_xfer_spi - Transfer a message over SPI and receive the reply
+>>>>>>> v3.18
 =======
  * cros_ec_cmd_xfer_spi - Transfer a message over SPI and receive the reply
 >>>>>>> v3.18
@@ -273,8 +324,13 @@ static int cros_ec_spi_receive_response(struct cros_ec_device *ec_dev,
  * @ec_msg: Message to transfer
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cros_ec_command_spi_xfer(struct cros_ec_device *ec_dev,
 				    struct cros_ec_msg *ec_msg)
+=======
+static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
+				struct cros_ec_command *ec_msg)
+>>>>>>> v3.18
 =======
 static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 				struct cros_ec_command *ec_msg)
@@ -288,7 +344,10 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 	int sum;
 	int ret = 0, final_ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -298,6 +357,7 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 	/* If it's too soon to do another transaction, wait */
 	if (ec_spi->last_transfer_ns) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct timespec ts;
 		unsigned long delay;	/* The delay completed so far */
 
@@ -306,18 +366,27 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 		if (delay < EC_SPI_RECOVERY_TIME_NS)
 			ndelay(delay);
 =======
+=======
+>>>>>>> v3.18
 		unsigned long delay;	/* The delay completed so far */
 
 		delay = ktime_get_ns() - ec_spi->last_transfer_ns;
 		if (delay < EC_SPI_RECOVERY_TIME_NS)
 			ndelay(EC_SPI_RECOVERY_TIME_NS - delay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Transmit phase - send our message */
 	debug_packet(ec_dev->dev, "out", ec_dev->dout, len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&trans, '\0', sizeof(trans));
+=======
+	memset(&trans, 0, sizeof(trans));
+>>>>>>> v3.18
 =======
 	memset(&trans, 0, sizeof(trans));
 >>>>>>> v3.18
@@ -332,7 +401,11 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 	if (!ret) {
 		ret = cros_ec_spi_receive_response(ec_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ec_msg->in_len + EC_MSG_TX_PROTO_BYTES);
+=======
+				ec_msg->insize + EC_MSG_TX_PROTO_BYTES);
+>>>>>>> v3.18
 =======
 				ec_msg->insize + EC_MSG_TX_PROTO_BYTES);
 >>>>>>> v3.18
@@ -341,12 +414,15 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* turn off CS */
 	spi_message_init(&msg);
 	final_ret = spi_sync(ec_spi->spi, &msg);
 	ktime_get_ts(&ts);
 	ec_spi->last_transfer_ns = timespec_to_ns(&ts);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Turn off CS, possibly adding a delay to ensure the rising edge
 	 * doesn't come too soon after the end of the data.
@@ -358,11 +434,15 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 
 	final_ret = spi_sync(ec_spi->spi, &msg);
 	ec_spi->last_transfer_ns = ktime_get_ns();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ret)
 		ret = final_ret;
 	if (ret < 0) {
 		dev_err(ec_dev->dev, "spi transfer failed: %d\n", ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ret;
 	}
@@ -382,6 +462,8 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 			len, ec_msg->in_len);
 		return -ENOSPC;
 =======
+=======
+>>>>>>> v3.18
 		goto exit;
 	}
 
@@ -400,6 +482,9 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 			len, ec_msg->insize);
 		ret = -ENOSPC;
 		goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -407,8 +492,13 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 	for (i = 0; i < len; i++) {
 		sum += ptr[i + 2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ec_msg->in_len)
 			ec_msg->in_buf[i] = ptr[i + 2];
+=======
+		if (ec_msg->insize)
+			ec_msg->indata[i] = ptr[i + 2];
+>>>>>>> v3.18
 =======
 		if (ec_msg->insize)
 			ec_msg->indata[i] = ptr[i + 2];
@@ -423,6 +513,7 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 			"bad packet checksum, expected %02x, got %02x\n",
 			sum, ptr[len + 2]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EBADMSG;
 	}
 
@@ -431,6 +522,8 @@ static int cros_ec_cmd_xfer_spi(struct cros_ec_device *ec_dev,
 
 static int cros_ec_probe_spi(struct spi_device *spi)
 =======
+=======
+>>>>>>> v3.18
 		ret = -EBADMSG;
 		goto exit;
 	}
@@ -455,6 +548,9 @@ static void cros_ec_spi_dt_probe(struct cros_ec_spi *ec_spi, struct device *dev)
 }
 
 static int cros_ec_spi_probe(struct spi_device *spi)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct device *dev = &spi->dev;
@@ -477,6 +573,7 @@ static int cros_ec_spi_probe(struct spi_device *spi)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, ec_dev);
 	ec_dev->name = "SPI";
 	ec_dev->dev = dev;
@@ -484,6 +581,8 @@ static int cros_ec_spi_probe(struct spi_device *spi)
 	ec_dev->irq = spi->irq;
 	ec_dev->command_xfer = cros_ec_command_spi_xfer;
 =======
+=======
+>>>>>>> v3.18
 	/* Check for any DT properties */
 	cros_ec_spi_dt_probe(ec_spi, dev);
 
@@ -492,6 +591,9 @@ static int cros_ec_spi_probe(struct spi_device *spi)
 	ec_dev->priv = ec_spi;
 	ec_dev->irq = spi->irq;
 	ec_dev->cmd_xfer = cros_ec_cmd_xfer_spi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ec_dev->ec_name = ec_spi->spi->modalias;
 	ec_dev->phys_name = dev_name(&ec_spi->spi->dev);
@@ -506,17 +608,23 @@ static int cros_ec_spi_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 static int cros_ec_remove_spi(struct spi_device *spi)
 =======
+=======
+>>>>>>> v3.18
 	device_init_wakeup(&spi->dev, true);
 
 	return 0;
 }
 
 static int cros_ec_spi_remove(struct spi_device *spi)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cros_ec_device *ec_dev;
@@ -559,8 +667,13 @@ static struct spi_driver cros_ec_driver_spi = {
 		.pm	= &cros_ec_spi_pm_ops,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe		= cros_ec_probe_spi,
 	.remove		= cros_ec_remove_spi,
+=======
+	.probe		= cros_ec_spi_probe,
+	.remove		= cros_ec_spi_remove,
+>>>>>>> v3.18
 =======
 	.probe		= cros_ec_spi_probe,
 	.remove		= cros_ec_spi_remove,
@@ -571,7 +684,11 @@ static struct spi_driver cros_ec_driver_spi = {
 module_spi_driver(cros_ec_driver_spi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

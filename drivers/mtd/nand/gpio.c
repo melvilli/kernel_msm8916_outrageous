@@ -18,7 +18,11 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -91,6 +95,7 @@ static void gpio_nand_cmd_ctrl(struct mtd_info *mtd, int cmd, unsigned int ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void gpio_nand_writebuf(struct mtd_info *mtd, const u_char *buf, int len)
 {
 	struct nand_chip *this = mtd->priv;
@@ -138,15 +143,21 @@ static void gpio_nand_readbuf16(struct mtd_info *mtd, u_char *buf, int len)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int gpio_nand_devready(struct mtd_info *mtd)
 {
 	struct gpiomtd *gpiomtd = gpio_nand_getpriv(mtd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_is_valid(gpiomtd->plat.gpio_rdy))
 		return gpio_get_value(gpiomtd->plat.gpio_rdy);
 
 	return 1;
+=======
+	return gpio_get_value(gpiomtd->plat.gpio_rdy);
+>>>>>>> v3.18
 =======
 	return gpio_get_value(gpiomtd->plat.gpio_rdy);
 >>>>>>> v3.18
@@ -165,6 +176,12 @@ static int gpio_nand_get_config_of(const struct device *dev,
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!dev->of_node)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!dev->of_node)
 		return -ENODEV;
@@ -194,6 +211,7 @@ static int gpio_nand_get_config_of(const struct device *dev,
 static struct resource *gpio_nand_get_io_sync_of(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *r = devm_kzalloc(&pdev->dev, sizeof(*r), GFP_KERNEL);
 	u64 addr;
 
@@ -202,6 +220,8 @@ static struct resource *gpio_nand_get_io_sync_of(struct platform_device *pdev)
 		return NULL;
 
 =======
+=======
+>>>>>>> v3.18
 	struct resource *r;
 	u64 addr;
 
@@ -213,6 +233,9 @@ static struct resource *gpio_nand_get_io_sync_of(struct platform_device *pdev)
 	if (!r)
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r->start = addr;
 	r->end = r->start + 0x3;
@@ -243,8 +266,13 @@ static inline int gpio_nand_get_config(const struct device *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->platform_data) {
 		memcpy(plat, dev->platform_data, sizeof(*plat));
+=======
+	if (dev_get_platdata(dev)) {
+		memcpy(plat, dev_get_platdata(dev), sizeof(*plat));
+>>>>>>> v3.18
 =======
 	if (dev_get_platdata(dev)) {
 		memcpy(plat, dev_get_platdata(dev), sizeof(*plat));
@@ -267,6 +295,7 @@ gpio_nand_get_io_sync(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gpio_nand_remove(struct platform_device *dev)
 {
 	struct gpiomtd *gpiomtd = platform_get_drvdata(dev);
@@ -284,17 +313,23 @@ static int gpio_nand_remove(struct platform_device *dev)
 	release_mem_region(res->start, resource_size(res));
 
 =======
+=======
+>>>>>>> v3.18
 static int gpio_nand_remove(struct platform_device *pdev)
 {
 	struct gpiomtd *gpiomtd = platform_get_drvdata(pdev);
 
 	nand_release(&gpiomtd->mtd_info);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (gpio_is_valid(gpiomtd->plat.gpio_nwp))
 		gpio_set_value(gpiomtd->plat.gpio_nwp, 0);
 	gpio_set_value(gpiomtd->plat.gpio_nce, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gpio_free(gpiomtd->plat.gpio_cle);
 	gpio_free(gpiomtd->plat.gpio_ale);
@@ -416,6 +451,8 @@ static int gpio_nand_probe(struct platform_device *dev)
 	if (nand_scan(&gpiomtd->mtd_info, 1)) {
 		dev_err(&dev->dev, "no nand chips found?\n");
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -498,6 +535,9 @@ static int gpio_nand_probe(struct platform_device *pdev)
 		gpio_direction_output(gpiomtd->plat.gpio_nwp, 1);
 
 	if (nand_scan(&gpiomtd->mtd_info, 1)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENXIO;
 		goto err_wp;
@@ -507,6 +547,7 @@ static int gpio_nand_probe(struct platform_device *pdev)
 		gpiomtd->plat.adjust_parts(&gpiomtd->plat,
 					   gpiomtd->mtd_info.size);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ppdata.of_node = dev->dev.of_node;
 	ret = mtd_device_parse_register(&gpiomtd->mtd_info, NULL, &ppdata,
@@ -518,17 +559,23 @@ static int gpio_nand_probe(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ppdata.of_node = pdev->dev.of_node;
 	ret = mtd_device_parse_register(&gpiomtd->mtd_info, NULL, &ppdata,
 					gpiomtd->plat.parts,
 					gpiomtd->plat.num_parts);
 	if (!ret)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err_wp:
 	if (gpio_is_valid(gpiomtd->plat.gpio_nwp))
 		gpio_set_value(gpiomtd->plat.gpio_nwp, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gpio_is_valid(gpiomtd->plat.gpio_rdy))
 		gpio_free(gpiomtd->plat.gpio_rdy);
@@ -552,6 +599,9 @@ err_map:
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -561,6 +611,10 @@ static struct platform_driver gpio_nand_driver = {
 	.driver		= {
 		.name	= "gpio-nand",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner	= THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner	= THIS_MODULE,
 >>>>>>> v3.18

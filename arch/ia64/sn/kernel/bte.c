@@ -115,7 +115,11 @@ bte_result_t bte_copy(u64 src, u64 dest, u64 len, u64 mode, void *notification)
 			nasid_to_try[1] = my_nasid;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nasid_to_try[1] = (int)NULL;
+=======
+			nasid_to_try[1] = 0;
+>>>>>>> v3.18
 =======
 			nasid_to_try[1] = 0;
 >>>>>>> v3.18
@@ -127,7 +131,11 @@ bte_result_t bte_copy(u64 src, u64 dest, u64 len, u64 mode, void *notification)
 			nasid_to_try[1] = NASID_GET(dest);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nasid_to_try[1] = (int)NULL;
+=======
+			nasid_to_try[1] = 0;
+>>>>>>> v3.18
 =======
 			nasid_to_try[1] = 0;
 >>>>>>> v3.18

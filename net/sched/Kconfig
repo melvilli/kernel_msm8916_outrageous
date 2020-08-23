@@ -273,7 +273,10 @@ config NET_SCH_FQ_CODEL
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NET_SCH_FQ
 	tristate "Fair Queue"
 	help
@@ -310,6 +313,9 @@ config NET_SCH_PIE
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NET_SCH_INGRESS
 	tristate "Ingress Qdisc"
@@ -461,6 +467,10 @@ config NET_CLS_CGROUP
 	tristate "Control Group Classifier"
 	select NET_CLS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CGROUP_NET_CLASSID
+>>>>>>> v3.18
 =======
 	select CGROUP_NET_CLASSID
 >>>>>>> v3.18
@@ -473,7 +483,10 @@ config NET_CLS_CGROUP
 	  module will be called cls_cgroup.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NET_CLS_BPF
 	tristate "BPF-based classifier"
 	select NET_CLS
@@ -484,6 +497,9 @@ config NET_CLS_BPF
 	  To compile this code as a module, choose M here: the module will
 	  be called cls_bpf.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NET_EMATCH
 	bool "Extended Matches"

@@ -44,6 +44,10 @@ pgd_t swapper_pg_dir[PTRS_PER_PGD] __attribute__((__aligned__(PAGE_SIZE)));
 unsigned long empty_zero_page, zero_page_mask;
 EXPORT_SYMBOL(empty_zero_page);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(zero_page_mask);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(zero_page_mask);
 >>>>>>> v3.18
@@ -129,8 +133,11 @@ void __init paging_init(void)
 	arch_local_irq_restore(4UL << (BITS_PER_LONG - 8));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&init_mm.context.attach_count, 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sparse_memory_present_with_active_regions(MAX_NUMNODES);
@@ -144,16 +151,22 @@ void __init paging_init(void)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long codesize, reservedpages, datasize, initsize;
 
         max_mapnr = num_physpages = max_low_pfn;
 =======
+=======
+>>>>>>> v3.18
 	if (MACHINE_HAS_TLB_LC)
 		cpumask_set_cpu(0, &init_mm.context.cpu_attach_mask);
 	cpumask_set_cpu(0, mm_cpumask(&init_mm));
 	atomic_set(&init_mm.context.attach_count, 1);
 
         max_mapnr = max_low_pfn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         high_memory = (void *) __va(max_low_pfn * PAGE_SIZE);
 
@@ -164,6 +177,7 @@ void __init mem_init(void)
 	free_all_bootmem();
 	setup_zero_pages();	/* Setup zeroed pages. */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reservedpages = 0;
 
@@ -180,6 +194,9 @@ void __init mem_init(void)
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 	printk("Write protected kernel read-only data: %#lx - %#lx\n",
 	       (unsigned long)&_stext,
 	       PFN_ALIGN((unsigned long)&_eshared) - 1);
@@ -188,7 +205,11 @@ void __init mem_init(void)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(POISON_FREE_INITMEM);
+>>>>>>> v3.18
 =======
 	free_initmem_default(POISON_FREE_INITMEM);
 >>>>>>> v3.18
@@ -198,7 +219,12 @@ void free_initmem(void)
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, POISON_FREE_INITMEM, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
+			   "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
 			   "initrd");

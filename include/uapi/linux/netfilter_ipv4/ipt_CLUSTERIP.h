@@ -3,6 +3,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 >>>>>>> v3.18
@@ -27,7 +31,11 @@ struct ipt_clusterip_tgt_info {
 
 	/* only relevant for new ones */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 clustermac[6];
+=======
+	__u8 clustermac[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	__u8 clustermac[ETH_ALEN];
 >>>>>>> v3.18

@@ -27,6 +27,10 @@ connbytes_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	u_int64_t bytes = 0;
 	u_int64_t pkts = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nf_conn_acct *acct;
+>>>>>>> v3.18
 =======
 	const struct nf_conn_acct *acct;
 >>>>>>> v3.18
@@ -37,16 +41,22 @@ connbytes_mt(const struct sk_buff *skb, struct xt_action_param *par)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	counters = nf_conn_acct_find(ct);
 	if (!counters)
 		return false;
 
 =======
+=======
+>>>>>>> v3.18
 	acct = nf_conn_acct_find(ct);
 	if (!acct)
 		return false;
 
 	counters = acct->counter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (sinfo->what) {
 	case XT_CONNBYTES_PKTS:
@@ -131,7 +141,11 @@ static int connbytes_mt_check(const struct xt_mtchk_param *par)
 	 */
 	if (!nf_ct_acct_enabled(par->net)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Forcing CT accounting to be enabled\n");
+=======
+		pr_warn("Forcing CT accounting to be enabled\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Forcing CT accounting to be enabled\n");
 >>>>>>> v3.18

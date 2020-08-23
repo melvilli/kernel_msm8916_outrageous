@@ -39,6 +39,12 @@
 
 #define WL18XX_PHY_INIT_MEM_ADDR   0x80926000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define WL18XX_PHY_END_MEM_ADDR	   0x8093CA44
+#define WL18XX_PHY_INIT_MEM_SIZE \
+	(WL18XX_PHY_END_MEM_ADDR - WL18XX_PHY_INIT_MEM_ADDR)
+>>>>>>> v3.18
 =======
 #define WL18XX_PHY_END_MEM_ADDR	   0x8093CA44
 #define WL18XX_PHY_INIT_MEM_SIZE \
@@ -118,12 +124,18 @@
 #define OCS_EN				0xA02080
 #define PRIMARY_CLK_DETECT		0xA020A6
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PLLSH_COEX_PLL_N		0xA02384
 #define PLLSH_COEX_PLL_M		0xA02382
 #define PLLSH_COEX_PLL_SWALLOW_EN	0xA0238E
 #define PLLSH_WL_PLL_SEL		0xA02398
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PLLSH_WCS_PLL_N			0xA02362
 #define PLLSH_WCS_PLL_M			0xA02360
@@ -140,6 +152,7 @@
 #define PLLSH_WCS_PLL_P_FACTOR_CFG_2_MASK	0x000F
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PLLSH_WCS_PLL_SWALLOW_EN_VAL1	0x1
 #define PLLSH_WCS_PLL_SWALLOW_EN_VAL2	0x12
 
@@ -149,6 +162,8 @@
 #define WL18XX_ROM_VER_MASK		0x3
 #define WL18XX_ROM_VER_OFFSET		0
 =======
+=======
+>>>>>>> v3.18
 #define PLLSH_WL_PLL_EN_VAL1		0x7
 #define PLLSH_WL_PLL_EN_VAL2		0x2
 #define PLLSH_COEX_PLL_SWALLOW_EN_VAL1	0x2
@@ -165,6 +180,9 @@
 #define WL18XX_PG_VER_OFFSET		4
 #define WL18XX_ROM_VER_MASK		0x3e00
 #define WL18XX_ROM_VER_OFFSET		9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WL18XX_METAL_VER_MASK		0xC
 #define WL18XX_METAL_VER_OFFSET		2
@@ -172,6 +190,12 @@
 #define WL18XX_NEW_METAL_VER_OFFSET	7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define WL18XX_PACKAGE_TYPE_OFFSET	13
+#define WL18XX_PACKAGE_TYPE_WSP		0
+
+>>>>>>> v3.18
 =======
 #define WL18XX_PACKAGE_TYPE_OFFSET	13
 #define WL18XX_PACKAGE_TYPE_WSP		0
@@ -238,7 +262,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
+=======
+enum wl18xx_rdl_num {
+>>>>>>> v3.18
 =======
 enum wl18xx_rdl_num {
 >>>>>>> v3.18
@@ -248,17 +276,24 @@ enum wl18xx_rdl_num {
 	RDL_3_HP	= 3,
 	RDL_4_SP	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	RDL_5_SP	= 0x11,
 	RDL_6_SP	= 0x12,
 	RDL_7_SP	= 0x13,
 	RDL_8_SP	= 0x14,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	_RDL_LAST,
 	RDL_MAX = _RDL_LAST - 1,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char * const rdl_names[] = {
 	[RDL_NONE]	= "",
@@ -268,6 +303,8 @@ static const char * const rdl_names[] = {
 	[RDL_4_SP]	= "1897 MIMO",
 };
 =======
+=======
+>>>>>>> v3.18
 
 /* FPGA_SPARE_1 register - used to change the PHY ATPG clock at boot time */
 #define WL18XX_PHY_FPGA_SPARE_1		0x8093CA40
@@ -280,6 +317,9 @@ static const char * const rdl_names[] = {
 
 /* command to re-enable FDSP clock */
 #define MEM_FDSP_CLK_120_ENABLE		0x40000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __REG_H__ */

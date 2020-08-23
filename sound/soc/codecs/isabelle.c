@@ -141,6 +141,7 @@ static const char *isabelle_rx2_texts[] = {"VRX2", "ARX2"};
 
 static const struct soc_enum isabelle_rx1_enum[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_ENUM_SINGLE(ISABELLE_VOICE_HPF_CFG_REG, 3, 1, isabelle_rx1_texts),
 	SOC_ENUM_SINGLE(ISABELLE_AUDIO_HPF_CFG_REG, 5, 1, isabelle_rx1_texts),
 };
@@ -149,6 +150,8 @@ static const struct soc_enum isabelle_rx2_enum[] = {
 	SOC_ENUM_SINGLE(ISABELLE_VOICE_HPF_CFG_REG, 2, 1, isabelle_rx2_texts),
 	SOC_ENUM_SINGLE(ISABELLE_AUDIO_HPF_CFG_REG, 4, 1, isabelle_rx2_texts),
 =======
+=======
+>>>>>>> v3.18
 	SOC_ENUM_SINGLE(ISABELLE_VOICE_HPF_CFG_REG, 3,
 			ARRAY_SIZE(isabelle_rx1_texts), isabelle_rx1_texts),
 	SOC_ENUM_SINGLE(ISABELLE_AUDIO_HPF_CFG_REG, 5,
@@ -160,6 +163,9 @@ static const struct soc_enum isabelle_rx2_enum[] = {
 			ARRAY_SIZE(isabelle_rx2_texts), isabelle_rx2_texts),
 	SOC_ENUM_SINGLE(ISABELLE_AUDIO_HPF_CFG_REG, 4,
 			ARRAY_SIZE(isabelle_rx2_texts), isabelle_rx2_texts),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -176,6 +182,7 @@ static const char *isabelle_vtx_texts[] = {"AMIC2", "DMIC"};
 
 static const struct soc_enum isabelle_atx_enum[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_ENUM_SINGLE(ISABELLE_AMIC_CFG_REG, 7, 1, isabelle_atx_texts),
 	SOC_ENUM_SINGLE(ISABELLE_DMIC_CFG_REG, 0, 1, isabelle_atx_texts),
 };
@@ -184,6 +191,8 @@ static const struct soc_enum isabelle_vtx_enum[] = {
 	SOC_ENUM_SINGLE(ISABELLE_AMIC_CFG_REG, 6, 1, isabelle_vtx_texts),
 	SOC_ENUM_SINGLE(ISABELLE_DMIC_CFG_REG, 0, 1, isabelle_vtx_texts),
 =======
+=======
+>>>>>>> v3.18
 	SOC_ENUM_SINGLE(ISABELLE_AMIC_CFG_REG, 7,
 			ARRAY_SIZE(isabelle_atx_texts), isabelle_atx_texts),
 	SOC_ENUM_SINGLE(ISABELLE_DMIC_CFG_REG, 0,
@@ -195,6 +204,9 @@ static const struct soc_enum isabelle_vtx_enum[] = {
 			ARRAY_SIZE(isabelle_vtx_texts), isabelle_vtx_texts),
 	SOC_ENUM_SINGLE(ISABELLE_DMIC_CFG_REG, 0,
 			ARRAY_SIZE(isabelle_vtx_texts), isabelle_vtx_texts),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -212,6 +224,7 @@ static const char *isabelle_amic1_texts[] = {
 static const char *isabelle_amic2_texts[] = {"Sub Mic", "Aux/FM Right"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum isabelle_amic1_enum[] = {
 	SOC_ENUM_SINGLE(ISABELLE_AMIC_CFG_REG, 5,
 			ARRAY_SIZE(isabelle_amic1_texts),
@@ -224,6 +237,8 @@ static const struct soc_enum isabelle_amic2_enum[] = {
 			isabelle_amic2_texts),
 };
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(isabelle_amic1_enum,
 			    ISABELLE_AMIC_CFG_REG, 5,
 			    isabelle_amic1_texts);
@@ -231,6 +246,9 @@ static SOC_ENUM_SINGLE_DECL(isabelle_amic1_enum,
 static SOC_ENUM_SINGLE_DECL(isabelle_amic2_enum,
 			    ISABELLE_AMIC_CFG_REG, 4,
 			    isabelle_amic2_texts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new amic1_control =
@@ -245,30 +263,42 @@ static const char *isabelle_st_voice_texts[] = {"VTX1", "VTX2"};
 
 static const struct soc_enum isabelle_st_audio_enum[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_ENUM_SINGLE(ISABELLE_ATX_STPGA1_CFG_REG, 7, 1,
 			isabelle_st_audio_texts),
 	SOC_ENUM_SINGLE(ISABELLE_ATX_STPGA2_CFG_REG, 7, 1,
 =======
+=======
+>>>>>>> v3.18
 	SOC_ENUM_SINGLE(ISABELLE_ATX_STPGA1_CFG_REG, 7,
 			ARRAY_SIZE(isabelle_st_audio_texts),
 			isabelle_st_audio_texts),
 	SOC_ENUM_SINGLE(ISABELLE_ATX_STPGA2_CFG_REG, 7,
 			ARRAY_SIZE(isabelle_st_audio_texts),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			isabelle_st_audio_texts),
 };
 
 static const struct soc_enum isabelle_st_voice_enum[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_ENUM_SINGLE(ISABELLE_VTX_STPGA1_CFG_REG, 7, 1,
 			isabelle_st_voice_texts),
 	SOC_ENUM_SINGLE(ISABELLE_VTX2_STPGA2_CFG_REG, 7, 1,
 =======
+=======
+>>>>>>> v3.18
 	SOC_ENUM_SINGLE(ISABELLE_VTX_STPGA1_CFG_REG, 7,
 			ARRAY_SIZE(isabelle_st_voice_texts),
 			isabelle_st_voice_texts),
 	SOC_ENUM_SINGLE(ISABELLE_VTX2_STPGA2_CFG_REG, 7,
 			ARRAY_SIZE(isabelle_st_voice_texts),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			isabelle_st_voice_texts),
 };
@@ -965,8 +995,12 @@ static int isabelle_hw_params(struct snd_pcm_substream *substream,
 			      struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_codec *codec = rtd->codec;
+=======
+	struct snd_soc_codec *codec = dai->codec;
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = dai->codec;
 >>>>>>> v3.18
@@ -1010,17 +1044,23 @@ static int isabelle_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S20_3LE:
 		aif |= ISABELLE_AIF_LENGTH_20;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 20:
 		aif |= ISABELLE_AIF_LENGTH_20;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		aif |= ISABELLE_AIF_LENGTH_32;
 		break;
@@ -1149,6 +1189,7 @@ static struct snd_soc_dai_driver isabelle_dai[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int isabelle_probe(struct snd_soc_codec *codec)
 {
 	int ret = 0;
@@ -1166,6 +1207,9 @@ static int isabelle_probe(struct snd_soc_codec *codec)
 
 static struct snd_soc_codec_driver soc_codec_dev_isabelle = {
 	.probe = isabelle_probe,
+=======
+static struct snd_soc_codec_driver soc_codec_dev_isabelle = {
+>>>>>>> v3.18
 =======
 static struct snd_soc_codec_driver soc_codec_dev_isabelle = {
 >>>>>>> v3.18

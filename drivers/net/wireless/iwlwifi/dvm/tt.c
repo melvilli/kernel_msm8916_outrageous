@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/mac80211.h>
@@ -245,7 +252,11 @@ static void iwl_prepare_ct_kill_task(struct iwl_priv *priv)
 	IWL_DEBUG_TEMP(priv, "Prepare to enter IWL_TI_CT_KILL\n");
 	/* make request to retrieve statistics information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_send_statistics_request(priv, CMD_SYNC, false);
+=======
+	iwl_send_statistics_request(priv, 0, false);
+>>>>>>> v3.18
 =======
 	iwl_send_statistics_request(priv, 0, false);
 >>>>>>> v3.18
@@ -639,7 +650,11 @@ void iwl_tt_initialize(struct iwl_priv *priv)
 	INIT_WORK(&priv->ct_exit, iwl_bg_ct_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->base_params->adv_thermal_throttle) {
+=======
+	if (priv->lib->adv_thermal_throttle) {
+>>>>>>> v3.18
 =======
 	if (priv->lib->adv_thermal_throttle) {
 >>>>>>> v3.18

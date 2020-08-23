@@ -107,7 +107,12 @@ static const char * card_names[] = {
 	"SiS 7016 PCI Fast Ethernet"
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sis900_pci_tbl) = {
+=======
+
+static const struct pci_device_id sis900_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 
 static const struct pci_device_id sis900_pci_tbl[] = {
@@ -582,7 +587,10 @@ err_out_unmap:
 	pci_iounmap(pci_dev, ioaddr);
 err_out_cleardev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_release_regions(pci_dev);
@@ -1318,6 +1326,7 @@ static void sis900_timer(unsigned long data)
 	struct mii_phy *mii_phy = sis_priv->mii;
 	static const int next_tick = 5*HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 status;
 
 	if (!sis_priv->autong_complete){
@@ -1340,6 +1349,11 @@ static void sis900_timer(unsigned long data)
 	u16 status;
 
 >>>>>>> v3.18
+=======
+	int speed = 0, duplex = 0;
+	u16 status;
+
+>>>>>>> v3.18
 	status = mdio_read(net_dev, sis_priv->cur_phy, MII_STATUS);
 	status = mdio_read(net_dev, sis_priv->cur_phy, MII_STATUS);
 
@@ -1351,10 +1365,13 @@ static void sis900_timer(unsigned long data)
 		mii_phy = sis_priv->mii;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status & MII_STAT_LINK){
 			sis900_check_mode(net_dev, mii_phy);
 			netif_carrier_on(net_dev);
 =======
+=======
+>>>>>>> v3.18
 		if (status & MII_STAT_LINK) {
 			WARN_ON(!(status & MII_STAT_AUTO_DONE));
 
@@ -1364,6 +1381,9 @@ static void sis900_timer(unsigned long data)
 				sis630_set_eq(net_dev, sis_priv->chipset_rev);
 				netif_carrier_on(net_dev);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -1639,12 +1659,15 @@ sis900_start_xmit(struct sk_buff *skb, struct net_device *net_dev)
 	unsigned int  count_dirty_tx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Don't transmit data before the complete of auto-negotiation */
 	if(!sis_priv->autong_complete){
 		netif_stop_queue(net_dev);
 		return NETDEV_TX_BUSY;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&sis_priv->lock, flags);
@@ -1659,7 +1682,11 @@ sis900_start_xmit(struct sk_buff *skb, struct net_device *net_dev)
 	if (unlikely(pci_dma_mapping_error(sis_priv->pci_dev,
 		sis_priv->tx_ring[entry].bufptr))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
+=======
+			dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1757,7 +1784,11 @@ static irqreturn_t sis900_interrupt(int irq, void *dev_instance)
 	if(netif_msg_intr(sis_priv))
 		printk(KERN_DEBUG "%s: exiting interrupt, "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       "interrupt status = 0x%#8.8x.\n",
+=======
+		       "interrupt status = %#8.8x\n",
+>>>>>>> v3.18
 =======
 		       "interrupt status = %#8.8x\n",
 >>>>>>> v3.18
@@ -2311,7 +2342,10 @@ static int sis900_set_config(struct net_device *dev, struct ifmap *map)
                 	/* These Modes are not supported (are they?)*/
 			return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2482,7 +2516,10 @@ static void sis900_remove(struct pci_dev *pci_dev)
 	free_netdev(net_dev);
 	pci_release_regions(pci_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

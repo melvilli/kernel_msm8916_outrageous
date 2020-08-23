@@ -4,12 +4,18 @@ For various board the "board" node may contain specific properties
 that pertain to this particular board, such as board-specific GPIOs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Required root node property: src
 - Nomadik System and reset controller used for basic chip control, clock
   and reset line control.
 - compatible: must be "stericsson,nomadik,src"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Boards with the Nomadik SoC include:
 

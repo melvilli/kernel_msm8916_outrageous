@@ -12,7 +12,10 @@
 	compatible = "wm,wm8850";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -24,6 +27,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	aliases {
 		serial0 = &uart0;
@@ -87,8 +93,13 @@
 				plla: plla {
 					#clock-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					compatible = "wm,wm8750-pll-clock";
 					clocks = <&ref25>;
+=======
+					compatible = "wm,wm8850-pll-clock";
+					clocks = <&ref24>;
+>>>>>>> v3.18
 =======
 					compatible = "wm,wm8850-pll-clock";
 					clocks = <&ref24>;
@@ -99,12 +110,15 @@
 				pllb: pllb {
 					#clock-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					compatible = "wm,wm8750-pll-clock";
 					clocks = <&ref25>;
 					reg = <0x204>;
 				};
 
 =======
+=======
+>>>>>>> v3.18
 					compatible = "wm,wm8850-pll-clock";
 					clocks = <&ref24>;
 					reg = <0x204>;
@@ -173,6 +187,9 @@
 					divisor-reg = <0x310>;
 				};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clkuart0: uart0 {
 					#clock-cells = <0>;
@@ -269,7 +286,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart0: uart@d8200000 {
+=======
+		uart0: serial@d8200000 {
+>>>>>>> v3.18
 =======
 		uart0: serial@d8200000 {
 >>>>>>> v3.18
@@ -278,48 +299,70 @@
 			interrupts = <32>;
 			clocks = <&clkuart0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 
 		uart1: uart@d82b0000 {
 =======
+=======
+>>>>>>> v3.18
 			status = "disabled";
 		};
 
 		uart1: serial@d82b0000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			compatible = "via,vt8500-uart";
 			reg = <0xd82b0000 0x1040>;
 			interrupts = <33>;
 			clocks = <&clkuart1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 
                 uart2: uart@d8210000 {
 =======
+=======
+>>>>>>> v3.18
 			status = "disabled";
 		};
 
                 uart2: serial@d8210000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                         compatible = "via,vt8500-uart";
                         reg = <0xd8210000 0x1040>;
                         interrupts = <47>;
                         clocks = <&clkuart2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 };
 
                 uart3: uart@d82c0000 {
 =======
+=======
+>>>>>>> v3.18
 			status = "disabled";
                 };
 
                 uart3: serial@d82c0000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                         compatible = "via,vt8500-uart";
                         reg = <0xd82c0000 0x1040>;
                         interrupts = <50>;
                         clocks = <&clkuart3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -340,13 +383,19 @@
 			sdon-inverted;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		ethernet@d8004000 {
 			compatible = "via,vt8500-rhine";
 			reg = <0xd8004000 0x100>;
 			interrupts = <10>;
                 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

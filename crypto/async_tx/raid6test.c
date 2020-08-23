@@ -29,7 +29,11 @@
 #define pr(fmt, args...) pr_info("raid6test: " fmt, ##args)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NDISKS 16 /* Including P and Q */
+=======
+#define NDISKS 64 /* Including P and Q */
+>>>>>>> v3.18
 =======
 #define NDISKS 64 /* Including P and Q */
 >>>>>>> v3.18
@@ -224,7 +228,10 @@ static int raid6_test(void)
 		err += test(12, &tests);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* the 24 disk case is special for ioatdma as it is the boudary point
 	 * at which it needs to switch from 8-source ops to 16-source
@@ -233,6 +240,9 @@ static int raid6_test(void)
 	if (NDISKS > 24)
 		err += test(24, &tests);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err += test(NDISKS, &tests);
 

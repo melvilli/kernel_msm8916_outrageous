@@ -31,6 +31,7 @@
 
 #include "device.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "wcmd.h"
 
 void RXvWorkItem(void *Context);
@@ -41,6 +42,11 @@ void RXvFreeRCB(PRCB pRCB, int bReAllocSkb);
 
 int RXbBulkInProcessData(struct vnt_private *, PRCB pRCB,
 	unsigned long BytesToIndicate);
+=======
+
+int vnt_rx_data(struct vnt_private *, struct vnt_rcb *,
+	unsigned long bytes_recieved);
+>>>>>>> v3.18
 =======
 
 int vnt_rx_data(struct vnt_private *, struct vnt_rcb *,

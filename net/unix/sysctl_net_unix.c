@@ -16,7 +16,11 @@
 #include <net/af_unix.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table unix_table[] = {
+=======
+static struct ctl_table unix_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table unix_table[] = {
 >>>>>>> v3.18

@@ -20,10 +20,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -50,6 +53,7 @@ static const unsigned short normal_i2c[] = { 0x48, 0x49, 0x4a, 0x4b,
 #define LM77_REG_TEMP_MIN	0x04
 #define LM77_REG_TEMP_MAX	0x05
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Each client has this additional data */
 struct lm77_data {
@@ -96,6 +100,8 @@ static struct i2c_driver lm77_driver = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 enum temp_index {
 	t_input = 0,
 	t_crit,
@@ -123,6 +129,9 @@ struct lm77_data {
 	u8			alarms;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* straight from the datasheet */
 #define LM77_TEMP_MIN (-55000)
@@ -135,8 +144,12 @@ struct lm77_data {
 static inline s16 LM77_TEMP_TO_REG(int temp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ntemp = clamp_val(temp, LM77_TEMP_MIN, LM77_TEMP_MAX);
 	return (ntemp / 500) * 8;
+=======
+	return (temp / 500) * 8;
+>>>>>>> v3.18
 =======
 	return (temp / 500) * 8;
 >>>>>>> v3.18
@@ -147,6 +160,7 @@ static inline int LM77_TEMP_FROM_REG(s16 reg)
 	return (reg / 8) * 500;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* sysfs stuff */
 
@@ -229,6 +243,8 @@ static ssize_t set_temp_crit_hyst(struct device *dev,
 	lm77_write_value(client, LM77_REG_TEMP_HYST,
 			 LM77_TEMP_TO_REG(data->temp_hyst));
 =======
+=======
+>>>>>>> v3.18
 /*
  * All registers are word-sized, except for the configuration register.
  * The LM77 uses the high-byte first convention.
@@ -319,11 +335,15 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *devattr,
 	mutex_lock(&data->update_lock);
 	data->temp[nr] = val;
 	lm77_write_value(client, temp_regs[nr], LM77_TEMP_TO_REG(val));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 	return count;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* preserve hysteresis when setting T_crit */
 static ssize_t set_temp_crit(struct device *dev, struct device_attribute *attr,
@@ -337,6 +357,8 @@ static ssize_t set_temp_crit(struct device *dev, struct device_attribute *attr,
 
 	err = kstrtoul(buf, 10, &val);
 =======
+=======
+>>>>>>> v3.18
 /*
  * hysteresis is stored as a relative value on the chip, so it has to be
  * converted first.
@@ -351,11 +373,15 @@ static ssize_t set_temp_hyst(struct device *dev,
 	int err;
 
 	err = kstrtol(buf, 10, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		return err;
 
 	mutex_lock(&data->update_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	oldcrithyst = data->temp_crit - data->temp_hyst;
 	data->temp_crit = val;
@@ -365,10 +391,15 @@ static ssize_t set_temp_hyst(struct device *dev,
 	lm77_write_value(client, LM77_REG_TEMP_HYST,
 			 LM77_TEMP_TO_REG(data->temp_hyst));
 =======
+=======
+>>>>>>> v3.18
 	val = clamp_val(data->temp[t_crit] - val, LM77_TEMP_MIN, LM77_TEMP_MAX);
 	data->temp[t_hyst] = val;
 	lm77_write_value(client, LM77_REG_TEMP_HYST,
 			 LM77_TEMP_TO_REG(data->temp[t_hyst]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 	return count;
@@ -382,6 +413,7 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%u\n", (data->alarms >> bitnr) & 1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(temp1_input, S_IRUGO,
 		   show_temp_input, NULL);
@@ -399,6 +431,8 @@ static DEVICE_ATTR(temp1_min_hyst, S_IRUGO,
 static DEVICE_ATTR(temp1_max_hyst, S_IRUGO,
 		   show_temp_max_hyst, NULL);
 =======
+=======
+>>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, show_temp, NULL, t_input);
 static SENSOR_DEVICE_ATTR(temp1_crit, S_IWUSR | S_IRUGO, show_temp, set_temp,
 			  t_crit);
@@ -411,12 +445,16 @@ static SENSOR_DEVICE_ATTR(temp1_crit_hyst, S_IWUSR | S_IRUGO, show_temp_hyst,
 			  set_temp_hyst, t_crit);
 static SENSOR_DEVICE_ATTR(temp1_min_hyst, S_IRUGO, show_temp_hyst, NULL, t_min);
 static SENSOR_DEVICE_ATTR(temp1_max_hyst, S_IRUGO, show_temp_hyst, NULL, t_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static SENSOR_DEVICE_ATTR(temp1_crit_alarm, S_IRUGO, show_alarm, NULL, 2);
 static SENSOR_DEVICE_ATTR(temp1_min_alarm, S_IRUGO, show_alarm, NULL, 0);
 static SENSOR_DEVICE_ATTR(temp1_max_alarm, S_IRUGO, show_alarm, NULL, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct attribute *lm77_attributes[] = {
 	&dev_attr_temp1_input.attr,
@@ -427,6 +465,8 @@ static struct attribute *lm77_attributes[] = {
 	&dev_attr_temp1_min_hyst.attr,
 	&dev_attr_temp1_max_hyst.attr,
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm77_attrs[] = {
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit.dev_attr.attr,
@@ -435,6 +475,9 @@ static struct attribute *lm77_attrs[] = {
 	&sensor_dev_attr_temp1_crit_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp1_min_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp1_max_hyst.dev_attr.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&sensor_dev_attr_temp1_crit_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp1_min_alarm.dev_attr.attr,
@@ -442,10 +485,14 @@ static struct attribute *lm77_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group lm77_group = {
 	.attrs = lm77_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(lm77);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm77);
 >>>>>>> v3.18
@@ -522,12 +569,15 @@ static int lm77_detect(struct i2c_client *client, struct i2c_board_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lm77_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	struct device *dev = &client->dev;
 	struct lm77_data *data;
 	int err;
 =======
+=======
+>>>>>>> v3.18
 static void lm77_init_client(struct i2c_client *client)
 {
 	/* Initialize the LM77 chip - turn off shutdown mode */
@@ -541,6 +591,9 @@ static int lm77_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct lm77_data *data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data = devm_kzalloc(dev, sizeof(struct lm77_data), GFP_KERNEL);
@@ -548,8 +601,12 @@ static int lm77_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(client, data);
 	data->valid = 0;
+=======
+	data->client = client;
+>>>>>>> v3.18
 =======
 	data->client = client;
 >>>>>>> v3.18
@@ -558,6 +615,7 @@ static int lm77_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	/* Initialize the LM77 chip */
 	lm77_init_client(client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&dev->kobj, &lm77_group);
@@ -649,6 +707,8 @@ static struct lm77_data *lm77_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data, lm77_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
@@ -671,6 +731,9 @@ static struct i2c_driver lm77_driver = {
 	.detect		= lm77_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(lm77_driver);

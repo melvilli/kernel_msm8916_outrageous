@@ -17,6 +17,10 @@
 #include <linux/of_platform.h>
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 >>>>>>> v3.18
@@ -30,6 +34,7 @@
 #include "at91_aic.h"
 #include "generic.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static const struct of_device_id irq_of_match[] __initconst = {
@@ -76,12 +81,17 @@ static void __init sama5_dt_device_init(void)
 
 static const char *sama5_dt_board_compat[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 static void __init sama5_dt_device_init(void)
 {
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 }
 
 static const char *sama5_dt_board_compat[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"atmel,sama5",
 	NULL
@@ -89,6 +99,7 @@ static const char *sama5_dt_board_compat[] __initconst = {
 
 DT_MACHINE_START(sama5_dt, "Atmel SAMA5 (Device Tree)")
 	/* Maintainer: Atmel */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
 	.map_io		= at91_map_io,
@@ -99,6 +110,8 @@ DT_MACHINE_START(sama5_dt, "Atmel SAMA5 (Device Tree)")
 	.dt_compat	= sama5_dt_board_compat,
 MACHINE_END
 =======
+=======
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.init_early	= at91_dt_initialize,
 	.init_machine	= sama5_dt_device_init,
@@ -118,4 +131,7 @@ DT_MACHINE_START(sama5_alt_dt, "Atmel SAMA5 (Device Tree)")
 	.dt_compat	= sama5_alt_dt_board_compat,
 	.l2c_aux_mask	= ~0UL,
 MACHINE_END
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

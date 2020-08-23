@@ -42,7 +42,10 @@
 #include "netport.h"
 #include "objsec.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "avc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -242,7 +245,10 @@ static __init int sel_netport_init(void)
 {
 	int iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -255,7 +261,11 @@ static __init int sel_netport_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

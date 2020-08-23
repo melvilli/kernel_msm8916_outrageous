@@ -385,6 +385,10 @@ void rio_dev_put(struct rio_dev *);
 #ifdef CONFIG_RAPIDIO_DMA_ENGINE
 extern struct dma_chan *rio_request_dma(struct rio_dev *rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct dma_chan *rio_request_mport_dma(struct rio_mport *mport);
+>>>>>>> v3.18
 =======
 extern struct dma_chan *rio_request_mport_dma(struct rio_mport *mport);
 >>>>>>> v3.18
@@ -394,11 +398,17 @@ extern struct dma_async_tx_descriptor *rio_dma_prep_slave_sg(
 		struct rio_dma_data *data,
 		enum dma_transfer_direction direction, unsigned long flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern struct dma_async_tx_descriptor *rio_dma_prep_xfer(
 		struct dma_chan *dchan,	u16 destid,
 		struct rio_dma_data *data,
 		enum dma_transfer_direction direction, unsigned long flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

@@ -27,8 +27,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -64,7 +68,10 @@
 #include <linux/mii.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/if_vlan.h>
@@ -416,7 +423,11 @@ union ring_type {
 #define NV_RX_DESCRIPTORVALID	(1<<16)
 #define NV_RX_MISSEDFRAME	(1<<17)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NV_RX_SUBSTRACT1	(1<<18)
+=======
+#define NV_RX_SUBTRACT1		(1<<18)
+>>>>>>> v3.18
 =======
 #define NV_RX_SUBTRACT1		(1<<18)
 >>>>>>> v3.18
@@ -437,7 +448,11 @@ union ring_type {
 #define NV_RX2_CHECKSUM_IP_UDP	(0x18000000)
 #define NV_RX2_DESCRIPTORVALID	(1<<29)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NV_RX2_SUBSTRACT1	(1<<25)
+=======
+#define NV_RX2_SUBTRACT1	(1<<25)
+>>>>>>> v3.18
 =======
 #define NV_RX2_SUBTRACT1	(1<<25)
 >>>>>>> v3.18
@@ -1499,7 +1514,11 @@ static int phy_init(struct net_device *dev)
 
 	/* phy vendor specific configuration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((np->phy_oui == PHY_OUI_CICADA)) {
+=======
+	if (np->phy_oui == PHY_OUI_CICADA) {
+>>>>>>> v3.18
 =======
 	if (np->phy_oui == PHY_OUI_CICADA) {
 >>>>>>> v3.18
@@ -1775,7 +1794,11 @@ nv_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *storage)
 	/* software stats */
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		syncp_start = u64_stats_fetch_begin_bh(&np->swstats_rx_syncp);
+=======
+		syncp_start = u64_stats_fetch_begin_irq(&np->swstats_rx_syncp);
+>>>>>>> v3.18
 =======
 		syncp_start = u64_stats_fetch_begin_irq(&np->swstats_rx_syncp);
 >>>>>>> v3.18
@@ -1783,6 +1806,7 @@ nv_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *storage)
 		storage->rx_bytes         = np->stat_rx_bytes;
 		storage->rx_dropped       = np->stat_rx_dropped;
 		storage->rx_missed_errors = np->stat_rx_missed_errors;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} while (u64_stats_fetch_retry_bh(&np->swstats_rx_syncp, syncp_start));
 
@@ -1793,6 +1817,8 @@ nv_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *storage)
 		storage->tx_dropped = np->stat_tx_dropped;
 	} while (u64_stats_fetch_retry_bh(&np->swstats_tx_syncp, syncp_start));
 =======
+=======
+>>>>>>> v3.18
 	} while (u64_stats_fetch_retry_irq(&np->swstats_rx_syncp, syncp_start));
 
 	do {
@@ -1801,6 +1827,9 @@ nv_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *storage)
 		storage->tx_bytes   = np->stat_tx_bytes;
 		storage->tx_dropped = np->stat_tx_dropped;
 	} while (u64_stats_fetch_retry_irq(&np->swstats_tx_syncp, syncp_start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If the nic supports hw counters then retrieve latest values */
@@ -2268,7 +2297,11 @@ static netdev_tx_t nv_start_xmit(struct sk_buff *skb, struct net_device *dev)
 					  np->put_tx_ctx->dma)) {
 			/* on DMA mapping error - drop the packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kfree_skb(skb);
+=======
+			dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -2318,7 +2351,11 @@ static netdev_tx_t nv_start_xmit(struct sk_buff *skb, struct net_device *dev)
 						tmp_tx_ctx = np->first_tx_ctx;
 				} while (tmp_tx_ctx != np->put_tx_ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				kfree_skb(skb);
+=======
+				dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 				dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -2425,7 +2462,11 @@ static netdev_tx_t nv_start_xmit_optimized(struct sk_buff *skb,
 					  np->put_tx_ctx->dma)) {
 			/* on DMA mapping error - drop the packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kfree_skb(skb);
+=======
+			dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -2476,7 +2517,11 @@ static netdev_tx_t nv_start_xmit_optimized(struct sk_buff *skb,
 						tmp_tx_ctx = np->first_tx_ctx;
 				} while (tmp_tx_ctx != np->put_tx_ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				kfree_skb(skb);
+=======
+				dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 				dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -2885,7 +2930,11 @@ static int nv_rx_process(struct net_device *dev, int limit)
 					/* framing errors are soft errors */
 					else if ((flags & NV_RX_ERROR_MASK) == NV_RX_FRAMINGERR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						if (flags & NV_RX_SUBSTRACT1)
+=======
+						if (flags & NV_RX_SUBTRACT1)
+>>>>>>> v3.18
 =======
 						if (flags & NV_RX_SUBTRACT1)
 >>>>>>> v3.18
@@ -2920,7 +2969,11 @@ static int nv_rx_process(struct net_device *dev, int limit)
 					/* framing errors are soft errors */
 					else if ((flags & NV_RX2_ERROR_MASK) == NV_RX2_FRAMINGERR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						if (flags & NV_RX2_SUBSTRACT1)
+=======
+						if (flags & NV_RX2_SUBTRACT1)
+>>>>>>> v3.18
 =======
 						if (flags & NV_RX2_SUBTRACT1)
 >>>>>>> v3.18
@@ -2998,7 +3051,11 @@ static int nv_rx_process_optimized(struct net_device *dev, int limit)
 				/* framing errors are soft errors */
 				else if ((flags & NV_RX2_ERROR_MASK) == NV_RX2_FRAMINGERR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (flags & NV_RX2_SUBSTRACT1)
+=======
+					if (flags & NV_RX2_SUBTRACT1)
+>>>>>>> v3.18
 =======
 					if (flags & NV_RX2_SUBTRACT1)
 >>>>>>> v3.18
@@ -3995,7 +4052,11 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 	struct fe_priv *np = get_nvpriv(dev);
 	u8 __iomem *base = get_hwbase(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 1;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -4015,22 +4076,34 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 		for (i = 0; i < (np->msi_flags & NV_MSI_X_VECTORS_MASK); i++)
 			np->msi_x_entry[i].entry = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = pci_enable_msix(np->pci_dev, np->msi_x_entry, (np->msi_flags & NV_MSI_X_VECTORS_MASK));
 		if (ret == 0) {
 =======
+=======
+>>>>>>> v3.18
 		ret = pci_enable_msix_range(np->pci_dev,
 					    np->msi_x_entry,
 					    np->msi_flags & NV_MSI_X_VECTORS_MASK,
 					    np->msi_flags & NV_MSI_X_VECTORS_MASK);
 		if (ret > 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			np->msi_flags |= NV_MSI_X_ENABLED;
 			if (optimization_mode == NV_OPTIMIZATION_MODE_THROUGHPUT && !intr_test) {
 				/* Request irq for rx handling */
 				sprintf(np->name_rx, "%s-rx", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_RX].vector,
 						nv_nic_irq_rx, IRQF_SHARED, np->name_rx, dev) != 0) {
+=======
+				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_RX].vector,
+						  nv_nic_irq_rx, IRQF_SHARED, np->name_rx, dev);
+				if (ret) {
+>>>>>>> v3.18
 =======
 				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_RX].vector,
 						  nv_nic_irq_rx, IRQF_SHARED, np->name_rx, dev);
@@ -4046,8 +4119,14 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 				/* Request irq for tx handling */
 				sprintf(np->name_tx, "%s-tx", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_TX].vector,
 						nv_nic_irq_tx, IRQF_SHARED, np->name_tx, dev) != 0) {
+=======
+				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_TX].vector,
+						  nv_nic_irq_tx, IRQF_SHARED, np->name_tx, dev);
+				if (ret) {
+>>>>>>> v3.18
 =======
 				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_TX].vector,
 						  nv_nic_irq_tx, IRQF_SHARED, np->name_tx, dev);
@@ -4063,8 +4142,14 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 				/* Request irq for link and timer handling */
 				sprintf(np->name_other, "%s-other", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_OTHER].vector,
 						nv_nic_irq_other, IRQF_SHARED, np->name_other, dev) != 0) {
+=======
+				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_OTHER].vector,
+						  nv_nic_irq_other, IRQF_SHARED, np->name_other, dev);
+				if (ret) {
+>>>>>>> v3.18
 =======
 				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_OTHER].vector,
 						  nv_nic_irq_other, IRQF_SHARED, np->name_other, dev);
@@ -4086,7 +4171,13 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 			} else {
 				/* Request irq for all interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_ALL].vector, handler, IRQF_SHARED, dev->name, dev) != 0) {
+=======
+				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_ALL].vector,
+						  handler, IRQF_SHARED, dev->name, dev);
+				if (ret) {
+>>>>>>> v3.18
 =======
 				ret = request_irq(np->msi_x_entry[NV_MSI_X_VECTOR_ALL].vector,
 						  handler, IRQF_SHARED, dev->name, dev);
@@ -4106,6 +4197,7 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 			}
 			netdev_info(dev, "MSI-X enabled\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 	if (ret != 0 && np->msi_flags & NV_MSI_CAPABLE) {
@@ -4114,6 +4206,8 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 			np->msi_flags |= NV_MSI_ENABLED;
 			if (request_irq(np->pci_dev->irq, handler, IRQF_SHARED, dev->name, dev) != 0) {
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 		}
 	}
@@ -4123,6 +4217,9 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 			np->msi_flags |= NV_MSI_ENABLED;
 			ret = request_irq(np->pci_dev->irq, handler, IRQF_SHARED, dev->name, dev);
 			if (ret) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				netdev_info(dev, "request_irq failed %d\n",
 					    ret);
@@ -4138,6 +4235,7 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 			writel(NVREG_MSI_VECTOR_0_ENABLED, base + NvRegMSIIrqMask);
 			netdev_info(dev, "MSI enabled\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 	if (ret != 0) {
@@ -4146,12 +4244,17 @@ static int nv_request_irq(struct net_device *dev, int intr_test)
 
 	}
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 		}
 	}
 
 	if (request_irq(np->pci_dev->irq, handler, IRQF_SHARED, dev->name, dev) != 0)
 		goto out_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -4398,8 +4501,13 @@ static int nv_get_settings(struct net_device *dev, struct ethtool_cmd *ecmd)
 			ecmd->duplex = DUPLEX_FULL;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		speed = -1;
 		ecmd->duplex = -1;
+=======
+		speed = SPEED_UNKNOWN;
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		speed = SPEED_UNKNOWN;
 		ecmd->duplex = DUPLEX_UNKNOWN;
@@ -5275,13 +5383,19 @@ static void nv_self_test(struct net_device *dev, struct ethtool_test *test, u64 
 	struct fe_priv *np = netdev_priv(dev);
 	u8 __iomem *base = get_hwbase(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result;
 	memset(buffer, 0, nv_get_sset_count(dev, ETH_SS_TEST)*sizeof(u64));
 =======
+=======
+>>>>>>> v3.18
 	int result, count;
 
 	count = nv_get_sset_count(dev, ETH_SS_TEST);
 	memset(buffer, 0, count * sizeof(u64));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!nv_link_test(dev)) {
@@ -5327,7 +5441,11 @@ static void nv_self_test(struct net_device *dev, struct ethtool_test *test, u64 
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!nv_loopback_test(dev)) {
+=======
+		if (count > NV_TEST_COUNT_BASE && !nv_loopback_test(dev)) {
+>>>>>>> v3.18
 =======
 		if (count > NV_TEST_COUNT_BASE && !nv_loopback_test(dev)) {
 >>>>>>> v3.18
@@ -5755,6 +5873,11 @@ static int nv_probe(struct pci_dev *pci_dev, const struct pci_device_id *id)
 	spin_lock_init(&np->hwstats_lock);
 	SET_NETDEV_DEV(dev, &pci_dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64_stats_init(&np->swstats_rx_syncp);
+	u64_stats_init(&np->swstats_tx_syncp);
+>>>>>>> v3.18
 =======
 	u64_stats_init(&np->swstats_rx_syncp);
 	u64_stats_init(&np->swstats_tx_syncp);
@@ -5896,7 +6019,11 @@ static int nv_probe(struct pci_dev *pci_dev, const struct pci_device_id *id)
 
 	netif_napi_add(dev, &np->napi, nv_napi_poll, RX_WORK_PER_LOOP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ops);
+=======
+	dev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ops;
 >>>>>>> v3.18
@@ -6161,7 +6288,10 @@ out_error:
 	if (phystate_orig)
 		writel(phystate|NVREG_ADAPTCTL_RUNNING, base + NvRegAdapterControl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_freering:
@@ -6235,7 +6365,10 @@ static void nv_remove(struct pci_dev *pci_dev)
 	pci_disable_device(pci_dev);
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -6327,7 +6460,11 @@ static void nv_shutdown(struct pci_dev *pdev)
 #endif /* CONFIG_PM */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pci_tbl) = {
+=======
+static const struct pci_device_id pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pci_tbl[] = {
 >>>>>>> v3.18
@@ -6495,7 +6632,11 @@ static const struct pci_device_id pci_tbl[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_driver driver = {
+=======
+static struct pci_driver forcedeth_pci_driver = {
+>>>>>>> v3.18
 =======
 static struct pci_driver forcedeth_pci_driver = {
 >>>>>>> v3.18
@@ -6508,6 +6649,7 @@ static struct pci_driver forcedeth_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init init_nic(void)
 {
 	return pci_register_driver(&driver);
@@ -6518,6 +6660,8 @@ static void __exit exit_nic(void)
 	pci_unregister_driver(&driver);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_param(max_interrupt_work, int, 0);
@@ -6541,6 +6685,7 @@ MODULE_PARM_DESC(debug_tx_timeout,
 		 "Dump tx related registers and ring when tx_timeout happens");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Manfred Spraul <manfred@colorfullife.com>");
 MODULE_DESCRIPTION("Reverse Engineered nForce ethernet driver");
 MODULE_LICENSE("GPL");
@@ -6550,9 +6695,14 @@ MODULE_DEVICE_TABLE(pci, pci_tbl);
 module_init(init_nic);
 module_exit(exit_nic);
 =======
+=======
+>>>>>>> v3.18
 module_pci_driver(forcedeth_pci_driver);
 MODULE_AUTHOR("Manfred Spraul <manfred@colorfullife.com>");
 MODULE_DESCRIPTION("Reverse Engineered nForce ethernet driver");
 MODULE_LICENSE("GPL");
 MODULE_DEVICE_TABLE(pci, pci_tbl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

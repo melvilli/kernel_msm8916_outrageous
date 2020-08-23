@@ -45,7 +45,10 @@ DEFINE_PER_CPU(int, __kmap_atomic_idx);
 #ifdef CONFIG_HIGHMEM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Architecture with aliasing data cache may define the following family of
  * helper functions in its asm/highmem.h to control cache color of virtual
@@ -106,6 +109,9 @@ static inline wait_queue_head_t *get_pkmap_wait_queue_head(unsigned int color)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned long totalhigh_pages __read_mostly;
 EXPORT_SYMBOL(totalhigh_pages);
@@ -132,7 +138,10 @@ unsigned int nr_free_highpages (void)
 
 static int pkmap_count[LAST_PKMAP];
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int last_pkmap_nr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static  __cacheline_aligned_in_smp DEFINE_SPINLOCK(kmap_lock);
@@ -140,8 +149,11 @@ static  __cacheline_aligned_in_smp DEFINE_SPINLOCK(kmap_lock);
 pte_t * pkmap_page_table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DECLARE_WAIT_QUEUE_HEAD(pkmap_map_wait);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -231,6 +243,7 @@ static inline unsigned long map_new_virtual(struct page *page)
 	unsigned long vaddr;
 	int count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 start:
 	count = LAST_PKMAP;
@@ -241,6 +254,8 @@ start:
 			flush_all_zero_pkmaps();
 			count = LAST_PKMAP;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int last_pkmap_nr;
 	unsigned int color = get_pkmap_color(page);
 
@@ -252,6 +267,9 @@ start:
 		if (no_more_pkmaps(last_pkmap_nr, color)) {
 			flush_all_zero_pkmaps();
 			count = get_pkmap_entries_count(color);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (!pkmap_count[last_pkmap_nr])
@@ -265,6 +283,7 @@ start:
 		{
 			DECLARE_WAITQUEUE(wait, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			__set_current_state(TASK_UNINTERRUPTIBLE);
 			add_wait_queue(&pkmap_map_wait, &wait);
@@ -272,6 +291,8 @@ start:
 			schedule();
 			remove_wait_queue(&pkmap_map_wait, &wait);
 =======
+=======
+>>>>>>> v3.18
 			wait_queue_head_t *pkmap_map_wait =
 				get_pkmap_wait_queue_head(color);
 
@@ -280,6 +301,9 @@ start:
 			unlock_kmap();
 			schedule();
 			remove_wait_queue(pkmap_map_wait, &wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			lock_kmap();
 
@@ -369,6 +393,11 @@ void kunmap_high(struct page *page)
 	unsigned long flags;
 	int need_wakeup;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int color = get_pkmap_color(page);
+	wait_queue_head_t *pkmap_map_wait;
+>>>>>>> v3.18
 =======
 	unsigned int color = get_pkmap_color(page);
 	wait_queue_head_t *pkmap_map_wait;
@@ -399,7 +428,12 @@ void kunmap_high(struct page *page)
 		 * test if the queue is empty.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		need_wakeup = waitqueue_active(&pkmap_map_wait);
+=======
+		pkmap_map_wait = get_pkmap_wait_queue_head(color);
+		need_wakeup = waitqueue_active(pkmap_map_wait);
+>>>>>>> v3.18
 =======
 		pkmap_map_wait = get_pkmap_wait_queue_head(color);
 		need_wakeup = waitqueue_active(pkmap_map_wait);
@@ -410,7 +444,11 @@ void kunmap_high(struct page *page)
 	/* do wake-up, if needed, race-free outside of the spin lock */
 	if (need_wakeup)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up(&pkmap_map_wait);
+=======
+		wake_up(pkmap_map_wait);
+>>>>>>> v3.18
 =======
 		wake_up(pkmap_map_wait);
 >>>>>>> v3.18

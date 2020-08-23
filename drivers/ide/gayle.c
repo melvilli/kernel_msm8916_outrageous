@@ -133,7 +133,11 @@ static int __init amiga_gayle_ide_probe(struct platform_device *pdev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -188,6 +192,7 @@ static struct platform_driver amiga_gayle_ide_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init amiga_gayle_ide_init(void)
 {
 	return platform_driver_probe(&amiga_gayle_ide_driver,
@@ -202,6 +207,9 @@ static void __exit amiga_gayle_ide_exit(void)
 }
 
 module_exit(amiga_gayle_ide_exit);
+=======
+module_platform_driver_probe(amiga_gayle_ide_driver, amiga_gayle_ide_probe);
+>>>>>>> v3.18
 =======
 module_platform_driver_probe(amiga_gayle_ide_driver, amiga_gayle_ide_probe);
 >>>>>>> v3.18

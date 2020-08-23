@@ -23,6 +23,7 @@ extern void _mcount(void);
 do {							\
 	asm volatile (					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"1: " load " %[" STR(dst) "], 0(%[" STR(src) "])\n"\
 		"   li %[" STR(error) "], 0\n"		\
 		"2:\n"					\
@@ -30,12 +31,17 @@ do {							\
 		".section .fixup, \"ax\"\n"		\
 		"3: li %[" STR(error) "], 1\n"		\
 =======
+=======
+>>>>>>> v3.18
 		"1: " load " %[tmp_dst], 0(%[tmp_src])\n"	\
 		"   li %[tmp_err], 0\n"			\
 		"2: .insn\n"				\
 							\
 		".section .fixup, \"ax\"\n"		\
 		"3: li %[tmp_err], 1\n"			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"   j 2b\n"				\
 		".previous\n"				\
@@ -45,8 +51,13 @@ do {							\
 		".previous\n"				\
 							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: [dst] "=&r" (dst), [error] "=r" (error)\
 		: [src] "r" (src)			\
+=======
+		: [tmp_dst] "=&r" (dst), [tmp_err] "=r" (error)\
+		: [tmp_src] "r" (src)			\
+>>>>>>> v3.18
 =======
 		: [tmp_dst] "=&r" (dst), [tmp_err] "=r" (error)\
 		: [tmp_src] "r" (src)			\
@@ -59,6 +70,7 @@ do {							\
 do {						\
 	asm volatile (				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"1: " store " %[" STR(src) "], 0(%[" STR(dst) "])\n"\
 		"   li %[" STR(error) "], 0\n"	\
 		"2:\n"				\
@@ -66,12 +78,17 @@ do {						\
 		".section .fixup, \"ax\"\n"	\
 		"3: li %[" STR(error) "], 1\n"	\
 =======
+=======
+>>>>>>> v3.18
 		"1: " store " %[tmp_src], 0(%[tmp_dst])\n"\
 		"   li %[tmp_err], 0\n"		\
 		"2: .insn\n"			\
 						\
 		".section .fixup, \"ax\"\n"	\
 		"3: li %[tmp_err], 1\n"		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"   j 2b\n"			\
 		".previous\n"			\
@@ -81,8 +98,13 @@ do {						\
 		".previous\n"			\
 						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: [error] "=r" (error)		\
 		: [dst] "r" (dst), [src] "r" (src)\
+=======
+		: [tmp_err] "=r" (error)	\
+		: [tmp_dst] "r" (dst), [tmp_src] "r" (src)\
+>>>>>>> v3.18
 =======
 		: [tmp_err] "=r" (error)	\
 		: [tmp_dst] "r" (dst), [tmp_src] "r" (src)\

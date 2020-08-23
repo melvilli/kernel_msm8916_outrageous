@@ -155,7 +155,11 @@ static s32 e1000_reset_hw_vf(struct e1000_hw *hw)
 		if (!ret_val) {
 			if (msgbuf[0] == (E1000_VF_RESET | E1000_VT_MSGTYPE_ACK))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				memcpy(hw->mac.perm_addr, addr, 6);
+=======
+				memcpy(hw->mac.perm_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 				memcpy(hw->mac.perm_addr, addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -319,7 +323,11 @@ static void e1000_rar_set_vf(struct e1000_hw *hw, u8 * addr, u32 index)
 	memset(msgbuf, 0, 12);
 	msgbuf[0] = E1000_VF_SET_MAC_ADDR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(msg_addr, addr, 6);
+=======
+	memcpy(msg_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(msg_addr, addr, ETH_ALEN);
 >>>>>>> v3.18

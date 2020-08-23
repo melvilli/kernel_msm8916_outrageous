@@ -662,7 +662,11 @@ static int cfv_probe(struct virtio_device *vdev)
 
 	netdev = alloc_netdev(sizeof(struct cfv_info), cfv_netdev_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      cfv_netdev_setup);
+=======
+			      NET_NAME_UNKNOWN, cfv_netdev_setup);
+>>>>>>> v3.18
 =======
 			      NET_NAME_UNKNOWN, cfv_netdev_setup);
 >>>>>>> v3.18
@@ -691,6 +695,7 @@ static int cfv_probe(struct virtio_device *vdev)
 
 	/* Get the CAIF configuration from virtio config space, if available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GET_VIRTIO_CONFIG_OPS(_v, _var, _f) \
 	((_v)->config->get(_v, offsetof(struct virtio_caif_transf_config, _f), \
 			   &_var, \
@@ -704,6 +709,8 @@ static int cfv_probe(struct virtio_device *vdev)
 		GET_VIRTIO_CONFIG_OPS(vdev, cfv->mtu, mtu);
 		GET_VIRTIO_CONFIG_OPS(vdev, cfv->mru, mtu);
 =======
+=======
+>>>>>>> v3.18
 	if (vdev->config->get) {
 		virtio_cread(vdev, struct virtio_caif_transf_config, headroom,
 			     &cfv->tx_hr);
@@ -717,6 +724,9 @@ static int cfv_probe(struct virtio_device *vdev)
 			     &cfv->mtu);
 		virtio_cread(vdev, struct virtio_caif_transf_config, mtu,
 			     &cfv->mru);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		cfv->tx_hr = CFV_DEF_HEADROOM;

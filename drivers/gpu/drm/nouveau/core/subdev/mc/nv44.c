@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/mc.h>
 
 struct nv44_mc_priv {
@@ -50,12 +51,17 @@ nv44_mc_init(struct nouveau_object *object)
 {
 	struct nv44_mc_priv *priv = (void *)object;
 =======
+=======
+>>>>>>> v3.18
 #include "nv04.h"
 
 int
 nv44_mc_init(struct nouveau_object *object)
 {
 	struct nv04_mc_priv *priv = (void *)object;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 tmp = nv_rd32(priv, 0x10020c);
 
@@ -70,24 +76,36 @@ nv44_mc_init(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_oclass
 nv44_mc_oclass = {
 	.handle = NV_SUBDEV(MC, 0x44),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv44_mc_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv44_mc_oclass = &(struct nouveau_mc_oclass) {
 	.base.handle = NV_SUBDEV(MC, 0x44),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_mc_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_mc_dtor,
 		.init = nv44_mc_init,
 		.fini = _nouveau_mc_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.intr = nv04_mc_intr,
+	.msi_rearm = nv40_mc_msi_rearm,
+}.base;
+>>>>>>> v3.18
 =======
 	.intr = nv04_mc_intr,
 	.msi_rearm = nv40_mc_msi_rearm,

@@ -49,7 +49,10 @@ int pinctrl_bind_pins(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 	/*
 	 * If power management is enabled, we also look for the optional
@@ -69,6 +72,9 @@ int pinctrl_bind_pins(struct device *dev)
 		dev_dbg(dev, "no idle pinctrl state\n");
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 

@@ -3,7 +3,11 @@
  *  Copyright (C) 2008 Nuvoton Technology Corp.
  *                Wei Song
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2010 Jean Delvare <khali@linux-fr.org>
+=======
+ *  Copyright (C) 2010 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2010 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -2287,7 +2291,11 @@ static struct i2c_driver w83795_driver = {
 module_i2c_driver(w83795_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Wei Song, Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Wei Song, Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Wei Song, Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

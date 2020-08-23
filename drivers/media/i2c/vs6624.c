@@ -28,6 +28,7 @@
 #include <linux/videodev2.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-device.h>
@@ -49,6 +50,8 @@
 #define QQCIF_HEIGHT    72
 
 =======
+=======
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-device.h>
 #include <media/v4l2-mediabus.h>
@@ -56,6 +59,9 @@
 
 #include "vs6624_regs.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_FRAME_RATE  30
 
@@ -515,6 +521,10 @@ static inline struct v4l2_subdev *to_sd(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 >>>>>>> v3.18
@@ -531,6 +541,10 @@ static int vs6624_read(struct v4l2_subdev *sd, u16 index)
 	return buf[0];
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -741,6 +755,7 @@ static int vs6624_s_stream(struct v4l2_subdev *sd, int enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vs6624_g_chip_ident(struct v4l2_subdev *sd,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -767,6 +782,11 @@ static int vs6624_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *r
 static int vs6624_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+static int vs6624_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
+{
+>>>>>>> v3.18
 	reg->val = vs6624_read(sd, reg->reg & 0xffff);
 	reg->size = 1;
 	return 0;
@@ -775,12 +795,15 @@ static int vs6624_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *r
 static int vs6624_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vs6624_write(sd, reg->reg & 0xffff, reg->val & 0xff);
@@ -794,7 +817,10 @@ static const struct v4l2_ctrl_ops vs6624_ctrl_ops = {
 
 static const struct v4l2_subdev_core_ops vs6624_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = vs6624_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -836,7 +862,12 @@ static int vs6624_probe(struct i2c_client *client,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gpio_request(*ce, "VS6624 Chip Enable");
+=======
+	ret = devm_gpio_request_one(&client->dev, *ce, GPIOF_OUT_INIT_HIGH,
+				    "VS6624 Chip Enable");
+>>>>>>> v3.18
 =======
 	ret = devm_gpio_request_one(&client->dev, *ce, GPIOF_OUT_INIT_HIGH,
 				    "VS6624 Chip Enable");
@@ -845,6 +876,7 @@ static int vs6624_probe(struct i2c_client *client,
 		v4l_err(client, "failed to request GPIO %d\n", *ce);
 		return ret;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gpio_direction_output(*ce, 1);
 	/* wait 100ms before any further i2c writes are performed */
@@ -856,12 +888,17 @@ static int vs6624_probe(struct i2c_client *client,
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* wait 100ms before any further i2c writes are performed */
 	mdelay(100);
 
 	sensor = devm_kzalloc(&client->dev, sizeof(*sensor), GFP_KERNEL);
 	if (sensor == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sd = &sensor->sd;
@@ -911,8 +948,11 @@ static int vs6624_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(sensor);
 		gpio_free(*ce);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -921,11 +961,16 @@ static int vs6624_probe(struct i2c_client *client,
 	/* initialize the hardware to the default control values */
 	ret = v4l2_ctrl_handler_setup(hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		v4l2_ctrl_handler_free(hdl);
 		kfree(sensor);
 		gpio_free(*ce);
 	}
+=======
+	if (ret)
+		v4l2_ctrl_handler_free(hdl);
+>>>>>>> v3.18
 =======
 	if (ret)
 		v4l2_ctrl_handler_free(hdl);
@@ -937,12 +982,18 @@ static int vs6624_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vs6624 *sensor = to_vs6624(sd);
 
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(sd->ctrl_handler);
 	gpio_free(sensor->ce_pin);
 	kfree(sensor);
+=======
+
+	v4l2_device_unregister_subdev(sd);
+	v4l2_ctrl_handler_free(sd->ctrl_handler);
+>>>>>>> v3.18
 =======
 
 	v4l2_device_unregister_subdev(sd);

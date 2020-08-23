@@ -14,7 +14,11 @@ Please refer to pinctrl-bindings.txt in this directory for details of the common
 pinctrl bindings used by client devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SiRFprimaII's pinmux nodes act as a container for an abitrary number of subnodes.
+=======
+SiRFprimaII's pinmux nodes act as a container for an arbitrary number of subnodes.
+>>>>>>> v3.18
 =======
 SiRFprimaII's pinmux nodes act as a container for an arbitrary number of subnodes.
 >>>>>>> v3.18

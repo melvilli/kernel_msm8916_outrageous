@@ -18,7 +18,11 @@
 #ifndef ATH9K_DFS_H
 #define ATH9K_DFS_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dfs_pattern_detector.h"
+=======
+#include "../dfs_pattern_detector.h"
+>>>>>>> v3.18
 =======
 #include "../dfs_pattern_detector.h"
 >>>>>>> v3.18

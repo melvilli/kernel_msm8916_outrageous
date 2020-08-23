@@ -26,6 +26,11 @@
 
 #include <drm/drm_mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_legacy.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_legacy.h>
 
@@ -120,7 +125,11 @@ enum via_family {
 #define VIA_WRITE8(reg, val)	DRM_WRITE8(VIA_BASE, reg, val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct drm_ioctl_desc via_ioctls[];
+=======
+extern const struct drm_ioctl_desc via_ioctls[];
+>>>>>>> v3.18
 =======
 extern const struct drm_ioctl_desc via_ioctls[];
 >>>>>>> v3.18
@@ -148,7 +157,11 @@ extern int via_enable_vblank(struct drm_device *dev, int crtc);
 extern void via_disable_vblank(struct drm_device *dev, int crtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t via_driver_irq_handler(DRM_IRQ_ARGS);
+=======
+extern irqreturn_t via_driver_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 extern irqreturn_t via_driver_irq_handler(int irq, void *arg);
 >>>>>>> v3.18

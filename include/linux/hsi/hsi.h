@@ -69,10 +69,13 @@ enum {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct hsi_config - Configuration for RX/TX HSI modules
  * @mode: Bit transmission mode (STREAM or FRAME)
  * @channels: Number of channels to use [1..16]
 =======
+=======
+>>>>>>> v3.18
  * struct hsi_channel - channel resource used by the hsi clients
  * @id: Channel number
  * @name: Channel name
@@ -88,6 +91,9 @@ struct hsi_channel {
  * @channels: Channel resources used by the client
  * @num_channels: Number of channel resources
  * @num_hw_channels: Number of channels the transceiver is configured for [1..16]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @speed: Max bit transmission speed (Kbit/s)
  * @flow: RX flow type (SYNCHRONIZED or PIPELINE)
@@ -95,15 +101,21 @@ struct hsi_channel {
  */
 struct hsi_config {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int	mode;
 	unsigned int	channels;
 	unsigned int	speed;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		mode;
 	struct hsi_channel	*channels;
 	unsigned int		num_channels;
 	unsigned int		num_hw_channels;
 	unsigned int		speed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union {
 		unsigned int	flow;		/* RX only */
@@ -205,7 +217,11 @@ static inline void hsi_unregister_client_driver(struct hsi_client_driver *drv)
  * @destructor: Destructor to free resources when flushing
  * @status: Status of the transfer when completed
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @actual_len: Actual length of data transfered on completion
+=======
+ * @actual_len: Actual length of data transferred on completion
+>>>>>>> v3.18
 =======
  * @actual_len: Actual length of data transferred on completion
 >>>>>>> v3.18
@@ -313,7 +329,10 @@ void hsi_put_controller(struct hsi_controller *hsi);
 int hsi_register_controller(struct hsi_controller *hsi);
 void hsi_unregister_controller(struct hsi_controller *hsi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct hsi_client *hsi_new_client(struct hsi_port *port,
 						struct hsi_board_info *info);
 int hsi_remove_client(struct device *dev, void *data);
@@ -329,6 +348,9 @@ static inline void hsi_add_clients_from_dt(struct hsi_port *port,
 	return;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void hsi_controller_set_drvdata(struct hsi_controller *hsi,
@@ -354,6 +376,11 @@ static inline struct hsi_port *hsi_find_port_num(struct hsi_controller *hsi,
 int hsi_async(struct hsi_client *cl, struct hsi_msg *msg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int hsi_get_channel_id_by_name(struct hsi_client *cl, char *name);
+
+>>>>>>> v3.18
 =======
 int hsi_get_channel_id_by_name(struct hsi_client *cl, char *name);
 

@@ -27,6 +27,10 @@
 #include <linux/time.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/list.h>
 >>>>>>> v3.18
@@ -43,6 +47,12 @@ static struct trace_array *blk_tr;
 static bool blk_tracer_enabled __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static LIST_HEAD(running_trace_list);
+static __cacheline_aligned_in_smp DEFINE_SPINLOCK(running_trace_lock);
+
+>>>>>>> v3.18
 =======
 static LIST_HEAD(running_trace_list);
 static __cacheline_aligned_in_smp DEFINE_SPINLOCK(running_trace_lock);
@@ -118,11 +128,14 @@ record_it:
  * started
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void trace_note_tsk(struct blk_trace *bt, struct task_struct *tsk)
 {
 	tsk->btrace_seq = blktrace_seq;
 	trace_note(bt, tsk->pid, BLK_TN_PROCESS, tsk->comm, sizeof(tsk->comm));
 =======
+=======
+>>>>>>> v3.18
 static void trace_note_tsk(struct task_struct *tsk)
 {
 	unsigned long flags;
@@ -135,6 +148,9 @@ static void trace_note_tsk(struct task_struct *tsk)
 			   sizeof(tsk->comm));
 	}
 	spin_unlock_irqrestore(&running_trace_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -213,9 +229,15 @@ static const u32 ddir_act[2] = { BLK_TC_ACT(BLK_TC_READ),
  */
 static void __blk_add_trace(struct blk_trace *bt, sector_t sector, int bytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int rw, u32 what, int error, int pdu_len,
 				void *pdu_data, struct task_struct *tsk)
 {
+=======
+		     int rw, u32 what, int error, int pdu_len, void *pdu_data)
+{
+	struct task_struct *tsk = current;
+>>>>>>> v3.18
 =======
 		     int rw, u32 what, int error, int pdu_len, void *pdu_data)
 {
@@ -261,6 +283,12 @@ static void __blk_add_trace(struct blk_trace *bt, sector_t sector, int bytes,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(tsk->btrace_seq != blktrace_seq))
+		trace_note_tsk(tsk);
+
+>>>>>>> v3.18
 =======
 	if (unlikely(tsk->btrace_seq != blktrace_seq))
 		trace_note_tsk(tsk);
@@ -273,10 +301,13 @@ static void __blk_add_trace(struct blk_trace *bt, sector_t sector, int bytes,
 	 */
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (unlikely(tsk->btrace_seq != blktrace_seq))
 		trace_note_tsk(bt, tsk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	t = relay_reserve(bt->rchan, sizeof(*t) + pdu_len);
@@ -518,6 +549,10 @@ int do_blk_trace_setup(struct request_queue *q, char *name, dev_t dev,
 	bt->dev = dev;
 	atomic_set(&bt->dropped, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&bt->running_list);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&bt->running_list);
 >>>>>>> v3.18
@@ -612,7 +647,10 @@ static int compat_blk_trace_setup(struct request_queue *q, char *name,
 		.pid = cbuts.pid,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&buts.name, &cbuts.name, 32);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -621,7 +659,11 @@ static int compat_blk_trace_setup(struct request_queue *q, char *name,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_to_user(arg, &buts.name, 32)) {
+=======
+	if (copy_to_user(arg, &buts.name, ARRAY_SIZE(buts.name))) {
+>>>>>>> v3.18
 =======
 	if (copy_to_user(arg, &buts.name, ARRAY_SIZE(buts.name))) {
 >>>>>>> v3.18
@@ -653,6 +695,12 @@ int blk_trace_startstop(struct request_queue *q, int start)
 			smp_mb();
 			bt->trace_state = Blktrace_running;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			spin_lock_irq(&running_trace_lock);
+			list_add(&bt->running_list, &running_trace_list);
+			spin_unlock_irq(&running_trace_lock);
+>>>>>>> v3.18
 =======
 			spin_lock_irq(&running_trace_lock);
 			list_add(&bt->running_list, &running_trace_list);
@@ -666,6 +714,12 @@ int blk_trace_startstop(struct request_queue *q, int start)
 		if (bt->trace_state == Blktrace_running) {
 			bt->trace_state = Blktrace_stopped;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			spin_lock_irq(&running_trace_lock);
+			list_del_init(&bt->running_list);
+			spin_unlock_irq(&running_trace_lock);
+>>>>>>> v3.18
 =======
 			spin_lock_irq(&running_trace_lock);
 			list_del_init(&bt->running_list);
@@ -760,13 +814,17 @@ static void blk_add_trace_rq(struct request_queue *q, struct request *rq,
 {
 	struct blk_trace *bt = q->blk_trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (likely(!bt))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Use the bio context for all events except ISSUE and
@@ -791,6 +849,8 @@ static void blk_add_trace_rq(struct request_queue *q, struct request *rq,
 		__blk_add_trace(bt, blk_rq_pos(rq), nr_bytes,
 				rq->cmd_flags, what, rq->errors, 0, NULL, tsk);
 =======
+=======
+>>>>>>> v3.18
 	if (rq->cmd_type == REQ_TYPE_BLOCK_PC) {
 		what |= BLK_TC_ACT(BLK_TC_PC);
 		__blk_add_trace(bt, 0, nr_bytes, rq->cmd_flags,
@@ -799,6 +859,9 @@ static void blk_add_trace_rq(struct request_queue *q, struct request *rq,
 		what |= BLK_TC_ACT(BLK_TC_FS);
 		__blk_add_trace(bt, blk_rq_pos(rq), nr_bytes,
 				rq->cmd_flags, what, rq->errors, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -852,13 +915,17 @@ static void blk_add_trace_bio(struct request_queue *q, struct bio *bio,
 {
 	struct blk_trace *bt = q->blk_trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (likely(!bt))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Not all the pages in the bio are dirtied by the same task but
@@ -875,11 +942,16 @@ static void blk_add_trace_bio(struct request_queue *q, struct bio *bio,
 	__blk_add_trace(bt, bio->bi_sector, bio->bi_size, bio->bi_rw, what,
 			error, 0, NULL, tsk);
 =======
+=======
+>>>>>>> v3.18
 	if (!error && !bio_flagged(bio, BIO_UPTODATE))
 		error = EIO;
 
 	__blk_add_trace(bt, bio->bi_iter.bi_sector, bio->bi_iter.bi_size,
 			bio->bi_rw, what, error, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -929,8 +1001,12 @@ static void blk_add_trace_getrq(void *ignore,
 
 		if (bt)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__blk_add_trace(bt, 0, 0, rw, BLK_TA_GETRQ, 0, 0,
 					NULL, current);
+=======
+			__blk_add_trace(bt, 0, 0, rw, BLK_TA_GETRQ, 0, 0, NULL);
+>>>>>>> v3.18
 =======
 			__blk_add_trace(bt, 0, 0, rw, BLK_TA_GETRQ, 0, 0, NULL);
 >>>>>>> v3.18
@@ -950,7 +1026,11 @@ static void blk_add_trace_sleeprq(void *ignore,
 		if (bt)
 			__blk_add_trace(bt, 0, 0, rw, BLK_TA_SLEEPRQ,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					0, 0, NULL, current);
+=======
+					0, 0, NULL);
+>>>>>>> v3.18
 =======
 					0, 0, NULL);
 >>>>>>> v3.18
@@ -963,8 +1043,12 @@ static void blk_add_trace_plug(void *ignore, struct request_queue *q)
 
 	if (bt)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__blk_add_trace(bt, 0, 0, 0, BLK_TA_PLUG, 0, 0, NULL,
 				current);
+=======
+		__blk_add_trace(bt, 0, 0, 0, BLK_TA_PLUG, 0, 0, NULL);
+>>>>>>> v3.18
 =======
 		__blk_add_trace(bt, 0, 0, 0, BLK_TA_PLUG, 0, 0, NULL);
 >>>>>>> v3.18
@@ -985,8 +1069,12 @@ static void blk_add_trace_unplug(void *ignore, struct request_queue *q,
 			what = BLK_TA_UNPLUG_TIMER;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__blk_add_trace(bt, 0, 0, 0, what, 0, sizeof(rpdu), &rpdu,
 				current);
+=======
+		__blk_add_trace(bt, 0, 0, 0, what, 0, sizeof(rpdu), &rpdu);
+>>>>>>> v3.18
 =======
 		__blk_add_trace(bt, 0, 0, 0, what, 0, sizeof(rpdu), &rpdu);
 >>>>>>> v3.18
@@ -999,13 +1087,17 @@ static void blk_add_trace_split(void *ignore,
 {
 	struct blk_trace *bt = q->blk_trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (bt) {
 		__be64 rpdu = cpu_to_be64(pdu);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (bio_has_data(bio) && bio->bi_io_vec &&
 		    bio->bi_io_vec->bv_page &&
@@ -1016,10 +1108,15 @@ static void blk_add_trace_split(void *ignore,
 				BLK_TA_SPLIT, !bio_flagged(bio, BIO_UPTODATE),
 				sizeof(rpdu), &rpdu, tsk);
 =======
+=======
+>>>>>>> v3.18
 		__blk_add_trace(bt, bio->bi_iter.bi_sector,
 				bio->bi_iter.bi_size, bio->bi_rw, BLK_TA_SPLIT,
 				!bio_flagged(bio, BIO_UPTODATE),
 				sizeof(rpdu), &rpdu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1044,7 +1141,10 @@ static void blk_add_trace_bio_remap(void *ignore,
 	struct blk_trace *bt = q->blk_trace;
 	struct blk_io_trace_remap r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1056,6 +1156,7 @@ static void blk_add_trace_bio_remap(void *ignore,
 	r.sector_from = cpu_to_be64(from);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio_has_data(bio) && bio->bi_io_vec &&
 	    bio->bi_io_vec->bv_page &&
 	    bio->bi_io_vec->bv_page->tsk_dirty)
@@ -1064,6 +1165,11 @@ static void blk_add_trace_bio_remap(void *ignore,
 	__blk_add_trace(bt, bio->bi_sector, bio->bi_size, bio->bi_rw,
 			BLK_TA_REMAP, !bio_flagged(bio, BIO_UPTODATE),
 			sizeof(r), &r, tsk);
+=======
+	__blk_add_trace(bt, bio->bi_iter.bi_sector, bio->bi_iter.bi_size,
+			bio->bi_rw, BLK_TA_REMAP,
+			!bio_flagged(bio, BIO_UPTODATE), sizeof(r), &r);
+>>>>>>> v3.18
 =======
 	__blk_add_trace(bt, bio->bi_iter.bi_sector, bio->bi_iter.bi_size,
 			bio->bi_rw, BLK_TA_REMAP,
@@ -1092,7 +1198,10 @@ static void blk_add_trace_rq_remap(void *ignore,
 	struct blk_trace *bt = q->blk_trace;
 	struct blk_io_trace_remap r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1104,6 +1213,7 @@ static void blk_add_trace_rq_remap(void *ignore,
 	r.sector_from = cpu_to_be64(from);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio_has_data(rq->bio) && rq->bio->bi_io_vec &&
 	    rq->bio->bi_io_vec->bv_page &&
 	    rq->bio->bi_io_vec->bv_page->tsk_dirty)
@@ -1112,6 +1222,11 @@ static void blk_add_trace_rq_remap(void *ignore,
 	__blk_add_trace(bt, blk_rq_pos(rq), blk_rq_bytes(rq),
 			rq_data_dir(rq), BLK_TA_REMAP, !!rq->errors,
 			sizeof(r), &r, tsk);
+=======
+	__blk_add_trace(bt, blk_rq_pos(rq), blk_rq_bytes(rq),
+			rq_data_dir(rq), BLK_TA_REMAP, !!rq->errors,
+			sizeof(r), &r);
+>>>>>>> v3.18
 =======
 	__blk_add_trace(bt, blk_rq_pos(rq), blk_rq_bytes(rq),
 			rq_data_dir(rq), BLK_TA_REMAP, !!rq->errors,
@@ -1136,13 +1251,17 @@ void blk_add_driver_data(struct request_queue *q,
 {
 	struct blk_trace *bt = q->blk_trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (likely(!bt))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (bio_has_data(rq->bio) && rq->bio->bi_io_vec &&
 	    rq->bio->bi_io_vec->bv_page &&
@@ -1156,12 +1275,17 @@ void blk_add_driver_data(struct request_queue *q,
 		__blk_add_trace(bt, blk_rq_pos(rq), blk_rq_bytes(rq), 0,
 				BLK_TA_DRV_DATA, rq->errors, len, data, tsk);
 =======
+=======
+>>>>>>> v3.18
 	if (rq->cmd_type == REQ_TYPE_BLOCK_PC)
 		__blk_add_trace(bt, 0, blk_rq_bytes(rq), 0,
 				BLK_TA_DRV_DATA, rq->errors, len, data);
 	else
 		__blk_add_trace(bt, blk_rq_pos(rq), blk_rq_bytes(rq), 0,
 				BLK_TA_DRV_DATA, rq->errors, len, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(blk_add_driver_data);
@@ -1608,7 +1732,12 @@ static enum print_line_t blk_tracer_print_line(struct trace_iterator *iter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int blk_tracer_set_flag(u32 old_flags, u32 bit, int set)
+=======
+static int
+blk_tracer_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
+>>>>>>> v3.18
 =======
 static int
 blk_tracer_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
@@ -1676,6 +1805,12 @@ static int blk_trace_remove_queue(struct request_queue *q)
 		blk_unregister_tracepoints();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irq(&running_trace_lock);
+	list_del(&bt->running_list);
+	spin_unlock_irq(&running_trace_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_irq(&running_trace_lock);
 	list_del(&bt->running_list);

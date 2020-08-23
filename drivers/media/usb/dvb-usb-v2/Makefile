@@ -23,9 +23,12 @@ dvb-usb-ec168-objs := ec168.o
 obj-$(CONFIG_DVB_USB_EC168) += dvb-usb-ec168.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 dvb-usb-it913x-objs := it913x.o
 obj-$(CONFIG_DVB_USB_IT913X) += dvb-usb-it913x.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 dvb-usb-lmedm04-objs := lmedm04.o
@@ -44,6 +47,12 @@ dvb-usb-rtl28xxu-objs := rtl28xxu.o
 obj-$(CONFIG_DVB_USB_RTL28XXU) += dvb-usb-rtl28xxu.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dvb-usb-dvbsky-objs := dvbsky.o
+obj-$(CONFIG_DVB_USB_DVBSKY) += dvb-usb-dvbsky.o
+
+>>>>>>> v3.18
 =======
 dvb-usb-dvbsky-objs := dvbsky.o
 obj-$(CONFIG_DVB_USB_DVBSKY) += dvb-usb-dvbsky.o

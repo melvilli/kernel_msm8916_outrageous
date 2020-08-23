@@ -38,7 +38,10 @@
 #define QXL_DIRTY_DELAY (HZ / 30)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define QXL_FB_OP_FILLRECT 1
 #define QXL_FB_OP_COPYAREA 2
 #define QXL_FB_OP_IMAGEBLIT 3
@@ -54,6 +57,9 @@ struct qxl_fb_op {
 	void *img_data;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qxl_fbdev {
 	struct drm_fb_helper helper;
@@ -62,6 +68,11 @@ struct qxl_fbdev {
 	struct qxl_device	*qdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t delayed_ops_lock;
+	struct list_head delayed_ops;
+>>>>>>> v3.18
 =======
 	spinlock_t delayed_ops_lock;
 	struct list_head delayed_ops;
@@ -188,9 +199,12 @@ static struct fb_deferred_io qxl_defio = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qxl_fb_fillrect(struct fb_info *info,
 			    const struct fb_fillrect *fb_rect)
 =======
+=======
+>>>>>>> v3.18
 static void qxl_fb_delayed_fillrect(struct qxl_fbdev *qfbdev,
 				    const struct fb_fillrect *fb_rect)
 {
@@ -254,6 +268,9 @@ static void qxl_fb_delayed_imageblit(struct qxl_fbdev *qfbdev,
 
 static void qxl_fb_fillrect_internal(struct fb_info *info,
 				     const struct fb_fillrect *fb_rect)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct qxl_fbdev *qfbdev = info->par;
@@ -293,6 +310,7 @@ static void qxl_fb_fillrect_internal(struct fb_info *info,
 	qxl_draw_fill_rec.color = color;
 	qxl_draw_fill_rec.rop = rop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!drm_can_sleep()) {
 		qxl_io_log(qdev,
 			"%s: TODO use RCU, mysterious locks with spin_lock\n",
@@ -305,6 +323,8 @@ static void qxl_fb_fillrect_internal(struct fb_info *info,
 static void qxl_fb_copyarea(struct fb_info *info,
 			    const struct fb_copyarea *region)
 =======
+=======
+>>>>>>> v3.18
 
 	qxl_draw_fill(&qxl_draw_fill_rec);
 }
@@ -327,6 +347,9 @@ static void qxl_fb_fillrect(struct fb_info *info,
 
 static void qxl_fb_copyarea_internal(struct fb_info *info,
 				     const struct fb_copyarea *region)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct qxl_fbdev *qfbdev = info->par;
@@ -338,7 +361,10 @@ static void qxl_fb_copyarea_internal(struct fb_info *info,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qxl_fb_copyarea(struct fb_info *info,
 			    const struct fb_copyarea *region)
 {
@@ -355,6 +381,9 @@ static void qxl_fb_copyarea(struct fb_info *info,
 	qxl_fb_copyarea_internal(info, region);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void qxl_fb_imageblit_safe(struct qxl_fb_image *qxl_fb_image)
 {
@@ -362,7 +391,10 @@ static void qxl_fb_imageblit_safe(struct qxl_fb_image *qxl_fb_image)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qxl_fb_imageblit_internal(struct fb_info *info,
 				      const struct fb_image *image)
 {
@@ -375,12 +407,16 @@ static void qxl_fb_imageblit_internal(struct fb_info *info,
 	qxl_fb_imageblit_safe(&qxl_fb_image);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void qxl_fb_imageblit(struct fb_info *info,
 			     const struct fb_image *image)
 {
 	struct qxl_fbdev *qfbdev = info->par;
 	struct qxl_device *qdev = qfbdev->qdev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct qxl_fb_image qxl_fb_image;
 
@@ -400,6 +436,8 @@ static void qxl_fb_imageblit(struct fb_info *info,
 	qxl_fb_image_init(&qxl_fb_image, qfbdev->qdev, info, image);
 	qxl_fb_imageblit_safe(&qxl_fb_image);
 =======
+=======
+>>>>>>> v3.18
 
 	if (!drm_can_sleep()) {
 		qxl_fb_delayed_imageblit(qfbdev, image);
@@ -440,12 +478,19 @@ static void qxl_fb_work(struct work_struct *work)
 		kfree(entry);
 	}
 	spin_unlock_irqrestore(&qfbdev->delayed_ops_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int qxl_fb_init(struct qxl_device *qdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_WORK(&qdev->fb_work, qxl_fb_work);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&qdev->fb_work, qxl_fb_work);
 >>>>>>> v3.18
@@ -680,7 +725,12 @@ static int qxl_fb_find_or_create_single(
 		struct drm_fb_helper_surface_size *sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qxl_fbdev *qfbdev = (struct qxl_fbdev *)helper;
+=======
+	struct qxl_fbdev *qfbdev =
+		container_of(helper, struct qxl_fbdev, helper);
+>>>>>>> v3.18
 =======
 	struct qxl_fbdev *qfbdev =
 		container_of(helper, struct qxl_fbdev, helper);
@@ -720,11 +770,15 @@ static int qxl_fbdev_destroy(struct drm_device *dev, struct qxl_fbdev *qfbdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs qxl_fb_helper_funcs = {
 	/* TODO
 	.gamma_set = qxl_crtc_fb_gamma_set,
 	.gamma_get = qxl_crtc_fb_gamma_get,
 	*/
+=======
+static const struct drm_fb_helper_funcs qxl_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs qxl_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -744,11 +798,14 @@ int qxl_fbdev_init(struct qxl_device *qdev)
 	qfbdev->qdev = qdev;
 	qdev->mode_info.qfbdev = qfbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qfbdev->helper.funcs = &qxl_fb_helper_funcs;
 
 	ret = drm_fb_helper_init(qdev->ddev, &qfbdev->helper,
 				 1 /* num_crtc - QXL supports just 1 */,
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&qfbdev->delayed_ops_lock);
 	INIT_LIST_HEAD(&qfbdev->delayed_ops);
 
@@ -757,6 +814,9 @@ int qxl_fbdev_init(struct qxl_device *qdev)
 
 	ret = drm_fb_helper_init(qdev->ddev, &qfbdev->helper,
 				 qxl_num_crtc /* num_crtc - QXL supports just 1 */,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 QXLFB_CONN_LIMIT);
 	if (ret) {
@@ -780,8 +840,11 @@ void qxl_fbdev_fini(struct qxl_device *qdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 void qxl_fbdev_set_suspend(struct qxl_device *qdev, int state)
 {
 	fb_set_suspend(qdev->mode_info.qfbdev->helper.fbdev, state);
@@ -793,4 +856,7 @@ bool qxl_fbdev_qobj_is_fb(struct qxl_device *qdev, struct qxl_bo *qobj)
 		return true;
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

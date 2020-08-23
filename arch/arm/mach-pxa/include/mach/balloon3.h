@@ -15,6 +15,11 @@
 #define ASM_ARCH_BALLOON3_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
+
+>>>>>>> v3.18
 =======
 #include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
 

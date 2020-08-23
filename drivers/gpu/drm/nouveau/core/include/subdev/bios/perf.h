@@ -4,7 +4,10 @@
 struct nouveau_bios;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u16 nvbios_perf_table(struct nouveau_bios *, u8 *ver, u8 *hdr,
 		      u8 *cnt, u8 *len, u8 *snr, u8 *ssz);
 
@@ -38,6 +41,9 @@ u32 nvbios_perfSe(struct nouveau_bios *, u32 data, int idx,
 u32 nvbios_perfSp(struct nouveau_bios *, u32 data, int idx,
 		  u8 *ver, u8 *hdr, u8 cnt, u8 len, struct nvbios_perfS *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nvbios_perf_fan {
 	u32 pwm_divisor;

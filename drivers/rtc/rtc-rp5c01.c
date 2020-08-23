@@ -252,10 +252,15 @@ static int __init rp5c01_rtc_probe(struct platform_device *dev)
 	rtc = devm_rtc_device_register(&dev->dev, "rtc-rp5c01", &rp5c01_rtc_ops,
 				  THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(rtc)) {
 		error = PTR_ERR(rtc);
 		goto out;
 	}
+=======
+	if (IS_ERR(rtc))
+		return PTR_ERR(rtc);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rtc))
 		return PTR_ERR(rtc);
@@ -265,6 +270,7 @@ static int __init rp5c01_rtc_probe(struct platform_device *dev)
 	error = sysfs_create_bin_file(&dev->dev.kobj, &priv->nvram_attr);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 
 	return 0;
@@ -272,6 +278,11 @@ static int __init rp5c01_rtc_probe(struct platform_device *dev)
 out:
 	platform_set_drvdata(dev, NULL);
 	return error;
+=======
+		return error;
+
+	return 0;
+>>>>>>> v3.18
 =======
 		return error;
 

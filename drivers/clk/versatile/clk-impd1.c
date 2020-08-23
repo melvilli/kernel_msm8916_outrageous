@@ -1,7 +1,11 @@
 /*
  * Clock driver for the ARM Integrator/IM-PD1 board
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Linus Walleij
+=======
+ * Copyright (C) 2012-2013 Linus Walleij
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2013 Linus Walleij
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 #include <linux/io.h>
 #include <linux/platform_data/clk-integrator.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/impd1.h>
 
@@ -38,6 +43,8 @@ static struct impd1_clk impd1_clks[4];
 
 static const struct icst_params impd1_vco_params = {
 =======
+=======
+>>>>>>> v3.18
 #include "clk-icst.h"
 
 #define IMPD1_OSC1	0x00
@@ -69,6 +76,9 @@ static struct impd1_clk impd1_clks[4];
  */
 
 static const struct icst_params impd1_vco1_params = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ref		= 24000000,	/* 24 MHz */
 	.vco_max	= ICST525_VCO_MAX_3V,
@@ -83,7 +93,11 @@ static const struct icst_params impd1_vco1_params = {
 
 static const struct clk_icst_desc impd1_icst1_desc = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.params = &impd1_vco_params,
+=======
+	.params = &impd1_vco1_params,
+>>>>>>> v3.18
 =======
 	.params = &impd1_vco1_params,
 >>>>>>> v3.18
@@ -92,7 +106,10 @@ static const struct clk_icst_desc impd1_icst1_desc = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct icst_params impd1_vco2_params = {
 	.ref		= 24000000,	/* 24 MHz */
 	.vco_max	= ICST525_VCO_MAX_3V,
@@ -111,6 +128,9 @@ static const struct clk_icst_desc impd1_icst2_desc = {
 	.lock_offset = IMPD1_LOCK,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * integrator_impd1_clk_init() - set up the integrator clock tree
@@ -122,6 +142,10 @@ void integrator_impd1_clk_init(void __iomem *base, unsigned int id)
 	struct impd1_clk *imc;
 	struct clk *clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *pclk;
+>>>>>>> v3.18
 =======
 	struct clk *pclk;
 >>>>>>> v3.18
@@ -134,6 +158,7 @@ void integrator_impd1_clk_init(void __iomem *base, unsigned int id)
 	imc = &impd1_clks[id];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = icst_clk_register(NULL, &impd1_icst1_desc, base);
 	imc->vcoclk = clk;
 	imc->clks[0] = clkdev_alloc(clk, NULL, "lm%x:01000", id);
@@ -145,6 +170,8 @@ void integrator_impd1_clk_init(void __iomem *base, unsigned int id)
 	imc->clks[1] = clkdev_alloc(clk, NULL, "lm%x:00100", id);
 	imc->clks[2] = clkdev_alloc(clk, NULL, "lm%x:00200", id);
 =======
+=======
+>>>>>>> v3.18
 	/* Register the fixed rate PCLK */
 	imc->pclkname = kasprintf(GFP_KERNEL, "lm%x-pclk", id);
 	pclk = clk_register_fixed_rate(NULL, imc->pclkname, NULL,
@@ -197,12 +224,19 @@ void integrator_impd1_clk_init(void __iomem *base, unsigned int id)
 	imc->scclk = clk;
 	imc->clks[13] = clkdev_alloc(pclk, "apb_pclk", "lm%x:00600", id);
 	imc->clks[14] = clkdev_alloc(clk, NULL, "lm%x:00600", id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(imc->clks); i++)
 		clkdev_add(imc->clks[i]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(integrator_impd1_clk_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(integrator_impd1_clk_init);
 >>>>>>> v3.18
@@ -219,10 +253,13 @@ void integrator_impd1_clk_exit(unsigned int id)
 	for (i = 0; i < ARRAY_SIZE(imc->clks); i++)
 		clkdev_drop(imc->clks[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_unregister(imc->uartclk);
 	clk_unregister(imc->vcoclk);
 }
 =======
+=======
+>>>>>>> v3.18
 	clk_unregister(imc->spiclk);
 	clk_unregister(imc->uartclk);
 	clk_unregister(imc->vco2clk);
@@ -236,4 +273,7 @@ void integrator_impd1_clk_exit(unsigned int id)
 	kfree(imc->pclkname);
 }
 EXPORT_SYMBOL_GPL(integrator_impd1_clk_exit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

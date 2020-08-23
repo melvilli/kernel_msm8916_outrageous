@@ -8,8 +8,12 @@
  * kernels the same way we'd run processes.  We call the first kernel the Host,
  * and the others the Guests.  The program which sets up and configures Guests
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (such as the example in Documentation/virtual/lguest/lguest.c) is called the
  * Launcher.
+=======
+ * (such as the example in tools/lguest/lguest.c) is called the Launcher.
+>>>>>>> v3.18
 =======
  * (such as the example in tools/lguest/lguest.c) is called the Launcher.
 >>>>>>> v3.18
@@ -239,7 +243,11 @@ static void lguest_end_context_switch(struct task_struct *next)
  * about the interrupt flag.  Our "save_flags()" just returns that.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long save_fl(void)
+=======
+asmlinkage __visible unsigned long lguest_save_fl(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible unsigned long lguest_save_fl(void)
 >>>>>>> v3.18
@@ -249,7 +257,11 @@ asmlinkage __visible unsigned long lguest_save_fl(void)
 
 /* Interrupts go off... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void irq_disable(void)
+=======
+asmlinkage __visible void lguest_irq_disable(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void lguest_irq_disable(void)
 >>>>>>> v3.18
@@ -267,8 +279,13 @@ asmlinkage __visible void lguest_irq_disable(void)
  * C function, then restores it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 PV_CALLEE_SAVE_REGS_THUNK(save_fl);
 PV_CALLEE_SAVE_REGS_THUNK(irq_disable);
+=======
+PV_CALLEE_SAVE_REGS_THUNK(lguest_save_fl);
+PV_CALLEE_SAVE_REGS_THUNK(lguest_irq_disable);
+>>>>>>> v3.18
 =======
 PV_CALLEE_SAVE_REGS_THUNK(lguest_save_fl);
 PV_CALLEE_SAVE_REGS_THUNK(lguest_irq_disable);
@@ -900,9 +917,15 @@ int lguest_setup_irq(unsigned int irq)
  * until then the Host gives us the time on every interrupt.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long lguest_get_wallclock(void)
 {
 	return lguest_data.time.tv_sec;
+=======
+static void lguest_get_wallclock(struct timespec *now)
+{
+	*now = lguest_data.time;
+>>>>>>> v3.18
 =======
 static void lguest_get_wallclock(struct timespec *now)
 {
@@ -1081,13 +1104,19 @@ static void lguest_load_sp0(struct tss_struct *tss,
 
 /* Let's just say, I wouldn't do debugging under a Guest. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long lguest_get_debugreg(int regno)
 {
 	/* FIXME: Implement */
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void lguest_set_debugreg(int regno, unsigned long value)
 {
@@ -1319,9 +1348,15 @@ __init void lguest_init(void)
 
 	/* Interrupt-related operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pv_irq_ops.save_fl = PV_CALLEE_SAVE(save_fl);
 	pv_irq_ops.restore_fl = __PV_IS_CALLEE_SAVE(lg_restore_fl);
 	pv_irq_ops.irq_disable = PV_CALLEE_SAVE(irq_disable);
+=======
+	pv_irq_ops.save_fl = PV_CALLEE_SAVE(lguest_save_fl);
+	pv_irq_ops.restore_fl = __PV_IS_CALLEE_SAVE(lg_restore_fl);
+	pv_irq_ops.irq_disable = PV_CALLEE_SAVE(lguest_irq_disable);
+>>>>>>> v3.18
 =======
 	pv_irq_ops.save_fl = PV_CALLEE_SAVE(lguest_save_fl);
 	pv_irq_ops.restore_fl = __PV_IS_CALLEE_SAVE(lg_restore_fl);
@@ -1343,6 +1378,10 @@ __init void lguest_init(void)
 	pv_cpu_ops.set_ldt = lguest_set_ldt;
 	pv_cpu_ops.load_tls = lguest_load_tls;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pv_cpu_ops.get_debugreg = lguest_get_debugreg;
+>>>>>>> v3.18
 =======
 	pv_cpu_ops.get_debugreg = lguest_get_debugreg;
 >>>>>>> v3.18
@@ -1453,7 +1492,11 @@ __init void lguest_init(void)
 
 	/* Math is always hard! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_cpu_data.hard_math = 1;
+=======
+	set_cpu_cap(&new_cpu_data, X86_FEATURE_FPU);
+>>>>>>> v3.18
 =======
 	set_cpu_cap(&new_cpu_data, X86_FEATURE_FPU);
 >>>>>>> v3.18

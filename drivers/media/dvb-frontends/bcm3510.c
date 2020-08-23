@@ -640,6 +640,7 @@ static int bcm3510_download_firmware(struct dvb_frontend* fe)
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("got firmware: %zd\n",fw->size);
 
 	b = fw->data;
@@ -647,12 +648,17 @@ static int bcm3510_download_firmware(struct dvb_frontend* fe)
 		addr = le16_to_cpu( *( (u16 *)&b[i] ) );
 		len  = le16_to_cpu( *( (u16 *)&b[i+2] ) );
 =======
+=======
+>>>>>>> v3.18
 	deb_info("got firmware: %zu\n", fw->size);
 
 	b = fw->data;
 	for (i = 0; i < fw->size;) {
 		addr = le16_to_cpu(*((__le16 *)&b[i]));
 		len  = le16_to_cpu(*((__le16 *)&b[i+2]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		deb_info("firmware chunk, addr: 0x%04x, len: 0x%04x, total length: 0x%04zx\n",addr,len,fw->size);
 		if ((ret = bcm3510_write_ram(st,addr,&b[i+4],len)) < 0) {

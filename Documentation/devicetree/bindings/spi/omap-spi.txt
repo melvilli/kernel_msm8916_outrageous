@@ -3,8 +3,13 @@ OMAP2+ McSPI device
 Required properties:
 - compatible :
 <<<<<<< HEAD
+<<<<<<< HEAD
   - "ti,omap2-spi" for OMAP2 & OMAP3.
   - "ti,omap4-spi" for OMAP4+.
+=======
+  - "ti,omap2-mcspi" for OMAP2 & OMAP3.
+  - "ti,omap4-mcspi" for OMAP4+.
+>>>>>>> v3.18
 =======
   - "ti,omap2-mcspi" for OMAP2 & OMAP3.
   - "ti,omap4-mcspi" for OMAP4+.
@@ -16,8 +21,11 @@ Required properties:
 			  D1 as output.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Example:
 =======
+=======
+>>>>>>> v3.18
 Optional properties:
 - dmas: List of DMA specifiers with the controller specific format
 	as described in the generic DMA client binding. A tx and rx
@@ -30,6 +38,9 @@ Optional properties:
 Examples:
 
 [hwmod populated DMA resources]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 mcspi1: mcspi@1 {
@@ -41,7 +52,10 @@ mcspi1: mcspi@1 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 [generic DMA request binding]
 
 mcspi1: mcspi@1 {
@@ -56,4 +70,7 @@ mcspi1: mcspi@1 {
 	    &edma 45>;
     dma-names = "tx0", "rx0", "tx1", "rx1";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

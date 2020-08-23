@@ -20,7 +20,11 @@
  *
  * Based on kobject:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	kobject is Copyright (c) 2002-2003 Patrick Mochel
+=======
+ *	kobject is Copyright (c) 2002-2003 Patrick Mochel
+>>>>>>> v3.18
 =======
  *	kobject is Copyright (c) 2002-2003 Patrick Mochel
 >>>>>>> v3.18
@@ -40,9 +44,15 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct config_item * to_item(struct list_head * entry)
 {
 	return container_of(entry,struct config_item,ci_entry);
+=======
+static inline struct config_item *to_item(struct list_head *entry)
+{
+	return container_of(entry, struct config_item, ci_entry);
+>>>>>>> v3.18
 =======
 static inline struct config_item *to_item(struct list_head *entry)
 {
@@ -58,7 +68,11 @@ static void config_item_release(struct kref *kref);
  *	@item:	item in question.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void config_item_init(struct config_item * item)
+=======
+void config_item_init(struct config_item *item)
+>>>>>>> v3.18
 =======
 void config_item_init(struct config_item *item)
 >>>>>>> v3.18
@@ -67,6 +81,10 @@ void config_item_init(struct config_item *item)
 	INIT_LIST_HEAD(&item->ci_entry);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(config_item_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(config_item_init);
 >>>>>>> v3.18
@@ -75,7 +93,11 @@ EXPORT_SYMBOL(config_item_init);
  *	config_item_set_name - Set the name of an item
  *	@item:	item.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@name:	name.
+=======
+ *	@fmt:  The vsnprintf()'s format string.
+>>>>>>> v3.18
 =======
  *	@fmt:  The vsnprintf()'s format string.
 >>>>>>> v3.18
@@ -85,7 +107,11 @@ EXPORT_SYMBOL(config_item_init);
  *	Otherwise, use the static @item->ci_namebuf array.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int config_item_set_name(struct config_item * item, const char * fmt, ...)
+=======
+int config_item_set_name(struct config_item *item, const char *fmt, ...)
+>>>>>>> v3.18
 =======
 int config_item_set_name(struct config_item *item, const char *fmt, ...)
 >>>>>>> v3.18
@@ -95,7 +121,11 @@ int config_item_set_name(struct config_item *item, const char *fmt, ...)
 	int need;
 	va_list args;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char * name;
+=======
+	char *name;
+>>>>>>> v3.18
 =======
 	char *name;
 >>>>>>> v3.18
@@ -104,8 +134,13 @@ int config_item_set_name(struct config_item *item, const char *fmt, ...)
 	 * First, try the static array
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	va_start(args,fmt);
 	need = vsnprintf(item->ci_namebuf,limit,fmt,args);
+=======
+	va_start(args, fmt);
+	need = vsnprintf(item->ci_namebuf, limit, fmt, args);
+>>>>>>> v3.18
 =======
 	va_start(args, fmt);
 	need = vsnprintf(item->ci_namebuf, limit, fmt, args);
@@ -119,7 +154,11 @@ int config_item_set_name(struct config_item *item, const char *fmt, ...)
 		 */
 		limit = need + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name = kmalloc(limit,GFP_KERNEL);
+=======
+		name = kmalloc(limit, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		name = kmalloc(limit, GFP_KERNEL);
 >>>>>>> v3.18
@@ -128,8 +167,13 @@ int config_item_set_name(struct config_item *item, const char *fmt, ...)
 			goto Done;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		va_start(args,fmt);
 		need = vsnprintf(name,limit,fmt,args);
+=======
+		va_start(args, fmt);
+		need = vsnprintf(name, limit, fmt, args);
+>>>>>>> v3.18
 =======
 		va_start(args, fmt);
 		need = vsnprintf(name, limit, fmt, args);
@@ -154,7 +198,10 @@ int config_item_set_name(struct config_item *item, const char *fmt, ...)
 	return error;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(config_item_set_name);
@@ -179,7 +226,11 @@ void config_group_init_type_name(struct config_group *group, const char *name,
 EXPORT_SYMBOL(config_group_init_type_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct config_item * config_item_get(struct config_item * item)
+=======
+struct config_item *config_item_get(struct config_item *item)
+>>>>>>> v3.18
 =======
 struct config_item *config_item_get(struct config_item *item)
 >>>>>>> v3.18
@@ -188,6 +239,7 @@ struct config_item *config_item_get(struct config_item *item)
 		kref_get(&item->ci_kref);
 	return item;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static void config_item_cleanup(struct config_item * item)
@@ -198,6 +250,8 @@ static void config_item_cleanup(struct config_item * item)
 
 	pr_debug("config_item %s: cleaning up\n",config_item_name(item));
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(config_item_get);
 
 static void config_item_cleanup(struct config_item *item)
@@ -207,6 +261,9 @@ static void config_item_cleanup(struct config_item *item)
 	struct config_item *parent = item->ci_parent;
 
 	pr_debug("config_item %s: cleaning up\n", config_item_name(item));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (item->ci_name != item->ci_namebuf)
 		kfree(item->ci_name);
@@ -231,7 +288,11 @@ static void config_item_release(struct kref *kref)
  *	Decrement the refcount, and if 0, call config_item_cleanup().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void config_item_put(struct config_item * item)
+=======
+void config_item_put(struct config_item *item)
+>>>>>>> v3.18
 =======
 void config_item_put(struct config_item *item)
 >>>>>>> v3.18
@@ -240,16 +301,22 @@ void config_item_put(struct config_item *item)
 		kref_put(&item->ci_kref, config_item_release);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  *	config_group_init - initialize a group for use
  *	@k:	group
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(config_item_put);
 
 /**
  *	config_group_init - initialize a group for use
  *	@group:	config_group
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void config_group_init(struct config_group *group)
@@ -258,6 +325,10 @@ void config_group_init(struct config_group *group)
 	INIT_LIST_HEAD(&group->cg_children);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(config_group_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(config_group_init);
 >>>>>>> v3.18
@@ -275,17 +346,23 @@ struct config_item *config_group_find_item(struct config_group *group,
 					   const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head * entry;
 	struct config_item * ret = NULL;
 
 	list_for_each(entry,&group->cg_children) {
 		struct config_item * item = to_item(entry);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head *entry;
 	struct config_item *ret = NULL;
 
 	list_for_each(entry, &group->cg_children) {
 		struct config_item *item = to_item(entry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (config_item_name(item) &&
 		    !strcmp(config_item_name(item), name)) {
@@ -296,11 +373,14 @@ struct config_item *config_group_find_item(struct config_group *group,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(config_item_init);
 EXPORT_SYMBOL(config_group_init);
 EXPORT_SYMBOL(config_item_get);
 EXPORT_SYMBOL(config_item_put);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(config_group_find_item);

@@ -13,6 +13,11 @@ nfs41-server.txt
 nfs-rdma.txt
 	- how to install and setup the Linux NFS/RDMA client and server software
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nfsd-admin-interfaces.txt
+	- Administrative interfaces for nfsd.
+>>>>>>> v3.18
 =======
 nfsd-admin-interfaces.txt
 	- Administrative interfaces for nfsd.
@@ -26,7 +31,11 @@ rpc-cache.txt
 idmapper.txt
 	- information for configuring request-keys to be used by idmapper
 <<<<<<< HEAD
+<<<<<<< HEAD
 knfsd-rpcgss.txt
+=======
+rpc-server-gss.txt
+>>>>>>> v3.18
 =======
 rpc-server-gss.txt
 >>>>>>> v3.18

@@ -28,6 +28,10 @@
 #include <linux/string.h>
 #include <crypto/rng.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/drbg.h>
+>>>>>>> v3.18
 =======
 #include <crypto/drbg.h>
 >>>>>>> v3.18
@@ -113,12 +117,18 @@ struct cprng_test_suite {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct drbg_test_suite {
 	struct drbg_testvec *vecs;
 	unsigned int count;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct alg_test_desc {
 	const char *alg;
@@ -134,6 +144,10 @@ struct alg_test_desc {
 		struct hash_test_suite hash;
 		struct cprng_test_suite cprng;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct drbg_test_suite drbg;
+>>>>>>> v3.18
 =======
 		struct drbg_test_suite drbg;
 >>>>>>> v3.18
@@ -188,9 +202,13 @@ static void testmgr_free_buf(char *buf[XBUFSIZE])
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_one_async_hash_op(struct ahash_request *req,
 				struct tcrypt_result *tr,
 				int ret)
+=======
+static int wait_async_op(struct tcrypt_result *tr, int ret)
+>>>>>>> v3.18
 =======
 static int wait_async_op(struct tcrypt_result *tr, int ret)
 >>>>>>> v3.18
@@ -200,7 +218,11 @@ static int wait_async_op(struct tcrypt_result *tr, int ret)
 		if (!ret)
 			ret = tr->err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(tr->completion);
+=======
+		reinit_completion(&tr->completion);
+>>>>>>> v3.18
 =======
 		reinit_completion(&tr->completion);
 >>>>>>> v3.18
@@ -209,8 +231,14 @@ static int wait_async_op(struct tcrypt_result *tr, int ret)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 		     unsigned int tcount, bool use_digest)
+=======
+static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
+		       unsigned int tcount, bool use_digest,
+		       const int align_offset)
+>>>>>>> v3.18
 =======
 static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 		       unsigned int tcount, bool use_digest,
@@ -221,7 +249,12 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 	unsigned int i, j, k, temp;
 	struct scatterlist sg[8];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char result[64];
+=======
+	char *result;
+	char *key;
+>>>>>>> v3.18
 =======
 	char *result;
 	char *key;
@@ -233,13 +266,19 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 	int ret = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	result = kmalloc(MAX_DIGEST_SIZE, GFP_KERNEL);
 	if (!result)
 		return ret;
 	key = kmalloc(MAX_KEYLEN, GFP_KERNEL);
 	if (!key)
 		goto out_nobuf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (testmgr_alloc_buf(xbuf))
 		goto out_nobuf;
@@ -261,11 +300,14 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		j++;
 		memset(result, 0, 64);
 
 		hash_buff = xbuf[0];
 =======
+=======
+>>>>>>> v3.18
 		ret = -EINVAL;
 		if (WARN_ON(align_offset + template[i].psize > PAGE_SIZE))
 			goto out;
@@ -275,6 +317,9 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 
 		hash_buff = xbuf[0];
 		hash_buff += align_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		memcpy(hash_buff, template[i].plaintext, template[i].psize);
@@ -283,9 +328,12 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 		if (template[i].ksize) {
 			crypto_ahash_clear_flags(tfm, ~0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = crypto_ahash_setkey(tfm, template[i].key,
 						  template[i].ksize);
 =======
+=======
+>>>>>>> v3.18
 			if (template[i].ksize > MAX_KEYLEN) {
 				pr_err("alg: hash: setkey failed on test %d for %s: key size %d > %d\n",
 				       j, algo, template[i].ksize, MAX_KEYLEN);
@@ -294,6 +342,9 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 			}
 			memcpy(key, template[i].key, template[i].ksize);
 			ret = crypto_ahash_setkey(tfm, key, template[i].ksize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret) {
 				printk(KERN_ERR "alg: hash: setkey failed on "
@@ -306,8 +357,12 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 		ahash_request_set_crypt(req, sg, result, template[i].psize);
 		if (use_digest) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = do_one_async_hash_op(req, &tresult,
 						   crypto_ahash_digest(req));
+=======
+			ret = wait_async_op(&tresult, crypto_ahash_digest(req));
+>>>>>>> v3.18
 =======
 			ret = wait_async_op(&tresult, crypto_ahash_digest(req));
 >>>>>>> v3.18
@@ -318,8 +373,12 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = do_one_async_hash_op(req, &tresult,
 						   crypto_ahash_init(req));
+=======
+			ret = wait_async_op(&tresult, crypto_ahash_init(req));
+>>>>>>> v3.18
 =======
 			ret = wait_async_op(&tresult, crypto_ahash_init(req));
 >>>>>>> v3.18
@@ -329,8 +388,12 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = do_one_async_hash_op(req, &tresult,
 						   crypto_ahash_update(req));
+=======
+			ret = wait_async_op(&tresult, crypto_ahash_update(req));
+>>>>>>> v3.18
 =======
 			ret = wait_async_op(&tresult, crypto_ahash_update(req));
 >>>>>>> v3.18
@@ -340,8 +403,12 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = do_one_async_hash_op(req, &tresult,
 						   crypto_ahash_final(req));
+=======
+			ret = wait_async_op(&tresult, crypto_ahash_final(req));
+>>>>>>> v3.18
 =======
 			ret = wait_async_op(&tresult, crypto_ahash_final(req));
 >>>>>>> v3.18
@@ -364,6 +431,7 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 
 	j = 0;
 	for (i = 0; i < tcount; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (template[i].np) {
 			j++;
@@ -430,6 +498,8 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 				goto out;
 			}
 =======
+=======
+>>>>>>> v3.18
 		/* alignment tests are only done with continuous buffers */
 		if (align_offset != 0)
 			break;
@@ -503,6 +573,9 @@ static int __test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 			hexdump(result, crypto_ahash_digestsize(tfm));
 			ret = -EINVAL;
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -515,6 +588,7 @@ out_noreq:
 	testmgr_free_buf(xbuf);
 out_nobuf:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 
@@ -522,6 +596,8 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 		       struct aead_testvec *template, unsigned int tcount,
 		       const bool diff_dst)
 =======
+=======
+>>>>>>> v3.18
 	kfree(key);
 	kfree(result);
 	return ret;
@@ -557,6 +633,9 @@ static int test_hash(struct crypto_ahash *tfm, struct hash_testvec *template,
 static int __test_aead(struct crypto_aead *tfm, int enc,
 		       struct aead_testvec *template, unsigned int tcount,
 		       const bool diff_dst, const int align_offset)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const char *algo = crypto_tfm_alg_driver_name(crypto_aead_tfm(tfm));
@@ -575,7 +654,11 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 	void *output;
 	void *assoc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char iv[MAX_IVLEN];
+=======
+	char *iv;
+>>>>>>> v3.18
 =======
 	char *iv;
 >>>>>>> v3.18
@@ -584,20 +667,29 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 	char *axbuf[XBUFSIZE];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	iv = kzalloc(MAX_IVLEN, GFP_KERNEL);
 	if (!iv)
 		return ret;
 	key = kmalloc(MAX_KEYLEN, GFP_KERNEL);
 	if (!key)
 		goto out_noxbuf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (testmgr_alloc_buf(xbuf))
 		goto out_noxbuf;
 	if (testmgr_alloc_buf(axbuf))
 		goto out_noaxbuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (diff_dst && testmgr_alloc_buf(xoutbuf))
@@ -633,6 +725,7 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 				  tcrypt_complete, &result);
 
 	for (i = 0, j = 0; i < tcount; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!template[i].np) {
 			j++;
@@ -741,6 +834,8 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 				goto out;
 			}
 =======
+=======
+>>>>>>> v3.18
 		if (template[i].np)
 			continue;
 
@@ -851,11 +946,15 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 			hexdump(q, template[i].rlen);
 			ret = -EINVAL;
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	for (i = 0, j = 0; i < tcount; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (template[i].np) {
 			j++;
@@ -1038,6 +1137,8 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 				temp += template[i].tap[k];
 			}
 =======
+=======
+>>>>>>> v3.18
 		/* alignment tests are only done with continuous buffers */
 		if (align_offset != 0)
 			break;
@@ -1218,6 +1319,9 @@ static int __test_aead(struct crypto_aead *tfm, int enc,
 			}
 
 			temp += template[i].tap[k];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1236,6 +1340,11 @@ out_noaxbuf:
 	testmgr_free_buf(xbuf);
 out_noxbuf:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(key);
+	kfree(iv);
+>>>>>>> v3.18
 =======
 	kfree(key);
 	kfree(iv);
@@ -1247,24 +1356,33 @@ static int test_aead(struct crypto_aead *tfm, int enc,
 		     struct aead_testvec *template, unsigned int tcount)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	/* test 'dst == src' case */
 	ret = __test_aead(tfm, enc, template, tcount, false);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int alignmask;
 	int ret;
 
 	/* test 'dst == src' case */
 	ret = __test_aead(tfm, enc, template, tcount, false, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	/* test 'dst != src' case */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __test_aead(tfm, enc, template, tcount, true);
 =======
+=======
+>>>>>>> v3.18
 	ret = __test_aead(tfm, enc, template, tcount, true, 0);
 	if (ret)
 		return ret;
@@ -1284,6 +1402,9 @@ static int test_aead(struct crypto_aead *tfm, int enc,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1365,7 +1486,11 @@ out_nobuf:
 static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 			   struct cipher_testvec *template, unsigned int tcount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   const bool diff_dst)
+=======
+			   const bool diff_dst, const int align_offset)
+>>>>>>> v3.18
 =======
 			   const bool diff_dst, const int align_offset)
 >>>>>>> v3.18
@@ -1416,6 +1541,12 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 	j = 0;
 	for (i = 0; i < tcount; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (template[i].np && !template[i].also_non_np)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (template[i].np && !template[i].also_non_np)
 			continue;
@@ -1426,6 +1557,7 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 		else
 			memset(iv, 0, MAX_IVLEN);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(template[i].np) || (template[i].also_non_np)) {
 			j++;
@@ -1492,6 +1624,8 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 				goto out;
 			}
 =======
+=======
+>>>>>>> v3.18
 		j++;
 		ret = -EINVAL;
 		if (WARN_ON(align_offset + template[i].ilen > PAGE_SIZE))
@@ -1551,6 +1685,9 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 			hexdump(q, template[i].rlen);
 			ret = -EINVAL;
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1558,13 +1695,19 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 	j = 0;
 	for (i = 0; i < tcount; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* alignment tests are only done with continuous buffers */
 		if (align_offset != 0)
 			break;
 
 		if (!template[i].np)
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (template[i].iv)
@@ -1572,6 +1715,7 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 		else
 			memset(iv, 0, MAX_IVLEN);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (template[i].np) {
 			j++;
@@ -1684,6 +1828,8 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 				temp += template[i].tap[k];
 			}
 =======
+=======
+>>>>>>> v3.18
 		j++;
 		crypto_ablkcipher_clear_flags(tfm, ~0);
 		if (template[i].wk)
@@ -1783,6 +1929,9 @@ static int __test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 				goto out;
 			}
 			temp += template[i].tap[k];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1803,24 +1952,33 @@ static int test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 			 struct cipher_testvec *template, unsigned int tcount)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	/* test 'dst == src' case */
 	ret = __test_skcipher(tfm, enc, template, tcount, false);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int alignmask;
 	int ret;
 
 	/* test 'dst == src' case */
 	ret = __test_skcipher(tfm, enc, template, tcount, false, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	/* test 'dst != src' case */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __test_skcipher(tfm, enc, template, tcount, true);
 =======
+=======
+>>>>>>> v3.18
 	ret = __test_skcipher(tfm, enc, template, tcount, true, 0);
 	if (ret)
 		return ret;
@@ -1840,6 +1998,9 @@ static int test_skcipher(struct crypto_ablkcipher *tfm, int enc,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2336,6 +2497,7 @@ static int alg_test_crc32c(const struct alg_test_desc *desc,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct {
 			struct shash_desc shash;
 			char ctx[crypto_shash_descsize(tfm)];
@@ -2347,6 +2509,8 @@ static int alg_test_crc32c(const struct alg_test_desc *desc,
 		*(u32 *)sdesc.ctx = le32_to_cpu(420553207);
 		err = crypto_shash_final(&sdesc.shash, (u8 *)&val);
 =======
+=======
+>>>>>>> v3.18
 		SHASH_DESC_ON_STACK(shash, tfm);
 		u32 *ctx = (u32 *)shash_desc_ctx(shash);
 
@@ -2355,6 +2519,9 @@ static int alg_test_crc32c(const struct alg_test_desc *desc,
 
 		*ctx = le32_to_cpu(420553207);
 		err = crypto_shash_final(shash, (u8 *)&val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err) {
 			printk(KERN_ERR "alg: crc32c: Operation failed for "
@@ -2396,7 +2563,10 @@ static int alg_test_cprng(const struct alg_test_desc *desc, const char *driver,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int drbg_cavs_test(struct drbg_testvec *test, int pr,
 			  const char *driver, u32 type, u32 mask)
@@ -2491,6 +2661,9 @@ static int alg_test_drbg(const struct alg_test_desc *desc, const char *driver,
 
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int alg_test_null(const struct alg_test_desc *desc,
 			     const char *driver, u32 type, u32 mask)
@@ -2520,9 +2693,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.test = alg_test_null,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "__cbc-twofish-avx2",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "__driver-cbc-aes-aesni",
@@ -2530,9 +2706,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.fips_allowed = 1,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "__driver-cbc-blowfish-avx2",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "__driver-cbc-camellia-aesni",
@@ -2560,9 +2739,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.test = alg_test_null,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "__driver-cbc-twofish-avx2",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "__driver-ecb-aes-aesni",
@@ -2570,9 +2752,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.fips_allowed = 1,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "__driver-ecb-blowfish-avx2",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "__driver-ecb-camellia-aesni",
@@ -2600,9 +2785,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.test = alg_test_null,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "__driver-ecb-twofish-avx2",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "__ghash-pclmulqdqni",
@@ -2620,7 +2808,10 @@ static const struct alg_test_desc alg_test_descs[] = {
 		}
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.alg = "authenc(hmac(md5),ecb(cipher_null))",
 		.test = alg_test_aead,
 		.fips_allowed = 1,
@@ -2637,6 +2828,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 			}
 		}
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.alg = "authenc(hmac(sha1),cbc(aes))",
 		.test = alg_test_aead,
@@ -2645,9 +2839,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 			.aead = {
 				.enc = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					.vecs = hmac_sha1_aes_cbc_enc_tv_template,
 					.count = HMAC_SHA1_AES_CBC_ENC_TEST_VECTORS
 =======
+=======
+>>>>>>> v3.18
 					.vecs =
 					hmac_sha1_aes_cbc_enc_tv_temp,
 					.count =
@@ -2728,6 +2925,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 					hmac_sha224_des3_ede_cbc_enc_tv_temp,
 					.count =
 					HMAC_SHA224_DES3_EDE_CBC_ENC_TEST_VEC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -2740,9 +2940,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 			.aead = {
 				.enc = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					.vecs = hmac_sha256_aes_cbc_enc_tv_template,
 					.count = HMAC_SHA256_AES_CBC_ENC_TEST_VECTORS
 =======
+=======
+>>>>>>> v3.18
 					.vecs =
 					hmac_sha256_aes_cbc_enc_tv_temp,
 					.count =
@@ -2803,6 +3006,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 					hmac_sha384_des3_ede_cbc_enc_tv_temp,
 					.count =
 					HMAC_SHA384_DES3_EDE_CBC_ENC_TEST_VEC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -2815,9 +3021,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 			.aead = {
 				.enc = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					.vecs = hmac_sha512_aes_cbc_enc_tv_template,
 					.count = HMAC_SHA512_AES_CBC_ENC_TEST_VECTORS
 =======
+=======
+>>>>>>> v3.18
 					.vecs =
 					hmac_sha512_aes_cbc_enc_tv_temp,
 					.count =
@@ -2850,6 +3059,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 					hmac_sha512_des3_ede_cbc_enc_tv_temp,
 					.count =
 					HMAC_SHA512_DES3_EDE_CBC_ENC_TEST_VEC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -3055,6 +3267,7 @@ static const struct alg_test_desc alg_test_descs[] = {
 		}
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "cryptd(__driver-cbc-aes-aesni)",
 		.test = alg_test_null,
 		.fips_allowed = 1,
@@ -3062,6 +3275,8 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.alg = "cryptd(__driver-cbc-blowfish-avx2)",
 		.test = alg_test_null,
 =======
+=======
+>>>>>>> v3.18
 		.alg = "crct10dif",
 		.test = alg_test_hash,
 		.fips_allowed = 1,
@@ -3075,6 +3290,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.alg = "cryptd(__driver-cbc-aes-aesni)",
 		.test = alg_test_null,
 		.fips_allowed = 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}, {
 		.alg = "cryptd(__driver-cbc-camellia-aesni)",
@@ -3091,9 +3309,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.fips_allowed = 1,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "cryptd(__driver-ecb-blowfish-avx2)",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "cryptd(__driver-ecb-camellia-aesni)",
@@ -3121,9 +3342,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.test = alg_test_null,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.alg = "cryptd(__driver-ecb-twofish-avx2)",
 		.test = alg_test_null,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.alg = "cryptd(__driver-gcm-aes-aesni)",
@@ -3305,7 +3529,10 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.test = alg_test_null,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.alg = "drbg_nopr_ctr_aes128",
 		.test = alg_test_drbg,
 		.fips_allowed = 1,
@@ -3452,6 +3679,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.fips_allowed = 1,
 		.test = alg_test_null,
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.alg = "ecb(__aes-aesni)",
 		.test = alg_test_null,
@@ -3921,7 +4151,10 @@ static const struct alg_test_desc alg_test_descs[] = {
 		}
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.alg = "lz4",
 		.test = alg_test_comp,
 		.fips_allowed = 1,
@@ -3954,6 +4187,9 @@ static const struct alg_test_desc alg_test_descs[] = {
 			}
 		}
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.alg = "lzo",
 		.test = alg_test_comp,
@@ -4355,7 +4591,10 @@ static const struct alg_test_desc alg_test_descs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool alg_test_descs_checked;
 
 static void alg_test_descs_check_order(void)
@@ -4385,6 +4624,9 @@ static void alg_test_descs_check_order(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int alg_find_test(const char *alg)
 {
@@ -4418,6 +4660,11 @@ int alg_test(const char *driver, const char *alg, u32 type, u32 mask)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	alg_test_descs_check_order();
+
+>>>>>>> v3.18
 =======
 	alg_test_descs_check_order();
 
@@ -4454,7 +4701,11 @@ int alg_test(const char *driver, const char *alg, u32 type, u32 mask)
 		rc |= alg_test_descs[i].test(alg_test_descs + i, driver,
 					     type, mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (j >= 0)
+=======
+	if (j >= 0 && j != i)
+>>>>>>> v3.18
 =======
 	if (j >= 0 && j != i)
 >>>>>>> v3.18
@@ -4467,8 +4718,13 @@ test_done:
 
 	if (fips_enabled && !rc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "alg: self-tests for %s (%s) passed\n",
 		       driver, alg);
+=======
+		pr_info(KERN_INFO "alg: self-tests for %s (%s) passed\n",
+			driver, alg);
+>>>>>>> v3.18
 =======
 		pr_info(KERN_INFO "alg: self-tests for %s (%s) passed\n",
 			driver, alg);

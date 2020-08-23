@@ -17,6 +17,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitops.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitops.h>
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
 #include <linux/iio/dac/ad5791.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AD5791_RES_MASK(x)		((1 << (x)) - 1)
 #define AD5791_DAC_MASK			AD5791_RES_MASK(20)
 #define AD5791_DAC_MSB			(1 << 19)
@@ -33,10 +38,15 @@
 #define AD5791_CMD_READ			(1 << 23)
 #define AD5791_CMD_WRITE		(0 << 23)
 =======
+=======
+>>>>>>> v3.18
 #define AD5791_DAC_MASK			GENMASK(19, 0)
 
 #define AD5791_CMD_READ			BIT(23)
 #define AD5791_CMD_WRITE		0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AD5791_ADDR(addr)		((addr) << 20)
 
@@ -49,17 +59,23 @@
 
 /* Control Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AD5791_CTRL_RBUF		(1 << 1)
 #define AD5791_CTRL_OPGND		(1 << 2)
 #define AD5791_CTRL_DACTRI		(1 << 3)
 #define AD5791_CTRL_BIN2SC		(1 << 4)
 #define AD5791_CTRL_SDODIS		(1 << 5)
 =======
+=======
+>>>>>>> v3.18
 #define AD5791_CTRL_RBUF		BIT(1)
 #define AD5791_CTRL_OPGND		BIT(2)
 #define AD5791_CTRL_DACTRI		BIT(3)
 #define AD5791_CTRL_BIN2SC		BIT(4)
 #define AD5791_CTRL_SDODIS		BIT(5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AD5761_CTRL_LINCOMP(x)		((x) << 6)
 
@@ -74,9 +90,15 @@
 
 /* Software Control Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AD5791_SWCTRL_LDAC		(1 << 0)
 #define AD5791_SWCTRL_CLR		(1 << 1)
 #define AD5791_SWCTRL_RESET		(1 << 2)
+=======
+#define AD5791_SWCTRL_LDAC		BIT(0)
+#define AD5791_SWCTRL_CLR		BIT(1)
+#define AD5791_SWCTRL_RESET		BIT(2)
+>>>>>>> v3.18
 =======
 #define AD5791_SWCTRL_LDAC		BIT(0)
 #define AD5791_SWCTRL_CLR		BIT(1)
@@ -98,7 +120,11 @@ struct ad5791_chip_info {
 /**
  * struct ad5791_state - driver instance specific data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @us:			spi_device
+=======
+ * @spi:			spi_device
+>>>>>>> v3.18
 =======
  * @spi:			spi_device
 >>>>>>> v3.18
@@ -121,12 +147,18 @@ struct ad5791_state {
 	unsigned			pwr_down_mode;
 	bool				pwr_down;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	union {
 		__be32 d32;
 		u8 d8[4];
 	} data[3] ____cacheline_aligned;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -141,6 +173,7 @@ enum ad5791_supported_device_ids {
 	ID_AD5791,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ad5791_spi_write(struct spi_device *spi, u8 addr, u32 val)
 {
@@ -167,6 +200,8 @@ static int ad5791_spi_read(struct spi_device *spi, u8 addr, u32 *val)
 		{
 			.tx_buf = &data[0].d8[1],
 =======
+=======
+>>>>>>> v3.18
 static int ad5791_spi_write(struct ad5791_state *st, u8 addr, u32 val)
 {
 	st->data[0].d32 = cpu_to_be32(AD5791_CMD_WRITE |
@@ -182,14 +217,22 @@ static int ad5791_spi_read(struct ad5791_state *st, u8 addr, u32 *val)
 	struct spi_transfer xfers[] = {
 		{
 			.tx_buf = &st->data[0].d8[1],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.bits_per_word = 8,
 			.len = 3,
 			.cs_change = 1,
 		}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.tx_buf = &data[1].d8[1],
 			.rx_buf = &data[2].d8[1],
+=======
+			.tx_buf = &st->data[1].d8[1],
+			.rx_buf = &st->data[2].d8[1],
+>>>>>>> v3.18
 =======
 			.tx_buf = &st->data[1].d8[1],
 			.rx_buf = &st->data[2].d8[1],
@@ -200,6 +243,7 @@ static int ad5791_spi_read(struct ad5791_state *st, u8 addr, u32 *val)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data[0].d32 = cpu_to_be32(AD5791_CMD_READ |
 			      AD5791_ADDR(addr));
 	data[1].d32 = cpu_to_be32(AD5791_ADDR(AD5791_ADDR_NOOP));
@@ -208,6 +252,8 @@ static int ad5791_spi_read(struct ad5791_state *st, u8 addr, u32 *val)
 
 	*val = be32_to_cpu(data[2].d32);
 =======
+=======
+>>>>>>> v3.18
 	st->data[0].d32 = cpu_to_be32(AD5791_CMD_READ |
 			      AD5791_ADDR(addr));
 	st->data[1].d32 = cpu_to_be32(AD5791_ADDR(AD5791_ADDR_NOOP));
@@ -215,6 +261,9 @@ static int ad5791_spi_read(struct ad5791_state *st, u8 addr, u32 *val)
 	ret = spi_sync_transfer(st->spi, xfers, ARRAY_SIZE(xfers));
 
 	*val = be32_to_cpu(st->data[2].d32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -281,7 +330,11 @@ static ssize_t ad5791_write_dac_powerdown(struct iio_dev *indio_dev,
 	st->pwr_down = pwr_down;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad5791_spi_write(st->spi, AD5791_ADDR_CTRL, st->ctrl);
+=======
+	ret = ad5791_spi_write(st, AD5791_ADDR_CTRL, st->ctrl);
+>>>>>>> v3.18
 =======
 	ret = ad5791_spi_write(st, AD5791_ADDR_CTRL, st->ctrl);
 >>>>>>> v3.18
@@ -338,7 +391,11 @@ static int ad5791_read_raw(struct iio_dev *indio_dev,
 	switch (m) {
 	case IIO_CHAN_INFO_RAW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ad5791_spi_read(st->spi, chan->address, val);
+=======
+		ret = ad5791_spi_read(st, chan->address, val);
+>>>>>>> v3.18
 =======
 		ret = ad5791_spi_read(st, chan->address, val);
 >>>>>>> v3.18
@@ -349,9 +406,15 @@ static int ad5791_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*val = 0;
 		*val2 = (((u64)st->vref_mv) * 1000000ULL) >> chan->scan_type.realbits;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = st->vref_mv;
+		*val2 = (1 << chan->scan_type.realbits) - 1;
+		return IIO_VAL_FRACTIONAL;
+>>>>>>> v3.18
 =======
 		*val = st->vref_mv;
 		*val2 = (1 << chan->scan_type.realbits) - 1;
@@ -372,25 +435,35 @@ static const struct iio_chan_spec_ext_info ad5791_ext_info[] = {
 	{
 		.name = "powerdown",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.shared = true,
 		.read = ad5791_read_dac_powerdown,
 		.write = ad5791_write_dac_powerdown,
 	},
 	IIO_ENUM("powerdown_mode", true, &ad5791_powerdown_mode_enum),
 =======
+=======
+>>>>>>> v3.18
 		.shared = IIO_SHARED_BY_TYPE,
 		.read = ad5791_read_dac_powerdown,
 		.write = ad5791_write_dac_powerdown,
 	},
 	IIO_ENUM("powerdown_mode", IIO_SHARED_BY_TYPE,
 		 &ad5791_powerdown_mode_enum),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_ENUM_AVAILABLE("powerdown_mode", &ad5791_powerdown_mode_enum),
 	{ },
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AD5791_CHAN(bits, shift) {			\
+=======
+#define AD5791_CHAN(bits, _shift) {			\
+>>>>>>> v3.18
 =======
 #define AD5791_CHAN(bits, _shift) {			\
 >>>>>>> v3.18
@@ -403,14 +476,20 @@ static const struct iio_chan_spec_ext_info ad5791_ext_info[] = {
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE) |	\
 		BIT(IIO_CHAN_INFO_OFFSET),		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', bits, 24, shift),	\
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = {					\
 		.sign = 'u',				\
 		.realbits = (bits),			\
 		.storagebits = 24,			\
 		.shift = (_shift),			\
 	},						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = ad5791_ext_info,			\
 }
@@ -433,15 +512,21 @@ static int ad5791_write_raw(struct iio_dev *indio_dev,
 	switch (mask) {
 	case IIO_CHAN_INFO_RAW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val &= AD5791_RES_MASK(chan->scan_type.realbits);
 		val <<= chan->scan_type.shift;
 
 		return ad5791_spi_write(st->spi, chan->address, val);
 =======
+=======
+>>>>>>> v3.18
 		val &= GENMASK(chan->scan_type.realbits - 1, 0);
 		val <<= chan->scan_type.shift;
 
 		return ad5791_spi_write(st, chan->address, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	default:
@@ -463,6 +548,7 @@ static int ad5791_probe(struct spi_device *spi)
 	int ret, pos_voltage_uv = 0, neg_voltage_uv = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
@@ -475,6 +561,8 @@ static int ad5791_probe(struct spi_device *spi)
 		if (ret)
 			goto error_put_reg_pos;
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
@@ -484,6 +572,9 @@ static int ad5791_probe(struct spi_device *spi)
 		ret = regulator_enable(st->reg_vdd);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = regulator_get_voltage(st->reg_vdd);
@@ -494,17 +585,23 @@ static int ad5791_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->reg_vss = regulator_get(&spi->dev, "vss");
 	if (!IS_ERR(st->reg_vss)) {
 		ret = regulator_enable(st->reg_vss);
 		if (ret)
 			goto error_put_reg_neg;
 =======
+=======
+>>>>>>> v3.18
 	st->reg_vss = devm_regulator_get(&spi->dev, "vss");
 	if (!IS_ERR(st->reg_vss)) {
 		ret = regulator_enable(st->reg_vss);
 		if (ret)
 			goto error_disable_reg_pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = regulator_get_voltage(st->reg_vss);
@@ -528,7 +625,11 @@ static int ad5791_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad5791_spi_write(spi, AD5791_ADDR_SW_CTRL, AD5791_SWCTRL_RESET);
+=======
+	ret = ad5791_spi_write(st, AD5791_ADDR_SW_CTRL, AD5791_SWCTRL_RESET);
+>>>>>>> v3.18
 =======
 	ret = ad5791_spi_write(st, AD5791_ADDR_SW_CTRL, AD5791_SWCTRL_RESET);
 >>>>>>> v3.18
@@ -544,7 +645,11 @@ static int ad5791_probe(struct spi_device *spi)
 		  AD5791_CTRL_BIN2SC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad5791_spi_write(spi, AD5791_ADDR_CTRL, st->ctrl |
+=======
+	ret = ad5791_spi_write(st, AD5791_ADDR_CTRL, st->ctrl |
+>>>>>>> v3.18
 =======
 	ret = ad5791_spi_write(st, AD5791_ADDR_CTRL, st->ctrl |
 >>>>>>> v3.18
@@ -570,6 +675,7 @@ error_disable_reg_neg:
 	if (!IS_ERR(st->reg_vss))
 		regulator_disable(st->reg_vss);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_put_reg_neg:
 	if (!IS_ERR(st->reg_vss))
 		regulator_put(st->reg_vss);
@@ -588,6 +694,11 @@ error_disable_reg_pos:
 	if (!IS_ERR(st->reg_vdd))
 		regulator_disable(st->reg_vdd);
 >>>>>>> v3.18
+=======
+error_disable_reg_pos:
+	if (!IS_ERR(st->reg_vdd))
+		regulator_disable(st->reg_vdd);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -597,6 +708,7 @@ static int ad5791_remove(struct spi_device *spi)
 	struct ad5791_state *st = iio_priv(indio_dev);
 
 	iio_device_unregister(indio_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!IS_ERR(st->reg_vdd)) {
 		regulator_disable(st->reg_vdd);
@@ -609,11 +721,16 @@ static int ad5791_remove(struct spi_device *spi)
 	}
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(st->reg_vdd))
 		regulator_disable(st->reg_vdd);
 
 	if (!IS_ERR(st->reg_vss))
 		regulator_disable(st->reg_vss);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

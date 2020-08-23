@@ -35,6 +35,10 @@
 
 #include <rdma/ib_verbs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/if_ether.h>
 >>>>>>> v3.18

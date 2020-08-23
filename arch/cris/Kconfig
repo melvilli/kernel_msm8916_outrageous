@@ -99,9 +99,12 @@ config ETRAX_KMALLOCED_MODULES
 	  Enable module allocation with kmalloc instead of vmalloc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config OOM_REBOOT
        bool "Enable reboot at out of memory"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "kernel/Kconfig.preempt"
@@ -129,12 +132,15 @@ config ETRAX100LX_V2
 	  Support version 2 of the ETRAX 100LX.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SVINTO_SIM
 	bool "ETRAX-100LX-for-xsim-simulator"
 	select ARCH_USES_GETTIMEOFFSET
 	help
 	  Support the xsim ETRAX Simulator.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAXFS
@@ -154,6 +160,10 @@ config ETRAX_ARCH_V10
        default y if ETRAX100LX || ETRAX100LX_V2
        default n if !(ETRAX100LX || ETRAX100LX_V2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+       select TTY
+>>>>>>> v3.18
 =======
        select TTY
 >>>>>>> v3.18
@@ -183,12 +193,15 @@ config ETRAX_FLASH_BUSWIDTH
 	  Width in bytes of the NOR Flash bus (1, 2 or 4). Is usually 2.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_NANDFLASH_BUSWIDTH
 	int "Buswidth of NAND flash in bytes"
 	default "1"
 	help
 	  Width in bytes of the NAND flash (1 or 2).
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAX_FLASH1_SIZE
@@ -283,6 +296,7 @@ config ETRAX_AXISFLASHMAP
 	  flash memories.  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_RTC
 	bool "Real Time Clock support"
 	depends on ETRAX_I2C
@@ -315,6 +329,8 @@ config ETRAX_PCF8563
 
 endchoice
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAX_SYNCHRONOUS_SERIAL
@@ -592,6 +608,7 @@ config ETRAX_SERIAL_PORT3_DMA5_IN
 	bool "DMA 5"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_SERIAL_PORT3_DMA9_IN
 	bool "Ser3 uses DMA9 for input"
 	depends on ETRAXFS
@@ -614,6 +631,8 @@ config ETRAX_SERIAL_PORT3_DMA3_IN
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 endchoice
 
 choice
@@ -631,6 +650,7 @@ config ETRAX_SERIAL_PORT3_DMA4_OUT
 	depends on ETRAX_ARCH_V10
 	bool "DMA 4"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ETRAX_SERIAL_PORT3_DMA8_OUT
 	bool "Ser3 uses DMA8 for output"
@@ -654,10 +674,13 @@ config ETRAX_SERIAL_PORT3_DMA2_OUT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 endchoice
 
 endmenu
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 source "drivers/base/Kconfig"
 
@@ -694,10 +717,15 @@ source "drivers/uwb/Kconfig"
 source "drivers/staging/Kconfig"
 
 =======
+=======
+>>>>>>> v3.18
 source "drivers/Kconfig"
 
 source "fs/Kconfig"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "arch/cris/Kconfig.debug"
 

@@ -13,14 +13,20 @@
 #define NF_LOG_MASK		0x0f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NF_LOG_TYPE_LOG		0x01
 #define NF_LOG_TYPE_ULOG	0x02
 =======
+=======
+>>>>>>> v3.18
 enum nf_log_type {
 	NF_LOG_TYPE_LOG		= 0,
 	NF_LOG_TYPE_ULOG,
 	NF_LOG_TYPE_MAX
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct nf_loginfo {
@@ -49,15 +55,21 @@ typedef void nf_logfn(struct net *net,
 
 struct nf_logger {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct module	*me;
 	nf_logfn 	*logfn;
 	char		*name;
 	struct list_head	list[NFPROTO_NUMPROTO];
 =======
+=======
+>>>>>>> v3.18
 	char			*name;
 	enum nf_log_type	type;
 	nf_logfn 		*logfn;
 	struct module		*me;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -74,7 +86,10 @@ int nf_log_bind_pf(struct net *net, u_int8_t pf,
 void nf_log_unbind_pf(struct net *net, u_int8_t pf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nf_logger_find_get(int pf, enum nf_log_type type);
 void nf_logger_put(int pf, enum nf_log_type type);
 void nf_logger_request_module(int pf, enum nf_log_type type);
@@ -82,6 +97,9 @@ void nf_logger_request_module(int pf, enum nf_log_type type);
 #define MODULE_ALIAS_NF_LOGGER(family, type) \
 	MODULE_ALIAS("nf-logger-" __stringify(family) "-" __stringify(type))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Calls the registered backend logging function */
 __printf(8, 9)
@@ -95,7 +113,10 @@ void nf_log_packet(struct net *net,
 		   const char *fmt, ...);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct nf_log_buf;
 
 struct nf_log_buf *nf_log_buf_open(void);
@@ -116,5 +137,8 @@ void nf_log_dump_packet_common(struct nf_log_buf *m, u_int8_t pf,
 			       const struct nf_loginfo *loginfo,
 			       const char *prefix);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _NF_LOG_H */

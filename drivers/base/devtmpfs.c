@@ -217,7 +217,11 @@ static int handle_create(const char *nodename, umode_t mode, kuid_t uid,
 		newattrs.ia_valid = ATTR_MODE|ATTR_UID|ATTR_GID;
 		mutex_lock(&dentry->d_inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		notify_change(dentry, &newattrs);
+=======
+		notify_change(dentry, &newattrs, NULL);
+>>>>>>> v3.18
 =======
 		notify_change(dentry, &newattrs, NULL);
 >>>>>>> v3.18
@@ -304,7 +308,11 @@ static int handle_remove(const char *nodename, struct device *dev)
 	struct path parent;
 	struct dentry *dentry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int deleted = 1;
+=======
+	int deleted = 0;
+>>>>>>> v3.18
 =======
 	int deleted = 0;
 >>>>>>> v3.18
@@ -331,9 +339,15 @@ static int handle_remove(const char *nodename, struct device *dev)
 				ATTR_UID|ATTR_GID|ATTR_MODE;
 			mutex_lock(&dentry->d_inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			notify_change(dentry, &newattrs);
 			mutex_unlock(&dentry->d_inode->i_mutex);
 			err = vfs_unlink(parent.dentry->d_inode, dentry);
+=======
+			notify_change(dentry, &newattrs, NULL);
+			mutex_unlock(&dentry->d_inode->i_mutex);
+			err = vfs_unlink(parent.dentry->d_inode, dentry, NULL);
+>>>>>>> v3.18
 =======
 			notify_change(dentry, &newattrs, NULL);
 			mutex_unlock(&dentry->d_inode->i_mutex);

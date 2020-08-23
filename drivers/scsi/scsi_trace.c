@@ -29,7 +29,11 @@ static const char *
 scsi_trace_rw6(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p);
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ static const char *
 scsi_trace_rw10(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p);
 >>>>>>> v3.18
@@ -80,7 +88,11 @@ static const char *
 scsi_trace_rw12(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p);
 >>>>>>> v3.18
@@ -107,7 +119,11 @@ static const char *
 scsi_trace_rw16(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p);
 >>>>>>> v3.18
@@ -142,7 +158,11 @@ static const char *
 scsi_trace_rw32(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len, *cmd;
+=======
+	const char *ret = trace_seq_buffer_ptr(p), *cmd;
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p), *cmd;
 >>>>>>> v3.18
@@ -201,7 +221,11 @@ static const char *
 scsi_trace_unmap(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p);
 >>>>>>> v3.18
@@ -217,7 +241,11 @@ static const char *
 scsi_trace_service_action_in(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len, *cmd;
+=======
+	const char *ret = trace_seq_buffer_ptr(p), *cmd;
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p), *cmd;
 >>>>>>> v3.18
@@ -276,7 +304,11 @@ static const char *
 scsi_trace_misc(struct trace_seq *p, unsigned char *cdb, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 =======
 	const char *ret = trace_seq_buffer_ptr(p);
 >>>>>>> v3.18

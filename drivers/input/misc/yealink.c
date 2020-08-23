@@ -48,7 +48,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -880,10 +883,13 @@ static int usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 
 	interface = intf->cur_altsetting;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (interface->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	endpoint = &interface->endpoint[0].desc;

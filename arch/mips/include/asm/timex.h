@@ -5,6 +5,10 @@
  *
  * Copyright (C) 1998, 1999, 2003 by Ralf Baechle
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 by Maciej W. Rozycki
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 by Maciej W. Rozycki
 >>>>>>> v3.18
@@ -15,14 +19,20 @@
 #ifdef __KERNEL__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mipsregs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/compiler.h>
 
 #include <asm/cpu.h>
 #include <asm/cpu-features.h>
 #include <asm/mipsregs.h>
 #include <asm/cpu-type.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -47,11 +57,14 @@
 typedef unsigned int cycles_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline cycles_t get_cycles(void)
 {
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 /*
  * On R4000/R4400 before version 5.0 an erratum exists such that if the
  * cycle counter is read in the exact moment that it is matching the
@@ -110,6 +123,9 @@ static inline unsigned long random_get_entropy(void)
 		return 0;	/* no usable register */
 }
 #define random_get_entropy random_get_entropy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __KERNEL__ */

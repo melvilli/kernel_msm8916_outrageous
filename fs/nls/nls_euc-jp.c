@@ -554,7 +554,10 @@ static struct nls_table table = {
 	.uni2char	= uni2char,
 	.char2uni	= char2uni,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.owner		= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

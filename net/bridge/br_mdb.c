@@ -10,6 +10,10 @@
 #if IS_ENABLED(CONFIG_IPV6)
 #include <net/ipv6.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/addrconf.h>
+>>>>>>> v3.18
 =======
 #include <net/addrconf.h>
 >>>>>>> v3.18
@@ -66,7 +70,12 @@ static int br_mdb_fill_info(struct sk_buff *skb, struct netlink_callback *cb,
 	for (i = 0; i < mdb->max; i++) {
 		struct net_bridge_mdb_entry *mp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct net_bridge_port_group *p, **pp;
+=======
+		struct net_bridge_port_group *p;
+		struct net_bridge_port_group __rcu **pp;
+>>>>>>> v3.18
 =======
 		struct net_bridge_port_group *p;
 		struct net_bridge_port_group __rcu **pp;
@@ -263,7 +272,11 @@ static bool is_valid_mdb_entry(struct br_mdb_entry *entry)
 #if IS_ENABLED(CONFIG_IPV6)
 	} else if (entry->addr.proto == htons(ETH_P_IPV6)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ipv6_is_transient_multicast(&entry->addr.u.ip6))
+=======
+		if (ipv6_addr_is_ll_all_nodes(&entry->addr.u.ip6))
+>>>>>>> v3.18
 =======
 		if (ipv6_addr_is_ll_all_nodes(&entry->addr.u.ip6))
 >>>>>>> v3.18
@@ -359,6 +372,10 @@ static int br_mdb_add_group(struct net_bridge *br, struct net_bridge_port *port,
 	rcu_assign_pointer(*pp, p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	br_mdb_notify(br->dev, port, group, RTM_NEWMDB);
+>>>>>>> v3.18
 =======
 	br_mdb_notify(br->dev, port, group, RTM_NEWMDB);
 >>>>>>> v3.18
@@ -385,7 +402,10 @@ static int __br_mdb_add(struct net *net, struct net_bridge *br,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&ip, 0, sizeof(ip));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ip.proto = entry->addr.proto;
@@ -435,6 +455,7 @@ static int __br_mdb_del(struct net_bridge *br, struct br_mdb_entry *entry)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (timer_pending(&br->multicast_querier_timer))
 		return -EBUSY;
 
@@ -447,6 +468,8 @@ static int __br_mdb_del(struct net_bridge *br, struct br_mdb_entry *entry)
 		ip.u.ip6 = entry->addr.u.ip6;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	ip.proto = entry->addr.proto;
 	if (ip.proto == htons(ETH_P_IP)) {
 		if (timer_pending(&br->ip4_other_query.timer))
@@ -461,6 +484,9 @@ static int __br_mdb_del(struct net_bridge *br, struct br_mdb_entry *entry)
 		ip.u.ip6 = entry->addr.u.ip6;
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_bh(&br->multicast_lock);

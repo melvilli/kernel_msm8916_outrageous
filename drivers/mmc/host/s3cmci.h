@@ -27,7 +27,11 @@ struct s3cmci_host {
 	int			irq;
 	int			irq_cd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			dma;
+=======
+	struct dma_chan		*dma;
+>>>>>>> v3.18
 =======
 	struct dma_chan		*dma;
 >>>>>>> v3.18
@@ -41,8 +45,11 @@ struct s3cmci_host {
 	unsigned		sdiimsk;
 	unsigned		sdidata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			dodma;
 	int			dmatogo;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

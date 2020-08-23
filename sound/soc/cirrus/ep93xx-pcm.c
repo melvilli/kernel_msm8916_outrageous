@@ -15,6 +15,7 @@
 #include <linux/module.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/device.h>
 #include <linux/slab.h>
 #include <linux/dmaengine.h>
@@ -24,18 +25,28 @@
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/dmaengine.h>
 
 #include <sound/pcm.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sound/soc.h>
 #include <sound/dmaengine_pcm.h>
 
 #include <linux/platform_data/dma-ep93xx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/ep93xx-regs.h>
+=======
+
+#include "ep93xx-pcm.h"
+>>>>>>> v3.18
 =======
 
 #include "ep93xx-pcm.h"
@@ -47,6 +58,7 @@ static const struct snd_pcm_hardware ep93xx_pcm_hardware = {
 				   SNDRV_PCM_INFO_INTERLEAVED	|
 				   SNDRV_PCM_INFO_BLOCK_TRANSFER),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   
 	.rates			= SNDRV_PCM_RATE_8000_192000,
 	.rate_min		= SNDRV_PCM_RATE_8000,
@@ -56,6 +68,8 @@ static const struct snd_pcm_hardware ep93xx_pcm_hardware = {
 				   SNDRV_PCM_FMTBIT_S24_LE |
 				   SNDRV_PCM_FMTBIT_S32_LE),
 	
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.buffer_bytes_max	= 131072,
@@ -78,6 +92,7 @@ static bool ep93xx_pcm_dma_filter(struct dma_chan *chan, void *filter_param)
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ep93xx_pcm_open(struct snd_pcm_substream *substream)
 {
@@ -222,6 +237,8 @@ static struct platform_driver ep93xx_pcm_driver = {
 
 module_platform_driver(ep93xx_pcm_driver);
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_dmaengine_pcm_config ep93xx_dmaengine_pcm_config = {
 	.pcm_hardware = &ep93xx_pcm_hardware,
 	.compat_filter_fn = ep93xx_pcm_dma_filter,
@@ -237,12 +254,18 @@ int devm_ep93xx_pcm_platform_register(struct device *dev)
 		SND_DMAENGINE_PCM_FLAG_COMPAT);
 }
 EXPORT_SYMBOL_GPL(devm_ep93xx_pcm_platform_register);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Ryan Mallon");
 MODULE_DESCRIPTION("EP93xx ALSA PCM interface");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:ep93xx-pcm-audio");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

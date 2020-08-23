@@ -65,6 +65,10 @@
 #define CPDMA_TO_PORT_SHIFT	16
 #define CPDMA_DESC_PORT_MASK	(BIT(18) | BIT(17) | BIT(16))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPDMA_DESC_CRC_LEN	4
+>>>>>>> v3.18
 =======
 #define CPDMA_DESC_CRC_LEN	4
 >>>>>>> v3.18
@@ -85,7 +89,11 @@ struct cpdma_desc {
 
 struct cpdma_desc_pool {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			phys;
+=======
+	phys_addr_t		phys;
+>>>>>>> v3.18
 =======
 	phys_addr_t		phys;
 >>>>>>> v3.18
@@ -166,9 +174,15 @@ cpdma_desc_pool_create(struct device *dev, u32 phys, u32 hw_addr,
 	struct cpdma_desc_pool *pool;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pool = kzalloc(sizeof(*pool), GFP_KERNEL);
 	if (!pool)
 		return NULL;
+=======
+	pool = devm_kzalloc(dev, sizeof(*pool), GFP_KERNEL);
+	if (!pool)
+		goto fail;
+>>>>>>> v3.18
 =======
 	pool = devm_kzalloc(dev, sizeof(*pool), GFP_KERNEL);
 	if (!pool)
@@ -184,7 +198,11 @@ cpdma_desc_pool_create(struct device *dev, u32 phys, u32 hw_addr,
 
 	bitmap_size  = (pool->num_desc / BITS_PER_LONG) * sizeof(long);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pool->bitmap = kzalloc(bitmap_size, GFP_KERNEL);
+=======
+	pool->bitmap = devm_kzalloc(dev, bitmap_size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pool->bitmap = devm_kzalloc(dev, bitmap_size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -205,10 +223,14 @@ cpdma_desc_pool_create(struct device *dev, u32 phys, u32 hw_addr,
 	if (pool->iomap)
 		return pool;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail:
 	kfree(pool->bitmap);
 	kfree(pool);
+=======
+fail:
+>>>>>>> v3.18
 =======
 fail:
 >>>>>>> v3.18
@@ -217,6 +239,7 @@ fail:
 
 static void cpdma_desc_pool_destroy(struct cpdma_desc_pool *pool)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -227,10 +250,15 @@ static void cpdma_desc_pool_destroy(struct cpdma_desc_pool *pool)
 	WARN_ON(pool->used_desc);
 	kfree(pool->bitmap);
 =======
+=======
+>>>>>>> v3.18
 	if (!pool)
 		return;
 
 	WARN_ON(pool->used_desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pool->cpumap) {
 		dma_free_coherent(pool->dev, pool->mem_size, pool->cpumap,
@@ -239,8 +267,11 @@ static void cpdma_desc_pool_destroy(struct cpdma_desc_pool *pool)
 		iounmap(pool->iomap);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&pool->lock, flags);
 	kfree(pool);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -251,8 +282,12 @@ static inline dma_addr_t desc_phys(struct cpdma_desc_pool *pool,
 	if (!desc)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pool->hw_addr + (__force dma_addr_t)desc -
 			    (__force dma_addr_t)pool->iomap;
+=======
+	return pool->hw_addr + (__force long)desc - (__force long)pool->iomap;
+>>>>>>> v3.18
 =======
 	return pool->hw_addr + (__force long)desc - (__force long)pool->iomap;
 >>>>>>> v3.18
@@ -313,7 +348,11 @@ struct cpdma_ctlr *cpdma_ctlr_create(struct cpdma_params *params)
 	struct cpdma_ctlr *ctlr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctlr = kzalloc(sizeof(*ctlr), GFP_KERNEL);
+=======
+	ctlr = devm_kzalloc(params->dev, sizeof(*ctlr), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ctlr = devm_kzalloc(params->dev, sizeof(*ctlr), GFP_KERNEL);
 >>>>>>> v3.18
@@ -331,10 +370,15 @@ struct cpdma_ctlr *cpdma_ctlr_create(struct cpdma_params *params)
 					    ctlr->params.desc_mem_size,
 					    ctlr->params.desc_align);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctlr->pool) {
 		kfree(ctlr);
 		return NULL;
 	}
+=======
+	if (!ctlr->pool)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!ctlr->pool)
 		return NULL;
@@ -401,7 +445,11 @@ int cpdma_ctlr_stop(struct cpdma_ctlr *ctlr)
 
 	spin_lock_irqsave(&ctlr->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctlr->state != CPDMA_STATE_ACTIVE) {
+=======
+	if (ctlr->state == CPDMA_STATE_TEARDOWN) {
+>>>>>>> v3.18
 =======
 	if (ctlr->state == CPDMA_STATE_TEARDOWN) {
 >>>>>>> v3.18
@@ -518,7 +566,10 @@ int cpdma_ctlr_destroy(struct cpdma_ctlr *ctlr)
 	cpdma_desc_pool_destroy(ctlr->pool);
 	spin_unlock_irqrestore(&ctlr->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(ctlr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -560,7 +611,11 @@ struct cpdma_chan *cpdma_chan_create(struct cpdma_ctlr *ctlr, int chan_num,
 {
 	struct cpdma_chan *chan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, offset = (chan_num % CPDMA_MAX_CHANNELS) * 4;
+=======
+	int offset = (chan_num % CPDMA_MAX_CHANNELS) * 4;
+>>>>>>> v3.18
 =======
 	int offset = (chan_num % CPDMA_MAX_CHANNELS) * 4;
 >>>>>>> v3.18
@@ -569,6 +624,7 @@ struct cpdma_chan *cpdma_chan_create(struct cpdma_ctlr *ctlr, int chan_num,
 	if (__chan_linear(chan_num) >= ctlr->num_chan)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = -ENOMEM;
 	chan = kzalloc(sizeof(*chan), GFP_KERNEL);
@@ -580,6 +636,8 @@ struct cpdma_chan *cpdma_chan_create(struct cpdma_ctlr *ctlr, int chan_num,
 	if (ctlr->channels[chan_num])
 		goto err_chan_busy;
 =======
+=======
+>>>>>>> v3.18
 	chan = devm_kzalloc(ctlr->dev, sizeof(*chan), GFP_KERNEL);
 	if (!chan)
 		return ERR_PTR(-ENOMEM);
@@ -590,6 +648,9 @@ struct cpdma_chan *cpdma_chan_create(struct cpdma_ctlr *ctlr, int chan_num,
 		devm_kfree(ctlr->dev, chan);
 		return ERR_PTR(-EBUSY);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chan->ctlr	= ctlr;
@@ -621,12 +682,15 @@ struct cpdma_chan *cpdma_chan_create(struct cpdma_ctlr *ctlr, int chan_num,
 	spin_unlock_irqrestore(&ctlr->lock, flags);
 	return chan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_chan_busy:
 	spin_unlock_irqrestore(&ctlr->lock, flags);
 	kfree(chan);
 err_chan_alloc:
 	return ERR_PTR(ret);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -647,7 +711,10 @@ int cpdma_chan_destroy(struct cpdma_chan *chan)
 	ctlr->channels[chan->chan_num] = NULL;
 	spin_unlock_irqrestore(&ctlr->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(chan);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -666,6 +733,10 @@ int cpdma_chan_get_stats(struct cpdma_chan *chan,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpdma_chan_get_stats);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpdma_chan_get_stats);
 >>>>>>> v3.18
@@ -885,11 +956,17 @@ static int __cpdma_chan_process(struct cpdma_chan *chan)
 		goto unlock_ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (status & CPDMA_DESC_PASS_CRC)
 		outlen -= CPDMA_DESC_CRC_LEN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status	= status & (CPDMA_DESC_EOQ | CPDMA_DESC_TD_COMPLETE |
 			    CPDMA_DESC_PORT_MASK);
@@ -973,7 +1050,11 @@ int cpdma_chan_stop(struct cpdma_chan *chan)
 
 	spin_lock_irqsave(&chan->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chan->state != CPDMA_STATE_ACTIVE) {
+=======
+	if (chan->state == CPDMA_STATE_TEARDOWN) {
+>>>>>>> v3.18
 =======
 	if (chan->state == CPDMA_STATE_TEARDOWN) {
 >>>>>>> v3.18
@@ -1057,7 +1138,11 @@ struct cpdma_control_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cpdma_control_info controls[] = {
+=======
+static struct cpdma_control_info controls[] = {
+>>>>>>> v3.18
 =======
 static struct cpdma_control_info controls[] = {
 >>>>>>> v3.18

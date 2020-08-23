@@ -29,6 +29,7 @@ config PRINT_STACK_DEPTH
 	  scroll off the screen.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
 	depends on DEBUG_KERNEL
@@ -36,6 +37,8 @@ config DEBUG_STACKOVERFLOW
 	  This option will cause messages to be printed if free stack space
 	  drops below a certain limit.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HCALL_STATS
@@ -151,7 +154,10 @@ choice
 	  _will not boot_.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PPC_EARLY_DEBUG_BOOTX
 	bool "BootX or OpenFirmware"
 	depends on BOOTX_TEXT
@@ -159,6 +165,9 @@ config PPC_EARLY_DEBUG_BOOTX
 	  Select this to enable early debugging for a machine using BootX
 	  or OpenFirmware.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PPC_EARLY_DEBUG_LPAR
 	bool "LPAR HV Console"
@@ -216,9 +225,13 @@ config PPC_EARLY_DEBUG_BEAT
 config PPC_EARLY_DEBUG_44x
 	bool "Early serial debugging for IBM/AMCC 44x CPUs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# PPC_EARLY_DEBUG on 440 leaves AS=1 mappings above the TLB high water
 	# mark, which doesn't work with current 440 KVM.
 	depends on 44x && !KVM
+=======
+	depends on 44x
+>>>>>>> v3.18
 =======
 	depends on 44x
 >>>>>>> v3.18
@@ -253,11 +266,14 @@ config PPC_EARLY_DEBUG_USBGECKO
 	  consoles via an external USB Gecko adapter.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PPC_EARLY_DEBUG_WSP
 	bool "Early debugging via WSP's internal UART"
 	depends on PPC_WSP
 	select PPC_UDBG_16550
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PPC_EARLY_DEBUG_PS3GELIC
@@ -329,7 +345,10 @@ config PPC_EARLY_DEBUG_OPAL_VTERMNO
 	  debug.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  On OPAL v1 (takeover) this should always be 0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	  On OPAL v2, this will be 0 for network console and 1 or 2 for

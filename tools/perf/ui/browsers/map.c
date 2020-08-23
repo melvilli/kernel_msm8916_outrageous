@@ -19,6 +19,7 @@ struct map_browser {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void map_browser__write(struct ui_browser *self, void *nd, int row)
 {
 	struct symbol *sym = rb_entry(nd, struct symbol, rb_node);
@@ -28,6 +29,8 @@ static void map_browser__write(struct ui_browser *self, void *nd, int row)
 
 	ui_browser__set_percent_color(self, 0, current_entry);
 =======
+=======
+>>>>>>> v3.18
 static void map_browser__write(struct ui_browser *browser, void *nd, int row)
 {
 	struct symbol *sym = rb_entry(nd, struct symbol, rb_node);
@@ -36,13 +39,20 @@ static void map_browser__write(struct ui_browser *browser, void *nd, int row)
 	int width;
 
 	ui_browser__set_percent_color(browser, 0, current_entry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	slsmg_printf("%*" PRIx64 " %*" PRIx64 " %c ",
 		     mb->addrlen, sym->start, mb->addrlen, sym->end,
 		     sym->binding == STB_GLOBAL ? 'g' :
 		     sym->binding == STB_LOCAL  ? 'l' : 'w');
 <<<<<<< HEAD
+<<<<<<< HEAD
 	width = self->width - ((mb->addrlen * 2) + 4);
+=======
+	width = browser->width - ((mb->addrlen * 2) + 4);
+>>>>>>> v3.18
 =======
 	width = browser->width - ((mb->addrlen * 2) + 4);
 >>>>>>> v3.18
@@ -52,6 +62,7 @@ static void map_browser__write(struct ui_browser *browser, void *nd, int row)
 
 /* FIXME uber-kludgy, see comment on cmd_report... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 *symbol__browser_index(struct symbol *self)
 {
 	return ((void *)self) - sizeof(struct rb_node) - sizeof(u32);
@@ -59,12 +70,17 @@ static u32 *symbol__browser_index(struct symbol *self)
 
 static int map_browser__search(struct map_browser *self)
 =======
+=======
+>>>>>>> v3.18
 static u32 *symbol__browser_index(struct symbol *browser)
 {
 	return ((void *)browser) - sizeof(struct rb_node) - sizeof(u32);
 }
 
 static int map_browser__search(struct map_browser *browser)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char target[512];
@@ -78,9 +94,15 @@ static int map_browser__search(struct map_browser *browser)
 	if (target[0] == '0' && tolower(target[1]) == 'x') {
 		u64 addr = strtoull(target, NULL, 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sym = map__find_symbol(self->map, addr, NULL);
 	} else
 		sym = map__find_symbol_by_name(self->map, target, NULL);
+=======
+		sym = map__find_symbol(browser->map, addr, NULL);
+	} else
+		sym = map__find_symbol_by_name(browser->map, target, NULL);
+>>>>>>> v3.18
 =======
 		sym = map__find_symbol(browser->map, addr, NULL);
 	} else
@@ -91,8 +113,13 @@ static int map_browser__search(struct map_browser *browser)
 		u32 *idx = symbol__browser_index(sym);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self->b.top = &sym->rb_node;
 		self->b.index = self->b.top_idx = *idx;
+=======
+		browser->b.top = &sym->rb_node;
+		browser->b.index = browser->b.top_idx = *idx;
+>>>>>>> v3.18
 =======
 		browser->b.top = &sym->rb_node;
 		browser->b.index = browser->b.top_idx = *idx;
@@ -104,17 +131,23 @@ static int map_browser__search(struct map_browser *browser)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int map_browser__run(struct map_browser *self)
 {
 	int key;
 
 	if (ui_browser__show(&self->b, self->map->dso->long_name,
 =======
+=======
+>>>>>>> v3.18
 static int map_browser__run(struct map_browser *browser)
 {
 	int key;
 
 	if (ui_browser__show(&browser->b, browser->map->dso->long_name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     "Press <- or ESC to exit, %s / to search",
 			     verbose ? "" : "restart with -v to use") < 0)
@@ -122,7 +155,11 @@ static int map_browser__run(struct map_browser *browser)
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = ui_browser__run(&self->b, 0);
+=======
+		key = ui_browser__run(&browser->b, 0);
+>>>>>>> v3.18
 =======
 		key = ui_browser__run(&browser->b, 0);
 >>>>>>> v3.18
@@ -131,7 +168,11 @@ static int map_browser__run(struct map_browser *browser)
 		case '/':
 			if (verbose)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				map_browser__search(self);
+=======
+				map_browser__search(browser);
+>>>>>>> v3.18
 =======
 				map_browser__search(browser);
 >>>>>>> v3.18
@@ -146,6 +187,7 @@ static int map_browser__run(struct map_browser *browser)
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ui_browser__hide(&self->b);
 	return key;
 }
@@ -156,6 +198,8 @@ int map__browse(struct map *self)
 		.b = {
 			.entries = &self->dso->symbols[self->type],
 =======
+=======
+>>>>>>> v3.18
 	ui_browser__hide(&browser->b);
 	return key;
 }
@@ -165,13 +209,20 @@ int map__browse(struct map *map)
 	struct map_browser mb = {
 		.b = {
 			.entries = &map->dso->symbols[map->type],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.refresh = ui_browser__rb_tree_refresh,
 			.seek	 = ui_browser__rb_tree_seek,
 			.write	 = map_browser__write,
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.map = self,
+=======
+		.map = map,
+>>>>>>> v3.18
 =======
 		.map = map,
 >>>>>>> v3.18

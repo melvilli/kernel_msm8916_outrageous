@@ -39,7 +39,10 @@
 
 use strict;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 use Getopt::Long;
 my $header = 0;
 
@@ -65,6 +68,9 @@ GetOptions(
 	'h|help'	=>\&help,
 	'header'	=>\$header
 );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 my %start;
@@ -78,12 +84,18 @@ my %pids;
 my %pidctr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 my $headerstep = 20;
 my $xheader = 15;
 my $yheader = 25;
 my $cyheader = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 while (<>) {
 	my $line = $_;
@@ -149,9 +161,14 @@ if ($count == 0) {
 No data found in the dmesg. Make sure that 'printk.time=1' and
 'initcall_debug' are passed on the kernel command line.
 <<<<<<< HEAD
+<<<<<<< HEAD
 Usage:
       dmesg | perl scripts/bootgraph.pl > output.svg
 END
+=======
+END
+	help(1);
+>>>>>>> v3.18
 =======
 END
 	help(1);
@@ -163,7 +180,10 @@ print "<?xml version=\"1.0\" standalone=\"no\"?> \n";
 print "<svg width=\"2000\" height=\"100%\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 if ($header) {
 	my $version = `uname -a`;
@@ -173,6 +193,9 @@ if ($header) {
 	print "<text transform=\"translate($xheader,$cyheader)\">Date: $date</text>\n";
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 my @styles;
 

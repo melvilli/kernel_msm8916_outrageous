@@ -62,6 +62,7 @@ static struct var_t vars[] = {
  */
 static struct kobj_attribute caps_start_attribute =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(caps_start, USER_RW, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, USER_RW, spk_var_show, spk_var_store);
@@ -80,6 +81,8 @@ static struct kobj_attribute voice_attribute =
 static struct kobj_attribute vol_attribute =
 	__ATTR(vol, USER_RW, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(caps_start, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
@@ -97,12 +100,16 @@ static struct kobj_attribute voice_attribute =
 	__ATTR(voice, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute vol_attribute =
 	__ATTR(vol, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * We should uncomment the following definition, when we agree on a
  * method of passing a language designation to the software synthesizer.
  * static struct kobj_attribute lang_attribute =
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	__ATTR(lang, USER_RW, spk_var_show, spk_var_store);
  */
@@ -118,6 +125,8 @@ static struct kobj_attribute jiffy_delta_attribute =
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, ROOT_W, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
  *	__ATTR(lang, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
  */
 
@@ -131,6 +140,9 @@ static struct kobj_attribute jiffy_delta_attribute =
 	__ATTR(jiffy_delta, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -216,6 +228,7 @@ static int softsynth_open(struct inode *inode, struct file *fp)
 	/*if ((fp->f_flags & O_ACCMODE) != O_RDONLY) */
 	/*	return -EPERM; */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 	if (synth_soft.alive) {
 		spk_unlock(flags);
@@ -224,6 +237,8 @@ static int softsynth_open(struct inode *inode, struct file *fp)
 	synth_soft.alive = 1;
 	spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 	if (synth_soft.alive) {
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
@@ -231,6 +246,9 @@ static int softsynth_open(struct inode *inode, struct file *fp)
 	}
 	synth_soft.alive = 1;
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -239,16 +257,22 @@ static int softsynth_close(struct inode *inode, struct file *fp)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 	synth_soft.alive = 0;
 	init_pos = 0;
 	spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 	synth_soft.alive = 0;
 	init_pos = 0;
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Make sure we let applications go before leaving */
 	speakup_start_ttys();
@@ -256,17 +280,23 @@ static int softsynth_close(struct inode *inode, struct file *fp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t softsynth_read(struct file *fp, char *buf, size_t count,
 			      loff_t *pos)
 {
 	int chars_sent = 0;
 	char *cp;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 			      loff_t *pos)
 {
 	int chars_sent = 0;
 	char __user *cp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *init;
 	char ch;
@@ -275,7 +305,11 @@ static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 	DEFINE_WAIT(wait);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -284,7 +318,11 @@ static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 		if (!synth_buffer_empty() || speakup_info.flushing)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_unlock(flags);
+=======
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -298,7 +336,11 @@ static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 		}
 		schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_lock(flags);
+=======
+		spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -319,15 +361,21 @@ static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 			ch = synth_buffer_getc();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_unlock(flags);
 		if (copy_to_user(cp, &ch, 1))
 			return -EFAULT;
 		spk_lock(flags);
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 		if (copy_to_user(cp, &ch, 1))
 			return -EFAULT;
 		spin_lock_irqsave(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		chars_sent++;
 		cp++;
@@ -335,7 +383,11 @@ static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 	*pos += chars_sent;
 	empty = synth_buffer_empty();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -349,8 +401,13 @@ static ssize_t softsynth_read(struct file *fp, char __user *buf, size_t count,
 static int last_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t softsynth_write(struct file *fp, const char *buf, size_t count,
 			       loff_t *pos)
+=======
+static ssize_t softsynth_write(struct file *fp, const char __user *buf,
+			       size_t count, loff_t *pos)
+>>>>>>> v3.18
 =======
 static ssize_t softsynth_write(struct file *fp, const char __user *buf,
 			       size_t count, loff_t *pos)
@@ -374,6 +431,7 @@ static unsigned int softsynth_poll(struct file *fp,
 	unsigned long flags;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	poll_wait(fp, &speakup_event, wait);
 
 	spk_lock(flags);
@@ -381,6 +439,8 @@ static unsigned int softsynth_poll(struct file *fp,
 		ret = POLLIN | POLLRDNORM;
 	spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 
 	poll_wait(fp, &speakup_event, wait);
 
@@ -388,6 +448,9 @@ static unsigned int softsynth_poll(struct file *fp,
 	if (!synth_buffer_empty() || speakup_info.flushing)
 		ret = POLLIN | POLLRDNORM;
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -396,6 +459,10 @@ static unsigned char get_index(void)
 {
 	int rv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

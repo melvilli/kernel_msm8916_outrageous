@@ -102,6 +102,10 @@ struct nfs_fattr {
 #define NFS_ATTR_FATTR_OWNER_NAME	(1U << 23)
 #define NFS_ATTR_FATTR_GROUP_NAME	(1U << 24)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NFS_ATTR_FATTR_V4_SECURITY_LABEL (1U << 25)
+>>>>>>> v3.18
 =======
 #define NFS_ATTR_FATTR_V4_SECURITY_LABEL (1U << 25)
 >>>>>>> v3.18
@@ -125,7 +129,12 @@ struct nfs_fattr {
 		| NFS_ATTR_FATTR_SPACE_USED)
 #define NFS_ATTR_FATTR_V4 (NFS_ATTR_FATTR \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		| NFS_ATTR_FATTR_SPACE_USED)
+=======
+		| NFS_ATTR_FATTR_SPACE_USED \
+		| NFS_ATTR_FATTR_V4_SECURITY_LABEL)
+>>>>>>> v3.18
 =======
 		| NFS_ATTR_FATTR_SPACE_USED \
 		| NFS_ATTR_FATTR_V4_SECURITY_LABEL)
@@ -256,6 +265,7 @@ struct nfs4_layoutget {
 	struct nfs4_layoutget_args args;
 	struct nfs4_layoutget_res res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfp_t gfp_flags;
 };
 
@@ -271,10 +281,15 @@ struct nfs4_getdevicelist_res {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct rpc_cred *cred;
 	gfp_t gfp_flags;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfs4_getdeviceinfo_args {
 	struct nfs4_sequence_args seq_args;
@@ -293,6 +308,12 @@ struct nfs4_layoutcommit_args {
 	struct inode *inode;
 	const u32 *bitmask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t layoutupdate_len;
+	struct page *layoutupdate_page;
+	struct page **layoutupdate_pages;
+>>>>>>> v3.18
 =======
 	size_t layoutupdate_len;
 	struct page *layoutupdate_page;
@@ -370,6 +391,10 @@ struct nfs_openargs {
 	__u32			claim;
 	enum createmode4	createmode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nfs4_label *label;
+>>>>>>> v3.18
 =======
 	const struct nfs4_label *label;
 >>>>>>> v3.18
@@ -383,6 +408,10 @@ struct nfs_openres {
 	__u32                   rflags;
 	struct nfs_fattr *      f_attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label	*f_label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label	*f_label;
 >>>>>>> v3.18
@@ -405,6 +434,10 @@ struct nfs_openres {
  */
 struct nfs_open_confirmargs {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_sequence_args	seq_args;
+>>>>>>> v3.18
 =======
 	struct nfs4_sequence_args	seq_args;
 >>>>>>> v3.18
@@ -415,6 +448,10 @@ struct nfs_open_confirmargs {
 
 struct nfs_open_confirmres {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_sequence_res	seq_res;
+>>>>>>> v3.18
 =======
 	struct nfs4_sequence_res	seq_res;
 >>>>>>> v3.18
@@ -499,10 +536,13 @@ struct nfs_lockt_res {
 
 struct nfs_release_lockowner_args {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_lowner	lock_owner;
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct nfs4_sequence_args	seq_args;
 	struct nfs_lowner	lock_owner;
 };
@@ -511,6 +551,9 @@ struct nfs_release_lockowner_res {
 	struct nfs4_sequence_res	seq_res;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfs4_delegreturnargs {
 	struct nfs4_sequence_args	seq_args;
@@ -526,6 +569,7 @@ struct nfs4_delegreturnres {
 };
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Arguments to the read call.
  */
@@ -553,6 +597,8 @@ struct nfs_readres {
  */
 struct nfs_writeargs {
 =======
+=======
+>>>>>>> v3.18
  * Arguments to the write call.
  */
 struct nfs_write_verifier {
@@ -568,6 +614,9 @@ struct nfs_writeverf {
  * Arguments shared by the read and write call.
  */
 struct nfs_pgio_args {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nfs4_sequence_args	seq_args;
 	struct nfs_fh *		fh;
@@ -576,6 +625,7 @@ struct nfs_pgio_args {
 	nfs4_stateid		stateid;
 	__u64			offset;
 	__u32			count;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enum nfs3_stable_how	stable;
 	unsigned int		pgbase;
@@ -599,6 +649,8 @@ struct nfs_writeres {
 	__u32			count;
 	const struct nfs_server *server;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		pgbase;
 	struct page **		pages;
 	const u32 *		bitmask;	/* used by write */
@@ -613,6 +665,9 @@ struct nfs_pgio_res {
 	struct nfs_writeverf *	verf;		/* used by write */
 	const struct nfs_server *server;	/* used by write */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -671,7 +726,10 @@ struct nfs_renameres {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* parsed sec= options */
 #define NFS_AUTH_INFO_MAX_FLAVORS 12 /* see fs/nfs/super.c */
 struct nfs_auth_info {
@@ -679,6 +737,9 @@ struct nfs_auth_info {
 	rpc_authflavor_t        flavors[NFS_AUTH_INFO_MAX_FLAVORS];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Argument struct for decode_entry function
@@ -693,6 +754,10 @@ struct nfs_entry {
 	struct nfs_fh *		fh;
 	struct nfs_fattr *	fattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label  *label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label  *label;
 >>>>>>> v3.18
@@ -729,6 +794,10 @@ struct nfs_setattrargs {
 	const struct nfs_server *	server; /* Needed for name mapping */
 	const u32 *			bitmask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	const struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -768,6 +837,10 @@ struct nfs_setattrres {
 	struct nfs4_sequence_res	seq_res;
 	struct nfs_fattr *              fattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -969,6 +1042,10 @@ struct nfs4_create_arg {
 	const struct nfs_fh *		dir_fh;
 	const u32 *			bitmask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	const struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -980,6 +1057,10 @@ struct nfs4_create_res {
 	struct nfs_fh *			fh;
 	struct nfs_fattr *		fattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -1008,6 +1089,10 @@ struct nfs4_getattr_res {
 	const struct nfs_server *	server;
 	struct nfs_fattr *		fattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -1026,6 +1111,10 @@ struct nfs4_link_res {
 	const struct nfs_server *	server;
 	struct nfs_fattr *		fattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -1047,6 +1136,10 @@ struct nfs4_lookup_res {
 	struct nfs_fattr *		fattr;
 	struct nfs_fh *			fh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs4_label		*label;
+>>>>>>> v3.18
 =======
 	struct nfs4_label		*label;
 >>>>>>> v3.18
@@ -1110,6 +1203,10 @@ struct nfs4_setclientid {
 	char				sc_uaddr[RPCBIND_MAXUADDRLEN + 1];
 	u32				sc_cb_ident;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rpc_cred			*sc_cred;
+>>>>>>> v3.18
 =======
 	struct rpc_cred			*sc_cred;
 >>>>>>> v3.18
@@ -1171,16 +1268,22 @@ struct nfs4_fs_locations_arg {
 	struct nfs4_sequence_args	seq_args;
 	const struct nfs_fh *dir_fh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct qstr *name;
 	struct page *page;
 	const u32 *bitmask;
 =======
+=======
+>>>>>>> v3.18
 	const struct nfs_fh *fh;
 	const struct qstr *name;
 	struct page *page;
 	const u32 *bitmask;
 	clientid4 clientid;
 	unsigned char migration:1, renew:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1188,6 +1291,10 @@ struct nfs4_fs_locations_res {
 	struct nfs4_sequence_res	seq_res;
 	struct nfs4_fs_locations       *fs_locations;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char			migration:1, renew:1;
+>>>>>>> v3.18
 =======
 	unsigned char			migration:1, renew:1;
 >>>>>>> v3.18
@@ -1215,7 +1322,10 @@ struct nfs4_secinfo_res {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct nfs4_fsid_present_arg {
 	struct nfs4_sequence_args	seq_args;
 	const struct nfs_fh		*fh;
@@ -1229,6 +1339,9 @@ struct nfs4_fsid_present_res {
 	unsigned char			renew:1;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_NFS_V4 */
 
@@ -1245,6 +1358,10 @@ struct pnfs_commit_bucket {
 	struct pnfs_layout_segment *wlseg;
 	struct pnfs_layout_segment *clseg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs_writeverf direct_verf;
+>>>>>>> v3.18
 =======
 	struct nfs_writeverf direct_verf;
 >>>>>>> v3.18
@@ -1258,8 +1375,11 @@ struct pnfs_ds_commit_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFS4_EXCHANGE_ID_LEN	(127)
 =======
+=======
+>>>>>>> v3.18
 #define NFS4_OP_MAP_NUM_LONGS \
 	DIV_ROUND_UP(LAST_NFS4_OP, 8 * sizeof(unsigned long))
 #define NFS4_OP_MAP_NUM_WORDS \
@@ -1278,6 +1398,9 @@ struct nfs41_state_protection {
 };
 
 #define NFS4_EXCHANGE_ID_LEN	(48)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfs41_exchange_id_args {
 	struct nfs_client		*client;
@@ -1286,6 +1409,10 @@ struct nfs41_exchange_id_args {
 	char 				id[NFS4_EXCHANGE_ID_LEN];
 	u32				flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs41_state_protection	state_protect;
+>>>>>>> v3.18
 =======
 	struct nfs41_state_protection	state_protect;
 >>>>>>> v3.18
@@ -1322,6 +1449,10 @@ struct nfs41_exchange_id_res {
 	struct nfs41_server_scope	*server_scope;
 	struct nfs41_impl_id		*impl_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs41_state_protection	state_protect;
+>>>>>>> v3.18
 =======
 	struct nfs41_state_protection	state_protect;
 >>>>>>> v3.18
@@ -1395,7 +1526,10 @@ nfs_free_pnfs_ds_cinfo(struct pnfs_ds_commit_info *cinfo)
 #endif /* CONFIG_NFS_V4_1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NFS_V4_2
 struct nfs42_seek_args {
 	struct nfs4_sequence_args	seq_args;
@@ -1415,6 +1549,9 @@ struct nfs42_seek_res {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfs_page;
 
@@ -1426,6 +1563,7 @@ struct nfs_page_array {
 	struct page		*page_array[NFS_PAGEVEC_SIZE];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct nfs_read_data {
 	struct nfs_pgio_header	*header;
@@ -1443,14 +1581,19 @@ struct nfs_read_data {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* used as flag bits in nfs_pgio_header */
 enum {
 	NFS_IOHDR_ERROR = 0,
 	NFS_IOHDR_EOF,
 	NFS_IOHDR_REDO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NFS_IOHDR_NEED_COMMIT,
 	NFS_IOHDR_NEED_RESCHED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1460,10 +1603,15 @@ struct nfs_pgio_header {
 	struct rpc_cred		*cred;
 	struct list_head	pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	rpc_list;
 	atomic_t		refcnt;
 	struct nfs_page		*req;
 	struct nfs_writeverf	*verf;
+=======
+	struct nfs_page		*req;
+	struct nfs_writeverf	verf;		/* Used for writes */
+>>>>>>> v3.18
 =======
 	struct nfs_page		*req;
 	struct nfs_writeverf	verf;		/* Used for writes */
@@ -1474,6 +1622,10 @@ struct nfs_pgio_header {
 	void (*release) (struct nfs_pgio_header *hdr);
 	const struct nfs_pgio_completion_ops *completion_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nfs_rw_ops	*rw_ops;
+>>>>>>> v3.18
 =======
 	const struct nfs_rw_ops	*rw_ops;
 >>>>>>> v3.18
@@ -1485,6 +1637,7 @@ struct nfs_pgio_header {
 	int			error;		/* merge with pnfs_error */
 	unsigned long		good_bytes;	/* boundary of good data */
 	unsigned long		flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -1513,6 +1666,8 @@ struct nfs_write_header {
 	struct nfs_write_data	rpc_data;
 	struct nfs_writeverf	verf;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * rpc data
@@ -1527,6 +1682,9 @@ struct nfs_write_header {
 	struct nfs_page_array	page_array;
 	struct nfs_client	*ds_clp;	/* pNFS data server */
 	int			ds_idx;		/* ds index if ds_clp is set */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1567,6 +1725,10 @@ struct nfs_commit_data {
 	struct nfs_client	*ds_clp;	/* pNFS data server */
 	int			ds_commit_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	loff_t			lwb;
+>>>>>>> v3.18
 =======
 	loff_t			lwb;
 >>>>>>> v3.18
@@ -1589,6 +1751,10 @@ struct nfs_unlinkdata {
 	struct rpc_cred	*cred;
 	struct nfs_fattr dir_attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	long timeout;
+>>>>>>> v3.18
 =======
 	long timeout;
 >>>>>>> v3.18
@@ -1605,6 +1771,11 @@ struct nfs_renamedata {
 	struct dentry		*new_dentry;
 	struct nfs_fattr	new_fattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*complete)(struct rpc_task *, struct nfs_renamedata *);
+	long timeout;
+>>>>>>> v3.18
 =======
 	void (*complete)(struct rpc_task *, struct nfs_renamedata *);
 	long timeout;
@@ -1637,18 +1808,24 @@ struct nfs_rpc_ops {
 				     struct nfs_subversion *);
 	int	(*getattr) (struct nfs_server *, struct nfs_fh *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct nfs_fattr *);
 	int	(*setattr) (struct dentry *, struct nfs_fattr *,
 			    struct iattr *);
 	int	(*lookup)  (struct inode *, struct qstr *,
 			    struct nfs_fh *, struct nfs_fattr *);
 =======
+=======
+>>>>>>> v3.18
 			    struct nfs_fattr *, struct nfs4_label *);
 	int	(*setattr) (struct dentry *, struct nfs_fattr *,
 			    struct iattr *);
 	int	(*lookup)  (struct inode *, struct qstr *,
 			    struct nfs_fh *, struct nfs_fattr *,
 			    struct nfs4_label *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int	(*access)  (struct inode *, struct nfs_access_entry *);
 	int	(*readlink)(struct inode *, struct page *, unsigned int,
@@ -1660,8 +1837,11 @@ struct nfs_rpc_ops {
 	void	(*unlink_rpc_prepare) (struct rpc_task *, struct nfs_unlinkdata *);
 	int	(*unlink_done) (struct rpc_task *, struct inode *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	(*rename)  (struct inode *, struct qstr *,
 			    struct inode *, struct qstr *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void	(*rename_setup)  (struct rpc_message *msg, struct inode *dir);
@@ -1685,6 +1865,7 @@ struct nfs_rpc_ops {
 	int	(*set_capabilities)(struct nfs_server *, struct nfs_fh *);
 	int	(*decode_dirent)(struct xdr_stream *, struct nfs_entry *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void	(*read_setup)   (struct nfs_read_data *, struct rpc_message *);
 	void	(*read_pageio_init)(struct nfs_pageio_descriptor *, struct inode *,
 				    const struct nfs_pgio_completion_ops *);
@@ -1696,12 +1877,17 @@ struct nfs_rpc_ops {
 	void	(*write_rpc_prepare)(struct rpc_task *, struct nfs_write_data *);
 	int	(*write_done)  (struct rpc_task *, struct nfs_write_data *);
 =======
+=======
+>>>>>>> v3.18
 	int	(*pgio_rpc_prepare)(struct rpc_task *,
 				    struct nfs_pgio_header *);
 	void	(*read_setup)(struct nfs_pgio_header *, struct rpc_message *);
 	int	(*read_done)(struct rpc_task *, struct nfs_pgio_header *);
 	void	(*write_setup)(struct nfs_pgio_header *, struct rpc_message *);
 	int	(*write_done)(struct rpc_task *, struct nfs_pgio_header *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void	(*commit_setup) (struct nfs_commit_data *, struct rpc_message *);
 	void	(*commit_rpc_prepare)(struct rpc_task *, struct nfs_commit_data *);
@@ -1714,7 +1900,12 @@ struct nfs_rpc_ops {
 				struct nfs_open_context *ctx,
 				int open_flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct iattr *iattr);
+=======
+				struct iattr *iattr,
+				int *);
+>>>>>>> v3.18
 =======
 				struct iattr *iattr,
 				int *);
@@ -1725,7 +1916,11 @@ struct nfs_rpc_ops {
 	struct nfs_client *
 		(*init_client) (struct nfs_client *, const struct rpc_timeout *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const char *, rpc_authflavor_t);
+=======
+				const char *);
+>>>>>>> v3.18
 =======
 				const char *);
 >>>>>>> v3.18

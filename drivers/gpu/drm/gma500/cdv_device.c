@@ -27,6 +27,10 @@
 #include "intel_bios.h"
 #include "cdv_device.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gma_device.h"
+>>>>>>> v3.18
 =======
 #include "gma_device.h"
 >>>>>>> v3.18
@@ -431,6 +435,7 @@ static int cdv_power_up(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* FIXME ? - shared with Poulsbo */
 static void cdv_get_core_freq(struct drm_device *dev)
 {
@@ -468,6 +473,8 @@ static void cdv_get_core_freq(struct drm_device *dev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void cdv_hotplug_work_func(struct work_struct *work)
@@ -626,7 +633,11 @@ static int cdv_chip_setup(struct drm_device *dev)
 		dev_warn(dev->dev, "Enabling MSI failed!\n");
 	dev_priv->regmap = cdv_regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdv_get_core_freq(dev);
+=======
+	gma_get_core_freq(dev);
+>>>>>>> v3.18
 =======
 	gma_get_core_freq(dev);
 >>>>>>> v3.18
@@ -646,6 +657,10 @@ const struct psb_ops cdv_chip_ops = {
 	.hdmi_mask = (1 << 0) | (1 << 1),
 	.lvds_mask = (1 << 1),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.sdvo_mask = (1 << 0),
+>>>>>>> v3.18
 =======
 	.sdvo_mask = (1 << 0),
 >>>>>>> v3.18
@@ -657,6 +672,10 @@ const struct psb_ops cdv_chip_ops = {
 	.crtc_helper = &cdv_intel_helper_funcs,
 	.crtc_funcs = &cdv_intel_crtc_funcs,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.clock_funcs = &cdv_clock_funcs,
+>>>>>>> v3.18
 =======
 	.clock_funcs = &cdv_clock_funcs,
 >>>>>>> v3.18
@@ -675,6 +694,11 @@ const struct psb_ops cdv_chip_ops = {
 	.power_down = cdv_power_down,
 	.power_up = cdv_power_up,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.update_wm = cdv_update_wm,
+	.disable_sr = cdv_disable_sr,
+>>>>>>> v3.18
 =======
 	.update_wm = cdv_update_wm,
 	.disable_sr = cdv_disable_sr,

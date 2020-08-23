@@ -30,11 +30,14 @@ config HAVE_FUNCTION_GRAPH_FP_TEST
 	  See Documentation/trace/ftrace-design.txt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_FUNCTION_TRACE_MCOUNT_TEST
 	bool
 	help
 	  See Documentation/trace/ftrace-design.txt
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HAVE_DYNAMIC_FTRACE
@@ -86,9 +89,12 @@ config EVENT_TRACING
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPU_TRACEPOINTS
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CONTEXT_SWITCH_TRACER
@@ -100,6 +106,7 @@ config RING_BUFFER_ALLOW_SWAP
 	 Allow the use of ring_buffer_swap_cpu.
 	 Adds a very slight overhead to tracing when enabled.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MSM_RTB
 	bool "Register tracing"
@@ -126,6 +133,8 @@ config IPC_LOGGING
 
 	  If in doubt, say no.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # All tracer options should select GENERIC_TRACER. For those options that are
@@ -462,6 +471,10 @@ config UPROBE_EVENT
 	depends on ARCH_SUPPORTS_UPROBES
 	depends on MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on PERF_EVENTS
+>>>>>>> v3.18
 =======
 	depends on PERF_EVENTS
 >>>>>>> v3.18
@@ -523,6 +536,7 @@ config FUNCTION_PROFILER
 	  If in doubt, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CPU_FREQ_SWITCH_PROFILER
 	bool "CPU frequency switch time profiler"
 	select GENERIC_TRACER
@@ -536,6 +550,8 @@ config CPU_FREQ_SWITCH_PROFILER
 
 	  If in doubt, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config FTRACE_MCOUNT_RECORD
@@ -592,7 +608,10 @@ config MMIOTRACE_TEST
 	  Say N, unless you absolutely know what you are doing.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TRACEPOINT_BENCHMARK
         bool "Add tracepoint that benchmarks tracepoints"
 	help
@@ -623,6 +642,9 @@ config TRACEPOINT_BENCHMARK
 	      last=281 first=3672 max=632 min=273 avg=287 std=183 std^2=33666
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RING_BUFFER_BENCHMARK
 	tristate "Ring buffer benchmark stress tester"

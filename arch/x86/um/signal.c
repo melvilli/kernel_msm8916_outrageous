@@ -371,6 +371,7 @@ struct rt_sigframe
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int setup_signal_stack_sc(unsigned long stack_top, int sig,
 			  struct k_sigaction *ka, struct pt_regs *regs,
 			  sigset_t *mask)
@@ -379,12 +380,17 @@ int setup_signal_stack_sc(unsigned long stack_top, int sig,
 	void __user *restorer;
 	int err = 0;
 =======
+=======
+>>>>>>> v3.18
 int setup_signal_stack_sc(unsigned long stack_top, struct ksignal *ksig,
 			  struct pt_regs *regs, sigset_t *mask)
 {
 	struct sigframe __user *frame;
 	void __user *restorer;
 	int err = 0, sig = ksig->sig;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* This is the same calculation as i386 - ((sp + 4) & 15) == 0 */
@@ -395,8 +401,13 @@ int setup_signal_stack_sc(unsigned long stack_top, struct ksignal *ksig,
 
 	restorer = frame->retcode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_RESTORER)
 		restorer = ka->sa.sa_restorer;
+=======
+	if (ksig->ka.sa.sa_flags & SA_RESTORER)
+		restorer = ksig->ka.sa.sa_restorer;
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_RESTORER)
 		restorer = ksig->ka.sa.sa_restorer;
@@ -425,7 +436,11 @@ int setup_signal_stack_sc(unsigned long stack_top, struct ksignal *ksig,
 
 	PT_REGS_SP(regs) = (unsigned long) frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PT_REGS_IP(regs) = (unsigned long) ka->sa.sa_handler;
+=======
+	PT_REGS_IP(regs) = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	PT_REGS_IP(regs) = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -436,6 +451,7 @@ int setup_signal_stack_sc(unsigned long stack_top, struct ksignal *ksig,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int setup_signal_stack_si(unsigned long stack_top, int sig,
 			  struct k_sigaction *ka, struct pt_regs *regs,
 			  siginfo_t *info, sigset_t *mask)
@@ -444,12 +460,17 @@ int setup_signal_stack_si(unsigned long stack_top, int sig,
 	void __user *restorer;
 	int err = 0;
 =======
+=======
+>>>>>>> v3.18
 int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 			  struct pt_regs *regs, sigset_t *mask)
 {
 	struct rt_sigframe __user *frame;
 	void __user *restorer;
 	int err = 0, sig = ksig->sig;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	stack_top &= -8UL;
@@ -459,8 +480,13 @@ int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 
 	restorer = frame->retcode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_RESTORER)
 		restorer = ka->sa.sa_restorer;
+=======
+	if (ksig->ka.sa.sa_flags & SA_RESTORER)
+		restorer = ksig->ka.sa.sa_restorer;
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_RESTORER)
 		restorer = ksig->ka.sa.sa_restorer;
@@ -471,7 +497,11 @@ int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 	err |= __put_user(&frame->info, &frame->pinfo);
 	err |= __put_user(&frame->uc, &frame->puc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
 >>>>>>> v3.18
@@ -494,7 +524,11 @@ int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 
 	PT_REGS_SP(regs) = (unsigned long) frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PT_REGS_IP(regs) = (unsigned long) ka->sa.sa_handler;
+=======
+	PT_REGS_IP(regs) = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	PT_REGS_IP(regs) = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -543,6 +577,7 @@ struct rt_sigframe
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int setup_signal_stack_si(unsigned long stack_top, int sig,
 			  struct k_sigaction *ka, struct pt_regs * regs,
 			  siginfo_t *info, sigset_t *set)
@@ -550,11 +585,16 @@ int setup_signal_stack_si(unsigned long stack_top, int sig,
 	struct rt_sigframe __user *frame;
 	int err = 0;
 =======
+=======
+>>>>>>> v3.18
 int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 			  struct pt_regs *regs, sigset_t *set)
 {
 	struct rt_sigframe __user *frame;
 	int err = 0, sig = ksig->sig;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	frame = (struct rt_sigframe __user *)
@@ -566,8 +606,13 @@ int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO) {
 		err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
+		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
 		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
@@ -597,8 +642,13 @@ int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 	 */
 	/* x86-64 should always use SA_RESTORER. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_RESTORER)
 		err |= __put_user(ka->sa.sa_restorer, &frame->pretcode);
+=======
+	if (ksig->ka.sa.sa_flags & SA_RESTORER)
+		err |= __put_user(ksig->ka.sa.sa_restorer, &frame->pretcode);
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_RESTORER)
 		err |= __put_user(ksig->ka.sa.sa_restorer, &frame->pretcode);
@@ -629,7 +679,11 @@ int setup_signal_stack_si(unsigned long stack_top, struct ksignal *ksig,
 	PT_REGS_SI(regs) = (unsigned long) &frame->info;
 	PT_REGS_DX(regs) = (unsigned long) &frame->uc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PT_REGS_IP(regs) = (unsigned long) ka->sa.sa_handler;
+=======
+	PT_REGS_IP(regs) = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	PT_REGS_IP(regs) = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18

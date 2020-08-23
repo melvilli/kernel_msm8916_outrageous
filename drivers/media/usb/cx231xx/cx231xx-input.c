@@ -2,7 +2,11 @@
  *   cx231xx IR glue driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) 2010 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *   Copyright (C) 2010 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *   Copyright (C) 2010 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -26,18 +30,24 @@
 #include <linux/usb.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MODULE_NAME "cx231xx-input"
 
 static int get_key_isdbt(struct IR_i2c *ir, u32 *ir_key,
 			 u32 *ir_raw)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitrev.h>
 
 #define MODULE_NAME "cx231xx-input"
 
 static int get_key_isdbt(struct IR_i2c *ir, enum rc_type *protocol,
 			 u32 *pscancode, u8 *toggle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int	rc;
@@ -60,6 +70,7 @@ static int get_key_isdbt(struct IR_i2c *ir, enum rc_type *protocol,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scancode =
 		 ((cmd & 0x01) ? 0x80 : 0) |
 		 ((cmd & 0x02) ? 0x40 : 0) |
@@ -72,13 +83,22 @@ static int get_key_isdbt(struct IR_i2c *ir, enum rc_type *protocol,
 =======
 	scancode = bitrev8(cmd);
 >>>>>>> v3.18
+=======
+	scancode = bitrev8(cmd);
+>>>>>>> v3.18
 
 	dev_dbg(&ir->rc->input_dev->dev, "cmd %02x, scan = %02x\n",
 		cmd, scancode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = scancode;
 	*ir_raw = scancode;
+=======
+	*protocol = RC_TYPE_OTHER;
+	*pscancode = scancode;
+	*toggle = 0;
+>>>>>>> v3.18
 =======
 	*protocol = RC_TYPE_OTHER;
 	*pscancode = scancode;
@@ -121,7 +141,11 @@ int cx231xx_ir_init(struct cx231xx *dev)
 	dev->init_data.ir_codes = cx231xx_boards[dev->model].rc_map_name;
 	/* The i2c micro-controller only outputs the cmd part of NEC protocol */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->init_data.rc_dev->scanmask = 0xff;
+=======
+	dev->init_data.rc_dev->scancode_mask = 0xff;
+>>>>>>> v3.18
 =======
 	dev->init_data.rc_dev->scancode_mask = 0xff;
 >>>>>>> v3.18

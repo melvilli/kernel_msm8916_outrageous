@@ -5,8 +5,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _BFIN_SIGINFO_H
 #define _BFIN_SIGINFO_H
+=======
+#ifndef _UAPI_BFIN_SIGINFO_H
+#define _UAPI_BFIN_SIGINFO_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_BFIN_SIGINFO_H
 #define _UAPI_BFIN_SIGINFO_H
@@ -44,7 +49,11 @@
 #define SEGV_STACKFLOW	(__SI_FAULT|3)	/* stack overflow */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* _UAPI_BFIN_SIGINFO_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_BFIN_SIGINFO_H */
 >>>>>>> v3.18

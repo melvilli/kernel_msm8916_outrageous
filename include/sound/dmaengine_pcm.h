@@ -62,6 +62,11 @@ struct dma_chan *snd_dmaengine_pcm_get_chan(struct snd_pcm_substream *substream)
  * @filter_data: Custom DMA channel filter data, this will usually be used when
  * requesting the DMA channel.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @chan_name: Custom channel name to use when requesting DMA channel.
+ * @fifo_size: FIFO size of the DAI controller in bytes
+>>>>>>> v3.18
 =======
  * @chan_name: Custom channel name to use when requesting DMA channel.
  * @fifo_size: FIFO size of the DAI controller in bytes
@@ -74,6 +79,11 @@ struct snd_dmaengine_dai_dma_data {
 	unsigned int slave_id;
 	void *filter_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *chan_name;
+	unsigned int fifo_size;
+>>>>>>> v3.18
 =======
 	const char *chan_name;
 	unsigned int fifo_size;
@@ -107,11 +117,17 @@ void snd_dmaengine_pcm_set_config_from_dai_data(
  */
 #define SND_DMAENGINE_PCM_FLAG_HALF_DUPLEX BIT(3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The PCM streams have custom channel names specified.
  */
 #define SND_DMAENGINE_PCM_FLAG_CUSTOM_CHANNEL_NAME BIT(4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -124,11 +140,17 @@ void snd_dmaengine_pcm_set_config_from_dai_data(
  *  channel for platforms which do not use devicetree. The filter parameter
  *  will be the DAI's DMA data.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @dma_dev: If set, request DMA channel on this device rather than the DAI
  *  device.
  * @chan_names: If set, these custom DMA channel names will be requested at
  *  registration time.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @pcm_hardware: snd_pcm_hardware struct to be used for the PCM.
  * @prealloc_buffer_size: Size of the preallocated audio buffer.
@@ -147,6 +169,11 @@ struct snd_dmaengine_pcm_config {
 			struct snd_pcm_substream *substream);
 	dma_filter_fn compat_filter_fn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dma_dev;
+	const char *chan_names[SNDRV_PCM_STREAM_LAST + 1];
+>>>>>>> v3.18
 =======
 	struct device *dma_dev;
 	const char *chan_names[SNDRV_PCM_STREAM_LAST + 1];
@@ -162,11 +189,17 @@ int snd_dmaengine_pcm_register(struct device *dev,
 void snd_dmaengine_pcm_unregister(struct device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int devm_snd_dmaengine_pcm_register(struct device *dev,
 	const struct snd_dmaengine_pcm_config *config,
 	unsigned int flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_dmaengine_pcm_prepare_slave_config(struct snd_pcm_substream *substream,
 	struct snd_pcm_hw_params *params,

@@ -24,6 +24,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -35,12 +36,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -55,9 +61,12 @@
  *    Ardelle Fan	    <ardelle.fan@intel.com>
  *    Kevin Gao             <kevin.gao@intel.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -81,16 +90,22 @@
 #include <net/sctp/sm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCTP_STATIC
 struct sctp_chunk *sctp_make_chunk(const struct sctp_association *asoc,
 				   __u8 type, __u8 flags, int paylen);
 =======
+=======
+>>>>>>> v3.18
 static struct sctp_chunk *sctp_make_control(const struct sctp_association *asoc,
 					    __u8 type, __u8 flags, int paylen);
 static struct sctp_chunk *sctp_make_data(const struct sctp_association *asoc,
 					 __u8 flags, int paylen);
 static struct sctp_chunk *_sctp_make_chunk(const struct sctp_association *asoc,
 					   __u8 type, __u8 flags, int paylen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static sctp_cookie_param_t *sctp_pack_cookie(const struct sctp_endpoint *ep,
 					const struct sctp_association *asoc,
@@ -104,7 +119,10 @@ static int sctp_process_param(struct sctp_association *asoc,
 static void *sctp_addto_param(struct sctp_chunk *chunk, int len,
 			      const void *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void  *sctp_addto_chunk_fixed(struct sctp_chunk *, int len,
 				     const void *data);
 
@@ -129,6 +147,9 @@ static void sctp_control_set_owner_w(struct sctp_chunk *chunk)
 	skb->sk = asoc ? asoc->base.sk : NULL;
 	skb->destructor = sctp_control_release_owner;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* What was the inbound interface for this chunk? */
@@ -347,7 +368,11 @@ struct sctp_chunk *sctp_make_init(const struct sctp_association *asoc,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_INIT, 0, chunksize);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_INIT, 0, chunksize);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_INIT, 0, chunksize);
 >>>>>>> v3.18
@@ -498,7 +523,11 @@ struct sctp_chunk *sctp_make_init_ack(const struct sctp_association *asoc,
 
 	/* Now allocate and fill out the chunk.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_INIT_ACK, 0, chunksize);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_INIT_ACK, 0, chunksize);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_INIT_ACK, 0, chunksize);
 >>>>>>> v3.18
@@ -607,7 +636,11 @@ struct sctp_chunk *sctp_make_cookie_echo(const struct sctp_association *asoc,
 
 	/* Build a cookie echo chunk.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_COOKIE_ECHO, 0, cookie_len);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_COOKIE_ECHO, 0, cookie_len);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_COOKIE_ECHO, 0, cookie_len);
 >>>>>>> v3.18
@@ -656,7 +689,11 @@ struct sctp_chunk *sctp_make_cookie_ack(const struct sctp_association *asoc,
 	struct sctp_chunk *retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_COOKIE_ACK, 0, 0);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_COOKIE_ACK, 0, 0);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_COOKIE_ACK, 0, 0);
 >>>>>>> v3.18
@@ -708,8 +745,13 @@ struct sctp_chunk *sctp_make_cwr(const struct sctp_association *asoc,
 
 	cwr.lowest_tsn = htonl(lowest_tsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_ECN_CWR, 0,
 				 sizeof(sctp_cwrhdr_t));
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_ECN_CWR, 0,
+				   sizeof(sctp_cwrhdr_t));
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_ECN_CWR, 0,
 				   sizeof(sctp_cwrhdr_t));
@@ -747,8 +789,13 @@ struct sctp_chunk *sctp_make_ecne(const struct sctp_association *asoc,
 
 	ecne.lowest_tsn = htonl(lowest_tsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_ECN_ECNE, 0,
 				 sizeof(sctp_ecnehdr_t));
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_ECN_ECNE, 0,
+				   sizeof(sctp_ecnehdr_t));
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_ECN_ECNE, 0,
 				   sizeof(sctp_ecnehdr_t));
@@ -789,7 +836,11 @@ struct sctp_chunk *sctp_make_datafrag_empty(struct sctp_association *asoc,
 
 	chunk_len = sizeof(dp) + data_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_DATA, flags, chunk_len);
+=======
+	retval = sctp_make_data(asoc, flags, chunk_len);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_data(asoc, flags, chunk_len);
 >>>>>>> v3.18
@@ -822,7 +873,12 @@ struct sctp_chunk *sctp_make_sack(const struct sctp_association *asoc)
 	memset(gabs, 0, sizeof(gabs));
 	ctsn = sctp_tsnmap_get_ctsn(map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("sackCTSNAck sent:  0x%x.\n", ctsn);
+=======
+
+	pr_debug("%s: sackCTSNAck sent:0x%x\n", __func__, ctsn);
+>>>>>>> v3.18
 =======
 
 	pr_debug("%s: sackCTSNAck sent:0x%x\n", __func__, ctsn);
@@ -844,7 +900,11 @@ struct sctp_chunk *sctp_make_sack(const struct sctp_association *asoc)
 
 	/* Create the chunk.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_SACK, 0, len);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_SACK, 0, len);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_SACK, 0, len);
 >>>>>>> v3.18
@@ -927,8 +987,13 @@ struct sctp_chunk *sctp_make_shutdown(const struct sctp_association *asoc,
 	shut.cum_tsn_ack = htonl(ctsn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_SHUTDOWN, 0,
 				 sizeof(sctp_shutdownhdr_t));
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_SHUTDOWN, 0,
+				   sizeof(sctp_shutdownhdr_t));
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_SHUTDOWN, 0,
 				   sizeof(sctp_shutdownhdr_t));
@@ -951,7 +1016,11 @@ struct sctp_chunk *sctp_make_shutdown_ack(const struct sctp_association *asoc,
 	struct sctp_chunk *retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_SHUTDOWN_ACK, 0, 0);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_SHUTDOWN_ACK, 0, 0);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_SHUTDOWN_ACK, 0, 0);
 >>>>>>> v3.18
@@ -984,7 +1053,11 @@ struct sctp_chunk *sctp_make_shutdown_complete(
 	flags |= asoc ? 0 : SCTP_CHUNK_FLAG_T;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_SHUTDOWN_COMPLETE, flags, 0);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_SHUTDOWN_COMPLETE, flags, 0);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_SHUTDOWN_COMPLETE, flags, 0);
 >>>>>>> v3.18
@@ -1027,7 +1100,11 @@ struct sctp_chunk *sctp_make_abort(const struct sctp_association *asoc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_ABORT, flags, hint);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_ABORT, flags, hint);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_ABORT, flags, hint);
 >>>>>>> v3.18
@@ -1223,7 +1300,11 @@ struct sctp_chunk *sctp_make_heartbeat(const struct sctp_association *asoc,
 	sctp_sender_hb_info_t hbinfo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_HEARTBEAT, 0, sizeof(hbinfo));
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_HEARTBEAT, 0, sizeof(hbinfo));
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_HEARTBEAT, 0, sizeof(hbinfo));
 >>>>>>> v3.18
@@ -1255,7 +1336,11 @@ struct sctp_chunk *sctp_make_heartbeat_ack(const struct sctp_association *asoc,
 	struct sctp_chunk *retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval  = sctp_make_chunk(asoc, SCTP_CID_HEARTBEAT_ACK, 0, paylen);
+=======
+	retval  = sctp_make_control(asoc, SCTP_CID_HEARTBEAT_ACK, 0, paylen);
+>>>>>>> v3.18
 =======
 	retval  = sctp_make_control(asoc, SCTP_CID_HEARTBEAT_ACK, 0, paylen);
 >>>>>>> v3.18
@@ -1291,8 +1376,13 @@ static struct sctp_chunk *sctp_make_op_error_space(
 	struct sctp_chunk *retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_ERROR, 0,
 				 sizeof(sctp_errhdr_t) + size);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_ERROR, 0,
+				   sizeof(sctp_errhdr_t) + size);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_ERROR, 0,
 				   sizeof(sctp_errhdr_t) + size);
@@ -1367,7 +1457,11 @@ struct sctp_chunk *sctp_make_auth(const struct sctp_association *asoc)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_AUTH, 0,
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_AUTH, 0,
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_AUTH, 0,
 >>>>>>> v3.18
@@ -1400,7 +1494,10 @@ struct sctp_chunk *sctp_make_auth(const struct sctp_association *asoc)
 /* Turn an skb into a chunk.
  * FIXME: Eventually move the structure directly inside the skb->cb[].
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * sctpimpguide-05.txt Section 2.8.2
  * M1) Each time a new DATA chunk is transmitted
@@ -1408,6 +1505,9 @@ struct sctp_chunk *sctp_make_auth(const struct sctp_association *asoc)
  * 'TSN.Missing.Report' count will be used to determine missing chunks
  * and when to fast retransmit.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct sctp_chunk *sctp_chunkify(struct sk_buff *skb,
@@ -1421,6 +1521,7 @@ struct sctp_chunk *sctp_chunkify(struct sk_buff *skb,
 	if (!retval)
 		goto nodata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!sk) {
 		SCTP_DEBUG_PRINTK("chunkifying skb %p w/o an sk\n", skb);
@@ -1429,10 +1530,15 @@ struct sctp_chunk *sctp_chunkify(struct sk_buff *skb,
 	if (!sk)
 		pr_debug("%s: chunkifying skb:%p w/o an sk\n", __func__, skb);
 >>>>>>> v3.18
+=======
+	if (!sk)
+		pr_debug("%s: chunkifying skb:%p w/o an sk\n", __func__, skb);
+>>>>>>> v3.18
 
 	INIT_LIST_HEAD(&retval->list);
 	retval->skb		= skb;
 	retval->asoc		= (struct sctp_association *)asoc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval->has_tsn		= 0;
 	retval->has_ssn         = 0;
@@ -1457,6 +1563,11 @@ struct sctp_chunk *sctp_chunkify(struct sk_buff *skb,
 	 * of the message (for SEND_FAILED).
 	 */
 	retval->msg = NULL;
+=======
+	retval->singleton	= 1;
+
+	retval->fast_retransmit = SCTP_CAN_FRTX;
+>>>>>>> v3.18
 =======
 	retval->singleton	= 1;
 
@@ -1497,9 +1608,14 @@ const union sctp_addr *sctp_source(const struct sctp_chunk *chunk)
  * arguments, reserving enough space for a 'paylen' byte payload.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCTP_STATIC
 struct sctp_chunk *sctp_make_chunk(const struct sctp_association *asoc,
 				   __u8 type, __u8 flags, int paylen)
+=======
+static struct sctp_chunk *_sctp_make_chunk(const struct sctp_association *asoc,
+					    __u8 type, __u8 flags, int paylen)
+>>>>>>> v3.18
 =======
 static struct sctp_chunk *_sctp_make_chunk(const struct sctp_association *asoc,
 					    __u8 type, __u8 flags, int paylen)
@@ -1537,9 +1653,12 @@ static struct sctp_chunk *_sctp_make_chunk(const struct sctp_association *asoc,
 		retval->auth = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set the skb to the belonging sock for accounting.  */
 	skb->sk = sk;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return retval;
@@ -1548,7 +1667,10 @@ nodata:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct sctp_chunk *sctp_make_data(const struct sctp_association *asoc,
 					 __u8 flags, int paylen)
 {
@@ -1565,6 +1687,9 @@ static struct sctp_chunk *sctp_make_control(const struct sctp_association *asoc,
 
 	return chunk;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Release the memory occupied by a chunk.  */
@@ -1630,8 +1755,13 @@ void *sctp_addto_chunk(struct sctp_chunk *chunk, int len, const void *data)
  * space in the chunk
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *sctp_addto_chunk_fixed(struct sctp_chunk *chunk,
 			     int len, const void *data)
+=======
+static void *sctp_addto_chunk_fixed(struct sctp_chunk *chunk,
+				    int len, const void *data)
+>>>>>>> v3.18
 =======
 static void *sctp_addto_chunk_fixed(struct sctp_chunk *chunk,
 				    int len, const void *data)
@@ -1808,8 +1938,13 @@ static sctp_cookie_param_t *sctp_pack_cookie(const struct sctp_endpoint *ep,
 
 	/* Set an expiration time for the cookie.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_gettimeofday(&cookie->c.expiration);
 	TIMEVAL_ADD(asoc->cookie_life, cookie->c.expiration);
+=======
+	cookie->c.expiration = ktime_add(asoc->cookie_life,
+					 ktime_get());
+>>>>>>> v3.18
 =======
 	cookie->c.expiration = ktime_add(asoc->cookie_life,
 					 ktime_get());
@@ -1863,7 +1998,11 @@ struct sctp_association *sctp_unpack_cookie(
 	sctp_scope_t scope;
 	struct sk_buff *skb = chunk->skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timeval tv;
+=======
+	ktime_t kt;
+>>>>>>> v3.18
 =======
 	ktime_t kt;
 >>>>>>> v3.18
@@ -1944,17 +2083,23 @@ no_hmac:
 	 */
 	if (sock_flag(ep->base.sk, SOCK_TIMESTAMP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb_get_timestamp(skb, &tv);
 	else
 		do_gettimeofday(&tv);
 
 	if (!asoc && tv_lt(bear_cookie->expiration, tv)) {
 =======
+=======
+>>>>>>> v3.18
 		kt = skb_get_ktime(skb);
 	else
 		kt = ktime_get();
 
 	if (!asoc && ktime_before(bear_cookie->expiration, kt)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Section 3.3.10.3 Stale Cookie Error (3)
@@ -1968,9 +2113,13 @@ no_hmac:
 		*errp = sctp_make_op_error_space(asoc, chunk, len);
 		if (*errp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			suseconds_t usecs = (tv.tv_sec -
 				bear_cookie->expiration.tv_sec) * 1000000L +
 				tv.tv_usec - bear_cookie->expiration.tv_usec;
+=======
+			suseconds_t usecs = ktime_to_us(ktime_sub(kt, bear_cookie->expiration));
+>>>>>>> v3.18
 =======
 			suseconds_t usecs = ktime_to_us(ktime_sub(kt, bear_cookie->expiration));
 >>>>>>> v3.18
@@ -2150,6 +2299,7 @@ static int sctp_verify_ext_param(struct net *net, union sctp_params param)
 	for (i = 0; i < num_ext; i++) {
 		switch (param.ext->chunks[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    case SCTP_CID_AUTH:
 			    have_auth = 1;
 			    break;
@@ -2158,6 +2308,8 @@ static int sctp_verify_ext_param(struct net *net, union sctp_params param)
 			    have_asconf = 1;
 			    break;
 =======
+=======
+>>>>>>> v3.18
 		case SCTP_CID_AUTH:
 			have_auth = 1;
 			break;
@@ -2165,6 +2317,9 @@ static int sctp_verify_ext_param(struct net *net, union sctp_params param)
 		case SCTP_CID_ASCONF_ACK:
 			have_asconf = 1;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2193,6 +2348,7 @@ static void sctp_process_ext_param(struct sctp_association *asoc,
 	for (i = 0; i < num_ext; i++) {
 		switch (param.ext->chunks[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    case SCTP_CID_FWD_TSN:
 			    if (net->sctp.prsctp_enable &&
 				!asoc->peer.prsctp_capable)
@@ -2213,6 +2369,8 @@ static void sctp_process_ext_param(struct sctp_association *asoc,
 		    default:
 			    break;
 =======
+=======
+>>>>>>> v3.18
 		case SCTP_CID_FWD_TSN:
 			if (net->sctp.prsctp_enable && !asoc->peer.prsctp_capable)
 				    asoc->peer.prsctp_capable = 1;
@@ -2231,6 +2389,9 @@ static void sctp_process_ext_param(struct sctp_association *asoc,
 			break;
 		default:
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2424,8 +2585,14 @@ static sctp_ierror_t sctp_verify_param(struct net *net,
 fallthrough:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("Unrecognized param: %d for chunk %d.\n",
 				ntohs(param.p->type), cid);
+=======
+		pr_debug("%s: unrecognized param:%d for chunk:%d\n",
+			 __func__, ntohs(param.p->type), cid);
+
+>>>>>>> v3.18
 =======
 		pr_debug("%s: unrecognized param:%d for chunk:%d\n",
 			 __func__, ntohs(param.p->type), cid);
@@ -2444,6 +2611,7 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 		     struct sctp_chunk **errp)
 {
 	union sctp_params param;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int has_cookie = 0;
 	int result;
@@ -2465,6 +2633,8 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 
 	} /* for (loop through all parameters) */
 =======
+=======
+>>>>>>> v3.18
 	bool has_cookie = false;
 	int result;
 
@@ -2482,6 +2652,9 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 		if (param.p->type == SCTP_PARAM_STATE_COOKIE)
 			has_cookie = true;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* There is a possibility that a parameter length was bad and
@@ -2492,7 +2665,11 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 	 * error handling code build and send the packet.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (param.v != (void*)chunk->chunk_end)
+=======
+	if (param.v != (void *)chunk->chunk_end)
+>>>>>>> v3.18
 =======
 	if (param.v != (void *)chunk->chunk_end)
 >>>>>>> v3.18
@@ -2511,6 +2688,7 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 					   chunk, errp);
 		switch (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    case SCTP_IERROR_ABORT:
 		    case SCTP_IERROR_NOMEM:
 				return 0;
@@ -2520,6 +2698,8 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 		    default:
 				break;
 =======
+=======
+>>>>>>> v3.18
 		case SCTP_IERROR_ABORT:
 		case SCTP_IERROR_NOMEM:
 			return 0;
@@ -2528,6 +2708,9 @@ int sctp_verify_init(struct net *net, const struct sctp_endpoint *ep,
 		case SCTP_IERROR_NO_ERROR:
 		default:
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2564,7 +2747,11 @@ int sctp_process_init(struct sctp_association *asoc, struct sctp_chunk *chunk,
 	 * be a a better choice than any of the embedded addresses.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!sctp_assoc_add_peer(asoc, peer_addr, gfp, SCTP_ACTIVE))
+=======
+	if (!sctp_assoc_add_peer(asoc, peer_addr, gfp, SCTP_ACTIVE))
+>>>>>>> v3.18
 =======
 	if (!sctp_assoc_add_peer(asoc, peer_addr, gfp, SCTP_ACTIVE))
 >>>>>>> v3.18
@@ -2790,6 +2977,7 @@ do_addr_param:
 		 * (1/1000sec).
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		asoc->cookie_life.tv_sec += stale / 1000;
 		asoc->cookie_life.tv_usec += (stale % 1000) * 1000;
 		break;
@@ -2797,11 +2985,16 @@ do_addr_param:
 	case SCTP_PARAM_HOST_NAME_ADDRESS:
 		SCTP_DEBUG_PRINTK("unimplemented SCTP_HOST_NAME_ADDRESS\n");
 =======
+=======
+>>>>>>> v3.18
 		asoc->cookie_life = ktime_add_ms(asoc->cookie_life, stale);
 		break;
 
 	case SCTP_PARAM_HOST_NAME_ADDRESS:
 		pr_debug("%s: unimplemented SCTP_HOST_NAME_ADDRESS\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -2875,7 +3068,11 @@ do_addr_param:
 		addr_param = param.v + sizeof(sctp_addip_param_t);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		af = sctp_get_af_specific(param_type2af(addr_param->p.type));
+=======
+		af = sctp_get_af_specific(param_type2af(param.p->type));
+>>>>>>> v3.18
 =======
 		af = sctp_get_af_specific(param_type2af(param.p->type));
 >>>>>>> v3.18
@@ -2956,8 +3153,13 @@ fall_through:
 		 * here.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("Ignoring param: %d for association %p.\n",
 				  ntohs(param.p->type), asoc);
+=======
+		pr_debug("%s: ignoring param:%d for association:%p.\n",
+			 __func__, ntohs(param.p->type), asoc);
+>>>>>>> v3.18
 =======
 		pr_debug("%s: ignoring param:%d for association:%p.\n",
 			 __func__, ntohs(param.p->type), asoc);
@@ -3032,7 +3234,11 @@ static struct sctp_chunk *sctp_make_asconf(struct sctp_association *asoc,
 
 	/* Create the chunk.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_ASCONF, 0, length);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_ASCONF, 0, length);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_ASCONF, 0, length);
 >>>>>>> v3.18
@@ -3108,12 +3314,18 @@ struct sctp_chunk *sctp_make_asconf_update_ip(struct sctp_association *asoc,
 			totallen += addr_param_len;
 			del_pickup = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SCTP_DEBUG_PRINTK("mkasconf_update_ip: picked same-scope del_pending addr, totallen for all addresses is %d\n", totallen);
 =======
+=======
+>>>>>>> v3.18
 
 			pr_debug("%s: picked same-scope del_pending addr, "
 				 "totallen for all addresses is %d\n",
 				 __func__, totallen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -3224,7 +3436,11 @@ static struct sctp_chunk *sctp_make_asconf_ack(const struct sctp_association *as
 
 	/* Create the chunk.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_ASCONF_ACK, 0, length);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_ASCONF_ACK, 0, length);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_ASCONF_ACK, 0, length);
 >>>>>>> v3.18
@@ -3639,7 +3855,11 @@ static __be16 sctp_get_asconf_response(struct sctp_chunk *asconf_ack,
 	while (asconf_ack_len > 0) {
 		if (asconf_ack_param->crr_id == asconf_param->crr_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			switch(asconf_ack_param->param_hdr.type) {
+=======
+			switch (asconf_ack_param->param_hdr.type) {
+>>>>>>> v3.18
 =======
 			switch (asconf_ack_param->param_hdr.type) {
 >>>>>>> v3.18
@@ -3774,7 +3994,11 @@ struct sctp_chunk *sctp_make_fwdtsn(const struct sctp_association *asoc,
 	hint = (nstreams + 1) * sizeof(__u32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = sctp_make_chunk(asoc, SCTP_CID_FWD_TSN, 0, hint);
+=======
+	retval = sctp_make_control(asoc, SCTP_CID_FWD_TSN, 0, hint);
+>>>>>>> v3.18
 =======
 	retval = sctp_make_control(asoc, SCTP_CID_FWD_TSN, 0, hint);
 >>>>>>> v3.18

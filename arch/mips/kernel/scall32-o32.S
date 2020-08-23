@@ -7,6 +7,10 @@
  * Copyright (C) 2001 MIPS Technologies, Inc.
  * Copyright (C) 2004 Thiemo Seufer
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -45,6 +49,7 @@ NESTED(handle_sys, PT_SIZE, sp)
 	beqz	t0, illegal_syscall
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sll	t0, v0, 3
 	la	t1, sys_call_table
 	addu	t1, t0
@@ -57,6 +62,8 @@ NESTED(handle_sys, PT_SIZE, sp)
 
 stack_done:
 =======
+=======
+>>>>>>> v3.18
 	sll	t0, v0, 2
 	la	t1, sys_call_table
 	addu	t1, t0
@@ -107,6 +114,9 @@ stack_done:
 	PTR	4b,bad_stack
 	.previous
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lw	t0, TI_FLAGS($28)	# syscall tracing enabled?
 	li	t1, _TIF_WORK_SYSCALL_ENTRY
@@ -135,8 +145,11 @@ syscall_trace_entry:
 	move	s0, t2
 	move	a0, sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal	syscall_trace_enter
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * syscall number is in v0 unless we called syscall(__NR_###)
@@ -149,6 +162,9 @@ syscall_trace_entry:
 1:	jal	syscall_trace_enter
 
 	bltz	v0, 2f			# seccomp failed? Skip syscall
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	move	t0, s0
@@ -170,7 +186,11 @@ syscall_trace_entry:
 1:	sw	v0, PT_R2(sp)		# result
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j	syscall_exit
+=======
+2:	j	syscall_exit
+>>>>>>> v3.18
 =======
 2:	j	syscall_exit
 >>>>>>> v3.18
@@ -178,6 +198,7 @@ syscall_trace_entry:
 /* ------------------------------------------------------------------------ */
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * More than four arguments.  Try to deal with it by copying the
 	 * stack arguments from the user stack to the kernel stack.
@@ -241,6 +262,8 @@ stackargs:
 	/*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	 * The stackpointer for a call with more than 4 arguments is bad.
 	 * We probably should handle this case a bit more drastic.
 	 */
@@ -267,7 +290,11 @@ illegal_syscall:
 	sltiu	v0, t0, __NR_O32_Linux_syscalls + 1
 	beqz	t0, einval		# do not recurse
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sll	t1, t0, 3
+=======
+	sll	t1, t0, 2
+>>>>>>> v3.18
 =======
 	sll	t1, t0, 2
 >>>>>>> v3.18
@@ -301,6 +328,7 @@ einval: li	v0, -ENOSYS
 	jr	ra
 	END(sys_syscall)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.macro	fifty ptr, nargs, from=1, to=50
 	sys	\ptr		\nargs
@@ -557,6 +585,8 @@ einval: li	v0, -ENOSYS
 	sys	sys_sendfile64		5
 	sys	sys_futex		6
 =======
+=======
+>>>>>>> v3.18
 	.align	2
 	.type	sys_call_table, @object
 EXPORT(sys_call_table)
@@ -799,11 +829,15 @@ EXPORT(sys_call_table)
 	PTR	sys_tkill
 	PTR	sys_sendfile64
 	PTR	sys_futex
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MIPS_MT_FPAFF
 	/*
 	 * For FPU affinity scheduling on MIPS MT processors, we need to
 	 * intercept sys_sched_xxxaffinity() calls until we get a proper hook
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * in kernel/sched.c.  Considered only temporary we only support these
 	 * hooks for the 32-bit kernel - there is no MIPS64 MT processor atm.
@@ -938,6 +972,8 @@ EXPORT(sys_call_table)
 	syscalltable
 	.size	sys_call_table, . - sys_call_table
 =======
+=======
+>>>>>>> v3.18
 	 * in kernel/sched/core.c.  Considered only temporary we only support
 	 * these hooks for the 32-bit kernel - there is no MIPS64 MT processor
 	 * atm.
@@ -1063,4 +1099,7 @@ EXPORT(sys_call_table)
 	PTR	sys_getrandom
 	PTR	sys_memfd_create
 	PTR	sys_bpf				/* 4355 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -80,6 +84,10 @@ static void acpi_ut_delete_internal_obj(union acpi_operand_object *object)
 	union acpi_operand_object *second_desc;
 	union acpi_operand_object *next_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	union acpi_operand_object *start_desc;
+>>>>>>> v3.18
 =======
 	union acpi_operand_object *start_desc;
 >>>>>>> v3.18
@@ -244,16 +252,22 @@ static void acpi_ut_delete_internal_obj(union acpi_operand_object *object)
 				next_desc =
 				    handler_desc->address_space.region_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				last_obj_ptr =
 				    &handler_desc->address_space.region_list;
 
 				/* Remove the region object from the handler's list */
 =======
+=======
+>>>>>>> v3.18
 				start_desc = next_desc;
 				last_obj_ptr =
 				    &handler_desc->address_space.region_list;
 
 				/* Remove the region object from the handler list */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				while (next_desc) {
@@ -264,11 +278,14 @@ static void acpi_ut_delete_internal_obj(union acpi_operand_object *object)
 					}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					/* Walk the linked list of handler */
 
 					last_obj_ptr = &next_desc->region.next;
 					next_desc = next_desc->region.next;
 =======
+=======
+>>>>>>> v3.18
 					/* Walk the linked list of handlers */
 
 					last_obj_ptr = &next_desc->region.next;
@@ -282,6 +299,9 @@ static void acpi_ut_delete_internal_obj(union acpi_operand_object *object)
 							    handler_desc));
 						return_VOID;
 					}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 
@@ -336,6 +356,10 @@ static void acpi_ut_delete_internal_obj(union acpi_operand_object *object)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -545,7 +569,10 @@ acpi_ut_update_object_reference(union acpi_operand_object *object, u16 action)
 		case ACPI_TYPE_POWER:
 		case ACPI_TYPE_THERMAL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -663,6 +690,10 @@ acpi_ut_update_object_reference(union acpi_operand_object *object, u16 action)
 		case ACPI_TYPE_REGION:
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -692,7 +723,11 @@ acpi_ut_update_object_reference(union acpi_operand_object *object, u16 action)
 	return (AE_OK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18

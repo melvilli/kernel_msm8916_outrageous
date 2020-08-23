@@ -28,6 +28,10 @@
 /* Bluetooth L2CAP sockets. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -37,7 +41,12 @@
 #include <net/bluetooth/hci_core.h>
 #include <net/bluetooth/l2cap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/bluetooth/smp.h>
+=======
+
+#include "smp.h"
+>>>>>>> v3.18
 =======
 
 #include "smp.h"
@@ -59,7 +68,10 @@ bool l2cap_is_socket(struct socket *sock)
 EXPORT_SYMBOL(l2cap_is_socket);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int l2cap_validate_bredr_psm(u16 psm)
 {
 	/* PSM must be odd and lsb of upper byte must be 0 */
@@ -86,6 +98,9 @@ static int l2cap_validate_le_psm(u16 psm)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 {
@@ -95,7 +110,11 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 	int len, err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -111,7 +130,10 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!bdaddr_type_is_valid(la.l2_bdaddr_type))
 		return -EINVAL;
 
@@ -122,6 +144,9 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 			return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lock_sock(sk);
 
@@ -133,6 +158,7 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 	if (la.l2_psm) {
 		__u16 psm = __le16_to_cpu(la.l2_psm);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* PSM must be odd and lsb of upper byte must be 0 */
 		if ((psm & 0x0101) != 0x0001) {
@@ -146,6 +172,8 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 			goto done;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (la.l2_bdaddr_type == BDADDR_BREDR)
 			err = l2cap_validate_bredr_psm(psm);
 		else
@@ -153,6 +181,9 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 
 		if (err)
 			goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -165,12 +196,15 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__le16_to_cpu(la.l2_psm) == L2CAP_PSM_SDP ||
 	    __le16_to_cpu(la.l2_psm) == L2CAP_PSM_RFCOMM)
 		chan->sec_level = BT_SECURITY_SDP;
 
 	bacpy(&bt_sk(sk)->src, &la.l2_bdaddr);
 =======
+=======
+>>>>>>> v3.18
 	switch (chan->chan_type) {
 	case L2CAP_CHAN_CONN_LESS:
 		if (__le16_to_cpu(la.l2_psm) == L2CAP_PSM_3DSP)
@@ -199,6 +233,9 @@ static int l2cap_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 
 	if (chan->psm && bdaddr_type_is_le(chan->src_type))
 		chan->mode = L2CAP_MODE_LE_FLOWCTL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chan->state = BT_BOUND;
@@ -218,7 +255,11 @@ static int l2cap_sock_connect(struct socket *sock, struct sockaddr *addr,
 	int len, err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -235,7 +276,10 @@ static int l2cap_sock_connect(struct socket *sock, struct sockaddr *addr,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!bdaddr_type_is_valid(la.l2_bdaddr_type))
 		return -EINVAL;
 
@@ -278,6 +322,9 @@ static int l2cap_sock_connect(struct socket *sock, struct sockaddr *addr,
 	if (chan->psm && bdaddr_type_is_le(chan->src_type))
 		chan->mode = L2CAP_MODE_LE_FLOWCTL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = l2cap_chan_connect(chan, la.l2_psm, __le16_to_cpu(la.l2_cid),
 				 &la.l2_bdaddr, la.l2_bdaddr_type);
@@ -301,7 +348,11 @@ static int l2cap_sock_listen(struct socket *sock, int backlog)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK backlog %d", sk, backlog);
+=======
+	BT_DBG("sk %p backlog %d", sk, backlog);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p backlog %d", sk, backlog);
 >>>>>>> v3.18
@@ -321,6 +372,10 @@ static int l2cap_sock_listen(struct socket *sock, int backlog)
 	switch (chan->mode) {
 	case L2CAP_MODE_BASIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case L2CAP_MODE_LE_FLOWCTL:
+>>>>>>> v3.18
 =======
 	case L2CAP_MODE_LE_FLOWCTL:
 >>>>>>> v3.18
@@ -332,7 +387,11 @@ static int l2cap_sock_listen(struct socket *sock, int backlog)
 		/* fall through */
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENOTSUPP;
+=======
+		err = -EOPNOTSUPP;
+>>>>>>> v3.18
 =======
 		err = -EOPNOTSUPP;
 >>>>>>> v3.18
@@ -363,7 +422,11 @@ static int l2cap_sock_accept(struct socket *sock, struct socket *newsock,
 	timeo = sock_rcvtimeo(sk, flags & O_NONBLOCK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK timeo %ld", sk, timeo);
+=======
+	BT_DBG("sk %p timeo %ld", sk, timeo);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p timeo %ld", sk, timeo);
 >>>>>>> v3.18
@@ -405,7 +468,11 @@ static int l2cap_sock_accept(struct socket *sock, struct socket *newsock,
 	newsock->state = SS_CONNECTED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("new socket %pK", nsk);
+=======
+	BT_DBG("new socket %p", nsk);
+>>>>>>> v3.18
 =======
 	BT_DBG("new socket %p", nsk);
 >>>>>>> v3.18
@@ -423,20 +490,27 @@ static int l2cap_sock_getname(struct socket *sock, struct sockaddr *addr,
 	struct l2cap_chan *chan = l2cap_pi(sk)->chan;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
 =======
+=======
+>>>>>>> v3.18
 	BT_DBG("sock %p, sk %p", sock, sk);
 
 	if (peer && sk->sk_state != BT_CONNECTED &&
 	    sk->sk_state != BT_CONNECT && sk->sk_state != BT_CONNECT2 &&
 	    sk->sk_state != BT_CONFIG)
 		return -ENOTCONN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(la, 0, sizeof(struct sockaddr_l2));
 	addr->sa_family = AF_BLUETOOTH;
 	*len = sizeof(struct sockaddr_l2);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (peer) {
 		la->l2_psm = chan->psm;
@@ -447,6 +521,8 @@ static int l2cap_sock_getname(struct socket *sock, struct sockaddr *addr,
 		bacpy(&la->l2_bdaddr, &bt_sk(sk)->src);
 		la->l2_cid = cpu_to_le16(chan->scid);
 =======
+=======
+>>>>>>> v3.18
 	la->l2_psm = chan->psm;
 
 	if (peer) {
@@ -457,6 +533,9 @@ static int l2cap_sock_getname(struct socket *sock, struct sockaddr *addr,
 		bacpy(&la->l2_bdaddr, &chan->src);
 		la->l2_cid = cpu_to_le16(chan->scid);
 		la->l2_bdaddr_type = chan->src_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -474,7 +553,11 @@ static int l2cap_sock_getsockopt_old(struct socket *sock, int optname,
 	u32 opt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -487,7 +570,10 @@ static int l2cap_sock_getsockopt_old(struct socket *sock, int optname,
 	switch (optname) {
 	case L2CAP_OPTIONS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* LE sockets should use BT_SNDMTU/BT_RCVMTU, but since
 		 * legacy ATT code depends on getsockopt for
 		 * L2CAP_OPTIONS we need to let this pass.
@@ -498,6 +584,9 @@ static int l2cap_sock_getsockopt_old(struct socket *sock, int optname,
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memset(&opts, 0, sizeof(opts));
 		opts.imtu     = chan->imtu;
@@ -527,11 +616,17 @@ static int l2cap_sock_getsockopt_old(struct socket *sock, int optname,
 			      L2CAP_LM_SECURE;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case BT_SECURITY_FIPS:
 			opt = L2CAP_LM_AUTH | L2CAP_LM_ENCRYPT |
 			      L2CAP_LM_SECURE | L2CAP_LM_FIPS;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			opt = 0;
@@ -547,6 +642,10 @@ static int l2cap_sock_getsockopt_old(struct socket *sock, int optname,
 		if (put_user(opt, (u32 __user *) optval))
 			err = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -589,7 +688,11 @@ static int l2cap_sock_getsockopt(struct socket *sock, int level, int optname,
 	int len, err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -609,6 +712,10 @@ static int l2cap_sock_getsockopt(struct socket *sock, int level, int optname,
 	case BT_SECURITY:
 		if (chan->chan_type != L2CAP_CHAN_CONN_ORIENTED &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		    chan->chan_type != L2CAP_CHAN_FIXED &&
+>>>>>>> v3.18
 =======
 		    chan->chan_type != L2CAP_CHAN_FIXED &&
 >>>>>>> v3.18
@@ -669,6 +776,7 @@ static int l2cap_sock_getsockopt(struct socket *sock, int level, int optname,
 
 	case BT_CHANNEL_POLICY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!enable_hs) {
 			err = -ENOPROTOOPT;
 			break;
@@ -676,6 +784,8 @@ static int l2cap_sock_getsockopt(struct socket *sock, int level, int optname,
 
 		if (put_user(chan->chan_policy, (u32 __user *) optval))
 =======
+=======
+>>>>>>> v3.18
 		if (put_user(chan->chan_policy, (u32 __user *) optval))
 			err = -EFAULT;
 		break;
@@ -702,6 +812,9 @@ static int l2cap_sock_getsockopt(struct socket *sock, int level, int optname,
 		}
 
 		if (put_user(chan->imtu, (u16 __user *) optval))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = -EFAULT;
 		break;
@@ -719,7 +832,11 @@ static bool l2cap_valid_mtu(struct l2cap_chan *chan, u16 mtu)
 {
 	switch (chan->scid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case L2CAP_CID_LE_DATA:
+=======
+	case L2CAP_CID_ATT:
+>>>>>>> v3.18
 =======
 	case L2CAP_CID_ATT:
 >>>>>>> v3.18
@@ -745,7 +862,11 @@ static int l2cap_sock_setsockopt_old(struct socket *sock, int optname,
 	u32 opt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -755,12 +876,18 @@ static int l2cap_sock_setsockopt_old(struct socket *sock, int optname,
 	switch (optname) {
 	case L2CAP_OPTIONS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (bdaddr_type_is_le(chan->src_type)) {
 			err = -EINVAL;
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (sk->sk_state == BT_CONNECTED) {
 			err = -EINVAL;
@@ -794,6 +921,11 @@ static int l2cap_sock_setsockopt_old(struct socket *sock, int optname,
 		chan->mode = opts.mode;
 		switch (chan->mode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case L2CAP_MODE_LE_FLOWCTL:
+			break;
+>>>>>>> v3.18
 =======
 		case L2CAP_MODE_LE_FLOWCTL:
 			break;
@@ -826,12 +958,18 @@ static int l2cap_sock_setsockopt_old(struct socket *sock, int optname,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (opt & L2CAP_LM_FIPS) {
 			err = -EINVAL;
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (opt & L2CAP_LM_AUTH)
 			chan->sec_level = BT_SECURITY_LOW;
@@ -872,7 +1010,11 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 	u32 opt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -889,6 +1031,10 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 	case BT_SECURITY:
 		if (chan->chan_type != L2CAP_CHAN_CONN_ORIENTED &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		    chan->chan_type != L2CAP_CHAN_FIXED &&
+>>>>>>> v3.18
 =======
 		    chan->chan_type != L2CAP_CHAN_FIXED &&
 >>>>>>> v3.18
@@ -920,6 +1066,7 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 
 		/*change security for LE channels */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chan->scid == L2CAP_CID_LE_DATA) {
 			if (!conn->hcon->out) {
 				err = -EINVAL;
@@ -929,10 +1076,15 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 			if (smp_conn_security(conn->hcon, sec.level))
 				break;
 =======
+=======
+>>>>>>> v3.18
 		if (chan->scid == L2CAP_CID_ATT) {
 			if (smp_conn_security(conn->hcon, sec.level))
 				break;
 			set_bit(FLAG_PENDING_SECURITY, &chan->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sk->sk_state = BT_CONFIG;
 			chan->state = BT_CONFIG;
@@ -942,7 +1094,11 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 			    test_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags)) ||
 			   sk->sk_state == BT_CONNECTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!l2cap_chan_check_security(chan))
+=======
+			if (!l2cap_chan_check_security(chan, true))
+>>>>>>> v3.18
 =======
 			if (!l2cap_chan_check_security(chan, true))
 >>>>>>> v3.18
@@ -966,11 +1122,14 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (opt)
 			set_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags);
 		else
 			clear_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags);
 =======
+=======
+>>>>>>> v3.18
 		if (opt) {
 			set_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags);
 			set_bit(FLAG_DEFER_SETUP, &chan->flags);
@@ -978,6 +1137,9 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 			clear_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags);
 			clear_bit(FLAG_DEFER_SETUP, &chan->flags);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -994,7 +1156,11 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 
 		if (opt == BT_FLUSHABLE_OFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct l2cap_conn *conn = chan->conn;
+=======
+			conn = chan->conn;
+>>>>>>> v3.18
 =======
 			conn = chan->conn;
 >>>>>>> v3.18
@@ -1035,12 +1201,16 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 
 	case BT_CHANNEL_POLICY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!enable_hs) {
 			err = -ENOPROTOOPT;
 			break;
 		}
 
 		if (get_user(opt, (u16 __user *) optval)) {
+=======
+		if (get_user(opt, (u32 __user *) optval)) {
+>>>>>>> v3.18
 =======
 		if (get_user(opt, (u32 __user *) optval)) {
 >>>>>>> v3.18
@@ -1068,7 +1238,10 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BT_SNDMTU:
 		if (!bdaddr_type_is_le(chan->src_type)) {
 			err = -EINVAL;
@@ -1100,6 +1273,9 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 		chan->imtu = opt;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -ENOPROTOOPT;
@@ -1118,7 +1294,11 @@ static int l2cap_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1134,9 +1314,12 @@ static int l2cap_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 		return -ENOTCONN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l2cap_chan_lock(chan);
 	err = l2cap_chan_send(chan, msg, len, sk->sk_priority);
 =======
+=======
+>>>>>>> v3.18
 	lock_sock(sk);
 	err = bt_sock_wait_ready(sk, msg->msg_flags);
 	release_sock(sk);
@@ -1145,6 +1328,9 @@ static int l2cap_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 
 	l2cap_chan_lock(chan);
 	err = l2cap_chan_send(chan, msg, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	l2cap_chan_unlock(chan);
 
@@ -1163,6 +1349,7 @@ static int l2cap_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 	if (sk->sk_state == BT_CONNECT2 && test_bit(BT_SK_DEFER_SETUP,
 						    &bt_sk(sk)->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_state = BT_CONFIG;
 		pi->chan->state = BT_CONFIG;
 
@@ -1170,6 +1357,8 @@ static int l2cap_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 		release_sock(sk);
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		if (bdaddr_type_is_le(pi->chan->src_type)) {
 			sk->sk_state = BT_CONNECTED;
 			pi->chan->state = BT_CONNECTED;
@@ -1182,6 +1371,9 @@ static int l2cap_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 
 		err = 0;
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1230,7 +1422,11 @@ static void l2cap_sock_kill(struct sock *sk)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK state %s", sk, state_to_string(sk->sk_state));
+=======
+	BT_DBG("sk %p state %s", sk, state_to_string(sk->sk_state));
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p state %s", sk, state_to_string(sk->sk_state));
 >>>>>>> v3.18
@@ -1243,7 +1439,10 @@ static void l2cap_sock_kill(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __l2cap_wait_ack(struct sock *sk)
 {
 	struct l2cap_chan *chan = l2cap_pi(sk)->chan;
@@ -1276,6 +1475,9 @@ static int __l2cap_wait_ack(struct sock *sk)
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int l2cap_sock_shutdown(struct socket *sock, int how)
 {
@@ -1285,7 +1487,11 @@ static int l2cap_sock_shutdown(struct socket *sock, int how)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1336,7 +1542,11 @@ static int l2cap_sock_release(struct socket *sock)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1358,7 +1568,11 @@ static void l2cap_sock_cleanup_listen(struct sock *parent)
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("parent %pK", parent);
+=======
+	BT_DBG("parent %p", parent);
+>>>>>>> v3.18
 =======
 	BT_DBG("parent %p", parent);
 >>>>>>> v3.18
@@ -1381,6 +1595,11 @@ static struct l2cap_chan *l2cap_sock_new_connection_cb(struct l2cap_chan *chan)
 	struct sock *sk, *parent = chan->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lock_sock(parent);
+
+>>>>>>> v3.18
 =======
 	lock_sock(parent);
 
@@ -1406,6 +1625,11 @@ static struct l2cap_chan *l2cap_sock_new_connection_cb(struct l2cap_chan *chan)
 	bt_accept_enqueue(parent, sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	release_sock(parent);
+
+>>>>>>> v3.18
 =======
 	release_sock(parent);
 
@@ -1416,6 +1640,7 @@ static struct l2cap_chan *l2cap_sock_new_connection_cb(struct l2cap_chan *chan)
 static int l2cap_sock_recv_cb(struct l2cap_chan *chan, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	struct sock *sk = chan->data;
 	struct l2cap_pinfo *pi = l2cap_pi(sk);
@@ -1424,12 +1649,17 @@ static int l2cap_sock_recv_cb(struct l2cap_chan *chan, struct sk_buff *skb)
 
 	if (pi->rx_busy_skb) {
 =======
+=======
+>>>>>>> v3.18
 	struct sock *sk = chan->data;
 	int err;
 
 	lock_sock(sk);
 
 	if (l2cap_pi(sk)->rx_busy_skb) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -ENOMEM;
 		goto done;
@@ -1447,9 +1677,15 @@ static int l2cap_sock_recv_cb(struct l2cap_chan *chan, struct sk_buff *skb)
 	 * available.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err < 0 && pi->chan->mode == L2CAP_MODE_ERTM) {
 		pi->rx_busy_skb = skb;
 		l2cap_chan_busy(pi->chan, 1);
+=======
+	if (err < 0 && chan->mode == L2CAP_MODE_ERTM) {
+		l2cap_pi(sk)->rx_busy_skb = skb;
+		l2cap_chan_busy(chan, 1);
+>>>>>>> v3.18
 =======
 	if (err < 0 && chan->mode == L2CAP_MODE_ERTM) {
 		l2cap_pi(sk)->rx_busy_skb = skb;
@@ -1502,7 +1738,11 @@ static void l2cap_sock_teardown_cb(struct l2cap_chan *chan, int err)
 		if (parent) {
 			bt_accept_unlink(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			parent->sk_data_ready(parent, 0);
+=======
+			parent->sk_data_ready(parent);
+>>>>>>> v3.18
 =======
 			parent->sk_data_ready(parent);
 >>>>>>> v3.18
@@ -1517,7 +1757,12 @@ static void l2cap_sock_teardown_cb(struct l2cap_chan *chan, int err)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void l2cap_sock_state_change_cb(struct l2cap_chan *chan, int state)
+=======
+static void l2cap_sock_state_change_cb(struct l2cap_chan *chan, int state,
+				       int err)
+>>>>>>> v3.18
 =======
 static void l2cap_sock_state_change_cb(struct l2cap_chan *chan, int state,
 				       int err)
@@ -1527,12 +1772,15 @@ static void l2cap_sock_state_change_cb(struct l2cap_chan *chan, int state,
 
 	sk->sk_state = state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static struct sk_buff *l2cap_sock_alloc_skb_cb(struct l2cap_chan *chan,
 					       unsigned long len, int nb)
 {
 =======
+=======
+>>>>>>> v3.18
 
 	if (err)
 		sk->sk_err = err;
@@ -1543,13 +1791,20 @@ static struct sk_buff *l2cap_sock_alloc_skb_cb(struct l2cap_chan *chan,
 					       unsigned long len, int nb)
 {
 	struct sock *sk = chan->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sk_buff *skb;
 	int err;
 
 	l2cap_chan_unlock(chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = bt_skb_send_alloc(chan->sk, len, nb, &err);
+=======
+	skb = bt_skb_send_alloc(sk, hdr_len + len, nb, &err);
+>>>>>>> v3.18
 =======
 	skb = bt_skb_send_alloc(sk, hdr_len + len, nb, &err);
 >>>>>>> v3.18
@@ -1559,10 +1814,13 @@ static struct sk_buff *l2cap_sock_alloc_skb_cb(struct l2cap_chan *chan,
 		return ERR_PTR(err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return skb;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	skb->priority = sk->sk_priority;
 
 	bt_cb(skb)->chan = chan;
@@ -1577,6 +1835,9 @@ static int l2cap_sock_memcpy_fromiovec_cb(struct l2cap_chan *chan,
 	return memcpy_fromiovec(kdata, iov, len);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void l2cap_sock_ready_cb(struct l2cap_chan *chan)
 {
@@ -1588,7 +1849,11 @@ static void l2cap_sock_ready_cb(struct l2cap_chan *chan)
 	parent = bt_sk(sk)->parent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK, parent %pK", sk, parent);
+=======
+	BT_DBG("sk %p, parent %p", sk, parent);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p, parent %p", sk, parent);
 >>>>>>> v3.18
@@ -1598,7 +1863,11 @@ static void l2cap_sock_ready_cb(struct l2cap_chan *chan)
 
 	if (parent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		parent->sk_data_ready(parent, 0);
+=======
+		parent->sk_data_ready(parent);
+>>>>>>> v3.18
 =======
 		parent->sk_data_ready(parent);
 >>>>>>> v3.18
@@ -1608,6 +1877,7 @@ static void l2cap_sock_ready_cb(struct l2cap_chan *chan)
 
 static void l2cap_sock_defer_cb(struct l2cap_chan *chan)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sock *sk = chan->data;
 	struct sock *parent = bt_sk(sk)->parent;
@@ -1627,6 +1897,8 @@ static struct l2cap_ops l2cap_chan_ops = {
 	.defer		= l2cap_sock_defer_cb,
 	.alloc_skb	= l2cap_sock_alloc_skb_cb,
 =======
+=======
+>>>>>>> v3.18
 	struct sock *parent, *sk = chan->data;
 
 	lock_sock(sk);
@@ -1690,22 +1962,31 @@ static const struct l2cap_ops l2cap_chan_ops = {
 	.get_sndtimeo		= l2cap_sock_get_sndtimeo_cb,
 	.alloc_skb		= l2cap_sock_alloc_skb_cb,
 	.memcpy_fromiovec	= l2cap_sock_memcpy_fromiovec_cb,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static void l2cap_sock_destruct(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
 
 	if (l2cap_pi(sk)->chan)
 		l2cap_chan_put(l2cap_pi(sk)->chan);
 =======
+=======
+>>>>>>> v3.18
 	BT_DBG("sk %p", sk);
 
 	if (l2cap_pi(sk)->chan)
 		l2cap_chan_put(l2cap_pi(sk)->chan);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (l2cap_pi(sk)->rx_busy_skb) {
 		kfree_skb(l2cap_pi(sk)->rx_busy_skb);
@@ -1717,6 +1998,7 @@ static void l2cap_sock_destruct(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void l2cap_sock_init(struct sock *sk, struct sock *parent)
 {
 	struct l2cap_pinfo *pi = l2cap_pi(sk);
@@ -1724,6 +2006,8 @@ static void l2cap_sock_init(struct sock *sk, struct sock *parent)
 
 	BT_DBG("sk %pK", sk);
 =======
+=======
+>>>>>>> v3.18
 static void l2cap_skb_msg_name(struct sk_buff *skb, void *msg_name,
 			       int *msg_namelen)
 {
@@ -1742,6 +2026,9 @@ static void l2cap_sock_init(struct sock *sk, struct sock *parent)
 	struct l2cap_chan *chan = l2cap_pi(sk)->chan;
 
 	BT_DBG("sk %p", sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (parent) {
@@ -1762,11 +2049,14 @@ static void l2cap_sock_init(struct sock *sk, struct sock *parent)
 		chan->sec_level = pchan->sec_level;
 		chan->flags = pchan->flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		security_sk_clone(parent, sk);
 	} else {
 
 =======
+=======
+>>>>>>> v3.18
 		chan->tx_credits = pchan->tx_credits;
 		chan->rx_credits = pchan->rx_credits;
 
@@ -1777,6 +2067,9 @@ static void l2cap_sock_init(struct sock *sk, struct sock *parent)
 
 		security_sk_clone(parent, sk);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch (sk->sk_type) {
 		case SOCK_RAW:
@@ -1785,6 +2078,10 @@ static void l2cap_sock_init(struct sock *sk, struct sock *parent)
 		case SOCK_DGRAM:
 			chan->chan_type = L2CAP_CHAN_CONN_LESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			bt_sk(sk)->skb_msg_name = l2cap_skb_msg_name;
+>>>>>>> v3.18
 =======
 			bt_sk(sk)->skb_msg_name = l2cap_skb_msg_name;
 >>>>>>> v3.18
@@ -1850,8 +2147,11 @@ static struct sock *l2cap_sock_alloc(struct net *net, struct socket *sock,
 	l2cap_chan_hold(chan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->sk = sk;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	l2cap_pi(sk)->chan = chan;
@@ -1865,7 +2165,11 @@ static int l2cap_sock_create(struct net *net, struct socket *sock, int protocol,
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK", sock);
+=======
+	BT_DBG("sock %p", sock);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p", sock);
 >>>>>>> v3.18

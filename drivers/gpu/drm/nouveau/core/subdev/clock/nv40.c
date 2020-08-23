@@ -24,12 +24,15 @@
 
 #include <subdev/clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct nv40_clock_priv {
 	struct nouveau_clock base;
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/pll.h>
 
@@ -212,6 +215,9 @@ nv40_clock_tidy(struct nouveau_clock *clk)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nv40_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -222,7 +228,12 @@ nv40_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_clock_create(parent, engine, oclass, &priv);
+=======
+	ret = nouveau_clock_create(parent, engine, oclass, nv40_domain, NULL, 0,
+				   true, &priv);
+>>>>>>> v3.18
 =======
 	ret = nouveau_clock_create(parent, engine, oclass, nv40_domain, NULL, 0,
 				   true, &priv);
@@ -232,16 +243,22 @@ nv40_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.pll_set = nv04_clock_pll_set;
 	priv->base.pll_calc = nv04_clock_pll_calc;
 	priv->base.pll_prog = nv04_clock_pll_prog;
 =======
+=======
+>>>>>>> v3.18
 	priv->base.pll_calc = nv04_clock_pll_calc;
 	priv->base.pll_prog = nv04_clock_pll_prog;
 	priv->base.read = nv40_clock_read;
 	priv->base.calc = nv40_clock_calc;
 	priv->base.prog = nv40_clock_prog;
 	priv->base.tidy = nv40_clock_tidy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

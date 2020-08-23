@@ -57,8 +57,13 @@ struct pl08x_platform_data pl080_plat_data = {
 	.lli_buses = PL08X_AHB1,
 	.mem_buses = PL08X_AHB1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_signal = pl080_get_signal,
 	.put_signal = pl080_put_signal,
+=======
+	.get_xfer_signal = pl080_get_signal,
+	.put_xfer_signal = pl080_put_signal,
+>>>>>>> v3.18
 =======
 	.get_xfer_signal = pl080_get_signal,
 	.put_xfer_signal = pl080_put_signal,

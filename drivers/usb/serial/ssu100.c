@@ -7,7 +7,10 @@
 
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -327,7 +330,11 @@ static int get_serial_info(struct usb_serial_port *port,
 
 	memset(&tmp, 0, sizeof(tmp));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp.line		= port->serial->minor;
+=======
+	tmp.line		= port->minor;
+>>>>>>> v3.18
 =======
 	tmp.line		= port->minor;
 >>>>>>> v3.18
@@ -350,8 +357,11 @@ static int ssu100_ioctl(struct tty_struct *tty,
 	struct usb_serial_port *port = tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s cmd 0x%04x\n", __func__, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {
@@ -363,8 +373,11 @@ static int ssu100_ioctl(struct tty_struct *tty,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s arg not supported\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return -ENOIOCTLCMD;

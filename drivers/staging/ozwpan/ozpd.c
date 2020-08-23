@@ -4,7 +4,11 @@
  * -----------------------------------------------------------------------------
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -13,8 +17,14 @@
 #include <linux/sched.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/errno.h>
 #include "ozconfig.h"
+=======
+#include <linux/etherdevice.h>
+#include <linux/errno.h>
+#include "ozdbg.h"
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 #include <linux/errno.h>
@@ -25,8 +35,11 @@
 #include "ozpd.h"
 #include "ozproto.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "oztrace.h"
 #include "ozevent.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ozcdev.h"
@@ -35,11 +48,15 @@
 #include <linux/uaccess.h>
 #include <net/psnap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
  */
 #define OZ_MAX_TX_POOL_SIZE	6
 /*------------------------------------------------------------------------------
  */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -52,6 +69,7 @@ static void oz_retire_frame(struct oz_pd *pd, struct oz_tx_frame *f);
 static void oz_isoc_stream_free(struct oz_isoc_stream *st);
 static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data);
 static void oz_isoc_destructor(struct sk_buff *skb);
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int oz_def_app_init(void);
 static void oz_def_app_term(void);
@@ -135,6 +153,8 @@ static void oz_def_app_rx(struct oz_pd *pd, struct oz_elt *elt)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Counts the uncompleted isoc frames submitted to netcard.
@@ -164,12 +184,16 @@ static const struct oz_app_if g_app_if[OZ_NB_APPS] = {
 
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq or process
  */
 void oz_pd_set_state(struct oz_pd *pd, unsigned state)
 {
 	pd->state = state;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	oz_event_log(OZ_EVT_PD_STATE, 0, 0, NULL, state);
 #ifdef WANT_TRACE
@@ -191,6 +215,8 @@ void oz_pd_set_state(struct oz_pd *pd, unsigned state)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	switch (state) {
 	case OZ_PD_S_IDLE:
 		oz_pd_dbg(pd, ON, "PD State: OZ_PD_S_IDLE\n");
@@ -208,6 +234,9 @@ void oz_pd_set_state(struct oz_pd *pd, unsigned state)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq or process
  */
@@ -216,7 +245,12 @@ void oz_pd_get(struct oz_pd *pd)
 	atomic_inc(&pd->ref_count);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -229,7 +263,12 @@ void oz_pd_put(struct oz_pd *pd)
 		oz_pd_destroy(pd);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -240,22 +279,29 @@ struct oz_pd *oz_pd_alloc(const u8 *mac_addr)
 {
 	struct oz_pd *pd = kzalloc(sizeof(struct oz_pd), GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pd) {
 		int i;
 		atomic_set(&pd->ref_count, 2);
 		for (i = 0; i < OZ_APPID_MAX; i++)
 =======
+=======
+>>>>>>> v3.18
 
 	if (pd) {
 		int i;
 
 		atomic_set(&pd->ref_count, 2);
 		for (i = 0; i < OZ_NB_APPS; i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			spin_lock_init(&pd->app_lock[i]);
 		pd->last_rx_pkt_num = 0xffffffff;
 		oz_pd_set_state(pd, OZ_PD_S_IDLE);
 		pd->max_tx_size = OZ_MAX_TX_SIZE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		memcpy(pd->mac_addr, mac_addr, ETH_ALEN);
 		if (0 != oz_elt_buf_init(&pd->elt_buff)) {
@@ -266,12 +312,17 @@ struct oz_pd *oz_pd_alloc(const u8 *mac_addr)
 		ether_addr_copy(pd->mac_addr, mac_addr);
 		oz_elt_buf_init(&pd->elt_buff);
 >>>>>>> v3.18
+=======
+		ether_addr_copy(pd->mac_addr, mac_addr);
+		oz_elt_buf_init(&pd->elt_buff);
+>>>>>>> v3.18
 		spin_lock_init(&pd->tx_frame_lock);
 		INIT_LIST_HEAD(&pd->tx_queue);
 		INIT_LIST_HEAD(&pd->farewell_list);
 		pd->last_sent_frame = &pd->tx_queue;
 		spin_lock_init(&pd->stream_lock);
 		INIT_LIST_HEAD(&pd->stream_list);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 	return pd;
@@ -301,6 +352,8 @@ void oz_pd_destroy(struct oz_pd *pd)
 		f = container_of(e, struct oz_tx_frame, link);
 		e = e->next;
 =======
+=======
+>>>>>>> v3.18
 		tasklet_init(&pd->heartbeat_tasklet, oz_pd_heartbeat_handler,
 							(unsigned long)pd);
 		tasklet_init(&pd->timeout_tasklet, oz_pd_timeout_handler,
@@ -335,11 +388,15 @@ static void oz_pd_free(struct work_struct *work)
 	list_for_each_safe(e, n, &pd->tx_queue) {
 		struct oz_tx_frame *f = list_entry(e, struct oz_tx_frame, link);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (f->skb != NULL)
 			kfree_skb(f->skb);
 		oz_retire_frame(pd, f);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	oz_elt_buf_term(&pd->elt_buff);
 	/* Free any farewells.
@@ -358,20 +415,28 @@ static void oz_pd_free(struct work_struct *work)
 		kfree(container_of(e, struct oz_tx_frame, link));
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	oz_elt_buf_term(&pd->elt_buff);
 
 	list_for_each_safe(e, n, &pd->farewell_list)
 		kfree(list_entry(e, struct oz_farewell, link));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pd->net_dev)
 		dev_put(pd->net_dev);
 	kfree(pd);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Context: softirq or Process
@@ -389,11 +454,15 @@ void oz_pd_destroy(struct oz_pd *pd)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq-serialized
  */
 int oz_services_start(struct oz_pd *pd, u16 apps, int resume)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct oz_app_if *ai;
 	int rc = 0;
@@ -412,6 +481,8 @@ int oz_services_start(struct oz_pd *pd, u16 apps, int resume)
 				pd->paused_apps &= ~(1<<ai->app_id);
 			oz_polling_unlock_bh();
 =======
+=======
+>>>>>>> v3.18
 	int i, rc = 0;
 
 	oz_pd_dbg(pd, ON, "%s: (0x%x) resume(%d)\n", __func__, apps, resume);
@@ -428,13 +499,21 @@ int oz_services_start(struct oz_pd *pd, u16 apps, int resume)
 			if (resume)
 				pd->paused_apps &= ~(1 << i);
 			spin_unlock_bh(&g_polling_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -443,6 +522,7 @@ int oz_services_start(struct oz_pd *pd, u16 apps, int resume)
  */
 void oz_services_stop(struct oz_pd *pd, u16 apps, int pause)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct oz_app_if *ai;
 	oz_trace("oz_stop_services(0x%x) pause(%d)\n", apps, pause);
@@ -462,6 +542,8 @@ void oz_services_stop(struct oz_pd *pd, u16 apps, int pause)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	oz_pd_dbg(pd, ON, "%s: (0x%x) pause(%d)\n", __func__, apps, pause);
@@ -481,11 +563,15 @@ void oz_services_stop(struct oz_pd *pd, u16 apps, int pause)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq
  */
 void oz_pd_heartbeat(struct oz_pd *pd, u16 apps)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct oz_app_if *ai;
 	int more = 0;
@@ -500,6 +586,8 @@ void oz_pd_heartbeat(struct oz_pd *pd, u16 apps)
 	if (pd->mode & OZ_F_ISOC_ANYTIME) {
 		int count = 8;
 =======
+=======
+>>>>>>> v3.18
 	int i, more = 0;
 
 	for (i = 0; i < OZ_NB_APPS; i++) {
@@ -513,13 +601,21 @@ void oz_pd_heartbeat(struct oz_pd *pd, u16 apps)
 	if (pd->mode & OZ_F_ISOC_ANYTIME) {
 		int count = 8;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		while (count-- && (oz_send_isoc_frame(pd) >= 0))
 			;
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -528,6 +624,7 @@ void oz_pd_heartbeat(struct oz_pd *pd, u16 apps)
  */
 void oz_pd_stop(struct oz_pd *pd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 stop_apps = 0;
 	oz_trace("oz_pd_stop() State = 0x%x\n", pd->state);
@@ -549,6 +646,8 @@ void oz_pd_stop(struct oz_pd *pd)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	u16 stop_apps;
 
 	oz_dbg(ON, "oz_pd_stop() State = 0x%x\n", pd->state);
@@ -569,12 +668,16 @@ void oz_pd_stop(struct oz_pd *pd)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq
  */
 int oz_pd_sleep(struct oz_pd *pd)
 {
 	int do_stop = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 stop_apps = 0;
 	oz_polling_lock_bh();
@@ -593,6 +696,8 @@ int oz_pd_sleep(struct oz_pd *pd)
 	stop_apps = pd->total_apps;
 	oz_polling_unlock_bh();
 =======
+=======
+>>>>>>> v3.18
 	u16 stop_apps;
 
 	spin_lock_bh(&g_polling_lock);
@@ -607,11 +712,15 @@ int oz_pd_sleep(struct oz_pd *pd)
 
 	stop_apps = pd->total_apps;
 	spin_unlock_bh(&g_polling_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (do_stop) {
 		oz_pd_stop(pd);
 	} else {
 		oz_services_stop(pd, stop_apps, 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		oz_timer_add(pd, OZ_TIMER_STOP, jiffies + pd->keep_alive_j, 1);
 	}
@@ -619,17 +728,23 @@ int oz_pd_sleep(struct oz_pd *pd)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 		oz_timer_add(pd, OZ_TIMER_STOP, pd->keep_alive);
 	}
 	return do_stop;
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq
  */
 static struct oz_tx_frame *oz_tx_frame_alloc(struct oz_pd *pd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct oz_tx_frame *f = NULL;
 	spin_lock_bh(&pd->tx_frame_lock);
@@ -646,6 +761,11 @@ static struct oz_tx_frame *oz_tx_frame_alloc(struct oz_pd *pd)
 
 	f = kmem_cache_alloc(oz_tx_frame_cache, GFP_ATOMIC);
 >>>>>>> v3.18
+=======
+	struct oz_tx_frame *f;
+
+	f = kmem_cache_alloc(oz_tx_frame_cache, GFP_ATOMIC);
+>>>>>>> v3.18
 	if (f) {
 		f->total_size = sizeof(struct oz_hdr);
 		INIT_LIST_HEAD(&f->link);
@@ -654,7 +774,12 @@ static struct oz_tx_frame *oz_tx_frame_alloc(struct oz_pd *pd)
 	return f;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -665,6 +790,7 @@ static void oz_tx_isoc_free(struct oz_pd *pd, struct oz_tx_frame *f)
 {
 	pd->nb_queued_isoc_frames--;
 	list_del_init(&f->link);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pd->tx_pool_count < OZ_MAX_TX_POOL_SIZE) {
 		f->link.next = pd->tx_pool;
@@ -678,6 +804,8 @@ static void oz_tx_isoc_free(struct oz_pd *pd, struct oz_tx_frame *f)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 	kmem_cache_free(oz_tx_frame_cache, f);
 
@@ -686,11 +814,15 @@ static void oz_tx_isoc_free(struct oz_pd *pd, struct oz_tx_frame *f)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq or process
  */
 static void oz_tx_frame_free(struct oz_pd *pd, struct oz_tx_frame *f)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&pd->tx_frame_lock);
 	if (pd->tx_pool_count < OZ_MAX_TX_POOL_SIZE) {
@@ -704,10 +836,15 @@ static void oz_tx_frame_free(struct oz_pd *pd, struct oz_tx_frame *f)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	kmem_cache_free(oz_tx_frame_cache, f);
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq-serialized
  */
@@ -715,15 +852,21 @@ static void oz_set_more_bit(struct sk_buff *skb)
 {
 	struct oz_hdr *oz_hdr = (struct oz_hdr *)skb_network_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oz_hdr->control |= OZ_F_MORE_DATA;
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 	oz_hdr->control |= OZ_F_MORE_DATA;
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq-serialized
  */
@@ -731,15 +874,21 @@ static void oz_set_last_pkt_nb(struct oz_pd *pd, struct sk_buff *skb)
 {
 	struct oz_hdr *oz_hdr = (struct oz_hdr *)skb_network_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oz_hdr->last_pkt_num = pd->trigger_pkt_num & OZ_LAST_PN_MASK;
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 	oz_hdr->last_pkt_num = pd->trigger_pkt_num & OZ_LAST_PN_MASK;
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq
  */
@@ -747,6 +896,10 @@ int oz_prepare_frame(struct oz_pd *pd, int empty)
 {
 	struct oz_tx_frame *f;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -775,7 +928,12 @@ int oz_prepare_frame(struct oz_pd *pd, int empty)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -789,7 +947,12 @@ static struct sk_buff *oz_build_frame(struct oz_pd *pd, struct oz_tx_frame *f)
 	struct oz_hdr *oz_hdr;
 	struct oz_elt *elt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *e;
+=======
+	struct oz_elt_info *ei;
+
+>>>>>>> v3.18
 =======
 	struct oz_elt_info *ei;
 
@@ -818,9 +981,13 @@ static struct sk_buff *oz_build_frame(struct oz_pd *pd, struct oz_tx_frame *f)
 	 */
 	elt = (struct oz_elt *)(oz_hdr+1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (e = f->elt_list.next; e != &f->elt_list; e = e->next) {
 		struct oz_elt_info *ei;
 		ei = container_of(e, struct oz_elt_info, link);
+=======
+	list_for_each_entry(ei, &f->elt_list, link) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(ei, &f->elt_list, link) {
 >>>>>>> v3.18
@@ -833,7 +1000,12 @@ fail:
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -843,12 +1015,18 @@ fail:
 static void oz_retire_frame(struct oz_pd *pd, struct oz_tx_frame *f)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *e;
 	struct oz_elt_info *ei;
 	e = f->elt_list.next;
 	while (e != &f->elt_list) {
 		ei = container_of(e, struct oz_elt_info, link);
 		e = e->next;
+=======
+	struct oz_elt_info *ei, *n;
+
+	list_for_each_entry_safe(ei, n, &f->elt_list, link) {
+>>>>>>> v3.18
 =======
 	struct oz_elt_info *ei, *n;
 
@@ -863,10 +1041,16 @@ static void oz_retire_frame(struct oz_pd *pd, struct oz_tx_frame *f)
 	}
 	oz_tx_frame_free(pd, f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pd->elt_buff.free_elts > pd->elt_buff.max_free_elts)
 		oz_trim_elt_pool(&pd->elt_buff);
 }
 /*------------------------------------------------------------------------------
+=======
+}
+
+/*
+>>>>>>> v3.18
 =======
 }
 
@@ -880,6 +1064,10 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 	struct oz_tx_frame *f;
 	struct list_head *e;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -890,7 +1078,11 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f = container_of(e, struct oz_tx_frame, link);
+=======
+	f = list_entry(e, struct oz_tx_frame, link);
+>>>>>>> v3.18
 =======
 	f = list_entry(e, struct oz_tx_frame, link);
 >>>>>>> v3.18
@@ -905,6 +1097,7 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 		if ((int)atomic_read(&g_submitted_isoc) <
 							OZ_MAX_SUBMITTED_ISOC) {
 			if (dev_queue_xmit(skb) < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				oz_trace2(OZ_TRACE_TX_FRAMES,
 						"Dropping ISOC Frame\n");
@@ -923,6 +1116,8 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 			return -1;
 		}
 =======
+=======
+>>>>>>> v3.18
 				oz_dbg(TX_FRAMES, "Dropping ISOC Frame\n");
 				return -1;
 			}
@@ -934,12 +1129,16 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 		kfree_skb(skb);
 		oz_dbg(TX_FRAMES, "Dropping ISOC Frame>\n");
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	pd->last_sent_frame = e;
 	skb = oz_build_frame(pd, f);
 	spin_unlock(&pd->tx_frame_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (more_data)
 		oz_set_more_bit(skb);
@@ -957,6 +1156,8 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	if (!skb)
 		return -1;
 	if (more_data)
@@ -969,6 +1170,9 @@ static int oz_send_next_queued_frame(struct oz_pd *pd, int more_data)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq-serialized
  */
@@ -1008,7 +1212,12 @@ out:	oz_prepare_frame(pd, 1);
 	oz_send_next_queued_frame(pd, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1021,6 +1230,7 @@ static int oz_send_isoc_frame(struct oz_pd *pd)
 	struct net_device *dev = pd->net_dev;
 	struct oz_hdr *oz_hdr;
 	struct oz_elt *elt;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head *e;
 	struct list_head list;
@@ -1035,6 +1245,8 @@ static int oz_send_isoc_frame(struct oz_pd *pd)
 	if (skb == NULL) {
 		oz_trace("Cannot alloc skb\n");
 =======
+=======
+>>>>>>> v3.18
 	struct oz_elt_info *ei;
 	LIST_HEAD(list);
 	int total_size = sizeof(struct oz_hdr);
@@ -1046,6 +1258,9 @@ static int oz_send_isoc_frame(struct oz_pd *pd)
 	skb = alloc_skb(total_size + OZ_ALLOCATED_SPACE(dev), GFP_ATOMIC);
 	if (skb == NULL) {
 		oz_dbg(ON, "Cannot alloc skb\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		oz_elt_info_free_chain(&pd->elt_buff, &list);
 		return -1;
@@ -1065,6 +1280,7 @@ static int oz_send_isoc_frame(struct oz_pd *pd)
 	elt = (struct oz_elt *)(oz_hdr+1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (e = list.next; e != &list; e = e->next) {
 		struct oz_elt_info *ei;
 		ei = container_of(e, struct oz_elt_info, link);
@@ -1073,17 +1289,27 @@ static int oz_send_isoc_frame(struct oz_pd *pd)
 	}
 	oz_event_log(OZ_EVT_TX_ISOC, 0, 0, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(ei, &list, link) {
 		memcpy(elt, ei->data, ei->length);
 		elt = oz_next_elt(elt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_queue_xmit(skb);
 	oz_elt_info_free_chain(&pd->elt_buff, &list);
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1092,6 +1318,7 @@ static int oz_send_isoc_frame(struct oz_pd *pd)
  */
 void oz_retire_tx_frames(struct oz_pd *pd, u8 lpn)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head *e;
 	struct oz_tx_frame *f;
@@ -1105,6 +1332,8 @@ void oz_retire_tx_frames(struct oz_pd *pd, u8 lpn)
 	while (e != &pd->tx_queue) {
 		f = container_of(e, struct oz_tx_frame, link);
 =======
+=======
+>>>>>>> v3.18
 	struct oz_tx_frame *f, *tmp = NULL;
 	u8 diff;
 	u32 pkt_num;
@@ -1113,11 +1342,15 @@ void oz_retire_tx_frames(struct oz_pd *pd, u8 lpn)
 
 	spin_lock(&pd->tx_frame_lock);
 	list_for_each_entry(f, &pd->tx_queue, link) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pkt_num = le32_to_cpu(get_unaligned(&f->hdr.pkt_num));
 		diff = (lpn - (pkt_num & OZ_LAST_PN_MASK)) & OZ_LAST_PN_MASK;
 		if ((diff > OZ_LAST_PN_HALF_CYCLE) || (pkt_num == 0))
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		oz_trace2(OZ_TRACE_TX_FRAMES, "Releasing pkt_num= %u, nb= %d\n",
 						 pkt_num, pd->nb_queued_frames);
@@ -1142,6 +1375,8 @@ void oz_retire_tx_frames(struct oz_pd *pd, u8 lpn)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 		oz_dbg(TX_FRAMES, "Releasing pkt_num= %u, nb= %d\n",
 		       pkt_num, pd->nb_queued_frames);
 		tmp = f;
@@ -1157,6 +1392,9 @@ void oz_retire_tx_frames(struct oz_pd *pd, u8 lpn)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Precondition: stream_lock must be held.
  * Context: softirq
@@ -1164,10 +1402,16 @@ void oz_retire_tx_frames(struct oz_pd *pd, u8 lpn)
 static struct oz_isoc_stream *pd_stream_find(struct oz_pd *pd, u8 ep_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *e;
 	struct oz_isoc_stream *st;
 	list_for_each(e, &pd->stream_list) {
 		st = container_of(e, struct oz_isoc_stream, link);
+=======
+	struct oz_isoc_stream *st;
+
+	list_for_each_entry(st, &pd->stream_list, link) {
+>>>>>>> v3.18
 =======
 	struct oz_isoc_stream *st;
 
@@ -1179,7 +1423,12 @@ static struct oz_isoc_stream *pd_stream_find(struct oz_pd *pd, u8 ep_num)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1203,7 +1452,12 @@ int oz_isoc_stream_create(struct oz_pd *pd, u8 ep_num)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1216,7 +1470,12 @@ static void oz_isoc_stream_free(struct oz_isoc_stream *st)
 	kfree(st);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1227,6 +1486,10 @@ int oz_isoc_stream_delete(struct oz_pd *pd, u8 ep_num)
 {
 	struct oz_isoc_stream *st;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1240,7 +1503,12 @@ int oz_isoc_stream_delete(struct oz_pd *pd, u8 ep_num)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1251,10 +1519,16 @@ static void oz_isoc_destructor(struct sk_buff *skb)
 {
 	atomic_dec(&g_submitted_isoc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oz_event_log(OZ_EVT_TX_ISOC_DONE, atomic_read(&g_submitted_isoc),
 		0, skb, 0);
 }
 /*------------------------------------------------------------------------------
+=======
+}
+
+/*
+>>>>>>> v3.18
 =======
 }
 
@@ -1271,6 +1545,10 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 	struct oz_hdr *oz_hdr = NULL;
 	int size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1316,6 +1594,10 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 		struct oz_hdr oz;
 		struct oz_isoc_large iso;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1342,12 +1624,15 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 			struct oz_tx_frame *isoc_unit = NULL;
 			int nb = pd->nb_queued_isoc_frames;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (nb >= pd->isoc_latency) {
 				oz_trace2(OZ_TRACE_TX_FRAMES,
 						"Dropping ISOC Unit nb= %d\n",
 									nb);
 				goto out;
 =======
+=======
+>>>>>>> v3.18
 
 			if (nb >= pd->isoc_latency) {
 				struct oz_tx_frame *f;
@@ -1362,6 +1647,9 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 					}
 				}
 				spin_unlock(&pd->tx_frame_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			isoc_unit = oz_tx_frame_alloc(pd);
@@ -1374,11 +1662,17 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 			pd->nb_queued_isoc_frames++;
 			spin_unlock_bh(&pd->tx_frame_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			oz_trace2(OZ_TRACE_TX_FRAMES,
 			"Added ISOC Frame to Tx Queue isoc_nb= %d, nb= %d\n",
 			pd->nb_queued_isoc_frames, pd->nb_queued_frames);
 			oz_event_log(OZ_EVT_TX_ISOC, nb_units, iso.frame_number,
 					skb, atomic_read(&g_submitted_isoc));
+=======
+			oz_dbg(TX_FRAMES,
+			       "Added ISOC Frame to Tx Queue isoc_nb= %d, nb= %d\n",
+			       pd->nb_queued_isoc_frames, pd->nb_queued_frames);
+>>>>>>> v3.18
 =======
 			oz_dbg(TX_FRAMES,
 			       "Added ISOC Frame to Tx Queue isoc_nb= %d, nb= %d\n",
@@ -1390,6 +1684,7 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 		/*In ANYTIME mode Xmit unit immediately*/
 		if (atomic_read(&g_submitted_isoc) < OZ_MAX_SUBMITTED_ISOC) {
 			atomic_inc(&g_submitted_isoc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			oz_event_log(OZ_EVT_TX_ISOC, nb_units, iso.frame_number,
 					skb, atomic_read(&g_submitted_isoc));
@@ -1403,12 +1698,17 @@ int oz_send_isoc_unit(struct oz_pd *pd, u8 ep_num, const u8 *data, int len)
 out:	oz_event_log(OZ_EVT_TX_ISOC_DROP, 0, 0, NULL, 0);
 	kfree_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 			if (dev_queue_xmit(skb) < 0)
 				return -1;
 			return 0;
 		}
 
 out:	kfree_skb(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -1;
 
@@ -1416,7 +1716,12 @@ out:	kfree_skb(skb);
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -1427,12 +1732,15 @@ void oz_apps_init(void)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < OZ_APPID_MAX; i++)
 		if (g_app_if[i].init)
 			g_app_if[i].init();
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < OZ_NB_APPS; i++) {
 		if (g_app_if[i].init)
@@ -1441,12 +1749,16 @@ void oz_apps_init(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: process
  */
 void oz_apps_term(void)
 {
 	int i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Terminate all the apps. */
 	for (i = 0; i < OZ_APPID_MAX; i++)
@@ -1455,6 +1767,8 @@ void oz_apps_term(void)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 	/* Terminate all the apps. */
 	for (i = 0; i < OZ_NB_APPS; i++) {
@@ -1464,11 +1778,15 @@ void oz_apps_term(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq-serialized
  */
 void oz_handle_app_elt(struct oz_pd *pd, u8 app_id, struct oz_elt *elt)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct oz_app_if *ai;
 	if (app_id == 0 || app_id > OZ_APPID_MAX)
@@ -1478,11 +1796,16 @@ void oz_handle_app_elt(struct oz_pd *pd, u8 app_id, struct oz_elt *elt)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	if (app_id < OZ_NB_APPS && g_app_if[app_id].rx)
 		g_app_if[app_id].rx(pd, elt);
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq or process
  */
@@ -1490,18 +1813,24 @@ void oz_pd_indicate_farewells(struct oz_pd *pd)
 {
 	struct oz_farewell *f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct oz_app_if *ai = &g_app_if[OZ_APPID_USB-1];
 	while (1) {
 		oz_polling_lock_bh();
 		if (list_empty(&pd->farewell_list)) {
 			oz_polling_unlock_bh();
 =======
+=======
+>>>>>>> v3.18
 	const struct oz_app_if *ai = &g_app_if[OZ_APPID_USB];
 
 	while (1) {
 		spin_lock_bh(&g_polling_lock);
 		if (list_empty(&pd->farewell_list)) {
 			spin_unlock_bh(&g_polling_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1509,7 +1838,11 @@ void oz_pd_indicate_farewells(struct oz_pd *pd)
 				struct oz_farewell, link);
 		list_del(&f->link);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oz_polling_unlock_bh();
+=======
+		spin_unlock_bh(&g_polling_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&g_polling_lock);
 >>>>>>> v3.18

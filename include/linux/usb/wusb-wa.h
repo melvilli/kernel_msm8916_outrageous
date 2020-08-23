@@ -67,6 +67,10 @@ enum {
 	WA_RESET = 0x02,
 	RPIPE_PAUSE = 0x1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RPIPE_STALL = 0x2,
+>>>>>>> v3.18
 =======
 	RPIPE_STALL = 0x2,
 >>>>>>> v3.18
@@ -97,12 +101,15 @@ struct usb_rpipe_descriptor {
 	__le16	wRequests;
 	__le16	wBlocks;		/* rw if 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16	wMaxPacketSize;		/* rw? */
 	u8	bHSHubAddress;		/* reserved: 0 */
 	u8	bHSHubPort;		/* ??? FIXME ??? */
 	u8	bSpeed;			/* rw: xfer rate 'enum uwb_phy_rate' */
 	u8	bDeviceAddress;		/* rw: Target device address */
 =======
+=======
+>>>>>>> v3.18
 	__le16	wMaxPacketSize;		/* rw */
 	union {
 		u8	dwa_bHSHubAddress;		/* rw: DWA. */
@@ -117,6 +124,9 @@ struct usb_rpipe_descriptor {
 		u8 dwa_bDeviceAddress;	/* rw: DWA Target device address. */
 		u8 hwa_reserved;		/* rw: HWA. */
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	bEndpointAddress;	/* rw: Target EP address */
 	u8	bDataSequence;		/* ro: Current Data sequence */
@@ -154,7 +164,11 @@ struct wa_notif_hdr {
 	u8 bLength;
 	u8 bNotifyType;			/* enum wa_notif_type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -174,7 +188,11 @@ struct hwa_notif_dn {
 	u8 bmAttributes;
 	struct wusb_dn_hdr dndata[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -187,6 +205,11 @@ enum wa_xfer_type {
 	WA_XFER_RESULT = 0x83,
 	WA_XFER_ABORT = 0x84,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WA_XFER_ISO_PACKET_INFO = 0xA0,
+	WA_XFER_ISO_PACKET_STATUS = 0xA1,
+>>>>>>> v3.18
 =======
 	WA_XFER_ISO_PACKET_INFO = 0xA0,
 	WA_XFER_ISO_PACKET_STATUS = 0xA1,
@@ -202,7 +225,11 @@ struct wa_xfer_hdr {
 	__le32 dwTransferLength;	/* Length of data to xfer */
 	u8 bTransferSegment;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -213,7 +240,11 @@ struct wa_xfer_ctl {
 	__le16 wReserved;
 	struct usb_ctrlrequest baSetupData;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -223,8 +254,14 @@ struct wa_xfer_bi {
 	u8 bReserved;
 	__le16 wReserved;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
 
+=======
+} __packed;
+
+/* [WUSB] section 8.5.5 */
+>>>>>>> v3.18
 =======
 } __packed;
 
@@ -236,9 +273,12 @@ struct wa_xfer_hwaiso {
 	__le16 wPresentationTime;
 	__le32 dwNumOfPackets;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME: u8 pktdata[]? */
 } __attribute__((packed));
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 struct wa_xfer_packet_info_hwaiso {
@@ -259,6 +299,9 @@ struct wa_xfer_packet_status_hwaiso {
 	u8 bReserved;
 	struct wa_xfer_packet_status_len_hwaiso PacketStatus[0];
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* [WUSB] section 8.3.3.5 */
@@ -268,7 +311,11 @@ struct wa_xfer_abort {
 	__le16 wRPipe;			/* RPipe index */
 	__le32 dwTransferID;		/* Host-assigned ID */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -282,7 +329,11 @@ struct wa_notif_xfer {
 	u8 bEndpoint;
 	u8 Reserved;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -313,7 +364,11 @@ struct wa_xfer_result {
 	u8     bTransferStatus;
 	__le32 dwNumOfPackets;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -332,24 +387,34 @@ struct usb_wa_descriptor {
 	u8	bLength;
 	u8	bDescriptorType;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	bcdWAVersion;
 	u8	bNumPorts;		/* don't use!! */
 	u8	bmAttributes;		/* Reserved == 0 */
 	u16	wNumRPipes;
 	u16	wRPipeMaxBlock;
 =======
+=======
+>>>>>>> v3.18
 	__le16	bcdWAVersion;
 	u8	bNumPorts;		/* don't use!! */
 	u8	bmAttributes;		/* Reserved == 0 */
 	__le16	wNumRPipes;
 	__le16	wRPipeMaxBlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	bRPipeBlockSize;
 	u8	bPwrOn2PwrGood;
 	u8	bNumMMCIEs;
 	u8	DeviceRemovable;	/* FIXME: in DWA this is up to 16 bytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -363,7 +428,11 @@ struct hwa_dev_info {
 	__le16	wPHYRates;
 	u8	bmDeviceAttribute;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18

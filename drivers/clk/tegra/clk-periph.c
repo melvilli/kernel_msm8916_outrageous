@@ -112,6 +112,7 @@ static void clk_periph_disable(struct clk_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tegra_periph_reset_deassert(struct clk *c)
 {
 	struct clk_hw *hw = __clk_get_hw(c);
@@ -154,6 +155,8 @@ EXPORT_SYMBOL(tegra_periph_reset_assert);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 const struct clk_ops tegra_clk_periph_ops = {
 	.get_parent = clk_periph_get_parent,
 	.set_parent = clk_periph_set_parent,
@@ -166,7 +169,11 @@ const struct clk_ops tegra_clk_periph_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct clk_ops tegra_clk_periph_nodiv_ops = {
+=======
+static const struct clk_ops tegra_clk_periph_nodiv_ops = {
+>>>>>>> v3.18
 =======
 static const struct clk_ops tegra_clk_periph_nodiv_ops = {
 >>>>>>> v3.18
@@ -178,11 +185,14 @@ static const struct clk_ops tegra_clk_periph_nodiv_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk *_tegra_clk_register_periph(const char *name,
 			const char **parent_names, int num_parents,
 			struct tegra_clk_periph *periph,
 			void __iomem *clk_base, u32 offset, bool div,
 =======
+=======
+>>>>>>> v3.18
 static const struct clk_ops tegra_clk_periph_no_gate_ops = {
 	.get_parent = clk_periph_get_parent,
 	.set_parent = clk_periph_set_parent,
@@ -195,16 +205,22 @@ static struct clk *_tegra_clk_register_periph(const char *name,
 			const char **parent_names, int num_parents,
 			struct tegra_clk_periph *periph,
 			void __iomem *clk_base, u32 offset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unsigned long flags)
 {
 	struct clk *clk;
 	struct clk_init_data init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	init.name = name;
 	init.ops = div ? &tegra_clk_periph_ops : &tegra_clk_periph_nodiv_ops;
 =======
+=======
+>>>>>>> v3.18
 	struct tegra_clk_periph_regs *bank;
 	bool div = !(periph->gate.flags & TEGRA_PERIPH_NO_DIV);
 
@@ -217,17 +233,26 @@ static struct clk *_tegra_clk_register_periph(const char *name,
 		init.ops = &tegra_clk_periph_ops;
 
 	init.name = name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	init.flags = flags;
 	init.parent_names = parent_names;
 	init.num_parents = num_parents;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bank = get_reg_bank(periph->gate.clk_num);
 	if (!bank)
 		return ERR_PTR(-EINVAL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Data in .init is copied by clk_register(), so stack variable OK */
 	periph->hw.init = &init;
@@ -236,6 +261,11 @@ static struct clk *_tegra_clk_register_periph(const char *name,
 	periph->divider.reg = div ? (clk_base + offset) : NULL;
 	periph->gate.clk_base = clk_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	periph->gate.regs = bank;
+	periph->gate.enable_refcnt = periph_clk_enb_refcnt;
+>>>>>>> v3.18
 =======
 	periph->gate.regs = bank;
 	periph->gate.enable_refcnt = periph_clk_enb_refcnt;
@@ -259,7 +289,11 @@ struct clk *tegra_clk_register_periph(const char *name,
 {
 	return _tegra_clk_register_periph(name, parent_names, num_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			periph, clk_base, offset, true, flags);
+=======
+			periph, clk_base, offset, flags);
+>>>>>>> v3.18
 =======
 			periph, clk_base, offset, flags);
 >>>>>>> v3.18
@@ -271,8 +305,14 @@ struct clk *tegra_clk_register_periph_nodiv(const char *name,
 		u32 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return _tegra_clk_register_periph(name, parent_names, num_parents,
 			periph, clk_base, offset, false, CLK_SET_RATE_PARENT);
+=======
+	periph->gate.flags |= TEGRA_PERIPH_NO_DIV;
+	return _tegra_clk_register_periph(name, parent_names, num_parents,
+			periph, clk_base, offset, CLK_SET_RATE_PARENT);
+>>>>>>> v3.18
 =======
 	periph->gate.flags |= TEGRA_PERIPH_NO_DIV;
 	return _tegra_clk_register_periph(name, parent_names, num_parents,

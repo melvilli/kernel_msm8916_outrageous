@@ -4,12 +4,15 @@
 
 extra-y := vmlinux.lds head_$(BITS).o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y := backtrace.o entry.o irq.o messaging.o \
 	pci-dma.o proc.o process.o ptrace.o reboot.o \
 	setup.o signal.o single_step.o stack.o sys.o sysfs.o time.o traps.o \
 	intvec_$(BITS).o regs_$(BITS).o tile-desc_$(BITS).o
 
 =======
+=======
+>>>>>>> v3.18
 obj-y := backtrace.o entry.o hvglue.o irq.o messaging.o \
 	pci-dma.o proc.o process.o ptrace.o reboot.o \
 	setup.o signal.o single_step.o stack.o sys.o \
@@ -21,6 +24,9 @@ CFLAGS_REMOVE_ftrace.o = -pg
 CFLAGS_REMOVE_early_printk.o = -pg
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_HARDWALL)		+= hardwall.o
 obj-$(CONFIG_COMPAT)		+= compat.o compat_signal.o
@@ -34,8 +40,11 @@ else
 obj-$(CONFIG_PCI)		+= pci.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_TILE_USB)		+= usb.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_PERF_EVENTS)	+= perf_event.o
 obj-$(CONFIG_USE_PMC)		+= pmc.o
 obj-$(CONFIG_TILE_USB)		+= usb.o
@@ -45,4 +54,7 @@ obj-$(CONFIG_KPROBES)		+= kprobes.o
 obj-$(CONFIG_KGDB)		+= kgdb.o
 
 obj-y				+= vdso/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

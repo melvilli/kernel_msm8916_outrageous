@@ -25,7 +25,10 @@
 #include <linux/slab.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -103,12 +106,15 @@ static int cs5345_s_ctrl(struct v4l2_ctrl *ctrl)
 static int cs5345_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->size = 1;
@@ -119,6 +125,7 @@ static int cs5345_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *r
 static int cs5345_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -127,11 +134,14 @@ static int cs5345_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regis
 		return -EPERM;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	cs5345_write(sd, reg->reg & 0x1f, reg->val & 0xff);
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cs5345_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
@@ -140,6 +150,8 @@ static int cs5345_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_iden
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_CS5345, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int cs5345_log_status(struct v4l2_subdev *sd)
@@ -165,7 +177,10 @@ static const struct v4l2_ctrl_ops cs5345_ctrl_ops = {
 static const struct v4l2_subdev_core_ops cs5345_core_ops = {
 	.log_status = cs5345_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = cs5345_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -206,7 +221,11 @@ static int cs5345_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct cs5345_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -226,7 +245,10 @@ static int cs5345_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -250,7 +272,10 @@ static int cs5345_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

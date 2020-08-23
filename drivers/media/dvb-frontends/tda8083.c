@@ -190,7 +190,11 @@ static int tda8083_set_tone (struct tda8083_state* state, fe_sec_tone_mode_t ton
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -206,7 +210,11 @@ static int tda8083_set_voltage (struct tda8083_state* state, fe_sec_voltage_t vo
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

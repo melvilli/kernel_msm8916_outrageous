@@ -35,16 +35,22 @@ static inline void arch_kgdb_breakpoint(void)
  * vm regs = psp+elr+est+badva = 4
  * syscall+restart = 2 more
 <<<<<<< HEAD
+<<<<<<< HEAD
  * so 48 = 42 +4 + 2
  */
 #define DBG_USER_REGS 42
 #define DBG_MAX_REG_NUM (DBG_USER_REGS + 6)
 =======
+=======
+>>>>>>> v3.18
  * also add cs0/1 = 2
  * so 48 = 42 + 4 + 2 + 2
  */
 #define DBG_USER_REGS 42
 #define DBG_MAX_REG_NUM (DBG_USER_REGS + 8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NUMREGBYTES  (DBG_MAX_REG_NUM*4)
 

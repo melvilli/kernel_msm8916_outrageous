@@ -27,6 +27,10 @@
 #include <linux/wait.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/workqueue.h>
+>>>>>>> v3.18
 =======
 #include <linux/workqueue.h>
 >>>>>>> v3.18
@@ -36,13 +40,19 @@
 #define UEVENT_BUFFER_SIZE		2048	/* buffer for the variables */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* path to the userspace helper executed on an event */
 extern char uevent_helper[];
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_UEVENT_HELPER
 /* path to the userspace helper executed on an event */
 extern char uevent_helper[];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* counter to tag the uevent, read only except for the kobject core */
@@ -75,14 +85,20 @@ struct kobject {
 	struct kset		*kset;
 	struct kobj_type	*ktype;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent	*sd;
 	struct kref		kref;
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node	*sd;
 	struct kref		kref;
 #ifdef CONFIG_DEBUG_KOBJECT_RELEASE
 	struct delayed_work	release;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int state_initialized:1;
 	unsigned int state_in_sysfs:1;
@@ -123,6 +139,10 @@ extern struct kobject *kobject_get(struct kobject *kobj);
 extern void kobject_put(struct kobject *kobj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const void *kobject_namespace(struct kobject *kobj);
+>>>>>>> v3.18
 =======
 extern const void *kobject_namespace(struct kobject *kobj);
 >>>>>>> v3.18
@@ -138,6 +158,10 @@ struct kobj_type {
 
 struct kobj_uevent_env {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *argv[3];
+>>>>>>> v3.18
 =======
 	char *argv[3];
 >>>>>>> v3.18

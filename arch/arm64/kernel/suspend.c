@@ -6,13 +6,17 @@
 #include <asm/pgtable.h>
 #include <asm/memory.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mmu_context.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/smp_plat.h>
 #include <asm/suspend.h>
 #include <asm/tlbflush.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int __cpu_suspend(unsigned long);
 /*
@@ -31,6 +35,8 @@ int __cpu_suspend_finisher(unsigned long arg, struct cpu_suspend_ctx *ptr,
 	int cpu = smp_processor_id();
 
 =======
+=======
+>>>>>>> v3.18
 extern int __cpu_suspend_enter(unsigned long arg, int (*fn)(unsigned long));
 /*
  * This is called by __cpu_suspend_enter() to save the state, and do whatever
@@ -44,6 +50,9 @@ extern int __cpu_suspend_enter(unsigned long arg, int (*fn)(unsigned long));
 void notrace __cpu_suspend_save(struct cpu_suspend_ctx *ptr,
 				phys_addr_t *save_ptr)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*save_ptr = virt_to_phys(ptr);
 
@@ -56,8 +65,11 @@ void notrace __cpu_suspend_save(struct cpu_suspend_ctx *ptr,
 	__flush_dcache_area(ptr, sizeof(*ptr));
 	__flush_dcache_area(save_ptr, sizeof(*save_ptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return cpu_ops[cpu]->cpu_suspend(arg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -80,6 +92,7 @@ void __init cpu_suspend_set_dbg_restorer(void (*hw_bp_restore)(void *))
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cpu_suspend
  *
  * @arg: argument to pass to the finisher function
@@ -90,6 +103,8 @@ int cpu_suspend(unsigned long arg)
 	int ret, cpu = smp_processor_id();
 	unsigned long flags;
 =======
+=======
+>>>>>>> v3.18
  * cpu_suspend() - function to enter a low-power state
  * @arg: argument to pass to CPU suspend operations
  *
@@ -99,6 +114,9 @@ int cpu_suspend(unsigned long arg)
 int cpu_suspend(unsigned long arg)
 {
 	int cpu = smp_processor_id();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -108,7 +126,10 @@ int cpu_suspend(unsigned long arg)
 	if (!cpu_ops[cpu] || !cpu_ops[cpu]->cpu_suspend)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return cpu_ops[cpu]->cpu_suspend(arg);
 }
 
@@ -124,6 +145,9 @@ int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 	struct mm_struct *mm = current->active_mm;
 	int ret;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -139,6 +163,7 @@ int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 	 * page tables, so that the thread address space is properly
 	 * set-up on function return.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = __cpu_suspend(arg);
 	if (ret == 0) {
@@ -159,6 +184,11 @@ int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 	if (ret == 0) {
 		cpu_switch_mm(mm->pgd, mm);
 >>>>>>> v3.18
+=======
+	ret = __cpu_suspend_enter(arg, fn);
+	if (ret == 0) {
+		cpu_switch_mm(mm->pgd, mm);
+>>>>>>> v3.18
 		flush_tlb_all();
 
 		/*
@@ -166,7 +196,11 @@ int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 		 * subsystem relying on it has a chance to run.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_my_cpu_offset(per_cpu_offset(cpu));
+=======
+		set_my_cpu_offset(per_cpu_offset(smp_processor_id()));
+>>>>>>> v3.18
 =======
 		set_my_cpu_offset(per_cpu_offset(smp_processor_id()));
 >>>>>>> v3.18
@@ -194,7 +228,11 @@ extern struct sleep_save_sp sleep_save_sp;
 extern phys_addr_t sleep_idmap_phys;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpu_suspend_init(void)
+=======
+static int __init cpu_suspend_init(void)
+>>>>>>> v3.18
 =======
 static int __init cpu_suspend_init(void)
 >>>>>>> v3.18

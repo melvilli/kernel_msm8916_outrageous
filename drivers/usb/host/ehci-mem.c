@@ -94,6 +94,10 @@ static struct ehci_qh *ehci_qh_alloc (struct ehci_hcd *ehci, gfp_t flags)
 	// INIT_LIST_HEAD (&qh->qh_list);
 	INIT_LIST_HEAD (&qh->qtd_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&qh->unlink_node);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&qh->unlink_node);
 >>>>>>> v3.18
@@ -164,9 +168,12 @@ static int ehci_mem_init (struct ehci_hcd *ehci, gfp_t flags)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t align;
 
 	align = ((ehci->pool_64_bit_align) ? 64 : 32);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -175,7 +182,11 @@ static int ehci_mem_init (struct ehci_hcd *ehci, gfp_t flags)
 			ehci_to_hcd(ehci)->self.controller,
 			sizeof (struct ehci_qtd),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			align /* byte alignment (for hw parts) */,
+=======
+			32 /* byte alignment (for hw parts) */,
+>>>>>>> v3.18
 =======
 			32 /* byte alignment (for hw parts) */,
 >>>>>>> v3.18
@@ -189,7 +200,11 @@ static int ehci_mem_init (struct ehci_hcd *ehci, gfp_t flags)
 			ehci_to_hcd(ehci)->self.controller,
 			sizeof(struct ehci_qh_hw),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			align /* byte alignment (for hw parts) */,
+=======
+			32 /* byte alignment (for hw parts) */,
+>>>>>>> v3.18
 =======
 			32 /* byte alignment (for hw parts) */,
 >>>>>>> v3.18
@@ -227,7 +242,11 @@ static int ehci_mem_init (struct ehci_hcd *ehci, gfp_t flags)
 		dma_alloc_coherent (ehci_to_hcd(ehci)->self.controller,
 			ehci->periodic_size * sizeof(__le32),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&ehci->periodic_dma, 0);
+=======
+			&ehci->periodic_dma, flags);
+>>>>>>> v3.18
 =======
 			&ehci->periodic_dma, flags);
 >>>>>>> v3.18
@@ -246,17 +265,23 @@ static int ehci_mem_init (struct ehci_hcd *ehci, gfp_t flags)
 		hw->hw_qtd_next = EHCI_LIST_END(ehci);
 		hw->hw_alt_next = EHCI_LIST_END(ehci);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw->hw_token &= ~QTD_STS_ACTIVE;
 		ehci->dummy->hw = hw;
 
 		for (i = 0; i < ehci->periodic_size; i++)
 			ehci->periodic[i] = ehci->dummy->qh_dma;
 =======
+=======
+>>>>>>> v3.18
 		ehci->dummy->hw = hw;
 
 		for (i = 0; i < ehci->periodic_size; i++)
 			ehci->periodic[i] = cpu_to_hc32(ehci,
 					ehci->dummy->qh_dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		for (i = 0; i < ehci->periodic_size; i++)

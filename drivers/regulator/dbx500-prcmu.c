@@ -79,6 +79,10 @@ void ux500_regulator_suspend_debug(void)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -91,6 +95,10 @@ void ux500_regulator_resume_debug(void)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -136,9 +144,15 @@ static int ux500_regulator_status_print(struct seq_file *s, void *p)
 
 	/* print dump header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = seq_printf(s, "ux500-regulator status:\n");
 	if (err < 0)
 		dev_err(dev, "seq_printf overflow\n");
+=======
+	err = seq_puts(s, "ux500-regulator status:\n");
+	if (err < 0)
+		dev_err(dev, "seq_puts overflow\n");
+>>>>>>> v3.18
 =======
 	err = seq_puts(s, "ux500-regulator status:\n");
 	if (err < 0)
@@ -217,6 +231,7 @@ ux500_regulator_debug_init(struct platform_device *pdev,
 
 	rdebug.state_before_suspend = kzalloc(num_regulators, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rdebug.state_before_suspend) {
 		dev_err(&pdev->dev,
 			"could not allocate memory for saving state\n");
@@ -230,12 +245,17 @@ ux500_regulator_debug_init(struct platform_device *pdev,
 		goto exit_free;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!rdebug.state_before_suspend)
 		goto exit_destroy_power_state;
 
 	rdebug.state_after_suspend = kzalloc(num_regulators, GFP_KERNEL);
 	if (!rdebug.state_after_suspend)
 		goto exit_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dbx500_regulator_testcase(regulator_info, num_regulators);

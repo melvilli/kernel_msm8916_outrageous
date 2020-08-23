@@ -175,6 +175,12 @@ struct nfsd3_readdirres {
 	__be32			status;
 	struct svc_fh		fh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Just to save kmalloc on every readdirplus entry (svc_fh is a
+	 * little large for the stack): */
+	struct svc_fh		scratch;
+>>>>>>> v3.18
 =======
 	/* Just to save kmalloc on every readdirplus entry (svc_fh is a
 	 * little large for the stack): */

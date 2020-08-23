@@ -4,7 +4,11 @@
 
    This is part of rtl8180 OpenSource driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
    Copyright (C) Andrea Merello 2004  <andreamrl@tiscali.it>
+=======
+   Copyright (C) Andrea Merello 2004  <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
    Copyright (C) Andrea Merello 2004  <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -25,6 +29,7 @@
 #include "r8180_93cx6.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void eprom_cs(struct net_device *dev, short bit)
 {
 	if(bit)
@@ -35,6 +40,8 @@ void eprom_cs(struct net_device *dev, short bit)
 		write_nic_byte_E(dev, EPROM_CMD, read_nic_byte_E(dev, EPROM_CMD)\
 			       &~(1<<EPROM_CS_SHIFT)); //disable EPROM
 =======
+=======
+>>>>>>> v3.18
 static void eprom_cs(struct net_device *dev, short bit)
 {
 	u8 cmdreg;
@@ -46,6 +53,9 @@ static void eprom_cs(struct net_device *dev, short bit)
 	else
 		/* disable EPROM */
 		write_nic_byte_E(dev, EPROM_CMD, cmdreg & ~EPROM_CS_BIT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	force_pci_posting(dev);
@@ -53,6 +63,7 @@ static void eprom_cs(struct net_device *dev, short bit)
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void eprom_ck_cycle(struct net_device *dev)
 {
@@ -63,6 +74,8 @@ void eprom_ck_cycle(struct net_device *dev)
 	write_nic_byte_E(dev, EPROM_CMD,
 		       read_nic_byte_E(dev, EPROM_CMD) &~ (1<<EPROM_CK_SHIFT));
 =======
+=======
+>>>>>>> v3.18
 static void eprom_ck_cycle(struct net_device *dev)
 {
 	u8 cmdreg;
@@ -74,12 +87,16 @@ static void eprom_ck_cycle(struct net_device *dev)
 
 	read_nic_byte_E(dev, EPROM_CMD, &cmdreg);
 	write_nic_byte_E(dev, EPROM_CMD, cmdreg & ~EPROM_CK_BIT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	force_pci_posting(dev);
 	udelay(EPROM_DELAY);
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void eprom_w(struct net_device *dev,short bit)
 {
@@ -90,6 +107,8 @@ void eprom_w(struct net_device *dev,short bit)
 		write_nic_byte_E(dev, EPROM_CMD, read_nic_byte_E(dev,EPROM_CMD)\
 			       &~(1<<EPROM_W_SHIFT));
 =======
+=======
+>>>>>>> v3.18
 static void eprom_w(struct net_device *dev, short bit)
 {
 	u8 cmdreg;
@@ -99,6 +118,9 @@ static void eprom_w(struct net_device *dev, short bit)
 		write_nic_byte_E(dev, EPROM_CMD, cmdreg | EPROM_W_BIT);
 	else
 		write_nic_byte_E(dev, EPROM_CMD, cmdreg & ~EPROM_W_BIT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	force_pci_posting(dev);
@@ -106,6 +128,7 @@ static void eprom_w(struct net_device *dev, short bit)
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 short eprom_r(struct net_device *dev)
 {
@@ -116,6 +139,8 @@ short eprom_r(struct net_device *dev)
 
 	if(bit) return 1;
 =======
+=======
+>>>>>>> v3.18
 static short eprom_r(struct net_device *dev)
 {
 	u8 bit;
@@ -126,11 +151,15 @@ static short eprom_r(struct net_device *dev)
 	if (bit & EPROM_R_BIT)
 		return 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void eprom_send_bits_string(struct net_device *dev, short b[], int len)
 {
@@ -138,11 +167,16 @@ void eprom_send_bits_string(struct net_device *dev, short b[], int len)
 
 	for(i=0; i<len; i++){
 =======
+=======
+>>>>>>> v3.18
 static void eprom_send_bits_string(struct net_device *dev, short b[], int len)
 {
 	int i;
 
 	for (i = 0; i < len; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		eprom_w(dev, b[i]);
 		eprom_ck_cycle(dev);
@@ -154,7 +188,11 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 {
 	struct r8192_priv *priv = ieee80211_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short read_cmd[]={1,1,0};
+=======
+	short read_cmd[] = {1, 1, 0};
+>>>>>>> v3.18
 =======
 	short read_cmd[] = {1, 1, 0};
 >>>>>>> v3.18
@@ -164,8 +202,13 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 	u32 ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret=0;
 	//enable EPROM programming
+=======
+	ret = 0;
+	/* enable EPROM programming */
+>>>>>>> v3.18
 =======
 	ret = 0;
 	/* enable EPROM programming */
@@ -175,6 +218,7 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 	force_pci_posting(dev);
 	udelay(EPROM_DELAY);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (priv->epromtype==EPROM_93c56){
 		addr_str[7]=addr & 1;
@@ -195,6 +239,8 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 		addr_str[0]=addr & (1<<5);
 		addr_len=6;
 =======
+=======
+>>>>>>> v3.18
 	if (priv->epromtype == EPROM_93c56) {
 		addr_str[7] = addr & 1;
 		addr_str[6] = addr & (1<<1);
@@ -213,6 +259,9 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 		addr_str[1] = addr & (1<<4);
 		addr_str[0] = addr & (1<<5);
 		addr_len = 6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	eprom_cs(dev, 1);
@@ -220,6 +269,7 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 	eprom_send_bits_string(dev, read_cmd, 3);
 	eprom_send_bits_string(dev, addr_str, addr_len);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//keep chip pin D to low state while reading.
 	//I'm unsure if it is necessary, but anyway shouldn't hurt
@@ -229,6 +279,8 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 		//eeprom needs a clk cycle between writing opcode&adr
 		//and reading data. (eeprom outs a dummy 0)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * keep chip pin D to low state while reading.
 	 * I'm unsure if it is necessary, but anyway shouldn't hurt
@@ -239,6 +291,9 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 		/* eeprom needs a clk cycle between writing opcode&adr
 		 * and reading data. (eeprom outs a dummy 0)
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		eprom_ck_cycle(dev);
 		ret |= (eprom_r(dev)<<(15-i));
@@ -248,7 +303,11 @@ u32 eprom_read(struct net_device *dev, u32 addr)
 	eprom_ck_cycle(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//disable EPROM programming
+=======
+	/* disable EPROM programming */
+>>>>>>> v3.18
 =======
 	/* disable EPROM programming */
 >>>>>>> v3.18

@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/asm-xtensa/mmu_context.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Switch an MMU context.
@@ -11,7 +14,11 @@
  * for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2001 - 2005 Tensilica Inc.
+=======
+ * Copyright (C) 2001 - 2013 Tensilica Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2001 - 2013 Tensilica Inc.
 >>>>>>> v3.18
@@ -28,7 +35,11 @@
 #include <linux/sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <variant/core.h>
+=======
+#include <asm/vectors.h>
+>>>>>>> v3.18
 =======
 #include <asm/vectors.h>
 >>>>>>> v3.18
@@ -38,6 +49,10 @@
 #include <asm/tlbflush.h>
 #include <asm-generic/mm_hooks.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm-generic/percpu.h>
+>>>>>>> v3.18
 =======
 #include <asm-generic/percpu.h>
 >>>>>>> v3.18
@@ -47,12 +62,15 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long asid_cache;
 
 /*
  * NO_CONTEXT is the invalid ASID value that we don't ever assign to
  * any user or kernel context.
 =======
+=======
+>>>>>>> v3.18
 DECLARE_PER_CPU(unsigned long, asid_cache);
 #define cpu_asid_cache(cpu) per_cpu(asid_cache, cpu)
 
@@ -60,6 +78,9 @@ DECLARE_PER_CPU(unsigned long, asid_cache);
  * NO_CONTEXT is the invalid ASID value that we don't ever assign to
  * any user or kernel context.  We use the reserved values in the
  * ASID_INSERT macro below.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * 0 invalid
@@ -75,13 +96,19 @@ DECLARE_PER_CPU(unsigned long, asid_cache);
 #define ASID_INSERT(x)	(0x03020001 | (((x) & ASID_MASK) << 8))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 void init_mmu(void);
 #else
 static inline void init_mmu(void) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void set_rasid_register (unsigned long val)
 {
@@ -96,6 +123,7 @@ static inline unsigned long get_rasid_register (void)
 	return tmp;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void
 __get_new_mmu_context(struct mm_struct *mm)
@@ -113,6 +141,8 @@ __load_mmu_context(struct mm_struct *mm)
 {
 	set_rasid_register(ASID_INSERT(mm->context));
 =======
+=======
+>>>>>>> v3.18
 static inline void get_new_mmu_context(struct mm_struct *mm, unsigned int cpu)
 {
 	unsigned long asid = cpu_asid_cache(cpu);
@@ -148,12 +178,16 @@ static inline void activate_context(struct mm_struct *mm, unsigned int cpu)
 {
 	get_mmu_context(mm, cpu);
 	set_rasid_register(ASID_INSERT(mm->context.asid[cpu]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	invalidate_page_directory();
 }
 
 /*
  * Initialize the context related info for a new mm_struct
+<<<<<<< HEAD
 <<<<<<< HEAD
  * instance.
  */
@@ -194,6 +228,8 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 
 #define deactivate_mm(tsk, mm)	do { } while(0)
 =======
+=======
+>>>>>>> v3.18
  * instance.  Valid cpu values are 0..(NR_CPUS-1), so initializing
  * to -1 says the process has never run on any core.
  */
@@ -225,6 +261,9 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 
 #define activate_mm(prev, next)	switch_mm((prev), (next), NULL)
 #define deactivate_mm(tsk, mm)	do { } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

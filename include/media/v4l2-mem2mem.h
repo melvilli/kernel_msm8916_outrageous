@@ -61,10 +61,13 @@ struct v4l2_m2m_queue_ctx {
 	spinlock_t		rdy_spinlock;
 	u8			num_rdy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct v4l2_m2m_ctx {
 =======
+=======
+>>>>>>> v3.18
 	bool			buffered;
 };
 
@@ -72,6 +75,9 @@ struct v4l2_m2m_ctx {
 	/* optional cap/out vb2 queues lock */
 	struct mutex			*q_lock;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* private: internal use only */
 	struct v4l2_m2m_dev		*m2m_dev;
@@ -102,6 +108,11 @@ struct vb2_queue *v4l2_m2m_get_vq(struct v4l2_m2m_ctx *m2m_ctx,
 				       enum v4l2_buf_type type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx);
+
+>>>>>>> v3.18
 =======
 void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx);
 
@@ -150,7 +161,10 @@ struct v4l2_m2m_ctx *v4l2_m2m_ctx_init(struct v4l2_m2m_dev *m2m_dev,
 		int (*queue_init)(void *priv, struct vb2_queue *src_vq, struct vb2_queue *dst_vq));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void v4l2_m2m_set_src_buffered(struct v4l2_m2m_ctx *m2m_ctx,
 					     bool buffered)
 {
@@ -163,6 +177,9 @@ static inline void v4l2_m2m_set_dst_buffered(struct v4l2_m2m_ctx *m2m_ctx,
 	m2m_ctx->cap_q_ctx.buffered = buffered;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void v4l2_m2m_ctx_release(struct v4l2_m2m_ctx *m2m_ctx);
 
@@ -247,7 +264,10 @@ static inline void *v4l2_m2m_dst_buf_remove(struct v4l2_m2m_ctx *m2m_ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* v4l2 ioctl helpers */
 
 int v4l2_m2m_ioctl_reqbufs(struct file *file, void *priv,
@@ -269,6 +289,9 @@ int v4l2_m2m_ioctl_streamoff(struct file *file, void *fh,
 int v4l2_m2m_fop_mmap(struct file *file, struct vm_area_struct *vma);
 unsigned int v4l2_m2m_fop_poll(struct file *file, poll_table *wait);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _MEDIA_V4L2_MEM2MEM_H */
 

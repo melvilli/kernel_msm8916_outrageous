@@ -684,7 +684,11 @@ against nested writers.
 
 The above will update the tail page if it is still pointing to the expected
 <<<<<<< HEAD
+<<<<<<< HEAD
 page. If this fails, a nested write pushed it forward, the the current write
+=======
+page. If this fails, a nested write pushed it forward, the current write
+>>>>>>> v3.18
 =======
 page. If this fails, a nested write pushed it forward, the current write
 >>>>>>> v3.18

@@ -3,10 +3,16 @@
 
 #include <linux/fb.h>	/* for struct fb_var_screeninfo for sis.h */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../video/sis/vgatypes.h"
 #include "../../video/sis/sis.h"		/* for LCD_TYPE */
 
 #ifndef XGI_VB_CHIP_TYPE
+=======
+#include "../../video/fbdev/sis/vgatypes.h"
+#include "../../video/fbdev/sis/sis.h"		/* for LCD_TYPE */
+
+>>>>>>> v3.18
 =======
 #include "../../video/fbdev/sis/vgatypes.h"
 #include "../../video/fbdev/sis/sis.h"		/* for LCD_TYPE */
@@ -26,7 +32,10 @@ enum XGI_VB_CHIP_TYPE {
 	MAX_VB_CHIP
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

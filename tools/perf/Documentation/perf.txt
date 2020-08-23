@@ -9,8 +9,11 @@ SYNOPSIS
 --------
 [verse]
 <<<<<<< HEAD
+<<<<<<< HEAD
 'perf' [--version] [--help] COMMAND [ARGS]
 =======
+=======
+>>>>>>> v3.18
 'perf' [--version] [--help] [OPTIONS] COMMAND [ARGS]
 
 OPTIONS
@@ -20,6 +23,9 @@ OPTIONS
 	range (0, 10). Use like:
 	  --debug verbose   # sets verbose = 1
 	  --debug verbose=2 # sets verbose = 2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DESCRIPTION

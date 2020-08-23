@@ -65,7 +65,11 @@ int crypto_sha1_update(struct shash_desc *desc, const u8 *data,
 		} while (done + SHA1_BLOCK_SIZE <= len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(temp, 0, sizeof(temp));
+=======
+		memzero_explicit(temp, sizeof(temp));
+>>>>>>> v3.18
 =======
 		memzero_explicit(temp, sizeof(temp));
 >>>>>>> v3.18
@@ -158,8 +162,12 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA1 Secure Hash Algorithm");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha1");
 MODULE_ALIAS_CRYPTO("sha1-generic");
+=======
+MODULE_ALIAS("sha1");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha1");
 >>>>>>> v3.18

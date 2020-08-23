@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -82,12 +92,15 @@
 #define IWL_ACTIVE_QUIET_TIME 10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __le16 iwl_mvm_scan_rx_chain(struct iwl_mvm *mvm)
 {
 	u16 rx_chain;
 	u8 rx_ant = iwl_fw_valid_rx_ant(mvm->fw);
 
 =======
+=======
+>>>>>>> v3.18
 struct iwl_mvm_scan_params {
 	u32 max_out_time;
 	u32 suspend_time;
@@ -107,6 +120,9 @@ static inline __le16 iwl_mvm_scan_rx_chain(struct iwl_mvm *mvm)
 		rx_ant = mvm->scan_rx_ant;
 	else
 		rx_ant = mvm->fw->valid_rx_ant;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rx_chain = rx_ant << PHY_RX_CHAIN_VALID_POS;
 	rx_chain |= rx_ant << PHY_RX_CHAIN_FORCE_MIMO_SEL_POS;
@@ -115,6 +131,7 @@ static inline __le16 iwl_mvm_scan_rx_chain(struct iwl_mvm *mvm)
 	return cpu_to_le16(rx_chain);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline __le32 iwl_mvm_scan_max_out_time(struct ieee80211_vif *vif)
 {
@@ -141,6 +158,11 @@ static __le32 iwl_mvm_scan_rxon_flags(enum ieee80211_band band)
 {
 	if (band == IEEE80211_BAND_2GHZ)
 >>>>>>> v3.18
+=======
+static __le32 iwl_mvm_scan_rxon_flags(enum ieee80211_band band)
+{
+	if (band == IEEE80211_BAND_2GHZ)
+>>>>>>> v3.18
 		return cpu_to_le32(PHY_BAND_24);
 	else
 		return cpu_to_le32(PHY_BAND_5);
@@ -154,7 +176,11 @@ iwl_mvm_scan_rate_n_flags(struct iwl_mvm *mvm, enum ieee80211_band band,
 
 	mvm->scan_last_antenna_idx =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iwl_mvm_next_antenna(mvm, iwl_fw_valid_tx_ant(mvm->fw),
+=======
+		iwl_mvm_next_antenna(mvm, mvm->fw->valid_tx_ant,
+>>>>>>> v3.18
 =======
 		iwl_mvm_next_antenna(mvm, mvm->fw->valid_tx_ant,
 >>>>>>> v3.18
@@ -175,6 +201,7 @@ iwl_mvm_scan_rate_n_flags(struct iwl_mvm *mvm, enum ieee80211_band band,
  * request.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void iwl_mvm_scan_fill_ssids(struct iwl_scan_cmd *cmd,
 				    struct cfg80211_scan_request *req)
 {
@@ -188,6 +215,8 @@ static void iwl_mvm_scan_fill_ssids(struct iwl_scan_cmd *cmd,
 		       req->ssids[req_idx].ssid,
 		       req->ssids[req_idx].ssid_len);
 =======
+=======
+>>>>>>> v3.18
 static void iwl_mvm_scan_fill_ssids(struct iwl_ssid_ie *cmd_ssid,
 				    struct cfg80211_ssid *ssids,
 				    int n_ssids, int first)
@@ -201,6 +230,9 @@ static void iwl_mvm_scan_fill_ssids(struct iwl_ssid_ie *cmd_ssid,
 		memcpy(cmd_ssid[fw_idx].ssid,
 		       ssids[req_idx].ssid,
 		       ssids[req_idx].ssid_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -212,7 +244,13 @@ static void iwl_mvm_scan_fill_ssids(struct iwl_ssid_ie *cmd_ssid,
  * In order to notify the FW of the number of SSIDs we wish to scan (including
  * the zero-length one), we need to set the corresponding bits in chan->type,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * one for each SSID, and set the active bit (first).
+=======
+ * one for each SSID, and set the active bit (first). If the first SSID is
+ * already included in the probe template, so we need to set only
+ * req->n_ssids - 1 bits in addition to the first bit.
+>>>>>>> v3.18
 =======
  * one for each SSID, and set the active bit (first). If the first SSID is
  * already included in the probe template, so we need to set only
@@ -223,8 +261,13 @@ static u16 iwl_mvm_get_active_dwell(enum ieee80211_band band, int n_ssids)
 {
 	if (band == IEEE80211_BAND_2GHZ)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 30  + 3 * (n_ssids + 1);
 	return 20  + 2 * (n_ssids + 1);
+=======
+		return 20  + 3 * (n_ssids + 1);
+	return 10  + 2 * (n_ssids + 1);
+>>>>>>> v3.18
 =======
 		return 20  + 3 * (n_ssids + 1);
 	return 10  + 2 * (n_ssids + 1);
@@ -237,6 +280,7 @@ static u16 iwl_mvm_get_passive_dwell(enum ieee80211_band band)
 }
 
 static void iwl_mvm_scan_fill_channels(struct iwl_scan_cmd *cmd,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				       struct cfg80211_scan_request *req)
 {
@@ -255,6 +299,8 @@ static void iwl_mvm_scan_fill_channels(struct iwl_scan_cmd *cmd,
 		chan->active_dwell = cpu_to_le16(active_dwell);
 		chan->passive_dwell = cpu_to_le16(passive_dwell);
 =======
+=======
+>>>>>>> v3.18
 				       struct cfg80211_scan_request *req,
 				       bool basic_ssid,
 				       struct iwl_mvm_scan_params *params)
@@ -275,6 +321,9 @@ static void iwl_mvm_scan_fill_channels(struct iwl_scan_cmd *cmd,
 			chan->type &= cpu_to_le32(~SCAN_CHANNEL_TYPE_ACTIVE);
 		chan->active_dwell = cpu_to_le16(params->dwell[band].active);
 		chan->passive_dwell = cpu_to_le16(params->dwell[band].passive);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		chan->iteration_count = cpu_to_le16(1);
 		chan++;
@@ -292,7 +341,12 @@ static void iwl_mvm_scan_fill_channels(struct iwl_scan_cmd *cmd,
 static u16 iwl_mvm_fill_probe_req(struct ieee80211_mgmt *frame, const u8 *ta,
 				  int n_ssids, const u8 *ssid, int ssid_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const u8 *ie, int ie_len,
+=======
+				  const u8 *band_ie, int band_ie_len,
+				  const u8 *common_ie, int common_ie_len,
+>>>>>>> v3.18
 =======
 				  const u8 *band_ie, int band_ie_len,
 				  const u8 *common_ie, int common_ie_len,
@@ -337,6 +391,7 @@ static u16 iwl_mvm_fill_probe_req(struct ieee80211_mgmt *frame, const u8 *ta,
 	len += ssid_len + 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(left < ie_len))
 		return len;
 
@@ -344,6 +399,8 @@ static u16 iwl_mvm_fill_probe_req(struct ieee80211_mgmt *frame, const u8 *ta,
 		memcpy(pos, ie, ie_len);
 		len += ie_len;
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON(left < band_ie_len + common_ie_len))
 		return len;
 
@@ -357,6 +414,9 @@ static u16 iwl_mvm_fill_probe_req(struct ieee80211_mgmt *frame, const u8 *ta,
 		memcpy(pos, common_ie, common_ie_len);
 		pos += common_ie_len;
 		len += common_ie_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -364,7 +424,10 @@ static u16 iwl_mvm_fill_probe_req(struct ieee80211_mgmt *frame, const u8 *ta,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void iwl_mvm_scan_condition_iterator(void *data, u8 *mac,
 					    struct ieee80211_vif *vif)
 {
@@ -489,6 +552,9 @@ int iwl_mvm_max_scan_ie_len(struct iwl_mvm *mvm, bool is_sched_scan)
 	return max_ie_len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 			 struct ieee80211_vif *vif,
@@ -499,7 +565,10 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 		.len = { 0, },
 		.data = { mvm->scan_cmd, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.dataflags = { IWL_HCMD_DFL_NOCOPY, },
@@ -509,6 +578,7 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	u32 status;
 	int ssid_len = 0;
 	u8 *ssid = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	lockdep_assert_held(&mvm->mutex);
@@ -520,6 +590,8 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	       mvm->fw->ucode_capa.max_probe_length +
 	       (MAX_NUM_SCAN_CHANNELS * sizeof(struct iwl_scan_channel)));
 =======
+=======
+>>>>>>> v3.18
 	bool basic_ssid = !(mvm->fw->ucode_capa.flags &
 			   IWL_UCODE_TLV_FLAGS_NO_BASIC_SSID);
 	struct iwl_mvm_scan_params params = {};
@@ -533,6 +605,9 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	IWL_DEBUG_SCAN(mvm, "Handling mac80211 scan request\n");
 	mvm->scan_status = IWL_MVM_SCAN_OS;
 	memset(cmd, 0, ksize(cmd));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cmd->channel_count = (u8)req->n_channels;
@@ -540,10 +615,13 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	cmd->quiet_plcp_th = cpu_to_le16(IWL_PLCP_QUIET_THRESH);
 	cmd->rxchain_sel_flags = iwl_mvm_scan_rx_chain(mvm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->max_out_time = iwl_mvm_scan_max_out_time(vif);
 	cmd->suspend_time = iwl_mvm_scan_suspend_time(vif);
 	cmd->rxon_flags = iwl_mvm_scan_rxon_flags(req);
 =======
+=======
+>>>>>>> v3.18
 
 	iwl_mvm_scan_calc_params(mvm, vif, req->n_ssids, req->flags, &params);
 	cmd->max_out_time = cpu_to_le32(params.max_out_time);
@@ -552,6 +630,9 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 		cmd->scan_flags |= SCAN_FLAGS_FRAGMENTED_SCAN;
 
 	cmd->rxon_flags = iwl_mvm_scan_rxon_flags(req->channels[0]->band);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd->filter_flags = cpu_to_le32(MAC_FILTER_ACCEPT_GRP |
 					MAC_FILTER_IN_BEACON);
@@ -562,12 +643,15 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 		cmd->type = cpu_to_le32(SCAN_TYPE_FORCED);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * TODO: This is a WA due to a bug in the FW AUX framework that does not
 	 * properly handle time events that fail to be scheduled
 	 */
 	cmd->type = cpu_to_le32(SCAN_TYPE_FORCED);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmd->repeats = cpu_to_le32(1);
@@ -578,6 +662,7 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	 */
 	if (req->n_ssids > 0) {
 		cmd->passive2active = cpu_to_le16(1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ssid = req->ssids[0].ssid;
 		ssid_len = req->ssids[0].ssid_len;
@@ -590,6 +675,8 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	cmd->tx_cmd.tx_flags = cpu_to_le32(TX_CMD_FLG_SEQ_CTL |
 					   TX_CMD_FLG_BT_DIS);
 =======
+=======
+>>>>>>> v3.18
 		cmd->scan_flags |= SCAN_FLAGS_PASSIVE2ACTIVE;
 		if (basic_ssid) {
 			ssid = req->ssids[0].ssid;
@@ -606,6 +693,9 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 	cmd->tx_cmd.tx_flags = cpu_to_le32(TX_CMD_FLG_SEQ_CTL |
 					   3 << TX_CMD_FLG_BT_PRIO_POS);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd->tx_cmd.sta_id = mvm->aux_sta.sta_id;
 	cmd->tx_cmd.life_time = cpu_to_le32(TX_CMD_LIFE_TIME_INFINITE);
@@ -619,15 +709,21 @@ int iwl_mvm_scan_request(struct iwl_mvm *mvm,
 			    vif->addr,
 			    req->n_ssids, ssid, ssid_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    req->ie, req->ie_len,
 			    mvm->fw->ucode_capa.max_probe_length));
 
 	iwl_mvm_scan_fill_channels(cmd, req);
 =======
+=======
+>>>>>>> v3.18
 			    req->ie, req->ie_len, NULL, 0,
 			    mvm->fw->ucode_capa.max_probe_length));
 
 	iwl_mvm_scan_fill_channels(cmd, req, basic_ssid, &params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cmd->len = cpu_to_le16(sizeof(struct iwl_scan_cmd) +
@@ -671,6 +767,7 @@ int iwl_mvm_rx_scan_complete(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	struct iwl_scan_complete_notif *notif = (void *)pkt->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IWL_DEBUG_SCAN(mvm, "Scan complete: status=0x%x scanned channels=%d\n",
 		       notif->status, notif->scanned_channels);
 
@@ -678,6 +775,8 @@ int iwl_mvm_rx_scan_complete(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	ieee80211_scan_completed(mvm->hw, notif->status != SCAN_COMP_STATUS_OK);
 
 =======
+=======
+>>>>>>> v3.18
 	lockdep_assert_held(&mvm->mutex);
 
 	IWL_DEBUG_SCAN(mvm, "Scan complete: status=0x%x scanned channels=%d\n",
@@ -715,6 +814,9 @@ int iwl_mvm_rx_scan_offload_results(struct iwl_mvm *mvm,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -737,12 +839,18 @@ static bool iwl_mvm_scan_abort_notif(struct iwl_notif_wait_data *notif_wait,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If scan cannot be aborted, it means that we had a
 		 * SCAN_COMPLETE_NOTIFICATION in the pipe and it called
 		 * ieee80211_scan_completed already.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		IWL_DEBUG_SCAN(mvm, "Scan cannot be aborted, exit now: %d\n",
 			       *resp);
@@ -761,7 +869,11 @@ static bool iwl_mvm_scan_abort_notif(struct iwl_notif_wait_data *notif_wait,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iwl_mvm_cancel_scan(struct iwl_mvm *mvm)
+=======
+static int iwl_mvm_cancel_regular_scan(struct iwl_mvm *mvm)
+>>>>>>> v3.18
 =======
 static int iwl_mvm_cancel_regular_scan(struct iwl_mvm *mvm)
 >>>>>>> v3.18
@@ -776,6 +888,7 @@ static int iwl_mvm_cancel_regular_scan(struct iwl_mvm *mvm)
 				   ARRAY_SIZE(scan_abort_notif),
 				   iwl_mvm_scan_abort_notif, NULL);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = iwl_mvm_send_cmd_pdu(mvm, SCAN_ABORT_CMD, CMD_SYNC, 0, NULL);
 	if (ret) {
@@ -792,6 +905,8 @@ static int iwl_mvm_cancel_regular_scan(struct iwl_mvm *mvm)
 out_remove_notif:
 	iwl_remove_notification(&mvm->notif_wait, &wait_scan_abort);
 =======
+=======
+>>>>>>> v3.18
 	ret = iwl_mvm_send_cmd_pdu(mvm, SCAN_ABORT_CMD, 0, 0, NULL);
 	if (ret) {
 		IWL_ERR(mvm, "Couldn't send SCAN_ABORT_CMD: %d\n", ret);
@@ -1588,5 +1703,8 @@ int iwl_mvm_cancel_scan(struct iwl_mvm *mvm)
 	if (mvm->fw->ucode_capa.api[0] & IWL_UCODE_TLV_API_LMAC_SCAN)
 		return iwl_mvm_scan_offload_stop(mvm, true);
 	return iwl_mvm_cancel_regular_scan(mvm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

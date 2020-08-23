@@ -20,6 +20,10 @@
 #include <linux/pagemap.h>
 #include <linux/vfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/falloc.h>
+>>>>>>> v3.18
 =======
 #include <linux/falloc.h>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 #include "cifsproto.h"
 #include "cifs_debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cifs_unicode.h"
+>>>>>>> v3.18
 =======
 #include "cifs_unicode.h"
 >>>>>>> v3.18
@@ -57,6 +65,7 @@ change_conf(struct TCP_Server_Info *server)
 	default:
 		server->echoes = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (enable_oplocks) {
 			server->oplocks = true;
 			server->oplock_credits = 1;
@@ -64,6 +73,11 @@ change_conf(struct TCP_Server_Info *server)
 			server->oplocks = false;
 
 		server->echo_credits = 1;
+=======
+		server->oplocks = true;
+		server->echo_credits = 1;
+		server->oplock_credits = 1;
+>>>>>>> v3.18
 =======
 		server->oplocks = true;
 		server->echo_credits = 1;
@@ -130,7 +144,10 @@ smb2_get_credits(struct mid_q_entry *mid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 smb2_wait_mtu_credits(struct TCP_Server_Info *server, unsigned int size,
 		      unsigned int *num, unsigned int *credits)
@@ -178,6 +195,9 @@ smb2_wait_mtu_credits(struct TCP_Server_Info *server, unsigned int size,
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __u64
 smb2_get_next_mid(struct TCP_Server_Info *server)
@@ -250,8 +270,14 @@ smb2_negotiate_wsize(struct cifs_tcon *tcon, struct smb_vol *volume_info)
 	wsize = volume_info->wsize ? volume_info->wsize : CIFS_DEFAULT_IOSIZE;
 	wsize = min_t(unsigned int, wsize, server->max_write);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set it to the maximum buffer size value we can send with 1 credit */
 	wsize = min_t(unsigned int, wsize, SMB2_MAX_BUFFER_SIZE);
+=======
+
+	if (!(server->capabilities & SMB2_GLOBAL_CAP_LARGE_MTU))
+		wsize = min_t(unsigned int, wsize, SMB2_MAX_BUFFER_SIZE);
+>>>>>>> v3.18
 =======
 
 	if (!(server->capabilities & SMB2_GLOBAL_CAP_LARGE_MTU))
@@ -271,8 +297,14 @@ smb2_negotiate_rsize(struct cifs_tcon *tcon, struct smb_vol *volume_info)
 	rsize = volume_info->rsize ? volume_info->rsize : CIFS_DEFAULT_IOSIZE;
 	rsize = min_t(unsigned int, rsize, server->max_read);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set it to the maximum buffer size value we can send with 1 credit */
 	rsize = min_t(unsigned int, rsize, SMB2_MAX_BUFFER_SIZE);
+=======
+
+	if (!(server->capabilities & SMB2_GLOBAL_CAP_LARGE_MTU))
+		rsize = min_t(unsigned int, rsize, SMB2_MAX_BUFFER_SIZE);
+>>>>>>> v3.18
 =======
 
 	if (!(server->capabilities & SMB2_GLOBAL_CAP_LARGE_MTU))
@@ -283,7 +315,10 @@ smb2_negotiate_rsize(struct cifs_tcon *tcon, struct smb_vol *volume_info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CIFS_STATS2
 static int
 SMB3_request_interfaces(const unsigned int xid, struct cifs_tcon *tcon)
@@ -375,6 +410,9 @@ smb2_qfs_tcon(const unsigned int xid, struct cifs_tcon *tcon)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 smb2_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
@@ -382,14 +420,20 @@ smb2_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 {
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64 persistent_fid, volatile_fid;
 	__le16 *utf16_path;
 	__u8 oplock = SMB2_OPLOCK_LEVEL_NONE;
 =======
+=======
+>>>>>>> v3.18
 	__le16 *utf16_path;
 	__u8 oplock = SMB2_OPLOCK_LEVEL_NONE;
 	struct cifs_open_parms oparms;
 	struct cifs_fid fid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	utf16_path = cifs_convert_path_to_utf16(full_path, cifs_sb);
@@ -397,9 +441,12 @@ smb2_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = SMB2_open(xid, tcon, utf16_path, &persistent_fid, &volatile_fid,
 		       FILE_READ_ATTRIBUTES, FILE_OPEN, 0, 0, &oplock, NULL);
 =======
+=======
+>>>>>>> v3.18
 	oparms.tcon = tcon;
 	oparms.desired_access = FILE_READ_ATTRIBUTES;
 	oparms.disposition = FILE_OPEN;
@@ -408,6 +455,9 @@ smb2_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 	oparms.reconnect = false;
 
 	rc = SMB2_open(xid, &oparms, utf16_path, &oplock, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc) {
 		kfree(utf16_path);
@@ -415,7 +465,11 @@ smb2_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = SMB2_close(xid, tcon, persistent_fid, volatile_fid);
+=======
+	rc = SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fid);
+>>>>>>> v3.18
 =======
 	rc = SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fid);
 >>>>>>> v3.18
@@ -472,7 +526,10 @@ smb2_clear_stats(struct cifs_tcon *tcon)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 smb2_dump_share_caps(struct seq_file *m, struct cifs_tcon *tcon)
 {
 	seq_puts(m, "\n\tShare Capabilities:");
@@ -504,6 +561,9 @@ smb2_dump_share_caps(struct seq_file *m, struct cifs_tcon *tcon)
 }
 
 static void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 smb2_print_stats(struct seq_file *m, struct cifs_tcon *tcon)
 {
@@ -517,7 +577,10 @@ smb2_print_stats(struct seq_file *m, struct cifs_tcon *tcon)
 		   atomic_read(&sent[SMB2_SESSION_SETUP_HE]),
 		   atomic_read(&failed[SMB2_SESSION_SETUP_HE]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMB2LOGOFF		0x0002 /* trivial request/resp */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	seq_printf(m, "\nLogoffs: %d sent %d failed",
@@ -579,11 +642,14 @@ smb2_set_fid(struct cifsFileInfo *cfile, struct cifs_fid *fid, __u32 oplock)
 {
 	struct cifsInodeInfo *cinode = CIFS_I(cfile->dentry->d_inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfile->fid.persistent_fid = fid->persistent_fid;
 	cfile->fid.volatile_fid = fid->volatile_fid;
 	smb2_set_oplock_level(cinode, oplock);
 	cinode->can_cache_brlcks = cinode->clientCanCacheAll;
 =======
+=======
+>>>>>>> v3.18
 	struct TCP_Server_Info *server = tlink_tcon(cfile->tlink)->ses->server;
 
 	cfile->fid.persistent_fid = fid->persistent_fid;
@@ -591,6 +657,9 @@ smb2_set_fid(struct cifsFileInfo *cfile, struct cifs_fid *fid, __u32 oplock)
 	server->ops->set_oplock_level(cinode, oplock, fid->epoch,
 				      &fid->purge_cache);
 	cinode->can_cache_brlcks = CIFS_CACHE_WRITE(cinode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -603,7 +672,10 @@ smb2_close_file(const unsigned int xid, struct cifs_tcon *tcon,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 SMB2_request_res_key(const unsigned int xid, struct cifs_tcon *tcon,
 		     u64 persistent_fid, u64 volatile_fid,
 		     struct copychunk_ioctl *pcchunk)
@@ -755,6 +827,9 @@ cchunk_out:
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 smb2_flush_file(const unsigned int xid, struct cifs_tcon *tcon,
 		struct cifs_fid *fid)
@@ -779,6 +854,7 @@ smb2_read_data_length(char *buf)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 smb2_sync_read(const unsigned int xid, struct cifsFileInfo *cfile,
 	       struct cifs_io_parms *parms, unsigned int *bytes_read,
 	       char **buf, int *buf_type)
@@ -786,19 +862,28 @@ smb2_sync_read(const unsigned int xid, struct cifsFileInfo *cfile,
 	parms->persistent_fid = cfile->fid.persistent_fid;
 	parms->volatile_fid = cfile->fid.volatile_fid;
 =======
+=======
+>>>>>>> v3.18
 smb2_sync_read(const unsigned int xid, struct cifs_fid *pfid,
 	       struct cifs_io_parms *parms, unsigned int *bytes_read,
 	       char **buf, int *buf_type)
 {
 	parms->persistent_fid = pfid->persistent_fid;
 	parms->volatile_fid = pfid->volatile_fid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return SMB2_read(xid, parms, bytes_read, buf, buf_type);
 }
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 smb2_sync_write(const unsigned int xid, struct cifsFileInfo *cfile,
+=======
+smb2_sync_write(const unsigned int xid, struct cifs_fid *pfid,
+>>>>>>> v3.18
 =======
 smb2_sync_write(const unsigned int xid, struct cifs_fid *pfid,
 >>>>>>> v3.18
@@ -807,12 +892,15 @@ smb2_sync_write(const unsigned int xid, struct cifs_fid *pfid,
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parms->persistent_fid = cfile->fid.persistent_fid;
 	parms->volatile_fid = cfile->fid.volatile_fid;
 	return SMB2_write(xid, parms, written, iov, nr_segs);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	parms->persistent_fid = pfid->persistent_fid;
 	parms->volatile_fid = pfid->volatile_fid;
 	return SMB2_write(xid, parms, written, iov, nr_segs);
@@ -864,6 +952,9 @@ static bool smb2_set_sparse(const unsigned int xid, struct cifs_tcon *tcon,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 smb2_set_file_size(const unsigned int xid, struct cifs_tcon *tcon,
@@ -871,9 +962,12 @@ smb2_set_file_size(const unsigned int xid, struct cifs_tcon *tcon,
 {
 	__le64 eof = cpu_to_le64(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return SMB2_set_eof(xid, tcon, cfile->fid.persistent_fid,
 			    cfile->fid.volatile_fid, cfile->pid, &eof);
 =======
+=======
+>>>>>>> v3.18
 	struct inode *inode;
 
 	/*
@@ -899,6 +993,9 @@ smb2_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
 {
 	return SMB2_set_compression(xid, tcon, cfile->fid.persistent_fid,
 			    cfile->fid.volatile_fid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -912,7 +1009,11 @@ smb2_query_dir_first(const unsigned int xid, struct cifs_tcon *tcon,
 	int rc;
 	__u8 oplock = SMB2_OPLOCK_LEVEL_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64 persistent_fid, volatile_fid;
+=======
+	struct cifs_open_parms oparms;
+>>>>>>> v3.18
 =======
 	struct cifs_open_parms oparms;
 >>>>>>> v3.18
@@ -922,10 +1023,13 @@ smb2_query_dir_first(const unsigned int xid, struct cifs_tcon *tcon,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = SMB2_open(xid, tcon, utf16_path, &persistent_fid, &volatile_fid,
 		       FILE_READ_ATTRIBUTES | FILE_READ_DATA, FILE_OPEN, 0, 0,
 		       &oplock, NULL);
 =======
+=======
+>>>>>>> v3.18
 	oparms.tcon = tcon;
 	oparms.desired_access = FILE_READ_ATTRIBUTES | FILE_READ_DATA;
 	oparms.disposition = FILE_OPEN;
@@ -934,6 +1038,9 @@ smb2_query_dir_first(const unsigned int xid, struct cifs_tcon *tcon,
 	oparms.reconnect = false;
 
 	rc = SMB2_open(xid, &oparms, utf16_path, &oplock, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(utf16_path);
 	if (rc) {
@@ -944,6 +1051,7 @@ smb2_query_dir_first(const unsigned int xid, struct cifs_tcon *tcon,
 	srch_inf->entries_in_buffer = 0;
 	srch_inf->index_of_last_entry = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fid->persistent_fid = persistent_fid;
 	fid->volatile_fid = volatile_fid;
 
@@ -953,12 +1061,17 @@ smb2_query_dir_first(const unsigned int xid, struct cifs_tcon *tcon,
 		cifs_dbg(VFS, "query directory failed\n");
 		SMB2_close(xid, tcon, persistent_fid, volatile_fid);
 =======
+=======
+>>>>>>> v3.18
 
 	rc = SMB2_query_directory(xid, tcon, fid->persistent_fid,
 				  fid->volatile_fid, 0, srch_inf);
 	if (rc) {
 		cifs_dbg(VFS, "query directory failed\n");
 		SMB2_close(xid, tcon, fid->persistent_fid, fid->volatile_fid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return rc;
@@ -1013,7 +1126,11 @@ smb2_oplock_response(struct cifs_tcon *tcon, struct cifs_fid *fid,
 	return SMB2_oplock_break(0, tcon, fid->persistent_fid,
 				 fid->volatile_fid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 cinode->clientCanCacheRead ? 1 : 0);
+=======
+				 CIFS_CACHE_READ(cinode) ? 1 : 0);
+>>>>>>> v3.18
 =======
 				 CIFS_CACHE_READ(cinode) ? 1 : 0);
 >>>>>>> v3.18
@@ -1024,6 +1141,7 @@ smb2_queryfs(const unsigned int xid, struct cifs_tcon *tcon,
 	     struct kstatfs *buf)
 {
 	int rc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u64 persistent_fid, volatile_fid;
 	__le16 srch_path = 0; /* Null - open root of share */
@@ -1037,6 +1155,8 @@ smb2_queryfs(const unsigned int xid, struct cifs_tcon *tcon,
 	rc = SMB2_QFS_info(xid, tcon, persistent_fid, volatile_fid, buf);
 	SMB2_close(xid, tcon, persistent_fid, volatile_fid);
 =======
+=======
+>>>>>>> v3.18
 	__le16 srch_path = 0; /* Null - open root of share */
 	u8 oplock = SMB2_OPLOCK_LEVEL_NONE;
 	struct cifs_open_parms oparms;
@@ -1056,6 +1176,9 @@ smb2_queryfs(const unsigned int xid, struct cifs_tcon *tcon,
 	rc = SMB2_QFS_info(xid, tcon, fid.persistent_fid, fid.volatile_fid,
 			   buf);
 	SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -1097,7 +1220,10 @@ smb2_new_lease_key(struct cifs_fid *fid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 smb2_query_symlink(const unsigned int xid, struct cifs_tcon *tcon,
 		   const char *full_path, char **target_path,
@@ -1455,6 +1581,9 @@ smb2_wp_retry_size(struct inode *inode)
 		     SMB2_MAX_BUFFER_SIZE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool
 smb2_dir_needs_close(struct cifsFileInfo *cfile)
@@ -1463,7 +1592,11 @@ smb2_dir_needs_close(struct cifsFileInfo *cfile)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct smb_version_operations smb21_operations = {
+=======
+struct smb_version_operations smb20_operations = {
+>>>>>>> v3.18
 =======
 struct smb_version_operations smb20_operations = {
 >>>>>>> v3.18
@@ -1476,6 +1609,10 @@ struct smb_version_operations smb20_operations = {
 	.get_credits_field = smb2_get_credits_field,
 	.get_credits = smb2_get_credits,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.wait_mtu_credits = cifs_wait_mtu_credits,
+>>>>>>> v3.18
 =======
 	.wait_mtu_credits = cifs_wait_mtu_credits,
 >>>>>>> v3.18
@@ -1490,6 +1627,10 @@ struct smb_version_operations smb20_operations = {
 	.print_stats = smb2_print_stats,
 	.is_oplock_break = smb2_is_valid_oplock_break,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.downgrade_oplock = smb2_downgrade_oplock,
+>>>>>>> v3.18
 =======
 	.downgrade_oplock = smb2_downgrade_oplock,
 >>>>>>> v3.18
@@ -1502,6 +1643,10 @@ struct smb_version_operations smb20_operations = {
 	.tree_connect = SMB2_tcon,
 	.tree_disconnect = SMB2_tdis,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.qfs_tcon = smb2_qfs_tcon,
+>>>>>>> v3.18
 =======
 	.qfs_tcon = smb2_qfs_tcon,
 >>>>>>> v3.18
@@ -1515,6 +1660,10 @@ struct smb_version_operations smb20_operations = {
 	.set_file_size = smb2_set_file_size,
 	.set_file_info = smb2_set_file_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_compression = smb2_set_compression,
+>>>>>>> v3.18
 =======
 	.set_compression = smb2_set_compression,
 >>>>>>> v3.18
@@ -1525,6 +1674,10 @@ struct smb_version_operations smb20_operations = {
 	.rename = smb2_rename_path,
 	.create_hardlink = smb2_create_hardlink,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.query_symlink = smb2_query_symlink,
+>>>>>>> v3.18
 =======
 	.query_symlink = smb2_query_symlink,
 >>>>>>> v3.18
@@ -1551,10 +1704,13 @@ struct smb_version_operations smb20_operations = {
 	.new_lease_key = smb2_new_lease_key,
 	.calc_signature = smb2_calc_signature,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dir_needs_close = smb2_dir_needs_close,
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.is_read_op = smb2_is_read_op,
 	.set_oplock_level = smb2_set_oplock_level,
 	.create_lease_buf = smb2_create_lease_buf,
@@ -1643,6 +1799,9 @@ struct smb_version_operations smb21_operations = {
 	.wp_retry_size = smb2_wp_retry_size,
 	.dir_needs_close = smb2_dir_needs_close,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct smb_version_operations smb30_operations = {
@@ -1655,6 +1814,10 @@ struct smb_version_operations smb30_operations = {
 	.get_credits_field = smb2_get_credits_field,
 	.get_credits = smb2_get_credits,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.wait_mtu_credits = smb2_wait_mtu_credits,
+>>>>>>> v3.18
 =======
 	.wait_mtu_credits = smb2_wait_mtu_credits,
 >>>>>>> v3.18
@@ -1668,7 +1831,13 @@ struct smb_version_operations smb30_operations = {
 	.clear_stats = smb2_clear_stats,
 	.print_stats = smb2_print_stats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.is_oplock_break = smb2_is_valid_oplock_break,
+=======
+	.dump_share_caps = smb2_dump_share_caps,
+	.is_oplock_break = smb2_is_valid_oplock_break,
+	.downgrade_oplock = smb2_downgrade_oplock,
+>>>>>>> v3.18
 =======
 	.dump_share_caps = smb2_dump_share_caps,
 	.is_oplock_break = smb2_is_valid_oplock_break,
@@ -1683,6 +1852,10 @@ struct smb_version_operations smb30_operations = {
 	.tree_connect = SMB2_tcon,
 	.tree_disconnect = SMB2_tdis,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.qfs_tcon = smb3_qfs_tcon,
+>>>>>>> v3.18
 =======
 	.qfs_tcon = smb3_qfs_tcon,
 >>>>>>> v3.18
@@ -1696,6 +1869,10 @@ struct smb_version_operations smb30_operations = {
 	.set_file_size = smb2_set_file_size,
 	.set_file_info = smb2_set_file_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_compression = smb2_set_compression,
+>>>>>>> v3.18
 =======
 	.set_compression = smb2_set_compression,
 >>>>>>> v3.18
@@ -1706,6 +1883,12 @@ struct smb_version_operations smb30_operations = {
 	.rename = smb2_rename_path,
 	.create_hardlink = smb2_create_hardlink,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.query_symlink = smb2_query_symlink,
+	.query_mf_symlink = smb3_query_mf_symlink,
+	.create_mf_symlink = smb3_create_mf_symlink,
+>>>>>>> v3.18
 =======
 	.query_symlink = smb2_query_symlink,
 	.query_mf_symlink = smb3_query_mf_symlink,
@@ -1733,9 +1916,12 @@ struct smb_version_operations smb30_operations = {
 	.set_lease_key = smb2_set_lease_key,
 	.new_lease_key = smb2_new_lease_key,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.calc_signature = smb3_calc_signature,
 	.dir_needs_close = smb2_dir_needs_close,
 =======
+=======
+>>>>>>> v3.18
 	.generate_signingkey = generate_smb3signingkey,
 	.calc_signature = smb3_calc_signature,
 	.is_read_op = smb21_is_read_op,
@@ -1747,6 +1933,9 @@ struct smb_version_operations smb30_operations = {
 	.wp_retry_size = smb2_wp_retry_size,
 	.dir_needs_close = smb2_dir_needs_close,
 	.fallocate = smb3_fallocate,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1766,7 +1955,13 @@ struct smb_version_values smb20_values = {
 	.cap_nt_find = SMB2_NT_FIND,
 	.cap_large_files = SMB2_LARGE_FILES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.oplock_read = SMB2_OPLOCK_LEVEL_II,
+=======
+	.signing_enabled = SMB2_NEGOTIATE_SIGNING_ENABLED | SMB2_NEGOTIATE_SIGNING_REQUIRED,
+	.signing_required = SMB2_NEGOTIATE_SIGNING_REQUIRED,
+	.create_lease_size = sizeof(struct create_lease),
+>>>>>>> v3.18
 =======
 	.signing_enabled = SMB2_NEGOTIATE_SIGNING_ENABLED | SMB2_NEGOTIATE_SIGNING_REQUIRED,
 	.signing_required = SMB2_NEGOTIATE_SIGNING_REQUIRED,
@@ -1790,7 +1985,13 @@ struct smb_version_values smb21_values = {
 	.cap_nt_find = SMB2_NT_FIND,
 	.cap_large_files = SMB2_LARGE_FILES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.oplock_read = SMB2_OPLOCK_LEVEL_II,
+=======
+	.signing_enabled = SMB2_NEGOTIATE_SIGNING_ENABLED | SMB2_NEGOTIATE_SIGNING_REQUIRED,
+	.signing_required = SMB2_NEGOTIATE_SIGNING_REQUIRED,
+	.create_lease_size = sizeof(struct create_lease),
+>>>>>>> v3.18
 =======
 	.signing_enabled = SMB2_NEGOTIATE_SIGNING_ENABLED | SMB2_NEGOTIATE_SIGNING_REQUIRED,
 	.signing_required = SMB2_NEGOTIATE_SIGNING_REQUIRED,
@@ -1814,8 +2015,11 @@ struct smb_version_values smb30_values = {
 	.cap_nt_find = SMB2_NT_FIND,
 	.cap_large_files = SMB2_LARGE_FILES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.oplock_read = SMB2_OPLOCK_LEVEL_II,
 =======
+=======
+>>>>>>> v3.18
 	.signing_enabled = SMB2_NEGOTIATE_SIGNING_ENABLED | SMB2_NEGOTIATE_SIGNING_REQUIRED,
 	.signing_required = SMB2_NEGOTIATE_SIGNING_REQUIRED,
 	.create_lease_size = sizeof(struct create_lease_v2),
@@ -1839,5 +2043,8 @@ struct smb_version_values smb302_values = {
 	.signing_enabled = SMB2_NEGOTIATE_SIGNING_ENABLED | SMB2_NEGOTIATE_SIGNING_REQUIRED,
 	.signing_required = SMB2_NEGOTIATE_SIGNING_REQUIRED,
 	.create_lease_size = sizeof(struct create_lease_v2),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

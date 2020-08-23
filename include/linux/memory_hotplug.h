@@ -13,9 +13,12 @@ struct mem_section;
 struct memory_block;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long movable_reserved_start, movable_reserved_size;
 extern unsigned long low_power_memory_start, low_power_memory_size;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_MEMORY_HOTPLUG
@@ -33,18 +36,24 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Types for control the zone type of onlined memory */
 enum {
 	ONLINE_KEEP,
 	ONLINE_KERNEL,
 	ONLINE_MOVABLE,
 =======
+=======
+>>>>>>> v3.18
 /* Types for control the zone type of onlined and offlined memory */
 enum {
 	MMOP_OFFLINE = -1,
 	MMOP_ONLINE_KEEP,
 	MMOP_ONLINE_KERNEL,
 	MMOP_ONLINE_MOVABLE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -99,6 +108,10 @@ extern int add_one_highpage(struct page *page, int pfn, int bad_ppro);
 /* VM interface that may be used by firmware interface */
 extern int online_pages(unsigned long, unsigned long, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int test_pages_in_a_zone(unsigned long, unsigned long);
+>>>>>>> v3.18
 =======
 extern int test_pages_in_a_zone(unsigned long, unsigned long);
 >>>>>>> v3.18
@@ -114,6 +127,11 @@ extern void __online_page_increment_counters(struct page *page);
 extern void __online_page_free(struct page *page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int try_online_node(int nid);
+
+>>>>>>> v3.18
 =======
 extern int try_online_node(int nid);
 
@@ -210,6 +228,7 @@ extern void get_page_bootmem(unsigned long ingo, struct page *page,
 			     unsigned long type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Lock for memory hotplug guarantees 1) all callbacks for memory hotplug
  * notifier will be called under this. 2) offline/online/add/remove memory
@@ -218,6 +237,10 @@ extern void get_page_bootmem(unsigned long ingo, struct page *page,
 
 void lock_memory_hotplug(void);
 void unlock_memory_hotplug(void);
+=======
+void get_online_mems(void);
+void put_online_mems(void);
+>>>>>>> v3.18
 =======
 void get_online_mems(void);
 void put_online_mems(void);
@@ -255,9 +278,12 @@ static inline void register_page_bootmem_info_node(struct pglist_data *pgdat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void lock_memory_hotplug(void) {}
 static inline void unlock_memory_hotplug(void) {}
 =======
+=======
+>>>>>>> v3.18
 static inline int try_online_node(int nid)
 {
 	return 0;
@@ -265,6 +291,9 @@ static inline int try_online_node(int nid)
 
 static inline void get_online_mems(void) {}
 static inline void put_online_mems(void) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* ! CONFIG_MEMORY_HOTPLUG */
@@ -274,6 +303,11 @@ static inline void put_online_mems(void) {}
 extern int is_mem_section_removable(unsigned long pfn, unsigned long nr_pages);
 extern void try_offline_node(int nid);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int offline_pages(unsigned long start_pfn, unsigned long nr_pages);
+extern void remove_memory(int nid, u64 start, u64 size);
+>>>>>>> v3.18
 =======
 extern int offline_pages(unsigned long start_pfn, unsigned long nr_pages);
 extern void remove_memory(int nid, u64 start, u64 size);
@@ -288,6 +322,7 @@ static inline int is_mem_section_removable(unsigned long pfn,
 
 static inline void try_offline_node(int nid) {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MEMORY_HOTREMOVE */
 
 extern int mem_online_node(int nid);
@@ -300,6 +335,8 @@ extern int remove_memory(int nid, u64 start, u64 size);
 extern int sparse_add_one_section(struct zone *zone, unsigned long start_pfn,
 								int nr_pages);
 =======
+=======
+>>>>>>> v3.18
 
 static inline int offline_pages(unsigned long start_pfn, unsigned long nr_pages)
 {
@@ -318,6 +355,9 @@ extern int offline_pages(unsigned long start_pfn, unsigned long nr_pages);
 extern bool is_memblock_offlined(struct memory_block *mem);
 extern void remove_memory(int nid, u64 start, u64 size);
 extern int sparse_add_one_section(struct zone *zone, unsigned long start_pfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void sparse_remove_one_section(struct zone *zone, struct mem_section *ms);
 extern struct page *sparse_decode_mem_map(unsigned long coded_mem_map,
@@ -325,11 +365,14 @@ extern struct page *sparse_decode_mem_map(unsigned long coded_mem_map,
 
 #endif /* __LINUX_MEMORY_HOTPLUG_H */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int physical_remove_memory(u64 start, u64 size);
 extern int arch_physical_remove_memory(u64 start, u64 size);
 extern int physical_low_power_memory(u64 start, u64 size);
 extern int arch_physical_low_power_memory(u64 start, u64 size);
 extern int physical_active_memory(u64 start, u64 size);
 extern int arch_physical_active_memory(u64 start, u64 size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

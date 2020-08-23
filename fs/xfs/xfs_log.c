@@ -18,19 +18,26 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_sb.h"
 #include "xfs_ag.h"
 #include "xfs_mount.h"
 #include "xfs_error.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "xfs_log_priv.h"
 #include "xfs_buf_item.h"
@@ -41,17 +48,26 @@
 #include "xfs_trans_priv.h"
 #include "xfs_dinode.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_trans.h"
 #include "xfs_trans_priv.h"
 #include "xfs_log.h"
 #include "xfs_log_priv.h"
 #include "xfs_log_recover.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_inode.h"
 #include "xfs_trace.h"
 #include "xfs_fsops.h"
 #include "xfs_cksum.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "xfs_sysfs.h"
+>>>>>>> v3.18
 =======
 #include "xfs_sysfs.h"
 >>>>>>> v3.18
@@ -277,7 +293,12 @@ xlog_grant_head_wait(
 	struct xlog_grant_head	*head,
 	struct xlog_ticket	*tic,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			need_bytes)
+=======
+	int			need_bytes) __releases(&head->lock)
+					    __acquires(&head->lock)
+>>>>>>> v3.18
 =======
 	int			need_bytes) __releases(&head->lock)
 					    __acquires(&head->lock)
@@ -309,7 +330,11 @@ xlog_grant_head_wait(
 shutdown:
 	list_del_init(&tic->t_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return XFS_ERROR(EIO);
+=======
+	return -EIO;
+>>>>>>> v3.18
 =======
 	return -EIO;
 >>>>>>> v3.18
@@ -407,7 +432,11 @@ xfs_log_regrant(
 
 	if (XLOG_FORCED_SHUTDOWN(log))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -480,7 +509,11 @@ xfs_log_reserve(
 
 	if (XLOG_FORCED_SHUTDOWN(log))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -492,7 +525,11 @@ xfs_log_reserve(
 				KM_SLEEP | KM_MAYFAIL);
 	if (!tic)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(ENOMEM);
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -632,7 +669,11 @@ xfs_log_release_iclog(
 	if (xlog_state_release_iclog(mp->m_log, iclog)) {
 		xfs_force_shutdown(mp, SHUTDOWN_LOG_IO_ERROR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return EIO;
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -659,6 +700,7 @@ xfs_log_mount(
 	int		num_bblks)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		error;
 
 	if (!(mp->m_flags & XFS_MOUNT_NORECOVERY))
@@ -667,6 +709,8 @@ xfs_log_mount(
 		xfs_notice(mp,
 "Mounting filesystem in no-recovery mode.  Filesystem will be inconsistent.");
 =======
+=======
+>>>>>>> v3.18
 	int		error = 0;
 	int		min_logfsbs;
 
@@ -677,6 +721,9 @@ xfs_log_mount(
 		xfs_notice(mp,
 "Mounting V%d filesystem in no-recovery mode. Filesystem will be inconsistent.",
 			   XFS_SB_VERSION_NUM(&mp->m_sb));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ASSERT(mp->m_flags & XFS_MOUNT_RDONLY);
 	}
@@ -684,7 +731,11 @@ xfs_log_mount(
 	mp->m_log = xlog_alloc_log(mp, log_target, blk_offset, num_bblks);
 	if (IS_ERR(mp->m_log)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -PTR_ERR(mp->m_log);
+=======
+		error = PTR_ERR(mp->m_log);
+>>>>>>> v3.18
 =======
 		error = PTR_ERR(mp->m_log);
 >>>>>>> v3.18
@@ -693,7 +744,10 @@ xfs_log_mount(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Validate the given log space and drop a critical message via syslog
 	 * if the log size is too small that would lead to some unexpected
 	 * situations in transaction log space reservation stage.
@@ -738,6 +792,9 @@ xfs_log_mount(
 	}
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Initialize the AIL now we have a log.
 	 */
@@ -770,12 +827,18 @@ xfs_log_mount(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	error = xfs_sysfs_init(&mp->m_log->l_kobj, &xfs_log_ktype, &mp->m_kobj,
 			       "log");
 	if (error)
 		goto out_destroy_ail;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Normal transactions can now occur */
 	mp->m_log->l_flags &= ~XLOG_ACTIVE_RECOVERY;
@@ -837,7 +900,11 @@ xfs_log_mount_finish(xfs_mount_t *mp)
  * data section where the "Un" was really a magic number (XLOG_UNMOUNT_TYPE).
  * We just write the magic number now since that particular field isn't
 <<<<<<< HEAD
+<<<<<<< HEAD
  * currently architecture converted and "nUmount" is a bit foo.
+=======
+ * currently architecture converted and "Unmount" is a bit foo.
+>>>>>>> v3.18
 =======
  * currently architecture converted and "Unmount" is a bit foo.
 >>>>>>> v3.18
@@ -1022,6 +1089,12 @@ xfs_log_unmount(
 
 	xfs_trans_ail_destroy(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	xfs_sysfs_del(&mp->m_log->l_kobj);
+
+>>>>>>> v3.18
 =======
 
 	xfs_sysfs_del(&mp->m_log->l_kobj);
@@ -1081,6 +1154,7 @@ xfs_log_space_wake(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Determine if we have a transaction that has gone to disk
  * that needs to be covered. To begin the transition to the idle state
  * firstly the log needs to be idle (no AIL and nothing in the iclogs).
@@ -1093,6 +1167,8 @@ xfs_log_space_wake(
  * the log at the end of the sync, hence if a crash occurrs avoids replay
  * of transactions where the metadata is already on disk.
 =======
+=======
+>>>>>>> v3.18
  * Determine if we have a transaction that has gone to disk that needs to be
  * covered. To begin the transition to the idle state firstly the log needs to
  * be idle. That means the CIL, the AIL and the iclogs needs to be empty before
@@ -1108,14 +1184,22 @@ xfs_log_space_wake(
  * tail of the log is pinned by an item that is modified in the CIL.  Hence
  * there's no point in running a dummy transaction at this point because we
  * can't start trying to idle the log until both the CIL and AIL are empty.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int
 xfs_log_need_covered(xfs_mount_t *mp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		needed = 0;
 	struct xlog	*log = mp->m_log;
+=======
+	struct xlog	*log = mp->m_log;
+	int		needed = 0;
+>>>>>>> v3.18
 =======
 	struct xlog	*log = mp->m_log;
 	int		needed = 0;
@@ -1125,6 +1209,12 @@ xfs_log_need_covered(xfs_mount_t *mp)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!xlog_cil_empty(log))
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (!xlog_cil_empty(log))
 		return 0;
@@ -1139,6 +1229,7 @@ xfs_log_need_covered(xfs_mount_t *mp)
 	case XLOG_STATE_COVER_NEED:
 	case XLOG_STATE_COVER_NEED2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!xfs_ail_min_lsn(log->l_ailp) &&
 		    xlog_iclogs_empty(log)) {
 			if (log->l_covered_state == XLOG_STATE_COVER_NEED)
@@ -1148,6 +1239,8 @@ xfs_log_need_covered(xfs_mount_t *mp)
 		}
 		/* FALLTHRU */
 =======
+=======
+>>>>>>> v3.18
 		if (xfs_ail_min_lsn(log->l_ailp))
 			break;
 		if (!xlog_iclogs_empty(log))
@@ -1159,6 +1252,9 @@ xfs_log_need_covered(xfs_mount_t *mp)
 		else
 			log->l_covered_state = XLOG_STATE_COVER_DONE2;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		needed = 1;
@@ -1192,6 +1288,10 @@ xlog_assign_tail_lsn_locked(
 	else
 		tail_lsn = atomic64_read(&log->l_last_sync_lsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_xfs_log_assign_tail_lsn(log, tail_lsn);
+>>>>>>> v3.18
 =======
 	trace_xfs_log_assign_tail_lsn(log, tail_lsn);
 >>>>>>> v3.18
@@ -1282,7 +1382,11 @@ xlog_iodone(xfs_buf_t *bp)
 	 * Race to shutdown the filesystem if we see an error.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (XFS_TEST_ERROR((xfs_buf_geterror(bp)), l->l_mp,
+=======
+	if (XFS_TEST_ERROR(bp->b_error, l->l_mp,
+>>>>>>> v3.18
 =======
 	if (XFS_TEST_ERROR(bp->b_error, l->l_mp,
 >>>>>>> v3.18
@@ -1304,12 +1408,15 @@ xlog_iodone(xfs_buf_t *bp)
 	ASSERT(XFS_BUF_ISASYNC(bp));
 	xlog_state_done_syncing(iclog, aborted);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * do not reference the buffer (bp) here as we could race
 	 * with it being freed after writing the unmount record to the
 	 * log.
 	 */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * drop the buffer lock now that we are done. Nothing references
@@ -1318,6 +1425,9 @@ xlog_iodone(xfs_buf_t *bp)
 	 * (bp) after the unlock as we could race with it being freed.
 	 */
 	xfs_buf_unlock(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1442,7 +1552,11 @@ xlog_alloc_log(
 	xfs_buf_t		*bp;
 	int			i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			error = ENOMEM;
+=======
+	int			error = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int			error = -ENOMEM;
 >>>>>>> v3.18
@@ -1473,7 +1587,11 @@ xlog_alloc_log(
 	xlog_grant_head_init(&log->l_write_head);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = EFSCORRUPTED;
+=======
+	error = -EFSCORRUPTED;
+>>>>>>> v3.18
 =======
 	error = -EFSCORRUPTED;
 >>>>>>> v3.18
@@ -1506,6 +1624,7 @@ xlog_alloc_log(
 	xlog_get_iclog_buffer_size(mp, log);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ENOMEM;
 	bp = xfs_buf_alloc(mp->m_logdev_targp, 0, BTOBB(log->l_iclog_size), 0);
 	if (!bp)
@@ -1513,6 +1632,8 @@ xlog_alloc_log(
 	bp->b_iodone = xlog_iodone;
 	ASSERT(xfs_buf_islocked(bp));
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Use a NULL block for the extra log buffer used during splits so that
 	 * it will trigger errors if we ever try to do IO on it without first
@@ -1533,6 +1654,9 @@ xlog_alloc_log(
 	xfs_buf_unlock(bp);
 
 	bp->b_iodone = xlog_iodone;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	log->l_xbuf = bp;
 
@@ -1563,6 +1687,12 @@ xlog_alloc_log(
 			goto out_free_iclog;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ASSERT(xfs_buf_islocked(bp));
+		xfs_buf_unlock(bp);
+
+>>>>>>> v3.18
 =======
 		ASSERT(xfs_buf_islocked(bp));
 		xfs_buf_unlock(bp);
@@ -1593,7 +1723,10 @@ xlog_alloc_log(
 		iclog->ic_datap = (char *)iclog->ic_data + log->l_iclog_hsize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ASSERT(xfs_buf_islocked(iclog->ic_bp));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		init_waitqueue_head(&iclog->ic_force_wait);
@@ -1622,7 +1755,11 @@ out_free_log:
 	kmem_free(log);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ERR_PTR(-error);
+=======
+	return ERR_PTR(error);
+>>>>>>> v3.18
 =======
 	return ERR_PTR(error);
 >>>>>>> v3.18
@@ -1809,13 +1946,19 @@ xlog_cksum(
  * iclogs to disk. This is because we don't want anymore new transactions to be
  * started or completed afterwards.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * We lock the iclogbufs here so that we can serialise against IO completion
  * during unmount. We might be processing a shutdown triggered during unmount,
  * and that can occur asynchronously to the unmount thread, and hence we need to
  * ensure that completes before tearing down the iclogbufs. Hence we need to
  * hold the buffer lock across the log IO to acheive that.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 STATIC int
@@ -1824,6 +1967,7 @@ xlog_bdstrat(
 {
 	struct xlog_in_core	*iclog = bp->b_fspriv;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (iclog->ic_state & XLOG_STATE_IOERROR) {
 		xfs_buf_ioerror(bp, EIO);
@@ -1834,6 +1978,8 @@ xlog_bdstrat(
 		 * the log state machine to propagate I/O errors instead of
 		 * doing it here.
 =======
+=======
+>>>>>>> v3.18
 	xfs_buf_lock(bp);
 	if (iclog->ic_state & XLOG_STATE_IOERROR) {
 		xfs_buf_ioerror(bp, -EIO);
@@ -1844,13 +1990,20 @@ xlog_bdstrat(
 		 * the log state machine to propagate I/O errors instead of
 		 * doing it here. Similarly, IO completion will unlock the
 		 * buffer, so we don't do it here.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		return 0;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_buf_iorequest(bp);
+=======
+	xfs_buf_submit(bp);
+>>>>>>> v3.18
 =======
 	xfs_buf_submit(bp);
 >>>>>>> v3.18
@@ -2051,10 +2204,13 @@ xlog_dealloc_log(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * always need to ensure that the extra buffer does not point to memory
 	 * owned by another log buffer before we free it.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	 * Cycle all the iclogbuf locks to make sure all log IO completion
 	 * is done before we tear down these buffers.
 	 */
@@ -2072,13 +2228,20 @@ xlog_dealloc_log(
 	 */
 	xfs_buf_lock(log->l_xbuf);
 	xfs_buf_unlock(log->l_xbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xfs_buf_set_empty(log->l_xbuf, BTOBB(log->l_iclog_size));
 	xfs_buf_free(log->l_xbuf);
 
 	iclog = log->l_iclog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i<log->l_iclog_bufs; i++) {
+=======
+	for (i = 0; i < log->l_iclog_bufs; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < log->l_iclog_bufs; i++) {
 >>>>>>> v3.18
@@ -2216,7 +2379,11 @@ xlog_print_tic_res(
 	for (i = 0; i < ticket->t_res_num; i++) {
 		uint r_type = ticket->t_res_arr[i].r_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xfs_warn(mp, "region[%u]: %s - %u bytes\n", i,
+=======
+		xfs_warn(mp, "region[%u]: %s - %u bytes", i,
+>>>>>>> v3.18
 =======
 		xfs_warn(mp, "region[%u]: %s - %u bytes", i,
 >>>>>>> v3.18
@@ -2228,7 +2395,11 @@ xlog_print_tic_res(
 	xfs_alert_tag(mp, XFS_PTAG_LOGRES,
 		"xlog_write: reservation ran out. Need to up reservation");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_force_shutdown(mp, SHUTDOWN_CORRUPT_INCORE);
+=======
+	xfs_force_shutdown(mp, SHUTDOWN_LOG_IO_ERROR);
+>>>>>>> v3.18
 =======
 	xfs_force_shutdown(mp, SHUTDOWN_LOG_IO_ERROR);
 >>>>>>> v3.18
@@ -2254,11 +2425,17 @@ xlog_write_calc_vec_length(
 
 	for (lv = log_vector; lv; lv = lv->lv_next) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* we don't write ordered log vectors */
 		if (lv->lv_buf_len == XFS_LOG_VEC_ORDERED)
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		headers += lv->lv_niovecs;
 
@@ -2338,7 +2515,11 @@ xlog_write_setup_ophdr(
  * to handle region write split across multiple log buffers - this
  * state is kept external to this function so that this code can
 <<<<<<< HEAD
+<<<<<<< HEAD
  * can be written in an obvious, self documenting manner.
+=======
+ * be written in an obvious, self documenting manner.
+>>>>>>> v3.18
 =======
  * be written in an obvious, self documenting manner.
 >>>>>>> v3.18
@@ -2518,7 +2699,11 @@ xlog_write(
 	lv = log_vector;
 	vecp = lv->lv_iovecp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (lv && index < lv->lv_niovecs) {
+=======
+	while (lv && (!lv->lv_niovecs || index < lv->lv_niovecs)) {
+>>>>>>> v3.18
 =======
 	while (lv && (!lv->lv_niovecs || index < lv->lv_niovecs)) {
 >>>>>>> v3.18
@@ -2542,8 +2727,13 @@ xlog_write(
 		 * of space which was allocated by xlog_state_get_iclog_space().
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (lv && index < lv->lv_niovecs) {
 			struct xfs_log_iovec	*reg = &vecp[index];
+=======
+		while (lv && (!lv->lv_niovecs || index < lv->lv_niovecs)) {
+			struct xfs_log_iovec	*reg;
+>>>>>>> v3.18
 =======
 		while (lv && (!lv->lv_niovecs || index < lv->lv_niovecs)) {
 			struct xfs_log_iovec	*reg;
@@ -2553,8 +2743,11 @@ xlog_write(
 			int			copy_len;
 			int			copy_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 			bool			ordered = false;
 
 			/* ordered log vectors have no regions to write */
@@ -2565,6 +2758,9 @@ xlog_write(
 			}
 
 			reg = &vecp[index];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ASSERT(reg->i_len % sizeof(__int32_t) == 0);
 			ASSERT((unsigned long)ptr % sizeof(__int32_t) == 0);
@@ -2579,7 +2775,11 @@ xlog_write(
 			ophdr = xlog_write_setup_ophdr(log, ptr, ticket, flags);
 			if (!ophdr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return XFS_ERROR(EIO);
+=======
+				return -EIO;
+>>>>>>> v3.18
 =======
 				return -EIO;
 >>>>>>> v3.18
@@ -2630,6 +2830,10 @@ xlog_write(
 
 			if (++index == lv->lv_niovecs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+next_lv:
+>>>>>>> v3.18
 =======
 next_lv:
 >>>>>>> v3.18
@@ -2639,7 +2843,11 @@ next_lv:
 					vecp = lv->lv_iovecp;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (record_cnt == 0) {
+=======
+			if (record_cnt == 0 && ordered == false) {
+>>>>>>> v3.18
 =======
 			if (record_cnt == 0 && ordered == false) {
 >>>>>>> v3.18
@@ -3089,7 +3297,11 @@ restart:
 	if (XLOG_FORCED_SHUTDOWN(log)) {
 		spin_unlock(&log->l_icloglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -3281,7 +3493,11 @@ xlog_state_release_iclog(
 
 	if (iclog->ic_state & XLOG_STATE_IOERROR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -3293,7 +3509,11 @@ xlog_state_release_iclog(
 	if (iclog->ic_state & XLOG_STATE_IOERROR) {
 		spin_unlock(&log->l_icloglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -3414,7 +3634,11 @@ _xfs_log_force(
 	if (iclog->ic_state & XLOG_STATE_IOERROR) {
 		spin_unlock(&log->l_icloglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -3456,7 +3680,11 @@ _xfs_log_force(
 
 				if (xlog_state_release_iclog(log, iclog))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					return XFS_ERROR(EIO);
+=======
+					return -EIO;
+>>>>>>> v3.18
 =======
 					return -EIO;
 >>>>>>> v3.18
@@ -3496,7 +3724,11 @@ maybe_sleep:
 		if (iclog->ic_state & XLOG_STATE_IOERROR) {
 			spin_unlock(&log->l_icloglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EIO);
+=======
+			return -EIO;
+>>>>>>> v3.18
 =======
 			return -EIO;
 >>>>>>> v3.18
@@ -3510,7 +3742,11 @@ maybe_sleep:
 		 */
 		if (iclog->ic_state & XLOG_STATE_IOERROR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EIO);
+=======
+			return -EIO;
+>>>>>>> v3.18
 =======
 			return -EIO;
 >>>>>>> v3.18
@@ -3582,7 +3818,11 @@ try_again:
 	if (iclog->ic_state & XLOG_STATE_IOERROR) {
 		spin_unlock(&log->l_icloglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -3637,7 +3877,11 @@ try_again:
 			spin_unlock(&log->l_icloglock);
 			if (xlog_state_release_iclog(log, iclog))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return XFS_ERROR(EIO);
+=======
+				return -EIO;
+>>>>>>> v3.18
 =======
 				return -EIO;
 >>>>>>> v3.18
@@ -3656,7 +3900,11 @@ try_again:
 			if (iclog->ic_state & XLOG_STATE_IOERROR) {
 				spin_unlock(&log->l_icloglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return XFS_ERROR(EIO);
+=======
+				return -EIO;
+>>>>>>> v3.18
 =======
 				return -EIO;
 >>>>>>> v3.18
@@ -3670,7 +3918,11 @@ try_again:
 			 */
 			if (iclog->ic_state & XLOG_STATE_IOERROR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return XFS_ERROR(EIO);
+=======
+				return -EIO;
+>>>>>>> v3.18
 =======
 				return -EIO;
 >>>>>>> v3.18
@@ -3757,6 +4009,7 @@ xfs_log_ticket_get(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Allocate and initialise a new log ticket.
  */
 struct xlog_ticket *
@@ -3776,6 +4029,8 @@ xlog_ticket_alloc(
 	if (!tic)
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
  * Figure out the total log space unit (in bytes) that would be
  * required for a log ticket.
  */
@@ -3787,6 +4042,9 @@ xfs_log_calc_unit_res(
 	struct xlog		*log = mp->m_log;
 	int			iclog_space;
 	uint			num_headers;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -3863,6 +4121,7 @@ xfs_log_calc_unit_res(
 
 	/* for roundoff padding for transaction data and one for commit record */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xfs_sb_version_haslogv2(&log->l_mp->m_sb) &&
 	    log->l_mp->m_sb.sb_logsunit > 1) {
 		/* log su roundoff */
@@ -3878,6 +4137,8 @@ xfs_log_calc_unit_res(
 	tic->t_unit_res		= unit_bytes;
 	tic->t_curr_res		= unit_bytes;
 =======
+=======
+>>>>>>> v3.18
 	if (xfs_sb_version_haslogv2(&mp->m_sb) && mp->m_sb.sb_logsunit > 1) {
 		/* log su roundoff */
 		unit_bytes += 2 * mp->m_sb.sb_logsunit;
@@ -3915,6 +4176,9 @@ xlog_ticket_alloc(
 	INIT_LIST_HEAD(&tic->t_queue);
 	tic->t_unit_res		= unit_res;
 	tic->t_curr_res		= unit_res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tic->t_cnt		= cnt;
 	tic->t_ocnt		= cnt;
@@ -4060,11 +4324,17 @@ xlog_verify_iclog(
 	spin_lock(&log->l_icloglock);
 	icptr = log->l_iclog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i < log->l_iclog_bufs; i++) {
 		if (icptr == NULL)
 			xfs_emerg(log->l_mp, "%s: invalid ptr", __func__);
 		icptr = icptr->ic_next;
 	}
+=======
+	for (i = 0; i < log->l_iclog_bufs; i++, icptr = icptr->ic_next)
+		ASSERT(icptr);
+
+>>>>>>> v3.18
 =======
 	for (i = 0; i < log->l_iclog_bufs; i++, icptr = icptr->ic_next)
 		ASSERT(icptr);
@@ -4172,6 +4442,7 @@ xlog_state_ioerror(
  * shutting down the filesystem, typically because of an IO error.
  * Our main objectives here are to make sure that:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	a. the filesystem gets marked 'SHUTDOWN' for all interested
  *	   parties to find out, 'atomically'.
  *	b. those who're sleeping on log reservations, pinned objects and
@@ -4185,6 +4456,8 @@ xlog_state_ioerror(
  * to be done before the log is marked as shutdown, otherwise the flush to the
  * iclogs will fail.
 =======
+=======
+>>>>>>> v3.18
  *	a. if !logerror, flush the logs to disk. Anything modified
  *	   after this is ignored.
  *	b. the filesystem gets marked 'SHUTDOWN' for all interested
@@ -4196,6 +4469,9 @@ xlog_state_ioerror(
  * Note: for the !logerror case we need to flush the regions held in memory out
  * to disk first. This needs to be done before the log is marked as shutdown,
  * otherwise the iclog writes will fail.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int
@@ -4229,6 +4505,7 @@ xfs_log_force_umount(
 		return 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = 0;
 
 	/*
@@ -4240,6 +4517,8 @@ xfs_log_force_umount(
 	if (!logerror)
 		xlog_cil_force(log);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Flush all the completed transactions to disk before marking the log
@@ -4250,6 +4529,9 @@ xfs_log_force_umount(
 	 */
 	if (!logerror)
 		_xfs_log_force(mp, XFS_LOG_SYNC, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -4262,6 +4544,7 @@ xfs_log_force_umount(
 		XFS_BUF_DONE(mp->m_sb_bp);
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This flag is sort of redundant because of the mount flag, but
 	 * it's good to maintain the separation between the log and the rest
@@ -4276,11 +4559,16 @@ xfs_log_force_umount(
 	if (logerror)
 		retval = xlog_state_ioerror(log);
 =======
+=======
+>>>>>>> v3.18
 	 * Mark the log and the iclogs with IO error flags to prevent any
 	 * further log IO from being issued or completed.
 	 */
 	log->l_flags |= XLOG_IO_ERROR;
 	retval = xlog_state_ioerror(log);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&log->l_icloglock);
 
@@ -4294,6 +4582,7 @@ xfs_log_force_umount(
 	xlog_grant_head_wake_all(&log->l_reserve_head);
 	xlog_grant_head_wake_all(&log->l_write_head);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(log->l_iclog->ic_state & XLOG_STATE_IOERROR)) {
 		ASSERT(!logerror);
@@ -4313,6 +4602,8 @@ xfs_log_force_umount(
 	 * log writes were completed.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Wake up everybody waiting on xfs_log_force. Wake the CIL push first
 	 * as if the log writes were completed. The abort handling in the log
@@ -4320,6 +4611,9 @@ xfs_log_force_umount(
 	 * avoid races.
 	 */
 	wake_up_all(&log->l_cilp->xc_commit_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xlog_state_do_callback(log, XFS_LI_ABORTED, NULL);
 

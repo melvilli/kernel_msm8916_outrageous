@@ -71,6 +71,11 @@ struct peak_pci_chan {
 #define PEAK_PCI_104E_DEVICE_ID	0x0007	/* PCAN-PCI/104 Express cards */
 #define PEAK_MPCIE_DEVICE_ID	0x0008	/* The miniPCIe slot cards */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PEAK_PCIE_OEM_ID	0x0009	/* PCAN-PCI Express OEM */
+#define PEAK_PCIEC34_DEVICE_ID	0x000A	/* PCAN-PCI Express 34 (one channel) */
+>>>>>>> v3.18
 =======
 #define PEAK_PCIE_OEM_ID	0x0009	/* PCAN-PCI Express OEM */
 #define PEAK_PCIEC34_DEVICE_ID	0x000A	/* PCAN-PCI Express 34 (one channel) */
@@ -83,7 +88,11 @@ static const u16 peak_pci_icr_masks[PEAK_PCI_CHAN_MAX] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(peak_pci_tbl) = {
+=======
+static const struct pci_device_id peak_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id peak_pci_tbl[] = {
 >>>>>>> v3.18
@@ -97,6 +106,10 @@ static const struct pci_device_id peak_pci_tbl[] = {
 #ifdef CONFIG_CAN_PEAK_PCIEC
 	{PEAK_PCI_VENDOR_ID, PEAK_PCIEC_DEVICE_ID, PCI_ANY_ID, PCI_ANY_ID,},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{PEAK_PCI_VENDOR_ID, PEAK_PCIEC34_DEVICE_ID, PCI_ANY_ID, PCI_ANY_ID,},
+>>>>>>> v3.18
 =======
 	{PEAK_PCI_VENDOR_ID, PEAK_PCIEC34_DEVICE_ID, PCI_ANY_ID, PCI_ANY_ID,},
 >>>>>>> v3.18
@@ -656,6 +669,10 @@ static int peak_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 		SET_NETDEV_DEV(dev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev->dev_id = i;
+>>>>>>> v3.18
 =======
 		dev->dev_id = i;
 >>>>>>> v3.18
@@ -670,7 +687,12 @@ static int peak_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		 * *after* devices linkage
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pdev->device == PEAK_PCIEC_DEVICE_ID) {
+=======
+		if (pdev->device == PEAK_PCIEC_DEVICE_ID ||
+		    pdev->device == PEAK_PCIEC34_DEVICE_ID) {
+>>>>>>> v3.18
 =======
 		if (pdev->device == PEAK_PCIEC_DEVICE_ID ||
 		    pdev->device == PEAK_PCIEC34_DEVICE_ID) {
@@ -771,8 +793,11 @@ static void peak_pci_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

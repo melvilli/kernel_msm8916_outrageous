@@ -33,7 +33,11 @@ hardware-specific bits for the hypothetical "foo" hardware.
 Tying the two halves of this interface together is struct clk_hw, which
 is defined in struct clk_foo and pointed to within struct clk.  This
 <<<<<<< HEAD
+<<<<<<< HEAD
 allows easy for navigation between the two discrete halves of the common
+=======
+allows for easy navigation between the two discrete halves of the common
+>>>>>>> v3.18
 =======
 allows for easy navigation between the two discrete halves of the common
 >>>>>>> v3.18
@@ -73,6 +77,7 @@ the operations defined in clk.h:
 		unsigned long	(*recalc_rate)(struct clk_hw *hw,
 						unsigned long parent_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		long		(*round_rate)(struct clk_hw *hw, unsigned long,
 						unsigned long *);
 		int		(*set_parent)(struct clk_hw *hw, u8 index);
@@ -80,6 +85,8 @@ the operations defined in clk.h:
 		int		(*set_rate)(struct clk_hw *hw, unsigned long);
 		void		(*init)(struct clk_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 		long		(*round_rate)(struct clk_hw *hw,
 						unsigned long rate,
 						unsigned long *parent_rate);
@@ -101,6 +108,9 @@ the operations defined in clk.h:
 		void		(*init)(struct clk_hw *hw);
 		int		(*debug_init)(struct clk_hw *hw,
 					      struct dentry *dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -208,6 +218,7 @@ callback is invalid or otherwise unnecessary.  Empty cells are either
 optional or must be evaluated on a case-by-case basis.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                            clock hardware characteristics
 	     -----------------------------------------------------------
              | gate | change rate | single parent | multiplexer | root |
@@ -229,6 +240,8 @@ optional or must be evaluated on a case-by-case basis.
 .init        |      |             |               |             |      |
 	     -----------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
                               clock hardware characteristics
                 -----------------------------------------------------------
                 | gate | change rate | single parent | multiplexer | root |
@@ -253,6 +266,9 @@ optional or must be evaluated on a case-by-case basis.
 .init           |      |             |               |             |      |
                 -----------------------------------------------------------
 [1] either one of round_rate or determine_rate is required.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Finally, register your clock at run-time with a hardware-specific
@@ -298,7 +314,10 @@ are sorted out.
 To bypass this disabling, include "clk_ignore_unused" in the bootargs to the
 kernel.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	Part 7 - Locking
 
@@ -333,4 +352,7 @@ driver in that case.
 Note that locking must also be considered when code outside of the common
 clock framework needs to access resources used by the clock operations. This
 is considered out of scope of this document.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -74,6 +74,7 @@
 #include <asm/setup.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char *arc_cache_mumbojumbo(int cpu_id, char *buf, int len)
 {
 	int n = 0;
@@ -82,16 +83,22 @@ char *arc_cache_mumbojumbo(int cpu_id, char *buf, int len)
 #define PR_CACHE(p, enb, str)						\
 {									\
 =======
+=======
+>>>>>>> v3.18
 char *arc_cache_mumbojumbo(int c, char *buf, int len)
 {
 	int n = 0;
 
 #define PR_CACHE(p, cfg, str)						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(p)->ver)							\
 		n += scnprintf(buf + n, len - n, str"\t\t: N/A\n");	\
 	else								\
 		n += scnprintf(buf + n, len - n,			\
+<<<<<<< HEAD
 <<<<<<< HEAD
 			str"\t\t: (%uK) VIPT, %dway set-asc, %ub Line %s\n", \
 			TO_KB((p)->sz), (p)->assoc, (p)->line_len,	\
@@ -101,6 +108,8 @@ char *arc_cache_mumbojumbo(int c, char *buf, int len)
 	PR_CACHE(&cpuinfo_arc700[c].icache, __CONFIG_ARC_HAS_ICACHE, "I-Cache");
 	PR_CACHE(&cpuinfo_arc700[c].dcache, __CONFIG_ARC_HAS_DCACHE, "D-Cache");
 =======
+=======
+>>>>>>> v3.18
 			str"\t\t: %uK, %dway/set, %uB Line, %s%s%s\n",	\
 			(p)->sz_k, (p)->assoc, (p)->line_len,		\
 			(p)->vipt ? "VIPT" : "PIPT",			\
@@ -109,6 +118,9 @@ char *arc_cache_mumbojumbo(int c, char *buf, int len)
 
 	PR_CACHE(&cpuinfo_arc700[c].icache, CONFIG_ARC_HAS_ICACHE, "I-Cache");
 	PR_CACHE(&cpuinfo_arc700[c].dcache, CONFIG_ARC_HAS_DCACHE, "D-Cache");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return buf;
@@ -120,12 +132,15 @@ char *arc_cache_mumbojumbo(int c, char *buf, int len)
  * No Validation done here, simply read/convert the BCRs
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit read_decode_cache_bcr(void)
 {
 	struct bcr_cache ibcr, dbcr;
 	struct cpuinfo_arc_cache *p_ic, *p_dc;
 	unsigned int cpu = smp_processor_id();
 =======
+=======
+>>>>>>> v3.18
 void read_decode_cache_bcr(void)
 {
 	struct cpuinfo_arc_cache *p_ic, *p_dc;
@@ -137,11 +152,15 @@ void read_decode_cache_bcr(void)
 		unsigned int ver:8, config:4, sz:4, line_len:4, pad:12;
 #endif
 	} ibcr, dbcr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	p_ic = &cpuinfo_arc700[cpu].icache;
 	READ_BCR(ARC_REG_IC_BCR, ibcr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ibcr.config == 0x3)
 		p_ic->assoc = 2;
@@ -158,6 +177,8 @@ void read_decode_cache_bcr(void)
 	p_dc->sz = 0x200 << dbcr.sz;
 	p_dc->ver = dbcr.ver;
 =======
+=======
+>>>>>>> v3.18
 	if (!ibcr.ver)
 		goto dc_chk;
 
@@ -183,6 +204,9 @@ dc_chk:
 	p_dc->ver = dbcr.ver;
 	p_dc->vipt = 1;
 	p_dc->alias = p_dc->sz_k/p_dc->assoc/TO_KB(PAGE_SIZE) > 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -193,6 +217,7 @@ dc_chk:
  * 3. Enable the Caches, setup default flush mode for D-Cache
  * 3. Calculate the SHMLBA used by user space
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __cpuinit arc_cache_init(void)
 {
@@ -207,10 +232,16 @@ void arc_cache_init(void)
 {
 	unsigned int __maybe_unused cpu = smp_processor_id();
 >>>>>>> v3.18
+=======
+void arc_cache_init(void)
+{
+	unsigned int __maybe_unused cpu = smp_processor_id();
+>>>>>>> v3.18
 	char str[256];
 
 	printk(arc_cache_mumbojumbo(0, str, sizeof(str)));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ic->ver)
 		goto chk_dc;
@@ -288,6 +319,8 @@ chk_dc:
 #define OP_FLUSH_N_INV	0x3
 
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_ARC_HAS_ICACHE)) {
 		struct cpuinfo_arc_cache *ic = &cpuinfo_arc700[cpu].icache;
 
@@ -393,6 +426,9 @@ static inline void __cache_line_loop(unsigned long paddr, unsigned long vaddr,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_ARC_HAS_DCACHE
 
@@ -401,11 +437,14 @@ static inline void __cache_line_loop(unsigned long paddr, unsigned long vaddr,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void wait_for_flush(void)
 {
 	while (read_aux_reg(ARC_REG_DC_CTRL) & DC_CTRL_FLUSH_STATUS)
 		;
 =======
+=======
+>>>>>>> v3.18
 static unsigned int __before_dc_op(const int op)
 {
 	unsigned int reg = reg;
@@ -432,6 +471,9 @@ static void __after_dc_op(const int op, unsigned int reg)
 	/* Switch back to default Invalidate mode */
 	if (op == OP_FLUSH_N_INV)
 		write_aux_reg(ARC_REG_DC_CTRL, reg & ~DC_CTRL_INV_MODE_FLUSH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -443,6 +485,7 @@ static void __after_dc_op(const int op, unsigned int reg)
  */
 static inline void __dc_entire_op(const int cacheop)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags, tmp = tmp;
 	int aux;
@@ -459,10 +502,15 @@ static inline void __dc_entire_op(const int cacheop)
 		write_aux_reg(ARC_REG_DC_CTRL, tmp | DC_CTRL_INV_MODE_FLUSH);
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ctrl_reg;
 	int aux;
 
 	ctrl_reg = __before_dc_op(cacheop);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cacheop & OP_INV)	/* Inv or flush-n-inv use same cmd reg */
@@ -472,6 +520,7 @@ static inline void __dc_entire_op(const int cacheop)
 
 	write_aux_reg(aux, 0x1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cacheop & OP_FLUSH)	/* flush / flush-n-inv both wait */
 		wait_for_flush();
@@ -531,6 +580,9 @@ static inline void __dc_line_loop(unsigned long paddr, unsigned long vaddr,
 =======
 	__after_dc_op(cacheop, ctrl_reg);
 >>>>>>> v3.18
+=======
+	__after_dc_op(cacheop, ctrl_reg);
+>>>>>>> v3.18
 }
 
 /* For kernel mappings cache operation: index is same as paddr */
@@ -542,6 +594,7 @@ static inline void __dc_line_loop(unsigned long paddr, unsigned long vaddr,
 static inline void __dc_line_op(unsigned long paddr, unsigned long vaddr,
 				unsigned long sz, const int cacheop)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags, tmp = tmp;
 	int aux;
@@ -573,6 +626,8 @@ static inline void __dc_line_op(unsigned long paddr, unsigned long vaddr,
 	if (cacheop == OP_FLUSH_N_INV)
 		write_aux_reg(ARC_REG_DC_CTRL, tmp & ~DC_CTRL_INV_MODE_FLUSH);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	unsigned int ctrl_reg;
 
@@ -583,6 +638,9 @@ static inline void __dc_line_op(unsigned long paddr, unsigned long vaddr,
 	__cache_line_loop(paddr, vaddr, sz, cacheop);
 
 	__after_dc_op(cacheop, ctrl_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_restore(flags);
@@ -645,6 +703,7 @@ static inline void __dc_line_op(unsigned long paddr, unsigned long vaddr,
  * Machine specific helper for per line I-Cache invalidate.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __ic_line_inv_vaddr(unsigned long paddr, unsigned long vaddr,
 				unsigned long sz)
 {
@@ -691,6 +750,8 @@ static void __ic_line_inv_vaddr(unsigned long paddr, unsigned long vaddr,
 #else
 
 =======
+=======
+>>>>>>> v3.18
 
 static inline void __ic_entire_inv(void)
 {
@@ -744,6 +805,9 @@ static void __ic_line_inv_vaddr(unsigned long paddr, unsigned long vaddr,
 #else	/* !CONFIG_ARC_HAS_ICACHE */
 
 #define __ic_entire_inv()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __ic_line_inv_vaddr(pstart, vstart, sz)
 
@@ -772,7 +836,11 @@ void flush_dcache_page(struct page *page)
 
 	if (!cache_is_vipt_aliasing()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(PG_arch_1, &page->flags);
+=======
+		clear_bit(PG_dc_clean, &page->flags);
+>>>>>>> v3.18
 =======
 		clear_bit(PG_dc_clean, &page->flags);
 >>>>>>> v3.18
@@ -790,7 +858,11 @@ void flush_dcache_page(struct page *page)
 	 */
 	if (!mapping_mapped(mapping)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(PG_arch_1, &page->flags);
+=======
+		clear_bit(PG_dc_clean, &page->flags);
+>>>>>>> v3.18
 =======
 		clear_bit(PG_dc_clean, &page->flags);
 >>>>>>> v3.18
@@ -835,6 +907,7 @@ EXPORT_SYMBOL(dma_cache_wback);
 void flush_icache_range(unsigned long kstart, unsigned long kend)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int tot_sz, off, sz;
 	unsigned long phy, pfn;
 
@@ -845,6 +918,11 @@ void flush_icache_range(unsigned long kstart, unsigned long kend)
 		BUG_ON("Flush icache range for user virtual addr space");
 		return;
 	}
+=======
+	unsigned int tot_sz;
+
+	WARN(kstart < TASK_SIZE, "%s() can't handle user vaddr", __func__);
+>>>>>>> v3.18
 =======
 	unsigned int tot_sz;
 
@@ -883,6 +961,12 @@ void flush_icache_range(unsigned long kstart, unsigned long kend)
 	 */
 	while (tot_sz > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		unsigned int off, sz;
+		unsigned long phy, pfn;
+
+>>>>>>> v3.18
 =======
 		unsigned int off, sz;
 		unsigned long phy, pfn;
@@ -898,6 +982,10 @@ void flush_icache_range(unsigned long kstart, unsigned long kend)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(flush_icache_range);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(flush_icache_range);
 >>>>>>> v3.18
@@ -905,6 +993,7 @@ EXPORT_SYMBOL(flush_icache_range);
 /*
  * General purpose helper to make I and D cache lines consistent.
  * @paddr is phy addr of region
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @vaddr is typically user or kernel vaddr (vmalloc)
  *    Howver in one instance, flush_icache_range() by kprobe (for a breakpt in
@@ -922,6 +1011,8 @@ void __sync_icache_dcache(unsigned long paddr, unsigned long vaddr, int len)
 	__dc_line_op(paddr, vaddr, len, OP_FLUSH_N_INV);
 	local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
  * @vaddr is typically user vaddr (breakpoint) or kernel vaddr (vmalloc)
  *    However in one instance, when called by kprobe (for a breakpt in
  *    builtin kernel code) @vaddr will be paddr only, meaning CDU operation will
@@ -933,6 +1024,9 @@ void __sync_icache_dcache(unsigned long paddr, unsigned long vaddr, int len)
 {
 	__dc_line_op(paddr, vaddr, len, OP_FLUSH_N_INV);
 	__ic_line_inv_vaddr(paddr, vaddr, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -952,6 +1046,7 @@ void ___flush_dcache_page(unsigned long paddr, unsigned long vaddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_icache_all(void)
 {
 	unsigned long flags;
@@ -967,6 +1062,8 @@ void flush_icache_all(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 noinline void flush_cache_all(void)
 {
 	unsigned long flags;
@@ -974,7 +1071,11 @@ noinline void flush_cache_all(void)
 	local_irq_save(flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_icache_all();
+=======
+	__ic_entire_inv();
+>>>>>>> v3.18
 =======
 	__ic_entire_inv();
 >>>>>>> v3.18
@@ -997,14 +1098,20 @@ void flush_cache_page(struct vm_area_struct *vma, unsigned long u_vaddr,
 	unsigned int paddr = pfn << PAGE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__sync_icache_dcache(paddr, u_vaddr, PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	u_vaddr &= PAGE_MASK;
 
 	___flush_dcache_page(paddr, u_vaddr);
 
 	if (vma->vm_flags & VM_EXEC)
 		__inv_icache_page(paddr, u_vaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1056,7 +1163,11 @@ void copy_user_highpage(struct page *to, struct page *from,
 	 * directly).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(PG_arch_1, &to->flags);
+=======
+	clear_bit(PG_dc_clean, &to->flags);
+>>>>>>> v3.18
 =======
 	clear_bit(PG_dc_clean, &to->flags);
 >>>>>>> v3.18
@@ -1068,8 +1179,14 @@ void copy_user_highpage(struct page *to, struct page *from,
 	if (clean_src_k_mappings) {
 		__flush_dcache_page(kfrom, kfrom);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		set_bit(PG_arch_1, &from->flags);
+=======
+		set_bit(PG_dc_clean, &from->flags);
+	} else {
+		clear_bit(PG_dc_clean, &from->flags);
+>>>>>>> v3.18
 =======
 		set_bit(PG_dc_clean, &from->flags);
 	} else {
@@ -1082,7 +1199,11 @@ void clear_user_page(void *to, unsigned long u_vaddr, struct page *page)
 {
 	clear_page(to);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(PG_arch_1, &page->flags);
+=======
+	clear_bit(PG_dc_clean, &page->flags);
+>>>>>>> v3.18
 =======
 	clear_bit(PG_dc_clean, &page->flags);
 >>>>>>> v3.18

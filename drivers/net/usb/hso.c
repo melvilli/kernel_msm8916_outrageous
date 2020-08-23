@@ -186,7 +186,10 @@ enum rx_ctrl_state{
 #define B_NOTIFICATION  (0x20)
 #define W_VALUE         (0x0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define W_INDEX         (0x2)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define W_LENGTH        (0x2)
@@ -263,10 +266,15 @@ struct hso_serial {
 	 */
 	int  curr_rx_urb_idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16  curr_rx_urb_offset;
 	u8   rx_urb_filled[MAX_RX_URBS];
 	struct tasklet_struct unthrottle_tasklet;
 	struct work_struct    retry_unthrottle_workqueue;
+=======
+	u8   rx_urb_filled[MAX_RX_URBS];
+	struct tasklet_struct unthrottle_tasklet;
+>>>>>>> v3.18
 =======
 	u8   rx_urb_filled[MAX_RX_URBS];
 	struct tasklet_struct unthrottle_tasklet;
@@ -479,6 +487,10 @@ static const struct usb_device_id hso_ids[] = {
 	{USB_DEVICE(0x0af0, 0x8900)},
 	{USB_DEVICE(0x0af0, 0x9000)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{USB_DEVICE(0x0af0, 0x9200)},		/* Option GTM671WFS */
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(0x0af0, 0x9200)},		/* Option GTM671WFS */
 >>>>>>> v3.18
@@ -1215,6 +1227,11 @@ static void hso_std_serial_read_bulk_callback(struct urb *urb)
 	int status = urb->status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	D4("\n--- Got serial_read_bulk callback %02x ---", status);
+
+>>>>>>> v3.18
 =======
 	D4("\n--- Got serial_read_bulk callback %02x ---", status);
 
@@ -1224,7 +1241,12 @@ static void hso_std_serial_read_bulk_callback(struct urb *urb)
 		D1("serial == NULL");
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (status) {
+=======
+	}
+	if (status) {
+>>>>>>> v3.18
 =======
 	}
 	if (status) {
@@ -1234,7 +1256,10 @@ static void hso_std_serial_read_bulk_callback(struct urb *urb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	D4("\n--- Got serial_read_bulk callback %02x ---", status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	D1("Actual length = %d\n", urb->actual_length);
@@ -1244,6 +1269,7 @@ static void hso_std_serial_read_bulk_callback(struct urb *urb)
 	if (serial->port.count == 0)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (status == 0) {
 		if (serial->parent->port_spec & HSO_INFO_CRC_BUG)
@@ -1265,6 +1291,8 @@ static void hso_std_serial_read_bulk_callback(struct urb *urb)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (serial->parent->port_spec & HSO_INFO_CRC_BUG)
 		fix_crc_bug(urb, serial->in_endp->wMaxPacketSize);
 	/* Valid data, handle RX data */
@@ -1272,6 +1300,9 @@ static void hso_std_serial_read_bulk_callback(struct urb *urb)
 	serial->rx_urb_filled[hso_urb_to_index(serial, urb)] = 1;
 	put_rxbuf_data_and_resubmit_bulk_urb(serial);
 	spin_unlock(&serial->serial_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1299,6 +1330,7 @@ static	void hso_unthrottle(struct tty_struct *tty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hso_unthrottle_workfunc(struct work_struct *work)
 {
 	struct hso_serial *serial =
@@ -1307,6 +1339,8 @@ static void hso_unthrottle_workfunc(struct work_struct *work)
 	hso_unthrottle_tasklet(serial);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* open the requested serial port */
@@ -1345,8 +1379,11 @@ static int hso_serial_open(struct tty_struct *tty, struct file *filp)
 			     (void (*)(unsigned long))hso_unthrottle_tasklet,
 			     (unsigned long)serial);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_WORK(&serial->retry_unthrottle_workqueue,
 			  hso_unthrottle_workfunc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		result = hso_start_serial_device(serial->parent, GFP_KERNEL);
@@ -1398,7 +1435,10 @@ static void hso_serial_close(struct tty_struct *tty, struct file *filp)
 			hso_stop_serial_device(serial->parent);
 		tasklet_kill(&serial->unthrottle_tasklet);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cancel_work_sync(&serial->retry_unthrottle_workqueue);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1532,6 +1572,10 @@ static void tiocmget_intr_callback(struct urb *urb)
 	struct hso_serial_state_notification *serial_state_notification;
 	struct usb_device *usb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int if_num;
+>>>>>>> v3.18
 =======
 	int if_num;
 >>>>>>> v3.18
@@ -1544,11 +1588,14 @@ static void tiocmget_intr_callback(struct urb *urb)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tiocmget = serial->tiocmget;
 	if (!tiocmget)
 		return;
 	usb = serial->parent->usb;
 =======
+=======
+>>>>>>> v3.18
 
 	/* tiocmget is only supported on HSO_PORT_MODEM */
 	tiocmget = serial->tiocmget;
@@ -1562,13 +1609,20 @@ static void tiocmget_intr_callback(struct urb *urb)
 	/* wIndex should be the USB interface number of the port to which the
 	 * notification applies, which should always be the Modem port.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	serial_state_notification = &tiocmget->serial_state_notification;
 	if (serial_state_notification->bmRequestType != BM_REQUEST_TYPE ||
 	    serial_state_notification->bNotification != B_NOTIFICATION ||
 	    le16_to_cpu(serial_state_notification->wValue) != W_VALUE ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    le16_to_cpu(serial_state_notification->wIndex) != W_INDEX ||
+=======
+	    le16_to_cpu(serial_state_notification->wIndex) != if_num ||
+>>>>>>> v3.18
 =======
 	    le16_to_cpu(serial_state_notification->wIndex) != if_num ||
 >>>>>>> v3.18
@@ -2083,8 +2137,12 @@ static int put_rxbuf_data(struct urb *urb, struct hso_serial *serial)
 {
 	struct tty_struct *tty;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int write_length_remaining = 0;
 	int curr_write_len;
+=======
+	int count;
+>>>>>>> v3.18
 =======
 	int count;
 >>>>>>> v3.18
@@ -2097,6 +2155,7 @@ static int put_rxbuf_data(struct urb *urb, struct hso_serial *serial)
 
 	tty = tty_port_tty_get(&serial->port);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Push data to tty */
 	write_length_remaining = urb->actual_length -
@@ -2122,6 +2181,8 @@ static int put_rxbuf_data(struct urb *urb, struct hso_serial *serial)
 	}
 	return write_length_remaining;
 =======
+=======
+>>>>>>> v3.18
 	if (tty && test_bit(TTY_THROTTLED, &tty->flags)) {
 		tty_kref_put(tty);
 		return -1;
@@ -2144,6 +2205,9 @@ static int put_rxbuf_data(struct urb *urb, struct hso_serial *serial)
 	serial->rx_urb_filled[hso_urb_to_index(serial, urb)] = 0;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2316,7 +2380,10 @@ static int hso_stop_serial_device(struct hso_device *hso_dev)
 	}
 	serial->curr_rx_urb_idx = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	serial->curr_rx_urb_offset = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2527,7 +2594,11 @@ static void hso_net_init(struct net_device *net)
 	net->mtu = DEFAULT_MTU - 14;
 	net->tx_queue_len = 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(net, &ops);
+=======
+	net->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	net->ethtool_ops = &ops;
 >>>>>>> v3.18
@@ -2626,7 +2697,12 @@ static struct hso_device *hso_create_net_device(struct usb_interface *interface,
 	/* allocate our network device, then we can put in our private data */
 	/* call hso_net_init to do the basic initialization */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net = alloc_netdev(sizeof(struct hso_net), "hso%d", hso_net_init);
+=======
+	net = alloc_netdev(sizeof(struct hso_net), "hso%d", NET_NAME_UNKNOWN,
+			   hso_net_init);
+>>>>>>> v3.18
 =======
 	net = alloc_netdev(sizeof(struct hso_net), "hso%d", NET_NAME_UNKNOWN,
 			   hso_net_init);
@@ -2926,6 +3002,7 @@ static int hso_get_config_data(struct usb_interface *interface)
 {
 	struct usb_device *usbdev = interface_to_usbdev(interface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 config_data[17];
 	u32 if_num = interface->altsetting->desc.bInterfaceNumber;
 	s32 result;
@@ -2934,6 +3011,8 @@ static int hso_get_config_data(struct usb_interface *interface)
 			    0x86, 0xC0, 0, 0, config_data, 17,
 			    USB_CTRL_SET_TIMEOUT) != 0x11) {
 =======
+=======
+>>>>>>> v3.18
 	u8 *config_data = kmalloc(17, GFP_KERNEL);
 	u32 if_num = interface->altsetting->desc.bInterfaceNumber;
 	s32 result;
@@ -2944,6 +3023,9 @@ static int hso_get_config_data(struct usb_interface *interface)
 			    0x86, 0xC0, 0, 0, config_data, 17,
 			    USB_CTRL_SET_TIMEOUT) != 0x11) {
 		kfree(config_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
@@ -2996,6 +3078,10 @@ static int hso_get_config_data(struct usb_interface *interface)
 		result |= HSO_INFO_CRC_BUG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(config_data);
+>>>>>>> v3.18
 =======
 	kfree(config_data);
 >>>>>>> v3.18
@@ -3013,12 +3099,18 @@ static int hso_probe(struct usb_interface *interface,
 	struct hso_device *tmp_dev = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (interface->cur_altsetting->desc.bInterfaceClass != 0xFF) {
 		dev_err(&interface->dev, "Not our interface\n");
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if_num = interface->altsetting->desc.bInterfaceNumber;
 
@@ -3030,10 +3122,13 @@ static int hso_probe(struct usb_interface *interface,
 		port_spec = hso_get_config_data(interface);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (interface->cur_altsetting->desc.bInterfaceClass != 0xFF) {
 		dev_err(&interface->dev, "Not our interface\n");
 		return -ENODEV;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Check if we need to switch to alt interfaces prior to port

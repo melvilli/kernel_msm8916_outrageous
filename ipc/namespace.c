@@ -155,17 +155,23 @@ static void *ipcns_get(struct task_struct *task)
 	struct nsproxy *nsproxy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	nsproxy = task_nsproxy(task);
 	if (nsproxy)
 		ns = get_ipc_ns(nsproxy->ipc_ns);
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	task_lock(task);
 	nsproxy = task->nsproxy;
 	if (nsproxy)
 		ns = get_ipc_ns(nsproxy->ipc_ns);
 	task_unlock(task);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ns;
@@ -181,7 +187,11 @@ static int ipcns_install(struct nsproxy *nsproxy, void *new)
 	struct ipc_namespace *ns = new;
 	if (!ns_capable(ns->user_ns, CAP_SYS_ADMIN) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !nsown_capable(CAP_SYS_ADMIN))
+=======
+	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
+>>>>>>> v3.18
 =======
 	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
 >>>>>>> v3.18

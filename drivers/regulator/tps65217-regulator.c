@@ -28,11 +28,14 @@
 #include <linux/mfd/tps65217.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TPS65217_REGULATOR(_name, _id, _ops, _n, _vr, _vm, _em, _t) \
 	{						\
 		.name		= _name,		\
 		.id		= _id,			\
 =======
+=======
+>>>>>>> v3.18
 #define TPS65217_REGULATOR(_name, _id, _of_match, _ops, _n, _vr, _vm, _em, \
                            _t, _lr, _nlr) \
 	{						\
@@ -40,6 +43,9 @@
 		.id		= _id,			\
 		.of_match       = of_match_ptr(_of_match),    \
 		.regulators_node= of_match_ptr("regulators"), \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ops		= &_ops,		\
 		.n_voltages	= _n,			\
@@ -50,6 +56,7 @@
 		.enable_reg	= TPS65217_REG_ENABLE,	\
 		.enable_mask	= _em,			\
 		.volt_table	= _t,			\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}						\
 
@@ -63,10 +70,15 @@
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		.linear_ranges	= _lr,			\
 		.n_linear_ranges = _nlr,		\
 	}						\
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const unsigned int LDO1_VSEL_table[] = {
 	1000000, 1100000, 1200000, 1250000,
@@ -75,6 +87,7 @@ static const unsigned int LDO1_VSEL_table[] = {
 	2800000, 3000000, 3100000, 3300000,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tps65217_vsel_to_uv1(unsigned int vsel)
 {
@@ -159,6 +172,8 @@ static struct tps_info tps65217_pmic_regs[] = {
 	TPS65217_INFO("LDO4", 1800000, 3300000, tps65217_vsel_to_uv2,
 			tps65217_uv_to_vsel2),
 =======
+=======
+>>>>>>> v3.18
 static const struct regulator_linear_range tps65217_uv1_ranges[] = {
 	REGULATOR_LINEAR_RANGE(900000, 0, 24, 25000),
 	REGULATOR_LINEAR_RANGE(1550000, 25, 30, 50000),
@@ -171,6 +186,9 @@ static const struct regulator_linear_range tps65217_uv2_ranges[] = {
 	REGULATOR_LINEAR_RANGE(1500000, 0, 8, 50000),
 	REGULATOR_LINEAR_RANGE(2000000, 9, 13, 100000),
 	REGULATOR_LINEAR_RANGE(2450000, 14, 31, 50000),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -178,7 +196,11 @@ static int tps65217_pmic_enable(struct regulator_dev *dev)
 {
 	struct tps65217 *tps = rdev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int rid = rdev_get_id(dev);
+=======
+	int rid = rdev_get_id(dev);
+>>>>>>> v3.18
 =======
 	int rid = rdev_get_id(dev);
 >>>>>>> v3.18
@@ -196,7 +218,11 @@ static int tps65217_pmic_disable(struct regulator_dev *dev)
 {
 	struct tps65217 *tps = rdev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int rid = rdev_get_id(dev);
+=======
+	int rid = rdev_get_id(dev);
+>>>>>>> v3.18
 =======
 	int rid = rdev_get_id(dev);
 >>>>>>> v3.18
@@ -232,6 +258,7 @@ static int tps65217_pmic_set_voltage_sel(struct regulator_dev *dev,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tps65217_pmic_map_voltage(struct regulator_dev *dev,
 				     int min_uV, int max_uV)
@@ -278,6 +305,8 @@ static int tps65217_pmic_list_voltage(struct regulator_dev *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Operations permitted on DCDCx, LDO2, LDO3 and LDO4 */
 static struct regulator_ops tps65217_pmic_ops = {
 	.is_enabled		= regulator_is_enabled_regmap,
@@ -286,8 +315,13 @@ static struct regulator_ops tps65217_pmic_ops = {
 	.get_voltage_sel	= regulator_get_voltage_sel_regmap,
 	.set_voltage_sel	= tps65217_pmic_set_voltage_sel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.list_voltage		= tps65217_pmic_list_voltage,
 	.map_voltage		= tps65217_pmic_map_voltage,
+=======
+	.list_voltage		= regulator_list_voltage_linear_range,
+	.map_voltage		= regulator_map_voltage_linear_range,
+>>>>>>> v3.18
 =======
 	.list_voltage		= regulator_list_voltage_linear_range,
 	.map_voltage		= regulator_map_voltage_linear_range,
@@ -302,6 +336,7 @@ static struct regulator_ops tps65217_pmic_ldo1_ops = {
 	.get_voltage_sel	= regulator_get_voltage_sel_regmap,
 	.set_voltage_sel	= tps65217_pmic_set_voltage_sel,
 	.list_voltage		= regulator_list_voltage_table,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -382,6 +417,8 @@ static struct tps65217_board *tps65217_parse_dt(struct platform_device *pdev)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	.map_voltage		= regulator_map_voltage_ascend,
 };
 
@@ -420,11 +457,15 @@ static const struct regulator_desc regulators[] = {
 			   ARRAY_SIZE(tps65217_uv2_ranges)),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tps65217_regulator_probe(struct platform_device *pdev)
 {
 	struct tps65217 *tps = dev_get_drvdata(pdev->dev.parent);
 	struct tps65217_board *pdata = dev_get_platdata(tps->dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct regulator_init_data *reg_data;
 	struct regulator_dev *rdev;
@@ -443,6 +484,11 @@ static int tps65217_regulator_probe(struct platform_device *pdev)
 	struct regulator_config config = { };
 	int i;
 >>>>>>> v3.18
+=======
+	struct regulator_dev *rdev;
+	struct regulator_config config = { };
+	int i;
+>>>>>>> v3.18
 
 	if (tps65217_chip_id(tps) != TPS65217) {
 		dev_err(&pdev->dev, "Invalid tps chip version\n");
@@ -452,6 +498,7 @@ static int tps65217_regulator_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, tps);
 
 	for (i = 0; i < TPS65217_NUM_REGULATOR; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		reg_data = pdata->tps65217_init_data[i];
@@ -503,6 +550,8 @@ static int tps65217_regulator_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 		/* Register the regulators */
 		config.dev = tps->dev;
 		if (pdata)
@@ -518,6 +567,9 @@ static int tps65217_regulator_remove(struct platform_device *pdev)
 			return PTR_ERR(rdev);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -529,7 +581,10 @@ static struct platform_driver tps65217_regulator_driver = {
 	},
 	.probe = tps65217_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tps65217_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

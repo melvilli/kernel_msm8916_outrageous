@@ -565,8 +565,11 @@ static int bitmap_read_sb(struct bitmap *bitmap)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sb = kmap_atomic(sb_page);
@@ -675,9 +678,12 @@ static inline unsigned long file_page_offset(struct bitmap_storage *store,
  * return a pointer to the page in the filemap that contains the given bit
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this lookup is complicated by the fact that the bitmap sb might be exactly
  * 1 page (e.g., x86) or less than 1 page -- so the bitmap might start on page
  * 0 or page 1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -687,8 +693,12 @@ static inline struct page *filemap_get_page(struct bitmap_storage *store,
 	if (file_page_index(store, chunk) >= store->file_pages)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return store->filemap[file_page_index(store, chunk)
 			      - file_page_index(store, 0)];
+=======
+	return store->filemap[file_page_index(store, chunk)];
+>>>>>>> v3.18
 =======
 	return store->filemap[file_page_index(store, chunk)];
 >>>>>>> v3.18
@@ -1644,7 +1654,11 @@ int bitmap_create(struct mddev *mddev)
 	struct file *file = mddev->bitmap_info.file;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *bm = NULL;
+=======
+	struct kernfs_node *bm = NULL;
+>>>>>>> v3.18
 =======
 	struct kernfs_node *bm = NULL;
 >>>>>>> v3.18
@@ -1667,9 +1681,15 @@ int bitmap_create(struct mddev *mddev)
 
 	if (mddev->kobj.sd)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bm = sysfs_get_dirent(mddev->kobj.sd, NULL, "bitmap");
 	if (bm) {
 		bitmap->sysfs_can_clear = sysfs_get_dirent(bm, NULL, "can_clear");
+=======
+		bm = sysfs_get_dirent(mddev->kobj.sd, "bitmap");
+	if (bm) {
+		bitmap->sysfs_can_clear = sysfs_get_dirent(bm, "can_clear");
+>>>>>>> v3.18
 =======
 		bm = sysfs_get_dirent(mddev->kobj.sd, "bitmap");
 	if (bm) {
@@ -1827,11 +1847,14 @@ int bitmap_resize(struct bitmap *bitmap, sector_t blocks,
 	struct bitmap_page *new_bp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bitmap->storage.file && !init) {
 		pr_info("md: cannot resize file-based bitmap\n");
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (chunksize == 0) {
@@ -2015,7 +2038,10 @@ location_store(struct mddev *mddev, const char *buf, size_t len)
 			struct file *f = mddev->bitmap_info.file;
 			mddev->bitmap_info.file = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			restore_bitmap_write_access(f);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			fput(f);
@@ -2032,9 +2058,15 @@ location_store(struct mddev *mddev, const char *buf, size_t len)
 			int rv;
 			if (buf[0] == '+')
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rv = strict_strtoll(buf+1, 10, &offset);
 			else
 				rv = strict_strtoll(buf, 10, &offset);
+=======
+				rv = kstrtoll(buf+1, 10, &offset);
+			else
+				rv = kstrtoll(buf, 10, &offset);
+>>>>>>> v3.18
 =======
 				rv = kstrtoll(buf+1, 10, &offset);
 			else
@@ -2175,7 +2207,11 @@ backlog_store(struct mddev *mddev, const char *buf, size_t len)
 {
 	unsigned long backlog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rv = strict_strtoul(buf, 10, &backlog);
+=======
+	int rv = kstrtoul(buf, 10, &backlog);
+>>>>>>> v3.18
 =======
 	int rv = kstrtoul(buf, 10, &backlog);
 >>>>>>> v3.18
@@ -2205,7 +2241,11 @@ chunksize_store(struct mddev *mddev, const char *buf, size_t len)
 	if (mddev->bitmap)
 		return -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = strict_strtoul(buf, 10, &csize);
+=======
+	rv = kstrtoul(buf, 10, &csize);
+>>>>>>> v3.18
 =======
 	rv = kstrtoul(buf, 10, &csize);
 >>>>>>> v3.18

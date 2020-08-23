@@ -229,6 +229,10 @@ static int s5p_mfc_alloc_instance_buffer_v5(struct s5p_mfc_ctx *ctx)
 	if (ret) {
 		mfc_err("Failed to allocate shared memory buffer\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		s5p_mfc_release_priv_buf(dev->mem_dev_l, &ctx->ctx);
+>>>>>>> v3.18
 =======
 		s5p_mfc_release_priv_buf(dev->mem_dev_l, &ctx->ctx);
 >>>>>>> v3.18
@@ -267,7 +271,11 @@ static void s5p_mfc_write_info_v5(struct s5p_mfc_ctx *ctx, unsigned int data,
 			unsigned int ofs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(data, (ctx->shm.virt + ofs));
+=======
+	writel(data, (volatile void __iomem *)(ctx->shm.virt + ofs));
+>>>>>>> v3.18
 =======
 	writel(data, (volatile void __iomem *)(ctx->shm.virt + ofs));
 >>>>>>> v3.18
@@ -279,7 +287,11 @@ static unsigned int s5p_mfc_read_info_v5(struct s5p_mfc_ctx *ctx,
 {
 	rmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return readl(ctx->shm.virt + ofs);
+=======
+	return readl((volatile void __iomem *)(ctx->shm.virt + ofs));
+>>>>>>> v3.18
 =======
 	return readl((volatile void __iomem *)(ctx->shm.virt + ofs));
 >>>>>>> v3.18
@@ -390,7 +402,11 @@ static int s5p_mfc_set_dec_stream_buffer_v5(struct s5p_mfc_ctx *ctx,
 static int s5p_mfc_set_dec_frame_buffer_v5(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int frame_size, i;
+=======
+	unsigned int frame_size_lu, i;
+>>>>>>> v3.18
 =======
 	unsigned int frame_size_lu, i;
 >>>>>>> v3.18
@@ -482,6 +498,7 @@ static int s5p_mfc_set_dec_frame_buffer_v5(struct s5p_mfc_ctx *ctx)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame_size = ctx->luma_size;
 	frame_size_ch = ctx->chroma_size;
 	frame_size_mv = ctx->mv_size;
@@ -495,6 +512,8 @@ static int s5p_mfc_set_dec_frame_buffer_v5(struct s5p_mfc_ctx *ctx)
 						S5P_FIMV_DEC_LUMA_ADR + i * 4);
 		mfc_debug(2, "\tChroma %d: %x\n", i,
 =======
+=======
+>>>>>>> v3.18
 	frame_size_lu = ctx->luma_size;
 	frame_size_ch = ctx->chroma_size;
 	frame_size_mv = ctx->mv_size;
@@ -507,13 +526,20 @@ static int s5p_mfc_set_dec_frame_buffer_v5(struct s5p_mfc_ctx *ctx)
 		mfc_write(dev, OFFSETB(ctx->dst_bufs[i].cookie.raw.luma),
 						S5P_FIMV_DEC_LUMA_ADR + i * 4);
 		mfc_debug(2, "\tChroma %d: %zx\n", i,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					ctx->dst_bufs[i].cookie.raw.chroma);
 		mfc_write(dev, OFFSETA(ctx->dst_bufs[i].cookie.raw.chroma),
 					       S5P_FIMV_DEC_CHROMA_ADR + i * 4);
 		if (ctx->codec_mode == S5P_MFC_CODEC_H264_DEC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mfc_debug(2, "\tBuf2: %x, size: %d\n",
+=======
+			mfc_debug(2, "\tBuf2: %zx, size: %d\n",
+>>>>>>> v3.18
 =======
 			mfc_debug(2, "\tBuf2: %zx, size: %d\n",
 >>>>>>> v3.18
@@ -525,7 +551,11 @@ static int s5p_mfc_set_dec_frame_buffer_v5(struct s5p_mfc_ctx *ctx)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_debug(2, "Buf1: %u, buf_size1: %d\n", buf_addr1, buf_size1);
+=======
+	mfc_debug(2, "Buf1: %zu, buf_size1: %d\n", buf_addr1, buf_size1);
+>>>>>>> v3.18
 =======
 	mfc_debug(2, "Buf1: %zu, buf_size1: %d\n", buf_addr1, buf_size1);
 >>>>>>> v3.18
@@ -536,7 +566,11 @@ static int s5p_mfc_set_dec_frame_buffer_v5(struct s5p_mfc_ctx *ctx)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_write_info_v5(ctx, frame_size, ALLOC_LUMA_DPB_SIZE);
+=======
+	s5p_mfc_write_info_v5(ctx, frame_size_lu, ALLOC_LUMA_DPB_SIZE);
+>>>>>>> v3.18
 =======
 	s5p_mfc_write_info_v5(ctx, frame_size_lu, ALLOC_LUMA_DPB_SIZE);
 >>>>>>> v3.18
@@ -610,7 +644,11 @@ static int s5p_mfc_set_enc_ref_buffer_v5(struct s5p_mfc_ctx *ctx)
 				       S5P_FIMV_NV12MT_SALIGN);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_debug(2, "buf_size1: %d, buf_size2: %d\n", buf_size1, buf_size2);
+=======
+	mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n", buf_size1, buf_size2);
+>>>>>>> v3.18
 =======
 	mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n", buf_size1, buf_size2);
 >>>>>>> v3.18
@@ -653,7 +691,11 @@ static int s5p_mfc_set_enc_ref_buffer_v5(struct s5p_mfc_ctx *ctx)
 		buf_addr1 += S5P_FIMV_ENC_NBORINFO_SIZE;
 		buf_size1 -= S5P_FIMV_ENC_NBORINFO_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mfc_debug(2, "buf_size1: %d, buf_size2: %d\n",
+=======
+		mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n",
+>>>>>>> v3.18
 =======
 		mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n",
 >>>>>>> v3.18
@@ -688,7 +730,11 @@ static int s5p_mfc_set_enc_ref_buffer_v5(struct s5p_mfc_ctx *ctx)
 		buf_addr1 += S5P_FIMV_ENC_ACDCCOEF_SIZE;
 		buf_size1 -= S5P_FIMV_ENC_ACDCCOEF_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mfc_debug(2, "buf_size1: %d, buf_size2: %d\n",
+=======
+		mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n",
+>>>>>>> v3.18
 =======
 		mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n",
 >>>>>>> v3.18
@@ -718,7 +764,11 @@ static int s5p_mfc_set_enc_ref_buffer_v5(struct s5p_mfc_ctx *ctx)
 		buf_addr1 += S5P_FIMV_ENC_ACDCCOEF_SIZE;
 		buf_size1 -= S5P_FIMV_ENC_ACDCCOEF_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mfc_debug(2, "buf_size1: %d, buf_size2: %d\n",
+=======
+		mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n",
+>>>>>>> v3.18
 =======
 		mfc_debug(2, "buf_size1: %zu, buf_size2: %zu\n",
 >>>>>>> v3.18
@@ -1246,7 +1296,10 @@ static int s5p_mfc_run_dec_frame(struct s5p_mfc_ctx *ctx, int last_frame)
 	struct s5p_mfc_buf *temp_vb;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int index;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1274,7 +1327,10 @@ static int s5p_mfc_run_dec_frame(struct s5p_mfc_ctx *ctx, int last_frame)
 		ctx->consumed_stream, temp_vb->b->v4l2_planes[0].bytesused);
 	spin_unlock_irqrestore(&dev->irqlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = temp_vb->b->v4l2_buf.index;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->curr_ctx = ctx->num;
@@ -1648,7 +1704,11 @@ static int s5p_mfc_get_int_reason_v5(struct s5p_mfc_dev *dev)
 	default:
 		reason = S5P_MFC_R2H_CMD_EMPTY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

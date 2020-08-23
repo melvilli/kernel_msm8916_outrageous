@@ -190,6 +190,11 @@ static inline void writel(u32 data, volatile void __iomem *addr)
 #define writel_relaxed __raw_writel
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define mmiowb()
+
+>>>>>>> v3.18
 =======
 #define mmiowb()
 

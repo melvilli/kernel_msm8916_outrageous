@@ -23,6 +23,10 @@
 struct lp55xx_led_config {
 	const char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *default_trigger;
+>>>>>>> v3.18
 =======
 	const char *default_trigger;
 >>>>>>> v3.18
@@ -41,7 +45,10 @@ struct lp55xx_predef_pattern {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum lp8501_pwr_sel {
 	LP8501_ALL_VDD,		/* D1~9 are connected to VDD */
 	LP8501_6VDD_3VOUT,	/* D1~6 with VDD, D7~9 with VOUT */
@@ -49,6 +56,9 @@ enum lp8501_pwr_sel {
 	LP8501_ALL_VOUT,	/* D1~9 are connected to VOUT */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * struct lp55xx_platform_data
@@ -74,10 +84,15 @@ struct lp55xx_platform_data {
 	u8 clock_mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Platform specific functions */
 	int (*setup_resources)(void);
 	void (*release_resources)(void);
 	void (*enable)(bool state);
+=======
+	/* optional enable GPIO */
+	int enable_gpio;
+>>>>>>> v3.18
 =======
 	/* optional enable GPIO */
 	int enable_gpio;
@@ -87,6 +102,12 @@ struct lp55xx_platform_data {
 	struct lp55xx_predef_pattern *patterns;
 	unsigned int num_patterns;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* LP8501 specific */
+	enum lp8501_pwr_sel pwr_sel;
+>>>>>>> v3.18
 =======
 
 	/* LP8501 specific */

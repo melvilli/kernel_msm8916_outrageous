@@ -15,7 +15,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -34,6 +37,10 @@
 #define XSPI_CR_OFFSET		0x60	/* Control Register */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XSPI_CR_LOOP		0x01
+>>>>>>> v3.18
 =======
 #define XSPI_CR_LOOP		0x01
 >>>>>>> v3.18
@@ -87,10 +94,16 @@ struct xilinx_spi {
 	struct spi_bitbang bitbang;
 	struct completion done;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource mem; /* phys mem */
 	void __iomem	*regs;	/* virt. address of the control registers */
 
 	u32		irq;
+=======
+	void __iomem	*regs;	/* virt. address of the control registers */
+
+	int		irq;
+>>>>>>> v3.18
 =======
 	void __iomem	*regs;	/* virt. address of the control registers */
 
@@ -102,15 +115,21 @@ struct xilinx_spi {
 	int remaining_bytes;	/* the number of bytes left to transfer */
 	u8 bits_per_word;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int (*read_fn) (void __iomem *);
 	void (*write_fn) (u32, void __iomem *);
 	void (*tx_fn) (struct xilinx_spi *);
 	void (*rx_fn) (struct xilinx_spi *);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int (*read_fn)(void __iomem *);
 	void (*write_fn)(u32, void __iomem *);
 	void (*tx_fn)(struct xilinx_spi *);
 	void (*rx_fn)(struct xilinx_spi *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -230,6 +249,7 @@ static void xilinx_spi_chipselect(struct spi_device *spi, int is_on)
 
 /* spi_bitbang requires custom setup_transfer() to be defined if there is a
 <<<<<<< HEAD
+<<<<<<< HEAD
  * custom txrx_bufs(). We have nothing to setup here as the SPI IP block
  * supports 8 or 16 bits per word which cannot be changed in software.
  * SPI clock can't be changed in software either.
@@ -238,10 +258,14 @@ static void xilinx_spi_chipselect(struct spi_device *spi, int is_on)
 =======
  * custom txrx_bufs().
 >>>>>>> v3.18
+=======
+ * custom txrx_bufs().
+>>>>>>> v3.18
  */
 static int xilinx_spi_setup_transfer(struct spi_device *spi,
 		struct spi_transfer *t)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xilinx_spi *xspi = spi_master_get_devdata(spi->master);
 	u8 bits_per_word;
@@ -269,6 +293,8 @@ static int xilinx_spi_setup(struct spi_device *spi)
 	 * If a driver setups with the wrong bit number, it will fail when
 	 * it tries to do a transfer
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -301,7 +327,11 @@ static int xilinx_spi_txrx_bufs(struct spi_device *spi, struct spi_transfer *t)
 	xspi->rx_ptr = t->rx_buf;
 	xspi->remaining_bytes = t->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(xspi->done);
+=======
+	reinit_completion(&xspi->done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&xspi->done);
 >>>>>>> v3.18
@@ -386,6 +416,7 @@ static const struct of_device_id xilinx_spi_of_match[] = {
 MODULE_DEVICE_TABLE(of, xilinx_spi_of_match);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct spi_master *xilinx_spi_init(struct device *dev, struct resource *mem,
 	u32 irq, s16 bus_num, int num_cs, int little_endian, int bits_per_word)
 {
@@ -397,6 +428,8 @@ struct spi_master *xilinx_spi_init(struct device *dev, struct resource *mem,
 	if (!master)
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 static int xilinx_spi_probe(struct platform_device *pdev)
 {
 	struct xilinx_spi *xspi;
@@ -425,12 +458,16 @@ static int xilinx_spi_probe(struct platform_device *pdev)
 	master = spi_alloc_master(&pdev->dev, sizeof(struct xilinx_spi));
 	if (!master)
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* the spi->mode bits understood by this driver: */
 	master->mode_bits = SPI_CPOL | SPI_CPHA;
 
 	xspi = spi_master_get_devdata(master);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xspi->bitbang.master = spi_master_get(master);
 	xspi->bitbang.chipselect = xilinx_spi_chipselect;
@@ -463,6 +500,8 @@ static int xilinx_spi_probe(struct platform_device *pdev)
 		xspi->write_fn = xspi_write32_be;
 	}
 =======
+=======
+>>>>>>> v3.18
 	xspi->bitbang.master = master;
 	xspi->bitbang.chipselect = xilinx_spi_chipselect;
 	xspi->bitbang.setup_transfer = xilinx_spi_setup_transfer;
@@ -499,6 +538,9 @@ static int xilinx_spi_probe(struct platform_device *pdev)
 	}
 
 	master->bits_per_word_mask = SPI_BPW_MASK(bits_per_word);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xspi->bits_per_word = bits_per_word;
 	if (xspi->bits_per_word == 8) {
@@ -511,19 +553,26 @@ static int xilinx_spi_probe(struct platform_device *pdev)
 		xspi->tx_fn = xspi_tx32;
 		xspi->rx_fn = xspi_rx32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		goto unmap_io;
 
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		ret = -EINVAL;
 		goto put_master;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* SPI controller initializations */
 	xspi_init_hw(xspi);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register for SPI Interrupt */
 	ret = request_irq(xspi->irq, xilinx_spi_irq, 0, XILINX_SPI_NAME, xspi);
@@ -614,6 +663,8 @@ static int xilinx_spi_probe(struct platform_device *dev)
 	if (!master)
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	xspi->irq = platform_get_irq(pdev, 0);
 	if (xspi->irq < 0) {
 		ret = xspi->irq;
@@ -634,6 +685,9 @@ static int xilinx_spi_probe(struct platform_device *dev)
 
 	dev_info(&pdev->dev, "at 0x%08llX mapped to 0x%p, irq=%d\n",
 		(unsigned long long)res->start, xspi->regs, xspi->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pdata) {
@@ -641,6 +695,7 @@ static int xilinx_spi_probe(struct platform_device *dev)
 			spi_new_device(master, pdata->devices + i);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(dev, master);
 	return 0;
@@ -651,6 +706,8 @@ static int xilinx_spi_remove(struct platform_device *dev)
 	xilinx_spi_deinit(platform_get_drvdata(dev));
 	platform_set_drvdata(dev, 0);
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, master);
 	return 0;
 
@@ -674,6 +731,9 @@ static int xilinx_spi_remove(struct platform_device *pdev)
 	xspi->write_fn(0, regs_base + XIPIF_V123B_DGIER_OFFSET);
 
 	spi_master_put(xspi->bitbang.master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -688,7 +748,10 @@ static struct platform_driver xilinx_spi_driver = {
 	.driver = {
 		.name = XILINX_SPI_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = xilinx_spi_of_match,

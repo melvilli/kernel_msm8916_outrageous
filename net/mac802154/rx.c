@@ -60,8 +60,11 @@ mac802154_subif_rx(struct ieee802154_dev *hw, struct sk_buff *skb, u8 lqi)
 	skb_reset_mac_header(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUILD_BUG_ON(sizeof(struct ieee802154_mac_cb) > sizeof(skb->cb));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!(priv->hw.flags & IEEE802154_HW_OMIT_CKSUM)) {
@@ -70,7 +73,11 @@ mac802154_subif_rx(struct ieee802154_dev *hw, struct sk_buff *skb, u8 lqi)
 		if (skb->len < 2) {
 			pr_debug("got invalid frame\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			goto fail;
+>>>>>>> v3.18
 =======
 			goto fail;
 >>>>>>> v3.18
@@ -79,7 +86,11 @@ mac802154_subif_rx(struct ieee802154_dev *hw, struct sk_buff *skb, u8 lqi)
 		if (crc) {
 			pr_debug("CRC mismatch\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			goto fail;
+>>>>>>> v3.18
 =======
 			goto fail;
 >>>>>>> v3.18
@@ -90,15 +101,21 @@ mac802154_subif_rx(struct ieee802154_dev *hw, struct sk_buff *skb, u8 lqi)
 	mac802154_monitors_rx(priv, skb);
 	mac802154_wpans_rx(priv, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	dev_kfree_skb(skb);
 	return;
 =======
+=======
+>>>>>>> v3.18
 
 	return;
 
 fail:
 	kfree_skb(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -106,9 +123,14 @@ static void mac802154_rx_worker(struct work_struct *work)
 {
 	struct rx_work *rw = container_of(work, struct rx_work, work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *skb = rw->skb;
 
 	mac802154_subif_rx(rw->dev, skb, rw->lqi);
+=======
+
+	mac802154_subif_rx(rw->dev, rw->skb, rw->lqi);
+>>>>>>> v3.18
 =======
 
 	mac802154_subif_rx(rw->dev, rw->skb, rw->lqi);
@@ -126,7 +148,11 @@ ieee802154_rx_irqsafe(struct ieee802154_dev *dev, struct sk_buff *skb, u8 lqi)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	work = kzalloc(sizeof(struct rx_work), GFP_ATOMIC);
+=======
+	work = kzalloc(sizeof(*work), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	work = kzalloc(sizeof(*work), GFP_ATOMIC);
 >>>>>>> v3.18

@@ -40,11 +40,17 @@
 #include <linux/mutex.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 
 #define PREFIX "ACPI: "
+=======
+#include <linux/acpi.h>
+
+#include "internal.h"
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 

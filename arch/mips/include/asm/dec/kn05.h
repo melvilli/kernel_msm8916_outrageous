@@ -50,6 +50,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Bits for the MB interrupt register.
  * The register appears read-only.
  */
@@ -57,6 +58,8 @@
 #define KN4K_MB_INT_RTC		(1<<1)		/* RTC? */
 #define KN4K_MB_INT_MT		(1<<3)		/* I/O ASIC cascade */
 =======
+=======
+>>>>>>> v3.18
  * MB ASIC interrupt bits.
  */
 #define KN4K_MB_INR_MB		4	/* ??? */
@@ -71,6 +74,9 @@
  */
 #define KN4K_MB_INT_IRQ		(0x1f<<0)	/* CPU Int[4:0] status. */
 #define KN4K_MB_INT_IRQ_N(n)	(1<<(n))	/* Individual status bits. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -88,6 +94,10 @@
 #define KN4K_MB_CSR_EE		(1<<15)		/* (bus) Exception Enable? */
 #define KN4K_MB_CSR_MSK		(0x1f<<16)	/* CPU Int[4:0] mask */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KN4K_MB_CSR_MSK_N(n)	(1<<((n)+16))	/* Individual mask bits. */
+>>>>>>> v3.18
 =======
 #define KN4K_MB_CSR_MSK_N(n)	(1<<((n)+16))	/* Individual mask bits. */
 >>>>>>> v3.18

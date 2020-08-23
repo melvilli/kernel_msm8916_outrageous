@@ -40,8 +40,13 @@
 	(OHCI_CTRL_CLE|OHCI_CTRL_BLE|OHCI_CTRL_PLE|OHCI_CTRL_IE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dl_done_list (struct ohci_hcd *);
 static void finish_unlinks (struct ohci_hcd *, u16);
+=======
+static void update_done_list(struct ohci_hcd *);
+static void ohci_work(struct ohci_hcd *);
+>>>>>>> v3.18
 =======
 static void update_done_list(struct ohci_hcd *);
 static void ohci_work(struct ohci_hcd *);
@@ -93,8 +98,13 @@ __acquires(ohci->lock)
 		spin_lock_irq (&ohci->lock);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dl_done_list (ohci);
 	finish_unlinks (ohci, ohci_frame_no(ohci));
+=======
+	update_done_list(ohci);
+	ohci_work(ohci);
+>>>>>>> v3.18
 =======
 	update_done_list(ohci);
 	ohci_work(ohci);
@@ -205,7 +215,10 @@ __acquires(ohci->lock)
 		if (!autostopped) {
 			spin_unlock_irq (&ohci->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(void) ohci_init (ohci);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			status = ohci_restart (ohci);
@@ -245,16 +258,22 @@ __acquires(ohci->lock)
 	periodic_reinit (ohci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* the following code is executed with ohci->lock held and
 	 * irqs disabled if and only if autostopped is true
 	 */
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The following code is executed with ohci->lock held and
 	 * irqs disabled if and only if autostopped is true.  This
 	 * will cause sparse to warn about a "context imbalance".
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 skip_resume:
 	/* interrupts might have been disabled */
@@ -331,6 +350,12 @@ static int ohci_bus_suspend (struct usb_hcd *hcd)
 		rc = ohci_rh_suspend (ohci, 0);
 	spin_unlock_irq (&ohci->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (rc == 0)
+		del_timer_sync(&ohci->io_watchdog);
+>>>>>>> v3.18
 =======
 
 	if (rc == 0)
@@ -484,8 +509,12 @@ static int ohci_root_hub_state_changes(struct ohci_hcd *ohci, int changed,
 /* build "status change" packet (one or two bytes) from HC registers */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 ohci_hub_status_data (struct usb_hcd *hcd, char *buf)
+=======
+int ohci_hub_status_data(struct usb_hcd *hcd, char *buf)
+>>>>>>> v3.18
 =======
 int ohci_hub_status_data(struct usb_hcd *hcd, char *buf)
 >>>>>>> v3.18
@@ -554,6 +583,10 @@ done:
 	return changed ? length : 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ohci_hub_status_data);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ohci_hub_status_data);
 >>>>>>> v3.18
@@ -586,7 +619,11 @@ ohci_hub_descriptor (
 	else if (rh & RH_A_OCPM)	/* per-port overcurrent reporting? */
 	    temp |= 0x0008;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc->wHubCharacteristics = (__force __u16)cpu_to_hc16(ohci, temp);
+=======
+	desc->wHubCharacteristics = cpu_to_le16(temp);
+>>>>>>> v3.18
 =======
 	desc->wHubCharacteristics = cpu_to_le16(temp);
 >>>>>>> v3.18
@@ -622,7 +659,11 @@ static int ohci_start_port_reset (struct usb_hcd *hcd, unsigned port)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* khubd will finish the reset later */
+=======
+	/* hub_wq will finish the reset later */
+>>>>>>> v3.18
 =======
 	/* hub_wq will finish the reset later */
 >>>>>>> v3.18
@@ -651,7 +692,11 @@ static int ohci_start_port_reset (struct usb_hcd *hcd, unsigned port)
 #define tick_before(t1,t2) ((s16)(((s16)(t1))-((s16)(t2))) < 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* called from some task, normally khubd */
+=======
+/* called from some task, normally hub_wq */
+>>>>>>> v3.18
 =======
 /* called from some task, normally hub_wq */
 >>>>>>> v3.18
@@ -712,7 +757,11 @@ static inline int root_port_reset (struct ohci_hcd *ohci, unsigned port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ohci_hub_control (
+=======
+int ohci_hub_control(
+>>>>>>> v3.18
 =======
 int ohci_hub_control(
 >>>>>>> v3.18
@@ -795,10 +844,15 @@ int ohci_hub_control(
 		put_unaligned_le32(temp, buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	OHCI_VERBOSE_DEBUG
 	if (*(u16*)(buf+2))	/* only if wPortChange is interesting */
 #endif
 		dbg_port (ohci, "GetStatus", wIndex, temp);
+=======
+		if (*(u16*)(buf+2))	/* only if wPortChange is interesting */
+			dbg_port(ohci, "GetStatus", wIndex, temp);
+>>>>>>> v3.18
 =======
 		if (*(u16*)(buf+2))	/* only if wPortChange is interesting */
 			dbg_port(ohci, "GetStatus", wIndex, temp);
@@ -849,7 +903,11 @@ error:
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+EXPORT_SYMBOL_GPL(ohci_hub_control);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ohci_hub_control);
 >>>>>>> v3.18

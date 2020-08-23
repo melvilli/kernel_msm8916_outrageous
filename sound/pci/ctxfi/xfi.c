@@ -45,7 +45,11 @@ module_param_array(subsystem, int, NULL, 0444);
 MODULE_PARM_DESC(subsystem, "Override subsystem ID for Creative X-Fi driver");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ct_pci_dev_ids) = {
+=======
+static const struct pci_device_id ct_pci_dev_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ct_pci_dev_ids[] = {
 >>>>>>> v3.18
@@ -76,6 +80,7 @@ ct_card_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 		return -ENOENT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
 	if (err)
 		return err;
@@ -92,6 +97,8 @@ ct_card_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 		printk(KERN_ERR "ctxfi: The valid values for multiple are "
 		       "1, 2 and 4, Value 2 is assumed.\n");
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
 	if (err)
@@ -109,6 +116,9 @@ ct_card_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 			multiple);
 		dev_err(card->dev,
 			"The valid values for multiple are 1, 2 and 4, Value 2 is assumed.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		multiple = 2;
 	}
@@ -147,7 +157,10 @@ static void ct_card_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

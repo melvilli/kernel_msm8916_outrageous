@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -236,7 +240,11 @@ static u16 link_modes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cas_pci_tbl) = {
+=======
+static const struct pci_device_id cas_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cas_pci_tbl[] = {
 >>>>>>> v3.18
@@ -257,7 +265,11 @@ static inline void cas_lock_tx(struct cas *cp)
 
 	for (i = 0; i < N_TX_RINGS; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&cp->tx_lock[i]);
+=======
+		spin_lock_nested(&cp->tx_lock[i], i);
+>>>>>>> v3.18
 =======
 		spin_lock_nested(&cp->tx_lock[i], i);
 >>>>>>> v3.18
@@ -821,7 +833,11 @@ static int cas_reset_mii_phy(struct cas *cp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cas_saturn_firmware_init(struct cas *cp)
+=======
+static void cas_saturn_firmware_init(struct cas *cp)
+>>>>>>> v3.18
 =======
 static void cas_saturn_firmware_init(struct cas *cp)
 >>>>>>> v3.18
@@ -832,7 +848,11 @@ static void cas_saturn_firmware_init(struct cas *cp)
 
 	if (PHY_NS_DP83065 != cp->phy_id)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -842,7 +862,11 @@ static void cas_saturn_firmware_init(struct cas *cp)
 		pr_err("Failed to load firmware \"%s\"\n",
 		       fw_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return err;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -851,7 +875,10 @@ static void cas_saturn_firmware_init(struct cas *cp)
 		pr_err("bogus length %zu in \"%s\"\n",
 		       fw->size, fw_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto out;
@@ -859,6 +886,7 @@ static void cas_saturn_firmware_init(struct cas *cp)
 	cp->fw_load_addr= fw->data[1] << 8 | fw->data[0];
 	cp->fw_size = fw->size - 2;
 	cp->fw_data = vmalloc(cp->fw_size);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!cp->fw_data) {
 		err = -ENOMEM;
@@ -869,11 +897,16 @@ out:
 	release_firmware(fw);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	if (!cp->fw_data)
 		goto out;
 	memcpy(cp->fw_data, &fw->data[2], cp->fw_size);
 out:
 	release_firmware(fw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -882,6 +915,12 @@ static void cas_saturn_firmware_load(struct cas *cp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!cp->fw_data)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!cp->fw_data)
 		return;
@@ -3397,7 +3436,11 @@ use_random_mac_addr:
 	addr = of_get_property(cp->of_node, "local-mac-address", NULL);
 	if (addr != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(dev_addr, addr, 6);
+=======
+		memcpy(dev_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(dev_addr, addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -5011,7 +5054,11 @@ static int cas_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	pci_write_config_word(pdev, PCI_COMMAND, pci_cmd);
 	if (pci_try_set_mwi(pdev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Could not enable MWI for %s\n", pci_name(pdev));
+=======
+		pr_warn("Could not enable MWI for %s\n", pci_name(pdev));
+>>>>>>> v3.18
 =======
 		pr_warn("Could not enable MWI for %s\n", pci_name(pdev));
 >>>>>>> v3.18
@@ -5133,8 +5180,12 @@ static int cas_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto err_out_iounmap;
 	if (cp->cas_flags & CAS_FLAG_SATURN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cas_saturn_firmware_init(cp))
 			goto err_out_iounmap;
+=======
+		cas_saturn_firmware_init(cp);
+>>>>>>> v3.18
 =======
 		cas_saturn_firmware_init(cp);
 >>>>>>> v3.18
@@ -5224,7 +5275,10 @@ err_out_free_netdev:
 err_out_disable_pdev:
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return -ENODEV;
@@ -5265,7 +5319,10 @@ static void cas_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

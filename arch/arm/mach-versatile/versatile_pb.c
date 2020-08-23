@@ -48,6 +48,7 @@ static struct mmci_platform_data mmc1_plat_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pl061_platform_data gpio2_plat_data = {
 	.gpio_base	= 16,
 	.irq_base	= IRQ_GPIO2_START,
@@ -60,11 +61,14 @@ static struct pl061_platform_data gpio3_plat_data = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define UART3_IRQ	{ IRQ_SIC_UART3 }
 #define SCI1_IRQ	{ IRQ_SIC_SCI3 }
 #define MMCI1_IRQ	{ IRQ_MMCI1A, IRQ_SIC_MMCI1B }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * These devices are connected via the core APB bridge
  */
@@ -72,6 +76,8 @@ static struct pl061_platform_data gpio3_plat_data = {
 #define GPIO3_IRQ	{ IRQ_GPIOINT3 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * These devices are connected via the DMA APB bridge
@@ -83,6 +89,7 @@ APB_DEVICE(sci1,  "fpga:0a", SCI1,     NULL);
 APB_DEVICE(mmc1,  "fpga:0b", MMCI1,    &mmc1_plat_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* DevChip Primecells */
 APB_DEVICE(gpio2, "dev:e6",  GPIO2,    &gpio2_plat_data);
 APB_DEVICE(gpio3, "dev:e7",  GPIO3,    &gpio3_plat_data);
@@ -91,6 +98,11 @@ static struct amba_device *amba_devs[] __initdata = {
 	&uart3_device,
 	&gpio2_device,
 	&gpio3_device,
+=======
+
+static struct amba_device *amba_devs[] __initdata = {
+	&uart3_device,
+>>>>>>> v3.18
 =======
 
 static struct amba_device *amba_devs[] __initdata = {

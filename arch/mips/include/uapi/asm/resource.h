@@ -27,7 +27,11 @@
  * for compatibility:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_32BIT
+=======
+#ifndef __mips64
+>>>>>>> v3.18
 =======
 #ifndef __mips64
 >>>>>>> v3.18

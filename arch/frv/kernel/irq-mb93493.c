@@ -119,7 +119,11 @@ static struct irqaction mb93493_irq[2]  = {
 	[0] = {
 		.handler	= mb93493_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags		= IRQF_DISABLED | IRQF_SHARED,
+=======
+		.flags		= IRQF_SHARED,
+>>>>>>> v3.18
 =======
 		.flags		= IRQF_SHARED,
 >>>>>>> v3.18
@@ -129,7 +133,11 @@ static struct irqaction mb93493_irq[2]  = {
 	[1] = {
 		.handler	= mb93493_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags		= IRQF_DISABLED | IRQF_SHARED,
+=======
+		.flags		= IRQF_SHARED,
+>>>>>>> v3.18
 =======
 		.flags		= IRQF_SHARED,
 >>>>>>> v3.18

@@ -24,6 +24,7 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 #include <mach/emev2.h>
 #include <asm/smp_plat.h>
@@ -33,6 +34,8 @@
 
 static int __cpuinit emev2_boot_secondary(unsigned int cpu, struct task_struct *idle)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/smp_plat.h>
 #include <asm/smp_scu.h>
 #include "common.h"
@@ -42,6 +45,9 @@ static int __cpuinit emev2_boot_secondary(unsigned int cpu, struct task_struct *
 #define SMU_GENERAL_REG0 0x7c0
 
 static int emev2_boot_secondary(unsigned int cpu, struct task_struct *idle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	arch_send_wakeup_ipi_mask(cpumask_of(cpu_logical_map(cpu)));
@@ -50,6 +56,7 @@ static int emev2_boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 static void __init emev2_smp_prepare_cpus(unsigned int max_cpus)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	scu_enable(shmobile_scu_base);
 
@@ -76,6 +83,8 @@ static void __init emev2_smp_init_cpus(void)
 struct smp_operations emev2_smp_ops __initdata = {
 	.smp_init_cpus		= emev2_smp_init_cpus,
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *smu;
 
 	/* Tell ROM loader about our vector (in headsmp.S) */
@@ -91,6 +100,9 @@ struct smp_operations emev2_smp_ops __initdata = {
 }
 
 struct smp_operations emev2_smp_ops __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.smp_prepare_cpus	= emev2_smp_prepare_cpus,
 	.smp_boot_secondary	= emev2_boot_secondary,

@@ -18,6 +18,12 @@
 void set_huge_pte_at(struct mm_struct *mm, unsigned long addr,
 		     pte_t *ptep, pte_t pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+pte_t huge_ptep_get(pte_t *ptep);
+pte_t huge_ptep_get_and_clear(struct mm_struct *mm,
+			      unsigned long addr, pte_t *ptep);
+>>>>>>> v3.18
 =======
 pte_t huge_ptep_get(pte_t *ptep);
 pte_t huge_ptep_get_and_clear(struct mm_struct *mm,
@@ -44,6 +50,7 @@ static inline int prepare_hugepage_range(struct file *file,
 int arch_prepare_hugepage(struct page *page);
 void arch_release_hugepage(struct page *page);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline pte_t huge_pte_wrprotect(pte_t pte)
 {
@@ -143,6 +150,8 @@ static inline pte_t mk_huge_pte(struct page *page, pgprot_t pgprot)
 	pte_val(pte) = pmd_val(pmd);
 	return pte;
 =======
+=======
+>>>>>>> v3.18
 static inline void huge_pte_clear(struct mm_struct *mm, unsigned long addr,
 				  pte_t *ptep)
 {
@@ -182,11 +191,15 @@ static inline pte_t mk_huge_pte(struct page *page, pgprot_t pgprot)
 static inline int huge_pte_none(pte_t pte)
 {
 	return pte_none(pte);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline int huge_pte_write(pte_t pte)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pmd_t pmd;
 
@@ -195,13 +208,20 @@ static inline int huge_pte_write(pte_t pte)
 =======
 	return pte_write(pte);
 >>>>>>> v3.18
+=======
+	return pte_write(pte);
+>>>>>>> v3.18
 }
 
 static inline int huge_pte_dirty(pte_t pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* No dirty bit in the segment table entry. */
 	return 0;
+=======
+	return pte_dirty(pte);
+>>>>>>> v3.18
 =======
 	return pte_dirty(pte);
 >>>>>>> v3.18
@@ -209,6 +229,7 @@ static inline int huge_pte_dirty(pte_t pte)
 
 static inline pte_t huge_pte_mkwrite(pte_t pte)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pmd_t pmd;
 
@@ -218,10 +239,14 @@ static inline pte_t huge_pte_mkwrite(pte_t pte)
 =======
 	return pte_mkwrite(pte);
 >>>>>>> v3.18
+=======
+	return pte_mkwrite(pte);
+>>>>>>> v3.18
 }
 
 static inline pte_t huge_pte_mkdirty(pte_t pte)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* No dirty bit in the segment table entry. */
 	return pte;
@@ -241,6 +266,8 @@ static inline void huge_pte_clear(struct mm_struct *mm, unsigned long addr,
 {
 	pmd_clear((pmd_t *) ptep);
 =======
+=======
+>>>>>>> v3.18
 	return pte_mkdirty(pte);
 }
 
@@ -252,6 +279,9 @@ static inline pte_t huge_pte_wrprotect(pte_t pte)
 static inline pte_t huge_pte_modify(pte_t pte, pgprot_t newprot)
 {
 	return pte_modify(pte, newprot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

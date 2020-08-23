@@ -10,7 +10,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 >>>>>>> v3.18
@@ -21,7 +25,11 @@ static inline void assert_server_locked(struct ncp_server *server)
 {
 	if (server->lock == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("ncpfs: server not locked!\n");
+=======
+		ncp_dbg(1, "server not locked!\n");
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "server not locked!\n");
 >>>>>>> v3.18
@@ -84,7 +92,11 @@ static void ncp_add_pstring(struct ncp_server *server, const char *s)
 	assert_server_locked(server);
 	if (len > 255) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("ncpfs: string too long: %s\n", s);
+=======
+		ncp_dbg(1, "string too long: %s\n", s);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "string too long: %s\n", s);
 >>>>>>> v3.18
@@ -238,7 +250,11 @@ int ncp_get_volume_info_with_number(struct ncp_server* server,
 	len = ncp_reply_byte(server, 29);
 	if (len > NCP_VOLNAME_LEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("ncpfs: volume name too long: %d\n", len);
+=======
+		ncp_dbg(1, "volume name too long: %d\n", len);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "volume name too long: %d\n", len);
 >>>>>>> v3.18
@@ -276,7 +292,11 @@ int ncp_get_directory_info(struct ncp_server* server, __u8 n,
 	len = ncp_reply_byte(server, 21);
 	if (len > NCP_VOLNAME_LEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("ncpfs: volume name too long: %d\n", len);
+=======
+		ncp_dbg(1, "volume name too long: %d\n", len);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "volume name too long: %d\n", len);
 >>>>>>> v3.18
@@ -316,9 +336,15 @@ ncp_make_closed(struct inode *inode)
 
 		if (!err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			PPRINTK("ncp_make_closed: volnum=%d, dirent=%u, error=%d\n",
 				NCP_FINFO(inode)->volNumber,
 				NCP_FINFO(inode)->dirEntNum, err);
+=======
+			ncp_vdbg("volnum=%d, dirent=%u, error=%d\n",
+				 NCP_FINFO(inode)->volNumber,
+				 NCP_FINFO(inode)->dirEntNum, err);
+>>>>>>> v3.18
 =======
 			ncp_vdbg("volnum=%d, dirent=%u, error=%d\n",
 				 NCP_FINFO(inode)->volNumber,
@@ -421,8 +447,12 @@ int ncp_obtain_nfs_info(struct ncp_server *server,
 		if ((result = ncp_request(server, 87)) == 0) {
 			ncp_extract_nfs_info(ncp_reply_data(server, 0), &target->nfs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DPRINTK(KERN_DEBUG
 				"ncp_obtain_nfs_info: (%s) mode=0%o, rdev=0x%x\n",
+=======
+			ncp_dbg(1, "(%s) mode=0%o, rdev=0x%x\n",
+>>>>>>> v3.18
 =======
 			ncp_dbg(1, "(%s) mode=0%o, rdev=0x%x\n",
 >>>>>>> v3.18
@@ -456,7 +486,11 @@ int ncp_obtain_info(struct ncp_server *server, struct inode *dir, const char *pa
 
 	if (target == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ncp_obtain_info: invalid call\n");
+=======
+		pr_err("%s: invalid call\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_err("%s: invalid call\n", __func__);
 >>>>>>> v3.18
@@ -533,7 +567,11 @@ ncp_get_known_namespace(struct ncp_server *server, __u8 volume)
 
 	while (no_namespaces > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("get_namespaces: found %d on %d\n", *namespace, volume);
+=======
+		ncp_dbg(1, "found %d on %d\n", *namespace, volume);
+>>>>>>> v3.18
 =======
 		ncp_dbg(1, "found %d on %d\n", *namespace, volume);
 >>>>>>> v3.18
@@ -570,8 +608,12 @@ ncp_update_known_namespace(struct ncp_server *server, __u8 volume, int *ret_ns)
 		*ret_ns = ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("lookup_vol: namespace[%d] = %d\n",
 		volume, server->name_space[volume]);
+=======
+	ncp_dbg(1, "namespace[%d] = %d\n", volume, server->name_space[volume]);
+>>>>>>> v3.18
 =======
 	ncp_dbg(1, "namespace[%d] = %d\n", volume, server->name_space[volume]);
 >>>>>>> v3.18
@@ -639,7 +681,11 @@ ncp_get_volume_root(struct ncp_server *server,
 	int result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("ncp_get_volume_root: looking up vol %s\n", volname);
+=======
+	ncp_dbg(1, "looking up vol %s\n", volname);
+>>>>>>> v3.18
 =======
 	ncp_dbg(1, "looking up vol %s\n", volname);
 >>>>>>> v3.18

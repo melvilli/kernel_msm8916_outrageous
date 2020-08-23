@@ -281,17 +281,23 @@ int qib_make_ud_req(struct qib_qp *qp)
 	if (ah_attr->dlid >= QIB_MULTICAST_LID_BASE) {
 		if (ah_attr->dlid != QIB_PERMISSIVE_LID)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ibp->n_multicast_xmit++;
 		else
 			ibp->n_unicast_xmit++;
 	} else {
 		ibp->n_unicast_xmit++;
 =======
+=======
+>>>>>>> v3.18
 			this_cpu_inc(ibp->pmastats->n_multicast_xmit);
 		else
 			this_cpu_inc(ibp->pmastats->n_unicast_xmit);
 	} else {
 		this_cpu_inc(ibp->pmastats->n_unicast_xmit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lid = ah_attr->dlid & ~((1 << ppd->lmc) - 1);
 		if (unlikely(lid == ppd->lid)) {

@@ -17,9 +17,13 @@
 #include <linux/delay.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ci13xxx_imx.h"
 
 #define USB_DEV_MAX 4
+=======
+#include "ci_hdrc_imx.h"
+>>>>>>> v3.18
 =======
 #include "ci_hdrc_imx.h"
 >>>>>>> v3.18
@@ -28,8 +32,11 @@
 #define MX25_BM_EXTERNAL_VBUS_DIVIDER	BIT(23)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MX53_USB_OTG_PHY_CTRL_0_OFFSET	0x08
 =======
+=======
+>>>>>>> v3.18
 #define MX25_EHCI_INTERFACE_SINGLE_UNI	(2 << 0)
 #define MX25_EHCI_INTERFACE_DIFF_UNI	(0 << 0)
 #define MX25_EHCI_INTERFACE_MASK	(0xf)
@@ -56,6 +63,9 @@
 
 #define MX53_USB_OTG_PHY_CTRL_0_OFFSET	0x08
 #define MX53_USB_OTG_PHY_CTRL_1_OFFSET	0x0c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MX53_USB_UH2_CTRL_OFFSET	0x14
 #define MX53_USB_UH3_CTRL_OFFSET	0x18
@@ -63,10 +73,13 @@
 #define MX53_BM_OVER_CUR_DIS_OTG	BIT(8)
 #define MX53_BM_OVER_CUR_DIS_UHx	BIT(30)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MX6_BM_OVER_CUR_DIS		BIT(7)
 
 =======
+=======
+>>>>>>> v3.18
 #define MX53_USB_PHYCTRL1_PLLDIV_MASK	0x3
 #define MX53_USB_PLL_DIV_24_MHZ		0x01
 
@@ -81,11 +94,15 @@ struct usbmisc_ops {
 	int (*post)(struct imx_usbmisc_data *data);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct imx_usbmisc {
 	void __iomem *base;
 	spinlock_t lock;
 	struct clk *clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct usbmisc_usb_device usbdev[USB_DEV_MAX];
 	const struct usbmisc_ops *ops;
@@ -118,6 +135,8 @@ static int usbmisc_imx25_post(struct device *dev)
 {
 	struct usbmisc_usb_device *usbdev;
 =======
+=======
+>>>>>>> v3.18
 	const struct usbmisc_ops *ops;
 };
 
@@ -158,11 +177,15 @@ static int usbmisc_imx25_init(struct imx_usbmisc_data *data)
 static int usbmisc_imx25_post(struct imx_usbmisc_data *data)
 {
 	struct imx_usbmisc *usbmisc = dev_get_drvdata(data->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *reg;
 	unsigned long flags;
 	u32 val;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	usbdev = get_usbdev(dev);
 	if (IS_ERR(usbdev))
@@ -172,12 +195,17 @@ static int usbmisc_imx25_post(struct imx_usbmisc_data *data)
 
 	if (usbdev->evdo) {
 =======
+=======
+>>>>>>> v3.18
 	if (data->index > 2)
 		return -EINVAL;
 
 	reg = usbmisc->base + MX25_USB_PHY_CTRL_OFFSET;
 
 	if (data->evdo) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock_irqsave(&usbmisc->lock, flags);
 		val = readl(reg);
@@ -190,10 +218,13 @@ static int usbmisc_imx25_post(struct imx_usbmisc_data *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usbmisc_imx53_init(struct device *dev)
 {
 	struct usbmisc_usb_device *usbdev;
 =======
+=======
+>>>>>>> v3.18
 static int usbmisc_imx27_init(struct imx_usbmisc_data *data)
 {
 	struct imx_usbmisc *usbmisc = dev_get_drvdata(data->dev);
@@ -228,11 +259,15 @@ static int usbmisc_imx27_init(struct imx_usbmisc_data *data)
 static int usbmisc_imx53_init(struct imx_usbmisc_data *data)
 {
 	struct imx_usbmisc *usbmisc = dev_get_drvdata(data->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *reg = NULL;
 	unsigned long flags;
 	u32 val = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	usbdev = get_usbdev(dev);
 	if (IS_ERR(usbdev))
@@ -242,6 +277,8 @@ static int usbmisc_imx53_init(struct imx_usbmisc_data *data)
 		spin_lock_irqsave(&usbmisc->lock, flags);
 		switch (usbdev->index) {
 =======
+=======
+>>>>>>> v3.18
 	if (data->index > 3)
 		return -EINVAL;
 
@@ -255,6 +292,9 @@ static int usbmisc_imx53_init(struct imx_usbmisc_data *data)
 	if (data->disable_oc) {
 		spin_lock_irqsave(&usbmisc->lock, flags);
 		switch (data->index) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 0:
 			reg = usbmisc->base + MX53_USB_OTG_PHY_CTRL_0_OFFSET;
@@ -282,6 +322,7 @@ static int usbmisc_imx53_init(struct imx_usbmisc_data *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usbmisc_imx6q_init(struct device *dev)
 {
 
@@ -299,6 +340,8 @@ static int usbmisc_imx6q_init(struct device *dev)
 		writel(reg | MX6_BM_OVER_CUR_DIS,
 			usbmisc->base + usbdev->index * 4);
 =======
+=======
+>>>>>>> v3.18
 static int usbmisc_imx6q_init(struct imx_usbmisc_data *data)
 {
 	struct imx_usbmisc *usbmisc = dev_get_drvdata(data->dev);
@@ -313,6 +356,9 @@ static int usbmisc_imx6q_init(struct imx_usbmisc_data *data)
 		reg = readl(usbmisc->base + data->index * 4);
 		writel(reg | MX6_BM_OVER_CUR_DIS,
 			usbmisc->base + data->index * 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_unlock_irqrestore(&usbmisc->lock, flags);
 	}
@@ -321,11 +367,14 @@ static int usbmisc_imx6q_init(struct imx_usbmisc_data *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct usbmisc_ops imx25_usbmisc_ops = {
 	.post = usbmisc_imx25_post,
 };
 
 =======
+=======
+>>>>>>> v3.18
 static int usbmisc_vf610_init(struct imx_usbmisc_data *data)
 {
 	struct imx_usbmisc *usbmisc = dev_get_drvdata(data->dev);
@@ -355,6 +404,9 @@ static const struct usbmisc_ops imx27_usbmisc_ops = {
 	.init = usbmisc_imx27_init,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct usbmisc_ops imx53_usbmisc_ops = {
 	.init = usbmisc_imx53_init,
@@ -365,7 +417,10 @@ static const struct usbmisc_ops imx6q_usbmisc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct usbmisc_ops vf610_usbmisc_ops = {
 	.init = usbmisc_vf610_init,
 };
@@ -390,6 +445,9 @@ int imx_usbmisc_init_post(struct imx_usbmisc_data *data)
 }
 EXPORT_SYMBOL_GPL(imx_usbmisc_init_post);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct of_device_id usbmisc_imx_dt_ids[] = {
 	{
@@ -398,7 +456,10 @@ static const struct of_device_id usbmisc_imx_dt_ids[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.compatible = "fsl,imx35-usbmisc",
 		.data = &imx25_usbmisc_ops,
 	},
@@ -411,6 +472,9 @@ static const struct of_device_id usbmisc_imx_dt_ids[] = {
 		.data = &imx53_usbmisc_ops,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.compatible = "fsl,imx53-usbmisc",
 		.data = &imx53_usbmisc_ops,
@@ -420,9 +484,12 @@ static const struct of_device_id usbmisc_imx_dt_ids[] = {
 		.data = &imx6q_usbmisc_ops,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ /* sentinel */ }
 };
 =======
+=======
+>>>>>>> v3.18
 	{
 		.compatible = "fsl,vf610-usbmisc",
 		.data = &vf610_usbmisc_ops,
@@ -430,6 +497,9 @@ static const struct of_device_id usbmisc_imx_dt_ids[] = {
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, usbmisc_imx_dt_ids);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int usbmisc_imx_probe(struct platform_device *pdev)
@@ -440,9 +510,12 @@ static int usbmisc_imx_probe(struct platform_device *pdev)
 	struct of_device_id *tmp_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (usbmisc)
 		return -EBUSY;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	data = devm_kzalloc(&pdev->dev, sizeof(*data), GFP_KERNEL);
@@ -474,6 +547,7 @@ static int usbmisc_imx_probe(struct platform_device *pdev)
 		of_match_device(usbmisc_imx_dt_ids, &pdev->dev);
 	data->ops = (const struct usbmisc_ops *)tmp_dev->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usbmisc = data;
 	ret = usbmisc_set_ops(data->ops);
 	if (ret) {
@@ -484,6 +558,9 @@ static int usbmisc_imx_probe(struct platform_device *pdev)
 =======
 	platform_set_drvdata(pdev, data);
 >>>>>>> v3.18
+=======
+	platform_set_drvdata(pdev, data);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -491,9 +568,14 @@ static int usbmisc_imx_probe(struct platform_device *pdev)
 static int usbmisc_imx_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usbmisc_unset_ops(usbmisc->ops);
 	clk_disable_unprepare(usbmisc->clk);
 	usbmisc = NULL;
+=======
+	struct imx_usbmisc *usbmisc = dev_get_drvdata(&pdev->dev);
+	clk_disable_unprepare(usbmisc->clk);
+>>>>>>> v3.18
 =======
 	struct imx_usbmisc *usbmisc = dev_get_drvdata(&pdev->dev);
 	clk_disable_unprepare(usbmisc->clk);
@@ -512,6 +594,7 @@ static struct platform_driver usbmisc_imx_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int usbmisc_imx_drv_init(void)
 {
 	return platform_driver_register(&usbmisc_imx_driver);
@@ -523,6 +606,9 @@ void usbmisc_imx_drv_exit(void)
 	platform_driver_unregister(&usbmisc_imx_driver);
 }
 module_exit(usbmisc_imx_drv_exit);
+=======
+module_platform_driver(usbmisc_imx_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(usbmisc_imx_driver);
 >>>>>>> v3.18

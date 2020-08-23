@@ -368,7 +368,11 @@ static int hsc_rx_set(struct hsi_client *cl, struct hsc_rx_config *rxc)
 	tmp = cl->rx_cfg;
 	cl->rx_cfg.mode = rxc->mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cl->rx_cfg.channels = rxc->channels;
+=======
+	cl->rx_cfg.num_hw_channels = rxc->channels;
+>>>>>>> v3.18
 =======
 	cl->rx_cfg.num_hw_channels = rxc->channels;
 >>>>>>> v3.18
@@ -388,7 +392,11 @@ static inline void hsc_rx_get(struct hsi_client *cl, struct hsc_rx_config *rxc)
 {
 	rxc->mode = cl->rx_cfg.mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxc->channels = cl->rx_cfg.channels;
+=======
+	rxc->channels = cl->rx_cfg.num_hw_channels;
+>>>>>>> v3.18
 =======
 	rxc->channels = cl->rx_cfg.num_hw_channels;
 >>>>>>> v3.18
@@ -411,7 +419,11 @@ static int hsc_tx_set(struct hsi_client *cl, struct hsc_tx_config *txc)
 	tmp = cl->tx_cfg;
 	cl->tx_cfg.mode = txc->mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cl->tx_cfg.channels = txc->channels;
+=======
+	cl->tx_cfg.num_hw_channels = txc->channels;
+>>>>>>> v3.18
 =======
 	cl->tx_cfg.num_hw_channels = txc->channels;
 >>>>>>> v3.18
@@ -430,7 +442,11 @@ static inline void hsc_tx_get(struct hsi_client *cl, struct hsc_tx_config *txc)
 {
 	txc->mode = cl->tx_cfg.mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txc->channels = cl->tx_cfg.channels;
+=======
+	txc->channels = cl->tx_cfg.num_hw_channels;
+>>>>>>> v3.18
 =======
 	txc->channels = cl->tx_cfg.num_hw_channels;
 >>>>>>> v3.18
@@ -452,7 +468,11 @@ static ssize_t hsc_read(struct file *file, char __user *buf, size_t len,
 	if (len > max_data_size)
 		len = max_data_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (channel->ch >= channel->cl->rx_cfg.channels)
+=======
+	if (channel->ch >= channel->cl->rx_cfg.num_hw_channels)
+>>>>>>> v3.18
 =======
 	if (channel->ch >= channel->cl->rx_cfg.num_hw_channels)
 >>>>>>> v3.18
@@ -513,7 +533,11 @@ static ssize_t hsc_write(struct file *file, const char __user *buf, size_t len,
 	if (len > max_data_size)
 		len = max_data_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (channel->ch >= channel->cl->tx_cfg.channels)
+=======
+	if (channel->ch >= channel->cl->tx_cfg.num_hw_channels)
+>>>>>>> v3.18
 =======
 	if (channel->ch >= channel->cl->tx_cfg.num_hw_channels)
 >>>>>>> v3.18
@@ -730,7 +754,11 @@ static int hsc_probe(struct device *dev)
 		ret = alloc_chrdev_region(&hsc_dev, hsc_baseminor,
 						HSC_DEVS, devname);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret > 0)
+=======
+		if (ret == 0)
+>>>>>>> v3.18
 =======
 		if (ret == 0)
 >>>>>>> v3.18

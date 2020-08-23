@@ -33,7 +33,11 @@ TRACE_EVENT(task_newtask,
 TRACE_EVENT(task_rename,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct task_struct *task, char *comm),
+=======
+	TP_PROTO(struct task_struct *task, const char *comm),
+>>>>>>> v3.18
 =======
 	TP_PROTO(struct task_struct *task, const char *comm),
 >>>>>>> v3.18

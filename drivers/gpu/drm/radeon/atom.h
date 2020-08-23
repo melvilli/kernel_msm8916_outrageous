@@ -126,6 +126,10 @@ struct atom_context {
 	struct card_info *card;
 	struct mutex mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex scratch_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex scratch_mutex;
 >>>>>>> v3.18
@@ -150,6 +154,10 @@ extern int atom_debug;
 struct atom_context *atom_parse(struct card_info *, void *);
 int atom_execute_table(struct atom_context *, int, uint32_t *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int atom_execute_table_scratch_unlocked(struct atom_context *, int, uint32_t *);
+>>>>>>> v3.18
 =======
 int atom_execute_table_scratch_unlocked(struct atom_context *, int, uint32_t *);
 >>>>>>> v3.18

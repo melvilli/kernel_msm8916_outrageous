@@ -45,12 +45,18 @@ static __net_init int sunrpc_init_net(struct net *net)
 		goto err_unixgid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpc_pipefs_init_net(net);
 =======
+=======
+>>>>>>> v3.18
 	err = rpc_pipefs_init_net(net);
 	if (err)
 		goto err_pipefs;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&sn->all_clients);
 	spin_lock_init(&sn->rpc_client_lock);
@@ -58,6 +64,11 @@ static __net_init int sunrpc_init_net(struct net *net)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_pipefs:
+	unix_gid_cache_destroy(net);
+>>>>>>> v3.18
 =======
 err_pipefs:
 	unix_gid_cache_destroy(net);
@@ -73,6 +84,10 @@ err_proc:
 static __net_exit void sunrpc_exit_net(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rpc_pipefs_exit_net(net);
+>>>>>>> v3.18
 =======
 	rpc_pipefs_exit_net(net);
 >>>>>>> v3.18

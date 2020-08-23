@@ -39,11 +39,16 @@ static struct musb_hdrc_config musb_config = {
 
 static struct musb_hdrc_platform_data musb_plat = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_GADGET_MUSB_HDRC
 	.mode		= MUSB_OTG,
 #else
 	.mode		= MUSB_HOST,
 #endif
+=======
+	.mode		= MUSB_OTG,
+
+>>>>>>> v3.18
 =======
 	.mode		= MUSB_OTG,
 
@@ -91,9 +96,12 @@ void __init usb_musb_init(struct omap_musb_board_data *musb_board_data)
 	musb_plat.extvbus = board_data->extvbus;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_is_omap44xx())
 		musb_plat.has_mailbox = true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (soc_is_am35xx()) {

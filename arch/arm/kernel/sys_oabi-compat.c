@@ -194,6 +194,7 @@ struct oabi_flock64 {
 } __attribute__ ((packed,aligned(4)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long do_locks(unsigned int fd, unsigned int cmd,
 				 unsigned long arg)
 {
@@ -242,6 +243,8 @@ asmlinkage long sys_oabi_fcntl64(unsigned int fd, unsigned int cmd,
 		return sys_fcntl64(fd, cmd, arg);
 	}
 =======
+=======
+>>>>>>> v3.18
 asmlinkage long sys_oabi_fcntl64(unsigned int fd, unsigned int cmd,
 				 unsigned long arg)
 {
@@ -291,6 +294,9 @@ asmlinkage long sys_oabi_fcntl64(unsigned int fd, unsigned int cmd,
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -329,12 +335,17 @@ asmlinkage long sys_oabi_epoll_wait(int epfd,
 	long ret, err, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (maxevents <= 0 ||
 			maxevents > (INT_MAX/sizeof(*kbuf)) ||
 			maxevents > (INT_MAX/sizeof(*events)))
 		return -EINVAL;
 	if (!access_ok(VERIFY_WRITE, events, sizeof(*events) * maxevents))
 		return -EFAULT;
+=======
+	if (maxevents <= 0 || maxevents > (INT_MAX/sizeof(struct epoll_event)))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (maxevents <= 0 || maxevents > (INT_MAX/sizeof(struct epoll_event)))
 		return -EINVAL;
@@ -376,8 +387,11 @@ asmlinkage long sys_oabi_semtimedop(int semid,
 	if (nsops < 1 || nsops > SEMOPM)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!access_ok(VERIFY_READ, tsops, sizeof(*tsops) * nsops))
 		return -EFAULT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sops = kmalloc(sizeof(*sops) * nsops, GFP_KERNEL);

@@ -150,7 +150,11 @@ static u32 ddb_i2c_functionality(struct i2c_adapter *adap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct i2c_algorithm ddb_i2c_algo = {
+=======
+static struct i2c_algorithm ddb_i2c_algo = {
+>>>>>>> v3.18
 =======
 static struct i2c_algorithm ddb_i2c_algo = {
 >>>>>>> v3.18
@@ -271,7 +275,11 @@ static void io_free(struct pci_dev *pdev, u8 **vbuf,
 		if (vbuf[i]) {
 			pci_free_consistent(pdev, size, vbuf[i], pbuf[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vbuf[i] = 0;
+=======
+			vbuf[i] = NULL;
+>>>>>>> v3.18
 =======
 			vbuf[i] = NULL;
 >>>>>>> v3.18
@@ -449,7 +457,11 @@ static u32 ddb_output_free(struct ddb_output *output)
 
 static ssize_t ddb_output_write(struct ddb_output *output,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const u8 *buf, size_t count)
+=======
+				const __user u8 *buf, size_t count)
+>>>>>>> v3.18
 =======
 				const __user u8 *buf, size_t count)
 >>>>>>> v3.18
@@ -519,7 +531,11 @@ static u32 ddb_input_avail(struct ddb_input *input)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ddb_input_read(struct ddb_input *input, u8 *buf, size_t count)
+=======
+static ssize_t ddb_input_read(struct ddb_input *input, __user u8 *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t ddb_input_read(struct ddb_input *input, __user u8 *buf, size_t count)
 >>>>>>> v3.18
@@ -866,7 +882,11 @@ static int dvb_input_attach(struct ddb_input *input)
 	input->attached = 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input->fe = 0;
+=======
+	input->fe = NULL;
+>>>>>>> v3.18
 =======
 	input->fe = NULL;
 >>>>>>> v3.18
@@ -897,10 +917,15 @@ static int dvb_input_attach(struct ddb_input *input)
 		if (tuner_attach_tda18271(input) < 0)
 			return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (input->fe) {
 			if (dvb_register_frontend(adap, input->fe) < 0)
 				return -ENODEV;
 		}
+=======
+		if (dvb_register_frontend(adap, input->fe) < 0)
+			return -ENODEV;
+>>>>>>> v3.18
 =======
 		if (dvb_register_frontend(adap, input->fe) < 0)
 			return -ENODEV;
@@ -923,7 +948,11 @@ static int dvb_input_attach(struct ddb_input *input)
 /****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ts_write(struct file *file, const char *buf,
+=======
+static ssize_t ts_write(struct file *file, const __user char *buf,
+>>>>>>> v3.18
 =======
 static ssize_t ts_write(struct file *file, const __user char *buf,
 >>>>>>> v3.18
@@ -952,7 +981,11 @@ static ssize_t ts_write(struct file *file, const __user char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ts_read(struct file *file, char *buf,
+=======
+static ssize_t ts_read(struct file *file, __user char *buf,
+>>>>>>> v3.18
 =======
 static ssize_t ts_read(struct file *file, __user char *buf,
 >>>>>>> v3.18
@@ -1011,11 +1044,17 @@ static const struct file_operations ci_fops = {
 	.release = dvb_generic_release,
 	.poll    = ts_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap    = 0,
 };
 
 static struct dvb_device dvbdev_ci = {
 	.priv    = 0,
+=======
+};
+
+static struct dvb_device dvbdev_ci = {
+>>>>>>> v3.18
 =======
 };
 
@@ -1080,7 +1119,11 @@ static void output_tasklet(unsigned long data)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cxd2099_cfg cxd_cfg = {
+=======
+static struct cxd2099_cfg cxd_cfg = {
+>>>>>>> v3.18
 =======
 static struct cxd2099_cfg cxd_cfg = {
 >>>>>>> v3.18
@@ -1173,7 +1216,11 @@ static void ddb_ports_detach(struct ddb *dev)
 				dvb_ca_en50221_release(port->en);
 				kfree(port->en);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				port->en = 0;
+=======
+				port->en = NULL;
+>>>>>>> v3.18
 =======
 				port->en = NULL;
 >>>>>>> v3.18
@@ -1463,9 +1510,15 @@ static int flashio(struct ddb *dev, u8 *wbuf, u32 wlen, u8 *rbuf, u32 rlen)
 
 struct ddb_flashio {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 *write_buf;
 	__u32 write_len;
 	__u8 *read_buf;
+=======
+	__user __u8 *write_buf;
+	__u32 write_len;
+	__user __u8 *read_buf;
+>>>>>>> v3.18
 =======
 	__user __u8 *write_buf;
 	__u32 write_len;
@@ -1495,7 +1548,11 @@ static long ddb_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct ddb *dev = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *parg = (void *)arg;
+=======
+	__user void *parg = (__user void *)arg;
+>>>>>>> v3.18
 =======
 	__user void *parg = (__user void *)arg;
 >>>>>>> v3.18
@@ -1602,7 +1659,11 @@ static void ddb_unmap(struct ddb *dev)
 static void ddb_remove(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ddb *dev = (struct ddb *) pci_get_drvdata(pdev);
+=======
+	struct ddb *dev = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ddb *dev = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1622,7 +1683,11 @@ static void ddb_remove(struct pci_dev *pdev)
 
 	ddb_unmap(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, 0);
+=======
+	pci_set_drvdata(pdev, NULL);
+>>>>>>> v3.18
 =======
 	pci_set_drvdata(pdev, NULL);
 >>>>>>> v3.18
@@ -1705,7 +1770,11 @@ fail:
 	printk(KERN_ERR "fail\n");
 	ddb_unmap(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, 0);
+=======
+	pci_set_drvdata(pdev, NULL);
+>>>>>>> v3.18
 =======
 	pci_set_drvdata(pdev, NULL);
 >>>>>>> v3.18
@@ -1735,13 +1804,19 @@ static struct ddb_info ddb_octopus_le = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ddb_info ddb_octopus_mini = {
 	.type     = DDB_OCTOPUS,
 	.name     = "Digital Devices Octopus Mini",
 	.port_num = 4,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ddb_info ddb_v6 = {
 	.type     = DDB_OCTOPUS,
@@ -1749,7 +1824,10 @@ static struct ddb_info ddb_v6 = {
 	.port_num = 3,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ddb_info ddb_v6_5 = {
 	.type     = DDB_OCTOPUS,
 	.name     = "Digital Devices Cine S2 V6.5 DVB adapter",
@@ -1773,6 +1851,9 @@ static struct ddb_info ddb_octopusv3 = {
 	.name     = "Digital Devices Octopus V3 DVB adapter",
 	.port_num = 4,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DDVID 0xdd01 /* Digital Devices Vendor ID */
@@ -1787,15 +1868,21 @@ static const struct pci_device_id ddb_id_tbl[] = {
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0001, ddb_octopus),
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0002, ddb_octopus_le),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0010, ddb_octopus),
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0020, ddb_v6),
 =======
+=======
+>>>>>>> v3.18
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0010, ddb_octopus_mini),
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0020, ddb_v6),
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0021, ddb_v6_5),
 	DDB_ID(DDVID, 0x0003, DDVID, 0x0030, ddb_dvbct),
 	DDB_ID(DDVID, 0x0003, DDVID, 0xdb03, ddb_satixS2v3),
 	DDB_ID(DDVID, 0x0005, DDVID, 0x0004, ddb_octopusv3),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* in case sub-ids got deleted in flash */
 	DDB_ID(DDVID, 0x0003, PCI_ANY_ID, PCI_ANY_ID, ddb_none),

@@ -174,7 +174,11 @@ static char *tomoyo_get_local_path(struct dentry *dentry, char * const buffer,
 		 * operation.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (inode->i_op && !inode->i_op->rename)
+=======
+		if (!inode->i_op->rename && !inode->i_op->rename2)
+>>>>>>> v3.18
 =======
 		if (!inode->i_op->rename && !inode->i_op->rename2)
 >>>>>>> v3.18
@@ -287,7 +291,12 @@ char *tomoyo_realpath_from_path(struct path *path)
 		 * or dentry without vfsmount.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!path->mnt || (inode->i_op && !inode->i_op->rename))
+=======
+		if (!path->mnt ||
+		    (!inode->i_op->rename && !inode->i_op->rename2))
+>>>>>>> v3.18
 =======
 		if (!path->mnt ||
 		    (!inode->i_op->rename && !inode->i_op->rename2))

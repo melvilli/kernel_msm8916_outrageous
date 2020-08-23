@@ -1,8 +1,13 @@
 00-INDEX
 	- This file
 <<<<<<< HEAD
+<<<<<<< HEAD
 acer-wmi.txt
 	- information on the Acer Laptop WMI Extras driver.
+=======
+Makefile
+	- Makefile for building dslm example program.
+>>>>>>> v3.18
 =======
 Makefile
 	- Makefile for building dslm example program.
@@ -14,6 +19,11 @@ disk-shock-protection.txt
 dslm.c
 	- Simple Disk Sleep Monitor program
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+freefall.c
+	- (HP/DELL) laptop accelerometer program for disk protection.
+>>>>>>> v3.18
 =======
 freefall.c
 	- (HP/DELL) laptop accelerometer program for disk protection.
@@ -27,6 +37,11 @@ sonypi.txt
 thinkpad-acpi.txt
 	- information on the (IBM and Lenovo) ThinkPad ACPI Extras driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+toshiba_haps.txt
+	- information on the Toshiba HDD Active Protection Sensor driver.
+>>>>>>> v3.18
 =======
 toshiba_haps.txt
 	- information on the Toshiba HDD Active Protection Sensor driver.

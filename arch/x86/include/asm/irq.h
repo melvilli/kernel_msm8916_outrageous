@@ -26,6 +26,10 @@ extern void irq_ctx_init(int cpu);
 #ifdef CONFIG_HOTPLUG_CPU
 #include <linux/cpumask.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int check_irq_vectors_for_cpu_disable(void);
+>>>>>>> v3.18
 =======
 extern int check_irq_vectors_for_cpu_disable(void);
 >>>>>>> v3.18
@@ -38,7 +42,11 @@ extern void native_init_IRQ(void);
 extern bool handle_irq(unsigned irq, struct pt_regs *regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int do_IRQ(struct pt_regs *regs);
+=======
+extern __visible unsigned int do_IRQ(struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 extern __visible unsigned int do_IRQ(struct pt_regs *regs);
 >>>>>>> v3.18
@@ -51,7 +59,11 @@ extern void init_ISA_irqs(void);
 
 #ifdef CONFIG_X86_LOCAL_APIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 void arch_trigger_all_cpu_backtrace(void);
+=======
+void arch_trigger_all_cpu_backtrace(bool);
+>>>>>>> v3.18
 =======
 void arch_trigger_all_cpu_backtrace(bool);
 >>>>>>> v3.18

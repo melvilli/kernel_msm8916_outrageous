@@ -2,7 +2,11 @@
  * access guest memory
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2008, 2009
+=======
+ * Copyright IBM Corp. 2008, 2014
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2008, 2014
 >>>>>>> v3.18
@@ -19,6 +23,7 @@
 
 #include <linux/compiler.h>
 #include <linux/kvm_host.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/uaccess.h>
 #include "kvm-s390.h"
@@ -105,6 +110,8 @@ static inline int __copy_guest(struct kvm_vcpu *vcpu, unsigned long to,
 #define copy_from_guest_absolute(vcpu, to, from, size) \
 	__copy_guest(vcpu, (unsigned long)to, from, size, 0, 0)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <linux/ptrace.h>
 #include "kvm-s390.h"
@@ -421,6 +428,9 @@ void ipte_lock(struct kvm_vcpu *vcpu);
 void ipte_unlock(struct kvm_vcpu *vcpu);
 int ipte_lock_held(struct kvm_vcpu *vcpu);
 int kvm_s390_check_low_addr_protection(struct kvm_vcpu *vcpu, unsigned long ga);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __KVM_S390_GACCESS_H */

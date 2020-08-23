@@ -183,12 +183,18 @@ struct wm8994_pdata {
 	int micdet_delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Delay between microphone detect completing and reporting on
 	 * insert (specified in ms)
 	 */
 	int mic_id_delay;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* IRQ for microphone detection if brought out directly as a
 	 * signal.
@@ -232,12 +238,18 @@ struct wm8994_pdata {
 	 */
 	int max_channels_clocked[WM8994_NUM_AIF];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/**
 	 * GPIO for the IRQ pin if host only supports edge triggering
 	 */
 	int irq_gpio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -87,7 +87,11 @@ static int ade7759_spi_read_reg_16(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = spi_w8r16(st->us, ADE7759_READ_REG(reg_address));
+=======
+	ret = spi_w8r16be(st->us, ADE7759_READ_REG(reg_address));
+>>>>>>> v3.18
 =======
 	ret = spi_w8r16be(st->us, ADE7759_READ_REG(reg_address));
 >>>>>>> v3.18
@@ -99,7 +103,10 @@ static int ade7759_spi_read_reg_16(struct device *dev,
 
 	*val = ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*val = be16_to_cpup(val);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -193,9 +200,15 @@ static ssize_t ade7759_write_8bit(struct device *dev,
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u8 val;
+
+	ret = kstrtou8(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	u8 val;
 
@@ -217,9 +230,15 @@ static ssize_t ade7759_write_16bit(struct device *dev,
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u16 val;
+
+	ret = kstrtou16(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	u16 val;
 
@@ -238,6 +257,10 @@ static int ade7759_reset(struct device *dev)
 	int ret;
 	u16 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -252,6 +275,7 @@ static int ade7759_reset(struct device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t ade7759_write_reset(struct device *dev,
 		struct device_attribute *attr,
@@ -268,6 +292,8 @@ static ssize_t ade7759_write_reset(struct device *dev,
 	return -1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static IIO_DEV_ATTR_AENERGY(ade7759_read_40bit, ADE7759_AENERGY);
@@ -323,6 +349,10 @@ static int ade7759_set_irq(struct device *dev, bool enable)
 	int ret;
 	u8 irqen;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -387,6 +417,10 @@ static ssize_t ade7759_read_frequency(struct device *dev,
 	u16 t;
 	int sps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -410,17 +444,23 @@ static ssize_t ade7759_write_frequency(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct ade7759_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 	int ret;
 	u16 reg, t;
 
 	ret = strict_strtol(buf, 10, &val);
 =======
+=======
+>>>>>>> v3.18
 	u16 val;
 	int ret;
 	u16 reg, t;
 
 	ret = kstrtou16(buf, 10, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -461,8 +501,11 @@ static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO,
 		ade7759_write_frequency);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static IIO_DEV_ATTR_RESET(ade7759_write_reset);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static IIO_CONST_ATTR_SAMP_FREQ_AVAIL("27900 14000 7000 3500");
@@ -474,7 +517,10 @@ static struct attribute *ade7759_attributes[] = {
 	&iio_dev_attr_sampling_frequency.dev_attr.attr,
 	&iio_const_attr_sampling_frequency_available.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&iio_dev_attr_reset.dev_attr.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&iio_dev_attr_phcal.dev_attr.attr,
@@ -511,11 +557,17 @@ static int ade7759_probe(struct spi_device *spi)
 
 	/* setup the industrialio driver allocated elements */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -536,6 +588,7 @@ static int ade7759_probe(struct spi_device *spi)
 	ret = ade7759_initial_setup(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
 
 	ret = iio_device_register(indio_dev);
@@ -549,6 +602,8 @@ error_free_dev:
 error_ret:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = iio_device_register(indio_dev);
@@ -556,6 +611,9 @@ error_ret:
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -567,7 +625,10 @@ static int ade7759_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 	ade7759_stop_device(&indio_dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

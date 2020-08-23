@@ -151,18 +151,24 @@ static int part_read_user_prot_reg(struct mtd_info *mtd, loff_t from,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int part_get_user_prot_info(struct mtd_info *mtd,
 		struct otp_info *buf, size_t len)
 {
 	struct mtd_part *part = PART(mtd);
 	return part->master->_get_user_prot_info(part->master, buf, len);
 =======
+=======
+>>>>>>> v3.18
 static int part_get_user_prot_info(struct mtd_info *mtd, size_t len,
 				   size_t *retlen, struct otp_info *buf)
 {
 	struct mtd_part *part = PART(mtd);
 	return part->master->_get_user_prot_info(part->master, len, retlen,
 						 buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -175,18 +181,24 @@ static int part_read_fact_prot_reg(struct mtd_info *mtd, loff_t from,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int part_get_fact_prot_info(struct mtd_info *mtd, struct otp_info *buf,
 		size_t len)
 {
 	struct mtd_part *part = PART(mtd);
 	return part->master->_get_fact_prot_info(part->master, buf, len);
 =======
+=======
+>>>>>>> v3.18
 static int part_get_fact_prot_info(struct mtd_info *mtd, size_t len,
 				   size_t *retlen, struct otp_info *buf)
 {
 	struct mtd_part *part = PART(mtd);
 	return part->master->_get_fact_prot_info(part->master, len, retlen,
 						 buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -307,7 +319,10 @@ static void part_resume(struct mtd_info *mtd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int part_block_isreserved(struct mtd_info *mtd, loff_t ofs)
 {
 	struct mtd_part *part = PART(mtd);
@@ -315,6 +330,9 @@ static int part_block_isreserved(struct mtd_info *mtd, loff_t ofs)
 	return part->master->_block_isreserved(part->master, ofs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int part_block_isbad(struct mtd_info *mtd, loff_t ofs)
 {
@@ -342,6 +360,7 @@ static inline void free_partition(struct mtd_part *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void part_fill_badblockstats(struct mtd_info *mtd)
 {
 	struct mtd_part *part = PART(mtd);
@@ -357,6 +376,8 @@ void part_fill_badblockstats(struct mtd_info *mtd)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -467,6 +488,11 @@ static struct mtd_part *allocate_partition(struct mtd_info *master,
 	if (master->_is_locked)
 		slave->mtd._is_locked = part_is_locked;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (master->_block_isreserved)
+		slave->mtd._block_isreserved = part_block_isreserved;
+>>>>>>> v3.18
 =======
 	if (master->_block_isreserved)
 		slave->mtd._block_isreserved = part_block_isreserved;
@@ -568,6 +594,7 @@ static struct mtd_part *allocate_partition(struct mtd_info *master,
 
 	slave->mtd.ecclayout = master->ecclayout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	slave->mtd.ecc_strength = master->ecc_strength;
 	slave->mtd.bitflip_threshold = master->bitflip_threshold;
 
@@ -576,6 +603,8 @@ static struct mtd_part *allocate_partition(struct mtd_info *master,
 	part_fill_badblockstats(&(slave->mtd));
 #endif
 =======
+=======
+>>>>>>> v3.18
 	slave->mtd.ecc_step_size = master->ecc_step_size;
 	slave->mtd.ecc_strength = master->ecc_strength;
 	slave->mtd.bitflip_threshold = master->bitflip_threshold;
@@ -591,6 +620,9 @@ static struct mtd_part *allocate_partition(struct mtd_info *master,
 			offs += slave->mtd.erasesize;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out_register:
@@ -598,7 +630,11 @@ out_register:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mtd_add_partition(struct mtd_info *master, char *name,
+=======
+int mtd_add_partition(struct mtd_info *master, const char *name,
+>>>>>>> v3.18
 =======
 int mtd_add_partition(struct mtd_info *master, const char *name,
 >>>>>>> v3.18
@@ -703,10 +739,15 @@ int add_mtd_partitions(struct mtd_info *master,
 	for (i = 0; i < nbparts; i++) {
 		slave = allocate_partition(master, parts + i, i, cur_offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR(slave)) {
 			del_mtd_partitions(master);
 			return PTR_ERR(slave);
 		}
+=======
+		if (IS_ERR(slave))
+			return PTR_ERR(slave);
+>>>>>>> v3.18
 =======
 		if (IS_ERR(slave))
 			return PTR_ERR(slave);
@@ -747,7 +788,11 @@ static struct mtd_part_parser *get_partition_parser(const char *name)
 #define put_partition_parser(p) do { module_put((p)->owner); } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int register_mtd_parser(struct mtd_part_parser *p)
+=======
+void register_mtd_parser(struct mtd_part_parser *p)
+>>>>>>> v3.18
 =======
 void register_mtd_parser(struct mtd_part_parser *p)
 >>>>>>> v3.18
@@ -756,6 +801,7 @@ void register_mtd_parser(struct mtd_part_parser *p)
 	list_add(&p->list, &part_parsers);
 	spin_unlock(&part_parser_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
@@ -763,17 +809,25 @@ EXPORT_SYMBOL_GPL(register_mtd_parser);
 
 int deregister_mtd_parser(struct mtd_part_parser *p)
 =======
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(register_mtd_parser);
 
 void deregister_mtd_parser(struct mtd_part_parser *p)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	spin_lock(&part_parser_lock);
 	list_del(&p->list);
 	spin_unlock(&part_parser_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

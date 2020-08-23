@@ -37,6 +37,7 @@
 	.text
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(call_do_softirq)
 	mflr	r0
 	stw	r0,4(r1)
@@ -58,6 +59,8 @@ _GLOBAL(call_handle_irq)
 	lwz	r1,0(r1)
 	lwz	r0,4(r1)
 =======
+=======
+>>>>>>> v3.18
 /*
  * We store the saved ksp_limit in the unused part
  * of the STACK_FRAME_OVERHEAD
@@ -96,6 +99,9 @@ _GLOBAL(call_do_irq)
 	lwz	r1,0(r1)
 	lwz	r0,4(r1)
 	stw	r10,THREAD+KSP_LIMIT(r2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtlr	r0
 	blr
@@ -337,7 +343,11 @@ _GLOBAL(flush_instruction_cache)
 	iccci	0,r3
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_FSL_BOOKE)
+=======
+#elif CONFIG_FSL_BOOKE
+>>>>>>> v3.18
 =======
 #elif CONFIG_FSL_BOOKE
 >>>>>>> v3.18
@@ -373,8 +383,14 @@ END_FTR_SECTION_IFSET(CPU_FTR_UNIFIED_ID_CACHE)
  * flush_icache_range(unsigned long start, unsigned long stop)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _KPROBE(__flush_icache_range)
 BEGIN_FTR_SECTION
+=======
+_KPROBE(flush_icache_range)
+BEGIN_FTR_SECTION
+	PURGE_PREFETCHED_INS
+>>>>>>> v3.18
 =======
 _KPROBE(flush_icache_range)
 BEGIN_FTR_SECTION
@@ -484,6 +500,10 @@ _GLOBAL(invalidate_dcache_range)
 _GLOBAL(__flush_dcache_icache)
 BEGIN_FTR_SECTION
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PURGE_PREFETCHED_INS
+>>>>>>> v3.18
 =======
 	PURGE_PREFETCHED_INS
 >>>>>>> v3.18
@@ -529,6 +549,10 @@ END_MMU_FTR_SECTION_IFSET(MMU_FTR_TYPE_44x)
 _GLOBAL(__flush_dcache_icache_phys)
 BEGIN_FTR_SECTION
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PURGE_PREFETCHED_INS
+>>>>>>> v3.18
 =======
 	PURGE_PREFETCHED_INS
 >>>>>>> v3.18
@@ -703,7 +727,10 @@ _GLOBAL(__lshrdi3)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * 64-bit comparison: __cmpdi2(s64 a, s64 b)
  * Returns 0 if a < b, 1 if a == b, 2 if a > b.
  */
@@ -718,6 +745,9 @@ _GLOBAL(__cmpdi2)
 	li	r3,2
 	blr
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * 64-bit comparison: __ucmpdi2(u64 a, u64 b)
  * Returns 0 if a < b, 1 if a == b, 2 if a > b.

@@ -58,7 +58,11 @@ I2C to communicate with your device. SMBus commands are preferred if
 the device supports them. Both are illustrated below.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   __u8 register = 0x10; /* Device register to access */
+=======
+  __u8 reg = 0x10; /* Device register to access */
+>>>>>>> v3.18
 =======
   __u8 reg = 0x10; /* Device register to access */
 >>>>>>> v3.18
@@ -67,7 +71,11 @@ the device supports them. Both are illustrated below.
 
   /* Using SMBus commands */
 <<<<<<< HEAD
+<<<<<<< HEAD
   res = i2c_smbus_read_word_data(file, register);
+=======
+  res = i2c_smbus_read_word_data(file, reg);
+>>>>>>> v3.18
 =======
   res = i2c_smbus_read_word_data(file, reg);
 >>>>>>> v3.18
@@ -79,17 +87,23 @@ the device supports them. Both are illustrated below.
 
   /* Using I2C Write, equivalent of 
 <<<<<<< HEAD
+<<<<<<< HEAD
      i2c_smbus_write_word_data(file, register, 0x6543) */
   buf[0] = register;
   buf[1] = 0x43;
   buf[2] = 0x65;
   if (write(file, buf, 3) ! =3) {
 =======
+=======
+>>>>>>> v3.18
      i2c_smbus_write_word_data(file, reg, 0x6543) */
   buf[0] = reg;
   buf[1] = 0x43;
   buf[2] = 0x65;
   if (write(file, buf, 3) != 3) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     /* ERROR HANDLING: i2c transaction failed */
   }

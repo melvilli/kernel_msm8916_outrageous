@@ -18,7 +18,11 @@
 #include <linux/mtd/map.h>
 #include <linux/ext2_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cramfs_fs.h>
+=======
+#include <uapi/linux/cramfs_fs.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/cramfs_fs.h>
 >>>>>>> v3.18
@@ -40,6 +44,12 @@
 #include <mach/pm.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SCB_PRIORITY
+#include <asm/scb.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SCB_PRIORITY
 #include <asm/scb.h>
@@ -110,7 +120,11 @@ void __init generate_cplb_tables(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit bfin_setup_caches(unsigned int cpu)
+=======
+void bfin_setup_caches(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void bfin_setup_caches(unsigned int cpu)
 >>>>>>> v3.18
@@ -180,7 +194,11 @@ void bfin_setup_caches(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit bfin_setup_cpudata(unsigned int cpu)
+=======
+void bfin_setup_cpudata(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void bfin_setup_cpudata(unsigned int cpu)
 >>>>>>> v3.18
@@ -1120,6 +1138,12 @@ void __init setup_arch(char **cmdline_p)
 	init_exception_vectors();
 	bfin_cache_init();	/* Initialize caches for the boot CPU */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SCB_PRIORITY
+	init_scb();
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SCB_PRIORITY
 	init_scb();

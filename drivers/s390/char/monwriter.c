@@ -61,7 +61,11 @@ static int monwrite_diag(struct monwrite_hdr *myhdr, char *buffer, int fcn)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strcpy(id.prod_nr, "LNXAPPL");
+=======
+	strncpy(id.prod_nr, "LNXAPPL", 7);
+>>>>>>> v3.18
 =======
 	strncpy(id.prod_nr, "LNXAPPL", 7);
 >>>>>>> v3.18

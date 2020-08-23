@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -73,7 +77,11 @@ ACPI_MODULE_NAME("uteval")
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ut_evaluate_object(struct acpi_namespace_node * prefix_node,
+=======
+acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
+>>>>>>> v3.18
 =======
 acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 >>>>>>> v3.18
@@ -96,7 +104,11 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 
 	info->prefix_node = prefix_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->pathname = path;
+=======
+	info->relative_pathname = path;
+>>>>>>> v3.18
 =======
 	info->relative_pathname = path;
 >>>>>>> v3.18
@@ -136,6 +148,10 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 	switch ((info->return_object)->common.type) {
 	case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -144,6 +160,10 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -152,6 +172,10 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -160,6 +184,10 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 
 	case ACPI_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -168,6 +196,10 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -209,7 +241,11 @@ acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
 	*return_desc = info->return_object;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -271,7 +307,12 @@ acpi_ut_evaluate_numeric_object(char *object_name,
  *
  * DESCRIPTION: Executes _STA for selected device and stores results in
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              *Flags.
+=======
+ *              *Flags. If _STA does not exist, then the device is assumed
+ *              to be present/functional/enabled (as per the ACPI spec).
+>>>>>>> v3.18
 =======
  *              *Flags. If _STA does not exist, then the device is assumed
  *              to be present/functional/enabled (as per the ACPI spec).
@@ -294,12 +335,18 @@ acpi_ut_execute_STA(struct acpi_namespace_node *device_node, u32 * flags)
 	if (ACPI_FAILURE(status)) {
 		if (AE_NOT_FOUND == status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * if _STA does not exist, then (as per the ACPI specification),
 			 * the returned flags will indicate that the device is present,
 			 * functional, and enabled.
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 					  "_STA on %4.4s was not found, assuming device is present\n",

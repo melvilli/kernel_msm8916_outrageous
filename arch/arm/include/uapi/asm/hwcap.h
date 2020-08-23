@@ -29,7 +29,10 @@
 #define HWCAP_EVTSTRM	(1 << 21)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * HWCAP2 flags - for elf_hwcap2 (in kernel) and AT_HWCAP2
  */
@@ -39,5 +42,8 @@
 #define HWCAP2_SHA2	(1 << 3)
 #define HWCAP2_CRC32	(1 << 4)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _UAPI__ASMARM_HWCAP_H */

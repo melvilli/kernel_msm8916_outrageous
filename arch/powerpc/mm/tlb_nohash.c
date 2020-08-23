@@ -44,6 +44,10 @@
 #include <asm/code-patching.h>
 #include <asm/hugetlb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/paca.h>
+>>>>>>> v3.18
 =======
 #include <asm/paca.h>
 >>>>>>> v3.18
@@ -63,11 +67,17 @@ struct mmu_psize_def mmu_psize_defs[MMU_PAGE_COUNT] = {
 		.enc	= BOOK3E_PAGESZ_4K,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[MMU_PAGE_2M] = {
 		.shift	= 21,
 		.enc	= BOOK3E_PAGESZ_2M,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[MMU_PAGE_4M] = {
 		.shift	= 22,
@@ -148,10 +158,13 @@ int mmu_linear_psize;		/* Page size used for the linear mapping */
 int mmu_pte_psize;		/* Page size used for PTE pages */
 int mmu_vmemmap_psize;		/* Page size used for the virtual mem map */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int book3e_htw_enabled;		/* Is HW tablewalk enabled ? */
 unsigned long linear_map_top;	/* Top of linear mapping */
 
 =======
+=======
+>>>>>>> v3.18
 int book3e_htw_mode;		/* HW tablewalk?  Value is PPC_HTW_* */
 unsigned long linear_map_top;	/* Top of linear mapping */
 
@@ -164,6 +177,9 @@ unsigned long linear_map_top;	/* Top of linear mapping */
  */
 int extlb_level_exc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC64 */
 
@@ -332,7 +348,11 @@ void flush_tlb_page(struct vm_area_struct *vma, unsigned long vmaddr)
 {
 #ifdef CONFIG_HUGETLB_PAGE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_vm_hugetlb_page(vma))
+=======
+	if (vma && is_vm_hugetlb_page(vma))
+>>>>>>> v3.18
 =======
 	if (vma && is_vm_hugetlb_page(vma))
 >>>>>>> v3.18
@@ -408,7 +428,11 @@ void tlb_flush_pgtable(struct mmu_gather *tlb, unsigned long address)
 	int tsize = mmu_psize_defs[mmu_pte_psize].enc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (book3e_htw_enabled) {
+=======
+	if (book3e_htw_mode != PPC_HTW_NONE) {
+>>>>>>> v3.18
 =======
 	if (book3e_htw_mode != PPC_HTW_NONE) {
 >>>>>>> v3.18
@@ -465,7 +489,11 @@ static void setup_page_sizes(void)
 			shift = def->shift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (shift == 0)
+=======
+			if (shift == 0 || shift & 1)
+>>>>>>> v3.18
 =======
 			if (shift == 0 || shift & 1)
 >>>>>>> v3.18
@@ -479,12 +507,15 @@ static void setup_page_sizes(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto no_indirect;
 	}
 
 	if (fsl_mmu && (mmucfg & MMUCFG_MAVN) == MMUCFG_MAVN_V2) {
 		u32 tlb1ps = mfspr(SPRN_TLB1PS);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -506,6 +537,9 @@ static void setup_page_sizes(void)
 		 */
 		if (eptcfg != 2)
 			book3e_htw_mode = PPC_HTW_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		for (psize = 0; psize < MMU_PAGE_COUNT; ++psize) {
@@ -514,11 +548,14 @@ static void setup_page_sizes(void)
 			if (tlb1ps & (1U << (def->shift - 10))) {
 				def->flags |= MMU_PAGE_SIZE_DIRECT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 		}
 
 		goto no_indirect;
 =======
+=======
+>>>>>>> v3.18
 
 				if (book3e_htw_mode && psize == MMU_PAGE_2M)
 					def->flags |= MMU_PAGE_SIZE_INDIRECT;
@@ -526,6 +563,9 @@ static void setup_page_sizes(void)
 		}
 
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
@@ -544,14 +584,20 @@ static void setup_page_sizes(void)
 
 	/* Indirect page sizes supported ? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((tlb0cfg & TLBnCFG_IND) == 0)
 		goto no_indirect;
 =======
+=======
+>>>>>>> v3.18
 	if ((tlb0cfg & TLBnCFG_IND) == 0 ||
 	    (tlb0cfg & TLBnCFG_PT) == 0)
 		goto out;
 
 	book3e_htw_mode = PPC_HTW_IBM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Now, we only deal with one IND page size for each
@@ -578,8 +624,13 @@ static void setup_page_sizes(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
  no_indirect:
 
+=======
+
+out:
+>>>>>>> v3.18
 =======
 
 out:
@@ -603,6 +654,7 @@ out:
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __patch_exception(int exc, unsigned long addr)
 {
@@ -643,6 +695,8 @@ static void setup_mmu_htw(void)
 	pr_info("MMU: Book3E HW tablewalk %s\n",
 		book3e_htw_enabled ? "enabled" : "not supported");
 =======
+=======
+>>>>>>> v3.18
 static void setup_mmu_htw(void)
 {
 	/*
@@ -665,12 +719,16 @@ static void setup_mmu_htw(void)
 	}
 	pr_info("MMU: Book3E HW tablewalk %s\n",
 		book3e_htw_mode != PPC_HTW_NONE ? "enabled" : "not supported");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Early initialization of the MMU TLB code
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __early_init_mmu(int boot_cpu)
 {
@@ -709,6 +767,8 @@ static void __early_init_mmu(int boot_cpu)
 	if (book3e_htw_enabled) {
 		mas4 |= mas4 | MAS4_INDD;
 =======
+=======
+>>>>>>> v3.18
 static void early_init_this_mmu(void)
 {
 	unsigned int mas4;
@@ -726,6 +786,9 @@ static void early_init_this_mmu(void)
 
 	case PPC_HTW_IBM:
 		mas4 |= MAS4_INDD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_64K_PAGES
 		mas4 |=	BOOK3E_PAGESZ_256M << MAS4_TSIZED_SHIFT;
@@ -735,7 +798,13 @@ static void early_init_this_mmu(void)
 		mmu_pte_psize = MMU_PAGE_1M;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
+=======
+		break;
+
+	case PPC_HTW_NONE:
+>>>>>>> v3.18
 =======
 		break;
 
@@ -748,6 +817,7 @@ static void early_init_this_mmu(void)
 #endif
 		mmu_pte_psize = mmu_virtual_psize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	mtspr(SPRN_MAS4, mas4);
 
@@ -757,10 +827,15 @@ static void early_init_this_mmu(void)
 	linear_map_top = memblock_end_of_DRAM();
 
 =======
+=======
+>>>>>>> v3.18
 		break;
 	}
 	mtspr(SPRN_MAS4, mas4);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 	if (mmu_has_feature(MMU_FTR_TYPE_FSL_E)) {
@@ -770,12 +845,15 @@ static void early_init_this_mmu(void)
 		num_cams = (mfspr(SPRN_TLB1CFG) & TLBnCFG_N_ENTRY) / 4;
 		linear_map_top = map_mem_in_cams(linear_map_top, num_cams);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* limit memory so we dont have linear faults */
 		memblock_enforce_memory_limit(linear_map_top);
 
 		patch_exception(0x1c0, exc_data_tlb_miss_bolted_book3e);
 		patch_exception(0x1e0, exc_instruction_tlb_miss_bolted_book3e);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -786,7 +864,10 @@ static void early_init_this_mmu(void)
 	 */
 	mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void __init early_init_mmu_global(void)
@@ -852,11 +933,15 @@ static void __init early_mmu_set_memory_limit(void)
 		memblock_enforce_memory_limit(linear_map_top);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memblock_set_current_limit(linear_map_top);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init early_init_mmu(void)
 {
@@ -867,6 +952,8 @@ void __cpuinit early_init_mmu_secondary(void)
 {
 	__early_init_mmu(0);
 =======
+=======
+>>>>>>> v3.18
 /* boot cpu only */
 void __init early_init_mmu(void)
 {
@@ -878,6 +965,9 @@ void __init early_init_mmu(void)
 void early_init_mmu_secondary(void)
 {
 	early_init_this_mmu();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

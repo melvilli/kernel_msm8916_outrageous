@@ -47,7 +47,11 @@ static inline void __unlazy_fpu(struct task_struct *tsk, struct pt_regs *regs)
 		release_fpu(regs);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk->fpu_counter = 0;
+=======
+		tsk->thread.fpu_counter = 0;
+>>>>>>> v3.18
 =======
 		tsk->thread.fpu_counter = 0;
 >>>>>>> v3.18

@@ -13,6 +13,10 @@
 #include <linux/rwsem.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ww_mutex.h>
+>>>>>>> v3.18
 =======
 #include <linux/ww_mutex.h>
 >>>>>>> v3.18
@@ -31,6 +35,11 @@
 static unsigned int debug_locks_verbose;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEFINE_WW_CLASS(ww_lockdep);
+
+>>>>>>> v3.18
 =======
 static DEFINE_WW_CLASS(ww_lockdep);
 
@@ -52,11 +61,17 @@ __setup("debug_locks_verbose=", setup_debug_locks_verbose);
 #define LOCKTYPE_MUTEX	0x4
 #define LOCKTYPE_RWSEM	0x8
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define LOCKTYPE_WW	0x10
 
 static struct ww_acquire_ctx t, t2;
 static struct ww_mutex o, o2, o3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -210,7 +225,10 @@ static void init_shared_classes(void)
 #define RWSI(x)			init_rwsem(&rwsem_##x)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_DEBUG_WW_MUTEX_SLOWPATH
 #define WWAI(x)			ww_acquire_init(x, &ww_lockdep)
 #else
@@ -225,6 +243,9 @@ static void init_shared_classes(void)
 #define WWU(x)			ww_mutex_unlock(x)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LOCK_UNLOCK_2(x,y)	LOCK(x); LOCK(y); UNLOCK(y); UNLOCK(x)
 
@@ -928,6 +949,10 @@ GENERATE_PERMUTATIONS_3_EVENTS(irq_read_recursion_soft)
 # define I_MUTEX(x)	lockdep_reset_lock(&mutex_##x.dep_map)
 # define I_RWSEM(x)	lockdep_reset_lock(&rwsem_##x.dep_map)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# define I_WW(x)	lockdep_reset_lock(&x.dep_map)
+>>>>>>> v3.18
 =======
 # define I_WW(x)	lockdep_reset_lock(&x.dep_map)
 >>>>>>> v3.18
@@ -937,6 +962,10 @@ GENERATE_PERMUTATIONS_3_EVENTS(irq_read_recursion_soft)
 # define I_MUTEX(x)
 # define I_RWSEM(x)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# define I_WW(x)
+>>>>>>> v3.18
 =======
 # define I_WW(x)
 >>>>>>> v3.18
@@ -962,12 +991,15 @@ static void reset_locks(void)
 {
 	local_irq_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	I1(A); I1(B); I1(C); I1(D);
 	I1(X1); I1(X2); I1(Y1); I1(Y2); I1(Z1); I1(Z2);
 	lockdep_reset();
 	I2(A); I2(B); I2(C); I2(D);
 	init_shared_classes();
 =======
+=======
+>>>>>>> v3.18
 	lockdep_free_key_range(&ww_lockdep.acquire_key, 1);
 	lockdep_free_key_range(&ww_lockdep.mutex_key, 1);
 
@@ -982,6 +1014,9 @@ static void reset_locks(void)
 	memset(&t, 0, sizeof(t)); memset(&t2, 0, sizeof(t2));
 	memset(&ww_lockdep.acquire_key, 0, sizeof(ww_lockdep.acquire_key));
 	memset(&ww_lockdep.mutex_key, 0, sizeof(ww_lockdep.mutex_key));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_enable();
 }
@@ -997,7 +1032,10 @@ static void dotest(void (*testcase_fn)(void), int expected, int lockclass_mask)
 {
 	unsigned long saved_preempt_count = preempt_count();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int expected_failure = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1008,6 +1046,7 @@ static void dotest(void (*testcase_fn)(void), int expected, int lockclass_mask)
 	 * Filter out expected failures:
 	 */
 #ifndef CONFIG_PROVE_LOCKING
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((lockclass_mask & LOCKTYPE_SPIN) && debug_locks != expected)
 		expected_failure = 1;
@@ -1029,6 +1068,8 @@ static void dotest(void (*testcase_fn)(void), int expected, int lockclass_mask)
 			dump_stack();
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (expected == FAILURE && debug_locks) {
 		expected_testcase_failures++;
 		printk("failed|");
@@ -1040,6 +1081,9 @@ static void dotest(void (*testcase_fn)(void), int expected, int lockclass_mask)
 		printk("FAILED|");
 
 		dump_stack();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		testcase_successes++;
@@ -1055,7 +1099,11 @@ static void dotest(void (*testcase_fn)(void), int expected, int lockclass_mask)
 	 * count, so restore it:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_count() = saved_preempt_count;
+=======
+	preempt_count_set(saved_preempt_count);
+>>>>>>> v3.18
 =======
 	preempt_count_set(saved_preempt_count);
 >>>>>>> v3.18
@@ -1188,7 +1236,10 @@ static inline void print_testname(const char *testname)
 	DO_TESTCASE_6IRW(desc, name, 321);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ww_test_fail_acquire(void)
 {
 	int ret;
@@ -1849,6 +1900,9 @@ static void ww_tests(void)
 	dotest(ww_test_spin_context, FAILURE, LOCKTYPE_WW);
 	printk("\n");
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void locking_selftest(void)
@@ -1931,6 +1985,11 @@ void locking_selftest(void)
 //	DO_TESTCASE_6x2B("irq read-recursion #2", irq_read_recursion2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ww_tests();
+
+>>>>>>> v3.18
 =======
 	ww_tests();
 

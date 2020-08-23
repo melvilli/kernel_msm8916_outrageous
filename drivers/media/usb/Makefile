@@ -10,13 +10,19 @@ obj-$(CONFIG_USB_VIDEO_CLASS)	+= uvc/
 obj-$(CONFIG_USB_GSPCA)         += gspca/
 obj-$(CONFIG_USB_PWC)           += pwc/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_VIDEO_CPIA2) += cpia2/
 obj-$(CONFIG_USB_SN9C102)       += sn9c102/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_USB_AIRSPY)        += airspy/
 obj-$(CONFIG_USB_HACKRF)        += hackrf/
 obj-$(CONFIG_USB_MSI2500)       += msi2500/
 obj-$(CONFIG_VIDEO_CPIA2) += cpia2/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_VIDEO_AU0828) += au0828/
 obj-$(CONFIG_VIDEO_HDPVR)	+= hdpvr/
@@ -28,6 +34,12 @@ obj-$(CONFIG_VIDEO_CX231XX) += cx231xx/
 obj-$(CONFIG_VIDEO_TM6000) += tm6000/
 obj-$(CONFIG_VIDEO_EM28XX) += em28xx/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_VIDEO_USBTV) += usbtv/
+obj-$(CONFIG_VIDEO_GO7007) += go7007/
+obj-$(CONFIG_DVB_AS102) += as102/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_VIDEO_USBTV) += usbtv/
 obj-$(CONFIG_VIDEO_GO7007) += go7007/

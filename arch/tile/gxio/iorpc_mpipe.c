@@ -22,7 +22,11 @@ struct alloc_buffer_stacks_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_alloc_buffer_stacks(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_alloc_buffer_stacks(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_alloc_buffer_stacks(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -50,7 +54,11 @@ struct init_buffer_stack_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_init_buffer_stack_aux(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_init_buffer_stack_aux(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_init_buffer_stack_aux(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -89,7 +97,11 @@ struct alloc_notif_rings_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_alloc_notif_rings(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_alloc_notif_rings(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_alloc_notif_rings(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -115,7 +127,11 @@ struct init_notif_ring_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_init_notif_ring_aux(gxio_mpipe_context_t * context, void *mem_va,
+=======
+int gxio_mpipe_init_notif_ring_aux(gxio_mpipe_context_t *context, void *mem_va,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_init_notif_ring_aux(gxio_mpipe_context_t *context, void *mem_va,
 >>>>>>> v3.18
@@ -150,7 +166,11 @@ struct request_notif_ring_interrupt_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_request_notif_ring_interrupt(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_request_notif_ring_interrupt(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_request_notif_ring_interrupt(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -179,7 +199,11 @@ struct enable_notif_ring_interrupt_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_enable_notif_ring_interrupt(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_enable_notif_ring_interrupt(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_enable_notif_ring_interrupt(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -204,7 +228,11 @@ struct alloc_notif_groups_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_alloc_notif_groups(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_alloc_notif_groups(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_alloc_notif_groups(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -230,7 +258,11 @@ struct init_notif_group_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_init_notif_group(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_init_notif_group(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_init_notif_group(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -256,7 +288,11 @@ struct alloc_buckets_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_alloc_buckets(gxio_mpipe_context_t * context, unsigned int count,
+=======
+int gxio_mpipe_alloc_buckets(gxio_mpipe_context_t *context, unsigned int count,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_alloc_buckets(gxio_mpipe_context_t *context, unsigned int count,
 >>>>>>> v3.18
@@ -281,7 +317,11 @@ struct init_bucket_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_init_bucket(gxio_mpipe_context_t * context, unsigned int bucket,
+=======
+int gxio_mpipe_init_bucket(gxio_mpipe_context_t *context, unsigned int bucket,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_init_bucket(gxio_mpipe_context_t *context, unsigned int bucket,
 >>>>>>> v3.18
@@ -306,7 +346,11 @@ struct alloc_edma_rings_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -333,7 +377,11 @@ struct init_edma_ring_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_init_edma_ring_aux(gxio_mpipe_context_t * context, void *mem_va,
+=======
+int gxio_mpipe_init_edma_ring_aux(gxio_mpipe_context_t *context, void *mem_va,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_init_edma_ring_aux(gxio_mpipe_context_t *context, void *mem_va,
 >>>>>>> v3.18
@@ -364,7 +412,11 @@ EXPORT_SYMBOL(gxio_mpipe_init_edma_ring_aux);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_commit_rules(gxio_mpipe_context_t * context, const void *blob,
+=======
+int gxio_mpipe_commit_rules(gxio_mpipe_context_t *context, const void *blob,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_commit_rules(gxio_mpipe_context_t *context, const void *blob,
 >>>>>>> v3.18
@@ -385,7 +437,11 @@ struct register_client_memory_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_register_client_memory(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_register_client_memory(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_register_client_memory(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -412,7 +468,11 @@ struct link_open_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_link_open_aux(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_link_open_aux(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_link_open_aux(gxio_mpipe_context_t *context,
 >>>>>>> v3.18
@@ -435,7 +495,11 @@ struct link_close_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_link_close_aux(gxio_mpipe_context_t * context, int mac)
+=======
+int gxio_mpipe_link_close_aux(gxio_mpipe_context_t *context, int mac)
+>>>>>>> v3.18
 =======
 int gxio_mpipe_link_close_aux(gxio_mpipe_context_t *context, int mac)
 >>>>>>> v3.18
@@ -452,7 +516,10 @@ int gxio_mpipe_link_close_aux(gxio_mpipe_context_t *context, int mac)
 EXPORT_SYMBOL(gxio_mpipe_link_close_aux);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct link_set_attr_aux_param {
 	int mac;
 	uint32_t attr;
@@ -474,6 +541,9 @@ int gxio_mpipe_link_set_attr_aux(gxio_mpipe_context_t *context, int mac,
 }
 
 EXPORT_SYMBOL(gxio_mpipe_link_set_attr_aux);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct get_timestamp_aux_param {
@@ -483,8 +553,13 @@ struct get_timestamp_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_get_timestamp_aux(gxio_mpipe_context_t * context, uint64_t * sec,
 				 uint64_t * nsec, uint64_t * cycles)
+=======
+int gxio_mpipe_get_timestamp_aux(gxio_mpipe_context_t *context, uint64_t *sec,
+				 uint64_t *nsec, uint64_t *cycles)
+>>>>>>> v3.18
 =======
 int gxio_mpipe_get_timestamp_aux(gxio_mpipe_context_t *context, uint64_t *sec,
 				 uint64_t *nsec, uint64_t *cycles)
@@ -513,7 +588,11 @@ struct set_timestamp_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_set_timestamp_aux(gxio_mpipe_context_t * context, uint64_t sec,
+=======
+int gxio_mpipe_set_timestamp_aux(gxio_mpipe_context_t *context, uint64_t sec,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_set_timestamp_aux(gxio_mpipe_context_t *context, uint64_t sec,
 >>>>>>> v3.18
@@ -537,8 +616,12 @@ struct adjust_timestamp_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_adjust_timestamp_aux(gxio_mpipe_context_t * context,
 				    int64_t nsec)
+=======
+int gxio_mpipe_adjust_timestamp_aux(gxio_mpipe_context_t *context, int64_t nsec)
+>>>>>>> v3.18
 =======
 int gxio_mpipe_adjust_timestamp_aux(gxio_mpipe_context_t *context, int64_t nsec)
 >>>>>>> v3.18
@@ -556,7 +639,10 @@ int gxio_mpipe_adjust_timestamp_aux(gxio_mpipe_context_t *context, int64_t nsec)
 EXPORT_SYMBOL(gxio_mpipe_adjust_timestamp_aux);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct config_edma_ring_blks_param {
 	unsigned int ering;
 	unsigned int max_blks;
@@ -601,13 +687,20 @@ int gxio_mpipe_adjust_timestamp_freq(gxio_mpipe_context_t *context, int32_t ppb)
 
 EXPORT_SYMBOL(gxio_mpipe_adjust_timestamp_freq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct arm_pollfd_param {
 	union iorpc_pollfd pollfd;
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_arm_pollfd(gxio_mpipe_context_t * context, int pollfd_cookie)
+=======
+int gxio_mpipe_arm_pollfd(gxio_mpipe_context_t *context, int pollfd_cookie)
+>>>>>>> v3.18
 =======
 int gxio_mpipe_arm_pollfd(gxio_mpipe_context_t *context, int pollfd_cookie)
 >>>>>>> v3.18
@@ -628,7 +721,11 @@ struct close_pollfd_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_close_pollfd(gxio_mpipe_context_t * context, int pollfd_cookie)
+=======
+int gxio_mpipe_close_pollfd(gxio_mpipe_context_t *context, int pollfd_cookie)
+>>>>>>> v3.18
 =======
 int gxio_mpipe_close_pollfd(gxio_mpipe_context_t *context, int pollfd_cookie)
 >>>>>>> v3.18
@@ -649,7 +746,11 @@ struct get_mmio_base_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_get_mmio_base(gxio_mpipe_context_t * context, HV_PTE *base)
+=======
+int gxio_mpipe_get_mmio_base(gxio_mpipe_context_t *context, HV_PTE *base)
+>>>>>>> v3.18
 =======
 int gxio_mpipe_get_mmio_base(gxio_mpipe_context_t *context, HV_PTE *base)
 >>>>>>> v3.18
@@ -674,7 +775,11 @@ struct check_mmio_offset_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_check_mmio_offset(gxio_mpipe_context_t * context,
+=======
+int gxio_mpipe_check_mmio_offset(gxio_mpipe_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_mpipe_check_mmio_offset(gxio_mpipe_context_t *context,
 >>>>>>> v3.18

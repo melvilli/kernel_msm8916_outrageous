@@ -27,7 +27,11 @@
 static void __iomem *ctr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace versatile_read_sched_clock(void)
+=======
+static u64 notrace versatile_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace versatile_read_sched_clock(void)
 >>>>>>> v3.18
@@ -42,7 +46,11 @@ void __init versatile_sched_clock_init(void __iomem *reg, unsigned long rate)
 {
 	ctr = reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(versatile_read_sched_clock, 32, rate);
+=======
+	sched_clock_register(versatile_read_sched_clock, 32, rate);
+>>>>>>> v3.18
 =======
 	sched_clock_register(versatile_read_sched_clock, 32, rate);
 >>>>>>> v3.18

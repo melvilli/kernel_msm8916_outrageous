@@ -105,7 +105,11 @@ struct fc_esb {
  */
 #define ESB_ST_RESP         (1 << 31)   /* responder to exchange */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ESB_ST_SEQ_INIT     (1 << 30)   /* port holds sequence initiaive */
+=======
+#define ESB_ST_SEQ_INIT     (1 << 30)   /* port holds sequence initiative */
+>>>>>>> v3.18
 =======
 #define ESB_ST_SEQ_INIT     (1 << 30)   /* port holds sequence initiative */
 >>>>>>> v3.18

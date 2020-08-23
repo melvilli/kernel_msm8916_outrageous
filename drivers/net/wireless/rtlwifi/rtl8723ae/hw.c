@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -41,6 +44,7 @@
 #include "def.h"
 #include "phy.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dm.h"
 #include "fw.h"
 #include "led.h"
@@ -52,6 +56,8 @@
 static void _rtl8723ae_set_bcn_ctrl_reg(struct ieee80211_hw *hw,
 					u8 set_bits, u8 clear_bits)
 =======
+=======
+>>>>>>> v3.18
 #include "../rtl8723com/phy_common.h"
 #include "dm.h"
 #include "../rtl8723com/dm_common.h"
@@ -67,6 +73,9 @@ static void _rtl8723ae_set_bcn_ctrl_reg(struct ieee80211_hw *hw,
 
 static void _rtl8723e_set_bcn_ctrl_reg(struct ieee80211_hw *hw,
 				       u8 set_bits, u8 clear_bits)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
@@ -79,7 +88,11 @@ static void _rtl8723e_set_bcn_ctrl_reg(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_stop_tx_beacon(struct ieee80211_hw *hw)
+=======
+static void _rtl8723e_stop_tx_beacon(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_stop_tx_beacon(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -96,7 +109,11 @@ static void _rtl8723e_stop_tx_beacon(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_resume_tx_beacon(struct ieee80211_hw *hw)
+=======
+static void _rtl8723e_resume_tx_beacon(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_resume_tx_beacon(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -113,6 +130,7 @@ static void _rtl8723e_resume_tx_beacon(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_enable_bcn_sufunc(struct ieee80211_hw *hw)
 {
 	_rtl8723ae_set_bcn_ctrl_reg(hw, 0, BIT(1));
@@ -125,6 +143,8 @@ static void _rtl8723ae_disable_bcn_sufunc(struct ieee80211_hw *hw)
 
 void rtl8723ae_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 =======
+=======
+>>>>>>> v3.18
 static void _rtl8723e_enable_bcn_sub_func(struct ieee80211_hw *hw)
 {
 	_rtl8723e_set_bcn_ctrl_reg(hw, 0, BIT(1));
@@ -136,6 +156,9 @@ static void _rtl8723e_disable_bcn_sub_func(struct ieee80211_hw *hw)
 }
 
 void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -145,7 +168,11 @@ void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 	switch (variable) {
 	case HW_VAR_RCR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*((u32 *) (val)) = rtlpci->receive_config;
+=======
+		*((u32 *)(val)) = rtlpci->receive_config;
+>>>>>>> v3.18
 =======
 		*((u32 *)(val)) = rtlpci->receive_config;
 >>>>>>> v3.18
@@ -154,6 +181,7 @@ void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 		*((enum rf_pwrstate *)(val)) = ppsc->rfpwr_state;
 		break;
 	case HW_VAR_FWLPS_RF_ON:{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		enum rf_pwrstate rfState;
 		u32 val_rcr;
@@ -189,6 +217,8 @@ void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 	default:
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 =======
+=======
+>>>>>>> v3.18
 			enum rf_pwrstate rfstate;
 			u32 val_rcr;
 
@@ -224,6 +254,9 @@ void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 		}
 	default:
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 "switch case not process\n");
 		break;
@@ -231,10 +264,16 @@ void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_pci_priv *pcipriv = rtl_pcipriv(hw);
+=======
+void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
+{
+	struct rtl_priv *rtlpriv = rtl_priv(hw);
+>>>>>>> v3.18
 =======
 void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 {
@@ -247,6 +286,7 @@ void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 	u8 idx;
 
 	switch (variable) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case HW_VAR_ETHER_ADDR:
 		for (idx = 0; idx < ETH_ALEN; idx++) {
@@ -464,6 +504,8 @@ void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 			       retry_limit << RETRY_LIMIT_LONG_SHIFT);
 		break; }
 =======
+=======
+>>>>>>> v3.18
 	case HW_VAR_ETHER_ADDR:{
 			for (idx = 0; idx < ETH_ALEN; idx++) {
 				rtl_write_byte(rtlpriv, (REG_MACID + idx),
@@ -696,11 +738,15 @@ void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 				       retry_limit << RETRY_LIMIT_LONG_SHIFT);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case HW_VAR_DUAL_TSF_RST:
 		rtl_write_byte(rtlpriv, REG_DUAL_TSF_RST, (BIT(0) | BIT(1)));
 		break;
 	case HW_VAR_EFUSE_BYTES:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rtlefuse->efuse_usedbytes = *((u16 *) val);
 		break;
@@ -841,6 +887,8 @@ void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 			 "switch case not processed\n");
 =======
+=======
+>>>>>>> v3.18
 		rtlefuse->efuse_usedbytes = *((u16 *)val);
 		break;
 	case HW_VAR_EFUSE_USAGE:
@@ -994,13 +1042,20 @@ void rtl8723e_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 	default:
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 			 "switch case not process\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool _rtl8723ae_llt_write(struct ieee80211_hw *hw, u32 address, u32 data)
+=======
+static bool _rtl8723e_llt_write(struct ieee80211_hw *hw, u32 address, u32 data)
+>>>>>>> v3.18
 =======
 static bool _rtl8723e_llt_write(struct ieee80211_hw *hw, u32 address, u32 data)
 >>>>>>> v3.18
@@ -1031,7 +1086,11 @@ static bool _rtl8723e_llt_write(struct ieee80211_hw *hw, u32 address, u32 data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool _rtl8723ae_llt_table_init(struct ieee80211_hw *hw)
+=======
+static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -1039,6 +1098,7 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	unsigned short i;
 	u8 txpktbuf_bndy;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 maxPage;
 	bool status;
@@ -1050,6 +1110,8 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 	rtl_write_byte(rtlpriv, REG_CR, 0x8B);
 
 =======
+=======
+>>>>>>> v3.18
 	u8 maxpage;
 	bool status;
 	u8 ubyte;
@@ -1083,12 +1145,19 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 #elif LLT_CONFIG == 4
 	rtl_write_dword(rtlpriv, REG_RQPN, 0x80bd1c1c);
 #elif LLT_CONFIG == 5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtl_write_word(rtlpriv, REG_RQPN_NPQ, 0x0000);
 
 	rtl_write_dword(rtlpriv, REG_RQPN, 0x80ac1c29);
 	rtl_write_byte(rtlpriv, REG_RQPN_NPQ, 0x03);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1105,7 +1174,11 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 
 	for (i = 0; i < (txpktbuf_bndy - 1); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = _rtl8723ae_llt_write(hw, i, i + 1);
+=======
+		status = _rtl8723e_llt_write(hw, i, i + 1);
+>>>>>>> v3.18
 =======
 		status = _rtl8723e_llt_write(hw, i, i + 1);
 >>>>>>> v3.18
@@ -1114,6 +1187,7 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = _rtl8723ae_llt_write(hw, (txpktbuf_bndy - 1), 0xFF);
 	if (true != status)
 		return status;
@@ -1121,19 +1195,28 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 	for (i = txpktbuf_bndy; i < maxPage; i++) {
 		status = _rtl8723ae_llt_write(hw, i, (i + 1));
 =======
+=======
+>>>>>>> v3.18
 	status = _rtl8723e_llt_write(hw, (txpktbuf_bndy - 1), 0xFF);
 	if (true != status)
 		return status;
 
 	for (i = txpktbuf_bndy; i < maxpage; i++) {
 		status = _rtl8723e_llt_write(hw, i, (i + 1));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (true != status)
 			return status;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = _rtl8723ae_llt_write(hw, maxPage, txpktbuf_bndy);
+=======
+	status = _rtl8723e_llt_write(hw, maxpage, txpktbuf_bndy);
+>>>>>>> v3.18
 =======
 	status = _rtl8723e_llt_write(hw, maxpage, txpktbuf_bndy);
 >>>>>>> v3.18
@@ -1148,7 +1231,11 @@ static bool _rtl8723e_llt_table_init(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_gen_refresh_led_state(struct ieee80211_hw *hw)
+=======
+static void _rtl8723e_gen_refresh_led_state(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_gen_refresh_led_state(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -1157,7 +1244,11 @@ static void _rtl8723e_gen_refresh_led_state(struct ieee80211_hw *hw)
 	struct rtl_pci_priv *pcipriv = rtl_pcipriv(hw);
 	struct rtl_ps_ctl *ppsc = rtl_psc(rtl_priv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtl_led *pLed0 = &(pcipriv->ledctl.sw_led0);
+=======
+	struct rtl_led *pled0 = &pcipriv->ledctl.sw_led0;
+>>>>>>> v3.18
 =======
 	struct rtl_led *pled0 = &pcipriv->ledctl.sw_led0;
 >>>>>>> v3.18
@@ -1167,17 +1258,23 @@ static void _rtl8723e_gen_refresh_led_state(struct ieee80211_hw *hw)
 
 	if (ppsc->rfoff_reason == RF_CHANGE_BY_IPS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl8723ae_sw_led_on(hw, pLed0);
 	else if (ppsc->rfoff_reason == RF_CHANGE_BY_INIT)
 		rtl8723ae_sw_led_on(hw, pLed0);
 	else
 		rtl8723ae_sw_led_off(hw, pLed0);
 =======
+=======
+>>>>>>> v3.18
 		rtl8723e_sw_led_on(hw, pled0);
 	else if (ppsc->rfoff_reason == RF_CHANGE_BY_INIT)
 		rtl8723e_sw_led_on(hw, pled0);
 	else
 		rtl8723e_sw_led_off(hw, pled0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1186,6 +1283,10 @@ static bool _rtl8712e_init_mac(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1203,7 +1304,10 @@ static bool _rtl8712e_init_mac(struct ieee80211_hw *hw)
 		mac_func_enable = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* HW Power on sequence */
@@ -1245,7 +1349,11 @@ static bool _rtl8712e_init_mac(struct ieee80211_hw *hw)
 
 	if (!mac_func_enable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (_rtl8723ae_llt_table_init(hw) == false)
+=======
+		if (!_rtl8723e_llt_table_init(hw))
+>>>>>>> v3.18
 =======
 		if (!_rtl8723e_llt_table_init(hw))
 >>>>>>> v3.18
@@ -1258,7 +1366,12 @@ static bool _rtl8712e_init_mac(struct ieee80211_hw *hw)
 	rtl_write_word(rtlpriv, REG_TRXFF_BNDY + 2, 0x27ff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wordtmp = rtl_read_word(rtlpriv, REG_TRXDMA_CTRL) & 0xf;
+=======
+	wordtmp = rtl_read_word(rtlpriv, REG_TRXDMA_CTRL);
+	wordtmp &= 0xf;
+>>>>>>> v3.18
 =======
 	wordtmp = rtl_read_word(rtlpriv, REG_TRXDMA_CTRL);
 	wordtmp &= 0xf;
@@ -1306,7 +1419,11 @@ static bool _rtl8712e_init_mac(struct ieee80211_hw *hw)
 	} while ((retry < 200) && (bytetmp & BIT(7)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_rtl8723ae_gen_refresh_led_state(hw);
+=======
+	_rtl8723e_gen_refresh_led_state(hw);
+>>>>>>> v3.18
 =======
 	_rtl8723e_gen_refresh_led_state(hw);
 >>>>>>> v3.18
@@ -1316,6 +1433,7 @@ static bool _rtl8712e_init_mac(struct ieee80211_hw *hw)
 	return true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void _rtl8723ae_hw_configure(struct ieee80211_hw *hw)
 {
@@ -1327,6 +1445,8 @@ static void _rtl8723ae_hw_configure(struct ieee80211_hw *hw)
 
 	reg_bw_opmode = BW_OPMODE_20MHZ;
 =======
+=======
+>>>>>>> v3.18
 static void _rtl8723e_hw_configure(struct ieee80211_hw *hw)
 {
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
@@ -1337,6 +1457,9 @@ static void _rtl8723e_hw_configure(struct ieee80211_hw *hw)
 	reg_bw_opmode = BW_OPMODE_20MHZ;
 	reg_ratr = RATE_ALL_CCK | RATE_ALL_OFDM_AG |
 	    RATE_ALL_OFDM_1SS | RATE_ALL_OFDM_2SS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg_prsr = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
 
@@ -1364,8 +1487,13 @@ static void _rtl8723e_hw_configure(struct ieee80211_hw *hw)
 	rtl_write_dword(rtlpriv, REG_RARFRC + 4, 0x07060504);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pcipriv->bt_coexist.bt_coexistence) &&
 	    (pcipriv->bt_coexist.bt_coexist_type == BT_CSR_BC4))
+=======
+	if ((rtlpriv->btcoexist.bt_coexistence) &&
+	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4))
+>>>>>>> v3.18
 =======
 	if ((rtlpriv->btcoexist.bt_coexistence) &&
 	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4))
@@ -1389,8 +1517,13 @@ static void _rtl8723e_hw_configure(struct ieee80211_hw *hw)
 	rtl_write_byte(rtlpriv, REG_AGGR_BREAK_TIME, 0x16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pcipriv->bt_coexist.bt_coexistence) &&
 	    (pcipriv->bt_coexist.bt_coexist_type == BT_CSR_BC4)) {
+=======
+	if ((rtlpriv->btcoexist.bt_coexistence) &&
+	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4)) {
+>>>>>>> v3.18
 =======
 	if ((rtlpriv->btcoexist.bt_coexistence) &&
 	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4)) {
@@ -1403,8 +1536,13 @@ static void _rtl8723e_hw_configure(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pcipriv->bt_coexist.bt_coexistence) &&
 	     (pcipriv->bt_coexist.bt_coexist_type == BT_CSR_BC4))
+=======
+	if ((rtlpriv->btcoexist.bt_coexistence) &&
+	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4))
+>>>>>>> v3.18
 =======
 	if ((rtlpriv->btcoexist.bt_coexistence) &&
 	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4))
@@ -1429,7 +1567,11 @@ static void _rtl8723e_hw_configure(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_enable_aspm_back_door(struct ieee80211_hw *hw)
+=======
+static void _rtl8723e_enable_aspm_back_door(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_enable_aspm_back_door(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -1451,7 +1593,11 @@ static void _rtl8723e_enable_aspm_back_door(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_enable_hw_security_config(struct ieee80211_hw *hw)
+=======
+void rtl8723e_enable_hw_security_config(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 void rtl8723e_enable_hw_security_config(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -1462,8 +1608,13 @@ void rtl8723e_enable_hw_security_config(struct ieee80211_hw *hw)
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_DMESG,
 		 "PairwiseEncAlgorithm = %d GroupEncAlgorithm = %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 rtlpriv->sec.pairwise_enc_algorithm,
 		 rtlpriv->sec.group_enc_algorithm);
+=======
+		  rtlpriv->sec.pairwise_enc_algorithm,
+		  rtlpriv->sec.group_enc_algorithm);
+>>>>>>> v3.18
 =======
 		  rtlpriv->sec.pairwise_enc_algorithm,
 		  rtlpriv->sec.group_enc_algorithm);
@@ -1476,17 +1627,23 @@ void rtl8723e_enable_hw_security_config(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sec_reg_value = SCR_TxEncEnable | SCR_RxDecEnable;
 
 	if (rtlpriv->sec.use_defaultkey) {
 		sec_reg_value |= SCR_TxUseDK;
 		sec_reg_value |= SCR_RxUseDK;
 =======
+=======
+>>>>>>> v3.18
 	sec_reg_value = SCR_TXENCENABLE | SCR_RXDECENABLE;
 
 	if (rtlpriv->sec.use_defaultkey) {
 		sec_reg_value |= SCR_TXUSEDK;
 		sec_reg_value |= SCR_RXUSEDK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1502,7 +1659,11 @@ void rtl8723e_enable_hw_security_config(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtl8723ae_hw_init(struct ieee80211_hw *hw)
+=======
+int rtl8723e_hw_init(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 int rtl8723e_hw_init(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -1529,6 +1690,10 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	local_save_flags(flags);
 	local_irq_enable();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rtlhal->fw_ready = false;
+>>>>>>> v3.18
 =======
 	rtlhal->fw_ready = false;
 >>>>>>> v3.18
@@ -1542,7 +1707,11 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = rtl8723ae_download_fw(hw);
+=======
+	err = rtl8723_download_fw(hw, false, FW_8723A_POLLING_TIMEOUT_COUNT);
+>>>>>>> v3.18
 =======
 	err = rtl8723_download_fw(hw, false, FW_8723A_POLLING_TIMEOUT_COUNT);
 >>>>>>> v3.18
@@ -1551,6 +1720,7 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 			 "Failed to download FW. Init HW without FW now..\n");
 		err = 1;
 		goto exit;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {
 		rtlhal->fw_ready = true;
@@ -1561,6 +1731,8 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	/* because the last function modifies RCR, we update
 	 * rcr var here, or TP will be unstable as ther receive_config
 =======
+=======
+>>>>>>> v3.18
 	}
 	rtlhal->fw_ready = true;
 
@@ -1568,6 +1740,9 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	rtl8723e_phy_mac_config(hw);
 	/* because last function modify RCR, so we update
 	 * rcr var here, or TP will unstable for receive_config
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * is wrong, RX RCR_ACRC32 will cause TP unstable & Rx
 	 * RCR_APP_ICV will cause mac80211 unassoc for cisco 1252
@@ -1577,9 +1752,15 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	rtl_write_dword(rtlpriv, REG_RCR, rtlpci->receive_config);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8723ae_phy_bb_config(hw);
 	rtlphy->rf_mode = RF_OP_BY_SW_3WIRE;
 	rtl8723ae_phy_rf_config(hw);
+=======
+	rtl8723e_phy_bb_config(hw);
+	rtlphy->rf_mode = RF_OP_BY_SW_3WIRE;
+	rtl8723e_phy_rf_config(hw);
+>>>>>>> v3.18
 =======
 	rtl8723e_phy_bb_config(hw);
 	rtlphy->rf_mode = RF_OP_BY_SW_3WIRE;
@@ -1604,9 +1785,15 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	rtl_set_bbreg(hw, RFPGA0_RFMOD, BOFDMEN, 0x1);
 	rtl_set_bbreg(hw, RFPGA0_ANALOGPARAMETER2, BIT(10), 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_rtl8723ae_hw_configure(hw);
 	rtl_cam_reset_all_entry(hw);
 	rtl8723ae_enable_hw_security_config(hw);
+=======
+	_rtl8723e_hw_configure(hw);
+	rtl_cam_reset_all_entry(hw);
+	rtl8723e_enable_hw_security_config(hw);
+>>>>>>> v3.18
 =======
 	_rtl8723e_hw_configure(hw);
 	rtl_cam_reset_all_entry(hw);
@@ -1616,6 +1803,7 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 	ppsc->rfpwr_state = ERFON;
 
 	rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_ETHER_ADDR, mac->mac_addr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_rtl8723ae_enable_aspm_back_door(hw);
 	rtlpriv->intf_ops->enable_aspm(hw);
@@ -1633,6 +1821,8 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 
 		rtl8723ae_phy_lc_calibrate(hw);
 =======
+=======
+>>>>>>> v3.18
 	_rtl8723e_enable_aspm_back_door(hw);
 	rtlpriv->intf_ops->enable_aspm(hw);
 
@@ -1649,6 +1839,9 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 
 		rtl8723e_dm_check_txpower_tracking(hw);
 		rtl8723e_phy_lc_calibrate(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1660,7 +1853,12 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 
 	if (!(tmp_u1b & BIT(4))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp_u1b = rtl_read_byte(rtlpriv, 0x16) & 0x0F;
+=======
+		tmp_u1b = rtl_read_byte(rtlpriv, 0x16);
+		tmp_u1b &= 0x0F;
+>>>>>>> v3.18
 =======
 		tmp_u1b = rtl_read_byte(rtlpriv, 0x16);
 		tmp_u1b &= 0x0F;
@@ -1671,7 +1869,11 @@ int rtl8723e_hw_init(struct ieee80211_hw *hw)
 		RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE, "under 1.5V\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8723ae_dm_init(hw);
+=======
+	rtl8723e_dm_init(hw);
+>>>>>>> v3.18
 =======
 	rtl8723e_dm_init(hw);
 >>>>>>> v3.18
@@ -1682,7 +1884,11 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static enum version_8723e _rtl8723ae_read_chip_version(struct ieee80211_hw *hw)
+=======
+static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -1696,15 +1902,21 @@ static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 	if (value32 & TRP_VAUX_EN) {
 		version = (enum version_8723e)(version |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  ((value32 & VENDOR_ID) ? CHIP_VENDOR_UMC : 0));
 		/* RTL8723 with BT function. */
 		version = (enum version_8723e)(version |
 			  ((value32 & BT_FUNC) ? CHIP_8723 : 0));
 =======
+=======
+>>>>>>> v3.18
 			((value32 & VENDOR_ID) ? CHIP_VENDOR_UMC : 0));
 		/* RTL8723 with BT function. */
 		version = (enum version_8723e)(version |
 			((value32 & BT_FUNC) ? CHIP_8723 : 0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	} else {
@@ -1712,15 +1924,21 @@ static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 		version = (enum version_8723e) NORMAL_CHIP;
 		version = (enum version_8723e)(version |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  ((value32 & VENDOR_ID) ? CHIP_VENDOR_UMC : 0));
 		/* RTL8723 with BT function. */
 		version = (enum version_8723e)(version |
 			  ((value32 & BT_FUNC) ? CHIP_8723 : 0));
 =======
+=======
+>>>>>>> v3.18
 			((value32 & VENDOR_ID) ? CHIP_VENDOR_UMC : 0));
 		/* RTL8723 with BT function. */
 		version = (enum version_8723e)(version |
 			((value32 & BT_FUNC) ? CHIP_8723 : 0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_CHIP_VENDOR_UMC(version))
 			version = (enum version_8723e)(version |
@@ -1728,9 +1946,15 @@ static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 		if (IS_8723_SERIES(version)) {
 			value32 = rtl_read_dword(rtlpriv, REG_GPIO_OUTSTS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* ROM code version */
 			version = (enum version_8723e)(version |
 				  ((value32 & RF_RL_ID)>>20));
+=======
+			/* ROM code version. */
+			version = (enum version_8723e)(version |
+				((value32 & RF_RL_ID)>>20));
+>>>>>>> v3.18
 =======
 			/* ROM code version. */
 			version = (enum version_8723e)(version |
@@ -1743,8 +1967,13 @@ static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 		value32 = rtl_read_dword(rtlpriv, REG_MULTI_FUNC_CTRL);
 		rtlphy->polarity_ctl = ((value32 & WL_HWPDN_SL) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       RT_POLARITY_HIGH_ACT :
 				       RT_POLARITY_LOW_ACT);
+=======
+					RT_POLARITY_HIGH_ACT :
+					RT_POLARITY_LOW_ACT);
+>>>>>>> v3.18
 =======
 					RT_POLARITY_HIGH_ACT :
 					RT_POLARITY_LOW_ACT);
@@ -1755,7 +1984,11 @@ static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 		RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE,
 			 "Chip Version ID: VERSION_TEST_UMC_CHIP_8723.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+			break;
+>>>>>>> v3.18
 =======
 			break;
 >>>>>>> v3.18
@@ -1783,8 +2016,13 @@ static enum version_8723e _rtl8723e_read_chip_version(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _rtl8723ae_set_media_status(struct ieee80211_hw *hw,
 				     enum nl80211_iftype type)
+=======
+static int _rtl8723e_set_media_status(struct ieee80211_hw *hw,
+				      enum nl80211_iftype type)
+>>>>>>> v3.18
 =======
 static int _rtl8723e_set_media_status(struct ieee80211_hw *hw,
 				      enum nl80211_iftype type)
@@ -1793,6 +2031,7 @@ static int _rtl8723e_set_media_status(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	u8 bt_msr = rtl_read_byte(rtlpriv, MSR) & 0xfc;
 	enum led_ctl_mode ledaction = LED_CTL_NO_LINK;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	rtl_write_dword(rtlpriv, REG_BCN_CTRL, 0);
@@ -1849,6 +2088,8 @@ static int _rtl8723e_set_media_status(struct ieee80211_hw *hw,
 	rtlpriv->cfg->ops->led_control(hw, ledaction);
 	if ((bt_msr & 0x03) == MSR_AP)
 =======
+=======
+>>>>>>> v3.18
 	u8 mode = MSR_NOLINK;
 
 	rtl_write_dword(rtlpriv, REG_BCN_CTRL, 0);
@@ -1911,6 +2152,9 @@ static int _rtl8723e_set_media_status(struct ieee80211_hw *hw,
 	rtl_write_byte(rtlpriv, (MSR), bt_msr | mode);
 	rtlpriv->cfg->ops->led_control(hw, ledaction);
 	if (mode == MSR_AP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rtl_write_byte(rtlpriv, REG_BCNTCFG + 1, 0x00);
 	else
@@ -1919,7 +2163,11 @@ static int _rtl8723e_set_media_status(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
+=======
+void rtl8723e_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
+>>>>>>> v3.18
 =======
 void rtl8723e_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 >>>>>>> v3.18
@@ -1931,6 +2179,7 @@ void rtl8723e_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 	if (rtlpriv->psc.rfpwr_state != ERFON)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (check_bssid == true) {
 		reg_rcr |= (RCR_CBSSID_DATA | RCR_CBSSID_BCN);
@@ -1952,6 +2201,8 @@ int rtl8723ae_set_network_type(struct ieee80211_hw *hw,
 
 	if (_rtl8723ae_set_media_status(hw, type))
 =======
+=======
+>>>>>>> v3.18
 	if (check_bssid) {
 		reg_rcr |= (RCR_CBSSID_DATA | RCR_CBSSID_BCN);
 		rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_RCR,
@@ -1971,11 +2222,15 @@ int rtl8723e_set_network_type(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 
 	if (_rtl8723e_set_media_status(hw, type))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EOPNOTSUPP;
 
 	if (rtlpriv->mac80211.link_state == MAC80211_LINKED) {
 		if (type != NL80211_IFTYPE_AP)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			rtl8723ae_set_check_bssid(hw, true);
 	} else {
@@ -1991,6 +2246,8 @@ void rtl8723ae_set_qos(struct ieee80211_hw *hw, int aci)
 
 	rtl8723ae_dm_init_edca_turbo(hw);
 =======
+=======
+>>>>>>> v3.18
 			rtl8723e_set_check_bssid(hw, true);
 	} else {
 		rtl8723e_set_check_bssid(hw, false);
@@ -2007,6 +2264,9 @@ void rtl8723e_set_qos(struct ieee80211_hw *hw, int aci)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 
 	rtl8723_dm_init_edca_turbo(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (aci) {
 	case AC1_BK:
@@ -2014,7 +2274,10 @@ void rtl8723e_set_qos(struct ieee80211_hw *hw, int aci)
 		break;
 	case AC0_BE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* rtl_write_dword(rtlpriv, REG_EDCA_BE_PARAM, u4ac_param); */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -2031,8 +2294,11 @@ void rtl8723e_set_qos(struct ieee80211_hw *hw, int aci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_enable_interrupt(struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 static void rtl8723e_clear_interrupt(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2046,6 +2312,9 @@ static void rtl8723e_clear_interrupt(struct ieee80211_hw *hw)
 }
 
 void rtl8723e_enable_interrupt(struct ieee80211_hw *hw)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2056,6 +2325,7 @@ void rtl8723e_enable_interrupt(struct ieee80211_hw *hw)
 	rtlpci->irq_enabled = true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rtl8723ae_disable_interrupt(struct ieee80211_hw *hw)
 {
@@ -2074,6 +2344,8 @@ static void _rtl8723ae_poweroff_adapter(struct ieee80211_hw *hw)
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 	u8 u1tmp;
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_disable_interrupt(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2090,13 +2362,20 @@ static void _rtl8723e_poweroff_adapter(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 	u8 u1b_tmp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Combo (PCIe + USB) Card and PCIe-MF Card */
 	/* 1. Run LPS WL RFOFF flow */
 	rtl_hal_pwrseqcmdparsing(rtlpriv, PWR_CUT_ALL_MSK, PWR_FAB_ALL_MSK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PWR_INTF_PCI_MSK, Rtl8723_NIC_LPS_ENTER_FLOW);
+=======
+				 PWR_INTF_PCI_MSK, Rtl8723_NIC_LPS_ENTER_FLOW);
+>>>>>>> v3.18
 =======
 				 PWR_INTF_PCI_MSK, Rtl8723_NIC_LPS_ENTER_FLOW);
 >>>>>>> v3.18
@@ -2105,6 +2384,7 @@ static void _rtl8723e_poweroff_adapter(struct ieee80211_hw *hw)
 	/* turn off RF */
 	rtl_write_byte(rtlpriv, REG_RF_CTRL, 0x00);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rtl_read_byte(rtlpriv, REG_MCUFWDL) & BIT(7)) && rtlhal->fw_ready)
 		rtl8723ae_firmware_selfreset(hw);
 
@@ -2112,6 +2392,8 @@ static void _rtl8723e_poweroff_adapter(struct ieee80211_hw *hw)
 	u1tmp = rtl_read_byte(rtlpriv, REG_SYS_FUNC_EN+1);
 	rtl_write_byte(rtlpriv, REG_SYS_FUNC_EN+1, (u1tmp & (~BIT(2))));
 =======
+=======
+>>>>>>> v3.18
 	if ((rtl_read_byte(rtlpriv, REG_MCUFWDL) & BIT(7)) &&
 	    rtlhal->fw_ready) {
 		rtl8723ae_firmware_selfreset(hw);
@@ -2120,6 +2402,9 @@ static void _rtl8723e_poweroff_adapter(struct ieee80211_hw *hw)
 	/* Reset MCU. Suggested by Filen. */
 	u1b_tmp = rtl_read_byte(rtlpriv, REG_SYS_FUNC_EN+1);
 	rtl_write_byte(rtlpriv, REG_SYS_FUNC_EN+1, (u1b_tmp & (~BIT(2))));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* g.	MCUFWDL 0x80[1:0]=0	 */
@@ -2132,15 +2417,21 @@ static void _rtl8723e_poweroff_adapter(struct ieee80211_hw *hw)
 
 	/* Reset MCU IO Wrapper */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u1tmp = rtl_read_byte(rtlpriv, REG_RSV_CTRL + 1);
 	rtl_write_byte(rtlpriv, REG_RSV_CTRL + 1, (u1tmp & (~BIT(0))));
 	u1tmp = rtl_read_byte(rtlpriv, REG_RSV_CTRL + 1);
 	rtl_write_byte(rtlpriv, REG_RSV_CTRL + 1, u1tmp | BIT(0));
 =======
+=======
+>>>>>>> v3.18
 	u1b_tmp = rtl_read_byte(rtlpriv, REG_RSV_CTRL + 1);
 	rtl_write_byte(rtlpriv, REG_RSV_CTRL + 1, (u1b_tmp & (~BIT(0))));
 	u1b_tmp = rtl_read_byte(rtlpriv, REG_RSV_CTRL + 1);
 	rtl_write_byte(rtlpriv, REG_RSV_CTRL + 1, u1b_tmp | BIT(0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 7. RSV_CTRL 0x1C[7:0] = 0x0E */
@@ -2149,7 +2440,11 @@ static void _rtl8723e_poweroff_adapter(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_card_disable(struct ieee80211_hw *hw)
+=======
+void rtl8723e_card_disable(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 void rtl8723e_card_disable(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -2158,13 +2453,17 @@ void rtl8723e_card_disable(struct ieee80211_hw *hw)
 	struct rtl_ps_ctl *ppsc = rtl_psc(rtl_priv(hw));
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enum nl80211_iftype opmode;
 
 	mac->link_state = MAC80211_NOLINK;
 	opmode = NL80211_IFTYPE_UNSPECIFIED;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_rtl8723ae_set_media_status(hw, opmode);
 	if (rtlpci->driver_is_goingto_unload ||
@@ -2173,12 +2472,17 @@ void rtl8723e_card_disable(struct ieee80211_hw *hw)
 	RT_SET_PS_LEVEL(ppsc, RT_RF_OFF_LEVL_HALT_NIC);
 	_rtl8723ae_poweroff_adapter(hw);
 =======
+=======
+>>>>>>> v3.18
 	_rtl8723e_set_media_status(hw, opmode);
 	if (rtlpriv->rtlhal.driver_is_goingto_unload ||
 	    ppsc->rfoff_reason > RF_CHANGE_BY_PS)
 		rtlpriv->cfg->ops->led_control(hw, LED_CTL_POWER_OFF);
 	RT_SET_PS_LEVEL(ppsc, RT_RF_OFF_LEVL_HALT_NIC);
 	_rtl8723e_poweroff_adapter(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* after power off we should do iqk again */
@@ -2186,8 +2490,13 @@ void rtl8723e_card_disable(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_interrupt_recognized(struct ieee80211_hw *hw,
 				    u32 *p_inta, u32 *p_intb)
+=======
+void rtl8723e_interrupt_recognized(struct ieee80211_hw *hw,
+				   u32 *p_inta, u32 *p_intb)
+>>>>>>> v3.18
 =======
 void rtl8723e_interrupt_recognized(struct ieee80211_hw *hw,
 				   u32 *p_inta, u32 *p_intb)
@@ -2201,7 +2510,11 @@ void rtl8723e_interrupt_recognized(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_set_beacon_related_registers(struct ieee80211_hw *hw)
+=======
+void rtl8723e_set_beacon_related_registers(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 void rtl8723e_set_beacon_related_registers(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -2214,7 +2527,11 @@ void rtl8723e_set_beacon_related_registers(struct ieee80211_hw *hw)
 	bcn_interval = mac->beacon_interval;
 	atim_window = 2;	/*FIX MERGE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8723ae_disable_interrupt(hw);
+=======
+	rtl8723e_disable_interrupt(hw);
+>>>>>>> v3.18
 =======
 	rtl8723e_disable_interrupt(hw);
 >>>>>>> v3.18
@@ -2225,15 +2542,21 @@ void rtl8723e_set_beacon_related_registers(struct ieee80211_hw *hw)
 	rtl_write_byte(rtlpriv, REG_RXTSF_OFFSET_OFDM, 0x18);
 	rtl_write_byte(rtlpriv, 0x606, 0x30);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8723ae_enable_interrupt(hw);
 }
 
 void rtl8723ae_set_beacon_interval(struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 	rtl8723e_enable_interrupt(hw);
 }
 
 void rtl8723e_set_beacon_interval(struct ieee80211_hw *hw)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2243,6 +2566,7 @@ void rtl8723e_set_beacon_interval(struct ieee80211_hw *hw)
 	RT_TRACE(rtlpriv, COMP_BEACON, DBG_DMESG,
 		 "beacon_interval:%d\n", bcn_interval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8723ae_disable_interrupt(hw);
 	rtl_write_word(rtlpriv, REG_BCN_INTERVAL, bcn_interval);
 	rtl8723ae_enable_interrupt(hw);
@@ -2251,6 +2575,8 @@ void rtl8723e_set_beacon_interval(struct ieee80211_hw *hw)
 void rtl8723ae_update_interrupt_mask(struct ieee80211_hw *hw,
 				     u32 add_msr, u32 rm_msr)
 =======
+=======
+>>>>>>> v3.18
 	rtl8723e_disable_interrupt(hw);
 	rtl_write_word(rtlpriv, REG_BCN_INTERVAL, bcn_interval);
 	rtl8723e_enable_interrupt(hw);
@@ -2258,6 +2584,9 @@ void rtl8723ae_update_interrupt_mask(struct ieee80211_hw *hw,
 
 void rtl8723e_update_interrupt_mask(struct ieee80211_hw *hw,
 				    u32 add_msr, u32 rm_msr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2271,17 +2600,23 @@ void rtl8723e_update_interrupt_mask(struct ieee80211_hw *hw,
 	if (rm_msr)
 		rtlpci->irq_mask[0] &= (~rm_msr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8723ae_disable_interrupt(hw);
 	rtl8723ae_enable_interrupt(hw);
 }
 
 static u8 _rtl8723ae_get_chnl_group(u8 chnl)
 =======
+=======
+>>>>>>> v3.18
 	rtl8723e_disable_interrupt(hw);
 	rtl8723e_enable_interrupt(hw);
 }
 
 static u8 _rtl8723e_get_chnl_group(u8 chnl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u8 group;
@@ -2296,9 +2631,15 @@ static u8 _rtl8723e_get_chnl_group(u8 chnl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 						   bool autoload_fail,
 						   u8 *hwinfo)
+=======
+static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
+						  bool autoload_fail,
+						  u8 *hwinfo)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 						  bool autoload_fail,
@@ -2314,6 +2655,7 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 		for (i = 0; i < 3; i++) {
 			if (!autoload_fail) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rtlefuse->eeprom_chnlarea_txpwr_cck
 				    [rf_path][i] =
 				    hwinfo[EEPROM_TXPOWERCCK + rf_path * 3 + i];
@@ -2328,6 +2670,8 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 				rtlefuse->eeprom_chnlarea_txpwr_ht40_1s
 				    [rf_path][i] =
 =======
+=======
+>>>>>>> v3.18
 				rtlefuse->eeprom_chnlarea_txpwr_cck[rf_path][i] =
 				    hwinfo[EEPROM_TXPOWERCCK + rf_path * 3 + i];
 				rtlefuse->eeprom_chnlarea_txpwr_ht40_1s[rf_path][i] =
@@ -2336,6 +2680,9 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 				rtlefuse->eeprom_chnlarea_txpwr_cck[rf_path][i] =
 				    EEPROM_DEFAULT_TXPOWERLEVEL;
 				rtlefuse->eeprom_chnlarea_txpwr_ht40_1s[rf_path][i] =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    EEPROM_DEFAULT_TXPOWERLEVEL;
 			}
@@ -2358,8 +2705,13 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 			RTPRINT(rtlpriv, FINIT, INIT_EEPROM,
 				"RF(%d) EEPROM CCK Area(%d) = 0x%x\n", rf_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				i, rtlefuse->eeprom_chnlarea_txpwr_cck
 				[rf_path][i]);
+=======
+				 i, rtlefuse->eeprom_chnlarea_txpwr_cck
+					[rf_path][i]);
+>>>>>>> v3.18
 =======
 				 i, rtlefuse->eeprom_chnlarea_txpwr_cck
 					[rf_path][i]);
@@ -2371,7 +2723,11 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 				rf_path, i,
 				rtlefuse->eeprom_chnlarea_txpwr_ht40_1s
 <<<<<<< HEAD
+<<<<<<< HEAD
 				[rf_path][i]);
+=======
+					[rf_path][i]);
+>>>>>>> v3.18
 =======
 					[rf_path][i]);
 >>>>>>> v3.18
@@ -2379,6 +2735,7 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 		for (i = 0; i < 3; i++)
 			RTPRINT(rtlpriv, FINIT, INIT_EEPROM,
 				"RF(%d) EEPROM HT40 2S Diff Area(%d) = 0x%x\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 				rf_path, i,
 				rtlefuse->eprom_chnl_txpwr_ht40_2sdf
@@ -2405,6 +2762,8 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 					rtlefuse->eprom_chnl_txpwr_ht40_2sdf
 					[rf_path][index];
 =======
+=======
+>>>>>>> v3.18
 				 rf_path, i,
 				 rtlefuse->eprom_chnl_txpwr_ht40_2sdf
 					[rf_path][i]);
@@ -2429,6 +2788,9 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 				  [rf_path][index] -
 				  rtlefuse->eprom_chnl_txpwr_ht40_2sdf
 				  [rf_path][index];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				rtlefuse->txpwrlevel_ht40_2s[rf_path][i] = 0;
@@ -2438,8 +2800,13 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 		for (i = 0; i < 14; i++) {
 			RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"RF(%d)-Ch(%d) [CCK / HT40_1S / HT40_2S] = "
 				"[0x%x / 0x%x / 0x%x]\n", rf_path, i,
+=======
+				"RF(%d)-Ch(%d) [CCK / HT40_1S / HT40_2S] = [0x%x / 0x%x / 0x%x]\n",
+				rf_path, i,
+>>>>>>> v3.18
 =======
 				"RF(%d)-Ch(%d) [CCK / HT40_1S / HT40_2S] = [0x%x / 0x%x / 0x%x]\n",
 				rf_path, i,
@@ -2465,6 +2832,7 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 	for (rf_path = 0; rf_path < 2; rf_path++) {
 		for (i = 0; i < 14; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			index = _rtl8723ae_get_chnl_group((u8) i);
 
 			if (rf_path == RF90_PATH_A) {
@@ -2482,6 +2850,8 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 				    ((rtlefuse->eeprom_pwrlimit_ht40[index] &
 				    0xf0) >> 4);
 =======
+=======
+>>>>>>> v3.18
 			index = _rtl8723e_get_chnl_group((u8)i);
 
 			if (rf_path == RF90_PATH_A) {
@@ -2496,6 +2866,9 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 				rtlefuse->pwrgroup_ht40[rf_path][i] =
 				  ((rtlefuse->eeprom_pwrlimit_ht40[index] &
 				   0xf0) >> 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
@@ -2510,7 +2883,11 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 
 	for (i = 0; i < 14; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index = _rtl8723ae_get_chnl_group((u8) i);
+=======
+		index = _rtl8723e_get_chnl_group((u8)i);
+>>>>>>> v3.18
 =======
 		index = _rtl8723e_get_chnl_group((u8)i);
 >>>>>>> v3.18
@@ -2531,7 +2908,11 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 			rtlefuse->txpwr_ht20diff[RF90_PATH_B][i] |= 0xF0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index = _rtl8723ae_get_chnl_group((u8) i);
+=======
+		index = _rtl8723e_get_chnl_group((u8)i);
+>>>>>>> v3.18
 =======
 		index = _rtl8723e_get_chnl_group((u8)i);
 >>>>>>> v3.18
@@ -2553,6 +2934,7 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 		RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
 			"RF-A Ht20 to HT40 Diff[%d] = 0x%x\n", i,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rtlefuse->txpwr_ht20diff[RF90_PATH_A][i]);
 	for (i = 0; i < 14; i++)
 		RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
@@ -2567,6 +2949,8 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 			"RF-B Legacy to HT40 Diff[%d] = 0x%x\n", i,
 			rtlefuse->txpwr_legacyhtdiff[RF90_PATH_B][i]);
 =======
+=======
+>>>>>>> v3.18
 			 rtlefuse->txpwr_ht20diff[RF90_PATH_A][i]);
 	for (i = 0; i < 14; i++)
 		RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
@@ -2580,6 +2964,9 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 		RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
 			"RF-B Legacy to HT40 Diff[%d] = 0x%x\n", i,
 			 rtlefuse->txpwr_legacyhtdiff[RF90_PATH_B][i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!autoload_fail)
@@ -2594,16 +2981,22 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 	else
 		rtlefuse->eeprom_tssi[RF90_PATH_A] = EEPROM_DEFAULT_TSSI;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
 		"TSSI_A = 0x%x, TSSI_B = 0x%x\n",
 		rtlefuse->eeprom_tssi[RF90_PATH_A],
 		rtlefuse->eeprom_tssi[RF90_PATH_B]);
 =======
+=======
+>>>>>>> v3.18
 
 	RTPRINT(rtlpriv, FINIT, INIT_TXPOWER,
 		"TSSI_A = 0x%x, TSSI_B = 0x%x\n",
 		 rtlefuse->eeprom_tssi[RF90_PATH_A],
 		 rtlefuse->eeprom_tssi[RF90_PATH_B]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!autoload_fail)
@@ -2621,8 +3014,13 @@ static void _rtl8723e_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_read_adapter_info(struct ieee80211_hw *hw,
 					 bool pseudo_test)
+=======
+static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
+					bool b_pseudo_test)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					bool b_pseudo_test)
@@ -2636,7 +3034,11 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	u16 eeprom_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pseudo_test) {
+=======
+	if (b_pseudo_test) {
+>>>>>>> v3.18
 =======
 	if (b_pseudo_test) {
 >>>>>>> v3.18
@@ -2654,7 +3056,11 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_PRINT_DATA(rtlpriv, COMP_INIT, DBG_DMESG, ("MAP\n"),
+=======
+	RT_PRINT_DATA(rtlpriv, COMP_INIT, DBG_DMESG, "MAP\n",
+>>>>>>> v3.18
 =======
 	RT_PRINT_DATA(rtlpriv, COMP_INIT, DBG_DMESG, "MAP\n",
 >>>>>>> v3.18
@@ -2671,6 +3077,7 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtlefuse->autoload_failflag == true)
 		return;
 
@@ -2679,6 +3086,8 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	rtlefuse->eeprom_svid = *(u16 *) &hwinfo[EEPROM_SVID];
 	rtlefuse->eeprom_smid = *(u16 *) &hwinfo[EEPROM_SMID];
 =======
+=======
+>>>>>>> v3.18
 	if (rtlefuse->autoload_failflag)
 		return;
 
@@ -2686,6 +3095,9 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	rtlefuse->eeprom_did = *(u16 *)&hwinfo[EEPROM_DID];
 	rtlefuse->eeprom_svid = *(u16 *)&hwinfo[EEPROM_SVID];
 	rtlefuse->eeprom_smid = *(u16 *)&hwinfo[EEPROM_SMID];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_LOUD,
 		 "EEPROMId = 0x%4x\n", eeprom_id);
@@ -2701,7 +3113,11 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	for (i = 0; i < 6; i += 2) {
 		usvalue = *(u16 *)&hwinfo[EEPROM_MAC_ADDR + i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*((u16 *) (&rtlefuse->dev_addr[i])) = usvalue;
+=======
+		*((u16 *)(&rtlefuse->dev_addr[i])) = usvalue;
+>>>>>>> v3.18
 =======
 		*((u16 *)(&rtlefuse->dev_addr[i])) = usvalue;
 >>>>>>> v3.18
@@ -2710,6 +3126,7 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_DMESG,
 		 "dev_addr: %pM\n", rtlefuse->dev_addr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_rtl8723ae_read_txpower_info_from_hwpg(hw,
 			rtlefuse->autoload_failflag, hwinfo);
@@ -2722,6 +3139,8 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	rtlefuse->txpwr_fromeprom = true;
 	rtlefuse->eeprom_oemid = *(u8 *)&hwinfo[EEPROM_CUSTOMER_ID];
 =======
+=======
+>>>>>>> v3.18
 	_rtl8723e_read_txpower_info_from_hwpg(hw, rtlefuse->autoload_failflag,
 					      hwinfo);
 
@@ -2732,6 +3151,9 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 	rtlefuse->eeprom_version = *(u16 *)&hwinfo[EEPROM_VERSION];
 	rtlefuse->txpwr_fromeprom = true;
 	rtlefuse->eeprom_oemid = hwinfo[EEPROM_CUSTOMER_ID];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_LOUD,
@@ -2753,7 +3175,10 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 				    CHK_SVID_SMID(0x10EC, 0x6179) ||
 				    CHK_SVID_SMID(0x10EC, 0x6180) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				    CHK_SVID_SMID(0x10EC, 0x7151) ||
 				    CHK_SVID_SMID(0x10EC, 0x7152) ||
 				    CHK_SVID_SMID(0x10EC, 0x7154) ||
@@ -2762,6 +3187,9 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 				    CHK_SVID_SMID(0x10EC, 0x7178) ||
 				    CHK_SVID_SMID(0x10EC, 0x7179) ||
 				    CHK_SVID_SMID(0x10EC, 0x7180) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    CHK_SVID_SMID(0x10EC, 0x8151) ||
 				    CHK_SVID_SMID(0x10EC, 0x8152) ||
@@ -2782,7 +3210,11 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					rtlhal->oem_id = RT_CID_TOSHIBA;
 				else if (rtlefuse->eeprom_svid == 0x1025)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rtlhal->oem_id = RT_CID_819x_Acer;
+=======
+					rtlhal->oem_id = RT_CID_819X_ACER;
+>>>>>>> v3.18
 =======
 					rtlhal->oem_id = RT_CID_819X_ACER;
 >>>>>>> v3.18
@@ -2795,14 +3227,20 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					 CHK_SVID_SMID(0x10EC, 0x8191) ||
 					 CHK_SVID_SMID(0x10EC, 0x8192) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 CHK_SVID_SMID(0x10EC, 0x8193))
 					rtlhal->oem_id = RT_CID_819x_SAMSUNG;
 =======
+=======
+>>>>>>> v3.18
 					 CHK_SVID_SMID(0x10EC, 0x8193) ||
 					 CHK_SVID_SMID(0x10EC, 0x9191) ||
 					 CHK_SVID_SMID(0x10EC, 0x9192) ||
 					 CHK_SVID_SMID(0x10EC, 0x9193))
 					rtlhal->oem_id = RT_CID_819X_SAMSUNG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				else if (CHK_SVID_SMID(0x10EC, 0x8195) ||
 					 CHK_SVID_SMID(0x10EC, 0x9195) ||
@@ -2812,20 +3250,27 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					 CHK_SVID_SMID(0x10EC, 0x8202) ||
 					 CHK_SVID_SMID(0x10EC, 0x9200))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rtlhal->oem_id = RT_CID_819x_Lenovo;
 				else if (CHK_SVID_SMID(0x10EC, 0x8197) ||
 					 CHK_SVID_SMID(0x10EC, 0x9196))
 					rtlhal->oem_id = RT_CID_819x_CLEVO;
 =======
+=======
+>>>>>>> v3.18
 					rtlhal->oem_id = RT_CID_819X_LENOVO;
 				else if (CHK_SVID_SMID(0x10EC, 0x8197) ||
 					 CHK_SVID_SMID(0x10EC, 0x9196))
 					rtlhal->oem_id = RT_CID_819X_CLEVO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				else if (CHK_SVID_SMID(0x1028, 0x8194) ||
 					 CHK_SVID_SMID(0x1028, 0x8198) ||
 					 CHK_SVID_SMID(0x1028, 0x9197) ||
 					 CHK_SVID_SMID(0x1028, 0x9198))
+<<<<<<< HEAD
 <<<<<<< HEAD
 					rtlhal->oem_id = RT_CID_819x_DELL;
 				else if (CHK_SVID_SMID(0x103C, 0x1629))
@@ -2838,6 +3283,8 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					rtlhal->oem_id =
 						 RT_CID_819x_Edimax_ASUS;
 =======
+=======
+>>>>>>> v3.18
 					rtlhal->oem_id = RT_CID_819X_DELL;
 				else if (CHK_SVID_SMID(0x103C, 0x1629))
 					rtlhal->oem_id = RT_CID_819X_HP;
@@ -2848,6 +3295,9 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 				else if (CHK_SVID_SMID(0x1043, 0x84B5))
 					rtlhal->oem_id =
 						 RT_CID_819X_EDIMAX_ASUS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				else
 					rtlhal->oem_id = RT_CID_DEFAULT;
@@ -2871,6 +3321,7 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					rtlhal->oem_id = RT_CID_TOSHIBA;
 				else if (rtlefuse->eeprom_svid == 0x1025)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rtlhal->oem_id = RT_CID_819x_Acer;
 				else if (CHK_SVID_SMID(0x10EC, 0x8186))
 					rtlhal->oem_id = RT_CID_819x_PRONETS;
@@ -2882,6 +3333,8 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 			} else {
 					rtlhal->oem_id = RT_CID_DEFAULT;
 =======
+=======
+>>>>>>> v3.18
 					rtlhal->oem_id = RT_CID_819X_ACER;
 				else if (CHK_SVID_SMID(0x10EC, 0x8186))
 					rtlhal->oem_id = RT_CID_819X_PRONETS;
@@ -2892,6 +3345,9 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 					rtlhal->oem_id = RT_CID_DEFAULT;
 			} else {
 				rtlhal->oem_id = RT_CID_DEFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -2903,7 +3359,11 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 			break;
 		case EEPROM_CID_QMI:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rtlhal->oem_id = RT_CID_819x_QMI;
+=======
+			rtlhal->oem_id = RT_CID_819X_QMI;
+>>>>>>> v3.18
 =======
 			rtlhal->oem_id = RT_CID_819X_QMI;
 >>>>>>> v3.18
@@ -2919,7 +3379,11 @@ static void _rtl8723e_read_adapter_info(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl8723ae_hal_customized_behavior(struct ieee80211_hw *hw)
+=======
+static void _rtl8723e_hal_customized_behavior(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 static void _rtl8723e_hal_customized_behavior(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -2930,7 +3394,10 @@ static void _rtl8723e_hal_customized_behavior(struct ieee80211_hw *hw)
 
 	pcipriv->ledctl.led_opendrain = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	switch (rtlhal->oem_id) {
 	case RT_CID_819X_HP:
 		pcipriv->ledctl.led_opendrain = true;
@@ -2944,13 +3411,20 @@ static void _rtl8723e_hal_customized_behavior(struct ieee80211_hw *hw)
 	default:
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_DMESG,
 		 "RT Customized ID: 0x%02X\n", rtlhal->oem_id);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_read_eeprom_info(struct ieee80211_hw *hw)
+=======
+void rtl8723e_read_eeprom_info(struct ieee80211_hw *hw)
+>>>>>>> v3.18
 =======
 void rtl8723e_read_eeprom_info(struct ieee80211_hw *hw)
 >>>>>>> v3.18
@@ -2967,7 +3441,11 @@ void rtl8723e_read_eeprom_info(struct ieee80211_hw *hw)
 	rtl_write_dword(rtlpriv, rtlpriv->cfg->maps[EFUSE_TEST], value32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlhal->version = _rtl8723ae_read_chip_version(hw);
+=======
+	rtlhal->version = _rtl8723e_read_chip_version(hw);
+>>>>>>> v3.18
 =======
 	rtlhal->version = _rtl8723e_read_chip_version(hw);
 >>>>>>> v3.18
@@ -2979,7 +3457,11 @@ void rtl8723e_read_eeprom_info(struct ieee80211_hw *hw)
 		    rtlpriv->dm.rfpath_rxenable[1] = true;
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_LOUD, "VersionID = 0x%4x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 rtlhal->version);
+=======
+						rtlhal->version);
+>>>>>>> v3.18
 =======
 						rtlhal->version);
 >>>>>>> v3.18
@@ -2996,6 +3478,7 @@ void rtl8723e_read_eeprom_info(struct ieee80211_hw *hw)
 		RT_TRACE(rtlpriv, COMP_INIT, DBG_LOUD, "Autoload OK\n");
 		rtlefuse->autoload_failflag = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_rtl8723ae_read_adapter_info(hw, false);
 	} else {
 		rtlefuse->autoload_failflag = true;
@@ -3011,6 +3494,8 @@ static void rtl8723ae_update_hal_rate_table(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_pci_priv *pcipriv = rtl_pcipriv(hw);
 =======
+=======
+>>>>>>> v3.18
 		_rtl8723e_read_adapter_info(hw, false);
 	} else {
 		rtlefuse->autoload_failflag = true;
@@ -3024,6 +3509,9 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 					   struct ieee80211_sta *sta)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
@@ -3031,8 +3519,14 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 	u32 ratr_value;
 	u8 ratr_index = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 nmode = mac->ht_enable;
 	u8 mimo_ps = IEEE80211_SMPS_OFF;
+=======
+	u8 b_nmode = mac->ht_enable;
+	u16 shortgi_rate;
+	u32 tmp_ratr_value;
+>>>>>>> v3.18
 =======
 	u8 b_nmode = mac->ht_enable;
 	u16 shortgi_rate;
@@ -3045,6 +3539,10 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 				1 : 0;
 	enum wireless_mode wirelessmode = mac->mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ratr_mask;
+>>>>>>> v3.18
 =======
 	u32 ratr_mask;
 >>>>>>> v3.18
@@ -3057,7 +3555,11 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 		ratr_value = 0xfff;
 	ratr_value |= (sta->ht_cap.mcs.rx_mask[1] << 20 |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       sta->ht_cap.mcs.rx_mask[0] << 12);
+=======
+			sta->ht_cap.mcs.rx_mask[0] << 12);
+>>>>>>> v3.18
 =======
 			sta->ht_cap.mcs.rx_mask[0] << 12);
 >>>>>>> v3.18
@@ -3074,6 +3576,7 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 	case WIRELESS_MODE_N_24G:
 	case WIRELESS_MODE_N_5G:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nmode = 1;
 		if (mimo_ps == IEEE80211_SMPS_STATIC) {
 			ratr_value &= 0x0007F005;
@@ -3089,6 +3592,8 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 			ratr_value &= ratr_mask;
 		}
 =======
+=======
+>>>>>>> v3.18
 		b_nmode = 1;
 		if (get_rf_type(rtlphy) == RF_1T2R ||
 		    get_rf_type(rtlphy) == RF_1T1R)
@@ -3097,6 +3602,9 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 			ratr_mask = 0x0f0ff005;
 
 		ratr_value &= ratr_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -3109,6 +3617,7 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pcipriv->bt_coexist.bt_coexistence) &&
 	    (pcipriv->bt_coexist.bt_coexist_type == BT_CSR_BC4) &&
 	    (pcipriv->bt_coexist.bt_cur_state) &&
@@ -3116,22 +3625,30 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 	    ((pcipriv->bt_coexist.bt_service == BT_SCO) ||
 	    (pcipriv->bt_coexist.bt_service == BT_BUSY)))
 =======
+=======
+>>>>>>> v3.18
 	if ((rtlpriv->btcoexist.bt_coexistence) &&
 	    (rtlpriv->btcoexist.bt_coexist_type == BT_CSR_BC4) &&
 	    (rtlpriv->btcoexist.bt_cur_state) &&
 	    (rtlpriv->btcoexist.bt_ant_isolation) &&
 	    ((rtlpriv->btcoexist.bt_service == BT_SCO) ||
 	    (rtlpriv->btcoexist.bt_service == BT_BUSY)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ratr_value &= 0x0fffcfc0;
 	else
 		ratr_value &= 0x0FFFFFFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nmode && ((curtxbw_40mhz && curshortgi_40mhz) ||
 	   (!curtxbw_40mhz && curshortgi_20mhz)))
 		ratr_value |= 0x10000000;
 =======
+=======
+>>>>>>> v3.18
 	if (b_nmode &&
 	    ((curtxbw_40mhz && curshortgi_40mhz) ||
 	     (!curtxbw_40mhz && curshortgi_20mhz))) {
@@ -3146,6 +3663,9 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 		shortgi_rate = (shortgi_rate << 12) | (shortgi_rate << 8) |
 		    (shortgi_rate << 4) | (shortgi_rate);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rtl_write_dword(rtlpriv, REG_ARFR0 + ratr_index * 4, ratr_value);
@@ -3155,8 +3675,14 @@ static void rtl8723e_update_hal_rate_table(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rtl8723ae_update_hal_rate_mask(struct ieee80211_hw *hw,
 		struct ieee80211_sta *sta, u8 rssi_level)
+=======
+static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
+					  struct ieee80211_sta *sta,
+					  u8 rssi_level)
+>>>>>>> v3.18
 =======
 static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 					  struct ieee80211_sta *sta,
@@ -3171,7 +3697,12 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 	u32 ratr_bitmap;
 	u8 ratr_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 curtxbw_40mhz = (sta->bandwidth >= IEEE80211_STA_RX_BW_40) ? 1 : 0;
+=======
+	u8 curtxbw_40mhz = (sta->ht_cap.cap & IEEE80211_HT_CAP_SUP_WIDTH_20_40)
+				? 1 : 0;
+>>>>>>> v3.18
 =======
 	u8 curtxbw_40mhz = (sta->ht_cap.cap & IEEE80211_HT_CAP_SUP_WIDTH_20_40)
 				? 1 : 0;
@@ -3185,9 +3716,15 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 	u8 rate_mask[5];
 	u8 macid = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mimo_ps = IEEE80211_SMPS_OFF;
 
 	sta_entry = (struct rtl_sta_info *) sta->drv_priv;
+=======
+	/*u8 mimo_ps = IEEE80211_SMPS_OFF;*/
+
+	sta_entry = (struct rtl_sta_info *)sta->drv_priv;
+>>>>>>> v3.18
 =======
 	/*u8 mimo_ps = IEEE80211_SMPS_OFF;*/
 
@@ -3228,7 +3765,11 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 		break;
 	case WIRELESS_MODE_A:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ratr_index = RATR_INX_WIRELESS_A;
+=======
+		ratr_index = RATR_INX_WIRELESS_G;
+>>>>>>> v3.18
 =======
 		ratr_index = RATR_INX_WIRELESS_G;
 >>>>>>> v3.18
@@ -3237,6 +3778,7 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 	case WIRELESS_MODE_N_24G:
 	case WIRELESS_MODE_N_5G:
 		ratr_index = RATR_INX_WIRELESS_NGB;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (mimo_ps == IEEE80211_SMPS_STATIC) {
@@ -3281,6 +3823,8 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 						ratr_bitmap &= 0x0f0ff005;
 				}
 =======
+=======
+>>>>>>> v3.18
 		if (rtlphy->rf_type == RF_1T2R ||
 		    rtlphy->rf_type == RF_1T1R) {
 			if (curtxbw_40mhz) {
@@ -3313,6 +3857,9 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 					ratr_bitmap &= 0x0f0ff000;
 				else
 					ratr_bitmap &= 0x0f0ff005;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -3339,6 +3886,7 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 	RT_TRACE(rtlpriv, COMP_RATR, DBG_DMESG,
 		 "ratr_bitmap :%x\n", ratr_bitmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* convert ratr_bitmap to le byte array */
 	rate_mask[0] = ratr_bitmap;
 	rate_mask[1] = (ratr_bitmap >>= 8);
@@ -3354,6 +3902,8 @@ static void rtl8723e_update_hal_rate_mask(struct ieee80211_hw *hw,
 void rtl8723ae_update_hal_rate_tbl(struct ieee80211_hw *hw,
 		struct ieee80211_sta *sta, u8 rssi_level)
 =======
+=======
+>>>>>>> v3.18
 	*(u32 *)&rate_mask = (ratr_bitmap & 0x0fffffff) |
 			     (ratr_index << 28);
 	rate_mask[4] = macid | (shortgi ? 0x20 : 0x00) | 0x80;
@@ -3368,11 +3918,15 @@ void rtl8723ae_update_hal_rate_tbl(struct ieee80211_hw *hw,
 
 void rtl8723e_update_hal_rate_tbl(struct ieee80211_hw *hw,
 				  struct ieee80211_sta *sta, u8 rssi_level)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 
 	if (rtlpriv->dm.useramask)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rtl8723ae_update_hal_rate_mask(hw, sta, rssi_level);
 	else
@@ -3381,12 +3935,17 @@ void rtl8723e_update_hal_rate_tbl(struct ieee80211_hw *hw,
 
 void rtl8723ae_update_channel_access_setting(struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 		rtl8723e_update_hal_rate_mask(hw, sta, rssi_level);
 	else
 		rtl8723e_update_hal_rate_table(hw, sta);
 }
 
 void rtl8723e_update_channel_access_setting(struct ieee80211_hw *hw)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -3394,8 +3953,12 @@ void rtl8723e_update_channel_access_setting(struct ieee80211_hw *hw)
 	u16 sifs_timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_SLOT_TIME,
 				      (u8 *)&mac->slot_time);
+=======
+	rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_SLOT_TIME, &mac->slot_time);
+>>>>>>> v3.18
 =======
 	rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_SLOT_TIME, &mac->slot_time);
 >>>>>>> v3.18
@@ -3407,7 +3970,11 @@ void rtl8723e_update_channel_access_setting(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool rtl8723ae_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
+=======
+bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
+>>>>>>> v3.18
 =======
 bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 >>>>>>> v3.18
@@ -3416,9 +3983,15 @@ bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 	struct rtl_ps_ctl *ppsc = rtl_psc(rtl_priv(hw));
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum rf_pwrstate e_rfpowerstate_toset;
 	u8 u1tmp;
 	bool actuallyset = false;
+=======
+	enum rf_pwrstate e_rfpowerstate_toset, cur_rfstate;
+	u8 u1tmp;
+	bool b_actuallyset = false;
+>>>>>>> v3.18
 =======
 	enum rf_pwrstate e_rfpowerstate_toset, cur_rfstate;
 	u8 u1tmp;
@@ -3441,6 +4014,11 @@ bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cur_rfstate = ppsc->rfpwr_state;
+
+>>>>>>> v3.18
 =======
 	cur_rfstate = ppsc->rfpwr_state;
 
@@ -3456,7 +4034,11 @@ bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 		e_rfpowerstate_toset = (u1tmp & BIT(1)) ? ERFON : ERFOFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ppsc->hwradiooff == true) && (e_rfpowerstate_toset == ERFON)) {
+=======
+	if (ppsc->hwradiooff && (e_rfpowerstate_toset == ERFON)) {
+>>>>>>> v3.18
 =======
 	if (ppsc->hwradiooff && (e_rfpowerstate_toset == ERFON)) {
 >>>>>>> v3.18
@@ -3466,9 +4048,14 @@ bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 		e_rfpowerstate_toset = ERFON;
 		ppsc->hwradiooff = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		actuallyset = true;
 	} else if ((ppsc->hwradiooff == false)
 		   && (e_rfpowerstate_toset == ERFOFF)) {
+=======
+		b_actuallyset = true;
+	} else if (!ppsc->hwradiooff && (e_rfpowerstate_toset == ERFOFF)) {
+>>>>>>> v3.18
 =======
 		b_actuallyset = true;
 	} else if (!ppsc->hwradiooff && (e_rfpowerstate_toset == ERFOFF)) {
@@ -3479,15 +4066,21 @@ bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 		e_rfpowerstate_toset = ERFOFF;
 		ppsc->hwradiooff = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		actuallyset = true;
 	}
 
 	if (actuallyset) {
 =======
+=======
+>>>>>>> v3.18
 		b_actuallyset = true;
 	}
 
 	if (b_actuallyset) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&rtlpriv->locks.rf_ps_lock);
 		ppsc->rfchange_inprogress = false;
@@ -3504,18 +4097,24 @@ bool rtl8723e_gpio_radio_on_off_checking(struct ieee80211_hw *hw, u8 *valid)
 	*valid = 1;
 	return !ppsc->hwradiooff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 void rtl8723ae_set_key(struct ieee80211_hw *hw, u32 key_index,
 		       u8 *p_macaddr, bool is_group, u8 enc_algo,
 		       bool is_wepkey, bool clear_all)
 =======
+=======
+>>>>>>> v3.18
 
 }
 
 void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 		      u8 *p_macaddr, bool is_group, u8 enc_algo,
 		      bool is_wepkey, bool clear_all)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -3525,6 +4124,10 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 	u32 entry_id = 0;
 	bool is_pairwise = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3556,6 +4159,10 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3575,8 +4182,13 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
+=======
+			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
+				 "switch case not process\n");
+>>>>>>> v3.18
 =======
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
@@ -3595,8 +4207,13 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 			} else {
 				if (mac->opmode == NL80211_IFTYPE_AP) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					entry_id = rtl_cam_get_free_entry(hw,
 								macaddr);
+=======
+					entry_id =
+					  rtl_cam_get_free_entry(hw, p_macaddr);
+>>>>>>> v3.18
 =======
 					entry_id =
 					  rtl_cam_get_free_entry(hw, p_macaddr);
@@ -3632,9 +4249,15 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 
 				rtl_cam_add_one_entry(hw, macaddr, key_index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					entry_id, enc_algo,
 					CAM_CONFIG_NO_USEDK,
 					rtlpriv->sec.key_buf[key_index]);
+=======
+						      entry_id, enc_algo,
+						      CAM_CONFIG_NO_USEDK,
+						      rtlpriv->sec.key_buf[key_index]);
+>>>>>>> v3.18
 =======
 						      entry_id, enc_algo,
 						      CAM_CONFIG_NO_USEDK,
@@ -3647,6 +4270,7 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 				if (mac->opmode == NL80211_IFTYPE_ADHOC) {
 					rtl_cam_add_one_entry(hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						rtlefuse->dev_addr,
 						PAIRWISE_KEYIDX,
 						CAM_PAIRWISE_KEY_POSITION,
@@ -3655,6 +4279,8 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 						rtlpriv->sec.key_buf
 						[entry_id]);
 =======
+=======
+>>>>>>> v3.18
 							rtlefuse->dev_addr,
 							PAIRWISE_KEYIDX,
 							CAM_PAIRWISE_KEY_POSITION,
@@ -3662,6 +4288,9 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 							CAM_CONFIG_NO_USEDK,
 							rtlpriv->sec.key_buf
 							[entry_id]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 
@@ -3675,6 +4304,7 @@ void rtl8723e_set_key(struct ieee80211_hw *hw, u32 key_index,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void rtl8723ae_bt_var_init(struct ieee80211_hw *hw)
 {
@@ -3716,6 +4346,8 @@ static void rtl8723ae_bt_var_init(struct ieee80211_hw *hw)
 
 		switch (pcipriv->bt_coexist.bt_coexist_type) {
 =======
+=======
+>>>>>>> v3.18
 static void rtl8723e_bt_var_init(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -3753,6 +4385,9 @@ static void rtl8723e_bt_var_init(struct ieee80211_hw *hw)
 				 "BlueTooth BT_Ant_Num = Antx1\n");
 		}
 		switch (rtlpriv->btcoexist.bt_coexist_type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case BT_2WIRE:
 			RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -3786,6 +4421,7 @@ static void rtl8723e_bt_var_init(struct ieee80211_hw *hw)
 		RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 			 "BlueTooth BT_Ant_isolation = %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 pcipriv->bt_coexist.bt_ant_isolation);
 		RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 			 "BT_RadioSharedType = 0x%x\n",
@@ -3801,6 +4437,8 @@ void rtl8723ae_read_bt_coexist_info_from_hwpg(struct ieee80211_hw *hw,
 {
 	struct rtl_pci_priv *pcipriv = rtl_pcipriv(hw);
 =======
+=======
+>>>>>>> v3.18
 			 rtlpriv->btcoexist.bt_ant_isolation);
 		RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 			 "BT_RadioSharedType = 0x%x\n",
@@ -3814,6 +4452,9 @@ void rtl8723ae_read_bt_coexist_info_from_hwpg(struct ieee80211_hw *hw,
 void rtl8723e_read_bt_coexist_info_from_hwpg(struct ieee80211_hw *hw,
 					     bool auto_load_fail, u8 *hwinfo)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	u8 value;
@@ -3822,6 +4463,7 @@ void rtl8723e_read_bt_coexist_info_from_hwpg(struct ieee80211_hw *hw,
 	if (!auto_load_fail) {
 		tmpu_32 = rtl_read_dword(rtlpriv, REG_MULTI_FUNC_CTRL);
 		if (tmpu_32 & BIT(18))
+<<<<<<< HEAD
 <<<<<<< HEAD
 			pcipriv->bt_coexist.eeprom_bt_coexist = 1;
 		else
@@ -3888,6 +4530,8 @@ void rtl8723ae_allow_all_destaddr(struct ieee80211_hw *hw,
 		 "receive_config=0x%08X, write_into_reg=%d\n",
 		 rtlpci->receive_config, write_into_reg);
 =======
+=======
+>>>>>>> v3.18
 			rtlpriv->btcoexist.eeprom_bt_coexist = 1;
 		else
 			rtlpriv->btcoexist.eeprom_bt_coexist = 0;
@@ -3934,5 +4578,8 @@ void rtl8723e_suspend(struct ieee80211_hw *hw)
 
 void rtl8723e_resume(struct ieee80211_hw *hw)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

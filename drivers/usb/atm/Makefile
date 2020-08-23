@@ -2,9 +2,12 @@
 # Makefile for USB ATM/xDSL drivers
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ccflags-$(CONFIG_USB_DEBUG) := -DDEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_USB_CXACRU)	+= cxacru.o

@@ -4,6 +4,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -64,7 +68,11 @@ ENTRY(relocate_new_kernel)
 	ldr r1,kexec_mach_type
 	ldr r2,kexec_boot_atags
 <<<<<<< HEAD
+<<<<<<< HEAD
  ARM(	mov pc, lr	)
+=======
+ ARM(	ret lr	)
+>>>>>>> v3.18
 =======
  ARM(	ret lr	)
 >>>>>>> v3.18

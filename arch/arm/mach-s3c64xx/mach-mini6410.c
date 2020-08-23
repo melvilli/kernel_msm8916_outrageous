@@ -23,6 +23,10 @@
 #include <linux/mtd/partitions.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 #include <mach/map.h>
 #include <mach/regs-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -45,7 +53,12 @@
 #include <plat/fb.h>
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+#include <linux/platform_data/mmc-sdhci-s3c.h>
+#include <plat/sdhci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/mmc-sdhci-s3c.h>
 #include <plat/sdhci.h>
@@ -228,7 +241,10 @@ static struct platform_device mini6410_lcd_powerdev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct s3c_sdhci_platdata mini6410_hsmmc1_pdata = {
 	.max_width		= 4,
 	.cd_type		= S3C_SDHCI_CD_GPIO,
@@ -236,6 +252,9 @@ static struct s3c_sdhci_platdata mini6410_hsmmc1_pdata = {
 	.ext_cd_gpio_invert	= true,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_device *mini6410_devices[] __initdata = {
 	&mini6410_device_eth,
@@ -255,7 +274,11 @@ static void __init mini6410_map_io(void)
 
 	s3c64xx_init_io(NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+>>>>>>> v3.18
 =======
 	s3c64xx_set_xtal_freq(12000000);
 >>>>>>> v3.18
@@ -349,6 +372,10 @@ static void __init mini6410_machine_init(void)
 	s3c_nand_set_platdata(&mini6410_nand_info);
 	s3c_fb_set_platdata(&mini6410_lcd_pdata[features.lcd_index]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s3c_sdhci1_set_platdata(&mini6410_hsmmc1_pdata);
+>>>>>>> v3.18
 =======
 	s3c_sdhci1_set_platdata(&mini6410_hsmmc1_pdata);
 >>>>>>> v3.18
@@ -387,7 +414,10 @@ MACHINE_START(MINI6410, "MINI6410")
 	.map_io		= mini6410_map_io,
 	.init_machine	= mini6410_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= samsung_timer_init,

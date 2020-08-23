@@ -25,6 +25,11 @@
 #  define __ARCH_WANT_COMPAT_SYS_TIME
 #  define __ARCH_WANT_COMPAT_SYS_GETDENTS64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#  define __ARCH_WANT_COMPAT_SYS_PREADV64
+#  define __ARCH_WANT_COMPAT_SYS_PWRITEV64
+>>>>>>> v3.18
 =======
 #  define __ARCH_WANT_COMPAT_SYS_PREADV64
 #  define __ARCH_WANT_COMPAT_SYS_PWRITEV64
@@ -45,7 +50,10 @@
 # define __ARCH_WANT_SYS_OLD_UNAME
 # define __ARCH_WANT_SYS_PAUSE
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define __ARCH_WANT_SYS_SGETMASK
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # define __ARCH_WANT_SYS_SIGNAL

@@ -2,6 +2,10 @@ config VIDEO_CAFE_CCIC
 	tristate "Marvell 88ALP01 (Cafe) CMOS Camera Controller support"
 	depends on PCI && I2C && VIDEO_V4L2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18
@@ -17,6 +21,10 @@ config VIDEO_MMP_CAMERA
 	tristate "Marvell Armada 610 integrated camera controller support"
 	depends on ARCH_MMP && I2C && VIDEO_V4L2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18

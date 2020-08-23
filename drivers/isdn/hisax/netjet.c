@@ -177,7 +177,11 @@ static void printframe(struct IsdnCardState *cs, u_char *buf, int count, char *s
 			j = i;
 		QuickHex(t, p, j);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, tmp);
+=======
+		debugl1(cs, "%s", tmp);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", tmp);
 >>>>>>> v3.18

@@ -60,7 +60,11 @@ static ssize_t arvo_sysfs_set_mode_key(struct device *dev,
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &state);
+=======
+	retval = kstrtoul(buf, 10, &state);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &state);
 >>>>>>> v3.18
@@ -80,6 +84,11 @@ static ssize_t arvo_sysfs_set_mode_key(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(mode_key, 0660,
+		   arvo_sysfs_show_mode_key, arvo_sysfs_set_mode_key);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(mode_key, 0660,
 		   arvo_sysfs_show_mode_key, arvo_sysfs_set_mode_key);
@@ -117,7 +126,11 @@ static ssize_t arvo_sysfs_set_key_mask(struct device *dev,
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &key_mask);
+=======
+	retval = kstrtoul(buf, 10, &key_mask);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &key_mask);
 >>>>>>> v3.18
@@ -137,6 +150,11 @@ static ssize_t arvo_sysfs_set_key_mask(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(key_mask, 0660,
+		   arvo_sysfs_show_key_mask, arvo_sysfs_set_key_mask);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(key_mask, 0660,
 		   arvo_sysfs_show_key_mask, arvo_sysfs_set_key_mask);
@@ -178,7 +196,11 @@ static ssize_t arvo_sysfs_set_actual_profile(struct device *dev,
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &profile);
+=======
+	retval = kstrtoul(buf, 10, &profile);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &profile);
 >>>>>>> v3.18
@@ -202,6 +224,12 @@ static ssize_t arvo_sysfs_set_actual_profile(struct device *dev,
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_profile, 0660,
+		   arvo_sysfs_show_actual_profile,
+		   arvo_sysfs_set_actual_profile);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_profile, 0660,
 		   arvo_sysfs_show_actual_profile,
@@ -259,6 +287,11 @@ static ssize_t arvo_sysfs_write_button(struct file *fp,
 			sizeof(struct arvo_button), ARVO_COMMAND_BUTTON);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static BIN_ATTR(button, 0220, NULL, arvo_sysfs_write_button,
+		sizeof(struct arvo_button));
+>>>>>>> v3.18
 =======
 static BIN_ATTR(button, 0220, NULL, arvo_sysfs_write_button,
 		sizeof(struct arvo_button));
@@ -271,6 +304,7 @@ static ssize_t arvo_sysfs_read_info(struct file *fp,
 	return arvo_sysfs_read(fp, kobj, buf, off, count,
 			sizeof(struct arvo_info), ARVO_COMMAND_INFO);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -298,6 +332,8 @@ static struct bin_attribute arvo_bin_attributes[] = {
 	},
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR(info, 0440, arvo_sysfs_read_info, NULL,
 		sizeof(struct arvo_info));
 
@@ -322,6 +358,9 @@ static const struct attribute_group arvo_group = {
 static const struct attribute_group *arvo_groups[] = {
 	&arvo_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -491,8 +530,12 @@ static int __init arvo_init(void)
 	if (IS_ERR(arvo_class))
 		return PTR_ERR(arvo_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arvo_class->dev_attrs = arvo_attributes;
 	arvo_class->dev_bin_attrs = arvo_bin_attributes;
+=======
+	arvo_class->dev_groups = arvo_groups;
+>>>>>>> v3.18
 =======
 	arvo_class->dev_groups = arvo_groups;
 >>>>>>> v3.18

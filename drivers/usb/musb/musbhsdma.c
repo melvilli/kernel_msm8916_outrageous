@@ -38,6 +38,7 @@
 #include "musbhsdma.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dma_controller_start(struct dma_controller *c)
 {
 	/* nothing to do */
@@ -51,10 +52,15 @@ static int dma_controller_stop(struct dma_controller *c)
 	struct musb_dma_controller *controller = container_of(c,
 			struct musb_dma_controller, controller);
 =======
+=======
+>>>>>>> v3.18
 static void dma_channel_release(struct dma_channel *channel);
 
 static void dma_controller_stop(struct musb_dma_controller *controller)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct musb *musb = controller->private_data;
 	struct dma_channel *channel;
@@ -75,8 +81,11 @@ static void dma_controller_stop(struct musb_dma_controller *controller)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -382,8 +391,12 @@ void dma_controller_destroy(struct dma_controller *c)
 			struct musb_dma_controller, controller);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!controller)
 		return;
+=======
+	dma_controller_stop(controller);
+>>>>>>> v3.18
 =======
 	dma_controller_stop(controller);
 >>>>>>> v3.18
@@ -415,8 +428,11 @@ struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *ba
 	controller->base = base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	controller->controller.start = dma_controller_start;
 	controller->controller.stop = dma_controller_stop;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	controller->controller.channel_alloc = dma_channel_allocate;

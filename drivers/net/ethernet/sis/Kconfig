@@ -23,7 +23,10 @@ config SIS900
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -43,7 +46,10 @@ config SIS190
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII

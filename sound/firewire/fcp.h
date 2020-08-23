@@ -2,9 +2,12 @@
 #define SOUND_FIREWIRE_FCP_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct fw_unit;
 
 =======
+=======
+>>>>>>> v3.18
 #define	AVC_PLUG_INFO_BUF_BYTES	4
 
 struct fw_unit;
@@ -28,6 +31,9 @@ int avc_general_get_plug_info(struct fw_unit *unit, unsigned int subunit_type,
 			      unsigned int subunit_id, unsigned int subfunction,
 			      u8 info[AVC_PLUG_INFO_BUF_BYTES]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int fcp_avc_transaction(struct fw_unit *unit,
 			const void *command, unsigned int command_size,

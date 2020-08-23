@@ -10,10 +10,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/module.h>
 #include <linux/net.h>
 #include <linux/sock_diag.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -42,7 +46,11 @@ static void tcp_diag_get_info(struct sock *sk, struct inet_diag_msg *r,
 
 static void tcp_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct inet_diag_req_v2 *r, struct nlattr *bc)
+=======
+			  struct inet_diag_req_v2 *r, struct nlattr *bc)
+>>>>>>> v3.18
 =======
 			  struct inet_diag_req_v2 *r, struct nlattr *bc)
 >>>>>>> v3.18
@@ -52,7 +60,11 @@ static void tcp_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,
 
 static int tcp_diag_dump_one(struct sk_buff *in_skb, const struct nlmsghdr *nlh,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct inet_diag_req_v2 *req)
+=======
+			     struct inet_diag_req_v2 *req)
+>>>>>>> v3.18
 =======
 			     struct inet_diag_req_v2 *req)
 >>>>>>> v3.18
@@ -60,6 +72,7 @@ static int tcp_diag_dump_one(struct sk_buff *in_skb, const struct nlmsghdr *nlh,
 	return inet_diag_dump_one_icsk(&tcp_hashinfo, in_skb, nlh, req);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_INET_DIAG_DESTROY
 static int tcp_diag_destroy(struct sk_buff *in_skb,
@@ -77,15 +90,20 @@ static int tcp_diag_destroy(struct sk_buff *in_skb,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct inet_diag_handler tcp_diag_handler = {
 	.dump		 = tcp_diag_dump,
 	.dump_one	 = tcp_diag_dump_one,
 	.idiag_get_info	 = tcp_diag_get_info,
 	.idiag_type	 = IPPROTO_TCP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_INET_DIAG_DESTROY
 	.destroy	 = tcp_diag_destroy,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

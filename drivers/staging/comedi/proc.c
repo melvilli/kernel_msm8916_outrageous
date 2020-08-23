@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     module/proc.c
     /proc interface for comedi
 
@@ -29,6 +30,8 @@
 	was cool.
 */
 =======
+=======
+>>>>>>> v3.18
  * /proc interface for comedi
  *
  * COMEDI - Linux Control and Measurement Device Interface
@@ -51,6 +54,9 @@
  * Taken from Dave A.'s PCL-711 driver, 'cuz I thought it
  * was cool.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "comedidev.h"
@@ -65,6 +71,7 @@ static int comedi_read(struct seq_file *m, void *v)
 	struct comedi_driver *driv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m,
 		     "comedi version " COMEDI_RELEASE "\n"
 		     "format string: %s\n",
@@ -77,6 +84,8 @@ static int comedi_read(struct seq_file *m, void *v)
 			continue;
 
 =======
+=======
+>>>>>>> v3.18
 	seq_printf(m, "comedi version " COMEDI_RELEASE "\nformat string: %s\n",
 		   "\"%2d: %-20s %-20s %4d\", i, driver_name, board_name, n_subdevices");
 
@@ -87,6 +96,9 @@ static int comedi_read(struct seq_file *m, void *v)
 			continue;
 
 		down_read(&dev->attach_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (dev->attached) {
 			devices_q = 1;
@@ -95,6 +107,11 @@ static int comedi_read(struct seq_file *m, void *v)
 				   dev->board_name, dev->n_subdevices);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		up_read(&dev->attach_lock);
+		comedi_dev_put(dev);
+>>>>>>> v3.18
 =======
 		up_read(&dev->attach_lock);
 		comedi_dev_put(dev);
@@ -104,6 +121,10 @@ static int comedi_read(struct seq_file *m, void *v)
 		seq_puts(m, "no devices\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&comedi_drivers_list_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&comedi_drivers_list_lock);
 >>>>>>> v3.18
@@ -118,6 +139,10 @@ static int comedi_read(struct seq_file *m, void *v)
 			seq_printf(m, " %s\n", driv->driver_name);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&comedi_drivers_list_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&comedi_drivers_list_lock);
 >>>>>>> v3.18

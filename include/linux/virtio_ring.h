@@ -2,6 +2,10 @@
 #define _LINUX_VIRTIO_RING_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -75,7 +79,11 @@ struct virtqueue *vring_new_virtqueue(unsigned int index,
 				      bool weak_barriers,
 				      void *pages,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      void (*notify)(struct virtqueue *vq),
+=======
+				      bool (*notify)(struct virtqueue *vq),
+>>>>>>> v3.18
 =======
 				      bool (*notify)(struct virtqueue *vq),
 >>>>>>> v3.18

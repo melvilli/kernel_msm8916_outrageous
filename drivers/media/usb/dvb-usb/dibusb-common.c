@@ -259,8 +259,13 @@ static struct dib3000mc_config mod3000p_dib3000p_config = {
 int dibusb_dib3000mc_frontend_attach(struct dvb_usb_adapter *adap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adap->dev->udev->descriptor.idVendor  == USB_VID_LITEON &&
 			adap->dev->udev->descriptor.idProduct ==
+=======
+	if (le16_to_cpu(adap->dev->udev->descriptor.idVendor) == USB_VID_LITEON &&
+	    le16_to_cpu(adap->dev->udev->descriptor.idProduct) ==
+>>>>>>> v3.18
 =======
 	if (le16_to_cpu(adap->dev->udev->descriptor.idVendor) == USB_VID_LITEON &&
 	    le16_to_cpu(adap->dev->udev->descriptor.idProduct) ==
@@ -303,8 +308,13 @@ int dibusb_dib3000mc_tuner_attach(struct dvb_usb_adapter *adap)
 
 	// First IF calibration for Liteon Sticks
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adap->dev->udev->descriptor.idVendor  == USB_VID_LITEON &&
 		adap->dev->udev->descriptor.idProduct == USB_PID_LITEON_DVB_T_WARM) {
+=======
+	if (le16_to_cpu(adap->dev->udev->descriptor.idVendor) == USB_VID_LITEON &&
+	    le16_to_cpu(adap->dev->udev->descriptor.idProduct) == USB_PID_LITEON_DVB_T_WARM) {
+>>>>>>> v3.18
 =======
 	if (le16_to_cpu(adap->dev->udev->descriptor.idVendor) == USB_VID_LITEON &&
 	    le16_to_cpu(adap->dev->udev->descriptor.idProduct) == USB_PID_LITEON_DVB_T_WARM) {
@@ -321,8 +331,13 @@ int dibusb_dib3000mc_tuner_attach(struct dvb_usb_adapter *adap)
 			warn("LITE-ON DVB-T: Strange IF1 calibration :%2X %2X\n", a, b);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (adap->dev->udev->descriptor.idVendor  == USB_VID_DIBCOM &&
 		   adap->dev->udev->descriptor.idProduct == USB_PID_DIBCOM_MOD3001_WARM) {
+=======
+	} else if (le16_to_cpu(adap->dev->udev->descriptor.idVendor) == USB_VID_DIBCOM &&
+		   le16_to_cpu(adap->dev->udev->descriptor.idProduct) == USB_PID_DIBCOM_MOD3001_WARM) {
+>>>>>>> v3.18
 =======
 	} else if (le16_to_cpu(adap->dev->udev->descriptor.idVendor) == USB_VID_DIBCOM &&
 		   le16_to_cpu(adap->dev->udev->descriptor.idProduct) == USB_PID_DIBCOM_MOD3001_WARM) {

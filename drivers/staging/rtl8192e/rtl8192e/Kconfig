@@ -6,7 +6,11 @@ config RTL8192E
 	select WEXT_PRIV
 	select CRYPTO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+	select FW_LOADER
+>>>>>>> v3.18
 =======
 	select FW_LOADER
 >>>>>>> v3.18

@@ -10,8 +10,11 @@
 #define _ASM_ARC_SYSCALLS_H  1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/compiler.h>
@@ -26,8 +29,11 @@ int sys_arc_gettls(void);
 #include <asm-generic/syscalls.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

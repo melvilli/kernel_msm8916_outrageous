@@ -27,9 +27,12 @@ Optional properties:
 - cap-sd-highspeed: SD high-speed timing is supported
 - cap-mmc-highspeed: MMC high-speed timing is supported
 <<<<<<< HEAD
+<<<<<<< HEAD
 - cap-power-off-card: powering off the card is safe
 - cap-sdio-irq: enable SDIO IRQ signalling on this interface
 =======
+=======
+>>>>>>> v3.18
 - sd-uhs-sdr12: SD UHS SDR12 speed is supported
 - sd-uhs-sdr25: SD UHS SDR25 speed is supported
 - sd-uhs-sdr50: SD UHS SDR50 speed is supported
@@ -46,6 +49,9 @@ Optional properties:
 - mmc-hs400-1_2v: eMMC HS400 mode(1.2V I/O) is supported
 - dsr: Value the card's (optional) Driver Stage Register (DSR) should be
   programmed with. Valid range: [0 .. 0xffff].
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 *NOTE* on CD and WP polarity. To use common for all SD/MMC host controllers line

@@ -119,6 +119,12 @@ static int x86_pmu_extra_regs(u64 config, struct perf_event *event)
 		if (event->attr.config1 & ~er->valid_mask)
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Check if the extra msrs can be safely accessed*/
+		if (!er->extra_msr_access)
+			return -ENXIO;
+>>>>>>> v3.18
 =======
 		/* Check if the extra msrs can be safely accessed*/
 		if (!er->extra_msr_access)
@@ -247,7 +253,13 @@ static bool check_hw_exists(void)
 msr_fail:
 	printk(KERN_CONT "Broken PMU hardware detected, using software events only.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "Failed to access perfctr msr (MSR %x is %Lx)\n", reg, val_new);
+=======
+	printk("%sFailed to access perfctr msr (MSR %x is %Lx)\n",
+		boot_cpu_has(X86_FEATURE_HYPERVISOR) ? KERN_INFO : KERN_ERR,
+		reg, val_new);
+>>>>>>> v3.18
 =======
 	printk("%sFailed to access perfctr msr (MSR %x is %Lx)\n",
 		boot_cpu_has(X86_FEATURE_HYPERVISOR) ? KERN_INFO : KERN_ERR,
@@ -316,6 +328,7 @@ int x86_setup_perfctr(struct perf_event *event)
 		hwc->last_period = hwc->sample_period;
 		local64_set(&hwc->period_left, hwc->sample_period);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/*
 		 * If we have a PMU initialized but no APIC
@@ -325,6 +338,8 @@ int x86_setup_perfctr(struct perf_event *event)
 		 */
 		if (!x86_pmu.apic)
 			return -EOPNOTSUPP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -409,7 +424,11 @@ int x86_pmu_hw_config(struct perf_event *event)
 
 			/* Support for IP fixup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (x86_pmu.lbr_nr)
+=======
+			if (x86_pmu.lbr_nr || x86_pmu.intel_cap.pebs_format >= 2)
+>>>>>>> v3.18
 =======
 			if (x86_pmu.lbr_nr || x86_pmu.intel_cap.pebs_format >= 2)
 >>>>>>> v3.18
@@ -423,7 +442,12 @@ int x86_pmu_hw_config(struct perf_event *event)
 		 * whatever the user is asking with attr->branch_sample_type
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (event->attr.precise_ip > 1) {
+=======
+		if (event->attr.precise_ip > 1 &&
+		    x86_pmu.intel_cap.pebs_format < 2) {
+>>>>>>> v3.18
 =======
 		if (event->attr.precise_ip > 1 &&
 		    x86_pmu.intel_cap.pebs_format < 2) {
@@ -517,7 +541,11 @@ static int __x86_pmu_event_init(struct perf_event *event)
 void x86_pmu_disable_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -539,7 +567,11 @@ void x86_pmu_disable_all(void)
 static void x86_pmu_disable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -560,7 +592,11 @@ static void x86_pmu_disable(struct pmu *pmu)
 void x86_pmu_enable_all(int added)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -605,7 +641,11 @@ struct perf_sched {
 	int			max_weight;
 	int			max_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct event_constraint	**constraints;
+=======
+	struct perf_event	**events;
+>>>>>>> v3.18
 =======
 	struct perf_event	**events;
 >>>>>>> v3.18
@@ -618,7 +658,11 @@ struct perf_sched {
  * Initialize interator that runs through all events and counters.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void perf_sched_init(struct perf_sched *sched, struct event_constraint **c,
+=======
+static void perf_sched_init(struct perf_sched *sched, struct perf_event **events,
+>>>>>>> v3.18
 =======
 static void perf_sched_init(struct perf_sched *sched, struct perf_event **events,
 >>>>>>> v3.18
@@ -630,15 +674,21 @@ static void perf_sched_init(struct perf_sched *sched, struct perf_event **events
 	sched->max_events	= num;
 	sched->max_weight	= wmax;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sched->constraints	= c;
 
 	for (idx = 0; idx < num; idx++) {
 		if (c[idx]->weight == wmin)
 =======
+=======
+>>>>>>> v3.18
 	sched->events		= events;
 
 	for (idx = 0; idx < num; idx++) {
 		if (events[idx]->hw.constraint->weight == wmin)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 	}
@@ -687,8 +737,12 @@ static bool __perf_sched_find_counter(struct perf_sched *sched)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c = sched->constraints[sched->state.event];
 
+=======
+	c = sched->events[sched->state.event]->hw.constraint;
+>>>>>>> v3.18
 =======
 	c = sched->events[sched->state.event]->hw.constraint;
 >>>>>>> v3.18
@@ -750,7 +804,11 @@ static bool perf_sched_next_event(struct perf_sched *sched)
 				return false;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c = sched->constraints[sched->state.event];
+=======
+		c = sched->events[sched->state.event]->hw.constraint;
+>>>>>>> v3.18
 =======
 		c = sched->events[sched->state.event]->hw.constraint;
 >>>>>>> v3.18
@@ -765,7 +823,11 @@ static bool perf_sched_next_event(struct perf_sched *sched)
  * Assign a counter for each event.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_assign_events(struct event_constraint **constraints, int n,
+=======
+int perf_assign_events(struct perf_event **events, int n,
+>>>>>>> v3.18
 =======
 int perf_assign_events(struct perf_event **events, int n,
 >>>>>>> v3.18
@@ -774,7 +836,11 @@ int perf_assign_events(struct perf_event **events, int n,
 	struct perf_sched sched;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_sched_init(&sched, constraints, n, wmin, wmax);
+=======
+	perf_sched_init(&sched, events, n, wmin, wmax);
+>>>>>>> v3.18
 =======
 	perf_sched_init(&sched, events, n, wmin, wmax);
 >>>>>>> v3.18
@@ -789,12 +855,15 @@ int perf_assign_events(struct perf_event **events, int n,
 	return sched.state.unassigned;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 {
 	struct event_constraint *c, *constraints[X86_PMC_IDX_MAX];
 	unsigned long used_mask[BITS_TO_LONGS(X86_PMC_IDX_MAX)];
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(perf_assign_events);
 
 int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
@@ -802,6 +871,9 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 	struct event_constraint *c;
 	unsigned long used_mask[BITS_TO_LONGS(X86_PMC_IDX_MAX)];
 	struct perf_event *e;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i, wmin, wmax, num = 0;
 	struct hw_perf_event *hwc;
@@ -810,13 +882,19 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 
 	for (i = 0, wmin = X86_PMC_IDX_MAX, wmax = 0; i < n; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c = x86_pmu.get_event_constraints(cpuc, cpuc->event_list[i]);
 		constraints[i] = c;
 =======
+=======
+>>>>>>> v3.18
 		hwc = &cpuc->event_list[i]->hw;
 		c = x86_pmu.get_event_constraints(cpuc, cpuc->event_list[i]);
 		hwc->constraint = c;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wmin = min(wmin, c->weight);
 		wmax = max(wmax, c->weight);
@@ -828,7 +906,11 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 	for (i = 0; i < n; i++) {
 		hwc = &cpuc->event_list[i]->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c = constraints[i];
+=======
+		c = hwc->constraint;
+>>>>>>> v3.18
 =======
 		c = hwc->constraint;
 >>>>>>> v3.18
@@ -853,10 +935,13 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 	/* slow path */
 	if (i != n)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		num = perf_assign_events(constraints, n, wmin, wmax, assign);
 
 	/*
 =======
+=======
+>>>>>>> v3.18
 		num = perf_assign_events(cpuc->event_list, n, wmin,
 					 wmax, assign);
 
@@ -871,6 +956,9 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 		}
 	}
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * scheduling failed or is just a simulation,
 	 * free resources if necessary
@@ -878,9 +966,12 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 	if (!assign || num) {
 		for (i = 0; i < n; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (x86_pmu.put_event_constraints)
 				x86_pmu.put_event_constraints(cpuc, cpuc->event_list[i]);
 =======
+=======
+>>>>>>> v3.18
 			e = cpuc->event_list[i];
 			/*
 			 * do not put_constraint() on comitted events,
@@ -891,6 +982,9 @@ int x86_schedule_events(struct cpu_hw_events *cpuc, int n, int *assign)
 
 			if (x86_pmu.put_event_constraints)
 				x86_pmu.put_event_constraints(cpuc, e);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -971,7 +1065,11 @@ static void x86_pmu_start(struct perf_event *event, int flags);
 static void x86_pmu_enable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -993,7 +1091,10 @@ static void x86_pmu_enable(struct pmu *pmu)
 		 *
 		 * step1: save events moving to new counters
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * step2: reprogram moved events into new counters
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 */
@@ -1022,6 +1123,12 @@ static void x86_pmu_enable(struct pmu *pmu)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/*
+		 * step2: reprogram moved events into new counters
+		 */
+>>>>>>> v3.18
 =======
 		/*
 		 * step2: reprogram moved events into new counters
@@ -1133,7 +1240,11 @@ void x86_pmu_enable_event(struct perf_event *event)
 static int x86_pmu_add(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1157,7 +1268,11 @@ static int x86_pmu_add(struct perf_event *event, int flags)
 	 * If group events scheduling transaction was started,
 	 * skip the schedulability test here, it will be performed
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * at commit time (->commit_txn) as a whole
+=======
+	 * at commit time (->commit_txn) as a whole.
+>>>>>>> v3.18
 =======
 	 * at commit time (->commit_txn) as a whole.
 >>>>>>> v3.18
@@ -1176,11 +1291,17 @@ static int x86_pmu_add(struct perf_event *event, int flags)
 
 done_collect:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Commit the collect_events() state. See x86_pmu_del() and
 	 * x86_pmu_*_txn().
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpuc->n_events = n;
 	cpuc->n_added += n - n0;
@@ -1195,7 +1316,11 @@ out:
 static void x86_pmu_start(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1278,7 +1403,11 @@ void perf_event_print_debug(void)
 void x86_pmu_stop(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1304,6 +1433,7 @@ void x86_pmu_stop(struct perf_event *event, int flags)
 static void x86_pmu_del(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
 	int i;
 
@@ -1312,6 +1442,8 @@ static void x86_pmu_del(struct perf_event *event, int flags)
 	 * The events never got scheduled and ->cancel_txn will truncate
 	 * the event_list.
 =======
+=======
+>>>>>>> v3.18
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 	int i;
 
@@ -1327,11 +1459,15 @@ static void x86_pmu_del(struct perf_event *event, int flags)
 	 *
 	 * XXX assumes any ->del() called during a TXN will only be on
 	 * an event added during that same TXN.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (cpuc->group_flag & PERF_EVENT_TXN)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	x86_pmu_stop(event, PERF_EF_UPDATE);
 
@@ -1352,6 +1488,8 @@ static void x86_pmu_del(struct perf_event *event, int flags)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Not a TXN, therefore cleanup properly.
 	 */
@@ -1377,6 +1515,9 @@ static void x86_pmu_del(struct perf_event *event, int flags)
 		cpuc->event_list[i-1] = cpuc->event_list[i];
 	--cpuc->n_events;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	perf_event_update_userpage(event);
 }
@@ -1390,7 +1531,11 @@ int x86_pmu_handle_irq(struct pt_regs *regs)
 	u64 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1454,6 +1599,7 @@ void perf_events_lapic_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes
 perf_event_nmi_handler(unsigned int cmd, struct pt_regs *regs)
 {
@@ -1461,21 +1607,32 @@ perf_event_nmi_handler(unsigned int cmd, struct pt_regs *regs)
 	u64 start_clock;
 	u64 finish_clock;
 =======
+=======
+>>>>>>> v3.18
 static int
 perf_event_nmi_handler(unsigned int cmd, struct pt_regs *regs)
 {
 	u64 start_clock;
 	u64 finish_clock;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!atomic_read(&active_events))
 		return NMI_DONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	start_clock = local_clock();
 	ret = x86_pmu.handle_irq(regs);
 	finish_clock = local_clock();
+=======
+	start_clock = sched_clock();
+	ret = x86_pmu.handle_irq(regs);
+	finish_clock = sched_clock();
+>>>>>>> v3.18
 =======
 	start_clock = sched_clock();
 	ret = x86_pmu.handle_irq(regs);
@@ -1487,6 +1644,10 @@ perf_event_nmi_handler(unsigned int cmd, struct pt_regs *regs)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(perf_event_nmi_handler);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(perf_event_nmi_handler);
 >>>>>>> v3.18
@@ -1495,7 +1656,11 @@ struct event_constraint emptyconstraint;
 struct event_constraint unconstrained;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -1550,7 +1715,10 @@ static void __init pmu_check_apic(void)
 	pr_info("no APIC, boot with the \"lapic\" boot parameter to force-enable it.\n");
 	pr_info("no hardware sampling interrupt available.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If we have a PMU initialized but no APIC
@@ -1560,6 +1728,9 @@ static void __init pmu_check_apic(void)
 	 */
 	pmu.capabilities |= PERF_PMU_CAP_NO_INTERRUPT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1722,7 +1893,11 @@ static int __init init_hw_perf_events(void)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		err = -ENOTSUPP;
+>>>>>>> v3.18
 =======
 		err = -ENOTSUPP;
 >>>>>>> v3.18
@@ -1741,6 +1916,11 @@ static int __init init_hw_perf_events(void)
 	pr_cont("%s PMU driver.\n", x86_pmu.name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	x86_pmu.attr_rdpmc = 1; /* enable userspace RDPMC usage by default */
+
+>>>>>>> v3.18
 =======
 	x86_pmu.attr_rdpmc = 1; /* enable userspace RDPMC usage by default */
 
@@ -1759,7 +1939,10 @@ static int __init init_hw_perf_events(void)
 				   0, x86_pmu.num_counters, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	x86_pmu.attr_rdpmc = 1; /* enable userspace RDPMC usage by default */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	x86_pmu_format_group.attrs = x86_pmu.format_attrs;
@@ -1822,7 +2005,12 @@ static void x86_pmu_cancel_txn(struct pmu *pmu)
 	__this_cpu_and(cpu_hw_events.group_flag, ~PERF_EVENT_TXN);
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Truncate the collected events.
+=======
+	 * Truncate collected array by the number of events added in this
+	 * transaction. See x86_pmu_add() and x86_pmu_*_txn().
+>>>>>>> v3.18
 =======
 	 * Truncate collected array by the number of events added in this
 	 * transaction. See x86_pmu_add() and x86_pmu_*_txn().
@@ -1838,17 +2026,23 @@ static void x86_pmu_cancel_txn(struct pmu *pmu)
  * Perform the group schedulability test as a whole
  * Return 0 if success
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static int x86_pmu_commit_txn(struct pmu *pmu)
 {
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
 =======
+=======
+>>>>>>> v3.18
  *
  * Does not cancel the transaction on failure; expects the caller to do this.
  */
 static int x86_pmu_commit_txn(struct pmu *pmu)
 {
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int assign[X86_PMC_IDX_MAX];
 	int n, ret;
@@ -2062,16 +2256,22 @@ static ssize_t set_attr_rdpmc(struct device *cdev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!!val != !!x86_pmu.attr_rdpmc) {
 		x86_pmu.attr_rdpmc = !!val;
 		smp_call_function(change_rdpmc, (void *)val, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (x86_pmu.attr_rdpmc_broken)
 		return -ENOTSUPP;
 
 	if (!!val != !!x86_pmu.attr_rdpmc) {
 		x86_pmu.attr_rdpmc = !!val;
 		on_each_cpu(change_rdpmc, (void *)val, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2134,6 +2334,7 @@ static struct pmu pmu = {
 void arch_perf_update_userpage(struct perf_event_mmap_page *userpg, u64 now)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	userpg->cap_usr_time = 0;
 	userpg->cap_usr_rdpmc = x86_pmu.attr_rdpmc;
 	userpg->pmc_width = x86_pmu.cntval_bits;
@@ -2149,6 +2350,8 @@ void arch_perf_update_userpage(struct perf_event_mmap_page *userpg, u64 now)
 	userpg->time_shift = CYC2NS_SCALE_FACTOR;
 	userpg->time_offset = this_cpu_read(cyc2ns_offset) - now;
 =======
+=======
+>>>>>>> v3.18
 	struct cyc2ns_data *data;
 
 	userpg->cap_user_time = 0;
@@ -2170,6 +2373,9 @@ void arch_perf_update_userpage(struct perf_event_mmap_page *userpg, u64 now)
 	userpg->time_zero = data->cyc2ns_offset;
 
 	cyc2ns_read_end(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2232,7 +2438,11 @@ static unsigned long get_segment_base(unsigned int segment)
 			return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc = __this_cpu_ptr(&gdt_page.gdt[0]);
+=======
+		desc = raw_cpu_ptr(gdt_page.gdt);
+>>>>>>> v3.18
 =======
 		desc = raw_cpu_ptr(gdt_page.gdt);
 >>>>>>> v3.18
@@ -2267,7 +2477,11 @@ perf_callchain_user32(struct pt_regs *regs, struct perf_callchain_entry *entry)
 
 		bytes = copy_from_user_nmi(&frame, fp, sizeof(frame));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bytes != sizeof(frame))
+=======
+		if (bytes != 0)
+>>>>>>> v3.18
 =======
 		if (bytes != 0)
 >>>>>>> v3.18
@@ -2323,7 +2537,11 @@ perf_callchain_user(struct perf_callchain_entry *entry, struct pt_regs *regs)
 
 		bytes = copy_from_user_nmi(&frame, fp, sizeof(frame));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bytes != sizeof(frame))
+=======
+		if (bytes != 0)
+>>>>>>> v3.18
 =======
 		if (bytes != 0)
 >>>>>>> v3.18

@@ -35,7 +35,10 @@ Optional properties:
 - interrupt-parent : <phandle>
 		  Phandle to interrupt controller
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - fsl,portid-mapping : <u32>
 		  The Coherency Subdomain ID Port Mapping Registers and
 		  Snoop ID Port Mapping registers, which are part of the
@@ -45,6 +48,9 @@ Optional properties:
 		  set if PAMUs should be snooped.  This property defines
 		  a bitmask which selects the bits that should be set if
 		  PAMUs should be snooped.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Child nodes:
@@ -101,6 +107,10 @@ Example:
 		reg = <0x20000 0x5000>;
 		ranges = <0 0x20000 0x5000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fsl,portid-mapping = <0xf80000>;
+>>>>>>> v3.18
 =======
 		fsl,portid-mapping = <0xf80000>;
 >>>>>>> v3.18

@@ -24,7 +24,10 @@
 
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -194,6 +197,10 @@ static void free_imon_context(struct imon_context *context)
 {
 	struct device *dev = context->driver->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -422,6 +429,10 @@ static ssize_t vfd_write(struct file *file, const char __user *buf,
 	if (IS_ERR(data_buf)) {
 		retval = PTR_ERR(data_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		data_buf = NULL;
+>>>>>>> v3.18
 =======
 		data_buf = NULL;
 >>>>>>> v3.18
@@ -494,8 +505,11 @@ static void usb_tx_callback(struct urb *urb)
 	atomic_set(&context->tx.busy, 0);
 	complete(&context->tx.finished);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -506,7 +520,10 @@ static void usb_tx_callback(struct urb *urb)
 static int ir_open(void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct imon_context *context;
@@ -526,7 +543,11 @@ static int ir_open(void *data)
 
 	mutex_unlock(&driver_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return retval;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -570,7 +591,10 @@ static void ir_close(void *data)
 
 	mutex_unlock(&context->ctx_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -598,7 +622,10 @@ static void submit_data(struct imon_context *context)
 	lirc_buffer_write(context->driver->rbuf, buf);
 	wake_up(&context->driver->rbuf->wait_poll);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -647,8 +674,13 @@ static void imon_incoming_packet(struct imon_context *context,
 
 	if (len != 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(dev, "imon %s: invalid incoming packet "
 			 "size (len = %d, intf%d)\n", __func__, len, intf);
+=======
+		dev_warn(dev, "imon %s: invalid incoming packet size (len = %d, intf%d)\n",
+			__func__, len, intf);
+>>>>>>> v3.18
 =======
 		dev_warn(dev, "imon %s: invalid incoming packet size (len = %d, intf%d)\n",
 			__func__, len, intf);
@@ -658,7 +690,11 @@ static void imon_incoming_packet(struct imon_context *context,
 
 	if (debug) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "raw packet: ");
+=======
+		dev_info(dev, "raw packet: ");
+>>>>>>> v3.18
 =======
 		dev_info(dev, "raw packet: ");
 >>>>>>> v3.18
@@ -694,6 +730,10 @@ static void imon_incoming_packet(struct imon_context *context,
 		for (bit = 0; bit < 8; ++bit) {
 			int curr_bit = !(buf[octet] & mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -749,8 +789,11 @@ static void usb_rx_callback(struct urb *urb)
 
 	usb_submit_urb(context->rx_urb, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -820,6 +863,10 @@ static int imon_probe(struct usb_interface *interface,
 		int ep_dir;
 		int ep_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -856,7 +903,12 @@ static int imon_probe(struct usb_interface *interface,
 	/* Input endpoint is mandatory */
 	if (!ir_ep_found) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "%s: no valid input (IR) endpoint found.\n", __func__);
+=======
+		dev_err(dev, "%s: no valid input (IR) endpoint found.\n",
+			__func__);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "%s: no valid input (IR) endpoint found.\n",
 			__func__);
@@ -931,8 +983,13 @@ static int imon_probe(struct usb_interface *interface,
 		goto unlock;
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(dev, "Registered iMON driver "
 			 "(lirc minor: %d)\n", lirc_minor);
+=======
+		dev_info(dev, "Registered iMON driver (lirc minor: %d)\n",
+			 lirc_minor);
+>>>>>>> v3.18
 =======
 		dev_info(dev, "Registered iMON driver (lirc minor: %d)\n",
 			 lirc_minor);
@@ -969,8 +1026,13 @@ static int imon_probe(struct usb_interface *interface,
 		dev_err(dev, "%s: usb_submit_urb failed for intf0 (%d)\n",
 			__func__, retval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&context->ctx_lock);
 		goto exit;
+=======
+		alloc_status = 8;
+		goto unlock;
+>>>>>>> v3.18
 =======
 		alloc_status = 8;
 		goto unlock;
@@ -986,6 +1048,7 @@ static int imon_probe(struct usb_interface *interface,
 		if (usb_register_dev(interface, &imon_class)) {
 			/* Not a fatal error, so ignore */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(dev, "%s: could not get a minor number for "
 				 "display\n", __func__);
 		}
@@ -995,6 +1058,8 @@ static int imon_probe(struct usb_interface *interface,
 		 "usb<%d:%d> initialized\n", vendor, product, ifnum,
 		 usbdev->bus->busnum, usbdev->devnum);
 =======
+=======
+>>>>>>> v3.18
 			dev_info(dev, "%s: could not get a minor number for display\n",
 				 __func__);
 		}
@@ -1002,6 +1067,9 @@ static int imon_probe(struct usb_interface *interface,
 
 	dev_info(dev, "iMON device (%04x:%04x, intf%d) on usb<%d:%d> initialized\n",
 		vendor, product, ifnum, usbdev->bus->busnum, usbdev->devnum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 unlock:
@@ -1010,6 +1078,11 @@ alloc_status_switch:
 
 	switch (alloc_status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 8:
+		lirc_unregister_driver(driver->minor);
+>>>>>>> v3.18
 =======
 	case 8:
 		lirc_unregister_driver(driver->minor);
@@ -1019,6 +1092,7 @@ alloc_status_switch:
 	case 6:
 		usb_free_urb(rx_urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 5:
 		if (rbuf)
 			lirc_buffer_free(rbuf);
@@ -1027,6 +1101,8 @@ alloc_status_switch:
 	case 3:
 		kfree(driver);
 =======
+=======
+>>>>>>> v3.18
 		/* fall-through */
 	case 5:
 		if (rbuf)
@@ -1038,6 +1114,9 @@ alloc_status_switch:
 	case 3:
 		kfree(driver);
 		/* fall-through */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 2:
 		kfree(context);
@@ -1051,7 +1130,10 @@ alloc_status_switch:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&driver_lock);
@@ -1114,7 +1196,10 @@ static int imon_suspend(struct usb_interface *intf, pm_message_t message)
 static int imon_resume(struct usb_interface *intf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct imon_context *context = usb_get_intfdata(intf);
@@ -1127,9 +1212,13 @@ static int imon_resume(struct usb_interface *intf)
 		context->rx_endpoint->bInterval);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = usb_submit_urb(context->rx_urb, GFP_ATOMIC);
 
 	return rc;
+=======
+	return usb_submit_urb(context->rx_urb, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	return usb_submit_urb(context->rx_urb, GFP_ATOMIC);
 >>>>>>> v3.18

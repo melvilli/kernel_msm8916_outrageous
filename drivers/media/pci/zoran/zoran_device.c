@@ -683,7 +683,11 @@ set_videobus_dir (struct zoran *zr,
 	case LML33:
 	case LML33R10:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (lml33dpath == 0)
+=======
+		if (!lml33dpath)
+>>>>>>> v3.18
 =======
 		if (!lml33dpath)
 >>>>>>> v3.18
@@ -1577,7 +1581,11 @@ zoran_init_hardware (struct zoran *zr)
 
 	decoder_call(zr, core, init, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder_call(zr, core, s_std, zr->norm);
+=======
+	decoder_call(zr, video, s_std, zr->norm);
+>>>>>>> v3.18
 =======
 	decoder_call(zr, video, s_std, zr->norm);
 >>>>>>> v3.18

@@ -35,7 +35,10 @@
 #include "control.h"
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -327,6 +330,7 @@ static struct cpuidle_driver omap3_idle_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Numbers based on measurements made in October 2009 for PM optimized kernel
  * with CPU freq enabled on device Nokia N900. Assumes OPP2 (main idle OPP,
@@ -392,6 +396,8 @@ static struct cpuidle_driver omap3430_idle_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Public functions */
 
 /**
@@ -411,10 +417,14 @@ int __init omap3_idle_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_is_omap3430())
 		return cpuidle_register(&omap3430_idle_driver, NULL);
 	else
 		return cpuidle_register(&omap3_idle_driver, NULL);
+=======
+	return cpuidle_register(&omap3_idle_driver, NULL);
+>>>>>>> v3.18
 =======
 	return cpuidle_register(&omap3_idle_driver, NULL);
 >>>>>>> v3.18

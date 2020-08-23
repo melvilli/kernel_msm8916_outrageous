@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -148,6 +158,11 @@ struct iwl_ssid_ie {
  *@SCAN_FLAGS_DELAYED_SCAN_HIGHBAND:
  *@SCAN_FLAGS_FRAGMENTED_SCAN:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *@SCAN_FLAGS_PASSIVE2ACTIVE: use active scan on channels that was active
+ *	in the past hour, even if they are marked as passive.
+>>>>>>> v3.18
 =======
  *@SCAN_FLAGS_PASSIVE2ACTIVE: use active scan on channels that was active
  *	in the past hour, even if they are marked as passive.
@@ -160,6 +175,10 @@ enum iwl_scan_flags {
 	SCAN_FLAGS_DELAYED_SCAN_HIGHBAND	= BIT(3),
 	SCAN_FLAGS_FRAGMENTED_SCAN		= BIT(4),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SCAN_FLAGS_PASSIVE2ACTIVE		= BIT(5),
+>>>>>>> v3.18
 =======
 	SCAN_FLAGS_PASSIVE2ACTIVE		= BIT(5),
 >>>>>>> v3.18
@@ -186,9 +205,12 @@ enum iwl_scan_type {
 }; /* SCAN_ACTIVITY_TYPE_E_VER_1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Maximal number of channels to scan */
 #define MAX_NUM_SCAN_CHANNELS 0x24
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -196,6 +218,7 @@ enum iwl_scan_type {
  * ( SCAN_REQUEST_CMD = 0x80 )
  * @len: command length in bytes
  * @scan_flags: scan flags from SCAN_FLAGS_*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @channel_count: num of channels in channel list (1 - MAX_NUM_SCAN_CHANNELS)
  * @quiet_time: in msecs, dwell this time for active scan on quiet channels
@@ -207,6 +230,8 @@ enum iwl_scan_type {
  * @suspend_time: how long to pause scan when returning to service channel:
  *	bits 0-19: beacon interal in usecs (suspend before executing)
 =======
+=======
+>>>>>>> v3.18
  * @channel_count: num of channels in channel list
  *	(1 - ucode_capa.n_scan_channels)
  * @quiet_time: in msecs, dwell this time for active scan on quiet channels
@@ -217,6 +242,9 @@ enum iwl_scan_type {
  * @max_out_time: in TUs, max out of serving channel time
  * @suspend_time: how long to pause scan when returning to service channel:
  *	bits 0-19: beacon interal in TUs (suspend before executing)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	bits 20-23: reserved
  *	bits 24-31: number of beacons (suspend between channels)
@@ -374,7 +402,11 @@ struct iwl_scan_results_notif {
  * @tsf_low: TSF timer (lower half) in usecs
  * @tsf_high: TSF timer (higher half) in usecs
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @results: all scan results, only "scanned_channels" of them are valid
+=======
+ * @results: array of scan results, only "scanned_channels" of them are valid
+>>>>>>> v3.18
 =======
  * @results: array of scan results, only "scanned_channels" of them are valid
 >>>>>>> v3.18
@@ -387,6 +419,7 @@ struct iwl_scan_complete_notif {
 	__le32 tsf_low;
 	__le32 tsf_high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_scan_results_notif results[MAX_NUM_SCAN_CHANNELS];
 } __packed; /* SCAN_COMPLETE_NTF_API_S_VER_2 */
 
@@ -394,12 +427,17 @@ struct iwl_scan_complete_notif {
 #define IWL_MAX_SCAN_CHANNELS		40
 #define IWL_SCAN_MAX_BLACKLIST_LEN	64
 =======
+=======
+>>>>>>> v3.18
 	struct iwl_scan_results_notif results[];
 } __packed; /* SCAN_COMPLETE_NTF_API_S_VER_2 */
 
 /* scan offload */
 #define IWL_SCAN_MAX_BLACKLIST_LEN	64
 #define IWL_SCAN_SHORT_BLACKLIST_LEN	16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IWL_SCAN_MAX_PROFILES		11
 #define SCAN_OFFLOAD_PROBE_REQ_SIZE	512
@@ -414,13 +452,19 @@ struct iwl_scan_complete_notif {
 #define IWL_FAST_SCHED_SCAN_ITERATIONS 3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum scan_framework_client {
 	SCAN_CLIENT_SCHED_SCAN		= BIT(0),
 	SCAN_CLIENT_NETDETECT		= BIT(1),
 	SCAN_CLIENT_ASSET_TRACKING	= BIT(2),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct iwl_scan_offload_cmd - SCAN_REQUEST_FIXED_PART_API_S_VER_6
@@ -431,8 +475,13 @@ enum scan_framework_client {
  * @good_CRC_th:	passive to active promotion threshold
  * @rx_chain:		RXON rx chain.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @max_out_time:	max uSec to be out of assoceated channel
  * @suspend_time:	pause scan this long when returning to service channel
+=======
+ * @max_out_time:	max TUs to be out of assoceated channel
+ * @suspend_time:	pause scan this TUs when returning to service channel
+>>>>>>> v3.18
 =======
  * @max_out_time:	max TUs to be out of assoceated channel
  * @suspend_time:	pause scan this TUs when returning to service channel
@@ -472,6 +521,7 @@ enum iwl_scan_offload_channel_flags {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * iwl_scan_channel_cfg - SCAN_CHANNEL_CFG_S
  * @type:		bitmap - see enum iwl_scan_offload_channel_flags.
@@ -493,6 +543,8 @@ struct iwl_scan_channel_cfg {
 	u8 dwell_time[IWL_MAX_SCAN_CHANNELS][2];
 } __packed;
 =======
+=======
+>>>>>>> v3.18
 /* channel configuration for struct iwl_scan_offload_cfg. Each channels needs:
  * __le32 type:	bitmap; bits 1-20 are for directed scan to i'th ssid and
  *	see enum iwl_scan_offload_channel_flags.
@@ -503,11 +555,15 @@ struct iwl_scan_channel_cfg {
  * u8 passive_dwell.
  */
 #define IWL_SCAN_CHAN_SIZE 14
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * iwl_scan_offload_cfg - SCAN_OFFLOAD_CONFIG_API_S
  * @scan_cmd:		scan command fixed part
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @channel_cfg:	scan channel configuration
  * @data:		probe request frames (one per band)
@@ -516,10 +572,15 @@ struct iwl_scan_offload_cfg {
 	struct iwl_scan_offload_cmd scan_cmd;
 	struct iwl_scan_channel_cfg channel_cfg;
 =======
+=======
+>>>>>>> v3.18
  * @data:		scan channel configuration and probe request frames
  */
 struct iwl_scan_offload_cfg {
 	struct iwl_scan_offload_cmd scan_cmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 data[0];
 } __packed;
@@ -529,6 +590,10 @@ struct iwl_scan_offload_cfg {
  * @ssid:		MAC address to filter out
  * @reported_rssi:	AP rssi reported to the host
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @client_bitmap: clients ignore this entry  - enum scan_framework_client
+>>>>>>> v3.18
 =======
  * @client_bitmap: clients ignore this entry  - enum scan_framework_client
 >>>>>>> v3.18
@@ -537,7 +602,11 @@ struct iwl_scan_offload_blacklist {
 	u8 ssid[ETH_ALEN];
 	u8 reported_rssi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved;
+=======
+	u8 client_bitmap;
+>>>>>>> v3.18
 =======
 	u8 client_bitmap;
 >>>>>>> v3.18
@@ -563,6 +632,10 @@ enum iwl_scan_offload_band_selection {
  * @network_type:	enum iwl_scan_offload_network_type
  * @band_selection:	enum iwl_scan_offload_band_selection
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @client_bitmap:	clients waiting for match - enum scan_framework_client
+>>>>>>> v3.18
 =======
  * @client_bitmap:	clients waiting for match - enum scan_framework_client
 >>>>>>> v3.18
@@ -574,7 +647,12 @@ struct iwl_scan_offload_profile {
 	u8 network_type;
 	u8 band_selection;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved[3];
+=======
+	u8 client_bitmap;
+	u8 reserved[2];
+>>>>>>> v3.18
 =======
 	u8 client_bitmap;
 	u8 reserved[2];
@@ -588,6 +666,7 @@ struct iwl_scan_offload_profile {
  * @blacklist_len:	length of blacklist
  * @num_profiles:	num of profiles in the list
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct iwl_scan_offload_profile_cfg {
 	struct iwl_scan_offload_blacklist blacklist[IWL_SCAN_MAX_BLACKLIST_LEN];
@@ -595,6 +674,8 @@ struct iwl_scan_offload_profile_cfg {
 	u8 blacklist_len;
 	u8 num_profiles;
 =======
+=======
+>>>>>>> v3.18
  * @match_notify:	clients waiting for match found notification
  * @pass_match:		clients waiting for the results
  * @active_clients:	active clients bitmap - enum scan_framework_client
@@ -608,6 +689,9 @@ struct iwl_scan_offload_profile_cfg {
 	u8 pass_match;
 	u8 active_clients;
 	u8 any_beacon_notify;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 reserved[2];
 } __packed;
@@ -620,7 +704,11 @@ struct iwl_scan_offload_profile_cfg {
  */
 struct iwl_scan_offload_schedule {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 delay;
+=======
+	__le16 delay;
+>>>>>>> v3.18
 =======
 	__le16 delay;
 >>>>>>> v3.18
@@ -631,6 +719,7 @@ struct iwl_scan_offload_schedule {
 /*
  * iwl_scan_offload_flags
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * IWL_SCAN_OFFLOAD_FLAG_FILTER_SSID: filter mode - upload every beacon or match
  *	ssid list.
@@ -643,6 +732,8 @@ enum iwl_scan_offload_flags {
 	IWL_SCAN_OFFLOAD_FLAG_CACHED_CHANNEL	= BIT(2),
 	IWL_SCAN_OFFLOAD_FLAG_ENERGY_SCAN	= BIT(3),
 =======
+=======
+>>>>>>> v3.18
  * IWL_SCAN_OFFLOAD_FLAG_PASS_ALL: pass all results - no filtering.
  * IWL_SCAN_OFFLOAD_FLAG_CACHED_CHANNEL: add cached channels to partial scan.
  * IWL_SCAN_OFFLOAD_FLAG_EBS_QUICK_MODE: EBS duration is 100mSec - typical
@@ -655,6 +746,9 @@ enum iwl_scan_offload_flags {
 	IWL_SCAN_OFFLOAD_FLAG_CACHED_CHANNEL	= BIT(2),
 	IWL_SCAN_OFFLOAD_FLAG_EBS_QUICK_MODE	= BIT(5),
 	IWL_SCAN_OFFLOAD_FLAG_EBS_ACCURATE_MODE	= BIT(6),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -679,13 +773,19 @@ enum iwl_scan_offload_compleate_status {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum iwl_scan_ebs_status {
 	IWL_SCAN_EBS_SUCCESS,
 	IWL_SCAN_EBS_FAILED,
 	IWL_SCAN_EBS_CHAN_NOT_FOUND,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * iwl_scan_offload_complete - SCAN_OFFLOAD_COMPLETE_NTF_API_S_VER_1
@@ -693,6 +793,10 @@ enum iwl_scan_ebs_status {
  * @last_schedule_iteration:	last scan iteration executed before scan abort
  * @status:			enum iwl_scan_offload_compleate_status
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ebs_status: last EBS status, see IWL_SCAN_EBS_*
+>>>>>>> v3.18
 =======
  * @ebs_status: last EBS status, see IWL_SCAN_EBS_*
 >>>>>>> v3.18
@@ -702,8 +806,11 @@ struct iwl_scan_offload_complete {
 	u8 last_schedule_iteration;
 	u8 status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved;
 =======
+=======
+>>>>>>> v3.18
 	u8 ebs_status;
 } __packed;
 
@@ -926,6 +1033,9 @@ struct iwl_periodic_scan_complete {
 	u8 ebs_status;
 	__le32 time_after_last_iter;
 	__le32 reserved;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 

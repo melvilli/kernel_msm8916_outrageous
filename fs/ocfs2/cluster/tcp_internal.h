@@ -166,7 +166,11 @@ struct o2net_sock_container {
 	/* original handlers for the sockets */
 	void			(*sc_state_change)(struct sock *sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			(*sc_data_ready)(struct sock *sk, int bytes);
+=======
+	void			(*sc_data_ready)(struct sock *sk);
+>>>>>>> v3.18
 =======
 	void			(*sc_data_ready)(struct sock *sk);
 >>>>>>> v3.18

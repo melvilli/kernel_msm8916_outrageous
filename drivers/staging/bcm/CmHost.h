@@ -56,7 +56,11 @@ int AllocAdapterDsxBuffer(struct bcm_mini_adapter *Adapter);
 int FreeAdapterDsxBuffer(struct bcm_mini_adapter *Adapter);
 unsigned long SetUpTargetDsxBuffers(struct bcm_mini_adapter *Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 BOOLEAN CmControlResponseMessage(struct bcm_mini_adapter *Adapter, void *pvBuffer);
+=======
+bool CmControlResponseMessage(struct bcm_mini_adapter *Adapter, void *pvBuffer);
+>>>>>>> v3.18
 =======
 bool CmControlResponseMessage(struct bcm_mini_adapter *Adapter, void *pvBuffer);
 >>>>>>> v3.18

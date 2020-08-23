@@ -5,6 +5,10 @@
 menuconfig IIO
 	tristate "Industrial I/O support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ANON_INODES
+>>>>>>> v3.18
 =======
 	select ANON_INODES
 >>>>>>> v3.18
@@ -27,7 +31,11 @@ config IIO_BUFFER_CB
 boolean "IIO callback buffer used for push in-kernel interfaces"
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Should be selected by any drivers that do-inkernel push
+=======
+	  Should be selected by any drivers that do in-kernel push
+>>>>>>> v3.18
 =======
 	  Should be selected by any drivers that do in-kernel push
 >>>>>>> v3.18
@@ -38,8 +46,12 @@ config IIO_KFIFO_BUF
 	tristate "Industrial I/O buffering based on kfifo"
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  A simple fifo based on kfifo.  Use this if you want a fifo
 	  rather than a ring buffer. Note that this currently provides
+=======
+	  A simple fifo based on kfifo.  Note that this currently provides
+>>>>>>> v3.18
 =======
 	  A simple fifo based on kfifo.  Note that this currently provides
 >>>>>>> v3.18
@@ -61,7 +73,11 @@ config IIO_TRIGGER
 	  Provides IIO core support for triggers.  Currently these
 	  are used to initialize capture of samples to push into
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  ring buffers.  The triggers are effectively a 'capture
+=======
+	  buffers.  The triggers are effectively a 'capture
+>>>>>>> v3.18
 =======
 	  buffers.  The triggers are effectively a 'capture
 >>>>>>> v3.18
@@ -83,10 +99,13 @@ source "drivers/iio/dac/Kconfig"
 source "drivers/iio/frequency/Kconfig"
 source "drivers/iio/gyro/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/iio/imu/Kconfig"
 source "drivers/iio/light/Kconfig"
 source "drivers/iio/magnetometer/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "drivers/iio/humidity/Kconfig"
 source "drivers/iio/imu/Kconfig"
 source "drivers/iio/light/Kconfig"
@@ -98,6 +117,9 @@ endif #IIO_TRIGGER
 source "drivers/iio/pressure/Kconfig"
 source "drivers/iio/proximity/Kconfig"
 source "drivers/iio/temperature/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # IIO

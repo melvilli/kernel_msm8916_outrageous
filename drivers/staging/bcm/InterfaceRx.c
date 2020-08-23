@@ -1,6 +1,7 @@
 #include "headers.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int SearchVcid(struct bcm_mini_adapter *Adapter,unsigned short usVcid)
 {
 	int iIndex=0;
@@ -8,6 +9,8 @@ static int SearchVcid(struct bcm_mini_adapter *Adapter,unsigned short usVcid)
 	for(iIndex=(NO_OF_QUEUES-1);iIndex>=0;iIndex--)
 		if(Adapter->PackInfo[iIndex].usVCID_Value == usVcid)
 =======
+=======
+>>>>>>> v3.18
 static void handle_control_packet(struct bcm_interface_adapter *interface,
 				  struct bcm_mini_adapter *ad,
 				  struct bcm_leader *leader,
@@ -101,6 +104,9 @@ static int SearchVcid(struct bcm_mini_adapter *Adapter, unsigned short usVcid)
 
 	for (iIndex = (NO_OF_QUEUES-1); iIndex >= 0; iIndex--)
 		if (Adapter->PackInfo[iIndex].usVCID_Value == usVcid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return iIndex;
 	return NO_OF_QUEUES+1;
@@ -115,6 +121,7 @@ GetBulkInRcb(struct bcm_interface_adapter *psIntfAdapter)
 	UINT index = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if((atomic_read(&psIntfAdapter->uNumRcbUsed) < MAXIMUM_USB_RCB) &&
 		(psIntfAdapter->psAdapter->StopAllXaction == FALSE))
 	{
@@ -125,6 +132,8 @@ GetBulkInRcb(struct bcm_interface_adapter *psIntfAdapter)
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter,DBG_TYPE_RX, RX_DPC, DBG_LVL_ALL, "Got Rx desc %d used %d",
 			index, atomic_read(&psIntfAdapter->uNumRcbUsed));
 =======
+=======
+>>>>>>> v3.18
 	if ((atomic_read(&psIntfAdapter->uNumRcbUsed) < MAXIMUM_USB_RCB) &&
 	    (psIntfAdapter->psAdapter->StopAllXaction == false)) {
 		index = atomic_read(&psIntfAdapter->uCurrRcb);
@@ -134,6 +143,9 @@ GetBulkInRcb(struct bcm_interface_adapter *psIntfAdapter)
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_RX, RX_DPC,
 				DBG_LVL_ALL, "Got Rx desc %d used %d", index,
 				atomic_read(&psIntfAdapter->uNumRcbUsed));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		index = (index + 1) % MAXIMUM_USB_RCB;
 		atomic_set(&psIntfAdapter->uCurrRcb, index);
@@ -147,11 +159,17 @@ static void read_bulk_callback(struct urb *urb)
 {
 	struct sk_buff *skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOLEAN bHeaderSupressionEnabled = FALSE;
 	int QueueIndex = NO_OF_QUEUES + 1;
 	UINT uiIndex=0;
 	int process_done = 1;
 	//int idleflag = 0 ;
+=======
+	bool bHeaderSupressionEnabled = false;
+	int QueueIndex = NO_OF_QUEUES + 1;
+	UINT uiIndex = 0;
+>>>>>>> v3.18
 =======
 	bool bHeaderSupressionEnabled = false;
 	int QueueIndex = NO_OF_QUEUES + 1;
@@ -166,6 +184,7 @@ static void read_bulk_callback(struct urb *urb)
 		pr_info(PFX "%s: rx urb status %d length %d\n",
 			Adapter->dev->name, urb->status, urb->actual_length);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if((Adapter->device_removed == TRUE)  ||
 		(TRUE == Adapter->bEndPointHalted) ||
@@ -211,6 +230,8 @@ static void read_bulk_callback(struct urb *urb)
 	if(MAX_CNTL_PKT_SIZE < pLeader->PLength)
 	{
 =======
+=======
+>>>>>>> v3.18
 	if ((Adapter->device_removed == TRUE) ||
 	    (TRUE == Adapter->bEndPointHalted) ||
 	    (0 == urb->actual_length)) {
@@ -253,6 +274,9 @@ static void read_bulk_callback(struct urb *urb)
 			"Leader Status:0x%hX, Length:0x%hX, VCID:0x%hX",
 			pLeader->Status, pLeader->PLength, pLeader->Vcid);
 	if (MAX_CNTL_PKT_SIZE < pLeader->PLength) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (netif_msg_rx_err(Adapter))
 			pr_info(PFX "%s: corrupted leader length...%d\n",
@@ -263,9 +287,14 @@ static void read_bulk_callback(struct urb *urb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QueueIndex = SearchVcid( Adapter,pLeader->Vcid);
 	if(QueueIndex < NO_OF_QUEUES)
 	{
+=======
+	QueueIndex = SearchVcid(Adapter, pLeader->Vcid);
+	if (QueueIndex < NO_OF_QUEUES) {
+>>>>>>> v3.18
 =======
 	QueueIndex = SearchVcid(Adapter, pLeader->Vcid);
 	if (QueueIndex < NO_OF_QUEUES) {
@@ -276,6 +305,7 @@ static void read_bulk_callback(struct urb *urb)
 			bHeaderSupressionEnabled & Adapter->bPHSEnabled;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	skb = dev_alloc_skb (pLeader->PLength + SKB_RESERVE_PHS_BYTES + SKB_RESERVE_ETHERNET_HEADER);//2   //2 for allignment
 	if(!skb)
@@ -363,6 +393,8 @@ static void read_bulk_callback(struct urb *urb)
 
 static int ReceiveRcb(struct bcm_interface_adapter *psIntfAdapter, struct bcm_usb_rcb *pRcb)
 =======
+=======
+>>>>>>> v3.18
 	skb = dev_alloc_skb(pLeader->PLength + SKB_RESERVE_PHS_BYTES +
 			    SKB_RESERVE_ETHERNET_HEADER);
 	if (!skb) {
@@ -388,11 +420,15 @@ static int ReceiveRcb(struct bcm_interface_adapter *psIntfAdapter, struct bcm_us
 
 static int ReceiveRcb(struct bcm_interface_adapter *psIntfAdapter,
 		      struct bcm_usb_rcb *pRcb)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct urb *urb = pRcb->urb;
 	int retval = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	usb_fill_bulk_urb(urb, psIntfAdapter->udev, usb_rcvbulkpipe(
 			psIntfAdapter->udev, psIntfAdapter->sBulkIn.bulk_in_endpointAddr),
@@ -412,6 +448,8 @@ static int ReceiveRcb(struct bcm_interface_adapter *psIntfAdapter,
 			{
 				psIntfAdapter->psAdapter->bEndPointHalted = TRUE ;
 =======
+=======
+>>>>>>> v3.18
 	usb_fill_bulk_urb(urb, psIntfAdapter->udev,
 			  usb_rcvbulkpipe(psIntfAdapter->udev,
 					  psIntfAdapter->sBulkIn.bulk_in_endpointAddr),
@@ -432,6 +470,9 @@ static int ReceiveRcb(struct bcm_interface_adapter *psIntfAdapter,
 			/* if this return value is because of pipe halt. need to clear this. */
 			if (retval == -EPIPE) {
 				psIntfAdapter->psAdapter->bEndPointHalted = TRUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				wake_up(&psIntfAdapter->psAdapter->tx_packet_wait_queue);
 			}
@@ -456,6 +497,7 @@ Return:				TRUE  - If Rx was successful.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 BOOLEAN InterfaceRx (struct bcm_interface_adapter *psIntfAdapter)
 {
 	USHORT RxDescCount = NUM_RX_DESC - atomic_read(&psIntfAdapter->uNumRcbUsed);
@@ -476,6 +518,8 @@ BOOLEAN InterfaceRx (struct bcm_interface_adapter *psIntfAdapter)
 		RxDescCount--;
     }
 =======
+=======
+>>>>>>> v3.18
 bool InterfaceRx(struct bcm_interface_adapter *psIntfAdapter)
 {
 	USHORT RxDescCount = NUM_RX_DESC -
@@ -494,6 +538,9 @@ bool InterfaceRx(struct bcm_interface_adapter *psIntfAdapter)
 		ReceiveRcb(psIntfAdapter, pRcb);
 		RxDescCount--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return TRUE;
 }

@@ -19,6 +19,10 @@ obj-$(CONFIG_KEYS_COMPAT) += compat.o
 obj-$(CONFIG_PROC_FS) += proc.o
 obj-$(CONFIG_SYSCTL) += sysctl.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_PERSISTENT_KEYRINGS) += persistent.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PERSISTENT_KEYRINGS) += persistent.o
 >>>>>>> v3.18
@@ -27,6 +31,10 @@ obj-$(CONFIG_PERSISTENT_KEYRINGS) += persistent.o
 # Key types
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_BIG_KEYS) += big_key.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_BIG_KEYS) += big_key.o
 >>>>>>> v3.18

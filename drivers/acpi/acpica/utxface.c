@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -70,7 +79,11 @@ ACPI_MODULE_NAME("utxface")
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_terminate(void)
+=======
+acpi_status __init acpi_terminate(void)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_terminate(void)
 >>>>>>> v3.18
@@ -118,7 +131,11 @@ acpi_status __init acpi_terminate(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXPORT_SYMBOL(acpi_terminate)
+=======
+ACPI_EXPORT_SYMBOL_INIT(acpi_terminate)
+>>>>>>> v3.18
 =======
 ACPI_EXPORT_SYMBOL_INIT(acpi_terminate)
 >>>>>>> v3.18
@@ -225,7 +242,10 @@ acpi_status acpi_get_system_info(struct acpi_buffer * out_buffer)
 ACPI_EXPORT_SYMBOL(acpi_get_system_info)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*******************************************************************************
  *
  * FUNCTION:    acpi_get_statistics
@@ -264,6 +284,9 @@ acpi_status acpi_get_statistics(struct acpi_statistics *stats)
 
 ACPI_EXPORT_SYMBOL(acpi_get_statistics)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************************
  *
@@ -448,7 +471,10 @@ ACPI_EXPORT_SYMBOL(acpi_install_interface_handler)
 /*****************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_update_interfaces
  *
  * PARAMETERS:  action              - Actions to be performed during the
@@ -477,6 +503,9 @@ acpi_status acpi_update_interfaces(u8 action)
 
 /*****************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_check_address_range
  *
@@ -492,6 +521,10 @@ acpi_status acpi_update_interfaces(u8 action)
  *
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

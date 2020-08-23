@@ -18,10 +18,13 @@ struct drm_connector *exynos_drm_connector_create(struct drm_device *dev,
 						   struct drm_encoder *encoder);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_encoder *exynos_drm_best_encoder(struct drm_connector *connector);
 
 void exynos_drm_display_power(struct drm_connector *connector, int mode);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

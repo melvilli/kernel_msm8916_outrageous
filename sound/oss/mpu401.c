@@ -317,6 +317,10 @@ static int mpu_input_scanner(struct mpu_config *devc, unsigned char midic)
 					/* printk( "tune_request\n"); */
 					devc->m_state = ST_INIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					break;
+>>>>>>> v3.18
 =======
 					break;
 >>>>>>> v3.18
@@ -572,7 +576,10 @@ static int mpu401_command(int dev, mpu_command_rec * cmd)
 {
 	int i, timeout, ok;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long   flags;
@@ -652,7 +659,10 @@ retry:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmd->data[0] = 0;
@@ -677,7 +687,11 @@ retry:
 	}
 	spin_unlock_irqrestore(&devc->lock,flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -989,7 +1003,10 @@ int attach_mpu401(struct address_info *hw_config, struct module *owner)
 	devc->m_state = ST_INIT;
 	devc->shared_irq = hw_config->always_detect;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devc->irq = hw_config->irq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_init(&devc->lock);

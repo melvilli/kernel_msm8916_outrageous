@@ -19,10 +19,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ----------------------------------------------------------------------------
@@ -34,6 +37,10 @@
 #include <linux/i2c.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 >>>>>>> v3.18
@@ -42,7 +49,11 @@
 #include <linux/err.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -53,6 +64,10 @@
 #include <linux/slab.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/i2c-designware.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/i2c-designware.h>
 >>>>>>> v3.18
@@ -69,6 +84,7 @@ static u32 i2c_dw_get_clk_rate_khz(struct dw_i2c_dev *dev)
 
 #ifdef CONFIG_ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dw_i2c_acpi_configure(struct platform_device *pdev)
 {
 	struct dw_i2c_dev *dev = platform_get_drvdata(pdev);
@@ -76,6 +92,8 @@ static int dw_i2c_acpi_configure(struct platform_device *pdev)
 	if (!ACPI_HANDLE(&pdev->dev))
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 static void dw_i2c_acpi_params(struct platform_device *pdev, char method[],
 			       u16 *hcnt, u16 *lcnt, u32 *sda_hold)
 {
@@ -103,11 +121,15 @@ static int dw_i2c_acpi_configure(struct platform_device *pdev)
 {
 	struct dw_i2c_dev *dev = platform_get_drvdata(pdev);
 	const struct acpi_device_id *id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->adapter.nr = -1;
 	dev->tx_fifo_depth = 32;
 	dev->rx_fifo_depth = 32;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -117,6 +139,8 @@ static const struct acpi_device_id dw_i2c_acpi_match[] = {
 	{ "INT33C3", 0 },
 	{ "80860F41", 0 },
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Try to get SDA hold time and *CNT values from an ACPI method if
@@ -157,6 +181,9 @@ static const struct acpi_device_id dw_i2c_acpi_match[] = {
 	{ "80860F41", 0 },
 	{ "808622C1", 0 },
 	{ "AMD0010", 133 * 1000 * 1000 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -167,6 +194,10 @@ static inline int dw_i2c_acpi_configure(struct platform_device *pdev)
 	return -ENODEV;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void dw_i2c_acpi_unconfigure(struct platform_device *pdev) { }
+>>>>>>> v3.18
 =======
 static inline void dw_i2c_acpi_unconfigure(struct platform_device *pdev) { }
 >>>>>>> v3.18
@@ -178,6 +209,7 @@ static int dw_i2c_probe(struct platform_device *pdev)
 	struct i2c_adapter *adap;
 	struct resource *mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq, r;
 
 	/* NOTE: driver uses the static register mapping */
@@ -186,6 +218,11 @@ static int dw_i2c_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "no mem resource?\n");
 		return -EINVAL;
 	}
+=======
+	struct dw_i2c_platform_data *pdata;
+	int irq, r;
+	u32 clk_freq, ht = 0;
+>>>>>>> v3.18
 =======
 	struct dw_i2c_platform_data *pdata;
 	int irq, r;
@@ -203,6 +240,10 @@ static int dw_i2c_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -217,6 +258,7 @@ static int dw_i2c_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->clk = devm_clk_get(&pdev->dev, NULL);
 	dev->get_clk_rate_khz = i2c_dw_get_clk_rate_khz;
 
@@ -224,6 +266,8 @@ static int dw_i2c_probe(struct platform_device *pdev)
 		return PTR_ERR(dev->clk);
 	clk_prepare_enable(dev->clk);
 =======
+=======
+>>>>>>> v3.18
 	/* fast mode by default because of legacy reasons */
 	clk_freq = 400000;
 
@@ -255,6 +299,9 @@ static int dw_i2c_probe(struct platform_device *pdev)
 		if (pdata)
 			clk_freq = pdata->i2c_scl_freq;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->functionality =
@@ -265,6 +312,7 @@ static int dw_i2c_probe(struct platform_device *pdev)
 		I2C_FUNC_SMBUS_WORD_DATA |
 		I2C_FUNC_SMBUS_I2C_BLOCK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->master_cfg =  DW_IC_CON_MASTER | DW_IC_CON_SLAVE_DISABLE |
 		DW_IC_CON_RESTART_EN | DW_IC_CON_SPEED_FAST;
 
@@ -272,6 +320,8 @@ static int dw_i2c_probe(struct platform_device *pdev)
 	r = dw_i2c_acpi_configure(pdev);
 	if (r) {
 =======
+=======
+>>>>>>> v3.18
 	if (clk_freq == 100000)
 		dev->master_cfg =  DW_IC_CON_MASTER | DW_IC_CON_SLAVE_DISABLE |
 			DW_IC_CON_RESTART_EN | DW_IC_CON_SPEED_STD;
@@ -293,6 +343,9 @@ static int dw_i2c_probe(struct platform_device *pdev)
 	}
 
 	if (!dev->tx_fifo_depth) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u32 param1 = i2c_dw_read_comp_param(dev);
 
@@ -316,7 +369,11 @@ static int dw_i2c_probe(struct platform_device *pdev)
 	i2c_set_adapdata(adap, dev);
 	adap->owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adap->class = I2C_CLASS_HWMON;
+=======
+	adap->class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 =======
 	adap->class = I2C_CLASS_DEPRECATED;
 >>>>>>> v3.18
@@ -332,8 +389,11 @@ static int dw_i2c_probe(struct platform_device *pdev)
 		return r;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(adap);
 	acpi_i2c_register_devices(adap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -359,6 +419,12 @@ static int dw_i2c_remove(struct platform_device *pdev)
 	pm_runtime_disable(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ACPI_COMPANION(&pdev->dev))
+		dw_i2c_acpi_unconfigure(pdev);
+
+>>>>>>> v3.18
 =======
 	if (ACPI_COMPANION(&pdev->dev))
 		dw_i2c_acpi_unconfigure(pdev);
@@ -382,6 +448,10 @@ static int dw_i2c_suspend(struct device *dev)
 	struct dw_i2c_dev *i_dev = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2c_dw_disable(i_dev);
+>>>>>>> v3.18
 =======
 	i2c_dw_disable(i_dev);
 >>>>>>> v3.18
@@ -403,7 +473,12 @@ static int dw_i2c_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(dw_i2c_dev_pm_ops, dw_i2c_suspend, dw_i2c_resume);
+=======
+static UNIVERSAL_DEV_PM_OPS(dw_i2c_dev_pm_ops, dw_i2c_suspend,
+			    dw_i2c_resume, NULL);
+>>>>>>> v3.18
 =======
 static UNIVERSAL_DEV_PM_OPS(dw_i2c_dev_pm_ops, dw_i2c_suspend,
 			    dw_i2c_resume, NULL);
@@ -414,7 +489,12 @@ MODULE_ALIAS("platform:i2c_designware");
 
 static struct platform_driver dw_i2c_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= dw_i2c_remove,
+=======
+	.probe = dw_i2c_probe,
+	.remove = dw_i2c_remove,
+>>>>>>> v3.18
 =======
 	.probe = dw_i2c_probe,
 	.remove = dw_i2c_remove,
@@ -431,7 +511,11 @@ static struct platform_driver dw_i2c_driver = {
 static int __init dw_i2c_init_driver(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return platform_driver_probe(&dw_i2c_driver, dw_i2c_probe);
+=======
+	return platform_driver_register(&dw_i2c_driver);
+>>>>>>> v3.18
 =======
 	return platform_driver_register(&dw_i2c_driver);
 >>>>>>> v3.18

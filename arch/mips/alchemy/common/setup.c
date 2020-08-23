@@ -28,11 +28,17 @@
 #include <linux/init.h>
 #include <linux/ioport.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/jiffies.h>
 #include <linux/module.h>
 
 #include <asm/mipsregs.h>
 #include <asm/time.h>
+=======
+
+#include <asm/dma-coherence.h>
+#include <asm/mipsregs.h>
+>>>>>>> v3.18
 =======
 
 #include <asm/dma-coherence.h>
@@ -46,6 +52,7 @@ extern void set_cpuspec(void);
 
 void __init plat_mem_setup(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long est_freq;
 
@@ -61,6 +68,8 @@ void __init plat_mem_setup(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (au1xxx_cpu_needs_config_od())
 		/* Various early Au1xx0 errata corrected by this */
 		set_c0_config(1 << 19); /* Set Config[OD] */
@@ -69,7 +78,10 @@ void __init plat_mem_setup(void)
 		clear_c0_config(1 << 19); /* Clear Config[OD] */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	hw_coherentio = 0;
 	coherentio = 1;
 	switch (alchemy_get_cputype()) {
@@ -85,6 +97,9 @@ void __init plat_mem_setup(void)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	board_setup();	/* board specific setup */
 

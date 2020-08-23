@@ -214,7 +214,11 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
 				}
 				seq_printf(m, "DevInfo: 0x%x Attributes: 0x%x"
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"\nPathComponentMax: %d Status: 0x%d",
+=======
+					"\n\tPathComponentMax: %d Status: %d",
+>>>>>>> v3.18
 =======
 					"\n\tPathComponentMax: %d Status: %d",
 >>>>>>> v3.18
@@ -229,6 +233,11 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
 				else
 					seq_printf(m, " type: %d ", dev_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				if (server->ops->dump_share_caps)
+					server->ops->dump_share_caps(m, tcon);
+>>>>>>> v3.18
 =======
 				if (server->ops->dump_share_caps)
 					server->ops->dump_share_caps(m, tcon);
@@ -605,10 +614,13 @@ static int cifs_security_flags_proc_open(struct inode *inode, struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t cifs_security_flags_proc_write(struct file *file,
 		const char __user *buffer, size_t count, loff_t *ppos)
 {
 =======
+=======
+>>>>>>> v3.18
 /*
  * Ensure that if someone sets a MUST flag, that we disable all other MAY
  * flags except for the ones corresponding to the given MUST flag. If there are
@@ -639,6 +651,9 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 		const char __user *buffer, size_t count, loff_t *ppos)
 {
 	int rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int flags;
 	char flags_string[12];
@@ -663,6 +678,7 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 			return count;
 		} else if (!isdigit(c)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cifs_dbg(VFS, "invalid flag %c\n", c);
 			return -EINVAL;
 		}
@@ -676,6 +692,8 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 	if (flags <= 0)  {
 		cifs_dbg(VFS, "invalid security flags %s\n", flags_string);
 =======
+=======
+>>>>>>> v3.18
 			cifs_dbg(VFS, "Invalid SecurityFlags: %s\n",
 					flags_string);
 			return -EINVAL;
@@ -694,17 +712,23 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 
 	if (flags == 0)  {
 		cifs_dbg(VFS, "Invalid SecurityFlags: %s\n", flags_string);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (flags & ~CIFSSEC_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(VFS, "attempt to set unsupported security flags 0x%x\n",
 			 flags & ~CIFSSEC_MASK);
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 		cifs_dbg(VFS, "Unsupported security flags: 0x%x\n",
 			 flags & ~CIFSSEC_MASK);
 		return -EINVAL;
@@ -712,6 +736,9 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 
 	cifs_security_flags_handle_must_flags(&flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* flags look ok - update the global security flags for cifs module */
 	global_secflags = flags;

@@ -31,6 +31,10 @@
 struct cpa_data {
 	unsigned long	*vaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pgd_t		*pgd;
+>>>>>>> v3.18
 =======
 	pgd_t		*pgd;
 >>>>>>> v3.18
@@ -130,8 +134,13 @@ within(unsigned long addr, unsigned long start, unsigned long end)
  * @size:	number of bytes to flush
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * clflush is an unordered instruction which needs fencing with mfence
  * to avoid ordering issues.
+=======
+ * clflushopt is an unordered instruction which needs fencing with mfence or
+ * sfence to avoid ordering issues.
+>>>>>>> v3.18
 =======
  * clflushopt is an unordered instruction which needs fencing with mfence or
  * sfence to avoid ordering issues.
@@ -145,17 +154,23 @@ void clflush_cache_range(void *vaddr, unsigned int size)
 
 	for (; vaddr < vend; vaddr += boot_cpu_data.x86_clflush_size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clflush(vaddr);
 	/*
 	 * Flush any possible final partial cacheline:
 	 */
 	clflush(vend);
 =======
+=======
+>>>>>>> v3.18
 		clflushopt(vaddr);
 	/*
 	 * Flush any possible final partial cacheline:
 	 */
 	clflushopt(vend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mb();
@@ -341,6 +356,7 @@ static inline pgprot_t static_protections(pgprot_t prot, unsigned long address,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Lookup the page table entry for a virtual address. Return a pointer
  * to the entry and the level of the mapping.
  *
@@ -352,12 +368,17 @@ pte_t *lookup_address(unsigned long address, unsigned int *level)
 {
 	pgd_t *pgd = pgd_offset_k(address);
 =======
+=======
+>>>>>>> v3.18
  * Lookup the page table entry for a virtual address in a specific pgd.
  * Return a pointer to the entry and the level of the mapping.
  */
 pte_t *lookup_address_in_pgd(pgd_t *pgd, unsigned long address,
 			     unsigned int *level)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pud_t *pud;
 	pmd_t *pmd;
@@ -388,9 +409,12 @@ pte_t *lookup_address_in_pgd(pgd_t *pgd, unsigned long address,
 	return pte_offset_kernel(pmd, address);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(lookup_address);
 
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Lookup the page table entry for a virtual address. Return a pointer
@@ -416,6 +440,9 @@ static pte_t *_lookup_address_cpa(struct cpa_data *cpa, unsigned long address,
         return lookup_address(address, level);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is necessary because __pa() does not work on some
@@ -492,7 +519,11 @@ try_preserve_large_page(pte_t *kpte, unsigned long address,
 	 * up already:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = lookup_address(address, &level);
+=======
+	tmp = _lookup_address_cpa(cpa, address, &level);
+>>>>>>> v3.18
 =======
 	tmp = _lookup_address_cpa(cpa, address, &level);
 >>>>>>> v3.18
@@ -602,7 +633,12 @@ out_unlock:
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 __split_large_page(pte_t *kpte, unsigned long address, struct page *base)
+=======
+__split_large_page(struct cpa_data *cpa, pte_t *kpte, unsigned long address,
+		   struct page *base)
+>>>>>>> v3.18
 =======
 __split_large_page(struct cpa_data *cpa, pte_t *kpte, unsigned long address,
 		   struct page *base)
@@ -620,7 +656,11 @@ __split_large_page(struct cpa_data *cpa, pte_t *kpte, unsigned long address,
 	 * up for us already:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = lookup_address(address, &level);
+=======
+	tmp = _lookup_address_cpa(cpa, address, &level);
+>>>>>>> v3.18
 =======
 	tmp = _lookup_address_cpa(cpa, address, &level);
 >>>>>>> v3.18
@@ -700,7 +740,12 @@ __split_large_page(struct cpa_data *cpa, pte_t *kpte, unsigned long address,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int split_large_page(pte_t *kpte, unsigned long address)
+=======
+static int split_large_page(struct cpa_data *cpa, pte_t *kpte,
+			    unsigned long address)
+>>>>>>> v3.18
 =======
 static int split_large_page(struct cpa_data *cpa, pte_t *kpte,
 			    unsigned long address)
@@ -717,7 +762,11 @@ static int split_large_page(struct cpa_data *cpa, pte_t *kpte,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__split_large_page(kpte, address, base))
+=======
+	if (__split_large_page(cpa, kpte, address, base))
+>>>>>>> v3.18
 =======
 	if (__split_large_page(cpa, kpte, address, base))
 >>>>>>> v3.18
@@ -727,10 +776,13 @@ static int split_large_page(struct cpa_data *cpa, pte_t *kpte,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpa_process_fault(struct cpa_data *cpa, unsigned long vaddr,
 			       int primary)
 {
 =======
+=======
+>>>>>>> v3.18
 static bool try_to_free_pte_page(pte_t *pte)
 {
 	int i;
@@ -1121,6 +1173,9 @@ static int __cpa_process_fault(struct cpa_data *cpa, unsigned long vaddr,
 	if (cpa->pgd)
 		return populate_pgd(cpa, vaddr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Ignore all non primary paths.
@@ -1167,7 +1222,11 @@ static int __change_page_attr(struct cpa_data *cpa, int primary)
 		address = *cpa->vaddr;
 repeat:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kpte = lookup_address(address, &level);
+=======
+	kpte = _lookup_address_cpa(cpa, address, &level);
+>>>>>>> v3.18
 =======
 	kpte = _lookup_address_cpa(cpa, address, &level);
 >>>>>>> v3.18
@@ -1235,7 +1294,11 @@ repeat:
 	 * We have to split the large page:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = split_large_page(kpte, address);
+=======
+	err = split_large_page(cpa, kpte, address);
+>>>>>>> v3.18
 =======
 	err = split_large_page(cpa, kpte, address);
 >>>>>>> v3.18
@@ -1388,6 +1451,11 @@ static int change_page_attr_set_clr(unsigned long *addr, int numpages,
 	unsigned long baddr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(&cpa, 0, sizeof(cpa));
+
+>>>>>>> v3.18
 =======
 	memset(&cpa, 0, sizeof(cpa));
 
@@ -1465,15 +1533,21 @@ static int change_page_attr_set_clr(unsigned long *addr, int numpages,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * On success we use clflush, when the CPU supports it to
 	 * avoid the wbindv. If the CPU does not support it and in the
 	 * error case we fall back to cpa_flush_all (which uses
 	 * wbindv):
 =======
+=======
+>>>>>>> v3.18
 	 * On success we use CLFLUSH, when the CPU supports it to
 	 * avoid the WBINVD. If the CPU does not support it and in the
 	 * error case we fall back to cpa_flush_all (which uses
 	 * WBINVD):
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (!ret && cpu_has_clflush) {
@@ -1846,6 +1920,10 @@ static int __set_pages_p(struct page *page, int numpages)
 	unsigned long tempaddr = (unsigned long) page_address(page);
 	struct cpa_data cpa = { .vaddr = &tempaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				.pgd = NULL,
+>>>>>>> v3.18
 =======
 				.pgd = NULL,
 >>>>>>> v3.18
@@ -1868,6 +1946,10 @@ static int __set_pages_np(struct page *page, int numpages)
 	unsigned long tempaddr = (unsigned long) page_address(page);
 	struct cpa_data cpa = { .vaddr = &tempaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				.pgd = NULL,
+>>>>>>> v3.18
 =======
 				.pgd = NULL,
 >>>>>>> v3.18
@@ -1932,7 +2014,10 @@ bool kernel_page_present(struct page *page)
 #endif /* CONFIG_DEBUG_PAGEALLOC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int kernel_map_pages_in_pgd(pgd_t *pgd, u64 pfn, unsigned long address,
 			    unsigned numpages, unsigned long page_flags)
 {
@@ -1969,6 +2054,9 @@ void kernel_unmap_pages_in_pgd(pgd_t *root, unsigned long address,
 	unmap_pgd_range(root, address, address + (numpages << PAGE_SHIFT));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The testcases use internal knowledge of the implementation that shouldn't

@@ -40,7 +40,11 @@ void nfs_fscache_get_client_cookie(struct nfs_client *clp)
 	clp->fscache = fscache_acquire_cookie(nfs_fscache_netfs.primary_index,
 					      &nfs_fscache_server_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      clp);
+=======
+					      clp, true);
+>>>>>>> v3.18
 =======
 					      clp, true);
 >>>>>>> v3.18
@@ -144,7 +148,11 @@ void nfs_fscache_get_super_cookie(struct super_block *sb, const char *uniq, int 
 	nfss->fscache = fscache_acquire_cookie(nfss->nfs_client->fscache,
 					       &nfs_fscache_super_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       nfss);
+=======
+					       nfss, true);
+>>>>>>> v3.18
 =======
 					       nfss, true);
 >>>>>>> v3.18
@@ -187,6 +195,7 @@ void nfs_fscache_release_super_cookie(struct super_block *sb)
  * Initialise the per-inode cache cookie pointer for an NFS inode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nfs_fscache_init_inode_cookie(struct inode *inode)
 {
 	NFS_I(inode)->fscache = NULL;
@@ -215,6 +224,8 @@ static void nfs_fscache_enable_inode_cookie(struct inode *inode)
 			 sb, nfsi, nfsi->fscache);
 	}
 =======
+=======
+>>>>>>> v3.18
 void nfs_fscache_init_inode(struct inode *inode)
 {
 	struct nfs_inode *nfsi = NFS_I(inode);
@@ -225,12 +236,16 @@ void nfs_fscache_init_inode(struct inode *inode)
 	nfsi->fscache = fscache_acquire_cookie(NFS_SB(inode->i_sb)->fscache,
 					       &nfs_fscache_inode_object_def,
 					       nfsi, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Release a per-inode cookie.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void nfs_fscache_release_inode_cookie(struct inode *inode)
 {
@@ -358,6 +373,8 @@ void nfs_fscache_reset_inode_cookie(struct inode *inode)
 	nfs_fscache_inode_unlock(inode);
 }
 =======
+=======
+>>>>>>> v3.18
 void nfs_fscache_clear_inode(struct inode *inode)
 {
 	struct nfs_inode *nfsi = NFS_I(inode);
@@ -416,6 +433,9 @@ void nfs_fscache_open_file(struct inode *inode, struct file *filp)
 	}
 }
 EXPORT_SYMBOL_GPL(nfs_fscache_open_file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -427,6 +447,7 @@ int nfs_fscache_release_page(struct page *page, gfp_t gfp)
 {
 	if (PageFsCache(page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct nfs_inode *nfsi = NFS_I(page->mapping->host);
 		struct fscache_cookie *cookie = nfsi->fscache;
 
@@ -434,11 +455,16 @@ int nfs_fscache_release_page(struct page *page, gfp_t gfp)
 		dfprintk(FSCACHE, "NFS: fscache releasepage (0x%p/0x%p/0x%p)\n",
 			 cookie, page, nfsi);
 =======
+=======
+>>>>>>> v3.18
 		struct fscache_cookie *cookie = nfs_i_fscache(page->mapping->host);
 
 		BUG_ON(!cookie);
 		dfprintk(FSCACHE, "NFS: fscache releasepage (0x%p/0x%p/0x%p)\n",
 			 cookie, page, NFS_I(page->mapping->host));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!fscache_maybe_release_page(cookie, page, gfp))
@@ -458,8 +484,12 @@ int nfs_fscache_release_page(struct page *page, gfp_t gfp)
 void __nfs_fscache_invalidate_page(struct page *page, struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_inode *nfsi = NFS_I(inode);
 	struct fscache_cookie *cookie = nfsi->fscache;
+=======
+	struct fscache_cookie *cookie = nfs_i_fscache(inode);
+>>>>>>> v3.18
 =======
 	struct fscache_cookie *cookie = nfs_i_fscache(inode);
 >>>>>>> v3.18
@@ -468,7 +498,11 @@ void __nfs_fscache_invalidate_page(struct page *page, struct inode *inode)
 
 	dfprintk(FSCACHE, "NFS: fscache invalidatepage (0x%p/0x%p/0x%p)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 cookie, page, nfsi);
+=======
+		 cookie, page, NFS_I(inode));
+>>>>>>> v3.18
 =======
 		 cookie, page, NFS_I(inode));
 >>>>>>> v3.18
@@ -516,9 +550,15 @@ int __nfs_readpage_from_fscache(struct nfs_open_context *ctx,
 	dfprintk(FSCACHE,
 		 "NFS: readpage_from_fscache(fsc:%p/p:%p(i:%lx f:%lx)/0x%p)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 NFS_I(inode)->fscache, page, page->index, page->flags, inode);
 
 	ret = fscache_read_or_alloc_page(NFS_I(inode)->fscache,
+=======
+		 nfs_i_fscache(inode), page, page->index, page->flags, inode);
+
+	ret = fscache_read_or_alloc_page(nfs_i_fscache(inode),
+>>>>>>> v3.18
 =======
 		 nfs_i_fscache(inode), page, page->index, page->flags, inode);
 
@@ -564,9 +604,15 @@ int __nfs_readpages_from_fscache(struct nfs_open_context *ctx,
 
 	dfprintk(FSCACHE, "NFS: nfs_getpages_from_fscache (0x%p/%u/0x%p)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 NFS_I(inode)->fscache, npages, inode);
 
 	ret = fscache_read_or_alloc_pages(NFS_I(inode)->fscache,
+=======
+		 nfs_i_fscache(inode), npages, inode);
+
+	ret = fscache_read_or_alloc_pages(nfs_i_fscache(inode),
+>>>>>>> v3.18
 =======
 		 nfs_i_fscache(inode), npages, inode);
 
@@ -617,9 +663,15 @@ void __nfs_readpage_to_fscache(struct inode *inode, struct page *page, int sync)
 	dfprintk(FSCACHE,
 		 "NFS: readpage_to_fscache(fsc:%p/p:%p(i:%lx f:%lx)/%d)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 NFS_I(inode)->fscache, page, page->index, page->flags, sync);
 
 	ret = fscache_write_page(NFS_I(inode)->fscache, page, GFP_KERNEL);
+=======
+		 nfs_i_fscache(inode), page, page->index, page->flags, sync);
+
+	ret = fscache_write_page(nfs_i_fscache(inode), page, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		 nfs_i_fscache(inode), page, page->index, page->flags, sync);
 
@@ -631,7 +683,11 @@ void __nfs_readpage_to_fscache(struct inode *inode, struct page *page, int sync)
 
 	if (ret != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fscache_uncache_page(NFS_I(inode)->fscache, page);
+=======
+		fscache_uncache_page(nfs_i_fscache(inode), page);
+>>>>>>> v3.18
 =======
 		fscache_uncache_page(nfs_i_fscache(inode), page);
 >>>>>>> v3.18

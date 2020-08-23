@@ -1017,7 +1017,10 @@ static void bmac_set_multicast(struct net_device *dev)
 {
 	struct netdev_hw_addr *ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short rx_cfg;
@@ -1034,7 +1037,11 @@ static void bmac_set_multicast(struct net_device *dev)
 		bmwrite(dev, RXCFG, rx_cfg);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u16 hash_table[4];
+=======
+		u16 hash_table[4] = { 0 };
+>>>>>>> v3.18
 =======
 		u16 hash_table[4] = { 0 };
 >>>>>>> v3.18
@@ -1044,8 +1051,11 @@ static void bmac_set_multicast(struct net_device *dev)
 		bmwrite(dev, RXCFG, rx_cfg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for(i = 0; i < 4; i++) hash_table[i] = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		netdev_for_each_mc_addr(ha, dev) {
@@ -1234,8 +1244,13 @@ static void bmac_reset_and_enable(struct net_device *dev)
 		data = skb_put(skb, ETHERMINPACKET);
 		memset(data, 0, ETHERMINPACKET);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(data, dev->dev_addr, 6);
 		memcpy(data+6, dev->dev_addr, 6);
+=======
+		memcpy(data, dev->dev_addr, ETH_ALEN);
+		memcpy(data + ETH_ALEN, dev->dev_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(data, dev->dev_addr, ETH_ALEN);
 		memcpy(data + ETH_ALEN, dev->dev_addr, ETH_ALEN);

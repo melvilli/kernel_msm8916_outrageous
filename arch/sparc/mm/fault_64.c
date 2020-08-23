@@ -22,6 +22,10 @@
 #include <linux/kdebug.h>
 #include <linux/percpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -36,6 +40,10 @@
 #include <asm/sections.h>
 #include <asm/mmu_context.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -204,9 +212,12 @@ static void do_fault_siginfo(int code, int sig, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int handle_ldf_stq(u32, struct pt_regs *);
 extern int handle_ld_nf(u32, struct pt_regs *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int get_fault_insn(struct pt_regs *regs, unsigned int insn)
@@ -294,6 +305,10 @@ static void noinline __kprobes bogus_32bit_fault_tpc(struct pt_regs *regs)
 asmlinkage void __kprobes do_sparc64_fault(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -308,7 +323,11 @@ asmlinkage void __kprobes do_sparc64_fault(struct pt_regs *regs)
 
 	if (notify_page_fault(regs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto exit_exception;
+>>>>>>> v3.18
 =======
 		goto exit_exception;
 >>>>>>> v3.18
@@ -341,7 +360,11 @@ asmlinkage void __kprobes do_sparc64_fault(struct pt_regs *regs)
 		} else {
 			bad_kernel_pc(regs, address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
+=======
+			goto exit_exception;
+>>>>>>> v3.18
 =======
 			goto exit_exception;
 >>>>>>> v3.18
@@ -370,6 +393,12 @@ retry:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (fault_code & FAULT_CODE_BAD_RA)
+		goto do_sigbus;
+
+>>>>>>> v3.18
 =======
 	if (fault_code & FAULT_CODE_BAD_RA)
 		goto do_sigbus;
@@ -468,7 +497,11 @@ good_area:
 
 	if ((fault & VM_FAULT_RETRY) && fatal_signal_pending(current))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto exit_exception;
+>>>>>>> v3.18
 =======
 		goto exit_exception;
 >>>>>>> v3.18
@@ -477,8 +510,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)
@@ -529,6 +565,11 @@ good_area:
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+exit_exception:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 exit_exception:
 	exception_exit(prev_state);
@@ -546,7 +587,11 @@ bad_area:
 handle_kernel_fault:
 	do_kernel_fault(regs, si_code, fault_code, insn, address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+	goto exit_exception;
+>>>>>>> v3.18
 =======
 	goto exit_exception;
 >>>>>>> v3.18
@@ -561,7 +606,11 @@ out_of_memory:
 	if (!(regs->tstate & TSTATE_PRIV)) {
 		pagefault_out_of_memory();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto exit_exception;
+>>>>>>> v3.18
 =======
 		goto exit_exception;
 >>>>>>> v3.18

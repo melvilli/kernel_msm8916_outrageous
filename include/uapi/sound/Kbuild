@@ -6,6 +6,10 @@ header-y += compress_offload.h
 header-y += compress_params.h
 header-y += emu10k1.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += firewire.h
+>>>>>>> v3.18
 =======
 header-y += firewire.h
 >>>>>>> v3.18
@@ -13,6 +17,7 @@ header-y += hdsp.h
 header-y += hdspm.h
 header-y += sb16_csp.h
 header-y += sfnt_info.h
+<<<<<<< HEAD
 <<<<<<< HEAD
 header-y += tlv.h
 header-y += lsm_params.h
@@ -22,5 +27,7 @@ header-y += audio_effects.h
 header-y += voice_svc.h
 header-y += devdep_params.h
 header-y += msmcal-hwdep.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

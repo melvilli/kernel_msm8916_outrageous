@@ -21,7 +21,11 @@
 static unsigned int isa_membase, isa_portbase, isa_portshift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ctl_isa_vars[4] = {
+=======
+static struct ctl_table ctl_isa_vars[4] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ctl_isa_vars[4] = {
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ static struct ctl_table ctl_isa_vars[4] = {
 static struct ctl_table_header *isa_sysctl_header;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ctl_isa[2] = {
+=======
+static struct ctl_table ctl_isa[2] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ctl_isa[2] = {
 >>>>>>> v3.18
@@ -61,7 +69,11 @@ static struct ctl_table ctl_isa[2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ctl_bus[2] = {
+=======
+static struct ctl_table ctl_bus[2] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ctl_bus[2] = {
 >>>>>>> v3.18

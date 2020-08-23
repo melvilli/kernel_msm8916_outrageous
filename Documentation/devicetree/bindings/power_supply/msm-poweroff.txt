@@ -10,6 +10,7 @@ Required Properties:
 -reg: Specifies the physical address of the ps-hold register
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Optional Properties:
 -reg: A secondary reg address/size pair may be provided, to specify the address
       of the TCSR_BOOT_MISC_DETECT register. This address is typically used to
@@ -17,6 +18,8 @@ Optional Properties:
       the reset type shall be configured by means of a call to the secure
       environment.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Example:

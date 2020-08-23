@@ -27,12 +27,18 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      PSvEnablePowerSaving - Enable Power Saving Mode
  *      PSvDiasblePowerSaving - Disable Power Saving Mode
  *      PSbConsiderPowerDown - Decide if we can Power Down
  *      PSvSendPSPOLL - Send PS-POLL packet
  *      PSbSendNullPacket - Send Null packet
  *      PSbIsNextTBTTWakeUp - Decide if we need to wake up at next Beacon
+=======
+ *      vnt_enable_power_saving - Enable Power Saving Mode
+ *      PSvDiasblePowerSaving - Disable Power Saving Mode
+ *      vnt_next_tbtt_wakeup - Decide if we need to wake up at next Beacon
+>>>>>>> v3.18
 =======
  *      vnt_enable_power_saving - Enable Power Saving Mode
  *      PSvDiasblePowerSaving - Disable Power Saving Mode
@@ -46,7 +52,10 @@
 #include "mac.h"
 #include "device.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "wmgr.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "power.h"
@@ -54,10 +63,14 @@
 #include "rxtx.h"
 #include "card.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "control.h"
 #include "rndis.h"
 
 static int msglevel = MSG_LEVEL_INFO;
+=======
+#include "usbpipe.h"
+>>>>>>> v3.18
 =======
 #include "usbpipe.h"
 >>>>>>> v3.18
@@ -72,6 +85,7 @@ static int msglevel = MSG_LEVEL_INFO;
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void PSvEnablePowerSaving(struct vnt_private *pDevice, u16 wListenInterval)
 {
@@ -126,6 +140,8 @@ void PSvEnablePowerSaving(struct vnt_private *pDevice, u16 wListenInterval)
 	pDevice->bPWBitOn = true;
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "PS:Power Saving Mode Enable...\n");
 =======
+=======
+>>>>>>> v3.18
 void vnt_enable_power_saving(struct vnt_private *priv, u16 listen_interval)
 {
 	u16 aid = priv->current_aid | BIT(14) | BIT(15);
@@ -166,6 +182,9 @@ void vnt_enable_power_saving(struct vnt_private *priv, u16 listen_interval)
 	}
 
 	dev_dbg(&priv->usb->dev,  "PS:Power Saving Mode Enable...\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -179,6 +198,7 @@ void vnt_enable_power_saving(struct vnt_private *priv, u16 listen_interval)
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void PSvDisablePowerSaving(struct vnt_private *pDevice)
 {
@@ -350,6 +370,8 @@ int PSbSendNullPacket(struct vnt_private *pDevice)
 	}
 	return true;
 =======
+=======
+>>>>>>> v3.18
 void vnt_disable_power_saving(struct vnt_private *priv)
 {
 
@@ -362,6 +384,9 @@ void vnt_disable_power_saving(struct vnt_private *priv)
 
 	/* set always listen beacon */
 	vnt_mac_reg_bits_on(priv, MAC_REG_PSCTL, PSCTL_ALBCN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -375,6 +400,7 @@ void vnt_disable_power_saving(struct vnt_private *priv)
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int PSbIsNextTBTTWakeUp(struct vnt_private *pDevice)
 {
@@ -401,6 +427,8 @@ int PSbIsNextTBTTWakeUp(struct vnt_private *pDevice)
 }
 
 =======
+=======
+>>>>>>> v3.18
 int vnt_next_tbtt_wakeup(struct vnt_private *priv)
 {
 	struct ieee80211_hw *hw = priv->hw;
@@ -415,4 +443,7 @@ int vnt_next_tbtt_wakeup(struct vnt_private *priv)
 
 	return wake_up;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

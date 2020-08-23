@@ -2,6 +2,7 @@
 #define __PERF_SVGHELPER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
 
 extern void open_svg(const char *filename, int cpus, int rows, u64 start, u64 end);
@@ -13,6 +14,8 @@ extern void svg_cpu_box(int cpu, u64 max_frequency, u64 turbo_frequency);
 
 extern void svg_process(int cpu, u64 start, u64 end, const char *type, const char *name);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 extern void open_svg(const char *filename, int cpus, int rows, u64 start, u64 end);
@@ -27,11 +30,15 @@ extern void svg_cpu_box(int cpu, u64 max_frequency, u64 turbo_frequency);
 
 
 extern void svg_process(int cpu, u64 start, u64 end, int pid, const char *name, const char *backtrace);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void svg_cstate(int cpu, u64 start, u64 end, int type);
 extern void svg_pstate(int cpu, u64 start, u64 end, u64 freq);
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void svg_time_grid(void);
 extern void svg_legenda(void);
@@ -43,6 +50,8 @@ extern void svg_close(void);
 
 extern int svg_page_width;
 =======
+=======
+>>>>>>> v3.18
 extern void svg_time_grid(double min_thickness);
 extern void svg_io_legenda(void);
 extern void svg_legenda(void);
@@ -57,6 +66,9 @@ extern int svg_build_topology_map(char *sib_core, int sib_core_nr,
 extern int svg_page_width;
 extern u64 svg_highlight;
 extern const char *svg_highlight_name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __PERF_SVGHELPER_H */

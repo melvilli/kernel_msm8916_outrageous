@@ -3,7 +3,10 @@
 #ifndef __ASSEMBLY__
 #include <linux/cpumask.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/percpu.h>
@@ -155,6 +158,10 @@ static inline void arch_send_call_function_ipi_mask(const struct cpumask *mask)
 
 void cpu_disable_common(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void cpu_die_common(unsigned int cpu);
+>>>>>>> v3.18
 =======
 void cpu_die_common(unsigned int cpu);
 >>>>>>> v3.18
@@ -187,7 +194,11 @@ static inline int wbinvd_on_all_cpus(void)
 #endif /* CONFIG_SMP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned disabled_cpus __cpuinitdata;
+=======
+extern unsigned disabled_cpus;
+>>>>>>> v3.18
 =======
 extern unsigned disabled_cpus;
 >>>>>>> v3.18

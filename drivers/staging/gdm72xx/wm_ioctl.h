@@ -12,8 +12,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(WM_IOCTL_H_20080714)
 #define WM_IOCTL_H_20080714
+=======
+#ifndef __GDM72XX_WM_IOCTL_H__
+#define __GDM72XX_WM_IOCTL_H__
+
+>>>>>>> v3.18
 =======
 #ifndef __GDM72XX_WM_IOCTL_H__
 #define __GDM72XX_WM_IOCTL_H__
@@ -26,15 +32,21 @@
 #define NETLINK_WIMAX	31
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIOCWMIOCTL			SIOCDEVPRIVATE
 
 #define SIOCG_DATA			0x8D10
 #define SIOCS_DATA			0x8D11
 =======
+=======
+>>>>>>> v3.18
 #define SIOCWMIOCTL	SIOCDEVPRIVATE
 
 #define SIOCG_DATA	0x8D10
 #define SIOCS_DATA	0x8D11
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -48,7 +60,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIOC_DATA_MAX			16
+=======
+#define SIOC_DATA_MAX	16
+>>>>>>> v3.18
 =======
 #define SIOC_DATA_MAX	16
 >>>>>>> v3.18
@@ -85,6 +101,7 @@ enum {
 
 struct fsm_s {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		m_status;	/*main status*/
 	int		c_status;	/*connection status*/
 	int		d_status;	/*oma-dm status*/
@@ -93,6 +110,8 @@ struct fsm_s {
 struct data_s {
 	int		size;
 =======
+=======
+>>>>>>> v3.18
 	int	m_status;	/*main status*/
 	int	c_status;	/*connection status*/
 	int	d_status;	/*oma-dm status*/
@@ -100,6 +119,9 @@ struct data_s {
 
 struct data_s {
 	int	size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void	*buf;
 };
@@ -107,11 +129,17 @@ struct data_s {
 struct wm_req_s {
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char	ifrn_name[IFNAMSIZ];
 	} ifr_ifrn;
 
 	unsigned short	cmd;
 
+=======
+		char ifrn_name[IFNAMSIZ];
+	} ifr_ifrn;
+	unsigned short	cmd;
+>>>>>>> v3.18
 =======
 		char ifrn_name[IFNAMSIZ];
 	} ifr_ifrn;
@@ -125,13 +153,19 @@ struct wm_req_s {
 
 #ifndef ifr_name
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ifr_name	ifr_ifrn.ifrn_name
 #endif
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define ifr_name ifr_ifrn.ifrn_name
 #endif
 
 #endif /* __GDM72XX_WM_IOCTL_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

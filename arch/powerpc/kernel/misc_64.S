@@ -35,7 +35,11 @@ _GLOBAL(call_do_softirq)
 	stdu	r1,THREAD_SIZE-STACK_FRAME_OVERHEAD(r3)
 	mr	r1,r3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.__do_softirq
+=======
+	bl	__do_softirq
+>>>>>>> v3.18
 =======
 	bl	__do_softirq
 >>>>>>> v3.18
@@ -44,6 +48,7 @@ _GLOBAL(call_do_softirq)
 	mtlr	r0
 	blr
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 _GLOBAL(call_handle_irq)
 	ld	r8,0(r6)
@@ -54,12 +59,17 @@ _GLOBAL(call_handle_irq)
 	mr	r1,r5
 	bctrl
 =======
+=======
+>>>>>>> v3.18
 _GLOBAL(call_do_irq)
 	mflr	r0
 	std	r0,16(r1)
 	stdu	r1,THREAD_SIZE-STACK_FRAME_OVERHEAD(r4)
 	mr	r1,r4
 	bl	__do_irq
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ld	r1,0(r1)
 	ld	r0,16(r1)
@@ -81,14 +91,20 @@ PPC64_CACHES:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _KPROBE(__flush_icache_range)
 
 =======
+=======
+>>>>>>> v3.18
 _KPROBE(flush_icache_range)
 BEGIN_FTR_SECTION
 	PURGE_PREFETCHED_INS
 	blr
 END_FTR_SECTION_IFSET(CPU_FTR_COHERENT_ICACHE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Flush the data cache to memory 
@@ -233,12 +249,18 @@ _GLOBAL(__flush_dcache_icache)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	PURGE_PREFETCHED_INS
 	blr
 END_FTR_SECTION_IFSET(CPU_FTR_COHERENT_ICACHE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Flush the dcache */
  	ld	r7,PPC64_CACHES@toc(r2)
@@ -276,8 +298,11 @@ _GLOBAL(__bswapdi2)
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PPC_PMAC) || defined(CONFIG_PPC_MAPLE)
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_EARLY_DEBUG_BOOTX
 _GLOBAL(rmci_on)
@@ -313,6 +338,9 @@ _GLOBAL(rmci_off)
 
 #if defined(CONFIG_PPC_PMAC) || defined(CONFIG_PPC_MAPLE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Do an IO access in real mode
@@ -484,6 +512,7 @@ _GLOBAL(scom970_write)
 #endif /* CONFIG_CPU_FREQ_PMAC64 || CONFIG_CPU_FREQ_MAPLE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * disable_kernel_fp()
@@ -497,6 +526,8 @@ _GLOBAL(disable_kernel_fp)
 	isync
 	blr
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* kexec_wait(phys_cpu)
@@ -550,7 +581,11 @@ _GLOBAL(kexec_smp_wait)
 	SYNC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.kexec_wait
+=======
+	b	kexec_wait
+>>>>>>> v3.18
 =======
 	b	kexec_wait
 >>>>>>> v3.18
@@ -624,7 +659,11 @@ _GLOBAL(kexec_sequence)
 	/* copy dest pages, flush whole dest image */
 	mr	r3,r29
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.kexec_copy_flush	/* (image) */
+=======
+	bl	kexec_copy_flush	/* (image) */
+>>>>>>> v3.18
 =======
 	bl	kexec_copy_flush	/* (image) */
 >>>>>>> v3.18
@@ -638,7 +677,11 @@ _GLOBAL(kexec_sequence)
 	li	r5,0x100
 	li	r6,0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.copy_and_flush	/* (dest, src, copy limit, start offset) */
+=======
+	bl	copy_and_flush	/* (dest, src, copy limit, start offset) */
+>>>>>>> v3.18
 =======
 	bl	copy_and_flush	/* (dest, src, copy limit, start offset) */
 >>>>>>> v3.18
@@ -651,15 +694,21 @@ _GLOBAL(kexec_sequence)
 
 	/* clear out hardware hash page table and tlb */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r5,0(r27)		/* deref function descriptor */
 	mtctr	r5
 =======
+=======
+>>>>>>> v3.18
 #if !defined(_CALL_ELF) || _CALL_ELF != 2
 	ld	r12,0(r27)		/* deref function descriptor */
 #else
 	mr	r12,r27
 #endif
 	mtctr	r12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bctrl				/* ppc_md.hpte_clear_all(void); */
 
@@ -695,7 +744,10 @@ _GLOBAL(kexec_sequence)
 	blr	/* image->start(physid, image->start, 0); */
 #endif /* CONFIG_KEXEC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MODULES
 #if defined(_CALL_ELF) && _CALL_ELF == 2
@@ -724,4 +776,7 @@ __ksymtab_TOC.:
 	.llong __kstrtab_TOC.
 #endif /* ELFv2 */
 #endif /* MODULES */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

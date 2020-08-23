@@ -3,15 +3,21 @@
 #include <linux/slab.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/usb/composite.h>
 #include <linux/usb/gadget_configfs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/nls.h>
 #include <linux/usb/composite.h>
 #include <linux/usb/gadget_configfs.h>
 #include "configfs.h"
 #include "u_f.h"
 #include "u_os_desc.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int check_user_usb_string(const char *name,
@@ -52,7 +58,12 @@ struct gadget_info {
 	struct config_group configs_group;
 	struct config_group strings_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct config_group *default_groups[4];
+=======
+	struct config_group os_desc_group;
+	struct config_group *default_groups[5];
+>>>>>>> v3.18
 =======
 	struct config_group os_desc_group;
 	struct config_group *default_groups[5];
@@ -70,6 +81,12 @@ struct gadget_info {
 	struct usb_composite_driver composite;
 	struct usb_composite_dev cdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool use_os_desc;
+	char b_vendor_code;
+	char qw_sign[OS_STRING_QW_SIGN_LEN];
+>>>>>>> v3.18
 =======
 	bool use_os_desc;
 	char b_vendor_code;
@@ -99,11 +116,17 @@ struct gadget_strings {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct os_desc {
 	struct config_group group;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct gadget_config_name {
 	struct usb_gadget_strings stringtab_dev;
@@ -115,9 +138,12 @@ struct gadget_config_name {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_USB_STRING_LEN	126
 #define MAX_USB_STRING_WITH_NULL_LEN	(MAX_USB_STRING_LEN+1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int usb_string_copy(const char *s, char **s_copy)
@@ -126,6 +152,7 @@ static int usb_string_copy(const char *s, char **s_copy)
 	char *str;
 	char *copy = *s_copy;
 	ret = strlen(s);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret > MAX_USB_STRING_LEN)
 		return -EOVERFLOW;
@@ -141,6 +168,8 @@ static int usb_string_copy(const char *s, char **s_copy)
 	if (str[ret - 1] == '\n')
 		str[ret - 1] = '\0';
 =======
+=======
+>>>>>>> v3.18
 	if (ret > 126)
 		return -EOVERFLOW;
 
@@ -150,6 +179,9 @@ static int usb_string_copy(const char *s, char **s_copy)
 	if (str[ret - 1] == '\n')
 		str[ret - 1] = '\0';
 	kfree(copy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*s_copy = str;
 	return 0;
@@ -607,7 +639,11 @@ static struct config_group *function_make(
 	fi = usb_get_function_instance(func_name);
 	if (IS_ERR(fi))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(PTR_ERR(fi));
+=======
+		return ERR_CAST(fi);
+>>>>>>> v3.18
 =======
 		return ERR_CAST(fi);
 >>>>>>> v3.18
@@ -618,7 +654,10 @@ static struct config_group *function_make(
 		return ERR_PTR(ret);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fi->set_inst_name) {
 		ret = fi->set_inst_name(fi, instance_name);
 		if (ret) {
@@ -626,6 +665,9 @@ static struct config_group *function_make(
 			return ERR_PTR(ret);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gi = container_of(group, struct gadget_info, functions_group);
@@ -792,7 +834,10 @@ USB_CONFIG_STRING_RW_OPS(gadget_strings);
 USB_CONFIG_STRINGS_LANG(gadget_strings, gadget_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct os_desc *to_os_desc(struct config_item *item)
 {
 	return container_of(to_config_group(item), struct os_desc, group);
@@ -1311,6 +1356,9 @@ int usb_os_desc_prepare_interf_dir(struct config_group *parent,
 }
 EXPORT_SYMBOL(usb_os_desc_prepare_interf_dir);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int configfs_do_nothing(struct usb_composite_dev *cdev)
 {
@@ -1322,6 +1370,12 @@ int composite_dev_prepare(struct usb_composite_driver *composite,
 		struct usb_composite_dev *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int composite_os_desc_req_prepare(struct usb_composite_dev *cdev,
+				  struct usb_ep *ep0);
+
+>>>>>>> v3.18
 =======
 int composite_os_desc_req_prepare(struct usb_composite_dev *cdev,
 				  struct usb_ep *ep0);
@@ -1343,7 +1397,11 @@ static void purge_configs_funcs(struct gadget_info *gi)
 			if (f->unbind) {
 				dev_err(&gi->cdev.gadget->dev, "unbind function"
 <<<<<<< HEAD
+<<<<<<< HEAD
 						" '%s'/%pK\n", f->name, f);
+=======
+						" '%s'/%p\n", f->name, f);
+>>>>>>> v3.18
 =======
 						" '%s'/%p\n", f->name, f);
 >>>>>>> v3.18
@@ -1352,7 +1410,10 @@ static void purge_configs_funcs(struct gadget_info *gi)
 		}
 		c->next_interface_id = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(c->interface, 0, sizeof(c->interface));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		c->superspeed = 0;
@@ -1384,7 +1445,11 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 
 	if (list_empty(&gi->cdev.configs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Need atleast one configuration in %s.\n",
+=======
+		pr_err("Need at least one configuration in %s.\n",
+>>>>>>> v3.18
 =======
 		pr_err("Need at least one configuration in %s.\n",
 >>>>>>> v3.18
@@ -1399,7 +1464,11 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 		cfg = container_of(c, struct config_usb_cfg, c);
 		if (list_empty(&cfg->func_list)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("Config %s/%d of %s needs atleast one function.\n",
+=======
+			pr_err("Config %s/%d of %s needs at least one function.\n",
+>>>>>>> v3.18
 =======
 			pr_err("Config %s/%d of %s needs at least one function.\n",
 >>>>>>> v3.18
@@ -1438,13 +1507,19 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (gi->use_os_desc) {
 		cdev->use_os_string = true;
 		cdev->b_vendor_code = gi->b_vendor_code;
 		memcpy(cdev->qw_sign, gi->qw_sign, OS_STRING_QW_SIGN_LEN);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Go through all configs, attach all functions */
 	list_for_each_entry(c, &gi->cdev.configs, list) {
@@ -1475,12 +1550,15 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 			list_del(&f->list);
 			ret = usb_add_function(c, f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ret)
 				goto err_purge_funcs;
 		}
 		usb_ep_autoconfig_reset(cdev->gadget);
 	}
 =======
+=======
+>>>>>>> v3.18
 			if (ret) {
 				list_add(&f->list, &cfg->func_list);
 				goto err_purge_funcs;
@@ -1494,6 +1572,9 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 			goto err_purge_funcs;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb_ep_autoconfig_reset(cdev->gadget);
 	return 0;
@@ -1528,6 +1609,10 @@ static const struct usb_gadget_driver configfs_driver_template = {
 
 	.setup          = composite_setup,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.reset          = composite_disconnect,
+>>>>>>> v3.18
 =======
 	.reset          = composite_disconnect,
 >>>>>>> v3.18
@@ -1555,6 +1640,10 @@ static struct config_group *gadgets_make(
 	gi->group.default_groups[1] = &gi->configs_group;
 	gi->group.default_groups[2] = &gi->strings_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gi->group.default_groups[3] = &gi->os_desc_group;
+>>>>>>> v3.18
 =======
 	gi->group.default_groups[3] = &gi->os_desc_group;
 >>>>>>> v3.18
@@ -1566,6 +1655,11 @@ static struct config_group *gadgets_make(
 	config_group_init_type_name(&gi->strings_group, "strings",
 			&gadget_strings_strings_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	config_group_init_type_name(&gi->os_desc_group, "os_desc",
+			&os_desc_type);
+>>>>>>> v3.18
 =======
 	config_group_init_type_name(&gi->os_desc_group, "os_desc",
 			&os_desc_type);
@@ -1634,7 +1728,10 @@ static struct configfs_subsystem gadget_subsys = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void unregister_gadget_item(struct config_item *item)
 {
 	struct gadget_info *gi = to_gadget_info(item);
@@ -1643,6 +1740,9 @@ void unregister_gadget_item(struct config_item *item)
 }
 EXPORT_SYMBOL_GPL(unregister_gadget_item);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init gadget_cfs_init(void)
 {

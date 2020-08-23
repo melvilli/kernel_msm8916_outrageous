@@ -7,18 +7,24 @@
 #include "trace.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int rdev_suspend(struct cfg80211_registered_device *rdev)
 {
 	int ret;
 	trace_rdev_suspend(&rdev->wiphy, rdev->wowlan);
 	ret = rdev->ops->suspend(&rdev->wiphy, rdev->wowlan);
 =======
+=======
+>>>>>>> v3.18
 static inline int rdev_suspend(struct cfg80211_registered_device *rdev,
 			       struct cfg80211_wowlan *wowlan)
 {
 	int ret;
 	trace_rdev_suspend(&rdev->wiphy, wowlan);
 	ret = rdev->ops->suspend(&rdev->wiphy, wowlan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_rdev_return_int(&rdev->wiphy, ret);
 	return ret;
@@ -187,6 +193,7 @@ static inline int rdev_add_station(struct cfg80211_registered_device *rdev,
 
 static inline int rdev_del_station(struct cfg80211_registered_device *rdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct net_device *dev,
 				   struct station_del_parameters *params)
 {
@@ -194,11 +201,16 @@ static inline int rdev_del_station(struct cfg80211_registered_device *rdev,
 	trace_rdev_del_station(&rdev->wiphy, dev, params);
 	ret = rdev->ops->del_station(&rdev->wiphy, dev, params);
 =======
+=======
+>>>>>>> v3.18
 				   struct net_device *dev, u8 *mac)
 {
 	int ret;
 	trace_rdev_del_station(&rdev->wiphy, dev, mac);
 	ret = rdev->ops->del_station(&rdev->wiphy, dev, mac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_rdev_return_int(&rdev->wiphy, ret);
 	return ret;
@@ -217,7 +229,11 @@ static inline int rdev_change_station(struct cfg80211_registered_device *rdev,
 
 static inline int rdev_get_station(struct cfg80211_registered_device *rdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct net_device *dev, u8 *mac,
+=======
+				   struct net_device *dev, const u8 *mac,
+>>>>>>> v3.18
 =======
 				   struct net_device *dev, const u8 *mac,
 >>>>>>> v3.18
@@ -538,18 +554,24 @@ static inline void rdev_rfkill_poll(struct cfg80211_registered_device *rdev)
 #ifdef CONFIG_NL80211_TESTMODE
 static inline int rdev_testmode_cmd(struct cfg80211_registered_device *rdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    void *data, int len)
 {
 	int ret;
 	trace_rdev_testmode_cmd(&rdev->wiphy);
 	ret = rdev->ops->testmode_cmd(&rdev->wiphy, data, len);
 =======
+=======
+>>>>>>> v3.18
 				    struct wireless_dev *wdev,
 				    void *data, int len)
 {
 	int ret;
 	trace_rdev_testmode_cmd(&rdev->wiphy, wdev);
 	ret = rdev->ops->testmode_cmd(&rdev->wiphy, wdev, data, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_rdev_return_int(&rdev->wiphy, ret);
 	return ret;
@@ -654,6 +676,7 @@ rdev_cancel_remain_on_channel(struct cfg80211_registered_device *rdev,
 static inline int rdev_mgmt_tx(struct cfg80211_registered_device *rdev,
 			       struct wireless_dev *wdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct ieee80211_channel *chan, bool offchan,
 			       unsigned int wait, const u8 *buf, size_t len,
 			       bool no_cck, bool dont_wait_for_ack, u64 *cookie)
@@ -665,12 +688,17 @@ static inline int rdev_mgmt_tx(struct cfg80211_registered_device *rdev,
 				  wait, buf, len, no_cck,
 				  dont_wait_for_ack, cookie);
 =======
+=======
+>>>>>>> v3.18
 			       struct cfg80211_mgmt_tx_params *params,
 			       u64 *cookie)
 {
 	int ret;
 	trace_rdev_mgmt_tx(&rdev->wiphy, wdev, params);
 	ret = rdev->ops->mgmt_tx(&rdev->wiphy, wdev, params, cookie);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_rdev_return_int_cookie(&rdev->wiphy, ret, *cookie);
 	return ret;
@@ -757,6 +785,7 @@ static inline int rdev_get_antenna(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int rdev_set_ringparam(struct cfg80211_registered_device *rdev,
 				     u32 tx, u32 rx)
 {
@@ -776,6 +805,8 @@ static inline void rdev_get_ringparam(struct cfg80211_registered_device *rdev,
 	trace_rdev_return_void_tx_rx(&rdev->wiphy, *tx, *tx_max, *rx, *rx_max);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int
@@ -816,7 +847,11 @@ static inline int rdev_tdls_mgmt(struct cfg80211_registered_device *rdev,
 				 u8 action_code, u8 dialog_token,
 				 u16 status_code, u32 peer_capability,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 const u8 *buf, size_t len)
+=======
+				 bool initiator, const u8 *buf, size_t len)
+>>>>>>> v3.18
 =======
 				 bool initiator, const u8 *buf, size_t len)
 >>>>>>> v3.18
@@ -825,15 +860,21 @@ static inline int rdev_tdls_mgmt(struct cfg80211_registered_device *rdev,
 	trace_rdev_tdls_mgmt(&rdev->wiphy, dev, peer, action_code,
 			     dialog_token, status_code, peer_capability,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     buf, len);
 	ret = rdev->ops->tdls_mgmt(&rdev->wiphy, dev, peer, action_code,
 				   dialog_token, status_code, peer_capability,
 				   buf, len);
 =======
+=======
+>>>>>>> v3.18
 			     initiator, buf, len);
 	ret = rdev->ops->tdls_mgmt(&rdev->wiphy, dev, peer, action_code,
 				   dialog_token, status_code, peer_capability,
 				   initiator, buf, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_rdev_return_int(&rdev->wiphy, ret);
 	return ret;
@@ -873,6 +914,7 @@ static inline int rdev_set_noack_map(struct cfg80211_registered_device *rdev,
 
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 rdev_get_et_sset_count(struct cfg80211_registered_device *rdev,
 		       struct net_device *dev, int sset)
 {
@@ -902,6 +944,8 @@ static inline void rdev_get_et_strings(struct cfg80211_registered_device *rdev,
 }
 
 static inline int
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 rdev_get_channel(struct cfg80211_registered_device *rdev,
@@ -983,7 +1027,10 @@ static inline void rdev_crit_proto_stop(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int rdev_channel_switch(struct cfg80211_registered_device *rdev,
 				      struct net_device *dev,
 				      struct cfg80211_csa_settings *params)
@@ -996,6 +1043,9 @@ static inline int rdev_channel_switch(struct cfg80211_registered_device *rdev,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int rdev_set_qos_map(struct cfg80211_registered_device *rdev,
 				   struct net_device *dev,
@@ -1026,7 +1076,10 @@ rdev_set_ap_chanwidth(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 rdev_add_tx_ts(struct cfg80211_registered_device *rdev,
 	       struct net_device *dev, u8 tsid, const u8 *peer,
@@ -1058,5 +1111,8 @@ rdev_del_tx_ts(struct cfg80211_registered_device *rdev,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __CFG80211_RDEV_OPS */

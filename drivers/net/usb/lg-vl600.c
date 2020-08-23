@@ -16,8 +16,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -216,7 +220,11 @@ static int vl600_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 			 */
 			if ((buf->data[sizeof(*ethhdr)] & 0xf0) == 0x60)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ethhdr->h_proto = __constant_htons(ETH_P_IPV6);
+=======
+				ethhdr->h_proto = htons(ETH_P_IPV6);
+>>>>>>> v3.18
 =======
 				ethhdr->h_proto = htons(ETH_P_IPV6);
 >>>>>>> v3.18

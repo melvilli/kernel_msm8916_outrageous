@@ -24,7 +24,10 @@
 
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -34,6 +37,7 @@
 #include <subdev/instmem.h>
 
 #include <engine/mpeg.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <engine/graph/nv40.h>
 
@@ -65,6 +69,8 @@ nv40_mpeg_context_ctor(struct nouveau_object *parent,
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 #include <engine/mpeg/nv31.h>
 
 /*******************************************************************************
@@ -106,11 +112,15 @@ nv40_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 		nv_wr32(priv, 0x00b370, base);
 		nv_wr32(priv, 0x00b374, size);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nv40_mpeg_context_fini(struct nouveau_object *object, bool suspend)
@@ -139,6 +149,8 @@ nv40_mpeg_cclass = {
 		.wr32 = _nouveau_mpeg_context_wr32,
 	},
 =======
+=======
+>>>>>>> v3.18
 static struct nouveau_omthds
 nv40_mpeg_omthds[] = {
 	{ 0x0190, 0x0190, nv40_mpeg_mthd_dma },
@@ -151,6 +163,9 @@ struct nouveau_oclass
 nv40_mpeg_sclass[] = {
 	{ 0x3174, &nv31_mpeg_ofuncs, nv40_mpeg_omthds },
 	{}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -162,7 +177,11 @@ static void
 nv40_mpeg_intr(struct nouveau_subdev *subdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv40_mpeg_priv *priv = (void *)subdev;
+=======
+	struct nv31_mpeg_priv *priv = (void *)subdev;
+>>>>>>> v3.18
 =======
 	struct nv31_mpeg_priv *priv = (void *)subdev;
 >>>>>>> v3.18
@@ -183,7 +202,11 @@ nv40_mpeg_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	       struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv40_mpeg_priv *priv;
+=======
+	struct nv31_mpeg_priv *priv;
+>>>>>>> v3.18
 =======
 	struct nv31_mpeg_priv *priv;
 >>>>>>> v3.18
@@ -197,8 +220,13 @@ nv40_mpeg_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_subdev(priv)->unit = 0x00000002;
 	nv_subdev(priv)->intr = nv40_mpeg_intr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_engine(priv)->cclass = &nv40_mpeg_cclass;
 	nv_engine(priv)->sclass = nv31_mpeg_sclass;
+=======
+	nv_engine(priv)->cclass = &nv31_mpeg_cclass;
+	nv_engine(priv)->sclass = nv40_mpeg_sclass;
+>>>>>>> v3.18
 =======
 	nv_engine(priv)->cclass = &nv31_mpeg_cclass;
 	nv_engine(priv)->sclass = nv40_mpeg_sclass;

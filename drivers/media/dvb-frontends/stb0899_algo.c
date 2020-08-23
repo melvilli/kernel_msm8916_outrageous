@@ -227,8 +227,13 @@ static enum stb0899_status stb0899_search_tmg(struct stb0899_state *state)
 
 		if (next_loop) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(state->config->inversion * derot_freq));
 			STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(state->config->inversion * derot_freq));
+=======
+			STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(internal->inversion * derot_freq));
+			STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(internal->inversion * derot_freq));
+>>>>>>> v3.18
 =======
 			STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(internal->inversion * derot_freq));
 			STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(internal->inversion * derot_freq));
@@ -241,7 +246,11 @@ static enum stb0899_status stb0899_search_tmg(struct stb0899_state *state)
 	if (internal->status == TIMINGOK) {
 		stb0899_read_regs(state, STB0899_CFRM, cfr, 2); /* get derotator frequency		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal->derot_freq = state->config->inversion * MAKEWORD16(cfr[0], cfr[1]);
+=======
+		internal->derot_freq = internal->inversion * MAKEWORD16(cfr[0], cfr[1]);
+>>>>>>> v3.18
 =======
 		internal->derot_freq = internal->inversion * MAKEWORD16(cfr[0], cfr[1]);
 >>>>>>> v3.18
@@ -316,8 +325,13 @@ static enum stb0899_status stb0899_search_carrier(struct stb0899_state *state)
 				stb0899_write_reg(state, STB0899_CFD, reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(state->config->inversion * derot_freq));
 				STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(state->config->inversion * derot_freq));
+=======
+				STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(internal->inversion * derot_freq));
+				STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(internal->inversion * derot_freq));
+>>>>>>> v3.18
 =======
 				STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(internal->inversion * derot_freq));
 				STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(internal->inversion * derot_freq));
@@ -332,7 +346,11 @@ static enum stb0899_status stb0899_search_carrier(struct stb0899_state *state)
 	if (internal->status == CARRIEROK) {
 		stb0899_read_regs(state, STB0899_CFRM, cfr, 2); /* get derotator frequency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal->derot_freq = state->config->inversion * MAKEWORD16(cfr[0], cfr[1]);
+=======
+		internal->derot_freq = internal->inversion * MAKEWORD16(cfr[0], cfr[1]);
+>>>>>>> v3.18
 =======
 		internal->derot_freq = internal->inversion * MAKEWORD16(cfr[0], cfr[1]);
 >>>>>>> v3.18
@@ -431,8 +449,13 @@ static enum stb0899_status stb0899_search_data(struct stb0899_state *state)
 				stb0899_write_reg(state, STB0899_CFD, reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(state->config->inversion * derot_freq));
 				STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(state->config->inversion * derot_freq));
+=======
+				STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(internal->inversion * derot_freq));
+				STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(internal->inversion * derot_freq));
+>>>>>>> v3.18
 =======
 				STB0899_SETFIELD_VAL(CFRM, cfr[0], MSB(internal->inversion * derot_freq));
 				STB0899_SETFIELD_VAL(CFRL, cfr[1], LSB(internal->inversion * derot_freq));
@@ -449,8 +472,11 @@ static enum stb0899_status stb0899_search_data(struct stb0899_state *state)
 	if (internal->status == DATAOK) {
 		stb0899_read_regs(state, STB0899_CFRM, cfr, 2); /* get derotator frequency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal->derot_freq = state->config->inversion * MAKEWORD16(cfr[0], cfr[1]);
 =======
+=======
+>>>>>>> v3.18
 
 		/* store autodetected IQ swapping as default for DVB-S2 tuning */
 		reg = stb0899_read_reg(state, STB0899_IQSWAP);
@@ -460,6 +486,9 @@ static enum stb0899_status stb0899_search_data(struct stb0899_state *state)
 			internal->inversion = IQ_SWAP_OFF;
 
 		internal->derot_freq = internal->inversion * MAKEWORD16(cfr[0], cfr[1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dprintk(state->verbose, FE_DEBUG, 1, "------> DATAOK ! Derot Freq=%d", internal->derot_freq);
 	}
@@ -480,7 +509,11 @@ static enum stb0899_status stb0899_check_range(struct stb0899_state *state)
 
 	range_offst = internal->srch_range / 2000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tp_freq = internal->freq + (internal->derot_freq * internal->mclk) / 1000;
+=======
+	tp_freq = internal->freq - (internal->derot_freq * internal->mclk) / 1000;
+>>>>>>> v3.18
 =======
 	tp_freq = internal->freq - (internal->derot_freq * internal->mclk) / 1000;
 >>>>>>> v3.18
@@ -678,7 +711,11 @@ enum stb0899_status stb0899_dvbs_algo(struct stb0899_state *state)
 							internal->derot_freq, internal->mclk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 						internal->freq = params->freq + ((internal->derot_freq * internal->mclk) / 1000);
+=======
+						internal->freq = params->freq - ((internal->derot_freq * internal->mclk) / 1000);
+>>>>>>> v3.18
 =======
 						internal->freq = params->freq - ((internal->derot_freq * internal->mclk) / 1000);
 >>>>>>> v3.18
@@ -1417,9 +1454,12 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 		STB0899_SETFIELD_VAL(SPECTRUM_INVERT, reg, 1);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case IQ_SWAP_AUTO:	/* use last successful search first	*/
 		STB0899_SETFIELD_VAL(SPECTRUM_INVERT, reg, 1);
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1451,6 +1491,7 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 	}
 
 	if (internal->status != DVBS2_FEC_LOCK) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (internal->inversion == IQ_SWAP_AUTO) {
 			reg = STB0899_READ_S2REG(STB0899_S2DEMOD, DMD_CNTRL2);
@@ -1488,6 +1529,8 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 */
 		}
 =======
+=======
+>>>>>>> v3.18
 		reg = STB0899_READ_S2REG(STB0899_S2DEMOD, DMD_CNTRL2);
 		iqSpectrum = STB0899_GETFIELD(SPECTRUM_INVERT, reg);
 		/* IQ Spectrum Inversion	*/
@@ -1521,6 +1564,9 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 		if (pParams->DVBS2State == FE_DVBS2_FEC_LOCKED)
 			pParams->IQLocked = !iqSpectrum;
 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (internal->status == DVBS2_FEC_LOCK) {
@@ -1570,6 +1616,7 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 		offsetfreq = STB0899_READ_S2REG(STB0899_S2DEMOD, CRL_FREQ);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offsetfreq = offsetfreq / ((1 << 30) / 1000);
 		offsetfreq *= (internal->master_clk / 1000000);
 		reg = STB0899_READ_S2REG(STB0899_S2DEMOD, DMD_CNTRL2);
@@ -1578,6 +1625,8 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 
 		internal->freq = internal->freq - offsetfreq;
 =======
+=======
+>>>>>>> v3.18
 		/* sign extend 30 bit value before using it in calculations */
 		if (offsetfreq & (1 << 29))
 			offsetfreq |= -1 << 30;
@@ -1593,6 +1642,9 @@ enum stb0899_status stb0899_dvbs2_algo(struct stb0899_state *state)
 			internal->inversion = IQ_SWAP_OFF;
 
 		internal->freq = internal->freq + offsetfreq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal->srate = stb0899_dvbs2_get_srate(state);
 

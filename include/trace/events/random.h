@@ -8,7 +8,10 @@
 #include <linux/tracepoint.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(add_device_randomness,
 	TP_PROTO(int bytes, unsigned long IP),
 
@@ -28,6 +31,9 @@ TRACE_EVENT(add_device_randomness,
 		__entry->bytes, (void *)__entry->IP)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DECLARE_EVENT_CLASS(random__mix_pool_bytes,
 	TP_PROTO(const char *pool_name, int bytes, unsigned long IP),
@@ -91,8 +97,11 @@ TRACE_EVENT(credit_entropy_bits,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(get_random_bytes,
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(push_to_pool,
 	TP_PROTO(const char *pool_name, int pool_bits, int input_bits),
 
@@ -199,6 +208,9 @@ TRACE_EVENT(xfer_secondary_pool,
 );
 
 DECLARE_EVENT_CLASS(random__get_random_bytes,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TP_PROTO(int nbytes, unsigned long IP),
 
@@ -218,7 +230,10 @@ DECLARE_EVENT_CLASS(random__get_random_bytes,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 DEFINE_EVENT(random__get_random_bytes, get_random_bytes,
 	TP_PROTO(int nbytes, unsigned long IP),
 
@@ -231,6 +246,9 @@ DEFINE_EVENT(random__get_random_bytes, get_random_bytes_arch,
 	TP_ARGS(nbytes, IP)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DECLARE_EVENT_CLASS(random__extract_entropy,
 	TP_PROTO(const char *pool_name, int nbytes, int entropy_count,
@@ -273,8 +291,11 @@ DEFINE_EVENT(random__extract_entropy, extract_entropy_user,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(random_read,
 	TP_PROTO(int got_bits, int need_bits, int pool_left, int input_left),
 
@@ -321,6 +342,9 @@ TRACE_EVENT(urandom_read,
 		  "input_entropy_left %d", __entry->got_bits,
 		  __entry->pool_left, __entry->input_left)
 );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _TRACE_RANDOM_H */

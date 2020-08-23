@@ -9,7 +9,10 @@
 #include <linux/edac.h>
 #include <linux/ktime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/aer.h>
 #include <linux/cper.h>
@@ -76,6 +79,9 @@ TRACE_EVENT(extlog_mem_event,
 		  __get_str(fru_text))
 );
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -164,7 +170,10 @@ TRACE_EVENT(mc_event,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * PCIe AER Trace event
  *
@@ -237,6 +246,9 @@ TRACE_EVENT(aer_event,
 		__print_flags(__entry->status, "|", aer_uncorrectable_errors))
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_HW_EVENT_MC_H */
 

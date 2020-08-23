@@ -2,6 +2,7 @@
 #define _ASM_X86_SPINLOCK_TYPES_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __LINUX_SPINLOCK_TYPES_H
 # error "please don't include this file directly"
 #endif
@@ -10,6 +11,8 @@
 
 #if (CONFIG_NR_CPUS < 256)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 #ifdef CONFIG_PARAVIRT_SPINLOCKS
@@ -21,6 +24,9 @@
 #endif
 
 #if (CONFIG_NR_CPUS < (256 / __TICKET_LOCK_INC))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef u8  __ticket_t;
 typedef u16 __ticketpair_t;
@@ -30,6 +36,11 @@ typedef u32 __ticketpair_t;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TICKET_LOCK_INC	((__ticket_t)__TICKET_LOCK_INC)
+
+>>>>>>> v3.18
 =======
 #define TICKET_LOCK_INC	((__ticket_t)__TICKET_LOCK_INC)
 
@@ -48,7 +59,11 @@ typedef struct arch_spinlock {
 #define __ARCH_SPIN_LOCK_UNLOCKED	{ { 0 } }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/rwlock.h>
+=======
+#include <asm-generic/qrwlock_types.h>
+>>>>>>> v3.18
 =======
 #include <asm-generic/qrwlock_types.h>
 >>>>>>> v3.18

@@ -14,6 +14,7 @@
 
 struct mips_abi {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (* const setup_frame)(void *sig_return, struct k_sigaction *ka,
 				  struct pt_regs *regs, int signr,
 				  sigset_t *set);
@@ -22,11 +23,16 @@ struct mips_abi {
 			       struct pt_regs *regs, int signr,
 			       sigset_t *set, siginfo_t *info);
 =======
+=======
+>>>>>>> v3.18
 	int (* const setup_frame)(void *sig_return, struct ksignal *ksig,
 				  struct pt_regs *regs, sigset_t *set);
 	const unsigned long	signal_return_offset;
 	int (* const setup_rt_frame)(void *sig_return, struct ksignal *ksig,
 				     struct pt_regs *regs, sigset_t *set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const unsigned long	rt_signal_return_offset;
 	const unsigned long	restart;

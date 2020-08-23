@@ -361,7 +361,11 @@ struct ibmasr_id {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ibmasr_id __initdata ibmasr_id_table[] = {
+=======
+static struct ibmasr_id ibmasr_id_table[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct ibmasr_id ibmasr_id_table[] __initdata = {
 >>>>>>> v3.18
@@ -424,6 +428,9 @@ MODULE_DESCRIPTION("IBM Automatic Server Restart driver");
 MODULE_AUTHOR("Andrey Panin");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

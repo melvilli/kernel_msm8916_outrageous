@@ -370,7 +370,11 @@ static int scs_init_hss_address(struct scs *scs)
 			   scs->hss_handler.offset);
 	err = snd_fw_transaction(scs->unit, TCODE_WRITE_BLOCK_REQUEST,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 HSS1394_ADDRESS, &data, 8);
+=======
+				 HSS1394_ADDRESS, &data, 8, 0);
+>>>>>>> v3.18
 =======
 				 HSS1394_ADDRESS, &data, 8, 0);
 >>>>>>> v3.18
@@ -389,9 +393,14 @@ static void scs_card_free(struct snd_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int scs_probe(struct device *unit_dev)
 {
 	struct fw_unit *unit = fw_unit(unit_dev);
+=======
+static int scs_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
+{
+>>>>>>> v3.18
 =======
 static int scs_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 {
@@ -402,15 +411,21 @@ static int scs_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(-16, NULL, THIS_MODULE, sizeof(*scs), &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, unit_dev);
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(&unit->device, -16, NULL, THIS_MODULE,
 			   sizeof(*scs), &card);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	scs = card->private_data;
@@ -422,13 +437,19 @@ static int scs_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 
 	scs->buffer = kmalloc(HSS1394_MAX_PACKET_SIZE, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!scs->buffer)
 		goto err_card;
 =======
+=======
+>>>>>>> v3.18
 	if (!scs->buffer) {
 		err = -ENOMEM;
 		goto err_card;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	scs->hss_handler.length = HSS1394_MAX_PACKET_SIZE;
@@ -464,7 +485,11 @@ static int scs_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 		goto err_card;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(unit_dev, scs);
+=======
+	dev_set_drvdata(&unit->device, scs);
+>>>>>>> v3.18
 =======
 	dev_set_drvdata(&unit->device, scs);
 >>>>>>> v3.18
@@ -479,10 +504,13 @@ err_card:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int scs_remove(struct device *dev)
 {
 	struct scs *scs = dev_get_drvdata(dev);
 =======
+=======
+>>>>>>> v3.18
 static void scs_update(struct fw_unit *unit)
 {
 	struct scs *scs = dev_get_drvdata(&unit->device);
@@ -501,6 +529,9 @@ static void scs_update(struct fw_unit *unit)
 static void scs_remove(struct fw_unit *unit)
 {
 	struct scs *scs = dev_get_drvdata(&unit->device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	snd_card_disconnect(scs->card);
@@ -513,6 +544,7 @@ static void scs_remove(struct fw_unit *unit)
 	tasklet_kill(&scs->tasklet);
 
 	snd_card_free_when_closed(scs->card);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -527,6 +559,8 @@ static void scs_update(struct fw_unit *unit)
 			   scs->hss_handler.offset);
 	snd_fw_transaction(scs->unit, TCODE_WRITE_BLOCK_REQUEST,
 			   HSS1394_ADDRESS, &data, 8);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -558,15 +592,21 @@ static struct fw_driver scs_driver = {
 		.name   = KBUILD_MODNAME,
 		.bus    = &fw_bus_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.probe  = scs_probe,
 		.remove = scs_remove,
 	},
 	.update   = scs_update,
 =======
+=======
+>>>>>>> v3.18
 	},
 	.probe    = scs_probe,
 	.update   = scs_update,
 	.remove   = scs_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table = scs_id_table,
 };

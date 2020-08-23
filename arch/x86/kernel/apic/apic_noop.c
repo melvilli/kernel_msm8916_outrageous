@@ -16,7 +16,10 @@
 #include <linux/kernel.h>
 #include <linux/ctype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -94,6 +97,7 @@ static const struct cpumask *noop_target_cpus(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long noop_check_apicid_used(physid_mask_t *map, int apicid)
 {
 	return physid_isset(apicid, *map);
@@ -104,6 +108,8 @@ static unsigned long noop_check_apicid_present(int bit)
 	return physid_isset(bit, phys_cpu_present_map);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void noop_vector_allocation_domain(int cpu, struct cpumask *retmask,
@@ -141,8 +147,12 @@ struct apic apic_noop = {
 	.disable_esr			= 0,
 	.dest_logical			= APIC_DEST_LOGICAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.check_apicid_used		= noop_check_apicid_used,
 	.check_apicid_present		= noop_check_apicid_present,
+=======
+	.check_apicid_used		= default_check_apicid_used,
+>>>>>>> v3.18
 =======
 	.check_apicid_used		= default_check_apicid_used,
 >>>>>>> v3.18
@@ -153,13 +163,17 @@ struct apic apic_noop = {
 	.ioapic_phys_id_map		= default_ioapic_phys_id_map,
 	.setup_apic_routing		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= physid_set_mask_of_physid,
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.setup_portio_remap		= NULL,
 	.check_phys_apicid_present	= default_check_phys_apicid_present,
@@ -169,6 +183,12 @@ struct apic apic_noop = {
 
 	.mps_oem_check			= NULL,
 
+=======
+	.check_phys_apicid_present	= default_check_phys_apicid_present,
+
+	.phys_pkg_id			= noop_phys_pkg_id,
+
+>>>>>>> v3.18
 =======
 	.check_phys_apicid_present	= default_check_phys_apicid_present,
 
@@ -190,6 +210,7 @@ struct apic apic_noop = {
 	.wakeup_secondary_cpu		= noop_wakeup_secondary_cpu,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* should be safe */
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
@@ -197,6 +218,9 @@ struct apic apic_noop = {
 	.wait_for_init_deassert		= NULL,
 
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 =======
 	.wait_for_init_deassert		= false,
 >>>>>>> v3.18

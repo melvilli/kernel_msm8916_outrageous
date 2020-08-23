@@ -27,6 +27,7 @@ static inline int irq_canonicalize(int irq)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 
 struct irqaction;
@@ -126,10 +127,15 @@ extern void do_IRQ_no_affinity(unsigned int irq);
 #endif /* CONFIG_MIPS_MT_SMTC_IRQAFF */
 
 =======
+=======
+>>>>>>> v3.18
 asmlinkage void plat_irq_dispatch(void);
 
 extern void do_IRQ(unsigned int irq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void arch_init_irq(void);
 extern void spurious_interrupt(void);

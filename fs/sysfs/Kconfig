@@ -2,6 +2,10 @@ config SYSFS
 	bool "sysfs file system support" if EXPERT
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select KERNFS
+>>>>>>> v3.18
 =======
 	select KERNFS
 >>>>>>> v3.18

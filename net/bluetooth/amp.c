@@ -15,16 +15,22 @@
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/bluetooth/a2mp.h>
 #include <net/bluetooth/amp.h>
 #include <crypto/hash.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <crypto/hash.h>
 
 #include "a2mp.h"
 #include "amp.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Remote AMP Controllers interface */
 void amp_ctrl_get(struct amp_ctrl *ctrl)
@@ -119,16 +125,22 @@ struct hci_conn *phylink_add(struct hci_dev *hdev, struct amp_mgr *mgr,
 			     u8 remote_id, bool out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdaddr_t *dst = mgr->l2cap_conn->dst;
 	struct hci_conn *hcon;
 
 	hcon = hci_conn_add(hdev, AMP_LINK, 0, dst);
 =======
+=======
+>>>>>>> v3.18
 	bdaddr_t *dst = &mgr->l2cap_conn->hcon->dst;
 	struct hci_conn *hcon;
 	u8 role = out ? HCI_ROLE_MASTER : HCI_ROLE_SLAVE;
 
 	hcon = hci_conn_add(hdev, AMP_LINK, dst, role);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!hcon)
 		return NULL;
@@ -141,7 +153,10 @@ struct hci_conn *phylink_add(struct hci_dev *hdev, struct amp_mgr *mgr,
 	hcon->remote_id = remote_id;
 	hcon->amp_mgr = amp_mgr_get(mgr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hcon->out = out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -152,8 +167,13 @@ struct hci_conn *phylink_add(struct hci_dev *hdev, struct amp_mgr *mgr,
 static int hmac_sha256(u8 *key, u8 ksize, char *plaintext, u8 psize, u8 *output)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	struct crypto_shash *tfm;
+=======
+	struct crypto_shash *tfm;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct crypto_shash *tfm;
 	int ret;
@@ -173,6 +193,7 @@ static int hmac_sha256(u8 *key, u8 ksize, char *plaintext, u8 psize, u8 *output)
 		BT_DBG("crypto_ahash_setkey failed: err %d", ret);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct {
 			struct shash_desc shash;
 			char ctx[crypto_shash_descsize(tfm)];
@@ -183,6 +204,8 @@ static int hmac_sha256(u8 *key, u8 ksize, char *plaintext, u8 psize, u8 *output)
 
 		ret = crypto_shash_digest(&desc.shash, plaintext, psize,
 =======
+=======
+>>>>>>> v3.18
 		char desc[sizeof(struct shash_desc) +
 			crypto_shash_descsize(tfm)] CRYPTO_MINALIGN_ATTR;
 		struct shash_desc *shash = (struct shash_desc *)desc;
@@ -191,6 +214,9 @@ static int hmac_sha256(u8 *key, u8 ksize, char *plaintext, u8 psize, u8 *output)
 		shash->flags = CRYPTO_TFM_REQ_MAY_SLEEP;
 
 		ret = crypto_shash_digest(shash, plaintext, psize,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  output);
 	}
@@ -445,7 +471,12 @@ void amp_create_logical_link(struct l2cap_chan *chan)
 	struct hci_dev *hdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("chan %p hs_hcon %p dst %pMR", chan, hs_hcon, chan->conn->dst);
+=======
+	BT_DBG("chan %p hs_hcon %p dst %pMR", chan, hs_hcon,
+	       &chan->conn->hcon->dst);
+>>>>>>> v3.18
 =======
 	BT_DBG("chan %p hs_hcon %p dst %pMR", chan, hs_hcon,
 	       &chan->conn->hcon->dst);

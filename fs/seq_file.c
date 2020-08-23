@@ -37,11 +37,17 @@ static void *seq_buf_alloc(unsigned long size)
 	void *buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size > PAGE_SIZE)
 		buf = vmalloc(size);
 	else
 		buf = kmalloc(size, GFP_KERNEL | __GFP_NOWARN);
 
+=======
+	buf = kmalloc(size, GFP_KERNEL | __GFP_NOWARN);
+	if (!buf && size > PAGE_SIZE)
+		buf = vmalloc(size);
+>>>>>>> v3.18
 =======
 	buf = kmalloc(size, GFP_KERNEL | __GFP_NOWARN);
 	if (!buf && size > PAGE_SIZE)
@@ -228,10 +234,15 @@ ssize_t seq_read(struct file *file, char __user *buf, size_t size, loff_t *ppos)
 		buf += n;
 		copied += n;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!m->count) {
 			m->from = 0;
 			m->index++;
 		}
+=======
+		if (!m->count)
+			m->index++;
+>>>>>>> v3.18
 =======
 		if (!m->count)
 			m->index++;
@@ -967,7 +978,10 @@ struct hlist_node *seq_hlist_next_rcu(void *v,
 }
 EXPORT_SYMBOL(seq_hlist_next_rcu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * seq_hlist_start_precpu - start an iteration of a percpu hlist array
@@ -1022,4 +1036,7 @@ seq_hlist_next_percpu(void *v, struct hlist_head __percpu *head,
 	return NULL;
 }
 EXPORT_SYMBOL(seq_hlist_next_percpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -20,7 +20,11 @@ if STAGING_MEDIA
 
 # Please keep them in alphabetic order
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/staging/media/as102/Kconfig"
+=======
+source "drivers/staging/media/bcm2048/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/staging/media/bcm2048/Kconfig"
 >>>>>>> v3.18
@@ -32,9 +36,15 @@ source "drivers/staging/media/davinci_vpfe/Kconfig"
 source "drivers/staging/media/dt3155v4l/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/staging/media/go7007/Kconfig"
 
 source "drivers/staging/media/solo6x10/Kconfig"
+=======
+source "drivers/staging/media/omap24xx/Kconfig"
+
+source "drivers/staging/media/omap4iss/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/staging/media/omap24xx/Kconfig"
 

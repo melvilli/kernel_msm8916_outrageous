@@ -6,8 +6,11 @@
 #define __LINUX_BLK_TYPES_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLOCK
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -32,7 +35,10 @@ struct bio_vec {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BLOCK
 
 struct bvec_iter {
@@ -46,6 +52,9 @@ struct bvec_iter {
 						   current bvec */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * main unit of I/O for the block layer and lower layers (ie drivers and
@@ -53,8 +62,11 @@ struct bvec_iter {
  */
 struct bio {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t		bi_sector;	/* device address in 512 byte
 						   sectors */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct bio		*bi_next;	/* request queue link */
@@ -65,8 +77,12 @@ struct bio {
 						 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short		bi_vcnt;	/* how many bio_vec's */
 	unsigned short		bi_idx;		/* current index into bvl_vec */
+=======
+	struct bvec_iter	bi_iter;
+>>>>>>> v3.18
 =======
 	struct bvec_iter	bi_iter;
 >>>>>>> v3.18
@@ -77,8 +93,11 @@ struct bio {
 	unsigned int		bi_phys_segments;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		bi_size;	/* residual I/O count */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -89,6 +108,11 @@ struct bio {
 	unsigned int		bi_seg_back_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t		bi_remaining;
+
+>>>>>>> v3.18
 =======
 	atomic_t		bi_remaining;
 
@@ -105,6 +129,7 @@ struct bio {
 	struct cgroup_subsys_state *bi_css;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BLK_DEV_INTEGRITY)
 	struct bio_integrity_payload *bi_integrity;  /* data integrity */
 #endif
@@ -116,6 +141,8 @@ struct bio {
 	 */
 	struct inode		*bi_dio_inode;
 =======
+=======
+>>>>>>> v3.18
 	union {
 #if defined(CONFIG_BLK_DEV_INTEGRITY)
 		struct bio_integrity_payload *bi_integrity; /* data integrity */
@@ -123,6 +150,9 @@ struct bio {
 	};
 
 	unsigned short		bi_vcnt;	/* how many bio_vec's */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -130,7 +160,11 @@ struct bio {
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		bi_max_vecs;	/* max bvl_vecs we can hold */
+=======
+	unsigned short		bi_max_vecs;	/* max bvl_vecs we can hold */
+>>>>>>> v3.18
 =======
 	unsigned short		bi_max_vecs;	/* max bvl_vecs we can hold */
 >>>>>>> v3.18
@@ -164,10 +198,15 @@ struct bio {
 #define BIO_EOPNOTSUPP	7	/* not supported */
 #define BIO_NULL_MAPPED 8	/* contains invalid user pages */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BIO_FS_INTEGRITY 9	/* fs owns integrity data, not block layer */
 #define BIO_QUIET	10	/* Make BIO Quiet */
 #define BIO_MAPPED_INTEGRITY 11/* integrity metadata has been remapped */
 #define BIO_SNAP_STABLE	12	/* bio data must be snapshotted during write */
+=======
+#define BIO_QUIET	9	/* Make BIO Quiet */
+#define BIO_SNAP_STABLE	10	/* bio data must be snapshotted during write */
+>>>>>>> v3.18
 =======
 #define BIO_QUIET	9	/* Make BIO Quiet */
 #define BIO_SNAP_STABLE	10	/* bio data must be snapshotted during write */
@@ -181,6 +220,7 @@ struct bio {
 #define BIO_OWNS_VEC	13	/* bio_free() should free bvec */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Added for Req based dm which need to perform post processing. This flag
  * ensures blk_update_request does not free the bios or request, this is done
@@ -188,6 +228,8 @@ struct bio {
  */
 #define BIO_DONTFREE 14
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define bio_flagged(bio, flag)	((bio)->bi_flags & (1 << (flag)))
@@ -223,6 +265,10 @@ enum rq_flag_bits {
 
 	__REQ_NOIDLE,		/* don't anticipate more IO after this one */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__REQ_INTEGRITY,	/* I/O includes block integrity payload */
+>>>>>>> v3.18
 =======
 	__REQ_INTEGRITY,	/* I/O includes block integrity payload */
 >>>>>>> v3.18
@@ -236,7 +282,11 @@ enum rq_flag_bits {
 
 	/* request only flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__REQ_SORTED = __REQ_RAHEAD, /* elevator knows about this request */
+=======
+	__REQ_SORTED,		/* elevator knows about this request */
+>>>>>>> v3.18
 =======
 	__REQ_SORTED,		/* elevator knows about this request */
 >>>>>>> v3.18
@@ -249,9 +299,13 @@ enum rq_flag_bits {
 	__REQ_FAILED,		/* set if the request failed */
 	__REQ_QUIET,		/* don't worry about errors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__REQ_PREEMPT,		/* set for "ide_preempt" requests and also
 				   for requests for which the SCSI "quiesce"
 				   state must be ignored. */
+=======
+	__REQ_PREEMPT,		/* set for "ide_preempt" requests */
+>>>>>>> v3.18
 =======
 	__REQ_PREEMPT,		/* set for "ide_preempt" requests */
 >>>>>>> v3.18
@@ -260,6 +314,7 @@ enum rq_flag_bits {
 	__REQ_FLUSH_SEQ,	/* request for flush sequence */
 	__REQ_IO_STAT,		/* account I/O stat */
 	__REQ_MIXED_MERGE,	/* merge of different types, fail separately */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__REQ_KERNEL, 		/* direct IO to kernel pages */
 	__REQ_PM,		/* runtime pm request */
@@ -279,6 +334,8 @@ enum rq_flag_bits {
 #define REQ_URGENT		(1 << __REQ_URGENT)
 #define REQ_NOIDLE		(1 << __REQ_NOIDLE)
 =======
+=======
+>>>>>>> v3.18
 	__REQ_PM,		/* runtime pm request */
 	__REQ_HASHED,		/* on IO scheduler merge hash */
 	__REQ_MQ_INFLIGHT,	/* track inflight for MQ */
@@ -296,6 +353,9 @@ enum rq_flag_bits {
 #define REQ_WRITE_SAME		(1ULL << __REQ_WRITE_SAME)
 #define REQ_NOIDLE		(1ULL << __REQ_NOIDLE)
 #define REQ_INTEGRITY		(1ULL << __REQ_INTEGRITY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define REQ_FAILFAST_MASK \
@@ -304,7 +364,11 @@ enum rq_flag_bits {
 	(REQ_WRITE | REQ_FAILFAST_MASK | REQ_SYNC | REQ_META | REQ_PRIO | \
 	 REQ_DISCARD | REQ_WRITE_SAME | REQ_NOIDLE | REQ_FLUSH | REQ_FUA | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 REQ_SECURE)
+=======
+	 REQ_SECURE | REQ_INTEGRITY)
+>>>>>>> v3.18
 =======
 	 REQ_SECURE | REQ_INTEGRITY)
 >>>>>>> v3.18
@@ -316,6 +380,7 @@ enum rq_flag_bits {
 #define REQ_NOMERGE_FLAGS \
 	(REQ_NOMERGE | REQ_STARTED | REQ_SOFTBARRIER | REQ_FLUSH | REQ_FUA)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MMC_REQ_NOREINSERT_MASK (REQ_URGENT | REQ_FUA | REQ_FLUSH)
 
@@ -343,6 +408,8 @@ enum rq_flag_bits {
 #define REQ_KERNEL		(1 << __REQ_KERNEL)
 #define REQ_PM			(1 << __REQ_PM)
 =======
+=======
+>>>>>>> v3.18
 #define REQ_RAHEAD		(1ULL << __REQ_RAHEAD)
 #define REQ_THROTTLED		(1ULL << __REQ_THROTTLED)
 
@@ -367,6 +434,9 @@ enum rq_flag_bits {
 #define REQ_PM			(1ULL << __REQ_PM)
 #define REQ_HASHED		(1ULL << __REQ_HASHED)
 #define REQ_MQ_INFLIGHT		(1ULL << __REQ_MQ_INFLIGHT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __LINUX_BLK_TYPES_H */

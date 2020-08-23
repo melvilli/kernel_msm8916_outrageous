@@ -35,6 +35,7 @@
 #define _AU1000_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef _LANGUAGE_ASSEMBLY
 
@@ -1570,6 +1571,8 @@ struct au1k_irda_platform_data {
 #define PCI_TIMEOUT_RETRIES(x)	(((x) & 0xff) << 8)	/* max retries */
 #define PCI_TIMEOUT_TO(x)	((x) & 0xff)	/* target ready timeout */
 =======
+=======
+>>>>>>> v3.18
 /* SOC Interrupt numbers */
 /* Au1000-style (IC0/1): 2 controllers with 32 sources each */
 #define AU1000_INTC0_INT_BASE	(MIPS_CPU_IRQ_BASE + 8)
@@ -2743,6 +2746,9 @@ enum soc_au1200_ints {
 };
 
 #endif /* !defined (_LANGUAGE_ASSEMBLY) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

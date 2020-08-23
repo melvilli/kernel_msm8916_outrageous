@@ -28,8 +28,11 @@ config ACER_WMI
 	select INPUT_SPARSEKMAP
 	# Acer WMI depends on ACPI_VIDEO when ACPI is enabled
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# but for select to work, need to select ACPI_VIDEO's dependencies, ick
         select VIDEO_OUTPUT_CONTROL if ACPI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         select ACPI_VIDEO if ACPI
@@ -59,7 +62,10 @@ config ACERHDF
 	  here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ALIENWARE_WMI
 	tristate "Alienware Special feature control"
 	depends on ACPI
@@ -72,6 +78,9 @@ config ALIENWARE_WMI
 	 zones on Alienware machines that don't contain a dedicated AlienFX
 	 USB MCU such as the X51 and X51-R2.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ASUS_LAPTOP
 	tristate "Asus Laptop Extras"
@@ -98,6 +107,7 @@ config ASUS_LAPTOP
 	  If you have an ACPI-compatible ASUS laptop, say Y or M here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CHROMEOS_LAPTOP
 	tristate "Chrome OS Laptop"
 	depends on I2C
@@ -109,6 +119,8 @@ config CHROMEOS_LAPTOP
 	  If you have a supported Chromebook, choose Y or M here.
 	  The module will be called chromeos_laptop.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config DELL_LAPTOP
@@ -125,7 +137,11 @@ config DELL_LAPTOP
 	---help---
 	This driver adds support for rfkill and backlight control to Dell
 <<<<<<< HEAD
+<<<<<<< HEAD
 	laptops.
+=======
+	laptops (except for some models covered by the Compal driver).
+>>>>>>> v3.18
 =======
 	laptops (except for some models covered by the Compal driver).
 >>>>>>> v3.18
@@ -154,7 +170,10 @@ config DELL_WMI_AIO
 	  be called dell-wmi-aio.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DELL_SMO8800
 	tristate "Dell Latitude freefall driver (ACPI SMO8800/SMO8810)"
 	depends on ACPI
@@ -165,6 +184,9 @@ config DELL_SMO8800
 	  To compile this driver as a module, choose M here: the module will
 	  be called dell-smo8800.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config FUJITSU_LAPTOP
@@ -215,6 +237,10 @@ config AMILO_RFKILL
 	tristate "Fujitsu-Siemens Amilo rfkill support"
 	depends on RFKILL
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on SERIO_I8042
+>>>>>>> v3.18
 =======
 	depends on SERIO_I8042
 >>>>>>> v3.18
@@ -235,6 +261,10 @@ config HP_ACCEL
 	tristate "HP laptop accelerometer"
 	depends on INPUT && ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on SERIO_I8042
+>>>>>>> v3.18
 =======
 	depends on SERIO_I8042
 >>>>>>> v3.18
@@ -254,7 +284,10 @@ config HP_ACCEL
 	  be called hp_accel.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HP_WIRELESS
 	tristate "HP wireless button"
 	depends on ACPI
@@ -266,6 +299,9 @@ config HP_WIRELESS
 	 To compile this driver as a module, choose M here: the module will
 	 be called hp-wireless.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HP_WMI
 	tristate "HP WMI extras"
@@ -315,7 +351,11 @@ config PANASONIC_LAPTOP
 
 config COMPAL_LAPTOP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Compal Laptop Extras"
+=======
+	tristate "Compal (and others) Laptop Extras"
+>>>>>>> v3.18
 =======
 	tristate "Compal (and others) Laptop Extras"
 >>>>>>> v3.18
@@ -325,6 +365,7 @@ config COMPAL_LAPTOP
 	depends on HWMON
 	depends on POWER_SUPPLY
 	---help---
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  This is a driver for laptops built by Compal:
 
@@ -337,6 +378,8 @@ config COMPAL_LAPTOP
 
 	  If you have an Compal FL9x/IFL9x/FT00 laptop, say Y or M here.
 =======
+=======
+>>>>>>> v3.18
 	  This is a driver for laptops built by Compal, and some models by
 	  other brands (e.g. Dell, Toshiba).
 
@@ -345,6 +388,9 @@ config COMPAL_LAPTOP
 
 	  For a (possibly incomplete) list of supported laptops, please refer
 	  to: Documentation/platform/x86-laptop-drivers.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SONY_LAPTOP
@@ -579,6 +625,10 @@ config ASUS_WMI
 	depends on RFKILL || RFKILL = n
 	depends on HOTPLUG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ACPI_VIDEO || ACPI_VIDEO = n
+>>>>>>> v3.18
 =======
 	depends on ACPI_VIDEO || ACPI_VIDEO = n
 >>>>>>> v3.18
@@ -600,7 +650,11 @@ config ASUS_NB_WMI
 	  like wireless radio and bluetooth control, leds, hotkeys, backlight...
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  For more informations, see
+=======
+	  For more information, see
+>>>>>>> v3.18
 =======
 	  For more information, see
 >>>>>>> v3.18
@@ -617,7 +671,11 @@ config EEEPC_WMI
 	  like wireless radio and bluetooth control, leds, hotkeys, backlight...
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  For more informations, see
+=======
+	  For more information, see
+>>>>>>> v3.18
 =======
 	  For more information, see
 >>>>>>> v3.18
@@ -679,6 +737,10 @@ config ACPI_TOSHIBA
 	depends on INPUT
 	depends on RFKILL || RFKILL = n
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on SERIO_I8042 || SERIO_I8042 = n
+>>>>>>> v3.18
 =======
 	depends on SERIO_I8042 || SERIO_I8042 = n
 >>>>>>> v3.18
@@ -723,7 +785,10 @@ config TOSHIBA_BT_RFKILL
 	  RFKill switch (such as the Portege R500), say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TOSHIBA_HAPS
 	tristate "Toshiba HDD Active Protection Sensor"
 	depends on ACPI
@@ -743,6 +808,9 @@ config TOSHIBA_HAPS
 	  If you have a recent Toshiba laptop with a built-in accelerometer
 	  device, say Y.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ACPI_CMPC
 	tristate "CMPC Laptop Extras"
@@ -825,7 +893,11 @@ config IBM_RTL
 config XO1_RFKILL
 	tristate "OLPC XO-1 software RF kill switch"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on OLPC
+=======
+	depends on OLPC || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on OLPC || COMPILE_TEST
 >>>>>>> v3.18
@@ -837,6 +909,10 @@ config XO1_RFKILL
 config XO15_EBOOK
 	tristate "OLPC XO-1.5 ebook switch"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on OLPC || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on OLPC || COMPILE_TEST
 >>>>>>> v3.18
@@ -852,6 +928,10 @@ config SAMSUNG_LAPTOP
 	depends on X86
 	depends on RFKILL || RFKILL = n
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ACPI_VIDEO || ACPI_VIDEO = n
+>>>>>>> v3.18
 =======
 	depends on ACPI_VIDEO || ACPI_VIDEO = n
 >>>>>>> v3.18
@@ -888,7 +968,11 @@ config INTEL_OAKTRAIL
 config SAMSUNG_Q10
 	tristate "Samsung Q10 Extras"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SERIO_I8042
+=======
+	depends on ACPI
+>>>>>>> v3.18
 =======
 	depends on ACPI
 >>>>>>> v3.18
@@ -911,7 +995,10 @@ config APPLE_GMUX
 	  control is supported by the driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTEL_RST
         tristate "Intel Rapid Start Technology Driver"
 	depends on ACPI
@@ -938,6 +1025,9 @@ config INTEL_SMARTCONNECT
 	  This driver checks to determine whether the device has Intel Smart
 	  Connect enabled, and if so disables it.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PVPANIC
 	tristate "pvpanic device support"

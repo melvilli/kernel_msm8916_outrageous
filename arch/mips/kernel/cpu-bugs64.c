@@ -7,6 +7,10 @@
  * 2 of the License, or (at your option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -172,6 +176,7 @@ static inline void check_mult_sh(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static volatile int daddi_ov __cpuinitdata;
 
 asmlinkage void __init do_daddi_ov(struct pt_regs *regs)
@@ -179,6 +184,8 @@ asmlinkage void __init do_daddi_ov(struct pt_regs *regs)
 	daddi_ov = 1;
 	regs->cp0_epc += 4;
 =======
+=======
+>>>>>>> v3.18
 static volatile int daddi_ov;
 
 asmlinkage void __init do_daddi_ov(struct pt_regs *regs)
@@ -189,6 +196,9 @@ asmlinkage void __init do_daddi_ov(struct pt_regs *regs)
 	daddi_ov = 1;
 	regs->cp0_epc += 4;
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

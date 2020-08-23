@@ -727,7 +727,11 @@ bail:
  * @pkeys: the PKEY table
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys)
+=======
+static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys, u8 port)
+>>>>>>> v3.18
 =======
 static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys, u8 port)
 >>>>>>> v3.18
@@ -764,6 +768,10 @@ static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys, u8 port)
 	if (changed) {
 		u64 pkey;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct ib_event event;
+>>>>>>> v3.18
 =======
 		struct ib_event event;
 >>>>>>> v3.18
@@ -777,12 +785,18 @@ static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys, u8 port)
 		ipath_write_kreg(dd, dd->ipath_kregs->kr_partitionkey,
 				 pkey);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		event.event = IB_EVENT_PKEY_CHANGE;
 		event.device = &dd->verbs_dev->ibdev;
 		event.element.port_num = port;
 		ib_dispatch_event(&event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -790,7 +804,11 @@ static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys, u8 port)
 
 static int recv_subn_set_pkeytable(struct ib_smp *smp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct ib_device *ibdev)
+=======
+				   struct ib_device *ibdev, u8 port)
+>>>>>>> v3.18
 =======
 				   struct ib_device *ibdev, u8 port)
 >>>>>>> v3.18
@@ -805,7 +823,11 @@ static int recv_subn_set_pkeytable(struct ib_smp *smp,
 		q[i] = be16_to_cpu(p[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (startpx != 0 || set_pkeys(dev->dd, q) != 0)
+=======
+	if (startpx != 0 || set_pkeys(dev->dd, q, port) != 0)
+>>>>>>> v3.18
 =======
 	if (startpx != 0 || set_pkeys(dev->dd, q, port) != 0)
 >>>>>>> v3.18
@@ -1367,7 +1389,11 @@ static int process_subn(struct ib_device *ibdev, int mad_flags,
 			goto bail;
 		case IB_SMP_ATTR_PKEY_TABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = recv_subn_set_pkeytable(smp, ibdev);
+=======
+			ret = recv_subn_set_pkeytable(smp, ibdev, port_num);
+>>>>>>> v3.18
 =======
 			ret = recv_subn_set_pkeytable(smp, ibdev, port_num);
 >>>>>>> v3.18

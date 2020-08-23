@@ -8,6 +8,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -144,9 +149,14 @@ static ssize_t withdraw_store(struct gfs2_sbd *sdp, const char *buf, size_t len)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfs2_lm_withdraw(sdp,
 		"GFS2: fsid=%s: withdrawing from cluster at user's request\n",
 		sdp->sd_fsname);
+=======
+	gfs2_lm_withdraw(sdp, "withdrawing from cluster at user's request\n");
+
+>>>>>>> v3.18
 =======
 	gfs2_lm_withdraw(sdp, "withdrawing from cluster at user's request\n");
 
@@ -250,8 +260,13 @@ static ssize_t demote_rq_store(struct gfs2_sbd *sdp, const char *buf, size_t len
 	if (gltype > LM_TYPE_JOURNAL)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gltype == LM_TYPE_NONDISK && glnum == GFS2_TRANS_LOCK)
 		glops = &gfs2_trans_glops;
+=======
+	if (gltype == LM_TYPE_NONDISK && glnum == GFS2_FREEZE_LOCK)
+		glops = &gfs2_freeze_glops;
+>>>>>>> v3.18
 =======
 	if (gltype == LM_TYPE_NONDISK && glnum == GFS2_FREEZE_LOCK)
 		glops = &gfs2_freeze_glops;
@@ -422,6 +437,12 @@ int gfs2_recover_set(struct gfs2_sbd *sdp, unsigned jid)
 	int rv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Wait for our primary journal to be initialized */
+	wait_for_completion(&sdp->sd_journal_ready);
+
+>>>>>>> v3.18
 =======
 	/* Wait for our primary journal to be initialized */
 	wait_for_completion(&sdp->sd_journal_ready);
@@ -609,7 +630,10 @@ TUNE_ATTR(complain_secs, 0);
 TUNE_ATTR(statfs_slow, 0);
 TUNE_ATTR(new_files_jdata, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 TUNE_ATTR(quota_simul_sync, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 TUNE_ATTR(statfs_quantum, 1);
@@ -622,7 +646,10 @@ static struct attribute *tune_attrs[] = {
 	&tune_attr_complain_secs.attr,
 	&tune_attr_statfs_slow.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tune_attr_quota_simul_sync.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&tune_attr_statfs_quantum.attr,

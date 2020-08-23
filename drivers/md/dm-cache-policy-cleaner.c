@@ -435,7 +435,11 @@ static struct dm_cache_policy_type wb_policy_type = {
 	.name = "cleaner",
 	.version = {1, 0, 0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hint_size = 4,
+=======
+	.hint_size = 0,
+>>>>>>> v3.18
 =======
 	.hint_size = 0,
 >>>>>>> v3.18

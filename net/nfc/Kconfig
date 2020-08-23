@@ -15,7 +15,10 @@ menuconfig NFC
 	  be called nfc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NFC_DIGITAL
 	depends on NFC
 	select CRC_CCITT
@@ -30,6 +33,9 @@ config NFC_DIGITAL
 	  To compile this support as a module, choose M here: the module will
 	  be called nfc_digital.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "net/nfc/nci/Kconfig"
 source "net/nfc/hci/Kconfig"

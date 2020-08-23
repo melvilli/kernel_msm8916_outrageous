@@ -38,7 +38,10 @@
 #include <linux/oom.h>
 #include <linux/numa.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/show_mem_notifier.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -228,9 +231,12 @@ static unsigned int ksm_thread_pages_to_scan = 100;
 static unsigned int ksm_thread_sleep_millisecs = 20;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Boolean to indicate whether to use deferred timer or not */
 static bool use_deferred_timer;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_NUMA
@@ -247,7 +253,11 @@ static int ksm_nr_node_ids = 1;
 #define KSM_RUN_UNMERGE	2
 #define KSM_RUN_OFFLINE	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long ksm_run = KSM_RUN_MERGE;
+=======
+static unsigned long ksm_run = KSM_RUN_STOP;
+>>>>>>> v3.18
 =======
 static unsigned long ksm_run = KSM_RUN_STOP;
 >>>>>>> v3.18
@@ -261,6 +271,7 @@ static DEFINE_SPINLOCK(ksm_mmlist_lock);
 		sizeof(struct __struct), __alignof__(struct __struct),\
 		(__flags), NULL)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ksm_show_mem_notifier(struct notifier_block *nb,
 				unsigned long action,
@@ -276,6 +287,8 @@ static struct notifier_block ksm_show_mem_notifier_block = {
 	.notifier_call = ksm_show_mem_notifier,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init ksm_slab_init(void)
@@ -315,8 +328,12 @@ static inline struct rmap_item *alloc_rmap_item(void)
 	struct rmap_item *rmap_item;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rmap_item = kmem_cache_zalloc(rmap_item_cache, GFP_KERNEL |
 						__GFP_NORETRY | __GFP_NOWARN);
+=======
+	rmap_item = kmem_cache_zalloc(rmap_item_cache, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rmap_item = kmem_cache_zalloc(rmap_item_cache, GFP_KERNEL);
 >>>>>>> v3.18
@@ -413,7 +430,11 @@ static int break_ksm(struct vm_area_struct *vma, unsigned long addr)
 			ret = VM_FAULT_WRITE;
 		put_page(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (!(ret & (VM_FAULT_WRITE | VM_FAULT_SIGBUS | VM_FAULT_SIGSEGV | VM_FAULT_OOM)));
+=======
+	} while (!(ret & (VM_FAULT_WRITE | VM_FAULT_SIGBUS | VM_FAULT_OOM)));
+>>>>>>> v3.18
 =======
 	} while (!(ret & (VM_FAULT_WRITE | VM_FAULT_SIGBUS | VM_FAULT_OOM)));
 >>>>>>> v3.18
@@ -986,7 +1007,10 @@ static int replace_page(struct vm_area_struct *vma, struct page *page,
 	if (!pmd)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(pmd_trans_huge(*pmd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1750,6 +1774,7 @@ static void ksm_do_scan(unsigned int scan_npages)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void process_timeout(unsigned long __data)
 {
 	wake_up_process((struct task_struct *)__data);
@@ -1787,6 +1812,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ksmd_should_run(void)
 {
 	return (ksm_run & KSM_RUN_MERGE) && !list_empty(&ksm_mm_head.mm_list);
@@ -1808,11 +1835,15 @@ static int ksm_scan_thread(void *nothing)
 
 		if (ksmd_should_run()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (use_deferred_timer)
 				deferred_schedule_timeout(
 				msecs_to_jiffies(ksm_thread_sleep_millisecs));
 			else
 				schedule_timeout_interruptible(
+=======
+			schedule_timeout_interruptible(
+>>>>>>> v3.18
 =======
 			schedule_timeout_interruptible(
 >>>>>>> v3.18
@@ -1981,6 +2012,7 @@ struct page *ksm_might_need_to_copy(struct page *page,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int page_referenced_ksm(struct page *page, struct mem_cgroup *memcg,
 			unsigned long *vm_flags)
 {
@@ -1997,6 +2029,8 @@ int page_referenced_ksm(struct page *page, struct mem_cgroup *memcg,
 	if (!stable_node)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 int rmap_walk_ksm(struct page *page, struct rmap_walk_control *rwc)
 {
 	struct stable_node *stable_node;
@@ -2015,6 +2049,9 @@ int rmap_walk_ksm(struct page *page, struct rmap_walk_control *rwc)
 	stable_node = page_stable_node(page);
 	if (!stable_node)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 again:
 	hlist_for_each_entry(rmap_item, &stable_node->hlist, hlist) {
@@ -2038,6 +2075,7 @@ again:
 			if ((rmap_item->mm == vma->vm_mm) == search_new_forks)
 				continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (memcg && !mm_match_cgroup(vma->vm_mm, memcg))
 				continue;
@@ -2154,6 +2192,8 @@ again:
 			ret = rmap_one(page, vma, rmap_item->address, arg);
 			if (ret != SWAP_AGAIN) {
 =======
+=======
+>>>>>>> v3.18
 			if (rwc->invalid_vma && rwc->invalid_vma(vma, rwc->arg))
 				continue;
 
@@ -2164,6 +2204,9 @@ again:
 				goto out;
 			}
 			if (rwc->done && rwc->done(page)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				anon_vma_unlock_read(anon_vma);
 				goto out;
@@ -2178,6 +2221,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MIGRATION
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MIGRATION
 >>>>>>> v3.18
@@ -2185,6 +2232,7 @@ void ksm_migrate_page(struct page *newpage, struct page *oldpage)
 {
 	struct stable_node *stable_node;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(oldpage));
 	VM_BUG_ON(!PageLocked(newpage));
@@ -2194,6 +2242,8 @@ void ksm_migrate_page(struct page *newpage, struct page *oldpage)
 	if (stable_node) {
 		VM_BUG_ON(stable_node->kpfn != page_to_pfn(oldpage));
 =======
+=======
+>>>>>>> v3.18
 	VM_BUG_ON_PAGE(!PageLocked(oldpage), oldpage);
 	VM_BUG_ON_PAGE(!PageLocked(newpage), newpage);
 	VM_BUG_ON_PAGE(newpage->mapping != oldpage->mapping, newpage);
@@ -2201,6 +2251,9 @@ void ksm_migrate_page(struct page *newpage, struct page *oldpage)
 	stable_node = page_stable_node(newpage);
 	if (stable_node) {
 		VM_BUG_ON_PAGE(stable_node->kpfn != page_to_pfn(oldpage), oldpage);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stable_node->kpfn = page_to_pfn(newpage);
 		/*
@@ -2217,6 +2270,7 @@ void ksm_migrate_page(struct page *newpage, struct page *oldpage)
 
 #ifdef CONFIG_MEMORY_HOTREMOVE
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int just_wait(void *word)
 {
 	schedule();
@@ -2225,13 +2279,19 @@ static int just_wait(void *word)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void wait_while_offlining(void)
 {
 	while (ksm_run & KSM_RUN_OFFLINE) {
 		mutex_unlock(&ksm_thread_mutex);
 		wait_on_bit(&ksm_run, ilog2(KSM_RUN_OFFLINE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				just_wait, TASK_UNINTERRUPTIBLE);
+=======
+			    TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 			    TASK_UNINTERRUPTIBLE);
 >>>>>>> v3.18
@@ -2346,7 +2406,11 @@ static ssize_t sleep_millisecs_store(struct kobject *kobj,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &msecs);
+=======
+	err = kstrtoul(buf, 10, &msecs);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(buf, 10, &msecs);
 >>>>>>> v3.18
@@ -2373,7 +2437,11 @@ static ssize_t pages_to_scan_store(struct kobject *kobj,
 	unsigned long nr_pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &nr_pages);
+=======
+	err = kstrtoul(buf, 10, &nr_pages);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(buf, 10, &nr_pages);
 >>>>>>> v3.18
@@ -2399,7 +2467,11 @@ static ssize_t run_store(struct kobject *kobj, struct kobj_attribute *attr,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 10, &flags);
+=======
+	err = kstrtoul(buf, 10, &flags);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(buf, 10, &flags);
 >>>>>>> v3.18
@@ -2439,6 +2511,7 @@ static ssize_t run_store(struct kobject *kobj, struct kobj_attribute *attr,
 KSM_ATTR(run);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t deferred_timer_show(struct kobject *kobj,
 				    struct kobj_attribute *attr, char *buf)
 {
@@ -2459,6 +2532,8 @@ static ssize_t deferred_timer_store(struct kobject *kobj,
 }
 KSM_ATTR(deferred_timer);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_NUMA
@@ -2496,8 +2571,13 @@ static ssize_t merge_across_nodes_store(struct kobject *kobj,
 			 * MAXSMP NODES_SHIFT 10 will use 16kB.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buf = kcalloc(nr_node_ids + nr_node_ids,
 				sizeof(*buf), GFP_KERNEL | __GFP_ZERO);
+=======
+			buf = kcalloc(nr_node_ids + nr_node_ids, sizeof(*buf),
+				      GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			buf = kcalloc(nr_node_ids + nr_node_ids, sizeof(*buf),
 				      GFP_KERNEL);
@@ -2579,7 +2659,10 @@ static struct attribute *ksm_attrs[] = {
 	&pages_volatile_attr.attr,
 	&full_scans_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&deferred_timer_attr.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_NUMA
@@ -2606,7 +2689,11 @@ static int __init ksm_init(void)
 	ksm_thread = kthread_run(ksm_scan_thread, NULL, "ksmd");
 	if (IS_ERR(ksm_thread)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ksm: creating kthread failed\n");
+=======
+		pr_err("ksm: creating kthread failed\n");
+>>>>>>> v3.18
 =======
 		pr_err("ksm: creating kthread failed\n");
 >>>>>>> v3.18
@@ -2618,7 +2705,11 @@ static int __init ksm_init(void)
 	err = sysfs_create_group(mm_kobj, &ksm_attr_group);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ksm: register sysfs failed\n");
+=======
+		pr_err("ksm: register sysfs failed\n");
+>>>>>>> v3.18
 =======
 		pr_err("ksm: register sysfs failed\n");
 >>>>>>> v3.18
@@ -2635,8 +2726,11 @@ static int __init ksm_init(void)
 	hotplug_memory_notifier(ksm_memory_callback, 100);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	show_mem_notifier_register(&ksm_show_mem_notifier_block);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2647,7 +2741,11 @@ out:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(ksm_init)
+=======
+subsys_initcall(ksm_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(ksm_init);
 >>>>>>> v3.18

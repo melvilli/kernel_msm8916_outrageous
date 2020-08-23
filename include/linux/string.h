@@ -42,7 +42,11 @@ extern int strncmp(const char *,const char *,__kernel_size_t);
 #endif
 #ifndef __HAVE_ARCH_STRNICMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int strnicmp(const char *, const char *, __kernel_size_t);
+=======
+#define strnicmp strncasecmp
+>>>>>>> v3.18
 =======
 #define strnicmp strncasecmp
 >>>>>>> v3.18
@@ -57,6 +61,12 @@ extern int strncasecmp(const char *s1, const char *s2, size_t n);
 extern char * strchr(const char *,int);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __HAVE_ARCH_STRCHRNUL
+extern char * strchrnul(const char *,int);
+#endif
+>>>>>>> v3.18
 =======
 #ifndef __HAVE_ARCH_STRCHRNUL
 extern char * strchrnul(const char *,int);

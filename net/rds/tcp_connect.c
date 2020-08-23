@@ -107,7 +107,10 @@ int rds_tcp_conn_connect(struct rds_connection *conn)
 	ret = sock->ops->connect(sock, (struct sockaddr *)&dest, sizeof(dest),
 				 O_NONBLOCK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -115,11 +118,17 @@ int rds_tcp_conn_connect(struct rds_connection *conn)
 	if (ret == -EINPROGRESS)
 		ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ret == 0)
 		sock = NULL;
 	else
 		rds_tcp_restore_callbacks(sock, conn->c_transport_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:

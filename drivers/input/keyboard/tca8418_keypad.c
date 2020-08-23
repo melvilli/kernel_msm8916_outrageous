@@ -275,7 +275,10 @@ static int tca8418_keypad_probe(struct i2c_client *client,
 	int irq;
 	int error, row_shift, max_keys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long trigger = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -291,7 +294,10 @@ static int tca8418_keypad_probe(struct i2c_client *client,
 		rep  = pdata->rep;
 		irq_is_gpio = pdata->irq_is_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		trigger = IRQF_TRIGGER_FALLING;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -369,7 +375,13 @@ static int tca8418_keypad_probe(struct i2c_client *client,
 
 	error = devm_request_threaded_irq(dev, irq, NULL, tca8418_irq_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  trigger | IRQF_SHARED | IRQF_ONESHOT,
+=======
+					  IRQF_TRIGGER_FALLING |
+						IRQF_SHARED |
+						IRQF_ONESHOT,
+>>>>>>> v3.18
 =======
 					  IRQF_TRIGGER_FALLING |
 						IRQF_SHARED |
@@ -405,7 +417,10 @@ static const struct of_device_id tca8418_dt_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, tca8418_dt_ids);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * The device tree based i2c loader looks for
@@ -413,6 +428,9 @@ MODULE_DEVICE_TABLE(of, tca8418_dt_ids);
  * and therefore we need an alias to be found.
  */
 MODULE_ALIAS("i2c:tca8418");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

@@ -164,8 +164,12 @@ static int ssb_hcd_probe(struct ssb_device *dev,
 	/* TODO: Probably need checks here; is the core connected? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma_set_mask(dev->dma_dev, DMA_BIT_MASK(32)) ||
 	    dma_set_coherent_mask(dev->dma_dev, DMA_BIT_MASK(32)))
+=======
+	if (dma_set_mask_and_coherent(dev->dma_dev, DMA_BIT_MASK(32)))
+>>>>>>> v3.18
 =======
 	if (dma_set_mask_and_coherent(dev->dma_dev, DMA_BIT_MASK(32)))
 >>>>>>> v3.18

@@ -31,6 +31,10 @@
 #include <linux/percpu.h>
 #include <asm/probes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/code-patching.h>
+>>>>>>> v3.18
 =======
 #include <asm/code-patching.h>
 >>>>>>> v3.18
@@ -61,9 +65,15 @@ typedef ppc_opcode_t kprobe_opcode_t;
 			colon++;					\
 			if (*colon != '\0' && *colon != '.')		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				addr = *(kprobe_opcode_t **)addr;	\
 		} else if (name[0] != '.')				\
 			addr = *(kprobe_opcode_t **)addr;		\
+=======
+				addr = (kprobe_opcode_t *)ppc_function_entry(addr); \
+		} else if (name[0] != '.')				\
+			addr = (kprobe_opcode_t *)ppc_function_entry(addr); \
+>>>>>>> v3.18
 =======
 				addr = (kprobe_opcode_t *)ppc_function_entry(addr); \
 		} else if (name[0] != '.')				\

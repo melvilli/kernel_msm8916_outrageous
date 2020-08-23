@@ -4,10 +4,13 @@ The device node for Tegra SOC USB PHY:
 
 Required properties :
 <<<<<<< HEAD
+<<<<<<< HEAD
  - compatible : Should be "nvidia,tegra20-usb-phy".
  - reg : Address and length of the register set for the USB PHY interface.
  - phy_type : Should be one of "ulpi" or "utmi".
 =======
+=======
+>>>>>>> v3.18
  - compatible : Should be "nvidia,tegra<chip>-usb-phy".
  - reg : Defines the following set of registers, in the order listed:
    - The PHY's own register set.
@@ -31,13 +34,19 @@ Required properties :
    - usb: The PHY's own reset signal.
    - utmi-pads: The reset of the PHY containing the chip-wide UTMI pad control
      registers. Required even if phy_type == ulpi.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Required properties for phy_type == ulpi:
   - nvidia,phy-reset-gpio : The GPIO used to reset the PHY.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Required PHY timing params for utmi phy, for all chips:
   - nvidia,hssync-start-delay : Number of 480 Mhz clock cycles to wait before
     start of sync launches RxActive
@@ -58,14 +67,20 @@ Required PHY timing params for utmi phy, only on Tegra30 and above:
   - nvidia,hssquelch-level : HS squelch detector level.
   - nvidia,hsdiscon-level : HS disconnect detector level.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Optional properties:
   - nvidia,has-legacy-mode : boolean indicates whether this controller can
     operate in legacy mode (as APX 2500 / 2600). In legacy mode some
     registers are accessed through the APB_MISC base address instead of
 <<<<<<< HEAD
+<<<<<<< HEAD
     the USB controller.
 =======
+=======
+>>>>>>> v3.18
     the USB controller.
   - nvidia,is-wired : boolean. Indicates whether we can do certain kind of power
     optimizations for the devices that are always connected. e.g. modem.
@@ -79,4 +94,7 @@ Optional properties:
 
 VBUS control (required for dr_mode == otg, optional for dr_mode == host):
   - vbus-supply: regulator for VBUS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

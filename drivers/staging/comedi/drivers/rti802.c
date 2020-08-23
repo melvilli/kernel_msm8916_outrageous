@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
    comedi/drivers/rti802.c
    Hardware driver for Analog Devices RTI-802 board
 
@@ -48,6 +49,8 @@ Configuration Options:
 #define RTI802_DATALOW 1
 #define RTI802_DATAHIGH 2
 =======
+=======
+>>>>>>> v3.18
  * rti802.c
  * Comedi driver for Analog Devices RTI-802 board
  *
@@ -88,6 +91,9 @@ Configuration Options:
 #define RTI802_SELECT		0x00
 #define RTI802_DATALOW		0x01
 #define RTI802_DATAHIGH		0x02
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct rti802_private {
@@ -95,6 +101,7 @@ struct rti802_private {
 		dac_2comp, dac_straight
 	} dac_coding[8];
 	const struct comedi_lrange *range_type_list[8];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int ao_readback[8];
 };
@@ -130,6 +137,8 @@ static int rti802_ao_insn_write(struct comedi_device *dev,
 	}
 	return i;
 =======
+=======
+>>>>>>> v3.18
 };
 
 static int rti802_ao_insn_write(struct comedi_device *dev,
@@ -157,6 +166,9 @@ static int rti802_ao_insn_write(struct comedi_device *dev,
 	}
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -168,6 +180,7 @@ static int rti802_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], RTI802_SIZE);
 	if (ret)
 		return ret;
@@ -177,6 +190,8 @@ static int rti802_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		return -ENOMEM;
 	dev->private = devpriv;
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_request_region(dev, it->options[0], 0x04);
 	if (ret)
 		return ret;
@@ -184,12 +199,16 @@ static int rti802_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 1);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s = &dev->subdevices[0];
 	/* ao subdevice */
@@ -208,6 +227,8 @@ static int rti802_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		devpriv->range_type_list[i] = (it->options[2 + 2 * i])
 		    ? &range_unipolar10 : &range_bipolar10;
 =======
+=======
+>>>>>>> v3.18
 	/* Analog Output subdevice */
 	s = &dev->subdevices[0];
 	s->type		= COMEDI_SUBD_AO;
@@ -227,6 +248,9 @@ static int rti802_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 			? (dac_straight) : (dac_2comp);
 		devpriv->range_type_list[i] = (it->options[2 + 2 * i])
 			? &range_unipolar10 : &range_bipolar10;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -243,7 +267,11 @@ module_comedi_driver(rti802_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for Analog Devices RTI-802 board");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for Analog Devices RTI-802 board");
 >>>>>>> v3.18

@@ -35,6 +35,11 @@
  ****************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -46,6 +51,10 @@
 #include <linux/console.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -111,6 +120,10 @@ struct netconsole_target {
 #endif
 	int			enabled;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex		mutex;
+>>>>>>> v3.18
 =======
 	struct mutex		mutex;
 >>>>>>> v3.18
@@ -194,6 +207,10 @@ static struct netconsole_target *alloc_param_target(char *target_config)
 	nt->np.local_port = 6665;
 	nt->np.remote_port = 6666;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&nt->mutex);
+>>>>>>> v3.18
 =======
 	mutex_init(&nt->mutex);
 >>>>>>> v3.18
@@ -325,6 +342,10 @@ static ssize_t store_enabled(struct netconsole_target *nt,
 			     size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -338,8 +359,13 @@ static ssize_t store_enabled(struct netconsole_target *nt,
 		return -EINVAL;
 	if (enabled == nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "netconsole: network logging has already %s\n",
 				nt->enabled ? "started" : "stopped");
+=======
+		pr_info("network logging has already %s\n",
+			nt->enabled ? "started" : "stopped");
+>>>>>>> v3.18
 =======
 		pr_info("network logging has already %s\n",
 			nt->enabled ? "started" : "stopped");
@@ -349,7 +375,10 @@ static ssize_t store_enabled(struct netconsole_target *nt,
 
 	if (enabled) {	/* 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -363,10 +392,13 @@ static ssize_t store_enabled(struct netconsole_target *nt,
 			return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "netconsole: network logging started\n");
 
 	} else {	/* 0 */
 =======
+=======
+>>>>>>> v3.18
 		pr_info("netconsole: network logging started\n");
 	} else {	/* 0 */
 		/* We need to disable the netconsole before cleaning it up
@@ -376,6 +408,9 @@ static ssize_t store_enabled(struct netconsole_target *nt,
 		spin_lock_irqsave(&target_list_lock, flags);
 		nt->enabled = 0;
 		spin_unlock_irqrestore(&target_list_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		netpoll_cleanup(&nt->np);
 	}
@@ -393,9 +428,14 @@ static ssize_t store_dev_name(struct netconsole_target *nt,
 
 	if (nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "netconsole: target (%s) is enabled, "
 				"disable to update parameters\n",
 				config_item_name(&nt->item));
+=======
+		pr_err("target (%s) is enabled, disable to update parameters\n",
+		       config_item_name(&nt->item));
+>>>>>>> v3.18
 =======
 		pr_err("target (%s) is enabled, disable to update parameters\n",
 		       config_item_name(&nt->item));
@@ -421,9 +461,14 @@ static ssize_t store_local_port(struct netconsole_target *nt,
 
 	if (nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "netconsole: target (%s) is enabled, "
 				"disable to update parameters\n",
 				config_item_name(&nt->item));
+=======
+		pr_err("target (%s) is enabled, disable to update parameters\n",
+		       config_item_name(&nt->item));
+>>>>>>> v3.18
 =======
 		pr_err("target (%s) is enabled, disable to update parameters\n",
 		       config_item_name(&nt->item));
@@ -445,9 +490,14 @@ static ssize_t store_remote_port(struct netconsole_target *nt,
 
 	if (nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "netconsole: target (%s) is enabled, "
 				"disable to update parameters\n",
 				config_item_name(&nt->item));
+=======
+		pr_err("target (%s) is enabled, disable to update parameters\n",
+		       config_item_name(&nt->item));
+>>>>>>> v3.18
 =======
 		pr_err("target (%s) is enabled, disable to update parameters\n",
 		       config_item_name(&nt->item));
@@ -467,9 +517,14 @@ static ssize_t store_local_ip(struct netconsole_target *nt,
 {
 	if (nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "netconsole: target (%s) is enabled, "
 				"disable to update parameters\n",
 				config_item_name(&nt->item));
+=======
+		pr_err("target (%s) is enabled, disable to update parameters\n",
+		       config_item_name(&nt->item));
+>>>>>>> v3.18
 =======
 		pr_err("target (%s) is enabled, disable to update parameters\n",
 		       config_item_name(&nt->item));
@@ -482,7 +537,11 @@ static ssize_t store_local_ip(struct netconsole_target *nt,
 		if (in6_pton(buf, count, nt->np.local_ip.in6.s6_addr, -1, &end) > 0) {
 			if (*end && *end != '\n') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "netconsole: invalid IPv6 address at: <%c>\n", *end);
+=======
+				pr_err("invalid IPv6 address at: <%c>\n", *end);
+>>>>>>> v3.18
 =======
 				pr_err("invalid IPv6 address at: <%c>\n", *end);
 >>>>>>> v3.18
@@ -507,9 +566,14 @@ static ssize_t store_remote_ip(struct netconsole_target *nt,
 {
 	if (nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "netconsole: target (%s) is enabled, "
 				"disable to update parameters\n",
 				config_item_name(&nt->item));
+=======
+		pr_err("target (%s) is enabled, disable to update parameters\n",
+		       config_item_name(&nt->item));
+>>>>>>> v3.18
 =======
 		pr_err("target (%s) is enabled, disable to update parameters\n",
 		       config_item_name(&nt->item));
@@ -522,7 +586,11 @@ static ssize_t store_remote_ip(struct netconsole_target *nt,
 		if (in6_pton(buf, count, nt->np.remote_ip.in6.s6_addr, -1, &end) > 0) {
 			if (*end && *end != '\n') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "netconsole: invalid IPv6 address at: <%c>\n", *end);
+=======
+				pr_err("invalid IPv6 address at: <%c>\n", *end);
+>>>>>>> v3.18
 =======
 				pr_err("invalid IPv6 address at: <%c>\n", *end);
 >>>>>>> v3.18
@@ -549,9 +617,14 @@ static ssize_t store_remote_mac(struct netconsole_target *nt,
 
 	if (nt->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "netconsole: target (%s) is enabled, "
 				"disable to update parameters\n",
 				config_item_name(&nt->item));
+=======
+		pr_err("target (%s) is enabled, disable to update parameters\n",
+		       config_item_name(&nt->item));
+>>>>>>> v3.18
 =======
 		pr_err("target (%s) is enabled, disable to update parameters\n",
 		       config_item_name(&nt->item));
@@ -636,13 +709,19 @@ static ssize_t netconsole_target_attr_store(struct config_item *item,
 		container_of(attr, struct netconsole_target_attr, attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (na->store)
 		ret = na->store(nt, buf, count);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&nt->mutex);
 	if (na->store)
 		ret = na->store(nt, buf, count);
 	mutex_unlock(&nt->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -683,6 +762,10 @@ static struct config_item *make_netconsole_target(struct config_group *group,
 	nt->np.local_port = 6665;
 	nt->np.remote_port = 6666;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&nt->mutex);
+>>>>>>> v3.18
 =======
 	mutex_init(&nt->mutex);
 >>>>>>> v3.18
@@ -744,6 +827,7 @@ static struct configfs_subsystem netconsole_subsys = {
 /* Handle network interface device notifications */
 static int netconsole_netdev_event(struct notifier_block *this,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   unsigned long event,
 				   void *ptr)
 {
@@ -751,11 +835,16 @@ static int netconsole_netdev_event(struct notifier_block *this,
 	struct netconsole_target *nt;
 	struct net_device *dev = ptr;
 =======
+=======
+>>>>>>> v3.18
 				   unsigned long event, void *ptr)
 {
 	unsigned long flags;
 	struct netconsole_target *nt;
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool stopped = false;
 
@@ -776,6 +865,7 @@ restart:
 			case NETDEV_JOIN:
 			case NETDEV_UNREGISTER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/*
 				 * rtnl_lock already held
 				 * we might sleep in __netpoll_cleanup()
@@ -783,6 +873,8 @@ restart:
 				spin_unlock_irqrestore(&target_list_lock, flags);
 				__netpoll_cleanup(&nt->np);
 =======
+=======
+>>>>>>> v3.18
 				/* rtnl_lock already held
 				 * we might sleep in __netpoll_cleanup()
 				 */
@@ -790,6 +882,9 @@ restart:
 
 				__netpoll_cleanup(&nt->np);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				spin_lock_irqsave(&target_list_lock, flags);
 				dev_put(nt->np.dev);
@@ -805,6 +900,7 @@ restart:
 	spin_unlock_irqrestore(&target_list_lock, flags);
 	if (stopped) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "netconsole: network logging stopped on "
 		       "interface %s as it ", dev->name);
 		switch (event) {
@@ -819,6 +915,8 @@ restart:
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 		const char *msg = "had an event";
 		switch (event) {
 		case NETDEV_UNREGISTER:
@@ -833,6 +931,9 @@ restart:
 		}
 		pr_info("network logging stopped on interface %s as it %s\n",
 			dev->name, msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -920,7 +1021,11 @@ static int __init init_netconsole(void)
 
 	register_console(&netconsole);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "netconsole: network logging started\n");
+=======
+	pr_info("network logging started\n");
+>>>>>>> v3.18
 =======
 	pr_info("network logging started\n");
 >>>>>>> v3.18
@@ -932,7 +1037,11 @@ undonotifier:
 
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "netconsole: cleaning up\n");
+=======
+	pr_err("cleaning up\n");
+>>>>>>> v3.18
 =======
 	pr_err("cleaning up\n");
 >>>>>>> v3.18

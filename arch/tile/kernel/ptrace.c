@@ -111,7 +111,11 @@ static int tile_gpr_set(struct task_struct *target,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pt_regs regs = *task_pt_regs(target);
+=======
+	struct pt_regs regs;
+>>>>>>> v3.18
 =======
 	struct pt_regs regs;
 >>>>>>> v3.18
@@ -270,7 +274,10 @@ int do_syscall_trace_enter(struct pt_regs *regs)
 void do_syscall_trace_exit(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	long errno;
 
 	/*
@@ -286,6 +293,9 @@ void do_syscall_trace_exit(struct pt_regs *regs)
 	else
 		regs->regs[1] = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (test_thread_flag(TIF_SYSCALL_TRACE))
 		tracehook_report_syscall_exit(regs, 0);
@@ -295,7 +305,11 @@ void do_syscall_trace_exit(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs, int error_code)
+=======
+void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -315,7 +329,11 @@ void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs)
 void __kprobes do_breakpoint(struct pt_regs* regs, int fault_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	send_sigtrap(current, regs, fault_num);
+=======
+	send_sigtrap(current, regs);
+>>>>>>> v3.18
 =======
 	send_sigtrap(current, regs);
 >>>>>>> v3.18

@@ -31,7 +31,10 @@ static inline struct ethhdr *eth_hdr(const struct sk_buff *skb)
 int eth_header_parse(const struct sk_buff *skb, unsigned char *haddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mac_pton(const char *s, u8 *mac);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern ssize_t sysfs_format_mac(char *buf, const unsigned char *addr, int len);

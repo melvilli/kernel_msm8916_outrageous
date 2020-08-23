@@ -16,16 +16,22 @@
  *
  *  You should have received a copy of the GNU General Public License along
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  */
 
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
  *  with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <linux/clk.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/netdevice.h>
@@ -185,6 +191,10 @@ struct au1k_private {
 	struct resource *ioarea;
 	struct au1k_irda_platform_data *platdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *irda_clk;
+>>>>>>> v3.18
 =======
 	struct clk *irda_clk;
 >>>>>>> v3.18
@@ -528,10 +538,13 @@ static int au1k_init(struct net_device *dev)
 {
 	struct au1k_private *aup = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 enable, ring_address;
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 	u32 enable, ring_address, phyck;
 	struct clk *c;
 	int i;
@@ -565,6 +578,9 @@ static int au1k_init(struct net_device *dev)
 	}
 	aup->irda_clk = c;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enable = IR_HC | IR_CE | IR_C;
 #ifndef CONFIG_CPU_LITTLE_ENDIAN
@@ -595,7 +611,11 @@ static int au1k_init(struct net_device *dev)
 				(RING_SIZE_64 << 8) | (RING_SIZE_64 << 12));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irda_write(aup, IR_CONFIG_2, IR_PHYCLK_48MHZ | IR_ONE_PIN);
+=======
+	irda_write(aup, IR_CONFIG_2, phyck | IR_ONE_PIN);
+>>>>>>> v3.18
 =======
 	irda_write(aup, IR_CONFIG_2, phyck | IR_ONE_PIN);
 >>>>>>> v3.18
@@ -673,6 +693,12 @@ static int au1k_irda_stop(struct net_device *dev)
 	free_irq(aup->irq_rx, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk_disable_unprepare(aup->irda_clk);
+	clk_put(aup->irda_clk);
+
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(aup->irda_clk);
 	clk_put(aup->irda_clk);
@@ -913,6 +939,10 @@ static int au1k_irda_probe(struct platform_device *pdev)
 	struct net_device *dev;
 	struct resource *r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *c;
+>>>>>>> v3.18
 =======
 	struct clk *c;
 >>>>>>> v3.18
@@ -950,7 +980,10 @@ static int au1k_irda_probe(struct platform_device *pdev)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* bail out early if clock doesn't exist */
 	c = clk_get(NULL, "irda_clk");
 	if (IS_ERR(c)) {
@@ -959,6 +992,9 @@ static int au1k_irda_probe(struct platform_device *pdev)
 	}
 	clk_put(c);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	aup->iobase = ioremap_nocache(r->start, resource_size(r));
 	if (!aup->iobase)

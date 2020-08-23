@@ -23,7 +23,10 @@ EXPORT_SYMBOL(strncpy_from_user_asm);
 EXPORT_SYMBOL(clear_user_asm);
 EXPORT_SYMBOL(flush_user_asm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(inv_user_asm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(finv_user_asm);
@@ -38,13 +41,19 @@ EXPORT_SYMBOL(dump_stack);
 EXPORT_SYMBOL(empty_zero_page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FUNCTION_TRACER
 /* arch/tile/kernel/mcount_64.S */
 #include <asm/ftrace.h>
 EXPORT_SYMBOL(__mcount);
 #endif /* CONFIG_FUNCTION_TRACER */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* arch/tile/lib/, various memcpy files */
 EXPORT_SYMBOL(memcpy);

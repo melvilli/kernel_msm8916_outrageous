@@ -16,8 +16,13 @@
 /* Changes
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Mitsuru KANDA @USAGI and
  * 	YOSHIFUJI Hideaki @USAGI: Remove ipv6_parse_exthdrs().
+=======
+ *	Mitsuru KANDA @USAGI and
+ *	YOSHIFUJI Hideaki @USAGI: Remove ipv6_parse_exthdrs().
+>>>>>>> v3.18
 =======
  *	Mitsuru KANDA @USAGI and
  *	YOSHIFUJI Hideaki @USAGI: Remove ipv6_parse_exthdrs().
@@ -50,7 +55,11 @@
 #include <net/addrconf.h>
 #include <net/xfrm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <net/inet_ecn.h>
+>>>>>>> v3.18
 =======
 #include <net/inet_ecn.h>
 >>>>>>> v3.18
@@ -75,7 +84,11 @@ int ipv6_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt
 {
 	const struct ipv6hdr *hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 		pkt_len;
+=======
+	u32 pkt_len;
+>>>>>>> v3.18
 =======
 	u32 pkt_len;
 >>>>>>> v3.18
@@ -123,11 +136,17 @@ int ipv6_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IP6_ADD_STATS_BH(dev_net(dev), idev,
 			 IPSTATS_MIB_NOECTPKTS +
 				(ipv6_get_dsfield(hdr) & INET_ECN_MASK),
 			 max_t(unsigned short, 1, skb_shinfo(skb)->gso_segs));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * RFC4291 2.5.3
@@ -346,15 +365,21 @@ int ip6_mc_input(struct sk_buff *skb)
 					goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (ipv6_is_mld(skb, nexthdr, offset))
 					deliver = true;
 
 				goto out;
 =======
+=======
+>>>>>>> v3.18
 				if (!ipv6_is_mld(skb, nexthdr, offset))
 					goto out;
 
 				deliver = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			/* unknown RA - process it normally */

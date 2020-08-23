@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -27,9 +30,12 @@ enum led_type {
 	DELCOM_VISUAL_SIGNAL_INDICATOR,
 	DREAM_CHEEKY_WEBMAIL_NOTIFIER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	RISO_KAGAKU_LED
 };
 
@@ -51,6 +57,9 @@ static unsigned const char riso_kagaku_tbl[] = {
 
 #define RISO_KAGAKU_IX(r,g,b) riso_kagaku_tbl[((r)?1:0)+((g)?2:0)+((b)?4:0)]
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* table of devices that work with this driver */
 static const struct usb_device_id id_table[] = {
@@ -61,6 +70,11 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x1d34, 0x000a),
 			.driver_info = DREAM_CHEEKY_WEBMAIL_NOTIFIER },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(0x1294, 0x1320),
+			.driver_info = RISO_KAGAKU_LED },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x1294, 0x1320),
 			.driver_info = RISO_KAGAKU_LED },
@@ -82,6 +96,10 @@ static void change_color(struct usb_led *led)
 	int retval = 0;
 	unsigned char *buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int actlength;
+>>>>>>> v3.18
 =======
 	int actlength;
 >>>>>>> v3.18
@@ -142,7 +160,10 @@ static void change_color(struct usb_led *led)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case RISO_KAGAKU_LED:
 		buffer[0] = RISO_KAGAKU_IX(led->red, led->green, led->blue);
 		buffer[1] = 0;
@@ -155,6 +176,9 @@ static void change_color(struct usb_led *led)
 			buffer, 5, &actlength, 1000 /*ms timeout*/);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_err(&led->udev->dev, "unknown device type %d\n", led->type);

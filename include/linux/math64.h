@@ -32,7 +32,10 @@ static inline s64 div_s64_rem(s64 dividend, s32 divisor, s32 *remainder)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * div64_u64_rem - unsigned 64bit divide with 64bit divisor and remainder
  */
 static inline u64 div64_u64_rem(u64 dividend, u64 divisor, u64 *remainder)
@@ -42,6 +45,9 @@ static inline u64 div64_u64_rem(u64 dividend, u64 divisor, u64 *remainder)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * div64_u64 - unsigned 64bit divide with 64bit divisor
  */
@@ -76,11 +82,17 @@ extern s64 div_s64_rem(s64 dividend, s32 divisor, s32 *remainder);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef div64_u64_rem
 extern u64 div64_u64_rem(u64 dividend, u64 divisor, u64 *remainder);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef div64_u64
 extern u64 div64_u64(u64 dividend, u64 divisor);
@@ -140,7 +152,10 @@ __iter_div_u64_rem(u64 dividend, u32 divisor, u64 *remainder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ARCH_SUPPORTS_INT128) && defined(__SIZEOF_INT128__)
 
 #ifndef mul_u64_u32_shr
@@ -171,5 +186,8 @@ static inline u64 mul_u64_u32_shr(u64 a, u32 mul, unsigned int shift)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_MATH64_H */

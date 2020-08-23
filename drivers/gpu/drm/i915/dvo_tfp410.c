@@ -119,7 +119,11 @@ static bool tfp410_readb(struct intel_dvo_device *dvo, int addr, uint8_t *ch)
 		*ch = in_buf[0];
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -272,6 +276,7 @@ static void tfp410_dump_regs(struct intel_dvo_device *dvo)
 
 	tfp410_readb(dvo, TFP410_REV, &val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_LOG_KMS("TFP410_REV: 0x%02X\n", val);
 	tfp410_readb(dvo, TFP410_CTL_1, &val);
 	DRM_LOG_KMS("TFP410_CTL1: 0x%02X\n", val);
@@ -300,6 +305,8 @@ static void tfp410_dump_regs(struct intel_dvo_device *dvo)
 	tfp410_readb(dvo, TFP410_V_RES_HI, &val2);
 	DRM_LOG_KMS("TFP410_V_RES: 0x%02X%02X\n", val2, val);
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("TFP410_REV: 0x%02X\n", val);
 	tfp410_readb(dvo, TFP410_CTL_1, &val);
 	DRM_DEBUG_KMS("TFP410_CTL1: 0x%02X\n", val);
@@ -327,6 +334,9 @@ static void tfp410_dump_regs(struct intel_dvo_device *dvo)
 	tfp410_readb(dvo, TFP410_V_RES_LO, &val);
 	tfp410_readb(dvo, TFP410_V_RES_HI, &val2);
 	DRM_DEBUG_KMS("TFP410_V_RES: 0x%02X%02X\n", val2, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

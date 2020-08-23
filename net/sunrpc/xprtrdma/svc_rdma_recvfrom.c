@@ -1,5 +1,9 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014 Open Grid Computing, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2014 Open Grid Computing, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -47,6 +51,10 @@
 #include <linux/sunrpc/rpc_rdma.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/highmem.h>
+>>>>>>> v3.18
 =======
 #include <linux/highmem.h>
 >>>>>>> v3.18
@@ -78,7 +86,12 @@ static void rdma_build_arg_xdr(struct svc_rqst *rqstp,
 	/* Set up the XDR head */
 	rqstp->rq_arg.head[0].iov_base = page_address(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rqstp->rq_arg.head[0].iov_len = min(byte_count, ctxt->sge[0].length);
+=======
+	rqstp->rq_arg.head[0].iov_len =
+		min_t(size_t, byte_count, ctxt->sge[0].length);
+>>>>>>> v3.18
 =======
 	rqstp->rq_arg.head[0].iov_len =
 		min_t(size_t, byte_count, ctxt->sge[0].length);
@@ -99,7 +112,11 @@ static void rdma_build_arg_xdr(struct svc_rqst *rqstp,
 		put_page(rqstp->rq_pages[sge_no]);
 		rqstp->rq_pages[sge_no] = page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bc -= min(bc, ctxt->sge[sge_no].length);
+=======
+		bc -= min_t(u32, bc, ctxt->sge[sge_no].length);
+>>>>>>> v3.18
 =======
 		bc -= min_t(u32, bc, ctxt->sge[sge_no].length);
 >>>>>>> v3.18
@@ -108,6 +125,10 @@ static void rdma_build_arg_xdr(struct svc_rqst *rqstp,
 	}
 	rqstp->rq_respages = &rqstp->rq_pages[sge_no];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rqstp->rq_next_page = rqstp->rq_respages + 1;
+>>>>>>> v3.18
 =======
 	rqstp->rq_next_page = rqstp->rq_respages + 1;
 >>>>>>> v3.18
@@ -133,6 +154,7 @@ static void rdma_build_arg_xdr(struct svc_rqst *rqstp,
 	rqstp->rq_arg.tail[0].iov_len = 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Encode a read-chunk-list as an array of IB SGE
  *
@@ -418,6 +440,8 @@ static int rdma_read_xdr(struct svcxprt_rdma *xprt,
 	struct svc_rdma_req_map *rpl_map;
 	struct svc_rdma_req_map *chl_map;
 =======
+=======
+>>>>>>> v3.18
 static int rdma_read_max_sge(struct svcxprt_rdma *xprt, int sge_count)
 {
 	if (rdma_node_get_transport(xprt->sc_cm_id->device->node_type) ==
@@ -677,6 +701,9 @@ static int rdma_read_chunks(struct svcxprt_rdma *xprt,
 	u32 page_offset, byte_count;
 	u64 rs_offset;
 	rdma_reader_fn reader;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If no read list is present, return 0 */
@@ -688,6 +715,7 @@ static int rdma_read_chunks(struct svcxprt_rdma *xprt,
 	if (ch_count > RPCSVC_MAXPAGES)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Allocate temporary reply and chunk maps */
 	rpl_map = svc_rdma_get_req_map();
@@ -813,6 +841,8 @@ next_sge:
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	/* The request is completed when the RDMA_READs complete. The
 	 * head context keeps all the pages that comprise the
 	 * request.
@@ -888,6 +918,9 @@ rdma_fix_xdr_pad(struct xdr_buf *buf)
 	buf->page_len += size;
 	buf->buflen += size;
 	buf->len += size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -906,6 +939,10 @@ static int rdma_read_complete(struct svc_rqst *rqstp,
 	}
 	/* Point rq_arg.pages past header */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rdma_fix_xdr_pad(&head->arg);
+>>>>>>> v3.18
 =======
 	rdma_fix_xdr_pad(&head->arg);
 >>>>>>> v3.18
@@ -916,7 +953,11 @@ static int rdma_read_complete(struct svc_rqst *rqstp,
 	/* rq_respages starts after the last arg page */
 	rqstp->rq_respages = &rqstp->rq_arg.pages[page_no];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rqstp->rq_next_page = &rqstp->rq_arg.pages[page_no];
+=======
+	rqstp->rq_next_page = rqstp->rq_respages + 1;
+>>>>>>> v3.18
 =======
 	rqstp->rq_next_page = rqstp->rq_respages + 1;
 >>>>>>> v3.18
@@ -969,6 +1010,7 @@ int svc_rdma_recvfrom(struct svc_rqst *rqstp)
 				  dto_q);
 		list_del_init(&ctxt->dto_q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	if (ctxt) {
 		spin_unlock_bh(&rdma_xprt->sc_rq_dto_lock);
@@ -976,6 +1018,11 @@ int svc_rdma_recvfrom(struct svc_rqst *rqstp)
 	}
 
 	if (!list_empty(&rdma_xprt->sc_rq_dto_q)) {
+=======
+		spin_unlock_bh(&rdma_xprt->sc_rq_dto_lock);
+		return rdma_read_complete(rqstp, ctxt);
+	} else if (!list_empty(&rdma_xprt->sc_rq_dto_q)) {
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&rdma_xprt->sc_rq_dto_lock);
 		return rdma_read_complete(rqstp, ctxt);
@@ -1001,7 +1048,10 @@ int svc_rdma_recvfrom(struct svc_rqst *rqstp)
 			goto close_out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(ret);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto out;
@@ -1027,6 +1077,7 @@ int svc_rdma_recvfrom(struct svc_rqst *rqstp)
 
 	/* Read read-list data. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = rdma_read_xdr(rdma_xprt, rmsgp, rqstp, ctxt);
 	if (ret > 0) {
 		/* read-list posted, defer until data received from client. */
@@ -1034,11 +1085,16 @@ int svc_rdma_recvfrom(struct svc_rqst *rqstp)
 	}
 	if (ret < 0) {
 =======
+=======
+>>>>>>> v3.18
 	ret = rdma_read_chunks(rdma_xprt, rmsgp, rqstp, ctxt);
 	if (ret > 0) {
 		/* read-list posted, defer until data received from client. */
 		goto defer;
 	} else if (ret < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Post of read-list failed, free context. */
 		svc_rdma_put_context(ctxt, 1);

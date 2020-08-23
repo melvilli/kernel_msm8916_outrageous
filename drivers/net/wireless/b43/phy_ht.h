@@ -82,7 +82,13 @@
 /* Values for the status are the same as for the trigger */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define B43_PHY_HT_RF_CTL1			B43_PHY_EXTG(0x010)
+=======
+#define B43_PHY_HT_RF_CTL_CMD			0x810
+#define  B43_PHY_HT_RF_CTL_CMD_FORCE		0x0001
+#define  B43_PHY_HT_RF_CTL_CMD_CHIP0_PU		0x0002
+>>>>>>> v3.18
 =======
 #define B43_PHY_HT_RF_CTL_CMD			0x810
 #define  B43_PHY_HT_RF_CTL_CMD_FORCE		0x0001
@@ -111,6 +117,12 @@
 #define B43_PHY_HT_TX_PCTL_STATUS_C3		B43_PHY_EXTG(0x169)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define B43_PHY_B_BBCFG				B43_PHY_N_BMODE(0x001)
+#define  B43_PHY_B_BBCFG_RSTCCA			0x4000 /* Reset CCA */
+#define  B43_PHY_B_BBCFG_RSTRX			0x8000 /* Reset RX */
+>>>>>>> v3.18
 =======
 #define B43_PHY_B_BBCFG				B43_PHY_N_BMODE(0x001)
 #define  B43_PHY_B_BBCFG_RSTCCA			0x4000 /* Reset CCA */

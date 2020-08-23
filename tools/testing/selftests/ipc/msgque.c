@@ -194,12 +194,18 @@ int main(int argc, char **argv)
 	struct msgque_data msgque;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (getuid() != 0) {
 		printf("Please run the test as root - Exiting.\n");
 		exit(1);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msgque.key = ftok(argv[0], 822155650);
 	if (msgque.key == -1) {
@@ -210,6 +216,10 @@ int main(int argc, char **argv)
 	msgque.msq_id = msgget(msgque.key, IPC_CREAT | IPC_EXCL | 0666);
 	if (msgque.msq_id == -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -errno;
+>>>>>>> v3.18
 =======
 		err = -errno;
 >>>>>>> v3.18

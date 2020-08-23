@@ -465,17 +465,23 @@ static void read_intr(void)
 ok_to_read:
 	req = hd_req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insw(HD_DATA, req->buffer, 256);
 #ifdef DEBUG
 	printk("%s: read: sector %ld, remaining = %u, buffer=%p\n",
 	       req->rq_disk->disk_name, blk_rq_pos(req) + 1,
 	       blk_rq_sectors(req) - 1, req->buffer+512);
 =======
+=======
+>>>>>>> v3.18
 	insw(HD_DATA, bio_data(req->bio), 256);
 #ifdef DEBUG
 	printk("%s: read: sector %ld, remaining = %u, buffer=%p\n",
 	       req->rq_disk->disk_name, blk_rq_pos(req) + 1,
 	       blk_rq_sectors(req) - 1, bio_data(req->bio)+512);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	if (hd_end_request(0, 512)) {
@@ -514,7 +520,11 @@ ok_to_write:
 	if (hd_end_request(0, 512)) {
 		SET_HANDLER(&write_intr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outsw(HD_DATA, req->buffer, 256);
+=======
+		outsw(HD_DATA, bio_data(req->bio), 256);
+>>>>>>> v3.18
 =======
 		outsw(HD_DATA, bio_data(req->bio), 256);
 >>>>>>> v3.18
@@ -637,7 +647,11 @@ repeat:
 		req->rq_disk->disk_name,
 		req_data_dir(req) == READ ? "read" : "writ",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cyl, head, sec, nsect, req->buffer);
+=======
+		cyl, head, sec, nsect, bio_data(req->bio));
+>>>>>>> v3.18
 =======
 		cyl, head, sec, nsect, bio_data(req->bio));
 >>>>>>> v3.18
@@ -660,7 +674,11 @@ repeat:
 				goto repeat;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			outsw(HD_DATA, req->buffer, 256);
+=======
+			outsw(HD_DATA, bio_data(req->bio), 256);
+>>>>>>> v3.18
 =======
 			outsw(HD_DATA, bio_data(req->bio), 256);
 >>>>>>> v3.18
@@ -715,6 +733,7 @@ static const struct block_device_operations hd_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This is the hard disk IRQ description. The IRQF_DISABLED in sa_flags
  * means we run the IRQ-handler with interrupts disabled:  this is bad for
@@ -725,6 +744,8 @@ static const struct block_device_operations hd_fops = {
  * safe.
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init hd_init(void)
@@ -785,7 +806,11 @@ static int __init hd_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(HD_IRQ, hd_interrupt, IRQF_DISABLED, "hd", NULL)) {
+=======
+	if (request_irq(HD_IRQ, hd_interrupt, 0, "hd", NULL)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(HD_IRQ, hd_interrupt, 0, "hd", NULL)) {
 >>>>>>> v3.18

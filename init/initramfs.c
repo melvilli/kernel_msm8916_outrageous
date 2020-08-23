@@ -20,7 +20,10 @@
 #include <linux/utime.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t __init xwrite(int fd, const char *p, size_t count)
 {
 	ssize_t out = 0;
@@ -44,6 +47,9 @@ static ssize_t __init xwrite(int fd, const char *p, size_t count)
 	return out;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __initdata char *message;
 static void __init error(char *x)
@@ -201,7 +207,11 @@ static __initdata enum state {
 
 static __initdata char *victim;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata unsigned count;
+=======
+static unsigned long byte_count __initdata;
+>>>>>>> v3.18
 =======
 static unsigned long byte_count __initdata;
 >>>>>>> v3.18
@@ -212,7 +222,11 @@ static inline void __init eat(unsigned n)
 	victim += n;
 	this_header += n;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count -= n;
+=======
+	byte_count -= n;
+>>>>>>> v3.18
 =======
 	byte_count -= n;
 >>>>>>> v3.18
@@ -221,7 +235,11 @@ static inline void __init eat(unsigned n)
 static __initdata char *vcollected;
 static __initdata char *collected;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata int remains;
+=======
+static long remains __initdata;
+>>>>>>> v3.18
 =======
 static long remains __initdata;
 >>>>>>> v3.18
@@ -230,7 +248,11 @@ static __initdata char *collect;
 static void __init read_into(char *buf, unsigned size, enum state next)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count >= size) {
+=======
+	if (byte_count >= size) {
+>>>>>>> v3.18
 =======
 	if (byte_count >= size) {
 >>>>>>> v3.18
@@ -256,9 +278,15 @@ static int __init do_start(void)
 static int __init do_collect(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned n = remains;
 	if (count < n)
 		n = count;
+=======
+	unsigned long n = remains;
+	if (byte_count < n)
+		n = byte_count;
+>>>>>>> v3.18
 =======
 	unsigned long n = remains;
 	if (byte_count < n)
@@ -306,8 +334,13 @@ static int __init do_header(void)
 static int __init do_skip(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this_header + count < next_header) {
 		eat(count);
+=======
+	if (this_header + byte_count < next_header) {
+		eat(byte_count);
+>>>>>>> v3.18
 =======
 	if (this_header + byte_count < next_header) {
 		eat(byte_count);
@@ -323,9 +356,15 @@ static int __init do_skip(void)
 static int __init do_reset(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while(count && *victim == '\0')
 		eat(1);
 	if (count && (this_header & 3))
+=======
+	while (byte_count && *victim == '\0')
+		eat(1);
+	if (byte_count && (this_header & 3))
+>>>>>>> v3.18
 =======
 	while (byte_count && *victim == '\0')
 		eat(1);
@@ -346,17 +385,23 @@ static int __init maybe_link(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init clean_path(char *path, umode_t mode)
 {
 	struct stat st;
 
 	if (!sys_newlstat(path, &st) && (st.st_mode^mode) & S_IFMT) {
 =======
+=======
+>>>>>>> v3.18
 static void __init clean_path(char *path, umode_t fmode)
 {
 	struct stat st;
 
 	if (!sys_newlstat(path, &st) && (st.st_mode ^ fmode) & S_IFMT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (S_ISDIR(st.st_mode))
 			sys_rmdir(path);
@@ -413,8 +458,14 @@ static int __init do_name(void)
 static int __init do_copy(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count >= body_len) {
 		sys_write(wfd, victim, body_len);
+=======
+	if (byte_count >= body_len) {
+		if (xwrite(wfd, victim, body_len) != body_len)
+			error("write error");
+>>>>>>> v3.18
 =======
 	if (byte_count >= body_len) {
 		if (xwrite(wfd, victim, body_len) != body_len)
@@ -428,14 +479,20 @@ static int __init do_copy(void)
 		return 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sys_write(wfd, victim, count);
 		body_len -= count;
 		eat(count);
 =======
+=======
+>>>>>>> v3.18
 		if (xwrite(wfd, victim, byte_count) != byte_count)
 			error("write error");
 		body_len -= byte_count;
 		eat(byte_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	}
@@ -465,9 +522,15 @@ static __initdata int (*actions[])(void) = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init write_buffer(char *buf, unsigned len)
 {
 	count = len;
+=======
+static long __init write_buffer(char *buf, unsigned long len)
+{
+	byte_count = len;
+>>>>>>> v3.18
 =======
 static long __init write_buffer(char *buf, unsigned long len)
 {
@@ -478,6 +541,7 @@ static long __init write_buffer(char *buf, unsigned long len)
 	while (!actions[state]())
 		;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return len - count;
 }
 
@@ -487,6 +551,8 @@ static int __init flush_buffer(void *bufv, unsigned len)
 	int written;
 	int origLen = len;
 =======
+=======
+>>>>>>> v3.18
 	return len - byte_count;
 }
 
@@ -495,6 +561,9 @@ static long __init flush_buffer(void *bufv, unsigned long len)
 	char *buf = (char *) bufv;
 	long written;
 	long origLen = len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (message)
 		return -1;
@@ -515,6 +584,7 @@ static long __init flush_buffer(void *bufv, unsigned long len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned my_inptr;   /* index of next byte to be processed in inbuf */
 
 #include <linux/decompress/generic.h>
@@ -523,6 +593,8 @@ static char * __init unpack_to_rootfs(char *buf, unsigned len)
 {
 	int written, res;
 =======
+=======
+>>>>>>> v3.18
 static unsigned long my_inptr; /* index of next byte to be processed in inbuf */
 
 #include <linux/decompress/generic.h>
@@ -530,6 +602,9 @@ static unsigned long my_inptr; /* index of next byte to be processed in inbuf */
 static char * __init unpack_to_rootfs(char *buf, unsigned long len)
 {
 	long written;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	decompress_fn decompress;
 	const char *compress_name;
@@ -563,8 +638,14 @@ static char * __init unpack_to_rootfs(char *buf, unsigned long len)
 		this_header = 0;
 		decompress = decompress_method(buf, len, &compress_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (decompress) {
 			res = decompress(buf, len, NULL, flush_buffer, NULL,
+=======
+		pr_debug("Detected %s compressed data\n", compress_name);
+		if (decompress) {
+			int res = decompress(buf, len, NULL, flush_buffer, NULL,
+>>>>>>> v3.18
 =======
 		pr_debug("Detected %s compressed data\n", compress_name);
 		if (decompress) {
@@ -697,7 +778,11 @@ static int __init populate_rootfs(void)
 	char *err = unpack_to_rootfs(__initramfs_start, __initramfs_size);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic(err);	/* Failed to decompress INTERNAL initramfs */
+=======
+		panic("%s", err); /* Failed to decompress INTERNAL initramfs */
+>>>>>>> v3.18
 =======
 		panic("%s", err); /* Failed to decompress INTERNAL initramfs */
 >>>>>>> v3.18
@@ -720,9 +805,12 @@ static int __init populate_rootfs(void)
 			      O_WRONLY|O_CREAT, 0700);
 		if (fd >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sys_write(fd, (char *)initrd_start,
 					initrd_end - initrd_start);
 =======
+=======
+>>>>>>> v3.18
 			ssize_t written = xwrite(fd, (char *)initrd_start,
 						initrd_end - initrd_start);
 
@@ -730,6 +818,9 @@ static int __init populate_rootfs(void)
 				pr_err("/initrd.image: incomplete write (%zd != %ld)\n",
 				       written, initrd_end - initrd_start);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sys_close(fd);
 			free_initrd();

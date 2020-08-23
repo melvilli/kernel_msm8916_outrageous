@@ -71,7 +71,11 @@ void ipath_disarm_senderrbufs(struct ipath_devdata *dd)
 		int i;
 		if (ipath_debug & (__IPATH_PKTDBG|__IPATH_DBG) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dd->ipath_lastcancel > jiffies) {
+=======
+			time_after(dd->ipath_lastcancel, jiffies)) {
+>>>>>>> v3.18
 =======
 			time_after(dd->ipath_lastcancel, jiffies)) {
 >>>>>>> v3.18
@@ -760,7 +764,11 @@ static int handle_errors(struct ipath_devdata *dd, ipath_err_t errs)
 	/* likely due to cancel; so suppress message unless verbose */
 	if ((errs & (INFINIPATH_E_SPKTLEN | INFINIPATH_E_SPIOARMLAUNCH)) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dd->ipath_lastcancel > jiffies) {
+=======
+		time_after(dd->ipath_lastcancel, jiffies)) {
+>>>>>>> v3.18
 =======
 		time_after(dd->ipath_lastcancel, jiffies)) {
 >>>>>>> v3.18

@@ -5,7 +5,10 @@
 #include <linux/types.h>
 #include <linux/serial_reg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -23,9 +26,12 @@
 
 #ifdef CONFIG_MACH_JZ4740
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART0_BASE  0xB0030000
 #define PORT(offset) (UART0_BASE + (4 * offset))
 =======
+=======
+>>>>>>> v3.18
 #include <asm/mach-jz4740/base.h>
 #define PORT(offset) (CKSEG1ADDR(JZ4740_UART0_BASE_ADDR) + (4 * offset))
 #endif
@@ -44,6 +50,9 @@
 
 #ifndef IOTYPE
 #define IOTYPE char
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -54,7 +63,11 @@
 static inline unsigned int serial_in(int offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return *((char *)PORT(offset));
+=======
+	return *((volatile IOTYPE *)PORT(offset)) & 0xFF;
+>>>>>>> v3.18
 =======
 	return *((volatile IOTYPE *)PORT(offset)) & 0xFF;
 >>>>>>> v3.18
@@ -63,7 +76,11 @@ static inline unsigned int serial_in(int offset)
 static inline void serial_out(int offset, int value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*((char *)PORT(offset)) = value;
+=======
+	*((volatile IOTYPE *)PORT(offset)) = value & 0xFF;
+>>>>>>> v3.18
 =======
 	*((volatile IOTYPE *)PORT(offset)) = value & 0xFF;
 >>>>>>> v3.18
@@ -72,7 +89,11 @@ static inline void serial_out(int offset, int value)
 void putc(char c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int timeout = 1024;
+=======
+	int timeout = 1000000;
+>>>>>>> v3.18
 =======
 	int timeout = 1000000;
 >>>>>>> v3.18

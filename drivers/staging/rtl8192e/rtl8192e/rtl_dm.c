@@ -138,6 +138,10 @@ void init_hal_dm(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -172,6 +176,10 @@ void hal_dm_watchdog(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -352,6 +360,10 @@ static void dm_check_rate_adaptive(struct net_device *dev)
 		if (targetRATR !=  currentRATR) {
 			u32 ratr_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -548,7 +560,11 @@ static void dm_TXPowerTrackingCallback_TSSI(struct net_device *dev)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (viviflag == true) {
+=======
+			if (viviflag) {
+>>>>>>> v3.18
 =======
 			if (viviflag) {
 >>>>>>> v3.18
@@ -1379,6 +1395,10 @@ void dm_initialize_txpower_tracking(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1393,6 +1413,10 @@ static void dm_CheckTXPowerTracking_TSSI(struct net_device *dev)
 	struct r8192_priv *priv = rtllib_priv(dev);
 	static u32 tx_power_track_counter;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1462,6 +1486,10 @@ static void dm_CCKTxPowerAdjust_TSSI(struct net_device *dev, bool  bInCH14)
 	u32 TempVal;
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1559,6 +1587,10 @@ void dm_cck_txpower_adjust(struct net_device *dev, bool  binch14)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1735,6 +1767,10 @@ static void dm_dig_init(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2166,6 +2202,10 @@ static void dm_check_edca_turbo(struct net_device *dev)
 		};
 		static int wb_tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2228,6 +2268,10 @@ static void dm_check_edca_turbo(struct net_device *dev)
 		 if (priv->bcurrent_turbo_EDCA) {
 			u8 tmp = AC0_BE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2310,7 +2354,11 @@ void dm_CheckRfCtrlGPIO(void *data)
 
 	if (priv->bfirst_after_down) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->bfirst_after_down = 1;
+=======
+		priv->bfirst_after_down = true;
+>>>>>>> v3.18
 =======
 		priv->bfirst_after_down = true;
 >>>>>>> v3.18
@@ -2322,6 +2370,7 @@ void dm_CheckRfCtrlGPIO(void *data)
 	eRfPowerStateToSet = (tmp1byte&BIT1) ?  eRfOn : eRfOff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((priv->bHwRadioOff == true) && (eRfPowerStateToSet == eRfOn)) {
 		RT_TRACE(COMP_RF, "gpiochangeRF  - HW Radio ON\n");
 		printk(KERN_INFO "gpiochangeRF  - HW Radio ON\n");
@@ -2331,6 +2380,8 @@ void dm_CheckRfCtrlGPIO(void *data)
 		RT_TRACE(COMP_RF, "gpiochangeRF  - HW Radio OFF\n");
 		printk(KERN_INFO "gpiochangeRF  - HW Radio OFF\n");
 =======
+=======
+>>>>>>> v3.18
 	if (priv->bHwRadioOff && (eRfPowerStateToSet == eRfOn)) {
 		RT_TRACE(COMP_RF, "gpiochangeRF  - HW Radio ON\n");
 		netdev_info(dev, "gpiochangeRF  - HW Radio ON\n");
@@ -2339,6 +2390,9 @@ void dm_CheckRfCtrlGPIO(void *data)
 	} else if (!priv->bHwRadioOff && (eRfPowerStateToSet == eRfOff)) {
 		RT_TRACE(COMP_RF, "gpiochangeRF  - HW Radio OFF\n");
 		netdev_info(dev, "gpiochangeRF  - HW Radio OFF\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->bHwRadioOff = true;
 		bActuallySet = true;
@@ -2349,7 +2403,11 @@ void dm_CheckRfCtrlGPIO(void *data)
 		priv->bHwRfOffAction = 1;
 		MgntActSet_RF_State(dev, eRfPowerStateToSet, RF_CHANGE_BY_HW, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (priv->bHwRadioOff == true)
+=======
+		if (priv->bHwRadioOff)
+>>>>>>> v3.18
 =======
 		if (priv->bHwRadioOff)
 >>>>>>> v3.18
@@ -2376,9 +2434,15 @@ void	dm_rf_pathcheck_workitemcallback(void *data)
 	for (i = 0; i < RF90_PATH_MAX; i++) {
 		if (rfpath & (0x01<<i))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->brfpath_rxenable[i] = 1;
 		else
 			priv->brfpath_rxenable[i] = 0;
+=======
+			priv->brfpath_rxenable[i] = true;
+		else
+			priv->brfpath_rxenable[i] = false;
+>>>>>>> v3.18
 =======
 			priv->brfpath_rxenable[i] = true;
 		else
@@ -2651,6 +2715,10 @@ static void dm_deInit_fsync(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2670,6 +2738,10 @@ void dm_fsync_timer_callback(unsigned long data)
 	    (priv->rtllib->pHTInfo->IOTAction & HT_IOT_ACT_CDD_FSYNC)) {
 		u32 rate_bitmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2768,6 +2840,10 @@ static void dm_StartHWFsync(struct net_device *dev)
 	u8 rf_timing = 0x77;
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2783,6 +2859,10 @@ static void dm_EndHWFsync(struct net_device *dev)
 	u8 rf_timing = 0xaa;
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3009,6 +3089,10 @@ static void dm_dynamic_txpower(struct net_device *dev)
 	unsigned int txhipower_threshhold = 0;
 	unsigned int txlowpower_threshold = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3036,8 +3120,12 @@ static void dm_dynamic_txpower(struct net_device *dev)
 		} else {
 			if (priv->undecorated_smoothed_pwdb <
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    txlowpower_threshold &&
 			    priv->bDynamicTxHighPower == true)
+=======
+			    txlowpower_threshold && priv->bDynamicTxHighPower)
+>>>>>>> v3.18
 =======
 			    txlowpower_threshold && priv->bDynamicTxHighPower)
 >>>>>>> v3.18

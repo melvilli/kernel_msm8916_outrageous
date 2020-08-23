@@ -1,7 +1,11 @@
 /* -----------------------------------------------------------------------
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright 2009 Intel Corporation; author H. Peter Anvin
+=======
+ *   Copyright 2009-2014 Intel Corporation; author H. Peter Anvin
+>>>>>>> v3.18
 =======
  *   Copyright 2009-2014 Intel Corporation; author H. Peter Anvin
 >>>>>>> v3.18
@@ -18,8 +22,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.code16gcc
 	.text
+=======
+	.code16
+	.section ".inittext","ax"
+>>>>>>> v3.18
 =======
 	.code16
 	.section ".inittext","ax"

@@ -302,7 +302,10 @@
 #define __NR_setns		283
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _UAPI__ASM_AVR32_UNISTD_H */

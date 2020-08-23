@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -27,7 +31,10 @@
 #include <linux/sched.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -204,7 +211,11 @@ static const struct can_bittiming_const pch_can_bittiming_const = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_pci_tbl) = {
+=======
+static const struct pci_device_id pch_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pch_pci_tbl[] = {
 >>>>>>> v3.18
@@ -964,6 +975,10 @@ static const struct net_device_ops pch_can_netdev_ops = {
 	.ndo_stop		= pch_close,
 	.ndo_start_xmit		= pch_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu		= can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu		= can_change_mtu,
 >>>>>>> v3.18
@@ -980,7 +995,10 @@ static void pch_can_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pch_can_reset(priv);

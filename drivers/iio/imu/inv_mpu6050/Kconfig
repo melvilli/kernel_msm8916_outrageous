@@ -10,6 +10,11 @@ config INV_MPU6050_IIO
 	help
 	  This driver supports the Invensense MPU6050 devices.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  This driver can also support MPU6500 in MPU6050 compatibility mode
+	  and also in MPU6500 mode with some limitations.
+>>>>>>> v3.18
 =======
 	  This driver can also support MPU6500 in MPU6050 compatibility mode
 	  and also in MPU6500 mode with some limitations.

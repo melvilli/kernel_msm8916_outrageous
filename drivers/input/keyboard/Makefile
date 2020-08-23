@@ -12,6 +12,11 @@ obj-$(CONFIG_KEYBOARD_ATARI)		+= atakbd.o
 obj-$(CONFIG_KEYBOARD_ATKBD)		+= atkbd.o
 obj-$(CONFIG_KEYBOARD_BFIN)		+= bf54x-keys.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_KEYBOARD_CAP1106)		+= cap1106.o
+obj-$(CONFIG_KEYBOARD_CLPS711X)		+= clps711x-keypad.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_KEYBOARD_CAP1106)		+= cap1106.o
 obj-$(CONFIG_KEYBOARD_CLPS711X)		+= clps711x-keypad.o
@@ -42,6 +47,10 @@ obj-$(CONFIG_KEYBOARD_MPR121)		+= mpr121_touchkey.o
 obj-$(CONFIG_KEYBOARD_NEWTON)		+= newtonkbd.o
 obj-$(CONFIG_KEYBOARD_NOMADIK)		+= nomadik-ske-keypad.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_KEYBOARD_NSPIRE)		+= nspire-keypad.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_KEYBOARD_NSPIRE)		+= nspire-keypad.o
 >>>>>>> v3.18
@@ -50,7 +59,10 @@ obj-$(CONFIG_KEYBOARD_OMAP4)		+= omap4-keypad.o
 obj-$(CONFIG_KEYBOARD_OPENCORES)	+= opencores-kbd.o
 obj-$(CONFIG_KEYBOARD_PMIC8XXX)		+= pmic8xxx-keypad.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_KEYBOARD_QPNP)		+= qpnp-keypad.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_KEYBOARD_PXA27x)		+= pxa27x_keypad.o
@@ -63,15 +75,21 @@ obj-$(CONFIG_KEYBOARD_SPEAR)		+= spear-keyboard.o
 obj-$(CONFIG_KEYBOARD_STMPE)		+= stmpe-keypad.o
 obj-$(CONFIG_KEYBOARD_STOWAWAY)		+= stowaway.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_KEYBOARD_SUNKBD)		+= sunkbd.o
 obj-$(CONFIG_KEYBOARD_TC3589X)		+= tc3589x-keypad.o
 obj-$(CONFIG_KEYBOARD_TEGRA)		+= tegra-kbc.o
 obj-$(CONFIG_KEYBOARD_TNETV107X)	+= tnetv107x-keypad.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_KEYBOARD_ST_KEYSCAN)	+= st-keyscan.o
 obj-$(CONFIG_KEYBOARD_SUNKBD)		+= sunkbd.o
 obj-$(CONFIG_KEYBOARD_TC3589X)		+= tc3589x-keypad.o
 obj-$(CONFIG_KEYBOARD_TEGRA)		+= tegra-kbc.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_KEYBOARD_TWL4030)		+= twl4030_keypad.o
 obj-$(CONFIG_KEYBOARD_XTKBD)		+= xtkbd.o

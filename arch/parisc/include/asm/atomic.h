@@ -8,6 +8,10 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ extern arch_spinlock_t __atomic_hash[ATOMIC_HASH_SIZE] __lock_aligned;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* It's possible to reduce all atomic operations to either
  * __atomic_add_return, atomic_set and atomic_read (the latter
  * is there only for consistency).
@@ -80,6 +85,9 @@ static __inline__ void atomic_set(atomic_t *v, int i)
 =======
 static __inline__ void atomic_set(atomic_t *v, int i)
 >>>>>>> v3.18
+=======
+static __inline__ void atomic_set(atomic_t *v, int i)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 	_atomic_spin_lock_irqsave(v, flags);
@@ -92,7 +100,11 @@ static __inline__ void atomic_set(atomic_t *v, int i)
 static __inline__ int atomic_read(const atomic_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (*(volatile int *)&(v)->counter);
+=======
+	return ACCESS_ONCE((v)->counter);
+>>>>>>> v3.18
 =======
 	return ACCESS_ONCE((v)->counter);
 >>>>>>> v3.18
@@ -127,6 +139,7 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define atomic_add(i,v)	((void)(__atomic_add_return(        (i),(v))))
 #define atomic_sub(i,v)	((void)(__atomic_add_return(-((int) (i)),(v))))
@@ -138,6 +151,8 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 #define atomic_inc_return(v)	(__atomic_add_return(   1,(v)))
 #define atomic_dec_return(v)	(__atomic_add_return(  -1,(v)))
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op, c_op)						\
 static __inline__ void atomic_##op(int i, atomic_t *v)			\
 {									\
@@ -175,6 +190,9 @@ ATOMIC_OPS(sub, -=)
 
 #define atomic_inc_return(v)	(atomic_add_return(   1,(v)))
 #define atomic_dec_return(v)	(atomic_add_return(  -1,(v)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define atomic_add_negative(a, v)	(atomic_add_return((a), (v)) < 0)
@@ -196,6 +214,7 @@ ATOMIC_OPS(sub, -=)
 #define ATOMIC_INIT(i)	{ (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
@@ -203,10 +222,13 @@ ATOMIC_OPS(sub, -=)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_64BIT
 
 #define ATOMIC64_INIT(i) { (i) }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __inline__ s64
 __atomic64_add_return(s64 i, atomic64_t *v)
@@ -221,6 +243,8 @@ __atomic64_add_return(s64 i, atomic64_t *v)
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC64_OP(op, c_op)						\
 static __inline__ void atomic64_##op(s64 i, atomic64_t *v)		\
 {									\
@@ -252,6 +276,9 @@ ATOMIC64_OPS(sub, -=)
 #undef ATOMIC64_OPS
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __inline__ void
@@ -269,6 +296,7 @@ static __inline__ s64
 atomic64_read(const atomic64_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (*(volatile long *)&(v)->counter);
 }
 
@@ -282,6 +310,8 @@ atomic64_read(const atomic64_t *v)
 #define atomic64_inc_return(v)		(__atomic64_add_return(   1,(v)))
 #define atomic64_dec_return(v)		(__atomic64_add_return(  -1,(v)))
 =======
+=======
+>>>>>>> v3.18
 	return ACCESS_ONCE((v)->counter);
 }
 
@@ -290,6 +320,9 @@ atomic64_read(const atomic64_t *v)
 
 #define atomic64_inc_return(v)		(atomic64_add_return(   1,(v)))
 #define atomic64_dec_return(v)		(atomic64_add_return(  -1,(v)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define atomic64_add_negative(a, v)	(atomic64_add_return((a), (v)) < 0)

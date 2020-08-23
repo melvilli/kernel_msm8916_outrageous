@@ -1,6 +1,10 @@
 ccflags-y := -Iinclude/drm
 <<<<<<< HEAD
+<<<<<<< HEAD
 mgag200-y   := mgag200_main.o mgag200_mode.o \
+=======
+mgag200-y   := mgag200_main.o mgag200_mode.o mgag200_cursor.o \
+>>>>>>> v3.18
 =======
 mgag200-y   := mgag200_main.o mgag200_mode.o mgag200_cursor.o \
 >>>>>>> v3.18

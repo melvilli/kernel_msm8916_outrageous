@@ -17,8 +17,13 @@ config X25
 	  (say Y to "LAPB Data Link Driver" below if you want that).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  You can read more about X.25 at <http://www.sangoma.com/x25.htm> and
 	  <http://www.cisco.com/univercd/cc/td/doc/product/software/ios11/cbook/cx25.htm>.
+=======
+	  You can read more about X.25 at <http://www.sangoma.com/tutorials/x25/> and
+	  <http://docwiki.cisco.com/wiki/X.25>.
+>>>>>>> v3.18
 =======
 	  You can read more about X.25 at <http://www.sangoma.com/tutorials/x25/> and
 	  <http://docwiki.cisco.com/wiki/X.25>.

@@ -31,6 +31,10 @@
 #define PMD_TYPE_TABLE		(_AT(pmdval_t, 3) << 0)
 #define PMD_TYPE_SECT		(_AT(pmdval_t, 1) << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PMD_TABLE_BIT		(_AT(pmdval_t, 1) << 1)
+>>>>>>> v3.18
 =======
 #define PMD_TABLE_BIT		(_AT(pmdval_t, 1) << 1)
 >>>>>>> v3.18
@@ -47,7 +51,11 @@
 #define PMD_SECT_CACHEABLE	(_AT(pmdval_t, 1) << 3)
 #define PMD_SECT_USER		(_AT(pmdval_t, 1) << 6)		/* AP[1] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PMD_SECT_RDONLY		(_AT(pmdval_t, 1) << 7)		/* AP[2] */
+=======
+#define PMD_SECT_AP2		(_AT(pmdval_t, 1) << 7)		/* read only */
+>>>>>>> v3.18
 =======
 #define PMD_SECT_AP2		(_AT(pmdval_t, 1) << 7)		/* read only */
 >>>>>>> v3.18
@@ -60,7 +68,10 @@
 #define PMD_SECT_AP_READ	(_AT(pmdval_t, 0))
 #define PMD_SECT_AP1		(_AT(pmdval_t, 1) << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PMD_SECT_AP2		(_AT(pmdval_t, 1) << 7)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PMD_SECT_TEX(x)		(_AT(pmdval_t, 0))
@@ -81,6 +92,10 @@
 #define PTE_TYPE_FAULT		(_AT(pteval_t, 0) << 0)
 #define PTE_TYPE_PAGE		(_AT(pteval_t, 3) << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PTE_TABLE_BIT		(_AT(pteval_t, 1) << 1)
+>>>>>>> v3.18
 =======
 #define PTE_TABLE_BIT		(_AT(pteval_t, 1) << 1)
 >>>>>>> v3.18
@@ -99,7 +114,10 @@
 #define PHYS_MASK		((1ULL << PHYS_MASK_SHIFT) - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * TTBR0/TTBR1 split (PAGE_OFFSET):
  *   0x40000000: T0SZ = 2, T1SZ = 0 (not used)
@@ -120,5 +138,8 @@
 
 #define TTBR1_SIZE	(((PAGE_OFFSET >> 30) - 1) << 16)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

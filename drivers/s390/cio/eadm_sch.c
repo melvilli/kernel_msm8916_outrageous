@@ -7,6 +7,10 @@
 
 #include <linux/kernel_stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/completion.h>
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 >>>>>>> v3.18
@@ -47,7 +51,11 @@ static debug_info_t *eadm_debug;
 static void EADM_LOG_HEX(int level, void *data, int length)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (level > eadm_debug->level)
+=======
+	if (!debug_level_enabled(eadm_debug, level))
+>>>>>>> v3.18
 =======
 	if (!debug_level_enabled(eadm_debug, level))
 >>>>>>> v3.18
@@ -142,7 +150,11 @@ static void eadm_subchannel_irq(struct subchannel *sch)
 	struct eadm_private *private = get_eadm_private(sch);
 	struct eadm_scsw *scsw = &sch->schib.scsw.eadm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irb *irb = (struct irb *)&S390_lowcore.irb;
+=======
+	struct irb *irb = this_cpu_ptr(&cio_irb);
+>>>>>>> v3.18
 =======
 	struct irb *irb = this_cpu_ptr(&cio_irb);
 >>>>>>> v3.18
@@ -172,6 +184,12 @@ static void eadm_subchannel_irq(struct subchannel *sch)
 	scm_irq_handler((struct aob *)(unsigned long)scsw->aob, error);
 	private->state = EADM_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (private->completion)
+		complete(private->completion);
+>>>>>>> v3.18
 =======
 
 	if (private->completion)
@@ -205,7 +223,11 @@ static struct subchannel *eadm_get_idle_sch(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int eadm_start_aob(struct aob *aob)
+=======
+int eadm_start_aob(struct aob *aob)
+>>>>>>> v3.18
 =======
 int eadm_start_aob(struct aob *aob)
 >>>>>>> v3.18
@@ -237,6 +259,10 @@ out_unlock:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(eadm_start_aob);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(eadm_start_aob);
 >>>>>>> v3.18
@@ -282,6 +308,7 @@ out:
 static void eadm_quiesce(struct subchannel *sch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	do {
@@ -290,6 +317,8 @@ static void eadm_quiesce(struct subchannel *sch)
 		spin_unlock_irq(sch->lock);
 	} while (ret == -EBUSY);
 =======
+=======
+>>>>>>> v3.18
 	struct eadm_private *private = get_eadm_private(sch);
 	DECLARE_COMPLETION_ONSTACK(completion);
 	int ret;
@@ -316,6 +345,9 @@ disable:
 	} while (ret == -EBUSY);
 
 	spin_unlock_irq(sch->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -413,11 +445,14 @@ static struct css_driver eadm_subchannel_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct eadm_ops eadm_ops = {
 	.eadm_start = eadm_start_aob,
 	.owner = THIS_MODULE,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init eadm_sch_init(void)
@@ -440,7 +475,10 @@ static int __init eadm_sch_init(void)
 		goto cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_eadm_ops(&eadm_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -454,7 +492,10 @@ cleanup:
 static void __exit eadm_sch_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_eadm_ops(&eadm_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	css_driver_unregister(&eadm_subchannel_driver);

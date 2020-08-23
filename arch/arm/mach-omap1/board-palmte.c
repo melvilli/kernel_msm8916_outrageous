@@ -39,7 +39,10 @@
 #include <mach/tc.h>
 #include <linux/omap-dma.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/keypad-omap.h>
@@ -49,7 +52,10 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -174,6 +180,7 @@ static struct platform_device palmte_backlight_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_irda_config palmte_irda_config = {
 	.transceiver_cap	= IR_SIRMODE,
 	.rx_channel		= OMAP_DMA_UART3_RX,
@@ -204,13 +211,18 @@ static struct platform_device palmte_irda_device = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_device *palmte_devices[] __initdata = {
 	&palmte_rom_device,
 	&palmte_kp_device,
 	&palmte_lcd_device,
 	&palmte_backlight_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&palmte_irda_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

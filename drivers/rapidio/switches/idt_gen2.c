@@ -12,6 +12,10 @@
 
 #include <linux/stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -394,7 +398,11 @@ idtg2_show_errlog(struct device *dev, struct device_attribute *attr, char *buf)
 static DEVICE_ATTR(errlog, S_IRUGO, idtg2_show_errlog, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int idtg2_sysfs(struct rio_dev *rdev, int create)
+=======
+static int idtg2_sysfs(struct rio_dev *rdev, bool create)
+>>>>>>> v3.18
 =======
 static int idtg2_sysfs(struct rio_dev *rdev, bool create)
 >>>>>>> v3.18
@@ -403,7 +411,11 @@ static int idtg2_sysfs(struct rio_dev *rdev, bool create)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (create == RIO_SW_SYSFS_CREATE) {
+=======
+	if (create) {
+>>>>>>> v3.18
 =======
 	if (create) {
 >>>>>>> v3.18
@@ -417,6 +429,7 @@ static int idtg2_sysfs(struct rio_dev *rdev, bool create)
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int idtg2_switch_init(struct rio_dev *rdev, int do_enum)
 {
@@ -432,6 +445,8 @@ static int idtg2_switch_init(struct rio_dev *rdev, int do_enum)
 
 	if (do_enum) {
 =======
+=======
+>>>>>>> v3.18
 static struct rio_switch_ops idtg2_switch_ops = {
 	.owner = THIS_MODULE,
 	.add_entry = idtg2_route_add_entry,
@@ -457,12 +472,16 @@ static int idtg2_probe(struct rio_dev *rdev, const struct rio_device_id *id)
 	rdev->rswitch->ops = &idtg2_switch_ops;
 
 	if (rdev->do_enum) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Ensure that default routing is disabled on startup */
 		rio_write_config_32(rdev,
 				    RIO_STD_RTE_DEFAULT_PORT, IDT_NO_ROUTE);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -473,6 +492,8 @@ DECLARE_RIO_SWITCH_INIT(RIO_VID_IDT, RIO_DID_IDTVPS1616, idtg2_switch_init);
 DECLARE_RIO_SWITCH_INIT(RIO_VID_IDT, RIO_DID_IDTSPS1616, idtg2_switch_init);
 DECLARE_RIO_SWITCH_INIT(RIO_VID_IDT, RIO_DID_IDTCPS1432, idtg2_switch_init);
 =======
+=======
+>>>>>>> v3.18
 	/* Create device-specific sysfs attributes */
 	idtg2_sysfs(rdev, true);
 
@@ -530,4 +551,7 @@ module_exit(idtg2_exit);
 MODULE_DESCRIPTION("IDT CPS Gen.2 Serial RapidIO switch family driver");
 MODULE_AUTHOR("Integrated Device Technology, Inc.");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

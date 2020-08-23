@@ -15,14 +15,20 @@ DOCBOOKS := z8530book.xml device-drivers.xml \
 	    80211.xml debugobjects.xml sh.xml regulator.xml \
 	    alsa-driver-api.xml writing-an-alsa-driver.xml \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    tracepoint.xml drm.xml media_api.xml
 
 include $(srctree)/Documentation/DocBook/media/Makefile
 =======
+=======
+>>>>>>> v3.18
 	    tracepoint.xml drm.xml media_api.xml w1.xml \
 	    writing_musb_glue_layer.xml
 
 include Documentation/DocBook/media/Makefile
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ###
@@ -44,6 +50,10 @@ PS_METHOD	= $(prefer-db2x)
 PHONY += xmldocs sgmldocs psdocs pdfdocs htmldocs mandocs installmandocs cleandocs
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+targets += $(DOCBOOKS)
+>>>>>>> v3.18
 =======
 targets += $(DOCBOOKS)
 >>>>>>> v3.18
@@ -66,16 +76,22 @@ htmldocs: $(HTML)
 MAN := $(patsubst %.xml, %.9, $(BOOKS))
 mandocs: $(MAN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 installmandocs: mandocs
 	mkdir -p /usr/local/man/man9/
 	install Documentation/DocBook/man/*.9.gz /usr/local/man/man9/
 =======
+=======
+>>>>>>> v3.18
 	$(if $(wildcard $(obj)/man/*.9),gzip -f $(obj)/man/*.9)
 
 installmandocs: mandocs
 	mkdir -p /usr/local/man/man9/
 	install $(obj)/man/*.9.gz /usr/local/man/man9/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ###
@@ -84,7 +100,11 @@ KERNELDOC = $(srctree)/scripts/kernel-doc
 DOCPROC   = $(objtree)/scripts/docproc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 XMLTOFLAGS = -m $(srctree)/Documentation/DocBook/stylesheet.xsl
+=======
+XMLTOFLAGS = -m $(srctree)/$(src)/stylesheet.xsl
+>>>>>>> v3.18
 =======
 XMLTOFLAGS = -m $(srctree)/$(src)/stylesheet.xsl
 >>>>>>> v3.18
@@ -110,6 +130,7 @@ define rule_docproc
 endef
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 %.xml: %.tmpl FORCE
 	$(call if_changed_rule,docproc)
 
@@ -125,6 +146,11 @@ endif
 # Changes in kernel-doc force a rebuild of all documentation
 $(BOOKS): $(KERNELDOC)
 
+=======
+%.xml: %.tmpl $(KERNELDOC) $(DOCPROC) FORCE
+	$(call if_changed_rule,docproc)
+
+>>>>>>> v3.18
 =======
 %.xml: %.tmpl $(KERNELDOC) $(DOCPROC) FORCE
 	$(call if_changed_rule,docproc)
@@ -168,7 +194,11 @@ quiet_cmd_db2pdf = PDF     $@
 
 index = index.html
 <<<<<<< HEAD
+<<<<<<< HEAD
 main_idx = Documentation/DocBook/$(index)
+=======
+main_idx = $(obj)/$(index)
+>>>>>>> v3.18
 =======
 main_idx = $(obj)/$(index)
 >>>>>>> v3.18
@@ -179,9 +209,15 @@ build_main_index = rm -rf $(main_idx); \
 
 quiet_cmd_db2html = HTML    $@
 <<<<<<< HEAD
+<<<<<<< HEAD
       cmd_db2html = xmlto xhtml $(XMLTOFLAGS) -o $(patsubst %.html,%,$@) $< && \
 		echo '<a HREF="$(patsubst %.html,%,$(notdir $@))/index.html"> \
         $(patsubst %.html,%,$(notdir $@))</a><p>' > $@
+=======
+      cmd_db2html = xmlto html $(XMLTOFLAGS) -o $(patsubst %.html,%,$@) $< && \
+		echo '<a HREF="$(patsubst %.html,%,$(notdir $@))/index.html"> \
+		$(patsubst %.html,%,$(notdir $@))</a><p>' > $@
+>>>>>>> v3.18
 =======
       cmd_db2html = xmlto html $(XMLTOFLAGS) -o $(patsubst %.html,%,$@) $< && \
 		echo '<a HREF="$(patsubst %.html,%,$(notdir $@))/index.html"> \
@@ -199,7 +235,11 @@ quiet_cmd_db2html = HTML    $@
 
 quiet_cmd_db2man = MAN     $@
 <<<<<<< HEAD
+<<<<<<< HEAD
       cmd_db2man = if grep -q refentry $<; then xmlto man $(XMLTOFLAGS) -o $(obj)/man $< ; gzip -f $(obj)/man/*.9; fi
+=======
+      cmd_db2man = if grep -q refentry $<; then xmlto man $(XMLTOFLAGS) -o $(obj)/man $< ; fi
+>>>>>>> v3.18
 =======
       cmd_db2man = if grep -q refentry $<; then xmlto man $(XMLTOFLAGS) -o $(obj)/man $< ; fi
 >>>>>>> v3.18

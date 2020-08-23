@@ -4,7 +4,11 @@
  *
  * Copyright (C) 2007 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2008-2014, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2008-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2008-2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -23,6 +27,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 >>>>>>> v3.18
@@ -33,6 +41,7 @@
 #include <mach/hardware.h>
 #include <asm/page.h>
 #include <mach/msm_iomap.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/memory.h>
 #include <asm/mach/map.h>
@@ -46,13 +55,22 @@
 
 #include "common.h"
 >>>>>>> v3.18
+=======
+#include <asm/mach/map.h>
+
+#include "common.h"
+>>>>>>> v3.18
 
 #define MSM_CHIP_DEVICE_TYPE(name, chip, mem_type) {			      \
 		.virtual = (unsigned long) MSM_##name##_BASE, \
 		.pfn = __phys_to_pfn(chip##_##name##_PHYS), \
 		.length = chip##_##name##_SIZE, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.type = MT_DEVICE, \
+=======
+		.type = mem_type, \
+>>>>>>> v3.18
 =======
 		.type = mem_type, \
 >>>>>>> v3.18
@@ -64,6 +82,7 @@
 		MSM_CHIP_DEVICE_TYPE(name, chip, MT_DEVICE)
 #define MSM_DEVICE(name) MSM_CHIP_DEVICE(name, MSM)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM8974
 static struct map_desc msm_8974_io_desc[] __initdata = {
@@ -209,6 +228,8 @@ void __init msm_map_msmzirc_io(void)
 }
 #endif /* CONFIG_ARCH_MSMZIRC */
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ARCH_MSM7X00A)
 static struct map_desc msm_io_desc[] __initdata = {
 	MSM_DEVICE_TYPE(VIC, MT_DEVICE_NONSHARED),
@@ -325,4 +346,7 @@ void __iomem *__msm_ioremap_caller(phys_addr_t phys_addr, size_t size,
 	return __arm_ioremap_caller(phys_addr, size, mtype, caller);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

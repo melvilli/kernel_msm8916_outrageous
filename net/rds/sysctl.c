@@ -50,7 +50,11 @@ unsigned int  rds_sysctl_max_unacked_bytes = (16 << 20);
 unsigned int rds_sysctl_ping_enable = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table rds_sysctl_rds_table[] = {
+=======
+static struct ctl_table rds_sysctl_rds_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table rds_sysctl_rds_table[] = {
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ static struct ctl_table rds_sysctl_rds_table[] = {
 		.procname	= "max_unacked_packets",
 		.data		= &rds_sysctl_max_unacked_packets,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen         = sizeof(int),
+=======
+		.maxlen         = sizeof(unsigned long),
+>>>>>>> v3.18
 =======
 		.maxlen         = sizeof(unsigned long),
 >>>>>>> v3.18
@@ -87,7 +95,11 @@ static struct ctl_table rds_sysctl_rds_table[] = {
 		.procname	= "max_unacked_bytes",
 		.data		= &rds_sysctl_max_unacked_bytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen         = sizeof(int),
+=======
+		.maxlen         = sizeof(unsigned long),
+>>>>>>> v3.18
 =======
 		.maxlen         = sizeof(unsigned long),
 >>>>>>> v3.18
@@ -107,8 +119,12 @@ static struct ctl_table rds_sysctl_rds_table[] = {
 void rds_sysctl_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rds_sysctl_reg_table)
 		unregister_net_sysctl_table(rds_sysctl_reg_table);
+=======
+	unregister_net_sysctl_table(rds_sysctl_reg_table);
+>>>>>>> v3.18
 =======
 	unregister_net_sysctl_table(rds_sysctl_reg_table);
 >>>>>>> v3.18

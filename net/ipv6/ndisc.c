@@ -126,6 +126,7 @@ struct neigh_table nd_tbl = {
 	.parms = {
 		.tbl			= &nd_tbl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.base_reachable_time	= ND_REACHABLE_TIME,
 		.retrans_time		= ND_RETRANS_TIMER,
 		.gc_staletime		= 60 * HZ,
@@ -138,6 +139,8 @@ struct neigh_table nd_tbl = {
 		.proxy_delay		= (8 * HZ) / 10,
 		.proxy_qlen		= 64,
 =======
+=======
+>>>>>>> v3.18
 		.reachable_time		= ND_REACHABLE_TIME,
 		.data = {
 			[NEIGH_VAR_MCAST_PROBES] = 3,
@@ -151,6 +154,9 @@ struct neigh_table nd_tbl = {
 			[NEIGH_VAR_ANYCAST_DELAY] = 1 * HZ,
 			[NEIGH_VAR_PROXY_DELAY] = (8 * HZ) / 10,
 		},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.gc_interval =	  30 * HZ,
@@ -190,7 +196,11 @@ static struct nd_opt_hdr *ndisc_next_option(struct nd_opt_hdr *cur,
 	do {
 		cur = ((void *)cur) + (cur->nd_opt_len << 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while(cur < end && cur->nd_opt_type != type);
+=======
+	} while (cur < end && cur->nd_opt_type != type);
+>>>>>>> v3.18
 =======
 	} while (cur < end && cur->nd_opt_type != type);
 >>>>>>> v3.18
@@ -211,7 +221,11 @@ static struct nd_opt_hdr *ndisc_next_useropt(struct nd_opt_hdr *cur,
 	do {
 		cur = ((void *)cur) + (cur->nd_opt_len << 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while(cur < end && !ndisc_is_useropt(cur));
+=======
+	} while (cur < end && !ndisc_is_useropt(cur));
+>>>>>>> v3.18
 =======
 	} while (cur < end && !ndisc_is_useropt(cur));
 >>>>>>> v3.18
@@ -307,7 +321,10 @@ int ndisc_mc_map(const struct in6_addr *addr, char *buf, struct net_device *dev,
 	return -EINVAL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(ndisc_mc_map);
@@ -322,7 +339,11 @@ static u32 ndisc_hash(const void *pkey,
 static int ndisc_constructor(struct neighbour *neigh)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct in6_addr *addr = (struct in6_addr*)&neigh->primary_key;
+=======
+	struct in6_addr *addr = (struct in6_addr *)&neigh->primary_key;
+>>>>>>> v3.18
 =======
 	struct in6_addr *addr = (struct in6_addr *)&neigh->primary_key;
 >>>>>>> v3.18
@@ -374,7 +395,11 @@ static int ndisc_constructor(struct neighbour *neigh)
 static int pndisc_constructor(struct pneigh_entry *n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct in6_addr *addr = (struct in6_addr*)&n->key;
+=======
+	struct in6_addr *addr = (struct in6_addr *)&n->key;
+>>>>>>> v3.18
 =======
 	struct in6_addr *addr = (struct in6_addr *)&n->key;
 >>>>>>> v3.18
@@ -391,7 +416,11 @@ static int pndisc_constructor(struct pneigh_entry *n)
 static void pndisc_destructor(struct pneigh_entry *n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct in6_addr *addr = (struct in6_addr*)&n->key;
+=======
+	struct in6_addr *addr = (struct in6_addr *)&n->key;
+>>>>>>> v3.18
 =======
 	struct in6_addr *addr = (struct in6_addr *)&n->key;
 >>>>>>> v3.18
@@ -470,7 +499,10 @@ static void ndisc_send_skb(struct sk_buff *skb,
 
 	if (!dst) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sock *sk = net->ipv6.ndisc_sk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		struct flowi6 fl6;
@@ -507,15 +539,21 @@ static void ndisc_send_skb(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ndisc_send_na(struct net_device *dev, struct neighbour *neigh,
 			  const struct in6_addr *daddr,
 			  const struct in6_addr *solicited_addr,
 			  bool router, bool solicited, bool override, bool inc_opt)
 =======
+=======
+>>>>>>> v3.18
 void ndisc_send_na(struct net_device *dev, struct neighbour *neigh,
 		   const struct in6_addr *daddr,
 		   const struct in6_addr *solicited_addr,
 		   bool router, bool solicited, bool override, bool inc_opt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct sk_buff *skb;
@@ -531,7 +569,11 @@ void ndisc_send_na(struct net_device *dev, struct neighbour *neigh,
 		src_addr = solicited_addr;
 		if (ifp->flags & IFA_F_OPTIMISTIC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			override = 0;
+=======
+			override = false;
+>>>>>>> v3.18
 =======
 			override = false;
 >>>>>>> v3.18
@@ -613,7 +655,11 @@ void ndisc_send_ns(struct net_device *dev, struct neighbour *neigh,
 
 	if (ipv6_addr_any(saddr))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inc_opt = 0;
+=======
+		inc_opt = false;
+>>>>>>> v3.18
 =======
 		inc_opt = false;
 >>>>>>> v3.18
@@ -715,7 +761,11 @@ static void ndisc_solicit(struct neighbour *neigh, struct sk_buff *skb)
 		saddr = &ipv6_hdr(skb)->saddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((probes -= neigh->parms->ucast_probes) < 0) {
+=======
+	if ((probes -= NEIGH_VAR(neigh->parms, UCAST_PROBES)) < 0) {
+>>>>>>> v3.18
 =======
 	if ((probes -= NEIGH_VAR(neigh->parms, UCAST_PROBES)) < 0) {
 >>>>>>> v3.18
@@ -726,10 +776,15 @@ static void ndisc_solicit(struct neighbour *neigh, struct sk_buff *skb)
 		}
 		ndisc_send_ns(dev, neigh, target, target, saddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if ((probes -= neigh->parms->app_probes) < 0) {
 #ifdef CONFIG_ARPD
 		neigh_app_ns(neigh);
 #endif
+=======
+	} else if ((probes -= NEIGH_VAR(neigh->parms, APP_PROBES)) < 0) {
+		neigh_app_ns(neigh);
+>>>>>>> v3.18
 =======
 	} else if ((probes -= NEIGH_VAR(neigh->parms, APP_PROBES)) < 0) {
 		neigh_app_ns(neigh);
@@ -762,7 +817,11 @@ static void ndisc_recv_ns(struct sk_buff *skb)
 	const struct in6_addr *daddr = &ipv6_hdr(skb)->daddr;
 	u8 *lladdr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ndoptlen = skb->tail - (skb->transport_header +
+=======
+	u32 ndoptlen = skb_tail_pointer(skb) - (skb_transport_header(skb) +
+>>>>>>> v3.18
 =======
 	u32 ndoptlen = skb_tail_pointer(skb) - (skb_transport_header(skb) +
 >>>>>>> v3.18
@@ -863,8 +922,13 @@ static void ndisc_recv_ns(struct sk_buff *skb)
 			if (!(NEIGH_CB(skb)->flags & LOCALLY_ENQUEUED) &&
 			    skb->pkt_type != PACKET_HOST &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    inc != 0 &&
 			    idev->nd_parms->proxy_delay != 0) {
+=======
+			    inc &&
+			    NEIGH_VAR(idev->nd_parms, PROXY_DELAY) != 0) {
+>>>>>>> v3.18
 =======
 			    inc &&
 			    NEIGH_VAR(idev->nd_parms, PROXY_DELAY) != 0) {
@@ -928,15 +992,21 @@ static void ndisc_recv_na(struct sk_buff *skb)
 {
 	struct nd_msg *msg = (struct nd_msg *)skb_transport_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct in6_addr *saddr = &ipv6_hdr(skb)->saddr;
 	const struct in6_addr *daddr = &ipv6_hdr(skb)->daddr;
 	u8 *lladdr = NULL;
 	u32 ndoptlen = skb->tail - (skb->transport_header +
 =======
+=======
+>>>>>>> v3.18
 	struct in6_addr *saddr = &ipv6_hdr(skb)->saddr;
 	const struct in6_addr *daddr = &ipv6_hdr(skb)->daddr;
 	u8 *lladdr = NULL;
 	u32 ndoptlen = skb_tail_pointer(skb) - (skb_transport_header(skb) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    offsetof(struct nd_msg, opt));
 	struct ndisc_options ndopts;
@@ -1028,10 +1098,14 @@ static void ndisc_recv_na(struct sk_buff *skb)
 			 * Change: router to host
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct rt6_info *rt;
 			rt = rt6_get_dflt_router(saddr, dev);
 			if (rt)
 				ip6_del_rt(rt);
+=======
+			rt6_clean_tohost(dev_net(dev),  saddr);
+>>>>>>> v3.18
 =======
 			rt6_clean_tohost(dev_net(dev),  saddr);
 >>>>>>> v3.18
@@ -1156,11 +1230,14 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 	unsigned int pref = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 * opt = (__u8 *)(ra_msg + 1);
 
 	optlen = (skb->tail - skb->transport_header) - sizeof(struct ra_msg);
 
 =======
+=======
+>>>>>>> v3.18
 	__u8 *opt = (__u8 *)(ra_msg + 1);
 
 	optlen = (skb_tail_pointer(skb) - skb_transport_header(skb)) -
@@ -1169,6 +1246,9 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 	ND_PRINTK(2, info,
 		  "RA: %s, dev: %s\n",
 		  __func__, skb->dev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(ipv6_addr_type(&ipv6_hdr(skb)->saddr) & IPV6_ADDR_LINKLOCAL)) {
 		ND_PRINTK(2, warn, "RA: source address is not link-local\n");
@@ -1203,6 +1283,7 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ipv6_accept_ra(in6_dev))
 		goto skip_linkparms;
 
@@ -1211,6 +1292,8 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 	if (skb->ndisc_nodetype == NDISC_NODETYPE_NODEFAULT)
 		goto skip_linkparms;
 =======
+=======
+>>>>>>> v3.18
 	if (!ipv6_accept_ra(in6_dev)) {
 		ND_PRINTK(2, info,
 			  "RA: %s, did not accept ra for dev: %s\n",
@@ -1226,6 +1309,9 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 			  __func__, skb->dev->name);
 		goto skip_linkparms;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1249,12 +1335,15 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 					IF_RA_OTHERCONF : 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!in6_dev->cnf.accept_ra_defrtr)
 		goto skip_defrtr;
 
 	if (ipv6_chk_addr(dev_net(in6_dev->dev), &ipv6_hdr(skb)->saddr, NULL, 0))
 		goto skip_defrtr;
 =======
+=======
+>>>>>>> v3.18
 	if (!in6_dev->cnf.accept_ra_defrtr) {
 		ND_PRINTK(2, info,
 			  "RA: %s, defrtr is false for dev: %s\n",
@@ -1273,6 +1362,9 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 			  skb->dev->name);
 		goto skip_defrtr;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lifetime = ntohs(ra_msg->icmph.icmp6_rt_lifetime);
@@ -1303,13 +1395,19 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rt == NULL && lifetime) {
 		ND_PRINTK(3, dbg, "RA: adding default router\n");
 =======
+=======
+>>>>>>> v3.18
 	ND_PRINTK(3, info, "RA: rt: %p  lifetime: %d, for dev: %s\n",
 		  rt, lifetime, skb->dev->name);
 	if (rt == NULL && lifetime) {
 		ND_PRINTK(3, info, "RA: adding default router\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rt = rt6_add_dflt_router(&ipv6_hdr(skb)->saddr, skb->dev, pref);
@@ -1337,6 +1435,7 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 		rt6_set_expires(rt, jiffies + (HZ * lifetime));
 	if (ra_msg->icmph.icmp6_hop_limit) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Only set hop_limit on the interface if it is higher than
 		 * the current hop_limit.
 		 */
@@ -1345,6 +1444,9 @@ static void ndisc_router_discovery(struct sk_buff *skb)
 		} else {
 			ND_PRINTK(2, warn, "RA: Got route advertisement with lower hop_limit than current\n");
 		}
+=======
+		in6_dev->cnf.hop_limit = ra_msg->icmph.icmp6_hop_limit;
+>>>>>>> v3.18
 =======
 		in6_dev->cnf.hop_limit = ra_msg->icmph.icmp6_hop_limit;
 >>>>>>> v3.18
@@ -1367,7 +1469,11 @@ skip_defrtr:
 			if (rtime < HZ/10)
 				rtime = HZ/10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			in6_dev->nd_parms->retrans_time = rtime;
+=======
+			NEIGH_VAR_SET(in6_dev->nd_parms, RETRANS_TIME, rtime);
+>>>>>>> v3.18
 =======
 			NEIGH_VAR_SET(in6_dev->nd_parms, RETRANS_TIME, rtime);
 >>>>>>> v3.18
@@ -1383,15 +1489,21 @@ skip_defrtr:
 				rtime = HZ/10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (rtime != in6_dev->nd_parms->base_reachable_time) {
 				in6_dev->nd_parms->base_reachable_time = rtime;
 				in6_dev->nd_parms->gc_staletime = 3 * rtime;
 =======
+=======
+>>>>>>> v3.18
 			if (rtime != NEIGH_VAR(in6_dev->nd_parms, BASE_REACHABLE_TIME)) {
 				NEIGH_VAR_SET(in6_dev->nd_parms,
 					      BASE_REACHABLE_TIME, rtime);
 				NEIGH_VAR_SET(in6_dev->nd_parms,
 					      GC_STALETIME, 3 * rtime);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				in6_dev->nd_parms->reachable_time = neigh_rand_reach_time(rtime);
 				in6_dev->tstamp = jiffies;
@@ -1428,6 +1540,7 @@ skip_linkparms:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ipv6_accept_ra(in6_dev))
 		goto out;
 
@@ -1435,6 +1548,8 @@ skip_linkparms:
 	if (ipv6_chk_addr(dev_net(in6_dev->dev), &ipv6_hdr(skb)->saddr, NULL, 0))
 		goto skip_routeinfo;
 =======
+=======
+>>>>>>> v3.18
 	if (!ipv6_accept_ra(in6_dev)) {
 		ND_PRINTK(2, info,
 			  "RA: %s, accept_ra is false for dev: %s\n",
@@ -1451,6 +1566,9 @@ skip_linkparms:
 			  skb->dev->name);
 		goto skip_routeinfo;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (in6_dev->cnf.accept_ra_rtr_pref && ndopts.nd_opts_ri) {
@@ -1465,16 +1583,22 @@ skip_linkparms:
 				continue;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ri->prefix_len > in6_dev->cnf.accept_ra_rt_info_max_plen)
 				continue;
 			rt6_route_rcv(skb->dev, (u8*)p, (p->nd_opt_len) << 3,
 =======
+=======
+>>>>>>> v3.18
 			if (ri->prefix_len == 0 &&
 			    !in6_dev->cnf.accept_ra_defrtr)
 				continue;
 			if (ri->prefix_len > in6_dev->cnf.accept_ra_rt_info_max_plen)
 				continue;
 			rt6_route_rcv(skb->dev, (u8 *)p, (p->nd_opt_len) << 3,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      &ipv6_hdr(skb)->saddr);
 		}
@@ -1486,15 +1610,21 @@ skip_routeinfo:
 #ifdef CONFIG_IPV6_NDISC_NODETYPE
 	/* skip link-specific ndopts from interior routers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->ndisc_nodetype == NDISC_NODETYPE_NODEFAULT)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (skb->ndisc_nodetype == NDISC_NODETYPE_NODEFAULT) {
 		ND_PRINTK(2, info,
 			  "RA: %s, nodetype is NODEFAULT (interior routes), dev: %s\n",
 			  __func__, skb->dev->name);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1510,17 +1640,23 @@ skip_routeinfo:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ndopts.nd_opts_mtu && in6_dev->cnf.accept_ra_mtu) {
 		__be32 n;
 		u32 mtu;
 
 		memcpy(&n, ((u8*)(ndopts.nd_opts_mtu+1))+2, sizeof(mtu));
 =======
+=======
+>>>>>>> v3.18
 	if (ndopts.nd_opts_mtu) {
 		__be32 n;
 		u32 mtu;
 
 		memcpy(&n, ((u8 *)(ndopts.nd_opts_mtu+1))+2, sizeof(mtu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mtu = ntohl(n);
 
@@ -1560,7 +1696,11 @@ static void ndisc_redirect_rcv(struct sk_buff *skb)
 	struct ndisc_options ndopts;
 	struct rd_msg *msg = (struct rd_msg *)skb_transport_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ndoptlen = skb->tail - (skb->transport_header +
+=======
+	u32 ndoptlen = skb_tail_pointer(skb) - (skb_transport_header(skb) +
+>>>>>>> v3.18
 =======
 	u32 ndoptlen = skb_tail_pointer(skb) - (skb_transport_header(skb) +
 >>>>>>> v3.18
@@ -1586,14 +1726,20 @@ static void ndisc_redirect_rcv(struct sk_buff *skb)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ndopts.nd_opts_rh)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	if (!ndopts.nd_opts_rh) {
 		ip6_redirect_no_header(skb, dev_net(skb->dev),
 					skb->dev->ifindex, 0);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdr = (u8 *)ndopts.nd_opts_rh;
@@ -1742,7 +1888,10 @@ static void pndisc_redo(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool ndisc_suppress_frag_ndisc(struct sk_buff *skb)
 {
 	struct inet6_dev *idev = __in6_dev_get(skb->dev);
@@ -1757,12 +1906,21 @@ static bool ndisc_suppress_frag_ndisc(struct sk_buff *skb)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ndisc_rcv(struct sk_buff *skb)
 {
 	struct nd_msg *msg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ndisc_suppress_frag_ndisc(skb))
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (ndisc_suppress_frag_ndisc(skb))
 		return 0;
@@ -1817,7 +1975,11 @@ int ndisc_rcv(struct sk_buff *skb)
 static int ndisc_netdev_event(struct notifier_block *this, unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1881,6 +2043,7 @@ int ndisc_ifinfo_sysctl_change(struct ctl_table *ctl, int write, void __user *bu
 
 	if (strcmp(ctl->procname, "retrans_time") == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = proc_dointvec(ctl, write, buffer, lenp, ppos);
 
 	else if (strcmp(ctl->procname, "base_reachable_time") == 0)
@@ -1892,6 +2055,8 @@ int ndisc_ifinfo_sysctl_change(struct ctl_table *ctl, int write, void __user *bu
 		ret = proc_dointvec_ms_jiffies(ctl, write,
 					       buffer, lenp, ppos);
 =======
+=======
+>>>>>>> v3.18
 		ret = neigh_proc_dointvec(ctl, write, buffer, lenp, ppos);
 
 	else if (strcmp(ctl->procname, "base_reachable_time") == 0)
@@ -1902,14 +2067,23 @@ int ndisc_ifinfo_sysctl_change(struct ctl_table *ctl, int write, void __user *bu
 		 (strcmp(ctl->procname, "base_reachable_time_ms") == 0))
 		ret = neigh_proc_dointvec_ms_jiffies(ctl, write,
 						     buffer, lenp, ppos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		ret = -1;
 
 	if (write && ret == 0 && dev && (idev = in6_dev_get(dev)) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ctl->data == &idev->nd_parms->base_reachable_time)
 			idev->nd_parms->reachable_time = neigh_rand_reach_time(idev->nd_parms->base_reachable_time);
+=======
+		if (ctl->data == &NEIGH_VAR(idev->nd_parms, BASE_REACHABLE_TIME))
+			idev->nd_parms->reachable_time =
+					neigh_rand_reach_time(NEIGH_VAR(idev->nd_parms, BASE_REACHABLE_TIME));
+>>>>>>> v3.18
 =======
 		if (ctl->data == &NEIGH_VAR(idev->nd_parms, BASE_REACHABLE_TIME))
 			idev->nd_parms->reachable_time =
@@ -1974,6 +2148,7 @@ int __init ndisc_init(void)
 
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = neigh_sysctl_register(NULL, &nd_tbl.parms, "ipv6",
 				    &ndisc_ifinfo_sysctl_change);
 	if (err)
@@ -1981,12 +2156,17 @@ int __init ndisc_init(void)
 #endif
 out:
 =======
+=======
+>>>>>>> v3.18
 	err = neigh_sysctl_register(NULL, &nd_tbl.parms,
 				    ndisc_ifinfo_sysctl_change);
 	if (err)
 		goto out_unregister_pernet;
 out:
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 

@@ -17,6 +17,10 @@
 #include <linux/list.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ static inline struct dma_chan *acpi_dma_request_slave_chan_by_index(
 		struct device *dev, size_t index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NULL;
+=======
+	return ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 =======
 	return ERR_PTR(-ENODEV);
 >>>>>>> v3.18
@@ -117,7 +125,11 @@ static inline struct dma_chan *acpi_dma_request_slave_chan_by_name(
 		struct device *dev, const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NULL;
+=======
+	return ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 =======
 	return ERR_PTR(-ENODEV);
 >>>>>>> v3.18

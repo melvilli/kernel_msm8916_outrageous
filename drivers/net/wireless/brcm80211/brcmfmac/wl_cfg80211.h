@@ -36,7 +36,11 @@
 
 #define WL_ESCAN_BUF_SIZE		(1024 * 64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WL_ESCAN_TIMER_INTERVAL_MS	8000 /* E-Scan timeout */
+=======
+#define WL_ESCAN_TIMER_INTERVAL_MS	10000 /* E-Scan timeout */
+>>>>>>> v3.18
 =======
 #define WL_ESCAN_TIMER_INTERVAL_MS	10000 /* E-Scan timeout */
 >>>>>>> v3.18
@@ -94,6 +98,7 @@ enum brcmf_scan_status {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * enum wl_mode - driver mode of virtual interface.
  *
@@ -109,6 +114,8 @@ enum wl_mode {
 	WL_MODE_P2P
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* dongle configuration */
@@ -201,7 +208,10 @@ struct vif_saved_ie {
  * @wdev: wireless device.
  * @profile: profile information.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mode: operating mode.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @roam_off: roaming state.
@@ -215,7 +225,10 @@ struct brcmf_cfg80211_vif {
 	struct wireless_dev wdev;
 	struct brcmf_cfg80211_profile profile;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 mode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s32 roam_off;
@@ -394,6 +407,11 @@ struct brcmf_cfg80211_vif_event {
  * @vif_cnt: number of vif instances.
  * @vif_event: vif event signalling.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @wowl_enabled; set during suspend, is wowl used.
+ * @pre_wowl_pmmode: intermediate storage of pm mode during wowl.
+>>>>>>> v3.18
 =======
  * @wowl_enabled; set during suspend, is wowl used.
  * @pre_wowl_pmmode: intermediate storage of pm mode during wowl.
@@ -407,7 +425,10 @@ struct brcmf_cfg80211_info {
 	struct cfg80211_scan_request *scan_request;
 	struct mutex usr_sync;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcmf_scan_results *bss_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct brcmf_cfg80211_scan_req scan_req_int;
@@ -424,7 +445,10 @@ struct brcmf_cfg80211_info {
 	bool pwr_save;
 	bool dongle_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool roam_on;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool scan_tried;
@@ -437,16 +461,22 @@ struct brcmf_cfg80211_info {
 	u8 *escan_ioctl_buf;
 	struct list_head vif_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 vif_cnt;
 	struct brcmf_cfg80211_vif_event vif_event;
 	struct completion vif_disabled;
 	struct brcmu_d11inf d11inf;
 =======
+=======
+>>>>>>> v3.18
 	struct brcmf_cfg80211_vif_event vif_event;
 	struct completion vif_disabled;
 	struct brcmu_d11inf d11inf;
 	bool wowl_enabled;
 	u32 pre_wowl_pmmode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -520,8 +550,12 @@ struct brcmf_cfg80211_vif *brcmf_alloc_vif(struct brcmf_cfg80211_info *cfg,
 					   enum nl80211_iftype type,
 					   bool pm_block);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void brcmf_free_vif(struct brcmf_cfg80211_info *cfg,
 	            struct brcmf_cfg80211_vif *vif);
+=======
+void brcmf_free_vif(struct brcmf_cfg80211_vif *vif);
+>>>>>>> v3.18
 =======
 void brcmf_free_vif(struct brcmf_cfg80211_vif *vif);
 >>>>>>> v3.18
@@ -530,16 +564,22 @@ s32 brcmf_vif_set_mgmt_ie(struct brcmf_cfg80211_vif *vif, s32 pktflag,
 			  const u8 *vndr_ie_buf, u32 vndr_ie_len);
 s32 brcmf_vif_clear_mgmt_ies(struct brcmf_cfg80211_vif *vif);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct brcmf_tlv *brcmf_parse_tlvs(void *buf, int buflen, uint key);
 u16 channel_to_chanspec(struct brcmu_d11inf *d11inf,
 			struct ieee80211_channel *ch);
 u32 wl_get_vif_state_all(struct brcmf_cfg80211_info *cfg, unsigned long state);
 =======
+=======
+>>>>>>> v3.18
 const struct brcmf_tlv *
 brcmf_parse_tlvs(const void *buf, int buflen, uint key);
 u16 channel_to_chanspec(struct brcmu_d11inf *d11inf,
 			struct ieee80211_channel *ch);
 bool brcmf_get_vif_state_any(struct brcmf_cfg80211_info *cfg, unsigned long state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void brcmf_cfg80211_arm_vif_event(struct brcmf_cfg80211_info *cfg,
 				  struct brcmf_cfg80211_vif *vif);
@@ -552,6 +592,10 @@ s32 brcmf_notify_escan_complete(struct brcmf_cfg80211_info *cfg,
 void brcmf_set_mpc(struct brcmf_if *ndev, int mpc);
 void brcmf_abort_scanning(struct brcmf_cfg80211_info *cfg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void brcmf_cfg80211_free_netdev(struct net_device *ndev);
+>>>>>>> v3.18
 =======
 void brcmf_cfg80211_free_netdev(struct net_device *ndev);
 >>>>>>> v3.18

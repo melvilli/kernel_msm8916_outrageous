@@ -19,6 +19,10 @@
 #include <linux/device.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/consumer.h>
 >>>>>>> v3.18
@@ -70,6 +74,10 @@ struct phy {
 	int			power_count;
 	struct phy_attrs	attrs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regulator	*pwr;
+>>>>>>> v3.18
 =======
 	struct regulator	*pwr;
 >>>>>>> v3.18

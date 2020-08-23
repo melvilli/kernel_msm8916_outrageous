@@ -17,7 +17,10 @@
 #include <linux/cpufreq.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/jiffies.h>
@@ -1126,8 +1129,12 @@ oprof_cpufreq_notify(struct notifier_block *nb, unsigned long val, void *data)
 	struct cpufreq_freqs *frq = data;
 	if ((val == CPUFREQ_PRECHANGE && frq->old < frq->new) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (val == CPUFREQ_POSTCHANGE && frq->old > frq->new) ||
 	    (val == CPUFREQ_RESUMECHANGE || val == CPUFREQ_SUSPENDCHANGE))
+=======
+	    (val == CPUFREQ_POSTCHANGE && frq->old > frq->new))
+>>>>>>> v3.18
 =======
 	    (val == CPUFREQ_POSTCHANGE && frq->old > frq->new))
 >>>>>>> v3.18

@@ -115,13 +115,19 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int fat_ioctl_get_volume_id(struct inode *inode, u32 __user *user_attr)
 {
 	struct msdos_sb_info *sbi = MSDOS_SB(inode->i_sb);
 	return put_user(sbi->vol_id, user_attr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long fat_generic_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
@@ -134,6 +140,11 @@ long fat_generic_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case FAT_IOCTL_SET_ATTRIBUTES:
 		return fat_ioctl_set_attributes(filp, user_attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case FAT_IOCTL_GET_VOLUME_ID:
+		return fat_ioctl_get_volume_id(inode, user_attr);
+>>>>>>> v3.18
 =======
 	case FAT_IOCTL_GET_VOLUME_ID:
 		return fat_ioctl_get_volume_id(inode, user_attr);
@@ -177,15 +188,21 @@ int fat_file_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
 const struct file_operations fat_file_operations = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= generic_file_aio_read,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.write		= new_sync_write,
 	.read_iter	= generic_file_read_iter,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.release	= fat_file_release,

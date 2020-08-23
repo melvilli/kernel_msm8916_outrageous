@@ -15,16 +15,22 @@
  * We don't use int-l64.h for the kernel anymore but still use it for
  * userspace to avoid code changes.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #ifndef __KERNEL__
 # if _MIPS_SZLONG == 64
 =======
+=======
+>>>>>>> v3.18
  *
  * However, some user programs (e.g. perf) may not want this. They can
  * flag __SANE_USERSPACE_TYPES__ to get int-ll64.h here.
  */
 #ifndef __KERNEL__
 # if _MIPS_SZLONG == 64 && !defined(__SANE_USERSPACE_TYPES__)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #  include <asm-generic/int-l64.h>
 # else

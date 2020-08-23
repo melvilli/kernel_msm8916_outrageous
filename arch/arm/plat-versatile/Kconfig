@@ -4,6 +4,7 @@ config PLAT_VERSATILE_CLOCK
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PLAT_VERSATILE_CLCD
 	bool
 
@@ -13,6 +14,8 @@ config PLAT_VERSATILE_LEDS
 	select LEDS_CLASS
 	select LEDS_TRIGGERS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PLAT_VERSATILE_SCHED_CLOCK

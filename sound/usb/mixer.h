@@ -64,8 +64,11 @@ void snd_usb_mixer_notify_id(struct usb_mixer_interface *mixer, int unitid);
 int snd_usb_mixer_set_ctl_value(struct usb_mixer_elem_info *cval,
 				int request, int validx, int value_set);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_usb_mixer_inactivate(struct usb_mixer_interface *mixer);
 int snd_usb_mixer_activate(struct usb_mixer_interface *mixer);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -76,11 +79,17 @@ int snd_usb_mixer_vol_tlv(struct snd_kcontrol *kcontrol, int op_flag,
 			  unsigned int size, unsigned int __user *_tlv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 int snd_usb_mixer_suspend(struct usb_mixer_interface *mixer);
 int snd_usb_mixer_resume(struct usb_mixer_interface *mixer, bool reset_resume);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __USBMIXER_H */

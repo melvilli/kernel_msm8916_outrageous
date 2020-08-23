@@ -79,7 +79,11 @@ static int em_sti_enable(struct em_sti_priv *p)
 
 	/* enable clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_enable(p->clk);
+=======
+	ret = clk_prepare_enable(p->clk);
+>>>>>>> v3.18
 =======
 	ret = clk_prepare_enable(p->clk);
 >>>>>>> v3.18
@@ -112,7 +116,11 @@ static void em_sti_disable(struct em_sti_priv *p)
 
 	/* stop clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(p->clk);
+=======
+	clk_disable_unprepare(p->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(p->clk);
 >>>>>>> v3.18
@@ -324,6 +332,7 @@ static int em_sti_probe(struct platform_device *pdev)
 	struct em_sti_priv *p;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq, ret;
 
 	p = kzalloc(sizeof(*p), GFP_KERNEL);
@@ -333,16 +342,22 @@ static int em_sti_probe(struct platform_device *pdev)
 		goto err0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	int irq;
 
 	p = devm_kzalloc(&pdev->dev, sizeof(*p), GFP_KERNEL);
 	if (p == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	p->pdev = pdev;
 	platform_set_drvdata(pdev, p);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
@@ -381,6 +396,8 @@ static int em_sti_probe(struct platform_device *pdev)
 		ret = -ENOENT;
 		goto err2;
 =======
+=======
+>>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
 		dev_err(&pdev->dev, "failed to get irq\n");
@@ -405,6 +422,9 @@ static int em_sti_probe(struct platform_device *pdev)
 			     dev_name(&pdev->dev), p)) {
 		dev_err(&pdev->dev, "failed to request low IRQ\n");
 		return -ENOENT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -412,6 +432,7 @@ static int em_sti_probe(struct platform_device *pdev)
 	em_sti_register_clockevent(p);
 	em_sti_register_clocksource(p);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err2:
@@ -421,6 +442,8 @@ err1:
 err0:
 	kfree(p);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

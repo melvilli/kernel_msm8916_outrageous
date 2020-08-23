@@ -36,7 +36,11 @@ def trace_end():
 def raw_syscalls__sys_enter(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id, args):
+=======
+	common_callchain, id, args):
+>>>>>>> v3.18
 =======
 	common_callchain, id, args):
 >>>>>>> v3.18
@@ -49,12 +53,18 @@ def raw_syscalls__sys_enter(event_name, context, common_cpu,
 		syscalls[id] = 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 def syscalls__sys_enter(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 	id, args):
 	raw_syscalls__sys_enter(**locals())
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 def print_syscall_totals():
     if for_comm is not None:

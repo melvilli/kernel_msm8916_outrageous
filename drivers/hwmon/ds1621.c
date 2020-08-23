@@ -5,8 +5,11 @@
  * based on lm75.c by Frodo Looijaard <frodol@dds.nl>
  * Ported to Linux 2.6 by Aurelien Jarno <aurelien@aurel32.net> with
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the help of Jean Delvare <khali@linux-fr.org>
 =======
+=======
+>>>>>>> v3.18
  * the help of Jean Delvare <jdelvare@suse.de>
  *
  * The DS1621 device is a digital temperature/thermometer with 9-bit
@@ -21,6 +24,9 @@
  * Since the DS1621 was the first chipset supported by this driver,
  * most comments will refer to this chipset, but are actually general
  * and concern all supported chipsets, unless mentioned otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -49,16 +55,22 @@
 #include <linux/mutex.h>
 #include <linux/sysfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "lm75.h"
 
 /* Addresses to scan */
 static const unsigned short normal_i2c[] = { 0x48, 0x49, 0x4a, 0x4b, 0x4c,
 					0x4d, 0x4e, 0x4f, I2C_CLIENT_END };
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 
 /* Supported devices */
 enum chips { ds1621, ds1625, ds1631, ds1721, ds1731 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Insmod parameters */
@@ -67,12 +79,15 @@ module_param(polarity, int, 0);
 MODULE_PARM_DESC(polarity, "Output's polarity: 0 = active high, 1 = active low");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Many DS1621 constants specified below */
 /* Config register used for detection         */
 /*  7    6    5    4    3    2    1    0      */
 /* |Done|THF |TLF |NVB | X  | X  |POL |1SHOT| */
 #define DS1621_REG_CONFIG_NVB		0x10
 =======
+=======
+>>>>>>> v3.18
 /*
  * The Configuration/Status register
  *
@@ -98,14 +113,20 @@ MODULE_PARM_DESC(polarity, "Output's polarity: 0 = active high, 1 = active low")
  */
 #define DS1621_REG_CONFIG_NVB		0x10
 #define DS1621_REG_CONFIG_RESOL		0x0C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DS1621_REG_CONFIG_POLARITY	0x02
 #define DS1621_REG_CONFIG_1SHOT		0x01
 #define DS1621_REG_CONFIG_DONE		0x80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The DS1621 registers */
 =======
+=======
+>>>>>>> v3.18
 #define DS1621_REG_CONFIG_RESOL_SHIFT	2
 
 /* ds1721 conversion rates: {C/LSB, time(ms), resolution bit setting} */
@@ -123,6 +144,9 @@ static const unsigned short ds1721_convrates[] = {
 #define DS1621_TEMP_MIN	(-55000)
 
 /* The DS1621 temperature registers */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u8 DS1621_REG_TEMP[3] = {
 	0xAA,		/* input, word, RO */
@@ -132,6 +156,10 @@ static const u8 DS1621_REG_TEMP[3] = {
 #define DS1621_REG_CONF			0xAC /* byte, RW */
 #define DS1621_COM_START		0xEE /* no data */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DS1721_COM_START		0x51 /* no data */
+>>>>>>> v3.18
 =======
 #define DS1721_COM_START		0x51 /* no data */
 >>>>>>> v3.18
@@ -148,6 +176,7 @@ static const u8 DS1621_REG_TEMP[3] = {
 /* Each client has this additional data */
 struct ds1621_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
 	struct mutex update_lock;
 	char valid;			/* !=0 if following fields are valid */
@@ -161,6 +190,8 @@ static void ds1621_init_client(struct i2c_client *client)
 {
 	u8 conf, new_conf;
 =======
+=======
+>>>>>>> v3.18
 	struct i2c_client *client;
 	struct mutex update_lock;
 	char valid;			/* !=0 if following fields are valid */
@@ -196,6 +227,9 @@ static void ds1621_init_client(struct ds1621_data *data,
 			       struct i2c_client *client)
 {
 	u8 conf, new_conf, sreg, resol;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	new_conf = conf = i2c_smbus_read_byte_data(client, DS1621_REG_CONF);
@@ -212,9 +246,12 @@ static void ds1621_init_client(struct ds1621_data *data,
 		i2c_smbus_write_byte_data(client, DS1621_REG_CONF, new_conf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* start conversion */
 	i2c_smbus_write_byte(client, DS1621_COM_START);
 =======
+=======
+>>>>>>> v3.18
 	switch (data->kind) {
 	case ds1625:
 		data->update_interval = DS1625_CONVERSION_MAX;
@@ -239,14 +276,22 @@ static void ds1621_init_client(struct ds1621_data *data,
 
 	/* start conversion */
 	i2c_smbus_write_byte(client, sreg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct ds1621_data *ds1621_update_client(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ds1621_data *data = i2c_get_clientdata(client);
+=======
+	struct ds1621_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ds1621_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -256,8 +301,13 @@ static struct ds1621_data *ds1621_update_client(struct device *dev)
 	mutex_lock(&data->update_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (time_after(jiffies, data->last_updated + HZ + HZ / 2)
 	    || !data->valid) {
+=======
+	if (time_after(jiffies, data->last_updated + data->update_interval) ||
+	    !data->valid) {
+>>>>>>> v3.18
 =======
 	if (time_after(jiffies, data->last_updated + data->update_interval) ||
 	    !data->valid) {
@@ -298,7 +348,11 @@ static ssize_t show_temp(struct device *dev, struct device_attribute *da,
 	struct ds1621_data *data = ds1621_update_client(dev);
 	return sprintf(buf, "%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       LM75_TEMP_FROM_REG(data->temp[attr->index]));
+=======
+		       DS1621_TEMP_FROM_REG(data->temp[attr->index]));
+>>>>>>> v3.18
 =======
 		       DS1621_TEMP_FROM_REG(data->temp[attr->index]));
 >>>>>>> v3.18
@@ -309,8 +363,12 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *da,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ds1621_data *data = i2c_get_clientdata(client);
+=======
+	struct ds1621_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct ds1621_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -323,8 +381,13 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *da,
 
 	mutex_lock(&data->update_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->temp[attr->index] = LM75_TEMP_TO_REG(val);
 	i2c_smbus_write_word_swapped(client, DS1621_REG_TEMP[attr->index],
+=======
+	data->temp[attr->index] = DS1621_TEMP_TO_REG(val, data->zbits);
+	i2c_smbus_write_word_swapped(data->client, DS1621_REG_TEMP[attr->index],
+>>>>>>> v3.18
 =======
 	data->temp[attr->index] = DS1621_TEMP_TO_REG(val, data->zbits);
 	i2c_smbus_write_word_swapped(data->client, DS1621_REG_TEMP[attr->index],
@@ -350,8 +413,11 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *da,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(alarms, S_IRUGO, show_alarms, NULL);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_convrate(struct device *dev, struct device_attribute *da,
 			  char *buf)
 {
@@ -393,6 +459,9 @@ static DEVICE_ATTR(alarms, S_IRUGO, show_alarms, NULL);
 static DEVICE_ATTR(update_interval, S_IWUSR | S_IRUGO, show_convrate,
 		   set_convrate);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, show_temp, NULL, 0);
 static SENSOR_DEVICE_ATTR(temp1_min, S_IWUSR | S_IRUGO, show_temp, set_temp, 1);
@@ -409,6 +478,7 @@ static struct attribute *ds1621_attributes[] = {
 	&sensor_dev_attr_temp1_min_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp1_max_alarm.dev_attr.attr,
 	&dev_attr_alarms.attr,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	NULL
 };
@@ -452,6 +522,8 @@ static int ds1621_detect(struct i2c_client *client,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_update_interval.attr,
 	NULL
 };
@@ -474,6 +546,9 @@ static const struct attribute_group ds1621_group = {
 	.is_visible = ds1621_attribute_visible
 };
 __ATTRIBUTE_GROUPS(ds1621);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ds1621_probe(struct i2c_client *client,
@@ -481,7 +556,11 @@ static int ds1621_probe(struct i2c_client *client,
 {
 	struct ds1621_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 >>>>>>> v3.18
@@ -491,6 +570,7 @@ static int ds1621_probe(struct i2c_client *client,
 	if (!data)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c_set_clientdata(client, data);
 	mutex_init(&data->update_lock);
@@ -530,6 +610,8 @@ static const struct i2c_device_id ds1621_id[] = {
 	{ "ds1621", 0 },
 	{ "ds1625", 0 },
 =======
+=======
+>>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
 	data->kind = id->driver_data;
@@ -550,6 +632,9 @@ static const struct i2c_device_id ds1621_id[] = {
 	{ "ds1631", ds1631 },
 	{ "ds1721", ds1721 },
 	{ "ds1731", ds1731 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -563,10 +648,14 @@ static struct i2c_driver ds1621_driver = {
 	},
 	.probe		= ds1621_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= ds1621_remove,
 	.id_table	= ds1621_id,
 	.detect		= ds1621_detect,
 	.address_list	= normal_i2c,
+=======
+	.id_table	= ds1621_id,
+>>>>>>> v3.18
 =======
 	.id_table	= ds1621_id,
 >>>>>>> v3.18

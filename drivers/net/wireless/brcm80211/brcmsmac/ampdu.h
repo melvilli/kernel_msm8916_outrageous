@@ -38,6 +38,7 @@ struct brcms_ampdu_session {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void brcms_c_ampdu_reset_session(struct brcms_ampdu_session *session,
 					struct brcms_c_info *wlc);
 extern int brcms_c_ampdu_add_frame(struct brcms_ampdu_session *session,
@@ -51,6 +52,8 @@ extern void brcms_c_ampdu_dotxstatus(struct ampdu_info *ampdu, struct scb *scb,
 extern void brcms_c_ampdu_macaddr_upd(struct brcms_c_info *wlc);
 extern void brcms_c_ampdu_shm_upd(struct ampdu_info *ampdu);
 =======
+=======
+>>>>>>> v3.18
 void brcms_c_ampdu_reset_session(struct brcms_ampdu_session *session,
 				 struct brcms_c_info *wlc);
 int brcms_c_ampdu_add_frame(struct brcms_ampdu_session *session,
@@ -63,6 +66,9 @@ void brcms_c_ampdu_dotxstatus(struct ampdu_info *ampdu, struct scb *scb,
 			      struct sk_buff *p, struct tx_status *txs);
 void brcms_c_ampdu_macaddr_upd(struct brcms_c_info *wlc);
 void brcms_c_ampdu_shm_upd(struct ampdu_info *ampdu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_AMPDU_H_ */

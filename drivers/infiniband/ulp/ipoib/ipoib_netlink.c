@@ -32,6 +32,10 @@
 
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_arp.h>      /* For ARPHRD_xxx */
+>>>>>>> v3.18
 =======
 #include <linux/if_arp.h>      /* For ARPHRD_xxx */
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ static int ipoib_new_child_link(struct net *src_net, struct net_device *dev,
 
 	pdev = __dev_get_by_index(src_net, nla_get_u32(tb[IFLA_LINK]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev)
+=======
+	if (!pdev || pdev->type != ARPHRD_INFINIBAND)
+>>>>>>> v3.18
 =======
 	if (!pdev || pdev->type != ARPHRD_INFINIBAND)
 >>>>>>> v3.18
@@ -128,7 +136,10 @@ static int ipoib_new_child_link(struct net *src_net, struct net_device *dev,
 		child_pkey  = nla_get_u16(data[IFLA_IPOIB_PKEY]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (child_pkey == 0 || child_pkey == 0x8000)
 		return -EINVAL;
 
@@ -138,6 +149,9 @@ static int ipoib_new_child_link(struct net *src_net, struct net_device *dev,
 	 */
 	child_pkey |= 0x8000;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = __ipoib_vlan_add(ppriv, netdev_priv(dev), child_pkey, IPOIB_RTNL_CHILD);
 
@@ -154,15 +168,21 @@ static void ipoib_unregister_child_dev(struct net_device *dev, struct list_head 
 	ppriv = netdev_priv(priv->parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ppriv->vlan_mutex);
 	unregister_netdevice_queue(dev, head);
 	list_del(&priv->list);
 	mutex_unlock(&ppriv->vlan_mutex);
 =======
+=======
+>>>>>>> v3.18
 	down_write(&ppriv->vlan_rwsem);
 	unregister_netdevice_queue(dev, head);
 	list_del(&priv->list);
 	up_write(&ppriv->vlan_rwsem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

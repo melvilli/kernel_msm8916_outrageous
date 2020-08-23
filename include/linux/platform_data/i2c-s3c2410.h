@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/plat-s3c/include/plat/iic.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -15,8 +19,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_IIC_H
 #define __ASM_ARCH_IIC_H __FILE__
+=======
+#ifndef __I2C_S3C2410_H
+#define __I2C_S3C2410_H __FILE__
+>>>>>>> v3.18
 =======
 #ifndef __I2C_S3C2410_H
 #define __I2C_S3C2410_H __FILE__
@@ -86,7 +95,11 @@ extern void s3c_i2c7_cfg_gpio(struct platform_device *dev);
 extern struct s3c2410_platform_i2c default_i2c_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_IIC_H */
+=======
+#endif /* __I2C_S3C2410_H */
+>>>>>>> v3.18
 =======
 #endif /* __I2C_S3C2410_H */
 >>>>>>> v3.18

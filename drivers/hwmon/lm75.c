@@ -28,6 +28,11 @@
 #include <linux/err.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/thermal.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/thermal.h>
@@ -45,6 +50,10 @@ enum lm75_type {		/* keep sorted in alphabetical order */
 	ds75,
 	ds7505,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	g751,
+>>>>>>> v3.18
 =======
 	g751,
 >>>>>>> v3.18
@@ -59,6 +68,10 @@ enum lm75_type {		/* keep sorted in alphabetical order */
 	tmp101,
 	tmp105,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tmp112,
+>>>>>>> v3.18
 =======
 	tmp112,
 >>>>>>> v3.18
@@ -83,7 +96,13 @@ static const u8 LM75_REG_TEMP[3] = {
 /* Each client has this additional data */
 struct lm75_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device		*hwmon_dev;
+=======
+	struct i2c_client	*client;
+	struct device		*hwmon_dev;
+	struct thermal_zone_device	*tz;
+>>>>>>> v3.18
 =======
 	struct i2c_client	*client;
 	struct device		*hwmon_dev;
@@ -110,9 +129,12 @@ static struct lm75_data *lm75_update_device(struct device *dev);
 /*-----------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sysfs attributes for hwmon */
 
 =======
+=======
+>>>>>>> v3.18
 static inline long lm75_reg_to_mc(s16 temp, u8 resolution)
 {
 	return ((temp >> (16 - resolution)) * 1000) >> (resolution - 8);
@@ -132,6 +154,9 @@ static int lm75_read_temp(void *dev, long *temp)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t show_temp(struct device *dev, struct device_attribute *da,
 			 char *buf)
@@ -139,7 +164,10 @@ static ssize_t show_temp(struct device *dev, struct device_attribute *da,
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 	struct lm75_data *data = lm75_update_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -147,10 +175,15 @@ static ssize_t show_temp(struct device *dev, struct device_attribute *da,
 		return PTR_ERR(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	temp = ((data->temp[attr->index] >> (16 - data->resolution)) * 1000)
 	       >> (data->resolution - 8);
 
 	return sprintf(buf, "%ld\n", temp);
+=======
+	return sprintf(buf, "%ld\n", lm75_reg_to_mc(data->temp[attr->index],
+						    data->resolution));
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "%ld\n", lm75_reg_to_mc(data->temp[attr->index],
 						    data->resolution));
@@ -162,8 +195,13 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *da,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm75_data *data = i2c_get_clientdata(client);
+=======
+	struct lm75_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm75_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -202,7 +240,11 @@ static SENSOR_DEVICE_ATTR(temp1_max_hyst, S_IWUSR | S_IRUGO,
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, show_temp, NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *lm75_attributes[] = {
+=======
+static struct attribute *lm75_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *lm75_attrs[] = {
 >>>>>>> v3.18
@@ -213,10 +255,14 @@ static struct attribute *lm75_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group lm75_group = {
 	.attrs = lm75_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(lm75);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm75);
 >>>>>>> v3.18
@@ -229,6 +275,10 @@ static int
 lm75_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = &client->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &client->dev;
 >>>>>>> v3.18
@@ -243,16 +293,22 @@ lm75_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(struct lm75_data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(struct lm75_data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_clientdata(client, data);
 	mutex_init(&data->update_lock);
@@ -283,6 +339,10 @@ lm75_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		data->sample_time = HZ / 4;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case g751:
+>>>>>>> v3.18
 =======
 	case g751:
 >>>>>>> v3.18
@@ -315,13 +375,19 @@ lm75_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		clr_mask |= 1 << 7;		/* not one-shot mode */
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case tmp112:
 		set_mask |= 3 << 5;		/* 12-bit mode */
 		clr_mask |= 1 << 7;		/* not one-shot mode */
 		data->resolution = 12;
 		data->sample_time = HZ / 4;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case tmp105:
 	case tmp175:
@@ -338,7 +404,11 @@ lm75_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	status = lm75_read_value(client, LM75_REG_CONF);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&client->dev, "Can't read config? %d\n", status);
+=======
+		dev_dbg(dev, "Can't read config? %d\n", status);
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "Can't read config? %d\n", status);
 >>>>>>> v3.18
@@ -349,6 +419,7 @@ lm75_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	new |= set_mask;
 	if (status != new)
 		lm75_write_value(client, LM75_REG_CONF, new);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(&client->dev, "Config %02x\n", new);
 
@@ -372,6 +443,8 @@ exit_remove:
 	sysfs_remove_group(&client->dev.kobj, &lm75_group);
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev, "Config %02x\n", new);
 
 	data->hwmon_dev = hwmon_device_register_with_groups(dev, client->name,
@@ -390,6 +463,9 @@ exit_remove:
 		 dev_name(data->hwmon_dev), client->name);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -398,8 +474,13 @@ static int lm75_remove(struct i2c_client *client)
 	struct lm75_data *data = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hwmon_device_unregister(data->hwmon_dev);
 	sysfs_remove_group(&client->dev.kobj, &lm75_group);
+=======
+	thermal_zone_of_sensor_unregister(data->hwmon_dev, data->tz);
+	hwmon_device_unregister(data->hwmon_dev);
+>>>>>>> v3.18
 =======
 	thermal_zone_of_sensor_unregister(data->hwmon_dev, data->tz);
 	hwmon_device_unregister(data->hwmon_dev);
@@ -414,6 +495,10 @@ static const struct i2c_device_id lm75_ids[] = {
 	{ "ds75", ds75, },
 	{ "ds7505", ds7505, },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "g751", g751, },
+>>>>>>> v3.18
 =======
 	{ "g751", g751, },
 >>>>>>> v3.18
@@ -428,6 +513,10 @@ static const struct i2c_device_id lm75_ids[] = {
 	{ "tmp101", tmp101, },
 	{ "tmp105", tmp105, },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "tmp112", tmp112, },
+>>>>>>> v3.18
 =======
 	{ "tmp112", tmp112, },
 >>>>>>> v3.18
@@ -605,8 +694,13 @@ static int lm75_write_value(struct i2c_client *client, u8 reg, u16 value)
 static struct lm75_data *lm75_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm75_data *data = i2c_get_clientdata(client);
+=======
+	struct lm75_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm75_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;

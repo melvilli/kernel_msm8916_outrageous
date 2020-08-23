@@ -16,6 +16,7 @@
 #include <linux/init.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/platform.h>
@@ -29,6 +30,8 @@ static struct cpufreq_driver integrator_driver;
 #define CM_STAT __io_address(INTEGRATOR_HDR_STAT)
 #define CM_LOCK __io_address(INTEGRATOR_HDR_LOCK)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
@@ -42,6 +45,9 @@ static void __iomem *cm_base;
 #define INTEGRATOR_HDR_LOCK_OFFSET      0x14
 
 static struct cpufreq_driver integrator_driver;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct icst_params lclk_params = {
@@ -108,17 +114,23 @@ static int integrator_set_target(struct cpufreq_policy *policy,
 	 * we should be running on the right CPU.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpus_allowed(current, cpumask_of_cpu(cpu));
 	BUG_ON(cpu != smp_processor_id());
 
 	/* get current setting */
 	cm_osc = __raw_readl(CM_OSC);
 =======
+=======
+>>>>>>> v3.18
 	set_cpus_allowed_ptr(current, cpumask_of(cpu));
 	BUG_ON(cpu != smp_processor_id());
 
 	/* get current setting */
 	cm_osc = __raw_readl(cm_base + INTEGRATOR_HDR_OSC_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (machine_is_integrator()) {
@@ -142,6 +154,7 @@ static int integrator_set_target(struct cpufreq_policy *policy,
 
 	if (freqs.old == freqs.new) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_cpus_allowed(current, cpus_allowed);
 		return 0;
 	}
@@ -150,6 +163,8 @@ static int integrator_set_target(struct cpufreq_policy *policy,
 
 	cm_osc = __raw_readl(CM_OSC);
 =======
+=======
+>>>>>>> v3.18
 		set_cpus_allowed_ptr(current, &cpus_allowed);
 		return 0;
 	}
@@ -157,6 +172,9 @@ static int integrator_set_target(struct cpufreq_policy *policy,
 	cpufreq_freq_transition_begin(policy, &freqs);
 
 	cm_osc = __raw_readl(cm_base + INTEGRATOR_HDR_OSC_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (machine_is_integrator()) {
@@ -168,9 +186,15 @@ static int integrator_set_target(struct cpufreq_policy *policy,
 	cm_osc |= vco.v;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(0xa05f, CM_LOCK);
 	__raw_writel(cm_osc, CM_OSC);
 	__raw_writel(0, CM_LOCK);
+=======
+	__raw_writel(0xa05f, cm_base + INTEGRATOR_HDR_LOCK_OFFSET);
+	__raw_writel(cm_osc, cm_base + INTEGRATOR_HDR_OSC_OFFSET);
+	__raw_writel(0, cm_base + INTEGRATOR_HDR_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__raw_writel(0xa05f, cm_base + INTEGRATOR_HDR_LOCK_OFFSET);
 	__raw_writel(cm_osc, cm_base + INTEGRATOR_HDR_OSC_OFFSET);
@@ -181,9 +205,15 @@ static int integrator_set_target(struct cpufreq_policy *policy,
 	 * Restore the CPUs allowed mask.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpus_allowed(current, cpus_allowed);
 
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+	set_cpus_allowed_ptr(current, &cpus_allowed);
+
+	cpufreq_freq_transition_end(policy, &freqs, 0);
+>>>>>>> v3.18
 =======
 	set_cpus_allowed_ptr(current, &cpus_allowed);
 
@@ -203,17 +233,23 @@ static unsigned int integrator_get(unsigned int cpu)
 	cpus_allowed = current->cpus_allowed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpus_allowed(current, cpumask_of_cpu(cpu));
 	BUG_ON(cpu != smp_processor_id());
 
 	/* detect memory etc. */
 	cm_osc = __raw_readl(CM_OSC);
 =======
+=======
+>>>>>>> v3.18
 	set_cpus_allowed_ptr(current, cpumask_of(cpu));
 	BUG_ON(cpu != smp_processor_id());
 
 	/* detect memory etc. */
 	cm_osc = __raw_readl(cm_base + INTEGRATOR_HDR_OSC_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (machine_is_integrator()) {
@@ -227,7 +263,11 @@ static unsigned int integrator_get(unsigned int cpu)
 	current_freq = icst_hz(&cclk_params, vco) / 1000; /* current freq */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpus_allowed(current, cpus_allowed);
+=======
+	set_cpus_allowed_ptr(current, &cpus_allowed);
+>>>>>>> v3.18
 =======
 	set_cpus_allowed_ptr(current, &cpus_allowed);
 >>>>>>> v3.18
@@ -240,10 +280,16 @@ static int integrator_cpufreq_init(struct cpufreq_policy *policy)
 
 	/* set default policy and cpuinfo */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cpuinfo.max_freq = 160000;
 	policy->cpuinfo.min_freq = 12000;
 	policy->cpuinfo.transition_latency = 1000000; /* 1 ms, assumed */
 	policy->cur = policy->min = policy->max = integrator_get(policy->cpu);
+=======
+	policy->max = policy->cpuinfo.max_freq = 160000;
+	policy->min = policy->cpuinfo.min_freq = 12000;
+	policy->cpuinfo.transition_latency = 1000000; /* 1 ms, assumed */
+>>>>>>> v3.18
 =======
 	policy->max = policy->cpuinfo.max_freq = 160000;
 	policy->min = policy->cpuinfo.min_freq = 12000;
@@ -255,6 +301,10 @@ static int integrator_cpufreq_init(struct cpufreq_policy *policy)
 
 static struct cpufreq_driver integrator_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags		= CPUFREQ_NEED_INITIAL_FREQ_CHECK,
+>>>>>>> v3.18
 =======
 	.flags		= CPUFREQ_NEED_INITIAL_FREQ_CHECK,
 >>>>>>> v3.18
@@ -265,6 +315,7 @@ static struct cpufreq_driver integrator_driver = {
 	.name		= "integrator",
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init integrator_cpu_init(void)
 {
@@ -283,6 +334,8 @@ MODULE_LICENSE ("GPL");
 module_init(integrator_cpu_init);
 module_exit(integrator_cpu_exit);
 =======
+=======
+>>>>>>> v3.18
 static int __init integrator_cpufreq_probe(struct platform_device *pdev)
 {
 	struct resource *res;
@@ -323,4 +376,7 @@ module_platform_driver_probe(integrator_cpufreq_driver,
 MODULE_AUTHOR ("Russell M. King");
 MODULE_DESCRIPTION ("cpufreq driver for ARM Integrator CPUs");
 MODULE_LICENSE ("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

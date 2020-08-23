@@ -22,6 +22,12 @@
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpuidle.h>
+#include <linux/cpufreq.h>
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpuidle.h>
 #include <linux/cpufreq.h>
@@ -101,7 +107,11 @@ static int remap_pte_fn(pte_t *ptep, pgtable_t token, unsigned long addr,
 	struct page *page = info->pages[info->index++];
 	unsigned long pfn = page_to_pfn(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_t pte = pfn_pte(pfn, info->prot);
+=======
+	pte_t pte = pte_mkspecial(pfn_pte(pfn, info->prot));
+>>>>>>> v3.18
 =======
 	pte_t pte = pte_mkspecial(pfn_pte(pfn, info->prot));
 >>>>>>> v3.18
@@ -163,7 +173,11 @@ int xen_unmap_domain_mfn_range(struct vm_area_struct *vma,
 EXPORT_SYMBOL_GPL(xen_unmap_domain_mfn_range);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init xen_percpu_init(void *unused)
+=======
+static void xen_percpu_init(void)
+>>>>>>> v3.18
 =======
 static void xen_percpu_init(void)
 >>>>>>> v3.18
@@ -188,7 +202,11 @@ static void xen_percpu_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void xen_restart(char str, const char *cmd)
+=======
+static void xen_restart(enum reboot_mode reboot_mode, const char *cmd)
+>>>>>>> v3.18
 =======
 static void xen_restart(enum reboot_mode reboot_mode, const char *cmd)
 >>>>>>> v3.18
@@ -197,8 +215,12 @@ static void xen_restart(enum reboot_mode reboot_mode, const char *cmd)
 	int rc;
 	rc = HYPERVISOR_sched_op(SCHEDOP_shutdown, &r);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		BUG();
+=======
+	BUG_ON(rc);
+>>>>>>> v3.18
 =======
 	BUG_ON(rc);
 >>>>>>> v3.18
@@ -210,9 +232,12 @@ static void xen_power_off(void)
 	int rc;
 	rc = HYPERVISOR_sched_op(SCHEDOP_shutdown, &r);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		BUG();
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(rc);
 }
 
@@ -239,6 +264,9 @@ static irqreturn_t xen_arm_callback(int irq, void *arg)
 {
 	xen_hvm_evtchn_do_upcall();
 	return IRQ_HANDLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -258,6 +286,10 @@ static int __init xen_guest_init(void)
 	const char *xen_prefix = "xen,xen-";
 	struct resource res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phys_addr_t grant_frames;
+>>>>>>> v3.18
 =======
 	phys_addr_t grant_frames;
 >>>>>>> v3.18
@@ -278,6 +310,7 @@ static int __init xen_guest_init(void)
 	if (of_address_to_resource(node, GRANT_TABLE_PHYSADDR, &res))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_hvm_resume_frames = res.start >> PAGE_SHIFT;
 	xen_events_irq = irq_of_parse_and_map(node, 0);
 	pr_info("Xen %s support found, events_irq=%d gnttab_frame_pfn=%lx\n",
@@ -286,6 +319,8 @@ static int __init xen_guest_init(void)
 
 	xen_setup_features();
 =======
+=======
+>>>>>>> v3.18
 	grant_frames = res.start;
 	xen_events_irq = irq_of_parse_and_map(node, 0);
 	pr_info("Xen %s support found, events_irq=%d gnttab_frame=%pa\n",
@@ -303,6 +338,9 @@ static int __init xen_guest_init(void)
 				"If your platform has any non-coherent DMA devices, they won't work properly.\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (xen_feature(XENFEAT_dom0))
 		xen_start_info->flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
@@ -334,11 +372,14 @@ static int __init xen_guest_init(void)
 	 * For uniformity we use VCPUOP_register_vcpu_info even on cpu0.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_vcpu_info = alloc_percpu(struct vcpu_info);
 	if (xen_vcpu_info == NULL)
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	xen_vcpu_info = __alloc_percpu(sizeof(struct vcpu_info),
 			                       sizeof(struct vcpu_info));
 	if (xen_vcpu_info == NULL)
@@ -348,16 +389,22 @@ static int __init xen_guest_init(void)
 		free_percpu(xen_vcpu_info);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gnttab_init();
 	if (!xen_initial_domain())
 		xenbus_probe(NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 core_initcall(xen_guest_init);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Making sure board specific code will not set up ops for
 	 * cpu idle and cpu freq.
@@ -380,6 +427,9 @@ core_initcall(xen_guest_init);
 	return 0;
 }
 early_initcall(xen_guest_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init xen_pm_init(void)
@@ -394,6 +444,7 @@ static int __init xen_pm_init(void)
 }
 late_initcall(xen_pm_init);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static irqreturn_t xen_arm_callback(int irq, void *arg)
 {
@@ -420,6 +471,8 @@ static int __init xen_init_events(void)
 }
 postcore_initcall(xen_init_events);
 =======
+=======
+>>>>>>> v3.18
 
 /* empty stubs */
 void xen_arch_pre_suspend(void) { }
@@ -427,6 +480,9 @@ void xen_arch_post_suspend(int suspend_cancelled) { }
 void xen_timer_resume(void) { }
 void xen_arch_resume(void) { }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* In the hypervisor.S file. */
@@ -441,6 +497,10 @@ EXPORT_SYMBOL_GPL(HYPERVISOR_physdev_op);
 EXPORT_SYMBOL_GPL(HYPERVISOR_vcpu_op);
 EXPORT_SYMBOL_GPL(HYPERVISOR_tmem_op);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(HYPERVISOR_multicall);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(HYPERVISOR_multicall);
 >>>>>>> v3.18

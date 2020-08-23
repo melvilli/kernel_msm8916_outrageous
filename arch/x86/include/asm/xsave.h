@@ -7,12 +7,15 @@
 #define XSTATE_CPUID		0x0000000d
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XSTATE_FP	0x1
 #define XSTATE_SSE	0x2
 #define XSTATE_YMM	0x4
 
 #define XSTATE_FPSSE	(XSTATE_FP | XSTATE_SSE)
 =======
+=======
+>>>>>>> v3.18
 #define XSTATE_FP		0x1
 #define XSTATE_SSE		0x2
 #define XSTATE_YMM		0x4
@@ -25,6 +28,9 @@
 #define XSTATE_FPSSE	(XSTATE_FP | XSTATE_SSE)
 /* Bit 63 of XCR0 is reserved for future expansion */
 #define XSTATE_EXTEND_MASK	(~(XSTATE_FPSSE | (1ULL << 63)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FXSAVE_SIZE	512
@@ -36,11 +42,14 @@
 #define XSAVE_YMM_OFFSET    (XSAVE_HDR_SIZE + XSAVE_HDR_OFFSET)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * These are the features that the OS can handle currently.
  */
 #define XCNTXT_MASK	(XSTATE_FP | XSTATE_SSE | XSTATE_YMM)
 =======
+=======
+>>>>>>> v3.18
 /* Supported features which support lazy state saving */
 #define XSTATE_LAZY	(XSTATE_FP | XSTATE_SSE | XSTATE_YMM		      \
 			| XSTATE_OPMASK | XSTATE_ZMM_Hi256 | XSTATE_Hi16_ZMM)
@@ -50,6 +59,9 @@
 
 /* All currently supported features */
 #define XCNTXT_MASK	(XSTATE_LAZY | XSTATE_EAGER)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
@@ -68,6 +80,7 @@ extern void update_regset_xstate_info(unsigned int size, u64 xstate_mask);
 extern int init_fpu(struct task_struct *child);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int fpu_xrstor_checking(struct xsave_struct *fx)
 {
 	int err;
@@ -82,6 +95,8 @@ static inline int fpu_xrstor_checking(struct xsave_struct *fx)
 		     : [err] "=r" (err)
 		     : "D" (fx), "m" (*fx), "a" (-1), "d" (-1), "0" (0)
 =======
+=======
+>>>>>>> v3.18
 /* These macros all use (%edi)/(%rdi) as the single memory argument. */
 #define XSAVE		".byte " REX_PREFIX "0x0f,0xae,0x27"
 #define XSAVEOPT	".byte " REX_PREFIX "0x0f,0xae,0x37"
@@ -151,6 +166,9 @@ static inline int xrstor_state_booting(struct xsave_struct *fx, u64 mask)
 
 	asm volatile(xstate_fault
 		     : "0" (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     : "memory");
 
@@ -158,7 +176,10 @@ static inline int xrstor_state_booting(struct xsave_struct *fx, u64 mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Save processor xstate to xsave area.
  */
@@ -249,6 +270,9 @@ static inline int fpu_xrstor_checking(struct xsave_struct *fx)
  * backward compatibility for old applications which don't understand
  * compacted format of xsave area.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int xsave_user(struct xsave_struct __user *buf)
 {
@@ -264,6 +288,7 @@ static inline int xsave_user(struct xsave_struct __user *buf)
 
 	__asm__ __volatile__(ASM_STAC "\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     "1: .byte " REX_PREFIX "0x0f,0xae,0x27\n"
 			     "2: " ASM_CLAC "\n"
 			     ".section .fixup,\"ax\"\n"
@@ -277,28 +302,40 @@ static inline int xsave_user(struct xsave_struct __user *buf)
 			     "2: " ASM_CLAC "\n"
 			     xstate_fault
 >>>>>>> v3.18
+=======
+			     "1:"XSAVE"\n"
+			     "2: " ASM_CLAC "\n"
+			     xstate_fault
+>>>>>>> v3.18
 			     : "D" (buf), "a" (-1), "d" (-1), "0" (0)
 			     : "memory");
 	return err;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int xrestore_user(struct xsave_struct __user *buf, u64 mask)
 {
 	int err;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Restore xstate from user space xsave area.
  */
 static inline int xrestore_user(struct xsave_struct __user *buf, u64 mask)
 {
 	int err = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct xsave_struct *xstate = ((__force struct xsave_struct *)buf);
 	u32 lmask = mask;
 	u32 hmask = mask >> 32;
 
 	__asm__ __volatile__(ASM_STAC "\n"
+<<<<<<< HEAD
 <<<<<<< HEAD
 			     "1: .byte " REX_PREFIX "0x0f,0xae,0x2f\n"
 			     "2: " ASM_CLAC "\n"
@@ -313,11 +350,17 @@ static inline int xrestore_user(struct xsave_struct __user *buf, u64 mask)
 			     "2: " ASM_CLAC "\n"
 			     xstate_fault
 >>>>>>> v3.18
+=======
+			     "1:"XRSTOR"\n"
+			     "2: " ASM_CLAC "\n"
+			     xstate_fault
+>>>>>>> v3.18
 			     : "D" (xstate), "a" (lmask), "d" (hmask), "0" (0)
 			     : "memory");	/* memory required? */
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void xrstor_state(struct xsave_struct *fx, u64 mask)
 {
@@ -350,6 +393,11 @@ static inline void fpu_xsave(struct fpu *fpu)
 		[fx] "D" (&fpu->state->xsave), "a" (-1), "d" (-1) :
 		"memory");
 }
+=======
+void *get_xsave_addr(struct xsave_struct *xsave, int xstate);
+void setup_xstate_comp(void);
+
+>>>>>>> v3.18
 =======
 void *get_xsave_addr(struct xsave_struct *xsave, int xstate);
 void setup_xstate_comp(void);

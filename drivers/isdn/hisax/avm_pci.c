@@ -286,7 +286,11 @@ hdlc_empty_fifo(struct BCState *bcs, int count)
 			     bcs->channel ? 'B' : 'A', count);
 		QuickHex(t, p, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, bcs->blog);
+=======
+		debugl1(cs, "%s", bcs->blog);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", bcs->blog);
 >>>>>>> v3.18
@@ -350,7 +354,11 @@ hdlc_fill_fifo(struct BCState *bcs)
 			     bcs->channel ? 'B' : 'A', count);
 		QuickHex(t, p, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, bcs->blog);
+=======
+		debugl1(cs, "%s", bcs->blog);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", bcs->blog);
 >>>>>>> v3.18

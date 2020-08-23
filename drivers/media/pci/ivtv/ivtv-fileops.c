@@ -895,7 +895,11 @@ int ivtv_v4l2_close(struct file *filp)
 		clear_bit(IVTV_F_I_RADIO_USER, &itv->i_flags);
 		/* Switch tuner to TV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ivtv_call_all(itv, core, s_std, itv->std);
+=======
+		ivtv_call_all(itv, video, s_std, itv->std);
+>>>>>>> v3.18
 =======
 		ivtv_call_all(itv, video, s_std, itv->std);
 >>>>>>> v3.18

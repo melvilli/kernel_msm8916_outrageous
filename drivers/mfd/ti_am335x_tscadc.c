@@ -15,7 +15,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -26,16 +29,22 @@
 #include <linux/mfd/core.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/mfd/ti_am335x_tscadc.h>
 #include <linux/input/ti_am335x_tsc.h>
 #include <linux/platform_data/ti_am335x_adc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/sched.h>
 
 #include <linux/mfd/ti_am335x_tscadc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned int tscadc_readl(struct ti_tscadc_dev *tsadc, unsigned int reg)
@@ -60,7 +69,10 @@ static const struct regmap_config tscadc_regmap_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void am335x_tsc_se_set_cache(struct ti_tscadc_dev *tsadc, u32 val)
 {
 	unsigned long flags;
@@ -139,6 +151,9 @@ void am335x_tsc_se_clr(struct ti_tscadc_dev *tsadc, u32 val)
 }
 EXPORT_SYMBOL_GPL(am335x_tsc_se_clr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void tscadc_idle_config(struct ti_tscadc_dev *config)
 {
@@ -155,6 +170,7 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 	struct ti_tscadc_dev	*tscadc;
 	struct resource		*res;
 	struct clk		*clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mfd_tscadc_board	*pdata = pdev->dev.platform_data;
 	struct mfd_cell		*cell;
@@ -174,6 +190,8 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 	total_channels = tsc_wires + adc_channels;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device_node	*node = pdev->dev.of_node;
 	struct mfd_cell		*cell;
 	struct property         *prop;
@@ -203,17 +221,23 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 		}
 	}
 	total_channels = tsc_wires + adc_channels;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (total_channels > 8) {
 		dev_err(&pdev->dev, "Number of i/p channels more than 8\n");
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "no memory resource defined.\n");
 =======
+=======
+>>>>>>> v3.18
 	if (total_channels == 0) {
 		dev_err(&pdev->dev, "Need atleast one channel.\n");
 		return -EINVAL;
@@ -221,6 +245,9 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 
 	if (readouts * 2 + 2 + adc_channels > 16) {
 		dev_err(&pdev->dev, "Too many step configurations requested\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -242,6 +269,7 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 		tscadc->irq = err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = devm_request_mem_region(&pdev->dev,
 			res->start, resource_size(res), pdev->name);
 	if (!res) {
@@ -256,10 +284,15 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	tscadc->tscadc_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(tscadc->tscadc_base))
 		return PTR_ERR(tscadc->tscadc_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tscadc->regmap_tscadc = devm_regmap_init_mmio(&pdev->dev,
@@ -271,6 +304,12 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&tscadc->reg_lock);
+	init_waitqueue_head(&tscadc->reg_se_wait);
+
+>>>>>>> v3.18
 =======
 	spin_lock_init(&tscadc->reg_lock);
 	init_waitqueue_head(&tscadc->reg_se_wait);
@@ -295,6 +334,7 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 	}
 	clock_rate = clk_get_rate(clk);
 	clk_put(clk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_value = clock_rate / ADC_CLK;
 	if (clk_value < MAX_CLK_DIV) {
@@ -336,6 +376,8 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 	err = mfd_add_devices(&pdev->dev, pdev->id, tscadc->cells,
 			TSCADC_CELLS, NULL, 0, NULL);
 =======
+=======
+>>>>>>> v3.18
 	tscadc->clk_div = clock_rate / ADC_CLK;
 
 	/* TSCADC_CLKDIV needs to be configured to the value minus 1 */
@@ -386,6 +428,9 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 
 	err = mfd_add_devices(&pdev->dev, pdev->id, tscadc->cells,
 			tscadc->used_cells, NULL, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		goto err_disable_clk;
@@ -393,7 +438,10 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
 	device_init_wakeup(&pdev->dev, true);
 	platform_set_drvdata(pdev, tscadc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -434,7 +482,11 @@ static int tscadc_resume(struct device *dev)
 {
 	struct ti_tscadc_dev	*tscadc_dev = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int restore, ctrl;
+=======
+	u32 ctrl;
+>>>>>>> v3.18
 =======
 	u32 ctrl;
 >>>>>>> v3.18
@@ -442,6 +494,7 @@ static int tscadc_resume(struct device *dev)
 	pm_runtime_get_sync(dev);
 
 	/* context restore */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ctrl = CNTRLREG_STEPCONFIGWRT | CNTRLREG_TSCENB |
 			CNTRLREG_STEPID | CNTRLREG_4WIRE;
@@ -452,6 +505,8 @@ static int tscadc_resume(struct device *dev)
 	tscadc_writel(tscadc_dev, REG_CTRL,
 			(restore | CNTRLREG_TSCSSENB));
 =======
+=======
+>>>>>>> v3.18
 	ctrl = CNTRLREG_STEPCONFIGWRT |	CNTRLREG_STEPID;
 	tscadc_writel(tscadc_dev, REG_CTRL, ctrl);
 
@@ -466,6 +521,9 @@ static int tscadc_resume(struct device *dev)
 	tscadc_writel(tscadc_dev, REG_CTRL, ctrl);
 
 	tscadc_writel(tscadc_dev, REG_CLKDIV, tscadc_dev->clk_div);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -481,12 +539,15 @@ static const struct dev_pm_ops tscadc_pm_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver ti_tscadc_driver = {
 	.driver = {
 		.name   = "ti_tscadc",
 		.owner	= THIS_MODULE,
 		.pm	= TSCADC_PM_OPS,
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id ti_tscadc_dt_ids[] = {
 	{ .compatible = "ti,am3359-tscadc", },
 	{ }
@@ -499,6 +560,9 @@ static struct platform_driver ti_tscadc_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= TSCADC_PM_OPS,
 		.of_match_table = ti_tscadc_dt_ids,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe	= ti_tscadc_probe,

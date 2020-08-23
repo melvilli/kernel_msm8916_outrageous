@@ -20,6 +20,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/genetlink.h>
+>>>>>>> v3.18
 =======
 #include <net/genetlink.h>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #include "../wlcore/cmd.h"
 #include "../wlcore/debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../wlcore/vendor_cmd.h"
+>>>>>>> v3.18
 =======
 #include "../wlcore/vendor_cmd.h"
 >>>>>>> v3.18
@@ -54,7 +62,10 @@ int wl18xx_wait_for_event(struct wl1271 *wl, enum wlcore_wait_event event,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int wlcore_smart_config_sync_event(struct wl1271 *wl, u8 sync_channel,
 					  u8 sync_band)
 {
@@ -107,6 +118,9 @@ static int wlcore_smart_config_decode_event(struct wl1271 *wl,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int wl18xx_process_mailbox_events(struct wl1271 *wl)
 {
@@ -171,7 +185,10 @@ int wl18xx_process_mailbox_events(struct wl1271 *wl)
 		wlcore_event_roc_complete(wl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (vector & SMART_CONFIG_SYNC_EVENT_ID)
 		wlcore_smart_config_sync_event(wl, mbox->sc_sync_channel,
 					       mbox->sc_sync_band);
@@ -183,6 +200,9 @@ int wl18xx_process_mailbox_events(struct wl1271 *wl)
 						 mbox->sc_pwd_len,
 						 mbox->sc_pwd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

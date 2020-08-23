@@ -141,6 +141,11 @@ hardware.
 	start_tx() / stop_tx() to flush the data out.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Do not transmit if ch == '\0' (__DISABLED_CHAR).
+
+>>>>>>> v3.18
 =======
 	Do not transmit if ch == '\0' (__DISABLED_CHAR).
 
@@ -270,10 +275,13 @@ hardware.
 	Interrupts: caller dependent.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   set_wake(port,state)
 	Enable/disable power management wakeup on serial activity.  Not
 	currently implemented.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   type(port)
@@ -442,7 +450,10 @@ thus:
 		int			my_stuff;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Modem control lines via GPIO
 ----------------------------
@@ -468,4 +479,7 @@ mctrl_gpio_set(gpios, mctrl):
 
 mctrl_gpio_get(gpios, mctrl):
 	This will update mctrl with the gpios values.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

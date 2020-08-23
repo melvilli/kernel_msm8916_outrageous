@@ -38,6 +38,10 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hardware/cache-l2x0.h>
+>>>>>>> v3.18
 =======
 #include <asm/hardware/cache-l2x0.h>
 >>>>>>> v3.18
@@ -69,6 +73,7 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 void handle_IRQ(unsigned int irq, struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pt_regs *old_regs = set_irq_regs(regs);
 
 	irq_enter();
@@ -87,6 +92,9 @@ void handle_IRQ(unsigned int irq, struct pt_regs *regs)
 
 	irq_exit();
 	set_irq_regs(old_regs);
+=======
+	__handle_domain_irq(NULL, irq, false, regs);
+>>>>>>> v3.18
 =======
 	__handle_domain_irq(NULL, irq, false, regs);
 >>>>>>> v3.18
@@ -124,6 +132,11 @@ EXPORT_SYMBOL_GPL(set_irq_flags);
 void __init init_IRQ(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -133,7 +146,10 @@ void __init init_IRQ(void)
 	else
 		machine_desc->init_irq();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (IS_ENABLED(CONFIG_OF) && IS_ENABLED(CONFIG_CACHE_L2X0) &&
 	    (machine_desc->l2c_aux_mask || machine_desc->l2c_aux_val)) {
@@ -143,6 +159,9 @@ void __init init_IRQ(void)
 		if (ret)
 			pr_err("L2C: failed to init: %d\n", ret);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,6 +190,10 @@ static bool migrate_one_irq(struct irq_desc *desc)
 	struct irq_data *d = irq_desc_get_irq_data(desc);
 	const struct cpumask *affinity = d->affinity;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct irq_chip *c;
+>>>>>>> v3.18
 =======
 	struct irq_chip *c;
 >>>>>>> v3.18
@@ -189,13 +212,19 @@ static bool migrate_one_irq(struct irq_desc *desc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_set_affinity_locked(d, affinity, 0);
 =======
+=======
+>>>>>>> v3.18
 	c = irq_data_get_irq_chip(d);
 	if (!c->irq_set_affinity)
 		pr_debug("IRQ%u: unable to set affinity\n", d->irq);
 	else if (c->irq_set_affinity(d, affinity, false) == IRQ_SET_MASK_OK && ret)
 		cpumask_copy(d->affinity, affinity);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -226,8 +255,13 @@ void migrate_irqs(void)
 
 		if (affinity_broken && printk_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("IRQ%u no longer affine to CPU%u\n", i,
 				smp_processor_id());
+=======
+			pr_warn("IRQ%u no longer affine to CPU%u\n",
+				i, smp_processor_id());
+>>>>>>> v3.18
 =======
 			pr_warn("IRQ%u no longer affine to CPU%u\n",
 				i, smp_processor_id());

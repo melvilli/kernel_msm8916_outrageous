@@ -155,6 +155,10 @@ typedef int (*read_sfp_module_eeprom_func_p)(struct bnx2x_phy *phy,
 
 #define SFP_EEPROM_CON_TYPE_ADDR		0x2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	#define SFP_EEPROM_CON_TYPE_VAL_UNKNOWN	0x0
+>>>>>>> v3.18
 =======
 	#define SFP_EEPROM_CON_TYPE_VAL_UNKNOWN	0x0
 >>>>>>> v3.18
@@ -164,11 +168,14 @@ typedef int (*read_sfp_module_eeprom_func_p)(struct bnx2x_phy *phy,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SFP_EEPROM_COMP_CODE_ADDR		0x3
 	#define SFP_EEPROM_COMP_CODE_SR_MASK	(1<<4)
 	#define SFP_EEPROM_COMP_CODE_LR_MASK	(1<<5)
 	#define SFP_EEPROM_COMP_CODE_LRM_MASK	(1<<6)
 =======
+=======
+>>>>>>> v3.18
 #define SFP_EEPROM_10G_COMP_CODE_ADDR		0x3
 	#define SFP_EEPROM_10G_COMP_CODE_SR_MASK	(1<<4)
 	#define SFP_EEPROM_10G_COMP_CODE_LR_MASK	(1<<5)
@@ -179,6 +186,9 @@ typedef int (*read_sfp_module_eeprom_func_p)(struct bnx2x_phy *phy,
 	#define SFP_EEPROM_1G_COMP_CODE_LX	(1<<1)
 	#define SFP_EEPROM_1G_COMP_CODE_CX	(1<<2)
 	#define SFP_EEPROM_1G_COMP_CODE_BASE_T	(1<<3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SFP_EEPROM_FC_TX_TECH_ADDR		0x8
@@ -193,6 +203,10 @@ typedef int (*read_sfp_module_eeprom_func_p)(struct bnx2x_phy *phy,
 #define EDC_MODE_LIMITING				0x0044
 #define EDC_MODE_PASSIVE_DAC			0x0055
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EDC_MODE_ACTIVE_DAC			0x0066
+>>>>>>> v3.18
 =======
 #define EDC_MODE_ACTIVE_DAC			0x0066
 >>>>>>> v3.18
@@ -226,12 +240,18 @@ typedef int (*read_sfp_module_eeprom_func_p)(struct bnx2x_phy *phy,
 		_val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bnx2x_check_half_open_conn(struct link_params *params,
 				      struct link_vars *vars, u8 notify);
 static int bnx2x_sfp_module_detection(struct bnx2x_phy *phy,
 				      struct link_params *params);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 bnx2x_bits_en(struct bnx2x *bp, u32 reg, u32 bits)
 {
@@ -1428,6 +1448,7 @@ static void bnx2x_update_pfc_xmac(struct link_params *params,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void bnx2x_emac_get_pfc_stat(struct link_params *params,
 				    u32 pfc_frames_sent[2],
@@ -1479,6 +1500,8 @@ void bnx2x_pfc_statistic(struct link_params *params, struct link_vars *vars,
 					pfc_frames_received);
 	}
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /******************************************************************/
@@ -2296,7 +2319,10 @@ int bnx2x_update_pfc(struct link_params *params,
 	u32 val;
 	struct bnx2x *bp = params->bp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bnx2x_status = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 bmac_loopback = (params->loopback_mode == LOOPBACK_BMAC);
@@ -2313,7 +2339,11 @@ int bnx2x_update_pfc(struct link_params *params,
 
 	if (!vars->link_up)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return bnx2x_status;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -2331,7 +2361,11 @@ int bnx2x_update_pfc(struct link_params *params,
 			DP(NETIF_MSG_LINK, "About to update PFC in EMAC\n");
 			bnx2x_emac_enable(params, vars, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return bnx2x_status;
+=======
+			return 0;
+>>>>>>> v3.18
 =======
 			return 0;
 >>>>>>> v3.18
@@ -2349,7 +2383,11 @@ int bnx2x_update_pfc(struct link_params *params,
 		REG_WR(bp, NIG_REG_BMAC0_PAUSE_OUT_EN + params->port*4, val);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bnx2x_status;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -3169,7 +3207,11 @@ static void bnx2x_bsc_module_sel(struct link_params *params)
 
 static int bnx2x_bsc_read(struct link_params *params,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct bnx2x_phy *phy,
+=======
+			  struct bnx2x *bp,
+>>>>>>> v3.18
 =======
 			  struct bnx2x *bp,
 >>>>>>> v3.18
@@ -3182,7 +3224,10 @@ static int bnx2x_bsc_read(struct link_params *params,
 	u32 val, i;
 	int rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bnx2x *bp = params->bp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3735,9 +3780,12 @@ static void bnx2x_warpcore_enable_AN_KR2(struct bnx2x_phy *phy,
 
 	/* Start KR2 work-around timer which handles BCM8073 link-parner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vars->link_attr_sync |= LINK_ATTR_SYNC_KR2_ENABLE;
 	bnx2x_update_link_attr(params, vars->link_attr_sync);
 =======
+=======
+>>>>>>> v3.18
 	params->link_attr_sync |= LINK_ATTR_SYNC_KR2_ENABLE;
 	bnx2x_update_link_attr(params, params->link_attr_sync);
 }
@@ -3775,6 +3823,9 @@ static void bnx2x_disable_kr2(struct link_params *params,
 	bnx2x_update_link_attr(params, params->link_attr_sync);
 
 	vars->check_kr2_recovery_cnt = CHECK_KR2_RECOVERY_CNT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3809,8 +3860,13 @@ static void bnx2x_warpcore_enable_AN_KR(struct bnx2x_phy *phy,
 					struct link_params *params,
 					struct link_vars *vars) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 lane, i, cl72_ctrl, an_adv = 0;
 	u16 ucode_ver;
+=======
+	u16 lane, i, cl72_ctrl, an_adv = 0, val;
+	u32 wc_lane_config;
+>>>>>>> v3.18
 =======
 	u16 lane, i, cl72_ctrl, an_adv = 0, val;
 	u32 wc_lane_config;
@@ -3906,6 +3962,7 @@ static void bnx2x_warpcore_enable_AN_KR(struct bnx2x_phy *phy,
 	/* Advertise pause */
 	bnx2x_ext_phy_set_pause(params, phy, vars);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set KR Autoneg Work-Around flag for Warpcore version older than D108
 	 */
 	bnx2x_cl45_read(bp, phy, MDIO_WC_DEVAD,
@@ -3915,6 +3972,9 @@ static void bnx2x_warpcore_enable_AN_KR(struct bnx2x_phy *phy,
 			       ucode_ver);
 		vars->rx_tx_asic_rst = MAX_KR_LINK_RETRY;
 	}
+=======
+	vars->rx_tx_asic_rst = MAX_KR_LINK_RETRY;
+>>>>>>> v3.18
 =======
 	vars->rx_tx_asic_rst = MAX_KR_LINK_RETRY;
 >>>>>>> v3.18
@@ -3942,7 +4002,10 @@ static void bnx2x_warpcore_enable_AN_KR(struct bnx2x_phy *phy,
 
 		bnx2x_warpcore_enable_AN_KR2(phy, params, vars);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		/* Enable Auto-Detect to support 1G over CL37 as well */
 		bnx2x_cl45_write(bp, phy, MDIO_WC_DEVAD,
@@ -3970,6 +4033,9 @@ static void bnx2x_warpcore_enable_AN_KR(struct bnx2x_phy *phy,
 				 val);
 
 		bnx2x_disable_kr2(params, vars, phy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4481,7 +4547,10 @@ static void bnx2x_warpcore_config_runtime(struct bnx2x_phy *phy,
 	u32 serdes_net_if;
 	u16 gp_status1 = 0, lnkup = 0, lnkup_kr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 lane = bnx2x_get_warpcore_lane(phy, params);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4491,6 +4560,7 @@ static void bnx2x_warpcore_config_runtime(struct bnx2x_phy *phy,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Return if there is no link partner */
 	if (!(bnx2x_warpcore_get_sigdet(phy, params))) {
 		DP(NETIF_MSG_LINK, "bnx2x_warpcore_get_sigdet false\n");
@@ -4498,6 +4568,10 @@ static void bnx2x_warpcore_config_runtime(struct bnx2x_phy *phy,
 	}
 
 	if (vars->rx_tx_asic_rst) {
+=======
+	if (vars->rx_tx_asic_rst) {
+		u16 lane = bnx2x_get_warpcore_lane(phy, params);
+>>>>>>> v3.18
 =======
 	if (vars->rx_tx_asic_rst) {
 		u16 lane = bnx2x_get_warpcore_lane(phy, params);
@@ -4517,6 +4591,7 @@ static void bnx2x_warpcore_config_runtime(struct bnx2x_phy *phy,
 			lnkup_kr = (gp_status1 >> (12+lane)) & 0x1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DP(NETIF_MSG_LINK,
 				"gp_status1 0x%x\n", gp_status1);
 
@@ -4525,6 +4600,10 @@ static void bnx2x_warpcore_config_runtime(struct bnx2x_phy *phy,
 					DP(NETIF_MSG_LINK,
 					"link up, rx_tx_asic_rst 0x%x\n",
 					vars->rx_tx_asic_rst);
+=======
+			if (lnkup_kr || lnkup) {
+				vars->rx_tx_asic_rst = 0;
+>>>>>>> v3.18
 =======
 			if (lnkup_kr || lnkup) {
 				vars->rx_tx_asic_rst = 0;
@@ -4654,11 +4733,14 @@ static void bnx2x_warpcore_config_init(struct bnx2x_phy *phy,
 			 * no module is connected
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (bnx2x_is_sfp_module_plugged(phy, params))
 				bnx2x_sfp_module_detection(phy, params);
 			else
 				bnx2x_sfp_e3_set_transmitter(params, phy, 1);
 =======
+=======
+>>>>>>> v3.18
 			if ((params->loopback_mode == LOOPBACK_NONE) ||
 			    (params->loopback_mode == LOOPBACK_EXT)) {
 				if (bnx2x_is_sfp_module_plugged(phy, params))
@@ -4667,6 +4749,9 @@ static void bnx2x_warpcore_config_init(struct bnx2x_phy *phy,
 					bnx2x_sfp_e3_set_transmitter(params,
 								     phy, 1);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			bnx2x_warpcore_config_sfi(phy, params);
@@ -4969,7 +5054,11 @@ void bnx2x_link_status_update(struct link_params *params,
 
 	if (SHMEM2_HAS(bp, link_attr_sync))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vars->link_attr_sync = SHMEM2_RD(bp,
+=======
+		params->link_attr_sync = SHMEM2_RD(bp,
+>>>>>>> v3.18
 =======
 		params->link_attr_sync = SHMEM2_RD(bp,
 >>>>>>> v3.18
@@ -5919,12 +6008,18 @@ static int bnx2x_warpcore_read_status(struct bnx2x_phy *phy,
 					 duplex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* In case of KR link down, start up the recovering procedure */
 	if ((!link_up) && (phy->media_type == ETH_PHY_KR) &&
 	    (!(phy->flags & FLAGS_WC_DUAL_MODE)))
 		vars->rx_tx_asic_rst = MAX_KR_LINK_RETRY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DP(NETIF_MSG_LINK, "duplex %x  flow_ctrl 0x%x link_status 0x%x\n",
 		   vars->duplex, vars->flow_ctrl, vars->link_status);
@@ -6515,10 +6610,13 @@ int bnx2x_set_led(struct link_params *params,
 			 */
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			REG_WR(bp, NIG_REG_LED_MODE_P0 + port*4,
 			       hw_led_mode);
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			u32 nig_led_mode = ((params->hw_led_mode <<
 					     SHARED_HW_CFG_LED_MODE_SHIFT) ==
@@ -6528,6 +6626,9 @@ int bnx2x_set_led(struct link_params *params,
 			REG_WR(bp, NIG_REG_LED_MODE_P0 + port*4,
 			       nig_led_mode);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		REG_WR(bp, NIG_REG_LED_CONTROL_OVERRIDE_TRAFFIC_P0 + port*4, 0);
@@ -6657,7 +6758,10 @@ static int bnx2x_link_initialize(struct link_params *params,
 				 struct link_vars *vars)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 phy_index, non_ext_phy;
@@ -6688,6 +6792,7 @@ static int bnx2x_link_initialize(struct link_params *params,
 		     CHIP_IS_E2(bp)))
 			bnx2x_set_parallel_detection(phy, params);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (params->phy[INT_PHY].config_init)
 				params->phy[INT_PHY].config_init(phy,
 								 params,
@@ -6695,6 +6800,8 @@ static int bnx2x_link_initialize(struct link_params *params,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		if (params->phy[INT_PHY].config_init)
 			params->phy[INT_PHY].config_init(phy, params, vars);
 	}
@@ -6704,6 +6811,9 @@ static int bnx2x_link_initialize(struct link_params *params,
 	 */
 	vars->line_speed = params->phy[INT_PHY].req_line_speed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Init external phy*/
 	if (non_ext_phy) {
@@ -6742,7 +6852,11 @@ static int bnx2x_link_initialize(struct link_params *params,
 			NIG_STATUS_SERDES0_LINK_STATUS |
 			NIG_MASK_MI_INT));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -8089,7 +8203,11 @@ static int bnx2x_warpcore_read_sfp_module_eeprom(struct bnx2x_phy *phy,
 			bnx2x_warpcore_power_module(params, 1);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = bnx2x_bsc_read(params, phy, dev_addr, addr32, 0, byte_cnt,
+=======
+		rc = bnx2x_bsc_read(params, bp, dev_addr, addr32, 0, byte_cnt,
+>>>>>>> v3.18
 =======
 		rc = bnx2x_bsc_read(params, bp, dev_addr, addr32, 0, byte_cnt,
 >>>>>>> v3.18
@@ -8250,7 +8368,11 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 	struct bnx2x *bp = params->bp;
 	u32 sync_offset = 0, phy_idx, media_types;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 gport, val[2], check_limiting_mode = 0;
+=======
+	u8 val[SFP_EEPROM_FC_TX_TECH_ADDR + 1], check_limiting_mode = 0;
+>>>>>>> v3.18
 =======
 	u8 val[SFP_EEPROM_FC_TX_TECH_ADDR + 1], check_limiting_mode = 0;
 >>>>>>> v3.18
@@ -8261,8 +8383,13 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 					 params,
 					 I2C_DEV_ADDR_A0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 SFP_EEPROM_CON_TYPE_ADDR,
 					 2,
+=======
+					 0,
+					 SFP_EEPROM_FC_TX_TECH_ADDR + 1,
+>>>>>>> v3.18
 =======
 					 0,
 					 SFP_EEPROM_FC_TX_TECH_ADDR + 1,
@@ -8272,14 +8399,20 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	switch (val[0]) {
 =======
+=======
+>>>>>>> v3.18
 	params->link_attr_sync &= ~LINK_SFP_EEPROM_COMP_CODE_MASK;
 	params->link_attr_sync |= val[SFP_EEPROM_10G_COMP_CODE_ADDR] <<
 		LINK_SFP_EEPROM_COMP_CODE_SHIFT;
 	bnx2x_update_link_attr(params, params->link_attr_sync);
 	switch (val[SFP_EEPROM_CON_TYPE_ADDR]) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SFP_EEPROM_CON_TYPE_VAL_COPPER:
 	{
@@ -8288,6 +8421,7 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 		/* Check if its active cable (includes SFP+ module)
 		 * of passive cable
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (bnx2x_read_sfp_module_eeprom(phy,
 					       params,
@@ -8303,10 +8437,14 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 =======
 		copper_module_type = val[SFP_EEPROM_FC_TX_TECH_ADDR];
 >>>>>>> v3.18
+=======
+		copper_module_type = val[SFP_EEPROM_FC_TX_TECH_ADDR];
+>>>>>>> v3.18
 
 		if (copper_module_type &
 		    SFP_EEPROM_FC_TX_TECH_BITMASK_COPPER_ACTIVE) {
 			DP(NETIF_MSG_LINK, "Active Copper cable detected\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 			check_limiting_mode = 1;
 		} else if (copper_module_type &
@@ -8334,6 +8472,8 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 			phy->media_type = ETH_PHY_SFP_1G_FIBER;
 			if (phy->req_line_speed != SPEED_1000) {
 =======
+=======
+>>>>>>> v3.18
 			if (phy->type == PORT_HW_CFG_XGXS_EXT_PHY_TYPE_DIRECT)
 				*edc_mode = EDC_MODE_ACTIVE_DAC;
 			else
@@ -8367,6 +8507,9 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 			phy->media_type = ETH_PHY_SFP_1G_FIBER;
 			if (phy->req_line_speed != SPEED_1000) {
 				u8 gport = params->port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				phy->req_line_speed = SPEED_1000;
 				if (!CHIP_IS_E1x(bp)) {
@@ -8378,13 +8521,19 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 					   gport);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (val[SFP_EEPROM_1G_COMP_CODE_ADDR] &
 			    SFP_EEPROM_1G_COMP_CODE_BASE_T) {
 				bnx2x_sfp_set_transmitter(params, phy, 0);
 				msleep(40);
 				bnx2x_sfp_set_transmitter(params, phy, 1);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			int idx, cfg_idx = 0;
@@ -8402,7 +8551,11 @@ static int bnx2x_get_edc_mode(struct bnx2x_phy *phy,
 	default:
 		DP(NETIF_MSG_LINK, "Unable to determine module type 0x%x !!!\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 val[0]);
+=======
+			 val[SFP_EEPROM_CON_TYPE_ADDR]);
+>>>>>>> v3.18
 =======
 			 val[SFP_EEPROM_CON_TYPE_ADDR]);
 >>>>>>> v3.18
@@ -8832,6 +8985,10 @@ static void bnx2x_warpcore_set_limiting_mode(struct link_params *params,
 		break;
 	case EDC_MODE_PASSIVE_DAC:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case EDC_MODE_ACTIVE_DAC:
+>>>>>>> v3.18
 =======
 	case EDC_MODE_ACTIVE_DAC:
 >>>>>>> v3.18
@@ -8873,8 +9030,13 @@ static void bnx2x_set_limiting_mode(struct link_params *params,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_sfp_module_detection(struct bnx2x_phy *phy,
 			       struct link_params *params)
+=======
+static int bnx2x_sfp_module_detection(struct bnx2x_phy *phy,
+				      struct link_params *params)
+>>>>>>> v3.18
 =======
 static int bnx2x_sfp_module_detection(struct bnx2x_phy *phy,
 				      struct link_params *params)
@@ -10016,6 +10178,7 @@ static int bnx2x_848xx_cmn_config_init(struct bnx2x_phy *phy,
 			 an_1000_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set 100 speed advertisement */
 	if ((phy->req_line_speed == SPEED_AUTO_NEG) &&
 	     (phy->speed_cap_mask &
@@ -10043,6 +10206,8 @@ static int bnx2x_848xx_cmn_config_init(struct bnx2x_phy *phy,
 			an_10_100_val |= (1<<6);
 		DP(NETIF_MSG_LINK, "Advertising 10M\n");
 =======
+=======
+>>>>>>> v3.18
 	/* Set 10/100 speed advertisement */
 	if (phy->req_line_speed == SPEED_AUTO_NEG) {
 		if (phy->speed_cap_mask &
@@ -10078,6 +10243,9 @@ static int bnx2x_848xx_cmn_config_init(struct bnx2x_phy *phy,
 			autoneg_val |= (1<<9 | 1<<12);
 			DP(NETIF_MSG_LINK, "Advertising 10M-HD\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -10933,11 +11101,14 @@ static void bnx2x_848xx_set_link_led(struct bnx2x_phy *phy,
 
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bnx2x_cl45_write(bp, phy,
 					 MDIO_PMA_DEVAD,
 					 MDIO_PMA_REG_8481_LED1_MASK,
 					 0x80);
 =======
+=======
+>>>>>>> v3.18
 			/* EXTPHY2 LED mode indicate that the 100M/1G/10G LED
 			 * sources are all wired through LED1, rather than only
 			 * 10G in other modes.
@@ -10950,6 +11121,9 @@ static void bnx2x_848xx_set_link_led(struct bnx2x_phy *phy,
 					 MDIO_PMA_DEVAD,
 					 MDIO_PMA_REG_8481_LED1_MASK,
 					 val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* Tell LED3 to blink on source */
@@ -11107,9 +11281,15 @@ static int bnx2x_54618se_config_init(struct bnx2x_phy *phy,
 
 	if (((phy->req_line_speed == SPEED_AUTO_NEG) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(phy->speed_cap_mask &
 			PORT_HW_CFG_SPEED_CAPABILITY_D0_1G)) ||
 			(phy->req_line_speed == SPEED_1000)) {
+=======
+	     (phy->speed_cap_mask &
+	      PORT_HW_CFG_SPEED_CAPABILITY_D0_1G)) ||
+	    (phy->req_line_speed == SPEED_1000)) {
+>>>>>>> v3.18
 =======
 	     (phy->speed_cap_mask &
 	      PORT_HW_CFG_SPEED_CAPABILITY_D0_1G)) ||
@@ -11130,6 +11310,7 @@ static int bnx2x_54618se_config_init(struct bnx2x_phy *phy,
 			0x09,
 			&an_1000_val);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set 100 speed advertisement */
 	if (((phy->req_line_speed == SPEED_AUTO_NEG) &&
@@ -11156,6 +11337,8 @@ static int bnx2x_54618se_config_init(struct bnx2x_phy *phy,
 			an_10_100_val |= (1<<6);
 		DP(NETIF_MSG_LINK, "Advertising 10M\n");
 =======
+=======
+>>>>>>> v3.18
 	/* Advertise 10/100 link speed */
 	if (phy->req_line_speed == SPEED_AUTO_NEG) {
 		if (phy->speed_cap_mask &
@@ -11182,6 +11365,9 @@ static int bnx2x_54618se_config_init(struct bnx2x_phy *phy,
 			autoneg_val |= (1<<9 | 1<<12);
 			DP(NETIF_MSG_LINK, "Advertising 100M-FD\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -12806,6 +12992,10 @@ static int bnx2x_avoid_link_flap(struct link_params *params,
 	struct bnx2x *bp = params->bp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bnx2x_set_mdio_emac_per_phy(bp, params);
+>>>>>>> v3.18
 =======
 	bnx2x_set_mdio_emac_per_phy(bp, params);
 >>>>>>> v3.18
@@ -13663,11 +13853,17 @@ static u8 bnx2x_analyze_link_error(struct link_params *params,
 	   old_status, status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Do not touch the link in case physical link down */
 	if ((vars->phy_flags & PHY_PHYSICAL_LINK_FLAG) == 0)
 		return 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* a. Update shmem->link_status accordingly
 	 * b. Update link_vars->link_up
@@ -13719,9 +13915,15 @@ static u8 bnx2x_analyze_link_error(struct link_params *params,
 *
 ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_check_half_open_conn(struct link_params *params,
 				struct link_vars *vars,
 				u8 notify)
+=======
+static int bnx2x_check_half_open_conn(struct link_params *params,
+				      struct link_vars *vars,
+				      u8 notify)
+>>>>>>> v3.18
 =======
 static int bnx2x_check_half_open_conn(struct link_params *params,
 				      struct link_vars *vars,
@@ -13823,6 +14025,7 @@ static void bnx2x_sfp_tx_fault_detection(struct bnx2x_phy *phy,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bnx2x_disable_kr2(struct link_params *params,
 			      struct link_vars *vars,
 			      struct bnx2x_phy *phy)
@@ -13862,6 +14065,8 @@ static void bnx2x_disable_kr2(struct link_params *params,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void bnx2x_kr2_recovery(struct link_params *params,
 			       struct link_vars *vars,
 			       struct bnx2x_phy *phy)
@@ -13893,7 +14098,11 @@ static void bnx2x_check_kr2_wa(struct link_params *params,
 	sigdet = bnx2x_warpcore_get_sigdet(phy, params);
 	if (!sigdet) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(vars->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
+=======
+		if (!(params->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
+>>>>>>> v3.18
 =======
 		if (!(params->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
 >>>>>>> v3.18
@@ -13915,7 +14124,11 @@ static void bnx2x_check_kr2_wa(struct link_params *params,
 	/* CL73 has not begun yet */
 	if (base_page == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(vars->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
+=======
+		if (!(params->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
+>>>>>>> v3.18
 =======
 		if (!(params->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
 >>>>>>> v3.18
@@ -13932,15 +14145,21 @@ static void bnx2x_check_kr2_wa(struct link_params *params,
 	not_kr2_device = (((base_page & 0x8000) == 0) ||
 			  (((base_page & 0x8000) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ((next_page & 0xe0) == 0x2))));
 
 	/* In case KR2 is already disabled, check if we need to re-enable it */
 	if (!(vars->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
 =======
+=======
+>>>>>>> v3.18
 			    ((next_page & 0xe0) == 0x20))));
 
 	/* In case KR2 is already disabled, check if we need to re-enable it */
 	if (!(params->link_attr_sync & LINK_ATTR_SYNC_KR2_ENABLE)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!not_kr2_device) {
 			DP(NETIF_MSG_LINK, "BP=0x%x, NP=0x%x\n", base_page,
@@ -13955,6 +14174,11 @@ static void bnx2x_check_kr2_wa(struct link_params *params,
 		DP(NETIF_MSG_LINK, "BP=0x%x, NP=0x%x\n", base_page, next_page);
 		bnx2x_disable_kr2(params, vars, phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Restart AN on leading lane */
+		bnx2x_warpcore_restart_AN_KR(phy, params);
+>>>>>>> v3.18
 =======
 		/* Restart AN on leading lane */
 		bnx2x_warpcore_restart_AN_KR(phy, params);

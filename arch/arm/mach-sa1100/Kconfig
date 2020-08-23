@@ -59,6 +59,10 @@ config SA1100_H3100
 	select ARM_SA1110_CPUFREQ
 	select HTC_EGPIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MFD_IPAQ_MICRO
+>>>>>>> v3.18
 =======
 	select MFD_IPAQ_MICRO
 >>>>>>> v3.18
@@ -74,6 +78,10 @@ config SA1100_H3600
 	select ARM_SA1110_CPUFREQ
 	select HTC_EGPIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MFD_IPAQ_MICRO
+>>>>>>> v3.18
 =======
 	select MFD_IPAQ_MICRO
 >>>>>>> v3.18

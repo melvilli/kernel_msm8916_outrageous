@@ -18,11 +18,17 @@ typedef unsigned long addr_t;
 typedef __signed__ long saddr_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct {
 	__u32 u[4];
 } __vector128;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY__ */
 

@@ -27,9 +27,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/types.h>
 =======
+=======
+>>>>>>> v3.18
 #include "bcm47xx_private.h"
 
 #include <linux/export.h>
@@ -37,12 +40,20 @@
 #include <linux/ethtool.h>
 #include <linux/phy.h>
 #include <linux/phy_fixed.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/ssb/ssb.h>
 #include <linux/ssb/ssb_embedded.h>
 #include <linux/bcma/bcma_soc.h>
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/idle.h>
+#include <asm/prom.h>
+>>>>>>> v3.18
 =======
 #include <asm/idle.h>
 #include <asm/prom.h>
@@ -52,6 +63,10 @@
 #include <bcm47xx.h>
 #include <bcm47xx_nvram.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <bcm47xx_board.h>
+>>>>>>> v3.18
 =======
 #include <bcm47xx_board.h>
 >>>>>>> v3.18
@@ -71,8 +86,11 @@ static void bcm47xx_machine_restart(char *command)
 #ifdef CONFIG_BCM47XX_SSB
 	case BCM47XX_BUS_TYPE_SSB:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ssb_watchdog_timer_set(&bcm47xx_bus.ssb, 1);
 =======
+=======
+>>>>>>> v3.18
 		if (bcm47xx_bus.ssb.chip_id == 0x4785)
 			write_c0_diag4(1 << 22);
 		ssb_watchdog_timer_set(&bcm47xx_bus.ssb, 1);
@@ -83,6 +101,9 @@ static void bcm47xx_machine_restart(char *command)
 				"wait\n\t"
 				".set\tmips0");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 #endif
@@ -227,11 +248,17 @@ static void __init bcm47xx_register_bcma(void)
 	err = bcma_host_soc_register(&bcm47xx_bus.bcma);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		panic("Failed to register BCMA bus (err %d)", err);
 
 	err = bcma_host_soc_init(&bcm47xx_bus.bcma);
 	if (err)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		panic("Failed to initialize BCMA bus (err %d)", err);
 
@@ -244,7 +271,11 @@ void __init plat_mem_setup(void)
 	struct cpuinfo_mips *c = &current_cpu_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->cputype == CPU_74K) {
+=======
+	if ((c->cputype == CPU_74K) || (c->cputype == CPU_1074K)) {
+>>>>>>> v3.18
 =======
 	if ((c->cputype == CPU_74K) || (c->cputype == CPU_1074K)) {
 >>>>>>> v3.18
@@ -253,11 +284,17 @@ void __init plat_mem_setup(void)
 		bcm47xx_bus_type = BCM47XX_BUS_TYPE_BCMA;
 		bcm47xx_register_bcma();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		bcm47xx_set_system_type(bcm47xx_bus.bcma.bus.chipinfo.id);
 #ifdef CONFIG_HIGHMEM
 		bcm47xx_prom_highmem_init();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	} else {
@@ -266,6 +303,10 @@ void __init plat_mem_setup(void)
 		bcm47xx_bus_type = BCM47XX_BUS_TYPE_SSB;
 		bcm47xx_register_ssb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bcm47xx_set_system_type(bcm47xx_bus.ssb.chip_id);
+>>>>>>> v3.18
 =======
 		bcm47xx_set_system_type(bcm47xx_bus.ssb.chip_id);
 >>>>>>> v3.18
@@ -276,8 +317,11 @@ void __init plat_mem_setup(void)
 	_machine_halt = bcm47xx_machine_halt;
 	pm_power_off = bcm47xx_machine_halt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> v3.18
 	bcm47xx_board_detect();
 	mips_set_machine_name(bcm47xx_board_get_name());
 }
@@ -312,6 +356,9 @@ static struct fixed_phy_status bcm47xx_fixed_phy_status __initdata = {
 	.speed	= SPEED_100,
 	.duplex	= DUPLEX_FULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init bcm47xx_register_bus_complete(void)
@@ -329,12 +376,18 @@ static int __init bcm47xx_register_bus_complete(void)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bcm47xx_buttons_register();
 	bcm47xx_leds_register();
 	bcm47xx_workarounds();
 
 	fixed_phy_add(PHY_POLL, 0, &bcm47xx_fixed_phy_status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

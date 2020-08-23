@@ -202,6 +202,7 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct lpc32xx_rtc *rtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resource_size_t size;
 	int rtcirq;
 	u32 tmp;
@@ -217,6 +218,11 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 	u32 tmp;
 
 >>>>>>> v3.18
+=======
+	int rtcirq;
+	u32 tmp;
+
+>>>>>>> v3.18
 	rtcirq = platform_get_irq(pdev, 0);
 	if (rtcirq < 0 || rtcirq >= NR_IRQS) {
 		dev_warn(&pdev->dev, "Can't get interrupt resource\n");
@@ -224,6 +230,7 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 	}
 
 	rtc = devm_kzalloc(&pdev->dev, sizeof(*rtc), GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unlikely(!rtc)) {
 		dev_err(&pdev->dev, "Can't allocate memory\n");
@@ -245,6 +252,8 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!rtc))
 		return -ENOMEM;
 
@@ -254,6 +263,9 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 	rtc->rtc_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(rtc->rtc_base))
 		return PTR_ERR(rtc->rtc_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&rtc->lock);
@@ -296,7 +308,10 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(rtc->rtc)) {
 		dev_err(&pdev->dev, "Can't get RTC\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return PTR_ERR(rtc->rtc);
@@ -328,8 +343,11 @@ static int lpc32xx_rtc_remove(struct platform_device *pdev)
 		device_init_wakeup(&pdev->dev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

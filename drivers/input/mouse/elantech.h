@@ -95,6 +95,10 @@
 #define PACKET_V4_MOTION		0x06
 #define PACKET_V4_STATUS		0x07
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PACKET_TRACKPOINT		0x08
+>>>>>>> v3.18
 =======
 #define PACKET_TRACKPOINT		0x08
 >>>>>>> v3.18
@@ -119,6 +123,11 @@ struct finger_pos {
 
 struct elantech_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct input_dev *tp_dev;	/* Relative device for trackpoint */
+	char tp_phys[32];
+>>>>>>> v3.18
 =======
 	struct input_dev *tp_dev;	/* Relative device for trackpoint */
 	char tp_phys[32];
@@ -139,6 +148,10 @@ struct elantech_data {
 	bool jumpy_cursor;
 	bool reports_pressure;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool crc_enabled;
+>>>>>>> v3.18
 =======
 	bool crc_enabled;
 >>>>>>> v3.18
@@ -152,7 +165,10 @@ struct elantech_data {
 	unsigned char parity[256];
 	int (*send_cmd)(struct psmouse *psmouse, unsigned char c, unsigned char *param);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*original_set_rate)(struct psmouse *psmouse, unsigned int rate);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

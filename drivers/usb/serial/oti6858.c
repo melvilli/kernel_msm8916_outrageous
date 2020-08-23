@@ -40,7 +40,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -107,6 +110,10 @@ struct oti6858_control_pkt {
 	u8	pin_state;
 #define PIN_MASK		0x3f
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PIN_MSR_MASK		0x1b
+>>>>>>> v3.18
 =======
 #define PIN_MSR_MASK		0x1b
 >>>>>>> v3.18
@@ -142,8 +149,11 @@ static int oti6858_tiocmget(struct tty_struct *tty);
 static int oti6858_tiocmset(struct tty_struct *tty,
 				unsigned int set, unsigned int clear);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int oti6858_tiocmiwait(struct tty_struct *tty, unsigned long arg);
 static int oti6858_attach(struct usb_serial *serial);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int oti6858_port_probe(struct usb_serial_port *port);
@@ -165,7 +175,11 @@ static struct usb_serial_driver oti6858_device = {
 	.tiocmget =		oti6858_tiocmget,
 	.tiocmset =		oti6858_tiocmset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tiocmiwait =		oti6858_tiocmiwait,
+=======
+	.tiocmiwait =		usb_serial_generic_tiocmiwait,
+>>>>>>> v3.18
 =======
 	.tiocmiwait =		usb_serial_generic_tiocmiwait,
 >>>>>>> v3.18
@@ -175,7 +189,10 @@ static struct usb_serial_driver oti6858_device = {
 	.write_room =		oti6858_write_room,
 	.chars_in_buffer =	oti6858_chars_in_buffer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attach =		oti6858_attach,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe =		oti6858_port_probe,
@@ -220,8 +237,12 @@ static void setup_line(struct work_struct *work)
 
 	new_setup = kmalloc(OTI6858_CTRL_PKT_SIZE, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_setup == NULL) {
 		dev_err(&port->dev, "%s(): out of memory!\n", __func__);
+=======
+	if (!new_setup) {
+>>>>>>> v3.18
 =======
 	if (!new_setup) {
 >>>>>>> v3.18
@@ -311,11 +332,17 @@ static void send_data(struct work_struct *work)
 	if (count != 0) {
 		allow = kmalloc(1, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!allow) {
 			dev_err_console(port, "%s(): kmalloc failed\n",
 					__func__);
 			return;
 		}
+=======
+		if (!allow)
+			return;
+
+>>>>>>> v3.18
 =======
 		if (!allow)
 			return;
@@ -358,6 +385,7 @@ static void send_data(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int oti6858_attach(struct usb_serial *serial)
 {
 	unsigned char num_ports = serial->num_ports;
@@ -372,6 +400,8 @@ static int oti6858_attach(struct usb_serial *serial)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int oti6858_port_probe(struct usb_serial_port *port)
@@ -390,6 +420,11 @@ static int oti6858_port_probe(struct usb_serial_port *port)
 	usb_set_serial_port_data(port, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->port.drain_delay = 256;	/* FIXME: check the FIFO length */
+
+>>>>>>> v3.18
 =======
 	port->port.drain_delay = 256;	/* FIXME: check the FIFO length */
 
@@ -463,9 +498,12 @@ static void oti6858_set_termios(struct tty_struct *tty,
 	int br;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tty)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cflag = tty->termios.c_cflag;
@@ -564,7 +602,10 @@ static int oti6858_open(struct tty_struct *tty, struct usb_serial_port *port)
 {
 	struct oti6858_private *priv = usb_get_serial_port_data(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ktermios tmp_termios;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct usb_serial *serial = port->serial;
@@ -577,10 +618,15 @@ static int oti6858_open(struct tty_struct *tty, struct usb_serial_port *port)
 
 	buf = kmalloc(OTI6858_CTRL_PKT_SIZE, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (buf == NULL) {
 		dev_err(&port->dev, "%s(): out of memory!\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!buf)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!buf)
 		return -ENOMEM;
@@ -623,8 +669,13 @@ static int oti6858_open(struct tty_struct *tty, struct usb_serial_port *port)
 	/* setup termios */
 	if (tty)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oti6858_set_termios(tty, port, &tmp_termios);
 	port->port.drain_delay = 256;	/* FIXME: check the FIFO length */
+=======
+		oti6858_set_termios(tty, port, NULL);
+
+>>>>>>> v3.18
 =======
 		oti6858_set_termios(tty, port, NULL);
 
@@ -717,6 +768,7 @@ static int oti6858_tiocmget(struct tty_struct *tty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int oti6858_tiocmiwait(struct tty_struct *tty, unsigned long arg)
 {
 	struct usb_serial_port *port = tty->driver_data;
@@ -757,6 +809,8 @@ static int oti6858_tiocmiwait(struct tty_struct *tty, unsigned long arg)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void oti6858_read_int_callback(struct urb *urb)
@@ -817,9 +871,12 @@ static void oti6858_read_int_callback(struct urb *urb)
 
 		if (!priv->transient) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (xs->pin_state != priv->status.pin_state)
 				wake_up_interruptible(&port->port.delta_msr_wait);
 =======
+=======
+>>>>>>> v3.18
 			u8 delta = xs->pin_state ^ priv->status.pin_state;
 
 			if (delta & PIN_MSR_MASK) {
@@ -835,6 +892,9 @@ static void oti6858_read_int_callback(struct urb *urb)
 				wake_up_interruptible(&port->port.delta_msr_wait);
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			memcpy(&priv->status, xs, OTI6858_CTRL_PKT_SIZE);
 		}

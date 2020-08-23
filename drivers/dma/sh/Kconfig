@@ -3,10 +3,13 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SH_DMAE_BASE
 	bool "Renesas SuperH DMA Engine support"
 	depends on (SUPERH && SH_DMA) || (ARM && ARCH_SHMOBILE)
 =======
+=======
+>>>>>>> v3.18
 #
 # DMA Engine Helpers
 #
@@ -15,6 +18,9 @@ config SH_DMAE_BASE
 	bool "Renesas SuperH DMA Engine support"
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
 	depends on !SUPERH || SH_DMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on !SH_DMA_API
 	default y
@@ -23,11 +29,17 @@ config SH_DMAE_BASE
 	  Enable support for the Renesas SuperH DMA controllers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #
 # DMA Controllers
 #
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SH_DMAE
 	tristate "Renesas SuperH DMAC support"
@@ -36,7 +48,10 @@ config SH_DMAE
 	  Enable support for the Renesas SuperH DMA controllers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 if SH_DMAE
 
 config SH_DMAE_R8A73A4
@@ -46,6 +61,9 @@ config SH_DMAE_R8A73A4
 
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SUDMAC
 	tristate "Renesas SUDMAC support"
@@ -53,7 +71,10 @@ config SUDMAC
 	help
 	  Enable support for the Renesas SUDMAC controllers.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config RCAR_HPB_DMAE
 	tristate "Renesas R-Car HPB DMAC support"
@@ -66,4 +87,7 @@ config RCAR_AUDMAC_PP
 	depends on SH_DMAE_BASE
 	help
 	  Enable support for the Renesas R-Car Audio DMAC Peripheral Peripheral controllers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

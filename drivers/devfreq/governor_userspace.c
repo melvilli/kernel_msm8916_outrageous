@@ -23,8 +23,12 @@ struct userspace_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int devfreq_userspace_func(struct devfreq *df, unsigned long *freq,
 					u32 *flag)
+=======
+static int devfreq_userspace_func(struct devfreq *df, unsigned long *freq)
+>>>>>>> v3.18
 =======
 static int devfreq_userspace_func(struct devfreq *df, unsigned long *freq)
 >>>>>>> v3.18

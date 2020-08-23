@@ -4,7 +4,11 @@
  * Copyright (C) 2008 Jordan Crouse <jordan@cosmicpenguin.net>
  * Copyright (C) 2008 Hans de Goede <hdegoede@redhat.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2009 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2009 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2009 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

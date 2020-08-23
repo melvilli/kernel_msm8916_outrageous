@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston,
  * MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -142,6 +146,10 @@ void netxen_release_tx_buffers(struct netxen_adapter *adapter)
 	struct nx_host_tx_ring *tx_ring = adapter->tx_ring;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock(&adapter->tx_clean_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&adapter->tx_clean_lock);
 >>>>>>> v3.18
@@ -169,6 +177,10 @@ void netxen_release_tx_buffers(struct netxen_adapter *adapter)
 		cmd_buf++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock(&adapter->tx_clean_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&adapter->tx_clean_lock);
 >>>>>>> v3.18
@@ -1617,7 +1629,11 @@ netxen_process_lro(struct netxen_adapter *adapter,
 	u8 vhdr_len = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(ring > adapter->max_rds_rings))
+=======
+	if (unlikely(ring >= adapter->max_rds_rings))
+>>>>>>> v3.18
 =======
 	if (unlikely(ring >= adapter->max_rds_rings))
 >>>>>>> v3.18
@@ -1627,7 +1643,11 @@ netxen_process_lro(struct netxen_adapter *adapter,
 
 	index = netxen_get_lro_sts_refhandle(sts_data0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(index > rds_ring->num_desc))
+=======
+	if (unlikely(index >= rds_ring->num_desc))
+>>>>>>> v3.18
 =======
 	if (unlikely(index >= rds_ring->num_desc))
 >>>>>>> v3.18
@@ -1815,9 +1835,15 @@ int netxen_process_cmd_ring(struct netxen_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count && netif_running(netdev)) {
 		tx_ring->sw_consumer = sw_consumer;
 
+=======
+	tx_ring->sw_consumer = sw_consumer;
+
+	if (count && netif_running(netdev)) {
+>>>>>>> v3.18
 =======
 	tx_ring->sw_consumer = sw_consumer;
 

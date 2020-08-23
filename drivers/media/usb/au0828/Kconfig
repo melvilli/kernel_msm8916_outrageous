@@ -21,6 +21,10 @@ config VIDEO_AU0828_V4L2
 	depends on VIDEO_AU0828 && VIDEO_V4L2
 	select DVB_AU8522_V4L if MEDIA_SUBDRV_AUTOSELECT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select VIDEO_TUNER
+>>>>>>> v3.18
 =======
 	select VIDEO_TUNER
 >>>>>>> v3.18
@@ -31,7 +35,10 @@ config VIDEO_AU0828_V4L2
 	  Choose Y here to include support for v4l2 analog video
 	  capture within the au0828 driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config VIDEO_AU0828_RC
 	bool "AU0828 Remote Controller support"
@@ -39,4 +46,7 @@ config VIDEO_AU0828_RC
 	depends on VIDEO_AU0828
 	---help---
 	   Enables Remote Controller support on au0828 driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -572,7 +572,11 @@ mode "640x480-60"
 #   Blank Time      4.798 us    0.564 ms
 #                   50 chars    28 lines
 <<<<<<< HEAD
+<<<<<<< HEAD
 #   Polarity        negtive    positive
+=======
+#   Polarity        negative    positive
+>>>>>>> v3.18
 =======
 #   Polarity        negative    positive
 >>>>>>> v3.18

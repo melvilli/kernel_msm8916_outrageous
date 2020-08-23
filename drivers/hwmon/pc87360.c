@@ -2,7 +2,11 @@
  *  pc87360.c - Part of lm_sensors, Linux kernel modules
  *              for hardware monitoring
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2004, 2007 Jean Delvare <khali@linux-fr.org>
+=======
+ *  Copyright (C) 2004, 2007 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2004, 2007 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -620,6 +624,12 @@ static ssize_t set_vrm(struct device *dev, struct device_attribute *attr,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (val > 255)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (val > 255)
 		return -EINVAL;
@@ -1236,7 +1246,11 @@ static int pc87360_probe(struct platform_device *pdev)
 	struct pc87360_data *data;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *name = "pc87360";
+=======
+	const char *name;
+>>>>>>> v3.18
 =======
 	const char *name;
 >>>>>>> v3.18
@@ -1248,6 +1262,7 @@ static int pc87360_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->fannr = 2;
 	data->innr = 0;
 	data->tempnr = 0;
@@ -1256,6 +1271,8 @@ static int pc87360_probe(struct platform_device *pdev)
 	case 0xe8:
 		name = "pc87363";
 =======
+=======
+>>>>>>> v3.18
 	switch (devid) {
 	default:
 		name = "pc87360";
@@ -1264,6 +1281,9 @@ static int pc87360_probe(struct platform_device *pdev)
 	case 0xe8:
 		name = "pc87363";
 		data->fannr = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 0xe4:
@@ -1286,7 +1306,10 @@ static int pc87360_probe(struct platform_device *pdev)
 
 	data->name = name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->valid = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_init(&data->lock);
@@ -1837,7 +1860,11 @@ static void __exit pc87360_exit(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

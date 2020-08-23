@@ -367,7 +367,11 @@ void roccat_disconnect(int minor)
 	devices[minor] = NULL;
 	mutex_unlock(&devices_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -431,6 +435,7 @@ static int __init roccat_init(void)
 	if (retval < 0) {
 		pr_warn("can't get major number\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return retval;
 	}
 
@@ -439,6 +444,8 @@ static int __init roccat_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto error;
 	}
 
@@ -456,6 +463,9 @@ static int __init roccat_init(void)
 	unregister_chrdev_region(dev_id, ROCCAT_MAX_DEVICES);
  error:
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

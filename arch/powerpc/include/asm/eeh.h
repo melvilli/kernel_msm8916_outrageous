@@ -25,6 +25,11 @@
 #include <linux/list.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/time.h>
+#include <linux/atomic.h>
+>>>>>>> v3.18
 =======
 #include <linux/time.h>
 #include <linux/atomic.h>
@@ -37,7 +42,10 @@ struct device_node;
 #ifdef CONFIG_EEH
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* EEH subsystem flags */
 #define EEH_ENABLED		0x01	/* EEH enabled		*/
 #define EEH_FORCE_DISABLED	0x02	/* EEH disabled		*/
@@ -55,6 +63,9 @@ struct device_node;
 #define EEH_PE_RST_HOLD_TIME		250
 #define EEH_PE_RST_SETTLE_TIME		1800
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The struct is used to trace PE related EEH functionality.
@@ -78,11 +89,17 @@ struct device_node;
 #define EEH_PE_ISOLATED		(1 << 0)	/* Isolated PE		*/
 #define EEH_PE_RECOVERING	(1 << 1)	/* Recovering PE	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EEH_PE_CFG_BLOCKED	(1 << 2)	/* Block config access	*/
 
 #define EEH_PE_KEEP		(1 << 8)	/* Keep PE on hotplug	*/
 #define EEH_PE_CFG_RESTRICTED	(1 << 9)	/* Block config on error */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct eeh_pe {
@@ -92,11 +109,14 @@ struct eeh_pe {
 	int addr;			/* PE configuration address	*/
 	struct pci_controller *phb;	/* Associated PHB		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int check_count;		/* Times of ignored error	*/
 	int freeze_count;		/* Times of froze up		*/
 	int false_positives;		/* Times of reported #ff's	*/
 	struct eeh_pe *parent;		/* Parent PE			*/
 =======
+=======
+>>>>>>> v3.18
 	struct pci_bus *bus;		/* Top PCI bus for bus PE	*/
 	int check_count;		/* Times of ignored error	*/
 	int freeze_count;		/* Times of froze up		*/
@@ -105,6 +125,9 @@ struct eeh_pe {
 	atomic_t pass_dev_cnt;		/* Count of passed through devs	*/
 	struct eeh_pe *parent;		/* Parent PE			*/
 	void *data;			/* PE auxillary data		*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head child_list;	/* Link PE to the child list	*/
 	struct list_head edevs;		/* Link list of EEH devices	*/
@@ -112,9 +135,12 @@ struct eeh_pe {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define eeh_pe_for_each_dev(pe, edev) \
 		list_for_each_entry(edev, &pe->edevs, list)
 =======
+=======
+>>>>>>> v3.18
 #define eeh_pe_for_each_dev(pe, edev, tmp) \
 		list_for_each_entry_safe(edev, tmp, &pe->edevs, list)
 
@@ -122,6 +148,9 @@ static inline bool eeh_pe_passed(struct eeh_pe *pe)
 {
 	return pe ? !!atomic_read(&pe->pass_dev_cnt) : false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -132,8 +161,11 @@ static inline bool eeh_pe_passed(struct eeh_pe *pe)
  * buses and PCI devices
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEH_DEV_IRQ_DISABLED	(1<<0)	/* Interrupt disabled		*/
 =======
+=======
+>>>>>>> v3.18
 #define EEH_DEV_BRIDGE		(1 << 0)	/* PCI bridge		*/
 #define EEH_DEV_ROOT_PORT	(1 << 1)	/* PCIe root port	*/
 #define EEH_DEV_DS_PORT		(1 << 2)	/* Downstream port	*/
@@ -143,6 +175,9 @@ static inline bool eeh_pe_passed(struct eeh_pe *pe)
 #define EEH_DEV_NO_HANDLER	(1 << 8)	/* No error handler	*/
 #define EEH_DEV_SYSFS		(1 << 9)	/* Sysfs created	*/
 #define EEH_DEV_REMOVED		(1 << 10)	/* Removed permanently	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct eeh_dev {
@@ -152,6 +187,12 @@ struct eeh_dev {
 	int pe_config_addr;		/* PE config address		*/
 	u32 config_space[16];		/* Saved PCI config space	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int pcix_cap;			/* Saved PCIx capability	*/
+	int pcie_cap;			/* Saved PCIe capability	*/
+	int aer_cap;			/* Saved AER capability		*/
+>>>>>>> v3.18
 =======
 	int pcix_cap;			/* Saved PCIx capability	*/
 	int pcie_cap;			/* Saved PCIe capability	*/
@@ -163,6 +204,10 @@ struct eeh_dev {
 	struct device_node *dn;		/* Associated device node	*/
 	struct pci_dev *pdev;		/* Associated PCI device	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pci_bus *bus;		/* PCI bus for partial hotplug	*/
+>>>>>>> v3.18
 =======
 	struct pci_bus *bus;		/* PCI bus for partial hotplug	*/
 >>>>>>> v3.18
@@ -171,7 +216,11 @@ struct eeh_dev {
 static inline struct device_node *eeh_dev_to_of_node(struct eeh_dev *edev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return edev->dn;
+=======
+	return edev ? edev->dn : NULL;
+>>>>>>> v3.18
 =======
 	return edev ? edev->dn : NULL;
 >>>>>>> v3.18
@@ -180,10 +229,13 @@ static inline struct device_node *eeh_dev_to_of_node(struct eeh_dev *edev)
 static inline struct pci_dev *eeh_dev_to_pci_dev(struct eeh_dev *edev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return edev->pdev;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return edev ? edev->pdev : NULL;
 }
 
@@ -202,6 +254,9 @@ enum {
 	EEH_NEXT_ERR_DEAD_IOC
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The struct is used to trace the registered EEH operation
@@ -215,6 +270,10 @@ enum {
 #define EEH_OPT_THAW_MMIO	2	/* MMIO enable	*/
 #define EEH_OPT_THAW_DMA	3	/* DMA enable	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EEH_OPT_FREEZE_PE	4	/* Freeze PE	*/
+>>>>>>> v3.18
 =======
 #define EEH_OPT_FREEZE_PE	4	/* Freeze PE	*/
 >>>>>>> v3.18
@@ -226,12 +285,18 @@ enum {
 #define EEH_STATE_MMIO_ENABLED	(1 << 5)	/* MMIO enabled		*/
 #define EEH_STATE_DMA_ENABLED	(1 << 6)	/* DMA enabled		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EEH_PE_STATE_NORMAL		0	/* Normal state		*/
 #define EEH_PE_STATE_RESET		1	/* PE reset asserted	*/
 #define EEH_PE_STATE_STOPPED_IO_DMA	2	/* Frozen PE		*/
 #define EEH_PE_STATE_STOPPED_DMA	4	/* Stopped DMA, Enabled IO */
 #define EEH_PE_STATE_UNAVAIL		5	/* Unavailable		*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EEH_RESET_DEACTIVATE	0	/* Deactivate the PE reset	*/
 #define EEH_RESET_HOT		1	/* Hot reset			*/
@@ -243,8 +308,14 @@ struct eeh_ops {
 	char *name;
 	int (*init)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void* (*of_probe)(struct device_node *dn, void *flag);
 	void* (*dev_probe)(struct pci_dev *dev, void *flag);
+=======
+	int (*post_init)(void);
+	void* (*of_probe)(struct device_node *dn, void *flag);
+	int (*dev_probe)(struct pci_dev *dev, void *flag);
+>>>>>>> v3.18
 =======
 	int (*post_init)(void);
 	void* (*of_probe)(struct device_node *dn, void *flag);
@@ -257,6 +328,7 @@ struct eeh_ops {
 	int (*wait_state)(struct eeh_pe *pe, int max_wait);
 	int (*get_log)(struct eeh_pe *pe, int severity, char *drv_log, unsigned long len);
 	int (*configure_bridge)(struct eeh_pe *pe);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*read_config)(struct device_node *dn, int where, int size, u32 *val);
 	int (*write_config)(struct device_node *dn, int where, int size, u32 val);
@@ -294,6 +366,8 @@ static inline void eeh_unlock(void)
 {
 	mutex_unlock(&eeh_mutex);
 =======
+=======
+>>>>>>> v3.18
 	int (*err_inject)(struct eeh_pe *pe, int type, int func,
 			  unsigned long addr, unsigned long mask);
 	int (*read_config)(struct device_node *dn, int where, int size, u32 *val);
@@ -338,6 +412,9 @@ static inline void eeh_serialize_lock(unsigned long *flags)
 static inline void eeh_serialize_unlock(unsigned long flags)
 {
 	raw_spin_unlock_irqrestore(&confirm_error_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -349,6 +426,7 @@ static inline void eeh_serialize_unlock(unsigned long flags)
 
 typedef void *(*eeh_traverse_func)(void *data, void *flag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int eeh_phb_pe_create(struct pci_controller *phb);
 int eeh_add_to_parent_pe(struct eeh_dev *edev);
 int eeh_rmv_from_parent_pe(struct eeh_dev *edev, int purge_pe);
@@ -356,6 +434,8 @@ void *eeh_pe_dev_traverse(struct eeh_pe *root,
 		eeh_traverse_func fn, void *flag);
 void eeh_pe_restore_bars(struct eeh_pe *pe);
 =======
+=======
+>>>>>>> v3.18
 void eeh_set_pe_aux_size(int size);
 int eeh_phb_pe_create(struct pci_controller *phb);
 struct eeh_pe *eeh_phb_pe_get(struct pci_controller *phb);
@@ -369,11 +449,15 @@ void *eeh_pe_dev_traverse(struct eeh_pe *root,
 		eeh_traverse_func fn, void *flag);
 void eeh_pe_restore_bars(struct eeh_pe *pe);
 const char *eeh_pe_loc_get(struct eeh_pe *pe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pci_bus *eeh_pe_bus_get(struct eeh_pe *pe);
 
 void *eeh_dev_init(struct device_node *dn, void *data);
 void eeh_dev_phb_init_dynamic(struct pci_controller *phb);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __init eeh_ops_register(struct eeh_ops *ops);
 int __exit eeh_ops_unregister(const char *name);
@@ -386,6 +470,8 @@ void eeh_add_device_tree_late(struct pci_bus *);
 void eeh_add_sysfs_files(struct pci_bus *);
 void eeh_remove_bus_device(struct pci_dev *, int);
 =======
+=======
+>>>>>>> v3.18
 int eeh_init(void);
 int __init eeh_ops_register(struct eeh_ops *ops);
 int __exit eeh_ops_unregister(const char *name);
@@ -407,6 +493,9 @@ int eeh_pe_set_option(struct eeh_pe *pe, int option);
 int eeh_pe_get_state(struct eeh_pe *pe);
 int eeh_pe_reset(struct eeh_pe *pe, int option);
 int eeh_pe_configure(struct eeh_pe *pe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -416,7 +505,11 @@ int eeh_pe_configure(struct eeh_pe *pe);
  * which does further tests out of line.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEH_POSSIBLE_ERROR(val, type)	((val) == (type)~0 && eeh_subsystem_enabled)
+=======
+#define EEH_POSSIBLE_ERROR(val, type)	((val) == (type)~0 && eeh_enabled())
+>>>>>>> v3.18
 =======
 #define EEH_POSSIBLE_ERROR(val, type)	((val) == (type)~0 && eeh_enabled())
 >>>>>>> v3.18
@@ -431,7 +524,10 @@ int eeh_pe_configure(struct eeh_pe *pe);
 #else /* !CONFIG_EEH */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool eeh_enabled(void)
 {
         return false;
@@ -442,6 +538,9 @@ static inline int eeh_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void *eeh_dev_init(struct device_node *dn, void *data)
 {
@@ -451,9 +550,15 @@ static inline void *eeh_dev_init(struct device_node *dn, void *data)
 static inline void eeh_dev_phb_init_dynamic(struct pci_controller *phb) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long eeh_check_failure(const volatile void __iomem *token, unsigned long val)
 {
 	return val;
+=======
+static inline int eeh_check_failure(const volatile void __iomem *token)
+{
+	return 0;
+>>>>>>> v3.18
 =======
 static inline int eeh_check_failure(const volatile void __iomem *token)
 {
@@ -466,25 +571,35 @@ static inline int eeh_check_failure(const volatile void __iomem *token)
 static inline void eeh_addr_cache_build(void) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void eeh_add_device_tree_early(struct device_node *dn) { }
 
 =======
+=======
+>>>>>>> v3.18
 static inline void eeh_add_device_early(struct device_node *dn) { }
 
 static inline void eeh_add_device_tree_early(struct device_node *dn) { }
 
 static inline void eeh_add_device_late(struct pci_dev *dev) { }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void eeh_add_device_tree_late(struct pci_bus *bus) { }
 
 static inline void eeh_add_sysfs_files(struct pci_bus *bus) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void eeh_remove_bus_device(struct pci_dev *dev, int purge_pe) { }
 
 static inline void eeh_lock(void) { }
 static inline void eeh_unlock(void) { }
+=======
+static inline void eeh_remove_device(struct pci_dev *dev) { }
+>>>>>>> v3.18
 =======
 static inline void eeh_remove_device(struct pci_dev *dev) { }
 >>>>>>> v3.18
@@ -502,7 +617,11 @@ static inline u8 eeh_readb(const volatile void __iomem *addr)
 	u8 val = in_8(addr);
 	if (EEH_POSSIBLE_ERROR(val, u8))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -514,7 +633,11 @@ static inline u16 eeh_readw(const volatile void __iomem *addr)
 	u16 val = in_le16(addr);
 	if (EEH_POSSIBLE_ERROR(val, u16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -526,7 +649,11 @@ static inline u32 eeh_readl(const volatile void __iomem *addr)
 	u32 val = in_le32(addr);
 	if (EEH_POSSIBLE_ERROR(val, u32))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -538,7 +665,11 @@ static inline u64 eeh_readq(const volatile void __iomem *addr)
 	u64 val = in_le64(addr);
 	if (EEH_POSSIBLE_ERROR(val, u64))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -550,7 +681,11 @@ static inline u16 eeh_readw_be(const volatile void __iomem *addr)
 	u16 val = in_be16(addr);
 	if (EEH_POSSIBLE_ERROR(val, u16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -562,7 +697,11 @@ static inline u32 eeh_readl_be(const volatile void __iomem *addr)
 	u32 val = in_be32(addr);
 	if (EEH_POSSIBLE_ERROR(val, u32))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -574,7 +713,11 @@ static inline u64 eeh_readq_be(const volatile void __iomem *addr)
 	u64 val = in_be64(addr);
 	if (EEH_POSSIBLE_ERROR(val, u64))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return eeh_check_failure(addr, val);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -592,7 +735,11 @@ static inline void eeh_memcpy_fromio(void *dest, const
 	 */
 	if (n >= 4 && EEH_POSSIBLE_ERROR(*((u32 *)(dest + n - 4)), u32))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		eeh_check_failure(src, *((u32 *)(dest + n - 4)));
+=======
+		eeh_check_failure(src);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(src);
 >>>>>>> v3.18
@@ -605,7 +752,11 @@ static inline void eeh_readsb(const volatile void __iomem *addr, void * buf,
 	_insb(addr, buf, ns);
 	if (EEH_POSSIBLE_ERROR((*(((u8*)buf)+ns-1)), u8))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		eeh_check_failure(addr, *(u8*)buf);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -617,7 +768,11 @@ static inline void eeh_readsw(const volatile void __iomem *addr, void * buf,
 	_insw(addr, buf, ns);
 	if (EEH_POSSIBLE_ERROR((*(((u16*)buf)+ns-1)), u16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		eeh_check_failure(addr, *(u16*)buf);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18
@@ -629,7 +784,11 @@ static inline void eeh_readsl(const volatile void __iomem *addr, void * buf,
 	_insl(addr, buf, nl);
 	if (EEH_POSSIBLE_ERROR((*(((u32*)buf)+nl-1)), u32))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		eeh_check_failure(addr, *(u32*)buf);
+=======
+		eeh_check_failure(addr);
+>>>>>>> v3.18
 =======
 		eeh_check_failure(addr);
 >>>>>>> v3.18

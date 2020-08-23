@@ -359,7 +359,11 @@ static int powertecscsi_probe(struct expansion_card *ec,
 
 	ret = request_irq(ec->irq, powertecscsi_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  IRQF_DISABLED, "powertec", info);
+=======
+			  0, "powertec", info);
+>>>>>>> v3.18
 =======
 			  0, "powertec", info);
 >>>>>>> v3.18

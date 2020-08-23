@@ -10,7 +10,10 @@
 
 #define PARMAREA		0x10400
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MEMORY_CHUNKS		256
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -34,6 +37,7 @@
 #endif /* CONFIG_64BIT */
 #define COMMAND_LINE      ((char *)            (0x10480))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CHUNK_READ_WRITE 0
 #define CHUNK_READ_ONLY  1
@@ -59,11 +63,16 @@ void create_mem_hole(struct mem_chunk mem_chunk[], unsigned long addr,
 
 extern unsigned int s390_user_mode;
 =======
+=======
+>>>>>>> v3.18
 extern int memory_end_set;
 extern unsigned long memory_end;
 extern unsigned long max_physmem_end;
 
 extern void detect_memory_memblock(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -78,7 +87,10 @@ extern void detect_memory_memblock(void);
 #define MACHINE_FLAG_IDTE	(1UL << 5)
 #define MACHINE_FLAG_DIAG9C	(1UL << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACHINE_FLAG_MVCOS	(1UL << 7)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MACHINE_FLAG_KVM	(1UL << 8)
@@ -90,7 +102,12 @@ extern void detect_memory_memblock(void);
 #define MACHINE_FLAG_TOPOLOGY	(1UL << 14)
 #define MACHINE_FLAG_TE		(1UL << 15)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACHINE_FLAG_RRBM	(1UL << 16)
+=======
+#define MACHINE_FLAG_TLB_LC	(1UL << 17)
+#define MACHINE_FLAG_VX		(1UL << 18)
+>>>>>>> v3.18
 =======
 #define MACHINE_FLAG_TLB_LC	(1UL << 17)
 #define MACHINE_FLAG_VX		(1UL << 18)
@@ -112,7 +129,10 @@ extern void detect_memory_memblock(void);
 #define MACHINE_HAS_DIAG44	(1)
 #define MACHINE_HAS_MVPG	(S390_lowcore.machine_flags & MACHINE_FLAG_MVPG)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACHINE_HAS_MVCOS	(0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MACHINE_HAS_EDAT1	(0)
@@ -121,7 +141,12 @@ extern void detect_memory_memblock(void);
 #define MACHINE_HAS_TOPOLOGY	(0)
 #define MACHINE_HAS_TE		(0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACHINE_HAS_RRBM	(0)
+=======
+#define MACHINE_HAS_TLB_LC	(0)
+#define MACHINE_HAS_VX		(0)
+>>>>>>> v3.18
 =======
 #define MACHINE_HAS_TLB_LC	(0)
 #define MACHINE_HAS_VX		(0)
@@ -133,7 +158,10 @@ extern void detect_memory_memblock(void);
 #define MACHINE_HAS_DIAG44	(S390_lowcore.machine_flags & MACHINE_FLAG_DIAG44)
 #define MACHINE_HAS_MVPG	(1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACHINE_HAS_MVCOS	(S390_lowcore.machine_flags & MACHINE_FLAG_MVCOS)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MACHINE_HAS_EDAT1	(S390_lowcore.machine_flags & MACHINE_FLAG_EDAT1)
@@ -142,6 +170,7 @@ extern void detect_memory_memblock(void);
 #define MACHINE_HAS_TOPOLOGY	(S390_lowcore.machine_flags & MACHINE_FLAG_TOPOLOGY)
 #define MACHINE_HAS_TE		(S390_lowcore.machine_flags & MACHINE_FLAG_TE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACHINE_HAS_RRBM	(S390_lowcore.machine_flags & MACHINE_FLAG_RRBM)
 #endif /* CONFIG_64BIT */
 
@@ -149,10 +178,15 @@ extern void detect_memory_memblock(void);
 #define ZFCPDUMP_HSA_SIZE_MAX	(64UL<<20)
 
 =======
+=======
+>>>>>>> v3.18
 #define MACHINE_HAS_TLB_LC	(S390_lowcore.machine_flags & MACHINE_FLAG_TLB_LC)
 #define MACHINE_HAS_VX		(S390_lowcore.machine_flags & MACHINE_FLAG_VX)
 #endif /* CONFIG_64BIT */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Console mode. Override with conmode=

@@ -30,6 +30,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
 #include <linux/of.h>
@@ -115,6 +116,8 @@ static const struct hc_driver ohci_omap3_hc_driver = {
 
 /*-------------------------------------------------------------------------*/
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dma-mapping.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -131,6 +134,9 @@ static const struct hc_driver ohci_omap3_hc_driver = {
 
 static const char hcd_name[] = "ohci-omap3";
 static struct hc_driver __read_mostly ohci_omap3_hc_driver;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -149,16 +155,22 @@ static int ohci_hcd_omap3_probe(struct platform_device *pdev)
 {
 	struct device		*dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd		*hcd = NULL;
 	void __iomem		*regs = NULL;
 	struct resource		*res;
 	int			ret = -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	struct ohci_hcd		*ohci;
 	struct usb_hcd		*hcd = NULL;
 	void __iomem		*regs = NULL;
 	struct resource		*res;
 	int			ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			irq;
 
@@ -194,17 +206,23 @@ static int ohci_hcd_omap3_probe(struct platform_device *pdev)
 	 * Once we have dma capability bindings this can go away.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->dma_mask)
 		dev->dma_mask = &dev->coherent_dma_mask;
 	if (!dev->coherent_dma_mask)
 		dev->coherent_dma_mask = DMA_BIT_MASK(32);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(32));
 	if (ret)
 		goto err_io;
 
 	ret = -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hcd = usb_create_hcd(&ohci_omap3_hc_driver, dev,
 			dev_name(dev));
@@ -221,14 +239,20 @@ static int ohci_hcd_omap3_probe(struct platform_device *pdev)
 	pm_runtime_get_sync(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ohci_hcd_init(hcd_to_ohci(hcd));
 =======
+=======
+>>>>>>> v3.18
 	ohci = hcd_to_ohci(hcd);
 	/*
 	 * RemoteWakeupConnected has to be set explicitly before
 	 * calling ohci_run. The reset value of RWC is 0.
 	 */
 	ohci->hc_control = OHCI_CTRL_RWC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = usb_add_hcd(hcd, irq, 0);
@@ -237,6 +261,10 @@ static int ohci_hcd_omap3_probe(struct platform_device *pdev)
 		goto err_add_hcd;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -280,6 +308,7 @@ static int ohci_hcd_omap3_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ohci_hcd_omap3_shutdown(struct platform_device *pdev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(&pdev->dev);
@@ -288,6 +317,8 @@ static void ohci_hcd_omap3_shutdown(struct platform_device *pdev)
 		hcd->driver->shutdown(hcd);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id omap_ohci_dt_ids[] = {
@@ -301,6 +332,7 @@ static struct platform_driver ohci_hcd_omap3_driver = {
 	.probe		= ohci_hcd_omap3_probe,
 	.remove		= ohci_hcd_omap3_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown	= ohci_hcd_omap3_shutdown,
 	.driver		= {
 		.name	= "ohci-omap3",
@@ -311,6 +343,8 @@ static struct platform_driver ohci_hcd_omap3_driver = {
 MODULE_ALIAS("platform:ohci-omap3");
 MODULE_AUTHOR("Anand Gadiyar <gadiyar@ti.com>");
 =======
+=======
+>>>>>>> v3.18
 	.shutdown	= usb_hcd_platform_shutdown,
 	.driver		= {
 		.name	= "ohci-omap3",
@@ -340,4 +374,7 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_ALIAS("platform:ohci-omap3");
 MODULE_AUTHOR("Anand Gadiyar <gadiyar@ti.com>");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

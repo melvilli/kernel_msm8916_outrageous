@@ -191,6 +191,10 @@ static int ad5933_reset(struct ad5933_state *st)
 {
 	unsigned char dat = st->ctrl_lb | AD5933_CTRL_RESET;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -222,7 +226,11 @@ static int ad5933_set_freq(struct ad5933_state *st,
 	unsigned long long freqreg;
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 d32;
+=======
+		__be32 d32;
+>>>>>>> v3.18
 =======
 		__be32 d32;
 >>>>>>> v3.18
@@ -250,7 +258,11 @@ static int ad5933_set_freq(struct ad5933_state *st,
 static int ad5933_setup(struct ad5933_state *st)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short dat;
+=======
+	__be16 dat;
+>>>>>>> v3.18
 =======
 	__be16 dat;
 >>>>>>> v3.18
@@ -307,7 +319,11 @@ static ssize_t ad5933_show_frequency(struct device *dev,
 	unsigned long long freqreg;
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 d32;
+=======
+		__be32 d32;
+>>>>>>> v3.18
 =======
 		__be32 d32;
 >>>>>>> v3.18
@@ -337,15 +353,21 @@ static ssize_t ad5933_store_frequency(struct device *dev,
 	struct ad5933_state *st = iio_priv(indio_dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 	int ret;
 
 	ret = strict_strtoul(buf, 10, &val);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long val;
 	int ret;
 
 	ret = kstrtoul(buf, 10, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -421,6 +443,7 @@ static ssize_t ad5933_store(struct device *dev,
 	struct ad5933_state *st = iio_priv(indio_dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 	int i, ret = 0;
 	unsigned short dat;
@@ -428,12 +451,17 @@ static ssize_t ad5933_store(struct device *dev,
 	if (this_attr->address != AD5933_IN_PGA_GAIN) {
 		ret = strict_strtol(buf, 10, &val);
 =======
+=======
+>>>>>>> v3.18
 	u16 val;
 	int i, ret = 0;
 	__be16 dat;
 
 	if (this_attr->address != AD5933_IN_PGA_GAIN) {
 		ret = kstrtou16(buf, 10, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			return ret;
@@ -464,7 +492,11 @@ static ssize_t ad5933_store(struct device *dev,
 		break;
 	case AD5933_OUT_SETTLING_CYCLES:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = clamp(val, 0L, 0x7FFL);
+=======
+		val = clamp(val, (u16)0, (u16)0x7FF);
+>>>>>>> v3.18
 =======
 		val = clamp(val, (u16)0, (u16)0x7FF);
 >>>>>>> v3.18
@@ -482,7 +514,11 @@ static ssize_t ad5933_store(struct device *dev,
 		break;
 	case AD5933_FREQ_POINTS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = clamp(val, 0L, 511L);
+=======
+		val = clamp(val, (u16)0, (u16)511);
+>>>>>>> v3.18
 =======
 		val = clamp(val, (u16)0, (u16)511);
 >>>>>>> v3.18
@@ -559,7 +595,11 @@ static int ad5933_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad5933_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short dat;
+=======
+	__be16 dat;
+>>>>>>> v3.18
 =======
 	__be16 dat;
 >>>>>>> v3.18
@@ -616,10 +656,13 @@ static int ad5933_ring_preenable(struct iio_dev *indio_dev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iio_sw_buffer_preenable(indio_dev);
 	if (ret < 0)
 		return ret;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = ad5933_reset(st);
@@ -675,11 +718,14 @@ static const struct iio_buffer_setup_ops ad5933_ring_setup_ops = {
 static int ad5933_register_ring_funcs_and_init(struct iio_dev *indio_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev->buffer = iio_kfifo_allocate(indio_dev);
 	if (!indio_dev->buffer)
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	struct iio_buffer *buffer;
 
 	buffer = iio_kfifo_allocate(indio_dev);
@@ -688,6 +734,9 @@ static int ad5933_register_ring_funcs_and_init(struct iio_dev *indio_dev)
 
 	iio_device_attach_buffer(indio_dev, buffer);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Ring buffer functions - here trigger setup related */
 	indio_dev->setup_ops = &ad5933_ring_setup_ops;
@@ -705,7 +754,10 @@ static void ad5933_work(struct work_struct *work)
 	signed short buf[2];
 	unsigned char status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -716,6 +768,7 @@ static void ad5933_work(struct work_struct *work)
 		st->state = AD5933_CTRL_START_SWEEP;
 		schedule_delayed_work(&st->work, st->poll_time_jiffies);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 	}
 
@@ -723,16 +776,22 @@ static void ad5933_work(struct work_struct *work)
 	if (ret)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		mutex_unlock(&indio_dev->mlock);
 		return;
 	}
 
 	ad5933_i2c_read(st->client, AD5933_REG_STATUS, 1, &status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (status & AD5933_STAT_DATA_VALID) {
 		int scan_count = bitmap_weight(indio_dev->active_scan_mask,
 					       indio_dev->masklength);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = ad5933_i2c_read(st->client,
 				test_bit(1, indio_dev->active_scan_mask) ?
@@ -741,10 +800,15 @@ static void ad5933_work(struct work_struct *work)
 		if (ret)
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 		ad5933_i2c_read(st->client,
 				test_bit(1, indio_dev->active_scan_mask) ?
 				AD5933_REG_REAL_DATA : AD5933_REG_IMAG_DATA,
 				scan_count * 2, (u8 *)buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (scan_count == 2) {
@@ -754,18 +818,24 @@ static void ad5933_work(struct work_struct *work)
 			buf[0] = be16_to_cpu(buf[0]);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iio_push_to_buffers(indio_dev, (u8 *)buf);
 	} else {
 		/* no data available - try again later */
 		schedule_delayed_work(&st->work, st->poll_time_jiffies);
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		iio_push_to_buffers(indio_dev, buf);
 	} else {
 		/* no data available - try again later */
 		schedule_delayed_work(&st->work, st->poll_time_jiffies);
 		mutex_unlock(&indio_dev->mlock);
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -779,7 +849,11 @@ static void ad5933_work(struct work_struct *work)
 		schedule_delayed_work(&st->work, st->poll_time_jiffies);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -793,7 +867,13 @@ static int ad5933_probe(struct i2c_client *client,
 	struct ad5933_platform_data *pdata = client->dev.platform_data;
 	struct ad5933_state *st;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iio_dev *indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	struct iio_dev *indio_dev;
+
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	struct iio_dev *indio_dev;
 
@@ -812,17 +892,23 @@ static int ad5933_probe(struct i2c_client *client,
 		st->pdata = pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->reg = regulator_get(&client->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	st->reg = devm_regulator_get(&client->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		voltage_uv = regulator_get_voltage(st->reg);
 	}
@@ -882,11 +968,14 @@ error_disable_reg:
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_put_reg:
 	if (!IS_ERR(st->reg))
 		regulator_put(st->reg);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -902,11 +991,16 @@ static int ad5933_remove(struct i2c_client *client)
 	iio_buffer_unregister(indio_dev);
 	iio_kfifo_free(indio_dev->buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);

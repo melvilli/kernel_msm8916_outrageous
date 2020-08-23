@@ -21,7 +21,10 @@ obj-$(CONFIG_PCMCIA)		+= pcmcia/
 
 obj-$(CONFIG_SCSI)		+= scsi_mod.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_TGT)		+= scsi_tgt.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -74,7 +77,10 @@ obj-$(CONFIG_SCSI_AIC7XXX)	+= aic7xxx/
 obj-$(CONFIG_SCSI_AIC79XX)	+= aic7xxx/
 obj-$(CONFIG_SCSI_AACRAID)	+= aacraid/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_AIC7XXX_OLD)	+= aic7xxx_old.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_SCSI_AIC94XX)	+= aic94xx/
@@ -135,9 +141,13 @@ obj-$(CONFIG_SCSI_SNI_53C710)	+= 53c700.o sni_53c710.o
 obj-$(CONFIG_SCSI_NSP32)	+= nsp32.o
 obj-$(CONFIG_SCSI_IPR)		+= ipr.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_SRP)		+= libsrp.o
 obj-$(CONFIG_SCSI_IBMVSCSI)	+= ibmvscsi/
 obj-$(CONFIG_SCSI_IBMVSCSIS)	+= ibmvscsi/
+=======
+obj-$(CONFIG_SCSI_IBMVSCSI)	+= ibmvscsi/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SCSI_IBMVSCSI)	+= ibmvscsi/
 >>>>>>> v3.18
@@ -152,15 +162,21 @@ obj-$(CONFIG_SCSI_CXGB4_ISCSI)	+= libiscsi.o libiscsi_tcp.o cxgbi/
 obj-$(CONFIG_SCSI_BNX2_ISCSI)	+= libiscsi.o bnx2i/
 obj-$(CONFIG_BE2ISCSI)		+= libiscsi.o be2iscsi/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_PMCRAID)	+= pmcraid.o
 obj-$(CONFIG_SCSI_VIRTIO)	+= virtio_scsi.o
 obj-$(CONFIG_VMWARE_PVSCSI)	+= vmw_pvscsi.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_SCSI_ESAS2R)	+= esas2r/
 obj-$(CONFIG_SCSI_PMCRAID)	+= pmcraid.o
 obj-$(CONFIG_SCSI_VIRTIO)	+= virtio_scsi.o
 obj-$(CONFIG_VMWARE_PVSCSI)	+= vmw_pvscsi.o
 obj-$(CONFIG_XEN_SCSI_FRONTEND)	+= xen-scsifront.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_HYPERV_STORAGE)	+= hv_storvsc.o
 
@@ -192,8 +208,11 @@ scsi_mod-$(CONFIG_PM)		+= scsi_pm.o
 hv_storvsc-y			:= storvsc_drv.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 scsi_tgt-y			+= scsi_tgt_lib.o scsi_tgt_if.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 sd_mod-objs	:= sd.o

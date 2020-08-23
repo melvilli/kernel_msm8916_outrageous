@@ -16,7 +16,11 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/flash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_ISP1362_HCD) || defined(CONFIG_USB_ISP1362_HCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_USB_ISP1362_HCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_ISP1362_HCD)
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ const char bfin_board_name[] = "IP04/IP08";
  */
 #if defined(CONFIG_BFIN532_IP0X)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_DM9000) || defined(CONFIG_DM9000_MODULE)
+=======
+#if IS_ENABLED(CONFIG_DM9000)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_DM9000)
 >>>>>>> v3.18
@@ -113,15 +121,21 @@ static struct platform_device dm9000_device2 = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
 /* all SPI peripherals info goes here */
 
 #if defined(CONFIG_MMC_SPI) || defined(CONFIG_MMC_SPI_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 /* all SPI peripherals info goes here */
 
 #if IS_ENABLED(CONFIG_MMC_SPI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct bfin5xx_spi_chip mmc_spi_chip_info = {
 	.enable_dma = 0,		/* if 1 - block!!! */
@@ -132,7 +146,11 @@ static struct bfin5xx_spi_chip mmc_spi_chip_info = {
  * SPI_BAUD, not the real baudrate */
 static struct spi_board_info bfin_spi_board_info[] __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MMC_SPI) || defined(CONFIG_MMC_SPI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MMC_SPI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MMC_SPI)
 >>>>>>> v3.18
@@ -162,7 +180,11 @@ static struct platform_device spi_bfin_master_device = {
 #endif  /* spi master and devices */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
 >>>>>>> v3.18
@@ -217,7 +239,11 @@ static struct platform_device bfin_uart0_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_SIR) || defined(CONFIG_BFIN_SIR_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_SIR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_SIR)
 >>>>>>> v3.18
@@ -250,7 +276,11 @@ static struct platform_device bfin_sir0_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_ISP1362_HCD) || defined(CONFIG_USB_ISP1362_HCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_USB_ISP1362_HCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_ISP1362_HCD)
 >>>>>>> v3.18
@@ -296,7 +326,11 @@ static struct platform_device isp1362_hcd_device = {
 static struct platform_device *ip0x_devices[] __initdata = {
 #if defined(CONFIG_BFIN532_IP0X)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_DM9000) || defined(CONFIG_DM9000_MODULE)
+=======
+#if IS_ENABLED(CONFIG_DM9000)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_DM9000)
 >>>>>>> v3.18
@@ -306,17 +340,23 @@ static struct platform_device *ip0x_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
 	&spi_bfin_master_device,
 #endif
 
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 	&spi_bfin_master_device,
 #endif
 
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_UART0
 	&bfin_uart0_device,
@@ -324,7 +364,11 @@ static struct platform_device *ip0x_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_SIR) || defined(CONFIG_BFIN_SIR_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_SIR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_SIR)
 >>>>>>> v3.18
@@ -334,7 +378,11 @@ static struct platform_device *ip0x_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_ISP1362_HCD) || defined(CONFIG_USB_ISP1362_HCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_USB_ISP1362_HCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_ISP1362_HCD)
 >>>>>>> v3.18

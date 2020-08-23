@@ -35,7 +35,10 @@
 
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "drm_internal.h"
 
 struct drm_magic_entry {
@@ -43,6 +46,9 @@ struct drm_magic_entry {
 	struct drm_hash_item hash_item;
 	struct drm_file *priv;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**

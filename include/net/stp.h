@@ -9,8 +9,13 @@ struct stp_proto {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int stp_proto_register(const struct stp_proto *proto);
 extern void stp_proto_unregister(const struct stp_proto *proto);
+=======
+int stp_proto_register(const struct stp_proto *proto);
+void stp_proto_unregister(const struct stp_proto *proto);
+>>>>>>> v3.18
 =======
 int stp_proto_register(const struct stp_proto *proto);
 void stp_proto_unregister(const struct stp_proto *proto);

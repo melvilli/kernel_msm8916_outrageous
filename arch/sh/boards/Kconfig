@@ -322,6 +322,10 @@ config SH_CAYMAN
 	depends on CPU_SUBTYPE_SH5_101 || CPU_SUBTYPE_SH5_103
 	select SYS_SUPPORTS_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_SERIO
 >>>>>>> v3.18
@@ -375,7 +379,11 @@ menu "Magic Panel R2 options"
 
 config SH_MAGIC_PANEL_R2_VERSION
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int SH_MAGIC_PANEL_R2_VERSION
+=======
+	int "Magic Panel R2 Version"
+>>>>>>> v3.18
 =======
 	int "Magic Panel R2 Version"
 >>>>>>> v3.18

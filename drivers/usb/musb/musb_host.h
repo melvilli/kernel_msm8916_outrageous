@@ -38,6 +38,7 @@
 #include <linux/scatterlist.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct usb_hcd *musb_to_hcd(struct musb *musb)
 {
 	return container_of((void *) musb, struct usb_hcd, hcd_priv);
@@ -48,6 +49,8 @@ static inline struct musb *hcd_to_musb(struct usb_hcd *hcd)
 	return (struct musb *) (hcd->hcd_priv);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* stored in "usb_host_endpoint.hcpriv" for scheduled endpoints */
@@ -90,8 +93,11 @@ static inline struct musb_qh *first_qh(struct list_head *q)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void musb_root_disconnect(struct musb *musb);
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_USB_MUSB_HOST) || IS_ENABLED(CONFIG_USB_MUSB_DUAL_ROLE)
 extern struct musb *hcd_to_musb(struct usb_hcd *);
 extern irqreturn_t musb_h_ep0_irq(struct musb *);
@@ -144,6 +150,9 @@ static inline void musb_port_suspend(struct musb *musb, bool do_suspend) {}
 static inline void musb_port_reset(struct musb *musb, bool do_reset) {}
 static inline void musb_host_finish_resume(struct work_struct *work) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct usb_hcd;
@@ -154,8 +163,11 @@ extern int musb_hub_control(struct usb_hcd *hcd,
 			char *buf, u16 wLength);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct hc_driver musb_hc_driver;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline struct urb *next_urb(struct musb_qh *qh)

@@ -25,7 +25,10 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -96,6 +99,12 @@ static int fs_enet_rx_napi(struct napi_struct *napi, int budget)
 	int curidx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (budget <= 0)
+		return received;
+
+>>>>>>> v3.18
 =======
 	if (budget <= 0)
 		return received;
@@ -223,6 +232,7 @@ static int fs_enet_rx_napi(struct napi_struct *napi, int budget)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* non NAPI receive function */
 static int fs_enet_rx_non_napi(struct net_device *dev)
 {
@@ -349,17 +359,26 @@ static void fs_enet_tx(struct net_device *dev)
 {
 	struct fs_enet_private *fep = netdev_priv(dev);
 =======
+=======
+>>>>>>> v3.18
 static int fs_enet_tx_napi(struct napi_struct *napi, int budget)
 {
 	struct fs_enet_private *fep = container_of(napi, struct fs_enet_private,
 						   napi_tx);
 	struct net_device *dev = fep->ndev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cbd_t __iomem *bdp;
 	struct sk_buff *skb;
 	int dirtyidx, do_wake, do_restart;
 	u16 sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int has_tx_work = 0;
+>>>>>>> v3.18
 =======
 	int has_tx_work = 0;
 >>>>>>> v3.18
@@ -368,6 +387,12 @@ static int fs_enet_tx_napi(struct napi_struct *napi, int budget)
 	bdp = fep->dirty_tx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* clear TX status bits for napi*/
+	(*fep->ops->napi_clear_tx_event)(dev);
+
+>>>>>>> v3.18
 =======
 	/* clear TX status bits for napi*/
 	(*fep->ops->napi_clear_tx_event)(dev);
@@ -426,7 +451,11 @@ static int fs_enet_tx_napi(struct napi_struct *napi, int budget)
 		 * Free the sk buffer associated with this last transmit.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb_irq(skb);
+=======
+		dev_kfree_skb(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb(skb);
 >>>>>>> v3.18
@@ -447,6 +476,10 @@ static int fs_enet_tx_napi(struct napi_struct *napi, int budget)
 		if (!fep->tx_free++)
 			do_wake = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		has_tx_work = 1;
+>>>>>>> v3.18
 =======
 		has_tx_work = 1;
 >>>>>>> v3.18
@@ -458,23 +491,35 @@ static int fs_enet_tx_napi(struct napi_struct *napi, int budget)
 		(*fep->ops->tx_restart)(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!has_tx_work) {
 		napi_complete(napi);
 		(*fep->ops->napi_enable_tx)(dev);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&fep->tx_lock);
 
 	if (do_wake)
 		netif_wake_queue(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (has_tx_work)
 		return budget;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -502,8 +547,12 @@ fs_enet_interrupt(int irq, void *dev_id)
 
 		int_clr_events = int_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fpi->use_napi)
 			int_clr_events &= ~fep->ev_napi_rx;
+=======
+		int_clr_events &= ~fep->ev_napi_rx;
+>>>>>>> v3.18
 =======
 		int_clr_events &= ~fep->ev_napi_rx;
 >>>>>>> v3.18
@@ -514,6 +563,7 @@ fs_enet_interrupt(int irq, void *dev_id)
 			(*fep->ops->ev_error)(dev, int_events);
 
 		if (int_events & fep->ev_rx) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (!fpi->use_napi)
 				fs_enet_rx_non_napi(dev);
@@ -533,6 +583,8 @@ fs_enet_interrupt(int irq, void *dev_id)
 		if (int_events & fep->ev_tx)
 			fs_enet_tx(dev);
 =======
+=======
+>>>>>>> v3.18
 			napi_ok = napi_schedule_prep(&fep->napi);
 
 			(*fep->ops->napi_disable_rx)(dev);
@@ -555,6 +607,9 @@ fs_enet_interrupt(int irq, void *dev_id)
 			if (napi_ok)
 				__napi_schedule(&fep->napi_tx);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -663,7 +718,10 @@ static struct sk_buff *tx_skb_align_workaround(struct net_device *dev,
 {
 	struct sk_buff *new_skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fs_enet_private *fep = netdev_priv(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -693,7 +751,10 @@ static int fs_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	int curidx;
 	u16 sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -711,7 +772,11 @@ static int fs_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&fep->tx_lock, flags);
+=======
+	spin_lock(&fep->tx_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&fep->tx_lock);
 >>>>>>> v3.18
@@ -724,7 +789,11 @@ static int fs_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (!fep->tx_free || (CBDR_SC(bdp) & BD_ENET_TX_READY)) {
 		netif_stop_queue(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irqrestore(&fep->tx_lock, flags);
+=======
+		spin_unlock(&fep->tx_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock(&fep->tx_lock);
 >>>>>>> v3.18
@@ -784,7 +853,11 @@ static int fs_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	(*fep->ops->tx_kickstart)(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&fep->tx_lock, flags);
+=======
+	spin_unlock(&fep->tx_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&fep->tx_lock);
 >>>>>>> v3.18
@@ -889,10 +962,13 @@ static int fs_init_phy(struct net_device *dev)
 				iface);
 	if (!phydev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phydev = of_phy_connect_fixed_link(dev, &fs_adjust_link,
 						   iface);
 	}
 	if (!phydev) {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dev_err(&dev->dev, "Could not attach to PHY\n");
@@ -915,8 +991,13 @@ static int fs_enet_open(struct net_device *dev)
 	fs_init_bds(fep->ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fep->fpi->use_napi)
 		napi_enable(&fep->napi);
+=======
+	napi_enable(&fep->napi);
+	napi_enable(&fep->napi_tx);
+>>>>>>> v3.18
 =======
 	napi_enable(&fep->napi);
 	napi_enable(&fep->napi_tx);
@@ -928,8 +1009,13 @@ static int fs_enet_open(struct net_device *dev)
 	if (r != 0) {
 		dev_err(fep->dev, "Could not allocate FS_ENET IRQ!");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fep->fpi->use_napi)
 			napi_disable(&fep->napi);
+=======
+		napi_disable(&fep->napi);
+		napi_disable(&fep->napi_tx);
+>>>>>>> v3.18
 =======
 		napi_disable(&fep->napi);
 		napi_disable(&fep->napi_tx);
@@ -941,8 +1027,13 @@ static int fs_enet_open(struct net_device *dev)
 	if (err) {
 		free_irq(fep->interrupt, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fep->fpi->use_napi)
 			napi_disable(&fep->napi);
+=======
+		napi_disable(&fep->napi);
+		napi_disable(&fep->napi_tx);
+>>>>>>> v3.18
 =======
 		napi_disable(&fep->napi);
 		napi_disable(&fep->napi_tx);
@@ -964,8 +1055,13 @@ static int fs_enet_close(struct net_device *dev)
 	netif_stop_queue(dev);
 	netif_carrier_off(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fep->fpi->use_napi)
 		napi_disable(&fep->napi);
+=======
+	napi_disable(&fep->napi);
+	napi_disable(&fep->napi_tx);
+>>>>>>> v3.18
 =======
 	napi_disable(&fep->napi);
 	napi_disable(&fep->napi_tx);
@@ -1121,6 +1217,11 @@ static int fs_enet_probe(struct platform_device *ofdev)
 	struct fs_platform_info *fpi;
 	const u32 *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+	int err;
+>>>>>>> v3.18
 =======
 	struct clk *clk;
 	int err;
@@ -1149,6 +1250,7 @@ static int fs_enet_probe(struct platform_device *ofdev)
 	fpi->tx_ring = 32;
 	fpi->rx_copybreak = 240;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpi->use_napi = 1;
 	fpi->napi_weight = 17;
 	fpi->phy_node = of_parse_phandle(ofdev->dev.of_node, "phy-handle", 0);
@@ -1156,6 +1258,8 @@ static int fs_enet_probe(struct platform_device *ofdev)
 						  NULL)))
 		goto out_free_fpi;
 =======
+=======
+>>>>>>> v3.18
 	fpi->napi_weight = 17;
 	fpi->phy_node = of_parse_phandle(ofdev->dev.of_node, "phy-handle", 0);
 	if (!fpi->phy_node && of_phy_is_fixed_link(ofdev->dev.of_node)) {
@@ -1168,6 +1272,9 @@ static int fs_enet_probe(struct platform_device *ofdev)
 		 */
 		fpi->phy_node = of_node_get(ofdev->dev.of_node);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (of_device_is_compatible(ofdev->dev.of_node, "fsl,mpc5125-fec")) {
@@ -1178,7 +1285,10 @@ static int fs_enet_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* make clock lookup non-fatal (the driver is shared among platforms),
 	 * but require enable to succeed when a clock was specified/found,
 	 * keep a reference to the clock upon successful acquisition
@@ -1193,6 +1303,9 @@ static int fs_enet_probe(struct platform_device *ofdev)
 		fpi->clk_per = clk;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	privsize = sizeof(*fep) +
 	           sizeof(struct sk_buff **) *
@@ -1206,7 +1319,11 @@ static int fs_enet_probe(struct platform_device *ofdev)
 
 	SET_NETDEV_DEV(ndev, &ofdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, ndev);
+=======
+	platform_set_drvdata(ofdev, ndev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, ndev);
 >>>>>>> v3.18
@@ -1230,7 +1347,11 @@ static int fs_enet_probe(struct platform_device *ofdev)
 	mac_addr = of_get_mac_address(ofdev->dev.of_node);
 	if (mac_addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(ndev->dev_addr, mac_addr, 6);
+=======
+		memcpy(ndev->dev_addr, mac_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(ndev->dev_addr, mac_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -1248,9 +1369,14 @@ static int fs_enet_probe(struct platform_device *ofdev)
 	ndev->netdev_ops = &fs_enet_netdev_ops;
 	ndev->watchdog_timeo = 2 * HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fpi->use_napi)
 		netif_napi_add(ndev, &fep->napi, fs_enet_rx_napi,
 		               fpi->napi_weight);
+=======
+	netif_napi_add(ndev, &fep->napi, fs_enet_rx_napi, fpi->napi_weight);
+	netif_napi_add(ndev, &fep->napi_tx, fs_enet_tx_napi, 2);
+>>>>>>> v3.18
 =======
 	netif_napi_add(ndev, &fep->napi, fs_enet_rx_napi, fpi->napi_weight);
 	netif_napi_add(ndev, &fep->napi_tx, fs_enet_tx_napi, 2);
@@ -1277,14 +1403,20 @@ out_cleanup_data:
 out_free_dev:
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
 out_put:
 	of_node_put(fpi->phy_node);
 =======
+=======
+>>>>>>> v3.18
 out_put:
 	of_node_put(fpi->phy_node);
 	if (fpi->clk_per)
 		clk_disable_unprepare(fpi->clk_per);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_free_fpi:
 	kfree(fpi);
@@ -1294,7 +1426,11 @@ out_free_fpi:
 static int fs_enet_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -1307,6 +1443,11 @@ static int fs_enet_remove(struct platform_device *ofdev)
 	dev_set_drvdata(fep->dev, NULL);
 	of_node_put(fep->fpi->phy_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (fep->fpi->clk_per)
+		clk_disable_unprepare(fep->fpi->clk_per);
+>>>>>>> v3.18
 =======
 	if (fep->fpi->clk_per)
 		clk_disable_unprepare(fep->fpi->clk_per);

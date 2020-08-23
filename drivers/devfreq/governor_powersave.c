@@ -15,8 +15,12 @@
 
 static int devfreq_powersave_func(struct devfreq *df,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  unsigned long *freq,
 				u32 *flag)
+=======
+				  unsigned long *freq)
+>>>>>>> v3.18
 =======
 				  unsigned long *freq)
 >>>>>>> v3.18
@@ -35,7 +39,11 @@ static int devfreq_powersave_handler(struct devfreq *devfreq,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (event == DEVFREQ_GOV_START || event == DEVFREQ_GOV_RESUME) {
+=======
+	if (event == DEVFREQ_GOV_START) {
+>>>>>>> v3.18
 =======
 	if (event == DEVFREQ_GOV_START) {
 >>>>>>> v3.18

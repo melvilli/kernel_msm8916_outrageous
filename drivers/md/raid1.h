@@ -42,7 +42,10 @@ struct r1conf {
 	sector_t		next_resync;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* When raid1 starts resync, we divide array into four partitions
 	 * |---------|--------------|---------------------|-------------|
 	 *        next_resync   start_next_window       end_window
@@ -56,6 +59,9 @@ struct r1conf {
 	int			current_window_requests;
 	int			next_window_requests;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t		device_lock;
 
@@ -82,6 +88,10 @@ struct r1conf {
 	int			nr_queued;
 	int			barrier;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			array_frozen;
+>>>>>>> v3.18
 =======
 	int			array_frozen;
 >>>>>>> v3.18
@@ -97,7 +107,10 @@ struct r1conf {
 	int			recovery_disabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* poolinfo contains information about the content of the
@@ -113,7 +126,10 @@ struct r1conf {
 	struct page		*tmppage;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* When taking over an array from a different personality, we store
@@ -138,6 +154,10 @@ struct r1bio {
 						 */
 	sector_t		sector;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sector_t		start_next_window;
+>>>>>>> v3.18
 =======
 	sector_t		start_next_window;
 >>>>>>> v3.18

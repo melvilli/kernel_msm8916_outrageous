@@ -10,10 +10,16 @@ obj-$(CONFIG_IGBVF) += igbvf/
 obj-$(CONFIG_IXGBE) += ixgbe/
 obj-$(CONFIG_IXGBEVF) += ixgbevf/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_IXGB) += ixgb/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_I40E) += i40e/
 obj-$(CONFIG_IXGB) += ixgb/
 obj-$(CONFIG_I40EVF) += i40evf/
 obj-$(CONFIG_FM10K) += fm10k/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

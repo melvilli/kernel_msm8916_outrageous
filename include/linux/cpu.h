@@ -7,9 +7,14 @@
  *
  * Basic handling of the devices is done in drivers/base/cpu.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and system devices are handled in drivers/base/sys.c. 
  *
  * CPUs are exported via sysfs in the class/cpu/devices/
+=======
+ *
+ * CPUs are exported via sysfs in the devices/system/cpu
+>>>>>>> v3.18
 =======
  *
  * CPUs are exported via sysfs in the devices/system/cpu
@@ -25,6 +30,10 @@
 
 struct device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct device_node;
+>>>>>>> v3.18
 =======
 struct device_node;
 >>>>>>> v3.18
@@ -35,6 +44,7 @@ struct cpu {
 	struct device dev;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct cpu_pstate_pwr {
 	unsigned int freq;
@@ -50,11 +60,18 @@ struct cpu_pwr_stats {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 extern int register_cpu(struct cpu *cpu, int num);
 extern struct device *get_cpu_device(unsigned cpu);
 extern bool cpu_is_hotpluggable(unsigned cpu);
 extern bool arch_match_cpu_phys_id(int cpu, u64 phys_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool arch_find_n_match_cpu_physical_id(struct device_node *cpun,
+					      int cpu, unsigned int *thread);
+>>>>>>> v3.18
 =======
 extern bool arch_find_n_match_cpu_physical_id(struct device_node *cpun,
 					      int cpu, unsigned int *thread);
@@ -74,6 +91,7 @@ extern ssize_t arch_cpu_release(const char *, size_t);
 struct notifier_block;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_HAS_CPU_AUTOPROBE
 extern int arch_cpu_uevent(struct device *dev, struct kobj_uevent_env *env);
 extern ssize_t arch_print_cpu_modalias(struct device *dev,
@@ -81,6 +99,8 @@ extern ssize_t arch_print_cpu_modalias(struct device *dev,
 				       char *bufptr);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -149,7 +169,11 @@ enum {
 #if defined(CONFIG_HOTPLUG_CPU) || !defined(MODULE)
 #define cpu_notifier(fn, pri) {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static struct notifier_block fn##_nb __cpuinitdata =	\
+=======
+	static struct notifier_block fn##_nb =			\
+>>>>>>> v3.18
 =======
 	static struct notifier_block fn##_nb =			\
 >>>>>>> v3.18
@@ -159,11 +183,14 @@ enum {
 
 #define __cpu_notifier(fn, pri) {				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static struct notifier_block fn##_nb __cpuinitdata =	\
 		{ .notifier_call = fn, .priority = pri };	\
 	__register_cpu_notifier(&fn##_nb);			\
 }
 =======
+=======
+>>>>>>> v3.18
 	static struct notifier_block fn##_nb =			\
 		{ .notifier_call = fn, .priority = pri };	\
 	__register_cpu_notifier(&fn##_nb);			\
@@ -174,11 +201,15 @@ enum {
 #endif /* #else #if defined(CONFIG_HOTPLUG_CPU) || !defined(MODULE) */
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int register_cpu_notifier(struct notifier_block *nb);
 extern int __register_cpu_notifier(struct notifier_block *nb);
 extern void unregister_cpu_notifier(struct notifier_block *nb);
 extern void __unregister_cpu_notifier(struct notifier_block *nb);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #else /* #if defined(CONFIG_HOTPLUG_CPU) || !defined(MODULE) */
@@ -186,12 +217,17 @@ extern void __unregister_cpu_notifier(struct notifier_block *nb);
 #define __cpu_notifier(fn, pri)	do { (void)(fn); } while (0)
 
 =======
+=======
+>>>>>>> v3.18
 #else
 
 #ifndef MODULE
 extern int register_cpu_notifier(struct notifier_block *nb);
 extern int __register_cpu_notifier(struct notifier_block *nb);
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int register_cpu_notifier(struct notifier_block *nb)
 {
@@ -203,6 +239,10 @@ static inline int __register_cpu_notifier(struct notifier_block *nb)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -270,12 +310,18 @@ extern struct bus_type cpu_subsys;
 /* Stop CPUs going up and down. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void get_online_cpus(void);
 =======
+=======
+>>>>>>> v3.18
 extern void cpu_hotplug_begin(void);
 extern void cpu_hotplug_done(void);
 extern void get_online_cpus(void);
 extern bool try_get_online_cpus(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void put_online_cpus(void);
 extern void cpu_hotplug_disable(void);
@@ -289,6 +335,7 @@ extern void cpu_hotplug_enable(void);
 void clear_tasks_mm_cpumask(int cpu);
 int cpu_down(unsigned int cpu);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ARCH_CPU_PROBE_RELEASE
 extern void cpu_hotplug_driver_lock(void);
@@ -307,12 +354,17 @@ static inline void cpu_hotplug_driver_unlock(void)
 
 #define get_online_cpus()	do { } while (0)
 =======
+=======
+>>>>>>> v3.18
 #else		/* CONFIG_HOTPLUG_CPU */
 
 static inline void cpu_hotplug_begin(void) {}
 static inline void cpu_hotplug_done(void) {}
 #define get_online_cpus()	do { } while (0)
 #define try_get_online_cpus()	true
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define put_online_cpus()	do { } while (0)
 #define cpu_hotplug_disable()	do { } while (0)
@@ -335,9 +387,12 @@ static inline void enable_nonboot_cpus(void) {}
 #endif /* !CONFIG_PM_SLEEP_SMP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cpu_pwr_stats *get_cpu_pwr_stats(void);
 void trigger_cpu_pwr_stats_calc(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum cpuhp_state {
@@ -347,7 +402,10 @@ enum cpuhp_state {
 
 void cpu_startup_entry(enum cpuhp_state state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cpu_idle(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -360,6 +418,7 @@ void arch_cpu_idle_exit(void);
 void arch_cpu_idle_dead(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IDLE_START 1
 #define IDLE_END 2
 
@@ -367,6 +426,8 @@ void idle_notifier_register(struct notifier_block *n);
 void idle_notifier_unregister(struct notifier_block *n);
 void idle_notifier_call_chain(unsigned long val);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _LINUX_CPU_H_ */

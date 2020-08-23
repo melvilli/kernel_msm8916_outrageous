@@ -38,7 +38,10 @@
 
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -79,7 +82,11 @@ static int vfd_open(struct inode *inode, struct file *file);
 static long vfd_ioctl(struct file *file, unsigned cmd, unsigned long arg);
 static int vfd_close(struct inode *inode, struct file *file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t vfd_write(struct file *file, const char *buf,
+=======
+static ssize_t vfd_write(struct file *file, const char __user *buf,
+>>>>>>> v3.18
 =======
 static ssize_t vfd_write(struct file *file, const char __user *buf,
 >>>>>>> v3.18
@@ -129,7 +136,11 @@ static const struct file_operations vfd_fops = {
 	.owner		= THIS_MODULE,
 	.open		= &vfd_open,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write		= &vfd_write,
+=======
+	.write		= vfd_write,
+>>>>>>> v3.18
 =======
 	.write		= vfd_write,
 >>>>>>> v3.18
@@ -373,7 +384,11 @@ static int send_packet(struct sasem_context *context)
  * each packet carrying 8 bytes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t vfd_write(struct file *file, const char *buf,
+=======
+static ssize_t vfd_write(struct file *file, const char __user *buf,
+>>>>>>> v3.18
 =======
 static ssize_t vfd_write(struct file *file, const char __user *buf,
 >>>>>>> v3.18
@@ -406,14 +421,20 @@ static ssize_t vfd_write(struct file *file, const char __user *buf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data_buf = memdup_user(buf, n_bytes);
 	if (IS_ERR(data_buf)) {
 		retval = PTR_ERR(data_buf);
 =======
+=======
+>>>>>>> v3.18
 	data_buf = memdup_user((void const __user *)buf, n_bytes);
 	if (IS_ERR(data_buf)) {
 		retval = PTR_ERR(data_buf);
 		data_buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto exit;
 	}
@@ -498,8 +519,11 @@ static void usb_tx_callback(struct urb *urb)
 	atomic_set(&context->tx.busy, 0);
 	complete(&context->tx.finished);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -589,7 +613,10 @@ static void ir_close(void *data)
 
 	mutex_unlock(&context->ctx_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -694,7 +721,10 @@ static void usb_rx_callback(struct urb *urb)
 
 	usb_submit_urb(context->rx_urb, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -746,6 +776,10 @@ static int sasem_probe(struct usb_interface *interface,
 		int ep_dir;
 		int ep_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -902,6 +936,7 @@ alloc_status_switch:
 	case 6:
 		usb_free_urb(rx_urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 5:
 		lirc_buffer_free(rbuf);
 	case 4:
@@ -912,6 +947,8 @@ alloc_status_switch:
 		kfree(context);
 		context = NULL;
 =======
+=======
+>>>>>>> v3.18
 		/* fall-through */
 	case 5:
 		lirc_buffer_free(rbuf);
@@ -926,6 +963,9 @@ alloc_status_switch:
 		kfree(context);
 		context = NULL;
 		/* fall-through */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 1:
 		if (retval == 0)

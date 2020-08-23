@@ -16,6 +16,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -25,7 +30,11 @@
 #include <linux/vmalloc.h>
 #include <linux/zlib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cramfs_fs.h>
+=======
+#include "internal.h"
+>>>>>>> v3.18
 =======
 #include "internal.h"
 >>>>>>> v3.18
@@ -47,7 +56,11 @@ int cramfs_uncompress_block(void *dst, int dstlen, void *src, int srclen)
 	err = zlib_inflateReset(&stream);
 	if (err != Z_OK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("zlib_inflateReset error %d\n", err);
+=======
+		pr_err("zlib_inflateReset error %d\n", err);
+>>>>>>> v3.18
 =======
 		pr_err("zlib_inflateReset error %d\n", err);
 >>>>>>> v3.18
@@ -62,8 +75,13 @@ int cramfs_uncompress_block(void *dst, int dstlen, void *src, int srclen)
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Error %d while decompressing!\n", err);
 	printk("%p(%d)->%p(%d)\n", src, srclen, dst, dstlen);
+=======
+	pr_err("Error %d while decompressing!\n", err);
+	pr_err("%p(%d)->%p(%d)\n", src, srclen, dst, dstlen);
+>>>>>>> v3.18
 =======
 	pr_err("Error %d while decompressing!\n", err);
 	pr_err("%p(%d)->%p(%d)\n", src, srclen, dst, dstlen);
@@ -76,7 +94,11 @@ int cramfs_uncompress_init(void)
 	if (!initialized++) {
 		stream.workspace = vmalloc(zlib_inflate_workspacesize());
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( !stream.workspace ) {
+=======
+		if (!stream.workspace) {
+>>>>>>> v3.18
 =======
 		if (!stream.workspace) {
 >>>>>>> v3.18

@@ -25,7 +25,11 @@ static inline int gup_pte_range(pmd_t *pmdp, pmd_t pmd, unsigned long addr,
 	struct page *page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mask = (write ? _PAGE_RO : 0) | _PAGE_INVALID | _PAGE_SPECIAL;
+=======
+	mask = (write ? _PAGE_PROTECT : 0) | _PAGE_INVALID | _PAGE_SPECIAL;
+>>>>>>> v3.18
 =======
 	mask = (write ? _PAGE_PROTECT : 0) | _PAGE_INVALID | _PAGE_SPECIAL;
 >>>>>>> v3.18
@@ -60,8 +64,13 @@ static inline int gup_huge_pmd(pmd_t *pmdp, pmd_t pmd, unsigned long addr,
 	int refs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = write ? 0 : _SEGMENT_ENTRY_RO;
 	mask = result | _SEGMENT_ENTRY_INV;
+=======
+	result = write ? 0 : _SEGMENT_ENTRY_PROTECT;
+	mask = result | _SEGMENT_ENTRY_INVALID;
+>>>>>>> v3.18
 =======
 	result = write ? 0 : _SEGMENT_ENTRY_PROTECT;
 	mask = result | _SEGMENT_ENTRY_INVALID;
@@ -190,10 +199,13 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	len = (unsigned long) nr_pages << PAGE_SHIFT;
 	end = start + len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((end < start) || (end > TASK_SIZE))
 		return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	if ((end <= start) || (end > TASK_SIZE))
 		return 0;
 	/*
@@ -203,6 +215,9 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	 * So long as we atomically load page table pointers versus teardown,
 	 * we can follow the address down to the the page and take a ref on it.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_save(flags);
 	pgdp = pgd_offset(mm, addr);
@@ -240,6 +255,7 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			struct page **pages)
 {
 	struct mm_struct *mm = current->mm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long addr, len, end;
 	unsigned long next;
@@ -301,6 +317,8 @@ slow_irqon:
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	int nr, ret;
 
 	start &= PAGE_MASK;
@@ -319,5 +337,8 @@ slow_irqon:
 	if (nr > 0)
 		ret = (ret < 0) ? nr : ret + nr;
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

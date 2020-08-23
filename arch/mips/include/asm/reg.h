@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Various register offset definitions for debuggers, core file
  * examiners and whatnot.
@@ -205,6 +206,9 @@
 #endif /* CONFIG_64BIT */
 
 #endif /* __ASM_MIPS_REG_H */
+=======
+#include <uapi/asm/reg.h>
+>>>>>>> v3.18
 =======
 #include <uapi/asm/reg.h>
 >>>>>>> v3.18

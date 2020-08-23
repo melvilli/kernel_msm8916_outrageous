@@ -1609,8 +1609,13 @@ static ssize_t dps1_insert_key(struct device *dev,
 	__ATTR(f##id##_dps0_is_keylocked, S_IRUGO, dps0_is_key_locked, NULL), \
 	__ATTR(f##id##_dps1_is_keylocked, S_IRUGO, dps1_is_key_locked, NULL), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(f##id##_dps0_protection_key, S_IWUGO, NULL, dps0_insert_key), \
 	__ATTR(f##id##_dps1_protection_key, S_IWUGO, NULL, dps1_insert_key), \
+=======
+	__ATTR(f##id##_dps0_protection_key, S_IWUSR|S_IWGRP, NULL, dps0_insert_key), \
+	__ATTR(f##id##_dps1_protection_key, S_IWUSR|S_IWGRP, NULL, dps1_insert_key), \
+>>>>>>> v3.18
 =======
 	__ATTR(f##id##_dps0_protection_key, S_IWUSR|S_IWGRP, NULL, dps0_insert_key), \
 	__ATTR(f##id##_dps1_protection_key, S_IWUSR|S_IWGRP, NULL, dps1_insert_key), \
@@ -1703,6 +1708,7 @@ static int dbg_asicmode_show(struct seq_file *s, void *p)
 	switch (mode) {
 	case DOC_ASICMODE_RESET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos += seq_printf(s, "reset");
 		break;
 	case DOC_ASICMODE_NORMAL:
@@ -1714,6 +1720,8 @@ static int dbg_asicmode_show(struct seq_file *s, void *p)
 	}
 	pos += seq_printf(s, ")\n");
 =======
+=======
+>>>>>>> v3.18
 		pos += seq_puts(s, "reset");
 		break;
 	case DOC_ASICMODE_NORMAL:
@@ -1724,6 +1732,9 @@ static int dbg_asicmode_show(struct seq_file *s, void *p)
 		break;
 	}
 	pos += seq_puts(s, ")\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pos;
 }
@@ -1764,6 +1775,7 @@ static int dbg_protection_show(struct seq_file *s, void *p)
 			 protect);
 	if (protect & DOC_PROTECT_FOUNDRY_OTP_LOCK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos += seq_printf(s, "FOUNDRY_OTP_LOCK,");
 	if (protect & DOC_PROTECT_CUSTOMER_OTP_LOCK)
 		pos += seq_printf(s, "CUSTOMER_OTP_LOCK,");
@@ -1781,6 +1793,8 @@ static int dbg_protection_show(struct seq_file *s, void *p)
 		pos += seq_printf(s, "NO_PROTECT_ERR");
 	pos += seq_printf(s, ")\n");
 =======
+=======
+>>>>>>> v3.18
 		pos += seq_puts(s, "FOUNDRY_OTP_LOCK,");
 	if (protect & DOC_PROTECT_CUSTOMER_OTP_LOCK)
 		pos += seq_puts(s, "CUSTOMER_OTP_LOCK,");
@@ -1797,6 +1811,9 @@ static int dbg_protection_show(struct seq_file *s, void *p)
 	else
 		pos += seq_puts(s, "NO_PROTECT_ERR");
 	pos += seq_puts(s, ")\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pos += seq_printf(s, "DPS0 = 0x%02x : "
@@ -2085,6 +2102,7 @@ static int __init docg3_probe(struct platform_device *pdev)
 	if (!ress) {
 		dev_err(dev, "No I/O memory resource defined\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto noress;
 	}
 	base = ioremap(ress->start, DOC_IOSPACE_SIZE);
@@ -2095,6 +2113,8 @@ static int __init docg3_probe(struct platform_device *pdev)
 	if (!cascade)
 		goto nomem1;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 	base = devm_ioremap(dev, ress->start, DOC_IOSPACE_SIZE);
@@ -2104,6 +2124,9 @@ static int __init docg3_probe(struct platform_device *pdev)
 			       GFP_KERNEL);
 	if (!cascade)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cascade->base = base;
 	mutex_init(&cascade->lock);
@@ -2111,7 +2134,11 @@ static int __init docg3_probe(struct platform_device *pdev)
 			     DOC_ECC_BCH_PRIMPOLY);
 	if (!cascade->bch)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto nomem2;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -2151,6 +2178,7 @@ notfound:
 	dev_info(dev, "No supported DiskOnChip found\n");
 err_probe:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(cascade->bch);
 	for (floor = 0; floor < DOC_MAX_NBFLOORS; floor++)
 		if (cascade->floors[floor])
@@ -2161,10 +2189,15 @@ nomem1:
 	iounmap(base);
 noress:
 =======
+=======
+>>>>>>> v3.18
 	free_bch(cascade->bch);
 	for (floor = 0; floor < DOC_MAX_NBFLOORS; floor++)
 		if (cascade->floors[floor])
 			doc_release_device(cascade->floors[floor]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2180,7 +2213,10 @@ static int __exit docg3_release(struct platform_device *pdev)
 	struct docg3_cascade *cascade = platform_get_drvdata(pdev);
 	struct docg3 *docg3 = cascade->floors[0]->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = cascade->base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int floor;
@@ -2193,8 +2229,11 @@ static int __exit docg3_release(struct platform_device *pdev)
 
 	free_bch(docg3->cascade->bch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(cascade);
 	iounmap(base);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -19,11 +19,17 @@
 #ifdef CONFIG_CPU_V7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cp15.h>
 #include <asm/vfp.h>
 #include "../vfp/vfpinstr.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Common ARMv7 event types
@@ -117,7 +123,10 @@ enum armv7_a15_perf_types {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ARMv7 Cortex-A12 specific event types */
 enum armv7_a12_perf_types {
 	ARMV7_A12_PERFCTR_L1_DCACHE_ACCESS_READ		= 0x40,
@@ -145,6 +154,9 @@ enum krait_perf_types {
 	KRAIT_PERFCTR_L1_DTLB_ACCESS			= 0x12210,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Cortex-A8 HW events mapping
@@ -155,6 +167,10 @@ enum krait_perf_types {
  */
 static const unsigned armv7_a8_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_MAP_ALL_UNSUPPORTED,
+>>>>>>> v3.18
 =======
 	PERF_MAP_ALL_UNSUPPORTED,
 >>>>>>> v3.18
@@ -164,6 +180,7 @@ static const unsigned armv7_a8_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_CACHE_MISSES]		= ARMV7_PERFCTR_L1_DCACHE_REFILL,
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV7_PERFCTR_PC_WRITE,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[PERF_COUNT_HW_BUS_CYCLES]		= HW_OP_UNSUPPORTED,
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= ARMV7_A8_PERFCTR_STALL_ISIDE,
@@ -278,6 +295,8 @@ static unsigned armv7_a8_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= ARMV7_A8_PERFCTR_STALL_ISIDE,
 };
 
@@ -314,6 +333,9 @@ static const unsigned armv7_a8_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 	[C(BPU)][C(OP_READ)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_ACCESS)]	= ARMV7_PERFCTR_PC_BRANCH_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -322,6 +344,10 @@ static const unsigned armv7_a8_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
  */
 static const unsigned armv7_a9_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_MAP_ALL_UNSUPPORTED,
+>>>>>>> v3.18
 =======
 	PERF_MAP_ALL_UNSUPPORTED,
 >>>>>>> v3.18
@@ -332,13 +358,17 @@ static const unsigned armv7_a9_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV7_PERFCTR_PC_WRITE,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[PERF_COUNT_HW_BUS_CYCLES]		= HW_OP_UNSUPPORTED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= ARMV7_A9_PERFCTR_STALL_ICACHE,
 	[PERF_COUNT_HW_STALLED_CYCLES_BACKEND]	= ARMV7_A9_PERFCTR_STALL_DISPATCH,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned armv7_a9_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 					  [PERF_COUNT_HW_CACHE_OP_MAX]
@@ -448,6 +478,8 @@ static unsigned armv7_a9_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 static const unsigned armv7_a9_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 					  [PERF_COUNT_HW_CACHE_OP_MAX]
 					  [PERF_COUNT_HW_CACHE_RESULT_MAX] = {
@@ -475,6 +507,9 @@ static const unsigned armv7_a9_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 	[C(BPU)][C(OP_READ)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_ACCESS)]	= ARMV7_PERFCTR_PC_BRANCH_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -483,6 +518,10 @@ static const unsigned armv7_a9_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
  */
 static const unsigned armv7_a5_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_MAP_ALL_UNSUPPORTED,
+>>>>>>> v3.18
 =======
 	PERF_MAP_ALL_UNSUPPORTED,
 >>>>>>> v3.18
@@ -492,6 +531,7 @@ static const unsigned armv7_a5_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_CACHE_MISSES]		= ARMV7_PERFCTR_L1_DCACHE_REFILL,
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV7_PERFCTR_PC_WRITE,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[PERF_COUNT_HW_BUS_CYCLES]		= HW_OP_UNSUPPORTED,
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= HW_OP_UNSUPPORTED,
@@ -604,6 +644,8 @@ static unsigned armv7_a5_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const unsigned armv7_a5_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
@@ -637,6 +679,9 @@ static const unsigned armv7_a5_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 	[C(BPU)][C(OP_READ)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_ACCESS)]	= ARMV7_PERFCTR_PC_BRANCH_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -645,6 +690,10 @@ static const unsigned armv7_a5_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
  */
 static const unsigned armv7_a15_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_MAP_ALL_UNSUPPORTED,
+>>>>>>> v3.18
 =======
 	PERF_MAP_ALL_UNSUPPORTED,
 >>>>>>> v3.18
@@ -655,6 +704,7 @@ static const unsigned armv7_a15_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV7_A15_PERFCTR_PC_WRITE_SPEC,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[PERF_COUNT_HW_BUS_CYCLES]		= ARMV7_PERFCTR_BUS_CYCLES,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= HW_OP_UNSUPPORTED,
 	[PERF_COUNT_HW_STALLED_CYCLES_BACKEND]	= HW_OP_UNSUPPORTED,
@@ -768,6 +818,8 @@ static unsigned armv7_a15_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const unsigned armv7_a15_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
@@ -803,6 +855,9 @@ static const unsigned armv7_a15_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 	[C(BPU)][C(OP_READ)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_ACCESS)]	= ARMV7_PERFCTR_PC_BRANCH_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -811,6 +866,10 @@ static const unsigned armv7_a15_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
  */
 static const unsigned armv7_a7_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_MAP_ALL_UNSUPPORTED,
+>>>>>>> v3.18
 =======
 	PERF_MAP_ALL_UNSUPPORTED,
 >>>>>>> v3.18
@@ -821,6 +880,7 @@ static const unsigned armv7_a7_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV7_PERFCTR_PC_WRITE,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[PERF_COUNT_HW_BUS_CYCLES]		= ARMV7_PERFCTR_BUS_CYCLES,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= HW_OP_UNSUPPORTED,
 	[PERF_COUNT_HW_STALLED_CYCLES_BACKEND]	= HW_OP_UNSUPPORTED,
@@ -934,6 +994,8 @@ static unsigned armv7_a7_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const unsigned armv7_a7_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
@@ -1069,6 +1131,9 @@ static const unsigned krait_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 	[C(BPU)][C(OP_READ)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_ACCESS)]	= ARMV7_PERFCTR_PC_BRANCH_PRED,
 	[C(BPU)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV7_PERFCTR_PC_BRANCH_MIS_PRED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1299,7 +1364,10 @@ static void armv7pmu_enable_event(struct perf_event *event)
 	struct pmu_hw_events *events = cpu_pmu->get_hw_events();
 	int idx = hwc->idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long long prev_count = local64_read(&hwc->prev_count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1334,9 +1402,12 @@ static void armv7pmu_enable_event(struct perf_event *event)
 	armv7_pmnc_enable_intens(idx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Restore prev val */
 	armv7pmu_write_counter(event, prev_count & 0xffffffff);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1519,6 +1590,7 @@ static int armv7pmu_set_event_filter(struct hw_perf_event *event,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PERF_EVENTS_USERMODE
 static void armv7pmu_init_usermode(void)
 {
@@ -1537,6 +1609,8 @@ static inline void armv7pmu_init_usermode(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void armv7pmu_reset(void *info)
 {
 	struct arm_pmu *cpu_pmu = (struct arm_pmu *)info;
@@ -1550,6 +1624,7 @@ static void armv7pmu_reset(void *info)
 
 	/* Initialize & Reset PMNC: C and P bits */
 	armv7_pmnc_write(ARMV7_PMNC_P | ARMV7_PMNC_C);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	armv7pmu_init_usermode();
@@ -1567,6 +1642,10 @@ static inline void armv7_force_pmu_reset(void *info)
 }
 #endif
 
+=======
+}
+
+>>>>>>> v3.18
 =======
 }
 
@@ -1602,6 +1681,7 @@ static int armv7_a7_map_event(struct perf_event *event)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PER_CPU(u32, armv7_pm_pmuserenr);
 
 static void armv7pmu_save_pm_registers(void *hcpu)
@@ -1624,6 +1704,8 @@ static void armv7pmu_restore_pm_registers(void *hcpu)
 		/* Restore PMUSERENR */
 		asm volatile("mcr p15, 0, %0, c9, c14, 0" : : "r" (val));
 =======
+=======
+>>>>>>> v3.18
 static int armv7_a12_map_event(struct perf_event *event)
 {
 	return armpmu_map_event(event, &armv7_a12_perf_map,
@@ -1640,6 +1722,9 @@ static int krait_map_event_no_branch(struct perf_event *event)
 {
 	return armpmu_map_event(event, &krait_perf_map_no_branch,
 				&krait_perf_cache_map, 0xFFFFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1655,10 +1740,14 @@ static void armv7pmu_init(struct arm_pmu *cpu_pmu)
 	cpu_pmu->stop		= armv7pmu_stop;
 	cpu_pmu->reset		= armv7pmu_reset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->force_reset			= armv7_force_pmu_reset;
 	cpu_pmu->max_period	= (1LLU << 32) - 1;
 	cpu_pmu->save_pm_registers	= armv7pmu_save_pm_registers;
 	cpu_pmu->restore_pm_registers	= armv7pmu_restore_pm_registers;
+=======
+	cpu_pmu->max_period	= (1LLU << 32) - 1;
+>>>>>>> v3.18
 =======
 	cpu_pmu->max_period	= (1LLU << 32) - 1;
 >>>>>>> v3.18
@@ -1679,7 +1768,11 @@ static int armv7_a8_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "ARMv7 Cortex-A8";
+=======
+	cpu_pmu->name		= "armv7_cortex_a8";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv7_cortex_a8";
 >>>>>>> v3.18
@@ -1692,7 +1785,11 @@ static int armv7_a9_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "ARMv7 Cortex-A9";
+=======
+	cpu_pmu->name		= "armv7_cortex_a9";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv7_cortex_a9";
 >>>>>>> v3.18
@@ -1705,7 +1802,11 @@ static int armv7_a5_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "ARMv7 Cortex-A5";
+=======
+	cpu_pmu->name		= "armv7_cortex_a5";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv7_cortex_a5";
 >>>>>>> v3.18
@@ -1718,7 +1819,11 @@ static int armv7_a15_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "ARMv7 Cortex-A15";
+=======
+	cpu_pmu->name		= "armv7_cortex_a15";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv7_cortex_a15";
 >>>>>>> v3.18
@@ -1729,15 +1834,21 @@ static int armv7_a15_pmu_init(struct arm_pmu *cpu_pmu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int armv8_pmuv3_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
 	cpu_pmu->name		= "ARMv8 Cortex-A53";
 =======
+=======
+>>>>>>> v3.18
 static int armv7_a7_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
 	cpu_pmu->name		= "armv7_cortex_a7";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpu_pmu->map_event	= armv7_a7_map_event;
 	cpu_pmu->num_events	= armv7_read_num_pmnc_events();
@@ -1745,6 +1856,7 @@ static int armv7_a7_pmu_init(struct arm_pmu *cpu_pmu)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int armv7_a7_pmu_init(struct arm_pmu *cpu_pmu)
 {
@@ -1754,6 +1866,8 @@ static int armv7_a7_pmu_init(struct arm_pmu *cpu_pmu)
 	cpu_pmu->num_events	= armv7_read_num_pmnc_events();
 	cpu_pmu->set_event_filter = armv7pmu_set_event_filter;
 =======
+=======
+>>>>>>> v3.18
 static int armv7_a12_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv7pmu_init(cpu_pmu);
@@ -2162,6 +2276,9 @@ static int krait_pmu_init(struct arm_pmu *cpu_pmu)
 	cpu_pmu->disable	= krait_pmu_disable_event;
 	cpu_pmu->get_event_idx	= krait_pmu_get_event_idx;
 	cpu_pmu->clear_event_idx = krait_pmu_clear_event_idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2191,7 +2308,10 @@ static inline int armv7_a7_pmu_init(struct arm_pmu *cpu_pmu)
 	return -ENODEV;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int armv7_a12_pmu_init(struct arm_pmu *cpu_pmu)
 {
@@ -2207,5 +2327,8 @@ static inline int krait_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	return -ENODEV;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* CONFIG_CPU_V7 */

@@ -267,7 +267,11 @@ static int __init bcm63xx_register_pci(void)
 	 * local RAM while bus mastering */
 	bcm63xx_int_cfg_writel(0, PCI_BASE_ADDRESS_3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BCMCPU_IS_6358() || BCMCPU_IS_6368())
+=======
+	if (BCMCPU_IS_3368() || BCMCPU_IS_6358() || BCMCPU_IS_6368())
+>>>>>>> v3.18
 =======
 	if (BCMCPU_IS_3368() || BCMCPU_IS_6358() || BCMCPU_IS_6368())
 >>>>>>> v3.18
@@ -343,6 +347,10 @@ static int __init bcm63xx_pci_init(void)
 	case BCM6362_CPU_ID:
 		return bcm63xx_register_pcie();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BCM3368_CPU_ID:
+>>>>>>> v3.18
 =======
 	case BCM3368_CPU_ID:
 >>>>>>> v3.18

@@ -85,6 +85,7 @@ static ssize_t dev_nvram_read(struct file *file, char __user *buf,
 	ssize_t size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENODEV;
 	if (!ppc_md.nvram_size)
 		goto out;
@@ -94,6 +95,8 @@ static ssize_t dev_nvram_read(struct file *file, char __user *buf,
 	if (*ppos >= size || size < 0)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (!ppc_md.nvram_size) {
 		ret = -ENODEV;
 		goto out;
@@ -109,22 +112,31 @@ static ssize_t dev_nvram_read(struct file *file, char __user *buf,
 		ret = 0;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	count = min_t(size_t, count, size - *ppos);
 	count = min(count, PAGE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENOMEM;
 	tmp = kmalloc(count, GFP_KERNEL);
 	if (!tmp)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	tmp = kmalloc(count, GFP_KERNEL);
 	if (!tmp) {
 		ret = -ENOMEM;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ppc_md.nvram_read(tmp, count, ppos);
@@ -229,7 +241,11 @@ static void __init nvram_print_partitions(char * label)
 	printk(KERN_WARNING "indx\t\tsig\tchks\tlen\tname\n");
 	list_for_each_entry(tmp_part, &nvram_partitions, partition) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%4d    \t%02x\t%02x\t%d\t%12s\n",
+=======
+		printk(KERN_WARNING "%4d    \t%02x\t%02x\t%d\t%12.12s\n",
+>>>>>>> v3.18
 =======
 		printk(KERN_WARNING "%4d    \t%02x\t%02x\t%d\t%12.12s\n",
 >>>>>>> v3.18
@@ -246,10 +262,13 @@ static int __init nvram_write_header(struct nvram_partition * part)
 	loff_t tmp_index;
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	tmp_index = part->index;
 	rc = ppc_md.nvram_write((char *)&part->header, NVRAM_HEADER_LEN, &tmp_index); 
 =======
+=======
+>>>>>>> v3.18
 	struct nvram_header phead;
 
 	memcpy(&phead, &part->header, NVRAM_HEADER_LEN);
@@ -257,6 +276,9 @@ static int __init nvram_write_header(struct nvram_partition * part)
 
 	tmp_index = part->index;
 	rc = ppc_md.nvram_write((char *)&phead, NVRAM_HEADER_LEN, &tmp_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -321,7 +343,11 @@ int __init nvram_remove_partition(const char *name, int sig,
 		/* Make partition a free partition */
 		part->header.signature = NVRAM_SIG_FREE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(part->header.name, 'w', 12);
+=======
+		strncpy(part->header.name, "wwwwwwwwwwww", 12);
+>>>>>>> v3.18
 =======
 		strncpy(part->header.name, "wwwwwwwwwwww", 12);
 >>>>>>> v3.18
@@ -343,8 +369,13 @@ int __init nvram_remove_partition(const char *name, int sig,
 		if (prev) {
 			prev->header.length += part->header.length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			prev->header.checksum = nvram_checksum(&prev->header);
 			rc = nvram_write_header(prev);
+=======
+			prev->header.checksum = nvram_checksum(&part->header);
+			rc = nvram_write_header(part);
+>>>>>>> v3.18
 =======
 			prev->header.checksum = nvram_checksum(&part->header);
 			rc = nvram_write_header(part);
@@ -547,6 +578,11 @@ int __init nvram_scan_partitions(void)
 		memcpy(&phead, header, NVRAM_HEADER_LEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		phead.length = be16_to_cpu(phead.length);
+
+>>>>>>> v3.18
 =======
 		phead.length = be16_to_cpu(phead.length);
 
@@ -608,7 +644,11 @@ static int __init nvram_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __exit nvram_cleanup(void)
+=======
+static void __exit nvram_cleanup(void)
+>>>>>>> v3.18
 =======
 static void __exit nvram_cleanup(void)
 >>>>>>> v3.18

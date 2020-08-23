@@ -16,6 +16,10 @@
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -154,6 +158,7 @@ static int socrates_nand_probe(struct platform_device *ofdev)
 
 	/* Allocate memory for the device structure (and zero it) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = kzalloc(sizeof(struct socrates_nand_host), GFP_KERNEL);
 	if (!host) {
 		printk(KERN_ERR
@@ -166,6 +171,8 @@ static int socrates_nand_probe(struct platform_device *ofdev)
 		printk(KERN_ERR "socrates_nand: ioremap failed\n");
 		kfree(host);
 =======
+=======
+>>>>>>> v3.18
 	host = devm_kzalloc(&ofdev->dev, sizeof(*host), GFP_KERNEL);
 	if (!host)
 		return -ENOMEM;
@@ -173,6 +180,9 @@ static int socrates_nand_probe(struct platform_device *ofdev)
 	host->io_base = of_iomap(ofdev->dev.of_node, 0);
 	if (host->io_base == NULL) {
 		dev_err(&ofdev->dev, "ioremap failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
@@ -226,9 +236,13 @@ static int socrates_nand_probe(struct platform_device *ofdev)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
 	iounmap(host->io_base);
 	kfree(host);
+=======
+	iounmap(host->io_base);
+>>>>>>> v3.18
 =======
 	iounmap(host->io_base);
 >>>>>>> v3.18
@@ -246,9 +260,13 @@ static int socrates_nand_remove(struct platform_device *ofdev)
 	nand_release(mtd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
 	iounmap(host->io_base);
 	kfree(host);
+=======
+	iounmap(host->io_base);
+>>>>>>> v3.18
 =======
 	iounmap(host->io_base);
 >>>>>>> v3.18

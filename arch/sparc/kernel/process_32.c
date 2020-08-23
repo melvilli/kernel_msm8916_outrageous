@@ -11,6 +11,10 @@
 #include <stdarg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/elfcore.h>
+>>>>>>> v3.18
 =======
 #include <linux/elfcore.h>
 >>>>>>> v3.18
@@ -27,8 +31,13 @@
 #include <linux/delay.h>
 #include <linux/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/slab.h>
+=======
+#include <linux/slab.h>
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/cpu.h>
@@ -49,6 +58,11 @@
 #include <asm/setup.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 
@@ -118,15 +132,21 @@ void machine_power_off(void)
 {
 	if (auxio_power_register &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (strcmp(of_console_device->type, "serial") || scons_pwroff))
 		*auxio_power_register |= AUXIO_POWER_OFF;
 =======
+=======
+>>>>>>> v3.18
 	    (strcmp(of_console_device->type, "serial") || scons_pwroff)) {
 		u8 power_register = sbus_readb(auxio_power_register);
 		power_register |= AUXIO_POWER_OFF;
 		sbus_writeb(power_register, auxio_power_register);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	machine_halt();
 }

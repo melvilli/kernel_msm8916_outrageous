@@ -10,7 +10,10 @@
 #define __AD193X_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/regmap.h>
 
 struct device;
@@ -18,6 +21,9 @@ struct device;
 extern const struct regmap_config ad193x_regmap_config;
 int ad193x_probe(struct device *dev, struct regmap *regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AD193X_PLL_CLK_CTRL0    0x00
 #define AD193X_PLL_POWERDOWN           0x01

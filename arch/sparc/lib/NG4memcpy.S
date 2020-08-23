@@ -241,11 +241,16 @@ FUNC_NAME:	/* %o0=dst, %o1=src, %o2=len */
 	bne,pt		%icc, 1b
 	 LOAD(prefetch, %g1 + 0x200, #n_reads_strong)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef NON_USER_COPY
 	VISExitHalfFast
 #else
 	VISExitHalf
 #endif
+=======
+	VISExitHalf
+
+>>>>>>> v3.18
 =======
 	VISExitHalf
 

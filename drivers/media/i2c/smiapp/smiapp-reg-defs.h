@@ -22,17 +22,23 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMIAPP_REG_MK_U8(r) ((SMIA_REG_8BIT << 16) | (r))
 #define SMIAPP_REG_MK_U16(r) ((SMIA_REG_16BIT << 16) | (r))
 #define SMIAPP_REG_MK_U32(r) ((SMIA_REG_32BIT << 16) | (r))
 
 #define SMIAPP_REG_MK_F32(r) (SMIA_REG_FLAG_FLOAT | (SMIA_REG_32BIT << 16) | (r))
 =======
+=======
+>>>>>>> v3.18
 #define SMIAPP_REG_MK_U8(r) ((SMIAPP_REG_8BIT << 16) | (r))
 #define SMIAPP_REG_MK_U16(r) ((SMIAPP_REG_16BIT << 16) | (r))
 #define SMIAPP_REG_MK_U32(r) ((SMIAPP_REG_32BIT << 16) | (r))
 
 #define SMIAPP_REG_MK_F32(r) (SMIAPP_REG_FLAG_FLOAT | (SMIAPP_REG_32BIT << 16) | (r))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SMIAPP_REG_U16_MODEL_ID					SMIAPP_REG_MK_U16(0x0000)

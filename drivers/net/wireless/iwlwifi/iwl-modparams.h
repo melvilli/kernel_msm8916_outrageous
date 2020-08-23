@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -105,6 +113,7 @@ enum iwl_disable_11n {
  * @amsdu_size_8K: enable 8K amsdu size, default = 0
  * @restart_fw: restart firmware, default = 1
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @plcp_check: enable plcp health check, default = true
  * @wd_disable: enable stuck queue check, default = 0
  * @bt_coex_active: enable bt coex, default = true
@@ -116,6 +125,8 @@ enum iwl_disable_11n {
  * @bt_ch_announce: BT channel inhibition, default = enable
  * @auto_agg: enable agg. without check, default = true
 =======
+=======
+>>>>>>> v3.18
  * @wd_disable: disable stuck queue check, default = 1
  * @bt_coex_active: enable bt coex, default = true
  * @led_mode: system default, default = 0
@@ -124,6 +135,9 @@ enum iwl_disable_11n {
  * @debug_level: levels are IWL_DL_*
  * @ant_coupling: antenna coupling in dB, default = 0
  * @fw_monitor: allow to use firmware monitor
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct iwl_mod_params {
@@ -132,7 +146,10 @@ struct iwl_mod_params {
 	int amsdu_size_8K;
 	bool restart_fw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool plcp_check;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int  wd_disable;
@@ -141,11 +158,14 @@ struct iwl_mod_params {
 	bool power_save;
 	int power_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 debug_level;
 	int ant_coupling;
 	bool bt_ch_announce;
 	bool auto_agg;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IWLWIFI_DEBUG
 	u32 debug_level;
 #endif
@@ -153,6 +173,9 @@ struct iwl_mod_params {
 	char *nvm_file;
 	bool uapsd_disable;
 	bool fw_monitor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

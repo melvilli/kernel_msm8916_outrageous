@@ -3,7 +3,10 @@
 
 Author: Catalin Marinas <catalin.marinas@arm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 Date  : 20 February 2012
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -11,6 +14,7 @@ This document describes the virtual memory layout used by the AArch64
 Linux kernel. The architecture allows up to 4 levels of translation
 tables with a 4KB page size and up to 3 levels with a 64KB page size.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 AArch64 Linux uses 3 levels of translation tables with the 4KB page
 configuration, allowing 39-bit (512GB) virtual addresses for both user
@@ -27,6 +31,8 @@ TTBR0.
 
 AArch64 Linux memory layout with 4KB pages:
 =======
+=======
+>>>>>>> v3.18
 AArch64 Linux uses either 3 levels or 4 levels of translation tables
 with the 4KB page configuration, allowing 39-bit (512GB) or 48-bit
 (256TB) virtual addresses, respectively, for both user and kernel. With
@@ -42,11 +48,15 @@ TTBR0.
 
 
 AArch64 Linux memory layout with 4KB pages + 3 levels:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Start			End			Size		Use
 -----------------------------------------------------------------------
 0000000000000000	0000007fffffffff	 512GB		user
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 ffffff8000000000	ffffffbbfffeffff	~240GB		vmalloc
@@ -72,6 +82,8 @@ ffffffc000000000	ffffffffffffffff	 256GB		kernel logical memory map
 
 AArch64 Linux memory layout with 64KB pages:
 =======
+=======
+>>>>>>> v3.18
 ffffff8000000000	ffffffffffffffff	 512GB		kernel
 
 
@@ -84,11 +96,15 @@ ffff000000000000	ffffffffffffffff	 256TB		kernel
 
 
 AArch64 Linux memory layout with 64KB pages + 2 levels:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Start			End			Size		Use
 -----------------------------------------------------------------------
 0000000000000000	000003ffffffffff	   4TB		user
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 fffffc0000000000	fffffdfbfffeffff	  ~2TB		vmalloc
@@ -111,6 +127,8 @@ fffffdfffc000000	fffffdffffffffff	  64MB		modules
 
 fffffe0000000000	ffffffffffffffff	   2TB		kernel logical memory map
 =======
+=======
+>>>>>>> v3.18
 fffffc0000000000	ffffffffffffffff	   4TB		kernel
 
 
@@ -124,6 +142,9 @@ ffff000000000000	ffffffffffffffff	 256TB		kernel
 
 For details of the virtual kernel memory layout please see the kernel
 booting log.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -139,7 +160,11 @@ Translation table lookup with 4KB pages:
  |                 |         |         +-----------> [29:21] L2 index
  |                 |         +---------------------> [38:30] L1 index
 <<<<<<< HEAD
+<<<<<<< HEAD
  |                 +-------------------------------> [47:39] L0 index (not used)
+=======
+ |                 +-------------------------------> [47:39] L0 index
+>>>>>>> v3.18
 =======
  |                 +-------------------------------> [47:39] L0 index
 >>>>>>> v3.18
@@ -156,10 +181,13 @@ Translation table lookup with 64KB pages:
  |                 |    |               |            [15:0]  in-page offset
  |                 |    |               +----------> [28:16] L3 index
 <<<<<<< HEAD
+<<<<<<< HEAD
  |                 |    +--------------------------> [41:29] L2 index (only 38:29 used)
  |                 +-------------------------------> [47:42] L1 index (not used)
  +-------------------------------------------------> [63] TTBR0/1
 =======
+=======
+>>>>>>> v3.18
  |                 |    +--------------------------> [41:29] L2 index
  |                 +-------------------------------> [47:42] L1 index
  +-------------------------------------------------> [63] TTBR0/1
@@ -171,4 +199,7 @@ offset from the kernel VA (top 24bits of the kernel VA set to zero):
 Start			End			Size		Use
 -----------------------------------------------------------------------
 0000004000000000	0000007fffffffff	 256GB		kernel objects mapped in HYP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -39,7 +39,11 @@ typedef __u16 __bitwise __hc16;
 
 /* statistics can be kept for tuning/monitoring */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 >>>>>>> v3.18
@@ -59,7 +63,10 @@ struct ehci_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Scheduling and budgeting information for periodic transfers, for both
  * high-speed devices and full/low-speed devices lying behind a TT.
@@ -82,6 +89,9 @@ struct ehci_per_sched {
 };
 #define NO_FRAME	29999			/* frame not assigned yet */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ehci_hcd->lock guards shared data against other CPUs:
  *   ehci_hcd:	async, unlink, periodic (and shadow), ...
@@ -118,6 +128,10 @@ enum ehci_hrtimer_event {
 	EHCI_HRTIMER_UNLINK_INTR,	/* Wait for interrupt QH unlink */
 	EHCI_HRTIMER_FREE_ITDS,		/* Wait for unused iTDs and siTDs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EHCI_HRTIMER_START_UNLINK_INTR, /* Unlink empty interrupt QHs */
+>>>>>>> v3.18
 =======
 	EHCI_HRTIMER_START_UNLINK_INTR, /* Unlink empty interrupt QHs */
 >>>>>>> v3.18
@@ -177,7 +191,13 @@ struct ehci_hcd {			/* one per controller */
 
 	union ehci_shadow	*pshadow;	/* mirror hw periodic table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	intr_unlink;
+=======
+	struct list_head	intr_unlink_wait;
+	struct list_head	intr_unlink;
+	unsigned		intr_unlink_wait_cycle;
+>>>>>>> v3.18
 =======
 	struct list_head	intr_unlink_wait;
 	struct list_head	intr_unlink;
@@ -227,8 +247,11 @@ struct ehci_hcd {			/* one per controller */
 	u32			command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		log2_irq_thresh;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* SILICON QUIRKS */
@@ -245,12 +268,15 @@ struct ehci_hcd {			/* one per controller */
 	unsigned		frame_index_bug:1; /* MosChip (AKA NetMos) */
 	unsigned		need_oc_pp_cycle:1; /* MPC834X port power */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		susp_sof_bug:1; /*Chip Idea HC*/
 	unsigned		resume_sof_bug:1;/*Chip Idea HC*/
 	unsigned		reset_sof_bug:1; /*Chip Idea HC*/
 	bool			disable_cerr;
 	bool			no_testmode_suspend; /* MSM Chipidea HC */
 	u32			reset_delay;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned		imx28_write_fix:1; /* For Freescale i.MX28 */
@@ -265,8 +291,13 @@ struct ehci_hcd {			/* one per controller */
 	__hc32			*ohci_hcctrl_reg;
 	unsigned		has_hostpc:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		has_ppcd:1; /* support per-port change bits */
 	unsigned		pool_64_bit_align:1; /* for 64 bit alignment */
+=======
+	unsigned		has_tdi_phy_lpm:1;
+	unsigned		has_ppcd:1; /* support per-port change bits */
+>>>>>>> v3.18
 =======
 	unsigned		has_tdi_phy_lpm:1;
 	unsigned		has_ppcd:1; /* support per-port change bits */
@@ -283,11 +314,14 @@ struct ehci_hcd {			/* one per controller */
 
 	/* debug files */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	struct dentry		*debug_dir;
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 	struct dentry		*debug_dir;
 #endif
@@ -301,6 +335,9 @@ struct ehci_hcd {			/* one per controller */
 						/* us budgeted per uframe */
 	struct list_head	tt_list;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* platform-specific data -- must come last */
 	unsigned long		priv[0] __aligned(sizeof(s64));
@@ -458,6 +495,10 @@ struct ehci_qh {
 	struct ehci_qtd		*dummy;
 	struct list_head	unlink_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ehci_per_sched	ps;		/* scheduling info */
+>>>>>>> v3.18
 =======
 	struct ehci_per_sched	ps;		/* scheduling info */
 >>>>>>> v3.18
@@ -475,6 +516,7 @@ struct ehci_qh {
 #define	QH_XACTERR_MAX		32		/* XactErr retry limit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* periodic schedule info */
 	u8			usecs;		/* intr bandwidth */
 	u8			gap_uf;		/* uframes split/csplit gap */
@@ -485,6 +527,10 @@ struct ehci_qh {
 #define NO_FRAME ((unsigned short)~0)			/* pick new start */
 
 	struct usb_device	*dev;		/* access to TT */
+=======
+	u8			gap_uf;		/* uframes split/csplit gap */
+
+>>>>>>> v3.18
 =======
 	u8			gap_uf;		/* uframes split/csplit gap */
 
@@ -516,6 +562,10 @@ struct ehci_iso_sched {
 	struct list_head	td_list;
 	unsigned		span;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		first_packet;
+>>>>>>> v3.18
 =======
 	unsigned		first_packet;
 >>>>>>> v3.18
@@ -535,6 +585,7 @@ struct ehci_iso_stream {
 	struct list_head	td_list;	/* queued itds/sitds */
 	struct list_head	free_list;	/* list of unused itds/sitds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_device	*udev;
 	struct usb_host_endpoint *ep;
 
@@ -552,6 +603,8 @@ struct ehci_iso_stream {
 	u16			maxp;
 	u16			raw_mask;
 =======
+=======
+>>>>>>> v3.18
 
 	/* output of (re)scheduling */
 	struct ehci_per_sched	ps;		/* scheduling info */
@@ -563,6 +616,9 @@ struct ehci_iso_stream {
 	 */
 	u16			uperiod;	/* period in uframes */
 	u16			maxp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned		bandwidth;
 
@@ -679,7 +735,10 @@ struct ehci_fstn {
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * USB-2.0 Specification Sections 11.14 and 11.18
  * Scheduling and budgeting split transactions using TTs
@@ -709,6 +768,9 @@ struct ehci_tt {
 
 /*-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Prepare the PORTSC wakeup flags during controller suspend/resume */
 
@@ -929,6 +991,7 @@ static inline u32 hc32_to_cpup (const struct ehci_hcd *ehci, const __hc32 *x)
 	dev_warn(ehci_to_hcd(ehci)->self.controller , fmt , ## args)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef VERBOSE_DEBUG
 #	define ehci_vdbg ehci_dbg
 #else
@@ -939,10 +1002,15 @@ static inline u32 hc32_to_cpup (const struct ehci_hcd *ehci, const __hc32 *x)
 #define STUB_DEBUG_FILES
 #endif	/* DEBUG */
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_DYNAMIC_DEBUG
 #define STUB_DEBUG_FILES
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*-------------------------------------------------------------------------*/
@@ -952,10 +1020,14 @@ static inline u32 hc32_to_cpup (const struct ehci_hcd *ehci, const __hc32 *x)
 struct ehci_driver_overrides {
 	size_t		extra_priv_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		flags;
 	int		(*reset)(struct usb_hcd *hcd);
 	int		(*bus_suspend)(struct usb_hcd *hcd);
 	int		(*bus_resume)(struct usb_hcd *hcd);
+=======
+	int		(*reset)(struct usb_hcd *hcd);
+>>>>>>> v3.18
 =======
 	int		(*reset)(struct usb_hcd *hcd);
 >>>>>>> v3.18
@@ -965,21 +1037,33 @@ extern void	ehci_init_driver(struct hc_driver *drv,
 				const struct ehci_driver_overrides *over);
 extern int	ehci_setup(struct usb_hcd *hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PM
 extern int ehci_bus_suspend(struct usb_hcd *hcd);
 extern int ehci_bus_resume(struct usb_hcd *hcd);
 =======
+=======
+>>>>>>> v3.18
 extern int	ehci_handshake(struct ehci_hcd *ehci, void __iomem *ptr,
 				u32 mask, u32 done, int usec);
 
 #ifdef CONFIG_PM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int	ehci_suspend(struct usb_hcd *hcd, bool do_wakeup);
 extern int	ehci_resume(struct usb_hcd *hcd, bool hibernated);
 #endif	/* CONFIG_PM */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int	ehci_hub_control(struct usb_hcd	*hcd, u16 typeReq, u16 wValue,
+				 u16 wIndex, char *buf, u16 wLength);
+
+>>>>>>> v3.18
 =======
 extern int	ehci_hub_control(struct usb_hcd	*hcd, u16 typeReq, u16 wValue,
 				 u16 wIndex, char *buf, u16 wLength);

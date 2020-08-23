@@ -144,6 +144,7 @@ TRACE_EVENT(9p_protocol_dump,
 		    memcpy(__entry->line, pdu->sdata, P9_PROTO_DUMP_SZ);
 		    ),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_printk("clnt %lu %s(tag = %d)\n%.3x: "
 		      "%02x %02x %02x %02x %02x %02x %02x %02x "
 		      "%02x %02x %02x %02x %02x %02x %02x %02x\n"
@@ -169,6 +170,11 @@ TRACE_EVENT(9p_protocol_dump,
 		      __entry->line[26], __entry->line[27],
 		      __entry->line[28], __entry->line[29],
 		      __entry->line[30], __entry->line[31])
+=======
+	    TP_printk("clnt %lu %s(tag = %d)\n%.3x: %16ph\n%.3x: %16ph\n",
+		      (unsigned long)__entry->clnt, show_9p_op(__entry->type),
+		      __entry->tag, 0, __entry->line, 16, __entry->line + 16)
+>>>>>>> v3.18
 =======
 	    TP_printk("clnt %lu %s(tag = %d)\n%.3x: %16ph\n%.3x: %16ph\n",
 		      (unsigned long)__entry->clnt, show_9p_op(__entry->type),

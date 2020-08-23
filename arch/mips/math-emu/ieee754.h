@@ -14,7 +14,11 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
+=======
+ *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
+>>>>>>> v3.18
 =======
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
 >>>>>>> v3.18
@@ -28,6 +32,7 @@
 #ifndef __ARCH_MIPS_MATH_EMU_IEEE754_H
 #define __ARCH_MIPS_MATH_EMU_IEEE754_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/byteorder.h>
 #include <linux/types.h>
@@ -104,6 +109,8 @@ typedef union _ieee754sp {
 } ieee754sp;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <linux/compiler.h>
 #include <asm/byteorder.h>
 #include <linux/kernel.h>
@@ -130,11 +137,15 @@ union ieee754sp {
 	};
 	u32 bits;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * single precision (often aka float)
 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ieee754sp_finite(ieee754sp x);
 int ieee754sp_class(ieee754sp x);
@@ -228,6 +239,8 @@ ieee754dp ieee754dp_trunc(ieee754dp x);
 
 ieee754dp ieee754dp_sqrt(ieee754dp x);
 =======
+=======
+>>>>>>> v3.18
 int ieee754sp_class(union ieee754sp x);
 
 union ieee754sp ieee754sp_abs(union ieee754sp x);
@@ -272,12 +285,16 @@ s64 ieee754dp_tlong(union ieee754dp x);
 int ieee754dp_cmp(union ieee754dp x, union ieee754dp y, int cop, int sig);
 
 union ieee754dp ieee754dp_sqrt(union ieee754dp x);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 
 /* 5 types of floating point number
 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IEEE754_CLASS_NORM	0x00
 #define IEEE754_CLASS_ZERO	0x01
@@ -286,6 +303,8 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x);
 #define IEEE754_CLASS_SNAN	0x04
 #define IEEE754_CLASS_QNAN	0x05
 =======
+=======
+>>>>>>> v3.18
 enum {
 	IEEE754_CLASS_NORM	= 0x00,
 	IEEE754_CLASS_ZERO	= 0x01,
@@ -294,6 +313,9 @@ enum {
 	IEEE754_CLASS_SNAN	= 0x04,
 	IEEE754_CLASS_QNAN	= 0x05,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* exception numbers */
@@ -310,6 +332,7 @@ enum {
 #define IEEE754_CGT	0x04
 #define IEEE754_CUN	0x08
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* rounding mode
 */
@@ -330,12 +353,21 @@ static inline int ieee754sp_eq(ieee754sp x, ieee754sp y)
 */
 static inline int ieee754sp_eq(union ieee754sp x, union ieee754sp y)
 >>>>>>> v3.18
+=======
+/* "normal" comparisons
+*/
+static inline int ieee754sp_eq(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y, IEEE754_CEQ, 0);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754sp_ne(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_ne(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754sp_ne(union ieee754sp x, union ieee754sp y)
 >>>>>>> v3.18
@@ -345,7 +377,11 @@ static inline int ieee754sp_ne(union ieee754sp x, union ieee754sp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754sp_lt(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_lt(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754sp_lt(union ieee754sp x, union ieee754sp y)
 >>>>>>> v3.18
@@ -354,7 +390,11 @@ static inline int ieee754sp_lt(union ieee754sp x, union ieee754sp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754sp_le(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_le(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754sp_le(union ieee754sp x, union ieee754sp y)
 >>>>>>> v3.18
@@ -363,7 +403,11 @@ static inline int ieee754sp_le(union ieee754sp x, union ieee754sp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754sp_gt(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_gt(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754sp_gt(union ieee754sp x, union ieee754sp y)
 >>>>>>> v3.18
@@ -373,7 +417,11 @@ static inline int ieee754sp_gt(union ieee754sp x, union ieee754sp y)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754sp_ge(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_ge(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754sp_ge(union ieee754sp x, union ieee754sp y)
 >>>>>>> v3.18
@@ -382,7 +430,11 @@ static inline int ieee754sp_ge(union ieee754sp x, union ieee754sp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754dp_eq(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_eq(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754dp_eq(union ieee754dp x, union ieee754dp y)
 >>>>>>> v3.18
@@ -391,7 +443,11 @@ static inline int ieee754dp_eq(union ieee754dp x, union ieee754dp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754dp_ne(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_ne(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754dp_ne(union ieee754dp x, union ieee754dp y)
 >>>>>>> v3.18
@@ -401,7 +457,11 @@ static inline int ieee754dp_ne(union ieee754dp x, union ieee754dp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754dp_lt(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_lt(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754dp_lt(union ieee754dp x, union ieee754dp y)
 >>>>>>> v3.18
@@ -410,7 +470,11 @@ static inline int ieee754dp_lt(union ieee754dp x, union ieee754dp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754dp_le(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_le(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754dp_le(union ieee754dp x, union ieee754dp y)
 >>>>>>> v3.18
@@ -419,7 +483,11 @@ static inline int ieee754dp_le(union ieee754dp x, union ieee754dp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754dp_gt(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_gt(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754dp_gt(union ieee754dp x, union ieee754dp y)
 >>>>>>> v3.18
@@ -428,7 +496,11 @@ static inline int ieee754dp_gt(union ieee754dp x, union ieee754dp y)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ieee754dp_ge(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_ge(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 =======
 static inline int ieee754dp_ge(union ieee754dp x, union ieee754dp y)
 >>>>>>> v3.18
@@ -436,6 +508,7 @@ static inline int ieee754dp_ge(union ieee754dp x, union ieee754dp y)
 	return ieee754dp_cmp(x, y, IEEE754_CGT | IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -447,10 +520,13 @@ char *ieee754dp_tstr(ieee754dp x, int prec, int fmt, int af);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * The control status register
  */
 struct _ieee754_csr {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef __BIG_ENDIAN
 	unsigned pad0:7;
@@ -473,6 +549,8 @@ struct _ieee754_csr {
 	unsigned pad0:7;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	__BITFIELD_FIELD(unsigned pad0:7,
 	__BITFIELD_FIELD(unsigned nod:1,	/* set 1 for no denormalised numbers */
 	__BITFIELD_FIELD(unsigned c:1,		/* condition */
@@ -482,6 +560,9 @@ struct _ieee754_csr {
 	__BITFIELD_FIELD(unsigned sx:5,		/* exceptions total */
 	__BITFIELD_FIELD(unsigned rm:2,		/* current rounding mode */
 	;))))))))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define ieee754_csr (*(struct _ieee754_csr *)(&current->thread.fpu.fcr31))
@@ -534,8 +615,13 @@ static inline int ieee754_sxtest(unsigned n)
 
 /* debugging */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee754sp ieee754sp_dump(char *s, ieee754sp x);
 ieee754dp ieee754dp_dump(char *s, ieee754dp x);
+=======
+union ieee754sp ieee754sp_dump(char *s, union ieee754sp x);
+union ieee754dp ieee754dp_dump(char *s, union ieee754dp x);
+>>>>>>> v3.18
 =======
 union ieee754sp ieee754sp_dump(char *s, union ieee754sp x);
 union ieee754dp ieee754dp_dump(char *s, union ieee754dp x);
@@ -560,15 +646,21 @@ union ieee754dp ieee754dp_dump(char *s, union ieee754dp x);
 #define IEEE754_SPCVAL_P1E63	16	/* + 1.0e63 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct ieee754dp_konst __ieee754dp_spcvals[];
 extern const struct ieee754sp_konst __ieee754sp_spcvals[];
 #define ieee754dp_spcvals ((const ieee754dp *)__ieee754dp_spcvals)
 #define ieee754sp_spcvals ((const ieee754sp *)__ieee754sp_spcvals)
 =======
+=======
+>>>>>>> v3.18
 extern const union ieee754dp __ieee754dp_spcvals[];
 extern const union ieee754sp __ieee754sp_spcvals[];
 #define ieee754dp_spcvals ((const union ieee754dp *)__ieee754dp_spcvals)
 #define ieee754sp_spcvals ((const union ieee754sp *)__ieee754sp_spcvals)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -600,6 +692,7 @@ extern const union ieee754sp __ieee754sp_spcvals[];
  * Indefinite integer value
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ieee754si_indef()	INT_MAX
 #ifdef LONG_LONG_MAX
 #define ieee754di_indef()	LONG_LONG_MAX
@@ -623,6 +716,8 @@ struct ieee754xctx {
 	va_list ap;
 };
 =======
+=======
+>>>>>>> v3.18
 static inline int ieee754si_indef(void)
 {
 	return INT_MAX;
@@ -632,6 +727,9 @@ static inline s64 ieee754di_indef(void)
 {
 	return S64_MAX;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* result types for xctx.rt */
@@ -642,8 +740,11 @@ static inline s64 ieee754di_indef(void)
 #define IEEE754_RT_DI	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ieee754_xcpt(struct ieee754xctx *xcp);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* compat */

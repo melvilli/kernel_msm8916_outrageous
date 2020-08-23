@@ -27,6 +27,10 @@
 #include <linux/syscore_ops.h>
 #include <linux/rwsem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu.h>
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ static DEFINE_PER_CPU(struct led_trigger_cpu, cpu_trig);
 void ledtrig_cpu(enum cpu_led_event ledevt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct led_trigger_cpu *trig = &__get_cpu_var(cpu_trig);
+=======
+	struct led_trigger_cpu *trig = this_cpu_ptr(&cpu_trig);
+>>>>>>> v3.18
 =======
 	struct led_trigger_cpu *trig = this_cpu_ptr(&cpu_trig);
 >>>>>>> v3.18
@@ -101,7 +109,10 @@ static struct syscore_ops ledtrig_cpu_syscore_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ledtrig_cpu_notify(struct notifier_block *self,
 					   unsigned long action, void *hcpu)
 {
@@ -122,6 +133,9 @@ static struct notifier_block ledtrig_cpu_nb = {
 	.notifier_call = ledtrig_cpu_notify,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init ledtrig_cpu_init(void)
 {
@@ -145,6 +159,10 @@ static int __init ledtrig_cpu_init(void)
 
 	register_syscore_ops(&ledtrig_cpu_syscore_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	register_cpu_notifier(&ledtrig_cpu_nb);
+>>>>>>> v3.18
 =======
 	register_cpu_notifier(&ledtrig_cpu_nb);
 >>>>>>> v3.18
@@ -160,6 +178,11 @@ static void __exit ledtrig_cpu_exit(void)
 	int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unregister_cpu_notifier(&ledtrig_cpu_nb);
+
+>>>>>>> v3.18
 =======
 	unregister_cpu_notifier(&ledtrig_cpu_nb);
 

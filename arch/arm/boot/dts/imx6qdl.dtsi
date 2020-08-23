@@ -11,6 +11,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/clock/imx6qdl-clock.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+>>>>>>> v3.18
 =======
 #include <dt-bindings/clock/imx6qdl-clock.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
@@ -21,11 +27,17 @@
 / {
 	aliases {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		serial0 = &uart1;
 		serial1 = &uart2;
 		serial2 = &uart3;
 		serial3 = &uart4;
 		serial4 = &uart5;
+=======
+		ethernet0 = &fec;
+		can0 = &can1;
+		can1 = &can2;
+>>>>>>> v3.18
 =======
 		ethernet0 = &fec;
 		can0 = &can1;
@@ -39,7 +51,10 @@
 		gpio5 = &gpio6;
 		gpio6 = &gpio7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		i2c0 = &i2c1;
 		i2c1 = &i2c2;
 		i2c2 = &i2c3;
@@ -58,6 +73,9 @@
 		spi3 = &ecspi4;
 		usbphy0 = &usbphy1;
 		usbphy1 = &usbphy2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -65,8 +83,11 @@
 		compatible = "arm,cortex-a9-gic";
 		#interrupt-cells = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		#address-cells = <1>;
 		#size-cells = <1>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		interrupt-controller;
@@ -81,6 +102,10 @@
 		ckil {
 			compatible = "fsl,imx-ckil", "fixed-clock";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#clock-cells = <0>;
+>>>>>>> v3.18
 =======
 			#clock-cells = <0>;
 >>>>>>> v3.18
@@ -90,6 +115,10 @@
 		ckih1 {
 			compatible = "fsl,imx-ckih1", "fixed-clock";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#clock-cells = <0>;
+>>>>>>> v3.18
 =======
 			#clock-cells = <0>;
 >>>>>>> v3.18
@@ -99,6 +128,10 @@
 		osc {
 			compatible = "fsl,imx-osc", "fixed-clock";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#clock-cells = <0>;
+>>>>>>> v3.18
 =======
 			#clock-cells = <0>;
 >>>>>>> v3.18
@@ -117,12 +150,15 @@
 			compatible = "fsl,imx6q-dma-apbh", "fsl,imx28-dma-apbh";
 			reg = <0x00110000 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 13 0x04>, <0 13 0x04>, <0 13 0x04>, <0 13 0x04>;
 			interrupt-names = "gpmi0", "gpmi1", "gpmi2", "gpmi3";
 			#dma-cells = <1>;
 			dma-channels = <4>;
 			clocks = <&clks 106>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <0 13 IRQ_TYPE_LEVEL_HIGH>,
 				     <0 13 IRQ_TYPE_LEVEL_HIGH>,
 				     <0 13 IRQ_TYPE_LEVEL_HIGH>,
@@ -131,6 +167,9 @@
 			#dma-cells = <1>;
 			dma-channels = <4>;
 			clocks = <&clks IMX6QDL_CLK_APBH_DMA>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -141,11 +180,14 @@
 			reg = <0x00112000 0x2000>, <0x00114000 0x2000>;
 			reg-names = "gpmi-nand", "bch";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 13 0x04>, <0 15 0x04>;
 			interrupt-names = "gpmi-dma", "bch";
 			clocks = <&clks 152>, <&clks 153>, <&clks 151>,
 				 <&clks 150>, <&clks 149>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <0 15 IRQ_TYPE_LEVEL_HIGH>;
 			interrupt-names = "bch";
 			clocks = <&clks IMX6QDL_CLK_GPMI_IO>,
@@ -153,13 +195,19 @@
 				 <&clks IMX6QDL_CLK_GPMI_BCH>,
 				 <&clks IMX6QDL_CLK_GPMI_BCH_APB>,
 				 <&clks IMX6QDL_CLK_PER1_BCH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clock-names = "gpmi_io", "gpmi_apb", "gpmi_bch",
 				      "gpmi_bch_apb", "per1_bch";
 			dmas = <&dma_apbh 0>;
 			dma-names = "rx-tx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fsl,gpmi-dma-channel = <0>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			status = "disabled";
@@ -170,7 +218,11 @@
 			reg = <0x00a00600 0x20>;
 			interrupts = <1 13 0xf01>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clocks = <&clks 15>;
+=======
+			clocks = <&clks IMX6QDL_CLK_TWD>;
+>>>>>>> v3.18
 =======
 			clocks = <&clks IMX6QDL_CLK_TWD>;
 >>>>>>> v3.18
@@ -180,10 +232,13 @@
 			compatible = "arm,pl310-cache";
 			reg = <0x00a02000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 92 0x04>;
 			cache-unified;
 			cache-level = <2>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <0 92 IRQ_TYPE_LEVEL_HIGH>;
 			cache-unified;
 			cache-level = <2>;
@@ -216,13 +271,20 @@
 				 <&clks IMX6QDL_CLK_PCIE_REF_125M>;
 			clock-names = "pcie", "pcie_bus", "pcie_phy";
 			status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
 		pmu {
 			compatible = "arm,cortex-a9-pmu";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 94 0x04>;
+=======
+			interrupts = <0 94 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <0 94 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -244,9 +306,12 @@
 
 				spdif: spdif@02004000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					reg = <0x02004000 0x4000>;
 					interrupts = <0 52 0x04>;
 =======
+=======
+>>>>>>> v3.18
 					compatible = "fsl,imx35-spdif";
 					reg = <0x02004000 0x4000>;
 					interrupts = <0 52 IRQ_TYPE_LEVEL_HIGH>;
@@ -264,6 +329,9 @@
 						      "rxtx5", "rxtx6",
 						      "rxtx7";
 					status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
@@ -273,16 +341,22 @@
 					compatible = "fsl,imx6q-ecspi", "fsl,imx51-ecspi";
 					reg = <0x02008000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 31 0x04>;
 					clocks = <&clks 112>, <&clks 112>;
 					clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 					interrupts = <0 31 IRQ_TYPE_LEVEL_HIGH>;
 					clocks = <&clks IMX6QDL_CLK_ECSPI1>,
 						 <&clks IMX6QDL_CLK_ECSPI1>;
 					clock-names = "ipg", "per";
 					dmas = <&sdma 3 7 1>, <&sdma 4 7 2>;
 					dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
@@ -293,16 +367,22 @@
 					compatible = "fsl,imx6q-ecspi", "fsl,imx51-ecspi";
 					reg = <0x0200c000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 32 0x04>;
 					clocks = <&clks 113>, <&clks 113>;
 					clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 					interrupts = <0 32 IRQ_TYPE_LEVEL_HIGH>;
 					clocks = <&clks IMX6QDL_CLK_ECSPI2>,
 						 <&clks IMX6QDL_CLK_ECSPI2>;
 					clock-names = "ipg", "per";
 					dmas = <&sdma 5 7 1>, <&sdma 6 7 2>;
 					dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
@@ -313,16 +393,22 @@
 					compatible = "fsl,imx6q-ecspi", "fsl,imx51-ecspi";
 					reg = <0x02010000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 33 0x04>;
 					clocks = <&clks 114>, <&clks 114>;
 					clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 					interrupts = <0 33 IRQ_TYPE_LEVEL_HIGH>;
 					clocks = <&clks IMX6QDL_CLK_ECSPI3>,
 						 <&clks IMX6QDL_CLK_ECSPI3>;
 					clock-names = "ipg", "per";
 					dmas = <&sdma 7 7 1>, <&sdma 8 7 2>;
 					dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
@@ -333,16 +419,22 @@
 					compatible = "fsl,imx6q-ecspi", "fsl,imx51-ecspi";
 					reg = <0x02014000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 34 0x04>;
 					clocks = <&clks 115>, <&clks 115>;
 					clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 					interrupts = <0 34 IRQ_TYPE_LEVEL_HIGH>;
 					clocks = <&clks IMX6QDL_CLK_ECSPI4>,
 						 <&clks IMX6QDL_CLK_ECSPI4>;
 					clock-names = "ipg", "per";
 					dmas = <&sdma 9 7 1>, <&sdma 10 7 2>;
 					dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
@@ -351,22 +443,29 @@
 					compatible = "fsl,imx6q-uart", "fsl,imx21-uart";
 					reg = <0x02020000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 26 0x04>;
 					clocks = <&clks 160>, <&clks 161>;
 					clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 					interrupts = <0 26 IRQ_TYPE_LEVEL_HIGH>;
 					clocks = <&clks IMX6QDL_CLK_UART_IPG>,
 						 <&clks IMX6QDL_CLK_UART_SERIAL>;
 					clock-names = "ipg", "per";
 					dmas = <&sdma 25 4 0>, <&sdma 26 4 0>;
 					dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
 
 				esai: esai@02024000 {
 					reg = <0x02024000 0x4000>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 					interrupts = <0 51 0x04>;
 				};
@@ -379,6 +478,8 @@
 					fsl,fifo-depth = <15>;
 					fsl,ssi-dma-events = <38 37>;
 =======
+=======
+>>>>>>> v3.18
 					interrupts = <0 51 IRQ_TYPE_LEVEL_HIGH>;
 				};
 
@@ -395,11 +496,15 @@
 					       <&sdma 38 1 0>;
 					dma-names = "rx", "tx";
 					fsl,fifo-depth = <15>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
 
 				ssi2: ssi@0202c000 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 					compatible = "fsl,imx6q-ssi","fsl,imx21-ssi";
 					reg = <0x0202c000 0x4000>;
@@ -408,6 +513,8 @@
 					fsl,fifo-depth = <15>;
 					fsl,ssi-dma-events = <42 41>;
 =======
+=======
+>>>>>>> v3.18
 					#sound-dai-cells = <0>;
 					compatible = "fsl,imx6q-ssi",
 							"fsl,imx51-ssi";
@@ -420,11 +527,15 @@
 					       <&sdma 42 1 0>;
 					dma-names = "rx", "tx";
 					fsl,fifo-depth = <15>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
 
 				ssi3: ssi@02030000 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 					compatible = "fsl,imx6q-ssi","fsl,imx21-ssi";
 					reg = <0x02030000 0x4000>;
@@ -433,6 +544,8 @@
 					fsl,fifo-depth = <15>;
 					fsl,ssi-dma-events = <46 45>;
 =======
+=======
+>>>>>>> v3.18
 					#sound-dai-cells = <0>;
 					compatible = "fsl,imx6q-ssi",
 							"fsl,imx51-ssi";
@@ -445,6 +558,9 @@
 					       <&sdma 46 1 0>;
 					dma-names = "rx", "tx";
 					fsl,fifo-depth = <15>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					status = "disabled";
 				};
@@ -452,7 +568,11 @@
 				asrc: asrc@02034000 {
 					reg = <0x02034000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 50 0x04>;
+=======
+					interrupts = <0 50 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 					interrupts = <0 50 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -466,7 +586,12 @@
 			vpu: vpu@02040000 {
 				reg = <0x02040000 0x3c000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 3 0x04 0 12 0x04>;
+=======
+				interrupts = <0 3 IRQ_TYPE_LEVEL_HIGH>,
+				             <0 12 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 3 IRQ_TYPE_LEVEL_HIGH>,
 				             <0 12 IRQ_TYPE_LEVEL_HIGH>;
@@ -482,8 +607,14 @@
 				compatible = "fsl,imx6q-pwm", "fsl,imx27-pwm";
 				reg = <0x02080000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 83 0x04>;
 				clocks = <&clks 62>, <&clks 145>;
+=======
+				interrupts = <0 83 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_IPG>,
+					 <&clks IMX6QDL_CLK_PWM1>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 83 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_IPG>,
@@ -497,8 +628,14 @@
 				compatible = "fsl,imx6q-pwm", "fsl,imx27-pwm";
 				reg = <0x02084000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 84 0x04>;
 				clocks = <&clks 62>, <&clks 146>;
+=======
+				interrupts = <0 84 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_IPG>,
+					 <&clks IMX6QDL_CLK_PWM2>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 84 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_IPG>,
@@ -512,8 +649,14 @@
 				compatible = "fsl,imx6q-pwm", "fsl,imx27-pwm";
 				reg = <0x02088000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 85 0x04>;
 				clocks = <&clks 62>, <&clks 147>;
+=======
+				interrupts = <0 85 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_IPG>,
+					 <&clks IMX6QDL_CLK_PWM3>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 85 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_IPG>,
@@ -527,8 +670,14 @@
 				compatible = "fsl,imx6q-pwm", "fsl,imx27-pwm";
 				reg = <0x0208c000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 86 0x04>;
 				clocks = <&clks 62>, <&clks 148>;
+=======
+				interrupts = <0 86 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_IPG>,
+					 <&clks IMX6QDL_CLK_PWM4>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 86 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_IPG>,
@@ -538,6 +687,7 @@
 			};
 
 			can1: flexcan@02090000 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				reg = <0x02090000 0x4000>;
 				interrupts = <0 110 0x04>;
@@ -555,6 +705,8 @@
 				clocks = <&clks 119>, <&clks 120>;
 				clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 				compatible = "fsl,imx6q-flexcan";
 				reg = <0x02090000 0x4000>;
 				interrupts = <0 110 IRQ_TYPE_LEVEL_HIGH>;
@@ -582,6 +734,9 @@
 					 <&clks IMX6QDL_CLK_GPT_IPG_PER>,
 					 <&clks IMX6QDL_CLK_GPT_3M>;
 				clock-names = "ipg", "per", "osc_per";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -589,7 +744,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x0209c000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 66 0x04 0 67 0x04>;
+=======
+				interrupts = <0 66 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 67 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 66 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 67 IRQ_TYPE_LEVEL_HIGH>;
@@ -604,7 +764,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x020a0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 68 0x04 0 69 0x04>;
+=======
+				interrupts = <0 68 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 69 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 68 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 69 IRQ_TYPE_LEVEL_HIGH>;
@@ -619,7 +784,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x020a4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 70 0x04 0 71 0x04>;
+=======
+				interrupts = <0 70 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 71 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 70 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 71 IRQ_TYPE_LEVEL_HIGH>;
@@ -634,7 +804,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x020a8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 72 0x04 0 73 0x04>;
+=======
+				interrupts = <0 72 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 73 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 72 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 73 IRQ_TYPE_LEVEL_HIGH>;
@@ -649,7 +824,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x020ac000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 74 0x04 0 75 0x04>;
+=======
+				interrupts = <0 74 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 75 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 74 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 75 IRQ_TYPE_LEVEL_HIGH>;
@@ -664,7 +844,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x020b0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 76 0x04 0 77 0x04>;
+=======
+				interrupts = <0 76 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 77 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 76 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 77 IRQ_TYPE_LEVEL_HIGH>;
@@ -679,7 +864,12 @@
 				compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
 				reg = <0x020b4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 78 0x04 0 79 0x04>;
+=======
+				interrupts = <0 78 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 79 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 78 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 79 IRQ_TYPE_LEVEL_HIGH>;
@@ -692,14 +882,20 @@
 
 			kpp: kpp@020b8000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				reg = <0x020b8000 0x4000>;
 				interrupts = <0 82 0x04>;
 =======
+=======
+>>>>>>> v3.18
 				compatible = "fsl,imx6q-kpp", "fsl,imx21-kpp";
 				reg = <0x020b8000 0x4000>;
 				interrupts = <0 82 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_IPG>;
 				status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -707,8 +903,13 @@
 				compatible = "fsl,imx6q-wdt", "fsl,imx21-wdt";
 				reg = <0x020bc000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 80 0x04>;
 				clocks = <&clks 0>;
+=======
+				interrupts = <0 80 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_DUMMY>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 80 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_DUMMY>;
@@ -719,8 +920,13 @@
 				compatible = "fsl,imx6q-wdt", "fsl,imx21-wdt";
 				reg = <0x020c0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 81 0x04>;
 				clocks = <&clks 0>;
+=======
+				interrupts = <0 81 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_DUMMY>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 81 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_DUMMY>;
@@ -732,7 +938,12 @@
 				compatible = "fsl,imx6q-ccm";
 				reg = <0x020c4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 87 0x04 0 88 0x04>;
+=======
+				interrupts = <0 87 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 88 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 87 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 88 IRQ_TYPE_LEVEL_HIGH>;
@@ -744,7 +955,13 @@
 				compatible = "fsl,imx6q-anatop", "syscon", "simple-bus";
 				reg = <0x020c8000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 49 0x04 0 54 0x04 0 127 0x04>;
+=======
+				interrupts = <0 49 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 54 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 127 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 49 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 54 IRQ_TYPE_LEVEL_HIGH>,
@@ -796,7 +1013,11 @@
 				reg_arm: regulator-vddcore@140 {
 					compatible = "fsl,anatop-regulator";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					regulator-name = "cpu";
+=======
+					regulator-name = "vddarm";
+>>>>>>> v3.18
 =======
 					regulator-name = "vddarm";
 >>>>>>> v3.18
@@ -850,12 +1071,15 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			usbphy1: usbphy@020c9000 {
 				compatible = "fsl,imx6q-usbphy", "fsl,imx23-usbphy";
 				reg = <0x020c9000 0x1000>;
 				interrupts = <0 44 0x04>;
 				clocks = <&clks 182>;
 =======
+=======
+>>>>>>> v3.18
 			tempmon: tempmon {
 				compatible = "fsl,imx6q-tempmon";
 				interrupts = <0 49 IRQ_TYPE_LEVEL_HIGH>;
@@ -870,6 +1094,9 @@
 				interrupts = <0 44 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USBPHY1>;
 				fsl,anatop = <&anatop>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -877,8 +1104,14 @@
 				compatible = "fsl,imx6q-usbphy", "fsl,imx23-usbphy";
 				reg = <0x020ca000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 45 0x04>;
 				clocks = <&clks 183>;
+=======
+				interrupts = <0 45 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_USBPHY2>;
+				fsl,anatop = <&anatop>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 45 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USBPHY2>;
@@ -896,7 +1129,12 @@
 					compatible = "fsl,sec-v4.0-mon-rtc-lp";
 					reg = <0x34 0x58>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <0 19 0x04 0 20 0x04>;
+=======
+					interrupts = <0 19 IRQ_TYPE_LEVEL_HIGH>,
+						     <0 20 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 					interrupts = <0 19 IRQ_TYPE_LEVEL_HIGH>,
 						     <0 20 IRQ_TYPE_LEVEL_HIGH>;
@@ -907,7 +1145,11 @@
 			epit1: epit@020d0000 { /* EPIT1 */
 				reg = <0x020d0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 56 0x04>;
+=======
+				interrupts = <0 56 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 56 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -916,7 +1158,11 @@
 			epit2: epit@020d4000 { /* EPIT2 */
 				reg = <0x020d4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 57 0x04>;
+=======
+				interrupts = <0 57 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 57 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -926,7 +1172,12 @@
 				compatible = "fsl,imx6q-src", "fsl,imx51-src";
 				reg = <0x020d8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 91 0x04 0 96 0x04>;
+=======
+				interrupts = <0 91 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 96 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 91 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 96 IRQ_TYPE_LEVEL_HIGH>;
@@ -938,7 +1189,12 @@
 				compatible = "fsl,imx6q-gpc";
 				reg = <0x020dc000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 89 0x04 0 90 0x04>;
+=======
+				interrupts = <0 89 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 90 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 89 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 90 IRQ_TYPE_LEVEL_HIGH>;
@@ -951,12 +1207,18 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			iomuxc: iomuxc@020e0000 {
 				compatible = "fsl,imx6dl-iomuxc", "fsl,imx6q-iomuxc";
 				reg = <0x020e0000 0x4000>;
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ldb: ldb@020e0008 {
 				#address-cells = <1>;
@@ -966,6 +1228,7 @@
 				status = "disabled";
 
 				lvds-channel@0 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 					reg = <0>;
 					crtcs = <&ipu1 0>;
@@ -977,6 +1240,8 @@
 					crtcs = <&ipu1 1>;
 					status = "disabled";
 =======
+=======
+>>>>>>> v3.18
 					#address-cells = <1>;
 					#size-cells = <0>;
 					reg = <0>;
@@ -1048,6 +1313,9 @@
 					hdmi_mux_1: endpoint {
 						remote-endpoint = <&ipu1_di1_hdmi>;
 					};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -1055,7 +1323,11 @@
 			dcic1: dcic@020e4000 {
 				reg = <0x020e4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 124 0x04>;
+=======
+				interrupts = <0 124 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 124 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1064,7 +1336,11 @@
 			dcic2: dcic@020e8000 {
 				reg = <0x020e8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 125 0x04>;
+=======
+				interrupts = <0 125 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 125 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1074,15 +1350,21 @@
 				compatible = "fsl,imx6q-sdma", "fsl,imx35-sdma";
 				reg = <0x020ec000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 2 0x04>;
 				clocks = <&clks 155>, <&clks 155>;
 				clock-names = "ipg", "ahb";
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 2 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_SDMA>,
 					 <&clks IMX6QDL_CLK_SDMA>;
 				clock-names = "ipg", "ahb";
 				#dma-cells = <3>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				fsl,sdma-ram-script-name = "imx/sdma/sdma-imx6q.bin";
 			};
@@ -1098,7 +1380,12 @@
 			caam@02100000 {
 				reg = <0x02100000 0x40000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 105 0x04 0 106 0x04>;
+=======
+				interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 106 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 106 IRQ_TYPE_LEVEL_HIGH>;
@@ -1113,8 +1400,13 @@
 				compatible = "fsl,imx6q-usb", "fsl,imx27-usb";
 				reg = <0x02184000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 43 0x04>;
 				clocks = <&clks 162>;
+=======
+				interrupts = <0 43 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_USBOH3>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 43 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USBOH3>;
@@ -1128,8 +1420,13 @@
 				compatible = "fsl,imx6q-usb", "fsl,imx27-usb";
 				reg = <0x02184200 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 40 0x04>;
 				clocks = <&clks 162>;
+=======
+				interrupts = <0 40 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_USBOH3>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 40 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USBOH3>;
@@ -1143,8 +1440,13 @@
 				compatible = "fsl,imx6q-usb", "fsl,imx27-usb";
 				reg = <0x02184400 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 41 0x04>;
 				clocks = <&clks 162>;
+=======
+				interrupts = <0 41 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_USBOH3>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 41 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USBOH3>;
@@ -1157,8 +1459,13 @@
 				compatible = "fsl,imx6q-usb", "fsl,imx27-usb";
 				reg = <0x02184600 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 42 0x04>;
 				clocks = <&clks 162>;
+=======
+				interrupts = <0 42 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_USBOH3>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 42 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USBOH3>;
@@ -1168,17 +1475,23 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			usbmisc: usbmisc: usbmisc@02184800 {
 				#index-cells = <1>;
 				compatible = "fsl,imx6q-usbmisc";
 				reg = <0x02184800 0x200>;
 				clocks = <&clks 162>;
 =======
+=======
+>>>>>>> v3.18
 			usbmisc: usbmisc@02184800 {
 				#index-cells = <1>;
 				compatible = "fsl,imx6q-usbmisc";
 				reg = <0x02184800 0x200>;
 				clocks = <&clks IMX6QDL_CLK_USBOH3>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -1186,15 +1499,21 @@
 				compatible = "fsl,imx6q-fec";
 				reg = <0x02188000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 118 0x04 0 119 0x04>;
 				clocks = <&clks 117>, <&clks 117>, <&clks 190>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts-extended =
 					<&intc 0 118 IRQ_TYPE_LEVEL_HIGH>,
 					<&intc 0 119 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_ENET>,
 					 <&clks IMX6QDL_CLK_ENET>,
 					 <&clks IMX6QDL_CLK_ENET_REF>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clock-names = "ipg", "ahb", "ptp";
 				status = "disabled";
@@ -1203,7 +1522,13 @@
 			mlb@0218c000 {
 				reg = <0x0218c000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 53 0x04 0 117 0x04 0 126 0x04>;
+=======
+				interrupts = <0 53 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 117 IRQ_TYPE_LEVEL_HIGH>,
+					     <0 126 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 53 IRQ_TYPE_LEVEL_HIGH>,
 					     <0 117 IRQ_TYPE_LEVEL_HIGH>,
@@ -1215,13 +1540,19 @@
 				compatible = "fsl,imx6q-usdhc";
 				reg = <0x02190000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 22 0x04>;
 				clocks = <&clks 163>, <&clks 163>, <&clks 163>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 22 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USDHC1>,
 					 <&clks IMX6QDL_CLK_USDHC1>,
 					 <&clks IMX6QDL_CLK_USDHC1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clock-names = "ipg", "ahb", "per";
 				bus-width = <4>;
@@ -1232,13 +1563,19 @@
 				compatible = "fsl,imx6q-usdhc";
 				reg = <0x02194000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 23 0x04>;
 				clocks = <&clks 164>, <&clks 164>, <&clks 164>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 23 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USDHC2>,
 					 <&clks IMX6QDL_CLK_USDHC2>,
 					 <&clks IMX6QDL_CLK_USDHC2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clock-names = "ipg", "ahb", "per";
 				bus-width = <4>;
@@ -1249,13 +1586,19 @@
 				compatible = "fsl,imx6q-usdhc";
 				reg = <0x02198000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 24 0x04>;
 				clocks = <&clks 165>, <&clks 165>, <&clks 165>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 24 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USDHC3>,
 					 <&clks IMX6QDL_CLK_USDHC3>,
 					 <&clks IMX6QDL_CLK_USDHC3>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clock-names = "ipg", "ahb", "per";
 				bus-width = <4>;
@@ -1266,13 +1609,19 @@
 				compatible = "fsl,imx6q-usdhc";
 				reg = <0x0219c000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 25 0x04>;
 				clocks = <&clks 166>, <&clks 166>, <&clks 166>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 25 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_USDHC4>,
 					 <&clks IMX6QDL_CLK_USDHC4>,
 					 <&clks IMX6QDL_CLK_USDHC4>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clock-names = "ipg", "ahb", "per";
 				bus-width = <4>;
@@ -1285,8 +1634,13 @@
 				compatible = "fsl,imx6q-i2c", "fsl,imx21-i2c";
 				reg = <0x021a0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 36 0x04>;
 				clocks = <&clks 125>;
+=======
+				interrupts = <0 36 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_I2C1>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 36 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_I2C1>;
@@ -1300,8 +1654,13 @@
 				compatible = "fsl,imx6q-i2c", "fsl,imx21-i2c";
 				reg = <0x021a4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 37 0x04>;
 				clocks = <&clks 126>;
+=======
+				interrupts = <0 37 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_I2C2>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 37 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_I2C2>;
@@ -1315,8 +1674,13 @@
 				compatible = "fsl,imx6q-i2c", "fsl,imx21-i2c";
 				reg = <0x021a8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 38 0x04>;
 				clocks = <&clks 127>;
+=======
+				interrupts = <0 38 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX6QDL_CLK_I2C3>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 38 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_I2C3>;
@@ -1338,6 +1702,7 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			weim@021b8000 {
 				reg = <0x021b8000 0x4000>;
 				interrupts = <0 14 0x04>;
@@ -1357,6 +1722,8 @@
 				reg = <0x021d0000 0x4000>;
 				interrupts = <0 108 0x04>;
 =======
+=======
+>>>>>>> v3.18
 			weim: weim@021b8000 {
 				compatible = "fsl,imx6q-weim";
 				reg = <0x021b8000 0x4000>;
@@ -1372,13 +1739,20 @@
 			tzasc@021d0000 { /* TZASC1 */
 				reg = <0x021d0000 0x4000>;
 				interrupts = <0 108 IRQ_TYPE_LEVEL_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
 			tzasc@021d4000 { /* TZASC2 */
 				reg = <0x021d4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 109 0x04>;
+=======
+				interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1391,6 +1765,7 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mipi@021dc000 { /* MIPI-CSI */
 				reg = <0x021dc000 0x4000>;
 			};
@@ -1398,6 +1773,8 @@
 			mipi@021e0000 { /* MIPI-DSI */
 				reg = <0x021e0000 0x4000>;
 =======
+=======
+>>>>>>> v3.18
 			mipi_csi: mipi@021dc000 {
 				reg = <0x021dc000 0x4000>;
 			};
@@ -1423,13 +1800,20 @@
 						remote-endpoint = <&ipu1_di1_mipi>;
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
 			vdoa@021e4000 {
 				reg = <0x021e4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 18 0x04>;
+=======
+				interrupts = <0 18 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 				interrupts = <0 18 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1439,16 +1823,22 @@
 				compatible = "fsl,imx6q-uart", "fsl,imx21-uart";
 				reg = <0x021e8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 27 0x04>;
 				clocks = <&clks 160>, <&clks 161>;
 				clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 27 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_UART_IPG>,
 					 <&clks IMX6QDL_CLK_UART_SERIAL>;
 				clock-names = "ipg", "per";
 				dmas = <&sdma 27 4 0>, <&sdma 28 4 0>;
 				dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -1457,16 +1847,22 @@
 				compatible = "fsl,imx6q-uart", "fsl,imx21-uart";
 				reg = <0x021ec000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 28 0x04>;
 				clocks = <&clks 160>, <&clks 161>;
 				clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 28 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_UART_IPG>,
 					 <&clks IMX6QDL_CLK_UART_SERIAL>;
 				clock-names = "ipg", "per";
 				dmas = <&sdma 29 4 0>, <&sdma 30 4 0>;
 				dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -1475,16 +1871,22 @@
 				compatible = "fsl,imx6q-uart", "fsl,imx21-uart";
 				reg = <0x021f0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 29 0x04>;
 				clocks = <&clks 160>, <&clks 161>;
 				clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 29 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_UART_IPG>,
 					 <&clks IMX6QDL_CLK_UART_SERIAL>;
 				clock-names = "ipg", "per";
 				dmas = <&sdma 31 4 0>, <&sdma 32 4 0>;
 				dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -1493,22 +1895,29 @@
 				compatible = "fsl,imx6q-uart", "fsl,imx21-uart";
 				reg = <0x021f4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <0 30 0x04>;
 				clocks = <&clks 160>, <&clks 161>;
 				clock-names = "ipg", "per";
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <0 30 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clks IMX6QDL_CLK_UART_IPG>,
 					 <&clks IMX6QDL_CLK_UART_SERIAL>;
 				clock-names = "ipg", "per";
 				dmas = <&sdma 33 4 0>, <&sdma 34 4 0>;
 				dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
 		};
 
 		ipu1: ipu@02400000 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			#crtc-cells = <1>;
 			compatible = "fsl,imx6q-ipu";
@@ -1518,6 +1927,8 @@
 			clock-names = "bus", "di0", "di1";
 			resets = <&src 2>;
 =======
+=======
+>>>>>>> v3.18
 			#address-cells = <1>;
 			#size-cells = <0>;
 			compatible = "fsl,imx6q-ipu";
@@ -1587,6 +1998,9 @@
 					remote-endpoint = <&lvds1_mux_1>;
 				};
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

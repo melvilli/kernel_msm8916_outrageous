@@ -73,7 +73,13 @@ initialize the <structfield>id</structfield>,
 of each &v4l2-ext-control; and call the
 <constant>VIDIOC_G_EXT_CTRLS</constant> ioctl. String controls controls
 <<<<<<< HEAD
+<<<<<<< HEAD
 must also set the <structfield>string</structfield> field.</para>
+=======
+must also set the <structfield>string</structfield> field. Controls
+of compound types (<constant>V4L2_CTRL_FLAG_HAS_PAYLOAD</constant> is set)
+must set the <structfield>ptr</structfield> field.</para>
+>>>>>>> v3.18
 =======
 must also set the <structfield>string</structfield> field. Controls
 of compound types (<constant>V4L2_CTRL_FLAG_HAS_PAYLOAD</constant> is set)
@@ -85,8 +91,13 @@ receive the control result (only relevant for pointer-type controls
 like strings), then the driver will set <structfield>size</structfield>
 to a valid value and return an &ENOSPC;. You should re-allocate the
 <<<<<<< HEAD
+<<<<<<< HEAD
 string memory to this new size and try again. It is possible that the
 same issue occurs again if the string has grown in the meantime. It is
+=======
+memory to this new size and try again. For the string type it is possible that
+the same issue occurs again if the string has grown in the meantime. It is
+>>>>>>> v3.18
 =======
 memory to this new size and try again. For the string type it is possible that
 the same issue occurs again if the string has grown in the meantime. It is
@@ -97,11 +108,14 @@ value. It is guaranteed that that is sufficient memory.
 </para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <para>To change the value of a set of controls applications
 initialize the <structfield>id</structfield>, <structfield>size</structfield>,
 <structfield>reserved2</structfield> and
 <structfield>value/string</structfield> fields of each &v4l2-ext-control; and
 =======
+=======
+>>>>>>> v3.18
     <para>N-dimensional arrays are set and retrieved row-by-row. You cannot set a partial
 array, all elements have to be set or retrieved. The total size is calculated
 as <structfield>elems</structfield> * <structfield>elem_size</structfield>.
@@ -111,6 +125,9 @@ These values can be obtained by calling &VIDIOC-QUERY-EXT-CTRL;.</para>
 initialize the <structfield>id</structfield>, <structfield>size</structfield>,
 <structfield>reserved2</structfield> and
 <structfield>value/value64/string/ptr</structfield> fields of each &v4l2-ext-control; and
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 call the <constant>VIDIOC_S_EXT_CTRLS</constant> ioctl. The controls
 will only be set if <emphasis>all</emphasis> control values are
@@ -120,7 +137,11 @@ valid.</para>
 initialize the <structfield>id</structfield>, <structfield>size</structfield>,
 <structfield>reserved2</structfield> and
 <<<<<<< HEAD
+<<<<<<< HEAD
 <structfield>value/string</structfield> fields of each &v4l2-ext-control; and
+=======
+<structfield>value/value64/string/ptr</structfield> fields of each &v4l2-ext-control; and
+>>>>>>> v3.18
 =======
 <structfield>value/value64/string/ptr</structfield> fields of each &v4l2-ext-control; and
 >>>>>>> v3.18
@@ -186,7 +207,13 @@ applications must set the array to zero.</entry>
 	    <entry>__s32</entry>
 	    <entry><structfield>value</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>New value or current value.</entry>
+=======
+	    <entry>New value or current value. Valid if this control is not of
+type <constant>V4L2_CTRL_TYPE_INTEGER64</constant> and
+<constant>V4L2_CTRL_FLAG_HAS_PAYLOAD</constant> is not set.</entry>
+>>>>>>> v3.18
 =======
 	    <entry>New value or current value. Valid if this control is not of
 type <constant>V4L2_CTRL_TYPE_INTEGER64</constant> and
@@ -198,7 +225,13 @@ type <constant>V4L2_CTRL_TYPE_INTEGER64</constant> and
 	    <entry>__s64</entry>
 	    <entry><structfield>value64</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>New value or current value.</entry>
+=======
+	    <entry>New value or current value. Valid if this control is of
+type <constant>V4L2_CTRL_TYPE_INTEGER64</constant> and
+<constant>V4L2_CTRL_FLAG_HAS_PAYLOAD</constant> is not set.</entry>
+>>>>>>> v3.18
 =======
 	    <entry>New value or current value. Valid if this control is of
 type <constant>V4L2_CTRL_TYPE_INTEGER64</constant> and
@@ -210,8 +243,11 @@ type <constant>V4L2_CTRL_TYPE_INTEGER64</constant> and
 	    <entry>char *</entry>
 	    <entry><structfield>string</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>A pointer to a string.</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>A pointer to a string. Valid if this control is of
 type <constant>V4L2_CTRL_TYPE_STRING</constant>.</entry>
 	  </row>
@@ -237,6 +273,9 @@ Valid if this control is of type <constant>V4L2_CTRL_TYPE_U16</constant>.</entry
 compound type (the control's type is >= <constant>V4L2_CTRL_COMPOUND_TYPES</constant>).
 Valid if <constant>V4L2_CTRL_FLAG_HAS_PAYLOAD</constant> is set for this control.
 </entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	</tbody>
@@ -395,14 +434,20 @@ These controls are described in <xref
 		linkend="fm-rx-controls" />.</entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry><constant>V4L2_CTRL_CLASS_RF_TUNER</constant></entry>
 	    <entry>0xa20000</entry>
 	    <entry>The class containing RF tuner controls.
 These controls are described in <xref linkend="rf-tuner-controls" />.</entry>
 	  </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	</tbody>
       </tgroup>

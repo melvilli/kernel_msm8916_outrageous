@@ -100,7 +100,11 @@ static void udp_dump(struct udp_table *table, struct sk_buff *skb, struct netlin
 	num = s_num = cb->args[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (slot = s_slot; slot <= table->mask; s_num = 0, slot++) {
+=======
+	for (slot = s_slot; slot <= table->mask; num = s_num = 0, slot++) {
+>>>>>>> v3.18
 =======
 	for (slot = s_slot; slot <= table->mask; num = s_num = 0, slot++) {
 >>>>>>> v3.18
@@ -109,8 +113,11 @@ static void udp_dump(struct udp_table *table, struct sk_buff *skb, struct netlin
 		struct udp_hslot *hslot = &table->hash[slot];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		num = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (hlist_nulls_empty(&hslot->head))

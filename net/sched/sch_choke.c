@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reciprocal_div.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/vmalloc.h>
@@ -62,7 +65,11 @@ struct choke_sched_data {
 /* Variables */
 	struct red_vars  vars;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_proto *filter_list;
+=======
+	struct tcf_proto __rcu *filter_list;
+>>>>>>> v3.18
 =======
 	struct tcf_proto __rcu *filter_list;
 >>>>>>> v3.18
@@ -85,12 +92,15 @@ struct choke_sched_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* deliver a random number between 0 and N - 1 */
 static u32 random_N(unsigned int N)
 {
 	return reciprocal_divide(prandom_u32(), N);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* number of elements in queue including holes */
@@ -145,7 +155,11 @@ static void choke_drop_by_idx(struct Qdisc *sch, unsigned int idx)
 		choke_zap_tail_holes(q);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.backlog -= qdisc_pkt_len(skb);
+=======
+	qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_backlog_dec(sch, skb);
 >>>>>>> v3.18
@@ -155,11 +169,14 @@ static void choke_drop_by_idx(struct Qdisc *sch, unsigned int idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct choke_skb_cb {
 	u16			classid;
 	u8			keys_valid;
 	struct flow_keys	keys;
 =======
+=======
+>>>>>>> v3.18
 /* private part of skb->cb[] that a qdisc is allowed to use
  * is limited to QDISC_CB_PRIV_LEN bytes.
  * As a flow key might be too large, we store a part of it only.
@@ -170,6 +187,9 @@ struct choke_skb_cb {
 	u16			classid;
 	u8			keys_valid;
 	u8			keys[QDISC_CB_PRIV_LEN - 3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -198,6 +218,11 @@ static bool choke_match_flow(struct sk_buff *skb1,
 			     struct sk_buff *skb2)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct flow_keys temp;
+
+>>>>>>> v3.18
 =======
 	struct flow_keys temp;
 
@@ -208,7 +233,12 @@ static bool choke_match_flow(struct sk_buff *skb1,
 	if (!choke_skb_cb(skb1)->keys_valid) {
 		choke_skb_cb(skb1)->keys_valid = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb_flow_dissect(skb1, &choke_skb_cb(skb1)->keys);
+=======
+		skb_flow_dissect(skb1, &temp);
+		memcpy(&choke_skb_cb(skb1)->keys, &temp, CHOKE_K_LEN);
+>>>>>>> v3.18
 =======
 		skb_flow_dissect(skb1, &temp);
 		memcpy(&choke_skb_cb(skb1)->keys, &temp, CHOKE_K_LEN);
@@ -218,7 +248,12 @@ static bool choke_match_flow(struct sk_buff *skb1,
 	if (!choke_skb_cb(skb2)->keys_valid) {
 		choke_skb_cb(skb2)->keys_valid = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb_flow_dissect(skb2, &choke_skb_cb(skb2)->keys);
+=======
+		skb_flow_dissect(skb2, &temp);
+		memcpy(&choke_skb_cb(skb2)->keys, &temp, CHOKE_K_LEN);
+>>>>>>> v3.18
 =======
 		skb_flow_dissect(skb2, &temp);
 		memcpy(&choke_skb_cb(skb2)->keys, &temp, CHOKE_K_LEN);
@@ -228,7 +263,11 @@ static bool choke_match_flow(struct sk_buff *skb1,
 	return !memcmp(&choke_skb_cb(skb1)->keys,
 		       &choke_skb_cb(skb2)->keys,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       sizeof(struct flow_keys));
+=======
+		       CHOKE_K_LEN);
+>>>>>>> v3.18
 =======
 		       CHOKE_K_LEN);
 >>>>>>> v3.18
@@ -247,15 +286,21 @@ static bool choke_classify(struct sk_buff *skb,
 	struct choke_sched_data *q = qdisc_priv(sch);
 	struct tcf_result res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result;
 
 	result = tc_classify(skb, q->filter_list, &res);
 =======
+=======
+>>>>>>> v3.18
 	struct tcf_proto *fl;
 	int result;
 
 	fl = rcu_dereference_bh(q->filter_list);
 	result = tc_classify(skb, fl, &res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (result >= 0) {
 #ifdef CONFIG_NET_CLS_ACT
@@ -288,7 +333,11 @@ static struct sk_buff *choke_peek_random(const struct choke_sched_data *q,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*pidx = (q->head + random_N(choke_len(q))) & q->tab_mask;
+=======
+		*pidx = (q->head + prandom_u32_max(choke_len(q))) & q->tab_mask;
+>>>>>>> v3.18
 =======
 		*pidx = (q->head + prandom_u32_max(choke_len(q))) & q->tab_mask;
 >>>>>>> v3.18
@@ -315,7 +364,11 @@ static bool choke_match_random(const struct choke_sched_data *q,
 
 	oskb = choke_peek_random(q, pidx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (q->filter_list)
+=======
+	if (rcu_access_pointer(q->filter_list))
+>>>>>>> v3.18
 =======
 	if (rcu_access_pointer(q->filter_list))
 >>>>>>> v3.18
@@ -327,17 +380,23 @@ static bool choke_match_random(const struct choke_sched_data *q,
 static int choke_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct choke_sched_data *q = qdisc_priv(sch);
 	const struct red_parms *p = &q->parms;
 	int ret = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 
 	if (q->filter_list) {
 =======
+=======
+>>>>>>> v3.18
 	int ret = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 	struct choke_sched_data *q = qdisc_priv(sch);
 	const struct red_parms *p = &q->parms;
 
 	if (rcu_access_pointer(q->filter_list)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* If using external classifiers, get result and record it. */
 		if (!choke_classify(skb, sch, &ret))
@@ -368,7 +427,11 @@ static int choke_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 			q->vars.qcount = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.overlimits++;
+=======
+			qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -385,7 +448,11 @@ static int choke_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 				q->vars.qR = red_random(p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sch->qstats.overlimits++;
+=======
+				qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 				qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -406,7 +473,11 @@ static int choke_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 		q->tail = (q->tail + 1) & q->tab_mask;
 		++sch->q.qlen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.backlog += qdisc_pkt_len(skb);
+=======
+		qdisc_qstats_backlog_inc(sch, skb);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_backlog_inc(sch, skb);
 >>>>>>> v3.18
@@ -423,7 +494,11 @@ congestion_drop:
 other_drop:
 	if (ret & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -447,7 +522,11 @@ static struct sk_buff *choke_dequeue(struct Qdisc *sch)
 	choke_zap_head_holes(q);
 	--sch->q.qlen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.backlog -= qdisc_pkt_len(skb);
+=======
+	qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_backlog_dec(sch, skb);
 >>>>>>> v3.18
@@ -489,12 +568,16 @@ static const struct nla_policy choke_policy[TCA_CHOKE_MAX + 1] = {
 static void choke_free(void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr) {
 		if (is_vmalloc_addr(addr))
 			vfree(addr);
 		else
 			kfree(addr);
 	}
+=======
+	kvfree(addr);
+>>>>>>> v3.18
 =======
 	kvfree(addr);
 >>>>>>> v3.18
@@ -533,7 +616,12 @@ static int choke_change(struct Qdisc *sch, struct nlattr *opt)
 		struct sk_buff **ntab;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ntab = kcalloc(mask + 1, sizeof(struct sk_buff *), GFP_KERNEL);
+=======
+		ntab = kcalloc(mask + 1, sizeof(struct sk_buff *),
+			       GFP_KERNEL | __GFP_NOWARN);
+>>>>>>> v3.18
 =======
 		ntab = kcalloc(mask + 1, sizeof(struct sk_buff *),
 			       GFP_KERNEL | __GFP_NOWARN);
@@ -559,7 +647,11 @@ static int choke_change(struct Qdisc *sch, struct nlattr *opt)
 					continue;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sch->qstats.backlog -= qdisc_pkt_len(skb);
+=======
+				qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 				qdisc_qstats_backlog_dec(sch, skb);
 >>>>>>> v3.18
@@ -669,7 +761,12 @@ static unsigned long choke_bind(struct Qdisc *sch, unsigned long parent,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **choke_find_tcf(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **choke_find_tcf(struct Qdisc *sch,
+					       unsigned long cl)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **choke_find_tcf(struct Qdisc *sch,
 					       unsigned long cl)

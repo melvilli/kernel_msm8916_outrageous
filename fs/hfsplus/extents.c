@@ -228,10 +228,15 @@ int hfsplus_get_block(struct inode *inode, sector_t iblock,
 	sector_t sector;
 	int was_dirty = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int shift;
 
 	/* Convert inode block to disk allocation block */
 	shift = sbi->alloc_blksz_shift - sb->s_blocksize_bits;
+=======
+
+	/* Convert inode block to disk allocation block */
+>>>>>>> v3.18
 =======
 
 	/* Convert inode block to disk allocation block */
@@ -243,7 +248,11 @@ int hfsplus_get_block(struct inode *inode, sector_t iblock,
 			return -EIO;
 		if (ablock >= hip->alloc_blocks) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res = hfsplus_file_extend(inode);
+=======
+			res = hfsplus_file_extend(inode, false);
+>>>>>>> v3.18
 =======
 			res = hfsplus_file_extend(inode, false);
 >>>>>>> v3.18
@@ -437,7 +446,11 @@ int hfsplus_free_fork(struct super_block *sb, u32 cnid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_file_extend(struct inode *inode)
+=======
+int hfsplus_file_extend(struct inode *inode, bool zeroout)
+>>>>>>> v3.18
 =======
 int hfsplus_file_extend(struct inode *inode, bool zeroout)
 >>>>>>> v3.18
@@ -452,10 +465,16 @@ int hfsplus_file_extend(struct inode *inode, bool zeroout)
 	    sbi->total_blocks - sbi->free_blocks + 8) {
 		/* extend alloc file */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("extend alloc file! "
 				"(%llu,%u,%u)\n",
 			sbi->alloc_file->i_size * 8,
 			sbi->total_blocks, sbi->free_blocks);
+=======
+		pr_err("extend alloc file! (%llu,%u,%u)\n",
+		       sbi->alloc_file->i_size * 8,
+		       sbi->total_blocks, sbi->free_blocks);
+>>>>>>> v3.18
 =======
 		pr_err("extend alloc file! (%llu,%u,%u)\n",
 		       sbi->alloc_file->i_size * 8,
@@ -485,13 +504,19 @@ int hfsplus_file_extend(struct inode *inode, bool zeroout)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (zeroout) {
 		res = sb_issue_zeroout(sb, start, len, GFP_NOFS);
 		if (res)
 			goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hfs_dbg(EXTENT, "extend %lu: %u,%u\n", inode->i_ino, start, len);
 
@@ -527,12 +552,15 @@ int hfsplus_file_extend(struct inode *inode, bool zeroout)
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&hip->extents_lock);
 	if (!res) {
 		hip->alloc_blocks += len;
 		hfsplus_mark_inode_dirty(inode, HFSPLUS_I_ALLOC_DIRTY);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!res) {
 		hip->alloc_blocks += len;
 		mutex_unlock(&hip->extents_lock);
@@ -540,6 +568,9 @@ out:
 		return 0;
 	}
 	mutex_unlock(&hip->extents_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return res;
 
@@ -595,12 +626,15 @@ void hfsplus_file_truncate(struct inode *inode)
 	blk_cnt = (inode->i_size + HFSPLUS_SB(sb)->alloc_blksz - 1) >>
 			HFSPLUS_SB(sb)->alloc_blksz_shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alloc_cnt = hip->alloc_blocks;
 	if (blk_cnt == alloc_cnt)
 		goto out;
 
 	mutex_lock(&hip->extents_lock);
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&hip->extents_lock);
 
@@ -608,6 +642,9 @@ void hfsplus_file_truncate(struct inode *inode)
 	if (blk_cnt == alloc_cnt)
 		goto out_unlock;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	res = hfs_find_init(HFSPLUS_SB(sb)->ext_tree, &fd);
 	if (res) {
@@ -641,15 +678,21 @@ void hfsplus_file_truncate(struct inode *inode)
 	}
 	hfs_find_exit(&fd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&hip->extents_lock);
 
 	hip->alloc_blocks = blk_cnt;
 out:
 =======
+=======
+>>>>>>> v3.18
 
 	hip->alloc_blocks = blk_cnt;
 out_unlock:
 	mutex_unlock(&hip->extents_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hip->phys_size = inode->i_size;
 	hip->fs_blocks = (inode->i_size + sb->s_blocksize - 1) >>

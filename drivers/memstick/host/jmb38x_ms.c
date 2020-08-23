@@ -1047,6 +1047,7 @@ static struct pci_driver jmb38x_ms_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init jmb38x_ms_init(void)
 {
 	return pci_register_driver(&jmb38x_ms_driver);
@@ -1059,14 +1060,20 @@ static void __exit jmb38x_ms_exit(void)
 =======
 module_pci_driver(jmb38x_ms_driver);
 >>>>>>> v3.18
+=======
+module_pci_driver(jmb38x_ms_driver);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Alex Dubov");
 MODULE_DESCRIPTION("JMicron jmb38x MemoryStick driver");
 MODULE_LICENSE("GPL");
 MODULE_DEVICE_TABLE(pci, jmb38x_ms_id_tbl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(jmb38x_ms_init);
 module_exit(jmb38x_ms_exit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -106,9 +106,15 @@ qh_update (struct ehci_hcd *ehci, struct ehci_qh *qh, struct ehci_qtd *qtd)
 		is_out = qh->is_out;
 		epnum = (hc32_to_cpup(ehci, &hw->hw_info1) >> 8) & 0x0f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unlikely (!usb_gettoggle (qh->dev, epnum, is_out))) {
 			hw->hw_token &= ~cpu_to_hc32(ehci, QTD_TOGGLE);
 			usb_settoggle (qh->dev, epnum, is_out, 1);
+=======
+		if (unlikely(!usb_gettoggle(qh->ps.udev, epnum, is_out))) {
+			hw->hw_token &= ~cpu_to_hc32(ehci, QTD_TOGGLE);
+			usb_settoggle(qh->ps.udev, epnum, is_out, 1);
+>>>>>>> v3.18
 =======
 		if (unlikely(!usb_gettoggle(qh->ps.udev, epnum, is_out))) {
 			hw->hw_token &= ~cpu_to_hc32(ehci, QTD_TOGGLE);
@@ -175,7 +181,11 @@ static void ehci_clear_tt_buffer(struct ehci_hcd *ehci, struct ehci_qh *qh,
 	 */
 	if (urb->dev->tt && !usb_pipeint(urb->pipe) && !qh->clearing_tt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 >>>>>>> v3.18
@@ -185,7 +195,11 @@ static void ehci_clear_tt_buffer(struct ehci_hcd *ehci, struct ehci_qh *qh,
 			urb->dev->ttport, urb->dev->devnum,
 			usb_pipeendpoint(urb->pipe), token);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* DEBUG */
+=======
+#endif /* CONFIG_DYNAMIC_DEBUG */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_DYNAMIC_DEBUG */
 >>>>>>> v3.18
@@ -255,6 +269,7 @@ static int qtd_copy_status (
 			status = -EPROTO;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		ehci_vdbg (ehci,
 			"dev%d ep%d%s qtd token %08x --> status %d\n",
@@ -262,6 +277,8 @@ static int qtd_copy_status (
 			usb_pipeendpoint (urb->pipe),
 			usb_pipein (urb->pipe) ? "in" : "out",
 			token, status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -272,8 +289,11 @@ static int qtd_copy_status (
 static void
 ehci_urb_done(struct ehci_hcd *ehci, struct urb *urb, int status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 __releases(ehci->lock)
 __acquires(ehci->lock)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 {
@@ -294,7 +314,11 @@ __acquires(ehci->lock)
 #ifdef EHCI_URB_TRACE
 	ehci_dbg (ehci,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s %s urb %pK ep%d%s status %d len %d/%d\n",
+=======
+		"%s %s urb %p ep%d%s status %d len %d/%d\n",
+>>>>>>> v3.18
 =======
 		"%s %s urb %p ep%d%s status %d len %d/%d\n",
 >>>>>>> v3.18
@@ -306,11 +330,16 @@ __acquires(ehci->lock)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* complete() can reenter this HCD */
 	usb_hcd_unlink_urb_from_ep(ehci_to_hcd(ehci), urb);
 	spin_unlock (&ehci->lock);
 	usb_hcd_giveback_urb(ehci_to_hcd(ehci), urb, status);
 	spin_lock (&ehci->lock);
+=======
+	usb_hcd_unlink_urb_from_ep(ehci_to_hcd(ehci), urb);
+	usb_hcd_giveback_urb(ehci_to_hcd(ehci), urb, status);
+>>>>>>> v3.18
 =======
 	usb_hcd_unlink_urb_from_ep(ehci_to_hcd(ehci), urb);
 	usb_hcd_giveback_urb(ehci_to_hcd(ehci), urb, status);
@@ -392,7 +421,11 @@ qh_completions (struct ehci_hcd *ehci, struct ehci_qh *qh)
 			if (token & QTD_STS_DBE)
 				ehci_dbg(ehci,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"detected DataBufferErr for urb %pK ep%d%s len %d, qtd %pK [qh %pK]\n",
+=======
+					"detected DataBufferErr for urb %p ep%d%s len %d, qtd %p [qh %p]\n",
+>>>>>>> v3.18
 =======
 					"detected DataBufferErr for urb %p ep%d%s len %d, qtd %p [qh %p]\n",
 >>>>>>> v3.18
@@ -640,8 +673,12 @@ qh_urb_transaction (
 
 	token = QTD_STS_ACTIVE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ehci->disable_cerr)
 		token |= (EHCI_TUNE_CERR << 10);
+=======
+	token |= (EHCI_TUNE_CERR << 10);
+>>>>>>> v3.18
 =======
 	token |= (EHCI_TUNE_CERR << 10);
 >>>>>>> v3.18
@@ -848,6 +885,7 @@ qh_make (
 	 */
 	if (type == PIPE_INTERRUPT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qh->usecs = NS_TO_US(usb_calc_bus_time(USB_SPEED_HIGH,
 				is_input, 0,
 				hb_mult(maxp) * max_packet(maxp)));
@@ -860,6 +898,8 @@ qh_make (
 			qh->period = urb->interval >> 3;
 			if (qh->period == 0 && urb->interval != 1) {
 =======
+=======
+>>>>>>> v3.18
 		unsigned	tmp;
 
 		qh->ps.usecs = NS_TO_US(usb_calc_bus_time(USB_SPEED_HIGH,
@@ -872,6 +912,9 @@ qh_make (
 			qh->gap_uf = 0;
 
 			if (urb->interval > 1 && urb->interval < 8) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* NOTE interval 2 or 4 uframes could work.
 				 * But interval 1 scheduling is simpler, and
@@ -879,11 +922,14 @@ qh_make (
 				 */
 				urb->interval = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (qh->period > ehci->periodic_size) {
 				qh->period = ehci->periodic_size;
 				urb->interval = qh->period << 3;
 			}
 =======
+=======
+>>>>>>> v3.18
 			} else if (urb->interval > ehci->periodic_size << 3) {
 				urb->interval = ehci->periodic_size << 3;
 			}
@@ -896,6 +942,9 @@ qh_make (
 			/* Allow urb->interval to override */
 			qh->ps.bw_uperiod = min_t(unsigned, tmp, urb->interval);
 			qh->ps.bw_period = qh->ps.bw_uperiod >> 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			int		think_time;
@@ -906,6 +955,7 @@ qh_make (
 
 			/* FIXME this just approximates SPLIT/CSPLIT times */
 			if (is_input) {		// SPLIT, gap, CSPLIT+DATA
+<<<<<<< HEAD
 <<<<<<< HEAD
 				qh->c_usecs = qh->usecs + HS_USECS (0);
 				qh->usecs = HS_USECS (1);
@@ -924,6 +974,8 @@ qh_make (
 				urb->interval = qh->period;
 			}
 =======
+=======
+>>>>>>> v3.18
 				qh->ps.c_usecs = qh->ps.usecs + HS_USECS(0);
 				qh->ps.usecs = HS_USECS(1);
 			} else {		// SPLIT+DATA, gap, CSPLIT
@@ -947,13 +999,21 @@ qh_make (
 			/* Allow urb->interval to override */
 			qh->ps.bw_period = min_t(unsigned, tmp, urb->interval);
 			qh->ps.bw_uperiod = qh->ps.bw_period << 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	/* support for tt scheduling, and access to toggles */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qh->dev = urb->dev;
+=======
+	qh->ps.udev = urb->dev;
+	qh->ps.ep = urb->ep;
+>>>>>>> v3.18
 =======
 	qh->ps.udev = urb->dev;
 	qh->ps.ep = urb->ep;
@@ -1019,7 +1079,11 @@ qh_make (
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ehci_dbg(ehci, "bogus dev %pK speed %d\n", urb->dev,
+=======
+		ehci_dbg(ehci, "bogus dev %p speed %d\n", urb->dev,
+>>>>>>> v3.18
 =======
 		ehci_dbg(ehci, "bogus dev %p speed %d\n", urb->dev,
 >>>>>>> v3.18
@@ -1211,7 +1275,11 @@ submit_async (
 		qtd = list_entry(qtd_list->next, struct ehci_qtd, qtd_list);
 		ehci_dbg(ehci,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "%s %s urb %pK ep%d%s len %d, qtd %pK [qh %pK]\n",
+=======
+			 "%s %s urb %p ep%d%s len %d, qtd %p [qh %p]\n",
+>>>>>>> v3.18
 =======
 			 "%s %s urb %p ep%d%s len %d, qtd %p [qh %p]\n",
 >>>>>>> v3.18
@@ -1252,7 +1320,13 @@ submit_async (
 
 /*-------------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This function creates the qtds and submits them for the
+=======
+#ifdef CONFIG_USB_HCD_TEST_MODE
+/*
+ * This function creates the qtds and submits them for the
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_USB_HCD_TEST_MODE
 /*
@@ -1267,6 +1341,7 @@ submit_async (
  * Returns 0 if success
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_EHCI_EHSET
 static int
 submit_single_step_set_feature(
@@ -1278,6 +1353,8 @@ submit_single_step_set_feature(
 	struct list_head	qtd_list;
 	struct list_head	*head ;
 =======
+=======
+>>>>>>> v3.18
 static int submit_single_step_set_feature(
 	struct usb_hcd  *hcd,
 	struct urb      *urb,
@@ -1286,6 +1363,9 @@ static int submit_single_step_set_feature(
 	struct ehci_hcd		*ehci = hcd_to_ehci(hcd);
 	struct list_head	qtd_list;
 	struct list_head	*head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct ehci_qtd		*qtd, *qtd_prev;
@@ -1297,9 +1377,13 @@ static int submit_single_step_set_feature(
 	head = &qtd_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * URBs map to sequences of QTDs:  one logical transaction
 	 */
+=======
+	/* URBs map to sequences of QTDs:  one logical transaction */
+>>>>>>> v3.18
 =======
 	/* URBs map to sequences of QTDs:  one logical transaction */
 >>>>>>> v3.18
@@ -1314,7 +1398,12 @@ static int submit_single_step_set_feature(
 
 	len = urb->transfer_buffer_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check if the request is to perform just the SETUP stage (getDesc)
+=======
+	/*
+	 * Check if the request is to perform just the SETUP stage (getDesc)
+>>>>>>> v3.18
 =======
 	/*
 	 * Check if the request is to perform just the SETUP stage (getDesc)
@@ -1333,7 +1422,11 @@ static int submit_single_step_set_feature(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*---------------------------------------------------------------------
+=======
+	/*
+>>>>>>> v3.18
 =======
 	/*
 >>>>>>> v3.18
@@ -1350,6 +1443,7 @@ static int submit_single_step_set_feature(
 	qtd_fill(ehci, qtd, buf, len, token, maxpacket);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Our IN phase shall always be a short read; so keep the queue running
 	* and let it advance to the next qtd which zero length OUT status */
 
@@ -1361,6 +1455,8 @@ static int submit_single_step_set_feature(
 	token ^= 0x0100;	/* "in" <--> "out"  */
 	token |= QTD_TOGGLE;	/* force DATA1 */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Our IN phase shall always be a short read; so keep the queue running
 	 * and let it advance to the next qtd which zero length OUT status
@@ -1370,6 +1466,9 @@ static int submit_single_step_set_feature(
 	/* STATUS stage for GetDesc control request */
 	token ^= 0x0100;        /* "in" <--> "out"  */
 	token |= QTD_TOGGLE;    /* force DATA1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	qtd_prev = qtd;
@@ -1396,7 +1495,11 @@ cleanup:
 	return -1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* CONFIG_USB_HCD_TEST_MODE */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_USB_HCD_TEST_MODE */
 >>>>>>> v3.18

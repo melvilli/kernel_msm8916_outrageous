@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // FT1000 driver for Flarion Flash OFDM NIC Device
 //
@@ -107,6 +108,8 @@ typedef struct _IOCTL_DPRAM_COMMAND
 #endif // _FT1000IOCTLH_
 
 =======
+=======
+>>>>>>> v3.18
 /*
 *---------------------------------------------------------------------------
 * FT1000 driver for Flarion Flash OFDM NIC Device
@@ -230,4 +233,7 @@ struct IOCTL_DPRAM_COMMAND {
 				    unsigned short *)
 
 #endif /* _FT1000IOCTLH_ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

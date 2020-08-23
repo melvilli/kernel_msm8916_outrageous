@@ -61,7 +61,11 @@
 struct virtio_net_config {
 	/* The config defining mac address (if VIRTIO_NET_F_MAC) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 mac[6];
+=======
+	__u8 mac[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	__u8 mac[ETH_ALEN];
 >>>>>>> v3.18
@@ -75,7 +79,13 @@ struct virtio_net_config {
 } __attribute__((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This is the first element of the scatter-gather list.  If you don't
+=======
+/* This header comes first in the scatter-gather list.
+ * If VIRTIO_F_ANY_LAYOUT is not negotiated, it must
+ * be the first element of the scatter-gather list.  If you don't
+>>>>>>> v3.18
 =======
 /* This header comes first in the scatter-gather list.
  * If VIRTIO_F_ANY_LAYOUT is not negotiated, it must

@@ -403,7 +403,13 @@ _GLOBAL(set_context)
  */
 _GLOBAL(loadcam_entry)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD_REG_ADDR(r4, TLBCAM)
+=======
+	mflr	r5
+	LOAD_REG_ADDR_PIC(r4, TLBCAM)
+	mtlr	r5
+>>>>>>> v3.18
 =======
 	mflr	r5
 	LOAD_REG_ADDR_PIC(r4, TLBCAM)

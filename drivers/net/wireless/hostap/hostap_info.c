@@ -218,7 +218,11 @@ static void prism2_host_roaming(local_info_t *local)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(req.bssid, selected->bssid, 6);
+=======
+	memcpy(req.bssid, selected->bssid, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(req.bssid, selected->bssid, ETH_ALEN);
 >>>>>>> v3.18

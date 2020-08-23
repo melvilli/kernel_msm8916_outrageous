@@ -30,12 +30,15 @@ static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
 static inline pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *page = alloc_pages(GFP_KERNEL|__GFP_REPEAT|__GFP_ZERO, 0);
 	pte_t *pte;
 
 	if(!page)
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct page *page;
 	pte_t *pte;
 
@@ -46,6 +49,9 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long addres
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pte = kmap(page);
@@ -54,7 +60,10 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long addres
 	nocache_page(pte);
 	kunmap(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_page_ctor(page);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return page;

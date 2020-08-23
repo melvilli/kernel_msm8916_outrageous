@@ -30,7 +30,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mii.h>
@@ -40,6 +43,10 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -80,15 +87,21 @@ void temac_iow(struct temac_local *lp, int offset, u32 value)
 int temac_indirect_busywait(struct temac_local *lp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long end = jiffies + 2;
 
 	while (!(temac_ior(lp, XTE_RDY0_OFFSET) & XTE_RDY0_HARD_ACS_RDY_MASK)) {
 		if (end - jiffies <= 0) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long end = jiffies + 2;
 
 	while (!(temac_ior(lp, XTE_RDY0_OFFSET) & XTE_RDY0_HARD_ACS_RDY_MASK)) {
 		if (time_before_eq(end, jiffies)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			WARN_ON(1);
 			return -ETIMEDOUT;
@@ -258,6 +271,7 @@ static int temac_dma_bd_init(struct net_device *ndev)
 	/* allocate the tx and rx ring buffer descriptors. */
 	/* returns a virtual address and a physical address. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->tx_bd_v = dma_alloc_coherent(ndev->dev.parent,
 					 sizeof(*lp->tx_bd_v) * TX_BD_NUM,
 					 &lp->tx_bd_p, GFP_KERNEL | __GFP_ZERO);
@@ -268,6 +282,8 @@ static int temac_dma_bd_init(struct net_device *ndev)
 					 sizeof(*lp->rx_bd_v) * RX_BD_NUM,
 					 &lp->rx_bd_p, GFP_KERNEL | __GFP_ZERO);
 =======
+=======
+>>>>>>> v3.18
 	lp->tx_bd_v = dma_zalloc_coherent(ndev->dev.parent,
 					  sizeof(*lp->tx_bd_v) * TX_BD_NUM,
 					  &lp->tx_bd_p, GFP_KERNEL);
@@ -277,6 +293,9 @@ static int temac_dma_bd_init(struct net_device *ndev)
 	lp->rx_bd_v = dma_zalloc_coherent(ndev->dev.parent,
 					  sizeof(*lp->rx_bd_v) * RX_BD_NUM,
 					  &lp->rx_bd_p, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!lp->rx_bd_v)
 		goto out;
@@ -798,8 +817,13 @@ static void ll_temac_recv(struct net_device *ndev)
 		/* if we're doing rx csum offload, set it up */
 		if (((lp->temac_features & TEMAC_FEATURE_RX_CSUM) != 0) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(skb->protocol == __constant_htons(ETH_P_IP)) &&
 			(skb->len > 64)) {
+=======
+		    (skb->protocol == htons(ETH_P_IP)) &&
+		    (skb->len > 64)) {
+>>>>>>> v3.18
 =======
 		    (skb->protocol == htons(ETH_P_IP)) &&
 		    (skb->len > 64)) {
@@ -1044,8 +1068,12 @@ static int temac_of_probe(struct platform_device *op)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(ndev);
 	dev_set_drvdata(&op->dev, ndev);
+=======
+	platform_set_drvdata(op, ndev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, ndev);
 >>>>>>> v3.18
@@ -1178,7 +1206,11 @@ static int temac_of_probe(struct platform_device *op)
 static int temac_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&op->dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1188,10 +1220,15 @@ static int temac_of_remove(struct platform_device *op)
 	unregister_netdev(ndev);
 	sysfs_remove_group(&lp->dev->kobj, &temac_attr_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lp->phy_node)
 		of_node_put(lp->phy_node);
 	lp->phy_node = NULL;
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	of_node_put(lp->phy_node);
+	lp->phy_node = NULL;
+>>>>>>> v3.18
 =======
 	of_node_put(lp->phy_node);
 	lp->phy_node = NULL;
@@ -1217,7 +1254,10 @@ static struct platform_driver temac_of_driver = {
 	.remove = temac_of_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "xilinx_temac",

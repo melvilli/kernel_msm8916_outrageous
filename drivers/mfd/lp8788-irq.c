@@ -67,6 +67,10 @@ static void lp8788_irq_enable(struct irq_data *data)
 {
 	struct lp8788_irq_data *irqd = irq_data_get_irq_chip_data(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -77,6 +81,10 @@ static void lp8788_irq_disable(struct irq_data *data)
 {
 	struct lp8788_irq_data *irqd = irq_data_get_irq_chip_data(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

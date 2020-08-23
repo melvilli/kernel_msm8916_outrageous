@@ -196,6 +196,7 @@ get_entry(const void *base, unsigned int offset)
 /* All zeroes == unconditional rule. */
 /* Mildly perf critical (only if packet tracing is on) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool unconditional(const struct ip6t_entry *e)
 {
 	static const struct ip6t_ip6 uncond;
@@ -203,11 +204,16 @@ static inline bool unconditional(const struct ip6t_entry *e)
 	return e->target_offset == sizeof(struct ip6t_entry) &&
 	       memcmp(&e->ipv6, &uncond, sizeof(uncond)) == 0;
 =======
+=======
+>>>>>>> v3.18
 static inline bool unconditional(const struct ip6t_ip6 *ipv6)
 {
 	static const struct ip6t_ip6 uncond;
 
 	return memcmp(ipv6, &uncond, sizeof(uncond)) == 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -265,16 +271,22 @@ get_chainname_rulenum(const struct ip6t_entry *s, const struct ip6t_entry *e,
 		(*rulenum)++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unconditional(s) &&
 		    strcmp(t->target.u.kernel.target->name,
 			   XT_STANDARD_TARGET) == 0 &&
 		    t->verdict < 0) {
 =======
+=======
+>>>>>>> v3.18
 		if (s->target_offset == sizeof(struct ip6t_entry) &&
 		    strcmp(t->target.u.kernel.target->name,
 			   XT_STANDARD_TARGET) == 0 &&
 		    t->verdict < 0 &&
 		    unconditional(&s->ipv6)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Tail of chains: STANDARD target (return/policy) */
 			*comment = *chainname == hookname
@@ -499,16 +511,22 @@ mark_source_chains(const struct xt_table_info *newinfo,
 
 			/* Unconditional return/END. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((unconditional(e) &&
 			     (strcmp(t->target.u.user.name,
 				     XT_STANDARD_TARGET) == 0) &&
 			     t->verdict < 0) || visited) {
 =======
+=======
+>>>>>>> v3.18
 			if ((e->target_offset == sizeof(struct ip6t_entry) &&
 			     (strcmp(t->target.u.user.name,
 				     XT_STANDARD_TARGET) == 0) &&
 			     t->verdict < 0 &&
 			     unconditional(&e->ipv6)) || visited) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				unsigned int oldpos, size;
 
@@ -551,8 +569,11 @@ mark_source_chains(const struct xt_table_info *newinfo,
 				e = (struct ip6t_entry *)
 					(entry0 + pos + size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (pos + size >= newinfo->size)
 					return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				e->counters.pcnt = pos;
@@ -577,8 +598,11 @@ mark_source_chains(const struct xt_table_info *newinfo,
 					/* ... this is a fallthru */
 					newpos = pos + e->next_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (newpos >= newinfo->size)
 						return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				}
@@ -608,7 +632,10 @@ static void cleanup_match(struct xt_entry_match *m, struct net *net)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 check_entry(const struct ip6t_entry *e, const char *name)
 {
@@ -630,6 +657,9 @@ check_entry(const struct ip6t_entry *e, const char *name)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int check_match(struct xt_entry_match *m, struct xt_mtchk_param *par)
 {
@@ -710,11 +740,17 @@ find_check_entry(struct ip6t_entry *e, struct net *net, const char *name,
 	struct xt_entry_match *ematch;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = check_entry(e, name);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	j = 0;
 	mtpar.net	= net;
@@ -760,7 +796,11 @@ static bool check_underflow(const struct ip6t_entry *e)
 	unsigned int verdict;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!unconditional(e))
+=======
+	if (!unconditional(&e->ipv6))
+>>>>>>> v3.18
 =======
 	if (!unconditional(&e->ipv6))
 >>>>>>> v3.18
@@ -784,11 +824,17 @@ check_entry_size_and_hooks(struct ip6t_entry *e,
 {
 	unsigned int h;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	if ((unsigned long)e % __alignof__(struct ip6t_entry) != 0 ||
 	    (unsigned char *)e + sizeof(struct ip6t_entry) >= limit ||
 	    (unsigned char *)e + e->next_offset > limit) {
+=======
+
+	if ((unsigned long)e % __alignof__(struct ip6t_entry) != 0 ||
+	    (unsigned char *)e + sizeof(struct ip6t_entry) >= limit) {
+>>>>>>> v3.18
 =======
 
 	if ((unsigned long)e % __alignof__(struct ip6t_entry) != 0 ||
@@ -806,6 +852,7 @@ check_entry_size_and_hooks(struct ip6t_entry *e,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ip6_checkentry(&e->ipv6))
 		return -EINVAL;
 
@@ -814,6 +861,8 @@ check_entry_size_and_hooks(struct ip6t_entry *e,
 	if (err)
 		return err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Check hooks & underflows */
@@ -825,9 +874,15 @@ check_entry_size_and_hooks(struct ip6t_entry *e,
 		if ((unsigned char *)e - base == underflows[h]) {
 			if (!check_underflow(e)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_debug("Underflows must be unconditional and "
 					 "use the STANDARD target with "
 					 "ACCEPT/DROP\n");
+=======
+				pr_err("Underflows must be unconditional and "
+				       "use the STANDARD target with "
+				       "ACCEPT/DROP\n");
+>>>>>>> v3.18
 =======
 				pr_err("Underflows must be unconditional and "
 				       "use the STANDARD target with "
@@ -1342,9 +1397,12 @@ do_replace(struct net *net, const void __user *user, unsigned int len)
 	if (tmp.num_counters >= INT_MAX / sizeof(struct xt_counters))
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp.num_counters == 0)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tmp.name[sizeof(tmp.name)-1] = 0;
@@ -1389,11 +1447,17 @@ do_add_counters(struct net *net, const void __user *user, unsigned int len,
 	struct xt_counters_info tmp;
 	struct xt_counters *paddc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int num_counters;
 	char *name;
 	int size;
 	void *ptmp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct xt_table *t;
 	const struct xt_table_info *private;
@@ -1402,12 +1466,15 @@ do_add_counters(struct net *net, const void __user *user, unsigned int len,
 	struct ip6t_entry *iter;
 	unsigned int addend;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	paddc = xt_copy_counters_from_user(user, len, &tmp, compat);
 	if (IS_ERR(paddc))
 		return PTR_ERR(paddc);
 	t = xt_find_table_lock(net, AF_INET6, tmp.name);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 	struct compat_xt_counters_info compat_tmp;
 
@@ -1448,6 +1515,9 @@ do_add_counters(struct net *net, const void __user *user, unsigned int len,
 	}
 
 	t = xt_find_table_lock(net, AF_INET6, name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR_OR_NULL(t)) {
 		ret = t ? PTR_ERR(t) : -ENOENT;
@@ -1458,7 +1528,11 @@ do_add_counters(struct net *net, const void __user *user, unsigned int len,
 	local_bh_disable();
 	private = t->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (private->number != tmp.num_counters) {
+=======
+	if (private->number != num_counters) {
+>>>>>>> v3.18
 =======
 	if (private->number != num_counters) {
 >>>>>>> v3.18
@@ -1542,6 +1616,10 @@ compat_copy_entry_to_user(struct ip6t_entry *e, void __user **dstptr,
 static int
 compat_find_calc_match(struct xt_entry_match *m,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		       const char *name,
+>>>>>>> v3.18
 =======
 		       const char *name,
 >>>>>>> v3.18
@@ -1581,12 +1659,18 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 				  unsigned int *size,
 				  const unsigned char *base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const unsigned char *limit)
 =======
+=======
+>>>>>>> v3.18
 				  const unsigned char *limit,
 				  const unsigned int *hook_entries,
 				  const unsigned int *underflows,
 				  const char *name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct xt_entry_match *ematch;
@@ -1595,6 +1679,7 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 	unsigned int entry_offset;
 	unsigned int j;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, off;
 
 	duprintf("check_compat_entry_size_and_hooks %p\n", e);
@@ -1602,11 +1687,16 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 	    (unsigned char *)e + sizeof(struct compat_ip6t_entry) >= limit ||
 	    (unsigned char *)e + e->next_offset > limit) {
 =======
+=======
+>>>>>>> v3.18
 	int ret, off, h;
 
 	duprintf("check_compat_entry_size_and_hooks %p\n", e);
 	if ((unsigned long)e % __alignof__(struct compat_ip6t_entry) != 0 ||
 	    (unsigned char *)e + sizeof(struct compat_ip6t_entry) >= limit) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		duprintf("Bad offset %p, limit = %p\n", e, limit);
 		return -EINVAL;
@@ -1620,11 +1710,16 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ip6_checkentry(&e->ipv6))
 		return -EINVAL;
 
 	ret = xt_compat_check_entry_offsets(e, e->elems,
 					    e->target_offset, e->next_offset);
+=======
+	/* For purposes of check_entry casting the compat entry is fine */
+	ret = check_entry((struct ip6t_entry *)e, name);
+>>>>>>> v3.18
 =======
 	/* For purposes of check_entry casting the compat entry is fine */
 	ret = check_entry((struct ip6t_entry *)e, name);
@@ -1637,8 +1732,13 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 	j = 0;
 	xt_ematch_foreach(ematch, e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = compat_find_calc_match(ematch, &e->ipv6, e->comefrom,
 					     &off);
+=======
+		ret = compat_find_calc_match(ematch, name,
+					     &e->ipv6, e->comefrom, &off);
+>>>>>>> v3.18
 =======
 		ret = compat_find_calc_match(ematch, name,
 					     &e->ipv6, e->comefrom, &off);
@@ -1666,7 +1766,10 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Check hooks & underflows */
 	for (h = 0; h < NF_INET_NUMHOOKS; h++) {
 		if ((unsigned char *)e - base == hook_entries[h])
@@ -1678,6 +1781,9 @@ check_compat_entry_size_and_hooks(struct compat_ip6t_entry *e,
 	/* Clear counters and comefrom */
 	memset(&e->counters, 0, sizeof(e->counters));
 	e->comefrom = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1693,9 +1799,15 @@ release_matches:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 compat_copy_entry_from_user(struct compat_ip6t_entry *e, void **dstptr,
 			    unsigned int *size,
+=======
+static int
+compat_copy_entry_from_user(struct compat_ip6t_entry *e, void **dstptr,
+			    unsigned int *size, const char *name,
+>>>>>>> v3.18
 =======
 static int
 compat_copy_entry_from_user(struct compat_ip6t_entry *e, void **dstptr,
@@ -1707,14 +1819,20 @@ compat_copy_entry_from_user(struct compat_ip6t_entry *e, void **dstptr,
 	struct ip6t_entry *de;
 	unsigned int origsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int h;
 	struct xt_entry_match *ematch;
 
 =======
+=======
+>>>>>>> v3.18
 	int ret, h;
 	struct xt_entry_match *ematch;
 
 	ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	origsize = *size;
 	de = (struct ip6t_entry *)*dstptr;
@@ -1725,15 +1843,21 @@ compat_copy_entry_from_user(struct compat_ip6t_entry *e, void **dstptr,
 	*size += sizeof(struct ip6t_entry) - sizeof(struct compat_ip6t_entry);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xt_ematch_foreach(ematch, e)
 		xt_compat_match_from_user(ematch, dstptr, size);
 
 =======
+=======
+>>>>>>> v3.18
 	xt_ematch_foreach(ematch, e) {
 		ret = xt_compat_match_from_user(ematch, dstptr, size);
 		if (ret != 0)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	de->target_offset = e->target_offset - (origsize - *size);
 	t = compat_ip6t_get_target(e);
@@ -1747,7 +1871,10 @@ compat_copy_entry_from_user(struct compat_ip6t_entry *e, void **dstptr,
 			newinfo->underflow[h] -= origsize - *size;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1784,16 +1911,22 @@ static int compat_check_entry(struct ip6t_entry *e, struct net *net,
 		cleanup_match(ematch, net);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int
 translate_compat_table(struct net *net,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct xt_table_info **pinfo,
 		       void **pentry0,
 		       const struct compat_ip6t_replace *compatr)
 =======
+=======
+>>>>>>> v3.18
 		       const char *name,
 		       unsigned int valid_hooks,
 		       struct xt_table_info **pinfo,
@@ -1802,6 +1935,9 @@ translate_compat_table(struct net *net,
 		       unsigned int number,
 		       unsigned int *hook_entries,
 		       unsigned int *underflows)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int i, j;
@@ -1809,7 +1945,11 @@ translate_compat_table(struct net *net,
 	void *pos, *entry0, *entry1;
 	struct compat_ip6t_entry *iter0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ip6t_replace repl;
+=======
+	struct ip6t_entry *iter1;
+>>>>>>> v3.18
 =======
 	struct ip6t_entry *iter1;
 >>>>>>> v3.18
@@ -1819,9 +1959,12 @@ translate_compat_table(struct net *net,
 	info = *pinfo;
 	entry0 = *pentry0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = compatr->size;
 	info->number = compatr->num_entries;
 =======
+=======
+>>>>>>> v3.18
 	size = total_size;
 	info->number = number;
 
@@ -1830,11 +1973,15 @@ translate_compat_table(struct net *net,
 		info->hook_entry[i] = 0xFFFFFFFF;
 		info->underflow[i] = 0xFFFFFFFF;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	duprintf("translate_compat_table: size %u\n", info->size);
 	j = 0;
 	xt_compat_lock(AF_INET6);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xt_compat_init_offsets(AF_INET6, compatr->num_entries);
 	/* Walk through entries, checking offsets. */
@@ -1843,6 +1990,8 @@ translate_compat_table(struct net *net,
 							entry0,
 							entry0 + compatr->size);
 =======
+=======
+>>>>>>> v3.18
 	xt_compat_init_offsets(AF_INET6, number);
 	/* Walk through entries, checking offsets. */
 	xt_entry_foreach(iter0, entry0, total_size) {
@@ -1852,6 +2001,9 @@ translate_compat_table(struct net *net,
 							hook_entries,
 							underflows,
 							name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret != 0)
 			goto out_unlock;
@@ -1860,6 +2012,7 @@ translate_compat_table(struct net *net,
 
 	ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (j != compatr->num_entries) {
 		duprintf("translate_compat_table: %u not %u entries\n",
 			 j, compatr->num_entries);
@@ -1867,6 +2020,8 @@ translate_compat_table(struct net *net,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (j != number) {
 		duprintf("translate_compat_table: %u not %u entries\n",
 			 j, number);
@@ -1890,12 +2045,16 @@ translate_compat_table(struct net *net,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = -ENOMEM;
 	newinfo = xt_alloc_table_info(size);
 	if (!newinfo)
 		goto out_unlock;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	newinfo->number = compatr->num_entries;
 	for (i = 0; i < NF_INET_NUMHOOKS; i++) {
@@ -1927,6 +2086,8 @@ translate_compat_table(struct net *net,
 	if (ret)
 		goto free_newinfo;
 =======
+=======
+>>>>>>> v3.18
 	newinfo->number = number;
 	for (i = 0; i < NF_INET_NUMHOOKS; i++) {
 		newinfo->hook_entry[i] = info->hook_entry[i];
@@ -1988,6 +2149,9 @@ translate_compat_table(struct net *net,
 	for_each_possible_cpu(i)
 		if (newinfo->entries[i] && newinfo->entries[i] != entry1)
 			memcpy(newinfo->entries[i], entry1, newinfo->size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*pinfo = newinfo;
@@ -1998,11 +2162,16 @@ translate_compat_table(struct net *net,
 free_newinfo:
 	xt_free_table_info(newinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 out_unlock:
 	xt_compat_flush_offsets(AF_INET6);
 	xt_compat_unlock(AF_INET6);
 	xt_entry_foreach(iter0, entry0, compatr->size) {
+=======
+out:
+	xt_entry_foreach(iter0, entry0, total_size) {
+>>>>>>> v3.18
 =======
 out:
 	xt_entry_foreach(iter0, entry0, total_size) {
@@ -2013,11 +2182,17 @@ out:
 	}
 	return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 out_unlock:
 	xt_compat_flush_offsets(AF_INET6);
 	xt_compat_unlock(AF_INET6);
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2039,9 +2214,12 @@ compat_do_replace(struct net *net, void __user *user, unsigned int len)
 	if (tmp.num_counters >= INT_MAX / sizeof(struct xt_counters))
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp.num_counters == 0)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tmp.name[sizeof(tmp.name)-1] = 0;
@@ -2059,12 +2237,18 @@ compat_do_replace(struct net *net, void __user *user, unsigned int len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = translate_compat_table(net, &newinfo, &loc_cpu_entry, &tmp);
 =======
+=======
+>>>>>>> v3.18
 	ret = translate_compat_table(net, tmp.name, tmp.valid_hooks,
 				     &newinfo, &loc_cpu_entry, tmp.size,
 				     tmp.num_entries, tmp.hook_entry,
 				     tmp.underflow);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret != 0)
 		goto free_newinfo;

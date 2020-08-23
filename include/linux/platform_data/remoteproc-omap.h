@@ -51,7 +51,11 @@ void __init omap_rproc_reserve_cma(void);
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init omap_rproc_reserve_cma(void)
+=======
+static inline void __init omap_rproc_reserve_cma(void)
+>>>>>>> v3.18
 =======
 static inline void __init omap_rproc_reserve_cma(void)
 >>>>>>> v3.18

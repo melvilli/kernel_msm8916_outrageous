@@ -132,7 +132,11 @@ static int __init proc_nommu_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_nommu_init);
+=======
+fs_initcall(proc_nommu_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_nommu_init);
 >>>>>>> v3.18

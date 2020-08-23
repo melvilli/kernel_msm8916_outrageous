@@ -60,7 +60,10 @@
 #define ARPHRD_DDCMP    517		/* Digital's DDCMP protocol     */
 #define ARPHRD_RAWHDLC	518		/* Raw HDLC			*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARPHRD_RAWIP	530	        /* Raw IP                       */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -98,6 +101,11 @@
 #define ARPHRD_CAIF	822		/* CAIF media type		*/
 #define ARPHRD_IP6GRE	823		/* GRE over IPv6		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ARPHRD_NETLINK	824		/* Netlink header		*/
+#define ARPHRD_6LOWPAN	825		/* IPv6 over LoWPAN             */
+>>>>>>> v3.18
 =======
 #define ARPHRD_NETLINK	824		/* Netlink header		*/
 #define ARPHRD_6LOWPAN	825		/* IPv6 over LoWPAN             */

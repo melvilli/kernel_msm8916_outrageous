@@ -26,9 +26,14 @@ int send_fault_sig(struct pt_regs *regs)
 	siginfo.si_code = current->thread.code;
 	siginfo.si_addr = (void *)current->thread.faddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk("send_fault_sig: %p,%d,%d\n", siginfo.si_addr, siginfo.si_signo, siginfo.si_code);
 #endif
+=======
+	pr_debug("send_fault_sig: %p,%d,%d\n", siginfo.si_addr,
+		 siginfo.si_signo, siginfo.si_code);
+>>>>>>> v3.18
 =======
 	pr_debug("send_fault_sig: %p,%d,%d\n", siginfo.si_addr,
 		 siginfo.si_signo, siginfo.si_code);
@@ -51,15 +56,21 @@ int send_fault_sig(struct pt_regs *regs)
 		 */
 		if ((unsigned long)siginfo.si_addr < PAGE_SIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ALERT "Unable to handle kernel NULL pointer dereference");
 		else
 			printk(KERN_ALERT "Unable to handle kernel access");
 		printk(" at virtual address %p\n", siginfo.si_addr);
 =======
+=======
+>>>>>>> v3.18
 			pr_alert("Unable to handle kernel NULL pointer dereference");
 		else
 			pr_alert("Unable to handle kernel access");
 		pr_cont(" at virtual address %p\n", siginfo.si_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		die_if_kernel("Oops", regs, 0 /*error_code*/);
 		do_exit(SIGKILL);
@@ -88,11 +99,16 @@ int do_page_fault(struct pt_regs *regs, unsigned long address,
 	unsigned int flags = FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk ("do page fault:\nregs->sr=%#x, regs->pc=%#lx, address=%#lx, %ld, %p\n",
 		regs->sr, regs->pc, address, error_code,
 		current->mm->pgd);
 #endif
+=======
+	pr_debug("do page fault:\nregs->sr=%#x, regs->pc=%#lx, address=%#lx, %ld, %p\n",
+		regs->sr, regs->pc, address, error_code, mm ? mm->pgd : NULL);
+>>>>>>> v3.18
 =======
 	pr_debug("do page fault:\nregs->sr=%#x, regs->pc=%#lx, address=%#lx, %ld, %p\n",
 		regs->sr, regs->pc, address, error_code, mm ? mm->pgd : NULL);
@@ -136,9 +152,13 @@ retry:
  */
 good_area:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk("do_page_fault: good_area\n");
 #endif
+=======
+	pr_debug("do_page_fault: good_area\n");
+>>>>>>> v3.18
 =======
 	pr_debug("do_page_fault: good_area\n");
 >>>>>>> v3.18
@@ -165,9 +185,13 @@ good_area:
 
 	fault = handle_mm_fault(mm, vma, address, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk("handle_mm_fault returns %d\n",fault);
 #endif
+=======
+	pr_debug("handle_mm_fault returns %d\n", fault);
+>>>>>>> v3.18
 =======
 	pr_debug("handle_mm_fault returns %d\n", fault);
 >>>>>>> v3.18
@@ -179,8 +203,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto map_err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)

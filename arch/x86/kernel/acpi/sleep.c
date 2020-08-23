@@ -17,7 +17,10 @@
 #include <asm/realmode.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ftrace.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "../../realmode/rm/wakeup.h"
@@ -31,8 +34,11 @@ static char temp_stack[4096];
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * acpi_suspend_lowlevel - save kernel state
 =======
+=======
+>>>>>>> v3.18
  * x86_acpi_enter_sleep_state - enter sleep state
  * @state: Sleep state to enter.
  *
@@ -45,13 +51,20 @@ acpi_status asmlinkage __visible x86_acpi_enter_sleep_state(u8 state)
 
 /**
  * x86_acpi_suspend_lowlevel - save kernel state
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Create an identity mapped page table and copy the wakeup routine to
  * low memory.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_suspend_lowlevel(void)
+=======
+int x86_acpi_suspend_lowlevel(void)
+>>>>>>> v3.18
 =======
 int x86_acpi_suspend_lowlevel(void)
 >>>>>>> v3.18
@@ -120,6 +133,7 @@ int x86_acpi_suspend_lowlevel(void)
 #endif /* CONFIG_64BIT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Pause/unpause graph tracing around do_suspend_lowlevel as it has
 	 * inconsistent call/return info after it jumps to the wakeup vector.
@@ -127,6 +141,9 @@ int x86_acpi_suspend_lowlevel(void)
 	pause_graph_tracing();
 	do_suspend_lowlevel();
 	unpause_graph_tracing();
+=======
+	do_suspend_lowlevel();
+>>>>>>> v3.18
 =======
 	do_suspend_lowlevel();
 >>>>>>> v3.18

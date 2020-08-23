@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -74,15 +84,21 @@
 #include <linux/etherdevice.h>
 #include <linux/ip.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/cfg80211.h>
 #include <net/ipv6.h>
 #include <net/tcp.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <net/cfg80211.h>
 #include <net/ipv6.h>
 #include <net/tcp.h>
 #include <net/addrconf.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "iwl-modparams.h"
 #include "fw-api.h"
@@ -123,7 +139,11 @@ void iwl_mvm_ipv6_addr_change(struct ieee80211_hw *hw,
 		mvmvif->target_ipv6_addrs[idx] = ifa->addr;
 		idx++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (idx >= IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS)
+=======
+		if (idx >= IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_MAX)
+>>>>>>> v3.18
 =======
 		if (idx >= IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_MAX)
 >>>>>>> v3.18
@@ -156,7 +176,11 @@ struct wowlan_key_data {
 	struct iwl_wowlan_tkip_params_cmd *tkip;
 	bool error, use_rsc_tsc, use_tkip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gtk_key_idx;
+=======
+	int wep_key_idx;
+>>>>>>> v3.18
 =======
 	int wep_key_idx;
 >>>>>>> v3.18
@@ -214,6 +238,7 @@ static void iwl_mvm_wowlan_program_keys(struct ieee80211_hw *hw,
 		} else {
 			/* others start at 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data->gtk_key_idx++;
 			wkc.wep_key.key_offset = data->gtk_key_idx;
 		}
@@ -221,11 +246,16 @@ static void iwl_mvm_wowlan_program_keys(struct ieee80211_hw *hw,
 		ret = iwl_mvm_send_cmd_pdu(mvm, WEP_KEY, CMD_SYNC,
 					   sizeof(wkc), &wkc);
 =======
+=======
+>>>>>>> v3.18
 			data->wep_key_idx++;
 			wkc.wep_key.key_offset = data->wep_key_idx;
 		}
 
 		ret = iwl_mvm_send_cmd_pdu(mvm, WEP_KEY, 0, sizeof(wkc), &wkc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data->error = ret != 0;
 
@@ -330,6 +360,7 @@ static void iwl_mvm_wowlan_program_keys(struct ieee80211_hw *hw,
 
 			ieee80211_get_key_rx_seq(key, i, &seq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			aes_sc[i].pn = cpu_to_le64((u64)pn[5] |
 						   ((u64)pn[4] << 8) |
 						   ((u64)pn[3] << 16) |
@@ -337,12 +368,17 @@ static void iwl_mvm_wowlan_program_keys(struct ieee80211_hw *hw,
 						   ((u64)pn[1] << 32) |
 						   ((u64)pn[0] << 40));
 =======
+=======
+>>>>>>> v3.18
 			aes_sc->pn = cpu_to_le64((u64)pn[5] |
 						 ((u64)pn[4] << 8) |
 						 ((u64)pn[3] << 16) |
 						 ((u64)pn[2] << 24) |
 						 ((u64)pn[1] << 32) |
 						 ((u64)pn[0] << 40));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		data->use_rsc_tsc = true;
@@ -359,9 +395,12 @@ static void iwl_mvm_wowlan_program_keys(struct ieee80211_hw *hw,
 		mvm->ptk_icvlen = key->icv_len;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->gtk_key_idx++;
 		key->hw_key_idx = data->gtk_key_idx;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * firmware only supports TSC/RSC for a single key,
 		 * so if there are multiple keep overwriting them
@@ -369,6 +408,9 @@ static void iwl_mvm_wowlan_program_keys(struct ieee80211_hw *hw,
 		 * list_add_tail().
 		 */
 		key->hw_key_idx = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mvm->gtk_ivlen = key->iv_len;
 		mvm->gtk_icvlen = key->icv_len;
@@ -388,7 +430,10 @@ static int iwl_mvm_send_patterns(struct iwl_mvm *mvm,
 		.id = WOWLAN_PATTERNS,
 		.dataflags[0] = IWL_HCMD_DFL_NOCOPY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -425,6 +470,7 @@ static int iwl_mvm_send_patterns(struct iwl_mvm *mvm,
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int iwl_mvm_send_proto_offload(struct iwl_mvm *mvm,
 				      struct ieee80211_vif *vif)
@@ -463,6 +509,8 @@ static int iwl_mvm_send_proto_offload(struct iwl_mvm *mvm,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 enum iwl_mvm_tcp_packet_type {
 	MVM_TCP_TX_SYN,
 	MVM_TCP_RX_SYNACK,
@@ -479,8 +527,12 @@ static __le16 pseudo_hdr_check(int len, __be32 saddr, __be32 daddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void iwl_mvm_build_tcp_packet(struct iwl_mvm *mvm,
 				     struct ieee80211_vif *vif,
+=======
+static void iwl_mvm_build_tcp_packet(struct ieee80211_vif *vif,
+>>>>>>> v3.18
 =======
 static void iwl_mvm_build_tcp_packet(struct ieee80211_vif *vif,
 >>>>>>> v3.18
@@ -611,7 +663,10 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 		.len = { sizeof(*cfg), },
 		.dataflags = { IWL_HCMD_DFL_NOCOPY, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -633,7 +688,11 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 	/* SYN (TX) */
 	iwl_mvm_build_tcp_packet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvm, vif, tcp, cfg->syn_tx.data, NULL,
+=======
+		vif, tcp, cfg->syn_tx.data, NULL,
+>>>>>>> v3.18
 =======
 		vif, tcp, cfg->syn_tx.data, NULL,
 >>>>>>> v3.18
@@ -644,7 +703,11 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 	/* SYN/ACK (RX) */
 	iwl_mvm_build_tcp_packet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvm, vif, tcp, cfg->synack_rx.data, cfg->synack_rx.rx_mask,
+=======
+		vif, tcp, cfg->synack_rx.data, cfg->synack_rx.rx_mask,
+>>>>>>> v3.18
 =======
 		vif, tcp, cfg->synack_rx.data, cfg->synack_rx.rx_mask,
 >>>>>>> v3.18
@@ -655,7 +718,11 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 	/* KEEPALIVE/ACK (TX) */
 	iwl_mvm_build_tcp_packet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvm, vif, tcp, cfg->keepalive_tx.data, NULL,
+=======
+		vif, tcp, cfg->keepalive_tx.data, NULL,
+>>>>>>> v3.18
 =======
 		vif, tcp, cfg->keepalive_tx.data, NULL,
 >>>>>>> v3.18
@@ -683,7 +750,11 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 	/* ACK (RX) */
 	iwl_mvm_build_tcp_packet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvm, vif, tcp, cfg->keepalive_ack_rx.data,
+=======
+		vif, tcp, cfg->keepalive_ack_rx.data,
+>>>>>>> v3.18
 =======
 		vif, tcp, cfg->keepalive_ack_rx.data,
 >>>>>>> v3.18
@@ -695,7 +766,11 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 	/* WAKEUP (RX) */
 	iwl_mvm_build_tcp_packet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvm, vif, tcp, cfg->wake_rx.data, cfg->wake_rx.rx_mask,
+=======
+		vif, tcp, cfg->wake_rx.data, cfg->wake_rx.rx_mask,
+>>>>>>> v3.18
 =======
 		vif, tcp, cfg->wake_rx.data, cfg->wake_rx.rx_mask,
 >>>>>>> v3.18
@@ -707,7 +782,11 @@ static int iwl_mvm_send_remote_wake_cfg(struct iwl_mvm *mvm,
 	/* FIN */
 	iwl_mvm_build_tcp_packet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvm, vif, tcp, cfg->fin_tx.data, NULL,
+=======
+		vif, tcp, cfg->fin_tx.data, NULL,
+>>>>>>> v3.18
 =======
 		vif, tcp, cfg->fin_tx.data, NULL,
 >>>>>>> v3.18
@@ -786,10 +865,15 @@ static int iwl_mvm_d3_reprogram(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 	if (WARN_ON(!vif->bss_conf.assoc))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* hack */
 	vif->bss_conf.assoc = false;
 	ret = iwl_mvm_mac_ctxt_add(mvm, vif);
 	vif->bss_conf.assoc = true;
+=======
+
+	ret = iwl_mvm_mac_ctxt_add(mvm, vif);
+>>>>>>> v3.18
 =======
 
 	ret = iwl_mvm_mac_ctxt_add(mvm, vif);
@@ -830,7 +914,11 @@ static int iwl_mvm_d3_reprogram(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 	rcu_assign_pointer(mvm->fw_id_to_mac_id[mvmvif->ap_sta_id], ap_sta);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_mvm_mac_ctxt_changed(mvm, vif);
+=======
+	ret = iwl_mvm_mac_ctxt_changed(mvm, vif, false, NULL);
+>>>>>>> v3.18
 =======
 	ret = iwl_mvm_mac_ctxt_changed(mvm, vif, false, NULL);
 >>>>>>> v3.18
@@ -842,8 +930,13 @@ static int iwl_mvm_d3_reprogram(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 		cpu_to_le32(FW_CMD_ID_AND_COLOR(mvmvif->phy_ctxt->id,
 						mvmvif->phy_ctxt->color));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	quota_cmd.quotas[0].quota = cpu_to_le32(100);
 	quota_cmd.quotas[0].max_duration = cpu_to_le32(1000);
+=======
+	quota_cmd.quotas[0].quota = cpu_to_le32(IWL_MVM_MAX_QUOTA);
+	quota_cmd.quotas[0].max_duration = cpu_to_le32(IWL_MVM_MAX_QUOTA);
+>>>>>>> v3.18
 =======
 	quota_cmd.quotas[0].quota = cpu_to_le32(IWL_MVM_MAX_QUOTA);
 	quota_cmd.quotas[0].max_duration = cpu_to_le32(IWL_MVM_MAX_QUOTA);
@@ -853,7 +946,11 @@ static int iwl_mvm_d3_reprogram(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 		quota_cmd.quotas[i].id_and_color = cpu_to_le32(FW_CTXT_INVALID);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_mvm_send_cmd_pdu(mvm, TIME_QUOTA_CMD, CMD_SYNC,
+=======
+	ret = iwl_mvm_send_cmd_pdu(mvm, TIME_QUOTA_CMD, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_mvm_send_cmd_pdu(mvm, TIME_QUOTA_CMD, 0,
 >>>>>>> v3.18
@@ -865,8 +962,11 @@ static int iwl_mvm_d3_reprogram(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iwl_mvm_suspend(struct ieee80211_hw *hw, struct cfg80211_wowlan *wowlan)
 =======
+=======
+>>>>>>> v3.18
 static int iwl_mvm_get_last_nonqos_seq(struct iwl_mvm *mvm,
 				       struct ieee80211_vif *vif)
 {
@@ -943,6 +1043,9 @@ iwl_mvm_send_wowlan_config_cmd(struct iwl_mvm *mvm,
 static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 			     struct cfg80211_wowlan *wowlan,
 			     bool test)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct iwl_mvm *mvm = IWL_MAC80211_GET_MVM(hw);
@@ -954,15 +1057,21 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	struct ieee80211_sta *ap_sta;
 	struct iwl_mvm_sta *mvm_ap_sta;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_wowlan_config_cmd wowlan_config_cmd = {};
 	struct iwl_wowlan_kek_kck_material_cmd kek_kck_cmd = {};
 	struct iwl_wowlan_tkip_params_cmd tkip_cmd = {};
 	struct iwl_d3_manager_config d3_cfg_cmd = {
 =======
+=======
+>>>>>>> v3.18
 	struct iwl_wowlan_config_cmd_v3 wowlan_config_cmd = {};
 	struct iwl_wowlan_kek_kck_material_cmd kek_kck_cmd = {};
 	struct iwl_wowlan_tkip_params_cmd tkip_cmd = {};
 	struct iwl_d3_manager_config d3_cfg_cmd_data = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Program the minimum sleep time to 10 seconds, as many
@@ -972,19 +1081,26 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 		.min_sleep_time = cpu_to_le32(10 * 1000 * 1000),
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct iwl_host_cmd d3_cfg_cmd = {
 		.id = D3_CONFIG_CMD,
 		.flags = CMD_WANT_SKB,
 		.data[0] = &d3_cfg_cmd_data,
 		.len[0] = sizeof(d3_cfg_cmd_data),
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct wowlan_key_data key_data = {
 		.use_rsc_tsc = false,
 		.tkip = &tkip_cmd,
 		.use_tkip = false,
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret, i;
 	u16 seq;
@@ -993,6 +1109,8 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	if (WARN_ON(!wowlan))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	int len __maybe_unused;
 
@@ -1004,6 +1122,9 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 		WARN_ON(!test);
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	key_data.rsc_tsc = kzalloc(sizeof(*key_data.rsc_tsc), GFP_KERNEL);
@@ -1013,8 +1134,11 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	mutex_lock(&mvm->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	old_aux_sta_id = mvm->aux_sta.sta_id;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* see if there's only a single BSS vif and it's associated */
@@ -1040,6 +1164,7 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 
 	mvm_ap_sta = (struct iwl_mvm_sta *)ap_sta->drv_priv;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * The D3 firmware still hardcodes the AP station ID for the
@@ -1096,6 +1221,8 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	if (wowlan->rfkill_release)
 		wowlan_config_cmd.wakeup_filter |=
 =======
+=======
+>>>>>>> v3.18
 	/* TODO: wowlan_config_cmd.common.wowlan_ba_teardown_tids */
 
 	wowlan_config_cmd.common.is_11n_connection =
@@ -1131,6 +1258,9 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 
 	if (wowlan->rfkill_release)
 		wowlan_config_cmd.common.wakeup_filter |=
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cpu_to_le32(IWL_WOWLAN_WAKEUP_RF_KILL_DEASSERT);
 
@@ -1140,7 +1270,11 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 		 * since that implies losing the TCP connection.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wowlan_config_cmd.wakeup_filter |=
+=======
+		wowlan_config_cmd.common.wakeup_filter |=
+>>>>>>> v3.18
 =======
 		wowlan_config_cmd.common.wakeup_filter |=
 >>>>>>> v3.18
@@ -1175,6 +1309,7 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	mvm->ptk_icvlen = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * The D3 firmware still hardcodes the AP station ID for the
 	 * BSS we're associated with as 0. As a result, we have to move
@@ -1185,6 +1320,8 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	 */
 	mvm->aux_sta.sta_id = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = iwl_mvm_load_d3_fw(mvm);
@@ -1215,7 +1352,10 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 			struct iwl_host_cmd rsc_tsc_cmd = {
 				.id = WOWLAN_TSC_RSC_PARAM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				.data[0] = key_data.rsc_tsc,
@@ -1232,7 +1372,11 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 			ret = iwl_mvm_send_cmd_pdu(mvm,
 						   WOWLAN_TKIP_PARAM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   CMD_SYNC, sizeof(tkip_cmd),
+=======
+						   0, sizeof(tkip_cmd),
+>>>>>>> v3.18
 =======
 						   0, sizeof(tkip_cmd),
 >>>>>>> v3.18
@@ -1253,8 +1397,12 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 
 			ret = iwl_mvm_send_cmd_pdu(mvm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   WOWLAN_KEK_KCK_MATERIAL,
 						   CMD_SYNC,
+=======
+						   WOWLAN_KEK_KCK_MATERIAL, 0,
+>>>>>>> v3.18
 =======
 						   WOWLAN_KEK_KCK_MATERIAL, 0,
 >>>>>>> v3.18
@@ -1266,9 +1414,13 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_mvm_send_cmd_pdu(mvm, WOWLAN_CONFIGURATION,
 				   CMD_SYNC, sizeof(wowlan_config_cmd),
 				   &wowlan_config_cmd);
+=======
+	ret = iwl_mvm_send_wowlan_config_cmd(mvm, &wowlan_config_cmd);
+>>>>>>> v3.18
 =======
 	ret = iwl_mvm_send_wowlan_config_cmd(mvm, &wowlan_config_cmd);
 >>>>>>> v3.18
@@ -1280,7 +1432,11 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_mvm_send_proto_offload(mvm, vif);
+=======
+	ret = iwl_mvm_send_proto_offload(mvm, vif, false, 0);
+>>>>>>> v3.18
 =======
 	ret = iwl_mvm_send_proto_offload(mvm, vif, false, 0);
 >>>>>>> v3.18
@@ -1291,6 +1447,7 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	if (ret)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* must be last -- this switches firmware state */
 	ret = iwl_mvm_send_cmd_pdu(mvm, D3_CONFIG_CMD, CMD_SYNC,
@@ -1310,6 +1467,8 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	if (ret < 0)
 		ieee80211_restart_hw(mvm->hw);
 =======
+=======
+>>>>>>> v3.18
 	ret = iwl_mvm_power_update_device(mvm);
 	if (ret)
 		goto out;
@@ -1345,6 +1504,9 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 		ieee80211_restart_hw(mvm->hw);
  out_noreset:
 	kfree(key_data.rsc_tsc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&mvm->mutex);
@@ -1352,6 +1514,7 @@ static int __iwl_mvm_suspend(struct ieee80211_hw *hw,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void iwl_mvm_query_wakeup_reasons(struct iwl_mvm *mvm,
 					 struct ieee80211_vif *vif)
@@ -1421,6 +1584,8 @@ static void iwl_mvm_query_wakeup_reasons(struct iwl_mvm *mvm,
 
 	reasons = le32_to_cpu(status->wakeup_reasons);
 =======
+=======
+>>>>>>> v3.18
 int iwl_mvm_suspend(struct ieee80211_hw *hw, struct cfg80211_wowlan *wowlan)
 {
 	struct iwl_mvm *mvm = IWL_MAC80211_GET_MVM(hw);
@@ -1455,6 +1620,9 @@ static void iwl_mvm_report_wakeup_reasons(struct iwl_mvm *mvm,
 	};
 	struct cfg80211_wowlan_wakeup *wakeup_report = &wakeup;
 	u32 reasons = status->wakeup_reasons;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (reasons == IWL_WOWLAN_WAKEUP_BY_NON_WIRELESS) {
@@ -1468,7 +1636,11 @@ static void iwl_mvm_report_wakeup_reasons(struct iwl_mvm *mvm,
 	if (reasons & IWL_WOWLAN_WAKEUP_BY_PATTERN)
 		wakeup.pattern_idx =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			le16_to_cpu(status->pattern_number);
+=======
+			status->pattern_number;
+>>>>>>> v3.18
 =======
 			status->pattern_number;
 >>>>>>> v3.18
@@ -1500,8 +1672,13 @@ static void iwl_mvm_report_wakeup_reasons(struct iwl_mvm *mvm,
 
 	if (status->wake_packet_bufsize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int pktsize = le32_to_cpu(status->wake_packet_bufsize);
 		int pktlen = le32_to_cpu(status->wake_packet_length);
+=======
+		int pktsize = status->wake_packet_bufsize;
+		int pktlen = status->wake_packet_length;
+>>>>>>> v3.18
 =======
 		int pktsize = status->wake_packet_bufsize;
 		int pktlen = status->wake_packet_length;
@@ -1528,13 +1705,19 @@ static void iwl_mvm_report_wakeup_reasons(struct iwl_mvm *mvm,
 
 			if (ieee80211_has_protected(hdr->frame_control)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * This is unlocked and using gtk_i(c)vlen,
 				 * but since everything is under RTNL still
 				 * that's not really a problem - changing
 				 * it would be difficult.
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (is_multicast_ether_addr(hdr->addr1)) {
 					ivlen = mvm->gtk_ivlen;
@@ -1587,6 +1770,7 @@ static void iwl_mvm_report_wakeup_reasons(struct iwl_mvm *mvm,
 	ieee80211_report_wowlan_wakeup(vif, wakeup_report, GFP_KERNEL);
 	kfree_skb(pkt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  out:
 	iwl_free_resp(&cmd);
@@ -1596,6 +1780,8 @@ int iwl_mvm_resume(struct ieee80211_hw *hw)
 {
 	struct iwl_mvm *mvm = IWL_MAC80211_GET_MVM(hw);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void iwl_mvm_aes_sc_to_seq(struct aes_sc *sc,
@@ -1969,6 +2155,9 @@ static void iwl_mvm_d3_disconnect_iter(void *data, u8 *mac,
 
 static int __iwl_mvm_resume(struct iwl_mvm *mvm, bool test)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iwl_d3_iter_data resume_iter_data = {
 		.mvm = mvm,
@@ -1977,6 +2166,10 @@ static int __iwl_mvm_resume(struct iwl_mvm *mvm, bool test)
 	int ret;
 	enum iwl_d3_status d3_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool keep = false;
+>>>>>>> v3.18
 =======
 	bool keep = false;
 >>>>>>> v3.18
@@ -1994,7 +2187,11 @@ static int __iwl_mvm_resume(struct iwl_mvm *mvm, bool test)
 	vif = resume_iter_data.vif;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_trans_d3_resume(mvm->trans, &d3_status);
+=======
+	ret = iwl_trans_d3_resume(mvm->trans, &d3_status, test);
+>>>>>>> v3.18
 =======
 	ret = iwl_trans_d3_resume(mvm->trans, &d3_status, test);
 >>>>>>> v3.18
@@ -2007,8 +2204,11 @@ static int __iwl_mvm_resume(struct iwl_mvm *mvm, bool test)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_mvm_query_wakeup_reasons(mvm, vif);
 =======
+=======
+>>>>>>> v3.18
 	/* query SRAM first in case we want event logging */
 	iwl_mvm_read_d3_sram(mvm);
 
@@ -2019,20 +2219,29 @@ static int __iwl_mvm_resume(struct iwl_mvm *mvm, bool test)
 #endif
 	/* has unlocked the mutex, so skip that */
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  out_unlock:
 	mutex_unlock(&mvm->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vif)
 		ieee80211_resume_disconnect(vif);
 =======
+=======
+>>>>>>> v3.18
  out:
 	if (!test)
 		ieee80211_iterate_active_interfaces_rtnl(mvm->hw,
 			IEEE80211_IFACE_ITER_NORMAL,
 			iwl_mvm_d3_disconnect_iter, keep ? vif : NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* return 1 to reconfigure the device */
@@ -2041,7 +2250,10 @@ static int __iwl_mvm_resume(struct iwl_mvm *mvm, bool test)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int iwl_mvm_resume(struct ieee80211_hw *hw)
 {
 	struct iwl_mvm *mvm = IWL_MAC80211_GET_MVM(hw);
@@ -2062,6 +2274,9 @@ int iwl_mvm_resume(struct ieee80211_hw *hw)
 	return __iwl_mvm_resume(mvm, false);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iwl_mvm_set_wakeup(struct ieee80211_hw *hw, bool enabled)
 {
@@ -2070,7 +2285,10 @@ void iwl_mvm_set_wakeup(struct ieee80211_hw *hw, bool enabled)
 	device_set_wakeup_enable(mvm->trans->dev, enabled);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_IWLWIFI_DEBUGFS
 static int iwl_mvm_d3_test_open(struct inode *inode, struct file *file)
@@ -2170,4 +2388,7 @@ const struct file_operations iwl_dbgfs_d3_test_ops = {
 	.release = iwl_mvm_d3_test_release,
 };
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

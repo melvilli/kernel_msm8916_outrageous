@@ -349,7 +349,11 @@ int __init fuse_ctl_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fuse_ctl_cleanup(void)
+=======
+void __exit fuse_ctl_cleanup(void)
+>>>>>>> v3.18
 =======
 void __exit fuse_ctl_cleanup(void)
 >>>>>>> v3.18

@@ -138,7 +138,10 @@ page_table_range_init_count(unsigned long start, unsigned long end)
 	vaddr = start;
 	pgd_idx = pgd_index(vaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_idx = pmd_index(vaddr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -542,7 +545,11 @@ static void __init pagetable_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pteval_t __supported_pte_mask __read_mostly = ~(_PAGE_NX | _PAGE_GLOBAL | _PAGE_IOMAP);
+=======
+pteval_t __supported_pte_mask __read_mostly = ~(_PAGE_NX | _PAGE_GLOBAL);
+>>>>>>> v3.18
 =======
 pteval_t __supported_pte_mask __read_mostly = ~(_PAGE_NX | _PAGE_GLOBAL);
 >>>>>>> v3.18
@@ -669,6 +676,7 @@ void __init initmem_init(void)
 	printk(KERN_NOTICE "%ldMB HIGHMEM available.\n",
 		pages_to_mb(highend_pfn - highstart_pfn));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = highend_pfn;
 	high_memory = (void *) __va(highstart_pfn * PAGE_SIZE - 1) + 1;
 #else
@@ -682,6 +690,8 @@ void __init initmem_init(void)
 #ifdef CONFIG_FLATMEM
 	max_mapnr = num_physpages;
 =======
+=======
+>>>>>>> v3.18
 	high_memory = (void *) __va(highstart_pfn * PAGE_SIZE - 1) + 1;
 #else
 	high_memory = (void *) __va(max_low_pfn * PAGE_SIZE - 1) + 1;
@@ -692,6 +702,9 @@ void __init initmem_init(void)
 
 #ifdef CONFIG_FLATMEM
 	max_mapnr = IS_ENABLED(CONFIG_HIGHMEM) ? highend_pfn : max_low_pfn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	__vmalloc_start_set = true;
@@ -761,9 +774,12 @@ static void __init test_wp_bit(void)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codesize, reservedpages, datasize, initsize;
 	int tmp;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iommu_alloc();
@@ -785,6 +801,7 @@ void __init mem_init(void)
 	/* this will put all low memory onto the freelists */
 	free_all_bootmem();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reservedpages = 0;
 	for (tmp = 0; tmp < max_low_pfn; tmp++)
@@ -810,6 +827,11 @@ void __init mem_init(void)
 		initsize >> 10,
 		totalhigh_pages << (PAGE_SHIFT-10));
 
+=======
+	after_bootmem = 1;
+
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 =======
 	after_bootmem = 1;
 
@@ -863,6 +885,12 @@ void __init mem_init(void)
 #undef high_memory
 #undef __FIXADDR_TOP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_RANDOMIZE_BASE
+	BUILD_BUG_ON(CONFIG_RANDOMIZE_BASE_MAX_OFFSET > KERNEL_IMAGE_SIZE);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_RANDOMIZE_BASE
 	BUILD_BUG_ON(CONFIG_RANDOMIZE_BASE_MAX_OFFSET > KERNEL_IMAGE_SIZE);
@@ -885,7 +913,12 @@ int arch_add_memory(int nid, u64 start, u64 size)
 {
 	struct pglist_data *pgdata = NODE_DATA(nid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zone *zone = pgdata->node_zones + ZONE_HIGHMEM;
+=======
+	struct zone *zone = pgdata->node_zones +
+		zone_for_memory(nid, start, size, ZONE_HIGHMEM);
+>>>>>>> v3.18
 =======
 	struct zone *zone = pgdata->node_zones +
 		zone_for_memory(nid, start, size, ZONE_HIGHMEM);

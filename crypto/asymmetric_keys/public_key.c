@@ -23,6 +23,7 @@
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char *const pkey_algo[PKEY_ALGO__LAST] = {
 	[PKEY_ALGO_DSA]		= "DSA",
 	[PKEY_ALGO_RSA]		= "RSA",
@@ -47,6 +48,8 @@ const char *const pkey_id_type[PKEY_ID_TYPE__LAST] = {
 };
 EXPORT_SYMBOL_GPL(pkey_id_type);
 =======
+=======
+>>>>>>> v3.18
 const char *const pkey_algo_name[PKEY_ALGO__LAST] = {
 	[PKEY_ALGO_DSA]		= "DSA",
 	[PKEY_ALGO_RSA]		= "RSA",
@@ -66,6 +69,9 @@ const char *const pkey_id_type_name[PKEY_ID_TYPE__LAST] = {
 	[PKEY_ID_X509]		= "X509",
 };
 EXPORT_SYMBOL_GPL(pkey_id_type_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -79,7 +85,11 @@ static void public_key_describe(const struct key *asymmetric_key,
 	if (key)
 		seq_printf(m, "%s.%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   pkey_id_type[key->id_type], key->algo->name);
+=======
+			   pkey_id_type_name[key->id_type], key->algo->name);
+>>>>>>> v3.18
 =======
 			   pkey_id_type_name[key->id_type], key->algo->name);
 >>>>>>> v3.18
@@ -105,6 +115,7 @@ EXPORT_SYMBOL_GPL(public_key_destroy);
  * Verify a signature using a public key.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int public_key_verify_signature(const struct key *key,
 				       const struct public_key_signature *sig)
 {
@@ -121,6 +132,8 @@ static int public_key_verify_signature(const struct key *key,
 
 	return pk->algo->verify_signature(pk, sig);
 =======
+=======
+>>>>>>> v3.18
 int public_key_verify_signature(const struct public_key *pk,
 				const struct public_key_signature *sig)
 {
@@ -160,6 +173,9 @@ static int public_key_verify_signature_2(const struct key *key,
 {
 	const struct public_key *pk = key->payload.data;
 	return public_key_verify_signature(pk, sig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -170,14 +186,20 @@ struct asymmetric_key_subtype public_key_subtype = {
 	.owner			= THIS_MODULE,
 	.name			= "public_key",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.describe		= public_key_describe,
 	.destroy		= public_key_destroy,
 	.verify_signature	= public_key_verify_signature,
 =======
+=======
+>>>>>>> v3.18
 	.name_len		= sizeof("public_key") - 1,
 	.describe		= public_key_describe,
 	.destroy		= public_key_destroy,
 	.verify_signature	= public_key_verify_signature_2,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(public_key_subtype);

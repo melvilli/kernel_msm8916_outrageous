@@ -344,7 +344,10 @@ static int wf_sat_remove(struct i2c_client *client)
 	}
 	sat->i2c = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(client, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kref_put(&sat->ref, wf_sat_release);

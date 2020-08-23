@@ -60,9 +60,15 @@ static inline void sched_info_reset_dequeued(struct task_struct *t)
  * delta taken on each cpu would annul the skew.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void sched_info_dequeued(struct task_struct *t)
 {
 	unsigned long long now = task_rq(t)->clock, delta = 0;
+=======
+static inline void sched_info_dequeued(struct rq *rq, struct task_struct *t)
+{
+	unsigned long long now = rq_clock(rq), delta = 0;
+>>>>>>> v3.18
 =======
 static inline void sched_info_dequeued(struct rq *rq, struct task_struct *t)
 {
@@ -76,7 +82,11 @@ static inline void sched_info_dequeued(struct rq *rq, struct task_struct *t)
 	t->sched_info.run_delay += delta;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq_sched_info_dequeued(task_rq(t), delta);
+=======
+	rq_sched_info_dequeued(rq, delta);
+>>>>>>> v3.18
 =======
 	rq_sched_info_dequeued(rq, delta);
 >>>>>>> v3.18
@@ -88,9 +98,15 @@ static inline void sched_info_dequeued(struct rq *rq, struct task_struct *t)
  * can keep stats on how long its timeslice is.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sched_info_arrive(struct task_struct *t)
 {
 	unsigned long long now = task_rq(t)->clock, delta = 0;
+=======
+static void sched_info_arrive(struct rq *rq, struct task_struct *t)
+{
+	unsigned long long now = rq_clock(rq), delta = 0;
+>>>>>>> v3.18
 =======
 static void sched_info_arrive(struct rq *rq, struct task_struct *t)
 {
@@ -105,7 +121,11 @@ static void sched_info_arrive(struct rq *rq, struct task_struct *t)
 	t->sched_info.pcount++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq_sched_info_arrive(task_rq(t), delta);
+=======
+	rq_sched_info_arrive(rq, delta);
+>>>>>>> v3.18
 =======
 	rq_sched_info_arrive(rq, delta);
 >>>>>>> v3.18
@@ -116,6 +136,7 @@ static void sched_info_arrive(struct rq *rq, struct task_struct *t)
  * the timestamp if it is already not set.  It's assumed that
  * sched_info_dequeued() will clear that stamp when appropriate.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void sched_info_queued(struct task_struct *t)
 {
@@ -128,6 +149,8 @@ static inline void sched_info_queued(struct task_struct *t)
  * Called when a process ceases being the active-running process, either
  * voluntarily or involuntarily.  Now we can calculate how long we ran.
 =======
+=======
+>>>>>>> v3.18
 static inline void sched_info_queued(struct rq *rq, struct task_struct *t)
 {
 	if (unlikely(sched_info_on()))
@@ -139,11 +162,15 @@ static inline void sched_info_queued(struct rq *rq, struct task_struct *t)
  * Called when a process ceases being the active-running process involuntarily
  * due, typically, to expiring its time slice (this may also be called when
  * switching to the idle task).  Now we can calculate how long we ran.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Also, if the process is still in the TASK_RUNNING state, call
  * sched_info_queued() to mark that it has now again started waiting on
  * the runqueue.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void sched_info_depart(struct task_struct *t)
 {
@@ -155,6 +182,8 @@ static inline void sched_info_depart(struct task_struct *t)
 	if (t->state == TASK_RUNNING)
 		sched_info_queued(t);
 =======
+=======
+>>>>>>> v3.18
 static inline void sched_info_depart(struct rq *rq, struct task_struct *t)
 {
 	unsigned long long delta = rq_clock(rq) -
@@ -164,6 +193,9 @@ static inline void sched_info_depart(struct rq *rq, struct task_struct *t)
 
 	if (t->state == TASK_RUNNING)
 		sched_info_queued(rq, t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -174,10 +206,16 @@ static inline void sched_info_depart(struct rq *rq, struct task_struct *t)
  */
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 __sched_info_switch(struct task_struct *prev, struct task_struct *next)
 {
 	struct rq *rq = task_rq(prev);
 
+=======
+__sched_info_switch(struct rq *rq,
+		    struct task_struct *prev, struct task_struct *next)
+{
+>>>>>>> v3.18
 =======
 __sched_info_switch(struct rq *rq,
 		    struct task_struct *prev, struct task_struct *next)
@@ -189,6 +227,7 @@ __sched_info_switch(struct rq *rq,
 	 * process, however.
 	 */
 	if (prev != rq->idle)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sched_info_depart(prev);
 
@@ -207,6 +246,8 @@ sched_info_switch(struct task_struct *prev, struct task_struct *next)
 #define sched_info_dequeued(t)			do { } while (0)
 #define sched_info_switch(t, next)		do { } while (0)
 =======
+=======
+>>>>>>> v3.18
 		sched_info_depart(rq, prev);
 
 	if (next != rq->idle)
@@ -226,6 +267,9 @@ sched_info_switch(struct rq *rq,
 #define sched_info_depart(rq, t)		do { } while (0)
 #define sched_info_arrive(rq, next)		do { } while (0)
 #define sched_info_switch(rq, t, next)		do { } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SCHEDSTATS || CONFIG_TASK_DELAY_ACCT */
 
@@ -237,7 +281,10 @@ sched_info_switch(struct rq *rq,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * cputimer_running - return true if cputimer is running
  *
  * @tsk:	Pointer to target task.
@@ -271,6 +318,9 @@ static inline bool cputimer_running(struct task_struct *tsk)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * account_group_user_time - Maintain utime for a thread group.
  *
@@ -287,7 +337,11 @@ static inline void account_group_user_time(struct task_struct *tsk,
 	struct thread_group_cputimer *cputimer = &tsk->signal->cputimer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cputimer->running)
+=======
+	if (!cputimer_running(tsk))
+>>>>>>> v3.18
 =======
 	if (!cputimer_running(tsk))
 >>>>>>> v3.18
@@ -314,7 +368,11 @@ static inline void account_group_system_time(struct task_struct *tsk,
 	struct thread_group_cputimer *cputimer = &tsk->signal->cputimer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cputimer->running)
+=======
+	if (!cputimer_running(tsk))
+>>>>>>> v3.18
 =======
 	if (!cputimer_running(tsk))
 >>>>>>> v3.18
@@ -341,7 +399,11 @@ static inline void account_group_exec_runtime(struct task_struct *tsk,
 	struct thread_group_cputimer *cputimer = &tsk->signal->cputimer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cputimer->running)
+=======
+	if (!cputimer_running(tsk))
+>>>>>>> v3.18
 =======
 	if (!cputimer_running(tsk))
 >>>>>>> v3.18

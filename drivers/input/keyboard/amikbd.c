@@ -247,7 +247,10 @@ static int __exit amikbd_remove(struct platform_device *pdev)
 	struct input_dev *dev = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_irq(IRQ_AMIGA_CIAA_SP, dev);

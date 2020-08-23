@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -39,13 +42,19 @@
 #include "hal_btc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_dm_bt_reject_ap_aggregated_packet(struct ieee80211_hw *hw,
 						 bool reject)
 =======
+=======
+>>>>>>> v3.18
 static bool bt_operation_on;
 
 void rtl8723e_dm_bt_reject_ap_aggregated_packet(struct ieee80211_hw *hw,
 						bool b_reject)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
@@ -53,6 +62,7 @@ void rtl8723e_dm_bt_reject_ap_aggregated_packet(struct ieee80211_hw *hw,
 void _rtl8723_dm_bt_check_wifi_state(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rtl_pci_priv *rtlpcipriv = rtl_pcipriv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
@@ -78,6 +88,8 @@ void _rtl8723_dm_bt_check_wifi_state(struct ieee80211_hw *hw)
 		rtlpcipriv->bt_coexist.cstate &= ~BT_COEX_STATE_WIFI_UPLINK;
 		rtlpcipriv->bt_coexist.cstate &= ~BT_COEX_STATE_WIFI_DOWNLINK;
 =======
+=======
+>>>>>>> v3.18
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 
 	if (rtlpriv->link_info.busytraffic) {
@@ -103,11 +115,15 @@ void _rtl8723_dm_bt_check_wifi_state(struct ieee80211_hw *hw)
 			~BT_COEX_STATE_WIFI_UPLINK;
 		rtlpriv->btcoexist.cstate &=
 			~BT_COEX_STATE_WIFI_DOWNLINK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (rtlpriv->mac80211.mode == WIRELESS_MODE_G ||
 	    rtlpriv->mac80211.mode == WIRELESS_MODE_B) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rtlpcipriv->bt_coexist.cstate |= BT_COEX_STATE_WIFI_LEGACY;
 		rtlpcipriv->bt_coexist.cstate &= ~BT_COEX_STATE_WIFI_HT20;
@@ -160,6 +176,8 @@ u8 rtl8723ae_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 					BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 				rtlpcipriv->bt_coexist.cstate &=
 =======
+=======
+>>>>>>> v3.18
 		rtlpriv->btcoexist.cstate |=
 			BT_COEX_STATE_WIFI_LEGACY;
 		rtlpriv->btcoexist.cstate &=
@@ -213,6 +231,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 				rtlpriv->btcoexist.cstate |=
 					BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 				rtlpriv->btcoexist.cstate &=
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					~BT_COEX_STATE_WIFI_RSSI_1_LOW;
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -224,6 +245,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (smooth < rssi_thresh) {
 				bt_rssi_state = BT_RSSI_STATE_LOW;
 				rtlpcipriv->bt_coexist.cstate |=
@@ -231,12 +253,17 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 				rtlpcipriv->bt_coexist.cstate &=
 					 ~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 =======
+=======
+>>>>>>> v3.18
 			if (undecoratedsmoothed_pwdb < rssi_thresh) {
 				bt_rssi_state = BT_RSSI_STATE_LOW;
 				rtlpriv->btcoexist.cstate |=
 					BT_COEX_STATE_WIFI_RSSI_1_LOW;
 				rtlpriv->btcoexist.cstate &=
 					~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 					 "[DM][BT], RSSI_1 state switch to Low\n");
@@ -250,6 +277,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 		if (rssi_thresh > rssi_thresh1) {
 			RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 				 "[DM][BT], RSSI_1 thresh error!!\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return rtlpcipriv->bt_coexist.bt_pre_rssi_state;
 		}
@@ -268,6 +296,8 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 				rtlpcipriv->bt_coexist.cstate &=
 					 ~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 =======
+=======
+>>>>>>> v3.18
 			return rtlpriv->btcoexist.bt_pre_rssi_state;
 		}
 
@@ -284,6 +314,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 					~BT_COEX_STATE_WIFI_RSSI_1_LOW;
 				rtlpriv->btcoexist.cstate &=
 					~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 					 "[DM][BT], RSSI_1 state switch to Medium\n");
@@ -292,6 +325,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 					 "[DM][BT], RSSI_1 state stay at Low\n");
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		} else if ((rtlpcipriv->bt_coexist.bt_pre_rssi_state ==
 			   BT_RSSI_STATE_MEDIUM) ||
@@ -316,6 +350,8 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 					~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 				rtlpcipriv->bt_coexist.cstate &=
 =======
+=======
+>>>>>>> v3.18
 		} else if ((rtlpriv->btcoexist.bt_pre_rssi_state ==
 			    BT_RSSI_STATE_MEDIUM) ||
 			   (rtlpriv->btcoexist.bt_pre_rssi_state ==
@@ -338,6 +374,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 				rtlpriv->btcoexist.cstate &=
 					~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 				rtlpriv->btcoexist.cstate &=
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					~BT_COEX_STATE_WIFI_RSSI_1_MEDIUM;
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -349,6 +388,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (smooth < rssi_thresh1) {
 				bt_rssi_state = BT_RSSI_STATE_MEDIUM;
 				rtlpcipriv->bt_coexist.cstate |=
@@ -357,6 +397,8 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 					~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 				rtlpcipriv->bt_coexist.cstate &=
 =======
+=======
+>>>>>>> v3.18
 			if (undecoratedsmoothed_pwdb < rssi_thresh1) {
 				bt_rssi_state = BT_RSSI_STATE_MEDIUM;
 				rtlpriv->btcoexist.cstate |=
@@ -364,6 +406,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 				rtlpriv->btcoexist.cstate &=
 					~BT_COEX_STATE_WIFI_RSSI_1_HIGH;
 				rtlpriv->btcoexist.cstate &=
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					~BT_COEX_STATE_WIFI_RSSI_1_LOW;
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -376,8 +421,12 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rtlpcipriv->bt_coexist.bt_pre_rssi_state1 = bt_rssi_state;
+=======
+	rtlpriv->btcoexist.bt_pre_rssi_state1 = bt_rssi_state;
+>>>>>>> v3.18
 =======
 	rtlpriv->btcoexist.bt_pre_rssi_state1 = bt_rssi_state;
 >>>>>>> v3.18
@@ -385,6 +434,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state1(struct ieee80211_hw *hw,
 	return bt_rssi_state;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 u8 rtl8723ae_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 					 u8 level_num, u8 rssi_thresh,
@@ -413,6 +463,8 @@ u8 rtl8723ae_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 				rtlpcipriv->bt_coexist.cstate &=
 					~BT_COEX_STATE_WIFI_RSSI_LOW;
 =======
+=======
+>>>>>>> v3.18
 u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 					u8 level_num,
 					u8 rssi_thresh,
@@ -439,6 +491,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 					|= BT_COEX_STATE_WIFI_RSSI_HIGH;
 				rtlpriv->btcoexist.cstate
 					&= ~BT_COEX_STATE_WIFI_RSSI_LOW;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 					 "[DM][BT], RSSI state switch to High\n");
@@ -449,6 +504,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (smooth < rssi_thresh) {
 				bt_rssi_state = BT_RSSI_STATE_LOW;
 				rtlpcipriv->bt_coexist.cstate |=
@@ -456,12 +512,17 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 				rtlpcipriv->bt_coexist.cstate &=
 					~BT_COEX_STATE_WIFI_RSSI_HIGH;
 =======
+=======
+>>>>>>> v3.18
 			if (undecoratedsmoothed_pwdb < rssi_thresh) {
 				bt_rssi_state = BT_RSSI_STATE_LOW;
 				rtlpriv->btcoexist.cstate
 					|= BT_COEX_STATE_WIFI_RSSI_LOW;
 				rtlpriv->btcoexist.cstate
 					&= ~BT_COEX_STATE_WIFI_RSSI_HIGH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 					 "[DM][BT], RSSI state switch to Low\n");
@@ -475,6 +536,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 		if (rssi_thresh > rssi_thresh1) {
 			RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 				 "[DM][BT], RSSI thresh error!!\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return rtlpcipriv->bt_coexist.bt_pre_rssi_state;
 		}
@@ -491,6 +553,8 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 					&= ~BT_COEX_STATE_WIFI_RSSI_LOW;
 				rtlpcipriv->bt_coexist.cstate
 =======
+=======
+>>>>>>> v3.18
 			return rtlpriv->btcoexist.bt_pre_rssi_state;
 		}
 		if ((rtlpriv->btcoexist.bt_pre_rssi_state ==
@@ -505,6 +569,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 				rtlpriv->btcoexist.cstate
 					&= ~BT_COEX_STATE_WIFI_RSSI_LOW;
 				rtlpriv->btcoexist.cstate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&= ~BT_COEX_STATE_WIFI_RSSI_HIGH;
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -514,6 +581,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 					 "[DM][BT], RSSI state stay at Low\n");
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		} else if ((rtlpcipriv->bt_coexist.bt_pre_rssi_state ==
 			   BT_RSSI_STATE_MEDIUM) ||
@@ -538,6 +606,8 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 					&= ~BT_COEX_STATE_WIFI_RSSI_HIGH;
 				rtlpcipriv->bt_coexist.cstate
 =======
+=======
+>>>>>>> v3.18
 		} else if ((rtlpriv->btcoexist.bt_pre_rssi_state ==
 				BT_RSSI_STATE_MEDIUM) ||
 			(rtlpriv->btcoexist.bt_pre_rssi_state ==
@@ -560,6 +630,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 				rtlpriv->btcoexist.cstate
 					&= ~BT_COEX_STATE_WIFI_RSSI_HIGH;
 				rtlpriv->btcoexist.cstate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&= ~BT_COEX_STATE_WIFI_RSSI_MEDIUM;
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -571,6 +644,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (smooth < rssi_thresh1) {
 				bt_rssi_state = BT_RSSI_STATE_MEDIUM;
 				rtlpcipriv->bt_coexist.cstate
@@ -579,6 +653,8 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 					&= ~BT_COEX_STATE_WIFI_RSSI_HIGH;
 				rtlpcipriv->bt_coexist.cstate
 =======
+=======
+>>>>>>> v3.18
 			if (undecoratedsmoothed_pwdb < rssi_thresh1) {
 				bt_rssi_state = BT_RSSI_STATE_MEDIUM;
 				rtlpriv->btcoexist.cstate
@@ -586,6 +662,9 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 				rtlpriv->btcoexist.cstate
 					&= ~BT_COEX_STATE_WIFI_RSSI_HIGH;
 				rtlpriv->btcoexist.cstate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&= ~BT_COEX_STATE_WIFI_RSSI_LOW;
 				RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -597,6 +676,7 @@ u8 rtl8723e_dm_bt_check_coex_rssi_state(struct ieee80211_hw *hw,
 			}
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	rtlpcipriv->bt_coexist.bt_pre_rssi_state = bt_rssi_state;
@@ -624,6 +704,8 @@ void rtl8723ae_dm_bt_balance(struct ieee80211_hw *hw,
 {
 	struct rtl_pci_priv *rtlpcipriv = rtl_pcipriv(hw);
 =======
+=======
+>>>>>>> v3.18
 	rtlpriv->btcoexist.bt_pre_rssi_state = bt_rssi_state;
 	return bt_rssi_state;
 }
@@ -650,6 +732,9 @@ long rtl8723e_dm_bt_get_rx_ss(struct ieee80211_hw *hw)
 void rtl8723e_dm_bt_balance(struct ieee80211_hw *hw,
 			    bool balance_on, u8 ms0, u8 ms1)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	u8 h2c_parameter[3] = {0};
@@ -659,7 +744,11 @@ void rtl8723e_dm_bt_balance(struct ieee80211_hw *hw,
 		h2c_parameter[1] = ms1;
 		h2c_parameter[0] = ms0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtlpcipriv->bt_coexist.fw_coexist_all_off = false;
+=======
+		rtlpriv->btcoexist.fw_coexist_all_off = false;
+>>>>>>> v3.18
 =======
 		rtlpriv->btcoexist.fw_coexist_all_off = false;
 >>>>>>> v3.18
@@ -668,6 +757,7 @@ void rtl8723e_dm_bt_balance(struct ieee80211_hw *hw,
 		h2c_parameter[1] = 0;
 		h2c_parameter[0] = 0;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rtlpcipriv->bt_coexist.balance_on = balance_on;
 
@@ -685,6 +775,8 @@ void rtl8723ae_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_pci_priv *rtlpcipriv = rtl_pcipriv(hw);
 =======
+=======
+>>>>>>> v3.18
 	rtlpriv->btcoexist.balance_on = balance_on;
 
 	RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
@@ -699,6 +791,9 @@ void rtl8723ae_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 void rtl8723e_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (type == BT_AGCTABLE_OFF) {
@@ -711,6 +806,7 @@ void rtl8723e_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 		rtl_write_dword(rtlpriv, 0xc78, 0x60200001);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl8723ae_phy_set_rf_reg(hw, RF90_PATH_A,
 					RF_RX_AGC_HP, 0xfffff, 0x32000);
 		rtl8723ae_phy_set_rf_reg(hw, RF90_PATH_A,
@@ -721,6 +817,8 @@ void rtl8723e_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 					RF_RX_AGC_HP, 0xfffff, 0xfc000);
 		rtl8723ae_phy_set_rf_reg(hw, RF90_PATH_A,
 =======
+=======
+>>>>>>> v3.18
 		rtl8723e_phy_set_rf_reg(hw, RF90_PATH_A,
 					RF_RX_AGC_HP, 0xfffff, 0x32000);
 		rtl8723e_phy_set_rf_reg(hw, RF90_PATH_A,
@@ -730,6 +828,9 @@ void rtl8723e_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 		rtl8723e_phy_set_rf_reg(hw, RF90_PATH_A,
 					RF_RX_AGC_HP, 0xfffff, 0xfc000);
 		rtl8723e_phy_set_rf_reg(hw, RF90_PATH_A,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					RF_RX_G1, 0xfffff, 0x30355);
 	} else if (type == BT_AGCTABLE_ON) {
@@ -741,6 +842,7 @@ void rtl8723e_dm_bt_agc_table(struct ieee80211_hw *hw, u8 type)
 		rtl_write_dword(rtlpriv, 0xc78, 0x4b1f0001);
 		rtl_write_dword(rtlpriv, 0xc78, 0x4a200001);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rtl8723ae_phy_set_rf_reg(hw, RF90_PATH_A,
 					RF_RX_AGC_HP, 0xfffff, 0xdc000);
@@ -762,6 +864,8 @@ void rtl8723ae_dm_bt_bback_off_level(struct ieee80211_hw *hw, u8 type)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_pci_priv *rtlpcipriv = rtl_pcipriv(hw);
 =======
+=======
+>>>>>>> v3.18
 		rtl8723e_phy_set_rf_reg(hw, RF90_PATH_A,
 					RF_RX_AGC_HP, 0xfffff, 0xdc000);
 		rtl8723e_phy_set_rf_reg(hw, RF90_PATH_A,
@@ -780,6 +884,9 @@ void rtl8723ae_dm_bt_bback_off_level(struct ieee80211_hw *hw, u8 type)
 void rtl8723e_dm_bt_bb_back_off_level(struct ieee80211_hw *hw, u8 type)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (type == BT_BB_BACKOFF_OFF) {
@@ -790,6 +897,7 @@ void rtl8723e_dm_bt_bb_back_off_level(struct ieee80211_hw *hw, u8 type)
 		RT_TRACE(rtlpriv, COMP_BT_COEXIST, DBG_TRACE,
 			 "[BT]BBBackOffLevel On!\n");
 		rtl_write_dword(rtlpriv, 0xc04, 0x3a07611);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rtlpcipriv->bt_coexist.sw_coexist_all_off = false;
 	}
@@ -868,6 +976,8 @@ bool rtl8723ae_dm_bt_is_coexist_state_changed(struct ieee80211_hw *hw)
 
 bool rtl8723ae_dm_bt_is_wifi_up_link(struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 		rtlpriv->btcoexist.sw_coexist_all_off = false;
 	}
 }
@@ -939,6 +1049,9 @@ bool rtl8723e_dm_bt_is_coexist_state_changed(struct ieee80211_hw *hw)
 }
 
 bool rtl8723e_dm_bt_is_wifi_up_link(struct ieee80211_hw *hw)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -946,8 +1059,12 @@ bool rtl8723e_dm_bt_is_wifi_up_link(struct ieee80211_hw *hw)
 	if (rtlpriv->link_info.tx_busy_traffic)
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return false;
+=======
+	return false;
+>>>>>>> v3.18
 =======
 	return false;
 >>>>>>> v3.18

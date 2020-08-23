@@ -97,13 +97,19 @@ enum hrtimer_restart {
  * @base:	pointer to the timer base (per cpu and per clock)
  * @state:	state information (See bit values above)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @start_pid: timer statistics field to store the pid of the task which
  *		started the timer
  * @start_site:	timer statistics field to store the site where the timer
  *		was started
  * @start_comm: timer statistics field to store the name of the process which
  *		started the timer
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * The hrtimer structure must be initialized by hrtimer_init()
@@ -115,12 +121,18 @@ struct hrtimer {
 	struct hrtimer_clock_base	*base;
 	unsigned long			state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TIMER_STATS
 	int				start_pid;
 	void				*start_site;
 	char				start_comm[16];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -172,6 +184,10 @@ enum  hrtimer_base_type {
  * @lock:		lock protecting the base and associated clock bases
  *			and timers
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cpu:		cpu number
+>>>>>>> v3.18
 =======
  * @cpu:		cpu number
 >>>>>>> v3.18
@@ -180,7 +196,10 @@ enum  hrtimer_base_type {
  * @expires_next:	absolute time of the next event which was scheduled
  *			via clock_set_next_event()
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @in_hrtirq:		hrtimer_interrupt() is currently executing
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @hres_active:	State of high resolution mode
@@ -194,6 +213,10 @@ enum  hrtimer_base_type {
 struct hrtimer_cpu_base {
 	raw_spinlock_t			lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int			cpu;
+>>>>>>> v3.18
 =======
 	unsigned int			cpu;
 >>>>>>> v3.18
@@ -202,7 +225,10 @@ struct hrtimer_cpu_base {
 #ifdef CONFIG_HIGH_RES_TIMERS
 	ktime_t				expires_next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				in_hrtirq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int				hres_active;
@@ -347,6 +373,7 @@ static inline void timerfd_clock_was_set(void) { }
 extern void hrtimers_resume(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern ktime_t ktime_get(void);
 extern ktime_t ktime_get_real(void);
 extern ktime_t ktime_get_boottime(void);
@@ -355,6 +382,8 @@ extern ktime_t ktime_get_clocktai(void);
 extern ktime_t ktime_get_update_offsets(ktime_t *offs_real, ktime_t *offs_boot,
 					 ktime_t *offs_tai);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 DECLARE_PER_CPU(struct tick_device, tick_cpu_device);
@@ -478,12 +507,15 @@ extern void hrtimer_run_pending(void);
 extern void __init hrtimers_init(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if BITS_PER_LONG < 64
 extern u64 ktime_divns(const ktime_t kt, s64 div);
 #else /* BITS_PER_LONG < 64 */
 # define ktime_divns(kt, div)		(u64)((kt).tv64 / (div))
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Show pending timers: */

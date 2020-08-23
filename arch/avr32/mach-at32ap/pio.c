@@ -436,7 +436,11 @@ void __init at32_init_pio(struct platform_device *pdev)
 	struct pio_device *pio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->id >= MAX_NR_PIO_DEVICES) {
+=======
+	if (pdev->id > MAX_NR_PIO_DEVICES) {
+>>>>>>> v3.18
 =======
 	if (pdev->id > MAX_NR_PIO_DEVICES) {
 >>>>>>> v3.18

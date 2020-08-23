@@ -47,7 +47,13 @@ struct netlink_kernel_cfg {
 	void		(*input)(struct sk_buff *skb);
 	struct mutex	*cb_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		(*bind)(int group);
+=======
+	int		(*bind)(int group);
+	void		(*unbind)(int group);
+	bool		(*compare)(struct net *net, struct sock *sk);
+>>>>>>> v3.18
 =======
 	int		(*bind)(int group);
 	void		(*unbind)(int group);
@@ -69,7 +75,10 @@ extern int __netlink_change_ngroups(struct sock *sk, unsigned int groups);
 extern int netlink_change_ngroups(struct sock *sk, unsigned int groups);
 extern void __netlink_clear_multicast_users(struct sock *sk, unsigned int group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void netlink_clear_multicast_users(struct sock *sk, unsigned int group);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void netlink_ack(struct sk_buff *in_skb, struct nlmsghdr *nlh, int err);
@@ -95,7 +104,10 @@ void netlink_detachskb(struct sock *sk, struct sk_buff *skb);
 int netlink_sendskb(struct sock *sk, struct sk_buff *skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct sk_buff *
 netlink_skb_clone(struct sk_buff *skb, gfp_t gfp_mask)
 {
@@ -112,6 +124,9 @@ netlink_skb_clone(struct sk_buff *skb, gfp_t gfp_mask)
 	return nskb;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	skb should fit one page. This choice is good for headerless malloc.
@@ -174,7 +189,10 @@ static inline int netlink_dump_start(struct sock *ssk, struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct netlink_tap {
 	struct net_device *dev;
 	struct module *module;
@@ -184,6 +202,9 @@ struct netlink_tap {
 extern int netlink_add_tap(struct netlink_tap *nt);
 extern int netlink_remove_tap(struct netlink_tap *nt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool __netlink_ns_capable(const struct netlink_skb_parms *nsp,
 			  struct user_namespace *ns, int cap);

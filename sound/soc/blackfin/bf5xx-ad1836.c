@@ -31,6 +31,7 @@
 #include "../codecs/ad1836.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "bf5xx-tdm-pcm.h"
 #include "bf5xx-tdm.h"
 
@@ -41,10 +42,15 @@ static int bf5xx_ad1836_hw_params(struct snd_pcm_substream *substream,
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_card bf5xx_ad1836;
 
 static int bf5xx_ad1836_init(struct snd_soc_pcm_runtime *rtd)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
 	unsigned int channel_map[] = {0, 4, 1, 5, 2, 6, 3, 7};
@@ -57,6 +63,7 @@ static int bf5xx_ad1836_init(struct snd_soc_pcm_runtime *rtd)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -65,6 +72,8 @@ static struct snd_soc_ops bf5xx_ad1836_ops = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0xFF, 0xFF, 8, 32);
 	if (ret < 0)
 		return ret;
@@ -72,6 +81,9 @@ static struct snd_soc_ops bf5xx_ad1836_ops = {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BF5XX_AD1836_DAIFMT (SND_SOC_DAIFMT_DSP_A | SND_SOC_DAIFMT_IB_IF | \
 				SND_SOC_DAIFMT_CBM_CFM)
@@ -81,9 +93,15 @@ static struct snd_soc_dai_link bf5xx_ad1836_dai = {
 	.stream_name = "AD1836",
 	.codec_dai_name = "ad1836-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name = "bfin-tdm-pcm-audio",
 	.ops = &bf5xx_ad1836_ops,
 	.dai_fmt = BF5XX_AD1836_DAIFMT,
+=======
+	.platform_name = "bfin-i2s-pcm-audio",
+	.dai_fmt = BF5XX_AD1836_DAIFMT,
+	.init = bf5xx_ad1836_init,
+>>>>>>> v3.18
 =======
 	.platform_name = "bfin-i2s-pcm-audio",
 	.dai_fmt = BF5XX_AD1836_DAIFMT,

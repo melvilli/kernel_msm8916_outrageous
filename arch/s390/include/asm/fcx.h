@@ -13,9 +13,15 @@
 #define TCW_FORMAT_DEFAULT		0
 #define TCW_TIDAW_FORMAT_DEFAULT	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TCW_FLAGS_INPUT_TIDA		1 << (23 - 5)
 #define TCW_FLAGS_TCCB_TIDA		1 << (23 - 6)
 #define TCW_FLAGS_OUTPUT_TIDA		1 << (23 - 7)
+=======
+#define TCW_FLAGS_INPUT_TIDA		(1 << (23 - 5))
+#define TCW_FLAGS_TCCB_TIDA		(1 << (23 - 6))
+#define TCW_FLAGS_OUTPUT_TIDA		(1 << (23 - 7))
+>>>>>>> v3.18
 =======
 #define TCW_FLAGS_INPUT_TIDA		(1 << (23 - 5))
 #define TCW_FLAGS_TCCB_TIDA		(1 << (23 - 6))
@@ -61,17 +67,23 @@ struct tcw {
 } __attribute__ ((packed, aligned(64)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIDAW_FLAGS_LAST		1 << (7 - 0)
 #define TIDAW_FLAGS_SKIP		1 << (7 - 1)
 #define TIDAW_FLAGS_DATA_INT		1 << (7 - 2)
 #define TIDAW_FLAGS_TTIC		1 << (7 - 3)
 #define TIDAW_FLAGS_INSERT_CBC		1 << (7 - 4)
 =======
+=======
+>>>>>>> v3.18
 #define TIDAW_FLAGS_LAST		(1 << (7 - 0))
 #define TIDAW_FLAGS_SKIP		(1 << (7 - 1))
 #define TIDAW_FLAGS_DATA_INT		(1 << (7 - 2))
 #define TIDAW_FLAGS_TTIC		(1 << (7 - 3))
 #define TIDAW_FLAGS_INSERT_CBC		(1 << (7 - 4))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -121,9 +133,15 @@ struct tsa_ddpc {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TSA_INTRG_FLAGS_CU_STATE_VALID		1 << (7 - 0)
 #define TSA_INTRG_FLAGS_DEV_STATE_VALID		1 << (7 - 1)
 #define TSA_INTRG_FLAGS_OP_STATE_VALID		1 << (7 - 2)
+=======
+#define TSA_INTRG_FLAGS_CU_STATE_VALID		(1 << (7 - 0))
+#define TSA_INTRG_FLAGS_DEV_STATE_VALID		(1 << (7 - 1))
+#define TSA_INTRG_FLAGS_OP_STATE_VALID		(1 << (7 - 2))
+>>>>>>> v3.18
 =======
 #define TSA_INTRG_FLAGS_CU_STATE_VALID		(1 << (7 - 0))
 #define TSA_INTRG_FLAGS_DEV_STATE_VALID		(1 << (7 - 1))
@@ -161,15 +179,21 @@ struct tsa_intrg {
 #define TSB_FORMAT_INTRG	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TSB_FLAGS_DCW_OFFSET_VALID	1 << (7 - 0)
 #define TSB_FLAGS_COUNT_VALID		1 << (7 - 1)
 #define TSB_FLAGS_CACHE_MISS		1 << (7 - 2)
 #define TSB_FLAGS_TIME_VALID		1 << (7 - 3)
 =======
+=======
+>>>>>>> v3.18
 #define TSB_FLAGS_DCW_OFFSET_VALID	(1 << (7 - 0))
 #define TSB_FLAGS_COUNT_VALID		(1 << (7 - 1))
 #define TSB_FLAGS_CACHE_MISS		(1 << (7 - 2))
 #define TSB_FLAGS_TIME_VALID		(1 << (7 - 3))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TSB_FLAGS_FORMAT(x)		((x) & 7)
 #define TSB_FORMAT(t)			((t)->flags & 7)
@@ -207,9 +231,15 @@ struct tsb {
 #define DCW_INTRG_RCQ_SECONDARY		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DCW_INTRG_FLAGS_MPM		1 < (7 - 0)
 #define DCW_INTRG_FLAGS_PPR		1 < (7 - 1)
 #define DCW_INTRG_FLAGS_CRIT		1 < (7 - 2)
+=======
+#define DCW_INTRG_FLAGS_MPM		(1 << (7 - 0))
+#define DCW_INTRG_FLAGS_PPR		(1 << (7 - 1))
+#define DCW_INTRG_FLAGS_CRIT		(1 << (7 - 2))
+>>>>>>> v3.18
 =======
 #define DCW_INTRG_FLAGS_MPM		(1 << (7 - 0))
 #define DCW_INTRG_FLAGS_PPR		(1 << (7 - 1))
@@ -250,7 +280,11 @@ struct dcw_intrg_data {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DCW_FLAGS_CC		1 << (7 - 1)
+=======
+#define DCW_FLAGS_CC		(1 << (7 - 1))
+>>>>>>> v3.18
 =======
 #define DCW_FLAGS_CC		(1 << (7 - 1))
 >>>>>>> v3.18

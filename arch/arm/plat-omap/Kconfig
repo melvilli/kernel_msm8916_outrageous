@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config ARCH_OMAP
+	bool
+
+>>>>>>> v3.18
 =======
 config ARCH_OMAP
 	bool
@@ -93,6 +99,7 @@ config OMAP_MUX_WARNINGS
 	  printed, it's safe to deselect OMAP_MUX for your product.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config OMAP_MBOX_FWK
 	tristate "Mailbox framework support"
 	depends on ARCH_OMAP && !ARCH_MULTIPLATFORM
@@ -114,6 +121,8 @@ config OMAP_IOMMU_IVA2
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config OMAP_MPU_TIMER
 	bool "Use mpu timer"
 	depends on ARCH_OMAP1
@@ -132,7 +141,11 @@ config OMAP_32K_TIMER
 	  support for no tick during idle. The 32KHz timer provides less
 	  intra-tick resolution than OMAP_MPU_TIMER. The 32KHz timer is
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  currently only available for OMAP16XX, 24XX, 34XX and OMAP4/5.
+=======
+	  currently only available for OMAP16XX, 24XX, 34XX, OMAP4/5 and DRA7XX.
+>>>>>>> v3.18
 =======
 	  currently only available for OMAP16XX, 24XX, 34XX, OMAP4/5 and DRA7XX.
 >>>>>>> v3.18

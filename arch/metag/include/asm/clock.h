@@ -20,6 +20,11 @@
  *			Meta 1: based on loops_per_jiffy.
  *			Meta 2: (EXPAND_TIMER_DIV + 1) MHz.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *			If a "core" clock is provided by the device tree, it
+ *			will override this function.
+>>>>>>> v3.18
 =======
  *			If a "core" clock is provided by the device tree, it
  *			will override this function.
@@ -33,13 +38,19 @@ extern struct meta_clock_desc _meta_clock;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Perform platform clock initialisation, reading clocks from device tree etc.
  * Only accessible during boot.
  */
 void init_metag_clocks(void);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Set up the default clock, ensuring all callbacks are valid - only accessible
  * during boot.

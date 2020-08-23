@@ -8,7 +8,10 @@
 
 #include <asm-generic/mutex-dec.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define arch_mutex_cpu_relax()	barrier()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

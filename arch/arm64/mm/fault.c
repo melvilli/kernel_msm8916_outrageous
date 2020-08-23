@@ -38,8 +38,11 @@
 #include <asm/tlbflush.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <trace/events/exception.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const char *fault_name(unsigned int esr);
@@ -68,6 +71,10 @@ void show_pte(struct mm_struct *mm, unsigned long addr)
 
 		pud = pud_offset(pgd, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		printk(", *pud=%016llx", pud_val(*pud));
+>>>>>>> v3.18
 =======
 		printk(", *pud=%016llx", pud_val(*pud));
 >>>>>>> v3.18
@@ -124,8 +131,11 @@ static void __do_user_fault(struct task_struct *tsk, unsigned long addr,
 	struct siginfo si;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_user_fault(tsk, addr, esr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (show_unhandled_signals && unhandled_signal(tsk, sig) &&
@@ -233,8 +243,12 @@ static int __kprobes do_page_fault(unsigned long addr, unsigned int esr,
 	if (esr & ESR_LNX_EXEC) {
 		vm_flags = VM_EXEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (((esr & ESR_EL1_WRITE) && !(esr & ESR_EL1_CM)) ||
 			((esr & ESR_EL1_CM) && !(mm_flags & FAULT_FLAG_USER))) {
+=======
+	} else if ((esr & ESR_EL1_WRITE) && !(esr & ESR_EL1_CM)) {
+>>>>>>> v3.18
 =======
 	} else if ((esr & ESR_EL1_WRITE) && !(esr & ESR_EL1_CM)) {
 >>>>>>> v3.18
@@ -298,7 +312,10 @@ retry:
 			 */
 			mm_flags &= ~FAULT_FLAG_ALLOW_RETRY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mm_flags |= FAULT_FLAG_TRIED;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto retry;

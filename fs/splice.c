@@ -33,6 +33,10 @@
 #include <linux/socket.h>
 #include <linux/compat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/aio.h>
+>>>>>>> v3.18
 =======
 #include <linux/aio.h>
 >>>>>>> v3.18
@@ -141,8 +145,11 @@ error:
 const struct pipe_buf_operations page_cache_pipe_buf_ops = {
 	.can_merge = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map = generic_pipe_buf_map,
 	.unmap = generic_pipe_buf_unmap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.confirm = page_cache_pipe_buf_confirm,
@@ -164,8 +171,11 @@ static int user_page_pipe_buf_steal(struct pipe_inode_info *pipe,
 static const struct pipe_buf_operations user_page_pipe_buf_ops = {
 	.can_merge = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map = generic_pipe_buf_map,
 	.unmap = generic_pipe_buf_unmap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.confirm = generic_pipe_buf_confirm,
@@ -200,9 +210,12 @@ ssize_t splice_to_pipe(struct pipe_inode_info *pipe,
 	int ret, do_wakeup, page_nr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!spd_pages)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = 0;
@@ -229,7 +242,10 @@ ssize_t splice_to_pipe(struct pipe_inode_info *pipe,
 			buf->private = spd->partial[page_nr].private;
 			buf->ops = spd->ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buf->flags = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (spd->flags & SPLICE_F_GIFT)
@@ -402,9 +418,12 @@ __generic_file_splice_read(struct file *in, loff_t *ppos,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!(in->f_mode & FMODE_SPLICE_READ)))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -574,8 +593,11 @@ EXPORT_SYMBOL(generic_file_splice_read);
 static const struct pipe_buf_operations default_pipe_buf_ops = {
 	.can_merge = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map = generic_pipe_buf_map,
 	.unmap = generic_pipe_buf_unmap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.confirm = generic_pipe_buf_confirm,
@@ -594,8 +616,11 @@ static int generic_pipe_buf_nosteal(struct pipe_inode_info *pipe,
 const struct pipe_buf_operations nosteal_pipe_buf_ops = {
 	.can_merge = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map = generic_pipe_buf_map,
 	.unmap = generic_pipe_buf_unmap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.confirm = generic_pipe_buf_confirm,
@@ -746,7 +771,11 @@ static int pipe_to_sendpage(struct pipe_inode_info *pipe,
 	int more;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!likely(file->f_op && file->f_op->sendpage))
+=======
+	if (!likely(file->f_op->sendpage))
+>>>>>>> v3.18
 =======
 	if (!likely(file->f_op->sendpage))
 >>>>>>> v3.18
@@ -761,6 +790,7 @@ static int pipe_to_sendpage(struct pipe_inode_info *pipe,
 				    sd->len, &pos, more);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This is a little more tricky than the file -> pipe splicing. There are
@@ -821,6 +851,8 @@ EXPORT_SYMBOL(pipe_to_file);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void wakeup_pipe_writers(struct pipe_inode_info *pipe)
 {
 	smp_mb();
@@ -850,7 +882,11 @@ static void wakeup_pipe_writers(struct pipe_inode_info *pipe)
  *    destination.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int splice_from_pipe_feed(struct pipe_inode_info *pipe, struct splice_desc *sd,
+=======
+static int splice_from_pipe_feed(struct pipe_inode_info *pipe, struct splice_desc *sd,
+>>>>>>> v3.18
 =======
 static int splice_from_pipe_feed(struct pipe_inode_info *pipe, struct splice_desc *sd,
 >>>>>>> v3.18
@@ -901,7 +937,10 @@ static int splice_from_pipe_feed(struct pipe_inode_info *pipe, struct splice_des
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(splice_from_pipe_feed);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -916,7 +955,11 @@ EXPORT_SYMBOL(splice_from_pipe_feed);
  *    or -errno if no more data needs to be spliced.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int splice_from_pipe_next(struct pipe_inode_info *pipe, struct splice_desc *sd)
+=======
+static int splice_from_pipe_next(struct pipe_inode_info *pipe, struct splice_desc *sd)
+>>>>>>> v3.18
 =======
 static int splice_from_pipe_next(struct pipe_inode_info *pipe, struct splice_desc *sd)
 >>>>>>> v3.18
@@ -945,7 +988,10 @@ static int splice_from_pipe_next(struct pipe_inode_info *pipe, struct splice_des
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(splice_from_pipe_next);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -959,7 +1005,11 @@ EXPORT_SYMBOL(splice_from_pipe_next);
  *    initialize the necessary fields of @sd.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void splice_from_pipe_begin(struct splice_desc *sd)
+=======
+static void splice_from_pipe_begin(struct splice_desc *sd)
+>>>>>>> v3.18
 =======
 static void splice_from_pipe_begin(struct splice_desc *sd)
 >>>>>>> v3.18
@@ -968,7 +1018,10 @@ static void splice_from_pipe_begin(struct splice_desc *sd)
 	sd->need_wakeup = false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(splice_from_pipe_begin);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -983,7 +1036,11 @@ EXPORT_SYMBOL(splice_from_pipe_begin);
  *    splice_from_pipe_feed().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void splice_from_pipe_end(struct pipe_inode_info *pipe, struct splice_desc *sd)
+=======
+static void splice_from_pipe_end(struct pipe_inode_info *pipe, struct splice_desc *sd)
+>>>>>>> v3.18
 =======
 static void splice_from_pipe_end(struct pipe_inode_info *pipe, struct splice_desc *sd)
 >>>>>>> v3.18
@@ -992,7 +1049,10 @@ static void splice_from_pipe_end(struct pipe_inode_info *pipe, struct splice_des
 		wakeup_pipe_writers(pipe);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(splice_from_pipe_end);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1017,7 +1077,10 @@ ssize_t __splice_from_pipe(struct pipe_inode_info *pipe, struct splice_desc *sd,
 	splice_from_pipe_begin(sd);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cond_resched();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = splice_from_pipe_next(pipe, sd);
@@ -1065,7 +1128,11 @@ ssize_t splice_from_pipe(struct pipe_inode_info *pipe, struct file *out,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * generic_file_splice_write - splice data from a pipe to a file
+=======
+ * iter_file_splice_write - splice data from a pipe to a file
+>>>>>>> v3.18
 =======
  * iter_file_splice_write - splice data from a pipe to a file
 >>>>>>> v3.18
@@ -1078,6 +1145,7 @@ ssize_t splice_from_pipe(struct pipe_inode_info *pipe, struct file *out,
  * Description:
  *    Will either move or copy pages (determined by @flags options) from
  *    the given pipe inode to the given file.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  */
@@ -1099,6 +1167,8 @@ generic_file_splice_write(struct pipe_inode_info *pipe, struct file *out,
 	sd.total_len = len;
 	sd.pos = *ppos;
 =======
+=======
+>>>>>>> v3.18
  *    This one is ->write_iter-based.
  *
  */
@@ -1119,25 +1189,35 @@ iter_file_splice_write(struct pipe_inode_info *pipe, struct file *out,
 
 	if (unlikely(!array))
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pipe_lock(pipe);
 
 	splice_from_pipe_begin(&sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do {
 =======
+=======
+>>>>>>> v3.18
 	while (sd.total_len) {
 		struct iov_iter from;
 		struct kiocb kiocb;
 		size_t left;
 		int n, idx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = splice_from_pipe_next(pipe, &sd);
 		if (ret <= 0)
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mutex_lock_nested(&inode->i_mutex, I_MUTEX_CHILD);
 		ret = file_remove_suid(out);
@@ -1150,6 +1230,8 @@ iter_file_splice_write(struct pipe_inode_info *pipe, struct file *out,
 		mutex_unlock(&inode->i_mutex);
 	} while (ret > 0);
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(nbufs < pipe->buffers)) {
 			kfree(array);
 			nbufs = pipe->buffers;
@@ -1232,6 +1314,9 @@ iter_file_splice_write(struct pipe_inode_info *pipe, struct file *out,
 	}
 done:
 	kfree(array);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	splice_from_pipe_end(pipe, &sd);
 
@@ -1240,6 +1325,7 @@ done:
 	if (sd.num_spliced)
 		ret = sd.num_spliced;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret > 0) {
 		int err;
@@ -1257,10 +1343,15 @@ done:
 
 EXPORT_SYMBOL(generic_file_splice_write);
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
 EXPORT_SYMBOL(iter_file_splice_write);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int write_pipe_buf(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
@@ -1271,9 +1362,15 @@ static int write_pipe_buf(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
 	loff_t tmp = sd->pos;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = buf->ops->map(pipe, buf, 0);
 	ret = __kernel_write(sd->u.file, data + buf->offset, sd->len, &tmp);
 	buf->ops->unmap(pipe, buf, data);
+=======
+	data = kmap(buf->page);
+	ret = __kernel_write(sd->u.file, data + buf->offset, sd->len, &tmp);
+	kunmap(buf->page);
+>>>>>>> v3.18
 =======
 	data = kmap(buf->page);
 	ret = __kernel_write(sd->u.file, data + buf->offset, sd->len, &tmp);
@@ -1290,9 +1387,12 @@ static ssize_t default_file_splice_write(struct pipe_inode_info *pipe,
 	ssize_t ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!(out->f_mode & FMODE_SPLICE_WRITE)))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = splice_from_pipe(pipe, out, ppos, len, flags, write_pipe_buf);
@@ -1332,6 +1432,7 @@ static long do_splice_from(struct pipe_inode_info *pipe, struct file *out,
 	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *,
 				loff_t *, size_t, unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	if (unlikely(!(out->f_mode & FMODE_WRITE)))
@@ -1349,15 +1450,23 @@ static long do_splice_from(struct pipe_inode_info *pipe, struct file *out,
 
 	if (out->f_op->splice_write)
 >>>>>>> v3.18
+=======
+
+	if (out->f_op->splice_write)
+>>>>>>> v3.18
 		splice_write = out->f_op->splice_write;
 	else
 		splice_write = default_file_splice_write;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file_start_write(out);
 	ret = splice_write(pipe, out, ppos, len, flags);
 	file_end_write(out);
 	return ret;
+=======
+	return splice_write(pipe, out, ppos, len, flags);
+>>>>>>> v3.18
 =======
 	return splice_write(pipe, out, ppos, len, flags);
 >>>>>>> v3.18
@@ -1382,7 +1491,11 @@ static long do_splice_to(struct file *in, loff_t *ppos,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (in->f_op && in->f_op->splice_read)
+=======
+	if (in->f_op->splice_read)
+>>>>>>> v3.18
 =======
 	if (in->f_op->splice_read)
 >>>>>>> v3.18
@@ -1414,7 +1527,11 @@ ssize_t splice_direct_to_actor(struct file *in, struct splice_desc *sd,
 	umode_t i_mode;
 	size_t len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, flags, more;
+=======
+	int i, flags;
+>>>>>>> v3.18
 =======
 	int i, flags;
 >>>>>>> v3.18
@@ -1461,7 +1578,10 @@ ssize_t splice_direct_to_actor(struct file *in, struct splice_desc *sd,
 	 */
 	sd->flags &= ~SPLICE_F_NONBLOCK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	more = sd->flags & SPLICE_F_MORE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1478,6 +1598,7 @@ ssize_t splice_direct_to_actor(struct file *in, struct splice_desc *sd,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * If more data is pending, set SPLICE_F_MORE
 		 * If this is the last data and SPLICE_F_MORE was not set
 		 * initially, clears it.
@@ -1487,6 +1608,8 @@ ssize_t splice_direct_to_actor(struct file *in, struct splice_desc *sd,
 		else if (!more)
 			sd->flags &= ~SPLICE_F_MORE;
 		/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 * NOTE: nonblocking mode only applies to the input. We
@@ -1574,7 +1697,10 @@ long do_splice_direct(struct file *in, loff_t *ppos, struct file *out,
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!(out->f_mode & FMODE_WRITE)))
 		return -EBADF;
 
@@ -1585,6 +1711,9 @@ long do_splice_direct(struct file *in, loff_t *ppos, struct file *out,
 	if (unlikely(ret < 0))
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = splice_direct_to_actor(in, &sd, direct_splice_actor);
 	if (ret > 0)
@@ -1593,6 +1722,10 @@ long do_splice_direct(struct file *in, loff_t *ppos, struct file *out,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(do_splice_direct);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(do_splice_direct);
 >>>>>>> v3.18
@@ -1646,8 +1779,11 @@ static long do_splice(struct file *in, loff_t __user *off_in,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = do_splice_from(ipipe, out, &offset, len, flags);
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(!(out->f_mode & FMODE_WRITE)))
 			return -EBADF;
 
@@ -1661,6 +1797,9 @@ static long do_splice(struct file *in, loff_t __user *off_in,
 		file_start_write(out);
 		ret = do_splice_from(ipipe, out, &offset, len, flags);
 		file_end_write(out);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!off_out)
@@ -1802,6 +1941,7 @@ static int pipe_to_user(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
 			struct splice_desc *sd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *src;
 	int ret;
 
@@ -1838,6 +1978,10 @@ out:
 	int n = copy_page_to_iter(buf->page, buf->offset, sd->len, sd->u.data);
 	return n == sd->len ? n : -EFAULT;
 >>>>>>> v3.18
+=======
+	int n = copy_page_to_iter(buf->page, buf->offset, sd->len, sd->u.data);
+	return n == sd->len ? n : -EFAULT;
+>>>>>>> v3.18
 }
 
 /*
@@ -1845,7 +1989,11 @@ out:
  * as a simple copy of the pipes pages to the user iov.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long vmsplice_to_user(struct file *file, const struct iovec __user *iov,
+=======
+static long vmsplice_to_user(struct file *file, const struct iovec __user *uiov,
+>>>>>>> v3.18
 =======
 static long vmsplice_to_user(struct file *file, const struct iovec __user *uiov,
 >>>>>>> v3.18
@@ -1854,21 +2002,28 @@ static long vmsplice_to_user(struct file *file, const struct iovec __user *uiov,
 	struct pipe_inode_info *pipe;
 	struct splice_desc sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t size;
 	int error;
 	long ret;
 =======
+=======
+>>>>>>> v3.18
 	long ret;
 	struct iovec iovstack[UIO_FASTIOV];
 	struct iovec *iov = iovstack;
 	struct iov_iter iter;
 	ssize_t count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pipe = get_pipe_info(file);
 	if (!pipe)
 		return -EBADF;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pipe_lock(pipe);
 
@@ -1930,6 +2085,8 @@ static long vmsplice_to_user(struct file *file, const struct iovec __user *uiov,
 	if (!ret)
 		ret = error;
 =======
+=======
+>>>>>>> v3.18
 	ret = rw_copy_check_uvector(READ, uiov, nr_segs,
 				    ARRAY_SIZE(iovstack), iovstack, &iov);
 	if (ret <= 0)
@@ -1951,6 +2108,9 @@ static long vmsplice_to_user(struct file *file, const struct iovec __user *uiov,
 out:
 	if (iov != iovstack)
 		kfree(iov);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;

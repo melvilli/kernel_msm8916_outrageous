@@ -128,9 +128,15 @@ static struct mr_table *ipmr_new_table(struct net *net, u32 id);
 static void ipmr_free_table(struct mr_table *mrt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ip_mr_forward(struct net *net, struct mr_table *mrt,
 			 struct sk_buff *skb, struct mfc_cache *cache,
 			 int local);
+=======
+static void ip_mr_forward(struct net *net, struct mr_table *mrt,
+			  struct sk_buff *skb, struct mfc_cache *cache,
+			  int local);
+>>>>>>> v3.18
 =======
 static void ip_mr_forward(struct net *net, struct mr_table *mrt,
 			  struct sk_buff *skb, struct mfc_cache *cache,
@@ -143,7 +149,11 @@ static int __ipmr_fill_mroute(struct mr_table *mrt, struct sk_buff *skb,
 static void mroute_netlink_event(struct mr_table *mrt, struct mfc_cache *mfc,
 				 int cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mroute_clean_tables(struct mr_table *mrt, bool all);
+=======
+static void mroute_clean_tables(struct mr_table *mrt);
+>>>>>>> v3.18
 =======
 static void mroute_clean_tables(struct mr_table *mrt);
 >>>>>>> v3.18
@@ -359,7 +369,11 @@ static void ipmr_free_table(struct mr_table *mrt)
 {
 	del_timer_sync(&mrt->ipmr_expire_timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mroute_clean_tables(mrt, true);
+=======
+	mroute_clean_tables(mrt);
+>>>>>>> v3.18
 =======
 	mroute_clean_tables(mrt);
 >>>>>>> v3.18
@@ -443,6 +457,10 @@ struct net_device *ipmr_new_tunnel(struct net *net, struct vifctl *v)
 
 			ipv4_devconf_setall(in_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			neigh_parms_data_state_setall(in_dev->arp_parms);
+>>>>>>> v3.18
 =======
 			neigh_parms_data_state_setall(in_dev->arp_parms);
 >>>>>>> v3.18
@@ -502,7 +520,11 @@ static void reg_vif_setup(struct net_device *dev)
 	dev->mtu		= ETH_DATA_LEN - sizeof(struct iphdr) - 8;
 	dev->flags		= IFF_NOARP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->netdev_ops		= &reg_vif_netdev_ops,
+=======
+	dev->netdev_ops		= &reg_vif_netdev_ops;
+>>>>>>> v3.18
 =======
 	dev->netdev_ops		= &reg_vif_netdev_ops;
 >>>>>>> v3.18
@@ -522,7 +544,11 @@ static struct net_device *ipmr_reg_vif(struct net *net, struct mr_table *mrt)
 		sprintf(name, "pimreg%u", mrt->id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(0, name, reg_vif_setup);
+=======
+	dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, reg_vif_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, reg_vif_setup);
 >>>>>>> v3.18
@@ -547,6 +573,10 @@ static struct net_device *ipmr_reg_vif(struct net *net, struct mr_table *mrt)
 
 	ipv4_devconf_setall(in_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	neigh_parms_data_state_setall(in_dev->arp_parms);
+>>>>>>> v3.18
 =======
 	neigh_parms_data_state_setall(in_dev->arp_parms);
 >>>>>>> v3.18
@@ -912,10 +942,15 @@ static struct mfc_cache *ipmr_cache_alloc(void)
 	struct mfc_cache *c = kmem_cache_zalloc(mrt_cachep, GFP_KERNEL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c) {
 		c->mfc_un.res.last_assert = jiffies - MFC_ASSERT_THRESH - 1;
 		c->mfc_un.res.minvif = MAXVIFS;
 	}
+=======
+	if (c)
+		c->mfc_un.res.minvif = MAXVIFS;
+>>>>>>> v3.18
 =======
 	if (c)
 		c->mfc_un.res.minvif = MAXVIFS;
@@ -1021,7 +1056,11 @@ static int ipmr_cache_report(struct mr_table *mrt,
 	/* Copy the IP header */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->network_header = skb->tail;
+=======
+	skb_set_network_header(skb, skb->len);
+>>>>>>> v3.18
 =======
 	skb_set_network_header(skb, skb->len);
 >>>>>>> v3.18
@@ -1241,7 +1280,11 @@ static int ipmr_mfc_add(struct net *net, struct mr_table *mrt,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mroute_clean_tables(struct mr_table *mrt, bool all)
+=======
+static void mroute_clean_tables(struct mr_table *mrt)
+>>>>>>> v3.18
 =======
 static void mroute_clean_tables(struct mr_table *mrt)
 >>>>>>> v3.18
@@ -1254,9 +1297,14 @@ static void mroute_clean_tables(struct mr_table *mrt)
 
 	for (i = 0; i < mrt->maxvif; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!all && (mrt->vif_table[i].flags & VIFF_STATIC))
 			continue;
 		vif_delete(mrt, i, 0, &list);
+=======
+		if (!(mrt->vif_table[i].flags & VIFF_STATIC))
+			vif_delete(mrt, i, 0, &list);
+>>>>>>> v3.18
 =======
 		if (!(mrt->vif_table[i].flags & VIFF_STATIC))
 			vif_delete(mrt, i, 0, &list);
@@ -1269,7 +1317,11 @@ static void mroute_clean_tables(struct mr_table *mrt)
 	for (i = 0; i < MFC_LINES; i++) {
 		list_for_each_entry_safe(c, next, &mrt->mfc_cache_array[i], list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!all && (c->mfc_flags & MFC_STATIC))
+=======
+			if (c->mfc_flags & MFC_STATIC)
+>>>>>>> v3.18
 =======
 			if (c->mfc_flags & MFC_STATIC)
 >>>>>>> v3.18
@@ -1308,7 +1360,11 @@ static void mrtsock_destruct(struct sock *sk)
 						    net->ipv4.devconf_all);
 			RCU_INIT_POINTER(mrt->mroute_sk, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mroute_clean_tables(mrt, false);
+=======
+			mroute_clean_tables(mrt);
+>>>>>>> v3.18
 =======
 			mroute_clean_tables(mrt);
 >>>>>>> v3.18
@@ -1672,7 +1728,11 @@ int ipmr_compat_ioctl(struct sock *sk, unsigned int cmd, void __user *arg)
 static int ipmr_device_event(struct notifier_block *this, unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1736,8 +1796,13 @@ static inline int ipmr_forward_finish(struct sk_buff *skb)
 	struct ip_options *opt = &(IPCB(skb)->opt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IP_INC_STATS(dev_net(skb_dst(skb)->dev), IPSTATS_MIB_OUTFORWDATAGRAMS);
 	IP_ADD_STATS(dev_net(skb_dst(skb)->dev), IPSTATS_MIB_OUTOCTETS, skb->len);
+=======
+	IP_INC_STATS_BH(dev_net(skb_dst(skb)->dev), IPSTATS_MIB_OUTFORWDATAGRAMS);
+	IP_ADD_STATS_BH(dev_net(skb_dst(skb)->dev), IPSTATS_MIB_OUTOCTETS, skb->len);
+>>>>>>> v3.18
 =======
 	IP_INC_STATS_BH(dev_net(skb_dst(skb)->dev), IPSTATS_MIB_OUTFORWDATAGRAMS);
 	IP_ADD_STATS_BH(dev_net(skb_dst(skb)->dev), IPSTATS_MIB_OUTOCTETS, skb->len);
@@ -1804,7 +1869,11 @@ static void ipmr_queue_xmit(struct net *net, struct mr_table *mrt,
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IP_INC_STATS(dev_net(dev), IPSTATS_MIB_FRAGFAILS);
+=======
+		IP_INC_STATS_BH(dev_net(dev), IPSTATS_MIB_FRAGFAILS);
+>>>>>>> v3.18
 =======
 		IP_INC_STATS_BH(dev_net(dev), IPSTATS_MIB_FRAGFAILS);
 >>>>>>> v3.18
@@ -1871,9 +1940,15 @@ static int ipmr_find_vif(struct mr_table *mrt, struct net_device *dev)
 /* "local" means that we should preserve one skb (for local delivery) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ip_mr_forward(struct net *net, struct mr_table *mrt,
 			 struct sk_buff *skb, struct mfc_cache *cache,
 			 int local)
+=======
+static void ip_mr_forward(struct net *net, struct mr_table *mrt,
+			  struct sk_buff *skb, struct mfc_cache *cache,
+			  int local)
+>>>>>>> v3.18
 =======
 static void ip_mr_forward(struct net *net, struct mr_table *mrt,
 			  struct sk_buff *skb, struct mfc_cache *cache,
@@ -1985,7 +2060,11 @@ last_forward:
 		} else {
 			ipmr_queue_xmit(net, mrt, skb, cache, psend);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			return;
+>>>>>>> v3.18
 =======
 			return;
 >>>>>>> v3.18
@@ -1996,7 +2075,10 @@ dont_forward:
 	if (!local)
 		kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2157,9 +2239,14 @@ static int __pim_rcv(struct mr_table *mrt, struct sk_buff *skb,
 	skb->protocol = htons(ETH_P_IP);
 	skb->ip_summed = CHECKSUM_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->pkt_type = PACKET_HOST;
 
 	skb_tunnel_rx(skb, reg_dev);
+=======
+
+	skb_tunnel_rx(skb, reg_dev, dev_net(reg_dev));
+>>>>>>> v3.18
 =======
 
 	skb_tunnel_rx(skb, reg_dev, dev_net(reg_dev));
@@ -2278,7 +2365,11 @@ static int __ipmr_fill_mroute(struct mr_table *mrt, struct sk_buff *skb,
 int ipmr_get_route(struct net *net, struct sk_buff *skb,
 		   __be32 saddr, __be32 daddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   struct rtmsg *rtm, int nowait, u32 portid)
+=======
+		   struct rtmsg *rtm, int nowait)
+>>>>>>> v3.18
 =======
 		   struct rtmsg *rtm, int nowait)
 >>>>>>> v3.18
@@ -2327,7 +2418,10 @@ int ipmr_get_route(struct net *net, struct sk_buff *skb,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		NETLINK_CB(skb2).portid = portid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		skb_push(skb2, sizeof(struct iphdr));

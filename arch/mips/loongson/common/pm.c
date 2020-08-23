@@ -80,7 +80,11 @@ static void wait_for_wakeup_events(void)
 {
 	while (!wakeup_loongson())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		LOONGSON_CHIPCFG0 &= ~0x7;
+=======
+		LOONGSON_CHIPCFG(0) &= ~0x7;
+>>>>>>> v3.18
 =======
 		LOONGSON_CHIPCFG(0) &= ~0x7;
 >>>>>>> v3.18
@@ -107,22 +111,32 @@ static void loongson_suspend_enter(void)
 	stop_perf_counters();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cached_cpu_freq = LOONGSON_CHIPCFG0;
 
 	/* Put CPU into wait mode */
 	LOONGSON_CHIPCFG0 &= ~0x7;
 =======
+=======
+>>>>>>> v3.18
 	cached_cpu_freq = LOONGSON_CHIPCFG(0);
 
 	/* Put CPU into wait mode */
 	LOONGSON_CHIPCFG(0) &= ~0x7;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* wait for the given events to wakeup cpu from wait mode */
 	wait_for_wakeup_events();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOONGSON_CHIPCFG0 = cached_cpu_freq;
+=======
+	LOONGSON_CHIPCFG(0) = cached_cpu_freq;
+>>>>>>> v3.18
 =======
 	LOONGSON_CHIPCFG(0) = cached_cpu_freq;
 >>>>>>> v3.18

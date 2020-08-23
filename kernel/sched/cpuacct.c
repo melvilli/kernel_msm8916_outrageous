@@ -34,11 +34,17 @@ struct cpuacct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* return cpu accounting group corresponding to this container */
 static inline struct cpuacct *cgroup_ca(struct cgroup *cgrp)
 {
 	return container_of(cgroup_subsys_state(cgrp, cpuacct_subsys_id),
 			    struct cpuacct, css);
+=======
+static inline struct cpuacct *css_ca(struct cgroup_subsys_state *css)
+{
+	return css ? container_of(css, struct cpuacct, css) : NULL;
+>>>>>>> v3.18
 =======
 static inline struct cpuacct *css_ca(struct cgroup_subsys_state *css)
 {
@@ -50,6 +56,7 @@ static inline struct cpuacct *css_ca(struct cgroup_subsys_state *css)
 static inline struct cpuacct *task_ca(struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return container_of(task_subsys_state(tsk, cpuacct_subsys_id),
 			    struct cpuacct, css);
 }
@@ -60,14 +67,21 @@ static inline struct cpuacct *__parent_ca(struct cpuacct *ca)
 =======
 	return css_ca(task_css(tsk, cpuacct_cgrp_id));
 >>>>>>> v3.18
+=======
+	return css_ca(task_css(tsk, cpuacct_cgrp_id));
+>>>>>>> v3.18
 }
 
 static inline struct cpuacct *parent_ca(struct cpuacct *ca)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ca->css.cgroup->parent)
 		return NULL;
 	return cgroup_ca(ca->css.cgroup->parent);
+=======
+	return css_ca(ca->css.parent);
+>>>>>>> v3.18
 =======
 	return css_ca(ca->css.parent);
 >>>>>>> v3.18
@@ -81,18 +95,24 @@ static struct cpuacct root_cpuacct = {
 
 /* create a new cpu accounting group */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cgroup_subsys_state *cpuacct_css_alloc(struct cgroup *cgrp)
 {
 	struct cpuacct *ca;
 
 	if (!cgrp->parent)
 =======
+=======
+>>>>>>> v3.18
 static struct cgroup_subsys_state *
 cpuacct_css_alloc(struct cgroup_subsys_state *parent_css)
 {
 	struct cpuacct *ca;
 
 	if (!parent_css)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return &root_cpuacct.css;
 
@@ -120,9 +140,15 @@ out:
 
 /* destroy an existing cpu accounting group */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cpuacct_css_free(struct cgroup *cgrp)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static void cpuacct_css_free(struct cgroup_subsys_state *css)
+{
+	struct cpuacct *ca = css_ca(css);
+>>>>>>> v3.18
 =======
 static void cpuacct_css_free(struct cgroup_subsys_state *css)
 {
@@ -171,9 +197,15 @@ static void cpuacct_cpuusage_write(struct cpuacct *ca, int cpu, u64 val)
 
 /* return total cpu usage (in nanoseconds) of a group */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 cpuusage_read(struct cgroup *cgrp, struct cftype *cft)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static u64 cpuusage_read(struct cgroup_subsys_state *css, struct cftype *cft)
+{
+	struct cpuacct *ca = css_ca(css);
+>>>>>>> v3.18
 =======
 static u64 cpuusage_read(struct cgroup_subsys_state *css, struct cftype *cft)
 {
@@ -189,15 +221,21 @@ static u64 cpuusage_read(struct cgroup_subsys_state *css, struct cftype *cft)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuusage_write(struct cgroup *cgrp, struct cftype *cftype,
 								u64 reset)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
 =======
+=======
+>>>>>>> v3.18
 static int cpuusage_write(struct cgroup_subsys_state *css, struct cftype *cft,
 			  u64 reset)
 {
 	struct cpuacct *ca = css_ca(css);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err = 0;
 	int i;
@@ -215,10 +253,16 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuacct_percpu_seq_read(struct cgroup *cgroup, struct cftype *cft,
 				   struct seq_file *m)
 {
 	struct cpuacct *ca = cgroup_ca(cgroup);
+=======
+static int cpuacct_percpu_seq_show(struct seq_file *m, void *V)
+{
+	struct cpuacct *ca = css_ca(seq_css(m));
+>>>>>>> v3.18
 =======
 static int cpuacct_percpu_seq_show(struct seq_file *m, void *V)
 {
@@ -241,10 +285,16 @@ static const char * const cpuacct_stat_desc[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuacct_stats_show(struct cgroup *cgrp, struct cftype *cft,
 			      struct cgroup_map_cb *cb)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static int cpuacct_stats_show(struct seq_file *sf, void *v)
+{
+	struct cpuacct *ca = css_ca(seq_css(sf));
+>>>>>>> v3.18
 =======
 static int cpuacct_stats_show(struct seq_file *sf, void *v)
 {
@@ -260,7 +310,11 @@ static int cpuacct_stats_show(struct seq_file *sf, void *v)
 	}
 	val = cputime64_to_clock_t(val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cb->fill(cb, cpuacct_stat_desc[CPUACCT_STAT_USER], val);
+=======
+	seq_printf(sf, "%s %lld\n", cpuacct_stat_desc[CPUACCT_STAT_USER], val);
+>>>>>>> v3.18
 =======
 	seq_printf(sf, "%s %lld\n", cpuacct_stat_desc[CPUACCT_STAT_USER], val);
 >>>>>>> v3.18
@@ -275,7 +329,11 @@ static int cpuacct_stats_show(struct seq_file *sf, void *v)
 
 	val = cputime64_to_clock_t(val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cb->fill(cb, cpuacct_stat_desc[CPUACCT_STAT_SYSTEM], val);
+=======
+	seq_printf(sf, "%s %lld\n", cpuacct_stat_desc[CPUACCT_STAT_SYSTEM], val);
+>>>>>>> v3.18
 =======
 	seq_printf(sf, "%s %lld\n", cpuacct_stat_desc[CPUACCT_STAT_SYSTEM], val);
 >>>>>>> v3.18
@@ -292,17 +350,23 @@ static struct cftype files[] = {
 	{
 		.name = "usage_percpu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.read_seq_string = cpuacct_percpu_seq_read,
 	},
 	{
 		.name = "stat",
 		.read_map = cpuacct_stats_show,
 =======
+=======
+>>>>>>> v3.18
 		.seq_show = cpuacct_percpu_seq_show,
 	},
 	{
 		.name = "stat",
 		.seq_show = cpuacct_stats_show,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{ }	/* terminate */
@@ -352,7 +416,11 @@ void cpuacct_account_field(struct task_struct *p, int index, u64 val)
 		kcpustat = this_cpu_ptr(ca->cpustat);
 		kcpustat->cpustat[index] += val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ca = __parent_ca(ca);
+=======
+		ca = parent_ca(ca);
+>>>>>>> v3.18
 =======
 		ca = parent_ca(ca);
 >>>>>>> v3.18
@@ -361,6 +429,7 @@ void cpuacct_account_field(struct task_struct *p, int index, u64 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cgroup_subsys cpuacct_subsys = {
 	.name		= "cpuacct",
 	.css_alloc	= cpuacct_css_alloc,
@@ -368,10 +437,15 @@ struct cgroup_subsys cpuacct_subsys = {
 	.subsys_id	= cpuacct_subsys_id,
 	.base_cftypes	= files,
 =======
+=======
+>>>>>>> v3.18
 struct cgroup_subsys cpuacct_cgrp_subsys = {
 	.css_alloc	= cpuacct_css_alloc,
 	.css_free	= cpuacct_css_free,
 	.legacy_cftypes	= files,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.early_init	= 1,
 };

@@ -23,7 +23,10 @@
 #include <linux/export.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acct.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -57,12 +60,15 @@ static char *sb_writers_name[SB_FREEZE_LEVELS] = {
  * take a passive reference to the superblock to avoid this from occurring.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int prune_super(struct shrinker *shrink, struct shrink_control *sc)
 {
 	struct super_block *sb;
 	int	fs_objects = 0;
 	int	total_objects;
 =======
+=======
+>>>>>>> v3.18
 static unsigned long super_cache_scan(struct shrinker *shrink,
 				      struct shrink_control *sc)
 {
@@ -72,6 +78,9 @@ static unsigned long super_cache_scan(struct shrinker *shrink,
 	long	freed = 0;
 	long	dentries;
 	long	inodes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sb = container_of(shrink, struct super_block, s_shrink);
@@ -80,6 +89,7 @@ static unsigned long super_cache_scan(struct shrinker *shrink,
 	 * Deadlock avoidance.  We may hold various FS locks, and we don't want
 	 * to recurse into the FS that called us in clear_inode() and friends..
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (sc->nr_to_scan && !(sc->gfp_mask & __GFP_FS))
 		return -1;
@@ -155,6 +165,8 @@ static void destroy_sb_writers(struct super_block *s)
 	for (i = 0; i < SB_FREEZE_LEVELS; i++)
 		percpu_counter_destroy(&s->s_writers.counter[i]);
 =======
+=======
+>>>>>>> v3.18
 	if (!(sc->gfp_mask & __GFP_FS))
 		return SHRINK_STOP;
 
@@ -239,6 +251,9 @@ static void destroy_super(struct super_block *s)
 	kfree(s->s_subtype);
 	kfree(s->s_options);
 	kfree_rcu(s, rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -254,6 +269,7 @@ static struct super_block *alloc_super(struct file_system_type *type, int flags)
 {
 	struct super_block *s = kzalloc(sizeof(struct super_block),  GFP_USER);
 	static const struct super_operations default_op;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (s) {
@@ -336,6 +352,8 @@ static inline void destroy_super(struct super_block *s)
 	kfree(s->s_options);
 	kfree(s);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	if (!s)
@@ -405,6 +423,9 @@ static inline void destroy_super(struct super_block *s)
 fail:
 	destroy_super(s);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -453,10 +474,16 @@ void deactivate_locked_super(struct super_block *s)
 	if (atomic_dec_and_test(&s->s_active)) {
 		cleancache_invalidate_fs(s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fs->kill_sb(s);
 
 		/* caches are now gone, we can safely kill the shrinker now */
 		unregister_shrinker(&s->s_shrink);
+=======
+		unregister_shrinker(&s->s_shrink);
+		fs->kill_sb(s);
+
+>>>>>>> v3.18
 =======
 		unregister_shrinker(&s->s_shrink);
 		fs->kill_sb(s);
@@ -577,12 +604,18 @@ void generic_shutdown_super(struct super_block *sb)
 		evict_inodes(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (sb->s_dio_done_wq) {
 			destroy_workqueue(sb->s_dio_done_wq);
 			sb->s_dio_done_wq = NULL;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (sop->put_super)
 			sop->put_super(sb);
@@ -864,8 +897,12 @@ rescan:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	do_remount_sb2 - asks filesystem to change mount options.
  *	@mnt:   mount we are looking at
+=======
+ *	do_remount_sb - asks filesystem to change mount options.
+>>>>>>> v3.18
 =======
  *	do_remount_sb - asks filesystem to change mount options.
 >>>>>>> v3.18
@@ -877,7 +914,11 @@ rescan:
  *	Alters the mount options of a mounted file system.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int do_remount_sb2(struct vfsmount *mnt, struct super_block *sb, int flags, void *data, int force)
+=======
+int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
+>>>>>>> v3.18
 =======
 int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 >>>>>>> v3.18
@@ -894,6 +935,7 @@ int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flags & MS_RDONLY)
 		acct_auto_close(sb);
 	shrink_dcache_sb(sb);
@@ -901,6 +943,8 @@ int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 	remount_ro = (flags & MS_RDONLY) && !(sb->s_flags & MS_RDONLY);
 
 =======
+=======
+>>>>>>> v3.18
 	remount_ro = (flags & MS_RDONLY) && !(sb->s_flags & MS_RDONLY);
 
 	if (remount_ro) {
@@ -917,6 +961,9 @@ int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 	}
 	shrink_dcache_sb(sb);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If we are remounting RDONLY and current sb is read/write,
 	   make sure there are no rw files opened */
@@ -932,6 +979,7 @@ int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sync_filesystem(sb);
 
 	if (mnt && sb->s_op->remount_fs2) {
@@ -944,6 +992,9 @@ int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 			     sb->s_type->name, retval);
 		}
 	} else if (sb->s_op->remount_fs) {
+=======
+	if (sb->s_op->remount_fs) {
+>>>>>>> v3.18
 =======
 	if (sb->s_op->remount_fs) {
 >>>>>>> v3.18
@@ -979,11 +1030,14 @@ cancel_readonly:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int do_remount_sb(struct super_block *sb, int flags, void *data, int force)
 {
 	return do_remount_sb2(NULL, sb, flags, data, force);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void do_emergency_remount(struct work_struct *work)
@@ -1036,12 +1090,18 @@ void emergency_remount(void)
 static DEFINE_IDA(unnamed_dev_ida);
 static DEFINE_SPINLOCK(unnamed_dev_lock);/* protects the above */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int unnamed_dev_start = 0; /* don't bother trying below it */
 =======
+=======
+>>>>>>> v3.18
 /* Many userspace utilities consider an FSID of 0 invalid.
  * Always return at least 1 from get_anon_bdev.
  */
 static int unnamed_dev_start = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int get_anon_bdev(dev_t *p)
@@ -1313,7 +1373,11 @@ EXPORT_SYMBOL(mount_single);
 
 struct dentry *
 <<<<<<< HEAD
+<<<<<<< HEAD
 mount_fs(struct file_system_type *type, int flags, const char *name, struct vfsmount *mnt, void *data)
+=======
+mount_fs(struct file_system_type *type, int flags, const char *name, void *data)
+>>>>>>> v3.18
 =======
 mount_fs(struct file_system_type *type, int flags, const char *name, void *data)
 >>>>>>> v3.18
@@ -1334,10 +1398,14 @@ mount_fs(struct file_system_type *type, int flags, const char *name, void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type->mount2)
 		root = type->mount2(mnt, type, flags, name, data);
 	else
 		root = type->mount(type, flags, name, data);
+=======
+	root = type->mount(type, flags, name, data);
+>>>>>>> v3.18
 =======
 	root = type->mount(type, flags, name, data);
 >>>>>>> v3.18
@@ -1584,8 +1652,13 @@ int freeze_super(struct super_block *sb)
 	}
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * For debugging purposes so that fs can warn if it sees write activity
 	 * when frozen is set to SB_FREEZE_COMPLETE, and for thaw_super().
+=======
+	 * This is just for debugging purposes so that fs can warn if it
+	 * sees write activity when frozen is set to SB_FREEZE_COMPLETE.
+>>>>>>> v3.18
 =======
 	 * This is just for debugging purposes so that fs can warn if it
 	 * sees write activity when frozen is set to SB_FREEZE_COMPLETE.
@@ -1609,7 +1682,11 @@ int thaw_super(struct super_block *sb)
 
 	down_write(&sb->s_umount);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sb->s_writers.frozen != SB_FREEZE_COMPLETE) {
+=======
+	if (sb->s_writers.frozen == SB_UNFROZEN) {
+>>>>>>> v3.18
 =======
 	if (sb->s_writers.frozen == SB_UNFROZEN) {
 >>>>>>> v3.18

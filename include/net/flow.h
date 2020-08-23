@@ -29,10 +29,15 @@ struct flowi_common {
 	__u8	flowic_flags;
 #define FLOWI_FLAG_ANYSRC		0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FLOWI_FLAG_CAN_SLEEP		0x02
 #define FLOWI_FLAG_KNOWN_NH		0x04
 	__u32	flowic_secid;
 	uid_t	flowic_uid;
+=======
+#define FLOWI_FLAG_KNOWN_NH		0x02
+	__u32	flowic_secid;
+>>>>>>> v3.18
 =======
 #define FLOWI_FLAG_KNOWN_NH		0x02
 	__u32	flowic_secid;
@@ -74,7 +79,10 @@ struct flowi4 {
 #define flowi4_flags		__fl_common.flowic_flags
 #define flowi4_secid		__fl_common.flowic_secid
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flowi4_uid		__fl_common.flowic_uid
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -97,8 +105,12 @@ static inline void flowi4_init_output(struct flowi4 *fl4, int oif,
 				      __u8 proto, __u8 flags,
 				      __be32 daddr, __be32 saddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      __be16 dport, __be16 sport,
 				      uid_t uid)
+=======
+				      __be16 dport, __be16 sport)
+>>>>>>> v3.18
 =======
 				      __be16 dport, __be16 sport)
 >>>>>>> v3.18
@@ -112,7 +124,10 @@ static inline void flowi4_init_output(struct flowi4 *fl4, int oif,
 	fl4->flowi4_flags = flags;
 	fl4->flowi4_secid = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl4->flowi4_uid = uid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fl4->daddr = daddr;
@@ -143,7 +158,10 @@ struct flowi6 {
 #define flowi6_flags		__fl_common.flowic_flags
 #define flowi6_secid		__fl_common.flowic_secid
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flowi6_uid		__fl_common.flowic_uid
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct in6_addr		daddr;
@@ -190,7 +208,10 @@ struct flowi {
 #define flowi_flags	u.__fl_common.flowic_flags
 #define flowi_secid	u.__fl_common.flowic_secid
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flowi_uid	u.__fl_common.flowic_uid
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } __attribute__((__aligned__(BITS_PER_LONG/8)));
@@ -251,6 +272,7 @@ typedef struct flow_cache_object *(*flow_resolve_t)(
 		u8 dir, struct flow_cache_object *oldobj, void *ctx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct flow_cache_object *flow_cache_lookup(
 		struct net *net, const struct flowi *key, u16 family,
 		u8 dir, flow_resolve_t resolver, void *ctx);
@@ -258,6 +280,8 @@ extern struct flow_cache_object *flow_cache_lookup(
 extern void flow_cache_flush(void);
 extern void flow_cache_flush_deferred(void);
 =======
+=======
+>>>>>>> v3.18
 struct flow_cache_object *flow_cache_lookup(struct net *net,
 					    const struct flowi *key, u16 family,
 					    u8 dir, flow_resolve_t resolver,
@@ -267,6 +291,9 @@ void flow_cache_fini(struct net *net);
 
 void flow_cache_flush(struct net *net);
 void flow_cache_flush_deferred(struct net *net);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern atomic_t flow_cache_genid;
 

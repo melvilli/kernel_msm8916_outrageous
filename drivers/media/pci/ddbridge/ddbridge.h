@@ -157,7 +157,11 @@ struct ddb_port {
 struct ddb {
 	struct pci_dev        *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char         *regs;
+=======
+	unsigned char __iomem *regs;
+>>>>>>> v3.18
 =======
 	unsigned char __iomem *regs;
 >>>>>>> v3.18
@@ -178,6 +182,7 @@ struct ddb {
 
 #define ddbwritel(_val, _adr)        writel((_val), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     (char *) (dev->regs+(_adr)))
 #define ddbreadl(_adr)               readl((char *) (dev->regs+(_adr)))
 #define ddbcpyto(_adr, _src, _count) memcpy_toio((char *)	\
@@ -185,10 +190,15 @@ struct ddb {
 #define ddbcpyfrom(_dst, _adr, _count) memcpy_fromio((_dst), (char *) \
 				       (dev->regs+(_adr)), (_count))
 =======
+=======
+>>>>>>> v3.18
 				     dev->regs+(_adr))
 #define ddbreadl(_adr)               readl(dev->regs+(_adr))
 #define ddbcpyto(_adr, _src, _count) memcpy_toio(dev->regs+(_adr), (_src), (_count))
 #define ddbcpyfrom(_dst, _adr, _count) memcpy_fromio((_dst), dev->regs+(_adr), (_count))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /****************************************************************************/

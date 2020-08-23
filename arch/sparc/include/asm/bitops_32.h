@@ -19,9 +19,15 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long ___set_bit(unsigned long *addr, unsigned long mask);
 extern unsigned long ___clear_bit(unsigned long *addr, unsigned long mask);
 extern unsigned long ___change_bit(unsigned long *addr, unsigned long mask);
+=======
+unsigned long ___set_bit(unsigned long *addr, unsigned long mask);
+unsigned long ___clear_bit(unsigned long *addr, unsigned long mask);
+unsigned long ___change_bit(unsigned long *addr, unsigned long mask);
+>>>>>>> v3.18
 =======
 unsigned long ___set_bit(unsigned long *addr, unsigned long mask);
 unsigned long ___clear_bit(unsigned long *addr, unsigned long mask);
@@ -97,9 +103,12 @@ static inline void change_bit(unsigned long nr, volatile unsigned long *addr)
 #include <asm-generic/bitops/non-atomic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_clear_bit()	do { } while(0)
 #define smp_mb__after_clear_bit()	do { } while(0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/bitops/ffz.h>

@@ -29,7 +29,10 @@
 #include "cifs_debug.h"
 #include "cifs_fs_sb.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "cifs_unicode.h"
 #ifdef CONFIG_CIFS_SMB2
 #include "smb2proto.h"
@@ -38,6 +41,9 @@
 /*
  * M-F Symlink Functions - Begin
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CIFS_MF_SYMLINK_LEN_OFFSET (4+1)
@@ -103,10 +109,15 @@ symlink_hash_err:
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 CIFSParseMFSymlink(const u8 *buf,
 		   unsigned int buf_len,
 		   unsigned int *_link_len,
 		   char **_link_str)
+=======
+parse_mf_symlink(const u8 *buf, unsigned int buf_len, unsigned int *_link_len,
+		 char **_link_str)
+>>>>>>> v3.18
 =======
 parse_mf_symlink(const u8 *buf, unsigned int buf_len, unsigned int *_link_len,
 		 char **_link_str)
@@ -154,7 +165,11 @@ parse_mf_symlink(const u8 *buf, unsigned int buf_len, unsigned int *_link_len,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 CIFSFormatMFSymlink(u8 *buf, unsigned int buf_len, const char *link_str)
+=======
+format_mf_symlink(u8 *buf, unsigned int buf_len, const char *link_str)
+>>>>>>> v3.18
 =======
 format_mf_symlink(u8 *buf, unsigned int buf_len, const char *link_str)
 >>>>>>> v3.18
@@ -201,6 +216,7 @@ format_mf_symlink(u8 *buf, unsigned int buf_len, const char *link_str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 CIFSCreateMFSymLink(const unsigned int xid, struct cifs_tcon *tcon,
 		    const char *fromName, const char *toName,
@@ -219,6 +235,8 @@ CIFSCreateMFSymLink(const unsigned int xid, struct cifs_tcon *tcon,
 	nls_codepage = cifs_sb->local_nls;
 	remap = cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR;
 =======
+=======
+>>>>>>> v3.18
 bool
 couldbe_mf_symlink(const struct cifs_fattr *fattr)
 {
@@ -275,12 +293,16 @@ query_mf_symlink(const unsigned int xid, struct cifs_tcon *tcon,
 	u8 *buf = NULL;
 	unsigned int link_len = 0;
 	unsigned int bytes_read = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	buf = kmalloc(CIFS_MF_SYMLINK_FILE_SIZE, GFP_KERNEL);
 	if (!buf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = CIFSFormatMFSymlink(buf, CIFS_MF_SYMLINK_FILE_SIZE, toName);
 	if (rc != 0) {
@@ -351,6 +373,8 @@ CIFSQueryMFSymLink(const unsigned int xid, struct cifs_tcon *tcon,
 	pbuf = buf;
 	io_parms.netfid = netfid;
 =======
+=======
+>>>>>>> v3.18
 	if (tcon->ses->server->ops->query_mf_symlink)
 		rc = tcon->ses->server->ops->query_mf_symlink(xid, tcon,
 					      cifs_sb, path, buf, &bytes_read);
@@ -458,12 +482,16 @@ cifs_query_mf_symlink(unsigned int xid, struct cifs_tcon *tcon,
 	}
 
 	io_parms.netfid = fid.netfid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	io_parms.pid = current->tgid;
 	io_parms.tcon = tcon;
 	io_parms.offset = 0;
 	io_parms.length = CIFS_MF_SYMLINK_FILE_SIZE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = CIFSSMBRead(xid, &io_parms, &bytes_read, &pbuf, &buf_type);
 	CIFSSMBClose(xid, tcon, netfid);
@@ -575,6 +603,8 @@ out:
 	return rc;
 }
 =======
+=======
+>>>>>>> v3.18
 	rc = CIFSSMBRead(xid, &io_parms, pbytes_read, &pbuf, &buf_type);
 out:
 	CIFSSMBClose(xid, tcon, fid.netfid);
@@ -751,6 +781,9 @@ smb3_create_mf_symlink(unsigned int xid, struct cifs_tcon *tcon,
 /*
  * M-F Symlink Functions - End
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int
@@ -785,6 +818,7 @@ cifs_hardlink(struct dentry *old_file, struct inode *inode,
 		rc = CIFSUnixCreateHardLink(xid, tcon, from_name, to_name,
 					    cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
 	else {
@@ -792,6 +826,8 @@ cifs_hardlink(struct dentry *old_file, struct inode *inode,
 		if (!server->ops->create_hardlink)
 			return -ENOSYS;
 =======
+=======
+>>>>>>> v3.18
 					    cifs_remap(cifs_sb));
 	else {
 		server = tcon->ses->server;
@@ -799,6 +835,9 @@ cifs_hardlink(struct dentry *old_file, struct inode *inode,
 			rc = -ENOSYS;
 			goto cifs_hl_exit;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = server->ops->create_hardlink(xid, tcon, from_name, to_name,
 						  cifs_sb);
@@ -819,11 +858,15 @@ cifs_hardlink(struct dentry *old_file, struct inode *inode,
 			inc_nlink(old_file->d_inode);
 			spin_unlock(&old_file->d_inode->i_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*
 			 * BB should we make this contingent on superblock flag
 			 * NOATIME?
 			 */
 			/* old_file->d_inode->i_ctime = CURRENT_TIME; */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -837,7 +880,13 @@ cifs_hardlink(struct dentry *old_file, struct inode *inode,
 		/*
 		 * if not oplocked will force revalidate to get info on source
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * file from srv
+=======
+		 * file from srv.  Note Samba server prior to 4.2 has bug -
+		 * not updating src file ctime on hardlinks but Windows servers
+		 * handle it properly
+>>>>>>> v3.18
 =======
 		 * file from srv.  Note Samba server prior to 4.2 has bug -
 		 * not updating src file ctime on hardlinks but Windows servers
@@ -876,6 +925,10 @@ cifs_follow_link(struct dentry *direntry, struct nameidata *nd)
 	struct tcon_link *tlink = NULL;
 	struct cifs_tcon *tcon;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct TCP_Server_Info *server;
+>>>>>>> v3.18
 =======
 	struct TCP_Server_Info *server;
 >>>>>>> v3.18
@@ -889,6 +942,7 @@ cifs_follow_link(struct dentry *direntry, struct nameidata *nd)
 		goto out;
 	}
 	tcon = tlink_tcon(tlink);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -912,6 +966,9 @@ cifs_follow_link(struct dentry *direntry, struct nameidata *nd)
 =======
 	server = tcon->ses->server;
 >>>>>>> v3.18
+=======
+	server = tcon->ses->server;
+>>>>>>> v3.18
 
 	full_path = build_path_from_dentry(direntry);
 	if (!full_path)
@@ -926,6 +983,7 @@ cifs_follow_link(struct dentry *direntry, struct nameidata *nd)
 	 */
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MF_SYMLINKS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = CIFSQueryMFSymLink(xid, tcon, full_path, &target_path,
 					cifs_sb->local_nls,
 					cifs_sb->mnt_cifs_flags &
@@ -935,12 +993,17 @@ cifs_follow_link(struct dentry *direntry, struct nameidata *nd)
 		rc = CIFSSMBUnixQuerySymLink(xid, tcon, full_path, &target_path,
 					     cifs_sb->local_nls);
 =======
+=======
+>>>>>>> v3.18
 		rc = query_mf_symlink(xid, tcon, cifs_sb, full_path,
 				      &target_path);
 
 	if (rc != 0 && server->ops->query_symlink)
 		rc = server->ops->query_symlink(xid, tcon, full_path,
 						&target_path, cifs_sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(full_path);
@@ -989,8 +1052,12 @@ cifs_symlink(struct inode *inode, struct dentry *direntry, const char *symname)
 	/* BB what if DFS and this volume is on different share? BB */
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MF_SYMLINKS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = CIFSCreateMFSymLink(xid, pTcon, full_path, symname,
 					cifs_sb);
+=======
+		rc = create_mf_symlink(xid, pTcon, cifs_sb, full_path, symname);
+>>>>>>> v3.18
 =======
 		rc = create_mf_symlink(xid, pTcon, cifs_sb, full_path, symname);
 >>>>>>> v3.18
@@ -1023,6 +1090,7 @@ symlink_exit:
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void cifs_put_link(struct dentry *direntry, struct nameidata *nd, void *cookie)
 {
@@ -1030,5 +1098,7 @@ void cifs_put_link(struct dentry *direntry, struct nameidata *nd, void *cookie)
 	if (!IS_ERR(p))
 		kfree(p);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

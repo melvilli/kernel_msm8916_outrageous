@@ -38,7 +38,11 @@ struct exec_domain default_exec_domain = {
 	.name		= "Linux",		/* name */
 	.handler	= default_handler,	/* lcall7 causes a seg fault. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.pers_low	= 0, 			/* PER_LINUX personality. */
+=======
+	.pers_low	= 0,			/* PER_LINUX personality. */
+>>>>>>> v3.18
 =======
 	.pers_low	= 0,			/* PER_LINUX personality. */
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ lookup_exec_domain(unsigned int personality)
 out:
 	read_unlock(&exec_domains_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ep);
+=======
+	return ep;
+>>>>>>> v3.18
 =======
 	return ep;
 >>>>>>> v3.18
@@ -119,8 +127,14 @@ register_exec_domain(struct exec_domain *ep)
 out:
 	write_unlock(&exec_domains_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (err);
 }
+=======
+	return err;
+}
+EXPORT_SYMBOL(register_exec_domain);
+>>>>>>> v3.18
 =======
 	return err;
 }
@@ -148,6 +162,10 @@ unregister:
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(unregister_exec_domain);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(unregister_exec_domain);
 >>>>>>> v3.18
@@ -163,6 +181,10 @@ int __set_personality(unsigned int personality)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__set_personality);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__set_personality);
 >>>>>>> v3.18
@@ -211,10 +233,13 @@ SYSCALL_DEFINE1(personality, unsigned int, personality)
 	return old;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 EXPORT_SYMBOL(register_exec_domain);
 EXPORT_SYMBOL(unregister_exec_domain);
 EXPORT_SYMBOL(__set_personality);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

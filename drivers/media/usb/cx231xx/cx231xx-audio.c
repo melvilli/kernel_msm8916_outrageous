@@ -666,8 +666,13 @@ static int cx231xx_audio_init(struct cx231xx *dev)
 		     "non standard usbaudio\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[devnr], "Cx231xx Audio", THIS_MODULE,
 			      0, &card);
+=======
+	err = snd_card_new(&dev->udev->dev, index[devnr], "Cx231xx Audio",
+			   THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&dev->udev->dev, index[devnr], "Cx231xx Audio",
 			   THIS_MODULE, 0, &card);
@@ -688,7 +693,10 @@ static int cx231xx_audio_init(struct cx231xx *dev)
 	pcm->private_data = dev;
 	strcpy(pcm->name, "Conexant cx231xx Capture");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &dev->udev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(card->driver, "Cx231xx-Audio");

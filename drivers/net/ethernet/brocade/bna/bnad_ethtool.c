@@ -267,8 +267,13 @@ bnad_get_settings(struct net_device *netdev, struct ethtool_cmd *cmd)
 		cmd->duplex = DUPLEX_FULL;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(cmd, -1);
 		cmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
+		cmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
 		cmd->duplex = DUPLEX_UNKNOWN;
@@ -1003,10 +1008,15 @@ bnad_get_eeprom(struct net_device *netdev, struct ethtool_eeprom *eeprom,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check if the flash read request is valid */
 	if (eeprom->magic != (bnad->pcidev->vendor |
 			     (bnad->pcidev->device << 16)))
 		return -EFAULT;
+=======
+	/* Fill the magic value */
+	eeprom->magic = bnad->pcidev->vendor | (bnad->pcidev->device << 16);
+>>>>>>> v3.18
 =======
 	/* Fill the magic value */
 	eeprom->magic = bnad->pcidev->vendor | (bnad->pcidev->device << 16);
@@ -1142,6 +1152,10 @@ static const struct ethtool_ops bnad_ethtool_ops = {
 	.set_eeprom = bnad_set_eeprom,
 	.flash_device = bnad_flash_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_ts_info = ethtool_op_get_ts_info,
+>>>>>>> v3.18
 =======
 	.get_ts_info = ethtool_op_get_ts_info,
 >>>>>>> v3.18
@@ -1151,7 +1165,11 @@ void
 bnad_set_ethtool_ops(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &bnad_ethtool_ops);
+=======
+	netdev->ethtool_ops = &bnad_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &bnad_ethtool_ops;
 >>>>>>> v3.18

@@ -2,11 +2,14 @@
 #define _LINUX_BH_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void local_bh_disable(void);
 extern void _local_bh_enable(void);
 extern void local_bh_enable(void);
 extern void local_bh_enable_ip(unsigned long ip);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/preempt.h>
 #include <linux/preempt_mask.h>
 
@@ -37,6 +40,9 @@ static inline void local_bh_enable(void)
 {
 	__local_bh_enable_ip(_THIS_IP_, SOFTIRQ_DISABLE_OFFSET);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _LINUX_BH_H */

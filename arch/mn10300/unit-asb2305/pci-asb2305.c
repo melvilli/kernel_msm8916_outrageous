@@ -222,7 +222,11 @@ int pci_mmap_page_range(struct pci_dev *dev, struct vm_area_struct *vma,
 	 * address on this platform.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags |= VM_LOCKED | VM_IO;
+=======
+	vma->vm_flags |= VM_LOCKED;
+>>>>>>> v3.18
 =======
 	vma->vm_flags |= VM_LOCKED;
 >>>>>>> v3.18

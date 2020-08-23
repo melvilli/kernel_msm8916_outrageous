@@ -30,7 +30,10 @@ enum ipi_message_type {
 	IPI_RESCHEDULE = 1,
 	IPI_CALL_FUNC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IPI_CALL_FUNC_SINGLE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	IPI_CPU_STOP,

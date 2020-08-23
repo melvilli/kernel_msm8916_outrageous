@@ -2,7 +2,11 @@
  * net/tipc/net.c: TIPC network routing code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 1995-2006, Ericsson AB
+=======
+ * Copyright (c) 1995-2006, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 1995-2006, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -43,7 +47,11 @@
 #include "name_distr.h"
 #include "subscr.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "port.h"
+=======
+#include "socket.h"
+>>>>>>> v3.18
 =======
 #include "socket.h"
 >>>>>>> v3.18
@@ -53,6 +61,7 @@
 /*
  * The TIPC locking policy is designed to ensure a very fine locking
  * granularity, permitting complete parallel access to individual
+<<<<<<< HEAD
 <<<<<<< HEAD
  * port and node/link instances. The code consists of three major
  * locking domains, each protected with their own disjunct set of locks.
@@ -88,6 +97,8 @@
  *
  *     This layer has four different locks:
 =======
+=======
+>>>>>>> v3.18
  * port and node/link instances. The code consists of four major
  * locking domains, each protected with their own disjunct set of locks.
  *
@@ -116,6 +127,9 @@
  *    tipc_user (port.c, reg.c, socket.c).
  *
  *    This layer has four different locks:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *     - The tipc_port spin_lock. This is protecting each port instance
  *       from parallel data access and removal. Since we can not place
@@ -136,7 +150,11 @@
  *       and 'wait_list', which is used to queue ports during congestion.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  3: The name table (name_table.c, name_distr.c, subscription.c)
+=======
+ *  4: The name table (name_table.c, name_distr.c, subscription.c)
+>>>>>>> v3.18
 =======
  *  4: The name table (name_table.c, name_distr.c, subscription.c)
 >>>>>>> v3.18
@@ -151,6 +169,7 @@
  *     - A local spin_lock protecting the queue of subscriber events.
 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 DEFINE_RWLOCK(tipc_net_lock);
 
@@ -228,6 +247,8 @@ void tipc_net_start(u32 addr)
 
 	tipc_cfg_reinit();
 =======
+=======
+>>>>>>> v3.18
 int tipc_net_start(u32 addr)
 {
 	char addr_string[16];
@@ -242,12 +263,19 @@ int tipc_net_start(u32 addr)
 
 	tipc_nametbl_publish(TIPC_CFG_SRV, tipc_own_addr, tipc_own_addr,
 			     TIPC_ZONE_SCOPE, 0, tipc_own_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_info("Started in network mode\n");
 	pr_info("Own node address %s, network identity %u\n",
 		tipc_addr_string_fill(addr_string, tipc_own_addr), tipc_net_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -255,6 +283,7 @@ int tipc_net_start(u32 addr)
 
 void tipc_net_stop(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tipc_node *node, *t_node;
 
@@ -267,6 +296,8 @@ void tipc_net_stop(void)
 		tipc_node_delete(node);
 	write_unlock_bh(&tipc_net_lock);
 =======
+=======
+>>>>>>> v3.18
 	if (!tipc_own_addr)
 		return;
 
@@ -277,6 +308,9 @@ void tipc_net_stop(void)
 	tipc_node_stop();
 	rtnl_unlock();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("Left network mode\n");
 }

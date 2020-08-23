@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/usb.h>
@@ -70,6 +73,7 @@ struct tusb_omap_dma {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tusb_omap_dma_start(struct dma_controller *c)
 {
 	struct tusb_omap_dma	*tusb_dma;
@@ -92,6 +96,8 @@ static int tusb_omap_dma_stop(struct dma_controller *c)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -702,8 +708,11 @@ struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *ba
 	tusb_dma->sync_dev = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tusb_dma->controller.start = tusb_omap_dma_start;
 	tusb_dma->controller.stop = tusb_omap_dma_stop;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tusb_dma->controller.channel_alloc = tusb_omap_dma_allocate;
@@ -712,7 +721,11 @@ struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *ba
 	tusb_dma->controller.channel_abort = tusb_omap_dma_abort;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tusb_get_revision(musb) >= TUSB_REV_30)
+=======
+	if (musb->tusb_revision >= TUSB_REV_30)
+>>>>>>> v3.18
 =======
 	if (musb->tusb_revision >= TUSB_REV_30)
 >>>>>>> v3.18

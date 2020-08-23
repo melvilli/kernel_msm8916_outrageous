@@ -53,6 +53,10 @@ struct clk {
 
 	void __iomem		*enable_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem		*status_reg;
+>>>>>>> v3.18
 =======
 	void __iomem		*status_reg;
 >>>>>>> v3.18
@@ -121,7 +125,11 @@ long clk_round_parent(struct clk *clk, unsigned long target,
 		      unsigned int div_min, unsigned int div_max);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SH_CLK_MSTP(_parent, _enable_reg, _enable_bit, _flags)		\
+=======
+#define SH_CLK_MSTP(_parent, _enable_reg, _enable_bit, _status_reg, _flags) \
+>>>>>>> v3.18
 =======
 #define SH_CLK_MSTP(_parent, _enable_reg, _enable_bit, _status_reg, _flags) \
 >>>>>>> v3.18
@@ -129,6 +137,7 @@ long clk_round_parent(struct clk *clk, unsigned long target,
 	.parent		= _parent,					\
 	.enable_reg	= (void __iomem *)_enable_reg,			\
 	.enable_bit	= _enable_bit,					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.flags		= _flags,					\
 }
@@ -142,6 +151,8 @@ long clk_round_parent(struct clk *clk, unsigned long target,
 #define SH_CLK_MSTP8(_p, _r, _b, _f)					\
 	SH_CLK_MSTP(_p, _r, _b, _f | CLK_ENABLE_REG_8BIT)
 =======
+=======
+>>>>>>> v3.18
 	.status_reg	= _status_reg,					\
 	.flags		= _flags,					\
 }
@@ -157,6 +168,9 @@ long clk_round_parent(struct clk *clk, unsigned long target,
 
 #define SH_CLK_MSTP8(_p, _r, _b, _f)				\
 	SH_CLK_MSTP(_p, _r, _b, 0, _f | CLK_ENABLE_REG_8BIT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int sh_clk_mstp_register(struct clk *clks, int nr);

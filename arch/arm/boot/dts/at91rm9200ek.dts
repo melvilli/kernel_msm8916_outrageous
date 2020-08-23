@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91rm9200.dtsi"
+=======
+#include "at91rm9200.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91rm9200.dtsi"
 >>>>>>> v3.18
@@ -30,7 +34,10 @@
 			clock-frequency = <18432000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -39,17 +46,23 @@
 		main_xtal {
 			clock-frequency = <18432000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	ahb {
 		apb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dbgu: serial@fffff200 {
 				status = "okay";
 			};
 
 =======
+=======
+>>>>>>> v3.18
 			usb1: gadget@fffb0000 {
 				atmel,vbus-gpio = <&pioD 4 GPIO_ACTIVE_HIGH>;
 				atmel,pullup-gpio = <&pioD 5 GPIO_ACTIVE_HIGH>;
@@ -66,6 +79,9 @@
 				};
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			usart1: serial@fffc4000 {
 				pinctrl-0 =
@@ -79,6 +95,7 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			macb0: ethernet@fffbc000 {
 				phy-mode = "rmii";
 				status = "okay";
@@ -87,6 +104,8 @@
 			usb1: gadget@fffb0000 {
 				atmel,vbus-gpio = <&pioD 4 0>;
 =======
+=======
+>>>>>>> v3.18
 			spi0: spi@fffe0000 {
 				status = "okay";
 				cs-gpios = <&pioA 3 0>, <0>, <0>, <0>;
@@ -98,6 +117,9 @@
 			};
 
 			dbgu: serial@fffff200 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -108,7 +130,10 @@
 			status = "okay";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		nor_flash@10000000 {
 			compatible = "cfi-flash";
@@ -138,6 +163,9 @@
 				reg = <0x350000 0x4B0000>;
 			};
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -147,7 +175,11 @@
 		ds2 {
 			label = "green";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 0 0x1>;
+=======
+			gpios = <&pioB 0 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 0 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -157,7 +189,11 @@
 		ds4 {
 			label = "yellow";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 1 0x1>;
+=======
+			gpios = <&pioB 1 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 1 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -167,7 +203,11 @@
 		ds6 {
 			label = "red";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 2 0x1>;
+=======
+			gpios = <&pioB 2 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 2 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

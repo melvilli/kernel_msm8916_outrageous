@@ -29,7 +29,11 @@ static const struct of_dev_auxdata pxa3xx_auxdata_lookup[] __initconst = {
 	OF_DEV_AUXDATA("mrvl,pxa-uart",		0x41600000, "pxa2xx-uart.3", NULL),
 	OF_DEV_AUXDATA("marvell,pxa-mmc",	0x41100000, "pxa2xx-mci.0", NULL),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OF_DEV_AUXDATA("mrvl,pxa-gpio",		0x40e00000, "pxa-gpio", NULL),
+=======
+	OF_DEV_AUXDATA("intel,pxa3xx-gpio",	0x40e00000, "pxa3xx-gpio", NULL),
+>>>>>>> v3.18
 =======
 	OF_DEV_AUXDATA("intel,pxa3xx-gpio",	0x40e00000, "pxa3xx-gpio", NULL),
 >>>>>>> v3.18

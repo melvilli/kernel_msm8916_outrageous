@@ -19,6 +19,7 @@ config SECURITY_DMESG_RESTRICT
 	  If you are unsure how to answer this question, answer N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SECURITY_PERF_EVENTS_RESTRICT
 	bool "Restrict unprivileged use of performance events"
 	depends on PERF_EVENTS
@@ -28,6 +29,8 @@ config SECURITY_PERF_EVENTS_RESTRICT
 	  perf_event_open syscall will be permitted unless it is
 	  changed.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SECURITY
@@ -83,6 +86,7 @@ config SECURITY_PATH
 	  If you are unsure how to answer this question, answer N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SECURITY_PFT
 	bool "Security hooks for Per File Encryption"
 	depends on SECURITY
@@ -93,6 +97,8 @@ config SECURITY_PFT
 	  implement file based access controls and encryption.
 	  If you are unsure how to answer this question, answer N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config INTEL_TXT
@@ -129,7 +135,11 @@ config LSM_MMAP_MIN_ADDR
 	int "Low address space for LSM to protect from user allocation"
 	depends on SECURITY && SECURITY_SELINUX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default 32768 if ARM
+=======
+	default 32768 if ARM || (ARM64 && COMPAT)
+>>>>>>> v3.18
 =======
 	default 32768 if ARM || (ARM64 && COMPAT)
 >>>>>>> v3.18
@@ -162,7 +172,10 @@ choice
 	default DEFAULT_SECURITY_APPARMOR if SECURITY_APPARMOR
 	default DEFAULT_SECURITY_YAMA if SECURITY_YAMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default DEFAULT_SECURITY_PFT if SECURITY_PFT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default DEFAULT_SECURITY_DAC
@@ -187,9 +200,12 @@ choice
 		bool "Yama" if SECURITY_YAMA=y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEFAULT_SECURITY_PFT
 		bool "PFT" if SECURITY_PFT=y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	config DEFAULT_SECURITY_DAC
@@ -205,7 +221,10 @@ config DEFAULT_SECURITY
 	default "apparmor" if DEFAULT_SECURITY_APPARMOR
 	default "yama" if DEFAULT_SECURITY_YAMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default "pft" if DEFAULT_SECURITY_PFT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default "" if DEFAULT_SECURITY_DAC

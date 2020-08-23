@@ -1,14 +1,20 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Samsung S5P/EXYNOS4 SoC series MIPI-CSI receiver driver
  *
  * Copyright (C) 2011 - 2012 Samsung Electronics Co., Ltd.
  * Sylwester Nawrocki <s.nawrocki@samsung.com>
 =======
+=======
+>>>>>>> v3.18
  * Samsung S5P/EXYNOS SoC series MIPI-CSI receiver driver
  *
  * Copyright (C) 2011 - 2013 Samsung Electronics Co., Ltd.
  * Author: Sylwester Nawrocki <s.nawrocki@samsung.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,6 +34,7 @@
 #include <linux/module.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/mipi-csis.h>
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
@@ -37,6 +44,8 @@
 #include <linux/videodev2.h>
 #include <media/s5p_fimc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_graph.h>
 #include <linux/phy/phy.h>
 #include <linux/platform_device.h>
@@ -47,6 +56,9 @@
 #include <linux/spinlock.h>
 #include <linux/videodev2.h>
 #include <media/exynos-fimc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <media/v4l2-of.h>
 #include <media/v4l2-subdev.h>
@@ -87,7 +99,10 @@ MODULE_PARM_DESC(debug, "Debug level (0-2)");
 /* Interrupt mask */
 #define S5PCSIS_INTMSK			0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5PCSIS_INTMSK_EN_ALL		0xf000103f
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define S5PCSIS_INTMSK_EVEN_BEFORE	(1 << 31)
@@ -95,6 +110,11 @@ MODULE_PARM_DESC(debug, "Debug level (0-2)");
 #define S5PCSIS_INTMSK_ODD_BEFORE	(1 << 29)
 #define S5PCSIS_INTMSK_ODD_AFTER	(1 << 28)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5PCSIS_INTMSK_FRAME_START	(1 << 27)
+#define S5PCSIS_INTMSK_FRAME_END	(1 << 26)
+>>>>>>> v3.18
 =======
 #define S5PCSIS_INTMSK_FRAME_START	(1 << 27)
 #define S5PCSIS_INTMSK_FRAME_END	(1 << 26)
@@ -107,6 +127,11 @@ MODULE_PARM_DESC(debug, "Debug level (0-2)");
 #define S5PCSIS_INTMSK_ERR_CRC		(1 << 1)
 #define S5PCSIS_INTMSK_ERR_UNKNOWN	(1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5PCSIS_INTMSK_EXYNOS4_EN_ALL	0xf000103f
+#define S5PCSIS_INTMSK_EXYNOS5_EN_ALL	0xfc00103f
+>>>>>>> v3.18
 =======
 #define S5PCSIS_INTMSK_EXYNOS4_EN_ALL	0xf000103f
 #define S5PCSIS_INTMSK_EXYNOS5_EN_ALL	0xfc00103f
@@ -121,7 +146,13 @@ MODULE_PARM_DESC(debug, "Debug level (0-2)");
 #define S5PCSIS_INTSRC_ODD_AFTER	(1 << 28)
 #define S5PCSIS_INTSRC_ODD		(0x3 << 28)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5PCSIS_INTSRC_NON_IMAGE_DATA	(0xff << 28)
+=======
+#define S5PCSIS_INTSRC_NON_IMAGE_DATA	(0xf << 28)
+#define S5PCSIS_INTSRC_FRAME_START	(1 << 27)
+#define S5PCSIS_INTSRC_FRAME_END	(1 << 26)
+>>>>>>> v3.18
 =======
 #define S5PCSIS_INTSRC_NON_IMAGE_DATA	(0xf << 28)
 #define S5PCSIS_INTSRC_FRAME_START	(1 << 27)
@@ -191,6 +222,12 @@ static const struct s5pcsis_event s5pcsis_events[] = {
 	{ S5PCSIS_INTSRC_ODD_BEFORE,	"Non-image data before odd frame" },
 	{ S5PCSIS_INTSRC_ODD_AFTER,	"Non-image data after odd frame" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Frame start/end */
+	{ S5PCSIS_INTSRC_FRAME_START,	"Frame Start" },
+	{ S5PCSIS_INTSRC_FRAME_END,	"Frame End" },
+>>>>>>> v3.18
 =======
 	/* Frame start/end */
 	{ S5PCSIS_INTSRC_FRAME_START,	"Frame Start" },
@@ -205,12 +242,18 @@ struct csis_pktbuf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct csis_drvdata {
 	/* Mask of all used interrupts in S5PCSIS_INTMSK register */
 	u32 interrupt_mask;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct csis_state - the driver's internal state data structure
@@ -221,6 +264,10 @@ struct csis_drvdata {
  * @index: the hardware instance index
  * @pdev: CSIS platform device
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @phy: pointer to the CSIS generic PHY
+>>>>>>> v3.18
 =======
  * @phy: pointer to the CSIS generic PHY
 >>>>>>> v3.18
@@ -229,6 +276,10 @@ struct csis_drvdata {
  * @clock: CSIS clocks
  * @irq: requested s5p-mipi-csis irq number
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @interrupt_mask: interrupt mask of the all used interrupts
+>>>>>>> v3.18
 =======
  * @interrupt_mask: interrupt mask of the all used interrupts
 >>>>>>> v3.18
@@ -251,6 +302,10 @@ struct csis_state {
 	u8 index;
 	struct platform_device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct phy *phy;
+>>>>>>> v3.18
 =======
 	struct phy *phy;
 >>>>>>> v3.18
@@ -259,6 +314,10 @@ struct csis_state {
 	struct clk *clock[NUM_CSIS_CLOCKS];
 	int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 interrupt_mask;
+>>>>>>> v3.18
 =======
 	u32 interrupt_mask;
 >>>>>>> v3.18
@@ -344,14 +403,20 @@ static void s5pcsis_enable_interrupts(struct csis_state *state, bool on)
 {
 	u32 val = s5pcsis_read(state, S5PCSIS_INTMSK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	val = on ? val | S5PCSIS_INTMSK_EN_ALL :
 		   val & ~S5PCSIS_INTMSK_EN_ALL;
 =======
+=======
+>>>>>>> v3.18
 	if (on)
 		val |= state->interrupt_mask;
 	else
 		val &= ~state->interrupt_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s5pcsis_write(state, S5PCSIS_INTMSK, val);
 }
@@ -787,6 +852,7 @@ static irqreturn_t s5pcsis_irq_handler(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s5pcsis_get_platform_data(struct platform_device *pdev,
 				     struct csis_state *state)
 {
@@ -809,6 +875,8 @@ static int s5pcsis_get_platform_data(struct platform_device *pdev,
 #ifdef CONFIG_OF
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int s5pcsis_parse_dt(struct platform_device *pdev,
 			    struct csis_state *state)
 {
@@ -823,7 +891,11 @@ static int s5pcsis_parse_dt(struct platform_device *pdev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = v4l2_of_get_next_endpoint(node, NULL);
+=======
+	node = of_graph_get_next_endpoint(node, NULL);
+>>>>>>> v3.18
 =======
 	node = of_graph_get_next_endpoint(node, NULL);
 >>>>>>> v3.18
@@ -836,8 +908,13 @@ static int s5pcsis_parse_dt(struct platform_device *pdev,
 	v4l2_of_parse_endpoint(node, &endpoint);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->index = endpoint.port - FIMC_INPUT_MIPI_CSI2_0;
 	if (state->index < 0 || state->index >= CSIS_MAX_ENTITIES)
+=======
+	state->index = endpoint.base.port - FIMC_INPUT_MIPI_CSI2_0;
+	if (state->index >= CSIS_MAX_ENTITIES)
+>>>>>>> v3.18
 =======
 	state->index = endpoint.base.port - FIMC_INPUT_MIPI_CSI2_0;
 	if (state->index >= CSIS_MAX_ENTITIES)
@@ -852,6 +929,7 @@ static int s5pcsis_parse_dt(struct platform_device *pdev,
 
 	state->num_lanes = endpoint.bus.mipi_csi2.num_data_lanes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	of_node_put(node);
 	return 0;
@@ -863,6 +941,8 @@ static int s5pcsis_parse_dt(struct platform_device *pdev,
 static int s5pcsis_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 	of_node_put(node);
 
 	return 0;
@@ -875,6 +955,9 @@ static int s5pcsis_probe(struct platform_device *pdev)
 {
 	const struct of_device_id *of_id;
 	const struct csis_drvdata *drv_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	struct resource *mem_res;
@@ -891,11 +974,14 @@ static int s5pcsis_probe(struct platform_device *pdev)
 	state->pdev = pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->of_node)
 		ret = s5pcsis_parse_dt(pdev, state);
 	else
 		ret = s5pcsis_get_platform_data(pdev, state);
 =======
+=======
+>>>>>>> v3.18
 	of_id = of_match_node(s5pcsis_of_match, dev->of_node);
 	if (WARN_ON(of_id == NULL))
 		return -EINVAL;
@@ -904,6 +990,9 @@ static int s5pcsis_probe(struct platform_device *pdev)
 	state->interrupt_mask = drv_data->interrupt_mask;
 
 	ret = s5pcsis_parse_dt(pdev, state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -915,11 +1004,17 @@ static int s5pcsis_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	state->phy = devm_phy_get(dev, "csis");
 	if (IS_ERR(state->phy))
 		return PTR_ERR(state->phy);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	state->regs = devm_ioremap_resource(dev, mem_res);
@@ -988,8 +1083,11 @@ static int s5pcsis_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, &state->sd);
 	memcpy(state->events, s5pcsis_events, sizeof(state->events));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_enable(dev);
 =======
+=======
+>>>>>>> v3.18
 
 	pm_runtime_enable(dev);
 	if (!pm_runtime_enabled(dev)) {
@@ -997,6 +1095,9 @@ static int s5pcsis_probe(struct platform_device *pdev)
 		if (ret < 0)
 			goto e_m_ent;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(&pdev->dev, "lanes: %d, hs_settle: %d, wclk: %d, freq: %u\n",
@@ -1005,6 +1106,11 @@ static int s5pcsis_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+e_m_ent:
+	media_entity_cleanup(&state->sd.entity);
+>>>>>>> v3.18
 =======
 e_m_ent:
 	media_entity_cleanup(&state->sd.entity);
@@ -1030,7 +1136,11 @@ static int s5pcsis_pm_suspend(struct device *dev, bool runtime)
 	if (state->flags & ST_POWERED) {
 		s5pcsis_stop_stream(state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = s5p_csis_phy_enable(state->index, false);
+=======
+		ret = phy_power_off(state->phy);
+>>>>>>> v3.18
 =======
 		ret = phy_power_off(state->phy);
 >>>>>>> v3.18
@@ -1070,7 +1180,11 @@ static int s5pcsis_pm_resume(struct device *dev, bool runtime)
 		if (ret)
 			goto unlock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = s5p_csis_phy_enable(state->index, true);
+=======
+		ret = phy_power_on(state->phy);
+>>>>>>> v3.18
 =======
 		ret = phy_power_on(state->phy);
 >>>>>>> v3.18
@@ -1123,7 +1237,11 @@ static int s5pcsis_remove(struct platform_device *pdev)
 
 	pm_runtime_disable(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5pcsis_pm_suspend(&pdev->dev, false);
+=======
+	s5pcsis_pm_suspend(&pdev->dev, true);
+>>>>>>> v3.18
 =======
 	s5pcsis_pm_suspend(&pdev->dev, true);
 >>>>>>> v3.18
@@ -1143,10 +1261,13 @@ static const struct dev_pm_ops s5pcsis_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id s5pcsis_of_match[] = {
 	{ .compatible = "samsung,s5pv210-csis" },
 	{ .compatible = "samsung,exynos4210-csis" },
 =======
+=======
+>>>>>>> v3.18
 static const struct csis_drvdata exynos4_csis_drvdata = {
 	.interrupt_mask = S5PCSIS_INTMSK_EXYNOS4_EN_ALL,
 };
@@ -1166,6 +1287,9 @@ static const struct of_device_id s5pcsis_of_match[] = {
 		.compatible = "samsung,exynos5250-csis",
 		.data = &exynos5_csis_drvdata,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ /* sentinel */ },
 };

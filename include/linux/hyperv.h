@@ -26,6 +26,7 @@
 #define _HYPERV_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 
 
@@ -338,11 +339,16 @@ struct hv_kvp_ip_msg {
 #include <linux/list.h>
 #include <linux/uuid.h>
 =======
+=======
+>>>>>>> v3.18
 #include <uapi/linux/hyperv.h>
 
 #include <linux/types.h>
 #include <linux/scatterlist.h>
 #include <linux/list.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/timer.h>
 #include <linux/workqueue.h>
@@ -352,7 +358,11 @@ struct hv_kvp_ip_msg {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PAGE_BUFFER_COUNT				19
+=======
+#define MAX_PAGE_BUFFER_COUNT				32
+>>>>>>> v3.18
 =======
 #define MAX_PAGE_BUFFER_COUNT				32
 >>>>>>> v3.18
@@ -434,6 +444,7 @@ struct hv_ring_buffer_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hv_ring_buffer_debug_info {
 	u32 current_interrupt_mask;
 	u32 current_read_index;
@@ -443,6 +454,8 @@ struct hv_ring_buffer_debug_info {
 };
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -471,6 +484,7 @@ hv_get_ringbuffer_availbytes(struct hv_ring_buffer_info *rbi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * We use the same version numbering for all Hyper-V modules.
@@ -494,6 +508,8 @@ hv_get_ringbuffer_availbytes(struct hv_ring_buffer_info *rbi,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * VMBUS version is 32 bit entity broken up into
  * two 16 bit quantities: major_number. minor_number.
@@ -510,7 +526,10 @@ hv_get_ringbuffer_availbytes(struct hv_ring_buffer_info *rbi,
 #define VERSION_WIN8_1    ((3 << 16) | (0))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define VERSION_INVAL -1
@@ -934,6 +953,7 @@ enum vmbus_channel_state {
 	CHANNEL_OPENING_STATE,
 	CHANNEL_OPEN_STATE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct vmbus_channel_debug_info {
@@ -951,6 +971,9 @@ struct vmbus_channel_debug_info {
 
 	struct hv_ring_buffer_debug_info inbound;
 	struct hv_ring_buffer_debug_info outbound;
+=======
+	CHANNEL_OPENED_STATE,
+>>>>>>> v3.18
 =======
 	CHANNEL_OPENED_STATE,
 >>>>>>> v3.18
@@ -1075,7 +1098,10 @@ struct vmbus_channel {
 	 */
 	u32 target_vp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* The corresponding CPUID in the guest */
 	u32 target_cpu;
 	/*
@@ -1119,6 +1145,9 @@ struct vmbus_channel {
 	 * link up channels based on their CPU affinity.
 	 */
 	struct list_head percpu_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1128,7 +1157,10 @@ static inline void set_channel_read_state(struct vmbus_channel *c, bool state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void set_per_channel_state(struct vmbus_channel *c, void *s)
 {
 	c->per_channel_state = s;
@@ -1139,13 +1171,19 @@ static inline void *get_per_channel_state(struct vmbus_channel *c)
 	return c->per_channel_state;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void vmbus_onmessage(void *context);
 
 int vmbus_request_offers(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * APIs for managing sub-channels.
  */
@@ -1174,6 +1212,9 @@ struct vmbus_channel *vmbus_get_outgoing_channel(struct vmbus_channel *primary);
  */
 bool vmbus_are_subchannels_present(struct vmbus_channel *primary);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* The format must be the same as struct vmdata_gpa_direct */
 struct vmbus_channel_packet_page_buffer {
@@ -1212,7 +1253,11 @@ extern void vmbus_close(struct vmbus_channel *channel);
 
 extern int vmbus_sendpacket(struct vmbus_channel *channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const void *buffer,
+=======
+				  void *buffer,
+>>>>>>> v3.18
 =======
 				  void *buffer,
 >>>>>>> v3.18
@@ -1256,6 +1301,7 @@ extern int vmbus_recvpacket_raw(struct vmbus_channel *channel,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void vmbus_get_debug_info(struct vmbus_channel *channel,
 				     struct vmbus_channel_debug_info *debug);
 
@@ -1269,6 +1315,10 @@ struct hv_dev_port_info {
 	u32 bytes_avail_towrite;
 };
 
+=======
+extern void vmbus_ontimer(unsigned long data);
+
+>>>>>>> v3.18
 =======
 extern void vmbus_ontimer(unsigned long data);
 
@@ -1455,7 +1505,10 @@ void vmbus_driver_unregister(struct hv_driver *hv_driver);
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Synthetic FC GUID
  * {2f9bcc4a-0069-4af3-b76b-6fd0be528cda}
@@ -1476,6 +1529,9 @@ void vmbus_driver_unregister(struct hv_driver *hv_driver);
 			0xE3, 0x4B, 0xD1, 0x34, 0xE4, 0xDE, 0xC8, 0x41, \
 			0x9A, 0xE7, 0x6B, 0x17, 0x49, 0x77, 0xC1, 0x92 \
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1575,7 +1631,11 @@ struct hyperv_service_callback {
 
 #define MAX_SRV_VER	0x7ffffff
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void vmbus_prep_negotiate_resp(struct icmsg_hdr *,
+=======
+extern bool vmbus_prep_negotiate_resp(struct icmsg_hdr *,
+>>>>>>> v3.18
 =======
 extern bool vmbus_prep_negotiate_resp(struct icmsg_hdr *,
 >>>>>>> v3.18
@@ -1591,6 +1651,11 @@ void hv_vss_deinit(void);
 void hv_vss_onchannelcallback(void *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct resource hyperv_mmio;
+
+>>>>>>> v3.18
 =======
 extern struct resource hyperv_mmio;
 
@@ -1602,7 +1667,10 @@ extern struct resource hyperv_mmio;
 extern __u32 vmbus_proto_version;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _HYPERV_H */

@@ -9,8 +9,13 @@
 KBUILD_CFLAGS	+= -Iarch/arc/plat-arcfpga/include
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y := platform.o irq.o
 obj-$(CONFIG_SMP)		+= smp.o
+=======
+obj-y := platform.o
+obj-$(CONFIG_ISS_SMP_EXTN)		+= smp.o
+>>>>>>> v3.18
 =======
 obj-y := platform.o
 obj-$(CONFIG_ISS_SMP_EXTN)		+= smp.o

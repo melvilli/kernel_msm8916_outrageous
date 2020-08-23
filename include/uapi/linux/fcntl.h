@@ -29,7 +29,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Set/Get seals
  */
 #define F_ADD_SEALS	(F_LINUX_SPECIFIC_BASE + 9)
@@ -45,6 +48,9 @@
 /* (1U << 31) is reserved for signed error codes */
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Types of directory notifications that may be requested.
  */

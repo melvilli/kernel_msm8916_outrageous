@@ -26,6 +26,10 @@
 #include <linux/fs.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -470,7 +474,11 @@ static DEFINE_SPINLOCK(clk_mgt_lock);
 #define CLK_MGT_ENTRY(_name, _branch, _clk38div)[PRCMU_##_name] = \
 	{ (PRCM_##_name##_MGT), 0 , _branch, _clk38div}
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct clk_mgt clk_mgt[PRCMU_NUM_REG_CLOCKS] = {
+=======
+static struct clk_mgt clk_mgt[PRCMU_NUM_REG_CLOCKS] = {
+>>>>>>> v3.18
 =======
 static struct clk_mgt clk_mgt[PRCMU_NUM_REG_CLOCKS] = {
 >>>>>>> v3.18
@@ -1742,8 +1750,13 @@ static struct cpufreq_frequency_table db8500_cpufreq_table[] = {
 static long round_armss_rate(unsigned long rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long freq = 0;
 	int i = 0;
+=======
+	struct cpufreq_frequency_table *pos;
+	long freq = 0;
+>>>>>>> v3.18
 =======
 	struct cpufreq_frequency_table *pos;
 	long freq = 0;
@@ -1754,16 +1767,22 @@ static long round_armss_rate(unsigned long rate)
 
 	/* Find the corresponding arm opp from the cpufreq table. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (db8500_cpufreq_table[i].frequency != CPUFREQ_TABLE_END) {
 		freq = db8500_cpufreq_table[i].frequency;
 		if (freq == rate)
 			break;
 		i++;
 =======
+=======
+>>>>>>> v3.18
 	cpufreq_for_each_entry(pos, db8500_cpufreq_table) {
 		freq = pos->frequency;
 		if (freq == rate)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1906,7 +1925,11 @@ static void set_clock_rate(u8 clock, unsigned long rate)
 static int set_armss_rate(unsigned long rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
+=======
+	struct cpufreq_frequency_table *pos;
+>>>>>>> v3.18
 =======
 	struct cpufreq_frequency_table *pos;
 >>>>>>> v3.18
@@ -1915,6 +1938,7 @@ static int set_armss_rate(unsigned long rate)
 	rate = rate / 1000;
 
 	/* Find the corresponding arm opp from the cpufreq table. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (db8500_cpufreq_table[i].frequency != CPUFREQ_TABLE_END) {
 		if (db8500_cpufreq_table[i].frequency == rate)
@@ -1928,6 +1952,8 @@ static int set_armss_rate(unsigned long rate)
 	/* Set the new arm opp. */
 	return db8500_prcmu_set_arm_opp(db8500_cpufreq_table[i].driver_data);
 =======
+=======
+>>>>>>> v3.18
 	cpufreq_for_each_entry(pos, db8500_cpufreq_table)
 		if (pos->frequency == rate)
 			break;
@@ -1937,6 +1963,9 @@ static int set_armss_rate(unsigned long rate)
 
 	/* Set the new arm opp. */
 	return db8500_prcmu_set_arm_opp(pos->driver_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2339,9 +2368,12 @@ int prcmu_ac_wake_req(void)
 	if (!wait_for_completion_timeout(&mb0_transfer.ac_wake_work,
 			msecs_to_jiffies(5000))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_DBX500_PRCMU_DEBUG)
 		db8500_prcmu_debug_dump(__func__, true, true);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pr_crit("prcmu: %s timed out (5 s) waiting for a reply.\n",
@@ -2358,7 +2390,11 @@ unlock_and_return:
  * prcmu_ac_sleep_req - called when ARM no longer needs to talk to modem
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void prcmu_ac_sleep_req()
+=======
+void prcmu_ac_sleep_req(void)
+>>>>>>> v3.18
 =======
 void prcmu_ac_sleep_req(void)
 >>>>>>> v3.18
@@ -2722,6 +2758,7 @@ static struct irq_domain_ops db8500_irq_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int db8500_irq_init(struct device_node *np, int irq_base)
 {
 	int i;
@@ -2733,12 +2770,17 @@ static int db8500_irq_init(struct device_node *np, int irq_base)
 	db8500_irq_domain = irq_domain_add_simple(
 		np, NUM_PRCMU_WAKEUPS, irq_base,
 =======
+=======
+>>>>>>> v3.18
 static int db8500_irq_init(struct device_node *np)
 {
 	int i;
 
 	db8500_irq_domain = irq_domain_add_simple(
 		np, NUM_PRCMU_WAKEUPS, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		&db8500_irq_ops, NULL);
 
@@ -3123,7 +3165,11 @@ static struct db8500_thsens_platform_data db8500_thsens_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell common_prcmu_devs[] = {
+=======
+static const struct mfd_cell common_prcmu_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell common_prcmu_devs[] = {
 >>>>>>> v3.18
@@ -3136,7 +3182,11 @@ static const struct mfd_cell common_prcmu_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell db8500_prcmu_devs[] = {
+=======
+static const struct mfd_cell db8500_prcmu_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell db8500_prcmu_devs[] = {
 >>>>>>> v3.18
@@ -3154,11 +3204,17 @@ static const struct mfd_cell db8500_prcmu_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.name = "cpuidle-dbx500",
 		.of_compatible = "stericsson,cpuidle-dbx500",
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name = "db8500-thermal",
 		.num_resources = ARRAY_SIZE(db8500_thsens_resources),
@@ -3178,17 +3234,23 @@ static void db8500_prcmu_update_cpufreq(void)
 
 static int db8500_prcmu_register_ab8500(struct device *parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct ab8500_platform_data *pdata,
 					int irq)
 {
 	struct resource ab8500_resource = DEFINE_RES_IRQ(irq);
 	struct mfd_cell ab8500_cell = {
 =======
+=======
+>>>>>>> v3.18
 					struct ab8500_platform_data *pdata)
 {
 	struct device_node *np;
 	struct resource ab8500_resource;
 	const struct mfd_cell ab8500_cell = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name = "ab8500-core",
 		.of_compatible = "stericsson,ab8500",
@@ -3200,7 +3262,10 @@ static int db8500_prcmu_register_ab8500(struct device *parent,
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!parent->of_node)
 		return -ENODEV;
 
@@ -3215,6 +3280,9 @@ static int db8500_prcmu_register_ab8500(struct device *parent,
 	}
 	of_irq_to_resource_table(np, &ab8500_resource, 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mfd_add_devices(parent, 0, &ab8500_cell, 1, NULL, 0, NULL);
 }
@@ -3269,7 +3337,11 @@ static int db8500_prcmu_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	db8500_irq_init(np, pdata->irq_base);
+=======
+	db8500_irq_init(np);
+>>>>>>> v3.18
 =======
 	db8500_irq_init(np);
 >>>>>>> v3.18
@@ -3298,8 +3370,12 @@ static int db8500_prcmu_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = db8500_prcmu_register_ab8500(&pdev->dev, pdata->ab_platdata,
 					   pdata->ab_irq);
+=======
+	err = db8500_prcmu_register_ab8500(&pdev->dev, pdata->ab_platdata);
+>>>>>>> v3.18
 =======
 	err = db8500_prcmu_register_ab8500(&pdev->dev, pdata->ab_platdata);
 >>>>>>> v3.18

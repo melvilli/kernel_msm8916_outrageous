@@ -22,6 +22,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "X25: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "X25: " fmt
 
@@ -99,7 +104,11 @@ void x25_link_control(struct sk_buff *skb, struct x25_neigh *nb,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "x25: diagnostic #%d - %02X %02X %02X\n",
+=======
+		pr_warn("diagnostic #%d - %02X %02X %02X\n",
+>>>>>>> v3.18
 =======
 		pr_warn("diagnostic #%d - %02X %02X %02X\n",
 >>>>>>> v3.18
@@ -109,7 +118,11 @@ void x25_link_control(struct sk_buff *skb, struct x25_neigh *nb,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "x25: received unknown %02X with LCI 000\n",
+=======
+		pr_warn("received unknown %02X with LCI 000\n",
+>>>>>>> v3.18
 =======
 		pr_warn("received unknown %02X with LCI 000\n",
 >>>>>>> v3.18

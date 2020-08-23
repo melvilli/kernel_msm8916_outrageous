@@ -35,7 +35,10 @@ struct fixed_voltage_data {
 	struct regulator_desc desc;
 	struct regulator_dev *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int microvolts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -55,7 +58,10 @@ of_get_fixed_voltage_config(struct device *dev)
 	struct fixed_voltage_config *config;
 	struct device_node *np = dev->of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const __be32 *delay;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regulator_init_data *init_data;
@@ -99,6 +105,7 @@ of_get_fixed_voltage_config(struct device *dev)
 		return ERR_PTR(-EPROBE_DEFER);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	delay = of_get_property(np, "startup-delay-us", NULL);
 	if (delay)
 		config->startup_delay = be32_to_cpu(*delay);
@@ -109,11 +116,16 @@ of_get_fixed_voltage_config(struct device *dev)
 	if (of_find_property(np, "gpio-open-drain", NULL))
 		config->gpio_is_open_drain = true;
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32(np, "startup-delay-us", &config->startup_delay);
 
 	config->enable_high = of_property_read_bool(np, "enable-active-high");
 	config->gpio_is_open_drain = of_property_read_bool(np,
 							   "gpio-open-drain");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (of_find_property(np, "vin-supply", NULL))
@@ -122,6 +134,7 @@ of_get_fixed_voltage_config(struct device *dev)
 	return config;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fixed_voltage_get_voltage(struct regulator_dev *dev)
 {
@@ -150,6 +163,9 @@ static struct regulator_ops fixed_voltage_ops = {
 =======
 static struct regulator_ops fixed_voltage_ops = {
 >>>>>>> v3.18
+=======
+static struct regulator_ops fixed_voltage_ops = {
+>>>>>>> v3.18
 };
 
 static int reg_fixed_voltage_probe(struct platform_device *pdev)
@@ -165,7 +181,11 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 			return PTR_ERR(config);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config = pdev->dev.platform_data;
+=======
+		config = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		config = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -176,6 +196,7 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 
 	drvdata = devm_kzalloc(&pdev->dev, sizeof(struct fixed_voltage_data),
 			       GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (drvdata == NULL) {
 		dev_err(&pdev->dev, "Failed to allocate device data\n");
@@ -189,6 +210,8 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	if (!drvdata)
 		return -ENOMEM;
 
@@ -198,6 +221,9 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 	if (drvdata->desc.name == NULL) {
 		dev_err(&pdev->dev, "Failed to allocate supply name\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	drvdata->desc.type = REGULATOR_VOLTAGE;
@@ -208,6 +234,7 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 
 	if (config->input_supply) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drvdata->desc.supply_name = kstrdup(config->input_supply,
 							GFP_KERNEL);
 		if (!drvdata->desc.supply_name) {
@@ -216,6 +243,8 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 			ret = -ENOMEM;
 			goto err_name;
 =======
+=======
+>>>>>>> v3.18
 		drvdata->desc.supply_name = devm_kstrdup(&pdev->dev,
 					    config->input_supply,
 					    GFP_KERNEL);
@@ -223,6 +252,9 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev,
 				"Failed to allocate input supply\n");
 			return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -231,7 +263,11 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 		drvdata->desc.n_voltages = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drvdata->microvolts = config->microvolts;
+=======
+	drvdata->desc.fixed_uV = config->microvolts;
+>>>>>>> v3.18
 =======
 	drvdata->desc.fixed_uV = config->microvolts;
 >>>>>>> v3.18
@@ -241,6 +277,7 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 	cfg.ena_gpio_invert = !config->enable_high;
 	if (config->enabled_at_boot) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (config->enable_high) {
 			cfg.ena_gpio_flags |= GPIOF_OUT_INIT_HIGH;
 		} else {
@@ -253,6 +290,8 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 			cfg.ena_gpio_flags |= GPIOF_OUT_INIT_HIGH;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (config->enable_high)
 			cfg.ena_gpio_flags |= GPIOF_OUT_INIT_HIGH;
 		else
@@ -262,6 +301,9 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 			cfg.ena_gpio_flags |= GPIOF_OUT_INIT_LOW;
 		else
 			cfg.ena_gpio_flags |= GPIOF_OUT_INIT_HIGH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (config->gpio_is_open_drain)
@@ -273,24 +315,31 @@ static int reg_fixed_voltage_probe(struct platform_device *pdev)
 	cfg.of_node = pdev->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drvdata->dev = regulator_register(&drvdata->desc, &cfg);
 	if (IS_ERR(drvdata->dev)) {
 		ret = PTR_ERR(drvdata->dev);
 		dev_err(&pdev->dev, "Failed to register regulator: %d\n", ret);
 		goto err_input;
 =======
+=======
+>>>>>>> v3.18
 	drvdata->dev = devm_regulator_register(&pdev->dev, &drvdata->desc,
 					       &cfg);
 	if (IS_ERR(drvdata->dev)) {
 		ret = PTR_ERR(drvdata->dev);
 		dev_err(&pdev->dev, "Failed to register regulator: %d\n", ret);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, drvdata);
 
 	dev_dbg(&pdev->dev, "%s supplying %duV\n", drvdata->desc.name,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		drvdata->microvolts);
 
@@ -314,6 +363,9 @@ static int reg_fixed_voltage_remove(struct platform_device *pdev)
 =======
 		drvdata->desc.fixed_uV);
 >>>>>>> v3.18
+=======
+		drvdata->desc.fixed_uV);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -329,7 +381,10 @@ MODULE_DEVICE_TABLE(of, fixed_of_match);
 static struct platform_driver regulator_fixed_voltage_driver = {
 	.probe		= reg_fixed_voltage_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= reg_fixed_voltage_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

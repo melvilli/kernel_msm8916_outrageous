@@ -96,6 +96,7 @@ static __inline__ char llc_backlog_type(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sock *llc_sk_alloc(struct net *net, int family, gfp_t priority,
 				 struct proto *prot);
 extern void llc_sk_free(struct sock *sk);
@@ -121,6 +122,8 @@ extern void llc_sap_remove_socket(struct llc_sap *sap, struct sock *sk);
 extern u8 llc_data_accept_state(u8 state);
 extern void llc_build_offset_table(void);
 =======
+=======
+>>>>>>> v3.18
 struct sock *llc_sk_alloc(struct net *net, int family, gfp_t priority,
 			  struct proto *prot);
 void llc_sk_free(struct sock *sk);
@@ -141,5 +144,8 @@ void llc_sap_remove_socket(struct llc_sap *sap, struct sock *sk);
 
 u8 llc_data_accept_state(u8 state);
 void llc_build_offset_table(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LLC_CONN_H */

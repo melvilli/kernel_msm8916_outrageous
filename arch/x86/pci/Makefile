@@ -14,12 +14,18 @@ obj-y				+= legacy.o irq.o
 obj-$(CONFIG_STA2X11)           += sta2x11-fixup.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_X86_VISWS)		+= visws.o
 
 obj-$(CONFIG_X86_NUMAQ)		+= numaq_32.o
 obj-$(CONFIG_X86_NUMACHIP)	+= numachip.o
 
 obj-$(CONFIG_X86_INTEL_MID)	+= mrst.o
+=======
+obj-$(CONFIG_X86_NUMACHIP)	+= numachip.o
+
+obj-$(CONFIG_X86_INTEL_MID)	+= intel_mid_pci.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_X86_NUMACHIP)	+= numachip.o
 

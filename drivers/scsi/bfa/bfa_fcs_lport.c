@@ -774,8 +774,11 @@ bfa_fcs_lport_uf_recv(struct bfa_fcs_lport_s *lport,
 
 	if (!bfa_fcs_lport_is_online(lport)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfa_stats(lport, uf_recv_drops);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * In direct attach topology, it is possible to get a PLOGI
 		 * before the lport is online due to port feature
@@ -790,6 +793,9 @@ bfa_fcs_lport_uf_recv(struct bfa_fcs_lport_s *lport,
 		} else
 			bfa_stats(lport, uf_recv_drops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -2077,6 +2083,11 @@ bfa_fcs_lport_fdmi_build_rhba_pyld(struct bfa_fcs_lport_fdmi_s *fdmi, u8 *pyld)
 	templen = sizeof(fcs_hba_attr->max_ct_pyld);
 	memcpy(attr->value, &fcs_hba_attr->max_ct_pyld, templen);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	templen = fc_roundup(templen, sizeof(u32));
+	curr_ptr += sizeof(attr->type) + sizeof(templen) + templen;
+>>>>>>> v3.18
 =======
 	templen = fc_roundup(templen, sizeof(u32));
 	curr_ptr += sizeof(attr->type) + sizeof(templen) + templen;
@@ -2086,7 +2097,10 @@ bfa_fcs_lport_fdmi_build_rhba_pyld(struct bfa_fcs_lport_fdmi_s *fdmi, u8 *pyld)
 	attr->len = cpu_to_be16(templen + sizeof(attr->type) +
 			     sizeof(templen));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Send extended attributes ( FOS 7.1 support )
 	 */
@@ -2146,6 +2160,9 @@ bfa_fcs_lport_fdmi_build_rhba_pyld(struct bfa_fcs_lport_fdmi_s *fdmi, u8 *pyld)
 		attr->len = cpu_to_be16(templen + sizeof(attr->type) +
 					sizeof(templen));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2348,7 +2365,10 @@ bfa_fcs_lport_fdmi_build_portattr_block(struct bfa_fcs_lport_fdmi_s *fdmi,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fdmi->retry_cnt == 0) {
 		attr = (struct fdmi_attr_s *) curr_ptr;
 		attr->type = cpu_to_be16(FDMI_PORT_ATTRIB_NODE_NAME);
@@ -2456,6 +2476,9 @@ bfa_fcs_lport_fdmi_build_portattr_block(struct bfa_fcs_lport_fdmi_s *fdmi,
 				sizeof(templen));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Update size of payload
@@ -2664,7 +2687,10 @@ bfa_fcs_fdmi_get_hbaattr(struct bfa_fcs_lport_fdmi_s *fdmi,
 	bfa_fcs_fdmi_get_portattr(fdmi, &fcs_port_attr);
 	hba_attr->max_ct_pyld = fcs_port_attr.max_frm_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	strncpy(hba_attr->node_sym_name.symname,
 		port->port_cfg.node_sym_name.symname, BFA_SYMNAME_MAXLEN);
@@ -2674,6 +2700,9 @@ bfa_fcs_fdmi_get_hbaattr(struct bfa_fcs_lport_fdmi_s *fdmi,
 	hba_attr->fabric_name = port->fabric->lps->pr_nwwn;
 	strncpy(hba_attr->bios_ver, hba_attr->option_rom_ver, BFA_VERSION_LEN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2685,6 +2714,10 @@ bfa_fcs_fdmi_get_portattr(struct bfa_fcs_lport_fdmi_s *fdmi,
 	struct bfa_fcs_driver_info_s  *driver_info = &port->fcs->driver_info;
 	struct bfa_port_attr_s pport_attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bfa_lport_attr_s lport_attr;
+>>>>>>> v3.18
 =======
 	struct bfa_lport_attr_s lport_attr;
 >>>>>>> v3.18
@@ -2753,7 +2786,10 @@ bfa_fcs_fdmi_get_portattr(struct bfa_fcs_lport_fdmi_s *fdmi,
 		sizeof(port_attr->host_name));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	port_attr->node_name = bfa_fcs_lport_get_nwwn(port);
 	port_attr->port_name = bfa_fcs_lport_get_pwwn(port);
 
@@ -2766,6 +2802,9 @@ bfa_fcs_fdmi_get_portattr(struct bfa_fcs_lport_fdmi_s *fdmi,
 	fc_get_fc4type_bitmask(FC_TYPE_FCP, port_attr->port_act_fc4_type);
 	port_attr->port_state = cpu_to_be32(pport_attr.port_state);
 	port_attr->num_ports = cpu_to_be32(port->num_rports);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -6032,6 +6071,10 @@ enum bfa_fcs_vport_event {
 	BFA_FCS_VPORT_SM_RSP_FAILED = 13,	/*  non-retryable failure */
 	BFA_FCS_VPORT_SM_STOPCOMP = 14,	/* vport delete completion */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_FCS_VPORT_SM_FABRIC_MAX = 15, /* max vports on fabric */
+>>>>>>> v3.18
 =======
 	BFA_FCS_VPORT_SM_FABRIC_MAX = 15, /* max vports on fabric */
 >>>>>>> v3.18
@@ -6221,6 +6264,10 @@ bfa_fcs_vport_sm_fdisc(struct bfa_fcs_vport_s *vport,
 
 	case BFA_FCS_VPORT_SM_RSP_FAILED:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BFA_FCS_VPORT_SM_FABRIC_MAX:
+>>>>>>> v3.18
 =======
 	case BFA_FCS_VPORT_SM_FABRIC_MAX:
 >>>>>>> v3.18
@@ -6295,6 +6342,10 @@ bfa_fcs_vport_sm_fdisc_rsp_wait(struct bfa_fcs_vport_s *vport,
 	case BFA_FCS_VPORT_SM_RSP_ERROR:
 	case BFA_FCS_VPORT_SM_RSP_FAILED:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BFA_FCS_VPORT_SM_FABRIC_MAX:
+>>>>>>> v3.18
 =======
 	case BFA_FCS_VPORT_SM_FABRIC_MAX:
 >>>>>>> v3.18
@@ -6584,7 +6635,11 @@ bfa_fcs_vport_fdisc_rejected(struct bfa_fcs_vport_s *vport)
 			bfa_fcs_vport_aen_post(&vport->lport,
 					BFA_LPORT_AEN_NPIV_FABRIC_MAX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_RSP_FAILED);
+=======
+			bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_FABRIC_MAX);
+>>>>>>> v3.18
 =======
 			bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_FABRIC_MAX);
 >>>>>>> v3.18
@@ -6974,8 +7029,11 @@ bfa_cb_lps_fdisc_comp(void *bfad, void *uarg, bfa_status_t status)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_RSP_ERROR);
 =======
+=======
+>>>>>>> v3.18
 		if (vport->fdisc_retries < BFA_FCS_VPORT_MAX_RETRIES)
 			bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_RSP_ERROR);
 		else
@@ -6989,6 +7047,9 @@ bfa_cb_lps_fdisc_comp(void *bfad, void *uarg, bfa_status_t status)
 			bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_RSP_ERROR);
 		else
 			bfa_sm_send_event(vport, BFA_FCS_VPORT_SM_RSP_FAILED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 

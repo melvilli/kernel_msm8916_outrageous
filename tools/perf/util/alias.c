@@ -56,8 +56,12 @@ int split_cmdline(char *cmdline, const char ***argv)
 				c = cmdline[src];
 				if (!c) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					free(*argv);
 					*argv = NULL;
+=======
+					zfree(argv);
+>>>>>>> v3.18
 =======
 					zfree(argv);
 >>>>>>> v3.18
@@ -73,8 +77,12 @@ int split_cmdline(char *cmdline, const char ***argv)
 
 	if (quoted) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(*argv);
 		*argv = NULL;
+=======
+		zfree(argv);
+>>>>>>> v3.18
 =======
 		zfree(argv);
 >>>>>>> v3.18

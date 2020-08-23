@@ -26,12 +26,15 @@
 #include <linux/sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void crypto_yield(u32 flags)
 {
 	if (flags & CRYPTO_TFM_REQ_MAY_SLEEP)
 		cond_resched();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void scatterwalk_sg_chain(struct scatterlist *sg1, int num,
@@ -118,6 +121,11 @@ void scatterwalk_map_and_copy(void *buf, struct scatterlist *sg,
 			      unsigned int start, unsigned int nbytes, int out);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int scatterwalk_bytes_sglen(struct scatterlist *sg, int num_bytes);
+
+>>>>>>> v3.18
 =======
 int scatterwalk_bytes_sglen(struct scatterlist *sg, int num_bytes);
 

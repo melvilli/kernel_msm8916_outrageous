@@ -14,17 +14,23 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/slab.h>
@@ -39,7 +45,11 @@ struct mei_nfc_hdr {
 	u32 reserved;
 	u16 data_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -73,8 +83,13 @@ int nfc_mei_phy_enable(void *phy_id)
 	r = mei_cl_enable_device(phy->device);
 	if (r < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 pr_err("MEI_PHY: Could not enable device\n");
                 return r;
+=======
+		pr_err("Could not enable device\n");
+		return r;
+>>>>>>> v3.18
 =======
 		pr_err("Could not enable device\n");
 		return r;
@@ -84,7 +99,11 @@ int nfc_mei_phy_enable(void *phy_id)
 	r = mei_cl_register_event_cb(phy->device, nfc_mei_event_cb, phy);
 	if (r) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("MEY_PHY: Event cb registration failed\n");
+=======
+		pr_err("Event cb registration failed\n");
+>>>>>>> v3.18
 =======
 		pr_err("Event cb registration failed\n");
 >>>>>>> v3.18
@@ -149,7 +168,11 @@ void nfc_mei_event_cb(struct mei_cl_device *device, u32 events, void *context)
 		reply_size = mei_cl_recv(device, skb->data, MEI_NFC_MAX_READ);
 		if (reply_size < MEI_NFC_HEADER_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kfree(skb);
+=======
+			kfree_skb(skb);
+>>>>>>> v3.18
 =======
 			kfree_skb(skb);
 >>>>>>> v3.18

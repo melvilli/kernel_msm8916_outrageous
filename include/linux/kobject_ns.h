@@ -40,6 +40,10 @@ enum kobj_ns_type {
 struct kobj_ns_type_operations {
 	enum kobj_ns_type type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool (*current_may_mount)(void);
+>>>>>>> v3.18
 =======
 	bool (*current_may_mount)(void);
 >>>>>>> v3.18
@@ -55,6 +59,10 @@ const struct kobj_ns_type_operations *kobj_child_ns_ops(struct kobject *parent);
 const struct kobj_ns_type_operations *kobj_ns_ops(struct kobject *kobj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool kobj_ns_current_may_mount(enum kobj_ns_type type);
+>>>>>>> v3.18
 =======
 bool kobj_ns_current_may_mount(enum kobj_ns_type type);
 >>>>>>> v3.18

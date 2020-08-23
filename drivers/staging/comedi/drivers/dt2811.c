@@ -19,10 +19,13 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -49,6 +52,7 @@ Configuration options:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
@@ -61,6 +65,8 @@ static const struct comedi_lrange range_dt2811_pgh_ai_5_unipolar = {
 		RANGE(0, 1.25),
 		RANGE(0, 0.625)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include "../comedidev.h"
 
@@ -70,6 +76,9 @@ static const struct comedi_lrange range_dt2811_pgh_ai_5_unipolar = {
 		UNI_RANGE(2.5),
 		UNI_RANGE(1.25),
 		UNI_RANGE(0.625)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -77,15 +86,21 @@ static const struct comedi_lrange range_dt2811_pgh_ai_5_unipolar = {
 static const struct comedi_lrange range_dt2811_pgh_ai_2_5_bipolar = {
 	4, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RANGE(-2.5, 2.5),
 		RANGE(-1.25, 1.25),
 		RANGE(-0.625, 0.625),
 		RANGE(-0.3125, 0.3125)
 =======
+=======
+>>>>>>> v3.18
 		BIP_RANGE(2.5),
 		BIP_RANGE(1.25),
 		BIP_RANGE(0.625),
 		BIP_RANGE(0.3125)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -93,15 +108,21 @@ static const struct comedi_lrange range_dt2811_pgh_ai_2_5_bipolar = {
 static const struct comedi_lrange range_dt2811_pgh_ai_5_bipolar = {
 	4, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RANGE(-5, 5),
 		RANGE(-2.5, 2.5),
 		RANGE(-1.25, 1.25),
 		RANGE(-0.625, 0.625)
 =======
+=======
+>>>>>>> v3.18
 		BIP_RANGE(5),
 		BIP_RANGE(2.5),
 		BIP_RANGE(1.25),
 		BIP_RANGE(0.625)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -109,15 +130,21 @@ static const struct comedi_lrange range_dt2811_pgh_ai_5_bipolar = {
 static const struct comedi_lrange range_dt2811_pgl_ai_5_unipolar = {
 	4, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RANGE(0, 5),
 		RANGE(0, 0.5),
 		RANGE(0, 0.05),
 		RANGE(0, 0.01)
 =======
+=======
+>>>>>>> v3.18
 		UNI_RANGE(5),
 		UNI_RANGE(0.5),
 		UNI_RANGE(0.05),
 		UNI_RANGE(0.01)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -125,15 +152,21 @@ static const struct comedi_lrange range_dt2811_pgl_ai_5_unipolar = {
 static const struct comedi_lrange range_dt2811_pgl_ai_2_5_bipolar = {
 	4, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RANGE(-2.5, 2.5),
 		RANGE(-0.25, 0.25),
 		RANGE(-0.025, 0.025),
 		RANGE(-0.005, 0.005)
 =======
+=======
+>>>>>>> v3.18
 		BIP_RANGE(2.5),
 		BIP_RANGE(0.25),
 		BIP_RANGE(0.025),
 		BIP_RANGE(0.005)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -141,15 +174,21 @@ static const struct comedi_lrange range_dt2811_pgl_ai_2_5_bipolar = {
 static const struct comedi_lrange range_dt2811_pgl_ai_5_bipolar = {
 	4, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RANGE(-5, 5),
 		RANGE(-0.5, 0.5),
 		RANGE(-0.05, 0.05),
 		RANGE(-0.01, 0.01)
 =======
+=======
+>>>>>>> v3.18
 		BIP_RANGE(5),
 		BIP_RANGE(0.5),
 		BIP_RANGE(0.05),
 		BIP_RANGE(0.01)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -226,8 +265,11 @@ static const struct comedi_lrange range_dt2811_pgl_ai_5_bipolar = {
 #define TIMEOUT 10000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DT2811_SIZE 8
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DT2811_ADCSR 0
@@ -275,7 +317,10 @@ struct dt2811_private {
 	} dac_range[2];
 	const struct comedi_lrange *range_type_list[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ao_readback[2];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -286,6 +331,7 @@ static const struct comedi_lrange *dac_range_types[] = {
 	&range_unipolar5
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DT2811_TIMEOUT 5
 
@@ -316,6 +362,8 @@ static irqreturn_t dt2811_interrupt(int irq, void *d)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 static int dt2811_ai_eoc(struct comedi_device *dev,
 			 struct comedi_subdevice *s,
 			 struct comedi_insn *insn,
@@ -328,6 +376,9 @@ static int dt2811_ai_eoc(struct comedi_device *dev,
 		return 0;
 	return -EBUSY;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int dt2811_ai_insn(struct comedi_device *dev, struct comedi_subdevice *s,
@@ -335,7 +386,11 @@ static int dt2811_ai_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 {
 	int chan = CR_CHAN(insn->chanspec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int timeout = DT2811_TIMEOUT;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -345,11 +400,17 @@ static int dt2811_ai_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 		outb(chan, dev->iobase + DT2811_ADGCR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (timeout
 		       && inb(dev->iobase + DT2811_ADCSR) & DT2811_ADBUSY)
 			timeout--;
 		if (!timeout)
 			return -ETIME;
+=======
+		ret = comedi_timeout(dev, s, insn, dt2811_ai_eoc, 0);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 =======
 		ret = comedi_timeout(dev, s, insn, dt2811_ai_eoc, 0);
 		if (ret)
@@ -364,6 +425,7 @@ static int dt2811_ai_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 	return i;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if 0
 /* Wow.  This is code from the Comedi stone age.  But it hasn't been
@@ -428,6 +490,8 @@ static int dt2811_ao_insn_read(struct comedi_device *dev,
 
 	return i;
 =======
+=======
+>>>>>>> v3.18
 static int dt2811_ao_insn_write(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 				struct comedi_insn *insn,
@@ -446,6 +510,9 @@ static int dt2811_ao_insn_write(struct comedi_device *dev,
 	s->readback[chan] = val;
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -461,17 +528,23 @@ static int dt2811_di_insn_bits(struct comedi_device *dev,
 static int dt2811_do_insn_bits(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct comedi_insn *insn, unsigned int *data)
 {
 	s->state &= ~data[0];
 	s->state |= data[0] & data[1];
 	outb(s->state, dev->iobase + DT2811_DIO);
 =======
+=======
+>>>>>>> v3.18
 			       struct comedi_insn *insn,
 			       unsigned int *data)
 {
 	if (comedi_dio_update_state(s, data))
 		outb(s->state, dev->iobase + DT2811_DIO);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -502,6 +575,7 @@ static int dt2811_do_insn_bits(struct comedi_device *dev,
 static int dt2811_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* int i, irq; */
 	/* unsigned long irqs; */
 	/* long flags; */
@@ -511,12 +585,20 @@ static int dt2811_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	/* int i; */
 	const struct dt2811_board *board = dev->board_ptr;
 >>>>>>> v3.18
+=======
+	/* int i; */
+	const struct dt2811_board *board = dev->board_ptr;
+>>>>>>> v3.18
 	struct dt2811_private *devpriv;
 	int ret;
 	struct comedi_subdevice *s;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], DT2811_SIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x8);
+>>>>>>> v3.18
 =======
 	ret = comedi_request_region(dev, it->options[0], 0x8);
 >>>>>>> v3.18
@@ -530,6 +612,7 @@ static int dt2811_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	i = inb(dev->iobase + DT2811_ADDATHI);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if 0
 	irq = it->options[1];
@@ -572,15 +655,23 @@ static int dt2811_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ret = comedi_alloc_subdevices(dev, 4);
 	if (ret)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -656,8 +747,11 @@ static int dt2811_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	s->subdev_flags = SDF_WRITABLE;
 	s->n_chan = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_write = dt2811_ao_insn;
 	s->insn_read = dt2811_ao_insn_read;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s->maxdata = 0xfff;
@@ -665,13 +759,19 @@ static int dt2811_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	devpriv->range_type_list[0] = dac_range_types[devpriv->dac_range[0]];
 	devpriv->range_type_list[1] = dac_range_types[devpriv->dac_range[1]];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	s->insn_write = dt2811_ao_insn_write;
 	s->insn_read = comedi_readback_insn_read;
 
 	ret = comedi_alloc_subdev_readback(s);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[2];

@@ -2,11 +2,14 @@ SAMSUNG S5P/Exynos SoC series System Registers (SYSREG)
 
 Properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
  - name : should be 'sysreg';
  - compatible : should contain "samsung,<chip name>-sysreg", "syscon";
    For Exynos4 SoC series it should be "samsung,exynos4-sysreg", "syscon";
  - reg : offset and length of the register set.
 =======
+=======
+>>>>>>> v3.18
  - compatible : should contain two values. First value must be one from following list:
 		- "samsung,exynos4-sysreg" - for Exynos4 based SoCs,
 		- "samsung,exynos5-sysreg" - for Exynos5 based SoCs.
@@ -23,4 +26,7 @@ Example:
 		compatible = "samsung,exynos5-sysreg", "syscon";
 		reg = <0x10050000 0x5000>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

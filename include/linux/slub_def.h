@@ -7,6 +7,7 @@
  * (C) 2007 SGI, Christoph Lameter
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 #include <linux/gfp.h>
 #include <linux/bug.h>
@@ -20,12 +21,17 @@ enum stat_item {
 	ALLOC_SLOWPATH,		/* Allocation by getting a new cpu slab */
 	FREE_FASTPATH,		/* Free to cpu slub */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kobject.h>
 
 enum stat_item {
 	ALLOC_FASTPATH,		/* Allocation from cpu slab */
 	ALLOC_SLOWPATH,		/* Allocation by getting a new cpu slab */
 	FREE_FASTPATH,		/* Free to cpu slab */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FREE_SLOWPATH,		/* Freeing not to cpu slab */
 	FREE_FROZEN,		/* Freeing to frozen slab */
@@ -103,6 +109,12 @@ struct kmem_cache {
 	struct memcg_cache_params *memcg_params;
 	int max_attr_size; /* for propagation, maximum size of a stored attr */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SYSFS
+	struct kset *memcg_kset;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SYSFS
 	struct kset *memcg_kset;
@@ -119,6 +131,7 @@ struct kmem_cache {
 	struct kmem_cache_node *node[MAX_NUMNODES];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void *kmem_cache_alloc(struct kmem_cache *, gfp_t);
 void *__kmalloc(size_t size, gfp_t flags);
@@ -222,12 +235,17 @@ static __always_inline void *kmalloc_node(size_t size, gfp_t flags, int node)
 	}
 	return __kmalloc_node(size, flags, node);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SYSFS
 #define SLAB_SUPPORTS_SYSFS
 void sysfs_slab_remove(struct kmem_cache *);
 #else
 static inline void sysfs_slab_remove(struct kmem_cache *s)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

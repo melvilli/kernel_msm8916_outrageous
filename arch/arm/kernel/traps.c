@@ -26,7 +26,11 @@
 #include <linux/init.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bug.h>
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 >>>>>>> v3.18
@@ -37,18 +41,24 @@
 #include <asm/unistd.h>
 #include <asm/traps.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/unwind.h>
 #include <asm/tls.h>
 #include <asm/system_misc.h>
 
 #include <trace/events/exception.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/ptrace.h>
 #include <asm/unwind.h>
 #include <asm/tls.h>
 #include <asm/system_misc.h>
 #include <asm/opcodes.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *handler[]= {
@@ -78,7 +88,11 @@ void dump_backtrace_entry(unsigned long where, unsigned long from, unsigned long
 {
 #ifdef CONFIG_KALLSYMS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("[<%08lx>] (%pS) from [<%08lx>] (%pS)\n", where, (void *)where, from, (void *)from);
+=======
+	printk("[<%08lx>] (%ps) from [<%08lx>] (%pS)\n", where, (void *)where, from, (void *)from);
+>>>>>>> v3.18
 =======
 	printk("[<%08lx>] (%ps) from [<%08lx>] (%pS)\n", where, (void *)where, from, (void *)from);
 >>>>>>> v3.18
@@ -204,7 +218,11 @@ static void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 
 	if (regs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fp = regs->ARM_fp;
+=======
+		fp = frame_pointer(regs);
+>>>>>>> v3.18
 =======
 		fp = frame_pointer(regs);
 >>>>>>> v3.18
@@ -435,6 +453,7 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 #ifdef CONFIG_THUMB2_KERNEL
 		if (thumb_mode(regs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			instr = ((u16 *)pc)[0];
 			if (is_wide_instruction(instr)) {
 				instr <<= 16;
@@ -447,6 +466,8 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 		if (get_user(instr, (u16 __user *)pc))
 			goto die_sig;
 =======
+=======
+>>>>>>> v3.18
 			instr = __mem_to_opcode_thumb16(((u16 *)pc)[0]);
 			if (is_wide_instruction(instr)) {
 				u16 inst2;
@@ -460,11 +481,15 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 		if (get_user(instr, (u16 __user *)pc))
 			goto die_sig;
 		instr = __mem_to_opcode_thumb16(instr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (is_wide_instruction(instr)) {
 			unsigned int instr2;
 			if (get_user(instr2, (u16 __user *)pc+1))
 				goto die_sig;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			instr <<= 16;
 			instr |= instr2;
@@ -472,6 +497,8 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 	} else if (get_user(instr, (u32 __user *)pc)) {
 		goto die_sig;
 =======
+=======
+>>>>>>> v3.18
 			instr2 = __mem_to_opcode_thumb16(instr2);
 			instr = __opcode_thumb32_compose(instr, instr2);
 		}
@@ -479,6 +506,9 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 		if (get_user(instr, (u32 __user *)pc))
 			goto die_sig;
 		instr = __mem_to_opcode_arm(instr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -487,8 +517,11 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 
 die_sig:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_undef_instr(regs, (void *)pc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_USER
@@ -496,6 +529,10 @@ die_sig:
 		printk(KERN_INFO "%s (%d): undefined instruction: pc=%p\n",
 			current->comm, task_pid_nr(current), pc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__show_regs(regs);
+>>>>>>> v3.18
 =======
 		__show_regs(regs);
 >>>>>>> v3.18
@@ -512,11 +549,14 @@ die_sig:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_unexp_fiq (struct pt_regs *regs)
 {
 	printk("Hmm.  Unexpected FIQ received, but trying to continue\n");
 	printk("You may have a hardware problem...\n");
 =======
+=======
+>>>>>>> v3.18
 /*
  * Handle FIQ similarly to NMI on x86 systems.
  *
@@ -540,6 +580,9 @@ asmlinkage void __exception_irq_entry handle_fiq_as_nmi(struct pt_regs *regs)
 	nmi_exit();
 
 	set_irq_regs(old_regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -592,6 +635,7 @@ static int bad_syscall(int n, struct pt_regs *regs)
 
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 do_cache_op(unsigned long start, unsigned long end, int flags)
 {
 	struct mm_struct *mm = current->active_mm;
@@ -614,6 +658,8 @@ do_cache_op(unsigned long start, unsigned long end, int flags)
 	up_read(&mm->mmap_sem);
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 __do_cache_op(unsigned long start, unsigned long end)
 {
 	int ret;
@@ -645,6 +691,9 @@ do_cache_op(unsigned long start, unsigned long end, int flags)
 		return -EFAULT;
 
 	return __do_cache_op(start, end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -656,7 +705,10 @@ do_cache_op(unsigned long start, unsigned long end, int flags)
 asmlinkage int arm_syscall(int no, struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread_info *thread = current_thread_info();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	siginfo_t info;
@@ -710,6 +762,7 @@ asmlinkage int arm_syscall(int no, struct pt_regs *regs)
 
 	case NR(set_tls):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		thread->tp_value[0] = regs->ARM_r0;
 		if (tls_emu)
 			return 0;
@@ -725,6 +778,9 @@ asmlinkage int arm_syscall(int no, struct pt_regs *regs)
 			 */
 			*((unsigned int *)0xffff0ff0) = regs->ARM_r0;
 		}
+=======
+		set_tls(regs->ARM_r0);
+>>>>>>> v3.18
 =======
 		set_tls(regs->ARM_r0);
 >>>>>>> v3.18
@@ -803,7 +859,11 @@ asmlinkage int arm_syscall(int no, struct pt_regs *regs)
 		if (user_mode(regs)) {
 			__show_regs(regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			c_backtrace(regs->ARM_fp, processor_mode(regs));
+=======
+			c_backtrace(frame_pointer(regs), processor_mode(regs));
+>>>>>>> v3.18
 =======
 			c_backtrace(frame_pointer(regs), processor_mode(regs));
 >>>>>>> v3.18
@@ -919,7 +979,10 @@ asmlinkage void __div0(void)
 {
 	printk("Division by zero in kernel.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(PANIC_CORRUPTION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dump_stack();
@@ -957,7 +1020,11 @@ static void __init kuser_init(void *vectors)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init kuser_init(void *vectors)
+=======
+static inline void __init kuser_init(void *vectors)
+>>>>>>> v3.18
 =======
 static inline void __init kuser_init(void *vectors)
 >>>>>>> v3.18
@@ -968,6 +1035,10 @@ static inline void __init kuser_init(void *vectors)
 void __init early_trap_init(void *vectors_base)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_CPU_V7M
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_CPU_V7M
 >>>>>>> v3.18
@@ -1000,7 +1071,10 @@ void __init early_trap_init(void *vectors_base)
 	flush_icache_range(vectors, vectors + PAGE_SIZE * 2);
 	modify_domain(DOMAIN_USER, DOMAIN_CLIENT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else /* ifndef CONFIG_CPU_V7M */
 	/*
 	 * on V7-M there is no need to copy the vector table to a dedicated
@@ -1008,5 +1082,8 @@ void __init early_trap_init(void *vectors_base)
 	 * image can be used.
 	 */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

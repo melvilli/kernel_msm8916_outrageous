@@ -36,17 +36,23 @@ struct timerfd_ctx {
 	wait_queue_head_t wqh;
 	u64 ticks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int expired;
 	int clockid;
 	struct rcu_head rcu;
 	struct list_head clist;
 	spinlock_t cancel_lock;
 =======
+=======
+>>>>>>> v3.18
 	int clockid;
 	short unsigned expired;
 	short unsigned settime_flags;	/* to show in fdinfo */
 	struct rcu_head rcu;
 	struct list_head clist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool might_cancel;
 };
@@ -102,7 +108,11 @@ static enum alarmtimer_restart timerfd_alarmproc(struct alarm *alarm,
 void timerfd_clock_was_set(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_t moffs = ktime_get_monotonic_offset();
+=======
+	ktime_t moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
+>>>>>>> v3.18
 =======
 	ktime_t moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
 >>>>>>> v3.18
@@ -125,7 +135,11 @@ void timerfd_clock_was_set(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __timerfd_remove_cancel(struct timerfd_ctx *ctx)
+=======
+static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
+>>>>>>> v3.18
 =======
 static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
 >>>>>>> v3.18
@@ -139,6 +153,7 @@ static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
 {
 	spin_lock(&ctx->cancel_lock);
@@ -148,12 +163,18 @@ static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static bool timerfd_canceled(struct timerfd_ctx *ctx)
 {
 	if (!ctx->might_cancel || ctx->moffs.tv64 != KTIME_MAX)
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->moffs = ktime_get_monotonic_offset();
+=======
+	ctx->moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
+>>>>>>> v3.18
 =======
 	ctx->moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
 >>>>>>> v3.18
@@ -163,7 +184,10 @@ static bool timerfd_canceled(struct timerfd_ctx *ctx)
 static void timerfd_setup_cancel(struct timerfd_ctx *ctx, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ctx->cancel_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((ctx->clockid == CLOCK_REALTIME ||
@@ -176,10 +200,16 @@ static void timerfd_setup_cancel(struct timerfd_ctx *ctx, int flags)
 			spin_unlock(&cancel_lock);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		__timerfd_remove_cancel(ctx);
 	}
 	spin_unlock(&ctx->cancel_lock);
+=======
+	} else if (ctx->might_cancel) {
+		timerfd_remove_cancel(ctx);
+	}
+>>>>>>> v3.18
 =======
 	} else if (ctx->might_cancel) {
 		timerfd_remove_cancel(ctx);
@@ -239,6 +269,11 @@ static int timerfd_setup(struct timerfd_ctx *ctx, int flags,
 			return -ECANCELED;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ctx->settime_flags = flags & TFD_SETTIME_FLAGS;
+>>>>>>> v3.18
 =======
 
 	ctx->settime_flags = flags & TFD_SETTIME_FLAGS;
@@ -332,7 +367,10 @@ static ssize_t timerfd_read(struct file *file, char __user *buf, size_t count,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 static int timerfd_show(struct seq_file *m, struct file *file)
 {
@@ -396,6 +434,9 @@ static long timerfd_ioctl(struct file *file, unsigned int cmd, unsigned long arg
 #define timerfd_ioctl NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct file_operations timerfd_fops = {
 	.release	= timerfd_release,
@@ -403,6 +444,11 @@ static const struct file_operations timerfd_fops = {
 	.read		= timerfd_read,
 	.llseek		= noop_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.show_fdinfo	= timerfd_show,
+	.unlocked_ioctl	= timerfd_ioctl,
+>>>>>>> v3.18
 =======
 	.show_fdinfo	= timerfd_show,
 	.unlocked_ioctl	= timerfd_ioctl,
@@ -445,7 +491,10 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 
 	init_waitqueue_head(&ctx->wqh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&ctx->cancel_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ctx->clockid = clockid;
@@ -459,7 +508,11 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 		hrtimer_init(&ctx->t.tmr, clockid, HRTIMER_MODE_ABS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->moffs = ktime_get_monotonic_offset();
+=======
+	ctx->moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
+>>>>>>> v3.18
 =======
 	ctx->moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
 >>>>>>> v3.18

@@ -129,8 +129,12 @@ static int init_slots(struct controller *ctrl)
 		slot->number = ctrl->first_slot + (ctrl->slot_num_inc * i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(name, sizeof(name), "shpchp-%d", slot->number);
 		slot->wq = alloc_workqueue(name, 0, 0);
+=======
+		slot->wq = alloc_workqueue("shpchp-%d", 0, 0, slot->number);
+>>>>>>> v3.18
 =======
 		slot->wq = alloc_workqueue("shpchp-%d", 0, 0, slot->number);
 >>>>>>> v3.18
@@ -149,16 +153,22 @@ static int init_slots(struct controller *ctrl)
 		hotplug_slot->ops = &shpchp_hotplug_slot_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  		ctrl_dbg(ctrl, "Registering domain:bus:dev=%04x:%02x:%02x "
  			 "hp_slot=%x sun=%x slot_device_offset=%x\n",
  			 pci_domain_nr(ctrl->pci_dev->subordinate),
  			 slot->bus, slot->device, slot->hp_slot, slot->number,
  			 ctrl->slot_device_offset);
 =======
+=======
+>>>>>>> v3.18
 		ctrl_dbg(ctrl, "Registering domain:bus:dev=%04x:%02x:%02x hp_slot=%x sun=%x slot_device_offset=%x\n",
 			 pci_domain_nr(ctrl->pci_dev->subordinate),
 			 slot->bus, slot->device, slot->hp_slot, slot->number,
 			 ctrl->slot_device_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = pci_hp_register(slot->hotplug_slot,
 				ctrl->pci_dev->subordinate, slot->device, name);

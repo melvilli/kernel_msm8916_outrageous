@@ -24,6 +24,10 @@
 #define __futex_atomic_op(insn, ret, oldval, tmp, uaddr, oparg)	\
 	smp_mb();						\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(uaddr);					\
+>>>>>>> v3.18
 =======
 	prefetchw(uaddr);					\
 >>>>>>> v3.18
@@ -51,6 +55,11 @@ futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Prefetching cannot fault */
+	prefetchw(uaddr);
+>>>>>>> v3.18
 =======
 	/* Prefetching cannot fault */
 	prefetchw(uaddr);

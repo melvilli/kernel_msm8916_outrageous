@@ -11,9 +11,12 @@ static struct pci_root_info *x86_find_pci_root_info(int bus)
 	struct pci_root_info *info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&pci_root_infos))
 		return NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	list_for_each_entry(info, &pci_root_infos, list)
@@ -24,7 +27,10 @@ static struct pci_root_info *x86_find_pci_root_info(int bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int x86_pci_root_bus_node(int bus)
 {
 	struct pci_root_info *info = x86_find_pci_root_info(bus);
@@ -35,6 +41,9 @@ int x86_pci_root_bus_node(int bus)
 	return info->node;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void x86_pci_root_bus_resources(int bus, struct list_head *resources)
 {

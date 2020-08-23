@@ -490,7 +490,10 @@ typedef struct scc_trans {
 #define FCC_GFMR_TRX		((uint)0x10000000)
 #define FCC_GFMR_TTX		((uint)0x08000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FCC_GFMR_TTX		((uint)0x08000000)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FCC_GFMR_CDP		((uint)0x04000000)

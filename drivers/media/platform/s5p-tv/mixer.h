@@ -66,7 +66,11 @@ struct mxr_format {
 	/** specifies to which subframe belong given plane */
 	int plane2subframe[MXR_MAX_PLANES];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/** internal code, driver dependant */
+=======
+	/** internal code, driver dependent */
+>>>>>>> v3.18
 =======
 	/** internal code, driver dependent */
 >>>>>>> v3.18

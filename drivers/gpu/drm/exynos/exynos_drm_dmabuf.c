@@ -12,6 +12,10 @@
 #include <drm/drmP.h>
 #include <drm/exynos_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "exynos_drm_dmabuf.h"
+>>>>>>> v3.18
 =======
 #include "exynos_drm_dmabuf.h"
 >>>>>>> v3.18
@@ -27,12 +31,18 @@ struct exynos_drm_dmabuf_attachment {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct exynos_drm_gem_obj *dma_buf_to_obj(struct dma_buf *buf)
 {
 	return to_exynos_gem_obj(buf->priv);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int exynos_gem_attach_dma_buf(struct dma_buf *dmabuf,
 					struct device *dev,
@@ -76,7 +86,11 @@ static struct sg_table *
 {
 	struct exynos_drm_dmabuf_attachment *exynos_attach = attach->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct exynos_drm_gem_obj *gem_obj = attach->dmabuf->priv;
+=======
+	struct exynos_drm_gem_obj *gem_obj = dma_buf_to_obj(attach->dmabuf);
+>>>>>>> v3.18
 =======
 	struct exynos_drm_gem_obj *gem_obj = dma_buf_to_obj(attach->dmabuf);
 >>>>>>> v3.18
@@ -88,8 +102,11 @@ static struct sg_table *
 	int nents, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_PRIME("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* just return current sgt if already requested. */
@@ -149,6 +166,7 @@ static void exynos_gem_unmap_dma_buf(struct dma_buf_attachment *attach,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void exynos_dmabuf_release(struct dma_buf *dmabuf)
 {
 	struct exynos_drm_gem_obj *exynos_gem_obj = dmabuf->priv;
@@ -172,6 +190,8 @@ static void exynos_dmabuf_release(struct dma_buf *dmabuf)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void *exynos_gem_dmabuf_kmap_atomic(struct dma_buf *dma_buf,
@@ -220,7 +240,11 @@ static struct dma_buf_ops exynos_dmabuf_ops = {
 	.kunmap_atomic		= exynos_gem_dmabuf_kunmap_atomic,
 	.mmap			= exynos_gem_dmabuf_mmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release		= exynos_dmabuf_release,
+=======
+	.release		= drm_gem_dmabuf_release,
+>>>>>>> v3.18
 =======
 	.release		= drm_gem_dmabuf_release,
 >>>>>>> v3.18
@@ -232,8 +256,13 @@ struct dma_buf *exynos_dmabuf_prime_export(struct drm_device *drm_dev,
 	struct exynos_drm_gem_obj *exynos_gem_obj = to_exynos_gem_obj(obj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dma_buf_export(exynos_gem_obj, &exynos_dmabuf_ops,
 				exynos_gem_obj->base.size, flags);
+=======
+	return dma_buf_export(obj, &exynos_dmabuf_ops,
+				exynos_gem_obj->base.size, flags, NULL);
+>>>>>>> v3.18
 =======
 	return dma_buf_export(obj, &exynos_dmabuf_ops,
 				exynos_gem_obj->base.size, flags, NULL);
@@ -251,8 +280,11 @@ struct drm_gem_object *exynos_dmabuf_prime_import(struct drm_device *drm_dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_PRIME("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* is this one of own objects? */
@@ -260,8 +292,12 @@ struct drm_gem_object *exynos_dmabuf_prime_import(struct drm_device *drm_dev,
 		struct drm_gem_object *obj;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exynos_gem_obj = dma_buf->priv;
 		obj = &exynos_gem_obj->base;
+=======
+		obj = dma_buf->priv;
+>>>>>>> v3.18
 =======
 		obj = dma_buf->priv;
 >>>>>>> v3.18
@@ -285,7 +321,11 @@ struct drm_gem_object *exynos_dmabuf_prime_import(struct drm_device *drm_dev,
 
 	sgt = dma_buf_map_attachment(attach, DMA_BIDIRECTIONAL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(sgt)) {
+=======
+	if (IS_ERR(sgt)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(sgt)) {
 >>>>>>> v3.18
@@ -296,7 +336,10 @@ struct drm_gem_object *exynos_dmabuf_prime_import(struct drm_device *drm_dev,
 	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
 	if (!buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_ERROR("failed to allocate exynos_drm_gem_buf.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;
@@ -332,7 +375,11 @@ struct drm_gem_object *exynos_dmabuf_prime_import(struct drm_device *drm_dev,
 	exynos_gem_obj->base.import_attach = attach;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_PRIME("dma_addr = 0x%x, size = 0x%lx\n", buffer->dma_addr,
+=======
+	DRM_DEBUG_PRIME("dma_addr = %pad, size = 0x%lx\n", &buffer->dma_addr,
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_PRIME("dma_addr = %pad, size = 0x%lx\n", &buffer->dma_addr,
 >>>>>>> v3.18

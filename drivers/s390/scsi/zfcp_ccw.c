@@ -73,6 +73,7 @@ MODULE_DEVICE_TABLE(ccw, zfcp_ccw_device_id);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * zfcp_ccw_priv_sch - check if subchannel is privileged
  * @adapter: Adapter/Subchannel to check
  */
@@ -82,6 +83,8 @@ int zfcp_ccw_priv_sch(struct zfcp_adapter *adapter)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * zfcp_ccw_probe - probe function of zfcp driver
@@ -133,15 +136,21 @@ static void zfcp_ccw_remove(struct ccw_device *cdev)
 
 	list_for_each_entry_safe(unit, u, &unit_remove_lh, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_device_unregister(&unit->dev, &zfcp_sysfs_unit_attrs);
 
 	list_for_each_entry_safe(port, p, &port_remove_lh, list)
 		zfcp_device_unregister(&port->dev, &zfcp_sysfs_port_attrs);
 =======
+=======
+>>>>>>> v3.18
 		device_unregister(&unit->dev);
 
 	list_for_each_entry_safe(port, p, &port_remove_lh, list)
 		device_unregister(&port->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	zfcp_adapter_unregister(adapter);

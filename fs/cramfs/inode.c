@@ -12,6 +12,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -23,6 +28,7 @@
 #include <linux/string.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cramfs_fs.h>
 #include <linux/slab.h>
 #include <linux/cramfs_fs_sb.h>
@@ -31,6 +37,8 @@
 
 #include <asm/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/vfs.h>
 #include <linux/mutex.h>
@@ -54,6 +62,9 @@ static inline struct cramfs_sb_info *CRAMFS_SB(struct super_block *sb)
 {
 	return sb->s_fs_info;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct super_operations cramfs_ops;
@@ -169,7 +180,11 @@ static struct inode *get_cramfs_inode(struct super_block *sb,
 static unsigned char read_buffers[READ_BUFFERS][BUFFER_SIZE];
 static unsigned buffer_blocknr[READ_BUFFERS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct super_block * buffer_dev[READ_BUFFERS];
+=======
+static struct super_block *buffer_dev[READ_BUFFERS];
+>>>>>>> v3.18
 =======
 static struct super_block *buffer_dev[READ_BUFFERS];
 >>>>>>> v3.18
@@ -215,8 +230,12 @@ static void *cramfs_read(struct super_block *sb, unsigned int offset, unsigned i
 
 		if (blocknr + i < devsize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page = read_mapping_page_async(mapping, blocknr + i,
 									NULL);
+=======
+			page = read_mapping_page(mapping, blocknr + i, NULL);
+>>>>>>> v3.18
 =======
 			page = read_mapping_page(mapping, blocknr + i, NULL);
 >>>>>>> v3.18
@@ -230,6 +249,10 @@ static void *cramfs_read(struct super_block *sb, unsigned int offset, unsigned i
 	for (i = 0; i < BLKS_PER_BUF; i++) {
 		struct page *page = pages[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -252,6 +275,10 @@ static void *cramfs_read(struct super_block *sb, unsigned int offset, unsigned i
 	for (i = 0; i < BLKS_PER_BUF; i++) {
 		struct page *page = pages[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -267,23 +294,33 @@ static void *cramfs_read(struct super_block *sb, unsigned int offset, unsigned i
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cramfs_put_super(struct super_block *sb)
 {
 	kfree(sb->s_fs_info);
 	sb->s_fs_info = NULL;
 =======
+=======
+>>>>>>> v3.18
 static void cramfs_kill_sb(struct super_block *sb)
 {
 	struct cramfs_sb_info *sbi = CRAMFS_SB(sb);
 
 	kill_block_super(sb);
 	kfree(sbi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int cramfs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -321,8 +358,13 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 		if (super.magic == CRAMFS_MAGIC_WEND) {
 			if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "cramfs: wrong endianness\n");
 			goto out;
+=======
+				pr_err("wrong endianness\n");
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 				pr_err("wrong endianness\n");
 			return -EINVAL;
@@ -336,15 +378,21 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 		if (super.magic != CRAMFS_MAGIC) {
 			if (super.magic == CRAMFS_MAGIC_WEND && !silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "cramfs: wrong endianness\n");
 			else if (!silent)
 				printk(KERN_ERR "cramfs: wrong magic\n");
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 				pr_err("wrong endianness\n");
 			else if (!silent)
 				pr_err("wrong magic\n");
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -352,8 +400,13 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 	/* get feature flags first */
 	if (super.flags & ~CRAMFS_SUPPORTED_FLAGS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cramfs: unsupported filesystem features\n");
 		goto out;
+=======
+		pr_err("unsupported filesystem features\n");
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		pr_err("unsupported filesystem features\n");
 		return -EINVAL;
@@ -363,8 +416,13 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 	/* Check that the root inode is in a sane state */
 	if (!S_ISDIR(super.root.mode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cramfs: root is not a directory\n");
 		goto out;
+=======
+		pr_err("root is not a directory\n");
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		pr_err("root is not a directory\n");
 		return -EINVAL;
@@ -375,6 +433,7 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 
 	root_offset = super.root.offset << 2;
 	if (super.flags & CRAMFS_FLAG_FSID_VERSION_2) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sbi->size=super.size;
 		sbi->blocks=super.fsid.blocks;
@@ -389,6 +448,8 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 	if (root_offset == 0)
 		printk(KERN_INFO "cramfs: empty filesystem");
 =======
+=======
+>>>>>>> v3.18
 		sbi->size = super.size;
 		sbi->blocks = super.fsid.blocks;
 		sbi->files = super.fsid.files;
@@ -401,14 +462,22 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 	sbi->flags = super.flags;
 	if (root_offset == 0)
 		pr_info("empty filesystem");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else if (!(super.flags & CRAMFS_FLAG_SHIFTED_ROOT_OFFSET) &&
 		 ((root_offset != sizeof(struct cramfs_super)) &&
 		  (root_offset != 512 + sizeof(struct cramfs_super))))
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cramfs: bad root offset %lu\n", root_offset);
 		goto out;
+=======
+		pr_err("bad root offset %lu\n", root_offset);
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		pr_err("bad root offset %lu\n", root_offset);
 		return -EINVAL;
@@ -420,6 +489,7 @@ static int cramfs_fill_super(struct super_block *sb, void *data, int silent)
 	root = get_cramfs_inode(sb, &super.root, 0);
 	if (IS_ERR(root))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 	sb->s_root = d_make_root(root);
 	if (!sb->s_root)
@@ -430,11 +500,16 @@ out:
 	sb->s_fs_info = NULL;
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		return PTR_ERR(root);
 	sb->s_root = d_make_root(root);
 	if (!sb->s_root)
 		return -ENOMEM;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -460,6 +535,7 @@ static int cramfs_statfs(struct dentry *dentry, struct kstatfs *buf)
  * Read a cramfs directory entry.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cramfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
@@ -473,6 +549,8 @@ static int cramfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	if (offset >= inode->i_size)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 static int cramfs_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
@@ -484,6 +562,9 @@ static int cramfs_readdir(struct file *file, struct dir_context *ctx)
 	if (ctx->pos >= inode->i_size)
 		return 0;
 	offset = ctx->pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Directory entries are always 4-byte aligned */
 	if (offset & 3)
@@ -494,7 +575,10 @@ static int cramfs_readdir(struct file *file, struct dir_context *ctx)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	copied = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (offset < inode->i_size) {
@@ -504,7 +588,11 @@ static int cramfs_readdir(struct file *file, struct dir_context *ctx)
 		ino_t ino;
 		umode_t mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int namelen, error;
+=======
+		int namelen;
+>>>>>>> v3.18
 =======
 		int namelen;
 >>>>>>> v3.18
@@ -534,6 +622,7 @@ static int cramfs_readdir(struct file *file, struct dir_context *ctx)
 			namelen--;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = filldir(dirent, buf, namelen, offset, ino, mode >> 12);
 		if (error)
 			break;
@@ -542,10 +631,15 @@ static int cramfs_readdir(struct file *file, struct dir_context *ctx)
 		filp->f_pos = offset;
 		copied++;
 =======
+=======
+>>>>>>> v3.18
 		if (!dir_emit(ctx, buf, namelen, ino, mode >> 12))
 			break;
 
 		ctx->pos = offset = nextoffset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	kfree(buf);
@@ -556,7 +650,11 @@ static int cramfs_readdir(struct file *file, struct dir_context *ctx)
  * Lookup and fill in the inode data..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry * cramfs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
+=======
+static struct dentry *cramfs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
+>>>>>>> v3.18
 =======
 static struct dentry *cramfs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 >>>>>>> v3.18
@@ -618,7 +716,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cramfs_readpage(struct file *file, struct page * page)
+=======
+static int cramfs_readpage(struct file *file, struct page *page)
+>>>>>>> v3.18
 =======
 static int cramfs_readpage(struct file *file, struct page *page)
 >>>>>>> v3.18
@@ -650,7 +752,11 @@ static int cramfs_readpage(struct file *file, struct page *page)
 			; /* hole */
 		else if (unlikely(compr_len > (PAGE_CACHE_SIZE << 1))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("cramfs: bad compressed blocksize %u\n",
+=======
+			pr_err("bad compressed blocksize %u\n",
+>>>>>>> v3.18
 =======
 			pr_err("bad compressed blocksize %u\n",
 >>>>>>> v3.18
@@ -698,7 +804,11 @@ static const struct file_operations cramfs_directory_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= cramfs_readdir,
+=======
+	.iterate	= cramfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= cramfs_readdir,
 >>>>>>> v3.18
@@ -710,7 +820,10 @@ static const struct inode_operations cramfs_dir_inode_operations = {
 
 static const struct super_operations cramfs_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.put_super	= cramfs_put_super,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.remount_fs	= cramfs_remount,
@@ -728,7 +841,11 @@ static struct file_system_type cramfs_fs_type = {
 	.name		= "cramfs",
 	.mount		= cramfs_mount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.kill_sb	= kill_block_super,
+=======
+	.kill_sb	= cramfs_kill_sb,
+>>>>>>> v3.18
 =======
 	.kill_sb	= cramfs_kill_sb,
 >>>>>>> v3.18

@@ -30,6 +30,10 @@
 		"1:\n"						 \
 		"	.section .fixup,\"ax\"\n"		 \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		"	MOV D1Ar1,#0\n"				 \
+>>>>>>> v3.18
 =======
 		"	MOV D1Ar1,#0\n"				 \
 >>>>>>> v3.18
@@ -264,6 +268,7 @@
 		"22:\n"							\
 		"MSETL	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"23:\n"							\
 		"SUB	%3, %3, #32\n"					\
 		"24:\n"							\
@@ -272,17 +277,23 @@
 		"MSETL	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
 		"26:\n"							\
 =======
+=======
+>>>>>>> v3.18
 		"SUB	%3, %3, #32\n"					\
 		"23:\n"							\
 		"MGETL	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
 		"24:\n"							\
 		"MSETL	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"SUB	%3, %3, #32\n"					\
 		"DCACHE	[%1+#-64], D0Ar6\n"				\
 		"BR	$Lloop"id"\n"					\
 									\
 		"MOV	RAPF, %1\n"					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		"27:\n"							\
 		"MGETL	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
@@ -298,6 +309,8 @@
 		"SUB	%0, %0, #8\n"					\
 		"33:\n"							\
 =======
+=======
+>>>>>>> v3.18
 		"25:\n"							\
 		"MGETL	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
 		"26:\n"							\
@@ -309,6 +322,9 @@
 		"MSETL	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
 		"SUB	%0, %0, #8\n"					\
 		"29:\n"							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"SETL	[%0++], D0.7, D1.7\n"				\
 		"SUB	%3, %3, #32\n"					\
@@ -342,6 +358,7 @@
 		"	.long 27b,3b\n"					\
 		"	.long 28b,3b\n"					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.long 29b,3b\n"					\
 		"	.long 30b,3b\n"					\
 		"	.long 31b,3b\n"					\
@@ -352,11 +369,16 @@
 		: "0" (to), "1" (from), "2" (ret), "3" (n)		\
 		: "D1Ar1", "D0Ar2", "cc", "memory")
 =======
+=======
+>>>>>>> v3.18
 		"	.long 29b,4b\n"					\
 		"	.previous\n"					\
 		: "=r" (to), "=r" (from), "=r" (ret), "=d" (n)		\
 		: "0" (to), "1" (from), "2" (ret), "3" (n)		\
 		: "D1Ar1", "D0Ar2", "memory")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*	rewind 'to' and 'from'  pointers when a fault occurs
@@ -384,7 +406,11 @@
 	__asm_copy_user_64bit_rapf_loop(to, from, ret, n, id,		\
 		"LSR	D0Ar2, D0Ar2, #8\n"				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"ANDS	D0Ar2, D0Ar2, #0x7\n"				\
+=======
+		"AND	D0Ar2, D0Ar2, #0x7\n"				\
+>>>>>>> v3.18
 =======
 		"AND	D0Ar2, D0Ar2, #0x7\n"				\
 >>>>>>> v3.18
@@ -449,6 +475,7 @@
 		"22:\n"							\
 		"MSETD	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"23:\n"							\
 		"SUB	%3, %3, #16\n"					\
 		"24:\n"							\
@@ -469,6 +496,8 @@
 		"MSETD	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
 		"32:\n"							\
 =======
+=======
+>>>>>>> v3.18
 		"SUB	%3, %3, #16\n"					\
 		"23:\n"							\
 		"MGETD	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
@@ -484,12 +513,16 @@
 		"MGETD	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
 		"28:\n"							\
 		"MSETD	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"SUB	%3, %3, #16\n"					\
 		"DCACHE	[%1+#-64], D0Ar6\n"				\
 		"BR	$Lloop"id"\n"					\
 									\
 		"MOV	RAPF, %1\n"					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		"33:\n"							\
 		"MGETD	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
@@ -517,6 +550,8 @@
 		"SUB	%0, %0, #4\n"					\
 		"45:\n"							\
 =======
+=======
+>>>>>>> v3.18
 		"29:\n"							\
 		"MGETD	D0FrT, D0.5, D0.6, D0.7, [%1++]\n"		\
 		"30:\n"							\
@@ -538,6 +573,9 @@
 		"MSETD	[%0++], D0FrT, D0.5, D0.6, D0.7\n"		\
 		"SUB	%0, %0, #4\n"					\
 		"37:\n"							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"SETD	[%0++], D0.7\n"					\
 		"SUB	%3, %3, #16\n"					\
@@ -579,6 +617,7 @@
 		"	.long 35b,3b\n"					\
 		"	.long 36b,3b\n"					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.long 37b,3b\n"					\
 		"	.long 38b,3b\n"					\
 		"	.long 39b,3b\n"					\
@@ -593,11 +632,16 @@
 		: "0" (to), "1" (from), "2" (ret), "3" (n)		\
 		: "D1Ar1", "D0Ar2", "cc", "memory")
 =======
+=======
+>>>>>>> v3.18
 		"	.long 37b,4b\n"					\
 		"	.previous\n"					\
 		: "=r" (to), "=r" (from), "=r" (ret), "=d" (n)		\
 		: "0" (to), "1" (from), "2" (ret), "3" (n)		\
 		: "D1Ar1", "D0Ar2", "memory")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*	rewind 'to' and 'from'  pointers when a fault occurs
@@ -625,7 +669,11 @@
 	__asm_copy_user_32bit_rapf_loop(to, from, ret, n, id,		\
 		"LSR	D0Ar2, D0Ar2, #8\n"				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"ANDS	D0Ar2, D0Ar2, #0x7\n"				\
+=======
+		"AND	D0Ar2, D0Ar2, #0x7\n"				\
+>>>>>>> v3.18
 =======
 		"AND	D0Ar2, D0Ar2, #0x7\n"				\
 >>>>>>> v3.18
@@ -654,8 +702,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 		__asm_copy_to_user_1(dst, src, retn);
 		n--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retn)
 			return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -665,8 +716,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 			__asm_copy_to_user_1(dst, src, retn);
 			n--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (retn)
 				return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -675,8 +729,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 		__asm_copy_to_user_2(dst, src, retn);
 		n -= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retn)
 			return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -686,8 +743,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 			__asm_copy_to_user_2(dst, src, retn);
 			n -= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (retn)
 				return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -705,8 +765,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 			__asm_copy_to_user_8x64(dst, src, retn);
 			n -= 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (retn)
 				return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -722,8 +785,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 			__asm_copy_to_user_8x64(dst, src, retn);
 			n -= 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (retn)
 				return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -734,8 +800,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 		__asm_copy_to_user_16(dst, src, retn);
 		n -= 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retn)
 			return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -744,8 +813,11 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 		__asm_copy_to_user_4(dst, src, retn);
 		n -= 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retn)
 			return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -765,10 +837,13 @@ unsigned long __copy_user(void __user *pdst, const void *psrc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If we get here, retn correctly reflects the number of failing
 	 * bytes.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return retn;
@@ -780,7 +855,12 @@ EXPORT_SYMBOL(__copy_user);
 		"	GETB D1Ar1,[%1++]\n"	\
 		"2:	SETB [%0++],D1Ar1\n",	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"3:	ADD  %2,%2,#1\n",	\
+=======
+		"3:	ADD  %2,%2,#1\n"	\
+		"	SETB [%0++],D1Ar1\n",	\
+>>>>>>> v3.18
 =======
 		"3:	ADD  %2,%2,#1\n"	\
 		"	SETB [%0++],D1Ar1\n",	\
@@ -792,7 +872,12 @@ EXPORT_SYMBOL(__copy_user);
 		"	GETW D1Ar1,[%1++]\n"		\
 		"2:	SETW [%0++],D1Ar1\n" COPY,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"3:	ADD  %2,%2,#2\n" FIXUP,		\
+=======
+		"3:	ADD  %2,%2,#2\n"		\
+		"	SETW [%0++],D1Ar1\n" FIXUP,	\
+>>>>>>> v3.18
 =======
 		"3:	ADD  %2,%2,#2\n"		\
 		"	SETW [%0++],D1Ar1\n" FIXUP,	\
@@ -807,7 +892,12 @@ EXPORT_SYMBOL(__copy_user);
 		"	GETB D1Ar1,[%1++]\n"		\
 		"4:	SETB [%0++],D1Ar1\n",		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"5:	ADD  %2,%2,#1\n",		\
+=======
+		"5:	ADD  %2,%2,#1\n"		\
+		"	SETB [%0++],D1Ar1\n",		\
+>>>>>>> v3.18
 =======
 		"5:	ADD  %2,%2,#1\n"		\
 		"	SETB [%0++],D1Ar1\n",		\
@@ -819,7 +909,12 @@ EXPORT_SYMBOL(__copy_user);
 		"	GETD D1Ar1,[%1++]\n"		\
 		"2:	SETD [%0++],D1Ar1\n" COPY,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"3:	ADD  %2,%2,#4\n" FIXUP,		\
+=======
+		"3:	ADD  %2,%2,#4\n"		\
+		"	SETD [%0++],D1Ar1\n" FIXUP,	\
+>>>>>>> v3.18
 =======
 		"3:	ADD  %2,%2,#4\n"		\
 		"	SETD [%0++],D1Ar1\n" FIXUP,	\
@@ -830,7 +925,10 @@ EXPORT_SYMBOL(__copy_user);
 	__asm_copy_from_user_4x_cont(to, from, ret, "", "", "")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __asm_copy_from_user_5(to, from, ret) \
 	__asm_copy_from_user_4x_cont(to, from, ret,	\
 		"	GETB D1Ar1,[%1++]\n"		\
@@ -945,6 +1043,9 @@ EXPORT_SYMBOL(__copy_user);
 #define __asm_copy_from_user_16(to, from, ret) \
 	__asm_copy_from_user_16x_cont(to, from, ret, "", "", "")
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __asm_copy_from_user_8x64(to, from, ret) \
 	asm volatile (				\
@@ -953,12 +1054,18 @@ EXPORT_SYMBOL(__copy_user);
 		"1:\n"					\
 		"	.section .fixup,\"ax\"\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"3:	ADD  %2,%2,#8\n"		\
 =======
+=======
+>>>>>>> v3.18
 		"	MOV D1Ar1,#0\n"			\
 		"	MOV D0Ar2,#0\n"			\
 		"3:	ADD  %2,%2,#8\n"		\
 		"	SETL [%0++],D0Ar2,D1Ar1\n"	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"	MOVT    D0Ar2,#HI(1b)\n"	\
 		"	JUMP    D0Ar2,#LO(1b)\n"	\
@@ -974,6 +1081,7 @@ EXPORT_SYMBOL(__copy_user);
  *
  *	Rationale:
  *		A fault occurs while reading from user buffer, which is the
+<<<<<<< HEAD
 <<<<<<< HEAD
  *		source.
  *		Since we don't write to kernel buffer until we read first,
@@ -995,6 +1103,8 @@ EXPORT_SYMBOL(__copy_user);
 		"ADDZ	D0Ar2, D0Ar2, #32\n"				\
 		"SUB	%1, %1, D0Ar2\n")
 =======
+=======
+>>>>>>> v3.18
  *		source. Since the fault is at a single address, we only
  *		need to rewind by 8 bytes.
  *		Since we don't write to kernel buffer until we read first,
@@ -1004,12 +1114,16 @@ EXPORT_SYMBOL(__copy_user);
 #define __asm_copy_from_user_64bit_rapf_loop(to, from, ret, n, id)	\
 	__asm_copy_user_64bit_rapf_loop(to, from, ret, n, id,		\
 		"SUB	%1, %1, #8\n")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*	rewind 'from' pointer when a fault occurs
  *
  *	Rationale:
  *		A fault occurs while reading from user buffer, which is the
+<<<<<<< HEAD
 <<<<<<< HEAD
  *		source.
  *		Since we don't write to kernel buffer until we read first,
@@ -1039,6 +1153,8 @@ EXPORT_SYMBOL(__copy_user);
 unsigned long raw_copy_from_user(void *pdst, const void __user *psrc,
 				 unsigned long n)
 =======
+=======
+>>>>>>> v3.18
  *		source. Since the fault is at a single address, we only
  *		need to rewind by 4 bytes.
  *		Since we don't write to kernel buffer until we read first,
@@ -1055,6 +1171,9 @@ unsigned long raw_copy_from_user(void *pdst, const void __user *psrc,
    inaccessible.  */
 unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 				  unsigned long n)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	register char *dst asm ("A0.2") = pdst;
@@ -1068,8 +1187,11 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 		__asm_copy_from_user_1(dst, src, retn);
 		n--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retn)
 			return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1080,7 +1202,11 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 			n--;
 			if (retn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return retn + n;
+=======
+				goto copy_exception_bytes;
+>>>>>>> v3.18
 =======
 				goto copy_exception_bytes;
 >>>>>>> v3.18
@@ -1090,8 +1216,11 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 		__asm_copy_from_user_2(dst, src, retn);
 		n -= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retn)
 			return retn + n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1102,11 +1231,14 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 			n -= 2;
 			if (retn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return retn + n;
 		}
 	}
 
 =======
+=======
+>>>>>>> v3.18
 				goto copy_exception_bytes;
 		}
 	}
@@ -1117,6 +1249,9 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 	if (retn != 0)
 		goto copy_exception_bytes;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef USE_RAPF
 	/* 64 bit copy loop */
@@ -1131,7 +1266,11 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 			n -= 8;
 			if (retn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return retn + n;
+=======
+				goto copy_exception_bytes;
+>>>>>>> v3.18
 =======
 				goto copy_exception_bytes;
 >>>>>>> v3.18
@@ -1151,7 +1290,11 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 			n -= 8;
 			if (retn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return retn + n;
+=======
+				goto copy_exception_bytes;
+>>>>>>> v3.18
 =======
 				goto copy_exception_bytes;
 >>>>>>> v3.18
@@ -1165,7 +1308,11 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 
 		if (retn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return retn + n;
+=======
+			goto copy_exception_bytes;
+>>>>>>> v3.18
 =======
 			goto copy_exception_bytes;
 >>>>>>> v3.18
@@ -1195,9 +1342,12 @@ unsigned long __copy_user_zeroing(void *pdst, const void __user *psrc,
 	   bytes.  */
 	return retn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 EXPORT_SYMBOL(raw_copy_from_user);
 =======
+=======
+>>>>>>> v3.18
 
  copy_exception_bytes:
 	/* We already have "retn" bytes cleared, and need to clear the
@@ -1213,6 +1363,9 @@ EXPORT_SYMBOL(raw_copy_from_user);
 	return retn + n;
 }
 EXPORT_SYMBOL(__copy_user_zeroing);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __asm_clear_8x64(to, ret) \

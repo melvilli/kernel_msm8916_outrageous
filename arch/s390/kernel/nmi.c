@@ -21,6 +21,10 @@
 #include <asm/nmi.h>
 #include <asm/crw.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 =======
 #include <asm/switch_to.h>
 >>>>>>> v3.18
@@ -58,9 +62,15 @@ void s390_handle_mcck(void)
 	local_irq_save(flags);
 	local_mcck_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcck = __get_cpu_var(cpu_mcck);
 	memset(&__get_cpu_var(cpu_mcck), 0, sizeof(struct mcck_struct));
 	clear_thread_flag(TIF_MCCK_PENDING);
+=======
+	mcck = *this_cpu_ptr(&cpu_mcck);
+	memset(this_cpu_ptr(&cpu_mcck), 0, sizeof(mcck));
+	clear_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 =======
 	mcck = *this_cpu_ptr(&cpu_mcck);
 	memset(this_cpu_ptr(&cpu_mcck), 0, sizeof(mcck));
@@ -174,7 +184,10 @@ static int notrace s390_revalidate_registers(struct mci *mci)
 			: : "a" (fpt_save_area));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_64BIT
 	/* Revalidate vector registers */
@@ -190,6 +203,9 @@ static int notrace s390_revalidate_registers(struct mci *mci)
 				S390_lowcore.vector_save_area_addr);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Revalidate access registers */
 	asm volatile(
@@ -243,10 +259,14 @@ static int notrace s390_revalidate_registers(struct mci *mci)
 #endif
 	/* Revalidate clock comparator register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (S390_lowcore.clock_comparator == -1)
 		set_clock_comparator(S390_lowcore.mcck_clock);
 	else
 		set_clock_comparator(S390_lowcore.clock_comparator);
+=======
+	set_clock_comparator(S390_lowcore.clock_comparator);
+>>>>>>> v3.18
 =======
 	set_clock_comparator(S390_lowcore.clock_comparator);
 >>>>>>> v3.18
@@ -289,7 +309,11 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 	inc_irq_stat(NMI_NMI);
 	mci = (struct mci *) &S390_lowcore.mcck_interruption_code;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcck = &__get_cpu_var(cpu_mcck);
+=======
+	mcck = this_cpu_ptr(&cpu_mcck);
+>>>>>>> v3.18
 =======
 	mcck = this_cpu_ptr(&cpu_mcck);
 >>>>>>> v3.18
@@ -353,7 +377,11 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 			mcck->kill_task = 1;
 			mcck->mcck_code = *(unsigned long long *) mci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_thread_flag(TIF_MCCK_PENDING);
+=======
+			set_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 =======
 			set_cpu_flag(CIF_MCCK_PENDING);
 >>>>>>> v3.18
@@ -396,7 +424,11 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 		/* Channel report word pending */
 		mcck->channel_report = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_thread_flag(TIF_MCCK_PENDING);
+=======
+		set_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 =======
 		set_cpu_flag(CIF_MCCK_PENDING);
 >>>>>>> v3.18
@@ -405,7 +437,11 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 		/* Warning pending */
 		mcck->warning = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_thread_flag(TIF_MCCK_PENDING);
+=======
+		set_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 =======
 		set_cpu_flag(CIF_MCCK_PENDING);
 >>>>>>> v3.18

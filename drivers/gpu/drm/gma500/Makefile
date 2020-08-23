@@ -14,14 +14,20 @@ gma500_gfx-y += \
 	  intel_gmbus.o \
 	  mmu.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  power.o \
 	  psb_drv.o \
 =======
+=======
+>>>>>>> v3.18
 	  blitter.o \
 	  power.o \
 	  psb_drv.o \
 	  gma_display.o \
 	  gma_device.o \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  psb_intel_display.o \
 	  psb_intel_lvds.o \

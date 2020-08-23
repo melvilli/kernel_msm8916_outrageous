@@ -6,7 +6,10 @@
 #include <linux/export.h>
 #include <net/ipv6.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <net/addrconf.h>
 #include <net/ip.h>
 
@@ -16,6 +19,9 @@
  */
 void (*__fib6_flush_trees)(struct net *);
 EXPORT_SYMBOL(__fib6_flush_trees);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IPV6_ADDR_SCOPE_TYPE(scope)	((scope) << 16)
@@ -110,7 +116,10 @@ int inet6addr_notifier_call_chain(unsigned long val, void *v)
 }
 EXPORT_SYMBOL(inet6addr_notifier_call_chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 const struct ipv6_stub *ipv6_stub __read_mostly;
 EXPORT_SYMBOL_GPL(ipv6_stub);
@@ -160,4 +169,7 @@ void in6_dev_finish_destroy(struct inet6_dev *idev)
 	kfree_rcu(idev, rcu);
 }
 EXPORT_SYMBOL(in6_dev_finish_destroy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

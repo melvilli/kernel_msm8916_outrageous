@@ -2,7 +2,12 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: Should be "fsl,imx28-lradc"
+=======
+- compatible: Should be "fsl,imx23-lradc" for i.MX23 SoC and "fsl,imx28-lradc"
+              for i.MX28 SoC
+>>>>>>> v3.18
 =======
 - compatible: Should be "fsl,imx23-lradc" for i.MX23 SoC and "fsl,imx28-lradc"
               for i.MX28 SoC
@@ -15,10 +20,13 @@ Optional properties:
                                to LRADC. Valid value is either 4 or 5. If this
                                property is not present, then the touchscreen is
 <<<<<<< HEAD
+<<<<<<< HEAD
                                disabled.
 
 Examples:
 =======
+=======
+>>>>>>> v3.18
                                disabled. 5 wires is valid for i.MX28 SoC only.
 - fsl,ave-ctrl: number of samples per direction to calculate an average value.
                 Allowed value is 1 ... 31, default is 4
@@ -43,20 +51,29 @@ Example for i.MX23 SoC:
 	};
 
 Example for i.MX28 SoC:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lradc@80050000 {
 		compatible = "fsl,imx28-lradc";
 		reg = <0x80050000 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <10 14 15 16 17 18 19
 				20 21 22 23 24 25>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <10 14 15 16 17 18 19 20 21 22 23 24 25>;
 		status = "okay";
 		fsl,lradc-touchscreen-wires = <5>;
 		fsl,ave-ctrl = <4>;
 		fsl,ave-delay = <2>;
 		fsl,settling = <10>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

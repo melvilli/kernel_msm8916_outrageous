@@ -14,8 +14,11 @@
 #define LINUX_RIO_IDS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RIO_ANY_ID			0xffff
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RIO_VID_FREESCALE		0x0002

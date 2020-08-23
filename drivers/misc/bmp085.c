@@ -48,18 +48,24 @@
 #include <linux/module.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/slab.h>
 #include <linux/delay.h>
 #include <linux/of.h>
 #include "bmp085.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/of.h>
 #include "bmp085.h"
 #include <linux/interrupt.h>
 #include <linux/completion.h>
 #include <linux/gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BMP085_CHIP_ID			0x55
@@ -94,9 +100,12 @@ struct bmp085_data {
 	u8	chip_id;
 	s32	b6; /* calculated temperature correction coefficient */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int	irq;
 	struct	completion done;
 };
@@ -110,6 +119,9 @@ static irqreturn_t bmp085_eoc_isr(int irq, void *devid)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static s32 bmp085_read_calibration_data(struct bmp085_data *data)
 {
@@ -142,6 +154,12 @@ static s32 bmp085_update_raw_temperature(struct bmp085_data *data)
 
 	mutex_lock(&data->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	init_completion(&data->done);
+
+>>>>>>> v3.18
 =======
 
 	init_completion(&data->done);
@@ -155,7 +173,12 @@ static s32 bmp085_update_raw_temperature(struct bmp085_data *data)
 		goto exit;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(BMP085_TEMP_CONVERSION_TIME);
+=======
+	wait_for_completion_timeout(&data->done, 1 + msecs_to_jiffies(
+					    BMP085_TEMP_CONVERSION_TIME));
+>>>>>>> v3.18
 =======
 	wait_for_completion_timeout(&data->done, 1 + msecs_to_jiffies(
 					    BMP085_TEMP_CONVERSION_TIME));
@@ -184,6 +207,12 @@ static s32 bmp085_update_raw_pressure(struct bmp085_data *data)
 
 	mutex_lock(&data->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	init_completion(&data->done);
+
+>>>>>>> v3.18
 =======
 
 	init_completion(&data->done);
@@ -200,8 +229,13 @@ static s32 bmp085_update_raw_pressure(struct bmp085_data *data)
 
 	/* wait for the end of conversion */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(2+(3 << data->oversampling_setting));
 
+=======
+	wait_for_completion_timeout(&data->done, 1 + msecs_to_jiffies(
+					2+(3 << data->oversampling_setting)));
+>>>>>>> v3.18
 =======
 	wait_for_completion_timeout(&data->done, 1 + msecs_to_jiffies(
 					2+(3 << data->oversampling_setting)));
@@ -422,7 +456,11 @@ int bmp085_detect(struct device *dev)
 EXPORT_SYMBOL_GPL(bmp085_detect);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init bmp085_get_of_properties(struct bmp085_data *data)
+=======
+static void bmp085_get_of_properties(struct bmp085_data *data)
+>>>>>>> v3.18
 =======
 static void bmp085_get_of_properties(struct bmp085_data *data)
 >>>>>>> v3.18
@@ -472,7 +510,11 @@ struct regmap_config bmp085_regmap_config = {
 EXPORT_SYMBOL_GPL(bmp085_regmap_config);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bmp085_probe(struct device *dev, struct regmap *regmap)
+=======
+int bmp085_probe(struct device *dev, struct regmap *regmap, int irq)
+>>>>>>> v3.18
 =======
 int bmp085_probe(struct device *dev, struct regmap *regmap, int irq)
 >>>>>>> v3.18
@@ -490,7 +532,10 @@ int bmp085_probe(struct device *dev, struct regmap *regmap, int irq)
 	data->dev = dev;
 	data->regmap = regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	data->irq = irq;
 
 	if (data->irq > 0) {
@@ -500,6 +545,9 @@ int bmp085_probe(struct device *dev, struct regmap *regmap, int irq)
 		if (err < 0)
 			goto exit_free;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Initialize the BMP085 chip */

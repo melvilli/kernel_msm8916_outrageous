@@ -1009,7 +1009,11 @@ static int ifx_spi_spi_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pl_data = (struct ifx_modem_platform_data *)spi->dev.platform_data;
+=======
+	pl_data = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	pl_data = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -1384,9 +1388,15 @@ static void __exit ifx_spi_exit(void)
 {
 	/* unregister */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_unregister_driver((void *)&ifx_spi_driver);
 	tty_unregister_driver(tty_drv);
 	put_tty_driver(tty_drv);
+=======
+	tty_unregister_driver(tty_drv);
+	put_tty_driver(tty_drv);
+	spi_unregister_driver((void *)&ifx_spi_driver);
+>>>>>>> v3.18
 =======
 	tty_unregister_driver(tty_drv);
 	put_tty_driver(tty_drv);

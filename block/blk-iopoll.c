@@ -15,9 +15,12 @@
 #include "blk.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int blk_iopoll_enabled = 1;
 EXPORT_SYMBOL(blk_iopoll_enabled);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int blk_iopoll_budget __read_mostly = 256;
@@ -39,7 +42,11 @@ void blk_iopoll_sched(struct blk_iopoll *iop)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_tail(&iop->list, &__get_cpu_var(blk_cpu_iopoll));
+=======
+	list_add_tail(&iop->list, this_cpu_ptr(&blk_cpu_iopoll));
+>>>>>>> v3.18
 =======
 	list_add_tail(&iop->list, this_cpu_ptr(&blk_cpu_iopoll));
 >>>>>>> v3.18
@@ -75,7 +82,11 @@ EXPORT_SYMBOL(__blk_iopoll_complete);
  *     is called.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void blk_iopoll_complete(struct blk_iopoll *iopoll)
+=======
+void blk_iopoll_complete(struct blk_iopoll *iop)
+>>>>>>> v3.18
 =======
 void blk_iopoll_complete(struct blk_iopoll *iop)
 >>>>>>> v3.18
@@ -84,7 +95,11 @@ void blk_iopoll_complete(struct blk_iopoll *iop)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__blk_iopoll_complete(iopoll);
+=======
+	__blk_iopoll_complete(iop);
+>>>>>>> v3.18
 =======
 	__blk_iopoll_complete(iop);
 >>>>>>> v3.18
@@ -95,7 +110,11 @@ EXPORT_SYMBOL(blk_iopoll_complete);
 static void blk_iopoll_softirq(struct softirq_action *h)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *list = &__get_cpu_var(blk_cpu_iopoll);
+=======
+	struct list_head *list = this_cpu_ptr(&blk_cpu_iopoll);
+>>>>>>> v3.18
 =======
 	struct list_head *list = this_cpu_ptr(&blk_cpu_iopoll);
 >>>>>>> v3.18
@@ -209,8 +228,13 @@ void blk_iopoll_init(struct blk_iopoll *iop, int weight, blk_iopoll_fn *poll_fn)
 EXPORT_SYMBOL(blk_iopoll_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit blk_iopoll_cpu_notify(struct notifier_block *self,
 					  unsigned long action, void *hcpu)
+=======
+static int blk_iopoll_cpu_notify(struct notifier_block *self,
+				 unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int blk_iopoll_cpu_notify(struct notifier_block *self,
 				 unsigned long action, void *hcpu)
@@ -226,7 +250,11 @@ static int blk_iopoll_cpu_notify(struct notifier_block *self,
 		local_irq_disable();
 		list_splice_init(&per_cpu(blk_cpu_iopoll, cpu),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 &__get_cpu_var(blk_cpu_iopoll));
+=======
+				 this_cpu_ptr(&blk_cpu_iopoll));
+>>>>>>> v3.18
 =======
 				 this_cpu_ptr(&blk_cpu_iopoll));
 >>>>>>> v3.18
@@ -238,7 +266,11 @@ static int blk_iopoll_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata blk_iopoll_cpu_notifier = {
+=======
+static struct notifier_block blk_iopoll_cpu_notifier = {
+>>>>>>> v3.18
 =======
 static struct notifier_block blk_iopoll_cpu_notifier = {
 >>>>>>> v3.18

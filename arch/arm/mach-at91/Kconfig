@@ -1,13 +1,19 @@
 if ARCH_AT91
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HAVE_AT91_UTMI
 	bool
 
 config HAVE_AT91_USB_CLK
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HAVE_AT91_DBGU0
 	bool
@@ -16,18 +22,25 @@ config HAVE_AT91_DBGU1
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HAVE_AT91_DBGU2
 	bool
 
 config AT91_USE_OLD_CLK
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config AT91_PMC_UNIT
 	bool
 	default !ARCH_AT91X40
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config AT91_SAM9_ALT_RESET
 	bool
@@ -39,6 +52,8 @@ config AT91_SAM9G45_RESET
 
 config AT91_SAM9_TIME
 =======
+=======
+>>>>>>> v3.18
 config COMMON_CLK_AT91
 	bool
 	default AT91_PMC_UNIT && USE_OF && !AT91_USE_OLD_CLK
@@ -57,11 +72,15 @@ config HAVE_AT91_SMD
 	bool
 
 config HAVE_AT91_H32MX
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool
 
 config SOC_AT91SAM9
 	bool
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select AT91_SAM9_TIME
 	select CPU_ARM926T
@@ -77,6 +96,8 @@ config SOC_SAMA5
 	select MULTI_IRQ_HANDLER
 	select SPARSE_IRQ
 =======
+=======
+>>>>>>> v3.18
 	select ATMEL_AIC_IRQ if !OLD_IRQ_AT91
 	select CPU_ARM926T
 	select GENERIC_CLOCKEVENTS
@@ -91,6 +112,9 @@ config SOC_SAMA5
 	select USE_OF
 	select MEMORY
 	select ATMEL_SDRAMC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 menu "Atmel AT91 System-on-Chip"
@@ -100,12 +124,15 @@ choice
 	prompt "Core type"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SOC_SAM_V4_V5
 	bool "ARM7/ARM9"
 	help
 	  Select this if you are using one of Atmel's AT91SAM9, AT91RM9200
 	  or AT91X40 SoC.
 =======
+=======
+>>>>>>> v3.18
 config ARCH_AT91X40
 	bool "ARM7 AT91X40"
 	depends on !MMU
@@ -121,6 +148,9 @@ config SOC_SAM_V4_V5
 	help
 	  Select this if you are using one of Atmel's AT91SAM9 or
 	  AT91RM9200 SoC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SOC_SAM_V7
@@ -136,6 +166,7 @@ if SOC_SAM_V7
 config SOC_SAMA5D3
 	bool "SAMA5D3 family"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SOC_SAM_V7
 	select SOC_SAMA5
 	select HAVE_FB_ATMEL
@@ -144,6 +175,8 @@ config SOC_SAMA5D3
 	  Select this if you are using one of Atmel's SAMA5D3 family SoC.
 	  This support covers SAMA5D31, SAMA5D33, SAMA5D34, SAMA5D35.
 =======
+=======
+>>>>>>> v3.18
 	select SOC_SAMA5
 	select HAVE_FB_ATMEL
 	select HAVE_AT91_DBGU1
@@ -168,6 +201,9 @@ config SOC_SAMA5D4
 	select HAVE_AT91_H32MX
 	help
 	  Select this if you are using one of Atmel's SAMA5D4 family SoC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 
@@ -175,17 +211,23 @@ if SOC_SAM_V4_V5
 config SOC_AT91RM9200
 	bool "AT91RM9200"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_ARM920T
 	select GENERIC_CLOCKEVENTS
 	select HAVE_AT91_DBGU0
 	select MULTI_IRQ_HANDLER
 	select SPARSE_IRQ
 =======
+=======
+>>>>>>> v3.18
 	select ATMEL_AIC_IRQ if !OLD_IRQ_AT91
 	select CPU_ARM920T
 	select GENERIC_CLOCKEVENTS
 	select HAVE_AT91_DBGU0
 	select HAVE_AT91_USB_CLK
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SOC_AT91SAM9260
@@ -193,6 +235,10 @@ config SOC_AT91SAM9260
 	select HAVE_AT91_DBGU0
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_USB_CLK
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_USB_CLK
 >>>>>>> v3.18
@@ -206,6 +252,10 @@ config SOC_AT91SAM9261
 	select HAVE_FB_ATMEL
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_USB_CLK
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_USB_CLK
 >>>>>>> v3.18
@@ -218,6 +268,10 @@ config SOC_AT91SAM9263
 	select HAVE_FB_ATMEL
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_USB_CLK
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_USB_CLK
 >>>>>>> v3.18
@@ -228,6 +282,10 @@ config SOC_AT91SAM9RL
 	select HAVE_FB_ATMEL
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_UTMI
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_UTMI
 >>>>>>> v3.18
@@ -238,6 +296,11 @@ config SOC_AT91SAM9G45
 	select HAVE_FB_ATMEL
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_UTMI
+	select HAVE_AT91_USB_CLK
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_UTMI
 	select HAVE_AT91_USB_CLK
@@ -252,6 +315,12 @@ config SOC_AT91SAM9X5
 	select HAVE_FB_ATMEL
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_UTMI
+	select HAVE_AT91_SMD
+	select HAVE_AT91_USB_CLK
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_UTMI
 	select HAVE_AT91_SMD
@@ -270,6 +339,10 @@ config SOC_AT91SAM9N12
 	select HAVE_FB_ATMEL
 	select SOC_AT91SAM9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_AT91_USB_CLK
+>>>>>>> v3.18
 =======
 	select HAVE_AT91_USB_CLK
 >>>>>>> v3.18
@@ -278,16 +351,22 @@ config SOC_AT91SAM9N12
 
 # ----------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 source arch/arm/mach-at91/Kconfig.non_dt
 endif # SOC_SAM_V4_V5
 =======
+=======
+>>>>>>> v3.18
 endif # SOC_SAM_V4_V5
 
 
 if SOC_SAM_V4_V5 || ARCH_AT91X40
 source arch/arm/mach-at91/Kconfig.non_dt
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 comment "Generic Board Type"
@@ -313,6 +392,10 @@ config MACH_SAMA5_DT
 	depends on SOC_SAMA5
 	select USE_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select PHYLIB if NETDEVICES
+>>>>>>> v3.18
 =======
 	select PHYLIB if NETDEVICES
 >>>>>>> v3.18
@@ -325,12 +408,15 @@ config MACH_SAMA5_DT
 comment "AT91 Feature Selections"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config AT91_PROGRAMMABLE_CLOCKS
 	bool "Programmable Clocks"
 	help
 	  Select this if you need to program one or more of the PCK0..PCK3
 	  programmable clock outputs.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config AT91_SLOW_CLOCK

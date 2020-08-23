@@ -18,8 +18,13 @@
 #define SH_CACHE_ASSOC		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CCR		0xfffc1000 /* CCR1 */
 #define CCR2		0xfffc1004
+=======
+#define SH_CCR		0xfffc1000 /* CCR1 */
+#define SH_CCR2		0xfffc1004
+>>>>>>> v3.18
 =======
 #define SH_CCR		0xfffc1000 /* CCR1 */
 #define SH_CCR2		0xfffc1004

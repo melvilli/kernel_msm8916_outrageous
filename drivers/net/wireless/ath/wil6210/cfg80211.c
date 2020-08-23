@@ -173,7 +173,11 @@ int wil_cid_fill_sinfo(struct wil6210_priv *wil, int cid,
 static int wil_cfg80211_get_station(struct wiphy *wiphy,
 				    struct net_device *ndev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    u8 *mac, struct station_info *sinfo)
+=======
+				    const u8 *mac, struct station_info *sinfo)
+>>>>>>> v3.18
 =======
 				    const u8 *mac, struct station_info *sinfo)
 >>>>>>> v3.18
@@ -485,17 +489,23 @@ static int wil_cfg80211_disconnect(struct wiphy *wiphy,
 
 int wil_cfg80211_mgmt_tx(struct wiphy *wiphy, struct wireless_dev *wdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ieee80211_channel *chan, bool offchan,
 			 unsigned int wait, const u8 *buf, size_t len,
 			 bool no_cck, bool dont_wait_for_ack,
 			 u64 *cookie)
 {
 =======
+=======
+>>>>>>> v3.18
 			 struct cfg80211_mgmt_tx_params *params,
 			 u64 *cookie)
 {
 	const u8 *buf = params->buf;
 	size_t len = params->len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct wil6210_priv *wil = wiphy_to_wil(wiphy);
 	int rc;
@@ -741,6 +751,11 @@ static int wil_cfg80211_start_ap(struct wiphy *wiphy,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wil_set_recovery_state(wil, fw_recovery_idle);
+
+>>>>>>> v3.18
 =======
 	wil_set_recovery_state(wil, fw_recovery_idle);
 
@@ -793,6 +808,11 @@ static int wil_cfg80211_stop_ap(struct wiphy *wiphy,
 	wil_dbg_misc(wil, "%s()\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wil_set_recovery_state(wil, fw_recovery_idle);
+
+>>>>>>> v3.18
 =======
 	wil_set_recovery_state(wil, fw_recovery_idle);
 
@@ -811,7 +831,11 @@ static int wil_cfg80211_stop_ap(struct wiphy *wiphy,
 
 static int wil_cfg80211_del_station(struct wiphy *wiphy,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    struct net_device *dev, u8 *mac)
+=======
+				    struct net_device *dev, const u8 *mac)
+>>>>>>> v3.18
 =======
 				    struct net_device *dev, const u8 *mac)
 >>>>>>> v3.18

@@ -719,7 +719,11 @@ static int si476x_core_probe(struct i2c_client *client,
 	core->power_state = SI476X_POWER_DOWN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -81,6 +84,7 @@ I/O port base address can be found in the output of 'lspci -v'.
    will copy the latched value to a Comedi buffer.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "../comedidev.h"
 
@@ -167,6 +171,8 @@ static int subdev_8255_insn(struct comedi_device *dev,
 	v |= (spriv->io(0, _8255_DATA + 1, 0, iobase) << 8);
 	v |= (spriv->io(0, _8255_DATA + 2, 0, iobase) << 16);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include "../comedidev.h"
 
@@ -224,6 +230,9 @@ static int subdev_8255_insn(struct comedi_device *dev,
 	v = spriv->io(dev, 0, I8255_DATA_A_REG, 0, regbase);
 	v |= (spriv->io(dev, 0, I8255_DATA_B_REG, 0, regbase) << 8);
 	v |= (spriv->io(dev, 0, I8255_DATA_C_REG, 0, regbase) << 16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = v;
@@ -235,6 +244,7 @@ static void subdev_8255_do_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s)
 {
 	struct subdev_8255_private *spriv = s->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long iobase = spriv->iobase;
 	int config;
@@ -252,6 +262,8 @@ static void subdev_8255_do_config(struct comedi_device *dev,
 
 	spriv->io(1, _8255_CR, config, iobase);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long regbase = spriv->regbase;
 	int config;
 
@@ -267,11 +279,15 @@ static void subdev_8255_do_config(struct comedi_device *dev,
 		config |= I8255_CTRL_C_HI_IO;
 
 	spriv->io(dev, 1, I8255_CTRL_REG, config, regbase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int subdev_8255_insn_config(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   struct comedi_insn *insn, unsigned int *data)
 {
@@ -381,6 +397,8 @@ int subdev_8255_init(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	s->private	= spriv;
 =======
+=======
+>>>>>>> v3.18
 				   struct comedi_insn *insn,
 				   unsigned int *data)
 {
@@ -426,6 +444,9 @@ static int __subdev_8255_init(struct comedi_device *dev,
 	else
 		spriv->io = subdev_8255_io;
 	spriv->regbase	= regbase;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s->type		= COMEDI_SUBD_DIO;
@@ -437,15 +458,19 @@ static int __subdev_8255_init(struct comedi_device *dev,
 	s->insn_config	= subdev_8255_insn_config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->state	= 0;
 	s->io_bits	= 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	subdev_8255_do_config(dev, s);
 
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(subdev_8255_init);
 
@@ -468,6 +493,8 @@ int subdev_8255_init_irq(struct comedi_device *dev, struct comedi_subdevice *s,
 EXPORT_SYMBOL_GPL(subdev_8255_init_irq);
 
 =======
+=======
+>>>>>>> v3.18
 
 int subdev_8255_init(struct comedi_device *dev, struct comedi_subdevice *s,
 		     int (*io)(struct comedi_device *,
@@ -486,6 +513,9 @@ int subdev_8255_mm_init(struct comedi_device *dev, struct comedi_subdevice *s,
 	return __subdev_8255_init(dev, s, io, regbase, true);
 }
 EXPORT_SYMBOL_GPL(subdev_8255_mm_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
 
@@ -498,8 +528,13 @@ static int dev_8255_attach(struct comedi_device *dev,
 {
 	struct comedi_subdevice *s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	unsigned long iobase;
+=======
+	unsigned long iobase;
+	int ret;
+>>>>>>> v3.18
 =======
 	unsigned long iobase;
 	int ret;
@@ -525,8 +560,11 @@ static int dev_8255_attach(struct comedi_device *dev,
 		iobase = it->options[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = __comedi_request_region(dev, iobase, _8255_SIZE);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * __comedi_request_region() does not set dev->iobase.
 		 *
@@ -535,6 +573,9 @@ static int dev_8255_attach(struct comedi_device *dev,
 		 * base address of the chip.
 		 */
 		ret = __comedi_request_region(dev, iobase, I8255_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret) {
 			s->type = COMEDI_SUBD_UNUSED;
@@ -559,9 +600,14 @@ static void dev_8255_detach(struct comedi_device *dev)
 		if (s->type != COMEDI_SUBD_UNUSED) {
 			spriv = s->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			release_region(spriv->iobase, _8255_SIZE);
 		}
 		comedi_spriv_free(dev, i);
+=======
+			release_region(spriv->regbase, I8255_SIZE);
+		}
+>>>>>>> v3.18
 =======
 			release_region(spriv->regbase, I8255_SIZE);
 		}

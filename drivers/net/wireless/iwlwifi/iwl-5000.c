@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -64,11 +68,17 @@ static const struct iwl_base_params iwl5000_base_params = {
 	.pll_cfg_val = CSR50_ANA_PLL_CFG_VAL,
 	.led_compensation = 51,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_LONG_THRESHOLD_DEF,
 	.chain_noise_scale = 1000,
 	.wd_timeout = IWL_WATCHDOG_DISABLED,
 	.max_event_log_size = 512,
 	.no_idle_support = true,
+=======
+	.wd_timeout = IWL_WATCHDOG_DISABLED,
+	.max_event_log_size = 512,
+	.scd_chain_ext_wa = true,
+>>>>>>> v3.18
 =======
 	.wd_timeout = IWL_WATCHDOG_DISABLED,
 	.max_event_log_size = 512,
@@ -170,7 +180,10 @@ const struct iwl_cfg iwl5350_agn_cfg = {
 	.base_params = &iwl5000_base_params,			\
 	.eeprom_params = &iwl5000_eeprom_params,		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_xtal_calib = true,					\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.led_mode = IWL_LED_BLINK,				\

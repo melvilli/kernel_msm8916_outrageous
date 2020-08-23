@@ -49,11 +49,17 @@ struct btrfs_delayed_root {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BTRFS_DELAYED_NODE_IN_LIST	0
 #define BTRFS_DELAYED_NODE_INODE_DIRTY	1
 #define BTRFS_DELAYED_NODE_DEL_IREF	2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct btrfs_delayed_node {
 	u64 inode_id;
@@ -73,8 +79,12 @@ struct btrfs_delayed_node {
 	atomic_t refs;
 	u64 index_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool in_list;
 	bool inode_dirty;
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -137,6 +147,10 @@ int btrfs_delayed_update_inode(struct btrfs_trans_handle *trans,
 			       struct btrfs_root *root, struct inode *inode);
 int btrfs_fill_inode(struct inode *inode, u32 *rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int btrfs_delayed_delete_inode_ref(struct inode *inode);
+>>>>>>> v3.18
 =======
 int btrfs_delayed_delete_inode_ref(struct inode *inode);
 >>>>>>> v3.18
@@ -155,8 +169,12 @@ void btrfs_put_delayed_items(struct list_head *ins_list,
 int btrfs_should_delete_dir_index(struct list_head *del_list,
 				  u64 index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int btrfs_readdir_delayed_dir_index(struct file *filp, void *dirent,
 				    filldir_t filldir,
+=======
+int btrfs_readdir_delayed_dir_index(struct dir_context *ctx,
+>>>>>>> v3.18
 =======
 int btrfs_readdir_delayed_dir_index(struct dir_context *ctx,
 >>>>>>> v3.18

@@ -22,8 +22,11 @@
 #include "srcpos.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "version_gen.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -52,6 +55,7 @@ static void fill_fullpaths(struct node *tree, const char *prefix)
 		fill_fullpaths(child, tree->fullpath);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void  __attribute__ ((noreturn)) usage(void)
 {
@@ -103,6 +107,8 @@ static void  __attribute__ ((noreturn)) usage(void)
 	exit(3);
 }
 =======
+=======
+>>>>>>> v3.18
 /* Usage related data. */
 static const char usage_synopsis[] = "dtc [options] <input file>";
 static const char usage_short_opts[] = "qI:O:o:V:d:R:S:p:fb:i:H:sW:E:hv";
@@ -157,6 +163,9 @@ static const char * const usage_opts_help[] = {
 	"\n\tPrint version and exit",
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int main(int argc, char *argv[])
@@ -179,8 +188,12 @@ int main(int argc, char *argv[])
 	padsize    = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((opt = getopt(argc, argv, "hI:O:o:V:d:R:S:p:fqb:i:vH:sW:E:"))
 			!= EOF) {
+=======
+	while ((opt = util_getopt_long()) != EOF) {
+>>>>>>> v3.18
 =======
 	while ((opt = util_getopt_long()) != EOF) {
 >>>>>>> v3.18
@@ -223,8 +236,12 @@ int main(int argc, char *argv[])
 			break;
 		case 'v':
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printf("Version: %s\n", DTC_VERSION);
 			exit(0);
+=======
+			util_version();
+>>>>>>> v3.18
 =======
 			util_version();
 >>>>>>> v3.18
@@ -254,8 +271,14 @@ int main(int argc, char *argv[])
 
 		case 'h':
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			usage();
+=======
+			usage(NULL);
+		default:
+			usage("unknown option");
+>>>>>>> v3.18
 =======
 			usage(NULL);
 		default:
@@ -266,7 +289,11 @@ int main(int argc, char *argv[])
 
 	if (argc > (optind+1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usage();
+=======
+		usage("missing files");
+>>>>>>> v3.18
 =======
 		usage("missing files");
 >>>>>>> v3.18
@@ -280,9 +307,12 @@ int main(int argc, char *argv[])
 		die("Can't set both -p and -S\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (minsize)
 		fprintf(stderr, "DTC: Use of \"-S\" is deprecated; it will be removed soon, use \"-p\" instead\n");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (depname) {

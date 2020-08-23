@@ -68,8 +68,14 @@ typedef struct compat_xfs_bstat {
 	__u16		bs_projid_lo;	/* lower part of project id	*/
 #define	bs_projid	bs_projid_lo	/* (previously just bs_projid)	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16		bs_projid_hi;	/* high part of project id	*/
 	unsigned char	bs_pad[12];	/* pad space, unused		*/
+=======
+	__u16		bs_forkoff;	/* inode fork offset in bytes	*/
+	__u16		bs_projid_hi;	/* high part of project id	*/
+	unsigned char	bs_pad[10];	/* pad space, unused		*/
+>>>>>>> v3.18
 =======
 	__u16		bs_forkoff;	/* inode fork offset in bytes	*/
 	__u16		bs_projid_hi;	/* high part of project id	*/

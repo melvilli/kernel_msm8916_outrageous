@@ -28,6 +28,7 @@
 #define __OMAP_PANEL_DATA_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct omap_dss_device;
 
 /**
@@ -66,6 +67,8 @@ struct panel_n8x0_data {
  * @ext_te_gpio: external TE GPIO
  * @esd_interval: interval of ESD checks, 0 = disabled (ms)
 =======
+=======
+>>>>>>> v3.18
 #include <video/omapdss.h>
 #include <video/display_timing.h>
 
@@ -165,15 +168,24 @@ struct panel_dpi_platform_data {
  * @reset_gpio: gpio to reset the panel (or -1)
  * @use_ext_te: use external TE GPIO
  * @ext_te_gpio: external TE GPIO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @ulps_timeout: time to wait before entering ULPS, 0 = disabled (ms)
  * @use_dsi_backlight: true if panel uses DSI command to control backlight
  * @pin_config: DSI pin configuration
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct nokia_dsi_panel_data {
 	const char *name;
+=======
+struct panel_dsicm_platform_data {
+	const char *name;
+	const char *source;
+>>>>>>> v3.18
 =======
 struct panel_dsicm_platform_data {
 	const char *name;
@@ -186,7 +198,10 @@ struct panel_dsicm_platform_data {
 	int ext_te_gpio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned esd_interval;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned ulps_timeout;
@@ -197,6 +212,7 @@ struct panel_dsicm_platform_data {
 };
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * struct picodlp_panel_data - picodlp panel driver configuration data
  * @picodlp_adapter_id:	i2c_adapter number for picodlp
@@ -227,6 +243,8 @@ struct tfp410_platform_data {
  */
 struct panel_sharp_ls037v7dw01_data {
 =======
+=======
+>>>>>>> v3.18
  * panel_acx565akm platform data
  * @name: name for this display entity
  * @source: name of the display entity used as a video source
@@ -277,6 +295,9 @@ struct panel_sharp_ls037v7dw01_platform_data {
 
 	int data_lines;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int resb_gpio;
 	int ini_gpio;
@@ -286,6 +307,7 @@ struct panel_sharp_ls037v7dw01_platform_data {
 };
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * acx565akm panel driver configuration data
  * @reset_gpio: reset signal
@@ -301,6 +323,8 @@ struct panel_acx565akm_data {
  */
 struct panel_nec_nl8048_data {
 =======
+=======
+>>>>>>> v3.18
  * panel-tpo-td043mtea1 platform data
  * @name: name for this display entity
  * @source: name of the display entity used as a video source
@@ -330,6 +354,9 @@ struct panel_nec_nl8048hl11_platform_data {
 
 	int data_lines;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int res_gpio;
 	int qvga_gpio;
@@ -337,12 +364,15 @@ struct panel_nec_nl8048hl11_platform_data {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * tpo td043 panel driver configuration data
  * @nreset_gpio: reset signal
  */
 struct panel_tpo_td043_data {
 	int nreset_gpio;
 =======
+=======
+>>>>>>> v3.18
  * panel-tpo-td028ttec1 platform data
  * @name: name for display entity
  * @source: name of the display entity used as a video source
@@ -353,6 +383,9 @@ struct panel_tpo_td028ttec1_platform_data {
 	const char *source;
 
 	int data_lines;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

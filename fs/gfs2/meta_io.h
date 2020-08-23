@@ -39,6 +39,10 @@ static inline void gfs2_buffer_copy_tail(struct buffer_head *to_bh,
 
 extern const struct address_space_operations gfs2_meta_aops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct address_space_operations gfs2_rgrp_aops;
+>>>>>>> v3.18
 =======
 extern const struct address_space_operations gfs2_rgrp_aops;
 >>>>>>> v3.18
@@ -49,6 +53,11 @@ static inline struct gfs2_sbd *gfs2_mapping2sbd(struct address_space *mapping)
 	if (mapping->a_ops == &gfs2_meta_aops)
 		return (((struct gfs2_glock *)mapping) - 1)->gl_sbd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (mapping->a_ops == &gfs2_rgrp_aops)
+		return container_of(mapping, struct gfs2_sbd, sd_aspace);
+>>>>>>> v3.18
 =======
 	else if (mapping->a_ops == &gfs2_rgrp_aops)
 		return container_of(mapping, struct gfs2_sbd, sd_aspace);
@@ -57,6 +66,7 @@ static inline struct gfs2_sbd *gfs2_mapping2sbd(struct address_space *mapping)
 		return inode->i_sb->s_fs_info;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void gfs2_meta_sync(struct gfs2_glock *gl);
 
@@ -74,6 +84,8 @@ void gfs2_meta_wipe(struct gfs2_inode *ip, u64 bstart, u32 blen);
 int gfs2_meta_indirect_buffer(struct gfs2_inode *ip, int height, u64 num,
 			      struct buffer_head **bhp);
 =======
+=======
+>>>>>>> v3.18
 extern struct buffer_head *gfs2_meta_new(struct gfs2_glock *gl, u64 blkno);
 extern int gfs2_meta_read(struct gfs2_glock *gl, u64 blkno, int flags,
 			  struct buffer_head **bhp);
@@ -85,6 +97,9 @@ extern void gfs2_remove_from_journal(struct buffer_head *bh,
 extern void gfs2_meta_wipe(struct gfs2_inode *ip, u64 bstart, u32 blen);
 extern int gfs2_meta_indirect_buffer(struct gfs2_inode *ip, int height, u64 num,
 				     struct buffer_head **bhp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int gfs2_meta_inode_buffer(struct gfs2_inode *ip,

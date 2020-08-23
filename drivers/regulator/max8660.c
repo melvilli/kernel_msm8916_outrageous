@@ -45,6 +45,12 @@
 #include <linux/slab.h>
 #include <linux/regulator/max8660.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+#include <linux/regulator/of_regulator.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -85,7 +91,10 @@ struct max8660 {
 	struct i2c_client *client;
 	u8 shadow_regs[MAX8660_N_REGS];		/* as chip is write only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev *rdev[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -93,12 +102,15 @@ struct max8660 {
 static int max8660_write(struct max8660 *max8660, u8 reg, u8 mask, u8 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const u8 max8660_addresses[MAX8660_N_REGS] =
 	  { 0x10, 0x12, 0x20, 0x23, 0x24, 0x29, 0x2a, 0x32, 0x33, 0x39, 0x80 };
 
 	int ret;
 	u8 reg_val = (max8660->shadow_regs[reg] & mask) | val;
 =======
+=======
+>>>>>>> v3.18
 	static const u8 max8660_addresses[MAX8660_N_REGS] = {
 	 0x10, 0x12, 0x20, 0x23, 0x24, 0x29, 0x2a, 0x32, 0x33, 0x39, 0x80
 	};
@@ -106,6 +118,9 @@ static int max8660_write(struct max8660 *max8660, u8 reg, u8 mask, u8 val)
 	int ret;
 	u8 reg_val = (max8660->shadow_regs[reg] & mask) | val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_vdbg(&max8660->client->dev, "Writing reg %02x with %02x\n",
 			max8660_addresses[reg], reg_val);
@@ -129,6 +144,10 @@ static int max8660_dcdc_is_enabled(struct regulator_dev *rdev)
 	u8 val = max8660->shadow_regs[MAX8660_OVER1];
 	u8 mask = (rdev_get_id(rdev) == MAX8660_V3) ? 1 : 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -140,6 +159,10 @@ static int max8660_dcdc_enable(struct regulator_dev *rdev)
 	struct max8660 *max8660 = rdev_get_drvdata(rdev);
 	u8 bit = (rdev_get_id(rdev) == MAX8660_V3) ? 1 : 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -151,6 +174,10 @@ static int max8660_dcdc_disable(struct regulator_dev *rdev)
 	struct max8660 *max8660 = rdev_get_drvdata(rdev);
 	u8 mask = (rdev_get_id(rdev) == MAX8660_V3) ? ~1 : ~4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -161,9 +188,15 @@ static int max8660_dcdc_get_voltage_sel(struct regulator_dev *rdev)
 {
 	struct max8660 *max8660 = rdev_get_drvdata(rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u8 reg = (rdev_get_id(rdev) == MAX8660_V3) ? MAX8660_ADTV2 : MAX8660_SDTV2;
 	u8 selector = max8660->shadow_regs[reg];
+=======
+	u8 reg = (rdev_get_id(rdev) == MAX8660_V3) ? MAX8660_ADTV2 : MAX8660_SDTV2;
+	u8 selector = max8660->shadow_regs[reg];
+
+>>>>>>> v3.18
 =======
 	u8 reg = (rdev_get_id(rdev) == MAX8660_V3) ? MAX8660_ADTV2 : MAX8660_SDTV2;
 	u8 selector = max8660->shadow_regs[reg];
@@ -242,6 +275,10 @@ static int max8660_ldo67_is_enabled(struct regulator_dev *rdev)
 	u8 val = max8660->shadow_regs[MAX8660_OVER2];
 	u8 mask = (rdev_get_id(rdev) == MAX8660_V6) ? 2 : 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -253,6 +290,10 @@ static int max8660_ldo67_enable(struct regulator_dev *rdev)
 	struct max8660 *max8660 = rdev_get_drvdata(rdev);
 	u8 bit = (rdev_get_id(rdev) == MAX8660_V6) ? 2 : 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -264,6 +305,10 @@ static int max8660_ldo67_disable(struct regulator_dev *rdev)
 	struct max8660 *max8660 = rdev_get_drvdata(rdev);
 	u8 mask = (rdev_get_id(rdev) == MAX8660_V6) ? ~2 : ~4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -274,9 +319,15 @@ static int max8660_ldo67_get_voltage_sel(struct regulator_dev *rdev)
 {
 	struct max8660 *max8660 = rdev_get_drvdata(rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u8 shift = (rdev_get_id(rdev) == MAX8660_V6) ? 0 : 4;
 	u8 selector = (max8660->shadow_regs[MAX8660_L12VCR] >> shift) & 0xf;
+=======
+	u8 shift = (rdev_get_id(rdev) == MAX8660_V6) ? 0 : 4;
+	u8 selector = (max8660->shadow_regs[MAX8660_L12VCR] >> shift) & 0xf;
+
+>>>>>>> v3.18
 =======
 	u8 shift = (rdev_get_id(rdev) == MAX8660_V6) ? 0 : 4;
 	u8 selector = (max8660->shadow_regs[MAX8660_L12VCR] >> shift) & 0xf;
@@ -361,6 +412,7 @@ static const struct regulator_desc max8660_reg[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max8660_probe(struct i2c_client *client,
 				   const struct i2c_device_id *i2c_id)
 {
@@ -379,6 +431,8 @@ static int max8660_probe(struct i2c_client *client,
 			sizeof(struct regulator_dev *) * MAX8660_V_END,
 			GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 enum {
 	MAX8660 = 0,
 	MAX8661 = 1,
@@ -478,13 +532,19 @@ static int max8660_probe(struct i2c_client *client,
 	}
 
 	max8660 = devm_kzalloc(dev, sizeof(struct max8660), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!max8660)
 		return -ENOMEM;
 
 	max8660->client = client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = max8660->rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -513,7 +573,11 @@ static int max8660_probe(struct i2c_client *client,
 
 		if (!pdata->subdevs[i].platform_data)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_out;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -541,9 +605,15 @@ static int max8660_probe(struct i2c_client *client,
 
 		case MAX8660_V7:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!strcmp(i2c_id->name, "max8661")) {
 				dev_err(&client->dev, "Regulator not on this chip!\n");
 				goto err_out;
+=======
+			if (type == MAX8661) {
+				dev_err(dev, "Regulator not on this chip!\n");
+				return -EINVAL;
+>>>>>>> v3.18
 =======
 			if (type == MAX8661) {
 				dev_err(dev, "Regulator not on this chip!\n");
@@ -557,9 +627,15 @@ static int max8660_probe(struct i2c_client *client,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&client->dev, "invalid regulator %s\n",
 				 pdata->subdevs[i].name);
 			goto err_out;
+=======
+			dev_err(dev, "invalid regulator %s\n",
+				 pdata->subdevs[i].name);
+			return ret;
+>>>>>>> v3.18
 =======
 			dev_err(dev, "invalid regulator %s\n",
 				 pdata->subdevs[i].name);
@@ -570,6 +646,7 @@ static int max8660_probe(struct i2c_client *client,
 
 	/* Finally register devices */
 	for (i = 0; i < pdata->num_subdevs; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		id = pdata->subdevs[i].id;
@@ -585,6 +662,8 @@ static int max8660_probe(struct i2c_client *client,
 				max8660_reg[id].name);
 			goto err_unregister;
 =======
+=======
+>>>>>>> v3.18
 		struct regulator_dev *rdev;
 
 		id = pdata->subdevs[i].id;
@@ -601,12 +680,16 @@ static int max8660_probe(struct i2c_client *client,
 			dev_err(&client->dev, "failed to register %s\n",
 				max8660_reg[id].name);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	i2c_set_clientdata(client, max8660);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_unregister:
@@ -630,11 +713,16 @@ static const struct i2c_device_id max8660_id[] = {
 	{ "max8660", 0 },
 	{ "max8661", 0 },
 =======
+=======
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id max8660_id[] = {
 	{ .name = "max8660", .driver_data = MAX8660 },
 	{ .name = "max8661", .driver_data = MAX8661 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -643,7 +731,10 @@ MODULE_DEVICE_TABLE(i2c, max8660_id);
 static struct i2c_driver max8660_driver = {
 	.probe = max8660_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max8660_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

@@ -66,6 +66,12 @@
 #define WL12XX_RX_BA_MAX_SESSIONS 3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define WL12XX_MAX_AP_STATIONS 8
+#define WL12XX_MAX_LINKS 12
+
+>>>>>>> v3.18
 =======
 #define WL12XX_MAX_AP_STATIONS 8
 #define WL12XX_MAX_LINKS 12
@@ -86,7 +92,10 @@ struct wl12xx_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct wl12xx_fw_packet_counters {
 	/* Cumulative counter of released packets per AC */
 	u8 tx_released_pkts[NUM_TX_QUEUES];
@@ -137,5 +146,8 @@ struct wl12xx_fw_status {
 	__le32 log_start_addr;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __WL12XX_PRIV_H__ */

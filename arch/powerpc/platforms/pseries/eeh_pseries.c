@@ -89,6 +89,7 @@ static int pseries_eeh_init(void)
 	 * of domain/bus/slot/function for EEH RTAS operations.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ibm_set_eeh_option == RTAS_UNKNOWN_SERVICE) {
 		pr_warning("%s: RTAS service <ibm,set-eeh-option> invalid\n",
 			__func__);
@@ -113,6 +114,8 @@ static int pseries_eeh_init(void)
 			"<ibm,configure-bridge> invalid\n",
 			__func__);
 =======
+=======
+>>>>>>> v3.18
 	if (ibm_set_eeh_option == RTAS_UNKNOWN_SERVICE		||
 	    ibm_set_slot_reset == RTAS_UNKNOWN_SERVICE		||
 	    (ibm_read_slot_reset_state2 == RTAS_UNKNOWN_SERVICE &&
@@ -121,6 +124,9 @@ static int pseries_eeh_init(void)
 	    (ibm_configure_pe == RTAS_UNKNOWN_SERVICE		&&
 	     ibm_configure_bridge == RTAS_UNKNOWN_SERVICE)) {
 		pr_info("EEH functionality not supported\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -130,17 +136,23 @@ static int pseries_eeh_init(void)
 	eeh_error_buf_size = rtas_token("rtas-error-log-max");
 	if (eeh_error_buf_size == RTAS_UNKNOWN_SERVICE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: unknown EEH error log size\n",
 			__func__);
 		eeh_error_buf_size = 1024;
 	} else if (eeh_error_buf_size > RTAS_ERROR_LOG_MAX) {
 		pr_warning("%s: EEH error log size %d exceeds the maximal %d\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_info("%s: unknown EEH error log size\n",
 			__func__);
 		eeh_error_buf_size = 1024;
 	} else if (eeh_error_buf_size > RTAS_ERROR_LOG_MAX) {
 		pr_info("%s: EEH error log size %d exceeds the maximal %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__func__, eeh_error_buf_size, RTAS_ERROR_LOG_MAX);
 		eeh_error_buf_size = RTAS_ERROR_LOG_MAX;
@@ -148,8 +160,11 @@ static int pseries_eeh_init(void)
 
 	/* Set EEH probe mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eeh_probe_mode_set(EEH_PROBE_MODE_DEVTREE);
 =======
+=======
+>>>>>>> v3.18
 	eeh_add_flag(EEH_PROBE_MODE_DEVTREE | EEH_ENABLE_IO_FOR_LOG);
 
 	return 0;
@@ -223,6 +238,9 @@ static int pseries_eeh_find_ecap(struct device_node *dn, int cap)
 		if (rtas_read_config(pdn, pos, 4, &header) != PCIBIOS_SUCCESSFUL)
 			break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -242,20 +260,27 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 	struct eeh_dev *edev;
 	struct eeh_pe pe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *class_code, *vendor_id, *device_id;
 	const u32 *regs;
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dn *pdn = PCI_DN(dn);
 	const __be32 *classp, *vendorp, *devicep;
 	u32 class_code;
 	const __be32 *regs;
 	u32 pcie_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int enable = 0;
 	int ret;
 
 	/* Retrieve OF node and eeh device */
 	edev = of_node_to_eeh_dev(dn);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!of_device_is_available(dn))
 		return NULL;
@@ -268,6 +293,8 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 	/* Skip for bad OF node or PCI-ISA bridge */
 	if (!class_code || !vendor_id || !device_id)
 =======
+=======
+>>>>>>> v3.18
 	if (edev->pe || !of_device_is_available(dn))
 		return NULL;
 
@@ -278,16 +305,22 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 
 	/* Skip for bad OF node or PCI-ISA bridge */
 	if (!classp || !vendorp || !devicep)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	if (dn->type && !strcmp(dn->type, "isa"))
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Update class code and mode of eeh device */
 	edev->class_code = *class_code;
 	edev->mode = 0;
 =======
+=======
+>>>>>>> v3.18
 	class_code = of_read_number(classp, 1);
 
 	/*
@@ -312,13 +345,20 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 				edev->mode |= EEH_DEV_DS_PORT;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Retrieve the device address */
 	regs = of_get_property(dn, "reg", NULL);
 	if (!regs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: OF node property %s::reg not found\n",
+=======
+		pr_warn("%s: OF node property %s::reg not found\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: OF node property %s::reg not found\n",
 >>>>>>> v3.18
@@ -330,7 +370,11 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 	memset(&pe, 0, sizeof(struct eeh_pe));
 	pe.phb = edev->phb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pe.config_addr = regs[0];
+=======
+	pe.config_addr = of_read_number(regs, 1);
+>>>>>>> v3.18
 =======
 	pe.config_addr = of_read_number(regs, 1);
 >>>>>>> v3.18
@@ -339,7 +383,11 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 	ret = eeh_ops->set_option(&pe, EEH_OPT_ENABLE);
 	if (!ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		edev->config_addr = regs[0];
+=======
+		edev->config_addr = of_read_number(regs, 1);
+>>>>>>> v3.18
 =======
 		edev->config_addr = of_read_number(regs, 1);
 >>>>>>> v3.18
@@ -357,7 +405,11 @@ static void *pseries_eeh_of_probe(struct device_node *dn, void *flag)
 
 		if (enable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			eeh_subsystem_enabled = 1;
+=======
+			eeh_add_flag(EEH_ENABLED);
+>>>>>>> v3.18
 =======
 			eeh_add_flag(EEH_ENABLED);
 >>>>>>> v3.18
@@ -413,7 +465,13 @@ static int pseries_eeh_set_option(struct eeh_pe *pe, int option)
 			config_addr = pe->addr;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	case EEH_OPT_FREEZE_PE:
+		/* Not support */
+		return 0;
+>>>>>>> v3.18
 =======
 	case EEH_OPT_FREEZE_PE:
 		/* Not support */
@@ -468,7 +526,11 @@ static int pseries_eeh_get_pe_addr(struct eeh_pe *pe)
 				BUID_LO(pe->phb->buid), 0);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Failed to get address for PHB#%d-PE#%x\n",
+=======
+			pr_warn("%s: Failed to get address for PHB#%d-PE#%x\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Failed to get address for PHB#%d-PE#%x\n",
 >>>>>>> v3.18
@@ -485,7 +547,11 @@ static int pseries_eeh_get_pe_addr(struct eeh_pe *pe)
 				BUID_LO(pe->phb->buid), 0);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Failed to get address for PHB#%d-PE#%x\n",
+=======
+			pr_warn("%s: Failed to get address for PHB#%d-PE#%x\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Failed to get address for PHB#%d-PE#%x\n",
 >>>>>>> v3.18
@@ -610,12 +676,15 @@ static int pseries_eeh_reset(struct eeh_pe *pe, int option)
 	if (option == EEH_RESET_FUNDAMENTAL &&
 	    ret == -8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = rtas_call(ibm_set_slot_reset, 4, 1, NULL,
 				config_addr, BUID_HI(pe->phb->buid),
 				BUID_LO(pe->phb->buid), EEH_RESET_HOT);
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		option = EEH_RESET_HOT;
 		ret = rtas_call(ibm_set_slot_reset, 4, 1, NULL,
 				config_addr, BUID_HI(pe->phb->buid),
@@ -629,6 +698,9 @@ static int pseries_eeh_reset(struct eeh_pe *pe, int option)
 	else
 		msleep(EEH_PE_RST_SETTLE_TIME);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -670,7 +742,11 @@ static int pseries_eeh_wait_state(struct eeh_pe *pe, int max_wait)
 
 		if (max_wait <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Timeout when getting PE's state (%d)\n",
+=======
+			pr_warn("%s: Timeout when getting PE's state (%d)\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Timeout when getting PE's state (%d)\n",
 >>>>>>> v3.18
@@ -680,17 +756,23 @@ static int pseries_eeh_wait_state(struct eeh_pe *pe, int max_wait)
 
 		if (mwait <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Firmware returned bad wait value %d\n",
 				__func__, mwait);
 			mwait = EEH_STATE_MIN_WAIT_TIME;
 		} else if (mwait > EEH_STATE_MAX_WAIT_TIME) {
 			pr_warning("%s: Firmware returned too long wait value %d\n",
 =======
+=======
+>>>>>>> v3.18
 			pr_warn("%s: Firmware returned bad wait value %d\n",
 				__func__, mwait);
 			mwait = EEH_STATE_MIN_WAIT_TIME;
 		} else if (mwait > EEH_STATE_MAX_WAIT_TIME) {
 			pr_warn("%s: Firmware returned too long wait value %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				__func__, mwait);
 			mwait = EEH_STATE_MAX_WAIT_TIME;
@@ -753,8 +835,11 @@ static int pseries_eeh_configure_bridge(struct eeh_pe *pe)
 	int config_addr;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Waiting 0.2s maximum before skipping configuration */
 	int max_wait = 200;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -763,6 +848,7 @@ static int pseries_eeh_configure_bridge(struct eeh_pe *pe)
 	if (pe->addr)
 		config_addr = pe->addr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (max_wait > 0) {
 		/* Use new configure-pe function, if supported */
@@ -801,6 +887,8 @@ static int pseries_eeh_configure_bridge(struct eeh_pe *pe)
 	pr_warn("%s: Unable to configure bridge PHB#%d-PE#%x (%d)\n",
 		__func__, pe->phb->global_number, pe->addr, ret);
 =======
+=======
+>>>>>>> v3.18
 	/* Use new configure-pe function, if supported */
 	if (ibm_configure_pe != RTAS_UNKNOWN_SERVICE) {
 		ret = rtas_call(ibm_configure_pe, 3, 1, NULL,
@@ -818,6 +906,9 @@ static int pseries_eeh_configure_bridge(struct eeh_pe *pe)
 		pr_warn("%s: Unable to configure bridge PHB#%d-PE#%x (%d)\n",
 			__func__, pe->phb->global_number, pe->addr, ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -871,14 +962,20 @@ static struct eeh_ops pseries_eeh_ops = {
 	.get_log		= pseries_eeh_get_log,
 	.configure_bridge       = pseries_eeh_configure_bridge,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read_config		= pseries_eeh_read_config,
 	.write_config		= pseries_eeh_write_config
 =======
+=======
+>>>>>>> v3.18
 	.err_inject		= NULL,
 	.read_config		= pseries_eeh_read_config,
 	.write_config		= pseries_eeh_write_config,
 	.next_error		= NULL,
 	.restore_config		= NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -891,10 +988,14 @@ static struct eeh_ops pseries_eeh_ops = {
 static int __init eeh_pseries_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EINVAL;
 
 	if (!machine_is(pseries))
 		return ret;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -909,8 +1010,12 @@ static int __init eeh_pseries_init(void)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 early_initcall(eeh_pseries_init);
+=======
+machine_early_initcall(pseries, eeh_pseries_init);
+>>>>>>> v3.18
 =======
 machine_early_initcall(pseries, eeh_pseries_init);
 >>>>>>> v3.18

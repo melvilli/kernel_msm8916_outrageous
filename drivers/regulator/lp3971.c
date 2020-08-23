@@ -26,8 +26,11 @@ struct lp3971 {
 	struct mutex io_lock;
 	struct i2c_client *i2c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num_regulators;
 	struct regulator_dev **rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -333,7 +336,11 @@ static int lp3971_i2c_read(struct i2c_client *i2c, char reg, int count,
 	ret = i2c_smbus_read_byte_data(i2c, reg);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -391,6 +398,7 @@ static int setup_regulators(struct lp3971 *lp3971,
 	int i, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp3971->num_regulators = pdata->num_regulators;
 	lp3971->rdev = kcalloc(pdata->num_regulators,
 				sizeof(struct regulator_dev *), GFP_KERNEL);
@@ -401,11 +409,17 @@ static int setup_regulators(struct lp3971 *lp3971,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Instantiate the regulators */
 	for (i = 0; i < pdata->num_regulators; i++) {
 		struct regulator_config config = { };
 		struct lp3971_regulator_subdev *reg = &pdata->regulators[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct regulator_dev *rdev;
+>>>>>>> v3.18
 =======
 		struct regulator_dev *rdev;
 >>>>>>> v3.18
@@ -415,6 +429,7 @@ static int setup_regulators(struct lp3971 *lp3971,
 		config.driver_data = lp3971;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lp3971->rdev[i] = regulator_register(&regulators[reg->id],
 						     &config);
 		if (IS_ERR(lp3971->rdev[i])) {
@@ -423,6 +438,8 @@ static int setup_regulators(struct lp3971 *lp3971,
 				err);
 			goto error;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(lp3971->dev,
 					       &regulators[reg->id], &config);
 		if (IS_ERR(rdev)) {
@@ -430,11 +447,15 @@ static int setup_regulators(struct lp3971 *lp3971,
 			dev_err(lp3971->dev, "regulator init failed: %d\n",
 				err);
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 error:
@@ -446,6 +467,8 @@ err_nomem:
 	return err;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int lp3971_i2c_probe(struct i2c_client *i2c,
@@ -453,7 +476,11 @@ static int lp3971_i2c_probe(struct i2c_client *i2c,
 {
 	struct lp3971 *lp3971;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lp3971_platform_data *pdata = i2c->dev.platform_data;
+=======
+	struct lp3971_platform_data *pdata = dev_get_platdata(&i2c->dev);
+>>>>>>> v3.18
 =======
 	struct lp3971_platform_data *pdata = dev_get_platdata(&i2c->dev);
 >>>>>>> v3.18
@@ -466,7 +493,11 @@ static int lp3971_i2c_probe(struct i2c_client *i2c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp3971 = kzalloc(sizeof(struct lp3971), GFP_KERNEL);
+=======
+	lp3971 = devm_kzalloc(&i2c->dev, sizeof(struct lp3971), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	lp3971 = devm_kzalloc(&i2c->dev, sizeof(struct lp3971), GFP_KERNEL);
 >>>>>>> v3.18
@@ -485,7 +516,11 @@ static int lp3971_i2c_probe(struct i2c_client *i2c,
 	if (ret < 0) {
 		dev_err(&i2c->dev, "failed to detect device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_detect;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -493,6 +528,7 @@ static int lp3971_i2c_probe(struct i2c_client *i2c,
 
 	ret = setup_regulators(lp3971, pdata);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_detect;
 
@@ -522,6 +558,8 @@ static const struct i2c_device_id lp3971_i2c_id[] = {
        { "lp3971", 0 },
        { }
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	i2c_set_clientdata(i2c, lp3971);
@@ -531,6 +569,9 @@ static const struct i2c_device_id lp3971_i2c_id[] = {
 static const struct i2c_device_id lp3971_i2c_id[] = {
 	{ "lp3971", 0 },
 	{ }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 MODULE_DEVICE_TABLE(i2c, lp3971_i2c_id);
@@ -542,7 +583,10 @@ static struct i2c_driver lp3971_i2c_driver = {
 	},
 	.probe    = lp3971_i2c_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove   = lp3971_i2c_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = lp3971_i2c_id,

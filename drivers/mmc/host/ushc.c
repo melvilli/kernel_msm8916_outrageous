@@ -427,9 +427,12 @@ static int ushc_probe(struct usb_interface *intf, const struct usb_device_id *id
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intf->cur_altsetting->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mmc = mmc_alloc_host(sizeof(struct ushc_data), &intf->dev);
@@ -511,7 +514,11 @@ static int ushc_probe(struct usb_interface *intf, const struct usb_device_id *id
 		goto err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ushc->csw = kzalloc(sizeof(struct ushc_cbw), GFP_KERNEL);
+=======
+	ushc->csw = kzalloc(sizeof(struct ushc_csw), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ushc->csw = kzalloc(sizeof(struct ushc_csw), GFP_KERNEL);
 >>>>>>> v3.18

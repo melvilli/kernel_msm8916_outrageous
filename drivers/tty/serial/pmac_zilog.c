@@ -58,6 +58,11 @@
 #include <linux/sysrq.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -657,6 +662,11 @@ static void pmz_start_tx(struct uart_port *port)
 		struct circ_buf *xmit = &port->state->xmit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (uart_circ_empty(xmit))
+			goto out;
+>>>>>>> v3.18
 =======
 		if (uart_circ_empty(xmit))
 			goto out;
@@ -670,6 +680,10 @@ static void pmz_start_tx(struct uart_port *port)
 			uart_write_wakeup(&uap->port);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ out:
+>>>>>>> v3.18
 =======
  out:
 >>>>>>> v3.18
@@ -1087,7 +1101,11 @@ static void pmz_convert_to_zs(struct uart_pmac_port *uap, unsigned int cflag,
 		uap->parity_mask = 0xff;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1109,7 +1127,11 @@ static void pmz_convert_to_zs(struct uart_pmac_port *uap, unsigned int cflag,
 	if (iflag & INPCK)
 		uap->port.read_status_mask |= CRC_ERR | PAR_ERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iflag & (BRKINT | PARMRK))
+=======
+	if (iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -1671,8 +1693,12 @@ static int __init pmz_probe(void)
 	 * Find all escc chips in the system
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node_p = of_find_node_by_name(NULL, "escc");
 	while (node_p) {
+=======
+	for_each_node_by_name(node_p, "escc") {
+>>>>>>> v3.18
 =======
 	for_each_node_by_name(node_p, "escc") {
 >>>>>>> v3.18
@@ -1694,7 +1720,11 @@ static int __init pmz_probe(void)
 			printk(KERN_ERR "pmac_zilog: missing node %c for escc %s\n",
 				(!node_a) ? 'a' : 'b', node_p->full_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto next;
+=======
+			continue;
+>>>>>>> v3.18
 =======
 			continue;
 >>>>>>> v3.18
@@ -1725,11 +1755,17 @@ static int __init pmz_probe(void)
 			memset(&pmz_ports[count], 0, sizeof(struct uart_pmac_port));
 			memset(&pmz_ports[count+1], 0, sizeof(struct uart_pmac_port));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto next;
 		}
 		count += 2;
 next:
 		node_p = of_find_node_by_name(node_p, "escc");
+=======
+			continue;
+		}
+		count += 2;
+>>>>>>> v3.18
 =======
 			continue;
 		}
@@ -1835,7 +1871,10 @@ static int __exit pmz_detach(struct platform_device *pdev)
 	uart_remove_one_port(&pmz_uart_reg, &uap->port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uap->port.dev = NULL;

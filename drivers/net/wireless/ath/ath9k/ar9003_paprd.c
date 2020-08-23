@@ -455,6 +455,11 @@ static bool create_pa_curve(u32 *data_L, u32 *data_U, u32 *pa_table, u16 *gain)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		max_index++;
+
+>>>>>>> v3.18
 =======
 		max_index++;
 
@@ -474,6 +479,7 @@ static bool create_pa_curve(u32 *data_L, u32 *data_U, u32 *pa_table, u16 *gain)
 		accum_tx <<= scale_factor;
 		accum_rx <<= scale_factor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		x_est[i + 1] = (((accum_tx + accum_cnt) / accum_cnt) + 32) >>
 		    scale_factor;
 
@@ -481,6 +487,8 @@ static bool create_pa_curve(u32 *data_L, u32 *data_U, u32 *pa_table, u16 *gain)
 			    scale_factor) +
 			    (1 << scale_factor) * max_index + 16;
 =======
+=======
+>>>>>>> v3.18
 		x_est[max_index] =
 			(((accum_tx + accum_cnt) / accum_cnt) + 32) >>
 			scale_factor;
@@ -489,16 +497,25 @@ static bool create_pa_curve(u32 *data_L, u32 *data_U, u32 *pa_table, u16 *gain)
 			((((accum_rx + accum_cnt) / accum_cnt) + 32) >>
 			    scale_factor) +
 			(1 << scale_factor) * i + 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (accum_ang >= (1 << 26))
 			accum_ang -= 1 << 27;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		theta[i + 1] = ((accum_ang * (1 << scale_factor)) + accum_cnt) /
 		    accum_cnt;
 
 		max_index++;
+=======
+		theta[max_index] =
+			((accum_ang * (1 << scale_factor)) + accum_cnt) /
+			accum_cnt;
+>>>>>>> v3.18
 =======
 		theta[max_index] =
 			((accum_ang * (1 << scale_factor)) + accum_cnt) /

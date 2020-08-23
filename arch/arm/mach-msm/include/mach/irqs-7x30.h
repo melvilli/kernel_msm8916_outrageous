@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2009-2010, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2009, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2009, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -29,7 +33,11 @@
 #define INT_SC_DBG_RX_FULL	7
 #define INT_SC_DBG_TX_EMPTY	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INT_ARMQC_PERFMON	9
+=======
+#define INT_ARM11_PM		9
+>>>>>>> v3.18
 =======
 #define INT_ARM11_PM		9
 >>>>>>> v3.18
@@ -140,8 +148,13 @@
 #define INT_TCHSCRN2 		INT_TSSC_PENUP
 #define INT_GP_TIMER_EXP 	INT_GPT0_TIMER_EXP
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INT_ADSP_A9_A11 	INT_AD5A_MPROC_APPS_0
 #define INT_ADSP_A11		INT_AD5A_MPROC_APPS_1
+=======
+#define INT_ADSP_A11 		INT_AD5A_MPROC_APPS_0
+#define INT_ADSP_A9_A11 	INT_AD5A_MPROC_APPS_1
+>>>>>>> v3.18
 =======
 #define INT_ADSP_A11 		INT_AD5A_MPROC_APPS_0
 #define INT_ADSP_A9_A11 	INT_AD5A_MPROC_APPS_1
@@ -156,12 +169,15 @@
 #define NR_GPIO_IRQS		182
 #define PMIC8058_IRQ_BASE	(NR_MSM_IRQS + NR_GPIO_IRQS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_PMIC8058_IRQS	256
 #define NR_BOARD_IRQS		NR_PMIC8058_IRQS
 
 #define INT_ADSP_A11_SMSM	INT_ADSP_A11
 
 =======
+=======
+>>>>>>> v3.18
 #define NR_PMIC8058_GPIO_IRQS	40
 #define NR_PMIC8058_MPP_IRQS	12
 #define NR_PMIC8058_MISC_IRQS	8
@@ -170,5 +186,8 @@
 				NR_PMIC8058_MISC_IRQS)
 #define NR_BOARD_IRQS		NR_PMIC8058_IRQS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_ARCH_MSM_IRQS_7X30_H */

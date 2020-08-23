@@ -92,12 +92,18 @@ struct mmp_win {
 	u16	bottom_crop;
 	int	pix_fmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * pitch[0]: graphics/video layer line length or y pitch
 	 * pitch[1]/pitch[2]: video u/v pitch if non-zero
 	 */
 	u32	pitch[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -343,6 +349,10 @@ struct mmp_mach_path_config {
 	u32 path_config;
 	u32 link_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 dsi_rbswap;
+>>>>>>> v3.18
 =======
 	u32 dsi_rbswap;
 >>>>>>> v3.18

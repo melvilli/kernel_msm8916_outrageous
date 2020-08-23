@@ -305,6 +305,10 @@
 #define AR_IMR_S2_QCU_TXURN    0x000003FF
 #define AR_IMR_S2_QCU_TXURN_S  0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AR_IMR_S2_BB_WATCHDOG  0x00010000
+>>>>>>> v3.18
 =======
 #define AR_IMR_S2_BB_WATCHDOG  0x00010000
 >>>>>>> v3.18
@@ -509,9 +513,12 @@
 #define AR_D_QCUMASK_RESV0   0xFFFFFC00
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_D_TXBLK_CMD  0x1038
 #define AR_D_TXBLK_DATA(i) (AR_D_TXBLK_CMD+(i))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AR_D0_LCL_IFS     0x1040
@@ -814,10 +821,13 @@
 #define AR_SREV_VERSION_9462		0x280
 #define AR_SREV_REVISION_9462_20	2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_SREV_VERSION_9565            0x2C0
 #define AR_SREV_REVISION_9565_10        0
 #define AR_SREV_VERSION_9550		0x400
 =======
+=======
+>>>>>>> v3.18
 #define AR_SREV_REVISION_9462_21	3
 #define AR_SREV_VERSION_9565            0x2C0
 #define AR_SREV_REVISION_9565_10        0
@@ -828,6 +838,9 @@
 #define AR_SREV_REVISION_9531_10        0
 #define AR_SREV_REVISION_9531_11        1
 #define AR_SREV_REVISION_9531_20        2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AR_SREV_5416(_ah) \
@@ -901,9 +914,12 @@
 #define AR_SREV_9330(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9330))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_SREV_9330_10(_ah) \
 	(AR_SREV_9330((_ah)) && \
 	 ((_ah)->hw_version.macRev == AR_SREV_REVISION_9330_10))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AR_SREV_9330_11(_ah) \
@@ -916,9 +932,15 @@
 #define AR_SREV_9485(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9485))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_SREV_9485_11(_ah) \
 	(AR_SREV_9485(_ah) && \
 	 ((_ah)->hw_version.macRev == AR_SREV_REVISION_9485_11))
+=======
+#define AR_SREV_9485_11_OR_LATER(_ah) \
+	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9485) && \
+	 ((_ah)->hw_version.macRev >= AR_SREV_REVISION_9485_11))
+>>>>>>> v3.18
 =======
 #define AR_SREV_9485_11_OR_LATER(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9485) && \
@@ -931,11 +953,17 @@
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9340))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AR_SREV_9340_13(_ah) \
 	(AR_SREV_9340((_ah)) && \
 	 ((_ah)->hw_version.macRev == AR_SREV_REVISION_9340_13))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AR_SREV_9340_13_OR_LATER(_ah) \
 	(AR_SREV_9340((_ah)) && \
@@ -947,6 +975,7 @@
 
 #define AR_SREV_9462(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9462))
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define AR_SREV_9462_20(_ah) \
@@ -960,6 +989,8 @@
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9565) && \
 	 ((_ah)->hw_version.macRev == AR_SREV_REVISION_9565_10))
 =======
+=======
+>>>>>>> v3.18
 #define AR_SREV_9462_20(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9462) && \
 	 ((_ah)->hw_version.macRev == AR_SREV_REVISION_9462_20))
@@ -987,6 +1018,9 @@
 #define AR_SREV_9565_11_OR_LATER(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9565) && \
 	 ((_ah)->hw_version.macRev >= AR_SREV_REVISION_9565_11))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AR_SREV_9550(_ah) \
@@ -996,7 +1030,10 @@
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9580) && \
 	((_ah)->hw_version.macRev >= AR_SREV_REVISION_9580_10))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AR_SREV_9580_10(_ah) \
@@ -1004,7 +1041,10 @@
 	((_ah)->hw_version.macRev == AR_SREV_REVISION_9580_10))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AR_SREV_9531(_ah) \
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9531))
 #define AR_SREV_9531_10(_ah) \
@@ -1017,6 +1057,9 @@
 	(((_ah)->hw_version.macVersion == AR_SREV_VERSION_9531) && \
 	 ((_ah)->hw_version.macRev == AR_SREV_REVISION_9531_20))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* NOTE: When adding chips newer than Peacock, add chip check here */
 #define AR_SREV_9580_10_OR_LATER(_ah) \
@@ -1296,7 +1339,10 @@ enum {
 #define AR_PHY_CCA_NOM_VAL_2GHZ      -118
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AR_RTC_9300_SOC_PLL_DIV_INT          0x0000003f
 #define AR_RTC_9300_SOC_PLL_DIV_INT_S        0
 #define AR_RTC_9300_SOC_PLL_DIV_FRAC         0x000fffc0
@@ -1307,6 +1353,9 @@ enum {
 #define AR_RTC_9300_SOC_PLL_CLKSEL_S         25
 #define AR_RTC_9300_SOC_PLL_BYPASS           0x08000000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AR_RTC_9300_PLL_DIV          0x000003ff
 #define AR_RTC_9300_PLL_DIV_S        0
@@ -1315,6 +1364,10 @@ enum {
 #define AR_RTC_9300_PLL_CLKSEL       0x0000C000
 #define AR_RTC_9300_PLL_CLKSEL_S     14
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AR_RTC_9300_PLL_BYPASS       0x00010000
+>>>>>>> v3.18
 =======
 #define AR_RTC_9300_PLL_BYPASS       0x00010000
 >>>>>>> v3.18

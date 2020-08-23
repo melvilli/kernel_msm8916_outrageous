@@ -21,7 +21,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See <asm/system.h>; called with prev and next task_struct pointers.
+=======
+ * See <asm/switch_to.h>; called with prev and next task_struct pointers.
+>>>>>>> v3.18
 =======
  * See <asm/switch_to.h>; called with prev and next task_struct pointers.
 >>>>>>> v3.18
@@ -44,7 +48,11 @@
 
 #if CALLEE_SAVED_REGS_COUNT != 24
 <<<<<<< HEAD
+<<<<<<< HEAD
 # error Mismatch between <asm/system.h> and kernel/entry.S
+=======
+# error Mismatch between <asm/switch_to.h> and kernel/entry.S
+>>>>>>> v3.18
 =======
 # error Mismatch between <asm/switch_to.h> and kernel/entry.S
 >>>>>>> v3.18

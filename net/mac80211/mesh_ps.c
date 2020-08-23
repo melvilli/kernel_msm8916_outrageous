@@ -154,6 +154,12 @@ u32 ieee80211_mps_set_sta_local_pm(struct sta_info *sta,
 	struct ieee80211_sub_if_data *sdata = sta->sdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (sta->local_pm == pm)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (sta->local_pm == pm)
 		return 0;
@@ -237,11 +243,17 @@ void ieee80211_mps_sta_status_update(struct sta_info *sta)
 	bool do_buffer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* For non-assoc STA, prevent buffering or frame transmission */
 	if (sta->sta_state < IEEE80211_STA_ASSOC)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * use peer-specific power mode if peering is established and the
@@ -256,7 +268,10 @@ void ieee80211_mps_sta_status_update(struct sta_info *sta)
 	do_buffer = (pm != NL80211_MESH_POWER_ACTIVE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* clear the MPSP flags for non-peers or active STA */
 	if (sta->plink_state != NL80211_PLINK_ESTAB) {
 		clear_sta_flag(sta, WLAN_STA_MPSP_OWNER);
@@ -265,6 +280,9 @@ void ieee80211_mps_sta_status_update(struct sta_info *sta)
 		clear_sta_flag(sta, WLAN_STA_MPSP_OWNER);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Don't let the same PS state be set twice */
 	if (test_sta_flag(sta, WLAN_STA_PS_STA) == do_buffer)
@@ -279,6 +297,7 @@ void ieee80211_mps_sta_status_update(struct sta_info *sta)
 		ieee80211_sta_ps_deliver_wakeup(sta);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* clear the MPSP flags for non-peers or active STA */
 	if (sta->plink_state != NL80211_PLINK_ESTAB) {
@@ -287,6 +306,8 @@ void ieee80211_mps_sta_status_update(struct sta_info *sta)
 	} else if (!do_buffer) {
 		clear_sta_flag(sta, WLAN_STA_MPSP_OWNER);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -469,8 +490,12 @@ static void mpsp_qos_null_append(struct sta_info *sta,
 static void mps_frame_deliver(struct sta_info *sta, int n_frames)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_sub_if_data *sdata = sta->sdata;
 	struct ieee80211_local *local = sdata->local;
+=======
+	struct ieee80211_local *local = sta->sdata->local;
+>>>>>>> v3.18
 =======
 	struct ieee80211_local *local = sta->sdata->local;
 >>>>>>> v3.18
@@ -587,15 +612,21 @@ void ieee80211_mpsp_trigger_process(u8 *qc, struct sta_info *sta,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ieee80211_mps_frame_release - release buffered frames in response to beacon
  *
  * @sta: mesh STA
  * @elems: beacon IEs
 =======
+=======
+>>>>>>> v3.18
  * ieee80211_mps_frame_release - release frames buffered due to mesh power save
  *
  * @sta: mesh STA
  * @elems: IEs of beacon or probe response
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * For peers if we have individually-addressed frames buffered or the peer
@@ -610,10 +641,16 @@ void ieee80211_mps_frame_release(struct sta_info *sta,
 	bool has_buffered = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TIM map only for LLID <= IEEE80211_MAX_AID */
 	if (sta->plink_state == NL80211_PLINK_ESTAB)
 		has_buffered = ieee80211_check_tim(elems->tim, elems->tim_len,
 				le16_to_cpu(sta->llid) % IEEE80211_MAX_AID);
+=======
+	if (sta->plink_state == NL80211_PLINK_ESTAB)
+		has_buffered = ieee80211_check_tim(elems->tim, elems->tim_len,
+						   sta->llid);
+>>>>>>> v3.18
 =======
 	if (sta->plink_state == NL80211_PLINK_ESTAB)
 		has_buffered = ieee80211_check_tim(elems->tim, elems->tim_len,
@@ -630,14 +667,20 @@ void ieee80211_mps_frame_release(struct sta_info *sta,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ac = 0; ac < IEEE80211_NUM_ACS; ac++)
 		buffer_local += skb_queue_len(&sta->ps_tx_buf[ac]) +
 				skb_queue_len(&sta->tx_filtered[ac]);
 =======
+=======
+>>>>>>> v3.18
 	if (!test_sta_flag(sta, WLAN_STA_MPSP_OWNER))
 		for (ac = 0; ac < IEEE80211_NUM_ACS; ac++)
 			buffer_local += skb_queue_len(&sta->ps_tx_buf[ac]) +
 					skb_queue_len(&sta->tx_filtered[ac]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!has_buffered && !buffer_local)

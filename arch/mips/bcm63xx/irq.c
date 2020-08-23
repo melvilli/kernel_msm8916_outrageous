@@ -13,6 +13,10 @@
 #include <linux/module.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/spinlock.h>
 >>>>>>> v3.18
@@ -23,6 +27,7 @@
 #include <bcm63xx_io.h>
 #include <bcm63xx_irq.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __dispatch_internal(void) __maybe_unused;
 static void __dispatch_internal_64(void) __maybe_unused;
@@ -131,6 +136,8 @@ static inline void bcm63xx_init_irq(void)
 static u32 irq_stat_addr, irq_mask_addr;
 static void (*dispatch_internal)(void);
 =======
+=======
+>>>>>>> v3.18
 
 static DEFINE_SPINLOCK(ipic_lock);
 static DEFINE_SPINLOCK(epic_lock);
@@ -138,11 +145,15 @@ static DEFINE_SPINLOCK(epic_lock);
 static u32 irq_stat_addr[2];
 static u32 irq_mask_addr[2];
 static void (*dispatch_internal)(int cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int is_ext_irq_cascaded;
 static unsigned int ext_irq_count;
 static unsigned int ext_irq_start, ext_irq_end;
 static unsigned int ext_irq_cfg_reg1, ext_irq_cfg_reg2;
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void (*internal_irq_mask)(unsigned int irq);
 static void (*internal_irq_unmask)(unsigned int irq);
@@ -237,6 +248,11 @@ static void (*internal_irq_mask)(struct irq_data *d);
 static void (*internal_irq_unmask)(struct irq_data *d, const struct cpumask *m);
 
 >>>>>>> v3.18
+=======
+static void (*internal_irq_mask)(struct irq_data *d);
+static void (*internal_irq_unmask)(struct irq_data *d, const struct cpumask *m);
+
+>>>>>>> v3.18
 
 static inline u32 get_ext_irq_perf_reg(int irq)
 {
@@ -255,7 +271,10 @@ static inline void handle_internal(int intbit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int enable_irq_for_cpu(int cpu, struct irq_data *d,
 				     const struct cpumask *m)
 {
@@ -270,6 +289,9 @@ static inline int enable_irq_for_cpu(int cpu, struct irq_data *d,
 	return enable;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * dispatch internal devices IRQ (uart, enet, watchdog, ...). do not
@@ -277,6 +299,7 @@ static inline int enable_irq_for_cpu(int cpu, struct irq_data *d,
  * will resume the loop where it ended the last time we left this
  * function.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __dispatch_internal(void)
 {
@@ -320,6 +343,8 @@ static void __dispatch_internal_64(void)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 
 #define BUILD_IPIC_INTERNAL(width)					\
 void __dispatch_internal_##width(int cpu)				\
@@ -407,6 +432,9 @@ static void __internal_irq_unmask_##width(struct irq_data *d,		\
 
 BUILD_IPIC_INTERNAL(32);
 BUILD_IPIC_INTERNAL(64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 asmlinkage void plat_irq_dispatch(void)
@@ -422,10 +450,13 @@ asmlinkage void plat_irq_dispatch(void)
 		if (cause & CAUSEF_IP7)
 			do_IRQ(7);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cause & CAUSEF_IP2)
 			dispatch_internal();
 		if (!is_ext_irq_cascaded) {
 =======
+=======
+>>>>>>> v3.18
 		if (cause & CAUSEF_IP0)
 			do_IRQ(0);
 		if (cause & CAUSEF_IP1)
@@ -436,6 +467,9 @@ asmlinkage void plat_irq_dispatch(void)
 			if (cause & CAUSEF_IP3)
 				dispatch_internal(1);
 		} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (cause & CAUSEF_IP3)
 				do_IRQ(IRQ_EXT_0);
@@ -453,6 +487,7 @@ asmlinkage void plat_irq_dispatch(void)
  * internal IRQs operations: only mask/unmask on PERF irq mask
  * register.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __internal_irq_mask_32(unsigned int irq)
 {
@@ -498,12 +533,21 @@ static void bcm63xx_internal_irq_mask(struct irq_data *d)
 {
 	internal_irq_mask(d);
 >>>>>>> v3.18
+=======
+static void bcm63xx_internal_irq_mask(struct irq_data *d)
+{
+	internal_irq_mask(d);
+>>>>>>> v3.18
 }
 
 static void bcm63xx_internal_irq_unmask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	internal_irq_unmask(d->irq - IRQ_INTERNAL_BASE);
+=======
+	internal_irq_unmask(d, NULL);
+>>>>>>> v3.18
 =======
 	internal_irq_unmask(d, NULL);
 >>>>>>> v3.18
@@ -518,13 +562,19 @@ static void bcm63xx_external_irq_mask(struct irq_data *d)
 	unsigned int irq = d->irq - IRQ_EXTERNAL_BASE;
 	u32 reg, regaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	regaddr = get_ext_irq_perf_reg(irq);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	regaddr = get_ext_irq_perf_reg(irq);
 	spin_lock_irqsave(&epic_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = bcm_perf_readl(regaddr);
 
@@ -535,13 +585,19 @@ static void bcm63xx_external_irq_mask(struct irq_data *d)
 
 	bcm_perf_writel(reg, regaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_ext_irq_cascaded)
 		internal_irq_mask(irq + ext_irq_start);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&epic_lock, flags);
 
 	if (is_ext_irq_cascaded)
 		internal_irq_mask(irq_get_irq_data(irq + ext_irq_start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -550,13 +606,19 @@ static void bcm63xx_external_irq_unmask(struct irq_data *d)
 	unsigned int irq = d->irq - IRQ_EXTERNAL_BASE;
 	u32 reg, regaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	regaddr = get_ext_irq_perf_reg(irq);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	regaddr = get_ext_irq_perf_reg(irq);
 	spin_lock_irqsave(&epic_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = bcm_perf_readl(regaddr);
 
@@ -567,15 +629,21 @@ static void bcm63xx_external_irq_unmask(struct irq_data *d)
 
 	bcm_perf_writel(reg, regaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (is_ext_irq_cascaded)
 		internal_irq_unmask(irq + ext_irq_start);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&epic_lock, flags);
 
 	if (is_ext_irq_cascaded)
 		internal_irq_unmask(irq_get_irq_data(irq + ext_irq_start),
 				    NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -584,13 +652,19 @@ static void bcm63xx_external_irq_clear(struct irq_data *d)
 	unsigned int irq = d->irq - IRQ_EXTERNAL_BASE;
 	u32 reg, regaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	regaddr = get_ext_irq_perf_reg(irq);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	regaddr = get_ext_irq_perf_reg(irq);
 	spin_lock_irqsave(&epic_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = bcm_perf_readl(regaddr);
 
@@ -601,6 +675,10 @@ static void bcm63xx_external_irq_clear(struct irq_data *d)
 
 	bcm_perf_writel(reg, regaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&epic_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&epic_lock, flags);
 >>>>>>> v3.18
@@ -613,6 +691,10 @@ static int bcm63xx_external_irq_set_type(struct irq_data *d,
 	u32 reg, regaddr;
 	int levelsense, sense, bothedge;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -651,6 +733,10 @@ static int bcm63xx_external_irq_set_type(struct irq_data *d,
 
 	regaddr = get_ext_irq_perf_reg(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&epic_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&epic_lock, flags);
 >>>>>>> v3.18
@@ -674,6 +760,10 @@ static int bcm63xx_external_irq_set_type(struct irq_data *d,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BCM3368_CPU_ID:
+>>>>>>> v3.18
 =======
 	case BCM3368_CPU_ID:
 >>>>>>> v3.18
@@ -702,6 +792,10 @@ static int bcm63xx_external_irq_set_type(struct irq_data *d,
 
 	bcm_perf_writel(reg, regaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&epic_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&epic_lock, flags);
 >>>>>>> v3.18
@@ -716,7 +810,10 @@ static int bcm63xx_external_irq_set_type(struct irq_data *d,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 static int bcm63xx_internal_set_affinity(struct irq_data *data,
 					 const struct cpumask *dest,
@@ -729,6 +826,9 @@ static int bcm63xx_internal_set_affinity(struct irq_data *data,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct irq_chip bcm63xx_internal_irq_chip = {
 	.name		= "bcm63xx_ipic",
@@ -753,7 +853,10 @@ static struct irqaction cpu_ip2_cascade_action = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 static struct irqaction cpu_ip3_cascade_action = {
 	.handler	= no_action,
@@ -762,6 +865,9 @@ static struct irqaction cpu_ip3_cascade_action = {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct irqaction cpu_ext_cascade_action = {
 	.handler	= no_action,
@@ -770,7 +876,10 @@ static struct irqaction cpu_ext_cascade_action = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void bcm63xx_init_irq(void)
 {
 	int irq_bits;
@@ -881,6 +990,9 @@ static void bcm63xx_init_irq(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init arch_init_irq(void)
 {
@@ -903,7 +1015,10 @@ void __init arch_init_irq(void)
 
 	setup_irq(MIPS_CPU_IRQ_BASE + 2, &cpu_ip2_cascade_action);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	if (is_ext_irq_cascaded) {
 		setup_irq(MIPS_CPU_IRQ_BASE + 3, &cpu_ip3_cascade_action);
@@ -914,5 +1029,8 @@ void __init arch_init_irq(void)
 		cpumask_set_cpu(smp_processor_id(), irq_default_affinity);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

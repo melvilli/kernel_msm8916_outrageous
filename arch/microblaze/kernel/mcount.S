@@ -92,11 +92,14 @@ ENTRY(ftrace_caller)
 	SAVE_REGS
 	swi	r15, r1, 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* MS: HAVE_FUNCTION_TRACE_MCOUNT_TEST begin of checking */
 	lwi	r5, r0, function_trace_stop;
 	bneid	r5, end;
 	nop;
 	/* MS: HAVE_FUNCTION_TRACE_MCOUNT_TEST end of checking */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER

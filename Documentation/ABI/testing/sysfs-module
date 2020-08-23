@@ -50,6 +50,10 @@ Description:	Module taint flags:
 			F - force-loaded module
 			C - staging driver module
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			E - unsigned module
+>>>>>>> v3.18
 =======
 			E - unsigned module
 >>>>>>> v3.18

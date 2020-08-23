@@ -5,6 +5,10 @@
 #include <linux/nfs_fs.h>
 #include "internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "nfs3_fs.h"
+>>>>>>> v3.18
 =======
 #include "nfs3_fs.h"
 >>>>>>> v3.18
@@ -17,6 +21,12 @@ static struct nfs_subversion nfs_v3 = {
 	.rpc_ops  = &nfs_v3_clientops,
 	.sops     = &nfs_sops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NFS_V3_ACL
+	.xattr    = nfs3_xattr_handlers,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NFS_V3_ACL
 	.xattr    = nfs3_xattr_handlers,

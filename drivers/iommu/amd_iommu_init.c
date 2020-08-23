@@ -27,7 +27,11 @@
 #include <linux/amd-iommu.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+#include <linux/iommu.h>
+>>>>>>> v3.18
 =======
 #include <linux/iommu.h>
 >>>>>>> v3.18
@@ -104,7 +108,11 @@ struct ivhd_header {
 	u16 pci_seg;
 	u16 info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved;
+=======
+	u32 efr;
+>>>>>>> v3.18
 =======
 	u32 efr;
 >>>>>>> v3.18
@@ -160,14 +168,20 @@ bool amd_iommu_np_cache __read_mostly;
 bool amd_iommu_iotlb_sup __read_mostly = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 amd_iommu_max_pasids __read_mostly = ~0;
 
 bool amd_iommu_v2_present __read_mostly;
 =======
+=======
+>>>>>>> v3.18
 u32 amd_iommu_max_pasid __read_mostly = ~0;
 
 bool amd_iommu_v2_present __read_mostly;
 bool amd_iommu_pc_present __read_mostly;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 bool amd_iommu_force_isolation __read_mostly;
@@ -385,24 +399,34 @@ static void iommu_disable(struct amd_iommu *iommu)
  * the system has one.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 __iomem * __init iommu_map_mmio_space(u64 address)
 {
 	if (!request_mem_region(address, MMIO_REGION_LENGTH, "amd_iommu")) {
 		pr_err("AMD-Vi: Can not reserve memory region %llx for mmio\n",
 			address);
 =======
+=======
+>>>>>>> v3.18
 static u8 __iomem * __init iommu_map_mmio_space(u64 address, u64 end)
 {
 	if (!request_mem_region(address, end, "amd_iommu")) {
 		pr_err("AMD-Vi: Can not reserve memory region %llx-%llx for mmio\n",
 			address, end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("AMD-Vi: This is a BIOS bug. Please contact your hardware vendor\n");
 		return NULL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (u8 __iomem *)ioremap_nocache(address, MMIO_REGION_LENGTH);
+=======
+	return (u8 __iomem *)ioremap_nocache(address, end);
+>>>>>>> v3.18
 =======
 	return (u8 __iomem *)ioremap_nocache(address, end);
 >>>>>>> v3.18
@@ -413,7 +437,11 @@ static void __init iommu_unmap_mmio_space(struct amd_iommu *iommu)
 	if (iommu->mmio_base)
 		iounmap(iommu->mmio_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_mem_region(iommu->mmio_phys, MMIO_REGION_LENGTH);
+=======
+	release_mem_region(iommu->mmio_phys, iommu->mmio_phys_end);
+>>>>>>> v3.18
 =======
 	release_mem_region(iommu->mmio_phys, iommu->mmio_phys_end);
 >>>>>>> v3.18
@@ -743,7 +771,11 @@ static void __init set_dev_entry_from_acpi(struct amd_iommu *iommu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init add_special_device(u8 type, u8 id, u16 devid, bool cmd_line)
+=======
+static int __init add_special_device(u8 type, u8 id, u16 *devid, bool cmd_line)
+>>>>>>> v3.18
 =======
 static int __init add_special_device(u8 type, u8 id, u16 *devid, bool cmd_line)
 >>>>>>> v3.18
@@ -766,6 +798,11 @@ static int __init add_special_device(u8 type, u8 id, u16 *devid, bool cmd_line)
 			type == IVHD_SPECIAL_IOAPIC ? "IOAPIC" : "HPET", id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		*devid = entry->devid;
+
+>>>>>>> v3.18
 =======
 		*devid = entry->devid;
 
@@ -779,7 +816,11 @@ static int __init add_special_device(u8 type, u8 id, u16 *devid, bool cmd_line)
 
 	entry->id	= id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry->devid	= devid;
+=======
+	entry->devid	= *devid;
+>>>>>>> v3.18
 =======
 	entry->devid	= *devid;
 >>>>>>> v3.18
@@ -798,7 +839,11 @@ static int __init add_early_maps(void)
 		ret = add_special_device(IVHD_SPECIAL_IOAPIC,
 					 early_ioapic_map[i].id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 early_ioapic_map[i].devid,
+=======
+					 &early_ioapic_map[i].devid,
+>>>>>>> v3.18
 =======
 					 &early_ioapic_map[i].devid,
 >>>>>>> v3.18
@@ -811,7 +856,11 @@ static int __init add_early_maps(void)
 		ret = add_special_device(IVHD_SPECIAL_HPET,
 					 early_hpet_map[i].id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 early_hpet_map[i].devid,
+=======
+					 &early_hpet_map[i].devid,
+>>>>>>> v3.18
 =======
 					 &early_hpet_map[i].devid,
 >>>>>>> v3.18
@@ -841,7 +890,11 @@ static void __init set_device_exclusion_range(u16 devid, struct ivmd_header *m)
 		 * device. This is done here
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_dev_entry_bit(m->devid, DEV_ENTRY_EX);
+=======
+		set_dev_entry_bit(devid, DEV_ENTRY_EX);
+>>>>>>> v3.18
 =======
 		set_dev_entry_bit(devid, DEV_ENTRY_EX);
 >>>>>>> v3.18
@@ -1034,11 +1087,14 @@ static int __init init_iommu_from_acpi(struct amd_iommu *iommu,
 				    PCI_FUNC(devid));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_dev_entry_from_acpi(iommu, devid, e->flags, 0);
 			ret = add_special_device(type, handle, devid, false);
 			if (ret)
 				return ret;
 =======
+=======
+>>>>>>> v3.18
 			ret = add_special_device(type, handle, &devid, false);
 			if (ret)
 				return ret;
@@ -1050,6 +1106,9 @@ static int __init init_iommu_from_acpi(struct amd_iommu *iommu,
 			 */
 			set_dev_entry_from_acpi(iommu, devid, e->flags, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1156,8 +1215,11 @@ static int __init init_iommu_one(struct amd_iommu *iommu, struct ivhd_header *h)
 	iommu->pci_seg = h->pci_seg;
 	iommu->mmio_phys = h->mmio_phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iommu->mmio_base = iommu_map_mmio_space(h->mmio_phys);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Check if IVHD EFR contains proper max banks/counters */
 	if ((h->efr != 0) &&
@@ -1170,6 +1232,9 @@ static int __init init_iommu_one(struct amd_iommu *iommu, struct ivhd_header *h)
 
 	iommu->mmio_base = iommu_map_mmio_space(iommu->mmio_phys,
 						iommu->mmio_phys_end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!iommu->mmio_base)
 		return -ENOMEM;
@@ -1246,7 +1311,10 @@ static int __init init_iommu_all(struct acpi_table_header *table)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void init_iommu_perf_ctr(struct amd_iommu *iommu)
 {
@@ -1307,6 +1375,9 @@ static const struct attribute_group *amd_iommu_groups[] = {
 	NULL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int iommu_init_pci(struct amd_iommu *iommu)
 {
@@ -1342,6 +1413,7 @@ static int iommu_init_pci(struct amd_iommu *iommu)
 	if (iommu_feature(iommu, FEATURE_GT)) {
 		int glxval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 pasids;
 		u64 shift;
 
@@ -1351,6 +1423,8 @@ static int iommu_init_pci(struct amd_iommu *iommu)
 
 		amd_iommu_max_pasids = min(amd_iommu_max_pasids, pasids);
 =======
+=======
+>>>>>>> v3.18
 		u32 max_pasid;
 		u64 pasmax;
 
@@ -1361,6 +1435,9 @@ static int iommu_init_pci(struct amd_iommu *iommu)
 		amd_iommu_max_pasid = min(amd_iommu_max_pasid, max_pasid);
 
 		BUG_ON(amd_iommu_max_pasid & ~PASID_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		glxval   = iommu->features & FEATURE_GLXVAL_MASK;
@@ -1388,6 +1465,11 @@ static int iommu_init_pci(struct amd_iommu *iommu)
 		amd_iommu_np_cache = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_iommu_perf_ctr(iommu);
+
+>>>>>>> v3.18
 =======
 	init_iommu_perf_ctr(iommu);
 
@@ -1422,11 +1504,17 @@ static int iommu_init_pci(struct amd_iommu *iommu)
 	amd_iommu_erratum_746_workaround(iommu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	iommu->iommu_dev = iommu_device_create(&iommu->dev->dev, iommu,
 					       amd_iommu_groups, "ivhd%d",
 					       iommu->index);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pci_enable_device(iommu->dev);
 }
@@ -1452,7 +1540,11 @@ static void print_iommu_info(void)
 					pr_cont(" %s", feat_str[i]);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_cont("\n");
+=======
+			pr_cont("\n");
+>>>>>>> v3.18
 =======
 			pr_cont("\n");
 >>>>>>> v3.18
@@ -1521,7 +1613,11 @@ static int iommu_init_msi(struct amd_iommu *iommu)
 		goto enable_faults;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pci_find_capability(iommu->dev, PCI_CAP_ID_MSI))
+=======
+	if (iommu->dev->msi_cap)
+>>>>>>> v3.18
 =======
 	if (iommu->dev->msi_cap)
 >>>>>>> v3.18
@@ -2414,7 +2510,10 @@ bool amd_iommu_v2_supported(void)
 }
 EXPORT_SYMBOL(amd_iommu_v2_supported);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /****************************************************************************
  *
@@ -2496,4 +2595,7 @@ int amd_iommu_pc_get_set_reg_val(u16 devid, u8 bank, u8 cntr, u8 fxn,
 	return 0;
 }
 EXPORT_SYMBOL(amd_iommu_pc_get_set_reg_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

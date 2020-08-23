@@ -70,6 +70,7 @@ static void snd_trident_print_voice_regs(struct snd_trident *trident, int voice)
 	unsigned int val, tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "Trident voice %i:\n", voice);
 	outb(voice, TRID_REG(trident, T4D_LFO_GC_CIR));
 	val = inl(TRID_REG(trident, CH_LBA));
@@ -89,6 +90,8 @@ static void snd_trident_print_voice_regs(struct snd_trident *trident, int voice)
 		printk(KERN_DEBUG "ESO: 0x%x\n", val >> 16);
 		printk(KERN_DEBUG "Delta: 0x%x\n", val & 0xffff);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(trident->card->dev, "Trident voice %i:\n", voice);
 	outb(voice, TRID_REG(trident, T4D_LFO_GC_CIR));
 	val = inl(TRID_REG(trident, CH_LBA));
@@ -107,11 +110,15 @@ static void snd_trident_print_voice_regs(struct snd_trident *trident, int voice)
 		val = inl(TRID_REG(trident, CH_DX_ESO_DELTA));
 		dev_dbg(trident->card->dev, "ESO: 0x%x\n", val >> 16);
 		dev_dbg(trident->card->dev, "Delta: 0x%x\n", val & 0xffff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = inl(TRID_REG(trident, CH_DX_FMC_RVOL_CVOL));
 	} else {		// TRIDENT_DEVICE_ID_NX
 		val = inl(TRID_REG(trident, CH_NX_DELTA_CSO));
 		tmp = (val >> 24) & 0xff;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk(KERN_DEBUG "CSO: 0x%x\n", val & 0x00ffffff);
 		val = inl(TRID_REG(trident, CH_NX_DELTA_ESO));
@@ -126,6 +133,8 @@ static void snd_trident_print_voice_regs(struct snd_trident *trident, int voice)
 	printk(KERN_DEBUG "RVol: 0x%x\n", (val >> 7) & 0x7f);
 	printk(KERN_DEBUG "CVol: 0x%x\n", val & 0x7f);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(trident->card->dev, "CSO: 0x%x\n", val & 0x00ffffff);
 		val = inl(TRID_REG(trident, CH_NX_DELTA_ESO));
 		tmp |= (val >> 16) & 0xff00;
@@ -138,6 +147,9 @@ static void snd_trident_print_voice_regs(struct snd_trident *trident, int voice)
 	dev_dbg(trident->card->dev, "FMC: 0x%x\n", (val >> 14) & 3);
 	dev_dbg(trident->card->dev, "RVol: 0x%x\n", (val >> 7) & 0x7f);
 	dev_dbg(trident->card->dev, "CVol: 0x%x\n", val & 0x7f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -193,7 +205,12 @@ static unsigned short snd_trident_codec_read(struct snd_ac97 *ac97, unsigned sho
 
 	if (count == 0 && !trident->ac97_detect) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ac97 codec read TIMEOUT [0x%x/0x%x]!!!\n",
+=======
+		dev_err(trident->card->dev,
+			"ac97 codec read TIMEOUT [0x%x/0x%x]!!!\n",
+>>>>>>> v3.18
 =======
 		dev_err(trident->card->dev,
 			"ac97 codec read TIMEOUT [0x%x/0x%x]!!!\n",
@@ -539,6 +556,7 @@ void snd_trident_write_voice_regs(struct snd_trident * trident,
 
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "written %i channel:\n", voice->number);
 	printk(KERN_DEBUG "  regs[0] = 0x%x/0x%x\n",
 	       regs[0], inl(TRID_REG(trident, CH_START + 0)));
@@ -550,6 +568,8 @@ void snd_trident_write_voice_regs(struct snd_trident * trident,
 	       regs[3], inl(TRID_REG(trident, CH_START + 12)));
 	printk(KERN_DEBUG "  regs[4] = 0x%x/0x%x\n",
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(trident->card->dev, "written %i channel:\n", voice->number);
 	dev_dbg(trident->card->dev, "  regs[0] = 0x%x/0x%x\n",
 	       regs[0], inl(TRID_REG(trident, CH_START + 0)));
@@ -560,6 +580,9 @@ void snd_trident_write_voice_regs(struct snd_trident * trident,
 	dev_dbg(trident->card->dev, "  regs[3] = 0x%x/0x%x\n",
 	       regs[3], inl(TRID_REG(trident, CH_START + 12)));
 	dev_dbg(trident->card->dev, "  regs[4] = 0x%x/0x%x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       regs[4], inl(TRID_REG(trident, CH_START + 16)));
 #endif
@@ -644,7 +667,11 @@ static void snd_trident_write_vol_reg(struct snd_trident * trident,
 		break;
 	case TRIDENT_DEVICE_ID_SI7018:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* printk(KERN_DEBUG "voice->Vol = 0x%x\n", voice->Vol); */
+=======
+		/* dev_dbg(trident->card->dev, "voice->Vol = 0x%x\n", voice->Vol); */
+>>>>>>> v3.18
 =======
 		/* dev_dbg(trident->card->dev, "voice->Vol = 0x%x\n", voice->Vol); */
 >>>>>>> v3.18
@@ -3072,7 +3099,12 @@ static int snd_trident_mixer(struct snd_trident *trident, int pcm_spdif_device)
 		err = snd_ac97_mixer(trident->ac97_bus, &_ac97, &trident->ac97_sec);
 		if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "SI7018: the secondary codec - invalid access\n");
+=======
+			dev_err(trident->card->dev,
+				"SI7018: the secondary codec - invalid access\n");
+>>>>>>> v3.18
 =======
 			dev_err(trident->card->dev,
 				"SI7018: the secondary codec - invalid access\n");
@@ -3083,7 +3115,12 @@ static int snd_trident_mixer(struct snd_trident *trident, int pcm_spdif_device)
 			err = snd_ac97_modem(trident->card, &_ac97, &mc97);
 			if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "snd_ac97_modem returned error %i\n", err);
+=======
+				dev_err(trident->card->dev,
+					"snd_ac97_modem returned error %i\n", err);
+>>>>>>> v3.18
 =======
 				dev_err(trident->card->dev,
 					"snd_ac97_modem returned error %i\n", err);
@@ -3266,7 +3303,12 @@ int snd_trident_create_gameport(struct snd_trident *chip)
 	chip->gameport = gp = gameport_allocate_port();
 	if (!gp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "trident: cannot allocate memory for gameport\n");
+=======
+		dev_err(chip->card->dev,
+			"cannot allocate memory for gameport\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"cannot allocate memory for gameport\n");
@@ -3344,7 +3386,12 @@ static int snd_trident_sis_reset(struct snd_trident *trident)
 		do_delay(trident);
 	} while (time_after_eq(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AC'97 codec ready error [0x%x]\n", inl(TRID_REG(trident, SI_SERIAL_INTF_CTRL)));
+=======
+	dev_err(trident->card->dev, "AC'97 codec ready error [0x%x]\n",
+		inl(TRID_REG(trident, SI_SERIAL_INTF_CTRL)));
+>>>>>>> v3.18
 =======
 	dev_err(trident->card->dev, "AC'97 codec ready error [0x%x]\n",
 		inl(TRID_REG(trident, SI_SERIAL_INTF_CTRL)));
@@ -3446,7 +3493,11 @@ static int snd_trident_tlb_alloc(struct snd_trident *trident)
 	if (snd_dma_alloc_pages(SNDRV_DMA_TYPE_DEV, snd_dma_pci_data(trident->pci),
 				2 * SNDRV_TRIDENT_MAX_PAGES * 4, &trident->tlb.buffer) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "trident: unable to allocate TLB buffer\n");
+=======
+		dev_err(trident->card->dev, "unable to allocate TLB buffer\n");
+>>>>>>> v3.18
 =======
 		dev_err(trident->card->dev, "unable to allocate TLB buffer\n");
 >>>>>>> v3.18
@@ -3458,7 +3509,12 @@ static int snd_trident_tlb_alloc(struct snd_trident *trident)
 	trident->tlb.shadow_entries = vmalloc(SNDRV_TRIDENT_MAX_PAGES*sizeof(unsigned long));
 	if (trident->tlb.shadow_entries == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "trident: unable to allocate shadow TLB entries\n");
+=======
+		dev_err(trident->card->dev,
+			"unable to allocate shadow TLB entries\n");
+>>>>>>> v3.18
 =======
 		dev_err(trident->card->dev,
 			"unable to allocate shadow TLB entries\n");
@@ -3469,7 +3525,11 @@ static int snd_trident_tlb_alloc(struct snd_trident *trident)
 	if (snd_dma_alloc_pages(SNDRV_DMA_TYPE_DEV, snd_dma_pci_data(trident->pci),
 				SNDRV_TRIDENT_PAGE_SIZE, &trident->tlb.silent_page) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "trident: unable to allocate silent page\n");
+=======
+		dev_err(trident->card->dev, "unable to allocate silent page\n");
+>>>>>>> v3.18
 =======
 		dev_err(trident->card->dev, "unable to allocate silent page\n");
 >>>>>>> v3.18
@@ -3531,7 +3591,11 @@ static int snd_trident_4d_dx_init(struct snd_trident *trident)
 		do_delay(trident);
 	} while (time_after_eq(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AC'97 codec ready error\n");
+=======
+	dev_err(trident->card->dev, "AC'97 codec ready error\n");
+>>>>>>> v3.18
 =======
 	dev_err(trident->card->dev, "AC'97 codec ready error\n");
 >>>>>>> v3.18
@@ -3573,7 +3637,12 @@ static int snd_trident_4d_nx_init(struct snd_trident *trident)
 		do_delay(trident);
 	} while (time_after_eq(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AC'97 codec ready error [0x%x]\n", inl(TRID_REG(trident, NX_ACR0_AC97_COM_STAT)));
+=======
+	dev_err(trident->card->dev, "AC'97 codec ready error [0x%x]\n",
+		inl(TRID_REG(trident, NX_ACR0_AC97_COM_STAT)));
+>>>>>>> v3.18
 =======
 	dev_err(trident->card->dev, "AC'97 codec ready error [0x%x]\n",
 		inl(TRID_REG(trident, NX_ACR0_AC97_COM_STAT)));
@@ -3663,7 +3732,12 @@ int snd_trident_create(struct snd_card *card,
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(30)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(30)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support 30bit PCI busmaster DMA\n");
+=======
+		dev_err(card->dev,
+			"architecture does not support 30bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"architecture does not support 30bit PCI busmaster DMA\n");
@@ -3706,7 +3780,11 @@ int snd_trident_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_trident_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, trident)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -3774,7 +3852,10 @@ int snd_trident_create(struct snd_card *card,
 
 	snd_trident_proc_init(trident);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rtrident = trident;
@@ -3986,7 +4067,10 @@ void snd_trident_free_voice(struct snd_trident * trident, struct snd_trident_voi
 	unsigned long flags;
 	void (*private_free)(struct snd_trident_voice *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *private_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3996,7 +4080,10 @@ void snd_trident_free_voice(struct snd_trident * trident, struct snd_trident_voi
 	spin_lock_irqsave(&trident->voice_alloc, flags);
 	private_free = voice->private_free;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private_data = voice->private_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	voice->private_free = NULL;
@@ -4069,8 +4156,12 @@ static int snd_trident_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "trident: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18

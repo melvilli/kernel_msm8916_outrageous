@@ -108,7 +108,11 @@ def taskState(state):
 class EventHeaders:
 	def __init__(self, common_cpu, common_secs, common_nsecs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     common_pid, common_comm):
+=======
+		     common_pid, common_comm, common_callchain):
+>>>>>>> v3.18
 =======
 		     common_pid, common_comm, common_callchain):
 >>>>>>> v3.18
@@ -118,6 +122,10 @@ class EventHeaders:
 		self.pid = common_pid
 		self.comm = common_comm
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		self.callchain = common_callchain
+>>>>>>> v3.18
 =======
 		self.callchain = common_callchain
 >>>>>>> v3.18

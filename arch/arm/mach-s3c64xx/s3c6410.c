@@ -11,11 +11,17 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * NOTE: Code in this file is not used when booting with Device Tree support.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/types.h>
@@ -28,7 +34,13 @@
 #include <linux/device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
+=======
+#include <linux/serial_s3c.h>
+#include <linux/platform_device.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 #include <linux/platform_device.h>
@@ -44,7 +56,10 @@
 
 #include <plat/cpu-freq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/regs-clock.h>
@@ -52,7 +67,10 @@
 #include <plat/cpu.h>
 #include <plat/devs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/sdhci.h>
@@ -82,6 +100,7 @@ void __init s3c6410_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init s3c6410_init_clocks(int xtal)
 {
 	printk(KERN_DEBUG "%s: initialising clocks\n", __func__);
@@ -89,6 +108,8 @@ void __init s3c6410_init_clocks(int xtal)
 	s3c64xx_setup_clocks();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init s3c6410_init_irq(void)
@@ -109,11 +130,17 @@ static struct device s3c6410_dev = {
 static int __init s3c6410_core_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Not applicable when using DT. */
 	if (of_have_populated_dt())
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return subsys_system_register(&s3c6410_subsys, NULL);
 }

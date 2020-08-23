@@ -25,6 +25,7 @@
 #include <linux/gpio.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mmc/sdhci-pci-data.h>
 
 #include "sdhci.h"
@@ -93,12 +94,17 @@ struct sdhci_pci_chip {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mmc/slot-gpio.h>
 #include <linux/mmc/sdhci-pci-data.h>
 
 #include "sdhci.h"
 #include "sdhci-pci.h"
 #include "sdhci-pci-o2micro.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*****************************************************************************\
@@ -175,11 +181,17 @@ static const struct sdhci_pci_fixes sdhci_cafe = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct sdhci_pci_fixes sdhci_intel_qrk = {
 	.quirks		= SDHCI_QUIRK_NO_HISPD_BIT,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mrst_hc_probe_slot(struct sdhci_pci_slot *slot)
 {
@@ -304,6 +316,10 @@ static const struct sdhci_pci_fixes sdhci_intel_mfd_sd = {
 	.quirks		= SDHCI_QUIRK_NO_ENDATTR_IN_NOPDESC,
 	.allow_runtime_pm = true,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.own_cd_for_runtime_pm = true,
+>>>>>>> v3.18
 =======
 	.own_cd_for_runtime_pm = true,
 >>>>>>> v3.18
@@ -328,11 +344,14 @@ static const struct sdhci_pci_fixes sdhci_intel_pch_sdio = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int byt_emmc_probe_slot(struct sdhci_pci_slot *slot)
 {
 	slot->host->mmc->caps |= MMC_CAP_8_BIT_DATA | MMC_CAP_NONREMOVABLE;
 	slot->host->mmc->caps2 |= MMC_CAP2_HC_ERASE_SZ;
 =======
+=======
+>>>>>>> v3.18
 static void sdhci_pci_int_hw_reset(struct sdhci_host *host)
 {
 	u8 reg;
@@ -356,6 +375,9 @@ static int byt_emmc_probe_slot(struct sdhci_pci_slot *slot)
 	slot->hw_reset = sdhci_pci_int_hw_reset;
 	if (slot->chip->pdev->device == PCI_DEVICE_ID_INTEL_BSW_EMMC)
 		slot->host->timeout_clk = 1000; /* 1000 kHz i.e. 1 MHz */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -367,6 +389,7 @@ static int byt_sdio_probe_slot(struct sdhci_pci_slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sdhci_pci_fixes sdhci_intel_byt_emmc = {
 	.allow_runtime_pm = true,
 	.probe_slot	= byt_emmc_probe_slot,
@@ -375,6 +398,8 @@ static const struct sdhci_pci_fixes sdhci_intel_byt_emmc = {
 static const struct sdhci_pci_fixes sdhci_intel_byt_sdio = {
 	.quirks2	= SDHCI_QUIRK2_HOST_OFF_CARD_ON,
 =======
+=======
+>>>>>>> v3.18
 static int byt_sd_probe_slot(struct sdhci_pci_slot *slot)
 {
 	slot->cd_con_id = NULL;
@@ -393,6 +418,9 @@ static const struct sdhci_pci_fixes sdhci_intel_byt_emmc = {
 static const struct sdhci_pci_fixes sdhci_intel_byt_sdio = {
 	.quirks2	= SDHCI_QUIRK2_HOST_OFF_CARD_ON |
 			SDHCI_QUIRK2_PRESET_VALUE_BROKEN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.allow_runtime_pm = true,
 	.probe_slot	= byt_sdio_probe_slot,
@@ -400,7 +428,10 @@ static const struct sdhci_pci_fixes sdhci_intel_byt_sdio = {
 
 static const struct sdhci_pci_fixes sdhci_intel_byt_sd = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.quirks2	= SDHCI_QUIRK2_CARD_ON_NEEDS_BUS_ON |
 			  SDHCI_QUIRK2_PRESET_VALUE_BROKEN |
 			  SDHCI_QUIRK2_STOP_WITH_TC,
@@ -432,6 +463,9 @@ static const struct sdhci_pci_fixes sdhci_intel_mrfl_mmc = {
 			SDHCI_QUIRK2_PRESET_VALUE_BROKEN,
 	.allow_runtime_pm = true,
 	.probe_slot	= intel_mrfl_mmc_probe_slot,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -444,6 +478,7 @@ static const struct sdhci_pci_fixes sdhci_intel_mrfl_mmc = {
 #define O2_SD_ADMA2		0xE7
 #define O2_SD_INF_MOD		0xF1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int o2_probe(struct sdhci_pci_chip *chip)
 {
@@ -504,6 +539,8 @@ static int o2_probe(struct sdhci_pci_chip *chip)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int jmicron_pmos(struct sdhci_pci_chip *chip, int on)
@@ -697,12 +734,18 @@ static int jmicron_resume(struct sdhci_pci_chip *chip)
 
 static const struct sdhci_pci_fixes sdhci_o2 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe		= o2_probe,
 =======
+=======
+>>>>>>> v3.18
 	.probe = sdhci_pci_o2_probe,
 	.quirks = SDHCI_QUIRK_NO_ENDATTR_IN_NOPDESC,
 	.probe_slot = sdhci_pci_o2_probe_slot,
 	.resume = sdhci_pci_o2_resume,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -796,7 +839,10 @@ static const struct sdhci_pci_fixes sdhci_via = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rtsx_probe_slot(struct sdhci_pci_slot *slot)
 {
 	slot->host->mmc->caps2 |= MMC_CAP2_HS200;
@@ -809,6 +855,9 @@ static const struct sdhci_pci_fixes sdhci_rtsx = {
 	.probe_slot	= rtsx_probe_slot,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct pci_device_id pci_ids[] = {
 	{
@@ -933,7 +982,10 @@ static const struct pci_device_id pci_ids[] = {
 
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.vendor		= PCI_VENDOR_ID_REALTEK,
 		.device		= 0x5250,
 		.subvendor	= PCI_ANY_ID,
@@ -950,6 +1002,9 @@ static const struct pci_device_id pci_ids[] = {
 	},
 
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.vendor		= PCI_VENDOR_ID_INTEL,
 		.device		= PCI_DEVICE_ID_INTEL_MRST_SD0,
@@ -1056,7 +1111,10 @@ static const struct pci_device_id pci_ids[] = {
 
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.vendor		= PCI_VENDOR_ID_INTEL,
 		.device		= PCI_DEVICE_ID_INTEL_BYT_EMMC2,
 		.subvendor	= PCI_ANY_ID,
@@ -1136,6 +1194,9 @@ static const struct pci_device_id pci_ids[] = {
 		.driver_data	= (kernel_ulong_t)&sdhci_intel_mrfl_mmc,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.vendor		= PCI_VENDOR_ID_O2,
 		.device		= PCI_DEVICE_ID_O2_8120,
@@ -1177,7 +1238,10 @@ static const struct pci_device_id pci_ids[] = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.vendor		= PCI_VENDOR_ID_O2,
 		.device		= PCI_DEVICE_ID_O2_FUJIN2,
@@ -1218,6 +1282,9 @@ static const struct pci_device_id pci_ids[] = {
 		.driver_data	= (kernel_ulong_t)&sdhci_o2,
 	},
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{	/* Generic SD host controller */
 		PCI_DEVICE_CLASS((PCI_CLASS_SYSTEM_SDHCI << 8), 0xFFFF00)
@@ -1260,7 +1327,11 @@ static int sdhci_pci_enable_dma(struct sdhci_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sdhci_pci_bus_width(struct sdhci_host *host, int width)
+=======
+static void sdhci_pci_set_bus_width(struct sdhci_host *host, int width)
+>>>>>>> v3.18
 =======
 static void sdhci_pci_set_bus_width(struct sdhci_host *host, int width)
 >>>>>>> v3.18
@@ -1285,11 +1356,17 @@ static void sdhci_pci_set_bus_width(struct sdhci_host *host, int width)
 
 	sdhci_writeb(host, ctrl, SDHCI_HOST_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
 
 static void sdhci_pci_hw_reset(struct sdhci_host *host)
+=======
+}
+
+static void sdhci_pci_gpio_hw_reset(struct sdhci_host *host)
+>>>>>>> v3.18
 =======
 }
 
@@ -1310,10 +1387,13 @@ static void sdhci_pci_gpio_hw_reset(struct sdhci_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sdhci_ops sdhci_pci_ops = {
 	.enable_dma	= sdhci_pci_enable_dma,
 	.platform_bus_width	= sdhci_pci_bus_width,
 =======
+=======
+>>>>>>> v3.18
 static void sdhci_pci_hw_reset(struct sdhci_host *host)
 {
 	struct sdhci_pci_slot *slot = sdhci_priv(host);
@@ -1328,6 +1408,9 @@ static const struct sdhci_ops sdhci_pci_ops = {
 	.set_bus_width	= sdhci_pci_set_bus_width,
 	.reset		= sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.hw_reset		= sdhci_pci_hw_reset,
 };
@@ -1377,6 +1460,7 @@ static int sdhci_pci_suspend(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_save_state(pdev);
 	if (pm_flags & MMC_PM_KEEP_POWER) {
 		if (pm_flags & MMC_PM_WAKE_SDIO_IRQ) {
@@ -1390,6 +1474,8 @@ static int sdhci_pci_suspend(struct device *dev)
 		pci_set_power_state(pdev, PCI_D3hot);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (pm_flags & MMC_PM_KEEP_POWER) {
 		if (pm_flags & MMC_PM_WAKE_SDIO_IRQ)
 			device_init_wakeup(dev, true);
@@ -1397,6 +1483,9 @@ static int sdhci_pci_suspend(struct device *dev)
 			device_init_wakeup(dev, false);
 	} else
 		device_init_wakeup(dev, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1419,12 +1508,15 @@ static int sdhci_pci_resume(struct device *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(pdev, PCI_D0);
 	pci_restore_state(pdev);
 	ret = pci_enable_device(pdev);
 	if (ret)
 		return ret;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (chip->fixes && chip->fixes->resume) {
@@ -1527,6 +1619,7 @@ static int sdhci_pci_runtime_idle(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 
 #define sdhci_pci_runtime_suspend	NULL
@@ -1535,15 +1628,22 @@ static int sdhci_pci_runtime_idle(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif
 
 static const struct dev_pm_ops sdhci_pci_pm_ops = {
 	.suspend = sdhci_pci_suspend,
 	.resume = sdhci_pci_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.runtime_suspend = sdhci_pci_runtime_suspend,
 	.runtime_resume = sdhci_pci_runtime_resume,
 	.runtime_idle = sdhci_pci_runtime_idle,
+=======
+	SET_RUNTIME_PM_OPS(sdhci_pci_runtime_suspend,
+			sdhci_pci_runtime_resume, sdhci_pci_runtime_idle)
+>>>>>>> v3.18
 =======
 	SET_RUNTIME_PM_OPS(sdhci_pci_runtime_suspend,
 			sdhci_pci_runtime_resume, sdhci_pci_runtime_idle)
@@ -1598,6 +1698,10 @@ static struct sdhci_pci_slot *sdhci_pci_probe_slot(
 	slot->rst_n_gpio = -EINVAL;
 	slot->cd_gpio = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	slot->cd_idx = -1;
+>>>>>>> v3.18
 =======
 	slot->cd_idx = -1;
 >>>>>>> v3.18
@@ -1649,6 +1753,10 @@ static struct sdhci_pci_slot *sdhci_pci_probe_slot(
 			gpio_direction_output(slot->rst_n_gpio, 1);
 			slot->host->mmc->caps |= MMC_CAP_HW_RESET;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			slot->hw_reset = sdhci_pci_gpio_hw_reset;
+>>>>>>> v3.18
 =======
 			slot->hw_reset = sdhci_pci_gpio_hw_reset;
 >>>>>>> v3.18
@@ -1663,7 +1771,10 @@ static struct sdhci_pci_slot *sdhci_pci_probe_slot(
 	host->mmc->caps2 |= MMC_CAP2_NO_PRESCAN_POWERUP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (slot->cd_idx >= 0 &&
 	    mmc_gpiod_request_cd(host->mmc, slot->cd_con_id, slot->cd_idx,
 				 slot->cd_override_level, 0, NULL)) {
@@ -1671,6 +1782,9 @@ static struct sdhci_pci_slot *sdhci_pci_probe_slot(
 		slot->cd_idx = -1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = sdhci_add_host(host);
 	if (ret)
@@ -1679,7 +1793,10 @@ static struct sdhci_pci_slot *sdhci_pci_probe_slot(
 	sdhci_pci_add_own_cd(slot);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Check if the chip needs a separate GPIO for card detect to wake up
 	 * from runtime suspend.  If it is not there, don't allow runtime PM.
@@ -1689,6 +1806,9 @@ static struct sdhci_pci_slot *sdhci_pci_probe_slot(
 	    !gpio_is_valid(slot->cd_gpio) && slot->cd_idx < 0)
 		chip->allow_runtime_pm = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return slot;
 

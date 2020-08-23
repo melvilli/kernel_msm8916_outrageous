@@ -25,12 +25,15 @@
  * variables, and to add the proper checker annotations:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __LOCK(lock) \
   do { preempt_disable(); __acquire(lock); (void)(lock); } while (0)
 
 #define __LOCK_BH(lock) \
   do { local_bh_disable(); __LOCK(lock); } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define ___LOCK(lock) \
   do { __acquire(lock); (void)(lock); } while (0)
 
@@ -39,6 +42,9 @@
 
 #define __LOCK_BH(lock) \
   do { __local_bh_disable_ip(_THIS_IP_, SOFTIRQ_LOCK_OFFSET); ___LOCK(lock); } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __LOCK_IRQ(lock) \
@@ -48,6 +54,7 @@
   do { local_irq_save(flags); __LOCK(lock); } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __UNLOCK(lock) \
   do { preempt_enable(); __release(lock); (void)(lock); } while (0)
 
@@ -55,6 +62,8 @@
   do { preempt_enable_no_resched(); local_bh_enable(); \
 	  __release(lock); (void)(lock); } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define ___UNLOCK(lock) \
   do { __release(lock); (void)(lock); } while (0)
 
@@ -64,6 +73,9 @@
 #define __UNLOCK_BH(lock) \
   do { __local_bh_enable_ip(_THIS_IP_, SOFTIRQ_LOCK_OFFSET); \
        ___UNLOCK(lock); } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __UNLOCK_IRQ(lock) \

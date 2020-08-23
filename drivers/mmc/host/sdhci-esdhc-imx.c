@@ -28,6 +28,10 @@
 #include <linux/pinctrl/consumer.h>
 #include <linux/platform_data/mmc-esdhc-imx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_runtime.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_runtime.h>
 >>>>>>> v3.18
@@ -39,12 +43,15 @@
 #define ESDHC_VENDOR_SPEC		0xc0
 #define  ESDHC_VENDOR_SPEC_SDIO_QUIRK	(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ESDHC_WTMK_LVL			0x44
 #define ESDHC_MIX_CTRL			0x48
 #define  ESDHC_MIX_CTRL_AC23EN		(1 << 7)
 /* Bits 3 and 6 are not SDHCI standard definitions */
 #define  ESDHC_MIX_CTRL_SDHCI_MASK	0xb7
 =======
+=======
+>>>>>>> v3.18
 #define  ESDHC_VENDOR_SPEC_VSELECT	(1 << 1)
 #define  ESDHC_VENDOR_SPEC_FRC_SDCLK_ON	(1 << 8)
 #define ESDHC_WTMK_LVL			0x44
@@ -80,6 +87,9 @@
 /* pinctrl state */
 #define ESDHC_PINCTRL_STATE_100MHZ	"state_100mhz"
 #define ESDHC_PINCTRL_STATE_200MHZ	"state_200mhz"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -109,6 +119,7 @@
  * exeception. Bit1 of Vendor Spec registor is used to fix it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ESDHC_FLAG_MULTIBLK_NO_INT	(1 << 1)
 
 enum imx_esdhc_type {
@@ -125,6 +136,8 @@ struct pltfm_imx_data {
 	enum imx_esdhc_type devtype;
 	struct pinctrl *pinctrl;
 =======
+=======
+>>>>>>> v3.18
 #define ESDHC_FLAG_MULTIBLK_NO_INT	BIT(1)
 /*
  * The flag enables the workaround for ESDHC errata ENGcm07207 which
@@ -179,6 +192,9 @@ struct pltfm_imx_data {
 	struct pinctrl_state *pins_100mhz;
 	struct pinctrl_state *pins_200mhz;
 	const struct esdhc_soc_data *socdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct esdhc_platform_data boarddata;
 	struct clk *clk_ipg;
@@ -190,7 +206,11 @@ struct pltfm_imx_data {
 		WAIT_FOR_INT,        /* sent CMD12, waiting for response INT */
 	} multiblock_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	u32 is_ddr;
+>>>>>>> v3.18
 =======
 	u32 is_ddr;
 >>>>>>> v3.18
@@ -199,6 +219,7 @@ struct pltfm_imx_data {
 static struct platform_device_id imx_esdhc_devtype[] = {
 	{
 		.name = "sdhci-esdhc-imx25",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.driver_data = IMX25_ESDHC,
 	}, {
@@ -214,6 +235,8 @@ static struct platform_device_id imx_esdhc_devtype[] = {
 		.name = "sdhci-usdhc-imx6q",
 		.driver_data = IMX6Q_USDHC,
 =======
+=======
+>>>>>>> v3.18
 		.driver_data = (kernel_ulong_t) &esdhc_imx25_data,
 	}, {
 		.name = "sdhci-esdhc-imx35",
@@ -221,6 +244,9 @@ static struct platform_device_id imx_esdhc_devtype[] = {
 	}, {
 		.name = "sdhci-esdhc-imx51",
 		.driver_data = (kernel_ulong_t) &esdhc_imx51_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}, {
 		/* sentinel */
@@ -230,18 +256,24 @@ MODULE_DEVICE_TABLE(platform, imx_esdhc_devtype);
 
 static const struct of_device_id imx_esdhc_dt_ids[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .compatible = "fsl,imx25-esdhc", .data = &imx_esdhc_devtype[IMX25_ESDHC], },
 	{ .compatible = "fsl,imx35-esdhc", .data = &imx_esdhc_devtype[IMX35_ESDHC], },
 	{ .compatible = "fsl,imx51-esdhc", .data = &imx_esdhc_devtype[IMX51_ESDHC], },
 	{ .compatible = "fsl,imx53-esdhc", .data = &imx_esdhc_devtype[IMX53_ESDHC], },
 	{ .compatible = "fsl,imx6q-usdhc", .data = &imx_esdhc_devtype[IMX6Q_USDHC], },
 =======
+=======
+>>>>>>> v3.18
 	{ .compatible = "fsl,imx25-esdhc", .data = &esdhc_imx25_data, },
 	{ .compatible = "fsl,imx35-esdhc", .data = &esdhc_imx35_data, },
 	{ .compatible = "fsl,imx51-esdhc", .data = &esdhc_imx51_data, },
 	{ .compatible = "fsl,imx53-esdhc", .data = &esdhc_imx53_data, },
 	{ .compatible = "fsl,imx6sl-usdhc", .data = &usdhc_imx6sl_data, },
 	{ .compatible = "fsl,imx6q-usdhc", .data = &usdhc_imx6q_data, },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ /* sentinel */ }
 };
@@ -249,6 +281,7 @@ MODULE_DEVICE_TABLE(of, imx_esdhc_dt_ids);
 
 static inline int is_imx25_esdhc(struct pltfm_imx_data *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return data->devtype == IMX25_ESDHC;
 }
@@ -272,6 +305,8 @@ static inline int is_imx6q_usdhc(struct pltfm_imx_data *data)
 {
 	return data->devtype == IMX6Q_USDHC;
 =======
+=======
+>>>>>>> v3.18
 	return data->socdata == &esdhc_imx25_data;
 }
 
@@ -288,6 +323,9 @@ static inline int is_imx6q_usdhc(struct pltfm_imx_data *data)
 static inline int esdhc_is_usdhc(struct pltfm_imx_data *data)
 {
 	return !!(data->socdata->flags & ESDHC_FLAG_USDHC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -306,8 +344,11 @@ static u32 esdhc_readl_le(struct sdhci_host *host, int reg)
 	u32 val = readl(host->ioaddr + reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(reg == SDHCI_CAPABILITIES)) {
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(reg == SDHCI_PRESENT_STATE)) {
 		u32 fsl_prss = val;
 		/* save the least 20 bits */
@@ -323,6 +364,9 @@ static u32 esdhc_readl_le(struct sdhci_host *host, int reg)
 		if (imx_data->socdata->flags & ESDHC_FLAG_HAVE_CAP1)
 			val &= 0xffff0000;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* In FSL esdhc IC module, only bit20 is used to indicate the
 		 * ADMA2 capability of esdhc, but this bit is messed up on
@@ -338,7 +382,10 @@ static u32 esdhc_readl_le(struct sdhci_host *host, int reg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(reg == SDHCI_CAPABILITIES_1)) {
 		if (esdhc_is_usdhc(imx_data)) {
 			if (imx_data->socdata->flags & ESDHC_FLAG_HAVE_CAP1)
@@ -358,6 +405,9 @@ static u32 esdhc_readl_le(struct sdhci_host *host, int reg)
 		val |= 0xFF << SDHCI_MAX_CURRENT_180_SHIFT;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(reg == SDHCI_INT_STATUS)) {
 		if (val & ESDHC_INT_VENDOR_SPEC_DMA_ERR) {
@@ -406,7 +456,11 @@ static void esdhc_writel_le(struct sdhci_host *host, u32 val, int reg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely((imx_data->flags & ESDHC_FLAG_MULTIBLK_NO_INT)
+=======
+	if (unlikely((imx_data->socdata->flags & ESDHC_FLAG_MULTIBLK_NO_INT)
+>>>>>>> v3.18
 =======
 	if (unlikely((imx_data->socdata->flags & ESDHC_FLAG_MULTIBLK_NO_INT)
 >>>>>>> v3.18
@@ -442,17 +496,23 @@ static u16 esdhc_readw_le(struct sdhci_host *host, int reg)
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 	struct pltfm_imx_data *imx_data = pltfm_host->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (unlikely(reg == SDHCI_HOST_VERSION)) {
 		reg ^= 2;
 		if (is_imx6q_usdhc(imx_data)) {
 =======
+=======
+>>>>>>> v3.18
 	u16 ret = 0;
 	u32 val;
 
 	if (unlikely(reg == SDHCI_HOST_VERSION)) {
 		reg ^= 2;
 		if (esdhc_is_usdhc(imx_data)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * The usdhc register returns a wrong host version.
@@ -463,7 +523,10 @@ static u16 esdhc_readw_le(struct sdhci_host *host, int reg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(reg == SDHCI_HOST_CONTROL2)) {
 		val = readl(host->ioaddr + ESDHC_VENDOR_SPEC);
 		if (val & ESDHC_VENDOR_SPEC_VSELECT)
@@ -503,6 +566,9 @@ static u16 esdhc_readw_le(struct sdhci_host *host, int reg)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return readw(host->ioaddr + reg);
 }
@@ -512,11 +578,14 @@ static void esdhc_writew_le(struct sdhci_host *host, u16 val, int reg)
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 	struct pltfm_imx_data *imx_data = pltfm_host->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	switch (reg) {
 	case SDHCI_TRANSFER_MODE:
 		if ((imx_data->flags & ESDHC_FLAG_MULTIBLK_NO_INT)
 =======
+=======
+>>>>>>> v3.18
 	u32 new_val = 0;
 
 	switch (reg) {
@@ -565,6 +634,9 @@ static void esdhc_writew_le(struct sdhci_host *host, u16 val, int reg)
 		return;
 	case SDHCI_TRANSFER_MODE:
 		if ((imx_data->socdata->flags & ESDHC_FLAG_MULTIBLK_NO_INT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				&& (host->cmd->opcode == SD_IO_RW_EXTENDED)
 				&& (host->cmd->data->blocks > 1)
@@ -576,7 +648,11 @@ static void esdhc_writew_le(struct sdhci_host *host, u16 val, int reg)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_imx6q_usdhc(imx_data)) {
+=======
+		if (esdhc_is_usdhc(imx_data)) {
+>>>>>>> v3.18
 =======
 		if (esdhc_is_usdhc(imx_data)) {
 >>>>>>> v3.18
@@ -602,15 +678,21 @@ static void esdhc_writew_le(struct sdhci_host *host, u16 val, int reg)
 
 		if ((host->cmd->opcode == MMC_SET_BLOCK_COUNT) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (imx_data->flags & ESDHC_FLAG_MULTIBLK_NO_INT))
 			imx_data->multiblock_status = MULTIBLK_IN_PROCESS;
 
 		if (is_imx6q_usdhc(imx_data))
 =======
+=======
+>>>>>>> v3.18
 		    (imx_data->socdata->flags & ESDHC_FLAG_MULTIBLK_NO_INT))
 			imx_data->multiblock_status = MULTIBLK_IN_PROCESS;
 
 		if (esdhc_is_usdhc(imx_data))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			writel(val << 16,
 			       host->ioaddr + SDHCI_TRANSFER_MODE);
@@ -678,12 +760,15 @@ static void esdhc_writeb_le(struct sdhci_host *host, u8 val, int reg)
 		 * Do it manually here.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_imx6q_usdhc(imx_data))
 			writel(0, host->ioaddr + ESDHC_MIX_CTRL);
 	}
 }
 
 =======
+=======
+>>>>>>> v3.18
 		if (esdhc_is_usdhc(imx_data)) {
 			/* the tuning bits should be kept during reset */
 			new_val = readl(host->ioaddr + ESDHC_MIX_CTRL);
@@ -706,14 +791,20 @@ static unsigned int esdhc_pltfm_get_max_clock(struct sdhci_host *host)
 		return pltfm_host->clock;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int esdhc_pltfm_get_min_clock(struct sdhci_host *host)
 {
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return clk_get_rate(pltfm_host->clk) / 256 / 16;
 =======
+=======
+>>>>>>> v3.18
 	return pltfm_host->clock / 256 / 16;
 }
 
@@ -775,6 +866,9 @@ static inline void esdhc_pltfm_set_clock(struct sdhci_host *host,
 	}
 
 	mdelay(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -798,7 +892,11 @@ static unsigned int esdhc_pltfm_get_ro(struct sdhci_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int esdhc_pltfm_bus_width(struct sdhci_host *host, int width)
+=======
+static void esdhc_pltfm_set_bus_width(struct sdhci_host *host, int width)
+>>>>>>> v3.18
 =======
 static void esdhc_pltfm_set_bus_width(struct sdhci_host *host, int width)
 >>>>>>> v3.18
@@ -820,7 +918,10 @@ static void esdhc_pltfm_set_bus_width(struct sdhci_host *host, int width)
 	esdhc_clrset_le(host, ESDHC_CTRL_BUSWIDTH_MASK, ctrl,
 			SDHCI_HOST_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void esdhc_prepare_tuning(struct sdhci_host *host, u32 val)
@@ -886,14 +987,20 @@ static int esdhc_send_tuning_cmd(struct sdhci_host *host, u32 opcode,
 		return cmd.error;
 	if (data.error)
 		return data.error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sdhci_ops sdhci_esdhc_ops = {
 =======
+=======
+>>>>>>> v3.18
 static void esdhc_post_tuning(struct sdhci_host *host)
 {
 	u32 reg;
@@ -1041,6 +1148,9 @@ static void esdhc_set_timeout(struct sdhci_host *host, struct mmc_command *cmd)
 }
 
 static struct sdhci_ops sdhci_esdhc_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.read_l = esdhc_readl_le,
 	.read_w = esdhc_readw_le,
@@ -1048,12 +1158,15 @@ static struct sdhci_ops sdhci_esdhc_ops = {
 	.write_w = esdhc_writew_le,
 	.write_b = esdhc_writeb_le,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_clock = esdhc_set_clock,
 	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
 	.get_min_clock = esdhc_pltfm_get_min_clock,
 	.get_ro = esdhc_pltfm_get_ro,
 	.platform_bus_width = esdhc_pltfm_bus_width,
 =======
+=======
+>>>>>>> v3.18
 	.set_clock = esdhc_pltfm_set_clock,
 	.get_max_clock = esdhc_pltfm_get_max_clock,
 	.get_min_clock = esdhc_pltfm_get_min_clock,
@@ -1063,6 +1176,9 @@ static struct sdhci_ops sdhci_esdhc_ops = {
 	.set_bus_width = esdhc_pltfm_set_bus_width,
 	.set_uhs_signaling = esdhc_set_uhs_signaling,
 	.reset = esdhc_reset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1104,7 +1220,10 @@ sdhci_esdhc_imx_probe_dt(struct platform_device *pdev,
 	of_property_read_u32(np, "bus-width", &boarddata->max_bus_width);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32(np, "max-frequency", &boarddata->f_max);
 
 	if (of_find_property(np, "no-1-8-v", NULL))
@@ -1115,6 +1234,9 @@ sdhci_esdhc_imx_probe_dt(struct platform_device *pdev,
 	if (of_property_read_u32(np, "fsl,delay-line", &boarddata->delay_line))
 		boarddata->delay_line = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1138,7 +1260,11 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	struct pltfm_imx_data *imx_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = sdhci_pltfm_init(pdev, &sdhci_esdhc_imx_pdata);
+=======
+	host = sdhci_pltfm_init(pdev, &sdhci_esdhc_imx_pdata, 0);
+>>>>>>> v3.18
 =======
 	host = sdhci_pltfm_init(pdev, &sdhci_esdhc_imx_pdata, 0);
 >>>>>>> v3.18
@@ -1154,9 +1280,14 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_id)
 		pdev->id_entry = of_id->data;
 	imx_data->devtype = pdev->id_entry->driver_data;
+=======
+	imx_data->socdata = of_id ? of_id->data : (struct esdhc_soc_data *)
+						  pdev->id_entry->driver_data;
+>>>>>>> v3.18
 =======
 	imx_data->socdata = of_id ? of_id->data : (struct esdhc_soc_data *)
 						  pdev->id_entry->driver_data;
@@ -1183,7 +1314,11 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 
 	pltfm_host->clk = imx_data->clk_per;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	pltfm_host->clock = clk_get_rate(pltfm_host->clk);
+>>>>>>> v3.18
 =======
 	pltfm_host->clock = clk_get_rate(pltfm_host->clk);
 >>>>>>> v3.18
@@ -1192,7 +1327,11 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	clk_prepare_enable(imx_data->clk_ahb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx_data->pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
+=======
+	imx_data->pinctrl = devm_pinctrl_get(&pdev->dev);
+>>>>>>> v3.18
 =======
 	imx_data->pinctrl = devm_pinctrl_get(&pdev->dev);
 >>>>>>> v3.18
@@ -1202,10 +1341,13 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->quirks |= SDHCI_QUIRK_BROKEN_TIMEOUT_VAL;
 
 	if (is_imx25_esdhc(imx_data) || is_imx35_esdhc(imx_data))
 =======
+=======
+>>>>>>> v3.18
 	imx_data->pins_default = pinctrl_lookup_state(imx_data->pinctrl,
 						PINCTRL_STATE_DEFAULT);
 	if (IS_ERR(imx_data->pins_default)) {
@@ -1217,15 +1359,21 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	host->quirks |= SDHCI_QUIRK_BROKEN_TIMEOUT_VAL;
 
 	if (imx_data->socdata->flags & ESDHC_FLAG_ENGCM07207)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Fix errata ENGcm07207 present on i.MX25 and i.MX35 */
 		host->quirks |= SDHCI_QUIRK_NO_MULTIBLOCK
 			| SDHCI_QUIRK_BROKEN_ADMA;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_imx53_esdhc(imx_data))
 		imx_data->flags |= ESDHC_FLAG_MULTIBLK_NO_INT;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1233,9 +1381,12 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	 * to something insane.  Change it back here.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_imx6q_usdhc(imx_data))
 		writel(0x08100810, host->ioaddr + ESDHC_WTMK_LVL);
 =======
+=======
+>>>>>>> v3.18
 	if (esdhc_is_usdhc(imx_data)) {
 		writel(0x08100810, host->ioaddr + ESDHC_WTMK_LVL);
 		host->quirks2 |= SDHCI_QUIRK2_PRESET_VALUE_BROKEN;
@@ -1250,6 +1401,9 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 		writel(readl(host->ioaddr + ESDHC_TUNING_CTRL) |
 			ESDHC_STD_TUNING_EN | ESDHC_TUNING_START_TAP,
 			host->ioaddr + ESDHC_TUNING_CTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	boarddata = &imx_data->boarddata;
@@ -1278,7 +1432,11 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	switch (boarddata->cd_type) {
 	case ESDHC_CD_GPIO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = mmc_gpio_request_cd(host->mmc, boarddata->cd_gpio);
+=======
+		err = mmc_gpio_request_cd(host->mmc, boarddata->cd_gpio, 0);
+>>>>>>> v3.18
 =======
 		err = mmc_gpio_request_cd(host->mmc, boarddata->cd_gpio, 0);
 >>>>>>> v3.18
@@ -1296,7 +1454,11 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 
 	case ESDHC_CD_PERMANENT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		host->mmc->caps = MMC_CAP_NONREMOVABLE;
+=======
+		host->mmc->caps |= MMC_CAP_NONREMOVABLE;
+>>>>>>> v3.18
 =======
 		host->mmc->caps |= MMC_CAP_NONREMOVABLE;
 >>>>>>> v3.18
@@ -1320,7 +1482,10 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* sdr50 and sdr104 needs work on 1.8v signal voltage */
 	if ((boarddata->support_vsel) && esdhc_is_usdhc(imx_data)) {
 		imx_data->pins_100mhz = pinctrl_lookup_state(imx_data->pinctrl,
@@ -1338,19 +1503,28 @@ static int sdhci_esdhc_imx_probe(struct platform_device *pdev)
 		host->quirks2 |= SDHCI_QUIRK2_NO_1_8_V;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = sdhci_add_host(host);
 	if (err)
 		goto disable_clk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_set_active(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_set_autosuspend_delay(&pdev->dev, 50);
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_suspend_ignore_children(&pdev->dev, 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1373,10 +1547,13 @@ static int sdhci_esdhc_imx_remove(struct platform_device *pdev)
 	sdhci_remove_host(host, dead);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(imx_data->clk_per);
 	clk_disable_unprepare(imx_data->clk_ipg);
 	clk_disable_unprepare(imx_data->clk_ahb);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_dont_use_autosuspend(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 
@@ -1385,6 +1562,9 @@ static int sdhci_esdhc_imx_remove(struct platform_device *pdev)
 		clk_disable_unprepare(imx_data->clk_ipg);
 		clk_disable_unprepare(imx_data->clk_ahb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sdhci_pltfm_free(pdev);
@@ -1393,6 +1573,7 @@ static int sdhci_esdhc_imx_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver sdhci_esdhc_imx_driver = {
 	.driver		= {
 		.name	= "sdhci-esdhc-imx",
@@ -1400,6 +1581,8 @@ static struct platform_driver sdhci_esdhc_imx_driver = {
 		.of_match_table = imx_esdhc_dt_ids,
 		.pm	= SDHCI_PLTFM_PMOPS,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_RUNTIME
 static int sdhci_esdhc_runtime_suspend(struct device *dev)
 {
@@ -1446,6 +1629,9 @@ static struct platform_driver sdhci_esdhc_imx_driver = {
 		.name	= "sdhci-esdhc-imx",
 		.of_match_table = imx_esdhc_dt_ids,
 		.pm	= &sdhci_esdhc_pmops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.id_table	= imx_esdhc_devtype,

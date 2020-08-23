@@ -34,7 +34,10 @@
 #include <linux/i2c.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "tea6420.h"
@@ -94,6 +97,7 @@ static int tea6420_s_routing(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tea6420_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -111,13 +115,20 @@ static const struct v4l2_subdev_core_ops tea6420_core_ops = {
 /* ----------------------------------------------------------------------- */
 
 >>>>>>> v3.18
+=======
+/* ----------------------------------------------------------------------- */
+
+>>>>>>> v3.18
 static const struct v4l2_subdev_audio_ops tea6420_audio_ops = {
 	.s_routing = tea6420_s_routing,
 };
 
 static const struct v4l2_subdev_ops tea6420_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.core = &tea6420_core_ops,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.audio = &tea6420_audio_ops,
@@ -137,7 +148,11 @@ static int tea6420_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd = kzalloc(sizeof(struct v4l2_subdev), GFP_KERNEL);
+=======
+	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
 >>>>>>> v3.18
@@ -162,7 +177,10 @@ static int tea6420_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

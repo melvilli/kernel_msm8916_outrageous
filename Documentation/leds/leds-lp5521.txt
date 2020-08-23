@@ -19,8 +19,11 @@ More details of the instructions can be found from the public data sheet.
 
 LP5521 has the internal program memory for running various LED patterns.
 <<<<<<< HEAD
+<<<<<<< HEAD
 For the details, please refer to 'firmware' section in leds-lp55xx.txt
 =======
+=======
+>>>>>>> v3.18
 There are two ways to run LED patterns.
 
 1) Legacy interface - enginex_mode and enginex_load
@@ -40,6 +43,9 @@ There are two ways to run LED patterns.
 
 2) Firmware interface - LP55xx common interface
   For the details, please refer to 'firmware' section in leds-lp55xx.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 sysfs contains a selftest entry.

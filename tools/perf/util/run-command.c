@@ -2,6 +2,10 @@
 #include "run-command.h"
 #include "exec_cmd.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "debug.h"
+>>>>>>> v3.18
 =======
 #include "debug.h"
 >>>>>>> v3.18
@@ -24,6 +28,10 @@ int start_command(struct child_process *cmd)
 	int need_in, need_out, need_err;
 	int fdin[2], fdout[2], fderr[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -108,7 +116,11 @@ int start_command(struct child_process *cmd)
 		if (cmd->dir && chdir(cmd->dir))
 			die("exec %s: cd to %s failed (%s)", cmd->argv[0],
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    cmd->dir, strerror(errno));
+=======
+			    cmd->dir, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 			    cmd->dir, strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18
@@ -166,6 +178,11 @@ int start_command(struct child_process *cmd)
 static int wait_or_whine(pid_t pid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 
@@ -178,7 +195,12 @@ static int wait_or_whine(pid_t pid)
 			if (errno == EINTR)
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error("waitpid failed (%s)", strerror(errno));
+=======
+			error("waitpid failed (%s)",
+			      strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 			error("waitpid failed (%s)",
 			      strerror_r(errno, sbuf, sizeof(sbuf)));

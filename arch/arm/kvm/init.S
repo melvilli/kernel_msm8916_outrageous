@@ -18,6 +18,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ __do_hyp_init:
 
 	@ Set the HTTBR to point to the hypervisor PGD pointer passed
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcrr	p15, 4, r2, r3, c2
+=======
+	mcrr	p15, 4, rr_lo_hi(r2, r3), c2
+>>>>>>> v3.18
 =======
 	mcrr	p15, 4, rr_lo_hi(r2, r3), c2
 >>>>>>> v3.18
@@ -107,11 +115,17 @@ __do_hyp_init:
 	mcr	p15, 4, r0, c10, c2, 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	@ Invalidate the stale TLBs from Bootloader
 	mcr	p15, 4, r0, c8, c7, 0	@ TLBIALLH
 	dsb	ish
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@ Set the HSCTLR to:
 	@  - ARM/THUMB exceptions: Kernel config (Thumb-2 kernel)
@@ -150,22 +164,32 @@ phase2:
 	adr	r1, target
 	bfi	r0, r1, #0, #PAGE_SHIFT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
 
 target:	@ We're now in the trampoline code, switch page tables
 	mcrr	p15, 4, r2, r3, c2
 =======
+=======
+>>>>>>> v3.18
 	ret	r0
 
 target:	@ We're now in the trampoline code, switch page tables
 	mcrr	p15, 4, rr_lo_hi(r2, r3), c2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	isb
 
 	@ Invalidate the old TLBs
 	mcr	p15, 4, r0, c8, c7, 0	@ TLBIALLH
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	ish
+>>>>>>> v3.18
 =======
 	dsb	ish
 >>>>>>> v3.18

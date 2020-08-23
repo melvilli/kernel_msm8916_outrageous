@@ -17,6 +17,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -34,6 +35,8 @@
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
@@ -43,6 +46,9 @@
  *
  * Written or modified by:
  *   Vlad Yasevich     <vladislav.yasevich@hp.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -61,7 +67,11 @@ static struct sctp_hmac sctp_hmac_list[SCTP_AUTH_NUM_HMACS] = {
 	{
 		.hmac_id = SCTP_AUTH_HMAC_ID_SHA1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hmac_name="hmac(sha1)",
+=======
+		.hmac_name = "hmac(sha1)",
+>>>>>>> v3.18
 =======
 		.hmac_name = "hmac(sha1)",
 >>>>>>> v3.18
@@ -75,7 +85,11 @@ static struct sctp_hmac sctp_hmac_list[SCTP_AUTH_NUM_HMACS] = {
 	{
 		.hmac_id = SCTP_AUTH_HMAC_ID_SHA256,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hmac_name="hmac(sha256)",
+=======
+		.hmac_name = "hmac(sha256)",
+>>>>>>> v3.18
 =======
 		.hmac_name = "hmac(sha256)",
 >>>>>>> v3.18
@@ -191,7 +205,11 @@ static int sctp_auth_compare_vectors(struct sctp_auth_bytes *vector1,
 		 * is automatically larger numerically.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < abs(diff); i++ ) {
+=======
+		for (i = 0; i < abs(diff); i++) {
+>>>>>>> v3.18
 =======
 		for (i = 0; i < abs(diff); i++) {
 >>>>>>> v3.18
@@ -258,9 +276,15 @@ static struct sctp_auth_bytes *sctp_auth_make_local_vector(
 {
 	return sctp_auth_make_key_vector(
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    (sctp_random_param_t*)asoc->c.auth_random,
 				    (sctp_chunks_param_t*)asoc->c.auth_chunks,
 				    (sctp_hmac_algo_param_t*)asoc->c.auth_hmacs,
+=======
+				    (sctp_random_param_t *)asoc->c.auth_random,
+				    (sctp_chunks_param_t *)asoc->c.auth_chunks,
+				    (sctp_hmac_algo_param_t *)asoc->c.auth_hmacs,
+>>>>>>> v3.18
 =======
 				    (sctp_random_param_t *)asoc->c.auth_random,
 				    (sctp_chunks_param_t *)asoc->c.auth_chunks,
@@ -536,8 +560,12 @@ void sctp_auth_destroy_hmacs(struct crypto_hash *auth_hmacs[])
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < SCTP_AUTH_NUM_HMACS; i++)
 	{
+=======
+	for (i = 0; i < SCTP_AUTH_NUM_HMACS; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < SCTP_AUTH_NUM_HMACS; i++) {
 >>>>>>> v3.18
@@ -579,6 +607,7 @@ struct sctp_hmac *sctp_auth_asoc_get_hmac(const struct sctp_association *asoc)
 		id = ntohs(hmacs->hmac_ids[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Check the id is in the supported range */
 		if (id > SCTP_AUTH_HMAC_ID_MAX) {
 			id = 0;
@@ -592,6 +621,8 @@ struct sctp_hmac *sctp_auth_asoc_get_hmac(const struct sctp_association *asoc)
 		 */
 		if (!sctp_hmac_list[id].hmac_name) {
 =======
+=======
+>>>>>>> v3.18
 		/* Check the id is in the supported range. And
 		 * see if we support the id.  Supported IDs have name and
 		 * length fields set, so that we can allocate and use
@@ -600,6 +631,9 @@ struct sctp_hmac *sctp_auth_asoc_get_hmac(const struct sctp_association *asoc)
 		 */
 		if (id > SCTP_AUTH_HMAC_ID_MAX ||
 		    !sctp_hmac_list[id].hmac_name) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			id = 0;
 			continue;
@@ -703,6 +737,7 @@ static int __sctp_auth_cid(sctp_cid_t chunk, struct sctp_chunks_param *param)
 	for (i = 0; !found && i < len; i++) {
 		switch (param->chunks[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    case SCTP_CID_INIT:
 		    case SCTP_CID_INIT_ACK:
 		    case SCTP_CID_SHUTDOWN_COMPLETE:
@@ -713,6 +748,8 @@ static int __sctp_auth_cid(sctp_cid_t chunk, struct sctp_chunks_param *param)
 			if (param->chunks[i] == chunk)
 			    found = 1;
 =======
+=======
+>>>>>>> v3.18
 		case SCTP_CID_INIT:
 		case SCTP_CID_INIT_ACK:
 		case SCTP_CID_SHUTDOWN_COMPLETE:
@@ -722,6 +759,9 @@ static int __sctp_auth_cid(sctp_cid_t chunk, struct sctp_chunks_param *param)
 		default:
 			if (param->chunks[i] == chunk)
 				found = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -870,8 +910,13 @@ int sctp_auth_ep_set_hmacs(struct sctp_endpoint *ep,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < hmacs->shmac_num_idents; i++)
 		ep->auth_hmacs_list->hmac_ids[i] = htons(hmacs->shmac_idents[i]);
+=======
+	memcpy(ep->auth_hmacs_list->hmac_ids, &hmacs->shmac_idents[0],
+		hmacs->shmac_num_idents * sizeof(__u16));
+>>>>>>> v3.18
 =======
 	memcpy(ep->auth_hmacs_list->hmac_ids, &hmacs->shmac_idents[0],
 		hmacs->shmac_num_idents * sizeof(__u16));

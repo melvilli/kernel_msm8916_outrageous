@@ -236,8 +236,13 @@ static irqreturn_t grgpio_irq_handler(int irq, void *dev)
  * irq_create_mapping in grgpio_to_irq
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int grgpio_irq_map(struct irq_domain *d, unsigned int irq,
 		   irq_hw_number_t hwirq)
+=======
+static int grgpio_irq_map(struct irq_domain *d, unsigned int irq,
+			  irq_hw_number_t hwirq)
+>>>>>>> v3.18
 =======
 static int grgpio_irq_map(struct irq_domain *d, unsigned int irq,
 			  irq_hw_number_t hwirq)
@@ -297,7 +302,11 @@ static int grgpio_irq_map(struct irq_domain *d, unsigned int irq,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void grgpio_irq_unmap(struct irq_domain *d, unsigned int irq)
+=======
+static void grgpio_irq_unmap(struct irq_domain *d, unsigned int irq)
+>>>>>>> v3.18
 =======
 static void grgpio_irq_unmap(struct irq_domain *d, unsigned int irq)
 >>>>>>> v3.18
@@ -478,9 +487,13 @@ static int grgpio_remove(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gpiochip_remove(&priv->bgc.gc);
 	if (ret)
 		goto out;
+=======
+	gpiochip_remove(&priv->bgc.gc);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&priv->bgc.gc);
 >>>>>>> v3.18
@@ -495,7 +508,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id grgpio_match[] = {
+=======
+static const struct of_device_id grgpio_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id grgpio_match[] = {
 >>>>>>> v3.18

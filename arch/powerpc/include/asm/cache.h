@@ -4,6 +4,10 @@
 #ifdef __KERNEL__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/reg.h>
+>>>>>>> v3.18
 =======
 #include <asm/reg.h>
 >>>>>>> v3.18
@@ -44,11 +48,14 @@ struct ppc64_caches {
 
 extern struct ppc64_caches ppc64_caches;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __powerpc64__ && ! __ASSEMBLY__ */
 
 #if !defined(__ASSEMBLY__)
 
 =======
+=======
+>>>>>>> v3.18
 
 static inline void logmpp(u64 x)
 {
@@ -71,6 +78,9 @@ static inline void logmpp(u64 x)
 	isync
 
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __read_mostly __attribute__((__section__(".data..read_mostly")))
 

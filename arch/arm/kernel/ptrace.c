@@ -601,7 +601,11 @@ static int gpr_set(struct task_struct *target,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pt_regs newregs = *task_pt_regs(target);
+=======
+	struct pt_regs newregs;
+>>>>>>> v3.18
 =======
 	struct pt_regs newregs;
 >>>>>>> v3.18
@@ -738,8 +742,13 @@ static int vfp_set(struct task_struct *target,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread->vfpstate.hard = new_vfp;
 	vfp_flush_hwstate(thread);
+=======
+	vfp_flush_hwstate(thread);
+	thread->vfpstate.hard = new_vfp;
+>>>>>>> v3.18
 =======
 	vfp_flush_hwstate(thread);
 	thread->vfpstate.hard = new_vfp;
@@ -896,6 +905,7 @@ long arch_ptrace(struct task_struct *child, long request,
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 		case PTRACE_GETHBPREGS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ptrace_get_breakpoints(child) < 0)
 				return -ESRCH;
 
@@ -910,6 +920,14 @@ long arch_ptrace(struct task_struct *child, long request,
 			ret = ptrace_sethbpregs(child, addr,
 						(unsigned long __user *)data);
 			ptrace_put_breakpoints(child);
+=======
+			ret = ptrace_gethbpregs(child, addr,
+						(unsigned long __user *)data);
+			break;
+		case PTRACE_SETHBPREGS:
+			ret = ptrace_sethbpregs(child, addr,
+						(unsigned long __user *)data);
+>>>>>>> v3.18
 =======
 			ret = ptrace_gethbpregs(child, addr,
 						(unsigned long __user *)data);
@@ -960,9 +978,12 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs, int scno)
 
 	/* Do the secure computing check first; failures should be fast. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (secure_computing(scno) == -1)
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARCH_SECCOMP_FILTER
 	if (secure_computing() == -1)
 		return -1;
@@ -970,6 +991,9 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs, int scno)
 	/* XXX: remove this once OABI gets fixed */
 	secure_computing_strict(scno);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (test_thread_flag(TIF_SYSCALL_TRACE))
@@ -981,8 +1005,13 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs, int scno)
 		trace_sys_enter(regs, scno);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_entry(AUDIT_ARCH_ARM, scno, regs->ARM_r0, regs->ARM_r1,
 			    regs->ARM_r2, regs->ARM_r3);
+=======
+	audit_syscall_entry(scno, regs->ARM_r0, regs->ARM_r1, regs->ARM_r2,
+			    regs->ARM_r3);
+>>>>>>> v3.18
 =======
 	audit_syscall_entry(scno, regs->ARM_r0, regs->ARM_r1, regs->ARM_r2,
 			    regs->ARM_r3);

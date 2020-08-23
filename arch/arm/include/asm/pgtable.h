@@ -101,7 +101,11 @@ extern pgprot_t		pgprot_s2_device;
 #define PAGE_HYP_DEVICE		_MOD_PROT(pgprot_hyp_device, L_PTE_HYP)
 #define PAGE_S2			_MOD_PROT(pgprot_s2, L_PTE_S2_RDONLY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PAGE_S2_DEVICE		_MOD_PROT(pgprot_s2_device, L_PTE_USER | L_PTE_S2_RDONLY)
+=======
+#define PAGE_S2_DEVICE		_MOD_PROT(pgprot_s2_device, L_PTE_S2_RDONLY)
+>>>>>>> v3.18
 =======
 #define PAGE_S2_DEVICE		_MOD_PROT(pgprot_s2_device, L_PTE_S2_RDONLY)
 >>>>>>> v3.18
@@ -125,6 +129,7 @@ extern pgprot_t		pgprot_s2_device;
 
 #define pgprot_stronglyordered(prot) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__pgprot_modify(prot, L_PTE_MT_MASK, L_PTE_MT_UNCACHED | L_PTE_XN)
 
 #define pgprot_device(prot) \
@@ -141,13 +146,19 @@ extern pgprot_t		pgprot_s2_device;
 =======
 	__pgprot_modify(prot, L_PTE_MT_MASK, L_PTE_MT_UNCACHED)
 >>>>>>> v3.18
+=======
+	__pgprot_modify(prot, L_PTE_MT_MASK, L_PTE_MT_UNCACHED)
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARM_DMA_MEM_BUFFERABLE
 #define pgprot_dmacoherent(prot) \
 	__pgprot_modify(prot, L_PTE_MT_MASK, L_PTE_MT_BUFFERABLE | L_PTE_XN)
 #define __HAVE_PHYS_MEM_ACCESS_PROT
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COHERENT_IS_NORMAL 1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct file;
@@ -157,7 +168,10 @@ extern pgprot_t phys_mem_access_prot(struct file *file, unsigned long pfn,
 #define pgprot_dmacoherent(prot) \
 	__pgprot_modify(prot, L_PTE_MT_MASK, L_PTE_MT_UNCACHED | L_PTE_XN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COHERENT_IS_NORMAL 0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -249,6 +263,11 @@ static inline pte_t *pmd_page_vaddr(pmd_t pmd)
 #define pte_none(pte)		(!pte_val(pte))
 #define pte_present(pte)	(pte_isset((pte), L_PTE_PRESENT))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pte_valid(pte)		(pte_isset((pte), L_PTE_VALID))
+#define pte_accessible(mm, pte)	(mm_tlb_flush_pending(mm) ? pte_present(pte) : pte_valid(pte))
+>>>>>>> v3.18
 =======
 #define pte_valid(pte)		(pte_isset((pte), L_PTE_VALID))
 #define pte_accessible(mm, pte)	(mm_tlb_flush_pending(mm) ? pte_present(pte) : pte_valid(pte))
@@ -258,9 +277,15 @@ static inline pte_t *pmd_page_vaddr(pmd_t pmd)
 #define pte_young(pte)		(pte_isset((pte), L_PTE_YOUNG))
 #define pte_exec(pte)		(pte_isclear((pte), L_PTE_XN))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pte_special(pte)	(0)
 
 #define pte_present_user(pte)  (pte_present(pte) && (pte_val(pte) & L_PTE_USER))
+=======
+
+#define pte_valid_user(pte)	\
+	(pte_valid(pte) && pte_isset((pte), L_PTE_USER) && pte_young(pte))
+>>>>>>> v3.18
 =======
 
 #define pte_valid_user(pte)	\
@@ -281,8 +306,14 @@ static inline void set_pte_at(struct mm_struct *mm, unsigned long addr,
 	unsigned long ext = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr < TASK_SIZE && pte_present_user(pteval)) {
 		__sync_icache_dcache(pteval);
+=======
+	if (addr < TASK_SIZE && pte_valid_user(pteval)) {
+		if (!pte_special(pteval))
+			__sync_icache_dcache(pteval);
+>>>>>>> v3.18
 =======
 	if (addr < TASK_SIZE && pte_valid_user(pteval)) {
 		if (!pte_special(pteval))
@@ -307,8 +338,11 @@ PTE_BIT_FUNC(mkexec,   &= ~L_PTE_XN);
 PTE_BIT_FUNC(mknexec,   |= L_PTE_XN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline pte_t pte_mkspecial(pte_t pte) { return pte; }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline pte_t pte_modify(pte_t pte, pgprot_t newprot)

@@ -132,11 +132,14 @@ static int em3027_probe(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int em3027_remove(struct i2c_client *client)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct i2c_device_id em3027_id[] = {
@@ -150,7 +153,10 @@ static struct i2c_driver em3027_driver = {
 	},
 	.probe = &em3027_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = &em3027_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = em3027_id,

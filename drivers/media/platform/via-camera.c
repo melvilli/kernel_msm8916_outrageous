@@ -18,8 +18,13 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-ioctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
 #include <media/v4l2-ctrls.h>
+=======
+#include <media/v4l2-ctrls.h>
+#include <media/v4l2-image-sizes.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-image-sizes.h>
@@ -56,6 +61,7 @@ MODULE_PARM_DESC(override_serial,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Basic window sizes.
  */
 #define VGA_WIDTH	640
@@ -64,6 +70,8 @@ MODULE_PARM_DESC(override_serial,
 #define	QCIF_HEIGHT	144
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The structure describing our camera.
@@ -99,7 +107,11 @@ struct via_camera {
 	 */
 	unsigned int cb_offsets[3];	/* offsets into fb mem */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *cb_addrs[3];		/* Kernel-space addresses */
+=======
+	u8 __iomem *cb_addrs[3];		/* Kernel-space addresses */
+>>>>>>> v3.18
 =======
 	u8 __iomem *cb_addrs[3];		/* Kernel-space addresses */
 >>>>>>> v3.18
@@ -818,6 +830,7 @@ static const struct v4l2_file_operations viacam_fops = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int viacam_g_chip_ident(struct file *file, void *priv,
 		struct v4l2_dbg_chip_ident *ident)
 {
@@ -832,6 +845,8 @@ static int viacam_g_chip_ident(struct file *file, void *priv,
 	return sensor_call(cam, core, g_chip_ident, ident);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -868,13 +883,19 @@ static int viacam_s_std(struct file *filp, void *priv, v4l2_std_id std)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int viacam_g_std(struct file *filp, void *priv, v4l2_std_id *std)
 {
 	*std = V4L2_STD_NTSC_M;
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Video format stuff.	Here is our default format until
@@ -1199,7 +1220,10 @@ static int viacam_enum_frameintervals(struct file *filp, void *priv,
 
 static const struct v4l2_ioctl_ops viacam_ioctl_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident	= viacam_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.vidioc_enum_input	= viacam_enum_input,
@@ -1207,6 +1231,10 @@ static const struct v4l2_ioctl_ops viacam_ioctl_ops = {
 	.vidioc_s_input		= viacam_s_input,
 	.vidioc_s_std		= viacam_s_std,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.vidioc_g_std		= viacam_g_std,
+>>>>>>> v3.18
 =======
 	.vidioc_g_std		= viacam_g_std,
 >>>>>>> v3.18
@@ -1298,7 +1326,10 @@ static struct video_device viacam_v4l_template = {
 	.minor		= -1,
 	.tvnorms	= V4L2_STD_NTSC_M,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.current_norm	= V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.fops		= &viacam_fops,
@@ -1328,7 +1359,11 @@ static bool viacam_serial_is_enabled(void)
 	if ((cbyte & VIACAM_SERIAL_BIT) == 0)
 		return false; /* Not enabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (override_serial == 0) {
+=======
+	if (!override_serial) {
+>>>>>>> v3.18
 =======
 	if (!override_serial) {
 >>>>>>> v3.18

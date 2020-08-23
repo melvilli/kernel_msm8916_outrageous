@@ -115,11 +115,14 @@ int pud_huge(pud_t pud)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct page *

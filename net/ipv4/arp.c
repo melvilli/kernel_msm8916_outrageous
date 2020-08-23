@@ -167,6 +167,7 @@ struct neigh_table arp_tbl = {
 	.parms		= {
 		.tbl			= &arp_tbl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.base_reachable_time	= 30 * HZ,
 		.retrans_time		= 1 * HZ,
 		.gc_staletime		= 60 * HZ,
@@ -180,6 +181,8 @@ struct neigh_table arp_tbl = {
 		.proxy_qlen		= 64,
 		.locktime		= 1 * HZ,
 =======
+=======
+>>>>>>> v3.18
 		.reachable_time		= 30 * HZ,
 		.data	= {
 			[NEIGH_VAR_MCAST_PROBES] = 3,
@@ -194,6 +197,9 @@ struct neigh_table arp_tbl = {
 			[NEIGH_VAR_PROXY_DELAY]	= (8 * HZ) / 10,
 			[NEIGH_VAR_LOCKTIME] = 1 * HZ,
 		},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.gc_interval	= 30 * HZ,
@@ -377,7 +383,11 @@ static void arp_solicit(struct neighbour *neigh, struct sk_buff *skb)
 		saddr = inet_select_addr(dev, target, RT_SCOPE_LINK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	probes -= neigh->parms->ucast_probes;
+=======
+	probes -= NEIGH_VAR(neigh->parms, UCAST_PROBES);
+>>>>>>> v3.18
 =======
 	probes -= NEIGH_VAR(neigh->parms, UCAST_PROBES);
 >>>>>>> v3.18
@@ -388,11 +398,17 @@ static void arp_solicit(struct neighbour *neigh, struct sk_buff *skb)
 		dst_hw = dst_ha;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		probes -= neigh->parms->app_probes;
 		if (probes < 0) {
 #ifdef CONFIG_ARPD
 			neigh_app_ns(neigh);
 #endif
+=======
+		probes -= NEIGH_VAR(neigh->parms, APP_PROBES);
+		if (probes < 0) {
+			neigh_app_ns(neigh);
+>>>>>>> v3.18
 =======
 		probes -= NEIGH_VAR(neigh->parms, APP_PROBES);
 		if (probes < 0) {
@@ -409,6 +425,10 @@ static void arp_solicit(struct neighbour *neigh, struct sk_buff *skb)
 static int arp_ignore(struct in_device *in_dev, __be32 sip, __be32 tip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net = dev_net(in_dev->dev);
+>>>>>>> v3.18
 =======
 	struct net *net = dev_net(in_dev->dev);
 >>>>>>> v3.18
@@ -431,6 +451,10 @@ static int arp_ignore(struct in_device *in_dev, __be32 sip, __be32 tip)
 		sip = 0;
 		scope = RT_SCOPE_LINK;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		in_dev = NULL;
+>>>>>>> v3.18
 =======
 		in_dev = NULL;
 >>>>>>> v3.18
@@ -446,7 +470,11 @@ static int arp_ignore(struct in_device *in_dev, __be32 sip, __be32 tip)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return !inet_confirm_addr(in_dev, sip, tip, scope);
+=======
+	return !inet_confirm_addr(net, in_dev, sip, tip, scope);
+>>>>>>> v3.18
 =======
 	return !inet_confirm_addr(net, in_dev, sip, tip, scope);
 >>>>>>> v3.18
@@ -770,6 +798,10 @@ static int arp_process(struct sk_buff *skb)
 	struct neighbour *n;
 	struct net *net = dev_net(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_garp = false;
+>>>>>>> v3.18
 =======
 	bool is_garp = false;
 >>>>>>> v3.18
@@ -917,7 +949,11 @@ static int arp_process(struct sk_buff *skb)
 				if (NEIGH_CB(skb)->flags & LOCALLY_ENQUEUED ||
 				    skb->pkt_type == PACKET_HOST ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    in_dev->arp_parms->proxy_delay == 0) {
+=======
+				    NEIGH_VAR(in_dev->arp_parms, PROXY_DELAY) == 0) {
+>>>>>>> v3.18
 =======
 				    NEIGH_VAR(in_dev->arp_parms, PROXY_DELAY) == 0) {
 >>>>>>> v3.18
@@ -944,17 +980,23 @@ static int arp_process(struct sk_buff *skb)
 		   devices (strip is candidate)
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (n == NULL &&
 		    (arp->ar_op == htons(ARPOP_REPLY) ||
 		     (arp->ar_op == htons(ARPOP_REQUEST) && tip == sip)) &&
 		    inet_addr_type(net, sip) == RTN_UNICAST)
 =======
+=======
+>>>>>>> v3.18
 		is_garp = arp->ar_op == htons(ARPOP_REQUEST) && tip == sip &&
 			  inet_addr_type(net, sip) == RTN_UNICAST;
 
 		if (n == NULL &&
 		    ((arp->ar_op == htons(ARPOP_REPLY)  &&
 		      inet_addr_type(net, sip) == RTN_UNICAST) || is_garp))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			n = __neigh_lookup(&arp_tbl, &sip, dev, 1);
 	}
@@ -969,12 +1011,18 @@ static int arp_process(struct sk_buff *skb)
 		   arp trashing and chooses the fastest router.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		override = time_after(jiffies, n->updated + n->parms->locktime);
 =======
+=======
+>>>>>>> v3.18
 		override = time_after(jiffies,
 				      n->updated +
 				      NEIGH_VAR(n->parms, LOCKTIME)) ||
 			   is_garp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Broadcast replies and request packets
@@ -1009,16 +1057,22 @@ static int arp_rcv(struct sk_buff *skb, struct net_device *dev,
 	const struct arphdr *arp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->flags & IFF_NOARP ||
 	    skb->pkt_type == PACKET_OTHERHOST ||
 	    skb->pkt_type == PACKET_LOOPBACK)
 		goto freeskb;
 =======
+=======
+>>>>>>> v3.18
 	/* do not tweak dropwatch on an ARP we will ignore */
 	if (dev->flags & IFF_NOARP ||
 	    skb->pkt_type == PACKET_OTHERHOST ||
 	    skb->pkt_type == PACKET_LOOPBACK)
 		goto consumeskb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb = skb_share_check(skb, GFP_ATOMIC);
@@ -1038,6 +1092,12 @@ static int arp_rcv(struct sk_buff *skb, struct net_device *dev,
 	return NF_HOOK(NFPROTO_ARP, NF_ARP_IN, skb, dev, NULL, arp_process);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+consumeskb:
+	consume_skb(skb);
+	return 0;
+>>>>>>> v3.18
 =======
 consumeskb:
 	consume_skb(skb);
@@ -1187,7 +1247,11 @@ static int arp_req_get(struct arpreq *r, struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int arp_invalidate(struct net_device *dev, __be32 ip)
+=======
+static int arp_invalidate(struct net_device *dev, __be32 ip)
+>>>>>>> v3.18
 =======
 static int arp_invalidate(struct net_device *dev, __be32 ip)
 >>>>>>> v3.18
@@ -1206,7 +1270,10 @@ static int arp_invalidate(struct net_device *dev, __be32 ip)
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(arp_invalidate);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1319,7 +1386,12 @@ static int arp_netdev_event(struct notifier_block *this, unsigned long event,
 			    void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+	struct netdev_notifier_change_info *change_info;
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 	struct netdev_notifier_change_info *change_info;
@@ -1331,12 +1403,18 @@ static int arp_netdev_event(struct notifier_block *this, unsigned long event,
 		rt_cache_flush(dev_net(dev));
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case NETDEV_CHANGE:
 		change_info = ptr;
 		if (change_info->flags_changed & IFF_NOARP)
 			neigh_changeaddr(&arp_tbl, dev);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -1378,7 +1456,11 @@ void __init arp_init(void)
 	arp_proc_init();
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	neigh_sysctl_register(NULL, &arp_tbl.parms, "ipv4", NULL);
+=======
+	neigh_sysctl_register(NULL, &arp_tbl.parms, NULL);
+>>>>>>> v3.18
 =======
 	neigh_sysctl_register(NULL, &arp_tbl.parms, NULL);
 >>>>>>> v3.18

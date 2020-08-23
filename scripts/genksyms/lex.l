@@ -130,8 +130,14 @@ yylex(void)
 {
   static enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
     ST_NOTSTARTED, ST_NORMAL, ST_ATTRIBUTE, ST_ASM, ST_BRACKET, ST_BRACE,
     ST_EXPRESSION, ST_TABLE_1, ST_TABLE_2, ST_TABLE_3, ST_TABLE_4,
+=======
+    ST_NOTSTARTED, ST_NORMAL, ST_ATTRIBUTE, ST_ASM, ST_TYPEOF, ST_TYPEOF_1,
+    ST_BRACKET, ST_BRACE, ST_EXPRESSION,
+    ST_TABLE_1, ST_TABLE_2, ST_TABLE_3, ST_TABLE_4,
+>>>>>>> v3.18
 =======
     ST_NOTSTARTED, ST_NORMAL, ST_ATTRIBUTE, ST_ASM, ST_TYPEOF, ST_TYPEOF_1,
     ST_BRACKET, ST_BRACE, ST_EXPRESSION,
@@ -205,11 +211,17 @@ repeat:
 		    count = 0;
 		    goto repeat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		  case TYPEOF_KEYW:
 		    lexstate = ST_TYPEOF;
 		    count = 0;
 		    goto repeat;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		  case STRUCT_KEYW:
@@ -298,7 +310,10 @@ repeat:
       break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     case ST_TYPEOF:
       switch (token)
 	{
@@ -341,6 +356,9 @@ repeat:
 	lexstate = ST_TYPEOF;
 	goto repeat;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     case ST_BRACKET:
       APP;

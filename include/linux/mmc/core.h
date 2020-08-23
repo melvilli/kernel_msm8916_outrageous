@@ -9,7 +9,10 @@
 #define LINUX_MMC_CORE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <uapi/linux/mmc/core.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -28,7 +31,10 @@ struct mmc_command {
 	u32			resp[4];
 	unsigned int		flags;		/* expected response type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MMC_RSP_PRESENT	(1 << 0)
 #define MMC_RSP_136	(1 << 1)		/* 136 bit response */
 #define MMC_RSP_CRC	(1 << 2)		/* expect valid crc */
@@ -61,6 +67,9 @@ struct mmc_command {
 #define MMC_RSP_R6	(MMC_RSP_PRESENT|MMC_RSP_CRC|MMC_RSP_OPCODE)
 #define MMC_RSP_R7	(MMC_RSP_PRESENT|MMC_RSP_CRC|MMC_RSP_OPCODE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define mmc_resp_type(cmd)	((cmd)->flags & (MMC_RSP_PRESENT|MMC_RSP_136|MMC_RSP_CRC|MMC_RSP_BUSY|MMC_RSP_OPCODE))
 
@@ -103,11 +112,17 @@ struct mmc_command {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		cmd_timeout_ms;	/* in milliseconds */
 	/* Set this flag only for sanitize request */
 	bool			sanitize_busy;
 	/* Set this flag only for commands which can be HPIed */
 	bool			ignore_timeout;
+=======
+	unsigned int		busy_timeout;	/* busy detect timeout in ms */
+	/* Set this flag only for blocking sanitize request */
+	bool			sanitize_busy;
+>>>>>>> v3.18
 =======
 	unsigned int		busy_timeout;	/* busy detect timeout in ms */
 	/* Set this flag only for blocking sanitize request */
@@ -139,7 +154,10 @@ struct mmc_data {
 	struct scatterlist	*sg;		/* I/O scatter list */
 	s32			host_cookie;	/* host private data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			fault_injected; /* fault injected */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -162,7 +180,10 @@ struct mmc_async_req;
 extern int mmc_stop_bkops(struct mmc_card *);
 extern int mmc_read_bkops_status(struct mmc_card *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool mmc_card_is_prog_state(struct mmc_card *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct mmc_async_req *mmc_start_req(struct mmc_host *,
@@ -175,6 +196,7 @@ extern int mmc_wait_for_app_cmd(struct mmc_host *, struct mmc_card *,
 	struct mmc_command *, int);
 extern void mmc_start_bkops(struct mmc_card *card, bool from_exception);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mmc_start_delayed_bkops(struct mmc_card *card);
 extern void mmc_start_idle_time_bkops(struct work_struct *work);
 extern void mmc_bkops_completion_polling(struct work_struct *work);
@@ -183,6 +205,11 @@ extern int __mmc_switch(struct mmc_card *, u8, u8, u8, unsigned int, bool,
 extern int mmc_switch(struct mmc_card *, u8, u8, u8, unsigned int);
 extern int mmc_switch_ignore_timeout(struct mmc_card *, u8, u8, u8,
 				     unsigned int);
+=======
+extern int __mmc_switch(struct mmc_card *, u8, u8, u8, unsigned int, bool,
+			bool, bool);
+extern int mmc_switch(struct mmc_card *, u8, u8, u8, unsigned int);
+>>>>>>> v3.18
 =======
 extern int __mmc_switch(struct mmc_card *, u8, u8, u8, unsigned int, bool,
 			bool, bool);
@@ -224,23 +251,32 @@ extern unsigned int mmc_align_data_size(struct mmc_card *, unsigned int);
 extern int __mmc_claim_host(struct mmc_host *host, atomic_t *abort);
 extern void mmc_release_host(struct mmc_host *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int mmc_try_claim_host(struct mmc_host *host);
 extern void mmc_set_ios(struct mmc_host *host);
 =======
+=======
+>>>>>>> v3.18
 
 extern void mmc_get_card(struct mmc_card *card);
 extern void mmc_put_card(struct mmc_card *card);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int mmc_flush_cache(struct mmc_card *);
 
 extern int mmc_detect_card_removed(struct mmc_host *host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mmc_blk_init_bkops_statistics(struct mmc_card *card);
 extern void mmc_rpm_hold(struct mmc_host *host, struct device *dev);
 extern void mmc_rpm_release(struct mmc_host *host, struct device *dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -255,7 +291,13 @@ static inline void mmc_claim_host(struct mmc_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 mmc_vddrange_to_ocrmask(int vdd_min, int vdd_max);
+=======
+struct device_node;
+extern u32 mmc_vddrange_to_ocrmask(int vdd_min, int vdd_max);
+extern int mmc_of_parse_voltage(struct device_node *np, u32 *mask);
+>>>>>>> v3.18
 =======
 struct device_node;
 extern u32 mmc_vddrange_to_ocrmask(int vdd_min, int vdd_max);

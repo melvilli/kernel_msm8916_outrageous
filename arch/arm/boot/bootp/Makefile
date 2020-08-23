@@ -6,6 +6,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+GCOV_PROFILE	:= n
+
+>>>>>>> v3.18
 =======
 GCOV_PROFILE	:= n
 

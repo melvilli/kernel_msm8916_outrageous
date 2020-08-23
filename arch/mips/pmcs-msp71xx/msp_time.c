@@ -89,7 +89,11 @@ void __init plat_time_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18

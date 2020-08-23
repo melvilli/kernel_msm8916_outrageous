@@ -46,6 +46,7 @@ static int db1x_pm_enter(suspend_state_t state)
 
 	/* clear and setup wake cause and source */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(0, SYS_WAKEMSK);
 	au_sync();
 	au_writel(0, SYS_WAKESRC);
@@ -64,6 +65,8 @@ static int db1x_pm_enter(suspend_state_t state)
 	/* wait for value to really hit the register */
 	while (au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_M20)
 =======
+=======
+>>>>>>> v3.18
 	alchemy_wrsys(0, AU1000_SYS_WAKEMSK);
 	alchemy_wrsys(0, AU1000_SYS_WAKESRC);
 
@@ -78,6 +81,9 @@ static int db1x_pm_enter(suspend_state_t state)
 
 	/* wait for value to really hit the register */
 	while (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_M20)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		asm volatile ("nop");
 
@@ -120,6 +126,7 @@ static void db1x_pm_end(void)
 	 * be able to clear it, WAKEMSK must be cleared first.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	db1x_pm_last_wakesrc = au_readl(SYS_WAKESRC);
 
 	au_writel(0, SYS_WAKEMSK);
@@ -127,10 +134,15 @@ static void db1x_pm_end(void)
 	au_sync();
 
 =======
+=======
+>>>>>>> v3.18
 	db1x_pm_last_wakesrc = alchemy_rdsys(AU1000_SYS_WAKESRC);
 
 	alchemy_wrsys(0, AU1000_SYS_WAKEMSK);
 	alchemy_wrsys(0, AU1000_SYS_WAKESRC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -183,7 +195,11 @@ static ssize_t db1x_pmattr_store(struct kobject *kobj,
 
 	if (ATTRCMP(timer_timeout)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = strict_strtoul(instr, 0, &l);
+=======
+		tmp = kstrtoul(instr, 0, &l);
+>>>>>>> v3.18
 =======
 		tmp = kstrtoul(instr, 0, &l);
 >>>>>>> v3.18
@@ -210,7 +226,11 @@ static ssize_t db1x_pmattr_store(struct kobject *kobj,
 
 	} else if (ATTRCMP(wakemsk)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = strict_strtoul(instr, 0, &l);
+=======
+		tmp = kstrtoul(instr, 0, &l);
+>>>>>>> v3.18
 =======
 		tmp = kstrtoul(instr, 0, &l);
 >>>>>>> v3.18
@@ -275,6 +295,7 @@ static int __init pm_init(void)
 	 * the next suspend cycle.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (au_readl(SYS_TOYTRIM) != 32767) {
 		au_writel(32767, SYS_TOYTRIM);
 		au_sync();
@@ -287,6 +308,8 @@ static int __init pm_init(void)
 	au_writel(0, SYS_WAKEMSK);
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	if (alchemy_rdsys(AU1000_SYS_TOYTRIM) != 32767)
 		alchemy_wrsys(32767, AU1000_SYS_TOYTRIM);
 
@@ -294,6 +317,9 @@ static int __init pm_init(void)
 
 	alchemy_wrsys(0, AU1000_SYS_WAKESRC);
 	alchemy_wrsys(0, AU1000_SYS_WAKEMSK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	suspend_set_ops(&db1x_pm_ops);

@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2012 Freescale Semiconductor, Inc.
+=======
+ * Copyright 2012-2014 Freescale Semiconductor, Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2012-2014 Freescale Semiconductor, Inc.
 >>>>>>> v3.18
@@ -25,6 +29,12 @@
 #include <linux/err.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+#include <linux/regmap.h>
+#include <linux/mfd/syscon.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/regmap.h>
@@ -39,9 +49,12 @@
 #define HW_USBPHY_CTRL_CLR			0x38
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BM_USBPHY_CTRL_SFTRST			BIT(31)
 #define BM_USBPHY_CTRL_CLKGATE			BIT(30)
 =======
+=======
+>>>>>>> v3.18
 #define HW_USBPHY_DEBUG_SET			0x54
 #define HW_USBPHY_DEBUG_CLR			0x58
 
@@ -59,11 +72,15 @@
 #define BM_USBPHY_CTRL_ENAUTOCLR_PHY_PWD	BIT(20)
 #define BM_USBPHY_CTRL_ENAUTOCLR_CLKGATE	BIT(19)
 #define BM_USBPHY_CTRL_ENAUTO_PWRON_PLL		BIT(18)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BM_USBPHY_CTRL_ENUTMILEVEL3		BIT(15)
 #define BM_USBPHY_CTRL_ENUTMILEVEL2		BIT(14)
 #define BM_USBPHY_CTRL_ENHOSTDISCONDETECT	BIT(1)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct mxs_phy {
 	struct usb_phy phy;
@@ -78,6 +95,8 @@ static void mxs_phy_hw_init(struct mxs_phy *mxs_phy)
 
 	stmp_reset_block(base + HW_USBPHY_CTRL);
 =======
+=======
+>>>>>>> v3.18
 #define BM_USBPHY_IP_FIX                       (BIT(17) | BIT(18))
 
 #define BM_USBPHY_DEBUG_CLKGATE			BIT(30)
@@ -206,17 +225,23 @@ static int mxs_phy_hw_init(struct mxs_phy *mxs_phy)
 	ret = stmp_reset_block(base + HW_USBPHY_CTRL);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Power up the PHY */
 	writel(0, base + HW_USBPHY_PWD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable FS/LS device */
 	writel(BM_USBPHY_CTRL_ENUTMILEVEL2 |
 	       BM_USBPHY_CTRL_ENUTMILEVEL3,
 	       base + HW_USBPHY_CTRL_SET);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * USB PHY Ctrl Setting
 	 * - Auto clock/power on
@@ -308,11 +333,15 @@ static void mxs_phy_disconnect_line(struct mxs_phy *mxs_phy, bool on)
 	else
 		__mxs_phy_disconnect_line(mxs_phy, false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int mxs_phy_init(struct usb_phy *phy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mxs_phy *mxs_phy = to_mxs_phy(phy);
 
@@ -321,6 +350,8 @@ static int mxs_phy_init(struct usb_phy *phy)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct mxs_phy *mxs_phy = to_mxs_phy(phy);
 
@@ -330,6 +361,9 @@ static int mxs_phy_init(struct usb_phy *phy)
 		return ret;
 
 	return mxs_phy_hw_init(mxs_phy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -346,6 +380,10 @@ static void mxs_phy_shutdown(struct usb_phy *phy)
 static int mxs_phy_suspend(struct usb_phy *x, int suspend)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -358,12 +396,18 @@ static int mxs_phy_suspend(struct usb_phy *x, int suspend)
 		clk_disable_unprepare(mxs_phy->clk);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_prepare_enable(mxs_phy->clk);
 =======
+=======
+>>>>>>> v3.18
 		mxs_phy_clock_switch_delay();
 		ret = clk_prepare_enable(mxs_phy->clk);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		writel(BM_USBPHY_CTRL_CLKGATE,
 		       x->io_priv + HW_USBPHY_CTRL_CLR);
@@ -374,12 +418,15 @@ static int mxs_phy_suspend(struct usb_phy *x, int suspend)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxs_phy_on_connect(struct usb_phy *phy,
 		enum usb_device_speed speed)
 {
 	dev_dbg(phy->dev, "%s speed device has connected\n",
 		(speed == USB_SPEED_HIGH) ? "high" : "non-high");
 =======
+=======
+>>>>>>> v3.18
 static int mxs_phy_set_wakeup(struct usb_phy *x, bool enabled)
 {
 	struct mxs_phy *mxs_phy = to_mxs_phy(x);
@@ -402,6 +449,9 @@ static int mxs_phy_on_connect(struct usb_phy *phy,
 {
 	dev_dbg(phy->dev, "%s device has connected\n",
 		(speed == USB_SPEED_HIGH) ? "HS" : "FS/LS");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (speed == USB_SPEED_HIGH)
@@ -415,8 +465,13 @@ static int mxs_phy_on_disconnect(struct usb_phy *phy,
 		enum usb_device_speed speed)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(phy->dev, "%s speed device has disconnected\n",
 		(speed == USB_SPEED_HIGH) ? "high" : "non-high");
+=======
+	dev_dbg(phy->dev, "%s device has disconnected\n",
+		(speed == USB_SPEED_HIGH) ? "HS" : "FS/LS");
+>>>>>>> v3.18
 =======
 	dev_dbg(phy->dev, "%s device has disconnected\n",
 		(speed == USB_SPEED_HIGH) ? "HS" : "FS/LS");
@@ -437,6 +492,12 @@ static int mxs_phy_probe(struct platform_device *pdev)
 	struct mxs_phy *mxs_phy;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct of_device_id *of_id =
+			of_match_device(mxs_phy_dt_ids, &pdev->dev);
+	struct device_node *np = pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	const struct of_device_id *of_id =
 			of_match_device(mxs_phy_dt_ids, &pdev->dev);
@@ -462,7 +523,10 @@ static int mxs_phy_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Some SoCs don't have anatop registers */
 	if (of_get_property(np, "fsl,anatop", NULL)) {
 		mxs_phy->regmap_anatop = syscon_regmap_lookup_by_phandle
@@ -479,6 +543,9 @@ static int mxs_phy_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "failed to get alias id, errno %d\n", ret);
 	mxs_phy->port_id = ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mxs_phy->phy.io_priv		= base;
 	mxs_phy->phy.dev		= &pdev->dev;
@@ -490,11 +557,14 @@ static int mxs_phy_probe(struct platform_device *pdev)
 	mxs_phy->phy.notify_disconnect	= mxs_phy_on_disconnect;
 	mxs_phy->phy.type		= USB_PHY_TYPE_USB2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mxs_phy->clk = clk;
 
 	platform_set_drvdata(pdev, &mxs_phy->phy);
 =======
+=======
+>>>>>>> v3.18
 	mxs_phy->phy.set_wakeup		= mxs_phy_set_wakeup;
 
 	mxs_phy->clk = clk;
@@ -503,6 +573,9 @@ static int mxs_phy_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, mxs_phy);
 
 	device_set_wakeup_capable(&pdev->dev, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = usb_add_phy_dev(&mxs_phy->phy);
@@ -522,12 +595,15 @@ static int mxs_phy_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id mxs_phy_dt_ids[] = {
 	{ .compatible = "fsl,imx23-usbphy", },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, mxs_phy_dt_ids);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static void mxs_phy_enable_ldo_in_suspend(struct mxs_phy *mxs_phy, bool on)
 {
@@ -568,6 +644,9 @@ static int mxs_phy_system_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(mxs_phy_pm, mxs_phy_system_suspend,
 		mxs_phy_system_resume);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver mxs_phy_driver = {
@@ -578,6 +657,10 @@ static struct platform_driver mxs_phy_driver = {
 		.owner	= THIS_MODULE,
 		.of_match_table = mxs_phy_dt_ids,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm = &mxs_phy_pm,
+>>>>>>> v3.18
 =======
 		.pm = &mxs_phy_pm,
 >>>>>>> v3.18

@@ -24,8 +24,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program;  if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program;  if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program;  if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -127,7 +131,11 @@ int netlbl_cfg_unlbl_map_add(const char *domain,
 
 	if (addr == NULL && mask == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->type = NETLBL_NLTYPE_UNLABELED;
+=======
+		entry->def.type = NETLBL_NLTYPE_UNLABELED;
+>>>>>>> v3.18
 =======
 		entry->def.type = NETLBL_NLTYPE_UNLABELED;
 >>>>>>> v3.18
@@ -146,7 +154,11 @@ int netlbl_cfg_unlbl_map_add(const char *domain,
 			if (map4 == NULL)
 				goto cfg_unlbl_map_add_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			map4->type = NETLBL_NLTYPE_UNLABELED;
+=======
+			map4->def.type = NETLBL_NLTYPE_UNLABELED;
+>>>>>>> v3.18
 =======
 			map4->def.type = NETLBL_NLTYPE_UNLABELED;
 >>>>>>> v3.18
@@ -167,7 +179,11 @@ int netlbl_cfg_unlbl_map_add(const char *domain,
 			if (map6 == NULL)
 				goto cfg_unlbl_map_add_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			map6->type = NETLBL_NLTYPE_UNLABELED;
+=======
+			map6->def.type = NETLBL_NLTYPE_UNLABELED;
+>>>>>>> v3.18
 =======
 			map6->def.type = NETLBL_NLTYPE_UNLABELED;
 >>>>>>> v3.18
@@ -188,16 +204,22 @@ int netlbl_cfg_unlbl_map_add(const char *domain,
 		default:
 			goto cfg_unlbl_map_add_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		}
 
 		entry->type_def.addrsel = addrmap;
 		entry->type = NETLBL_NLTYPE_ADDRSELECT;
 =======
+=======
+>>>>>>> v3.18
 		}
 
 		entry->def.addrsel = addrmap;
 		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		ret_val = -EINVAL;
@@ -272,7 +294,10 @@ int netlbl_cfg_unlbl_static_add(struct net *net,
  * @mask: address mask in network byte order (struct in[6]_addr)
  * @family: address family
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @secid: LSM secid value for the entry
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @audit_info: NetLabel audit information
@@ -382,8 +407,13 @@ int netlbl_cfg_cipsov4_map_add(u32 doi,
 
 	if (addr == NULL && mask == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->type_def.cipsov4 = doi_def;
 		entry->type = NETLBL_NLTYPE_CIPSOV4;
+=======
+		entry->def.cipso = doi_def;
+		entry->def.type = NETLBL_NLTYPE_CIPSOV4;
+>>>>>>> v3.18
 =======
 		entry->def.cipso = doi_def;
 		entry->def.type = NETLBL_NLTYPE_CIPSOV4;
@@ -399,8 +429,13 @@ int netlbl_cfg_cipsov4_map_add(u32 doi,
 		if (addrinfo == NULL)
 			goto out_addrinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addrinfo->type_def.cipsov4 = doi_def;
 		addrinfo->type = NETLBL_NLTYPE_CIPSOV4;
+=======
+		addrinfo->def.cipso = doi_def;
+		addrinfo->def.type = NETLBL_NLTYPE_CIPSOV4;
+>>>>>>> v3.18
 =======
 		addrinfo->def.cipso = doi_def;
 		addrinfo->def.type = NETLBL_NLTYPE_CIPSOV4;
@@ -413,8 +448,13 @@ int netlbl_cfg_cipsov4_map_add(u32 doi,
 			goto cfg_cipsov4_map_add_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->type_def.addrsel = addrmap;
 		entry->type = NETLBL_NLTYPE_ADDRSELECT;
+=======
+		entry->def.addrsel = addrmap;
+		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
+>>>>>>> v3.18
 =======
 		entry->def.addrsel = addrmap;
 		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
@@ -448,9 +488,12 @@ out_entry:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * netlbl_secattr_catmap_walk - Walk a LSM secattr catmap looking for a bit
 =======
+=======
+>>>>>>> v3.18
 #define _CM_F_NONE	0x00000000
 #define _CM_F_ALLOC	0x00000001
 #define _CM_F_WALK	0x00000002
@@ -517,6 +560,9 @@ catmap_getnode_alloc:
 
 /**
  * netlbl_catmap_walk - Walk a LSM secattr catmap looking for a bit
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @catmap: the category bitmap
  * @offset: the offset to start searching at, in bits
@@ -526,6 +572,7 @@ catmap_getnode_alloc:
  * returns the spot of the first set bit or -ENOENT if no bits are set.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int netlbl_secattr_catmap_walk(struct netlbl_lsm_secattr_catmap *catmap,
 			       u32 offset)
@@ -550,6 +597,8 @@ int netlbl_secattr_catmap_walk(struct netlbl_lsm_secattr_catmap *catmap,
 	}
 	bitmap = iter->bitmap[node_idx] >> node_bit;
 =======
+=======
+>>>>>>> v3.18
 int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset)
 {
 	struct netlbl_lsm_catmap *iter = catmap;
@@ -569,12 +618,16 @@ int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset)
 		bit = 0;
 	}
 	bitmap = iter->bitmap[idx] >> bit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (;;) {
 		if (bitmap != 0) {
 			while ((bitmap & NETLBL_CATMAP_BIT) == 0) {
 				bitmap >>= 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				node_bit++;
 			}
@@ -591,6 +644,8 @@ int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset)
 		bitmap = iter->bitmap[node_idx];
 		node_bit = 0;
 =======
+=======
+>>>>>>> v3.18
 				bit++;
 			}
 			return iter->startbit +
@@ -605,6 +660,9 @@ int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset)
 		}
 		bitmap = iter->bitmap[idx];
 		bit = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -613,7 +671,11 @@ int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * netlbl_secattr_catmap_walk_rng - Find the end of a string of set bits
+=======
+ * netlbl_catmap_walkrng - Find the end of a string of set bits
+>>>>>>> v3.18
 =======
  * netlbl_catmap_walkrng - Find the end of a string of set bits
 >>>>>>> v3.18
@@ -626,6 +688,7 @@ int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset)
  * the end of the bitmap.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int netlbl_secattr_catmap_walk_rng(struct netlbl_lsm_secattr_catmap *catmap,
 				   u32 offset)
@@ -671,6 +734,8 @@ int netlbl_secattr_catmap_walk_rng(struct netlbl_lsm_secattr_catmap *catmap,
 		bitmask = NETLBL_CATMAP_BIT;
 		node_bit = 0;
 =======
+=======
+>>>>>>> v3.18
 int netlbl_catmap_walkrng(struct netlbl_lsm_catmap *catmap, u32 offset)
 {
 	struct netlbl_lsm_catmap *iter;
@@ -714,6 +779,9 @@ int netlbl_catmap_walkrng(struct netlbl_lsm_catmap *catmap, u32 offset)
 		}
 		bitmask = NETLBL_CATMAP_BIT;
 		bit = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -722,9 +790,12 @@ int netlbl_catmap_walkrng(struct netlbl_lsm_catmap *catmap, u32 offset)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * netlbl_secattr_catmap_setbit - Set a bit in a LSM secattr catmap
  * @catmap: the category bitmap
 =======
+=======
+>>>>>>> v3.18
  * netlbl_catmap_getlong - Export an unsigned long bitmap
  * @catmap: pointer to the category bitmap
  * @offset: pointer to the requested offset
@@ -775,6 +846,9 @@ int netlbl_catmap_getlong(struct netlbl_lsm_catmap *catmap,
 /**
  * netlbl_catmap_setbit - Set a bit in a LSM secattr catmap
  * @catmap: pointer to the category bitmap
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @bit: the bit to set
  * @flags: memory allocation flags
@@ -784,6 +858,7 @@ int netlbl_catmap_getlong(struct netlbl_lsm_catmap *catmap,
  * negative values on failure.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int netlbl_secattr_catmap_setbit(struct netlbl_lsm_secattr_catmap *catmap,
 				 u32 bit,
@@ -809,6 +884,8 @@ int netlbl_secattr_catmap_setbit(struct netlbl_lsm_secattr_catmap *catmap,
 	node_bit = bit - iter->startbit - (NETLBL_CATMAP_MAPSIZE * node_idx);
 	iter->bitmap[node_idx] |= NETLBL_CATMAP_BIT << node_bit;
 =======
+=======
+>>>>>>> v3.18
 int netlbl_catmap_setbit(struct netlbl_lsm_catmap **catmap,
 			 u32 bit,
 			 gfp_t flags)
@@ -823,6 +900,9 @@ int netlbl_catmap_setbit(struct netlbl_lsm_catmap **catmap,
 	bit -= iter->startbit;
 	idx = bit / NETLBL_CATMAP_MAPSIZE;
 	iter->bitmap[idx] |= NETLBL_CATMAP_BIT << (bit % NETLBL_CATMAP_MAPSIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -830,8 +910,13 @@ int netlbl_catmap_setbit(struct netlbl_lsm_catmap **catmap,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * netlbl_secattr_catmap_setrng - Set a range of bits in a LSM secattr catmap
  * @catmap: the category bitmap
+=======
+ * netlbl_catmap_setrng - Set a range of bits in a LSM secattr catmap
+ * @catmap: pointer to the category bitmap
+>>>>>>> v3.18
 =======
  * netlbl_catmap_setrng - Set a range of bits in a LSM secattr catmap
  * @catmap: pointer to the category bitmap
@@ -845,6 +930,7 @@ int netlbl_catmap_setbit(struct netlbl_lsm_catmap **catmap,
  * on success, negative values on failure.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int netlbl_secattr_catmap_setrng(struct netlbl_lsm_secattr_catmap *catmap,
 				 u32 start,
@@ -877,6 +963,8 @@ int netlbl_secattr_catmap_setrng(struct netlbl_lsm_secattr_catmap *catmap,
 
 	return ret_val;
 =======
+=======
+>>>>>>> v3.18
 int netlbl_catmap_setrng(struct netlbl_lsm_catmap **catmap,
 			 u32 start,
 			 u32 end,
@@ -934,6 +1022,9 @@ int netlbl_catmap_setlong(struct netlbl_lsm_catmap **catmap,
 	iter->bitmap[idx] |= bitmap << (offset % NETLBL_CATMAP_MAPSIZE);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -992,7 +1083,11 @@ int netlbl_sock_setattr(struct sock *sk,
 	switch (family) {
 	case AF_INET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (dom_entry->type) {
+=======
+		switch (dom_entry->def.type) {
+>>>>>>> v3.18
 =======
 		switch (dom_entry->def.type) {
 >>>>>>> v3.18
@@ -1002,8 +1097,13 @@ int netlbl_sock_setattr(struct sock *sk,
 		case NETLBL_NLTYPE_CIPSOV4:
 			ret_val = cipso_v4_sock_setattr(sk,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    dom_entry->type_def.cipsov4,
 						    secattr);
+=======
+							dom_entry->def.cipso,
+							secattr);
+>>>>>>> v3.18
 =======
 							dom_entry->def.cipso,
 							secattr);
@@ -1044,11 +1144,15 @@ socket_setattr_return:
 void netlbl_sock_delattr(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (sk->sk_family) {
 	case AF_INET:
 		cipso_v4_sock_delattr(sk);
 		break;
 	}
+=======
+	cipso_v4_sock_delattr(sk);
+>>>>>>> v3.18
 =======
 	cipso_v4_sock_delattr(sk);
 >>>>>>> v3.18
@@ -1106,7 +1210,11 @@ int netlbl_conn_setattr(struct sock *sk,
 	int ret_val;
 	struct sockaddr_in *addr4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netlbl_domaddr4_map *af4_entry;
+=======
+	struct netlbl_dommap_def *entry;
+>>>>>>> v3.18
 =======
 	struct netlbl_dommap_def *entry;
 >>>>>>> v3.18
@@ -1115,6 +1223,7 @@ int netlbl_conn_setattr(struct sock *sk,
 	switch (addr->sa_family) {
 	case AF_INET:
 		addr4 = (struct sockaddr_in *)addr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		af4_entry = netlbl_domhsh_getentry_af4(secattr->domain,
 						       addr4->sin_addr.s_addr);
@@ -1128,6 +1237,8 @@ int netlbl_conn_setattr(struct sock *sk,
 						   af4_entry->type_def.cipsov4,
 						   secattr);
 =======
+=======
+>>>>>>> v3.18
 		entry = netlbl_domhsh_getentry_af4(secattr->domain,
 						   addr4->sin_addr.s_addr);
 		if (entry == NULL) {
@@ -1138,6 +1249,9 @@ int netlbl_conn_setattr(struct sock *sk,
 		case NETLBL_NLTYPE_CIPSOV4:
 			ret_val = cipso_v4_sock_setattr(sk,
 							entry->cipso, secattr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case NETLBL_NLTYPE_UNLABELED:
@@ -1181,6 +1295,7 @@ int netlbl_req_setattr(struct request_sock *req,
 {
 	int ret_val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netlbl_dom_map *dom_entry;
 	struct netlbl_domaddr4_map *af4_entry;
 	u32 proto_type;
@@ -1212,6 +1327,8 @@ int netlbl_req_setattr(struct request_sock *req,
 		case NETLBL_NLTYPE_CIPSOV4:
 			ret_val = cipso_v4_req_setattr(req, proto_cv4, secattr);
 =======
+=======
+>>>>>>> v3.18
 	struct netlbl_dommap_def *entry;
 
 	rcu_read_lock();
@@ -1227,6 +1344,9 @@ int netlbl_req_setattr(struct request_sock *req,
 		case NETLBL_NLTYPE_CIPSOV4:
 			ret_val = cipso_v4_req_setattr(req,
 						       entry->cipso, secattr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case NETLBL_NLTYPE_UNLABELED:
@@ -1266,11 +1386,15 @@ req_setattr_return:
 void netlbl_req_delattr(struct request_sock *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (req->rsk_ops->family) {
 	case AF_INET:
 		cipso_v4_req_delattr(req);
 		break;
 	}
+=======
+	cipso_v4_req_delattr(req);
+>>>>>>> v3.18
 =======
 	cipso_v4_req_delattr(req);
 >>>>>>> v3.18
@@ -1294,7 +1418,11 @@ int netlbl_skbuff_setattr(struct sk_buff *skb,
 	int ret_val;
 	struct iphdr *hdr4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netlbl_domaddr4_map *af4_entry;
+=======
+	struct netlbl_dommap_def *entry;
+>>>>>>> v3.18
 =======
 	struct netlbl_dommap_def *entry;
 >>>>>>> v3.18
@@ -1303,6 +1431,7 @@ int netlbl_skbuff_setattr(struct sk_buff *skb,
 	switch (family) {
 	case AF_INET:
 		hdr4 = ip_hdr(skb);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		af4_entry = netlbl_domhsh_getentry_af4(secattr->domain,
 						       hdr4->daddr);
@@ -1316,6 +1445,8 @@ int netlbl_skbuff_setattr(struct sk_buff *skb,
 						   af4_entry->type_def.cipsov4,
 						   secattr);
 =======
+=======
+>>>>>>> v3.18
 		entry = netlbl_domhsh_getentry_af4(secattr->domain,hdr4->daddr);
 		if (entry == NULL) {
 			ret_val = -ENOENT;
@@ -1325,6 +1456,9 @@ int netlbl_skbuff_setattr(struct sk_buff *skb,
 		case NETLBL_NLTYPE_CIPSOV4:
 			ret_val = cipso_v4_skbuff_setattr(skb, entry->cipso,
 							  secattr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case NETLBL_NLTYPE_UNLABELED:

@@ -45,6 +45,7 @@
 #define R6XX_MAX_PIPES_MASK			0xff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PTE flags */
 #define PTE_VALID				(1 << 0)
 #define PTE_SYSTEM				(1 << 1)
@@ -52,6 +53,8 @@
 #define PTE_READABLE				(1 << 5)
 #define PTE_WRITEABLE				(1 << 6)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* tiling bits */
@@ -306,18 +309,27 @@
 #define		SOFT_RESET_CP					(1<<0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	CG_THERMAL_CTRL					0x7F0
 #define		DIG_THERM_DPM(x)			((x) << 12)
 #define		DIG_THERM_DPM_MASK			0x000FF000
 #define		DIG_THERM_DPM_SHIFT			12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	CG_THERMAL_STATUS				0x7F4
 #define		ASIC_T(x)			        ((x) << 0)
 #define		ASIC_T_MASK			        0x1FF
 #define		ASIC_T_SHIFT			        0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	CG_THERMAL_INT					0x7F8
 #define		DIG_THERM_INTH(x)			((x) << 8)
 #define		DIG_THERM_INTH_MASK			0x0000FF00
@@ -329,6 +341,9 @@
 #define 	THERM_INT_MASK_LOW			(1 << 25)
 
 #define	RV770_CG_THERMAL_INT				0x734
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	HDP_HOST_PATH_CNTL				0x2C00
@@ -340,6 +355,10 @@
 #define HDP_DEBUG1                                      0x2F34
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_CONFIG					0x2000
+>>>>>>> v3.18
 =======
 #define MC_CONFIG					0x2000
 >>>>>>> v3.18
@@ -348,7 +367,11 @@
 #define	MC_VM_AGP_BASE					0x218C
 #define MC_VM_FB_LOCATION				0x2180
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MC_VM_L1_TLB_MCD_RD_A_CNTL			0x219C
+=======
+#define MC_VM_L1_TLB_MCB_RD_UVD_CNTL			0x2124
+>>>>>>> v3.18
 =======
 #define MC_VM_L1_TLB_MCB_RD_UVD_CNTL			0x2124
 >>>>>>> v3.18
@@ -372,6 +395,10 @@
 #define		EFFECTIVE_L1_QUEUE_SIZE_MASK			0x00038000
 #define		EFFECTIVE_L1_QUEUE_SIZE_SHIFT			15
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_VM_L1_TLB_MCD_RD_A_CNTL			0x219C
+>>>>>>> v3.18
 =======
 #define MC_VM_L1_TLB_MCD_RD_A_CNTL			0x219C
 >>>>>>> v3.18
@@ -382,6 +409,10 @@
 #define MC_VM_L1_TLB_MCB_RD_SEM_CNTL			0x220C
 #define	MC_VM_L1_TLB_MCB_RD_SYS_CNTL			0x2200
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_VM_L1_TLB_MCB_WR_UVD_CNTL			0x212c
+>>>>>>> v3.18
 =======
 #define MC_VM_L1_TLB_MCB_WR_UVD_CNTL			0x212c
 >>>>>>> v3.18
@@ -399,6 +430,11 @@
 #define MC_VM_SYSTEM_APERTURE_DEFAULT_ADDR		0x2198
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RS_DQ_RD_RET_CONF				0x2348
+
+>>>>>>> v3.18
 =======
 #define RS_DQ_RD_RET_CONF				0x2348
 
@@ -633,6 +669,10 @@
 
 #define	WAIT_UNTIL					0x8040
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define         WAIT_CP_DMA_IDLE_bit                            (1 << 8)
+>>>>>>> v3.18
 =======
 #define         WAIT_CP_DMA_IDLE_bit                            (1 << 8)
 >>>>>>> v3.18
@@ -734,11 +774,16 @@
 #define RLC_UCODE_DATA                                    0x3f30
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* new for TN */
 #define TN_RLC_SAVE_AND_RESTORE_BASE                      0x3f10
 #define TN_RLC_CLEAR_STATE_RESTORE_BASE                   0x3f20
 
 #define SRBM_SOFT_RESET                                   0xe60
+=======
+#define SRBM_SOFT_RESET                                   0xe60
+#       define SOFT_RESET_BIF                             (1 << 1)
+>>>>>>> v3.18
 =======
 #define SRBM_SOFT_RESET                                   0xe60
 #       define SOFT_RESET_BIF                             (1 << 1)
@@ -749,13 +794,19 @@
 #       define RV770_SOFT_RESET_DMA                       (1 << 20)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BIF_SCRATCH0                                      0x5438
 
 #define BUS_CNTL                                          0x5420
 #       define BIOS_ROM_DIS                               (1 << 1)
 #       define VGA_COHE_SPEC_TIMER_DIS                    (1 << 9)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CP_INT_CNTL                                       0xc124
 #       define CNTX_BUSY_INT_ENABLE                       (1 << 19)
@@ -974,7 +1025,10 @@
 #       define SELECTABLE_DEEMPHASIS                      (1 << 6)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Audio */
 #define AZ_HOT_PLUG_CONTROL               0x7300
 #       define AZ_FORCE_CODEC_WAKE        (1 << 0)
@@ -992,6 +1046,9 @@
 #       define PIN2_AUDIO_ENABLED         (1 << 26)
 #       define PIN3_AUDIO_ENABLED         (1 << 27)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Audio clocks DCE 2.0/3.0 */
 #define AUDIO_DTO                         0x7340
@@ -1005,6 +1062,12 @@
 #       define DTO_LOAD                   (1 << 31)
 #define DCCG_AUDIO_DTO0_CNTL              0x0520
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO(x) (((x) & 7) << 0)
+#       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO_MASK 7
+#       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO_SHIFT 0
+>>>>>>> v3.18
 =======
 #       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO(x) (((x) & 7) << 0)
 #       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO_MASK 7
@@ -1035,7 +1098,10 @@
 #define DIG1_CNTL                        0x79a0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AZ_F0_CODEC_PIN0_CONTROL_CHANNEL_SPEAKER          0x71bc
 #define		SPEAKER_ALLOCATION(x)			(((x) & 0x7f) << 0)
 #define		SPEAKER_ALLOCATION_MASK			(0x7f << 0)
@@ -1072,6 +1138,9 @@
  * bit6 = 192 kHz
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* rs6xx/rs740 and r6xx share the same HDMI blocks, however, rs6xx has only one
  * instance of the blocks while r6xx has 2.  DCE 3.0 cards are slightly
@@ -1100,15 +1169,21 @@
 #       define HDMI0_AUDIO_SAMPLE_SEND  (1 << 0)
 #       define HDMI0_AUDIO_DELAY_EN(x)  (((x) & 3) << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define HDMI0_AUDIO_SEND_MAX_PACKETS  (1 << 8)
 #       define HDMI0_AUDIO_TEST_EN         (1 << 12)
 #       define HDMI0_AUDIO_PACKETS_PER_LINE(x)  (((x) & 0x1f) << 16)
 =======
+=======
+>>>>>>> v3.18
 #       define HDMI0_AUDIO_DELAY_EN_MASK	(3 << 4)
 #       define HDMI0_AUDIO_SEND_MAX_PACKETS  (1 << 8)
 #       define HDMI0_AUDIO_TEST_EN         (1 << 12)
 #       define HDMI0_AUDIO_PACKETS_PER_LINE(x)  (((x) & 0x1f) << 16)
 #       define HDMI0_AUDIO_PACKETS_PER_LINE_MASK	(0x1f << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #       define HDMI0_AUDIO_CHANNEL_SWAP    (1 << 24)
 #       define HDMI0_60958_CS_UPDATE       (1 << 26)
@@ -1117,6 +1192,10 @@
 #define HDMI0_AUDIO_CRC_CONTROL      0x740c
 #       define HDMI0_AUDIO_CRC_EN    (1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DCE3_HDMI0_ACR_PACKET_CONTROL	0x740c
+>>>>>>> v3.18
 =======
 #define DCE3_HDMI0_ACR_PACKET_CONTROL	0x740c
 >>>>>>> v3.18
@@ -1130,7 +1209,11 @@
 #       define HDMI0_AUDIO_INFO_SEND (1 << 4)
 #       define HDMI0_AUDIO_INFO_CONT (1 << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define HDMI0_AUDIO_INFO_SOURCE (1 << 6) /* 0 - sound block; 1 - hmdi regs */
+=======
+#       define HDMI0_AUDIO_INFO_SOURCE (1 << 6) /* 0 - sound block; 1 - hdmi regs */
+>>>>>>> v3.18
 =======
 #       define HDMI0_AUDIO_INFO_SOURCE (1 << 6) /* 0 - sound block; 1 - hdmi regs */
 >>>>>>> v3.18
@@ -1141,7 +1224,13 @@
 #define HDMI0_INFOFRAME_CONTROL1     0x7418
 #       define HDMI0_AVI_INFO_LINE(x)  (((x) & 0x3f) << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define HDMI0_AUDIO_INFO_LINE(x)  (((x) & 0x3f) << 8)
+=======
+#       define HDMI0_AVI_INFO_LINE_MASK		(0x3f << 0)
+#       define HDMI0_AUDIO_INFO_LINE(x)  (((x) & 0x3f) << 8)
+#       define HDMI0_AUDIO_INFO_LINE_MASK	(0x3f << 8)
+>>>>>>> v3.18
 =======
 #       define HDMI0_AVI_INFO_LINE_MASK		(0x3f << 0)
 #       define HDMI0_AUDIO_INFO_LINE(x)  (((x) & 0x3f) << 8)
@@ -1156,7 +1245,13 @@
 #       define HDMI0_GENERIC1_CONT   (1 << 5)
 #       define HDMI0_GENERIC0_LINE(x)  (((x) & 0x3f) << 16)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define HDMI0_GENERIC1_LINE(x)  (((x) & 0x3f) << 24)
+=======
+#       define HDMI0_GENERIC0_LINE_MASK		(0x3f << 16)
+#       define HDMI0_GENERIC1_LINE(x)  (((x) & 0x3f) << 24)
+#       define HDMI0_GENERIC1_LINE_MASK		(0x3f << 24)
+>>>>>>> v3.18
 =======
 #       define HDMI0_GENERIC0_LINE_MASK		(0x3f << 16)
 #       define HDMI0_GENERIC1_LINE(x)  (((x) & 0x3f) << 24)
@@ -1218,6 +1313,7 @@
 #define HDMI0_ACR_32_0               0x74ac
 #       define HDMI0_ACR_CTS_32(x)   (((x) & 0xfffff) << 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HDMI0_ACR_32_1               0x74b0
 #       define HDMI0_ACR_N_32(x)   (((x) & 0xfffff) << 0)
 #define HDMI0_ACR_44_0               0x74b4
@@ -1229,6 +1325,8 @@
 #define HDMI0_ACR_48_1               0x74c0
 #       define HDMI0_ACR_N_48(x)   (((x) & 0xfffff) << 0)
 =======
+=======
+>>>>>>> v3.18
 #       define HDMI0_ACR_CTS_32_MASK		(0xfffff << 12)
 #define HDMI0_ACR_32_1               0x74b0
 #       define HDMI0_ACR_N_32(x)   (((x) & 0xfffff) << 0)
@@ -1245,6 +1343,9 @@
 #define HDMI0_ACR_48_1               0x74c0
 #       define HDMI0_ACR_N_48(x)   (((x) & 0xfffff) << 0)
 #       define HDMI0_ACR_N_48_MASK		(0xfffff << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define HDMI0_ACR_STATUS_0           0x74c4
 #define HDMI0_ACR_STATUS_1           0x74c8
@@ -1266,13 +1367,19 @@
 #       define HDMI0_60958_CS_SOURCE_NUMBER(x)      (((x) & 0xf) << 16)
 #       define HDMI0_60958_CS_CHANNEL_NUMBER_L(x)   (((x) & 0xf) << 20)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define HDMI0_60958_CS_SAMPLING_FREQUENCY(x) (((x) & 0xf) << 24)
 #       define HDMI0_60958_CS_CLOCK_ACCURACY(x)     (((x) & 3) << 28)
 =======
+=======
+>>>>>>> v3.18
 #       define HDMI0_60958_CS_CHANNEL_NUMBER_L_MASK	(0xf << 20)
 #       define HDMI0_60958_CS_SAMPLING_FREQUENCY(x) (((x) & 0xf) << 24)
 #       define HDMI0_60958_CS_CLOCK_ACCURACY(x)     (((x) & 3) << 28)
 #       define HDMI0_60958_CS_CLOCK_ACCURACY_MASK	(3 << 28)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define HDMI0_60958_1                0x74d8
 #       define HDMI0_60958_CS_WORD_LENGTH(x)        (((x) & 0xf) << 0)
@@ -1281,6 +1388,10 @@
 #       define HDMI0_60958_CS_VALID_R(x)   (((x) & 1) << 18)
 #       define HDMI0_60958_CS_CHANNEL_NUMBER_R(x)   (((x) & 0xf) << 20)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define HDMI0_60958_CS_CHANNEL_NUMBER_R_MASK	(0xf << 20)
+>>>>>>> v3.18
 =======
 #       define HDMI0_60958_CS_CHANNEL_NUMBER_R_MASK	(0xf << 20)
 >>>>>>> v3.18
@@ -1295,6 +1406,10 @@
 #       define HDMI0_ACR_SOURCE      (1 << 8) /* 0 - hw; 1 - cts value */
 #       define HDMI0_ACR_AUTO_SEND   (1 << 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DCE3_HDMI0_AUDIO_CRC_CONTROL	0x74dc
+>>>>>>> v3.18
 =======
 #define DCE3_HDMI0_AUDIO_CRC_CONTROL	0x74dc
 >>>>>>> v3.18
@@ -1339,7 +1454,10 @@
 #       define AFMT_AZ_AUDIO_ENABLE_CHG_ACK  (1 << 30)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DCE3 FMT blocks */
 #define FMT_CONTROL                          0x6700
 #       define FMT_PIXEL_ENCODING            (1 << 16)
@@ -1581,6 +1699,9 @@
 #       define RSP_TYPE_MASK                              0xf0
 #       define RSP_TYPE_SHIFT                             4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * UVD
@@ -1602,6 +1723,10 @@
 #define UVD_LMI_CTRL2					0xf4f4
 #define UVD_MASTINT_EN					0xf500
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UVD_FW_START					0xf51C
+>>>>>>> v3.18
 =======
 #define UVD_FW_START					0xf51C
 >>>>>>> v3.18
@@ -1618,7 +1743,10 @@
 #define UVD_MPC_SET_ALU					0xf5f8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define UVD_VCPU_CACHE_OFFSET0				0xf608
 #define UVD_VCPU_CACHE_SIZE0				0xf60c
 #define UVD_VCPU_CACHE_OFFSET1				0xf610
@@ -1626,6 +1754,9 @@
 #define UVD_VCPU_CACHE_OFFSET2				0xf618
 #define UVD_VCPU_CACHE_SIZE2				0xf61c
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UVD_VCPU_CNTL					0xf660
 #define UVD_SOFT_RESET					0xf680
@@ -1657,10 +1788,13 @@
 #define UVD_CONTEXT_ID					0xf6f4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #	define UPLL_CTLREQ_MASK				0x00000008
 #	define UPLL_CTLACK_MASK				0x40000000
 #	define UPLL_CTLACK2_MASK			0x80000000
 =======
+=======
+>>>>>>> v3.18
 /* rs780 only */
 #define	GFX_MACRO_BYPASS_CNTL				0x30c0
 #define		SPLL_BYPASS_CNTL			(1 << 0)
@@ -1690,6 +1824,9 @@
 #	define VCLK_SRC_SEL_MASK			0x01F00000
 #	define DCLK_SRC_SEL(x)				((x) << 25)
 #	define DCLK_SRC_SEL_MASK			0x3E000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1762,6 +1899,10 @@
 #              define PACKET3_CP_DMA_CMD_SAIC      (1 << 28)
 #              define PACKET3_CP_DMA_CMD_DAIC      (1 << 29)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	PACKET3_PFP_SYNC_ME				0x42 /* r7xx+ only */
+>>>>>>> v3.18
 =======
 #define	PACKET3_PFP_SYNC_ME				0x42 /* r7xx+ only */
 >>>>>>> v3.18

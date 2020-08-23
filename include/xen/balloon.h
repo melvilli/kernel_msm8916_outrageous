@@ -30,6 +30,12 @@ int alloc_xenballooned_pages(int nr_pages, struct page **pages,
 void free_xenballooned_pages(int nr_pages, struct page **pages);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct page *get_balloon_scratch_page(void);
+void put_balloon_scratch_page(void);
+
+>>>>>>> v3.18
 =======
 struct page *get_balloon_scratch_page(void);
 void put_balloon_scratch_page(void);

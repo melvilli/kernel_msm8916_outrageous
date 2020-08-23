@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/pcmda12.c
     Driver for Winsystems PC-104 based PCM-D/A-12 8-channel AO board.
 
@@ -149,6 +150,8 @@ static int ao_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	return i;
 =======
+=======
+>>>>>>> v3.18
  * pcmda12.c
  * Driver for Winsystems PC-104 based PCM-D/A-12 8-channel AO board.
  *
@@ -270,6 +273,9 @@ static void pcmda12_ao_reset(struct comedi_device *dev,
 	}
 	/* Initiate transfer by reading one of the AO registers. */
 	inb(dev->iobase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -281,6 +287,7 @@ static int pcmda12_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], IOSIZE);
 	if (ret)
 		return ret;
@@ -290,6 +297,8 @@ static int pcmda12_attach(struct comedi_device *dev,
 		return -ENOMEM;
 	dev->private = devpriv;
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_request_region(dev, it->options[0], 0x10);
 	if (ret)
 		return ret;
@@ -297,6 +306,9 @@ static int pcmda12_attach(struct comedi_device *dev,
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	devpriv->simultaneous_xfer_mode = it->options[1];
@@ -306,6 +318,7 @@ static int pcmda12_attach(struct comedi_device *dev,
 		return ret;
 
 	s = &dev->subdevices[0];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s->private = NULL;
 	s->maxdata = (0x1 << BITS) - 1;
@@ -320,6 +333,8 @@ static int pcmda12_attach(struct comedi_device *dev,
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	s->type		= COMEDI_SUBD_AO;
 	s->subdev_flags	= SDF_READABLE | SDF_WRITABLE;
 	s->n_chan	= 8;
@@ -335,6 +350,9 @@ static int pcmda12_attach(struct comedi_device *dev,
 	pcmda12_ao_reset(dev, s);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

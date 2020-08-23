@@ -31,10 +31,13 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 icache_policy(void)
 {
 	return (read_cpuid_cachetype() >> CTR_L1IP_SHIFT) & CTR_L1IP_MASK;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 
 #define CTR_L1IP(ctr)	(((ctr) >> CTR_L1IP_SHIFT) & CTR_L1IP_MASK)
@@ -62,6 +65,9 @@ static inline int icache_get_linesize(void)
 static inline int icache_get_numsets(void)
 {
 	return 1 + CCSIDR_EL1_NUMSETS(icache_get_ccsidr());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -72,7 +78,11 @@ static inline int icache_get_numsets(void)
 static inline int icache_is_aliasing(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return icache_policy() != ICACHE_POLICY_PIPT;
+=======
+	return test_bit(ICACHEF_ALIASING, &__icache_flags);
+>>>>>>> v3.18
 =======
 	return test_bit(ICACHEF_ALIASING, &__icache_flags);
 >>>>>>> v3.18
@@ -81,7 +91,11 @@ static inline int icache_is_aliasing(void)
 static inline int icache_is_aivivt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return icache_policy() == ICACHE_POLICY_AIVIVT;
+=======
+	return test_bit(ICACHEF_AIVIVT, &__icache_flags);
+>>>>>>> v3.18
 =======
 	return test_bit(ICACHEF_AIVIVT, &__icache_flags);
 >>>>>>> v3.18

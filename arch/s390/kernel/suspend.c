@@ -10,16 +10,22 @@
 #include <linux/suspend.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/sections.h>
 #include <asm/ctl_reg.h>
 #include <asm/ipl.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/ctl_reg.h>
 #include <asm/ipl.h>
 #include <asm/cio.h>
 #include <asm/pci.h>
 #include <asm/sections.h>
 #include "entry.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -145,8 +151,11 @@ int pfn_is_nosave(unsigned long pfn)
 	unsigned long nosave_begin_pfn = PFN_DOWN(__pa(&__nosave_begin));
 	unsigned long nosave_end_pfn = PFN_DOWN(__pa(&__nosave_end));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long eshared_pfn = PFN_DOWN(__pa(&_eshared)) - 1;
 	unsigned long stext_pfn = PFN_DOWN(__pa(&_stext));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -157,8 +166,11 @@ int pfn_is_nosave(unsigned long pfn)
 		return 1;
 	/* Skip memory holes and read-only pages (NSS, DCSS, ...). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pfn >= stext_pfn && pfn <= eshared_pfn)
 		return ipl_info.type == IPL_TYPE_NSS ? 1 : 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (tprot(PFN_PHYS(pfn)))
@@ -228,7 +240,10 @@ void restore_processor_state(void)
 	local_mcck_enable();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Called at the end of swsusp_arch_resume */
 void s390_early_resume(void)
@@ -237,4 +252,7 @@ void s390_early_resume(void)
 	channel_subsystem_reinit();
 	zpci_rescan();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

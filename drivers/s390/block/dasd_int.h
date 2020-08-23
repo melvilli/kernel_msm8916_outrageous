@@ -176,6 +176,10 @@ struct dasd_ccw_req {
 	struct dasd_device *memdev;	/* the device used to allocate this */
 	struct dasd_device *startdev;	/* device the request is started on */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dasd_device *basedev;	/* base device if no block->base */
+>>>>>>> v3.18
 =======
 	struct dasd_device *basedev;	/* base device if no block->base */
 >>>>>>> v3.18
@@ -229,6 +233,11 @@ struct dasd_ccw_req {
 #define DASD_EXPIRES	  300
 #define DASD_EXPIRES_MAX  40000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DASD_RETRIES	  256
+#define DASD_RETRIES_MAX  32768
+>>>>>>> v3.18
 =======
 #define DASD_RETRIES	  256
 #define DASD_RETRIES_MAX  32768
@@ -312,7 +321,11 @@ struct dasd_discipline {
 	int (*basic_to_ready) (struct dasd_device *);
 	int (*online_to_ready) (struct dasd_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*ready_to_basic)  (struct dasd_device *);
+=======
+	int (*basic_to_known)(struct dasd_device *);
+>>>>>>> v3.18
 =======
 	int (*basic_to_known)(struct dasd_device *);
 >>>>>>> v3.18
@@ -333,7 +346,11 @@ struct dasd_discipline {
 	void (*handle_terminated_request) (struct dasd_ccw_req *);
 	int (*format_device) (struct dasd_device *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct format_data_t *);
+=======
+			      struct format_data_t *, int enable_pav);
+>>>>>>> v3.18
 =======
 			      struct format_data_t *, int enable_pav);
 >>>>>>> v3.18
@@ -372,6 +389,10 @@ struct dasd_discipline {
 	int (*get_uid) (struct dasd_device *, struct dasd_uid *);
 	void (*kick_validate) (struct dasd_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*check_attention)(struct dasd_device *, __u8);
+>>>>>>> v3.18
 =======
 	int (*check_attention)(struct dasd_device *, __u8);
 >>>>>>> v3.18
@@ -401,11 +422,17 @@ struct dasd_path {
 	__u8 ppm;
 	__u8 npm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* paths that are not used because of a special condition */
 	__u8 cablepm; /* miss-cabled */
 	__u8 hpfpm;   /* the HPF requirements of the other paths are not met */
 	__u8 cuirpm;  /* CUIR varied offline */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -495,6 +522,12 @@ struct dasd_device {
 	/* default expiration time in s */
 	unsigned long default_expires;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long default_retries;
+
+	unsigned long blk_timeout;
+>>>>>>> v3.18
 =======
 	unsigned long default_retries;
 
@@ -530,12 +563,18 @@ struct dasd_block {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 struct dasd_attention_data {
 	struct dasd_device *device;
 	__u8 lpum;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* reasons why device (ccw_device_start) was stopped */
@@ -561,12 +600,18 @@ struct dasd_attention_data {
 #define DASD_FLAG_SAFE_OFFLINE	10	/* safe offline processing requested*/
 #define DASD_FLAG_SAFE_OFFLINE_RUNNING	11	/* safe offline running */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define DASD_FLAG_ABORTALL	12	/* Abort all noretry requests */
 
 #define DASD_SLEEPON_START_TAG	((void *) 1)
 #define DASD_SLEEPON_END_TAG	((void *) 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void dasd_put_device_wake(struct dasd_device *);
@@ -709,6 +754,11 @@ struct dasd_block *dasd_alloc_block(void);
 void dasd_free_block(struct dasd_block *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+enum blk_eh_timer_return dasd_times_out(struct request *req);
+
+>>>>>>> v3.18
 =======
 enum blk_eh_timer_return dasd_times_out(struct request *req);
 

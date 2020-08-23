@@ -16,7 +16,10 @@ obj-$(CONFIG_USB_SERIAL_BELKIN)			+= belkin_sa.o
 obj-$(CONFIG_USB_SERIAL_CH341)			+= ch341.o
 obj-$(CONFIG_USB_SERIAL_CP210X)			+= cp210x.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_SERIAL_CSVT)			+= csvt.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_USB_SERIAL_CYBERJACK)		+= cyberjack.o
@@ -29,9 +32,13 @@ obj-$(CONFIG_USB_SERIAL_EMPEG)			+= empeg.o
 obj-$(CONFIG_USB_SERIAL_F81232)			+= f81232.o
 obj-$(CONFIG_USB_SERIAL_FTDI_SIO)		+= ftdi_sio.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_SERIAL_FUNSOFT)		+= funsoft.o
 obj-$(CONFIG_USB_SERIAL_GARMIN)			+= garmin_gps.o
 obj-$(CONFIG_USB_SERIAL_HP4X)			+= hp4x.o
+=======
+obj-$(CONFIG_USB_SERIAL_GARMIN)			+= garmin_gps.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_SERIAL_GARMIN)			+= garmin_gps.o
 >>>>>>> v3.18
@@ -48,7 +55,11 @@ obj-$(CONFIG_USB_SERIAL_METRO)			+= metro-usb.o
 obj-$(CONFIG_USB_SERIAL_MOS7720)		+= mos7720.o
 obj-$(CONFIG_USB_SERIAL_MOS7840)		+= mos7840.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_SERIAL_MOTOROLA)		+= moto_modem.o
+=======
+obj-$(CONFIG_USB_SERIAL_MXUPORT)		+= mxuport.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_SERIAL_MXUPORT)		+= mxuport.o
 >>>>>>> v3.18
@@ -63,8 +74,13 @@ obj-$(CONFIG_USB_SERIAL_QUALCOMM)		+= qcserial.o
 obj-$(CONFIG_USB_SERIAL_QT2)			+= quatech2.o
 obj-$(CONFIG_USB_SERIAL_SAFE)			+= safe_serial.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_SERIAL_SIEMENS_MPI)		+= siemens_mpi.o
 obj-$(CONFIG_USB_SERIAL_SIERRAWIRELESS)		+= sierra.o
+=======
+obj-$(CONFIG_USB_SERIAL_SIERRAWIRELESS)		+= sierra.o
+obj-$(CONFIG_USB_SERIAL_SIMPLE)			+= usb-serial-simple.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_SERIAL_SIERRAWIRELESS)		+= sierra.o
 obj-$(CONFIG_USB_SERIAL_SIMPLE)			+= usb-serial-simple.o
@@ -79,10 +95,14 @@ obj-$(CONFIG_USB_SERIAL_WISHBONE)		+= wishbone-serial.o
 obj-$(CONFIG_USB_SERIAL_WHITEHEAT)		+= whiteheat.o
 obj-$(CONFIG_USB_SERIAL_XIRCOM)			+= keyspan_pda.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_SERIAL_VIVOPAY_SERIAL)		+= vivopay-serial.o
 obj-$(CONFIG_USB_SERIAL_XSENS_MT)		+= xsens_mt.o
 obj-$(CONFIG_USB_SERIAL_ZIO)			+= zio.o
 obj-$(CONFIG_USB_SERIAL_ZTE)			+= zte_ev.o
+=======
+obj-$(CONFIG_USB_SERIAL_XSENS_MT)		+= xsens_mt.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_SERIAL_XSENS_MT)		+= xsens_mt.o
 >>>>>>> v3.18

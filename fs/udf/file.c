@@ -28,7 +28,11 @@
 #include "udfdecl.h"
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -105,6 +109,7 @@ static int udf_adinicb_write_begin(struct file *file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int udf_adinicb_write_end(struct file *file,
 			struct address_space *mapping,
 			loff_t pos, unsigned len, unsigned copied,
@@ -131,6 +136,11 @@ static ssize_t udf_adinicb_direct_IO(int rw, struct kiocb *iocb,
 				     struct iov_iter *iter,
 				     loff_t offset)
 >>>>>>> v3.18
+=======
+static ssize_t udf_adinicb_direct_IO(int rw, struct kiocb *iocb,
+				     struct iov_iter *iter,
+				     loff_t offset)
+>>>>>>> v3.18
 {
 	/* Fallback to buffered I/O. */
 	return 0;
@@ -141,6 +151,7 @@ const struct address_space_operations udf_adinicb_aops = {
 	.writepage	= udf_adinicb_writepage,
 	.write_begin	= udf_adinicb_write_begin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write_end	= udf_adinicb_write_end,
 	.direct_IO	= udf_adinicb_direct_IO,
 };
@@ -148,11 +159,16 @@ const struct address_space_operations udf_adinicb_aops = {
 static ssize_t udf_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 				  unsigned long nr_segs, loff_t ppos)
 =======
+=======
+>>>>>>> v3.18
 	.write_end	= simple_write_end,
 	.direct_IO	= udf_adinicb_direct_IO,
 };
 
 static ssize_t udf_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	ssize_t retval;
@@ -160,14 +176,20 @@ static ssize_t udf_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	struct inode *inode = file_inode(file);
 	int err, pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t count = iocb->ki_left;
 	struct udf_inode_info *iinfo = UDF_I(inode);
 
 =======
+=======
+>>>>>>> v3.18
 	size_t count = iocb->ki_nbytes;
 	struct udf_inode_info *iinfo = UDF_I(inode);
 
 	mutex_lock(&inode->i_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	down_write(&iinfo->i_data_sem);
 	if (iinfo->i_alloc_type == ICBTAG_FLAG_AD_IN_ICB) {
@@ -175,7 +197,11 @@ static ssize_t udf_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 			pos = inode->i_size;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pos = ppos;
+=======
+			pos = iocb->ki_pos;
+>>>>>>> v3.18
 =======
 			pos = iocb->ki_pos;
 >>>>>>> v3.18
@@ -186,6 +212,10 @@ static ssize_t udf_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 			err = udf_expand_file_adinicb(inode);
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				mutex_unlock(&inode->i_mutex);
+>>>>>>> v3.18
 =======
 				mutex_unlock(&inode->i_mutex);
 >>>>>>> v3.18
@@ -203,10 +233,13 @@ static ssize_t udf_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		up_write(&iinfo->i_data_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = generic_file_aio_write(iocb, iov, nr_segs, ppos);
 	if (retval > 0)
 		mark_inode_dirty(inode);
 =======
+=======
+>>>>>>> v3.18
 	retval = __generic_file_write_iter(iocb, from);
 	mutex_unlock(&inode->i_mutex);
 
@@ -218,6 +251,9 @@ static ssize_t udf_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		if (err < 0)
 			retval = err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return retval;
@@ -280,8 +316,11 @@ out:
 static int udf_release_file(struct inode *inode, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_mode & FMODE_WRITE) {
 =======
+=======
+>>>>>>> v3.18
 	if (filp->f_mode & FMODE_WRITE &&
 	    atomic_read(&inode->i_writecount) > 1) {
 		/*
@@ -289,12 +328,19 @@ static int udf_release_file(struct inode *inode, struct file *filp)
 		 * while we are running.
 		 */
 		mutex_lock(&inode->i_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		down_write(&UDF_I(inode)->i_data_sem);
 		udf_discard_prealloc(inode);
 		udf_truncate_tail_extent(inode);
 		up_write(&UDF_I(inode)->i_data_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_unlock(&inode->i_mutex);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&inode->i_mutex);
 >>>>>>> v3.18
@@ -304,6 +350,7 @@ static int udf_release_file(struct inode *inode, struct file *filp)
 
 const struct file_operations udf_file_operations = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read			= do_sync_read,
 	.aio_read		= generic_file_aio_read,
 	.unlocked_ioctl		= udf_ioctl,
@@ -312,6 +359,8 @@ const struct file_operations udf_file_operations = {
 	.write			= do_sync_write,
 	.aio_write		= udf_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read			= new_sync_read,
 	.read_iter		= generic_file_read_iter,
 	.unlocked_ioctl		= udf_ioctl,
@@ -319,6 +368,9 @@ const struct file_operations udf_file_operations = {
 	.mmap			= generic_file_mmap,
 	.write			= new_sync_write,
 	.write_iter		= udf_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.release		= udf_release_file,
 	.fsync			= generic_file_fsync,

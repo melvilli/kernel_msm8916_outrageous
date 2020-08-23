@@ -23,7 +23,11 @@ static u64 user_addr_offset;
 #define ALIGN 4096
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void never_notify_host(struct virtqueue *vq)
+=======
+static bool never_notify_host(struct virtqueue *vq)
+>>>>>>> v3.18
 =======
 static bool never_notify_host(struct virtqueue *vq)
 >>>>>>> v3.18
@@ -70,6 +74,7 @@ struct guest_virtio_device {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void parallel_notify_host(struct virtqueue *vq)
 {
 	struct guest_virtio_device *gvdev;
@@ -82,6 +87,8 @@ static void parallel_notify_host(struct virtqueue *vq)
 static void no_notify_host(struct virtqueue *vq)
 {
 =======
+=======
+>>>>>>> v3.18
 static bool parallel_notify_host(struct virtqueue *vq)
 {
 	int rc;
@@ -98,6 +105,9 @@ static bool parallel_notify_host(struct virtqueue *vq)
 static bool no_notify_host(struct virtqueue *vq)
 {
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

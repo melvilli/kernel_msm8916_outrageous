@@ -1,7 +1,11 @@
 /*
  *    Disk Array driver for HP Smart Array SAS controllers
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Copyright 2000, 2009 Hewlett-Packard Development Company, L.P.
+=======
+ *    Copyright 2000, 2014 Hewlett-Packard Development Company, L.P.
+>>>>>>> v3.18
 =======
  *    Copyright 2000, 2014 Hewlett-Packard Development Company, L.P.
 >>>>>>> v3.18
@@ -30,6 +34,10 @@
 #define SG_ENTRIES_IN_CMD	32 /* Max SG entries excluding chain blocks */
 #define HPSA_SG_CHAIN		0x80000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HPSA_SG_LAST		0x40000000
+>>>>>>> v3.18
 =======
 #define HPSA_SG_LAST		0x40000000
 >>>>>>> v3.18
@@ -50,6 +58,11 @@
 #define CMD_TIMEOUT             0x000B
 #define CMD_UNABORTABLE		0x000C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CMD_IOACCEL_DISABLED	0x000E
+
+>>>>>>> v3.18
 =======
 #define CMD_IOACCEL_DISABLED	0x000E
 
@@ -93,8 +106,14 @@
 
 /* cdb type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TYPE_CMD				0x00
 #define TYPE_MSG				0x01
+=======
+#define TYPE_CMD		0x00
+#define TYPE_MSG		0x01
+#define TYPE_IOACCEL2_CMD	0x81 /* 0x81 is not used by hardware */
+>>>>>>> v3.18
 =======
 #define TYPE_CMD		0x00
 #define TYPE_MSG		0x01
@@ -145,16 +164,22 @@
 #define DOORBELL_CTLR_RESET	0x00000004l
 #define DOORBELL_CTLR_RESET2	0x00000020l
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define CFGTBL_Trans_Simple     0x00000002l
 #define CFGTBL_Trans_Performant 0x00000004l
 =======
+=======
+>>>>>>> v3.18
 #define DOORBELL_CLEAR_EVENTS	0x00000040l
 
 #define CFGTBL_Trans_Simple     0x00000002l
 #define CFGTBL_Trans_Performant 0x00000004l
 #define CFGTBL_Trans_io_accel1	0x00000080l
 #define CFGTBL_Trans_io_accel2	0x00000100l
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CFGTBL_Trans_use_short_tags 0x20000000l
 #define CFGTBL_Trans_enable_directed_msix (1 << 30)
@@ -164,7 +189,10 @@
 #define CFGTBL_BusType_Fibre1G  0x00000100l
 #define CFGTBL_BusType_Fibre2G  0x00000200l
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* VPD Inquiry types */
 #define HPSA_VPD_SUPPORTED_PAGES        0x00
@@ -187,6 +215,9 @@
 #define HPSA_LV_PENDING_ENCRYPTION			0x19
 #define HPSA_LV_PENDING_ENCRYPTION_REKEYING		0x1A
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct vals32 {
 	u32   lower;
@@ -216,6 +247,7 @@ struct InquiryData {
 #define HPSA_REPORT_LOG 0xc2    /* Report Logical LUNs */
 #define HPSA_REPORT_PHYS 0xc3   /* Report Physical LUNs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ReportLUNdata {
 	u8 LUNListLength[4];
 	u32 reserved;
@@ -223,6 +255,8 @@ struct ReportLUNdata {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define HPSA_REPORT_PHYS_EXTENDED 0x02
 #define HPSA_CISS_READ	0xc0	/* CISS Read */
 #define HPSA_GET_RAID_MAP 0xc8	/* CISS Get RAID Layout Map */
@@ -280,13 +314,20 @@ struct ext_report_lun_entry {
 	u32 ioaccel_handle; /* ioaccel1 only uses lower 16 bits */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ReportExtendedLUNdata {
 	u8 LUNListLength[4];
 	u8 extended_response_flag;
 	u8 reserved[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 LUN[HPSA_MAX_LUN][24];
+=======
+	struct ext_report_lun_entry LUN[HPSA_MAX_LUN];
+>>>>>>> v3.18
 =======
 	struct ext_report_lun_entry LUN[HPSA_MAX_LUN];
 >>>>>>> v3.18
@@ -305,6 +346,10 @@ struct SenseSubsystem_info {
 #define HPSA_CACHE_FLUSH 0x01	/* C2 was already being used by HPSA */
 #define BMIC_FLASH_FIRMWARE 0xF7
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BMIC_SENSE_CONTROLLER_PARAMETERS 0x64
+>>>>>>> v3.18
 =======
 #define BMIC_SENSE_CONTROLLER_PARAMETERS 0x64
 >>>>>>> v3.18
@@ -405,6 +450,11 @@ struct ErrorInfo {
 #define CMD_IOCTL_PEND  0x01
 #define CMD_SCSI	0x03
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CMD_IOACCEL1	0x04
+#define CMD_IOACCEL2	0x05
+>>>>>>> v3.18
 =======
 #define CMD_IOACCEL1	0x04
 #define CMD_IOACCEL2	0x05
@@ -429,6 +479,10 @@ struct ctlr_info; /* defined in hpsa.h */
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define COMMANDLIST_ALIGNMENT 128
+>>>>>>> v3.18
 =======
 #define COMMANDLIST_ALIGNMENT 128
 >>>>>>> v3.18
@@ -444,6 +498,7 @@ struct CommandList {
 	int			   cmd_type;
 	long			   cmdindex;
 	struct list_head list;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct request *rq;
 	struct completion *waiting;
@@ -463,6 +518,8 @@ struct CommandList {
 #define COMMANDLIST_PAD (IS_32_BIT * PAD_32 + IS_64_BIT * PAD_64)
 	u8 pad[COMMANDLIST_PAD];
 =======
+=======
+>>>>>>> v3.18
 	struct completion *waiting;
 	void   *scsi_cmd;
 } __aligned(COMMANDLIST_ALIGNMENT);
@@ -624,6 +681,9 @@ struct hpsa_tmf_struct {
 	struct vals32 abort_tag;/* cciss tag of SCSI cmd or task to abort */
 	u64 error_ptr;		/* Error Pointer */
 	u32 error_len;		/* Error Length */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -631,7 +691,11 @@ struct hpsa_tmf_struct {
 struct HostWrite {
 	u32 TransportRequest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 Reserved;
+=======
+	u32 command_pool_addr_hi;
+>>>>>>> v3.18
 =======
 	u32 command_pool_addr_hi;
 >>>>>>> v3.18
@@ -643,6 +707,12 @@ struct HostWrite {
 #define PERFORMANT_MODE 0x04
 #define MEMQ_MODE       0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IOACCEL_MODE_1  0x80
+
+#define DRIVER_SUPPORT_UA_ENABLE        0x00000001
+>>>>>>> v3.18
 =======
 #define IOACCEL_MODE_1  0x80
 
@@ -661,7 +731,13 @@ struct CfgTable {
 	u8            ServerName[16];
 	u32           HeartBeat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32           SCSI_Prefetch;
+=======
+	u32           driver_support;
+#define			ENABLE_SCSI_PREFETCH 0x100
+#define			ENABLE_UNIT_ATTN 0x01
+>>>>>>> v3.18
 =======
 	u32           driver_support;
 #define			ENABLE_SCSI_PREFETCH 0x100
@@ -682,9 +758,12 @@ struct CfgTable {
 #define			MISC_FW_DOORBELL_RESET (0x02)
 #define			MISC_FW_DOORBELL_RESET2 (0x010)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		driver_version[32];
 
 =======
+=======
+>>>>>>> v3.18
 #define			MISC_FW_RAID_OFFLOAD_BASIC (0x020)
 #define			MISC_FW_EVENT_NOTIFY (0x080)
 	u8		driver_version[32];
@@ -697,6 +776,9 @@ struct CfgTable {
 #define HPSA_EVENT_NOTIFY_ACCEL_IO_PATH_STATE_CHANGE (1 << 30)
 #define HPSA_EVENT_NOTIFY_ACCEL_IO_PATH_CONFIG_CHANGE (1 << 31)
 	u32		clear_event_notify;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -708,7 +790,11 @@ struct TransTable_struct {
 	u32            RepQCtrAddrLow32;
 	u32            RepQCtrAddrHigh32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_REPLY_QUEUES 8
+=======
+#define MAX_REPLY_QUEUES 64
+>>>>>>> v3.18
 =======
 #define MAX_REPLY_QUEUES 64
 >>>>>>> v3.18

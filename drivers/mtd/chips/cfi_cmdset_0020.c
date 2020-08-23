@@ -23,7 +23,10 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/io.h>
@@ -180,7 +183,10 @@ static struct mtd_info *cfi_staa_setup(struct map_info *map)
 
 	if (!mtd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to allocate memory for MTD device\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree(cfi->cmdset_priv);
@@ -196,7 +202,10 @@ static struct mtd_info *cfi_staa_setup(struct map_info *map)
 			* mtd->numeraseregions, GFP_KERNEL);
 	if (!mtd->eraseregions) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to allocate memory for MTD erase region info\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree(cfi->cmdset_priv);
@@ -974,7 +983,11 @@ static int cfi_staa_erase_varsize(struct mtd_info *mtd,
 
 			if (chipnum >= cfi->numchips)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18
@@ -1187,7 +1200,11 @@ static int cfi_staa_lock(struct mtd_info *mtd, loff_t ofs, uint64_t len)
 
 			if (chipnum >= cfi->numchips)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18

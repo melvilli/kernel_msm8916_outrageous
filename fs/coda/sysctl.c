@@ -15,7 +15,11 @@
 static struct ctl_table_header *fs_table_header;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table coda_table[] = {
+=======
+static struct ctl_table coda_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table coda_table[] = {
 >>>>>>> v3.18
@@ -44,7 +48,11 @@ static struct ctl_table coda_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table fs_table[] = {
+=======
+static struct ctl_table fs_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table fs_table[] = {
 >>>>>>> v3.18

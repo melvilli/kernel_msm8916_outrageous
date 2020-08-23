@@ -34,9 +34,15 @@
 #define ReadEF4Byte(_ptr)		EF4Byte(*((u32 *)(_ptr)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WriteEF1Byte(_ptr, _val)	(*((u8 *)(_ptr))) = EF1Byte(_val)
 #define WriteEF2Byte(_ptr, _val)	(*((u16 *)(_ptr))) = EF2Byte(_val)
 #define WriteEF4Byte(_ptr, _val)	(*((u32 *)(_ptr))) = EF4Byte(_val)
+=======
+#define WriteEF1Byte(_ptr, _val)	((*((u8 *)(_ptr))) = EF1Byte(_val))
+#define WriteEF2Byte(_ptr, _val)	((*((u16 *)(_ptr))) = EF2Byte(_val))
+#define WriteEF4Byte(_ptr, _val)	((*((u32 *)(_ptr))) = EF4Byte(_val))
+>>>>>>> v3.18
 =======
 #define WriteEF1Byte(_ptr, _val)	((*((u8 *)(_ptr))) = EF1Byte(_val))
 #define WriteEF2Byte(_ptr, _val)	((*((u16 *)(_ptr))) = EF2Byte(_val))
@@ -91,6 +97,7 @@
 	)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SET_BITS_TO_LE_4BYTE(__pStart, __BitOffset, __BitLen, __Value) \
 	*((u32 *)(__pStart)) = \
 	EF4Byte( \
@@ -100,6 +107,8 @@
 	);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BIT_LEN_MASK_16(__BitLen) \
@@ -119,6 +128,7 @@
 	)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LE_BITS_CLEARED_TO_2BYTE(__pStart, __BitOffset, __BitLen) \
 	( \
 	  LE_P2BYTE_TO_HOST_2BYTE(__pStart) \
@@ -134,6 +144,8 @@
 		(__BitOffset)) \
 	);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BIT_LEN_MASK_8(__BitLen) \
@@ -153,6 +165,7 @@
 	)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LE_BITS_CLEARED_TO_1BYTE(__pStart, __BitOffset, __BitLen) \
 	( \
 	  LE_P1BYTE_TO_HOST_1BYTE(__pStart) \
@@ -167,6 +180,8 @@
 		(__BitOffset))						\
 	);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define	N_BYTE_ALIGMENT(__Value, __Aligment)			\

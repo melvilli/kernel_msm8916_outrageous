@@ -89,7 +89,11 @@ NOT * support the internal Tripletalk!
 Speakup does support two other synthesizers, but because they work in
 conjunction with other software, they must be loaded as modules after
 <<<<<<< HEAD
+<<<<<<< HEAD
 their related software is loaded, and so are not available at boot up. 
+=======
+their related software is loaded, and so are not available at boot up.
+>>>>>>> v3.18
 =======
 their related software is loaded, and so are not available at boot up.
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ the bootup messages.
 Once you have booted the system, and if necessary, have supplied the
 proper bootup parameter for your synthesizer, Speakup will begin
 <<<<<<< HEAD
+<<<<<<< HEAD
 talking as soon as the kernel is loaded.  In fact, it will talk a lot! 
+=======
+talking as soon as the kernel is loaded.  In fact, it will talk a lot!
+>>>>>>> v3.18
 =======
 talking as soon as the kernel is loaded.  In fact, it will talk a lot!
 >>>>>>> v3.18
@@ -124,7 +132,11 @@ kernel, they are automatically handled properly by Speakup.  There are a
 few exceptions, but we'll come to those later.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Note:  In this guide I will refer to the numeric keypad as the keypad. 
+=======
+Note:  In this guide I will refer to the numeric keypad as the keypad.
+>>>>>>> v3.18
 =======
 Note:  In this guide I will refer to the numeric keypad as the keypad.
 >>>>>>> v3.18
@@ -156,7 +168,11 @@ You can check to see if the boot process has completed by pressing the 8
 key on the keypad, which reads the current line.  This also has the
 effect of starting Speakup talking again, so you can press keypad enter
 <<<<<<< HEAD
+<<<<<<< HEAD
 to silence it again if the boot process has not completed.  
+=======
+to silence it again if the boot process has not completed.
+>>>>>>> v3.18
 =======
 to silence it again if the boot process has not completed.
 >>>>>>> v3.18
@@ -176,7 +192,11 @@ which require root privileges.
 When you are running a program or command, Speakup will automatically
 speak new text as it arrives on the screen.  You can at any time silence
 <<<<<<< HEAD
+<<<<<<< HEAD
 the speech with keypad enter, or use any of the Speakup review keys. 
+=======
+the speech with keypad enter, or use any of the Speakup review keys.
+>>>>>>> v3.18
 =======
 the speech with keypad enter, or use any of the Speakup review keys.
 >>>>>>> v3.18
@@ -236,7 +256,11 @@ example, if you press the keypad 8 key, you will hear:
 "Keypad 8 is line, say current."
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 You'll notice that some commands do not have keys assigned to them. 
+=======
+You'll notice that some commands do not have keys assigned to them.
+>>>>>>> v3.18
 =======
 You'll notice that some commands do not have keys assigned to them.
 >>>>>>> v3.18
@@ -245,7 +269,11 @@ accessible through the sys system.  We'll discuss the sys system later
 in this manual.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 You'll also notice that some commands have two keys assigned to them. 
+=======
+You'll also notice that some commands have two keys assigned to them.
+>>>>>>> v3.18
 =======
 You'll also notice that some commands have two keys assigned to them.
 >>>>>>> v3.18
@@ -321,7 +349,11 @@ spk key_kp6 = say_to_right
  key_kpplus = say_screen
 spk key_kpplus = say_win
 <<<<<<< HEAD
+<<<<<<< HEAD
  key_kp1 = say_prev_char 
+=======
+ key_kp1 = say_prev_char
+>>>>>>> v3.18
 =======
  key_kp1 = say_prev_char
 >>>>>>> v3.18
@@ -330,7 +362,11 @@ spk key_kp1 = right_edge
 spk key_kp2 = say_to_bottom
 double key_kp2 = say_phonetic_char
 <<<<<<< HEAD
+<<<<<<< HEAD
  key_kp3 = say_next_char  
+=======
+ key_kp3 = say_next_char
+>>>>>>> v3.18
 =======
  key_kp3 = say_next_char
 >>>>>>> v3.18
@@ -391,7 +427,11 @@ As a convenience, run as root
 ln -s /sys/accessibility/speakup /speakup
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 to directly access speakup parameters from /speakup. 
+=======
+to directly access speakup parameters from /speakup.
+>>>>>>> v3.18
 =======
 to directly access speakup parameters from /speakup.
 >>>>>>> v3.18
@@ -538,7 +578,11 @@ this:
 
 cat /speakup/version
 <<<<<<< HEAD
+<<<<<<< HEAD
 Speakup v-2.00 CVS: Thu Oct 21 10:38:21 EDT 2004 
+=======
+Speakup v-2.00 CVS: Thu Oct 21 10:38:21 EDT 2004
+>>>>>>> v3.18
 =======
 Speakup v-2.00 CVS: Thu Oct 21 10:38:21 EDT 2004
 >>>>>>> v3.18
@@ -562,7 +606,11 @@ All the entries in the Speakup sys system are readable, some are
 writable by root only, and some are writable by everyone.  Unless you
 know what you are doing, you should probably leave the ones that are
 <<<<<<< HEAD
+<<<<<<< HEAD
 writable by root only alone.  Most of the names are self explanatory. 
+=======
+writable by root only alone.  Most of the names are self explanatory.
+>>>>>>> v3.18
 =======
 writable by root only alone.  Most of the names are self explanatory.
 >>>>>>> v3.18
@@ -576,7 +624,11 @@ It is possible to change to a different synthesizer while speakup is
 running.  In other words, it is not necessary to reboot the system
 in order to use a different synthesizer.  You can simply echo the
 <<<<<<< HEAD
+<<<<<<< HEAD
 synthesizer keyword to the /speakup/synth sys entry. 
+=======
+synthesizer keyword to the /speakup/synth sys entry.
+>>>>>>> v3.18
 =======
 synthesizer keyword to the /speakup/synth sys entry.
 >>>>>>> v3.18
@@ -685,7 +737,11 @@ Espeakup may already be available as a package for your distribution
 of Linux.  If it is not packaged, you need to install it manually.
 You can find it in the contrib/ subdirectory of the Speakup sources.
 <<<<<<< HEAD
+<<<<<<< HEAD
 The filename is espeakup-$VERSION.tar.bz2, where $VERSION 
+=======
+The filename is espeakup-$VERSION.tar.bz2, where $VERSION
+>>>>>>> v3.18
 =======
 The filename is espeakup-$VERSION.tar.bz2, where $VERSION
 >>>>>>> v3.18
@@ -717,7 +773,11 @@ These procedures are not described in this document.
 
 If you built Espeakup manually, the "make install" step placed the binary
 <<<<<<< HEAD
+<<<<<<< HEAD
 under /usr/bin.  
+=======
+under /usr/bin.
+>>>>>>> v3.18
 =======
 under /usr/bin.
 >>>>>>> v3.18
@@ -745,7 +805,11 @@ distribution may also have a precompiled Speech Dispatcher package.
 Once you've installed, configured, and tested Speech Dispatcher with your
 chosen software synthesizer, you still need one more piece of software
 <<<<<<< HEAD
+<<<<<<< HEAD
 in order to make things work.  You need a package called speechd-up. 
+=======
+in order to make things work.  You need a package called speechd-up.
+>>>>>>> v3.18
 =======
 in order to make things work.  You need a package called speechd-up.
 >>>>>>> v3.18
@@ -878,7 +942,11 @@ position the reading cursor on the rightmost character of the above
 url. Press the keypad slash key once again to actually cut the text
 from the screen.  Speakup will say, "cut".  Although we call this
 <<<<<<< HEAD
+<<<<<<< HEAD
 cutting, Speakup does not actually delete the cut text from the screen. 
+=======
+cutting, Speakup does not actually delete the cut text from the screen.
+>>>>>>> v3.18
 =======
 cutting, Speakup does not actually delete the cut text from the screen.
 >>>>>>> v3.18
@@ -1029,7 +1097,11 @@ you reboot, or until you load another keymap.
 One final warning.  If you try to load a partial map, you will quickly
 find that all the mappings you didn't include in your file got deleted
 <<<<<<< HEAD
+<<<<<<< HEAD
 from the working map.  Be extremely careful, and always make a backup! 
+=======
+from the working map.  Be extremely careful, and always make a backup!
+>>>>>>> v3.18
 =======
 from the working map.  Be extremely careful, and always make a backup!
 >>>>>>> v3.18

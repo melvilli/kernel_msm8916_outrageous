@@ -94,6 +94,10 @@
 #endif
 #include <linux/log2.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hash.h>
+>>>>>>> v3.18
 =======
 #include <linux/hash.h>
 >>>>>>> v3.18
@@ -134,6 +138,7 @@ static void flush_descriptor(journal_t *, struct journal_head *, int, int);
 /* Utility functions to maintain the revoke table */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Borrowed from buffer.c: this is a tried and tested block hash function */
 static inline int hash(journal_t *journal, unsigned int block)
 {
@@ -144,11 +149,16 @@ static inline int hash(journal_t *journal, unsigned int block)
 		(block >> 13) ^
 		(block << (hash_shift - 12))) & (table->hash_size - 1);
 =======
+=======
+>>>>>>> v3.18
 static inline int hash(journal_t *journal, unsigned int block)
 {
 	struct jbd_revoke_table_s *table = journal->j_revoke;
 
 	return hash_32(block, table->hash_shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -244,8 +254,12 @@ record_cache_failure:
 static struct jbd_revoke_table_s *journal_init_revoke_table(int hash_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int shift = 0;
 	int tmp = hash_size;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -256,11 +270,16 @@ static struct jbd_revoke_table_s *journal_init_revoke_table(int hash_size)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while((tmp >>= 1UL) != 0UL)
 		shift++;
 
 	table->hash_size = hash_size;
 	table->hash_shift = shift;
+=======
+	table->hash_size = hash_size;
+	table->hash_shift = ilog2(hash_size);
+>>>>>>> v3.18
 =======
 	table->hash_size = hash_size;
 	table->hash_shift = ilog2(hash_size);
@@ -274,8 +293,13 @@ static struct jbd_revoke_table_s *journal_init_revoke_table(int hash_size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (tmp = 0; tmp < hash_size; tmp++)
 		INIT_LIST_HEAD(&table->hash_table[tmp]);
+=======
+	for (i = 0; i < hash_size; i++)
+		INIT_LIST_HEAD(&table->hash_table[i]);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < hash_size; i++)
 		INIT_LIST_HEAD(&table->hash_table[i]);

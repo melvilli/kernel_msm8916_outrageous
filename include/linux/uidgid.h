@@ -18,8 +18,11 @@ struct user_namespace;
 extern struct user_namespace init_user_ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_UIDGID_STRICT_TYPE_CHECKS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct {
@@ -44,6 +47,7 @@ static inline gid_t __kgid_val(kgid_t gid)
 	return gid.val;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 
@@ -71,6 +75,11 @@ static inline gid_t __kgid_val(kgid_t gid)
 #define GLOBAL_SYSTEM_UID KUIDT_INIT(1000)
 #define GLOBAL_SYSTEM_GID KGIDT_INIT(1000)
 
+=======
+#define GLOBAL_ROOT_UID KUIDT_INIT(0)
+#define GLOBAL_ROOT_GID KGIDT_INIT(0)
+
+>>>>>>> v3.18
 =======
 #define GLOBAL_ROOT_UID KUIDT_INIT(0)
 #define GLOBAL_ROOT_GID KGIDT_INIT(0)

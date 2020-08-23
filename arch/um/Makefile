@@ -7,7 +7,10 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # select defconfig based on actual architecture
 ifeq ($(SUBARCH),x86)
   ifeq ($(shell uname -m),x86_64)
@@ -19,6 +22,9 @@ else
         KBUILD_DEFCONFIG := $(SUBARCH)_defconfig
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ARCH_DIR := arch/um
 OS := $(shell uname -s)
@@ -37,6 +43,7 @@ MODE_INCLUDE	+= -I$(srctree)/$(ARCH_DIR)/include/shared/skas
 HEADER_ARCH 	:= $(SUBARCH)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Additional ARCH settings for x86
 ifeq ($(SUBARCH),i386)
         HEADER_ARCH := x86
@@ -44,11 +51,16 @@ endif
 ifeq ($(SUBARCH),x86_64)
         HEADER_ARCH := x86
 =======
+=======
+>>>>>>> v3.18
 ifneq ($(filter $(SUBARCH),x86 x86_64 i386),)
 	HEADER_ARCH := x86
 endif
 
 ifdef CONFIG_64BIT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	KBUILD_CFLAGS += -mcmodel=large
 endif
@@ -124,8 +136,12 @@ KBUILD_KCONFIG := $(HOST_DIR)/um/Kconfig
 
 archheaders:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(Q)$(MAKE) -C '$(srctree)' KBUILD_SRC= \
 		ARCH=$(HEADER_ARCH) O='$(objtree)' archheaders
+=======
+	$(Q)$(MAKE) KBUILD_SRC= ARCH=$(HEADER_ARCH) archheaders
+>>>>>>> v3.18
 =======
 	$(Q)$(MAKE) KBUILD_SRC= ARCH=$(HEADER_ARCH) archheaders
 >>>>>>> v3.18

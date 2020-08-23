@@ -14,7 +14,11 @@ Supported chips:
 Authors:
     Wei Song (Nuvoton)
 <<<<<<< HEAD
+<<<<<<< HEAD
     Jean Delvare <khali@linux-fr.org>
+=======
+    Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
     Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

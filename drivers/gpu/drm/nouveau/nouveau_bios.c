@@ -23,8 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/bios.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <drm/drmP.h>
@@ -131,8 +134,13 @@ static int call_lvds_manufacturer_script(struct drm_device *dev, struct dcb_outp
 	/* Powerbook specific quirks */
 	if (script == LVDS_RESET &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (dev->pci_device == 0x0179 || dev->pci_device == 0x0189 ||
 	     dev->pci_device == 0x0329))
+=======
+	    (dev->pdev->device == 0x0179 || dev->pdev->device == 0x0189 ||
+	     dev->pdev->device == 0x0329))
+>>>>>>> v3.18
 =======
 	    (dev->pdev->device == 0x0179 || dev->pdev->device == 0x0189 ||
 	     dev->pdev->device == 0x0329))
@@ -226,7 +234,11 @@ int call_lvds_script(struct drm_device *dev, struct dcb_output *dcbent, int head
 
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
+=======
+	struct nvif_device *device = &drm->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 >>>>>>> v3.18
@@ -253,7 +265,11 @@ int call_lvds_script(struct drm_device *dev, struct dcb_output *dcbent, int head
 
 	/* don't let script change pll->head binding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sel_clk_binding = nv_rd32(device, NV_PRAMDAC_SEL_CLK) & 0x50000;
+=======
+	sel_clk_binding = nvif_rd32(device, NV_PRAMDAC_SEL_CLK) & 0x50000;
+>>>>>>> v3.18
 =======
 	sel_clk_binding = nvif_rd32(device, NV_PRAMDAC_SEL_CLK) & 0x50000;
 >>>>>>> v3.18
@@ -269,7 +285,11 @@ int call_lvds_script(struct drm_device *dev, struct dcb_output *dcbent, int head
 	NVWriteRAMDAC(dev, 0, NV_PRAMDAC_SEL_CLK, sel_clk | sel_clk_binding);
 	/* some scripts set a value in NV_PBUS_POWERCTRL_2 and break video overlay */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wr32(device, NV_PBUS_POWERCTRL_2, 0);
+=======
+	nvif_wr32(device, NV_PBUS_POWERCTRL_2, 0);
+>>>>>>> v3.18
 =======
 	nvif_wr32(device, NV_PBUS_POWERCTRL_2, 0);
 >>>>>>> v3.18
@@ -341,7 +361,11 @@ static int
 get_fp_strap(struct drm_device *dev, struct nvbios *bios)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
+=======
+	struct nvif_device *device = &nouveau_drm(dev)->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 >>>>>>> v3.18
@@ -359,15 +383,21 @@ get_fp_strap(struct drm_device *dev, struct nvbios *bios)
 		return NVReadVgaCrtc5758(dev, 0, 0xf) & 0xf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device->card_type >= NV_50)
 		return (nv_rd32(device, NV_PEXTDEV_BOOT_0) >> 24) & 0xf;
 	else
 		return (nv_rd32(device, NV_PEXTDEV_BOOT_0) >> 16) & 0xf;
 =======
+=======
+>>>>>>> v3.18
 	if (device->info.family >= NV_DEVICE_INFO_V0_TESLA)
 		return (nvif_rd32(device, NV_PEXTDEV_BOOT_0) >> 24) & 0xf;
 	else
 		return (nvif_rd32(device, NV_PEXTDEV_BOOT_0) >> 16) & 0xf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -668,7 +698,11 @@ int run_tmds_table(struct drm_device *dev, struct dcb_output *dcbent, int head, 
 
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
+=======
+	struct nvif_device *device = &drm->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 >>>>>>> v3.18
@@ -706,7 +740,11 @@ int run_tmds_table(struct drm_device *dev, struct dcb_output *dcbent, int head, 
 
 	/* don't let script change pll->head binding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sel_clk_binding = nv_rd32(device, NV_PRAMDAC_SEL_CLK) & 0x50000;
+=======
+	sel_clk_binding = nvif_rd32(device, NV_PRAMDAC_SEL_CLK) & 0x50000;
+>>>>>>> v3.18
 =======
 	sel_clk_binding = nvif_rd32(device, NV_PRAMDAC_SEL_CLK) & 0x50000;
 >>>>>>> v3.18
@@ -1293,7 +1331,11 @@ olddcb_table(struct drm_device *dev)
 	u8 *dcb = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type > NV_04)
+=======
+	if (drm->device.info.family > NV_DEVICE_INFO_V0_TNT)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family > NV_DEVICE_INFO_V0_TNT)
 >>>>>>> v3.18
@@ -1443,6 +1485,10 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int link = 0;
+>>>>>>> v3.18
 =======
 	int link = 0;
 >>>>>>> v3.18
@@ -1492,6 +1538,10 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 				entry->lvdsconf.use_power_scripts = true;
 			entry->lvdsconf.sor.link = (conf & 0x00000030) >> 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			link = entry->lvdsconf.sor.link;
+>>>>>>> v3.18
 =======
 			link = entry->lvdsconf.sor.link;
 >>>>>>> v3.18
@@ -1526,16 +1576,22 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 			entry->dpconf.link_bw = 162000;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			entry->dpconf.link_bw = 270000;
 			break;
 =======
+=======
+>>>>>>> v3.18
 		case 1:
 			entry->dpconf.link_bw = 270000;
 			break;
 		default:
 			entry->dpconf.link_bw = 540000;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		switch ((conf & 0x0f000000) >> 24) {
@@ -1550,6 +1606,10 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		link = entry->dpconf.sor.link;
+>>>>>>> v3.18
 =======
 		link = entry->dpconf.sor.link;
 >>>>>>> v3.18
@@ -1559,6 +1619,10 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 			entry->tmdsconf.sor.link = (conf & 0x00000030) >> 4;
 			entry->extdev = (conf & 0x0000ff00) >> 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			link = entry->tmdsconf.sor.link;
+>>>>>>> v3.18
 =======
 			link = entry->tmdsconf.sor.link;
 >>>>>>> v3.18
@@ -1568,7 +1632,10 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 		else if (dcb->version >= 0x22)
 			entry->tmdsconf.slave_addr = (conf & 0x00000070) >> 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1595,6 +1662,11 @@ parse_dcb20_entry(struct drm_device *dev, struct dcb_table *dcb,
 		entry->i2c_upper_default = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	entry->hasht = (entry->location << 4) | entry->type;
+	entry->hashm = (entry->heads << 8) | (link << 6) | entry->or;
+>>>>>>> v3.18
 =======
 	entry->hasht = (entry->location << 4) | entry->type;
 	entry->hashm = (entry->heads << 8) | (link << 6) | entry->or;
@@ -1955,9 +2027,12 @@ parse_dcb_table(struct drm_device *dev, struct nvbios *bios)
 		merge_like_dcb_entries(dev, dcb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dcb->entries)
 		return -ENXIO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* dump connector table entries to log, if any exist */
@@ -1988,7 +2063,11 @@ static int load_nv17_hwsq_ucode_entry(struct drm_device *dev, struct nvbios *bio
 
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
+=======
+	struct nvif_device *device = &drm->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 >>>>>>> v3.18
@@ -2015,7 +2094,11 @@ static int load_nv17_hwsq_ucode_entry(struct drm_device *dev, struct nvbios *bio
 
 	/* set sequencer control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wr32(device, 0x00001304, ROM32(bios->data[hwsq_entry_offset]));
+=======
+	nvif_wr32(device, 0x00001304, ROM32(bios->data[hwsq_entry_offset]));
+>>>>>>> v3.18
 =======
 	nvif_wr32(device, 0x00001304, ROM32(bios->data[hwsq_entry_offset]));
 >>>>>>> v3.18
@@ -2024,15 +2107,21 @@ static int load_nv17_hwsq_ucode_entry(struct drm_device *dev, struct nvbios *bio
 	/* write ucode */
 	for (i = 0; i < bytes_to_write; i += 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(device, 0x00001400 + i, ROM32(bios->data[hwsq_entry_offset + i + 4]));
 
 	/* twiddle NV_PBUS_DEBUG_4 */
 	nv_wr32(device, NV_PBUS_DEBUG_4, nv_rd32(device, NV_PBUS_DEBUG_4) | 0x18);
 =======
+=======
+>>>>>>> v3.18
 		nvif_wr32(device, 0x00001400 + i, ROM32(bios->data[hwsq_entry_offset + i + 4]));
 
 	/* twiddle NV_PBUS_DEBUG_4 */
 	nvif_wr32(device, NV_PBUS_DEBUG_4, nvif_rd32(device, NV_PBUS_DEBUG_4) | 0x18);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2097,7 +2186,11 @@ static bool NVInitVBIOS(struct drm_device *dev)
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_bios *bios = nouveau_bios(drm->device);
+=======
+	struct nouveau_bios *bios = nvkm_bios(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_bios *bios = nvkm_bios(&drm->device);
 >>>>>>> v3.18
@@ -2153,12 +2246,17 @@ nouveau_bios_posted(struct drm_device *dev)
 	unsigned htotal;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_50) {
 		if (NVReadVgaCrtc(dev, 0, 0x00) == 0 &&
 		    NVReadVgaCrtc(dev, 0, 0x1a) == 0)
 			return false;
 		return true;
 	}
+=======
+	if (drm->device.info.family >= NV_DEVICE_INFO_V0_TESLA)
+		return true;
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_TESLA)
 		return true;
@@ -2170,7 +2268,10 @@ nouveau_bios_posted(struct drm_device *dev)
 	htotal |= (NVReadVgaCrtc(dev, 0, 0x25) & 0x01) << 10;
 	htotal |= (NVReadVgaCrtc(dev, 0, 0x41) & 0x01) << 11;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return (htotal != 0);
@@ -2184,11 +2285,17 @@ nouveau_bios_init(struct drm_device *dev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* only relevant for PCI devices */
 	if (!dev->pdev)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!NVInitVBIOS(dev))
 		return -ENODEV;

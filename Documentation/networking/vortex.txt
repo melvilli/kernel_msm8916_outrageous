@@ -69,7 +69,11 @@ Module parameters
 There are several parameters which may be provided to the driver when
 its module is loaded.  These are usually placed in /etc/modprobe.d/*.conf
 <<<<<<< HEAD
+<<<<<<< HEAD
 configuretion files.  Example:
+=======
+configuration files.  Example:
+>>>>>>> v3.18
 =======
 configuration files.  Example:
 >>>>>>> v3.18
@@ -183,7 +187,11 @@ max_interrupt_work=N
   The driver's interrupt service routine can handle many receive and
   transmit packets in a single invocation.  It does this in a loop. 
 <<<<<<< HEAD
+<<<<<<< HEAD
   The value of max_interrupt_work governs how mnay times the interrupt
+=======
+  The value of max_interrupt_work governs how many times the interrupt
+>>>>>>> v3.18
 =======
   The value of max_interrupt_work governs how many times the interrupt
 >>>>>>> v3.18
@@ -368,7 +376,11 @@ steps you should take:
 
    You need to generate a report.  Typically this is an email to the
 <<<<<<< HEAD
+<<<<<<< HEAD
    maintainer and/or linux-net@vger.kernel.org.  The maintainer's
+=======
+   maintainer and/or netdev@vger.kernel.org.  The maintainer's
+>>>>>>> v3.18
 =======
    maintainer and/or netdev@vger.kernel.org.  The maintainer's
 >>>>>>> v3.18

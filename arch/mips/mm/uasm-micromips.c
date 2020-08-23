@@ -16,7 +16,10 @@
 #include <linux/kernel.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,7 +56,11 @@
 #include "uasm.c"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct insn insn_table_MM[] __uasminitdata = {
+=======
+static struct insn insn_table_MM[] = {
+>>>>>>> v3.18
 =======
 static struct insn insn_table_MM[] = {
 >>>>>>> v3.18
@@ -72,6 +79,10 @@ static struct insn insn_table_MM[] = {
 	{ insn_daddu, 0, 0 },
 	{ insn_daddiu, 0, 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ insn_divu, M(mm_pool32a_op, 0, 0, 0, mm_divu_op, mm_pool32axf_op), RT | RS },
+>>>>>>> v3.18
 =======
 	{ insn_divu, M(mm_pool32a_op, 0, 0, 0, mm_divu_op, mm_pool32axf_op), RT | RS },
 >>>>>>> v3.18
@@ -91,14 +102,20 @@ static struct insn insn_table_MM[] = {
 	{ insn_j, M(mm_j32_op, 0, 0, 0, 0, 0), JIMM },
 	{ insn_jal, M(mm_jal32_op, 0, 0, 0, 0, 0), JIMM },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_jr, M(mm_pool32a_op, 0, 0, 0, mm_jalr_op, mm_pool32axf_op), RS },
 	{ insn_ld, 0, 0 },
 =======
+=======
+>>>>>>> v3.18
 	{ insn_jalr, M(mm_pool32a_op, 0, 0, 0, mm_jalr_op, mm_pool32axf_op), RT | RS },
 	{ insn_jr, M(mm_pool32a_op, 0, 0, 0, mm_jalr_op, mm_pool32axf_op), RS },
 	{ insn_lb, M(mm_lb32_op, 0, 0, 0, 0, 0), RT | RS | SIMM },
 	{ insn_ld, 0, 0 },
 	{ insn_lh, M(mm_lh32_op, 0, 0, 0, 0, 0), RS | RS | SIMM },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_ll, M(mm_pool32c_op, 0, 0, (mm_ll_func << 1), 0, 0), RS | RT | SIMM },
 	{ insn_lld, 0, 0 },
@@ -106,12 +123,18 @@ static struct insn insn_table_MM[] = {
 	{ insn_lw, M(mm_lw32_op, 0, 0, 0, 0, 0), RT | RS | SIMM },
 	{ insn_mfc0, M(mm_pool32a_op, 0, 0, 0, mm_mfc0_op, mm_pool32axf_op), RT | RS | RD },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_mtc0, M(mm_pool32a_op, 0, 0, 0, mm_mtc0_op, mm_pool32axf_op), RT | RS | RD },
 =======
+=======
+>>>>>>> v3.18
 	{ insn_mfhi, M(mm_pool32a_op, 0, 0, 0, mm_mfhi32_op, mm_pool32axf_op), RS },
 	{ insn_mflo, M(mm_pool32a_op, 0, 0, 0, mm_mflo32_op, mm_pool32axf_op), RS },
 	{ insn_mtc0, M(mm_pool32a_op, 0, 0, 0, mm_mtc0_op, mm_pool32axf_op), RT | RS | RD },
 	{ insn_mul, M(mm_pool32a_op, 0, 0, 0, 0, mm_mul_op), RT | RS | RD },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_or, M(mm_pool32a_op, 0, 0, 0, 0, mm_or32_op), RT | RS | RD },
 	{ insn_ori, M(mm_ori32_op, 0, 0, 0, 0, 0), RT | RS | UIMM },
@@ -122,12 +145,15 @@ static struct insn insn_table_MM[] = {
 	{ insn_sd, 0, 0 },
 	{ insn_sll, M(mm_pool32a_op, 0, 0, 0, 0, mm_sll32_op), RT | RS | RD },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ insn_sra, M(mm_pool32a_op, 0, 0, 0, 0, mm_sra_op), RT | RS | RD },
 	{ insn_srl, M(mm_pool32a_op, 0, 0, 0, 0, mm_srl32_op), RT | RS | RD },
 	{ insn_rotr, M(mm_pool32a_op, 0, 0, 0, 0, mm_rotr_op), RT | RS | RD },
 	{ insn_subu, M(mm_pool32a_op, 0, 0, 0, 0, mm_subu32_op), RT | RS | RD },
 	{ insn_sw, M(mm_sw32_op, 0, 0, 0, 0, 0), RT | RS | SIMM },
 =======
+=======
+>>>>>>> v3.18
 	{ insn_sllv, M(mm_pool32a_op, 0, 0, 0, 0, mm_sllv32_op), RT | RS | RD },
 	{ insn_slt, M(mm_pool32a_op, 0, 0, 0, 0, mm_slt_op), RT | RS | RD },
 	{ insn_sltiu, M(mm_sltiu32_op, 0, 0, 0, 0, 0), RT | RS | SIMM },
@@ -139,12 +165,20 @@ static struct insn insn_table_MM[] = {
 	{ insn_subu, M(mm_pool32a_op, 0, 0, 0, 0, mm_subu32_op), RT | RS | RD },
 	{ insn_sw, M(mm_sw32_op, 0, 0, 0, 0, 0), RT | RS | SIMM },
 	{ insn_sync, M(mm_pool32a_op, 0, 0, 0, mm_sync_op, mm_pool32axf_op), RS },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ insn_tlbp, M(mm_pool32a_op, 0, 0, 0, mm_tlbp_op, mm_pool32axf_op), 0 },
 	{ insn_tlbr, M(mm_pool32a_op, 0, 0, 0, mm_tlbr_op, mm_pool32axf_op), 0 },
 	{ insn_tlbwi, M(mm_pool32a_op, 0, 0, 0, mm_tlbwi_op, mm_pool32axf_op), 0 },
 	{ insn_tlbwr, M(mm_pool32a_op, 0, 0, 0, mm_tlbwr_op, mm_pool32axf_op), 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ insn_wait, M(mm_pool32a_op, 0, 0, 0, mm_wait_op, mm_pool32axf_op), SCIMM },
+	{ insn_wsbh, M(mm_pool32a_op, 0, 0, 0, mm_wsbh_op, mm_pool32axf_op), RT | RS },
+>>>>>>> v3.18
 =======
 	{ insn_wait, M(mm_pool32a_op, 0, 0, 0, mm_wait_op, mm_pool32axf_op), SCIMM },
 	{ insn_wsbh, M(mm_pool32a_op, 0, 0, 0, mm_wsbh_op, mm_pool32axf_op), RT | RS },
@@ -164,7 +198,11 @@ static struct insn insn_table_MM[] = {
 #undef M
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_bimm(s32 arg)
+=======
+static inline u32 build_bimm(s32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_bimm(s32 arg)
 >>>>>>> v3.18
@@ -178,7 +216,11 @@ static inline u32 build_bimm(s32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_jimm(u32 arg)
+=======
+static inline u32 build_jimm(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_jimm(u32 arg)
 >>>>>>> v3.18
@@ -195,7 +237,11 @@ static inline u32 build_jimm(u32 arg)
  * starting with RS and ending with FUNC or IMM.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __uasminit build_insn(u32 **buf, enum opcode opc, ...)
+=======
+static void build_insn(u32 **buf, enum opcode opc, ...)
+>>>>>>> v3.18
 =======
 static void build_insn(u32 **buf, enum opcode opc, ...)
 >>>>>>> v3.18
@@ -257,7 +303,11 @@ static void build_insn(u32 **buf, enum opcode opc, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __uasminit
+=======
+static inline void
+>>>>>>> v3.18
 =======
 static inline void
 >>>>>>> v3.18

@@ -334,17 +334,23 @@ static struct wlcore_conf wl12xx_conf = {
 	},
 	.fwlog = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mode                         = WL12XX_FWLOG_ON_DEMAND,
 		.mem_blocks                   = 2,
 		.severity                     = 0,
 		.timestamp                    = WL12XX_FWLOG_TIMESTAMP_DISABLED,
 		.output                       = WL12XX_FWLOG_OUTPUT_HOST,
 =======
+=======
+>>>>>>> v3.18
 		.mode                         = WL12XX_FWLOG_CONTINUOUS,
 		.mem_blocks                   = 2,
 		.severity                     = 0,
 		.timestamp                    = WL12XX_FWLOG_TIMESTAMP_DISABLED,
 		.output                       = WL12XX_FWLOG_OUTPUT_DBG_PINS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.threshold                    = 0,
 	},
@@ -726,6 +732,12 @@ static int wl12xx_identify_chip(struct wl1271 *wl)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wl->fw_mem_block_size = 256;
+	wl->fwlog_end = 0x2000000;
+
+>>>>>>> v3.18
 =======
 	wl->fw_mem_block_size = 256;
 	wl->fwlog_end = 0x2000000;
@@ -1277,14 +1289,20 @@ static int wl12xx_boot(struct wl1271 *wl)
 		REMAIN_ON_CHANNEL_COMPLETE_EVENT_ID |
 		INACTIVE_STA_EVENT_ID |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MAX_TX_RETRY_EVENT_ID |
 		CHANNEL_SWITCH_COMPLETE_EVENT_ID;
 
 =======
+=======
+>>>>>>> v3.18
 		CHANNEL_SWITCH_COMPLETE_EVENT_ID;
 
 	wl->ap_event_mask = MAX_TX_RETRY_EVENT_ID;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = wlcore_boot_run_firmware(wl);
 	if (ret < 0)
@@ -1396,7 +1414,11 @@ static u32 wl12xx_get_rx_packet_len(struct wl1271 *wl, void *rx_data,
 static int wl12xx_tx_delayed_compl(struct wl1271 *wl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wl->fw_status_1->tx_results_counter ==
+=======
+	if (wl->fw_status->tx_results_counter ==
+>>>>>>> v3.18
 =======
 	if (wl->fw_status->tx_results_counter ==
 >>>>>>> v3.18
@@ -1460,7 +1482,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void wl12xx_convert_fw_status(struct wl1271 *wl, void *raw_fw_status,
 				     struct wl_fw_status *fw_status)
 {
@@ -1492,6 +1517,9 @@ static void wl12xx_convert_fw_status(struct wl1271 *wl, void *raw_fw_status,
 	fw_status->log_start_addr = le32_to_cpu(int_fw_status->log_start_addr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 wl12xx_sta_get_ap_rate_mask(struct wl1271 *wl,
 				       struct wl12xx_vif *wlvif)
@@ -1693,7 +1721,11 @@ static bool wl12xx_lnk_high_prio(struct wl1271 *wl, u8 hlid,
 	u8 thold;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(hlid, (unsigned long *)&wl->fw_fast_lnk_map))
+=======
+	if (test_bit(hlid, &wl->fw_fast_lnk_map))
+>>>>>>> v3.18
 =======
 	if (test_bit(hlid, &wl->fw_fast_lnk_map))
 >>>>>>> v3.18
@@ -1712,12 +1744,18 @@ static bool wl12xx_lnk_low_prio(struct wl1271 *wl, u8 hlid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 wl12xx_convert_hwaddr(struct wl1271 *wl, u32 hwaddr)
 {
 	return hwaddr << 5;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int wl12xx_setup(struct wl1271 *wl);
 
@@ -1740,6 +1778,10 @@ static struct wlcore_ops wl12xx_ops = {
 	.hw_init		= wl12xx_hw_init,
 	.init_vif		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.convert_fw_status	= wl12xx_convert_fw_status,
+>>>>>>> v3.18
 =======
 	.convert_fw_status	= wl12xx_convert_fw_status,
 >>>>>>> v3.18
@@ -1760,6 +1802,10 @@ static struct wlcore_ops wl12xx_ops = {
 	.pre_pkt_send		= NULL,
 	.set_peer_cap		= wl12xx_set_peer_cap,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.convert_hwaddr		= wl12xx_convert_hwaddr,
+>>>>>>> v3.18
 =======
 	.convert_hwaddr		= wl12xx_convert_hwaddr,
 >>>>>>> v3.18
@@ -1781,6 +1827,7 @@ static struct ieee80211_sta_ht_cap wl12xx_ht_cap = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wl12xx_setup(struct wl1271 *wl)
 {
 	struct wl12xx_priv *priv = wl->priv;
@@ -1792,6 +1839,8 @@ static int wl12xx_setup(struct wl1271 *wl)
 	wl->num_rx_desc = WL12XX_NUM_RX_DESCRIPTORS;
 	wl->num_channels = 1;
 =======
+=======
+>>>>>>> v3.18
 static const struct ieee80211_iface_limit wl12xx_iface_limits[] = {
 	{
 		.max = 3,
@@ -1831,19 +1880,28 @@ static int wl12xx_setup(struct wl1271 *wl)
 	wl->max_ap_stations = WL12XX_MAX_AP_STATIONS;
 	wl->iface_combinations = wl12xx_iface_combinations;
 	wl->n_iface_combinations = ARRAY_SIZE(wl12xx_iface_combinations);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wl->num_mac_addr = WL12XX_NUM_MAC_ADDRESSES;
 	wl->band_rate_to_idx = wl12xx_band_rate_to_idx;
 	wl->hw_tx_rate_tbl_size = WL12XX_CONF_HW_RXTX_RATE_MAX;
 	wl->hw_min_ht_rate = WL12XX_CONF_HW_RXTX_RATE_MCS0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl->fw_status_priv_len = 0;
 	wl->stats.fw_stats_len = sizeof(struct wl12xx_acx_statistics);
 =======
+=======
+>>>>>>> v3.18
 	wl->fw_status_len = sizeof(struct wl12xx_fw_status);
 	wl->fw_status_priv_len = 0;
 	wl->stats.fw_stats_len = sizeof(struct wl12xx_acx_statistics);
 	wl->ofdm_only_ap = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wlcore_set_ht_cap(wl, IEEE80211_BAND_2GHZ, &wl12xx_ht_cap);
 	wlcore_set_ht_cap(wl, IEEE80211_BAND_5GHZ, &wl12xx_ht_cap);

@@ -34,7 +34,10 @@ if DMADEVICES
 comment "DMA Devices"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTEL_MIC_X100_DMA
 	tristate "Intel MIC X100 DMA Driver"
 	depends on 64BIT && X86 && INTEL_MIC_BUS
@@ -53,6 +56,9 @@ config INTEL_MIC_X100_DMA
 	  OS and tools for MIC to use with this driver are available from
 	  <http://software.intel.com/en-us/mic-developer>.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config INTEL_MID_DMAC
 	tristate "Intel MID DMA support for Peripheral DMA controllers"
@@ -84,6 +90,10 @@ config INTEL_IOATDMA
 	depends on PCI && X86
 	select DMA_ENGINE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DMA_ENGINE_RAID
+>>>>>>> v3.18
 =======
 	select DMA_ENGINE_RAID
 >>>>>>> v3.18
@@ -104,6 +114,7 @@ config INTEL_IOP_ADMA
 	help
 	  Enable support for the Intel(R) IOP Series RAID engines.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config QCOM_SPS_DMA
 	tristate "Qualcomm technologies inc DMA driver for sps-BAM"
@@ -137,6 +148,9 @@ config DW_DMAC_BIG_ENDIAN_IO
 =======
 source "drivers/dma/dw/Kconfig"
 >>>>>>> v3.18
+=======
+source "drivers/dma/dw/Kconfig"
+>>>>>>> v3.18
 
 config AT_HDMAC
 	tristate "Atmel AHB DMA support"
@@ -147,7 +161,11 @@ config AT_HDMAC
 
 config FSL_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Freescale Elo and Elo Plus DMA support"
+=======
+	tristate "Freescale Elo series DMA support"
+>>>>>>> v3.18
 =======
 	tristate "Freescale Elo series DMA support"
 >>>>>>> v3.18
@@ -156,14 +174,20 @@ config FSL_DMA
 	select ASYNC_TX_ENABLE_CHANNEL_SWITCH
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Enable support for the Freescale Elo and Elo Plus DMA controllers.
 	  The Elo is the DMA controller on some 82xx and 83xx parts, and the
 	  Elo Plus is the DMA controller on 85xx and 86xx parts.
 =======
+=======
+>>>>>>> v3.18
 	  Enable support for the Freescale Elo series DMA controllers.
 	  The Elo is the DMA controller on some mpc82xx and mpc83xx parts, the
 	  EloPlus is on mpc85xx and mpc86xx and Pxxx parts, and the Elo3 is on
 	  some Txxx and Bxxx parts.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MPC512X_DMA
@@ -180,6 +204,10 @@ config MV_XOR
 	depends on PLAT_ORION
 	select DMA_ENGINE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DMA_ENGINE_RAID
+>>>>>>> v3.18
 =======
 	select DMA_ENGINE_RAID
 >>>>>>> v3.18
@@ -227,7 +255,10 @@ config TEGRA20_APB_DMA
 	  or vice versa. It does not support memory to memory data transfer.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config S3C24XX_DMAC
 	tristate "Samsung S3C24XX DMA support"
 	depends on ARCH_S3C24XX && !S3C24XX_DMA
@@ -240,6 +271,9 @@ config S3C24XX_DMAC
 	  The DMA controller can transfer data from memory to peripheral,
 	  periphal to memory, periphal to periphal and memory to memory.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/dma/sh/Kconfig"
 
@@ -262,6 +296,10 @@ config AMCC_PPC440SPE_ADMA
 	depends on 440SPe || 440SP
 	select DMA_ENGINE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DMA_ENGINE_RAID
+>>>>>>> v3.18
 =======
 	select DMA_ENGINE_RAID
 >>>>>>> v3.18
@@ -273,7 +311,11 @@ config AMCC_PPC440SPE_ADMA
 config TIMB_DMA
 	tristate "Timberdale FPGA DMA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MFD_TIMBERDALE || HAS_IOMEM
+=======
+	depends on MFD_TIMBERDALE
+>>>>>>> v3.18
 =======
 	depends on MFD_TIMBERDALE
 >>>>>>> v3.18
@@ -290,16 +332,22 @@ config SIRF_DMA
 
 config TI_EDMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "TI EDMA support"
 	depends on ARCH_DAVINCI
 	select DMA_ENGINE
 	select DMA_VIRTUAL_CHANNELS
 =======
+=======
+>>>>>>> v3.18
 	bool "TI EDMA support"
 	depends on ARCH_DAVINCI || ARCH_OMAP || ARCH_KEYSTONE
 	select DMA_ENGINE
 	select DMA_VIRTUAL_CHANNELS
 	select TI_PRIV_EDMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default n
 	help
@@ -321,7 +369,11 @@ config PL330_DMA
 config PCH_DMA
 	tristate "Intel EG20T PCH / LAPIS Semicon IOH(ML7213/ML7223/ML7831) DMA"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && X86
+=======
+	depends on PCI && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -343,7 +395,11 @@ config IMX_SDMA
 	help
 	  Support the i.MX SDMA engine. This engine is integrated into
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Freescale i.MX25/31/35/51/53 chips.
+=======
+	  Freescale i.MX25/31/35/51/53/6 chips.
+>>>>>>> v3.18
 =======
 	  Freescale i.MX25/31/35/51/53/6 chips.
 >>>>>>> v3.18
@@ -364,7 +420,11 @@ config MXS_DMA
 	help
 	  Support the MXS DMA engine. This engine including APBH-DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  and APBX-DMA is integrated into Freescale i.MX23/28 chips.
+=======
+	  and APBX-DMA is integrated into Freescale i.MX23/28/MX6Q/MX6DL chips.
+>>>>>>> v3.18
 =======
 	  and APBX-DMA is integrated into Freescale i.MX23/28/MX6Q/MX6DL chips.
 >>>>>>> v3.18
@@ -391,15 +451,21 @@ config MMP_TDMA
 	depends on ARCH_MMP
 	select DMA_ENGINE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
 	  Support the MMP Two-Channel DMA engine.
 	  This engine used for MMP Audio DMA and pxa910 SQU.
 =======
+=======
+>>>>>>> v3.18
 	select MMP_SRAM
 	help
 	  Support the MMP Two-Channel DMA engine.
 	  This engine used for MMP Audio DMA and pxa910 SQU.
 	  It needs sram driver under mach-mmp.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  Say Y here if you enabled MMP ADMA, otherwise say N.
@@ -411,7 +477,10 @@ config DMA_OMAP
 	select DMA_VIRTUAL_CHANNELS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DMA_BCM2835
 	tristate "BCM2835 DMA engine support"
 	depends on ARCH_BCM2835
@@ -426,6 +495,9 @@ config TI_CPPI41
 	  The Communications Port Programming Interface (CPPI) 4.1 DMA engine
 	  is currently used by the USB driver on AM335x platforms.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMP_PDMA
 	bool "MMP PDMA support"
@@ -433,8 +505,11 @@ config MMP_PDMA
 	select DMA_ENGINE
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Support the MMP PDMA engine for PXA and MMP platfrom.
 =======
+=======
+>>>>>>> v3.18
 	  Support the MMP PDMA engine for PXA and MMP platform.
 
 config DMA_JZ4740
@@ -500,6 +575,9 @@ config NBPFAXI_DMA
 	depends on ARM || COMPILE_TEST
 	help
 	  Support for "Type-AXI" NBPF DMA IPs from Renesas
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config DMA_ENGINE
@@ -516,6 +594,10 @@ config DMA_OF
 	def_bool y
 	depends on OF
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DMA_ENGINE
+>>>>>>> v3.18
 =======
 	select DMA_ENGINE
 >>>>>>> v3.18
@@ -523,6 +605,7 @@ config DMA_OF
 comment "DMA Clients"
 	depends on DMA_ENGINE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config NET_DMA
 	bool "Network: TCP receive copy offload"
@@ -536,6 +619,8 @@ config NET_DMA
 	  Say Y here if you enabled INTEL_IOATDMA or FSL_DMA, otherwise
 	  say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ASYNC_TX_DMA
@@ -557,7 +642,10 @@ config DMATEST
 	  DMA Device driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DMA_ENGINE_RAID
 	bool
 
@@ -570,5 +658,8 @@ config QCOM_BAM_DMA
 	  Enable support for the QCOM BAM DMA controller.  This controller
 	  provides DMA capabilities for a variety of on-chip devices.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

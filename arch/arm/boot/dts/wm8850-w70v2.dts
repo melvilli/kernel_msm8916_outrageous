@@ -12,6 +12,10 @@
 /dts-v1/;
 /include/ "wm8850.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/pwm/pwm.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/pwm/pwm.h>
 >>>>>>> v3.18
@@ -22,7 +26,11 @@
 	backlight {
 		compatible = "pwm-backlight";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwms = <&pwm 0 50000 1>;	/* duty inverted */
+=======
+		pwms = <&pwm 0 50000 PWM_POLARITY_INVERTED>;
+>>>>>>> v3.18
 =======
 		pwms = <&pwm 0 50000 PWM_POLARITY_INVERTED>;
 >>>>>>> v3.18
@@ -50,9 +58,15 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &uart0 {
 	status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

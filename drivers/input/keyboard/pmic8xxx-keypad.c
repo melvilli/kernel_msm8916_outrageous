@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2009-2011, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2009-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2009-2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -24,10 +28,16 @@
 #include <linux/delay.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/mfd/pm8xxx/core.h>
 #include <linux/mfd/pm8xxx/gpio.h>
 #include <linux/input/pmic8xxx-keypad.h>
+=======
+#include <linux/regmap.h>
+#include <linux/of.h>
+#include <linux/input/matrix_keypad.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 #include <linux/of.h>
@@ -96,13 +106,19 @@
 /**
  * struct pmic8xxx_kp - internal keypad data structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pdata - keypad platform data pointer
  * @input - input device pointer for keypad
 =======
+=======
+>>>>>>> v3.18
  * @num_cols - number of columns of keypad
  * @num_rows - number of row of keypad
  * @input - input device pointer for keypad
  * @regmap - regmap handle
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @key_sense_irq - key press/release irq number
  * @key_stuck_irq - key stuck notification irq number
@@ -114,13 +130,19 @@
  */
 struct pmic8xxx_kp {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pm8xxx_keypad_platform_data *pdata;
 	struct input_dev *input;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int num_rows;
 	unsigned int num_cols;
 	struct input_dev *input;
 	struct regmap *regmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int key_sense_irq;
 	int key_stuck_irq;
@@ -134,6 +156,7 @@ struct pmic8xxx_kp {
 	u8 ctrl_reg;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pmic8xxx_kp_write_u8(struct pmic8xxx_kp *kp,
 				 u8 data, u16 reg)
@@ -174,14 +197,22 @@ static int pmic8xxx_kp_read_u8(struct pmic8xxx_kp *kp,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static u8 pmic8xxx_col_state(struct pmic8xxx_kp *kp, u8 col)
 {
 	/* all keys pressed on that particular row? */
 	if (col == 0x00)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1 << kp->pdata->num_cols;
 	else
 		return col & ((1 << kp->pdata->num_cols) - 1);
+=======
+		return 1 << kp->num_cols;
+	else
+		return col & ((1 << kp->num_cols) - 1);
+>>>>>>> v3.18
 =======
 		return 1 << kp->num_cols;
 	else
@@ -205,9 +236,15 @@ static int pmic8xxx_chk_sync_read(struct pmic8xxx_kp *kp)
 {
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 scan_val;
 
 	rc = pmic8xxx_kp_read_u8(kp, &scan_val, KEYP_SCAN);
+=======
+	unsigned int scan_val;
+
+	rc = regmap_read(kp->regmap, KEYP_SCAN, &scan_val);
+>>>>>>> v3.18
 =======
 	unsigned int scan_val;
 
@@ -221,7 +258,11 @@ static int pmic8xxx_chk_sync_read(struct pmic8xxx_kp *kp)
 	scan_val |= 0x1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pmic8xxx_kp_write_u8(kp, scan_val, KEYP_SCAN);
+=======
+	rc = regmap_write(kp->regmap, KEYP_SCAN, scan_val);
+>>>>>>> v3.18
 =======
 	rc = regmap_write(kp->regmap, KEYP_SCAN, scan_val);
 >>>>>>> v3.18
@@ -241,6 +282,7 @@ static int pmic8xxx_kp_read_data(struct pmic8xxx_kp *kp, u16 *state,
 {
 	int rc, row;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 new_data[PM8XXX_MAX_ROWS];
 
 	rc = pmic8xxx_kp_read(kp, new_data, data_reg, read_rows);
@@ -255,6 +297,8 @@ static int pmic8xxx_kp_read_data(struct pmic8xxx_kp *kp, u16 *state,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 
 	for (row = 0; row < read_rows; row++) {
@@ -266,6 +310,9 @@ static int pmic8xxx_kp_read_data(struct pmic8xxx_kp *kp, u16 *state,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -274,6 +321,7 @@ static int pmic8xxx_kp_read_matrix(struct pmic8xxx_kp *kp, u16 *new_state,
 {
 	int rc, read_rows;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 scan_val;
 
 	if (kp->pdata->num_rows < PM8XXX_MIN_ROWS)
@@ -281,12 +329,17 @@ static int pmic8xxx_kp_read_matrix(struct pmic8xxx_kp *kp, u16 *new_state,
 	else
 		read_rows = kp->pdata->num_rows;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int scan_val;
 
 	if (kp->num_rows < PM8XXX_MIN_ROWS)
 		read_rows = PM8XXX_MIN_ROWS;
 	else
 		read_rows = kp->num_rows;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pmic8xxx_chk_sync_read(kp);
@@ -313,7 +366,11 @@ static int pmic8xxx_kp_read_matrix(struct pmic8xxx_kp *kp, u16 *new_state,
 	udelay((4 * DIV_ROUND_UP(USEC_PER_SEC, KEYP_CLOCK_FREQ)) + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pmic8xxx_kp_read_u8(kp, &scan_val, KEYP_SCAN);
+=======
+	rc = regmap_read(kp->regmap, KEYP_SCAN, &scan_val);
+>>>>>>> v3.18
 =======
 	rc = regmap_read(kp->regmap, KEYP_SCAN, &scan_val);
 >>>>>>> v3.18
@@ -324,7 +381,11 @@ static int pmic8xxx_kp_read_matrix(struct pmic8xxx_kp *kp, u16 *new_state,
 
 	scan_val &= 0xFE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pmic8xxx_kp_write_u8(kp, scan_val, KEYP_SCAN);
+=======
+	rc = regmap_write(kp->regmap, KEYP_SCAN, scan_val);
+>>>>>>> v3.18
 =======
 	rc = regmap_write(kp->regmap, KEYP_SCAN, scan_val);
 >>>>>>> v3.18
@@ -340,7 +401,11 @@ static void __pmic8xxx_kp_scan_matrix(struct pmic8xxx_kp *kp, u16 *new_state,
 	int row, col, code;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (row = 0; row < kp->pdata->num_rows; row++) {
+=======
+	for (row = 0; row < kp->num_rows; row++) {
+>>>>>>> v3.18
 =======
 	for (row = 0; row < kp->num_rows; row++) {
 >>>>>>> v3.18
@@ -350,7 +415,11 @@ static void __pmic8xxx_kp_scan_matrix(struct pmic8xxx_kp *kp, u16 *new_state,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (col = 0; col < kp->pdata->num_cols; col++) {
+=======
+		for (col = 0; col < kp->num_cols; col++) {
+>>>>>>> v3.18
 =======
 		for (col = 0; col < kp->num_cols; col++) {
 >>>>>>> v3.18
@@ -380,9 +449,15 @@ static bool pmic8xxx_detect_ghost_keys(struct pmic8xxx_kp *kp, u16 *new_state)
 
 	check = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (row = 0; row < kp->pdata->num_rows; row++) {
 		row_state = (~new_state[row]) &
 				 ((1 << kp->pdata->num_cols) - 1);
+=======
+	for (row = 0; row < kp->num_rows; row++) {
+		row_state = (~new_state[row]) &
+				 ((1 << kp->num_cols) - 1);
+>>>>>>> v3.18
 =======
 	for (row = 0; row < kp->num_rows; row++) {
 		row_state = (~new_state[row]) &
@@ -478,15 +553,21 @@ static irqreturn_t pmic8xxx_kp_irq(int irq, void *data)
 {
 	struct pmic8xxx_kp *kp = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ctrl_val, events;
 	int rc;
 
 	rc = pmic8xxx_kp_read(kp, &ctrl_val, KEYP_CTRL, 1);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ctrl_val, events;
 	int rc;
 
 	rc = regmap_read(kp->regmap, KEYP_CTRL, &ctrl_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0) {
 		dev_err(kp->dev, "failed to read keyp_ctrl register\n");
@@ -503,9 +584,12 @@ static irqreturn_t pmic8xxx_kp_irq(int irq, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp)
 {
 =======
+=======
+>>>>>>> v3.18
 static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 			     struct platform_device *pdev)
 {
@@ -513,6 +597,9 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 	unsigned int scan_delay_ms;
 	unsigned int row_hold_ns;
 	unsigned int debounce_ms;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int bits, rc, cycles;
 	u8 scan_val = 0, ctrl_val = 0;
@@ -522,20 +609,27 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 
 	/* Find column bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kp->pdata->num_cols < KEYP_CTRL_SCAN_COLS_MIN)
 		bits = 0;
 	else
 		bits = kp->pdata->num_cols - KEYP_CTRL_SCAN_COLS_MIN;
 =======
+=======
+>>>>>>> v3.18
 	if (kp->num_cols < KEYP_CTRL_SCAN_COLS_MIN)
 		bits = 0;
 	else
 		bits = kp->num_cols - KEYP_CTRL_SCAN_COLS_MIN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctrl_val = (bits & KEYP_CTRL_SCAN_COLS_BITS) <<
 		KEYP_CTRL_SCAN_COLS_SHIFT;
 
 	/* Find row bits */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (kp->pdata->num_rows < KEYP_CTRL_SCAN_ROWS_MIN)
 		bits = 0;
@@ -546,6 +640,8 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 
 	rc = pmic8xxx_kp_write_u8(kp, ctrl_val, KEYP_CTRL);
 =======
+=======
+>>>>>>> v3.18
 	if (kp->num_rows < KEYP_CTRL_SCAN_ROWS_MIN)
 		bits = 0;
 	else
@@ -554,12 +650,16 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 	ctrl_val |= (bits << KEYP_CTRL_SCAN_ROWS_SHIFT);
 
 	rc = regmap_write(kp->regmap, KEYP_CTRL, ctrl_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0) {
 		dev_err(kp->dev, "Error writing KEYP_CTRL reg, rc=%d\n", rc);
 		return rc;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bits = (kp->pdata->debounce_ms / 5) - 1;
 
@@ -575,6 +675,8 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 
 	rc = pmic8xxx_kp_write_u8(kp, scan_val, KEYP_SCAN);
 =======
+=======
+>>>>>>> v3.18
 	if (of_property_read_u32(of_node, "scan-delay", &scan_delay_ms))
 		scan_delay_ms = MIN_SCAN_DELAY;
 
@@ -617,6 +719,9 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 	scan_val |= (cycles << KEYP_SCAN_ROW_HOLD_SHIFT);
 
 	rc = regmap_write(kp->regmap, KEYP_SCAN, scan_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		dev_err(kp->dev, "Error writing KEYP_SCAN reg, rc=%d\n", rc);
@@ -625,6 +730,7 @@ static int pmic8xxx_kpd_init(struct pmic8xxx_kp *kp,
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int  pmic8xxx_kp_config_gpio(int gpio_start, int num_gpios,
 			struct pmic8xxx_kp *kp, struct pm_gpio *gpio_config)
@@ -649,6 +755,8 @@ static int  pmic8xxx_kp_config_gpio(int gpio_start, int num_gpios,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int pmic8xxx_kp_enable(struct pmic8xxx_kp *kp)
 {
 	int rc;
@@ -656,7 +764,11 @@ static int pmic8xxx_kp_enable(struct pmic8xxx_kp *kp)
 	kp->ctrl_reg |= KEYP_CTRL_KEYP_EN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pmic8xxx_kp_write_u8(kp, kp->ctrl_reg, KEYP_CTRL);
+=======
+	rc = regmap_write(kp->regmap, KEYP_CTRL, kp->ctrl_reg);
+>>>>>>> v3.18
 =======
 	rc = regmap_write(kp->regmap, KEYP_CTRL, kp->ctrl_reg);
 >>>>>>> v3.18
@@ -673,7 +785,11 @@ static int pmic8xxx_kp_disable(struct pmic8xxx_kp *kp)
 	kp->ctrl_reg &= ~KEYP_CTRL_KEYP_EN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pmic8xxx_kp_write_u8(kp, kp->ctrl_reg, KEYP_CTRL);
+=======
+	rc = regmap_write(kp->regmap, KEYP_CTRL, kp->ctrl_reg);
+>>>>>>> v3.18
 =======
 	rc = regmap_write(kp->regmap, KEYP_CTRL, kp->ctrl_reg);
 >>>>>>> v3.18
@@ -710,6 +826,7 @@ static void pmic8xxx_kp_close(struct input_dev *dev)
 static int pmic8xxx_kp_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pm8xxx_keypad_platform_data *pdata =
 					dev_get_platdata(&pdev->dev);
 	const struct matrix_keymap_data *keymap_data;
@@ -743,6 +860,8 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 		pdata->num_rows > PM8XXX_MAX_ROWS ||
 		pdata->num_cols < PM8XXX_MIN_COLS) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int rows, cols;
 	bool repeat;
 	bool wakeup;
@@ -756,11 +875,15 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 
 	if (cols > PM8XXX_MAX_COLS || rows > PM8XXX_MAX_ROWS ||
 	    cols < PM8XXX_MIN_COLS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&pdev->dev, "invalid platform data\n");
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!pdata->scan_delay_ms ||
 		pdata->scan_delay_ms > MAX_SCAN_DELAY ||
@@ -807,6 +930,8 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 		rc = -ENOMEM;
 		goto err_alloc_device;
 =======
+=======
+>>>>>>> v3.18
 	repeat = !of_property_read_bool(pdev->dev.of_node,
 					"linux,input-no-autorepeat");
 	wakeup = of_property_read_bool(pdev->dev.of_node,
@@ -830,6 +955,9 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	if (!kp->input) {
 		dev_err(&pdev->dev, "unable to allocate input device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -837,8 +965,12 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	if (kp->key_sense_irq < 0) {
 		dev_err(&pdev->dev, "unable to get keypad sense irq\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -ENXIO;
 		goto err_get_irq;
+=======
+		return kp->key_sense_irq;
+>>>>>>> v3.18
 =======
 		return kp->key_sense_irq;
 >>>>>>> v3.18
@@ -847,6 +979,7 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	kp->key_stuck_irq = platform_get_irq(pdev, 1);
 	if (kp->key_stuck_irq < 0) {
 		dev_err(&pdev->dev, "unable to get keypad stuck irq\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc = -ENXIO;
 		goto err_get_irq;
@@ -857,11 +990,16 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 
 	kp->input->dev.parent	= &pdev->dev;
 =======
+=======
+>>>>>>> v3.18
 		return kp->key_stuck_irq;
 	}
 
 	kp->input->name = "PMIC8XXX keypad";
 	kp->input->phys = "pmic8xxx_keypad/input0";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kp->input->id.bustype	= BUS_I2C;
@@ -873,7 +1011,11 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	kp->input->close	= pmic8xxx_kp_close;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = matrix_keypad_build_keymap(keymap_data, NULL,
+=======
+	rc = matrix_keypad_build_keymap(NULL, NULL,
+>>>>>>> v3.18
 =======
 	rc = matrix_keypad_build_keymap(NULL, NULL,
 >>>>>>> v3.18
@@ -882,15 +1024,21 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	if (rc) {
 		dev_err(&pdev->dev, "failed to build keymap\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_get_irq;
 	}
 
 	if (pdata->rep)
 =======
+=======
+>>>>>>> v3.18
 		return rc;
 	}
 
 	if (repeat)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__set_bit(EV_REP, kp->input->evbit);
 	input_set_capability(kp->input, EV_MSC, MSC_SCAN);
@@ -901,6 +1049,7 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	memset(kp->keystate, 0xff, sizeof(kp->keystate));
 	memset(kp->stuckstate, 0xff, sizeof(kp->stuckstate));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = pmic8xxx_kpd_init(kp);
 	if (rc < 0) {
@@ -941,6 +1090,8 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to read KEYP_CTRL register\n");
 		goto err_pmic_reg_read;
 =======
+=======
+>>>>>>> v3.18
 	rc = pmic8xxx_kpd_init(kp, pdev);
 	if (rc < 0) {
 		dev_err(&pdev->dev, "unable to initialize keypad controller\n");
@@ -967,6 +1118,9 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	if (rc < 0) {
 		dev_err(&pdev->dev, "failed to read KEYP_CTRL register\n");
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -975,6 +1129,7 @@ static int pmic8xxx_kp_probe(struct platform_device *pdev)
 	rc = input_register_device(kp->input);
 	if (rc < 0) {
 		dev_err(&pdev->dev, "unable to register keypad input device\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_pmic_reg_read;
 	}
@@ -1008,11 +1163,16 @@ static int pmic8xxx_kp_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 		return rc;
 	}
 
 	device_init_wakeup(&pdev->dev, wakeup);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1063,6 +1223,7 @@ static SIMPLE_DEV_PM_OPS(pm8xxx_kp_pm_ops,
 			 pmic8xxx_kp_suspend, pmic8xxx_kp_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver pmic8xxx_kp_driver = {
 	.probe		= pmic8xxx_kp_probe,
 	.remove		= pmic8xxx_kp_remove,
@@ -1071,6 +1232,8 @@ static struct platform_driver pmic8xxx_kp_driver = {
 		.owner = THIS_MODULE,
 		.pm = &pm8xxx_kp_pm_ops,
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id pm8xxx_match_table[] = {
 	{ .compatible = "qcom,pm8058-keypad" },
 	{ .compatible = "qcom,pm8921-keypad" },
@@ -1085,6 +1248,9 @@ static struct platform_driver pmic8xxx_kp_driver = {
 		.owner = THIS_MODULE,
 		.pm = &pm8xxx_kp_pm_ops,
 		.of_match_table = pm8xxx_match_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

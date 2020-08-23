@@ -57,6 +57,7 @@ extern void s3c2416_setup_sdhci1_cfg_gpio(struct platform_device *, int w);
 extern void s3c64xx_setup_sdhci0_cfg_gpio(struct platform_device *, int w);
 extern void s3c64xx_setup_sdhci1_cfg_gpio(struct platform_device *, int w);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s5pc100_setup_sdhci0_cfg_gpio(struct platform_device *, int w);
 extern void s5pc100_setup_sdhci1_cfg_gpio(struct platform_device *, int w);
 extern void s5pc100_setup_sdhci2_cfg_gpio(struct platform_device *, int w);
@@ -73,6 +74,9 @@ extern void s5p64x0_setup_sdhci0_cfg_gpio(struct platform_device *, int w);
 extern void s5p64x0_setup_sdhci1_cfg_gpio(struct platform_device *, int w);
 extern void s5p6440_setup_sdhci2_cfg_gpio(struct platform_device *, int w);
 extern void s5p6450_setup_sdhci2_cfg_gpio(struct platform_device *, int w);
+=======
+extern void s3c64xx_setup_sdhci2_cfg_gpio(struct platform_device *, int w);
+>>>>>>> v3.18
 =======
 extern void s3c64xx_setup_sdhci2_cfg_gpio(struct platform_device *, int w);
 >>>>>>> v3.18
@@ -155,6 +159,7 @@ static inline void s3c6400_default_sdhci2(void) { }
 
 #endif /* CONFIG_S3C64XX_SETUP_SDHCI */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* S5P64X0 SDHCI setup */
 
@@ -303,6 +308,8 @@ static inline void exynos4_default_sdhci3(void) { }
 
 #endif /* CONFIG_EXYNOS4_SETUP_SDHCI */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void s3c_sdhci_setname(int id, char *name)

@@ -255,6 +255,7 @@ static void pppol2tp_recv(struct l2tp_session *session, struct sk_buff *skb, int
 		ppp_input(&po->chan, skb);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		l2tp_info(session, PPPOL2TP_MSG_DATA, "%s: socket not bound\n",
 			  session->name);
 
@@ -262,6 +263,8 @@ static void pppol2tp_recv(struct l2tp_session *session, struct sk_buff *skb, int
 		atomic_long_inc(&session->stats.rx_errors);
 		kfree_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 		l2tp_dbg(session, PPPOL2TP_MSG_DATA,
 			 "%s: recv %d byte data frame, passing to L2TP socket\n",
 			 session->name, data_len);
@@ -270,6 +273,9 @@ static void pppol2tp_recv(struct l2tp_session *session, struct sk_buff *skb, int
 			atomic_long_inc(&session->stats.rx_errors);
 			kfree_skb(skb);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -466,7 +472,10 @@ static void pppol2tp_session_close(struct l2tp_session *session)
 	BUG_ON(session->magic != L2TP_SESSION_MAGIC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sock) {
@@ -475,7 +484,10 @@ static void pppol2tp_session_close(struct l2tp_session *session)
 		l2tp_session_inc_refcount(session);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -492,7 +504,10 @@ static void pppol2tp_session_destruct(struct sock *sk)
 		l2tp_session_dec_refcount(session);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -930,8 +945,13 @@ static int pppol2tp_getname(struct socket *sock, struct sockaddr *uaddr,
 	} else if ((tunnel->version == 2) &&
 		   (tunnel->sock->sk_family == AF_INET6)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ipv6_pinfo *np = inet6_sk(tunnel->sock);
 		struct sockaddr_pppol2tpin6 sp;
+=======
+		struct sockaddr_pppol2tpin6 sp;
+
+>>>>>>> v3.18
 =======
 		struct sockaddr_pppol2tpin6 sp;
 
@@ -949,6 +969,7 @@ static int pppol2tp_getname(struct socket *sock, struct sockaddr *uaddr,
 		sp.pppol2tp.addr.sin6_family = AF_INET6;
 		sp.pppol2tp.addr.sin6_port = inet->inet_dport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(&sp.pppol2tp.addr.sin6_addr, &np->daddr,
 		       sizeof(np->daddr));
 		memcpy(uaddr, &sp, len);
@@ -957,6 +978,8 @@ static int pppol2tp_getname(struct socket *sock, struct sockaddr *uaddr,
 		struct ipv6_pinfo *np = inet6_sk(tunnel->sock);
 		struct sockaddr_pppol2tpv3in6 sp;
 =======
+=======
+>>>>>>> v3.18
 		memcpy(&sp.pppol2tp.addr.sin6_addr, &tunnel->sock->sk_v6_daddr,
 		       sizeof(tunnel->sock->sk_v6_daddr));
 		memcpy(uaddr, &sp, len);
@@ -964,6 +987,9 @@ static int pppol2tp_getname(struct socket *sock, struct sockaddr *uaddr,
 		   (tunnel->sock->sk_family == AF_INET6)) {
 		struct sockaddr_pppol2tpv3in6 sp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		len = sizeof(sp);
 		memset(&sp, 0, len);
@@ -978,8 +1004,13 @@ static int pppol2tp_getname(struct socket *sock, struct sockaddr *uaddr,
 		sp.pppol2tp.addr.sin6_family = AF_INET6;
 		sp.pppol2tp.addr.sin6_port = inet->inet_dport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(&sp.pppol2tp.addr.sin6_addr, &np->daddr,
 		       sizeof(np->daddr));
+=======
+		memcpy(&sp.pppol2tp.addr.sin6_addr, &tunnel->sock->sk_v6_daddr,
+		       sizeof(tunnel->sock->sk_v6_daddr));
+>>>>>>> v3.18
 =======
 		memcpy(&sp.pppol2tp.addr.sin6_addr, &tunnel->sock->sk_v6_daddr,
 		       sizeof(tunnel->sock->sk_v6_daddr));
@@ -1354,6 +1385,10 @@ static int pppol2tp_session_setsockopt(struct sock *sk,
 				PPPOL2TP_L2TP_HDR_SIZE_NOSEQ;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		l2tp_session_set_header_len(session, session->tunnel->version);
+>>>>>>> v3.18
 =======
 		l2tp_session_set_header_len(session, session->tunnel->version);
 >>>>>>> v3.18
@@ -1621,7 +1656,11 @@ static void pppol2tp_next_tunnel(struct net *net, struct pppol2tp_seq_data *pd)
 static void pppol2tp_next_session(struct net *net, struct pppol2tp_seq_data *pd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd->session = l2tp_session_get_nth(pd->tunnel, pd->session_idx, true);
+=======
+	pd->session = l2tp_session_find_nth(pd->tunnel, pd->session_idx);
+>>>>>>> v3.18
 =======
 	pd->session = l2tp_session_find_nth(pd->tunnel, pd->session_idx);
 >>>>>>> v3.18
@@ -1752,6 +1791,7 @@ static int pppol2tp_seq_show(struct seq_file *m, void *v)
 	/* Show the tunnel or session context.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pd->session) {
 		pppol2tp_seq_tunnel_show(m, pd->tunnel);
 	} else {
@@ -1761,10 +1801,15 @@ static int pppol2tp_seq_show(struct seq_file *m, void *v)
 		l2tp_session_dec_refcount(pd->session);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (pd->session == NULL)
 		pppol2tp_seq_tunnel_show(m, pd->tunnel);
 	else
 		pppol2tp_seq_session_show(m, pd->session);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:

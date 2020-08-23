@@ -27,6 +27,12 @@
 #define NET_9P_TRANSPORT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define P9_DEF_MIN_RESVPORT	(665U)
+#define P9_DEF_MAX_RESVPORT	(1023U)
+
+>>>>>>> v3.18
 =======
 #define P9_DEF_MIN_RESVPORT	(665U)
 #define P9_DEF_MAX_RESVPORT	(1023U)
@@ -38,7 +44,10 @@
  * @name: the human-readable name of the transport
  * @maxsize: transport provided maximum packet size
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pref: Preferences of this transport
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @def: set if this transport should be considered the default
@@ -47,6 +56,11 @@
  * @request: member function to issue a request to the transport
  * @cancel: member function to cancel a request (if it hasn't been sent)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cancelled: member function to notify that a cancelled request will not
+ *             not receive a reply
+>>>>>>> v3.18
 =======
  * @cancelled: member function to notify that a cancelled request will not
  *             not receive a reply
@@ -70,6 +84,10 @@ struct p9_trans_module {
 	int (*request) (struct p9_client *, struct p9_req_t *req);
 	int (*cancel) (struct p9_client *, struct p9_req_t *req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*cancelled)(struct p9_client *, struct p9_req_t *req);
+>>>>>>> v3.18
 =======
 	int (*cancelled)(struct p9_client *, struct p9_req_t *req);
 >>>>>>> v3.18

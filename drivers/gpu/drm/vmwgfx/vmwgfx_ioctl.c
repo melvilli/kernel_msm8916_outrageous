@@ -30,12 +30,18 @@
 #include "vmwgfx_kms.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct svga_3d_compat_cap {
 	SVGA3dCapsRecordHeader header;
 	SVGA3dCapPair pairs[SVGA3D_DEVCAP_MAX];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 		       struct drm_file *file_priv)
@@ -44,6 +50,10 @@ int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 	struct drm_vmw_getparam_arg *param =
 	    (struct drm_vmw_getparam_arg *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vmw_fpriv *vmw_fp = vmw_fpriv(file_priv);
+>>>>>>> v3.18
 =======
 	struct vmw_fpriv *vmw_fp = vmw_fpriv(file_priv);
 >>>>>>> v3.18
@@ -66,7 +76,11 @@ int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 		break;
 	case DRM_VMW_PARAM_MAX_FB_SIZE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		param->value = dev_priv->vram_size;
+=======
+		param->value = dev_priv->prim_bb_mem;
+>>>>>>> v3.18
 =======
 		param->value = dev_priv->prim_bb_mem;
 >>>>>>> v3.18
@@ -77,12 +91,18 @@ int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 		const struct vmw_fifo_state *fifo = &dev_priv->fifo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if ((dev_priv->capabilities & SVGA_CAP_GBOBJECTS)) {
 			param->value = SVGA3D_HWVERSION_WS8_B1;
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		param->value =
 			ioread32(fifo_mem +
@@ -93,8 +113,11 @@ int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
 =======
+=======
+>>>>>>> v3.18
 	case DRM_VMW_PARAM_MAX_SURF_MEMORY:
 		if ((dev_priv->capabilities & SVGA_CAP_GBOBJECTS) &&
 		    !vmw_fp->gb_aware)
@@ -124,6 +147,9 @@ int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 	default:
 		DRM_ERROR("Illegal vmwgfx get param request: %d\n",
 			  param->param);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -132,7 +158,10 @@ int vmw_getparam_ioctl(struct drm_device *dev, void *data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vmw_fill_compat_cap(struct vmw_private *dev_priv, void *bounce,
 			       size_t size)
 {
@@ -165,6 +194,9 @@ static int vmw_fill_compat_cap(struct vmw_private *dev_priv, void *bounce,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int vmw_get_cap_3d_ioctl(struct drm_device *dev, void *data,
@@ -179,21 +211,30 @@ int vmw_get_cap_3d_ioctl(struct drm_device *dev, void *data,
 	void *bounce;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (unlikely(arg->pad64 != 0 || arg->max_size == 0)) {
 =======
+=======
+>>>>>>> v3.18
 	bool gb_objects = !!(dev_priv->capabilities & SVGA_CAP_GBOBJECTS);
 	struct vmw_fpriv *vmw_fp = vmw_fpriv(file_priv);
 
 	if (unlikely(arg->pad64 != 0)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		DRM_ERROR("Illegal GET_3D_CAP argument.\n");
 		return -EINVAL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = (SVGA_FIFO_3D_CAPS_LAST - SVGA_FIFO_3D_CAPS + 1) << 2;
 =======
+=======
+>>>>>>> v3.18
 	if (gb_objects && vmw_fp->gb_aware)
 		size = SVGA3D_DEVCAP_MAX * sizeof(uint32_t);
 	else if (gb_objects)
@@ -201,13 +242,20 @@ int vmw_get_cap_3d_ioctl(struct drm_device *dev, void *data,
 	else
 		size = (SVGA_FIFO_3D_CAPS_LAST - SVGA_FIFO_3D_CAPS + 1) *
 			sizeof(uint32_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (arg->max_size < size)
 		size = arg->max_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bounce = vmalloc(size);
+=======
+	bounce = vzalloc(size);
+>>>>>>> v3.18
 =======
 	bounce = vzalloc(size);
 >>>>>>> v3.18
@@ -217,9 +265,12 @@ int vmw_get_cap_3d_ioctl(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fifo_mem = dev_priv->mmio_virt;
 	memcpy_fromio(bounce, &fifo_mem[SVGA_FIFO_3D_CAPS], size);
 =======
+=======
+>>>>>>> v3.18
 	if (gb_objects && vmw_fp->gb_aware) {
 		int i, num;
 		uint32_t *bounce32 = (uint32_t *) bounce;
@@ -242,12 +293,19 @@ int vmw_get_cap_3d_ioctl(struct drm_device *dev, void *data,
 		fifo_mem = dev_priv->mmio_virt;
 		memcpy_fromio(bounce, &fifo_mem[SVGA_FIFO_3D_CAPS], size);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = copy_to_user(buffer, bounce, size);
 	if (ret)
 		ret = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_err:
+>>>>>>> v3.18
 =======
 out_err:
 >>>>>>> v3.18
@@ -268,7 +326,10 @@ int vmw_present_ioctl(struct drm_device *dev, void *data,
 		(struct drm_vmw_present_arg *)data;
 	struct vmw_surface *surface;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct drm_vmw_rect __user *clips_ptr;
@@ -311,7 +372,11 @@ int vmw_present_ioctl(struct drm_device *dev, void *data,
 	if (!fb) {
 		DRM_ERROR("Invalid framebuffer id.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+		ret = -ENOENT;
+>>>>>>> v3.18
 =======
 		ret = -ENOENT;
 >>>>>>> v3.18
@@ -320,7 +385,11 @@ int vmw_present_ioctl(struct drm_device *dev, void *data,
 	vfb = vmw_framebuffer_to_vfb(fb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
+=======
+	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
+>>>>>>> v3.18
 =======
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
 >>>>>>> v3.18
@@ -344,7 +413,11 @@ int vmw_present_ioctl(struct drm_device *dev, void *data,
 
 out_no_surface:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
+=======
+	ttm_read_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_read_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18
@@ -368,7 +441,10 @@ int vmw_present_readback_ioctl(struct drm_device *dev, void *data,
 		(struct drm_vmw_fence_rep __user *)
 		(unsigned long)arg->fence_rep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct drm_vmw_rect __user *clips_ptr;
@@ -410,7 +486,11 @@ int vmw_present_readback_ioctl(struct drm_device *dev, void *data,
 	if (!fb) {
 		DRM_ERROR("Invalid framebuffer id.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+		ret = -ENOENT;
+>>>>>>> v3.18
 =======
 		ret = -ENOENT;
 >>>>>>> v3.18
@@ -425,7 +505,11 @@ int vmw_present_readback_ioctl(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
+=======
+	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
+>>>>>>> v3.18
 =======
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
 >>>>>>> v3.18
@@ -437,7 +521,11 @@ int vmw_present_readback_ioctl(struct drm_device *dev, void *data,
 			       clips, num_clips);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
+=======
+	ttm_read_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_read_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18

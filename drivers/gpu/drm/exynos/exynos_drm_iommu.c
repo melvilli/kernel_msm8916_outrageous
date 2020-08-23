@@ -37,6 +37,7 @@ int drm_create_iommu_mapping(struct drm_device *drm_dev)
 	if (!priv->da_space_size)
 		priv->da_space_size = EXYNOS_DEV_ADDR_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!priv->da_space_order)
 		priv->da_space_order = EXYNOS_DEV_ADDR_ORDER;
 
@@ -44,10 +45,15 @@ int drm_create_iommu_mapping(struct drm_device *drm_dev)
 						priv->da_space_size,
 						priv->da_space_order);
 =======
+=======
+>>>>>>> v3.18
 
 	mapping = arm_iommu_create_mapping(&platform_bus_type, priv->da_start,
 						priv->da_space_size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(mapping))
 		return PTR_ERR(mapping);
@@ -55,6 +61,12 @@ int drm_create_iommu_mapping(struct drm_device *drm_dev)
 	dev->dma_parms = devm_kzalloc(dev, sizeof(*dev->dma_parms),
 					GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!dev->dma_parms)
+		goto error;
+
+>>>>>>> v3.18
 =======
 	if (!dev->dma_parms)
 		goto error;
@@ -65,6 +77,12 @@ int drm_create_iommu_mapping(struct drm_device *drm_dev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+error:
+	arm_iommu_release_mapping(mapping);
+	return -ENOMEM;
+>>>>>>> v3.18
 =======
 error:
 	arm_iommu_release_mapping(mapping);
@@ -111,6 +129,12 @@ int drm_iommu_attach_device(struct drm_device *drm_dev,
 					sizeof(*subdrv_dev->dma_parms),
 					GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!subdrv_dev->dma_parms)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!subdrv_dev->dma_parms)
 		return -ENOMEM;

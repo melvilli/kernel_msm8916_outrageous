@@ -31,10 +31,16 @@ extern unsigned long oprofile_started;
 extern unsigned long oprofile_backtrace_depth;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct super_block;
 struct dentry;
 
 void oprofile_create_files(struct super_block *sb, struct dentry *root);
+=======
+struct dentry;
+
+void oprofile_create_files(struct dentry *root);
+>>>>>>> v3.18
 =======
 struct dentry;
 

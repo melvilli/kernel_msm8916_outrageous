@@ -17,6 +17,11 @@
 #include <linux/err.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+#include <linux/miscdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/miscdevice.h>
@@ -311,7 +316,11 @@ void kvmppc_core_load_guest_debugstate(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
+=======
+static void kvmppc_core_vcpu_load_e500(struct kvm_vcpu *vcpu, int cpu)
+>>>>>>> v3.18
 =======
 static void kvmppc_core_vcpu_load_e500(struct kvm_vcpu *vcpu, int cpu)
 >>>>>>> v3.18
@@ -323,7 +332,11 @@ static void kvmppc_core_vcpu_load_e500(struct kvm_vcpu *vcpu, int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_vcpu_put(struct kvm_vcpu *vcpu)
+=======
+static void kvmppc_core_vcpu_put_e500(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 static void kvmppc_core_vcpu_put_e500(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -381,7 +394,12 @@ int kvmppc_core_vcpu_setup(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_get_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs)
+=======
+static int kvmppc_core_get_sregs_e500(struct kvm_vcpu *vcpu,
+				      struct kvm_sregs *sregs)
+>>>>>>> v3.18
 =======
 static int kvmppc_core_get_sregs_e500(struct kvm_vcpu *vcpu,
 				      struct kvm_sregs *sregs)
@@ -407,15 +425,21 @@ static int kvmppc_core_get_sregs_e500(struct kvm_vcpu *vcpu,
 	kvmppc_get_sregs_ivor(vcpu, sregs);
 	kvmppc_get_sregs_e500_tlb(vcpu, sregs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 int kvmppc_core_set_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs)
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static int kvmppc_core_set_sregs_e500(struct kvm_vcpu *vcpu,
 				      struct kvm_sregs *sregs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvmppc_vcpu_e500 *vcpu_e500 = to_e500(vcpu);
@@ -452,8 +476,13 @@ static int kvmppc_core_set_sregs_e500(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 			union kvmppc_one_reg *val)
+=======
+static int kvmppc_get_one_reg_e500(struct kvm_vcpu *vcpu, u64 id,
+				   union kvmppc_one_reg *val)
+>>>>>>> v3.18
 =======
 static int kvmppc_get_one_reg_e500(struct kvm_vcpu *vcpu, u64 id,
 				   union kvmppc_one_reg *val)
@@ -464,8 +493,13 @@ static int kvmppc_get_one_reg_e500(struct kvm_vcpu *vcpu, u64 id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 		       union kvmppc_one_reg *val)
+=======
+static int kvmppc_set_one_reg_e500(struct kvm_vcpu *vcpu, u64 id,
+				   union kvmppc_one_reg *val)
+>>>>>>> v3.18
 =======
 static int kvmppc_set_one_reg_e500(struct kvm_vcpu *vcpu, u64 id,
 				   union kvmppc_one_reg *val)
@@ -476,7 +510,12 @@ static int kvmppc_set_one_reg_e500(struct kvm_vcpu *vcpu, u64 id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_vcpu *kvmppc_core_vcpu_create(struct kvm *kvm, unsigned int id)
+=======
+static struct kvm_vcpu *kvmppc_core_vcpu_create_e500(struct kvm *kvm,
+						     unsigned int id)
+>>>>>>> v3.18
 =======
 static struct kvm_vcpu *kvmppc_core_vcpu_create_e500(struct kvm *kvm,
 						     unsigned int id)
@@ -523,7 +562,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_vcpu_free(struct kvm_vcpu *vcpu)
+=======
+static void kvmppc_core_vcpu_free_e500(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 static void kvmppc_core_vcpu_free_e500(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -538,7 +581,11 @@ static void kvmppc_core_vcpu_free_e500(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_core_init_vm(struct kvm *kvm)
+=======
+static int kvmppc_core_init_vm_e500(struct kvm *kvm)
+>>>>>>> v3.18
 =======
 static int kvmppc_core_init_vm_e500(struct kvm *kvm)
 >>>>>>> v3.18
@@ -547,11 +594,14 @@ static int kvmppc_core_init_vm_e500(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_destroy_vm(struct kvm *kvm)
 {
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void kvmppc_core_destroy_vm_e500(struct kvm *kvm)
 {
 }
@@ -573,6 +623,9 @@ static struct kvmppc_ops kvm_ops_e500 = {
 	.emulate_mfspr = kvmppc_core_emulate_mfspr_e500,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init kvmppc_e500_init(void)
 {
@@ -586,17 +639,23 @@ static int __init kvmppc_e500_init(void)
 	r = kvmppc_core_check_processor_compat();
 	if (r)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return r;
 
 	r = kvmppc_booke_init();
 	if (r)
 		return r;
 =======
+=======
+>>>>>>> v3.18
 		goto err_out;
 
 	r = kvmppc_booke_init();
 	if (r)
 		goto err_out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* copy extra E500 exception handlers */
@@ -616,8 +675,11 @@ static int __init kvmppc_e500_init(void)
 			   ivor[max_ivor] + handler_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return kvm_init(NULL, sizeof(struct kvmppc_vcpu_e500), 0, THIS_MODULE);
 =======
+=======
+>>>>>>> v3.18
 	r = kvm_init(NULL, sizeof(struct kvmppc_vcpu_e500), 0, THIS_MODULE);
 	if (r)
 		goto err_out;
@@ -626,12 +688,19 @@ static int __init kvmppc_e500_init(void)
 
 err_out:
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit kvmppc_e500_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvmppc_pr_ops = NULL;
+>>>>>>> v3.18
 =======
 	kvmppc_pr_ops = NULL;
 >>>>>>> v3.18
@@ -641,6 +710,11 @@ static void __exit kvmppc_e500_exit(void)
 module_init(kvmppc_e500_init);
 module_exit(kvmppc_e500_exit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS_MISCDEV(KVM_MINOR);
+MODULE_ALIAS("devname:kvm");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS_MISCDEV(KVM_MINOR);
 MODULE_ALIAS("devname:kvm");

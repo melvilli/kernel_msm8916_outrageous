@@ -67,7 +67,10 @@ CONFIG_MMU=y
 # CONFIG_XTENSA_UNALIGNED_USER is not set
 # CONFIG_PREEMPT is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CONFIG_MATH_EMULATION is not set
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_HIGHMEM is not set

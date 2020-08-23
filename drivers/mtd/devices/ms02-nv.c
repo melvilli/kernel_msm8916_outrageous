@@ -206,7 +206,11 @@ static int __init ms02nv_init_one(ulong addr)
 	mtd->flags = MTD_CAP_RAM;
 	mtd->size = fixsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtd->name = (char *)ms02nv_name;
+=======
+	mtd->name = ms02nv_name;
+>>>>>>> v3.18
 =======
 	mtd->name = ms02nv_name;
 >>>>>>> v3.18

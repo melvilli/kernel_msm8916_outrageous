@@ -34,6 +34,7 @@
 #include <unistd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * glibc synced up and added the metag number but didn't add the relocations.
  * Work around this in a crude manner for now.
@@ -46,10 +47,15 @@
 #endif
 #ifndef R_METAG_NONE
 =======
+=======
+>>>>>>> v3.18
 #ifndef EM_METAG
 /* Remove this when these make it to the standard system elf.h. */
 #define EM_METAG      174
 #define R_METAG_ADDR32                   2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define R_METAG_NONE                     3
 #endif
@@ -57,8 +63,11 @@
 #ifndef EM_AARCH64
 #define EM_AARCH64	183
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 #ifndef R_AARCH64_ABS64
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define R_AARCH64_ABS64	257
@@ -214,6 +223,7 @@ static void *mmap_file(char const *fname)
 		uread(fd_map, addr, sb.st_size);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sb.st_nlink != 1) {
 		/* file is hard-linked, break the hard link */
 		close(fd_map);
@@ -228,6 +238,8 @@ static void *mmap_file(char const *fname)
 		}
 		uwrite(fd_map, addr, sb.st_size);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return addr;
@@ -425,10 +437,13 @@ do_file(char const *const fname)
 			fail_file();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (w2(ehdr->e_machine) == EM_S390) {
 			reltype = R_390_32;
 			mcount_adjust_32 = -4;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (w2(ehdr->e_machine) == EM_MIPS) {
@@ -527,7 +542,10 @@ main(int argc, char *argv[])
 	return !!n_error;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

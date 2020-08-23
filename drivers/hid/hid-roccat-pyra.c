@@ -36,8 +36,11 @@ static void profile_activated(struct pyra_device *pyra,
 		unsigned int new_profile)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_profile >= ARRAY_SIZE(pyra->profile_settings))
 		return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pyra->actual_profile = new_profile;
@@ -162,7 +165,12 @@ PYRA_SYSFS_R(thingy, THINGY)
 
 #define PYRA_BIN_ATTRIBUTE_RW(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+PYRA_SYSFS_RW(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 PYRA_SYSFS_RW(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -175,7 +183,12 @@ static struct bin_attribute bin_attr_##thingy = { \
 
 #define PYRA_BIN_ATTRIBUTE_R(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+PYRA_SYSFS_R(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 PYRA_SYSFS_R(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -187,7 +200,12 @@ static struct bin_attribute bin_attr_##thingy = { \
 
 #define PYRA_BIN_ATTRIBUTE_W(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+PYRA_SYSFS_W(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 PYRA_SYSFS_W(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -198,16 +216,22 @@ static struct bin_attribute bin_attr_##thingy = { \
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 PYRA_SYSFS_W(control, CONTROL)
 PYRA_SYSFS_RW(info, INFO)
 PYRA_SYSFS_RW(profile_settings, PROFILE_SETTINGS)
 PYRA_SYSFS_RW(profile_buttons, PROFILE_BUTTONS)
 PYRA_SYSFS_R(settings, SETTINGS)
 =======
+=======
+>>>>>>> v3.18
 PYRA_BIN_ATTRIBUTE_W(control, CONTROL);
 PYRA_BIN_ATTRIBUTE_RW(info, INFO);
 PYRA_BIN_ATTRIBUTE_RW(profile_settings, PROFILE_SETTINGS);
 PYRA_BIN_ATTRIBUTE_RW(profile_buttons, PROFILE_BUTTONS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t pyra_sysfs_read_profilex_settings(struct file *fp,
@@ -249,7 +273,10 @@ static ssize_t pyra_sysfs_read_profilex_buttons(struct file *fp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PROFILE_ATTR(number)						\
 static struct bin_attribute bin_attr_profile##number##_settings = {	\
 	.attr = { .name = "profile" #number "_settings", .mode = 0440 },	\
@@ -269,6 +296,9 @@ PROFILE_ATTR(3);
 PROFILE_ATTR(4);
 PROFILE_ATTR(5);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t pyra_sysfs_write_settings(struct file *fp,
 		struct kobject *kobj, struct bin_attribute *attr, char *buf,
@@ -286,6 +316,7 @@ static ssize_t pyra_sysfs_write_settings(struct file *fp,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	settings = (struct pyra_settings const *)buf;
 	if (settings->startup_profile >= ARRAY_SIZE(pyra->profile_settings))
 		return -EINVAL;
@@ -293,10 +324,15 @@ static ssize_t pyra_sysfs_write_settings(struct file *fp,
 	mutex_lock(&pyra->pyra_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&pyra->pyra_lock);
 
 	settings = (struct pyra_settings const *)buf;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	retval = pyra_set_settings(usb_dev, settings);
 	if (retval) {
@@ -317,12 +353,18 @@ static ssize_t pyra_sysfs_write_settings(struct file *fp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 PYRA_SYSFS_R(settings, SETTINGS);
 static struct bin_attribute bin_attr_settings =
 	__BIN_ATTR(settings, (S_IWUSR | S_IRUGO),
 		   pyra_sysfs_read_settings, pyra_sysfs_write_settings,
 		   PYRA_SIZE_SETTINGS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t pyra_sysfs_show_actual_cpi(struct device *dev,
@@ -333,6 +375,10 @@ static ssize_t pyra_sysfs_show_actual_cpi(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", pyra->actual_cpi);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_cpi, 0440, pyra_sysfs_show_actual_cpi, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_cpi, 0440, pyra_sysfs_show_actual_cpi, NULL);
 >>>>>>> v3.18
@@ -353,6 +399,11 @@ static ssize_t pyra_sysfs_show_actual_profile(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", settings.startup_profile);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_profile, 0440, pyra_sysfs_show_actual_profile, NULL);
+static DEVICE_ATTR(startup_profile, 0440, pyra_sysfs_show_actual_profile, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_profile, 0440, pyra_sysfs_show_actual_profile, NULL);
 static DEVICE_ATTR(startup_profile, 0440, pyra_sysfs_show_actual_profile, NULL);
@@ -376,6 +427,7 @@ static ssize_t pyra_sysfs_show_firmware_version(struct device *dev,
 
 	return snprintf(buf, PAGE_SIZE, "%d\n", info.firmware_version);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute pyra_attributes[] = {
@@ -456,6 +508,8 @@ static struct bin_attribute pyra_bin_attributes[] = {
 	},
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(firmware_version, 0440, pyra_sysfs_show_firmware_version,
 		   NULL);
 
@@ -494,6 +548,9 @@ static const struct attribute_group pyra_group = {
 static const struct attribute_group *pyra_groups[] = {
 	&pyra_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -717,8 +774,12 @@ static int __init pyra_init(void)
 	if (IS_ERR(pyra_class))
 		return PTR_ERR(pyra_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pyra_class->dev_attrs = pyra_attributes;
 	pyra_class->dev_bin_attrs = pyra_bin_attributes;
+=======
+	pyra_class->dev_groups = pyra_groups;
+>>>>>>> v3.18
 =======
 	pyra_class->dev_groups = pyra_groups;
 >>>>>>> v3.18

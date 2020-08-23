@@ -272,6 +272,11 @@ static inline u8 wusb_key_index(int index, int type, int originator)
 #define WUSB_KEY_INDEX_ORIGINATOR_HOST		0
 #define WUSB_KEY_INDEX_ORIGINATOR_DEVICE	1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* bits 0-3 used for the key index. */
+#define WUSB_KEY_INDEX_MAX			15
+>>>>>>> v3.18
 =======
 /* bits 0-3 used for the key index. */
 #define WUSB_KEY_INDEX_MAX			15

@@ -41,6 +41,10 @@
 #include <linux/of_platform.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/sections.h>
+>>>>>>> v3.18
 =======
 #include <asm/sections.h>
 >>>>>>> v3.18
@@ -55,8 +59,11 @@
 #include "vmlinux.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char __initdata cmd_line[COMMAND_LINE_SIZE] = CONFIG_CMDLINE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned long __init setup_memory(void)
@@ -85,7 +92,11 @@ static unsigned long __init setup_memory(void)
 	ram_start_pfn = PFN_UP(memory_start);
 	/* free_ram_start_pfn is first page after kernel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_ram_start_pfn = PFN_UP(__pa(&_end));
+=======
+	free_ram_start_pfn = PFN_UP(__pa(_end));
+>>>>>>> v3.18
 =======
 	free_ram_start_pfn = PFN_UP(__pa(_end));
 >>>>>>> v3.18
@@ -221,6 +232,7 @@ void __init setup_cpuinfo(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init or32_early_setup(unsigned int fdt)
 {
 	if (fdt) {
@@ -231,6 +243,8 @@ void __init or32_early_setup(unsigned int fdt)
 		printk(KERN_INFO "Compiled-in FDT at %p\n", __dtb_start);
 	}
 =======
+=======
+>>>>>>> v3.18
 void __init or32_early_setup(void *fdt)
 {
 	if (fdt)
@@ -240,6 +254,9 @@ void __init or32_early_setup(void *fdt)
 		pr_info("Compiled-in FDT at %p\n", fdt);
 	}
 	early_init_devtree(fdt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -291,7 +308,11 @@ void __init detect_unit_config(unsigned long upr, unsigned long mask,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
+=======
+void calibrate_delay(void)
+>>>>>>> v3.18
 =======
 void calibrate_delay(void)
 >>>>>>> v3.18
@@ -313,7 +334,11 @@ void __init setup_arch(char **cmdline_p)
 	unsigned long max_low_pfn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unflatten_device_tree();
+=======
+	unflatten_and_copy_device_tree();
+>>>>>>> v3.18
 =======
 	unflatten_and_copy_device_tree();
 >>>>>>> v3.18
@@ -322,15 +347,21 @@ void __init setup_arch(char **cmdline_p)
 
 	/* process 1's initial memory region is the kernel code/data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_mm.start_code = (unsigned long)&_stext;
 	init_mm.end_code = (unsigned long)&_etext;
 	init_mm.end_data = (unsigned long)&_edata;
 	init_mm.brk = (unsigned long)&_end;
 =======
+=======
+>>>>>>> v3.18
 	init_mm.start_code = (unsigned long)_stext;
 	init_mm.end_code = (unsigned long)_etext;
 	init_mm.end_data = (unsigned long)_edata;
 	init_mm.brk = (unsigned long)_end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_BLK_DEV_INITRD
@@ -355,7 +386,11 @@ void __init setup_arch(char **cmdline_p)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*cmdline_p = cmd_line;
+=======
+	*cmdline_p = boot_command_line;
+>>>>>>> v3.18
 =======
 	*cmdline_p = boot_command_line;
 >>>>>>> v3.18

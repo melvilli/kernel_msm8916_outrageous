@@ -11,7 +11,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -301,7 +304,10 @@ static void tc3589x_keypad_close(struct input_dev *input)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct tc3589x_keypad_platform_data *
 tc3589x_keypad_of_probe(struct device *dev)
@@ -361,6 +367,9 @@ tc3589x_keypad_of_probe(struct device *dev)
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tc3589x_keypad_probe(struct platform_device *pdev)
 {
@@ -373,14 +382,20 @@ static int tc3589x_keypad_probe(struct platform_device *pdev)
 	plat = tc3589x->pdata->keypad;
 	if (!plat) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "invalid keypad platform data\n");
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		plat = tc3589x_keypad_of_probe(&pdev->dev);
 		if (IS_ERR(plat)) {
 			dev_err(&pdev->dev, "invalid keypad platform data\n");
 			return PTR_ERR(plat);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

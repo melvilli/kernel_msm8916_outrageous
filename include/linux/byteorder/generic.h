@@ -3,7 +3,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * linux/byteorder_generic.h
+=======
+ * linux/byteorder/generic.h
+>>>>>>> v3.18
 =======
  * linux/byteorder/generic.h
 >>>>>>> v3.18

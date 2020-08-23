@@ -18,6 +18,7 @@
 #include <linux/icmp.h>
 #include <net/icmp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/ip.h>
 #include <net/tcp.h>
 #include <net/route.h>
@@ -30,6 +31,8 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/netfilter/x_tables.h>
 #include <linux/netfilter_ipv4/ip_tables.h>
 #include <linux/netfilter_ipv4/ipt_REJECT.h>
@@ -39,11 +42,15 @@
 
 #include <net/netfilter/ipv4/nf_reject.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Netfilter Core Team <coreteam@netfilter.org>");
 MODULE_DESCRIPTION("Xtables: packet \"rejection\" target for IPv4");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Send RST reply */
 static void send_reset(struct sk_buff *oldskb, int hook)
@@ -154,6 +161,8 @@ static inline void send_unreach(struct sk_buff *skb_in, int code)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned int
 reject_tg(struct sk_buff *skb, const struct xt_action_param *par)
 {
@@ -161,6 +170,7 @@ reject_tg(struct sk_buff *skb, const struct xt_action_param *par)
 
 	switch (reject->with) {
 	case IPT_ICMP_NET_UNREACHABLE:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		send_unreach(skb, ICMP_NET_UNREACH);
 		break;
@@ -185,6 +195,8 @@ reject_tg(struct sk_buff *skb, const struct xt_action_param *par)
 	case IPT_TCP_RESET:
 		send_reset(skb, par->hooknum);
 =======
+=======
+>>>>>>> v3.18
 		nf_send_unreach(skb, ICMP_NET_UNREACH);
 		break;
 	case IPT_ICMP_HOST_UNREACHABLE:
@@ -207,6 +219,9 @@ reject_tg(struct sk_buff *skb, const struct xt_action_param *par)
 		break;
 	case IPT_TCP_RESET:
 		nf_send_reset(skb, par->hooknum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IPT_ICMP_ECHOREPLY:
 		/* Doesn't happen. */

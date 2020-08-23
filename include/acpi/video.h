@@ -20,12 +20,15 @@ struct acpi_device;
 extern int acpi_video_register(void);
 extern void acpi_video_unregister(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int acpi_video_get_edid(struct acpi_device *device, int type,
 			       int device_id, void **edid);
 #else
 static inline int acpi_video_register(void) { return 0; }
 static inline void acpi_video_unregister(void) { return; }
 =======
+=======
+>>>>>>> v3.18
 extern void acpi_video_unregister_backlight(void);
 extern int acpi_video_get_edid(struct acpi_device *device, int type,
 			       int device_id, void **edid);
@@ -34,6 +37,9 @@ extern bool acpi_video_verify_backlight_support(void);
 static inline int acpi_video_register(void) { return 0; }
 static inline void acpi_video_unregister(void) { return; }
 static inline void acpi_video_unregister_backlight(void) { return; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int acpi_video_get_edid(struct acpi_device *device, int type,
 				      int device_id, void **edid)
@@ -41,6 +47,10 @@ static inline int acpi_video_get_edid(struct acpi_device *device, int type,
 	return -ENODEV;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline bool acpi_video_verify_backlight_support(void) { return false; }
+>>>>>>> v3.18
 =======
 static inline bool acpi_video_verify_backlight_support(void) { return false; }
 >>>>>>> v3.18

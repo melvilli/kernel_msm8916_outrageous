@@ -14,9 +14,15 @@ struct tcf_nat {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct tcf_nat *to_tcf_nat(struct tcf_common *pc)
 {
 	return container_of(pc, struct tcf_nat, common);
+=======
+static inline struct tcf_nat *to_tcf_nat(struct tc_action *a)
+{
+	return container_of(a->priv, struct tcf_nat, common);
+>>>>>>> v3.18
 =======
 static inline struct tcf_nat *to_tcf_nat(struct tc_action *a)
 {

@@ -481,7 +481,11 @@ static int aac_rx_ioremap(struct aac_dev * dev, u32 size)
 static int aac_rx_restart_adapter(struct aac_dev *dev, int bled)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 var;
+=======
+	u32 var = 0;
+>>>>>>> v3.18
 =======
 	u32 var = 0;
 >>>>>>> v3.18
@@ -505,7 +509,11 @@ static int aac_rx_restart_adapter(struct aac_dev *dev, int bled)
 			return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bled || (var == 0x3803000F)) { /* USE_OTHER_METHOD */
+=======
+	if (bled && (var == 0x3803000F)) { /* USE_OTHER_METHOD */
+>>>>>>> v3.18
 =======
 	if (bled && (var == 0x3803000F)) { /* USE_OTHER_METHOD */
 >>>>>>> v3.18
@@ -514,8 +522,14 @@ static int aac_rx_restart_adapter(struct aac_dev *dev, int bled)
 		var = 0x00000001;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (var != 0x00000001)
 		return -EINVAL;
+=======
+	if (bled && (var != 0x00000001))
+		return -EINVAL;
+	ssleep(5);
+>>>>>>> v3.18
 =======
 	if (bled && (var != 0x00000001))
 		return -EINVAL;
@@ -661,7 +675,11 @@ int _aac_rx_init(struct aac_dev *dev)
 	dev->msi = aac_msi && !pci_enable_msi(dev->pdev);
 	if (request_irq(dev->pdev->irq, dev->a_ops.adapter_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_SHARED|IRQF_DISABLED, "aacraid", dev) < 0) {
+=======
+			IRQF_SHARED, "aacraid", dev) < 0) {
+>>>>>>> v3.18
 =======
 			IRQF_SHARED, "aacraid", dev) < 0) {
 >>>>>>> v3.18

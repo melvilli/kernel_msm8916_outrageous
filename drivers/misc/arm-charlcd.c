@@ -12,6 +12,10 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -296,7 +300,11 @@ static int __init charlcd_probe(struct platform_device *pdev)
 	if (!lcd->virtbase) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_no_remap;
+=======
+		goto out_no_memregion;
+>>>>>>> v3.18
 =======
 		goto out_no_memregion;
 >>>>>>> v3.18
@@ -306,7 +314,11 @@ static int __init charlcd_probe(struct platform_device *pdev)
 	/* If no IRQ is supplied, we'll survive without it */
 	if (lcd->irq >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (request_irq(lcd->irq, charlcd_interrupt, IRQF_DISABLED,
+=======
+		if (request_irq(lcd->irq, charlcd_interrupt, 0,
+>>>>>>> v3.18
 =======
 		if (request_irq(lcd->irq, charlcd_interrupt, 0,
 >>>>>>> v3.18
@@ -333,8 +345,11 @@ static int __init charlcd_probe(struct platform_device *pdev)
 out_no_irq:
 	iounmap(lcd->virtbase);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_no_remap:
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_no_memregion:
@@ -353,7 +368,10 @@ static int __exit charlcd_remove(struct platform_device *pdev)
 		iounmap(lcd->virtbase);
 		release_mem_region(lcd->phybase, lcd->physize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree(lcd);
@@ -388,12 +406,18 @@ static const struct dev_pm_ops charlcd_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id charlcd_match[] = {
 	{ .compatible = "arm,versatile-lcd", },
 	{}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver charlcd_driver = {
 	.driver = {
@@ -401,6 +425,10 @@ static struct platform_driver charlcd_driver = {
 		.owner = THIS_MODULE,
 		.pm = &charlcd_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(charlcd_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(charlcd_match),
 >>>>>>> v3.18

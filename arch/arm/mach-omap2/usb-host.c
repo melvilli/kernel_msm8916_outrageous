@@ -29,6 +29,10 @@
 #include <linux/gpio.h>
 #include <linux/usb/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/usb_phy_generic.h>
 >>>>>>> v3.18
@@ -193,6 +197,7 @@ static void __init setup_ehci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static
 void __init setup_4430ehci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 {
@@ -314,6 +319,8 @@ void __init setup_4430ehci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void __init setup_ohci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 {
 	switch (port_mode[0]) {
@@ -412,6 +419,7 @@ static void __init setup_ohci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static
 void __init setup_4430ohci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 {
@@ -486,6 +494,8 @@ void __init setup_4430ohci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __init usbhs_init(struct usbhs_omap_platform_data *pdata)
 {
 	struct omap_hwmod	*uhh_hwm, *tll_hwm;
@@ -500,9 +510,12 @@ void __init usbhs_init(struct usbhs_omap_platform_data *pdata)
 			pdata->single_ulpi_bypass = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (cpu_is_omap44xx()) {
 		setup_4430ehci_io_mux(pdata->port_mode);
 		setup_4430ohci_io_mux(pdata->port_mode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -556,7 +569,11 @@ static struct fixed_voltage_config hsusb_reg_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *nop_name = "nop_usb_xceiv"; /* NOP PHY driver */
+=======
+static const char *nop_name = "usb_phy_generic"; /* NOP PHY driver */
+>>>>>>> v3.18
 =======
 static const char *nop_name = "usb_phy_generic"; /* NOP PHY driver */
 >>>>>>> v3.18
@@ -578,7 +595,12 @@ static int usbhs_add_regulator(char *name, char *dev_id, char *dev_supply,
 	struct fixed_voltage_config *config;
 	struct platform_device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	struct platform_device_info pdevinfo;
+	int ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 	struct platform_device_info pdevinfo;
 	int ret = -ENOMEM;
@@ -594,7 +616,11 @@ static int usbhs_add_regulator(char *name, char *dev_id, char *dev_supply,
 	reg_data = kzalloc(sizeof(*reg_data), GFP_KERNEL);
 	if (!reg_data)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		goto err_data;
+>>>>>>> v3.18
 =======
 		goto err_data;
 >>>>>>> v3.18
@@ -607,22 +633,29 @@ static int usbhs_add_regulator(char *name, char *dev_id, char *dev_supply,
 			GFP_KERNEL);
 	if (!config)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
 
 	config->supply_name = name;
 =======
+=======
+>>>>>>> v3.18
 		goto err_config;
 
 	config->supply_name = kstrdup(name, GFP_KERNEL);
 	if (!config->supply_name)
 		goto err_supplyname;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config->gpio = gpio;
 	config->enable_high = polarity;
 	config->init_data = reg_data;
 
 	/* create a regulator device */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pdev = kzalloc(sizeof(*pdev), GFP_KERNEL);
 	if (!pdev)
@@ -650,6 +683,8 @@ int usbhs_init_phys(struct usbhs_phy_data *phy, int num_phys)
 	/* the phy_id will be something like "nop_usb_xceiv.1" */
 	len = strlen(nop_name) + 3; /* 3 -> ".1" and NULL terminator */
 =======
+=======
+>>>>>>> v3.18
 	memset(&pdevinfo, 0, sizeof(pdevinfo));
 	pdevinfo.name = reg_name;
 	pdevinfo.id = PLATFORM_DEVID_AUTO;
@@ -687,6 +722,9 @@ int usbhs_init_phys(struct usbhs_phy_data *phy, int num_phys)
 	char *phy_id;
 	struct platform_device_info pdevinfo;
 	struct usb_phy_generic_platform_data nop_pdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < num_phys; i++) {
@@ -702,6 +740,7 @@ int usbhs_init_phys(struct usbhs_phy_data *phy, int num_phys)
 			!gpio_is_valid(phy->vcc_gpio))
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* create a NOP PHY device */
 		pdev = kzalloc(sizeof(*pdev), GFP_KERNEL);
@@ -723,6 +762,8 @@ int usbhs_init_phys(struct usbhs_phy_data *phy, int num_phys)
 			pr_err("%s: Failed to register device %s\n",
 				__func__,  phy_id);
 =======
+=======
+>>>>>>> v3.18
 		phy_id = kmalloc(MAX_STR, GFP_KERNEL);
 		if (!phy_id) {
 			pr_err("%s: kmalloc() failed\n", __func__);
@@ -750,12 +791,16 @@ int usbhs_init_phys(struct usbhs_phy_data *phy, int num_phys)
 			pr_err("%s: Failed to register device %s : %ld\n",
 				__func__,  phy_id, PTR_ERR(pdev));
 			kfree(phy_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
 
 		usb_bind_phy("ehci-omap.0", phy->port - 1, phy_id);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Do we need RESET regulator ? */
 		if (gpio_is_valid(phy->reset_gpio)) {
@@ -779,6 +824,11 @@ int usbhs_init_phys(struct usbhs_phy_data *phy, int num_phys)
 
 			scnprintf(rail_name, 13, "hsusb%d_vcc", phy->port);
 
+=======
+		/* Do we need VCC regulator ? */
+		if (gpio_is_valid(phy->vcc_gpio)) {
+			scnprintf(rail_name, MAX_STR, "hsusb%d_vcc", phy->port);
+>>>>>>> v3.18
 =======
 		/* Do we need VCC regulator ? */
 		if (gpio_is_valid(phy->vcc_gpio)) {

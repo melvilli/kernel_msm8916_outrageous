@@ -612,8 +612,14 @@ static void rtas_flash_firmware(int reboot_type)
 		/* Translate data addrs to absolute */
 		for (i = 0; i < f->num_blocks; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			f->blocks[i].data = (char *)__pa(f->blocks[i].data);
 			image_size += f->blocks[i].length;
+=======
+			f->blocks[i].data = (char *)cpu_to_be64(__pa(f->blocks[i].data));
+			image_size += f->blocks[i].length;
+			f->blocks[i].length = cpu_to_be64(f->blocks[i].length);
+>>>>>>> v3.18
 =======
 			f->blocks[i].data = (char *)cpu_to_be64(__pa(f->blocks[i].data));
 			image_size += f->blocks[i].length;
@@ -624,7 +630,11 @@ static void rtas_flash_firmware(int reboot_type)
 		/* Don't translate NULL pointer for last entry */
 		if (f->next)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			f->next = (struct flash_block_list *)__pa(f->next);
+=======
+			f->next = (struct flash_block_list *)cpu_to_be64(__pa(f->next));
+>>>>>>> v3.18
 =======
 			f->next = (struct flash_block_list *)cpu_to_be64(__pa(f->next));
 >>>>>>> v3.18
@@ -633,6 +643,10 @@ static void rtas_flash_firmware(int reboot_type)
 		/* make num_blocks into the version/length field */
 		f->num_blocks = (FLASH_BLOCK_LIST_VERSION << 56) | ((f->num_blocks+1)*16);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		f->num_blocks = cpu_to_be64(f->num_blocks);
+>>>>>>> v3.18
 =======
 		f->num_blocks = cpu_to_be64(f->num_blocks);
 >>>>>>> v3.18
@@ -720,7 +734,11 @@ static int __init rtas_flash_init(void)
 		       RTAS_UNKNOWN_SERVICE) {
 		pr_info("rtas_flash: no firmware flash support\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18

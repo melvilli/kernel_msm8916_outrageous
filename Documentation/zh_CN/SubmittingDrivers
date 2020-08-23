@@ -151,10 +151,13 @@ LWN.net:
 		http://lwn.net/Articles/driver-porting/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 KernelTrap：
 	Linux 内核的最新动态以及开发者访谈
 	http://kerneltrap.org/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 内核新手(KernelNewbies):

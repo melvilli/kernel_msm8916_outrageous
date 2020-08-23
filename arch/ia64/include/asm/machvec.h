@@ -114,8 +114,11 @@ extern void machvec_tlb_migrate_finish (struct mm_struct *);
 # elif defined (CONFIG_IA64_SGI_UV)
 #  include <asm/machvec_uv.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 # elif defined (CONFIG_IA64_XEN_GUEST)
 #  include <asm/machvec_xen.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # elif defined (CONFIG_IA64_GENERIC)

@@ -555,7 +555,10 @@ int cfspi_rxfrm(struct cfspi *cfspi, u8 *buf, size_t len)
 		skb->protocol = htons(ETH_P_CAIF);
 		skb_reset_mac_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->dev = cfspi->ndev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -735,8 +738,13 @@ int cfspi_spi_probe(struct platform_device *pdev)
 	dev = (struct cfspi_dev *)pdev->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ndev = alloc_netdev(sizeof(struct cfspi),
 			"cfspi%d", cfspi_setup);
+=======
+	ndev = alloc_netdev(sizeof(struct cfspi), "cfspi%d",
+			    NET_NAME_UNKNOWN, cfspi_setup);
+>>>>>>> v3.18
 =======
 	ndev = alloc_netdev(sizeof(struct cfspi), "cfspi%d",
 			    NET_NAME_UNKNOWN, cfspi_setup);

@@ -117,8 +117,11 @@ static inline notrace int decrementer_check_overflow(void)
  	u64 *next_tb = &__get_cpu_var(decrementers_next_tb);
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (now >= *next_tb)
 		set_dec(1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return now >= *next_tb;
@@ -195,12 +198,18 @@ notrace unsigned int __check_irq_replay(void)
 #endif /* CONFIG_PPC_BOOK3E */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Check if an hypervisor Maintenance interrupt happened */
 	local_paca->irq_happened &= ~PACA_IRQ_HMI;
 	if (happened & PACA_IRQ_HMI)
 		return 0xe60;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* There should be nothing left ! */
 	BUG_ON(local_paca->irq_happened != 0);
@@ -318,7 +327,11 @@ void notrace restore_interrupts(void)
  * and in the latter case it will leave with interrupts hard
  * disabled and marked as such, so the local_irq_enable() call
 <<<<<<< HEAD
+<<<<<<< HEAD
  * in cpu_idle() will properly re-enable everything.
+=======
+ * in arch_cpu_idle() will properly re-enable everything.
+>>>>>>> v3.18
 =======
  * in arch_cpu_idle() will properly re-enable everything.
 >>>>>>> v3.18
@@ -372,9 +385,12 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 	seq_printf(p, "%*s: ", prec, "LOC");
 	for_each_online_cpu(j)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(p, "%10u ", per_cpu(irq_stat, j).timer_irqs);
         seq_printf(p, "  Local timer interrupts\n");
 =======
+=======
+>>>>>>> v3.18
 		seq_printf(p, "%10u ", per_cpu(irq_stat, j).timer_irqs_event);
         seq_printf(p, "  Local timer interrupts for timer event device\n");
 
@@ -382,6 +398,9 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 	for_each_online_cpu(j)
 		seq_printf(p, "%10u ", per_cpu(irq_stat, j).timer_irqs_others);
         seq_printf(p, "  Local timer interrupts for others\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	seq_printf(p, "%*s: ", prec, "SPU");
@@ -390,7 +409,11 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 	seq_printf(p, "  Spurious interrupts\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(p, "%*s: ", prec, "CNT");
+=======
+	seq_printf(p, "%*s: ", prec, "PMI");
+>>>>>>> v3.18
 =======
 	seq_printf(p, "%*s: ", prec, "PMI");
 >>>>>>> v3.18
@@ -404,7 +427,10 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 	seq_printf(p, "  Machine check exceptions\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_has_feature(CPU_FTR_HVMODE)) {
 		seq_printf(p, "%*s: ", prec, "HMI");
 		for_each_online_cpu(j)
@@ -413,6 +439,9 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 		seq_printf(p, "  Hypervisor Maintenance Interrupts\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_DOORBELL
 	if (cpu_has_feature(CPU_FTR_DBELL)) {
@@ -432,7 +461,11 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 u64 arch_irq_stat_cpu(unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 sum = per_cpu(irq_stat, cpu).timer_irqs;
+=======
+	u64 sum = per_cpu(irq_stat, cpu).timer_irqs_event;
+>>>>>>> v3.18
 =======
 	u64 sum = per_cpu(irq_stat, cpu).timer_irqs_event;
 >>>>>>> v3.18
@@ -441,6 +474,11 @@ u64 arch_irq_stat_cpu(unsigned int cpu)
 	sum += per_cpu(irq_stat, cpu).mce_exceptions;
 	sum += per_cpu(irq_stat, cpu).spurious_irqs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sum += per_cpu(irq_stat, cpu).timer_irqs_others;
+	sum += per_cpu(irq_stat, cpu).hmi_exceptions;
+>>>>>>> v3.18
 =======
 	sum += per_cpu(irq_stat, cpu).timer_irqs_others;
 	sum += per_cpu(irq_stat, cpu).hmi_exceptions;
@@ -476,7 +514,11 @@ void migrate_irqs(void)
 		cpumask_and(mask, data->affinity, map);
 		if (cpumask_any(mask) >= nr_cpu_ids) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("Breaking affinity for irq %i\n", irq);
+=======
+			pr_warn("Breaking affinity for irq %i\n", irq);
+>>>>>>> v3.18
 =======
 			pr_warn("Breaking affinity for irq %i\n", irq);
 >>>>>>> v3.18
@@ -486,7 +528,11 @@ void migrate_irqs(void)
 			chip->irq_set_affinity(data, mask, true);
 		else if (desc->action && !(warned++))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("Cannot set affinity for irq %i\n", irq);
+=======
+			pr_err("Cannot set affinity for irq %i\n", irq);
+>>>>>>> v3.18
 =======
 			pr_err("Cannot set affinity for irq %i\n", irq);
 >>>>>>> v3.18
@@ -500,6 +546,7 @@ void migrate_irqs(void)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void handle_one_irq(unsigned int irq)
 {
@@ -547,11 +594,14 @@ static inline void handle_one_irq(unsigned int irq)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline void check_stack_overflow(void)
 {
 #ifdef CONFIG_DEBUG_STACKOVERFLOW
 	long sp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sp = __get_SP() & (THREAD_SIZE-1);
 
@@ -559,11 +609,16 @@ static inline void check_stack_overflow(void)
 	if (unlikely(sp < (sizeof(struct thread_info) + 2048))) {
 		printk("do_IRQ: stack overflow: %ld\n",
 =======
+=======
+>>>>>>> v3.18
 	sp = current_stack_pointer() & (THREAD_SIZE-1);
 
 	/* check for stack overflow: is there less than 2KB free? */
 	if (unlikely(sp < (sizeof(struct thread_info) + 2048))) {
 		pr_err("do_IRQ: stack overflow: %ld\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sp - sizeof(struct thread_info));
 		dump_stack();
@@ -572,9 +627,14 @@ static inline void check_stack_overflow(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_IRQ(struct pt_regs *regs)
 {
 	struct pt_regs *old_regs = set_irq_regs(regs);
+=======
+void __do_irq(struct pt_regs *regs)
+{
+>>>>>>> v3.18
 =======
 void __do_irq(struct pt_regs *regs)
 {
@@ -595,6 +655,7 @@ void __do_irq(struct pt_regs *regs)
 	irq = ppc_md.get_irq();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We can hard enable interrupts now */
 	may_hard_irq_enable();
 
@@ -604,6 +665,8 @@ void __do_irq(struct pt_regs *regs)
 	else
 		__get_cpu_var(irq_stat).spurious_irqs++;
 =======
+=======
+>>>>>>> v3.18
 	/* We can hard enable interrupts now to allow perf interrupts */
 	may_hard_irq_enable();
 
@@ -612,13 +675,19 @@ void __do_irq(struct pt_regs *regs)
 		__get_cpu_var(irq_stat).spurious_irqs++;
 	else
 		generic_handle_irq(irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	trace_irq_exit(regs);
 
 	irq_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 void do_IRQ(struct pt_regs *regs)
@@ -655,6 +724,9 @@ void do_IRQ(struct pt_regs *regs)
 	if (irqtp->flags)
 		set_bits(irqtp->flags, &curtp->flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_irq_regs(old_regs);
 }
@@ -684,9 +756,12 @@ void exc_lvl_ctx_init(void)
 		cpu_nr = i;
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu_nr = get_hard_smp_processor_id(i);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 		cpu_nr = get_hard_smp_processor_id(i);
 #else
@@ -694,6 +769,9 @@ void exc_lvl_ctx_init(void)
 #endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memset((void *)critirq_ctx[cpu_nr], 0, THREAD_SIZE);
 		tp = critirq_ctx[cpu_nr];
@@ -728,13 +806,17 @@ void irq_ctx_init(void)
 		tp = softirq_ctx[i];
 		tp->cpu = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tp->preempt_count = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 		memset((void *)hardirq_ctx[i], 0, THREAD_SIZE);
 		tp = hardirq_ctx[i];
 		tp->cpu = i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tp->preempt_count = HARDIRQ_OFFSET;
 	}
@@ -745,12 +827,17 @@ static inline void do_softirq_onstack(void)
 	struct thread_info *curtp, *irqtp;
 	unsigned long saved_sp_limit = current->thread.ksp_limit;
 =======
+=======
+>>>>>>> v3.18
 	}
 }
 
 void do_softirq_own_stack(void)
 {
 	struct thread_info *curtp, *irqtp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	curtp = current_thread_info();
@@ -758,10 +845,14 @@ void do_softirq_own_stack(void)
 	irqtp->task = curtp->task;
 	irqtp->flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->thread.ksp_limit = (unsigned long)irqtp +
 				    _ALIGN_UP(sizeof(struct thread_info), 16);
 	call_do_softirq(irqtp);
 	current->thread.ksp_limit = saved_sp_limit;
+=======
+	call_do_softirq(irqtp);
+>>>>>>> v3.18
 =======
 	call_do_softirq(irqtp);
 >>>>>>> v3.18
@@ -774,6 +865,7 @@ void do_softirq_own_stack(void)
 		set_bits(irqtp->flags, &curtp->flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void do_softirq(void)
 {
@@ -790,6 +882,8 @@ void do_softirq(void)
 	local_irq_restore(flags);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 irq_hw_number_t virq_to_hw(unsigned int virq)

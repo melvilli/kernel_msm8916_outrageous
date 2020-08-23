@@ -3,6 +3,7 @@ Kernel driver ds1621
 
 Supported chips:
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Dallas Semiconductor DS1621
     Prefix: 'ds1621'
     Addresses scanned: I2C 0x48 - 0x4f
@@ -14,6 +15,8 @@ Supported chips:
     Datasheet: Publicly available at the Dallas Semiconductor website
                http://www.dalsemi.com/
 =======
+=======
+>>>>>>> v3.18
   * Dallas Semiconductor / Maxim Integrated DS1621
     Prefix: 'ds1621'
     Addresses scanned: none
@@ -38,6 +41,9 @@ Supported chips:
     Prefix: 'ds1731'
     Addresses scanned: none
     Datasheet: Publicly available from www.maximintegrated.com
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Authors:
@@ -45,7 +51,11 @@ Authors:
         valuable contributions by Jan M. Sendler <sendler@sendler.de>
         ported to 2.6 by Aurelien Jarno <aurelien@aurel32.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
         with the help of Jean Delvare <khali@linux-fr.org>
+=======
+        with the help of Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
         with the help of Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -91,9 +101,12 @@ reset. Be aware: When testing, it showed that the status of Tout can change
 with neither of the alarms set.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Temperature conversion of the DS1621 takes up to 1000ms; internal access to
 non-volatile registers may last for 10ms or below.
 =======
+=======
+>>>>>>> v3.18
 Since there is no version or vendor identification register, there is
 no unique identification for these devices. Therefore, explicit device
 instantiation is required for correct device identification and functionality
@@ -206,4 +219,7 @@ where:
  -> 'x' = the output from 'update_interval'
  -> 'g(x)' = the resolution in degrees C per LSB.
  -> 93.75ms = minimum conversion time
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

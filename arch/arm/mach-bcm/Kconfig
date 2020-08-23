@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_BCM
 	bool "Broadcom SoC" if ARCH_MULTI_V7
 	depends on MMU
@@ -19,6 +20,8 @@ config ARCH_BCM
 	  BCM11130, BCM11140, BCM11351, BCM28145 and
 	  BCM28155 variants.
 =======
+=======
+>>>>>>> v3.18
 menuconfig ARCH_BCM
 	bool "Broadcom SoC Support" if ARCH_MULTI_V6_V7
 	help
@@ -154,4 +157,7 @@ config ARCH_BRCMSTB
 	  including the 7445 family of chips.
 
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

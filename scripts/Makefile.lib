@@ -28,7 +28,11 @@ lib-y := $(filter-out $(obj-y), $(sort $(lib-y) $(lib-m)))
 # o if we encounter foo/ in $(obj-y), replace it by foo/built-in.o
 #   and add the directory to the list of dirs to descend into: $(subdir-y)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # o if we encounter foo/ in $(obj-m), remove it from $(obj-m) 
+=======
+# o if we encounter foo/ in $(obj-m), remove it from $(obj-m)
+>>>>>>> v3.18
 =======
 # o if we encounter foo/ in $(obj-m), remove it from $(obj-m)
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ obj-m		:= $(filter-out %/, $(obj-m))
 subdir-ym	:= $(sort $(subdir-y) $(subdir-m))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # if $(foo-objs) exists, foo.o is a composite object 
+=======
+# if $(foo-objs) exists, foo.o is a composite object
+>>>>>>> v3.18
 =======
 # if $(foo-objs) exists, foo.o is a composite object
 >>>>>>> v3.18
@@ -72,7 +80,11 @@ subdir-obj-y := $(filter %/built-in.o, $(obj-y))
 
 # $(obj-dirs) is a list of directories that contain object files
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-dirs := $(dir $(multi-objs) $(subdir-obj-y))
+=======
+obj-dirs := $(dir $(multi-objs) $(obj-y))
+>>>>>>> v3.18
 =======
 obj-dirs := $(dir $(multi-objs) $(obj-y))
 >>>>>>> v3.18
@@ -104,7 +116,11 @@ obj-dirs	:= $(addprefix $(obj)/,$(obj-dirs))
 # These flags are needed for modversions and compiling, so we define them here
 # already
 <<<<<<< HEAD
+<<<<<<< HEAD
 # $(modname_flags) #defines KBUILD_MODNAME as the name of the module it will 
+=======
+# $(modname_flags) #defines KBUILD_MODNAME as the name of the module it will
+>>>>>>> v3.18
 =======
 # $(modname_flags) #defines KBUILD_MODNAME as the name of the module it will
 >>>>>>> v3.18
@@ -169,6 +185,10 @@ dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
 		 -I$(srctree)/arch/$(SRCARCH)/boot/dts                   \
 		 -I$(srctree)/arch/$(SRCARCH)/boot/dts/include           \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		 -I$(srctree)/drivers/of/testcase-data                   \
+>>>>>>> v3.18
 =======
 		 -I$(srctree)/drivers/of/testcase-data                   \
 >>>>>>> v3.18
@@ -179,7 +199,10 @@ modname-multi = $(sort $(foreach m,$(multi-used),\
 		$(if $(filter $(subst $(obj)/,,$*.o), $($(m:.o=-objs)) $($(m:.o=-y))),$(m:.o=))))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Useful for describing the dependency of composite objects
 # Usage:
 #   $(call multi_depend, multi_used_targets, suffix_to_remove, suffix_to_add)
@@ -189,6 +212,9 @@ $(foreach m, $(notdir $1), \
 	$(addprefix $(obj)/, $(foreach s, $3, $($(m:%$(strip $2)=%$(s)))))))
 endef
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ifdef REGENERATE_PARSERS
 
@@ -244,7 +270,11 @@ $(obj)/%: $(src)/%_shipped
 # Commands useful for building a boot image
 # ===========================================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> v3.18
 =======
 #
 >>>>>>> v3.18
@@ -262,7 +292,11 @@ $(obj)/%: $(src)/%_shipped
 quiet_cmd_ld = LD      $@
 cmd_ld = $(LD) $(LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F)) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       $(filter-out FORCE,$^) -o $@ 
+=======
+	       $(filter-out FORCE,$^) -o $@
+>>>>>>> v3.18
 =======
 	       $(filter-out FORCE,$^) -o $@
 >>>>>>> v3.18
@@ -285,7 +319,11 @@ cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
 
 # Generate an assembly file to wrap the output of the device tree compiler
 <<<<<<< HEAD
+<<<<<<< HEAD
 quiet_cmd_dt_S_dtb= DTB    $@
+=======
+quiet_cmd_dt_S_dtb= DTB     $@
+>>>>>>> v3.18
 =======
 quiet_cmd_dt_S_dtb= DTB     $@
 >>>>>>> v3.18
@@ -318,12 +356,15 @@ $(obj)/%.dtb: $(src)/%.dts FORCE
 dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # cat
 # ---------------------------------------------------------------------------
 # Concatentate multiple files together
 quiet_cmd_cat = CAT     $@
 cmd_cat = (cat $(filter-out FORCE,$^) > $@) || (rm -f $@; false)
 =======
+=======
+>>>>>>> v3.18
 # Helper targets for Installing DTBs into the boot directory
 quiet_cmd_dtb_install =	INSTALL $<
       cmd_dtb_install =	cp $< $(2)
@@ -335,6 +376,9 @@ _dtbinst_pre_:
 
 %.dtb_dtbinst_: $(obj)/%.dtb _dtbinst_pre_
 	$(call cmd,dtb_install,$(INSTALL_DTBS_PATH))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # Bzip2
@@ -376,12 +420,18 @@ cmd_lzo = (cat $(filter-out FORCE,$^) | \
 	(rm -f $@ ; false)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 quiet_cmd_lz4 = LZ4     $@
 cmd_lz4 = (cat $(filter-out FORCE,$^) | \
 	lz4c -l -c1 stdin stdout && $(call size_append, $(filter-out FORCE,$^))) > $@ || \
 	(rm -f $@ ; false)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # U-Boot mkimage
 # ---------------------------------------------------------------------------
@@ -435,9 +485,12 @@ cmd_xzmisc = (cat $(filter-out FORCE,$^) | \
 	xz --check=crc32 --lzma2=dict=1MiB) > $@ || \
 	(rm -f $@ ; false)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # misc stuff
 # ---------------------------------------------------------------------------
 quote:="
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

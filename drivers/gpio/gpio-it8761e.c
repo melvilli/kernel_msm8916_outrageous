@@ -218,11 +218,15 @@ static void __exit it8761e_gpio_exit(void)
 {
 	if (gpio_ba) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int ret = gpiochip_remove(&it8761e_gpio_chip);
 
 		WARN(ret, "%s(): gpiochip_remove() failed, ret=%d\n",
 				__func__, ret);
 
+=======
+		gpiochip_remove(&it8761e_gpio_chip);
+>>>>>>> v3.18
 =======
 		gpiochip_remove(&it8761e_gpio_chip);
 >>>>>>> v3.18

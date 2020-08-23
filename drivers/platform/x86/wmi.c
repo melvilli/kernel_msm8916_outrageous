@@ -38,8 +38,11 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -256,8 +259,11 @@ static acpi_status wmi_method_enable(struct wmi_block *wblock, int enable)
 	struct guid_block *block = NULL;
 	char method[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_object_list input;
 	union acpi_object params[1];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_status status;
@@ -266,6 +272,7 @@ static acpi_status wmi_method_enable(struct wmi_block *wblock, int enable)
 	block = &wblock->gblock;
 	handle = wblock->handle;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!block)
 		return AE_NOT_EXIST;
@@ -277,6 +284,10 @@ static acpi_status wmi_method_enable(struct wmi_block *wblock, int enable)
 
 	snprintf(method, 5, "WE%02X", block->notify_id);
 	status = acpi_evaluate_object(handle, method, &input, NULL);
+=======
+	snprintf(method, 5, "WE%02X", block->notify_id);
+	status = acpi_execute_simple_method(handle, method, enable);
+>>>>>>> v3.18
 =======
 	snprintf(method, 5, "WE%02X", block->notify_id);
 	status = acpi_execute_simple_method(handle, method, enable);
@@ -365,15 +376,21 @@ struct acpi_buffer *out)
 	struct guid_block *block = NULL;
 	struct wmi_block *wblock = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle, wc_handle;
 	acpi_status status, wc_status = AE_ERROR;
 	struct acpi_object_list input, wc_input;
 	union acpi_object wc_params[1], wq_params[1];
 =======
+=======
+>>>>>>> v3.18
 	acpi_handle handle;
 	acpi_status status, wc_status = AE_ERROR;
 	struct acpi_object_list input;
 	union acpi_object wq_params[1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char method[5];
 	char wc_method[5] = "WC";
@@ -405,11 +422,14 @@ struct acpi_buffer *out)
 	 */
 	if (block->flags & ACPI_WMI_EXPENSIVE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wc_input.count = 1;
 		wc_input.pointer = wc_params;
 		wc_params[0].type = ACPI_TYPE_INTEGER;
 		wc_params[0].integer.value = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		strncat(wc_method, block->object_id, 2);
@@ -420,10 +440,16 @@ struct acpi_buffer *out)
 		 * should not fail if this happens.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wc_status = acpi_get_handle(handle, wc_method, &wc_handle);
 		if (ACPI_SUCCESS(wc_status))
 			wc_status = acpi_evaluate_object(handle, wc_method,
 				&wc_input, NULL);
+=======
+		if (acpi_has_method(handle, wc_method))
+			wc_status = acpi_execute_simple_method(handle,
+								wc_method, 1);
+>>>>>>> v3.18
 =======
 		if (acpi_has_method(handle, wc_method))
 			wc_status = acpi_execute_simple_method(handle,
@@ -442,9 +468,13 @@ struct acpi_buffer *out)
 	 */
 	if ((block->flags & ACPI_WMI_EXPENSIVE) && ACPI_SUCCESS(wc_status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wc_params[0].integer.value = 0;
 		status = acpi_evaluate_object(handle,
 		wc_method, &wc_input, NULL);
+=======
+		status = acpi_execute_simple_method(handle, wc_method, 0);
+>>>>>>> v3.18
 =======
 		status = acpi_execute_simple_method(handle, wc_method, 0);
 >>>>>>> v3.18
@@ -718,13 +748,19 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 
 	wblock = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!wblock)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!wblock) {
 		strcat(buf, "\n");
 		return strlen(buf);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wmi_gtoa(wblock->gblock.guid, guid_string);
@@ -732,12 +768,15 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "wmi:%s\n", guid_string);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute wmi_dev_attrs[] = {
 	__ATTR_RO(modalias),
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static struct attribute *wmi_attrs[] = {
@@ -745,6 +784,9 @@ static struct attribute *wmi_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(wmi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int wmi_dev_uevent(struct device *dev, struct kobj_uevent_env *env)
@@ -781,7 +823,11 @@ static struct class wmi_class = {
 	.dev_release = wmi_dev_free,
 	.dev_uevent = wmi_dev_uevent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = wmi_dev_attrs,
+=======
+	.dev_groups = wmi_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = wmi_groups,
 >>>>>>> v3.18
@@ -796,7 +842,11 @@ static int wmi_create_device(const struct guid_block *gblock,
 
 	wmi_gtoa(gblock->guid, guid_string);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&wblock->dev, guid_string);
+=======
+	dev_set_name(&wblock->dev, "%s", guid_string);
+>>>>>>> v3.18
 =======
 	dev_set_name(&wblock->dev, "%s", guid_string);
 >>>>>>> v3.18
@@ -835,7 +885,11 @@ static bool guid_already_parsed(const char *guid_string)
  * Parse the _WDG method for the GUID data blocks
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static acpi_status parse_wdg(acpi_handle handle)
+=======
+static int parse_wdg(acpi_handle handle)
+>>>>>>> v3.18
 =======
 static int parse_wdg(acpi_handle handle)
 >>>>>>> v3.18
@@ -871,7 +925,11 @@ static int parse_wdg(acpi_handle handle)
 		wblock = kzalloc(sizeof(struct wmi_block), GFP_KERNEL);
 		if (!wblock)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return AE_NO_MEMORY;
+=======
+			return -ENOMEM;
+>>>>>>> v3.18
 =======
 			return -ENOMEM;
 >>>>>>> v3.18

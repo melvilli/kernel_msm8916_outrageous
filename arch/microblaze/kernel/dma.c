@@ -14,6 +14,7 @@
 #include <linux/bug.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Generic direct DMA implementation
  *
@@ -31,6 +32,8 @@ static unsigned long get_dma_direct_offset(struct device *dev)
 	return PCI_DRAM_OFFSET; /* FIXME Not sure if is correct */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NOT_COHERENT_CACHE
@@ -55,7 +58,11 @@ static void *dma_direct_alloc_coherent(struct device *dev, size_t size,
 	ret = page_address(page);
 	memset(ret, 0, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*dma_handle = virt_to_phys(ret) + get_dma_direct_offset(dev);
+=======
+	*dma_handle = virt_to_phys(ret);
+>>>>>>> v3.18
 =======
 	*dma_handle = virt_to_phys(ret);
 >>>>>>> v3.18
@@ -85,7 +92,11 @@ static int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl,
 	/* FIXME this part of code is untested */
 	for_each_sg(sgl, sg, nents, i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sg->dma_address = sg_phys(sg) + get_dma_direct_offset(dev);
+=======
+		sg->dma_address = sg_phys(sg);
+>>>>>>> v3.18
 =======
 		sg->dma_address = sg_phys(sg);
 >>>>>>> v3.18
@@ -97,12 +108,15 @@ static int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dma_direct_unmap_sg(struct device *dev, struct scatterlist *sg,
 				int nents, enum dma_data_direction direction,
 				struct dma_attrs *attrs)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int dma_direct_dma_supported(struct device *dev, u64 mask)
@@ -119,7 +133,11 @@ static inline dma_addr_t dma_direct_map_page(struct device *dev,
 {
 	__dma_sync(page_to_phys(page) + offset, size, direction);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return page_to_phys(page) + offset + get_dma_direct_offset(dev);
+=======
+	return page_to_phys(page) + offset;
+>>>>>>> v3.18
 =======
 	return page_to_phys(page) + offset;
 >>>>>>> v3.18
@@ -200,7 +218,10 @@ struct dma_map_ops dma_direct_ops = {
 	.free		= dma_direct_free_coherent,
 	.map_sg		= dma_direct_map_sg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.unmap_sg	= dma_direct_unmap_sg,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.dma_supported	= dma_direct_dma_supported,

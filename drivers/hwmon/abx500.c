@@ -316,7 +316,11 @@ static SENSOR_DEVICE_ATTR(temp4_min_alarm, S_IRUGO, show_min_alarm, NULL, 3);
 static SENSOR_DEVICE_ATTR(temp4_max_alarm, S_IRUGO, show_max_alarm, NULL, 3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct attribute *abx500_temp_attributes[] = {
+=======
+static struct attribute *abx500_temp_attributes[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *abx500_temp_attributes[] = {
 >>>>>>> v3.18

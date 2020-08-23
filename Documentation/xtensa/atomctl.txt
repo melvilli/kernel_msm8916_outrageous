@@ -41,7 +41,11 @@ See Section 4.3.12.4 of ISA; Bits:
     0        Exception               Exception               Exception
     1        RCW Transaction         RCW Transaction         RCW Transaction
 <<<<<<< HEAD
+<<<<<<< HEAD
     2        Internal Operation      Exception               Reserved
+=======
+    2        Internal Operation      Internal Operation      Reserved
+>>>>>>> v3.18
 =======
     2        Internal Operation      Internal Operation      Reserved
 >>>>>>> v3.18

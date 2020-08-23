@@ -20,7 +20,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -324,7 +327,11 @@ static int ucb1400_ts_detect_irq(struct ucb1400_ts *ucb,
 static int ucb1400_ts_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ucb1400_ts *ucb = pdev->dev.platform_data;
+=======
+	struct ucb1400_ts *ucb = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct ucb1400_ts *ucb = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -407,7 +414,11 @@ err:
 static int ucb1400_ts_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ucb1400_ts *ucb = pdev->dev.platform_data;
+=======
+	struct ucb1400_ts *ucb = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct ucb1400_ts *ucb = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -422,7 +433,11 @@ static int ucb1400_ts_remove(struct platform_device *pdev)
 static int ucb1400_ts_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ucb1400_ts *ucb = dev->platform_data;
+=======
+	struct ucb1400_ts *ucb = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct ucb1400_ts *ucb = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -440,7 +455,11 @@ static int ucb1400_ts_suspend(struct device *dev)
 static int ucb1400_ts_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ucb1400_ts *ucb = dev->platform_data;
+=======
+	struct ucb1400_ts *ucb = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct ucb1400_ts *ucb = dev_get_platdata(dev);
 >>>>>>> v3.18

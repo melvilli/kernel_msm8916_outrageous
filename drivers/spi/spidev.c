@@ -38,7 +38,11 @@
 #include <linux/spi/spidev.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -78,7 +82,12 @@ static DECLARE_BITMAP(minors, N_SPI_MINORS);
 #define SPI_MODE_MASK		(SPI_CPHA | SPI_CPOL | SPI_CS_HIGH \
 				| SPI_LSB_FIRST | SPI_3WIRE | SPI_LOOP \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				| SPI_NO_CS | SPI_READY)
+=======
+				| SPI_NO_CS | SPI_READY | SPI_TX_DUAL \
+				| SPI_TX_QUAD | SPI_RX_DUAL | SPI_RX_QUAD)
+>>>>>>> v3.18
 =======
 				| SPI_NO_CS | SPI_READY | SPI_TX_DUAL \
 				| SPI_TX_QUAD | SPI_RX_DUAL | SPI_RX_QUAD)
@@ -91,17 +100,23 @@ struct spidev_data {
 	struct list_head	device_entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* buffer is NULL unless this device is open (users > 0) */
 	struct mutex		buf_lock;
 	unsigned		users;
 	u8			*buffer;
 	u8			*bufferrx;
 =======
+=======
+>>>>>>> v3.18
 	/* TX/RX buffers are NULL unless this device is open (users > 0) */
 	struct mutex		buf_lock;
 	unsigned		users;
 	u8			*tx_buffer;
 	u8			*rx_buffer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -112,6 +127,7 @@ static unsigned bufsiz = 4096;
 module_param(bufsiz, uint, S_IRUGO);
 MODULE_PARM_DESC(bufsiz, "data bytes in biggest supported SPI message");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This can be used for testing the controller, given the busnum and the
@@ -137,6 +153,8 @@ MODULE_PARM_DESC(spimode, "mode of the desired device");
 
 static struct spi_device *spi;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*-------------------------------------------------------------------------*/
@@ -180,7 +198,11 @@ spidev_sync_write(struct spidev_data *spidev, size_t len)
 {
 	struct spi_transfer	t = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.tx_buf		= spidev->buffer,
+=======
+			.tx_buf		= spidev->tx_buffer,
+>>>>>>> v3.18
 =======
 			.tx_buf		= spidev->tx_buffer,
 >>>>>>> v3.18
@@ -198,7 +220,11 @@ spidev_sync_read(struct spidev_data *spidev, size_t len)
 {
 	struct spi_transfer	t = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.rx_buf		= spidev->buffer,
+=======
+			.rx_buf		= spidev->rx_buffer,
+>>>>>>> v3.18
 =======
 			.rx_buf		= spidev->rx_buffer,
 >>>>>>> v3.18
@@ -232,7 +258,11 @@ spidev_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)
 		unsigned long	missing;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		missing = copy_to_user(buf, spidev->buffer, status);
+=======
+		missing = copy_to_user(buf, spidev->rx_buffer, status);
+>>>>>>> v3.18
 =======
 		missing = copy_to_user(buf, spidev->rx_buffer, status);
 >>>>>>> v3.18
@@ -263,15 +293,21 @@ spidev_write(struct file *filp, const char __user *buf,
 
 	mutex_lock(&spidev->buf_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	missing = copy_from_user(spidev->buffer, buf, count);
 	if (missing == 0) {
 		status = spidev_sync_write(spidev, count);
 	} else
 =======
+=======
+>>>>>>> v3.18
 	missing = copy_from_user(spidev->tx_buffer, buf, count);
 	if (missing == 0)
 		status = spidev_sync_write(spidev, count);
 	else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = -EFAULT;
 	mutex_unlock(&spidev->buf_lock);
@@ -288,7 +324,11 @@ static int spidev_message(struct spidev_data *spidev,
 	struct spi_ioc_transfer *u_tmp;
 	unsigned		n, total;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			*buf, *bufrx;
+=======
+	u8			*tx_buf, *rx_buf;
+>>>>>>> v3.18
 =======
 	u8			*tx_buf, *rx_buf;
 >>>>>>> v3.18
@@ -304,8 +344,13 @@ static int spidev_message(struct spidev_data *spidev,
 	 * to initialize a kernel version of the same transfer.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = spidev->buffer;
 	bufrx = spidev->bufferrx;
+=======
+	tx_buf = spidev->tx_buffer;
+	rx_buf = spidev->rx_buffer;
+>>>>>>> v3.18
 =======
 	tx_buf = spidev->tx_buffer;
 	rx_buf = spidev->rx_buffer;
@@ -318,10 +363,14 @@ static int spidev_message(struct spidev_data *spidev,
 
 		total += k_tmp->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Check total length of transfers.  Also check each
 		 * transfer length to avoid arithmetic overflow.
 		 */
 		if (total > bufsiz || k_tmp->len > bufsiz) {
+=======
+		if (total > bufsiz) {
+>>>>>>> v3.18
 =======
 		if (total > bufsiz) {
 >>>>>>> v3.18
@@ -331,7 +380,11 @@ static int spidev_message(struct spidev_data *spidev,
 
 		if (u_tmp->rx_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			k_tmp->rx_buf = bufrx;
+=======
+			k_tmp->rx_buf = rx_buf;
+>>>>>>> v3.18
 =======
 			k_tmp->rx_buf = rx_buf;
 >>>>>>> v3.18
@@ -342,8 +395,13 @@ static int spidev_message(struct spidev_data *spidev,
 		}
 		if (u_tmp->tx_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			k_tmp->tx_buf = buf;
 			if (copy_from_user(buf, (const u8 __user *)
+=======
+			k_tmp->tx_buf = tx_buf;
+			if (copy_from_user(tx_buf, (const u8 __user *)
+>>>>>>> v3.18
 =======
 			k_tmp->tx_buf = tx_buf;
 			if (copy_from_user(tx_buf, (const u8 __user *)
@@ -353,17 +411,23 @@ static int spidev_message(struct spidev_data *spidev,
 				goto done;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf += k_tmp->len;
 		bufrx += k_tmp->len;
 
 		k_tmp->cs_change = !!u_tmp->cs_change;
 =======
+=======
+>>>>>>> v3.18
 		tx_buf += k_tmp->len;
 		rx_buf += k_tmp->len;
 
 		k_tmp->cs_change = !!u_tmp->cs_change;
 		k_tmp->tx_nbits = u_tmp->tx_nbits;
 		k_tmp->rx_nbits = u_tmp->rx_nbits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		k_tmp->bits_per_word = u_tmp->bits_per_word;
 		k_tmp->delay_usecs = u_tmp->delay_usecs;
@@ -388,17 +452,23 @@ static int spidev_message(struct spidev_data *spidev,
 
 	/* copy any rx data out of bounce buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = spidev->bufferrx;
 	for (n = n_xfers, u_tmp = u_xfers; n; n--, u_tmp++) {
 		if (u_tmp->rx_buf) {
 			if (__copy_to_user((u8 __user *)
 					(uintptr_t) u_tmp->rx_buf, buf,
 =======
+=======
+>>>>>>> v3.18
 	rx_buf = spidev->rx_buffer;
 	for (n = n_xfers, u_tmp = u_xfers; n; n--, u_tmp++) {
 		if (u_tmp->rx_buf) {
 			if (__copy_to_user((u8 __user *)
 					(uintptr_t) u_tmp->rx_buf, rx_buf,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					u_tmp->len)) {
 				status = -EFAULT;
@@ -406,7 +476,11 @@ static int spidev_message(struct spidev_data *spidev,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf += u_tmp->len;
+=======
+		rx_buf += u_tmp->len;
+>>>>>>> v3.18
 =======
 		rx_buf += u_tmp->len;
 >>>>>>> v3.18
@@ -472,11 +546,17 @@ spidev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 					(__u8 __user *)arg);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SPI_IOC_RD_MODE32:
 		retval = __put_user(spi->mode & SPI_MODE_MASK,
 					(__u32 __user *)arg);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SPI_IOC_RD_LSB_FIRST:
 		retval = __put_user((spi->mode & SPI_LSB_FIRST) ?  1 : 0,
@@ -492,10 +572,13 @@ spidev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	/* write requests */
 	case SPI_IOC_WR_MODE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = __get_user(tmp, (u8 __user *)arg);
 		if (retval == 0) {
 			u8	save = spi->mode;
 =======
+=======
+>>>>>>> v3.18
 	case SPI_IOC_WR_MODE32:
 		if (cmd == SPI_IOC_WR_MODE)
 			retval = __get_user(tmp, (u8 __user *)arg);
@@ -503,6 +586,9 @@ spidev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			retval = __get_user(tmp, (u32 __user *)arg);
 		if (retval == 0) {
 			u32	save = spi->mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (tmp & ~SPI_MODE_MASK) {
@@ -512,7 +598,11 @@ spidev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 
 			tmp |= spi->mode & ~SPI_MODE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spi->mode = (u8)tmp;
+=======
+			spi->mode = (u16)tmp;
+>>>>>>> v3.18
 =======
 			spi->mode = (u16)tmp;
 >>>>>>> v3.18
@@ -521,7 +611,11 @@ spidev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 				spi->mode = save;
 			else
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_dbg(&spi->dev, "spi mode %02x\n", tmp);
+=======
+				dev_dbg(&spi->dev, "spi mode %x\n", tmp);
+>>>>>>> v3.18
 =======
 				dev_dbg(&spi->dev, "spi mode %x\n", tmp);
 >>>>>>> v3.18
@@ -531,7 +625,11 @@ spidev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		retval = __get_user(tmp, (__u8 __user *)arg);
 		if (retval == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u8	save = spi->mode;
+=======
+			u32	save = spi->mode;
+>>>>>>> v3.18
 =======
 			u32	save = spi->mode;
 >>>>>>> v3.18
@@ -639,6 +737,7 @@ static int spidev_open(struct inode *inode, struct file *filp)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status == 0) {
 		if (!spidev->buffer) {
 			spidev->buffer = kmalloc(bufsiz, GFP_KERNEL);
@@ -665,6 +764,8 @@ static int spidev_open(struct inode *inode, struct file *filp)
 		pr_debug("spidev: nothing for minor %d\n", iminor(inode));
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (status) {
 		pr_debug("spidev: nothing for minor %d\n", iminor(inode));
@@ -700,6 +801,9 @@ err_alloc_rx_buf:
 	kfree(spidev->tx_buffer);
 	spidev->tx_buffer = NULL;
 err_find_dev:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&device_list_lock);
 	return status;
@@ -720,16 +824,22 @@ static int spidev_release(struct inode *inode, struct file *filp)
 		int		dofree;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(spidev->buffer);
 		spidev->buffer = NULL;
 		kfree(spidev->bufferrx);
 		spidev->bufferrx = NULL;
 =======
+=======
+>>>>>>> v3.18
 		kfree(spidev->tx_buffer);
 		spidev->tx_buffer = NULL;
 
 		kfree(spidev->rx_buffer);
 		spidev->rx_buffer = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* ... after we unbound from the underlying device? */
@@ -802,7 +912,11 @@ static int spidev_probe(struct spi_device *spi)
 				    spidev, "spidev%d.%d",
 				    spi->master->bus_num, spi->chip_select);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = PTR_RET(dev);
+=======
+		status = PTR_ERR_OR_ZERO(dev);
+>>>>>>> v3.18
 =======
 		status = PTR_ERR_OR_ZERO(dev);
 >>>>>>> v3.18
@@ -832,7 +946,10 @@ static int spidev_remove(struct spi_device *spi)
 	spin_lock_irq(&spidev->spi_lock);
 	spidev->spi = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irq(&spidev->spi_lock);
@@ -890,6 +1007,7 @@ static int __init spidev_init(void)
 	spidev_class = class_create(THIS_MODULE, "spidev");
 	if (IS_ERR(spidev_class)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = PTR_ERR(spidev_class);
 		goto error_class;
 	}
@@ -933,6 +1051,8 @@ error_register:
 error_class:
 	unregister_chrdev(SPIDEV_MAJOR, spidev_spi_driver.driver.name);
 =======
+=======
+>>>>>>> v3.18
 		unregister_chrdev(SPIDEV_MAJOR, spidev_spi_driver.driver.name);
 		return PTR_ERR(spidev_class);
 	}
@@ -942,6 +1062,9 @@ error_class:
 		class_destroy(spidev_class);
 		unregister_chrdev(SPIDEV_MAJOR, spidev_spi_driver.driver.name);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -950,10 +1073,13 @@ module_init(spidev_init);
 static void __exit spidev_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi) {
 		spi_unregister_device(spi);
 		spi = NULL;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_unregister_driver(&spidev_spi_driver);

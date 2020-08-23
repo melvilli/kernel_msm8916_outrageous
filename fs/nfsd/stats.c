@@ -25,7 +25,10 @@
 #include <linux/module.h>
 #include <linux/sunrpc/stats.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/nfsd/stats.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/net_namespace.h>

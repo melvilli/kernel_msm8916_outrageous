@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/if_ether.h>
@@ -469,7 +475,11 @@ static u32 igb_hash_mc_addr(struct e1000_hw *hw, u8 *mc_addr)
  **/
 void igb_update_mc_addr_list(struct e1000_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
                              u8 *mc_addr_list, u32 mc_addr_count)
+=======
+			     u8 *mc_addr_list, u32 mc_addr_count)
+>>>>>>> v3.18
 =======
 			     u8 *mc_addr_list, u32 mc_addr_count)
 >>>>>>> v3.18
@@ -742,6 +752,10 @@ static s32 igb_set_default_fc(struct e1000_hw *hw)
 {
 	s32 ret_val = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 lan_offset;
+>>>>>>> v3.18
 =======
 	u16 lan_offset;
 >>>>>>> v3.18
@@ -756,8 +770,11 @@ static s32 igb_set_default_fc(struct e1000_hw *hw)
 	 * be initialized based on a value in the EEPROM.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret_val = hw->nvm.ops.read(hw, NVM_INIT_CONTROL2_REG, 1, &nvm_data);
 =======
+=======
+>>>>>>> v3.18
 	if (hw->mac.type == e1000_i350) {
 		lan_offset = NVM_82580_LAN_FUNC_OFFSET(hw->bus.func);
 		ret_val = hw->nvm.ops.read(hw, NVM_INIT_CONTROL2_REG
@@ -766,6 +783,9 @@ static s32 igb_set_default_fc(struct e1000_hw *hw)
 		ret_val = hw->nvm.ops.read(hw, NVM_INIT_CONTROL2_REG,
 					   1, &nvm_data);
 	 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret_val) {
@@ -904,8 +924,12 @@ s32 igb_config_fc_after_link_up(struct e1000_hw *hw)
 
 		if (!(mii_status_reg & MII_SR_AUTONEG_COMPLETE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hw_dbg("Copper PHY and Auto Neg "
 				 "has not completed.\n");
+=======
+			hw_dbg("Copper PHY and Auto Neg has not completed.\n");
+>>>>>>> v3.18
 =======
 			hw_dbg("Copper PHY and Auto Neg has not completed.\n");
 >>>>>>> v3.18
@@ -971,16 +995,22 @@ s32 igb_config_fc_after_link_up(struct e1000_hw *hw)
 			if (hw->fc.requested_mode == e1000_fc_full) {
 				hw->fc.current_mode = e1000_fc_full;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hw_dbg("Flow Control = FULL.\r\n");
 			} else {
 				hw->fc.current_mode = e1000_fc_rx_pause;
 				hw_dbg("Flow Control = "
 				       "RX PAUSE frames only.\r\n");
 =======
+=======
+>>>>>>> v3.18
 				hw_dbg("Flow Control = FULL.\n");
 			} else {
 				hw->fc.current_mode = e1000_fc_rx_pause;
 				hw_dbg("Flow Control = RX PAUSE frames only.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -997,7 +1027,11 @@ s32 igb_config_fc_after_link_up(struct e1000_hw *hw)
 			  (mii_nway_lp_ability_reg & NWAY_LPAR_ASM_DIR)) {
 			hw->fc.current_mode = e1000_fc_tx_pause;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hw_dbg("Flow Control = TX PAUSE frames only.\r\n");
+=======
+			hw_dbg("Flow Control = TX PAUSE frames only.\n");
+>>>>>>> v3.18
 =======
 			hw_dbg("Flow Control = TX PAUSE frames only.\n");
 >>>>>>> v3.18
@@ -1015,7 +1049,11 @@ s32 igb_config_fc_after_link_up(struct e1000_hw *hw)
 			 (mii_nway_lp_ability_reg & NWAY_LPAR_ASM_DIR)) {
 			hw->fc.current_mode = e1000_fc_rx_pause;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hw_dbg("Flow Control = RX PAUSE frames only.\r\n");
+=======
+			hw_dbg("Flow Control = RX PAUSE frames only.\n");
+>>>>>>> v3.18
 =======
 			hw_dbg("Flow Control = RX PAUSE frames only.\n");
 >>>>>>> v3.18
@@ -1045,15 +1083,21 @@ s32 igb_config_fc_after_link_up(struct e1000_hw *hw)
 			 (hw->fc.strict_ieee)) {
 			hw->fc.current_mode = e1000_fc_none;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hw_dbg("Flow Control = NONE.\r\n");
 		} else {
 			hw->fc.current_mode = e1000_fc_rx_pause;
 			hw_dbg("Flow Control = RX PAUSE frames only.\r\n");
 =======
+=======
+>>>>>>> v3.18
 			hw_dbg("Flow Control = NONE.\n");
 		} else {
 			hw->fc.current_mode = e1000_fc_rx_pause;
 			hw_dbg("Flow Control = RX PAUSE frames only.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1242,6 +1286,7 @@ s32 igb_get_speed_and_duplex_copper(struct e1000_hw *hw, u16 *speed,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check if it is an I354 2.5Gb backplane connection. */
 	if (hw->mac.type == e1000_i354) {
 		if ((status & E1000_STATUS_2P5_SKU) &&
@@ -1253,6 +1298,8 @@ s32 igb_get_speed_and_duplex_copper(struct e1000_hw *hw, u16 *speed,
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1344,7 +1391,11 @@ s32 igb_get_auto_rd_done(struct e1000_hw *hw)
 		if (rd32(E1000_EECD) & E1000_EECD_AUTO_RD)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(1);
+=======
+		usleep_range(1000, 2000);
+>>>>>>> v3.18
 =======
 		usleep_range(1000, 2000);
 >>>>>>> v3.18
@@ -1381,7 +1432,11 @@ static s32 igb_valid_led_default(struct e1000_hw *hw, u16 *data)
 
 	if (*data == ID_LED_RESERVED_0000 || *data == ID_LED_RESERVED_FFFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch(hw->phy.media_type) {
+=======
+		switch (hw->phy.media_type) {
+>>>>>>> v3.18
 =======
 		switch (hw->phy.media_type) {
 >>>>>>> v3.18
@@ -1414,8 +1469,11 @@ s32 igb_id_led_init(struct e1000_hw *hw)
 	const u16 led_mask = 0x0F;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret_val = igb_valid_led_default(hw, &data);
 =======
+=======
+>>>>>>> v3.18
 	/* i210 and i211 devices have different LED mechanism */
 	if ((hw->mac.type == e1000_i210) ||
 	    (hw->mac.type == e1000_i211))
@@ -1423,6 +1481,9 @@ s32 igb_id_led_init(struct e1000_hw *hw)
 	else
 		ret_val = igb_valid_led_default(hw, &data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret_val)
 		goto out;
@@ -1498,6 +1559,7 @@ s32 igb_blink_led(struct e1000_hw *hw)
 	u32 i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set the blink bit for each LED that's "on" (0x0E)
 	 * in ledctl_mode2
 	 */
@@ -1508,6 +1570,8 @@ s32 igb_blink_led(struct e1000_hw *hw)
 			ledctl_blink |= (E1000_LEDCTL_LED0_BLINK <<
 					 (i * 8));
 =======
+=======
+>>>>>>> v3.18
 	if (hw->phy.media_type == e1000_media_type_fiber) {
 		/* always blink LED0 for PCI-E fiber */
 		ledctl_blink = E1000_LEDCTL_LED0_BLINK |
@@ -1536,6 +1600,9 @@ s32 igb_blink_led(struct e1000_hw *hw)
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wr32(E1000_LEDCTL, ledctl_blink);

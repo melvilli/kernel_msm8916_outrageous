@@ -31,6 +31,10 @@
 #include <linux/slab.h>
 #include <linux/mtd/mtd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -207,7 +211,12 @@ static int ndfc_probe(struct platform_device *ofdev)
 	const __be32 *reg;
 	u32 ccr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err, len, cs;
+=======
+	u32 cs;
+	int err, len;
+>>>>>>> v3.18
 =======
 	u32 cs;
 	int err, len;

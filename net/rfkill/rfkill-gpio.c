@@ -25,6 +25,7 @@
 #include <linux/clk.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/rfkill-gpio.h>
 
@@ -47,6 +48,8 @@ struct rfkill_gpio_data {
 	enum rfkill_gpio_clk_state		pwr_clk_enabled;
 	struct clk				*pwr_clk;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/gpio/consumer.h>
 
@@ -62,6 +65,9 @@ struct rfkill_gpio_data {
 	struct clk		*clk;
 
 	bool			clk_enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -69,6 +75,7 @@ static int rfkill_gpio_set_power(void *data, bool blocked)
 {
 	struct rfkill_gpio_data *rfkill = data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (blocked) {
 		if (gpio_is_valid(rfkill->pdata->shutdown_gpio))
@@ -89,6 +96,8 @@ static int rfkill_gpio_set_power(void *data, bool blocked)
 	if (rfkill->pwr_clk)
 		PWR_CLK_SET(rfkill, blocked);
 =======
+=======
+>>>>>>> v3.18
 	if (!blocked && !IS_ERR(rfkill->clk) && !rfkill->clk_enabled)
 		clk_enable(rfkill->clk);
 
@@ -99,6 +108,9 @@ static int rfkill_gpio_set_power(void *data, bool blocked)
 		clk_disable(rfkill->clk);
 
 	rfkill->clk_enabled = !blocked;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -108,6 +120,7 @@ static const struct rfkill_ops rfkill_gpio_ops = {
 	.set_block = rfkill_gpio_set_power,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int rfkill_gpio_probe(struct platform_device *pdev)
 {
@@ -221,6 +234,8 @@ fail_alloc:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int rfkill_gpio_acpi_probe(struct device *dev,
 				  struct rfkill_gpio_data *rfkill)
 {
@@ -299,12 +314,16 @@ static int rfkill_gpio_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "%s device registered.\n", rfkill->name);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int rfkill_gpio_remove(struct platform_device *pdev)
 {
 	struct rfkill_gpio_data *rfkill = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rfkill_gpio_platform_data *pdata = pdev->dev.platform_data;
 
@@ -328,12 +347,20 @@ static int rfkill_gpio_remove(struct platform_device *pdev)
 	rfkill_unregister(rfkill->rfkill_dev);
 	rfkill_destroy(rfkill->rfkill_dev);
 >>>>>>> v3.18
+=======
+
+	rfkill_unregister(rfkill->rfkill_dev);
+	rfkill_destroy(rfkill->rfkill_dev);
+>>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ACPI
 static const struct acpi_device_id rfkill_acpi_match[] = {
 	{ "BCM2E1A", RFKILL_TYPE_BLUETOOTH },
@@ -347,14 +374,23 @@ static const struct acpi_device_id rfkill_acpi_match[] = {
 MODULE_DEVICE_TABLE(acpi, rfkill_acpi_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver rfkill_gpio_driver = {
 	.probe = rfkill_gpio_probe,
 	.remove = rfkill_gpio_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   .name = "rfkill_gpio",
 		   .owner = THIS_MODULE,
+=======
+		.name = "rfkill_gpio",
+		.owner = THIS_MODULE,
+		.acpi_match_table = ACPI_PTR(rfkill_acpi_match),
+>>>>>>> v3.18
 =======
 		.name = "rfkill_gpio",
 		.owner = THIS_MODULE,

@@ -14,10 +14,13 @@
 #include <linux/writeback.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/ceph/libceph.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/posix_acl.h>
 
 #include <linux/ceph/libceph.h>
@@ -26,6 +29,9 @@
 #include <linux/fscache.h>
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* f_type in struct statfs */
 #define CEPH_SUPER_MAGIC 0x00c36400
@@ -41,6 +47,10 @@
 #define CEPH_MOUNT_OPT_INO32           (1<<8) /* 32 bit inos */
 #define CEPH_MOUNT_OPT_DCACHE          (1<<9) /* use dcache for readdir etc */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CEPH_MOUNT_OPT_FSCACHE         (1<<10) /* use fscache */
+>>>>>>> v3.18
 =======
 #define CEPH_MOUNT_OPT_FSCACHE         (1<<10) /* use fscache */
 >>>>>>> v3.18
@@ -105,13 +115,19 @@ struct ceph_fs_client {
 	struct dentry *debugfs_bdi;
 	struct dentry *debugfs_mdsc, *debugfs_mdsmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct dentry *debugfs_mds_sessions;
 #endif
 
 #ifdef CONFIG_CEPH_FSCACHE
 	struct fscache_cookie *fscache;
 	struct workqueue_struct *revalidate_wq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -280,7 +296,10 @@ struct ceph_inode_info {
 	u64 i_rbytes, i_rfiles, i_rsubdirs;
 	u64 i_files, i_subdirs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 i_max_offset;  /* largest readdir offset, set with complete dir */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -305,9 +324,12 @@ struct ceph_inode_info {
 	unsigned long i_hold_caps_max; /* jiffies */
 	struct list_head i_cap_delay_list;  /* for delayed cap release to mds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i_cap_exporting_mds;         /* to handle cap migration between */
 	unsigned i_cap_exporting_mseq;   /*  mds's. */
 	unsigned i_cap_exporting_issued;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ceph_cap_reservation i_cap_migration_resv;
@@ -319,6 +341,10 @@ struct ceph_inode_info {
 	int i_nr_by_mode[CEPH_FILE_MODE_NUM];  /* open file counts */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex i_truncate_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex i_truncate_mutex;
 >>>>>>> v3.18
@@ -354,12 +380,18 @@ struct ceph_inode_info {
 	struct work_struct i_vmtruncate_work;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CEPH_FSCACHE
 	struct fscache_cookie *fscache;
 	u32 i_fscache_gen; /* sequence, for delayed fscache validate */
 	struct work_struct i_revalidate_work;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct inode vfs_inode; /* at end */
 };
@@ -555,6 +587,11 @@ static inline int __ceph_caps_dirty(struct ceph_inode_info *ci)
 extern int __ceph_mark_dirty_caps(struct ceph_inode_info *ci, int mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int __ceph_caps_revoking_other(struct ceph_inode_info *ci,
+				      struct ceph_cap *ocap, int mask);
+>>>>>>> v3.18
 =======
 extern int __ceph_caps_revoking_other(struct ceph_inode_info *ci,
 				      struct ceph_cap *ocap, int mask);
@@ -582,7 +619,11 @@ extern void ceph_caps_init(struct ceph_mds_client *mdsc);
 extern void ceph_caps_finalize(struct ceph_mds_client *mdsc);
 extern void ceph_adjust_min_caps(struct ceph_mds_client *mdsc, int delta);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ceph_reserve_caps(struct ceph_mds_client *mdsc,
+=======
+extern void ceph_reserve_caps(struct ceph_mds_client *mdsc,
+>>>>>>> v3.18
 =======
 extern void ceph_reserve_caps(struct ceph_mds_client *mdsc,
 >>>>>>> v3.18
@@ -612,7 +653,11 @@ struct ceph_file_info {
 	/* readdir: position within a frag */
 	unsigned offset;       /* offset of last chunk, adjusted for . and .. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 next_offset;       /* offset of next chunk (last_name's + 1) */
+=======
+	unsigned next_offset;  /* offset of next chunk (last_name's + 1) */
+>>>>>>> v3.18
 =======
 	unsigned next_offset;  /* offset of next chunk (last_name's + 1) */
 >>>>>>> v3.18
@@ -730,6 +775,10 @@ extern const struct inode_operations ceph_file_iops;
 extern struct inode *ceph_alloc_inode(struct super_block *sb);
 extern void ceph_destroy_inode(struct inode *inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int ceph_drop_inode(struct inode *inode);
+>>>>>>> v3.18
 =======
 extern int ceph_drop_inode(struct inode *inode);
 >>>>>>> v3.18
@@ -752,7 +801,11 @@ extern int ceph_inode_holds_cap(struct inode *inode, int mask);
 
 extern int ceph_inode_set_size(struct inode *inode, loff_t size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __ceph_do_pending_vmtruncate(struct inode *inode, bool needlock);
+=======
+extern void __ceph_do_pending_vmtruncate(struct inode *inode);
+>>>>>>> v3.18
 =======
 extern void __ceph_do_pending_vmtruncate(struct inode *inode);
 >>>>>>> v3.18
@@ -762,7 +815,11 @@ extern void ceph_queue_invalidate(struct inode *inode);
 extern void ceph_queue_writeback(struct inode *inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ceph_do_getattr(struct inode *inode, int mask);
+=======
+extern int ceph_do_getattr(struct inode *inode, int mask, bool force);
+>>>>>>> v3.18
 =======
 extern int ceph_do_getattr(struct inode *inode, int mask, bool force);
 >>>>>>> v3.18
@@ -775,6 +832,12 @@ extern int ceph_getattr(struct vfsmount *mnt, struct dentry *dentry,
 extern int ceph_setxattr(struct dentry *, const char *, const void *,
 			 size_t, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int __ceph_setxattr(struct dentry *, const char *, const void *, size_t, int);
+ssize_t __ceph_getxattr(struct inode *, const char *, void *, size_t);
+int __ceph_removexattr(struct dentry *, const char *);
+>>>>>>> v3.18
 =======
 int __ceph_setxattr(struct dentry *, const char *, const void *, size_t, int);
 ssize_t __ceph_getxattr(struct inode *, const char *, void *, size_t);
@@ -788,7 +851,10 @@ extern void __ceph_destroy_xattrs(struct ceph_inode_info *ci);
 extern void __init ceph_xattr_init(void);
 extern void ceph_xattr_exit(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const struct xattr_handler *ceph_xattr_handlers[];
 
 /* acl.c */
@@ -839,12 +905,16 @@ static inline void ceph_forget_all_cached_acls(struct inode *inode)
 }
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* caps.c */
 extern const char *ceph_cap_string(int c);
 extern void ceph_handle_caps(struct ceph_mds_session *session,
 			     struct ceph_msg *msg);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int ceph_add_cap(struct inode *inode,
 			struct ceph_mds_session *session, u64 cap_id,
@@ -861,6 +931,8 @@ static inline void ceph_remove_cap(struct ceph_cap *cap)
 extern void ceph_put_cap(struct ceph_mds_client *mdsc,
 			 struct ceph_cap *cap);
 =======
+=======
+>>>>>>> v3.18
 extern struct ceph_cap *ceph_get_cap(struct ceph_mds_client *mdsc,
 				     struct ceph_cap_reservation *ctx);
 extern void ceph_add_cap(struct inode *inode,
@@ -872,6 +944,9 @@ extern void __ceph_remove_cap(struct ceph_cap *cap, bool queue_release);
 extern void ceph_put_cap(struct ceph_mds_client *mdsc,
 			 struct ceph_cap *cap);
 extern int ceph_is_any_caps(struct inode *inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void __queue_cap_release(struct ceph_mds_session *session, u64 ino,
@@ -960,6 +1035,10 @@ extern const struct export_operations ceph_export_ops;
 
 /* locks.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern __init void ceph_flock_init(void);
+>>>>>>> v3.18
 =======
 extern __init void ceph_flock_init(void);
 >>>>>>> v3.18

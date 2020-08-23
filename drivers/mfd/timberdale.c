@@ -116,17 +116,23 @@ static const struct resource timberdale_ocores_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct max7301_platform_data timberdale_max7301_platform_data = {
 	.base = 200
 };
 
 const struct mc33880_platform_data timberdale_mc33880_platform_data = {
 =======
+=======
+>>>>>>> v3.18
 static const struct max7301_platform_data timberdale_max7301_platform_data = {
 	.base = 200
 };
 
 static const struct mc33880_platform_data timberdale_mc33880_platform_data = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.base = 100
 };
@@ -154,7 +160,10 @@ static struct spi_board_info timberdale_spi_8bit_board_info[] = {
 static struct xspi_platform_data timberdale_xspi_platform_data = {
 	.num_chipselect = 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.little_endian = true,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* bits per word and devices will be filled in runtime depending
@@ -387,7 +396,11 @@ static const struct resource timberdale_dma_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell timberdale_cells_bar0_cfg0[] = {
+=======
+static const struct mfd_cell timberdale_cells_bar0_cfg0[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell timberdale_cells_bar0_cfg0[] = {
 >>>>>>> v3.18
@@ -448,7 +461,11 @@ static const struct mfd_cell timberdale_cells_bar0_cfg0[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell timberdale_cells_bar0_cfg1[] = {
+=======
+static const struct mfd_cell timberdale_cells_bar0_cfg1[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell timberdale_cells_bar0_cfg1[] = {
 >>>>>>> v3.18
@@ -519,7 +536,11 @@ static const struct mfd_cell timberdale_cells_bar0_cfg1[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell timberdale_cells_bar0_cfg2[] = {
+=======
+static const struct mfd_cell timberdale_cells_bar0_cfg2[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell timberdale_cells_bar0_cfg2[] = {
 >>>>>>> v3.18
@@ -573,7 +594,11 @@ static const struct mfd_cell timberdale_cells_bar0_cfg2[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell timberdale_cells_bar0_cfg3[] = {
+=======
+static const struct mfd_cell timberdale_cells_bar0_cfg3[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell timberdale_cells_bar0_cfg3[] = {
 >>>>>>> v3.18
@@ -648,7 +673,11 @@ static const struct resource timberdale_sdhc_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell timberdale_cells_bar1[] = {
+=======
+static const struct mfd_cell timberdale_cells_bar1[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell timberdale_cells_bar1[] = {
 >>>>>>> v3.18
@@ -660,7 +689,11 @@ static const struct mfd_cell timberdale_cells_bar1[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell timberdale_cells_bar2[] = {
+=======
+static const struct mfd_cell timberdale_cells_bar2[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell timberdale_cells_bar2[] = {
 >>>>>>> v3.18
@@ -715,7 +748,11 @@ static int timb_probe(struct pci_dev *dev,
 	if (!request_mem_region(priv->ctl_mapbase, CHIPCTLSIZE, "timb-ctl")) {
 		dev_err(&dev->dev, "Failed to request ctl mem\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_request;
+=======
+		goto err_start;
+>>>>>>> v3.18
 =======
 		goto err_start;
 >>>>>>> v3.18
@@ -756,7 +793,11 @@ static int timb_probe(struct pci_dev *dev,
 		msix_entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pci_enable_msix(dev, msix_entries, TIMBERDALE_NR_IRQS);
+=======
+	err = pci_enable_msix_exact(dev, msix_entries, TIMBERDALE_NR_IRQS);
+>>>>>>> v3.18
 =======
 	err = pci_enable_msix_exact(dev, msix_entries, TIMBERDALE_NR_IRQS);
 >>>>>>> v3.18
@@ -826,7 +867,10 @@ static int timb_probe(struct pci_dev *dev,
 		err = -ENODEV;
 		goto err_mfd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -877,8 +921,11 @@ err_config:
 err_ioremap:
 	release_mem_region(priv->ctl_mapbase, CHIPCTLSIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_request:
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_start:
@@ -886,7 +933,10 @@ err_start:
 err_enable:
 	kfree(priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return -ENODEV;
@@ -906,16 +956,22 @@ static void timb_remove(struct pci_dev *dev)
 	pci_disable_msix(dev);
 	pci_disable_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
 	kfree(priv);
 }
 
 static DEFINE_PCI_DEVICE_TABLE(timberdale_pci_tbl) = {
 =======
+=======
+>>>>>>> v3.18
 	kfree(priv);
 }
 
 static const struct pci_device_id timberdale_pci_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_TIMB, PCI_DEVICE_ID_TIMB) },
 	{ 0 }
@@ -929,6 +985,7 @@ static struct pci_driver timberdale_pci_driver = {
 	.remove = timb_remove,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init timberdale_init(void)
 {
@@ -958,6 +1015,9 @@ static void __exit timberdale_exit(void)
 
 module_init(timberdale_init);
 module_exit(timberdale_exit);
+=======
+module_pci_driver(timberdale_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(timberdale_pci_driver);
 >>>>>>> v3.18

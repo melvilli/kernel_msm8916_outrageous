@@ -47,9 +47,12 @@ static inline unsigned long mk_esid_data(unsigned long ea, int ssize,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define slb_vsid_shift(ssize)	\
 	((ssize) == MMU_SEGSIZE_256M? SLB_VSID_SHIFT: SLB_VSID_SHIFT_1T)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned long mk_vsid_data(unsigned long ea, int ssize,
@@ -70,13 +73,19 @@ static inline void slb_shadow_update(unsigned long ea, int ssize,
 	 */
 	get_slb_shadow()->save_area[entry].esid = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_slb_shadow()->save_area[entry].vsid = mk_vsid_data(ea, ssize, flags);
 	get_slb_shadow()->save_area[entry].esid = mk_esid_data(ea, ssize, entry);
 =======
+=======
+>>>>>>> v3.18
 	get_slb_shadow()->save_area[entry].vsid =
 				cpu_to_be64(mk_vsid_data(ea, ssize, flags));
 	get_slb_shadow()->save_area[entry].esid =
 				cpu_to_be64(mk_esid_data(ea, ssize, entry));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -106,7 +115,11 @@ static void __slb_flush_and_rebolt(void)
 {
 	/* If you change this make sure you change SLB_NUM_BOLTED
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * appropriately too. */
+=======
+	 * and PR KVM appropriately too. */
+>>>>>>> v3.18
 =======
 	 * and PR KVM appropriately too. */
 >>>>>>> v3.18
@@ -127,7 +140,12 @@ static void __slb_flush_and_rebolt(void)
 		/* Update stack entry; others don't change */
 		slb_shadow_update(get_paca()->kstack, mmu_kernel_ssize, lflags, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ksp_vsid_data = get_slb_shadow()->save_area[2].vsid;
+=======
+		ksp_vsid_data =
+			be64_to_cpu(get_slb_shadow()->save_area[2].vsid);
+>>>>>>> v3.18
 =======
 		ksp_vsid_data =
 			be64_to_cpu(get_slb_shadow()->save_area[2].vsid);
@@ -273,11 +291,14 @@ static inline void patch_slb_encoding(unsigned int *insn_addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void slb_set_size(u16 size)
 {
 	extern unsigned int *slb_compare_rr_to_size;
 
 =======
+=======
+>>>>>>> v3.18
 extern u32 slb_compare_rr_to_size[];
 extern u32 slb_miss_kernel_load_linear[];
 extern u32 slb_miss_kernel_load_io[];
@@ -286,6 +307,9 @@ extern u32 slb_miss_kernel_load_vmemmap[];
 
 void slb_set_size(u16 size)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mmu_slb_size == size)
 		return;
@@ -300,11 +324,15 @@ void slb_initialize(void)
 	unsigned long lflags, vflags;
 	static int slb_encoding_inited;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern unsigned int *slb_miss_kernel_load_linear;
 	extern unsigned int *slb_miss_kernel_load_io;
 	extern unsigned int *slb_compare_rr_to_size;
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 	extern unsigned int *slb_miss_kernel_load_vmemmap;
+=======
+#ifdef CONFIG_SPARSEMEM_VMEMMAP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 >>>>>>> v3.18

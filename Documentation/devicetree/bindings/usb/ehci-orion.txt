@@ -7,12 +7,18 @@ Required properties:
 - interrupts: The EHCI interrupt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional properties:
 - clocks: reference to the clock
 - phys: reference to the USB PHY
 - phy-names: name of the USB PHY, should be "usb"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

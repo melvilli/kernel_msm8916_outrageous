@@ -48,8 +48,11 @@ struct user_desc;
 #ifdef CONFIG_X86_32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HOST_AUDIT_ARCH AUDIT_ARCH_I386
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int ptrace_get_thread_area(struct task_struct *child, int idx,
@@ -61,8 +64,11 @@ extern int ptrace_set_thread_area(struct task_struct *child, int idx,
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HOST_AUDIT_ARCH AUDIT_ARCH_X86_64
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PT_REGS_R8(r) UPT_R8(&(r)->regs)

@@ -12,8 +12,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __GDM_USB_H__
 #define __GDM_USB_H__
+=======
+#ifndef __GDM72XX_GDM_USB_H__
+#define __GDM72XX_GDM_USB_H__
+>>>>>>> v3.18
 =======
 #ifndef __GDM72XX_GDM_USB_H__
 #define __GDM72XX_GDM_USB_H__
@@ -34,6 +39,7 @@ struct usb_tx {
 #endif
 	struct tx_cxt		*tx_cxt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct urb		*urb;
 	u8			*buf;
@@ -41,10 +47,15 @@ struct usb_tx {
 	void (*callback)(void *cb_data);
 	void *cb_data;
 =======
+=======
+>>>>>>> v3.18
 	struct urb		*urb;
 	u8			*buf;
 	void (*callback)(void *cb_data);
 	void			*cb_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -56,7 +67,10 @@ struct tx_cxt {
 	struct list_head	pending_list;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t		lock;
@@ -66,10 +80,15 @@ struct usb_rx {
 	struct list_head	list;
 	struct rx_cxt		*rx_cxt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct urb		*urb;
 	u8			*buf;
 
+=======
+	struct urb		*urb;
+	u8			*buf;
+>>>>>>> v3.18
 =======
 	struct urb		*urb;
 	u8			*buf;
@@ -96,6 +115,7 @@ struct usbwm_dev {
 	struct list_head	list;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct tx_cxt		tx;
 	struct rx_cxt		rx;
@@ -105,10 +125,15 @@ struct usbwm_dev {
 
 #endif /* __GDM_USB_H__ */
 =======
+=======
+>>>>>>> v3.18
 	struct tx_cxt		tx;
 	struct rx_cxt		rx;
 	int			padding;
 };
 
 #endif /* __GDM72XX_GDM_USB_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

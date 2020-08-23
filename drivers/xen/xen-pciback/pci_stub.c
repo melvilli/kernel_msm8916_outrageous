@@ -5,6 +5,12 @@
  * Chris Bookholt <hap10@epoch.ncsc.mil>
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -137,7 +143,11 @@ static void pcistub_device_release(struct kref *kref)
 	xen_pcibk_config_free_dev(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_flags &= ~PCI_DEV_FLAGS_ASSIGNED;
+=======
+	pci_clear_dev_assigned(dev);
+>>>>>>> v3.18
 =======
 	pci_clear_dev_assigned(dev);
 >>>>>>> v3.18
@@ -250,7 +260,10 @@ struct pci_dev *pcistub_get_pci_dev(struct xen_pcibk_device *pdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Called when:
  *  - XenBus state has been reconfigure (pci unplug). See xen_pcibk_remove_device
@@ -260,6 +273,9 @@ struct pci_dev *pcistub_get_pci_dev(struct xen_pcibk_device *pdev,
  *
  *  As such we have to be careful.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pcistub_put_pci_dev(struct pci_dev *dev)
 {
@@ -292,6 +308,7 @@ void pcistub_put_pci_dev(struct pci_dev *dev)
 	 */
 	pci_reset_function(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_restore_state(psdev->dev);
 
 	/* This disables the device. */
@@ -303,6 +320,8 @@ void pcistub_put_pci_dev(struct pci_dev *dev)
 
 	xen_unregister_device_domain_owner(found_psdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	pci_restore_state(dev);
 
 	/* This disables the device. */
@@ -313,6 +332,9 @@ void pcistub_put_pci_dev(struct pci_dev *dev)
 	xen_pcibk_config_free_dyn_fields(dev);
 
 	xen_unregister_device_domain_owner(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&found_psdev->lock, flags);
@@ -437,7 +459,11 @@ static int pcistub_init_device(struct pci_dev *dev)
 	xen_pcibk_reset_device(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_flags |= PCI_DEV_FLAGS_ASSIGNED;
+=======
+	pci_set_dev_assigned(dev);
+>>>>>>> v3.18
 =======
 	pci_set_dev_assigned(dev);
 >>>>>>> v3.18
@@ -465,8 +491,11 @@ static int __init pcistub_init_devices_late(void)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug(DRV_NAME ": pcistub_init_devices_late\n");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&pcistub_devices_lock, flags);
@@ -535,6 +564,11 @@ static int pcistub_seize(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Called when 'bind'. This means we must _NOT_ call pci_reset_function or
+ * other functions that take the sysfs lock. */
+>>>>>>> v3.18
 =======
 /* Called when 'bind'. This means we must _NOT_ call pci_reset_function or
  * other functions that take the sysfs lock. */
@@ -567,6 +601,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Called when 'unbind'. This means we must _NOT_ call pci_reset_function or
+ * other functions that take the sysfs lock. */
+>>>>>>> v3.18
 =======
 /* Called when 'unbind'. This means we must _NOT_ call pci_reset_function or
  * other functions that take the sysfs lock. */
@@ -597,6 +636,7 @@ static void pcistub_remove(struct pci_dev *dev)
 
 		if (found_psdev->pdev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING DRV_NAME ": ****** removing device "
 			       "%s while still in-use! ******\n",
 			       pci_name(found_psdev->dev));
@@ -608,6 +648,8 @@ static void pcistub_remove(struct pci_dev *dev)
 			       "or domains\n");
 
 =======
+=======
+>>>>>>> v3.18
 			pr_warn("****** removing device %s while still in-use! ******\n",
 			       pci_name(found_psdev->dev));
 			pr_warn("****** driver domain may still access this device's i/o resources!\n");
@@ -616,6 +658,9 @@ static void pcistub_remove(struct pci_dev *dev)
 
 			/* N.B. This ends up calling pcistub_put_pci_dev which ends up
 			 * doing the FLR. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			xen_pcibk_release_pci_dev(found_psdev->pdev,
 						found_psdev->dev);
@@ -631,7 +676,11 @@ static void pcistub_remove(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pcistub_ids) = {
+=======
+static const struct pci_device_id pcistub_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pcistub_ids[] = {
 >>>>>>> v3.18
@@ -1086,7 +1135,11 @@ static int pcistub_device_id_add(int domain, int bus, int slot, int func)
 	pci_dev_id->devfn = devfn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug(DRV_NAME ": wants to seize %04x:%02x:%02x.%d\n",
+=======
+	pr_debug("wants to seize %04x:%02x:%02x.%d\n",
+>>>>>>> v3.18
 =======
 	pr_debug("wants to seize %04x:%02x:%02x.%d\n",
 >>>>>>> v3.18
@@ -1120,8 +1173,13 @@ static int pcistub_device_id_remove(int domain, int bus, int slot, int func)
 			err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug(DRV_NAME ": removed %04x:%02x:%02x.%d from "
 				 "seize list\n", domain, bus, slot, func);
+=======
+			pr_debug("removed %04x:%02x:%02x.%d from seize list\n",
+				 domain, bus, slot, func);
+>>>>>>> v3.18
 =======
 			pr_debug("removed %04x:%02x:%02x.%d from seize list\n",
 				 domain, bus, slot, func);
@@ -1273,7 +1331,11 @@ static ssize_t pcistub_irq_handler_switch(struct device_driver *drv,
 	struct xen_pcibk_dev_data *dev_data;
 	int domain, bus, slot, func;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = -ENOENT;
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -1284,6 +1346,7 @@ static ssize_t pcistub_irq_handler_switch(struct device_driver *drv,
 
 	psdev = pcistub_device_find(domain, bus, slot, func);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!psdev)
 		goto out;
 
@@ -1291,6 +1354,8 @@ static ssize_t pcistub_irq_handler_switch(struct device_driver *drv,
 	if (!dev_data)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (!psdev) {
 		err = -ENOENT;
 		goto out;
@@ -1301,6 +1366,9 @@ static ssize_t pcistub_irq_handler_switch(struct device_driver *drv,
 		err = -ENOENT;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&psdev->dev->dev, "%s fake irq handler: %d->%d\n",
@@ -1564,7 +1632,11 @@ out:
 
 parse_error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR DRV_NAME ": Error parsing pci_devs_to_hide at \"%s\"\n",
+=======
+	pr_err("Error parsing pci_devs_to_hide at \"%s\"\n",
+>>>>>>> v3.18
 =======
 	pr_err("Error parsing pci_devs_to_hide at \"%s\"\n",
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 #include <linux/sunrpc/xdr.h>
 #include <linux/sunrpc/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sunrpc/rpc_pipe_fs.h>
+>>>>>>> v3.18
 =======
 #include <linux/sunrpc/rpc_pipe_fs.h>
 >>>>>>> v3.18
@@ -37,6 +41,10 @@ struct rpc_inode;
 struct rpc_clnt {
 	atomic_t		cl_count;	/* Number of references */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		cl_clid;	/* client id */
+>>>>>>> v3.18
 =======
 	unsigned int		cl_clid;	/* client id */
 >>>>>>> v3.18
@@ -50,7 +58,10 @@ struct rpc_clnt {
 				cl_maxproc;	/* max procedure number */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *		cl_protname;	/* protocol name */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rpc_auth *	cl_auth;	/* authenticator */
@@ -60,6 +71,10 @@ struct rpc_clnt {
 	unsigned int		cl_softrtry : 1,/* soft timeouts */
 				cl_discrtry : 1,/* disconnect before retry */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				cl_noretranstimeo: 1,/* No retransmit timeouts */
+>>>>>>> v3.18
 =======
 				cl_noretranstimeo: 1,/* No retransmit timeouts */
 >>>>>>> v3.18
@@ -72,7 +87,11 @@ struct rpc_clnt {
 	int			cl_nodelen;	/* nodename length */
 	char 			cl_nodename[UNX_MAXNODENAME];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *		cl_dentry;
+=======
+	struct rpc_pipe_dir_head cl_pipedir_objects;
+>>>>>>> v3.18
 =======
 	struct rpc_pipe_dir_head cl_pipedir_objects;
 >>>>>>> v3.18
@@ -81,7 +100,10 @@ struct rpc_clnt {
 	struct rpc_timeout	cl_timeout_default;
 	const struct rpc_program *cl_program;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			*cl_principal;	/* target to authenticate to */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -149,14 +171,20 @@ struct rpc_create_args {
 #define RPC_CLNT_CREATE_INFINITE_SLOTS	(1UL << 7)
 #define RPC_CLNT_CREATE_NO_IDLE_TIMEOUT	(1UL << 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct rpc_clnt *rpc_create(struct rpc_create_args *args);
 =======
+=======
+>>>>>>> v3.18
 #define RPC_CLNT_CREATE_NO_RETRANS_TIMEOUT	(1UL << 9)
 
 struct rpc_clnt *rpc_create(struct rpc_create_args *args);
 struct rpc_clnt *rpc_create_xprt(struct rpc_create_args *args,
 					struct rpc_xprt *xprt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rpc_clnt	*rpc_bind_new_program(struct rpc_clnt *,
 				const struct rpc_program *, u32);
@@ -165,11 +193,17 @@ struct rpc_clnt *rpc_clone_client(struct rpc_clnt *);
 struct rpc_clnt *rpc_clone_client_set_auth(struct rpc_clnt *,
 				rpc_authflavor_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int		rpc_switch_client_transport(struct rpc_clnt *,
 				struct xprt_create *,
 				const struct rpc_timeout *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void		rpc_shutdown_client(struct rpc_clnt *);
 void		rpc_release_client(struct rpc_clnt *);

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -74,7 +83,11 @@ ACPI_MODULE_NAME("utxfinit")
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_initialize_subsystem(void)
+=======
+acpi_status __init acpi_initialize_subsystem(void)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_initialize_subsystem(void)
 >>>>>>> v3.18
@@ -135,11 +148,14 @@ acpi_status __init acpi_initialize_subsystem(void)
 	/* If configured, initialize the AML debugger */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_DEBUGGER_EXEC(status = acpi_db_initialize());
 	return_ACPI_STATUS(status);
 }
 ACPI_EXPORT_SYMBOL(acpi_initialize_subsystem)
 =======
+=======
+>>>>>>> v3.18
 #ifdef ACPI_DEBUGGER
 	status = acpi_db_initialize();
 	if (ACPI_FAILURE(status)) {
@@ -153,6 +169,9 @@ ACPI_EXPORT_SYMBOL(acpi_initialize_subsystem)
 }
 
 ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_subsystem)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
@@ -168,7 +187,11 @@ ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_subsystem)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_enable_subsystem(u32 flags)
+=======
+acpi_status __init acpi_enable_subsystem(u32 flags)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_enable_subsystem(u32 flags)
 >>>>>>> v3.18
@@ -199,6 +222,7 @@ acpi_status __init acpi_enable_subsystem(u32 flags)
 	 * Global Lock and the Firmware Waking Vector
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(flags & ACPI_NO_FACS_INIT)) {
 		status = acpi_tb_initialize_facs();
 		if (ACPI_FAILURE(status)) {
@@ -206,10 +230,15 @@ acpi_status __init acpi_enable_subsystem(u32 flags)
 			return_ACPI_STATUS(status);
 		}
 =======
+=======
+>>>>>>> v3.18
 	status = acpi_tb_initialize_facs();
 	if (ACPI_FAILURE(status)) {
 		ACPI_WARNING((AE_INFO, "Could not map the FACS table"));
 		return_ACPI_STATUS(status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif				/* !ACPI_REDUCED_HARDWARE */
@@ -271,7 +300,12 @@ acpi_status __init acpi_enable_subsystem(u32 flags)
 	return_ACPI_STATUS(status);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXPORT_SYMBOL(acpi_enable_subsystem)
+=======
+
+ACPI_EXPORT_SYMBOL_INIT(acpi_enable_subsystem)
+>>>>>>> v3.18
 =======
 
 ACPI_EXPORT_SYMBOL_INIT(acpi_enable_subsystem)
@@ -290,7 +324,11 @@ ACPI_EXPORT_SYMBOL_INIT(acpi_enable_subsystem)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_initialize_objects(u32 flags)
+=======
+acpi_status __init acpi_initialize_objects(u32 flags)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_initialize_objects(u32 flags)
 >>>>>>> v3.18
@@ -366,7 +404,12 @@ acpi_status __init acpi_initialize_objects(u32 flags)
 	return_ACPI_STATUS(status);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXPORT_SYMBOL(acpi_initialize_objects)
+=======
+
+ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_objects)
+>>>>>>> v3.18
 =======
 
 ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_objects)

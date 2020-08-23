@@ -88,7 +88,11 @@ static struct platform_device geos_leds_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata platform_device *geos_devs[] = {
+=======
+static struct platform_device *geos_devs[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct platform_device *geos_devs[] __initdata = {
 >>>>>>> v3.18

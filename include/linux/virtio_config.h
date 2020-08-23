@@ -97,6 +97,7 @@ static inline bool virtio_has_feature(const struct virtio_device *vdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * virtio_config_val - look for a feature and get a virtio config entry.
  * @vdev: the virtio device
@@ -126,6 +127,8 @@ static inline int virtio_config_buf(struct virtio_device *vdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline
 struct virtqueue *virtio_find_single_vq(struct virtio_device *vdev,
 					vq_callback_t *c, const char *n)
@@ -140,7 +143,10 @@ struct virtqueue *virtio_find_single_vq(struct virtio_device *vdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * virtio_device_ready - enable vq use in probe function
  * @vdev: the device
@@ -158,6 +164,9 @@ void virtio_device_ready(struct virtio_device *dev)
 	dev->config->set_status(dev, status | VIRTIO_CONFIG_S_DRIVER_OK);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline
 const char *virtio_bus_name(struct virtio_device *vdev)
@@ -186,7 +195,10 @@ int virtqueue_set_affinity(struct virtqueue *vq, int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Config space accessors. */
 #define virtio_cread(vdev, structname, member, ptr)			\
 	do {								\
@@ -321,6 +333,9 @@ static inline void virtio_cwrite64(struct virtio_device *vdev,
 			virtio_cread((vdev), structname, member, ptr);	\
 		_r;							\
 	})
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _LINUX_VIRTIO_CONFIG_H */

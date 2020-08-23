@@ -1,7 +1,11 @@
 /* Keyring key type
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2008 Red Hat, Inc. All Rights Reserved.
+=======
+ * Copyright (C) 2008, 2013 Red Hat, Inc. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2008, 2013 Red Hat, Inc. All Rights Reserved.
 >>>>>>> v3.18
@@ -18,6 +22,7 @@
 
 #include <linux/key.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/rcupdate.h>
 
 /*
@@ -32,6 +37,9 @@ struct keyring_list {
 	struct key __rcu *keys[0];
 };
 
+=======
+#include <linux/assoc_array.h>
+>>>>>>> v3.18
 =======
 #include <linux/assoc_array.h>
 >>>>>>> v3.18

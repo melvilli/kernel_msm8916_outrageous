@@ -76,6 +76,10 @@ enum falcon_mux {
 	FALCON_MUX_RST,
 	FALCON_MUX_NTR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FALCON_MUX_PPS,
+>>>>>>> v3.18
 =======
 	FALCON_MUX_PPS,
 >>>>>>> v3.18
@@ -119,7 +123,11 @@ static struct ltq_mfp_pin falcon_mfp[] = {
 	MFP_FALCON(GPIO3,	GPIO,	GPIO,   NONE,   NONE),
 	MFP_FALCON(GPIO4,	NTR,	GPIO,   NONE,   NONE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MFP_FALCON(GPIO5,	NTR,	GPIO,   NONE,   NONE),
+=======
+	MFP_FALCON(GPIO5,	NTR,	GPIO,   PPS,    NONE),
+>>>>>>> v3.18
 =======
 	MFP_FALCON(GPIO5,	NTR,	GPIO,   PPS,    NONE),
 >>>>>>> v3.18
@@ -177,6 +185,10 @@ static const unsigned pins_por[] = {GPIO0};
 static const unsigned pins_ntr[] = {GPIO4};
 static const unsigned pins_ntr8k[] = {GPIO5};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static const unsigned pins_pps[] = {GPIO5};
+>>>>>>> v3.18
 =======
 static const unsigned pins_pps[] = {GPIO5};
 >>>>>>> v3.18
@@ -199,6 +211,10 @@ static struct ltq_pin_group falcon_grps[] = {
 	GRP_MUX("ntr", NTR, pins_ntr),
 	GRP_MUX("ntr8k", NTR, pins_ntr8k),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GRP_MUX("pps", PPS, pins_pps),
+>>>>>>> v3.18
 =======
 	GRP_MUX("pps", PPS, pins_pps),
 >>>>>>> v3.18
@@ -218,7 +234,11 @@ static struct ltq_pin_group falcon_grps[] = {
 
 static const char * const ltq_rst_grps[] = {"por", "hrst"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char * const ltq_ntr_grps[] = {"ntr", "ntr8k"};
+=======
+static const char * const ltq_ntr_grps[] = {"ntr", "ntr8k", "pps"};
+>>>>>>> v3.18
 =======
 static const char * const ltq_ntr_grps[] = {"ntr", "ntr8k", "pps"};
 >>>>>>> v3.18
@@ -256,7 +276,12 @@ static int falcon_pinconf_group_get(struct pinctrl_dev *pctrldev,
 
 static int falcon_pinconf_group_set(struct pinctrl_dev *pctrldev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned group, unsigned long config)
+=======
+				unsigned group, unsigned long *configs,
+				unsigned num_configs)
+>>>>>>> v3.18
 =======
 				unsigned group, unsigned long *configs,
 				unsigned num_configs)
@@ -302,6 +327,7 @@ static int falcon_pinconf_get(struct pinctrl_dev *pctrldev,
 
 static int falcon_pinconf_set(struct pinctrl_dev *pctrldev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned pin, unsigned long config)
 {
 	enum ltq_pinconf_param param = LTQ_PINCONF_UNPACK_PARAM(config);
@@ -336,6 +362,8 @@ static int falcon_pinconf_set(struct pinctrl_dev *pctrldev,
 	if (!(pad_r32(mem, reg) & BIT(PORT_PIN(pin))))
 		return -ENOTSUPP;
 =======
+=======
+>>>>>>> v3.18
 			unsigned pin, unsigned long *configs,
 			unsigned num_configs)
 {
@@ -377,6 +405,9 @@ static int falcon_pinconf_set(struct pinctrl_dev *pctrldev,
 			return -ENOTSUPP;
 	} /* for each config */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

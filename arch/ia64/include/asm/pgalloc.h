@@ -92,12 +92,18 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long addr)
 		return NULL;
 	page = virt_to_page(pg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_page_ctor(page);
 =======
+=======
+>>>>>>> v3.18
 	if (!pgtable_page_ctor(page)) {
 		quicklist_free(0, NULL, pg);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }

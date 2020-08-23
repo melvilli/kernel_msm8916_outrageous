@@ -14,7 +14,10 @@
 #include <linux/stddef.h>
 #include <linux/ioport.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -419,7 +422,11 @@ static const struct i2c_algorithm smbus_algorithm = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(amd8111_ids) = {
+=======
+static const struct pci_device_id amd8111_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id amd8111_ids[] = {
 >>>>>>> v3.18

@@ -15,11 +15,14 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  *  02110-1301, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -29,7 +32,10 @@
 
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/rc-core.h>
@@ -138,8 +144,11 @@ struct cx23888_ir_state {
 	struct v4l2_subdev sd;
 	struct cx23885_dev *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 id;
 	u32 rev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -276,7 +285,11 @@ static inline unsigned int lpf_count_to_us(unsigned int count)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FIFO register pulse width count compuations
+=======
+ * FIFO register pulse width count computations
+>>>>>>> v3.18
 =======
  * FIFO register pulse width count computations
 >>>>>>> v3.18
@@ -1100,6 +1113,7 @@ static int cx23888_ir_log_status(struct v4l2_subdev *sd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int cx23888_ir_dbg_match(const struct v4l2_dbg_match *match)
 {
 	return match->type == V4L2_CHIP_MATCH_HOST && match->addr == 2;
@@ -1119,6 +1133,8 @@ static int cx23888_ir_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int cx23888_ir_g_register(struct v4l2_subdev *sd,
 				 struct v4l2_dbg_register *reg)
@@ -1127,8 +1143,11 @@ static int cx23888_ir_g_register(struct v4l2_subdev *sd,
 	u32 addr = CX23888_IR_REG_BASE + (u32) reg->reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cx23888_ir_dbg_match(&reg->match))
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((addr & 0x3) != 0)
@@ -1136,8 +1155,11 @@ static int cx23888_ir_g_register(struct v4l2_subdev *sd,
 	if (addr < CX23888_IR_CNTRL_REG || addr > CX23888_IR_LEARN_REG)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->size = 4;
@@ -1152,8 +1174,11 @@ static int cx23888_ir_s_register(struct v4l2_subdev *sd,
 	u32 addr = CX23888_IR_REG_BASE + (u32) reg->reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cx23888_ir_dbg_match(&reg->match))
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((addr & 0x3) != 0)
@@ -1161,8 +1186,11 @@ static int cx23888_ir_s_register(struct v4l2_subdev *sd,
 	if (addr < CX23888_IR_CNTRL_REG || addr > CX23888_IR_LEARN_REG)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cx23888_ir_write4(state->dev, addr, reg->val);
@@ -1172,7 +1200,10 @@ static int cx23888_ir_s_register(struct v4l2_subdev *sd,
 
 static const struct v4l2_subdev_core_ops cx23888_ir_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = cx23888_ir_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.log_status = cx23888_ir_log_status,
@@ -1249,8 +1280,11 @@ int cx23888_ir_probe(struct cx23885_dev *dev)
 
 	state->dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->id = V4L2_IDENT_CX23888_IR;
 	state->rev = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sd = &state->sd;

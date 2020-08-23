@@ -37,19 +37,28 @@
  * Generic range manager structs
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/list.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bug.h>
 #include <linux/kernel.h>
 #include <linux/list.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 #include <linux/seq_file.h>
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum drm_mm_search_flags {
 	DRM_MM_SEARCH_DEFAULT =		0,
 	DRM_MM_SEARCH_BEST =		1 << 0,
@@ -64,6 +73,9 @@ enum drm_mm_allocator_flags {
 #define DRM_MM_BOTTOMUP DRM_MM_SEARCH_DEFAULT, DRM_MM_CREATE_DEFAULT
 #define DRM_MM_TOPDOWN DRM_MM_SEARCH_BELOW, DRM_MM_CREATE_TOP
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct drm_mm_node {
 	struct list_head node_list;
@@ -87,9 +99,12 @@ struct drm_mm {
 	 * according to the (increasing) start address of the memory node. */
 	struct drm_mm_node head_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head unused_nodes;
 	int num_unused;
 	spinlock_t unused_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int scan_check_range : 1;
@@ -108,7 +123,10 @@ struct drm_mm {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_node_allocated - checks whether a node is allocated
  * @node: drm_mm_node to check
@@ -119,6 +137,9 @@ struct drm_mm {
  * Returns:
  * True if the @node is allocated.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool drm_mm_node_allocated(struct drm_mm_node *node)
 {
@@ -126,7 +147,10 @@ static inline bool drm_mm_node_allocated(struct drm_mm_node *node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_initialized - checks whether an allocator is initialized
  * @mm: drm_mm to check
@@ -137,6 +161,9 @@ static inline bool drm_mm_node_allocated(struct drm_mm_node *node)
  * Returns:
  * True if the @mm is initialized.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool drm_mm_initialized(struct drm_mm *mm)
 {
@@ -149,7 +176,10 @@ static inline unsigned long __drm_mm_hole_node_start(struct drm_mm_node *hole_no
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_hole_node_start - computes the start of the hole following @node
  * @hole_node: drm_mm_node which implicitly tracks the following hole
@@ -161,6 +191,9 @@ static inline unsigned long __drm_mm_hole_node_start(struct drm_mm_node *hole_no
  * Returns:
  * Start of the subsequent hole.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long drm_mm_hole_node_start(struct drm_mm_node *hole_node)
 {
@@ -175,7 +208,10 @@ static inline unsigned long __drm_mm_hole_node_end(struct drm_mm_node *hole_node
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_hole_node_end - computes the end of the hole following @node
  * @hole_node: drm_mm_node which implicitly tracks the following hole
@@ -187,12 +223,16 @@ static inline unsigned long __drm_mm_hole_node_end(struct drm_mm_node *hole_node
  * Returns:
  * End of the subsequent hole.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long drm_mm_hole_node_end(struct drm_mm_node *hole_node)
 {
 	return __drm_mm_hole_node_end(hole_node);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define drm_mm_for_each_node(entry, mm) list_for_each_entry(entry, \
 						&(mm)->head_node.node_list, \
@@ -209,6 +249,8 @@ static inline unsigned long drm_mm_hole_node_end(struct drm_mm_node *hole_node)
  * setting hole_start and hole_end on each iteration and keep the
  * macro sane.
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_for_each_node - iterator to walk over all allocated nodes
  * @entry: drm_mm_node structure to assign to in each iteration step
@@ -239,6 +281,9 @@ static inline unsigned long drm_mm_hole_node_end(struct drm_mm_node *hole_node)
  *
  * The __drm_mm_for_each_hole version is similar, but with added support for
  * going backwards.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define drm_mm_for_each_hole(entry, mm, hole_start, hole_end) \
@@ -249,6 +294,7 @@ static inline unsigned long drm_mm_hole_node_end(struct drm_mm_node *hole_node)
 	     1 : 0; \
 	     entry = list_entry(entry->hole_stack.next, struct drm_mm_node, hole_stack))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Basic range manager support (drm_mm.c)
@@ -403,6 +449,8 @@ static inline struct drm_mm *drm_get_mm(struct drm_mm_node *block)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #define __drm_mm_for_each_hole(entry, mm, hole_start, hole_end, backwards) \
 	for (entry = list_entry((backwards) ? (mm)->hole_stack.prev : (mm)->hole_stack.next, struct drm_mm_node, hole_stack); \
 	     &entry->hole_stack != &(mm)->hole_stack ? \
@@ -497,6 +545,9 @@ void drm_mm_init(struct drm_mm *mm,
 void drm_mm_takedown(struct drm_mm *mm);
 bool drm_mm_clean(struct drm_mm *mm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void drm_mm_init_scan(struct drm_mm *mm,
 		      unsigned long size,
@@ -509,15 +560,21 @@ void drm_mm_init_scan_with_range(struct drm_mm *mm,
 				 unsigned long start,
 				 unsigned long end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_mm_scan_add_block(struct drm_mm_node *node);
 int drm_mm_scan_remove_block(struct drm_mm_node *node);
 
 extern void drm_mm_debug_table(struct drm_mm *mm, const char *prefix);
 =======
+=======
+>>>>>>> v3.18
 bool drm_mm_scan_add_block(struct drm_mm_node *node);
 bool drm_mm_scan_remove_block(struct drm_mm_node *node);
 
 void drm_mm_debug_table(struct drm_mm *mm, const char *prefix);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 int drm_mm_dump_table(struct seq_file *m, struct drm_mm *mm);

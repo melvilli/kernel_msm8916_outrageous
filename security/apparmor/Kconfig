@@ -30,7 +30,10 @@ config SECURITY_APPARMOR_BOOTPARAM_VALUE
 
 	  If you are unsure how to answer this question, answer 1.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config SECURITY_APPARMOR_HASH
 	bool "SHA1 hash of loaded profiles"
@@ -43,4 +46,7 @@ config SECURITY_APPARMOR_HASH
 	  This option selects whether sha1 hashing is done against loaded
           profiles and exported for inspection to user space via the apparmor
           filesystem.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

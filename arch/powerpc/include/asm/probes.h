@@ -39,7 +39,10 @@ typedef u32 ppc_opcode_t;
 #endif /* CONFIG_PPC64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_ADV_DEBUG_REGS
 #define MSR_SINGLESTEP	(MSR_DE)
 #else
@@ -65,6 +68,9 @@ static inline void enable_single_step(struct pt_regs *regs)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __KERNEL__ */
 #endif	/* _ASM_POWERPC_PROBES_H */

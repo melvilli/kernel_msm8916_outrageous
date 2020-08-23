@@ -33,9 +33,12 @@
 #include <asm/vm_mmu.h>
 #include <asm/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 #include <asm/prom.h>
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -45,7 +48,11 @@ static char default_command_line[COMMAND_LINE_SIZE] __initdata = CONFIG_CMDLINE;
 int on_simulator;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
+=======
+void calibrate_delay(void)
+>>>>>>> v3.18
 =======
 void calibrate_delay(void)
 >>>>>>> v3.18

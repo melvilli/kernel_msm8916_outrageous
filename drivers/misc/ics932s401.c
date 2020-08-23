@@ -3,7 +3,11 @@
  * Copyright (C) 2008 IBM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
 =======
  * Author: Darrick J. Wong <darrick.wong@oracle.com>
 >>>>>>> v3.18
@@ -487,7 +491,11 @@ static int ics932s401_remove(struct i2c_client *client)
 module_i2c_driver(ics932s401_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
+=======
+MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
 >>>>>>> v3.18

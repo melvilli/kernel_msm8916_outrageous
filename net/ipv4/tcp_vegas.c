@@ -52,7 +52,10 @@ module_param(gamma, int, 0644);
 MODULE_PARM_DESC(gamma, "limit on increase (scale by 2)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* There are several situations when we must "re-start" Vegas:
@@ -137,7 +140,10 @@ EXPORT_SYMBOL_GPL(tcp_vegas_pkts_acked);
 void tcp_vegas_state(struct sock *sk, u8 ca_state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ca_state == TCP_CA_Open)
@@ -170,7 +176,11 @@ static inline u32 tcp_vegas_ssthresh(struct tcp_sock *tp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -180,7 +190,11 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 
 	if (!vegas->doing_vegas_now) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+		tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 =======
 		tcp_reno_cong_avoid(sk, ack, acked);
 >>>>>>> v3.18
@@ -209,7 +223,11 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 			 * calculation, so we'll behave like Reno.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+			tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 =======
 			tcp_reno_cong_avoid(sk, ack, acked);
 >>>>>>> v3.18
@@ -263,7 +281,11 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 			} else if (tp->snd_cwnd <= tp->snd_ssthresh) {
 				/* Slow start.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				tcp_slow_start(tp);
+=======
+				tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 =======
 				tcp_slow_start(tp, acked);
 >>>>>>> v3.18
@@ -307,8 +329,12 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 	/* Use normal slow start */
 	else if (tp->snd_cwnd <= tp->snd_ssthresh)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_slow_start(tp);
 
+=======
+		tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 =======
 		tcp_slow_start(tp, acked);
 >>>>>>> v3.18
@@ -333,11 +359,17 @@ EXPORT_SYMBOL_GPL(tcp_vegas_get_info);
 
 static struct tcp_congestion_ops tcp_vegas __read_mostly = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= TCP_CONG_RTT_STAMP,
 	.init		= tcp_vegas_init,
 	.ssthresh	= tcp_reno_ssthresh,
 	.cong_avoid	= tcp_vegas_cong_avoid,
 	.min_cwnd	= tcp_reno_min_cwnd,
+=======
+	.init		= tcp_vegas_init,
+	.ssthresh	= tcp_reno_ssthresh,
+	.cong_avoid	= tcp_vegas_cong_avoid,
+>>>>>>> v3.18
 =======
 	.init		= tcp_vegas_init,
 	.ssthresh	= tcp_reno_ssthresh,

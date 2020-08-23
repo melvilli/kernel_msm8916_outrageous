@@ -234,7 +234,11 @@ static int fc0013_set_params(struct dvb_frontend *fe)
 	unsigned long f_vco;
 	unsigned short xtal_freq_khz_2, xin, xdiv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int vco_select = false;
+=======
+	bool vco_select = false;
+>>>>>>> v3.18
 =======
 	bool vco_select = false;
 >>>>>>> v3.18

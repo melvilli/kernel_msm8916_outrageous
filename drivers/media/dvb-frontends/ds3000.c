@@ -617,7 +617,11 @@ static int ds3000_read_snr(struct dvb_frontend *fe, u16 *snr)
 			if (snr_reading > 80)
 				snr_reading = 80;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*snr = -(dvbs2_snr_tab[snr_reading] / 1000);
+=======
+			*snr = -(dvbs2_snr_tab[snr_reading - 1] / 1000);
+>>>>>>> v3.18
 =======
 			*snr = -(dvbs2_snr_tab[snr_reading - 1] / 1000);
 >>>>>>> v3.18

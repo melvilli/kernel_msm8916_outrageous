@@ -34,13 +34,19 @@
 #include <linux/dma-mapping.h>
 #include <linux/dmapool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 #include <linux/fsldma.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "dmaengine.h"
 #include "fsldma.h"
@@ -67,7 +73,10 @@ static u32 get_sr(struct fsldma_chan *chan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void set_mr(struct fsldma_chan *chan, u32 val)
 {
 	DMA_OUT(chan, &chan->regs->mr, val, 32);
@@ -78,6 +87,9 @@ static u32 get_mr(struct fsldma_chan *chan)
 	return DMA_IN(chan, &chan->regs->mr, 32);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void set_cdar(struct fsldma_chan *chan, dma_addr_t addr)
 {
@@ -90,12 +102,18 @@ static dma_addr_t get_cdar(struct fsldma_chan *chan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void set_bcr(struct fsldma_chan *chan, u32 val)
 {
 	DMA_OUT(chan, &chan->regs->bcr, val, 32);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 get_bcr(struct fsldma_chan *chan)
 {
@@ -113,11 +131,14 @@ static void set_desc_cnt(struct fsldma_chan *chan,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 get_desc_cnt(struct fsldma_chan *chan, struct fsl_desc_sw *desc)
 {
 	return DMA_TO_CPU(chan, desc->hw.count, 32);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void set_desc_src(struct fsldma_chan *chan,
@@ -131,6 +152,7 @@ static void set_desc_src(struct fsldma_chan *chan,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static dma_addr_t get_desc_src(struct fsldma_chan *chan,
 			       struct fsl_desc_sw *desc)
 {
@@ -141,6 +163,8 @@ static dma_addr_t get_desc_src(struct fsldma_chan *chan,
 	return DMA_TO_CPU(chan, desc->hw.src_addr, 64) & ~snoop_bits;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void set_desc_dst(struct fsldma_chan *chan,
@@ -154,6 +178,7 @@ static void set_desc_dst(struct fsldma_chan *chan,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static dma_addr_t get_desc_dst(struct fsldma_chan *chan,
 			       struct fsl_desc_sw *desc)
 {
@@ -164,6 +189,8 @@ static dma_addr_t get_desc_dst(struct fsldma_chan *chan,
 	return DMA_TO_CPU(chan, desc->hw.dst_addr, 64) & ~snoop_bits;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void set_desc_next(struct fsldma_chan *chan,
@@ -196,7 +223,11 @@ static void dma_init(struct fsldma_chan *chan)
 {
 	/* Reset the channel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DMA_OUT(chan, &chan->regs->mr, 0, 32);
+=======
+	set_mr(chan, 0);
+>>>>>>> v3.18
 =======
 	set_mr(chan, 0);
 >>>>>>> v3.18
@@ -209,8 +240,13 @@ static void dma_init(struct fsldma_chan *chan)
 		 * BWC - Bandwidth sharing among channels
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_OUT(chan, &chan->regs->mr, FSL_DMA_MR_BWC
 				| FSL_DMA_MR_EIE | FSL_DMA_MR_EOLNIE, 32);
+=======
+		set_mr(chan, FSL_DMA_MR_BWC | FSL_DMA_MR_EIE
+			| FSL_DMA_MR_EOLNIE);
+>>>>>>> v3.18
 =======
 		set_mr(chan, FSL_DMA_MR_BWC | FSL_DMA_MR_EIE
 			| FSL_DMA_MR_EOLNIE);
@@ -222,8 +258,12 @@ static void dma_init(struct fsldma_chan *chan)
 		 * PRC_RM - PCI read multiple
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_OUT(chan, &chan->regs->mr, FSL_DMA_MR_EOTIE
 				| FSL_DMA_MR_PRC_RM, 32);
+=======
+		set_mr(chan, FSL_DMA_MR_EOTIE | FSL_DMA_MR_PRC_RM);
+>>>>>>> v3.18
 =======
 		set_mr(chan, FSL_DMA_MR_EOTIE | FSL_DMA_MR_PRC_RM);
 >>>>>>> v3.18
@@ -249,15 +289,21 @@ static void dma_start(struct fsldma_chan *chan)
 	u32 mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = DMA_IN(chan, &chan->regs->mr, 32);
 
 	if (chan->feature & FSL_DMA_CHAN_PAUSE_EXT) {
 		DMA_OUT(chan, &chan->regs->bcr, 0, 32);
 =======
+=======
+>>>>>>> v3.18
 	mode = get_mr(chan);
 
 	if (chan->feature & FSL_DMA_CHAN_PAUSE_EXT) {
 		set_bcr(chan, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mode |= FSL_DMA_MR_EMP_EN;
 	} else {
@@ -272,7 +318,11 @@ static void dma_start(struct fsldma_chan *chan)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DMA_OUT(chan, &chan->regs->mr, mode, 32);
+=======
+	set_mr(chan, mode);
+>>>>>>> v3.18
 =======
 	set_mr(chan, mode);
 >>>>>>> v3.18
@@ -285,7 +335,11 @@ static void dma_halt(struct fsldma_chan *chan)
 
 	/* read the mode register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = DMA_IN(chan, &chan->regs->mr, 32);
+=======
+	mode = get_mr(chan);
+>>>>>>> v3.18
 =======
 	mode = get_mr(chan);
 >>>>>>> v3.18
@@ -298,7 +352,11 @@ static void dma_halt(struct fsldma_chan *chan)
 	if ((chan->feature & FSL_DMA_IP_MASK) == FSL_DMA_IP_85XX) {
 		mode |= FSL_DMA_MR_CA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_OUT(chan, &chan->regs->mr, mode, 32);
+=======
+		set_mr(chan, mode);
+>>>>>>> v3.18
 =======
 		set_mr(chan, mode);
 >>>>>>> v3.18
@@ -309,7 +367,11 @@ static void dma_halt(struct fsldma_chan *chan)
 	/* stop the DMA controller */
 	mode &= ~(FSL_DMA_MR_CS | FSL_DMA_MR_EMS_EN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DMA_OUT(chan, &chan->regs->mr, mode, 32);
+=======
+	set_mr(chan, mode);
+>>>>>>> v3.18
 =======
 	set_mr(chan, mode);
 >>>>>>> v3.18
@@ -342,7 +404,11 @@ static void fsl_chan_set_src_loop_size(struct fsldma_chan *chan, int size)
 	u32 mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = DMA_IN(chan, &chan->regs->mr, 32);
+=======
+	mode = get_mr(chan);
+>>>>>>> v3.18
 =======
 	mode = get_mr(chan);
 >>>>>>> v3.18
@@ -360,7 +426,11 @@ static void fsl_chan_set_src_loop_size(struct fsldma_chan *chan, int size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DMA_OUT(chan, &chan->regs->mr, mode, 32);
+=======
+	set_mr(chan, mode);
+>>>>>>> v3.18
 =======
 	set_mr(chan, mode);
 >>>>>>> v3.18
@@ -382,7 +452,11 @@ static void fsl_chan_set_dst_loop_size(struct fsldma_chan *chan, int size)
 	u32 mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = DMA_IN(chan, &chan->regs->mr, 32);
+=======
+	mode = get_mr(chan);
+>>>>>>> v3.18
 =======
 	mode = get_mr(chan);
 >>>>>>> v3.18
@@ -400,7 +474,11 @@ static void fsl_chan_set_dst_loop_size(struct fsldma_chan *chan, int size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DMA_OUT(chan, &chan->regs->mr, mode, 32);
+=======
+	set_mr(chan, mode);
+>>>>>>> v3.18
 =======
 	set_mr(chan, mode);
 >>>>>>> v3.18
@@ -425,15 +503,21 @@ static void fsl_chan_set_request_count(struct fsldma_chan *chan, int size)
 	BUG_ON(size > 1024);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = DMA_IN(chan, &chan->regs->mr, 32);
 	mode |= (__ilog2(size) << 24) & 0x0f000000;
 
 	DMA_OUT(chan, &chan->regs->mr, mode, 32);
 =======
+=======
+>>>>>>> v3.18
 	mode = get_mr(chan);
 	mode |= (__ilog2(size) << 24) & 0x0f000000;
 
 	set_mr(chan, mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -473,7 +557,10 @@ static void fsl_chan_toggle_ext_start(struct fsldma_chan *chan, int enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int fsl_dma_external_start(struct dma_chan *dchan, int enable)
 {
 	struct fsldma_chan *chan;
@@ -488,6 +575,9 @@ int fsl_dma_external_start(struct dma_chan *dchan, int enable)
 }
 EXPORT_SYMBOL_GPL(fsl_dma_external_start);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void append_ld_queue(struct fsldma_chan *chan, struct fsl_desc_sw *desc)
 {
@@ -519,11 +609,14 @@ static dma_cookie_t fsl_dma_tx_submit(struct dma_async_tx_descriptor *tx)
 	struct fsl_desc_sw *desc = tx_to_fsl_desc(tx);
 	struct fsl_desc_sw *child;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	dma_cookie_t cookie;
 
 	spin_lock_irqsave(&chan->desc_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	dma_cookie_t cookie = -EINVAL;
 
 	spin_lock_bh(&chan->desc_lock);
@@ -535,6 +628,9 @@ static dma_cookie_t fsl_dma_tx_submit(struct dma_async_tx_descriptor *tx)
 		return -1;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -549,7 +645,11 @@ static dma_cookie_t fsl_dma_tx_submit(struct dma_async_tx_descriptor *tx)
 	append_ld_queue(chan, desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chan->desc_lock, flags);
+=======
+	spin_unlock_bh(&chan->desc_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&chan->desc_lock);
 >>>>>>> v3.18
@@ -559,7 +659,10 @@ static dma_cookie_t fsl_dma_tx_submit(struct dma_async_tx_descriptor *tx)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * fsl_dma_free_descriptor - Free descriptor from channel's DMA pool.
  * @chan : Freescale DMA channel
  * @desc: descriptor to be freed
@@ -573,6 +676,9 @@ static void fsl_dma_free_descriptor(struct fsldma_chan *chan,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * fsl_dma_alloc_descriptor - Allocate descriptor from channel's DMA pool.
  * @chan : Freescale DMA channel
@@ -597,9 +703,13 @@ static struct fsl_desc_sw *fsl_dma_alloc_descriptor(struct fsldma_chan *chan)
 	desc->async_tx.phys = pdesc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef FSL_DMA_LD_DEBUG
 	chan_dbg(chan, "LD %p allocated\n", desc);
 #endif
+=======
+	chan_dbg(chan, "LD %p allocated\n", desc);
+>>>>>>> v3.18
 =======
 	chan_dbg(chan, "LD %p allocated\n", desc);
 >>>>>>> v3.18
@@ -609,7 +719,10 @@ static struct fsl_desc_sw *fsl_dma_alloc_descriptor(struct fsldma_chan *chan)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * fsldma_clean_completed_descriptor - free all descriptors which
  * has been completed and acked
  * @chan: Freescale DMA channel
@@ -814,6 +927,9 @@ static void fsldma_cleanup_descriptors(struct fsldma_chan *chan)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * fsl_dma_alloc_chan_resources - Allocate resources for DMA channel.
  * @chan : Freescale DMA channel
@@ -859,6 +975,7 @@ static void fsldma_free_desc_list(struct fsldma_chan *chan,
 	struct fsl_desc_sw *desc, *_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(desc, _desc, list, node) {
 		list_del(&desc->node);
 #ifdef FSL_DMA_LD_DEBUG
@@ -866,6 +983,10 @@ static void fsldma_free_desc_list(struct fsldma_chan *chan,
 #endif
 		dma_pool_free(chan->desc_pool, desc, desc->async_tx.phys);
 	}
+=======
+	list_for_each_entry_safe(desc, _desc, list, node)
+		fsl_dma_free_descriptor(chan, desc);
+>>>>>>> v3.18
 =======
 	list_for_each_entry_safe(desc, _desc, list, node)
 		fsl_dma_free_descriptor(chan, desc);
@@ -878,6 +999,7 @@ static void fsldma_free_desc_list_reverse(struct fsldma_chan *chan,
 	struct fsl_desc_sw *desc, *_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe_reverse(desc, _desc, list, node) {
 		list_del(&desc->node);
 #ifdef FSL_DMA_LD_DEBUG
@@ -885,6 +1007,10 @@ static void fsldma_free_desc_list_reverse(struct fsldma_chan *chan,
 #endif
 		dma_pool_free(chan->desc_pool, desc, desc->async_tx.phys);
 	}
+=======
+	list_for_each_entry_safe_reverse(desc, _desc, list, node)
+		fsl_dma_free_descriptor(chan, desc);
+>>>>>>> v3.18
 =======
 	list_for_each_entry_safe_reverse(desc, _desc, list, node)
 		fsl_dma_free_descriptor(chan, desc);
@@ -899,6 +1025,7 @@ static void fsl_dma_free_chan_resources(struct dma_chan *dchan)
 {
 	struct fsldma_chan *chan = to_fsl_chan(dchan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	chan_dbg(chan, "free all channel resources\n");
@@ -907,6 +1034,8 @@ static void fsl_dma_free_chan_resources(struct dma_chan *dchan)
 	fsldma_free_desc_list(chan, &chan->ld_running);
 	spin_unlock_irqrestore(&chan->desc_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 
 	chan_dbg(chan, "free all channel resources\n");
 	spin_lock_bh(&chan->desc_lock);
@@ -915,6 +1044,9 @@ static void fsl_dma_free_chan_resources(struct dma_chan *dchan)
 	fsldma_free_desc_list(chan, &chan->ld_running);
 	fsldma_free_desc_list(chan, &chan->ld_completed);
 	spin_unlock_bh(&chan->desc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dma_pool_destroy(chan->desc_pool);
@@ -922,6 +1054,7 @@ static void fsl_dma_free_chan_resources(struct dma_chan *dchan)
 }
 
 static struct dma_async_tx_descriptor *
+<<<<<<< HEAD
 <<<<<<< HEAD
 fsl_dma_prep_interrupt(struct dma_chan *dchan, unsigned long flags)
 {
@@ -952,6 +1085,8 @@ fsl_dma_prep_interrupt(struct dma_chan *dchan, unsigned long flags)
 }
 
 static struct dma_async_tx_descriptor *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 fsl_dma_prep_memcpy(struct dma_chan *dchan,
@@ -1167,7 +1302,10 @@ static int fsl_dma_device_control(struct dma_chan *dchan,
 	struct dma_slave_config *config;
 	struct fsldma_chan *chan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int size;
@@ -1180,7 +1318,11 @@ static int fsl_dma_device_control(struct dma_chan *dchan,
 	switch (cmd) {
 	case DMA_TERMINATE_ALL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&chan->desc_lock, flags);
+=======
+		spin_lock_bh(&chan->desc_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&chan->desc_lock);
 >>>>>>> v3.18
@@ -1192,14 +1334,20 @@ static int fsl_dma_device_control(struct dma_chan *dchan,
 		fsldma_free_desc_list(chan, &chan->ld_pending);
 		fsldma_free_desc_list(chan, &chan->ld_running);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan->idle = true;
 
 		spin_unlock_irqrestore(&chan->desc_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		fsldma_free_desc_list(chan, &chan->ld_completed);
 		chan->idle = true;
 
 		spin_unlock_bh(&chan->desc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -1220,6 +1368,7 @@ static int fsl_dma_device_control(struct dma_chan *dchan,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSLDMA_EXTERNAL_START:
 
 		/* make sure the channel supports external start */
@@ -1231,6 +1380,8 @@ static int fsl_dma_device_control(struct dma_chan *dchan,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	default:
 		return -ENXIO;
 	}
@@ -1239,6 +1390,7 @@ static int fsl_dma_device_control(struct dma_chan *dchan,
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * fsldma_cleanup_descriptor - cleanup and free a single link descriptor
  * @chan: Freescale DMA channel
@@ -1360,6 +1512,8 @@ static void fsl_chan_xfer_ld_queue(struct fsldma_chan *chan)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * fsl_dma_memcpy_issue_pending - Issue the DMA start command
  * @chan : Freescale DMA channel
  */
@@ -1367,16 +1521,22 @@ static void fsl_dma_memcpy_issue_pending(struct dma_chan *dchan)
 {
 	struct fsldma_chan *chan = to_fsl_chan(dchan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&chan->desc_lock, flags);
 	fsl_chan_xfer_ld_queue(chan);
 	spin_unlock_irqrestore(&chan->desc_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock_bh(&chan->desc_lock);
 	fsl_chan_xfer_ld_queue(chan);
 	spin_unlock_bh(&chan->desc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1391,6 +1551,7 @@ static enum dma_status fsl_tx_status(struct dma_chan *dchan,
 	struct fsldma_chan *chan = to_fsl_chan(dchan);
 	enum dma_status ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&chan->desc_lock, flags);
@@ -1399,6 +1560,8 @@ static enum dma_status fsl_tx_status(struct dma_chan *dchan,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = dma_cookie_status(dchan, cookie, txstate);
 	if (ret == DMA_COMPLETE)
@@ -1409,6 +1572,9 @@ static enum dma_status fsl_tx_status(struct dma_chan *dchan,
 	spin_unlock_bh(&chan->desc_lock);
 
 	return dma_cookie_status(dchan, cookie, txstate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1487,6 +1653,7 @@ static void dma_do_tasklet(unsigned long data)
 {
 	struct fsldma_chan *chan = (struct fsldma_chan *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_desc_sw *desc, *_desc;
 	LIST_HEAD(ld_cleanup);
 	unsigned long flags;
@@ -1512,15 +1679,21 @@ static void dma_do_tasklet(unsigned long data)
 	 */
 	list_splice_tail_init(&chan->ld_running, &ld_cleanup);
 =======
+=======
+>>>>>>> v3.18
 
 	chan_dbg(chan, "tasklet entry\n");
 
 	spin_lock_bh(&chan->desc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* the hardware is now idle and ready for more */
 	chan->idle = true;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Start any pending transactions automatically
@@ -1541,10 +1714,15 @@ static void dma_do_tasklet(unsigned long data)
 		fsldma_cleanup_descriptor(chan, desc);
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Run all cleanup for descriptors which have been completed */
 	fsldma_cleanup_descriptors(chan);
 
 	spin_unlock_bh(&chan->desc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chan_dbg(chan, "tasklet exit\n");
@@ -1698,7 +1876,13 @@ static int fsl_dma_chan_probe(struct fsldma_device *fdev,
 
 	chan->dev = fdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->id = ((res.start - 0x100) & 0xfff) >> 7;
+=======
+	chan->id = (res.start & 0xfff) < 0x300 ?
+		   ((res.start - 0x100) & 0xfff) >> 7 :
+		   ((res.start - 0x200) & 0xfff) >> 7;
+>>>>>>> v3.18
 =======
 	chan->id = (res.start & 0xfff) < 0x300 ?
 		   ((res.start - 0x100) & 0xfff) >> 7 :
@@ -1734,13 +1918,19 @@ static int fsl_dma_chan_probe(struct fsldma_device *fdev,
 	INIT_LIST_HEAD(&chan->ld_pending);
 	INIT_LIST_HEAD(&chan->ld_running);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->idle = true;
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&chan->ld_completed);
 	chan->idle = true;
 #ifdef CONFIG_PM
 	chan->pm_state = RUNNING;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chan->common.device = &fdev->common;
@@ -1803,7 +1993,10 @@ static int fsldma_of_probe(struct platform_device *op)
 
 	dma_cap_set(DMA_MEMCPY, fdev->common.cap_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_cap_set(DMA_INTERRUPT, fdev->common.cap_mask);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dma_cap_set(DMA_SG, fdev->common.cap_mask);
@@ -1811,7 +2004,10 @@ static int fsldma_of_probe(struct platform_device *op)
 	fdev->common.device_alloc_chan_resources = fsl_dma_alloc_chan_resources;
 	fdev->common.device_free_chan_resources = fsl_dma_free_chan_resources;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fdev->common.device_prep_dma_interrupt = fsl_dma_prep_interrupt;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fdev->common.device_prep_dma_memcpy = fsl_dma_prep_memcpy;
@@ -1825,7 +2021,11 @@ static int fsldma_of_probe(struct platform_device *op)
 	dma_set_mask(&(op->dev), DMA_BIT_MASK(36));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, fdev);
+=======
+	platform_set_drvdata(op, fdev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, fdev);
 >>>>>>> v3.18
@@ -1878,7 +2078,11 @@ static int fsldma_of_remove(struct platform_device *op)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fdev = dev_get_drvdata(&op->dev);
+=======
+	fdev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	fdev = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1893,7 +2097,10 @@ static int fsldma_of_remove(struct platform_device *op)
 
 	iounmap(fdev->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(fdev);
@@ -1902,8 +2109,11 @@ static int fsldma_of_remove(struct platform_device *op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id fsldma_of_ids[] = {
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static int fsldma_suspend_late(struct device *dev)
 {
@@ -1969,6 +2179,9 @@ static const struct dev_pm_ops fsldma_pm_ops = {
 
 static const struct of_device_id fsldma_of_ids[] = {
 	{ .compatible = "fsl,elo3-dma", },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "fsl,eloplus-dma", },
 	{ .compatible = "fsl,elo-dma", },
@@ -1981,6 +2194,12 @@ static struct platform_driver fsldma_of_driver = {
 		.owner = THIS_MODULE,
 		.of_match_table = fsldma_of_ids,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+		.pm = &fsldma_pm_ops,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 		.pm = &fsldma_pm_ops,
@@ -1998,7 +2217,11 @@ static struct platform_driver fsldma_of_driver = {
 static __init int fsldma_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Freescale Elo / Elo Plus DMA driver\n");
+=======
+	pr_info("Freescale Elo series DMA driver\n");
+>>>>>>> v3.18
 =======
 	pr_info("Freescale Elo series DMA driver\n");
 >>>>>>> v3.18
@@ -2014,7 +2237,11 @@ subsys_initcall(fsldma_init);
 module_exit(fsldma_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Freescale Elo / Elo Plus DMA driver");
+=======
+MODULE_DESCRIPTION("Freescale Elo series DMA driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Freescale Elo series DMA driver");
 >>>>>>> v3.18

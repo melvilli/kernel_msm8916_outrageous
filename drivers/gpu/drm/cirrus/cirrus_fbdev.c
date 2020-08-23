@@ -26,7 +26,11 @@ static void cirrus_dirty_update(struct cirrus_fbdev *afbdev,
 	int src_offset, dst_offset;
 	int bpp = (afbdev->gfb.base.bits_per_pixel + 7)/8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = -EBUSY;
+>>>>>>> v3.18
 =======
 	int ret = -EBUSY;
 >>>>>>> v3.18
@@ -44,7 +48,12 @@ static void cirrus_dirty_update(struct cirrus_fbdev *afbdev,
 	 * store up the damage until later.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = cirrus_bo_reserve(bo, true);
+=======
+	if (drm_can_sleep())
+		ret = cirrus_bo_reserve(bo, true);
+>>>>>>> v3.18
 =======
 	if (drm_can_sleep())
 		ret = cirrus_bo_reserve(bo, true);
@@ -169,7 +178,12 @@ static int cirrusfb_create(struct drm_fb_helper *helper,
 			   struct drm_fb_helper_surface_size *sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cirrus_fbdev *gfbdev = (struct cirrus_fbdev *)helper;
+=======
+	struct cirrus_fbdev *gfbdev =
+		container_of(helper, struct cirrus_fbdev, helper);
+>>>>>>> v3.18
 =======
 	struct cirrus_fbdev *gfbdev =
 		container_of(helper, struct cirrus_fbdev, helper);
@@ -247,6 +261,12 @@ static int cirrusfb_create(struct drm_fb_helper *helper,
 	info->apertures->ranges[0].size = cdev->mc.vram_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	info->fix.smem_start = cdev->dev->mode_config.fb_base;
+	info->fix.smem_len = cdev->mc.vram_size;
+
+>>>>>>> v3.18
 =======
 	info->fix.smem_start = cdev->dev->mode_config.fb_base;
 	info->fix.smem_len = cdev->mc.vram_size;
@@ -305,7 +325,11 @@ static int cirrus_fbdev_destroy(struct drm_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs cirrus_fb_helper_funcs = {
+=======
+static const struct drm_fb_helper_funcs cirrus_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs cirrus_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -327,15 +351,21 @@ int cirrus_fbdev_init(struct cirrus_device *cdev)
 
 	cdev->mode_info.gfbdev = gfbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfbdev->helper.funcs = &cirrus_fb_helper_funcs;
 	spin_lock_init(&gfbdev->dirty_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&gfbdev->dirty_lock);
 
 	drm_fb_helper_prepare(cdev->dev, &gfbdev->helper,
 			      &cirrus_fb_helper_funcs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = drm_fb_helper_init(cdev->dev, &gfbdev->helper,
 				 cdev->num_crtc, CIRRUSFB_CONN_LIMIT);

@@ -51,7 +51,10 @@ static int inotify_max_user_watches __read_mostly;
 
 static struct kmem_cache *inotify_inode_mark_cachep __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kmem_cache *event_priv_cachep __read_mostly;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -62,7 +65,11 @@ struct kmem_cache *event_priv_cachep __read_mostly;
 static int zero;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ctl_table inotify_table[] = {
+=======
+struct ctl_table inotify_table[] = {
+>>>>>>> v3.18
 =======
 struct ctl_table inotify_table[] = {
 >>>>>>> v3.18
@@ -132,7 +139,10 @@ static unsigned int inotify_poll(struct file *file, poll_table *wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int round_event_name_len(struct fsnotify_event *fsn_event)
 {
 	struct inotify_event_info *event;
@@ -143,6 +153,9 @@ static int round_event_name_len(struct fsnotify_event *fsn_event)
 	return roundup(event->name_len + 1, sizeof(struct inotify_event));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Get an inotify_kernel_event if one exists and is small
@@ -161,6 +174,7 @@ static struct fsnotify_event *get_one_event(struct fsnotify_group *group,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event = fsnotify_peek_notify_event(group);
 
 	pr_debug("%s: group=%p event=%p\n", __func__, group, event);
@@ -169,11 +183,16 @@ static struct fsnotify_event *get_one_event(struct fsnotify_group *group,
 		event_size += roundup(event->name_len + 1, event_size);
 
 =======
+=======
+>>>>>>> v3.18
 	event = fsnotify_peek_first_event(group);
 
 	pr_debug("%s: group=%p event=%p\n", __func__, group, event);
 
 	event_size += round_event_name_len(event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (event_size > count)
 		return ERR_PTR(-EINVAL);
@@ -181,7 +200,11 @@ static struct fsnotify_event *get_one_event(struct fsnotify_group *group,
 	/* held the notification_mutex the whole time, so this is the
 	 * same event we peeked above */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fsnotify_remove_notify_event(group);
+=======
+	fsnotify_remove_first_event(group);
+>>>>>>> v3.18
 =======
 	fsnotify_remove_first_event(group);
 >>>>>>> v3.18
@@ -196,6 +219,7 @@ static struct fsnotify_event *get_one_event(struct fsnotify_group *group,
  * buffer we had in "get_one_event()" above.
  */
 static ssize_t copy_event_to_user(struct fsnotify_group *group,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				  struct fsnotify_event *event,
 				  char __user *buf)
@@ -232,6 +256,8 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 
 	inotify_event.mask = inotify_mask_to_arg(event->mask);
 =======
+=======
+>>>>>>> v3.18
 				  struct fsnotify_event *fsn_event,
 				  char __user *buf)
 {
@@ -253,6 +279,9 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 	inotify_event.len = pad_name_len;
 	inotify_event.mask = inotify_mask_to_arg(fsn_event->mask);
 	inotify_event.wd = event->wd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	inotify_event.cookie = event->sync_cookie;
 
@@ -265,6 +294,7 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 	/*
 	 * fsnotify only stores the pathname, so here we have to send the pathname
 	 * and then pad that pathname out to a multiple of sizeof(inotify_event)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * with zeros.  I get my zeros from the nul_inotify_event.
 	 */
@@ -281,6 +311,8 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 		buf += len_to_zero;
 		event_size += name_len;
 =======
+=======
+>>>>>>> v3.18
 	 * with zeros.
 	 */
 	if (pad_name_len) {
@@ -293,6 +325,9 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 		if (clear_user(buf, pad_name_len - name_len))
 			return -EFAULT;
 		event_size += pad_name_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -326,7 +361,11 @@ static ssize_t inotify_read(struct file *file, char __user *buf,
 				break;
 			ret = copy_event_to_user(group, kevent, buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fsnotify_put_event(kevent);
+=======
+			fsnotify_destroy_event(group, kevent);
+>>>>>>> v3.18
 =======
 			fsnotify_destroy_event(group, kevent);
 >>>>>>> v3.18
@@ -373,8 +412,12 @@ static long inotify_ioctl(struct file *file, unsigned int cmd,
 {
 	struct fsnotify_group *group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsnotify_event_holder *holder;
 	struct fsnotify_event *event;
+=======
+	struct fsnotify_event *fsn_event;
+>>>>>>> v3.18
 =======
 	struct fsnotify_event *fsn_event;
 >>>>>>> v3.18
@@ -391,6 +434,7 @@ static long inotify_ioctl(struct file *file, unsigned int cmd,
 	case FIONREAD:
 		mutex_lock(&group->notification_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_for_each_entry(holder, &group->notification_list, event_list) {
 			event = holder->event;
 			send_len += sizeof(struct inotify_event);
@@ -398,10 +442,15 @@ static long inotify_ioctl(struct file *file, unsigned int cmd,
 				send_len += roundup(event->name_len + 1,
 						sizeof(struct inotify_event));
 =======
+=======
+>>>>>>> v3.18
 		list_for_each_entry(fsn_event, &group->notification_list,
 				    list) {
 			send_len += sizeof(struct inotify_event);
 			send_len += round_event_name_len(fsn_event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		mutex_unlock(&group->notification_mutex);
@@ -436,7 +485,11 @@ static int inotify_find_inode(const char __user *dirname, struct path *path, uns
 		return error;
 	/* you can only watch an inode if you have read permissions on it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = inode_permission2(path->mnt, path->dentry->d_inode, MAY_READ);
+=======
+	error = inode_permission(path->dentry->d_inode, MAY_READ);
+>>>>>>> v3.18
 =======
 	error = inode_permission(path->dentry->d_inode, MAY_READ);
 >>>>>>> v3.18
@@ -594,6 +647,7 @@ void inotify_ignored_and_remove_idr(struct fsnotify_mark *fsn_mark,
 {
 	struct inotify_inode_mark *i_mark;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsnotify_event *ignored_event, *notify_event;
 	struct inotify_event_private_data *event_priv;
 	struct fsnotify_event_private_data *fsn_event_priv;
@@ -632,12 +686,17 @@ skip_send_ignore:
 		fsnotify_put_event(ignored_event);
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Queue ignore event for the watch */
 	inotify_handle_event(group, NULL, fsn_mark, NULL, FS_IN_IGNORED,
 			     NULL, FSNOTIFY_EVENT_NONE, NULL, 0);
 
 	i_mark = container_of(fsn_mark, struct inotify_inode_mark, fsn_mark);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* remove this mark from the idr */
 	inotify_remove_from_idr(group, i_mark);
@@ -736,7 +795,12 @@ static int inotify_new_watch(struct fsnotify_group *group,
 
 	/* we are on the idr, now get on the inode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = fsnotify_add_mark(&tmp_i_mark->fsn_mark, group, inode, NULL, 0);
+=======
+	ret = fsnotify_add_mark_locked(&tmp_i_mark->fsn_mark, group, inode,
+				       NULL, 0);
+>>>>>>> v3.18
 =======
 	ret = fsnotify_add_mark_locked(&tmp_i_mark->fsn_mark, group, inode,
 				       NULL, 0);
@@ -765,7 +829,11 @@ static int inotify_update_watch(struct fsnotify_group *group, struct inode *inod
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 retry:
+=======
+	mutex_lock(&group->mark_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&group->mark_mutex);
 >>>>>>> v3.18
@@ -774,6 +842,7 @@ retry:
 	/* no mark present, try to add a new one */
 	if (ret == -ENOENT)
 		ret = inotify_new_watch(group, inode, arg);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * inotify_new_watch could race with another thread which did an
@@ -785,6 +854,9 @@ retry:
 =======
 	mutex_unlock(&group->mark_mutex);
 >>>>>>> v3.18
+=======
+	mutex_unlock(&group->mark_mutex);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -793,6 +865,10 @@ static struct fsnotify_group *inotify_new_group(unsigned int max_events)
 {
 	struct fsnotify_group *group;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct inotify_event_info *oevent;
+>>>>>>> v3.18
 =======
 	struct inotify_event_info *oevent;
 >>>>>>> v3.18
@@ -802,7 +878,10 @@ static struct fsnotify_group *inotify_new_group(unsigned int max_events)
 		return group;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	oevent = kmalloc(sizeof(struct inotify_event_info), GFP_KERNEL);
 	if (unlikely(!oevent)) {
 		fsnotify_destroy_group(group);
@@ -814,6 +893,9 @@ static struct fsnotify_group *inotify_new_group(unsigned int max_events)
 	oevent->sync_cookie = 0;
 	oevent->name_len = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	group->max_events = max_events;
 
@@ -869,8 +951,11 @@ SYSCALL_DEFINE3(inotify_add_watch, int, fd, const char __user *, pathname,
 	struct inode *inode;
 	struct path path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct path alteredpath;
 	struct path *canonical_path = &path;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct fd f;
@@ -901,6 +986,7 @@ SYSCALL_DEFINE3(inotify_add_watch, int, fd, const char __user *, pathname,
 		goto fput_and_out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* support stacked filesystems */
 	if(path.dentry && path.dentry->d_op) {
 		if (path.dentry->d_op->d_canonical_path) {
@@ -916,12 +1002,20 @@ SYSCALL_DEFINE3(inotify_add_watch, int, fd, const char __user *, pathname,
 	/* inode held in place by reference to path; group by fget on fd */
 	inode = path.dentry->d_inode;
 >>>>>>> v3.18
+=======
+	/* inode held in place by reference to path; group by fget on fd */
+	inode = path.dentry->d_inode;
+>>>>>>> v3.18
 	group = f.file->private_data;
 
 	/* create/update an inode mark */
 	ret = inotify_update_watch(group, inode, mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	path_put(canonical_path);
+=======
+	path_put(&path);
+>>>>>>> v3.18
 =======
 	path_put(&path);
 >>>>>>> v3.18
@@ -995,7 +1089,10 @@ static int __init inotify_user_setup(void)
 
 	inotify_inode_mark_cachep = KMEM_CACHE(inotify_inode_mark, SLAB_PANIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event_priv_cachep = KMEM_CACHE(inotify_event_private_data, SLAB_PANIC);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

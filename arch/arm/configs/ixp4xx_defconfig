@@ -170,7 +170,10 @@ CONFIG_WATCHDOG=y
 CONFIG_IXP4XX_WATCHDOG=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

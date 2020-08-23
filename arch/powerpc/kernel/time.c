@@ -43,6 +43,10 @@
 #include <linux/kernel_stat.h>
 #include <linux/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clockchips.h>
+>>>>>>> v3.18
 =======
 #include <linux/clockchips.h>
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ struct clock_event_device decrementer_clockevent = {
 	.set_next_event = decrementer_set_next_event,
 	.set_mode       = decrementer_set_mode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.features       = CLOCK_EVT_FEAT_ONESHOT,
+=======
+	.features       = CLOCK_EVT_FEAT_ONESHOT | CLOCK_EVT_FEAT_C3STOP,
+>>>>>>> v3.18
 =======
 	.features       = CLOCK_EVT_FEAT_ONESHOT | CLOCK_EVT_FEAT_C3STOP,
 >>>>>>> v3.18
@@ -219,6 +227,7 @@ static u64 scan_dispatch_log(u64 stop_tb)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i == vpa->dtl_idx)
 		return 0;
 	while (i < vpa->dtl_idx) {
@@ -232,6 +241,8 @@ static u64 scan_dispatch_log(u64 stop_tb)
 			/* buffer has overflowed */
 			i = vpa->dtl_idx - N_DISPATCH_LOG;
 =======
+=======
+>>>>>>> v3.18
 	if (i == be64_to_cpu(vpa->dtl_idx))
 		return 0;
 	while (i < be64_to_cpu(vpa->dtl_idx)) {
@@ -242,6 +253,9 @@ static u64 scan_dispatch_log(u64 stop_tb)
 		if (i + N_DISPATCH_LOG < be64_to_cpu(vpa->dtl_idx)) {
 			/* buffer has overflowed */
 			i = be64_to_cpu(vpa->dtl_idx) - N_DISPATCH_LOG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dtl = local_paca->dispatch_log + (i % N_DISPATCH_LOG);
 			continue;
@@ -249,6 +263,11 @@ static u64 scan_dispatch_log(u64 stop_tb)
 		if (dtb > stop_tb)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (dtl_consumer)
+			dtl_consumer(dtl, i);
+>>>>>>> v3.18
 =======
 		if (dtl_consumer)
 			dtl_consumer(dtl, i);
@@ -296,7 +315,11 @@ static inline u64 calculate_stolen_time(u64 stop_tb)
 	u64 stolen = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_paca()->dtl_ridx != get_paca()->lppaca_ptr->dtl_idx) {
+=======
+	if (get_paca()->dtl_ridx != be64_to_cpu(get_lppaca()->dtl_idx)) {
+>>>>>>> v3.18
 =======
 	if (get_paca()->dtl_ridx != be64_to_cpu(get_lppaca()->dtl_idx)) {
 >>>>>>> v3.18
@@ -509,7 +532,10 @@ void arch_irq_work_raise(void)
 #endif /* CONFIG_IRQ_WORK */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __timer_interrupt(void)
 {
 	struct pt_regs *regs = get_irq_regs();
@@ -551,6 +577,9 @@ static void __timer_interrupt(void)
 	trace_timer_interrupt_exit(regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * timer_interrupt - gets called when the decrementer overflows,
@@ -561,8 +590,11 @@ void timer_interrupt(struct pt_regs * regs)
 	struct pt_regs *old_regs;
 	u64 *next_tb = &__get_cpu_var(decrementers_next_tb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clock_event_device *evt = &__get_cpu_var(decrementers);
 	u64 now;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -588,7 +620,10 @@ void timer_interrupt(struct pt_regs * regs)
 	may_hard_irq_enable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).timer_irqs++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -600,6 +635,7 @@ void timer_interrupt(struct pt_regs * regs)
 	old_regs = set_irq_regs(regs);
 	irq_enter();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	trace_timer_interrupt_entry(regs);
 
@@ -629,6 +665,9 @@ void timer_interrupt(struct pt_regs * regs)
 
 	trace_timer_interrupt_exit(regs);
 
+=======
+	__timer_interrupt();
+>>>>>>> v3.18
 =======
 	__timer_interrupt();
 >>>>>>> v3.18
@@ -697,7 +736,11 @@ static int __init get_freq(char *name, int cells, unsigned long *val)
 {
 	struct device_node *cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int *fp;
+=======
+	const __be32 *fp;
+>>>>>>> v3.18
 =======
 	const __be32 *fp;
 >>>>>>> v3.18
@@ -720,8 +763,12 @@ static int __init get_freq(char *name, int cells, unsigned long *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* should become __cpuinit when secondary_cpu_time_init also is */
 void start_cpu_decrementer(void)
+=======
+static void start_cpu_decrementer(void)
+>>>>>>> v3.18
 =======
 static void start_cpu_decrementer(void)
 >>>>>>> v3.18
@@ -823,7 +870,11 @@ static cycle_t timebase_read(struct clocksource *cs)
 
 void update_vsyscall_old(struct timespec *wall_time, struct timespec *wtm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct clocksource *clock, u32 mult)
+=======
+			 struct clocksource *clock, u32 mult, cycle_t cycle_last)
+>>>>>>> v3.18
 =======
 			 struct clocksource *clock, u32 mult, cycle_t cycle_last)
 >>>>>>> v3.18
@@ -860,7 +911,11 @@ void update_vsyscall_old(struct timespec *wall_time, struct timespec *wtm,
 	 * vdso_data->tb_update_count already.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vdso_data->tb_orig_stamp = clock->cycle_last;
+=======
+	vdso_data->tb_orig_stamp = cycle_last;
+>>>>>>> v3.18
 =======
 	vdso_data->tb_orig_stamp = cycle_last;
 >>>>>>> v3.18
@@ -905,12 +960,18 @@ static int decrementer_set_next_event(unsigned long evt,
 	__get_cpu_var(decrementers_next_tb) = get_tb_or_rtc() + evt;
 	set_dec(evt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* We may have raced with new irq work */
 	if (test_irq_work_pending())
 		set_dec(1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -923,7 +984,10 @@ static void decrementer_set_mode(enum clock_event_mode mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Interrupt handler for the timer broadcast IPI */
 void tick_broadcast_ipi_handler(void)
 {
@@ -933,6 +997,9 @@ void tick_broadcast_ipi_handler(void)
 	__timer_interrupt();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void register_decrementer_clockevent(int cpu)
 {
@@ -1038,6 +1105,10 @@ void __init time_init(void)
 
 	init_decrementer_clockevent();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tick_setup_hrtimer_broadcast();
+>>>>>>> v3.18
 =======
 	tick_setup_hrtimer_broadcast();
 >>>>>>> v3.18
@@ -1123,6 +1194,10 @@ void to_tm(int tim, struct rtc_time * tm)
 	GregorianDay(tm);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(to_tm);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(to_tm);
 >>>>>>> v3.18
@@ -1179,7 +1254,11 @@ static int __init rtc_init(void)
 	pdev = platform_device_register_simple("rtc-generic", -1, NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(pdev);
+=======
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(pdev);
 >>>>>>> v3.18

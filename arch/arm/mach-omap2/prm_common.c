@@ -24,14 +24,20 @@
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/clk-provider.h>
 #include <linux/clk/ti.h>
 
 #include "soc.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "prm2xxx_3xxx.h"
 #include "prm2xxx.h"
@@ -39,6 +45,10 @@
 #include "prm44xx.h"
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "clock.h"
+>>>>>>> v3.18
 =======
 #include "clock.h"
 >>>>>>> v3.18
@@ -70,6 +80,11 @@ static struct omap_prcm_irq_setup *prcm_irq_setup;
 void __iomem *prm_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+u16 prm_features;
+
+>>>>>>> v3.18
 =======
 u16 prm_features;
 
@@ -341,12 +356,18 @@ int omap_prcm_register_chain_handler(struct omap_prcm_irq_setup *irq_setup)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (of_have_populated_dt()) {
 		int irq = omap_prcm_event_to_irq("io");
 		omap_pcs_legacy_init(irq, irq_setup->reconfigure_io_chain);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -480,7 +501,10 @@ int prm_unregister(struct prm_ll_data *pld)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static const struct of_device_id omap_prcm_dt_match_table[] = {
 	{ .compatible = "ti,am3-prcm" },
@@ -550,4 +574,7 @@ static int __init prm_late_init(void)
 	return 0;
 }
 subsys_initcall(prm_late_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

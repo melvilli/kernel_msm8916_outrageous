@@ -118,7 +118,11 @@ static int vx_reset_chk(struct vx_core *chip)
  * returns 0 if successful, or a negative error code.
  * the error code can be VX-specific, retrieved via vx_get_error().
 <<<<<<< HEAD
+<<<<<<< HEAD
  * NB: call with spinlock held!
+=======
+ * NB: call with mutex held!
+>>>>>>> v3.18
 =======
  * NB: call with mutex held!
 >>>>>>> v3.18
@@ -160,7 +164,11 @@ static int vx_transfer_end(struct vx_core *chip, int cmd)
  * returns 0 if successful, or a negative error code.
  * the error code can be VX-specific, retrieved via vx_get_error().
 <<<<<<< HEAD
+<<<<<<< HEAD
  * NB: call with spinlock held!
+=======
+ * NB: call with mutex held!
+>>>>>>> v3.18
 =======
  * NB: call with mutex held!
 >>>>>>> v3.18
@@ -214,7 +222,11 @@ static int vx_read_status(struct vx_core *chip, struct vx_rmh *rmh)
 	if (size < 1)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (snd_BUG_ON(size > SIZE_MAX_STATUS))
+=======
+	if (snd_BUG_ON(size >= SIZE_MAX_STATUS))
+>>>>>>> v3.18
 =======
 	if (snd_BUG_ON(size >= SIZE_MAX_STATUS))
 >>>>>>> v3.18
@@ -249,7 +261,11 @@ static int vx_read_status(struct vx_core *chip, struct vx_rmh *rmh)
  * the error code can be VX-specific, retrieved via vx_get_error().
  * 
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this function doesn't call spinlock at all.
+=======
+ * this function doesn't call mutex lock at all.
+>>>>>>> v3.18
 =======
  * this function doesn't call mutex lock at all.
 >>>>>>> v3.18
@@ -354,7 +370,11 @@ int vx_send_msg_nolock(struct vx_core *chip, struct vx_rmh *rmh)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * vx_send_msg - send a DSP message with spinlock
+=======
+ * vx_send_msg - send a DSP message with mutex
+>>>>>>> v3.18
 =======
  * vx_send_msg - send a DSP message with mutex
 >>>>>>> v3.18
@@ -366,6 +386,7 @@ int vx_send_msg_nolock(struct vx_core *chip, struct vx_rmh *rmh)
 int vx_send_msg(struct vx_core *chip, struct vx_rmh *rmh)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	int err;
 
@@ -373,11 +394,16 @@ int vx_send_msg(struct vx_core *chip, struct vx_rmh *rmh)
 	err = vx_send_msg_nolock(chip, rmh);
 	spin_unlock_irqrestore(&chip->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	mutex_lock(&chip->lock);
 	err = vx_send_msg_nolock(chip, rmh);
 	mutex_unlock(&chip->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -391,7 +417,11 @@ int vx_send_msg(struct vx_core *chip, struct vx_rmh *rmh)
  * the error code can be VX-specific, retrieved via vx_get_error().
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this function doesn't call spinlock at all.
+=======
+ * this function doesn't call mutex at all.
+>>>>>>> v3.18
 =======
  * this function doesn't call mutex at all.
 >>>>>>> v3.18
@@ -431,7 +461,11 @@ int vx_send_rih_nolock(struct vx_core *chip, int cmd)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * vx_send_rih - send an RIH with spinlock
+=======
+ * vx_send_rih - send an RIH with mutex
+>>>>>>> v3.18
 =======
  * vx_send_rih - send an RIH with mutex
 >>>>>>> v3.18
@@ -442,6 +476,7 @@ int vx_send_rih_nolock(struct vx_core *chip, int cmd)
 int vx_send_rih(struct vx_core *chip, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	int err;
 
@@ -449,11 +484,16 @@ int vx_send_rih(struct vx_core *chip, int cmd)
 	err = vx_send_rih_nolock(chip, cmd);
 	spin_unlock_irqrestore(&chip->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	mutex_lock(&chip->lock);
 	err = vx_send_rih_nolock(chip, cmd);
 	mutex_unlock(&chip->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -527,7 +567,11 @@ static int vx_test_irq_src(struct vx_core *chip, unsigned int *ret)
 
 	vx_init_rmh(&chip->irq_rmh, CMD_TEST_IT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&chip->lock);
+=======
+	mutex_lock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->lock);
 >>>>>>> v3.18
@@ -537,7 +581,11 @@ static int vx_test_irq_src(struct vx_core *chip, unsigned int *ret)
 	else
 		*ret = chip->irq_rmh.Stat[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&chip->lock);
+=======
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->lock);
 >>>>>>> v3.18
@@ -546,6 +594,7 @@ static int vx_test_irq_src(struct vx_core *chip, unsigned int *ret)
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * vx_interrupt - soft irq handler
  */
@@ -560,6 +609,8 @@ static void vx_interrupt(unsigned long private_data)
 	if (vx_test_irq_src(chip, &events) < 0)
 		return;
 =======
+=======
+>>>>>>> v3.18
  * snd_vx_threaded_irq_handler - threaded irq handler
  */
 irqreturn_t snd_vx_threaded_irq_handler(int irq, void *dev)
@@ -572,6 +623,9 @@ irqreturn_t snd_vx_threaded_irq_handler(int irq, void *dev)
 
 	if (vx_test_irq_src(chip, &events) < 0)
 		return IRQ_HANDLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     
 #if 0
@@ -587,7 +641,11 @@ irqreturn_t snd_vx_threaded_irq_handler(int irq, void *dev)
 	if (events & FATAL_DSP_ERROR) {
 		snd_printk(KERN_ERR "vx_core: fatal DSP error!!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return IRQ_HANDLED;
+>>>>>>> v3.18
 =======
 		return IRQ_HANDLED;
 >>>>>>> v3.18
@@ -606,8 +664,14 @@ irqreturn_t snd_vx_threaded_irq_handler(int irq, void *dev)
 	/* update the pcm streams */
 	vx_pcm_update_intr(chip, events);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
+=======
+	return IRQ_HANDLED;
+}
+EXPORT_SYMBOL(snd_vx_threaded_irq_handler);
+>>>>>>> v3.18
 =======
 	return IRQ_HANDLED;
 }
@@ -626,8 +690,13 @@ irqreturn_t snd_vx_irq_handler(int irq, void *dev)
 		return IRQ_NONE;
 	if (! vx_test_and_ack(chip))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tasklet_schedule(&chip->tq);
 	return IRQ_HANDLED;
+=======
+		return IRQ_WAKE_THREAD;
+	return IRQ_NONE;
+>>>>>>> v3.18
 =======
 		return IRQ_WAKE_THREAD;
 	return IRQ_NONE;
@@ -873,8 +942,12 @@ struct vx_core *snd_vx_create(struct snd_card *card, struct snd_vx_hardware *hw,
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&chip->lock);
 	spin_lock_init(&chip->irq_lock);
+=======
+	mutex_init(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_init(&chip->lock);
 >>>>>>> v3.18
@@ -883,7 +956,10 @@ struct vx_core *snd_vx_create(struct snd_card *card, struct snd_vx_hardware *hw,
 	chip->type = hw->type;
 	chip->ops = ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tasklet_init(&chip->tq, vx_interrupt, (unsigned long)chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_init(&chip->mixer_mutex);

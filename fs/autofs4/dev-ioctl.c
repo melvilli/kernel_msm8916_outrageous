@@ -96,7 +96,11 @@ static int check_dev_ioctl_version(int cmd, struct autofs_dev_ioctl *param)
 static struct autofs_dev_ioctl *copy_dev_ioctl(struct autofs_dev_ioctl __user *in)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct autofs_dev_ioctl tmp, *res;
+=======
+	struct autofs_dev_ioctl tmp;
+>>>>>>> v3.18
 =======
 	struct autofs_dev_ioctl tmp;
 >>>>>>> v3.18
@@ -108,16 +112,22 @@ static struct autofs_dev_ioctl *copy_dev_ioctl(struct autofs_dev_ioctl __user *i
 		return ERR_PTR(-EINVAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = memdup_user(in, tmp.size);
 	if (!IS_ERR(res))
 		res->size = tmp.size;
 
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	if (tmp.size > (PATH_MAX + sizeof(tmp)))
 		return ERR_PTR(-ENAMETOOLONG);
 
 	return memdup_user(in, tmp.size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -199,6 +209,10 @@ static int autofs_dev_ioctl_protosubver(struct file *fp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Find the topmost mount satisfying test() */
+>>>>>>> v3.18
 =======
 /* Find the topmost mount satisfying test() */
 >>>>>>> v3.18
@@ -209,7 +223,11 @@ static int find_autofs_mount(const char *pathname,
 {
 	struct path path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = kern_path(pathname, 0, &path);
+=======
+	int err = kern_path_mountpoint(AT_FDCWD, pathname, &path, 0);
+>>>>>>> v3.18
 =======
 	int err = kern_path_mountpoint(AT_FDCWD, pathname, &path, 0);
 >>>>>>> v3.18
@@ -221,10 +239,16 @@ static int find_autofs_mount(const char *pathname,
 			if (test(&path, data)) {
 				path_get(&path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (!err) /* already found some */
 					path_put(res);
 				*res = path;
 				err = 0;
+=======
+				*res = path;
+				err = 0;
+				break;
+>>>>>>> v3.18
 =======
 				*res = path;
 				err = 0;
@@ -376,6 +400,10 @@ static int autofs_dev_ioctl_setpipefd(struct file *fp,
 	int pipefd;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pid *new_pid = NULL;
+>>>>>>> v3.18
 =======
 	struct pid *new_pid = NULL;
 >>>>>>> v3.18
@@ -391,8 +419,11 @@ static int autofs_dev_ioctl_setpipefd(struct file *fp,
 		return -EBUSY;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct file *pipe = fget(pipefd);
 =======
+=======
+>>>>>>> v3.18
 		struct file *pipe;
 
 		new_pid = get_task_pid(current, PIDTYPE_PGID);
@@ -404,6 +435,9 @@ static int autofs_dev_ioctl_setpipefd(struct file *fp,
 		}
 
 		pipe = fget(pipefd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!pipe) {
 			err = -EBADF;
@@ -415,7 +449,11 @@ static int autofs_dev_ioctl_setpipefd(struct file *fp,
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sbi->oz_pgrp = task_pgrp_nr(current);
+=======
+		swap(sbi->oz_pgrp, new_pid);
+>>>>>>> v3.18
 =======
 		swap(sbi->oz_pgrp, new_pid);
 >>>>>>> v3.18
@@ -425,6 +463,10 @@ static int autofs_dev_ioctl_setpipefd(struct file *fp,
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	put_pid(new_pid);
+>>>>>>> v3.18
 =======
 	put_pid(new_pid);
 >>>>>>> v3.18
@@ -491,7 +533,11 @@ static int autofs_dev_ioctl_requester(struct file *fp,
 	if (ino) {
 		err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		autofs4_expire_wait(path.dentry);
+=======
+		autofs4_expire_wait(path.dentry, 0);
+>>>>>>> v3.18
 =======
 		autofs4_expire_wait(path.dentry, 0);
 >>>>>>> v3.18
@@ -546,6 +592,7 @@ static int autofs_dev_ioctl_askumount(struct file *fp,
  *
  * If we aren't supplied with a file descriptor then we
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lookup the nameidata of the path and check if it is the
  * root of a mount. If a type is given we are looking for
  * a particular autofs mount and if we don't find a match
@@ -553,11 +600,16 @@ static int autofs_dev_ioctl_askumount(struct file *fp,
  * root of a mount we return 1 along with the super magic
  * of the mount or 0 otherwise.
 =======
+=======
+>>>>>>> v3.18
  * lookup the path and check if it is the root of a mount.
  * If a type is given we are looking for a particular autofs
  * mount and if we don't find a match we return fail. If the
  * located path is the root of a mount we return 1 along with
  * the super magic of the mount or 0 otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * In both cases the the device number (as returned by
@@ -587,15 +639,21 @@ static int autofs_dev_ioctl_ismountpoint(struct file *fp,
 	if (!fp || param->ioctlfd == -1) {
 		if (autofs_type_any(type))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = kern_path(name, LOOKUP_FOLLOW, &path);
 		else
 			err = find_autofs_mount(name, &path, test_by_type, &type);
 =======
+=======
+>>>>>>> v3.18
 			err = kern_path_mountpoint(AT_FDCWD,
 						   name, &path, LOOKUP_FOLLOW);
 		else
 			err = find_autofs_mount(name, &path,
 						test_by_type, &type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)
 			goto out;
@@ -733,12 +791,15 @@ static int _autofs_dev_ioctl(unsigned int command, struct autofs_dev_ioctl __use
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!fp->f_op) {
 			err = -ENOTTY;
 			fput(fp);
 			goto out;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sbi = autofs_dev_ioctl_sbi(fp);
@@ -806,7 +867,11 @@ MODULE_ALIAS("devname:autofs");
 
 /* Register/deregister misc character device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int autofs_dev_ioctl_init(void)
+=======
+int __init autofs_dev_ioctl_init(void)
+>>>>>>> v3.18
 =======
 int __init autofs_dev_ioctl_init(void)
 >>>>>>> v3.18

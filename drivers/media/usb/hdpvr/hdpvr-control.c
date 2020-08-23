@@ -46,6 +46,7 @@ int hdpvr_config_call(struct hdpvr_device *dev, uint value, u8 valbuf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hdpvr_video_info *get_video_info(struct hdpvr_device *dev)
 {
 	struct hdpvr_video_info *vidinf = NULL;
@@ -61,11 +62,16 @@ struct hdpvr_video_info *get_video_info(struct hdpvr_device *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 int get_video_info(struct hdpvr_device *dev, struct hdpvr_video_info *vidinf)
 {
 	int ret;
 
 	vidinf->valid = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&dev->usbc_mutex);
 	ret = usb_control_msg(dev->udev,
@@ -74,6 +80,7 @@ int get_video_info(struct hdpvr_device *dev, struct hdpvr_video_info *vidinf)
 			      0x1400, 0x0003,
 			      dev->usbc_buf, 5,
 			      1000);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret == 5) {
 		vidinf->width	= dev->usbc_buf[1] << 8 | dev->usbc_buf[0];
@@ -98,6 +105,8 @@ int get_video_info(struct hdpvr_device *dev, struct hdpvr_video_info *vidinf)
 err:
 	return vidinf;
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef HDPVR_DEBUG
 	if (hdpvr_debug & MSG_INFO)
@@ -116,15 +125,21 @@ err:
 	vidinf->valid   = vidinf->width && vidinf->height && vidinf->fps;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int get_input_lines_info(struct hdpvr_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HDPVR_DEBUG
 	char print_buf[9];
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret, lines;
@@ -139,6 +154,7 @@ int get_input_lines_info(struct hdpvr_device *dev)
 
 #ifdef HDPVR_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdpvr_debug & MSG_INFO) {
 		hex_dump_to_buffer(dev->usbc_buf, 3, 16, 1, print_buf,
 				   sizeof(print_buf), 0);
@@ -147,10 +163,15 @@ int get_input_lines_info(struct hdpvr_device *dev)
 			 print_buf);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (hdpvr_debug & MSG_INFO)
 		v4l2_dbg(MSG_INFO, hdpvr_debug, &dev->v4l2_dev,
 			 "get input lines info returned: %d, %3ph\n", ret,
 			 dev->usbc_buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	(void)ret;	/* suppress compiler warning */

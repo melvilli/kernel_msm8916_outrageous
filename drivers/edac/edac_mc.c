@@ -34,9 +34,12 @@
 #include "edac_core.h"
 #include "edac_module.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define CREATE_TRACE_POINTS
 #define TRACE_INCLUDE_PATH ../../include/ras
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <ras/ras_event.h>
@@ -135,7 +138,11 @@ static void edac_mc_dump_mci(struct mem_ctl_info *mci)
  * keep those in sync with the enum mem_type
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char *edac_mem_types[] = {
+=======
+const char * const edac_mem_types[] = {
+>>>>>>> v3.18
 =======
 const char * const edac_mem_types[] = {
 >>>>>>> v3.18
@@ -799,13 +806,19 @@ int edac_mc_add_mc(struct mem_ctl_info *mci)
 
 	/* Report action taken */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	edac_mc_printk(mci, KERN_INFO, "Giving out device to '%s' '%s':"
 		" DEV %s\n", mci->mod_name, mci->ctl_name, edac_dev_name(mci));
 =======
+=======
+>>>>>>> v3.18
 	edac_mc_printk(mci, KERN_INFO,
 		"Giving out device to module %s controller %s: DEV %s (%s)\n",
 		mci->mod_name, mci->ctl_name, mci->dev_name,
 		edac_op_state_to_string(mci->op_state));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	edac_mc_owner = mci->mod_name;
@@ -983,7 +996,11 @@ static void edac_inc_ue_error(struct mem_ctl_info *mci,
 
 	if (!enable_per_layer_report) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mci->ue_noinfo_count += count;
+=======
+		mci->ce_noinfo_count += count;
+>>>>>>> v3.18
 =======
 		mci->ce_noinfo_count += count;
 >>>>>>> v3.18
@@ -1035,7 +1052,11 @@ static void edac_ce_error(struct mem_ctl_info *mci,
 	edac_inc_ce_error(mci, enable_per_layer_report, pos, error_count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mci->scrub_mode & SCRUB_SW_SRC) {
+=======
+	if (mci->scrub_mode == SCRUB_SW_SRC) {
+>>>>>>> v3.18
 =======
 	if (mci->scrub_mode == SCRUB_SW_SRC) {
 >>>>>>> v3.18

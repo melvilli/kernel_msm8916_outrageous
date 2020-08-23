@@ -305,7 +305,10 @@ static int layout_cnodes(struct ubifs_info *c)
 				     lnum <= c->lpt_last);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done_ltab = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		c->ltab_lnum = lnum;
@@ -325,7 +328,11 @@ static int layout_cnodes(struct ubifs_info *c)
 no_space:
 	ubifs_err("LPT out of space at LEB %d:%d needing %d, done_ltab %d, done_lsave %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  c->vi.ubi_num, lnum, offs, len, done_ltab, done_lsave);
+=======
+		  lnum, offs, len, done_ltab, done_lsave);
+>>>>>>> v3.18
 =======
 		  lnum, offs, len, done_ltab, done_lsave);
 >>>>>>> v3.18
@@ -522,7 +529,10 @@ static int write_cnodes(struct ubifs_info *c)
 				return err;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done_ltab = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ubifs_pack_ltab(c, buf + offs, c->ltab_cmt);
@@ -557,7 +567,11 @@ static int write_cnodes(struct ubifs_info *c)
 no_space:
 	ubifs_err("LPT out of space mismatch at LEB %d:%d needing %d, done_ltab %d, done_lsave %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  c->vi.ubi_num, lnum, offs, len, done_ltab, done_lsave);
+=======
+		  lnum, offs, len, done_ltab, done_lsave);
+>>>>>>> v3.18
 =======
 		  lnum, offs, len, done_ltab, done_lsave);
 >>>>>>> v3.18
@@ -1655,8 +1669,12 @@ static int dbg_check_ltab_lnum(struct ubifs_info *c, int lnum)
 	buf = p = __vmalloc(c->leb_size, GFP_NOFS, PAGE_KERNEL);
 	if (!buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("cannot allocate memory for ltab checking",
 				c->vi.ubi_num);
+=======
+		ubifs_err("cannot allocate memory for ltab checking");
+>>>>>>> v3.18
 =======
 		ubifs_err("cannot allocate memory for ltab checking");
 >>>>>>> v3.18
@@ -1683,8 +1701,12 @@ static int dbg_check_ltab_lnum(struct ubifs_info *c, int lnum)
 			if (!dbg_is_all_ff(p, len)) {
 				ubifs_err("invalid empty space in LEB %d at %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, lnum,
 					  c->leb_size - len);
+=======
+					  lnum, c->leb_size - len);
+>>>>>>> v3.18
 =======
 					  lnum, c->leb_size - len);
 >>>>>>> v3.18
@@ -1694,8 +1716,12 @@ static int dbg_check_ltab_lnum(struct ubifs_info *c, int lnum)
 			if (len != c->ltab[i].free) {
 				ubifs_err("invalid free space in LEB %d (free %d, expected %d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, lnum, len,
 					  c->ltab[i].free);
+=======
+					  lnum, len, c->ltab[i].free);
+>>>>>>> v3.18
 =======
 					  lnum, len, c->ltab[i].free);
 >>>>>>> v3.18
@@ -1704,8 +1730,12 @@ static int dbg_check_ltab_lnum(struct ubifs_info *c, int lnum)
 			if (dirty != c->ltab[i].dirty) {
 				ubifs_err("invalid dirty space in LEB %d (dirty %d, expected %d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, lnum, dirty,
 					  c->ltab[i].dirty);
+=======
+					  lnum, dirty, c->ltab[i].dirty);
+>>>>>>> v3.18
 =======
 					  lnum, dirty, c->ltab[i].dirty);
 >>>>>>> v3.18
@@ -1762,7 +1792,11 @@ int dbg_check_ltab(struct ubifs_info *c)
 		err = dbg_check_ltab_lnum(c, lnum);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("failed at LEB %d", c->vi.ubi_num, lnum);
+=======
+			ubifs_err("failed at LEB %d", lnum);
+>>>>>>> v3.18
 =======
 			ubifs_err("failed at LEB %d", lnum);
 >>>>>>> v3.18
@@ -1799,7 +1833,11 @@ int dbg_chk_lpt_free_spc(struct ubifs_info *c)
 	if (free < c->lpt_sz) {
 		ubifs_err("LPT space error: free %lld lpt_sz %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				c->vi.ubi_num, free, c->lpt_sz);
+=======
+			  free, c->lpt_sz);
+>>>>>>> v3.18
 =======
 			  free, c->lpt_sz);
 >>>>>>> v3.18
@@ -1843,7 +1881,11 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (c->dirty_pn_cnt > c->pnode_cnt) {
 			ubifs_err("dirty pnodes %d exceed max %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, c->dirty_pn_cnt, c->pnode_cnt);
+=======
+				  c->dirty_pn_cnt, c->pnode_cnt);
+>>>>>>> v3.18
 =======
 				  c->dirty_pn_cnt, c->pnode_cnt);
 >>>>>>> v3.18
@@ -1852,7 +1894,11 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (c->dirty_nn_cnt > c->nnode_cnt) {
 			ubifs_err("dirty nnodes %d exceed max %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, c->dirty_nn_cnt, c->nnode_cnt);
+=======
+				  c->dirty_nn_cnt, c->nnode_cnt);
+>>>>>>> v3.18
 =======
 				  c->dirty_nn_cnt, c->nnode_cnt);
 >>>>>>> v3.18
@@ -1874,7 +1920,11 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (d->chk_lpt_sz != chk_lpt_sz) {
 			ubifs_err("LPT wrote %lld but space used was %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, d->chk_lpt_sz, chk_lpt_sz);
+=======
+				  d->chk_lpt_sz, chk_lpt_sz);
+>>>>>>> v3.18
 =======
 				  d->chk_lpt_sz, chk_lpt_sz);
 >>>>>>> v3.18
@@ -1883,7 +1933,11 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (d->chk_lpt_sz > c->lpt_sz) {
 			ubifs_err("LPT wrote %lld but lpt_sz is %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, d->chk_lpt_sz, c->lpt_sz);
+=======
+				  d->chk_lpt_sz, c->lpt_sz);
+>>>>>>> v3.18
 =======
 				  d->chk_lpt_sz, c->lpt_sz);
 >>>>>>> v3.18
@@ -1892,7 +1946,11 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (d->chk_lpt_sz2 && d->chk_lpt_sz != d->chk_lpt_sz2) {
 			ubifs_err("LPT layout size %lld but wrote %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, d->chk_lpt_sz, d->chk_lpt_sz2);
+=======
+				  d->chk_lpt_sz, d->chk_lpt_sz2);
+>>>>>>> v3.18
 =======
 				  d->chk_lpt_sz, d->chk_lpt_sz2);
 >>>>>>> v3.18
@@ -1901,7 +1959,11 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (d->chk_lpt_sz2 && d->new_nhead_offs != len) {
 			ubifs_err("LPT new nhead offs: expected %d was %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, d->new_nhead_offs, len);
+=======
+				  d->new_nhead_offs, len);
+>>>>>>> v3.18
 =======
 				  d->new_nhead_offs, len);
 >>>>>>> v3.18
@@ -1915,8 +1977,12 @@ int dbg_chk_lpt_sz(struct ubifs_info *c, int action, int len)
 		if (d->chk_lpt_sz - d->chk_lpt_wastage > lpt_sz) {
 			ubifs_err("LPT chk_lpt_sz %lld + waste %lld exceeds %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, d->chk_lpt_sz,
 				  d->chk_lpt_wastage, lpt_sz);
+=======
+				  d->chk_lpt_sz, d->chk_lpt_wastage, lpt_sz);
+>>>>>>> v3.18
 =======
 				  d->chk_lpt_sz, d->chk_lpt_wastage, lpt_sz);
 >>>>>>> v3.18
@@ -1961,7 +2027,11 @@ static void dump_lpt_leb(const struct ubifs_info *c, int lnum)
 	buf = p = __vmalloc(c->leb_size, GFP_NOFS, PAGE_KERNEL);
 	if (!buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("cannot allocate memory to dump LPT", c->vi.ubi_num);
+=======
+		ubifs_err("cannot allocate memory to dump LPT");
+>>>>>>> v3.18
 =======
 		ubifs_err("cannot allocate memory to dump LPT");
 >>>>>>> v3.18
@@ -2017,12 +2087,18 @@ static void dump_lpt_leb(const struct ubifs_info *c, int lnum)
 				       lnum, offs);
 			err = ubifs_unpack_nnode(c, p, &nnode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (err) {
 				pr_err("failed to unpack_node, error %d\n",
 				       err);
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			for (i = 0; i < UBIFS_LPT_FANOUT; i++) {
 				pr_cont("%d:%d", nnode.nbranch[i].lnum,
@@ -2043,8 +2119,12 @@ static void dump_lpt_leb(const struct ubifs_info *c, int lnum)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("LPT node type %d not recognized",
 					c->vi.ubi_num, node_type);
+=======
+			ubifs_err("LPT node type %d not recognized", node_type);
+>>>>>>> v3.18
 =======
 			ubifs_err("LPT node type %d not recognized", node_type);
 >>>>>>> v3.18

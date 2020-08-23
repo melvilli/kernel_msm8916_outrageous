@@ -110,6 +110,10 @@ enum perf_sw_ids {
 	PERF_COUNT_SW_ALIGNMENT_FAULTS		= 7,
 	PERF_COUNT_SW_EMULATION_FAULTS		= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_COUNT_SW_DUMMY			= 9,
+>>>>>>> v3.18
 =======
 	PERF_COUNT_SW_DUMMY			= 9,
 >>>>>>> v3.18
@@ -139,13 +143,19 @@ enum perf_event_sample_format {
 	PERF_SAMPLE_WEIGHT			= 1U << 14,
 	PERF_SAMPLE_DATA_SRC			= 1U << 15,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	PERF_SAMPLE_MAX = 1U << 16,		/* non-ABI */
 =======
+=======
+>>>>>>> v3.18
 	PERF_SAMPLE_IDENTIFIER			= 1U << 16,
 	PERF_SAMPLE_TRANSACTION			= 1U << 17,
 
 	PERF_SAMPLE_MAX = 1U << 18,		/* non-ABI */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -169,15 +179,21 @@ enum perf_branch_sample_type {
 	PERF_SAMPLE_BRANCH_ANY_RETURN	= 1U << 5, /* any return branch */
 	PERF_SAMPLE_BRANCH_IND_CALL	= 1U << 6, /* indirect calls */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	PERF_SAMPLE_BRANCH_MAX		= 1U << 7, /* non-ABI */
 =======
+=======
+>>>>>>> v3.18
 	PERF_SAMPLE_BRANCH_ABORT_TX	= 1U << 7, /* transaction aborts */
 	PERF_SAMPLE_BRANCH_IN_TX	= 1U << 8, /* in transaction */
 	PERF_SAMPLE_BRANCH_NO_TX	= 1U << 9, /* not in transaction */
 	PERF_SAMPLE_BRANCH_COND		= 1U << 10, /* conditional branches */
 
 	PERF_SAMPLE_BRANCH_MAX		= 1U << 11, /* non-ABI */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -197,7 +213,10 @@ enum perf_sample_regs_abi {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Values for the memory transaction event qualifier, mostly for
  * abort events. Multiple bits can be set.
  */
@@ -220,6 +239,9 @@ enum {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The format of the data returned by read() on a perf event fd,
  * as specified by attr.read_format:
@@ -318,9 +340,15 @@ struct perf_event_attr {
 				exclude_callchain_kernel : 1, /* exclude kernel callchains */
 				exclude_callchain_user   : 1, /* exclude user callchains */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				constraint_duplicate : 1,
 
 				__reserved_1   : 40;
+=======
+				mmap2          :  1, /* include mmap with inode data     */
+				comm_exec      :  1, /* flag comm events that are due to an exec */
+				__reserved_1   : 39;
+>>>>>>> v3.18
 =======
 				mmap2          :  1, /* include mmap with inode data     */
 				comm_exec      :  1, /* flag comm events that are due to an exec */
@@ -371,6 +399,10 @@ struct perf_event_attr {
 #define PERF_EVENT_IOC_SET_OUTPUT	_IO ('$', 5)
 #define PERF_EVENT_IOC_SET_FILTER	_IOW('$', 6, char *)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PERF_EVENT_IOC_ID		_IOR('$', 7, __u64 *)
+>>>>>>> v3.18
 =======
 #define PERF_EVENT_IOC_ID		_IOR('$', 7, __u64 *)
 >>>>>>> v3.18
@@ -390,7 +422,11 @@ struct perf_event_mmap_page {
 	 * Bits needed to read the hw events in user-space.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *   u32 seq, time_mult, time_shift, idx, width;
+=======
+	 *   u32 seq, time_mult, time_shift, index, width;
+>>>>>>> v3.18
 =======
 	 *   u32 seq, time_mult, time_shift, index, width;
 >>>>>>> v3.18
@@ -413,17 +449,23 @@ struct perf_event_mmap_page {
 	 *     }
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *     idx = pc->index;
 	 *     count = pc->offset;
 	 *     if (pc->cap_usr_rdpmc && idx) {
 	 *       width = pc->pmc_width;
 	 *       pmc = rdpmc(idx - 1);
 =======
+=======
+>>>>>>> v3.18
 	 *     index = pc->index;
 	 *     count = pc->offset;
 	 *     if (pc->cap_user_rdpmc && index) {
 	 *       width = pc->pmc_width;
 	 *       pmc = rdpmc(index - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *     }
 	 *
@@ -441,6 +483,7 @@ struct perf_event_mmap_page {
 	union {
 		__u64	capabilities;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__u64	cap_usr_time  : 1,
 			cap_usr_rdpmc : 1,
 			cap_____res   : 62;
@@ -449,6 +492,8 @@ struct perf_event_mmap_page {
 	/*
 	 * If cap_usr_rdpmc this field provides the bit-width of the value
 =======
+=======
+>>>>>>> v3.18
 		struct {
 			__u64	cap_bit0		: 1, /* Always 0, deprecated, see commit 860f085b74e9 */
 				cap_bit0_is_deprecated	: 1, /* Always 1, signals that bit 0 is zero */
@@ -462,6 +507,9 @@ struct perf_event_mmap_page {
 
 	/*
 	 * If cap_user_rdpmc this field provides the bit-width of the value
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * read using the rdpmc() or equivalent instruction. This can be used
 	 * to sign extend the result like:
@@ -487,15 +535,21 @@ struct perf_event_mmap_page {
 	 * Where time_offset,time_mult,time_shift and cyc are read in the
 	 * seqcount loop described above. This delta can then be added to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * enabled and possible running (if idx), improving the scaling:
 	 *
 	 *   enabled += delta;
 	 *   if (idx)
 =======
+=======
+>>>>>>> v3.18
 	 * enabled and possible running (if index), improving the scaling:
 	 *
 	 *   enabled += delta;
 	 *   if (index)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *     running += delta;
 	 *
@@ -507,7 +561,10 @@ struct perf_event_mmap_page {
 	__u32	time_mult;
 	__u64	time_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If cap_usr_time_zero, the hardware clock (e.g. TSC) can be calculated
 	 * from sample timestamps.
@@ -526,6 +583,9 @@ struct perf_event_mmap_page {
 	 */
 	__u64	time_zero;
 	__u32	size;			/* Header size up to __reserved[] fields. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -533,7 +593,11 @@ struct perf_event_mmap_page {
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64	__reserved[120];	/* align to 1k */
+=======
+	__u8	__reserved[118*8+4];	/* align to 1k. */
+>>>>>>> v3.18
 =======
 	__u8	__reserved[118*8+4];	/* align to 1k. */
 >>>>>>> v3.18
@@ -564,14 +628,20 @@ struct perf_event_mmap_page {
 #define PERF_RECORD_MISC_GUEST_USER		(5 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PERF_RECORD_MISC_MMAP_DATA		(1 << 13)
 =======
+=======
+>>>>>>> v3.18
 /*
  * PERF_RECORD_MISC_MMAP_DATA and PERF_RECORD_MISC_COMM_EXEC are used on
  * different events so can reuse the same bit position.
  */
 #define PERF_RECORD_MISC_MMAP_DATA		(1 << 13)
 #define PERF_RECORD_MISC_COMM_EXEC		(1 << 13)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Indicates that the content of PERF_SAMPLE_IP points to
@@ -596,6 +666,7 @@ enum perf_event_type {
 	 * If perf_event_attr.sample_id_all is set then all event types will
 	 * have the sample_type selected fields related to where/when
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * (identity) an event took place (TID, TIME, ID, CPU, STREAM_ID)
 	 * described in PERF_RECORD_SAMPLE below, it will be stashed just after
 	 * the perf_event_header and the fields already present for the existing
@@ -604,6 +675,8 @@ enum perf_event_type {
 	 * fields being ignored.
 	 *
 =======
+=======
+>>>>>>> v3.18
 	 * (identity) an event took place (TID, TIME, ID, STREAM_ID, CPU,
 	 * IDENTIFIER) described in PERF_RECORD_SAMPLE below, it will be stashed
 	 * just after the perf_event_header and the fields already present for
@@ -626,6 +699,9 @@ enum perf_event_type {
 	 */
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * The MMAP events record the PROT_EXEC mappings so that we can
 	 * correlate userspace IPs to code. They have the following structure:
@@ -639,6 +715,10 @@ enum perf_event_type {
 	 *	u64				pgoff;
 	 *	char				filename[];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -652,6 +732,10 @@ enum perf_event_type {
 	 *	u64				id;
 	 *	u64				lost;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -666,6 +750,10 @@ enum perf_event_type {
 	 *	u32				pid, tid;
 	 *	char				comm[];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -680,6 +768,10 @@ enum perf_event_type {
 	 *	u32				tid, ptid;
 	 *	u64				time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -694,6 +786,10 @@ enum perf_event_type {
 	 *	u64				id;
 	 *	u64				stream_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -709,6 +805,10 @@ enum perf_event_type {
 	 *	u32				tid, ptid;
 	 *	u64				time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -723,6 +823,10 @@ enum perf_event_type {
 	 *
 	 *	struct read_format		values;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * 	struct sample_id		sample_id;
+>>>>>>> v3.18
 =======
 	 * 	struct sample_id		sample_id;
 >>>>>>> v3.18
@@ -735,7 +839,10 @@ enum perf_event_type {
 	 *	struct perf_event_header	header;
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 *	#
 	 *	# Note that PERF_SAMPLE_IDENTIFIER duplicates PERF_SAMPLE_ID.
 	 *	# The advantage of PERF_SAMPLE_IDENTIFIER is that its position
@@ -743,6 +850,9 @@ enum perf_event_type {
 	 *	#
 	 *
 	 *	{ u64			id;	  } && PERF_SAMPLE_IDENTIFIER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *	{ u64			ip;	  } && PERF_SAMPLE_IP
 	 *	{ u32			pid, tid; } && PERF_SAMPLE_TID
@@ -784,7 +894,12 @@ enum perf_event_type {
 	 *
 	 *	{ u64			weight;   } && PERF_SAMPLE_WEIGHT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *	{ u64			data_src;     } && PERF_SAMPLE_DATA_SRC
+=======
+	 *	{ u64			data_src; } && PERF_SAMPLE_DATA_SRC
+	 *	{ u64			transaction; } && PERF_SAMPLE_TRANSACTION
+>>>>>>> v3.18
 =======
 	 *	{ u64			data_src; } && PERF_SAMPLE_DATA_SRC
 	 *	{ u64			transaction; } && PERF_SAMPLE_TRANSACTION
@@ -794,7 +909,10 @@ enum perf_event_type {
 	PERF_RECORD_SAMPLE			= 9,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The MMAP2 records are an augmented version of MMAP, they add
 	 * maj, min, ino numbers to be used to uniquely identify each mapping
@@ -817,6 +935,9 @@ enum perf_event_type {
 	 */
 	PERF_RECORD_MMAP2			= 10,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PERF_RECORD_MAX,			/* non-ABI */
 };
@@ -836,14 +957,20 @@ enum perf_callchain_context {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PERF_FLAG_FD_NO_GROUP		(1U << 0)
 #define PERF_FLAG_FD_OUTPUT		(1U << 1)
 #define PERF_FLAG_PID_CGROUP		(1U << 2) /* pid=cgroup id, per-cpu mode only */
 =======
+=======
+>>>>>>> v3.18
 #define PERF_FLAG_FD_NO_GROUP		(1UL << 0)
 #define PERF_FLAG_FD_OUTPUT		(1UL << 1)
 #define PERF_FLAG_PID_CGROUP		(1UL << 2) /* pid=cgroup id, per-cpu mode only */
 #define PERF_FLAG_FD_CLOEXEC		(1UL << 3) /* O_CLOEXEC */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 union perf_mem_data_src {
@@ -908,8 +1035,11 @@ union perf_mem_data_src {
 
 #define PERF_MEM_S(a, s) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(((u64)PERF_MEM_##a##_##s) << PERF_MEM_##a##_SHIFT)
 =======
+=======
+>>>>>>> v3.18
 	(((__u64)PERF_MEM_##a##_##s) << PERF_MEM_##a##_SHIFT)
 
 /*
@@ -935,6 +1065,9 @@ struct perf_branch_entry {
 		abort:1,    /* transaction abort */
 		reserved:60;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_LINUX_PERF_EVENT_H */

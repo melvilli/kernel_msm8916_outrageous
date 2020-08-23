@@ -30,6 +30,7 @@
 #include <net/pkt_cls.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HTSIZE (PAGE_SIZE/sizeof(struct fw_filter *))
 
 struct fw_head {
@@ -77,6 +78,8 @@ static inline int fw_hash(u32 handle)
 	} else
 		return handle & (HTSIZE - 1);
 =======
+=======
+>>>>>>> v3.18
 #define HTSIZE 256
 
 struct fw_head {
@@ -102,6 +105,9 @@ static u32 fw_hash(u32 handle)
 	handle ^= (handle >> 16);
 	handle ^= (handle >> 8);
 	return handle % HTSIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -109,7 +115,11 @@ static int fw_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 			  struct tcf_result *res)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_head *head = (struct fw_head *)tp->root;
+=======
+	struct fw_head *head = rcu_dereference_bh(tp->root);
+>>>>>>> v3.18
 =======
 	struct fw_head *head = rcu_dereference_bh(tp->root);
 >>>>>>> v3.18
@@ -120,12 +130,15 @@ static int fw_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 	if (head != NULL) {
 		id &= head->mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (f = head->ht[fw_hash(id)]; f; f = f->next) {
 			if (f->id == id) {
 				*res = f->res;
 #ifdef CONFIG_NET_CLS_IND
 				if (!tcf_match_indev(skb, f->indev))
 =======
+=======
+>>>>>>> v3.18
 
 		for (f = rcu_dereference_bh(head->ht[fw_hash(id)]); f;
 		     f = rcu_dereference_bh(f->next)) {
@@ -133,6 +146,9 @@ static int fw_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 				*res = f->res;
 #ifdef CONFIG_NET_CLS_IND
 				if (!tcf_match_indev(skb, f->ifindex))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					continue;
 #endif /* CONFIG_NET_CLS_IND */
@@ -159,7 +175,11 @@ static int fw_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 static unsigned long fw_get(struct tcf_proto *tp, u32 handle)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_head *head = (struct fw_head *)tp->root;
+=======
+	struct fw_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct fw_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -169,7 +189,12 @@ static unsigned long fw_get(struct tcf_proto *tp, u32 handle)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (f = head->ht[fw_hash(handle)]; f; f = f->next) {
+=======
+	f = rtnl_dereference(head->ht[fw_hash(handle)]);
+	for (; f; f = rtnl_dereference(f->next)) {
+>>>>>>> v3.18
 =======
 	f = rtnl_dereference(head->ht[fw_hash(handle)]);
 	for (; f; f = rtnl_dereference(f->next)) {
@@ -190,16 +215,22 @@ static int fw_init(struct tcf_proto *tp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fw_delete_filter(struct tcf_proto *tp, struct fw_filter *f)
 {
 	tcf_unbind_filter(tp, &f->res);
 	tcf_exts_destroy(tp, &f->exts);
 =======
+=======
+>>>>>>> v3.18
 static void fw_delete_filter(struct rcu_head *head)
 {
 	struct fw_filter *f = container_of(head, struct fw_filter, rcu);
 
 	tcf_exts_destroy(&f->exts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(f);
 }
@@ -207,7 +238,11 @@ static void fw_delete_filter(struct rcu_head *head)
 static void fw_destroy(struct tcf_proto *tp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_head *head = tp->root;
+=======
+	struct fw_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct fw_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -219,6 +254,7 @@ static void fw_destroy(struct tcf_proto *tp)
 
 	for (h = 0; h < HTSIZE; h++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((f = head->ht[h]) != NULL) {
 			head->ht[h] = f->next;
 			fw_delete_filter(tp, f);
@@ -226,6 +262,8 @@ static void fw_destroy(struct tcf_proto *tp)
 	}
 	kfree(head);
 =======
+=======
+>>>>>>> v3.18
 		while ((f = rtnl_dereference(head->ht[h])) != NULL) {
 			RCU_INIT_POINTER(head->ht[h],
 					 rtnl_dereference(f->next));
@@ -235,25 +273,35 @@ static void fw_destroy(struct tcf_proto *tp)
 	}
 	RCU_INIT_POINTER(tp->root, NULL);
 	kfree_rcu(head, rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int fw_delete(struct tcf_proto *tp, unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_head *head = (struct fw_head *)tp->root;
 	struct fw_filter *f = (struct fw_filter *)arg;
 	struct fw_filter **fp;
 =======
+=======
+>>>>>>> v3.18
 	struct fw_head *head = rtnl_dereference(tp->root);
 	struct fw_filter *f = (struct fw_filter *)arg;
 	struct fw_filter __rcu **fp;
 	struct fw_filter *pfp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (head == NULL || f == NULL)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (fp = &head->ht[fw_hash(f->id)]; *fp; fp = &(*fp)->next) {
 		if (*fp == f) {
@@ -262,6 +310,8 @@ static int fw_delete(struct tcf_proto *tp, unsigned long arg)
 			tcf_tree_unlock(tp);
 			fw_delete_filter(tp, f);
 =======
+=======
+>>>>>>> v3.18
 	fp = &head->ht[fw_hash(f->id)];
 
 	for (pfp = rtnl_dereference(*fp); pfp;
@@ -270,6 +320,9 @@ static int fw_delete(struct tcf_proto *tp, unsigned long arg)
 			RCU_INIT_POINTER(*fp, rtnl_dereference(f->next));
 			tcf_unbind_filter(tp, &f->res);
 			call_rcu(&f->rcu, fw_delete_filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 		}
@@ -287,9 +340,15 @@ static const struct nla_policy fw_policy[TCA_FW_MAX + 1] = {
 static int
 fw_change_attrs(struct net *net, struct tcf_proto *tp, struct fw_filter *f,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nlattr **tb, struct nlattr **tca, unsigned long base)
 {
 	struct fw_head *head = (struct fw_head *)tp->root;
+=======
+	struct nlattr **tb, struct nlattr **tca, unsigned long base, bool ovr)
+{
+	struct fw_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct nlattr **tb, struct nlattr **tca, unsigned long base, bool ovr)
 {
@@ -300,7 +359,12 @@ fw_change_attrs(struct net *net, struct tcf_proto *tp, struct fw_filter *f,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = tcf_exts_validate(net, tp, tb, tca[TCA_RATE], &e, &fw_ext_map);
+=======
+	tcf_exts_init(&e, TCA_FW_ACT, TCA_FW_POLICE);
+	err = tcf_exts_validate(net, tp, tb, tca[TCA_RATE], &e, ovr);
+>>>>>>> v3.18
 =======
 	tcf_exts_init(&e, TCA_FW_ACT, TCA_FW_POLICE);
 	err = tcf_exts_validate(net, tp, tb, tca[TCA_RATE], &e, ovr);
@@ -316,10 +380,13 @@ fw_change_attrs(struct net *net, struct tcf_proto *tp, struct fw_filter *f,
 #ifdef CONFIG_NET_CLS_IND
 	if (tb[TCA_FW_INDEV]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = tcf_change_indev(tp, f->indev, tb[TCA_FW_INDEV]);
 		if (err < 0)
 			goto errout;
 =======
+=======
+>>>>>>> v3.18
 		int ret;
 		ret = tcf_change_indev(net, tb[TCA_FW_INDEV]);
 		if (ret < 0) {
@@ -327,6 +394,9 @@ fw_change_attrs(struct net *net, struct tcf_proto *tp, struct fw_filter *f,
 			goto errout;
 		}
 		f->ifindex = ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif /* CONFIG_NET_CLS_IND */
@@ -344,7 +414,11 @@ fw_change_attrs(struct net *net, struct tcf_proto *tp, struct fw_filter *f,
 	return 0;
 errout:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcf_exts_destroy(tp, &e);
+=======
+	tcf_exts_destroy(&e);
+>>>>>>> v3.18
 =======
 	tcf_exts_destroy(&e);
 >>>>>>> v3.18
@@ -356,9 +430,15 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 		     u32 handle,
 		     struct nlattr **tca,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned long *arg)
 {
 	struct fw_head *head = (struct fw_head *)tp->root;
+=======
+		     unsigned long *arg, bool ovr)
+{
+	struct fw_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 		     unsigned long *arg, bool ovr)
 {
@@ -377,11 +457,14 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (f != NULL) {
 		if (f->id != handle && handle)
 			return -EINVAL;
 		return fw_change_attrs(net, tp, f, tb, tca, base);
 =======
+=======
+>>>>>>> v3.18
 	if (f) {
 		struct fw_filter *pfp, *fnew;
 		struct fw_filter __rcu **fp;
@@ -421,6 +504,9 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 
 		*arg = (unsigned long)fnew;
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -438,9 +524,13 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 		head->mask = mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcf_tree_lock(tp);
 		tp->root = head;
 		tcf_tree_unlock(tp);
+=======
+		rcu_assign_pointer(tp->root, head);
+>>>>>>> v3.18
 =======
 		rcu_assign_pointer(tp->root, head);
 >>>>>>> v3.18
@@ -450,6 +540,7 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 	if (f == NULL)
 		return -ENOBUFS;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	f->id = handle;
 
@@ -462,6 +553,8 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 	head->ht[fw_hash(handle)] = f;
 	tcf_tree_unlock(tp);
 =======
+=======
+>>>>>>> v3.18
 	tcf_exts_init(&f->exts, TCA_FW_ACT, TCA_FW_POLICE);
 	f->id = handle;
 	f->tp = tp;
@@ -472,6 +565,9 @@ static int fw_change(struct net *net, struct sk_buff *in_skb,
 
 	RCU_INIT_POINTER(f->next, head->ht[fw_hash(handle)]);
 	rcu_assign_pointer(head->ht[fw_hash(handle)], f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*arg = (unsigned long)f;
@@ -485,7 +581,11 @@ errout:
 static void fw_walk(struct tcf_proto *tp, struct tcf_walker *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_head *head = (struct fw_head *)tp->root;
+=======
+	struct fw_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct fw_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -501,7 +601,12 @@ static void fw_walk(struct tcf_proto *tp, struct tcf_walker *arg)
 		struct fw_filter *f;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (f = head->ht[h]; f; f = f->next) {
+=======
+		for (f = rtnl_dereference(head->ht[h]); f;
+		     f = rtnl_dereference(f->next)) {
+>>>>>>> v3.18
 =======
 		for (f = rtnl_dereference(head->ht[h]); f;
 		     f = rtnl_dereference(f->next)) {
@@ -520,15 +625,21 @@ static void fw_walk(struct tcf_proto *tp, struct tcf_walker *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fw_dump(struct tcf_proto *tp, unsigned long fh,
 		   struct sk_buff *skb, struct tcmsg *t)
 {
 	struct fw_head *head = (struct fw_head *)tp->root;
 =======
+=======
+>>>>>>> v3.18
 static int fw_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 		   struct sk_buff *skb, struct tcmsg *t)
 {
 	struct fw_head *head = rtnl_dereference(tp->root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fw_filter *f = (struct fw_filter *)fh;
 	unsigned char *b = skb_tail_pointer(skb);
@@ -551,16 +662,22 @@ static int fw_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 		goto nla_put_failure;
 #ifdef CONFIG_NET_CLS_IND
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strlen(f->indev) &&
 	    nla_put_string(skb, TCA_FW_INDEV, f->indev))
 		goto nla_put_failure;
 =======
+=======
+>>>>>>> v3.18
 	if (f->ifindex) {
 		struct net_device *dev;
 		dev = __dev_get_by_index(net, f->ifindex);
 		if (dev && nla_put_string(skb, TCA_FW_INDEV, dev->name))
 			goto nla_put_failure;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_NET_CLS_IND */
 	if (head->mask != 0xFFFFFFFF &&
@@ -568,7 +685,11 @@ static int fw_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 		goto nla_put_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_exts_dump(skb, &f->exts, &fw_ext_map) < 0)
+=======
+	if (tcf_exts_dump(skb, &f->exts) < 0)
+>>>>>>> v3.18
 =======
 	if (tcf_exts_dump(skb, &f->exts) < 0)
 >>>>>>> v3.18
@@ -577,7 +698,11 @@ static int fw_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 	nla_nest_end(skb, nest);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_exts_dump_stats(skb, &f->exts, &fw_ext_map) < 0)
+=======
+	if (tcf_exts_dump_stats(skb, &f->exts) < 0)
+>>>>>>> v3.18
 =======
 	if (tcf_exts_dump_stats(skb, &f->exts) < 0)
 >>>>>>> v3.18

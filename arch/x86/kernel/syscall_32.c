@@ -16,7 +16,11 @@ typedef asmlinkage void (*sys_call_ptr_t)(void);
 extern asmlinkage void sys_ni_syscall(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const sys_call_ptr_t sys_call_table[__NR_syscall_max+1] = {
+=======
+__visible const sys_call_ptr_t sys_call_table[__NR_syscall_max+1] = {
+>>>>>>> v3.18
 =======
 __visible const sys_call_ptr_t sys_call_table[__NR_syscall_max+1] = {
 >>>>>>> v3.18

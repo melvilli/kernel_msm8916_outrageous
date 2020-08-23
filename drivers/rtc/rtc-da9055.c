@@ -279,7 +279,11 @@ static int da9055_rtc_probe(struct platform_device *pdev)
 
 	rtc->da9055 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = rtc->da9055->dev->platform_data;
+=======
+	pdata = dev_get_platdata(rtc->da9055->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(rtc->da9055->dev);
 >>>>>>> v3.18
@@ -307,7 +311,13 @@ static int da9055_rtc_probe(struct platform_device *pdev)
 
 	alm_irq = platform_get_irq_byname(pdev, "ALM");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alm_irq = regmap_irq_get_virq(rtc->da9055->irq_data, alm_irq);
+=======
+	if (alm_irq < 0)
+		return alm_irq;
+
+>>>>>>> v3.18
 =======
 	if (alm_irq < 0)
 		return alm_irq;
@@ -326,6 +336,7 @@ err_rtc:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int da9055_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
@@ -333,6 +344,8 @@ static int da9055_rtc_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PM
@@ -408,7 +421,10 @@ static const struct dev_pm_ops da9055_rtc_pm_ops = {
 static struct platform_driver da9055_rtc_driver = {
 	.probe  = da9055_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = da9055_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

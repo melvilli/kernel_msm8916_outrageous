@@ -430,7 +430,12 @@ static void snd_cs4231_advance_dma(struct cs4231_dma_control *dma_cont,
 		unsigned int offset = period_size * (*periods_sent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(period_size >= (1 << 24));
+=======
+		if (WARN_ON(period_size >= (1 << 24)))
+			return;
+>>>>>>> v3.18
 =======
 		if (WARN_ON(period_size >= (1 << 24)))
 			return;
@@ -912,6 +917,10 @@ static int snd_cs4231_playback_prepare(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -922,6 +931,7 @@ static int snd_cs4231_playback_prepare(struct snd_pcm_substream *substream)
 					    CS4231_PLAYBACK_PIO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(runtime->period_size > 0xffff + 1);
 
 	chip->p_periods_sent = 0;
@@ -929,6 +939,8 @@ static int snd_cs4231_playback_prepare(struct snd_pcm_substream *substream)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON(runtime->period_size > 0xffff + 1)) {
 		ret = -EINVAL;
 		goto out;
@@ -940,6 +952,9 @@ out:
 	spin_unlock_irqrestore(&chip->lock, flags);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1582,7 +1597,12 @@ static int snd_cs4231_mixer(struct snd_card *card)
 static int dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cs4231_attach_begin(struct snd_card **rcard)
+=======
+static int cs4231_attach_begin(struct platform_device *op,
+			       struct snd_card **rcard)
+>>>>>>> v3.18
 =======
 static int cs4231_attach_begin(struct platform_device *op,
 			       struct snd_card **rcard)
@@ -1603,8 +1623,13 @@ static int cs4231_attach_begin(struct platform_device *op,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_cs4231), &card);
+=======
+	err = snd_card_new(&op->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_cs4231), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&op->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_cs4231), &card);
@@ -1896,7 +1921,11 @@ static int cs4231_sbus_probe(struct platform_device *op)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = cs4231_attach_begin(&card);
+=======
+	err = cs4231_attach_begin(op, &card);
+>>>>>>> v3.18
 =======
 	err = cs4231_attach_begin(op, &card);
 >>>>>>> v3.18
@@ -2091,7 +2120,11 @@ static int cs4231_ebus_probe(struct platform_device *op)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = cs4231_attach_begin(&card);
+=======
+	err = cs4231_attach_begin(op, &card);
+>>>>>>> v3.18
 =======
 	err = cs4231_attach_begin(op, &card);
 >>>>>>> v3.18

@@ -82,7 +82,11 @@ static void ivtv_alsa_announce_pcm_data(struct snd_ivtv_card *itvsc,
 	int length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("ivtv alsa announce ptr=%p data=%p num_bytes=%zd\n", itvsc,
+=======
+	dprintk("ivtv alsa announce ptr=%p data=%p num_bytes=%zu\n", itvsc,
+>>>>>>> v3.18
 =======
 	dprintk("ivtv alsa announce ptr=%p data=%p num_bytes=%zu\n", itvsc,
 >>>>>>> v3.18

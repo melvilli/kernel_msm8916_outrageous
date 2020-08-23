@@ -86,6 +86,7 @@ Special purpose threads, called worker threads, execute the functions
 off of the queue, one after the other.  If no work is queued, the
 worker threads become idle.  These worker threads are managed in so
 <<<<<<< HEAD
+<<<<<<< HEAD
 called thread-pools.
 
 The cmwq design differentiates between the user-facing workqueues that
@@ -97,6 +98,8 @@ and one gcwq to serve work items queued on unbound workqueues.  Each
 gcwq has two thread-pools - one for normal work items and the other
 for high priority ones.
 =======
+=======
+>>>>>>> v3.18
 called worker-pools.
 
 The cmwq design differentiates between the user-facing workqueues that
@@ -107,12 +110,16 @@ There are two worker-pools, one for normal work items and the other
 for high priority ones, for each possible CPU and some extra
 worker-pools to serve work items queued on unbound workqueues - the
 number of these backing pools is dynamic.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Subsystems and drivers can create and queue work items through special
 workqueue API functions as they see fit. They can influence some
 aspects of the way the work items are executed by setting flags on the
 workqueue they are putting the work item on. These flags include
+<<<<<<< HEAD
 <<<<<<< HEAD
 things like CPU locality, reentrancy, concurrency limits, priority and
 more.  To get a detailed overview refer to the API description of
@@ -126,6 +133,8 @@ of a bound workqueue will be queued on the worklist of either normal
 or highpri thread-pool of the gcwq that is associated to the CPU the
 issuer is running on.
 =======
+=======
+>>>>>>> v3.18
 things like CPU locality, concurrency limits, priority and more.  To
 get a detailed overview refer to the API description of
 alloc_workqueue() below.
@@ -136,6 +145,9 @@ and appended on the shared worklist of the worker-pool.  For example,
 unless specifically overridden, a work item of a bound workqueue will
 be queued on the worklist of either normal or highpri worker-pool that
 is associated to the CPU the issuer is running on.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 For any worker pool implementation, managing the concurrency level
@@ -145,8 +157,13 @@ Minimal to save resources and sufficient in that the system is used at
 its full capacity.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Each thread-pool bound to an actual CPU implements concurrency
 management by hooking into the scheduler.  The thread-pool is notified
+=======
+Each worker-pool bound to an actual CPU implements concurrency
+management by hooking into the scheduler.  The worker-pool is notified
+>>>>>>> v3.18
 =======
 Each worker-pool bound to an actual CPU implements concurrency
 management by hooking into the scheduler.  The worker-pool is notified
@@ -157,7 +174,11 @@ not expected to hog a CPU and consume many cycles.  That means
 maintaining just enough concurrency to prevent work processing from
 stalling should be optimal.  As long as there are one or more runnable
 <<<<<<< HEAD
+<<<<<<< HEAD
 workers on the CPU, the thread-pool doesn't start execution of a new
+=======
+workers on the CPU, the worker-pool doesn't start execution of a new
+>>>>>>> v3.18
 =======
 workers on the CPU, the worker-pool doesn't start execution of a new
 >>>>>>> v3.18
@@ -171,6 +192,7 @@ for kthreads, so cmwq holds onto idle ones for a while before killing
 them.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 For an unbound wq, the above concurrency management doesn't apply and
 the thread-pools for the pseudo unbound CPU try to start executing all
 work items as soon as possible.  The responsibility of regulating
@@ -178,6 +200,8 @@ concurrency level is on the users.  There is also a flag to mark a
 bound wq to ignore the concurrency management.  Please refer to the
 API section for details.
 =======
+=======
+>>>>>>> v3.18
 For unbound workqueues, the number of backing pools is dynamic.
 Unbound workqueue can be assigned custom attributes using
 apply_workqueue_attrs() and workqueue will automatically create
@@ -185,6 +209,9 @@ backing worker pools matching the attributes.  The responsibility of
 regulating concurrency level is on the users.  There is also a flag to
 mark a bound wq to ignore the concurrency management.  Please refer to
 the API section for details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Forward progress guarantee relies on that workers can be created when
@@ -193,7 +220,11 @@ through the use of rescue workers.  All work items which might be used
 on code paths that handle memory reclaim are required to be queued on
 wq's that have a rescue-worker reserved for execution under memory
 <<<<<<< HEAD
+<<<<<<< HEAD
 pressure.  Else it is possible that the thread-pool deadlocks waiting
+=======
+pressure.  Else it is possible that the worker-pool deadlocks waiting
+>>>>>>> v3.18
 =======
 pressure.  Else it is possible that the worker-pool deadlocks waiting
 >>>>>>> v3.18
@@ -216,6 +247,7 @@ resources, scheduled and executed.
 @flags:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   WQ_NON_REENTRANT
 
 	By default, a wq guarantees non-reentrance only on the same
@@ -236,6 +268,8 @@ resources, scheduled and executed.
 	Unbound wq sacrifices locality but is useful for the following
 	cases.
 =======
+=======
+>>>>>>> v3.18
   WQ_UNBOUND
 
 	Work items queued to an unbound wq are served by the special
@@ -245,6 +279,9 @@ resources, scheduled and executed.
 	worker-pools try to start execution of work items as soon as
 	possible.  Unbound wq sacrifices locality but is useful for
 	the following cases.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	* Wide fluctuation in the concurrency level requirement is
@@ -271,15 +308,21 @@ resources, scheduled and executed.
 
 	Work items of a highpri wq are queued to the highpri
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread-pool of the target gcwq.  Highpri thread-pools are
 	served by worker threads with elevated nice level.
 
 	Note that normal and highpri thread-pools don't interact with
 =======
+=======
+>>>>>>> v3.18
 	worker-pool of the target cpu.  Highpri worker-pools are
 	served by worker threads with elevated nice level.
 
 	Note that normal and highpri worker-pools don't interact with
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	each other.  Each maintain its separate pool of workers and
 	implements concurrency management among its workers.
@@ -290,7 +333,11 @@ resources, scheduled and executed.
 	concurrency level.  In other words, runnable CPU intensive
 	work items will not prevent other work items in the same
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread-pool from starting execution.  This is useful for bound
+=======
+	worker-pool from starting execution.  This is useful for bound
+>>>>>>> v3.18
 =======
 	worker-pool from starting execution.  This is useful for bound
 >>>>>>> v3.18
@@ -306,11 +353,17 @@ resources, scheduled and executed.
 	This flag is meaningless for unbound wq.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Note that the flag WQ_NON_REENTRANT no longer exists as all workqueues
 are now non-reentrant - any work item is guaranteed to be executed by
 at most one worker system-wide at any given time.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 @max_active:
 
@@ -334,9 +387,15 @@ recommended.
 Some users depend on the strict execution ordering of ST wq.  The
 combination of @max_active of 1 and WQ_UNBOUND is used to achieve this
 <<<<<<< HEAD
+<<<<<<< HEAD
 behavior.  Work items on such wq are always queued to the unbound gcwq
 and only one work item can be active at any given time thus achieving
 the same ordering property as ST wq.
+=======
+behavior.  Work items on such wq are always queued to the unbound
+worker-pools and only one work item can be active at any given time thus
+achieving the same ordering property as ST wq.
+>>>>>>> v3.18
 =======
 behavior.  Work items on such wq are always queued to the unbound
 worker-pools and only one work item can be active at any given time thus

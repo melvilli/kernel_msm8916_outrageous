@@ -516,7 +516,11 @@ static int lp8788_buck_probe(struct platform_device *pdev)
 	cfg.regmap = lp->regmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = regulator_register(&lp8788_buck_desc[id], &cfg);
+=======
+	rdev = devm_regulator_register(&pdev->dev, &lp8788_buck_desc[id], &cfg);
+>>>>>>> v3.18
 =======
 	rdev = devm_regulator_register(&pdev->dev, &lp8788_buck_desc[id], &cfg);
 >>>>>>> v3.18
@@ -534,6 +538,7 @@ static int lp8788_buck_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lp8788_buck_remove(struct platform_device *pdev)
 {
 	struct lp8788_buck *buck = platform_get_drvdata(pdev);
@@ -547,6 +552,10 @@ static int lp8788_buck_remove(struct platform_device *pdev)
 static struct platform_driver lp8788_buck_driver = {
 	.probe = lp8788_buck_probe,
 	.remove = lp8788_buck_remove,
+=======
+static struct platform_driver lp8788_buck_driver = {
+	.probe = lp8788_buck_probe,
+>>>>>>> v3.18
 =======
 static struct platform_driver lp8788_buck_driver = {
 	.probe = lp8788_buck_probe,

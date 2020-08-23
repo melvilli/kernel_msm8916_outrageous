@@ -336,6 +336,7 @@ bfad_im_reset_stats(struct Scsi_Host *shost)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FC transport template entry, get rport loss timeout.
  */
 static void
@@ -354,10 +355,15 @@ bfad_im_get_rport_loss_tmo(struct fc_rport *rport)
 /*
  * FC transport template entry, set rport loss timeout.
 =======
+=======
+>>>>>>> v3.18
  * FC transport template entry, set rport loss timeout.
  * Update dev_loss_tmo based on the value pushed down by the stack
  * In case it is lesser than path_tov of driver, set it to path_tov + 1
  * to ensure that the driver times out before the application
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void
@@ -366,6 +372,7 @@ bfad_im_set_rport_loss_tmo(struct fc_rport *rport, u32 timeout)
 	struct bfad_itnim_data_s *itnim_data = rport->dd_data;
 	struct bfad_itnim_s   *itnim = itnim_data->itnim;
 	struct bfad_s         *bfad = itnim->im->bfad;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long   flags;
 
@@ -377,11 +384,16 @@ bfad_im_set_rport_loss_tmo(struct fc_rport *rport, u32 timeout)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	uint16_t path_tov = bfa_fcpim_path_tov_get(&bfad->bfa);
 
 	rport->dev_loss_tmo = timeout;
 	if (timeout < path_tov)
 		rport->dev_loss_tmo = path_tov + 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -678,7 +690,10 @@ struct fc_function_template bfad_im_fc_function_template = {
 	.show_rport_supported_classes = 1,
 	.show_rport_dev_loss_tmo = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_rport_dev_loss_tmo = bfad_im_get_rport_loss_tmo,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_rport_dev_loss_tmo = bfad_im_set_rport_loss_tmo,
@@ -739,7 +754,10 @@ struct fc_function_template bfad_im_vport_fc_function_template = {
 	.show_rport_supported_classes = 1,
 	.show_rport_dev_loss_tmo = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_rport_dev_loss_tmo = bfad_im_get_rport_loss_tmo,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_rport_dev_loss_tmo = bfad_im_set_rport_loss_tmo,

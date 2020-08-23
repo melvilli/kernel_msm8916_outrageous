@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012-2014, 2016 The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
 >>>>>>> v3.18
@@ -14,7 +18,10 @@
  * GNU General Public License for more details.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef _LINUX_SPMI_H
@@ -28,6 +35,7 @@
 #define SPMI_MAX_SLAVE_ID		16
 
 /* SPMI Commands */
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum spmi_commands {
 	SPMI_CMD_EXT_WRITE = 0x00,
@@ -265,6 +273,8 @@ static inline int spmi_register_board_info(int busnum,
 
 static inline void *spmi_get_ctrldata(const struct spmi_controller *ctrl)
 =======
+=======
+>>>>>>> v3.18
 #define SPMI_CMD_EXT_WRITE		0x00
 #define SPMI_CMD_RESET			0x10
 #define SPMI_CMD_SLEEP			0x11
@@ -347,13 +357,21 @@ static inline struct spmi_controller *to_spmi_controller(struct device *d)
 
 static inline
 void *spmi_controller_get_drvdata(const struct spmi_controller *ctrl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return dev_get_drvdata(&ctrl->dev);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void spmi_set_ctrldata(struct spmi_controller *ctrl, void *data)
+=======
+static inline void spmi_controller_set_drvdata(struct spmi_controller *ctrl,
+					       void *data)
+>>>>>>> v3.18
 =======
 static inline void spmi_controller_set_drvdata(struct spmi_controller *ctrl,
 					       void *data)
@@ -362,6 +380,7 @@ static inline void spmi_controller_set_drvdata(struct spmi_controller *ctrl,
 	dev_set_drvdata(&ctrl->dev, data);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void *spmi_get_devicedata(const struct spmi_device *dev)
 {
@@ -582,6 +601,8 @@ static inline const char *spmi_get_primary_dev_name(struct spmi_device *dev)
 struct spmi_resource *spmi_get_dev_container_byname(struct spmi_device *dev,
 						    const char *label);
 =======
+=======
+>>>>>>> v3.18
 struct spmi_controller *spmi_controller_alloc(struct device *parent,
 					      size_t size);
 
@@ -658,5 +679,8 @@ int spmi_command_sleep(struct spmi_device *sdev);
 int spmi_command_wakeup(struct spmi_device *sdev);
 int spmi_command_shutdown(struct spmi_device *sdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

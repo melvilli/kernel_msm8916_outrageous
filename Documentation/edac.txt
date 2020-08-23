@@ -7,7 +7,11 @@ Written by Doug Thompson <dougthompson@xmission.com>
 17 Jul 2007	Updated
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 (c) Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+(c) Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
 (c) Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -555,7 +559,11 @@ installs itself as:
 
 in this directory are various controls, a symlink and one or more 'instance'
 <<<<<<< HEAD
+<<<<<<< HEAD
 directorys.
+=======
+directories.
+>>>>>>> v3.18
 =======
 directories.
 >>>>>>> v3.18

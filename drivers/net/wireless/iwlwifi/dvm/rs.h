@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -320,7 +324,11 @@ struct iwl_scale_tbl_info {
 	u8 action;	/* change modulation; IWL_[LEGACY/SISO/MIMO]_SWITCH_* */
 	u8 max_search;	/* maximun number of tables we can search */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 *expected_tpt;	/* throughput metrics; expected_tpt_G, etc. */
+=======
+	const u16 *expected_tpt;	/* throughput metrics; expected_tpt_G, etc. */
+>>>>>>> v3.18
 =======
 	const u16 *expected_tpt;	/* throughput metrics; expected_tpt_G, etc. */
 >>>>>>> v3.18
@@ -398,6 +406,7 @@ struct iwl_lq_sta {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u8 num_of_ant(u8 mask)
 {
 	return  !!((mask) & ANT_A) +
@@ -405,6 +414,8 @@ static inline u8 num_of_ant(u8 mask)
 		!!((mask) & ANT_C);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline u8 first_antenna(u8 mask)
@@ -419,8 +430,13 @@ static inline u8 first_antenna(u8 mask)
 
 /* Initialize station's rate scaling information after adding station */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void iwl_rs_rate_init(struct iwl_priv *priv,
 			     struct ieee80211_sta *sta, u8 sta_id);
+=======
+void iwl_rs_rate_init(struct iwl_priv *priv, struct ieee80211_sta *sta,
+		      u8 sta_id);
+>>>>>>> v3.18
 =======
 void iwl_rs_rate_init(struct iwl_priv *priv, struct ieee80211_sta *sta,
 		      u8 sta_id);
@@ -437,7 +453,11 @@ void iwl_rs_rate_init(struct iwl_priv *priv, struct ieee80211_sta *sta,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int iwlagn_rate_control_register(void);
+=======
+int iwlagn_rate_control_register(void);
+>>>>>>> v3.18
 =======
 int iwlagn_rate_control_register(void);
 >>>>>>> v3.18
@@ -449,7 +469,11 @@ int iwlagn_rate_control_register(void);
  * the driver is unloaded.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void iwlagn_rate_control_unregister(void);
+=======
+void iwlagn_rate_control_unregister(void);
+>>>>>>> v3.18
 =======
 void iwlagn_rate_control_unregister(void);
 >>>>>>> v3.18

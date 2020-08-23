@@ -26,6 +26,7 @@
 #include <subdev/bios.h>
 #include <subdev/bios/pll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "pll.h"
 
@@ -66,6 +67,8 @@ nvc0_clock_pll_set(struct nouveau_clock *clk, u32 type, u32 freq)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/timer.h>
 
 #include "pll.h"
@@ -296,13 +299,19 @@ calc_pll(struct nvc0_clock_priv *priv, int clk, u32 freq, u32 *coef)
 		return 0;
 
 	*coef = (P << 16) | (N << 8) | M;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 calc_clk(struct nvc0_clock_priv *priv,
 	 struct nouveau_cstate *cstate, int clk, int dom)
 {
@@ -474,6 +483,9 @@ nvc0_domain[] = {
 };
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nvc0_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		struct nouveau_oclass *oclass, void *data, u32 size,
@@ -483,7 +495,12 @@ nvc0_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_clock_create(parent, engine, oclass, &priv);
+=======
+	ret = nouveau_clock_create(parent, engine, oclass, nvc0_domain, NULL, 0,
+				   false, &priv);
+>>>>>>> v3.18
 =======
 	ret = nouveau_clock_create(parent, engine, oclass, nvc0_domain, NULL, 0,
 				   false, &priv);
@@ -493,13 +510,19 @@ nvc0_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.pll_set = nvc0_clock_pll_set;
 	priv->base.pll_calc = nva3_clock_pll_calc;
 =======
+=======
+>>>>>>> v3.18
 	priv->base.read = nvc0_clock_read;
 	priv->base.calc = nvc0_clock_calc;
 	priv->base.prog = nvc0_clock_prog;
 	priv->base.tidy = nvc0_clock_tidy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

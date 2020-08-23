@@ -26,6 +26,10 @@
 #define __KVM_HAVE_GUEST_DEBUG
 #define __KVM_HAVE_IRQ_LINE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __KVM_HAVE_READONLY_MEM
+>>>>>>> v3.18
 =======
 #define __KVM_HAVE_READONLY_MEM
 >>>>>>> v3.18
@@ -69,7 +73,12 @@ struct kvm_regs {
 /* Supported Processor Types */
 #define KVM_ARM_TARGET_CORTEX_A15	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KVM_ARM_NUM_TARGETS		1
+=======
+#define KVM_ARM_TARGET_CORTEX_A7	1
+#define KVM_ARM_NUM_TARGETS		2
+>>>>>>> v3.18
 =======
 #define KVM_ARM_TARGET_CORTEX_A7	1
 #define KVM_ARM_NUM_TARGETS		2
@@ -174,7 +183,10 @@ struct kvm_arch_memory_slot {
 #define KVM_REG_ARM_VFP_FPINST2		0x100A
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Device Control API: ARM VGIC */
 #define KVM_DEV_ARM_VGIC_GRP_ADDR	0
 #define KVM_DEV_ARM_VGIC_GRP_DIST_REGS	1
@@ -184,6 +196,9 @@ struct kvm_arch_memory_slot {
 #define   KVM_DEV_ARM_VGIC_OFFSET_SHIFT	0
 #define   KVM_DEV_ARM_VGIC_OFFSET_MASK	(0xffffffffULL << KVM_DEV_ARM_VGIC_OFFSET_SHIFT)
 #define KVM_DEV_ARM_VGIC_GRP_NR_IRQS	3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* KVM_IRQ_LINE irq field index values */

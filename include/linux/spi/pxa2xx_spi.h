@@ -24,6 +24,11 @@
 #define PXA2XX_CS_DEASSERT (0x02)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct dma_chan;
+
+>>>>>>> v3.18
 =======
 struct dma_chan;
 
@@ -36,10 +41,16 @@ struct pxa2xx_spi_master {
 
 	/* DMA engine specific config */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rx_chan_id;
 	int tx_chan_id;
 	int rx_slave_id;
 	int tx_slave_id;
+=======
+	bool (*dma_filter)(struct dma_chan *chan, void *param);
+	void *tx_param;
+	void *rx_param;
+>>>>>>> v3.18
 =======
 	bool (*dma_filter)(struct dma_chan *chan, void *param);
 	void *tx_param;

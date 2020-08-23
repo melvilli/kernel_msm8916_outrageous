@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "util.h"
 
 #include <stdlib.h>
@@ -23,6 +24,8 @@ static char *test_file(int size)
 {
 	static char buf_templ[] = "/tmp/test-XXXXXX";
 =======
+=======
+>>>>>>> v3.18
 #include <stdlib.h>
 #include <linux/types.h>
 #include <sys/stat.h>
@@ -41,12 +44,21 @@ static char *test_file(int size)
 {
 #define TEMPL "/tmp/perf-test-XXXXXX"
 	static char buf_templ[sizeof(TEMPL)];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *templ = buf_templ;
 	int fd, i;
 	unsigned char *buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	strcpy(buf_templ, TEMPL);
+#undef TEMPL
+
+>>>>>>> v3.18
 =======
 	strcpy(buf_templ, TEMPL);
 #undef TEMPL
@@ -71,6 +83,10 @@ static char *test_file(int size)
 		templ = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free(buf);
+>>>>>>> v3.18
 =======
 	free(buf);
 >>>>>>> v3.18
@@ -189,7 +205,10 @@ int test__dso_data(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static long open_files_cnt(void)
 {
@@ -391,4 +410,7 @@ int test__dso_data_reopen(void)
 	TEST_ASSERT_VAL("failed leadking files", nr == nr_end);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

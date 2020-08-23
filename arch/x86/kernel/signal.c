@@ -44,12 +44,15 @@
 #include <asm/sigframe.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_32
 # define FIX_EFLAGS	(__FIX_EFLAGS | X86_EFLAGS_RF)
 #else
 # define FIX_EFLAGS	__FIX_EFLAGS
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define COPY(x)			do {			\
@@ -308,7 +311,12 @@ __setup_frame(int sig, struct ksignal *ksig, sigset_t *set,
 
 	if (current->mm->context.vdso)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		restorer = VDSO32_SYMBOL(current->mm->context.vdso, sigreturn);
+=======
+		restorer = current->mm->context.vdso +
+			selected_vdso32->sym___kernel_sigreturn;
+>>>>>>> v3.18
 =======
 		restorer = current->mm->context.vdso +
 			selected_vdso32->sym___kernel_sigreturn;
@@ -376,7 +384,12 @@ static int __setup_rt_frame(int sig, struct ksignal *ksig,
 
 		/* Set up to return from userspace.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		restorer = VDSO32_SYMBOL(current->mm->context.vdso, rt_sigreturn);
+=======
+		restorer = current->mm->context.vdso +
+			selected_vdso32->sym___kernel_rt_sigreturn;
+>>>>>>> v3.18
 =======
 		restorer = current->mm->context.vdso +
 			selected_vdso32->sym___kernel_rt_sigreturn;
@@ -553,7 +566,11 @@ static int x32_setup_rt_frame(struct ksignal *ksig,
  */
 #ifdef CONFIG_X86_32
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long sys_sigreturn(void)
+=======
+asmlinkage unsigned long sys_sigreturn(void)
+>>>>>>> v3.18
 =======
 asmlinkage unsigned long sys_sigreturn(void)
 >>>>>>> v3.18
@@ -586,7 +603,11 @@ badframe:
 #endif /* CONFIG_X86_32 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 long sys_rt_sigreturn(void)
+=======
+asmlinkage long sys_rt_sigreturn(void)
+>>>>>>> v3.18
 =======
 asmlinkage long sys_rt_sigreturn(void)
 >>>>>>> v3.18
@@ -690,15 +711,21 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 		/*
 		 * Clear the direction flag as per the ABI for function entry.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 */
 		regs->flags &= ~X86_EFLAGS_DF;
 		/*
 =======
+=======
+>>>>>>> v3.18
 		 *
 		 * Clear RF when entering the signal handler, because
 		 * it might disable possible debug exception from the
 		 * signal handler.
 		 *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * Clear TF when entering the signal handler, but
 		 * notify any tracer that was single-stepping it.
@@ -706,7 +733,11 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 		 * handler too.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regs->flags &= ~X86_EFLAGS_TF;
+=======
+		regs->flags &= ~(X86_EFLAGS_DF|X86_EFLAGS_RF|X86_EFLAGS_TF);
+>>>>>>> v3.18
 =======
 		regs->flags &= ~(X86_EFLAGS_DF|X86_EFLAGS_RF|X86_EFLAGS_TF);
 >>>>>>> v3.18
@@ -720,6 +751,7 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long get_nr_restart_syscall(const struct pt_regs *regs)
 {
 #if defined(CONFIG_X86_32) || !defined(CONFIG_X86_64)
@@ -730,12 +762,17 @@ static inline unsigned long get_nr_restart_syscall(const struct pt_regs *regs)
 #endif /* CONFIG_X86_32 || !CONFIG_X86_64 */
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 #define NR_restart_syscall	__NR_restart_syscall
 #else /* !CONFIG_X86_32 */
 #define NR_restart_syscall	\
 	test_thread_flag(TIF_IA32) ? __NR_ia32_restart_syscall : __NR_restart_syscall
 #endif /* CONFIG_X86_32 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -766,7 +803,11 @@ static void do_signal(struct pt_regs *regs)
 
 		case -ERESTART_RESTARTBLOCK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			regs->ax = get_nr_restart_syscall(regs);
+=======
+			regs->ax = NR_restart_syscall;
+>>>>>>> v3.18
 =======
 			regs->ax = NR_restart_syscall;
 >>>>>>> v3.18
@@ -787,7 +828,11 @@ static void do_signal(struct pt_regs *regs)
  * - triggered by the TIF_WORK_MASK flags
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+__visible void
+>>>>>>> v3.18
 =======
 __visible void
 >>>>>>> v3.18

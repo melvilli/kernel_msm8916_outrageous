@@ -27,8 +27,11 @@
 #include "card.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct tagSChannelTblElement {
@@ -39,8 +42,11 @@ typedef struct tagSChannelTblElement {
 } SChannelTblElement, *PSChannelTblElement;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Functions  --------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool is_channel_valid(unsigned int CountryCode);

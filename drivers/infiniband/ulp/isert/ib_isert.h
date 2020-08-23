@@ -6,6 +6,11 @@
 
 #define ISERT_RDMA_LISTEN_BACKLOG	10
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ISCSI_ISER_SG_TABLESIZE		256
+#define ISER_FASTREG_LI_WRID		0xffffffffffffffffULL
+>>>>>>> v3.18
 =======
 #define ISCSI_ISER_SG_TABLESIZE		256
 #define ISER_FASTREG_LI_WRID		0xffffffffffffffffULL
@@ -27,7 +32,10 @@ enum iser_conn_state {
 	ISER_CONN_INIT,
 	ISER_CONN_UP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ISER_CONN_FULL_FEATURE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ISER_CONN_TERMINATING,
@@ -52,10 +60,13 @@ struct iser_tx_desc {
 	int		num_sge;
 	struct isert_cmd *isert_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_send_wr send_wr;
 } __packed;
 
 =======
+=======
+>>>>>>> v3.18
 	struct llist_node *comp_llnode_batch;
 	struct llist_node comp_llnode;
 	bool		llnode_active;
@@ -93,6 +104,9 @@ struct isert_data_buf {
 	enum dma_data_direction dma_dir;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct isert_rdma_wr {
 	struct list_head	wr_list;
@@ -100,11 +114,14 @@ struct isert_rdma_wr {
 	enum iser_ib_op_code	iser_ib_op;
 	struct ib_sge		*ib_sge;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			num_sge;
 	struct scatterlist	*sge;
 	int			send_wr_num;
 	struct ib_send_wr	*send_wr;
 =======
+=======
+>>>>>>> v3.18
 	struct ib_sge		s_ib_sge;
 	int			send_wr_num;
 	struct ib_send_wr	*send_wr;
@@ -112,6 +129,9 @@ struct isert_rdma_wr {
 	struct isert_data_buf	data;
 	struct isert_data_buf	prot;
 	struct fast_reg_descriptor *fr_desc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -121,8 +141,13 @@ struct isert_cmd {
 	uint64_t		read_va;
 	uint64_t		write_va;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64			sense_buf_dma;
 	u32			sense_buf_len;
+=======
+	u64			pdu_buf_dma;
+	u32			pdu_buf_len;
+>>>>>>> v3.18
 =======
 	u64			pdu_buf_dma;
 	u32			pdu_buf_len;
@@ -132,8 +157,12 @@ struct isert_cmd {
 	u32			rdma_wr_num;
 	struct isert_conn	*conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_cmd	iscsi_cmd;
 	struct ib_sge		*ib_sge;
+=======
+	struct iscsi_cmd	*iscsi_cmd;
+>>>>>>> v3.18
 =======
 	struct iscsi_cmd	*iscsi_cmd;
 >>>>>>> v3.18
@@ -156,7 +185,10 @@ struct isert_conn {
 	char			*login_rsp_buf;
 	u64			login_req_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			login_req_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64			login_rsp_dma;
@@ -167,7 +199,10 @@ struct isert_conn {
 	struct list_head	conn_accept_node;
 	struct completion	conn_login_comp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct completion	login_req_comp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct iser_tx_desc	conn_login_tx_desc;
@@ -177,6 +212,10 @@ struct isert_conn {
 	struct ib_qp		*conn_qp;
 	struct isert_device	*conn_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct	conn_logout_work;
+>>>>>>> v3.18
 =======
 	struct work_struct	conn_logout_work;
 >>>>>>> v3.18
@@ -185,8 +224,11 @@ struct isert_conn {
 	struct completion	conn_wait_comp_err;
 	struct kref		conn_kref;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct	release_work;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head	conn_fr_pool;
 	int			conn_fr_pool_size;
 	/* lock to protect fastreg pool */
@@ -195,6 +237,9 @@ struct isert_conn {
 	int			conn_comp_batch;
 	struct llist_head	conn_comp_llist;
 	bool                    disconnect;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -209,6 +254,11 @@ struct isert_cq_desc {
 
 struct isert_device {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			use_fastreg;
+	bool			pi_capable;
+>>>>>>> v3.18
 =======
 	int			use_fastreg;
 	bool			pi_capable;
@@ -218,8 +268,11 @@ struct isert_device {
 	int			cq_active_qps[ISERT_MAX_CQ];
 	struct ib_device	*ib_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_pd		*dev_pd;
 	struct ib_mr		*dev_mr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ib_cq		*dev_rx_cq[ISERT_MAX_CQ];
@@ -227,11 +280,14 @@ struct isert_device {
 	struct isert_cq_desc	*cq_desc;
 	struct list_head	dev_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct isert_np {
 	struct iscsi_np         *np;
 =======
+=======
+>>>>>>> v3.18
 	struct ib_device_attr	dev_attr;
 	int			(*reg_rdma_mem)(struct iscsi_conn *conn,
 						    struct iscsi_cmd *cmd,
@@ -241,6 +297,9 @@ struct isert_np {
 };
 
 struct isert_np {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct semaphore	np_sem;
 	struct rdma_cm_id	*np_cm_id;

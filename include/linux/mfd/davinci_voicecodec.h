@@ -22,7 +22,11 @@
 
 #ifndef __LINUX_MFD_DAVINCI_VOICECODEC_H_
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __LINUX_MFD_DAVINIC_VOICECODEC_H_
+=======
+#define __LINUX_MFD_DAVINCI_VOICECODEC_H_
+>>>>>>> v3.18
 =======
 #define __LINUX_MFD_DAVINCI_VOICECODEC_H_
 >>>>>>> v3.18
@@ -31,14 +35,20 @@
 #include <linux/platform_device.h>
 #include <linux/mfd/core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/edma.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/edma.h>
 
 #include <mach/hardware.h>
 
 struct regmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -125,8 +135,12 @@ struct davinci_vc {
 	/* Memory resources */
 	void __iomem *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resource_size_t pbase;
 	size_t base_size;
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18

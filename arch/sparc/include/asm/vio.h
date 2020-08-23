@@ -66,6 +66,10 @@ struct vio_dring_register {
 #define VIO_TX_DRING		0x0001
 #define VIO_RX_DRING		0x0002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VIO_RX_DRING_DATA	0x0004
+>>>>>>> v3.18
 =======
 #define VIO_RX_DRING_DATA	0x0004
 >>>>>>> v3.18
@@ -85,6 +89,11 @@ struct vio_dring_unregister {
 #define VIO_DESC_MODE		0x02 /* In-band descriptors	*/
 #define VIO_DRING_MODE		0x03 /* Descriptor rings	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* in vers >= 1.2, VIO_DRING_MODE is 0x04 and transfer mode is a bitmask */
+#define VIO_NEW_DRING_MODE	0x04
+>>>>>>> v3.18
 =======
 /* in vers >= 1.2, VIO_DRING_MODE is 0x04 and transfer mode is a bitmask */
 #define VIO_NEW_DRING_MODE	0x04
@@ -221,11 +230,14 @@ struct vio_net_attr_info {
 #define VNET_ADDR_ETHERMAC	0x01
 	u16			ack_freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			resv1;
 	u64			addr;
 	u64			mtu;
 	u64			resv2[3];
 =======
+=======
+>>>>>>> v3.18
 	u8			plnk_updt;
 #define PHYSLINK_UPDATE_NONE		0x00
 #define PHYSLINK_UPDATE_STATE		0x01
@@ -240,6 +252,9 @@ struct vio_net_attr_info {
 	u16			ipv4_lso_maxlen;
 	u32			resv2;
 	u64			resv3[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -312,6 +327,10 @@ struct vio_dev {
 	unsigned int		tx_irq;
 	unsigned int		rx_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64			rx_ino;
+>>>>>>> v3.18
 =======
 	u64			rx_ino;
 >>>>>>> v3.18
@@ -403,7 +422,10 @@ struct vio_driver_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool vio_version_before(struct vio_driver_state *vio,
 				      u16 major, u16 minor)
 {
@@ -431,6 +453,9 @@ static inline bool vio_version_after_eq(struct vio_driver_state *vio,
 	return have >= want;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define viodbg(TYPE, f, a...) \
 do {	if (vio->debug & VIO_DEBUG_##TYPE) \
@@ -439,7 +464,11 @@ do {	if (vio->debug & VIO_DEBUG_##TYPE) \
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __vio_register_driver(struct vio_driver *drv, struct module *owner,
+=======
+int __vio_register_driver(struct vio_driver *drv, struct module *owner,
+>>>>>>> v3.18
 =======
 int __vio_register_driver(struct vio_driver *drv, struct module *owner,
 >>>>>>> v3.18
@@ -450,7 +479,11 @@ int __vio_register_driver(struct vio_driver *drv, struct module *owner,
 #define vio_register_driver(driver)		\
 	__vio_register_driver(driver, THIS_MODULE, KBUILD_MODNAME)
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void vio_unregister_driver(struct vio_driver *drv);
+=======
+void vio_unregister_driver(struct vio_driver *drv);
+>>>>>>> v3.18
 =======
 void vio_unregister_driver(struct vio_driver *drv);
 >>>>>>> v3.18
@@ -465,6 +498,7 @@ static inline struct vio_dev *to_vio_dev(struct device *dev)
 	return container_of(dev, struct vio_dev, dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int vio_ldc_send(struct vio_driver_state *vio, void *data, int len);
 extern void vio_link_state_change(struct vio_driver_state *vio, int event);
@@ -483,6 +517,8 @@ extern int vio_driver_init(struct vio_driver_state *vio, struct vio_dev *vdev,
 
 extern void vio_port_up(struct vio_driver_state *vio);
 =======
+=======
+>>>>>>> v3.18
 int vio_ldc_send(struct vio_driver_state *vio, void *data, int len);
 void vio_link_state_change(struct vio_driver_state *vio, int event);
 void vio_conn_reset(struct vio_driver_state *vio);
@@ -500,6 +536,9 @@ int vio_driver_init(struct vio_driver_state *vio, struct vio_dev *vdev,
 
 void vio_port_up(struct vio_driver_state *vio);
 int vio_set_intr(unsigned long dev_ino, int state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _SPARC64_VIO_H */

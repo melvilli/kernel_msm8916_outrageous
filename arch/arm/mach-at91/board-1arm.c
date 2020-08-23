@@ -40,7 +40,11 @@
 #include "board.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18

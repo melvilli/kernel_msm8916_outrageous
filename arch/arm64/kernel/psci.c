@@ -22,6 +22,10 @@
 #include <linux/pm.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -33,6 +37,10 @@
 #include <asm/psci.h>
 #include <asm/smp_plat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/suspend.h>
+>>>>>>> v3.18
 =======
 #include <asm/suspend.h>
 >>>>>>> v3.18
@@ -74,6 +82,11 @@ enum psci_function {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEFINE_PER_CPU_READ_MOSTLY(struct psci_power_state *, psci_power_state);
+
+>>>>>>> v3.18
 =======
 static DEFINE_PER_CPU_READ_MOSTLY(struct psci_power_state *, psci_power_state);
 
@@ -107,7 +120,10 @@ static u32 psci_power_state_pack(struct psci_power_state state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void psci_power_state_unpack(u32 power_state,
 				    struct psci_power_state *state)
 {
@@ -120,6 +136,9 @@ static void psci_power_state_unpack(u32 power_state,
 			PSCI_0_2_POWER_STATE_AFFL_SHIFT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The following two functions are invoked via the invoke_psci_fn pointer
@@ -228,7 +247,10 @@ static int psci_migrate_info_type(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __maybe_unused cpu_psci_cpu_init_idle(struct device_node *cpu_node,
 						 unsigned int cpu)
 {
@@ -286,6 +308,9 @@ free_mem:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int get_set_conduit_method(struct device_node *np)
 {
@@ -324,7 +349,11 @@ static void psci_sys_poweroff(void)
  * standard values.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int psci_0_2_init(struct device_node *np)
+=======
+static int __init psci_0_2_init(struct device_node *np)
+>>>>>>> v3.18
 =======
 static int __init psci_0_2_init(struct device_node *np)
 >>>>>>> v3.18
@@ -389,7 +418,11 @@ out_put_node:
  * PSCI < v0.2 get PSCI Function IDs via DT.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int psci_0_1_init(struct device_node *np)
+=======
+static int __init psci_0_1_init(struct device_node *np)
+>>>>>>> v3.18
 =======
 static int __init psci_0_1_init(struct device_node *np)
 >>>>>>> v3.18
@@ -531,10 +564,13 @@ static int cpu_psci_cpu_kill(unsigned int cpu)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct cpu_operations cpu_psci_ops = {
 	.name		= "psci",
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static int psci_suspend_finisher(unsigned long index)
@@ -571,6 +607,9 @@ const struct cpu_operations cpu_psci_ops = {
 	.cpu_suspend	= cpu_psci_cpu_suspend,
 #endif
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.cpu_init	= cpu_psci_cpu_init,
 	.cpu_prepare	= cpu_psci_cpu_prepare,
@@ -581,10 +620,16 @@ const struct cpu_operations cpu_psci_ops = {
 	.cpu_kill	= cpu_psci_cpu_kill,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 CPU_METHOD_OF_DECLARE(psci, &cpu_psci_ops);
 #endif
+=======
+#endif
+};
+
+>>>>>>> v3.18
 =======
 #endif
 };

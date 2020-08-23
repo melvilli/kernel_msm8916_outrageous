@@ -32,11 +32,17 @@ static int sys_ptrace(int request, pid_t pid, void *addr, void *data)
 #define TEST_SICODE_SHARE	-2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef PAGE_SIZE
 #define PAGE_SIZE sysconf(_SC_PAGESIZE)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define err(fmt, ...)						\
 		fprintf(stderr,					\

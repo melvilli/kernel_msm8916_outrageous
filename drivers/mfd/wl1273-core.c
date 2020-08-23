@@ -173,12 +173,18 @@ static int wl1273_fm_set_volume(struct wl1273_core *core, unsigned int volume)
 static int wl1273_core_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wl1273_core *core = i2c_get_clientdata(client);
 
 	dev_dbg(&client->dev, "%s\n", __func__);
 
 	mfd_remove_devices(&client->dev);
 	kfree(core);
+=======
+	dev_dbg(&client->dev, "%s\n", __func__);
+
+	mfd_remove_devices(&client->dev);
+>>>>>>> v3.18
 =======
 	dev_dbg(&client->dev, "%s\n", __func__);
 
@@ -192,7 +198,11 @@ static int wl1273_core_probe(struct i2c_client *client,
 				       const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wl1273_fm_platform_data *pdata = client->dev.platform_data;
+=======
+	struct wl1273_fm_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct wl1273_fm_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -214,7 +224,11 @@ static int wl1273_core_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	core = kzalloc(sizeof(*core), GFP_KERNEL);
+=======
+	core = devm_kzalloc(&client->dev, sizeof(*core), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	core = devm_kzalloc(&client->dev, sizeof(*core), GFP_KERNEL);
 >>>>>>> v3.18
@@ -264,7 +278,10 @@ static int wl1273_core_probe(struct i2c_client *client,
 err:
 	pdata->free_resources();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(core);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

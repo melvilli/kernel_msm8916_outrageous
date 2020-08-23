@@ -48,6 +48,10 @@
 #include <linux/workqueue.h>
 #include <linux/kdev_t.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -84,8 +88,11 @@ static struct ib_cm {
 	struct list_head timewait_list;
 	struct workqueue_struct *wq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sync on cm change port state */
 	spinlock_t state_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } cm;
@@ -170,8 +177,11 @@ struct cm_port {
 	struct kobject port_obj;
 	u8 port_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head cm_priv_prim_list;
 	struct list_head cm_priv_altr_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cm_counter_group counter_group[CM_COUNTER_GROUPS];
@@ -192,6 +202,11 @@ struct cm_av {
 	u16 pkey_index;
 	u8 timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8  valid;
+	u8  smac[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8  valid;
 	u8  smac[ETH_ALEN];
@@ -257,12 +272,15 @@ struct cm_id_private {
 	u8 target_ack_delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head prim_list;
 	struct list_head altr_list;
 	/* Indicates that the send port mad is registered and av is set */
 	int prim_send_port_not_ready;
 	int altr_send_port_not_ready;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head work_list;
@@ -283,6 +301,7 @@ static int cm_alloc_msg(struct cm_id_private *cm_id_priv,
 	struct ib_mad_agent *mad_agent;
 	struct ib_mad_send_buf *m;
 	struct ib_ah *ah;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cm_av *av;
 	unsigned long flags, flags2;
@@ -319,6 +338,8 @@ static int cm_alloc_msg(struct cm_id_private *cm_id_priv,
 	m = ib_create_send_mad(mad_agent, cm_id_priv->id.remote_cm_qpn,
 			       av->pkey_index,
 =======
+=======
+>>>>>>> v3.18
 
 	mad_agent = cm_id_priv->av.port->mad_agent;
 	ah = ib_create_ah(mad_agent->qp->pd, &cm_id_priv->av.ah_attr);
@@ -327,14 +348,21 @@ static int cm_alloc_msg(struct cm_id_private *cm_id_priv,
 
 	m = ib_create_send_mad(mad_agent, cm_id_priv->id.remote_cm_qpn,
 			       cm_id_priv->av.pkey_index,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       0, IB_MGMT_MAD_HDR, IB_MGMT_MAD_DATA,
 			       GFP_ATOMIC);
 	if (IS_ERR(m)) {
 		ib_destroy_ah(ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = PTR_ERR(m);
 		goto out;
+=======
+		return PTR_ERR(m);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(m);
 >>>>>>> v3.18
@@ -348,10 +376,14 @@ static int cm_alloc_msg(struct cm_id_private *cm_id_priv,
 	m->context[0] = cm_id_priv;
 	*msg = m;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out:
 	spin_unlock_irqrestore(&cm.state_lock, flags2);
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -424,8 +456,12 @@ static void cm_init_av_for_response(struct cm_port *port, struct ib_wc *wc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cm_init_av_by_path(struct ib_sa_path_rec *path, struct cm_av *av,
 			      struct cm_id_private *cm_id_priv)
+=======
+static int cm_init_av_by_path(struct ib_sa_path_rec *path, struct cm_av *av)
+>>>>>>> v3.18
 =======
 static int cm_init_av_by_path(struct ib_sa_path_rec *path, struct cm_av *av)
 >>>>>>> v3.18
@@ -459,6 +495,7 @@ static int cm_init_av_by_path(struct ib_sa_path_rec *path, struct cm_av *av)
 			     &av->ah_attr);
 	av->timeout = path->packet_life_time + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irqsave(&cm.lock, flags);
 	if (&cm_id_priv->av == av)
@@ -472,10 +509,15 @@ static int cm_init_av_by_path(struct ib_sa_path_rec *path, struct cm_av *av)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	memcpy(av->smac, path->smac, sizeof(av->smac));
 
 	av->valid = 1;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -484,7 +526,10 @@ static int cm_alloc_id(struct cm_id_private *cm_id_priv)
 	unsigned long flags;
 	int id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int next_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -492,9 +537,13 @@ static int cm_alloc_id(struct cm_id_private *cm_id_priv)
 	spin_lock_irqsave(&cm.lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id = idr_alloc(&cm.local_id_table, cm_id_priv, next_id, 0, GFP_NOWAIT);
 	if (id >= 0)
 		next_id = max(id + 1, 0);
+=======
+	id = idr_alloc_cyclic(&cm.local_id_table, cm_id_priv, 0, 0, GFP_NOWAIT);
+>>>>>>> v3.18
 =======
 	id = idr_alloc_cyclic(&cm.local_id_table, cm_id_priv, 0, 0, GFP_NOWAIT);
 >>>>>>> v3.18
@@ -824,8 +873,11 @@ struct ib_cm_id *ib_create_cm_id(struct ib_device *device,
 	init_completion(&cm_id_priv->comp);
 	INIT_LIST_HEAD(&cm_id_priv->work_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&cm_id_priv->prim_list);
 	INIT_LIST_HEAD(&cm_id_priv->altr_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atomic_set(&cm_id_priv->work_count, -1);
@@ -970,11 +1022,14 @@ retest:
 		spin_unlock_irq(&cm_id_priv->lock);
 		cm_reject_sidr_req(cm_id_priv, IB_SIDR_REJECT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irq(&cm.lock);
 		if (!RB_EMPTY_NODE(&cm_id_priv->sidr_id_node))
 			rb_erase(&cm_id_priv->sidr_id_node,
 				 &cm.remote_sidr_table);
 		spin_unlock_irq(&cm.lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1030,6 +1085,7 @@ retest:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&cm.lock);
 	if (!list_empty(&cm_id_priv->altr_list) &&
 	    (!cm_id_priv->altr_send_port_not_ready))
@@ -1039,6 +1095,8 @@ retest:
 		list_del(&cm_id_priv->prim_list);
 	spin_unlock_irq(&cm.lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cm_free_id(cm_id->local_id);
@@ -1265,8 +1323,12 @@ int ib_send_cm_req(struct ib_cm_id *cm_id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = cm_init_av_by_path(param->primary_path, &cm_id_priv->av,
 				 cm_id_priv);
+=======
+	ret = cm_init_av_by_path(param->primary_path, &cm_id_priv->av);
+>>>>>>> v3.18
 =======
 	ret = cm_init_av_by_path(param->primary_path, &cm_id_priv->av);
 >>>>>>> v3.18
@@ -1275,7 +1337,11 @@ int ib_send_cm_req(struct ib_cm_id *cm_id,
 	if (param->alternate_path) {
 		ret = cm_init_av_by_path(param->alternate_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 &cm_id_priv->alt_av, cm_id_priv);
+=======
+					 &cm_id_priv->alt_av);
+>>>>>>> v3.18
 =======
 					 &cm_id_priv->alt_av);
 >>>>>>> v3.18
@@ -1699,13 +1765,19 @@ static int cm_req_handler(struct cm_work *work)
 	cm_process_routed_req(req_msg, work->mad_recv_wc->wc);
 	cm_format_paths_from_req(req_msg, &work->path[0], &work->path[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = cm_init_av_by_path(&work->path[0], &cm_id_priv->av,
 				 cm_id_priv);
 =======
+=======
+>>>>>>> v3.18
 
 	memcpy(work->path[0].dmac, cm_id_priv->av.ah_attr.dmac, ETH_ALEN);
 	work->path[0].vlan_id = cm_id_priv->av.ah_attr.vlan_id;
 	ret = cm_init_av_by_path(&work->path[0], &cm_id_priv->av);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		ib_get_cached_gid(work->port->cm_dev->ib_device,
@@ -1717,8 +1789,12 @@ static int cm_req_handler(struct cm_work *work)
 	}
 	if (req_msg->alt_local_lid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cm_init_av_by_path(&work->path[1], &cm_id_priv->alt_av,
 					 cm_id_priv);
+=======
+		ret = cm_init_av_by_path(&work->path[1], &cm_id_priv->alt_av);
+>>>>>>> v3.18
 =======
 		ret = cm_init_av_by_path(&work->path[1], &cm_id_priv->alt_av);
 >>>>>>> v3.18
@@ -2777,8 +2853,12 @@ int ib_send_cm_lap(struct ib_cm_id *cm_id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = cm_init_av_by_path(alternate_path, &cm_id_priv->alt_av,
 				 cm_id_priv);
+=======
+	ret = cm_init_av_by_path(alternate_path, &cm_id_priv->alt_av);
+>>>>>>> v3.18
 =======
 	ret = cm_init_av_by_path(alternate_path, &cm_id_priv->alt_av);
 >>>>>>> v3.18
@@ -2894,8 +2974,12 @@ static int cm_lap_handler(struct cm_work *work)
 				work->mad_recv_wc->recv_buf.grh,
 				&cm_id_priv->av);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cm_init_av_by_path(param->alternate_path, &cm_id_priv->alt_av,
 			   cm_id_priv);
+=======
+	cm_init_av_by_path(param->alternate_path, &cm_id_priv->alt_av);
+>>>>>>> v3.18
 =======
 	cm_init_av_by_path(param->alternate_path, &cm_id_priv->alt_av);
 >>>>>>> v3.18
@@ -3091,7 +3175,11 @@ int ib_send_cm_sidr_req(struct ib_cm_id *cm_id,
 
 	cm_id_priv = container_of(cm_id, struct cm_id_private, id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = cm_init_av_by_path(param->path, &cm_id_priv->av, cm_id_priv);
+=======
+	ret = cm_init_av_by_path(param->path, &cm_id_priv->av);
+>>>>>>> v3.18
 =======
 	ret = cm_init_av_by_path(param->path, &cm_id_priv->av);
 >>>>>>> v3.18
@@ -3262,10 +3350,14 @@ int ib_send_cm_sidr_rep(struct ib_cm_id *cm_id,
 
 	spin_lock_irqsave(&cm.lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!RB_EMPTY_NODE(&cm_id_priv->sidr_id_node)) {
 		rb_erase(&cm_id_priv->sidr_id_node, &cm.remote_sidr_table);
 		RB_CLEAR_NODE(&cm_id_priv->sidr_id_node);
 	}
+=======
+	rb_erase(&cm_id_priv->sidr_id_node, &cm.remote_sidr_table);
+>>>>>>> v3.18
 =======
 	rb_erase(&cm_id_priv->sidr_id_node, &cm.remote_sidr_table);
 >>>>>>> v3.18
@@ -3520,9 +3612,13 @@ static int cm_migrate(struct ib_cm_id *cm_id)
 {
 	struct cm_id_private *cm_id_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cm_av tmp_av;
 	unsigned long flags;
 	int tmp_send_port_not_ready;
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -3535,6 +3631,7 @@ static int cm_migrate(struct ib_cm_id *cm_id)
 	     cm_id->lap_state == IB_CM_LAP_IDLE)) {
 		cm_id->lap_state = IB_CM_LAP_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Swap address vector */
 		tmp_av = cm_id_priv->av;
 		cm_id_priv->av = cm_id_priv->alt_av;
@@ -3543,6 +3640,9 @@ static int cm_migrate(struct ib_cm_id *cm_id)
 		tmp_send_port_not_ready = cm_id_priv->prim_send_port_not_ready;
 		cm_id_priv->prim_send_port_not_ready = cm_id_priv->altr_send_port_not_ready;
 		cm_id_priv->altr_send_port_not_ready = tmp_send_port_not_ready;
+=======
+		cm_id_priv->av = cm_id_priv->alt_av;
+>>>>>>> v3.18
 =======
 		cm_id_priv->av = cm_id_priv->alt_av;
 >>>>>>> v3.18
@@ -3696,7 +3796,10 @@ static int cm_init_qp_rtr_attr(struct cm_id_private *cm_id_priv,
 				IB_QP_DEST_QPN | IB_QP_RQ_PSN;
 		qp_attr->ah_attr = cm_id_priv->av.ah_attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (!cm_id_priv->av.valid) {
 			spin_unlock_irqrestore(&cm_id_priv->lock, flags);
 			return -EINVAL;
@@ -3723,6 +3826,9 @@ static int cm_init_qp_rtr_attr(struct cm_id_private *cm_id_priv,
 				*qp_attr_mask |= IB_QP_ALT_SMAC;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		qp_attr->path_mtu = cm_id_priv->path_mtu;
 		qp_attr->dest_qp_num = be32_to_cpu(cm_id_priv->remote_qpn);
@@ -3943,7 +4049,11 @@ static void cm_add_one(struct ib_device *ib_device)
 	struct ib_mad_reg_req reg_req = {
 		.mgmt_class = IB_MGMT_CLASS_CM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mgmt_class_version = IB_CM_CLASS_VERSION
+=======
+		.mgmt_class_version = IB_CM_CLASS_VERSION,
+>>>>>>> v3.18
 =======
 		.mgmt_class_version = IB_CM_CLASS_VERSION,
 >>>>>>> v3.18
@@ -3985,9 +4095,12 @@ static void cm_add_one(struct ib_device *ib_device)
 		port->port_num = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_LIST_HEAD(&port->cm_priv_prim_list);
 		INIT_LIST_HEAD(&port->cm_priv_altr_list);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = cm_create_port_fs(port);
@@ -4001,7 +4114,12 @@ static void cm_add_one(struct ib_device *ib_device)
 							cm_send_handler,
 							cm_recv_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							port);
+=======
+							port,
+							0);
+>>>>>>> v3.18
 =======
 							port,
 							0);
@@ -4042,8 +4160,11 @@ static void cm_remove_one(struct ib_device *ib_device)
 	struct cm_device *cm_dev;
 	struct cm_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cm_id_private *cm_id_priv;
 	struct ib_mad_agent *cur_mad_agent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ib_port_modify port_modify = {
@@ -4064,6 +4185,7 @@ static void cm_remove_one(struct ib_device *ib_device)
 		port = cm_dev->port[i-1];
 		ib_modify_port(ib_device, port->port_num, 0, &port_modify);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Mark all the cm_id's as not valid */
 		spin_lock_irq(&cm.lock);
 		list_for_each_entry(cm_id_priv, &port->cm_priv_altr_list, altr_list)
@@ -4081,10 +4203,15 @@ static void cm_remove_one(struct ib_device *ib_device)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		ib_unregister_mad_agent(port->mad_agent);
 		flush_workqueue(cm.wq);
 		cm_remove_port_fs(port);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	device_unregister(cm_dev->device);
 	kfree(cm_dev);
@@ -4099,7 +4226,10 @@ static int __init ib_cm_init(void)
 	rwlock_init(&cm.device_lock);
 	spin_lock_init(&cm.lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&cm.state_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cm.listen_service_table = RB_ROOT;

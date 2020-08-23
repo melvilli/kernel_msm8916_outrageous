@@ -17,12 +17,15 @@ extern debug_info_t *qdio_dbf_setup;
 extern debug_info_t *qdio_dbf_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sort out low debug levels early to avoid wasted sprints */
 static inline int qdio_dbf_passes(debug_info_t *dbf_grp, int level)
 {
 	return (level <= dbf_grp->level);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DBF_ERR		3	/* error conditions	*/
@@ -69,7 +72,11 @@ static inline void DBF_ERROR_HEX(void *addr, int len)
 	do { \
 		char debug_buffer[QDIO_DBF_LEN]; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (qdio_dbf_passes(device->debug_area, level)) { \
+=======
+		if (debug_level_enabled(device->debug_area, level)) { \
+>>>>>>> v3.18
 =======
 		if (debug_level_enabled(device->debug_area, level)) { \
 >>>>>>> v3.18
@@ -89,7 +96,11 @@ static inline void DBF_DEV_HEX(struct qdio_irq *dev, void *addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qdio_allocate_dbf(struct qdio_initialize *init_data,
+=======
+int qdio_allocate_dbf(struct qdio_initialize *init_data,
+>>>>>>> v3.18
 =======
 int qdio_allocate_dbf(struct qdio_initialize *init_data,
 >>>>>>> v3.18

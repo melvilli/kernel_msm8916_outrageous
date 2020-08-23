@@ -128,7 +128,11 @@ static int parse_opts(char *opts, struct p9_client *clnt)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clnt->proto_version = p9_proto_2000u;
+=======
+	clnt->proto_version = p9_proto_2000L;
+>>>>>>> v3.18
 =======
 	clnt->proto_version = p9_proto_2000L;
 >>>>>>> v3.18
@@ -209,7 +213,10 @@ free_and_return:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct p9_fcall *p9_fcall_alloc(int alloc_msize)
 {
 	struct p9_fcall *fc;
@@ -221,6 +228,9 @@ static struct p9_fcall *p9_fcall_alloc(int alloc_msize)
 	return fc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * p9_tag_alloc - lookup/allocate a request by tag
@@ -275,6 +285,7 @@ p9_tag_alloc(struct p9_client *c, u16 tag, unsigned int max_size)
 
 	req = &c->reqs[row][col];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!req->tc) {
 		req->wq = kmalloc(sizeof(wait_queue_head_t), GFP_NOFS);
 		if (!req->wq) {
@@ -302,6 +313,8 @@ p9_tag_alloc(struct p9_client *c, u16 tag, unsigned int max_size)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (!req->wq) {
 		req->wq = kmalloc(sizeof(wait_queue_head_t), GFP_NOFS);
 		if (!req->wq)
@@ -316,6 +329,9 @@ p9_tag_alloc(struct p9_client *c, u16 tag, unsigned int max_size)
 	if (!req->tc || !req->rc)
 		goto grow_failed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p9pdu_reset(req->tc);
 	p9pdu_reset(req->rc);
@@ -324,8 +340,11 @@ p9_tag_alloc(struct p9_client *c, u16 tag, unsigned int max_size)
 	req->status = REQ_STATUS_ALLOC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return &c->reqs[row][col];
 =======
+=======
+>>>>>>> v3.18
 	return req;
 
 grow_failed:
@@ -336,6 +355,9 @@ grow_failed:
 	req->tc = req->rc = NULL;
 	req->wq = NULL;
 	return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -456,10 +478,13 @@ static void p9_free_req(struct p9_client *c, struct p9_req_t *r)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void p9_client_cb(struct p9_client *c, struct p9_req_t *req)
 {
 	p9_debug(P9_DEBUG_MUX, " tag %d\n", req->tc->tag);
 =======
+=======
+>>>>>>> v3.18
 void p9_client_cb(struct p9_client *c, struct p9_req_t *req, int status)
 {
 	p9_debug(P9_DEBUG_MUX, " tag %d\n", req->tc->tag);
@@ -471,6 +496,9 @@ void p9_client_cb(struct p9_client *c, struct p9_req_t *req, int status)
 	smp_wmb();
 	req->status = status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wake_up(req->wq);
 	p9_debug(P9_DEBUG_MUX, "wakeup: %d\n", req->tc->tag);
@@ -710,6 +738,7 @@ static int p9_client_flush(struct p9_client *c, struct p9_req_t *oldreq)
 		return PTR_ERR(req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* if we haven't received a response for oldreq,
 	   remove it from the list. */
@@ -718,6 +747,8 @@ static int p9_client_flush(struct p9_client *c, struct p9_req_t *oldreq)
 		list_del(&oldreq->req_list);
 	spin_unlock(&c->lock);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * if we haven't received a response for oldreq,
 	 * remove it from the list
@@ -725,6 +756,9 @@ static int p9_client_flush(struct p9_client *c, struct p9_req_t *oldreq)
 	if (oldreq->status == REQ_STATUS_SENT)
 		if (c->trans_mod->cancelled)
 			c->trans_mod->cancelled(c, oldreq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	p9_free_req(c, req);
@@ -813,13 +847,19 @@ again:
 				       req->status >= REQ_STATUS_RCVD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Make sure our req is coherent with regard to updates in other
 	 * threads - echoes to wmb() in the callback
 	 */
 	smp_rmb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((err == -ERESTARTSYS) && (c->status == Connected)
 				  && (type == P9_TFLUSH)) {
@@ -910,8 +950,12 @@ static struct p9_req_t *p9_client_zc_rpc(struct p9_client *c, int8_t type,
 		if (err == -EIO)
 			c->status = Disconnected;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err != -ERESTARTSYS)
 			goto reterr;
+=======
+		goto reterr;
+>>>>>>> v3.18
 =======
 		goto reterr;
 >>>>>>> v3.18
@@ -1024,7 +1068,10 @@ static int p9_client_version(struct p9_client *c)
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1066,6 +1113,10 @@ struct p9_client *p9_client_create(const char *dev_name, char *options)
 	int err;
 	struct p9_client *clnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *client_id;
+>>>>>>> v3.18
 =======
 	char *client_id;
 >>>>>>> v3.18
@@ -1078,11 +1129,17 @@ struct p9_client *p9_client_create(const char *dev_name, char *options)
 	clnt->trans_mod = NULL;
 	clnt->trans = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	client_id = utsname()->nodename;
 	memcpy(clnt->name, client_id, strlen(client_id) + 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&clnt->lock);
 	INIT_LIST_HEAD(&clnt->fidlist);
@@ -2180,10 +2237,13 @@ int p9_client_readdir(struct p9_fid *fid, char *data, u32 count, u64 offset)
 		goto free_and_error;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rsize < count) {
 		pr_err("bogus RREADDIR count (%d > %d)\n", count, rsize);
 		count = rsize;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

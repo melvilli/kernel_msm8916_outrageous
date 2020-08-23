@@ -10,10 +10,15 @@
  * the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/miscdevice.h>
+=======
+#include <linux/kernel.h>
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -36,7 +41,11 @@ static int wdt_start(struct watchdog_device *wdd)
 {
 	struct device *dev = watchdog_get_drvdata(wdd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct stmp3xxx_wdt_pdata *pdata = dev->platform_data;
+=======
+	struct stmp3xxx_wdt_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct stmp3xxx_wdt_pdata *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -49,7 +58,11 @@ static int wdt_stop(struct watchdog_device *wdd)
 {
 	struct device *dev = watchdog_get_drvdata(wdd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct stmp3xxx_wdt_pdata *pdata = dev->platform_data;
+=======
+	struct stmp3xxx_wdt_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct stmp3xxx_wdt_pdata *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -110,10 +123,13 @@ static int stmp3xxx_wdt_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver stmp3xxx_wdt_driver = {
 	.driver = {
 		.name = "stmp3xxx_rtc_wdt",
 =======
+=======
+>>>>>>> v3.18
 static int __maybe_unused stmp3xxx_wdt_suspend(struct device *dev)
 {
 	struct watchdog_device *wdd = &stmp3xxx_wdd;
@@ -141,6 +157,9 @@ static struct platform_driver stmp3xxx_wdt_driver = {
 	.driver = {
 		.name = "stmp3xxx_rtc_wdt",
 		.pm = &stmp3xxx_wdt_pm_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe = stmp3xxx_wdt_probe,
@@ -152,6 +171,9 @@ MODULE_DESCRIPTION("STMP3XXX RTC Watchdog Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR("Wolfram Sang <w.sang@pengutronix.de>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

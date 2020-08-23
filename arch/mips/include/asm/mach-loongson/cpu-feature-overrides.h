@@ -42,10 +42,15 @@
 #define cpu_has_mdmx		0
 #define cpu_has_mips16		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_mips32r1	0
 #define cpu_has_mips32r2	0
 #define cpu_has_mips3d		0
 #define cpu_has_mips64r1	0
+=======
+#define cpu_has_mips32r2	0
+#define cpu_has_mips3d		0
+>>>>>>> v3.18
 =======
 #define cpu_has_mips32r2	0
 #define cpu_has_mips3d		0
@@ -65,6 +70,11 @@
 #define cpu_has_local_ebase	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_has_wsbh		IS_ENABLED(CONFIG_CPU_LOONGSON3)
+
+>>>>>>> v3.18
 =======
 #define cpu_has_wsbh		IS_ENABLED(CONFIG_CPU_LOONGSON3)
 

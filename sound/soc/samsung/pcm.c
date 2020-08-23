@@ -21,7 +21,10 @@
 
 #include <linux/platform_data/asoc-s3c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -136,6 +139,7 @@ struct s3c_pcm_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct s3c2410_dma_client s3c_pcm_dma_client_out = {
 	.name		= "PCM Stereo out"
 };
@@ -158,6 +162,13 @@ static struct s3c_dma_params s3c_pcm_stereo_out[] = {
 	},
 	[1] = {
 >>>>>>> v3.18
+=======
+static struct s3c_dma_params s3c_pcm_stereo_out[] = {
+	[0] = {
+		.dma_size	= 4,
+	},
+	[1] = {
+>>>>>>> v3.18
 		.dma_size	= 4,
 	},
 };
@@ -165,11 +176,17 @@ static struct s3c_dma_params s3c_pcm_stereo_out[] = {
 static struct s3c_dma_params s3c_pcm_stereo_in[] = {
 	[0] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.client		= &s3c_pcm_dma_client_in,
 		.dma_size	= 4,
 	},
 	[1] = {
 		.client		= &s3c_pcm_dma_client_in,
+=======
+		.dma_size	= 4,
+	},
+	[1] = {
+>>>>>>> v3.18
 =======
 		.dma_size	= 4,
 	},
@@ -293,7 +310,10 @@ static int s3c_pcm_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct s3c_pcm_info *pcm = snd_soc_dai_get_drvdata(rtd->cpu_dai);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_dma_params *dma_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem *regs = pcm->regs;
@@ -305,6 +325,7 @@ static int s3c_pcm_hw_params(struct snd_pcm_substream *substream,
 	dev_dbg(pcm->dev, "Entered %s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
 		dma_data = pcm->dma_playback;
 	else
@@ -315,6 +336,11 @@ static int s3c_pcm_hw_params(struct snd_pcm_substream *substream,
 	/* Strictly check for sample size */
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
+=======
+	/* Strictly check for sample size */
+	switch (params_width(params)) {
+	case 16:
+>>>>>>> v3.18
 =======
 	/* Strictly check for sample size */
 	switch (params_width(params)) {
@@ -488,7 +514,10 @@ static const struct snd_soc_dai_ops s3c_pcm_dai_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int s3c_pcm_dai_probe(struct snd_soc_dai *dai)
 {
 	struct s3c_pcm_info *pcm = snd_soc_dai_get_drvdata(dai);
@@ -498,12 +527,19 @@ static int s3c_pcm_dai_probe(struct snd_soc_dai *dai)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define S3C_PCM_RATES  SNDRV_PCM_RATE_8000_96000
 
 #define S3C_PCM_DAI_DECLARE			\
 	.symmetric_rates = 1,					\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe = s3c_pcm_dai_probe,				\
+>>>>>>> v3.18
 =======
 	.probe = s3c_pcm_dai_probe,				\
 >>>>>>> v3.18
@@ -584,7 +620,11 @@ static int s3c_pcm_dev_probe(struct platform_device *pdev)
 	pcm->sclk_per_fs = 128;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcm->cclk = clk_get(&pdev->dev, "audio-bus");
+=======
+	pcm->cclk = devm_clk_get(&pdev->dev, "audio-bus");
+>>>>>>> v3.18
 =======
 	pcm->cclk = devm_clk_get(&pdev->dev, "audio-bus");
 >>>>>>> v3.18
@@ -613,7 +653,11 @@ static int s3c_pcm_dev_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcm->pclk = clk_get(&pdev->dev, "pcm");
+=======
+	pcm->pclk = devm_clk_get(&pdev->dev, "pcm");
+>>>>>>> v3.18
 =======
 	pcm->pclk = devm_clk_get(&pdev->dev, "pcm");
 >>>>>>> v3.18
@@ -638,7 +682,11 @@ static int s3c_pcm_dev_probe(struct platform_device *pdev)
 	pm_runtime_enable(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&pdev->dev, &s3c_pcm_component,
+=======
+	ret = devm_snd_soc_register_component(&pdev->dev, &s3c_pcm_component,
+>>>>>>> v3.18
 =======
 	ret = devm_snd_soc_register_component(&pdev->dev, &s3c_pcm_component,
 >>>>>>> v3.18
@@ -649,26 +697,37 @@ static int s3c_pcm_dev_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to get register DMA: %d\n", ret);
 		goto err6;
 =======
+=======
+>>>>>>> v3.18
 	ret = samsung_asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to get register DMA: %d\n", ret);
 		goto err5;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err6:
 	snd_soc_unregister_component(&pdev->dev);
 err5:
 	clk_disable_unprepare(pcm->pclk);
 	clk_put(pcm->pclk);
+=======
+err5:
+	clk_disable_unprepare(pcm->pclk);
+>>>>>>> v3.18
 =======
 err5:
 	clk_disable_unprepare(pcm->pclk);
@@ -680,7 +739,10 @@ err3:
 err2:
 	clk_disable_unprepare(pcm->cclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(pcm->cclk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err1:
@@ -693,9 +755,12 @@ static int s3c_pcm_dev_remove(struct platform_device *pdev)
 	struct resource *mem_res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc_dma_platform_unregister(&pdev->dev);
 	snd_soc_unregister_component(&pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm_runtime_disable(&pdev->dev);
@@ -708,8 +773,11 @@ static int s3c_pcm_dev_remove(struct platform_device *pdev)
 	clk_disable_unprepare(pcm->cclk);
 	clk_disable_unprepare(pcm->pclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(pcm->pclk);
 	clk_put(pcm->cclk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

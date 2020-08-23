@@ -366,10 +366,15 @@ static int spear_rtc_probe(struct platform_device *pdev)
 
 	config = devm_kzalloc(&pdev->dev, sizeof(*config), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!config) {
 		dev_err(&pdev->dev, "out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!config)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!config)
 		return -ENOMEM;
@@ -423,7 +428,10 @@ static int spear_rtc_probe(struct platform_device *pdev)
 
 err_disable_clock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk_disable_unprepare(config->clk);

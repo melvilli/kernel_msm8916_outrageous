@@ -69,8 +69,12 @@ static void scatterwalk_pagedone(struct scatter_walk *walk, int out,
 void scatterwalk_done(struct scatter_walk *walk, int out, int more)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!more || walk->offset >= walk->sg->offset + walk->sg->length ||
 	    !(walk->offset & (PAGE_SIZE - 1)))
+=======
+	if (!(scatterwalk_pagelen(walk) & (PAGE_SIZE - 1)) || !more)
+>>>>>>> v3.18
 =======
 	if (!(scatterwalk_pagelen(walk) & (PAGE_SIZE - 1)) || !more)
 >>>>>>> v3.18
@@ -130,7 +134,10 @@ void scatterwalk_map_and_copy(void *buf, struct scatterlist *sg,
 }
 EXPORT_SYMBOL_GPL(scatterwalk_map_and_copy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int scatterwalk_bytes_sglen(struct scatterlist *sg, int num_bytes)
 {
@@ -153,4 +160,7 @@ int scatterwalk_bytes_sglen(struct scatterlist *sg, int num_bytes)
 	return n;
 }
 EXPORT_SYMBOL_GPL(scatterwalk_bytes_sglen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

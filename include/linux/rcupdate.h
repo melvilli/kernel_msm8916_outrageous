@@ -13,8 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -50,6 +55,7 @@
 #include <linux/bug.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_RCU_TORTURE_TEST
 extern int rcutorture_runnable; /* for sysctl */
@@ -65,6 +71,8 @@ extern void do_trace_rcu_torture_read(char *rcutorturename,
 				      unsigned long c);
 #else
 =======
+=======
+>>>>>>> v3.18
 #include <asm/barrier.h>
 
 extern int rcu_expedited; /* for sysctl */
@@ -98,6 +106,9 @@ static inline void rcutorture_get_gp_data(enum rcutorture_type test_type,
 	*gpnum = 0;
 	*completed = 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void rcutorture_record_test_transition(void)
 {
@@ -107,17 +118,23 @@ static inline void rcutorture_record_progress(unsigned long vernum)
 }
 #ifdef CONFIG_RCU_TRACE
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void do_trace_rcu_torture_read(char *rcutorturename,
 				      struct rcu_head *rhp,
 				      unsigned long secs,
 				      unsigned long c_old,
 				      unsigned long c);
 =======
+=======
+>>>>>>> v3.18
 void do_trace_rcu_torture_read(const char *rcutorturename,
 			       struct rcu_head *rhp,
 			       unsigned long secs,
 			       unsigned long c_old,
 			       unsigned long c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define do_trace_rcu_torture_read(rcutorturename, rhp, secs, c_old, c) \
@@ -168,8 +185,13 @@ void do_trace_rcu_torture_read(const char *rcutorturename,
  * more than one CPU).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void call_rcu(struct rcu_head *head,
 			      void (*func)(struct rcu_head *head));
+=======
+void call_rcu(struct rcu_head *head,
+	      void (*func)(struct rcu_head *head));
+>>>>>>> v3.18
 =======
 void call_rcu(struct rcu_head *head,
 	      void (*func)(struct rcu_head *head));
@@ -204,8 +226,13 @@ void call_rcu(struct rcu_head *head,
  * memory ordering guarantees.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void call_rcu_bh(struct rcu_head *head,
 			void (*func)(struct rcu_head *head));
+=======
+void call_rcu_bh(struct rcu_head *head,
+		 void (*func)(struct rcu_head *head));
+>>>>>>> v3.18
 =======
 void call_rcu_bh(struct rcu_head *head,
 		 void (*func)(struct rcu_head *head));
@@ -231,6 +258,7 @@ void call_rcu_bh(struct rcu_head *head,
  * memory ordering guarantees.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void call_rcu_sched(struct rcu_head *head,
 			   void (*func)(struct rcu_head *rcu));
 
@@ -242,6 +270,8 @@ extern void __rcu_read_lock(void);
 extern void __rcu_read_unlock(void);
 extern void rcu_read_unlock_special(struct task_struct *t);
 =======
+=======
+>>>>>>> v3.18
 void call_rcu_sched(struct rcu_head *head,
 		    void (*func)(struct rcu_head *rcu));
 
@@ -274,6 +304,9 @@ void rcu_barrier_tasks(void);
 void __rcu_read_lock(void);
 void __rcu_read_unlock(void);
 void rcu_read_unlock_special(struct task_struct *t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void synchronize_rcu(void);
 
@@ -311,6 +344,7 @@ static inline int rcu_preempt_depth(void)
 
 /* Internal to kernel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rcu_sched_qs(int cpu);
 extern void rcu_bh_qs(int cpu);
 extern void rcu_check_callbacks(int cpu, int user);
@@ -331,6 +365,8 @@ static inline void rcu_user_exit(void) { }
 static inline void rcu_user_enter_after_irq(void) { }
 static inline void rcu_user_exit_after_irq(void) { }
 =======
+=======
+>>>>>>> v3.18
 void rcu_init(void);
 void rcu_sched_qs(void);
 void rcu_bh_qs(void);
@@ -359,14 +395,20 @@ void rcu_user_exit(void);
 #else
 static inline void rcu_user_enter(void) { }
 static inline void rcu_user_exit(void) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void rcu_user_hooks_switch(struct task_struct *prev,
 					 struct task_struct *next) { }
 #endif /* CONFIG_RCU_USER_QS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void exit_rcu(void);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RCU_NOCB_CPU
 void rcu_init_nohz(void);
 #else /* #ifdef CONFIG_RCU_NOCB_CPU */
@@ -374,6 +416,9 @@ static inline void rcu_init_nohz(void)
 {
 }
 #endif /* #else #ifdef CONFIG_RCU_NOCB_CPU */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -403,7 +448,10 @@ static inline void rcu_init_nohz(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Note a voluntary context switch for RCU-tasks benefit.  This is a
  * macro rather than an inline function to avoid #include hell.
  */
@@ -438,6 +486,9 @@ bool __rcu_is_watching(void);
 #endif /* #if defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_RCU_TRACE) || defined(CONFIG_SMP) */
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Infrastructure to implement the synchronize_() primitives in
  * TREE_RCU and rcu_barrier_() primitives in TINY_RCU.
@@ -450,7 +501,11 @@ void wait_rcu_gp(call_rcu_func_t crf);
 #if defined(CONFIG_TREE_RCU) || defined(CONFIG_TREE_PREEMPT_RCU)
 #include <linux/rcutree.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_TINY_RCU) || defined(CONFIG_TINY_PREEMPT_RCU)
+=======
+#elif defined(CONFIG_TINY_RCU)
+>>>>>>> v3.18
 =======
 #elif defined(CONFIG_TINY_RCU)
 >>>>>>> v3.18
@@ -467,10 +522,13 @@ void wait_rcu_gp(call_rcu_func_t crf);
  */
 #ifdef CONFIG_DEBUG_OBJECTS_RCU_HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void init_rcu_head_on_stack(struct rcu_head *head);
 extern void destroy_rcu_head_on_stack(struct rcu_head *head);
 #else /* !CONFIG_DEBUG_OBJECTS_RCU_HEAD */
 =======
+=======
+>>>>>>> v3.18
 void init_rcu_head(struct rcu_head *head);
 void destroy_rcu_head(struct rcu_head *head);
 void init_rcu_head_on_stack(struct rcu_head *head);
@@ -484,6 +542,9 @@ static inline void destroy_rcu_head(struct rcu_head *head)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void init_rcu_head_on_stack(struct rcu_head *head)
 {
@@ -495,10 +556,13 @@ static inline void destroy_rcu_head_on_stack(struct rcu_head *head)
 #endif	/* #else !CONFIG_DEBUG_OBJECTS_RCU_HEAD */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_SMP)
 extern int rcu_is_cpu_idle(void);
 #endif /* #if defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_SMP) */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_PROVE_RCU)
@@ -507,7 +571,11 @@ bool rcu_lockdep_current_cpu_online(void);
 static inline bool rcu_lockdep_current_cpu_online(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18
@@ -519,7 +587,11 @@ static inline bool rcu_lockdep_current_cpu_online(void)
 static inline void rcu_lock_acquire(struct lockdep_map *map)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_acquire(map, 0, 0, 2, 1, NULL, _THIS_IP_);
+=======
+	lock_acquire(map, 0, 0, 2, 0, NULL, _THIS_IP_);
+>>>>>>> v3.18
 =======
 	lock_acquire(map, 0, 0, 2, 0, NULL, _THIS_IP_);
 >>>>>>> v3.18
@@ -533,6 +605,7 @@ static inline void rcu_lock_release(struct lockdep_map *map)
 extern struct lockdep_map rcu_lock_map;
 extern struct lockdep_map rcu_bh_lock_map;
 extern struct lockdep_map rcu_sched_lock_map;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int debug_lockdep_rcu_enabled(void);
 
@@ -573,11 +646,16 @@ static inline int rcu_read_lock_held(void)
  */
 extern int rcu_read_lock_bh_held(void);
 =======
+=======
+>>>>>>> v3.18
 extern struct lockdep_map rcu_callback_map;
 int debug_lockdep_rcu_enabled(void);
 
 int rcu_read_lock_held(void);
 int rcu_read_lock_bh_held(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -619,7 +697,11 @@ static inline int rcu_read_lock_sched_held(void)
 	if (!debug_lockdep_rcu_enabled())
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rcu_is_cpu_idle())
+=======
+	if (!rcu_is_watching())
+>>>>>>> v3.18
 =======
 	if (!rcu_is_watching())
 >>>>>>> v3.18
@@ -669,8 +751,11 @@ static inline int rcu_read_lock_sched_held(void)
 #ifdef CONFIG_PROVE_RCU
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int rcu_my_thread_group_empty(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -704,11 +789,17 @@ static inline void rcu_preempt_sleep_check(void)
 		rcu_preempt_sleep_check();				\
 		rcu_lockdep_assert(!lock_is_held(&rcu_bh_lock_map),	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   "Illegal context switch in RCU-bh"	\
 				   " read-side critical section");	\
 		rcu_lockdep_assert(!lock_is_held(&rcu_sched_lock_map),	\
 				   "Illegal context switch in RCU-sched"\
 				   " read-side critical section");	\
+=======
+				   "Illegal context switch in RCU-bh read-side critical section"); \
+		rcu_lockdep_assert(!lock_is_held(&rcu_sched_lock_map),	\
+				   "Illegal context switch in RCU-sched read-side critical section"); \
+>>>>>>> v3.18
 =======
 				   "Illegal context switch in RCU-bh read-side critical section"); \
 		rcu_lockdep_assert(!lock_is_held(&rcu_sched_lock_map),	\
@@ -740,6 +831,7 @@ static inline void rcu_preempt_sleep_check(void)
 #endif /* #else #ifdef __CHECKER__ */
 
 #define __rcu_access_pointer(p, space) \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	({ \
 		typeof(*p) *_________p1 = (typeof(*p)*__force )ACCESS_ONCE(p); \
@@ -785,6 +877,8 @@ static inline void rcu_preempt_sleep_check(void)
 	} while (0)
 
 =======
+=======
+>>>>>>> v3.18
 ({ \
 	typeof(*p) *_________p1 = (typeof(*p) *__force)ACCESS_ONCE(p); \
 	rcu_dereference_sparse(p, space); \
@@ -873,6 +967,9 @@ static inline void rcu_preempt_sleep_check(void)
  * other macros that it invokes.
  */
 #define rcu_assign_pointer(p, v) smp_store_release(&p, RCU_INITIALIZER(v))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1077,6 +1174,7 @@ static inline void rcu_preempt_sleep_check(void)
  * But if you want the full story, read on!
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * In non-preemptible RCU implementations (TREE_RCU and TINY_RCU), it
  * is illegal to block while in an RCU read-side critical section.  In
  * preemptible RCU implementations (TREE_PREEMPT_RCU and TINY_PREEMPT_RCU)
@@ -1087,6 +1185,8 @@ static inline void rcu_preempt_sleep_check(void)
  * block, but only when acquiring spinlocks that are subject to priority
  * inheritance.
 =======
+=======
+>>>>>>> v3.18
  * In non-preemptible RCU implementations (TREE_RCU and TINY_RCU),
  * it is illegal to block while in an RCU read-side critical section.
  * In preemptible RCU implementations (TREE_PREEMPT_RCU) in CONFIG_PREEMPT
@@ -1095,6 +1195,9 @@ static inline void rcu_preempt_sleep_check(void)
  * implementations in real-time (with -rt patchset) kernel builds, RCU
  * read-side critical sections may be preempted and they may also block, but
  * only when acquiring spinlocks that are subject to priority inheritance.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline void rcu_read_lock(void)
@@ -1103,7 +1206,11 @@ static inline void rcu_read_lock(void)
 	__acquire(RCU);
 	rcu_lock_acquire(&rcu_lock_map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_lockdep_assert(!rcu_is_cpu_idle(),
+=======
+	rcu_lockdep_assert(rcu_is_watching(),
+>>>>>>> v3.18
 =======
 	rcu_lockdep_assert(rcu_is_watching(),
 >>>>>>> v3.18
@@ -1124,7 +1231,10 @@ static inline void rcu_read_lock(void)
  * rcu_read_unlock() - marks the end of an RCU read-side critical section.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * In most situations, rcu_read_unlock() is immune from deadlock.
  * However, in kernels built with CONFIG_RCU_BOOST, rcu_read_unlock()
  * is responsible for deboosting, which it does via rt_mutex_unlock().
@@ -1153,13 +1263,20 @@ static inline void rcu_read_lock(void)
  * developers willing to keep abreast of the set of locks acquired by
  * rt_mutex_unlock().
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * See rcu_read_lock() for more information.
  */
 static inline void rcu_read_unlock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_lockdep_assert(!rcu_is_cpu_idle(),
+=======
+	rcu_lockdep_assert(rcu_is_watching(),
+>>>>>>> v3.18
 =======
 	rcu_lockdep_assert(rcu_is_watching(),
 >>>>>>> v3.18
@@ -1192,7 +1309,11 @@ static inline void rcu_read_lock_bh(void)
 	__acquire(RCU_BH);
 	rcu_lock_acquire(&rcu_bh_lock_map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_lockdep_assert(!rcu_is_cpu_idle(),
+=======
+	rcu_lockdep_assert(rcu_is_watching(),
+>>>>>>> v3.18
 =======
 	rcu_lockdep_assert(rcu_is_watching(),
 >>>>>>> v3.18
@@ -1207,7 +1328,11 @@ static inline void rcu_read_lock_bh(void)
 static inline void rcu_read_unlock_bh(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_lockdep_assert(!rcu_is_cpu_idle(),
+=======
+	rcu_lockdep_assert(rcu_is_watching(),
+>>>>>>> v3.18
 =======
 	rcu_lockdep_assert(rcu_is_watching(),
 >>>>>>> v3.18
@@ -1236,7 +1361,11 @@ static inline void rcu_read_lock_sched(void)
 	__acquire(RCU_SCHED);
 	rcu_lock_acquire(&rcu_sched_lock_map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_lockdep_assert(!rcu_is_cpu_idle(),
+=======
+	rcu_lockdep_assert(rcu_is_watching(),
+>>>>>>> v3.18
 =======
 	rcu_lockdep_assert(rcu_is_watching(),
 >>>>>>> v3.18
@@ -1258,7 +1387,11 @@ static inline notrace void rcu_read_lock_sched_notrace(void)
 static inline void rcu_read_unlock_sched(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_lockdep_assert(!rcu_is_cpu_idle(),
+=======
+	rcu_lockdep_assert(rcu_is_watching(),
+>>>>>>> v3.18
 =======
 	rcu_lockdep_assert(rcu_is_watching(),
 >>>>>>> v3.18
@@ -1276,6 +1409,7 @@ static inline notrace void rcu_read_unlock_sched_notrace(void)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * rcu_assign_pointer() - assign to RCU-protected pointer
  * @p: pointer to assign to
@@ -1303,6 +1437,8 @@ static inline notrace void rcu_read_unlock_sched_notrace(void)
 	__rcu_assign_pointer((p), (v), __rcu)
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * RCU_INIT_POINTER() - initialize an RCU protected pointer
@@ -1336,11 +1472,14 @@ static inline notrace void rcu_read_unlock_sched_notrace(void)
  * external-to-structure pointer -after- you have completely initialized
  * the reader-accessible portions of the linked structure.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define RCU_INIT_POINTER(p, v) \
 	do { \
 		p = (typeof(*v) __force __rcu *)(v); \
 =======
+=======
+>>>>>>> v3.18
  *
  * Note that unlike rcu_assign_pointer(), RCU_INIT_POINTER() provides no
  * ordering guarantees for either the CPU or the compiler.
@@ -1348,6 +1487,9 @@ static inline notrace void rcu_read_unlock_sched_notrace(void)
 #define RCU_INIT_POINTER(p, v) \
 	do { \
 		p = RCU_INITIALIZER(v); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (0)
 
@@ -1358,7 +1500,11 @@ static inline notrace void rcu_read_unlock_sched_notrace(void)
  */
 #define RCU_POINTER_INITIALIZER(p, v) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.p = (typeof(*v) __force __rcu *)(v)
+=======
+		.p = RCU_INITIALIZER(v)
+>>>>>>> v3.18
 =======
 		.p = RCU_INITIALIZER(v)
 >>>>>>> v3.18
@@ -1408,12 +1554,15 @@ static inline notrace void rcu_read_unlock_sched_notrace(void)
 	__kfree_rcu(&((ptr)->rcu_head), offsetof(typeof(*(ptr)), rcu_head))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_RCU_NOCB_CPU
 extern bool rcu_is_nocb_cpu(int cpu);
 #else
 static inline bool rcu_is_nocb_cpu(int cpu) { return false; }
 #endif /* #else #ifdef CONFIG_RCU_NOCB_CPU */
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_TINY_RCU) || defined(CONFIG_RCU_NOCB_CPU_ALL)
 static inline int rcu_needs_cpu(int cpu, unsigned long *delta_jiffies)
 {
@@ -1447,6 +1596,9 @@ static inline void rcu_sysidle_force_exit(void)
 }
 
 #endif /* #else #ifdef CONFIG_NO_HZ_FULL_SYSIDLE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

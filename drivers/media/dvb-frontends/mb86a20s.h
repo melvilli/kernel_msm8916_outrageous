@@ -2,7 +2,11 @@
  *   Fujitsu mb86a20s driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) 2010 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *   Copyright (C) 2010 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *   Copyright (C) 2010 Mauro Carvalho Chehab
 >>>>>>> v3.18

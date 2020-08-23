@@ -40,7 +40,10 @@ MODULE_PARM_DESC(ts_debug,"enable debug messages [ts]");
 
 /* ------------------------------------------------------------------ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int buffer_activate(struct saa7134_dev *dev,
@@ -49,6 +52,7 @@ static int buffer_activate(struct saa7134_dev *dev,
 {
 
 	dprintk("buffer_activate [%p]",buf);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buf->vb.state = VIDEOBUF_ACTIVE;
 	buf->top_seen = 0;
@@ -60,6 +64,8 @@ static int buffer_activate(struct saa7134_dev *dev,
 		saa_writel(SAA7134_RS_BA1(5),saa7134_buffer_base(buf));
 		saa_writel(SAA7134_RS_BA2(5),saa7134_buffer_base(next));
 =======
+=======
+>>>>>>> v3.18
 	buf->top_seen = 0;
 
 	if (!dev->ts_started)
@@ -72,12 +78,19 @@ static int buffer_activate(struct saa7134_dev *dev,
 		saa_writel(SAA7134_RS_BA1(5),saa7134_buffer_base(buf));
 		saa_writel(SAA7134_RS_BA2(5),saa7134_buffer_base(next));
 		dev->ts_field = V4L2_FIELD_BOTTOM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		dprintk("- [bottom]  buf=%p next=%p\n",buf,next);
 		saa_writel(SAA7134_RS_BA1(5),saa7134_buffer_base(next));
 		saa_writel(SAA7134_RS_BA2(5),saa7134_buffer_base(buf));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev->ts_field = V4L2_FIELD_TOP;
+>>>>>>> v3.18
 =======
 		dev->ts_field = V4L2_FIELD_TOP;
 >>>>>>> v3.18
@@ -95,6 +108,7 @@ static int buffer_activate(struct saa7134_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int buffer_prepare(struct videobuf_queue *q, struct videobuf_buffer *vb,
 		enum v4l2_field field)
 {
@@ -105,6 +119,8 @@ static int buffer_prepare(struct videobuf_queue *q, struct videobuf_buffer *vb,
 
 	dprintk("buffer_prepare [%p,%s]\n",buf,v4l2_field_names[field]);
 =======
+=======
+>>>>>>> v3.18
 int saa7134_ts_buffer_init(struct vb2_buffer *vb2)
 {
 	struct saa7134_dmaqueue *dmaq = vb2->vb2_queue->drv_priv;
@@ -127,12 +143,16 @@ int saa7134_ts_buffer_prepare(struct vb2_buffer *vb2)
 	int ret;
 
 	dprintk("buffer_prepare [%p]\n", buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	llength = TS_PACKET_SIZE;
 	lines = dev->ts.nr_packets;
 
 	size = lines * llength;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (0 != buf->vb.baddr  &&  buf->vb.bsize < size)
 		return -EINVAL;
@@ -211,6 +231,8 @@ struct videobuf_queue_ops saa7134_ts_qops = {
 	.buf_queue    = buffer_queue,
 	.buf_release  = buffer_release,
 =======
+=======
+>>>>>>> v3.18
 	if (vb2_plane_size(vb2, 0) < size)
 		return -EINVAL;
 
@@ -301,6 +323,9 @@ struct vb2_ops saa7134_ts_qops = {
 	.wait_prepare	= vb2_ops_wait_prepare,
 	.wait_finish	= vb2_ops_wait_finish,
 	.stop_streaming = saa7134_ts_stop_streaming,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(saa7134_ts_qops);
@@ -338,8 +363,13 @@ int saa7134_ts_init1(struct saa7134_dev *dev)
 	if (tsbufs < 2)
 		tsbufs = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tsbufs > VB2_MAX_FRAME)
 		tsbufs = VB2_MAX_FRAME;
+=======
+	if (tsbufs > VIDEO_MAX_FRAME)
+		tsbufs = VIDEO_MAX_FRAME;
+>>>>>>> v3.18
 =======
 	if (tsbufs > VIDEO_MAX_FRAME)
 		tsbufs = VIDEO_MAX_FRAME;
@@ -359,7 +389,11 @@ int saa7134_ts_init1(struct saa7134_dev *dev)
 	dev->ts_q.need_two         = 1;
 	dev->ts_started            = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saa7134_pgtable_alloc(dev->pci,&dev->ts.pt_ts);
+=======
+	saa7134_pgtable_alloc(dev->pci, &dev->ts_q.pt);
+>>>>>>> v3.18
 =======
 	saa7134_pgtable_alloc(dev->pci, &dev->ts_q.pt);
 >>>>>>> v3.18
@@ -376,7 +410,12 @@ int saa7134_ts_stop(struct saa7134_dev *dev)
 	dprintk("TS stop\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!dev->ts_started);
+=======
+	if (!dev->ts_started)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (!dev->ts_started)
 		return 0;
@@ -402,7 +441,12 @@ int saa7134_ts_start(struct saa7134_dev *dev)
 	dprintk("TS start\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->ts_started);
+=======
+	if (WARN_ON(dev->ts_started))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(dev->ts_started))
 		return 0;
@@ -419,7 +463,11 @@ int saa7134_ts_start(struct saa7134_dev *dev)
 	saa_writel(SAA7134_RS_CONTROL(5), SAA7134_RS_CONTROL_BURST_16 |
 					  SAA7134_RS_CONTROL_ME |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  (dev->ts.pt_ts.dma >> 12));
+=======
+					  (dev->ts_q.pt.dma >> 12));
+>>>>>>> v3.18
 =======
 					  (dev->ts_q.pt.dma >> 12));
 >>>>>>> v3.18
@@ -457,7 +505,11 @@ int saa7134_ts_start(struct saa7134_dev *dev)
 int saa7134_ts_fini(struct saa7134_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saa7134_pgtable_free(dev->pci,&dev->ts.pt_ts);
+=======
+	saa7134_pgtable_free(dev->pci, &dev->ts_q.pt);
+>>>>>>> v3.18
 =======
 	saa7134_pgtable_free(dev->pci, &dev->ts_q.pt);
 >>>>>>> v3.18
@@ -471,8 +523,13 @@ void saa7134_irq_ts_done(struct saa7134_dev *dev, unsigned long status)
 	spin_lock(&dev->slock);
 	if (dev->ts_q.curr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		field = dev->ts_q.curr->vb.field;
 		if (field == V4L2_FIELD_TOP) {
+=======
+		field = dev->ts_field;
+		if (field != V4L2_FIELD_TOP) {
+>>>>>>> v3.18
 =======
 		field = dev->ts_field;
 		if (field != V4L2_FIELD_TOP) {
@@ -484,7 +541,11 @@ void saa7134_irq_ts_done(struct saa7134_dev *dev, unsigned long status)
 				goto done;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		saa7134_buffer_finish(dev,&dev->ts_q,VIDEOBUF_DONE);
+=======
+		saa7134_buffer_finish(dev, &dev->ts_q, VB2_BUF_STATE_DONE);
+>>>>>>> v3.18
 =======
 		saa7134_buffer_finish(dev, &dev->ts_q, VB2_BUF_STATE_DONE);
 >>>>>>> v3.18
@@ -495,6 +556,7 @@ void saa7134_irq_ts_done(struct saa7134_dev *dev, unsigned long status)
 	spin_unlock(&dev->slock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ----------------------------------------------------------- */
 /*
@@ -502,5 +564,7 @@ void saa7134_irq_ts_done(struct saa7134_dev *dev, unsigned long status)
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

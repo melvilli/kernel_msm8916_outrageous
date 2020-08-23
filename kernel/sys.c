@@ -17,7 +17,10 @@
 #include <linux/resource.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kexec.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/workqueue.h>
@@ -46,9 +49,12 @@
 #include <linux/version.h>
 #include <linux/ctype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mm.h>
 #include <linux/mempolicy.h>
 #include <linux/sched.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -73,6 +79,7 @@
 
 #ifndef SET_UNALIGN_CTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define SET_UNALIGN_CTL(a,b)	(-EINVAL)
 #endif
 #ifndef GET_UNALIGN_CTL
@@ -96,6 +103,8 @@
 #ifndef SET_ENDIAN
 # define SET_ENDIAN(a,b)	(-EINVAL)
 =======
+=======
+>>>>>>> v3.18
 # define SET_UNALIGN_CTL(a, b)	(-EINVAL)
 #endif
 #ifndef GET_UNALIGN_CTL
@@ -118,6 +127,9 @@
 #endif
 #ifndef SET_ENDIAN
 # define SET_ENDIAN(a, b)	(-EINVAL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifndef GET_TSC_CTL
@@ -151,6 +163,7 @@ EXPORT_SYMBOL(fs_overflowgid);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this indicates whether you can reboot with ctrl-alt-del: the default is yes
  */
 
@@ -165,6 +178,8 @@ EXPORT_SYMBOL(cad_pid);
 void (*pm_power_off_prepare)(void);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Returns true if current's euid is same as p's uid or euid,
@@ -227,20 +242,27 @@ SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
 	/* normalize: avoid signed division (rounding problems) */
 	error = -ESRCH;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (niceval < -20)
 		niceval = -20;
 	if (niceval > 19)
 		niceval = 19;
 =======
+=======
+>>>>>>> v3.18
 	if (niceval < MIN_NICE)
 		niceval = MIN_NICE;
 	if (niceval > MAX_NICE)
 		niceval = MAX_NICE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rcu_read_lock();
 	read_lock(&tasklist_lock);
 	switch (which) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case PRIO_PROCESS:
 			if (who)
@@ -276,6 +298,8 @@ SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
 				free_uid(user);		/* For find_user() */
 			break;
 =======
+=======
+>>>>>>> v3.18
 	case PRIO_PROCESS:
 		if (who)
 			p = find_task_by_vpid(who);
@@ -310,6 +334,9 @@ SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
 		if (!uid_eq(uid, cred->uid))
 			free_uid(user);		/* For find_user() */
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out_unlock:
@@ -340,6 +367,7 @@ SYSCALL_DEFINE2(getpriority, int, which, int, who)
 	rcu_read_lock();
 	read_lock(&tasklist_lock);
 	switch (which) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case PRIO_PROCESS:
 			if (who)
@@ -383,6 +411,8 @@ SYSCALL_DEFINE2(getpriority, int, which, int, who)
 				free_uid(user);		/* for find_user() */
 			break;
 =======
+=======
+>>>>>>> v3.18
 	case PRIO_PROCESS:
 		if (who)
 			p = find_task_by_vpid(who);
@@ -425,6 +455,9 @@ SYSCALL_DEFINE2(getpriority, int, which, int, who)
 		if (!uid_eq(uid, cred->uid))
 			free_uid(user);		/* for find_user() */
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out_unlock:
@@ -434,6 +467,7 @@ out_unlock:
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  *	emergency_restart - reboot the system
@@ -697,6 +731,8 @@ void ctrl_alt_del(void)
 	
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Unprivileged users may change the real gid to the effective gid
  * or vice versa.  (BSD-style)
@@ -711,7 +747,11 @@ void ctrl_alt_del(void)
  * The general idea is that a program which uses just setregid() will be
  * 100% compatible with BSD.  A program which uses just setgid() will be
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 100% compatible with POSIX with saved IDs. 
+=======
+ * 100% compatible with POSIX with saved IDs.
+>>>>>>> v3.18
 =======
  * 100% compatible with POSIX with saved IDs.
 >>>>>>> v3.18
@@ -745,7 +785,11 @@ SYSCALL_DEFINE2(setregid, gid_t, rgid, gid_t, egid)
 		if (gid_eq(old->gid, krgid) ||
 		    gid_eq(old->egid, krgid) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    nsown_capable(CAP_SETGID))
+=======
+		    ns_capable(old->user_ns, CAP_SETGID))
+>>>>>>> v3.18
 =======
 		    ns_capable(old->user_ns, CAP_SETGID))
 >>>>>>> v3.18
@@ -758,7 +802,11 @@ SYSCALL_DEFINE2(setregid, gid_t, rgid, gid_t, egid)
 		    gid_eq(old->egid, kegid) ||
 		    gid_eq(old->sgid, kegid) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    nsown_capable(CAP_SETGID))
+=======
+		    ns_capable(old->user_ns, CAP_SETGID))
+>>>>>>> v3.18
 =======
 		    ns_capable(old->user_ns, CAP_SETGID))
 >>>>>>> v3.18
@@ -781,7 +829,11 @@ error:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * setgid() is implemented like SysV w/ SAVED_IDS 
+=======
+ * setgid() is implemented like SysV w/ SAVED_IDS
+>>>>>>> v3.18
 =======
  * setgid() is implemented like SysV w/ SAVED_IDS
 >>>>>>> v3.18
@@ -807,7 +859,11 @@ SYSCALL_DEFINE1(setgid, gid_t, gid)
 
 	retval = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nsown_capable(CAP_SETGID))
+=======
+	if (ns_capable(old->user_ns, CAP_SETGID))
+>>>>>>> v3.18
 =======
 	if (ns_capable(old->user_ns, CAP_SETGID))
 >>>>>>> v3.18
@@ -867,7 +923,11 @@ static int set_user(struct cred *new)
  * The general idea is that a program which uses just setreuid() will be
  * 100% compatible with BSD.  A program which uses just setuid() will be
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 100% compatible with POSIX with saved IDs. 
+=======
+ * 100% compatible with POSIX with saved IDs.
+>>>>>>> v3.18
 =======
  * 100% compatible with POSIX with saved IDs.
 >>>>>>> v3.18
@@ -899,7 +959,11 @@ SYSCALL_DEFINE2(setreuid, uid_t, ruid, uid_t, euid)
 		if (!uid_eq(old->uid, kruid) &&
 		    !uid_eq(old->euid, kruid) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    !nsown_capable(CAP_SETUID))
+=======
+		    !ns_capable(old->user_ns, CAP_SETUID))
+>>>>>>> v3.18
 =======
 		    !ns_capable(old->user_ns, CAP_SETUID))
 >>>>>>> v3.18
@@ -912,7 +976,11 @@ SYSCALL_DEFINE2(setreuid, uid_t, ruid, uid_t, euid)
 		    !uid_eq(old->euid, keuid) &&
 		    !uid_eq(old->suid, keuid) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    !nsown_capable(CAP_SETUID))
+=======
+		    !ns_capable(old->user_ns, CAP_SETUID))
+>>>>>>> v3.18
 =======
 		    !ns_capable(old->user_ns, CAP_SETUID))
 >>>>>>> v3.18
@@ -940,6 +1008,7 @@ error:
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 /*
  * setuid() is implemented like SysV with SAVED_IDS 
@@ -947,19 +1016,28 @@ error:
  * Note that SAVED_ID's is deficient in that a setuid root program
  * like sendmail, for example, cannot set its uid to be a normal 
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * setuid() is implemented like SysV with SAVED_IDS
  *
  * Note that SAVED_ID's is deficient in that a setuid root program
  * like sendmail, for example, cannot set its uid to be a normal
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * user and then switch back, because if you're root, setuid() sets
  * the saved uid too.  If you don't like this, blame the bright people
  * in the POSIX committee and/or USG.  Note that the BSD-style setreuid()
  * will allow a root program to temporarily drop privileges and be able to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * regain them by swapping the real and effective uid.  
+=======
+ * regain them by swapping the real and effective uid.
+>>>>>>> v3.18
 =======
  * regain them by swapping the real and effective uid.
 >>>>>>> v3.18
@@ -983,7 +1061,11 @@ SYSCALL_DEFINE1(setuid, uid_t, uid)
 
 	retval = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nsown_capable(CAP_SETUID)) {
+=======
+	if (ns_capable(old->user_ns, CAP_SETUID)) {
+>>>>>>> v3.18
 =======
 	if (ns_capable(old->user_ns, CAP_SETUID)) {
 >>>>>>> v3.18
@@ -1044,7 +1126,11 @@ SYSCALL_DEFINE3(setresuid, uid_t, ruid, uid_t, euid, uid_t, suid)
 
 	retval = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nsown_capable(CAP_SETUID)) {
+=======
+	if (!ns_capable(old->user_ns, CAP_SETUID)) {
+>>>>>>> v3.18
 =======
 	if (!ns_capable(old->user_ns, CAP_SETUID)) {
 >>>>>>> v3.18
@@ -1095,17 +1181,23 @@ SYSCALL_DEFINE3(getresuid, uid_t __user *, ruidp, uid_t __user *, euidp, uid_t _
 	suid = from_kuid_munged(cred->user_ns, cred->suid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(retval   = put_user(ruid, ruidp)) &&
 	    !(retval   = put_user(euid, euidp)))
 		retval = put_user(suid, suidp);
 
 =======
+=======
+>>>>>>> v3.18
 	retval = put_user(ruid, ruidp);
 	if (!retval) {
 		retval = put_user(euid, euidp);
 		if (!retval)
 			return put_user(suid, suidp);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -1139,7 +1231,11 @@ SYSCALL_DEFINE3(setresgid, gid_t, rgid, gid_t, egid, gid_t, sgid)
 
 	retval = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nsown_capable(CAP_SETGID)) {
+=======
+	if (!ns_capable(old->user_ns, CAP_SETGID)) {
+>>>>>>> v3.18
 =======
 	if (!ns_capable(old->user_ns, CAP_SETGID)) {
 >>>>>>> v3.18
@@ -1180,16 +1276,22 @@ SYSCALL_DEFINE3(getresgid, gid_t __user *, rgidp, gid_t __user *, egidp, gid_t _
 	sgid = from_kgid_munged(cred->user_ns, cred->sgid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(retval   = put_user(rgid, rgidp)) &&
 	    !(retval   = put_user(egid, egidp)))
 		retval = put_user(sgid, sgidp);
 =======
+=======
+>>>>>>> v3.18
 	retval = put_user(rgid, rgidp);
 	if (!retval) {
 		retval = put_user(egid, egidp);
 		if (!retval)
 			retval = put_user(sgid, sgidp);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return retval;
@@ -1223,7 +1325,11 @@ SYSCALL_DEFINE1(setfsuid, uid_t, uid)
 	if (uid_eq(kuid, old->uid)  || uid_eq(kuid, old->euid)  ||
 	    uid_eq(kuid, old->suid) || uid_eq(kuid, old->fsuid) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nsown_capable(CAP_SETUID)) {
+=======
+	    ns_capable(old->user_ns, CAP_SETUID)) {
+>>>>>>> v3.18
 =======
 	    ns_capable(old->user_ns, CAP_SETUID)) {
 >>>>>>> v3.18
@@ -1266,7 +1372,11 @@ SYSCALL_DEFINE1(setfsgid, gid_t, gid)
 	if (gid_eq(kgid, old->gid)  || gid_eq(kgid, old->egid)  ||
 	    gid_eq(kgid, old->sgid) || gid_eq(kgid, old->fsgid) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nsown_capable(CAP_SETGID)) {
+=======
+	    ns_capable(old->user_ns, CAP_SETGID)) {
+>>>>>>> v3.18
 =======
 	    ns_capable(old->user_ns, CAP_SETGID)) {
 >>>>>>> v3.18
@@ -1350,11 +1460,17 @@ void do_sys_times(struct tms *tms)
 	cputime_t tgutime, tgstime, cutime, cstime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&current->sighand->siglock);
 	thread_group_cputime_adjusted(current, &tgutime, &tgstime);
 	cutime = current->signal->cutime;
 	cstime = current->signal->cstime;
 	spin_unlock_irq(&current->sighand->siglock);
+=======
+	thread_group_cputime_adjusted(current, &tgutime, &tgstime);
+	cutime = current->signal->cutime;
+	cstime = current->signal->cstime;
+>>>>>>> v3.18
 =======
 	thread_group_cputime_adjusted(current, &tgutime, &tgstime);
 	cutime = current->signal->cutime;
@@ -1389,8 +1505,12 @@ SYSCALL_DEFINE1(times, struct tms __user *, tbuf)
  * can't send a signal to a process owned by another.  -TYT, 12/12/91
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Auch. Had to add the 'did_exec' flag to conform completely to POSIX.
  * LBT 04.03.94
+=======
+ * !PF_FORKNOEXEC check to conform completely to POSIX.
+>>>>>>> v3.18
 =======
  * !PF_FORKNOEXEC check to conform completely to POSIX.
 >>>>>>> v3.18
@@ -1430,7 +1550,11 @@ SYSCALL_DEFINE2(setpgid, pid_t, pid, pid_t, pgid)
 			goto out;
 		err = -EACCES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (p->did_exec)
+=======
+		if (!(p->flags & PF_FORKNOEXEC))
+>>>>>>> v3.18
 =======
 		if (!(p->flags & PF_FORKNOEXEC))
 >>>>>>> v3.18
@@ -1536,7 +1660,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void set_special_pids(struct pid *pid)
 {
 	struct task_struct *curr = current->group_leader;
@@ -1548,6 +1675,9 @@ static void set_special_pids(struct pid *pid)
 		change_pid(curr, PIDTYPE_PGID, pid);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SYSCALL_DEFINE0(setsid)
 {
@@ -1569,7 +1699,11 @@ SYSCALL_DEFINE0(setsid)
 
 	group_leader->signal->leader = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__set_special_pids(sid);
+=======
+	set_special_pids(sid);
+>>>>>>> v3.18
 =======
 	set_special_pids(sid);
 >>>>>>> v3.18
@@ -1794,7 +1928,10 @@ SYSCALL_DEFINE2(getrlimit, unsigned int, resource, struct rlimit __user *, rlim)
  *	Back compatibility for getrlimit. Needed for some apps.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 SYSCALL_DEFINE2(old_getrlimit, unsigned int, resource,
@@ -1812,7 +1949,11 @@ SYSCALL_DEFINE2(old_getrlimit, unsigned int, resource,
 	if (x.rlim_max > 0x7FFFFFFF)
 		x.rlim_max = 0x7FFFFFFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return copy_to_user(rlim, &x, sizeof(x))?-EFAULT:0;
+=======
+	return copy_to_user(rlim, &x, sizeof(x)) ? -EFAULT : 0;
+>>>>>>> v3.18
 =======
 	return copy_to_user(rlim, &x, sizeof(x)) ? -EFAULT : 0;
 >>>>>>> v3.18
@@ -2044,7 +2185,11 @@ static void k_getrusage(struct task_struct *p, int who, struct rusage *r)
 	unsigned long maxrss = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset((char *) r, 0, sizeof *r);
+=======
+	memset((char *)r, 0, sizeof (*r));
+>>>>>>> v3.18
 =======
 	memset((char *)r, 0, sizeof (*r));
 >>>>>>> v3.18
@@ -2061,6 +2206,7 @@ static void k_getrusage(struct task_struct *p, int who, struct rusage *r)
 		return;
 
 	switch (who) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case RUSAGE_BOTH:
 		case RUSAGE_CHILDREN:
@@ -2099,6 +2245,8 @@ static void k_getrusage(struct task_struct *p, int who, struct rusage *r)
 		default:
 			BUG();
 =======
+=======
+>>>>>>> v3.18
 	case RUSAGE_BOTH:
 	case RUSAGE_CHILDREN:
 		utime = p->signal->cutime;
@@ -2134,6 +2282,9 @@ static void k_getrusage(struct task_struct *p, int who, struct rusage *r)
 
 	default:
 		BUG();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	unlock_task_sighand(p, &flags);
@@ -2145,6 +2296,10 @@ out:
 	if (who != RUSAGE_CHILDREN) {
 		struct mm_struct *mm = get_task_mm(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2160,6 +2315,10 @@ int getrusage(struct task_struct *p, int who, struct rusage __user *ru)
 {
 	struct rusage r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2196,7 +2355,11 @@ SYSCALL_DEFINE1(umask, int, mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int prctl_set_mm_exe_file(struct mm_struct *mm, unsigned int fd)
+=======
+static int prctl_set_mm_exe_file_locked(struct mm_struct *mm, unsigned int fd)
+>>>>>>> v3.18
 =======
 static int prctl_set_mm_exe_file_locked(struct mm_struct *mm, unsigned int fd)
 >>>>>>> v3.18
@@ -2206,6 +2369,11 @@ static int prctl_set_mm_exe_file_locked(struct mm_struct *mm, unsigned int fd)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	VM_BUG_ON_MM(!rwsem_is_locked(&mm->mmap_sem), mm);
+
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_MM(!rwsem_is_locked(&mm->mmap_sem), mm);
 
@@ -2231,8 +2399,11 @@ static int prctl_set_mm_exe_file_locked(struct mm_struct *mm, unsigned int fd)
 		goto exit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	down_write(&mm->mmap_sem);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -2247,7 +2418,11 @@ static int prctl_set_mm_exe_file_locked(struct mm_struct *mm, unsigned int fd)
 			    path_equal(&vma->vm_file->f_path,
 				       &mm->exe_file->f_path))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto exit_unlock;
+=======
+				goto exit;
+>>>>>>> v3.18
 =======
 				goto exit;
 >>>>>>> v3.18
@@ -2262,6 +2437,7 @@ static int prctl_set_mm_exe_file_locked(struct mm_struct *mm, unsigned int fd)
 	err = -EPERM;
 	if (test_and_set_bit(MMF_EXE_FILE_CHANGED, &mm->flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_unlock;
 
 	err = 0;
@@ -2270,10 +2446,15 @@ exit_unlock:
 	up_write(&mm->mmap_sem);
 
 =======
+=======
+>>>>>>> v3.18
 		goto exit;
 
 	err = 0;
 	set_mm_exe_file(mm, exe.file);	/* this grabs a reference to exe.file */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit:
 	fdput(exe);
@@ -2281,11 +2462,14 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int prctl_set_mm(int opt, unsigned long addr,
 			unsigned long arg4, unsigned long arg5)
 {
 	unsigned long rlim = rlimit(RLIMIT_DATA);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CHECKPOINT_RESTORE
 /*
  * WARNING: we don't require any capability here so be very careful
@@ -2470,11 +2654,15 @@ out:
 static int prctl_set_mm(int opt, unsigned long addr,
 			unsigned long arg4, unsigned long arg5)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mm_struct *mm = current->mm;
 	struct vm_area_struct *vma;
 	int error;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (arg5 || (arg4 && opt != PR_SET_MM_AUXV))
 		return -EINVAL;
@@ -2485,6 +2673,8 @@ static int prctl_set_mm(int opt, unsigned long addr,
 	if (opt == PR_SET_MM_EXE_FILE)
 		return prctl_set_mm_exe_file(mm, (unsigned int)addr);
 =======
+=======
+>>>>>>> v3.18
 	if (arg5 || (arg4 && (opt != PR_SET_MM_AUXV &&
 			      opt != PR_SET_MM_MAP &&
 			      opt != PR_SET_MM_MAP_SIZE)))
@@ -2504,6 +2694,9 @@ static int prctl_set_mm(int opt, unsigned long addr,
 		up_write(&mm->mmap_sem);
 		return error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (addr >= TASK_SIZE || addr < mmap_min_addr)
@@ -2533,9 +2726,14 @@ static int prctl_set_mm(int opt, unsigned long addr,
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rlim < RLIM_INFINITY &&
 		    (mm->brk - addr) +
 		    (mm->end_data - mm->start_data) > rlim)
+=======
+		if (check_data_rlimit(rlimit(RLIMIT_DATA), mm->brk, addr,
+				      mm->end_data, mm->start_data))
+>>>>>>> v3.18
 =======
 		if (check_data_rlimit(rlimit(RLIMIT_DATA), mm->brk, addr,
 				      mm->end_data, mm->start_data))
@@ -2550,9 +2748,14 @@ static int prctl_set_mm(int opt, unsigned long addr,
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rlim < RLIM_INFINITY &&
 		    (addr - mm->start_brk) +
 		    (mm->end_data - mm->start_data) > rlim)
+=======
+		if (check_data_rlimit(rlimit(RLIMIT_DATA), addr, mm->start_brk,
+				      mm->end_data, mm->start_data))
+>>>>>>> v3.18
 =======
 		if (check_data_rlimit(rlimit(RLIMIT_DATA), addr, mm->start_brk,
 				      mm->end_data, mm->start_data))
@@ -2642,6 +2845,7 @@ static int prctl_get_tid_address(struct task_struct *me, int __user **tid_addr)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MMU
 static int prctl_update_vma_anon_name(struct vm_area_struct *vma,
@@ -2792,12 +2996,17 @@ static int prctl_set_vma(unsigned long opt, unsigned long start,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 		unsigned long, arg4, unsigned long, arg5)
 {
 	struct task_struct *me = current;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char comm[sizeof(me->comm)];
@@ -2924,6 +3133,7 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 				return -EINVAL;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case PR_SET_TIMERSLACK_PID:
 			if (current->pid != (pid_t)arg3 &&
 					!capable(CAP_SYS_NICE))
@@ -2944,6 +3154,8 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 			put_task_struct(tsk);
 			error = 0;
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -2983,9 +3195,12 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 			return -EINVAL;
 		return task_no_new_privs(current) ? 1 : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PR_SET_VMA:
 		error = prctl_set_vma(arg2, arg3, arg4, arg5);
 =======
+=======
+>>>>>>> v3.18
 	case PR_GET_THP_DISABLE:
 		if (arg2 || arg3 || arg4 || arg5)
 			return -EINVAL;
@@ -3000,6 +3215,9 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 		else
 			me->mm->def_flags &= ~VM_NOHUGEPAGE;
 		up_write(&me->mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -3015,6 +3233,10 @@ SYSCALL_DEFINE3(getcpu, unsigned __user *, cpup, unsigned __user *, nodep,
 	int err = 0;
 	int cpu = raw_smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3025,6 +3247,7 @@ SYSCALL_DEFINE3(getcpu, unsigned __user *, cpup, unsigned __user *, nodep,
 	return err ? -EFAULT : 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 char poweroff_cmd[POWEROFF_CMD_PATH_LEN] = "/sbin/poweroff";
 
@@ -3090,6 +3313,8 @@ EXPORT_SYMBOL_GPL(orderly_poweroff);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * do_sysinfo - fill in sysinfo struct
  * @info: pointer to buffer to fill
@@ -3103,8 +3328,12 @@ static int do_sysinfo(struct sysinfo *info)
 	memset(info, 0, sizeof(struct sysinfo));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&tp);
 	monotonic_to_bootbased(&tp);
+=======
+	get_monotonic_boottime(&tp);
+>>>>>>> v3.18
 =======
 	get_monotonic_boottime(&tp);
 >>>>>>> v3.18
@@ -3201,7 +3430,11 @@ COMPAT_SYSCALL_DEFINE1(sysinfo, struct compat_sysinfo __user *, info)
 	 *  down if needed
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((s.totalram >> 32) || (s.totalswap >> 32)) {
+=======
+	if (upper_32_bits(s.totalram) || upper_32_bits(s.totalswap)) {
+>>>>>>> v3.18
 =======
 	if (upper_32_bits(s.totalram) || upper_32_bits(s.totalswap)) {
 >>>>>>> v3.18

@@ -72,13 +72,19 @@ static unsigned int mpui1510_sleep_save[MPUI1510_SLEEP_SAVE_SIZE];
 static unsigned int mpui1610_sleep_save[MPUI1610_SLEEP_SAVE_SIZE];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP_32K_TIMER
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_OMAP_32K_TIMER
 
 static unsigned short enable_dyn_sleep = 0;
 
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned short enable_dyn_sleep = 1;
@@ -128,6 +134,7 @@ void omap1_pm_idle(void)
 	use_idlect1 = use_idlect1 & ~(1 << 9);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while (enable_dyn_sleep) {
 
@@ -141,6 +148,10 @@ void omap1_pm_idle(void)
 		break;
 	}
 
+=======
+	if (enable_dyn_sleep)
+		do_sleep = 1;
+>>>>>>> v3.18
 =======
 	if (enable_dyn_sleep)
 		do_sleep = 1;
@@ -642,7 +653,10 @@ static irqreturn_t omap_wakeup_interrupt(int irq, void *dev)
 static struct irqaction omap_wakeup_irq = {
 	.name		= "peripheral wakeup",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.handler	= omap_wakeup_interrupt

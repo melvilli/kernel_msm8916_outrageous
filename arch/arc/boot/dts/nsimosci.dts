@@ -21,7 +21,11 @@
 		/* bootargs = "console=tty0 consoleblank=0"; */
 		/* this is for console on serial */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "earlycon=uart8250,mmio32,0xf0000000,115200n8 console=tty0 console=ttyS0,115200n8 consoleblank=0 debug";
+=======
+		bootargs = "earlycon=uart8250,mmio32,0xc0000000,115200n8 console=tty0 console=ttyS0,115200n8 consoleblank=0 debug";
+>>>>>>> v3.18
 =======
 		bootargs = "earlycon=uart8250,mmio32,0xc0000000,115200n8 console=tty0 console=ttyS0,115200n8 consoleblank=0 debug";
 >>>>>>> v3.18
@@ -32,11 +36,14 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memory {
 		device_type = "memory";
 		reg = <0x80000000 0x10000000>;	/* 256M */
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fpga {
@@ -54,9 +61,15 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart0: serial@f0000000 {
 			compatible = "ns8250";
 			reg = <0xf0000000 0x2000>;
+=======
+		uart0: serial@c0000000 {
+			compatible = "ns8250";
+			reg = <0xc0000000 0x2000>;
+>>>>>>> v3.18
 =======
 		uart0: serial@c0000000 {
 			compatible = "ns8250";
@@ -71,6 +84,7 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pgu0: pgu@f9000000 {
 			compatible = "snps,arcpgufb";
 			reg = <0xf9000000 0x400>;
@@ -80,6 +94,8 @@
 			compatible = "snps,arc_ps2";
 			reg = <0xf9000400 0x14>;
 =======
+=======
+>>>>>>> v3.18
 		pgu0: pgu@c9000000 {
 			compatible = "snps,arcpgufb";
 			reg = <0xc9000000 0x400>;
@@ -88,15 +104,24 @@
 		ps2: ps2@c9001000 {
 			compatible = "snps,arc_ps2";
 			reg = <0xc9000400 0x14>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			interrupts = <13>;
 			interrupt-names = "arc_ps2_irq";
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		eth0: ethernet@f0003000 {
 			compatible = "snps,oscilan";
 			reg = <0xf0003000 0x44>;
+=======
+		eth0: ethernet@c0003000 {
+			compatible = "snps,oscilan";
+			reg = <0xc0003000 0x44>;
+>>>>>>> v3.18
 =======
 		eth0: ethernet@c0003000 {
 			compatible = "snps,oscilan";

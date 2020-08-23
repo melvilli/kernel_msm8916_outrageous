@@ -613,8 +613,11 @@ svc_prepare_thread(struct svc_serv *serv, struct svc_pool *pool, int node)
 		goto out_enomem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&rqstp->rq_wait);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	serv->sv_nrthreads++;
@@ -744,7 +747,11 @@ svc_set_num_threads(struct svc_serv *serv, struct svc_pool *pool, int nrservs)
 		__module_get(serv->sv_module);
 		task = kthread_create_on_node(serv->sv_function, rqstp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      node, serv->sv_name);
+=======
+					      node, "%s", serv->sv_name);
+>>>>>>> v3.18
 =======
 					      node, "%s", serv->sv_name);
 >>>>>>> v3.18
@@ -924,9 +931,12 @@ static int __svc_register(struct net *net, const char *progname,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (error < 0)
 		printk(KERN_WARNING "svc: failed to register %sv%u RPC "
 			"service (errno %d).\n", progname, version, -error);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return error;
@@ -948,6 +958,10 @@ int svc_register(const struct svc_serv *serv, struct net *net,
 {
 	struct svc_program	*progp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct svc_version	*vers;
+>>>>>>> v3.18
 =======
 	struct svc_version	*vers;
 >>>>>>> v3.18
@@ -961,7 +975,12 @@ int svc_register(const struct svc_serv *serv, struct net *net,
 	for (progp = serv->sv_program; progp; progp = progp->pg_next) {
 		for (i = 0; i < progp->pg_nvers; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (progp->pg_vers[i] == NULL)
+=======
+			vers = progp->pg_vers[i];
+			if (vers == NULL)
+>>>>>>> v3.18
 =======
 			vers = progp->pg_vers[i];
 			if (vers == NULL)
@@ -975,24 +994,33 @@ int svc_register(const struct svc_serv *serv, struct net *net,
 					port,
 					family,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					progp->pg_vers[i]->vs_hidden?
 						" (but not telling portmap)" : "");
 
 			if (progp->pg_vers[i]->vs_hidden)
 =======
+=======
+>>>>>>> v3.18
 					vers->vs_hidden ?
 					" (but not telling portmap)" : "");
 
 			if (vers->vs_hidden)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 
 			error = __svc_register(net, progp->pg_name, progp->pg_prog,
 						i, family, proto, port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (error < 0)
 				break;
 =======
+=======
+>>>>>>> v3.18
 
 			if (vers->vs_rpcb_optnl) {
 				error = 0;
@@ -1005,6 +1033,9 @@ int svc_register(const struct svc_serv *serv, struct net *net,
 					progp->pg_name, i, -error);
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1119,9 +1150,15 @@ svc_process_common(struct svc_rqst *rqstp, struct kvec *argv, struct kvec *resv)
 
 	/* Will be turned off only in gss privacy case: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rqstp->rq_splice_ok = 1;
 	/* Will be turned off only when NFSv4 Sessions are used */
 	rqstp->rq_usedeferral = 1;
+=======
+	rqstp->rq_splice_ok = true;
+	/* Will be turned off only when NFSv4 Sessions are used */
+	rqstp->rq_usedeferral = true;
+>>>>>>> v3.18
 =======
 	rqstp->rq_splice_ok = true;
 	/* Will be turned off only when NFSv4 Sessions are used */
@@ -1152,8 +1189,11 @@ svc_process_common(struct svc_rqst *rqstp, struct kvec *argv, struct kvec *resv)
 	rqstp->rq_proc = proc = svc_getnl(argv);	/* procedure number */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	progp = serv->sv_program;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (progp = serv->sv_program; progp; progp = progp->pg_next)
@@ -1233,8 +1273,12 @@ svc_process_common(struct svc_rqst *rqstp, struct kvec *argv, struct kvec *resv)
 
 		/* Encode reply */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*statp == rpc_drop_reply ||
 		    rqstp->rq_dropme) {
+=======
+		if (rqstp->rq_dropme) {
+>>>>>>> v3.18
 =======
 		if (rqstp->rq_dropme) {
 >>>>>>> v3.18
@@ -1243,11 +1287,14 @@ svc_process_common(struct svc_rqst *rqstp, struct kvec *argv, struct kvec *resv)
 			goto dropit;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*statp == rpc_autherr_badcred) {
 			if (procp->pc_release)
 				procp->pc_release(rqstp, NULL, rqstp->rq_resp);
 			goto err_bad_auth;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (*statp == rpc_success &&

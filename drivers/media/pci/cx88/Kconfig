@@ -73,9 +73,15 @@ config VIDEO_CX88_DVB
 	  module will be called cx88-dvb.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config VIDEO_CX88_VP3054
 	tristate "VP-3054 Secondary I2C Bus Support"
 	default m
+=======
+config VIDEO_CX88_ENABLE_VP3054
+	bool "VP-3054 Secondary I2C Bus Support"
+	default y
+>>>>>>> v3.18
 =======
 config VIDEO_CX88_ENABLE_VP3054
 	bool "VP-3054 Secondary I2C Bus Support"
@@ -89,12 +95,18 @@ config VIDEO_CX88_ENABLE_VP3054
 	  Secondary I2C bus, such at DNTV Live! DVB-T Pro.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_CX88_VP3054
 	tristate
 	depends on VIDEO_CX88_DVB && VIDEO_CX88_ENABLE_VP3054
 	default y
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VIDEO_CX88_MPEG
 	tristate

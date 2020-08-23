@@ -23,6 +23,10 @@
 #include <linux/shmem_fs.h>
 #include "psb_drv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "blitter.h"
+>>>>>>> v3.18
 =======
 #include "blitter.h"
 >>>>>>> v3.18
@@ -110,12 +114,15 @@ static int psb_gtt_insert(struct drm_device *dev, struct gtt_range *r,
 	/* Write our page entries into the GTT itself */
 	for (i = r->roll; i < r->npage; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]), 0);
 		iowrite32(pte, gtt_slot++);
 	}
 	for (i = 0; i < r->roll; i++) {
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]), 0);
 =======
+=======
+>>>>>>> v3.18
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]),
 				       PSB_MMU_CACHED_MEMORY);
 		iowrite32(pte, gtt_slot++);
@@ -123,6 +130,9 @@ static int psb_gtt_insert(struct drm_device *dev, struct gtt_range *r,
 	for (i = 0; i < r->roll; i++) {
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]),
 				       PSB_MMU_CACHED_MEMORY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iowrite32(pte, gtt_slot++);
 	}
@@ -142,7 +152,11 @@ static int psb_gtt_insert(struct drm_device *dev, struct gtt_range *r,
  *	mutex which the caller must hold.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void psb_gtt_remove(struct drm_device *dev, struct gtt_range *r)
+=======
+void psb_gtt_remove(struct drm_device *dev, struct gtt_range *r)
+>>>>>>> v3.18
 =======
 void psb_gtt_remove(struct drm_device *dev, struct gtt_range *r)
 >>>>>>> v3.18
@@ -156,7 +170,12 @@ void psb_gtt_remove(struct drm_device *dev, struct gtt_range *r)
 
 	gtt_slot = psb_gtt_entry(dev, r);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte = psb_gtt_mask_pte(page_to_pfn(dev_priv->scratch_page), 0);
+=======
+	pte = psb_gtt_mask_pte(page_to_pfn(dev_priv->scratch_page),
+			       PSB_MMU_CACHED_MEMORY);
+>>>>>>> v3.18
 =======
 	pte = psb_gtt_mask_pte(page_to_pfn(dev_priv->scratch_page),
 			       PSB_MMU_CACHED_MEMORY);
@@ -200,12 +219,15 @@ void psb_gtt_roll(struct drm_device *dev, struct gtt_range *r, int roll)
 
 	for (i = r->roll; i < r->npage; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]), 0);
 		iowrite32(pte, gtt_slot++);
 	}
 	for (i = 0; i < r->roll; i++) {
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]), 0);
 =======
+=======
+>>>>>>> v3.18
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]),
 				       PSB_MMU_CACHED_MEMORY);
 		iowrite32(pte, gtt_slot++);
@@ -213,6 +235,9 @@ void psb_gtt_roll(struct drm_device *dev, struct gtt_range *r, int roll)
 	for (i = 0; i < r->roll; i++) {
 		pte = psb_gtt_mask_pte(page_to_pfn(r->pages[i]),
 				       PSB_MMU_CACHED_MEMORY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iowrite32(pte, gtt_slot++);
 	}
@@ -229,6 +254,7 @@ void psb_gtt_roll(struct drm_device *dev, struct gtt_range *r, int roll)
  */
 static int psb_gtt_attach_pages(struct gtt_range *gt)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct inode *inode;
 	struct address_space *mapping;
@@ -262,6 +288,8 @@ err:
 	gt->pages = NULL;
 	return PTR_ERR(p);
 =======
+=======
+>>>>>>> v3.18
 	struct page **pages;
 
 	WARN_ON(gt->pages);
@@ -274,6 +302,9 @@ err:
 	gt->pages = pages;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -289,6 +320,7 @@ err:
 static void psb_gtt_detach_pages(struct gtt_range *gt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	for (i = 0; i < gt->npage; i++) {
 		/* FIXME: do we need to force dirty */
@@ -296,6 +328,9 @@ static void psb_gtt_detach_pages(struct gtt_range *gt)
 		page_cache_release(gt->pages[i]);
 	}
 	kfree(gt->pages);
+=======
+	drm_gem_put_pages(&gt->gem, gt->pages, true, false);
+>>>>>>> v3.18
 =======
 	drm_gem_put_pages(&gt->gem, gt->pages, true, false);
 >>>>>>> v3.18
@@ -318,6 +353,10 @@ int psb_gtt_pin(struct gtt_range *gt)
 	struct drm_device *dev = gt->gem.dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 gpu_base = dev_priv->gtt.gatt_start;
+>>>>>>> v3.18
 =======
 	u32 gpu_base = dev_priv->gtt.gatt_start;
 >>>>>>> v3.18
@@ -334,6 +373,12 @@ int psb_gtt_pin(struct gtt_range *gt)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		psb_mmu_insert_pages(psb_mmu_get_default_pd(dev_priv->mmu),
+				     gt->pages, (gpu_base + gt->offset),
+				     gt->npage, 0, 0, PSB_MMU_CACHED_MEMORY);
+>>>>>>> v3.18
 =======
 		psb_mmu_insert_pages(psb_mmu_get_default_pd(dev_priv->mmu),
 				     gt->pages, (gpu_base + gt->offset),
@@ -362,10 +407,13 @@ void psb_gtt_unpin(struct gtt_range *gt)
 	struct drm_device *dev = gt->gem.dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_lock(&dev_priv->gtt_mutex);
 
 =======
+=======
+>>>>>>> v3.18
 	u32 gpu_base = dev_priv->gtt.gatt_start;
 	int ret;
 
@@ -379,16 +427,22 @@ void psb_gtt_unpin(struct gtt_range *gt)
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WARN_ON(!gt->in_gart);
 
 	gt->in_gart--;
 	if (gt->in_gart == 0 && gt->stolen == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_gtt_remove(dev, gt);
 		psb_gtt_detach_pages(gt);
 	}
 =======
+=======
+>>>>>>> v3.18
 		psb_mmu_remove_pages(psb_mmu_get_default_pd(dev_priv->mmu),
 				     (gpu_base + gt->offset), gt->npage, 0, 0);
 		psb_gtt_remove(dev, gt);
@@ -396,6 +450,9 @@ void psb_gtt_unpin(struct gtt_range *gt)
 	}
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev_priv->gtt_mutex);
 }
@@ -420,7 +477,11 @@ out:
  */
 struct gtt_range *psb_gtt_alloc_range(struct drm_device *dev, int len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						const char *name, int backed)
+=======
+				      const char *name, int backed, u32 align)
+>>>>>>> v3.18
 =======
 				      const char *name, int backed, u32 align)
 >>>>>>> v3.18
@@ -452,7 +513,11 @@ struct gtt_range *psb_gtt_alloc_range(struct drm_device *dev, int len,
 	gt->gem.dev = dev;
 	ret = allocate_resource(dev_priv->gtt_mem, &gt->resource,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				len, start, end, PAGE_SIZE, NULL, NULL);
+=======
+				len, start, end, align, NULL, NULL);
+>>>>>>> v3.18
 =======
 				len, start, end, align, NULL, NULL);
 >>>>>>> v3.18
@@ -619,6 +684,10 @@ int psb_gtt_init(struct drm_device *dev, int resume)
 		dev_priv->vram_addr = ioremap_wc(dev_priv->stolen_base,
 						 stolen_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -638,7 +707,11 @@ int psb_gtt_init(struct drm_device *dev, int resume)
 		num_pages, pfn_base << PAGE_SHIFT, 0);
 	for (i = 0; i < num_pages; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte = psb_gtt_mask_pte(pfn_base + i, 0);
+=======
+		pte = psb_gtt_mask_pte(pfn_base + i, PSB_MMU_CACHED_MEMORY);
+>>>>>>> v3.18
 =======
 		pte = psb_gtt_mask_pte(pfn_base + i, PSB_MMU_CACHED_MEMORY);
 >>>>>>> v3.18
@@ -651,7 +724,11 @@ int psb_gtt_init(struct drm_device *dev, int resume)
 
 	pfn_base = page_to_pfn(dev_priv->scratch_page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte = psb_gtt_mask_pte(pfn_base, 0);
+=======
+	pte = psb_gtt_mask_pte(pfn_base, PSB_MMU_CACHED_MEMORY);
+>>>>>>> v3.18
 =======
 	pte = psb_gtt_mask_pte(pfn_base, PSB_MMU_CACHED_MEMORY);
 >>>>>>> v3.18

@@ -24,6 +24,7 @@
  * or not.  This is necessary for the hotplug code to work reliably.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit write_pen_release(int val)
 {
 	pen_release = val;
@@ -31,18 +32,27 @@ static void __cpuinit write_pen_release(int val)
 	__cpuc_flush_dcache_area((void *)&pen_release, sizeof(pen_release));
 	outer_clean_range(__pa(&pen_release), __pa(&pen_release + 1));
 =======
+=======
+>>>>>>> v3.18
 static void write_pen_release(int val)
 {
 	pen_release = val;
 	smp_wmb();
 	sync_cache_w(&pen_release);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static DEFINE_SPINLOCK(boot_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit versatile_secondary_init(unsigned int cpu)
+=======
+void versatile_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void versatile_secondary_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -61,7 +71,11 @@ void versatile_secondary_init(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit versatile_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+int versatile_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 int versatile_boot_secondary(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18

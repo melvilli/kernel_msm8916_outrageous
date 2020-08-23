@@ -24,7 +24,10 @@
 #include <linux/interrupt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USE_TIMER
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MV_XOR_POOL_SIZE		PAGE_SIZE
@@ -32,6 +35,7 @@
 #define MV_XOR_THRESHOLD		1
 #define MV_XOR_MAX_CHANNELS             2
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define XOR_OPERATION_MODE_XOR		0
 #define XOR_OPERATION_MODE_MEMCPY	2
@@ -46,6 +50,8 @@
 #define XOR_INIT_VALUE_LOW(chan)	(chan->mmr_base + 0x2E0)
 #define XOR_INIT_VALUE_HIGH(chan)	(chan->mmr_base + 0x2E4)
 =======
+=======
+>>>>>>> v3.18
 #define MV_XOR_MIN_BYTE_COUNT		SZ_128
 #define MV_XOR_MAX_BYTE_COUNT		(SZ_16M - 1)
 
@@ -64,6 +70,9 @@
 #define XOR_BLOCK_SIZE(chan)	(chan->mmr_high_base + 0xC0 + (chan->idx * 4))
 #define XOR_INIT_VALUE_LOW(chan)	(chan->mmr_high_base + 0xE0)
 #define XOR_INIT_VALUE_HIGH(chan)	(chan->mmr_high_base + 0xE4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define XOR_CONFIG(chan)	(chan->mmr_base + 0x10 + (chan->idx * 4))
@@ -73,6 +82,7 @@
 #define XOR_ERROR_CAUSE(chan)	(chan->mmr_base + 0x50)
 #define XOR_ERROR_ADDR(chan)	(chan->mmr_base + 0x60)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XOR_INTR_MASK_VALUE	0x3F5
 
 #define WINDOW_BASE(w)		(0x250 + ((w) << 2))
@@ -81,6 +91,8 @@
 #define WINDOW_BAR_ENABLE(chan)	(0x240 + ((chan) << 2))
 #define WINDOW_OVERRIDE_CTRL(chan)	(0x2A0 + ((chan) << 2))
 =======
+=======
+>>>>>>> v3.18
 
 #define XOR_INT_END_OF_DESC	BIT(0)
 #define XOR_INT_END_OF_CHAIN	BIT(1)
@@ -105,6 +117,9 @@
 #define WINDOW_REMAP_HIGH(w)	(0x90 + ((w) << 2))
 #define WINDOW_BAR_ENABLE(chan)	(0x40 + ((chan) << 2))
 #define WINDOW_OVERRIDE_CTRL(chan)	(0xA0 + ((chan) << 2))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mv_xor_device {
@@ -134,6 +149,10 @@ struct mv_xor_chan {
 	spinlock_t		lock; /* protects the descriptor slot pool */
 	void __iomem		*mmr_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem		*mmr_high_base;
+>>>>>>> v3.18
 =======
 	void __iomem		*mmr_high_base;
 >>>>>>> v3.18
@@ -152,10 +171,16 @@ struct mv_xor_chan {
 	int			slots_allocated;
 	struct tasklet_struct	irq_tasklet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef USE_TIMER
 	unsigned long		cleanup_time;
 	u32			current_on_last_cleanup;
 #endif
+=======
+	char			dummy_src[MV_XOR_MIN_BYTE_COUNT];
+	char			dummy_dst[MV_XOR_MIN_BYTE_COUNT];
+	dma_addr_t		dummy_src_addr, dummy_dst_addr;
+>>>>>>> v3.18
 =======
 	char			dummy_src[MV_XOR_MIN_BYTE_COUNT];
 	char			dummy_dst[MV_XOR_MIN_BYTE_COUNT];
@@ -171,6 +196,7 @@ struct mv_xor_chan {
  * @hw_desc: virtual address of the hardware descriptor chain
  * @phys: hardware address of the hardware descriptor chain
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @group_head: first operation in a transaction
  * @slot_cnt: total slots used in an transaction (group of operations)
  * @slots_per_op: number of slots per operation
@@ -182,10 +208,15 @@ struct mv_xor_chan {
  * @xor_check_result: result of zero sum
  * @crc32_result: result crc calculation
 =======
+=======
+>>>>>>> v3.18
  * @slot_used: slot in use or not
  * @idx: pool index
  * @tx_list: list of slots that make up a multi-descriptor transaction
  * @async_tx: support for the async_tx api
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct mv_xor_desc_slot {
@@ -194,6 +225,7 @@ struct mv_xor_desc_slot {
 	struct list_head	completed_node;
 	enum dma_transaction_type	type;
 	void			*hw_desc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mv_xor_desc_slot	*group_head;
 	u16			slot_cnt;
@@ -216,6 +248,8 @@ struct mv_xor_desc_slot {
 
 /* This structure describes XOR descriptor size 64bytes	*/
 =======
+=======
+>>>>>>> v3.18
 	u16			slot_used;
 	u16			idx;
 	struct dma_async_tx_descriptor	async_tx;
@@ -231,6 +265,9 @@ struct mv_xor_desc_slot {
  * explains the different mv_phy_src_idx() implementation.
  */
 #if defined(__LITTLE_ENDIAN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mv_xor_desc {
 	u32 status;		/* descriptor execution status */
@@ -244,7 +281,10 @@ struct mv_xor_desc {
 	u32 reserved1;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define mv_phy_src_idx(src_idx) (src_idx)
 #else
 struct mv_xor_desc {
@@ -260,6 +300,9 @@ struct mv_xor_desc {
 };
 #define mv_phy_src_idx(src_idx) (src_idx ^ 1)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define to_mv_sw_desc(addr_hw_desc)		\
@@ -269,11 +312,14 @@ struct mv_xor_desc {
 	((void *)(((unsigned long)hw_desc) + ((idx) << 5)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MV_XOR_MIN_BYTE_COUNT	(128)
 #define XOR_MAX_BYTE_COUNT	((16 * 1024 * 1024) - 1)
 #define MV_XOR_MAX_BYTE_COUNT	XOR_MAX_BYTE_COUNT
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

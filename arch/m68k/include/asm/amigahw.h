@@ -19,6 +19,7 @@
 #include <linux/ioport.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /*
      *  Different Amiga models
      */
@@ -42,6 +43,9 @@
 =======
 #include <asm/bootinfo-amiga.h>
 >>>>>>> v3.18
+=======
+#include <asm/bootinfo-amiga.h>
+>>>>>>> v3.18
 
 
     /*
@@ -51,11 +55,14 @@
 extern unsigned long amiga_chipset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CS_STONEAGE	(0)
 #define CS_OCS		(1)
 #define CS_ECS		(2)
 #define CS_AGA		(3)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -274,7 +281,11 @@ struct CIA {
 #define zTwoBase (0x80000000)
 #define ZTWO_PADDR(x) (((unsigned long)(x))-zTwoBase)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ZTWO_VADDR(x) (((unsigned long)(x))+zTwoBase)
+=======
+#define ZTWO_VADDR(x) ((void __iomem *)(((unsigned long)(x))+zTwoBase))
+>>>>>>> v3.18
 =======
 #define ZTWO_VADDR(x) ((void __iomem *)(((unsigned long)(x))+zTwoBase))
 >>>>>>> v3.18

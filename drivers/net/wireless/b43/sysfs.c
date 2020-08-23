@@ -41,7 +41,11 @@ static int get_integer(const char *buf, size_t count)
 	if (count == 0)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = min(count, (size_t) 10);
+=======
+	count = min_t(size_t, count, 10);
+>>>>>>> v3.18
 =======
 	count = min_t(size_t, count, 10);
 >>>>>>> v3.18

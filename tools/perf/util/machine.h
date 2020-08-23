@@ -5,12 +5,18 @@
 #include <linux/rbtree.h>
 #include "map.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #include "dso.h"
 #include "event.h"
 
 struct addr_location;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct branch_stack;
 struct perf_evsel;
@@ -24,17 +30,27 @@ union perf_event;
 #define	DEFAULT_GUEST_KERNEL_ID		(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const char *ref_reloc_sym_names[];
 
 struct vdso_info;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct machine {
 	struct rb_node	  rb_node;
 	pid_t		  pid;
 	u16		  id_hdr_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool		  comm_exec;
+>>>>>>> v3.18
 =======
 	bool		  comm_exec;
 >>>>>>> v3.18
@@ -43,11 +59,14 @@ struct machine {
 	struct list_head  dead_threads;
 	struct thread	  *last_match;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head  user_dsos;
 	struct list_head  kernel_dsos;
 	struct map_groups kmaps;
 	struct map	  *vmlinux_maps[MAP__NR_TYPES];
 =======
+=======
+>>>>>>> v3.18
 	struct vdso_info  *vdso_info;
 	struct dsos	  user_dsos;
 	struct dsos	  kernel_dsos;
@@ -56,6 +75,9 @@ struct machine {
 	u64		  kernel_start;
 	symbol_filter_t	  symbol_filter;
 	pid_t		  *current_tid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -66,6 +88,7 @@ struct map *machine__kernel_map(struct machine *machine, enum map_type type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct thread *machine__find_thread(struct machine *machine, pid_t pid);
 
 int machine__process_comm_event(struct machine *machine, union perf_event *event);
@@ -75,6 +98,8 @@ int machine__process_lost_event(struct machine *machine, union perf_event *event
 int machine__process_mmap_event(struct machine *machine, union perf_event *event);
 int machine__process_event(struct machine *machine, union perf_event *event);
 =======
+=======
+>>>>>>> v3.18
 int machine__get_kernel_start(struct machine *machine);
 
 static inline u64 machine__kernel_start(struct machine *machine)
@@ -110,6 +135,9 @@ int machine__process_mmap2_event(struct machine *machine, union perf_event *even
 				 struct perf_sample *sample);
 int machine__process_event(struct machine *machine, union perf_event *event,
 				struct perf_sample *sample);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef void (*machine__process_t)(struct machine *machine, void *data);
@@ -118,6 +146,10 @@ struct machines {
 	struct machine host;
 	struct rb_root guests;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	symbol_filter_t symbol_filter;
+>>>>>>> v3.18
 =======
 	symbol_filter_t symbol_filter;
 >>>>>>> v3.18
@@ -139,12 +171,18 @@ void machines__set_id_hdr_size(struct machines *machines, u16 id_hdr_size);
 char *machine__mmap_name(struct machine *machine, char *bf, size_t size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void machines__set_symbol_filter(struct machines *machines,
 				 symbol_filter_t symbol_filter);
 void machines__set_comm_exec(struct machines *machines, bool comm_exec);
 
 struct machine *machine__new_host(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int machine__init(struct machine *machine, const char *root_dir, pid_t pid);
 void machine__exit(struct machine *machine);
@@ -153,6 +191,7 @@ void machine__delete_threads(struct machine *machine);
 void machine__delete(struct machine *machine);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct branch_info *machine__resolve_bstack(struct machine *machine,
 					    struct thread *thread,
 					    struct branch_stack *bs);
@@ -160,17 +199,28 @@ struct mem_info *machine__resolve_mem(struct machine *machine,
 				      struct thread *thread,
 				      struct perf_sample *sample, u8 cpumode);
 =======
+=======
+>>>>>>> v3.18
 struct branch_info *sample__resolve_bstack(struct perf_sample *sample,
 					   struct addr_location *al);
 struct mem_info *sample__resolve_mem(struct perf_sample *sample,
 				     struct addr_location *al);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int machine__resolve_callchain(struct machine *machine,
 			       struct perf_evsel *evsel,
 			       struct thread *thread,
 			       struct perf_sample *sample,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct symbol **parent);
+=======
+			       struct symbol **parent,
+			       struct addr_location *root_al,
+			       int max_stack);
+>>>>>>> v3.18
 =======
 			       struct symbol **parent,
 			       struct addr_location *root_al,
@@ -192,7 +242,12 @@ static inline bool machine__is_host(struct machine *machine)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct thread *machine__findnew_thread(struct machine *machine, pid_t pid);
+=======
+struct thread *machine__findnew_thread(struct machine *machine, pid_t pid,
+				       pid_t tid);
+>>>>>>> v3.18
 =======
 struct thread *machine__findnew_thread(struct machine *machine, pid_t pid,
 				       pid_t tid);
@@ -254,7 +309,10 @@ void machines__destroy_kernel_maps(struct machines *machines);
 size_t machine__fprintf_vmlinux_path(struct machine *machine, FILE *fp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int machine__for_each_thread(struct machine *machine,
 			     int (*fn)(struct thread *thread, void *p),
 			     void *priv);
@@ -274,5 +332,8 @@ pid_t machine__get_current_tid(struct machine *machine, int cpu);
 int machine__set_current_tid(struct machine *machine, int cpu, pid_t pid,
 			     pid_t tid);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PERF_MACHINE_H */

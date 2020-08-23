@@ -29,6 +29,7 @@
 #include <linux/kernel.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/smp.h>
 #include <asm/bootinfo.h>
 #include <asm/fw/cfe/cfe_api.h>
@@ -126,6 +127,8 @@ static __init void prom_init_cmdline(void)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ssb/ssb_driver_chipcommon.h>
 #include <linux/ssb/ssb_regs.h>
 #include <linux/smp.h>
@@ -150,6 +153,9 @@ __init void bcm47xx_set_system_type(u16 chip_id)
 }
 
 static unsigned long lowmem __initdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __init void prom_init_mem(void)
@@ -171,6 +177,7 @@ static __init void prom_init_mem(void)
 	 * less that that amount of ram it remaps the ram more often into the
 	 * available space.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Accessing memory after 128MB will cause an exception.
 	 * max contains the biggest possible address supported by the platform.
 	 * If the method wants to try something above we assume 128MB ram.
@@ -181,6 +188,8 @@ static __init void prom_init_mem(void)
 		if ((off + mem) > max) {
 			mem = (128 << 20);
 =======
+=======
+>>>>>>> v3.18
 	 */
 
 	/* Physical address, without mapping to any kernel segment */
@@ -193,6 +202,9 @@ static __init void prom_init_mem(void)
 		/* Loop condition may be not enough, off may be over 1 MiB */
 		if (off + mem >= max) {
 			mem = max;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk(KERN_DEBUG "assume 128MB RAM\n");
 			break;
@@ -201,6 +213,10 @@ static __init void prom_init_mem(void)
 			break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lowmem = mem;
+>>>>>>> v3.18
 =======
 	lowmem = mem;
 >>>>>>> v3.18
@@ -213,6 +229,7 @@ static __init void prom_init_mem(void)
 	if (c->cputype == CPU_74K && (mem == (128  << 20)))
 		mem -= 0x1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	add_memory_region(0, mem, BOOT_MEM_RAM);
 }
@@ -224,6 +241,8 @@ void __init prom_init(void)
 	prom_init_cmdline();
 	prom_init_mem();
 =======
+=======
+>>>>>>> v3.18
 	add_memory_region(0, mem, BOOT_MEM_RAM);
 }
 
@@ -237,6 +256,9 @@ void __init prom_init(void)
 {
 	prom_init_mem();
 	setup_8250_early_printk_port(CKSEG1ADDR(BCM47XX_SERIAL_ADDR), 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -244,7 +266,10 @@ void __init prom_free_prom_memory(void)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_BCM47XX_BCMA) && defined(CONFIG_HIGHMEM)
 
@@ -309,4 +334,7 @@ void __init bcm47xx_prom_highmem_init(void)
 }
 
 #endif /* defined(CONFIG_BCM47XX_BCMA) && defined(CONFIG_HIGHMEM) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

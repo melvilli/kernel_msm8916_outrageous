@@ -8,6 +8,10 @@
 #include <linux/iio/kfifo_buf.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/poll.h>
+>>>>>>> v3.18
 =======
 #include <linux/poll.h>
 >>>>>>> v3.18
@@ -16,6 +20,10 @@ struct iio_kfifo {
 	struct iio_buffer buffer;
 	struct kfifo kf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex user_lock;
+>>>>>>> v3.18
 =======
 	struct mutex user_lock;
 >>>>>>> v3.18
@@ -40,6 +48,7 @@ static int iio_request_update_kfifo(struct iio_buffer *r)
 	struct iio_kfifo *buf = iio_to_kfifo(r);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!buf->update_needed)
 		goto error_ret;
 	kfifo_free(&buf->kf);
@@ -48,6 +57,8 @@ static int iio_request_update_kfifo(struct iio_buffer *r)
 	r->stufftoread = false;
 error_ret:
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&buf->user_lock);
 	if (buf->update_needed) {
 		kfifo_free(&buf->kf);
@@ -59,6 +70,9 @@ error_ret:
 	}
 	mutex_unlock(&buf->user_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -117,7 +131,11 @@ static int iio_set_length_kfifo(struct iio_buffer *r, int length)
 
 static int iio_store_to_kfifo(struct iio_buffer *r,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      u8 *data)
+=======
+			      const void *data)
+>>>>>>> v3.18
 =======
 			      const void *data)
 >>>>>>> v3.18
@@ -128,8 +146,13 @@ static int iio_store_to_kfifo(struct iio_buffer *r,
 	if (ret != 1)
 		return -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r->stufftoread = true;
 	wake_up_interruptible(&r->pollq);
+=======
+
+	wake_up_interruptible_poll(&r->pollq, POLLIN | POLLRDNORM);
+>>>>>>> v3.18
 =======
 
 	wake_up_interruptible_poll(&r->pollq, POLLIN | POLLRDNORM);
@@ -144,6 +167,7 @@ static int iio_read_first_n_kfifo(struct iio_buffer *r,
 	int ret, copied;
 	struct iio_kfifo *kf = iio_to_kfifo(r);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (n < r->bytes_per_datum || r->bytes_per_datum == 0)
 		return -EINVAL;
@@ -165,6 +189,8 @@ static const struct iio_buffer_access_funcs kfifo_access_funcs = {
 	.store_to = &iio_store_to_kfifo,
 	.read_first_n = &iio_read_first_n_kfifo,
 =======
+=======
+>>>>>>> v3.18
 	if (mutex_lock_interruptible(&kf->user_lock))
 		return -ERESTARTSYS;
 
@@ -204,6 +230,9 @@ static const struct iio_buffer_access_funcs kfifo_access_funcs = {
 	.store_to = &iio_store_to_kfifo,
 	.read_first_n = &iio_read_first_n_kfifo,
 	.data_available = iio_kfifo_buf_data_available,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.request_update = &iio_request_update_kfifo,
 	.get_bytes_per_datum = &iio_get_bytes_per_datum_kfifo,
@@ -211,6 +240,10 @@ static const struct iio_buffer_access_funcs kfifo_access_funcs = {
 	.get_length = &iio_get_length_kfifo,
 	.set_length = &iio_set_length_kfifo,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.release = &iio_kfifo_buffer_release,
+>>>>>>> v3.18
 =======
 	.release = &iio_kfifo_buffer_release,
 >>>>>>> v3.18
@@ -229,6 +262,10 @@ struct iio_buffer *iio_kfifo_allocate(struct iio_dev *indio_dev)
 	kf->buffer.access = &kfifo_access_funcs;
 	kf->buffer.length = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&kf->user_lock);
+>>>>>>> v3.18
 =======
 	mutex_init(&kf->user_lock);
 >>>>>>> v3.18
@@ -239,7 +276,11 @@ EXPORT_SYMBOL(iio_kfifo_allocate);
 void iio_kfifo_free(struct iio_buffer *r)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(iio_to_kfifo(r));
+=======
+	iio_buffer_put(r);
+>>>>>>> v3.18
 =======
 	iio_buffer_put(r);
 >>>>>>> v3.18

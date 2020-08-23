@@ -28,7 +28,10 @@ MODULE_DESCRIPTION("Shared library for Atheros wireless 802.11n LAN cards.");
 MODULE_LICENSE("Dual BSD/GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Assumes you've already done the endian to CPU conversion */
 bool ath9k_cmn_rx_accept(struct ath_common *common,
 			 struct ieee80211_hdr *hdr,
@@ -273,6 +276,9 @@ void ath9k_cmn_process_rssi(struct ath_common *common,
 }
 EXPORT_SYMBOL(ath9k_cmn_process_rssi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ath9k_cmn_get_hw_crypto_keytype(struct sk_buff *skb)
 {
@@ -296,6 +302,7 @@ int ath9k_cmn_get_hw_crypto_keytype(struct sk_buff *skb)
 }
 EXPORT_SYMBOL(ath9k_cmn_get_hw_crypto_keytype);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 ath9k_get_extchanmode(struct ieee80211_channel *chan,
 				 enum nl80211_channel_type channel_type)
@@ -361,6 +368,8 @@ void ath9k_cmn_update_ichannel(struct ath9k_channel *ichan,
 }
 EXPORT_SYMBOL(ath9k_cmn_update_ichannel);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Update internal channel flags.
  */
@@ -400,11 +409,15 @@ static void ath9k_cmn_update_ichannel(struct ath9k_channel *ichan,
 
 	ichan->channelFlags = flags;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Get the internal channel reference.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct ath9k_channel *ath9k_cmn_get_curchannel(struct ieee80211_hw *hw,
 					       struct ath_hw *ah)
@@ -422,6 +435,8 @@ struct ath9k_channel *ath9k_cmn_get_curchannel(struct ieee80211_hw *hw,
 }
 EXPORT_SYMBOL(ath9k_cmn_get_curchannel);
 =======
+=======
+>>>>>>> v3.18
 struct ath9k_channel *ath9k_cmn_get_channel(struct ieee80211_hw *hw,
 					    struct ath_hw *ah,
 					    struct cfg80211_chan_def *chandef)
@@ -435,6 +450,9 @@ struct ath9k_channel *ath9k_cmn_get_channel(struct ieee80211_hw *hw,
 	return channel;
 }
 EXPORT_SYMBOL(ath9k_cmn_get_channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int ath9k_cmn_count_streams(unsigned int chainmask, int max)
@@ -456,17 +474,23 @@ void ath9k_cmn_update_txpow(struct ath_hw *ah, u16 cur_txpow,
 	struct ath_regulatory *reg = ath9k_hw_regulatory(ah);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reg->power_limit != new_txpow) {
 		ath9k_hw_set_txpowerlimit(ah, new_txpow, false);
 		/* read back in case value is clamped */
 		*txpower = reg->max_power_level;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (reg->power_limit != new_txpow)
 		ath9k_hw_set_txpowerlimit(ah, new_txpow, false);
 
 	/* read back in case value is clamped */
 	*txpower = reg->max_power_level;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ath9k_cmn_update_txpow);

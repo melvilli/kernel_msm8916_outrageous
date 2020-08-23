@@ -196,7 +196,11 @@ enum ifla_caif_hsi {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct cfhsi_ops *cfhsi_get_ops(void);
+=======
+struct cfhsi_ops *cfhsi_get_ops(void);
+>>>>>>> v3.18
 =======
 struct cfhsi_ops *cfhsi_get_ops(void);
 >>>>>>> v3.18

@@ -32,6 +32,7 @@
 #include "device.h"
 #include "wcmd.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 //
 // RTS buffer header
@@ -636,6 +637,8 @@ CMD_STATUS csBeacon_xmit(struct vnt_private *, struct vnt_tx_mgmt *);
 int bRelayPacketSend(struct vnt_private *, u8 *pbySkbData, u32 uDataLen,
 	u32 uNodeIndex);
 =======
+=======
+>>>>>>> v3.18
 #include "baseband.h"
 
 #define DEFAULT_MGN_LIFETIME_RES_64us	125  /* 64us */
@@ -861,6 +864,9 @@ int vnt_tx_packet(struct vnt_private *, struct sk_buff *);
 int vnt_beacon_make(struct vnt_private *, struct ieee80211_vif *);
 int vnt_beacon_enable(struct vnt_private *, struct ieee80211_vif *,
 	struct ieee80211_bss_conf *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __RXTX_H__ */

@@ -29,6 +29,10 @@
 #include <net/sock.h>
 #include <net/af_ieee802154.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ieee802154_netdev.h>
+>>>>>>> v3.18
 =======
 #include <net/ieee802154_netdev.h>
 >>>>>>> v3.18
@@ -60,6 +64,7 @@ static void raw_close(struct sock *sk, long timeout)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int raw_bind(struct sock *sk, struct sockaddr *uaddr, int len)
 {
 	struct sockaddr_ieee802154 *addr = (struct sockaddr_ieee802154 *)uaddr;
@@ -71,6 +76,8 @@ static int raw_bind(struct sock *sk, struct sockaddr *uaddr, int len)
 
 	if (addr->family != AF_IEEE802154)
 =======
+=======
+>>>>>>> v3.18
 static int raw_bind(struct sock *sk, struct sockaddr *_uaddr, int len)
 {
 	struct ieee802154_addr addr;
@@ -83,13 +90,21 @@ static int raw_bind(struct sock *sk, struct sockaddr *_uaddr, int len)
 
 	uaddr = (struct sockaddr_ieee802154 *)_uaddr;
 	if (uaddr->family != AF_IEEE802154)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
 	lock_sock(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = ieee802154_get_dev(sock_net(sk), &addr->addr);
+=======
+	ieee802154_addr_from_sa(&addr, &uaddr->addr);
+	dev = ieee802154_get_dev(sock_net(sk), &addr);
+>>>>>>> v3.18
 =======
 	ieee802154_addr_from_sa(&addr, &uaddr->addr);
 	dev = ieee802154_get_dev(sock_net(sk), &addr);
@@ -117,7 +132,11 @@ out:
 
 static int raw_connect(struct sock *sk, struct sockaddr *uaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int addr_len)
+=======
+		       int addr_len)
+>>>>>>> v3.18
 =======
 		       int addr_len)
 >>>>>>> v3.18
@@ -131,8 +150,13 @@ static int raw_disconnect(struct sock *sk, int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int raw_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 		       size_t size)
+=======
+static int raw_sendmsg(struct kiocb *iocb, struct sock *sk,
+		       struct msghdr *msg, size_t size)
+>>>>>>> v3.18
 =======
 static int raw_sendmsg(struct kiocb *iocb, struct sock *sk,
 		       struct msghdr *msg, size_t size)
@@ -175,7 +199,11 @@ static int raw_sendmsg(struct kiocb *iocb, struct sock *sk,
 	tlen = dev->needed_tailroom;
 	skb = sock_alloc_send_skb(sk, hlen + tlen + size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			msg->msg_flags & MSG_DONTWAIT, &err);
+=======
+				  msg->msg_flags & MSG_DONTWAIT, &err);
+>>>>>>> v3.18
 =======
 				  msg->msg_flags & MSG_DONTWAIT, &err);
 >>>>>>> v3.18
@@ -247,11 +275,17 @@ out:
 static int raw_rcv_skb(struct sock *sk, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	skb = skb_share_check(skb, GFP_ATOMIC);
 	if (!skb)
 		return NET_RX_DROP;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sock_queue_rcv_skb(sk, skb) < 0) {
 		kfree_skb(skb);
@@ -272,7 +306,10 @@ void ieee802154_raw_deliver(struct net_device *dev, struct sk_buff *skb)
 		if (!sk->sk_bound_dev_if ||
 		    sk->sk_bound_dev_if == dev->ifindex) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			struct sk_buff *clone;
@@ -288,7 +325,11 @@ void ieee802154_raw_deliver(struct net_device *dev, struct sk_buff *skb)
 
 static int raw_getsockopt(struct sock *sk, int level, int optname,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    char __user *optval, int __user *optlen)
+=======
+			  char __user *optval, int __user *optlen)
+>>>>>>> v3.18
 =======
 			  char __user *optval, int __user *optlen)
 >>>>>>> v3.18
@@ -298,7 +339,11 @@ static int raw_getsockopt(struct sock *sk, int level, int optname,
 
 static int raw_setsockopt(struct sock *sk, int level, int optname,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    char __user *optval, unsigned int optlen)
+=======
+			  char __user *optval, unsigned int optlen)
+>>>>>>> v3.18
 =======
 			  char __user *optval, unsigned int optlen)
 >>>>>>> v3.18
@@ -322,6 +367,9 @@ struct proto ieee802154_raw_prot = {
 	.setsockopt	= raw_setsockopt,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

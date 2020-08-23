@@ -48,6 +48,7 @@ MODULE_PARM_DESC(sip_direct_signalling, "expect incoming calls from registrar "
 					"only (default 1)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ctl_table_header *sip_sysctl_header;
 static unsigned nf_ct_disable_sip_alg;
 static int sip_direct_media = 1;
@@ -131,6 +132,8 @@ unsigned int (*nf_nat_sdp_media_hook)(struct sk_buff *skb, unsigned int protoff,
 				      __read_mostly;
 EXPORT_SYMBOL_GPL(nf_nat_sdp_media_hook);
 =======
+=======
+>>>>>>> v3.18
 static int sip_direct_media __read_mostly = 1;
 module_param(sip_direct_media, int, 0600);
 MODULE_PARM_DESC(sip_direct_media, "Expect Media streams between signalling "
@@ -138,6 +141,9 @@ MODULE_PARM_DESC(sip_direct_media, "Expect Media streams between signalling "
 
 const struct nf_nat_sip_hooks *nf_nat_sip_hooks;
 EXPORT_SYMBOL_GPL(nf_nat_sip_hooks);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int string_len(const struct nf_conn *ct, const char *dptr,
@@ -333,7 +339,11 @@ int ct_sip_parse_request(const struct nf_conn *ct,
 		if (*dptr == '\r' || *dptr == '\n')
 			return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(dptr, "sip:", strlen("sip:")) == 0) {
+=======
+		if (strncasecmp(dptr, "sip:", strlen("sip:")) == 0) {
+>>>>>>> v3.18
 =======
 		if (strncasecmp(dptr, "sip:", strlen("sip:")) == 0) {
 >>>>>>> v3.18
@@ -440,7 +450,11 @@ static const char *ct_sip_header_search(const char *dptr, const char *limit,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(dptr, needle, len) == 0)
+=======
+		if (strncasecmp(dptr, needle, len) == 0)
+>>>>>>> v3.18
 =======
 		if (strncasecmp(dptr, needle, len) == 0)
 >>>>>>> v3.18
@@ -477,15 +491,21 @@ int ct_sip_get_header(const struct nf_conn *ct, const char *dptr,
 		 * non-alphabetic character to avoid mismatches. */
 		if (limit - dptr >= hdr->len &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    strnicmp(dptr, hdr->name, hdr->len) == 0)
 			dptr += hdr->len;
 		else if (hdr->cname && limit - dptr >= hdr->clen + 1 &&
 			 strnicmp(dptr, hdr->cname, hdr->clen) == 0 &&
 =======
+=======
+>>>>>>> v3.18
 		    strncasecmp(dptr, hdr->name, hdr->len) == 0)
 			dptr += hdr->len;
 		else if (hdr->cname && limit - dptr >= hdr->clen + 1 &&
 			 strncasecmp(dptr, hdr->cname, hdr->clen) == 0 &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 !isalpha(*(dptr + hdr->clen)))
 			dptr += hdr->clen;
@@ -721,9 +741,15 @@ static int ct_sip_parse_transport(struct nf_conn *ct, const char *dptr,
 	if (ct_sip_parse_param(ct, dptr, dataoff, datalen, "transport=",
 			       &matchoff, &matchlen)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strnicmp(dptr + matchoff, "TCP", strlen("TCP")))
 			*proto = IPPROTO_TCP;
 		else if (!strnicmp(dptr + matchoff, "UDP", strlen("UDP")))
+=======
+		if (!strncasecmp(dptr + matchoff, "TCP", strlen("TCP")))
+			*proto = IPPROTO_TCP;
+		else if (!strncasecmp(dptr + matchoff, "UDP", strlen("UDP")))
+>>>>>>> v3.18
 =======
 		if (!strncasecmp(dptr + matchoff, "TCP", strlen("TCP")))
 			*proto = IPPROTO_TCP;
@@ -850,15 +876,21 @@ int ct_sip_get_sdp_header(const struct nf_conn *ct, const char *dptr,
 		if (term != SDP_HDR_UNSPEC &&
 		    limit - dptr >= thdr->len &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    strnicmp(dptr, thdr->name, thdr->len) == 0)
 			break;
 		else if (limit - dptr >= hdr->len &&
 			 strnicmp(dptr, hdr->name, hdr->len) == 0)
 =======
+=======
+>>>>>>> v3.18
 		    strncasecmp(dptr, thdr->name, thdr->len) == 0)
 			break;
 		else if (limit - dptr >= hdr->len &&
 			 strncasecmp(dptr, hdr->name, hdr->len) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dptr += hdr->len;
 		else
@@ -914,7 +946,11 @@ static int refresh_signalling_expectation(struct nf_conn *ct,
 	int found = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -933,7 +969,11 @@ static int refresh_signalling_expectation(struct nf_conn *ct,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -947,7 +987,11 @@ static void flush_expectations(struct nf_conn *ct, bool media)
 	struct hlist_node *next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -962,7 +1006,11 @@ static void flush_expectations(struct nf_conn *ct, bool media)
 			break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -986,8 +1034,12 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 	u_int16_t base_port;
 	__be16 rtp_port, rtcp_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof(nf_nat_sdp_port_hook) nf_nat_sdp_port;
 	typeof(nf_nat_sdp_media_hook) nf_nat_sdp_media;
+=======
+	const struct nf_nat_sip_hooks *hooks;
+>>>>>>> v3.18
 =======
 	const struct nf_nat_sip_hooks *hooks;
 >>>>>>> v3.18
@@ -1042,7 +1094,10 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 			skip_expect = 1;
 	} while (!skip_expect);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1052,9 +1107,15 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 
 	if (direct_rtp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_nat_sdp_port = rcu_dereference(nf_nat_sdp_port_hook);
 		if (nf_nat_sdp_port &&
 		    !nf_nat_sdp_port(skb, protoff, dataoff, dptr, datalen,
+=======
+		hooks = rcu_dereference(nf_nat_sip_hooks);
+		if (hooks &&
+		    !hooks->sdp_port(skb, protoff, dataoff, dptr, datalen,
+>>>>>>> v3.18
 =======
 		hooks = rcu_dereference(nf_nat_sip_hooks);
 		if (hooks &&
@@ -1065,13 +1126,19 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skip_expect)
 		return NF_ACCEPT;
 =======
+=======
+>>>>>>> v3.18
 	if (skip_expect) {
 		rcu_read_unlock();
 		return NF_ACCEPT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rtp_exp = nf_ct_expect_alloc(ct);
@@ -1087,15 +1154,21 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 			  IPPROTO_UDP, NULL, &rtcp_port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_nat_sdp_media = rcu_dereference(nf_nat_sdp_media_hook);
 	if (nf_nat_sdp_media && ct->status & IPS_NAT_MASK && !direct_rtp)
 		ret = nf_nat_sdp_media(skb, protoff, dataoff, dptr, datalen,
 				       rtp_exp, rtcp_exp,
 =======
+=======
+>>>>>>> v3.18
 	hooks = rcu_dereference(nf_nat_sip_hooks);
 	if (hooks && ct->status & IPS_NAT_MASK && !direct_rtp)
 		ret = hooks->sdp_media(skb, protoff, dataoff, dptr,
 				       datalen, rtp_exp, rtcp_exp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				       mediaoff, medialen, daddr);
 	else {
@@ -1111,6 +1184,10 @@ err2:
 	nf_ct_expect_put(rtp_exp);
 err1:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_unlock();
 >>>>>>> v3.18
@@ -1154,6 +1231,7 @@ static int process_sdp(struct sk_buff *skb, unsigned int protoff,
 	unsigned int i;
 	union nf_inet_addr caddr, maddr, rtp_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int port;
 	const struct sdp_media_type *t;
 	int ret = NF_ACCEPT;
@@ -1162,12 +1240,17 @@ static int process_sdp(struct sk_buff *skb, unsigned int protoff,
 
 	nf_nat_sdp_addr = rcu_dereference(nf_nat_sdp_addr_hook);
 =======
+=======
+>>>>>>> v3.18
 	const struct nf_nat_sip_hooks *hooks;
 	unsigned int port;
 	const struct sdp_media_type *t;
 	int ret = NF_ACCEPT;
 
 	hooks = rcu_dereference(nf_nat_sip_hooks);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Find beginning of session description */
@@ -1237,16 +1320,22 @@ static int process_sdp(struct sk_buff *skb, unsigned int protoff,
 
 		/* Update media connection address if present */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (maddr_len && nf_nat_sdp_addr && ct->status & IPS_NAT_MASK) {
 			ret = nf_nat_sdp_addr(skb, protoff, dataoff,
 					      dptr, datalen, mediaoff,
 					      SDP_HDR_CONNECTION, SDP_HDR_MEDIA,
 =======
+=======
+>>>>>>> v3.18
 		if (maddr_len && hooks && ct->status & IPS_NAT_MASK) {
 			ret = hooks->sdp_addr(skb, protoff, dataoff,
 					      dptr, datalen, mediaoff,
 					      SDP_HDR_CONNECTION,
 					      SDP_HDR_MEDIA,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      &rtp_addr);
 			if (ret != NF_ACCEPT) {
@@ -1259,16 +1348,22 @@ static int process_sdp(struct sk_buff *skb, unsigned int protoff,
 
 	/* Update session connection and owner addresses */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_nat_sdp_session = rcu_dereference(nf_nat_sdp_session_hook);
 	if (nf_nat_sdp_session && ct->status & IPS_NAT_MASK)
 		ret = nf_nat_sdp_session(skb, protoff, dataoff,
 					 dptr, datalen, sdpoff, &rtp_addr);
 =======
+=======
+>>>>>>> v3.18
 	hooks = rcu_dereference(nf_nat_sip_hooks);
 	if (hooks && ct->status & IPS_NAT_MASK)
 		ret = hooks->sdp_session(skb, protoff, dataoff,
 					 dptr, datalen, sdpoff,
 					 &rtp_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1370,6 +1465,10 @@ static int process_register_request(struct sk_buff *skb, unsigned int protoff,
 	struct nf_conntrack_expect *exp;
 	union nf_inet_addr *saddr, daddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nf_nat_sip_hooks *hooks;
+>>>>>>> v3.18
 =======
 	const struct nf_nat_sip_hooks *hooks;
 >>>>>>> v3.18
@@ -1378,7 +1477,10 @@ static int process_register_request(struct sk_buff *skb, unsigned int protoff,
 	unsigned int expires = 0;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof(nf_nat_sip_expect_hook) nf_nat_sip_expect;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1444,15 +1546,21 @@ static int process_register_request(struct sk_buff *skb, unsigned int protoff,
 	exp->flags = NF_CT_EXPECT_PERMANENT | NF_CT_EXPECT_INACTIVE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_nat_sip_expect = rcu_dereference(nf_nat_sip_expect_hook);
 	if (nf_nat_sip_expect && ct->status & IPS_NAT_MASK)
 		ret = nf_nat_sip_expect(skb, protoff, dataoff, dptr, datalen,
 					exp, matchoff, matchlen);
 =======
+=======
+>>>>>>> v3.18
 	hooks = rcu_dereference(nf_nat_sip_hooks);
 	if (hooks && ct->status & IPS_NAT_MASK)
 		ret = hooks->expect(skb, protoff, dataoff, dptr, datalen,
 				    exp, matchoff, matchlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		if (nf_ct_expect_related(exp) != 0) {
@@ -1592,7 +1700,11 @@ static int process_sip_response(struct sk_buff *skb, unsigned int protoff,
 			continue;
 		if (*datalen < matchend + handler->len ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    strnicmp(*dptr + matchend, handler->method, handler->len))
+=======
+		    strncasecmp(*dptr + matchend, handler->method, handler->len))
+>>>>>>> v3.18
 =======
 		    strncasecmp(*dptr + matchend, handler->method, handler->len))
 >>>>>>> v3.18
@@ -1637,7 +1749,11 @@ static int process_sip_request(struct sk_buff *skb, unsigned int protoff,
 			continue;
 		if (*datalen < handler->len ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    strnicmp(*dptr, handler->method, handler->len))
+=======
+		    strncasecmp(*dptr, handler->method, handler->len))
+>>>>>>> v3.18
 =======
 		    strncasecmp(*dptr, handler->method, handler->len))
 >>>>>>> v3.18
@@ -1665,6 +1781,7 @@ static int process_sip_msg(struct sk_buff *skb, struct nf_conn *ct,
 			   const char **dptr, unsigned int *datalen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof(nf_nat_sip_hook) nf_nat_sip;
 	int ret;
 
@@ -1673,10 +1790,15 @@ static int process_sip_msg(struct sk_buff *skb, struct nf_conn *ct,
 
 	if (strnicmp(*dptr, "SIP/2.0 ", strlen("SIP/2.0 ")) != 0)
 =======
+=======
+>>>>>>> v3.18
 	const struct nf_nat_sip_hooks *hooks;
 	int ret;
 
 	if (strncasecmp(*dptr, "SIP/2.0 ", strlen("SIP/2.0 ")) != 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = process_sip_request(skb, protoff, dataoff, dptr, datalen);
 	else
@@ -1684,9 +1806,15 @@ static int process_sip_msg(struct sk_buff *skb, struct nf_conn *ct,
 
 	if (ret == NF_ACCEPT && ct->status & IPS_NAT_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_nat_sip = rcu_dereference(nf_nat_sip_hook);
 		if (nf_nat_sip && !nf_nat_sip(skb, protoff, dataoff,
 					      dptr, datalen)) {
+=======
+		hooks = rcu_dereference(nf_nat_sip_hooks);
+		if (hooks && !hooks->msg(skb, protoff, dataoff,
+					 dptr, datalen)) {
+>>>>>>> v3.18
 =======
 		hooks = rcu_dereference(nf_nat_sip_hooks);
 		if (hooks && !hooks->msg(skb, protoff, dataoff,
@@ -1712,7 +1840,10 @@ static int sip_help_tcp(struct sk_buff *skb, unsigned int protoff,
 	int ret = NF_ACCEPT;
 	bool term;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof(nf_nat_sip_seq_adjust_hook) nf_nat_sip_seq_adjust;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1779,15 +1910,21 @@ static int sip_help_tcp(struct sk_buff *skb, unsigned int protoff,
 
 	if (ret == NF_ACCEPT && ct->status & IPS_NAT_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_nat_sip_seq_adjust = rcu_dereference(nf_nat_sip_seq_adjust_hook);
 		if (nf_nat_sip_seq_adjust)
 			nf_nat_sip_seq_adjust(skb, protoff, tdiff);
 =======
+=======
+>>>>>>> v3.18
 		const struct nf_nat_sip_hooks *hooks;
 
 		hooks = rcu_dereference(nf_nat_sip_hooks);
 		if (hooks)
 			hooks->seq_adjust(skb, protoff, tdiff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1861,6 +1998,7 @@ static int __init nf_conntrack_sip_init(void)
 	int i, j, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sip_sysctl_header = register_net_sysctl(&init_net, "net/netfilter",
 						sip_sysctl_tbl);
 	if (!sip_sysctl_header)
@@ -1871,6 +2009,8 @@ static int __init nf_conntrack_sip_init(void)
 	else
 		pr_debug("nf_ct_sip: SIP ALG enabled\n");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ports_c == 0)

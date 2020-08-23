@@ -61,8 +61,13 @@ static uint _init_intf_hdl(struct _adapter *padapter,
 	set_intf_ops = &r8712_usb_set_intf_ops;
 	init_intf_priv = &r8712_usb_init_intf_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pintf_priv = pintf_hdl->pintfpriv = (struct intf_priv *)
 		     _malloc(sizeof(struct intf_priv));
+=======
+	pintf_priv = pintf_hdl->pintfpriv = kmalloc(sizeof(struct intf_priv),
+						    GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	pintf_priv = pintf_hdl->pintfpriv = kmalloc(sizeof(struct intf_priv),
 						    GFP_ATOMIC);
@@ -118,6 +123,7 @@ uint r8712_alloc_io_queue(struct _adapter *adapter)
 	struct io_req *pio_req;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pio_queue = (struct io_queue *)_malloc(sizeof(struct io_queue));
 	if (pio_queue == NULL)
 		goto alloc_io_queue_fail;
@@ -128,6 +134,8 @@ uint r8712_alloc_io_queue(struct _adapter *adapter)
 	pio_queue->pallocated_free_ioreqs_buf = (u8 *)_malloc(NUM_IOREQ *
 						(sizeof(struct io_req)) + 4);
 =======
+=======
+>>>>>>> v3.18
 	pio_queue = kmalloc(sizeof(*pio_queue), GFP_ATOMIC);
 	if (pio_queue == NULL)
 		goto alloc_io_queue_fail;
@@ -138,6 +146,9 @@ uint r8712_alloc_io_queue(struct _adapter *adapter)
 	pio_queue->pallocated_free_ioreqs_buf = kmalloc(NUM_IOREQ *
 						(sizeof(struct io_req)) + 4,
 						GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((pio_queue->pallocated_free_ioreqs_buf) == NULL)
 		goto alloc_io_queue_fail;
@@ -149,8 +160,13 @@ uint r8712_alloc_io_queue(struct _adapter *adapter)
 	pio_req = (struct io_req *)(pio_queue->free_ioreqs_buf);
 	for (i = 0; i < NUM_IOREQ; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_init_listhead(&pio_req->list);
 		list_insert_tail(&pio_req->list, &pio_queue->free_ioreqs);
+=======
+		INIT_LIST_HEAD(&pio_req->list);
+		list_add_tail(&pio_req->list, &pio_queue->free_ioreqs);
+>>>>>>> v3.18
 =======
 		INIT_LIST_HEAD(&pio_req->list);
 		list_add_tail(&pio_req->list, &pio_queue->free_ioreqs);

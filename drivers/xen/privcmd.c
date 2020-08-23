@@ -7,6 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
 
@@ -47,14 +52,20 @@ MODULE_LICENSE("GPL");
 #define PRIV_VMA_LOCKED ((void *)1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HAVE_ARCH_PRIVCMD_MMAP
 static int privcmd_enforce_singleshot_mapping(struct vm_area_struct *vma);
 #endif
 =======
+=======
+>>>>>>> v3.18
 static int privcmd_vma_range_is_mapped(
                struct vm_area_struct *vma,
                unsigned long addr,
                unsigned long nr_pages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static long privcmd_ioctl_hypercall(void __user *udata)
@@ -236,9 +247,15 @@ static long privcmd_ioctl_mmap(void __user *udata)
 		rc = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!vma || (msg->va != vma->vm_start) ||
 		    !privcmd_enforce_singleshot_mapping(vma))
 			goto out_up;
+=======
+		if (!vma || (msg->va != vma->vm_start) || vma->vm_private_data)
+			goto out_up;
+		vma->vm_private_data = PRIV_VMA_LOCKED;
+>>>>>>> v3.18
 =======
 		if (!vma || (msg->va != vma->vm_start) || vma->vm_private_data)
 			goto out_up;
@@ -375,7 +392,11 @@ static int alloc_empty_pages(struct vm_area_struct *vma, int numpgs)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(vma->vm_private_data != PRIV_VMA_LOCKED);
+=======
+	BUG_ON(vma->vm_private_data != NULL);
+>>>>>>> v3.18
 =======
 	BUG_ON(vma->vm_private_data != NULL);
 >>>>>>> v3.18
@@ -442,6 +463,7 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 	vma = find_vma(mm, m.addr);
 	if (!vma ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    vma->vm_ops != &privcmd_vm_ops ||
 	    (m.addr != vma->vm_start) ||
 	    ((m.addr + (nr_pages << PAGE_SHIFT)) != vma->vm_end) ||
@@ -456,6 +478,8 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 			up_write(&mm->mmap_sem);
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 	    vma->vm_ops != &privcmd_vm_ops) {
 		ret = -EINVAL;
 		goto out_unlock;
@@ -493,6 +517,9 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 		if (privcmd_vma_range_is_mapped(vma, m.addr, nr_pages)) {
 			ret = -EINVAL;
 			goto out_unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -527,14 +554,20 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 out:
 	free_page_list(&pagelist);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 
 out_unlock:
 	up_write(&mm->mmap_sem);
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -574,6 +607,10 @@ static void privcmd_close(struct vm_area_struct *vma)
 	struct page **pages = vma->vm_private_data;
 	int numpgs = (vma->vm_end - vma->vm_start) >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -582,15 +619,21 @@ static void privcmd_close(struct vm_area_struct *vma)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_unmap_domain_mfn_range(vma, numpgs, pages);
 	free_xenballooned_pages(numpgs, pages);
 =======
+=======
+>>>>>>> v3.18
 	rc = xen_unmap_domain_mfn_range(vma, numpgs, pages);
 	if (rc == 0)
 		free_xenballooned_pages(numpgs, pages);
 	else
 		pr_crit("unable to unmap MFN range: leaking %d pages. rc=%d\n",
 			numpgs, rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(pages);
 }
@@ -622,10 +665,13 @@ static int privcmd_mmap(struct file *file, struct vm_area_struct *vma)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int privcmd_enforce_singleshot_mapping(struct vm_area_struct *vma)
 {
 	return !cmpxchg(&vma->vm_private_data, NULL, PRIV_VMA_LOCKED);
 =======
+=======
+>>>>>>> v3.18
 /*
  * For MMAPBATCH*. This allows asserting the singleshot mapping
  * on a per pfn/pte basis. Mapping calls that fail with ENOENT
@@ -644,6 +690,9 @@ static int privcmd_vma_range_is_mapped(
 {
 	return apply_to_page_range(vma->vm_mm, addr, nr_pages << PAGE_SHIFT,
 				   is_mapped_fn, NULL) != 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -670,7 +719,11 @@ static int __init privcmd_init(void)
 	err = misc_register(&privcmd_dev);
 	if (err != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Could not register Xen privcmd device\n");
+=======
+		pr_err("Could not register Xen privcmd device\n");
+>>>>>>> v3.18
 =======
 		pr_err("Could not register Xen privcmd device\n");
 >>>>>>> v3.18

@@ -13,8 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -42,8 +47,11 @@
 #include <linux/srcu.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <trace/events/rcu.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "rcu.h"
@@ -309,9 +317,15 @@ int __srcu_read_lock(struct srcu_struct *sp)
 	idx = ACCESS_ONCE(sp->completed) & 0x1;
 	preempt_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACCESS_ONCE(this_cpu_ptr(sp->per_cpu_ref)->c[idx]) += 1;
 	smp_mb(); /* B */  /* Avoid leaking the critical section. */
 	ACCESS_ONCE(this_cpu_ptr(sp->per_cpu_ref)->seq[idx]) += 1;
+=======
+	__this_cpu_inc(sp->per_cpu_ref->c[idx]);
+	smp_mb(); /* B */  /* Avoid leaking the critical section. */
+	__this_cpu_inc(sp->per_cpu_ref->seq[idx]);
+>>>>>>> v3.18
 =======
 	__this_cpu_inc(sp->per_cpu_ref->c[idx]);
 	smp_mb(); /* B */  /* Avoid leaking the critical section. */
@@ -378,7 +392,10 @@ static void srcu_flip(struct srcu_struct *sp)
  * Enqueue an SRCU callback on the specified srcu_struct structure,
  * initiating grace-period processing if it is not already running.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * Note that all CPUs must agree that the grace period extended beyond
  * all pre-existing SRCU read-side critical section.  On systems with
@@ -402,6 +419,9 @@ static void srcu_flip(struct srcu_struct *sp)
  * Of course, these guarantees apply only for invocations of call_srcu(),
  * srcu_read_lock(), and srcu_read_unlock() that are all passed the same
  * srcu_struct structure.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void call_srcu(struct srcu_struct *sp, struct rcu_head *head,
@@ -416,7 +436,11 @@ void call_srcu(struct srcu_struct *sp, struct rcu_head *head,
 	if (!sp->running) {
 		sp->running = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&sp->work, 0);
+=======
+		queue_delayed_work(system_power_efficient_wq, &sp->work, 0);
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq, &sp->work, 0);
 >>>>>>> v3.18
@@ -504,8 +528,11 @@ static void __synchronize_srcu(struct srcu_struct *sp, int trycount)
  * SRCU read-side critical section; doing so will result in deadlock.
  * However, it is perfectly legal to call synchronize_srcu() on one
 <<<<<<< HEAD
+<<<<<<< HEAD
  * srcu_struct from some other srcu_struct's read-side critical section.
 =======
+=======
+>>>>>>> v3.18
  * srcu_struct from some other srcu_struct's read-side critical section,
  * as long as the resulting graph of srcu_structs is acyclic.
  *
@@ -530,6 +557,9 @@ static void __synchronize_srcu(struct srcu_struct *sp, int trycount)
  * Of course, these memory-ordering guarantees apply only when
  * synchronize_srcu(), srcu_read_lock(), and srcu_read_unlock() are
  * passed the same srcu_struct structure.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void synchronize_srcu(struct srcu_struct *sp)
@@ -548,12 +578,17 @@ EXPORT_SYMBOL_GPL(synchronize_srcu);
  * spinning rather than blocking when waiting.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note that it is also illegal to call synchronize_srcu_expedited()
  * from the corresponding SRCU read-side critical section;
  * doing so will result in deadlock.  However, it is perfectly legal
  * to call synchronize_srcu_expedited() on one srcu_struct from some
  * other srcu_struct's read-side critical section, as long as
  * the resulting graph of srcu_structs is acyclic.
+=======
+ * Note that synchronize_srcu_expedited() has the same deadlock and
+ * memory-ordering properties as does synchronize_srcu().
+>>>>>>> v3.18
 =======
  * Note that synchronize_srcu_expedited() has the same deadlock and
  * memory-ordering properties as does synchronize_srcu().
@@ -568,6 +603,10 @@ EXPORT_SYMBOL_GPL(synchronize_srcu_expedited);
 /**
  * srcu_barrier - Wait until all in-flight call_srcu() callbacks complete.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @sp: srcu_struct on which to wait for in-flight callbacks.
+>>>>>>> v3.18
 =======
  * @sp: srcu_struct on which to wait for in-flight callbacks.
 >>>>>>> v3.18
@@ -712,7 +751,12 @@ static void srcu_reschedule(struct srcu_struct *sp)
 
 	if (pending)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&sp->work, SRCU_INTERVAL);
+=======
+		queue_delayed_work(system_power_efficient_wq,
+				   &sp->work, SRCU_INTERVAL);
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq,
 				   &sp->work, SRCU_INTERVAL);

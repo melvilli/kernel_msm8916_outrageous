@@ -12,6 +12,7 @@
 #define __ASM_MACH_LOONGSON_DMA_COHERENCE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device;
 
 static inline dma_addr_t plat_map_dma_mem(struct device *dev, void *addr,
@@ -19,6 +20,8 @@ static inline dma_addr_t plat_map_dma_mem(struct device *dev, void *addr,
 {
 	return virt_to_phys(addr) | 0x80000000;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SWIOTLB
 #include <linux/swiotlb.h>
 #endif
@@ -35,6 +38,9 @@ static inline dma_addr_t plat_map_dma_mem(struct device *dev, void *addr,
 #else
 	return virt_to_phys(addr) | 0x80000000;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -42,13 +48,19 @@ static inline dma_addr_t plat_map_dma_mem_page(struct device *dev,
 					       struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return page_to_phys(page) | 0x80000000;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_LOONGSON3
 	return page_to_phys(page);
 #else
 	return page_to_phys(page) | 0x80000000;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -56,7 +68,13 @@ static inline unsigned long plat_dma_addr_to_phys(struct device *dev,
 	dma_addr_t dma_addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_LOONGSON2F) && defined(CONFIG_64BIT)
+=======
+#if defined(CONFIG_CPU_LOONGSON3) && defined(CONFIG_64BIT)
+	return dma_addr;
+#elif defined(CONFIG_CPU_LOONGSON2F) && defined(CONFIG_64BIT)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_CPU_LOONGSON3) && defined(CONFIG_64BIT)
 	return dma_addr;
@@ -87,6 +105,7 @@ static inline int plat_dma_supported(struct device *dev, u64 mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void plat_extra_sync_for_device(struct device *dev)
 {
 }
@@ -101,6 +120,8 @@ static inline int plat_device_is_coherent(struct device *dev)
 {
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static inline int plat_device_is_coherent(struct device *dev)
 {
 #ifdef CONFIG_DMA_NONCOHERENT
@@ -108,6 +129,9 @@ static inline int plat_device_is_coherent(struct device *dev)
 #else
 	return 1;
 #endif /* CONFIG_DMA_NONCOHERENT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

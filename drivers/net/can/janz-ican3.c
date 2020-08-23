@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -203,9 +206,12 @@ struct ican3_dev {
 	struct napi_struct napi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Device for printing */
 	struct device *dev;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* module number */
@@ -303,7 +309,11 @@ static int ican3_old_recv_msg(struct ican3_dev *mod, struct ican3_msg *msg)
 
 	if ((xord & MSYNC_RB_MASK) == 0x00) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(mod->dev, "no mbox for reading\n");
+=======
+		netdev_dbg(mod->ndev, "no mbox for reading\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(mod->ndev, "no mbox for reading\n");
 >>>>>>> v3.18
@@ -352,7 +362,11 @@ static int ican3_old_send_msg(struct ican3_dev *mod, struct ican3_msg *msg)
 
 	if ((xord & MSYNC_WB_MASK) == MSYNC_WB_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "no mbox for writing\n");
+=======
+		netdev_err(mod->ndev, "no mbox for writing\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "no mbox for writing\n");
 >>>>>>> v3.18
@@ -558,7 +572,11 @@ static int ican3_new_send_msg(struct ican3_dev *mod, struct ican3_msg *msg)
 
 	if (!(desc.control & DESC_VALID)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(mod->dev, "%s: no free buffers\n", __func__);
+=======
+		netdev_dbg(mod->ndev, "%s: no free buffers\n", __func__);
+>>>>>>> v3.18
 =======
 		netdev_dbg(mod->ndev, "%s: no free buffers\n", __func__);
 >>>>>>> v3.18
@@ -593,7 +611,11 @@ static int ican3_new_recv_msg(struct ican3_dev *mod, struct ican3_msg *msg)
 
 	if (!(desc.control & DESC_VALID)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(mod->dev, "%s: no buffers to recv\n", __func__);
+=======
+		netdev_dbg(mod->ndev, "%s: no buffers to recv\n", __func__);
+>>>>>>> v3.18
 =======
 		netdev_dbg(mod->ndev, "%s: no buffers to recv\n", __func__);
 >>>>>>> v3.18
@@ -907,7 +929,11 @@ static void can_frame_to_ican3(struct ican3_dev *mod,
 static void ican3_handle_idvers(struct ican3_dev *mod, struct ican3_msg *msg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(mod->dev, "IDVERS response: %s\n", msg->data);
+=======
+	netdev_dbg(mod->ndev, "IDVERS response: %s\n", msg->data);
+>>>>>>> v3.18
 =======
 	netdev_dbg(mod->ndev, "IDVERS response: %s\n", msg->data);
 >>>>>>> v3.18
@@ -927,7 +953,11 @@ static void ican3_handle_msglost(struct ican3_dev *mod, struct ican3_msg *msg)
 	 */
 	if (msg->spec == MSG_MSGLOST) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "lost %d control messages\n", msg->data[0]);
+=======
+		netdev_err(mod->ndev, "lost %d control messages\n", msg->data[0]);
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "lost %d control messages\n", msg->data[0]);
 >>>>>>> v3.18
@@ -971,7 +1001,11 @@ static int ican3_handle_cevtind(struct ican3_dev *mod, struct ican3_msg *msg)
 	/* we can only handle the SJA1000 part */
 	if (msg->data[1] != CEVTIND_CHIP_SJA1000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to handle errors on non-SJA1000\n");
+=======
+		netdev_err(mod->ndev, "unable to handle errors on non-SJA1000\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to handle errors on non-SJA1000\n");
 >>>>>>> v3.18
@@ -981,7 +1015,11 @@ static int ican3_handle_cevtind(struct ican3_dev *mod, struct ican3_msg *msg)
 	/* check the message length for sanity */
 	if (le16_to_cpu(msg->len) < 6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "error message too short\n");
+=======
+		netdev_err(mod->ndev, "error message too short\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "error message too short\n");
 >>>>>>> v3.18
@@ -1007,7 +1045,11 @@ static int ican3_handle_cevtind(struct ican3_dev *mod, struct ican3_msg *msg)
 	if (isrc == CEVTIND_BEI) {
 		int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(mod->dev, "bus error interrupt\n");
+=======
+		netdev_dbg(mod->ndev, "bus error interrupt\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(mod->ndev, "bus error interrupt\n");
 >>>>>>> v3.18
@@ -1027,7 +1069,11 @@ static int ican3_handle_cevtind(struct ican3_dev *mod, struct ican3_msg *msg)
 		ret = ican3_set_buserror(mod, 1);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(mod->dev, "unable to re-enable bus-error\n");
+=======
+			netdev_err(mod->ndev, "unable to re-enable bus-error\n");
+>>>>>>> v3.18
 =======
 			netdev_err(mod->ndev, "unable to re-enable bus-error\n");
 >>>>>>> v3.18
@@ -1046,7 +1092,11 @@ static int ican3_handle_cevtind(struct ican3_dev *mod, struct ican3_msg *msg)
 	/* data overrun interrupt */
 	if (isrc == CEVTIND_DOI || isrc == CEVTIND_LOST) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(mod->dev, "data overrun interrupt\n");
+=======
+		netdev_dbg(mod->ndev, "data overrun interrupt\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(mod->ndev, "data overrun interrupt\n");
 >>>>>>> v3.18
@@ -1059,7 +1109,11 @@ static int ican3_handle_cevtind(struct ican3_dev *mod, struct ican3_msg *msg)
 	/* error warning + passive interrupt */
 	if (isrc == CEVTIND_EI) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(mod->dev, "error warning + passive interrupt\n");
+=======
+		netdev_dbg(mod->ndev, "error warning + passive interrupt\n");
+>>>>>>> v3.18
 =======
 		netdev_dbg(mod->ndev, "error warning + passive interrupt\n");
 >>>>>>> v3.18
@@ -1144,7 +1198,11 @@ static void ican3_handle_inquiry(struct ican3_dev *mod, struct ican3_msg *msg)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "received an unknown inquiry response\n");
+=======
+		netdev_err(mod->ndev, "received an unknown inquiry response\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "received an unknown inquiry response\n");
 >>>>>>> v3.18
@@ -1156,7 +1214,11 @@ static void ican3_handle_unknown_message(struct ican3_dev *mod,
 					struct ican3_msg *msg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_warn(mod->dev, "received unknown message: spec 0x%.2x length %d\n",
+=======
+	netdev_warn(mod->ndev, "received unknown message: spec 0x%.2x length %d\n",
+>>>>>>> v3.18
 =======
 	netdev_warn(mod->ndev, "received unknown message: spec 0x%.2x length %d\n",
 >>>>>>> v3.18
@@ -1169,7 +1231,11 @@ static void ican3_handle_unknown_message(struct ican3_dev *mod,
 static void ican3_handle_message(struct ican3_dev *mod, struct ican3_msg *msg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(mod->dev, "%s: modno %d spec 0x%.2x len %d bytes\n", __func__,
+=======
+	netdev_dbg(mod->ndev, "%s: modno %d spec 0x%.2x len %d bytes\n", __func__,
+>>>>>>> v3.18
 =======
 	netdev_dbg(mod->ndev, "%s: modno %d spec 0x%.2x len %d bytes\n", __func__,
 >>>>>>> v3.18
@@ -1380,7 +1446,11 @@ static int ican3_napi(struct napi_struct *napi, int budget)
 	/* process all communication messages */
 	while (true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ican3_msg msg;
+=======
+		struct ican3_msg uninitialized_var(msg);
+>>>>>>> v3.18
 =======
 		struct ican3_msg uninitialized_var(msg);
 >>>>>>> v3.18
@@ -1478,7 +1548,11 @@ static int ican3_reset_module(struct ican3_dev *mod)
 	} while (time_before(jiffies, start + HZ / 4));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(mod->dev, "failed to reset CAN module\n");
+=======
+	netdev_err(mod->ndev, "failed to reset CAN module\n");
+>>>>>>> v3.18
 =======
 	netdev_err(mod->ndev, "failed to reset CAN module\n");
 >>>>>>> v3.18
@@ -1501,7 +1575,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_reset_module(mod);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to reset module\n");
+=======
+		netdev_err(mod->ndev, "unable to reset module\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to reset module\n");
 >>>>>>> v3.18
@@ -1514,7 +1592,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_msg_connect(mod);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to connect to module\n");
+=======
+		netdev_err(mod->ndev, "unable to connect to module\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to connect to module\n");
 >>>>>>> v3.18
@@ -1525,7 +1607,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_msg_newhostif(mod);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to switch to new-style interface\n");
+=======
+		netdev_err(mod->ndev, "unable to switch to new-style interface\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to switch to new-style interface\n");
 >>>>>>> v3.18
@@ -1536,7 +1622,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_set_termination(mod, true);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to enable termination\n");
+=======
+		netdev_err(mod->ndev, "unable to enable termination\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to enable termination\n");
 >>>>>>> v3.18
@@ -1547,7 +1637,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_set_buserror(mod, 1);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to set bus-error\n");
+=======
+		netdev_err(mod->ndev, "unable to set bus-error\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to set bus-error\n");
 >>>>>>> v3.18
@@ -1558,7 +1652,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_msg_fasthostif(mod);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to switch to fast host interface\n");
+=======
+		netdev_err(mod->ndev, "unable to switch to fast host interface\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to switch to fast host interface\n");
 >>>>>>> v3.18
@@ -1568,7 +1666,11 @@ static int ican3_startup_module(struct ican3_dev *mod)
 	ret = ican3_set_id_filter(mod, true);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to set acceptance filter\n");
+=======
+		netdev_err(mod->ndev, "unable to set acceptance filter\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to set acceptance filter\n");
 >>>>>>> v3.18
@@ -1591,7 +1693,11 @@ static int ican3_open(struct net_device *ndev)
 	ret = open_candev(ndev);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to start CAN layer\n");
+=======
+		netdev_err(mod->ndev, "unable to start CAN layer\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to start CAN layer\n");
 >>>>>>> v3.18
@@ -1602,7 +1708,11 @@ static int ican3_open(struct net_device *ndev)
 	ret = ican3_set_bus_state(mod, true);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to set bus-on\n");
+=======
+		netdev_err(mod->ndev, "unable to set bus-on\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to set bus-on\n");
 >>>>>>> v3.18
@@ -1630,7 +1740,11 @@ static int ican3_stop(struct net_device *ndev)
 	ret = ican3_set_bus_state(mod, false);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to set bus-off\n");
+=======
+		netdev_err(mod->ndev, "unable to set bus-off\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "unable to set bus-off\n");
 >>>>>>> v3.18
@@ -1661,7 +1775,11 @@ static int ican3_xmit(struct sk_buff *skb, struct net_device *ndev)
 	/* check that we can actually transmit */
 	if (!ican3_txok(mod)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "BUG: no free descriptors\n");
+=======
+		netdev_err(mod->ndev, "BUG: no free descriptors\n");
+>>>>>>> v3.18
 =======
 		netdev_err(mod->ndev, "BUG: no free descriptors\n");
 >>>>>>> v3.18
@@ -1717,6 +1835,10 @@ static const struct net_device_ops ican3_netdev_ops = {
 	.ndo_stop	= ican3_stop,
 	.ndo_start_xmit	= ican3_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu = can_change_mtu,
 >>>>>>> v3.18
@@ -1781,7 +1903,11 @@ static int ican3_set_mode(struct net_device *ndev, enum can_mode mode)
 	ret = ican3_set_bus_state(mod, true);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mod->dev, "unable to set bus-on\n");
+=======
+		netdev_err(ndev, "unable to set bus-on\n");
+>>>>>>> v3.18
 =======
 		netdev_err(ndev, "unable to set bus-on\n");
 >>>>>>> v3.18
@@ -1810,7 +1936,11 @@ static int ican3_get_berr_counter(const struct net_device *ndev,
 	ret = wait_for_completion_timeout(&mod->buserror_comp, HZ);
 	if (ret == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(mod->dev, "%s timed out\n", __func__);
+=======
+		netdev_info(mod->ndev, "%s timed out\n", __func__);
+>>>>>>> v3.18
 =======
 		netdev_info(mod->ndev, "%s timed out\n", __func__);
 >>>>>>> v3.18
@@ -1840,7 +1970,11 @@ static ssize_t ican3_sysfs_show_term(struct device *dev,
 	ret = wait_for_completion_timeout(&mod->termination_comp, HZ);
 	if (ret == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(mod->dev, "%s timed out\n", __func__);
+=======
+		netdev_info(mod->ndev, "%s timed out\n", __func__);
+>>>>>>> v3.18
 =======
 		netdev_info(mod->ndev, "%s timed out\n", __func__);
 >>>>>>> v3.18
@@ -1859,7 +1993,11 @@ static ssize_t ican3_sysfs_set_term(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &enable))
+=======
+	if (kstrtoul(buf, 0, &enable))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &enable))
 >>>>>>> v3.18
@@ -1898,7 +2036,11 @@ static int ican3_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1922,7 +2064,10 @@ static int ican3_probe(struct platform_device *pdev)
 	mod = netdev_priv(ndev);
 	mod->ndev = ndev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mod->dev = &pdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mod->num = pdata->modno;

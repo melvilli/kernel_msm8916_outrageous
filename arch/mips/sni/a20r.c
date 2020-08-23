@@ -123,7 +123,10 @@ static struct resource sc26xx_rsrc[] = {
 static struct sccnxp_pdata sccnxp_data = {
 	.reg_shift	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.frequency	= 3686400,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.mctrl_cfg[0]	= MCTRL_SIG(DTR_OP, LINE_OP7) |

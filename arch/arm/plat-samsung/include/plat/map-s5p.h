@@ -16,7 +16,10 @@
 #define S5P_VA_CHIPID		S3C_ADDR(0x02000000)
 #define S5P_VA_CMU		S3C_ADDR(0x02100000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5P_VA_PMU		S3C_ADDR(0x02180000)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define S5P_VA_GPIO		S3C_ADDR(0x02200000)

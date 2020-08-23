@@ -8,13 +8,19 @@ config PPC4xx_PCI_EXPRESS
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PPC4xx_HSTA_MSI
 	bool
 	depends on PCI_MSI
 	depends on PCI && 4xx
 	default n
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PPC4xx_MSI
 	bool
@@ -29,7 +35,11 @@ config PPC_MSI_BITMAP
 	default y if FSL_PCI
 	default y if PPC4xx_MSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default y if POWERNV_MSI
+=======
+	default y if PPC_POWERNV
+>>>>>>> v3.18
 =======
 	default y if PPC_POWERNV
 >>>>>>> v3.18
@@ -42,7 +52,11 @@ config PPC_SCOM
 config SCOM_DEBUGFS
 	bool "Expose SCOM controllers via debugfs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PPC_SCOM
+=======
+	depends on PPC_SCOM && DEBUG_FS
+>>>>>>> v3.18
 =======
 	depends on PPC_SCOM && DEBUG_FS
 >>>>>>> v3.18

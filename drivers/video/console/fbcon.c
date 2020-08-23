@@ -405,7 +405,11 @@ static void cursor_timer_handler(unsigned long dev_addr)
 	struct fbcon_ops *ops = info->fbcon_par;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_work(&info->queue);
+=======
+	queue_work(system_power_efficient_wq, &info->queue);
+>>>>>>> v3.18
 =======
 	queue_work(system_power_efficient_wq, &info->queue);
 >>>>>>> v3.18
@@ -453,13 +457,19 @@ static int __init fb_console_setup(char *this_opt)
 
 	while ((options = strsep(&this_opt, ",")) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strncmp(options, "font:", 5))
 			strlcpy(fontname, options + 5, sizeof(fontname));
 =======
+=======
+>>>>>>> v3.18
 		if (!strncmp(options, "font:", 5)) {
 			strlcpy(fontname, options + 5, sizeof(fontname));
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		
 		if (!strncmp(options, "scrollback:", 11)) {
@@ -469,6 +479,7 @@ static int __init fb_console_setup(char *this_opt)
 				if (*options == 'k' || *options == 'K') {
 					fbcon_softback_size *= 1024;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					options++;
 				}
 				if (*options != ',')
@@ -476,6 +487,11 @@ static int __init fb_console_setup(char *this_opt)
 				options++;
 			} else
 				return 1;
+=======
+				}
+			}
+			continue;
+>>>>>>> v3.18
 =======
 				}
 			}
@@ -496,8 +512,12 @@ static int __init fb_console_setup(char *this_opt)
 				fbcon_map_override();
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			return 1;
+=======
+			continue;
+>>>>>>> v3.18
 =======
 			continue;
 >>>>>>> v3.18
@@ -513,7 +533,12 @@ static int __init fb_console_setup(char *this_opt)
 				last_fb_vc = simple_strtoul(options, &options, 10) - 1;
 			fbcon_is_default = 0; 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}	
+=======
+			continue;
+		}
+>>>>>>> v3.18
 =======
 			continue;
 		}
@@ -526,6 +551,10 @@ static int __init fb_console_setup(char *this_opt)
 			if (initial_rotation > 3)
 				initial_rotation = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			continue;
+>>>>>>> v3.18
 =======
 			continue;
 >>>>>>> v3.18
@@ -587,6 +616,7 @@ static int do_fbcon_takeover(int show_logo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fbcon_takeover(int show_logo)
 {
 	int err, i;
@@ -615,6 +645,8 @@ static int fbcon_takeover(int show_logo)
 	return err;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef MODULE
@@ -810,6 +842,10 @@ static int con2fb_release_oldinfo(struct vc_data *vc, struct fb_info *oldinfo,
 		kfree(ops->cursor_state.mask);
 		kfree(ops->cursor_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kfree(ops->cursor_src);
+>>>>>>> v3.18
 =======
 		kfree(ops->cursor_src);
 >>>>>>> v3.18
@@ -825,7 +861,11 @@ static int con2fb_release_oldinfo(struct vc_data *vc, struct fb_info *oldinfo,
 		  fb_set_par() may be needed for the newinfo.
 		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (newinfo->fbops->fb_set_par) {
+=======
+		if (newinfo && newinfo->fbops->fb_set_par) {
+>>>>>>> v3.18
 =======
 		if (newinfo && newinfo->fbops->fb_set_par) {
 >>>>>>> v3.18
@@ -943,7 +983,11 @@ static int set_con2fb_map(int unit, int newidx, int user)
  *  Low Level Operations
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* NOTE: fbcon cannot be __init: it may be called from take_over_console later */
+=======
+/* NOTE: fbcon cannot be __init: it may be called from do_take_over_console later */
+>>>>>>> v3.18
 =======
 /* NOTE: fbcon cannot be __init: it may be called from do_take_over_console later */
 >>>>>>> v3.18
@@ -1242,8 +1286,11 @@ static void fbcon_free_font(struct display *p, bool freefont)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_vc_hi_font(struct vc_data *vc, bool set);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void fbcon_deinit(struct vc_data *vc)
@@ -1282,9 +1329,12 @@ finished:
 		vc->vc_font.data = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vc->vc_hi_font_mask)
 		set_vc_hi_font(vc, false);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!con_is_bound(&fb_con))
@@ -2523,11 +2573,14 @@ static int fbcon_get_font(struct vc_data *vc, struct console_font *font)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* set/clear vc_hi_font_mask and update vc attrs accordingly */
 static void set_vc_hi_font(struct vc_data *vc, bool set)
 {
 	if (!set) {
 =======
+=======
+>>>>>>> v3.18
 static int fbcon_do_set_font(struct vc_data *vc, int w, int h,
 			     const u8 * data, int userfont)
 {
@@ -2554,6 +2607,9 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h,
 	vc->vc_font.width = w;
 	vc->vc_font.height = h;
 	if (vc->vc_hi_font_mask && cnt == 256) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vc->vc_hi_font_mask = 0;
 		if (vc->vc_can_do_color) {
@@ -2578,7 +2634,11 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h,
 			vc->vc_attr >>= 1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
+=======
+	} else if (!vc->vc_hi_font_mask && cnt == 512) {
+>>>>>>> v3.18
 =======
 	} else if (!vc->vc_hi_font_mask && cnt == 512) {
 >>>>>>> v3.18
@@ -2614,6 +2674,7 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h,
 				vc->vc_video_erase_char = c & ~0x100;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 }
 
@@ -2646,6 +2707,10 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h,
 		set_vc_hi_font(vc, false);
 	else if (!vc->vc_hi_font_mask && cnt == 512)
 		set_vc_hi_font(vc, true);
+=======
+
+	}
+>>>>>>> v3.18
 =======
 
 	}
@@ -3159,9 +3224,12 @@ static int fbcon_fb_unbind(int idx)
 				set_con2fb_map(i, new_idx, 0);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		ret = fbcon_unbind();
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		struct fb_info *info = registered_fb[idx];
 
@@ -3187,6 +3255,9 @@ static int fbcon_fb_unbind(int idx)
 		}
 		ret = fbcon_unbind();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -3674,8 +3745,14 @@ static void fbcon_start(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		console_unlock();
 		fbcon_takeover(0);
+=======
+		do_fbcon_takeover(0);
+		console_unlock();
+
+>>>>>>> v3.18
 =======
 		do_fbcon_takeover(0);
 		console_unlock();
@@ -3711,13 +3788,19 @@ static void fbcon_exit(void)
 
 		for (j = first_fb_vc; j <= last_fb_vc; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (con2fb_map[j] == i)
 				mapped = 1;
 =======
+=======
+>>>>>>> v3.18
 			if (con2fb_map[j] == i) {
 				mapped = 1;
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -3732,6 +3815,10 @@ static void fbcon_exit(void)
 				fbcon_del_cursor_timer(info);
 				kfree(ops->cursor_src);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				kfree(ops->cursor_state.mask);
+>>>>>>> v3.18
 =======
 				kfree(ops->cursor_state.mask);
 >>>>>>> v3.18
@@ -3796,8 +3883,13 @@ static void __exit fb_console_exit(void)
 	device_destroy(fb_class, MKDEV(0, 0));
 	fbcon_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_unlock();
 	unregister_con_driver(&fb_con);
+=======
+	do_unregister_con_driver(&fb_con);
+	console_unlock();
+>>>>>>> v3.18
 =======
 	do_unregister_con_driver(&fb_con);
 	console_unlock();

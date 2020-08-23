@@ -18,11 +18,16 @@
 #define __ARCH_ARM_MACH_OMAP2_CM_33XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "common.h"
 
 #include "cm.h"
 #include "cm-regbits-33xx.h"
 #include "iomap.h"
+=======
+#include "cm.h"
+#include "cm-regbits-33xx.h"
+>>>>>>> v3.18
 =======
 #include "cm.h"
 #include "cm-regbits-33xx.h"
@@ -383,6 +388,7 @@
 
 #ifndef __ASSEMBLER__
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool am33xx_cm_is_clkdm_in_hwsup(s16 inst, u16 cdoffs);
 extern void am33xx_cm_clkdm_enable_hwsup(s16 inst, u16 cdoffs);
 extern void am33xx_cm_clkdm_disable_hwsup(s16 inst, u16 cdoffs);
@@ -391,6 +397,8 @@ extern void am33xx_cm_clkdm_force_wakeup(s16 inst, u16 cdoffs);
 
 #ifdef CONFIG_SOC_AM33XX
 =======
+=======
+>>>>>>> v3.18
 bool am33xx_cm_is_clkdm_in_hwsup(u16 inst, u16 cdoffs);
 void am33xx_cm_clkdm_enable_hwsup(u16 inst, u16 cdoffs);
 void am33xx_cm_clkdm_disable_hwsup(u16 inst, u16 cdoffs);
@@ -398,6 +406,9 @@ void am33xx_cm_clkdm_force_sleep(u16 inst, u16 cdoffs);
 void am33xx_cm_clkdm_force_wakeup(u16 inst, u16 cdoffs);
 
 #if defined(CONFIG_SOC_AM33XX) || defined(CONFIG_SOC_AM43XX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int am33xx_cm_wait_module_idle(u16 inst, s16 cdoffs,
 					u16 clkctrl_offs);

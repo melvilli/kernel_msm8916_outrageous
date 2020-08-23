@@ -1,9 +1,13 @@
 config VT6656
 	tristate "VIA Technologies VT6656 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB && WLAN && m
 	select WIRELESS_EXT
 	select WEXT_PRIV
+=======
+	depends on MAC80211 && USB && WLAN && m
+>>>>>>> v3.18
 =======
 	depends on MAC80211 && USB && WLAN && m
 >>>>>>> v3.18

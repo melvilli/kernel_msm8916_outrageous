@@ -137,7 +137,10 @@ enum ath6kl_fw_capability {
 	ATH6KL_FW_CAPABILITY_HEART_BEAT_POLL,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* WMI_SET_TX_SELECT_RATES_CMDID uses 64 bit size rate table */
 	ATH6KL_FW_CAPABILITY_64BIT_RATES,
 
@@ -153,6 +156,9 @@ enum ath6kl_fw_capability {
 	/* firmare doesn't support IP checksumming */
 	ATH6KL_FW_CAPABILITY_NO_IP_CHECKSUM,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* this needs to be last */
 	ATH6KL_FW_CAPABILITY_MAX,
@@ -168,9 +174,12 @@ struct ath6kl_fw_ie {
 
 enum ath6kl_hw_flags {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ATH6KL_HW_64BIT_RATES		= BIT(0),
 	ATH6KL_HW_AP_INACTIVITY_MINS	= BIT(1),
 	ATH6KL_HW_MAP_LP_ENDPOINT	= BIT(2),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ATH6KL_HW_SDIO_CRC_ERROR_WAR	= BIT(3),
@@ -180,6 +189,10 @@ enum ath6kl_hw_flags {
 #define ATH6KL_FW_API3_FILE "fw-3.bin"
 #define ATH6KL_FW_API4_FILE "fw-4.bin"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ATH6KL_FW_API5_FILE "fw-5.bin"
+>>>>>>> v3.18
 =======
 #define ATH6KL_FW_API5_FILE "fw-5.bin"
 >>>>>>> v3.18
@@ -241,9 +254,12 @@ enum ath6kl_hw_flags {
 #define AR6004_HW_1_3_FW_DIR			"ath6k/AR6004/hw1.3"
 #define AR6004_HW_1_3_FIRMWARE_FILE		"fw.ram.bin"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR6004_HW_1_3_BOARD_DATA_FILE		"ath6k/AR6004/hw1.3/bdata.bin"
 #define AR6004_HW_1_3_DEFAULT_BOARD_DATA_FILE	"ath6k/AR6004/hw1.3/bdata.bin"
 =======
+=======
+>>>>>>> v3.18
 #define AR6004_HW_1_3_TCMD_FIRMWARE_FILE	"utf.bin"
 #define AR6004_HW_1_3_UTF_FIRMWARE_FILE		"utf.bin"
 #define AR6004_HW_1_3_TESTSCRIPT_FILE		"nullTestFlow.bin"
@@ -259,6 +275,9 @@ enum ath6kl_hw_flags {
 #define AR6004_HW_3_0_TESTSCRIPT_FILE		"nullTestFlow.bin"
 #define AR6004_HW_3_0_BOARD_DATA_FILE	      AR6004_HW_3_0_FW_DIR "/bdata.bin"
 #define AR6004_HW_3_0_DEFAULT_BOARD_DATA_FILE AR6004_HW_3_0_FW_DIR "/bdata.bin"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Per STA data, used in AP mode */

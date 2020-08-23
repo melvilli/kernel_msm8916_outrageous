@@ -3,12 +3,15 @@
 
 #include <stdlib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../util/types.h"
 #include <asm/perf_regs.h>
 
 #ifndef ARCH_X86_64
 #define PERF_REGS_MASK ((1ULL << PERF_REG_X86_32_MAX) - 1)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <asm/perf_regs.h>
 
@@ -18,6 +21,9 @@ void perf_regs_load(u64 *regs);
 #define PERF_REGS_MASK ((1ULL << PERF_REG_X86_32_MAX) - 1)
 #define PERF_REGS_MAX PERF_REG_X86_32_MAX
 #define PERF_SAMPLE_REGS_ABI PERF_SAMPLE_REGS_ABI_32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define REG_NOSUPPORT ((1ULL << PERF_REG_X86_DS) | \
@@ -26,6 +32,11 @@ void perf_regs_load(u64 *regs);
 		       (1ULL << PERF_REG_X86_GS))
 #define PERF_REGS_MASK (((1ULL << PERF_REG_X86_64_MAX) - 1) & ~REG_NOSUPPORT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PERF_REGS_MAX PERF_REG_X86_64_MAX
+#define PERF_SAMPLE_REGS_ABI PERF_SAMPLE_REGS_ABI_64
+>>>>>>> v3.18
 =======
 #define PERF_REGS_MAX PERF_REG_X86_64_MAX
 #define PERF_SAMPLE_REGS_ABI PERF_SAMPLE_REGS_ABI_64
@@ -70,7 +81,11 @@ static inline const char *perf_reg_name(int id)
 	case PERF_REG_X86_GS:
 		return "GS";
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ARCH_X86_64
+=======
+#ifdef HAVE_ARCH_X86_64_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_ARCH_X86_64_SUPPORT
 >>>>>>> v3.18
@@ -91,7 +106,11 @@ static inline const char *perf_reg_name(int id)
 	case PERF_REG_X86_R15:
 		return "R15";
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* ARCH_X86_64 */
+=======
+#endif /* HAVE_ARCH_X86_64_SUPPORT */
+>>>>>>> v3.18
 =======
 #endif /* HAVE_ARCH_X86_64_SUPPORT */
 >>>>>>> v3.18

@@ -2,7 +2,10 @@
 #define _INTEL_RINGBUFFER_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hashtable.h>
 
 #define I915_CMD_HASH_ORDER 9
@@ -14,6 +17,9 @@
  */
 #define CACHELINE_BYTES 64
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Gen2 BSpec "1. Programming Environment" / 1.4.4.6 "Ring Buffer Use"
@@ -48,6 +54,7 @@ struct  intel_hw_status_page {
 #define I915_WRITE_IMR(ring, val) I915_WRITE(RING_IMR((ring)->mmio_base), val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define I915_READ_NOPID(ring) I915_READ(RING_NOPID((ring)->mmio_base))
 #define I915_READ_SYNC_0(ring) I915_READ(RING_SYNC_0((ring)->mmio_base))
 #define I915_READ_SYNC_1(ring) I915_READ(RING_SYNC_1((ring)->mmio_base))
@@ -72,6 +79,8 @@ struct  intel_ring_buffer {
 	int		effective_size;
 	struct intel_hw_status_page status_page;
 =======
+=======
+>>>>>>> v3.18
 #define I915_READ_MODE(ring) I915_READ(RING_MI_MODE((ring)->mmio_base))
 #define I915_WRITE_MODE(ring, val) I915_WRITE(RING_MI_MODE((ring)->mmio_base), val)
 
@@ -139,6 +148,9 @@ struct intel_ringbuffer {
 	int space;
 	int size;
 	int effective_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/** We track the position of the requests in the ring buffer, and
@@ -149,6 +161,7 @@ struct intel_ringbuffer {
 	 * last_retired_head is set to -1 after the value is consumed so
 	 * we can detect new retirements.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32		last_retired_head;
 
@@ -168,6 +181,8 @@ struct intel_ringbuffer {
 				  u32	flush_domains);
 	int		(*add_request)(struct intel_ring_buffer *ring);
 =======
+=======
+>>>>>>> v3.18
 	u32 last_retired_head;
 };
 
@@ -204,6 +219,9 @@ struct  intel_engine_cs {
 				  u32	invalidate_domains,
 				  u32	flush_domains);
 	int		(*add_request)(struct intel_engine_cs *ring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Some chipsets are not quite as coherent as advertised and need
 	 * an expensive kick to force a true read of the up-to-date seqno.
@@ -211,6 +229,7 @@ struct  intel_engine_cs {
 	 * seen value is good enough. Note that the seqno will always be
 	 * monotonic, even if not coherent.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32		(*get_seqno)(struct intel_ring_buffer *ring,
 				     bool lazy_coherency);
@@ -229,6 +248,8 @@ struct  intel_engine_cs {
 	u32		semaphore_register[3]; /*our mbox written by others */
 	u32		signal_mbox[2]; /* mboxes this ring signals to */
 =======
+=======
+>>>>>>> v3.18
 	u32		(*get_seqno)(struct intel_engine_cs *ring,
 				     bool lazy_coherency);
 	void		(*set_seqno)(struct intel_engine_cs *ring,
@@ -311,6 +332,9 @@ struct  intel_engine_cs {
 	int		(*emit_bb_start)(struct intel_ringbuffer *ringbuf,
 					 u64 offset, unsigned flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/**
 	 * List of objects currently involved in rendering from the
@@ -333,6 +357,7 @@ struct  intel_engine_cs {
 	/**
 	 * Do we have some not yet emitted requests outstanding?
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 outstanding_lazy_request;
 	bool gpu_caches_dirty;
@@ -358,6 +383,8 @@ intel_ring_initialized(struct intel_ring_buffer *ring)
 static inline unsigned
 intel_ring_flag(struct intel_ring_buffer *ring)
 =======
+=======
+>>>>>>> v3.18
 	struct drm_i915_gem_request *preallocated_lazy_request;
 	u32 outstanding_lazy_seqno;
 	bool gpu_caches_dirty;
@@ -414,6 +441,9 @@ bool intel_ring_initialized(struct intel_engine_cs *ring);
 
 static inline unsigned
 intel_ring_flag(struct intel_engine_cs *ring)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 1 << ring->id;
@@ -421,8 +451,13 @@ intel_ring_flag(struct intel_engine_cs *ring)
 
 static inline u32
 <<<<<<< HEAD
+<<<<<<< HEAD
 intel_ring_sync_index(struct intel_ring_buffer *ring,
 		      struct intel_ring_buffer *other)
+=======
+intel_ring_sync_index(struct intel_engine_cs *ring,
+		      struct intel_engine_cs *other)
+>>>>>>> v3.18
 =======
 intel_ring_sync_index(struct intel_engine_cs *ring,
 		      struct intel_engine_cs *other)
@@ -432,15 +467,21 @@ intel_ring_sync_index(struct intel_engine_cs *ring,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * cs -> 0 = vcs, 1 = bcs
 	 * vcs -> 0 = bcs, 1 = cs,
 	 * bcs -> 0 = cs, 1 = vcs.
 =======
+=======
+>>>>>>> v3.18
 	 * rcs -> 0 = vcs, 1 = bcs, 2 = vecs, 3 = vcs2;
 	 * vcs -> 0 = bcs, 1 = vecs, 2 = vcs2, 3 = rcs;
 	 * bcs -> 0 = vecs, 1 = vcs2. 2 = rcs, 3 = vcs;
 	 * vecs -> 0 = vcs2, 1 = rcs, 2 = vcs, 3 = bcs;
 	 * vcs2 -> 0 = rcs, 1 = vcs, 2 = bcs, 3 = vecs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 
@@ -453,7 +494,11 @@ intel_ring_sync_index(struct intel_engine_cs *ring,
 
 static inline u32
 <<<<<<< HEAD
+<<<<<<< HEAD
 intel_read_status_page(struct intel_ring_buffer *ring,
+=======
+intel_read_status_page(struct intel_engine_cs *ring,
+>>>>>>> v3.18
 =======
 intel_read_status_page(struct intel_engine_cs *ring,
 >>>>>>> v3.18
@@ -466,7 +511,11 @@ intel_read_status_page(struct intel_engine_cs *ring,
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 intel_write_status_page(struct intel_ring_buffer *ring,
+=======
+intel_write_status_page(struct intel_engine_cs *ring,
+>>>>>>> v3.18
 =======
 intel_write_status_page(struct intel_engine_cs *ring,
 >>>>>>> v3.18
@@ -494,6 +543,7 @@ intel_write_status_page(struct intel_engine_cs *ring,
 #define I915_GEM_HWS_SCRATCH_INDEX	0x30
 #define I915_GEM_HWS_SCRATCH_ADDR (I915_GEM_HWS_SCRATCH_INDEX << MI_STORE_DWORD_INDEX_SHIFT)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void intel_cleanup_ring_buffer(struct intel_ring_buffer *ring);
 
@@ -530,6 +580,8 @@ static inline u32 intel_ring_get_seqno(struct intel_ring_buffer *ring)
 
 static inline void i915_trace_irq_get(struct intel_ring_buffer *ring, u32 seqno)
 =======
+=======
+>>>>>>> v3.18
 void intel_destroy_ringbuffer_obj(struct intel_ringbuffer *ringbuf);
 int intel_alloc_ringbuffer_obj(struct drm_device *dev,
 			       struct intel_ringbuffer *ringbuf);
@@ -585,6 +637,9 @@ static inline u32 intel_ring_get_seqno(struct intel_engine_cs *ring)
 }
 
 static inline void i915_trace_irq_get(struct intel_engine_cs *ring, u32 seqno)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (ring->trace_irq_seqno == 0 && ring->irq_get(ring))

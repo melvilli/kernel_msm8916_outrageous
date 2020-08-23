@@ -149,8 +149,13 @@ static const int ab9540_irq_regoffset[AB9540_NUM_IRQ_REGS] = {
 /* AB8540 support */
 static const int ab8540_irq_regoffset[AB8540_NUM_IRQ_REGS] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	0, 1, 2, 3, 4, -1, -1, -1, -1, 11, 18, 19, 20, 21, 12, 13, 24, 5, 22, 23,
 	25, 26, 27, 28, 29, 30, 31,
+=======
+	0, 1, 2, 3, 4, -1, -1, -1, -1, 11, 18, 19, 20, 21, 12, 13, 24, 5, 22,
+	23, 25, 26, 27, 28, 29, 30, 31,
+>>>>>>> v3.18
 =======
 	0, 1, 2, 3, 4, -1, -1, -1, -1, 11, 18, 19, 20, 21, 12, 13, 24, 5, 22,
 	23, 25, 26, 27, 28, 29, 30, 31,
@@ -328,7 +333,11 @@ static int ab8500_mask_and_set_register(struct device *dev,
 
 	atomic_inc(&ab8500->transfer_ongoing);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret= mask_and_set_register_interruptible(ab8500, bank, reg,
+=======
+	ret = mask_and_set_register_interruptible(ab8500, bank, reg,
+>>>>>>> v3.18
 =======
 	ret = mask_and_set_register_interruptible(ab8500, bank, reg,
 >>>>>>> v3.18
@@ -425,15 +434,21 @@ static void ab8500_irq_unmask(struct irq_data *data)
 		if (offset >= AB8500_INT_GPIO6R && offset <= AB8500_INT_GPIO41R)
 			ab8500->mask[index + 2] &= ~mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (offset >= AB9540_INT_GPIO50R && offset <= AB9540_INT_GPIO54R)
 			ab8500->mask[index + 1] &= ~mask;
 		else if (offset == AB8540_INT_GPIO43R || offset == AB8540_INT_GPIO44R)
 =======
+=======
+>>>>>>> v3.18
 		else if (offset >= AB9540_INT_GPIO50R &&
 			 offset <= AB9540_INT_GPIO54R)
 			ab8500->mask[index + 1] &= ~mask;
 		else if (offset == AB8540_INT_GPIO43R ||
 			 offset == AB8540_INT_GPIO44R)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Here the falling IRQ is one bit lower */
 			ab8500->mask[index] &= ~(mask << 1);
@@ -469,7 +484,11 @@ static void update_latch_offset(u8 *offset, int i)
 	if (unlikely(*offset == 16))
 			*offset = 25;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((i==3) && (*offset >= 24))
+=======
+	if ((i == 3) && (*offset >= 24))
+>>>>>>> v3.18
 =======
 	if ((i == 3) && (*offset >= 24))
 >>>>>>> v3.18
@@ -513,7 +532,11 @@ static int ab8500_handle_hierarchical_line(struct ab8500 *ab8500,
 			line += 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		handle_nested_irq(ab8500->irq_base + line);
+=======
+		handle_nested_irq(irq_create_mapping(ab8500->domain, line));
+>>>>>>> v3.18
 =======
 		handle_nested_irq(irq_create_mapping(ab8500->domain, line));
 >>>>>>> v3.18
@@ -599,8 +622,13 @@ static int ab8500_irq_map(struct irq_domain *d, unsigned int virq,
 
 static struct irq_domain_ops ab8500_irq_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
         .map    = ab8500_irq_map,
         .xlate  = irq_domain_xlate_twocell,
+=======
+	.map    = ab8500_irq_map,
+	.xlate  = irq_domain_xlate_twocell,
+>>>>>>> v3.18
 =======
 	.map    = ab8500_irq_map,
 	.xlate  = irq_domain_xlate_twocell,
@@ -622,8 +650,13 @@ static int ab8500_irq_init(struct ab8500 *ab8500, struct device_node *np)
 
 	/* If ->irq_base is zero this will give a linear mapping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ab8500->domain = irq_domain_add_simple(NULL,
 			num_irqs, ab8500->irq_base,
+=======
+	ab8500->domain = irq_domain_add_simple(ab8500->dev->of_node,
+			num_irqs, 0,
+>>>>>>> v3.18
 =======
 	ab8500->domain = irq_domain_add_simple(ab8500->dev->of_node,
 			num_irqs, 0,
@@ -643,8 +676,13 @@ int ab8500_suspend(struct ab8500 *ab8500)
 	if (atomic_read(&ab8500->transfer_ongoing))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return 0;
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -691,7 +729,10 @@ static struct resource ab8500_rtc_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource ab8540_rtc_resources[] = {
 	{
 		.name	= "1S",
@@ -707,6 +748,9 @@ static struct resource ab8540_rtc_resources[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct resource ab8500_poweronkey_db_resources[] = {
 	{
@@ -1061,7 +1105,11 @@ static struct resource ab8500_temp_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell ab8500_bm_devs[] = {
+=======
+static const struct mfd_cell ab8500_bm_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell ab8500_bm_devs[] = {
 >>>>>>> v3.18
@@ -1100,7 +1148,11 @@ static const struct mfd_cell ab8500_bm_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell ab8500_devs[] = {
+=======
+static const struct mfd_cell ab8500_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell ab8500_devs[] = {
 >>>>>>> v3.18
@@ -1118,11 +1170,17 @@ static const struct mfd_cell ab8500_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.name = "ab8500-ext-regulator",
 		.of_compatible = "stericsson,ab8500-ext-regulator",
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name = "ab8500-regulator",
 		.of_compatible = "stericsson,ab8500-regulator",
@@ -1173,10 +1231,13 @@ static const struct mfd_cell ab8500_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "ab8500-leds",
 		.of_compatible = "stericsson,ab8500-leds",
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "ab8500-denc",
@@ -1201,16 +1262,22 @@ static const struct mfd_cell ab8500_devs[] = {
 	{
 		.name = "ab8500-codec",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 };
 
 static struct mfd_cell ab9540_devs[] = {
 =======
+=======
+>>>>>>> v3.18
 		.of_compatible = "stericsson,ab8500-codec",
 	},
 };
 
 static const struct mfd_cell ab9540_devs[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	{
@@ -1224,6 +1291,12 @@ static const struct mfd_cell ab9540_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.name = "ab8500-ext-regulator",
+	},
+	{
+>>>>>>> v3.18
 =======
 		.name = "ab8500-ext-regulator",
 	},
@@ -1262,9 +1335,12 @@ static const struct mfd_cell ab9540_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "ab8500-leds",
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "abx500-temp",
@@ -1292,7 +1368,11 @@ static const struct mfd_cell ab9540_devs[] = {
 
 /* Device list for ab8505  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell ab8505_devs[] = {
+=======
+static const struct mfd_cell ab8505_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell ab8505_devs[] = {
 >>>>>>> v3.18
@@ -1340,9 +1420,12 @@ static const struct mfd_cell ab8505_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "ab8500-leds",
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "pinctrl-ab8505",
@@ -1363,7 +1446,11 @@ static const struct mfd_cell ab8505_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell ab8540_devs[] = {
+=======
+static const struct mfd_cell ab8540_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell ab8540_devs[] = {
 >>>>>>> v3.18
@@ -1379,6 +1466,12 @@ static const struct mfd_cell ab8540_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.name = "ab8500-ext-regulator",
+	},
+	{
+>>>>>>> v3.18
 =======
 		.name = "ab8500-ext-regulator",
 	},
@@ -1398,11 +1491,14 @@ static const struct mfd_cell ab8540_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "ab8500-rtc",
 		.num_resources = ARRAY_SIZE(ab8500_rtc_resources),
 		.resources = ab8500_rtc_resources,
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "ab8500-acc-det",
@@ -1420,9 +1516,12 @@ static const struct mfd_cell ab8540_devs[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "ab8500-leds",
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "abx500-temp",
@@ -1448,7 +1547,10 @@ static const struct mfd_cell ab8540_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct mfd_cell ab8540_cut1_devs[] = {
 	{
 		.name = "ab8500-rtc",
@@ -1467,6 +1569,9 @@ static const struct mfd_cell ab8540_cut2_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t show_chip_id(struct device *dev,
 				struct device_attribute *attr, char *buf)
@@ -1663,7 +1768,11 @@ static struct attribute_group ab9540_attr_group = {
 static int ab8500_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static char *switch_off_status[] = {
+=======
+	static const char *switch_off_status[] = {
+>>>>>>> v3.18
 =======
 	static const char *switch_off_status[] = {
 >>>>>>> v3.18
@@ -1676,7 +1785,11 @@ static int ab8500_probe(struct platform_device *pdev)
 		"Power on key 1 pressed longer than 10 seconds",
 		"DB8500 thermal shutdown"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static char *turn_on_status[] = {
+=======
+	static const char *turn_on_status[] = {
+>>>>>>> v3.18
 =======
 	static const char *turn_on_status[] = {
 >>>>>>> v3.18
@@ -1699,6 +1812,7 @@ static int ab8500_probe(struct platform_device *pdev)
 	u8 value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ab8500 = devm_kzalloc(&pdev->dev, sizeof *ab8500, GFP_KERNEL);
 	if (!ab8500)
 		return -ENOMEM;
@@ -1712,6 +1826,8 @@ static int ab8500_probe(struct platform_device *pdev)
 	if (!resource)
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	ab8500 = devm_kzalloc(&pdev->dev, sizeof(*ab8500), GFP_KERNEL);
 	if (!ab8500)
 		return -ENOMEM;
@@ -1723,6 +1839,9 @@ static int ab8500_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "no IRQ resource\n");
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ab8500->irq = resource->start;
@@ -1746,13 +1865,19 @@ static int ab8500_probe(struct platform_device *pdev)
 		ret = get_register_interruptible(ab8500, AB8500_MISC,
 			AB8500_IC_NAME_REG, &value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret < 0)
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 		if (ret < 0) {
 			dev_err(&pdev->dev, "could not probe HW\n");
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ab8500->version = value;
@@ -1776,7 +1901,11 @@ static int ab8500_probe(struct platform_device *pdev)
 		ab8500->irq_reg_offset = ab8540_irq_regoffset;
 		ab8500->it_latchhier_num = AB8540_IT_LATCHHIER_NUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}/* Configure AB8500 or AB9540 IRQ */
+=======
+	} /* Configure AB8500 or AB9540 IRQ */
+>>>>>>> v3.18
 =======
 	} /* Configure AB8500 or AB9540 IRQ */
 >>>>>>> v3.18
@@ -1790,17 +1919,23 @@ static int ab8500_probe(struct platform_device *pdev)
 		ab8500->it_latchhier_num = AB8500_IT_LATCHHIER_NUM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ab8500->mask = devm_kzalloc(&pdev->dev, ab8500->mask_size, GFP_KERNEL);
 	if (!ab8500->mask)
 		return -ENOMEM;
 	ab8500->oldmask = devm_kzalloc(&pdev->dev, ab8500->mask_size, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	ab8500->mask = devm_kzalloc(&pdev->dev, ab8500->mask_size,
 				    GFP_KERNEL);
 	if (!ab8500->mask)
 		return -ENOMEM;
 	ab8500->oldmask = devm_kzalloc(&pdev->dev, ab8500->mask_size,
 				       GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ab8500->oldmask)
 		return -ENOMEM;
@@ -1827,6 +1962,7 @@ static int ab8500_probe(struct platform_device *pdev)
 		for (i = 0; i < ARRAY_SIZE(switch_off_status); i++) {
 			if (value & 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_CONT " \"%s\"",
 				       switch_off_status[i]);
 			value = value >> 1;
@@ -1836,6 +1972,8 @@ static int ab8500_probe(struct platform_device *pdev)
 	} else {
 		printk(KERN_CONT " None\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_cont(" \"%s\"", switch_off_status[i]);
 			value = value >> 1;
 
@@ -1843,6 +1981,9 @@ static int ab8500_probe(struct platform_device *pdev)
 		pr_cont("\n");
 	} else {
 		pr_cont(" None\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	ret = get_register_interruptible(ab8500, AB8500_SYS_CTRL1_BLOCK,
@@ -1855,6 +1996,7 @@ static int ab8500_probe(struct platform_device *pdev)
 		for (i = 0; i < ARRAY_SIZE(turn_on_status); i++) {
 			if (value & 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("\"%s\" ", turn_on_status[i]);
 			value = value >> 1;
 		}
@@ -1862,12 +2004,17 @@ static int ab8500_probe(struct platform_device *pdev)
 	} else {
 		printk("None\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_cont("\"%s\" ", turn_on_status[i]);
 			value = value >> 1;
 		}
 		pr_cont("\n");
 	} else {
 		pr_cont("None\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1923,7 +2070,11 @@ static int ab8500_probe(struct platform_device *pdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CONFIG_DEBUG_FS
+=======
+#ifdef CONFIG_DEBUG_FS
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DEBUG_FS
 >>>>>>> v3.18
@@ -1935,6 +2086,7 @@ static int ab8500_probe(struct platform_device *pdev)
 	if (is_ab9540(ab8500))
 		ret = mfd_add_devices(ab8500->dev, 0, ab9540_devs,
 				ARRAY_SIZE(ab9540_devs), NULL,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				ab8500->irq_base, ab8500->domain);
 	else if (is_ab8540(ab8500))
@@ -1950,6 +2102,8 @@ static int ab8500_probe(struct platform_device *pdev)
 				ARRAY_SIZE(ab8500_devs), NULL,
 				ab8500->irq_base, ab8500->domain);
 =======
+=======
+>>>>>>> v3.18
 				0, ab8500->domain);
 	else if (is_ab8540(ab8500)) {
 		ret = mfd_add_devices(ab8500->dev, 0, ab8540_devs,
@@ -1974,6 +2128,9 @@ static int ab8500_probe(struct platform_device *pdev)
 		ret = mfd_add_devices(ab8500->dev, 0, ab8500_devs,
 				ARRAY_SIZE(ab8500_devs), NULL,
 				0, ab8500->domain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -1983,7 +2140,11 @@ static int ab8500_probe(struct platform_device *pdev)
 		ret = mfd_add_devices(ab8500->dev, 0, ab8500_bm_devs,
 				      ARRAY_SIZE(ab8500_bm_devs), NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      ab8500->irq_base, ab8500->domain);
+=======
+				      0, ab8500->domain);
+>>>>>>> v3.18
 =======
 				      0, ab8500->domain);
 >>>>>>> v3.18

@@ -1,6 +1,9 @@
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bitops.h>
@@ -13,6 +16,10 @@
 #include <asm/apic.h>
 #include <asm/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/smp.h>
+>>>>>>> v3.18
 =======
 #include <asm/smp.h>
 >>>>>>> v3.18
@@ -59,7 +66,10 @@ static inline int wrmsrl_amd_safe(unsigned msr, unsigned long long val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -77,18 +87,24 @@ static inline int wrmsrl_amd_safe(unsigned msr, unsigned long long val)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void vide(void);
 __asm__(".align 4\nvide: ret");
 
 static void __cpuinit init_amd_k5(struct cpuinfo_x86 *c)
 {
 =======
+=======
+>>>>>>> v3.18
 extern __visible void vide(void);
 __asm__(".globl vide\n\t.align 4\nvide: ret");
 
 static void init_amd_k5(struct cpuinfo_x86 *c)
 {
 #ifdef CONFIG_X86_32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * General Systems BIOSen alias the cpu frequency registers
@@ -104,6 +120,7 @@ static void init_amd_k5(struct cpuinfo_x86 *c)
 			outl(0 | CBAR_KEY, CBAR);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 
@@ -112,6 +129,8 @@ static void __cpuinit init_amd_k6(struct cpuinfo_x86 *c)
 	u32 l, h;
 	int mbytes = num_physpages >> (20-PAGE_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 #endif
 }
 
@@ -120,6 +139,9 @@ static void init_amd_k6(struct cpuinfo_x86 *c)
 #ifdef CONFIG_X86_32
 	u32 l, h;
 	int mbytes = get_num_physpages() >> (20-PAGE_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (c->x86_model < 6) {
@@ -208,11 +230,14 @@ static void init_amd_k6(struct cpuinfo_x86 *c)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void __cpuinit amd_k7_smp_check(struct cpuinfo_x86 *c)
 {
 =======
+=======
+>>>>>>> v3.18
 #endif
 }
 
@@ -251,6 +276,9 @@ static void init_amd_k7(struct cpuinfo_x86 *c)
 
 	set_cpu_cap(c, X86_FEATURE_K7);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* calling is from identify_secondary_cpu() ? */
 	if (!c->cpu_index)
@@ -280,7 +308,11 @@ static void init_amd_k7(struct cpuinfo_x86 *c)
 	    ((c->x86_model == 7) && (c->x86_mask >= 1)) ||
 	     (c->x86_model > 7))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cpu_has_mp)
+=======
+		if (cpu_has(c, X86_FEATURE_MP))
+>>>>>>> v3.18
 =======
 		if (cpu_has(c, X86_FEATURE_MP))
 >>>>>>> v3.18
@@ -294,6 +326,7 @@ static void init_amd_k7(struct cpuinfo_x86 *c)
 	 */
 	WARN_ONCE(1, "WARNING: This combination of AMD"
 		" processors is not suitable for SMP.\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	add_taint(TAINT_UNSAFE_SMP, LOCKDEP_NOW_UNRELIABLE);
 }
@@ -342,6 +375,11 @@ static void __cpuinit init_amd_k7(struct cpuinfo_x86 *c)
 #endif
 }
 >>>>>>> v3.18
+=======
+	add_taint(TAINT_CPU_OUT_OF_SPEC, LOCKDEP_NOW_UNRELIABLE);
+#endif
+}
+>>>>>>> v3.18
 
 #ifdef CONFIG_NUMA
 /*
@@ -349,7 +387,11 @@ static void __cpuinit init_amd_k7(struct cpuinfo_x86 *c)
  * srat_detect_node().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit nearby_node(int apicid)
+=======
+static int nearby_node(int apicid)
+>>>>>>> v3.18
 =======
 static int nearby_node(int apicid)
 >>>>>>> v3.18
@@ -378,7 +420,11 @@ static int nearby_node(int apicid)
  */
 #ifdef CONFIG_X86_HT
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit amd_get_topology(struct cpuinfo_x86 *c)
+=======
+static void amd_get_topology(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void amd_get_topology(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -429,15 +475,21 @@ static void amd_get_topology(struct cpuinfo_x86 *c)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * On a AMD dual core setup the lower bits of the APIC id distingush the cores.
  * Assumes number of cores is a power of two.
  */
 static void __cpuinit amd_detect_cmp(struct cpuinfo_x86 *c)
 =======
+=======
+>>>>>>> v3.18
  * On a AMD dual core setup the lower bits of the APIC id distinguish the cores.
  * Assumes number of cores is a power of two.
  */
 static void amd_detect_cmp(struct cpuinfo_x86 *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 #ifdef CONFIG_X86_HT
@@ -466,7 +518,11 @@ u16 amd_get_nb_id(int cpu)
 EXPORT_SYMBOL_GPL(amd_get_nb_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit srat_detect_node(struct cpuinfo_x86 *c)
+=======
+static void srat_detect_node(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void srat_detect_node(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -522,7 +578,11 @@ static void srat_detect_node(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit early_init_amd_mc(struct cpuinfo_x86 *c)
+=======
+static void early_init_amd_mc(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void early_init_amd_mc(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -552,9 +612,12 @@ static void early_init_amd_mc(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit bsp_init_amd(struct cpuinfo_x86 *c)
 {
 =======
+=======
+>>>>>>> v3.18
 static void bsp_init_amd(struct cpuinfo_x86 *c)
 {
 
@@ -577,6 +640,9 @@ static void bsp_init_amd(struct cpuinfo_x86 *c)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpu_has(c, X86_FEATURE_CONSTANT_TSC)) {
 
@@ -605,7 +671,11 @@ static void bsp_init_amd(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit early_init_amd(struct cpuinfo_x86 *c)
+=======
+static void early_init_amd(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void early_init_amd(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -621,7 +691,11 @@ static void early_init_amd(struct cpuinfo_x86 *c)
 		set_cpu_cap(c, X86_FEATURE_NONSTOP_TSC);
 		if (!check_tsc_unstable())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sched_clock_stable = 1;
+=======
+			set_sched_clock_stable();
+>>>>>>> v3.18
 =======
 			set_sched_clock_stable();
 >>>>>>> v3.18
@@ -647,6 +721,7 @@ static void early_init_amd(struct cpuinfo_x86 *c)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* F16h erratum 793, CVE-2013-6885 */
 	if (c->x86 == 0x16 && c->x86_model <= 0xf) {
 		u64 val;
@@ -657,6 +732,8 @@ static void early_init_amd(struct cpuinfo_x86 *c)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This is only needed to tell the kernel whether to use VMCALL
 	 * and VMMCALL.  VMMCALL is never executed except under virt, so
@@ -667,11 +744,15 @@ static void early_init_amd(struct cpuinfo_x86 *c)
 	/* F16h erratum 793, CVE-2013-6885 */
 	if (c->x86 == 0x16 && c->x86_model <= 0xf)
 		msr_set_bit(MSR_AMD64_LS_CFG, 15);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static const int amd_erratum_383[];
 static const int amd_erratum_400[];
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool cpu_has_amd_erratum(const int *erratum);
 
@@ -784,6 +865,8 @@ static void __cpuinit init_amd(struct cpuinfo_x86 *c)
 				printk(KERN_INFO FW_INFO "CPU: Re-enabling "
 				  "disabled Topology Extensions Support\n");
 =======
+=======
+>>>>>>> v3.18
 static bool cpu_has_amd_erratum(struct cpuinfo_x86 *cpu, const int *erratum);
 
 static void init_amd_k8(struct cpuinfo_x86 *c)
@@ -861,6 +944,9 @@ static void init_amd_bd(struct cpuinfo_x86 *c)
 			if (value & BIT_64(54)) {
 				set_cpu_cap(c, X86_FEATURE_TOPOEXT);
 				pr_info(FW_INFO "CPU: Re-enabling disabled Topology Extensions Support.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -871,9 +957,13 @@ static void init_amd_bd(struct cpuinfo_x86 *c)
 	 * Disable it on the affected CPUs.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((c->x86 == 0x15) &&
 	    (c->x86_model >= 0x02) && (c->x86_model < 0x20)) {
 
+=======
+	if ((c->x86_model >= 0x02) && (c->x86_model < 0x20)) {
+>>>>>>> v3.18
 =======
 	if ((c->x86_model >= 0x02) && (c->x86_model < 0x20)) {
 >>>>>>> v3.18
@@ -883,7 +973,10 @@ static void init_amd_bd(struct cpuinfo_x86 *c)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void init_amd(struct cpuinfo_x86 *c)
@@ -932,6 +1025,9 @@ static void init_amd(struct cpuinfo_x86 *c)
 	/* Enable workaround for FXSAVE leak */
 	if (c->x86 >= 6)
 		set_cpu_bug(c, X86_BUG_FXSAVE_LEAK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpu_detect_cache_sizes(c);
@@ -956,6 +1052,7 @@ static void init_amd(struct cpuinfo_x86 *c)
 		set_cpu_cap(c, X86_FEATURE_MFENCE_RDTSC);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_X86_64
 	if (c->x86 == 0x10) {
@@ -986,6 +1083,8 @@ static void init_amd(struct cpuinfo_x86 *c)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/*
 	 * Family 0x12 and above processors have APIC timer
 	 * running in deep C states.
@@ -993,6 +1092,7 @@ static void init_amd(struct cpuinfo_x86 *c)
 	if (c->x86 > 0x11)
 		set_cpu_cap(c, X86_FEATURE_ARAT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (c->x86 == 0x10) {
 		/*
@@ -1036,6 +1136,9 @@ static void init_amd(struct cpuinfo_x86 *c)
 =======
 	if (cpu_has_amd_erratum(c, amd_erratum_400))
 >>>>>>> v3.18
+=======
+	if (cpu_has_amd_erratum(c, amd_erratum_400))
+>>>>>>> v3.18
 		set_cpu_bug(c, X86_BUG_AMD_APIC_C1E);
 
 	rdmsr_safe(MSR_AMD64_PATCH_LEVEL, &c->microcode, &dummy);
@@ -1043,8 +1146,12 @@ static void init_amd(struct cpuinfo_x86 *c)
 
 #ifdef CONFIG_X86_32
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int __cpuinit amd_size_cache(struct cpuinfo_x86 *c,
 							unsigned int size)
+=======
+static unsigned int amd_size_cache(struct cpuinfo_x86 *c, unsigned int size)
+>>>>>>> v3.18
 =======
 static unsigned int amd_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 >>>>>>> v3.18
@@ -1064,6 +1171,7 @@ static unsigned int amd_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cpu_set_tlb_flushall_shift(struct cpuinfo_x86 *c)
 {
 	tlb_flushall_shift = 5;
@@ -1073,6 +1181,9 @@ static void __cpuinit cpu_set_tlb_flushall_shift(struct cpuinfo_x86 *c)
 }
 
 static void __cpuinit cpu_detect_tlb_amd(struct cpuinfo_x86 *c)
+=======
+static void cpu_detect_tlb_amd(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void cpu_detect_tlb_amd(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1102,6 +1213,7 @@ static void cpu_detect_tlb_amd(struct cpuinfo_x86 *c)
 
 	/* Handle DTLB 2M and 4M sizes, fall back to L1 if L2 is disabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!((eax >> 16) & mask)) {
 		u32 a, b, c, d;
 
@@ -1111,10 +1223,15 @@ static void cpu_detect_tlb_amd(struct cpuinfo_x86 *c)
 		tlb_lld_2m[ENTRIES] = (eax >> 16) & mask;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!((eax >> 16) & mask))
 		tlb_lld_2m[ENTRIES] = (cpuid_eax(0x80000005) >> 16) & 0xff;
 	else
 		tlb_lld_2m[ENTRIES] = (eax >> 16) & mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* a 4M entry uses two 2M entries */
@@ -1134,6 +1251,7 @@ static void cpu_detect_tlb_amd(struct cpuinfo_x86 *c)
 
 	tlb_lli_4m[ENTRIES] = tlb_lli_2m[ENTRIES] >> 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cpu_set_tlb_flushall_shift(c);
 }
@@ -1145,6 +1263,8 @@ static const struct cpu_dev __cpuinitconst amd_cpu_dev = {
 	.c_models = {
 		{ .vendor = X86_VENDOR_AMD, .family = 4, .model_names =
 =======
+=======
+>>>>>>> v3.18
 }
 
 static const struct cpu_dev amd_cpu_dev = {
@@ -1153,6 +1273,9 @@ static const struct cpu_dev amd_cpu_dev = {
 #ifdef CONFIG_X86_32
 	.legacy_models = {
 		{ .family = 4, .model_names =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  {
 			  [3] = "486 DX/2",
@@ -1165,7 +1288,11 @@ static const struct cpu_dev amd_cpu_dev = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.c_size_cache	= amd_size_cache,
+=======
+	.legacy_cache_size = amd_size_cache,
+>>>>>>> v3.18
 =======
 	.legacy_cache_size = amd_size_cache,
 >>>>>>> v3.18
@@ -1212,9 +1339,15 @@ static const int amd_erratum_383[] =
 	AMD_OSVW_ERRATUM(3, AMD_MODEL_RANGE(0x10, 0, 0, 0xff, 0xf));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool cpu_has_amd_erratum(const int *erratum)
 {
 	struct cpuinfo_x86 *cpu = __this_cpu_ptr(&cpu_info);
+=======
+
+static bool cpu_has_amd_erratum(struct cpuinfo_x86 *cpu, const int *erratum)
+{
+>>>>>>> v3.18
 =======
 
 static bool cpu_has_amd_erratum(struct cpuinfo_x86 *cpu, const int *erratum)
@@ -1224,6 +1357,7 @@ static bool cpu_has_amd_erratum(struct cpuinfo_x86 *cpu, const int *erratum)
 	u32 range;
 	u32 ms;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * If called early enough that current_cpu_data hasn't been initialized
@@ -1235,6 +1369,8 @@ static bool cpu_has_amd_erratum(struct cpuinfo_x86 *cpu, const int *erratum)
 	if (cpu->x86_vendor != X86_VENDOR_AMD)
 		return false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (osvw_id >= 0 && osvw_id < 65536 &&

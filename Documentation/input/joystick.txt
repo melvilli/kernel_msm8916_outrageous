@@ -117,7 +117,11 @@ your needs:
 program in the utilities package. You run it by typing:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jstest /dev/js0
+=======
+	jstest /dev/input/js0
+>>>>>>> v3.18
 =======
 	jstest /dev/input/js0
 >>>>>>> v3.18
@@ -141,7 +145,11 @@ some analog joysticks, that either do not use linear resistors, or if you
 want better precision, you can use the jscal program
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jscal -c /dev/js0
+=======
+	jscal -c /dev/input/js0
+>>>>>>> v3.18
 =======
 	jscal -c /dev/input/js0
 >>>>>>> v3.18
@@ -154,7 +162,11 @@ calibration using the jstest command, and if you do, you then can save the
 correction coefficients into a file
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jscal -p /dev/js0 > /etc/joystick.cal
+=======
+	jscal -p /dev/input/js0 > /etc/joystick.cal
+>>>>>>> v3.18
 =======
 	jscal -p /dev/input/js0 > /etc/joystick.cal
 >>>>>>> v3.18
@@ -569,7 +581,11 @@ interface, and "old" for the "0.x" interface. You run it by typing:
 5. FAQ
 ~~~~~~
 <<<<<<< HEAD
+<<<<<<< HEAD
 Q: Running 'jstest /dev/js0' results in "File not found" error. What's the
+=======
+Q: Running 'jstest /dev/input/js0' results in "File not found" error. What's the
+>>>>>>> v3.18
 =======
 Q: Running 'jstest /dev/input/js0' results in "File not found" error. What's the
 >>>>>>> v3.18

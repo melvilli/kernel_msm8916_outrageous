@@ -1072,10 +1072,13 @@ static struct resource pxa3xx_resource_ssp4[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct platform_device pxa3xx_device_ssp4 = {
 	/* PXA3xx SSP is basically equivalent to PXA27x */
 	.name		= "pxa27x-ssp",
 =======
+=======
+>>>>>>> v3.18
 /*
  * PXA3xx SSP is basically equivalent to PXA27x.
  * However, we need to register the device by the correct name in order to
@@ -1117,6 +1120,9 @@ struct platform_device pxa3xx_device_ssp3 = {
 
 struct platform_device pxa3xx_device_ssp4 = {
 	.name		= "pxa3xx-ssp",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id		= 3,
 	.dev		= {

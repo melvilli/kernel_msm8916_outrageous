@@ -130,15 +130,21 @@ static u32 ath9k_hw_4k_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 
 	if (!dump_base_hdr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len,
 				"%20s :\n", "2GHz modal Header");
 		len = ath9k_dump_4k_modal_eeprom(buf, len, size,
 						  &eep->modalHeader);
 =======
+=======
+>>>>>>> v3.18
 		len += scnprintf(buf + len, size - len,
 				 "%20s :\n", "2GHz modal Header");
 		len = ath9k_dump_4k_modal_eeprom(buf, len, size,
 						 &eep->modalHeader);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -168,8 +174,13 @@ static u32 ath9k_hw_4k_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	PR_EEP("TX Gain type", pBase->txGainType);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
 			pBase->macAddr);
+=======
+	len += scnprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
+			 pBase->macAddr);
+>>>>>>> v3.18
 =======
 	len += scnprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
 			 pBase->macAddr);
@@ -825,6 +836,10 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 					 struct ath9k_channel *chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ath9k_hw_capabilities *pCap = &ah->caps;
+>>>>>>> v3.18
 =======
 	struct ath9k_hw_capabilities *pCap = &ah->caps;
 >>>>>>> v3.18
@@ -875,7 +890,10 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 		REG_WRITE(ah, AR_PHY_CCK_DETECT, regVal);
 		regVal = REG_READ(ah, AR_PHY_CCK_DETECT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (pCap->hw_caps & ATH9K_HW_CAP_ANT_DIV_COMB) {
 			/*
@@ -894,6 +912,9 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 			regVal |= (0 << AR_PHY_9285_FAST_DIV_BIAS_S);
 			REG_WRITE(ah, AR_PHY_MULTICHAIN_GAIN_CTL, regVal);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1104,6 +1125,7 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 static u16 ath9k_hw_4k_get_spur_channel(struct ath_hw *ah, u16 i, bool is2GHz)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEP_MAP4K_SPURCHAN \
 	(ah->eeprom.map4k.modalHeader.spurChans[i].spurChan)
 	struct ath_common *common = ath9k_hw_common(ah);
@@ -1129,6 +1151,9 @@ static u16 ath9k_hw_4k_get_spur_channel(struct ath_hw *ah, u16 i, bool is2GHz)
 	return spur_val;
 
 #undef EEP_MAP4K_SPURCHAN
+=======
+	return ah->eeprom.map4k.modalHeader.spurChans[i].spurChan;
+>>>>>>> v3.18
 =======
 	return ah->eeprom.map4k.modalHeader.spurChans[i].spurChan;
 >>>>>>> v3.18

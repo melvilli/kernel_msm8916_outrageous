@@ -166,7 +166,10 @@ SECTIONS
     RELOCATE_ENTRY(_DebugInterruptVector_text,
 		   .DebugInterruptVector.text);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_SMP)
     RELOCATE_ENTRY(_SecondaryResetVector_literal,
 		   .SecondaryResetVector.literal);
@@ -174,6 +177,9 @@ SECTIONS
 		   .SecondaryResetVector.text);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   
     __boot_reloc_table_end = ABSOLUTE(.) ;
@@ -273,7 +279,11 @@ SECTIONS
   SECTION_VECTOR (_DoubleExceptionVector_literal,
 		  .DoubleExceptionVector.literal,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  DOUBLEEXC_VECTOR_VADDR - 16,
+=======
+		  DOUBLEEXC_VECTOR_VADDR - 48,
+>>>>>>> v3.18
 =======
 		  DOUBLEEXC_VECTOR_VADDR - 48,
 >>>>>>> v3.18
@@ -283,11 +293,14 @@ SECTIONS
 		  .DoubleExceptionVector.text,
 		  DOUBLEEXC_VECTOR_VADDR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  32,
 		  .DoubleExceptionVector.literal)
 
   . = (LOADADDR( .DoubleExceptionVector.text ) + SIZEOF( .DoubleExceptionVector.text ) + 3) & ~ 3;
 =======
+=======
+>>>>>>> v3.18
 		  48,
 		  .DoubleExceptionVector.literal)
 
@@ -311,6 +324,9 @@ SECTIONS
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   . = ALIGN(PAGE_SIZE);
 

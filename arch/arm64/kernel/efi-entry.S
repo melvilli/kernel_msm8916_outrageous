@@ -55,15 +55,21 @@ ENTRY(efi_stub_entry)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * efi_entry() will have relocated the kernel image if necessary
 	 * and we return here with device tree address in x0 and the kernel
 	 * entry point stored at *image_addr. Save those values in registers
 	 * which are callee preserved.
 =======
+=======
+>>>>>>> v3.18
 	 * efi_entry() will have copied the kernel image if necessary and we
 	 * return here with device tree address in x0 and the kernel entry
 	 * point stored at *image_addr. Save those values in registers which
 	 * are callee preserved.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	mov	x20, x0		// DTB address
@@ -72,8 +78,12 @@ ENTRY(efi_stub_entry)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Flush dcache covering current runtime addresses
 	 * of kernel text/data. Then flush all of icache.
+=======
+	 * Calculate size of the kernel Image (same for original and copy).
+>>>>>>> v3.18
 =======
 	 * Calculate size of the kernel Image (same for original and copy).
 >>>>>>> v3.18
@@ -85,10 +95,13 @@ ENTRY(efi_stub_entry)
 	sub	x1, x2, x1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	__flush_dcache_area
 	ic	ialluis
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Flush the copied Image to the PoC, and ensure it is not shadowed by
 	 * stale icache entries from before relocation.
@@ -107,6 +120,9 @@ ENTRY(efi_stub_entry)
 	sub	x1, x1, x0
 	bl	__flush_dcache_area
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Turn off Dcache and MMU */
 	mrs	x0, CurrentEL
@@ -138,6 +154,10 @@ efi_load_fail:
 	ret
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+efi_stub_entry_end:
+>>>>>>> v3.18
 =======
 efi_stub_entry_end:
 >>>>>>> v3.18

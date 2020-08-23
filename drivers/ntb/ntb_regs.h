@@ -47,8 +47,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NTB_LINK_ENABLE		0x0000
 #define NTB_LINK_DISABLE	0x0002
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NTB_LINK_STATUS_ACTIVE	0x2000
@@ -60,6 +63,7 @@
 #define SNB_MAX_COMPAT_SPADS	16
 /* Reserve the uppermost bit for link interrupt */
 #define SNB_MAX_DB_BITS		15
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SNB_DB_BITS_PER_VEC	5
 
@@ -81,6 +85,8 @@
 #define SNB_SBAR2BASE_OFFSET	0x0048
 #define SNB_SBAR4BASE_OFFSET	0x0050
 =======
+=======
+>>>>>>> v3.18
 #define SNB_LINK_DB		15
 #define SNB_DB_BITS_PER_VEC	5
 #define HSX_SPLITBAR_MAX_MW	3
@@ -113,6 +119,9 @@
 #define SNB_SBAR2BASE_OFFSET	0x0048
 #define SNB_SBAR4BASE_OFFSET	0x0050
 #define SNB_SBAR5BASE_OFFSET	0x0054
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SNB_NTBCNTL_OFFSET	0x0058
 #define SNB_SBDF_OFFSET		0x005C
@@ -121,7 +130,11 @@
 #define SNB_SDOORBELL_OFFSET	0x0064
 #define SNB_SDBMSK_OFFSET	0x0066
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNB_USMEMMISS		0x0070
+=======
+#define SNB_USMEMMISS_OFFSET	0x0070
+>>>>>>> v3.18
 =======
 #define SNB_USMEMMISS_OFFSET	0x0070
 >>>>>>> v3.18
@@ -131,6 +144,7 @@
 #define SNB_B2B_SPAD_OFFSET	0x0100
 #define SNB_B2B_DOORBELL_OFFSET	0x0140
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNB_B2B_XLAT_OFFSET	0x0144
 
 #define BWD_MSIX_CNT		34
@@ -139,6 +153,8 @@
 #define BWD_MAX_DB_BITS		34
 #define BWD_DB_BITS_PER_VEC	1
 =======
+=======
+>>>>>>> v3.18
 #define SNB_B2B_XLAT_OFFSETL	0x0144
 #define SNB_B2B_XLAT_OFFSETU	0x0148
 
@@ -160,6 +176,9 @@
 #define BWD_MAX_DB_BITS		34
 #define BWD_DB_BITS_PER_VEC	1
 #define BWD_MAX_MW		2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BWD_PCICMD_OFFSET	0xb004
@@ -168,6 +187,10 @@
 #define BWD_DEVCTRL_OFFSET	0xb048
 #define BWD_LINK_STATUS_OFFSET	0xb052
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BWD_ERRCORSTS_OFFSET	0xb110
+>>>>>>> v3.18
 =======
 #define BWD_ERRCORSTS_OFFSET	0xb110
 >>>>>>> v3.18
@@ -189,10 +212,13 @@
 #define BWD_B2B_STKYSPAD_OFFSET	0x80c4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NTB_CNTL_BAR23_SNOOP	(1 << 2)
 #define NTB_CNTL_BAR45_SNOOP	(1 << 6)
 #define BWD_CNTL_LINK_DOWN	(1 << 16)
 =======
+=======
+>>>>>>> v3.18
 #define BWD_MODPHY_PCSREG4	0x1c004
 #define BWD_MODPHY_PCSREG6	0x1c006
 
@@ -216,11 +242,15 @@
 #define NTB_CNTL_S2P_BAR5_SNOOP	(1 << 12)
 #define NTB_CNTL_P2S_BAR5_SNOOP	(1 << 14)
 #define BWD_CNTL_LINK_DOWN		(1 << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NTB_PPD_OFFSET		0x00D4
 #define SNB_PPD_CONN_TYPE	0x0003
 #define SNB_PPD_DEV_TYPE	0x0010
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define BWD_PPD_INIT_LINK	0x0008
 #define BWD_PPD_CONN_TYPE	0x0300
@@ -235,8 +265,13 @@
 #define BWD_MBAR23_DSD_ADDR	0x000000400000000C
 #define BWD_MBAR45_DSD_ADDR	0x000000800000000C
 =======
+=======
+>>>>>>> v3.18
 #define SNB_PPD_SPLIT_BAR	(1 << 6)
 #define BWD_PPD_INIT_LINK	0x0008
 #define BWD_PPD_CONN_TYPE	0x0300
 #define BWD_PPD_DEV_TYPE	0x1000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

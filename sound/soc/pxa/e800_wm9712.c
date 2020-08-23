@@ -72,6 +72,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int e800_ac97_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
@@ -87,6 +88,8 @@ static int e800_ac97_init(struct snd_soc_pcm_runtime *rtd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct snd_soc_dai_link e800_dai[] = {
 	{
 		.name = "AC97",
@@ -96,7 +99,10 @@ static struct snd_soc_dai_link e800_dai[] = {
 		.platform_name = "pxa-pcm-audio",
 		.codec_name = "wm9712-codec",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init = e800_ac97_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -116,12 +122,18 @@ static struct snd_soc_card e800 = {
 	.dai_link = e800_dai,
 	.num_links = ARRAY_SIZE(e800_dai),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	.dapm_widgets = e800_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(e800_dapm_widgets),
 	.dapm_routes = audio_map,
 	.num_dapm_routes = ARRAY_SIZE(audio_map),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -165,6 +177,10 @@ static struct platform_driver e800_driver = {
 		.name	= "e800-audio",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm     = &snd_soc_pm_ops,
 >>>>>>> v3.18

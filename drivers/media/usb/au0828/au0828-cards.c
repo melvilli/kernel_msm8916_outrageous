@@ -47,7 +47,13 @@ struct au0828_board au0828_boards[] = {
 		.tuner_type = TUNER_XC5000,
 		.tuner_addr = 0x61,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.i2c_clk_divider = AU0828_I2C_CLK_20KHZ,
+=======
+		.has_ir_i2c = 1,
+		.has_analog = 1,
+		.i2c_clk_divider = AU0828_I2C_CLK_250KHZ,
+>>>>>>> v3.18
 =======
 		.has_ir_i2c = 1,
 		.has_analog = 1,
@@ -78,6 +84,7 @@ struct au0828_board au0828_boards[] = {
 		.tuner_type = TUNER_XC5000,
 		.tuner_addr = 0x61,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The au0828 hardware i2c implementation does not properly
 		   support the xc5000's i2c clock stretching.  So we need to
 		   lower the clock frequency enough where the 15us clock
@@ -85,6 +92,11 @@ struct au0828_board au0828_boards[] = {
 		   au0828 fails to set the STOP bit.  A 30 KHz clock puts the
 		   clock pulse width at 18us */
 		.i2c_clk_divider = AU0828_I2C_CLK_20KHZ,
+=======
+		.has_ir_i2c = 1,
+		.has_analog = 1,
+		.i2c_clk_divider = AU0828_I2C_CLK_250KHZ,
+>>>>>>> v3.18
 =======
 		.has_ir_i2c = 1,
 		.has_analog = 1,
@@ -113,8 +125,13 @@ struct au0828_board au0828_boards[] = {
 	[AU0828_BOARD_HAUPPAUGE_HVR950Q_MXL] = {
 		.name	= "Hauppauge HVR950Q rev xxF8",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.tuner_type = UNSET,
 		.tuner_addr = ADDR_UNSET,
+=======
+		.tuner_type = TUNER_XC5000,
+		.tuner_addr = 0x61,
+>>>>>>> v3.18
 =======
 		.tuner_type = TUNER_XC5000,
 		.tuner_addr = 0x61,
@@ -124,8 +141,13 @@ struct au0828_board au0828_boards[] = {
 	[AU0828_BOARD_DVICO_FUSIONHDTV7] = {
 		.name	= "DViCO FusionHDTV USB",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.tuner_type = UNSET,
 		.tuner_addr = ADDR_UNSET,
+=======
+		.tuner_type = TUNER_XC5000,
+		.tuner_addr = 0x61,
+>>>>>>> v3.18
 =======
 		.tuner_type = TUNER_XC5000,
 		.tuner_addr = 0x61,
@@ -135,8 +157,13 @@ struct au0828_board au0828_boards[] = {
 	[AU0828_BOARD_HAUPPAUGE_WOODBURY] = {
 		.name = "Hauppauge Woodbury",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.tuner_type = UNSET,
 		.tuner_addr = ADDR_UNSET,
+=======
+		.tuner_type = TUNER_NXP_TDA18271,
+		.tuner_addr = 0x60,
+>>>>>>> v3.18
 =======
 		.tuner_type = TUNER_NXP_TDA18271,
 		.tuner_addr = 0x60,
@@ -169,8 +196,12 @@ int au0828_tuner_callback(void *priv, int component, int command, int arg)
 			return 0;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
 				"%s(): Unknown command.\n", __func__);
+=======
+			pr_err("%s(): Unknown command.\n", __func__);
+>>>>>>> v3.18
 =======
 			pr_err("%s(): Unknown command.\n", __func__);
 >>>>>>> v3.18
@@ -208,6 +239,7 @@ static void hauppauge_eeprom(struct au0828_dev *dev, u8 *eeprom_data)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: warning: "
 		       "unknown hauppauge model #%d\n", __func__, tv.model);
 		break;
@@ -215,12 +247,17 @@ static void hauppauge_eeprom(struct au0828_dev *dev, u8 *eeprom_data)
 
 	printk(KERN_INFO "%s: hauppauge eeprom: model=%d\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("%s: warning: unknown hauppauge model #%d\n",
 			__func__, tv.model);
 		break;
 	}
 
 	pr_info("%s: hauppauge eeprom: model=%d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       __func__, tv.model);
 }
@@ -268,24 +305,34 @@ void au0828_card_analog_fe_setup(struct au0828_dev *dev)
 				"au8522", 0x8e >> 1, NULL);
 		if (sd == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "analog subdev registration failed\n");
 	}
 
 	/* Setup tuners */
 	if (dev->board.tuner_type != TUNER_ABSENT) {
 =======
+=======
+>>>>>>> v3.18
 			pr_err("analog subdev registration failed\n");
 	}
 
 	/* Setup tuners */
 	if (dev->board.tuner_type != TUNER_ABSENT && dev->board.has_analog) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Load the tuner module, which does the attach */
 		sd = v4l2_i2c_new_subdev(&dev->v4l2_dev, &dev->i2c_adap,
 				"tuner", dev->board.tuner_addr, NULL);
 		if (sd == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "tuner subdev registration fail\n");
+=======
+			pr_err("tuner subdev registration fail\n");
+>>>>>>> v3.18
 =======
 			pr_err("tuner subdev registration fail\n");
 >>>>>>> v3.18
@@ -323,6 +370,7 @@ void au0828_gpio_setup(struct au0828_dev *dev)
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Into reset */
 		au0828_write(dev, REG_003, 0x02);
 		au0828_write(dev, REG_002, 0x80 | 0x20 | 0x10);
@@ -336,6 +384,8 @@ void au0828_gpio_setup(struct au0828_dev *dev)
 		au0828_write(dev, REG_002, 0x80 | 0x20 | 0x10);
 		au0828_write(dev, REG_000, 0x80 | 0x40 | 0x20);
 =======
+=======
+>>>>>>> v3.18
 		/* Set relevant GPIOs as outputs (leave the EEPROM W/P
 		   as an input since we will never touch it and it has
 		   a pullup) */
@@ -355,6 +405,9 @@ void au0828_gpio_setup(struct au0828_dev *dev)
 		   cs5340 in reset until needed) */
 		au0828_write(dev, REG_001, 0x02); /* xc5000 */
 		au0828_write(dev, REG_000, 0x80 | 0x20); /* PS + au8522 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		msleep(250);

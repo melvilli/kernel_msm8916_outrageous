@@ -32,7 +32,10 @@
 #include "r600_blit_shaders.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 23 bits of float fractional data */
 #define I2F_FRAC_BITS  23
 #define I2F_MASK ((1 << I2F_FRAC_BITS) - 1)
@@ -64,6 +67,9 @@ static __pure uint32_t int2float(uint32_t x)
 	return fraction + exponent;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DI_PT_RECTLIST        0x11
 #define DI_INDEX_SIZE_16_BIT  0x0

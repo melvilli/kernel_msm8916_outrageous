@@ -551,6 +551,10 @@ static int pcan_add_channels(struct pcan_pccard *card)
 		priv->priv = card;
 		SET_NETDEV_DEV(netdev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		netdev->dev_id = i;
+>>>>>>> v3.18
 =======
 		netdev->dev_id = i;
 >>>>>>> v3.18

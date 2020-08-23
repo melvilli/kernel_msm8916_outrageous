@@ -135,7 +135,10 @@ struct cpu_dbs_common_info {
 	u64 prev_cpu_wall;
 	u64 prev_cpu_nice;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Used to keep track of load in the previous interval. However, when
 	 * explicitly set to zero, it is used as a flag to ensure that we copy
@@ -143,6 +146,9 @@ struct cpu_dbs_common_info {
 	 * wake-up from idle.
 	 */
 	unsigned int prev_load;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cpufreq_policy *cur_policy;
 	struct delayed_work work;
@@ -268,6 +274,11 @@ static ssize_t show_sampling_rate_min_gov_pol				\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct mutex cpufreq_governor_lock;
+
+>>>>>>> v3.18
 =======
 extern struct mutex cpufreq_governor_lock;
 

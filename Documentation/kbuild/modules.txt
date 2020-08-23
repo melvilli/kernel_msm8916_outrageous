@@ -471,7 +471,11 @@ build.
 	Sometimes, an external module uses exported symbols from
 	another external module. kbuild needs to have full knowledge of
 <<<<<<< HEAD
+<<<<<<< HEAD
 	all symbols to avoid spliitting out warnings about undefined
+=======
+	all symbols to avoid spitting out warnings about undefined
+>>>>>>> v3.18
 =======
 	all symbols to avoid spitting out warnings about undefined
 >>>>>>> v3.18

@@ -59,7 +59,11 @@ struct pci_bus *ibmphp_pci_bus;
 static int max_slots;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int irqs[16];    /* PIC mode IRQ's we're using so far (in case MPS
+=======
+static int irqs[16];    /* PIC mode IRQs we're using so far (in case MPS
+>>>>>>> v3.18
 =======
 static int irqs[16];    /* PIC mode IRQs we're using so far (in case MPS
 >>>>>>> v3.18
@@ -76,6 +80,7 @@ static inline int get_max_adapter_speed (struct hotplug_slot *hs, u8 *value)
 }
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int get_cur_bus_info(struct slot **sl) 
 {
 	int rc = 1;
@@ -91,6 +96,8 @@ static inline int get_cur_bus_info(struct slot **sl)
 		return rc;
 	  
 =======
+=======
+>>>>>>> v3.18
 static inline int get_cur_bus_info(struct slot **sl)
 {
 	int rc = 1;
@@ -105,6 +112,9 @@ static inline int get_cur_bus_info(struct slot **sl)
 	if (rc)
 		return rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	slot_cur->bus_on->current_speed = CURRENT_BUS_SPEED(slot_cur->busstatus);
 	if (READ_BUS_MODE(slot_cur->ctrl))
@@ -118,7 +128,11 @@ static inline int get_cur_bus_info(struct slot **sl)
 			slot_cur->bus_on->current_speed,
 			slot_cur->bus_on->current_bus_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -130,8 +144,13 @@ static inline int slot_update(struct slot **sl)
 {
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
  	rc = ibmphp_hpc_readslot(*sl, READ_ALLSTAT, NULL);
 	if (rc) 
+=======
+	rc = ibmphp_hpc_readslot(*sl, READ_ALLSTAT, NULL);
+	if (rc)
+>>>>>>> v3.18
 =======
 	rc = ibmphp_hpc_readslot(*sl, READ_ALLSTAT, NULL);
 	if (rc)
@@ -145,8 +164,13 @@ static inline int slot_update(struct slot **sl)
 static int __init get_max_slots (void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct slot * slot_cur;
 	struct list_head * tmp;
+=======
+	struct slot *slot_cur;
+	struct list_head *tmp;
+>>>>>>> v3.18
 =======
 	struct slot *slot_cur;
 	struct list_head *tmp;
@@ -208,7 +232,11 @@ int ibmphp_init_devno(struct slot **cur_slot)
 					(*cur_slot)->irq[3]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			debug("rtable->exlusive_irqs = %x\n",
+=======
+			debug("rtable->exclusive_irqs = %x\n",
+>>>>>>> v3.18
 =======
 			debug("rtable->exclusive_irqs = %x\n",
 >>>>>>> v3.18
@@ -311,7 +339,11 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 value)
 				rc = -ENODEV;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else	
+=======
+	} else
+>>>>>>> v3.18
 =======
 	} else
 >>>>>>> v3.18
@@ -324,7 +356,11 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -336,7 +372,11 @@ static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 	debug("get_attention_status - Entry hotplug_slot[%lx] pvalue[%lx]\n",
 					(ulong) hotplug_slot, (ulong) value);
 <<<<<<< HEAD
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -363,7 +403,11 @@ static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_latch_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_latch_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_latch_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -394,7 +438,11 @@ static int get_latch_status(struct hotplug_slot *hotplug_slot, u8 *value)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_power_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -424,7 +472,11 @@ static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_adapter_present(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_adapter_present(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_adapter_present(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -470,7 +522,11 @@ static int get_max_bus_speed(struct slot *slot)
 	ibmphp_lock_operations();
 	mode = slot->supported_bus_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	speed = slot->supported_speed; 
+=======
+	speed = slot->supported_speed;
+>>>>>>> v3.18
 =======
 	speed = slot->supported_speed;
 >>>>>>> v3.18
@@ -481,7 +537,11 @@ static int get_max_bus_speed(struct slot *slot)
 		break;
 	case BUS_SPEED_66:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mode == BUS_MODE_PCIX) 
+=======
+		if (mode == BUS_MODE_PCIX)
+>>>>>>> v3.18
 =======
 		if (mode == BUS_MODE_PCIX)
 >>>>>>> v3.18
@@ -505,7 +565,11 @@ static int get_max_bus_speed(struct slot *slot)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_max_adapter_speed_1(struct hotplug_slot *hotplug_slot, u8 * value, u8 flag)
+=======
+static int get_max_adapter_speed_1(struct hotplug_slot *hotplug_slot, u8 *value, u8 flag)
+>>>>>>> v3.18
 =======
 static int get_max_adapter_speed_1(struct hotplug_slot *hotplug_slot, u8 *value, u8 flag)
 >>>>>>> v3.18
@@ -547,7 +611,11 @@ static int get_max_adapter_speed_1(struct hotplug_slot *hotplug_slot, u8 *value,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_bus_name(struct hotplug_slot *hotplug_slot, char * value)
+=======
+static int get_bus_name(struct hotplug_slot *hotplug_slot, char *value)
+>>>>>>> v3.18
 =======
 static int get_bus_name(struct hotplug_slot *hotplug_slot, char *value)
 >>>>>>> v3.18
@@ -595,7 +663,11 @@ static int __init init_ops(void)
 		debug("BEFORE GETTING SLOT STATUS, slot # %x\n",
 							slot_cur->number);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (slot_cur->ctrl->revision == 0xFF) 
+=======
+		if (slot_cur->ctrl->revision == 0xFF)
+>>>>>>> v3.18
 =======
 		if (slot_cur->ctrl->revision == 0xFF)
 >>>>>>> v3.18
@@ -604,8 +676,13 @@ static int __init init_ops(void)
 				return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (slot_cur->bus_on->current_speed == 0xFF) 
 			if (get_cur_bus_info(&slot_cur)) 
+=======
+		if (slot_cur->bus_on->current_speed == 0xFF)
+			if (get_cur_bus_info(&slot_cur))
+>>>>>>> v3.18
 =======
 		if (slot_cur->bus_on->current_speed == 0xFF)
 			if (get_cur_bus_info(&slot_cur))
@@ -628,8 +705,13 @@ static int __init init_ops(void)
 		debug("SLOT_LATCH = %x\n", SLOT_LATCH(slot_cur->status));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((SLOT_PWRGD(slot_cur->status)) && 
 		    !(SLOT_PRESENT(slot_cur->status)) && 
+=======
+		if ((SLOT_PWRGD(slot_cur->status)) &&
+		    !(SLOT_PRESENT(slot_cur->status)) &&
+>>>>>>> v3.18
 =======
 		if ((SLOT_PWRGD(slot_cur->status)) &&
 		    !(SLOT_PRESENT(slot_cur->status)) &&
@@ -675,8 +757,13 @@ static int validate(struct slot *slot_cur, int opn)
 	switch (opn) {
 		case ENABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(SLOT_PWRGD(slot_cur->status)) && 
 			     (SLOT_PRESENT(slot_cur->status)) && 
+=======
+			if (!(SLOT_PWRGD(slot_cur->status)) &&
+			     (SLOT_PRESENT(slot_cur->status)) &&
+>>>>>>> v3.18
 =======
 			if (!(SLOT_PWRGD(slot_cur->status)) &&
 			     (SLOT_PRESENT(slot_cur->status)) &&
@@ -686,7 +773,11 @@ static int validate(struct slot *slot_cur, int opn)
 			break;
 		case DISABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((SLOT_PWRGD(slot_cur->status)) && 
+=======
+			if ((SLOT_PWRGD(slot_cur->status)) &&
+>>>>>>> v3.18
 =======
 			if ((SLOT_PWRGD(slot_cur->status)) &&
 >>>>>>> v3.18
@@ -720,7 +811,11 @@ int ibmphp_update_slot_info(struct slot *slot_cur)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -745,7 +840,11 @@ int ibmphp_update_slot_info(struct slot *slot_cur)
 			break;
 		case BUS_SPEED_66:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (mode == BUS_MODE_PCIX) 
+=======
+			if (mode == BUS_MODE_PCIX)
+>>>>>>> v3.18
 =======
 			if (mode == BUS_MODE_PCIX)
 >>>>>>> v3.18
@@ -765,8 +864,13 @@ int ibmphp_update_slot_info(struct slot *slot_cur)
 
 	bus->cur_bus_speed = bus_speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// To do: bus_names 
 	
+=======
+	// To do: bus_names
+
+>>>>>>> v3.18
 =======
 	// To do: bus_names
 
@@ -787,7 +891,11 @@ static struct pci_func *ibm_slot_find(u8 busno, u8 device, u8 function)
 	struct pci_func *func_cur;
 	struct slot *slot_cur;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head * tmp;
+=======
+	struct list_head *tmp;
+>>>>>>> v3.18
 =======
 	struct list_head *tmp;
 >>>>>>> v3.18
@@ -816,8 +924,13 @@ static void free_slots(void)
 {
 	struct slot *slot_cur;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head * tmp;
 	struct list_head * next;
+=======
+	struct list_head *tmp;
+	struct list_head *next;
+>>>>>>> v3.18
 =======
 	struct list_head *tmp;
 	struct list_head *next;
@@ -843,6 +956,11 @@ static void ibm_unconfigure_device(struct pci_func *func)
 	debug("func->device << 3 | 0x0  = %x\n", func->device << 3 | 0x0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -855,6 +973,7 @@ static void ibm_unconfigure_device(struct pci_func *func)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_dev_put(func->dev);
 }
 
@@ -862,6 +981,8 @@ static void ibm_unconfigure_device(struct pci_func *func)
  * The following function is to fix kernel bug regarding 
  * getting bus entries, here we manually add those primary 
 =======
+=======
+>>>>>>> v3.18
 
 	pci_dev_put(func->dev);
 
@@ -871,6 +992,9 @@ static void ibm_unconfigure_device(struct pci_func *func)
 /*
  * The following function is to fix kernel bug regarding
  * getting bus entries, here we manually add those primary
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * bus entries to kernel bus structure whenever apply
  */
@@ -922,6 +1046,11 @@ static int ibm_configure_device(struct pci_func *func)
 					for bridged devices primarily */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -936,7 +1065,11 @@ static int ibm_configure_device(struct pci_func *func)
 		struct pci_bus *bus = pci_find_bus(0, func->busno);
 		if (!bus)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -951,7 +1084,11 @@ static int ibm_configure_device(struct pci_func *func)
 		if (func->dev == NULL) {
 			err("ERROR... : pci_dev still NULL\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -965,6 +1102,11 @@ static int ibm_configure_device(struct pci_func *func)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ out:
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
  out:
 	pci_unlock_rescan_remove();
@@ -974,6 +1116,7 @@ static int ibm_configure_device(struct pci_func *func)
 
 /*******************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns whether the bus is empty or not 
  *******************************************************/
 static int is_bus_empty(struct slot * slot_cur)
@@ -981,12 +1124,17 @@ static int is_bus_empty(struct slot * slot_cur)
 	int rc;
 	struct slot * tmp_slot;
 =======
+=======
+>>>>>>> v3.18
  * Returns whether the bus is empty or not
  *******************************************************/
 static int is_bus_empty(struct slot *slot_cur)
 {
 	int rc;
 	struct slot *tmp_slot;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 i = slot_cur->bus_on->slot_min;
 
@@ -1011,7 +1159,11 @@ static int is_bus_empty(struct slot *slot_cur)
 
 /***********************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If the HPC permits and the bus currently empty, tries to set the 
+=======
+ * If the HPC permits and the bus currently empty, tries to set the
+>>>>>>> v3.18
 =======
  * If the HPC permits and the bus currently empty, tries to set the
 >>>>>>> v3.18
@@ -1020,7 +1172,11 @@ static int is_bus_empty(struct slot *slot_cur)
  * Returns: bus is set (0) or error code
  ***********************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_bus(struct slot * slot_cur)
+=======
+static int set_bus(struct slot *slot_cur)
+>>>>>>> v3.18
 =======
 static int set_bus(struct slot *slot_cur)
 >>>>>>> v3.18
@@ -1033,7 +1189,11 @@ static int set_bus(struct slot *slot_cur)
 		{ PCI_DEVICE(PCI_VENDOR_ID_SERVERWORKS, 0x0101) },
 	        { },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};	
+=======
+	};
+>>>>>>> v3.18
 =======
 	};
 >>>>>>> v3.18
@@ -1058,7 +1218,11 @@ static int set_bus(struct slot *slot_cur)
 					/* if max slot/bus capability is 66 pci
 					and there's no bus mode mismatch, then
 <<<<<<< HEAD
+<<<<<<< HEAD
 					the adapter supports 66 pci */ 
+=======
+					the adapter supports 66 pci */
+>>>>>>> v3.18
 =======
 					the adapter supports 66 pci */
 >>>>>>> v3.18
@@ -1115,7 +1279,11 @@ static int set_bus(struct slot *slot_cur)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This is for x440, once Brandon fixes the firmware, 
+=======
+	/* This is for x440, once Brandon fixes the firmware,
+>>>>>>> v3.18
 =======
 	/* This is for x440, once Brandon fixes the firmware,
 >>>>>>> v3.18
@@ -1127,9 +1295,15 @@ static int set_bus(struct slot *slot_cur)
 
 /* This routine checks the bus limitations that the slot is on from the BIOS.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This is used in deciding whether or not to power up the slot.  
  * (electrical/spec limitations. For example, >1 133 MHz or >2 66 PCI cards on
  * same bus) 
+=======
+ * This is used in deciding whether or not to power up the slot.
+ * (electrical/spec limitations. For example, >1 133 MHz or >2 66 PCI cards on
+ * same bus)
+>>>>>>> v3.18
 =======
  * This is used in deciding whether or not to power up the slot.
  * (electrical/spec limitations. For example, >1 133 MHz or >2 66 PCI cards on
@@ -1142,7 +1316,11 @@ static int check_limitations(struct slot *slot_cur)
 {
 	u8 i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct slot * tmp_slot;
+=======
+	struct slot *tmp_slot;
+>>>>>>> v3.18
 =======
 	struct slot *tmp_slot;
 >>>>>>> v3.18
@@ -1185,7 +1363,11 @@ static inline void print_card_capability(struct slot *slot_cur)
 {
 	info("capability of the card is ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((slot_cur->ext_status & CARD_INFO) == PCIX133) 
+=======
+	if ((slot_cur->ext_status & CARD_INFO) == PCIX133)
+>>>>>>> v3.18
 =======
 	if ((slot_cur->ext_status & CARD_INFO) == PCIX133)
 >>>>>>> v3.18
@@ -1217,7 +1399,12 @@ static int enable_slot(struct hotplug_slot *hs)
 	slot_cur = hs->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rc = validate(slot_cur, ENABLE))) {
+=======
+	rc = validate(slot_cur, ENABLE);
+	if (rc) {
+>>>>>>> v3.18
 =======
 	rc = validate(slot_cur, ENABLE);
 	if (rc) {
@@ -1228,7 +1415,11 @@ static int enable_slot(struct hotplug_slot *hs)
 
 	attn_LED_blink(slot_cur);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1248,8 +1439,12 @@ static int enable_slot(struct hotplug_slot *hs)
 	if (rc) {
 		err("Adding this card exceeds the limitations of this bus.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("(i.e., >1 133MHz cards running on same bus, or "
 		     ">2 66 PCI cards running on same bus.\n");
+=======
+		err("(i.e., >1 133MHz cards running on same bus, or >2 66 PCI cards running on same bus.\n");
+>>>>>>> v3.18
 =======
 		err("(i.e., >1 133MHz cards running on same bus, or >2 66 PCI cards running on same bus.\n");
 >>>>>>> v3.18
@@ -1277,6 +1472,7 @@ static int enable_slot(struct hotplug_slot *hs)
 			err("power fault occurred trying to power up\n");
 		else if (SLOT_BUS_SPEED(slot_cur->status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err("bus speed mismatch occurred.  please check "
 				"current bus speed and card capability\n");
 			print_card_capability(slot_cur);
@@ -1284,10 +1480,15 @@ static int enable_slot(struct hotplug_slot *hs)
 			err("bus mode mismatch occurred.  please check "
 				"current bus mode and card capability\n");
 =======
+=======
+>>>>>>> v3.18
 			err("bus speed mismatch occurred.  please check current bus speed and card capability\n");
 			print_card_capability(slot_cur);
 		} else if (SLOT_BUS_MODE(slot_cur->ext_status)) {
 			err("bus mode mismatch occurred.  please check current bus mode and card capability\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			print_card_capability(slot_cur);
 		}
@@ -1305,7 +1506,11 @@ static int enable_slot(struct hotplug_slot *hs)
 	if (rc)
 		goto error_power;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1316,16 +1521,22 @@ static int enable_slot(struct hotplug_slot *hs)
 	}
 	if (SLOT_POWER(slot_cur->status) && (SLOT_BUS_SPEED(slot_cur->status))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("bus speed mismatch occurred.  please check current bus "
 					"speed and card capability\n");
 		print_card_capability(slot_cur);
 		goto error_power;
 	} 
 =======
+=======
+>>>>>>> v3.18
 		err("bus speed mismatch occurred.  please check current bus speed and card capability\n");
 		print_card_capability(slot_cur);
 		goto error_power;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Don't think this case will happen after above checks...
 	 * but just in case, for paranoia sake */
@@ -1378,7 +1589,11 @@ static int enable_slot(struct hotplug_slot *hs)
 	rc = ibmphp_update_slot_info(slot_cur);
 exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ibmphp_unlock_operations(); 
+=======
+	ibmphp_unlock_operations();
+>>>>>>> v3.18
 =======
 	ibmphp_unlock_operations();
 >>>>>>> v3.18
@@ -1418,7 +1633,11 @@ static int ibmphp_disable_slot(struct hotplug_slot *hotplug_slot)
 	struct slot *slot = hotplug_slot->private;
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1434,6 +1653,7 @@ int ibmphp_do_disable_slot(struct slot *slot_cur)
 	u8 flag;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug("DISABLING SLOT...\n"); 
 		
 	if ((slot_cur == NULL) || (slot_cur->ctrl == NULL)) {
@@ -1441,11 +1661,16 @@ int ibmphp_do_disable_slot(struct slot *slot_cur)
 	}
 	
 =======
+=======
+>>>>>>> v3.18
 	debug("DISABLING SLOT...\n");
 
 	if ((slot_cur == NULL) || (slot_cur->ctrl == NULL))
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	flag = slot_cur->flag;
 	slot_cur->flag = 1;
@@ -1460,7 +1685,11 @@ int ibmphp_do_disable_slot(struct slot *slot_cur)
 
 	if (slot_cur->func == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We need this for fncs's that were there on bootup */
+=======
+		/* We need this for functions that were there on bootup */
+>>>>>>> v3.18
 =======
 		/* We need this for functions that were there on bootup */
 >>>>>>> v3.18
@@ -1476,6 +1705,7 @@ int ibmphp_do_disable_slot(struct slot *slot_cur)
 
 	ibm_unconfigure_device(slot_cur->func);
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 	/* If we got here from latch suddenly opening on operating card or 
 	a power fault, there's no power to the card, so cannot
@@ -1483,6 +1713,8 @@ int ibmphp_do_disable_slot(struct slot *slot_cur)
 	is forbidden anyhow.  The best we can do is remove it from kernel
 	lists at least */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If we got here from latch suddenly opening on operating card or
@@ -1490,6 +1722,9 @@ int ibmphp_do_disable_slot(struct slot *slot_cur)
 	 * read from it to determine what resources it occupied.  This operation
 	 * is forbidden anyhow.  The best we can do is remove it from kernel
 	 * lists at least */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!flag) {
@@ -1528,7 +1763,11 @@ error:
 		goto exit;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flag)		
+=======
+	if (flag)
+>>>>>>> v3.18
 =======
 	if (flag)
 >>>>>>> v3.18
@@ -1598,12 +1837,15 @@ static int __init ibmphp_init(void)
 		irqs[i] = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rc = ibmphp_access_ebda()))
 		goto error;
 	debug("after ibmphp_access_ebda()\n");
 
 	if ((rc = ibmphp_rsrc_init()))
 =======
+=======
+>>>>>>> v3.18
 	rc = ibmphp_access_ebda();
 	if (rc)
 		goto error;
@@ -1611,14 +1853,23 @@ static int __init ibmphp_init(void)
 
 	rc = ibmphp_rsrc_init();
 	if (rc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto error;
 	debug("AFTER Resource & EBDA INITIALIZATIONS\n");
 
 	max_slots = get_max_slots();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	if ((rc = ibmphp_register_pci()))
+=======
+
+	rc = ibmphp_register_pci();
+	if (rc)
+>>>>>>> v3.18
 =======
 
 	rc = ibmphp_register_pci();
@@ -1633,9 +1884,15 @@ static int __init ibmphp_init(void)
 
 	ibmphp_print_test();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rc = ibmphp_hpc_start_poll_thread())) {
 		goto error;
 	}
+=======
+	rc = ibmphp_hpc_start_poll_thread();
+	if (rc)
+		goto error;
+>>>>>>> v3.18
 =======
 	rc = ibmphp_hpc_start_poll_thread();
 	if (rc)

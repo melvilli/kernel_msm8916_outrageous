@@ -30,7 +30,13 @@
 
 u64 uevent_seqnum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 char uevent_helper[UEVENT_HELPER_PATH_LEN] = CONFIG_UEVENT_HELPER_PATH;
+=======
+#ifdef CONFIG_UEVENT_HELPER
+char uevent_helper[UEVENT_HELPER_PATH_LEN] = CONFIG_UEVENT_HELPER_PATH;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UEVENT_HELPER
 char uevent_helper[UEVENT_HELPER_PATH_LEN] = CONFIG_UEVENT_HELPER_PATH;
@@ -95,12 +101,15 @@ out:
 static int kobj_bcast_filter(struct sock *dsk, struct sk_buff *skb, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kobject *kobj = data;
 	const struct kobj_ns_type_operations *ops;
 
 	ops = kobj_ns_ops(kobj);
 	if (ops) {
 =======
+=======
+>>>>>>> v3.18
 	struct kobject *kobj = data, *ksobj;
 	const struct kobj_ns_type_operations *ops;
 
@@ -112,6 +121,9 @@ static int kobj_bcast_filter(struct sock *dsk, struct sk_buff *skb, void *data)
 	}
 
 	if (ops && ops->netlink_ns && kobj->ktype->namespace) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		const void *sock_ns, *ns;
 		ns = kobj->ktype->namespace(kobj);
@@ -124,6 +136,10 @@ static int kobj_bcast_filter(struct sock *dsk, struct sk_buff *skb, void *data)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_UEVENT_HELPER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UEVENT_HELPER
 >>>>>>> v3.18
@@ -143,7 +159,10 @@ static int kobj_usermode_filter(struct kobject *kobj)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int init_uevent_argv(struct kobj_uevent_env *env, const char *subsystem)
 {
 	int len;
@@ -169,6 +188,9 @@ static void cleanup_uevent_env(struct subprocess_info *info)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * kobject_uevent_env - send an uevent with environmental data
@@ -346,6 +368,7 @@ int kobject_uevent_env(struct kobject *kobj, enum kobject_action action,
 	mutex_unlock(&uevent_sock_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* call uevent_helper, usually only enabled during early boot */
 	if (uevent_helper[0] && !kobj_usermode_filter(kobj)) {
 		char *argv [3];
@@ -354,11 +377,16 @@ int kobject_uevent_env(struct kobject *kobj, enum kobject_action action,
 		argv [1] = (char *)subsystem;
 		argv [2] = NULL;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_UEVENT_HELPER
 	/* call uevent_helper, usually only enabled during early boot */
 	if (uevent_helper[0] && !kobj_usermode_filter(kobj)) {
 		struct subprocess_info *info;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = add_uevent_var(env, "HOME=/");
 		if (retval)
@@ -368,11 +396,14 @@ int kobject_uevent_env(struct kobject *kobj, enum kobject_action action,
 		if (retval)
 			goto exit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		retval = call_usermodehelper(argv[0], argv,
 					     env->envp, UMH_WAIT_EXEC);
 	}
 =======
+=======
+>>>>>>> v3.18
 		retval = init_uevent_argv(env, subsystem);
 		if (retval)
 			goto exit;
@@ -387,6 +418,9 @@ int kobject_uevent_env(struct kobject *kobj, enum kobject_action action,
 		}
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 exit:

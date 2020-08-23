@@ -188,7 +188,11 @@ static int twl4030_audio_probe(struct platform_device *pdev)
 {
 	struct twl4030_audio *audio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct twl4030_audio_data *pdata = pdev->dev.platform_data;
+=======
+	struct twl4030_audio_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct twl4030_audio_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -266,10 +270,15 @@ static int twl4030_audio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		platform_set_drvdata(pdev, NULL);
 		twl4030_audio_dev = NULL;
 	}
+=======
+	if (ret)
+		twl4030_audio_dev = NULL;
+>>>>>>> v3.18
 =======
 	if (ret)
 		twl4030_audio_dev = NULL;
@@ -282,7 +291,10 @@ static int twl4030_audio_remove(struct platform_device *pdev)
 {
 	mfd_remove_devices(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	twl4030_audio_dev = NULL;

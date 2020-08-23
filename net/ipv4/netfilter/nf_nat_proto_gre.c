@@ -125,7 +125,11 @@ static const struct nf_nat_l4proto gre = {
 	.in_range		= nf_nat_l4proto_in_range,
 	.unique_tuple		= gre_unique_tuple,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 >>>>>>> v3.18

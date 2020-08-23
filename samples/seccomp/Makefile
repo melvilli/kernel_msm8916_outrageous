@@ -19,8 +19,13 @@ bpf-direct-objs := bpf-direct.o
 
 # Try to match the kernel target.
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifndef CONFIG_64BIT
 ifndef CROSS_COMPILE
+=======
+ifndef CROSS_COMPILE
+ifndef CONFIG_64BIT
+>>>>>>> v3.18
 =======
 ifndef CROSS_COMPILE
 ifndef CONFIG_64BIT
@@ -42,11 +47,14 @@ HOSTLOADLIBES_bpf-fancy += $(MFLAG)
 HOSTLOADLIBES_dropper += $(MFLAG)
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif
 
 # Tell kbuild to always build the programs
 always := $(hostprogs-y)
 =======
+=======
+>>>>>>> v3.18
 always := $(hostprogs-y)
 else
 # MIPS system calls are defined based on the -mabi that is passed
@@ -57,4 +65,7 @@ ifndef CONFIG_MIPS
 always := $(hostprogs-y)
 endif
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

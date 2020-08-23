@@ -31,6 +31,11 @@
 #define __GENALLOC_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/spinlock_types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/spinlock_types.h>
 
@@ -47,7 +52,11 @@ struct device_node;
  * @data: optional additional data used by @genpool_algo_t
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef u64 (*genpool_algo_t)(unsigned long *map,
+=======
+typedef unsigned long (*genpool_algo_t)(unsigned long *map,
+>>>>>>> v3.18
 =======
 typedef unsigned long (*genpool_algo_t)(unsigned long *map,
 >>>>>>> v3.18
@@ -76,8 +85,13 @@ struct gen_pool_chunk {
 	atomic_t avail;
 	phys_addr_t phys_addr;		/* physical starting address of memory chunk */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 start_addr;			/* start address of memory chunk */
 	u64 end_addr;			/* end address of memory chunk (inclusive) */
+=======
+	unsigned long start_addr;	/* start address of memory chunk */
+	unsigned long end_addr;		/* end address of memory chunk (inclusive) */
+>>>>>>> v3.18
 =======
 	unsigned long start_addr;	/* start address of memory chunk */
 	unsigned long end_addr;		/* end address of memory chunk (inclusive) */
@@ -87,8 +101,13 @@ struct gen_pool_chunk {
 
 extern struct gen_pool *gen_pool_create(int, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern phys_addr_t gen_pool_virt_to_phys(struct gen_pool *pool, u64);
 extern int gen_pool_add_virt(struct gen_pool *, u64, phys_addr_t,
+=======
+extern phys_addr_t gen_pool_virt_to_phys(struct gen_pool *pool, unsigned long);
+extern int gen_pool_add_virt(struct gen_pool *, unsigned long, phys_addr_t,
+>>>>>>> v3.18
 =======
 extern phys_addr_t gen_pool_virt_to_phys(struct gen_pool *pool, unsigned long);
 extern int gen_pool_add_virt(struct gen_pool *, unsigned long, phys_addr_t,
@@ -107,7 +126,11 @@ extern int gen_pool_add_virt(struct gen_pool *, unsigned long, phys_addr_t,
  * Returns 0 on success or a -ve errno on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int gen_pool_add(struct gen_pool *pool, u64 addr,
+=======
+static inline int gen_pool_add(struct gen_pool *pool, unsigned long addr,
+>>>>>>> v3.18
 =======
 static inline int gen_pool_add(struct gen_pool *pool, unsigned long addr,
 >>>>>>> v3.18
@@ -117,12 +140,18 @@ static inline int gen_pool_add(struct gen_pool *pool, unsigned long addr,
 }
 extern void gen_pool_destroy(struct gen_pool *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void gen_pool_free(struct gen_pool *, u64, size_t);
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long gen_pool_alloc(struct gen_pool *, size_t);
 extern void *gen_pool_dma_alloc(struct gen_pool *pool, size_t size,
 		dma_addr_t *dma);
 extern void gen_pool_free(struct gen_pool *, unsigned long, size_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void gen_pool_for_each_chunk(struct gen_pool *,
 	void (*)(struct gen_pool *, struct gen_pool_chunk *, void *), void *);
@@ -133,11 +162,14 @@ extern void gen_pool_set_algo(struct gen_pool *pool, genpool_algo_t algo,
 		void *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u64 gen_pool_first_fit(unsigned long *map, unsigned long size,
 		unsigned long start, unsigned int nr, void *data);
 
 extern u64 gen_pool_best_fit(unsigned long *map, unsigned long size,
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long gen_pool_first_fit(unsigned long *map, unsigned long size,
 		unsigned long start, unsigned int nr, void *data);
 
@@ -146,6 +178,9 @@ extern unsigned long gen_pool_first_fit_order_align(unsigned long *map,
 		void *data);
 
 extern unsigned long gen_pool_best_fit(unsigned long *map, unsigned long size,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned long start, unsigned int nr, void *data);
 
@@ -153,6 +188,7 @@ extern struct gen_pool *devm_gen_pool_create(struct device *dev,
 		int min_alloc_order, int nid);
 extern struct gen_pool *dev_get_gen_pool(struct device *dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 u64 __must_check
 gen_pool_alloc_aligned(struct gen_pool *pool, size_t size,
@@ -171,6 +207,10 @@ gen_pool_alloc(struct gen_pool *pool, size_t size)
 {
         return gen_pool_alloc_aligned(pool, size, 0);
 }
+=======
+bool addr_in_gen_pool(struct gen_pool *pool, unsigned long start,
+			size_t size);
+>>>>>>> v3.18
 =======
 bool addr_in_gen_pool(struct gen_pool *pool, unsigned long start,
 			size_t size);

@@ -186,7 +186,10 @@
 					interrupts = <8 1>;
 					reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -195,7 +198,10 @@
 					interrupts = <8 1>;
 					reg = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -204,7 +210,10 @@
 					interrupts = <8 1>;
 					reg = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -213,7 +222,10 @@
 					interrupts = <8 1>;
 					reg = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -222,7 +234,10 @@
 					interrupts = <8 1>;
 					reg = <5>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};

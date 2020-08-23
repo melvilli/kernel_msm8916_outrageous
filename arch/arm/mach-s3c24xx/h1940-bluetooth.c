@@ -20,13 +20,19 @@
 #include <linux/rfkill.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/regs-gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <plat/gpio-cfg.h>
 #include <mach/hardware.h>
 #include <mach/regs-gpio.h>
 #include <mach/gpio-samsung.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "h1940.h"

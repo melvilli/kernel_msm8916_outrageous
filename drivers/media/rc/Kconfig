@@ -34,6 +34,7 @@ config IR_LIRC_CODEC
 	   the LIRC interface.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USER_RC_INPUT
 	tristate "User Space Input device wrapper for Remote Control"
 	depends on RC_CORE
@@ -55,6 +56,8 @@ config USER_SP_RC_INPUT
 
 	   To compile this driver as a module, choose M here: the module will
 	   be called user-sp-input.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -109,6 +112,7 @@ config IR_SONY_DECODER
 	   uses the Sony protocol, and you need software decoding support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IR_RC5_SZ_DECODER
 	tristate "Enable IR raw decoder for the RC-5 (streamzap) protocol"
 	depends on RC_CORE
@@ -124,6 +128,8 @@ config IR_RC5_SZ_DECODER
 config IR_SANYO_DECODER
 	tristate "Enable IR raw decoder for the Sanyo protocol"
 =======
+=======
+>>>>>>> v3.18
 config IR_SANYO_DECODER
 	tristate "Enable IR raw decoder for the Sanyo protocol"
 	depends on RC_CORE
@@ -136,6 +142,9 @@ config IR_SANYO_DECODER
 
 config IR_SHARP_DECODER
 	tristate "Enable IR raw decoder for the Sharp protocol"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on RC_CORE
 	default y
@@ -143,8 +152,12 @@ config IR_SHARP_DECODER
 	---help---
 	   Enable this option if you have an infrared remote control which
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   uses the Sanyo protocol (Sanyo, Aiwa, Chinon remotes),
 	   and you need software decoding support.
+=======
+	   uses the Sharp protocol, and you need software decoding support.
+>>>>>>> v3.18
 =======
 	   uses the Sharp protocol, and you need software decoding support.
 >>>>>>> v3.18
@@ -160,7 +173,10 @@ config IR_MCE_KBD_DECODER
 	   Windows Media Center Edition, which you would like to use with
 	   a raw IR receiver in your system.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config IR_XMP_DECODER
 	tristate "Enable IR raw decoder for the XMP protocol"
@@ -171,6 +187,9 @@ config IR_XMP_DECODER
 	---help---
 	   Enable this option if you have IR with XMP protocol, and
 	   if the IR is decoded in software
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif #RC_DECODERS
 
@@ -214,7 +233,10 @@ config IR_ENE
 	   module will be called ene_ir.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config IR_HIX5HD2
 	tristate "Hisilicon hix5hd2 IR remote control"
 	depends on RC_CORE
@@ -225,6 +247,9 @@ config IR_HIX5HD2
 
 	 If you're not sure, select N here
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config IR_IMON
 	tristate "SoundGraph iMON Receiver and Display"
@@ -293,6 +318,11 @@ config IR_REDRAT3
 	depends on USB_ARCH_HAS_HCD
 	depends on RC_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select NEW_LEDS
+	select LEDS_CLASS
+>>>>>>> v3.18
 =======
 	select NEW_LEDS
 	select LEDS_CLASS
@@ -323,7 +353,10 @@ config IR_WINBOND_CIR
 	select NEW_LEDS
 	select LEDS_CLASS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select LEDS_TRIGGERS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select BITREVERSE
@@ -377,6 +410,11 @@ config IR_RX51
 	   wave and pulses.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/media/rc/img-ir/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/media/rc/img-ir/Kconfig"
 
@@ -404,6 +442,7 @@ config IR_GPIO_CIR
 	   be called gpio-ir-recv.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IR_MSM_GENI
 	tristate "MSM GENI IR Controller"
 	depends on RC_CORE
@@ -423,6 +462,8 @@ config IR_MSM_GENI_TX
 	   Say Y here to enable support for integrated infrared transmitter
 	   for MSM family processors.
 =======
+=======
+>>>>>>> v3.18
 config RC_ST
 	tristate "ST remote control receiver"
 	depends on RC_CORE
@@ -443,6 +484,9 @@ config IR_SUNXI
 
       To compile this driver as a module, choose M here: the module will
       be called sunxi-ir.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif #RC_DEVICES

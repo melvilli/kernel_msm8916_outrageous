@@ -31,7 +31,11 @@
 #include <net/net_namespace.h>
 #include <net/sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -122,7 +126,11 @@ static void nr_kill_by_device(struct net_device *dev)
 static int nr_device_event(struct notifier_block *this, unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1020,7 +1028,11 @@ int nr_rx_frame(struct sk_buff *skb, struct net_device *dev)
 
 	if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -1041,7 +1053,11 @@ static int nr_sendmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct nr_sock *nr = nr_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_ax25 *usax = (struct sockaddr_ax25 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_ax25 *, usax, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_ax25 *, usax, msg->msg_name);
 >>>>>>> v3.18
@@ -1154,7 +1170,11 @@ static int nr_recvmsg(struct kiocb *iocb, struct socket *sock,
 {
 	struct sock *sk = sock->sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_ax25 *sax = (struct sockaddr_ax25 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_ax25 *, sax, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_ax25 *, sax, msg->msg_name);
 >>>>>>> v3.18
@@ -1439,7 +1459,11 @@ static int __init nr_proto_init(void)
 
 		sprintf(name, "nr%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = alloc_netdev(0, name, nr_setup);
+=======
+		dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, nr_setup);
+>>>>>>> v3.18
 =======
 		dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, nr_setup);
 >>>>>>> v3.18

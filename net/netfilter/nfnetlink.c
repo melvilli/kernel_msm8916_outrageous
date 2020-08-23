@@ -48,6 +48,11 @@ static const int nfnl_group2type[NFNLGRP_MAX+1] = {
 	[NFNLGRP_CONNTRACK_EXP_UPDATE]	= NFNL_SUBSYS_CTNETLINK_EXP,
 	[NFNLGRP_CONNTRACK_EXP_DESTROY] = NFNL_SUBSYS_CTNETLINK_EXP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[NFNLGRP_NFTABLES]		= NFNL_SUBSYS_NFTABLES,
+	[NFNLGRP_ACCT_QUOTA]		= NFNL_SUBSYS_ACCT,
+>>>>>>> v3.18
 =======
 	[NFNLGRP_NFTABLES]		= NFNL_SUBSYS_NFTABLES,
 	[NFNLGRP_ACCT_QUOTA]		= NFNL_SUBSYS_ACCT,
@@ -67,7 +72,10 @@ void nfnl_unlock(__u8 subsys_id)
 EXPORT_SYMBOL_GPL(nfnl_unlock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PROVE_LOCKING
 int lockdep_nfnl_is_held(u8 subsys_id)
 {
@@ -76,6 +84,9 @@ int lockdep_nfnl_is_held(u8 subsys_id)
 EXPORT_SYMBOL_GPL(lockdep_nfnl_is_held);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nfnetlink_subsys_register(const struct nfnetlink_subsystem *n)
 {
@@ -164,9 +175,12 @@ static int nfnetlink_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 	int type, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netlink_net_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* All the messages must at least contain nfgenmsg */
@@ -237,6 +251,7 @@ replay:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nfnetlink_rcv(struct sk_buff *skb)
 {
 	netlink_rcv_skb(skb, &nfnetlink_rcv_msg);
@@ -257,6 +272,8 @@ static void nfnetlink_bind(int group)
 	}
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 struct nfnl_err {
 	struct list_head	head;
 	struct nlmsghdr		*nlh;
@@ -512,6 +529,9 @@ static int nfnetlink_bind(int group)
 	if (!ss)
 		request_module("nfnetlink-subsys-%d", type);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -556,6 +576,12 @@ static int __init nfnetlink_init(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for (i = NFNLGRP_NONE + 1; i <= NFNLGRP_MAX; i++)
+		BUG_ON(nfnl_group2type[i] == NFNL_SUBSYS_NONE);
+
+>>>>>>> v3.18
 =======
 	for (i = NFNLGRP_NONE + 1; i <= NFNLGRP_MAX; i++)
 		BUG_ON(nfnl_group2type[i] == NFNL_SUBSYS_NONE);

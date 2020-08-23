@@ -6,6 +6,11 @@
 #include <linux/pci.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vgaarb.h>
+#include <linux/screen_info.h>
+>>>>>>> v3.18
 =======
 #include <linux/vgaarb.h>
 #include <linux/screen_info.h>
@@ -25,14 +30,20 @@
  * card with this copy. On laptops this copy has to be used since
  * the main ROM may be compressed or combined with another image.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See pci_map_rom() for use of this flag. IORESOURCE_ROM_SHADOW
  * is marked here since the boot video device will be the only enabled
  * video device at this point.
 =======
+=======
+>>>>>>> v3.18
  * See pci_map_rom() for use of this flag. Before marking the device
  * with IORESOURCE_ROM_SHADOW check if a vga_default_device is already set
  * by either arch cde or vga-arbitration, if so only apply the fixup to this
  * already determined primary video card.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -48,9 +59,12 @@ static void pci_fixup_video(struct pci_dev *pdev)
 	/* Maybe, this machine supports legacy memory map. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pdev->class >> 8) != PCI_CLASS_DISPLAY_VGA)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Is VGA routed to us? */
@@ -66,9 +80,13 @@ static void pci_fixup_video(struct pci_dev *pdev)
 		 * PCI header type NORMAL.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bridge
 		    &&((bridge->hdr_type == PCI_HEADER_TYPE_BRIDGE)
 		       ||(bridge->hdr_type == PCI_HEADER_TYPE_CARDBUS))) {
+=======
+		if (bridge && (pci_is_bridge(bridge))) {
+>>>>>>> v3.18
 =======
 		if (bridge && (pci_is_bridge(bridge))) {
 >>>>>>> v3.18
@@ -80,6 +98,7 @@ static void pci_fixup_video(struct pci_dev *pdev)
 		bus = bus->parent;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(pdev, PCI_COMMAND, &config);
 	if (config & (PCI_COMMAND_IO | PCI_COMMAND_MEMORY)) {
 		pdev->resource[PCI_ROM_RESOURCE].flags |= IORESOURCE_ROM_SHADOW;
@@ -88,6 +107,8 @@ static void pci_fixup_video(struct pci_dev *pdev)
 }
 DECLARE_PCI_FIXUP_HEADER(PCI_ANY_ID, PCI_ANY_ID, pci_fixup_video);
 =======
+=======
+>>>>>>> v3.18
 	if (!vga_default_device() || pdev == vga_default_device()) {
 		pci_read_config_word(pdev, PCI_COMMAND, &config);
 		if (config & (PCI_COMMAND_IO | PCI_COMMAND_MEMORY)) {
@@ -98,4 +119,7 @@ DECLARE_PCI_FIXUP_HEADER(PCI_ANY_ID, PCI_ANY_ID, pci_fixup_video);
 }
 DECLARE_PCI_FIXUP_CLASS_FINAL(PCI_ANY_ID, PCI_ANY_ID,
 				PCI_CLASS_DISPLAY_VGA, 8, pci_fixup_video);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -12,7 +12,11 @@ Consider the following machine :-
 
 The drivers for consumers A & B must be mapped to the correct regulator in
 <<<<<<< HEAD
+<<<<<<< HEAD
 order to control their power supply. This mapping can be achieved in machine
+=======
+order to control their power supplies. This mapping can be achieved in machine
+>>>>>>> v3.18
 =======
 order to control their power supplies. This mapping can be achieved in machine
 >>>>>>> v3.18
@@ -44,7 +48,11 @@ to the 'Vcc' supply for Consumer A.
 Constraints can now be registered by defining a struct regulator_init_data
 for each regulator power domain. This structure also maps the consumers
 <<<<<<< HEAD
+<<<<<<< HEAD
 to their supply regulator :-
+=======
+to their supply regulators :-
+>>>>>>> v3.18
 =======
 to their supply regulators :-
 >>>>>>> v3.18

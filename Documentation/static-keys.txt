@@ -117,7 +117,11 @@ The branch(es) can then be switched via:
 
 Thus, 'static_key_slow_inc()' means 'make the branch true', and
 <<<<<<< HEAD
+<<<<<<< HEAD
 'static_key_slow_dec()' means 'make the the branch false' with appropriate
+=======
+'static_key_slow_dec()' means 'make the branch false' with appropriate
+>>>>>>> v3.18
 =======
 'static_key_slow_dec()' means 'make the branch false' with appropriate
 >>>>>>> v3.18
@@ -241,7 +245,11 @@ label case adds:
 If we then include the padding bytes, the jump label code saves, 16 total bytes
 of instruction memory for this small function. In this case the non-jump label
 <<<<<<< HEAD
+<<<<<<< HEAD
 function is 80 bytes long. Thus, we have have saved 20% of the instruction
+=======
+function is 80 bytes long. Thus, we have saved 20% of the instruction
+>>>>>>> v3.18
 =======
 function is 80 bytes long. Thus, we have saved 20% of the instruction
 >>>>>>> v3.18

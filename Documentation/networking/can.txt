@@ -3,6 +3,7 @@
 can.txt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Readme file for the Controller Area Network Protocol Family (aka Socket CAN)
 
 This file contains
@@ -19,6 +20,8 @@ This file contains
 
   4 How to use Socket CAN
 =======
+=======
+>>>>>>> v3.18
 Readme file for the Controller Area Network Protocol Family (aka SocketCAN)
 
 This file contains
@@ -33,6 +36,9 @@ This file contains
     3.3 network problem notifications
 
   4 How to use SocketCAN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     4.1 RAW protocol sockets with can_filters (SOCK_RAW)
       4.1.1 RAW socket option CAN_RAW_FILTER
@@ -43,11 +49,14 @@ This file contains
       4.1.6 RAW socket returned message flags
     4.2 Broadcast Manager protocol sockets (SOCK_DGRAM)
 <<<<<<< HEAD
+<<<<<<< HEAD
     4.3 connected transport protocols (SOCK_SEQPACKET)
     4.4 unconnected transport protocols (SOCK_DGRAM)
 
   5 Socket CAN core module
 =======
+=======
+>>>>>>> v3.18
       4.2.1 Broadcast Manager operations
       4.2.2 Broadcast Manager message flags
       4.2.3 Broadcast Manager transmission timers
@@ -58,6 +67,9 @@ This file contains
     4.4 unconnected transport protocols (SOCK_DGRAM)
 
   5 SocketCAN core module
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     5.1 can.ko module params
     5.2 procfs content
@@ -76,7 +88,11 @@ This file contains
     6.7 supported CAN hardware
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   7 Socket CAN resources
+=======
+  7 SocketCAN resources
+>>>>>>> v3.18
 =======
   7 SocketCAN resources
 >>>>>>> v3.18
@@ -86,7 +102,11 @@ This file contains
 ============================================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. Overview / What is Socket CAN
+=======
+1. Overview / What is SocketCAN
+>>>>>>> v3.18
 =======
 1. Overview / What is SocketCAN
 >>>>>>> v3.18
@@ -97,7 +117,11 @@ The socketcan package is an implementation of CAN protocols
 which has widespread use in automation, embedded devices, and
 automotive fields.  While there have been other CAN implementations
 <<<<<<< HEAD
+<<<<<<< HEAD
 for Linux based on character devices, Socket CAN uses the Berkeley
+=======
+for Linux based on character devices, SocketCAN uses the Berkeley
+>>>>>>> v3.18
 =======
 for Linux based on character devices, SocketCAN uses the Berkeley
 >>>>>>> v3.18
@@ -111,7 +135,11 @@ sockets.
 ----------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 There have been CAN implementations for Linux before Socket CAN so the
+=======
+There have been CAN implementations for Linux before SocketCAN so the
+>>>>>>> v3.18
 =======
 There have been CAN implementations for Linux before SocketCAN so the
 >>>>>>> v3.18
@@ -130,15 +158,21 @@ often the need for adaption of large parts of the application to the
 new driver's API.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Socket CAN was designed to overcome all of these limitations.  A new
 protocol family has been implemented which provides a socket interface
 to user space applications and which builds upon the Linux network
 layer, so to use all of the provided queueing functionality.  A device
 =======
+=======
+>>>>>>> v3.18
 SocketCAN was designed to overcome all of these limitations.  A new
 protocol family has been implemented which provides a socket interface
 to user space applications and which builds upon the Linux network
 layer, enabling use all of the provided queueing functionality.  A device
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 driver for CAN controller hardware registers itself with the Linux
 network layer as a network device, so that CAN frames from the
@@ -194,7 +228,11 @@ solution for a couple of reasons:
   it would be no more difficult, or may be even easier, to use the
   networking framework provided by the Linux kernel, and this is what
 <<<<<<< HEAD
+<<<<<<< HEAD
   Socket CAN does.
+=======
+  SocketCAN does.
+>>>>>>> v3.18
 =======
   SocketCAN does.
 >>>>>>> v3.18
@@ -203,15 +241,21 @@ solution for a couple of reasons:
   natural and most appropriate way to implement CAN for Linux.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 3. Socket CAN concept
 ---------------------
 
   As described in chapter 2 it is the main goal of Socket CAN to
 =======
+=======
+>>>>>>> v3.18
 3. SocketCAN concept
 ---------------------
 
   As described in chapter 2 it is the main goal of SocketCAN to
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   provide a socket interface to user space applications which builds
   upon the Linux network layer. In contrast to the commonly known
@@ -227,17 +271,23 @@ solution for a couple of reasons:
   The network transparent access of multiple applications leads to the
   problem that different applications may be interested in the same
 <<<<<<< HEAD
+<<<<<<< HEAD
   CAN-IDs from the same CAN network interface. The Socket CAN core
   module - which implements the protocol family CAN - provides several
   high efficient receive lists for this reason. If e.g. a user space
   application opens a CAN RAW socket, the raw protocol module itself
   requests the (range of) CAN-IDs from the Socket CAN core that are
 =======
+=======
+>>>>>>> v3.18
   CAN-IDs from the same CAN network interface. The SocketCAN core
   module - which implements the protocol family CAN - provides several
   high efficient receive lists for this reason. If e.g. a user space
   application opens a CAN RAW socket, the raw protocol module itself
   requests the (range of) CAN-IDs from the SocketCAN core that are
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   requested by the user. The subscription and unsubscription of
   CAN-IDs can be done for specific CAN interfaces or for all(!) known
@@ -284,6 +334,7 @@ solution for a couple of reasons:
       like 'candump' or 'cansniffer' on the (same) node.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   3.3 network security issues (capabilities)
 
   The Controller Area Network is a local field bus transmitting only
@@ -299,6 +350,9 @@ solution for a couple of reasons:
   selected at kernel compile time.
 
   3.4 network problem notifications
+=======
+  3.3 network problem notifications
+>>>>>>> v3.18
 =======
   3.3 network problem notifications
 >>>>>>> v3.18
@@ -322,17 +376,23 @@ solution for a couple of reasons:
   described in the Linux header file "include/linux/can/error.h".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 4. How to use Socket CAN
 ------------------------
 
   Like TCP/IP, you first need to open a socket for communicating over a
   CAN network. Since Socket CAN implements a new protocol family, you
 =======
+=======
+>>>>>>> v3.18
 4. How to use SocketCAN
 ------------------------
 
   Like TCP/IP, you first need to open a socket for communicating over a
   CAN network. Since SocketCAN implements a new protocol family, you
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   need to pass PF_CAN as the first argument to the socket(2) system
   call. Currently, there are two CAN protocols to choose from, the raw
@@ -365,8 +425,13 @@ solution for a couple of reasons:
 
   The alignment of the (linear) payload data[] to a 64bit boundary
 <<<<<<< HEAD
+<<<<<<< HEAD
   allows the user to define own structs and unions to easily access the
   CAN payload. There is no given byteorder on the CAN bus by
+=======
+  allows the user to define their own structs and unions to easily access
+  the CAN payload. There is no given byteorder on the CAN bus by
+>>>>>>> v3.18
 =======
   allows the user to define their own structs and unions to easily access
   the CAN payload. There is no given byteorder on the CAN bus by
@@ -563,7 +628,11 @@ solution for a couple of reasons:
     setsockopt(s, SOL_CAN_RAW, CAN_RAW_FILTER, NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   To set the filters to zero filters is quite obsolete as not read
+=======
+  To set the filters to zero filters is quite obsolete as to not read
+>>>>>>> v3.18
 =======
   To set the filters to zero filters is quite obsolete as to not read
 >>>>>>> v3.18
@@ -572,7 +641,10 @@ solution for a couple of reasons:
   Kernel to save a little (really a very little!) CPU usage.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   4.1.1.1 CAN filter usage optimisation
 
   The CAN filters are processed in per-device filter lists at CAN frame
@@ -608,6 +680,9 @@ solution for a couple of reasons:
 
     setsockopt(s, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, sizeof(rfilter));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   4.1.2 RAW socket option CAN_RAW_ERR_FILTER
 
@@ -695,12 +770,15 @@ solution for a couple of reasons:
   CANFD_MTU sized CAN FD frames.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   As long as the payload length is <=8 the received CAN frames from CAN FD
   capable CAN devices can be received and read by legacy sockets too. When
   user-generated CAN FD frames have a payload length <=8 these can be send
   by legacy CAN network interfaces too. Sending CAN FD frames with payload
   length > 8 to a legacy CAN network interface returns an -EMSGSIZE error.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   Implementation hint for new CAN applications:
@@ -728,7 +806,10 @@ solution for a couple of reasons:
 
   4.2 Broadcast Manager protocol sockets (SOCK_DGRAM)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
   The Broadcast Manager protocol provides a command based configuration
   interface to filter and send (e.g. cyclic) CAN messages in kernel space.
@@ -940,21 +1021,30 @@ solution for a couple of reasons:
 
     write(s, &msg, sizeof(msg));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   4.3 connected transport protocols (SOCK_SEQPACKET)
   4.4 unconnected transport protocols (SOCK_DGRAM)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 5. Socket CAN core module
 -------------------------
 
   The Socket CAN core module implements the protocol family
 =======
+=======
+>>>>>>> v3.18
 5. SocketCAN core module
 -------------------------
 
   The SocketCAN core module implements the protocol family
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   PF_CAN. CAN protocol modules are loaded by the core module at
   runtime. The core module provides an interface for CAN protocol
@@ -963,7 +1053,11 @@ solution for a couple of reasons:
   5.1 can.ko module params
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   - stats_timer: To calculate the Socket CAN core statistics
+=======
+  - stats_timer: To calculate the SocketCAN core statistics
+>>>>>>> v3.18
 =======
   - stats_timer: To calculate the SocketCAN core statistics
 >>>>>>> v3.18
@@ -976,7 +1070,11 @@ solution for a couple of reasons:
   5.2 procfs content
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   As described in chapter 3.1 the Socket CAN core uses several filter
+=======
+  As described in chapter 3.1 the SocketCAN core uses several filter
+>>>>>>> v3.18
 =======
   As described in chapter 3.1 the SocketCAN core uses several filter
 >>>>>>> v3.18
@@ -1007,9 +1105,15 @@ solution for a couple of reasons:
   Additional procfs files in /proc/net/can
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     stats       - Socket CAN core statistics (rx/tx frames, match ratios, ...)
     reset_stats - manual statistic reset
     version     - prints the Socket CAN core version and the ABI version
+=======
+    stats       - SocketCAN core statistics (rx/tx frames, match ratios, ...)
+    reset_stats - manual statistic reset
+    version     - prints the SocketCAN core version and the ABI version
+>>>>>>> v3.18
 =======
     stats       - SocketCAN core statistics (rx/tx frames, match ratios, ...)
     reset_stats - manual statistic reset
@@ -1021,7 +1125,11 @@ solution for a couple of reasons:
   To implement a new protocol in the protocol family PF_CAN a new
   protocol has to be defined in include/linux/can.h .
 <<<<<<< HEAD
+<<<<<<< HEAD
   The prototypes and definitions to use the Socket CAN core can be
+=======
+  The prototypes and definitions to use the SocketCAN core can be
+>>>>>>> v3.18
 =======
   The prototypes and definitions to use the SocketCAN core can be
 >>>>>>> v3.18
@@ -1195,7 +1303,11 @@ solution for a couple of reasons:
 	in milliseconds. By default it's off.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     "bitrate 125000 sample_point 0.875"
+=======
+    "bitrate 125000 sample-point 0.875"
+>>>>>>> v3.18
 =======
     "bitrate 125000 sample-point 0.875"
 >>>>>>> v3.18
@@ -1266,7 +1378,11 @@ solution for a couple of reasons:
     $ ip link set canX up type can bitrate 125000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   A device may enter the "bus-off" state if too much errors occurred on
+=======
+  A device may enter the "bus-off" state if too many errors occurred on
+>>>>>>> v3.18
 =======
   A device may enter the "bus-off" state if too many errors occurred on
 >>>>>>> v3.18
@@ -1290,7 +1406,11 @@ solution for a couple of reasons:
   CAN FD capable CAN controllers support two different bitrates for the
   arbitration phase and the payload phase of the CAN FD frame. Therefore a
 <<<<<<< HEAD
+<<<<<<< HEAD
   second bittiming has to be specified in order to enable the CAN FD bitrate.
+=======
+  second bit timing has to be specified in order to enable the CAN FD bitrate.
+>>>>>>> v3.18
 =======
   second bit timing has to be specified in order to enable the CAN FD bitrate.
 >>>>>>> v3.18
@@ -1319,6 +1439,7 @@ solution for a couple of reasons:
 
   Please check the "Kconfig" file in "drivers/net/can" to get an actual
 <<<<<<< HEAD
+<<<<<<< HEAD
   list of the support CAN hardware. On the Socket CAN project website
   (see chapter 7) there might be further drivers available, also for
   older kernel versions.
@@ -1335,6 +1456,8 @@ solution for a couple of reasons:
   If you have questions, bug fixes, etc., don't hesitate to post them to
   the Socketcan-Users mailing list. But please search the archives first.
 =======
+=======
+>>>>>>> v3.18
   list of the support CAN hardware. On the SocketCAN project website
   (see chapter 7) there might be further drivers available, also for
   older kernel versions.
@@ -1345,6 +1468,9 @@ solution for a couple of reasons:
   The Linux CAN / SocketCAN project ressources (project site / mailing list)
   are referenced in the MAINTAINERS file in the Linux source tree.
   Search for CAN NETWORK [LAYERS|DRIVERS].
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 8. Credits

@@ -26,8 +26,11 @@
 
 #define BITMASK(bits)		(BIT(bits) - 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ALE_ENTRY_BITS		68
 #define ALE_ENTRY_WORDS	DIV_ROUND_UP(ALE_ENTRY_BITS, 32)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -167,7 +170,11 @@ int cpsw_ale_match_addr(struct cpsw_ale *ale, u8 *addr, u16 vid)
 			continue;
 		cpsw_ale_get_addr(ale_entry, entry_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(entry_addr, addr, 6) == 0)
+=======
+		if (ether_addr_equal(entry_addr, addr))
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(entry_addr, addr))
 >>>>>>> v3.18
@@ -453,7 +460,10 @@ int cpsw_ale_del_vlan(struct cpsw_ale *ale, u16 vid, int port_mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void cpsw_ale_set_allmulti(struct cpsw_ale *ale, int allmulti)
 {
 	u32 ale_entry[ALE_ENTRY_WORDS];
@@ -483,6 +493,9 @@ void cpsw_ale_set_allmulti(struct cpsw_ale *ale, int allmulti)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ale_control_info {
 	const char	*name;
@@ -517,7 +530,10 @@ static const struct ale_control_info ale_controls[ALE_NUM_CONTROLS] = {
 		.bits		= 1,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[ALE_P0_UNI_FLOOD]	= {
 		.name		= "port0_unicast_flood",
 		.offset		= ALE_CONTROL,
@@ -526,6 +542,9 @@ static const struct ale_control_info ale_controls[ALE_NUM_CONTROLS] = {
 		.port_shift	= 0,
 		.bits		= 1,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[ALE_VLAN_NOLEARN]	= {
 		.name		= "vlan_nolearn",
@@ -624,7 +643,10 @@ static const struct ale_control_info ale_controls[ALE_NUM_CONTROLS] = {
 		.bits		= 1,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[ALE_PORT_NO_SA_UPDATE]	= {
 		.name		= "no_source_update",
 		.offset		= ALE_PORTCTL,
@@ -633,6 +655,9 @@ static const struct ale_control_info ale_controls[ALE_NUM_CONTROLS] = {
 		.port_shift	= 0,
 		.bits		= 1,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[ALE_PORT_MCAST_LIMIT]	= {
 		.name		= "mcast_limit",
@@ -804,7 +829,10 @@ int cpsw_ale_destroy(struct cpsw_ale *ale)
 	if (!ale)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpsw_ale_stop(ale);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cpsw_ale_control_set(ale, 0, ALE_ENABLE, 0);
@@ -812,7 +840,10 @@ int cpsw_ale_destroy(struct cpsw_ale *ale)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void cpsw_ale_dump(struct cpsw_ale *ale, u32 *data)
 {
@@ -823,4 +854,7 @@ void cpsw_ale_dump(struct cpsw_ale *ale, u32 *data)
 		data += ALE_ENTRY_WORDS;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

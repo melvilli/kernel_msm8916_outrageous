@@ -8,7 +8,10 @@ menu "Serial drivers"
 	depends on HAS_IOMEM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SERIAL_EARLYCON
 	bool
 	help
@@ -16,6 +19,9 @@ config SERIAL_EARLYCON
 	  the console before standard serial driver is probed. The console is
 	  enabled when early_param is processed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/tty/serial/8250/Kconfig"
 
@@ -64,6 +70,10 @@ config SERIAL_AMBA_PL011_CONSOLE
 	depends on SERIAL_AMBA_PL011=y
 	select SERIAL_CORE_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SERIAL_EARLYCON
+>>>>>>> v3.18
 =======
 	select SERIAL_EARLYCON
 >>>>>>> v3.18
@@ -80,7 +90,10 @@ config SERIAL_AMBA_PL011_CONSOLE
 	  kernel at boot time.)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SERIAL_EARLYCON_ARM_SEMIHOST
 	bool "Early console using ARM semihosting"
 	depends on ARM64 || ARM
@@ -93,6 +106,9 @@ config SERIAL_EARLYCON_ARM_SEMIHOST
 	  with "earlycon=smh" on the kernel command line. The console is
 	  enabled when early_param is processed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SERIAL_SB1250_DUART
 	tristate "BCM1xxx on-chip DUART serial support"
@@ -127,6 +143,10 @@ config SERIAL_ATMEL
 	depends on ARCH_AT91 || AVR32
 	select SERIAL_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SERIAL_MCTRL_GPIO
+>>>>>>> v3.18
 =======
 	select SERIAL_MCTRL_GPIO
 >>>>>>> v3.18
@@ -213,12 +233,15 @@ config SERIAL_KS8695_CONSOLE
 	  logins in single user mode).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SERIAL_CLPS711X
 	tristate "CLPS711X serial port support"
 	depends on ARCH_CLPS711X
 	select SERIAL_CORE
 	default y
 =======
+=======
+>>>>>>> v3.18
 config SERIAL_MESON
 	tristate "Meson serial port support"
 	depends on ARCH_MESON
@@ -242,6 +265,9 @@ config SERIAL_CLPS711X
 	depends on ARCH_CLPS711X || COMPILE_TEST
 	select SERIAL_CORE
 	select SERIAL_MCTRL_GPIO if GPIOLIB
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This enables the driver for the on-chip UARTs of the Cirrus
@@ -260,7 +286,11 @@ config SERIAL_CLPS711X_CONSOLE
 config SERIAL_SAMSUNG
 	tristate "Samsung SoC serial support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PLAT_SAMSUNG
+=======
+	depends on PLAT_SAMSUNG || ARCH_EXYNOS
+>>>>>>> v3.18
 =======
 	depends on PLAT_SAMSUNG || ARCH_EXYNOS
 >>>>>>> v3.18
@@ -282,7 +312,10 @@ config SERIAL_SAMSUNG_UARTS
 	int
 	depends on PLAT_SAMSUNG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default 6 if CPU_S5P6450
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default 4 if SERIAL_SAMSUNG_UARTS_4 || CPU_S3C2416
@@ -318,7 +351,11 @@ config SERIAL_SAMSUNG_CONSOLE
 config SERIAL_SIRFSOC
         tristate "SiRF SoC Platform Serial port support"
 <<<<<<< HEAD
+<<<<<<< HEAD
         depends on ARCH_PRIMA2
+=======
+        depends on ARCH_SIRF
+>>>>>>> v3.18
 =======
         depends on ARCH_SIRF
 >>>>>>> v3.18
@@ -348,7 +385,11 @@ config SERIAL_TEGRA
 	help
 	  Support for the on-chip UARTs on the NVIDIA Tegra series SOCs
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  providing /dev/ttyHS0, 1, 2, 3 and 4 (note, some machines may not
+=======
+	  providing /dev/ttyTHS0, 1, 2, 3 and 4 (note, some machines may not
+>>>>>>> v3.18
 =======
 	  providing /dev/ttyTHS0, 1, 2, 3 and 4 (note, some machines may not
 >>>>>>> v3.18
@@ -365,6 +406,7 @@ config SERIAL_MAX3100
 
 config SERIAL_MAX310X
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "MAX310X support"
 	depends on SPI
 	select SERIAL_CORE
@@ -374,6 +416,8 @@ config SERIAL_MAX310X
 	  This selects support for an advanced UART from Maxim (Dallas).
 	  Supported ICs are MAX3107, MAX3108.
 =======
+=======
+>>>>>>> v3.18
 	tristate "MAX310X support"
 	depends on SPI_MASTER
 	select SERIAL_CORE
@@ -382,6 +426,9 @@ config SERIAL_MAX310X
 	help
 	  This selects support for an advanced UART from Maxim (Dallas).
 	  Supported ICs are MAX3107, MAX3108, MAX3109, MAX14830.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  Each IC contains 128 words each of receive and transmit FIFO
 	  that can be controlled through I2C or high-speed SPI.
@@ -637,7 +684,11 @@ config BFIN_UART3_CTSRTS
 
 config SERIAL_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "IMX serial port support"
+=======
+	tristate "IMX serial port support"
+>>>>>>> v3.18
 =======
 	tristate "IMX serial port support"
 >>>>>>> v3.18
@@ -651,21 +702,28 @@ config SERIAL_IMX
 config SERIAL_IMX_CONSOLE
 	bool "Console on IMX serial port"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SERIAL_IMX
 	select SERIAL_CORE_CONSOLE
 	help
 	  If you have enabled the serial port on the Motorola IMX
 =======
+=======
+>>>>>>> v3.18
 	depends on SERIAL_IMX=y
 	select SERIAL_CORE_CONSOLE
 	help
 	  If you have enabled the serial port on the Freescale IMX
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  CPU you can make it the console by answering Y to this option.
 
 	  Even if you say Y here, the currently visible virtual console
 	  (/dev/tty0) will still be used as the system console by default, but
 	  you can alter that using a kernel command line option such as
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  "console=ttySA0". (Try "man bootparam" or see the documentation of
 	  your boot loader (lilo or loadlin) about how to pass options to the
@@ -675,12 +733,17 @@ config SERIAL_UARTLITE
 	tristate "Xilinx uartlite serial port support"
 	depends on PPC32 || MICROBLAZE || MFD_TIMBERDALE
 =======
+=======
+>>>>>>> v3.18
 	  "console=ttymxc0". (Try "man bootparam" or see the documentation of
 	  your bootloader about how to pass options to the kernel at boot time.)
 
 config SERIAL_UARTLITE
 	tristate "Xilinx uartlite serial port support"
 	depends on PPC32 || MICROBLAZE || MFD_TIMBERDALE || ARCH_ZYNQ
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select SERIAL_CORE
 	help
@@ -816,7 +879,11 @@ config SERIAL_IP22_ZILOG_CONSOLE
 config SERIAL_SH_SCI
 	tristate "SuperH SCI(F) serial port support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_CLK && (SUPERH || ARCH_SHMOBILE)
+=======
+	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
 >>>>>>> v3.18
@@ -865,7 +932,11 @@ config SERIAL_HS_LPC32XX
 config SERIAL_HS_LPC32XX_CONSOLE
 	bool "Enable LPC32XX high speed UART serial console"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SERIAL_HS_LPC32XX
+=======
+	depends on SERIAL_HS_LPC32XX=y
+>>>>>>> v3.18
 =======
 	depends on SERIAL_HS_LPC32XX=y
 >>>>>>> v3.18
@@ -1140,7 +1211,11 @@ config SERIAL_SGI_IOC3
 config SERIAL_MSM
 	bool "MSM on-chip serial port support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM && ARCH_MSM
+=======
+	depends on ARCH_MSM || ARCH_QCOM
+>>>>>>> v3.18
 =======
 	depends on ARCH_MSM || ARCH_QCOM
 >>>>>>> v3.18
@@ -1151,16 +1226,22 @@ config SERIAL_MSM_CONSOLE
 	depends on SERIAL_MSM=y
 	select SERIAL_CORE_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config SERIAL_MSM_HS
 	tristate "MSM UART High Speed: Serial Driver"
 	depends on ARCH_MSM
 =======
+=======
+>>>>>>> v3.18
 	select SERIAL_EARLYCON
 
 config SERIAL_MSM_HS
 	tristate "MSM UART High Speed: Serial Driver"
 	depends on ARCH_MSM7X00A || ARCH_MSM7X30 || ARCH_QSD8X50
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select SERIAL_CORE
 	help
@@ -1171,6 +1252,7 @@ config SERIAL_MSM_HS
 	  Choose M here to compile it as a module. The module will be
 	  called msm_serial_hs.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SERIAL_MSM_RX_WAKEUP
 	bool "Wakeup the msm uart clock on GPIO activity."
@@ -1202,6 +1284,8 @@ config SERIAL_BCM_BT_LPM
 	help
 	  Select this module for Broadcom Bluetooth low power management.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SERIAL_VT8500
@@ -1306,6 +1390,7 @@ config SERIAL_QE
 	  PowerPC that contain a QUICC Engine.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SERIAL_SC26XX
 	tristate "SC2681/SC2692 serial port support"
 	depends on SNI_RM
@@ -1331,12 +1416,20 @@ config SERIAL_SCCNXP
 	tristate "SCCNXP serial port support"
 	select SERIAL_CORE
 >>>>>>> v3.18
+=======
+config SERIAL_SCCNXP
+	tristate "SCCNXP serial port support"
+	select SERIAL_CORE
+>>>>>>> v3.18
 	help
 	  This selects support for an advanced UART from NXP (Philips).
 	  Supported ICs are SCC2681, SCC2691, SCC2692, SC28L91, SC28L92,
 	  SC28L202, SCC68681 and SCC68692.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Positioned as a replacement for the driver SC26XX.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1348,7 +1441,10 @@ config SERIAL_SCCNXP_CONSOLE
 	  Support for console on SCCNXP serial ports.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SERIAL_SC16IS7XX
 	tristate "SC16IS7xx serial support"
 	depends on I2C
@@ -1359,6 +1455,9 @@ config SERIAL_SC16IS7XX
 	  Supported ICs are SC16IS740, SC16IS741, SC16IS750, SC16IS752,
 	  SC16IS760 and SC16IS762.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SERIAL_BFIN_SPORT
 	tristate "Blackfin SPORT emulate UART"
@@ -1427,6 +1526,10 @@ config SERIAL_TIMBERDALE
 	tristate "Support for timberdale UART"
 	select SERIAL_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on X86_32 || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on X86_32 || COMPILE_TEST
 >>>>>>> v3.18
@@ -1527,7 +1630,11 @@ config SERIAL_IFX6X60
 config SERIAL_PCH_UART
 	tristate "Intel EG20T PCH/LAPIS Semicon IOH(ML7213/ML7223/ML7831) UART"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+	depends on PCI && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -1577,6 +1684,7 @@ config SERIAL_MXS_AUART_CONSOLE
 
 config SERIAL_XILINX_PS_UART
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Xilinx PS UART support"
 	depends on OF
 	select SERIAL_CORE
@@ -1594,6 +1702,8 @@ config SERIAL_AR933X
 	bool "AR933X serial port support"
 	depends on SOC_AR933X
 =======
+=======
+>>>>>>> v3.18
 	tristate "Cadence (Xilinx Zynq) UART support"
 	depends on OF
 	select SERIAL_CORE
@@ -1612,6 +1722,9 @@ config SERIAL_XILINX_PS_UART_CONSOLE
 config SERIAL_AR933X
 	tristate "AR933X serial port support"
 	depends on HAVE_CLK && SOC_AR933X
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select SERIAL_CORE
 	help
@@ -1619,6 +1732,12 @@ config SERIAL_AR933X
 	  built-in UART of the SoC, say Y to this option.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called ar933x_uart.
+
+>>>>>>> v3.18
 =======
 	  To compile this driver as a module, choose M here: the
 	  module will be called ar933x_uart.
@@ -1641,8 +1760,13 @@ config SERIAL_AR933X_NR_UARTS
 
 config SERIAL_EFM32_UART
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "EFM32 UART/USART port."
 	depends on ARCH_EFM32
+=======
+	tristate "EFM32 UART/USART port"
+	depends on ARM && (ARCH_EFM32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	tristate "EFM32 UART/USART port"
 	depends on ARM && (ARCH_EFM32 || COMPILE_TEST)
@@ -1658,7 +1782,10 @@ config SERIAL_EFM32_UART_CONSOLE
 	select SERIAL_CORE_CONSOLE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SERIAL_TILEGX
 	tristate "TILE-Gx on-chip serial port support"
 	depends on TILEGX
@@ -1668,6 +1795,9 @@ config SERIAL_TILEGX
 	  This device provides access to the on-chip UARTs on the TILE-Gx
 	  processor.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SERIAL_ARC
 	tristate "ARC UART driver support"
@@ -1681,6 +1811,10 @@ config SERIAL_ARC_CONSOLE
 	depends on SERIAL_ARC=y
 	select SERIAL_CORE_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SERIAL_EARLYCON
+>>>>>>> v3.18
 =======
 	select SERIAL_EARLYCON
 >>>>>>> v3.18
@@ -1721,9 +1855,12 @@ config SERIAL_RP2_NR_UARTS
 	  need to be increased.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
 
 =======
+=======
+>>>>>>> v3.18
 config SERIAL_FSL_LPUART
 	tristate "Freescale lpuart serial port support"
 	depends on HAS_DMA
@@ -1772,5 +1909,8 @@ endmenu
 config SERIAL_MCTRL_GPIO
 	tristate
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # TTY

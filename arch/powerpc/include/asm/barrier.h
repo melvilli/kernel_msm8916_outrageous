@@ -85,6 +85,12 @@ do {									\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define smp_mb__before_atomic()     smp_mb()
+#define smp_mb__after_atomic()      smp_mb()
+
+>>>>>>> v3.18
 =======
 #define smp_mb__before_atomic()     smp_mb()
 #define smp_mb__after_atomic()      smp_mb()

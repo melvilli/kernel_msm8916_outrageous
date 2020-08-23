@@ -54,7 +54,11 @@ struct machine_desc {
  * Current machine - only accessible during boot.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct machine_desc *machine_desc;
+=======
+extern const struct machine_desc *machine_desc;
+>>>>>>> v3.18
 =======
 extern const struct machine_desc *machine_desc;
 >>>>>>> v3.18

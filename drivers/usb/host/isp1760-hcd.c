@@ -1761,7 +1761,11 @@ static int isp1760_hub_status_data(struct usb_hcd *hcd, char *buf)
 	/*
 	 * Return status information even for ports with OWNER set.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Otherwise khubd wouldn't see the disconnect event when a
+=======
+	 * Otherwise hub_wq wouldn't see the disconnect event when a
+>>>>>>> v3.18
 =======
 	 * Otherwise hub_wq wouldn't see the disconnect event when a
 >>>>>>> v3.18
@@ -1876,7 +1880,11 @@ static int isp1760_hub_control(struct usb_hcd *hcd, u16 typeReq,
 		/*
 		 * Even if OWNER is set, so the port is owned by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * companion controller, khubd needs to be able to clear
+=======
+		 * companion controller, hub_wq needs to be able to clear
+>>>>>>> v3.18
 =======
 		 * companion controller, hub_wq needs to be able to clear
 >>>>>>> v3.18
@@ -2009,7 +2017,11 @@ static int isp1760_hub_control(struct usb_hcd *hcd, u16 typeReq,
 		}
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Even if OWNER is set, there's no harm letting khubd
+=======
+		 * Even if OWNER is set, there's no harm letting hub_wq
+>>>>>>> v3.18
 =======
 		 * Even if OWNER is set, there's no harm letting hub_wq
 >>>>>>> v3.18
@@ -2263,6 +2275,10 @@ struct usb_hcd *isp1760_register(phys_addr_t res_start, resource_size_t res_len,
 	if (ret)
 		goto err_unmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18

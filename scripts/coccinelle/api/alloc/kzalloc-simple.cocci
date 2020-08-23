@@ -10,7 +10,11 @@
 // Copyright: (C) 2009-2010 Gilles Muller, INRIA/LiP6.  GPLv2.
 // URL: http://coccinelle.lip6.fr/rules/kzalloc.html
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 =======
 // Options: --no-includes --include-headers
 >>>>>>> v3.18

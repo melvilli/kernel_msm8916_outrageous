@@ -24,6 +24,10 @@
 #include <linux/mm.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -32,6 +36,10 @@
 #include <linux/sizes.h>
 #include <linux/backlight.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/basic_mmio_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/basic_mmio_gpio.h>
 >>>>>>> v3.18
@@ -47,7 +55,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/syspld.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -55,6 +66,10 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "devices.h"
+>>>>>>> v3.18
 =======
 #include "devices.h"
 >>>>>>> v3.18
@@ -67,7 +82,10 @@
 #define P720T_NAND_BASE		(CLPS711X_SDRAM1_BASE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define P720T_MMGPIO_BASE	(CLPS711X_NR_GPIO)
 
 #define SYSPLD_PHYS_BASE	IOMEM(CS1_PHYS_BASE)
@@ -240,6 +258,9 @@ static struct {
 	{ PLD_GPIO,	PLD_GPIO_MMGPIO_BASE },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct resource p720t_nand_resource[] __initdata = {
 	DEFINE_RES_MEM(P720T_NAND_BASE, SZ_4),
@@ -283,12 +304,15 @@ static void p720t_lcd_power_set(struct plat_lcd_data *pd, unsigned int power)
 {
 	if (power) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PLD_LCDEN = PLD_LCDEN_EN;
 		PLD_PWR |= PLD_S4_ON | PLD_S2_ON | PLD_S1_ON;
 	} else {
 		PLD_PWR &= ~(PLD_S4_ON | PLD_S2_ON | PLD_S1_ON);
 		PLD_LCDEN = 0;
 =======
+=======
+>>>>>>> v3.18
 		gpio_set_value(PLD_LCDEN_EN, 1);
 		gpio_set_value(PLD_S1_ON, 1);
 		gpio_set_value(PLD_S2_ON, 1);
@@ -298,6 +322,9 @@ static void p720t_lcd_power_set(struct plat_lcd_data *pd, unsigned int power)
 		gpio_set_value(PLD_S2_ON, 0);
 		gpio_set_value(PLD_S4_ON, 0);
 		gpio_set_value(PLD_LCDEN_EN, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -309,10 +336,14 @@ static struct plat_lcd_data p720t_lcd_power_pdata = {
 static void p720t_lcd_backlight_set_intensity(int intensity)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intensity)
 		PLD_PWR |= PLD_S3_ON;
 	else
 		PLD_PWR = 0;
+=======
+	gpio_set_value(PLD_S3_ON, intensity);
+>>>>>>> v3.18
 =======
 	gpio_set_value(PLD_S3_ON, intensity);
 >>>>>>> v3.18
@@ -325,6 +356,7 @@ static struct generic_bl_info p720t_lcd_backlight_pdata = {
 	.set_bl_intensity	= p720t_lcd_backlight_set_intensity,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Map the P720T system PLD. It occupies two address spaces:
@@ -341,6 +373,10 @@ static struct map_desc p720t_io_desc[] __initdata = {
 
 static void __init
 fixup_p720t(struct tag *tag, char **cmdline, struct meminfo *mi)
+=======
+static void __init
+fixup_p720t(struct tag *tag, char **cmdline)
+>>>>>>> v3.18
 =======
 static void __init
 fixup_p720t(struct tag *tag, char **cmdline)
@@ -368,6 +404,7 @@ fixup_p720t(struct tag *tag, char **cmdline)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init p720t_map_io(void)
 {
@@ -398,6 +435,8 @@ static void __init p720t_init_early(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct gpio_led p720t_gpio_leds[] = {
 	{
 		.name			= "User LED",
@@ -414,6 +453,7 @@ static struct gpio_led_platform_data p720t_gpio_led_pdata __initdata = {
 static void __init p720t_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register(&p720t_nand_pdev);
 	platform_device_register_data(&platform_bus, "platform-lcd", 0,
 				      &p720t_lcd_power_pdata,
@@ -428,6 +468,8 @@ static void __init p720t_init_late(void)
 {
 	platform_device_register_data(&platform_bus, "leds-gpio", 0,
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	clps711x_devices_init();
@@ -450,6 +492,9 @@ static void __init p720t_init_late(void)
 				      sizeof(p720t_lcd_backlight_pdata));
 	platform_device_register_simple("video-clps711x", 0, NULL, 0);
 	platform_device_register_data(NULL, "leds-gpio", 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      &p720t_gpio_led_pdata,
 				      sizeof(p720t_gpio_led_pdata));
@@ -459,10 +504,15 @@ MACHINE_START(P720T, "ARM-Prospector720T")
 	/* Maintainer: ARM Ltd/Deep Blue Solutions Ltd */
 	.atag_offset	= 0x100,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nr_irqs	= CLPS711X_NR_IRQS,
 	.fixup		= fixup_p720t,
 	.map_io		= p720t_map_io,
 	.init_early	= p720t_init_early,
+=======
+	.fixup		= fixup_p720t,
+	.map_io		= clps711x_map_io,
+>>>>>>> v3.18
 =======
 	.fixup		= fixup_p720t,
 	.map_io		= clps711x_map_io,
@@ -472,7 +522,10 @@ MACHINE_START(P720T, "ARM-Prospector720T")
 	.init_machine	= p720t_init,
 	.init_late	= p720t_init_late,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= clps711x_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.restart	= clps711x_restart,

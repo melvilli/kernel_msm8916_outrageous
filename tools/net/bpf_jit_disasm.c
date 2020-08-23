@@ -44,8 +44,12 @@ static void get_exec_path(char *tpath, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void get_asm_insns(uint8_t *image, size_t len, unsigned long base,
 			  int opcodes)
+=======
+static void get_asm_insns(uint8_t *image, size_t len, int opcodes)
+>>>>>>> v3.18
 =======
 static void get_asm_insns(uint8_t *image, size_t len, int opcodes)
 >>>>>>> v3.18
@@ -112,8 +116,12 @@ static void put_klog_buff(char *buff)
 
 static int get_last_jit_image(char *haystack, size_t hlen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      uint8_t *image, size_t ilen,
 			      unsigned long *base)
+=======
+			      uint8_t *image, size_t ilen)
+>>>>>>> v3.18
 =======
 			      uint8_t *image, size_t ilen)
 >>>>>>> v3.18
@@ -123,6 +131,10 @@ static int get_last_jit_image(char *haystack, size_t hlen,
 	int ret, flen, proglen, pass, ulen = 0;
 	regmatch_t pmatch[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long base;
+>>>>>>> v3.18
 =======
 	unsigned long base;
 >>>>>>> v3.18
@@ -149,7 +161,11 @@ static int get_last_jit_image(char *haystack, size_t hlen,
 	ptr = haystack + off - (pmatch[0].rm_eo - pmatch[0].rm_so);
 	ret = sscanf(ptr, "flen=%d proglen=%d pass=%d image=%lx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     &flen, &proglen, &pass, base);
+=======
+		     &flen, &proglen, &pass, &base);
+>>>>>>> v3.18
 =======
 		     &flen, &proglen, &pass, &base);
 >>>>>>> v3.18
@@ -179,7 +195,11 @@ static int get_last_jit_image(char *haystack, size_t hlen,
 	printf("%d bytes emitted from JIT compiler (pass:%d, flen:%d)\n",
 	       proglen, pass, flen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("%lx + <x>:\n", *base);
+=======
+	printf("%lx + <x>:\n", base);
+>>>>>>> v3.18
 =======
 	printf("%lx + <x>:\n", base);
 >>>>>>> v3.18
@@ -193,8 +213,12 @@ int main(int argc, char **argv)
 	int len, klen, opcodes = 0;
 	char *kbuff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long base;
 	uint8_t image[4096];
+=======
+	static uint8_t image[32768];
+>>>>>>> v3.18
 =======
 	static uint8_t image[32768];
 >>>>>>> v3.18
@@ -214,9 +238,15 @@ int main(int argc, char **argv)
 	kbuff = get_klog_buff(&klen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = get_last_jit_image(kbuff, klen, image, sizeof(image), &base);
 	if (len > 0 && base > 0)
 		get_asm_insns(image, len, base, opcodes);
+=======
+	len = get_last_jit_image(kbuff, klen, image, sizeof(image));
+	if (len > 0)
+		get_asm_insns(image, len, opcodes);
+>>>>>>> v3.18
 =======
 	len = get_last_jit_image(kbuff, klen, image, sizeof(image));
 	if (len > 0)

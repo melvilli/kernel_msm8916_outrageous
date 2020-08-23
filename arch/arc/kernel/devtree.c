@@ -15,11 +15,14 @@
 #include <linux/of.h>
 #include <linux/of_fdt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/prom.h>
 #include <asm/clk.h>
 #include <asm/mach_desc.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/clk.h>
 #include <asm/mach_desc.h>
 
@@ -36,6 +39,9 @@ static const void * __init arch_get_next_mach(const char *const **match)
 	return m;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * setup_machine_fdt - Machine setup when an dtb was passed to the kernel
@@ -44,6 +50,7 @@ static const void * __init arch_get_next_mach(const char *const **match)
  * If a dtb was passed to the kernel, then use it to choose the correct
  * machine_desc and to setup the system.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct machine_desc * __init setup_machine_fdt(void *dt)
 {
@@ -115,6 +122,8 @@ struct machine_desc * __init setup_machine_fdt(void *dt)
 	of_scan_flat_dt(early_init_dt_scan_memory, NULL);
 
 =======
+=======
+>>>>>>> v3.18
 const struct machine_desc * __init setup_machine_fdt(void *dt)
 {
 	const struct machine_desc *mdesc;
@@ -130,11 +139,15 @@ const struct machine_desc * __init setup_machine_fdt(void *dt)
 		machine_halt();
 
 	dt_root = of_get_flat_dt_root();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk = of_get_flat_dt_prop(dt_root, "clock-frequency", &len);
 	if (clk)
 		arc_set_core_freq(of_read_ulong(clk, len/4));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return mdesc_best;
 }
@@ -152,6 +165,9 @@ void __init copy_devtree(void)
 				be32_to_cpu(initial_boot_params->totalsize));
 		initial_boot_params = alloc;
 	}
+=======
+	return mdesc;
+>>>>>>> v3.18
 =======
 	return mdesc;
 >>>>>>> v3.18

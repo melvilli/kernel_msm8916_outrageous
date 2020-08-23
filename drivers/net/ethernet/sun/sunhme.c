@@ -1263,6 +1263,10 @@ static void happy_meal_init_rings(struct happy_meal *hp)
 	for (i = 0; i < RX_RING_SIZE; i++) {
 		struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u32 mapping;
+>>>>>>> v3.18
 =======
 		u32 mapping;
 >>>>>>> v3.18
@@ -1277,11 +1281,14 @@ static void happy_meal_init_rings(struct happy_meal *hp)
 		/* Because we reserve afterwards. */
 		skb_put(skb, (ETH_FRAME_LEN + RX_OFFSET + 4));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hme_write_rxd(hp, &hb->happy_meal_rxd[i],
 			      (RXFLAG_OWN | ((RX_BUF_ALLOC_SIZE - RX_OFFSET) << 16)),
 			      dma_map_single(hp->dma_dev, skb->data, RX_BUF_ALLOC_SIZE,
 					     DMA_FROM_DEVICE));
 =======
+=======
+>>>>>>> v3.18
 		mapping = dma_map_single(hp->dma_dev, skb->data, RX_BUF_ALLOC_SIZE,
 					 DMA_FROM_DEVICE);
 		if (dma_mapping_error(hp->dma_dev, mapping)) {
@@ -1292,6 +1299,9 @@ static void happy_meal_init_rings(struct happy_meal *hp)
 		hme_write_rxd(hp, &hb->happy_meal_rxd[i],
 			      (RXFLAG_OWN | ((RX_BUF_ALLOC_SIZE - RX_OFFSET) << 16)),
 			      mapping);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		skb_reserve(skb, RX_OFFSET);
 	}
@@ -2038,6 +2048,10 @@ static void happy_meal_rx(struct happy_meal *hp, struct net_device *dev)
 		if (len > RX_COPY_THRESHOLD) {
 			struct sk_buff *new_skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			u32 mapping;
+>>>>>>> v3.18
 =======
 			u32 mapping;
 >>>>>>> v3.18
@@ -2049,6 +2063,7 @@ static void happy_meal_rx(struct happy_meal *hp, struct net_device *dev)
 				goto drop_it;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_unmap_single(hp->dma_dev, dma_addr, RX_BUF_ALLOC_SIZE, DMA_FROM_DEVICE);
 			hp->rx_skbs[elem] = new_skb;
 			skb_put(new_skb, (ETH_FRAME_LEN + RX_OFFSET + 4));
@@ -2057,6 +2072,8 @@ static void happy_meal_rx(struct happy_meal *hp, struct net_device *dev)
 				      dma_map_single(hp->dma_dev, new_skb->data, RX_BUF_ALLOC_SIZE,
 						     DMA_FROM_DEVICE));
 =======
+=======
+>>>>>>> v3.18
 			skb_put(new_skb, (ETH_FRAME_LEN + RX_OFFSET + 4));
 			mapping = dma_map_single(hp->dma_dev, new_skb->data,
 						 RX_BUF_ALLOC_SIZE,
@@ -2072,6 +2089,9 @@ static void happy_meal_rx(struct happy_meal *hp, struct net_device *dev)
 			hme_write_rxd(hp, this,
 				      (RXFLAG_OWN|((RX_BUF_ALLOC_SIZE-RX_OFFSET)<<16)),
 				      mapping);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			skb_reserve(new_skb, RX_OFFSET);
 
@@ -2288,7 +2308,10 @@ static void happy_meal_tx_timeout(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void unmap_partial_tx_skb(struct happy_meal *hp, u32 first_mapping,
 				 u32 first_len, u32 first_entry, u32 entry)
 {
@@ -2308,6 +2331,9 @@ static void unmap_partial_tx_skb(struct happy_meal *hp, u32 first_mapping,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static netdev_tx_t happy_meal_start_xmit(struct sk_buff *skb,
 					 struct net_device *dev)
@@ -2346,6 +2372,11 @@ static netdev_tx_t happy_meal_start_xmit(struct sk_buff *skb,
 		len = skb->len;
 		mapping = dma_map_single(hp->dma_dev, skb->data, len, DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (unlikely(dma_mapping_error(hp->dma_dev, mapping)))
+			goto out_dma_error;
+>>>>>>> v3.18
 =======
 		if (unlikely(dma_mapping_error(hp->dma_dev, mapping)))
 			goto out_dma_error;
@@ -2366,6 +2397,11 @@ static netdev_tx_t happy_meal_start_xmit(struct sk_buff *skb,
 		first_mapping = dma_map_single(hp->dma_dev, skb->data, first_len,
 					       DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (unlikely(dma_mapping_error(hp->dma_dev, first_mapping)))
+			goto out_dma_error;
+>>>>>>> v3.18
 =======
 		if (unlikely(dma_mapping_error(hp->dma_dev, first_mapping)))
 			goto out_dma_error;
@@ -2380,12 +2416,18 @@ static netdev_tx_t happy_meal_start_xmit(struct sk_buff *skb,
 			mapping = skb_frag_dma_map(hp->dma_dev, this_frag,
 						   0, len, DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (unlikely(dma_mapping_error(hp->dma_dev, mapping))) {
 				unmap_partial_tx_skb(hp, first_mapping, first_len,
 						     first_entry, entry);
 				goto out_dma_error;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			this_txflags = tx_flags;
 			if (frag == skb_shinfo(skb)->nr_frags - 1)
@@ -2413,7 +2455,10 @@ static netdev_tx_t happy_meal_start_xmit(struct sk_buff *skb,
 	tx_add_log(hp, TXLOG_ACTION_TXMIT, 0);
 	return NETDEV_TX_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 out_dma_error:
 	hp->tx_skbs[hp->tx_new] = NULL;
@@ -2422,6 +2467,9 @@ out_dma_error:
 	dev_kfree_skb_any(skb);
 	dev->stats.tx_dropped++;
 	return NETDEV_TX_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2597,7 +2645,11 @@ static struct quattro *quattro_sbus_find(struct platform_device *child)
 
 	op = to_platform_device(parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qp = dev_get_drvdata(&op->dev);
+=======
+	qp = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	qp = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -2616,7 +2668,11 @@ static struct quattro *quattro_sbus_find(struct platform_device *child)
 		qfe_sbus_list = qp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_drvdata(&op->dev, qp);
+=======
+		platform_set_drvdata(op, qp);
+>>>>>>> v3.18
 =======
 		platform_set_drvdata(op, qp);
 >>>>>>> v3.18
@@ -2774,15 +2830,21 @@ static int happy_meal_sbus_probe_one(struct platform_device *op, int is_qfe)
 		addr = of_get_property(dp, "local-mac-address", &len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (qfe_slot != -1 && addr && len == 6)
 			memcpy(dev->dev_addr, addr, 6);
 		else
 			memcpy(dev->dev_addr, idprom->id_ethaddr, 6);
 =======
+=======
+>>>>>>> v3.18
 		if (qfe_slot != -1 && addr && len == ETH_ALEN)
 			memcpy(dev->dev_addr, addr, ETH_ALEN);
 		else
 			memcpy(dev->dev_addr, idprom->id_ethaddr, ETH_ALEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2904,7 +2966,11 @@ static int happy_meal_sbus_probe_one(struct platform_device *op, int is_qfe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, hp);
+=======
+	platform_set_drvdata(op, hp);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, hp);
 >>>>>>> v3.18
@@ -3134,9 +3200,15 @@ static int happy_meal_pci_probe(struct pci_dev *pdev,
 			!= NULL &&
 		    len == 6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(dev->dev_addr, addr, 6);
 		} else {
 			memcpy(dev->dev_addr, idprom->id_ethaddr, 6);
+=======
+			memcpy(dev->dev_addr, addr, ETH_ALEN);
+		} else {
+			memcpy(dev->dev_addr, idprom->id_ethaddr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 			memcpy(dev->dev_addr, addr, ETH_ALEN);
 		} else {
@@ -3227,7 +3299,11 @@ static int happy_meal_pci_probe(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, hp);
+=======
+	pci_set_drvdata(pdev, hp);
+>>>>>>> v3.18
 =======
 	pci_set_drvdata(pdev, hp);
 >>>>>>> v3.18
@@ -3279,7 +3355,11 @@ err_out:
 static void happy_meal_pci_remove(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct happy_meal *hp = dev_get_drvdata(&pdev->dev);
+=======
+	struct happy_meal *hp = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct happy_meal *hp = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -3294,11 +3374,17 @@ static void happy_meal_pci_remove(struct pci_dev *pdev)
 
 	free_netdev(net_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_set_drvdata(&pdev->dev, NULL);
 }
 
 static DEFINE_PCI_DEVICE_TABLE(happymeal_pci_ids) = {
+=======
+}
+
+static const struct pci_device_id happymeal_pci_ids[] = {
+>>>>>>> v3.18
 =======
 }
 
@@ -3361,7 +3447,11 @@ static int hme_sbus_probe(struct platform_device *op)
 static int hme_sbus_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct happy_meal *hp = dev_get_drvdata(&op->dev);
+=======
+	struct happy_meal *hp = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct happy_meal *hp = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -3384,8 +3474,11 @@ static int hme_sbus_remove(struct platform_device *op)
 	free_netdev(net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

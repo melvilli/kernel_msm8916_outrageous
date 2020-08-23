@@ -8,6 +8,10 @@
  * Copyright (C) 2001 Thiemo Seufer.
  * Copyright (C) 2002 Maciej W. Rozycki
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -34,10 +38,13 @@
 __wsum csum_partial(const void *buff, int len, __wsum sum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __wsum __csum_partial_copy_user(const void *src, void *dst,
 				int len, __wsum sum, int *err_ptr);
 
 =======
+=======
+>>>>>>> v3.18
 __wsum __csum_partial_copy_kernel(const void *src, void *dst,
 				  int len, __wsum sum, int *err_ptr);
 
@@ -45,6 +52,9 @@ __wsum __csum_partial_copy_from_user(const void *src, void *dst,
 				     int len, __wsum sum, int *err_ptr);
 __wsum __csum_partial_copy_to_user(const void *src, void *dst,
 				   int len, __wsum sum, int *err_ptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * this is a new version of the above that records errors it finds in *errp,
@@ -56,9 +66,12 @@ __wsum csum_partial_copy_from_user(const void __user *src, void *dst, int len,
 {
 	might_fault();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __csum_partial_copy_user((__force void *)src, dst,
 					len, sum, err_ptr);
 =======
+=======
+>>>>>>> v3.18
 	if (segment_eq(get_fs(), get_ds()))
 		return __csum_partial_copy_kernel((__force void *)src, dst,
 						  len, sum, err_ptr);
@@ -79,6 +92,9 @@ __wsum csum_and_copy_from_user(const void __user *src, void *dst,
 		*err_ptr = -EFAULT;
 
 	return sum;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -92,10 +108,13 @@ __wsum csum_and_copy_to_user(const void *src, void __user *dst, int len,
 {
 	might_fault();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (access_ok(VERIFY_WRITE, dst, len))
 		return __csum_partial_copy_user(src, (__force void *)dst,
 						len, sum, err_ptr);
 =======
+=======
+>>>>>>> v3.18
 	if (access_ok(VERIFY_WRITE, dst, len)) {
 		if (segment_eq(get_fs(), get_ds()))
 			return __csum_partial_copy_kernel(src,
@@ -106,6 +125,9 @@ __wsum csum_and_copy_to_user(const void *src, void __user *dst, int len,
 							   (__force void *)dst,
 							   len, sum, err_ptr);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (len)
 		*err_ptr = -EFAULT;
@@ -206,9 +228,13 @@ static inline __wsum csum_tcpudp_nofold(__be32 saddr,
 	"	dsll32	$1, %0, 0	\n"
 	"	daddu	%0, $1		\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	sltu	$1, %0, $1	\n"
 	"	dsra32	%0, %0, 0	\n"
 	"	addu	%0, $1		\n"
+=======
+	"	dsra32	%0, %0, 0	\n"
+>>>>>>> v3.18
 =======
 	"	dsra32	%0, %0, 0	\n"
 >>>>>>> v3.18

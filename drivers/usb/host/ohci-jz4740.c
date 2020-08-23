@@ -83,6 +83,7 @@ static int ohci_jz4740_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 {
 	struct jz4740_ohci_hcd *jz4740_ohci = hcd_to_jz4740_hcd(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	switch (typeReq) {
@@ -92,6 +93,8 @@ static int ohci_jz4740_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		break;
 	case ClearHubFeature:
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 
 	switch (typeReq) {
@@ -100,6 +103,9 @@ static int ohci_jz4740_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			ret = ohci_jz4740_set_vbus_power(jz4740_ohci, true);
 		break;
 	case ClearPortFeature:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (wValue == USB_PORT_FEAT_POWER)
 			ret = ohci_jz4740_set_vbus_power(jz4740_ohci, false);
@@ -186,6 +192,7 @@ static int jz4740_ohci_probe(struct platform_device *pdev)
 	jz4740_ohci = hcd_to_jz4740_hcd(hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = request_mem_region(res->start, resource_size(res), hcd_name);
 	if (!res) {
 		dev_err(&pdev->dev, "Failed to request mem region.\n");
@@ -212,6 +219,8 @@ static int jz4740_ohci_probe(struct platform_device *pdev)
 
 	jz4740_ohci->vbus = regulator_get(&pdev->dev, "vbus");
 =======
+=======
+>>>>>>> v3.18
 	hcd->rsrc_start = res->start;
 	hcd->rsrc_len = resource_size(res);
 
@@ -229,6 +238,9 @@ static int jz4740_ohci_probe(struct platform_device *pdev)
 	}
 
 	jz4740_ohci->vbus = devm_regulator_get(&pdev->dev, "vbus");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(jz4740_ohci->vbus))
 		jz4740_ohci->vbus = NULL;
@@ -249,6 +261,10 @@ static int jz4740_ohci_probe(struct platform_device *pdev)
 		goto err_disable;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -256,6 +272,7 @@ static int jz4740_ohci_probe(struct platform_device *pdev)
 	return 0;
 
 err_disable:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	if (jz4740_ohci->vbus) {
@@ -270,10 +287,15 @@ err_iounmap:
 err_release_mem:
 	release_mem_region(res->start, resource_size(res));
 =======
+=======
+>>>>>>> v3.18
 	if (jz4740_ohci->vbus)
 		regulator_disable(jz4740_ohci->vbus);
 	clk_disable(jz4740_ohci->clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_free:
 	usb_put_hcd(hcd);
@@ -289,6 +311,7 @@ static int jz4740_ohci_remove(struct platform_device *pdev)
 	usb_remove_hcd(hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
 	if (jz4740_ohci->vbus) {
@@ -302,10 +325,15 @@ static int jz4740_ohci_remove(struct platform_device *pdev)
 	iounmap(hcd->regs);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
 =======
+=======
+>>>>>>> v3.18
 	if (jz4740_ohci->vbus)
 		regulator_disable(jz4740_ohci->vbus);
 
 	clk_disable(jz4740_ohci->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usb_put_hcd(hcd);

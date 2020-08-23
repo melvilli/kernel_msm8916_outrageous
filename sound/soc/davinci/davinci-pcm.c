@@ -18,6 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/genalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/edma.h>
 >>>>>>> v3.18
@@ -50,6 +54,7 @@ static void print_buf_info(int slot, char *name)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DAVINCI_PCM_FMTBITS	(\
 				SNDRV_PCM_FMTBIT_S8	|\
 				SNDRV_PCM_FMTBIT_U8	|\
@@ -68,11 +73,14 @@ static void print_buf_info(int slot, char *name)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct snd_pcm_hardware pcm_hardware_playback = {
 	.info = (SNDRV_PCM_INFO_INTERLEAVED | SNDRV_PCM_INFO_BLOCK_TRANSFER |
 		 SNDRV_PCM_INFO_MMAP | SNDRV_PCM_INFO_MMAP_VALID |
 		 SNDRV_PCM_INFO_PAUSE | SNDRV_PCM_INFO_RESUME|
 		 SNDRV_PCM_INFO_BATCH),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.formats = DAVINCI_PCM_FMTBITS,
 	.rates = SNDRV_PCM_RATE_8000_192000 | SNDRV_PCM_RATE_KNOT,
@@ -80,6 +88,8 @@ static struct snd_pcm_hardware pcm_hardware_playback = {
 	.rate_max = 192000,
 	.channels_min = 2,
 	.channels_max = 384,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.buffer_bytes_max = 128 * 1024,
@@ -96,12 +106,15 @@ static struct snd_pcm_hardware pcm_hardware_capture = {
 		 SNDRV_PCM_INFO_PAUSE |
 		 SNDRV_PCM_INFO_BATCH),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.formats = DAVINCI_PCM_FMTBITS,
 	.rates = SNDRV_PCM_RATE_8000_192000 | SNDRV_PCM_RATE_KNOT,
 	.rate_min = 8000,
 	.rate_max = 192000,
 	.channels_min = 2,
 	.channels_max = 384,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.buffer_bytes_max = 128 * 1024,
@@ -251,7 +264,11 @@ static void davinci_pcm_dma_irq(unsigned link, u16 ch_status, void *data)
 	pr_debug("davinci_pcm: link=%d, status=0x%x\n", link, ch_status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(ch_status != DMA_COMPLETE))
+=======
+	if (unlikely(ch_status != EDMA_DMA_COMPLETE))
+>>>>>>> v3.18
 =======
 	if (unlikely(ch_status != EDMA_DMA_COMPLETE))
 >>>>>>> v3.18
@@ -284,10 +301,16 @@ static int allocate_sram(struct snd_pcm_substream *substream,
 
 	ppcm->period_bytes_max = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iram_virt = (void *)gen_pool_alloc(sram_pool, size);
 	if (!iram_virt)
 		goto exit1;
 	iram_phys = gen_pool_virt_to_phys(sram_pool, (unsigned)iram_virt);
+=======
+	iram_virt = gen_pool_dma_alloc(sram_pool, size, &iram_phys);
+	if (!iram_virt)
+		goto exit1;
+>>>>>>> v3.18
 =======
 	iram_virt = gen_pool_dma_alloc(sram_pool, size, &iram_phys);
 	if (!iram_virt)
@@ -867,8 +890,11 @@ static void davinci_pcm_free(struct snd_pcm *pcm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 davinci_pcm_dmamask = DMA_BIT_MASK(32);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int davinci_pcm_new(struct snd_soc_pcm_runtime *rtd)
@@ -878,10 +904,16 @@ static int davinci_pcm_new(struct snd_soc_pcm_runtime *rtd)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!card->dev->dma_mask)
 		card->dev->dma_mask = &davinci_pcm_dmamask;
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
 	if (ret)
@@ -916,6 +948,7 @@ static struct snd_soc_platform_driver davinci_soc_platform = {
 int davinci_soc_platform_register(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_soc_register_platform(dev, &davinci_soc_platform);
 }
 EXPORT_SYMBOL_GPL(davinci_soc_platform_register);
@@ -927,10 +960,15 @@ void davinci_soc_platform_unregister(struct device *dev)
 EXPORT_SYMBOL_GPL(davinci_soc_platform_unregister);
 
 =======
+=======
+>>>>>>> v3.18
 	return devm_snd_soc_register_platform(dev, &davinci_soc_platform);
 }
 EXPORT_SYMBOL_GPL(davinci_soc_platform_register);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Vladimir Barinov");
 MODULE_DESCRIPTION("TI DAVINCI PCM DMA module");

@@ -454,7 +454,11 @@ int __init pas16_detect(struct scsi_host_template * tpnt)
 
 	if (instance->irq != SCSI_IRQ_NONE) 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    if (request_irq(instance->irq, pas16_intr, IRQF_DISABLED,
+=======
+	    if (request_irq(instance->irq, pas16_intr, 0,
+>>>>>>> v3.18
 =======
 	    if (request_irq(instance->irq, pas16_intr, 0,
 >>>>>>> v3.18
@@ -612,8 +616,11 @@ static int pas16_release(struct Scsi_Host *shost)
 		free_irq(shost->irq, shost);
 	NCR5380_exit(shost);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (shost->dma_channel != 0xff)
 		free_dma(shost->dma_channel);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (shost->io_port && shost->n_io_port)

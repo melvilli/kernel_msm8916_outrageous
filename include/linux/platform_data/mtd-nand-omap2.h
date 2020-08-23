@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/plat-omap/include/mach/nand.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Copyright (C) 2006 Micron Technology Inc.
@@ -27,6 +30,7 @@ enum nand_io {
 
 enum omap_ecc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* 1-bit ecc: stored at end of spare area */
 	OMAP_ECC_HAMMING_CODE_DEFAULT = 0, /* Default, s/w method */
 	OMAP_ECC_HAMMING_CODE_HW, /* gpmc to detect the error */
@@ -35,6 +39,8 @@ enum omap_ecc {
 	OMAP_ECC_BCH4_CODE_HW, /* 4-bit BCH ecc code */
 	OMAP_ECC_BCH8_CODE_HW, /* 8-bit BCH ecc code */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * 1-bit ECC: calculation and correction by SW
 	 * ECC stored at end of spare area
@@ -56,6 +62,9 @@ enum omap_ecc {
 	OMAP_ECC_BCH8_CODE_HW,
 	/* 16-bit ECC calculation by GPMC, Error detection by ELM */
 	OMAP_ECC_BCH16_CODE_HW,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -77,6 +86,12 @@ struct gpmc_nand_regs {
 	void __iomem	*gpmc_bch_result2[GPMC_BCH_NUM_REMAINDER];
 	void __iomem	*gpmc_bch_result3[GPMC_BCH_NUM_REMAINDER];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem	*gpmc_bch_result4[GPMC_BCH_NUM_REMAINDER];
+	void __iomem	*gpmc_bch_result5[GPMC_BCH_NUM_REMAINDER];
+	void __iomem	*gpmc_bch_result6[GPMC_BCH_NUM_REMAINDER];
+>>>>>>> v3.18
 =======
 	void __iomem	*gpmc_bch_result4[GPMC_BCH_NUM_REMAINDER];
 	void __iomem	*gpmc_bch_result5[GPMC_BCH_NUM_REMAINDER];
@@ -90,6 +105,10 @@ struct omap_nand_platform_data {
 	int			nr_parts;
 	bool			dev_ready;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			flash_bbt;
+>>>>>>> v3.18
 =======
 	bool			flash_bbt;
 >>>>>>> v3.18
@@ -101,6 +120,10 @@ struct omap_nand_platform_data {
 	/* for passing the partitions */
 	struct device_node	*of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node	*elm_of_node;
+>>>>>>> v3.18
 =======
 	struct device_node	*elm_of_node;
 >>>>>>> v3.18

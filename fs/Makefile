@@ -4,7 +4,11 @@
 # 14 Sep 2000, Christoph Hellwig <hch@infradead.org>
 # Rewritten to use lists instead of if-statements.
 <<<<<<< HEAD
+<<<<<<< HEAD
 #
+=======
+# 
+>>>>>>> v3.18
 =======
 # 
 >>>>>>> v3.18
@@ -16,15 +20,21 @@ obj-y :=	open.o read_write.o file_table.o super.o \
 		seq_file.o xattr.o libfs.o fs-writeback.o \
 		pnode.o splice.o sync.o utimes.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		stack.o fs_struct.o statfs.o
 
 ifeq ($(CONFIG_BLOCK),y)
 obj-y +=	buffer.o bio.o block_dev.o direct-io.o mpage.o ioprio.o
 =======
+=======
+>>>>>>> v3.18
 		stack.o fs_struct.o statfs.o fs_pin.o
 
 ifeq ($(CONFIG_BLOCK),y)
 obj-y +=	buffer.o block_dev.o direct-io.o mpage.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 else
 obj-y +=	no-block.o
@@ -33,7 +43,10 @@ endif
 obj-$(CONFIG_PROC_FS) += proc_namespace.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_BLK_DEV_INTEGRITY) += bio-integrity.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-y				+= notify/
@@ -44,7 +57,10 @@ obj-$(CONFIG_TIMERFD)		+= timerfd.o
 obj-$(CONFIG_EVENTFD)		+= eventfd.o
 obj-$(CONFIG_AIO)               += aio.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_FS_ENCRYPTION)	+= crypto/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_FILE_LOCKING)      += locks.o
@@ -61,9 +77,14 @@ obj-$(CONFIG_BINFMT_FLAT)	+= binfmt_flat.o
 
 obj-$(CONFIG_FS_MBCACHE)	+= mbcache.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_FS_POSIX_ACL)	+= posix_acl.o xattr_acl.o
 obj-$(CONFIG_NFS_COMMON)	+= nfs_common/
 obj-$(CONFIG_GENERIC_ACL)	+= generic_acl.o
+=======
+obj-$(CONFIG_FS_POSIX_ACL)	+= posix_acl.o
+obj-$(CONFIG_NFS_COMMON)	+= nfs_common/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_FS_POSIX_ACL)	+= posix_acl.o
 obj-$(CONFIG_NFS_COMMON)	+= nfs_common/
@@ -77,6 +98,10 @@ obj-y				+= quota/
 
 obj-$(CONFIG_PROC_FS)		+= proc/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_KERNFS)		+= kernfs/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_KERNFS)		+= kernfs/
 >>>>>>> v3.18
@@ -87,7 +112,11 @@ obj-y				+= devpts/
 obj-$(CONFIG_PROFILING)		+= dcookies.o
 obj-$(CONFIG_DLM)		+= dlm/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> v3.18
 =======
  
 >>>>>>> v3.18
@@ -114,7 +143,10 @@ obj-$(CONFIG_HFSPLUS_FS)	+= hfsplus/ # Before hfs to find wrapped HFS+
 obj-$(CONFIG_HFS_FS)		+= hfs/
 obj-$(CONFIG_ECRYPT_FS)		+= ecryptfs/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SDCARD_FS)		+= sdcardfs/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_VXFS_FS)		+= freevxfs/
@@ -141,6 +173,10 @@ obj-$(CONFIG_AUTOFS4_FS)	+= autofs4/
 obj-$(CONFIG_ADFS_FS)		+= adfs/
 obj-$(CONFIG_FUSE_FS)		+= fuse/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_OVERLAY_FS)	+= overlayfs/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_OVERLAY_FS)	+= overlayfs/
 >>>>>>> v3.18
@@ -166,8 +202,11 @@ obj-$(CONFIG_CEPH_FS)		+= ceph/
 obj-$(CONFIG_PSTORE)		+= pstore/
 obj-$(CONFIG_EFIVAR_FS)		+= efivarfs/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # Patched by YAFFS
 obj-$(CONFIG_YAFFS_FS)		+= yaffs2/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

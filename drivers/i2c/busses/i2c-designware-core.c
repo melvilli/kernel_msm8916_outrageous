@@ -19,10 +19,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ----------------------------------------------------------------------------
@@ -30,7 +33,10 @@
  */
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clk.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -74,16 +80,22 @@
 #define DW_IC_TXFLR		0x74
 #define DW_IC_RXFLR		0x78
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DW_IC_TX_ABRT_SOURCE	0x80
 #define DW_IC_ENABLE_STATUS	0x9c
 #define DW_IC_COMP_PARAM_1	0xf4
 =======
+=======
+>>>>>>> v3.18
 #define DW_IC_SDA_HOLD		0x7c
 #define DW_IC_TX_ABRT_SOURCE	0x80
 #define DW_IC_ENABLE_STATUS	0x9c
 #define DW_IC_COMP_PARAM_1	0xf4
 #define DW_IC_COMP_VERSION	0xf8
 #define DW_IC_SDA_HOLD_MIN_VERS	0x3131312A
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DW_IC_COMP_TYPE		0xfc
 #define DW_IC_COMP_TYPE_VALUE	0x44570140
@@ -111,6 +123,11 @@
 #define DW_IC_ERR_TX_ABRT	0x1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DW_IC_TAR_10BITADDR_MASTER BIT(12)
+
+>>>>>>> v3.18
 =======
 #define DW_IC_TAR_10BITADDR_MASTER BIT(12)
 
@@ -235,7 +252,11 @@ i2c_dw_scl_hcnt(u32 ic_clk, u32 tSYMBOL, u32 tf, int cond, int offset)
 		 * If your hardware is free from tHD;STA issue, try this one.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (ic_clk * tSYMBOL + 5000) / 10000 - 8 + offset;
+=======
+		return (ic_clk * tSYMBOL + 500000) / 1000000 - 8 + offset;
+>>>>>>> v3.18
 =======
 		return (ic_clk * tSYMBOL + 500000) / 1000000 - 8 + offset;
 >>>>>>> v3.18
@@ -255,7 +276,12 @@ i2c_dw_scl_hcnt(u32 ic_clk, u32 tSYMBOL, u32 tf, int cond, int offset)
 		 * is the same as described in i2c_dw_scl_lcnt().
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (ic_clk * (tSYMBOL + tf) + 5000) / 10000 - 3 + offset;
+=======
+		return (ic_clk * (tSYMBOL + tf) + 500000) / 1000000
+			- 3 + offset;
+>>>>>>> v3.18
 =======
 		return (ic_clk * (tSYMBOL + tf) + 500000) / 1000000
 			- 3 + offset;
@@ -276,7 +302,11 @@ static u32 i2c_dw_scl_lcnt(u32 ic_clk, u32 tLOW, u32 tf, int offset)
 	 * should be 0.3 us, for safety.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((ic_clk * (tLOW + tf) + 5000) / 10000) - 1 + offset;
+=======
+	return ((ic_clk * (tLOW + tf) + 500000) / 1000000) - 1 + offset;
+>>>>>>> v3.18
 =======
 	return ((ic_clk * (tLOW + tf) + 500000) / 1000000) - 1 + offset;
 >>>>>>> v3.18
@@ -317,6 +347,10 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 	u32 hcnt, lcnt;
 	u32 reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 sda_falling_time, scl_falling_time;
+>>>>>>> v3.18
 =======
 	u32 sda_falling_time, scl_falling_time;
 >>>>>>> v3.18
@@ -342,6 +376,7 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 	/* set standard and fast speed deviders for high/low periods */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Standard-mode */
 	hcnt = i2c_dw_scl_hcnt(input_clock_khz,
 				40,	/* tHD;STA = tHIGH = 4.0 us */
@@ -353,6 +388,8 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 				3,	/* tf = 0.3 us */
 				0);	/* No offset */
 =======
+=======
+>>>>>>> v3.18
 	sda_falling_time = dev->sda_falling_time ?: 300; /* ns */
 	scl_falling_time = dev->scl_falling_time ?: 300; /* ns */
 
@@ -372,6 +409,9 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 		hcnt = dev->ss_hcnt;
 		lcnt = dev->ss_lcnt;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dw_writel(dev, hcnt, DW_IC_SS_SCL_HCNT);
 	dw_writel(dev, lcnt, DW_IC_SS_SCL_LCNT);
@@ -379,6 +419,7 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 
 	/* Fast-mode */
 	hcnt = i2c_dw_scl_hcnt(input_clock_khz,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				6,	/* tHD;STA = tHIGH = 0.6 us */
 				3,	/* tf = 0.3 us */
@@ -389,6 +430,8 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 				3,	/* tf = 0.3 us */
 				0);	/* No offset */
 =======
+=======
+>>>>>>> v3.18
 				600,	/* tHD;STA = tHIGH = 0.6 us */
 				sda_falling_time,
 				0,	/* 0: DW default, 1: Ideal */
@@ -402,15 +445,21 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 		hcnt = dev->fs_hcnt;
 		lcnt = dev->fs_lcnt;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dw_writel(dev, hcnt, DW_IC_FS_SCL_HCNT);
 	dw_writel(dev, lcnt, DW_IC_FS_SCL_LCNT);
 	dev_dbg(dev->dev, "Fast-mode HCNT:LCNT = %d:%d\n", hcnt, lcnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Configure Tx/Rx FIFO threshold levels */
 	dw_writel(dev, dev->tx_fifo_depth - 1, DW_IC_TX_TL);
 =======
+=======
+>>>>>>> v3.18
 	/* Configure SDA Hold Time if required */
 	if (dev->sda_hold_time) {
 		reg = dw_readl(dev, DW_IC_COMP_VERSION);
@@ -423,6 +472,9 @@ int i2c_dw_init(struct dw_i2c_dev *dev)
 
 	/* Configure Tx/Rx FIFO threshold levels */
 	dw_writel(dev, dev->tx_fifo_depth / 2, DW_IC_TX_TL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dw_writel(dev, 0, DW_IC_RX_TL);
 
@@ -455,7 +507,11 @@ static void i2c_dw_xfer_init(struct dw_i2c_dev *dev)
 {
 	struct i2c_msg *msgs = dev->msgs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ic_con;
+=======
+	u32 ic_con, ic_tar = 0;
+>>>>>>> v3.18
 =======
 	u32 ic_con, ic_tar = 0;
 >>>>>>> v3.18
@@ -463,6 +519,7 @@ static void i2c_dw_xfer_init(struct dw_i2c_dev *dev)
 	/* Disable the adapter */
 	__i2c_dw_enable(dev, false);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* set the slave (target) address */
 	dw_writel(dev, msgs[dev->msg_write_idx].addr, DW_IC_TAR);
@@ -476,6 +533,8 @@ static void i2c_dw_xfer_init(struct dw_i2c_dev *dev)
 	dw_writel(dev, ic_con, DW_IC_CON);
 
 =======
+=======
+>>>>>>> v3.18
 	/* if the slave address is ten bit address, enable 10BITADDR */
 	ic_con = dw_readl(dev, DW_IC_CON);
 	if (msgs[dev->msg_write_idx].flags & I2C_M_TEN) {
@@ -499,6 +558,9 @@ static void i2c_dw_xfer_init(struct dw_i2c_dev *dev)
 	 */
 	dw_writel(dev, msgs[dev->msg_write_idx].addr | ic_tar, DW_IC_TAR);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* enforce disabled interrupts (due to HW issues) */
 	i2c_dw_disable_int(dev);
@@ -527,6 +589,10 @@ i2c_dw_xfer_msg(struct dw_i2c_dev *dev)
 	u32 buf_len = dev->tx_buf_len;
 	u8 *buf = dev->tx_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool need_restart = false;
+>>>>>>> v3.18
 =======
 	bool need_restart = false;
 >>>>>>> v3.18
@@ -558,7 +624,10 @@ i2c_dw_xfer_msg(struct dw_i2c_dev *dev)
 			buf = msgs[dev->msg_write_idx].buf;
 			buf_len = msgs[dev->msg_write_idx].len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			/* If both IC_EMPTYFIFO_HOLD_MASTER_EN and
 			 * IC_RESTART_EN are set, we must manually
@@ -567,6 +636,9 @@ i2c_dw_xfer_msg(struct dw_i2c_dev *dev)
 			if ((dev->master_cfg & DW_IC_CON_RESTART_EN) &&
 					(dev->msg_write_idx > 0))
 				need_restart = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -587,12 +659,18 @@ i2c_dw_xfer_msg(struct dw_i2c_dev *dev)
 				cmd |= BIT(9);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (need_restart) {
 				cmd |= BIT(10);
 				need_restart = false;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (msgs[dev->msg_write_idx].flags & I2C_M_RD) {
 
@@ -708,7 +786,11 @@ i2c_dw_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 	pm_runtime_get_sync(dev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(dev->cmd_complete);
+=======
+	reinit_completion(&dev->cmd_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&dev->cmd_complete);
 >>>>>>> v3.18
@@ -731,6 +813,7 @@ i2c_dw_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 
 	/* wait for tx to complete */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = wait_for_completion_interruptible_timeout(&dev->cmd_complete, HZ);
 	if (ret == 0) {
 		dev_err(dev->dev, "controller timed out\n");
@@ -740,6 +823,8 @@ i2c_dw_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 	} else if (ret < 0)
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 	ret = wait_for_completion_timeout(&dev->cmd_complete, HZ);
 	if (ret == 0) {
 		dev_err(dev->dev, "controller timed out\n");
@@ -757,6 +842,9 @@ i2c_dw_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 	 * a hardware bug or this driver doesn't handle them correctly yet.
 	 */
 	__i2c_dw_enable(dev, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dev->msg_err) {
@@ -767,8 +855,11 @@ i2c_dw_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 	/* no error */
 	if (likely(!dev->cmd_err)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Disable the adapter */
 		__i2c_dw_enable(dev, false);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = num;

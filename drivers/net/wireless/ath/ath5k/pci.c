@@ -29,7 +29,11 @@
 
 /* Known PCI ids */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ath5k_pci_id_table) = {
+=======
+static const struct pci_device_id ath5k_pci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ath5k_pci_id_table[] = {
 >>>>>>> v3.18

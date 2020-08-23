@@ -578,7 +578,12 @@ static ssize_t __send_control_msg(struct ports_device *portdev, u32 port_id,
 	if (virtqueue_add_outbuf(vq, sg, 1, &cpkt, GFP_ATOMIC) == 0) {
 		virtqueue_kick(vq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (!virtqueue_get_buf(vq, &len))
+=======
+		while (!virtqueue_get_buf(vq, &len)
+			&& !virtqueue_is_broken(vq))
+>>>>>>> v3.18
 =======
 		while (!virtqueue_get_buf(vq, &len)
 			&& !virtqueue_is_broken(vq))
@@ -656,7 +661,12 @@ static ssize_t __send_to_port(struct port *port, struct scatterlist *sg,
 	 * console driver writes something out.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!virtqueue_get_buf(out_vq, &len))
+=======
+	while (!virtqueue_get_buf(out_vq, &len)
+		&& !virtqueue_is_broken(out_vq))
+>>>>>>> v3.18
 =======
 	while (!virtqueue_get_buf(out_vq, &len)
 		&& !virtqueue_is_broken(out_vq))
@@ -899,6 +909,7 @@ static int pipe_to_sg(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
 		/* Failback to copying a page */
 		struct page *page = alloc_page(GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *src = buf->ops->map(pipe, buf, 1);
 		char *dst;
 
@@ -906,10 +917,15 @@ static int pipe_to_sg(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
 			return -ENOMEM;
 		dst = kmap(page);
 =======
+=======
+>>>>>>> v3.18
 		char *src;
 
 		if (!page)
 			return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		offset = sd->pos & ~PAGE_MASK;
@@ -919,10 +935,16 @@ static int pipe_to_sg(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
 			len = PAGE_SIZE - offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(dst + offset, src + buf->offset, len);
 
 		kunmap(page);
 		buf->ops->unmap(pipe, buf, src);
+=======
+		src = kmap_atomic(buf->page);
+		memcpy(page_address(page) + offset, src + buf->offset, len);
+		kunmap_atomic(src);
+>>>>>>> v3.18
 =======
 		src = kmap_atomic(buf->page);
 		memcpy(page_address(page) + offset, src + buf->offset, len);
@@ -1153,8 +1175,11 @@ static int put_chars(u32 vtermno, const char *buf, int count)
 	struct port *port;
 	struct scatterlist sg[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *data;
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1166,6 +1191,7 @@ static int put_chars(u32 vtermno, const char *buf, int count)
 		return -EPIPE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = kmemdup(buf, count, GFP_ATOMIC);
 	if (!data)
 		return -ENOMEM;
@@ -1174,6 +1200,10 @@ static int put_chars(u32 vtermno, const char *buf, int count)
 	ret = __send_to_port(port, sg, 1, count, data, false);
 	kfree(data);
 	return ret;
+=======
+	sg_init_one(sg, buf, count);
+	return __send_to_port(port, sg, 1, count, (void *)buf, false);
+>>>>>>> v3.18
 =======
 	sg_init_one(sg, buf, count);
 	return __send_to_port(port, sg, 1, count, (void *)buf, false);
@@ -1569,6 +1599,7 @@ static void remove_port_data(struct port *port)
 	struct port_buffer *buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Remove unused data this port might have received. */
 	discard_port_data(port);
 
@@ -1578,6 +1609,8 @@ static void remove_port_data(struct port *port)
 	while ((buf = virtqueue_detach_unused_buf(port->in_vq)))
 		free_buf(buf, true);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&port->inbuf_lock);
 	/* Remove unused data this port might have received. */
 	discard_port_data(port);
@@ -1589,12 +1622,19 @@ static void remove_port_data(struct port *port)
 
 	spin_lock_irq(&port->outvq_lock);
 	reclaim_consumed_buffers(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Free pending buffers from the out-queue. */
 	while ((buf = virtqueue_detach_unused_buf(port->out_vq)))
 		free_buf(buf, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irq(&port->outvq_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_irq(&port->outvq_lock);
 >>>>>>> v3.18
@@ -1612,6 +1652,10 @@ static void unplug_port(struct port *port)
 	spin_unlock_irq(&port->portdev->ports_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irq(&port->inbuf_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_irq(&port->inbuf_lock);
 >>>>>>> v3.18
@@ -1626,6 +1670,10 @@ static void unplug_port(struct port *port)
 		wake_up_interruptible(&port->waitqueue);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irq(&port->inbuf_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_irq(&port->inbuf_lock);
 >>>>>>> v3.18
@@ -1651,9 +1699,14 @@ static void unplug_port(struct port *port)
 	cdev_del(port->cdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(port->name);
 
 	debugfs_remove(port->debugfs_file);
+=======
+	debugfs_remove(port->debugfs_file);
+	kfree(port->name);
+>>>>>>> v3.18
 =======
 	debugfs_remove(port->debugfs_file);
 	kfree(port->name);
@@ -1752,7 +1805,13 @@ static void handle_control_message(struct ports_device *portdev,
 		 * knowing the host connection state changed.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		send_sigio_to_port(port);
+=======
+		spin_lock_irq(&port->inbuf_lock);
+		send_sigio_to_port(port);
+		spin_unlock_irq(&port->inbuf_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_irq(&port->inbuf_lock);
 		send_sigio_to_port(port);
@@ -1878,6 +1937,12 @@ static void in_intr(struct virtqueue *vq)
 		discard_port_data(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Send a SIGIO indicating new data in case the process asked for it */
+	send_sigio_to_port(port);
+
+>>>>>>> v3.18
 =======
 	/* Send a SIGIO indicating new data in case the process asked for it */
 	send_sigio_to_port(port);
@@ -1888,9 +1953,12 @@ static void in_intr(struct virtqueue *vq)
 	wake_up_interruptible(&port->waitqueue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Send a SIGIO indicating new data in case the process asked for it */
 	send_sigio_to_port(port);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (is_console_port(port) && hvc_poll(port->cons.hvc))
@@ -1916,12 +1984,17 @@ static void config_intr(struct virtio_device *vdev)
 		u16 rows, cols;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vdev->config->get(vdev,
 				  offsetof(struct virtio_console_config, cols),
 				  &cols, sizeof(u16));
 		vdev->config->get(vdev,
 				  offsetof(struct virtio_console_config, rows),
 				  &rows, sizeof(u16));
+=======
+		virtio_cread(vdev, struct virtio_console_config, cols, &cols);
+		virtio_cread(vdev, struct virtio_console_config, rows, &rows);
+>>>>>>> v3.18
 =======
 		virtio_cread(vdev, struct virtio_console_config, cols, &cols);
 		virtio_cread(vdev, struct virtio_console_config, rows, &rows);
@@ -2098,10 +2171,16 @@ static int virtcons_probe(struct virtio_device *vdev)
 	/* Don't test MULTIPORT at all if we're rproc: not a valid feature! */
 	if (!is_rproc_serial(vdev) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    virtio_config_val(vdev, VIRTIO_CONSOLE_F_MULTIPORT,
 				  offsetof(struct virtio_console_config,
 					   max_nr_ports),
 				  &portdev->config.max_nr_ports) == 0) {
+=======
+	    virtio_cread_feature(vdev, VIRTIO_CONSOLE_F_MULTIPORT,
+				 struct virtio_console_config, max_nr_ports,
+				 &portdev->config.max_nr_ports) == 0) {
+>>>>>>> v3.18
 =======
 	    virtio_cread_feature(vdev, VIRTIO_CONSOLE_F_MULTIPORT,
 				 struct virtio_console_config, max_nr_ports,
@@ -2120,7 +2199,11 @@ static int virtcons_probe(struct virtio_device *vdev)
 	INIT_LIST_HEAD(&portdev->ports);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&portdev->control_work, &control_work_handler);
+=======
+	virtio_device_ready(portdev->vdev);
+>>>>>>> v3.18
 =======
 	virtio_device_ready(portdev->vdev);
 >>>>>>> v3.18
@@ -2131,6 +2214,10 @@ static int virtcons_probe(struct virtio_device *vdev)
 		spin_lock_init(&portdev->c_ivq_lock);
 		spin_lock_init(&portdev->c_ovq_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		INIT_WORK(&portdev->control_work, &control_work_handler);
+>>>>>>> v3.18
 =======
 		INIT_WORK(&portdev->control_work, &control_work_handler);
 >>>>>>> v3.18
@@ -2241,7 +2328,11 @@ static unsigned int rproc_serial_features[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -2291,6 +2382,11 @@ static int virtcons_restore(struct virtio_device *vdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	virtio_device_ready(portdev->vdev);
+
+>>>>>>> v3.18
 =======
 	virtio_device_ready(portdev->vdev);
 
@@ -2328,7 +2424,11 @@ static struct virtio_driver virtio_console = {
 	.remove =	virtcons_remove,
 	.config_changed = config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -2360,10 +2460,15 @@ static int __init init(void)
 
 	pdrvdata.debugfs_dir = debugfs_create_dir("virtio-ports", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdrvdata.debugfs_dir) {
 		pr_warning("Error %ld creating debugfs dir for virtio-ports\n",
 			   PTR_ERR(pdrvdata.debugfs_dir));
 	}
+=======
+	if (!pdrvdata.debugfs_dir)
+		pr_warning("Error creating debugfs dir for virtio-ports\n");
+>>>>>>> v3.18
 =======
 	if (!pdrvdata.debugfs_dir)
 		pr_warning("Error creating debugfs dir for virtio-ports\n");
@@ -2387,8 +2492,12 @@ unregister:
 	unregister_virtio_driver(&virtio_console);
 free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdrvdata.debugfs_dir)
 		debugfs_remove_recursive(pdrvdata.debugfs_dir);
+=======
+	debugfs_remove_recursive(pdrvdata.debugfs_dir);
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(pdrvdata.debugfs_dir);
 >>>>>>> v3.18
@@ -2405,8 +2514,12 @@ static void __exit fini(void)
 
 	class_destroy(pdrvdata.class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdrvdata.debugfs_dir)
 		debugfs_remove_recursive(pdrvdata.debugfs_dir);
+=======
+	debugfs_remove_recursive(pdrvdata.debugfs_dir);
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(pdrvdata.debugfs_dir);
 >>>>>>> v3.18

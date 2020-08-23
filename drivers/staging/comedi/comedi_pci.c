@@ -15,6 +15,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -23,10 +24,15 @@
 
 #include <linux/pci.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/pci.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "comedidev.h"
@@ -85,7 +91,10 @@ EXPORT_SYMBOL_GPL(comedi_pci_disable);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * comedi_pci_detach() - A generic (*detach) function for PCI drivers.
  * @dev: comedi_device struct
  */
@@ -109,6 +118,9 @@ void comedi_pci_detach(struct comedi_device *dev)
 EXPORT_SYMBOL_GPL(comedi_pci_detach);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * comedi_pci_auto_config() - Configure/probe a comedi PCI driver.
  * @pcidev: pci_dev struct

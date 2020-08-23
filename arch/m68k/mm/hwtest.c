@@ -26,6 +26,7 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hwreg_present( volatile void *regp )
 {
     int	ret = 0;
@@ -53,6 +54,8 @@ int hwreg_present( volatile void *regp )
 
     return( ret );
 =======
+=======
+>>>>>>> v3.18
 int hwreg_present(volatile void *regp)
 {
 	int ret = 0;
@@ -79,6 +82,9 @@ int hwreg_present(volatile void *regp)
 	local_irq_restore(flags);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(hwreg_present);
@@ -87,6 +93,7 @@ EXPORT_SYMBOL(hwreg_present);
  * by a bus error handler. Returns 1 if successful, 0 otherwise.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int hwreg_write( volatile void *regp, unsigned short val )
 {
@@ -111,6 +118,8 @@ int hwreg_write( volatile void *regp, unsigned short val )
 		"movel	%1,%/sp\n\t"
 		"movec	%2,%/vbr"
 =======
+=======
+>>>>>>> v3.18
 int hwreg_write(volatile void *regp, unsigned short val)
 {
 	int ret;
@@ -135,6 +144,9 @@ int hwreg_write(volatile void *regp, unsigned short val)
 	"Lberr2:\n\t"
 		"movel %1,%/sp\n\t"
 		"movec %2,%/vbr"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		: "=&d" (ret), "=&r" (save_sp), "=&r" (save_vbr)
 		: "a" (regp), "a" (tmp_vectors), "g" (val)
@@ -142,7 +154,11 @@ int hwreg_write(volatile void *regp, unsigned short val)
 	local_irq_restore(flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return( ret );
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18

@@ -40,7 +40,11 @@ enum {
 struct max8660_subdev_data {
 	int				id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char				*name;
+=======
+	const char			*name;
+>>>>>>> v3.18
 =======
 	const char			*name;
 >>>>>>> v3.18

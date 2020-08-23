@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -49,7 +53,10 @@
 #define __ACLINUX_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __KERNEL__
 
 /* ACPICA external files should not include ACPICA headers directly. */
@@ -60,11 +67,15 @@
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Common (in-kernel/user-space) ACPICA configuration */
 
 #define ACPI_USE_SYSTEM_CLIBRARY
 #define ACPI_USE_DO_WHILE_0
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ACPI_MUTEX_TYPE             ACPI_BINARY_SEMAPHORE
 
@@ -72,6 +83,8 @@
 #ifdef __KERNEL__
 
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __KERNEL__
 
@@ -83,6 +96,9 @@
 #define ACPI_REDUCED_HARDWARE 1
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/string.h>
 #include <linux/kernel.h>
@@ -90,12 +106,15 @@
 #include <linux/sched.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/div64.h>
 #include <asm/acpi.h>
 #include <linux/slab.h>
 #include <linux/spinlock_types.h>
 #include <asm/current.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/math64.h>
 #include <linux/slab.h>
 #include <linux/spinlock_types.h>
@@ -136,6 +155,9 @@
 	static ACPI_INLINE prototype {return(NULL);}
 
 #endif				/* CONFIG_ACPI */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Host-dependent types and defines for in-kernel ACPICA */
@@ -149,8 +171,11 @@
 #define acpi_cpu_flags                      unsigned long
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* !__KERNEL__ */
 =======
+=======
+>>>>>>> v3.18
 /* Use native linux version of acpi_os_allocate_zeroed */
 
 #define USE_NATIVE_ALLOCATE_ZEROED
@@ -186,6 +211,9 @@
 #define ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_close_directory
 
 #else				/* !__KERNEL__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <stdarg.h>
@@ -195,13 +223,19 @@
 #include <unistd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Define/disable kernel-specific declarators */
 
 #ifndef __init
 #define __init
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Host-dependent types and defines for user-space ACPICA */
 
@@ -209,7 +243,12 @@
 #define ACPI_CAST_PTHREAD_T(pthread) ((acpi_thread_id) (pthread))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(__ia64__) || defined(__x86_64__)
+=======
+#if defined(__ia64__)    || defined(__x86_64__) ||\
+	defined(__aarch64__) || defined(__PPC64__)
+>>>>>>> v3.18
 =======
 #if defined(__ia64__)    || defined(__x86_64__) ||\
 	defined(__aarch64__) || defined(__PPC64__)
@@ -229,7 +268,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
+=======
+#endif				/* __KERNEL__ */
+>>>>>>> v3.18
 =======
 #endif				/* __KERNEL__ */
 >>>>>>> v3.18
@@ -238,6 +281,7 @@
 
 #include <acpi/platform/acgcc.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef __KERNEL__
 #include <acpi/actypes.h>
@@ -308,6 +352,9 @@ static inline void *acpi_os_acquire_object(acpi_cache_t * cache)
 #endif /* __KERNEL__ */
 
 #endif /* __ACLINUX_H__ */
+=======
+#endif				/* __ACLINUX_H__ */
+>>>>>>> v3.18
 =======
 #endif				/* __ACLINUX_H__ */
 >>>>>>> v3.18

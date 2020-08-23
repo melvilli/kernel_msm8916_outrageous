@@ -716,7 +716,12 @@ static int sd_start(struct gspca_dev *gspca_dev)
 
 	/* create the JPEG header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jpeg_define(sd->jpeg_hdr, gspca_dev->height, gspca_dev->width,
+=======
+	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
+			gspca_dev->pixfmt.width,
+>>>>>>> v3.18
 =======
 	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
 			gspca_dev->pixfmt.width,
@@ -1032,6 +1037,10 @@ static const struct usb_device_id device_table[] = {
 	{USB_DEVICE(0x05da, 0x1018), BS(SPCA504B, 0)},
 	{USB_DEVICE(0x06d6, 0x0031), BS(SPCA533, 0)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{USB_DEVICE(0x06d6, 0x0041), BS(SPCA504B, 0)},
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(0x06d6, 0x0041), BS(SPCA504B, 0)},
 >>>>>>> v3.18

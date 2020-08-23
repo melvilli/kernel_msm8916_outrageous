@@ -102,11 +102,17 @@ these ones should be used if hardware could only guess (measure and
 retain) the thresholds of a given power supply.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 VOLTAGE_BOOT - Reports the voltage measured during boot
 
 CURRENT_BOOT - Reports the current measured during boot
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CHARGE_FULL_DESIGN, CHARGE_EMPTY_DESIGN - design charge values, when
 battery considered full/empty.
@@ -126,13 +132,19 @@ CONSTANT_CHARGE_CURRENT - constant charge current programmed by charger.
 CONSTANT_CHARGE_CURRENT_MAX - maximum charge current supported by the
 power supply object.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 INPUT_CURRENT_LIMIT - input current limit programmed by charger. Indicates
 the current drawn from a charging source.
 CHARGE_TERM_CURRENT - Charge termination current used to detect the end of charge
 condition.
 
 CALIBRATE - battery or coulomb counter calibration status
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 CONSTANT_CHARGE_VOLTAGE - constant charge voltage programmed by charger.
@@ -145,10 +157,13 @@ CHARGE_CONTROL_LIMIT_MAX - maximum charge control limit setting
 ENERGY_FULL, ENERGY_EMPTY - same as above but for energy.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 HI_POWER, LOW_POWER - These attributes are used to indicate the
 power state of the client. This information can be used by the
 power_supply to take appropriate actions.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CAPACITY - capacity in percents.
@@ -157,6 +172,7 @@ CAPACITY_ALERT_MAX - maximum capacity alert value in percents.
 CAPACITY_LEVEL - capacity level. This corresponds to
 POWER_SUPPLY_CAPACITY_LEVEL_*.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 RESISTANCE - battery resistance in milli ohms
 RESISTANCE_CAPACITIVE - battery capacitive resistance in milli ohms
@@ -169,6 +185,8 @@ TEMP_AMBIENT - ambient temperature.
 TEMP_AMBIENT_ALERT_MIN - minimum ambient temperature alert value in milli centigrade.
 TEMP_AMBIENT_ALERT_MAX - maximum ambient temperature alert value in milli centigrade.
 =======
+=======
+>>>>>>> v3.18
 TEMP - temperature of the power supply.
 TEMP_ALERT_MIN - minimum battery temperature alert.
 TEMP_ALERT_MAX - maximum battery temperature alert.
@@ -177,6 +195,9 @@ TEMP_AMBIENT_ALERT_MIN - minimum ambient temperature alert.
 TEMP_AMBIENT_ALERT_MAX - maximum ambient temperature alert.
 TEMP_MIN - minimum operatable temperature
 TEMP_MAX - maximum operatable temperature
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 TIME_TO_EMPTY - seconds left for battery to be considered empty (i.e.

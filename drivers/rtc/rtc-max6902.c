@@ -144,11 +144,14 @@ static int max6902_probe(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max6902_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct spi_driver max6902_driver = {
@@ -158,7 +161,10 @@ static struct spi_driver max6902_driver = {
 	},
 	.probe	= max6902_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max6902_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -166,9 +172,15 @@ static struct spi_driver max6902_driver = {
 module_spi_driver(max6902_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION ("max6902 spi RTC driver");
 MODULE_AUTHOR ("Raphael Assenat");
 MODULE_LICENSE ("GPL");
+=======
+MODULE_DESCRIPTION("max6902 spi RTC driver");
+MODULE_AUTHOR("Raphael Assenat");
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("max6902 spi RTC driver");
 MODULE_AUTHOR("Raphael Assenat");

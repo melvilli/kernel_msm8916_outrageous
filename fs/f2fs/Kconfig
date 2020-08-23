@@ -1,9 +1,14 @@
 config F2FS_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "F2FS filesystem support"
 	depends on BLOCK
 	select CRYPTO
 	select CRYPTO_CRC32
+=======
+	tristate "F2FS filesystem support (EXPERIMENTAL)"
+	depends on BLOCK
+>>>>>>> v3.18
 =======
 	tristate "F2FS filesystem support (EXPERIMENTAL)"
 	depends on BLOCK
@@ -53,7 +58,11 @@ config F2FS_FS_POSIX_ACL
 	help
 	  Posix Access Control Lists (ACLs) support permissions for users and
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  groups beyond the owner/group/world scheme.
+=======
+	  gourps beyond the owner/group/world scheme.
+>>>>>>> v3.18
 =======
 	  gourps beyond the owner/group/world scheme.
 >>>>>>> v3.18
@@ -82,6 +91,7 @@ config F2FS_CHECK_FS
 	  Enables BUG_ONs which check the filesystem consistency in runtime.
 
 	  If you want to improve the performance, say N.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 config F2FS_FS_ENCRYPTION
@@ -112,5 +122,7 @@ config F2FS_FAULT_INJECTION
 	  Test F2FS to inject faults such as ENOMEM, ENOSPC, and so on.
 
 	  If unsure, say N.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

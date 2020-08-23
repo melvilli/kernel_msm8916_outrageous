@@ -16,11 +16,14 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/device.h>
 #include <linux/gfp.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/gpio/consumer.h>
@@ -161,6 +164,9 @@ EXPORT_SYMBOL(devm_gpiod_put);
 
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void devm_gpio_release(struct device *dev, void *res)
 {
@@ -178,15 +184,21 @@ static int devm_gpio_match(struct device *dev, void *res, void *data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      devm_gpio_request - request a gpio for a managed device
  *      @dev: device to request the gpio for
  *      @gpio: gpio to allocate
  *      @label: the name of the requested gpio
 =======
+=======
+>>>>>>> v3.18
  *      devm_gpio_request - request a GPIO for a managed device
  *      @dev: device to request the GPIO for
  *      @gpio: GPIO to allocate
  *      @label: the name of the requested GPIO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *      Except for the extra @dev argument, this function takes the
@@ -252,9 +264,15 @@ EXPORT_SYMBOL(devm_gpio_request_one);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      devm_gpio_free - free an interrupt
  *      @dev: device to free gpio for
  *      @gpio: gpio to free
+=======
+ *      devm_gpio_free - free a GPIO
+ *      @dev: device to free GPIO for
+ *      @gpio: GPIO to free
+>>>>>>> v3.18
 =======
  *      devm_gpio_free - free a GPIO
  *      @dev: device to free GPIO for

@@ -108,14 +108,20 @@ enum ad5360_type {
 		BIT(IIO_CHAN_INFO_CALIBSCALE) |			\
 		BIT(IIO_CHAN_INFO_CALIBBIAS),			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (bits), 16, 16 - (bits))	\
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = {						\
 		.sign = 'u',					\
 		.realbits = (bits),				\
 		.storagebits = 16,				\
 		.shift = 16 - (bits),				\
 	},							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -389,6 +395,7 @@ static int ad5360_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* vout = 4 * vref * dac_code */
 		scale_uv = ad5360_get_channel_vref(st, chan->channel) * 4 * 100;
 		if (scale_uv < 0)
@@ -399,6 +406,8 @@ static int ad5360_read_raw(struct iio_dev *indio_dev,
 		*val2 = (scale_uv % 100000) * 10;
 		return IIO_VAL_INT_PLUS_MICRO;
 =======
+=======
+>>>>>>> v3.18
 		scale_uv = ad5360_get_channel_vref(st, chan->channel);
 		if (scale_uv < 0)
 			return scale_uv;
@@ -407,6 +416,9 @@ static int ad5360_read_raw(struct iio_dev *indio_dev,
 		*val = scale_uv * 4 / 1000;
 		*val2 = chan->scan_type.realbits;
 		return IIO_VAL_FRACTIONAL_LOG2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IIO_CHAN_INFO_CALIBBIAS:
 		ret = ad5360_read(indio_dev, AD5360_READBACK_OFFSET,
@@ -480,7 +492,11 @@ static int ad5360_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 >>>>>>> v3.18
@@ -505,7 +521,11 @@ static int ad5360_probe(struct spi_device *spi)
 	if (ret) {
 		dev_err(&spi->dev, "Failed to allocate channel spec: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -515,7 +535,11 @@ static int ad5360_probe(struct spi_device *spi)
 		st->vref_reg[i].supply = ad5360_vref_name[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regulator_bulk_get(&st->spi->dev, st->chip_info->num_vrefs,
+=======
+	ret = devm_regulator_bulk_get(&st->spi->dev, st->chip_info->num_vrefs,
+>>>>>>> v3.18
 =======
 	ret = devm_regulator_bulk_get(&st->spi->dev, st->chip_info->num_vrefs,
 >>>>>>> v3.18
@@ -529,7 +553,11 @@ static int ad5360_probe(struct spi_device *spi)
 	if (ret) {
 		dev_err(&spi->dev, "Failed to enable vref regulators: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_reg;
+=======
+		goto error_free_channels;
+>>>>>>> v3.18
 =======
 		goto error_free_channels;
 >>>>>>> v3.18
@@ -546,12 +574,17 @@ static int ad5360_probe(struct spi_device *spi)
 error_disable_reg:
 	regulator_bulk_disable(st->chip_info->num_vrefs, st->vref_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_reg:
 	regulator_bulk_free(st->chip_info->num_vrefs, st->vref_reg);
 error_free_channels:
 	kfree(indio_dev->channels);
 error_free:
 	iio_device_free(indio_dev);
+=======
+error_free_channels:
+	kfree(indio_dev->channels);
+>>>>>>> v3.18
 =======
 error_free_channels:
 	kfree(indio_dev->channels);
@@ -571,9 +604,12 @@ static int ad5360_remove(struct spi_device *spi)
 
 	regulator_bulk_disable(st->chip_info->num_vrefs, st->vref_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_bulk_free(st->chip_info->num_vrefs, st->vref_reg);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

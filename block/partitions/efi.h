@@ -33,6 +33,10 @@
 #include <linux/string.h>
 #include <linux/efi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -42,6 +46,12 @@
 #define EFI_PMBR_OSTYPE_EFI_GPT 0xEE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GPT_MBR_PROTECTIVE  1
+#define GPT_MBR_HYBRID      2
+
+>>>>>>> v3.18
 =======
 #define GPT_MBR_PROTECTIVE  1
 #define GPT_MBR_HYBRID      2
@@ -95,7 +105,11 @@ typedef struct _gpt_header {
 	 * uint8_t		reserved2[ BlockSize - 92 ];
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed)) gpt_header;
+=======
+} __packed gpt_header;
+>>>>>>> v3.18
 =======
 } __packed gpt_header;
 >>>>>>> v3.18
@@ -105,7 +119,11 @@ typedef struct _gpt_entry_attributes {
 	u64 reserved:47;
         u64 type_guid_specific:16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed)) gpt_entry_attributes;
+=======
+} __packed gpt_entry_attributes;
+>>>>>>> v3.18
 =======
 } __packed gpt_entry_attributes;
 >>>>>>> v3.18
@@ -118,8 +136,11 @@ typedef struct _gpt_entry {
 	gpt_entry_attributes attributes;
 	efi_char16_t partition_name[72 / sizeof (efi_char16_t)];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed)) gpt_entry;
 =======
+=======
+>>>>>>> v3.18
 } __packed gpt_entry;
 
 typedef struct _gpt_mbr_record {
@@ -135,6 +156,9 @@ typedef struct _gpt_mbr_record {
 	__le32	size_in_lba;    /* used by EFI - size of pt in LBA */
 } __packed gpt_mbr_record;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef struct _legacy_mbr {
@@ -142,9 +166,15 @@ typedef struct _legacy_mbr {
 	__le32 unique_mbr_signature;
 	__le16 unknown;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct partition partition_record[4];
 	__le16 signature;
 } __attribute__ ((packed)) legacy_mbr;
+=======
+	gpt_mbr_record partition_record[4];
+	__le16 signature;
+} __packed legacy_mbr;
+>>>>>>> v3.18
 =======
 	gpt_mbr_record partition_record[4];
 	__le16 signature;
@@ -155,6 +185,7 @@ typedef struct _legacy_mbr {
 extern int efi_partition(struct parsed_partitions *state);
 
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -175,5 +206,7 @@ extern int efi_partition(struct parsed_partitions *state);
  * tab-width: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

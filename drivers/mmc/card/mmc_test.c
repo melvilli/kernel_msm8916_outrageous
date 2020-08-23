@@ -796,7 +796,11 @@ static int mmc_test_nonblock_transfer(struct mmc_test_card *test,
 	struct mmc_async_req *other_areq = &test_areq[1].areq;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = RESULT_OK;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -2700,7 +2704,10 @@ static void mmc_test_run(struct mmc_test_card *test, int testcase)
 		mmc_hostname(test->card->host), mmc_card_id(test->card));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_rpm_hold(test->card->host, &test->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mmc_claim_host(test->card->host);
@@ -2787,7 +2794,10 @@ static void mmc_test_run(struct mmc_test_card *test, int testcase)
 
 	mmc_release_host(test->card->host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_rpm_release(test->card->host, &test->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2862,6 +2872,7 @@ static ssize_t mtf_test_write(struct file *file, const char __user *buf,
 	struct mmc_card *card = (struct mmc_card *)sf->private;
 	struct mmc_test_card *test;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char lbuf[12];
 	long testcase;
 
@@ -2875,12 +2886,17 @@ static ssize_t mtf_test_write(struct file *file, const char __user *buf,
 	if (strict_strtol(lbuf, 10, &testcase))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	long testcase;
 	int ret;
 
 	ret = kstrtol_from_user(buf, count, 10, &testcase);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	test = kzalloc(sizeof(struct mmc_test_card), GFP_KERNEL);
@@ -2912,8 +2928,12 @@ static ssize_t mtf_test_write(struct file *file, const char __user *buf,
 
 #ifdef CONFIG_HIGHMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test->highmem)
 		__free_pages(test->highmem, BUFFER_ORDER);
+=======
+	__free_pages(test->highmem, BUFFER_ORDER);
+>>>>>>> v3.18
 =======
 	__free_pages(test->highmem, BUFFER_ORDER);
 >>>>>>> v3.18
@@ -3052,11 +3072,17 @@ static void mmc_test_remove(struct mmc_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mmc_test_shutdown(struct mmc_card *card)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct mmc_driver mmc_driver = {
 	.drv		= {
@@ -3065,6 +3091,10 @@ static struct mmc_driver mmc_driver = {
 	.probe		= mmc_test_probe,
 	.remove		= mmc_test_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown	= mmc_test_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= mmc_test_shutdown,
 >>>>>>> v3.18

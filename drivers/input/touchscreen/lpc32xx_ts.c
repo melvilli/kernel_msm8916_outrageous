@@ -16,7 +16,10 @@
 
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -389,7 +392,11 @@ static const struct dev_pm_ops lpc32xx_ts_pm_ops = {
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id lpc32xx_tsc_of_match[] = {
+=======
+static const struct of_device_id lpc32xx_tsc_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id lpc32xx_tsc_of_match[] = {
 >>>>>>> v3.18

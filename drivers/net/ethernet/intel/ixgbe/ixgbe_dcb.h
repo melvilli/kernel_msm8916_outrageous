@@ -160,6 +160,11 @@ s32 ixgbe_dcb_hw_pfc_config(struct ixgbe_hw *hw, u8 pfc_en, u8 *tc_prio);
 s32 ixgbe_dcb_hw_config(struct ixgbe_hw *, struct ixgbe_dcb_config *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void ixgbe_dcb_read_rtrup2tc(struct ixgbe_hw *hw, u8 *map);
+
+>>>>>>> v3.18
 =======
 void ixgbe_dcb_read_rtrup2tc(struct ixgbe_hw *hw, u8 *map);
 

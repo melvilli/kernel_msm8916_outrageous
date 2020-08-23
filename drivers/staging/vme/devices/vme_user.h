@@ -8,6 +8,7 @@
  */
 struct vme_master {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int enable;			/* State of Window */
 	unsigned long long vme_addr;	/* Starting Address on the VMEbus */
 	unsigned long long size;	/* Window Size */
@@ -21,6 +22,8 @@ struct vme_master {
 #endif
 };
 =======
+=======
+>>>>>>> v3.18
 	__u32 enable;		/* State of Window */
 	__u64 vme_addr;		/* Starting Address on the VMEbus */
 	__u64 size;		/* Window Size */
@@ -33,6 +36,9 @@ struct vme_master {
 	char wrpostenable;		/* Write Post State */
 #endif
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -47,6 +53,7 @@ struct vme_master {
 /* VMEbus Slave Window Configuration Structure */
 struct vme_slave {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int enable;			/* State of Window */
 	unsigned long long vme_addr;	/* Starting Address on the VMEbus */
 	unsigned long long size;	/* Window Size */
@@ -59,6 +66,8 @@ struct vme_slave {
 #endif
 };
 =======
+=======
+>>>>>>> v3.18
 	__u32 enable;		/* State of Window */
 	__u64 vme_addr;		/* Starting Address on the VMEbus */
 	__u64 size;		/* Window Size */
@@ -70,6 +79,9 @@ struct vme_slave {
 	char data64bitcapable;		/* non-VMEbus capable of 64-bit Data */
 #endif
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct vme_irq_id {

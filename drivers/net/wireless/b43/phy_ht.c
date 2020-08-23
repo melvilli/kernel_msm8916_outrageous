@@ -82,20 +82,27 @@ static void b43_radio_2059_channel_setup(struct b43_wldev *dev,
 
 	/* Calibration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_radio_mask(dev, 0x2b, ~0x1);
 	b43_radio_mask(dev, 0x2e, ~0x4);
 	b43_radio_set(dev, 0x2e, 0x4);
 	b43_radio_set(dev, 0x2b, 0x1);
 =======
+=======
+>>>>>>> v3.18
 	b43_radio_mask(dev, R2059_RFPLL_MISC_EN, ~0x1);
 	b43_radio_mask(dev, R2059_RFPLL_MISC_CAL_RESETN, ~0x4);
 	b43_radio_set(dev, R2059_RFPLL_MISC_CAL_RESETN, 0x4);
 	b43_radio_set(dev, R2059_RFPLL_MISC_EN, 0x1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	udelay(300);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void b43_radio_2059_init(struct b43_wldev *dev)
 {
@@ -164,6 +171,8 @@ static void b43_radio_2059_init(struct b43_wldev *dev)
 
 	b43_radio_mask(dev, 0x11, ~0x0008);
 =======
+=======
+>>>>>>> v3.18
 /* Calibrate resistors in LPF of PLL? */
 static void b43_radio_2059_rcal(struct b43_wldev *dev)
 {
@@ -254,6 +263,9 @@ static void b43_radio_2059_init(struct b43_wldev *dev)
 	}
 
 	b43_radio_mask(dev, R2059_RFPLL_MASTER, ~0x0008);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -398,7 +410,10 @@ static void b43_phy_ht_bphy_init(struct b43_wldev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void b43_phy_ht_bphy_reset(struct b43_wldev *dev, bool reset)
 {
 	u16 tmp;
@@ -419,6 +434,9 @@ static void b43_phy_ht_bphy_reset(struct b43_wldev *dev, bool reset)
 	b43_write16(dev, B43_MMIO_PSM_PHY_HDR, tmp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**************************************************
  * Samples
@@ -720,7 +738,11 @@ static void b43_phy_ht_tx_power_ctl_setup(struct b43_wldev *dev)
 	s16 a1[3], b0[3], b1[3];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 freq = dev->phy.channel_freq;
+=======
+	u16 freq = dev->phy.chandef->chan->center_freq;
+>>>>>>> v3.18
 =======
 	u16 freq = dev->phy.chandef->chan->center_freq;
 >>>>>>> v3.18
@@ -832,7 +854,10 @@ static void b43_phy_ht_spur_avoid(struct b43_wldev *dev,
 	struct bcma_device *core = dev->dev->bdev;
 	int spuravoid = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 tmp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -847,6 +872,7 @@ static void b43_phy_ht_spur_avoid(struct b43_wldev *dev,
 			  B43_BCMA_CLKCTLST_80211_PLL_ST |
 			  B43_BCMA_CLKCTLST_PHY_PLL_ST, false);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Values has been taken from wlc_bmac_switch_macfreq comments */
 	switch (spuravoid) {
@@ -869,6 +895,11 @@ static void b43_phy_ht_spur_avoid(struct b43_wldev *dev,
 
 	b43_wireless_core_phy_pll_reset(dev);
 >>>>>>> v3.18
+=======
+	b43_mac_switch_freq(dev, spuravoid);
+
+	b43_wireless_core_phy_pll_reset(dev);
+>>>>>>> v3.18
 
 	if (spuravoid)
 		b43_phy_set(dev, B43_PHY_HT_BBCFG, B43_PHY_HT_BBCFG_RSTRX);
@@ -884,6 +915,7 @@ static void b43_phy_ht_channel_setup(struct b43_wldev *dev,
 				struct ieee80211_channel *new_channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool old_band_5ghz;
 
 	old_band_5ghz = b43_phy_read(dev, B43_PHY_HT_BANDCTL) & 0; /* FIXME */
@@ -892,6 +924,8 @@ static void b43_phy_ht_channel_setup(struct b43_wldev *dev,
 	} else if (new_channel->band == IEEE80211_BAND_2GHZ && old_band_5ghz) {
 		/* TODO */
 =======
+=======
+>>>>>>> v3.18
 	if (new_channel->band == IEEE80211_BAND_5GHZ) {
 		/* Switch to 2 GHz for a moment to access B-PHY regs */
 		b43_phy_mask(dev, B43_PHY_HT_BANDCTL, ~B43_PHY_HT_BANDCTL_5GHZ);
@@ -905,6 +939,9 @@ static void b43_phy_ht_channel_setup(struct b43_wldev *dev,
 		b43_phy_mask(dev, B43_PHY_HT_BANDCTL, ~B43_PHY_HT_BANDCTL_5GHZ);
 
 		b43_phy_ht_bphy_reset(dev, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1155,6 +1192,7 @@ static void b43_phy_ht_op_software_rfkill(struct b43_wldev *dev,
 		b43err(dev->wl, "MAC not suspended\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* In the following PHY ops we copy wl's dummy behaviour.
 	 * TODO: Find out if reads (currently hidden in masks/masksets) are
 	 * needed and replace following ops with just writes or w&r.
@@ -1169,10 +1207,15 @@ static void b43_phy_ht_op_software_rfkill(struct b43_wldev *dev,
 		b43_phy_maskset(dev, B43_PHY_HT_RF_CTL1, 0, 0x2);
 
 =======
+=======
+>>>>>>> v3.18
 	if (blocked) {
 		b43_phy_mask(dev, B43_PHY_HT_RF_CTL_CMD,
 			     ~B43_PHY_HT_RF_CTL_CMD_CHIP0_PU);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (dev->phy.radio_ver == 0x2059)
 			b43_radio_2059_init(dev);
@@ -1231,6 +1274,7 @@ static unsigned int b43_phy_ht_op_get_default_chan(struct b43_wldev *dev)
  **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 b43_phy_ht_op_read(struct b43_wldev *dev, u16 reg)
 {
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
@@ -1248,10 +1292,15 @@ static void b43_phy_ht_op_maskset(struct b43_wldev *dev, u16 reg, u16 mask,
 {
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
 =======
+=======
+>>>>>>> v3.18
 static void b43_phy_ht_op_maskset(struct b43_wldev *dev, u16 reg, u16 mask,
 				 u16 set)
 {
 	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b43_write16(dev, B43_MMIO_PHY_DATA,
 		    (b43_read16(dev, B43_MMIO_PHY_DATA) & mask) | set);
@@ -1263,7 +1312,11 @@ static u16 b43_phy_ht_op_radio_read(struct b43_wldev *dev, u16 reg)
 	reg |= 0x200;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_RADIO24_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
+>>>>>>> v3.18
 =======
 	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
 >>>>>>> v3.18
@@ -1274,7 +1327,11 @@ static void b43_phy_ht_op_radio_write(struct b43_wldev *dev, u16 reg,
 				      u16 value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_RADIO24_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
+>>>>>>> v3.18
 =======
 	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
 >>>>>>> v3.18
@@ -1301,8 +1358,11 @@ const struct b43_phy_operations b43_phyops_ht = {
 	.prepare_structs	= b43_phy_ht_op_prepare_structs,
 	.init			= b43_phy_ht_op_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.phy_read		= b43_phy_ht_op_read,
 	.phy_write		= b43_phy_ht_op_write,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.phy_maskset		= b43_phy_ht_op_maskset,

@@ -16,12 +16,15 @@ Common 'camera' node
 Required properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible	: must be "samsung,fimc", "simple-bus"
 - clocks	: list of clock specifiers, corresponding to entries in
 		  the clock-names property;
 - clock-names	: must contain "sclk_cam0", "sclk_cam1", "pxl_async0",
 		  "pxl_async1" entries, matching entries in the clocks property.
 =======
+=======
+>>>>>>> v3.18
 - compatible: must be "samsung,fimc", "simple-bus"
 - clocks: list of clock specifiers, corresponding to entries in
   the clock-names property;
@@ -37,6 +40,9 @@ Required properties:
 - clock-output-names: from the common clock bindings, should contain names of
   clocks registered by the camera subsystem corresponding to CAM_A_CLKOUT,
   CAM_B_CLKOUT output clocks respectively.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The pinctrl bindings defined in ../pinctrl/pinctrl-bindings.txt must be used
@@ -51,6 +57,10 @@ way around.
 The 'camera' node must include at least one 'fimc' child node.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -111,8 +121,13 @@ port nodes specifies data input - 0, 1 indicates input A, B respectively.
 Optional properties
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - samsung,camclk-out : specifies clock output for remote sensor,
 		       0 - CAM_A_CLKOUT, 1 - CAM_B_CLKOUT;
+=======
+- samsung,camclk-out (deprecated) : specifies clock output for remote sensor,
+  0 - CAM_A_CLKOUT, 1 - CAM_B_CLKOUT;
+>>>>>>> v3.18
 =======
 - samsung,camclk-out (deprecated) : specifies clock output for remote sensor,
   0 - CAM_A_CLKOUT, 1 - CAM_B_CLKOUT;
@@ -125,8 +140,11 @@ The sensor device nodes should be added to their control bus controller (e.g.
 I2C0) nodes and linked to a port node in the csis or the parallel-ports node,
 using the common video interfaces bindings, defined in video-interfaces.txt.
 <<<<<<< HEAD
+<<<<<<< HEAD
 The implementation of this bindings requires clock-frequency property to be
 present in the sensor device nodes.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -145,7 +163,11 @@ Example:
 
 			clock-frequency = <24000000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clocks = <...>;
+=======
+			clocks = <&camera 1>;
+>>>>>>> v3.18
 =======
 			clocks = <&camera 1>;
 >>>>>>> v3.18
@@ -161,6 +183,7 @@ Example:
 				};
 			};
 		};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	};
 
@@ -179,6 +202,8 @@ Example:
 				data-lanes = <1 2 3 4>;
 				remote-endpoint = <&csis0_ep>;
 =======
+=======
+>>>>>>> v3.18
 
 		/* MIPI CSI-2 bus IF sensor */
 		s5c73m3: sensor@0x1a {
@@ -195,6 +220,9 @@ Example:
 					data-lanes = <1 2 3 4>;
 					remote-endpoint = <&csis0_ep>;
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};
@@ -203,6 +231,7 @@ Example:
 	camera {
 		compatible = "samsung,fimc", "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		#address-cells = <1>;
 		#size-cells = <1>;
 		status = "okay";
@@ -210,6 +239,8 @@ Example:
 		pinctrl-names = "default";
 		pinctrl-0 = <&cam_port_a_clk_active>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock 132>, <&clock 133>, <&clock 351>,
 			 <&clock 352>;
 		clock-names = "sclk_cam0", "sclk_cam1", "pxl_async0",
@@ -221,6 +252,9 @@ Example:
 		status = "okay";
 		#address-cells = <1>;
 		#size-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* parallel camera ports */

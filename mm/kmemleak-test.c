@@ -19,6 +19,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "kmemleak: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "kmemleak: " fmt
 
@@ -56,6 +61,7 @@ static int __init kmemleak_test_init(void)
 
 	/* make some orphan objects */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("kmemleak: kmalloc(32) = %p\n", kmalloc(32, GFP_KERNEL));
 	pr_info("kmemleak: kmalloc(32) = %p\n", kmalloc(32, GFP_KERNEL));
 	pr_info("kmemleak: kmalloc(1024) = %p\n", kmalloc(1024, GFP_KERNEL));
@@ -76,6 +82,8 @@ static int __init kmemleak_test_init(void)
 	pr_info("kmemleak: vmalloc(64) = %p\n", vmalloc(64));
 	pr_info("kmemleak: vmalloc(64) = %p\n", vmalloc(64));
 =======
+=======
+>>>>>>> v3.18
 	pr_info("kmalloc(32) = %p\n", kmalloc(32, GFP_KERNEL));
 	pr_info("kmalloc(32) = %p\n", kmalloc(32, GFP_KERNEL));
 	pr_info("kmalloc(1024) = %p\n", kmalloc(1024, GFP_KERNEL));
@@ -95,6 +103,9 @@ static int __init kmemleak_test_init(void)
 	pr_info("vmalloc(64) = %p\n", vmalloc(64));
 	pr_info("vmalloc(64) = %p\n", vmalloc(64));
 	pr_info("vmalloc(64) = %p\n", vmalloc(64));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -104,7 +115,11 @@ static int __init kmemleak_test_init(void)
 	for (i = 0; i < 10; i++) {
 		elem = kzalloc(sizeof(*elem), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("kmemleak: kzalloc(sizeof(*elem)) = %p\n", elem);
+=======
+		pr_info("kzalloc(sizeof(*elem)) = %p\n", elem);
+>>>>>>> v3.18
 =======
 		pr_info("kzalloc(sizeof(*elem)) = %p\n", elem);
 >>>>>>> v3.18
@@ -117,7 +132,11 @@ static int __init kmemleak_test_init(void)
 	for_each_possible_cpu(i) {
 		per_cpu(kmemleak_test_pointer, i) = kmalloc(129, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("kmemleak: kmalloc(129) = %p\n",
+=======
+		pr_info("kmalloc(129) = %p\n",
+>>>>>>> v3.18
 =======
 		pr_info("kmalloc(129) = %p\n",
 >>>>>>> v3.18

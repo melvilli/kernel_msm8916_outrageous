@@ -46,7 +46,12 @@ int wl12xx_start_dev(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 int wl12xx_stop_dev(struct wl1271 *wl, struct wl12xx_vif *wlvif);
 int wl1271_cmd_test(struct wl1271 *wl, void *buf, size_t buf_len, u8 answer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf, size_t len);
+=======
+int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf,
+			   size_t cmd_len, size_t res_len);
+>>>>>>> v3.18
 =======
 int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf,
 			   size_t cmd_len, size_t res_len);
@@ -69,7 +74,12 @@ int wl12xx_cmd_build_probe_req(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			       u8 role_id, u8 band,
 			       const u8 *ssid, size_t ssid_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       const u8 *ie, size_t ie_len, bool sched_scan);
+=======
+			       const u8 *ie, size_t ie_len, const u8 *common_ie,
+			       size_t common_ie_len, bool sched_scan);
+>>>>>>> v3.18
 =======
 			       const u8 *ie, size_t ie_len, const u8 *common_ie,
 			       size_t common_ie_len, bool sched_scan);
@@ -98,7 +108,12 @@ int wl12xx_croc(struct wl1271 *wl, u8 role_id);
 int wl12xx_cmd_add_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			struct ieee80211_sta *sta, u8 hlid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl12xx_cmd_remove_peer(struct wl1271 *wl, u8 hlid);
+=======
+int wl12xx_cmd_remove_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
+			   u8 hlid);
+>>>>>>> v3.18
 =======
 int wl12xx_cmd_remove_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			   u8 hlid);
@@ -183,6 +198,12 @@ enum wl1271_commands {
 	/* start of 18xx specific commands */
 	CMD_DFS_CHANNEL_CONFIG		= 60,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CMD_SMART_CONFIG_START		= 61,
+	CMD_SMART_CONFIG_STOP		= 62,
+	CMD_SMART_CONFIG_SET_GROUP_KEY	= 63,
+>>>>>>> v3.18
 =======
 	CMD_SMART_CONFIG_START		= 61,
 	CMD_SMART_CONFIG_STOP		= 62,
@@ -227,7 +248,11 @@ enum cmd_templ {
 #define WL1271_CMD_TEMPL_DFLT_SIZE 252
 #define WL1271_CMD_TEMPL_MAX_SIZE  512
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WL1271_EVENT_TIMEOUT       1500
+=======
+#define WL1271_EVENT_TIMEOUT       5000
+>>>>>>> v3.18
 =======
 #define WL1271_EVENT_TIMEOUT       5000
 >>>>>>> v3.18
@@ -619,6 +644,11 @@ struct wl12xx_cmd_add_peer {
 	u8 wmm;
 	u8 session_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 role_id;
+	u8 padding[3];
+>>>>>>> v3.18
 =======
 	u8 role_id;
 	u8 padding[3];
@@ -632,7 +662,11 @@ struct wl12xx_cmd_remove_peer {
 	u8 reason_opcode;
 	u8 send_deauth_flag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 padding1;
+=======
+	u8 role_id;
+>>>>>>> v3.18
 =======
 	u8 role_id;
 >>>>>>> v3.18

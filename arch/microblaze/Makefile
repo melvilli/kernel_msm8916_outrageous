@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+KBUILD_DEFCONFIG := mmu_defconfig
+
+>>>>>>> v3.18
 =======
 KBUILD_DEFCONFIG := mmu_defconfig
 
@@ -52,7 +57,10 @@ libs-y += arch/microblaze/lib/
 core-y += arch/microblaze/kernel/
 core-y += arch/microblaze/mm/
 <<<<<<< HEAD
+<<<<<<< HEAD
 core-y += arch/microblaze/platform/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 core-$(CONFIG_PCI) += arch/microblaze/pci/
@@ -81,7 +89,11 @@ archclean:
 	$(Q)$(MAKE) $(clean)=$(boot)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 linux.bin linux.bin.gz: vmlinux
+=======
+linux.bin linux.bin.gz linux.bin.ub: vmlinux
+>>>>>>> v3.18
 =======
 linux.bin linux.bin.gz linux.bin.ub: vmlinux
 >>>>>>> v3.18
@@ -94,6 +106,10 @@ define archhelp
   echo '* linux.bin    - Create raw binary'
   echo '  linux.bin.gz - Create compressed raw binary'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  echo '  linux.bin.ub - Create U-Boot wrapped raw binary'
+>>>>>>> v3.18
 =======
   echo '  linux.bin.ub - Create U-Boot wrapped raw binary'
 >>>>>>> v3.18

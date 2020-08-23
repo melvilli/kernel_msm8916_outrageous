@@ -3,6 +3,7 @@ is used to provide gpio pin multiplexing and configuration on mach-msm
 targets.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Usage
 =====
 
@@ -64,6 +65,8 @@ If a configuration is omitted, nothing will happen at the relevant transitions.
 This allows for the creation of 'static configurations' which do not
 change as the line is requested and freed.
 =======
+=======
+>>>>>>> v3.18
 History
 =======
 
@@ -160,6 +163,9 @@ that a value should not be changed:
 
 replaces the active configuration of gpio 0 with an all-zero configuration,
 but leaves the suspended configuration as it was.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Static Configurations
@@ -167,6 +173,7 @@ Static Configurations
 
 To install a static configuration, which is applied at boot and does
 not change after that, install a configuration with a suspended component
+<<<<<<< HEAD
 <<<<<<< HEAD
 but no active component:
 
@@ -176,10 +183,15 @@ but no active component:
 			...
 		},
 =======
+=======
+>>>>>>> v3.18
 but no active component, as in the previous example:
 
 	[34] = {
 		.suspended = GPIOMUX_VALID | GPIOMUX_PULL_DOWN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 
@@ -227,7 +239,10 @@ This mechanism allows for "auto-request" of gpiomux lines via gpiolib
 when it is suitable.  Drivers wishing more exact control are, of course,
 free to also use msm_gpiomux_set and msm_gpiomux_get.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 About Output-Enable Settings
 ============================
@@ -249,4 +264,7 @@ which means that if the gpio line is held by a client of gpiolib and
 msm_gpiomux_write is called, the direction setting has been lost and
 gpiolib's internal state has been broken.
 Release gpio lines before reconfiguring them.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

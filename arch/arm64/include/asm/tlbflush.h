@@ -79,6 +79,7 @@ static inline void flush_tlb_all(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool msm8994_needs_tlbi_wa(void)
 {
 #ifdef CONFIG_ARCH_MSM8994_V1_TLBI_WA
@@ -104,6 +105,8 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
 		dsb(ish);
 	}
 =======
+=======
+>>>>>>> v3.18
 static inline void flush_tlb_mm(struct mm_struct *mm)
 {
 	unsigned long asid = (unsigned long)ASID(mm) << 48;
@@ -111,12 +114,16 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
 	dsb(ishst);
 	asm("tlbi	aside1is, %0" : : "r" (asid));
 	dsb(ish);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void flush_tlb_page(struct vm_area_struct *vma,
 				  unsigned long uaddr)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (msm8994_needs_tlbi_wa()) {
 		dsb(ishst);
@@ -132,18 +139,24 @@ static inline void flush_tlb_page(struct vm_area_struct *vma,
 		dsb(ish);
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned long addr = uaddr >> 12 |
 		((unsigned long)ASID(vma->vm_mm) << 48);
 
 	dsb(ishst);
 	asm("tlbi	vae1is, %0" : : "r" (addr));
 	dsb(ish);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void __flush_tlb_range(struct vm_area_struct *vma,
 				     unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (msm8994_needs_tlbi_wa()) {
 		asm("tlbi	vmalle1is");
@@ -161,6 +174,8 @@ static inline void __flush_tlb_range(struct vm_area_struct *vma,
 		dsb(ish);
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned long asid = (unsigned long)ASID(vma->vm_mm) << 48;
 	unsigned long addr;
 	start = asid | (start >> 12);
@@ -170,11 +185,15 @@ static inline void __flush_tlb_range(struct vm_area_struct *vma,
 	for (addr = start; addr < end; addr += 1 << (PAGE_SHIFT - 12))
 		asm("tlbi vae1is, %0" : : "r"(addr));
 	dsb(ish);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void __flush_tlb_kernel_range(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (msm8994_needs_tlbi_wa()) {
 		asm("tlbi	vmalle1is");
@@ -192,6 +211,8 @@ static inline void __flush_tlb_kernel_range(unsigned long start, unsigned long e
 		isb();
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned long addr;
 	start >>= 12;
 	end >>= 12;
@@ -201,6 +222,9 @@ static inline void __flush_tlb_kernel_range(unsigned long start, unsigned long e
 		asm("tlbi vaae1is, %0" : : "r"(addr));
 	dsb(ish);
 	isb();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

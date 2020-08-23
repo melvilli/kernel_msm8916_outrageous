@@ -183,10 +183,13 @@ async_memcpy(struct page *dest, struct page *src, unsigned int dest_offset,
 	     struct async_submit_ctl *submit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_async_tx_descriptor *
 async_memset(struct page *dest, int val, unsigned int offset,
 	     size_t len, struct async_submit_ctl *submit);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dma_async_tx_descriptor *async_trigger_callback(struct async_submit_ctl *submit);

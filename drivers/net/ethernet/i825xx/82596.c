@@ -712,7 +712,11 @@ static int init_i596_mem(struct net_device *dev)
 
 	DEB(DEB_INIT,printk(KERN_DEBUG "%s: queuing CmdSASetup\n", dev->name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(lp->sa_cmd.eth_addr, dev->dev_addr, 6);
+=======
+	memcpy(lp->sa_cmd.eth_addr, dev->dev_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(lp->sa_cmd.eth_addr, dev->dev_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -1160,7 +1164,11 @@ struct net_device * __init i82596_probe(int unit)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(eth_addr, (void *) 0xfffc1f2c, 6);	/* YUCK! Get addr from NOVRAM */
+=======
+		memcpy(eth_addr, (void *) 0xfffc1f2c, ETH_ALEN);	/* YUCK! Get addr from NOVRAM */
+>>>>>>> v3.18
 =======
 		memcpy(eth_addr, (void *) 0xfffc1f2c, ETH_ALEN);	/* YUCK! Get addr from NOVRAM */
 >>>>>>> v3.18
@@ -1536,9 +1544,13 @@ int __init init_module(void)
 		i596_debug = debug;
 	dev_82596 = i82596_probe(-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(dev_82596))
 		return PTR_ERR(dev_82596);
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(dev_82596);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dev_82596);
 >>>>>>> v3.18

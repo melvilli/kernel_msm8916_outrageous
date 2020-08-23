@@ -71,7 +71,11 @@ struct dm_exception_store_type {
 	 */
 	void (*commit_exception) (struct dm_exception_store *store,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct dm_exception *e, int valid,
+=======
+				  struct dm_exception *e,
+>>>>>>> v3.18
 =======
 				  struct dm_exception *e,
 >>>>>>> v3.18

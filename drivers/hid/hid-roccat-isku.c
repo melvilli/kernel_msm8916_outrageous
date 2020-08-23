@@ -83,7 +83,11 @@ static ssize_t isku_sysfs_set_actual_profile(struct device *dev,
 	usb_dev = interface_to_usbdev(to_usb_interface(dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &profile);
+=======
+	retval = kstrtoul(buf, 10, &profile);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &profile);
 >>>>>>> v3.18
@@ -114,6 +118,7 @@ static ssize_t isku_sysfs_set_actual_profile(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute isku_attributes[] = {
 	__ATTR(actual_profile, 0660,
@@ -121,12 +126,17 @@ static struct device_attribute isku_attributes[] = {
 			isku_sysfs_set_actual_profile),
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(actual_profile, 0660, isku_sysfs_show_actual_profile,
 		   isku_sysfs_set_actual_profile);
 
 static struct attribute *isku_attrs[] = {
 	&dev_attr_actual_profile.attr,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -198,7 +208,12 @@ ISKU_SYSFS_W(thingy, THINGY)
 
 #define ISKU_BIN_ATTR_RW(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+ISKU_SYSFS_RW(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 ISKU_SYSFS_RW(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -211,7 +226,12 @@ static struct bin_attribute bin_attr_##thingy = { \
 
 #define ISKU_BIN_ATTR_R(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+ISKU_SYSFS_R(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 ISKU_SYSFS_R(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -223,7 +243,12 @@ static struct bin_attribute bin_attr_##thingy = { \
 
 #define ISKU_BIN_ATTR_W(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+ISKU_SYSFS_W(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 ISKU_SYSFS_W(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -233,6 +258,7 @@ static struct bin_attribute bin_attr_##thingy = { \
 	.write = isku_sysfs_write_ ## thingy \
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ISKU_SYSFS_RW(macro, MACRO)
 ISKU_SYSFS_RW(keys_function, KEYS_FUNCTION)
@@ -268,6 +294,8 @@ static struct bin_attribute isku_bin_attributes[] = {
 	ISKU_BIN_ATTR_W(reset, RESET),
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 ISKU_BIN_ATTR_RW(macro, MACRO);
 ISKU_BIN_ATTR_RW(keys_function, KEYS_FUNCTION);
 ISKU_BIN_ATTR_RW(keys_easyzone, KEYS_EASYZONE);
@@ -311,6 +339,9 @@ static const struct attribute_group isku_group = {
 static const struct attribute_group *isku_groups[] = {
 	&isku_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -502,8 +533,12 @@ static int __init isku_init(void)
 	if (IS_ERR(isku_class))
 		return PTR_ERR(isku_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isku_class->dev_attrs = isku_attributes;
 	isku_class->dev_bin_attrs = isku_bin_attributes;
+=======
+	isku_class->dev_groups = isku_groups;
+>>>>>>> v3.18
 =======
 	isku_class->dev_groups = isku_groups;
 >>>>>>> v3.18

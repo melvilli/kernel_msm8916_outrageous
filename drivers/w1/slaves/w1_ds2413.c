@@ -24,6 +24,10 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Mariusz Bialonczyk <manio@skyboo.net>");
 MODULE_DESCRIPTION("w1 family 3a driver for DS2413 2 Pin IO");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2413));
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2413));
 >>>>>>> v3.18
@@ -34,10 +38,16 @@ MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2413));
 #define W1_F3A_SUCCESS_CONFIRM_BYTE        0xAA
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f3a_read_state(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t state_read(struct file *filp, struct kobject *kobj,
+			  struct bin_attribute *bin_attr, char *buf, loff_t off,
+			  size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t state_read(struct file *filp, struct kobject *kobj,
 			  struct bin_attribute *bin_attr, char *buf, loff_t off,
@@ -76,16 +86,22 @@ static ssize_t state_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f3a_write_output(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RO(state, 1);
 
 static ssize_t output_write(struct file *filp, struct kobject *kobj,
 			    struct bin_attribute *bin_attr, char *buf,
 			    loff_t off, size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct w1_slave *sl = kobj_to_w1_slave(kobj);
@@ -127,6 +143,7 @@ error:
 	return -EIO;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define NB_SYSFS_BIN_FILES 2
 static struct bin_attribute w1_f3a_sysfs_bin_files[NB_SYSFS_BIN_FILES] = {
@@ -176,6 +193,8 @@ static struct w1_family_ops w1_f3a_fops = {
 	.add_slave      = w1_f3a_add_slave,
 	.remove_slave   = w1_f3a_remove_slave,
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR(output, S_IRUGO | S_IWUSR | S_IWGRP, NULL, output_write, 1);
 
 static struct bin_attribute *w1_f3a_bin_attrs[] = {
@@ -195,6 +214,9 @@ static const struct attribute_group *w1_f3a_groups[] = {
 
 static struct w1_family_ops w1_f3a_fops = {
 	.groups		= w1_f3a_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

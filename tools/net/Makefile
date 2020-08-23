@@ -2,6 +2,7 @@ prefix = /usr
 
 CC = gcc
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 all : bpf_jit_disasm
 
@@ -15,6 +16,8 @@ clean :
 install :
 	install bpf_jit_disasm $(prefix)/bin/bpf_jit_disasm
 =======
+=======
+>>>>>>> v3.18
 LEX = flex
 YACC = bison
 
@@ -46,4 +49,7 @@ install :
 	install bpf_jit_disasm $(prefix)/bin/bpf_jit_disasm
 	install bpf_dbg $(prefix)/bin/bpf_dbg
 	install bpf_asm $(prefix)/bin/bpf_asm
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -48,6 +48,7 @@ displays the statistics gathered since it was forked.
 .SH FIELD DESCRIPTIONS
 .nf
 <<<<<<< HEAD
+<<<<<<< HEAD
 \fBpk\fP processor package number.
 \fBcor\fP processor core number.
 \fBCPU\fP Linux CPU (logical processor) number.
@@ -64,6 +65,8 @@ Note that multiple CPUs per core indicate support for Intel(R) Hyper-Threading T
 \fBGFX_W\fP Watts consumed by the Graphics part of the package -- available only on client processors.
 \fBRAM_W\fP Watts consumed by the DRAM DIMMS -- available only on server processors.
 =======
+=======
+>>>>>>> v3.18
 \fBPackage\fP processor package number.
 \fBCore\fP processor core number.
 \fBCPU\fP Linux CPU (logical processor) number.
@@ -80,6 +83,9 @@ Note that multiple CPUs per core indicate support for Intel(R) Hyper-Threading T
 \fBCorWatt\fP Watts consumed by the core part of the package.
 \fBGFXWatt\fP Watts consumed by the Graphics part of the package -- available only on client processors.
 \fBRAMWatt\fP Watts consumed by the DRAM DIMMS -- available only on server processors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 \fBPKG_%\fP percent of the interval that RAPL throttling was active on the Package.
 \fBRAM_%\fP percent of the interval that RAPL throttling was active on DRAM.
@@ -97,6 +103,7 @@ For Watts columns, the summary is a system total.
 Subsequent rows show per-CPU statistics.
 
 .nf
+<<<<<<< HEAD
 <<<<<<< HEAD
 [root@sandy]# ./turbostat
 cor CPU    %c0  GHz  TSC    %c1    %c3    %c6    %c7 CTMP PTMP   %pc2   %pc3   %pc6   %pc7  Pkg_W  Cor_W GFX_W
@@ -122,6 +129,8 @@ and then the one line system summary for each sample interval.
   1.55 2.72 3.38  26.73  37.66  34.07   42   2.53   2.80
   1.37 2.83 3.38  16.95  60.05  21.63   42   5.76   0.20
 =======
+=======
+>>>>>>> v3.18
 [root@ivy]# ./turbostat
     Core     CPU Avg_MHz   %Busy Bzy_MHz TSC_MHz     SMI  CPU%c1  CPU%c3  CPU%c6  CPU%c7 CoreTmp  PkgTmp Pkg%pc2 Pkg%pc3 Pkg%pc6 Pkg%pc7 PkgWatt CorWatt GFXWatt 
        -       -       6    0.36    1596    3492       0    0.59    0.01   99.04    0.00      23      24   23.82    0.01   72.47    0.00    6.40    1.01    0.00
@@ -133,6 +142,9 @@ and then the one line system summary for each sample interval.
        2       6       2    0.10    1597    3492       0    0.97
        3       3       3    0.20    1596    3492       0    0.44    0.00   99.37    0.00      23
        3       7       5    0.31    1596    3492       0    0.33
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .fi
 .SH VERBOSE EXAMPLE
@@ -188,6 +200,7 @@ until ^C while the other CPUs are mostly idle:
 
 .nf
 <<<<<<< HEAD
+<<<<<<< HEAD
 [root@x980 lenb]# ./turbostat cat /dev/zero > /dev/null
 ^C
 cor CPU    %c0  GHz  TSC    %c1    %c3    %c6   %pc3   %pc6
@@ -238,6 +251,8 @@ cor CPU    %c0  GHz  TSC SMI    %c1    %c3    %c6 CTMP   %pc3   %pc6
 ^C
 .fi
 =======
+=======
+>>>>>>> v3.18
 root@ivy: turbostat cat /dev/zero > /dev/null
 ^C
     Core     CPU Avg_MHz   %Busy Bzy_MHz TSC_MHz     SMI  CPU%c1  CPU%c3  CPU%c6  CPU%c7 CoreTmp  PkgTmp Pkg%pc2 Pkg%pc3 Pkg%pc6 Pkg%pc7 PkgWatt CorWatt GFXWatt 
@@ -267,6 +282,9 @@ The Avg_MHz multiplied by the %Busy results in the Bzy_MHz --
 which is the average frequency while the processor was executing --
 not including any non-busy idle time.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .SH NOTES
 

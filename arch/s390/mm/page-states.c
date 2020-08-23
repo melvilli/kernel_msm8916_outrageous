@@ -13,8 +13,11 @@
 #include <linux/gfp.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/setup.h>
 #include <asm/ipl.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -47,6 +50,7 @@ void __init cmma_init(void)
 	if (!cmma_flag)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Disable CMM for dump, otherwise  the tprot based memory
 	 * detection can fail because of unstable pages.
@@ -55,6 +59,8 @@ void __init cmma_init(void)
 		cmma_flag = 0;
 		return;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	asm volatile(

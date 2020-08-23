@@ -19,7 +19,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -170,6 +173,7 @@ static int egalax_firmware_version(struct i2c_client *client)
 
 static int egalax_ts_probe(struct i2c_client *client,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       const struct i2c_device_id *id)
 {
 	struct egalax_ts *ts;
@@ -179,6 +183,8 @@ static int egalax_ts_probe(struct i2c_client *client,
 
 	ts = kzalloc(sizeof(struct egalax_ts), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 			   const struct i2c_device_id *id)
 {
 	struct egalax_ts *ts;
@@ -186,6 +192,9 @@ static int egalax_ts_probe(struct i2c_client *client,
 	int error;
 
 	ts = devm_kzalloc(&client->dev, sizeof(struct egalax_ts), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ts) {
 		dev_err(&client->dev, "Failed to allocate memory\n");
@@ -193,16 +202,22 @@ static int egalax_ts_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_dev = input_allocate_device();
 	if (!input_dev) {
 		dev_err(&client->dev, "Failed to allocate memory\n");
 		error = -ENOMEM;
 		goto err_free_ts;
 =======
+=======
+>>>>>>> v3.18
 	input_dev = devm_input_allocate_device(&client->dev);
 	if (!input_dev) {
 		dev_err(&client->dev, "Failed to allocate memory\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -214,6 +229,7 @@ static int egalax_ts_probe(struct i2c_client *client,
 	if (error) {
 		dev_err(&client->dev, "Failed to wake up the controller\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_dev;
 	}
 
@@ -223,6 +239,8 @@ static int egalax_ts_probe(struct i2c_client *client,
 		error = -EIO;
 		goto err_free_dev;
 =======
+=======
+>>>>>>> v3.18
 		return error;
 	}
 
@@ -230,13 +248,19 @@ static int egalax_ts_probe(struct i2c_client *client,
 	if (error < 0) {
 		dev_err(&client->dev, "Failed to read firmware version\n");
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	input_dev->name = "EETI eGalax Touch Screen";
 	input_dev->id.bustype = BUS_I2C;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_dev->dev.parent = &client->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -255,6 +279,7 @@ static int egalax_ts_probe(struct i2c_client *client,
 	input_set_drvdata(input_dev, ts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_threaded_irq(client->irq, NULL, egalax_ts_interrupt,
 				     IRQF_TRIGGER_LOW | IRQF_ONESHOT,
 				     "egalax_ts", ts);
@@ -262,6 +287,8 @@ static int egalax_ts_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Failed to register interrupt\n");
 		goto err_free_dev;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_threaded_irq(&client->dev, client->irq, NULL,
 					  egalax_ts_interrupt,
 					  IRQF_TRIGGER_LOW | IRQF_ONESHOT,
@@ -269,11 +296,15 @@ static int egalax_ts_probe(struct i2c_client *client,
 	if (error < 0) {
 		dev_err(&client->dev, "Failed to register interrupt\n");
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	error = input_register_device(ts->input_dev);
 	if (error)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free_irq;
 
@@ -301,10 +332,15 @@ static int egalax_ts_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return error;
 
 	i2c_set_clientdata(client, ts);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -338,7 +374,11 @@ static int egalax_ts_resume(struct device *dev)
 static SIMPLE_DEV_PM_OPS(egalax_ts_pm_ops, egalax_ts_suspend, egalax_ts_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id egalax_ts_dt_ids[] = {
+=======
+static const struct of_device_id egalax_ts_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id egalax_ts_dt_ids[] = {
 >>>>>>> v3.18
@@ -352,16 +392,22 @@ static struct i2c_driver egalax_ts_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &egalax_ts_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table	= of_match_ptr(egalax_ts_dt_ids),
 	},
 	.id_table	= egalax_ts_id,
 	.probe		= egalax_ts_probe,
 	.remove		= egalax_ts_remove,
 =======
+=======
+>>>>>>> v3.18
 		.of_match_table	= egalax_ts_dt_ids,
 	},
 	.id_table	= egalax_ts_id,
 	.probe		= egalax_ts_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -22,6 +22,10 @@
 #include <linux/dmi.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rfkill.h>
+>>>>>>> v3.18
 =======
 #include <linux/rfkill.h>
 >>>>>>> v3.18
@@ -74,7 +78,11 @@ static struct quirk_entry quirk_dell_vostro_v130 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dmi_matched(const struct dmi_system_id *dmi)
+=======
+static int __init dmi_matched(const struct dmi_system_id *dmi)
+>>>>>>> v3.18
 =======
 static int __init dmi_matched(const struct dmi_system_id *dmi)
 >>>>>>> v3.18
@@ -98,7 +106,10 @@ static struct platform_driver platform_driver = {
 static struct platform_device *platform_device;
 static struct backlight_device *dell_backlight_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct rfkill *wifi_rfkill;
 static struct rfkill *bluetooth_rfkill;
 static struct rfkill *wwan_rfkill;
@@ -106,6 +117,9 @@ static bool force_rfkill;
 
 module_param(force_rfkill, bool, 0444);
 MODULE_PARM_DESC(force_rfkill, "enable rfkill on non whitelisted models");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct dmi_system_id dell_device_table[] __initconst = {
@@ -134,7 +148,11 @@ static const struct dmi_system_id dell_device_table[] __initconst = {
 MODULE_DEVICE_TABLE(dmi, dell_device_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id dell_quirks[] = {
+=======
+static const struct dmi_system_id dell_quirks[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id dell_quirks[] __initconst = {
 >>>>>>> v3.18
@@ -378,7 +396,10 @@ dell_send_request(struct calling_interface_buffer *buffer, int class,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Derived from information in DellWirelessCtl.cpp:
    Class 17, select 11 is radio control. It returns an array of 32-bit values.
 
@@ -481,6 +502,9 @@ static const struct rfkill_ops dell_rfkill_ops = {
 	.query = dell_rfkill_query,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct dentry *dell_laptop_dir;
 
@@ -552,7 +576,10 @@ static const struct file_operations dell_debugfs_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void dell_update_rfkill(struct work_struct *ignored)
 {
 	int status;
@@ -718,6 +745,9 @@ static void dell_cleanup_rfkill(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dell_send_intensity(struct backlight_device *bd)
 {
@@ -740,7 +770,11 @@ static int dell_send_intensity(struct backlight_device *bd)
 out:
 	release_buffer();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18
@@ -805,7 +839,11 @@ static struct led_classdev touchpad_led = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int touchpad_led_init(struct device *dev)
+=======
+static int __init touchpad_led_init(struct device *dev)
+>>>>>>> v3.18
 =======
 static int __init touchpad_led_init(struct device *dev)
 >>>>>>> v3.18
@@ -855,12 +893,15 @@ static int __init dell_init(void)
 	 */
 	bufferpage = alloc_page(GFP_KERNEL | GFP_DMA32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!bufferpage)
 		goto fail_buffer;
 	buffer = page_address(bufferpage);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!bufferpage) {
 		ret = -ENOMEM;
 		goto fail_buffer;
@@ -874,12 +915,21 @@ static int __init dell_init(void)
 		goto fail_rfkill;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (quirks && quirks->touchpad_led)
 		touchpad_led_init(&platform_device->dev);
 
 	dell_laptop_dir = debugfs_create_dir("dell_laptop", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dell_laptop_dir != NULL)
+		debugfs_create_file("rfkill", 0444, dell_laptop_dir, NULL,
+				    &dell_debugfs_fops);
+>>>>>>> v3.18
 =======
 	if (dell_laptop_dir != NULL)
 		debugfs_create_file("rfkill", 0444, dell_laptop_dir, NULL,
@@ -928,11 +978,17 @@ static int __init dell_init(void)
 
 fail_backlight:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	i8042_remove_filter(dell_laptop_i8042_filter);
 	cancel_delayed_work_sync(&dell_rfkill_work);
 	dell_cleanup_rfkill();
 fail_rfkill:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_page((unsigned long)bufferpage);
 fail_buffer:
@@ -952,12 +1008,18 @@ static void __exit dell_exit(void)
 	if (quirks && quirks->touchpad_led)
 		touchpad_led_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(dell_backlight_device);
 =======
+=======
+>>>>>>> v3.18
 	i8042_remove_filter(dell_laptop_i8042_filter);
 	cancel_delayed_work_sync(&dell_rfkill_work);
 	backlight_device_unregister(dell_backlight_device);
 	dell_cleanup_rfkill();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (platform_device) {
 		platform_device_unregister(platform_device);

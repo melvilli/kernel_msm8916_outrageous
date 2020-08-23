@@ -53,6 +53,11 @@
 #define AR9300_PAPRD_SCALE_2_S		28
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AR9300_EEP_ANTDIV_CONTROL_DEFAULT_VALUE 0xc9
+
+>>>>>>> v3.18
 =======
 #define AR9300_EEP_ANTDIV_CONTROL_DEFAULT_VALUE 0xc9
 
@@ -77,7 +82,11 @@
 		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x30000 : 0x14000)
 #define AR9300_OTP_STATUS \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x31018 : 0x15f18)
+=======
+		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x30018 : 0x15f18)
+>>>>>>> v3.18
 =======
 		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x30018 : 0x15f18)
 >>>>>>> v3.18
@@ -87,7 +96,11 @@
 #define AR9300_OTP_STATUS_SM_BUSY	0x1
 #define AR9300_OTP_READ_DATA \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x3101c : 0x15f1c)
+=======
+		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x3001c : 0x15f1c)
+>>>>>>> v3.18
 =======
 		((AR_SREV_9340(ah) || AR_SREV_9550(ah)) ? 0x3001c : 0x15f1c)
 >>>>>>> v3.18
@@ -282,11 +295,14 @@ struct cal_ctl_data_5g {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ar9300_BaseExtension_1 {
 	u8 ant_div_control;
 	u8 future[3];
 	u8 tempslopextension[8];
 =======
+=======
+>>>>>>> v3.18
 #define MAX_BASE_EXTENSION_FUTURE 2
 
 struct ar9300_BaseExtension_1 {
@@ -301,6 +317,9 @@ struct ar9300_BaseExtension_1 {
 	 */
 	u8 misc_enable;
 	int8_t tempslopextension[8];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int8_t quick_drop_low;
 	int8_t quick_drop_high;
@@ -365,6 +384,11 @@ struct ar9300_eeprom {
 s32 ar9003_hw_get_tx_gain_idx(struct ath_hw *ah);
 s32 ar9003_hw_get_rx_gain_idx(struct ath_hw *ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+u32 ar9003_hw_ant_ctrl_common_get(struct ath_hw *ah, bool is2ghz);
+u32 ar9003_hw_ant_ctrl_common_2_get(struct ath_hw *ah, bool is2ghz);
+>>>>>>> v3.18
 =======
 u32 ar9003_hw_ant_ctrl_common_get(struct ath_hw *ah, bool is2ghz);
 u32 ar9003_hw_ant_ctrl_common_2_get(struct ath_hw *ah, bool is2ghz);

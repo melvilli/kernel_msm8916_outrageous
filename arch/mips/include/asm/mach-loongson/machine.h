@@ -25,12 +25,18 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_LOONGSON_MACH3X
 
 #define LOONGSON_MACHTYPE MACH_LEMOTE_A1101
 
 #endif /* CONFIG_LOONGSON_MACH3X */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_MACH_LOONGSON_MACHINE_H */

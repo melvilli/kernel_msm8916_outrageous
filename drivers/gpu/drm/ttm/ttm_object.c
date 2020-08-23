@@ -1,7 +1,11 @@
 /**************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009 VMware, Inc., Palo Alto, CA., USA
+=======
+ * Copyright (c) 2009-2013 VMware, Inc., Palo Alto, CA., USA
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009-2013 VMware, Inc., Palo Alto, CA., USA
 >>>>>>> v3.18
@@ -31,13 +35,19 @@
 /*
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * While no substantial code is shared, the prime code is inspired by
  * drm_prime.c, with
  * Authors:
  *      Dave Airlie <airlied@redhat.com>
  *      Rob Clark <rob.clark@linaro.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 /** @file ttm_ref_object.c
@@ -48,6 +58,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -79,7 +93,11 @@
 struct ttm_object_file {
 	struct ttm_object_device *tdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rwlock_t lock;
+=======
+	spinlock_t lock;
+>>>>>>> v3.18
 =======
 	spinlock_t lock;
 >>>>>>> v3.18
@@ -106,6 +124,12 @@ struct ttm_object_device {
 	atomic_t object_count;
 	struct ttm_mem_global *mem_glob;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dma_buf_ops ops;
+	void (*dmabuf_release)(struct dma_buf *dma_buf);
+	size_t dma_buf_size;
+>>>>>>> v3.18
 =======
 	struct dma_buf_ops ops;
 	void (*dmabuf_release)(struct dma_buf *dma_buf);
@@ -136,6 +160,10 @@ struct ttm_object_device {
 
 struct ttm_ref_object {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head rcu_head;
+>>>>>>> v3.18
 =======
 	struct rcu_head rcu_head;
 >>>>>>> v3.18
@@ -148,6 +176,11 @@ struct ttm_ref_object {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void ttm_prime_dmabuf_release(struct dma_buf *dma_buf);
+
+>>>>>>> v3.18
 =======
 static void ttm_prime_dmabuf_release(struct dma_buf *dma_buf);
 
@@ -235,10 +268,16 @@ static void ttm_release_base(struct kref *kref)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (base->refcount_release) {
 		ttm_object_file_unref(&base->tfile);
 		base->refcount_release(&base);
 	}
+=======
+	ttm_object_file_unref(&base->tfile);
+	if (base->refcount_release)
+		base->refcount_release(&base);
+>>>>>>> v3.18
 =======
 	ttm_object_file_unref(&base->tfile);
 	if (base->refcount_release)
@@ -259,6 +298,7 @@ EXPORT_SYMBOL(ttm_base_object_unref);
 struct ttm_base_object *ttm_base_object_lookup(struct ttm_object_file *tfile,
 					       uint32_t key)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ttm_object_device *tdev = tfile->tdev;
 	struct ttm_base_object *base;
@@ -287,6 +327,8 @@ struct ttm_base_object *ttm_base_object_lookup(struct ttm_object_file *tfile,
 }
 EXPORT_SYMBOL(ttm_base_object_lookup);
 =======
+=======
+>>>>>>> v3.18
 	struct ttm_base_object *base = NULL;
 	struct drm_hash_item *hash;
 	struct drm_open_hash *ht = &tfile->ref_hash[TTM_REF_USAGE];
@@ -373,6 +415,9 @@ bool ttm_ref_object_exists(struct ttm_object_file *tfile,
 	return false;
 }
 EXPORT_SYMBOL(ttm_ref_object_exists);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int ttm_ref_object_add(struct ttm_object_file *tfile,
@@ -386,6 +431,12 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 	int ret = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (base->tfile != tfile && !base->shareable)
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (base->tfile != tfile && !base->shareable)
 		return -EPERM;
@@ -395,6 +446,7 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 		*existed = true;
 
 	while (ret == -EINVAL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		read_lock(&tfile->lock);
 		ret = drm_ht_find_item(ht, base->hash.key, &hash);
@@ -408,6 +460,8 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 
 		read_unlock(&tfile->lock);
 =======
+=======
+>>>>>>> v3.18
 		rcu_read_lock();
 		ret = drm_ht_find_item_rcu(ht, base->hash.key, &hash);
 
@@ -420,6 +474,9 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 		}
 
 		rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = ttm_mem_global_alloc(mem_glob, sizeof(*ref),
 					   false, false);
@@ -438,8 +495,13 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 		kref_init(&ref->kref);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_lock(&tfile->lock);
 		ret = drm_ht_insert_item(ht, &ref->hash);
+=======
+		spin_lock(&tfile->lock);
+		ret = drm_ht_insert_item_rcu(ht, &ref->hash);
+>>>>>>> v3.18
 =======
 		spin_lock(&tfile->lock);
 		ret = drm_ht_insert_item_rcu(ht, &ref->hash);
@@ -449,7 +511,11 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 			list_add_tail(&ref->head, &tfile->ref_list);
 			kref_get(&base->refcount);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			write_unlock(&tfile->lock);
+=======
+			spin_unlock(&tfile->lock);
+>>>>>>> v3.18
 =======
 			spin_unlock(&tfile->lock);
 >>>>>>> v3.18
@@ -459,7 +525,11 @@ int ttm_ref_object_add(struct ttm_object_file *tfile,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_unlock(&tfile->lock);
+=======
+		spin_unlock(&tfile->lock);
+>>>>>>> v3.18
 =======
 		spin_unlock(&tfile->lock);
 >>>>>>> v3.18
@@ -484,9 +554,15 @@ static void ttm_ref_object_release(struct kref *kref)
 
 	ht = &tfile->ref_hash[ref->ref_type];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void)drm_ht_remove_item(ht, &ref->hash);
 	list_del(&ref->head);
 	write_unlock(&tfile->lock);
+=======
+	(void)drm_ht_remove_item_rcu(ht, &ref->hash);
+	list_del(&ref->head);
+	spin_unlock(&tfile->lock);
+>>>>>>> v3.18
 =======
 	(void)drm_ht_remove_item_rcu(ht, &ref->hash);
 	list_del(&ref->head);
@@ -499,8 +575,13 @@ static void ttm_ref_object_release(struct kref *kref)
 	ttm_base_object_unref(&ref->obj);
 	ttm_mem_global_free(mem_glob, sizeof(*ref));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(ref);
 	write_lock(&tfile->lock);
+=======
+	kfree_rcu(ref, rcu_head);
+	spin_lock(&tfile->lock);
+>>>>>>> v3.18
 =======
 	kfree_rcu(ref, rcu_head);
 	spin_lock(&tfile->lock);
@@ -516,22 +597,32 @@ int ttm_ref_object_base_unref(struct ttm_object_file *tfile,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_lock(&tfile->lock);
 	ret = drm_ht_find_item(ht, key, &hash);
 	if (unlikely(ret != 0)) {
 		write_unlock(&tfile->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&tfile->lock);
 	ret = drm_ht_find_item(ht, key, &hash);
 	if (unlikely(ret != 0)) {
 		spin_unlock(&tfile->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
 	ref = drm_hash_entry(hash, struct ttm_ref_object, hash);
 	kref_put(&ref->kref, ttm_ref_object_release);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_unlock(&tfile->lock);
+=======
+	spin_unlock(&tfile->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&tfile->lock);
 >>>>>>> v3.18
@@ -548,7 +639,11 @@ void ttm_object_file_release(struct ttm_object_file **p_tfile)
 
 	*p_tfile = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_lock(&tfile->lock);
+=======
+	spin_lock(&tfile->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&tfile->lock);
 >>>>>>> v3.18
@@ -568,7 +663,11 @@ void ttm_object_file_release(struct ttm_object_file **p_tfile)
 		drm_ht_remove(&tfile->ref_hash[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_unlock(&tfile->lock);
+=======
+	spin_unlock(&tfile->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&tfile->lock);
 >>>>>>> v3.18
@@ -588,7 +687,11 @@ struct ttm_object_file *ttm_object_file_init(struct ttm_object_device *tdev,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rwlock_init(&tfile->lock);
+=======
+	spin_lock_init(&tfile->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&tfile->lock);
 >>>>>>> v3.18
@@ -616,14 +719,20 @@ out_err:
 EXPORT_SYMBOL(ttm_object_file_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ttm_object_device *ttm_object_device_init(struct ttm_mem_global
 						 *mem_glob,
 						 unsigned int hash_order)
 =======
+=======
+>>>>>>> v3.18
 struct ttm_object_device *
 ttm_object_device_init(struct ttm_mem_global *mem_glob,
 		       unsigned int hash_order,
 		       const struct dma_buf_ops *ops)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ttm_object_device *tdev = kmalloc(sizeof(*tdev), GFP_KERNEL);
@@ -637,11 +746,14 @@ ttm_object_device_init(struct ttm_mem_global *mem_glob,
 	atomic_set(&tdev->object_count, 0);
 	ret = drm_ht_create(&tdev->object_hash, hash_order);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (likely(ret == 0))
 		return tdev;
 
 =======
+=======
+>>>>>>> v3.18
 	if (ret != 0)
 		goto out_no_object_hash;
 
@@ -653,6 +765,9 @@ ttm_object_device_init(struct ttm_mem_global *mem_glob,
 	return tdev;
 
 out_no_object_hash:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(tdev);
 	return NULL;
@@ -673,7 +788,10 @@ void ttm_object_device_release(struct ttm_object_device **p_tdev)
 }
 EXPORT_SYMBOL(ttm_object_device_release);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * get_dma_buf_unless_doomed - get a dma_buf reference if possible.
@@ -896,4 +1014,7 @@ int ttm_prime_object_init(struct ttm_object_file *tfile, size_t size,
 				    ref_obj_release);
 }
 EXPORT_SYMBOL(ttm_prime_object_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

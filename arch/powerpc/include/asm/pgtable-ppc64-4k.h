@@ -65,7 +65,11 @@
 
 #define pud_ERROR(e) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s:%d: bad pud %08lx.\n", __FILE__, __LINE__, pud_val(e))
+=======
+	pr_err("%s:%d: bad pud %08lx.\n", __FILE__, __LINE__, pud_val(e))
+>>>>>>> v3.18
 =======
 	pr_err("%s:%d: bad pud %08lx.\n", __FILE__, __LINE__, pud_val(e))
 >>>>>>> v3.18

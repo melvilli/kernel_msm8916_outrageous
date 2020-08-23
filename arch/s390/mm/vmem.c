@@ -11,6 +11,10 @@
 #include <linux/hugetlb.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -69,6 +73,7 @@ static pte_t __ref *vmem_pte_alloc(unsigned long address)
 
 	if (slab_is_available())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte = (pte_t *) page_table_alloc(&init_mm, address);
 	else
 		pte = alloc_bootmem(PTRS_PER_PTE * sizeof(pte_t));
@@ -76,6 +81,8 @@ static pte_t __ref *vmem_pte_alloc(unsigned long address)
 		return NULL;
 	clear_table((unsigned long *) pte, _PAGE_TYPE_EMPTY,
 =======
+=======
+>>>>>>> v3.18
 		pte = (pte_t *) page_table_alloc(&init_mm);
 	else
 		pte = alloc_bootmem_align(PTRS_PER_PTE * sizeof(pte_t),
@@ -83,6 +90,9 @@ static pte_t __ref *vmem_pte_alloc(unsigned long address)
 	if (!pte)
 		return NULL;
 	clear_table((unsigned long *) pte, _PAGE_INVALID,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    PTRS_PER_PTE * sizeof(pte_t));
 	return pte;
@@ -116,7 +126,11 @@ static int vmem_add_mem(unsigned long start, unsigned long size, int ro)
 			pud_val(*pu_dir) = __pa(address) |
 				_REGION_ENTRY_TYPE_R3 | _REGION3_ENTRY_LARGE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(ro ? _REGION_ENTRY_RO : 0);
+=======
+				(ro ? _REGION_ENTRY_PROTECT : 0);
+>>>>>>> v3.18
 =======
 				(ro ? _REGION_ENTRY_PROTECT : 0);
 >>>>>>> v3.18
@@ -137,7 +151,12 @@ static int vmem_add_mem(unsigned long start, unsigned long size, int ro)
 			pmd_val(*pm_dir) = __pa(address) |
 				_SEGMENT_ENTRY | _SEGMENT_ENTRY_LARGE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(ro ? _SEGMENT_ENTRY_RO : 0);
+=======
+				_SEGMENT_ENTRY_YOUNG |
+				(ro ? _SEGMENT_ENTRY_PROTECT : 0);
+>>>>>>> v3.18
 =======
 				_SEGMENT_ENTRY_YOUNG |
 				(ro ? _SEGMENT_ENTRY_PROTECT : 0);
@@ -155,7 +174,12 @@ static int vmem_add_mem(unsigned long start, unsigned long size, int ro)
 
 		pt_dir = pte_offset_kernel(pm_dir, address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_val(*pt_dir) = __pa(address) | (ro ? _PAGE_RO : 0);
+=======
+		pte_val(*pt_dir) = __pa(address) |
+			pgprot_val(ro ? PAGE_KERNEL_RO : PAGE_KERNEL);
+>>>>>>> v3.18
 =======
 		pte_val(*pt_dir) = __pa(address) |
 			pgprot_val(ro ? PAGE_KERNEL_RO : PAGE_KERNEL);
@@ -165,7 +189,10 @@ static int vmem_add_mem(unsigned long start, unsigned long size, int ro)
 	ret = 0;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_tlb_kernel_range(start, end);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -186,7 +213,11 @@ static void vmem_remove_range(unsigned long start, unsigned long size)
 	pte_t  pte;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_val(pte) = _PAGE_TYPE_EMPTY;
+=======
+	pte_val(pte) = _PAGE_INVALID;
+>>>>>>> v3.18
 =======
 	pte_val(pte) = _PAGE_INVALID;
 >>>>>>> v3.18
@@ -269,8 +300,12 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 					goto out;
 				pmd_val(*pm_dir) = __pa(new_page) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					_SEGMENT_ENTRY | _SEGMENT_ENTRY_LARGE |
 					_SEGMENT_ENTRY_CO;
+=======
+					_SEGMENT_ENTRY | _SEGMENT_ENTRY_LARGE;
+>>>>>>> v3.18
 =======
 					_SEGMENT_ENTRY | _SEGMENT_ENTRY_LARGE;
 >>>>>>> v3.18
@@ -290,6 +325,7 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 		pt_dir = pte_offset_kernel(pm_dir, address);
 		if (pte_none(*pt_dir)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long new_page;
 
 			new_page =__pa(vmem_alloc_pages(0));
@@ -304,6 +340,8 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 out:
 	flush_tlb_kernel_range(start, end);
 =======
+=======
+>>>>>>> v3.18
 			void *new_page;
 
 			new_page = vmemmap_alloc_block(PAGE_SIZE, node);
@@ -316,6 +354,9 @@ out:
 	}
 	ret = 0;
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -425,6 +466,7 @@ void __init vmem_map_init(void)
 {
 	unsigned long ro_start, ro_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long start, end;
 	int i;
 
@@ -436,6 +478,8 @@ void __init vmem_map_init(void)
 		start = memory_chunk[i].addr;
 		end = memory_chunk[i].addr + memory_chunk[i].size;
 =======
+=======
+>>>>>>> v3.18
 	struct memblock_region *reg;
 	phys_addr_t start, end;
 
@@ -444,6 +488,9 @@ void __init vmem_map_init(void)
 	for_each_memblock(memory, reg) {
 		start = reg->base;
 		end = reg->base + reg->size - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (start >= ro_end || end <= ro_start)
 			vmem_add_mem(start, end - start, 0);
@@ -465,6 +512,7 @@ void __init vmem_map_init(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Convert memory chunk array to a memory segment list so there is a single
  * list that contains both r/w memory and shared memory segments.
  */
@@ -483,6 +531,8 @@ static int __init vmem_convert_memory_chunk(void)
 		seg->start = memory_chunk[i].addr;
 		seg->size = memory_chunk[i].size;
 =======
+=======
+>>>>>>> v3.18
  * Convert memblock.memory  to a memory segment list so there is a single
  * list that contains all memory segments.
  */
@@ -498,6 +548,9 @@ static int __init vmem_convert_memory_chunk(void)
 			panic("Out of memory...\n");
 		seg->start = reg->base;
 		seg->size = reg->size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		insert_memory_segment(seg);
 	}

@@ -36,7 +36,11 @@ char atl1e_driver_version[] = DRV_VERSION;
  *   Class, Class Mask, private data (not used) }
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(atl1e_pci_tbl) = {
+=======
+static const struct pci_device_id atl1e_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id atl1e_pci_tbl[] = {
 >>>>>>> v3.18
@@ -318,7 +322,10 @@ static void atl1e_set_multi(struct net_device *netdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __atl1e_rx_mode(netdev_features_t features, u32 *mac_ctrl_data)
 {
 
@@ -347,6 +354,9 @@ static void atl1e_rx_mode(struct net_device *netdev,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __atl1e_vlan_mode(netdev_features_t features, u32 *mac_ctrl_data)
 {
@@ -430,11 +440,17 @@ static int atl1e_set_features(struct net_device *netdev,
 		atl1e_vlan_mode(netdev, features);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (changed & NETIF_F_RXALL)
 		atl1e_rx_mode(netdev, features);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -842,9 +858,14 @@ static int atl1e_setup_ring_resources(struct atl1e_adapter *adapter)
 
 	size = adapter->ring_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->ring_vir_addr = pci_alloc_consistent(pdev,
 			adapter->ring_size, &adapter->ring_dma);
 
+=======
+	adapter->ring_vir_addr = pci_zalloc_consistent(pdev, adapter->ring_size,
+						       &adapter->ring_dma);
+>>>>>>> v3.18
 =======
 	adapter->ring_vir_addr = pci_zalloc_consistent(pdev, adapter->ring_size,
 						       &adapter->ring_dma);
@@ -856,8 +877,11 @@ static int atl1e_setup_ring_resources(struct atl1e_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(adapter->ring_vir_addr, 0, adapter->ring_size);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rx_page_desc = rx_ring->rx_page_desc;
@@ -1108,7 +1132,12 @@ static void atl1e_setup_mac_ctrl(struct atl1e_adapter *adapter)
 	if (netdev->flags & IFF_ALLMULTI)
 		value |= MAC_CTRL_MC_ALL_EN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	if (netdev->features & NETIF_F_RXALL)
+		value |= MAC_CTRL_DBG;
+>>>>>>> v3.18
 =======
 	if (netdev->features & NETIF_F_RXALL)
 		value |= MAC_CTRL_DBG;
@@ -1200,14 +1229,18 @@ static struct net_device_stats *atl1e_get_stats(struct net_device *netdev)
 	struct net_device_stats *net_stats = &netdev->stats;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net_stats->rx_packets = hw_stats->rx_ok;
 	net_stats->tx_packets = hw_stats->tx_ok;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	net_stats->rx_bytes   = hw_stats->rx_byte_cnt;
 	net_stats->tx_bytes   = hw_stats->tx_byte_cnt;
 	net_stats->multicast  = hw_stats->rx_mcast;
 	net_stats->collisions = hw_stats->tx_1_col +
+<<<<<<< HEAD
 <<<<<<< HEAD
 				hw_stats->tx_2_col * 2 +
 				hw_stats->tx_late_col + hw_stats->tx_abort_col;
@@ -1216,6 +1249,8 @@ static struct net_device_stats *atl1e_get_stats(struct net_device *netdev)
 				hw_stats->rx_len_err + hw_stats->rx_sz_ov +
 				hw_stats->rx_rrd_ov + hw_stats->rx_align_err;
 =======
+=======
+>>>>>>> v3.18
 				hw_stats->tx_2_col +
 				hw_stats->tx_late_col +
 				hw_stats->tx_abort_col;
@@ -1228,11 +1263,15 @@ static struct net_device_stats *atl1e_get_stats(struct net_device *netdev)
 				hw_stats->rx_align_err +
 				hw_stats->rx_rxf_ov;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	net_stats->rx_fifo_errors   = hw_stats->rx_rxf_ov;
 	net_stats->rx_length_errors = hw_stats->rx_len_err;
 	net_stats->rx_crc_errors    = hw_stats->rx_fcs_err;
 	net_stats->rx_frame_errors  = hw_stats->rx_align_err;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	net_stats->rx_over_errors   = hw_stats->rx_rrd_ov + hw_stats->rx_rxf_ov;
 
@@ -1241,6 +1280,8 @@ static struct net_device_stats *atl1e_get_stats(struct net_device *netdev)
 	net_stats->tx_errors = hw_stats->tx_late_col + hw_stats->tx_abort_col +
 			       hw_stats->tx_underrun + hw_stats->tx_trunc;
 =======
+=======
+>>>>>>> v3.18
 	net_stats->rx_dropped       = hw_stats->rx_rrd_ov;
 
 	net_stats->tx_errors = hw_stats->tx_late_col +
@@ -1248,12 +1289,21 @@ static struct net_device_stats *atl1e_get_stats(struct net_device *netdev)
 			       hw_stats->tx_underrun +
 			       hw_stats->tx_trunc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	net_stats->tx_fifo_errors    = hw_stats->tx_underrun;
 	net_stats->tx_aborted_errors = hw_stats->tx_abort_col;
 	net_stats->tx_window_errors  = hw_stats->tx_late_col;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	net_stats->rx_packets = hw_stats->rx_ok + net_stats->rx_errors;
+	net_stats->tx_packets = hw_stats->tx_ok + net_stats->tx_errors;
+
+>>>>>>> v3.18
 =======
 	net_stats->rx_packets = hw_stats->rx_ok + net_stats->rx_errors;
 	net_stats->tx_packets = hw_stats->tx_ok + net_stats->tx_errors;
@@ -1495,7 +1545,12 @@ static void atl1e_clean_rx_irq(struct atl1e_adapter *adapter, u8 que,
 
 			/* error packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (prrs->pkt_flag & RRS_IS_ERR_FRAME) {
+=======
+			if ((prrs->pkt_flag & RRS_IS_ERR_FRAME) &&
+			    !(netdev->features & NETIF_F_RXALL)) {
+>>>>>>> v3.18
 =======
 			if ((prrs->pkt_flag & RRS_IS_ERR_FRAME) &&
 			    !(netdev->features & NETIF_F_RXALL)) {
@@ -1513,12 +1568,18 @@ static void atl1e_clean_rx_irq(struct atl1e_adapter *adapter, u8 que,
 
 			packet_size = ((prrs->word1 >> RRS_PKT_SIZE_SHIFT) &
 <<<<<<< HEAD
+<<<<<<< HEAD
 					RRS_PKT_SIZE_MASK) - 4; /* CRC */
 =======
+=======
+>>>>>>> v3.18
 					RRS_PKT_SIZE_MASK);
 			if (likely(!(netdev->features & NETIF_F_RXFCS)))
 				packet_size -= 4; /* CRC */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			skb = netdev_alloc_skb_ip_align(netdev, packet_size);
 			if (skb == NULL)
@@ -1698,6 +1759,7 @@ static int atl1e_tso_csum(struct atl1e_adapter *adapter,
 		       struct sk_buff *skb, struct atl1e_tpd_desc *tpd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 hdr_len;
 	u32 real_len;
 	unsigned short offload_type;
@@ -1710,6 +1772,8 @@ static int atl1e_tso_csum(struct atl1e_adapter *adapter,
 				return -1;
 		}
 =======
+=======
+>>>>>>> v3.18
 	unsigned short offload_type;
 	u8 hdr_len;
 	u32 real_len;
@@ -1721,6 +1785,9 @@ static int atl1e_tso_csum(struct atl1e_adapter *adapter,
 		if (err < 0)
 			return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		offload_type = skb_shinfo(skb)->gso_type;
 
@@ -2361,7 +2428,12 @@ static int atl1e_init_netdev(struct net_device *netdev, struct pci_dev *pdev)
 	netdev->features = netdev->hw_features | NETIF_F_LLTX |
 			   NETIF_F_HW_VLAN_CTAG_TX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	/* not enabled by default */
+	netdev->hw_features |= NETIF_F_RXALL | NETIF_F_RXFCS;
+>>>>>>> v3.18
 =======
 	/* not enabled by default */
 	netdev->hw_features |= NETIF_F_RXALL | NETIF_F_RXFCS;
@@ -2511,7 +2583,11 @@ err_register:
 err_sw_init:
 err_eeprom:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(adapter->hw.hw_addr);
+=======
+	pci_iounmap(pdev, adapter->hw.hw_addr);
+>>>>>>> v3.18
 =======
 	pci_iounmap(pdev, adapter->hw.hw_addr);
 >>>>>>> v3.18
@@ -2553,7 +2629,11 @@ static void atl1e_remove(struct pci_dev *pdev)
 	atl1e_free_ring_resources(adapter);
 	atl1e_force_ps(&adapter->hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(adapter->hw.hw_addr);
+=======
+	pci_iounmap(pdev, adapter->hw.hw_addr);
+>>>>>>> v3.18
 =======
 	pci_iounmap(pdev, adapter->hw.hw_addr);
 >>>>>>> v3.18
@@ -2662,6 +2742,7 @@ static struct pci_driver atl1e_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * atl1e_init_module - Driver Registration Routine
  *
@@ -2686,6 +2767,9 @@ static void __exit atl1e_exit_module(void)
 
 module_init(atl1e_init_module);
 module_exit(atl1e_exit_module);
+=======
+module_pci_driver(atl1e_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(atl1e_driver);
 >>>>>>> v3.18

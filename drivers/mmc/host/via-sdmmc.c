@@ -1270,7 +1270,10 @@ static int via_sd_suspend(struct pci_dev *pcidev, pm_message_t state)
 {
 	struct via_crdr_mmc_host *host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1280,8 +1283,11 @@ static int via_sd_suspend(struct pci_dev *pcidev, pm_message_t state)
 	via_save_sdcreg(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mmc_suspend_host(host->mmc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_save_state(pcidev);
@@ -1290,7 +1296,11 @@ static int via_sd_suspend(struct pci_dev *pcidev, pm_message_t state)
 	pci_set_power_state(pcidev, pci_choose_state(pcidev, state));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1327,8 +1337,11 @@ static int via_sd_resume(struct pci_dev *pcidev)
 	via_init_sdc_pm(sdhost);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mmc_resume_host(sdhost->mmc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

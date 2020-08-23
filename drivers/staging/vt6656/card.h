@@ -33,6 +33,7 @@
 /* init card type */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _CARD_PHY_TYPE {
     PHY_TYPE_AUTO = 0,
     PHY_TYPE_11B,
@@ -73,6 +74,8 @@ int CARDbRadioPowerOn(struct vnt_private *pDevice);
 u8 CARDbyGetPktType(struct vnt_private *pDevice);
 void CARDvSetBSSMode(struct vnt_private *pDevice);
 =======
+=======
+>>>>>>> v3.18
 #define CB_MAX_CHANNEL_24G	14
 #define CB_MAX_CHANNEL_5G	42 /* add channel9(5045MHz), 41==>42 */
 #define CB_MAX_CHANNEL		(CB_MAX_CHANNEL_24G + CB_MAX_CHANNEL_5G)
@@ -95,6 +98,9 @@ int vnt_radio_power_off(struct vnt_private *);
 int vnt_radio_power_on(struct vnt_private *);
 u8 vnt_get_pkt_type(struct vnt_private *);
 void vnt_set_bss_mode(struct vnt_private *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __CARD_H__ */

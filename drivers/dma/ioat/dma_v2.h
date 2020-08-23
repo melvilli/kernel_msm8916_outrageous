@@ -124,7 +124,10 @@ struct ioat_ring_ent {
 	union {
 		struct ioat_dma_descriptor *hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ioat_fill_descriptor *fill;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		struct ioat_xor_descriptor *xor;
@@ -162,7 +165,10 @@ static inline void ioat2_set_chainaddr(struct ioat2_dma_chan *ioat, u64 addr)
 int ioat2_dma_probe(struct ioatdma_device *dev, int dca);
 int ioat3_dma_probe(struct ioatdma_device *dev, int dca);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ioat3_dma_remove(struct ioatdma_device *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dca_provider *ioat2_dca_init(struct pci_dev *pdev, void __iomem *iobase);

@@ -11,6 +11,12 @@ struct nouveau_handle {
 	u32 priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8  route;
+	u64 token;
+
+>>>>>>> v3.18
 =======
 	u8  route;
 	u64 token;
@@ -27,12 +33,18 @@ int  nouveau_handle_init(struct nouveau_handle *);
 int  nouveau_handle_fini(struct nouveau_handle *, bool suspend);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int  nouveau_handle_new(struct nouveau_object *, u32 parent, u32 handle,
 			u16 oclass, void *data, u32 size,
 			struct nouveau_object **);
 int  nouveau_handle_del(struct nouveau_object *, u32 parent, u32 handle);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nouveau_object *
 nouveau_handle_ref(struct nouveau_object *, u32 name);

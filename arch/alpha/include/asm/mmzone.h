@@ -72,8 +72,11 @@ PLAT_NODE_DATA_LOCALNR(unsigned long p, int n)
 #define virt_to_page(kaddr)	pfn_to_page(__pa(kaddr) >> PAGE_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VALID_PAGE(page)	(((page) - mem_map) < max_mapnr)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define pmd_page(pmd)		(pfn_to_page(pmd_val(pmd) >> 32))

@@ -6,6 +6,10 @@ apparmor-y := apparmorfs.o audit.o capability.o context.o ipc.o lib.o match.o \
               path.o domain.o policy.o policy_unpack.o procattr.o lsm.o \
               resource.o sid.o file.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+apparmor-$(CONFIG_SECURITY_APPARMOR_HASH) += crypto.o
+>>>>>>> v3.18
 =======
 apparmor-$(CONFIG_SECURITY_APPARMOR_HASH) += crypto.o
 >>>>>>> v3.18
@@ -23,13 +27,19 @@ cmd_make-caps = echo "static const char *const capability_names[] = {" > $@ ;\
 	sed $< >>$@ -r -n -e '/CAP_FS_MASK/d' \
 	-e 's/^\#define[ \t]+CAP_([A-Z0-9_]+)[ \t]+([0-9]+)/[\2] = "\L\1",/p';\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	echo "};" >> $@
 =======
+=======
+>>>>>>> v3.18
 	echo "};" >> $@ ;\
 	echo -n '\#define AA_FS_CAPS_MASK "' >> $@ ;\
 	sed $< -r -n -e '/CAP_FS_MASK/d' \
 	    -e 's/^\#define[ \t]+CAP_([A-Z0-9_]+)[ \t]+([0-9]+)/\L\1/p' | \
 	     tr '\n' ' ' | sed -e 's/ $$/"\n/' >> $@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

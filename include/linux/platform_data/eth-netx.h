@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/mach-netx/include/mach/eth.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Copyright (c) 2005 Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix
@@ -21,8 +24,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ASMARM_ARCH_ETH_H
 #define ASMARM_ARCH_ETH_H
+=======
+#ifndef __ETH_NETX_H
+#define __ETH_NETX_H
+>>>>>>> v3.18
 =======
 #ifndef __ETH_NETX_H
 #define __ETH_NETX_H

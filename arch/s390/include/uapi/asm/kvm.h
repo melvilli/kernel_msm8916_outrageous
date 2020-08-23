@@ -16,7 +16,10 @@
 
 #define __KVM_S390
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __KVM_HAVE_GUEST_DEBUG
 
 /* Device control API: s390-specific devices */
@@ -63,6 +66,9 @@ struct kvm_s390_io_adapter_req {
 /* kvm attributes for mem_ctrl */
 #define KVM_S390_VM_MEM_ENABLE_CMMA	0
 #define KVM_S390_VM_MEM_CLR_CMMA	1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* for KVM_GET_REGS and KVM_SET_REGS */
@@ -84,8 +90,11 @@ struct kvm_fpu {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_debug_exit_arch {
 =======
+=======
+>>>>>>> v3.18
 #define KVM_GUESTDBG_USE_HW_BP		0x00010000
 
 #define KVM_HW_BP			1
@@ -104,12 +113,21 @@ struct kvm_hw_breakpoint {
 	__u64 len;
 	__u8 type;
 	__u8 pad[7]; /* Should be set to 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* for KVM_SET_GUEST_DEBUG */
 struct kvm_guest_debug_arch {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u32 nr_hw_bp;
+	__u32 pad; /* Should be set to 0 */
+	struct kvm_hw_breakpoint __user *hw_bp;
+>>>>>>> v3.18
 =======
 	__u32 nr_hw_bp;
 	__u32 pad; /* Should be set to 0 */
@@ -122,6 +140,11 @@ struct kvm_guest_debug_arch {
 #define KVM_SYNC_ACRS   (1UL << 2)
 #define KVM_SYNC_CRS    (1UL << 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KVM_SYNC_ARCH0  (1UL << 4)
+#define KVM_SYNC_PFAULT (1UL << 5)
+>>>>>>> v3.18
 =======
 #define KVM_SYNC_ARCH0  (1UL << 4)
 #define KVM_SYNC_PFAULT (1UL << 5)
@@ -133,7 +156,10 @@ struct kvm_sync_regs {
 	__u32 acrs[16];	/* access registers */
 	__u64 crs[16];	/* control registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__u64 todpr;	/* tod programmable register [ARCH0] */
 	__u64 cputm;	/* cpu timer [ARCH0] */
 	__u64 ckc;	/* clock comparator [ARCH0] */
@@ -142,6 +168,9 @@ struct kvm_sync_regs {
 	__u64 pft;	/* pfault token [PFAULT] */
 	__u64 pfs;	/* pfault select [PFAULT] */
 	__u64 pfc;	/* pfault compare [PFAULT] */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -150,11 +179,17 @@ struct kvm_sync_regs {
 #define KVM_REG_S390_CPU_TIMER  (KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x3)
 #define KVM_REG_S390_CLOCK_COMP (KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define KVM_REG_S390_PFTOKEN	(KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x5)
 #define KVM_REG_S390_PFCOMPARE	(KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x6)
 #define KVM_REG_S390_PFSELECT	(KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x7)
 #define KVM_REG_S390_PP		(KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x8)
 #define KVM_REG_S390_GBEA	(KVM_REG_S390 | KVM_REG_SIZE_U64 | 0x9)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

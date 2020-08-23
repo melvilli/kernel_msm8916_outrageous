@@ -83,6 +83,10 @@
 #define PS_CALLINC_MASK		0x00030000
 #define PS_OWB_SHIFT		8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PS_OWB_WIDTH		4
+>>>>>>> v3.18
 =======
 #define PS_OWB_WIDTH		4
 >>>>>>> v3.18

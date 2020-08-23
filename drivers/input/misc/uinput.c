@@ -21,6 +21,11 @@
  *
  * Changes/Revisions:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	0.4	01/09/2014 (Benjamin Tissoires <benjamin.tissoires@redhat.com>)
+ *		- add UI_GET_SYSNAME ioctl
+>>>>>>> v3.18
 =======
  *	0.4	01/09/2014 (Benjamin Tissoires <benjamin.tissoires@redhat.com>)
  *		- add UI_GET_SYSNAME ioctl
@@ -315,8 +320,11 @@ static int uinput_validate_absbits(struct input_dev *dev)
 {
 	unsigned int cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval = 0;
 =======
+=======
+>>>>>>> v3.18
 	int nslot;
 
 	if (!test_bit(EV_ABS, dev->evbit))
@@ -325,6 +333,9 @@ static int uinput_validate_absbits(struct input_dev *dev)
 	/*
 	 * Check if absmin/absmax/absfuzz/absflat are sane.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (cnt = 0; cnt < ABS_CNT; cnt++) {
@@ -342,8 +353,12 @@ static int uinput_validate_absbits(struct input_dev *dev)
 				input_abs_get_min(dev, cnt),
 				input_abs_get_max(dev, cnt));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			retval = -EINVAL;
 			break;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -359,12 +374,15 @@ static int uinput_validate_absbits(struct input_dev *dev)
 				input_abs_get_min(dev, cnt),
 				input_abs_get_max(dev, cnt));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			retval = -EINVAL;
 			break;
 		}
 	}
 	return retval;
 =======
+=======
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 	}
@@ -377,6 +395,9 @@ static int uinput_validate_absbits(struct input_dev *dev)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -444,6 +465,7 @@ static int uinput_setup_device(struct uinput_device *udev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* check if absmin/absmax/absfuzz/absflat are filled as
 	 * told in Documentation/input/input-programming.txt */
 	if (test_bit(EV_ABS, dev->evbit)) {
@@ -462,6 +484,11 @@ static int uinput_setup_device(struct uinput_device *udev,
 	if (retval < 0)
 		goto exit;
 >>>>>>> v3.18
+=======
+	retval = uinput_validate_absbits(dev);
+	if (retval < 0)
+		goto exit;
+>>>>>>> v3.18
 
 	udev->state = UIST_SETUP_COMPLETE;
 	retval = count;
@@ -471,6 +498,7 @@ static int uinput_setup_device(struct uinput_device *udev,
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t uinput_inject_event(struct uinput_device *udev,
 				   const char __user *buffer, size_t count)
@@ -487,6 +515,8 @@ static ssize_t uinput_inject_event(struct uinput_device *udev,
 
 	return input_event_size();
 =======
+=======
+>>>>>>> v3.18
 static ssize_t uinput_inject_events(struct uinput_device *udev,
 				    const char __user *buffer, size_t count)
 {
@@ -511,6 +541,9 @@ static ssize_t uinput_inject_events(struct uinput_device *udev,
 	}
 
 	return bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -529,7 +562,11 @@ static ssize_t uinput_write(struct file *file, const char __user *buffer,
 
 	retval = udev->state == UIST_CREATED ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uinput_inject_event(udev, buffer, count) :
+=======
+			uinput_inject_events(udev, buffer, count) :
+>>>>>>> v3.18
 =======
 			uinput_inject_events(udev, buffer, count) :
 >>>>>>> v3.18
@@ -733,7 +770,10 @@ static int uinput_ff_upload_from_user(const char __user *buffer,
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int uinput_str_to_user(void __user *dest, const char *str,
 			      unsigned int maxlen)
 {
@@ -759,6 +799,9 @@ static int uinput_str_to_user(void __user *dest, const char *str,
 	return ret ? -EFAULT : len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 				 unsigned long arg, void __user *p)
@@ -770,6 +813,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 	struct uinput_request   *req;
 	char			*phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char		*name;
+	unsigned int		size;
+>>>>>>> v3.18
 =======
 	const char		*name;
 	unsigned int		size;
@@ -786,6 +834,7 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 	}
 
 	switch (cmd) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case UI_DEV_CREATE:
 			retval = uinput_create_device(udev);
@@ -835,6 +884,8 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			retval = uinput_set_bit(arg, propbit, INPUT_PROP_MAX);
 			break;
 =======
+=======
+>>>>>>> v3.18
 		case UI_GET_VERSION:
 			if (put_user(UINPUT_VERSION,
 				     (unsigned int __user *)p))
@@ -888,6 +939,9 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 		case UI_SET_PROPBIT:
 			retval = uinput_set_bit(arg, propbit, INPUT_PROP_MAX);
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		case UI_SET_PHYS:
@@ -905,7 +959,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			kfree(udev->dev->phys);
 			udev->dev->phys = phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -914,7 +972,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			retval = uinput_ff_upload_from_user(p, &ff_up);
 			if (retval)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -924,7 +986,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			    !req->u.upload.effect) {
 				retval = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -939,7 +1005,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 
 			retval = uinput_ff_upload_to_user(p, &ff_up);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -948,7 +1018,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			if (copy_from_user(&ff_erase, p, sizeof(ff_erase))) {
 				retval = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -958,7 +1032,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			if (!req || req->code != UI_FF_ERASE) {
 				retval = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -969,22 +1047,32 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			if (copy_to_user(p, &ff_erase, sizeof(ff_erase))) {
 				retval = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
 			}
 
 			break;
 =======
+=======
+>>>>>>> v3.18
 				goto out;
 			}
 
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		case UI_END_FF_UPLOAD:
 			retval = uinput_ff_upload_from_user(p, &ff_up);
 			if (retval)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -994,7 +1082,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			    !req->u.upload.effect) {
 				retval = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -1003,7 +1095,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			req->retval = ff_up.retval;
 			uinput_request_done(udev, req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -1012,7 +1108,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			if (copy_from_user(&ff_erase, p, sizeof(ff_erase))) {
 				retval = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -1022,7 +1122,11 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			if (!req || req->code != UI_FF_ERASE) {
 				retval = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+				goto out;
+>>>>>>> v3.18
 =======
 				goto out;
 >>>>>>> v3.18
@@ -1031,6 +1135,7 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 			req->retval = ff_erase.retval;
 			uinput_request_done(udev, req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 
 		default:
@@ -1038,6 +1143,8 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			goto out;
 	}
 
@@ -1056,6 +1163,9 @@ static long uinput_ioctl_handler(struct file *file, unsigned int cmd,
 	}
 
 	retval = -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	mutex_unlock(&udev->mutex);
@@ -1069,6 +1179,7 @@ static long uinput_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 #ifdef CONFIG_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define UI_SET_PHYS_COMPAT	_IOW(UINPUT_IOCTL_BASE, 108, compat_uptr_t)
 
@@ -1078,6 +1189,11 @@ static long uinput_compat_ioctl(struct file *file,
 	if (cmd == UI_SET_PHYS_COMPAT)
 		cmd = UI_SET_PHYS;
 
+=======
+static long uinput_compat_ioctl(struct file *file,
+				unsigned int cmd, unsigned long arg)
+{
+>>>>>>> v3.18
 =======
 static long uinput_compat_ioctl(struct file *file,
 				unsigned int cmd, unsigned long arg)

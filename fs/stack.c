@@ -45,7 +45,11 @@ void fsstack_copy_inode_size(struct inode *dst, struct inode *src)
 	 * is called, so take i_lock for that case.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * And if CONFIG_LBADF (on 32-bit), continue our effort to keep the
+=======
+	 * And if CONFIG_LBDAF (on 32-bit), continue our effort to keep the
+>>>>>>> v3.18
 =======
 	 * And if CONFIG_LBDAF (on 32-bit), continue our effort to keep the
 >>>>>>> v3.18

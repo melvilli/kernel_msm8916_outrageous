@@ -245,7 +245,11 @@ static void kvm_pit_ack_irq(struct kvm_irq_ack_notifier *kian)
 		 */
 		atomic_inc(&ps->pending);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (value > 0 && ps->reinject)
+=======
+	else if (value > 0)
+>>>>>>> v3.18
 =======
 	else if (value > 0)
 >>>>>>> v3.18
@@ -292,9 +296,13 @@ static void pit_do_work(struct kthread_work *work)
 	 */
 	spin_lock(&ps->inject_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ps->reinject)
 		inject = 1;
 	else if (ps->irq_ack) {
+=======
+	if (ps->irq_ack) {
+>>>>>>> v3.18
 =======
 	if (ps->irq_ack) {
 >>>>>>> v3.18
@@ -316,7 +324,11 @@ static void pit_do_work(struct kthread_work *work)
 		 * VCPU0, and only if its LVT0 is in EXTINT mode.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (atomic_read(&kvm->arch.vapics_in_nmi_mode) > 0)
+=======
+		if (kvm->arch.vapics_in_nmi_mode > 0)
+>>>>>>> v3.18
 =======
 		if (kvm->arch.vapics_in_nmi_mode > 0)
 >>>>>>> v3.18
@@ -331,15 +343,21 @@ static enum hrtimer_restart pit_timer_fn(struct hrtimer *data)
 	struct kvm_pit *pt = ps->kvm->arch.vpit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ps->reinject)
 		atomic_inc(&ps->pending);
 
 	queue_kthread_work(&pt->worker, &pt->expired);
 =======
+=======
+>>>>>>> v3.18
 	if (ps->reinject || !atomic_read(&ps->pending)) {
 		atomic_inc(&ps->pending);
 		queue_kthread_work(&pt->worker, &pt->expired);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ps->is_periodic) {

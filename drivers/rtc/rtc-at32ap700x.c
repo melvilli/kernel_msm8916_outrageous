@@ -142,7 +142,11 @@ static int at32_rtc_alarm_irq_enable(struct device *dev, unsigned int enabled)
 	spin_lock_irq(&rtc->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(enabled) {
+=======
+	if (enabled) {
+>>>>>>> v3.18
 =======
 	if (enabled) {
 >>>>>>> v3.18
@@ -209,10 +213,15 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 	rtc = devm_kzalloc(&pdev->dev, sizeof(struct rtc_at32ap700x),
 			   GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rtc) {
 		dev_dbg(&pdev->dev, "out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!rtc)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!rtc)
 		return -ENOMEM;
@@ -222,8 +231,12 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 	if (!regs) {
 		dev_dbg(&pdev->dev, "no mmio resource defined\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENXIO;
 		goto out;
+=======
+		return -ENXIO;
+>>>>>>> v3.18
 =======
 		return -ENXIO;
 >>>>>>> v3.18
@@ -233,8 +246,12 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 	if (irq <= 0) {
 		dev_dbg(&pdev->dev, "could not get irq\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENXIO;
 		goto out;
+=======
+		return -ENXIO;
+>>>>>>> v3.18
 =======
 		return -ENXIO;
 >>>>>>> v3.18
@@ -244,9 +261,14 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 	rtc->regs = devm_ioremap(&pdev->dev, regs->start, resource_size(regs));
 	if (!rtc->regs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		dev_dbg(&pdev->dev, "could not map I/O memory\n");
 		goto out;
+=======
+		dev_dbg(&pdev->dev, "could not map I/O memory\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		dev_dbg(&pdev->dev, "could not map I/O memory\n");
 		return -ENOMEM;
@@ -272,7 +294,11 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_dbg(&pdev->dev, "could not request irq %d\n", irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -285,8 +311,12 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(rtc->rtc)) {
 		dev_dbg(&pdev->dev, "could not register rtc device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = PTR_ERR(rtc->rtc);
 		goto out;
+=======
+		return PTR_ERR(rtc->rtc);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(rtc->rtc);
 >>>>>>> v3.18
@@ -299,10 +329,13 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out:
 	platform_set_drvdata(pdev, NULL);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -312,8 +345,11 @@ static int __exit at32_rtc_remove(struct platform_device *pdev)
 	device_init_wakeup(&pdev->dev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

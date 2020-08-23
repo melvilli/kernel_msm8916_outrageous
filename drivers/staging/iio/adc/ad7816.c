@@ -41,7 +41,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct ad7816_chip_info - chip specifc information
+=======
+ * struct ad7816_chip_info - chip specific information
+>>>>>>> v3.18
 =======
  * struct ad7816_chip_info - chip specific information
 >>>>>>> v3.18
@@ -123,8 +127,12 @@ static ssize_t ad7816_show_mode(struct device *dev,
 	if (chip->mode)
 		return sprintf(buf, "power-save\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return sprintf(buf, "full\n");
+=======
+	return sprintf(buf, "full\n");
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "full\n");
 >>>>>>> v3.18
@@ -184,9 +192,15 @@ static ssize_t ad7816_store_channel(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 10, &data);
 	if (ret)
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 10, &data);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 10, &data);
 	if (ret)
@@ -241,8 +255,13 @@ static ssize_t ad7816_show_value(struct device *dev,
 			data = (1 << AD7816_TEMP_FLOAT_OFFSET) - data;
 		return sprintf(buf, "%d.%.2d\n", value, data * 25);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		return sprintf(buf, "%u\n", data);
+=======
+	}
+	return sprintf(buf, "%u\n", data);
+>>>>>>> v3.18
 =======
 	}
 	return sprintf(buf, "%u\n", data);
@@ -295,8 +314,13 @@ static ssize_t ad7816_show_oti(struct device *dev,
 			AD7816_BOUND_VALUE_BASE);
 		return sprintf(buf, "%d\n", value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		return sprintf(buf, "%u\n", chip->oti_data[chip->channel_id]);
+=======
+	}
+	return sprintf(buf, "%u\n", chip->oti_data[chip->channel_id]);
+>>>>>>> v3.18
 =======
 	}
 	return sprintf(buf, "%u\n", chip->oti_data[chip->channel_id]);
@@ -315,7 +339,13 @@ static inline ssize_t ad7816_set_oti(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &value);
+=======
+	ret = kstrtol(buf, 10, &value);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtol(buf, 10, &value);
 	if (ret)
@@ -385,11 +415,17 @@ static int ad7816_probe(struct spi_device *spi_dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi_dev->dev, sizeof(*chip));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi_dev->dev, sizeof(*chip));
 	if (!indio_dev)
@@ -406,6 +442,7 @@ static int ad7816_probe(struct spi_device *spi_dev)
 	chip->convert_pin = pins[1];
 	chip->busy_pin = pins[2];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = gpio_request(chip->rdwr_pin, spi_get_device_id(spi_dev)->name);
 	if (ret) {
@@ -427,6 +464,8 @@ static int ad7816_probe(struct spi_device *spi_dev)
 			chip->busy_pin);
 		goto error_free_gpio_convert;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_gpio_request(&spi_dev->dev, chip->rdwr_pin,
 					spi_get_device_id(spi_dev)->name);
 	if (ret) {
@@ -449,6 +488,9 @@ static int ad7816_probe(struct spi_device *spi_dev)
 		dev_err(&spi_dev->dev, "Fail to request busy gpio PIN %d.\n",
 			chip->busy_pin);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	gpio_direction_input(chip->busy_pin);
@@ -460,6 +502,7 @@ static int ad7816_probe(struct spi_device *spi_dev)
 
 	if (spi_dev->irq) {
 		/* Only low trigger is supported in ad7816/7/8 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = request_threaded_irq(spi_dev->irq,
 					   NULL,
@@ -475,6 +518,8 @@ static int ad7816_probe(struct spi_device *spi_dev)
 	if (ret)
 		goto error_free_irq;
 =======
+=======
+>>>>>>> v3.18
 		ret = devm_request_threaded_irq(&spi_dev->dev, spi_dev->irq,
 						NULL,
 						&ad7816_event_handler,
@@ -488,12 +533,16 @@ static int ad7816_probe(struct spi_device *spi_dev)
 	ret = devm_iio_device_register(&spi_dev->dev, indio_dev);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(&spi_dev->dev, "%s temperature sensor and ADC registered.\n",
 			 indio_dev->name);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 error_free_irq:
 	free_irq(spi_dev->irq, indio_dev);
@@ -526,6 +575,8 @@ static int ad7816_remove(struct spi_device *spi_dev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct spi_device_id ad7816_id[] = {
@@ -544,7 +595,10 @@ static struct spi_driver ad7816_driver = {
 	},
 	.probe = ad7816_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ad7816_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ad7816_id,
@@ -553,8 +607,12 @@ module_spi_driver(ad7816_driver);
 
 MODULE_AUTHOR("Sonic Zhang <sonic.zhang@analog.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Analog Devices AD7816/7/8 digital"
 			" temperature sensor driver");
+=======
+MODULE_DESCRIPTION("Analog Devices AD7816/7/8 digital temperature sensor driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Analog Devices AD7816/7/8 digital temperature sensor driver");
 >>>>>>> v3.18

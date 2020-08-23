@@ -1,16 +1,22 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/serial/msm_serial.c - driver for msm7k serial device and console
  *
  * Copyright (C) 2007 Google, Inc.
  * Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
  * Author: Robert Love <rlove@google.com>
 =======
+=======
+>>>>>>> v3.18
  * Driver for msm7k serial device and console
  *
  * Copyright (C) 2007 Google, Inc.
  * Author: Robert Love <rlove@google.com>
  * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This software is licensed under the terms of the GNU General Public
@@ -28,6 +34,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/atomic.h>
+>>>>>>> v3.18
 =======
 #include <linux/atomic.h>
 >>>>>>> v3.18
@@ -38,7 +48,10 @@
 #include <linux/irq.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/console.h>
@@ -46,6 +59,7 @@
 #include <linux/tty_flip.h>
 #include <linux/serial_core.h>
 #include <linux/serial.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/nmi.h>
 #include <linux/clk.h>
@@ -76,6 +90,8 @@ struct msm_wakeup {
 };
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/platform_device.h>
 #include <linux/delay.h>
@@ -90,12 +106,16 @@ enum {
 	UARTDM_1P3,
 	UARTDM_1P4,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct msm_port {
 	struct uart_port	uart;
 	char			name[16];
 	struct clk		*clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int		imr;
 #ifdef CONFIG_SERIAL_MSM_CLOCK_CONTROL
@@ -132,6 +152,8 @@ static inline unsigned int use_low_power_wakeup(struct msm_port *msm_port)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	struct clk		*pclk;
 	unsigned int		imr;
 	int			is_uartdm;
@@ -147,6 +169,9 @@ static inline void wait_for_xmitr(struct uart_port *port)
 	}
 	msm_write(port, UART_CR_CMD_RESET_TX_READY, UART_CR);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void msm_stop_tx(struct uart_port *port)
@@ -181,6 +206,7 @@ static void msm_enable_ms(struct uart_port *port)
 	msm_write(port, msm_port->imr, UART_IMR);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SERIAL_MSM_CLOCK_CONTROL
 /* turn clock off if TX buffer is empty, otherwise reschedule */
@@ -303,6 +329,8 @@ static void handle_rx(struct uart_port *port)
 {
 	struct tty_struct *tty = port->state->port.tty;
 =======
+=======
+>>>>>>> v3.18
 static void handle_rx_dm(struct uart_port *port, unsigned int misr)
 {
 	struct tty_port *tport = &port->state->port;
@@ -363,6 +391,9 @@ static void handle_rx_dm(struct uart_port *port, unsigned int misr)
 static void handle_rx(struct uart_port *port)
 {
 	struct tty_port *tport = &port->state->port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int sr;
 
@@ -373,7 +404,11 @@ static void handle_rx(struct uart_port *port)
 	if ((msm_read(port, UART_SR) & UART_SR_OVERRUN)) {
 		port->icount.overrun++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tty_insert_flip_char(tty->port, 0, TTY_OVERRUN);
+=======
+		tty_insert_flip_char(tport, 0, TTY_OVERRUN);
+>>>>>>> v3.18
 =======
 		tty_insert_flip_char(tport, 0, TTY_OVERRUN);
 >>>>>>> v3.18
@@ -401,6 +436,7 @@ static void handle_rx(struct uart_port *port)
 		sr &= port->read_status_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sr & UART_SR_RX_BREAK) {
 			flag = TTY_BREAK;
 		} else if (sr & UART_SR_PAR_FRAME_ERR) {
@@ -413,6 +449,8 @@ static void handle_rx(struct uart_port *port)
 
 	tty_flip_buffer_push(tty->port);
 =======
+=======
+>>>>>>> v3.18
 		if (sr & UART_SR_RX_BREAK)
 			flag = TTY_BREAK;
 		else if (sr & UART_SR_PAR_FRAME_ERR)
@@ -432,6 +470,9 @@ static void reset_dm_count(struct uart_port *port, int count)
 	wait_for_xmitr(port);
 	msm_write(port, count, UARTDM_NCF_TX);
 	msm_read(port, UARTDM_NCF_TX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -439,6 +480,7 @@ static void handle_tx(struct uart_port *port)
 {
 	struct circ_buf *xmit = &port->state->xmit;
 	struct msm_port *msm_port = UART_TO_MSM(port);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int sent_tx;
 
@@ -471,6 +513,8 @@ static void handle_tx(struct uart_port *port)
 				msm_port->clk_off_delay, HRTIMER_MODE_REL);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	unsigned int tx_count, num_chars;
 	unsigned int tf_pointer = 0;
 	void __iomem *tf;
@@ -521,6 +565,9 @@ static void handle_tx(struct uart_port *port)
 	/* disable tx interrupts if nothing more to send */
 	if (uart_circ_empty(xmit))
 		msm_stop_tx(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (uart_circ_chars_pending(xmit) < WAKEUP_CHARS)
@@ -537,13 +584,17 @@ static void handle_delta_cts(struct uart_port *port)
 static irqreturn_t msm_irq(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct uart_port *port = dev_id;
 	struct msm_port *msm_port = UART_TO_MSM(port);
 	unsigned int misr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&port->lock, flags);
 	misr = msm_read(port, UART_MISR);
@@ -552,6 +603,8 @@ static irqreturn_t msm_irq(int irq, void *dev_id)
 	if (misr & (UART_IMR_RXLEV | UART_IMR_RXSTALE))
 		handle_rx(port);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&port->lock);
 	misr = msm_read(port, UART_MISR);
 	msm_write(port, 0, UART_IMR); /* disable interrupt */
@@ -562,6 +615,9 @@ static irqreturn_t msm_irq(int irq, void *dev_id)
 		else
 			handle_rx(port);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (misr & UART_IMR_TXLEV)
 		handle_tx(port);
@@ -570,7 +626,11 @@ static irqreturn_t msm_irq(int irq, void *dev_id)
 
 	msm_write(port, msm_port->imr, UART_IMR); /* restore interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&port->lock, flags);
+=======
+	spin_unlock(&port->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&port->lock);
 >>>>>>> v3.18
@@ -581,10 +641,14 @@ static irqreturn_t msm_irq(int irq, void *dev_id)
 static unsigned int msm_tx_empty(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ret;
 
 	ret = (msm_read(port, UART_SR) & UART_SR_TX_EMPTY) ? TIOCSER_TEMT : 0;
 	return ret;
+=======
+	return (msm_read(port, UART_SR) & UART_SR_TX_EMPTY) ? TIOCSER_TEMT : 0;
+>>>>>>> v3.18
 =======
 	return (msm_read(port, UART_SR) & UART_SR_TX_EMPTY) ? TIOCSER_TEMT : 0;
 >>>>>>> v3.18
@@ -596,7 +660,10 @@ static unsigned int msm_get_mctrl(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void msm_reset(struct uart_port *port)
 {
 	struct msm_port *msm_port = UART_TO_MSM(port);
@@ -614,6 +681,9 @@ static void msm_reset(struct uart_port *port)
 		msm_write(port, 0, UARTDM_DMEN);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void msm_set_mctrl(struct uart_port *port, unsigned int mctrl)
 {
@@ -639,6 +709,7 @@ static void msm_break_ctl(struct uart_port *port, int break_ctl)
 		msm_write(port, UART_CR_CMD_STOP_BREAK, UART_CR);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void msm_set_baud_rate(struct uart_port *port, unsigned int baud)
 {
@@ -700,6 +771,8 @@ static void msm_set_baud_rate(struct uart_port *port, unsigned int baud)
 
 	/* RX stale watermark */
 =======
+=======
+>>>>>>> v3.18
 struct msm_baud_map {
 	u16	divisor;
 	u8	code;
@@ -754,6 +827,9 @@ static int msm_set_baud_rate(struct uart_port *port, unsigned int baud)
 
 	/* RX stale watermark */
 	rxstale = entry->rxstale;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	watermark = UART_IPR_STALE_LSB & rxstale;
 	watermark |= UART_IPR_RXSTALE_LAST;
@@ -766,6 +842,7 @@ static int msm_set_baud_rate(struct uart_port *port, unsigned int baud)
 
 	/* set TX watermark */
 	msm_write(port, 10, UART_TFWR);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -838,6 +915,8 @@ static void msm_deinit_clock(struct uart_port *port)
 
 }
 =======
+=======
+>>>>>>> v3.18
 
 	if (msm_port->is_uartdm) {
 		msm_write(port, UART_CR_CMD_RESET_STALE_INT, UART_CR);
@@ -857,6 +936,9 @@ static void msm_init_clock(struct uart_port *port)
 	msm_serial_set_mnd_regs(port);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int msm_startup(struct uart_port *port)
 {
@@ -873,11 +955,15 @@ static int msm_startup(struct uart_port *port)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef CONFIG_PM_RUNTIME
 	msm_init_clock(port);
 #endif
 	pm_runtime_get_sync(port->dev);
+=======
+	msm_init_clock(port);
+>>>>>>> v3.18
 =======
 	msm_init_clock(port);
 >>>>>>> v3.18
@@ -904,10 +990,13 @@ static int msm_startup(struct uart_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msm_reset(port);
 
 	msm_write(port, 0x05, UART_CR);	/* enable TX & RX */
 =======
+=======
+>>>>>>> v3.18
 	data = 0;
 	if (!port->cons || (port->cons && !(port->cons->flags & CON_ENABLED))) {
 		msm_write(port, UART_CR_CMD_PROTECTION_EN, UART_CR);
@@ -921,11 +1010,15 @@ static int msm_startup(struct uart_port *port)
 	/* Make sure IPR is not 0 to start with*/
 	if (msm_port->is_uartdm)
 		msm_write(port, UART_IPR_STALE_LSB, UART_IPR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* turn on RX and CTS interrupts */
 	msm_port->imr = UART_IMR_RXLEV | UART_IMR_RXSTALE |
 			UART_IMR_CURRENT_CTS;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	msm_write(port, msm_port->imr, UART_IMR);
 
@@ -944,6 +1037,8 @@ static int msm_startup(struct uart_port *port)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (msm_port->is_uartdm) {
 		msm_write(port, 0xFFFFFF, UARTDM_DMRX);
@@ -952,6 +1047,9 @@ static int msm_startup(struct uart_port *port)
 	}
 
 	msm_write(port, msm_port->imr, UART_IMR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -960,6 +1058,7 @@ static void msm_shutdown(struct uart_port *port)
 {
 	struct msm_port *msm_port = UART_TO_MSM(port);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (msm_port->uim)
 		msm_write(port,
@@ -982,12 +1081,17 @@ static void msm_shutdown(struct uart_port *port)
 #endif
 	pm_runtime_put_sync(port->dev);
 =======
+=======
+>>>>>>> v3.18
 	msm_port->imr = 0;
 	msm_write(port, 0, UART_IMR); /* disable interrupts */
 
 	clk_disable_unprepare(msm_port->clk);
 
 	free_irq(port->irq, port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -998,9 +1102,12 @@ static void msm_set_termios(struct uart_port *port, struct ktermios *termios,
 	unsigned int baud, mr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!termios->c_cflag)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&port->lock, flags);
@@ -1008,7 +1115,13 @@ static void msm_set_termios(struct uart_port *port, struct ktermios *termios,
 	/* calculate and set baud rate */
 	baud = uart_get_baud_rate(port, termios, old, 300, 115200);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msm_set_baud_rate(port, baud);
+=======
+	baud = msm_set_baud_rate(port, baud);
+	if (tty_termios_baud_rate(termios))
+		tty_termios_encode_baud_rate(termios, baud, baud);
+>>>>>>> v3.18
 =======
 	baud = msm_set_baud_rate(port, baud);
 	if (tty_termios_baud_rate(termios))
@@ -1069,16 +1182,22 @@ static void msm_set_termios(struct uart_port *port, struct ktermios *termios,
 	if (termios->c_iflag & INPCK)
 		port->read_status_mask |= UART_SR_PAR_FRAME_ERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
 		port->read_status_mask |= UART_SR_RX_BREAK;
 
 	uart_update_timeout(port, termios->c_cflag, baud);
 =======
+=======
+>>>>>>> v3.18
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 		port->read_status_mask |= UART_SR_RX_BREAK;
 
 	uart_update_timeout(port, termios->c_cflag, baud);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&port->lock, flags);
 }
@@ -1092,6 +1211,7 @@ static void msm_release_port(struct uart_port *port)
 {
 	struct platform_device *pdev = to_platform_device(port->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *resource;
 	resource_size_t size;
 
@@ -1100,6 +1220,8 @@ static void msm_release_port(struct uart_port *port)
 		return;
 	size = resource->end - resource->start + 1;
 =======
+=======
+>>>>>>> v3.18
 	struct resource *uart_resource;
 	resource_size_t size;
 
@@ -1107,6 +1229,9 @@ static void msm_release_port(struct uart_port *port)
 	if (unlikely(!uart_resource))
 		return;
 	size = resource_size(uart_resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	release_mem_region(port->mapbase, size);
@@ -1118,6 +1243,7 @@ static int msm_request_port(struct uart_port *port)
 {
 	struct platform_device *pdev = to_platform_device(port->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *resource;
 	resource_size_t size;
 
@@ -1128,6 +1254,8 @@ static int msm_request_port(struct uart_port *port)
 
 	if (unlikely(!request_mem_region(port->mapbase, size, "msm_serial")))
 =======
+=======
+>>>>>>> v3.18
 	struct resource *uart_resource;
 	resource_size_t size;
 	int ret;
@@ -1139,11 +1267,15 @@ static int msm_request_port(struct uart_port *port)
 	size = resource_size(uart_resource);
 
 	if (!request_mem_region(port->mapbase, size, "msm_serial"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EBUSY;
 
 	port->membase = ioremap(port->mapbase, size);
 	if (!port->membase) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		release_mem_region(port->mapbase, size);
 		return -EBUSY;
@@ -1151,6 +1283,8 @@ static int msm_request_port(struct uart_port *port)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		ret = -EBUSY;
 		goto fail_release_port;
 	}
@@ -1160,16 +1294,22 @@ static int msm_request_port(struct uart_port *port)
 fail_release_port:
 	release_mem_region(port->mapbase, size);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void msm_config_port(struct uart_port *port, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flags & UART_CONFIG_TYPE) {
 		port->type = PORT_MSM;
 		msm_request_port(port);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (flags & UART_CONFIG_TYPE) {
@@ -1177,6 +1317,9 @@ static void msm_config_port(struct uart_port *port, int flags)
 		ret = msm_request_port(port);
 		if (ret)
 			return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1194,13 +1337,17 @@ static void msm_power(struct uart_port *port, unsigned int state,
 		      unsigned int oldstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct msm_port *msm_port = UART_TO_MSM(port);
 
 	switch (state) {
 	case 0:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = clk_prepare_enable(msm_port->clk);
 		if (ret)
@@ -1217,6 +1364,8 @@ static void msm_power(struct uart_port *port, unsigned int state,
 }
 
 =======
+=======
+>>>>>>> v3.18
 		clk_prepare_enable(msm_port->clk);
 		clk_prepare_enable(msm_port->pclk);
 		break;
@@ -1331,6 +1480,9 @@ static void msm_poll_put_char(struct uart_port *port, unsigned char c)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct uart_ops msm_uart_pops = {
 	.tx_empty = msm_tx_empty,
@@ -1351,11 +1503,17 @@ static struct uart_ops msm_uart_pops = {
 	.verify_port = msm_verify_port,
 	.pm = msm_power,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CONSOLE_POLL
 	.poll_get_char	= msm_poll_get_char,
 	.poll_put_char	= msm_poll_put_char,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1366,7 +1524,11 @@ static struct msm_port msm_uart_ports[] = {
 			.ops = &msm_uart_pops,
 			.flags = UPF_BOOT_AUTOCONF,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.fifosize = 512,
+=======
+			.fifosize = 64,
+>>>>>>> v3.18
 =======
 			.fifosize = 64,
 >>>>>>> v3.18
@@ -1379,7 +1541,11 @@ static struct msm_port msm_uart_ports[] = {
 			.ops = &msm_uart_pops,
 			.flags = UPF_BOOT_AUTOCONF,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.fifosize = 512,
+=======
+			.fifosize = 64,
+>>>>>>> v3.18
 =======
 			.fifosize = 64,
 >>>>>>> v3.18
@@ -1398,8 +1564,14 @@ static struct msm_port msm_uart_ports[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART_NR 256
 static inline struct uart_port * get_port_from_line(unsigned int line)
+=======
+#define UART_NR	ARRAY_SIZE(msm_uart_ports)
+
+static inline struct uart_port *get_port_from_line(unsigned int line)
+>>>>>>> v3.18
 =======
 #define UART_NR	ARRAY_SIZE(msm_uart_ports)
 
@@ -1410,6 +1582,7 @@ static inline struct uart_port *get_port_from_line(unsigned int line)
 }
 
 #ifdef CONFIG_SERIAL_MSM_CONSOLE
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -1456,6 +1629,8 @@ static void msm_console_putchar(struct uart_port *port, int c)
 
 	msm_write(port, c, UART_TF);
 =======
+=======
+>>>>>>> v3.18
 static void __msm_console_write(struct uart_port *port, const char *s,
 				unsigned int count, bool is_uartdm)
 {
@@ -1512,6 +1687,9 @@ static void __msm_console_write(struct uart_port *port, const char *s,
 		i += num_chars;
 	}
 	spin_unlock(&port->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1521,7 +1699,10 @@ static void msm_console_write(struct console *co, const char *s,
 	struct uart_port *port;
 	struct msm_port *msm_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int locked;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1530,6 +1711,7 @@ static void msm_console_write(struct console *co, const char *s,
 	port = get_port_from_line(co->index);
 	msm_port = UART_TO_MSM(port);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* not pretty, but we can end up here via various convoluted paths */
 	if (port->sysrq || oops_in_progress)
@@ -1546,12 +1728,19 @@ static void msm_console_write(struct console *co, const char *s,
 =======
 	__msm_console_write(port, s, count, msm_port->is_uartdm);
 >>>>>>> v3.18
+=======
+	__msm_console_write(port, s, count, msm_port->is_uartdm);
+>>>>>>> v3.18
 }
 
 static int __init msm_console_setup(struct console *co, char *options)
 {
 	struct uart_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct msm_port *msm_port;
+>>>>>>> v3.18
 =======
 	struct msm_port *msm_port;
 >>>>>>> v3.18
@@ -1562,6 +1751,10 @@ static int __init msm_console_setup(struct console *co, char *options)
 
 	port = get_port_from_line(co->index);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	msm_port = UART_TO_MSM(port);
+>>>>>>> v3.18
 =======
 	msm_port = UART_TO_MSM(port);
 >>>>>>> v3.18
@@ -1569,6 +1762,7 @@ static int __init msm_console_setup(struct console *co, char *options)
 	if (unlikely(!port->membase))
 		return -ENXIO;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	port->cons = co;
 
@@ -1578,6 +1772,9 @@ static int __init msm_console_setup(struct console *co, char *options)
 	msm_init_clock(port);
 #endif
 	pm_runtime_resume(port->dev);
+=======
+	msm_init_clock(port);
+>>>>>>> v3.18
 =======
 	msm_init_clock(port);
 >>>>>>> v3.18
@@ -1598,21 +1795,30 @@ static int __init msm_console_setup(struct console *co, char *options)
 	msm_reset(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "msm_serial: console setup on port #%d\n", port->line);
 =======
+=======
+>>>>>>> v3.18
 	if (msm_port->is_uartdm) {
 		msm_write(port, UART_CR_CMD_PROTECTION_EN, UART_CR);
 		msm_write(port, UART_CR_TX_ENABLE, UART_CR);
 	}
 
 	pr_info("msm_serial: console setup on port #%d\n", port->line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return uart_set_options(port, co, baud, parity, bits, flow);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 msm_serial_early_write(struct console *con, const char *s, unsigned n)
 {
@@ -1656,6 +1862,9 @@ EARLYCON_DECLARE(msm_serial_dm, msm_serial_early_console_setup_dm);
 OF_EARLYCON_DECLARE(msm_serial_dm, "qcom,msm-uartdm",
 		    msm_serial_early_console_setup_dm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct uart_driver msm_uart_driver;
 
@@ -1670,7 +1879,11 @@ static struct console msm_console = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MSM_CONSOLE	&msm_console
+=======
+#define MSM_CONSOLE	(&msm_console)
+>>>>>>> v3.18
 =======
 #define MSM_CONSOLE	(&msm_console)
 >>>>>>> v3.18
@@ -1688,8 +1901,11 @@ static struct uart_driver msm_uart_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init msm_serial_probe(struct platform_device *pdev)
 =======
+=======
+>>>>>>> v3.18
 static atomic_t msm_uart_next_id = ATOMIC_INIT(0);
 
 static const struct of_device_id msm_uartdm_table[] = {
@@ -1701,27 +1917,40 @@ static const struct of_device_id msm_uartdm_table[] = {
 };
 
 static int msm_serial_probe(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct msm_port *msm_port;
 	struct resource *resource;
 	struct uart_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq;
 	struct msm_serial_platform_data *pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *id;
 	int irq;
 
 	if (pdev->id == -1)
 		pdev->id = atomic_inc_return(&msm_uart_next_id) - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(pdev->id < 0 || pdev->id >= UART_NR))
 		return -ENXIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "msm_serial: detected port #%d\n", pdev->id);
+=======
+	dev_info(&pdev->dev, "msm_serial: detected port #%d\n", pdev->id);
+>>>>>>> v3.18
 =======
 	dev_info(&pdev->dev, "msm_serial: detected port #%d\n", pdev->id);
 >>>>>>> v3.18
@@ -1730,6 +1959,7 @@ static int msm_serial_probe(struct platform_device *pdev)
 	port->dev = &pdev->dev;
 	msm_port = UART_TO_MSM(port);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	msm_port->clk = clk_get(&pdev->dev, "core_clk");
 	if (unlikely(IS_ERR(msm_port->clk)))
@@ -1796,6 +2026,8 @@ static int __init msm_uim_probe(struct platform_device *pdev)
 
 	msm_port->uim = true;
 =======
+=======
+>>>>>>> v3.18
 	id = of_match_device(msm_uartdm_table, &pdev->dev);
 	if (id)
 		msm_port->is_uartdm = (unsigned long)id->data;
@@ -1816,6 +2048,9 @@ static int __init msm_uim_probe(struct platform_device *pdev)
 
 	port->uartclk = clk_get_rate(msm_port->clk);
 	dev_info(&pdev->dev, "uartclk = %d\n", port->uartclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	resource = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -1835,6 +2070,7 @@ static int __init msm_uim_probe(struct platform_device *pdev)
 
 static int msm_serial_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct msm_port *msm_port = platform_get_drvdata(pdev);
 
@@ -1926,6 +2162,8 @@ static struct platform_driver msm_platform_uim_driver = {
 		.name = "msm_uim",
 		.owner = THIS_MODULE,
 =======
+=======
+>>>>>>> v3.18
 	struct uart_port *port = platform_get_drvdata(pdev);
 
 	uart_remove_one_port(&msm_uart_driver, port);
@@ -1946,6 +2184,9 @@ static struct platform_driver msm_platform_driver = {
 		.name = "msm_serial",
 		.owner = THIS_MODULE,
 		.of_match_table = msm_match_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1959,6 +2200,7 @@ static int __init msm_serial_init(void)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = platform_driver_probe(&msm_platform_driver, msm_serial_probe);
 	if (unlikely(ret))
 		uart_unregister_driver(&msm_uart_driver);
@@ -1967,11 +2209,16 @@ static int __init msm_serial_init(void)
 
 	printk(KERN_INFO "msm_serial: driver initialized\n");
 =======
+=======
+>>>>>>> v3.18
 	ret = platform_driver_register(&msm_platform_driver);
 	if (unlikely(ret))
 		uart_unregister_driver(&msm_uart_driver);
 
 	pr_info("msm_serial: driver initialized\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1992,7 +2239,11 @@ module_exit(msm_serial_exit);
 MODULE_AUTHOR("Robert Love <rlove@google.com>");
 MODULE_DESCRIPTION("Driver for msm7x serial device");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPL v2");
+=======
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL");
 >>>>>>> v3.18

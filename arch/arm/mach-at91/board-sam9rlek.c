@@ -19,6 +19,10 @@
 #include <linux/input.h>
 #include <linux/gpio_keys.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/at91_adc.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at91_adc.h>
 >>>>>>> v3.18
@@ -39,15 +43,21 @@
 
 #include "at91_aic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "at91_shdwc.h"
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -182,7 +192,11 @@ static struct fb_monspecs at91fb_default_monspecs = {
 					| ATMEL_LCDC_CLKMOD_ALWAYSACTIVE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void at91_lcdc_power_control(int on)
+=======
+static void at91_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
+>>>>>>> v3.18
 =======
 static void at91_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 >>>>>>> v3.18
@@ -195,7 +209,11 @@ static void at91_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 
 /* Driver datas */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 >>>>>>> v3.18
@@ -211,7 +229,11 @@ static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data;
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
 >>>>>>> v3.18
@@ -253,6 +275,7 @@ static struct gpio_led ek_leds[] = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Touchscreen
  */
 static struct at91_tsadcc_data ek_tsadcc_data = {
@@ -260,6 +283,8 @@ static struct at91_tsadcc_data ek_tsadcc_data = {
 	.pendet_debounce	= 0x0f,
 	.ts_sample_hold_time	= 0x03,
 =======
+=======
+>>>>>>> v3.18
  * ADC + Touchscreen
  */
 static struct at91_adc_data ek_adc_data = {
@@ -267,6 +292,9 @@ static struct at91_adc_data ek_adc_data = {
 	.use_external_triggers = true,
 	.vref = 3300,
 	.touchscreen_type = ATMEL_ADC_TOUCHSCREEN_4WIRE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -323,6 +351,11 @@ static void __init ek_add_device_buttons(void) {}
 static void __init ek_board_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 =======
 	at91_register_devices();
 
@@ -349,8 +382,13 @@ static void __init ek_board_init(void)
 	/* AC97 */
 	at91_add_device_ac97(&ek_ac97_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Touch Screen Controller */
 	at91_add_device_tsadcc(&ek_tsadcc_data);
+=======
+	/* Touch Screen Controller + ADC */
+	at91_add_device_adc(&ek_adc_data);
+>>>>>>> v3.18
 =======
 	/* Touch Screen Controller + ADC */
 	at91_add_device_adc(&ek_adc_data);
@@ -364,7 +402,11 @@ static void __init ek_board_init(void)
 MACHINE_START(AT91SAM9RLEK, "Atmel AT91SAM9RL-EK")
 	/* Maintainer: Atmel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

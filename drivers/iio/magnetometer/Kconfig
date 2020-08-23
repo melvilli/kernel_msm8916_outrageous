@@ -2,6 +2,11 @@
 # Magnetometer sensors
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 =======
 # When adding new entries keep the list in alphabetical order
 
@@ -15,7 +20,12 @@ config AK8975
 	help
 	  Say yes here to build support for Asahi Kasei AK8975 3-Axis
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Magnetometer.
+=======
+	  Magnetometer. This driver can also support AK8963, if i2c
+	  device name is identified as ak8963.
+>>>>>>> v3.18
 =======
 	  Magnetometer. This driver can also support AK8963, if i2c
 	  device name is identified as ak8963.
@@ -25,7 +35,10 @@ config AK8975
 	  will be called ak8975.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AK09911
 	tristate "Asahi Kasei AK09911 3-axis Compass"
 	depends on I2C
@@ -48,6 +61,9 @@ config MAG3110
 	  To compile this driver as a module, choose M here: the module
 	  will be called mag3110.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_SENSOR_MAGNETOMETER_3D
 	depends on HID_SENSOR_HUB
@@ -68,7 +84,10 @@ config IIO_ST_MAGN_3AXIS
 	select IIO_ST_MAGN_SPI_3AXIS if (SPI_MASTER)
 	select IIO_TRIGGERED_BUFFER if (IIO_BUFFER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select IIO_ST_MAGN_BUFFER if (IIO_TRIGGERED_BUFFER)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -76,8 +95,13 @@ config IIO_ST_MAGN_3AXIS
 	  LSM303DLHC, LSM303DLM, LIS3MDL.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This driver can also be built as a module. If so, will be created
 	  these modules:
+=======
+	  This driver can also be built as a module. If so, these modules
+	  will be created:
+>>>>>>> v3.18
 =======
 	  This driver can also be built as a module. If so, these modules
 	  will be created:

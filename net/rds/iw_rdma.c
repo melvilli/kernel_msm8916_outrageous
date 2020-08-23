@@ -89,9 +89,13 @@ static unsigned int rds_iw_unmap_fastreg_list(struct rds_iw_mr_pool *pool,
 static void rds_iw_destroy_fastreg(struct rds_iw_mr_pool *pool, struct rds_iw_mr *ibmr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rds_iw_get_device(struct sockaddr_in *src, struct sockaddr_in *dst,
 			     struct rds_iw_device **rds_iwdev,
 			     struct rdma_cm_id **cm_id)
+=======
+static int rds_iw_get_device(struct rds_sock *rs, struct rds_iw_device **rds_iwdev, struct rdma_cm_id **cm_id)
+>>>>>>> v3.18
 =======
 static int rds_iw_get_device(struct rds_sock *rs, struct rds_iw_device **rds_iwdev, struct rdma_cm_id **cm_id)
 >>>>>>> v3.18
@@ -119,6 +123,7 @@ static int rds_iw_get_device(struct rds_sock *rs, struct rds_iw_device **rds_iwd
 				dst_addr->sin_addr.s_addr,
 				dst_addr->sin_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				src->sin_addr.s_addr,
 				src->sin_port,
 				dst->sin_addr.s_addr,
@@ -129,6 +134,8 @@ static int rds_iw_get_device(struct rds_sock *rs, struct rds_iw_device **rds_iwd
 			    dst_addr->sin_addr.s_addr == dst->sin_addr.s_addr &&
 			    dst_addr->sin_port == dst->sin_port) {
 =======
+=======
+>>>>>>> v3.18
 				rs->rs_bound_addr,
 				rs->rs_bound_port,
 				rs->rs_conn_addr,
@@ -138,6 +145,9 @@ static int rds_iw_get_device(struct rds_sock *rs, struct rds_iw_device **rds_iwd
 			    src_addr->sin_port == rs->rs_bound_port &&
 			    dst_addr->sin_addr.s_addr == rs->rs_conn_addr &&
 			    dst_addr->sin_port == rs->rs_conn_port) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 			/* FIXME - needs to compare the local and remote
@@ -147,7 +157,11 @@ static int rds_iw_get_device(struct rds_sock *rs, struct rds_iw_device **rds_iwd
 			 * during connection setup...
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (src_addr->sin_addr.s_addr == src->sin_addr.s_addr) {
+=======
+			if (src_addr->sin_addr.s_addr == rs->rs_bound_addr) {
+>>>>>>> v3.18
 =======
 			if (src_addr->sin_addr.s_addr == rs->rs_bound_addr) {
 >>>>>>> v3.18
@@ -203,6 +217,10 @@ int rds_iw_update_cm_id(struct rds_iw_device *rds_iwdev, struct rdma_cm_id *cm_i
 	struct sockaddr_in *src_addr, *dst_addr;
 	struct rds_iw_device *rds_iwdev_old;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rds_sock rs;
+>>>>>>> v3.18
 =======
 	struct rds_sock rs;
 >>>>>>> v3.18
@@ -213,14 +231,20 @@ int rds_iw_update_cm_id(struct rds_iw_device *rds_iwdev, struct rdma_cm_id *cm_i
 	dst_addr = (struct sockaddr_in *)&cm_id->route.addr.dst_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = rds_iw_get_device(src_addr, dst_addr, &rds_iwdev_old, &pcm_id);
 =======
+=======
+>>>>>>> v3.18
 	rs.rs_bound_addr = src_addr->sin_addr.s_addr;
 	rs.rs_bound_port = src_addr->sin_port;
 	rs.rs_conn_addr = dst_addr->sin_addr.s_addr;
 	rs.rs_conn_port = dst_addr->sin_port;
 
 	rc = rds_iw_get_device(&rs, &rds_iwdev_old, &pcm_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		rds_iw_remove_cm_id(rds_iwdev, cm_id);
@@ -628,6 +652,7 @@ void *rds_iw_get_mr(struct scatterlist *sg, unsigned long nents,
 	struct rds_iw_mr *ibmr = NULL;
 	struct rdma_cm_id *cm_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in src = {
 		.sin_addr.s_addr = rs->rs_bound_addr,
 		.sin_port = rs->rs_bound_port,
@@ -639,6 +664,11 @@ void *rds_iw_get_mr(struct scatterlist *sg, unsigned long nents,
 	int ret;
 
 	ret = rds_iw_get_device(&src, &dst, &rds_iwdev, &cm_id);
+=======
+	int ret;
+
+	ret = rds_iw_get_device(rs, &rds_iwdev, &cm_id);
+>>>>>>> v3.18
 =======
 	int ret;
 

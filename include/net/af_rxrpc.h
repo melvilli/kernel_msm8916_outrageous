@@ -32,6 +32,7 @@ enum {
 typedef void (*rxrpc_interceptor_t)(struct sock *, unsigned long,
 				    struct sk_buff *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rxrpc_kernel_intercept_rx_messages(struct socket *,
 					       rxrpc_interceptor_t);
 extern struct rxrpc_call *rxrpc_kernel_begin_call(struct socket *,
@@ -52,6 +53,8 @@ extern struct rxrpc_call *rxrpc_kernel_accept_call(struct socket *,
 						   unsigned long);
 extern int rxrpc_kernel_reject_call(struct socket *);
 =======
+=======
+>>>>>>> v3.18
 void rxrpc_kernel_intercept_rx_messages(struct socket *, rxrpc_interceptor_t);
 struct rxrpc_call *rxrpc_kernel_begin_call(struct socket *,
 					   struct sockaddr_rxrpc *,
@@ -68,6 +71,9 @@ void rxrpc_kernel_data_delivered(struct sk_buff *);
 void rxrpc_kernel_free_skb(struct sk_buff *);
 struct rxrpc_call *rxrpc_kernel_accept_call(struct socket *, unsigned long);
 int rxrpc_kernel_reject_call(struct socket *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _NET_RXRPC_H */

@@ -47,7 +47,11 @@
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if __GNUC__ < 4
+=======
+#if __GNUC__ < 4 || !defined(CONFIG_AEABI)
+>>>>>>> v3.18
 =======
 #if __GNUC__ < 4 || !defined(CONFIG_AEABI)
 >>>>>>> v3.18

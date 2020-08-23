@@ -76,7 +76,10 @@ void mlx4_init_vlan_table(struct mlx4_dev *dev, struct mlx4_vlan_table *table)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void mlx4_init_roce_gid_table(struct mlx4_dev *dev,
 			      struct mlx4_roce_gid_table *table)
 {
@@ -87,6 +90,9 @@ void mlx4_init_roce_gid_table(struct mlx4_dev *dev,
 		memset(table->roce_gids[i].raw, 0, MLX4_ROCE_GID_ENTRY_SIZE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int validate_index(struct mlx4_dev *dev,
 			  struct mlx4_mac_table *table, int index)
@@ -107,7 +113,12 @@ static int find_index(struct mlx4_dev *dev,
 
 	for (i = 0; i < MLX4_MAX_MAC_NUM; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((mac & MLX4_MAC_MASK) ==
+=======
+		if (table->refs[i] &&
+		    (MLX4_MAC_MASK & mac) ==
+>>>>>>> v3.18
 =======
 		if (table->refs[i] &&
 		    (MLX4_MAC_MASK & mac) ==
@@ -142,7 +153,10 @@ static int mlx4_set_port_mac_table(struct mlx4_dev *dev, u8 port,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mlx4_find_cached_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *idx)
 {
 	struct mlx4_port_info *info = &mlx4_priv(dev)->port[port];
@@ -163,6 +177,9 @@ int mlx4_find_cached_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *idx)
 }
 EXPORT_SYMBOL_GPL(mlx4_find_cached_mac);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 {
@@ -177,6 +194,7 @@ int __mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 	mutex_lock(&table->mutex);
 	for (i = 0; i < MLX4_MAX_MAC_NUM; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (free < 0 && !table->entries[i]) {
 			free = i;
 			continue;
@@ -184,6 +202,8 @@ int __mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 
 		if (mac == (MLX4_MAC_MASK & be64_to_cpu(table->entries[i]))) {
 =======
+=======
+>>>>>>> v3.18
 		if (!table->refs[i]) {
 			if (free < 0)
 				free = i;
@@ -192,6 +212,9 @@ int __mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 
 		if ((MLX4_MAC_MASK & mac) ==
 		     (MLX4_MAC_MASK & be64_to_cpu(table->entries[i]))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* MAC already registered, increment ref count */
 			err = i;
@@ -231,6 +254,7 @@ int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 {
 	u64 out_param = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	if (mlx4_is_mfunc(dev)) {
@@ -239,6 +263,8 @@ int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 				   RES_OP_RESERVE_AND_MAP, MLX4_CMD_ALLOC_RES,
 				   MLX4_CMD_TIME_CLASS_A, MLX4_CMD_WRAPPED);
 =======
+=======
+>>>>>>> v3.18
 	int err = -EINVAL;
 
 	if (mlx4_is_mfunc(dev)) {
@@ -257,6 +283,9 @@ int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 			if (!err)
 				dev->flags |= MLX4_FLAG_OLD_REG_MAC;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)
 			return err;
@@ -277,11 +306,14 @@ EXPORT_SYMBOL_GPL(mlx4_get_base_qpn);
 void __mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mlx4_port_info *info = &mlx4_priv(dev)->port[port];
 	struct mlx4_mac_table *table = &info->mac_table;
 	int index;
 
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_port_info *info;
 	struct mlx4_mac_table *table;
 	int index;
@@ -292,6 +324,9 @@ void __mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 	}
 	info = &mlx4_priv(dev)->port[port];
 	table = &info->mac_table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&table->mutex);
 	index = find_index(dev, table, mac);
@@ -300,8 +335,13 @@ void __mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 		goto out;
 	if (--table->refs[index]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_dbg(dev, "Have more references for index %d,"
 			 "no need to modify mac table\n", index);
+=======
+		mlx4_dbg(dev, "Have more references for index %d, no need to modify mac table\n",
+			 index);
+>>>>>>> v3.18
 =======
 		mlx4_dbg(dev, "Have more references for index %d, no need to modify mac table\n",
 			 index);
@@ -323,11 +363,14 @@ void mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 
 	if (mlx4_is_mfunc(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_param_l(&out_param, port);
 		(void) mlx4_cmd_imm(dev, mac, &out_param, RES_MAC,
 				    RES_OP_RESERVE_AND_MAP, MLX4_CMD_FREE_RES,
 				    MLX4_CMD_TIME_CLASS_A, MLX4_CMD_WRAPPED);
 =======
+=======
+>>>>>>> v3.18
 		if (!(dev->flags & MLX4_FLAG_OLD_REG_MAC)) {
 			(void) mlx4_cmd_imm(dev, mac, &out_param,
 					    ((u32) port) << 8 | (u32) RES_MAC,
@@ -340,6 +383,9 @@ void mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, u64 mac)
 					    RES_OP_RESERVE_AND_MAP, MLX4_CMD_FREE_RES,
 					    MLX4_CMD_TIME_CLASS_A, MLX4_CMD_WRAPPED);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -391,7 +437,11 @@ static int mlx4_set_port_vlan_table(struct mlx4_dev *dev, u8 port,
 	in_mod = MLX4_SET_PORT_VLAN_TABLE << 8 | port;
 	err = mlx4_cmd(dev, mailbox->dma, in_mod, 1, MLX4_CMD_SET_PORT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       MLX4_CMD_TIME_CLASS_B, MLX4_CMD_WRAPPED);
+=======
+		       MLX4_CMD_TIME_CLASS_B, MLX4_CMD_NATIVE);
+>>>>>>> v3.18
 =======
 		       MLX4_CMD_TIME_CLASS_B, MLX4_CMD_NATIVE);
 >>>>>>> v3.18
@@ -481,16 +531,22 @@ int mlx4_register_vlan(struct mlx4_dev *dev, u8 port, u16 vlan, int *index)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mlx4_is_mfunc(dev)) {
 		set_param_l(&out_param, port);
 		err = mlx4_cmd_imm(dev, vlan, &out_param, RES_VLAN,
 =======
+=======
+>>>>>>> v3.18
 	if (vlan > 4095)
 		return -EINVAL;
 
 	if (mlx4_is_mfunc(dev)) {
 		err = mlx4_cmd_imm(dev, vlan, &out_param,
 				   ((u32) port) << 8 | (u32) RES_VLAN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   RES_OP_RESERVE_AND_MAP, MLX4_CMD_ALLOC_RES,
 				   MLX4_CMD_TIME_CLASS_A, MLX4_CMD_WRAPPED);
@@ -503,6 +559,7 @@ int mlx4_register_vlan(struct mlx4_dev *dev, u8 port, u16 vlan, int *index)
 }
 EXPORT_SYMBOL_GPL(mlx4_register_vlan);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, int index)
 {
@@ -522,6 +579,8 @@ void __mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, int index)
 		mlx4_dbg(dev, "Have more references for index %d,"
 			 "no need to modify vlan table\n", index);
 =======
+=======
+>>>>>>> v3.18
 void __mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, u16 vlan)
 {
 	struct mlx4_vlan_table *table = &mlx4_priv(dev)->port[port].vlan_table;
@@ -541,6 +600,9 @@ void __mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, u16 vlan)
 	if (--table->refs[index]) {
 		mlx4_dbg(dev, "Have %d more references for index %d, no need to modify vlan table\n",
 			 table->refs[index], index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -551,6 +613,7 @@ out:
 	mutex_unlock(&table->mutex);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, int index)
 {
@@ -570,6 +633,8 @@ void mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, int index)
 	}
 	__mlx4_unregister_vlan(dev, port, index);
 =======
+=======
+>>>>>>> v3.18
 void mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, u16 vlan)
 {
 	u64 out_param = 0;
@@ -583,6 +648,9 @@ void mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, u16 vlan)
 		return;
 	}
 	__mlx4_unregister_vlan(dev, port, vlan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(mlx4_unregister_vlan);
@@ -606,8 +674,11 @@ int mlx4_get_port_ib_caps(struct mlx4_dev *dev, u8 port, __be32 *caps)
 	inbuf = inmailbox->buf;
 	outbuf = outmailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(inbuf, 0, 256);
 	memset(outbuf, 0, 256);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	inbuf[0] = 1;
@@ -627,7 +698,10 @@ int mlx4_get_port_ib_caps(struct mlx4_dev *dev, u8 port, __be32 *caps)
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct mlx4_roce_gid_entry zgid_entry;
 
 int mlx4_get_slave_num_gids(struct mlx4_dev *dev, int slave, int port)
@@ -784,6 +858,9 @@ void mlx4_reset_roce_gids(struct mlx4_dev *dev, int slave)
 	mlx4_free_cmd_mailbox(dev, mailbox);
 	return;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mlx4_common_set_port(struct mlx4_dev *dev, int slave, u32 in_mod,
@@ -796,23 +873,34 @@ static int mlx4_common_set_port(struct mlx4_dev *dev, int slave, u32 in_mod,
 	struct mlx4_set_port_rqp_calc_context *qpn_context;
 	struct mlx4_set_port_general_context *gen_context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int reset_qkey_viols;
 	int port;
 	int is_eth;
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_roce_gid_entry *gid_entry_tbl, *gid_entry_mbox, *gid_entry_mb1;
 	int reset_qkey_viols;
 	int port;
 	int is_eth;
 	int num_gids;
 	int base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 in_modifier;
 	u32 promisc;
 	u16 mtu, prev_mtu;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	int i, j;
+	int offset;
+>>>>>>> v3.18
 =======
 	int i, j;
 	int offset;
@@ -830,7 +918,12 @@ static int mlx4_common_set_port(struct mlx4_dev *dev, int slave, u32 in_mod,
 	if (is_eth) {
 		if (slave != dev->caps.function &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    in_modifier != MLX4_SET_PORT_GENERAL) {
+=======
+		    in_modifier != MLX4_SET_PORT_GENERAL &&
+		    in_modifier != MLX4_SET_PORT_GID_TABLE) {
+>>>>>>> v3.18
 =======
 		    in_modifier != MLX4_SET_PORT_GENERAL &&
 		    in_modifier != MLX4_SET_PORT_GID_TABLE) {
@@ -881,9 +974,12 @@ static int mlx4_common_set_port(struct mlx4_dev *dev, int slave, u32 in_mod,
 			gen_context->mtu = cpu_to_be16(master->max_mtu[port]);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		return mlx4_cmd(dev, inbox->dma, in_mod, op_mod,
 =======
+=======
+>>>>>>> v3.18
 		case MLX4_SET_PORT_GID_TABLE:
 			/* change to MULTIPLE entries: number of guest's gids
 			 * need a FOR-loop here over number of gids the guest has.
@@ -957,6 +1053,9 @@ static int mlx4_common_set_port(struct mlx4_dev *dev, int slave, u32 in_mod,
 		}
 
 		return mlx4_cmd(dev, inbox->dma, in_mod & 0xffff, op_mod,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				MLX4_CMD_SET_PORT, MLX4_CMD_TIME_CLASS_B,
 				MLX4_CMD_NATIVE);
@@ -1022,7 +1121,10 @@ int mlx4_SET_PORT_wrapper(struct mlx4_dev *dev, int slave,
 			  struct mlx4_cmd_info *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int port = mlx4_slave_convert_port(
 			dev, slave, vhcr->in_modifier & 0xFF);
 
@@ -1032,6 +1134,9 @@ int mlx4_SET_PORT_wrapper(struct mlx4_dev *dev, int slave,
 	vhcr->in_modifier = (vhcr->in_modifier & ~0xFF) |
 			    (port & 0xFF);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mlx4_common_set_port(dev, slave, vhcr->in_modifier,
 				    vhcr->op_modifier, inbox);
@@ -1059,8 +1164,11 @@ int mlx4_SET_PORT(struct mlx4_dev *dev, u8 port, int pkey_tbl_sz)
 		return PTR_ERR(mailbox);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mailbox->buf, 0, 256);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	((__be32 *) mailbox->buf)[1] = dev->caps.ib_port_def_cap[port];
@@ -1101,8 +1209,11 @@ int mlx4_SET_PORT_general(struct mlx4_dev *dev, u8 port, int mtu,
 		return PTR_ERR(mailbox);
 	context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(context, 0, sizeof *context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	context->flags = SET_PORT_GEN_ALL_VALID;
@@ -1139,8 +1250,11 @@ int mlx4_SET_PORT_qpn_calc(struct mlx4_dev *dev, u8 port, u32 base_qpn,
 		return PTR_ERR(mailbox);
 	context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(context, 0, sizeof *context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	context->base_qpn = cpu_to_be32(base_qpn);
@@ -1176,8 +1290,11 @@ int mlx4_SET_PORT_PRIO2TC(struct mlx4_dev *dev, u8 port, u8 *prio2tc)
 		return PTR_ERR(mailbox);
 	context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(context, 0, sizeof *context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < MLX4_NUM_UP; i += 2)
@@ -1206,6 +1323,7 @@ int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
 		return PTR_ERR(mailbox);
 	context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(context, 0, sizeof *context);
 
 	for (i = 0; i < MLX4_NUM_TC; i++) {
@@ -1219,6 +1337,8 @@ int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
 		tc->max_bw_units = htons(MLX4_RATELIMIT_UNITS);
 		tc->max_bw_value = htons(r);
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < MLX4_NUM_TC; i++) {
 		struct mlx4_port_scheduler_tc_cfg_be *tc = &context->tc[i];
@@ -1242,6 +1362,9 @@ int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
 
 		tc->pg = htons(pg[i]);
 		tc->bw_precentage = htons(tc_tx_bw[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1255,7 +1378,10 @@ int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
 EXPORT_SYMBOL(mlx4_SET_PORT_SCHEDULER);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	VXLAN_ENABLE_MODIFY	= 1 << 7,
 	VXLAN_STEERING_MODIFY	= 1 << 6,
@@ -1298,6 +1424,9 @@ int mlx4_SET_PORT_VXLAN(struct mlx4_dev *dev, u8 port, u8 steering, int enable)
 }
 EXPORT_SYMBOL(mlx4_SET_PORT_VXLAN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mlx4_SET_MCAST_FLTR_wrapper(struct mlx4_dev *dev, int slave,
 				struct mlx4_vhcr *vhcr,
@@ -1366,7 +1495,10 @@ void mlx4_set_stats_bitmap(struct mlx4_dev *dev, u64 *stats_bitmap)
 }
 EXPORT_SYMBOL(mlx4_set_stats_bitmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int mlx4_get_slave_from_roce_gid(struct mlx4_dev *dev, int port, u8 *gid,
 				 int *slave_id)
@@ -1479,4 +1611,7 @@ int mlx4_get_roce_gid_from_slave(struct mlx4_dev *dev, int port, int slave_id,
 	return 0;
 }
 EXPORT_SYMBOL(mlx4_get_roce_gid_from_slave);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -87,7 +87,11 @@
 #define	EALREADY	114	/* Operation already in progress */
 #define	EINPROGRESS	115	/* Operation now in progress */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ESTALE		116	/* Stale NFS file handle */
+=======
+#define	ESTALE		116	/* Stale file handle */
+>>>>>>> v3.18
 =======
 #define	ESTALE		116	/* Stale file handle */
 >>>>>>> v3.18

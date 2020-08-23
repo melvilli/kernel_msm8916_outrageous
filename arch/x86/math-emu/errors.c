@@ -303,7 +303,11 @@ static struct {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void FPU_exception(int n)
+=======
+asmlinkage __visible void FPU_exception(int n)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void FPU_exception(int n)
 >>>>>>> v3.18
@@ -335,11 +339,14 @@ asmlinkage __visible void FPU_exception(int n)
 	RE_ENTRANT_CHECK_OFF;
 	if ((~control_word & n & CW_Exceptions) || (n == EX_INTERNAL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PRINT_MESSAGES
 		/* My message from the sponsor */
 		printk(FPU_VERSION " " __DATE__ " (C) W. Metzenthen.\n");
 #endif /* PRINT_MESSAGES */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Get a name string for error reporting */
@@ -505,7 +512,11 @@ int real_2op_NaN(FPU_REG const *b, u_char tagb,
 /* Invalid arith operation on Valid registers */
 /* Returns < 0 if the exception is unmasked */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int arith_invalid(int deststnr)
+=======
+asmlinkage __visible int arith_invalid(int deststnr)
+>>>>>>> v3.18
 =======
 asmlinkage __visible int arith_invalid(int deststnr)
 >>>>>>> v3.18
@@ -524,7 +535,11 @@ asmlinkage __visible int arith_invalid(int deststnr)
 
 /* Divide a finite number by zero */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int FPU_divide_by_zero(int deststnr, u_char sign)
+=======
+asmlinkage __visible int FPU_divide_by_zero(int deststnr, u_char sign)
+>>>>>>> v3.18
 =======
 asmlinkage __visible int FPU_divide_by_zero(int deststnr, u_char sign)
 >>>>>>> v3.18
@@ -560,7 +575,11 @@ int set_precision_flag(int flags)
 
 /* This may be called often, so keep it lean */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void set_precision_flag_up(void)
+=======
+asmlinkage __visible void set_precision_flag_up(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void set_precision_flag_up(void)
 >>>>>>> v3.18
@@ -573,7 +592,11 @@ asmlinkage __visible void set_precision_flag_up(void)
 
 /* This may be called often, so keep it lean */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void set_precision_flag_down(void)
+=======
+asmlinkage __visible void set_precision_flag_down(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void set_precision_flag_down(void)
 >>>>>>> v3.18
@@ -586,7 +609,11 @@ asmlinkage __visible void set_precision_flag_down(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int denormal_operand(void)
+=======
+asmlinkage __visible int denormal_operand(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible int denormal_operand(void)
 >>>>>>> v3.18
@@ -601,7 +628,11 @@ asmlinkage __visible int denormal_operand(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int arith_overflow(FPU_REG *dest)
+=======
+asmlinkage __visible int arith_overflow(FPU_REG *dest)
+>>>>>>> v3.18
 =======
 asmlinkage __visible int arith_overflow(FPU_REG *dest)
 >>>>>>> v3.18
@@ -633,7 +664,11 @@ asmlinkage __visible int arith_overflow(FPU_REG *dest)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int arith_underflow(FPU_REG *dest)
+=======
+asmlinkage __visible int arith_underflow(FPU_REG *dest)
+>>>>>>> v3.18
 =======
 asmlinkage __visible int arith_underflow(FPU_REG *dest)
 >>>>>>> v3.18

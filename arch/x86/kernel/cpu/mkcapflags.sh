@@ -1,7 +1,11 @@
 #!/bin/sh
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Generate the x86_cap_flags[] array from include/asm/cpufeature.h
+=======
+# Generate the x86_cap/bug_flags[] arrays from include/asm/cpufeature.h
+>>>>>>> v3.18
 =======
 # Generate the x86_cap/bug_flags[] arrays from include/asm/cpufeature.h
 >>>>>>> v3.18
@@ -10,6 +14,7 @@
 IN=$1
 OUT=$2
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 TABS="$(printf '\t\t\t\t\t')"
 trap 'rm "$OUT"' EXIT
@@ -24,6 +29,8 @@ trap 'rm "$OUT"' EXIT
 	# Iterate through any input lines starting with #define X86_FEATURE_
 	sed -n -e 's/\t/ /g' -e 's/^ *# *define *X86_FEATURE_//p' $IN |
 =======
+=======
+>>>>>>> v3.18
 function dump_array()
 {
 	ARRAY=$1
@@ -38,6 +45,9 @@ function dump_array()
 
 	# Iterate through any input lines starting with #define $PFX
 	sed -n -e 's/\t/ /g' -e "s/^ *# *define *$PFX//p" $IN |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while read i
 	do
@@ -53,12 +63,15 @@ function dump_array()
 		VALUE="$(echo "$VALUE" | tr A-Z a-z)"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		TABCOUNT=$(( ( 5*8 - 14 - $(echo "$NAME" | wc -c) ) / 8 ))
 		printf "\t[%s]%.*s = %s,\n" \
 			"X86_FEATURE_$NAME" "$TABCOUNT" "$TABS" "$VALUE"
 	done
 	echo "};"
 =======
+=======
+>>>>>>> v3.18
         if [ -n "$POSTFIX" ]; then
             T=$(( $PFX_SZ + $(echo $POSTFIX | wc -c) + 2 ))
 	        TABS="$(printf '\t\t\t\t\t\t')"
@@ -85,6 +98,9 @@ trap 'rm "$OUT"' EXIT
 
 	dump_array "x86_bug_flags" "NBUGINTS*32" "X86_BUG_" "NCAPINTS*32"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ) > $OUT
 

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -88,7 +92,13 @@
  * table checksum is incorrect?
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_CHECKSUM_ABORT             FALSE
+=======
+#ifndef ACPI_CHECKSUM_ABORT
+#define ACPI_CHECKSUM_ABORT             FALSE
+#endif
+>>>>>>> v3.18
 =======
 #ifndef ACPI_CHECKSUM_ABORT
 #define ACPI_CHECKSUM_ABORT             FALSE
@@ -111,7 +121,13 @@
  *      FACS table (Waking vectors and Global Lock)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_REDUCED_HARDWARE           FALSE
+=======
+#ifndef ACPI_REDUCED_HARDWARE
+#define ACPI_REDUCED_HARDWARE           FALSE
+#endif
+>>>>>>> v3.18
 =======
 #ifndef ACPI_REDUCED_HARDWARE
 #define ACPI_REDUCED_HARDWARE           FALSE
@@ -232,7 +248,10 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Miscellaneous constants
  *
  *****************************************************************************/
@@ -251,14 +270,22 @@
 
 /******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ACPI AML Debugger
  *
  *****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_DEBUGGER_MAX_ARGS          8	/* Must be max method args + 1 */
 #define ACPI_DB_LINE_BUFFER_SIZE	512
+=======
+#define ACPI_DEBUGGER_MAX_ARGS          ACPI_METHOD_NUM_ARGS + 4	/* Max command line arguments */
+#define ACPI_DB_LINE_BUFFER_SIZE        512
+>>>>>>> v3.18
 =======
 #define ACPI_DEBUGGER_MAX_ARGS          ACPI_METHOD_NUM_ARGS + 4	/* Max command line arguments */
 #define ACPI_DB_LINE_BUFFER_SIZE        512

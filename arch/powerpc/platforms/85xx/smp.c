@@ -16,6 +16,10 @@
 #include <linux/delay.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -31,6 +35,11 @@
 #include <asm/dbell.h>
 #include <asm/fsl_guts.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/code-patching.h>
+#include <asm/cputhreads.h>
+>>>>>>> v3.18
 =======
 #include <asm/code-patching.h>
 #include <asm/cputhreads.h>
@@ -79,8 +88,11 @@ static void mpc85xx_give_timebase(void)
 
 	mpc85xx_timebase_freeze(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timebase = get_tb();
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64
 	/*
 	 * e5500/e6500 have a workaround for erratum A-006958 in place
@@ -107,6 +119,9 @@ static void mpc85xx_give_timebase(void)
 #else
 	timebase = get_tb();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mb();
 	tb_valid = 1;
@@ -138,7 +153,11 @@ static void mpc85xx_take_timebase(void)
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit smp_85xx_mach_cpu_die(void)
+=======
+static void smp_85xx_mach_cpu_die(void)
+>>>>>>> v3.18
 =======
 static void smp_85xx_mach_cpu_die(void)
 >>>>>>> v3.18
@@ -184,8 +203,11 @@ static inline u32 read_spin_table_addr_l(void *spin_table)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit smp_85xx_kick_cpu(int nr)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64
 static void wake_hw_thread(void *info)
 {
@@ -205,6 +227,9 @@ static void wake_hw_thread(void *info)
 #endif
 
 static int smp_85xx_kick_cpu(int nr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long flags;
@@ -221,7 +246,10 @@ static int smp_85xx_kick_cpu(int nr)
 	pr_debug("smp_85xx_kick_cpu: kick CPU #%d\n", nr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64
 	/* Threads don't use the spin table */
 	if (cpu_thread_in_core(nr) != 0) {
@@ -247,6 +275,9 @@ static int smp_85xx_kick_cpu(int nr)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	np = of_get_cpu_node(nr, NULL);
 	cpu_rel_addr = of_get_property(np, "cpu-release-addr", NULL);
@@ -334,7 +365,11 @@ out:
 	out_be32(&spin_table->pir, hw_cpu);
 	out_be64((u64 *)(&spin_table->addr_h),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  __pa((u64)*((unsigned long long *)generic_secondary_smp_init)));
+=======
+		__pa(ppc_function_entry(generic_secondary_smp_init)));
+>>>>>>> v3.18
 =======
 		__pa(ppc_function_entry(generic_secondary_smp_init)));
 >>>>>>> v3.18
@@ -352,6 +387,10 @@ out:
 struct smp_ops_t smp_85xx_ops = {
 	.kick_cpu = smp_85xx_kick_cpu,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cpu_bootable = smp_generic_cpu_bootable,
+>>>>>>> v3.18
 =======
 	.cpu_bootable = smp_generic_cpu_bootable,
 >>>>>>> v3.18
@@ -463,6 +502,7 @@ static void mpc85xx_smp_machine_kexec(struct kimage *image)
 #endif /* CONFIG_KEXEC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit smp_85xx_setup_cpu(int cpu_nr)
 {
 	if (smp_85xx_ops.probe == smp_mpic_probe)
@@ -472,18 +512,28 @@ static void __cpuinit smp_85xx_setup_cpu(int cpu_nr)
 static void smp_85xx_basic_setup(int cpu_nr)
 {
 >>>>>>> v3.18
+=======
+static void smp_85xx_basic_setup(int cpu_nr)
+{
+>>>>>>> v3.18
 	if (cpu_has_feature(CPU_FTR_DBELL))
 		doorbell_setup_this_cpu();
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void smp_85xx_setup_cpu(int cpu_nr)
 {
 	mpic_setup_this_cpu();
 	smp_85xx_basic_setup(cpu_nr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct of_device_id mpc85xx_smp_guts_ids[] = {
 	{ .compatible = "fsl,mpc8572-guts", },
@@ -500,7 +550,10 @@ void __init mpc85xx_smp_init(void)
 	struct device_node *np;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_85xx_ops.setup_cpu = smp_85xx_setup_cpu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -508,13 +561,19 @@ void __init mpc85xx_smp_init(void)
 	if (np) {
 		smp_85xx_ops.probe = smp_mpic_probe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		smp_85xx_ops.message_pass = smp_mpic_message_pass;
 	}
 =======
+=======
+>>>>>>> v3.18
 		smp_85xx_ops.setup_cpu = smp_85xx_setup_cpu;
 		smp_85xx_ops.message_pass = smp_mpic_message_pass;
 	} else
 		smp_85xx_ops.setup_cpu = smp_85xx_basic_setup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cpu_has_feature(CPU_FTR_DBELL)) {
@@ -525,6 +584,10 @@ void __init mpc85xx_smp_init(void)
 		smp_85xx_ops.message_pass = NULL;
 		smp_85xx_ops.cause_ipi = doorbell_cause_ipi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		smp_85xx_ops.probe = NULL;
+>>>>>>> v3.18
 =======
 		smp_85xx_ops.probe = NULL;
 >>>>>>> v3.18

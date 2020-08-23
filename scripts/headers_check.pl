@@ -66,13 +66,19 @@ sub check_include
 sub check_declarations
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ($line =~m/^(\s*extern|unsigned|char|short|int|long|void)\b/) {
 =======
+=======
+>>>>>>> v3.18
 	# soundcard.h is what it is
 	if ($line =~ m/^void seqbuf_dump\(void\);/) {
 		return;
 	}
 	if ($line =~ m/^(\s*extern|unsigned|char|short|int|long|void)\b/) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printf STDERR "$filename:$lineno: " .
 			      "userspace cannot reference function or " .

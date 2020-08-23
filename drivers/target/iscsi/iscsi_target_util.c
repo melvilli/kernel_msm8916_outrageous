@@ -2,9 +2,13 @@
  * This file contains the iSCSI Target specific utility functions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -24,6 +28,10 @@
 
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/percpu_ida.h>
+>>>>>>> v3.18
 =======
 #include <linux/percpu_ida.h>
 >>>>>>> v3.18
@@ -158,6 +166,7 @@ void iscsit_free_r2ts_from_list(struct iscsi_cmd *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iscsi_cmd *iscsit_alloc_cmd(struct iscsi_conn *conn, gfp_t gfp_mask)
 {
 	struct iscsi_cmd *cmd;
@@ -172,10 +181,13 @@ struct iscsi_cmd *iscsit_alloc_cmd(struct iscsi_conn *conn, gfp_t gfp_mask)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * May be called from software interrupt (timer) context for allocating
  * iSCSI NopINs.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *conn, gfp_t gfp_mask)
 {
@@ -187,6 +199,8 @@ struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *conn, gfp_t gfp_mask)
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *conn, int state)
 {
 	struct iscsi_cmd *cmd;
@@ -202,6 +216,9 @@ struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *conn, int state)
 	memset(cmd, 0, size);
 
 	cmd->se_cmd.map_tag = tag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd->conn = conn;
 	INIT_LIST_HEAD(&cmd->i_conn_node);
@@ -282,9 +299,15 @@ static inline int iscsit_check_received_cmdsn(struct iscsi_session *sess, u32 cm
 	if (iscsi_sna_gt(cmdsn, sess->max_cmd_sn)) {
 		pr_err("Received CmdSN: 0x%08x is greater than"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       " MaxCmdSN: 0x%08x, protocol error.\n", cmdsn,
 		       sess->max_cmd_sn);
 		ret = CMDSN_ERROR_CANNOT_RECOVER;
+=======
+		       " MaxCmdSN: 0x%08x, ignoring.\n", cmdsn,
+		       sess->max_cmd_sn);
+		ret = CMDSN_MAXCMDSN_OVERRUN;
+>>>>>>> v3.18
 =======
 		       " MaxCmdSN: 0x%08x, ignoring.\n", cmdsn,
 		       sess->max_cmd_sn);
@@ -349,6 +372,7 @@ int iscsit_sequence_cmd(struct iscsi_conn *conn, struct iscsi_cmd *cmd,
 		break;
 	case CMDSN_LOWER_THAN_EXP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd->i_state = ISTATE_REMOVE;
 		iscsit_add_cmd_to_immediate_queue(cmd, conn, cmd->i_state);
 		ret = cmdsn_ret;
@@ -358,6 +382,8 @@ int iscsit_sequence_cmd(struct iscsi_conn *conn, struct iscsi_cmd *cmd,
 		reject = true;
 		ret = cmdsn_ret;
 =======
+=======
+>>>>>>> v3.18
 	case CMDSN_MAXCMDSN_OVERRUN:
 	default:
 		cmd->i_state = ISTATE_REMOVE;
@@ -368,6 +394,9 @@ int iscsit_sequence_cmd(struct iscsi_conn *conn, struct iscsi_cmd *cmd,
 		 * return for CMDSN_MAXCMDSN_OVERRUN as well..
 		 */
 		ret = CMDSN_LOWER_THAN_EXP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -454,6 +483,11 @@ struct iscsi_cmd *iscsit_find_cmd_from_itt_or_dump(
 	spin_lock_bh(&conn->cmd_lock);
 	list_for_each_entry(cmd, &conn->conn_cmd_list, i_conn_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (cmd->cmd_flags & ICF_GOT_LAST_DATAOUT)
+			continue;
+>>>>>>> v3.18
 =======
 		if (cmd->cmd_flags & ICF_GOT_LAST_DATAOUT)
 			continue;
@@ -743,7 +777,10 @@ void iscsit_free_queue_reqs_for_conn(struct iscsi_conn *conn)
 void iscsit_release_cmd(struct iscsi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct iscsi_session *sess;
 	struct se_cmd *se_cmd = &cmd->se_cmd;
 
@@ -754,12 +791,16 @@ void iscsit_release_cmd(struct iscsi_cmd *cmd)
 
 	BUG_ON(!sess || !sess->se_sess);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(cmd->buf_ptr);
 	kfree(cmd->pdu_list);
 	kfree(cmd->seq_list);
 	kfree(cmd->tmr_req);
 	kfree(cmd->iov_data);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	kmem_cache_free(lio_cmd_cache, cmd);
@@ -768,6 +809,8 @@ void iscsit_release_cmd(struct iscsi_cmd *cmd)
 static void __iscsit_free_cmd(struct iscsi_cmd *cmd, bool scsi_cmd,
 			      bool check_queues)
 =======
+=======
+>>>>>>> v3.18
 	kfree(cmd->text_in_ptr);
 
 	percpu_ida_free(&sess->se_sess->sess_tag_pool, se_cmd->map_tag);
@@ -776,6 +819,9 @@ EXPORT_SYMBOL(iscsit_release_cmd);
 
 void __iscsit_free_cmd(struct iscsi_cmd *cmd, bool scsi_cmd,
 		       bool check_queues)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct iscsi_conn *conn = cmd->conn;
@@ -800,7 +846,10 @@ void iscsit_free_cmd(struct iscsi_cmd *cmd, bool shutdown)
 	struct se_cmd *se_cmd = NULL;
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool op_scsi = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -810,7 +859,12 @@ void iscsit_free_cmd(struct iscsi_cmd *cmd, bool shutdown)
 	switch (cmd->iscsi_opcode) {
 	case ISCSI_OP_SCSI_CMD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		op_scsi = true;
+=======
+		se_cmd = &cmd->se_cmd;
+		__iscsit_free_cmd(cmd, true, shutdown);
+>>>>>>> v3.18
 =======
 		se_cmd = &cmd->se_cmd;
 		__iscsit_free_cmd(cmd, true, shutdown);
@@ -820,11 +874,17 @@ void iscsit_free_cmd(struct iscsi_cmd *cmd, bool shutdown)
 		 */
 	case ISCSI_OP_SCSI_TMFUNC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		se_cmd = &cmd->se_cmd;
 		__iscsit_free_cmd(cmd, op_scsi, shutdown);
 		rc = transport_generic_free_cmd(se_cmd, shutdown);
 		if (!rc && shutdown && se_cmd->se_sess) {
 			__iscsit_free_cmd(cmd, op_scsi, shutdown);
+=======
+		rc = transport_generic_free_cmd(&cmd->se_cmd, shutdown);
+		if (!rc && shutdown && se_cmd && se_cmd->se_sess) {
+			__iscsit_free_cmd(cmd, true, shutdown);
+>>>>>>> v3.18
 =======
 		rc = transport_generic_free_cmd(&cmd->se_cmd, shutdown);
 		if (!rc && shutdown && se_cmd && se_cmd->se_sess) {
@@ -854,7 +914,11 @@ void iscsit_free_cmd(struct iscsi_cmd *cmd, bool shutdown)
 	default:
 		__iscsit_free_cmd(cmd, false, shutdown);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd->release_cmd(cmd);
+=======
+		iscsit_release_cmd(cmd);
+>>>>>>> v3.18
 =======
 		iscsit_release_cmd(cmd);
 >>>>>>> v3.18
@@ -1020,7 +1084,11 @@ static int iscsit_add_nopin(struct iscsi_conn *conn, int want_response)
 	struct iscsi_cmd *cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd = iscsit_allocate_cmd(conn, GFP_ATOMIC);
+=======
+	cmd = iscsit_allocate_cmd(conn, TASK_RUNNING);
+>>>>>>> v3.18
 =======
 	cmd = iscsit_allocate_cmd(conn, TASK_RUNNING);
 >>>>>>> v3.18
@@ -1080,7 +1148,11 @@ static void iscsit_handle_nopin_response_timeout(unsigned long data)
 				ISCSI_SESS_ERR_CXN_TIMEOUT;
 		tiqn->sess_err_stats.cxn_timeout_errors++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn->sess->conn_timeout_errors++;
+=======
+		atomic_long_inc(&conn->sess->conn_timeout_errors);
+>>>>>>> v3.18
 =======
 		atomic_long_inc(&conn->sess->conn_timeout_errors);
 >>>>>>> v3.18
@@ -1455,7 +1527,11 @@ static int iscsit_do_tx_data(
 	struct iscsi_data_count *count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, iov_len;
+=======
+	int data = count->data_length, total_tx = 0, tx_loop = 0, iov_len;
+>>>>>>> v3.18
 =======
 	int data = count->data_length, total_tx = 0, tx_loop = 0, iov_len;
 >>>>>>> v3.18
@@ -1466,8 +1542,13 @@ static int iscsit_do_tx_data(
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count->data_length <= 0) {
 		pr_err("Data length is: %d\n", count->data_length);
+=======
+	if (data <= 0) {
+		pr_err("Data length is: %d\n", data);
+>>>>>>> v3.18
 =======
 	if (data <= 0) {
 		pr_err("Data length is: %d\n", data);
@@ -1481,6 +1562,7 @@ static int iscsit_do_tx_data(
 	iov_len = count->iov_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = kernel_sendmsg(conn->sock, &msg, iov_p, iov_len,
 			     count->data_length);
 	if (ret != count->data_length) {
@@ -1492,6 +1574,8 @@ static int iscsit_do_tx_data(
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	while (total_tx < data) {
 		tx_loop = kernel_sendmsg(conn->sock, &msg, iov_p, iov_len,
 					(data - total_tx));
@@ -1506,6 +1590,9 @@ static int iscsit_do_tx_data(
 	}
 
 	return total_tx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1600,8 +1687,14 @@ void iscsit_collect_login_stats(
 			intrname = iscsi_find_param_from_key(INITIATORNAME,
 							     conn->param_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strcpy(ls->last_intr_fail_name,
 		       (intrname ? intrname->value : "Unknown"));
+=======
+		strlcpy(ls->last_intr_fail_name,
+		       (intrname ? intrname->value : "Unknown"),
+		       sizeof(ls->last_intr_fail_name));
+>>>>>>> v3.18
 =======
 		strlcpy(ls->last_intr_fail_name,
 		       (intrname ? intrname->value : "Unknown"),

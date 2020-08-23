@@ -23,17 +23,23 @@ bool vlan_do_receive(struct sk_buff **skbp)
 
 	skb->dev = vlan_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->pkt_type == PACKET_OTHERHOST) {
 		/* Our lower layer thinks this is not local, let's make sure.
 		 * This allows the VLAN to have a different MAC than the
 		 * underlying device, and still route correctly. */
 		if (ether_addr_equal(eth_hdr(skb)->h_dest, vlan_dev->dev_addr))
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(skb->pkt_type == PACKET_OTHERHOST)) {
 		/* Our lower layer thinks this is not local, let's make sure.
 		 * This allows the VLAN to have a different MAC than the
 		 * underlying device, and still route correctly. */
 		if (ether_addr_equal_64bits(eth_hdr(skb)->h_dest, vlan_dev->dev_addr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			skb->pkt_type = PACKET_HOST;
 	}
@@ -72,7 +78,11 @@ bool vlan_do_receive(struct sk_buff **skbp)
 
 /* Must be invoked with rcu_read_lock. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct net_device *__vlan_find_dev_deep(struct net_device *dev,
+=======
+struct net_device *__vlan_find_dev_deep_rcu(struct net_device *dev,
+>>>>>>> v3.18
 =======
 struct net_device *__vlan_find_dev_deep_rcu(struct net_device *dev,
 >>>>>>> v3.18
@@ -94,7 +104,11 @@ struct net_device *__vlan_find_dev_deep_rcu(struct net_device *dev,
 		upper_dev = netdev_master_upper_dev_get_rcu(dev);
 		if (upper_dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return __vlan_find_dev_deep(upper_dev,
+=======
+			return __vlan_find_dev_deep_rcu(upper_dev,
+>>>>>>> v3.18
 =======
 			return __vlan_find_dev_deep_rcu(upper_dev,
 >>>>>>> v3.18
@@ -104,12 +118,15 @@ struct net_device *__vlan_find_dev_deep_rcu(struct net_device *dev,
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__vlan_find_dev_deep);
 
 struct net_device *vlan_dev_real_dev(const struct net_device *dev)
 {
 	return vlan_dev_priv(dev)->real_dev;
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__vlan_find_dev_deep_rcu);
 
 struct net_device *vlan_dev_real_dev(const struct net_device *dev)
@@ -120,6 +137,9 @@ struct net_device *vlan_dev_real_dev(const struct net_device *dev)
 		ret = vlan_dev_priv(ret)->real_dev;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(vlan_dev_real_dev);
@@ -130,6 +150,7 @@ u16 vlan_dev_vlan_id(const struct net_device *dev)
 }
 EXPORT_SYMBOL(vlan_dev_vlan_id);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sk_buff *vlan_reorder_header(struct sk_buff *skb)
 {
@@ -184,11 +205,16 @@ err_free:
 EXPORT_SYMBOL(vlan_untag);
 
 =======
+=======
+>>>>>>> v3.18
 __be16 vlan_dev_vlan_proto(const struct net_device *dev)
 {
 	return vlan_dev_priv(dev)->vlan_proto;
 }
 EXPORT_SYMBOL(vlan_dev_vlan_proto);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

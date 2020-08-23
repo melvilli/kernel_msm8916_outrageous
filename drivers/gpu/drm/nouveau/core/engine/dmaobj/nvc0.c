@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/device.h>
 #include <core/gpuobj.h>
 #include <core/class.h>
@@ -43,6 +44,8 @@ nvc0_dmaobj_bind(struct nouveau_dmaeng *dmaeng,
 	u32 flags0 = nv_mclass(dmaobj);
 	u32 flags5 = 0x00000000;
 =======
+=======
+>>>>>>> v3.18
 #include <core/client.h>
 #include <core/device.h>
 #include <core/gpuobj.h>
@@ -65,15 +68,24 @@ nvc0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		 struct nouveau_gpuobj **pgpuobj)
 {
 	struct nvc0_dmaobj_priv *priv = (void *)dmaobj;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	if (!nv_iclass(parent, NV_ENGCTX_CLASS)) {
 		switch (nv_mclass(parent->parent)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case NVA3_DISP_MAST_CLASS:
 		case NVA3_DISP_SYNC_CLASS:
 		case NVA3_DISP_OVLY_CLASS:
+=======
+		case GT214_DISP_CORE_CHANNEL_DMA:
+		case GT214_DISP_BASE_CHANNEL_DMA:
+		case GT214_DISP_OVERLAY_CHANNEL_DMA:
+>>>>>>> v3.18
 =======
 		case GT214_DISP_CORE_CHANNEL_DMA:
 		case GT214_DISP_BASE_CHANNEL_DMA:
@@ -86,6 +98,7 @@ nvc0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 	} else
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(dmaobj->conf0 & NVC0_DMA_CONF0_ENABLE)) {
 		if (dmaobj->target == NV_MEM_TARGET_VM) {
@@ -115,6 +128,8 @@ nvc0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 	case NV_MEM_TARGET_PCI_NOSNOOP:
 		flags0 |= 0x00030000;
 =======
+=======
+>>>>>>> v3.18
 	ret = nouveau_gpuobj_new(parent, parent, 24, 32, 0, pgpuobj);
 	if (ret == 0) {
 		nv_wo32(*pgpuobj, 0x00, priv->flags0 | nv_mclass(dmaobj));
@@ -186,12 +201,16 @@ nvc0_dmaobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		break;
 	case NV_MEM_TARGET_PCI_NOSNOOP:
 		priv->flags0 |= 0x00030000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (dmaobj->access) {
 	case NV_MEM_ACCESS_VM:
@@ -248,6 +267,8 @@ nvc0_dmaeng_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 	switch (priv->base.access) {
 	case NV_MEM_ACCESS_VM:
 		break;
@@ -291,4 +312,7 @@ nvc0_dmaeng_oclass = &(struct nvkm_dmaeng_impl) {
 	.sclass = nvc0_dmaeng_sclass,
 	.bind = nvc0_dmaobj_bind,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

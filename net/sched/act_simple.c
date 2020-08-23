@@ -26,6 +26,7 @@
 
 #define SIMP_TAB_MASK     7
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_common *tcf_simp_ht[SIMP_TAB_MASK + 1];
 static u32 simp_idx_gen;
 static DEFINE_RWLOCK(simp_lock);
@@ -35,6 +36,8 @@ static struct tcf_hashinfo simp_hash_info = {
 	.hmask	=	SIMP_TAB_MASK,
 	.lock	=	&simp_lock,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -59,6 +62,7 @@ static int tcf_simp(struct sk_buff *skb, const struct tc_action *a,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcf_simp_release(struct tcf_defact *d, int bind)
 {
 	int ret = 0;
@@ -74,10 +78,15 @@ static int tcf_simp_release(struct tcf_defact *d, int bind)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static void tcf_simp_release(struct tc_action *a, int bind)
 {
 	struct tcf_defact *d = to_defact(a);
 	kfree(d->tcfd_defdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -113,7 +122,10 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 	struct tc_defact *parm;
 	struct tcf_defact *d;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *defdata;
@@ -136,6 +148,7 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 	defdata = nla_data(tb[TCA_DEF_DATA]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &simp_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(parm->index, est, a, sizeof(*d), bind,
@@ -151,6 +164,8 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 						   &pc->tcfc_rate_est);
 			kfree_rcu(pc, tcfc_rcu);
 =======
+=======
+>>>>>>> v3.18
 	if (!tcf_hash_check(parm->index, a, bind)) {
 		ret = tcf_hash_create(parm->index, est, a, sizeof(*d), bind);
 		if (ret)
@@ -160,6 +175,9 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 		ret = alloc_defdata(d, defdata);
 		if (ret < 0) {
 			tcf_hash_cleanup(a, est);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ret;
 		}
@@ -167,12 +185,15 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 		ret = ACT_P_CREATED;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		d = to_defact(pc);
 		if (!ovr) {
 			tcf_simp_release(d, bind);
 			return -EEXIST;
 		}
 =======
+=======
+>>>>>>> v3.18
 		d = to_defact(a);
 
 		if (bind)
@@ -181,11 +202,15 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 		if (!ovr)
 			return -EEXIST;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reset_policy(d, defdata, parm);
 	}
 
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tcf_hash_insert(pc, &simp_hash_info);
 	return ret;
@@ -201,10 +226,15 @@ static int tcf_simp_cleanup(struct tc_action *a, int bind)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		tcf_hash_insert(a);
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tcf_simp_dump(struct sk_buff *skb, struct tc_action *a,
 			 int bind, int ref)
@@ -237,6 +267,7 @@ nla_put_failure:
 static struct tc_action_ops act_simp_ops = {
 	.kind		=	"simple",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hinfo		=	&simp_hash_info,
 	.type		=	TCA_ACT_SIMP,
 	.capab		=	TCA_CAP_NONE,
@@ -247,12 +278,17 @@ static struct tc_action_ops act_simp_ops = {
 	.init		=	tcf_simp_init,
 	.walk		=	tcf_generic_walker,
 =======
+=======
+>>>>>>> v3.18
 	.type		=	TCA_ACT_SIMP,
 	.owner		=	THIS_MODULE,
 	.act		=	tcf_simp,
 	.dump		=	tcf_simp_dump,
 	.cleanup	=	tcf_simp_release,
 	.init		=	tcf_simp_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -263,7 +299,12 @@ MODULE_LICENSE("GPL");
 static int __init simp_init_module(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = tcf_register_action(&act_simp_ops);
+=======
+	int ret;
+	ret = tcf_register_action(&act_simp_ops, SIMP_TAB_MASK);
+>>>>>>> v3.18
 =======
 	int ret;
 	ret = tcf_register_action(&act_simp_ops, SIMP_TAB_MASK);

@@ -2,7 +2,12 @@ Altera UART
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : should be "ALTR,uart-1.0"
+=======
+- compatible : should be "ALTR,uart-1.0" <DEPRECATED>
+- compatible : should be "altr,uart-1.0"
+>>>>>>> v3.18
 =======
 - compatible : should be "ALTR,uart-1.0" <DEPRECATED>
 - compatible : should be "altr,uart-1.0"

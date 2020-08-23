@@ -38,7 +38,11 @@ void spear_restart(enum reboot_mode, const char *);
 
 void spear13xx_secondary_startup(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit spear13xx_cpu_die(unsigned int cpu);
+=======
+void spear13xx_cpu_die(unsigned int cpu);
+>>>>>>> v3.18
 =======
 void spear13xx_cpu_die(unsigned int cpu);
 >>>>>>> v3.18

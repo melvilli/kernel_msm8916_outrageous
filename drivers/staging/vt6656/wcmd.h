@@ -30,6 +30,7 @@
 #define __WCMD_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "80211hdr.h"
 #include "80211mgr.h"
 
@@ -117,6 +118,8 @@ WCMDvCommandThread(
 
 void BSSvSecondTxData(struct vnt_private *);
 =======
+=======
+>>>>>>> v3.18
 #include "device.h"
 
 /* Command code */
@@ -147,6 +150,9 @@ void vnt_reset_command_timer(struct vnt_private *);
 int vnt_schedule_command(struct vnt_private *, enum vnt_cmd);
 
 void vnt_run_command(struct work_struct *work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __WCMD_H__ */

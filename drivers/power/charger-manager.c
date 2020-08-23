@@ -13,6 +13,11 @@
 **/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -29,7 +34,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/sysfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/thermal.h>
 
@@ -39,6 +47,9 @@
  */
 #define CM_DEFAULT_RECHARGE_TEMP_DIFF	50
 #define CM_DEFAULT_CHARGE_TEMP_MAX	500
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char * const default_event_names[] = {
@@ -47,6 +58,11 @@ static const char * const default_event_names[] = {
 	[CM_EVENT_BATT_IN] = "Battery Inserted",
 	[CM_EVENT_BATT_OUT] = "Battery Pulled Out",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[CM_EVENT_BATT_OVERHEAT] = "Battery Overheat",
+	[CM_EVENT_BATT_COLD] = "Battery Cold",
+>>>>>>> v3.18
 =======
 	[CM_EVENT_BATT_OVERHEAT] = "Battery Overheat",
 	[CM_EVENT_BATT_COLD] = "Battery Cold",
@@ -107,6 +123,10 @@ static bool is_batt_present(struct charger_manager *cm)
 {
 	union power_supply_propval val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *psy;
+>>>>>>> v3.18
 =======
 	struct power_supply *psy;
 >>>>>>> v3.18
@@ -121,13 +141,19 @@ static bool is_batt_present(struct charger_manager *cm)
 		break;
 	case CM_FUEL_GAUGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
 =======
+=======
+>>>>>>> v3.18
 		psy = power_supply_get_by_name(cm->desc->psy_fuel_gauge);
 		if (!psy)
 			break;
 
 		ret = psy->get_property(psy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				POWER_SUPPLY_PROP_PRESENT, &val);
 		if (ret == 0 && val.intval)
@@ -135,11 +161,14 @@ static bool is_batt_present(struct charger_manager *cm)
 		break;
 	case CM_CHARGER_STAT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; cm->charger_stat[i]; i++) {
 			ret = cm->charger_stat[i]->get_property(
 					cm->charger_stat[i],
 					POWER_SUPPLY_PROP_PRESENT, &val);
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; cm->desc->psy_charger_stat[i]; i++) {
 			psy = power_supply_get_by_name(
 					cm->desc->psy_charger_stat[i]);
@@ -151,6 +180,9 @@ static bool is_batt_present(struct charger_manager *cm)
 
 			ret = psy->get_property(psy, POWER_SUPPLY_PROP_PRESENT,
 					&val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret == 0 && val.intval) {
 				present = true;
@@ -175,6 +207,10 @@ static bool is_ext_pwr_online(struct charger_manager *cm)
 {
 	union power_supply_propval val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *psy;
+>>>>>>> v3.18
 =======
 	struct power_supply *psy;
 >>>>>>> v3.18
@@ -183,11 +219,14 @@ static bool is_ext_pwr_online(struct charger_manager *cm)
 
 	/* If at least one of them has one, it's yes. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; cm->charger_stat[i]; i++) {
 		ret = cm->charger_stat[i]->get_property(
 				cm->charger_stat[i],
 				POWER_SUPPLY_PROP_ONLINE, &val);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; cm->desc->psy_charger_stat[i]; i++) {
 		psy = power_supply_get_by_name(cm->desc->psy_charger_stat[i]);
 		if (!psy) {
@@ -197,6 +236,9 @@ static bool is_ext_pwr_online(struct charger_manager *cm)
 		}
 
 		ret = psy->get_property(psy, POWER_SUPPLY_PROP_ONLINE, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret == 0 && val.intval) {
 			online = true;
@@ -219,6 +261,7 @@ static int get_batt_uV(struct charger_manager *cm, int *uV)
 {
 	union power_supply_propval val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	if (!cm->fuel_gauge)
@@ -226,6 +269,8 @@ static int get_batt_uV(struct charger_manager *cm, int *uV)
 
 	ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
 =======
+=======
+>>>>>>> v3.18
 	struct power_supply *fuel_gauge;
 	int ret;
 
@@ -234,6 +279,9 @@ static int get_batt_uV(struct charger_manager *cm, int *uV)
 		return -ENODEV;
 
 	ret = fuel_gauge->get_property(fuel_gauge,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				POWER_SUPPLY_PROP_VOLTAGE_NOW, &val);
 	if (ret)
@@ -252,6 +300,10 @@ static bool is_charging(struct charger_manager *cm)
 	int i, ret;
 	bool charging = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *psy;
+>>>>>>> v3.18
 =======
 	struct power_supply *psy;
 >>>>>>> v3.18
@@ -263,7 +315,11 @@ static bool is_charging(struct charger_manager *cm)
 
 	/* If at least one of the charger is charging, return yes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; cm->charger_stat[i]; i++) {
+=======
+	for (i = 0; cm->desc->psy_charger_stat[i]; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; cm->desc->psy_charger_stat[i]; i++) {
 >>>>>>> v3.18
@@ -274,6 +330,7 @@ static bool is_charging(struct charger_manager *cm)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* 2. The charger should be online (ext-power) */
 		ret = cm->charger_stat[i]->get_property(
 				cm->charger_stat[i],
@@ -282,6 +339,8 @@ static bool is_charging(struct charger_manager *cm)
 			dev_warn(cm->dev, "Cannot read ONLINE value from %s.\n",
 					cm->desc->psy_charger_stat[i]);
 =======
+=======
+>>>>>>> v3.18
 		psy = power_supply_get_by_name(cm->desc->psy_charger_stat[i]);
 		if (!psy) {
 			dev_err(cm->dev, "Cannot find power supply \"%s\"\n",
@@ -294,6 +353,9 @@ static bool is_charging(struct charger_manager *cm)
 		if (ret) {
 			dev_warn(cm->dev, "Cannot read ONLINE value from %s\n",
 				 cm->desc->psy_charger_stat[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -305,6 +367,7 @@ static bool is_charging(struct charger_manager *cm)
 		 * or NOT_CHARGING.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cm->charger_stat[i]->get_property(
 				cm->charger_stat[i],
 				POWER_SUPPLY_PROP_STATUS, &val);
@@ -312,10 +375,15 @@ static bool is_charging(struct charger_manager *cm)
 			dev_warn(cm->dev, "Cannot read STATUS value from %s.\n",
 					cm->desc->psy_charger_stat[i]);
 =======
+=======
+>>>>>>> v3.18
 		ret = psy->get_property(psy, POWER_SUPPLY_PROP_STATUS, &val);
 		if (ret) {
 			dev_warn(cm->dev, "Cannot read STATUS value from %s\n",
 				 cm->desc->psy_charger_stat[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -341,6 +409,10 @@ static bool is_full_charged(struct charger_manager *cm)
 	struct charger_desc *desc = cm->desc;
 	union power_supply_propval val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *fuel_gauge;
+>>>>>>> v3.18
 =======
 	struct power_supply *fuel_gauge;
 >>>>>>> v3.18
@@ -352,12 +424,15 @@ static bool is_full_charged(struct charger_manager *cm)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cm->fuel_gauge && desc->fullbatt_full_capacity > 0) {
 		val.intval = 0;
 
 		/* Not full if capacity of fuel gauge isn't full */
 		ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
 =======
+=======
+>>>>>>> v3.18
 	fuel_gauge = power_supply_get_by_name(cm->desc->psy_fuel_gauge);
 	if (!fuel_gauge)
 		return false;
@@ -367,6 +442,9 @@ static bool is_full_charged(struct charger_manager *cm)
 
 		/* Not full if capacity of fuel gauge isn't full */
 		ret = fuel_gauge->get_property(fuel_gauge,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				POWER_SUPPLY_PROP_CHARGE_FULL, &val);
 		if (!ret && val.intval > desc->fullbatt_full_capacity)
@@ -382,15 +460,21 @@ static bool is_full_charged(struct charger_manager *cm)
 
 	/* Full, if the capacity is more than fullbatt_soc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cm->fuel_gauge && desc->fullbatt_soc > 0) {
 		val.intval = 0;
 
 		ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
 =======
+=======
+>>>>>>> v3.18
 	if (desc->fullbatt_soc > 0) {
 		val.intval = 0;
 
 		ret = fuel_gauge->get_property(fuel_gauge,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				POWER_SUPPLY_PROP_CAPACITY, &val);
 		if (!ret && val.intval >= desc->fullbatt_soc)
@@ -418,7 +502,11 @@ static bool is_polling_required(struct charger_manager *cm)
 	default:
 		dev_warn(cm->dev, "Incorrect polling_mode (%d)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cm->desc->polling_mode);
+=======
+			 cm->desc->polling_mode);
+>>>>>>> v3.18
 =======
 			 cm->desc->polling_mode);
 >>>>>>> v3.18
@@ -464,9 +552,14 @@ static int try_charger_enable(struct charger_manager *cm, bool enable)
 			err = regulator_enable(desc->charger_regulators[i].consumer);
 			if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_warn(cm->dev,
 					"Cannot enable %s regulator\n",
 					desc->charger_regulators[i].regulator_name);
+=======
+				dev_warn(cm->dev, "Cannot enable %s regulator\n",
+					 desc->charger_regulators[i].regulator_name);
+>>>>>>> v3.18
 =======
 				dev_warn(cm->dev, "Cannot enable %s regulator\n",
 					 desc->charger_regulators[i].regulator_name);
@@ -488,9 +581,14 @@ static int try_charger_enable(struct charger_manager *cm, bool enable)
 			err = regulator_disable(desc->charger_regulators[i].consumer);
 			if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_warn(cm->dev,
 					"Cannot disable %s regulator\n",
 					desc->charger_regulators[i].regulator_name);
+=======
+				dev_warn(cm->dev, "Cannot disable %s regulator\n",
+					 desc->charger_regulators[i].regulator_name);
+>>>>>>> v3.18
 =======
 				dev_warn(cm->dev, "Cannot disable %s regulator\n",
 					 desc->charger_regulators[i].regulator_name);
@@ -508,9 +606,14 @@ static int try_charger_enable(struct charger_manager *cm, bool enable)
 				regulator_force_disable(
 					desc->charger_regulators[i].consumer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_warn(cm->dev,
 					"Disable regulator(%s) forcibly.\n",
 					desc->charger_regulators[i].regulator_name);
+=======
+				dev_warn(cm->dev, "Disable regulator(%s) forcibly\n",
+					 desc->charger_regulators[i].regulator_name);
+>>>>>>> v3.18
 =======
 				dev_warn(cm->dev, "Disable regulator(%s) forcibly\n",
 					 desc->charger_regulators[i].regulator_name);
@@ -598,7 +701,11 @@ static void uevent_notify(struct charger_manager *cm, const char *event)
 	kobject_uevent(&cm->dev->kobj, KOBJ_CHANGE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(cm->dev, "%s", event);
+=======
+	dev_info(cm->dev, "%s\n", event);
+>>>>>>> v3.18
 =======
 	dev_info(cm->dev, "%s\n", event);
 >>>>>>> v3.18
@@ -630,7 +737,11 @@ static void fullbatt_vchk(struct work_struct *work)
 	err = get_batt_uV(cm, &batt_uV);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(cm->dev, "%s: get_batt_uV error(%d).\n", __func__, err);
+=======
+		dev_err(cm->dev, "%s: get_batt_uV error(%d)\n", __func__, err);
+>>>>>>> v3.18
 =======
 		dev_err(cm->dev, "%s: get_batt_uV error(%d)\n", __func__, err);
 >>>>>>> v3.18
@@ -642,7 +753,11 @@ static void fullbatt_vchk(struct work_struct *work)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(cm->dev, "VBATT dropped %duV after full-batt.\n", diff);
+=======
+	dev_info(cm->dev, "VBATT dropped %duV after full-batt\n", diff);
+>>>>>>> v3.18
 =======
 	dev_info(cm->dev, "VBATT dropped %duV after full-batt\n", diff);
 >>>>>>> v3.18
@@ -679,7 +794,11 @@ static int check_charging_duration(struct charger_manager *cm)
 
 		if (duration > desc->charging_max_duration_ms) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(cm->dev, "Charging duration exceed %lldms",
+=======
+			dev_info(cm->dev, "Charging duration exceed %ums\n",
+>>>>>>> v3.18
 =======
 			dev_info(cm->dev, "Charging duration exceed %ums\n",
 >>>>>>> v3.18
@@ -694,9 +813,15 @@ static int check_charging_duration(struct charger_manager *cm)
 		if (duration > desc->charging_max_duration_ms &&
 				is_ext_pwr_online(cm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(cm->dev, "DisCharging duration exceed %lldms",
 				 desc->discharging_max_duration_ms);
 			uevent_notify(cm, "Recharing");
+=======
+			dev_info(cm->dev, "Discharging duration exceed %ums\n",
+				 desc->discharging_max_duration_ms);
+			uevent_notify(cm, "Recharging");
+>>>>>>> v3.18
 =======
 			dev_info(cm->dev, "Discharging duration exceed %ums\n",
 				 desc->discharging_max_duration_ms);
@@ -711,7 +836,10 @@ static int check_charging_duration(struct charger_manager *cm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int cm_get_battery_temperature_by_psy(struct charger_manager *cm,
 					int *temp)
 {
@@ -783,6 +911,9 @@ static int cm_check_thermal_status(struct charger_manager *cm)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * _cm_monitor - Monitor the temperature and return true for exceptions.
@@ -794,6 +925,7 @@ static int cm_check_thermal_status(struct charger_manager *cm)
 static bool _cm_monitor(struct charger_manager *cm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct charger_desc *desc = cm->desc;
 	int temp = desc->temperature_out_of_range(&cm->last_temp_mC);
 
@@ -803,12 +935,17 @@ static bool _cm_monitor(struct charger_manager *cm)
 	/* It has been stopped already */
 	if (temp && cm->emergency_stop)
 =======
+=======
+>>>>>>> v3.18
 	int temp_alrt;
 
 	temp_alrt = cm_check_thermal_status(cm);
 
 	/* It has been stopped already */
 	if (temp_alrt && cm->emergency_stop)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 
@@ -816,6 +953,7 @@ static bool _cm_monitor(struct charger_manager *cm)
 	 * Check temperature whether overheat or cold.
 	 * If temperature is out of range normal state, stop charging.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (temp) {
 		cm->emergency_stop = temp;
@@ -826,10 +964,15 @@ static bool _cm_monitor(struct charger_manager *cm)
 				uevent_notify(cm, "COLD");
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (temp_alrt) {
 		cm->emergency_stop = temp_alrt;
 		if (!try_charger_enable(cm, false))
 			uevent_notify(cm, default_event_names[temp_alrt]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -839,7 +982,11 @@ static bool _cm_monitor(struct charger_manager *cm)
 	} else if (!cm->emergency_stop && check_charging_duration(cm)) {
 		dev_dbg(cm->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"Charging/Discharging duration is out of range");
+=======
+			"Charging/Discharging duration is out of range\n");
+>>>>>>> v3.18
 =======
 			"Charging/Discharging duration is out of range\n");
 >>>>>>> v3.18
@@ -859,7 +1006,11 @@ static bool _cm_monitor(struct charger_manager *cm)
 	} else if (!cm->emergency_stop && is_full_charged(cm) &&
 			cm->charger_enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(cm->dev, "EVENT_HANDLE: Battery Fully Charged.\n");
+=======
+		dev_info(cm->dev, "EVENT_HANDLE: Battery Fully Charged\n");
+>>>>>>> v3.18
 =======
 		dev_info(cm->dev, "EVENT_HANDLE: Battery Fully Charged\n");
 >>>>>>> v3.18
@@ -993,7 +1144,11 @@ static void fullbatt_handler(struct charger_manager *cm)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(cm->dev, "EVENT_HANDLE: Battery Fully Charged.\n");
+=======
+	dev_info(cm->dev, "EVENT_HANDLE: Battery Fully Charged\n");
+>>>>>>> v3.18
 =======
 	dev_info(cm->dev, "EVENT_HANDLE: Battery Fully Charged\n");
 >>>>>>> v3.18
@@ -1041,6 +1196,10 @@ static int charger_get_property(struct power_supply *psy,
 			struct charger_manager, charger_psy);
 	struct charger_desc *desc = cm->desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *fuel_gauge;
+>>>>>>> v3.18
 =======
 	struct power_supply *fuel_gauge;
 >>>>>>> v3.18
@@ -1075,6 +1234,7 @@ static int charger_get_property(struct power_supply *psy,
 		break;
 	case POWER_SUPPLY_PROP_CURRENT_NOW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
 				POWER_SUPPLY_PROP_CURRENT_NOW, val);
 		break;
@@ -1097,6 +1257,8 @@ static int charger_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CAPACITY:
 		if (!cm->fuel_gauge) {
 =======
+=======
+>>>>>>> v3.18
 		fuel_gauge = power_supply_get_by_name(cm->desc->psy_fuel_gauge);
 		if (!fuel_gauge) {
 			ret = -ENODEV;
@@ -1111,6 +1273,9 @@ static int charger_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CAPACITY:
 		fuel_gauge = power_supply_get_by_name(cm->desc->psy_fuel_gauge);
 		if (!fuel_gauge) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -ENODEV;
 			break;
@@ -1123,7 +1288,11 @@ static int charger_get_property(struct power_supply *psy,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
+=======
+		ret = fuel_gauge->get_property(fuel_gauge,
+>>>>>>> v3.18
 =======
 		ret = fuel_gauge->get_property(fuel_gauge,
 >>>>>>> v3.18
@@ -1176,8 +1345,11 @@ static int charger_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CHARGE_NOW:
 		if (is_charging(cm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = cm->fuel_gauge->get_property(cm->fuel_gauge,
 =======
+=======
+>>>>>>> v3.18
 			fuel_gauge = power_supply_get_by_name(
 					cm->desc->psy_fuel_gauge);
 			if (!fuel_gauge) {
@@ -1186,6 +1358,9 @@ static int charger_get_property(struct power_supply *psy,
 			}
 
 			ret = fuel_gauge->get_property(fuel_gauge,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						POWER_SUPPLY_PROP_CHARGE_NOW,
 						val);
@@ -1233,6 +1408,10 @@ static struct power_supply psy_default = {
 	.num_properties = ARRAY_SIZE(default_charger_props),
 	.get_property = charger_get_property,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.no_thermal = true,
+>>>>>>> v3.18
 =======
 	.no_thermal = true,
 >>>>>>> v3.18
@@ -1284,7 +1463,11 @@ static bool cm_setup_timer(void)
 
 	if (wakeup_ms < UINT_MAX && wakeup_ms > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("Charger Manager wakeup timer: %u ms.\n", wakeup_ms);
+=======
+		pr_info("Charger Manager wakeup timer: %u ms\n", wakeup_ms);
+>>>>>>> v3.18
 =======
 		pr_info("Charger Manager wakeup timer: %u ms\n", wakeup_ms);
 >>>>>>> v3.18
@@ -1321,8 +1504,12 @@ static bool cm_setup_timer(void)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_info("Waking up after %lu secs.\n",
 					time - now);
+=======
+			pr_info("Waking up after %lu secs\n", time - now);
+>>>>>>> v3.18
 =======
 			pr_info("Waking up after %lu secs\n", time - now);
 >>>>>>> v3.18
@@ -1421,7 +1608,11 @@ int setup_charger_manager(struct charger_global_desc *gd)
 
 	if (!gd->rtc_only_wakeup) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("The callback rtc_only_wakeup is not given.\n");
+=======
+		pr_err("The callback rtc_only_wakeup is not given\n");
+>>>>>>> v3.18
 =======
 		pr_err("The callback rtc_only_wakeup is not given\n");
 >>>>>>> v3.18
@@ -1436,7 +1627,11 @@ int setup_charger_manager(struct charger_global_desc *gd)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warn("No wakeup timer is given for charger manager."
+=======
+		pr_warn("No wakeup timer is given for charger manager.  "
+>>>>>>> v3.18
 =======
 		pr_warn("No wakeup timer is given for charger manager.  "
 >>>>>>> v3.18
@@ -1466,7 +1661,11 @@ static void charger_extcon_work(struct work_struct *work)
 		if (ret < 0) {
 			pr_err("Cannot set current limit of %s (%s)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cable->charger->regulator_name, cable->name);
+=======
+			       cable->charger->regulator_name, cable->name);
+>>>>>>> v3.18
 =======
 			       cable->charger->regulator_name, cable->name);
 >>>>>>> v3.18
@@ -1475,8 +1674,13 @@ static void charger_extcon_work(struct work_struct *work)
 
 		pr_info("Set current limit of %s : %duA ~ %duA\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cable->charger->regulator_name,
 					cable->min_uA, cable->max_uA);
+=======
+			cable->charger->regulator_name,
+			cable->min_uA, cable->max_uA);
+>>>>>>> v3.18
 =======
 			cable->charger->regulator_name,
 			cable->min_uA, cable->max_uA);
@@ -1547,9 +1751,14 @@ static int charger_extcon_init(struct charger_manager *cm,
 			cable->extcon_name, cable->name, &cable->nb);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("Cannot register extcon_dev for %s(cable: %s).\n",
 				cable->extcon_name,
 				cable->name);
+=======
+		pr_info("Cannot register extcon_dev for %s(cable: %s)\n",
+			cable->extcon_name, cable->name);
+>>>>>>> v3.18
 =======
 		pr_info("Cannot register extcon_dev for %s(cable: %s)\n",
 			cable->extcon_name, cable->name);
@@ -1584,16 +1793,22 @@ static int charger_manager_register_extcon(struct charger_manager *cm)
 		charger->consumer = regulator_get(cm->dev,
 					charger->regulator_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (charger->consumer == NULL) {
 			dev_err(cm->dev, "Cannot find charger(%s)n",
 					charger->regulator_name);
 			ret = -EINVAL;
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		if (IS_ERR(charger->consumer)) {
 			dev_err(cm->dev, "Cannot find charger(%s)\n",
 				charger->regulator_name);
 			return PTR_ERR(charger->consumer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		charger->cm = cm;
@@ -1604,8 +1819,13 @@ static int charger_manager_register_extcon(struct charger_manager *cm)
 			ret = charger_extcon_init(cm, cable);
 			if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_err(cm->dev, "Cannot initialize charger(%s)n",
 						charger->regulator_name);
+=======
+				dev_err(cm->dev, "Cannot initialize charger(%s)\n",
+					charger->regulator_name);
+>>>>>>> v3.18
 =======
 				dev_err(cm->dev, "Cannot initialize charger(%s)\n",
 					charger->regulator_name);
@@ -1701,10 +1921,15 @@ static ssize_t charger_externally_control_store(struct device *dev,
 	} else {
 		dev_warn(cm->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"'%s' regulator should be controlled "
 			"in charger-manager because charger-manager "
 			"must need at least one charger for charging\n",
 			charger->regulator_name);
+=======
+			 "'%s' regulator should be controlled in charger-manager because charger-manager must need at least one charger for charging\n",
+			 charger->regulator_name);
+>>>>>>> v3.18
 =======
 			 "'%s' regulator should be controlled in charger-manager because charger-manager must need at least one charger for charging\n",
 			 charger->regulator_name);
@@ -1743,10 +1968,16 @@ static int charger_manager_register_sysfs(struct charger_manager *cm)
 
 		snprintf(buf, 10, "charger.%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		str = kzalloc(sizeof(char) * (strlen(buf) + 1), GFP_KERNEL);
 		if (!str) {
 			dev_err(cm->dev, "Cannot allocate memory: %s\n",
 					charger->regulator_name);
+=======
+		str = devm_kzalloc(cm->dev,
+				sizeof(char) * (strlen(buf) + 1), GFP_KERNEL);
+		if (!str) {
+>>>>>>> v3.18
 =======
 		str = devm_kzalloc(cm->dev,
 				sizeof(char) * (strlen(buf) + 1), GFP_KERNEL);
@@ -1788,9 +2019,14 @@ static int charger_manager_register_sysfs(struct charger_manager *cm)
 			chargers_externally_control = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(cm->dev, "'%s' regulator's externally_control"
 				"is %d\n", charger->regulator_name,
 				charger->externally_control);
+=======
+		dev_info(cm->dev, "'%s' regulator's externally_control is %d\n",
+			 charger->regulator_name, charger->externally_control);
+>>>>>>> v3.18
 =======
 		dev_info(cm->dev, "'%s' regulator's externally_control is %d\n",
 			 charger->regulator_name, charger->externally_control);
@@ -1800,9 +2036,14 @@ static int charger_manager_register_sysfs(struct charger_manager *cm)
 					&charger->attr_g);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(cm->dev, "Cannot create sysfs entry"
 					"of %s regulator\n",
 					charger->regulator_name);
+=======
+			dev_err(cm->dev, "Cannot create sysfs entry of %s regulator\n",
+				charger->regulator_name);
+>>>>>>> v3.18
 =======
 			dev_err(cm->dev, "Cannot create sysfs entry of %s regulator\n",
 				charger->regulator_name);
@@ -1814,10 +2055,14 @@ static int charger_manager_register_sysfs(struct charger_manager *cm)
 
 	if (chargers_externally_control) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(cm->dev, "Cannot register regulator because "
 				"charger-manager must need at least "
 				"one charger for charging battery\n");
 
+=======
+		dev_err(cm->dev, "Cannot register regulator because charger-manager must need at least one charger for charging battery\n");
+>>>>>>> v3.18
 =======
 		dev_err(cm->dev, "Cannot register regulator because charger-manager must need at least one charger for charging battery\n");
 >>>>>>> v3.18
@@ -1830,10 +2075,13 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int charger_manager_probe(struct platform_device *pdev)
 {
 	struct charger_desc *desc = dev_get_platdata(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 static int cm_init_thermal_data(struct charger_manager *cm,
 		struct power_supply *fuel_gauge)
 {
@@ -2010,12 +2258,19 @@ static inline struct charger_desc *cm_get_drv_data(struct platform_device *pdev)
 static int charger_manager_probe(struct platform_device *pdev)
 {
 	struct charger_desc *desc = cm_get_drv_data(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct charger_manager *cm;
 	int ret = 0, i = 0;
 	int j = 0;
 	union power_supply_propval val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct power_supply *fuel_gauge;
+>>>>>>> v3.18
 =======
 	struct power_supply *fuel_gauge;
 >>>>>>> v3.18
@@ -2024,6 +2279,7 @@ static int charger_manager_probe(struct platform_device *pdev)
 		rtc_dev = rtc_class_open(g_desc->rtc_name);
 		if (IS_ERR_OR_NULL(rtc_dev)) {
 			rtc_dev = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dev_err(&pdev->dev, "Cannot get RTC %s.\n",
 				g_desc->rtc_name);
@@ -2055,6 +2311,8 @@ static int charger_manager_probe(struct platform_device *pdev)
 	}
 	cm->last_temp_mC = INT_MIN; /* denotes "unmeasured, yet" */
 =======
+=======
+>>>>>>> v3.18
 			dev_err(&pdev->dev, "Cannot get RTC %s\n",
 				g_desc->rtc_name);
 			return -ENODEV;
@@ -2074,6 +2332,9 @@ static int charger_manager_probe(struct platform_device *pdev)
 	/* Basic Values. Unspecified are Null or 0 */
 	cm->dev = &pdev->dev;
 	cm->desc = desc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2082,6 +2343,7 @@ static int charger_manager_probe(struct platform_device *pdev)
 	 */
 	if (desc->fullbatt_uV == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&pdev->dev, "Ignoring full-battery voltage threshold"
 					" as it is not supplied.");
 	}
@@ -2089,15 +2351,21 @@ static int charger_manager_probe(struct platform_device *pdev)
 		dev_info(&pdev->dev, "Disabling full-battery voltage drop "
 				"checking mechanism as it is not supplied.");
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&pdev->dev, "Ignoring full-battery voltage threshold as it is not supplied\n");
 	}
 	if (!desc->fullbatt_vchkdrop_ms || !desc->fullbatt_vchkdrop_uV) {
 		dev_info(&pdev->dev, "Disabling full-battery voltage drop checking mechanism as it is not supplied\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		desc->fullbatt_vchkdrop_ms = 0;
 		desc->fullbatt_vchkdrop_uV = 0;
 	}
 	if (desc->fullbatt_soc == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_info(&pdev->dev, "Ignoring full-battery soc(state of"
 					" charge) threshold as it is not"
@@ -2119,6 +2387,8 @@ static int charger_manager_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto err_no_charger_stat;
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&pdev->dev, "Ignoring full-battery soc(state of charge) threshold as it is not supplied\n");
 	}
 	if (desc->fullbatt_full_capacity == 0) {
@@ -2138,6 +2408,9 @@ static int charger_manager_probe(struct platform_device *pdev)
 	if (!desc->psy_fuel_gauge) {
 		dev_err(&pdev->dev, "No fuel gauge power supply defined\n");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2145,6 +2418,7 @@ static int charger_manager_probe(struct platform_device *pdev)
 	while (desc->psy_charger_stat[i])
 		i++;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cm->charger_stat = kzalloc(sizeof(struct power_supply *) * (i + 1),
 				   GFP_KERNEL);
@@ -2172,6 +2446,8 @@ static int charger_manager_probe(struct platform_device *pdev)
 		ret = -ENODEV;
 		goto err_chg_stat;
 =======
+=======
+>>>>>>> v3.18
 	/* Check if charger's supplies are present at probe */
 	for (i = 0; desc->psy_charger_stat[i]; i++) {
 		struct power_supply *psy;
@@ -2189,12 +2465,16 @@ static int charger_manager_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Cannot find power supply \"%s\"\n",
 			desc->psy_fuel_gauge);
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (desc->polling_interval_ms == 0 ||
 	    msecs_to_jiffies(desc->polling_interval_ms) <= CM_JIFFIES_SMALL) {
 		dev_err(&pdev->dev, "polling_interval_ms is too small\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -EINVAL;
 		goto err_chg_stat;
@@ -2207,14 +2487,21 @@ static int charger_manager_probe(struct platform_device *pdev)
 =======
 		return -EINVAL;
 >>>>>>> v3.18
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	if (!desc->charging_max_duration_ms ||
 			!desc->discharging_max_duration_ms) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&pdev->dev, "Cannot limit charging duration "
 			 "checking mechanism to prevent overcharge/overheat "
 			 "and control discharging duration");
+=======
+		dev_info(&pdev->dev, "Cannot limit charging duration checking mechanism to prevent overcharge/overheat and control discharging duration\n");
+>>>>>>> v3.18
 =======
 		dev_info(&pdev->dev, "Cannot limit charging duration checking mechanism to prevent overcharge/overheat and control discharging duration\n");
 >>>>>>> v3.18
@@ -2234,6 +2521,7 @@ static int charger_manager_probe(struct platform_device *pdev)
 
 	/* Allocate for psy properties because they may vary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cm->charger_psy.properties = kzalloc(sizeof(enum power_supply_property)
 				* (ARRAY_SIZE(default_charger_props) +
 				NUM_CHARGER_PSY_OPTIONAL),
@@ -2244,6 +2532,8 @@ static int charger_manager_probe(struct platform_device *pdev)
 		goto err_chg_stat;
 	}
 =======
+=======
+>>>>>>> v3.18
 	cm->charger_psy.properties = devm_kzalloc(&pdev->dev,
 				sizeof(enum power_supply_property)
 				* (ARRAY_SIZE(default_charger_props) +
@@ -2251,6 +2541,9 @@ static int charger_manager_probe(struct platform_device *pdev)
 	if (!cm->charger_psy.properties)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(cm->charger_psy.properties, default_charger_props,
 		sizeof(enum power_supply_property) *
@@ -2259,7 +2552,11 @@ static int charger_manager_probe(struct platform_device *pdev)
 
 	/* Find which optional psy-properties are available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cm->fuel_gauge->get_property(cm->fuel_gauge,
+=======
+	if (!fuel_gauge->get_property(fuel_gauge,
+>>>>>>> v3.18
 =======
 	if (!fuel_gauge->get_property(fuel_gauge,
 >>>>>>> v3.18
@@ -2269,7 +2566,11 @@ static int charger_manager_probe(struct platform_device *pdev)
 		cm->charger_psy.num_properties++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cm->fuel_gauge->get_property(cm->fuel_gauge,
+=======
+	if (!fuel_gauge->get_property(fuel_gauge,
+>>>>>>> v3.18
 =======
 	if (!fuel_gauge->get_property(fuel_gauge,
 >>>>>>> v3.18
@@ -2281,6 +2582,7 @@ static int charger_manager_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (desc->measure_battery_temp) {
 		cm->charger_psy.properties[cm->charger_psy.num_properties] =
 				POWER_SUPPLY_PROP_TEMP;
@@ -2290,10 +2592,15 @@ static int charger_manager_probe(struct platform_device *pdev)
 				POWER_SUPPLY_PROP_TEMP_AMBIENT;
 		cm->charger_psy.num_properties++;
 =======
+=======
+>>>>>>> v3.18
 	ret = cm_init_thermal_data(cm, fuel_gauge);
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to initialize thermal data\n");
 		cm->desc->measure_battery_temp = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2302,9 +2609,15 @@ static int charger_manager_probe(struct platform_device *pdev)
 	ret = power_supply_register(NULL, &cm->charger_psy);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "Cannot register charger-manager with"
 				" name \"%s\".\n", cm->charger_psy.name);
 		goto err_register;
+=======
+		dev_err(&pdev->dev, "Cannot register charger-manager with name \"%s\"\n",
+			cm->charger_psy.name);
+		return ret;
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "Cannot register charger-manager with name \"%s\"\n",
 			cm->charger_psy.name);
@@ -2340,7 +2653,10 @@ static int charger_manager_probe(struct platform_device *pdev)
 	device_set_wakeup_capable(&pdev->dev, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Charger-manager have to check the charging state right after
 	 * tialization of charger-manager and then update current charging
@@ -2348,6 +2664,9 @@ static int charger_manager_probe(struct platform_device *pdev)
 	 */
 	cm_monitor();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	schedule_work(&setup_polling);
 
@@ -2361,8 +2680,11 @@ err_reg_sysfs:
 		sysfs_remove_group(&cm->charger_psy.dev->kobj,
 				&charger->attr_g);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		kfree(charger->attr_g.name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2374,7 +2696,13 @@ err_reg_extcon:
 		for (j = 0; j < charger->num_cables; j++) {
 			struct charger_cable *cable = &charger->cables[j];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			extcon_unregister_interest(&cable->extcon_dev);
+=======
+			/* Remove notifier block if only edev exists */
+			if (cable->extcon_dev.edev)
+				extcon_unregister_interest(&cable->extcon_dev);
+>>>>>>> v3.18
 =======
 			/* Remove notifier block if only edev exists */
 			if (cable->extcon_dev.edev)
@@ -2387,6 +2715,7 @@ err_reg_extcon:
 
 	power_supply_unregister(&cm->charger_psy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_register:
 	kfree(cm->charger_psy.properties);
 err_chg_stat:
@@ -2397,6 +2726,9 @@ err_no_charger:
 err_alloc_desc:
 	kfree(cm);
 err_alloc:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2435,11 +2767,14 @@ static int charger_manager_remove(struct platform_device *pdev)
 	try_charger_enable(cm, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(cm->charger_psy.properties);
 	kfree(cm->charger_stat);
 	kfree(cm->desc);
 	kfree(cm);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2559,6 +2894,10 @@ static struct platform_driver charger_manager_driver = {
 		.owner = THIS_MODULE,
 		.pm = &charger_manager_pm,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = charger_manager_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = charger_manager_match,
 >>>>>>> v3.18
@@ -2598,8 +2937,13 @@ static bool find_power_supply(struct charger_manager *cm,
 	bool found = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; cm->charger_stat[i]; i++) {
 		if (psy == cm->charger_stat[i]) {
+=======
+	for (i = 0; cm->desc->psy_charger_stat[i]; i++) {
+		if (!strcmp(psy->name, cm->desc->psy_charger_stat[i])) {
+>>>>>>> v3.18
 =======
 	for (i = 0; cm->desc->psy_charger_stat[i]; i++) {
 		if (!strcmp(psy->name, cm->desc->psy_charger_stat[i])) {
@@ -2655,7 +2999,11 @@ void cm_notify_event(struct power_supply *psy, enum cm_event_types type,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(cm->dev, "%s type not specified.\n", __func__);
+=======
+		dev_err(cm->dev, "%s: type not specified\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_err(cm->dev, "%s: type not specified\n", __func__);
 >>>>>>> v3.18

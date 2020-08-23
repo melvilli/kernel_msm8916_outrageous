@@ -41,6 +41,10 @@
 #include <linux/seq_file.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -72,7 +76,11 @@ struct aarp_entry {
 	struct atalk_addr	target_addr;
 	struct net_device	*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			hwaddr[6];
+=======
+	char			hwaddr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	char			hwaddr[ETH_ALEN];
 >>>>>>> v3.18
@@ -143,7 +151,11 @@ static void __aarp_send_query(struct aarp_entry *a)
 	eah->function	 = htons(AARP_REQUEST);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eah->hw_src, dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(eah->hw_src, dev->dev_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(eah->hw_src, dev->dev_addr);
 >>>>>>> v3.18
@@ -194,7 +206,11 @@ static void aarp_send_reply(struct net_device *dev, struct atalk_addr *us,
 	eah->function	 = htons(AARP_REPLY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eah->hw_src, dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(eah->hw_src, dev->dev_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(eah->hw_src, dev->dev_addr);
 >>>>>>> v3.18
@@ -207,7 +223,11 @@ static void aarp_send_reply(struct net_device *dev, struct atalk_addr *us,
 		memset(eah->hw_dst, '\0', ETH_ALEN);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(eah->hw_dst, sha, ETH_ALEN);
+=======
+		ether_addr_copy(eah->hw_dst, sha);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(eah->hw_dst, sha);
 >>>>>>> v3.18
@@ -253,7 +273,11 @@ static void aarp_send_probe(struct net_device *dev, struct atalk_addr *us)
 	eah->function	 = htons(AARP_PROBE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eah->hw_src, dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(eah->hw_src, dev->dev_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(eah->hw_src, dev->dev_addr);
 >>>>>>> v3.18
@@ -357,7 +381,11 @@ static int aarp_device_event(struct notifier_block *this, unsigned long event,
 			     void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -819,7 +847,11 @@ static int aarp_rcv(struct sk_buff *skb, struct net_device *dev,
 
 		/* We can fill one in - this is good. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(a->hwaddr, ea->hw_src, ETH_ALEN);
+=======
+		ether_addr_copy(a->hwaddr, ea->hw_src);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(a->hwaddr, ea->hw_src);
 >>>>>>> v3.18
@@ -958,7 +990,11 @@ static struct aarp_entry *iter_next(struct aarp_iter_state *iter, loff_t *pos)
 
  rescan:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while(ct < AARP_HASH_SIZE) {
+=======
+	while (ct < AARP_HASH_SIZE) {
+>>>>>>> v3.18
 =======
 	while (ct < AARP_HASH_SIZE) {
 >>>>>>> v3.18
@@ -1031,7 +1067,11 @@ static const char *dt2str(unsigned long ticks)
 	static char buf[32];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(buf, "%ld.%02ld", ticks / HZ, ((ticks % HZ) * 100 ) / HZ);
+=======
+	sprintf(buf, "%ld.%02ld", ticks / HZ, ((ticks % HZ) * 100) / HZ);
+>>>>>>> v3.18
 =======
 	sprintf(buf, "%ld.%02ld", ticks / HZ, ((ticks % HZ) * 100) / HZ);
 >>>>>>> v3.18

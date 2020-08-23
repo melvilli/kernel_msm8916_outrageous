@@ -36,7 +36,11 @@ struct vmw_fence_manager {
 	spinlock_t lock;
 	struct list_head fence_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct work;
+=======
+	struct work_struct work, ping_work;
+>>>>>>> v3.18
 =======
 	struct work_struct work, ping_work;
 >>>>>>> v3.18
@@ -51,6 +55,10 @@ struct vmw_fence_manager {
 	bool seqno_valid; /* Protected by @lock, and may not be set to true
 			     without the @goal_irq_mutex held. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned ctx;
+>>>>>>> v3.18
 =======
 	unsigned ctx;
 >>>>>>> v3.18
@@ -89,13 +97,19 @@ struct vmw_event_fence_action {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct vmw_fence_manager *
 fman_from_fence(struct vmw_fence_obj *fence)
 {
 	return container_of(fence->base.lock, struct vmw_fence_manager, lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Note on fencing subsystem usage of irqs:
@@ -120,6 +134,7 @@ fman_from_fence(struct vmw_fence_obj *fence)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vmw_fence_obj_destroy_locked(struct kref *kref)
 {
 	struct vmw_fence_obj *fence =
@@ -140,6 +155,8 @@ static void vmw_fence_obj_destroy_locked(struct kref *kref)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void vmw_fence_obj_destroy(struct fence *f)
 {
 	struct vmw_fence_obj *fence =
@@ -277,6 +294,9 @@ static struct fence_ops vmw_fence_ops = {
 	.release = vmw_fence_obj_destroy,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -338,6 +358,10 @@ struct vmw_fence_manager *vmw_fence_manager_init(struct vmw_private *dev_priv)
 	INIT_LIST_HEAD(&fman->cleanup_list);
 	INIT_WORK(&fman->work, &vmw_fence_work_func);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_WORK(&fman->ping_work, &vmw_fence_ping_func);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&fman->ping_work, &vmw_fence_ping_func);
 >>>>>>> v3.18
@@ -348,6 +372,10 @@ struct vmw_fence_manager *vmw_fence_manager_init(struct vmw_private *dev_priv)
 		ttm_round_pot(sizeof(struct vmw_event_fence_action));
 	mutex_init(&fman->goal_irq_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fman->ctx = fence_context_alloc(1);
+>>>>>>> v3.18
 =======
 	fman->ctx = fence_context_alloc(1);
 >>>>>>> v3.18
@@ -362,6 +390,10 @@ void vmw_fence_manager_takedown(struct vmw_fence_manager *fman)
 
 	(void) cancel_work_sync(&fman->work);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	(void) cancel_work_sync(&fman->ping_work);
+>>>>>>> v3.18
 =======
 	(void) cancel_work_sync(&fman->ping_work);
 >>>>>>> v3.18
@@ -376,6 +408,7 @@ void vmw_fence_manager_takedown(struct vmw_fence_manager *fman)
 }
 
 static int vmw_fence_obj_init(struct vmw_fence_manager *fman,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			      struct vmw_fence_obj *fence,
 			      u32 seqno,
@@ -395,6 +428,8 @@ static int vmw_fence_obj_init(struct vmw_fence_manager *fman,
 	fence->destroy = destroy;
 	init_waitqueue_head(&fence->queue);
 =======
+=======
+>>>>>>> v3.18
 			      struct vmw_fence_obj *fence, u32 seqno,
 			      void (*destroy) (struct vmw_fence_obj *fence))
 {
@@ -405,6 +440,9 @@ static int vmw_fence_obj_init(struct vmw_fence_manager *fman,
 		   fman->ctx, seqno);
 	INIT_LIST_HEAD(&fence->seq_passed_actions);
 	fence->destroy = destroy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&fman->lock, irq_flags);
@@ -414,7 +452,11 @@ static int vmw_fence_obj_init(struct vmw_fence_manager *fman,
 	}
 	list_add_tail(&fence->head, &fman->fence_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_fences = ++fman->num_fence_objects;
+=======
+	++fman->num_fence_objects;
+>>>>>>> v3.18
 =======
 	++fman->num_fence_objects;
 >>>>>>> v3.18
@@ -425,6 +467,7 @@ out_unlock:
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct vmw_fence_obj *vmw_fence_obj_reference(struct vmw_fence_obj *fence)
 {
@@ -459,6 +502,9 @@ void vmw_fence_obj_unreference(struct vmw_fence_obj **fence_p)
 }
 
 void vmw_fences_perform_actions(struct vmw_fence_manager *fman,
+=======
+static void vmw_fences_perform_actions(struct vmw_fence_manager *fman,
+>>>>>>> v3.18
 =======
 static void vmw_fences_perform_actions(struct vmw_fence_manager *fman,
 >>>>>>> v3.18
@@ -517,7 +563,11 @@ static bool vmw_fence_goal_new_locked(struct vmw_fence_manager *fman,
 		if (!list_empty(&fence->seq_passed_actions)) {
 			fman->seqno_valid = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iowrite32(fence->seqno,
+=======
+			iowrite32(fence->base.seqno,
+>>>>>>> v3.18
 =======
 			iowrite32(fence->base.seqno,
 >>>>>>> v3.18
@@ -548,6 +598,7 @@ static bool vmw_fence_goal_new_locked(struct vmw_fence_manager *fman,
 static bool vmw_fence_goal_check_locked(struct vmw_fence_obj *fence)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 goal_seqno;
 	__le32 __iomem *fifo_mem;
 
@@ -563,6 +614,8 @@ static bool vmw_fence_goal_check_locked(struct vmw_fence_obj *fence)
 	iowrite32(fence->seqno, fifo_mem + SVGA_FIFO_FENCE_GOAL);
 	fence->fman->seqno_valid = true;
 =======
+=======
+>>>>>>> v3.18
 	struct vmw_fence_manager *fman = fman_from_fence(fence);
 	u32 goal_seqno;
 	__le32 __iomem *fifo_mem;
@@ -578,15 +631,23 @@ static bool vmw_fence_goal_check_locked(struct vmw_fence_obj *fence)
 
 	iowrite32(fence->base.seqno, fifo_mem + SVGA_FIFO_FENCE_GOAL);
 	fman->seqno_valid = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_fences_update(struct vmw_fence_manager *fman)
 {
 	unsigned long flags;
+=======
+static void __vmw_fences_update(struct vmw_fence_manager *fman)
+{
+>>>>>>> v3.18
 =======
 static void __vmw_fences_update(struct vmw_fence_manager *fman)
 {
@@ -600,29 +661,39 @@ static void __vmw_fences_update(struct vmw_fence_manager *fman)
 	seqno = ioread32(fifo_mem + SVGA_FIFO_FENCE);
 rerun:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&fman->lock, flags);
 	list_for_each_entry_safe(fence, next_fence, &fman->fence_list, head) {
 		if (seqno - fence->seqno < VMW_FENCE_WRAP) {
 			list_del_init(&fence->head);
 			fence->signaled |= DRM_VMW_FENCE_FLAG_EXEC;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_safe(fence, next_fence, &fman->fence_list, head) {
 		if (seqno - fence->base.seqno < VMW_FENCE_WRAP) {
 			list_del_init(&fence->head);
 			fence_signal_locked(&fence->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			INIT_LIST_HEAD(&action_list);
 			list_splice_init(&fence->seq_passed_actions,
 					 &action_list);
 			vmw_fences_perform_actions(fman, &action_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wake_up_all(&fence->queue);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		} else
 			break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	needs_rerun = vmw_fence_goal_new_locked(fman, seqno);
 
@@ -632,6 +703,8 @@ rerun:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/*
 	 * Rerun if the fence goal seqno was updated, and the
 	 * hardware might have raced with that update, so that
@@ -639,6 +712,10 @@ rerun:
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	needs_rerun = vmw_fence_goal_new_locked(fman, seqno);
+>>>>>>> v3.18
 =======
 	needs_rerun = vmw_fence_goal_new_locked(fman, seqno);
 >>>>>>> v3.18
@@ -649,6 +726,7 @@ rerun:
 			goto rerun;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -710,6 +788,8 @@ int vmw_fence_obj_wait(struct vmw_fence_obj *fence,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	if (!list_empty(&fman->cleanup_list))
 		(void) schedule_work(&fman->work);
@@ -747,13 +827,20 @@ int vmw_fence_obj_wait(struct vmw_fence_obj *fence, bool lazy,
 		return -EBUSY;
 	else
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void vmw_fence_obj_flush(struct vmw_fence_obj *fence)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_private *dev_priv = fence->fman->dev_priv;
+=======
+	struct vmw_private *dev_priv = fman_from_fence(fence)->dev_priv;
+>>>>>>> v3.18
 =======
 	struct vmw_private *dev_priv = fman_from_fence(fence)->dev_priv;
 >>>>>>> v3.18
@@ -764,14 +851,20 @@ void vmw_fence_obj_flush(struct vmw_fence_obj *fence)
 static void vmw_fence_destroy(struct vmw_fence_obj *fence)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_fence_manager *fman = fence->fman;
 
 	kfree(fence);
 =======
+=======
+>>>>>>> v3.18
 	struct vmw_fence_manager *fman = fman_from_fence(fence);
 
 	fence_free(&fence->base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Free kernel space accounting.
@@ -783,7 +876,10 @@ static void vmw_fence_destroy(struct vmw_fence_obj *fence)
 int vmw_fence_create(struct vmw_fence_manager *fman,
 		     uint32_t seqno,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     uint32_t mask,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		     struct vmw_fence_obj **p_fence)
@@ -804,7 +900,11 @@ int vmw_fence_create(struct vmw_fence_manager *fman,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = vmw_fence_obj_init(fman, fence, seqno, mask,
+=======
+	ret = vmw_fence_obj_init(fman, fence, seqno,
+>>>>>>> v3.18
 =======
 	ret = vmw_fence_obj_init(fman, fence, seqno,
 >>>>>>> v3.18
@@ -828,7 +928,11 @@ static void vmw_user_fence_destroy(struct vmw_fence_obj *fence)
 	struct vmw_user_fence *ufence =
 		container_of(fence, struct vmw_user_fence, fence);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_fence_manager *fman = fence->fman;
+=======
+	struct vmw_fence_manager *fman = fman_from_fence(fence);
+>>>>>>> v3.18
 =======
 	struct vmw_fence_manager *fman = fman_from_fence(fence);
 >>>>>>> v3.18
@@ -856,7 +960,10 @@ int vmw_user_fence_create(struct drm_file *file_priv,
 			  struct vmw_fence_manager *fman,
 			  uint32_t seqno,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  uint32_t mask,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			  struct vmw_fence_obj **p_fence,
@@ -886,7 +993,11 @@ int vmw_user_fence_create(struct drm_file *file_priv,
 
 	ret = vmw_fence_obj_init(fman, &ufence->fence, seqno,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 mask, vmw_user_fence_destroy);
+=======
+				 vmw_user_fence_destroy);
+>>>>>>> v3.18
 =======
 				 vmw_user_fence_destroy);
 >>>>>>> v3.18
@@ -933,7 +1044,10 @@ out_no_object:
 void vmw_fence_fifo_down(struct vmw_fence_manager *fman)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long irq_flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head action_list;
@@ -945,7 +1059,11 @@ void vmw_fence_fifo_down(struct vmw_fence_manager *fman)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&fman->lock, irq_flags);
+=======
+	spin_lock_irq(&fman->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_irq(&fman->lock);
 >>>>>>> v3.18
@@ -955,23 +1073,33 @@ void vmw_fence_fifo_down(struct vmw_fence_manager *fman)
 			list_entry(fman->fence_list.prev, struct vmw_fence_obj,
 				   head);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kref_get(&fence->kref);
 		spin_unlock_irq(&fman->lock);
 
 		ret = vmw_fence_obj_wait(fence, fence->signal_mask,
 					 false, false,
 =======
+=======
+>>>>>>> v3.18
 		fence_get(&fence->base);
 		spin_unlock_irq(&fman->lock);
 
 		ret = vmw_fence_obj_wait(fence, false, false,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 VMW_FENCE_WAIT_TIMEOUT);
 
 		if (unlikely(ret != 0)) {
 			list_del_init(&fence->head);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fence->signaled |= DRM_VMW_FENCE_FLAG_EXEC;
+=======
+			fence_signal(&fence->base);
+>>>>>>> v3.18
 =======
 			fence_signal(&fence->base);
 >>>>>>> v3.18
@@ -979,6 +1107,7 @@ void vmw_fence_fifo_down(struct vmw_fence_manager *fman)
 			list_splice_init(&fence->seq_passed_actions,
 					 &action_list);
 			vmw_fences_perform_actions(fman, &action_list);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			wake_up_all(&fence->queue);
 		}
@@ -990,6 +1119,8 @@ void vmw_fence_fifo_down(struct vmw_fence_manager *fman)
 	}
 	spin_unlock_irqrestore(&fman->lock, irq_flags);
 =======
+=======
+>>>>>>> v3.18
 		}
 
 		BUG_ON(!list_empty(&fence->head));
@@ -997,6 +1128,9 @@ void vmw_fence_fifo_down(struct vmw_fence_manager *fman)
 		spin_lock_irq(&fman->lock);
 	}
 	spin_unlock_irq(&fman->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1048,7 +1182,11 @@ int vmw_fence_obj_wait_ioctl(struct drm_device *dev, void *data,
 	timeout = jiffies;
 	if (time_after_eq(timeout, (unsigned long)arg->kernel_cookie)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ((vmw_fence_obj_signaled(fence, arg->flags)) ?
+=======
+		ret = ((vmw_fence_obj_signaled(fence)) ?
+>>>>>>> v3.18
 =======
 		ret = ((vmw_fence_obj_signaled(fence)) ?
 >>>>>>> v3.18
@@ -1059,7 +1197,11 @@ int vmw_fence_obj_wait_ioctl(struct drm_device *dev, void *data,
 	timeout = (unsigned long)arg->kernel_cookie - timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = vmw_fence_obj_wait(fence, arg->flags, arg->lazy, true, timeout);
+=======
+	ret = vmw_fence_obj_wait(fence, arg->lazy, true, timeout);
+>>>>>>> v3.18
 =======
 	ret = vmw_fence_obj_wait(fence, arg->lazy, true, timeout);
 >>>>>>> v3.18
@@ -1098,6 +1240,7 @@ int vmw_fence_obj_signaled_ioctl(struct drm_device *dev, void *data,
 
 	fence = &(container_of(base, struct vmw_user_fence, base)->fence);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fman = fence->fman;
 
 	arg->signaled = vmw_fence_obj_signaled(fence, arg->flags);
@@ -1105,12 +1248,17 @@ int vmw_fence_obj_signaled_ioctl(struct drm_device *dev, void *data,
 
 	arg->signaled_flags = fence->signaled;
 =======
+=======
+>>>>>>> v3.18
 	fman = fman_from_fence(fence);
 
 	arg->signaled = vmw_fence_obj_signaled(fence);
 
 	arg->signaled_flags = arg->flags;
 	spin_lock_irq(&fman->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	arg->passed_seqno = dev_priv->last_read_seqno;
 	spin_unlock_irq(&fman->lock);
@@ -1225,7 +1373,11 @@ static void vmw_event_fence_action_cleanup(struct vmw_fence_action *action)
 	struct vmw_event_fence_action *eaction =
 		container_of(action, struct vmw_event_fence_action, action);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_fence_manager *fman = eaction->fence->fman;
+=======
+	struct vmw_fence_manager *fman = fman_from_fence(eaction->fence);
+>>>>>>> v3.18
 =======
 	struct vmw_fence_manager *fman = fman_from_fence(eaction->fence);
 >>>>>>> v3.18
@@ -1250,15 +1402,21 @@ static void vmw_event_fence_action_cleanup(struct vmw_fence_action *action)
  * returns.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_fence_obj_add_action(struct vmw_fence_obj *fence,
 			      struct vmw_fence_action *action)
 {
 	struct vmw_fence_manager *fman = fence->fman;
 =======
+=======
+>>>>>>> v3.18
 static void vmw_fence_obj_add_action(struct vmw_fence_obj *fence,
 			      struct vmw_fence_action *action)
 {
 	struct vmw_fence_manager *fman = fman_from_fence(fence);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long irq_flags;
 	bool run_update = false;
@@ -1268,7 +1426,11 @@ static void vmw_fence_obj_add_action(struct vmw_fence_obj *fence,
 
 	fman->pending_actions[action->type]++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fence->signaled & DRM_VMW_FENCE_FLAG_EXEC) {
+=======
+	if (fence_is_signaled_locked(&fence->base)) {
+>>>>>>> v3.18
 =======
 	if (fence_is_signaled_locked(&fence->base)) {
 >>>>>>> v3.18
@@ -1324,7 +1486,11 @@ int vmw_event_fence_action_queue(struct drm_file *file_priv,
 {
 	struct vmw_event_fence_action *eaction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_fence_manager *fman = fence->fman;
+=======
+	struct vmw_fence_manager *fman = fman_from_fence(fence);
+>>>>>>> v3.18
 =======
 	struct vmw_fence_manager *fman = fman_from_fence(fence);
 >>>>>>> v3.18
@@ -1361,7 +1527,11 @@ struct vmw_event_fence_pending {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vmw_event_fence_action_create(struct drm_file *file_priv,
+=======
+static int vmw_event_fence_action_create(struct drm_file *file_priv,
+>>>>>>> v3.18
 =======
 static int vmw_event_fence_action_create(struct drm_file *file_priv,
 >>>>>>> v3.18
@@ -1372,7 +1542,12 @@ static int vmw_event_fence_action_create(struct drm_file *file_priv,
 {
 	struct vmw_event_fence_pending *event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *dev = fence->fman->dev_priv->dev;
+=======
+	struct vmw_fence_manager *fman = fman_from_fence(fence);
+	struct drm_device *dev = fman->dev_priv->dev;
+>>>>>>> v3.18
 =======
 	struct vmw_fence_manager *fman = fman_from_fence(fence);
 	struct drm_device *dev = fman->dev_priv->dev;
@@ -1426,8 +1601,11 @@ static int vmw_event_fence_action_create(struct drm_file *file_priv,
 		goto out_no_queue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_no_queue:
@@ -1462,7 +1640,12 @@ int vmw_fence_event_ioctl(struct drm_device *dev, void *data,
 	if (arg->handle) {
 		struct ttm_base_object *base =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ttm_base_object_lookup(vmw_fp->tfile, arg->handle);
+=======
+			ttm_base_object_lookup_for_ref(dev_priv->tdev,
+						       arg->handle);
+>>>>>>> v3.18
 =======
 			ttm_base_object_lookup_for_ref(dev_priv->tdev,
 						       arg->handle);
@@ -1510,11 +1693,14 @@ int vmw_fence_event_ioctl(struct drm_device *dev, void *data,
 	BUG_ON(fence == NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = vmw_event_fence_action_create(file_priv, fence,
 					    arg->flags,
 					    arg->user_data,
 					    true);
 =======
+=======
+>>>>>>> v3.18
 	if (arg->flags & DRM_VMW_FE_FLAG_REQ_TIME)
 		ret = vmw_event_fence_action_create(file_priv, fence,
 						    arg->flags,
@@ -1526,6 +1712,9 @@ int vmw_fence_event_ioctl(struct drm_device *dev, void *data,
 						    arg->user_data,
 						    true);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0)) {
 		if (ret != -ERESTARTSYS)

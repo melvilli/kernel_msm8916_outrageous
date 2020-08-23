@@ -26,7 +26,10 @@ trace_seq_init(struct trace_seq *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * trace_seq_buffer_ptr - return pointer to next location in buffer
  * @s: trace sequence descriptor
@@ -42,6 +45,9 @@ trace_seq_buffer_ptr(struct trace_seq *s)
 	return s->buffer + s->len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Currently only defined when tracing is enabled.
@@ -55,6 +61,7 @@ extern int
 trace_seq_bprintf(struct trace_seq *s, const char *fmt, const u32 *binary);
 extern int trace_print_seq(struct seq_file *m, struct trace_seq *s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern ssize_t trace_seq_to_user(struct trace_seq *s, char __user *ubuf,
 				 size_t cnt);
 extern int trace_seq_puts(struct trace_seq *s, const char *str);
@@ -66,6 +73,8 @@ extern void *trace_seq_reserve(struct trace_seq *s, size_t len);
 extern int trace_seq_path(struct trace_seq *s, const struct path *path);
 
 =======
+=======
+>>>>>>> v3.18
 extern int trace_seq_to_user(struct trace_seq *s, char __user *ubuf,
 			     int cnt);
 extern int trace_seq_puts(struct trace_seq *s, const char *str);
@@ -78,6 +87,9 @@ extern int trace_seq_path(struct trace_seq *s, const struct path *path);
 extern int trace_seq_bitmask(struct trace_seq *s, const unsigned long *maskp,
 			     int nmaskbits);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_TRACING */
 static inline int trace_seq_printf(struct trace_seq *s, const char *fmt, ...)
@@ -91,7 +103,10 @@ trace_seq_bprintf(struct trace_seq *s, const char *fmt, const u32 *binary)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 trace_seq_bitmask(struct trace_seq *s, const unsigned long *maskp,
 		  int nmaskbits)
@@ -99,14 +114,22 @@ trace_seq_bitmask(struct trace_seq *s, const unsigned long *maskp,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int trace_print_seq(struct seq_file *m, struct trace_seq *s)
 {
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline ssize_t trace_seq_to_user(struct trace_seq *s, char __user *ubuf,
 				 size_t cnt)
+=======
+static inline int trace_seq_to_user(struct trace_seq *s, char __user *ubuf,
+				    int cnt)
+>>>>>>> v3.18
 =======
 static inline int trace_seq_to_user(struct trace_seq *s, char __user *ubuf,
 				    int cnt)
@@ -124,7 +147,11 @@ static inline int trace_seq_putc(struct trace_seq *s, unsigned char c)
 }
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 trace_seq_putmem(struct trace_seq *s, const void *mem, size_t len)
+=======
+trace_seq_putmem(struct trace_seq *s, const void *mem, unsigned int len)
+>>>>>>> v3.18
 =======
 trace_seq_putmem(struct trace_seq *s, const void *mem, unsigned int len)
 >>>>>>> v3.18
@@ -132,6 +159,7 @@ trace_seq_putmem(struct trace_seq *s, const void *mem, unsigned int len)
 	return 0;
 }
 static inline int trace_seq_putmem_hex(struct trace_seq *s, const void *mem,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				       size_t len)
 {
@@ -142,10 +170,15 @@ static inline void *trace_seq_reserve(struct trace_seq *s, size_t len)
 	return NULL;
 }
 =======
+=======
+>>>>>>> v3.18
 				       unsigned int len)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int trace_seq_path(struct trace_seq *s, const struct path *path)
 {

@@ -18,10 +18,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -435,10 +438,15 @@ static struct scx200_acb_iface *scx200_create_iface(const char *text,
 
 	iface = kzalloc(sizeof(*iface), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!iface) {
 		pr_err("can't allocate memory\n");
 		return NULL;
 	}
+=======
+	if (!iface)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!iface)
 		return NULL;
@@ -565,7 +573,11 @@ static struct platform_driver scx200_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(scx200_isa) = {
+=======
+static const struct pci_device_id scx200_isa[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id scx200_isa[] = {
 >>>>>>> v3.18

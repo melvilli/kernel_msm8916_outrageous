@@ -47,7 +47,10 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-ctrls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/saa7115.h>
@@ -67,7 +70,10 @@ MODULE_PARM_DESC(debug, "Debug level (0-1)");
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum saa711x_model {
 	SAA7111A,
 	SAA7111,
@@ -78,6 +84,9 @@ enum saa711x_model {
 	SAA7118,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct saa711x_state {
 	struct v4l2_subdev sd;
@@ -97,7 +106,11 @@ struct saa711x_state {
 	int width;
 	int height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ident;
+=======
+	enum saa711x_model ident;
+>>>>>>> v3.18
 =======
 	enum saa711x_model ident;
 >>>>>>> v3.18
@@ -132,15 +145,21 @@ static inline int saa711x_write(struct v4l2_subdev *sd, u8 reg, u8 value)
 static int saa711x_has_reg(const int id, const u8 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id == V4L2_IDENT_SAA7111)
 		return reg < 0x20 && reg != 0x01 && reg != 0x0f &&
 		       (reg < 0x13 || reg > 0x19) && reg != 0x1d && reg != 0x1e;
 	if (id == V4L2_IDENT_SAA7111A)
 =======
+=======
+>>>>>>> v3.18
 	if (id == SAA7111)
 		return reg < 0x20 && reg != 0x01 && reg != 0x0f &&
 		       (reg < 0x13 || reg > 0x19) && reg != 0x1d && reg != 0x1e;
 	if (id == SAA7111A)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return reg < 0x20 && reg != 0x01 && reg != 0x0f &&
 		       reg != 0x14 && reg != 0x18 && reg != 0x19 &&
@@ -155,6 +174,7 @@ static int saa711x_has_reg(const int id, const u8 reg)
 
 	switch (id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_SAA7113:
 		return reg != 0x14 && (reg < 0x18 || reg > 0x1e) && (reg < 0x20 || reg > 0x3f) &&
 		       reg != 0x5d && reg < 0x63;
@@ -166,6 +186,8 @@ static int saa711x_has_reg(const int id, const u8 reg)
 		return (reg < 0x20 || reg > 0x2f) && reg != 0x65 && (reg < 0xfc || reg > 0xfe);
 	case V4L2_IDENT_SAA7118:
 =======
+=======
+>>>>>>> v3.18
 	case GM7113C:
 		return reg != 0x14 && (reg < 0x18 || reg > 0x1e) && reg < 0x20;
 	case SAA7113:
@@ -178,6 +200,9 @@ static int saa711x_has_reg(const int id, const u8 reg)
 	case SAA7115:
 		return (reg < 0x20 || reg > 0x2f) && reg != 0x65 && (reg < 0xfc || reg > 0xfe);
 	case SAA7118:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return (reg < 0x1a || reg > 0x1d) && (reg < 0x20 || reg > 0x22) &&
 		       (reg < 0x26 || reg > 0x28) && reg != 0x33 && reg != 0x37 &&
@@ -257,8 +282,11 @@ static const unsigned char saa7111_init[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SAA7113 init codes */
 =======
+=======
+>>>>>>> v3.18
 /*
  * This table has one illegal value, and some values that are not
  * correct according to the datasheet initialization table.
@@ -269,6 +297,9 @@ static const unsigned char saa7111_init[] = {
  */
 
 /* SAA7113 Init codes */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const unsigned char saa7113_init[] = {
 	R_01_INC_DELAY, 0x08,
@@ -277,15 +308,21 @@ static const unsigned char saa7113_init[] = {
 	R_04_INPUT_CNTL_3, 0x00,
 	R_05_INPUT_CNTL_4, 0x00,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	R_06_H_SYNC_START, 0x89,
 	R_07_H_SYNC_STOP, 0x0d,
 	R_08_SYNC_CNTL, 0x88,
 =======
+=======
+>>>>>>> v3.18
 	R_06_H_SYNC_START, 0x89,	/* Illegal value -119,
 					 * min. value = -108 (0x94) */
 	R_07_H_SYNC_STOP, 0x0d,
 	R_08_SYNC_CNTL, 0x88,		/* Not datasheet default.
 					 * HTC = VTR mode, should be 0x98 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	R_09_LUMA_CNTL, 0x01,
 	R_0A_LUMA_BRIGHT_CNTL, 0x80,
@@ -295,10 +332,13 @@ static const unsigned char saa7113_init[] = {
 	R_0E_CHROMA_CNTL_1, 0x01,
 	R_0F_CHROMA_GAIN_CNTL, 0x2a,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	R_10_CHROMA_CNTL_2, 0x08,
 	R_11_MODE_DELAY_CNTL, 0x0c,
 	R_12_RT_SIGNAL_CNTL, 0x07,
 =======
+=======
+>>>>>>> v3.18
 	R_10_CHROMA_CNTL_2, 0x08,	/* Not datsheet default.
 					 * VRLN enabled, should be 0x00 */
 	R_11_MODE_DELAY_CNTL, 0x0c,
@@ -338,6 +378,9 @@ static const unsigned char gm7113c_init[] = {
 	R_10_CHROMA_CNTL_2, 0x00,
 	R_11_MODE_DELAY_CNTL, 0x0c,
 	R_12_RT_SIGNAL_CNTL, 0x01,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	R_13_RT_X_PORT_OUT_CNTL, 0x00,
 	R_14_ANAL_ADC_COMPAT_CNTL, 0x00,
@@ -1038,12 +1081,15 @@ static void saa711x_set_v4lstd(struct v4l2_subdev *sd, v4l2_std_id std)
 	if (std & V4L2_STD_525_60) {
 		v4l2_dbg(1, debug, sd, "decoder set standard 60 Hz\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		saa711x_writeregs(sd, saa7115_cfg_60hz_video);
 		saa711x_set_size(sd, 720, 480);
 	} else {
 		v4l2_dbg(1, debug, sd, "decoder set standard 50 Hz\n");
 		saa711x_writeregs(sd, saa7115_cfg_50hz_video);
 =======
+=======
+>>>>>>> v3.18
 		if (state->ident == GM7113C) {
 			u8 reg = saa711x_read(sd, R_08_SYNC_CNTL);
 			reg &= ~(SAA7113_R_08_FSEL | SAA7113_R_08_AUFD);
@@ -1062,6 +1108,9 @@ static void saa711x_set_v4lstd(struct v4l2_subdev *sd, v4l2_std_id std)
 		} else {
 			saa711x_writeregs(sd, saa7115_cfg_50hz_video);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		saa711x_set_size(sd, 720, 576);
 	}
@@ -1076,7 +1125,12 @@ static void saa711x_set_v4lstd(struct v4l2_subdev *sd, v4l2_std_id std)
 	100 reserved                    NTSC-Japan (3.58MHz)
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident <= V4L2_IDENT_SAA7113) {
+=======
+	if (state->ident <= SAA7113 ||
+	    state->ident == GM7113C) {
+>>>>>>> v3.18
 =======
 	if (state->ident <= SAA7113 ||
 	    state->ident == GM7113C) {
@@ -1100,9 +1154,14 @@ static void saa711x_set_v4lstd(struct v4l2_subdev *sd, v4l2_std_id std)
 		int taskb = saa711x_read(sd, R_80_GLOBAL_CNTL_1) & 0x10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (taskb && state->ident == V4L2_IDENT_SAA7114) {
 			saa711x_writeregs(sd, saa7115_cfg_vbi_on);
 		}
+=======
+		if (taskb && state->ident == SAA7114)
+			saa711x_writeregs(sd, saa7115_cfg_vbi_on);
+>>>>>>> v3.18
 =======
 		if (taskb && state->ident == SAA7114)
 			saa711x_writeregs(sd, saa7115_cfg_vbi_on);
@@ -1129,7 +1188,11 @@ static void saa711x_set_lcr(struct v4l2_subdev *sd, struct v4l2_sliced_vbi_forma
 #else
 	/* SAA7113 and SAA7118 also should support VBI - Need testing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident != V4L2_IDENT_SAA7115)
+=======
+	if (state->ident != SAA7115)
+>>>>>>> v3.18
 =======
 	if (state->ident != SAA7115)
 >>>>>>> v3.18
@@ -1355,7 +1418,11 @@ static int saa711x_s_routing(struct v4l2_subdev *sd,
 {
 	struct saa711x_state *state = to_state(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mask = (state->ident <= V4L2_IDENT_SAA7111A) ? 0xf8 : 0xf0;
+=======
+	u8 mask = (state->ident <= SAA7111A) ? 0xf8 : 0xf0;
+>>>>>>> v3.18
 =======
 	u8 mask = (state->ident <= SAA7111A) ? 0xf8 : 0xf0;
 >>>>>>> v3.18
@@ -1365,7 +1432,12 @@ static int saa711x_s_routing(struct v4l2_subdev *sd,
 
 	/* saa7111/3 does not have these inputs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident <= V4L2_IDENT_SAA7113 &&
+=======
+	if ((state->ident <= SAA7113 ||
+	     state->ident == GM7113C) &&
+>>>>>>> v3.18
 =======
 	if ((state->ident <= SAA7113 ||
 	     state->ident == GM7113C) &&
@@ -1385,7 +1457,11 @@ static int saa711x_s_routing(struct v4l2_subdev *sd,
 
 	/* saa7111 has slightly different input numbering */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident <= V4L2_IDENT_SAA7111A) {
+=======
+	if (state->ident <= SAA7111A) {
+>>>>>>> v3.18
 =======
 	if (state->ident <= SAA7111A) {
 >>>>>>> v3.18
@@ -1412,8 +1488,13 @@ static int saa711x_s_routing(struct v4l2_subdev *sd,
 
 	state->output = output;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident == V4L2_IDENT_SAA7114 ||
 			state->ident == V4L2_IDENT_SAA7115) {
+=======
+	if (state->ident == SAA7114 ||
+			state->ident == SAA7115) {
+>>>>>>> v3.18
 =======
 	if (state->ident == SAA7114 ||
 			state->ident == SAA7115) {
@@ -1423,7 +1504,11 @@ static int saa711x_s_routing(struct v4l2_subdev *sd,
 				(state->output & 0x01));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident > V4L2_IDENT_SAA7111A) {
+=======
+	if (state->ident > SAA7111A) {
+>>>>>>> v3.18
 =======
 	if (state->ident > SAA7111A) {
 >>>>>>> v3.18
@@ -1440,7 +1525,11 @@ static int saa711x_s_gpio(struct v4l2_subdev *sd, u32 val)
 	struct saa711x_state *state = to_state(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident > V4L2_IDENT_SAA7111A)
+=======
+	if (state->ident > SAA7111A)
+>>>>>>> v3.18
 =======
 	if (state->ident > SAA7111A)
 >>>>>>> v3.18
@@ -1534,7 +1623,11 @@ static int saa711x_querystd(struct v4l2_subdev *sd, v4l2_std_id *std)
 	reg1f = saa711x_read(sd, R_1F_STATUS_BYTE_2_VD_DEC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident == V4L2_IDENT_SAA7115) {
+=======
+	if (state->ident == SAA7115) {
+>>>>>>> v3.18
 =======
 	if (state->ident == SAA7115) {
 >>>>>>> v3.18
@@ -1560,6 +1653,10 @@ static int saa711x_querystd(struct v4l2_subdev *sd, v4l2_std_id *std)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			*std = V4L2_STD_UNKNOWN;
+>>>>>>> v3.18
 =======
 			*std = V4L2_STD_UNKNOWN;
 >>>>>>> v3.18
@@ -1572,13 +1669,19 @@ static int saa711x_querystd(struct v4l2_subdev *sd, v4l2_std_id *std)
 
 	/* horizontal/vertical not locked */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reg1f & 0x40)
 		goto ret;
 =======
+=======
+>>>>>>> v3.18
 	if (reg1f & 0x40) {
 		*std = V4L2_STD_UNKNOWN;
 		goto ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (reg1f & 0x20)
@@ -1600,7 +1703,11 @@ static int saa711x_g_input_status(struct v4l2_subdev *sd, u32 *status)
 
 	*status = V4L2_IN_ST_NO_SIGNAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident == V4L2_IDENT_SAA7115)
+=======
+	if (state->ident == SAA7115)
+>>>>>>> v3.18
 =======
 	if (state->ident == SAA7115)
 >>>>>>> v3.18
@@ -1615,12 +1722,15 @@ static int saa711x_g_input_status(struct v4l2_subdev *sd, u32 *status)
 static int saa711x_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->val = saa711x_read(sd, reg->reg & 0xff);
@@ -1631,6 +1741,7 @@ static int saa711x_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 static int saa711x_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -1639,11 +1750,14 @@ static int saa711x_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regi
 		return -EPERM;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	saa711x_write(sd, reg->reg & 0xff, reg->val & 0xff);
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int saa711x_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
@@ -1655,6 +1769,8 @@ static int saa711x_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int saa711x_log_status(struct v4l2_subdev *sd)
 {
 	struct saa711x_state *state = to_state(sd);
@@ -1664,7 +1780,11 @@ static int saa711x_log_status(struct v4l2_subdev *sd)
 
 	v4l2_info(sd, "Audio frequency: %d Hz\n", state->audclk_freq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident != V4L2_IDENT_SAA7115) {
+=======
+	if (state->ident != SAA7115) {
+>>>>>>> v3.18
 =======
 	if (state->ident != SAA7115) {
 >>>>>>> v3.18
@@ -1719,7 +1839,10 @@ static const struct v4l2_ctrl_ops saa711x_ctrl_ops = {
 static const struct v4l2_subdev_core_ops saa711x_core_ops = {
 	.log_status = saa711x_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = saa711x_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -1730,7 +1853,10 @@ static const struct v4l2_subdev_core_ops saa711x_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = saa711x_s_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.reset = saa711x_reset,
@@ -1752,6 +1878,10 @@ static const struct v4l2_subdev_audio_ops saa711x_audio_ops = {
 
 static const struct v4l2_subdev_video_ops saa711x_video_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.s_std = saa711x_s_std,
+>>>>>>> v3.18
 =======
 	.s_std = saa711x_s_std,
 >>>>>>> v3.18
@@ -1780,6 +1910,7 @@ static const struct v4l2_subdev_ops saa711x_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ----------------------------------------------------------------------- */
 
 static int saa711x_probe(struct i2c_client *client,
@@ -1801,6 +1932,8 @@ static int saa711x_probe(struct i2c_client *client,
 		i2c_smbus_write_byte_data(client, 0, i);
 		name[i] = (i2c_smbus_read_byte_data(client, 0) & 0x0f) + '0';
 =======
+=======
+>>>>>>> v3.18
 #define CHIP_VER_SIZE	16
 
 /* ----------------------------------------------------------------------- */
@@ -1894,12 +2027,16 @@ static int saa711x_detect_chip(struct i2c_client *client,
 		i2c_smbus_write_byte_data(client, 0, i);
 		chip_ver[i] = i2c_smbus_read_byte_data(client, 0);
 		name[i] = (chip_ver[i] & 0x0f) + '0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (name[i] > '9')
 			name[i] += 'a' - '9' - 1;
 	}
 	name[i] = '\0';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	chip_id = name[5];
 
@@ -1921,6 +2058,8 @@ static int saa711x_detect_chip(struct i2c_client *client,
 
 	state = kzalloc(sizeof(struct saa711x_state), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	/* Check if it is a Philips/NXP chip */
 	if (!memcmp(name + 1, "f711", 4)) {
 		chip_id = name[5];
@@ -2015,6 +2154,9 @@ static int saa711x_probe(struct i2c_client *client,
 	strlcpy(client->name, name, sizeof(client->name));
 
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (state == NULL)
 		return -ENOMEM;
@@ -2022,6 +2164,11 @@ static int saa711x_probe(struct i2c_client *client,
 	v4l2_i2c_subdev_init(sd, client, &saa711x_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l_info(client, "%s found @ 0x%x (%s)\n", name,
+		 client->addr << 1, client->adapter->name);
+>>>>>>> v3.18
 =======
 	v4l_info(client, "%s found @ 0x%x (%s)\n", name,
 		 client->addr << 1, client->adapter->name);
@@ -2047,7 +2194,10 @@ static int saa711x_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -2058,6 +2208,7 @@ static int saa711x_probe(struct i2c_client *client,
 	state->output = SAA7115_IPORT_ON;
 	state->enable = 1;
 	state->radio = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (chip_id) {
 	case '1':
@@ -2087,6 +2238,9 @@ static int saa711x_probe(struct i2c_client *client,
 =======
 	state->ident = ident;
 >>>>>>> v3.18
+=======
+	state->ident = ident;
+>>>>>>> v3.18
 
 	state->audclk_freq = 48000;
 
@@ -2094,6 +2248,7 @@ static int saa711x_probe(struct i2c_client *client,
 
 	/* init to 60hz/48khz */
 	state->crystal_freq = SAA7115_FREQ_24_576_MHZ;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (state->ident) {
 	case V4L2_IDENT_SAA7111:
@@ -2103,6 +2258,8 @@ static int saa711x_probe(struct i2c_client *client,
 	case V4L2_IDENT_SAA7113:
 		saa711x_writeregs(sd, saa7113_init);
 =======
+=======
+>>>>>>> v3.18
 	pdata = client->dev.platform_data;
 	switch (state->ident) {
 	case SAA7111:
@@ -2117,6 +2274,9 @@ static int saa711x_probe(struct i2c_client *client,
 			saa711x_writeregs(sd, gm7113c_init);
 		else
 			saa711x_writeregs(sd, saa7113_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2124,15 +2284,21 @@ static int saa711x_probe(struct i2c_client *client,
 		saa711x_writeregs(sd, saa7115_init_auto_input);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident > V4L2_IDENT_SAA7111A)
 		saa711x_writeregs(sd, saa7115_init_misc);
 =======
+=======
+>>>>>>> v3.18
 	if (state->ident > SAA7111A && state->ident != GM7113C)
 		saa711x_writeregs(sd, saa7115_init_misc);
 
 	if (pdata)
 		saa711x_write_platform_data(state, pdata);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	saa711x_set_v4lstd(sd, V4L2_STD_NTSC);
 	v4l2_ctrl_handler_setup(hdl);
@@ -2152,7 +2318,10 @@ static int saa711x_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(sd->ctrl_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2166,6 +2335,10 @@ static const struct i2c_device_id saa711x_id[] = {
 	{ "saa7115", 0 },
 	{ "saa7118", 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "gm7113c", 0 },
+>>>>>>> v3.18
 =======
 	{ "gm7113c", 0 },
 >>>>>>> v3.18

@@ -38,6 +38,10 @@
 #include <linux/of_device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/edma.h>
 >>>>>>> v3.18
@@ -197,7 +201,10 @@ struct mmc_davinci_host {
 #define DAVINCI_MMC_DATADIR_WRITE	2
 	unsigned char data_dir;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char suspended;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1200,7 +1207,11 @@ static struct davinci_mmc_config
 	struct davinci_mmc_config *pdata = pdev->dev.platform_data;
 	const struct of_device_id *match =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_match_device(of_match_ptr(davinci_mmc_dt_ids), &pdev->dev);
+=======
+		of_match_device(davinci_mmc_dt_ids, &pdev->dev);
+>>>>>>> v3.18
 =======
 		of_match_device(davinci_mmc_dt_ids, &pdev->dev);
 >>>>>>> v3.18
@@ -1418,7 +1429,10 @@ static int __exit davinci_mmcsd_remove(struct platform_device *pdev)
 	struct mmc_davinci_host *host = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (host) {
@@ -1450,6 +1464,7 @@ static int davinci_mmcsd_suspend(struct device *dev)
 	struct platform_device *pdev = to_platform_device(dev);
 	struct mmc_davinci_host *host = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = mmc_suspend_host(host->mmc);
@@ -1464,12 +1479,17 @@ static int davinci_mmcsd_suspend(struct device *dev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	writel(0, host->base + DAVINCI_MMCIM);
 	mmc_davinci_reset_ctrl(host, 1);
 	clk_disable(host->clk);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1477,6 +1497,7 @@ static int davinci_mmcsd_resume(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	struct mmc_davinci_host *host = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -1492,11 +1513,16 @@ static int davinci_mmcsd_resume(struct device *dev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	clk_enable(host->clk);
 	mmc_davinci_reset_ctrl(host, 0);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1516,7 +1542,11 @@ static struct platform_driver davinci_mmcsd_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= davinci_mmcsd_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(davinci_mmc_dt_ids),
+=======
+		.of_match_table = davinci_mmc_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = davinci_mmc_dt_ids,
 >>>>>>> v3.18

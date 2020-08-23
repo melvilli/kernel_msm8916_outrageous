@@ -594,7 +594,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -611,6 +615,10 @@ perf_ibs_nmi_handler(unsigned int cmd, struct pt_regs *regs)
 	return handled;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(perf_ibs_nmi_handler);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(perf_ibs_nmi_handler);
 >>>>>>> v3.18
@@ -903,7 +911,11 @@ static inline void perf_ibs_pm_init(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -939,6 +951,7 @@ static __init int amd_ibs_init(void)
 
 	perf_ibs_pm_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
 	ibs_caps = caps;
 	/* make ibs_caps visible to other cpus: */
@@ -947,6 +960,8 @@ static __init int amd_ibs_init(void)
 	smp_call_function(setup_APIC_ibs, NULL, 1);
 	put_online_cpus();
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 	ibs_caps = caps;
 	/* make ibs_caps visible to other cpus: */
@@ -954,6 +969,9 @@ static __init int amd_ibs_init(void)
 	smp_call_function(setup_APIC_ibs, NULL, 1);
 	__perf_cpu_notifier(perf_ibs_cpu_notifier);
 	cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = perf_event_ibs_init();

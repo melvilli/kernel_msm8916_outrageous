@@ -32,7 +32,11 @@
  * Final freeing of a group
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fsnotify_final_destroy_group(struct fsnotify_group *group)
+=======
+static void fsnotify_final_destroy_group(struct fsnotify_group *group)
+>>>>>>> v3.18
 =======
 static void fsnotify_final_destroy_group(struct fsnotify_group *group)
 >>>>>>> v3.18
@@ -60,7 +64,10 @@ void fsnotify_destroy_group(struct fsnotify_group *group)
 	fsnotify_flush_notify(group);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Destroy overflow event (we cannot use fsnotify_destroy_event() as
 	 * that deliberately ignores overflow events.
@@ -68,6 +75,9 @@ void fsnotify_destroy_group(struct fsnotify_group *group)
 	if (group->overflow_event)
 		group->ops->free_event(group->overflow_event);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fsnotify_put_group(group);
 }

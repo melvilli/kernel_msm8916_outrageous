@@ -16,21 +16,32 @@
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/x86_init.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/x86_init.h>
 
 void ptdump_walk_pgd_level(struct seq_file *m, pgd_t *pgd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * ZERO_PAGE is a global shared page that is always zero: used
  * for zero-mapped memory areas etc..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long empty_zero_page[PAGE_SIZE / sizeof(unsigned long)];
+=======
+extern unsigned long empty_zero_page[PAGE_SIZE / sizeof(unsigned long)]
+	__visible;
+>>>>>>> v3.18
 =======
 extern unsigned long empty_zero_page[PAGE_SIZE / sizeof(unsigned long)]
 	__visible;
@@ -142,8 +153,11 @@ static inline int pte_exec(pte_t pte)
 static inline int pte_special(pte_t pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pte_flags(pte) & _PAGE_SPECIAL;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * See CONFIG_NUMA_BALANCING pte_numa in include/asm-generic/pgtable.h.
 	 * On x86 we have _PAGE_BIT_NUMA == _PAGE_BIT_GLOBAL+1 ==
@@ -151,6 +165,9 @@ static inline int pte_special(pte_t pte)
 	 */
 	return (pte_flags(pte) & _PAGE_SPECIAL) &&
 		(pte_flags(pte) & (_PAGE_PRESENT|_PAGE_PROTNONE));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -230,7 +247,11 @@ static inline pte_t pte_mkexec(pte_t pte)
 static inline pte_t pte_mkdirty(pte_t pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pte_set_flags(pte, _PAGE_DIRTY);
+=======
+	return pte_set_flags(pte, _PAGE_DIRTY | _PAGE_SOFT_DIRTY);
+>>>>>>> v3.18
 =======
 	return pte_set_flags(pte, _PAGE_DIRTY | _PAGE_SOFT_DIRTY);
 >>>>>>> v3.18
@@ -298,7 +319,11 @@ static inline pmd_t pmd_wrprotect(pmd_t pmd)
 static inline pmd_t pmd_mkdirty(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pmd_set_flags(pmd, _PAGE_DIRTY);
+=======
+	return pmd_set_flags(pmd, _PAGE_DIRTY | _PAGE_SOFT_DIRTY);
+>>>>>>> v3.18
 =======
 	return pmd_set_flags(pmd, _PAGE_DIRTY | _PAGE_SOFT_DIRTY);
 >>>>>>> v3.18
@@ -325,7 +350,10 @@ static inline pmd_t pmd_mknotpresent(pmd_t pmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARCH_SOFT_DIRTY
 static inline int pte_soft_dirty(pte_t pte)
 {
@@ -364,6 +392,9 @@ static inline int pte_file_soft_dirty(pte_t pte)
 
 #endif /* CONFIG_HAVE_ARCH_SOFT_DIRTY */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Mask out unsupported bits in a present pgprot.  Non-present pgprots
@@ -467,6 +498,10 @@ pte_t *populate_extra_pte(unsigned long vaddr);
 #ifndef __ASSEMBLY__
 #include <linux/mm_types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmdebug.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmdebug.h>
 >>>>>>> v3.18
@@ -490,13 +525,19 @@ static inline int pte_present(pte_t a)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define pte_present_nonuma pte_present_nonuma
 static inline int pte_present_nonuma(pte_t a)
 {
 	return pte_flags(a) & (_PAGE_PRESENT | _PAGE_PROTNONE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define pte_accessible pte_accessible
 static inline bool pte_accessible(struct mm_struct *mm, pte_t a)
@@ -905,7 +946,10 @@ static inline void update_mmu_cache_pmd(struct vm_area_struct *vma,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARCH_SOFT_DIRTY
 static inline pte_t pte_swp_mksoft_dirty(pte_t pte)
 {
@@ -926,6 +970,9 @@ static inline pte_t pte_swp_clear_soft_dirty(pte_t pte)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/pgtable.h>
 #endif	/* __ASSEMBLY__ */

@@ -21,6 +21,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -30,6 +31,11 @@
  * this source code.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -117,9 +123,15 @@ static int apci3501_ao_insn_write(struct comedi_device *dev,
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	unsigned int range = CR_RANGE(insn->chanspec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val = 0;
 	int i;
 	int ret;
+=======
+	unsigned int cfg = APCI3501_AO_DATA_CHAN(chan);
+	int ret;
+	int i;
+>>>>>>> v3.18
 =======
 	unsigned int cfg = APCI3501_AO_DATA_CHAN(chan);
 	int ret;
@@ -136,7 +148,11 @@ static int apci3501_ao_insn_write(struct comedi_device *dev,
 		outl(0, dev->iobase + APCI3501_AO_CTRL_STATUS_REG);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val |= APCI3501_AO_DATA_BIPOLAR;
+=======
+		cfg |= APCI3501_AO_DATA_BIPOLAR;
+>>>>>>> v3.18
 =======
 		cfg |= APCI3501_AO_DATA_BIPOLAR;
 >>>>>>> v3.18
@@ -145,9 +161,15 @@ static int apci3501_ao_insn_write(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val |= APCI3501_AO_DATA_CHAN(chan);
 
 	for (i = 0; i < insn->n; i++) {
+=======
+	for (i = 0; i < insn->n; i++) {
+		unsigned int val = data[i];
+
+>>>>>>> v3.18
 =======
 	for (i = 0; i < insn->n; i++) {
 		unsigned int val = data[i];
@@ -166,13 +188,19 @@ static int apci3501_ao_insn_write(struct comedi_device *dev,
 			return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outl(val | APCI3501_AO_DATA_VAL(data[i]),
 		     dev->iobase + APCI3501_AO_DATA_REG);
 =======
+=======
+>>>>>>> v3.18
 		outl(cfg | APCI3501_AO_DATA_VAL(val),
 		     dev->iobase + APCI3501_AO_DATA_REG);
 
 		s->readback[chan] = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -197,6 +225,7 @@ static int apci3501_do_insn_bits(struct comedi_device *dev,
 				 unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -208,10 +237,15 @@ static int apci3501_do_insn_bits(struct comedi_device *dev,
 		outl(s->state, dev->iobase + APCI3501_DO_REG);
 	}
 =======
+=======
+>>>>>>> v3.18
 	s->state = inl(dev->iobase + APCI3501_DO_REG);
 
 	if (comedi_dio_update_state(s, data))
 		outl(s->state, dev->iobase + APCI3501_DO_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -323,7 +357,11 @@ static irqreturn_t apci3501_interrupt(int irq, void *d)
 	ui_Timer_AOWatchdog = inl(dev->iobase + APCI3501_TIMER_IRQ_REG) & 0x1;
 	if ((!ui_Timer_AOWatchdog)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "IRQ from unknown source");
+=======
+		dev_err(dev->class_dev, "IRQ from unknown source\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "IRQ from unknown source\n");
 >>>>>>> v3.18
@@ -380,10 +418,16 @@ static int apci3501_auto_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -420,12 +464,18 @@ static int apci3501_auto_attach(struct comedi_device *dev,
 		s->range_table	= &apci3501_ao_range;
 		s->insn_write	= apci3501_ao_insn_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		s->insn_read	= comedi_readback_insn_read;
 
 		ret = comedi_alloc_subdev_readback(s);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		s->type		= COMEDI_SUBD_UNUSED;
@@ -458,9 +508,15 @@ static int apci3501_auto_attach(struct comedi_device *dev,
 	s->len_chanlist = 1;
 	s->range_table = &range_digital;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_write = i_APCI3501_StartStopWriteTimerCounterWatchdog;
 	s->insn_read = i_APCI3501_ReadTimerCounterWatchdog;
 	s->insn_config = i_APCI3501_ConfigTimerCounterWatchdog;
+=======
+	s->insn_write = apci3501_write_insn_timer;
+	s->insn_read = apci3501_read_insn_timer;
+	s->insn_config = apci3501_config_insn_timer;
+>>>>>>> v3.18
 =======
 	s->insn_write = apci3501_write_insn_timer;
 	s->insn_read = apci3501_read_insn_timer;
@@ -484,9 +540,13 @@ static void apci3501_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci3501_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->irq)
 		free_irq(dev->irq, dev);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 >>>>>>> v3.18
@@ -506,7 +566,11 @@ static int apci3501_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci3501_pci_table) = {
+=======
+static const struct pci_device_id apci3501_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci3501_pci_table[] = {
 >>>>>>> v3.18

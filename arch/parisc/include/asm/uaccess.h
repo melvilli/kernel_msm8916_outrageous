@@ -10,7 +10,11 @@
 #include <asm-generic/uaccess-unaligned.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/string.h>
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 >>>>>>> v3.18
@@ -35,11 +39,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __get_kernel_bad(void);
 extern int __get_user_bad(void);
 extern int __put_kernel_bad(void);
 extern int __put_user_bad(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline long access_ok(int type, const void __user * addr,
@@ -53,8 +60,13 @@ static inline long access_ok(int type, const void __user * addr,
 
 #if !defined(CONFIG_64BIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LDD_KERNEL(ptr)		__get_kernel_bad();
 #define LDD_USER(ptr)		__get_user_bad();
+=======
+#define LDD_KERNEL(ptr)		BUILD_BUG()
+#define LDD_USER(ptr)		BUILD_BUG()
+>>>>>>> v3.18
 =======
 #define LDD_KERNEL(ptr)		BUILD_BUG()
 #define LDD_USER(ptr)		BUILD_BUG()
@@ -74,6 +86,7 @@ static inline long access_ok(int type, const void __user * addr,
  * The exception table contains two values: the first is an address
  * for an instruction that is allowed to fault, and the second is
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the address to the fixup routine. 
  */
 
@@ -81,6 +94,8 @@ struct exception_table_entry {
 	unsigned long insn;  /* address of insn that is allowed to fault.   */
 	long fixup;          /* fixup routine */
 =======
+=======
+>>>>>>> v3.18
  * the address to the fixup routine. Even on a 64bit kernel we could
  * use a 32bit (unsigned int) address here.
  */
@@ -88,6 +103,9 @@ struct exception_table_entry {
 struct exception_table_entry {
 	unsigned long insn;	/* address of insn that is allowed to fault. */
 	unsigned long fixup;	/* fixup routine */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -118,7 +136,11 @@ struct exception_data {
 	    case 4: __get_kernel_asm("ldw",ptr); break; \
 	    case 8: LDD_KERNEL(ptr); break;		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    default: __get_kernel_bad(); break;         \
+=======
+	    default: BUILD_BUG(); break;		\
+>>>>>>> v3.18
 =======
 	    default: BUILD_BUG(); break;		\
 >>>>>>> v3.18
@@ -131,7 +153,11 @@ struct exception_data {
 	    case 4: __get_user_asm("ldw",ptr); break;   \
 	    case 8: LDD_USER(ptr);  break;		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    default: __get_user_bad(); break;           \
+=======
+	    default: BUILD_BUG(); break;		\
+>>>>>>> v3.18
 =======
 	    default: BUILD_BUG(); break;		\
 >>>>>>> v3.18
@@ -168,7 +194,11 @@ struct exception_data {
 	    case 4: __put_kernel_asm("stw",__x,ptr); break;     \
 	    case 8: STD_KERNEL(__x,ptr); break;			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    default: __put_kernel_bad(); break;			\
+=======
+	    default: BUILD_BUG(); break;			\
+>>>>>>> v3.18
 =======
 	    default: BUILD_BUG(); break;			\
 >>>>>>> v3.18
@@ -181,7 +211,11 @@ struct exception_data {
 	    case 4: __put_user_asm("stw",__x,ptr); break;       \
 	    case 8: STD_USER(__x,ptr); break;			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    default: __put_user_bad(); break;			\
+=======
+	    default: BUILD_BUG(); break;			\
+>>>>>>> v3.18
 =======
 	    default: BUILD_BUG(); break;			\
 >>>>>>> v3.18
@@ -287,7 +321,11 @@ static inline unsigned long __must_check copy_from_user(void *to,
 {
         int sz = __compiletime_object_size(to);
 <<<<<<< HEAD
+<<<<<<< HEAD
         unsigned long ret = n;
+=======
+        int ret = -EFAULT;
+>>>>>>> v3.18
 =======
         int ret = -EFAULT;
 >>>>>>> v3.18
@@ -297,8 +335,12 @@ static inline unsigned long __must_check copy_from_user(void *to,
         else
                 copy_from_user_overflow();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(ret))
 		memset(to + (n - ret), 0, ret);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -19,6 +19,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <stdarg.h>
 #include <linux/kernel.h>
 #include <linux/string.h>
@@ -94,6 +95,8 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/memblock.h>
@@ -106,4 +109,7 @@ void __init early_init_devtree(void *params)
 	early_init_dt_scan(params);
 	memblock_allow_resize();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -11,7 +11,10 @@
 
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/netdevice.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -48,7 +51,11 @@ EXPORT_SYMBOL_GPL(unregister_switch_driver);
 
 static struct dsa_switch_driver *
 <<<<<<< HEAD
+<<<<<<< HEAD
 dsa_switch_probe(struct mii_bus *bus, int sw_addr, char **_name)
+=======
+dsa_switch_probe(struct device *host_dev, int sw_addr, char **_name)
+>>>>>>> v3.18
 =======
 dsa_switch_probe(struct device *host_dev, int sw_addr, char **_name)
 >>>>>>> v3.18
@@ -67,7 +74,11 @@ dsa_switch_probe(struct device *host_dev, int sw_addr, char **_name)
 		drv = list_entry(list, struct dsa_switch_driver, list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name = drv->probe(bus, sw_addr);
+=======
+		name = drv->probe(host_dev, sw_addr);
+>>>>>>> v3.18
 =======
 		name = drv->probe(host_dev, sw_addr);
 >>>>>>> v3.18
@@ -88,7 +99,11 @@ dsa_switch_probe(struct device *host_dev, int sw_addr, char **_name)
 static struct dsa_switch *
 dsa_switch_setup(struct dsa_switch_tree *dst, int index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 struct device *parent, struct mii_bus *bus)
+=======
+		 struct device *parent, struct device *host_dev)
+>>>>>>> v3.18
 =======
 		 struct device *parent, struct device *host_dev)
 >>>>>>> v3.18
@@ -105,7 +120,11 @@ dsa_switch_setup(struct dsa_switch_tree *dst, int index,
 	 * Probe for switch model.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv = dsa_switch_probe(bus, pd->sw_addr, &name);
+=======
+	drv = dsa_switch_probe(host_dev, pd->sw_addr, &name);
+>>>>>>> v3.18
 =======
 	drv = dsa_switch_probe(host_dev, pd->sw_addr, &name);
 >>>>>>> v3.18
@@ -130,8 +149,12 @@ dsa_switch_setup(struct dsa_switch_tree *dst, int index,
 	ds->pd = dst->pd->chip + index;
 	ds->drv = drv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ds->master_mii_bus = bus;
 
+=======
+	ds->master_dev = host_dev;
+>>>>>>> v3.18
 =======
 	ds->master_dev = host_dev;
 >>>>>>> v3.18
@@ -168,12 +191,18 @@ dsa_switch_setup(struct dsa_switch_tree *dst, int index,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Make the built-in MII bus mask match the number of ports,
 	 * switch drivers can override this later
 	 */
 	ds->phys_mii_mask = ds->phys_port_mask;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If the CPU connects to this switch, set the switch tree
@@ -181,10 +210,13 @@ dsa_switch_setup(struct dsa_switch_tree *dst, int index,
 	 * switch.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ds->dst->cpu_switch == index)
 		ds->dst->tag_protocol = drv->tag_protocol;
 
 =======
+=======
+>>>>>>> v3.18
 	if (dst->cpu_switch == index) {
 		switch (drv->tag_protocol) {
 #ifdef CONFIG_NET_DSA_TAG_DSA
@@ -216,6 +248,9 @@ dsa_switch_setup(struct dsa_switch_tree *dst, int index,
 
 		dst->tag_protocol = drv->tag_protocol;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -276,7 +311,10 @@ static void dsa_switch_destroy(struct dsa_switch *ds)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int dsa_switch_suspend(struct dsa_switch *ds)
 {
@@ -322,6 +360,9 @@ static int dsa_switch_resume(struct dsa_switch *ds)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* link polling *************************************************************/
@@ -370,7 +411,11 @@ static struct device *dev_find_class(struct device *parent, char *class)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mii_bus *dev_to_mii_bus(struct device *dev)
+=======
+struct mii_bus *dsa_host_dev_to_mii_bus(struct device *dev)
+>>>>>>> v3.18
 =======
 struct mii_bus *dsa_host_dev_to_mii_bus(struct device *dev)
 >>>>>>> v3.18
@@ -390,6 +435,10 @@ struct mii_bus *dsa_host_dev_to_mii_bus(struct device *dev)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(dsa_host_dev_to_mii_bus);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(dsa_host_dev_to_mii_bus);
 >>>>>>> v3.18
@@ -473,8 +522,12 @@ static void dsa_of_free_platform_data(struct dsa_platform_data *pd)
 		port_index = 0;
 		while (port_index < DSA_MAX_PORTS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pd->chip[i].port_names[port_index])
 				kfree(pd->chip[i].port_names[port_index]);
+=======
+			kfree(pd->chip[i].port_names[port_index]);
+>>>>>>> v3.18
 =======
 			kfree(pd->chip[i].port_names[port_index]);
 >>>>>>> v3.18
@@ -532,12 +585,15 @@ static int dsa_of_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip_index = 0;
 	for_each_available_child_of_node(np, child) {
 		cd = &pd->chip[chip_index];
 
 		cd->mii_bus = &mdio_bus->dev;
 =======
+=======
+>>>>>>> v3.18
 	chip_index = -1;
 	for_each_available_child_of_node(np, child) {
 		chip_index++;
@@ -545,6 +601,9 @@ static int dsa_of_probe(struct platform_device *pdev)
 
 		cd->of_node = child;
 		cd->host_dev = &mdio_bus->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		sw_addr = of_get_property(child, "reg", NULL);
@@ -567,6 +626,11 @@ static int dsa_of_probe(struct platform_device *pdev)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cd->port_dn[port_index] = port;
+
+>>>>>>> v3.18
 =======
 			cd->port_dn[port_index] = port;
 
@@ -675,6 +739,7 @@ static int dsa_probe(struct platform_device *pdev)
 
 	for (i = 0; i < pd->nr_chips; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct mii_bus *bus;
 		struct dsa_switch *ds;
 
@@ -686,6 +751,11 @@ static int dsa_probe(struct platform_device *pdev)
 		}
 
 		ds = dsa_switch_setup(dst, i, &pdev->dev, bus);
+=======
+		struct dsa_switch *ds;
+
+		ds = dsa_switch_setup(dst, i, &pdev->dev, pd->chip[i].host_dev);
+>>>>>>> v3.18
 =======
 		struct dsa_switch *ds;
 
@@ -755,8 +825,11 @@ static void dsa_shutdown(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id dsa_of_match_table[] = {
 =======
+=======
+>>>>>>> v3.18
 static int dsa_switch_rcv(struct sk_buff *skb, struct net_device *dev,
 			  struct packet_type *pt, struct net_device *orig_dev)
 {
@@ -813,6 +886,9 @@ static SIMPLE_DEV_PM_OPS(dsa_pm_ops, dsa_suspend, dsa_resume);
 
 static const struct of_device_id dsa_of_match_table[] = {
 	{ .compatible = "brcm,bcm7445-switch-v4.0" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "marvell,dsa", },
 	{}
@@ -828,6 +904,10 @@ static struct platform_driver dsa_driver = {
 		.owner	= THIS_MODULE,
 		.of_match_table = dsa_of_match_table,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &dsa_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &dsa_pm_ops,
 >>>>>>> v3.18
@@ -843,6 +923,7 @@ static int __init dsa_init_module(void)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NET_DSA_TAG_DSA
 	dev_add_pack(&dsa_packet_type);
 #endif
@@ -856,12 +937,17 @@ static int __init dsa_init_module(void)
 	dev_add_pack(&dsa_pack_type);
 
 >>>>>>> v3.18
+=======
+	dev_add_pack(&dsa_pack_type);
+
+>>>>>>> v3.18
 	return 0;
 }
 module_init(dsa_init_module);
 
 static void __exit dsa_cleanup_module(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_NET_DSA_TAG_TRAILER
 	dev_remove_pack(&trailer_packet_type);
@@ -872,6 +958,9 @@ static void __exit dsa_cleanup_module(void)
 #ifdef CONFIG_NET_DSA_TAG_DSA
 	dev_remove_pack(&dsa_packet_type);
 #endif
+=======
+	dev_remove_pack(&dsa_pack_type);
+>>>>>>> v3.18
 =======
 	dev_remove_pack(&dsa_pack_type);
 >>>>>>> v3.18

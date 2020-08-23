@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -135,7 +139,11 @@ static const struct acpi_simple_repair_info acpi_object_repair_info[] = {
  * FUNCTION:    acpi_ns_simple_repair
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  data                - Pointer to validation data structure
+=======
+ * PARAMETERS:  info                - Method execution information block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  info                - Method execution information block
 >>>>>>> v3.18
@@ -155,7 +163,11 @@ static const struct acpi_simple_repair_info acpi_object_repair_info[] = {
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_simple_repair(struct acpi_predefined_data *data,
+=======
+acpi_ns_simple_repair(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -175,6 +187,7 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 	 * Check if this name is in the list of repairable names.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	predefined = acpi_ns_match_simple_repair(data->node,
 						 data->return_btype,
 						 package_index);
@@ -182,12 +195,17 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 		if (!return_object) {
 			ACPI_WARN_PREDEFINED((AE_INFO, data->pathname,
 =======
+=======
+>>>>>>> v3.18
 	predefined = acpi_ns_match_simple_repair(info->node,
 						 info->return_btype,
 						 package_index);
 	if (predefined) {
 		if (!return_object) {
 			ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      ACPI_WARN_ALWAYS,
 					      "Missing expected return value"));
@@ -213,7 +231,11 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 	 * expected.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->return_btype & expected_btypes) {
+=======
+	if (info->return_btype & expected_btypes) {
+>>>>>>> v3.18
 =======
 	if (info->return_btype & expected_btypes) {
 >>>>>>> v3.18
@@ -233,6 +255,7 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 	 * for both methods and other objects.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Exit now if there is no return object. Warning if one was expected.
 	 */
 	if (!return_object) {
@@ -241,6 +264,8 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 					      ACPI_WARN_ALWAYS,
 					      "Missing expected return value"));
 =======
+=======
+>>>>>>> v3.18
 	 * Try to fix if there was no return object. Warning if failed to fix.
 	 */
 	if (!return_object) {
@@ -265,6 +290,9 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 						      ACPI_WARN_ALWAYS,
 						      "Missing expected return value"));
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			return (AE_AML_NO_RETURN_VALUE);
@@ -300,7 +328,11 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 		 */
 		status =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    acpi_ns_wrap_with_package(data, return_object, &new_object);
+=======
+		    acpi_ns_wrap_with_package(info, return_object, &new_object);
+>>>>>>> v3.18
 =======
 		    acpi_ns_wrap_with_package(info, return_object, &new_object);
 >>>>>>> v3.18
@@ -311,7 +343,11 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 			 */
 			*return_object_ptr = new_object;	/* New Package object */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data->flags |= ACPI_OBJECT_REPAIRED;
+=======
+			info->return_flags |= ACPI_OBJECT_REPAIRED;
+>>>>>>> v3.18
 =======
 			info->return_flags |= ACPI_OBJECT_REPAIRED;
 >>>>>>> v3.18
@@ -324,7 +360,11 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 	return (AE_AML_OPERAND_TYPE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       object_repaired:
+=======
+object_repaired:
+>>>>>>> v3.18
 =======
 object_repaired:
 >>>>>>> v3.18
@@ -342,7 +382,11 @@ object_repaired:
 		 * change the reference count.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(data->flags & ACPI_OBJECT_WRAPPED)) {
+=======
+		if (!(info->return_flags & ACPI_OBJECT_WRAPPED)) {
+>>>>>>> v3.18
 =======
 		if (!(info->return_flags & ACPI_OBJECT_WRAPPED)) {
 >>>>>>> v3.18
@@ -357,7 +401,11 @@ object_repaired:
 		ACPI_DEBUG_PRINT((ACPI_DB_REPAIR,
 				  "%s: Converted %s to expected %s at Package index %u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  data->pathname,
+=======
+				  info->full_pathname,
+>>>>>>> v3.18
 =======
 				  info->full_pathname,
 >>>>>>> v3.18
@@ -368,7 +416,11 @@ object_repaired:
 		ACPI_DEBUG_PRINT((ACPI_DB_REPAIR,
 				  "%s: Converted %s to expected %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  data->pathname,
+=======
+				  info->full_pathname,
+>>>>>>> v3.18
 =======
 				  info->full_pathname,
 >>>>>>> v3.18
@@ -381,7 +433,11 @@ object_repaired:
 	acpi_ut_remove_reference(return_object);
 	*return_object_ptr = new_object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->flags |= ACPI_OBJECT_REPAIRED;
+=======
+	info->return_flags |= ACPI_OBJECT_REPAIRED;
+>>>>>>> v3.18
 =======
 	info->return_flags |= ACPI_OBJECT_REPAIRED;
 >>>>>>> v3.18
@@ -440,7 +496,11 @@ static const struct acpi_simple_repair_info *acpi_ns_match_simple_repair(struct
  * FUNCTION:    acpi_ns_repair_null_element
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  data                - Pointer to validation data structure
+=======
+ * PARAMETERS:  info                - Method execution information block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  info                - Method execution information block
 >>>>>>> v3.18
@@ -459,7 +519,11 @@ static const struct acpi_simple_repair_info *acpi_ns_match_simple_repair(struct
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_repair_null_element(struct acpi_predefined_data *data,
+=======
+acpi_ns_repair_null_element(struct acpi_evaluate_info * info,
+>>>>>>> v3.18
 =======
 acpi_ns_repair_null_element(struct acpi_evaluate_info * info,
 >>>>>>> v3.18
@@ -513,24 +577,34 @@ acpi_ns_repair_null_element(struct acpi_evaluate_info * info,
 
 	new_object->common.reference_count =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    data->parent_package->common.reference_count;
 
 	ACPI_DEBUG_PRINT((ACPI_DB_REPAIR,
 			  "%s: Converted NULL package element to expected %s at index %u\n",
 			  data->pathname,
 =======
+=======
+>>>>>>> v3.18
 	    info->parent_package->common.reference_count;
 
 	ACPI_DEBUG_PRINT((ACPI_DB_REPAIR,
 			  "%s: Converted NULL package element to expected %s at index %u\n",
 			  info->full_pathname,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  acpi_ut_get_object_type_name(new_object),
 			  package_index));
 
 	*return_object_ptr = new_object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->flags |= ACPI_OBJECT_REPAIRED;
+=======
+	info->return_flags |= ACPI_OBJECT_REPAIRED;
+>>>>>>> v3.18
 =======
 	info->return_flags |= ACPI_OBJECT_REPAIRED;
 >>>>>>> v3.18
@@ -542,7 +616,11 @@ acpi_ns_repair_null_element(struct acpi_evaluate_info * info,
  * FUNCTION:    acpi_ns_remove_null_elements
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  data                - Pointer to validation data structure
+=======
+ * PARAMETERS:  info                - Method execution information block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  info                - Method execution information block
 >>>>>>> v3.18
@@ -553,7 +631,11 @@ acpi_ns_repair_null_element(struct acpi_evaluate_info * info,
  *
  * DESCRIPTION: Remove all NULL package elements from packages that contain
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              a variable number of sub-packages. For these types of
+=======
+ *              a variable number of subpackages. For these types of
+>>>>>>> v3.18
 =======
  *              a variable number of subpackages. For these types of
 >>>>>>> v3.18
@@ -563,7 +645,11 @@ acpi_ns_repair_null_element(struct acpi_evaluate_info * info,
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_remove_null_elements(struct acpi_predefined_data *data,
+=======
+acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -582,7 +668,11 @@ acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
 	 * We can safely remove all NULL elements from these package types:
 	 * PTYPE1_VAR packages contain a variable number of simple data types.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * PTYPE2 packages contain a variable number of sub-packages.
+=======
+	 * PTYPE2 packages contain a variable number of subpackages.
+>>>>>>> v3.18
 =======
 	 * PTYPE2 packages contain a variable number of subpackages.
 >>>>>>> v3.18
@@ -597,6 +687,10 @@ acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
 	case ACPI_PTYPE2_REV_FIXED:
 	case ACPI_PTYPE2_FIX_VAR:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -632,7 +726,11 @@ acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
 		ACPI_DEBUG_PRINT((ACPI_DB_REPAIR,
 				  "%s: Found and removed %u NULL elements\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  data->pathname, (count - new_count)));
+=======
+				  info->full_pathname, (count - new_count)));
+>>>>>>> v3.18
 =======
 				  info->full_pathname, (count - new_count)));
 >>>>>>> v3.18
@@ -649,7 +747,11 @@ acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
  * FUNCTION:    acpi_ns_wrap_with_package
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  data                - Pointer to validation data structure
+=======
+ * PARAMETERS:  info                - Method execution information block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  info                - Method execution information block
 >>>>>>> v3.18
@@ -674,7 +776,11 @@ acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_wrap_with_package(struct acpi_predefined_data *data,
+=======
+acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -699,7 +805,11 @@ acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
 	ACPI_DEBUG_PRINT((ACPI_DB_REPAIR,
 			  "%s: Wrapped %s with expected Package object\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  data->pathname,
+=======
+			  info->full_pathname,
+>>>>>>> v3.18
 =======
 			  info->full_pathname,
 >>>>>>> v3.18
@@ -709,7 +819,11 @@ acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
 
 	*obj_desc_ptr = pkg_obj_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->flags |= ACPI_OBJECT_REPAIRED | ACPI_OBJECT_WRAPPED;
+=======
+	info->return_flags |= ACPI_OBJECT_REPAIRED | ACPI_OBJECT_WRAPPED;
+>>>>>>> v3.18
 =======
 	info->return_flags |= ACPI_OBJECT_REPAIRED | ACPI_OBJECT_WRAPPED;
 >>>>>>> v3.18

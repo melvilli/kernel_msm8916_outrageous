@@ -143,14 +143,20 @@ are:
 - Makefile
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   The targets 'sgmldocs', 'psdocs', 'pdfdocs', and 'htmldocs' are used
   to build DocBook files, PostScript files, PDF files, and html files
   in Documentation/DocBook.
 =======
+=======
+>>>>>>> v3.18
   The targets 'xmldocs', 'psdocs', 'pdfdocs', and 'htmldocs' are used
   to build XML DocBook files, PostScript files, PDF files, and html files
   in Documentation/DocBook. The older target 'sgmldocs' is equivalent
   to 'xmldocs'.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - Documentation/DocBook/Makefile
@@ -166,8 +172,13 @@ subsystems (see Documentation/DocBook/*.tmpl), just type 'make
 psdocs', or 'make pdfdocs', or 'make htmldocs', depending on your
 preference.  If you would rather read a different format, you can type
 <<<<<<< HEAD
+<<<<<<< HEAD
 'make sgmldocs' and then use DocBook tools to convert
 Documentation/DocBook/*.sgml to a format of your choice (for example,
+=======
+'make xmldocs' and then use DocBook tools to convert
+Documentation/DocBook/*.xml to a format of your choice (for example,
+>>>>>>> v3.18
 =======
 'make xmldocs' and then use DocBook tools to convert
 Documentation/DocBook/*.xml to a format of your choice (for example,

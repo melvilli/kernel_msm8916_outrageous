@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -246,7 +250,10 @@ s32 ixgbe_dcb_config_pfc_82599(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fcrtl = (hw->fc.low_water << 10) | IXGBE_FCRTL_XONE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -264,6 +271,10 @@ s32 ixgbe_dcb_config_pfc_82599(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 		if (enabled) {
 			reg = (hw->fc.high_water[i] << 10) | IXGBE_FCRTH_FCEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			fcrtl = (hw->fc.low_water[i] << 10) | IXGBE_FCRTL_XONE;
+>>>>>>> v3.18
 =======
 			fcrtl = (hw->fc.low_water[i] << 10) | IXGBE_FCRTL_XONE;
 >>>>>>> v3.18

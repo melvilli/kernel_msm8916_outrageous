@@ -625,6 +625,7 @@ static struct platform_driver tx4939ide_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init tx4939ide_init(void)
 {
 	return platform_driver_probe(&tx4939ide_driver, tx4939ide_probe);
@@ -637,6 +638,9 @@ static void __exit tx4939ide_exit(void)
 
 module_init(tx4939ide_init);
 module_exit(tx4939ide_exit);
+=======
+module_platform_driver_probe(tx4939ide_driver, tx4939ide_probe);
+>>>>>>> v3.18
 =======
 module_platform_driver_probe(tx4939ide_driver, tx4939ide_probe);
 >>>>>>> v3.18

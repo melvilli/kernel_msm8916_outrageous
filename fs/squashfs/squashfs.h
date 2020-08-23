@@ -26,17 +26,23 @@
 #define ERROR(s, args...)	pr_err("SQUASHFS error: "s, ## args)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WARNING(s, args...)	pr_warning("SQUASHFS: "s, ## args)
 
 /* block.c */
 extern int squashfs_read_data(struct super_block *, void **, u64, int, u64 *,
 				int, int);
 =======
+=======
+>>>>>>> v3.18
 #define WARNING(s, args...)	pr_warn("SQUASHFS: "s, ## args)
 
 /* block.c */
 extern int squashfs_read_data(struct super_block *, u64, int, u64 *,
 				struct squashfs_page_actor *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* cache.c */
@@ -57,8 +63,11 @@ extern void *squashfs_read_table(struct super_block *, u64, int);
 /* decompressor.c */
 extern const struct squashfs_decompressor *squashfs_lookup_decompressor(int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *squashfs_decompressor_init(struct super_block *, unsigned short);
 =======
+=======
+>>>>>>> v3.18
 extern void *squashfs_decompressor_setup(struct super_block *, unsigned short);
 
 /* decompressor_xxx.c */
@@ -67,6 +76,9 @@ extern void squashfs_decompressor_destroy(struct squashfs_sb_info *);
 extern int squashfs_decompress(struct squashfs_sb_info *, struct buffer_head **,
 	int, int, int, struct squashfs_page_actor *);
 extern int squashfs_max_decompressors(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* export.c */
@@ -79,7 +91,10 @@ extern __le64 *squashfs_read_fragment_index_table(struct super_block *,
 				u64, u64, unsigned int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* file.c */
 void squashfs_copy_cache(struct page *, struct squashfs_cache_entry *, int,
 				int);
@@ -87,6 +102,9 @@ void squashfs_copy_cache(struct page *, struct squashfs_cache_entry *, int,
 /* file_xxx.c */
 extern int squashfs_readpage_block(struct page *, u64, int);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* id.c */
 extern int squashfs_get_id(struct super_block *, unsigned int, unsigned int *);

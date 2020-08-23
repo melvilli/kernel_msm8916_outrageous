@@ -195,8 +195,12 @@ static __exit void oct_ilm_module_exit(void)
 {
 	disable_timer(TIMER_NUM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dir)
 		debugfs_remove_recursive(dir);
+=======
+	debugfs_remove_recursive(dir);
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(dir);
 >>>>>>> v3.18

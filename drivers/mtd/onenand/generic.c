@@ -14,7 +14,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -42,7 +45,11 @@ static int generic_onenand_probe(struct platform_device *pdev)
 {
 	struct onenand_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct onenand_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct onenand_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct onenand_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -66,7 +73,11 @@ static int generic_onenand_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->onenand.mmcontrol = pdata ? pdata->mmcontrol : 0;
+=======
+	info->onenand.mmcontrol = pdata ? pdata->mmcontrol : NULL;
+>>>>>>> v3.18
 =======
 	info->onenand.mmcontrol = pdata ? pdata->mmcontrol : NULL;
 >>>>>>> v3.18
@@ -106,8 +117,11 @@ static int generic_onenand_remove(struct platform_device *pdev)
 	unsigned long size = resource_size(res);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (info) {

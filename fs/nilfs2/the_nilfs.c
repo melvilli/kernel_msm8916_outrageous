@@ -86,6 +86,10 @@ struct the_nilfs *alloc_nilfs(struct block_device *bdev)
 	spin_lock_init(&nilfs->ns_cptree_lock);
 	init_rwsem(&nilfs->ns_segctor_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nilfs->ns_sb_update_freq = NILFS_SB_FREQ;
+>>>>>>> v3.18
 =======
 	nilfs->ns_sb_update_freq = NILFS_SB_FREQ;
 >>>>>>> v3.18
@@ -102,6 +106,10 @@ void destroy_nilfs(struct the_nilfs *nilfs)
 	might_sleep();
 	if (nilfs_init(nilfs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		nilfs_sysfs_delete_device_group(nilfs);
+>>>>>>> v3.18
 =======
 		nilfs_sysfs_delete_device_group(nilfs);
 >>>>>>> v3.18
@@ -408,7 +416,10 @@ static int nilfs_store_disk_layout(struct the_nilfs *nilfs,
 
 	nilfs->ns_inode_size = le16_to_cpu(sbp->s_inode_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (nilfs->ns_inode_size > nilfs->ns_blocksize) {
 		printk(KERN_ERR "NILFS: too large inode size: %d bytes.\n",
 		       nilfs->ns_inode_size);
@@ -419,6 +430,9 @@ static int nilfs_store_disk_layout(struct the_nilfs *nilfs,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nilfs->ns_first_ino = le32_to_cpu(sbp->s_first_ino);
 
@@ -453,7 +467,11 @@ static int nilfs_valid_sb(struct nilfs_super_block *sbp)
 		return 0;
 	bytes = le16_to_cpu(sbp->s_bytes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bytes < sumoff + 4 || bytes > BLOCK_SIZE)
+=======
+	if (bytes > BLOCK_SIZE)
+>>>>>>> v3.18
 =======
 	if (bytes > BLOCK_SIZE)
 >>>>>>> v3.18
@@ -656,11 +674,17 @@ int init_nilfs(struct the_nilfs *nilfs, struct super_block *sb, char *data)
 		goto failed_sbh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = nilfs_sysfs_create_device_group(sb);
 	if (err)
 		goto failed_sbh;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_nilfs_init(nilfs);
 	err = 0;
@@ -763,6 +787,10 @@ nilfs_find_or_create_root(struct the_nilfs *nilfs, __u64 cno)
 	struct rb_node **p, *parent;
 	struct nilfs_root *root, *new;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -772,7 +800,11 @@ nilfs_find_or_create_root(struct the_nilfs *nilfs, __u64 cno)
 		return root;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new = kmalloc(sizeof(*root), GFP_KERNEL);
+=======
+	new = kzalloc(sizeof(*root), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	new = kzalloc(sizeof(*root), GFP_KERNEL);
 >>>>>>> v3.18
@@ -805,8 +837,13 @@ nilfs_find_or_create_root(struct the_nilfs *nilfs, __u64 cno)
 	new->nilfs = nilfs;
 	atomic_set(&new->count, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&new->inodes_count, 0);
 	atomic_set(&new->blocks_count, 0);
+=======
+	atomic64_set(&new->inodes_count, 0);
+	atomic64_set(&new->blocks_count, 0);
+>>>>>>> v3.18
 =======
 	atomic64_set(&new->inodes_count, 0);
 	atomic64_set(&new->blocks_count, 0);
@@ -818,13 +855,19 @@ nilfs_find_or_create_root(struct the_nilfs *nilfs, __u64 cno)
 	spin_unlock(&nilfs->ns_cptree_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = nilfs_sysfs_create_snapshot_group(new);
 	if (err) {
 		kfree(new);
 		new = NULL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return new;
 }
@@ -835,6 +878,11 @@ void nilfs_put_root(struct nilfs_root *root)
 		struct the_nilfs *nilfs = root->nilfs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		nilfs_sysfs_delete_snapshot_group(root);
+
+>>>>>>> v3.18
 =======
 		nilfs_sysfs_delete_snapshot_group(root);
 

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -52,7 +56,10 @@
 ACPI_MODULE_NAME("utosi")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /******************************************************************************
  *
  * ACPICA policy for new _OSI strings:
@@ -78,6 +85,9 @@ ACPI_MODULE_NAME("utosi")
  *    release of another string which only compounds the initial problem.
  *
  *****************************************************************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Strings supported by the _OSI predefined control method (which is
@@ -107,6 +117,7 @@ static struct acpi_interface_info acpi_default_supported_interfaces[] = {
 	{"Windows 2009", NULL, 0, ACPI_OSI_WIN_7},	/* Windows 7 and Server 2008 R2 - Added 09/2009 */
 	{"Windows 2012", NULL, 0, ACPI_OSI_WIN_8},	/* Windows 8 and Server 2012 - Added 08/2012 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Feature Group Strings */
 
@@ -126,6 +137,8 @@ static struct acpi_interface_info acpi_default_supported_interfaces[] = {
 	 * "Processor Aggregator Device"
 	 */
 =======
+=======
+>>>>>>> v3.18
 	{"Windows 2013", NULL, 0, ACPI_OSI_WIN_8},	/* Windows 8.1 and Server 2012 R2 - Added 01/2014 */
 
 	/* Feature Group Strings */
@@ -144,6 +157,9 @@ static struct acpi_interface_info acpi_default_supported_interfaces[] = {
 	{"3.0 Thermal Model", NULL, ACPI_OSI_OPTIONAL_FEATURE, 0},
 	{"3.0 _SCP Extensions", NULL, ACPI_OSI_OPTIONAL_FEATURE, 0},
 	{"Processor Aggregator Device", NULL, ACPI_OSI_OPTIONAL_FEATURE, 0}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -212,12 +228,15 @@ acpi_status acpi_ut_interface_terminate(void)
 		acpi_gbl_supported_interfaces = next_interface->next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Only interfaces added at runtime can be freed */
 
 		if (next_interface->flags & ACPI_OSI_DYNAMIC) {
 			ACPI_FREE(next_interface->name);
 			ACPI_FREE(next_interface);
 =======
+=======
+>>>>>>> v3.18
 		if (next_interface->flags & ACPI_OSI_DYNAMIC) {
 
 			/* Only interfaces added at runtime can be freed */
@@ -232,6 +251,9 @@ acpi_status acpi_ut_interface_terminate(void)
 			} else {
 				next_interface->flags &= ~ACPI_OSI_INVALID;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -349,7 +371,10 @@ acpi_status acpi_ut_remove_interface(acpi_string interface_name)
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ut_update_interfaces
  *
  * PARAMETERS:  action              - Actions to be performed during the
@@ -393,6 +418,9 @@ acpi_status acpi_ut_update_interfaces(u8 action)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_ut_get_interface
  *

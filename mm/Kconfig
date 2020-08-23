@@ -21,7 +21,11 @@ config FLATMEM_MANUAL
 	  Some users of more advanced features like NUMA and
 	  memory hotplug may have different options here.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  DISCONTIGMEM is an more mature, better tested system,
+=======
+	  DISCONTIGMEM is a more mature, better tested system,
+>>>>>>> v3.18
 =======
 	  DISCONTIGMEM is a more mature, better tested system,
 >>>>>>> v3.18
@@ -139,13 +143,19 @@ config HAVE_MEMBLOCK_NODE_MAP
 	boolean
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HAVE_MEMBLOCK_PHYS_MAP
 	boolean
 
 config HAVE_GENERIC_RCU_GUP
 	boolean
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARCH_DISCARD_MEMBLOCK
 	boolean
@@ -167,12 +177,15 @@ config MOVABLE_NODE
 	  Allow a node to have only movable memory.  Pages used by the kernel,
 	  such as direct mapping pages cannot be migrated.  So the corresponding
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  memory device cannot be hotplugged.  This option allows users to
 	  online all the memory of a node as movable memory so that the whole
 	  node can be hotplugged.  Users who don't use the memory hotplug
 	  feature are fine with this option on since they don't online memory
 	  as movable.
 =======
+=======
+>>>>>>> v3.18
 	  memory device cannot be hotplugged.  This option allows the following
 	  two things:
 	  - When the system is booting, node full of hotpluggable memory can
@@ -185,6 +198,9 @@ config MOVABLE_NODE
 	  Users who don't use the memory hotplug feature are fine with this
 	  option on since they don't specify movable_node boot option or they
 	  don't online memory as movable.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  Say Y here if you want to hotplug a whole node.
@@ -202,8 +218,13 @@ config MEMORY_HOTPLUG
 	bool "Allow for memory hot-add"
 	depends on SPARSEMEM || X86_64_ACPI_NUMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HOTPLUG && ARCH_ENABLE_MEMORY_HOTPLUG
 	depends on (IA64 || X86 || PPC_BOOK3S_64 || SUPERH || S390 || ARM)
+=======
+	depends on ARCH_ENABLE_MEMORY_HOTPLUG
+	depends on (IA64 || X86 || PPC_BOOK3S_64 || SUPERH || S390)
+>>>>>>> v3.18
 =======
 	depends on ARCH_ENABLE_MEMORY_HOTPLUG
 	depends on (IA64 || X86 || PPC_BOOK3S_64 || SUPERH || S390)
@@ -217,7 +238,11 @@ config MEMORY_HOTREMOVE
 	bool "Allow for memory hot remove"
 	select MEMORY_ISOLATION
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_BOOTMEM_INFO_NODE if X86_64
+=======
+	select HAVE_BOOTMEM_INFO_NODE if (X86_64 || PPC64)
+>>>>>>> v3.18
 =======
 	select HAVE_BOOTMEM_INFO_NODE if (X86_64 || PPC64)
 >>>>>>> v3.18
@@ -247,12 +272,15 @@ config PAGEFLAGS_EXTENDED
 config SPLIT_PTLOCK_CPUS
 	int
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default "999999" if ARM && !CPU_CACHE_VIPT
 	default "999999" if PARISC && !PA20
 	default "999999" if DEBUG_SPINLOCK || DEBUG_LOCK_ALLOC
 	default "4"
 
 =======
+=======
+>>>>>>> v3.18
 	default "999999" if !MMU
 	default "999999" if ARM && !CPU_CACHE_VIPT
 	default "999999" if PARISC && !PA20
@@ -266,6 +294,9 @@ config ARCH_ENABLE_SPLIT_PMD_PTLOCK
 config MEMORY_BALLOON
 	boolean
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # support for memory balloon compaction
@@ -273,7 +304,11 @@ config BALLOON_COMPACTION
 	bool "Allow for balloon memory compaction/migration"
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on COMPACTION && VIRTIO_BALLOON
+=======
+	depends on COMPACTION && MEMORY_BALLOON
+>>>>>>> v3.18
 =======
 	depends on COMPACTION && MEMORY_BALLOON
 >>>>>>> v3.18
@@ -303,7 +338,11 @@ config MIGRATION
 	bool "Page migration"
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE || COMPACTION || CMA
+=======
+	depends on (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE || COMPACTION || CMA) && MMU
+>>>>>>> v3.18
 =======
 	depends on (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE || COMPACTION || CMA) && MMU
 >>>>>>> v3.18
@@ -316,6 +355,12 @@ config MIGRATION
 	  allocation instead of reclaiming.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config ARCH_ENABLE_HUGEPAGE_MIGRATION
+	boolean
+
+>>>>>>> v3.18
 =======
 config ARCH_ENABLE_HUGEPAGE_MIGRATION
 	boolean
@@ -488,6 +533,7 @@ choice
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CROSS_MEMORY_ATTACH
 	bool "Cross Memory Support"
 	depends on MMU
@@ -498,6 +544,8 @@ config CROSS_MEMORY_ATTACH
 	  to directly read from or write to to another process's address space.
 	  See the man page for more details.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #
@@ -549,6 +597,7 @@ config FRONTSWAP
 	  If unsure, say Y to enable frontswap.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MEMORY_HOLE_CARVEOUT
         bool
         help
@@ -570,6 +619,8 @@ config USE_USER_ACCESSIBLE_TIMERS
 	  architecture-specific code that will need to be enabled
 	  separately.
 =======
+=======
+>>>>>>> v3.18
 config CMA
 	bool "Contiguous Memory Allocator"
 	depends on HAVE_MEMBLOCK && MMU
@@ -604,6 +655,9 @@ config CMA_AREAS
 	  number of CMA area in the system.
 
 	  If unsure, leave the default value "7".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MEM_SOFT_DIRTY
@@ -623,7 +677,11 @@ config ZSWAP
 	depends on FRONTSWAP && CRYPTO=y
 	select CRYPTO_LZO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ZBUD
+=======
+	select ZPOOL
+>>>>>>> v3.18
 =======
 	select ZPOOL
 >>>>>>> v3.18
@@ -642,6 +700,7 @@ config ZSWAP
 	  they have not be fully explored on the large set of potential
 	  configurations and workloads that exist.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config BALANCE_ANON_FILE_RECLAIM
 	bool "During reclaim treat anon and file backed pages equally"
@@ -673,6 +732,8 @@ config PROCESS_RECLAIM
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ZPOOL
 	tristate "Common API for compressed memory storage"
 	default n
@@ -692,7 +753,11 @@ config ZBUD
 
 config ZSMALLOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Memory allocator for compressed pages"
+=======
+	tristate "Memory allocator for compressed pages"
+>>>>>>> v3.18
 =======
 	tristate "Memory allocator for compressed pages"
 >>>>>>> v3.18
@@ -717,9 +782,12 @@ config PGTABLE_MAPPING
 	  mapping rather than copying for object mapping.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  You can check speed with zsmalloc benchmark[1].
 	  [1] https://github.com/spartacus06/zsmalloc
 =======
+=======
+>>>>>>> v3.18
 	  You can check speed with zsmalloc benchmark:
 	  https://github.com/spartacus06/zsmapbench
 
@@ -740,4 +808,7 @@ config MAX_STACK_SIZE_MB
 	  changed to a smaller value in which case that is used.
 
 	  A sane initial value is 80 MB.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

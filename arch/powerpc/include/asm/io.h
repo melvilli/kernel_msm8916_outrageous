@@ -22,7 +22,11 @@ extern struct pci_dev *isa_bridge_pcidev;
  * has legacy ISA devices ?
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define arch_has_dev_port()	(isa_bridge_pcidev != NULL)
+=======
+#define arch_has_dev_port()	(isa_bridge_pcidev != NULL || isa_io_special)
+>>>>>>> v3.18
 =======
 #define arch_has_dev_port()	(isa_bridge_pcidev != NULL || isa_io_special)
 >>>>>>> v3.18
@@ -74,9 +78,12 @@ extern unsigned long pci_dram_offset;
 extern resource_size_t isa_mem_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PPC32) && defined(CONFIG_PPC_INDIRECT_IO)
 #error CONFIG_PPC_INDIRECT_IO is not yet supported on 32 bits
 =======
+=======
+>>>>>>> v3.18
 /* Boolean set by platform if PIO accesses are suppored while _IO_BASE
  * is not set or addresses cannot be translated to MMIO. This is typically
  * set when the platform supports "special" PIO accesses via a non memory
@@ -89,6 +96,9 @@ extern bool isa_io_special;
 #if defined(CONFIG_PPC_INDIRECT_PIO) || defined(CONFIG_PPC_INDIRECT_MMIO)
 #error CONFIG_PPC_INDIRECT_{PIO,MMIO} are not yet supported on 32 bits
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -123,7 +133,11 @@ extern bool isa_io_special;
 /* gcc 4.0 and older doesn't have 'Z' constraint */
 #if __GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEF_MMIO_IN_LE(name, size, insn)				\
+=======
+#define DEF_MMIO_IN_X(name, size, insn)				\
+>>>>>>> v3.18
 =======
 #define DEF_MMIO_IN_X(name, size, insn)				\
 >>>>>>> v3.18
@@ -136,7 +150,11 @@ static inline u##size name(const volatile u##size __iomem *addr)	\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEF_MMIO_OUT_LE(name, size, insn) 				\
+=======
+#define DEF_MMIO_OUT_X(name, size, insn)				\
+>>>>>>> v3.18
 =======
 #define DEF_MMIO_OUT_X(name, size, insn)				\
 >>>>>>> v3.18
@@ -148,7 +166,11 @@ static inline void name(volatile u##size __iomem *addr, u##size val)	\
 }
 #else /* newer gcc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEF_MMIO_IN_LE(name, size, insn)				\
+=======
+#define DEF_MMIO_IN_X(name, size, insn)				\
+>>>>>>> v3.18
 =======
 #define DEF_MMIO_IN_X(name, size, insn)				\
 >>>>>>> v3.18
@@ -161,7 +183,11 @@ static inline u##size name(const volatile u##size __iomem *addr)	\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEF_MMIO_OUT_LE(name, size, insn) 				\
+=======
+#define DEF_MMIO_OUT_X(name, size, insn)				\
+>>>>>>> v3.18
 =======
 #define DEF_MMIO_OUT_X(name, size, insn)				\
 >>>>>>> v3.18
@@ -174,7 +200,11 @@ static inline void name(volatile u##size __iomem *addr, u##size val)	\
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEF_MMIO_IN_BE(name, size, insn)				\
+=======
+#define DEF_MMIO_IN_D(name, size, insn)				\
+>>>>>>> v3.18
 =======
 #define DEF_MMIO_IN_D(name, size, insn)				\
 >>>>>>> v3.18
@@ -187,7 +217,11 @@ static inline u##size name(const volatile u##size __iomem *addr)	\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEF_MMIO_OUT_BE(name, size, insn)				\
+=======
+#define DEF_MMIO_OUT_D(name, size, insn)				\
+>>>>>>> v3.18
 =======
 #define DEF_MMIO_OUT_D(name, size, insn)				\
 >>>>>>> v3.18
@@ -198,6 +232,7 @@ static inline void name(volatile u##size __iomem *addr, u##size val)	\
 	IO_SET_SYNC_FLAG();						\
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 DEF_MMIO_IN_BE(in_8,     8, lbz);
@@ -216,6 +251,8 @@ DEF_MMIO_OUT_LE(out_le32, 32, stwbrx);
 DEF_MMIO_OUT_BE(out_be64, 64, std);
 DEF_MMIO_IN_BE(in_be64, 64, ld);
 =======
+=======
+>>>>>>> v3.18
 DEF_MMIO_IN_D(in_8,     8, lbz);
 DEF_MMIO_OUT_D(out_8,   8, stb);
 
@@ -263,6 +300,9 @@ DEF_MMIO_IN_X(in_rm64, 64, ldcix);
 #ifdef __BIG_ENDIAN__
 DEF_MMIO_OUT_D(out_be64, 64, std);
 DEF_MMIO_IN_D(in_be64, 64, ld);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* There is no asm instructions for 64 bits reverse loads and stores */
@@ -276,7 +316,10 @@ static inline void out_le64(volatile u64 __iomem *addr, u64 val)
 	out_be64(addr, swab64(val));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 DEF_MMIO_OUT_D(out_le64, 64, std);
 DEF_MMIO_IN_D(in_le64, 64, ld);
@@ -293,6 +336,9 @@ static inline void out_be64(volatile u64 __iomem *addr, u64 val)
 }
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __powerpc64__ */
 
@@ -335,9 +381,15 @@ extern void _memcpy_toio(volatile void __iomem *dest, const void *src,
  * provides fairly heavy weight barriers for the non-raw versions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * In addition, they support a hook mechanism when CONFIG_PPC_INDIRECT_IO
  * allowing the platform to provide its own implementation of some or all
  * of the accessors.
+=======
+ * In addition, they support a hook mechanism when CONFIG_PPC_INDIRECT_MMIO
+ * or CONFIG_PPC_INDIRECT_PIO are set allowing the platform to provide its
+ * own implementation of some or all of the accessors.
+>>>>>>> v3.18
 =======
  * In addition, they support a hook mechanism when CONFIG_PPC_INDIRECT_MMIO
  * or CONFIG_PPC_INDIRECT_PIO are set allowing the platform to provide its
@@ -359,8 +411,13 @@ extern void _memcpy_toio(volatile void __iomem *dest, const void *src,
 /* Indirect IO address tokens:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * When CONFIG_PPC_INDIRECT_IO is set, the platform can provide hooks
  * on all IOs. (Note that this is all 64 bits only for now)
+=======
+ * When CONFIG_PPC_INDIRECT_MMIO is set, the platform can provide hooks
+ * on all MMIOs. (Note that this is all 64 bits only for now)
+>>>>>>> v3.18
 =======
  * When CONFIG_PPC_INDIRECT_MMIO is set, the platform can provide hooks
  * on all MMIOs. (Note that this is all 64 bits only for now)
@@ -387,12 +444,15 @@ extern void _memcpy_toio(volatile void __iomem *dest, const void *src,
  * The direct IO mapping operations will then mask off those bits
  * before doing the actual access, though that only happen when
 <<<<<<< HEAD
+<<<<<<< HEAD
  * CONFIG_PPC_INDIRECT_IO is set, thus be careful when you use that
  * mechanism
  */
 
 #ifdef CONFIG_PPC_INDIRECT_IO
 =======
+=======
+>>>>>>> v3.18
  * CONFIG_PPC_INDIRECT_MMIO is set, thus be careful when you use that
  * mechanism
  *
@@ -401,6 +461,9 @@ extern void _memcpy_toio(volatile void __iomem *dest, const void *src,
  */
 
 #ifdef CONFIG_PPC_INDIRECT_MMIO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCI_IO_IND_TOKEN_MASK	0x0fff000000000000ul
 #define PCI_IO_IND_TOKEN_SHIFT	48
@@ -807,7 +870,11 @@ extern void __iounmap_at(void *ea, unsigned long size);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * When CONFIG_PPC_INDIRECT_IO is set, we use the generic iomap implementation
+=======
+ * When CONFIG_PPC_INDIRECT_PIO is set, we use the generic iomap implementation
+>>>>>>> v3.18
 =======
  * When CONFIG_PPC_INDIRECT_PIO is set, we use the generic iomap implementation
 >>>>>>> v3.18

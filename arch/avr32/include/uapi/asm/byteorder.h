@@ -2,6 +2,7 @@
  * AVR32 endian-conversion functions.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_BYTEORDER_H
 #define __ASM_AVR32_BYTEORDER_H
 
@@ -9,10 +10,15 @@
 
 #endif /* __ASM_AVR32_BYTEORDER_H */
 =======
+=======
+>>>>>>> v3.18
 #ifndef _UAPI__ASM_AVR32_BYTEORDER_H
 #define _UAPI__ASM_AVR32_BYTEORDER_H
 
 #include <linux/byteorder/big_endian.h>
 
 #endif /* _UAPI__ASM_AVR32_BYTEORDER_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

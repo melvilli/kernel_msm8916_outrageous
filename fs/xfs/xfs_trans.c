@@ -19,6 +19,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -46,6 +47,8 @@
 #include "xfs_buf_item.h"
 #include "xfs_trace.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -61,12 +64,16 @@
 #include "xfs_log.h"
 #include "xfs_trace.h"
 #include "xfs_error.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 kmem_zone_t	*xfs_trans_zone;
 kmem_zone_t	*xfs_log_item_desc_zone;
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * A buffer has a format structure overhead in the log in addition
  * to the data, so we need to take this into account when reserving
@@ -657,6 +664,8 @@ xfs_calc_sb_reservation(
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Initialize the precomputed transaction reservation values
  * in the mount structure.
  */
@@ -664,6 +673,7 @@ void
 xfs_trans_init(
 	struct xfs_mount	*mp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xfs_trans_reservations *resp = &mp->m_reservations;
 
@@ -695,6 +705,9 @@ xfs_trans_init(
 	resp->tr_qm_quotaoff = xfs_calc_qm_quotaoff_reservation(mp);
 	resp->tr_qm_equotaoff = xfs_calc_qm_quotaoff_end_reservation(mp);
 	resp->tr_sb = xfs_calc_sb_reservation(mp);
+=======
+	xfs_trans_resv_calc(mp, M_RES(mp));
+>>>>>>> v3.18
 =======
 	xfs_trans_resv_calc(mp, M_RES(mp));
 >>>>>>> v3.18
@@ -734,7 +747,11 @@ _xfs_trans_alloc(
 
 	tp = kmem_zone_zalloc(xfs_trans_zone, memflags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tp->t_magic = XFS_TRANS_MAGIC;
+=======
+	tp->t_magic = XFS_TRANS_HEADER_MAGIC;
+>>>>>>> v3.18
 =======
 	tp->t_magic = XFS_TRANS_HEADER_MAGIC;
 >>>>>>> v3.18
@@ -783,7 +800,11 @@ xfs_trans_dup(
 	 * Initialize the new transaction structure.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ntp->t_magic = XFS_TRANS_MAGIC;
+=======
+	ntp->t_magic = XFS_TRANS_HEADER_MAGIC;
+>>>>>>> v3.18
 =======
 	ntp->t_magic = XFS_TRANS_HEADER_MAGIC;
 >>>>>>> v3.18
@@ -830,6 +851,7 @@ xfs_trans_dup(
 int
 xfs_trans_reserve(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_t	*tp,
 	uint		blocks,
 	uint		logspace,
@@ -837,10 +859,15 @@ xfs_trans_reserve(
 	uint		flags,
 	uint		logcount)
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_trans	*tp,
 	struct xfs_trans_res	*resp,
 	uint			blocks,
 	uint			rtextents)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int		error = 0;
@@ -860,7 +887,11 @@ xfs_trans_reserve(
 		if (error != 0) {
 			current_restore_flags_nested(&tp->t_pflags, PF_FSTRANS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return (XFS_ERROR(ENOSPC));
+=======
+			return -ENOSPC;
+>>>>>>> v3.18
 =======
 			return -ENOSPC;
 >>>>>>> v3.18
@@ -872,6 +903,7 @@ xfs_trans_reserve(
 	 * Reserve the log space needed for this transaction.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (logspace > 0) {
 		bool	permanent = false;
 
@@ -880,6 +912,8 @@ xfs_trans_reserve(
 
 		if (flags & XFS_TRANS_PERM_LOG_RES) {
 =======
+=======
+>>>>>>> v3.18
 	if (resp->tr_logres > 0) {
 		bool	permanent = false;
 
@@ -889,6 +923,9 @@ xfs_trans_reserve(
 		       tp->t_log_count == resp->tr_logcount);
 
 		if (resp->tr_logflags & XFS_TRANS_PERM_LOG_RES) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tp->t_flags |= XFS_TRANS_PERM_LOG_RES;
 			permanent = true;
@@ -899,6 +936,7 @@ xfs_trans_reserve(
 
 		if (tp->t_ticket != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ASSERT(flags & XFS_TRANS_PERM_LOG_RES);
 			error = xfs_log_regrant(tp->t_mountp, tp->t_ticket);
 		} else {
@@ -907,6 +945,8 @@ xfs_trans_reserve(
 						XFS_TRANSACTION, permanent,
 						tp->t_type);
 =======
+=======
+>>>>>>> v3.18
 			ASSERT(resp->tr_logflags & XFS_TRANS_PERM_LOG_RES);
 			error = xfs_log_regrant(tp->t_mountp, tp->t_ticket);
 		} else {
@@ -915,6 +955,9 @@ xfs_trans_reserve(
 						resp->tr_logcount,
 						&tp->t_ticket, XFS_TRANSACTION,
 						permanent, tp->t_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -922,8 +965,13 @@ xfs_trans_reserve(
 			goto undo_blocks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tp->t_log_res = logspace;
 		tp->t_log_count = logcount;
+=======
+		tp->t_log_res = resp->tr_logres;
+		tp->t_log_count = resp->tr_logcount;
+>>>>>>> v3.18
 =======
 		tp->t_log_res = resp->tr_logres;
 		tp->t_log_count = resp->tr_logcount;
@@ -940,7 +988,11 @@ xfs_trans_reserve(
 					  -((int64_t)rtextents), rsvd);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = XFS_ERROR(ENOSPC);
+=======
+			error = -ENOSPC;
+>>>>>>> v3.18
 =======
 			error = -ENOSPC;
 >>>>>>> v3.18
@@ -957,15 +1009,21 @@ xfs_trans_reserve(
 	 */
 undo_log:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (logspace > 0) {
 		int		log_flags;
 
 		if (flags & XFS_TRANS_PERM_LOG_RES) {
 =======
+=======
+>>>>>>> v3.18
 	if (resp->tr_logres > 0) {
 		int		log_flags;
 
 		if (resp->tr_logflags & XFS_TRANS_PERM_LOG_RES) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			log_flags = XFS_LOG_REL_PERM_RESERV;
 		} else {
@@ -1184,7 +1242,10 @@ xfs_trans_apply_sb_deltas(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_buf_set_type(tp, bp, XFS_BLFT_SB_BUF);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (whole)
@@ -1419,15 +1480,21 @@ xfs_trans_free_items(
 
 		if (commit_lsn != NULLCOMMITLSN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IOP_COMMITTING(lip, commit_lsn);
 		if (flags & XFS_TRANS_ABORT)
 			lip->li_flags |= XFS_LI_ABORTED;
 		IOP_UNLOCK(lip);
 =======
+=======
+>>>>>>> v3.18
 			lip->li_ops->iop_committing(lip, commit_lsn);
 		if (flags & XFS_TRANS_ABORT)
 			lip->li_flags |= XFS_LI_ABORTED;
 		lip->li_ops->iop_unlock(lip);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		xfs_trans_free_item_desc(lidp);
@@ -1449,14 +1516,20 @@ xfs_log_item_batch_insert(
 	xfs_trans_ail_update_bulk(ailp, cur, log_items, nr_items, commit_lsn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < nr_items; i++)
 		IOP_UNPIN(log_items[i], 0);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < nr_items; i++) {
 		struct xfs_log_item *lip = log_items[i];
 
 		lip->li_ops->iop_unpin(lip, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1468,17 +1541,23 @@ xfs_log_item_batch_insert(
  * If we are called with the aborted flag set, it is because a log write during
  * a CIL checkpoint commit has failed. In this case, all the items in the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * checkpoint have already gone through IOP_COMMITED and IOP_UNLOCK, which
  * means that checkpoint commit abort handling is treated exactly the same
  * as an iclog write error even though we haven't started any IO yet. Hence in
  * this case all we need to do is IOP_COMMITTED processing, followed by an
  * IOP_UNPIN(aborted) call.
 =======
+=======
+>>>>>>> v3.18
  * checkpoint have already gone through iop_commited and iop_unlock, which
  * means that checkpoint commit abort handling is treated exactly the same
  * as an iclog write error even though we haven't started any IO yet. Hence in
  * this case all we need to do is iop_committed processing, followed by an
  * iop_unpin(aborted) call.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * The AIL cursor is used to optimise the insert process. If commit_lsn is not
@@ -1513,7 +1592,11 @@ xfs_trans_committed_bulk(
 		if (aborted)
 			lip->li_flags |= XFS_LI_ABORTED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		item_lsn = IOP_COMMITTED(lip, commit_lsn);
+=======
+		item_lsn = lip->li_ops->iop_committed(lip, commit_lsn);
+>>>>>>> v3.18
 =======
 		item_lsn = lip->li_ops->iop_committed(lip, commit_lsn);
 >>>>>>> v3.18
@@ -1529,7 +1612,11 @@ xfs_trans_committed_bulk(
 		if (aborted) {
 			ASSERT(XFS_FORCED_SHUTDOWN(ailp->xa_mount));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IOP_UNPIN(lip, 1);
+=======
+			lip->li_ops->iop_unpin(lip, 1);
+>>>>>>> v3.18
 =======
 			lip->li_ops->iop_unpin(lip, 1);
 >>>>>>> v3.18
@@ -1551,7 +1638,11 @@ xfs_trans_committed_bulk(
 			else
 				spin_unlock(&ailp->xa_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IOP_UNPIN(lip, 0);
+=======
+			lip->li_ops->iop_unpin(lip, 0);
+>>>>>>> v3.18
 =======
 			lip->li_ops->iop_unpin(lip, 0);
 >>>>>>> v3.18
@@ -1573,7 +1664,11 @@ xfs_trans_committed_bulk(
 
 	spin_lock(&ailp->xa_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_ail_cursor_done(ailp, &cur);
+=======
+	xfs_trans_ail_cursor_done(&cur);
+>>>>>>> v3.18
 =======
 	xfs_trans_ail_cursor_done(&cur);
 >>>>>>> v3.18
@@ -1624,7 +1719,11 @@ xfs_trans_commit(
 
 	if (XFS_FORCED_SHUTDOWN(mp)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = XFS_ERROR(EIO);
+=======
+		error = -EIO;
+>>>>>>> v3.18
 =======
 		error = -EIO;
 >>>>>>> v3.18
@@ -1641,12 +1740,16 @@ xfs_trans_commit(
 	xfs_trans_apply_dquot_deltas(tp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_log_commit_cil(mp, tp, &commit_lsn, flags);
 	if (error == ENOMEM) {
 		xfs_force_shutdown(mp, SHUTDOWN_LOG_IO_ERROR);
 		error = XFS_ERROR(EIO);
 		goto out_unreserve;
 	}
+=======
+	xfs_log_commit_cil(mp, tp, &commit_lsn, flags);
+>>>>>>> v3.18
 =======
 	xfs_log_commit_cil(mp, tp, &commit_lsn, flags);
 >>>>>>> v3.18
@@ -1660,10 +1763,14 @@ xfs_trans_commit(
 	 */
 	if (sync) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!error) {
 			error = _xfs_log_force_lsn(mp, commit_lsn,
 				      XFS_LOG_SYNC, NULL);
 		}
+=======
+		error = _xfs_log_force_lsn(mp, commit_lsn, XFS_LOG_SYNC, NULL);
+>>>>>>> v3.18
 =======
 		error = _xfs_log_force_lsn(mp, commit_lsn, XFS_LOG_SYNC, NULL);
 >>>>>>> v3.18
@@ -1687,7 +1794,11 @@ out_unreserve:
 		commit_lsn = xfs_log_done(mp, tp->t_ticket, NULL, log_flags);
 		if (commit_lsn == -1 && !error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = XFS_ERROR(EIO);
+=======
+			error = -EIO;
+>>>>>>> v3.18
 =======
 			error = -EIO;
 >>>>>>> v3.18
@@ -1773,7 +1884,11 @@ xfs_trans_roll(
 {
 	struct xfs_trans	*trans;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		logres, count;
+=======
+	struct xfs_trans_res	tres;
+>>>>>>> v3.18
 =======
 	struct xfs_trans_res	tres;
 >>>>>>> v3.18
@@ -1789,8 +1904,13 @@ xfs_trans_roll(
 	 * Copy the critical parameters from one trans to the next.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	logres = trans->t_log_res;
 	count = trans->t_log_count;
+=======
+	tres.tr_logres = trans->t_log_res;
+	tres.tr_logcount = trans->t_log_count;
+>>>>>>> v3.18
 =======
 	tres.tr_logres = trans->t_log_res;
 	tres.tr_logcount = trans->t_log_count;
@@ -1807,7 +1927,11 @@ xfs_trans_roll(
 	error = xfs_trans_commit(trans, 0);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (error);
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -1830,8 +1954,13 @@ xfs_trans_roll(
 	 * the prior and the next transactions.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_trans_reserve(trans, 0, logres, 0,
 				  XFS_TRANS_PERM_LOG_RES, count);
+=======
+	tres.tr_logflags = XFS_TRANS_PERM_LOG_RES;
+	error = xfs_trans_reserve(trans, &tres, 0, 0);
+>>>>>>> v3.18
 =======
 	tres.tr_logflags = XFS_TRANS_PERM_LOG_RES;
 	error = xfs_trans_reserve(trans, &tres, 0, 0);

@@ -12,12 +12,15 @@
 #define ZCRYPT_DBF_LEN	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sort out low debug levels early to avoid wasted sprints */
 static inline int zcrypt_dbf_passes(debug_info_t *dbf_grp, int level)
 {
 	return (level <= dbf_grp->level);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DBF_ERR		3	/* error conditions	*/
@@ -29,7 +32,11 @@ static inline int zcrypt_dbf_passes(debug_info_t *dbf_grp, int level)
 #define ZCRYPT_DBF_COMMON(level, text...) \
 	do { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (zcrypt_dbf_passes(zcrypt_dbf_common, level)) { \
+=======
+		if (debug_level_enabled(zcrypt_dbf_common, level)) { \
+>>>>>>> v3.18
 =======
 		if (debug_level_enabled(zcrypt_dbf_common, level)) { \
 >>>>>>> v3.18
@@ -43,7 +50,11 @@ static inline int zcrypt_dbf_passes(debug_info_t *dbf_grp, int level)
 #define ZCRYPT_DBF_DEVICES(level, text...) \
 	do { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (zcrypt_dbf_passes(zcrypt_dbf_devices, level)) { \
+=======
+		if (debug_level_enabled(zcrypt_dbf_devices, level)) { \
+>>>>>>> v3.18
 =======
 		if (debug_level_enabled(zcrypt_dbf_devices, level)) { \
 >>>>>>> v3.18
@@ -57,7 +68,11 @@ static inline int zcrypt_dbf_passes(debug_info_t *dbf_grp, int level)
 #define ZCRYPT_DBF_DEV(level, device, text...) \
 	do { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (zcrypt_dbf_passes(device->dbf_area, level)) { \
+=======
+		if (debug_level_enabled(device->dbf_area, level)) { \
+>>>>>>> v3.18
 =======
 		if (debug_level_enabled(device->dbf_area, level)) { \
 >>>>>>> v3.18

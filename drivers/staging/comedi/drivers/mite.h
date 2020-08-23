@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -29,6 +32,7 @@
 
 #include <linux/pci.h>
 #include <linux/log2.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "../comedidev.h"
 
@@ -48,6 +52,8 @@ struct mite_dma_descriptor {
 	u32 addr;
 	u32 next;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include "../comedidev.h"
 
@@ -59,6 +65,9 @@ struct mite_dma_descriptor {
 	__le32 count;
 	__le32 addr;
 	__le32 next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 dar;
 };
@@ -84,7 +93,10 @@ struct mite_struct {
 	void __iomem *mite_io_addr;
 	resource_size_t daq_phys_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *daq_io_addr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mite_channel channels[MAX_MITE_DMA_CHANNELS];
@@ -96,6 +108,7 @@ struct mite_struct {
 
 struct mite_struct *mite_alloc(struct pci_dev *pcidev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void mite_free(struct mite_struct *mite)
 {
@@ -116,6 +129,8 @@ int mite_setup(struct mite_struct *mite);
 int mite_setup2(struct mite_struct *mite, unsigned use_iodwbsr_1);
 void mite_unsetup(struct mite_struct *mite);
 =======
+=======
+>>>>>>> v3.18
 int mite_setup2(struct comedi_device *, struct mite_struct *, bool use_win1);
 
 static inline int mite_setup(struct comedi_device *dev,
@@ -125,6 +140,9 @@ static inline int mite_setup(struct comedi_device *dev,
 }
 
 void mite_detach(struct mite_struct *mite);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mite_dma_descriptor_ring *mite_alloc_ring(struct mite_struct *mite);
 void mite_free_ring(struct mite_dma_descriptor_ring *ring);
@@ -150,9 +168,15 @@ void mite_dma_arm(struct mite_channel *mite_chan);
 void mite_dma_disarm(struct mite_channel *mite_chan);
 int mite_sync_input_dma(struct mite_channel *mite_chan,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct comedi_async *async);
 int mite_sync_output_dma(struct mite_channel *mite_chan,
 			 struct comedi_async *async);
+=======
+			struct comedi_subdevice *s);
+int mite_sync_output_dma(struct mite_channel *mite_chan,
+			 struct comedi_subdevice *s);
+>>>>>>> v3.18
 =======
 			struct comedi_subdevice *s);
 int mite_sync_output_dma(struct mite_channel *mite_chan,
@@ -170,6 +194,7 @@ void mite_prep_dma(struct mite_channel *mite_chan,
 		   unsigned int num_device_bits, unsigned int num_memory_bits);
 int mite_buf_change(struct mite_dma_descriptor_ring *ring,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct comedi_async *async);
 
 #ifdef DEBUG_MITE
@@ -181,6 +206,9 @@ static inline int CHAN_OFFSET(int channel)
 {
 	return 0x500 + 0x100 * channel;
 };
+=======
+		    struct comedi_subdevice *s);
+>>>>>>> v3.18
 =======
 		    struct comedi_subdevice *s);
 >>>>>>> v3.18
@@ -196,6 +224,7 @@ enum mite_registers {
 	MITE_PCI_CONFIG_OFFSET = 0x300,
 	MITE_CSIGR = 0x460	/* chip signature */
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int MITE_CHOR(int channel)
 {				/*  channel operation */
@@ -282,6 +311,8 @@ static inline int MITE_FCR(int channel)
 	return CHAN_OFFSET(channel) + 0x40;
 };
 =======
+=======
+>>>>>>> v3.18
 
 #define MITE_CHAN(x)	(0x500 + 0x100 * (x))
 #define MITE_CHOR(x)	(0x00 + MITE_CHAN(x))	/* channel operation */
@@ -301,6 +332,9 @@ static inline int MITE_FCR(int channel)
 #define MITE_WSER(x)	(0x38 + MITE_CHAN(x))	/* ? */
 #define MITE_CHSR(x)	(0x3c + MITE_CHAN(x))	/* channel status */
 #define MITE_FCR(x)	(0x40 + MITE_CHAN(x))	/* fifo count */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum MITE_IODWBSR_bits {
@@ -350,11 +384,17 @@ static inline int mite_csigr_wpdep(u32 csigr_bits)
 {				/*  write post fifo depth */
 	unsigned int wpdep_bits = (csigr_bits >> 20) & 0x7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wpdep_bits == 0)
 		return 0;
 	else
 		return 1 << (wpdep_bits - 1);
 };
+=======
+
+	return (wpdep_bits) ? (1 << (wpdep_bits - 1)) : 0;
+}
+>>>>>>> v3.18
 =======
 
 	return (wpdep_bits) ? (1 << (wpdep_bits - 1)) : 0;

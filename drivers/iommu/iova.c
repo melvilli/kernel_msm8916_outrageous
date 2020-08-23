@@ -343,7 +343,10 @@ __is_range_overlap(struct rb_node *node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct iova *
 alloc_and_init_iova(unsigned long pfn_lo, unsigned long pfn_hi)
 {
@@ -358,6 +361,9 @@ alloc_and_init_iova(unsigned long pfn_lo, unsigned long pfn_hi)
 	return iova;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct iova *
 __insert_new_range(struct iova_domain *iovad,
@@ -365,6 +371,7 @@ __insert_new_range(struct iova_domain *iovad,
 {
 	struct iova *iova;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	iova = alloc_iova_mem();
 	if (!iova)
@@ -374,10 +381,15 @@ __insert_new_range(struct iova_domain *iovad,
 	iova->pfn_lo = pfn_lo;
 	iova_insert_rbtree(&iovad->rbroot, iova);
 =======
+=======
+>>>>>>> v3.18
 	iova = alloc_and_init_iova(pfn_lo, pfn_hi);
 	if (iova)
 		iova_insert_rbtree(&iovad->rbroot, iova);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return iova;
 }
@@ -458,7 +470,10 @@ copy_reserved_iova(struct iova_domain *from, struct iova_domain *to)
 	spin_unlock_irqrestore(&from->iova_rbtree_lock, flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct iova *
 split_and_remove_iova(struct iova_domain *iovad, struct iova *iova,
@@ -500,4 +515,7 @@ error:
 		free_iova_mem(prev);
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

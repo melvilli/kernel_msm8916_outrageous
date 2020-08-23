@@ -4,7 +4,11 @@
  * Implementation of FSF commands.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2002, 2015
+=======
+ * Copyright IBM Corp. 2002, 2013
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2002, 2013
 >>>>>>> v3.18
@@ -259,6 +263,7 @@ static void zfcp_fsf_status_read_handler(struct zfcp_fsf_req *req)
 		break;
 	case FSF_STATUS_READ_NOTIFICATION_LOST:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sr_buf->status_subtype & FSF_STATUS_READ_SUB_ACT_UPDATED)
 			zfcp_cfdc_adapter_access_changed(adapter);
 		if (sr_buf->status_subtype & FSF_STATUS_READ_SUB_INCOMING_ELS)
@@ -267,6 +272,11 @@ static void zfcp_fsf_status_read_handler(struct zfcp_fsf_req *req)
 	case FSF_STATUS_READ_CFDC_UPDATED:
 		zfcp_cfdc_adapter_access_changed(adapter);
 		break;
+=======
+		if (sr_buf->status_subtype & FSF_STATUS_READ_SUB_INCOMING_ELS)
+			zfcp_fc_conditional_port_scan(adapter);
+		break;
+>>>>>>> v3.18
 =======
 		if (sr_buf->status_subtype & FSF_STATUS_READ_SUB_INCOMING_ELS)
 			zfcp_fc_conditional_port_scan(adapter);
@@ -524,10 +534,14 @@ static int zfcp_fsf_exchange_config_evaluate(struct zfcp_fsf_req *req)
 		break;
 	case FSF_TOPO_FABRIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bottom->connection_features & FSF_FEATURE_NPIV_MODE)
 			fc_host_port_type(shost) = FC_PORTTYPE_NPIV;
 		else
 			fc_host_port_type(shost) = FC_PORTTYPE_NPORT;
+=======
+		fc_host_port_type(shost) = FC_PORTTYPE_NPORT;
+>>>>>>> v3.18
 =======
 		fc_host_port_type(shost) = FC_PORTTYPE_NPORT;
 >>>>>>> v3.18
@@ -636,6 +650,10 @@ static void zfcp_fsf_exchange_port_evaluate(struct zfcp_fsf_req *req)
 	if (adapter->connection_features & FSF_FEATURE_NPIV_MODE) {
 		fc_host_permanent_port_name(shost) = bottom->wwpn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fc_host_port_type(shost) = FC_PORTTYPE_NPIV;
+>>>>>>> v3.18
 =======
 		fc_host_port_type(shost) = FC_PORTTYPE_NPIV;
 >>>>>>> v3.18
@@ -796,7 +814,12 @@ int zfcp_fsf_status_read(struct zfcp_qdio *qdio)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req = zfcp_fsf_req_create(qdio, FSF_QTCB_UNSOLICITED_STATUS, 0,
+=======
+	req = zfcp_fsf_req_create(qdio, FSF_QTCB_UNSOLICITED_STATUS,
+				  SBAL_SFLAGS0_TYPE_STATUS,
+>>>>>>> v3.18
 =======
 	req = zfcp_fsf_req_create(qdio, FSF_QTCB_UNSOLICITED_STATUS,
 				  SBAL_SFLAGS0_TYPE_STATUS,
@@ -970,8 +993,11 @@ static void zfcp_fsf_send_ct_handler(struct zfcp_fsf_req *req)
                 }
                 break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSF_ACCESS_DENIED:
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         case FSF_PORT_BOXED:
@@ -1017,12 +1043,17 @@ static int zfcp_fsf_setup_ct_els_sbals(struct zfcp_fsf_req *req,
 		if (zfcp_qdio_sbals_from_sg(qdio, &req->qdio_req, sg_req))
 			return -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qtcb->bottom.support.req_buf_length =
 			zfcp_qdio_real_bytes(sg_req);
 		if (zfcp_qdio_sbals_from_sg(qdio, &req->qdio_req, sg_resp))
 			return -EIO;
 		qtcb->bottom.support.resp_buf_length =
 			zfcp_qdio_real_bytes(sg_resp);
+=======
+		if (zfcp_qdio_sbals_from_sg(qdio, &req->qdio_req, sg_resp))
+			return -EIO;
+>>>>>>> v3.18
 =======
 		if (zfcp_qdio_sbals_from_sg(qdio, &req->qdio_req, sg_resp))
 			return -EIO;
@@ -1117,7 +1148,10 @@ int zfcp_fsf_send_ct(struct zfcp_fc_wka_port *wka_port,
 	req->handler = zfcp_fsf_send_ct_handler;
 	req->qtcb->header.port_handle = wka_port->handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct->d_id = wka_port->d_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	req->data = ct;
@@ -1141,7 +1175,10 @@ static void zfcp_fsf_send_els_handler(struct zfcp_fsf_req *req)
 {
 	struct zfcp_fsf_ct_els *send_els = req->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zfcp_port *port = send_els->port;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct fsf_qtcb_header *header = &req->qtcb->header;
@@ -1174,12 +1211,15 @@ static void zfcp_fsf_send_els_handler(struct zfcp_fsf_req *req)
 	case FSF_RESPONSE_SIZE_TOO_LARGE:
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSF_ACCESS_DENIED:
 		if (port) {
 			zfcp_cfdc_port_denied(port, &header->fsf_status_qual);
 			req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 		}
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FSF_SBAL_MISMATCH:
@@ -1230,7 +1270,10 @@ int zfcp_fsf_send_els(struct zfcp_adapter *adapter, u32 d_id,
 	hton24(req->qtcb->bottom.support.d_id, d_id);
 	req->handler = zfcp_fsf_send_els_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	els->d_id = d_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	req->data = els;
@@ -1274,8 +1317,11 @@ int zfcp_fsf_exchange_config_data(struct zfcp_erp_action *erp_action)
 
 	req->qtcb->bottom.config.feature_selection =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			FSF_FEATURE_CFDC |
 			FSF_FEATURE_LUN_SHARING |
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			FSF_FEATURE_NOTIFICATION_LOST |
@@ -1318,8 +1364,11 @@ int zfcp_fsf_exchange_config_data_sync(struct zfcp_qdio *qdio,
 
 	req->qtcb->bottom.config.feature_selection =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			FSF_FEATURE_CFDC |
 			FSF_FEATURE_LUN_SHARING |
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			FSF_FEATURE_NOTIFICATION_LOST |
@@ -1449,10 +1498,13 @@ static void zfcp_fsf_open_port_handler(struct zfcp_fsf_req *req)
 	case FSF_PORT_ALREADY_OPEN:
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSF_ACCESS_DENIED:
 		zfcp_cfdc_port_denied(port, &header->fsf_status_qual);
 		req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FSF_MAXIMUM_NUMBER_OF_PORTS_EXCEEDED:
@@ -1638,8 +1690,11 @@ static void zfcp_fsf_open_wka_port_handler(struct zfcp_fsf_req *req)
 	case FSF_ADAPTER_STATUS_AVAILABLE:
 		req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* fall through */
 	case FSF_ACCESS_DENIED:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		wka_port->status = ZFCP_FC_WKA_PORT_OFFLINE;
@@ -1692,8 +1747,11 @@ int zfcp_fsf_open_wka_port(struct zfcp_fc_wka_port *wka_port)
 out:
 	spin_unlock_irq(&qdio->req_q_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!retval)
 		zfcp_dbf_rec_run_wka("fsowp_1", wka_port, req->req_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return retval;
@@ -1750,8 +1808,11 @@ int zfcp_fsf_close_wka_port(struct zfcp_fc_wka_port *wka_port)
 out:
 	spin_unlock_irq(&qdio->req_q_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!retval)
 		zfcp_dbf_rec_run_wka("fscwp_1", wka_port, req->req_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return retval;
@@ -1772,9 +1833,12 @@ static void zfcp_fsf_close_physical_port_handler(struct zfcp_fsf_req *req)
 		req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSF_ACCESS_DENIED:
 		zfcp_cfdc_port_denied(port, &header->fsf_status_qual);
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FSF_PORT_BOXED:
@@ -1863,7 +1927,11 @@ static void zfcp_fsf_open_lun_handler(struct zfcp_fsf_req *req)
 	struct zfcp_scsi_dev *zfcp_sdev;
 	struct fsf_qtcb_header *header = &req->qtcb->header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsf_qtcb_bottom_support *bottom = &req->qtcb->bottom.support;
+=======
+	union fsf_status_qual *qual = &header->fsf_status_qual;
+>>>>>>> v3.18
 =======
 	union fsf_status_qual *qual = &header->fsf_status_qual;
 >>>>>>> v3.18
@@ -1875,9 +1943,13 @@ static void zfcp_fsf_open_lun_handler(struct zfcp_fsf_req *req)
 
 	atomic_clear_mask(ZFCP_STATUS_COMMON_ACCESS_DENIED |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  ZFCP_STATUS_COMMON_ACCESS_BOXED |
 			  ZFCP_STATUS_LUN_SHARED |
 			  ZFCP_STATUS_LUN_READONLY,
+=======
+			  ZFCP_STATUS_COMMON_ACCESS_BOXED,
+>>>>>>> v3.18
 =======
 			  ZFCP_STATUS_COMMON_ACCESS_BOXED,
 >>>>>>> v3.18
@@ -1891,10 +1963,13 @@ static void zfcp_fsf_open_lun_handler(struct zfcp_fsf_req *req)
 	case FSF_LUN_ALREADY_OPEN:
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSF_ACCESS_DENIED:
 		zfcp_cfdc_lun_denied(sdev, &header->fsf_status_qual);
 		req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FSF_PORT_BOXED:
@@ -1906,8 +1981,11 @@ static void zfcp_fsf_open_lun_handler(struct zfcp_fsf_req *req)
 		break;
 	case FSF_LUN_SHARING_VIOLATION:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_cfdc_lun_shrng_vltn(sdev, &header->fsf_status_qual);
 =======
+=======
+>>>>>>> v3.18
 		if (qual->word[0])
 			dev_warn(&zfcp_sdev->port->adapter->ccw_device->dev,
 				 "LUN 0x%Lx on port 0x%Lx is already in "
@@ -1919,6 +1997,9 @@ static void zfcp_fsf_open_lun_handler(struct zfcp_fsf_req *req)
 		zfcp_erp_set_lun_status(sdev,
 					ZFCP_STATUS_COMMON_ERP_FAILED |
 					ZFCP_STATUS_COMMON_ACCESS_DENIED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 		break;
@@ -1948,7 +2029,10 @@ static void zfcp_fsf_open_lun_handler(struct zfcp_fsf_req *req)
 		zfcp_sdev->lun_handle = header->lun_handle;
 		atomic_set_mask(ZFCP_STATUS_COMMON_OPEN, &zfcp_sdev->status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_cfdc_open_lun_eval(sdev, bottom);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -2179,10 +2263,13 @@ static void zfcp_fsf_fcp_handler_common(struct zfcp_fsf_req *req)
 		zfcp_fsf_class_not_supp(req);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FSF_ACCESS_DENIED:
 		zfcp_cfdc_lun_denied(sdev, &header->fsf_status_qual);
 		req->status |= ZFCP_STATUS_FSFREQ_ERROR;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FSF_DIRECTION_INDICATOR_NOT_VALID:
@@ -2382,8 +2469,12 @@ int zfcp_fsf_fcp_cmnd(struct scsi_cmnd *scsi_cmnd)
 	zfcp_fc_scsi_to_fcp(fcp_cmnd, scsi_cmnd, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((scsi_get_prot_op(scsi_cmnd) != SCSI_PROT_NORMAL) &&
 	    scsi_prot_sg_count(scsi_cmnd)) {
+=======
+	if (scsi_prot_sg_count(scsi_cmnd)) {
+>>>>>>> v3.18
 =======
 	if (scsi_prot_sg_count(scsi_cmnd)) {
 >>>>>>> v3.18
@@ -2491,6 +2582,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void zfcp_fsf_control_file_handler(struct zfcp_fsf_req *req)
 {
 }
@@ -2566,6 +2658,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * zfcp_fsf_reqid_check - validate req_id contained in SBAL returned by QDIO
  * @adapter: pointer to struct zfcp_adapter
@@ -2604,6 +2698,7 @@ void zfcp_fsf_reqid_check(struct zfcp_qdio *qdio, int sbal_idx)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct zfcp_fsf_req *zfcp_fsf_get_req(struct zfcp_qdio *qdio,
 				      struct qdio_buffer *sbal)
@@ -2613,5 +2708,7 @@ struct zfcp_fsf_req *zfcp_fsf_get_req(struct zfcp_qdio *qdio,
 
 	return zfcp_reqlist_find(qdio->adapter->req_list, req_id);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

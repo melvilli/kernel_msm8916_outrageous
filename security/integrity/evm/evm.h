@@ -25,12 +25,18 @@ extern int evm_initialized;
 extern char *evm_hmac;
 extern char *evm_hash;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int evm_hmac_version;
 =======
+=======
+>>>>>>> v3.18
 
 #define EVM_ATTR_FSUUID		0x0001
 
 extern int evm_hmac_attrs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct crypto_shash *hmac_tfm;
@@ -39,6 +45,7 @@ extern struct crypto_shash *hash_tfm;
 /* List of EVM protected security xattrs */
 extern char *evm_config_xattrnames[];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int evm_init_key(void);
 extern int evm_update_evmxattr(struct dentry *dentry,
@@ -55,6 +62,8 @@ extern int evm_init_hmac(struct inode *inode, const struct xattr *xattr,
 			 char *hmac_val);
 extern int evm_init_secfs(void);
 =======
+=======
+>>>>>>> v3.18
 int evm_init_key(void);
 int evm_update_evmxattr(struct dentry *dentry,
 			const char *req_xattr_name,
@@ -69,6 +78,9 @@ int evm_calc_hash(struct dentry *dentry, const char *req_xattr_name,
 int evm_init_hmac(struct inode *inode, const struct xattr *xattr,
 		  char *hmac_val);
 int evm_init_secfs(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

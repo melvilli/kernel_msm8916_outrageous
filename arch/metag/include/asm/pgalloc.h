@@ -53,15 +53,21 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm,
 	struct page *pte;
 	pte = alloc_pages(GFP_KERNEL | __GFP_REPEAT | __GFP_ZERO, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pte)
 		pgtable_page_ctor(pte);
 =======
+=======
+>>>>>>> v3.18
 	if (!pte)
 		return NULL;
 	if (!pgtable_page_ctor(pte)) {
 		__free_page(pte);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pte;
 }

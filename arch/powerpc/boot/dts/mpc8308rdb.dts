@@ -167,7 +167,10 @@
 					interrupts = <17 0x8>;
 					reg = <0x2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -270,7 +273,11 @@
 
 		dma@2c000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "fsl,mpc8308-dma", "fsl,mpc5121-dma";
+=======
+			compatible = "fsl,mpc8308-dma";
+>>>>>>> v3.18
 =======
 			compatible = "fsl,mpc8308-dma";
 >>>>>>> v3.18

@@ -9,12 +9,18 @@
 //#define DBG
 //#define DEBUG_LOCKS
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/mutex.h>
@@ -36,8 +42,14 @@
 #define ALLOC_M		1
 #define FNODE_RD_AHEAD	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ANODE_RD_AHEAD	16
 #define DNODE_RD_AHEAD	4
+=======
+#define ANODE_RD_AHEAD	0
+#define DNODE_RD_AHEAD	72
+#define COUNT_RD_AHEAD	62
+>>>>>>> v3.18
 =======
 #define ANODE_RD_AHEAD	0
 #define DNODE_RD_AHEAD	72
@@ -94,6 +106,10 @@ struct hpfs_sb_info {
 	unsigned sb_max_fwd_alloc;	/* max forwad allocation */
 	int sb_timeshift;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head rcu;
 >>>>>>> v3.18
@@ -226,6 +242,10 @@ void hpfs_remove_fnode(struct super_block *, fnode_secno fno);
 /* buffer.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void hpfs_prefetch_sectors(struct super_block *, unsigned, int);
+>>>>>>> v3.18
 =======
 void hpfs_prefetch_sectors(struct super_block *, unsigned, int);
 >>>>>>> v3.18
@@ -294,6 +314,10 @@ void hpfs_evict_inode(struct inode *);
 __le32 *hpfs_map_dnode_bitmap(struct super_block *, struct quad_buffer_head *);
 __le32 *hpfs_map_bitmap(struct super_block *, unsigned, struct quad_buffer_head *, char *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void hpfs_prefetch_bitmap(struct super_block *, unsigned);
+>>>>>>> v3.18
 =======
 void hpfs_prefetch_bitmap(struct super_block *, unsigned);
 >>>>>>> v3.18
@@ -335,7 +359,11 @@ __printf(2, 3)
 void hpfs_error(struct super_block *, const char *, ...);
 int hpfs_stop_cycles(struct super_block *, int, int *, int *, char *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned hpfs_count_one_bitmap(struct super_block *, secno);
+=======
+unsigned hpfs_get_free_dnodes(struct super_block *);
+>>>>>>> v3.18
 =======
 unsigned hpfs_get_free_dnodes(struct super_block *);
 >>>>>>> v3.18

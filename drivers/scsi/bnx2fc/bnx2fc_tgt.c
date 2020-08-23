@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2fc_tgt.c: Broadcom NetXtreme II Linux FCoE offload driver.
+=======
+/* bnx2fc_tgt.c: QLogic NetXtreme II Linux FCoE offload driver.
+>>>>>>> v3.18
 =======
 /* bnx2fc_tgt.c: QLogic NetXtreme II Linux FCoE offload driver.
 >>>>>>> v3.18
@@ -8,6 +12,10 @@
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014, QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c) 2014, QLogic Corporation
 >>>>>>> v3.18
@@ -395,6 +403,10 @@ static int bnx2fc_init_tgt(struct bnx2fc_rport *tgt,
 	tgt->rq_cons_idx = 0;
 	atomic_set(&tgt->num_active_ios, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tgt->retry_delay_timestamp = 0;
+>>>>>>> v3.18
 =======
 	tgt->retry_delay_timestamp = 0;
 >>>>>>> v3.18
@@ -686,7 +698,12 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	/* Allocate and map SQ */
 	tgt->sq_mem_size = tgt->max_sqes * BNX2FC_SQ_WQE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->sq_mem_size = (tgt->sq_mem_size + (PAGE_SIZE - 1)) & PAGE_MASK;
+=======
+	tgt->sq_mem_size = (tgt->sq_mem_size + (CNIC_PAGE_SIZE - 1)) &
+			   CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->sq_mem_size = (tgt->sq_mem_size + (CNIC_PAGE_SIZE - 1)) &
 			   CNIC_PAGE_MASK;
@@ -704,7 +721,12 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	/* Allocate and map CQ */
 	tgt->cq_mem_size = tgt->max_cqes * BNX2FC_CQ_WQE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->cq_mem_size = (tgt->cq_mem_size + (PAGE_SIZE - 1)) & PAGE_MASK;
+=======
+	tgt->cq_mem_size = (tgt->cq_mem_size + (CNIC_PAGE_SIZE - 1)) &
+			   CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->cq_mem_size = (tgt->cq_mem_size + (CNIC_PAGE_SIZE - 1)) &
 			   CNIC_PAGE_MASK;
@@ -722,7 +744,12 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	/* Allocate and map RQ and RQ PBL */
 	tgt->rq_mem_size = tgt->max_rqes * BNX2FC_RQ_WQE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->rq_mem_size = (tgt->rq_mem_size + (PAGE_SIZE - 1)) & PAGE_MASK;
+=======
+	tgt->rq_mem_size = (tgt->rq_mem_size + (CNIC_PAGE_SIZE - 1)) &
+			   CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->rq_mem_size = (tgt->rq_mem_size + (CNIC_PAGE_SIZE - 1)) &
 			   CNIC_PAGE_MASK;
@@ -738,8 +765,14 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	memset(tgt->rq, 0, tgt->rq_mem_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->rq_pbl_size = (tgt->rq_mem_size / PAGE_SIZE) * sizeof(void *);
 	tgt->rq_pbl_size = (tgt->rq_pbl_size + (PAGE_SIZE - 1)) & PAGE_MASK;
+=======
+	tgt->rq_pbl_size = (tgt->rq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
+	tgt->rq_pbl_size = (tgt->rq_pbl_size + (CNIC_PAGE_SIZE - 1)) &
+			   CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->rq_pbl_size = (tgt->rq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
 	tgt->rq_pbl_size = (tgt->rq_pbl_size + (CNIC_PAGE_SIZE - 1)) &
@@ -756,7 +789,11 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 
 	memset(tgt->rq_pbl, 0, tgt->rq_pbl_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_pages = tgt->rq_mem_size / PAGE_SIZE;
+=======
+	num_pages = tgt->rq_mem_size / CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	num_pages = tgt->rq_mem_size / CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -769,7 +806,11 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 		*pbl = (u32)((u64)page >> 32);
 		pbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page += PAGE_SIZE;
+=======
+		page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 		page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -778,8 +819,13 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	/* Allocate and map XFERQ */
 	tgt->xferq_mem_size = tgt->max_sqes * BNX2FC_XFERQ_WQE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->xferq_mem_size = (tgt->xferq_mem_size + (PAGE_SIZE - 1)) &
 			       PAGE_MASK;
+=======
+	tgt->xferq_mem_size = (tgt->xferq_mem_size + (CNIC_PAGE_SIZE - 1)) &
+			       CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->xferq_mem_size = (tgt->xferq_mem_size + (CNIC_PAGE_SIZE - 1)) &
 			       CNIC_PAGE_MASK;
@@ -797,8 +843,13 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	/* Allocate and map CONFQ & CONFQ PBL */
 	tgt->confq_mem_size = tgt->max_sqes * BNX2FC_CONFQ_WQE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->confq_mem_size = (tgt->confq_mem_size + (PAGE_SIZE - 1)) &
 			       PAGE_MASK;
+=======
+	tgt->confq_mem_size = (tgt->confq_mem_size + (CNIC_PAGE_SIZE - 1)) &
+			       CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->confq_mem_size = (tgt->confq_mem_size + (CNIC_PAGE_SIZE - 1)) &
 			       CNIC_PAGE_MASK;
@@ -815,9 +866,15 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 
 	tgt->confq_pbl_size =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(tgt->confq_mem_size / PAGE_SIZE) * sizeof(void *);
 	tgt->confq_pbl_size =
 		(tgt->confq_pbl_size + (PAGE_SIZE - 1)) & PAGE_MASK;
+=======
+		(tgt->confq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
+	tgt->confq_pbl_size =
+		(tgt->confq_pbl_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 		(tgt->confq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
 	tgt->confq_pbl_size =
@@ -835,7 +892,11 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 
 	memset(tgt->confq_pbl, 0, tgt->confq_pbl_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_pages = tgt->confq_mem_size / PAGE_SIZE;
+=======
+	num_pages = tgt->confq_mem_size / CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	num_pages = tgt->confq_mem_size / CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -848,7 +909,11 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 		*pbl = (u32)((u64)page >> 32);
 		pbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page += PAGE_SIZE;
+=======
+		page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 		page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -871,8 +936,13 @@ static int bnx2fc_alloc_session_resc(struct bnx2fc_hba *hba,
 	/* Allocate and map LCQ */
 	tgt->lcq_mem_size = (tgt->max_sqes + 8) * BNX2FC_SQ_WQE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tgt->lcq_mem_size = (tgt->lcq_mem_size + (PAGE_SIZE - 1)) &
 			     PAGE_MASK;
+=======
+	tgt->lcq_mem_size = (tgt->lcq_mem_size + (CNIC_PAGE_SIZE - 1)) &
+			     CNIC_PAGE_MASK;
+>>>>>>> v3.18
 =======
 	tgt->lcq_mem_size = (tgt->lcq_mem_size + (CNIC_PAGE_SIZE - 1)) &
 			     CNIC_PAGE_MASK;

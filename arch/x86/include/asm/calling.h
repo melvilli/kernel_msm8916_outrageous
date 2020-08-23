@@ -49,6 +49,11 @@ For 32-bit we have the following conventions - kernel is built with
 #include <asm/dwarf2.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_X86_64
+
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_X86_64
 
@@ -89,7 +94,11 @@ For 32-bit we have the following conventions - kernel is built with
 #define SWFRAME		ORIG_RAX
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro SAVE_ARGS addskip=0, save_rcx=1, save_r891011=1
+=======
+	.macro SAVE_ARGS addskip=0, save_rcx=1, save_r891011=1, rax_enosys=0
+>>>>>>> v3.18
 =======
 	.macro SAVE_ARGS addskip=0, save_rcx=1, save_r891011=1, rax_enosys=0
 >>>>>>> v3.18
@@ -104,13 +113,19 @@ For 32-bit we have the following conventions - kernel is built with
 	.endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movq_cfi rax, 4*8
 =======
+=======
+>>>>>>> v3.18
 	.if \rax_enosys
 	movq $-ENOSYS, 4*8(%rsp)
 	.else
 	movq_cfi rax, 4*8
 	.endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.if \save_r891011
@@ -210,7 +225,10 @@ For 32-bit we have the following conventions - kernel is built with
 	.byte 0xf1
 	.endm
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #else /* CONFIG_X86_64 */
 
@@ -259,4 +277,7 @@ For 32-bit we have the following conventions - kernel is built with
 
 #endif /* CONFIG_X86_64 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

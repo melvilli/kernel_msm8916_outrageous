@@ -292,6 +292,11 @@ enum ab8500_version {
 #define AB8540_INT_BITCLK2F		214
 #define AB8540_INT_BITCLK2R		215
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ab8540_irq_regoffset[27] -> IT[Source|Latch|Mask]33 */
+#define AB8540_INT_RTC_1S		216
+>>>>>>> v3.18
 =======
 /* ab8540_irq_regoffset[27] -> IT[Source|Latch|Mask]33 */
 #define AB8540_INT_RTC_1S		216
@@ -351,7 +356,10 @@ struct ab8500 {
 	struct mutex	irq_lock;
 	atomic_t	transfer_ongoing;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		irq_base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int		irq;
@@ -375,7 +383,10 @@ struct ab8500 {
 
 struct ab8500_regulator_platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ab8500_gpio_platform_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ab8500_codec_platform_data;
@@ -389,10 +400,15 @@ struct ab8500_sysctrl_platform_data;
  */
 struct ab8500_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq_base;
 	void (*init) (struct ab8500 *);
 	struct ab8500_regulator_platform_data *regulator;
 	struct abx500_gpio_platform_data *gpio;
+=======
+	void (*init) (struct ab8500 *);
+	struct ab8500_regulator_platform_data *regulator;
+>>>>>>> v3.18
 =======
 	void (*init) (struct ab8500 *);
 	struct ab8500_regulator_platform_data *regulator;
@@ -524,6 +540,10 @@ void ab8500_override_turn_on_stat(u8 mask, u8 set);
 
 #ifdef CONFIG_AB8500_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int prcmu_abb_read(u8 slave, u8 reg, u8 *value, u8 size);
+>>>>>>> v3.18
 =======
 extern int prcmu_abb_read(u8 slave, u8 reg, u8 *value, u8 size);
 >>>>>>> v3.18

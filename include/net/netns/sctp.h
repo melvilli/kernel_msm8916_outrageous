@@ -32,7 +32,10 @@ struct netns_sctp {
 	struct timer_list addr_wq_timer;
 	struct list_head auto_asconf_splist;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Lock that protects both addr_waitq and auto_asconf_splist */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t addr_wq_lock;

@@ -1261,7 +1261,11 @@ static int __init capinc_tty_init(void)
 		capi_ttyminors = CAPINC_NR_PORTS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capiminors = kzalloc(sizeof(struct capi_minor *) * capi_ttyminors,
+=======
+	capiminors = kzalloc(sizeof(struct capiminor *) * capi_ttyminors,
+>>>>>>> v3.18
 =======
 	capiminors = kzalloc(sizeof(struct capiminor *) * capi_ttyminors,
 >>>>>>> v3.18
@@ -1276,7 +1280,11 @@ static int __init capinc_tty_init(void)
 	}
 	drv->driver_name = "capi_nc";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv->name = "capi";
+=======
+	drv->name = "capi!";
+>>>>>>> v3.18
 =======
 	drv->name = "capi!";
 >>>>>>> v3.18
@@ -1426,7 +1434,11 @@ static int __init capi_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_create(capi_class, NULL, MKDEV(capi_major, 0), NULL, "capi");
+=======
+	device_create(capi_class, NULL, MKDEV(capi_major, 0), NULL, "capi20");
+>>>>>>> v3.18
 =======
 	device_create(capi_class, NULL, MKDEV(capi_major, 0), NULL, "capi20");
 >>>>>>> v3.18

@@ -24,8 +24,13 @@
 #define IPSET_NO_TIMEOUT	UINT_MAX
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ip_set_adt_opt_timeout(opt, map)	\
 ((opt)->ext.timeout != IPSET_NO_TIMEOUT ? (opt)->ext.timeout : (map)->timeout)
+=======
+#define ip_set_adt_opt_timeout(opt, set)	\
+((opt)->ext.timeout != IPSET_NO_TIMEOUT ? (opt)->ext.timeout : (set)->timeout)
+>>>>>>> v3.18
 =======
 #define ip_set_adt_opt_timeout(opt, set)	\
 ((opt)->ext.timeout != IPSET_NO_TIMEOUT ? (opt)->ext.timeout : (set)->timeout)

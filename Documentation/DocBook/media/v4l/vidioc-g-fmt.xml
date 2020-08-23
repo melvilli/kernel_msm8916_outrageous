@@ -173,7 +173,10 @@ capture and output devices.</entry>
 	  <row>
 	    <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry>&v4l2-sdr-format;</entry>
 	    <entry><structfield>sdr</structfield></entry>
 	    <entry>Definition of a data format, see
@@ -181,6 +184,9 @@ capture and output devices.</entry>
 	  </row>
 	  <row>
 	    <entry></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>__u8</entry>
 	    <entry><structfield>raw_data</structfield>[200]</entry>

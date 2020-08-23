@@ -57,7 +57,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct epoll_event {
@@ -66,9 +69,12 @@ struct epoll_event {
 } EPOLL_PACKED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif /* __KERNEL__ */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static inline void ep_take_care_of_epollwakeup(struct epoll_event *epev)
 {
@@ -81,5 +87,8 @@ static inline void ep_take_care_of_epollwakeup(struct epoll_event *epev)
 	epev->events &= ~EPOLLWAKEUP;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _UAPI_LINUX_EVENTPOLL_H */

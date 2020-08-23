@@ -23,16 +23,22 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
 #include <linux/input.h>
 #include <linux/kernel.h>
 #include <linux/notifier.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 #include <linux/i2c.h>
 #include <linux/input.h>
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/slab.h>
@@ -47,16 +53,22 @@
  * @keymap_data: Matrix keymap data used to convert to keyscan values
  * @ghost_filter: true to enable the matrix key-ghosting filter
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer
  * @idev: Input device
  * @ec: Top level ChromeOS device to use to talk to EC
  * @event_notifier: interrupt event notifier for transport devices
 =======
+=======
+>>>>>>> v3.18
  * @valid_keys: bitmap of existing keys for each matrix column
  * @old_kb_state: bitmap of keys pressed last scan
  * @dev: Device pointer
  * @idev: Input device
  * @ec: Top level ChromeOS device to use to talk to EC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct cros_ec_keyb {
@@ -66,6 +78,11 @@ struct cros_ec_keyb {
 	const struct matrix_keymap_data *keymap_data;
 	bool ghost_filter;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint8_t *valid_keys;
+	uint8_t *old_kb_state;
+>>>>>>> v3.18
 =======
 	uint8_t *valid_keys;
 	uint8_t *old_kb_state;
@@ -74,6 +91,7 @@ struct cros_ec_keyb {
 	struct device *dev;
 	struct input_dev *idev;
 	struct cros_ec_device *ec;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct notifier_block notifier;
 };
@@ -110,6 +128,11 @@ static bool cros_ec_keyb_row_has_ghosting(struct cros_ec_keyb *ckdev,
 
 
 >>>>>>> v3.18
+=======
+};
+
+
+>>>>>>> v3.18
 /*
  * Returns true when there is at least one combination of pressed keys that
  * results in ghosting.
@@ -117,7 +140,13 @@ static bool cros_ec_keyb_row_has_ghosting(struct cros_ec_keyb *ckdev,
 static bool cros_ec_keyb_has_ghosting(struct cros_ec_keyb *ckdev, uint8_t *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int row;
+=======
+	int col1, col2, buf1, buf2;
+	struct device *dev = ckdev->dev;
+	uint8_t *valid_keys = ckdev->valid_keys;
+>>>>>>> v3.18
 =======
 	int col1, col2, buf1, buf2;
 	struct device *dev = ckdev->dev;
@@ -137,6 +166,7 @@ static bool cros_ec_keyb_has_ghosting(struct cros_ec_keyb *ckdev, uint8_t *buf)
 	 * In this case only X, Y, and Z are pressed, but g appears to be
 	 * pressed too (see Wikipedia).
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * We can detect ghosting in a single pass (*) over the keyboard state
 	 * by maintaining two arrays.  pressed_in_row counts how many pressed
@@ -155,6 +185,8 @@ static bool cros_ec_keyb_has_ghosting(struct cros_ec_keyb *ckdev, uint8_t *buf)
 		if (cros_ec_keyb_row_has_ghosting(ckdev, buf, row))
 			return true;
 =======
+=======
+>>>>>>> v3.18
 	 */
 	for (col1 = 0; col1 < ckdev->cols; col1++) {
 		buf1 = buf[col1] & valid_keys[col1];
@@ -167,12 +199,19 @@ static bool cros_ec_keyb_has_ghosting(struct cros_ec_keyb *ckdev, uint8_t *buf)
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return false;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -188,6 +227,10 @@ static void cros_ec_keyb_process(struct cros_ec_keyb *ckdev,
 	int col, row;
 	int new_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int old_state;
+>>>>>>> v3.18
 =======
 	int old_state;
 >>>>>>> v3.18
@@ -210,36 +253,49 @@ static void cros_ec_keyb_process(struct cros_ec_keyb *ckdev,
 			int pos = MATRIX_SCAN_CODE(row, col, ckdev->row_shift);
 			const unsigned short *keycodes = idev->keycode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int code;
 
 			code = keycodes[pos];
 			new_state = kb_state[col] & (1 << row);
 			if (!!new_state != test_bit(code, idev->key)) {
 =======
+=======
+>>>>>>> v3.18
 
 			new_state = kb_state[col] & (1 << row);
 			old_state = ckdev->old_kb_state[col] & (1 << row);
 			if (new_state != old_state) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				dev_dbg(ckdev->dev,
 					"changed: [r%d c%d]: byte %02x\n",
 					row, col, new_state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				input_report_key(idev, code, new_state);
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 				input_report_key(idev, keycodes[pos],
 						 new_state);
 			}
 		}
 		ckdev->old_kb_state[col] = kb_state[col];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	input_sync(ckdev->idev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cros_ec_keyb_open(struct input_dev *dev)
 {
@@ -304,6 +360,8 @@ static void cros_ec_keyb_clear_keyboard(struct cros_ec_keyb *ckdev)
 	dev_info(ckdev->dev, "Discarded %d keyscan(s) in %dus\n", i,
 		jiffies_to_usecs(duration));
 =======
+=======
+>>>>>>> v3.18
 static int cros_ec_keyb_get_state(struct cros_ec_keyb *ckdev, uint8_t *kb_state)
 {
 	struct cros_ec_command msg = {
@@ -377,6 +435,9 @@ static void cros_ec_keyb_compute_valid_keys(struct cros_ec_keyb *ckdev)
 		dev_dbg(ckdev->dev, "valid_keys[%02d] = 0x%02x\n",
 			col, ckdev->valid_keys[col]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -402,7 +463,10 @@ static int cros_ec_keyb_probe(struct platform_device *pdev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ckdev->valid_keys = devm_kzalloc(&pdev->dev, ckdev->cols, GFP_KERNEL);
 	if (!ckdev->valid_keys)
 		return -ENOMEM;
@@ -411,21 +475,30 @@ static int cros_ec_keyb_probe(struct platform_device *pdev)
 	if (!ckdev->old_kb_state)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	idev = devm_input_allocate_device(&pdev->dev);
 	if (!idev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ckdev->ec = ec;
 	ckdev->notifier.notifier_call = cros_ec_keyb_work;
 =======
+=======
+>>>>>>> v3.18
 	if (!ec->irq) {
 		dev_err(dev, "no EC IRQ specified\n");
 		return -EINVAL;
 	}
 
 	ckdev->ec = ec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ckdev->dev = dev;
 	dev_set_drvdata(&pdev->dev, ckdev);
@@ -457,6 +530,11 @@ static int cros_ec_keyb_probe(struct platform_device *pdev)
 	input_set_drvdata(idev, ckdev);
 	ckdev->idev = idev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cros_ec_keyb_compute_valid_keys(ckdev);
+
+>>>>>>> v3.18
 =======
 	cros_ec_keyb_compute_valid_keys(ckdev);
 
@@ -472,7 +550,10 @@ static int cros_ec_keyb_probe(struct platform_device *pdev)
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Clear any keys in the buffer */
 static void cros_ec_keyb_clear_keyboard(struct cros_ec_keyb *ckdev)
 {
@@ -500,6 +581,9 @@ static void cros_ec_keyb_clear_keyboard(struct cros_ec_keyb *ckdev)
 		jiffies_to_usecs(duration));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cros_ec_keyb_resume(struct device *dev)
 {
@@ -522,7 +606,10 @@ static int cros_ec_keyb_resume(struct device *dev)
 static SIMPLE_DEV_PM_OPS(cros_ec_keyb_pm_ops, NULL, cros_ec_keyb_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id cros_ec_keyb_of_match[] = {
 	{ .compatible = "google,cros-ec-keyb" },
@@ -531,12 +618,19 @@ static const struct of_device_id cros_ec_keyb_of_match[] = {
 MODULE_DEVICE_TABLE(of, cros_ec_keyb_of_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver cros_ec_keyb_driver = {
 	.probe = cros_ec_keyb_probe,
 	.driver = {
 		.name = "cros-ec-keyb",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(cros_ec_keyb_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(cros_ec_keyb_of_match),
 >>>>>>> v3.18

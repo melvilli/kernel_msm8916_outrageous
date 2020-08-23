@@ -33,7 +33,11 @@
 static int opDEC_fix;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -71,8 +75,13 @@ dik_show_regs(struct pt_regs *regs, unsigned long *r9_15)
 	printk("pc = [<%016lx>]  ra = [<%016lx>]  ps = %04lx    %s\n",
 	       regs->pc, regs->r26, regs->ps, print_tainted());
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_symbol("pc is at %s\n", regs->pc);
 	print_symbol("ra is at %s\n", regs->r26 );
+=======
+	printk("pc is at %pSR\n", (void *)regs->pc);
+	printk("ra is at %pSR\n", (void *)regs->r26);
+>>>>>>> v3.18
 =======
 	printk("pc is at %pSR\n", (void *)regs->pc);
 	printk("ra is at %pSR\n", (void *)regs->r26);
@@ -142,9 +151,13 @@ dik_show_trace(unsigned long *sp)
 		if (tmp >= (unsigned long) &_etext)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("[<%lx>]", tmp);
 		print_symbol(" %s", tmp);
 		printk("\n");
+=======
+		printk("[<%lx>] %pSR\n", tmp, (void *)tmp);
+>>>>>>> v3.18
 =======
 		printk("[<%lx>] %pSR\n", tmp, (void *)tmp);
 >>>>>>> v3.18
@@ -257,7 +270,10 @@ do_entIF(unsigned long type, struct pt_regs *regs)
 			       data[0]);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ALPHA_WTINT
 		if (type == 4) {
 			/* If CALL_PAL WTINT is totally unsupported by the
@@ -273,6 +289,9 @@ do_entIF(unsigned long type, struct pt_regs *regs)
 			}
 		}
 #endif /* ALPHA_WTINT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		die_if_kernel((type == 1 ? "Kernel Bug" : "Instruction fault"),
 			      regs, type, NULL);
@@ -1091,7 +1110,11 @@ give_sigbus:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18

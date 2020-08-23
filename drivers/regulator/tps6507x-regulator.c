@@ -360,7 +360,10 @@ static struct regulator_ops tps6507x_pmic_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct of_regulator_match tps6507x_matches[] = {
@@ -385,6 +388,7 @@ static struct tps6507x_board *tps6507x_parse_dt_reg_data(
 	tps_board = devm_kzalloc(&pdev->dev, sizeof(*tps_board),
 					GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tps_board) {
 		dev_err(&pdev->dev, "Failure to alloc pdata for regulators.\n");
 		return NULL;
@@ -392,10 +396,15 @@ static struct tps6507x_board *tps6507x_parse_dt_reg_data(
 
 	regulators = of_find_node_by_name(np, "regulators");
 =======
+=======
+>>>>>>> v3.18
 	if (!tps_board)
 		return NULL;
 
 	regulators = of_get_child_by_name(np, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!regulators) {
 		dev_err(&pdev->dev, "regulator node not found\n");
@@ -407,6 +416,10 @@ static struct tps6507x_board *tps6507x_parse_dt_reg_data(
 
 	ret = of_regulator_match(&pdev->dev, regulators, matches, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(regulators);
+>>>>>>> v3.18
 =======
 	of_node_put(regulators);
 >>>>>>> v3.18
@@ -421,10 +434,15 @@ static struct tps6507x_board *tps6507x_parse_dt_reg_data(
 	reg_data = devm_kzalloc(&pdev->dev, (sizeof(struct regulator_init_data)
 					* TPS6507X_NUM_REGULATOR), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!reg_data) {
 		dev_err(&pdev->dev, "Failure to alloc init data for regulators.\n");
 		return NULL;
 	}
+=======
+	if (!reg_data)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!reg_data)
 		return NULL;
@@ -444,6 +462,7 @@ static struct tps6507x_board *tps6507x_parse_dt_reg_data(
 	return tps_board;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline struct tps6507x_board *tps6507x_parse_dt_reg_data(
 			struct platform_device *pdev,
@@ -453,6 +472,9 @@ static inline struct tps6507x_board *tps6507x_parse_dt_reg_data(
 	return NULL;
 }
 #endif
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -477,14 +499,20 @@ static int tps6507x_pmic_probe(struct platform_device *pdev)
 
 	tps_board = dev_get_platdata(tps6507x_dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tps_board && tps6507x_dev->dev->of_node)
 		tps_board = tps6507x_parse_dt_reg_data(pdev,
 						&tps6507x_reg_matches);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OF) && !tps_board &&
 		tps6507x_dev->dev->of_node)
 		tps_board = tps6507x_parse_dt_reg_data(pdev,
 				&tps6507x_reg_matches);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!tps_board)
 		return -EINVAL;
@@ -512,7 +540,11 @@ static int tps6507x_pmic_probe(struct platform_device *pdev)
 		if (init_data->driver_data) {
 			struct tps6507x_reg_platform_data *data =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							init_data->driver_data;
+=======
+					init_data->driver_data;
+>>>>>>> v3.18
 =======
 					init_data->driver_data;
 >>>>>>> v3.18
@@ -543,7 +575,12 @@ static int tps6507x_pmic_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev = regulator_register(&tps->desc[i], &config);
+=======
+		rdev = devm_regulator_register(&pdev->dev, &tps->desc[i],
+					       &config);
+>>>>>>> v3.18
 =======
 		rdev = devm_regulator_register(&pdev->dev, &tps->desc[i],
 					       &config);
@@ -553,8 +590,12 @@ static int tps6507x_pmic_probe(struct platform_device *pdev)
 				"failed to register %s regulator\n",
 				pdev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = PTR_ERR(rdev);
 			goto fail;
+=======
+			return PTR_ERR(rdev);
+>>>>>>> v3.18
 =======
 			return PTR_ERR(rdev);
 >>>>>>> v3.18
@@ -568,6 +609,7 @@ static int tps6507x_pmic_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, tps6507x_dev);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 fail:
@@ -587,6 +629,8 @@ static int tps6507x_pmic_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver tps6507x_pmic_driver = {
@@ -596,7 +640,10 @@ static struct platform_driver tps6507x_pmic_driver = {
 	},
 	.probe = tps6507x_pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tps6507x_pmic_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -41,6 +41,10 @@ binary=
 gzip=.gz
 pie=
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+format=
+>>>>>>> v3.18
 =======
 format=
 >>>>>>> v3.18
@@ -141,7 +145,10 @@ if [ -z "$kernel" ]; then
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 elfformat="`${CROSS}objdump -p "$kernel" | grep 'file format' | awk '{print $4}'`"
 case "$elfformat" in
     elf64-powerpcle)	format=elf64lppc	;;
@@ -150,6 +157,9 @@ case "$elfformat" in
 esac
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 platformo=$object/"$platform".o
 lds=$object/zImage.lds
@@ -162,6 +172,7 @@ link_address='0x400000'
 make_space=y
 
 case "$platform" in
+<<<<<<< HEAD
 <<<<<<< HEAD
 pseries)
     platformo=$object/of.o
@@ -179,6 +190,8 @@ coff)
     lds=$object/zImage.coff.lds
     link_address='0x500000'
 =======
+=======
+>>>>>>> v3.18
 of)
     platformo="$object/of.o $object/epapr.o"
     make_space=n
@@ -206,6 +219,9 @@ coff)
     lds=$object/zImage.coff.lds
     link_address='0x500000'
     make_space=n
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     pie=
     ;;
@@ -295,6 +311,12 @@ treeboot-currituck)
     link_address='0x1000000'
     ;;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+treeboot-akebono)
+    link_address='0x1000000'
+    ;;
+>>>>>>> v3.18
 =======
 treeboot-akebono)
     link_address='0x1000000'
@@ -305,10 +327,13 @@ treeboot-iss4xx-mpic)
     ;;
 epapr)
 <<<<<<< HEAD
+<<<<<<< HEAD
     link_address='0x20000000'
     pie=-pie
     ;;
 =======
+=======
+>>>>>>> v3.18
     platformo="$object/epapr.o $object/epapr-wrapper.o"
     link_address='0x20000000'
     pie=-pie
@@ -317,6 +342,9 @@ mvme5100)
     platformo="$object/fixed-head.o $object/mvme5100.o"
     binary=y
     ;;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 esac
 
@@ -429,7 +457,11 @@ if [ "$platform" != "miboot" ]; then
         text_start="-Ttext $link_address"
     fi
 <<<<<<< HEAD
+<<<<<<< HEAD
     ${CROSS}ld -m elf32ppc -T $lds $text_start $pie -o "$ofile" \
+=======
+    ${CROSS}ld -m $format -T $lds $text_start $pie -o "$ofile" \
+>>>>>>> v3.18
 =======
     ${CROSS}ld -m $format -T $lds $text_start $pie -o "$ofile" \
 >>>>>>> v3.18

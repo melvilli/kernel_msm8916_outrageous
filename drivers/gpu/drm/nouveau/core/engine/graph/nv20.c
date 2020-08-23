@@ -1,7 +1,10 @@
 #include <core/client.h>
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -353,7 +356,11 @@ nv20_graph_init(struct nouveau_object *object)
 
 	/* begin RAM config */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vramsz = pci_resource_len(nv_device(priv)->pdev, 0) - 1;
+=======
+	vramsz = nv_device_resource_len(nv_device(priv), 0) - 1;
+>>>>>>> v3.18
 =======
 	vramsz = nv_device_resource_len(nv_device(priv), 0) - 1;
 >>>>>>> v3.18

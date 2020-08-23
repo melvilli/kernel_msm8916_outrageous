@@ -53,7 +53,11 @@ struct voice_info
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct opl_devinfo
+=======
+struct opl_devinfo
+>>>>>>> v3.18
 =======
 struct opl_devinfo
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ struct opl_devinfo
 
 	int             is_opl4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } opl_devinfo;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -284,7 +292,10 @@ static int opl3_kill_note  (int devno, int voice, int note, int velocity)
 
 	 map = &pv_map[devc->lv_map[voice]];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 DEB(printk("Kill note %d\n", voice));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -885,8 +896,11 @@ static void opl3_aftertouch(int dev, int voice, int pressure)
 	map = &pv_map[devc->lv_map[voice]];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("Aftertouch %d\n", voice));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (map->voice_mode == 0)

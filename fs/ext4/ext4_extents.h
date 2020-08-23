@@ -124,6 +124,10 @@ struct ext4_ext_path {
 	ext4_fsblk_t			p_block;
 	__u16				p_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u16				p_maxdepth;
+>>>>>>> v3.18
 =======
 	__u16				p_maxdepth;
 >>>>>>> v3.18
@@ -138,6 +142,7 @@ struct ext4_ext_path {
  */
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Maximum number of logical blocks in a file; ext4_extent's ee_block is
  * __le32.
@@ -164,6 +169,8 @@ struct ext4_ext_path {
 #define EXT_INIT_MAX_LEN	(1UL << 15)
 #define EXT_UNINIT_MAX_LEN	(EXT_INIT_MAX_LEN - 1)
 =======
+=======
+>>>>>>> v3.18
  * EXT_INIT_MAX_LEN is the maximum number of blocks we can have in an
  * initialized extent. This is 2^15 and not (2^16 - 1), since we use the
  * MSB of ee_len field in the extent datastructure to signify if this
@@ -182,6 +189,9 @@ struct ext4_ext_path {
  */
 #define EXT_INIT_MAX_LEN	(1UL << 15)
 #define EXT_UNWRITTEN_MAX_LEN	(EXT_INIT_MAX_LEN - 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -219,9 +229,15 @@ static inline unsigned short ext_depth(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void ext4_ext_mark_uninitialized(struct ext4_extent *ext)
 {
 	/* We can not have an uninitialized extent of zero length! */
+=======
+static inline void ext4_ext_mark_unwritten(struct ext4_extent *ext)
+{
+	/* We can not have an unwritten extent of zero length! */
+>>>>>>> v3.18
 =======
 static inline void ext4_ext_mark_unwritten(struct ext4_extent *ext)
 {
@@ -232,7 +248,11 @@ static inline void ext4_ext_mark_unwritten(struct ext4_extent *ext)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ext4_ext_is_uninitialized(struct ext4_extent *ext)
+=======
+static inline int ext4_ext_is_unwritten(struct ext4_extent *ext)
+>>>>>>> v3.18
 =======
 static inline int ext4_ext_is_unwritten(struct ext4_extent *ext)
 >>>>>>> v3.18

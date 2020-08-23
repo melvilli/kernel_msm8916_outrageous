@@ -19,7 +19,10 @@ module_param_named(pstore_disable, efivars_pstore_disable, bool, 0644);
 static int efi_pstore_open(struct pstore_info *psi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efivar_entry_iter_begin();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	psi->data = NULL;
@@ -29,7 +32,10 @@ static int efi_pstore_open(struct pstore_info *psi)
 static int efi_pstore_close(struct pstore_info *psi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efivar_entry_iter_end();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	psi->data = NULL;
@@ -42,6 +48,10 @@ struct pstore_read_data {
 	int *count;
 	struct timespec *timespec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool *compressed;
+>>>>>>> v3.18
 =======
 	bool *compressed;
 >>>>>>> v3.18
@@ -52,7 +62,11 @@ static inline u64 generic_id(unsigned long timestamp,
 			     unsigned int part, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (timestamp * 100 + part) * 1000 + count;
+=======
+	return ((u64) timestamp * 100 + part) * 1000 + count;
+>>>>>>> v3.18
 =======
 	return ((u64) timestamp * 100 + part) * 1000 + count;
 >>>>>>> v3.18
@@ -63,7 +77,11 @@ static int efi_pstore_read_func(struct efivar_entry *entry, void *data)
 	efi_guid_t vendor = LINUX_EFI_CRASH_GUID;
 	struct pstore_read_data *cb_data = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[DUMP_NAME_LEN];
+=======
+	char name[DUMP_NAME_LEN], data_type;
+>>>>>>> v3.18
 =======
 	char name[DUMP_NAME_LEN], data_type;
 >>>>>>> v3.18
@@ -79,8 +97,11 @@ static int efi_pstore_read_func(struct efivar_entry *entry, void *data)
 		name[i] = entry->var.VariableName[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sscanf(name, "dump-type%u-%u-%d-%lu",
 =======
+=======
+>>>>>>> v3.18
 	if (sscanf(name, "dump-type%u-%u-%d-%lu-%c",
 		   cb_data->type, &part, &cnt, &time, &data_type) == 5) {
 		*cb_data->id = generic_id(time, part, cnt);
@@ -92,6 +113,9 @@ static int efi_pstore_read_func(struct efivar_entry *entry, void *data)
 		else
 			*cb_data->compressed = false;
 	} else if (sscanf(name, "dump-type%u-%u-%d-%lu",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   cb_data->type, &part, &cnt, &time) == 4) {
 		*cb_data->id = generic_id(time, part, cnt);
@@ -99,6 +123,10 @@ static int efi_pstore_read_func(struct efivar_entry *entry, void *data)
 		cb_data->timespec->tv_sec = time;
 		cb_data->timespec->tv_nsec = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		*cb_data->compressed = false;
+>>>>>>> v3.18
 =======
 		*cb_data->compressed = false;
 >>>>>>> v3.18
@@ -114,6 +142,10 @@ static int efi_pstore_read_func(struct efivar_entry *entry, void *data)
 		cb_data->timespec->tv_sec = time;
 		cb_data->timespec->tv_nsec = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		*cb_data->compressed = false;
+>>>>>>> v3.18
 =======
 		*cb_data->compressed = false;
 >>>>>>> v3.18
@@ -124,6 +156,7 @@ static int efi_pstore_read_func(struct efivar_entry *entry, void *data)
 	__efivar_entry_get(entry, &entry->var.Attributes,
 			   &entry->var.DataSize, entry->var.Data);
 	size = entry->var.DataSize;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	*cb_data->buf = kmalloc(size, GFP_KERNEL);
@@ -139,6 +172,8 @@ static ssize_t efi_pstore_read(u64 *id, enum pstore_type_id *type,
 {
 	struct pstore_read_data data;
 =======
+=======
+>>>>>>> v3.18
 	memcpy(*cb_data->buf, entry->var.Data,
 	       (size_t)min_t(unsigned long, EFIVARS_DATA_SIZE_MAX, size));
 
@@ -258,6 +293,9 @@ static ssize_t efi_pstore_read(u64 *id, enum pstore_type_id *type,
 {
 	struct pstore_read_data data;
 	ssize_t size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data.id = id;
@@ -265,11 +303,14 @@ static ssize_t efi_pstore_read(u64 *id, enum pstore_type_id *type,
 	data.count = count;
 	data.timespec = timespec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data.buf = buf;
 
 	return __efivar_entry_iter(efi_pstore_read_func, &efivar_sysfs_list, &data,
 				   (struct efivar_entry **)&psi->data);
 =======
+=======
+>>>>>>> v3.18
 	data.compressed = compressed;
 	data.buf = buf;
 
@@ -284,13 +325,20 @@ static ssize_t efi_pstore_read(u64 *id, enum pstore_type_id *type,
 	if (size <= 0)
 		kfree(*data.buf);
 	return size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int efi_pstore_write(enum pstore_type_id type,
 		enum kmsg_dump_reason reason, u64 *id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned int part, int count, size_t size,
+=======
+		unsigned int part, int count, bool compressed, size_t size,
+>>>>>>> v3.18
 =======
 		unsigned int part, int count, bool compressed, size_t size,
 >>>>>>> v3.18
@@ -302,8 +350,13 @@ static int efi_pstore_write(enum pstore_type_id type,
 	int i, ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(name, "dump-type%u-%u-%d-%lu", type, part, count,
 		get_seconds());
+=======
+	sprintf(name, "dump-type%u-%u-%d-%lu-%c", type, part, count,
+		get_seconds(), compressed ? 'C' : 'D');
+>>>>>>> v3.18
 =======
 	sprintf(name, "dump-type%u-%u-%d-%lu-%c", type, part, count,
 		get_seconds(), compressed ? 'C' : 'D');
@@ -365,10 +418,13 @@ static int efi_pstore_erase_func(struct efivar_entry *entry, void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* found */
 	__efivar_entry_delete(entry);
 	list_del(&entry->list);
 =======
+=======
+>>>>>>> v3.18
 	if (entry->scanning) {
 		/*
 		 * Skip deletion because this entry will be deleted
@@ -380,6 +436,9 @@ static int efi_pstore_erase_func(struct efivar_entry *entry, void *data)
 
 	/* found */
 	__efivar_entry_delete(entry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -411,17 +470,23 @@ static int efi_pstore_erase(enum pstore_type_id type, u64 id, int count,
 	efivar_entry_iter_begin();
 	found = __efivar_entry_iter(efi_pstore_erase_func, &efivar_sysfs_list, &edata, &entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efivar_entry_iter_end();
 
 	if (found)
 		efivar_unregister(entry);
 =======
+=======
+>>>>>>> v3.18
 
 	if (found && !entry->scanning) {
 		efivar_entry_iter_end();
 		efivar_unregister(entry);
 	} else
 		efivar_entry_iter_end();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -431,6 +496,10 @@ static struct pstore_info efi_pstore_info = {
 	.owner		= THIS_MODULE,
 	.name		= "efi",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags		= PSTORE_FLAGS_FRAGILE,
+>>>>>>> v3.18
 =======
 	.flags		= PSTORE_FLAGS_FRAGILE,
 >>>>>>> v3.18
@@ -460,13 +529,19 @@ static __init int efivars_pstore_init(void)
 	spin_lock_init(&efi_pstore_info.buf_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pstore_register(&efi_pstore_info);
 =======
+=======
+>>>>>>> v3.18
 	if (pstore_register(&efi_pstore_info)) {
 		kfree(efi_pstore_info.buf);
 		efi_pstore_info.buf = NULL;
 		efi_pstore_info.bufsize = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

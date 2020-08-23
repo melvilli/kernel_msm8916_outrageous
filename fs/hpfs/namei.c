@@ -9,6 +9,7 @@
 #include "hpfs_fn.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hpfs_update_directory_times(struct inode *dir)
 {
 	time_t t = get_seconds();
@@ -20,6 +21,8 @@ static void hpfs_update_directory_times(struct inode *dir)
 	hpfs_write_inode_nolock(dir);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int hpfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
@@ -114,7 +117,10 @@ static int hpfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 		hpfs_write_inode_nolock(result);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpfs_update_directory_times(dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d_instantiate(dentry, result);
@@ -206,7 +212,10 @@ static int hpfs_create(struct inode *dir, struct dentry *dentry, umode_t mode, b
 		hpfs_write_inode_nolock(result);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpfs_update_directory_times(dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d_instantiate(dentry, result);
@@ -285,7 +294,10 @@ static int hpfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, de
 
 	hpfs_write_inode_nolock(result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpfs_update_directory_times(dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d_instantiate(dentry, result);
@@ -367,7 +379,10 @@ static int hpfs_symlink(struct inode *dir, struct dentry *dentry, const char *sy
 
 	hpfs_write_inode_nolock(result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpfs_update_directory_times(dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d_instantiate(dentry, result);
@@ -435,15 +450,21 @@ again:
 		} else {
 			struct iattr newattrs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*printk("HPFS: truncating file before delete.\n");*/
 			newattrs.ia_size = 0;
 			newattrs.ia_valid = ATTR_SIZE | ATTR_CTIME;
 			err = notify_change(dentry, &newattrs);
 =======
+=======
+>>>>>>> v3.18
 			/*pr_info("truncating file before delete.\n");*/
 			newattrs.ia_size = 0;
 			newattrs.ia_valid = ATTR_SIZE | ATTR_CTIME;
 			err = notify_change(dentry, &newattrs, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			put_write_access(inode);
 			if (!err)
@@ -461,8 +482,11 @@ out1:
 	hpfs_brelse4(&qbh);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!err)
 		hpfs_update_directory_times(dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hpfs_unlock(dir->i_sb);
@@ -520,8 +544,11 @@ out1:
 	hpfs_brelse4(&qbh);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!err)
 		hpfs_update_directory_times(dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hpfs_unlock(dir->i_sb);
@@ -643,7 +670,11 @@ static int hpfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 end:
+=======
+	end:
+>>>>>>> v3.18
 =======
 	end:
 >>>>>>> v3.18
@@ -662,10 +693,13 @@ end:
 	}
 end1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!err) {
 		hpfs_update_directory_times(old_dir);
 		hpfs_update_directory_times(new_dir);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hpfs_unlock(i->i_sb);

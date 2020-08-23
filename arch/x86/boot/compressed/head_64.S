@@ -28,8 +28,11 @@
 #include <linux/linkage.h>
 #include <asm/segment.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/pgtable_types.h>
 #include <asm/page_types.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/boot.h>
@@ -37,6 +40,7 @@
 #include <asm/processor-flags.h>
 #include <asm/asm-offsets.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Locally defined symbols should be marked hidden:
@@ -46,6 +50,8 @@
 	.hidden _got
 	.hidden _egot
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__HEAD
@@ -111,15 +117,21 @@ ENTRY(startup_32)
 	notl	%eax
 	andl	%eax, %ebx
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	movl	$LOAD_PHYSICAL_ADDR, %ebx
 #endif
 =======
+=======
+>>>>>>> v3.18
 	cmpl	$LOAD_PHYSICAL_ADDR, %ebx
 	jge	1f
 #endif
 	movl	$LOAD_PHYSICAL_ADDR, %ebx
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Target address to relocate to for decompression */
@@ -136,7 +148,12 @@ ENTRY(startup_32)
 
 	/* Enable PAE mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movl	$(X86_CR4_PAE), %eax
+=======
+	movl	%cr4, %eax
+	orl	$X86_CR4_PAE, %eax
+>>>>>>> v3.18
 =======
 	movl	%cr4, %eax
 	orl	$X86_CR4_PAE, %eax
@@ -206,7 +223,10 @@ ENTRY(startup_32)
 	pushl	$__KERNEL_CS
 	leal	startup_64(%ebp), %eax
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EFI_MIXED
 	movl	efi32_config(%ebp), %ebx
 	cmp	$0, %ebx
@@ -214,6 +234,9 @@ ENTRY(startup_32)
 	leal	handover_entry(%ebp), %eax
 1:
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pushl	%eax
 
@@ -226,7 +249,10 @@ ENTRY(startup_32)
 ENDPROC(startup_32)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EFI_MIXED
 	.org 0x190
 ENTRY(efi32_stub_entry)
@@ -251,6 +277,9 @@ ENTRY(efi32_stub_entry)
 ENDPROC(efi32_stub_entry)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.code64
 	.org 0x200
@@ -274,6 +303,7 @@ ENTRY(startup_64)
 
 ENTRY(efi_pe_entry)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	%rcx, %rdi
 	mov	%rdx, %rsi
 	pushq	%rdi
@@ -289,6 +319,8 @@ ENTRY(efi_pe_entry)
 
 ENTRY(efi_stub_entry)
 =======
+=======
+>>>>>>> v3.18
 	movq	%rcx, efi64_config(%rip)	/* Handle */
 	movq	%rdx, efi64_config+8(%rip) /* EFI System table pointer */
 
@@ -325,21 +357,30 @@ handover_entry:
 	addq	%rbp, 88(%rax)
 2:
 	movq	efi_config(%rip), %rdi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	call	efi_main
 	movq	%rax,%rsi
 	cmpq	$0,%rax
 	jne	2f
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:
 	/* EFI init failed, so hang. */
 	hlt
 	jmp	1b
 =======
+=======
+>>>>>>> v3.18
 fail:
 	/* EFI init failed, so hang. */
 	hlt
 	jmp	fail
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 2:
 	movl	BP_code32_start(%esi), %eax
@@ -379,15 +420,21 @@ preferred_addr:
 	notq	%rax
 	andq	%rax, %rbp
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	movq	$LOAD_PHYSICAL_ADDR, %rbp
 #endif
 =======
+=======
+>>>>>>> v3.18
 	cmpq	$LOAD_PHYSICAL_ADDR, %rbp
 	jge	1f
 #endif
 	movq	$LOAD_PHYSICAL_ADDR, %rbp
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Target address to relocate to for decompression */
@@ -421,7 +468,10 @@ preferred_addr:
 	jmp	*%rax
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EFI_STUB
 	.org 0x390
 ENTRY(efi64_stub_entry)
@@ -436,6 +486,9 @@ ENTRY(efi64_stub_entry)
 ENDPROC(efi64_stub_entry)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.text
 relocated:
@@ -468,6 +521,11 @@ relocated:
  */
 	pushq	%rsi			/* Save the real mode argument */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	movq	$z_run_size, %r9	/* size of kernel with .bss and .brk */
+	pushq	%r9
+>>>>>>> v3.18
 =======
 	movq	$z_run_size, %r9	/* size of kernel with .bss and .brk */
 	pushq	%r9
@@ -478,7 +536,13 @@ relocated:
 	movl	$z_input_len, %ecx	/* input_len */
 	movq	%rbp, %r8		/* output target address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call	decompress_kernel
+=======
+	movq	$z_output_len, %r9	/* decompressed length, end of relocs */
+	call	decompress_kernel	/* returns kernel location in %rax */
+	popq	%r9
+>>>>>>> v3.18
 =======
 	movq	$z_output_len, %r9	/* decompressed length, end of relocs */
 	call	decompress_kernel	/* returns kernel location in %rax */
@@ -490,7 +554,11 @@ relocated:
  * Jump to the decompressed kernel.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jmp	*%rbp
+=======
+	jmp	*%rax
+>>>>>>> v3.18
 =======
 	jmp	*%rax
 >>>>>>> v3.18
@@ -517,7 +585,10 @@ gdt:
 gdt_end:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EFI_STUB
 efi_config:
 	.quad	0
@@ -537,6 +608,9 @@ efi64_config:
 	.byte	1
 #endif /* CONFIG_EFI_STUB */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Stack and heap for uncompression

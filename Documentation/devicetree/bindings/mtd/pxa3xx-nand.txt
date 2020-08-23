@@ -3,7 +3,13 @@ PXA3xx NAND DT bindings
 Required properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  - compatible:		Should be "marvell,pxa3xx-nand"
+=======
+ - compatible:		Should be set to one of the following:
+			marvell,pxa3xx-nand
+			marvell,armada370-nand
+>>>>>>> v3.18
 =======
  - compatible:		Should be set to one of the following:
 			marvell,pxa3xx-nand
@@ -20,7 +26,10 @@ Optional properties:
 				by the bootloader
  - num-cs:			Number of chipselect lines to usw
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  - nand-on-flash-bbt: 		boolean to enable on flash bbt option if
 				not present false
  - nand-ecc-strength:           number of bits to correct per ECC step
@@ -31,6 +40,9 @@ The following ECC strength and step size are currently supported:
  - nand-ecc-strength = <1>, nand-ecc-step-size = <512>
  - nand-ecc-strength = <4>, nand-ecc-step-size = <512>
  - nand-ecc-strength = <8>, nand-ecc-step-size = <512>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:

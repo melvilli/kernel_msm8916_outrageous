@@ -53,7 +53,10 @@ config MEMSTICK_REALTEK_PCI
 	  To compile this driver as a module, choose M here: the module will
 	  be called rtsx_pci_ms.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config MEMSTICK_REALTEK_USB
 	tristate "Realtek USB Memstick Card Interface Driver"
@@ -64,4 +67,7 @@ config MEMSTICK_REALTEK_USB
 
 	  To compile this driver as a module, choose M here: the module will
 	  be called rts5139_ms.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -9,7 +9,11 @@
  * struct drxk_config - Configure the initial parameters for DRX-K
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @adr:		I2C Address of the DRX-K
+=======
+ * @adr:		I2C address of the DRX-K
+>>>>>>> v3.18
 =======
  * @adr:		I2C address of the DRX-K
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
  *				the correct number of parameters will be
  *				automatically detected.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @load_firmware_sync:		Force the firmware load to be synchronous.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -49,7 +56,10 @@ struct drxk_config {
 	bool	dynamic_clk;
 	bool	enable_merr_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool	load_firmware_sync;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

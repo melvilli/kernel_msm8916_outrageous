@@ -32,7 +32,10 @@ has lapsed, so this approach may be used in non-GPL software, if desired.
 under either GPL or LGPL.  Sorry!!!)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 In 1987, Rashid et al. described lazy TLB-flush [RichardRashid87a].
 At first glance, this has nothing to do with RCU, but nevertheless
 this paper helped inspire the update-side batching used in the later
@@ -41,6 +44,9 @@ a description of Argus that noted that use of out-of-date values can
 be tolerated in some situations.  Thus, this paper provides some early
 theoretical justification for use of stale data.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 In 1990, Pugh [Pugh90] noted that explicitly tracking which threads
 were reading a given data structure permitted deferred free to operate
@@ -51,6 +57,7 @@ write-side contention and parallelize the other write-side overheads by
 providing a fine-grained locking design, however, it would be interesting
 to see how much of the performance advantage reported in 1990 remains
 <<<<<<< HEAD
+<<<<<<< HEAD
 in 2004.
 
 At about this same time, Adams [Adams91] described ``chaotic relaxation'',
@@ -59,6 +66,8 @@ numerical algorithms are relaxed, so that iteration $n$ might use
 data from iteration $n-1$ or even $n-2$.  This introduces error,
 which typically slows convergence and thus increases the number of
 =======
+=======
+>>>>>>> v3.18
 today.
 
 At about this same time, Andrews [Andrews91textbook] described ``chaotic
@@ -66,6 +75,9 @@ relaxation'', where the normal barriers between successive iterations
 of convergent numerical algorithms are relaxed, so that iteration $n$
 might use data from iteration $n-1$ or even $n-2$.  This introduces
 error, which typically slows convergence and thus increases the number of
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 iterations required.  However, this increase is sometimes more than made
 up for by a reduction in the number of expensive barrier operations,
@@ -77,7 +89,12 @@ is thus inapplicable to most data structures in operating-system kernels.
 In 1992, Henry (now Alexia) Massalin completed a dissertation advising
 parallel programmers to defer processing when feasible to simplify
 <<<<<<< HEAD
+<<<<<<< HEAD
 synchronization.  RCU makes extremely heavy use of this advice.
+=======
+synchronization [HMassalinPhD].  RCU makes extremely heavy use of
+this advice.
+>>>>>>> v3.18
 =======
 synchronization [HMassalinPhD].  RCU makes extremely heavy use of
 this advice.
@@ -113,6 +130,7 @@ DYNIX/ptx kernel.  The corresponding conference paper appeared in 1998
 
 In 1999, the Tornado and K42 groups described their "generations"
 <<<<<<< HEAD
+<<<<<<< HEAD
 mechanism, which quite similar to RCU [Gamsa99].  These operating systems
 made pervasive use of RCU in place of "existence locks", which greatly
 simplifies locking hierarchies.
@@ -122,6 +140,8 @@ at OLS.  The resulting abundance of RCU patches was presented the
 following year [McKenney02a], and use of RCU in dcache was first
 described that same year [Linder02a].
 =======
+=======
+>>>>>>> v3.18
 mechanism, which is quite similar to RCU [Gamsa99].  These operating
 systems made pervasive use of RCU in place of "existence locks", which
 greatly simplifies locking hierarchies and helps avoid deadlocks.
@@ -132,12 +152,16 @@ led to yet another independent invention of something like RCU
 RCU presentation involving Linux [McKenney01a] at OLS.  The resulting
 abundance of RCU patches was presented the following year [McKenney02a],
 and use of RCU in dcache was first described that same year [Linder02a].
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Also in 2002, Michael [Michael02b,Michael02a] presented "hazard-pointer"
 techniques that defer the destruction of data structures to simplify
 non-blocking synchronization (wait-free synchronization, lock-free
 synchronization, and obstruction-free synchronization are all examples of
+<<<<<<< HEAD
 <<<<<<< HEAD
 non-blocking synchronization).  In particular, this technique eliminates
 locking, reduces contention, reduces memory latency for readers, and
@@ -149,6 +173,8 @@ of as inside-out reference counts, where the count is represented by the
 number of hazard pointers referencing a given data structure (rather than
 the more conventional counter field within the data structure itself).
 =======
+=======
+>>>>>>> v3.18
 non-blocking synchronization).  The corresponding journal article appeared
 in 2004 [MagedMichael04a].  This technique eliminates locking, reduces
 contention, reduces memory latency for readers, and parallelizes pipeline
@@ -161,6 +187,9 @@ referencing a given data structure rather than the more conventional
 counter field within the data structure itself.  The key advantage
 of inside-out reference counts is that they can be stored in immortal
 variables, thus allowing races between access and deletion to be avoided.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 By the same token, RCU can be thought of as a "bulk reference count",
@@ -175,13 +204,19 @@ can be thought of in other terms as well.
 In 2003, the K42 group described how RCU could be used to create
 hot-pluggable implementations of operating-system functions [Appavoo03a].
 <<<<<<< HEAD
+<<<<<<< HEAD
 Later that year saw a paper describing an RCU implementation of System
 V IPC [Arcangeli03], and an introduction to RCU in Linux Journal
 =======
+=======
+>>>>>>> v3.18
 Later that year saw a paper describing an RCU implementation
 of System V IPC [Arcangeli03] (following up on a suggestion by
 Hugh Dickins [Dickins02a] and an implementation by Mingming Cao
 [MingmingCao2002IPCRCU]), and an introduction to RCU in Linux Journal
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 [McKenney03a].
 
@@ -241,8 +276,11 @@ tree using software transactional memory to protect concurrent updates
 RCU-protected resizeable hash tables [Triplett:2011:RPHash], the 3.0 RCU
 trainwreck [PaulEMcKenney2011RCU3.0trainwreck], and Neil Brown's "Meet the
 <<<<<<< HEAD
+<<<<<<< HEAD
 Lockers" LWN article [NeilBrown2011MeetTheLockers].
 =======
+=======
+>>>>>>> v3.18
 Lockers" LWN article [NeilBrown2011MeetTheLockers].  Some academic
 work looked at debugging uses of RCU [Seyster:2011:RFA:2075416.2075425].
 
@@ -262,6 +300,9 @@ RCU based on separation logic [AlexeyGotsman2012VerifyGraceExtended],
 which was published in the 2013 European Symposium on Programming
 [AlexeyGotsman2013ESOPRCU].
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -277,9 +318,12 @@ Bibtex Entries
 ,number="3"
 ,pages="354-382"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://portal.acm.org/citation.cfm?id=320619&dl=GUIDE,}
 [Viewed December 3, 2007]"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ,annotation={
@@ -287,6 +331,11 @@ Bibtex Entries
 	.
 	Oldest use of something vaguely resembling RCU that I have found.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	http://portal.acm.org/citation.cfm?id=320619&dl=GUIDE,
+	[Viewed December 3, 2007]
+>>>>>>> v3.18
 =======
 	http://portal.acm.org/citation.cfm?id=320619&dl=GUIDE,
 	[Viewed December 3, 2007]
@@ -401,7 +450,11 @@ for Programming Languages and Operating Systems}"
 ,publisher = {ACM}
 ,address = {New York, NY, USA}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation= {
+=======
+,annotation={
+>>>>>>> v3.18
 =======
 ,annotation={
 >>>>>>> v3.18
@@ -442,8 +495,14 @@ for Programming Languages and Operating Systems}"
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @Book{Adams91
 ,Author="Gregory R. Adams"
+=======
+# Was Adams91, see also syncrefs.bib.
+@Book{Andrews91textbook
+,Author="Gregory R. Andrews"
+>>>>>>> v3.18
 =======
 # Was Adams91, see also syncrefs.bib.
 @Book{Andrews91textbook
@@ -464,7 +523,10 @@ for Programming Languages and Operating Systems}"
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 @phdthesis{HMassalinPhD
 ,author="H. Massalin"
 ,title="Synthesis: An Efficient Implementation of Fundamental Operating
@@ -480,6 +542,9 @@ System Services"
 }
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 @unpublished{Jacobson93
 ,author="Van Jacobson"
@@ -518,6 +583,7 @@ System Services"
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @conference{Pu95a,
 Author = "Calton Pu and Tito Autrey and Andrew Black and Charles Consel and
 Crispin Cowan and Jon Inouye and Lakshmi Kethana and Jonathan Walpole and
@@ -552,6 +618,8 @@ annotation="
 	using the resource at hand.  Allows multiple readers.
 "
 =======
+=======
+>>>>>>> v3.18
 @conference{Pu95a
 ,Author = "Calton Pu and Tito Autrey and Andrew Black and Charles Consel and
 Crispin Cowan and Jon Inouye and Lakshmi Kethana and Jonathan Walpole and
@@ -585,6 +653,9 @@ Ke Zhang"
 	Uses a replugger, but with a counter to signal when people are
 	using the resource at hand.  Allows multiple readers.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -649,9 +720,12 @@ Problems"
 ,pages="509-518"
 ,Address="Las Vegas, NV"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://www.rdrop.com/users/paulmck/RCU/rclockpdcsproof.pdf}
 [Viewed December 3, 2007]"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ,annotation={
@@ -660,6 +734,11 @@ Problems"
 	Defines 'quiescent state'.  Includes both measured and analytic
 	evaluation.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	http://www.rdrop.com/users/paulmck/RCU/rclockpdcsproof.pdf
+	[Viewed December 3, 2007]
+>>>>>>> v3.18
 =======
 	http://www.rdrop.com/users/paulmck/RCU/rclockpdcsproof.pdf
 	[Viewed December 3, 2007]
@@ -678,9 +757,12 @@ Operating System Design and Implementation}"
 ,pages="87-100"
 ,Address="New Orleans, LA"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://www.usenix.org/events/osdi99/full_papers/gamsa/gamsa.pdf}
 [Viewed August 30, 2006]"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ,annotation={
@@ -688,6 +770,11 @@ Operating System Design and Implementation}"
 	invention of RCU.
 	See especially pages 7-9 (Section 5).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	http://www.usenix.org/events/osdi99/full_papers/gamsa/gamsa.pdf
+	[Viewed August 30, 2006]
+>>>>>>> v3.18
 =======
 	http://www.usenix.org/events/osdi99/full_papers/gamsa/gamsa.pdf
 	[Viewed August 30, 2006]
@@ -783,9 +870,15 @@ Orran Krieger and Rusty Russell and Dipankar Sarma and Maneesh Soni"
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=100259266316456&w=2}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Memory-barrier and Alpha thread.  100 messages, not too bad...
 "
+=======
+,annotation={
+	Memory-barrier and Alpha thread.  100 messages, not too bad...
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Memory-barrier and Alpha thread.  100 messages, not too bad...
@@ -802,15 +895,21 @@ Orran Krieger and Rusty Russell and Dipankar Sarma and Maneesh Soni"
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=100264675012867&w=2}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Suggested burying memory barriers in Linux's list-manipulation
 	primitives.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Suggested burying memory barriers in Linux's list-manipulation
 	primitives.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -823,6 +922,11 @@ Orran Krieger and Rusty Russell and Dipankar Sarma and Maneesh Soni"
 \url{http://lkml.org/lkml/2001/10/13/105}
 [Viewed August 21, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+,annotation={
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 }
@@ -840,7 +944,10 @@ Orran Krieger and Rusty Russell and Dipankar Sarma and Maneesh Soni"
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 @conference{Michael02b
 ,author="Maged M. Michael"
 ,title="High Performance Dynamic Lock-Free Hash Tables and List-Based Sets"
@@ -855,6 +962,9 @@ Like the title says...
 }
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 @Conference{Linder02a
 ,Author="Hanna Linder and Dipankar Sarma and Maneesh Soni"
@@ -864,15 +974,21 @@ Like the title says...
 ,Year="2002"
 ,pages="289-300"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Measured scalability of Linux 2.4 kernel's directory-entry cache
 	(dcache), and measured some scalability enhancements.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Measured scalability of Linux 2.4 kernel's directory-entry cache
 	(dcache), and measured some scalability enhancements.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -888,15 +1004,21 @@ Andrea Arcangeli and Andi Kleen and Orran Krieger and Rusty Russell"
 \url{http://www.linux.org.uk/~ajh/ols2002_proceedings.pdf.gz}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Presented and compared a number of RCU implementations for the
 	Linux kernel.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Presented and compared a number of RCU implementations for the
 	Linux kernel.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -909,9 +1031,15 @@ Andrea Arcangeli and Andi Kleen and Orran Krieger and Rusty Russell"
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=102645767914212&w=2}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Compare fastwalk and RCU for dcache.  RCU won.
 "
+=======
+,annotation={
+	Compare fastwalk and RCU for dcache.  RCU won.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Compare fastwalk and RCU for dcache.  RCU won.
@@ -928,10 +1056,13 @@ Andrea Arcangeli and Andi Kleen and Orran Krieger and Rusty Russell"
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=103082050621241&w=2}
 [Viewed: June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Suggested RCU for vfs\_shared\_cred.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Suggested RCU for vfs\_shared\_cred.
 }
@@ -953,6 +1084,9 @@ Symposium on Principles of Distributed Computing}"
 	state its needs.  Also requires read-side memory barriers on
 	most architectures.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -965,7 +1099,10 @@ Symposium on Principles of Distributed Computing}"
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 @InProceedings{HerlihyLM02
 ,author={Maurice Herlihy and Victor Luchangco and Mark Moir}
 ,title="The Repeat Offender Problem: A Mechanism for Supporting Dynamic-Sized,
@@ -977,6 +1114,9 @@ Symposium on Distributed Computing}
 ,pages="339-353"
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 @unpublished{Sarma02b
 ,Author="Dipankar Sarma"
@@ -987,11 +1127,14 @@ Symposium on Distributed Computing}
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=103462075416638&w=2}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Performance of dcache RCU on kernbench for 16x NUMA-Q and 1x,
 	2x, and 4x systems.  RCU does no harm, and helps on 16x.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Performance of dcache RCU on kernbench for 16x NUMA-Q and 1x,
 	2x, and 4x systems.  RCU does no harm, and helps on 16x.
@@ -1009,6 +1152,9 @@ Symposium on Distributed Computing}
 ,annotation={
 	Mingming Cao's patch to introduce RCU to SysV IPC.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1021,7 +1167,11 @@ Symposium on Distributed Computing}
 \url{http://lkml.org/lkml/2003/3/9/205}
 [Viewed March 13, 2006]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
+=======
+,annotation={
+>>>>>>> v3.18
 =======
 ,annotation={
 >>>>>>> v3.18
@@ -1032,7 +1182,11 @@ Symposium on Distributed Computing}
 	.
 	Steve Hemminger responds by replacing them with RCU.
 <<<<<<< HEAD
+<<<<<<< HEAD
 "
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -1051,9 +1205,15 @@ B. Rosenburg and M. Stumm and J. Xenidis"
 ,number="1"
 ,pages="60-76"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Use of RCU to enable hot-swapping for autonomic behavior in K42.
 "
+=======
+,annotation={
+	Use of RCU to enable hot-swapping for autonomic behavior in K42.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Use of RCU to enable hot-swapping for autonomic behavior in K42.
@@ -1068,9 +1228,15 @@ B. Rosenburg and M. Stumm and J. Xenidis"
 ,Month="March"
 ,note="email correspondence"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Described the relationship of the VM/XA passive serialization to RCU.
 "
+=======
+,annotation={
+	Described the relationship of the VM/XA passive serialization to RCU.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Described the relationship of the VM/XA passive serialization to RCU.
@@ -1090,6 +1256,7 @@ Dipankar Sarma"
 ,month="June"
 ,pages="297-310"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://www.rdrop.com/users/paulmck/RCU/rcu.FREENIX.2003.06.14.pdf}
 [Viewed November 21, 2007]"
@@ -1099,12 +1266,17 @@ Dipankar Sarma"
 	performance improvements.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Compared updated RCU implementations for the Linux kernel, and
 	described System V IPC use of RCU, including order-of-magnitude
 	performance improvements.
 	http://www.rdrop.com/users/paulmck/RCU/rcu.FREENIX.2003.06.14.pdf
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1134,15 +1306,21 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 \url{http://www.linuxjournal.com/article/6993}
 [Viewed November 14, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Reader-friendly intro to RCU, with the infamous old-man-and-brat
 	cartoon.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Reader-friendly intro to RCU, with the infamous old-man-and-brat
 	cartoon.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1153,7 +1331,13 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 ,year="2003"
 ,note="Message ID: 20031222180114.GA2248@in.ibm.com"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="dipankar/ct.2004.03.27/RCUll.2003.12.22.patch"
+=======
+,annotation={
+	dipankar/ct.2004.03.27/RCUll.2003.12.22.patch
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	dipankar/ct.2004.03.27/RCUll.2003.12.22.patch
@@ -1171,17 +1355,23 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 ,month="December"
 ,pages="112"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Applies RCU to a wildcard-search Patricia tree in order to permit
 	synchronization-free lookup.  RCU is used to retain removed nodes
 	for a grace period before freeing them.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Applies RCU to a wildcard-search Patricia tree in order to permit
 	synchronization-free lookup.  RCU is used to retain removed nodes
 	for a grace period before freeing them.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1195,6 +1385,7 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 ,number="118"
 ,pages="38-46"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://www.linuxjournal.com/node/7124}
 [Viewed December 26, 2010]"
@@ -1202,11 +1393,16 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 	Reader friendly intro to dcache and RCU.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Reader friendly intro to dcache and RCU.
 	http://www.linuxjournal.com/node/7124
 	[Viewed December 26, 2010]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1222,15 +1418,21 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 \url{http://www.rdrop.com/users/paulmck/RCU/lockperf.2004.01.17a.pdf}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Compares performance of RCU to that of other locking primitives
 	over a number of CPUs (x86, Opteron, Itanium, and PPC).
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Compares performance of RCU to that of other locking primitives
 	over a number of CPUs (x86, Opteron, Itanium, and PPC).
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1241,7 +1443,13 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 ,year="2004"
 ,note="\url{http://marc.theaimsgroup.com/?l=linux-kernel&m=108003746402892&w=2}"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="Head of thread: dipankar/2004.03.23/rcu-low-lat.1.patch"
+=======
+,annotation={
+	Head of thread: dipankar/2004.03.23/rcu-low-lat.1.patch
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Head of thread: dipankar/2004.03.23/rcu-low-lat.1.patch
@@ -1256,7 +1464,13 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 ,year="2004"
 ,note="\url{http://marc.theaimsgroup.com/?l=linux-kernel&m=108016474829546&w=2}"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="dipankar/rcuth.2004.03.24/rcu-throttle.patch"
+=======
+,annotation={
+	dipankar/rcuth.2004.03.24/rcu-throttle.patch
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	dipankar/rcuth.2004.03.24/rcu-throttle.patch
@@ -1273,9 +1487,15 @@ Michal Ostrowski and Bryan Rosenburg and Jimi Xenidis"
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=108546407726602&w=2}
 [Viewed June 23, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Hierarchical-bitmap patch for RCU infrastructure.
 "
+=======
+,annotation={
+	Hierarchical-bitmap patch for RCU infrastructure.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Hierarchical-bitmap patch for RCU infrastructure.
@@ -1318,11 +1538,14 @@ Realtime Applications"
 ,month="June"
 ,pages="182-191"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Describes and compares a number of modifications to the Linux RCU
 	implementation that make it friendly to realtime applications.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Describes and compares a number of modifications to the Linux RCU
 	implementation that make it friendly to realtime applications.
@@ -1346,6 +1569,9 @@ Realtime Applications"
 ,annotation={
 	New canonical hazard-pointer citation.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1358,6 +1584,7 @@ in Operating System Kernels"
 Oregon Health and Sciences University"
 ,year="2004"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://www.rdrop.com/users/paulmck/RCU/RCUdissertation.2004.07.14e1.pdf}
 [Viewed October 15, 2004]"
@@ -1367,6 +1594,8 @@ Oregon Health and Sciences University"
 	kernels.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Describes RCU implementations and presents design patterns
 	corresponding to common uses of RCU in several operating-system
@@ -1374,6 +1603,9 @@ Oregon Health and Sciences University"
 	http://www.rdrop.com/users/paulmck/RCU/RCUdissertation.2004.07.14e1.pdf
 	[Viewed October 15, 2004]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1386,9 +1618,15 @@ Oregon Health and Sciences University"
 \url{http://lkml.org/lkml/2004/8/6/237}
 [Viewed June 8, 2010]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Introduce rcu_dereference().
 "
+=======
+,annotation={
+	Introduce rcu_dereference().
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Introduce rcu_dereference().
@@ -1405,17 +1643,23 @@ Oregon Health and Sciences University"
 \url{http://lkml.org/lkml/2004/8/30/87}
 [Viewed February 17, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Uses active code in rcu_read_lock() and rcu_read_unlock() to
 	make RCU happen, allowing RCU to function on CPUs that do not
 	receive a scheduling-clock interrupt.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Uses active code in rcu_read_lock() and rcu_read_unlock() to
 	make RCU happen, allowing RCU to function on CPUs that do not
 	receive a scheduling-clock interrupt.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1428,9 +1672,15 @@ Oregon Health and Sciences University"
 \url{http://www.cs.toronto.edu/~tomhart/masters_thesis.html}
 [Viewed October 15, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Proposes comparing RCU to lock-free methods for the Linux kernel.
 "
+=======
+,annotation={
+	Proposes comparing RCU to lock-free methods for the Linux kernel.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Proposes comparing RCU to lock-free methods for the Linux kernel.
@@ -1447,9 +1697,15 @@ Oregon Health and Sciences University"
 \url{http://marc.theaimsgroup.com/?t=109395731700004&r=1&w=2}
 [Viewed October 18, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Srivatsa's RCU patch for tcp_ehash lookup.
 "
+=======
+,annotation={
+	Srivatsa's RCU patch for tcp_ehash lookup.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Srivatsa's RCU patch for tcp_ehash lookup.
@@ -1466,9 +1722,15 @@ Oregon Health and Sciences University"
 \url{http://marc.theaimsgroup.com/?t=109144217400003&r=1&w=2}
 [Viewed October 18, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Ravikiran's lockfree FD patch.
 "
+=======
+,annotation={
+	Ravikiran's lockfree FD patch.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Ravikiran's lockfree FD patch.
@@ -1485,9 +1747,15 @@ Oregon Health and Sciences University"
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=109152521410459&w=2}
 [Viewed October 18, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Ravikiran's lockfree FD patch.
 "
+=======
+,annotation={
+	Ravikiran's lockfree FD patch.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Ravikiran's lockfree FD patch.
@@ -1504,9 +1772,15 @@ Oregon Health and Sciences University"
 \url{http://lkml.org/lkml/2004/10/23/241}
 [Viewed June 8, 2010]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Introduce rcu_assign_pointer().
 "
+=======
+,annotation={
+	Introduce rcu_assign_pointer().
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Introduce rcu_assign_pointer().
@@ -1521,6 +1795,7 @@ Oregon Health and Sciences University"
 ,month="November"
 ,year="2004"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://marc.theaimsgroup.com/?l=linux-kernel&m=110054979416004&w=2}
 [Viewed December 10, 2004]"
@@ -1528,12 +1803,17 @@ Oregon Health and Sciences University"
 	James Morris posts Kaigai Kohei's patch to LKML.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://marc.theaimsgroup.com/?l=linux-kernel&m=110054979416004&w=2}"
 ,annotation={
 	James Morris posts Kaigai Kohei's patch to LKML.
 	[Viewed December 10, 2004]
 	Kaigai's patch is at https://lkml.org/lkml/2004/9/27/52
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1546,9 +1826,15 @@ Oregon Health and Sciences University"
 \url{http://www.livejournal.com/users/james_morris/2153.html}
 [Viewed December 10, 2004]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	RCU helps SELinux performance.  ;-)  Made LWN.
 "
+=======
+,annotation={
+	RCU helps SELinux performance.  ;-)  Made LWN.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	RCU helps SELinux performance.  ;-)  Made LWN.
@@ -1566,9 +1852,15 @@ Oregon Health and Sciences University"
 \url{http://www.rdrop.com/users/paulmck/RCU/rcu-semantics.2005.01.30a.pdf}
 [Viewed December 6, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Early derivation of RCU semantics.
 "
+=======
+,annotation={
+	Early derivation of RCU semantics.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Early derivation of RCU semantics.
@@ -1586,15 +1878,21 @@ Oregon Health and Sciences University"
 \url{http://lkml.org/lkml/2005/3/17/199}
 [Viewed September 5, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First posting showing how RCU can be safely adapted for
 	preemptable RCU read side critical sections.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	First posting showing how RCU can be safely adapted for
 	preemptable RCU read side critical sections.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1608,6 +1906,7 @@ Oregon Health and Sciences University"
 \url{http://lkml.org/lkml/2005/3/18/122}
 [Viewed March 30, 2006]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Esben Neilsen suggests read-side suppression of grace-period
 	processing for crude-but-workable realtime RCU.  The downside
@@ -1615,12 +1914,17 @@ Oregon Health and Sciences University"
 	and testing.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Esben Neilsen suggests read-side suppression of grace-period
 	processing for crude-but-workable realtime RCU.  The downside
 	is indefinite grace periods...  But this is OK for experimentation
 	and testing.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1634,15 +1938,21 @@ Data Structures"
 \url{ftp://ftp.cs.toronto.edu/csrg-technical-reports/515/}
 [Viewed March 4, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Comparison of RCU, QBSR, and EBSR.  RCU wins for read-mostly
 	workloads.  ;-)
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Comparison of RCU, QBSR, and EBSR.  RCU wins for read-mostly
 	workloads.  ;-)
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1656,15 +1966,21 @@ Data Structures"
 \url{http://lwn.net/Articles/134484/}
 [Viewed May 3, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Jon Corbet describes deprecation of synchronize_kernel()
 	in favor of synchronize_rcu() and synchronize_sched().
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Jon Corbet describes deprecation of synchronize_kernel()
 	in favor of synchronize_rcu() and synchronize_sched().
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1677,15 +1993,21 @@ Data Structures"
 \url{http://lkml.org/lkml/2005/5/9/185}
 [Viewed May 13, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First publication of working lock-based deferred free patches
 	for the CONFIG_PREEMPT_RT environment.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	First publication of working lock-based deferred free patches
 	for the CONFIG_PREEMPT_RT environment.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1700,15 +2022,21 @@ Data Structures"
 \url{http://www.rdrop.com/users/paulmck/RCU/realtimeRCU.2005.04.23a.pdf}
 [Viewed May 13, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Realtime turns into making RCU yet more realtime friendly.
 	http://lca2005.linux.org.au/Papers/Paul%20McKenney/Towards%20Hard%20Realtime%20Response%20from%20the%20Linux%20Kernel/LKS.2005.04.22a.pdf
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Realtime turns into making RCU yet more realtime friendly.
 	http://lca2005.linux.org.au/Papers/Paul%20McKenney/Towards%20Hard%20Realtime%20Response%20from%20the%20Linux%20Kernel/LKS.2005.04.22a.pdf
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1721,9 +2049,15 @@ Data Structures"
 \url{http://www.rdrop.com/users/paulmck/}
 [Viewed May 25, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Paul McKenney's home page.
 "
+=======
+,annotation={
+	Paul McKenney's home page.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Paul McKenney's home page.
@@ -1740,9 +2074,15 @@ Data Structures"
 \url{http://www.rdrop.com/users/paulmck/RCU}
 [Viewed May 25, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Paul McKenney's RCU page.
 "
+=======
+,annotation={
+	Paul McKenney's RCU page.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Paul McKenney's RCU page.
@@ -1757,15 +2097,21 @@ Data Structures"
 ,year="2005"
 ,note="Personal communication"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Joe Seigh announcing his atomic-ptr-plus project.
 	http://sourceforge.net/projects/atomic-ptr-plus/
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Joe Seigh announcing his atomic-ptr-plus project.
 	http://sourceforge.net/projects/atomic-ptr-plus/
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1779,9 +2125,15 @@ Data Structures"
 \url{http://sourceforge.net/projects/atomic-ptr-plus/}
 [Viewed August 8, 2005]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Joe Seigh's atomic-ptr-plus project.
 "
+=======
+,annotation={
+	Joe Seigh's atomic-ptr-plus project.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Joe Seigh's atomic-ptr-plus project.
@@ -1799,9 +2151,15 @@ Data Structures"
 \url{http://lkml.org/lkml/2005/8/1/155}
 [Viewed March 14, 2006]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First operating counter-based realtime RCU patch posted to LKML.
 "
+=======
+,annotation={
+	First operating counter-based realtime RCU patch posted to LKML.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	First operating counter-based realtime RCU patch posted to LKML.
@@ -1819,17 +2177,23 @@ Data Structures"
 \url{http://lkml.org/lkml/2005/8/8/108}
 [Viewed March 14, 2006]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First operating counter-based realtime RCU patch posted to LKML,
 	but fixed so that various unusual combinations of configuration
 	parameters all function properly.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	First operating counter-based realtime RCU patch posted to LKML,
 	but fixed so that various unusual combinations of configuration
 	parameters all function properly.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1843,10 +2207,13 @@ Data Structures"
 \url{http://lkml.org/lkml/2005/10/1/70}
 [Viewed March 14, 2006]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First rcutorture patch.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	First rcutorture patch.
 }
@@ -1866,6 +2233,9 @@ Data Structures"
 	like it, but time he saw an opportunity for this technique,
 	something else always proved superior.  Partitioning or RCU.  ;-)
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1883,15 +2253,21 @@ Distributed Processing Symposium"
 \url{http://www.rdrop.com/users/paulmck/RCU/hart_ipdps06.pdf}
 [Viewed April 28, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Compares QSBR, HPBR, EBR, and lock-free reference counting.
 	http://www.cs.toronto.edu/~tomhart/perflab/ipdps06.tgz
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Compares QSBR, HPBR, EBR, and lock-free reference counting.
 	http://www.cs.toronto.edu/~tomhart/perflab/ipdps06.tgz
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1905,9 +2281,15 @@ Distributed Processing Symposium"
 \url{http://lkml.org/lkml/2006/6/20/238}
 [Viewed March 25, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	RCU-protected radix tree.
 "
+=======
+,annotation={
+	RCU-protected radix tree.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	RCU-protected radix tree.
@@ -1928,9 +2310,15 @@ Suparna Bhattacharya"
 \url{http://www.rdrop.com/users/paulmck/RCU/OLSrtRCU.2006.08.11a.pdf}
 [Viewed January 1, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Described how to improve the -rt implementation of realtime RCU.
 "
+=======
+,annotation={
+	Described how to improve the -rt implementation of realtime RCU.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Described how to improve the -rt implementation of realtime RCU.
@@ -1947,6 +2335,7 @@ Canis Rufus and Zoicon5 and Anome and Hal Eisen"
 ,day="8"
 ,year="2006"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://en.wikipedia.org/wiki/Read-copy-update}
 [Viewed August 21, 2006]"
@@ -1954,11 +2343,16 @@ Canis Rufus and Zoicon5 and Anome and Hal Eisen"
 	Wikipedia RCU page as of July 8 2006.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://en.wikipedia.org/wiki/Read-copy-update}"
 ,annotation={
 	Wikipedia RCU page as of July 8 2006.
 	[Viewed August 21, 2006]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1973,9 +2367,15 @@ Canis Rufus and Zoicon5 and Anome and Hal Eisen"
 \url{http://www.linuxsymposium.org/2006/view_abstract.php?content_key=184}
 [Viewed January 11, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Uses RCU-protected radix tree for a lockless page cache.
 "
+=======
+,annotation={
+	Uses RCU-protected radix tree for a lockless page cache.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Uses RCU-protected radix tree for a lockless page cache.
@@ -1995,9 +2395,15 @@ Revised:
 \url{http://www.rdrop.com/users/paulmck/RCU/srcu.2007.01.14a.pdf}
 [Viewed August 21, 2006]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	LWN article introducing SRCU.
 "
+=======
+,annotation={
+	LWN article introducing SRCU.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	LWN article introducing SRCU.
@@ -2012,6 +2418,7 @@ Revised:
 ,day="18"
 ,year="2006"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://www.nada.kth.se/~snilsson/publications/TRASH/trash.pdf}
 [Viewed March 4, 2011]"
@@ -2019,11 +2426,16 @@ Revised:
 	RCU-protected dynamic trie-hash combination.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://www.nada.kth.se/~snilsson/publications/TRASH/trash.pdf}"
 ,annotation={
 	RCU-protected dynamic trie-hash combination.
 	[Viewed March 4, 2011]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2047,15 +2459,21 @@ Revised:
 \url{http://www.rdrop.com/users/paulmck/RCU/linuxusage.html}
 [Viewed January 14, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Paul McKenney's RCU page showing graphs plotting Linux-kernel
 	usage of RCU.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Paul McKenney's RCU page showing graphs plotting Linux-kernel
 	usage of RCU.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2068,15 +2486,21 @@ Revised:
 \url{http://www.rdrop.com/users/paulmck/RCU/linuxusage/rculocktab.html}
 [Viewed January 14, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Paul McKenney's RCU page showing Linux usage of RCU in tabular
 	form, with links to corresponding cscope databases.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Paul McKenney's RCU page showing Linux usage of RCU in tabular
 	form, with links to corresponding cscope databases.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2090,7 +2514,11 @@ Revised:
 \url{http://lkml.org/lkml/2006/10/26/73}
 [Viewed January 26, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
+=======
+,annotation={
+>>>>>>> v3.18
 =======
 ,annotation={
 >>>>>>> v3.18
@@ -2100,7 +2528,11 @@ Revised:
 	the semantics of reader-writer locking.  This is a recursive
 	lock.
 <<<<<<< HEAD
+<<<<<<< HEAD
 "
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2117,17 +2549,23 @@ Revised:
 \url{http://lkml.org/lkml/2006/11/17/56}
 [Viewed May 28, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	SRCU's grace periods are too slow for Jens, even after a
 	factor-of-three speedup.
 	Sped-up version of SRCU at http://lkml.org/lkml/2006/11/17/359.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	SRCU's grace periods are too slow for Jens, even after a
 	factor-of-three speedup.
 	Sped-up version of SRCU at http://lkml.org/lkml/2006/11/17/359.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2142,15 +2580,21 @@ Revised:
 \url{http://lkml.org/lkml/2006/11/19/69}
 [Viewed May 28, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First cut of QRCU.  Expanded/corrected versions followed.
 	Used to be OlegNesterov2007QRCU, now time-corrected.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	First cut of QRCU.  Expanded/corrected versions followed.
 	Used to be OlegNesterov2007QRCU, now time-corrected.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2164,15 +2608,21 @@ Revised:
 \url{http://lkml.org/lkml/2006/11/29/330}
 [Viewed November 26, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Expanded/corrected version of QRCU.
 	Used to be OlegNesterov2007aQRCU, now time-corrected.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Expanded/corrected version of QRCU.
 	Used to be OlegNesterov2007aQRCU, now time-corrected.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2186,15 +2636,21 @@ Revised:
 \url{http://www.ioremap.net/node/41}
 [Viewed October 28, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Using RCU as a pure delay leads to a 2.5x slowdown in skbs in
 	the Linux kernel.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Using RCU as a pure delay leads to a 2.5x slowdown in skbs in
 	the Linux kernel.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2213,7 +2669,12 @@ Revised:
 	Uses K42's RCU-like functionality to manage clustered-object
 	lifetimes.
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -2234,7 +2695,12 @@ Revised:
 ,annotation={
 	Describes relationship of K42 generations to RCU.
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -2251,9 +2717,15 @@ Revised:
 \url{http://lkml.org/lkml/2007/1/3/112}
 [Viewed May 28, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Patch for list_splice_rcu().
 "
+=======
+,annotation={
+	Patch for list_splice_rcu().
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Patch for list_splice_rcu().
@@ -2271,9 +2743,15 @@ Revised:
 \url{http://lwn.net/Articles/217484/}
 [Viewed November 22, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	LWN article introducing the rcu_barrier() primitive.
 "
+=======
+,annotation={
+	LWN article introducing the rcu_barrier() primitive.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	LWN article introducing the rcu_barrier() primitive.
@@ -2291,15 +2769,21 @@ Revised:
 \url{http://lkml.org/lkml/2007/1/28/34}
 [Viewed March 27, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	RCU-like implementation for frequent updaters and rare readers(!).
 	Subsumed into QRCU.  Maybe...
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	RCU-like implementation for frequent updaters and rare readers(!).
 	Subsumed into QRCU.  Maybe...
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2310,6 +2794,7 @@ Revised:
 ,day="5"
 ,year="2007"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://lwn.net/Articles/220677/}
 Revised:
@@ -2319,6 +2804,8 @@ Revised:
 	LWN article introducing RCU priority boosting.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://lwn.net/Articles/220677/}"
 ,annotation={
 	LWN article introducing RCU priority boosting.
@@ -2326,6 +2813,9 @@ Revised:
 	http://www.rdrop.com/users/paulmck/RCU/RCUbooststate.2007.04.16a.pdf
 	[Viewed September 7, 2007]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2339,9 +2829,15 @@ Revised:
 \url{http://lkml.org/lkml/2007/2/25/18}
 [Viewed March 27, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Patch for QRCU supplying lock-free fast path.
 "
+=======
+,annotation={
+	Patch for QRCU supplying lock-free fast path.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Patch for QRCU supplying lock-free fast path.
@@ -2364,7 +2860,12 @@ Revised:
 ,annotation={
 	Role of RCU in K42.
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -2380,9 +2881,15 @@ Revised:
 \url{http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4281239}
 [Viewed October 1, 2010]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	RCU-protected dynamic trie-hash combination.
 "
+=======
+,annotation={
+	RCU-protected dynamic trie-hash combination.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	RCU-protected dynamic trie-hash combination.
@@ -2401,15 +2908,21 @@ Revised:
 \url{http://ols.108.redhat.com/2007/Reprints/zijlstra-Reprint.pdf}
 [Viewed April 14, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Page-cache modifications permitting RCU readers and concurrent
 	updates.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Page-cache modifications permitting RCU readers and concurrent
 	updates.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2436,17 +2949,23 @@ Revised:
 \url{http://lwn.net/Articles/243851/}
 [Viewed September 8, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	LWN article describing Promela and spin, and also using Oleg
 	Nesterov's QRCU as an example (with Paul McKenney's fastpath).
 	Merged patch at: http://lkml.org/lkml/2007/2/25/18
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	LWN article describing Promela and spin, and also using Oleg
 	Nesterov's QRCU as an example (with Paul McKenney's fastpath).
 	Merged patch at: http://lkml.org/lkml/2007/2/25/18
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2457,6 +2976,7 @@ Revised:
 ,day="3"
 ,year="2007"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Preprint:
 \url{http://open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2664.htm}
 [Viewed December 7, 2009]"
@@ -2464,12 +2984,17 @@ Revised:
 	RCU for C++, parts 1 and 2.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="Available:
 \url{http://open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2664.htm}
 [Viewed December 7, 2009]"
 ,annotation={
 	RCU for C++, parts 1 and 2.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2480,6 +3005,7 @@ Revised:
 ,day="18"
 ,year="2008"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Preprint:
 \url{http://open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2782.htm}
 [Viewed December 7, 2009]"
@@ -2487,12 +3013,17 @@ Revised:
 	RCU for C++, part 2, updated many times.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="Available:
 \url{http://open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2782.htm}
 [Viewed December 7, 2009]"
 ,annotation={
 	RCU for C++, part 2, updated many times.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2506,15 +3037,21 @@ Revised:
 \url{http://lkml.org/lkml/2007/9/10/213}
 [Viewed October 25, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Final patch for preemptable RCU to -rt.  (Later patches were
 	to mainline, eventually incorporated.)
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Final patch for preemptable RCU to -rt.  (Later patches were
 	to mainline, eventually incorporated.)
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2528,9 +3065,15 @@ Revised:
 \url{http://lwn.net/Articles/253651/}
 [Viewed October 25, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	LWN article describing the design of preemptible RCU.
 "
+=======
+,annotation={
+	LWN article describing the design of preemptible RCU.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	LWN article describing the design of preemptible RCU.
@@ -2557,6 +3100,10 @@ Revised:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# MathieuDesnoyers2007call_rcu_schedNeeded
+>>>>>>> v3.18
 =======
 # MathieuDesnoyers2007call_rcu_schedNeeded
 >>>>>>> v3.18
@@ -2570,9 +3117,15 @@ Revised:
 \url{http://lkml.org/lkml/2007/12/20/244}
 [Viewed March 27, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Request for call_rcu_sched() and rcu_barrier_sched().
 "
+=======
+,annotation={
+	Request for call_rcu_sched() and rcu_barrier_sched().
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Request for call_rcu_sched() and rcu_barrier_sched().
@@ -2599,17 +3152,23 @@ Revised:
 \url{http://lwn.net/Articles/262464/}
 [Viewed December 27, 2007]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Lays out the three basic components of RCU: (1) publish-subscribe,
 	(2) wait for pre-existing readers to complete, and (2) maintain
 	multiple versions.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Lays out the three basic components of RCU: (1) publish-subscribe,
 	(2) wait for pre-existing readers to complete, and (2) maintain
 	multiple versions.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2623,7 +3182,11 @@ Revised:
 \url{http://lwn.net/Articles/263130/}
 [Viewed January 4, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
+=======
+,annotation={
+>>>>>>> v3.18
 =======
 ,annotation={
 >>>>>>> v3.18
@@ -2635,7 +3198,11 @@ Revised:
 	5. RCU is a Way of Providing Existence Guarantees
 	6. RCU is a Way of Waiting for Things to Finish
 <<<<<<< HEAD
+<<<<<<< HEAD
 "
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2651,15 +3218,21 @@ Revised:
 \url{http://lwn.net/Articles/264090/}
 [Viewed January 10, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Gives an overview of the Linux-kernel RCU API and a brief annotated RCU
 	bibliography.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Gives an overview of the Linux-kernel RCU API and a brief annotated RCU
 	bibliography.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2679,15 +3252,21 @@ Revised:
 \url{http://lkml.org/lkml/2008/1/29/208}
 [Viewed March 27, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Patch that prevents preemptible RCU from unnecessarily waking
 	up dynticks-idle CPUs.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Patch that prevents preemptible RCU from unnecessarily waking
 	up dynticks-idle CPUs.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2701,9 +3280,15 @@ Revised:
 \url{http://lkml.org/lkml/2008/2/2/255}
 [Viewed October 18, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Explanation of compilers violating dependency ordering.
 "
+=======
+,annotation={
+	Explanation of compilers violating dependency ordering.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Explanation of compilers violating dependency ordering.
@@ -2736,15 +3321,21 @@ lot of {Linux} into your technology!!!"
 \url{http://lwn.net/Articles/279077/}
 [Viewed April 24, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Describes use of Promela and Spin to validate (and fix!) the
 	dynticks/RCU interface.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Describes use of Promela and Spin to validate (and fix!) the
 	dynticks/RCU interface.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2753,7 +3344,11 @@ lot of {Linux} into your technology!!!"
 ,title="The read-copy-update mechanism for supporting real-time applications on shared-memory multiprocessor systems with {Linux}"
 ,Year="2008"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,Month="April-June"
+=======
+,Month="May"
+>>>>>>> v3.18
 =======
 ,Month="May"
 >>>>>>> v3.18
@@ -2762,15 +3357,21 @@ lot of {Linux} into your technology!!!"
 ,number="2"
 ,pages="221-236"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	RCU, realtime RCU, sleepable RCU, performance.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	RCU, realtime RCU, sleepable RCU, performance.
 	http://www.research.ibm.com/journal/sj/472/guniguntala.pdf
 	[Viewed April 24, 2008]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2784,17 +3385,23 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2008/6/2/539}
 [Viewed December 10, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Updated RCU classic algorithm.  Introduced multi-tailed list
 	for RCU callbacks and also pulling common code into
 	__call_rcu().
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Updated RCU classic algorithm.  Introduced multi-tailed list
 	for RCU callbacks and also pulling common code into
 	__call_rcu().
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2813,6 +3420,10 @@ lot of {Linux} into your technology!!!"
 ,annotation={
 	Linux changed RCU to a far greater degree than RCU has changed Linux.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	http://portal.acm.org/citation.cfm?doid=1400097.1400099
+>>>>>>> v3.18
 =======
 	http://portal.acm.org/citation.cfm?doid=1400097.1400099
 >>>>>>> v3.18
@@ -2829,15 +3440,21 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2008/8/21/336}
 [Viewed December 8, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	State-based RCU.  One key thing that this patch does is to
 	separate the dynticks handling of NMIs and IRQs.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	State-based RCU.  One key thing that this patch does is to
 	separate the dynticks handling of NMIs and IRQs.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2851,6 +3468,7 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2008/9/6/86}
 [Viewed December 8, 2008]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Manfred notes a fix required to my attempt to separate irq
 	and NMI processing for hierarchical RCU's dynticks interface.
@@ -2858,6 +3476,8 @@ lot of {Linux} into your technology!!!"
 }
 
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Manfred notes a fix required to my attempt to separate irq
 	and NMI processing for hierarchical RCU's dynticks interface.
@@ -2865,6 +3485,9 @@ lot of {Linux} into your technology!!!"
 }
 
 # Was PaulEMcKenney2011cyclicRCU
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 @techreport{PaulEMcKenney2008cyclicRCU
 ,author="Paul E. McKenney"
@@ -2876,17 +3499,23 @@ lot of {Linux} into your technology!!!"
 ,month="September"
 ,pages="23"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Maintains an additional level of indirection to allow
 	readers to confine themselves to the desired snapshot of the
 	data structure.  Only permits one update at a time.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Maintains an additional level of indirection to allow
 	readers to confine themselves to the desired snapshot of the
 	data structure.  Only permits one update at a time.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2897,6 +3526,7 @@ lot of {Linux} into your technology!!!"
 ,day="3"
 ,year="2008"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://lwn.net/Articles/305782/}
 [Viewed November 6, 2008]"
@@ -2905,12 +3535,17 @@ lot of {Linux} into your technology!!!"
 	permitting it to handle thousands of CPUs.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://lwn.net/Articles/305782/}"
 ,annotation={
 	RCU with combining-tree-based grace-period detection,
 	permitting it to handle thousands of CPUs.
 	[Viewed November 6, 2008]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2924,15 +3559,21 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2009/1/14/449}
 [Viewed January 15, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Small-footprint implementation of RCU for uniprocessor
 	embedded applications -- and also for exposition purposes.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Small-footprint implementation of RCU for uniprocessor
 	embedded applications -- and also for exposition purposes.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2947,9 +3588,15 @@ lot of {Linux} into your technology!!!"
 \url{http://www.rdrop.com/users/paulmck/RCU/urcutorture.2009.01.22a.pdf}
 [Viewed February 2, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Realtime RCU and torture-testing RCU uses.
 "
+=======
+,annotation={
+	Realtime RCU and torture-testing RCU uses.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Realtime RCU and torture-testing RCU uses.
@@ -2964,6 +3611,7 @@ lot of {Linux} into your technology!!!"
 ,day="5"
 ,year="2009"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://lkml.org/lkml/2009/2/5/572}
 \url{http://lttng.org/urcu}
@@ -2973,12 +3621,21 @@ lot of {Linux} into your technology!!!"
 ,note="\url{http://lttng.org/urcu}"
 ,annotation={
 >>>>>>> v3.18
+=======
+,note="\url{http://lttng.org/urcu}"
+,annotation={
+>>>>>>> v3.18
 	Mathieu Desnoyers's user-space RCU implementation.
 	git://lttng.org/userspace-rcu.git
 	http://lttng.org/cgi-bin/gitweb.cgi?p=userspace-rcu.git
 	http://lttng.org/urcu
 <<<<<<< HEAD
+<<<<<<< HEAD
 "
+=======
+	http://lkml.org/lkml/2009/2/5/572
+}
+>>>>>>> v3.18
 =======
 	http://lkml.org/lkml/2009/2/5/572
 }
@@ -2995,10 +3652,13 @@ lot of {Linux} into your technology!!!"
 \url{http://lwn.net/Articles/323929/}
 [Viewed March 20, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Uniprocessor assumptions allow simplified RCU implementation.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Uniprocessor assumptions allow simplified RCU implementation.
 }
@@ -3017,6 +3677,9 @@ lot of {Linux} into your technology!!!"
 	Distributed hash table with transactions, using elliptic
 	hash functions to distribute data.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3030,9 +3693,15 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2009/6/25/306}
 [Viewed August 16, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First posting of expedited RCU to be accepted into -tip.
 "
+=======
+,annotation={
+	First posting of expedited RCU to be accepted into -tip.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	First posting of expedited RCU to be accepted into -tip.
@@ -3050,6 +3719,7 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2009/7/23/294}
 [Viewed August 15, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	First posting of simple and fast preemptable RCU.
 "
@@ -3057,17 +3727,23 @@ lot of {Linux} into your technology!!!"
 
 @InProceedings{JoshTriplett2009RPHash
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	First posting of simple and fast preemptable RCU.
 }
 }
 
 @unpublished{JoshTriplett2009RPHash
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ,Author="Josh Triplett"
 ,Title="Scalable concurrent hash tables via relativistic programming"
 ,month="September"
 ,year="2009"
+<<<<<<< HEAD
 <<<<<<< HEAD
 ,booktitle="Linux Plumbers Conference 2009"
 ,annotation="
@@ -3075,11 +3751,16 @@ lot of {Linux} into your technology!!!"
 	See also JoshTriplett2010RPHash
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="Linux Plumbers Conference presentation"
 ,annotation={
 	RP fun with hash tables.
 	Superseded by JoshTriplett2010RPHash
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3106,9 +3787,15 @@ lot of {Linux} into your technology!!!"
 \url{http://wiki.cs.pdx.edu/rp/}
 [Viewed December 9, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Main Relativistic Programming Wiki.
 "
+=======
+,annotation={
+	Main Relativistic Programming Wiki.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Main Relativistic Programming Wiki.
@@ -3138,9 +3825,15 @@ lot of {Linux} into your technology!!!"
 \url{http://paulmck.livejournal.com/14639.html}
 [Viewed June 4, 2010]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Day-one bug in Tree RCU that took forever to track down.
 "
+=======
+,annotation={
+	Day-one bug in Tree RCU that took forever to track down.
+}
+>>>>>>> v3.18
 =======
 ,annotation={
 	Day-one bug in Tree RCU that took forever to track down.
@@ -3157,15 +3850,21 @@ lot of {Linux} into your technology!!!"
 \url{http://lkml.org/lkml/2009/10/18/129}
 [Viewed December 29, 2009]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Mathieu proposed defer_rcu() with fixed-size per-thread pool
 	of RCU callbacks.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Mathieu proposed defer_rcu() with fixed-size per-thread pool
 	of RCU callbacks.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3176,15 +3875,21 @@ lot of {Linux} into your technology!!!"
 ,year="2009"
 ,note="Submitted to IEEE TPDS"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	OOMem model for Mathieu's user-level RCU mechanical proof of
 	correctness.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	OOMem model for Mathieu's user-level RCU mechanical proof of
 	correctness.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3194,8 +3899,13 @@ lot of {Linux} into your technology!!!"
 ,month="December"
 ,year="2010"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,url=\url{http://www.computer.org/csdl/trans/td/2012/02/ttd2012020375-abs.html}
 ,annotation="
+=======
+,url={\url{http://www.computer.org/csdl/trans/td/2012/02/ttd2012020375-abs.html}}
+,annotation={
+>>>>>>> v3.18
 =======
 ,url={\url{http://www.computer.org/csdl/trans/td/2012/02/ttd2012020375-abs.html}}
 ,annotation={
@@ -3207,7 +3917,11 @@ lot of {Linux} into your technology!!!"
 	http://www.rdrop.com/users/paulmck/RCU/urcu-supp-accepted.2011.08.30a.pdf
 	Superseded by MathieuDesnoyers2012URCU.
 <<<<<<< HEAD
+<<<<<<< HEAD
 "
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -3227,7 +3941,12 @@ lot of {Linux} into your technology!!!"
 ,annotation={
 	Uses RCU to protect metadata used in dynamic analysis.
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -3244,15 +3963,21 @@ lot of {Linux} into your technology!!!"
 \url{http://www.rdrop.com/users/paulmck/RCU/SimplicityThruOptimization.2010.01.21f.pdf}
 [Viewed October 10, 2010]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	TREE_PREEMPT_RCU optimizations greatly simplified the old
 	PREEMPT_RCU implementation.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	TREE_PREEMPT_RCU optimizations greatly simplified the old
 	PREEMPT_RCU implementation.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3263,6 +3988,7 @@ lot of {Linux} into your technology!!!"
 ,year="2010"
 ,day="1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{https://lwn.net/Articles/371986/}
 [Viewed June 4, 2010]"
@@ -3270,11 +3996,16 @@ lot of {Linux} into your technology!!!"
 	CONFIG_PROVE_RCU, or at least an early version.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{https://lwn.net/Articles/371986/}"
 ,annotation={
 	CONFIG_PROVE_RCU, or at least an early version.
 	[Viewed June 4, 2010]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3287,15 +4018,21 @@ lot of {Linux} into your technology!!!"
 \url{http://www.mail-archive.com/kvm@vger.kernel.org/msg28640.html}
 [Viewed March 20, 2010]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	Use of RCU permits KVM to increase the size of guest OSes from
 	16 CPUs to 64 CPUs.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	Use of RCU permits KVM to increase the size of guest OSes from
 	16 CPUs to 64 CPUs.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3306,6 +4043,7 @@ lot of {Linux} into your technology!!!"
 ,year="2010"
 ,note="Available:
 <<<<<<< HEAD
+<<<<<<< HEAD
 \url{http://kerneltrap.com/mailarchive/linux-netdev/2010/2/26/6270589}
 [Viewed March 20, 2011]"
 ,annotation={
@@ -3313,6 +4051,8 @@ lot of {Linux} into your technology!!!"
 	resizable hash tables.
 }}
 =======
+=======
+>>>>>>> v3.18
 \url{http://thread.gmane.org/gmane.linux.network/153338}
 [Viewed June 9, 2014]"
 ,annotation={
@@ -3331,6 +4071,9 @@ lot of {Linux} into your technology!!!"
 	http://www.filesystems.org/docs/abhinav-thesis/abhinav_thesis.pdf
 }
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 @article{JoshTriplett2010RPHash
@@ -3345,7 +4088,12 @@ lot of {Linux} into your technology!!!"
 	RP fun with hash tables.
 	http://portal.acm.org/citation.cfm?id=1842733.1842750
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -3358,6 +4106,7 @@ lot of {Linux} into your technology!!!"
 ,day="8"
 ,year="2010"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://lwn.net/Articles/418853/}
 [Viewed December 8, 2010]"
@@ -3365,11 +4114,16 @@ lot of {Linux} into your technology!!!"
 	Includes updated software-engineering features.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://lwn.net/Articles/418853/}"
 ,annotation={
 	Includes updated software-engineering features.
 	[Viewed December 8, 2010]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3386,7 +4140,12 @@ lot of {Linux} into your technology!!!"
 	Drives quiescent-state detection from RCU read-side primitives,
 	in a manner roughly similar to that of Jim Houston.
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -3411,7 +4170,12 @@ lot of {Linux} into your technology!!!"
 	d_lock on every component lookup. So I'm seeing improvements of 30-50%
 	on some seriously pathname-lookup intensive loads."
 <<<<<<< HEAD
+<<<<<<< HEAD
 }}
+=======
+}
+}
+>>>>>>> v3.18
 =======
 }
 }
@@ -3450,7 +4214,11 @@ lot of {Linux} into your technology!!!"
 ,month="May"
 ,pages="34"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
+=======
+,annotation={
+>>>>>>> v3.18
 =======
 ,annotation={
 >>>>>>> v3.18
@@ -3459,7 +4227,11 @@ lot of {Linux} into your technology!!!"
 	readers to confine themselves to the desired snapshot of the
 	data structure.
 <<<<<<< HEAD
+<<<<<<< HEAD
 "
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -3474,7 +4246,11 @@ lot of {Linux} into your technology!!!"
 ,pages = {145--158}
 ,numpages = {14}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,url={http://www.usenix.org/event/atc11/tech/final_files/atc11_proceedings.pdf}
+=======
+,url={http://www.usenix.org/event/atc11/tech/final_files/Triplett.pdf}
+>>>>>>> v3.18
 =======
 ,url={http://www.usenix.org/event/atc11/tech/final_files/Triplett.pdf}
 >>>>>>> v3.18
@@ -3489,6 +4265,7 @@ lot of {Linux} into your technology!!!"
 ,day="27"
 ,year="2011"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,note="Available:
 \url{http://lwn.net/Articles/453002/}
 [Viewed July 27, 2011]"
@@ -3496,18 +4273,27 @@ lot of {Linux} into your technology!!!"
 	Analysis of the RCU trainwreck in Linux kernel 3.0.
 "
 =======
+=======
+>>>>>>> v3.18
 ,note="\url{http://lwn.net/Articles/453002/}"
 ,annotation={
 	Analysis of the RCU trainwreck in Linux kernel 3.0.
 	[Viewed July 27, 2011]
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 @unpublished{NeilBrown2011MeetTheLockers
 ,Author="Neil Brown"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,Title="Meet the Lockers"
+=======
+,Title="Meet the {Lockers}"
+>>>>>>> v3.18
 =======
 ,Title="Meet the {Lockers}"
 >>>>>>> v3.18
@@ -3518,11 +4304,14 @@ lot of {Linux} into your technology!!!"
 \url{http://lwn.net/Articles/453685/}
 [Viewed September 2, 2011]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 ,annotation="
 	The Locker family as an analogy for locking, reference counting,
 	RCU, and seqlock.
 "
 =======
+=======
+>>>>>>> v3.18
 ,annotation={
 	The Locker family as an analogy for locking, reference counting,
 	RCU, and seqlock.
@@ -3559,6 +4348,9 @@ lot of {Linux} into your technology!!!"
 	updater needs to wait for a grace period between the individual
 	updates.
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3580,7 +4372,10 @@ lot of {Linux} into your technology!!!"
 	http://www.rdrop.com/users/paulmck/RCU/urcu-main-accepted.2011.08.30a.pdf
 	http://www.rdrop.com/users/paulmck/RCU/urcu-supp-accepted.2011.08.30a.pdf
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	http://www.computer.org/cms/Computer.org/dl/trans/td/2012/02/extras/ttd2012020375s.pdf
 }
 }
@@ -3726,6 +4521,9 @@ lot of {Linux} into your technology!!!"
 ,note="\url{http://lwn.net/Articles/541037/}"
 ,annotation={
 	Getting rid of TINY_PREEMPT_RCU.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 }

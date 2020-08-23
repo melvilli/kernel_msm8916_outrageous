@@ -19,6 +19,10 @@ unsigned long saved_max_pfn;
  */
 unsigned long long elfcorehdr_addr = ELFCORE_ADDR_MAX;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(elfcorehdr_addr);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(elfcorehdr_addr);
 >>>>>>> v3.18

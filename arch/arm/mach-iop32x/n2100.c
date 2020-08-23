@@ -31,6 +31,10 @@
 #include <linux/reboot.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -45,6 +49,10 @@
 #include <asm/pgtable.h>
 #include <mach/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio-iop32x.h"
+>>>>>>> v3.18
 =======
 #include "gpio-iop32x.h"
 >>>>>>> v3.18
@@ -297,9 +305,12 @@ static void n2100_power_off(void)
 static void n2100_restart(enum reboot_mode mode, const char *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_line_set(N2100_HARDWARE_RESET, GPIO_LOW);
 	gpio_line_config(N2100_HARDWARE_RESET, GPIO_OUT);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = gpio_direction_output(N2100_HARDWARE_RESET, 0);
@@ -308,6 +319,9 @@ static void n2100_restart(enum reboot_mode mode, const char *cmd)
 		return;
 	}
 	/* Wait for reset to happen */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (1)
 		;
@@ -319,7 +333,11 @@ static struct timer_list power_button_poll_timer;
 static void power_button_poll(unsigned long dummy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_line_get(N2100_POWER_BUTTON) == 0) {
+=======
+	if (gpio_get_value(N2100_POWER_BUTTON) == 0) {
+>>>>>>> v3.18
 =======
 	if (gpio_get_value(N2100_POWER_BUTTON) == 0) {
 >>>>>>> v3.18
@@ -332,10 +350,13 @@ static void power_button_poll(unsigned long dummy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void __init n2100_init_machine(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static int __init n2100_request_gpios(void)
 {
 	int ret;
@@ -367,6 +388,9 @@ device_initcall(n2100_request_gpios);
 static void __init n2100_init_machine(void)
 {
 	register_iop32x_gpio();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&iop3xx_i2c0_device);
 	platform_device_register(&n2100_flash_device);
@@ -379,11 +403,14 @@ static void __init n2100_init_machine(void)
 
 	pm_power_off = n2100_power_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	init_timer(&power_button_poll_timer);
 	power_button_poll_timer.function = power_button_poll;
 	power_button_poll_timer.expires = jiffies + (HZ / 10);
 	add_timer(&power_button_poll_timer);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

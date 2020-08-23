@@ -8,8 +8,11 @@ static void pci_free_resources(struct pci_dev *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  	msi_remove_pci_irq_vectors(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_cleanup_rom(dev);
@@ -28,7 +31,11 @@ static void pci_stop_dev(struct pci_dev *dev)
 		pci_proc_detach_device(dev);
 		pci_remove_sysfs_dev_files(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device_del(&dev->dev);
+=======
+		device_release_driver(&dev->dev);
+>>>>>>> v3.18
 =======
 		device_release_driver(&dev->dev);
 >>>>>>> v3.18
@@ -42,12 +49,18 @@ static void pci_stop_dev(struct pci_dev *dev)
 static void pci_destroy_dev(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!dev->dev.kobj.parent)
 		return;
 
 	device_del(&dev->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	down_write(&pci_bus_sem);
 	list_del(&dev->bus_list);
@@ -128,7 +141,10 @@ void pci_stop_and_remove_bus_device(struct pci_dev *dev)
 EXPORT_SYMBOL(pci_stop_and_remove_bus_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void pci_stop_and_remove_bus_device_locked(struct pci_dev *dev)
 {
 	pci_lock_rescan_remove();
@@ -137,6 +153,9 @@ void pci_stop_and_remove_bus_device_locked(struct pci_dev *dev)
 }
 EXPORT_SYMBOL_GPL(pci_stop_and_remove_bus_device_locked);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pci_stop_root_bus(struct pci_bus *bus)
 {
@@ -153,7 +172,11 @@ void pci_stop_root_bus(struct pci_bus *bus)
 
 	/* stop the host bridge */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_del(&host_bridge->dev);
+=======
+	device_release_driver(&host_bridge->dev);
+>>>>>>> v3.18
 =======
 	device_release_driver(&host_bridge->dev);
 >>>>>>> v3.18
@@ -176,7 +199,11 @@ void pci_remove_root_bus(struct pci_bus *bus)
 
 	/* remove the host bridge */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_device(&host_bridge->dev);
+=======
+	device_unregister(&host_bridge->dev);
+>>>>>>> v3.18
 =======
 	device_unregister(&host_bridge->dev);
 >>>>>>> v3.18

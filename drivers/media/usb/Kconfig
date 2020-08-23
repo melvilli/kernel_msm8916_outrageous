@@ -18,7 +18,11 @@ source "drivers/media/usb/zr364xx/Kconfig"
 source "drivers/media/usb/stkwebcam/Kconfig"
 source "drivers/media/usb/s2255/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/media/usb/sn9c102/Kconfig"
+=======
+source "drivers/media/usb/usbtv/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/media/usb/usbtv/Kconfig"
 >>>>>>> v3.18
@@ -32,6 +36,10 @@ source "drivers/media/usb/tlg2300/Kconfig"
 source "drivers/media/usb/usbvision/Kconfig"
 source "drivers/media/usb/stk1160/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/media/usb/go7007/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/media/usb/go7007/Kconfig"
 >>>>>>> v3.18
@@ -54,6 +62,10 @@ source "drivers/media/usb/ttusb-dec/Kconfig"
 source "drivers/media/usb/siano/Kconfig"
 source "drivers/media/usb/b2c2/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/media/usb/as102/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/media/usb/as102/Kconfig"
 >>>>>>> v3.18
@@ -65,7 +77,10 @@ source "drivers/media/usb/em28xx/Kconfig"
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 if MEDIA_SDR_SUPPORT
 	comment "Software defined radio USB devices"
 source "drivers/media/usb/airspy/Kconfig"
@@ -73,6 +88,9 @@ source "drivers/media/usb/hackrf/Kconfig"
 source "drivers/media/usb/msi2500/Kconfig"
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif #MEDIA_USB_SUPPORT
 endif #USB

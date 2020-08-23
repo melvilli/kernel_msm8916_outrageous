@@ -7,6 +7,11 @@
  * Copyright 2000 Paul Mackerras.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Adapted for 64 bit little endian images by Andrew Tauferner.
+ *
+>>>>>>> v3.18
 =======
  * Adapted for 64 bit little endian images by Andrew Tauferner.
  *
@@ -61,6 +66,7 @@ unsigned int rpanote[N_RPA_DESCR] = {
 #define ROUNDUP(len)	(((len) + 3) & ~3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char buf[512];
 
 #define GET_16BE(off)	((buf[off] << 8) + (buf[(off)+1]))
@@ -78,6 +84,8 @@ unsigned char buf[512];
 #define E_PHNUM		44
 #define E_HSIZE		52	/* size of ELF header */
 =======
+=======
+>>>>>>> v3.18
 unsigned char buf[1024];
 #define ELFDATA2LSB     1
 #define ELFDATA2MSB     2
@@ -121,6 +129,9 @@ static int e_class = ELFCLASS32;
 #define E_PHENTSIZE	(e_class == ELFCLASS32 ? 42 : 54)
 #define E_PHNUM		(e_class == ELFCLASS32 ? 44 : 56)
 #define E_HSIZE		(e_class == ELFCLASS32 ? 52 : 64)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define EI_MAGIC	0	/* offsets in E_IDENT area */
@@ -128,6 +139,7 @@ static int e_class = ELFCLASS32;
 #define EI_DATA		5
 
 #define PH_TYPE		0	/* ELF program header */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PH_OFFSET	4
 #define PH_FILESZ	16
@@ -138,12 +150,17 @@ static int e_class = ELFCLASS32;
 #define ELFCLASS32	1
 #define ELFDATA2MSB	2
 =======
+=======
+>>>>>>> v3.18
 #define PH_OFFSET	(e_class == ELFCLASS32 ? 4 : 8)
 #define PH_FILESZ	(e_class == ELFCLASS32 ? 16 : 32)
 #define PH_HSIZE	(e_class == ELFCLASS32 ? 32 : 56)
 
 #define PT_NOTE		4	/* Program header type = note */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 unsigned char elf_magic[4] = { 0x7f, 'E', 'L', 'F' };
@@ -153,8 +170,13 @@ main(int ac, char **av)
 {
 	int fd, n, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ph, ps, np;
 	int nnote, nnote2, ns;
+=======
+	unsigned long ph, ps, np;
+	long nnote, nnote2, ns;
+>>>>>>> v3.18
 =======
 	unsigned long ph, ps, np;
 	long nnote, nnote2, ns;
@@ -180,6 +202,7 @@ main(int ac, char **av)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (n < E_HSIZE || memcmp(&buf[E_IDENT+EI_MAGIC], elf_magic, 4) != 0)
 		goto notelf;
 
@@ -194,6 +217,8 @@ main(int ac, char **av)
 	ps = GET_16BE(E_PHENTSIZE);
 	np = GET_16BE(E_PHNUM);
 =======
+=======
+>>>>>>> v3.18
 	if (memcmp(&buf[E_IDENT+EI_MAGIC], elf_magic, 4) != 0)
 		goto notelf;
 	e_class = buf[E_IDENT+EI_CLASS];
@@ -208,6 +233,9 @@ main(int ac, char **av)
 	ph = (e_class == ELFCLASS32 ? GET_32(E_PHOFF) : GET_64(E_PHOFF));
 	ps = GET_16(E_PHENTSIZE);
 	np = GET_16(E_PHNUM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ph < E_HSIZE || ps < PH_HSIZE || np < 1)
 		goto notelf;
@@ -216,7 +244,11 @@ main(int ac, char **av)
 
 	for (i = 0; i < np; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (GET_32BE(ph + PH_TYPE) == PT_NOTE) {
+=======
+		if (GET_32(ph + PH_TYPE) == PT_NOTE) {
+>>>>>>> v3.18
 =======
 		if (GET_32(ph + PH_TYPE) == PT_NOTE) {
 >>>>>>> v3.18
@@ -235,6 +267,7 @@ main(int ac, char **av)
 	/* fill in the program header entry */
 	ns = ph + 2 * ps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PUT_32BE(ph + PH_TYPE, PT_NOTE);
 	PUT_32BE(ph + PH_OFFSET, ns);
 	PUT_32BE(ph + PH_FILESZ, nnote);
@@ -245,6 +278,8 @@ main(int ac, char **av)
 	PUT_32BE(ns + 4, N_DESCR * 4);
 	PUT_32BE(ns + 8, 0x1275);
 =======
+=======
+>>>>>>> v3.18
 	PUT_32(ph + PH_TYPE, PT_NOTE);
 	if (e_class == ELFCLASS32)
 		PUT_32(ph + PH_OFFSET, ns);
@@ -261,6 +296,9 @@ main(int ac, char **av)
 	PUT_32(ns, strlen(arch) + 1);
 	PUT_32(ns + 4, N_DESCR * 4);
 	PUT_32(ns + 8, 0x1275);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	strcpy((char *) &buf[ns + 12], arch);
 	ns += 12 + strlen(arch) + 1;
@@ -269,6 +307,7 @@ main(int ac, char **av)
 
 	/* fill in the second program header entry and the RPA note area */
 	ph += ps;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PUT_32BE(ph + PH_TYPE, PT_NOTE);
 	PUT_32BE(ph + PH_OFFSET, ns);
@@ -279,6 +318,8 @@ main(int ac, char **av)
 	PUT_32BE(ns + 4, sizeof(rpanote));
 	PUT_32BE(ns + 8, 0x12759999);
 =======
+=======
+>>>>>>> v3.18
 	PUT_32(ph + PH_TYPE, PT_NOTE);
 	if (e_class == ELFCLASS32)
 		PUT_32(ph + PH_OFFSET, ns);
@@ -294,6 +335,9 @@ main(int ac, char **av)
 	PUT_32(ns, strlen(rpaname) + 1);
 	PUT_32(ns + 4, sizeof(rpanote));
 	PUT_32(ns + 8, 0x12759999);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	strcpy((char *) &buf[ns + 12], rpaname);
 	ns += 12 + ROUNDUP(strlen(rpaname) + 1);
@@ -302,7 +346,11 @@ main(int ac, char **av)
 
 	/* Update the number of program headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PUT_16BE(E_PHNUM, np + 2);
+=======
+	PUT_16(E_PHNUM, np + 2);
+>>>>>>> v3.18
 =======
 	PUT_16(E_PHNUM, np + 2);
 >>>>>>> v3.18

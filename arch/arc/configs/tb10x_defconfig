@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_CROSS_COMPILE="arc-elf32-"
+=======
+CONFIG_CROSS_COMPILE="arc-linux-uclibc-"
+>>>>>>> v3.18
 =======
 CONFIG_CROSS_COMPILE="arc-linux-uclibc-"
 >>>>>>> v3.18

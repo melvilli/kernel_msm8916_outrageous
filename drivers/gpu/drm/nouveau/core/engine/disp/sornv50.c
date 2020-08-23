@@ -23,8 +23,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/os.h>
 #include <core/class.h>
+=======
+#include <core/client.h>
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <core/client.h>
 #include <nvif/unpack.h>
@@ -39,11 +45,14 @@
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv50_sor_power(struct nv50_disp_priv *priv, int or, u32 data)
 {
 	const u32 stat = data & NV50_DISP_SOR_PWR_STATE;
 	const u32 soff = (or * 0x800);
 =======
+=======
+>>>>>>> v3.18
 nv50_sor_power(NV50_DISP_MTHD_V1)
 {
 	union {
@@ -61,6 +70,9 @@ nv50_sor_power(NV50_DISP_MTHD_V1)
 	} else
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wait(priv, 0x61c004 + soff, 0x80000000, 0x00000000);
 	nv_mask(priv, 0x61c004 + soff, 0x80000001, 0x80000000 | stat);
@@ -68,6 +80,7 @@ nv50_sor_power(NV50_DISP_MTHD_V1)
 	nv_wait(priv, 0x61c030 + soff, 0x10000000, 0x00000000);
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int
@@ -104,5 +117,7 @@ nv50_sor_mthd(struct nouveau_object *object, u32 mthd, void *args, u32 size)
 
 	return ret;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

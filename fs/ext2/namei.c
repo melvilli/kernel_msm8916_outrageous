@@ -422,6 +422,10 @@ const struct inode_operations ext2_dir_inode_operations = {
 	.setattr	= ext2_setattr,
 	.get_acl	= ext2_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl	= ext2_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl	= ext2_set_acl,
 >>>>>>> v3.18
@@ -438,6 +442,10 @@ const struct inode_operations ext2_special_inode_operations = {
 	.setattr	= ext2_setattr,
 	.get_acl	= ext2_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl	= ext2_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl	= ext2_set_acl,
 >>>>>>> v3.18

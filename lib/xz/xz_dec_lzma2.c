@@ -1044,6 +1044,11 @@ XZ_EXTERN enum xz_ret xz_dec_lzma2_run(struct xz_dec_lzma2 *s,
 			s->lzma2.sequence = SEQ_LZMA_PREPARE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Fall through */
+
+>>>>>>> v3.18
 =======
 		/* Fall through */
 
@@ -1059,6 +1064,11 @@ XZ_EXTERN enum xz_ret xz_dec_lzma2_run(struct xz_dec_lzma2 *s,
 			s->lzma2.sequence = SEQ_LZMA_RUN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Fall through */
+
+>>>>>>> v3.18
 =======
 		/* Fall through */
 

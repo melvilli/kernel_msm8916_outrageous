@@ -154,7 +154,10 @@ config RTC_DRV_88PM80X
 	  will be called rtc-88pm80x.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_AS3722
 	tristate "ams AS3722 RTC driver"
 	depends on MFD_AS3722
@@ -165,6 +168,9 @@ config RTC_DRV_AS3722
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-as3722.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_DS1307
 	tristate "Dallas/Maxim DS1307/37/38/39/40, ST M41T00, EPSON RX-8025"
@@ -216,7 +222,10 @@ config RTC_DRV_DS3232
 	  will be called rtc-ds3232.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_HYM8563
 	tristate "Haoyu Microelectronics HYM8563"
 	depends on I2C && OF
@@ -228,6 +237,9 @@ config RTC_DRV_HYM8563
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-hym8563.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_LP8788
 	tristate "TI LP8788 RTC driver"
@@ -295,7 +307,10 @@ config RTC_DRV_MAX77686
 	  will be called rtc-max77686.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_RK808
 	tristate "Rockchip RK808 RTC"
 	depends on MFD_RK808
@@ -316,6 +331,9 @@ config RTC_DRV_MAX77802
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-max77802.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_RS5C372
 	tristate "Ricoh R2025S/D, RS5C372A/B, RV5C386, RV5C387A"
@@ -345,7 +363,10 @@ config RTC_DRV_ISL12022
 	  will be called rtc-isl12022.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_ISL12057
        depends on I2C
        select REGMAP_I2C
@@ -357,6 +378,9 @@ config RTC_DRV_ISL12057
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-isl12057.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_X1205
 	tristate "Xicor/Intersil X1205"
@@ -378,7 +402,10 @@ config RTC_DRV_PALMAS
 	  will be called rtc-palma.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_PCF2127
 	tristate "NXP PCF2127"
 	help
@@ -388,6 +415,9 @@ config RTC_DRV_PCF2127
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-pcf2127.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_PCF8523
 	tristate "NXP PCF8523"
@@ -409,7 +439,10 @@ config RTC_DRV_PCF8563
 	  will be called rtc-pcf8563.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_PCF85063
 	tristate "nxp PCF85063"
 	help
@@ -418,6 +451,9 @@ config RTC_DRV_PCF85063
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-pcf85063.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_PCF8583
 	tristate "Philips PCF8583"
@@ -433,7 +469,11 @@ config RTC_DRV_PCF8583
 
 config RTC_DRV_M41T80
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "ST M41T62/65/M41T80/81/82/83/84/85/87"
+=======
+	tristate "ST M41T62/65/M41T80/81/82/83/84/85/87 and compatible"
+>>>>>>> v3.18
 =======
 	tristate "ST M41T62/65/M41T80/81/82/83/84/85/87 and compatible"
 >>>>>>> v3.18
@@ -442,7 +482,11 @@ config RTC_DRV_M41T80
 	  and M41T80 RTC chips series. Currently, the following chips are
 	  supported: M41T62, M41T65, M41T80, M41T81, M41T82, M41T83, M41ST84,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  M41ST85, and M41ST87.
+=======
+	  M41ST85, M41ST87, and MicroCrystal RV4162.
+>>>>>>> v3.18
 =======
 	  M41ST85, M41ST87, and MicroCrystal RV4162.
 >>>>>>> v3.18
@@ -584,7 +628,10 @@ config RTC_DRV_RV3029C2
 	  will be called rtc-rv3029c2.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_S5M
 	tristate "Samsung S2M/S5M series"
 	depends on MFD_SEC_CORE
@@ -595,6 +642,9 @@ config RTC_DRV_S5M
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-s5m.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # I2C
 
@@ -631,7 +681,10 @@ config RTC_DRV_DS1305
 	  will be called rtc-ds1305.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_DS1343
 	select REGMAP_SPI
 	tristate "Dallas/Maxim DS1343/DS1344"
@@ -655,6 +708,9 @@ config RTC_DRV_DS1347
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-ds1347.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_DS1390
 	tristate "Dallas/Maxim DS1390/93/94"
@@ -722,7 +778,10 @@ config RTC_DRV_RX4581
 	  will be called rtc-rx4581.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_MCP795
 	tristate "Microchip MCP795"
 	help
@@ -731,6 +790,9 @@ config RTC_DRV_MCP795
 	  This driver can also be built as a module. If so the module
 	  will be called rtc-mcp795.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # SPI_MASTER
 
@@ -743,7 +805,11 @@ comment "Platform RTC drivers"
 config RTC_DRV_CMOS
 	tristate "PC-style 'CMOS'"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86 || ALPHA || ARM || M32R || ATARI || PPC || MIPS || SPARC64
+=======
+	depends on X86 || ARM || M32R || PPC || MIPS || SPARC64
+>>>>>>> v3.18
 =======
 	depends on X86 || ARM || M32R || PPC || MIPS || SPARC64
 >>>>>>> v3.18
@@ -764,7 +830,10 @@ config RTC_DRV_CMOS
 	  will be called rtc-cmos.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_ALPHA
 	bool "Alpha PC-style CMOS"
 	depends on ALPHA
@@ -773,6 +842,9 @@ config RTC_DRV_ALPHA
 	  Direct support for the real-time clock found on every Alpha
 	  system, specifically MC146818 compatibles.  If in doubt, say Y.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_VRTC
 	tristate "Virtual RTC for Intel MID platforms"
@@ -795,6 +867,10 @@ config RTC_DRV_DS1216
 config RTC_DRV_DS1286
 	tristate "Dallas DS1286"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -810,6 +886,10 @@ config RTC_DRV_DS1302
 config RTC_DRV_DS1511
 	tristate "Dallas DS1511"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -823,6 +903,10 @@ config RTC_DRV_DS1511
 config RTC_DRV_DS1553
 	tristate "Maxim/Dallas DS1553"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -836,6 +920,10 @@ config RTC_DRV_DS1553
 config RTC_DRV_DS1742
 	tristate "Maxim/Dallas DS1742/1743"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -847,7 +935,10 @@ config RTC_DRV_DS1742
 	  will be called rtc-ds1742.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_DS2404
 	tristate "Maxim/Dallas DS2404"
 	help
@@ -857,6 +948,9 @@ config RTC_DRV_DS2404
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-ds2404.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_DA9052
 	tristate "Dialog DA9052/DA9053 RTC"
@@ -876,10 +970,13 @@ config RTC_DRV_DA9055
 	  will be called rtc-da9055
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RTC_DRV_EFI
 	tristate "EFI RTC"
 	depends on IA64
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_DA9063
 	tristate "Dialog Semiconductor DA9063 RTC"
 	depends on MFD_DA9063
@@ -893,6 +990,9 @@ config RTC_DRV_DA9063
 config RTC_DRV_EFI
 	tristate "EFI RTC"
 	depends on EFI && !X86
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  If you say yes here you will get support for the EFI
@@ -904,6 +1004,10 @@ config RTC_DRV_EFI
 config RTC_DRV_STK17TA8
 	tristate "Simtek STK17TA8"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -926,6 +1030,10 @@ config RTC_DRV_M48T86
 config RTC_DRV_M48T35
 	tristate "ST M48T35"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -939,6 +1047,10 @@ config RTC_DRV_M48T35
 config RTC_DRV_M48T59
 	tristate "ST M48T59/M48T08/M48T02"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -955,6 +1067,10 @@ config RTC_DRV_M48T59
 config RTC_DRV_MSM6242
 	tristate "Oki MSM6242"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -968,6 +1084,10 @@ config RTC_DRV_MSM6242
 config RTC_DRV_BQ4802
 	tristate "TI BQ4802"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -981,6 +1101,10 @@ config RTC_DRV_BQ4802
 config RTC_DRV_RP5C01
 	tristate "Ricoh RP5C01"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -1002,6 +1126,7 @@ config RTC_DRV_V3020
 	  will be called rtc-v3020.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RTC_DRV_DS2404
 	tristate "Dallas DS2404"
 	help
@@ -1011,6 +1136,8 @@ config RTC_DRV_DS2404
 	  This driver can also be built as a module. If so, the module
 	  will be called rtc-ds2404.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config RTC_DRV_WM831X
@@ -1075,6 +1202,7 @@ config RTC_DRV_NUC900
 comment "on-CPU RTC drivers"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RTC_SECURE_TIME_SUPPORT
         bool "Support for secure time on Qualcomm Chipsets"
         depends on RTC_DRV_MSM = y
@@ -1091,6 +1219,8 @@ config RTC_ASYNC_MODEM_SUPPORT
 	 Say yes here to have the system time updated if there is
 	 an asynchronous MODEM boot.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config RTC_DRV_DAVINCI
@@ -1318,7 +1448,10 @@ config RTC_DRV_SUN4V
 	  based RTC on SUN4V systems.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_SUN6I
 	tristate "Allwinner A31 RTC"
 	depends on MACH_SUN6I || MACH_SUN8I
@@ -1333,6 +1466,9 @@ config RTC_DRV_SUNXI
 	  If you say Y here you will get support for the RTC found on
 	  Allwinner A10/A20.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RTC_DRV_STARFIRE
 	bool "Starfire RTC"
@@ -1351,7 +1487,11 @@ config RTC_DRV_TX4939
 config RTC_DRV_MV
 	tristate "Marvell SoC RTC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_KIRKWOOD || ARCH_DOVE || ARCH_MVEBU
+=======
+	depends on ARCH_DOVE || ARCH_MVEBU
+>>>>>>> v3.18
 =======
 	depends on ARCH_DOVE || ARCH_MVEBU
 >>>>>>> v3.18
@@ -1440,7 +1580,11 @@ config RTC_DRV_LPC32XX
 config RTC_DRV_PM8XXX
 	tristate "Qualcomm PMIC8XXX RTC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MFD_PM8XXX
+=======
+	depends on MFD_PM8XXX || MFD_SPMI_PMIC
+>>>>>>> v3.18
 =======
 	depends on MFD_PM8XXX || MFD_SPMI_PMIC
 >>>>>>> v3.18
@@ -1509,6 +1653,7 @@ config RTC_DRV_SNVS
 	   will be called "rtc-snvs".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RTC_DRV_QPNP
 	tristate "Qualcomm QPNP PMIC RTC"
 	depends on SPMI && OF_SPMI && MSM_QPNP_INT
@@ -1518,6 +1663,8 @@ config RTC_DRV_QPNP
 	  To compile this driver as a module, choose M here: the
 	  module will be called qpnp-rtc.
 =======
+=======
+>>>>>>> v3.18
 config RTC_DRV_SIRFSOC
 	tristate "SiRFSOC RTC"
 	depends on ARCH_SIRF
@@ -1544,6 +1691,9 @@ config RTC_DRV_XGENE
 
 	  This driver can also be built as a module, if so, the module
 	  will be called "rtc-xgene".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 comment "HID Sensor RTC drivers"

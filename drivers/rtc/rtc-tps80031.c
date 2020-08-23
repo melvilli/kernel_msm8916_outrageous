@@ -299,11 +299,14 @@ static int tps80031_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tps80031_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
@@ -337,7 +340,10 @@ static struct platform_driver tps80031_rtc_driver = {
 	},
 	.probe	= tps80031_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= tps80031_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

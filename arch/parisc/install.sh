@@ -20,6 +20,7 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # User may have a custom install script
 
 if [ -x ~/bin/${INSTALLKERNEL} ]; then exec ~/bin/${INSTALLKERNEL} "$@"; fi
@@ -38,6 +39,8 @@ fi
 cat $2 > $4/vmlinux
 cp $3 $4/System.map
 =======
+=======
+>>>>>>> v3.18
 verify () {
 	if [ ! -f "$1" ]; then
 		echo ""                                                   1>&2
@@ -83,4 +86,7 @@ if [ -f $4/System.map-$1 ]; then
 fi
 cp $3 $4/System.map-$1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

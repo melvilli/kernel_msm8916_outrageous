@@ -24,6 +24,10 @@
 static int da9052_spi_probe(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regmap_config config;
+>>>>>>> v3.18
 =======
 	struct regmap_config config;
 >>>>>>> v3.18
@@ -45,15 +49,21 @@ static int da9052_spi_probe(struct spi_device *spi)
 	spi_set_drvdata(spi, da9052);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	da9052_regmap_config.read_flag_mask = 1;
 	da9052_regmap_config.write_flag_mask = 0;
 
 	da9052->regmap = devm_regmap_init_spi(spi, &da9052_regmap_config);
 =======
+=======
+>>>>>>> v3.18
 	config = da9052_regmap_config;
 	config.read_flag_mask = 1;
 
 	da9052->regmap = devm_regmap_init_spi(spi, &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(da9052->regmap)) {
 		ret = PTR_ERR(da9052->regmap);
@@ -83,6 +93,10 @@ static struct spi_device_id da9052_spi_id[] = {
 	{"da9053-ba", DA9053_BA},
 	{"da9053-bb", DA9053_BB},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"da9053-bc", DA9053_BC},
+>>>>>>> v3.18
 =======
 	{"da9053-bc", DA9053_BC},
 >>>>>>> v3.18

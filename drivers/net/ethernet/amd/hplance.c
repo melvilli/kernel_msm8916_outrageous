@@ -28,9 +28,15 @@
 #include "hplance.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We have 16834 bytes of RAM for the init block and buffers. This places
  * an upper limit on the number of buffers we can use. NetBSD uses 8 Rx
  * buffers and 2 Tx buffers.
+=======
+/* We have 16392 bytes of RAM for the init block and buffers. This places
+ * an upper limit on the number of buffers we can use. NetBSD uses 8 Rx
+ * buffers and 2 Tx buffers, it takes (8 + 2) * 1544 bytes.
+>>>>>>> v3.18
 =======
 /* We have 16392 bytes of RAM for the init block and buffers. This places
  * an upper limit on the number of buffers we can use. NetBSD uses 8 Rx
@@ -134,6 +140,7 @@ static void hplance_remove_one(struct dio_dev *d)
 static void hplance_init(struct net_device *dev, struct dio_dev *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         unsigned long va = (d->resource.start + DIO_VIRADDRBASE);
         struct hplance_private *lp;
         int i;
@@ -170,6 +177,8 @@ static void hplance_init(struct net_device *dev, struct dio_dev *d)
         lp->lance.rx_ring_mod_mask = RX_RING_MOD_MASK;
         lp->lance.tx_ring_mod_mask = TX_RING_MOD_MASK;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long va = (d->resource.start + DIO_VIRADDRBASE);
 	struct hplance_private *lp;
 	int i;
@@ -205,6 +214,9 @@ static void hplance_init(struct net_device *dev, struct dio_dev *d)
 	lp->lance.lance_log_tx_bufs = LANCE_LOG_TX_BUFFERS;
 	lp->lance.rx_ring_mod_mask = RX_RING_MOD_MASK;
 	lp->lance.tx_ring_mod_mask = TX_RING_MOD_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -240,6 +252,7 @@ static unsigned short hplance_readrdp(void *priv)
 static int hplance_open(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         int status;
         struct lance_private *lp = netdev_priv(dev);
 
@@ -251,6 +264,8 @@ static int hplance_open(struct net_device *dev)
 
         return 0;
 =======
+=======
+>>>>>>> v3.18
 	int status;
 	struct lance_private *lp = netdev_priv(dev);
 
@@ -261,11 +276,15 @@ static int hplance_open(struct net_device *dev)
 	out_8(lp->base + HPLANCE_STATUS, LE_IE);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int hplance_close(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         struct lance_private *lp = netdev_priv(dev);
 
@@ -273,11 +292,16 @@ static int hplance_close(struct net_device *dev)
         lance_close(dev);
         return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct lance_private *lp = netdev_priv(dev);
 
 	out_8(lp->base + HPLANCE_STATUS, 0);	/* disable interrupts at boardlevel */
 	lance_close(dev);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -289,7 +313,11 @@ static int __init hplance_init_module(void)
 static void __exit hplance_cleanup_module(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         dio_unregister_driver(&hplance_driver);
+=======
+	dio_unregister_driver(&hplance_driver);
+>>>>>>> v3.18
 =======
 	dio_unregister_driver(&hplance_driver);
 >>>>>>> v3.18

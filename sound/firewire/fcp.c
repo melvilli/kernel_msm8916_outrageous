@@ -11,6 +11,10 @@
 #include <linux/list.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -21,6 +25,10 @@
 #include "fcp.h"
 #include "lib.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "amdtp.h"
+>>>>>>> v3.18
 =======
 #include "amdtp.h"
 >>>>>>> v3.18
@@ -32,7 +40,10 @@
 #define FCP_TIMEOUT_MS	125
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int avc_general_set_sig_fmt(struct fw_unit *unit, unsigned int rate,
 			    enum avc_general_plug_dir dir,
 			    unsigned short pid)
@@ -185,6 +196,9 @@ end:
 }
 EXPORT_SYMBOL(avc_general_get_plug_info);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_SPINLOCK(transactions_lock);
 static LIST_HEAD(transactions);
@@ -194,6 +208,10 @@ enum fcp_state {
 	STATE_BUS_RESET,
 	STATE_COMPLETE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATE_DEFERRED,
+>>>>>>> v3.18
 =======
 	STATE_DEFERRED,
 >>>>>>> v3.18
@@ -208,6 +226,10 @@ struct fcp_transaction {
 	enum fcp_state state;
 	wait_queue_head_t wait;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool deferrable;
+>>>>>>> v3.18
 =======
 	bool deferrable;
 >>>>>>> v3.18
@@ -234,8 +256,11 @@ struct fcp_transaction {
  * @command and @response can point to the same buffer.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Asynchronous operation (INTERIM, NOTIFY) is not supported at the moment.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Returns the actual size of the response frame, or a negative error code.
@@ -256,6 +281,12 @@ int fcp_avc_transaction(struct fw_unit *unit,
 	init_waitqueue_head(&t.wait);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (*(const u8 *)command == 0x00 || *(const u8 *)command == 0x03)
+		t.deferrable = true;
+
+>>>>>>> v3.18
 =======
 	if (*(const u8 *)command == 0x00 || *(const u8 *)command == 0x03)
 		t.deferrable = true;
@@ -271,6 +302,7 @@ int fcp_avc_transaction(struct fw_unit *unit,
 		ret = snd_fw_transaction(t.unit, tcode,
 					 CSR_REGISTER_BASE + CSR_FCP_COMMAND,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 (void *)command, command_size);
 		if (ret < 0)
 			break;
@@ -280,6 +312,8 @@ int fcp_avc_transaction(struct fw_unit *unit,
 
 		if (t.state == STATE_COMPLETE) {
 =======
+=======
+>>>>>>> v3.18
 					 (void *)command, command_size, 0);
 		if (ret < 0)
 			break;
@@ -298,6 +332,9 @@ deferred:
 			t.state = STATE_PENDING;
 			goto deferred;
 		} else if (t.state == STATE_COMPLETE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = t.response_size;
 			break;
@@ -334,7 +371,12 @@ void fcp_bus_reset(struct fw_unit *unit)
 	list_for_each_entry(t, &transactions, list) {
 		if (t->unit == unit &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    t->state == STATE_PENDING) {
+=======
+		    (t->state == STATE_PENDING ||
+		     t->state == STATE_DEFERRED)) {
+>>>>>>> v3.18
 =======
 		    (t->state == STATE_PENDING ||
 		     t->state == STATE_DEFERRED)) {
@@ -393,11 +435,14 @@ static void fcp_response(struct fw_card *card, struct fw_request *request,
 		if (t->state == STATE_PENDING &&
 		    is_matching_response(t, data, length)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			t->state = STATE_COMPLETE;
 			t->response_size = min((unsigned int)length,
 					       t->response_size);
 			memcpy(t->response_buffer, data, t->response_size);
 =======
+=======
+>>>>>>> v3.18
 			if (t->deferrable && *(const u8 *)data == 0x0f) {
 				t->state = STATE_DEFERRED;
 			} else {
@@ -407,6 +452,9 @@ static void fcp_response(struct fw_card *card, struct fw_request *request,
 				memcpy(t->response_buffer, data,
 				       t->response_size);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			wake_up(&t->wait);
 		}

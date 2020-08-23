@@ -25,6 +25,7 @@
 
 #define GACT_TAB_MASK	15
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_common *tcf_gact_ht[GACT_TAB_MASK + 1];
 static u32 gact_idx_gen;
 static DEFINE_RWLOCK(gact_lock);
@@ -36,12 +37,18 @@ static struct tcf_hashinfo gact_hash_info = {
 };
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_GACT_PROB
 static int gact_net_rand(struct tcf_gact *gact)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!gact->tcfg_pval || net_random() % gact->tcfg_pval)
+=======
+	if (!gact->tcfg_pval || prandom_u32() % gact->tcfg_pval)
+>>>>>>> v3.18
 =======
 	if (!gact->tcfg_pval || prandom_u32() % gact->tcfg_pval)
 >>>>>>> v3.18
@@ -73,7 +80,10 @@ static int tcf_gact_init(struct net *net, struct nlattr *nla,
 	struct tc_gact *parm;
 	struct tcf_gact *gact;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret = 0;
@@ -105,6 +115,7 @@ static int tcf_gact_init(struct net *net, struct nlattr *nla,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &gact_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(parm->index, est, a, sizeof(*gact),
@@ -121,6 +132,8 @@ static int tcf_gact_init(struct net *net, struct nlattr *nla,
 
 	gact = to_gact(pc);
 =======
+=======
+>>>>>>> v3.18
 	if (!tcf_hash_check(parm->index, a, bind)) {
 		ret = tcf_hash_create(parm->index, est, a, sizeof(*gact), bind);
 		if (ret)
@@ -135,6 +148,9 @@ static int tcf_gact_init(struct net *net, struct nlattr *nla,
 	}
 
 	gact = to_gact(a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_bh(&gact->tcf_lock);
@@ -148,6 +164,7 @@ static int tcf_gact_init(struct net *net, struct nlattr *nla,
 #endif
 	spin_unlock_bh(&gact->tcf_lock);
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tcf_hash_insert(pc, &gact_hash_info);
 	return ret;
@@ -163,10 +180,15 @@ static int tcf_gact_cleanup(struct tc_action *a, int bind)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		tcf_hash_insert(a);
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tcf_gact(struct sk_buff *skb, const struct tc_action *a,
 		    struct tcf_result *res)
@@ -234,6 +256,7 @@ nla_put_failure:
 static struct tc_action_ops act_gact_ops = {
 	.kind		=	"gact",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hinfo		=	&gact_hash_info,
 	.type		=	TCA_ACT_GACT,
 	.capab		=	TCA_CAP_NONE,
@@ -245,11 +268,16 @@ static struct tc_action_ops act_gact_ops = {
 	.init		=	tcf_gact_init,
 	.walk		=	tcf_generic_walker
 =======
+=======
+>>>>>>> v3.18
 	.type		=	TCA_ACT_GACT,
 	.owner		=	THIS_MODULE,
 	.act		=	tcf_gact,
 	.dump		=	tcf_gact_dump,
 	.init		=	tcf_gact_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -265,7 +293,11 @@ static int __init gact_init_module(void)
 	pr_info("GACT probability NOT on\n");
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return tcf_register_action(&act_gact_ops);
+=======
+	return tcf_register_action(&act_gact_ops, GACT_TAB_MASK);
+>>>>>>> v3.18
 =======
 	return tcf_register_action(&act_gact_ops, GACT_TAB_MASK);
 >>>>>>> v3.18

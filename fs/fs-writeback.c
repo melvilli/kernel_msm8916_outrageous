@@ -27,6 +27,10 @@
 #include <linux/backing-dev.h>
 #include <linux/tracepoint.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -50,6 +54,10 @@ struct wb_writeback_work {
 	unsigned int range_cyclic:1;
 	unsigned int for_background:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int for_sync:1;	/* sync(2) WB_SYNC_ALL writeback */
+>>>>>>> v3.18
 =======
 	unsigned int for_sync:1;	/* sync(2) WB_SYNC_ALL writeback */
 >>>>>>> v3.18
@@ -77,7 +85,11 @@ static inline struct backing_dev_info *inode_to_bdi(struct inode *inode)
 	struct super_block *sb = inode->i_sb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strcmp(sb->s_type->name, "bdev") == 0)
+=======
+	if (sb_is_blkdev_sb(sb))
+>>>>>>> v3.18
 =======
 	if (sb_is_blkdev_sb(sb))
 >>>>>>> v3.18
@@ -100,6 +112,11 @@ static inline struct inode *wb_inode(struct list_head *head)
 #include <trace/events/writeback.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(wbc_writepage);
+
+>>>>>>> v3.18
 =======
 EXPORT_TRACEPOINT_SYMBOL_GPL(wbc_writepage);
 
@@ -281,12 +298,15 @@ static int move_expired_inodes(struct list_head *delaying_queue,
 		    inode_dirtied_after(inode, *work->older_than_this))
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sb && sb != inode->i_sb)
 			do_sb_sort = 1;
 		sb = inode->i_sb;
 		list_move(&inode->i_wb_list, &tmp);
 		moved++;
 =======
+=======
+>>>>>>> v3.18
 		list_move(&inode->i_wb_list, &tmp);
 		moved++;
 		if (sb_is_blkdev_sb(inode->i_sb))
@@ -294,6 +314,9 @@ static int move_expired_inodes(struct list_head *delaying_queue,
 		if (sb && sb != inode->i_sb)
 			do_sb_sort = 1;
 		sb = inode->i_sb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -364,7 +387,12 @@ static void __inode_wait_for_writeback(struct inode *inode)
 	while (inode->i_state & I_SYNC) {
 		spin_unlock(&inode->i_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__wait_on_bit(wqh, &wq, inode_wait, TASK_UNINTERRUPTIBLE);
+=======
+		__wait_on_bit(wqh, &wq, bit_wait,
+			      TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 		__wait_on_bit(wqh, &wq, bit_wait,
 			      TASK_UNINTERRUPTIBLE);
@@ -489,15 +517,21 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
 	 * Make sure to wait on the data before writing out the metadata.
 	 * This is important for filesystems that modify metadata on data
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * I/O completion.
 	 */
 	if (wbc->sync_mode == WB_SYNC_ALL) {
 =======
+=======
+>>>>>>> v3.18
 	 * I/O completion. We don't do it for sync(2) writeback because it has a
 	 * separate, external IO completion path and ->sync_fs for guaranteeing
 	 * inode metadata is written back correctly.
 	 */
 	if (wbc->sync_mode == WB_SYNC_ALL && !wbc->for_sync) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		int err = filemap_fdatawait(mapping);
 		if (ret == 0)
@@ -510,6 +544,7 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
 	 * write_inode()
 	 */
 	spin_lock(&inode->i_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	dirty = inode->i_state & I_DIRTY;
@@ -534,12 +569,17 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
 	spin_unlock(&inode->i_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Clear I_DIRTY_PAGES if we've written out all dirty pages */
 	if (!mapping_tagged(mapping, PAGECACHE_TAG_DIRTY))
 		inode->i_state &= ~I_DIRTY_PAGES;
 	dirty = inode->i_state & I_DIRTY;
 	inode->i_state &= ~(I_DIRTY_SYNC | I_DIRTY_DATASYNC);
 	spin_unlock(&inode->i_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Don't write the inode if only I_DIRTY_PAGES was set */
 	if (dirty & (I_DIRTY_SYNC | I_DIRTY_DATASYNC)) {
@@ -660,6 +700,10 @@ static long writeback_sb_inodes(struct super_block *sb,
 		.for_kupdate		= work->for_kupdate,
 		.for_background		= work->for_background,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.for_sync		= work->for_sync,
+>>>>>>> v3.18
 =======
 		.for_sync		= work->for_sync,
 >>>>>>> v3.18
@@ -805,7 +849,11 @@ static long __writeback_inodes_wb(struct bdi_writeback *wb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 long writeback_inodes_wb(struct bdi_writeback *wb, long nr_pages,
+=======
+static long writeback_inodes_wb(struct bdi_writeback *wb, long nr_pages,
+>>>>>>> v3.18
 =======
 static long writeback_inodes_wb(struct bdi_writeback *wb, long nr_pages,
 >>>>>>> v3.18
@@ -1049,7 +1097,11 @@ static long wb_check_old_data_flush(struct bdi_writeback *wb)
  * Retrieve work items and do the writeback they describe
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 long wb_do_writeback(struct bdi_writeback *wb, int force_wait)
+=======
+static long wb_do_writeback(struct bdi_writeback *wb)
+>>>>>>> v3.18
 =======
 static long wb_do_writeback(struct bdi_writeback *wb)
 >>>>>>> v3.18
@@ -1061,12 +1113,15 @@ static long wb_do_writeback(struct bdi_writeback *wb)
 	set_bit(BDI_writeback_running, &wb->bdi->state);
 	while ((work = get_next_work_item(bdi)) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Override sync mode, in case we must wait for completion
 		 * because this thread is exiting now.
 		 */
 		if (force_wait)
 			work->sync_mode = WB_SYNC_ALL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1118,7 +1173,11 @@ void bdi_writeback_workfn(struct work_struct *work)
 		 */
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pages_written = wb_do_writeback(wb, 0);
+=======
+			pages_written = wb_do_writeback(wb);
+>>>>>>> v3.18
 =======
 			pages_written = wb_do_writeback(wb);
 >>>>>>> v3.18
@@ -1152,10 +1211,15 @@ void wakeup_flusher_threads(long nr_pages, enum wb_reason reason)
 	struct backing_dev_info *bdi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nr_pages) {
 		nr_pages = global_page_state(NR_FILE_DIRTY) +
 				global_page_state(NR_UNSTABLE_NFS);
 	}
+=======
+	if (!nr_pages)
+		nr_pages = get_nr_dirty_pages();
+>>>>>>> v3.18
 =======
 	if (!nr_pages)
 		nr_pages = get_nr_dirty_pages();
@@ -1236,6 +1300,7 @@ void __mark_inode_dirty(struct inode *inode, int flags)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Paired with smp_mb() in __writeback_single_inode() for the
 	 * following lockless i_state test.  See there for details.
 	 */
@@ -1246,6 +1311,8 @@ void __mark_inode_dirty(struct inode *inode, int flags)
 
 	if (unlikely(block_dump > 1))
 =======
+=======
+>>>>>>> v3.18
 	 * make sure that changes are seen by all cpus before we test i_state
 	 * -- mikulas
 	 */
@@ -1256,6 +1323,9 @@ void __mark_inode_dirty(struct inode *inode, int flags)
 		return;
 
 	if (unlikely(block_dump))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		block_dump___mark_inode_dirty(inode);
 
@@ -1293,6 +1363,11 @@ void __mark_inode_dirty(struct inode *inode, int flags)
 			bdi = inode_to_bdi(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			spin_unlock(&inode->i_lock);
+			spin_lock(&bdi->wb.list_lock);
+>>>>>>> v3.18
 =======
 			spin_unlock(&inode->i_lock);
 			spin_lock(&bdi->wb.list_lock);
@@ -1312,8 +1387,11 @@ void __mark_inode_dirty(struct inode *inode, int flags)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock(&inode->i_lock);
 			spin_lock(&bdi->wb.list_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			inode->dirtied_when = jiffies;
@@ -1488,6 +1566,10 @@ void sync_inodes_sb(struct super_block *sb)
 		.done		= &done,
 		.reason		= WB_REASON_SYNC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.for_sync	= 1,
+>>>>>>> v3.18
 =======
 		.for_sync	= 1,
 >>>>>>> v3.18

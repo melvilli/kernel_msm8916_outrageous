@@ -29,7 +29,10 @@
 
 struct jz4740_hwmon {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *mem;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem *base;
@@ -70,7 +73,11 @@ static ssize_t jz4740_hwmon_read_adcin(struct device *dev,
 	mutex_lock(&hwmon->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(*completion);
+=======
+	reinit_completion(completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(completion);
 >>>>>>> v3.18
@@ -114,6 +121,10 @@ static int jz4740_hwmon_probe(struct platform_device *pdev)
 	int ret;
 	struct jz4740_hwmon *hwmon;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource *mem;
+>>>>>>> v3.18
 =======
 	struct resource *mem;
 >>>>>>> v3.18
@@ -131,6 +142,7 @@ static int jz4740_hwmon_probe(struct platform_device *pdev)
 		return hwmon->irq;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hwmon->mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!hwmon->mem) {
@@ -152,10 +164,15 @@ static int jz4740_hwmon_probe(struct platform_device *pdev)
 		return -EBUSY;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	hwmon->base = devm_ioremap_resource(&pdev->dev, mem);
 	if (IS_ERR(hwmon->base))
 		return PTR_ERR(hwmon->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	init_completion(&hwmon->read_completion);

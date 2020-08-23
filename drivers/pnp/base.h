@@ -5,7 +5,11 @@
 
 extern spinlock_t pnp_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device_attribute pnp_interface_attrs[];
+=======
+extern const struct attribute_group *pnp_dev_groups[];
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *pnp_dev_groups[];
 >>>>>>> v3.18

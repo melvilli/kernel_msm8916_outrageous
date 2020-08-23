@@ -5,6 +5,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This file describes reciprocical division.
  *
  * This optimizes the (A/B) problem, when A and B are two u32
@@ -32,6 +33,8 @@ static inline u32 reciprocal_divide(u32 A, u32 R)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
  * This algorithm is based on the paper "Division by Invariant
  * Integers Using Multiplication" by Torbjörn Granlund and Peter
  * L. Montgomery.
@@ -61,4 +64,7 @@ static inline u32 reciprocal_divide(u32 a, struct reciprocal_value R)
 }
 
 #endif /* _LINUX_RECIPROCAL_DIV_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

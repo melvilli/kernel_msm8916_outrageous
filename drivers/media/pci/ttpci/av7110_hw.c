@@ -502,7 +502,11 @@ int av7110_fw_cmd(struct av7110 *av7110, int type, int com, int num, ...)
 //	dprintk(4, "%p\n", av7110);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (2 + num > sizeof(buf)) {
+=======
+	if (2 + num > ARRAY_SIZE(buf)) {
+>>>>>>> v3.18
 =======
 	if (2 + num > ARRAY_SIZE(buf)) {
 >>>>>>> v3.18

@@ -39,10 +39,13 @@ static inline struct trace_bprintk_fmt *lookup_format(const char *fmt)
 {
 	struct trace_bprintk_fmt *pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!fmt)
 		return ERR_PTR(-EINVAL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	list_for_each_entry(pos, &trace_bprintk_fmt_list, list) {
@@ -67,8 +70,12 @@ void hold_module_trace_bprintk_format(const char **start, const char **end)
 		struct trace_bprintk_fmt *tb_fmt = lookup_format(*iter);
 		if (tb_fmt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!IS_ERR(tb_fmt))
 				*iter = tb_fmt->fmt;
+=======
+			*iter = tb_fmt->fmt;
+>>>>>>> v3.18
 =======
 			*iter = tb_fmt->fmt;
 >>>>>>> v3.18
@@ -257,6 +264,10 @@ static const char **find_next(void *v, loff_t *pos)
 	const char **fmt = v;
 	int start_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int last_index;
+>>>>>>> v3.18
 =======
 	int last_index;
 >>>>>>> v3.18
@@ -267,7 +278,10 @@ static const char **find_next(void *v, loff_t *pos)
 		return __start___trace_bprintk_fmt + *pos;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The __tracepoint_str section is treated the same as the
 	 * __trace_printk_fmt section. The difference is that the
@@ -286,6 +300,9 @@ static const char **find_next(void *v, loff_t *pos)
 	if (*pos < last_index + start_index)
 		return __start___tracepoint_str + (*pos - last_index);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return find_next_mod_format(start_index, v, fmt, pos);
 }
@@ -310,10 +327,14 @@ static int t_show(struct seq_file *m, void *v)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!*fmt)
 		return 0;
 
 	seq_printf(m, "0x%lx : \"", 0L);
+=======
+	seq_printf(m, "0x%lx : \"", *(unsigned long *)fmt);
+>>>>>>> v3.18
 =======
 	seq_printf(m, "0x%lx : \"", *(unsigned long *)fmt);
 >>>>>>> v3.18

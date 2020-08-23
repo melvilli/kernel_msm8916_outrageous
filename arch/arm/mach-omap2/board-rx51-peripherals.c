@@ -46,6 +46,11 @@
 #include <linux/lis3lv02d.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <video/omap-panel-data.h>
+
+>>>>>>> v3.18
 =======
 #include <video/omap-panel-data.h>
 
@@ -61,6 +66,11 @@
 #include "gpmc.h"
 #include "gpmc-onenand.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "soc.h"
+#include "omap-secure.h"
+>>>>>>> v3.18
 =======
 #include "soc.h"
 #include "omap-secure.h"
@@ -91,7 +101,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct wl12xx_platform_data wl1251_pdata;
+=======
+static struct wl1251_platform_data wl1251_pdata;
+>>>>>>> v3.18
 =======
 static struct wl1251_platform_data wl1251_pdata;
 >>>>>>> v3.18
@@ -180,6 +194,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 0,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -188,6 +206,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 1,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -196,6 +218,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 2,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -204,6 +230,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 3,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -212,6 +242,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 4,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -220,6 +254,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 5,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -228,6 +266,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 6,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -236,6 +278,10 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.chan_nr	= 7,
 		.led_current	= 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 =======
 		.max_current	= 100,
 >>>>>>> v3.18
@@ -243,6 +289,7 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.name		= "lp5523:kb6",
 		.chan_nr	= 8,
 		.led_current	= 50,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 };
@@ -264,15 +311,21 @@ static void rx51_lp5523_enable(bool state)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		.max_current	= 100,
 	}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct lp55xx_platform_data rx51_lp5523_platform_data = {
 	.led_config		= rx51_lp5523_led_config,
 	.num_channels		= ARRAY_SIZE(rx51_lp5523_led_config),
 	.clock_mode		= LP55XX_CLOCK_AUTO,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.setup_resources	= rx51_lp5523_setup,
 	.release_resources	= rx51_lp5523_release,
@@ -281,6 +334,8 @@ static struct lp55xx_platform_data rx51_lp5523_platform_data = {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	.enable_gpio		= RX51_LP5523_CHIP_EN_GPIO,
 };
 #endif
@@ -294,6 +349,9 @@ static struct panel_acx565akm_platform_data acx_pdata = {
 	.datapairs	= 2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct omap2_mcspi_device_config wl1251_mcspi_config = {
 	.turbo_mode	= 0,
@@ -324,6 +382,10 @@ static struct spi_board_info rx51_peripherals_spi_board_info[] __initdata = {
 		.max_speed_hz		= 6000000,
 		.controller_data	= &mipid_mcspi_config,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.platform_data		= &acx_pdata,
+>>>>>>> v3.18
 =======
 		.platform_data		= &acx_pdata,
 >>>>>>> v3.18
@@ -627,6 +689,10 @@ static struct regulator_consumer_supply rx51_vio_supplies[] = {
 static struct regulator_consumer_supply rx51_vaux1_consumers[] = {
 	REGULATOR_SUPPLY("vdds_sdi", "omapdss"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGULATOR_SUPPLY("vdds_sdi", "omapdss_sdi.0"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("vdds_sdi", "omapdss_sdi.0"),
 >>>>>>> v3.18
@@ -832,8 +898,11 @@ static struct regulator_init_data rx51_vintdig = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct si4713_platform_data rx51_si4713_i2c_data __initdata_or_module = {
 =======
+=======
+>>>>>>> v3.18
 static const char * const si4713_supply_names[] = {
 	"vio",
 	"vdd",
@@ -842,6 +911,9 @@ static const char * const si4713_supply_names[] = {
 static struct si4713_platform_data rx51_si4713_i2c_data __initdata_or_module = {
 	.supplies	= ARRAY_SIZE(si4713_supply_names),
 	.supply_names	= si4713_supply_names,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.gpio_reset	= RX51_FMTX_RESET_GPIO,
 };
@@ -1249,6 +1321,7 @@ static inline void board_smc91x_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rx51_wl1251_set_power(bool enable)
 {
 	gpio_set_value(RX51_WL1251_POWER_GPIO, enable);
@@ -1256,6 +1329,9 @@ static void rx51_wl1251_set_power(bool enable)
 
 static struct gpio rx51_wl1251_gpios[] __initdata = {
 	{ RX51_WL1251_POWER_GPIO, GPIOF_OUT_INIT_LOW,	"wl1251 power"	},
+=======
+static struct gpio rx51_wl1251_gpios[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct gpio rx51_wl1251_gpios[] __initdata = {
 >>>>>>> v3.18
@@ -1276,7 +1352,11 @@ static void __init rx51_init_wl1251(void)
 		goto err_irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl1251_pdata.set_power = rx51_wl1251_set_power;
+=======
+	wl1251_pdata.power_gpio = RX51_WL1251_POWER_GPIO;
+>>>>>>> v3.18
 =======
 	wl1251_pdata.power_gpio = RX51_WL1251_POWER_GPIO;
 >>>>>>> v3.18
@@ -1287,10 +1367,16 @@ static void __init rx51_init_wl1251(void)
 err_irq:
 	gpio_free(RX51_WL1251_IRQ_GPIO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_free(RX51_WL1251_POWER_GPIO);
 error:
 	printk(KERN_ERR "wl1251 board initialisation failed\n");
 	wl1251_pdata.set_power = NULL;
+=======
+error:
+	printk(KERN_ERR "wl1251 board initialisation failed\n");
+	wl1251_pdata.power_gpio = -1;
+>>>>>>> v3.18
 =======
 error:
 	printk(KERN_ERR "wl1251 board initialisation failed\n");
@@ -1379,7 +1465,10 @@ static void __init rx51_init_twl4030_hwmon(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device omap3_rom_rng_device = {
 	.name		= "omap3-rom-rng",
 	.id		= -1,
@@ -1396,6 +1485,9 @@ static void __init rx51_init_omap3_rom_rng(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init rx51_peripherals_init(void)
 {
@@ -1418,6 +1510,10 @@ void __init rx51_peripherals_init(void)
 	rx51_charger_init();
 	rx51_init_twl4030_hwmon();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rx51_init_omap3_rom_rng();
+>>>>>>> v3.18
 =======
 	rx51_init_omap3_rom_rng();
 >>>>>>> v3.18

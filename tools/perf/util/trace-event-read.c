@@ -23,7 +23,10 @@
 #include <stdlib.h>
 #include <string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <getopt.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <stdarg.h>
@@ -40,6 +43,7 @@
 #include "util.h"
 #include "trace-event.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int input_fd;
 
@@ -48,10 +52,15 @@ int host_bigendian;
 static int long_size;
 
 =======
+=======
+>>>>>>> v3.18
 #include "debug.h"
 
 static int input_fd;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t trace_data_size;
 static bool repipe;
@@ -227,7 +236,11 @@ static int read_header_files(struct pevent *pevent)
 {
 	unsigned long long size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *header_event;
+=======
+	char *header_page;
+>>>>>>> v3.18
 =======
 	char *header_page;
 >>>>>>> v3.18
@@ -244,6 +257,7 @@ static int read_header_files(struct pevent *pevent)
 
 	size = read8(pevent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skip(size);
 
 	/*
@@ -252,6 +266,8 @@ static int read_header_files(struct pevent *pevent)
 	 */
 	long_size = header_page_size_size;
 =======
+=======
+>>>>>>> v3.18
 
 	header_page = malloc(size);
 	if (header_page == NULL)
@@ -272,6 +288,9 @@ static int read_header_files(struct pevent *pevent)
 		pevent_set_long_size(pevent, pevent->header_page_size_size);
 	}
 	free(header_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (do_read(buf, 13) < 0)
@@ -284,6 +303,7 @@ static int read_header_files(struct pevent *pevent)
 
 	size = read8(pevent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	header_event = malloc(size);
 	if (header_event == NULL)
 		return -1;
@@ -292,6 +312,10 @@ static int read_header_files(struct pevent *pevent)
 		ret = -1;
 
 	free(header_event);
+=======
+	skip(size);
+
+>>>>>>> v3.18
 =======
 	skip(size);
 
@@ -383,7 +407,11 @@ static int read_event_files(struct pevent *pevent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t trace_report(int fd, struct pevent **ppevent, bool __repipe)
+=======
+ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
+>>>>>>> v3.18
 =======
 ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 >>>>>>> v3.18
@@ -396,12 +424,15 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 	int show_printk = 0;
 	ssize_t size = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pevent *pevent;
 	int err;
 
 	*ppevent = NULL;
 
 =======
+=======
+>>>>>>> v3.18
 	int file_bigendian;
 	int host_bigendian;
 	int file_long_size;
@@ -409,6 +440,9 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 	struct pevent *pevent = NULL;
 	int err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	repipe = __repipe;
 	input_fd = fd;
@@ -440,6 +474,7 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 	host_bigendian = bigendian();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pevent = read_trace_init(file_bigendian, host_bigendian);
 	if (pevent == NULL) {
 		pr_debug("read_trace_init failed");
@@ -455,6 +490,8 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 	if (trace_event__init(tevent)) {
 		pr_debug("trace_event__init failed");
 		goto out;
@@ -477,6 +514,9 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 	pevent_set_long_size(pevent, file_long_size);
 	pevent_set_page_size(pevent, file_page_size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = read_header_files(pevent);
 	if (err)
@@ -504,7 +544,10 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ppevent = pevent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pevent = NULL;
@@ -512,7 +555,11 @@ ssize_t trace_report(int fd, struct trace_event *tevent, bool __repipe)
 out:
 	if (pevent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pevent_free(pevent);
+=======
+		trace_event__cleanup(tevent);
+>>>>>>> v3.18
 =======
 		trace_event__cleanup(tevent);
 >>>>>>> v3.18

@@ -6,7 +6,11 @@ cat << "END" | $@ -x c - -c -o /dev/null >/dev/null 2>&1 && echo "y"
 int main(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __arm__
+=======
+#if defined(__arm__) || defined(__aarch64__)
+>>>>>>> v3.18
 =======
 #if defined(__arm__) || defined(__aarch64__)
 >>>>>>> v3.18

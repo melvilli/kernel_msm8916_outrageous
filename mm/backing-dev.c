@@ -41,7 +41,11 @@ LIST_HEAD(bdi_list);
 struct workqueue_struct *bdi_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bdi_lock_two(struct bdi_writeback *wb1, struct bdi_writeback *wb2)
+=======
+static void bdi_lock_two(struct bdi_writeback *wb1, struct bdi_writeback *wb2)
+>>>>>>> v3.18
 =======
 static void bdi_lock_two(struct bdi_writeback *wb1, struct bdi_writeback *wb2)
 >>>>>>> v3.18
@@ -185,7 +189,12 @@ static ssize_t name##_show(struct device *dev,				\
 									\
 	return snprintf(page, PAGE_SIZE-1, "%lld\n", (long long)expr);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}									\
+static DEVICE_ATTR_RW(name);
+>>>>>>> v3.18
 =======
 }									\
 static DEVICE_ATTR_RW(name);
@@ -241,6 +250,7 @@ static ssize_t stable_pages_required_show(struct device *dev,
 			bdi_cap_stable_pages_required(bdi) ? 1 : 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute bdi_dev_attrs[] = {
 	__ATTR_RW(read_ahead_kb),
@@ -250,6 +260,8 @@ static struct device_attribute bdi_dev_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(stable_pages_required);
 
 static struct attribute *bdi_dev_attrs[] = {
@@ -260,6 +272,9 @@ static struct attribute *bdi_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(bdi_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __init int bdi_class_init(void)
@@ -269,7 +284,11 @@ static __init int bdi_class_init(void)
 		return PTR_ERR(bdi_class);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdi_class->dev_attrs = bdi_dev_attrs;
+=======
+	bdi_class->dev_groups = bdi_dev_groups;
+>>>>>>> v3.18
 =======
 	bdi_class->dev_groups = bdi_dev_groups;
 >>>>>>> v3.18
@@ -400,6 +419,7 @@ static void bdi_wb_shutdown(struct backing_dev_info *bdi)
 	flush_delayed_work(&bdi->wb.dwork);
 	WARN_ON(!list_empty(&bdi->work_list));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * This shouldn't be necessary unless @bdi for some reason has
@@ -407,6 +427,9 @@ static void bdi_wb_shutdown(struct backing_dev_info *bdi)
 	 * just in case.
 	 */
 	cancel_delayed_work_sync(&bdi->wb.dwork);
+=======
+	WARN_ON(delayed_work_pending(&bdi->wb.dwork));
+>>>>>>> v3.18
 =======
 	WARN_ON(delayed_work_pending(&bdi->wb.dwork));
 >>>>>>> v3.18
@@ -430,9 +453,13 @@ static void bdi_prune_sb(struct backing_dev_info *bdi)
 void bdi_unregister(struct backing_dev_info *bdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = bdi->dev;
 
 	if (dev) {
+=======
+	if (bdi->dev) {
+>>>>>>> v3.18
 =======
 	if (bdi->dev) {
 >>>>>>> v3.18
@@ -443,12 +470,17 @@ void bdi_unregister(struct backing_dev_info *bdi)
 		bdi_wb_shutdown(bdi);
 		bdi_debug_unregister(bdi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		spin_lock_bh(&bdi->wb_lock);
 		bdi->dev = NULL;
 		spin_unlock_bh(&bdi->wb_lock);
 
 		device_unregister(dev);
+=======
+		device_unregister(bdi->dev);
+		bdi->dev = NULL;
+>>>>>>> v3.18
 =======
 		device_unregister(bdi->dev);
 		bdi->dev = NULL;
@@ -492,7 +524,11 @@ int bdi_init(struct backing_dev_info *bdi)
 
 	for (i = 0; i < NR_BDI_STAT_ITEMS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = percpu_counter_init(&bdi->bdi_stat[i], 0);
+=======
+		err = percpu_counter_init(&bdi->bdi_stat[i], 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = percpu_counter_init(&bdi->bdi_stat[i], 0, GFP_KERNEL);
 >>>>>>> v3.18
@@ -511,7 +547,11 @@ int bdi_init(struct backing_dev_info *bdi)
 	bdi->avg_write_bandwidth = INIT_BW;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = fprop_local_init_percpu(&bdi->completions);
+=======
+	err = fprop_local_init_percpu(&bdi->completions, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	err = fprop_local_init_percpu(&bdi->completions, GFP_KERNEL);
 >>>>>>> v3.18
@@ -532,9 +572,12 @@ void bdi_destroy(struct backing_dev_info *bdi)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Splice our entries to the default_backing_dev_info, if this
 	 * bdi disappears
 =======
+=======
+>>>>>>> v3.18
 	 * Splice our entries to the default_backing_dev_info.  This
 	 * condition shouldn't happen.  @wb must be empty at this point and
 	 * dirty inodes on it might cause other issues.  This workaround is
@@ -546,6 +589,9 @@ void bdi_destroy(struct backing_dev_info *bdi)
 	 *
 	 * We should probably add WARN_ON() to find out whether it still
 	 * happens and track it down if so.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (bdi_has_dirty_io(bdi)) {
@@ -562,12 +608,16 @@ void bdi_destroy(struct backing_dev_info *bdi)
 	bdi_unregister(bdi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If bdi_unregister() had already been called earlier, the dwork
 	 * could still be pending because bdi_prune_sb() can race with the
 	 * bdi_wakeup_thread_delayed() calls from __mark_inode_dirty().
 	 */
 	cancel_delayed_work_sync(&bdi->wb.dwork);
+=======
+	WARN_ON(delayed_work_pending(&bdi->wb.dwork));
+>>>>>>> v3.18
 =======
 	WARN_ON(delayed_work_pending(&bdi->wb.dwork));
 >>>>>>> v3.18
@@ -587,7 +637,10 @@ int bdi_setup_and_register(struct backing_dev_info *bdi, char *name,
 			   unsigned int cap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char tmp[32];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err;
@@ -599,8 +652,13 @@ int bdi_setup_and_register(struct backing_dev_info *bdi, char *name,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(tmp, "%.28s%s", name, "-%d");
 	err = bdi_register(bdi, NULL, tmp, atomic_long_inc_return(&bdi_seq));
+=======
+	err = bdi_register(bdi, NULL, "%.28s-%ld", name,
+			   atomic_long_inc_return(&bdi_seq));
+>>>>>>> v3.18
 =======
 	err = bdi_register(bdi, NULL, "%.28s-%ld", name,
 			   atomic_long_inc_return(&bdi_seq));
@@ -703,7 +761,11 @@ long wait_iff_congested(struct zone *zone, int sync, long timeout)
 	 */
 	if (atomic_read(&nr_bdi_congested[sync]) == 0 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			!zone_is_reclaim_congested(zone)) {
+=======
+	    !test_bit(ZONE_CONGESTED, &zone->flags)) {
+>>>>>>> v3.18
 =======
 	    !test_bit(ZONE_CONGESTED, &zone->flags)) {
 >>>>>>> v3.18
@@ -736,7 +798,11 @@ int pdflush_proc_obsolete(struct ctl_table *table, int write,
 	char kbuf[] = "0\n";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*ppos) {
+=======
+	if (*ppos || *lenp < sizeof(kbuf)) {
+>>>>>>> v3.18
 =======
 	if (*ppos || *lenp < sizeof(kbuf)) {
 >>>>>>> v3.18

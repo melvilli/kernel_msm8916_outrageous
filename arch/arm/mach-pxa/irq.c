@@ -236,8 +236,11 @@ void __init pxa_dt_irq_init(int (*fn)(struct irq_data *, unsigned int))
 {
 	struct device_node *node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct of_device_id *of_id;
 	struct pxa_intc_conf *conf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct resource res;
@@ -249,8 +252,11 @@ void __init pxa_dt_irq_init(int (*fn)(struct irq_data *, unsigned int))
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_id = of_match_node(intc_ids, node);
 	conf = of_id->data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

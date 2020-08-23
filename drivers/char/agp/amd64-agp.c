@@ -270,7 +270,10 @@ static int agp_aperture_valid(u64 aper, u32 size)
 static int fix_northbridge(struct pci_dev *nb, struct pci_dev *agp, u16 cap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 aper_low, aper_hi;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 aper, nb_aper;
@@ -299,9 +302,13 @@ static int fix_northbridge(struct pci_dev *nb, struct pci_dev *agp, u16 cap)
 	order = 7 - hweight16(apsize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp, 0x10, &aper_low);
 	pci_read_config_dword(agp, 0x14, &aper_hi);
 	aper = (aper_low & ~((1<<22)-1)) | ((u64)aper_hi << 32);
+=======
+	aper = pci_bus_address(agp, AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	aper = pci_bus_address(agp, AGP_APERTURE_BAR);
 >>>>>>> v3.18
@@ -743,7 +750,11 @@ static struct pci_device_id agp_amd64_pci_table[] = {
 MODULE_DEVICE_TABLE(pci, agp_amd64_pci_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(agp_amd64_pci_promisc_table) = {
+=======
+static const struct pci_device_id agp_amd64_pci_promisc_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id agp_amd64_pci_promisc_table[] = {
 >>>>>>> v3.18

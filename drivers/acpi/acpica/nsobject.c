@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -227,6 +231,7 @@ void acpi_ns_detach_object(struct acpi_namespace_node *node)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Clear the entry in all cases */
 
 	node->object = NULL;
@@ -237,6 +242,8 @@ void acpi_ns_detach_object(struct acpi_namespace_node *node)
 			node->object = node->object->common.next_object;
 		}
 =======
+=======
+>>>>>>> v3.18
 	/* Clear the Node entry in all cases */
 
 	node->object = NULL;
@@ -262,6 +269,9 @@ void acpi_ns_detach_object(struct acpi_namespace_node *node)
 		     ACPI_TYPE_LOCAL_DATA)) {
 			obj_desc->common.next_object = NULL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -16,6 +16,10 @@
 
 #include <asm/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hash.h>
+>>>>>>> v3.18
 =======
 #include <asm/hash.h>
 >>>>>>> v3.18
@@ -41,6 +45,12 @@ static __always_inline u64 hash_64(u64 val, unsigned int bits)
 	u64 hash = val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
+	hash = hash * GOLDEN_RATIO_PRIME_64;
+#else
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
 	hash = hash * GOLDEN_RATIO_PRIME_64;
@@ -61,6 +71,10 @@ static __always_inline u64 hash_64(u64 val, unsigned int bits)
 	n <<= 2;
 	hash += n;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -93,7 +107,10 @@ static inline u32 hash32_ptr(const void *ptr)
 	return (u32)val;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct fast_hash_ops {
 	u32 (*hash)(const void *data, u32 len, u32 seed);
@@ -129,5 +146,8 @@ extern u32 arch_fast_hash(const void *data, u32 len, u32 seed);
  */
 extern u32 arch_fast_hash2(const u32 *data, u32 len, u32 seed);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_HASH_H */

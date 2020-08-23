@@ -226,7 +226,11 @@ struct bitmap {
 	wait_queue_head_t behind_wait;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *sysfs_can_clear;
+=======
+	struct kernfs_node *sysfs_can_clear;
+>>>>>>> v3.18
 =======
 	struct kernfs_node *sysfs_can_clear;
 >>>>>>> v3.18

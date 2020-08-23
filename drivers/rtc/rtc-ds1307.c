@@ -127,10 +127,13 @@ struct chip_desc {
 	u16			nvram_size;
 	u16			trickle_charger_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct chip_desc chips[last_ds_type] = {
 =======
+=======
+>>>>>>> v3.18
 	u8			trickle_charger_setup;
 	u8			(*do_trickle_setup)(struct i2c_client *, uint32_t, bool);
 };
@@ -139,6 +142,9 @@ static u8 do_trickle_setup_ds1339(struct i2c_client *,
 				  uint32_t ohms, bool diode);
 
 static struct chip_desc chips[last_ds_type] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[ds_1307] = {
 		.nvram_offset	= 8,
@@ -155,6 +161,10 @@ static struct chip_desc chips[last_ds_type] = {
 		.alarm		= 1,
 		.trickle_charger_reg = 0x10,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.do_trickle_setup = &do_trickle_setup_ds1339,
+>>>>>>> v3.18
 =======
 		.do_trickle_setup = &do_trickle_setup_ds1339,
 >>>>>>> v3.18
@@ -170,6 +180,10 @@ static struct chip_desc chips[last_ds_type] = {
 	},
 	[mcp7941x] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.alarm		= 1,
+>>>>>>> v3.18
 =======
 		.alarm		= 1,
 >>>>>>> v3.18
@@ -626,7 +640,10 @@ static const struct rtc_class_ops ds13xx_rtc_ops = {
 /*----------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Alarm support for mcp7941x devices.
  */
@@ -799,6 +816,9 @@ static const struct rtc_class_ops mcp7941x_rtc_ops = {
 
 /*----------------------------------------------------------------------*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t
 ds1307_nvram_read(struct file *filp, struct kobject *kobj,
@@ -855,9 +875,12 @@ ds1307_nvram_write(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*----------------------------------------------------------------------*/
 
 =======
+=======
+>>>>>>> v3.18
 
 /*----------------------------------------------------------------------*/
 
@@ -903,6 +926,9 @@ out:
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ds1307_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
@@ -911,17 +937,23 @@ static int ds1307_probe(struct i2c_client *client,
 	int			err = -ENODEV;
 	int			tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct chip_desc	*chip = &chips[id->driver_data];
 	struct i2c_adapter	*adapter = to_i2c_adapter(client->dev.parent);
 	int			want_irq = false;
 	unsigned char		*buf;
 	struct ds1307_platform_data *pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	struct chip_desc	*chip = &chips[id->driver_data];
 	struct i2c_adapter	*adapter = to_i2c_adapter(client->dev.parent);
 	bool			want_irq = false;
 	unsigned char		*buf;
 	struct ds1307_platform_data *pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static const int	bbsqi_bitpos[] = {
 		[ds_1337] = 0,
@@ -929,6 +961,10 @@ static int ds1307_probe(struct i2c_client *client,
 		[ds_3231] = DS3231_BIT_BBSQW,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct rtc_class_ops *rtc_ops = &ds13xx_rtc_ops;
+>>>>>>> v3.18
 =======
 	const struct rtc_class_ops *rtc_ops = &ds13xx_rtc_ops;
 >>>>>>> v3.18
@@ -938,7 +974,11 @@ static int ds1307_probe(struct i2c_client *client,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ds1307 = kzalloc(sizeof(struct ds1307), GFP_KERNEL);
+=======
+	ds1307 = devm_kzalloc(&client->dev, sizeof(struct ds1307), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ds1307 = devm_kzalloc(&client->dev, sizeof(struct ds1307), GFP_KERNEL);
 >>>>>>> v3.18
@@ -951,10 +991,13 @@ static int ds1307_probe(struct i2c_client *client,
 	ds1307->type	= id->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && pdata->trickle_charger_setup && chip->trickle_charger_reg)
 		i2c_smbus_write_byte_data(client, chip->trickle_charger_reg,
 			DS13XX_TRICKLE_CHARGER_MAGIC | pdata->trickle_charger_setup);
 =======
+=======
+>>>>>>> v3.18
 	if (!pdata && client->dev.of_node)
 		ds1307_trickle_of_init(client, chip);
 	else if (pdata && pdata->trickle_charger_setup)
@@ -968,6 +1011,9 @@ static int ds1307_probe(struct i2c_client *client,
 		    DS13XX_TRICKLE_CHARGER_MAGIC |
 		    chip->trickle_charger_setup);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	buf = ds1307->regs;
@@ -990,7 +1036,11 @@ static int ds1307_probe(struct i2c_client *client,
 			dev_dbg(&client->dev, "read error %d\n", tmp);
 			err = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto exit_free;
+=======
+			goto exit;
+>>>>>>> v3.18
 =======
 			goto exit;
 >>>>>>> v3.18
@@ -1033,7 +1083,11 @@ static int ds1307_probe(struct i2c_client *client,
 			dev_dbg(&client->dev, "read error %d\n", tmp);
 			err = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto exit_free;
+=======
+			goto exit;
+>>>>>>> v3.18
 =======
 			goto exit;
 >>>>>>> v3.18
@@ -1081,7 +1135,11 @@ static int ds1307_probe(struct i2c_client *client,
 				dev_dbg(&client->dev, "read error %d\n", tmp);
 				err = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto exit_free;
+=======
+				goto exit;
+>>>>>>> v3.18
 =======
 				goto exit;
 >>>>>>> v3.18
@@ -1103,7 +1161,10 @@ static int ds1307_probe(struct i2c_client *client,
 		ds1307->offset = 1; /* Seconds starts at 1 */
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case mcp7941x:
 		rtc_ops = &mcp7941x_rtc_ops;
 		if (ds1307->client->irq > 0 && chip->alarm) {
@@ -1111,6 +1172,9 @@ static int ds1307_probe(struct i2c_client *client,
 			want_irq = true;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -1123,7 +1187,11 @@ read_rtc:
 		dev_dbg(&client->dev, "read error %d\n", tmp);
 		err = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_free;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -1169,7 +1237,11 @@ read_rtc:
 			dev_dbg(&client->dev, "read error %d\n", tmp);
 			err = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto exit_free;
+=======
+			goto exit;
+>>>>>>> v3.18
 =======
 			goto exit;
 >>>>>>> v3.18
@@ -1232,6 +1304,7 @@ read_rtc:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ds1307->rtc = rtc_device_register(client->name, &client->dev,
 				&ds13xx_rtc_ops, THIS_MODULE);
 	if (IS_ERR(ds1307->rtc)) {
@@ -1240,11 +1313,16 @@ read_rtc:
 			"unable to register the class device\n");
 		goto exit_free;
 =======
+=======
+>>>>>>> v3.18
 	device_set_wakeup_capable(&client->dev, want_irq);
 	ds1307->rtc = devm_rtc_device_register(&client->dev, client->name,
 				rtc_ops, THIS_MODULE);
 	if (IS_ERR(ds1307->rtc)) {
 		return PTR_ERR(ds1307->rtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1252,6 +1330,7 @@ read_rtc:
 		err = request_irq(client->irq, ds1307_irq, IRQF_SHARED,
 			  ds1307->rtc->name, client);
 		if (err) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dev_err(&client->dev,
 				"unable to request IRQ!\n");
@@ -1285,6 +1364,8 @@ read_rtc:
 		set_bit(HAS_NVRAM, &ds1307->flags);
 		dev_info(&client->dev, "%zu bytes nvram\n", ds1307->nvram->size);
 =======
+=======
+>>>>>>> v3.18
 			client->irq = 0;
 			dev_err(&client->dev, "unable to request IRQ!\n");
 		} else {
@@ -1325,17 +1406,24 @@ read_rtc:
 					 ds1307->nvram->size);
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_nvram:
 exit_irq:
 	rtc_device_unregister(ds1307->rtc);
 exit_free:
 	kfree(ds1307);
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -1352,6 +1440,7 @@ static int ds1307_remove(struct i2c_client *client)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_and_clear_bit(HAS_NVRAM, &ds1307->flags)) {
 		sysfs_remove_bin_file(&client->dev.kobj, ds1307->nvram);
 		kfree(ds1307->nvram);
@@ -1359,6 +1448,11 @@ static int ds1307_remove(struct i2c_client *client)
 
 	rtc_device_unregister(ds1307->rtc);
 	kfree(ds1307);
+=======
+	if (test_and_clear_bit(HAS_NVRAM, &ds1307->flags))
+		sysfs_remove_bin_file(&client->dev.kobj, ds1307->nvram);
+
+>>>>>>> v3.18
 =======
 	if (test_and_clear_bit(HAS_NVRAM, &ds1307->flags))
 		sysfs_remove_bin_file(&client->dev.kobj, ds1307->nvram);

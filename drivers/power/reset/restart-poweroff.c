@@ -21,7 +21,12 @@
 static void restart_poweroff_do_poweroff(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arm_pm_restart(REBOOT_HARD, NULL);
+=======
+	reboot_mode = REBOOT_HARD;
+	machine_restart(NULL);
+>>>>>>> v3.18
 =======
 	reboot_mode = REBOOT_HARD;
 	machine_restart(NULL);
@@ -68,7 +73,11 @@ module_platform_driver(restart_poweroff_driver);
 MODULE_AUTHOR("Andrew Lunn <andrew@lunn.ch");
 MODULE_DESCRIPTION("restart poweroff driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPLv2");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

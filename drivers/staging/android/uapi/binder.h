@@ -33,8 +33,11 @@ enum {
 	BINDER_TYPE_WEAK_HANDLE	= B_PACK_CHARS('w', 'h', '*', B_TYPE_LARGE),
 	BINDER_TYPE_FD		= B_PACK_CHARS('f', 'd', '*', B_TYPE_LARGE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BINDER_TYPE_FDA		= B_PACK_CHARS('f', 'd', 'a', B_TYPE_LARGE),
 	BINDER_TYPE_PTR		= B_PACK_CHARS('p', 't', '*', B_TYPE_LARGE),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -53,6 +56,7 @@ typedef __u64 binder_uintptr_t;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct binder_object_header - header shared by all binder metadata objects.
  * @type:	type of the object
@@ -61,6 +65,8 @@ struct binder_object_header {
 	__u32        type;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -72,8 +78,14 @@ struct binder_object_header {
  */
 struct flat_binder_object {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct binder_object_header	hdr;
 	__u32				flags;
+=======
+	/* 8 bytes for large_flat_header. */
+	__u32		type;
+	__u32		flags;
+>>>>>>> v3.18
 =======
 	/* 8 bytes for large_flat_header. */
 	__u32		type;
@@ -90,6 +102,7 @@ struct flat_binder_object {
 	binder_uintptr_t	cookie;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct binder_fd_object - describes a filedescriptor to be fixed up.
@@ -173,6 +186,8 @@ struct binder_fd_array_object {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * On 64-bit platforms where user code may run in 32-bits the driver must
  * translate the buffer (and local binder) addresses appropriately.
@@ -202,17 +217,23 @@ struct binder_version {
 
 #define BINDER_WRITE_READ		_IOWR('b', 1, struct binder_write_read)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	BINDER_SET_IDLE_TIMEOUT		_IOW('b', 3, __s64)
 #define	BINDER_SET_MAX_THREADS		_IOW('b', 5, __u32)
 #define	BINDER_SET_IDLE_PRIORITY	_IOW('b', 6, __s32)
 #define	BINDER_SET_CONTEXT_MGR		_IOW('b', 7, __s32)
 #define	BINDER_THREAD_EXIT		_IOW('b', 8, __s32)
 =======
+=======
+>>>>>>> v3.18
 #define BINDER_SET_IDLE_TIMEOUT		_IOW('b', 3, __s64)
 #define BINDER_SET_MAX_THREADS		_IOW('b', 5, __u32)
 #define BINDER_SET_IDLE_PRIORITY	_IOW('b', 6, __s32)
 #define BINDER_SET_CONTEXT_MGR		_IOW('b', 7, __s32)
 #define BINDER_THREAD_EXIT		_IOW('b', 8, __s32)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BINDER_VERSION			_IOWR('b', 9, struct binder_version)
 
@@ -244,13 +265,19 @@ struct binder_transaction_data {
 	 */
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__u32	handle;	/* target descriptor of command transaction */
 		binder_uintptr_t ptr;	/* target descriptor of return transaction */
 =======
+=======
+>>>>>>> v3.18
 		/* target descriptor of command transaction */
 		__u32	handle;
 		/* target descriptor of return transaction */
 		binder_uintptr_t ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} target;
 	binder_uintptr_t	cookie;	/* target object cookie */
@@ -279,11 +306,14 @@ struct binder_transaction_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct binder_transaction_data_sg {
 	struct binder_transaction_data transaction_data;
 	binder_size_t buffers_size;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct binder_ptr_cookie {
@@ -295,7 +325,11 @@ struct binder_handle_cookie {
 	__u32 handle;
 	binder_uintptr_t cookie;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -457,7 +491,12 @@ enum binder_driver_command_protocol {
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BC_REQUEST_DEATH_NOTIFICATION = _IOW('c', 14, struct binder_handle_cookie),
+=======
+	BC_REQUEST_DEATH_NOTIFICATION = _IOW('c', 14,
+						struct binder_handle_cookie),
+>>>>>>> v3.18
 =======
 	BC_REQUEST_DEATH_NOTIFICATION = _IOW('c', 14,
 						struct binder_handle_cookie),
@@ -468,7 +507,12 @@ enum binder_driver_command_protocol {
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BC_CLEAR_DEATH_NOTIFICATION = _IOW('c', 15, struct binder_handle_cookie),
+=======
+	BC_CLEAR_DEATH_NOTIFICATION = _IOW('c', 15,
+						struct binder_handle_cookie),
+>>>>>>> v3.18
 =======
 	BC_CLEAR_DEATH_NOTIFICATION = _IOW('c', 15,
 						struct binder_handle_cookie),
@@ -483,12 +527,15 @@ enum binder_driver_command_protocol {
 	 * void *: cookie
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	BC_TRANSACTION_SG = _IOW('c', 17, struct binder_transaction_data_sg),
 	BC_REPLY_SG = _IOW('c', 18, struct binder_transaction_data_sg),
 	/*
 	 * binder_transaction_data_sg: the sent command.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

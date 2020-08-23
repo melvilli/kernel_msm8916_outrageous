@@ -20,6 +20,7 @@ const char *ceph_osd_op_name(int op)
 {
 	switch (op) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case CEPH_OSD_OP_READ: return "read";
 	case CEPH_OSD_OP_STAT: return "stat";
 	case CEPH_OSD_OP_MAPEXT: return "mapext";
@@ -92,12 +93,17 @@ const char *ceph_osd_op_name(int op)
 	}
 	return "???";
 =======
+=======
+>>>>>>> v3.18
 #define GENERATE_CASE(op, opcode, str)	case CEPH_OSD_OP_##op: return (str);
 __CEPH_FORALL_OSD_OPS(GENERATE_CASE)
 #undef GENERATE_CASE
 	default:
 		return "???";
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

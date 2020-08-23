@@ -16,7 +16,11 @@
 #include <linux/stringify.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(CONFIG_CPU_MIPSR2) || defined(CONFIG_MIPS_MT_SMTC)
+=======
+#ifndef CONFIG_CPU_MIPSR2
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_CPU_MIPSR2
 >>>>>>> v3.18
@@ -47,12 +51,16 @@ notrace void arch_local_irq_disable(void)
 	"	.set	push						\n"
 	"	.set	noat						\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	"	mfc0	$1, $2, 1					\n"
 	"	ori	$1, 0x400					\n"
 	"	.set	noreorder					\n"
 	"	mtc0	$1, $2, 1					\n"
 #elif defined(CONFIG_CPU_MIPSR2)
+=======
+#if   defined(CONFIG_CPU_MIPSR2)
+>>>>>>> v3.18
 =======
 #if   defined(CONFIG_CPU_MIPSR2)
 >>>>>>> v3.18
@@ -86,6 +94,7 @@ notrace unsigned long arch_local_irq_save(void)
 	"	.set	reorder						\n"
 	"	.set	noat						\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	"	mfc0	%[flags], $2, 1				\n"
 	"	ori	$1, %[flags], 0x400				\n"
@@ -93,6 +102,9 @@ notrace unsigned long arch_local_irq_save(void)
 	"	mtc0	$1, $2, 1					\n"
 	"	andi	%[flags], %[flags], 0x400			\n"
 #elif defined(CONFIG_CPU_MIPSR2)
+=======
+#if   defined(CONFIG_CPU_MIPSR2)
+>>>>>>> v3.18
 =======
 #if   defined(CONFIG_CPU_MIPSR2)
 >>>>>>> v3.18
@@ -121,6 +133,7 @@ notrace void arch_local_irq_restore(unsigned long flags)
 	unsigned long __tmp1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * SMTC kernel needs to do a software replay of queued
@@ -132,12 +145,15 @@ notrace void arch_local_irq_restore(unsigned long flags)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	preempt_disable();
 
 	__asm__ __volatile__(
 	"	.set	push						\n"
 	"	.set	noreorder					\n"
 	"	.set	noat						\n"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	"	mfc0	$1, $2, 1					\n"
@@ -147,6 +163,9 @@ notrace void arch_local_irq_restore(unsigned long flags)
 	"	or	%[flags], $1					\n"
 	"	mtc0	%[flags], $2, 1					\n"
 #elif defined(CONFIG_CPU_MIPSR2) && defined(CONFIG_IRQ_CPU)
+=======
+#if   defined(CONFIG_CPU_MIPSR2) && defined(CONFIG_IRQ_CPU)
+>>>>>>> v3.18
 =======
 #if   defined(CONFIG_CPU_MIPSR2) && defined(CONFIG_IRQ_CPU)
 >>>>>>> v3.18
@@ -183,6 +202,7 @@ notrace void __arch_local_irq_restore(unsigned long flags)
 	"	.set	noreorder					\n"
 	"	.set	noat						\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	"	mfc0	$1, $2, 1					\n"
 	"	andi	%[flags], 0x400					\n"
@@ -191,6 +211,9 @@ notrace void __arch_local_irq_restore(unsigned long flags)
 	"	or	%[flags], $1					\n"
 	"	mtc0	%[flags], $2, 1					\n"
 #elif defined(CONFIG_CPU_MIPSR2) && defined(CONFIG_IRQ_CPU)
+=======
+#if   defined(CONFIG_CPU_MIPSR2) && defined(CONFIG_IRQ_CPU)
+>>>>>>> v3.18
 =======
 #if   defined(CONFIG_CPU_MIPSR2) && defined(CONFIG_IRQ_CPU)
 >>>>>>> v3.18
@@ -216,7 +239,11 @@ notrace void __arch_local_irq_restore(unsigned long flags)
 EXPORT_SYMBOL(__arch_local_irq_restore);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* !defined(CONFIG_CPU_MIPSR2) || defined(CONFIG_MIPS_MT_SMTC) */
+=======
+#endif /* !CONFIG_CPU_MIPSR2 */
+>>>>>>> v3.18
 =======
 #endif /* !CONFIG_CPU_MIPSR2 */
 >>>>>>> v3.18

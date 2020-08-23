@@ -49,14 +49,20 @@ extern void ntfs_debug_dump_runlist(const runlist_element *rl);
 #else	/* !DEBUG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ntfs_debug(f, a...)		do {} while (0)
 =======
+=======
+>>>>>>> v3.18
 #define ntfs_debug(fmt, ...)						\
 do {									\
 	if (0)								\
 		no_printk(fmt, ##__VA_ARGS__);				\
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ntfs_debug_dump_runlist(rl)	do {} while (0)
 

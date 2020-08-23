@@ -70,7 +70,11 @@ static char *dentry_name(struct dentry *dentry, int extra)
 	char *root, *name;
 	const char *seg_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len, seg_len;
+=======
+	int len, seg_len, root_len;
+>>>>>>> v3.18
 =======
 	int len, seg_len, root_len;
 >>>>>>> v3.18
@@ -86,7 +90,12 @@ static char *dentry_name(struct dentry *dentry, int extra)
 
 	root = "proc";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += strlen(root);
+=======
+	root_len = strlen(root);
+	len += root_len;
+>>>>>>> v3.18
 =======
 	root_len = strlen(root);
 	len += root_len;
@@ -101,7 +110,11 @@ static char *dentry_name(struct dentry *dentry, int extra)
 		if (is_pid(parent)) {
 			seg_name = "pid";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seg_len = strlen("pid");
+=======
+			seg_len = strlen(seg_name);
+>>>>>>> v3.18
 =======
 			seg_len = strlen(seg_name);
 >>>>>>> v3.18
@@ -114,15 +127,21 @@ static char *dentry_name(struct dentry *dentry, int extra)
 		len -= seg_len + 1;
 		name[len] = '/';
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strncpy(&name[len + 1], seg_name, seg_len);
 		parent = parent->d_parent;
 	}
 	strncpy(name, root, strlen(root));
 =======
+=======
+>>>>>>> v3.18
 		memcpy(&name[len + 1], seg_name, seg_len);
 		parent = parent->d_parent;
 	}
 	memcpy(name, root, root_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return name;
 }
@@ -563,8 +582,13 @@ static const struct file_operations hppfs_file_fops = {
 
 struct hppfs_dirent {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *vfs_dirent;
 	filldir_t filldir;
+=======
+	struct dir_context ctx;
+	struct dir_context *caller;
+>>>>>>> v3.18
 =======
 	struct dir_context ctx;
 	struct dir_context *caller;
@@ -580,6 +604,7 @@ static int hppfs_filldir(void *d, const char *name, int size,
 	if (file_removed(dirent->dentry, name))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (*dirent->filldir)(dirent->vfs_dirent, name, size, offset,
 				  inode, type);
@@ -604,6 +629,8 @@ static int hppfs_readdir(struct file *file, void *ent, filldir_t filldir)
 	file->f_pos = proc_file->f_pos;
 
 =======
+=======
+>>>>>>> v3.18
 	dirent->caller->pos = dirent->ctx.pos;
 	return !dir_emit(dirent->caller, name, size, inode, type);
 }
@@ -621,6 +648,9 @@ static int hppfs_readdir(struct file *file, struct dir_context *ctx)
 	proc_file->f_pos = ctx->pos;
 	err = iterate_dir(proc_file, &d.ctx);
 	ctx->pos = d.ctx.pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -628,7 +658,11 @@ static int hppfs_readdir(struct file *file, struct dir_context *ctx)
 static const struct file_operations hppfs_dir_fops = {
 	.owner		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= hppfs_readdir,
+=======
+	.iterate	= hppfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= hppfs_readdir,
 >>>>>>> v3.18

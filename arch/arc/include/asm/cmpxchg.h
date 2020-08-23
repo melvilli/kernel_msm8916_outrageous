@@ -26,16 +26,22 @@ __cmpxchg(volatile void *ptr, unsigned long expected, unsigned long new)
 	"	bnz     1b		\n"
 	"2:				\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	: "=&r"(prev)	/* Early clobber, to prevent reg reuse */
 	: "r"(ptr),	/* Not "m": llock only supports reg direct addr mode */
 	  "ir"(expected),
 	  "r"(new)	/* can't be "ir". scond can't take LIMM for "b" */
 	: "cc", "memory"); /* so that gcc knows memory is being written here */
 =======
+=======
+>>>>>>> v3.18
 	: "=&r"(prev)
 	: "r"(ptr), "ir"(expected),
 	  "r"(new) /* can't be "ir". scond can't take limm for "b" */
 	: "cc");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return prev;

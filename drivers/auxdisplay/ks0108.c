@@ -140,7 +140,10 @@ static int __init ks0108_init(void)
 	ks0108_pardevice = parport_register_device(ks0108_parport, KS0108_NAME,
 		NULL, NULL, NULL, PARPORT_DEV_EXCL, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parport_put_port(ks0108_parport);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ks0108_pardevice == NULL) {

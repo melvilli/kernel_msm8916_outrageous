@@ -73,7 +73,11 @@
 
 #define	PACR		(CONFIG_MBAR + 0xc00)	/* PCI arbiter control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	PASR		(COFNIG_MBAR + 0xc04)	/* PCI arbiter status */
+=======
+#define	PASR		(CONFIG_MBAR + 0xc04)	/* PCI arbiter status */
+>>>>>>> v3.18
 =======
 #define	PASR		(CONFIG_MBAR + 0xc04)	/* PCI arbiter status */
 >>>>>>> v3.18

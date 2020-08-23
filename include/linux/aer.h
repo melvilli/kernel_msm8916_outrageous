@@ -8,7 +8,10 @@
 #define _AER_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 #define AER_NONFATAL			0
@@ -17,6 +20,9 @@
 
 struct pci_dev;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct aer_header_log_regs {
 	unsigned int dw0;
@@ -43,9 +49,15 @@ struct aer_capability_regs {
 #if defined(CONFIG_PCIEAER)
 /* pci-e port driver needs this function to enable aer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pci_enable_pcie_error_reporting(struct pci_dev *dev);
 extern int pci_disable_pcie_error_reporting(struct pci_dev *dev);
 extern int pci_cleanup_aer_uncorrect_error_status(struct pci_dev *dev);
+=======
+int pci_enable_pcie_error_reporting(struct pci_dev *dev);
+int pci_disable_pcie_error_reporting(struct pci_dev *dev);
+int pci_cleanup_aer_uncorrect_error_status(struct pci_dev *dev);
+>>>>>>> v3.18
 =======
 int pci_enable_pcie_error_reporting(struct pci_dev *dev);
 int pci_disable_pcie_error_reporting(struct pci_dev *dev);
@@ -67,6 +79,7 @@ static inline int pci_cleanup_aer_uncorrect_error_status(struct pci_dev *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cper_print_aer(struct pci_dev *dev,
 			   int cper_severity, struct aer_capability_regs *aer);
 extern int cper_severity_to_aer(int cper_severity);
@@ -74,12 +87,17 @@ extern void aer_recover_queue(int domain, unsigned int bus, unsigned int devfn,
 			      int severity,
 			      struct aer_capability_regs *aer_regs);
 =======
+=======
+>>>>>>> v3.18
 void cper_print_aer(struct pci_dev *dev, int cper_severity,
 		    struct aer_capability_regs *aer);
 int cper_severity_to_aer(int cper_severity);
 void aer_recover_queue(int domain, unsigned int bus, unsigned int devfn,
 		       int severity,
 		       struct aer_capability_regs *aer_regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif //_AER_H_
 

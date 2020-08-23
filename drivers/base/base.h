@@ -64,8 +64,11 @@ struct driver_private {
  *	the device; typically because it depends on another driver getting
  *	probed first.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @driver_data - private pointer for driver specific info.  Will turn into a
  * list soon.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @device - pointer back to the struct class that this structure is
@@ -80,7 +83,10 @@ struct device_private {
 	struct klist_node knode_bus;
 	struct list_head deferred_probe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *driver_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device *device;
@@ -107,6 +113,10 @@ static inline int hypervisor_init(void) { return 0; }
 extern int platform_bus_init(void);
 extern void cpu_dev_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void container_dev_init(void);
+>>>>>>> v3.18
 =======
 extern void container_dev_init(void);
 >>>>>>> v3.18
@@ -130,7 +140,10 @@ static inline int driver_match_device(struct device_driver *drv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int driver_add_groups(struct device_driver *drv,
 			     const struct attribute_group **groups);
 extern void driver_remove_groups(struct device_driver *drv,
@@ -141,6 +154,9 @@ extern int device_add_groups(struct device *dev,
 extern void device_remove_groups(struct device *dev,
 				 const struct attribute_group **groups);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern char *make_class_name(const char *name, struct kobject *kobj);
 

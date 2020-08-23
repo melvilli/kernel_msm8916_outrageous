@@ -48,7 +48,10 @@
 #include <asm/desc.h>
 #include <asm/topology.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/vgtod.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/traps.h>
@@ -58,7 +61,10 @@
 
 DEFINE_VVAR(int, vgetcpu_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_VVAR(struct vsyscall_gtod_data, vsyscall_gtod_data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -83,6 +89,7 @@ static int __init vsyscall_setup(char *str)
 }
 early_param("vsyscall", vsyscall_setup);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void update_vsyscall_tz(void)
 {
@@ -128,6 +135,8 @@ void update_vsyscall(struct timekeeper *tk)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
 			      const char *message)
 {
@@ -145,7 +154,11 @@ static int addr_to_vsyscall_nr(unsigned long addr)
 	int nr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((addr & ~0xC00UL) != VSYSCALL_START)
+=======
+	if ((addr & ~0xC00UL) != VSYSCALL_ADDR)
+>>>>>>> v3.18
 =======
 	if ((addr & ~0xC00UL) != VSYSCALL_ADDR)
 >>>>>>> v3.18
@@ -274,7 +287,11 @@ bool emulate_vsyscall(struct pt_regs *regs, unsigned long address)
 	regs->orig_ax = syscall_nr;
 	regs->ax = -ENOSYS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = secure_computing(syscall_nr);
+=======
+	tmp = secure_computing();
+>>>>>>> v3.18
 =======
 	tmp = secure_computing();
 >>>>>>> v3.18
@@ -349,7 +366,11 @@ sigsegv:
  * doesn't violate that. We'll find out if it does.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit vsyscall_set_cpu(int cpu)
+=======
+static void vsyscall_set_cpu(int cpu)
+>>>>>>> v3.18
 =======
 static void vsyscall_set_cpu(int cpu)
 >>>>>>> v3.18
@@ -375,7 +396,11 @@ static void vsyscall_set_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cpu_vsyscall_init(void *arg)
+=======
+static void cpu_vsyscall_init(void *arg)
+>>>>>>> v3.18
 =======
 static void cpu_vsyscall_init(void *arg)
 >>>>>>> v3.18
@@ -385,7 +410,11 @@ static void cpu_vsyscall_init(void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -404,6 +433,7 @@ void __init map_vsyscall(void)
 	extern char __vsyscall_page;
 	unsigned long physaddr_vsyscall = __pa_symbol(&__vsyscall_page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern char __vvar_page;
 	unsigned long physaddr_vvar_page = __pa_symbol(&__vvar_page);
 
@@ -418,6 +448,8 @@ void __init map_vsyscall(void)
 	BUILD_BUG_ON((unsigned long)__fix_to_virt(VVAR_PAGE) !=
 		     (unsigned long)VVAR_ADDRESS);
 =======
+=======
+>>>>>>> v3.18
 
 	__set_fixmap(VSYSCALL_PAGE, physaddr_vsyscall,
 		     vsyscall_mode == NATIVE
@@ -425,11 +457,15 @@ void __init map_vsyscall(void)
 		     : PAGE_KERNEL_VVAR);
 	BUILD_BUG_ON((unsigned long)__fix_to_virt(VSYSCALL_PAGE) !=
 		     (unsigned long)VSYSCALL_ADDR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int __init vsyscall_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BUG_ON(VSYSCALL_ADDR(0) != __fix_to_virt(VSYSCALL_FIRST_PAGE));
 
@@ -437,6 +473,8 @@ static int __init vsyscall_init(void)
 	/* notifier priority > KVM */
 	hotcpu_notifier(cpu_vsyscall_notifier, 30);
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 
 	on_each_cpu(cpu_vsyscall_init, NULL, 1);
@@ -444,6 +482,9 @@ static int __init vsyscall_init(void)
 	__hotcpu_notifier(cpu_vsyscall_notifier, 30);
 
 	cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

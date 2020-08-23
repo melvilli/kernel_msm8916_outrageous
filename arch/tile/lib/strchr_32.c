@@ -17,8 +17,11 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef strchr
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 char *strchr(const char *s, int c)

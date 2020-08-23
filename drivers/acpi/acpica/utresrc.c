@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -52,7 +56,12 @@
 #define _COMPONENT          ACPI_UTILITIES
 ACPI_MODULE_NAME("utresrc")
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(ACPI_DISASSEMBLER) || defined (ACPI_DEBUGGER)
+=======
+
+#if defined(ACPI_DEBUG_OUTPUT) || defined (ACPI_DISASSEMBLER) || defined (ACPI_DEBUGGER)
+>>>>>>> v3.18
 =======
 
 #if defined(ACPI_DEBUG_OUTPUT) || defined (ACPI_DISASSEMBLER) || defined (ACPI_DEBUGGER)
@@ -96,7 +105,13 @@ const char *acpi_gbl_io_decode[] = {
 const char *acpi_gbl_ll_decode[] = {
 	"ActiveHigh",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"ActiveLow"
+=======
+	"ActiveLow",
+	"ActiveBoth",
+	"Reserved"
+>>>>>>> v3.18
 =======
 	"ActiveLow",
 	"ActiveBoth",
@@ -659,7 +674,11 @@ acpi_ut_validate_resource(struct acpi_walk_state *walk_state,
 	return (AE_OK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       invalid_resource:
+=======
+invalid_resource:
+>>>>>>> v3.18
 =======
 invalid_resource:
 >>>>>>> v3.18
@@ -672,7 +691,11 @@ invalid_resource:
 	return (AE_AML_INVALID_RESOURCE_TYPE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       bad_resource_length:
+=======
+bad_resource_length:
+>>>>>>> v3.18
 =======
 bad_resource_length:
 >>>>>>> v3.18

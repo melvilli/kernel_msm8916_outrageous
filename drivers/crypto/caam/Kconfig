@@ -5,7 +5,11 @@ config CRYPTO_DEV_FSL_CAAM
 	  Enables the driver module for Freescale's Cryptographic Accelerator
 	  and Assurance Module (CAAM), also known as the SEC version 4 (SEC4).
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This module adds a job ring operation interface, and configures h/w
+=======
+	  This module creates job ring devices, and configures h/w
+>>>>>>> v3.18
 =======
 	  This module creates job ring devices, and configures h/w
 >>>>>>> v3.18
@@ -16,10 +20,13 @@ config CRYPTO_DEV_FSL_CAAM
 	  will be called caam.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CRYPTO_DEV_FSL_CAAM_RINGSIZE
 	int "Job Ring size"
 	depends on CRYPTO_DEV_FSL_CAAM
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_DEV_FSL_CAAM_JR
 	tristate "Freescale CAAM Job Ring driver backend"
 	depends on CRYPTO_DEV_FSL_CAAM
@@ -36,6 +43,9 @@ config CRYPTO_DEV_FSL_CAAM_JR
 config CRYPTO_DEV_FSL_CAAM_RINGSIZE
 	int "Job Ring size"
 	depends on CRYPTO_DEV_FSL_CAAM_JR
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	range 2 9
 	default "9"
@@ -55,7 +65,11 @@ config CRYPTO_DEV_FSL_CAAM_RINGSIZE
 config CRYPTO_DEV_FSL_CAAM_INTC
 	bool "Job Ring interrupt coalescing"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CRYPTO_DEV_FSL_CAAM
+=======
+	depends on CRYPTO_DEV_FSL_CAAM_JR
+>>>>>>> v3.18
 =======
 	depends on CRYPTO_DEV_FSL_CAAM_JR
 >>>>>>> v3.18
@@ -90,7 +104,11 @@ config CRYPTO_DEV_FSL_CAAM_INTC_TIME_THLD
 config CRYPTO_DEV_FSL_CAAM_CRYPTO_API
 	tristate "Register algorithm implementations with the Crypto API"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CRYPTO_DEV_FSL_CAAM
+=======
+	depends on CRYPTO_DEV_FSL_CAAM && CRYPTO_DEV_FSL_CAAM_JR
+>>>>>>> v3.18
 =======
 	depends on CRYPTO_DEV_FSL_CAAM && CRYPTO_DEV_FSL_CAAM_JR
 >>>>>>> v3.18
@@ -108,7 +126,11 @@ config CRYPTO_DEV_FSL_CAAM_CRYPTO_API
 config CRYPTO_DEV_FSL_CAAM_AHASH_API
 	tristate "Register hash algorithm implementations with Crypto API"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CRYPTO_DEV_FSL_CAAM
+=======
+	depends on CRYPTO_DEV_FSL_CAAM && CRYPTO_DEV_FSL_CAAM_JR
+>>>>>>> v3.18
 =======
 	depends on CRYPTO_DEV_FSL_CAAM && CRYPTO_DEV_FSL_CAAM_JR
 >>>>>>> v3.18
@@ -124,7 +146,11 @@ config CRYPTO_DEV_FSL_CAAM_AHASH_API
 config CRYPTO_DEV_FSL_CAAM_RNG_API
 	tristate "Register caam device for hwrng API"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CRYPTO_DEV_FSL_CAAM
+=======
+	depends on CRYPTO_DEV_FSL_CAAM && CRYPTO_DEV_FSL_CAAM_JR
+>>>>>>> v3.18
 =======
 	depends on CRYPTO_DEV_FSL_CAAM && CRYPTO_DEV_FSL_CAAM_JR
 >>>>>>> v3.18
@@ -138,7 +164,10 @@ config CRYPTO_DEV_FSL_CAAM_RNG_API
 	  To compile this as a module, choose M here: the module
 	  will be called caamrng.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config CRYPTO_DEV_FSL_CAAM_DEBUG
 	bool "Enable debug output in CAAM driver"
@@ -147,4 +176,7 @@ config CRYPTO_DEV_FSL_CAAM_DEBUG
 	help
 	  Selecting this will enable printing of various debug
 	  information in the CAAM driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

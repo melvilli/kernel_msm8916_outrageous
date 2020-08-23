@@ -26,7 +26,11 @@
 #define BTRFS_SUPER_MIRROR_SHIFT 12
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
+=======
+enum btrfs_wq_endio_type {
+>>>>>>> v3.18
 =======
 enum btrfs_wq_endio_type {
 >>>>>>> v3.18
@@ -35,6 +39,10 @@ enum btrfs_wq_endio_type {
 	BTRFS_WQ_ENDIO_FREE_SPACE = 2,
 	BTRFS_WQ_ENDIO_RAID56 = 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BTRFS_WQ_ENDIO_DIO_REPAIR = 4,
+>>>>>>> v3.18
 =======
 	BTRFS_WQ_ENDIO_DIO_REPAIR = 4,
 >>>>>>> v3.18
@@ -53,9 +61,14 @@ struct btrfs_fs_devices;
 
 struct extent_buffer *read_tree_block(struct btrfs_root *root, u64 bytenr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      u32 blocksize, u64 parent_transid);
 int readahead_tree_block(struct btrfs_root *root, u64 bytenr, u32 blocksize,
 			 u64 parent_transid);
+=======
+				      u64 parent_transid);
+void readahead_tree_block(struct btrfs_root *root, u64 bytenr, u32 blocksize);
+>>>>>>> v3.18
 =======
 				      u64 parent_transid);
 void readahead_tree_block(struct btrfs_root *root, u64 bytenr, u32 blocksize);
@@ -70,7 +83,11 @@ int open_ctree(struct super_block *sb,
 	       struct btrfs_fs_devices *fs_devices,
 	       char *options);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int close_ctree(struct btrfs_root *root);
+=======
+void close_ctree(struct btrfs_root *root);
+>>>>>>> v3.18
 =======
 void close_ctree(struct btrfs_root *root);
 >>>>>>> v3.18
@@ -79,6 +96,7 @@ int write_ctree_super(struct btrfs_trans_handle *trans,
 struct buffer_head *btrfs_read_dev_super(struct block_device *bdev);
 int btrfs_commit_super(struct btrfs_root *root);
 struct extent_buffer *btrfs_find_tree_block(struct btrfs_root *root,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					    u64 bytenr, u32 blocksize);
 struct btrfs_root *btrfs_read_fs_root_no_radix(struct btrfs_root *tree_root,
@@ -90,6 +108,8 @@ void btrfs_btree_balance_dirty(struct btrfs_root *root);
 void btrfs_btree_balance_dirty_nodelay(struct btrfs_root *root);
 void btrfs_free_fs_root(struct btrfs_fs_info *fs_info, struct btrfs_root *root);
 =======
+=======
+>>>>>>> v3.18
 					    u64 bytenr);
 struct btrfs_root *btrfs_read_fs_root(struct btrfs_root *tree_root,
 				      struct btrfs_key *location);
@@ -139,6 +159,9 @@ static inline void btrfs_put_fs_root(struct btrfs_root *root)
 		kfree(root);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void btrfs_mark_buffer_dirty(struct extent_buffer *buf);
 int btrfs_buffer_uptodate(struct extent_buffer *buf, u64 parent_transid,
@@ -149,7 +172,11 @@ u32 btrfs_csum_data(char *data, u32 seed, size_t len);
 void btrfs_csum_final(u32 crc, char *result);
 int btrfs_bio_wq_end_io(struct btrfs_fs_info *info, struct bio *bio,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int metadata);
+=======
+			enum btrfs_wq_endio_type metadata);
+>>>>>>> v3.18
 =======
 			enum btrfs_wq_endio_type metadata);
 >>>>>>> v3.18
@@ -175,6 +202,11 @@ int btree_lock_page_hook(struct page *page, void *data,
 int btrfs_calc_num_tolerated_disk_barrier_failures(
 	struct btrfs_fs_info *fs_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int __init btrfs_end_io_wq_init(void);
+void btrfs_end_io_wq_exit(void);
+>>>>>>> v3.18
 =======
 int __init btrfs_end_io_wq_init(void);
 void btrfs_end_io_wq_exit(void);

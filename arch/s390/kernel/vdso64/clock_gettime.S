@@ -20,12 +20,15 @@
 __kernel_clock_gettime:
 	.cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	larl	%r5,_vdso_data
 	cghi	%r2,__CLOCK_REALTIME
 	je	4f
 	cghi	%r2,-2		/* CLOCK_THREAD_CPUTIME_ID for this thread */
 	je	9f
 =======
+=======
+>>>>>>> v3.18
 	aghi	%r15,-16
 	larl	%r5,_vdso_data
 	cghi	%r2,__CLOCK_REALTIME_COARSE
@@ -38,11 +41,15 @@ __kernel_clock_gettime:
 	je	9f
 	cghi	%r2,__CLOCK_MONOTONIC_COARSE
 	je	3f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cghi	%r2,__CLOCK_MONOTONIC
 	jne	12f
 
 	/* CLOCK_MONOTONIC */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ltgr	%r3,%r3
 	jz	3f				/* tp == NULL */
@@ -59,6 +66,8 @@ __kernel_clock_gettime:
 	alg	%r1,__VDSO_WTOM_NSEC(%r5)	/*  + wall_to_monotonic */
 	alg	%r0,__VDSO_WTOM_SEC(%r5)
 =======
+=======
+>>>>>>> v3.18
 0:	lg	%r4,__VDSO_UPD_COUNT(%r5)	/* load update counter */
 	tmll	%r4,0x0001			/* pending update ? loop */
 	jnz	0b
@@ -70,6 +79,9 @@ __kernel_clock_gettime:
 	msgf	%r1,__VDSO_TK_MULT(%r5)		/*  * tk->mult */
 	alg	%r1,__VDSO_WTOM_NSEC(%r5)
 	srlg	%r1,%r1,0(%r2)			/*  >> tk->shift */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clg	%r4,__VDSO_UPD_COUNT(%r5)	/* check update counter */
 	jne	0b
@@ -81,6 +93,7 @@ __kernel_clock_gettime:
 	j	1b
 2:	stg	%r0,0(%r3)			/* store tp->tv_sec */
 	stg	%r1,8(%r3)			/* store tp->tv_nsec */
+<<<<<<< HEAD
 <<<<<<< HEAD
 3:	lghi	%r2,0
 	br	%r14
@@ -99,6 +112,8 @@ __kernel_clock_gettime:
 	alg	%r1,__VDSO_XTIME_NSEC(%r5)	/*  + xtime */
 	lg	%r0,__VDSO_XTIME_SEC(%r5)
 =======
+=======
+>>>>>>> v3.18
 	lghi	%r2,0
 	aghi	%r15,16
 	br	%r14
@@ -135,6 +150,9 @@ __kernel_clock_gettime:
 	alg	%r1,__VDSO_XTIME_NSEC(%r5)	/*  + tk->xtime_nsec */
 	srlg	%r1,%r1,0(%r2)			/*  >> tk->shift */
 	lg	%r0,__VDSO_XTIME_SEC(%r5)	/* tk->xtime_sec */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clg	%r4,__VDSO_UPD_COUNT(%r5)	/* check update counter */
 	jne	5b
@@ -147,7 +165,12 @@ __kernel_clock_gettime:
 7:	stg	%r0,0(%r3)			/* store tp->tv_sec */
 	stg	%r1,8(%r3)			/* store tp->tv_nsec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 8:	lghi	%r2,0
+=======
+	lghi	%r2,0
+	aghi	%r15,16
+>>>>>>> v3.18
 =======
 	lghi	%r2,0
 	aghi	%r15,16
@@ -186,6 +209,10 @@ __kernel_clock_gettime:
 	stg	%r4,8(%r3)
 	lghi	%r2,0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aghi	%r15,16
+>>>>>>> v3.18
 =======
 	aghi	%r15,16
 >>>>>>> v3.18
@@ -195,6 +222,10 @@ __kernel_clock_gettime:
 12:	lghi	%r1,__NR_clock_gettime
 	svc	0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aghi	%r15,16
+>>>>>>> v3.18
 =======
 	aghi	%r15,16
 >>>>>>> v3.18

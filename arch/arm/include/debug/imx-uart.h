@@ -44,7 +44,10 @@
 #define IMX35_UART_BASE(n)	IMX35_UART_BASE_ADDR(n)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IMX50_UART1_BASE_ADDR	0x53fbc000
 #define IMX50_UART2_BASE_ADDR	0x53fc0000
 #define IMX50_UART3_BASE_ADDR	0x5000c000
@@ -53,6 +56,9 @@
 #define IMX50_UART_BASE_ADDR(n)	IMX50_UART##n##_BASE_ADDR
 #define IMX50_UART_BASE(n)	IMX50_UART_BASE_ADDR(n)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IMX51_UART1_BASE_ADDR	0x73fbc000
 #define IMX51_UART2_BASE_ADDR	0x73fc0000
@@ -77,7 +83,10 @@
 #define IMX6Q_UART_BASE(n)	IMX6Q_UART_BASE_ADDR(n)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IMX6SL_UART1_BASE_ADDR	0x02020000
 #define IMX6SL_UART2_BASE_ADDR	0x02024000
 #define IMX6SL_UART3_BASE_ADDR	0x02034000
@@ -95,6 +104,9 @@
 #define IMX6SX_UART_BASE_ADDR(n) IMX6SX_UART##n##_BASE_ADDR
 #define IMX6SX_UART_BASE(n)	IMX6SX_UART_BASE_ADDR(n)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IMX_DEBUG_UART_BASE(soc) soc##_UART_BASE(CONFIG_DEBUG_IMX_UART_PORT)
 
@@ -109,6 +121,11 @@
 #elif defined(CONFIG_DEBUG_IMX35_UART)
 #define UART_PADDR	IMX_DEBUG_UART_BASE(IMX35)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#elif defined(CONFIG_DEBUG_IMX50_UART)
+#define UART_PADDR	IMX_DEBUG_UART_BASE(IMX50)
+>>>>>>> v3.18
 =======
 #elif defined(CONFIG_DEBUG_IMX50_UART)
 #define UART_PADDR	IMX_DEBUG_UART_BASE(IMX50)
@@ -120,11 +137,17 @@
 #elif defined(CONFIG_DEBUG_IMX6Q_UART)
 #define UART_PADDR	IMX_DEBUG_UART_BASE(IMX6Q)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_DEBUG_IMX6SL_UART)
 #define UART_PADDR	IMX_DEBUG_UART_BASE(IMX6SL)
 #elif defined(CONFIG_DEBUG_IMX6SX_UART)
 #define UART_PADDR	IMX_DEBUG_UART_BASE(IMX6SX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

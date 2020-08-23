@@ -110,6 +110,7 @@ static void autofs4_notify_daemon(struct autofs_sb_info *sbi,
 	pkt.hdr.proto_version = sbi->version;
 	pkt.hdr.type = type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&sbi->wq_mutex);
 
 	/* Check if we have become catatonic */
@@ -117,6 +118,9 @@ static void autofs4_notify_daemon(struct autofs_sb_info *sbi,
 		mutex_unlock(&sbi->wq_mutex);
 		return;
 	}
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -358,6 +362,11 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 	char *name;
 	int status, ret, type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pid_t pid;
+	pid_t tgid;
+>>>>>>> v3.18
 =======
 	pid_t pid;
 	pid_t tgid;
@@ -368,7 +377,10 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Try translating pids to the namespace of the daemon.
 	 *
@@ -379,6 +391,9 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 	if (pid == 0 || tgid == 0)
 		return -ENOENT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dentry->d_inode) {
 		/*
@@ -446,16 +461,22 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 		wq->uid = current_uid();
 		wq->gid = current_gid();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wq->pid = current->pid;
 		wq->tgid = current->tgid;
 		wq->status = -EINTR; /* Status return if interrupted */
 		wq->wait_ctr = 2;
 		mutex_unlock(&sbi->wq_mutex);
 =======
+=======
+>>>>>>> v3.18
 		wq->pid = pid;
 		wq->tgid = tgid;
 		wq->status = -EINTR; /* Status return if interrupted */
 		wq->wait_ctr = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (sbi->version < 5) {
@@ -479,6 +500,7 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 			wq->name.name, notify);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* autofs4_notify_daemon() may block */
 		autofs4_notify_daemon(sbi, wq, type);
 	} else {
@@ -489,6 +511,8 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 			(unsigned long) wq->wait_queue_token, wq->name.len,
 			wq->name.name, notify);
 =======
+=======
+>>>>>>> v3.18
 		/* autofs4_notify_daemon() may block; it will unlock ->wq_mutex */
 		autofs4_notify_daemon(sbi, wq, type);
 	} else {
@@ -498,6 +522,9 @@ int autofs4_wait(struct autofs_sb_info *sbi, struct dentry *dentry,
 			wq->name.name, notify);
 		mutex_unlock(&sbi->wq_mutex);
 		kfree(qstr.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

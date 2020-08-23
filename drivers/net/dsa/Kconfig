@@ -37,7 +37,10 @@ config NET_DSA_MV88E6123_61_65
 	  ethernet switch chips.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NET_DSA_MV88E6171
 	tristate "Marvell 88E6171 ethernet switch chip support"
 	select NET_DSA
@@ -59,5 +62,8 @@ config NET_DSA_BCM_SF2
 	  This enables support for the Broadcom Starfighter 2 Ethernet
 	  switch chips.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

@@ -46,6 +46,7 @@ struct linger {
  
 struct msghdr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void	*	msg_name;	/* Socket name			*/
 	int		msg_namelen;	/* Length of name		*/
 	struct iovec *	msg_iov;	/* Data blocks			*/
@@ -54,6 +55,8 @@ struct msghdr {
 	__kernel_size_t	msg_controllen;	/* Length of cmsg list */
 	unsigned int	msg_flags;
 =======
+=======
+>>>>>>> v3.18
 	void		*msg_name;	/* ptr to socket address structure */
 	int		msg_namelen;	/* size of socket address structure */
 	struct iovec	*msg_iov;	/* scatter/gather array */
@@ -61,6 +64,9 @@ struct msghdr {
 	void		*msg_control;	/* ancillary data */
 	__kernel_size_t	msg_controllen;	/* ancillary data buffer length */
 	unsigned int	msg_flags;	/* flags on received message */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -178,6 +184,10 @@ struct ucred {
 #define AF_WANPIPE	25	/* Wanpipe API Sockets */
 #define AF_LLC		26	/* Linux LLC			*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AF_IB		27	/* Native InfiniBand address	*/
+>>>>>>> v3.18
 =======
 #define AF_IB		27	/* Native InfiniBand address	*/
 >>>>>>> v3.18
@@ -226,6 +236,10 @@ struct ucred {
 #define PF_WANPIPE	AF_WANPIPE
 #define PF_LLC		AF_LLC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PF_IB		AF_IB
+>>>>>>> v3.18
 =======
 #define PF_IB		AF_IB
 >>>>>>> v3.18
@@ -273,7 +287,11 @@ struct ucred {
 
 #define MSG_FASTOPEN	0x20000000	/* Send data in TCP SYN */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MSG_CMSG_CLOEXEC 0x40000000	/* Set close_on_exit for file
+=======
+#define MSG_CMSG_CLOEXEC 0x40000000	/* Set close_on_exec for file
+>>>>>>> v3.18
 =======
 #define MSG_CMSG_CLOEXEC 0x40000000	/* Set close_on_exec for file
 >>>>>>> v3.18
@@ -326,10 +344,13 @@ struct ucred {
 #define IPX_TYPE	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cred_to_ucred(struct pid *pid, const struct cred *cred, struct ucred *ucred);
 
 extern int memcpy_fromiovecend(unsigned char *kdata, const struct iovec *iov,
 			       int offset, int len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int csum_partial_copy_fromiovecend(unsigned char *kdata, 
@@ -337,15 +358,21 @@ extern int csum_partial_copy_fromiovecend(unsigned char *kdata,
 					  int offset, 
 					  unsigned int len, __wsum *csump);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern int verify_iovec(struct msghdr *m, struct iovec *iov, struct sockaddr_storage *address, int mode);
 extern int memcpy_toiovecend(const struct iovec *v, unsigned char *kdata,
 			     int offset, int len);
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long iov_pages(const struct iovec *iov, int offset,
 			       unsigned long nr_segs);
 
 extern int verify_iovec(struct msghdr *m, struct iovec *iov, struct sockaddr_storage *address, int mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int move_addr_to_kernel(void __user *uaddr, int ulen, struct sockaddr_storage *kaddr);
 extern int put_cmsg(struct msghdr*, int level, int type, int len, void *data);

@@ -40,7 +40,10 @@
 #include <linux/init.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/seq_file.h>
@@ -57,7 +60,12 @@
 	})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long no_fiq_insn;
+=======
+static unsigned long dfl_fiq_insn;
+static struct pt_regs dfl_fiq_regs;
+>>>>>>> v3.18
 =======
 static unsigned long dfl_fiq_insn;
 static struct pt_regs dfl_fiq_regs;
@@ -70,9 +78,12 @@ static struct pt_regs dfl_fiq_regs;
 static int fiq_def_op(void *ref, int relinquish)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!relinquish)
 		set_fiq_handler(&no_fiq_insn, sizeof(no_fiq_insn));
 =======
+=======
+>>>>>>> v3.18
 	if (!relinquish) {
 		/* Restore default handler and registers */
 		local_fiq_disable();
@@ -82,6 +93,9 @@ static int fiq_def_op(void *ref, int relinquish)
 
 		/* FIXME: notify irq controller to standard enable FIQs */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -161,11 +175,14 @@ void disable_fiq(int fiq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fiq_set_type(int fiq, unsigned int type)
 {
 	irq_set_irq_type(fiq + FIQ_START, type);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(set_fiq_handler);
@@ -176,7 +193,10 @@ EXPORT_SYMBOL(release_fiq);
 EXPORT_SYMBOL(enable_fiq);
 EXPORT_SYMBOL(disable_fiq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(fiq_set_type);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -184,7 +204,12 @@ void __init init_FIQ(int start)
 {
 	unsigned offset = FIQ_OFFSET;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	no_fiq_insn = *(unsigned long *)(0xffff0000 + offset);
+=======
+	dfl_fiq_insn = *(unsigned long *)(0xffff0000 + offset);
+	get_fiq_regs(&dfl_fiq_regs);
+>>>>>>> v3.18
 =======
 	dfl_fiq_insn = *(unsigned long *)(0xffff0000 + offset);
 	get_fiq_regs(&dfl_fiq_regs);

@@ -78,7 +78,10 @@ config I2C_AMD8111
 	  will be called i2c-amd8111.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_HIX5HD2
 	tristate "Hix5hd2 high-speed I2C driver"
 	depends on ARCH_HIX5HD2
@@ -89,6 +92,9 @@ config I2C_HIX5HD2
 	  This driver can also be built as a module.  If so, the module
 	  will be called i2c-hix5hd2.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_I801
 	tristate "Intel 82801 (ICH/PCH)"
@@ -123,13 +129,19 @@ config I2C_I801
 	    Wellsburg (PCH)
 	    Coleto Creek (PCH)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    Wildcat Point-LP (PCH)
 	    BayTrail (SOC)
 =======
+=======
+>>>>>>> v3.18
 	    Wildcat Point (PCH)
 	    Wildcat Point-LP (PCH)
 	    BayTrail (SOC)
 	    Sunrise Point-H (PCH)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  This driver can also be built as a module.  If so, the module
@@ -174,6 +186,10 @@ config I2C_PIIX4
 	    ATI SB800
 	    AMD Hudson-2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    AMD ML
+>>>>>>> v3.18
 =======
 	    AMD ML
 >>>>>>> v3.18
@@ -360,7 +376,10 @@ config I2C_AU1550
 	  will be called i2c-au1550.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_AXXIA
 	tristate "Axxia I2C controller"
 	depends on ARCH_AXXIA || COMPILE_TEST
@@ -372,6 +391,9 @@ config I2C_AXXIA
 	  255 bytes in length. Any attempt to to a larger transfer will return
 	  an error.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_BCM2835
 	tristate "Broadcom BCM2835 I2C controller"
@@ -386,7 +408,10 @@ config I2C_BCM2835
 	  will be called i2c-bcm2835.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_BCM_KONA
 	tristate "BCM Kona I2C adapter"
 	depends on ARCH_BCM_MOBILE
@@ -397,6 +422,9 @@ config I2C_BCM_KONA
 
 	  If you do not need KONA I2C interface, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_BLACKFIN_TWI
 	tristate "Blackfin TWI I2C support"
@@ -417,7 +445,10 @@ config I2C_BLACKFIN_TWI_CLK_KHZ
 	  The unit of the TWI clock is kHz.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_CADENCE
 	tristate "Cadence I2C Controller"
 	depends on ARCH_ZYNQ
@@ -425,6 +456,9 @@ config I2C_CADENCE
 	  Say yes here to select Cadence I2C Host Controller. This controller is
 	  e.g. used by Xilinx Zynq.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_CBUS_GPIO
 	tristate "CBUS I2C driver"
@@ -439,7 +473,11 @@ config I2C_CBUS_GPIO
 config I2C_CPM
 	tristate "Freescale CPM1 or CPM2 (MPC8xx/826x)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (CPM1 || CPM2) && OF_I2C
+=======
+	depends on CPM1 || CPM2
+>>>>>>> v3.18
 =======
 	depends on CPM1 || CPM2
 >>>>>>> v3.18
@@ -453,7 +491,11 @@ config I2C_CPM
 config I2C_DAVINCI
 	tristate "DaVinci I2C driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_DAVINCI
+=======
+	depends on ARCH_DAVINCI || ARCH_KEYSTONE
+>>>>>>> v3.18
 =======
 	depends on ARCH_DAVINCI || ARCH_KEYSTONE
 >>>>>>> v3.18
@@ -473,8 +515,13 @@ config I2C_DESIGNWARE_CORE
 config I2C_DESIGNWARE_PLATFORM
 	tristate "Synopsys DesignWare Platform"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_CLK
 	select I2C_DESIGNWARE_CORE
+=======
+	select I2C_DESIGNWARE_CORE
+	depends on (ACPI && COMMON_CLK) || !ACPI
+>>>>>>> v3.18
 =======
 	select I2C_DESIGNWARE_CORE
 	depends on (ACPI && COMMON_CLK) || !ACPI
@@ -498,10 +545,13 @@ config I2C_DESIGNWARE_PCI
 	  will be called i2c-designware-pci.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config I2C_EG20T
 	tristate "Intel EG20T PCH/LAPIS Semicon IOH(ML7213/ML7223/ML7831) I2C"
 	depends on PCI
 =======
+=======
+>>>>>>> v3.18
 config I2C_EFM32
 	tristate "EFM32 I2C controller"
 	depends on ARCH_EFM32 || COMPILE_TEST
@@ -512,6 +562,9 @@ config I2C_EFM32
 config I2C_EG20T
 	tristate "Intel EG20T PCH/LAPIS Semicon IOH(ML7213/ML7223/ML7831) I2C"
 	depends on PCI && (X86_32 || COMPILE_TEST)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This driver is for PCH(Platform controller Hub) I2C of EG20T which
@@ -526,7 +579,10 @@ config I2C_EG20T
 	  ML7213/ML7223/ML7831 is completely compatible for Intel EG20T PCH.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_EXYNOS5
 	tristate "Exynos5 high-speed I2C driver"
 	depends on ARCH_EXYNOS && OF
@@ -534,6 +590,9 @@ config I2C_EXYNOS5
 	help
 	  High-speed I2C controller on Exynos5 based Samsung SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_GPIO
 	tristate "GPIO-based bitbanging I2C"
@@ -576,6 +635,7 @@ config I2C_IMX
 	  will be called i2c-imx.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config I2C_INTEL_MID
 	tristate "Intel Moorestown/Medfield Platform I2C controller"
 	depends on PCI
@@ -586,6 +646,8 @@ config I2C_INTEL_MID
 	  This support is also available as a module. If so, the module
 	  will be called i2c-intel-mid.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config I2C_IOP3XX
@@ -599,7 +661,10 @@ config I2C_IOP3XX
 	  will be called i2c-iop3xx.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_KEMPLD
 	tristate "Kontron COM I2C Controller"
 	depends on MFD_KEMPLD
@@ -610,6 +675,9 @@ config I2C_KEMPLD
 	  This driver can also be built as a module. If so, the module
 	  will be called i2c-kempld.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_MPC
 	tristate "MPC107/824x/85xx/512x/52xx/83xx/86xx"
@@ -622,6 +690,7 @@ config I2C_MPC
 	  This driver can also be built as a module.  If so, the module
 	  will be called i2c-mpc.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config I2C_QUP
 	tristate "I2C_QUP"
@@ -648,6 +717,8 @@ config I2C_MV64XXX
 	  If you say yes to this option, support will be included for the
 	  built-in I2C interface on the Marvell 64xxx line of host bridges.
 =======
+=======
+>>>>>>> v3.18
 config I2C_MV64XXX
 	tristate "Marvell mv64xxx I2C Controller"
 	depends on MV64X60 || PLAT_ORION || ARCH_SUNXI
@@ -655,6 +726,9 @@ config I2C_MV64XXX
 	  If you say yes to this option, support will be included for the
 	  built-in I2C interface on the Marvell 64xxx line of host bridges.
 	  This driver is also used for Allwinner SoCs I2C controllers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  This driver can also be built as a module.  If so, the module
@@ -680,6 +754,7 @@ config I2C_NOMADIK
 	  as well as the STA2X11 PCIe I/O HUB.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config I2C_NUC900
 	tristate "NUC900 I2C Driver"
 	depends on ARCH_W90X900
@@ -687,6 +762,8 @@ config I2C_NUC900
 	  Say Y here to include support for I2C controller in the
 	  Winbond/Nuvoton NUC900 based System-on-Chip devices.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config I2C_OCORES
@@ -776,7 +853,10 @@ config I2C_PXA_SLAVE
 	  I2C bus.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_QUP
 	tristate "Qualcomm QUP based I2C controller"
 	depends on ARCH_QCOM
@@ -807,6 +887,9 @@ config I2C_RK3X
 	  This driver can also be built as a module. If so, the module will
 	  be called i2c-rk3x.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HAVE_S3C2410_I2C
 	bool
@@ -823,6 +906,7 @@ config I2C_S3C2410
 	  Samsung SoCs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config I2C_S6000
 	tristate "S6000 I2C support"
 	depends on XTENSA_VARIANT_S6000
@@ -833,6 +917,8 @@ config I2C_S6000
 	  To compile this driver as a module, choose M here. The module
 	  will be called i2c-s6000.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config I2C_SH7760
@@ -847,7 +933,11 @@ config I2C_SH7760
 config I2C_SH_MOBILE
 	tristate "SuperH Mobile I2C Controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SUPERH || ARCH_SHMOBILE
+=======
+	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
 >>>>>>> v3.18
@@ -873,7 +963,11 @@ config I2C_SIMTEC
 config I2C_SIRF
 	tristate "CSR SiRFprimaII I2C interface"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_PRIMA2
+=======
+	depends on ARCH_SIRF
+>>>>>>> v3.18
 =======
 	depends on ARCH_SIRF
 >>>>>>> v3.18
@@ -885,7 +979,10 @@ config I2C_SIRF
 	  will be called i2c-sirf.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_ST
 	tristate "STMicroelectronics SSC I2C support"
 	depends on ARCH_STI
@@ -896,6 +993,9 @@ config I2C_ST
 	  This driver can also be built as module. If so, the module
 	  will be called i2c-st.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_STU300
 	tristate "ST Microelectronics DDC I2C interface"
@@ -911,7 +1011,10 @@ config I2C_STU300
 	  will be called i2c-stu300.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_SUN6I_P2WI
 	tristate "Allwinner sun6i internal P2WI controller"
 	depends on RESET_CONTROLLER
@@ -925,6 +1028,9 @@ config I2C_SUN6I_P2WI
 	  This interface is used to connect to specific PMIC devices (like the
 	  AXP221).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_TEGRA
 	tristate "NVIDIA Tegra internal I2C controller"
@@ -945,10 +1051,13 @@ config I2C_VERSATILE
 	  will be called i2c-versatile.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config I2C_OCTEON
 	tristate "Cavium OCTEON I2C bus support"
 	depends on CPU_CAVIUM_OCTEON
 =======
+=======
+>>>>>>> v3.18
 config I2C_WMT
 	tristate "Wondermedia WM8xxx SoC I2C bus support"
 	depends on ARCH_VT8500
@@ -962,6 +1071,9 @@ config I2C_WMT
 config I2C_OCTEON
 	tristate "Cavium OCTEON I2C bus support"
 	depends on CAVIUM_OCTEON_SOC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say yes if you want to support the I2C serial bus on Cavium
@@ -993,7 +1105,11 @@ config I2C_XLR
 config I2C_RCAR
 	tristate "Renesas R-Car I2C Controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_SHMOBILE && I2C
+=======
+	depends on ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_SHMOBILE || COMPILE_TEST
 >>>>>>> v3.18
@@ -1066,7 +1182,10 @@ config I2C_PARPORT_LIGHT
 	  will be called i2c-parport-light.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I2C_ROBOTFUZZ_OSIF
 	tristate "RobotFuzz Open Source InterFace USB adapter"
 	depends on USB
@@ -1077,6 +1196,9 @@ config I2C_ROBOTFUZZ_OSIF
 	  This driver can also be built as a module.  If so, the module
 	  will be called i2c-osif.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config I2C_TAOS_EVM
 	tristate "TAOS evaluation module"
@@ -1162,6 +1284,7 @@ config I2C_SIBYTE
 	  Supports the SiByte SOC on-chip I2C interfaces (2 channels).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCx200_I2C
 	tristate "NatSemi SCx200 I2C using GPIO pins (DEPRECATED)"
 	depends on SCx200_GPIO
@@ -1193,6 +1316,8 @@ config SCx200_I2C_SDA
 	  Enter the GPIO pin number used for the SSA signal.  This value can
 	  also be specified with a module parameter.
 =======
+=======
+>>>>>>> v3.18
 config I2C_CROS_EC_TUNNEL
 	tristate "ChromeOS EC tunnel I2C bus"
 	depends on MFD_CROS_EC
@@ -1201,6 +1326,9 @@ config I2C_CROS_EC_TUNNEL
 	  through to the other side of the ChromeOS EC to the i2c bus
 	  connected there. This will work whatever the interface used to
 	  talk to the EC (SPI, I2C or LPC).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SCx200_ACB

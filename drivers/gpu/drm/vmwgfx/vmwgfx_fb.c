@@ -375,6 +375,7 @@ static int vmw_fb_create_bo(struct vmw_private *vmw_priv,
 {
 	struct vmw_dma_buffer *vmw_bo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ttm_placement ne_placement = vmw_vram_ne_placement;
 	int ret;
 
@@ -389,6 +390,8 @@ static int vmw_fb_create_bo(struct vmw_private *vmw_priv,
 	if (!vmw_bo)
 		goto err_unlock;
 =======
+=======
+>>>>>>> v3.18
 	struct ttm_place ne_place = vmw_vram_ne_placement.placement[0];
 	struct ttm_placement ne_placement;
 	int ret;
@@ -407,6 +410,9 @@ static int vmw_fb_create_bo(struct vmw_private *vmw_priv,
 		ret = -ENOMEM;
 		goto err_unlock;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = vmw_dmabuf_init(vmw_priv, vmw_bo, size,

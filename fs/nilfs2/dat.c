@@ -485,7 +485,10 @@ int nilfs_dat_read(struct super_block *sb, size_t entry_size,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (entry_size > sb->s_blocksize) {
 		printk(KERN_ERR
 		       "NILFS: too large DAT entry size: %zu bytes.\n",
@@ -498,6 +501,9 @@ int nilfs_dat_read(struct super_block *sb, size_t entry_size,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dat = nilfs_iget_locked(sb, NULL, NILFS_DAT_INO);
 	if (unlikely(!dat))

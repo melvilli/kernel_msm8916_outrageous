@@ -5,11 +5,17 @@ ifeq ($(CONFIG_VIDEO_AU0828_V4L2),y)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(CONFIG_VIDEO_AU0828_RC),y)
   au0828-objs   += au0828-input.o
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_VIDEO_AU0828) += au0828.o
 

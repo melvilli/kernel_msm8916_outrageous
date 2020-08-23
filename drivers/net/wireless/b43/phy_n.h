@@ -3,6 +3,10 @@
 
 #include "phy_common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ppr.h"
+>>>>>>> v3.18
 =======
 #include "ppr.h"
 >>>>>>> v3.18
@@ -371,6 +375,10 @@
 #define B43_NPHY_TXF_40CO_B32S1			B43_PHY_N(0x0E6) /* TX filter 40 coeff B32 stage 1 */
 #define B43_NPHY_TXF_40CO_B1S1			B43_PHY_N(0x0E7) /* TX filter 40 coeff B1 stage 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define B43_NPHY_REV3_RFCTL_OVER0		B43_PHY_N(0x0E7)
+>>>>>>> v3.18
 =======
 #define B43_NPHY_REV3_RFCTL_OVER0		B43_PHY_N(0x0E7)
 >>>>>>> v3.18
@@ -380,6 +388,10 @@
 #define B43_NPHY_BIST_STAT3			B43_PHY_N(0x0EB) /* BIST status 3 */
 #define B43_NPHY_RFCTL_OVER			B43_PHY_N(0x0EC) /* RF control override */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define B43_NPHY_REV3_RFCTL_OVER1		B43_PHY_N(0x0EC)
+>>>>>>> v3.18
 =======
 #define B43_NPHY_REV3_RFCTL_OVER1		B43_PHY_N(0x0EC)
 >>>>>>> v3.18
@@ -870,8 +882,11 @@
 #define B43_NPHY_REV3_C2_CLIP2_GAIN_B		B43_PHY_N(0x2B0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define B43_PHY_B_BBCFG				B43_PHY_N_BMODE(0x001) /* BB config */
 =======
+=======
+>>>>>>> v3.18
 #define B43_NPHY_REV7_RF_CTL_MISC_REG3		B43_PHY_N(0x340)
 #define B43_NPHY_REV7_RF_CTL_MISC_REG4		B43_PHY_N(0x341)
 #define B43_NPHY_REV7_RF_CTL_OVER3		B43_PHY_N(0x342)
@@ -884,6 +899,9 @@
 #define B43_PHY_B_BBCFG				B43_PHY_N_BMODE(0x001) /* BB config */
 #define  B43_PHY_B_BBCFG_RSTCCA			0x4000 /* Reset CCA */
 #define  B43_PHY_B_BBCFG_RSTRX			0x8000 /* Reset RX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define B43_PHY_B_TEST				B43_PHY_N_BMODE(0x00A)
 
@@ -959,7 +977,10 @@ struct b43_phy_n {
 	s32 preamble_override;
 	u32 bb_mult_save;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool init_por;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -967,6 +988,11 @@ struct b43_phy_n {
 	bool elna_gain_config;
 	bool band5g_pwrgain;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool use_int_tx_iq_lo_cal;
+	bool lpf_bw_overrode_for_sample_play;
+>>>>>>> v3.18
 =======
 	bool use_int_tx_iq_lo_cal;
 	bool lpf_bw_overrode_for_sample_play;
@@ -989,6 +1015,12 @@ struct b43_phy_n {
 	struct b43_phy_n_pwr_ctl_info pwr_ctl_info[2];
 	struct b43_chanspec txiqlocal_chanspec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct b43_ppr tx_pwr_max_ppr;
+	u16 tx_pwr_last_recalc_freq;
+	int tx_pwr_last_recalc_limit;
+>>>>>>> v3.18
 =======
 	struct b43_ppr tx_pwr_max_ppr;
 	u16 tx_pwr_last_recalc_freq;

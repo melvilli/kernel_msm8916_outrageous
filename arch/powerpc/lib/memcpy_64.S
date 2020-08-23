@@ -11,6 +11,7 @@
 
 	.align	7
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(memcpy)
 BEGIN_FTR_SECTION
 	std	r3,48(r1)	/* save destination pointer for return value */
@@ -18,6 +19,8 @@ FTR_SECTION_ELSE
 	b	memcpy_power7
 ALT_FTR_SECTION_END_IFCLR(CPU_FTR_VMX_COPY)
 =======
+=======
+>>>>>>> v3.18
 _GLOBAL_TOC(memcpy)
 BEGIN_FTR_SECTION
 #ifdef __LITTLE_ENDIAN__
@@ -41,6 +44,9 @@ ALT_FTR_SECTION_END_IFCLR(CPU_FTR_VMX_COPY)
 	bdnz 1b
 	blr
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PPC_MTOCRF(0x01,r5)
 	cmpldi	cr1,r5,16
@@ -98,7 +104,11 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 	lbz	r9,8(r4)
 	stb	r9,0(r3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 3:	ld	r3,48(r1)	/* return dest pointer */
+=======
+3:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)	/* return dest pointer */
+>>>>>>> v3.18
 =======
 3:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)	/* return dest pointer */
 >>>>>>> v3.18
@@ -185,7 +195,11 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 	rotldi	r9,r9,8
 	stb	r9,0(r3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 3:	ld	r3,48(r1)	/* return dest pointer */
+=======
+3:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)	/* return dest pointer */
+>>>>>>> v3.18
 =======
 3:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)	/* return dest pointer */
 >>>>>>> v3.18
@@ -234,8 +248,14 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 	lbz	r0,0(r4)
 	stb	r0,0(r3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 4:	ld	r3,48(r1)	/* return dest pointer */
 	blr
+=======
+4:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)	/* return dest pointer */
+	blr
+#endif
+>>>>>>> v3.18
 =======
 4:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)	/* return dest pointer */
 	blr

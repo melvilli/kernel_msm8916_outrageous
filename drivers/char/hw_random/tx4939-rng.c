@@ -111,6 +111,7 @@ static int __init tx4939_rng_probe(struct platform_device *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = platform_get_resource(dev, IORESOURCE_MEM, 0);
 	if (!r)
 		return -EBUSY;
@@ -118,10 +119,15 @@ static int __init tx4939_rng_probe(struct platform_device *dev)
 	if (!rngdev)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	rngdev = devm_kzalloc(&dev->dev, sizeof(*rngdev), GFP_KERNEL);
 	if (!rngdev)
 		return -ENOMEM;
 	r = platform_get_resource(dev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rngdev->base = devm_ioremap_resource(&dev->dev, r);
 	if (IS_ERR(rngdev->base))
@@ -162,7 +168,10 @@ static int __exit tx4939_rng_remove(struct platform_device *dev)
 
 	hwrng_unregister(&rngdev->rng);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

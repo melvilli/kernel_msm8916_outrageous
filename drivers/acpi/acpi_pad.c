@@ -29,8 +29,12 @@
 #include <linux/clockchips.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -162,7 +166,11 @@ static int power_saving_thread(void *data)
 	while (!kthread_should_stop()) {
 		int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u64 expire_time;
+=======
+		unsigned long expire_time;
+>>>>>>> v3.18
 =======
 		unsigned long expire_time;
 >>>>>>> v3.18
@@ -171,7 +179,12 @@ static int power_saving_thread(void *data)
 
 		/* round robin to cpus */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (last_jiffies + round_robin_time * HZ < jiffies) {
+=======
+		expire_time = last_jiffies + round_robin_time * HZ;
+		if (time_before(expire_time, jiffies)) {
+>>>>>>> v3.18
 =======
 		expire_time = last_jiffies + round_robin_time * HZ;
 		if (time_before(expire_time, jiffies)) {
@@ -207,10 +220,14 @@ static int power_saving_thread(void *data)
 			stop_critical_timings();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__monitor((void *)&current_thread_info()->flags, 0, 0);
 			smp_mb();
 			if (!need_resched())
 				__mwait(power_saving_mwait_eax, 1);
+=======
+			mwait_idle_with_hints(power_saving_mwait_eax, 1);
+>>>>>>> v3.18
 =======
 			mwait_idle_with_hints(power_saving_mwait_eax, 1);
 >>>>>>> v3.18
@@ -222,7 +239,11 @@ static int power_saving_thread(void *data)
 			local_irq_enable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (jiffies > expire_time) {
+=======
+			if (time_before(expire_time, jiffies)) {
+>>>>>>> v3.18
 =======
 			if (time_before(expire_time, jiffies)) {
 >>>>>>> v3.18
@@ -241,9 +262,12 @@ static int power_saving_thread(void *data)
 		 * CPU time. To make 'avoid starvation' work, takes a nap here.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (do_sleep)
 			schedule_timeout_killable(HZ * idle_pct / 100);
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(do_sleep))
 			schedule_timeout_killable(HZ * idle_pct / 100);
 
@@ -253,6 +277,9 @@ static int power_saving_thread(void *data)
 		 */
 		if (unlikely(need_resched()))
 			schedule();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -265,7 +292,11 @@ static unsigned int ps_tsk_num;
 static int create_power_saving_task(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = -ENOMEM;
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -274,12 +305,15 @@ static int create_power_saving_task(void)
 		(void *)(unsigned long)ps_tsk_num,
 		"acpi_pad/%d", ps_tsk_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = PTR_RET(ps_tsks[ps_tsk_num]);
 	if (!rc)
 		ps_tsk_num++;
 	else
 		ps_tsks[ps_tsk_num] = NULL;
 =======
+=======
+>>>>>>> v3.18
 
 	if (IS_ERR(ps_tsks[ps_tsk_num])) {
 		rc = PTR_ERR(ps_tsks[ps_tsk_num]);
@@ -288,6 +322,9 @@ static int create_power_saving_task(void)
 		rc = 0;
 		ps_tsk_num++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -458,6 +495,7 @@ static int acpi_pad_pur(acpi_handle handle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Notify firmware how many CPUs are idle */
 static void acpi_pad_ost(acpi_handle handle, int stat,
 	uint32_t idle_cpus)
@@ -478,16 +516,24 @@ static void acpi_pad_ost(acpi_handle handle, int stat,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void acpi_pad_handle_notify(acpi_handle handle)
 {
 	int num_cpus;
 	uint32_t idle_cpus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_buffer param = {
 		.length = 4,
 		.pointer = (void *)&idle_cpus,
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&isolated_cpus_lock);
@@ -499,7 +545,11 @@ static void acpi_pad_handle_notify(acpi_handle handle)
 	acpi_pad_idle_cpus(num_cpus);
 	idle_cpus = acpi_pad_idle_cpus_num();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_pad_ost(handle, 0, idle_cpus);
+=======
+	acpi_evaluate_ost(handle, ACPI_PROCESSOR_AGGREGATOR_NOTIFY, 0, &param);
+>>>>>>> v3.18
 =======
 	acpi_evaluate_ost(handle, ACPI_PROCESSOR_AGGREGATOR_NOTIFY, 0, &param);
 >>>>>>> v3.18
@@ -515,7 +565,10 @@ static void acpi_pad_notify(acpi_handle handle, u32 event,
 	case ACPI_PROCESSOR_AGGREGATOR_NOTIFY:
 		acpi_pad_handle_notify(handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_bus_generate_proc_event(device, event, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		acpi_bus_generate_netlink_event(device->pnp.device_class,

@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -41,10 +45,13 @@ struct iwl_priv;
 #define IWL_LED_LINK           (1<<1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iwlagn_led_enable(struct iwl_priv *priv);
 void iwl_leds_init(struct iwl_priv *priv);
 void iwl_leds_exit(struct iwl_priv *priv);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IWLWIFI_LEDS
 void iwlagn_led_enable(struct iwl_priv *priv);
 void iwl_leds_init(struct iwl_priv *priv);
@@ -60,6 +67,9 @@ static inline void iwl_leds_exit(struct iwl_priv *priv)
 {
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __iwl_leds_h__ */

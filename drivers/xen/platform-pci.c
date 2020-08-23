@@ -46,7 +46,11 @@ static unsigned long platform_mmiolen;
 static uint64_t callback_via;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long alloc_xen_mmio(unsigned long len)
+=======
+static unsigned long alloc_xen_mmio(unsigned long len)
+>>>>>>> v3.18
 =======
 static unsigned long alloc_xen_mmio(unsigned long len)
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ static int xen_allocate_irq(struct pci_dev *pdev)
 {
 	return request_irq(pdev->irq, do_hvm_evtchn_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_NOBALANCING | IRQF_TRIGGER_RISING,
+=======
+			IRQF_NOBALANCING | IRQF_TRIGGER_RISING,
+>>>>>>> v3.18
 =======
 			IRQF_NOBALANCING | IRQF_TRIGGER_RISING,
 >>>>>>> v3.18
@@ -117,6 +125,10 @@ static int platform_pci_init(struct pci_dev *pdev,
 	long mmio_addr, mmio_len;
 	unsigned int max_nr_gframes;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long grant_frames;
+>>>>>>> v3.18
 =======
 	unsigned long grant_frames;
 >>>>>>> v3.18
@@ -167,6 +179,7 @@ static int platform_pci_init(struct pci_dev *pdev,
 
 	max_nr_gframes = gnttab_max_grant_frames();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_hvm_resume_frames = alloc_xen_mmio(PAGE_SIZE * max_nr_gframes);
 	ret = gnttab_init();
 	if (ret)
@@ -175,6 +188,8 @@ static int platform_pci_init(struct pci_dev *pdev,
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	grant_frames = alloc_xen_mmio(PAGE_SIZE * max_nr_gframes);
 	ret = gnttab_setup_auto_xlat_frames(grant_frames);
 	if (ret)
@@ -186,6 +201,9 @@ static int platform_pci_init(struct pci_dev *pdev,
 	return 0;
 grant_out:
 	gnttab_free_auto_xlat_frames();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	pci_release_region(pdev, 0);

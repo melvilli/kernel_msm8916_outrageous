@@ -16,6 +16,10 @@ Required properties:
 
 Optional properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- atmel,nand-has-dma : boolean to support dma transfer for nand read/write.
+>>>>>>> v3.18
 =======
 - atmel,nand-has-dma : boolean to support dma transfer for nand read/write.
 >>>>>>> v3.18
@@ -34,7 +38,10 @@ Optional properties:
 - nand-bus-width : 8 or 16 bus width if not present 8
 - nand-on-flash-bbt: boolean to enable on flash bbt option if not present false
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - Nand Flash Controller(NFC) is a slave driver under Atmel nand flash
   - Required properties:
     - compatible : "atmel,sama5d3-nfc".
@@ -44,6 +51,9 @@ Optional properties:
     - clocks: phandle to the peripheral clock
   - Optional properties:
     - atmel,write-by-sram: boolean to enable NFC write by sram.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Examples:
@@ -94,7 +104,10 @@ nand0: nand@40000000 {
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* for NFC supported chips */
 nand0: nand@40000000 {
@@ -115,4 +128,7 @@ nand0: nand@40000000 {
 		>;
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

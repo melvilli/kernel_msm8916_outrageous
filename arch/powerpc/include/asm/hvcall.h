@@ -275,7 +275,10 @@
 #define H_RTAS			0xf000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* "Platform specific hcalls", provided by PHYP */
 #define H_GET_24X7_CATALOG_PAGE	0xF078
 #define H_GET_24X7_DATA		0xF07C
@@ -287,6 +290,9 @@
 #define H_SET_MODE_RESOURCE_ADDR_TRANS_MODE	3
 #define H_SET_MODE_RESOURCE_LE			4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
@@ -418,6 +424,11 @@ extern long pSeries_enable_reloc_on_exc(void);
 extern long pSeries_disable_reloc_on_exc(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern long pseries_big_endian_exceptions(void);
+
+>>>>>>> v3.18
 =======
 extern long pseries_big_endian_exceptions(void);
 

@@ -15,7 +15,10 @@
 #include <linux/types.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/spinlock.h>
@@ -1044,7 +1047,10 @@ static int s6gmac_remove(struct platform_device *pdev)
 		free_irq(dev->irq, dev);
 		free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

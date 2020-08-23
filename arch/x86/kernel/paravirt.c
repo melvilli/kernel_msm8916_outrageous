@@ -24,6 +24,10 @@
 #include <linux/bcd.h>
 #include <linux/highmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kprobes.h>
+>>>>>>> v3.18
 =======
 #include <linux/kprobes.h>
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ void _paravirt_nop(void)
 
 /* identity function, which can be inlined */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 notrace _paravirt_ident_32(u32 x)
+=======
+u32 _paravirt_ident_32(u32 x)
+>>>>>>> v3.18
 =======
 u32 _paravirt_ident_32(u32 x)
 >>>>>>> v3.18
@@ -60,7 +68,11 @@ u32 _paravirt_ident_32(u32 x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 notrace _paravirt_ident_64(u64 x)
+=======
+u64 _paravirt_ident_64(u64 x)
+>>>>>>> v3.18
 =======
 u64 _paravirt_ident_64(u64 x)
 >>>>>>> v3.18
@@ -75,11 +87,14 @@ void __init default_banner(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Simple instruction patching code. */
 #define DEF_NATIVE(ops, name, code)					\
 	extern const char start_##ops##_##name[], end_##ops##_##name[];	\
 	asm("start_" #ops "_" #name ": " code "; end_" #ops "_" #name ":")
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Undefined instruction for dealing with missing ops pointers. */
@@ -340,7 +355,11 @@ struct pv_time_ops pv_time_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pv_irq_ops pv_irq_ops = {
+=======
+__visible struct pv_irq_ops pv_irq_ops = {
+>>>>>>> v3.18
 =======
 __visible struct pv_irq_ops pv_irq_ops = {
 >>>>>>> v3.18
@@ -356,7 +375,11 @@ __visible struct pv_irq_ops pv_irq_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pv_cpu_ops pv_cpu_ops = {
+=======
+__visible struct pv_cpu_ops pv_cpu_ops = {
+>>>>>>> v3.18
 =======
 __visible struct pv_cpu_ops pv_cpu_ops = {
 >>>>>>> v3.18
@@ -418,12 +441,18 @@ __visible struct pv_cpu_ops pv_cpu_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* At this point, native_get/set_debugreg has real function entries */
 NOKPROBE_SYMBOL(native_get_debugreg);
 NOKPROBE_SYMBOL(native_set_debugreg);
 NOKPROBE_SYMBOL(native_load_idt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pv_apic_ops pv_apic_ops = {
 #ifdef CONFIG_X86_LOCAL_APIC

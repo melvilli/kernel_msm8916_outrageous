@@ -19,9 +19,12 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
 #include "iomap.h"
 #include "common.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "prm2xxx.h"
@@ -331,7 +334,10 @@ struct clkdm_ops omap2_clkdm_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int omap2xxx_cm_fclks_active(void)
 {
 	u32 f1, f2;
@@ -399,6 +405,9 @@ void omap2xxx_cm_set_mod_dividers(u32 mpu, u32 dsp, u32 gfx, u32 core, u32 mdm)
 		omap2_cm_write_mod_reg(mdm, OMAP2430_MDM_MOD, CM_CLKSEL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *
@@ -412,9 +421,12 @@ static struct cm_ll_data omap2xxx_cm_ll_data = {
 int __init omap2xxx_cm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap24xx())
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return cm_register(&omap2xxx_cm_ll_data);
@@ -423,12 +435,16 @@ int __init omap2xxx_cm_init(void)
 static void __exit omap2xxx_cm_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap24xx())
 		return;
 
 	/* Should never happen */
 	WARN(cm_unregister(&omap2xxx_cm_ll_data),
 	     "%s: cm_ll_data function pointer mismatch\n", __func__);
+=======
+	cm_unregister(&omap2xxx_cm_ll_data);
+>>>>>>> v3.18
 =======
 	cm_unregister(&omap2xxx_cm_ll_data);
 >>>>>>> v3.18

@@ -16,6 +16,10 @@
 
 #include "include/audit.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "include/context.h"
+>>>>>>> v3.18
 =======
 #include "include/context.h"
 >>>>>>> v3.18
@@ -95,6 +99,7 @@ int aa_task_setrlimit(struct aa_profile *profile, struct task_struct *task,
 		      unsigned int resource, struct rlimit *new_rlim)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error = 0;
 
 	/* TODO: extend resource control to handle other (non current)
@@ -103,6 +108,8 @@ int aa_task_setrlimit(struct aa_profile *profile, struct task_struct *task,
 	 */
 	if ((task != current->group_leader) ||
 =======
+=======
+>>>>>>> v3.18
 	struct aa_profile *task_profile;
 	int error = 0;
 
@@ -116,12 +123,20 @@ int aa_task_setrlimit(struct aa_profile *profile, struct task_struct *task,
 	 * the same profile.
 	 */
 	if (profile != task_profile ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    (profile->rlimits.mask & (1 << resource) &&
 	     new_rlim->rlim_max > profile->rlimits.limits[resource].rlim_max))
 		error = -EACCES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aa_put_profile(task_profile);
+
+>>>>>>> v3.18
 =======
 	aa_put_profile(task_profile);
 

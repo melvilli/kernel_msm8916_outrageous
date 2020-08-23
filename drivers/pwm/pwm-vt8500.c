@@ -212,10 +212,15 @@ static int vt8500_pwm_probe(struct platform_device *pdev)
 
 	chip = devm_kzalloc(&pdev->dev, sizeof(*chip), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chip == NULL) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (chip == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (chip == NULL)
 		return -ENOMEM;

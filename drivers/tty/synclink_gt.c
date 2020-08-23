@@ -674,9 +674,15 @@ static int open(struct tty_struct *tty, struct file *filp)
 
 	/* If port is closing, signal caller to try again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tty_hung_up_p(filp) || info->port.flags & ASYNC_CLOSING){
 		if (info->port.flags & ASYNC_CLOSING)
 			interruptible_sleep_on(&info->port.close_wait);
+=======
+	if (info->port.flags & ASYNC_CLOSING){
+		wait_event_interruptible_tty(tty, info->port.close_wait,
+					     !(info->port.flags & ASYNC_CLOSING));
+>>>>>>> v3.18
 =======
 	if (info->port.flags & ASYNC_CLOSING){
 		wait_event_interruptible_tty(tty, info->port.close_wait,
@@ -3280,7 +3286,10 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	int		retval;
 	bool		do_clocal = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		extra_count = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long	flags;
@@ -3310,10 +3319,14 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 
 	spin_lock_irqsave(&info->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tty_hung_up_p(filp)) {
 		extra_count = true;
 		port->count--;
 	}
+=======
+	port->count--;
+>>>>>>> v3.18
 =======
 	port->count--;
 >>>>>>> v3.18
@@ -3352,7 +3365,11 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	remove_wait_queue(&port->open_wait, &wait);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (extra_count)
+=======
+	if (!tty_hung_up_p(filp))
+>>>>>>> v3.18
 =======
 	if (!tty_hung_up_p(filp))
 >>>>>>> v3.18
@@ -3405,6 +3422,7 @@ static int alloc_desc(struct slgt_info *info)
 
 	/* allocate memory to hold descriptor lists */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->bufs = pci_alloc_consistent(info->pdev, DESC_LIST_SIZE, &info->bufs_dma_addr);
 	if (info->bufs == NULL)
 		return -ENOMEM;
@@ -3412,11 +3430,16 @@ static int alloc_desc(struct slgt_info *info)
 	memset(info->bufs, 0, DESC_LIST_SIZE);
 
 =======
+=======
+>>>>>>> v3.18
 	info->bufs = pci_zalloc_consistent(info->pdev, DESC_LIST_SIZE,
 					   &info->bufs_dma_addr);
 	if (info->bufs == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	info->rbufs = (struct slgt_desc*)info->bufs;
 	info->tbufs = ((struct slgt_desc*)info->bufs) + info->rbuf_count;

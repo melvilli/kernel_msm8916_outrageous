@@ -89,6 +89,10 @@ static int ir_rc6_decode(struct rc_dev *dev, struct ir_raw_event ev)
 	u32 scancode;
 	u8 toggle;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum rc_type protocol;
+>>>>>>> v3.18
 =======
 	enum rc_type protocol;
 >>>>>>> v3.18
@@ -238,15 +242,21 @@ again:
 			scancode = data->body;
 			toggle = data->toggle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IR_dprintk(1, "RC6(0) scancode 0x%04x (toggle: %u)\n",
 				   scancode, toggle);
 			break;
 =======
+=======
+>>>>>>> v3.18
 			protocol = RC_TYPE_RC6_0;
 			IR_dprintk(1, "RC6(0) scancode 0x%04x (toggle: %u)\n",
 				   scancode, toggle);
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case RC6_MODE_6A:
 			if (data->count > CHAR_BIT * sizeof data->body) {
@@ -256,6 +266,7 @@ again:
 			}
 
 			scancode = data->body;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (data->count == RC6_6A_32_NBITS &&
 					(scancode & RC6_6A_LCC_MASK) == RC6_6A_MCE_CC) {
@@ -268,6 +279,8 @@ again:
 			IR_dprintk(1, "RC6(6A) scancode 0x%08x (toggle: %u)\n",
 				   scancode, toggle);
 =======
+=======
+>>>>>>> v3.18
 			switch (data->count) {
 			case 20:
 				protocol = RC_TYPE_RC6_6A_20;
@@ -294,6 +307,9 @@ again:
 
 			IR_dprintk(1, "RC6(6A) proto 0x%04x, scancode 0x%08x (toggle: %u)\n",
 				   protocol, scancode, toggle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -302,7 +318,11 @@ again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(dev, scancode, toggle);
+=======
+		rc_keydown(dev, protocol, scancode, toggle);
+>>>>>>> v3.18
 =======
 		rc_keydown(dev, protocol, scancode, toggle);
 >>>>>>> v3.18

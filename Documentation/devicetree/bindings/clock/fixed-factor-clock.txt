@@ -20,8 +20,13 @@ Example:
 		clocks = <&parentclk>;
 		#clock-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		div = <2>;
 		mult = <1>;
+=======
+		clock-div = <2>;
+		clock-mult = <1>;
+>>>>>>> v3.18
 =======
 		clock-div = <2>;
 		clock-mult = <1>;

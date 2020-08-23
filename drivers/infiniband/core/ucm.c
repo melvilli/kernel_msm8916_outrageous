@@ -49,7 +49,10 @@
 #include <asm/uaccess.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <rdma/ib.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <rdma/ib_cm.h>
@@ -1109,9 +1112,12 @@ static ssize_t ib_ucm_write(struct file *filp, const char __user *buf,
 	ssize_t result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON_ONCE(!ib_safe_file_access(filp)))
 		return -EACCES;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (len < sizeof(hdr))

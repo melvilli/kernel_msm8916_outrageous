@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/stddef.h>
@@ -35,9 +38,14 @@
 #include <linux/random.h>
 #include <linux/hw_breakpoint.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cpuidle.h>
 #include <linux/leds.h>
 #include <linux/console.h>
+=======
+#include <linux/leds.h>
+#include <linux/reboot.h>
+>>>>>>> v3.18
 =======
 #include <linux/leds.h>
 #include <linux/reboot.h>
@@ -49,6 +57,10 @@
 #include <asm/thread_notify.h>
 #include <asm/stacktrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/system_misc.h>
+>>>>>>> v3.18
 =======
 #include <asm/system_misc.h>
 >>>>>>> v3.18
@@ -62,7 +74,11 @@ EXPORT_SYMBOL(__stack_chk_guard);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *processor_modes[] = {
+=======
+static const char *processor_modes[] __maybe_unused = {
+>>>>>>> v3.18
 =======
 static const char *processor_modes[] __maybe_unused = {
 >>>>>>> v3.18
@@ -72,6 +88,7 @@ static const char *processor_modes[] __maybe_unused = {
   "UK8_32" , "UK9_32" , "UK10_32", "UND_32" , "UK12_32", "UK13_32", "UK14_32", "SYS_32"
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char *isa_modes[] = {
   "ARM" , "Thumb" , "Jazelle", "ThumbEE"
@@ -118,6 +135,8 @@ void arm_machine_flush_console(void)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 static const char *isa_modes[] __maybe_unused = {
   "ARM" , "Thumb" , "Jazelle", "ThumbEE"
 };
@@ -125,6 +144,9 @@ static const char *isa_modes[] __maybe_unused = {
 extern void call_with_stack(void (*fn)(void *), void *arg, void *sp);
 typedef void (*phys_reset_t)(unsigned long);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * A temporary stack to use for CPU reset. This is static so that we
@@ -165,7 +187,11 @@ void soft_restart(unsigned long addr)
 
 	/* Disable interrupts first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_disable();
+=======
+	raw_local_irq_disable();
+>>>>>>> v3.18
 =======
 	raw_local_irq_disable();
 >>>>>>> v3.18
@@ -183,10 +209,13 @@ void soft_restart(unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void null_restart(enum reboot_mode reboot_mode, const char *cmd)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -196,8 +225,12 @@ void (*pm_power_off)(void);
 EXPORT_SYMBOL(pm_power_off);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd) = null_restart;
 EXPORT_SYMBOL_GPL(arm_pm_restart);
+=======
+void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
+>>>>>>> v3.18
 =======
 void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
 >>>>>>> v3.18
@@ -209,13 +242,19 @@ void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
 void (*arm_pm_idle)(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void default_idle(void)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Called from the core idle loop.
  */
 
 void arch_cpu_idle(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (arm_pm_idle)
@@ -233,7 +272,10 @@ void arch_cpu_idle_prepare(void)
 void arch_cpu_idle_enter(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idle_notifier_call_chain(IDLE_START);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ledtrig_cpu(CPU_LED_IDLE_START);
@@ -246,7 +288,10 @@ void arch_cpu_idle_exit(void)
 {
 	ledtrig_cpu(CPU_LED_IDLE_END);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idle_notifier_call_chain(IDLE_END);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -259,6 +304,7 @@ void arch_cpu_idle_dead(void)
 #endif
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Called from the core idle loop.
  */
@@ -281,6 +327,8 @@ __setup("reboot=", reboot_setup);
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Called by kexec, immediately prior to machine_kexec().
  *
  * This must completely disable all secondary CPUs; simply causing those CPUs
@@ -291,6 +339,7 @@ __setup("reboot=", reboot_setup);
  */
 void machine_shutdown(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 	/*
@@ -304,6 +353,8 @@ void machine_shutdown(void)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	disable_nonboot_cpus();
 }
 
@@ -315,7 +366,11 @@ void machine_shutdown(void)
 void machine_halt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
+=======
+	local_irq_disable();
+>>>>>>> v3.18
 =======
 	local_irq_disable();
 >>>>>>> v3.18
@@ -334,7 +389,11 @@ void machine_halt(void)
 void machine_power_off(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
+=======
+	local_irq_disable();
+>>>>>>> v3.18
 =======
 	local_irq_disable();
 >>>>>>> v3.18
@@ -358,6 +417,7 @@ void machine_power_off(void)
 void machine_restart(char *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
 	smp_send_stop();
 
@@ -367,6 +427,8 @@ void machine_restart(char *cmd)
 
 	arm_pm_restart(reboot_mode, cmd);
 =======
+=======
+>>>>>>> v3.18
 	local_irq_disable();
 	smp_send_stop();
 
@@ -374,6 +436,9 @@ void machine_restart(char *cmd)
 		arm_pm_restart(reboot_mode, cmd);
 	else
 		do_kernel_restart(cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Give a grace period for failure to restart of 1s */
@@ -385,6 +450,7 @@ void machine_restart(char *cmd)
 	while (1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * dump a block of kernel memory from around the given address
@@ -459,6 +525,8 @@ static void show_extra_register_data(struct pt_regs *regs, int nbytes)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __show_regs(struct pt_regs *regs)
 {
 	unsigned long flags;
@@ -490,6 +558,10 @@ void __show_regs(struct pt_regs *regs)
 	buf[4] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_CPU_V7M
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_CPU_V7M
 >>>>>>> v3.18
@@ -500,11 +572,17 @@ void __show_regs(struct pt_regs *regs)
 		isa_modes[isa_mode(regs)],
 		get_fs() == get_ds() ? "kernel" : "user");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 	printk("xPSR: %08lx\n", regs->ARM_cpsr);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CPU_CP15
 	{
@@ -527,8 +605,11 @@ void __show_regs(struct pt_regs *regs)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_fs() == get_ds())
 		show_extra_register_data(regs, 128);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -536,7 +617,10 @@ void __show_regs(struct pt_regs *regs)
 void show_regs(struct pt_regs * regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__show_regs(regs);
@@ -567,6 +651,11 @@ void flush_thread(void)
 	memset(&thread->fpstate, 0, sizeof(union fp_state));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	flush_tls();
+
+>>>>>>> v3.18
 =======
 	flush_tls();
 
@@ -710,6 +799,7 @@ int in_gate_area_no_mm(unsigned long addr)
 const char *arch_vma_name(struct vm_area_struct *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_gate_vma(vma))
 		return "[vectors]";
 	else if (vma->vm_mm && vma->vm_start == vma->vm_mm->context.sigpage)
@@ -719,6 +809,8 @@ const char *arch_vma_name(struct vm_area_struct *vma)
 	else
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 	return is_gate_vma(vma) ? "[vectors]" : NULL;
 }
 
@@ -753,6 +845,9 @@ static unsigned long sigpage_addr(const struct mm_struct *mm,
 	addr = first + (offset << PAGE_SHIFT);
 
 	return addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -760,12 +855,15 @@ static struct page *signal_page;
 extern struct page *get_signal_page(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 {
 	struct mm_struct *mm = current->mm;
 	unsigned long addr;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 static const struct vm_special_mapping sigpage_mapping = {
 	.name = "[sigpage]",
 	.pages = &signal_page,
@@ -778,6 +876,9 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 	unsigned long addr;
 	unsigned long hint;
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!signal_page)
@@ -787,7 +888,12 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 
 	down_write(&mm->mmap_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = get_unmapped_area(NULL, 0, PAGE_SIZE, 0, 0);
+=======
+	hint = sigpage_addr(mm, 1);
+	addr = get_unmapped_area(NULL, hint, PAGE_SIZE, 0, 0);
+>>>>>>> v3.18
 =======
 	hint = sigpage_addr(mm, 1);
 	addr = get_unmapped_area(NULL, hint, PAGE_SIZE, 0, 0);
@@ -798,6 +904,7 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = install_special_mapping(mm, addr, PAGE_SIZE,
 		VM_READ | VM_EXEC | VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC,
 		&signal_page);
@@ -805,6 +912,8 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 	if (ret == 0)
 		mm->context.sigpage = addr;
 =======
+=======
+>>>>>>> v3.18
 	vma = _install_special_mapping(mm, addr, PAGE_SIZE,
 		VM_READ | VM_EXEC | VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC,
 		&sigpage_mapping);
@@ -815,6 +924,9 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 	}
 
 	mm->context.sigpage = addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  up_fail:

@@ -30,11 +30,17 @@ static int bcm47xxnflash_probe(struct platform_device *pdev)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b47n = kzalloc(sizeof(*b47n), GFP_KERNEL);
 	if (!b47n) {
 		err = -ENOMEM;
 		goto out;
 	}
+=======
+	b47n = devm_kzalloc(&pdev->dev, sizeof(*b47n), GFP_KERNEL);
+	if (!b47n)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	b47n = devm_kzalloc(&pdev->dev, sizeof(*b47n), GFP_KERNEL);
 	if (!b47n)
@@ -55,7 +61,11 @@ static int bcm47xxnflash_probe(struct platform_device *pdev)
 	if (err) {
 		pr_err("Initialization failed: %d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_init;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -64,6 +74,7 @@ static int bcm47xxnflash_probe(struct platform_device *pdev)
 	err = mtd_device_parse_register(&b47n->mtd, probes, NULL, NULL, 0);
 	if (err) {
 		pr_err("Failed to register MTD device: %d\n", err);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_dev_reg;
 	}
@@ -76,10 +87,15 @@ err_init:
 out:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -103,6 +119,7 @@ static struct platform_driver bcm47xxnflash_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init bcm47xxnflash_init(void)
 {
 	int err;
@@ -122,6 +139,9 @@ static void __exit bcm47xxnflash_exit(void)
 
 module_init(bcm47xxnflash_init);
 module_exit(bcm47xxnflash_exit);
+=======
+module_platform_driver(bcm47xxnflash_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(bcm47xxnflash_driver);
 >>>>>>> v3.18

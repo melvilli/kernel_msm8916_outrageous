@@ -11,6 +11,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/i2c/bfin_twi.h>
+>>>>>>> v3.18
 =======
 #include <linux/i2c/bfin_twi.h>
 >>>>>>> v3.18

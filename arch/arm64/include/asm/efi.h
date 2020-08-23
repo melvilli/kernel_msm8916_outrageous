@@ -3,6 +3,10 @@
 
 #include <asm/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/neon.h>
+>>>>>>> v3.18
 =======
 #include <asm/neon.h>
 >>>>>>> v3.18
@@ -16,7 +20,10 @@ extern void efi_idmap_init(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define efi_call_virt(f, ...)						\
 ({									\
 	efi_##f##_t *__f = efi.systab->runtime->f;			\
@@ -49,5 +56,8 @@ extern void efi_idmap_init(void);
 
 #define efi_call_early(f, ...) sys_table_arg->boottime->f(__VA_ARGS__)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_EFI_H */

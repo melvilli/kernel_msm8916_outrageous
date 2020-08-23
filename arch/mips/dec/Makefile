@@ -4,9 +4,14 @@
 
 obj-y		:= ecc-berr.o int-handler.o ioasic-irq.o kn01-berr.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   kn02-irq.o kn02xa-berr.o reset.o setup.o time.o
 
 obj-$(CONFIG_PROM_CONSOLE)	+= promcon.o
+=======
+		   kn02-irq.o kn02xa-berr.o platform.o reset.o setup.o time.o
+
+>>>>>>> v3.18
 =======
 		   kn02-irq.o kn02xa-berr.o platform.o reset.o setup.o time.o
 

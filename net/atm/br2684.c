@@ -683,8 +683,13 @@ static int br2684_create(void __user *arg)
 	netdev = alloc_netdev(sizeof(struct br2684_dev),
 			      ni.ifname[0] ? ni.ifname : "nas%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      (payload == p_routed) ?
 			      br2684_setup_routed : br2684_setup);
+=======
+			      NET_NAME_UNKNOWN,
+			      (payload == p_routed) ? br2684_setup_routed : br2684_setup);
+>>>>>>> v3.18
 =======
 			      NET_NAME_UNKNOWN,
 			      (payload == p_routed) ? br2684_setup_routed : br2684_setup);

@@ -53,7 +53,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 
 	for (i = 0; i < sh_ubc->num_events; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct perf_event **slot = &__get_cpu_var(bp_per_reg[i]);
+=======
+		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
+>>>>>>> v3.18
 =======
 		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 
 	for (i = 0; i < sh_ubc->num_events; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct perf_event **slot = &__get_cpu_var(bp_per_reg[i]);
+=======
+		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
+>>>>>>> v3.18
 =======
 		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
 >>>>>>> v3.18

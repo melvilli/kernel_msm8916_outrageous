@@ -13,7 +13,12 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len) {
+=======
+static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
+{
+>>>>>>> v3.18
 =======
 static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
 {
@@ -29,7 +34,12 @@ static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
  
 	if (inode->i_size & (EFS_DIRBSIZE-1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "EFS: WARNING: find_entry(): directory size not a multiple of EFS_DIRBSIZE\n");
+=======
+		pr_warn("%s(): directory size not a multiple of EFS_DIRBSIZE\n",
+			__func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s(): directory size not a multiple of EFS_DIRBSIZE\n",
 			__func__);
@@ -40,7 +50,12 @@ static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
 		bh = sb_bread(inode->i_sb, efs_bmap(inode, block));
 		if (!bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "EFS: find_entry(): failed to read dir block %d\n", block);
+=======
+			pr_err("%s(): failed to read dir block %d\n",
+			       __func__, block);
+>>>>>>> v3.18
 =======
 			pr_err("%s(): failed to read dir block %d\n",
 			       __func__, block);
@@ -52,6 +67,7 @@ static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
 
 		if (be16_to_cpu(dirblock->magic) != EFS_DIRBLK_MAGIC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "EFS: find_entry(): invalid directory block\n");
 			brelse(bh);
 			return(0);
@@ -59,12 +75,17 @@ static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
 
 		for(slot = 0; slot < dirblock->slots; slot++) {
 =======
+=======
+>>>>>>> v3.18
 			pr_err("%s(): invalid directory block\n", __func__);
 			brelse(bh);
 			return 0;
 		}
 
 		for (slot = 0; slot < dirblock->slots; slot++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dirslot  = (struct efs_dentry *) (((char *) bh->b_data) + EFS_SLOTAT(dirblock, slot));
 
@@ -75,7 +96,11 @@ static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
 				inodenum = be32_to_cpu(dirslot->inode);
 				brelse(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return(inodenum);
+=======
+				return inodenum;
+>>>>>>> v3.18
 =======
 				return inodenum;
 >>>>>>> v3.18
@@ -84,7 +109,11 @@ static efs_ino_t efs_find_entry(struct inode *inode, const char *name, int len)
 		brelse(bh);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return(0);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

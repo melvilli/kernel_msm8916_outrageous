@@ -77,10 +77,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	corenet-cf@18000 {
 		compatible = "fsl,b4420-corenet-cf";
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	guts: global-utilities@e0000 {
@@ -90,7 +93,10 @@
 	clockgen: global-utilities@e1000 {
 		compatible = "fsl,b4420-clockgen", "fsl,qoriq-clockgen-2.0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ranges = <0x0 0xe1000 0x1000>;
 		#address-cells = <1>;
 		#size-cells = <1>;
@@ -127,6 +133,9 @@
 				"pll1", "pll1-div2", "pll1-div4";
 			clock-output-names = "cmux0";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 

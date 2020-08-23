@@ -1,6 +1,10 @@
 #include <linux/module.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -18,13 +22,19 @@ static void ceph_pagelist_unmap_tail(struct ceph_pagelist *pl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ceph_pagelist_release(struct ceph_pagelist *pl)
 {
 =======
+=======
+>>>>>>> v3.18
 void ceph_pagelist_release(struct ceph_pagelist *pl)
 {
 	if (!atomic_dec_and_test(&pl->refcnt))
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ceph_pagelist_unmap_tail(pl);
 	while (!list_empty(&pl->head)) {
@@ -35,7 +45,11 @@ void ceph_pagelist_release(struct ceph_pagelist *pl)
 	}
 	ceph_pagelist_free_reserve(pl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	kfree(pl);
+>>>>>>> v3.18
 =======
 	kfree(pl);
 >>>>>>> v3.18

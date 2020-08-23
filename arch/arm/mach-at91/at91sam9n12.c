@@ -9,6 +9,10 @@
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk/at91_pmc.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk/at91_pmc.h>
 >>>>>>> v3.18
@@ -18,7 +22,10 @@
 #include <asm/mach/map.h>
 #include <mach/at91sam9n12.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/cpu.h>
@@ -27,14 +34,20 @@
 #include "soc.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "clock.h"
 #include "sam9_smc.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "sam9_smc.h"
 
 #if defined(CONFIG_OLD_CLK_AT91)
 #include "clock.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Clocks
@@ -184,6 +197,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID("t0_clk", "f800c000.timer", &tcb_clk),
 	CLKDEV_CON_DEV_ID("mci_clk", "f0008000.mmc", &mmc_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "f0010000.ssc", &ssc_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID(NULL, "f0010000.ssc", &ssc_clk),
 >>>>>>> v3.18
@@ -200,6 +217,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID("hclk", "500000.ohci", &uhp_clk),
 	CLKDEV_CON_DEV_ID("ohci_clk", "500000.ohci", &uhp_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "f8034000.pwm", &pwm_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID(NULL, "f8034000.pwm", &pwm_clk),
 >>>>>>> v3.18
@@ -236,6 +257,12 @@ static void __init at91sam9n12_register_clocks(void)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define at91sam9n12_register_clocks NULL
+#endif
+>>>>>>> v3.18
 =======
 #else
 #define at91sam9n12_register_clocks NULL

@@ -418,7 +418,11 @@ static int adp1653_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flash = kzalloc(sizeof(*flash), GFP_KERNEL);
+=======
+	flash = devm_kzalloc(&client->dev, sizeof(*flash), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	flash = devm_kzalloc(&client->dev, sizeof(*flash), GFP_KERNEL);
 >>>>>>> v3.18
@@ -448,7 +452,10 @@ static int adp1653_probe(struct i2c_client *client,
 free_and_quit:
 	v4l2_ctrl_handler_free(&flash->ctrls);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(flash);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -463,7 +470,11 @@ static int adp1653_remove(struct i2c_client *client)
 	v4l2_ctrl_handler_free(&flash->ctrls);
 	media_entity_cleanup(&flash->subdev.entity);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(flash);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

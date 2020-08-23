@@ -165,8 +165,12 @@ static void req_done(struct virtqueue *vq)
 		p9_debug(P9_DEBUG_TRANS, ": lookup tag %d\n", rc->tag);
 		req = p9_tag_lookup(chan->client, rc->tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		req->status = REQ_STATUS_RCVD;
 		p9_client_cb(chan->client, req);
+=======
+		p9_client_cb(chan->client, req, REQ_STATUS_RCVD);
+>>>>>>> v3.18
 =======
 		p9_client_cb(chan->client, req, REQ_STATUS_RCVD);
 >>>>>>> v3.18
@@ -552,9 +556,13 @@ static int p9_virtio_probe(struct virtio_device *vdev)
 	chan->inuse = false;
 	if (virtio_has_feature(vdev, VIRTIO_9P_MOUNT_TAG)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vdev->config->get(vdev,
 				offsetof(struct virtio_9p_config, tag_len),
 				&tag_len, sizeof(tag_len));
+=======
+		virtio_cread(vdev, struct virtio_9p_config, tag_len, &tag_len);
+>>>>>>> v3.18
 =======
 		virtio_cread(vdev, struct virtio_9p_config, tag_len, &tag_len);
 >>>>>>> v3.18
@@ -568,8 +576,14 @@ static int p9_virtio_probe(struct virtio_device *vdev)
 		goto out_free_vq;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vdev->config->get(vdev, offsetof(struct virtio_9p_config, tag),
 			tag, tag_len);
+=======
+
+	virtio_cread_bytes(vdev, offsetof(struct virtio_9p_config, tag),
+			   tag, tag_len);
+>>>>>>> v3.18
 =======
 
 	virtio_cread_bytes(vdev, offsetof(struct virtio_9p_config, tag),
@@ -592,6 +606,11 @@ static int p9_virtio_probe(struct virtio_device *vdev)
 	chan->p9_max_pages = nr_free_buffer_pages()/4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	virtio_device_ready(vdev);
+
+>>>>>>> v3.18
 =======
 	virtio_device_ready(vdev);
 
@@ -722,7 +741,11 @@ static struct p9_trans_module p9_virtio_trans = {
 	 */
 	.maxsize = PAGE_SIZE * (VIRTQUEUE_NUM - 3),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.def = 0,
+=======
+	.def = 1,
+>>>>>>> v3.18
 =======
 	.def = 1,
 >>>>>>> v3.18

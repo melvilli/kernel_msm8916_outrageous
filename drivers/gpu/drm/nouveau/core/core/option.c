@@ -26,6 +26,7 @@
 #include <core/debug.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* compares unterminated string 'str' with zero-terminated string 'cmp' */
 static inline int
 strncasecmpz(const char *str, const char *cmp, size_t len)
@@ -35,6 +36,8 @@ strncasecmpz(const char *str, const char *cmp, size_t len)
 	return strncasecmp(str, cmp, len);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 const char *
@@ -109,7 +112,11 @@ nouveau_dbgopt(const char *optstr, const char *sub)
 					level = NV_DBG_WARN;
 				else if (!strncasecmpz(optstr, "info", len))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					level = NV_DBG_INFO;
+=======
+					level = NV_DBG_INFO_NORMAL;
+>>>>>>> v3.18
 =======
 					level = NV_DBG_INFO_NORMAL;
 >>>>>>> v3.18

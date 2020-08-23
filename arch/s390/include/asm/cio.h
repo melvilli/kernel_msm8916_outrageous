@@ -200,7 +200,11 @@ struct esw_eadm {
  * struct irb - interruption response block
  * @scsw: subchannel status word
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @esw: extened status word
+=======
+ * @esw: extended status word
+>>>>>>> v3.18
 =======
  * @esw: extended status word
 >>>>>>> v3.18
@@ -301,6 +305,10 @@ static inline int ccw_dev_id_is_equal(struct ccw_dev_id *dev_id1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void channel_subsystem_reinit(void);
+>>>>>>> v3.18
 =======
 void channel_subsystem_reinit(void);
 >>>>>>> v3.18

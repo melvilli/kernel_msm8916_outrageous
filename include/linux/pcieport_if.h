@@ -24,7 +24,11 @@
 
 struct pcie_device {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int 		irq;	    /* Service IRQ/MSI/MSI-X Vector */
+=======
+	int		irq;	    /* Service IRQ/MSI/MSI-X Vector */
+>>>>>>> v3.18
 =======
 	int		irq;	    /* Service IRQ/MSI/MSI-X Vector */
 >>>>>>> v3.18

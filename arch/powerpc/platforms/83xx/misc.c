@@ -115,7 +115,11 @@ void __init mpc83xx_ipic_and_qe_init_IRQ(void)
 #endif /* CONFIG_QUICC_ENGINE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

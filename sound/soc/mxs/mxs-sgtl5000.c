@@ -26,7 +26,10 @@
 #include <sound/jack.h>
 #include <sound/soc-dapm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mach-types.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -55,6 +58,7 @@ static int mxs_sgtl5000_hw_params(struct snd_pcm_substream *substream,
 
 	/* Sgtl5000 sysclk should be >= 8MHz and <= 27M */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mclk < 8000000 || mclk > 27000000)
 		return -EINVAL;
 
@@ -68,6 +72,8 @@ static int mxs_sgtl5000_hw_params(struct snd_pcm_substream *substream,
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (mclk < 8000000 || mclk > 27000000) {
 		dev_err(codec_dai->dev, "Invalid mclk frequency: %u.%03uMHz\n",
 			mclk / 1000000, mclk / 1000 % 1000);
@@ -89,6 +95,9 @@ static int mxs_sgtl5000_hw_params(struct snd_pcm_substream *substream,
 			mclk / 1000000, mclk / 1000 % 1000);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set codec to slave mode */
@@ -98,6 +107,7 @@ static int mxs_sgtl5000_hw_params(struct snd_pcm_substream *substream,
 	/* set codec DAI configuration */
 	ret = snd_soc_dai_set_fmt(codec_dai, dai_format);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		return ret;
 
@@ -106,6 +116,8 @@ static int mxs_sgtl5000_hw_params(struct snd_pcm_substream *substream,
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		dev_err(codec_dai->dev, "Failed to set dai format to %08x\n",
 			dai_format);
@@ -119,6 +131,9 @@ static int mxs_sgtl5000_hw_params(struct snd_pcm_substream *substream,
 			dai_format);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -134,10 +149,15 @@ static struct snd_soc_dai_link mxs_sgtl5000_dai[] = {
 		.stream_name	= "HiFi Playback",
 		.codec_dai_name	= "sgtl5000",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.codec_name	= "sgtl5000.0-000a",
 		.cpu_dai_name	= "mxs-saif.0",
 		.platform_name	= "mxs-saif.0",
 		.ops		= &mxs_sgtl5000_hifi_ops,
+=======
+		.ops		= &mxs_sgtl5000_hifi_ops,
+		.playback_only	= true,
+>>>>>>> v3.18
 =======
 		.ops		= &mxs_sgtl5000_hifi_ops,
 		.playback_only	= true,
@@ -147,10 +167,15 @@ static struct snd_soc_dai_link mxs_sgtl5000_dai[] = {
 		.stream_name	= "HiFi Capture",
 		.codec_dai_name	= "sgtl5000",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.codec_name	= "sgtl5000.0-000a",
 		.cpu_dai_name	= "mxs-saif.1",
 		.platform_name	= "mxs-saif.1",
 		.ops		= &mxs_sgtl5000_hifi_ops,
+=======
+		.ops		= &mxs_sgtl5000_hifi_ops,
+		.capture_only	= true,
+>>>>>>> v3.18
 =======
 		.ops		= &mxs_sgtl5000_hifi_ops,
 		.capture_only	= true,
@@ -166,6 +191,7 @@ static struct snd_soc_card mxs_sgtl5000 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxs_sgtl5000_probe_dt(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
@@ -175,12 +201,17 @@ static int mxs_sgtl5000_probe_dt(struct platform_device *pdev)
 	if (!np)
 		return 1; /* no device tree */
 =======
+=======
+>>>>>>> v3.18
 static int mxs_sgtl5000_probe(struct platform_device *pdev)
 {
 	struct snd_soc_card *card = &mxs_sgtl5000;
 	int ret, i;
 	struct device_node *np = pdev->dev.of_node;
 	struct device_node *saif_np[2], *codec_np;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	saif_np[0] = of_parse_phandle(np, "saif-controllers", 0);
@@ -205,6 +236,7 @@ static int mxs_sgtl5000_probe(struct platform_device *pdev)
 	of_node_put(saif_np[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 
@@ -219,6 +251,8 @@ static int mxs_sgtl5000_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/*
 	 * Set an init clock(11.28Mhz) for sgtl5000 initialization(i2c r/w).
 	 * The Sgtl5000 sysclk is derived from saif0 mclk and it's range
@@ -226,13 +260,19 @@ static int mxs_sgtl5000_probe(struct platform_device *pdev)
 	 */
 	ret = mxs_saif_get_mclk(0, 44100 * 256, 44100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		dev_err(&pdev->dev, "failed to get mclk\n");
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	card->dev = &pdev->dev;

@@ -18,15 +18,21 @@
 #include <asm/ptrace.h>
 #include <asm/asm-offsets.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cp15.h>
 #include <asm/thread_info.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/memory.h>
 #include <asm/cp15.h>
 #include <asm/thread_info.h>
 #include <asm/v7m.h>
 #include <asm/mpu.h>
 #include <asm/page.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -60,11 +66,14 @@ ENTRY(stext)
 	setmode	PSR_F_BIT | PSR_I_BIT | SVC_MODE, r9 @ ensure svc mode
 						@ and irqs disabled
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_CPU_CP15
 	ldr	r9, =CONFIG_PROCESSOR_ID
 #else
 	mrc	p15, 0, r9, c0, c0		@ get processor id
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_CP15)
 	mrc	p15, 0, r9, c0, c0		@ get processor id
 #elif defined(CONFIG_CPU_V7M)
@@ -72,12 +81,16 @@ ENTRY(stext)
 	ldr	r9, [r9, V7M_SCB_CPUID]
 #else
 	ldr	r9, =CONFIG_PROCESSOR_ID
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	bl	__lookup_processor_type		@ r5=procinfo r9=cpuid
 	movs	r10, r5				@ invalid processor (r5=0)?
 	beq	__error_p				@ yes, error 'p'
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	adr	lr, BSYM(__after_proc_init)	@ return (PIC) address
  ARM(	add	pc, r10, #PROCINFO_INITFUNC	)
@@ -86,6 +99,8 @@ ENTRY(stext)
 ENDPROC(stext)
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_MPU
 	/* Calculate the size of a region covering just the kernel */
 	ldr	r5, =PLAT_PHYS_OFFSET		@ Region start: PHYS_OFFSET
@@ -154,6 +169,9 @@ __secondary_data:
 	.long	__secondary_switched
 #endif /* CONFIG_SMP */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Set the Control Register and Read the process ID.
@@ -186,6 +204,7 @@ __after_proc_init:
 	mcr	p15, 0, r0, c1, c0, 0		@ write control reg
 #endif /* CONFIG_CPU_CP15 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	b	__mmap_switched			@ clear the BSS and jump
 						@ to start_kernel
@@ -193,6 +212,8 @@ ENDPROC(__after_proc_init)
 	.ltorg
 
 =======
+=======
+>>>>>>> v3.18
 	ret	r13
 ENDPROC(__after_proc_init)
 	.ltorg
@@ -286,5 +307,8 @@ ENTRY(__setup_mpu)
 	ret	lr
 ENDPROC(__setup_mpu)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "head-common.S"

@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __CAN_PLATFORM_MCP251X_H__
 #define __CAN_PLATFORM_MCP251X_H__
+=======
+#ifndef _CAN_PLATFORM_MCP251X_H
+#define _CAN_PLATFORM_MCP251X_H
+>>>>>>> v3.18
 =======
 #ifndef _CAN_PLATFORM_MCP251X_H
 #define _CAN_PLATFORM_MCP251X_H
@@ -14,6 +19,7 @@
 
 #include <linux/spi/spi.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct mcp251x_platform_data - MCP251X SPI CAN controller platform data
@@ -32,10 +38,16 @@
  * struct mcp251x_platform_data - MCP251X SPI CAN controller platform data
  * @oscillator_frequency:       - oscillator frequency in Hz
 >>>>>>> v3.18
+=======
+/*
+ * struct mcp251x_platform_data - MCP251X SPI CAN controller platform data
+ * @oscillator_frequency:       - oscillator frequency in Hz
+>>>>>>> v3.18
  */
 
 struct mcp251x_platform_data {
 	unsigned long oscillator_frequency;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long irq_flags;
 	int (*board_specific_setup)(struct spi_device *spi);
@@ -44,6 +56,11 @@ struct mcp251x_platform_data {
 };
 
 #endif /* __CAN_PLATFORM_MCP251X_H__ */
+=======
+};
+
+#endif /* !_CAN_PLATFORM_MCP251X_H */
+>>>>>>> v3.18
 =======
 };
 

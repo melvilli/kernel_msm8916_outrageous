@@ -30,7 +30,11 @@
  * it's best to have buff aligned on a 32-bit boundary
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __wsum csum_partial(const void *buff, int len, __wsum sum);
+=======
+__wsum csum_partial(const void *buff, int len, __wsum sum);
+>>>>>>> v3.18
 =======
 __wsum csum_partial(const void *buff, int len, __wsum sum);
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ __wsum csum_partial(const void *buff, int len, __wsum sum);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int __csum_partial_copy_sparc_generic (const unsigned char *, unsigned char *);
+=======
+unsigned int __csum_partial_copy_sparc_generic (const unsigned char *, unsigned char *);
+>>>>>>> v3.18
 =======
 unsigned int __csum_partial_copy_sparc_generic (const unsigned char *, unsigned char *);
 >>>>>>> v3.18
@@ -247,7 +255,10 @@ static inline __sum16 ip_compute_csum(const void *buff, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HAVE_ARCH_CSUM_ADD
 static inline __wsum csum_add(__wsum csum, __wsum addend)
 {
@@ -260,5 +271,8 @@ static inline __wsum csum_add(__wsum csum, __wsum addend)
 	return csum;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !(__SPARC_CHECKSUM_H) */

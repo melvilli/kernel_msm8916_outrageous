@@ -17,9 +17,14 @@
 #include <linux/regulator/consumer.h>
 #include <linux/cpufreq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/suspend.h>
 
 #include <plat/cpu.h>
+=======
+#include <linux/platform_device.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 #include <linux/of.h>
@@ -28,6 +33,7 @@
 #include "exynos-cpufreq.h"
 
 static struct exynos_dvfs_info *exynos_info;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct regulator *arm_regulator;
@@ -51,10 +57,15 @@ static unsigned int exynos_getspeed(unsigned int cpu)
 static struct regulator *arm_regulator;
 static unsigned int locking_frequency;
 >>>>>>> v3.18
+=======
+static struct regulator *arm_regulator;
+static unsigned int locking_frequency;
+>>>>>>> v3.18
 
 static int exynos_cpufreq_get_index(unsigned int freq)
 {
 	struct cpufreq_frequency_table *freq_table = exynos_info->freq_table;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int index;
 
@@ -68,6 +79,8 @@ static int exynos_cpufreq_get_index(unsigned int freq)
 
 	return index;
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_frequency_table *pos;
 
 	cpufreq_for_each_entry(pos, freq_table)
@@ -78,6 +91,9 @@ static int exynos_cpufreq_get_index(unsigned int freq)
 		return -EINVAL;
 
 	return pos - freq_table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -89,6 +105,7 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 	unsigned int arm_volt, safe_arm_volt = 0;
 	unsigned int mpll_freq_khz = exynos_info->mpll_freq_khz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int index, old_index;
 	int ret = 0;
 
@@ -98,21 +115,32 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 	if (freqs.new == freqs.old)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = exynos_info->dev;
 	unsigned int old_freq;
 	int index, old_index;
 	int ret = 0;
 
 	old_freq = policy->cur;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * The policy max have been changed so that we cannot get proper
 	 * old_index with cpufreq_frequency_table_target(). Thus, ignore
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * policy and get the index from the raw freqeuncy table.
 	 */
 	old_index = exynos_cpufreq_get_index(freqs.old);
+=======
+	 * policy and get the index from the raw frequency table.
+	 */
+	old_index = exynos_cpufreq_get_index(old_freq);
+>>>>>>> v3.18
 =======
 	 * policy and get the index from the raw frequency table.
 	 */
@@ -143,6 +171,7 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 	arm_volt = volt_table[index];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
 	/* When the new frequency is higher than current frequency */
@@ -154,6 +183,8 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 				__func__, arm_volt);
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 	/* When the new frequency is higher than current frequency */
 	if ((target_freq > old_freq) && !safe_arm_volt) {
 		/* Firstly, voltage up to increase frequency */
@@ -162,6 +193,9 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 			dev_err(dev, "failed to set cpu voltage to %d\n",
 				arm_volt);
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -171,9 +205,15 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 				      safe_arm_volt);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("%s: failed to set cpu voltage to %d\n",
 				__func__, safe_arm_volt);
 			goto out;
+=======
+			dev_err(dev, "failed to set cpu voltage to %d\n",
+				safe_arm_volt);
+			return ret;
+>>>>>>> v3.18
 =======
 			dev_err(dev, "failed to set cpu voltage to %d\n",
 				safe_arm_volt);
@@ -184,6 +224,7 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 
 	exynos_info->set_freq(old_index, index);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
@@ -197,6 +238,8 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 			pr_err("%s: failed to set cpu voltage to %d\n",
 				__func__, arm_volt);
 =======
+=======
+>>>>>>> v3.18
 	/* When the new frequency is lower than current frequency */
 	if ((target_freq < old_freq) ||
 	   ((target_freq > old_freq) && safe_arm_volt)) {
@@ -206,6 +249,9 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 		if (ret) {
 			dev_err(dev, "failed to set cpu voltage to %d\n",
 				arm_volt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out;
 		}
@@ -213,7 +259,10 @@ static int exynos_cpufreq_scale(unsigned int target_freq)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cpufreq_cpu_put(policy);
@@ -221,6 +270,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int exynos_target(struct cpufreq_policy *policy,
 			  unsigned int target_freq,
@@ -352,6 +402,8 @@ static struct cpufreq_driver exynos_driver = {
 
 static int __init exynos_cpufreq_init(void)
 =======
+=======
+>>>>>>> v3.18
 static int exynos_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	return exynos_cpufreq_scale(exynos_info->freq_table[index].frequency);
@@ -381,6 +433,9 @@ static struct cpufreq_driver exynos_driver = {
 };
 
 static int exynos_cpufreq_probe(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret = -EINVAL;
@@ -389,6 +444,7 @@ static int exynos_cpufreq_probe(struct platform_device *pdev)
 	if (!exynos_info)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (soc_is_exynos4210())
 		ret = exynos4210_cpufreq_init(exynos_info);
@@ -399,6 +455,8 @@ static int exynos_cpufreq_probe(struct platform_device *pdev)
 	else
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	exynos_info->dev = &pdev->dev;
 
 	if (of_machine_is_compatible("samsung,exynos4210")) {
@@ -417,6 +475,9 @@ static int exynos_cpufreq_probe(struct platform_device *pdev)
 		pr_err("%s: Unknown SoC type\n", __func__);
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -424,7 +485,11 @@ static int exynos_cpufreq_probe(struct platform_device *pdev)
 
 	if (exynos_info->set_freq == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: No set_freq function (ERR)\n", __func__);
+=======
+		dev_err(&pdev->dev, "No set_freq function (ERR)\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "No set_freq function (ERR)\n");
 >>>>>>> v3.18
@@ -433,6 +498,7 @@ static int exynos_cpufreq_probe(struct platform_device *pdev)
 
 	arm_regulator = regulator_get(NULL, "vdd_arm");
 	if (IS_ERR(arm_regulator)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_err("%s: failed to get resource vdd_arm\n", __func__);
 		goto err_vdd_arm;
@@ -459,6 +525,8 @@ err_vdd_arm:
 }
 late_initcall(exynos_cpufreq_init);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "failed to get resource vdd_arm\n");
 		goto err_vdd_arm;
 	}
@@ -484,4 +552,7 @@ static struct platform_driver exynos_cpufreq_platdrv = {
 	.probe = exynos_cpufreq_probe,
 };
 module_platform_driver(exynos_cpufreq_platdrv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

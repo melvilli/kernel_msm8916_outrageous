@@ -14,6 +14,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -102,7 +106,11 @@ UNWIND(.fnstart)
 	cmpeq	xl, r4
 	movlo	xh, xl
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movlo	pc, lr
+=======
+	retlo	lr
+>>>>>>> v3.18
 =======
 	retlo	lr
 >>>>>>> v3.18
@@ -120,7 +128,11 @@ UNWIND(.fnstart)
 	movs	ip, ip, lsr #1
 	bne	4b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -131,7 +143,11 @@ UNWIND(.fnstart)
 6:	bcs	5b
 	cmp	xl, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr
+=======
+	reteq	lr
+>>>>>>> v3.18
 =======
 	reteq	lr
 >>>>>>> v3.18
@@ -161,7 +177,11 @@ UNWIND(.fnstart)
 	mov	xh, #1
 	bne	4b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -205,7 +225,11 @@ UNWIND(.fnstart)
 	mov	xh, xl, lsl ip
 	mov	xh, xh, lsr ip
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -215,7 +239,11 @@ UNWIND(.fnstart)
 	moveq	yh, xh
 	moveq	xh, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr
+=======
+	reteq	lr
+>>>>>>> v3.18
 =======
 	reteq	lr
 >>>>>>> v3.18

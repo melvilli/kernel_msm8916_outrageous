@@ -30,6 +30,7 @@
 #define PRIOMAP_MIN_SZ		128
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct cgroup_netprio_state *cgrp_netprio_state(struct cgroup *cgrp)
 {
 	return container_of(cgroup_subsys_state(cgrp, net_prio_subsys_id),
@@ -38,6 +39,10 @@ static inline struct cgroup_netprio_state *cgrp_netprio_state(struct cgroup *cgr
 
 /*
  * Extend @dev->priomap so that it's large enough to accomodate
+=======
+/*
+ * Extend @dev->priomap so that it's large enough to accommodate
+>>>>>>> v3.18
 =======
 /*
  * Extend @dev->priomap so that it's large enough to accommodate
@@ -93,7 +98,11 @@ static int extend_netdev_table(struct net_device *dev, u32 target_idx)
 /**
  * netprio_prio - return the effective netprio of a cgroup-net_device pair
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @cgrp: cgroup part of the target pair
+=======
+ * @css: css part of the target pair
+>>>>>>> v3.18
 =======
  * @css: css part of the target pair
 >>>>>>> v3.18
@@ -102,6 +111,7 @@ static int extend_netdev_table(struct net_device *dev, u32 target_idx)
  * Should be called under RCU read or rtnl lock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 netprio_prio(struct cgroup *cgrp, struct net_device *dev)
 {
 	struct netprio_map *map = rcu_dereference_rtnl(dev->priomap);
@@ -109,6 +119,8 @@ static u32 netprio_prio(struct cgroup *cgrp, struct net_device *dev)
 	if (map && cgrp->id < map->priomap_len)
 		return map->priomap[cgrp->id];
 =======
+=======
+>>>>>>> v3.18
 static u32 netprio_prio(struct cgroup_subsys_state *css, struct net_device *dev)
 {
 	struct netprio_map *map = rcu_dereference_rtnl(dev->priomap);
@@ -116,12 +128,16 @@ static u32 netprio_prio(struct cgroup_subsys_state *css, struct net_device *dev)
 
 	if (map && id < map->priomap_len)
 		return map->priomap[id];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 /**
  * netprio_set_prio - set netprio on a cgroup-net_device pair
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @cgrp: cgroup part of the target pair
  * @dev: net_device part of the target pair
@@ -135,6 +151,8 @@ static int netprio_set_prio(struct cgroup *cgrp, struct net_device *dev,
 {
 	struct netprio_map *map;
 =======
+=======
+>>>>>>> v3.18
  * @css: css part of the target pair
  * @dev: net_device part of the target pair
  * @prio: prio to set
@@ -147,26 +165,36 @@ static int netprio_set_prio(struct cgroup_subsys_state *css,
 {
 	struct netprio_map *map;
 	int id = css->cgroup->id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	/* avoid extending priomap for zero writes */
 	map = rtnl_dereference(dev->priomap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!prio && (!map || map->priomap_len <= cgrp->id))
 		return 0;
 
 	ret = extend_netdev_table(dev, cgrp->id);
 =======
+=======
+>>>>>>> v3.18
 	if (!prio && (!map || map->priomap_len <= id))
 		return 0;
 
 	ret = extend_netdev_table(dev, id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	map = rtnl_dereference(dev->priomap);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	map->priomap[cgrp->id] = prio;
 	return 0;
@@ -191,6 +219,8 @@ static int cgrp_css_online(struct cgroup *cgrp)
 
 	if (!parent)
 =======
+=======
+>>>>>>> v3.18
 	map->priomap[id] = prio;
 	return 0;
 }
@@ -214,6 +244,9 @@ static int cgrp_css_online(struct cgroup_subsys_state *css)
 	int ret = 0;
 
 	if (!parent_css)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -224,9 +257,15 @@ static int cgrp_css_online(struct cgroup_subsys_state *css)
 	 */
 	for_each_netdev(&init_net, dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 prio = netprio_prio(parent, dev);
 
 		ret = netprio_set_prio(cgrp, dev, prio);
+=======
+		u32 prio = netprio_prio(parent_css, dev);
+
+		ret = netprio_set_prio(css, dev, prio);
+>>>>>>> v3.18
 =======
 		u32 prio = netprio_prio(parent_css, dev);
 
@@ -239,6 +278,7 @@ static int cgrp_css_online(struct cgroup_subsys_state *css)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void cgrp_css_free(struct cgroup *cgrp)
 {
@@ -253,6 +293,8 @@ static u64 read_prioidx(struct cgroup *cgrp, struct cftype *cft)
 static int read_priomap(struct cgroup *cont, struct cftype *cft,
 			struct cgroup_map_cb *cb)
 =======
+=======
+>>>>>>> v3.18
 static void cgrp_css_free(struct cgroup_subsys_state *css)
 {
 	kfree(css);
@@ -264,6 +306,9 @@ static u64 read_prioidx(struct cgroup_subsys_state *css, struct cftype *cft)
 }
 
 static int read_priomap(struct seq_file *sf, void *v)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net_device *dev;
@@ -271,7 +316,12 @@ static int read_priomap(struct seq_file *sf, void *v)
 	rcu_read_lock();
 	for_each_netdev_rcu(&init_net, dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cb->fill(cb, dev->name, netprio_prio(cont, dev));
+=======
+		seq_printf(sf, "%s %u\n", dev->name,
+			   netprio_prio(seq_css(sf), dev));
+>>>>>>> v3.18
 =======
 		seq_printf(sf, "%s %u\n", dev->name,
 			   netprio_prio(seq_css(sf), dev));
@@ -281,8 +331,13 @@ static int read_priomap(struct seq_file *sf, void *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int write_priomap(struct cgroup *cgrp, struct cftype *cft,
 			 const char *buffer)
+=======
+static ssize_t write_priomap(struct kernfs_open_file *of,
+			     char *buf, size_t nbytes, loff_t off)
+>>>>>>> v3.18
 =======
 static ssize_t write_priomap(struct kernfs_open_file *of,
 			     char *buf, size_t nbytes, loff_t off)
@@ -294,7 +349,11 @@ static ssize_t write_priomap(struct kernfs_open_file *of,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sscanf(buffer, "%"__stringify(IFNAMSIZ)"s %u", devname, &prio) != 2)
+=======
+	if (sscanf(buf, "%"__stringify(IFNAMSIZ)"s %u", devname, &prio) != 2)
+>>>>>>> v3.18
 =======
 	if (sscanf(buf, "%"__stringify(IFNAMSIZ)"s %u", devname, &prio) != 2)
 >>>>>>> v3.18
@@ -307,17 +366,23 @@ static ssize_t write_priomap(struct kernfs_open_file *of,
 	rtnl_lock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = netprio_set_prio(cgrp, dev, prio);
 
 	rtnl_unlock();
 	dev_put(dev);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	ret = netprio_set_prio(of_css(of), dev, prio);
 
 	rtnl_unlock();
 	dev_put(dev);
 	return ret ?: nbytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -331,6 +396,7 @@ static int update_netprio(const void *v, struct file *file, unsigned n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void net_prio_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 {
 	struct task_struct *p;
@@ -340,6 +406,8 @@ static void net_prio_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 		task_lock(p);
 		v = (void *)(unsigned long)task_netprioidx(p);
 =======
+=======
+>>>>>>> v3.18
 static void net_prio_attach(struct cgroup_subsys_state *css,
 			    struct cgroup_taskset *tset)
 {
@@ -348,6 +416,9 @@ static void net_prio_attach(struct cgroup_subsys_state *css,
 
 	cgroup_taskset_for_each(p, tset) {
 		task_lock(p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iterate_fd(p->files, 0, update_netprio, v);
 		task_unlock(p);
@@ -362,8 +433,13 @@ static struct cftype ss_files[] = {
 	{
 		.name = "ifpriomap",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.read_map = read_priomap,
 		.write_string = write_priomap,
+=======
+		.seq_show = read_priomap,
+		.write = write_priomap,
+>>>>>>> v3.18
 =======
 		.seq_show = read_priomap,
 		.write = write_priomap,
@@ -373,8 +449,12 @@ static struct cftype ss_files[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cgroup_subsys net_prio_subsys = {
 	.name		= "net_prio",
+=======
+struct cgroup_subsys net_prio_cgrp_subsys = {
+>>>>>>> v3.18
 =======
 struct cgroup_subsys net_prio_cgrp_subsys = {
 >>>>>>> v3.18
@@ -383,9 +463,13 @@ struct cgroup_subsys net_prio_cgrp_subsys = {
 	.css_free	= cgrp_css_free,
 	.attach		= net_prio_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.subsys_id	= net_prio_subsys_id,
 	.base_cftypes	= ss_files,
 	.module		= THIS_MODULE,
+=======
+	.legacy_cftypes	= ss_files,
+>>>>>>> v3.18
 =======
 	.legacy_cftypes	= ss_files,
 >>>>>>> v3.18
@@ -395,7 +479,11 @@ static int netprio_device_event(struct notifier_block *unused,
 				unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -423,6 +511,7 @@ static struct notifier_block netprio_device_notifier = {
 
 static int __init init_cgroup_netprio(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -458,10 +547,15 @@ static void __exit exit_cgroup_netprio(void)
 module_init(init_cgroup_netprio);
 module_exit(exit_cgroup_netprio);
 =======
+=======
+>>>>>>> v3.18
 	register_netdevice_notifier(&netprio_device_notifier);
 	return 0;
 }
 
 subsys_initcall(init_cgroup_netprio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL v2");

@@ -6,6 +6,7 @@ This is for the non-QE/CPM/GUTs GPIO controllers as found on
 Every GPIO controller node must have #gpio-cells property defined,
 this information will be used to translate gpio-specifiers.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Required properties:
 - compatible : "fsl,<CHIP>-gpio" followed by "fsl,mpc8349-gpio" for
@@ -17,6 +18,8 @@ Required properties:
    services interrupts for this device.
 - gpio-controller : Marks the port as GPIO controller.
 =======
+=======
+>>>>>>> v3.18
 See bindings/gpio/gpio.txt for details of how to specify GPIO
 information for devices.
 
@@ -53,6 +56,9 @@ Optional properties:
 			trigger polarity).  Note that the available
 			set of trigger conditions supported by the
 			GPIO module depends on the actual SoC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example of gpio-controller nodes for a MPC8347 SoC:
@@ -62,15 +68,21 @@ Example of gpio-controller nodes for a MPC8347 SoC:
 		compatible = "fsl,mpc8347-gpio", "fsl,mpc8349-gpio";
 		reg = <0xc00 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <74 0x8>;
 		interrupt-parent = <&ipic>;
 		gpio-controller;
 =======
+=======
+>>>>>>> v3.18
 		interrupt-parent = <&ipic>;
 		interrupts = <74 0x8>;
 		gpio-controller;
 		interrupt-controller;
 		#interrupt-cells = <2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -78,6 +90,7 @@ Example of gpio-controller nodes for a MPC8347 SoC:
 		#gpio-cells = <2>;
 		compatible = "fsl,mpc8347-gpio", "fsl,mpc8349-gpio";
 		reg = <0xd00 0x100>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		interrupts = <75 0x8>;
 		interrupt-parent = <&ipic>;
@@ -100,20 +113,30 @@ interrupts = <number trigger>, where:
 
 Example of device using this is:
 =======
+=======
+>>>>>>> v3.18
 		interrupt-parent = <&ipic>;
 		interrupts = <75 0x8>;
 		gpio-controller;
 	};
 
 Example of a peripheral using the GPIO module as an IRQ controller:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	funkyfpga@0 {
 		compatible = "funky-fpga";
 		...
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <4 3>;
 		interrupt-parent = <&gpio1>;
+=======
+		interrupt-parent = <&gpio1>;
+		interrupts = <4 3>;
+>>>>>>> v3.18
 =======
 		interrupt-parent = <&gpio1>;
 		interrupts = <4 3>;

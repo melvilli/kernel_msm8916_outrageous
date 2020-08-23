@@ -24,7 +24,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -186,12 +189,15 @@ static void max8997_haptic_enable(struct max8997_haptic *chip)
 
 	if (!chip->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chip->enabled = true;
 		regulator_enable(chip->regulator);
 		max8997_haptic_configure(chip);
 		if (chip->mode == MAX8997_EXTERNAL_MODE)
 			pwm_enable(chip->pwm);
 =======
+=======
+>>>>>>> v3.18
 		error = regulator_enable(chip->regulator);
 		if (error) {
 			dev_err(chip->dev, "Failed to enable regulator\n");
@@ -207,6 +213,9 @@ static void max8997_haptic_enable(struct max8997_haptic *chip)
 			}
 		}
 		chip->enabled = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -268,7 +277,12 @@ static int max8997_haptic_probe(struct platform_device *pdev)
 	const struct max8997_platform_data *pdata =
 					dev_get_platdata(iodev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct max8997_haptic_platform_data *haptic_pdata = NULL;
+=======
+	const struct max8997_haptic_platform_data *haptic_pdata =
+					pdata->haptic_pdata;
+>>>>>>> v3.18
 =======
 	const struct max8997_haptic_platform_data *haptic_pdata =
 					pdata->haptic_pdata;
@@ -278,9 +292,12 @@ static int max8997_haptic_probe(struct platform_device *pdev)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata)
 		haptic_pdata = pdata->haptic_pdata;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!haptic_pdata) {

@@ -37,7 +37,10 @@
 struct da9055_hwmon {
 	struct da9055	*da9055;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device	*class_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mutex	hwmon_lock;
@@ -204,6 +207,7 @@ static ssize_t da9055_read_tjunc(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t da9055_hwmon_show_name(struct device *dev,
 				      struct device_attribute *devattr,
 				      char *buf)
@@ -211,6 +215,8 @@ static ssize_t da9055_hwmon_show_name(struct device *dev,
 	return sprintf(buf, "da9055\n");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t show_label(struct device *dev,
@@ -243,10 +249,14 @@ static SENSOR_DEVICE_ATTR(temp1_label, S_IRUGO, show_label, NULL,
 			  DA9055_ADC_TJUNC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, da9055_hwmon_show_name, NULL);
 
 static struct attribute *da9055_attr[] = {
 	&dev_attr_name.attr,
+=======
+static struct attribute *da9055_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *da9055_attrs[] = {
 >>>>>>> v3.18
@@ -265,6 +275,7 @@ static struct attribute *da9055_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group da9055_attr_group = {.attrs = da9055_attr};
 
 static int da9055_hwmon_probe(struct platform_device *pdev)
@@ -275,6 +286,8 @@ static int da9055_hwmon_probe(struct platform_device *pdev)
 	hwmon = devm_kzalloc(&pdev->dev, sizeof(struct da9055_hwmon),
 			     GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 ATTRIBUTE_GROUPS(da9055);
 
 static int da9055_hwmon_probe(struct platform_device *pdev)
@@ -285,6 +298,9 @@ static int da9055_hwmon_probe(struct platform_device *pdev)
 	int hwmon_irq, ret;
 
 	hwmon = devm_kzalloc(dev, sizeof(struct da9055_hwmon), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!hwmon)
 		return -ENOMEM;
@@ -296,8 +312,11 @@ static int da9055_hwmon_probe(struct platform_device *pdev)
 	hwmon->da9055 = dev_get_drvdata(pdev->dev.parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, hwmon);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hwmon_irq = platform_get_irq_byname(pdev, "HWMON");
@@ -305,10 +324,13 @@ static int da9055_hwmon_probe(struct platform_device *pdev)
 		return hwmon_irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hwmon_irq = regmap_irq_get_virq(hwmon->da9055->irq_data, hwmon_irq);
 	if (hwmon_irq < 0)
 		return hwmon_irq;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = devm_request_threaded_irq(&pdev->dev, hwmon_irq,
@@ -321,6 +343,7 @@ static int da9055_hwmon_probe(struct platform_device *pdev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = sysfs_create_group(&pdev->dev.kobj, &da9055_attr_group);
 	if (ret)
@@ -348,17 +371,25 @@ static int da9055_hwmon_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, "da9055",
 							   hwmon,
 							   da9055_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct platform_driver da9055_hwmon_driver = {
 	.probe = da9055_hwmon_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = da9055_hwmon_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

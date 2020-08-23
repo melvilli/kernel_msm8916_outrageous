@@ -46,7 +46,11 @@ static inline pgd_t *pgd_alloc(struct mm_struct *mm)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(pgd, swapper_pg_dir, PTRS_PER_PGD*sizeof(pgd_t *));
+=======
+	memcpy(pgd, swapper_pg_dir, PTRS_PER_PGD*sizeof(pgd_t));
+>>>>>>> v3.18
 =======
 	memcpy(pgd, swapper_pg_dir, PTRS_PER_PGD*sizeof(pgd_t));
 >>>>>>> v3.18
@@ -70,17 +74,23 @@ static inline struct page *pte_alloc_one(struct mm_struct *mm,
 
 	pte = alloc_page(GFP_KERNEL | __GFP_REPEAT | __GFP_ZERO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (pte)
 		pgtable_page_ctor(pte);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!pte)
 		return NULL;
 	if (!pgtable_page_ctor(pte)) {
 		__free_page(pte);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pte;
 }

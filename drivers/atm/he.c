@@ -420,7 +420,10 @@ static void he_remove_one(struct pci_dev *pci_dev)
 	kfree(he_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_disable_device(pci_dev);
@@ -538,8 +541,14 @@ static void he_init_tx_lbfp(struct he_dev *he_dev)
 static int he_init_tpdrq(struct he_dev *he_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	he_dev->tpdrq_base = pci_alloc_consistent(he_dev->pci_dev,
 		CONFIG_TPDRQ_SIZE * sizeof(struct he_tpdrq), &he_dev->tpdrq_phys);
+=======
+	he_dev->tpdrq_base = pci_zalloc_consistent(he_dev->pci_dev,
+						   CONFIG_TPDRQ_SIZE * sizeof(struct he_tpdrq),
+						   &he_dev->tpdrq_phys);
+>>>>>>> v3.18
 =======
 	he_dev->tpdrq_base = pci_zalloc_consistent(he_dev->pci_dev,
 						   CONFIG_TPDRQ_SIZE * sizeof(struct he_tpdrq),
@@ -550,8 +559,11 @@ static int he_init_tpdrq(struct he_dev *he_dev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(he_dev->tpdrq_base, 0,
 				CONFIG_TPDRQ_SIZE * sizeof(struct he_tpdrq));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -818,8 +830,14 @@ static int he_init_group(struct he_dev *he_dev, int group)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	he_dev->rbpl_base = pci_alloc_consistent(he_dev->pci_dev,
 		CONFIG_RBPL_SIZE * sizeof(struct he_rbp), &he_dev->rbpl_phys);
+=======
+	he_dev->rbpl_base = pci_zalloc_consistent(he_dev->pci_dev,
+						  CONFIG_RBPL_SIZE * sizeof(struct he_rbp),
+						  &he_dev->rbpl_phys);
+>>>>>>> v3.18
 =======
 	he_dev->rbpl_base = pci_zalloc_consistent(he_dev->pci_dev,
 						  CONFIG_RBPL_SIZE * sizeof(struct he_rbp),
@@ -830,7 +848,10 @@ static int he_init_group(struct he_dev *he_dev, int group)
 		goto out_destroy_rbpl_pool;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(he_dev->rbpl_base, 0, CONFIG_RBPL_SIZE * sizeof(struct he_rbp));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -866,8 +887,14 @@ static int he_init_group(struct he_dev *he_dev, int group)
 	/* rx buffer ready queue */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	he_dev->rbrq_base = pci_alloc_consistent(he_dev->pci_dev,
 		CONFIG_RBRQ_SIZE * sizeof(struct he_rbrq), &he_dev->rbrq_phys);
+=======
+	he_dev->rbrq_base = pci_zalloc_consistent(he_dev->pci_dev,
+						  CONFIG_RBRQ_SIZE * sizeof(struct he_rbrq),
+						  &he_dev->rbrq_phys);
+>>>>>>> v3.18
 =======
 	he_dev->rbrq_base = pci_zalloc_consistent(he_dev->pci_dev,
 						  CONFIG_RBRQ_SIZE * sizeof(struct he_rbrq),
@@ -878,7 +905,10 @@ static int he_init_group(struct he_dev *he_dev, int group)
 		goto out_free_rbpl;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(he_dev->rbrq_base, 0, CONFIG_RBRQ_SIZE * sizeof(struct he_rbrq));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -899,8 +929,14 @@ static int he_init_group(struct he_dev *he_dev, int group)
 	/* tx buffer ready queue */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	he_dev->tbrq_base = pci_alloc_consistent(he_dev->pci_dev,
 		CONFIG_TBRQ_SIZE * sizeof(struct he_tbrq), &he_dev->tbrq_phys);
+=======
+	he_dev->tbrq_base = pci_zalloc_consistent(he_dev->pci_dev,
+						  CONFIG_TBRQ_SIZE * sizeof(struct he_tbrq),
+						  &he_dev->tbrq_phys);
+>>>>>>> v3.18
 =======
 	he_dev->tbrq_base = pci_zalloc_consistent(he_dev->pci_dev,
 						  CONFIG_TBRQ_SIZE * sizeof(struct he_tbrq),
@@ -911,7 +947,10 @@ static int he_init_group(struct he_dev *he_dev, int group)
 		goto out_free_rbpq_base;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(he_dev->tbrq_base, 0, CONFIG_TBRQ_SIZE * sizeof(struct he_tbrq));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1128,6 +1167,7 @@ static int he_start(struct atm_dev *dev)
 		dev->esi[i] = read_prom_byte(he_dev, MAC_ADDR + i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hprintk("%s%s, %x:%x:%x:%x:%x:%x\n",
 				he_dev->prod_id,
 					he_dev->media & 0x40 ? "SM" : "MM",
@@ -1137,6 +1177,10 @@ static int he_start(struct atm_dev *dev)
 						dev->esi[3],
 						dev->esi[4],
 						dev->esi[5]);
+=======
+	hprintk("%s%s, %pM\n", he_dev->prod_id,
+		he_dev->media & 0x40 ? "SM" : "MM", dev->esi);
+>>>>>>> v3.18
 =======
 	hprintk("%s%s, %pM\n", he_dev->prod_id,
 		he_dev->media & 0x40 ? "SM" : "MM", dev->esi);
@@ -1513,8 +1557,14 @@ static int he_start(struct atm_dev *dev)
 	/* host status page */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	he_dev->hsp = pci_alloc_consistent(he_dev->pci_dev,
 				sizeof(struct he_hsp), &he_dev->hsp_phys);
+=======
+	he_dev->hsp = pci_zalloc_consistent(he_dev->pci_dev,
+					    sizeof(struct he_hsp),
+					    &he_dev->hsp_phys);
+>>>>>>> v3.18
 =======
 	he_dev->hsp = pci_zalloc_consistent(he_dev->pci_dev,
 					    sizeof(struct he_hsp),
@@ -1525,7 +1575,10 @@ static int he_start(struct atm_dev *dev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(he_dev->hsp, 0, sizeof(struct he_hsp));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	he_writel(he_dev, he_dev->hsp_phys, HSP_BA);
@@ -2926,6 +2979,7 @@ static struct pci_driver he_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init he_init(void)
 {
 	return pci_register_driver(&he_driver);
@@ -2938,6 +2992,9 @@ static void __exit he_cleanup(void)
 
 module_init(he_init);
 module_exit(he_cleanup);
+=======
+module_pci_driver(he_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(he_driver);
 >>>>>>> v3.18

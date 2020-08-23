@@ -78,7 +78,10 @@ bfin_jc_emudat_manager(void *arg)
 			__set_current_state(TASK_UNINTERRUPTIBLE);
 			schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			continue;
@@ -353,7 +356,11 @@ bfin_jc_early_write(struct console *co, const char *buf, unsigned int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata console bfin_jc_early_console = {
+=======
+static struct console bfin_jc_early_console __initdata = {
+>>>>>>> v3.18
 =======
 static struct console bfin_jc_early_console __initdata = {
 >>>>>>> v3.18

@@ -27,6 +27,10 @@
 
 #include <crypto/algapi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/null.h>
+>>>>>>> v3.18
 =======
 #include <crypto/null.h>
 >>>>>>> v3.18

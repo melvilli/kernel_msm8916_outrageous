@@ -109,8 +109,13 @@ static void nmi_timer_shutdown(void)
 	int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
 	unregister_cpu_notifier(&nmi_timer_cpu_nb);
+=======
+	cpu_notifier_register_begin();
+	__unregister_cpu_notifier(&nmi_timer_cpu_nb);
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 	__unregister_cpu_notifier(&nmi_timer_cpu_nb);
@@ -125,7 +130,11 @@ static void nmi_timer_shutdown(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_done();
 >>>>>>> v3.18
@@ -142,6 +151,7 @@ static int nmi_timer_setup(void)
 	nmi_timer_attr.sample_period = period;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
 	err = register_cpu_notifier(&nmi_timer_cpu_nb);
 	if (err)
@@ -157,6 +167,8 @@ static int nmi_timer_setup(void)
 out:
 	put_online_cpus();
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 	err = __register_cpu_notifier(&nmi_timer_cpu_nb);
 	if (err)
@@ -174,6 +186,9 @@ out:
 
 out:
 	cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

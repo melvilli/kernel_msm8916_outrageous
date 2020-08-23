@@ -28,7 +28,11 @@
 #define IIO_DEV_ATTR_FREQSYMBOL(_channel, _mode, _show, _store, _addr)	\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_frequencysymbol,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -55,7 +59,11 @@
 #define IIO_DEV_ATTR_PHASESYMBOL(_channel, _mode, _show, _store, _addr)	\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_phasesymbol,		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -67,7 +75,11 @@
 #define IIO_DEV_ATTR_PINCONTROL_EN(_channel, _mode, _show, _store, _addr)\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_pincontrol_en,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -79,7 +91,11 @@
 #define IIO_DEV_ATTR_PINCONTROL_FREQ_EN(_channel, _mode, _show, _store, _addr)\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_pincontrol_frequency_en,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -91,7 +107,11 @@
 #define IIO_DEV_ATTR_PINCONTROL_PHASE_EN(_channel, _mode, _show, _store, _addr)\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_pincontrol_phase_en,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -103,7 +123,11 @@
 #define IIO_DEV_ATTR_OUT_ENABLE(_channel, _mode, _show, _store, _addr)	\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_out_enable,		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -116,7 +140,11 @@
 			_mode, _show, _store, _addr)			\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_out##_output##_enable,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_mode, _show, _store, _addr);
+=======
+			_mode, _show, _store, _addr)
+>>>>>>> v3.18
 =======
 			_mode, _show, _store, _addr)
 >>>>>>> v3.18
@@ -128,7 +156,11 @@
 #define IIO_DEV_ATTR_OUT_WAVETYPE(_channel, _output, _store, _addr)	\
 	IIO_DEVICE_ATTR(out_altvoltage##_channel##_out##_output##_wavetype,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			S_IWUSR, NULL, _store, _addr);
+=======
+			S_IWUSR, NULL, _store, _addr)
+>>>>>>> v3.18
 =======
 			S_IWUSR, NULL, _store, _addr)
 >>>>>>> v3.18
@@ -140,7 +172,11 @@
 #define IIO_CONST_ATTR_OUT_WAVETYPES_AVAILABLE(_channel, _output, _modes)\
 	IIO_CONST_ATTR(							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_altvoltage##_channel##_out##_output##_wavetype_available, _modes);
+=======
+	out_altvoltage##_channel##_out##_output##_wavetype_available, _modes)
+>>>>>>> v3.18
 =======
 	out_altvoltage##_channel##_out##_output##_wavetype_available, _modes)
 >>>>>>> v3.18

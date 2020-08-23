@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -36,8 +40,13 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.pc_DriverName		= "apci3200",
 		.i_IorangeBase1		= 256,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.i_PCIEeprom		= ADDIDATA_EEPROM,
 		.pc_EepromChip		= ADDIDATA_S5920,
+=======
+		.i_PCIEeprom		= 1,
+		.pc_EepromChip		= "S5920",
+>>>>>>> v3.18
 =======
 		.i_PCIEeprom		= 1,
 		.pc_EepromChip		= "S5920",
@@ -52,6 +61,7 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.ui_MinAcquisitiontimeNs = 10000,
 		.ui_MinDelaytimeNs	= 100000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.interrupt		= v_APCI3200_Interrupt,
 		.reset			= i_APCI3200_Reset,
 		.ai_config		= i_APCI3200_ConfigAnalogInput,
@@ -62,6 +72,8 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.ai_cmd			= i_APCI3200_CommandAnalogInput,
 		.ai_cancel		= i_APCI3200_StopCyclicAcquisition,
 =======
+=======
+>>>>>>> v3.18
 		.interrupt		= apci3200_interrupt,
 		.reset			= apci3200_reset,
 		.ai_config		= apci3200_ai_config,
@@ -71,6 +83,9 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.ai_cmdtest		= apci3200_ai_cmdtest,
 		.ai_cmd			= apci3200_ai_cmd,
 		.ai_cancel		= apci3200_cancel,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.di_bits		= apci3200_di_insn_bits,
 		.do_bits		= apci3200_do_insn_bits,
@@ -79,8 +94,13 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.pc_DriverName		= "apci3300",
 		.i_IorangeBase1		= 256,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.i_PCIEeprom		= ADDIDATA_EEPROM,
 		.pc_EepromChip		= ADDIDATA_S5920,
+=======
+		.i_PCIEeprom		= 1,
+		.pc_EepromChip		= "S5920",
+>>>>>>> v3.18
 =======
 		.i_PCIEeprom		= 1,
 		.pc_EepromChip		= "S5920",
@@ -94,6 +114,7 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.ui_MinAcquisitiontimeNs = 10000,
 		.ui_MinDelaytimeNs	= 100000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.interrupt		= v_APCI3200_Interrupt,
 		.reset			= i_APCI3200_Reset,
 		.ai_config		= i_APCI3200_ConfigAnalogInput,
@@ -104,6 +125,8 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.ai_cmd			= i_APCI3200_CommandAnalogInput,
 		.ai_cancel		= i_APCI3200_StopCyclicAcquisition,
 =======
+=======
+>>>>>>> v3.18
 		.interrupt		= apci3200_interrupt,
 		.reset			= apci3200_reset,
 		.ai_config		= apci3200_ai_config,
@@ -113,6 +136,9 @@ static const struct addi_board apci3200_boardtypes[] = {
 		.ai_cmdtest		= apci3200_ai_cmdtest,
 		.ai_cmd			= apci3200_ai_cmd,
 		.ai_cancel		= apci3200_cancel,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.di_bits		= apci3200_di_insn_bits,
 		.do_bits		= apci3200_do_insn_bits,
@@ -147,7 +173,11 @@ static int apci3200_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci3200_pci_table) = {
+=======
+static const struct pci_device_id apci3200_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci3200_pci_table[] = {
 >>>>>>> v3.18

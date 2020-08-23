@@ -22,6 +22,11 @@
 #include <linux/list.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 
@@ -196,6 +201,11 @@ struct ssp_device {
 	int		drcmr_rx;
 	int		drcmr_tx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct device_node	*of_node;
+>>>>>>> v3.18
 =======
 
 	struct device_node	*of_node;
@@ -226,15 +236,21 @@ static inline u32 pxa_ssp_read_reg(struct ssp_device *dev, u32 reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_PXA
 struct ssp_device *pxa_ssp_request(int port, const char *label);
 void pxa_ssp_free(struct ssp_device *);
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_PXA_SSP)
 struct ssp_device *pxa_ssp_request(int port, const char *label);
 void pxa_ssp_free(struct ssp_device *);
 struct ssp_device *pxa_ssp_request_of(const struct device_node *of_node,
 				      const char *label);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline struct ssp_device *pxa_ssp_request(int port, const char *label)
@@ -242,12 +258,18 @@ static inline struct ssp_device *pxa_ssp_request(int port, const char *label)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct ssp_device *pxa_ssp_request_of(const struct device_node *n,
 						    const char *name)
 {
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void pxa_ssp_free(struct ssp_device *ssp) {}
 #endif

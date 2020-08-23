@@ -964,10 +964,13 @@ static int cx24116_send_diseqc_msg(struct dvb_frontend *fe,
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Validate length */
 	if (d->msg_len > sizeof(d->msg))
                 return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Dump DiSEqC message */
@@ -982,11 +985,17 @@ static int cx24116_send_diseqc_msg(struct dvb_frontend *fe,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Validate length */
 	if (d->msg_len > (CX24116_ARGLEN - CX24116_DISEQC_MSGOFS))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* DiSEqC message */
 	for (i = 0; i < d->msg_len; i++)

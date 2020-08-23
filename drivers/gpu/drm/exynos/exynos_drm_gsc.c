@@ -13,7 +13,10 @@
  */
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -25,6 +28,10 @@
 #include <drm/exynos_drm.h>
 #include "regs-gsc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "exynos_drm_drv.h"
+>>>>>>> v3.18
 =======
 #include "exynos_drm_drv.h"
 >>>>>>> v3.18
@@ -408,8 +415,11 @@ static int gsc_sw_reset(struct gsc_context *ctx)
 	int count = GSC_RESET_TIMEOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* s/w reset */
@@ -452,8 +462,11 @@ static void gsc_set_gscblk_fimd_wb(struct gsc_context *ctx, bool enable)
 	u32 gscblk_cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gscblk_cfg = readl(SYSREG_GSCBLK_CFG1);
@@ -474,7 +487,11 @@ static void gsc_handle_irq(struct gsc_context *ctx, bool enable,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:enable[%d]overflow[%d]level[%d]\n", __func__,
+=======
+	DRM_DEBUG_KMS("enable[%d]overflow[%d]level[%d]\n",
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("enable[%d]overflow[%d]level[%d]\n",
 >>>>>>> v3.18
@@ -509,7 +526,11 @@ static int gsc_src_set_fmt(struct device *dev, u32 fmt)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fmt[0x%x]\n", __func__, fmt);
+=======
+	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
 >>>>>>> v3.18
@@ -589,8 +610,12 @@ static int gsc_src_set_transf(struct device *dev,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:degree[%d]flip[0x%x]\n", __func__,
 		degree, flip);
+=======
+	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
 >>>>>>> v3.18
@@ -642,8 +667,13 @@ static int gsc_src_set_size(struct device *dev, int swap,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:swap[%d]x[%d]y[%d]w[%d]h[%d]\n",
 		__func__, swap, pos->x, pos->y, pos->w, pos->h);
+=======
+	DRM_DEBUG_KMS("swap[%d]x[%d]y[%d]w[%d]h[%d]\n",
+		swap, pos->x, pos->y, pos->w, pos->h);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("swap[%d]x[%d]y[%d]w[%d]h[%d]\n",
 		swap, pos->x, pos->y, pos->w, pos->h);
@@ -665,8 +695,12 @@ static int gsc_src_set_size(struct device *dev, int swap,
 	gsc_write(cfg, GSC_CROPPED_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:hsize[%d]vsize[%d]\n",
 		__func__, sz->hsize, sz->vsize);
+=======
+	DRM_DEBUG_KMS("hsize[%d]vsize[%d]\n", sz->hsize, sz->vsize);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("hsize[%d]vsize[%d]\n", sz->hsize, sz->vsize);
 >>>>>>> v3.18
@@ -685,8 +719,12 @@ static int gsc_src_set_size(struct device *dev, int swap,
 	cfg &= ~GSC_IN_RGB_TYPE_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:width[%d]range[%d]\n",
 		__func__, pos->w, sc->range);
+=======
+	DRM_DEBUG_KMS("width[%d]range[%d]\n", pos->w, sc->range);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("width[%d]range[%d]\n", pos->w, sc->range);
 >>>>>>> v3.18
@@ -716,8 +754,12 @@ static int gsc_src_set_buf_seq(struct gsc_context *ctx, u32 buf_id,
 	u32 mask = 0x00000001 << buf_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:buf_id[%d]buf_type[%d]\n", __func__,
 		buf_id, buf_type);
+=======
+	DRM_DEBUG_KMS("buf_id[%d]buf_type[%d]\n", buf_id, buf_type);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("buf_id[%d]buf_type[%d]\n", buf_id, buf_type);
 >>>>>>> v3.18
@@ -764,7 +806,11 @@ static int gsc_src_set_addr(struct device *dev,
 	property = &c_node->property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:prop_id[%d]buf_id[%d]buf_type[%d]\n", __func__,
+=======
+	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
 >>>>>>> v3.18
@@ -812,7 +858,11 @@ static int gsc_dst_set_fmt(struct device *dev, u32 fmt)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:fmt[0x%x]\n", __func__, fmt);
+=======
+	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("fmt[0x%x]\n", fmt);
 >>>>>>> v3.18
@@ -889,8 +939,12 @@ static int gsc_dst_set_transf(struct device *dev,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:degree[%d]flip[0x%x]\n", __func__,
 		degree, flip);
+=======
+	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("degree[%d]flip[0x%x]\n", degree, flip);
 >>>>>>> v3.18
@@ -936,7 +990,11 @@ static int gsc_dst_set_transf(struct device *dev,
 static int gsc_get_ratio_shift(u32 src, u32 dst, u32 *ratio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:src[%d]dst[%d]\n", __func__, src, dst);
+=======
+	DRM_DEBUG_KMS("src[%d]dst[%d]\n", src, dst);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("src[%d]dst[%d]\n", src, dst);
 >>>>>>> v3.18
@@ -1003,8 +1061,13 @@ static int gsc_set_prescaler(struct gsc_context *ctx, struct gsc_scaler *sc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:pre_hratio[%d]pre_vratio[%d]\n",
 		__func__, sc->pre_hratio, sc->pre_vratio);
+=======
+	DRM_DEBUG_KMS("pre_hratio[%d]pre_vratio[%d]\n",
+		sc->pre_hratio, sc->pre_vratio);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("pre_hratio[%d]pre_vratio[%d]\n",
 		sc->pre_hratio, sc->pre_vratio);
@@ -1014,8 +1077,13 @@ static int gsc_set_prescaler(struct gsc_context *ctx, struct gsc_scaler *sc,
 	sc->main_vratio = (src_h << 16) / dst_h;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:main_hratio[%ld]main_vratio[%ld]\n",
 		__func__, sc->main_hratio, sc->main_vratio);
+=======
+	DRM_DEBUG_KMS("main_hratio[%ld]main_vratio[%ld]\n",
+		sc->main_hratio, sc->main_vratio);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("main_hratio[%ld]main_vratio[%ld]\n",
 		sc->main_hratio, sc->main_vratio);
@@ -1025,8 +1093,12 @@ static int gsc_set_prescaler(struct gsc_context *ctx, struct gsc_scaler *sc,
 		&sc->pre_shfactor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:pre_shfactor[%d]\n", __func__,
 		sc->pre_shfactor);
+=======
+	DRM_DEBUG_KMS("pre_shfactor[%d]\n", sc->pre_shfactor);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("pre_shfactor[%d]\n", sc->pre_shfactor);
 >>>>>>> v3.18
@@ -1096,8 +1168,13 @@ static void gsc_set_scaler(struct gsc_context *ctx, struct gsc_scaler *sc)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:main_hratio[%ld]main_vratio[%ld]\n",
 		__func__, sc->main_hratio, sc->main_vratio);
+=======
+	DRM_DEBUG_KMS("main_hratio[%ld]main_vratio[%ld]\n",
+		sc->main_hratio, sc->main_vratio);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("main_hratio[%ld]main_vratio[%ld]\n",
 		sc->main_hratio, sc->main_vratio);
@@ -1121,8 +1198,13 @@ static int gsc_dst_set_size(struct device *dev, int swap,
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:swap[%d]x[%d]y[%d]w[%d]h[%d]\n",
 		__func__, swap, pos->x, pos->y, pos->w, pos->h);
+=======
+	DRM_DEBUG_KMS("swap[%d]x[%d]y[%d]w[%d]h[%d]\n",
+		swap, pos->x, pos->y, pos->w, pos->h);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("swap[%d]x[%d]y[%d]w[%d]h[%d]\n",
 		swap, pos->x, pos->y, pos->w, pos->h);
@@ -1143,8 +1225,12 @@ static int gsc_dst_set_size(struct device *dev, int swap,
 	gsc_write(cfg, GSC_SCALED_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:hsize[%d]vsize[%d]\n",
 		__func__, sz->hsize, sz->vsize);
+=======
+	DRM_DEBUG_KMS("hsize[%d]vsize[%d]\n", sz->hsize, sz->vsize);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("hsize[%d]vsize[%d]\n", sz->hsize, sz->vsize);
 >>>>>>> v3.18
@@ -1161,8 +1247,12 @@ static int gsc_dst_set_size(struct device *dev, int swap,
 	cfg &= ~GSC_OUT_RGB_TYPE_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:width[%d]range[%d]\n",
 		__func__, pos->w, sc->range);
+=======
+	DRM_DEBUG_KMS("width[%d]range[%d]\n", pos->w, sc->range);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("width[%d]range[%d]\n", pos->w, sc->range);
 >>>>>>> v3.18
@@ -1195,7 +1285,11 @@ static int gsc_dst_get_buf_seq(struct gsc_context *ctx)
 			buf_num--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:buf_num[%d]\n", __func__, buf_num);
+=======
+	DRM_DEBUG_KMS("buf_num[%d]\n", buf_num);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("buf_num[%d]\n", buf_num);
 >>>>>>> v3.18
@@ -1213,8 +1307,12 @@ static int gsc_dst_set_buf_seq(struct gsc_context *ctx, u32 buf_id,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:buf_id[%d]buf_type[%d]\n", __func__,
 		buf_id, buf_type);
+=======
+	DRM_DEBUG_KMS("buf_id[%d]buf_type[%d]\n", buf_id, buf_type);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("buf_id[%d]buf_type[%d]\n", buf_id, buf_type);
 >>>>>>> v3.18
@@ -1276,7 +1374,11 @@ static int gsc_dst_set_addr(struct device *dev,
 	property = &c_node->property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:prop_id[%d]buf_id[%d]buf_type[%d]\n", __func__,
+=======
+	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("prop_id[%d]buf_id[%d]buf_type[%d]\n",
 >>>>>>> v3.18
@@ -1320,7 +1422,11 @@ static struct exynos_drm_ipp_ops gsc_dst_ops = {
 static int gsc_clk_ctrl(struct gsc_context *ctx, bool enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:enable[%d]\n", __func__, enable);
+=======
+	DRM_DEBUG_KMS("enable[%d]\n", enable);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("enable[%d]\n", enable);
 >>>>>>> v3.18
@@ -1343,7 +1449,11 @@ static int gsc_get_src_buf_index(struct gsc_context *ctx)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:gsc id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("gsc id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("gsc id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -1370,7 +1480,11 @@ static int gsc_get_src_buf_index(struct gsc_context *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:cfg[0x%x]curr_index[%d]buf_id[%d]\n", __func__, cfg,
+=======
+	DRM_DEBUG_KMS("cfg[0x%x]curr_index[%d]buf_id[%d]\n", cfg,
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("cfg[0x%x]curr_index[%d]buf_id[%d]\n", cfg,
 >>>>>>> v3.18
@@ -1386,7 +1500,11 @@ static int gsc_get_dst_buf_index(struct gsc_context *ctx)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:gsc id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("gsc id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("gsc id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -1413,7 +1531,11 @@ static int gsc_get_dst_buf_index(struct gsc_context *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:cfg[0x%x]curr_index[%d]buf_id[%d]\n", __func__, cfg,
+=======
+	DRM_DEBUG_KMS("cfg[0x%x]curr_index[%d]buf_id[%d]\n", cfg,
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("cfg[0x%x]curr_index[%d]buf_id[%d]\n", cfg,
 >>>>>>> v3.18
@@ -1433,17 +1555,23 @@ static irqreturn_t gsc_irq_handler(int irq, void *dev_id)
 	int buf_id[EXYNOS_DRM_OPS_MAX];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:gsc id[%d]\n", __func__, ctx->id);
 
 	status = gsc_read(GSC_IRQ);
 	if (status & GSC_IRQ_STATUS_OR_IRQ) {
 		dev_err(ippdrv->dev, "occured overflow at %d, status 0x%x.\n",
 =======
+=======
+>>>>>>> v3.18
 	DRM_DEBUG_KMS("gsc id[%d]\n", ctx->id);
 
 	status = gsc_read(GSC_IRQ);
 	if (status & GSC_IRQ_STATUS_OR_IRQ) {
 		dev_err(ippdrv->dev, "occurred overflow at %d, status 0x%x.\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->id, status);
 		return IRQ_NONE;
@@ -1451,7 +1579,11 @@ static irqreturn_t gsc_irq_handler(int irq, void *dev_id)
 
 	if (status & GSC_IRQ_STATUS_OR_FRM_DONE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(ippdrv->dev, "occured frame done at %d, status 0x%x.\n",
+=======
+		dev_dbg(ippdrv->dev, "occurred frame done at %d, status 0x%x.\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(ippdrv->dev, "occurred frame done at %d, status 0x%x.\n",
 >>>>>>> v3.18
@@ -1466,7 +1598,11 @@ static irqreturn_t gsc_irq_handler(int irq, void *dev_id)
 			return IRQ_HANDLED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:buf_id_src[%d]buf_id_dst[%d]\n", __func__,
+=======
+		DRM_DEBUG_KMS("buf_id_src[%d]buf_id_dst[%d]\n",
+>>>>>>> v3.18
 =======
 		DRM_DEBUG_KMS("buf_id_src[%d]buf_id_dst[%d]\n",
 >>>>>>> v3.18
@@ -1478,8 +1614,12 @@ static irqreturn_t gsc_irq_handler(int irq, void *dev_id)
 		event_work->buf_id[EXYNOS_DRM_OPS_DST] =
 			buf_id[EXYNOS_DRM_OPS_DST];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_work(ippdrv->event_workq,
 			(struct work_struct *)event_work);
+=======
+		queue_work(ippdrv->event_workq, &event_work->work);
+>>>>>>> v3.18
 =======
 		queue_work(ippdrv->event_workq, &event_work->work);
 >>>>>>> v3.18
@@ -1491,6 +1631,7 @@ static irqreturn_t gsc_irq_handler(int irq, void *dev_id)
 static int gsc_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_exynos_ipp_prop_list *prop_list;
 
 	DRM_DEBUG_KMS("%s\n", __func__);
@@ -1500,6 +1641,9 @@ static int gsc_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 		DRM_ERROR("failed to alloc property list.\n");
 		return -ENOMEM;
 	}
+=======
+	struct drm_exynos_ipp_prop_list *prop_list = &ippdrv->prop_list;
+>>>>>>> v3.18
 =======
 	struct drm_exynos_ipp_prop_list *prop_list = &ippdrv->prop_list;
 >>>>>>> v3.18
@@ -1527,8 +1671,11 @@ static int gsc_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 	prop_list->scale_min.vsize = GSC_SCALE_MIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ippdrv->prop_list = prop_list;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1544,7 +1691,11 @@ static inline bool gsc_check_drm_flip(enum drm_exynos_flip flip)
 		return true;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:invalid flip\n", __func__);
+=======
+		DRM_DEBUG_KMS("invalid flip\n");
+>>>>>>> v3.18
 =======
 		DRM_DEBUG_KMS("invalid flip\n");
 >>>>>>> v3.18
@@ -1558,7 +1709,11 @@ static int gsc_ippdrv_check_property(struct device *dev,
 	struct gsc_context *ctx = get_gsc_context(dev);
 	struct exynos_drm_ippdrv *ippdrv = &ctx->ippdrv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_exynos_ipp_prop_list *pp = ippdrv->prop_list;
+=======
+	struct drm_exynos_ipp_prop_list *pp = &ippdrv->prop_list;
+>>>>>>> v3.18
 =======
 	struct drm_exynos_ipp_prop_list *pp = &ippdrv->prop_list;
 >>>>>>> v3.18
@@ -1569,8 +1724,11 @@ static int gsc_ippdrv_check_property(struct device *dev,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_ipp_ops(i) {
@@ -1682,8 +1840,11 @@ static int gsc_ippdrv_reset(struct device *dev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* reset h/w block */
@@ -1713,7 +1874,11 @@ static int gsc_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	int ret, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:cmd[%d]\n", __func__, cmd);
+=======
+	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
 >>>>>>> v3.18
@@ -1811,7 +1976,11 @@ static void gsc_ippdrv_stop(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:cmd[%d]\n", __func__, cmd);
+=======
+	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("cmd[%d]\n", cmd);
 >>>>>>> v3.18
@@ -1900,8 +2069,12 @@ static int gsc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]ippdrv[0x%x]\n", __func__, ctx->id,
 		(int)ippdrv);
+=======
+	DRM_DEBUG_KMS("id[%d]ippdrv[0x%x]\n", ctx->id, (int)ippdrv);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]ippdrv[0x%x]\n", ctx->id, (int)ippdrv);
 >>>>>>> v3.18
@@ -1948,7 +2121,11 @@ static int gsc_suspend(struct device *dev)
 	struct gsc_context *ctx = get_gsc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -1964,7 +2141,11 @@ static int gsc_resume(struct device *dev)
 	struct gsc_context *ctx = get_gsc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -1982,7 +2163,11 @@ static int gsc_runtime_suspend(struct device *dev)
 	struct gsc_context *ctx = get_gsc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __func__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18
@@ -1995,7 +2180,11 @@ static int gsc_runtime_resume(struct device *dev)
 	struct gsc_context *ctx = get_gsc_context(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:id[%d]\n", __FILE__, ctx->id);
+=======
+	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
+>>>>>>> v3.18
 =======
 	DRM_DEBUG_KMS("id[%d]\n", ctx->id);
 >>>>>>> v3.18

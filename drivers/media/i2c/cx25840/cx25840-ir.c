@@ -225,7 +225,11 @@ static inline unsigned int lpf_count_to_us(unsigned int count)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FIFO register pulse width count compuations
+=======
+ * FIFO register pulse width count computations
+>>>>>>> v3.18
 =======
  * FIFO register pulse width count computations
 >>>>>>> v3.18
@@ -1235,7 +1239,11 @@ int cx25840_ir_probe(struct v4l2_subdev *sd)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir_state = kzalloc(sizeof(struct cx25840_ir_state), GFP_KERNEL);
+=======
+	ir_state = devm_kzalloc(&state->c->dev, sizeof(*ir_state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ir_state = devm_kzalloc(&state->c->dev, sizeof(*ir_state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1245,10 +1253,15 @@ int cx25840_ir_probe(struct v4l2_subdev *sd)
 	spin_lock_init(&ir_state->rx_kfifo_lock);
 	if (kfifo_alloc(&ir_state->rx_kfifo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			CX25840_IR_RX_KFIFO_SIZE, GFP_KERNEL)) {
 		kfree(ir_state);
 		return -ENOMEM;
 	}
+=======
+			CX25840_IR_RX_KFIFO_SIZE, GFP_KERNEL))
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 			CX25840_IR_RX_KFIFO_SIZE, GFP_KERNEL))
 		return -ENOMEM;
@@ -1287,7 +1300,10 @@ int cx25840_ir_remove(struct v4l2_subdev *sd)
 
 	kfifo_free(&ir_state->rx_kfifo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(ir_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	state->ir_state = NULL;

@@ -439,7 +439,11 @@ void medusa_set_resolution(struct cx25821_dev *dev, int width,
 	} else {
 		decoder = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		decoder_count = _num_decoders;
+=======
+		decoder_count = dev->_max_num_decoders;
+>>>>>>> v3.18
 =======
 		decoder_count = dev->_max_num_decoders;
 >>>>>>> v3.18
@@ -511,8 +515,11 @@ static void medusa_set_decoderduration(struct cx25821_dev *dev, int decoder,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_display_field_cnt[decoder] = duration;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* update hardware */
@@ -675,8 +682,11 @@ int medusa_video_init(struct cx25821_dev *dev)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_num_decoders = dev->_max_num_decoders;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* disable Auto source selection on all video decoders */
@@ -696,9 +706,12 @@ int medusa_video_init(struct cx25821_dev *dev)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < _num_decoders; i++)
 		medusa_set_decoderduration(dev, i, _display_field_cnt[i]);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * FIXME: due to a coding bug the duration was always 0. It's
 	 * likely that it really should be something else, but due to the
@@ -707,6 +720,9 @@ int medusa_video_init(struct cx25821_dev *dev)
 	 */
 	for (i = 0; i < dev->_max_num_decoders; i++)
 		medusa_set_decoderduration(dev, i, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Select monitor as DENC A input, power up the DAC */
@@ -739,7 +755,11 @@ int medusa_video_init(struct cx25821_dev *dev)
 	value = cx25821_i2c_read(&dev->i2c_bus[0], PIN_OE_CTRL, &tmp);
 	value &= 0xFEF0FE00;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (_num_decoders == MAX_DECODERS) {
+=======
+	if (dev->_max_num_decoders == MAX_DECODERS) {
+>>>>>>> v3.18
 =======
 	if (dev->_max_num_decoders == MAX_DECODERS) {
 >>>>>>> v3.18

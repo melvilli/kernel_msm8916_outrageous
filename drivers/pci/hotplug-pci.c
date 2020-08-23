@@ -5,7 +5,11 @@
 #include "pci.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __ref pci_hp_add_bridge(struct pci_dev *dev)
+=======
+int pci_hp_add_bridge(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 int pci_hp_add_bridge(struct pci_dev *dev)
 >>>>>>> v3.18

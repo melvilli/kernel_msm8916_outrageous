@@ -36,17 +36,23 @@ int __ieee80211_suspend(struct ieee80211_hw *hw, struct cfg80211_wowlan *wowlan)
 	ieee80211_stop_queues_by_reason(hw,
 					IEEE80211_MAX_QUEUE_MAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_QUEUE_STOP_REASON_SUSPEND);
 
 	/* flush out all packets and station cleanup call_rcu()s */
 	synchronize_net();
 	rcu_barrier();
 =======
+=======
+>>>>>>> v3.18
 					IEEE80211_QUEUE_STOP_REASON_SUSPEND,
 					false);
 
 	/* flush out all packets */
 	synchronize_net();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ieee80211_flush_queues(local, NULL);
@@ -84,18 +90,24 @@ int __ieee80211_suspend(struct ieee80211_hw *hw, struct cfg80211_wowlan *wowlan)
 			ieee80211_wake_queues_by_reason(hw,
 					IEEE80211_MAX_QUEUE_MAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_QUEUE_STOP_REASON_SUSPEND);
 			return err;
 		} else if (err > 0) {
 			WARN_ON(err != 1);
 			local->wowlan = false;
 =======
+=======
+>>>>>>> v3.18
 					IEEE80211_QUEUE_STOP_REASON_SUSPEND,
 					false);
 			return err;
 		} else if (err > 0) {
 			WARN_ON(err != 1);
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			goto suspend;
@@ -132,7 +144,10 @@ int __ieee80211_suspend(struct ieee80211_hw *hw, struct cfg80211_wowlan *wowlan)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flush_delayed_work(&sdata->dec_tailroom_needed_wk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		drv_remove_interface(local, sdata);

@@ -202,7 +202,10 @@
 #define R_FF_S_PLL_MAX_PHASE_ERR_THRESH_NUM_LINES     0xff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* SAA7113 bit-masks */
 #define SAA7113_R_08_HTC_OFFSET 3
 #define SAA7113_R_08_HTC_MASK (0x3 << SAA7113_R_08_HTC_OFFSET)
@@ -222,6 +225,9 @@
 #define SAA7113_R_13_ADLSB_OFFSET 7
 #define SAA7113_R_13_ADLSB_MASK (0x1 << SAA7113_R_13_ADLSB_OFFSET)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if 0
 /* Those structs will be used in the future for debug purposes */

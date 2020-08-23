@@ -23,12 +23,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/object.h>
 #include <core/client.h>
 #include <core/class.h>
 
 #include <engine/fifo.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"

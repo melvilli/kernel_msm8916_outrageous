@@ -4,7 +4,11 @@
  * Interface to Linux SCSI midlayer.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2002, 2016
+=======
+ * Copyright IBM Corp. 2002, 2013
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2002, 2013
 >>>>>>> v3.18
@@ -114,7 +118,13 @@ int zfcp_scsi_queuecommand(struct Scsi_Host *shost, struct scsi_cmnd *scpnt)
 
 	if (unlikely(!(status & ZFCP_STATUS_COMMON_UNBLOCKED))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* This could be
+=======
+		/* This could be either
+		 * open LUN pending: this is temporary, will result in
+		 *	open LUN or ERP_FAILED, so retry command
+>>>>>>> v3.18
 =======
 		/* This could be either
 		 * open LUN pending: this is temporary, will result in
@@ -239,6 +249,7 @@ static int zfcp_scsi_eh_abort_handler(struct scsi_cmnd *scpnt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct zfcp_scsi_req_filter {
 	u8 tmf_scope;
 	u32 lun_handle;
@@ -292,6 +303,8 @@ static void zfcp_scsi_forget_cmnds(struct zfcp_scsi_dev *zsdev, u8 tm_flags)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int zfcp_task_mgmt_function(struct scsi_cmnd *scpnt, u8 tm_flags)
 {
 	struct zfcp_scsi_dev *zfcp_sdev = sdev_to_zfcp(scpnt->device);
@@ -308,10 +321,15 @@ static int zfcp_task_mgmt_function(struct scsi_cmnd *scpnt, u8 tm_flags)
 		zfcp_erp_wait(adapter);
 		ret = fc_block_scsi_eh(scpnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret) {
 			zfcp_dbf_scsi_devreset("fiof", scpnt, tm_flags);
 			return ret;
 		}
+=======
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 =======
 		if (ret)
 			return ret;
@@ -324,10 +342,15 @@ static int zfcp_task_mgmt_function(struct scsi_cmnd *scpnt, u8 tm_flags)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!fsf_req) {
 		zfcp_dbf_scsi_devreset("reqf", scpnt, tm_flags);
 		return FAILED;
 	}
+=======
+	if (!fsf_req)
+		return FAILED;
+>>>>>>> v3.18
 =======
 	if (!fsf_req)
 		return FAILED;
@@ -339,10 +362,15 @@ static int zfcp_task_mgmt_function(struct scsi_cmnd *scpnt, u8 tm_flags)
 		zfcp_dbf_scsi_devreset("fail", scpnt, tm_flags);
 		retval = FAILED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		zfcp_dbf_scsi_devreset("okay", scpnt, tm_flags);
 		zfcp_scsi_forget_cmnds(zfcp_sdev, tm_flags);
 	}
+=======
+	} else
+		zfcp_dbf_scsi_devreset("okay", scpnt, tm_flags);
+>>>>>>> v3.18
 =======
 	} else
 		zfcp_dbf_scsi_devreset("okay", scpnt, tm_flags);
@@ -661,9 +689,12 @@ static void zfcp_scsi_rport_register(struct zfcp_port *port)
 	ids.roles = FC_RPORT_ROLE_FCP_TARGET;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zfcp_dbf_rec_trig("scpaddy", port->adapter, port, NULL,
 			  ZFCP_PSEUDO_ERP_ACTION_RPORT_ADD,
 			  ZFCP_PSEUDO_ERP_ACTION_RPORT_ADD);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rport = fc_remote_port_add(port->adapter->scsi_host, 0, &ids);
@@ -688,9 +719,12 @@ static void zfcp_scsi_rport_block(struct zfcp_port *port)
 
 	if (rport) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_dbf_rec_trig("scpdely", port->adapter, port, NULL,
 				  ZFCP_PSEUDO_ERP_ACTION_RPORT_DEL,
 				  ZFCP_PSEUDO_ERP_ACTION_RPORT_DEL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		fc_remote_port_delete(rport);

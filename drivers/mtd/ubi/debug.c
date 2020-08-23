@@ -1,9 +1,12 @@
 /*
  * Copyright (c) International Business Machines Corp., 2006
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014, Linux Foundation. All rights reserved.
  * Linux Foundation chooses to take subject only to the GPLv2
  * license terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -50,6 +53,7 @@ void ubi_dump_flash(struct ubi_device *ubi, int pnum, int offset, int len)
 	err = mtd_read(ubi->mtd, addr, len, &read, buf);
 	if (err && err != -EUCLEAN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 		"err %d while reading %d bytes from PEB %d:%d, read %zd bytes",
 			err, len, pnum, offset, read);
@@ -67,12 +71,17 @@ void ubi_dump_flash(struct ubi_device *ubi, int pnum, int offset, int len)
 
 	ubi_msg(ubi->ubi_num, "dumping %d bytes of data from PEB %d, offset %d",
 =======
+=======
+>>>>>>> v3.18
 		ubi_err("error %d while reading %d bytes from PEB %d:%d, read %zd bytes",
 			err, len, pnum, offset, read);
 		goto out;
 	}
 
 	ubi_msg("dumping %d bytes of data from PEB %d, offset %d",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		len, pnum, offset);
 	print_hex_dump(KERN_DEBUG, "", DUMP_PREFIX_OFFSET, 32, 1, buf, len, 1);
@@ -264,7 +273,11 @@ int ubi_debugfs_init(void)
 		int err = dfs_rootdir ? -ENODEV : PTR_ERR(dfs_rootdir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubi_err(UBI_MAX_DEVICES, "cannot create \"ubi\" debugfs directory, error %d\n",
+=======
+		ubi_err("cannot create \"ubi\" debugfs directory, error %d\n",
+>>>>>>> v3.18
 =======
 		ubi_err("cannot create \"ubi\" debugfs directory, error %d\n",
 >>>>>>> v3.18
@@ -463,7 +476,11 @@ out_remove:
 out:
 	err = dent ? PTR_ERR(dent) : -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "cannot create \"%s\" debugfs file or directory, error %d\n",
+=======
+	ubi_err("cannot create \"%s\" debugfs file or directory, error %d\n",
+>>>>>>> v3.18
 =======
 	ubi_err("cannot create \"%s\" debugfs file or directory, error %d\n",
 >>>>>>> v3.18

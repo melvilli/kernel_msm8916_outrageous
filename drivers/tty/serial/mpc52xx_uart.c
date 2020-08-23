@@ -85,6 +85,7 @@ static irqreturn_t mpc52xx_uart_int(int irq, void *dev_id);
 static irqreturn_t mpc5xxx_uart_process_int(struct uart_port *port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Simple macro to test if a port is console or not. This one is taken
  * for serial_core.c and maybe should be moved to serial_core.h ? */
@@ -95,6 +96,8 @@ static irqreturn_t mpc5xxx_uart_process_int(struct uart_port *port);
 #define uart_console(port)	(0)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* ======================================================================== */
@@ -121,6 +124,11 @@ struct psc_ops {
 					struct ktermios *new,
 					struct ktermios *old);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		(*clock_alloc)(struct uart_port *port);
+	void		(*clock_relse)(struct uart_port *port);
+>>>>>>> v3.18
 =======
 	int		(*clock_alloc)(struct uart_port *port);
 	void		(*clock_relse)(struct uart_port *port);
@@ -131,7 +139,10 @@ struct psc_ops {
 	void		(*get_irq)(struct uart_port *, struct device_node *);
 	irqreturn_t	(*handle_irq)(struct uart_port *port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u16		(*get_status)(struct uart_port *port);
 	u8		(*get_ipcr)(struct uart_port *port);
 	void		(*command)(struct uart_port *port, u8 cmd);
@@ -141,6 +152,9 @@ struct psc_ops {
 	void		(*set_sicr)(struct uart_port *port, u32 val);
 	void		(*set_imr)(struct uart_port *port, u16 val);
 	u8		(*get_mr1)(struct uart_port *port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -155,7 +169,10 @@ static inline void mpc52xx_set_divisor(struct mpc52xx_psc __iomem *psc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u16 mpc52xx_psc_get_status(struct uart_port *port)
 {
 	return in_be16(&PSC(port)->mpc52xx_psc_status);
@@ -215,6 +232,9 @@ static u8 mpc52xx_psc_get_mr1(struct uart_port *port)
 	return in_8(&PSC(port)->mode);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_MPC52xx
 #define FIFO_52xx(port) ((struct mpc52xx_psc_fifo __iomem *)(PSC(port)+1))
@@ -387,7 +407,10 @@ static struct psc_ops mpc52xx_psc_ops = {
 	.get_irq = mpc52xx_psc_get_irq,
 	.handle_irq = mpc52xx_psc_handle_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.get_status = mpc52xx_psc_get_status,
 	.get_ipcr = mpc52xx_psc_get_ipcr,
 	.command = mpc52xx_psc_command,
@@ -397,6 +420,9 @@ static struct psc_ops mpc52xx_psc_ops = {
 	.set_sicr = mpc52xx_psc_set_sicr,
 	.set_imr = mpc52xx_psc_set_imr,
 	.get_mr1 = mpc52xx_psc_get_mr1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -420,7 +446,10 @@ static struct psc_ops mpc5200b_psc_ops = {
 	.get_irq = mpc52xx_psc_get_irq,
 	.handle_irq = mpc52xx_psc_handle_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.get_status = mpc52xx_psc_get_status,
 	.get_ipcr = mpc52xx_psc_get_ipcr,
 	.command = mpc52xx_psc_command,
@@ -430,6 +459,9 @@ static struct psc_ops mpc5200b_psc_ops = {
 	.set_sicr = mpc52xx_psc_set_sicr,
 	.set_imr = mpc52xx_psc_set_imr,
 	.get_mr1 = mpc52xx_psc_get_mr1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -450,6 +482,10 @@ struct psc_fifoc {
 static struct psc_fifoc __iomem *psc_fifoc;
 static unsigned int psc_fifoc_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct clk *psc_fifoc_clk;
+>>>>>>> v3.18
 =======
 static struct clk *psc_fifoc_clk;
 >>>>>>> v3.18
@@ -601,14 +637,20 @@ static unsigned int mpc512x_psc_set_baudrate(struct uart_port *port,
 static int __init mpc512x_psc_fifoc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *np;
 =======
+=======
+>>>>>>> v3.18
 	int err;
 	struct device_node *np;
 	struct clk *clk;
 
 	/* default error code, potentially overwritten by clock calls */
 	err = -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = of_find_compatible_node(NULL, NULL,
@@ -616,9 +658,12 @@ static int __init mpc512x_psc_fifoc_init(void)
 	if (!np) {
 		pr_err("%s: Can't find FIFOC node\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto out_err;
 	}
 
@@ -638,11 +683,15 @@ static int __init mpc512x_psc_fifoc_init(void)
 		goto out_ofnode_put;
 	}
 	psc_fifoc_clk = clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	psc_fifoc = of_iomap(np, 0);
 	if (!psc_fifoc) {
 		pr_err("%s: Can't map FIFOC\n", __func__);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		of_node_put(np);
 		return -ENODEV;
@@ -658,6 +707,8 @@ static int __init mpc512x_psc_fifoc_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto out_clk_disable;
 	}
 
@@ -679,6 +730,9 @@ out_ofnode_put:
 	of_node_put(np);
 out_err:
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -686,7 +740,10 @@ static void __exit mpc512x_psc_fifoc_uninit(void)
 {
 	iounmap(psc_fifoc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* disable the clock, errors are not fatal */
 	if (psc_fifoc_clk) {
@@ -694,6 +751,9 @@ static void __exit mpc512x_psc_fifoc_uninit(void)
 		clk_put(psc_fifoc_clk);
 		psc_fifoc_clk = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -716,12 +776,15 @@ static irqreturn_t mpc512x_psc_handle_irq(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mpc512x_psc_clock(struct uart_port *port, int enable)
 {
 	struct clk *psc_clk;
 	int psc_num;
 	char clk_name[10];
 =======
+=======
+>>>>>>> v3.18
 static struct clk *psc_mclk_clk[MPC52xx_PSC_MAXNUM];
 static struct clk *psc_ipg_clk[MPC52xx_PSC_MAXNUM];
 
@@ -798,12 +861,16 @@ static int mpc512x_psc_endis_clock(struct uart_port *port, int enable)
 	int psc_num;
 	struct clk *psc_clk;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (uart_console(port))
 		return 0;
 
 	psc_num = (port->mapbase & 0xf00) >> 8;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snprintf(clk_name, sizeof(clk_name), "psc%d_mclk", psc_num);
 	psc_clk = clk_get(port->dev, clk_name);
@@ -812,10 +879,15 @@ static int mpc512x_psc_endis_clock(struct uart_port *port, int enable)
 	psc_clk = psc_mclk_clk[psc_num];
 	if (!psc_clk) {
 >>>>>>> v3.18
+=======
+	psc_clk = psc_mclk_clk[psc_num];
+	if (!psc_clk) {
+>>>>>>> v3.18
 		dev_err(port->dev, "Failed to get PSC clock entry!\n");
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(port->dev, "%s %sable\n", clk_name, enable ? "en" : "dis");
 
@@ -826,6 +898,8 @@ static int mpc512x_psc_endis_clock(struct uart_port *port, int enable)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(port->dev, "mclk %sable\n", enable ? "en" : "dis");
 	if (enable) {
 		ret = clk_enable(psc_clk);
@@ -836,6 +910,9 @@ static int mpc512x_psc_endis_clock(struct uart_port *port, int enable)
 		clk_disable(psc_clk);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -845,7 +922,10 @@ static void mpc512x_psc_get_irq(struct uart_port *port, struct device_node *np)
 	port->irq = psc_fifoc_irq;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_PPC_MPC512x
@@ -1088,6 +1168,9 @@ static struct psc_ops mpc5125_psc_ops = {
 	.set_imr = mpc5125_psc_set_imr,
 	.get_mr1 = mpc5125_psc_get_mr1,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct psc_ops mpc512x_psc_ops = {
@@ -1108,7 +1191,13 @@ static struct psc_ops mpc512x_psc_ops = {
 	.cw_restore_ints = mpc512x_psc_cw_restore_ints,
 	.set_baudrate = mpc512x_psc_set_baudrate,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.clock = mpc512x_psc_clock,
+=======
+	.clock_alloc = mpc512x_psc_alloc_clock,
+	.clock_relse = mpc512x_psc_relse_clock,
+	.clock = mpc512x_psc_endis_clock,
+>>>>>>> v3.18
 =======
 	.clock_alloc = mpc512x_psc_alloc_clock,
 	.clock_relse = mpc512x_psc_relse_clock,
@@ -1119,9 +1208,12 @@ static struct psc_ops mpc512x_psc_ops = {
 	.get_irq = mpc512x_psc_get_irq,
 	.handle_irq = mpc512x_psc_handle_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.get_status = mpc52xx_psc_get_status,
 	.get_ipcr = mpc52xx_psc_get_ipcr,
 	.command = mpc52xx_psc_command,
@@ -1134,6 +1226,9 @@ static struct psc_ops mpc512x_psc_ops = {
 };
 #endif /* CONFIG_PPC_MPC512x */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct psc_ops *psc_ops;
@@ -1152,10 +1247,14 @@ static void
 mpc52xx_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mctrl & TIOCM_RTS)
 		out_8(&PSC(port)->op1, MPC52xx_PSC_OP_RTS);
 	else
 		out_8(&PSC(port)->op0, MPC52xx_PSC_OP_RTS);
+=======
+	psc_ops->set_rts(port, mctrl & TIOCM_RTS);
+>>>>>>> v3.18
 =======
 	psc_ops->set_rts(port, mctrl & TIOCM_RTS);
 >>>>>>> v3.18
@@ -1166,7 +1265,11 @@ mpc52xx_uart_get_mctrl(struct uart_port *port)
 {
 	unsigned int ret = TIOCM_DSR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 status = in_8(&PSC(port)->mpc52xx_psc_ipcr);
+=======
+	u8 status = psc_ops->get_ipcr(port);
+>>>>>>> v3.18
 =======
 	u8 status = psc_ops->get_ipcr(port);
 >>>>>>> v3.18
@@ -1195,6 +1298,7 @@ mpc52xx_uart_start_tx(struct uart_port *port)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 mpc52xx_uart_send_xchar(struct uart_port *port, char ch)
 {
 	unsigned long flags;
@@ -1213,6 +1317,8 @@ mpc52xx_uart_send_xchar(struct uart_port *port, char ch)
 static void
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 mpc52xx_uart_stop_rx(struct uart_port *port)
 {
 	/* port->lock taken by caller */
@@ -1222,6 +1328,7 @@ mpc52xx_uart_stop_rx(struct uart_port *port)
 static void
 mpc52xx_uart_enable_ms(struct uart_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mpc52xx_psc __iomem *psc = PSC(port);
 
@@ -1235,6 +1342,9 @@ mpc52xx_uart_enable_ms(struct uart_port *port)
 =======
 	psc_ops->enable_ms(port);
 >>>>>>> v3.18
+=======
+	psc_ops->enable_ms(port);
+>>>>>>> v3.18
 }
 
 static void
@@ -1245,9 +1355,15 @@ mpc52xx_uart_break_ctl(struct uart_port *port, int ctl)
 
 	if (ctl == -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		out_8(&PSC(port)->command, MPC52xx_PSC_START_BRK);
 	else
 		out_8(&PSC(port)->command, MPC52xx_PSC_STOP_BRK);
+=======
+		psc_ops->command(port, MPC52xx_PSC_START_BRK);
+	else
+		psc_ops->command(port, MPC52xx_PSC_STOP_BRK);
+>>>>>>> v3.18
 =======
 		psc_ops->command(port, MPC52xx_PSC_START_BRK);
 	else
@@ -1261,7 +1377,10 @@ static int
 mpc52xx_uart_startup(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc52xx_psc __iomem *psc = PSC(port);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -1280,6 +1399,7 @@ mpc52xx_uart_startup(struct uart_port *port)
 
 	/* Reset/activate the port, clear and enable interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_8(&psc->command, MPC52xx_PSC_RST_RX);
 	out_8(&psc->command, MPC52xx_PSC_RST_TX);
 
@@ -1290,6 +1410,8 @@ mpc52xx_uart_startup(struct uart_port *port)
 	out_8(&psc->command, MPC52xx_PSC_TX_ENABLE);
 	out_8(&psc->command, MPC52xx_PSC_RX_ENABLE);
 =======
+=======
+>>>>>>> v3.18
 	psc_ops->command(port, MPC52xx_PSC_RST_RX);
 	psc_ops->command(port, MPC52xx_PSC_RST_TX);
 
@@ -1299,6 +1421,9 @@ mpc52xx_uart_startup(struct uart_port *port)
 
 	psc_ops->command(port, MPC52xx_PSC_TX_ENABLE);
 	psc_ops->command(port, MPC52xx_PSC_RX_ENABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1307,6 +1432,7 @@ mpc52xx_uart_startup(struct uart_port *port)
 static void
 mpc52xx_uart_shutdown(struct uart_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mpc52xx_psc __iomem *psc = PSC(port);
 
@@ -1318,6 +1444,8 @@ mpc52xx_uart_shutdown(struct uart_port *port)
 	port->read_status_mask = 0;
 	out_be16(&psc->mpc52xx_psc_imr, port->read_status_mask);
 =======
+=======
+>>>>>>> v3.18
 	/* Shut down the port.  Leave TX active if on a console port */
 	psc_ops->command(port, MPC52xx_PSC_RST_RX);
 	if (!uart_console(port))
@@ -1325,12 +1453,21 @@ mpc52xx_uart_shutdown(struct uart_port *port)
 
 	port->read_status_mask = 0;
 	psc_ops->set_imr(port, port->read_status_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (psc_ops->clock)
 		psc_ops->clock(port, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Disable interrupt */
+	psc_ops->cw_disable_ints(port);
+
+>>>>>>> v3.18
 =======
 	/* Disable interrupt */
 	psc_ops->cw_disable_ints(port);
@@ -1345,7 +1482,10 @@ mpc52xx_uart_set_termios(struct uart_port *port, struct ktermios *new,
 			 struct ktermios *old)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc52xx_psc __iomem *psc = PSC(port);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long flags;
@@ -1412,6 +1552,7 @@ mpc52xx_uart_set_termios(struct uart_port *port, struct ktermios *new,
 
 	/* Reset the TX & RX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_8(&psc->command, MPC52xx_PSC_RST_RX);
 	out_8(&psc->command, MPC52xx_PSC_RST_TX);
 
@@ -1420,11 +1561,16 @@ mpc52xx_uart_set_termios(struct uart_port *port, struct ktermios *new,
 	out_8(&psc->mode, mr1);
 	out_8(&psc->mode, mr2);
 =======
+=======
+>>>>>>> v3.18
 	psc_ops->command(port, MPC52xx_PSC_RST_RX);
 	psc_ops->command(port, MPC52xx_PSC_RST_TX);
 
 	/* Send new mode settings */
 	psc_ops->set_mode(port, mr1, mr2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	baud = psc_ops->set_baudrate(port, new, old);
 
@@ -1436,8 +1582,13 @@ mpc52xx_uart_set_termios(struct uart_port *port, struct ktermios *new,
 
 	/* Reenable TX & RX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_8(&psc->command, MPC52xx_PSC_TX_ENABLE);
 	out_8(&psc->command, MPC52xx_PSC_RX_ENABLE);
+=======
+	psc_ops->command(port, MPC52xx_PSC_TX_ENABLE);
+	psc_ops->command(port, MPC52xx_PSC_RX_ENABLE);
+>>>>>>> v3.18
 =======
 	psc_ops->command(port, MPC52xx_PSC_TX_ENABLE);
 	psc_ops->command(port, MPC52xx_PSC_RX_ENABLE);
@@ -1461,6 +1612,12 @@ static void
 mpc52xx_uart_release_port(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (psc_ops->clock_relse)
+		psc_ops->clock_relse(port);
+
+>>>>>>> v3.18
 =======
 	if (psc_ops->clock_relse)
 		psc_ops->clock_relse(port);
@@ -1491,12 +1648,15 @@ mpc52xx_uart_request_port(struct uart_port *port)
 			"mpc52xx_psc_uart") != NULL ? 0 : -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err && (port->flags & UPF_IOREMAP)) {
 		iounmap(port->membase);
 		port->membase = NULL;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (err)
 		goto out_membase;
 
@@ -1515,6 +1675,9 @@ out_membase:
 		iounmap(port->membase);
 		port->membase = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1551,7 +1714,10 @@ static struct uart_ops mpc52xx_uart_ops = {
 	.stop_tx	= mpc52xx_uart_stop_tx,
 	.start_tx	= mpc52xx_uart_start_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.send_xchar	= mpc52xx_uart_send_xchar,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.stop_rx	= mpc52xx_uart_stop_rx,
@@ -1562,7 +1728,10 @@ static struct uart_ops mpc52xx_uart_ops = {
 	.set_termios	= mpc52xx_uart_set_termios,
 /*	.pm		= mpc52xx_uart_pm,		Not supported yet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*	.set_wake	= mpc52xx_uart_set_wake,	Not supported yet */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.type		= mpc52xx_uart_type,
@@ -1603,7 +1772,11 @@ mpc52xx_uart_int_rx_chars(struct uart_port *port)
 		port->icount.rx++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = in_be16(&PSC(port)->mpc52xx_psc_status);
+=======
+		status = psc_ops->get_status(port);
+>>>>>>> v3.18
 =======
 		status = psc_ops->get_status(port);
 >>>>>>> v3.18
@@ -1627,7 +1800,11 @@ mpc52xx_uart_int_rx_chars(struct uart_port *port)
 
 			/* Clear error condition */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			out_8(&PSC(port)->command, MPC52xx_PSC_RST_ERR_STAT);
+=======
+			psc_ops->command(port, MPC52xx_PSC_RST_ERR_STAT);
+>>>>>>> v3.18
 =======
 			psc_ops->command(port, MPC52xx_PSC_RST_ERR_STAT);
 >>>>>>> v3.18
@@ -1714,7 +1891,11 @@ mpc5xxx_uart_process_int(struct uart_port *port)
 			keepgoing |= mpc52xx_uart_int_tx_chars(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = in_8(&PSC(port)->mpc52xx_psc_ipcr);
+=======
+		status = psc_ops->get_ipcr(port);
+>>>>>>> v3.18
 =======
 		status = psc_ops->get_ipcr(port);
 >>>>>>> v3.18
@@ -1759,7 +1940,10 @@ mpc52xx_console_get_options(struct uart_port *port,
 			    int *baud, int *parity, int *bits, int *flow)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc52xx_psc __iomem *psc = PSC(port);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char mr1;
@@ -1768,8 +1952,12 @@ mpc52xx_console_get_options(struct uart_port *port,
 
 	/* Read the mode registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_8(&psc->command, MPC52xx_PSC_SEL_MODE_REG_1);
 	mr1 = in_8(&psc->mode);
+=======
+	mr1 = psc_ops->get_mr1(port);
+>>>>>>> v3.18
 =======
 	mr1 = psc_ops->get_mr1(port);
 >>>>>>> v3.18
@@ -1963,6 +2151,10 @@ static struct of_device_id mpc52xx_uart_of_match[] = {
 #ifdef CONFIG_PPC_MPC512x
 	{ .compatible = "fsl,mpc5121-psc-uart", .data = &mpc512x_psc_ops, },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "fsl,mpc5125-psc-uart", .data = &mpc5125_psc_ops, },
+>>>>>>> v3.18
 =======
 	{ .compatible = "fsl,mpc5125-psc-uart", .data = &mpc5125_psc_ops, },
 >>>>>>> v3.18
@@ -2035,7 +2227,11 @@ static int mpc52xx_uart_of_probe(struct platform_device *op)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, (void *)port);
+=======
+	platform_set_drvdata(op, (void *)port);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, (void *)port);
 >>>>>>> v3.18
@@ -2046,8 +2242,12 @@ static int
 mpc52xx_uart_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_port *port = dev_get_drvdata(&op->dev);
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	struct uart_port *port = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct uart_port *port = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -2063,7 +2263,11 @@ static int
 mpc52xx_uart_of_suspend(struct platform_device *op, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_port *port = (struct uart_port *) dev_get_drvdata(&op->dev);
+=======
+	struct uart_port *port = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct uart_port *port = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -2078,7 +2282,11 @@ static int
 mpc52xx_uart_of_resume(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_port *port = (struct uart_port *) dev_get_drvdata(&op->dev);
+=======
+	struct uart_port *port = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct uart_port *port = platform_get_drvdata(op);
 >>>>>>> v3.18

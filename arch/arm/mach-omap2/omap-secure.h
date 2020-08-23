@@ -4,6 +4,11 @@
  * Copyright (C) 2011 Texas Instruments, Inc.
  *	Santosh Shilimkar <santosh.shilimkar@ti.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
+ * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
  * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
@@ -48,6 +53,12 @@
 #define OMAP4_MON_L2X0_PREFETCH_INDEX	0x113
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OMAP5_DRA7_MON_SET_CNTFRQ_INDEX	0x109
+#define OMAP5_MON_AMBA_IF_INDEX		0x108
+
+>>>>>>> v3.18
 =======
 #define OMAP5_DRA7_MON_SET_CNTFRQ_INDEX	0x109
 #define OMAP5_MON_AMBA_IF_INDEX		0x108
@@ -58,12 +69,18 @@
 #define OMAP4_PPA_CPU_ACTRL_SMP_INDEX	0x25
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Secure RX-51 PPA (Primary Protected Application) APIs */
 #define RX51_PPA_HWRNG			29
 #define RX51_PPA_L2_INVAL		40
 #define RX51_PPA_WRITE_ACR		42
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLER__
 
@@ -71,10 +88,13 @@ extern u32 omap_secure_dispatcher(u32 idx, u32 flag, u32 nargs,
 				u32 arg1, u32 arg2, u32 arg3, u32 arg4);
 extern u32 omap_smc2(u32 id, u32 falg, u32 pargs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern phys_addr_t omap_secure_ram_mempool_base(void);
 extern int omap_secure_ram_reserve_memblock(void);
 
 =======
+=======
+>>>>>>> v3.18
 extern u32 omap_smc3(u32 id, u32 process, u32 flag, u32 pargs);
 extern phys_addr_t omap_secure_ram_mempool_base(void);
 extern int omap_secure_ram_reserve_memblock(void);
@@ -84,6 +104,9 @@ extern u32 rx51_secure_dispatcher(u32 idx, u32 process, u32 flag, u32 nargs,
 extern u32 rx51_secure_update_aux_cr(u32 set_bits, u32 clear_bits);
 extern u32 rx51_secure_rng_call(u32 ptr, u32 count, u32 flag);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OMAP4_ERRATA_I688
 extern int omap_barrier_reserve_memblock(void);
@@ -92,7 +115,10 @@ static inline void omap_barrier_reserve_memblock(void)
 { }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_SOC_HAS_REALTIME_COUNTER
 void set_cntfreq(void);
@@ -102,6 +128,9 @@ static inline void set_cntfreq(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASSEMBLER__ */
 #endif /* OMAP_ARCH_OMAP_SECURE_H */

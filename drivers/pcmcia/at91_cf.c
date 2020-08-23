@@ -19,6 +19,7 @@
 #include <linux/gpio.h>
 #include <linux/platform_data/atmel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <pcmcia/ss.h>
 
@@ -27,6 +28,8 @@
 #include <asm/sizes.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/sizes.h>
 #include <linux/of.h>
@@ -35,6 +38,9 @@
 
 #include <pcmcia/ss.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <mach/at91rm9200_mc.h>
 #include <mach/at91_ramc.h>
@@ -53,8 +59,11 @@
 /*--------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char driver_name[] = "at91_cf";
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct at91_cf_socket {
@@ -91,7 +100,11 @@ static irqreturn_t at91_cf_irq(int irq, void *_cf)
 		if (present != cf->present) {
 			cf->present = present;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("%s: card %s\n", driver_name,
+=======
+			dev_dbg(&cf->pdev->dev, "card %s\n",
+>>>>>>> v3.18
 =======
 			dev_dbg(&cf->pdev->dev, "card %s\n",
 >>>>>>> v3.18
@@ -139,6 +152,7 @@ at91_cf_set_socket(struct pcmcia_socket *sock, struct socket_state_t *s)
 	if (gpio_is_valid(cf->board->vcc_pin)) {
 		switch (s->Vcc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case 0:
 				gpio_set_value(cf->board->vcc_pin, 0);
 				break;
@@ -148,6 +162,8 @@ at91_cf_set_socket(struct pcmcia_socket *sock, struct socket_state_t *s)
 			default:
 				return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		case 0:
 			gpio_set_value(cf->board->vcc_pin, 0);
 			break;
@@ -156,6 +172,9 @@ at91_cf_set_socket(struct pcmcia_socket *sock, struct socket_state_t *s)
 			break;
 		default:
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -164,8 +183,13 @@ at91_cf_set_socket(struct pcmcia_socket *sock, struct socket_state_t *s)
 	gpio_set_value(cf->board->rst_pin, s->flags & SS_RESET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: Vcc %d, io_irq %d, flags %04x csc %04x\n",
 		driver_name, s->Vcc, s->io_irq, s->flags, s->csc_mask);
+=======
+	dev_dbg(&cf->pdev->dev, "Vcc %d, io_irq %d, flags %04x csc %04x\n",
+				s->Vcc, s->io_irq, s->flags, s->csc_mask);
+>>>>>>> v3.18
 =======
 	dev_dbg(&cf->pdev->dev, "Vcc %d, io_irq %d, flags %04x csc %04x\n",
 				s->Vcc, s->io_irq, s->flags, s->csc_mask);
@@ -206,15 +230,21 @@ static int at91_cf_set_io_map(struct pcmcia_socket *s, struct pccard_io_map *io)
 	if (!(io->flags & (MAP_16BIT | MAP_AUTOSZ))) {
 		csr |= AT91_SMC_DBW_8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("%s: 8bit i/o bus\n", driver_name);
 	} else {
 		csr |= AT91_SMC_DBW_16;
 		pr_debug("%s: 16bit i/o bus\n", driver_name);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&cf->pdev->dev, "8bit i/o bus\n");
 	} else {
 		csr |= AT91_SMC_DBW_16;
 		dev_dbg(&cf->pdev->dev, "16bit i/o bus\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	at91_ramc_write(0, AT91_SMC_CSR(cf->board->chipselect), csr);
@@ -257,8 +287,11 @@ static struct pccard_operations at91_cf_ops = {
 /*--------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init at91_cf_probe(struct platform_device *pdev)
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 static const struct of_device_id at91_cf_dt_ids[] = {
 	{ .compatible = "atmel,at91rm9200-cf" },
@@ -291,6 +324,9 @@ static int at91_cf_dt_init(struct platform_device *pdev)
 #endif
 
 static int at91_cf_probe(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct at91_cf_socket	*cf;
@@ -299,8 +335,11 @@ static int at91_cf_probe(struct platform_device *pdev)
 	int			status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!board || !gpio_is_valid(board->det_pin) || !gpio_is_valid(board->rst_pin))
 =======
+=======
+>>>>>>> v3.18
 	if (!board) {
 		status = at91_cf_dt_init(pdev);
 		if (status)
@@ -310,6 +349,9 @@ static int at91_cf_probe(struct platform_device *pdev)
 	}
 
 	if (!gpio_is_valid(board->det_pin) || !gpio_is_valid(board->rst_pin))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 
@@ -318,7 +360,11 @@ static int at91_cf_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cf = kzalloc(sizeof *cf, GFP_KERNEL);
+=======
+	cf = devm_kzalloc(&pdev->dev, sizeof(*cf), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cf = devm_kzalloc(&pdev->dev, sizeof(*cf), GFP_KERNEL);
 >>>>>>> v3.18
@@ -332,6 +378,7 @@ static int at91_cf_probe(struct platform_device *pdev)
 
 	/* must be a GPIO; ergo must trigger on both edges */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = gpio_request(board->det_pin, "cf_det");
 	if (status < 0)
 		goto fail0;
@@ -342,6 +389,8 @@ static int at91_cf_probe(struct platform_device *pdev)
 
 	status = gpio_request(board->rst_pin, "cf_rst");
 =======
+=======
+>>>>>>> v3.18
 	status = devm_gpio_request(&pdev->dev, board->det_pin, "cf_det");
 	if (status < 0)
 		return status;
@@ -354,15 +403,24 @@ static int at91_cf_probe(struct platform_device *pdev)
 	device_init_wakeup(&pdev->dev, 1);
 
 	status = devm_gpio_request(&pdev->dev, board->rst_pin, "cf_rst");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status < 0)
 		goto fail0a;
 
 	if (gpio_is_valid(board->vcc_pin)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = gpio_request(board->vcc_pin, "cf_vcc");
 		if (status < 0)
 			goto fail0b;
+=======
+		status = devm_gpio_request(&pdev->dev, board->vcc_pin, "cf_vcc");
+		if (status < 0)
+			goto fail0a;
+>>>>>>> v3.18
 =======
 		status = devm_gpio_request(&pdev->dev, board->vcc_pin, "cf_vcc");
 		if (status < 0)
@@ -378,6 +436,7 @@ static int at91_cf_probe(struct platform_device *pdev)
 	 */
 	if (gpio_is_valid(board->irq_pin)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = gpio_request(board->irq_pin, "cf_irq");
 		if (status < 0)
 			goto fail0c;
@@ -386,6 +445,8 @@ static int at91_cf_probe(struct platform_device *pdev)
 		if (status < 0)
 			goto fail0d;
 =======
+=======
+>>>>>>> v3.18
 		status = devm_gpio_request(&pdev->dev, board->irq_pin, "cf_irq");
 		if (status < 0)
 			goto fail0a;
@@ -394,12 +455,16 @@ static int at91_cf_probe(struct platform_device *pdev)
 					at91_cf_irq, IRQF_SHARED, "at91_cf", cf);
 		if (status < 0)
 			goto fail0a;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cf->socket.pci_irq = gpio_to_irq(board->irq_pin);
 	} else
 		cf->socket.pci_irq = nr_irqs + 1;
 
 	/* pcmcia layer only remaps "real" memory not iospace */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cf->socket.io_offset = (unsigned long)
 			ioremap(cf->phys_baseaddr + CF_IO_PHYS, SZ_2K);
@@ -416,6 +481,8 @@ static int at91_cf_probe(struct platform_device *pdev)
 
 	pr_info("%s: irqs det #%d, io #%d\n", driver_name,
 =======
+=======
+>>>>>>> v3.18
 	cf->socket.io_offset = (unsigned long) devm_ioremap(&pdev->dev,
 					cf->phys_baseaddr + CF_IO_PHYS, SZ_2K);
 	if (!cf->socket.io_offset) {
@@ -430,6 +497,9 @@ static int at91_cf_probe(struct platform_device *pdev)
 	}
 
 	dev_info(&pdev->dev, "irqs det #%d, io #%d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_to_irq(board->det_pin), gpio_to_irq(board->irq_pin));
 
@@ -444,6 +514,7 @@ static int at91_cf_probe(struct platform_device *pdev)
 
 	status = pcmcia_register_socket(&cf->socket);
 	if (status < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail2;
 
@@ -495,6 +566,8 @@ static int __exit at91_cf_remove(struct platform_device *pdev)
 	gpio_free(board->det_pin);
 	kfree(cf);
 =======
+=======
+>>>>>>> v3.18
 		goto fail0a;
 
 	return 0;
@@ -511,6 +584,9 @@ static int at91_cf_remove(struct platform_device *pdev)
 	pcmcia_unregister_socket(&cf->socket);
 	device_init_wakeup(&pdev->dev, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -552,22 +628,29 @@ static int at91_cf_resume(struct platform_device *pdev)
 static struct platform_driver at91_cf_driver = {
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= (char *) driver_name,
 		.owner		= THIS_MODULE,
 	},
 	.remove		= __exit_p(at91_cf_remove),
 =======
+=======
+>>>>>>> v3.18
 		.name		= "at91_cf",
 		.owner		= THIS_MODULE,
 		.of_match_table = of_match_ptr(at91_cf_dt_ids),
 	},
 	.probe		= at91_cf_probe,
 	.remove		= at91_cf_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.suspend	= at91_cf_suspend,
 	.resume		= at91_cf_resume,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*--------------------------------------------------------------------------*/
 
@@ -582,6 +665,9 @@ static void __exit at91_cf_exit(void)
 	platform_driver_unregister(&at91_cf_driver);
 }
 module_exit(at91_cf_exit);
+=======
+module_platform_driver(at91_cf_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(at91_cf_driver);
 >>>>>>> v3.18

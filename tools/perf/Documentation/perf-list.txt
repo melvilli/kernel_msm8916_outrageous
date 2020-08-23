@@ -9,7 +9,11 @@ SYNOPSIS
 --------
 [verse]
 <<<<<<< HEAD
+<<<<<<< HEAD
 'perf list' [hw|sw|cache|tracepoint|event_glob]
+=======
+'perf list' [hw|sw|cache|tracepoint|pmu|event_glob]
+>>>>>>> v3.18
 =======
 'perf list' [hw|sw|cache|tracepoint|pmu|event_glob]
 >>>>>>> v3.18
@@ -24,7 +28,11 @@ EVENT MODIFIERS
 ---------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Events can optionally have a modifer by appending a colon and one or
+=======
+Events can optionally have a modifier by appending a colon and one or
+>>>>>>> v3.18
 =======
 Events can optionally have a modifier by appending a colon and one or
 >>>>>>> v3.18
@@ -38,6 +46,11 @@ counted. The following modifiers exist:
  H - host counting (not in KVM guests)
  p - precise level
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ S - read sample value (PERF_SAMPLE_READ)
+ D - pin the event to the PMU
+>>>>>>> v3.18
 =======
  S - read sample value (PERF_SAMPLE_READ)
  D - pin the event to the PMU
@@ -118,6 +131,11 @@ To limit the list use:
   block, etc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+. 'pmu' to print the kernel supplied PMU events.
+
+>>>>>>> v3.18
 =======
 . 'pmu' to print the kernel supplied PMU events.
 

@@ -48,7 +48,11 @@
 
 struct ltc4151_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -64,8 +68,13 @@ struct ltc4151_data {
 static struct ltc4151_data *ltc4151_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ltc4151_data *data = i2c_get_clientdata(client);
+=======
+	struct ltc4151_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ltc4151_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -169,7 +178,11 @@ static SENSOR_DEVICE_ATTR(curr1_input, S_IRUGO, ltc4151_show_value, NULL,
  * as required for sysfs_create_group()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ltc4151_attributes[] = {
+=======
+static struct attribute *ltc4151_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ltc4151_attrs[] = {
 >>>>>>> v3.18
@@ -181,10 +194,14 @@ static struct attribute *ltc4151_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group ltc4151_group = {
 	.attrs = ltc4151_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ltc4151);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ltc4151);
 >>>>>>> v3.18
@@ -194,8 +211,14 @@ static int ltc4151_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adapter = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ltc4151_data *data;
 	int ret;
+=======
+	struct device *dev = &client->dev;
+	struct ltc4151_data *data;
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &client->dev;
 	struct ltc4151_data *data;
@@ -205,6 +228,7 @@ static int ltc4151_probe(struct i2c_client *client,
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
@@ -240,6 +264,8 @@ static int ltc4151_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -251,6 +277,9 @@ static int ltc4151_remove(struct i2c_client *client)
 							   data,
 							   ltc4151_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -267,7 +296,10 @@ static struct i2c_driver ltc4151_driver = {
 	},
 	.probe		= ltc4151_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= ltc4151_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= ltc4151_id,

@@ -409,14 +409,20 @@ void ath9k_hw_get_gain_boundaries_pdadcs(struct ath_hw *ah,
 	if (match) {
 		if (AR_SREV_9287(ah)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (i = 0; i < numXpdGains; i++) {
 				minPwrT4[i] = data_9287[idxL].pwrPdg[i][0];
 				maxPwrT4[i] = data_9287[idxL].pwrPdg[i][intercepts - 1];
 =======
+=======
+>>>>>>> v3.18
 			/* FIXME: array overrun? */
 			for (i = 0; i < numXpdGains; i++) {
 				minPwrT4[i] = data_9287[idxL].pwrPdg[i][0];
 				maxPwrT4[i] = data_9287[idxL].pwrPdg[i][4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ath9k_hw_fill_vpd_table(minPwrT4[i], maxPwrT4[i],
 						data_9287[idxL].pwrPdg[i],
@@ -428,7 +434,11 @@ void ath9k_hw_get_gain_boundaries_pdadcs(struct ath_hw *ah,
 			for (i = 0; i < numXpdGains; i++) {
 				minPwrT4[i] = data_4k[idxL].pwrPdg[i][0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 				maxPwrT4[i] = data_4k[idxL].pwrPdg[i][intercepts - 1];
+=======
+				maxPwrT4[i] = data_4k[idxL].pwrPdg[i][4];
+>>>>>>> v3.18
 =======
 				maxPwrT4[i] = data_4k[idxL].pwrPdg[i][4];
 >>>>>>> v3.18
@@ -442,7 +452,11 @@ void ath9k_hw_get_gain_boundaries_pdadcs(struct ath_hw *ah,
 			for (i = 0; i < numXpdGains; i++) {
 				minPwrT4[i] = data_def[idxL].pwrPdg[i][0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 				maxPwrT4[i] = data_def[idxL].pwrPdg[i][intercepts - 1];
+=======
+				maxPwrT4[i] = data_def[idxL].pwrPdg[i][4];
+>>>>>>> v3.18
 =======
 				maxPwrT4[i] = data_def[idxL].pwrPdg[i][4];
 >>>>>>> v3.18

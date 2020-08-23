@@ -1,6 +1,10 @@
 config CRAMFS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Compressed ROM file system support (cramfs)"
+=======
+	tristate "Compressed ROM file system support (cramfs) (OBSOLETE)"
+>>>>>>> v3.18
 =======
 	tristate "Compressed ROM file system support (cramfs) (OBSOLETE)"
 >>>>>>> v3.18
@@ -21,6 +25,12 @@ config CRAMFS
 	  directory /) cannot be compiled as a module.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  This filesystem is obsoleted by SquashFS, which is much better
+	  in terms of performance and features.
+
+>>>>>>> v3.18
 =======
 	  This filesystem is obsoleted by SquashFS, which is much better
 	  in terms of performance and features.

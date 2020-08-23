@@ -63,7 +63,10 @@ extern int omap2xxx_cm_wait_module_ready(s16 prcm_mod, u8 idlest_id,
 extern int omap2xxx_cm_split_idlest_reg(void __iomem *idlest_reg,
 					s16 *prcm_inst, u8 *idlest_reg_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int omap2xxx_cm_fclks_active(void);
 extern int omap2xxx_cm_mpu_retention_allowed(void);
 extern u32 omap2xxx_cm_get_core_clk_src(void);
@@ -72,6 +75,9 @@ extern u32 omap2xxx_cm_get_pll_config(void);
 extern u32 omap2xxx_cm_get_pll_status(void);
 extern void omap2xxx_cm_set_mod_dividers(u32 mpu, u32 dsp, u32 gfx, u32 core,
 					 u32 mdm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int __init omap2xxx_cm_init(void);

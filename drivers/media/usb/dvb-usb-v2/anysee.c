@@ -333,7 +333,10 @@ static struct tda10023_config anysee_tda10023_tda18212_config = {
 
 static struct tda18212_config anysee_tda18212_config = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.i2c_address = (0xc0 >> 1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.if_dvbt_6 = 4150,
@@ -344,7 +347,10 @@ static struct tda18212_config anysee_tda18212_config = {
 
 static struct tda18212_config anysee_tda18212_config2 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.i2c_address = 0x60 /* (0xc0 >> 1) */,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.if_dvbt_6 = 3550,
@@ -639,7 +645,10 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int anysee_add_i2c_dev(struct dvb_usb_device *d, const char *type,
 		u8 addr, void *platform_data)
 {
@@ -726,6 +735,9 @@ err:
 	dev_dbg(&d->udev->dev, "%s: failed\n", __func__);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int anysee_frontend_attach(struct dvb_usb_adapter *adap)
 {
@@ -736,7 +748,11 @@ static int anysee_frontend_attach(struct dvb_usb_adapter *adap)
 	struct i2c_msg msg[2] = {
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.addr = anysee_tda18212_config.i2c_address,
+=======
+			.addr = 0x60,
+>>>>>>> v3.18
 =======
 			.addr = 0x60,
 >>>>>>> v3.18
@@ -745,7 +761,11 @@ static int anysee_frontend_attach(struct dvb_usb_adapter *adap)
 			.buf = "\x00",
 		}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.addr = anysee_tda18212_config.i2c_address,
+=======
+			.addr = 0x60,
+>>>>>>> v3.18
 =======
 			.addr = 0x60,
 >>>>>>> v3.18
@@ -827,15 +847,21 @@ static int anysee_frontend_attach(struct dvb_usb_adapter *adap)
 		tmp = 0;
 		ret = i2c_transfer(&d->i2c_adap, msg, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == 2 && tmp == 0xc7)
 			dev_dbg(&d->udev->dev, "%s: TDA18212 found\n",
 					__func__);
 =======
+=======
+>>>>>>> v3.18
 		if (ret == 2 && tmp == 0xc7) {
 			dev_dbg(&d->udev->dev, "%s: TDA18212 found\n",
 					__func__);
 			state->has_tda18212 = true;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			tmp = 0;
@@ -1051,6 +1077,7 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 
 		/* attach tuner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fe = dvb_attach(tda18212_attach, adap->fe[0], &d->i2c_adap,
 				&anysee_tda18212_config);
 
@@ -1073,6 +1100,8 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 					(0xc0 >> 1), &d->i2c_adap,
 					DVB_PLL_SAMSUNG_DTOS403IH102A);
 =======
+=======
+>>>>>>> v3.18
 		if (state->has_tda18212) {
 			struct tda18212_config tda18212_config =
 					anysee_tda18212_config;
@@ -1105,12 +1134,16 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 						(0xc0 >> 1), &d->i2c_adap,
 						DVB_PLL_SAMSUNG_DTOS403IH102A);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		break;
 	case ANYSEE_HW_508TC: /* 18 */
 	case ANYSEE_HW_508PTC: /* 21 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* E7 TC */
 		/* E7 PTC */
@@ -1127,6 +1160,8 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 
 		break;
 =======
+=======
+>>>>>>> v3.18
 	{
 		/* E7 TC */
 		/* E7 PTC */
@@ -1147,6 +1182,9 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ANYSEE_HW_508S2: /* 19 */
 	case ANYSEE_HW_508PS2: /* 22 */
@@ -1167,6 +1205,7 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 
 	case ANYSEE_HW_508T2C: /* 20 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* E7 T2C */
 
 		/* attach tuner */
@@ -1175,6 +1214,8 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 
 		break;
 =======
+=======
+>>>>>>> v3.18
 	{
 		/* E7 T2C */
 		struct tda18212_config tda18212_config =
@@ -1187,6 +1228,9 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		fe = NULL;
@@ -1197,7 +1241,11 @@ static int anysee_tuner_attach(struct dvb_usb_adapter *adap)
 	else
 		ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+err:
+>>>>>>> v3.18
 =======
 err:
 >>>>>>> v3.18
@@ -1227,7 +1275,12 @@ static int anysee_rc_query(struct dvb_usb_device *d)
 		dev_dbg(&d->udev->dev, "%s: key pressed %02x\n", __func__,
 				ircode[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(d->rc_dev, 0x08 << 8 | ircode[1], 0);
+=======
+		rc_keydown(d->rc_dev, RC_TYPE_NEC,
+			   RC_SCANCODE_NEC(0x08, ircode[1]), 0);
+>>>>>>> v3.18
 =======
 		rc_keydown(d->rc_dev, RC_TYPE_NEC,
 			   RC_SCANCODE_NEC(0x08, ircode[1]), 0);
@@ -1463,12 +1516,18 @@ static int anysee_init(struct dvb_usb_device *d)
 static void anysee_exit(struct dvb_usb_device *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct anysee_state *state = d_to_priv(d);
 
 	if (state->i2c_client[0])
 		anysee_del_i2c_dev(d);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return anysee_ci_release(d);
 }

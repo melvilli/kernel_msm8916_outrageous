@@ -25,6 +25,10 @@
 
 #include <linux/drbd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "drbd_strings.h"
+>>>>>>> v3.18
 =======
 #include "drbd_strings.h"
 >>>>>>> v3.18

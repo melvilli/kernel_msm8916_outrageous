@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -42,6 +45,7 @@ Configuration options:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #include <linux/ioport.h>
@@ -53,11 +57,17 @@ Configuration options:
 #include "../comedidev.h"
 
 >>>>>>> v3.18
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+
+>>>>>>> v3.18
 #define DT2817_CR 0
 #define DT2817_DATA 1
 
 static int dt2817_dio_insn_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				  struct comedi_insn *insn, unsigned int *data)
 {
@@ -82,6 +92,8 @@ static int dt2817_dio_insn_config(struct comedi_device *dev,
 	else
 		s->io_bits &= ~mask;
 =======
+=======
+>>>>>>> v3.18
 				  struct comedi_insn *insn,
 				  unsigned int *data)
 {
@@ -102,6 +114,9 @@ static int dt2817_dio_insn_config(struct comedi_device *dev,
 	ret = comedi_dio_insn_config(dev, s, insn, data, mask);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (s->io_bits & 0x000000ff)
@@ -116,7 +131,11 @@ static int dt2817_dio_insn_config(struct comedi_device *dev,
 	outb(oe, dev->iobase + DT2817_CR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return insn->n;
+>>>>>>> v3.18
 =======
 	return insn->n;
 >>>>>>> v3.18
@@ -124,6 +143,7 @@ static int dt2817_dio_insn_config(struct comedi_device *dev,
 
 static int dt2817_dio_insn_bits(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
@@ -156,6 +176,8 @@ static int dt2817_dio_insn_bits(struct comedi_device *dev,
 	data[1] |= (inb(dev->iobase + DT2817_DATA + 2) << 16);
 	data[1] |= (inb(dev->iobase + DT2817_DATA + 3) << 24);
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
@@ -181,6 +203,9 @@ static int dt2817_dio_insn_bits(struct comedi_device *dev,
 	val |= (inb(iobase + 3) << 24);
 
 	data[1] = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -192,7 +217,11 @@ static int dt2817_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	struct comedi_subdevice *s;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], DT2817_SIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x5);
+>>>>>>> v3.18
 =======
 	ret = comedi_request_region(dev, it->options[0], 0x5);
 >>>>>>> v3.18

@@ -14,6 +14,10 @@
 #include <asm/amigahw.h>
 #include <asm/amigayle.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 >>>>>>> v3.18
@@ -61,7 +65,11 @@ static int __init amiga_init_bus(void)
 	pdev = platform_device_register_simple("amiga-zorro", -1,
 					       zorro_resources, n);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(pdev);
+=======
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(pdev);
 >>>>>>> v3.18
@@ -75,17 +83,23 @@ static int __init z_dev_present(zorro_id id)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < zorro_num_autocon; i++)
 		if (zorro_autocon[i].rom.er_Manufacturer == ZORRO_MANUF(id) &&
 		    zorro_autocon[i].rom.er_Product == ZORRO_PROD(id))
 			return 1;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < zorro_num_autocon; i++) {
 		const struct ExpansionRom *rom = &zorro_autocon_init[i].rom;
 		if (be16_to_cpu(rom->er_Manufacturer) == ZORRO_MANUF(id) &&
 		    rom->er_Product == ZORRO_PROD(id))
 			return 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

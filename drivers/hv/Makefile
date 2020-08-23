@@ -6,7 +6,11 @@ hv_vmbus-y := vmbus_drv.o \
 		 hv.o connection.o channel.o \
 		 channel_mgmt.o ring_buffer.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 hv_utils-y := hv_util.o hv_kvp.o hv_snapshot.o
+=======
+hv_utils-y := hv_util.o hv_kvp.o hv_snapshot.o hv_fcopy.o
+>>>>>>> v3.18
 =======
 hv_utils-y := hv_util.o hv_kvp.o hv_snapshot.o hv_fcopy.o
 >>>>>>> v3.18

@@ -22,7 +22,10 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -35,6 +38,10 @@
 #include <linux/bitops.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -103,12 +110,15 @@ static int fs_enet_fec_mii_write(struct mii_bus *bus, int phy_id, int location, 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fs_enet_fec_mii_reset(struct mii_bus *bus)
 {
 	/* nothing here - for now */
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct of_device_id fs_enet_mdio_fec_match[];
@@ -139,7 +149,10 @@ static int fs_enet_mdio_probe(struct platform_device *ofdev)
 	new_bus->read = &fs_enet_fec_mii_read;
 	new_bus->write = &fs_enet_fec_mii_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_bus->reset = &fs_enet_fec_mii_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -194,7 +207,11 @@ static int fs_enet_mdio_probe(struct platform_device *ofdev)
 
 	new_bus->parent = &ofdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, new_bus);
+=======
+	platform_set_drvdata(ofdev, new_bus);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, new_bus);
 >>>>>>> v3.18
@@ -207,7 +224,10 @@ static int fs_enet_mdio_probe(struct platform_device *ofdev)
 
 out_free_irqs:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(new_bus->irq);
@@ -225,16 +245,22 @@ out:
 static int fs_enet_mdio_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mii_bus *bus = dev_get_drvdata(&ofdev->dev);
 	struct fec_info *fec = bus->priv;
 
 	mdiobus_unregister(bus);
 	dev_set_drvdata(&ofdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct mii_bus *bus = platform_get_drvdata(ofdev);
 	struct fec_info *fec = bus->priv;
 
 	mdiobus_unregister(bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(bus->irq);
 	iounmap(fec->fecp);

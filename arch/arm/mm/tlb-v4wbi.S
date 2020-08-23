@@ -15,6 +15,10 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ ENTRY(v4wbi_flush_user_tlb_range)
 	act_mm	r3				@ get current->active_mm
 	eors	r3, ip, r3			@ == mm ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movne	pc, lr				@ no, we dont do anything
+=======
+	retne	lr				@ no, we dont do anything
+>>>>>>> v3.18
 =======
 	retne	lr				@ no, we dont do anything
 >>>>>>> v3.18
@@ -53,7 +61,11 @@ ENTRY(v4wbi_flush_user_tlb_range)
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -69,7 +81,11 @@ ENTRY(v4wbi_flush_kern_tlb_range)
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

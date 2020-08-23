@@ -27,6 +27,12 @@
 #include <asm/vectors.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CA_BYPASS	(_PAGE_CA_BYPASS | _PAGE_HW_WRITE | _PAGE_HW_EXEC)
+#define CA_WRITEBACK	(_PAGE_CA_WB     | _PAGE_HW_WRITE | _PAGE_HW_EXEC)
+
+>>>>>>> v3.18
 =======
 #define CA_BYPASS	(_PAGE_CA_BYPASS | _PAGE_HW_WRITE | _PAGE_HW_EXEC)
 #define CA_WRITEBACK	(_PAGE_CA_WB     | _PAGE_HW_WRITE | _PAGE_HW_EXEC)
@@ -87,8 +93,11 @@
 	 * and jump to the new mapping.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CA_BYPASS	(_PAGE_CA_BYPASS | _PAGE_HW_WRITE | _PAGE_HW_EXEC)
 #define CA_WRITEBACK	(_PAGE_CA_WB     | _PAGE_HW_WRITE | _PAGE_HW_EXEC)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -133,6 +142,7 @@
 	witlb	a4, a5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movi	a5, 0xe0000006
 	movi	a4, 0xf0000000 + CA_WRITEBACK
 	wdtlb	a4, a5
@@ -141,6 +151,8 @@
 	movi	a5, 0xf0000006
 	movi	a4, 0xf0000000 + CA_BYPASS
 =======
+=======
+>>>>>>> v3.18
 	movi	a5, XCHAL_KIO_CACHED_VADDR + 6
 	movi	a4, XCHAL_KIO_DEFAULT_PADDR + CA_WRITEBACK
 	wdtlb	a4, a5
@@ -148,6 +160,9 @@
 
 	movi	a5, XCHAL_KIO_BYPASS_VADDR + 6
 	movi	a4, XCHAL_KIO_DEFAULT_PADDR + CA_BYPASS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wdtlb	a4, a5
 	witlb	a4, a5

@@ -212,6 +212,10 @@ static int mace_probe(struct platform_device *pdev)
 
 	mp->device = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, dev);
 >>>>>>> v3.18

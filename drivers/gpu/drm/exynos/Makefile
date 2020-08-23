@@ -4,7 +4,11 @@
 
 ccflags-y := -Iinclude/drm -Idrivers/gpu/drm/exynos
 <<<<<<< HEAD
+<<<<<<< HEAD
 exynosdrm-y := exynos_drm_drv.o exynos_drm_encoder.o exynos_drm_connector.o \
+=======
+exynosdrm-y := exynos_drm_drv.o exynos_drm_encoder.o \
+>>>>>>> v3.18
 =======
 exynosdrm-y := exynos_drm_drv.o exynos_drm_encoder.o \
 >>>>>>> v3.18
@@ -16,14 +20,20 @@ exynosdrm-$(CONFIG_DRM_EXYNOS_IOMMU) += exynos_drm_iommu.o
 exynosdrm-$(CONFIG_DRM_EXYNOS_DMABUF) += exynos_drm_dmabuf.o
 exynosdrm-$(CONFIG_DRM_EXYNOS_FIMD)	+= exynos_drm_fimd.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 exynosdrm-$(CONFIG_DRM_EXYNOS_HDMI)	+= exynos_hdmi.o exynos_mixer.o \
 					   exynos_ddc.o exynos_hdmiphy.o \
 					   exynos_drm_hdmi.o
 =======
+=======
+>>>>>>> v3.18
 exynosdrm-$(CONFIG_DRM_EXYNOS_DPI)	+= exynos_drm_dpi.o
 exynosdrm-$(CONFIG_DRM_EXYNOS_DSI)	+= exynos_drm_dsi.o
 exynosdrm-$(CONFIG_DRM_EXYNOS_DP)	+= exynos_dp_core.o exynos_dp_reg.o
 exynosdrm-$(CONFIG_DRM_EXYNOS_HDMI)	+= exynos_hdmi.o exynos_mixer.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exynosdrm-$(CONFIG_DRM_EXYNOS_VIDI)	+= exynos_drm_vidi.o
 exynosdrm-$(CONFIG_DRM_EXYNOS_G2D)	+= exynos_drm_g2d.o

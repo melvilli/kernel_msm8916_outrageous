@@ -688,6 +688,10 @@ static int find_rsb_dir(struct dlm_ls *ls, char *name, int len,
 			  from_nodeid, dir_nodeid, our_nodeid, r->res_name);
 		dlm_free_rsb(r);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		r = NULL;
+>>>>>>> v3.18
 =======
 		r = NULL;
 >>>>>>> v3.18
@@ -2043,8 +2047,13 @@ static void set_lvb_lock_pc(struct dlm_rsb *r, struct dlm_lkb *lkb,
 	if (b == 1) {
 		int len = receive_extralen(ms);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (len > DLM_RESNAME_MAXLEN)
 			len = DLM_RESNAME_MAXLEN;
+=======
+		if (len > r->res_ls->ls_lvblen)
+			len = r->res_ls->ls_lvblen;
+>>>>>>> v3.18
 =======
 		if (len > r->res_ls->ls_lvblen)
 			len = r->res_ls->ls_lvblen;
@@ -3903,8 +3912,13 @@ static int receive_lvb(struct dlm_ls *ls, struct dlm_lkb *lkb,
 			return -ENOMEM;
 		len = receive_extralen(ms);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (len > DLM_RESNAME_MAXLEN)
 			len = DLM_RESNAME_MAXLEN;
+=======
+		if (len > ls->ls_lvblen)
+			len = ls->ls_lvblen;
+>>>>>>> v3.18
 =======
 		if (len > ls->ls_lvblen)
 			len = ls->ls_lvblen;
@@ -5477,7 +5491,11 @@ void dlm_recover_purge(struct dlm_ls *ls)
 
 	if (lkb_count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_purge %u locks for %u nodes",
+=======
+		log_rinfo(ls, "dlm_recover_purge %u locks for %u nodes",
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_purge %u locks for %u nodes",
 >>>>>>> v3.18
@@ -5555,7 +5573,11 @@ void dlm_recover_grant(struct dlm_ls *ls)
 
 	if (lkb_count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_grant %u locks on %u resources",
+=======
+		log_rinfo(ls, "dlm_recover_grant %u locks on %u resources",
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_grant %u locks on %u resources",
 >>>>>>> v3.18
@@ -5718,7 +5740,11 @@ int dlm_recover_master_copy(struct dlm_ls *ls, struct dlm_rcom *rc)
  out:
 	if (error && error != -EEXIST)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_master_copy remote %d %x error %d",
+=======
+		log_rinfo(ls, "dlm_recover_master_copy remote %d %x error %d",
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_master_copy remote %d %x error %d",
 >>>>>>> v3.18

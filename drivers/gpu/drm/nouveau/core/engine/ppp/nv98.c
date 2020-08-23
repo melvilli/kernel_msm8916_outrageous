@@ -20,6 +20,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Authors: Ben Skeggs
  */
 
@@ -36,6 +37,8 @@ struct nv98_ppp_priv {
 struct nv98_ppp_chan {
 	struct nouveau_engctx base;
 =======
+=======
+>>>>>>> v3.18
  * Authors: Ben Skeggs, Maarten Lankhorst, Ilia Mirkin
  */
 
@@ -44,6 +47,9 @@ struct nv98_ppp_chan {
 
 struct nv98_ppp_priv {
 	struct nouveau_falcon base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -54,6 +60,11 @@ struct nv98_ppp_priv {
 static struct nouveau_oclass
 nv98_ppp_sclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x88b3, &nouveau_object_ofuncs },
+	{ 0x85b3, &nouveau_object_ofuncs },
+>>>>>>> v3.18
 =======
 	{ 0x88b3, &nouveau_object_ofuncs },
 	{ 0x85b3, &nouveau_object_ofuncs },
@@ -70,6 +81,7 @@ nv98_ppp_cclass = {
 	.handle = NV_ENGCTX(PPP, 0x98),
 	.ofuncs = &(struct nouveau_ofuncs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ctor = _nouveau_engctx_ctor,
 		.dtor = _nouveau_engctx_dtor,
 		.init = _nouveau_engctx_init,
@@ -77,12 +89,17 @@ nv98_ppp_cclass = {
 		.rd32 = _nouveau_engctx_rd32,
 		.wr32 = _nouveau_engctx_wr32,
 =======
+=======
+>>>>>>> v3.18
 		.ctor = _nouveau_falcon_context_ctor,
 		.dtor = _nouveau_falcon_context_dtor,
 		.init = _nouveau_falcon_context_init,
 		.fini = _nouveau_falcon_context_fini,
 		.rd32 = _nouveau_falcon_context_rd32,
 		.wr32 = _nouveau_falcon_context_wr32,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -93,7 +110,10 @@ nv98_ppp_cclass = {
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nv98_ppp_init(struct nouveau_object *object)
 {
 	struct nv98_ppp_priv *priv = (void *)object;
@@ -109,6 +129,9 @@ nv98_ppp_init(struct nouveau_object *object)
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv98_ppp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
@@ -118,7 +141,11 @@ nv98_ppp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_engine_create(parent, engine, oclass, true,
+=======
+	ret = nouveau_falcon_create(parent, engine, oclass, 0x086000, true,
+>>>>>>> v3.18
 =======
 	ret = nouveau_falcon_create(parent, engine, oclass, 0x086000, true,
 >>>>>>> v3.18
@@ -139,15 +166,21 @@ nv98_ppp_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv98_ppp_ctor,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.dtor = _nouveau_engine_dtor,
 		.init = _nouveau_engine_init,
 		.fini = _nouveau_engine_fini,
 =======
+=======
+>>>>>>> v3.18
 		.dtor = _nouveau_falcon_dtor,
 		.init = nv98_ppp_init,
 		.fini = _nouveau_falcon_fini,
 		.rd32 = _nouveau_falcon_rd32,
 		.wr32 = _nouveau_falcon_wr32,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

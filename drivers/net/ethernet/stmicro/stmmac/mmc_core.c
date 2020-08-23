@@ -197,7 +197,11 @@ void dwmac_mmc_read(void __iomem *ioaddr, struct stmmac_counters *mmc)
 	mmc->mmc_rx_broadcastframe_g += readl(ioaddr + MMC_RX_BROADCASTFRAME_G);
 	mmc->mmc_rx_multicastframe_g += readl(ioaddr + MMC_RX_MULTICASTFRAME_G);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc->mmc_rx_crc_errror += readl(ioaddr + MMC_RX_CRC_ERRROR);
+=======
+	mmc->mmc_rx_crc_error += readl(ioaddr + MMC_RX_CRC_ERRROR);
+>>>>>>> v3.18
 =======
 	mmc->mmc_rx_crc_error += readl(ioaddr + MMC_RX_CRC_ERRROR);
 >>>>>>> v3.18

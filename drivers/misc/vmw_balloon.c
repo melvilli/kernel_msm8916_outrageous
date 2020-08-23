@@ -18,7 +18,12 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Dmitry Torokhov <dtor@vmware.com>
+=======
+ * Maintained by:	Xavier Deguillard <xdeguillard@vmware.com>
+ *			Philip Moltmann <moltmann@vmware.com>
+>>>>>>> v3.18
 =======
  * Maintained by:	Xavier Deguillard <xdeguillard@vmware.com>
  *			Philip Moltmann <moltmann@vmware.com>
@@ -139,7 +144,11 @@ MODULE_LICENSE("GPL");
 ({							\
 	unsigned long __stat, __dummy1, __dummy2;	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__asm__ __volatile__ ("inl (%%dx)" :		\
+=======
+	__asm__ __volatile__ ("inl %%dx" :		\
+>>>>>>> v3.18
 =======
 	__asm__ __volatile__ ("inl %%dx" :		\
 >>>>>>> v3.18

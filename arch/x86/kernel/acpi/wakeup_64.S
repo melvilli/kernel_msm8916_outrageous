@@ -74,7 +74,11 @@ ENTRY(do_suspend_lowlevel)
 	movl	$3, %edi
 	xorl	%eax, %eax
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call	acpi_enter_sleep_state
+=======
+	call	x86_acpi_enter_sleep_state
+>>>>>>> v3.18
 =======
 	call	x86_acpi_enter_sleep_state
 >>>>>>> v3.18

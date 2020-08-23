@@ -456,6 +456,7 @@ DEFINE_IPL_ATTR_RO(ipl_fcp, br_lba, "%lld\n", (unsigned long long)
 		   IPL_PARMBLOCK_START->ipl_info.fcp.br_lba);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ipl_fcp_attrs[] = {
 	&sys_ipl_type_attr.attr,
 	&sys_ipl_device_attr.attr,
@@ -472,6 +473,8 @@ static struct attribute_group ipl_fcp_attr_group = {
 
 /* CCW ipl device attributes */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t ipl_ccw_loadparm_show(struct kobject *kobj,
@@ -491,7 +494,10 @@ static struct kobj_attribute sys_ipl_ccw_loadparm_attr =
 	__ATTR(loadparm, 0444, ipl_ccw_loadparm_show, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *ipl_fcp_attrs[] = {
 	&sys_ipl_type_attr.attr,
 	&sys_ipl_device_attr.attr,
@@ -509,6 +515,9 @@ static struct attribute_group ipl_fcp_attr_group = {
 
 /* CCW ipl device attributes */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct attribute *ipl_ccw_attrs_vm[] = {
 	&sys_ipl_type_attr.attr,
@@ -789,6 +798,7 @@ DEFINE_IPL_ATTR_RW(reipl_fcp, device, "0.0.%04llx\n", "0.0.%llx\n",
 		   reipl_block_fcp->ipl_info.fcp.devno);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *reipl_fcp_attrs[] = {
 	&sys_reipl_fcp_device_attr.attr,
 	&sys_reipl_fcp_wwpn_attr.attr,
@@ -812,10 +822,15 @@ static void reipl_get_ascii_loadparm(char *loadparm,
 {
 	memcpy(loadparm, ibp->ipl_info.ccw.load_parm, LOADPARM_LEN);
 =======
+=======
+>>>>>>> v3.18
 static void reipl_get_ascii_loadparm(char *loadparm,
 				     struct ipl_parameter_block *ibp)
 {
 	memcpy(loadparm, ibp->hdr.loadparm, LOADPARM_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EBCASC(loadparm, LOADPARM_LEN);
 	loadparm[LOADPARM_LEN] = 0;
@@ -852,6 +867,7 @@ static ssize_t reipl_generic_loadparm_store(struct ipl_parameter_block *ipb,
 	}
 	/* initialize loadparm with blanks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(ipb->ipl_info.ccw.load_parm, ' ', LOADPARM_LEN);
 	/* copy and convert to ebcdic */
 	memcpy(ipb->ipl_info.ccw.load_parm, buf, lp_len);
@@ -860,6 +876,8 @@ static ssize_t reipl_generic_loadparm_store(struct ipl_parameter_block *ipb,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	memset(ipb->hdr.loadparm, ' ', LOADPARM_LEN);
 	/* copy and convert to ebcdic */
 	memcpy(ipb->hdr.loadparm, buf, lp_len);
@@ -904,6 +922,9 @@ static struct attribute_group reipl_fcp_attr_group = {
 DEFINE_IPL_ATTR_RW(reipl_ccw, device, "0.0.%04llx\n", "0.0.%llx\n",
 	reipl_block_ccw->ipl_info.ccw.devno);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* NSS wrapper */
 static ssize_t reipl_nss_loadparm_show(struct kobject *kobj,
@@ -1203,16 +1224,22 @@ static void reipl_block_ccw_fill_parms(struct ipl_parameter_block *ipb)
 	/* check if read scp info worked and set loadparm */
 	if (sclp_ipl_info.is_valid)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(ipb->ipl_info.ccw.load_parm,
 				&sclp_ipl_info.loadparm, LOADPARM_LEN);
 	else
 		/* read scp info failed: set empty loadparm (EBCDIC blanks) */
 		memset(ipb->ipl_info.ccw.load_parm, 0x40, LOADPARM_LEN);
 =======
+=======
+>>>>>>> v3.18
 		memcpy(ipb->hdr.loadparm, &sclp_ipl_info.loadparm, LOADPARM_LEN);
 	else
 		/* read scp info failed: set empty loadparm (EBCDIC blanks) */
 		memset(ipb->hdr.loadparm, 0x40, LOADPARM_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ipb->hdr.flags = DIAG308_FLAGS_LP_VALID;
 
@@ -1336,10 +1363,13 @@ static int __init reipl_fcp_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipl_info.type == IPL_TYPE_FCP)
 		memcpy(reipl_block_fcp, IPL_PARMBLOCK_START, PAGE_SIZE);
 	else {
 =======
+=======
+>>>>>>> v3.18
 	if (ipl_info.type == IPL_TYPE_FCP) {
 		memcpy(reipl_block_fcp, IPL_PARMBLOCK_START, PAGE_SIZE);
 		/*
@@ -1350,6 +1380,9 @@ static int __init reipl_fcp_init(void)
 		memcpy(reipl_block_fcp->hdr.loadparm, sclp_ipl_info.loadparm,
 		       LOADPARM_LEN);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reipl_block_fcp->hdr.len = IPL_PARM_BLK_FCP_LEN;
 		reipl_block_fcp->hdr.version = IPL_PARM_BLOCK_VERSION;
@@ -1962,8 +1995,11 @@ static void __init shutdown_actions_init(void)
 static int __init s390_ipl_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sclp_get_ipl_info(&sclp_ipl_info);
 =======
+=======
+>>>>>>> v3.18
 	char str[8] = {0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40};
 
 	sclp_get_ipl_info(&sclp_ipl_info);
@@ -1981,6 +2017,9 @@ static int __init s390_ipl_init(void)
 	    diag308_set_works)
 		memcpy(sclp_ipl_info.loadparm, ipl_block.hdr.loadparm,
 		       LOADPARM_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	shutdown_actions_init();
 	shutdown_triggers_init();
@@ -2169,7 +2208,11 @@ void s390_reset_system(void (*func)(void *), void *data)
 
 	/* Set new machine check handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	S390_lowcore.mcck_new_psw.mask = psw_kernel_bits | PSW_MASK_DAT;
+=======
+	S390_lowcore.mcck_new_psw.mask = PSW_KERNEL_BITS | PSW_MASK_DAT;
+>>>>>>> v3.18
 =======
 	S390_lowcore.mcck_new_psw.mask = PSW_KERNEL_BITS | PSW_MASK_DAT;
 >>>>>>> v3.18
@@ -2178,11 +2221,14 @@ void s390_reset_system(void (*func)(void *), void *data)
 
 	/* Set new program check handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	S390_lowcore.program_new_psw.mask = psw_kernel_bits | PSW_MASK_DAT;
 	S390_lowcore.program_new_psw.addr =
 		PSW_ADDR_AMODE | (unsigned long) s390_base_pgm_handler;
 
 =======
+=======
+>>>>>>> v3.18
 	S390_lowcore.program_new_psw.mask = PSW_KERNEL_BITS | PSW_MASK_DAT;
 	S390_lowcore.program_new_psw.addr =
 		PSW_ADDR_AMODE | (unsigned long) s390_base_pgm_handler;
@@ -2194,6 +2240,9 @@ void s390_reset_system(void (*func)(void *), void *data)
 	S390_lowcore.subchannel_id = 0;
 	S390_lowcore.subchannel_nr = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Store status at absolute zero */
 	store_status();

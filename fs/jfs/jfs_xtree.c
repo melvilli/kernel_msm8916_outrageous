@@ -65,6 +65,7 @@
 /* get page buffer for specified block address */
 /* ToDo: Replace this ugly macro with a function */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XT_GETPAGE(IP, BN, MP, SIZE, P, RC)\
 {\
 	BT_GETPAGE(IP, BN, MP, xtpage_t, SIZE, P, RC, i_xtroot)\
@@ -82,6 +83,8 @@
 	}\
 }
 =======
+=======
+>>>>>>> v3.18
 #define XT_GETPAGE(IP, BN, MP, SIZE, P, RC)				\
 do {									\
 	BT_GETPAGE(IP, BN, MP, xtpage_t, SIZE, P, RC, i_xtroot);	\
@@ -99,6 +102,9 @@ do {									\
 		}							\
 	}								\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* for consistency */
@@ -520,7 +526,11 @@ static int xtSearch(struct inode *ip, s64 xoff,	s64 *nextp,
 		/* push (bn, index) of the parent page/entry */
 		if (BT_STACK_FULL(btstack)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb, "stack overrun in xtSearch!");
+=======
+			jfs_error(ip->i_sb, "stack overrun!\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "stack overrun!\n");
 >>>>>>> v3.18
@@ -1410,7 +1420,11 @@ int xtExtend(tid_t tid,		/* transaction id */
 	if (cmp != 0) {
 		XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "xtExtend: xtSearch did not find extent");
+=======
+		jfs_error(ip->i_sb, "xtSearch did not find extent\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "xtSearch did not find extent\n");
 >>>>>>> v3.18
@@ -1422,7 +1436,11 @@ int xtExtend(tid_t tid,		/* transaction id */
 	if ((offsetXAD(xad) + lengthXAD(xad)) != xoff) {
 		XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "xtExtend: extension is not contiguous");
+=======
+		jfs_error(ip->i_sb, "extension is not contiguous\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "extension is not contiguous\n");
 >>>>>>> v3.18
@@ -1585,7 +1603,11 @@ printf("xtTailgate: nxoff:0x%lx nxlen:0x%x nxaddr:0x%lx\n",
 	if (cmp != 0) {
 		XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "xtTailgate: couldn't find extent");
+=======
+		jfs_error(ip->i_sb, "couldn't find extent\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "couldn't find extent\n");
 >>>>>>> v3.18
@@ -1597,8 +1619,12 @@ printf("xtTailgate: nxoff:0x%lx nxlen:0x%x nxaddr:0x%lx\n",
 	if (index != nextindex - 1) {
 		XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb,
 			  "xtTailgate: the entry found is not the last entry");
+=======
+		jfs_error(ip->i_sb, "the entry found is not the last entry\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "the entry found is not the last entry\n");
 >>>>>>> v3.18
@@ -1775,7 +1801,11 @@ int xtUpdate(tid_t tid, struct inode *ip, xad_t * nxad)
 	if (cmp != 0) {
 		XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "xtUpdate: Could not find extent");
+=======
+		jfs_error(ip->i_sb, "Could not find extent\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "Could not find extent\n");
 >>>>>>> v3.18
@@ -1803,7 +1833,11 @@ int xtUpdate(tid_t tid, struct inode *ip, xad_t * nxad)
 		XT_PUTPAGE(mp);
 		jfs_error(ip->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "xtUpdate: nXAD in not completely contained within XAD");
+=======
+			  "nXAD in not completely contained within XAD\n");
+>>>>>>> v3.18
 =======
 			  "nXAD in not completely contained within XAD\n");
 >>>>>>> v3.18
@@ -1956,7 +1990,11 @@ int xtUpdate(tid_t tid, struct inode *ip, xad_t * nxad)
 	if (xoff >= nxoff) {
 		XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "xtUpdate: xoff >= nxoff");
+=======
+		jfs_error(ip->i_sb, "xoff >= nxoff\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "xoff >= nxoff\n");
 >>>>>>> v3.18
@@ -2101,7 +2139,11 @@ int xtUpdate(tid_t tid, struct inode *ip, xad_t * nxad)
 		if (cmp != 0) {
 			XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb, "xtUpdate: xtSearch failed");
+=======
+			jfs_error(ip->i_sb, "xtSearch failed\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "xtSearch failed\n");
 >>>>>>> v3.18
@@ -2111,8 +2153,12 @@ int xtUpdate(tid_t tid, struct inode *ip, xad_t * nxad)
 		if (index0 != index) {
 			XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb,
 				  "xtUpdate: unexpected value of index");
+=======
+			jfs_error(ip->i_sb, "unexpected value of index\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "unexpected value of index\n");
 >>>>>>> v3.18
@@ -3711,7 +3757,11 @@ s64 xtTruncate(tid_t tid, struct inode *ip, s64 newsize, int flag)
 	/* save current parent entry for the child page */
 	if (BT_STACK_FULL(&btstack)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "stack overrun in xtTruncate!");
+=======
+		jfs_error(ip->i_sb, "stack overrun!\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "stack overrun!\n");
 >>>>>>> v3.18
@@ -3816,8 +3866,12 @@ s64 xtTruncate_pmap(tid_t tid, struct inode *ip, s64 committed_size)
 		if (cmp != 0) {
 			XT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb,
 				  "xtTruncate_pmap: did not find extent");
+=======
+			jfs_error(ip->i_sb, "did not find extent\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "did not find extent\n");
 >>>>>>> v3.18
@@ -3920,7 +3974,11 @@ s64 xtTruncate_pmap(tid_t tid, struct inode *ip, s64 committed_size)
 	/* save current parent entry for the child page */
 	if (BT_STACK_FULL(&btstack)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "stack overrun in xtTruncate_pmap!");
+=======
+		jfs_error(ip->i_sb, "stack overrun!\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "stack overrun!\n");
 >>>>>>> v3.18

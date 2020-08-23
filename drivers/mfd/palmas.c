@@ -24,6 +24,7 @@
 #include <linux/mfd/core.h>
 #include <linux/mfd/palmas.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 
 enum palmas_ids {
@@ -99,6 +100,9 @@ static const struct mfd_cell palmas_children[] = {
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 
 static const struct regmap_config palmas_regmap_config[PALMAS_NUM_CLIENTS] = {
 	{
@@ -122,7 +126,10 @@ static const struct regmap_config palmas_regmap_config[PALMAS_NUM_CLIENTS] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct regmap_irq tps65917_irqs[] = {
 	/* INT1 IRQs */
 	[TPS65917_RESERVED1] = {
@@ -250,6 +257,9 @@ static const struct regmap_irq tps65917_irqs[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct regmap_irq palmas_irqs[] = {
 	/* INT1 IRQs */
@@ -392,7 +402,10 @@ static struct regmap_irq_chip palmas_irq_chip = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct regmap_irq_chip tps65917_irq_chip = {
 	.name = "tps65917",
 	.irqs = tps65917_irqs,
@@ -457,6 +470,9 @@ int palmas_ext_control_req_config(struct palmas *palmas,
 }
 EXPORT_SYMBOL_GPL(palmas_ext_control_req_config);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int palmas_set_pdata_irq_flag(struct i2c_client *i2c,
 		struct palmas_platform_data *pdata)
@@ -502,9 +518,12 @@ static void palmas_dt_to_pdata(struct i2c_client *i2c,
 	if (i2c->irq)
 		palmas_set_pdata_irq_flag(i2c, pdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	pdata->pm_off = of_property_read_bool(node,
 			"ti,system-power-controller");
@@ -573,6 +592,9 @@ static const struct of_device_id of_palmas_match_tbl[] = {
 };
 MODULE_DEVICE_TABLE(of, of_palmas_match_tbl);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int palmas_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
@@ -580,6 +602,10 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 	struct palmas *palmas;
 	struct palmas_platform_data *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct palmas_driver_data *driver_data;
+>>>>>>> v3.18
 =======
 	struct palmas_driver_data *driver_data;
 >>>>>>> v3.18
@@ -588,7 +614,11 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 	unsigned int reg, addr;
 	int slave;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mfd_cell *children;
+=======
+	const struct of_device_id *match;
+>>>>>>> v3.18
 =======
 	const struct of_device_id *match;
 >>>>>>> v3.18
@@ -614,10 +644,13 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 	i2c_set_clientdata(i2c, palmas);
 	palmas->dev = &i2c->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	palmas->id = id->driver_data;
 	palmas->irq = i2c->irq;
 
 =======
+=======
+>>>>>>> v3.18
 	palmas->irq = i2c->irq;
 
 	match = of_match_device(of_palmas_match_tbl, &i2c->dev);
@@ -628,6 +661,9 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 	driver_data = (struct palmas_driver_data *)match->data;
 	palmas->features = *driver_data->features;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < PALMAS_NUM_CLIENTS; i++) {
 		if (i == 0)
@@ -641,7 +677,11 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 					"can't attach client %d\n", i);
 				ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto err;
+=======
+				goto err_i2c;
+>>>>>>> v3.18
 =======
 				goto err_i2c;
 >>>>>>> v3.18
@@ -656,11 +696,14 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 				"Failed to allocate regmap %d, err: %d\n",
 				i, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err;
 		}
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			goto err_i2c;
 		}
 	}
@@ -670,6 +713,9 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 		goto no_irq;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Change interrupt line output polarity */
 	if (pdata->irq_flags & IRQ_TYPE_LEVEL_HIGH)
@@ -682,7 +728,11 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 	if (ret < 0) {
 		dev_err(palmas->dev, "POLARITY_CTRL updat failed: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		goto err_i2c;
+>>>>>>> v3.18
 =======
 		goto err_i2c;
 >>>>>>> v3.18
@@ -697,18 +747,24 @@ static int palmas_i2c_probe(struct i2c_client *i2c,
 
 	ret = regmap_add_irq_chip(palmas->regmap[slave], palmas->irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_ONESHOT | pdata->irq_flags, 0, &palmas_irq_chip,
 			&palmas->irq_data);
 	if (ret < 0)
 		goto err;
 
 =======
+=======
+>>>>>>> v3.18
 				  IRQF_ONESHOT | pdata->irq_flags, 0,
 				  driver_data->irq_chip, &palmas->irq_data);
 	if (ret < 0)
 		goto err_i2c;
 
 no_irq:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	slave = PALMAS_BASE_TO_SLAVE(PALMAS_PU_PD_OD_BASE);
 	addr = PALMAS_BASE_TO_REG(PALMAS_PU_PD_OD_BASE,
@@ -789,6 +845,7 @@ no_irq:
 	if (node) {
 		ret = of_platform_populate(node, NULL, NULL, &i2c->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret < 0)
 			goto err_irq;
 		else
@@ -835,6 +892,8 @@ err_irq:
 	regmap_del_irq_chip(palmas->irq, palmas->irq_data);
 err:
 =======
+=======
+>>>>>>> v3.18
 		if (ret < 0) {
 			goto err_irq;
 		} else if (pdata->pm_off && !pm_power_off) {
@@ -852,6 +911,9 @@ err_i2c:
 		if (palmas->i2c_clients[i])
 			i2c_unregister_device(palmas->i2c_clients[i]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -860,11 +922,14 @@ static int palmas_i2c_remove(struct i2c_client *i2c)
 {
 	struct palmas *palmas = i2c_get_clientdata(i2c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mfd_remove_devices(palmas->dev);
 	regmap_del_irq_chip(palmas->irq, palmas->irq_data);
 
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	regmap_del_irq_chip(palmas->irq, palmas->irq_data);
@@ -879,6 +944,9 @@ static int palmas_i2c_remove(struct i2c_client *i2c)
 		palmas_dev = NULL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -893,11 +961,14 @@ static const struct i2c_device_id palmas_i2c_id[] = {
 MODULE_DEVICE_TABLE(i2c, palmas_i2c_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id of_palmas_match_tbl[] = {
 	{ .compatible = "ti,palmas", },
 	{ /* end */ }
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct i2c_driver palmas_i2c_driver = {

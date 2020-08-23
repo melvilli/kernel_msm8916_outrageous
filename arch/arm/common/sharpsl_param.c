@@ -16,6 +16,10 @@
 #include <linux/string.h>
 #include <asm/mach/sharpsl_param.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/memory.h>
+>>>>>>> v3.18
 =======
 #include <asm/memory.h>
 >>>>>>> v3.18
@@ -30,13 +34,19 @@
 #ifdef CONFIG_ARCH_SA1100
 #define PARAM_BASE	0xe8ffc000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define PARAM_BASE	0xa0000a00
 =======
+=======
+>>>>>>> v3.18
 #define param_start(x)	(void *)(x)
 #else
 #define PARAM_BASE	0xa0000a00
 #define param_start(x)	__va(x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #define MAGIC_CHG(a,b,c,d) ( ( d << 24 ) | ( c << 16 )  | ( b << 8 ) | a )
@@ -53,7 +63,11 @@ EXPORT_SYMBOL(sharpsl_param);
 void sharpsl_save_param(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&sharpsl_param, (void *)PARAM_BASE, sizeof(struct sharpsl_param_info));
+=======
+	memcpy(&sharpsl_param, param_start(PARAM_BASE), sizeof(struct sharpsl_param_info));
+>>>>>>> v3.18
 =======
 	memcpy(&sharpsl_param, param_start(PARAM_BASE), sizeof(struct sharpsl_param_info));
 >>>>>>> v3.18

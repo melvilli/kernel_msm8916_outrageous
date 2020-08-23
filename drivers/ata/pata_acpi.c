@@ -8,7 +8,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -16,16 +19,22 @@
 #include <linux/device.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <scsi/scsi_host.h>
 #include <acpi/acpi_bus.h>
 
 #include <linux/libata.h>
 #include <linux/ata.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/libata.h>
 #include <linux/ata.h>
 #include <scsi/scsi_host.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DRV_NAME	"pata_acpi"
@@ -50,7 +59,11 @@ static int pacpi_pre_reset(struct ata_link *link, unsigned long deadline)
 	struct ata_port *ap = link->ap;
 	struct pata_acpi *acpi = ap->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ata_ap_acpi_handle(ap) == NULL || ata_acpi_gtm(ap, &acpi->gtm) < 0)
+=======
+	if (ACPI_HANDLE(&ap->tdev) == NULL || ata_acpi_gtm(ap, &acpi->gtm) < 0)
+>>>>>>> v3.18
 =======
 	if (ACPI_HANDLE(&ap->tdev) == NULL || ata_acpi_gtm(ap, &acpi->gtm) < 0)
 >>>>>>> v3.18
@@ -210,7 +223,11 @@ static int pacpi_port_start(struct ata_port *ap)
 	struct pata_acpi *acpi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ata_ap_acpi_handle(ap) == NULL)
+=======
+	if (ACPI_HANDLE(&ap->tdev) == NULL)
+>>>>>>> v3.18
 =======
 	if (ACPI_HANDLE(&ap->tdev) == NULL)
 >>>>>>> v3.18
@@ -286,7 +303,11 @@ static struct pci_driver pacpi_pci_driver = {
 	.probe			= pacpi_init_one,
 	.remove			= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

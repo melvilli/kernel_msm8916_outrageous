@@ -19,6 +19,11 @@ config PLAT_S3C24XX
 	  Base platform code for any Samsung S3C24XX device
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> v3.18
 =======
 
 
@@ -32,16 +37,22 @@ config CPU_S3C2410
 	default y
 	select CPU_ARM920T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_LLSERIAL_S3C2410
 	select S3C2410_CLOCK
 	select S3C2410_CPUFREQ if CPU_FREQ_S3C24XX
 	select S3C2410_PM if PM
 	select SAMSUNG_HRT
 =======
+=======
+>>>>>>> v3.18
 	select S3C2410_COMMON_CLK
 	select S3C2410_DMA if S3C24XX_DMA
 	select ARM_S3C2410_CPUFREQ if ARM_S3C24XX_CPUFREQ
 	select S3C2410_PM if PM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Support for S3C2410 and S3C2410A family from the S3C24XX line
@@ -51,10 +62,16 @@ config CPU_S3C2412
 	bool "SAMSUNG S3C2412"
 	select CPU_ARM926T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_LLSERIAL_S3C2440
 	select S3C2412_DMA if S3C24XX_DMA
 	select S3C2412_PM if PM
 	select SAMSUNG_HRT
+=======
+	select S3C2412_COMMON_CLK
+	select S3C2412_DMA if S3C24XX_DMA
+	select S3C2412_PM if PM
+>>>>>>> v3.18
 =======
 	select S3C2412_COMMON_CLK
 	select S3C2412_DMA if S3C24XX_DMA
@@ -67,12 +84,18 @@ config CPU_S3C2416
 	bool "SAMSUNG S3C2416/S3C2450"
 	select CPU_ARM926T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_LLSERIAL_S3C2440
 	select S3C2416_PM if PM
 	select S3C2443_COMMON
 	select S3C2443_DMA if S3C24XX_DMA
 	select SAMSUNG_CLKSRC
 	select SAMSUNG_HRT
+=======
+	select S3C2416_PM if PM
+	select S3C2443_COMMON_CLK
+	select S3C2443_DMA if S3C24XX_DMA
+>>>>>>> v3.18
 =======
 	select S3C2416_PM if PM
 	select S3C2443_COMMON_CLK
@@ -85,11 +108,17 @@ config CPU_S3C2440
 	bool "SAMSUNG S3C2440"
 	select CPU_ARM920T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_LLSERIAL_S3C2440
 	select S3C2410_CLOCK
 	select S3C2410_PM if PM
 	select S3C2440_DMA if S3C24XX_DMA
 	select SAMSUNG_HRT
+=======
+	select S3C2410_COMMON_CLK
+	select S3C2410_PM if PM
+	select S3C2440_DMA if S3C24XX_DMA
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_CLK
 	select S3C2410_PM if PM
@@ -102,10 +131,16 @@ config CPU_S3C2442
 	bool "SAMSUNG S3C2442"
 	select CPU_ARM920T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_LLSERIAL_S3C2440
 	select S3C2410_CLOCK
 	select S3C2410_PM if PM
 	select SAMSUNG_HRT
+=======
+	select S3C2410_COMMON_CLK
+	select S3C2410_DMA if S3C24XX_DMA
+	select S3C2410_PM if PM
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_CLK
 	select S3C2410_DMA if S3C24XX_DMA
@@ -122,6 +157,7 @@ config CPU_S3C2443
 	bool "SAMSUNG S3C2443"
 	select CPU_ARM920T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_LLSERIAL_S3C2440
 	select S3C2443_COMMON
 	select S3C2443_DMA if S3C24XX_DMA
@@ -131,11 +167,16 @@ config CPU_S3C2443
 	select S3C2443_COMMON_CLK
 	select S3C2443_DMA if S3C24XX_DMA
 >>>>>>> v3.18
+=======
+	select S3C2443_COMMON_CLK
+	select S3C2443_DMA if S3C24XX_DMA
+>>>>>>> v3.18
 	help
 	  Support for the S3C2443 SoC from the S3C24XX line
 
 # common code
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config S3C2410_CLOCK
 	bool
@@ -148,6 +189,8 @@ config S3C24XX_DCLK
 	help
 	  Clock code for supporting DCLK/CLKOUT on S3C24XX architectures
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config S3C24XX_SMDK
@@ -180,7 +223,11 @@ config S3C24XX_SETUP_TS
 
 config S3C24XX_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "S3C2410 DMA support"
+=======
+	bool "S3C2410 DMA support (deprecated)"
+>>>>>>> v3.18
 =======
 	bool "S3C2410 DMA support (deprecated)"
 >>>>>>> v3.18
@@ -201,7 +248,10 @@ config S3C2410_DMA
 	bool
 	depends on S3C24XX_DMA && (CPU_S3C2410 || CPU_S3C2442)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default y if CPU_S3C2410 || CPU_S3C2442
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -212,6 +262,7 @@ config S3C2410_PM
 	help
 	  Power Management code common to S3C2410 and better
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # low-level serial option nodes
 
@@ -256,6 +307,8 @@ config S3C24XX_GPIO_EXTRA128
 	  Add an extra 128 gpio numbers to the available GPIO pool. This is
 	  available for boards that need extra gpios for external devices.
 =======
+=======
+>>>>>>> v3.18
 config S3C24XX_PLL
 	bool "Support CPUfreq changing of PLL frequency (EXPERIMENTAL)"
 	depends on ARM_S3C24XX_CPUFREQ
@@ -266,6 +319,9 @@ config S3C24XX_PLL
 
 	  This also means that the PLL tables for the selected CPU(s) will
 	  be built which may increase the size of the kernel image.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # cpu frequency items common between s3c2410 and s3c2440/s3c2442
@@ -273,7 +329,11 @@ config S3C24XX_PLL
 config S3C2410_IOTIMING
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_FREQ_S3C24XX
+=======
+	depends on ARM_S3C24XX_CPUFREQ
+>>>>>>> v3.18
 =======
 	depends on ARM_S3C24XX_CPUFREQ
 >>>>>>> v3.18
@@ -283,17 +343,23 @@ config S3C2410_IOTIMING
 
 config S3C2410_CPUFREQ_UTILS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool
 	depends on CPU_FREQ_S3C24XX
 	help
 	  Internal node to select timing code that is common to the s3c2410
 	  and s3c2440/s3c244 cpu frequency support.
 =======
+=======
+>>>>>>> v3.18
        bool
        depends on ARM_S3C24XX_CPUFREQ
        help
          Internal node to select timing code that is common to the s3c2410
          and s3c2440/s3c244 cpu frequency support.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # cpu frequency support common to s3c2412, s3c2413 and s3c2442
@@ -301,7 +367,11 @@ config S3C2410_CPUFREQ_UTILS
 config S3C2412_IOTIMING
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_FREQ_S3C24XX && (CPU_S3C2412 || CPU_S3C2443)
+=======
+	depends on ARM_S3C24XX_CPUFREQ && (CPU_S3C2412 || CPU_S3C2443)
+>>>>>>> v3.18
 =======
 	depends on ARM_S3C24XX_CPUFREQ && (CPU_S3C2412 || CPU_S3C2443)
 >>>>>>> v3.18
@@ -314,6 +384,7 @@ config S3C2412_IOTIMING
 if CPU_S3C2410
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S3C2410_CPUFREQ
 	bool
 	depends on CPU_FREQ_S3C24XX
@@ -324,6 +395,11 @@ config S3C2410_CPUFREQ
 config S3C2410_PLL
 	bool
 	depends on S3C2410_CPUFREQ && CPU_FREQ_S3C24XX_PLL
+=======
+config S3C2410_PLL
+	bool
+	depends on ARM_S3C2410_CPUFREQ && S3C24XX_PLL
+>>>>>>> v3.18
 =======
 config S3C2410_PLL
 	bool
@@ -365,8 +441,13 @@ config ARCH_BAST
 	select ISA
 	select MACH_BAST_IDE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select S3C2410_IOTIMING if S3C2410_CPUFREQ
 	select S3C24XX_DCLK
+=======
+	select S3C2410_COMMON_DCLK
+	select S3C2410_IOTIMING if ARM_S3C2410_CPUFREQ
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_DCLK
 	select S3C2410_IOTIMING if ARM_S3C2410_CPUFREQ
@@ -452,7 +533,11 @@ config MACH_VR1000
 	bool "Thorcom VR1000"
 	select MACH_BAST_IDE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select S3C24XX_DCLK
+=======
+	select S3C2410_COMMON_DCLK
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_DCLK
 >>>>>>> v3.18
@@ -481,6 +566,7 @@ config CPU_S3C2412_ONLY
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S3C2412_CPUFREQ
 	bool
 	depends on CPU_FREQ_S3C24XX
@@ -489,6 +575,8 @@ config S3C2412_CPUFREQ
 	help
 	  CPU Frequency scaling support for S3C2412 and S3C2413 SoC CPUs.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config S3C2412_DMA
@@ -589,7 +677,10 @@ config MACH_SMDK2416
 	  Say Y here if you are using an SMDK2416
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MACH_S3C2416_DT
 	bool "Samsung S3C2416 machine using devicetree"
 	select CLKSRC_OF
@@ -602,11 +693,15 @@ config MACH_S3C2416_DT
 	  Note: This is under development and not all peripherals can be supported
 	  with this machine file.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif	# CPU_S3C2416
 
 if CPU_S3C2440
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config S3C2440_CPUFREQ
 	bool "S3C2440/S3C2442 CPU Frequency scaling support"
@@ -616,6 +711,8 @@ config S3C2440_CPUFREQ
 	help
 	  CPU Frequency scaling support for S3C2440 and S3C2442 SoC CPUs.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config S3C2440_DMA
@@ -638,8 +735,13 @@ config S3C2440_XTAL_16934400
 config S3C2440_PLL_12000000
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on S3C2440_CPUFREQ && S3C2440_XTAL_12000000
 	default y if CPU_FREQ_S3C24XX_PLL
+=======
+	depends on ARM_S3C2440_CPUFREQ && S3C2440_XTAL_12000000
+	default y if S3C24XX_PLL
+>>>>>>> v3.18
 =======
 	depends on ARM_S3C2440_CPUFREQ && S3C2440_XTAL_12000000
 	default y if S3C24XX_PLL
@@ -650,8 +752,13 @@ config S3C2440_PLL_12000000
 config S3C2440_PLL_16934400
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on S3C2440_CPUFREQ && S3C2440_XTAL_16934400
 	default y if CPU_FREQ_S3C24XX_PLL
+=======
+	depends on ARM_S3C2440_CPUFREQ && S3C2440_XTAL_16934400
+	default y if S3C24XX_PLL
+>>>>>>> v3.18
 =======
 	depends on ARM_S3C2440_CPUFREQ && S3C2440_XTAL_16934400
 	default y if S3C24XX_PLL
@@ -670,9 +777,14 @@ config MACH_ANUBIS
 	bool "Simtec Electronics ANUBIS"
 	select HAVE_PATA_PLATFORM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select S3C2440_XTAL_12000000
 	select S3C24XX_DCLK
 	select S3C24XX_GPIO_EXTRA64
+=======
+	select S3C2410_COMMON_DCLK
+	select S3C2440_XTAL_12000000
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_DCLK
 	select S3C2440_XTAL_12000000
@@ -693,7 +805,11 @@ config MACH_AT2440EVB
 config MACH_MINI2440
 	bool "MINI2440 development board"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select EEPROM_AT24
+=======
+	select EEPROM_AT24 if I2C
+>>>>>>> v3.18
 =======
 	select EEPROM_AT24 if I2C
 >>>>>>> v3.18
@@ -719,10 +835,16 @@ config MACH_NEXCODER_2440
 config MACH_OSIRIS
 	bool "Simtec IM2440D20 (OSIRIS) module"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select S3C2410_IOTIMING if S3C2440_CPUFREQ
 	select S3C2440_XTAL_12000000
 	select S3C24XX_DCLK
 	select S3C24XX_GPIO_EXTRA128
+=======
+	select S3C2410_COMMON_DCLK
+	select S3C2410_IOTIMING if ARM_S3C2440_CPUFREQ
+	select S3C2440_XTAL_12000000
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_DCLK
 	select S3C2410_IOTIMING if ARM_S3C2440_CPUFREQ
@@ -739,7 +861,11 @@ config MACH_OSIRIS_DVS
 	tristate "Simtec IM2440D20 (OSIRIS) Dynamic Voltage Scaling driver"
 	depends on MACH_OSIRIS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select TPS65010
+=======
+	depends on TPS65010
+>>>>>>> v3.18
 =======
 	depends on TPS65010
 >>>>>>> v3.18
@@ -801,9 +927,15 @@ config MACH_RX1950
 	select I2C
 	select PM_H1940 if PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select S3C2410_IOTIMING if S3C2440_CPUFREQ
 	select S3C2440_XTAL_16934400
 	select S3C24XX_DCLK
+=======
+	select S3C2410_COMMON_DCLK
+	select S3C2410_IOTIMING if ARM_S3C2440_CPUFREQ
+	select S3C2440_XTAL_16934400
+>>>>>>> v3.18
 =======
 	select S3C2410_COMMON_DCLK
 	select S3C2410_IOTIMING if ARM_S3C2440_CPUFREQ
@@ -819,12 +951,15 @@ endif	# CPU_S3C2442
 if CPU_S3C2443 || CPU_S3C2416
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S3C2443_COMMON
 	bool
 	help
 	  Common code for the S3C2443 and similar processors, which includes
 	  the S3C2416 and S3C2450.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config S3C2443_DMA

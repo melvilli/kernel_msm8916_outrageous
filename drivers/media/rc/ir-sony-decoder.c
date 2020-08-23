@@ -43,6 +43,10 @@ static int ir_sony_decode(struct rc_dev *dev, struct ir_raw_event ev)
 {
 	struct sony_dec *data = &dev->raw->sony;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum rc_type protocol;
+>>>>>>> v3.18
 =======
 	enum rc_type protocol;
 >>>>>>> v3.18
@@ -136,6 +140,10 @@ static int ir_sony_decode(struct rc_dev *dev, struct ir_raw_event ev)
 			subdevice = 0;
 			function  = bitrev8((data->bits >>  4) & 0xFE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			protocol = RC_TYPE_SONY12;
+>>>>>>> v3.18
 =======
 			protocol = RC_TYPE_SONY12;
 >>>>>>> v3.18
@@ -149,6 +157,10 @@ static int ir_sony_decode(struct rc_dev *dev, struct ir_raw_event ev)
 			subdevice = 0;
 			function  = bitrev8((data->bits >>  7) & 0xFE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			protocol = RC_TYPE_SONY15;
+>>>>>>> v3.18
 =======
 			protocol = RC_TYPE_SONY15;
 >>>>>>> v3.18
@@ -162,6 +174,10 @@ static int ir_sony_decode(struct rc_dev *dev, struct ir_raw_event ev)
 			subdevice = bitrev8((data->bits >>  0) & 0xFF);
 			function  = bitrev8((data->bits >> 12) & 0xFE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			protocol = RC_TYPE_SONY20;
+>>>>>>> v3.18
 =======
 			protocol = RC_TYPE_SONY20;
 >>>>>>> v3.18
@@ -174,7 +190,11 @@ static int ir_sony_decode(struct rc_dev *dev, struct ir_raw_event ev)
 		scancode = device << 16 | subdevice << 8 | function;
 		IR_dprintk(1, "Sony(%u) scancode 0x%05x\n", data->count, scancode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(dev, scancode, 0);
+=======
+		rc_keydown(dev, protocol, scancode, 0);
+>>>>>>> v3.18
 =======
 		rc_keydown(dev, protocol, scancode, 0);
 >>>>>>> v3.18

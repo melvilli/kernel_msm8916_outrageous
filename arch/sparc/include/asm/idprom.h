@@ -21,7 +21,11 @@ struct idprom {
 
 extern struct idprom *idprom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void idprom_init(void);
+=======
+void idprom_init(void);
+>>>>>>> v3.18
 =======
 void idprom_init(void);
 >>>>>>> v3.18

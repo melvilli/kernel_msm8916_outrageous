@@ -344,6 +344,7 @@ static inline int dccp_elapsed_time_len(const u32 elapsed_time)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* FIXME: This function is currently not used anywhere */
 int dccp_insert_option_elapsed_time(struct sk_buff *skb, u32 elapsed_time)
 {
@@ -376,6 +377,8 @@ int dccp_insert_option_elapsed_time(struct sk_buff *skb, u32 elapsed_time)
 
 EXPORT_SYMBOL_GPL(dccp_insert_option_elapsed_time);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int dccp_insert_option_timestamp(struct sk_buff *skb)

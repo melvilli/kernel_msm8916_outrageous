@@ -43,7 +43,11 @@
 
 #ifdef ETHTOOL_OPS_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ethtool_ioctl(struct ifreq *ifr);
+=======
+int ethtool_ioctl(struct ifreq *ifr);
+>>>>>>> v3.18
 =======
 int ethtool_ioctl(struct ifreq *ifr);
 >>>>>>> v3.18

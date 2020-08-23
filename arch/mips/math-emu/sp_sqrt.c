@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -32,12 +36,17 @@
 
 ieee754sp ieee754sp_sqrt(ieee754sp x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include "ieee754sp.h"
 
 union ieee754sp ieee754sp_sqrt(union ieee754sp x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ix, s, q, m, t, i;
@@ -48,7 +57,11 @@ union ieee754sp ieee754sp_sqrt(union ieee754sp x)
 
 	EXPLODEXSP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -58,6 +71,7 @@ union ieee754sp ieee754sp_sqrt(union ieee754sp x)
 	switch (xc) {
 	case IEEE754_CLASS_QNAN:
 		/* sqrt(Nan) = Nan */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ieee754sp_nanxcpt(x, "sqrt");
 	case IEEE754_CLASS_SNAN:
@@ -75,6 +89,8 @@ union ieee754sp ieee754sp_sqrt(union ieee754sp x)
 		/* sqrt(+Inf) = Inf */
 		return x;
 =======
+=======
+>>>>>>> v3.18
 		return ieee754sp_nanxcpt(x);
 
 	case IEEE754_CLASS_SNAN:
@@ -94,14 +110,22 @@ union ieee754sp ieee754sp_sqrt(union ieee754sp x)
 		/* sqrt(+Inf) = Inf */
 		return x;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IEEE754_CLASS_DNORM:
 	case IEEE754_CLASS_NORM:
 		if (xs) {
 			/* sqrt(-x) = Nan */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SETCX(IEEE754_INVALID_OPERATION);
 			return ieee754sp_nanxcpt(ieee754sp_indef(), "sqrt");
+=======
+			ieee754_setcx(IEEE754_INVALID_OPERATION);
+			return ieee754sp_nanxcpt(ieee754sp_indef());
+>>>>>>> v3.18
 =======
 			ieee754_setcx(IEEE754_INVALID_OPERATION);
 			return ieee754sp_nanxcpt(ieee754sp_indef());
@@ -143,6 +167,7 @@ union ieee754sp ieee754sp_sqrt(union ieee754sp x)
 
 	if (ix != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INEXACT);
 		switch (ieee754_csr.rm) {
 		case IEEE754_RP:
@@ -150,12 +175,17 @@ union ieee754sp ieee754sp_sqrt(union ieee754sp x)
 			break;
 		case IEEE754_RN:
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INEXACT);
 		switch (ieee754_csr.rm) {
 		case FPU_CSR_RU:
 			q += 2;
 			break;
 		case FPU_CSR_RN:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			q += (q & 1);
 			break;

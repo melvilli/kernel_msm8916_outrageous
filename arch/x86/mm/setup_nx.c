@@ -6,7 +6,11 @@
 #include <asm/proto.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int disable_nx __cpuinitdata;
+=======
+static int disable_nx;
+>>>>>>> v3.18
 =======
 static int disable_nx;
 >>>>>>> v3.18
@@ -34,7 +38,11 @@ static int __init noexec_setup(char *str)
 early_param("noexec", noexec_setup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit x86_configure_nx(void)
+=======
+void x86_configure_nx(void)
+>>>>>>> v3.18
 =======
 void x86_configure_nx(void)
 >>>>>>> v3.18

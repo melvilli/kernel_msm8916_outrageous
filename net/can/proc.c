@@ -81,7 +81,10 @@ static const char rx_list_name[][8] = {
 	[RX_FIL] = "rx_fil",
 	[RX_INV] = "rx_inv",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[RX_EFF] = "rx_eff",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -393,6 +396,7 @@ static const struct file_operations can_rcvlist_proc_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void can_rcvlist_sff_proc_show_one(struct seq_file *m,
 						 struct net_device *dev,
 						 struct dev_rcv_lists *d)
@@ -404,6 +408,8 @@ static inline void can_rcvlist_sff_proc_show_one(struct seq_file *m,
 	for (i = 0; i < 0x800; i++)
 		if (!hlist_empty(&d->rx_sff[i])) {
 =======
+=======
+>>>>>>> v3.18
 static inline void can_rcvlist_proc_show_array(struct seq_file *m,
 					       struct net_device *dev,
 					       struct hlist_head *rcv_array,
@@ -415,6 +421,9 @@ static inline void can_rcvlist_proc_show_array(struct seq_file *m,
 	/* check whether at least one list is non-empty */
 	for (i = 0; i < rcv_array_sz; i++)
 		if (!hlist_empty(&rcv_array[i])) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			all_empty = 0;
 			break;
@@ -423,9 +432,15 @@ static inline void can_rcvlist_proc_show_array(struct seq_file *m,
 	if (!all_empty) {
 		can_print_recv_banner(m);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < 0x800; i++) {
 			if (!hlist_empty(&d->rx_sff[i]))
 				can_print_rcvlist(m, &d->rx_sff[i], dev);
+=======
+		for (i = 0; i < rcv_array_sz; i++) {
+			if (!hlist_empty(&rcv_array[i]))
+				can_print_rcvlist(m, &rcv_array[i], dev);
+>>>>>>> v3.18
 =======
 		for (i = 0; i < rcv_array_sz; i++) {
 			if (!hlist_empty(&rcv_array[i]))
@@ -449,6 +464,7 @@ static int can_rcvlist_sff_proc_show(struct seq_file *m, void *v)
 	/* sff receive list for 'all' CAN devices (dev == NULL) */
 	d = &can_rx_alldev_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	can_rcvlist_sff_proc_show_one(m, NULL, d);
 
 	/* sff receive list for registered CAN devices */
@@ -456,6 +472,8 @@ static int can_rcvlist_sff_proc_show(struct seq_file *m, void *v)
 		if (dev->type == ARPHRD_CAN && dev->ml_priv)
 			can_rcvlist_sff_proc_show_one(m, dev, dev->ml_priv);
 =======
+=======
+>>>>>>> v3.18
 	can_rcvlist_proc_show_array(m, NULL, d->rx_sff, ARRAY_SIZE(d->rx_sff));
 
 	/* sff receive list for registered CAN devices */
@@ -465,6 +483,9 @@ static int can_rcvlist_sff_proc_show(struct seq_file *m, void *v)
 			can_rcvlist_proc_show_array(m, dev, d->rx_sff,
 						    ARRAY_SIZE(d->rx_sff));
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -488,7 +509,10 @@ static const struct file_operations can_rcvlist_sff_proc_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int can_rcvlist_eff_proc_show(struct seq_file *m, void *v)
 {
@@ -532,6 +556,9 @@ static const struct file_operations can_rcvlist_eff_proc_fops = {
 	.release	= single_release,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * proc utility functions
@@ -573,8 +600,13 @@ void can_init_proc(void)
 	pde_rcvlist_inv = proc_create_data(CAN_PROC_RCVLIST_INV, 0644, can_dir,
 					   &can_rcvlist_proc_fops, (void *)RX_INV);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pde_rcvlist_eff = proc_create_data(CAN_PROC_RCVLIST_EFF, 0644, can_dir,
 					   &can_rcvlist_proc_fops, (void *)RX_EFF);
+=======
+	pde_rcvlist_eff = proc_create(CAN_PROC_RCVLIST_EFF, 0644, can_dir,
+				      &can_rcvlist_eff_proc_fops);
+>>>>>>> v3.18
 =======
 	pde_rcvlist_eff = proc_create(CAN_PROC_RCVLIST_EFF, 0644, can_dir,
 				      &can_rcvlist_eff_proc_fops);

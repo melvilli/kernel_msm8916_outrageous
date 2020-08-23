@@ -63,7 +63,11 @@ static inline u8 byte(const u32 x, const unsigned n)
 static const u32 rco_tab[10] = { 1, 2, 4, 8, 16, 32, 64, 128, 27, 54 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 crypto_ft_tab[4][256] = {
+=======
+__visible const u32 crypto_ft_tab[4][256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 crypto_ft_tab[4][256] = {
 >>>>>>> v3.18
@@ -331,7 +335,11 @@ __visible const u32 crypto_ft_tab[4][256] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 crypto_fl_tab[4][256] = {
+=======
+__visible const u32 crypto_fl_tab[4][256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 crypto_fl_tab[4][256] = {
 >>>>>>> v3.18
@@ -599,7 +607,11 @@ __visible const u32 crypto_fl_tab[4][256] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 crypto_it_tab[4][256] = {
+=======
+__visible const u32 crypto_it_tab[4][256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 crypto_it_tab[4][256] = {
 >>>>>>> v3.18
@@ -867,7 +879,11 @@ __visible const u32 crypto_it_tab[4][256] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 crypto_il_tab[4][256] = {
+=======
+__visible const u32 crypto_il_tab[4][256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 crypto_il_tab[4][256] = {
 >>>>>>> v3.18
@@ -1491,8 +1507,12 @@ module_exit(aes_fini);
 MODULE_DESCRIPTION("Rijndael (AES) Cipher Algorithm");
 MODULE_LICENSE("Dual BSD/GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("aes");
 MODULE_ALIAS_CRYPTO("aes-generic");
+=======
+MODULE_ALIAS("aes");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("aes");
 >>>>>>> v3.18

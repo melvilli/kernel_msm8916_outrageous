@@ -19,6 +19,10 @@
 #include <asm/cpu.h>
 #include <asm/cpu-info.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -68,6 +72,7 @@ void r4k_wait_irqoff(void)
 		__asm__(
 		"	.set	push		\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3		\n"
 		"	wait			\n"
 		"	.set	pop		\n");
@@ -76,10 +81,15 @@ void r4k_wait_irqoff(void)
 	"	.globl __pastwait	\n"
 	"__pastwait:			\n");
 =======
+=======
+>>>>>>> v3.18
 		"	.set	arch=r4000	\n"
 		"	wait			\n"
 		"	.set	pop		\n");
 	local_irq_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -93,7 +103,11 @@ static void rm7k_wait_irqoff(void)
 		__asm__(
 		"	.set	push					\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -118,7 +132,11 @@ static void au1k_wait(void)
 
 	__asm__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3			\n"
+=======
+	"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -156,7 +174,11 @@ void __init check_wait(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (c->cputype) {
+=======
+	switch (current_cpu_type()) {
+>>>>>>> v3.18
 =======
 	switch (current_cpu_type()) {
 >>>>>>> v3.18
@@ -190,6 +212,10 @@ void __init check_wait(void)
 	case CPU_CAVIUM_OCTEON_PLUS:
 	case CPU_CAVIUM_OCTEON2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CPU_CAVIUM_OCTEON3:
+>>>>>>> v3.18
 =======
 	case CPU_CAVIUM_OCTEON3:
 >>>>>>> v3.18
@@ -210,12 +236,18 @@ void __init check_wait(void)
 	case CPU_34K:
 	case CPU_1004K:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_1074K:
 	case CPU_INTERAPTIV:
 	case CPU_PROAPTIV:
 	case CPU_P5600:
 	case CPU_M5150:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cpu_wait = r4k_wait;
 		if (read_c0_config7() & MIPS_CONF7_WII)
@@ -253,10 +285,13 @@ void __init check_wait(void)
 		 */
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case CPU_RM9000:
 		if ((c->processor_id & 0x00ff) >= 0x40)
 			cpu_wait = r4k_wait;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -264,6 +299,7 @@ void __init check_wait(void)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void smtc_idle_hook(void)
 {
@@ -281,13 +317,20 @@ void arch_cpu_idle(void)
 void arch_cpu_idle(void)
 {
 >>>>>>> v3.18
+=======
+void arch_cpu_idle(void)
+{
+>>>>>>> v3.18
 	if (cpu_wait)
 		cpu_wait();
 	else
 		local_irq_enable();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_CPU_IDLE
 
@@ -299,4 +342,7 @@ int mips_cpuidle_wait_enter(struct cpuidle_device *dev,
 }
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

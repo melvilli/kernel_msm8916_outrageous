@@ -27,6 +27,10 @@
 #include <asm/kvm_ppc.h>
 #include <asm/kvm_book3s.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mmu-hash64.h>
+>>>>>>> v3.18
 =======
 #include <asm/mmu-hash64.h>
 >>>>>>> v3.18
@@ -42,7 +46,11 @@
 static void kvmppc_mmu_book3s_64_reset_msr(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvmppc_set_msr(vcpu, MSR_SF);
+=======
+	kvmppc_set_msr(vcpu, vcpu->arch.intr_msr);
+>>>>>>> v3.18
 =======
 	kvmppc_set_msr(vcpu, vcpu->arch.intr_msr);
 >>>>>>> v3.18
@@ -85,7 +93,10 @@ static struct kvmppc_slb *kvmppc_mmu_book3s_64_find_slbe(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int kvmppc_slb_sid_shift(struct kvmppc_slb *slbe)
 {
 	return slbe->tb ? SID_SHIFT_1T : SID_SHIFT;
@@ -104,6 +115,9 @@ static u64 kvmppc_slb_calc_vpn(struct kvmppc_slb *slb, gva_t eaddr)
 		((slb->vsid) << (kvmppc_slb_sid_shift(slb) - VPN_SHIFT));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 kvmppc_mmu_book3s_64_ea_to_vp(struct kvm_vcpu *vcpu, gva_t eaddr,
 					 bool data)
@@ -115,12 +129,15 @@ static u64 kvmppc_mmu_book3s_64_ea_to_vp(struct kvm_vcpu *vcpu, gva_t eaddr,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (slb->tb)
 		return (((u64)eaddr >> 12) & 0xfffffff) |
 		       (((u64)slb->vsid) << 28);
 
 	return (((u64)eaddr >> 12) & 0xffff) | (((u64)slb->vsid) << 16);
 =======
+=======
+>>>>>>> v3.18
 	return kvmppc_slb_calc_vpn(slb, eaddr);
 }
 
@@ -133,13 +150,20 @@ static int mmu_pagesize(int mmu_pg)
 		return 24;
 	}
 	return 12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int kvmppc_mmu_book3s_64_get_pagesize(struct kvmppc_slb *slbe)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return slbe->large ? 24 : 12;
+=======
+	return mmu_pagesize(slbe->base_page_size);
+>>>>>>> v3.18
 =======
 	return mmu_pagesize(slbe->base_page_size);
 >>>>>>> v3.18
@@ -148,6 +172,7 @@ static int kvmppc_mmu_book3s_64_get_pagesize(struct kvmppc_slb *slbe)
 static u32 kvmppc_mmu_book3s_64_get_page(struct kvmppc_slb *slbe, gva_t eaddr)
 {
 	int p = kvmppc_mmu_book3s_64_get_pagesize(slbe);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ((eaddr & 0xfffffff) >> p);
 }
@@ -166,6 +191,8 @@ static hva_t kvmppc_mmu_book3s_64_get_pteg(
 
 	hash = slbe->vsid ^ page;
 =======
+=======
+>>>>>>> v3.18
 
 	return ((eaddr & kvmppc_slb_offset_mask(slbe)) >> p);
 }
@@ -185,6 +212,9 @@ static hva_t kvmppc_mmu_book3s_64_get_pteg(struct kvm_vcpu *vcpu,
 	vpn = kvmppc_slb_calc_vpn(slbe, eaddr);
 	ssize = slbe->tb ? MMU_SEGSIZE_1T : MMU_SEGSIZE_256M;
 	hash = hpt_hash(vpn, kvmppc_mmu_book3s_64_get_pagesize(slbe), ssize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (second)
 		hash = ~hash;
@@ -201,15 +231,21 @@ static hva_t kvmppc_mmu_book3s_64_get_pteg(struct kvm_vcpu *vcpu,
 	/* When running a PAPR guest, SDR1 contains a HVA address instead
            of a GPA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vcpu_book3s->vcpu.arch.papr_enabled)
 		r = pteg;
 	else
 		r = gfn_to_hva(vcpu_book3s->vcpu.kvm, pteg >> PAGE_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	if (vcpu->arch.papr_enabled)
 		r = pteg;
 	else
 		r = gfn_to_hva(vcpu->kvm, pteg >> PAGE_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (kvm_is_error_hva(r))
@@ -224,6 +260,7 @@ static u64 kvmppc_mmu_book3s_64_get_avpn(struct kvmppc_slb *slbe, gva_t eaddr)
 
 	avpn = kvmppc_mmu_book3s_64_get_page(slbe, eaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	avpn |= slbe->vsid << (28 - p);
 
 	if (p < 24)
@@ -231,23 +268,31 @@ static u64 kvmppc_mmu_book3s_64_get_avpn(struct kvmppc_slb *slbe, gva_t eaddr)
 	else
 		avpn <<= 8;
 =======
+=======
+>>>>>>> v3.18
 	avpn |= slbe->vsid << (kvmppc_slb_sid_shift(slbe) - p);
 
 	if (p < 16)
 		avpn >>= ((80 - p) - 56) - 8;	/* 16 - p */
 	else
 		avpn <<= p - 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return avpn;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 				struct kvmppc_pte *gpte, bool data)
 {
 	struct kvmppc_vcpu_book3s *vcpu_book3s = to_book3s(vcpu);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return page size encoded in the second word of a HPTE, or
  * -1 for an invalid encoding for the base page size indicated by
@@ -272,11 +317,15 @@ static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 				      struct kvmppc_pte *gpte, bool data,
 				      bool iswrite)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct kvmppc_slb *slbe;
 	hva_t ptegp;
 	u64 pteg[16];
 	u64 avpn = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	u8 key = 0;
@@ -284,6 +333,8 @@ static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 	bool perm_err = false;
 	int second = 0;
 =======
+=======
+>>>>>>> v3.18
 	u64 v, r;
 	u64 v_val, v_mask;
 	u64 eaddr_mask;
@@ -292,6 +343,9 @@ static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 	bool found = false;
 	bool second = false;
 	int pgsize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ulong mp_ea = vcpu->arch.magic_page_ea;
 
@@ -299,7 +353,11 @@ static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 	if (unlikely(mp_ea) &&
 	    unlikely((eaddr & ~0xfffULL) == (mp_ea & ~0xfffULL)) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !(vcpu->arch.shared->msr & MSR_PR)) {
+=======
+	    !(kvmppc_get_msr(vcpu) & MSR_PR)) {
+>>>>>>> v3.18
 =======
 	    !(kvmppc_get_msr(vcpu) & MSR_PR)) {
 >>>>>>> v3.18
@@ -311,6 +369,10 @@ static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 		gpte->may_read = true;
 		gpte->may_write = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		gpte->page_size = MMU_PAGE_4K;
+>>>>>>> v3.18
 =======
 		gpte->page_size = MMU_PAGE_4K;
 >>>>>>> v3.18
@@ -323,6 +385,7 @@ static int kvmppc_mmu_book3s_64_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 		goto no_seg_found;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 do_second:
 	ptegp = kvmppc_mmu_book3s_64_get_pteg(vcpu_book3s, slbe, eaddr, second);
 	if (kvm_is_error_hva(ptegp))
@@ -331,6 +394,8 @@ do_second:
 	avpn = kvmppc_mmu_book3s_64_get_avpn(slbe, eaddr);
 
 =======
+=======
+>>>>>>> v3.18
 	avpn = kvmppc_mmu_book3s_64_get_avpn(slbe, eaddr);
 	v_val = avpn & HPTE_V_AVPN;
 
@@ -352,12 +417,16 @@ do_second:
 	if (kvm_is_error_hva(ptegp))
 		goto no_page_found;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if(copy_from_user(pteg, (void __user *)ptegp, sizeof(pteg))) {
 		printk(KERN_ERR "KVM can't copy data from 0x%lx!\n", ptegp);
 		goto no_page_found;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((vcpu->arch.shared->msr & MSR_PR) && slbe->Kp)
 		key = 4;
@@ -414,6 +483,8 @@ do_second:
 				"-> 0x%lx\n",
 				eaddr, avpn, gpte->vpage, gpte->raddr);
 =======
+=======
+>>>>>>> v3.18
 	if ((kvmppc_get_msr(vcpu) & MSR_PR) && slbe->Kp)
 		key = 4;
 	else if (!(kvmppc_get_msr(vcpu) & MSR_PR) && slbe->Ks)
@@ -432,12 +503,16 @@ do_second:
 				if (pgsize < 0)
 					continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			found = true;
 			break;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Update PTE R and C bits, so the guest's swapper knows we used the
 	 * page */
@@ -486,6 +561,8 @@ no_page_found:
 no_seg_found:
 
 =======
+=======
+>>>>>>> v3.18
 	if (!found) {
 		if (second)
 			goto no_page_found;
@@ -565,6 +642,9 @@ no_page_found:
 	return -ENOENT;
 
 no_seg_found:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dprintk("KVM MMU: Trigger segment fault\n");
 	return -EINVAL;
@@ -594,7 +674,11 @@ static void kvmppc_mmu_book3s_64_slbmte(struct kvm_vcpu *vcpu, u64 rs, u64 rb)
 	slbe->tb    = (rs & SLB_VSID_B_1T) ? 1 : 0;
 	slbe->esid  = slbe->tb ? esid_1t : esid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	slbe->vsid  = rs >> 12;
+=======
+	slbe->vsid  = (rs & ~SLB_VSID_B) >> (kvmppc_slb_sid_shift(slbe) - 16);
+>>>>>>> v3.18
 =======
 	slbe->vsid  = (rs & ~SLB_VSID_B) >> (kvmppc_slb_sid_shift(slbe) - 16);
 >>>>>>> v3.18
@@ -605,7 +689,10 @@ static void kvmppc_mmu_book3s_64_slbmte(struct kvm_vcpu *vcpu, u64 rs, u64 rb)
 	slbe->class = (rs & SLB_VSID_C) ? 1 : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	slbe->base_page_size = MMU_PAGE_4K;
 	if (slbe->large) {
 		if (vcpu->arch.hflags & BOOK3S_HFLAG_MULTI_PGSIZE) {
@@ -621,6 +708,9 @@ static void kvmppc_mmu_book3s_64_slbmte(struct kvm_vcpu *vcpu, u64 rs, u64 rb)
 			slbe->base_page_size = MMU_PAGE_16M;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	slbe->orige = rb & (ESID_MASK | SLB_ESID_V);
 	slbe->origv = rs;
@@ -657,6 +747,10 @@ static void kvmppc_mmu_book3s_64_slbie(struct kvm_vcpu *vcpu, u64 ea)
 {
 	struct kvmppc_slb *slbe;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 seg_size;
+>>>>>>> v3.18
 =======
 	u64 seg_size;
 >>>>>>> v3.18
@@ -672,14 +766,20 @@ static void kvmppc_mmu_book3s_64_slbie(struct kvm_vcpu *vcpu, u64 ea)
 
 	slbe->valid = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	kvmppc_mmu_map_segment(vcpu, ea);
 =======
+=======
+>>>>>>> v3.18
 	slbe->orige = 0;
 	slbe->origv = 0;
 
 	seg_size = 1ull << kvmppc_slb_sid_shift(slbe);
 	kvmppc_mmu_flush_segment(vcpu, ea & ~(seg_size - 1), seg_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -690,11 +790,14 @@ static void kvmppc_mmu_book3s_64_slbia(struct kvm_vcpu *vcpu)
 	dprintk("KVM MMU: slbia()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i < vcpu->arch.slb_nr; i++)
 		vcpu->arch.slb[i].valid = false;
 
 	if (vcpu->arch.shared->msr & MSR_IR) {
 =======
+=======
+>>>>>>> v3.18
 	for (i = 1; i < vcpu->arch.slb_nr; i++) {
 		vcpu->arch.slb[i].valid = false;
 		vcpu->arch.slb[i].orige = 0;
@@ -702,6 +805,9 @@ static void kvmppc_mmu_book3s_64_slbia(struct kvm_vcpu *vcpu)
 	}
 
 	if (kvmppc_get_msr(vcpu) & MSR_IR) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kvmppc_mmu_flush_segments(vcpu);
 		kvmppc_mmu_map_segment(vcpu, kvmppc_get_pc(vcpu));
@@ -753,6 +859,7 @@ static void kvmppc_mmu_book3s_64_tlbie(struct kvm_vcpu *vcpu, ulong va,
 {
 	u64 mask = 0xFFFFFFFFFULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dprintk("KVM MMU: tlbie(0x%lx)\n", va);
 
@@ -762,6 +869,8 @@ static void kvmppc_mmu_book3s_64_tlbie(struct kvm_vcpu *vcpu, ulong va,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	long i;
 	struct kvm_vcpu *v;
 
@@ -801,6 +910,9 @@ static int segment_contains_magic_page(struct kvm_vcpu *vcpu, ulong esid)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 					     u64 *vsid)
@@ -809,6 +921,7 @@ static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 	struct kvmppc_slb *slb;
 	u64 gvsid = esid;
 	ulong mp_ea = vcpu->arch.magic_page_ea;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (vcpu->arch.shared->msr & (MSR_DR|MSR_IR)) {
@@ -827,6 +940,8 @@ static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 	case MSR_DR:
 		*vsid = VSID_REAL_DR | gvsid;
 =======
+=======
+>>>>>>> v3.18
 	int pagesize = MMU_PAGE_64K;
 	u64 msr = kvmppc_get_msr(vcpu);
 
@@ -852,6 +967,9 @@ static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 		break;
 	case MSR_DR:
 		gvsid |= VSID_REAL_DR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case MSR_DR|MSR_IR:
@@ -859,7 +977,10 @@ static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 			goto no_slb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*vsid = gvsid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -869,10 +990,13 @@ static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vcpu->arch.shared->msr & MSR_PR)
 		*vsid |= VSID_PR;
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_64K_PAGES
 	/*
 	 * Mark this as a 64k segment if the host is using
@@ -890,6 +1014,9 @@ static int kvmppc_mmu_book3s_64_esid_to_vsid(struct kvm_vcpu *vcpu, ulong esid,
 		gvsid |= VSID_PR;
 
 	*vsid = gvsid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -898,7 +1025,11 @@ no_slb:
 	if (unlikely(mp_ea) &&
 	    unlikely(esid == (mp_ea >> SID_SHIFT)) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !(vcpu->arch.shared->msr & MSR_PR)) {
+=======
+	    !(kvmppc_get_msr(vcpu) & MSR_PR)) {
+>>>>>>> v3.18
 =======
 	    !(kvmppc_get_msr(vcpu) & MSR_PR)) {
 >>>>>>> v3.18

@@ -50,7 +50,11 @@ struct lb_priv_ex {
 	struct team *team;
 	struct lb_port_mapping tx_hash_to_port_mapping[LB_TX_HASHTABLE_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sock_fprog *orig_fprog;
+=======
+	struct sock_fprog_kern *orig_fprog;
+>>>>>>> v3.18
 =======
 	struct sock_fprog_kern *orig_fprog;
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ struct lb_priv_ex {
 
 struct lb_priv {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_filter __rcu *fp;
+=======
+	struct bpf_prog __rcu *fp;
+>>>>>>> v3.18
 =======
 	struct bpf_prog __rcu *fp;
 >>>>>>> v3.18
@@ -121,9 +129,14 @@ static struct team_port *lb_hash_select_tx_port(struct team *team,
 						unsigned char hash)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int port_index;
 
 	port_index = hash % team->en_port_count;
+=======
+	int port_index = team_num_to_port_index(team, hash);
+
+>>>>>>> v3.18
 =======
 	int port_index = team_num_to_port_index(team, hash);
 
@@ -189,7 +202,11 @@ static unsigned int lb_get_skb_hash(struct lb_priv *lb_priv,
 				    struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_filter *fp;
+=======
+	struct bpf_prog *fp;
+>>>>>>> v3.18
 =======
 	struct bpf_prog *fp;
 >>>>>>> v3.18
@@ -200,7 +217,11 @@ static unsigned int lb_get_skb_hash(struct lb_priv *lb_priv,
 	if (unlikely(!fp))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lhash = SK_RUN_FILTER(fp, skb);
+=======
+	lhash = BPF_PROG_RUN(fp, skb);
+>>>>>>> v3.18
 =======
 	lhash = BPF_PROG_RUN(fp, skb);
 >>>>>>> v3.18
@@ -264,22 +285,32 @@ static int lb_bpf_func_get(struct team *team, struct team_gsetter_ctx *ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __fprog_create(struct sock_fprog **pfprog, u32 data_len,
 			  const void *data)
 {
 	struct sock_fprog *fprog;
 =======
+=======
+>>>>>>> v3.18
 static int __fprog_create(struct sock_fprog_kern **pfprog, u32 data_len,
 			  const void *data)
 {
 	struct sock_fprog_kern *fprog;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sock_filter *filter = (struct sock_filter *) data;
 
 	if (data_len % sizeof(struct sock_filter))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fprog = kmalloc(sizeof(struct sock_fprog), GFP_KERNEL);
+=======
+	fprog = kmalloc(sizeof(*fprog), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	fprog = kmalloc(sizeof(*fprog), GFP_KERNEL);
 >>>>>>> v3.18
@@ -296,7 +327,11 @@ static int __fprog_create(struct sock_fprog_kern **pfprog, u32 data_len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __fprog_destroy(struct sock_fprog *fprog)
+=======
+static void __fprog_destroy(struct sock_fprog_kern *fprog)
+>>>>>>> v3.18
 =======
 static void __fprog_destroy(struct sock_fprog_kern *fprog)
 >>>>>>> v3.18
@@ -309,9 +344,15 @@ static int lb_bpf_func_set(struct team *team, struct team_gsetter_ctx *ctx)
 {
 	struct lb_priv *lb_priv = get_lb_priv(team);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_filter *fp = NULL;
 	struct sk_filter *orig_fp;
 	struct sock_fprog *fprog = NULL;
+=======
+	struct bpf_prog *fp = NULL;
+	struct bpf_prog *orig_fp = NULL;
+	struct sock_fprog_kern *fprog = NULL;
+>>>>>>> v3.18
 =======
 	struct bpf_prog *fp = NULL;
 	struct bpf_prog *orig_fp = NULL;
@@ -325,7 +366,11 @@ static int lb_bpf_func_set(struct team *team, struct team_gsetter_ctx *ctx)
 		if (err)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = sk_unattached_filter_create(&fp, fprog);
+=======
+		err = bpf_prog_create(&fp, fprog);
+>>>>>>> v3.18
 =======
 		err = bpf_prog_create(&fp, fprog);
 >>>>>>> v3.18
@@ -341,7 +386,10 @@ static int lb_bpf_func_set(struct team *team, struct team_gsetter_ctx *ctx)
 		orig_fp = rcu_dereference_protected(lb_priv->fp,
 						lockdep_is_held(&team->lock));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk_unattached_filter_destroy(orig_fp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -349,12 +397,18 @@ static int lb_bpf_func_set(struct team *team, struct team_gsetter_ctx *ctx)
 	rcu_assign_pointer(lb_priv->fp, fp);
 	lb_priv->ex->orig_fprog = fprog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (orig_fp) {
 		synchronize_rcu();
 		bpf_prog_destroy(orig_fp);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -491,9 +545,15 @@ static void __lb_one_cpu_stats_add(struct lb_stats *acc_stats,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(syncp);
 		tmp.tx_bytes = cpu_stats->tx_bytes;
 	} while (u64_stats_fetch_retry_bh(syncp, start));
+=======
+		start = u64_stats_fetch_begin_irq(syncp);
+		tmp.tx_bytes = cpu_stats->tx_bytes;
+	} while (u64_stats_fetch_retry_irq(syncp, start));
+>>>>>>> v3.18
 =======
 		start = u64_stats_fetch_begin_irq(syncp);
 		tmp.tx_bytes = cpu_stats->tx_bytes;
@@ -635,7 +695,11 @@ static int lb_init(struct team *team)
 	struct lb_priv *lb_priv = get_lb_priv(team);
 	lb_select_tx_port_func_t *func;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	int i, err;
+>>>>>>> v3.18
 =======
 	int i, err;
 >>>>>>> v3.18
@@ -657,7 +721,10 @@ static int lb_init(struct team *team)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(i) {
 		struct lb_pcpu_stats *team_lb_stats;
 		team_lb_stats = per_cpu_ptr(lb_priv->pcpu_stats, i);
@@ -665,6 +732,9 @@ static int lb_init(struct team *team)
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_DELAYED_WORK(&lb_priv->ex->stats.refresh_dw, lb_stats_refresh);
 

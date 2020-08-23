@@ -63,8 +63,13 @@ static int vxge_ethtool_gset(struct net_device *dev, struct ethtool_cmd *info)
 		info->duplex = DUPLEX_FULL;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(info, -1);
 		info->duplex = -1;
+=======
+		ethtool_cmd_speed_set(info, SPEED_UNKNOWN);
+		info->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(info, SPEED_UNKNOWN);
 		info->duplex = DUPLEX_UNKNOWN;
@@ -1134,7 +1139,11 @@ static const struct ethtool_ops vxge_ethtool_ops = {
 void vxge_initialize_ethtool_ops(struct net_device *ndev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &vxge_ethtool_ops);
+=======
+	ndev->ethtool_ops = &vxge_ethtool_ops;
+>>>>>>> v3.18
 =======
 	ndev->ethtool_ops = &vxge_ethtool_ops;
 >>>>>>> v3.18

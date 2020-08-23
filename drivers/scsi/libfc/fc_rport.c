@@ -927,7 +927,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool
 fc_rport_compatible_roles(struct fc_lport *lport, struct fc_rport_priv *rdata)
 {
@@ -942,6 +945,9 @@ fc_rport_compatible_roles(struct fc_lport *lport, struct fc_rport_priv *rdata)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * fc_rport_enter_plogi() - Send Port Login (PLOGI) request
@@ -956,13 +962,19 @@ static void fc_rport_enter_plogi(struct fc_rport_priv *rdata)
 	struct fc_frame *fp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!fc_rport_compatible_roles(lport, rdata)) {
 		FC_RPORT_DBG(rdata, "PLOGI suppressed for incompatible role\n");
 		fc_rport_state_enter(rdata, RPORT_ST_PLOGI_WAIT);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FC_RPORT_DBG(rdata, "Port entered PLOGI state from %s state\n",
 		     fc_rport_state(rdata));
@@ -1673,7 +1685,10 @@ static void fc_rport_recv_plogi_req(struct fc_lport *lport,
 		goto reject;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!fc_rport_compatible_roles(lport, rdata)) {
 		FC_RPORT_DBG(rdata, "Received PLOGI for incompatible role\n");
 		mutex_unlock(&rdata->rp_mutex);
@@ -1681,6 +1696,9 @@ static void fc_rport_recv_plogi_req(struct fc_lport *lport,
 		rjt_data.explan = ELS_EXPL_NONE;
 		goto reject;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1715,7 +1733,11 @@ reject:
  * @rx_fp: The PRLI request frame
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Locking Note: The rport lock is exected to be held before calling
+=======
+ * Locking Note: The rport lock is expected to be held before calling
+>>>>>>> v3.18
 =======
  * Locking Note: The rport lock is expected to be held before calling
 >>>>>>> v3.18
@@ -1838,7 +1860,11 @@ drop:
  * @rx_fp: The PRLO request frame
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Locking Note: The rport lock is exected to be held before calling
+=======
+ * Locking Note: The rport lock is expected to be held before calling
+>>>>>>> v3.18
 =======
  * Locking Note: The rport lock is expected to be held before calling
 >>>>>>> v3.18
@@ -1913,7 +1939,11 @@ drop:
  * @fp:	   The LOGO request frame
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Locking Note: The rport lock is exected to be held before calling
+=======
+ * Locking Note: The rport lock is expected to be held before calling
+>>>>>>> v3.18
 =======
  * Locking Note: The rport lock is expected to be held before calling
 >>>>>>> v3.18

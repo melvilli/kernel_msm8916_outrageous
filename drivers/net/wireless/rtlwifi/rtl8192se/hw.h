@@ -75,8 +75,11 @@ void rtl92se_set_key(struct ieee80211_hw *hw,
 void rtl92se_suspend(struct ieee80211_hw *hw);
 void rtl92se_resume(struct ieee80211_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92se_allow_all_destaddr(struct ieee80211_hw *hw,
 				bool allow_all_da, bool write_into_reg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

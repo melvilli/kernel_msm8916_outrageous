@@ -62,6 +62,10 @@ typedef tilegx_bundle_bits tile_bundle_bits;
 #define TILE_LOG2_BUNDLE_ALIGNMENT_IN_BYTES \
   TILEGX_LOG2_BUNDLE_ALIGNMENT_IN_BYTES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TILE_BPT_BUNDLE TILEGX_BPT_BUNDLE
+>>>>>>> v3.18
 =======
 #define TILE_BPT_BUNDLE TILEGX_BPT_BUNDLE
 >>>>>>> v3.18

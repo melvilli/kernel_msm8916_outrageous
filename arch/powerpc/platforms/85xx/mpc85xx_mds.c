@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2006-2010, 2012 Freescale Semiconductor, Inc.
+=======
+ * Copyright (C) 2006-2010, 2012-2013 Freescale Semiconductor, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2006-2010, 2012-2013 Freescale Semiconductor, Inc.
 >>>>>>> v3.18
@@ -243,6 +247,7 @@ static void __init mpc85xx_mds_qe_init(void)
 	struct device_node *np;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np = of_find_compatible_node(NULL, NULL, "fsl,qe");
 	if (!np) {
 		np = of_find_node_by_name(NULL, "qe");
@@ -269,6 +274,10 @@ static void __init mpc85xx_mds_qe_init(void)
 			par_io_of_config(ucc);
 	}
 
+=======
+	mpc85xx_qe_init();
+	mpc85xx_qe_par_io_init();
+>>>>>>> v3.18
 =======
 	mpc85xx_qe_init();
 	mpc85xx_qe_par_io_init();
@@ -426,6 +435,10 @@ define_machine(mpc8568_mds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -451,6 +464,10 @@ define_machine(mpc8569_mds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -477,6 +494,10 @@ define_machine(p1021_mds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

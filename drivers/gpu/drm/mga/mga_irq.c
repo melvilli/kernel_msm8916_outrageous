@@ -48,7 +48,11 @@ u32 mga_get_vblank_counter(struct drm_device *dev, int crtc)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t mga_driver_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t mga_driver_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t mga_driver_irq_handler(int irq, void *arg)
 >>>>>>> v3.18
@@ -84,7 +88,11 @@ irqreturn_t mga_driver_irq_handler(int irq, void *arg)
 
 		atomic_inc(&dev_priv->last_fence_retired);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_WAKEUP(&dev_priv->fence_queue);
+=======
+		wake_up(&dev_priv->fence_queue);
+>>>>>>> v3.18
 =======
 		wake_up(&dev_priv->fence_queue);
 >>>>>>> v3.18
@@ -137,7 +145,11 @@ int mga_driver_fence_wait(struct drm_device *dev, unsigned int *sequence)
 	 * using fences.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_WAIT_ON(ret, dev_priv->fence_queue, 3 * DRM_HZ,
+=======
+	DRM_WAIT_ON(ret, dev_priv->fence_queue, 3 * HZ,
+>>>>>>> v3.18
 =======
 	DRM_WAIT_ON(ret, dev_priv->fence_queue, 3 * HZ,
 >>>>>>> v3.18
@@ -164,7 +176,11 @@ int mga_driver_irq_postinstall(struct drm_device *dev)
 	drm_mga_private_t *dev_priv = (drm_mga_private_t *) dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_INIT_WAITQUEUE(&dev_priv->fence_queue);
+=======
+	init_waitqueue_head(&dev_priv->fence_queue);
+>>>>>>> v3.18
 =======
 	init_waitqueue_head(&dev_priv->fence_queue);
 >>>>>>> v3.18
@@ -186,7 +202,11 @@ void mga_driver_irq_uninstall(struct drm_device *dev)
 	MGA_WRITE(MGA_IEN, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->irq_enabled = 0;
+=======
+	dev->irq_enabled = false;
+>>>>>>> v3.18
 =======
 	dev->irq_enabled = false;
 >>>>>>> v3.18

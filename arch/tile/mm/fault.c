@@ -35,6 +35,10 @@
 #include <linux/syscalls.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kdebug.h>
+>>>>>>> v3.18
 =======
 #include <linux/kdebug.h>
 >>>>>>> v3.18
@@ -127,10 +131,16 @@ static inline pmd_t *vmalloc_sync_one(pgd_t *pgd, unsigned long address)
 	if (!pmd_present(*pmd_k))
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pmd_present(*pmd)) {
 		set_pmd(pmd, *pmd_k);
 		arch_flush_lazy_mmu_mode();
 	} else
+=======
+	if (!pmd_present(*pmd))
+		set_pmd(pmd, *pmd_k);
+	else
+>>>>>>> v3.18
 =======
 	if (!pmd_present(*pmd))
 		set_pmd(pmd, *pmd_k);
@@ -160,8 +170,11 @@ static inline int vmalloc_fault(pgd_t *pgd, unsigned long address)
 	if (!pmd_k)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pmd_huge(*pmd_k))
 		return 0;   /* support TILE huge_vmap() API */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pte_k = pte_offset_kernel(pmd_k, address);
@@ -296,7 +309,11 @@ static int handle_page_fault(struct pt_regs *regs,
 	flags = FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_kernel_mode = (EX1_PL(regs->ex1) != USER_PL);
+=======
+	is_kernel_mode = !user_mode(regs);
+>>>>>>> v3.18
 =======
 	is_kernel_mode = !user_mode(regs);
 >>>>>>> v3.18
@@ -464,8 +481,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)
@@ -491,6 +511,7 @@ good_area:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_TILE_DMA() || CHIP_HAS_SN_PROC()
 	/*
 	 * If this was an asynchronous fault,
@@ -503,12 +524,18 @@ good_area:
 	/* If this was a DMA TLB fault, restart the DMA engine. */
 	switch (fault_num) {
 >>>>>>> v3.18
+=======
+#if CHIP_HAS_TILE_DMA()
+	/* If this was a DMA TLB fault, restart the DMA engine. */
+	switch (fault_num) {
+>>>>>>> v3.18
 	case INT_DMATLB_MISS:
 	case INT_DMATLB_MISS_DWNCL:
 	case INT_DMATLB_ACCESS:
 	case INT_DMATLB_ACCESS_DWNCL:
 		__insn_mtspr(SPR_DMA_CTR, SPR_DMA_CTR__REQUEST_MASK);
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 #if CHIP_HAS_SN_PROC()
@@ -519,6 +546,8 @@ good_area:
 			     ~SPR_SNCTL__FRZPROC_MASK);
 		break;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -751,9 +780,12 @@ void do_page_fault(struct pt_regs *regs, int fault_num,
 	int is_page_fault;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This case should have been handled by do_page_fault_ics(). */
 	BUG_ON(write & ~1);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KPROBES
 	/*
 	 * This is to notify the fault handler of the kprobes.  The
@@ -808,6 +840,9 @@ void do_page_fault(struct pt_regs *regs, int fault_num,
 	/* This case should have been handled by do_page_fault_ics(). */
 	BUG_ON(write & ~1);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if CHIP_HAS_TILE_DMA()
@@ -838,10 +873,13 @@ void do_page_fault(struct pt_regs *regs, int fault_num,
 	case INT_DMATLB_MISS_DWNCL:
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	case INT_SNITLB_MISS:
 	case INT_SNITLB_MISS_DWNCL:
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		is_page_fault = 1;
@@ -860,8 +898,13 @@ void do_page_fault(struct pt_regs *regs, int fault_num,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_TILE_DMA() || CHIP_HAS_SN_PROC()
 	if (EX1_PL(regs->ex1) != USER_PL) {
+=======
+#if CHIP_HAS_TILE_DMA()
+	if (!user_mode(regs)) {
+>>>>>>> v3.18
 =======
 #if CHIP_HAS_TILE_DMA()
 	if (!user_mode(regs)) {
@@ -877,12 +920,15 @@ void do_page_fault(struct pt_regs *regs, int fault_num,
 			break;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 		case INT_SNITLB_MISS:
 		case INT_SNITLB_MISS_DWNCL:
 			async = &current->thread.sn_async_tlb;
 			break;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -918,6 +964,7 @@ void do_page_fault(struct pt_regs *regs, int fault_num,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_TILE_DMA() || CHIP_HAS_SN_PROC()
 /*
  * Check an async_tlb structure to see if a deferred fault is waiting,
@@ -927,6 +974,8 @@ static void handle_async_page_fault(struct pt_regs *regs,
 				    struct async_tlb *async)
 {
 =======
+=======
+>>>>>>> v3.18
 #if CHIP_HAS_TILE_DMA()
 /*
  * This routine effectively re-issues asynchronous page faults
@@ -943,6 +992,9 @@ void do_async_page_fault(struct pt_regs *regs)
 	 */
 	clear_thread_flag(TIF_ASYNC_TLB);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (async->fault_num) {
 		/*
@@ -957,6 +1009,7 @@ void do_async_page_fault(struct pt_regs *regs)
 				  async->address, async->is_write);
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -983,6 +1036,9 @@ void do_async_page_fault(struct pt_regs *regs)
 =======
 #endif /* CHIP_HAS_TILE_DMA() */
 >>>>>>> v3.18
+=======
+#endif /* CHIP_HAS_TILE_DMA() */
+>>>>>>> v3.18
 
 
 void vmalloc_sync_all(void)
@@ -990,7 +1046,12 @@ void vmalloc_sync_all(void)
 #ifdef __tilegx__
 	/* Currently all L1 kernel pmd's are static and shared. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(pgd_index(VMALLOC_END) != pgd_index(VMALLOC_START));
+=======
+	BUILD_BUG_ON(pgd_index(VMALLOC_END - PAGE_SIZE) !=
+		     pgd_index(VMALLOC_START));
+>>>>>>> v3.18
 =======
 	BUILD_BUG_ON(pgd_index(VMALLOC_END - PAGE_SIZE) !=
 		     pgd_index(VMALLOC_START));

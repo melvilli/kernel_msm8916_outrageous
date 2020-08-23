@@ -29,6 +29,10 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -103,12 +107,15 @@ static struct ehea_bcmc_reg_array ehea_bcmc_regs;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ehea_probe_adapter(struct platform_device *dev,
 			      const struct of_device_id *id);
 
 static int ehea_remove(struct platform_device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 static int ehea_probe_adapter(struct platform_device *dev);
 
 static int ehea_remove(struct platform_device *dev);
@@ -126,6 +133,9 @@ static struct of_device_id ehea_module_device_table[] = {
 };
 MODULE_DEVICE_TABLE(of, ehea_module_device_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct of_device_id ehea_device_table[] = {
 	{
@@ -135,9 +145,14 @@ static struct of_device_id ehea_device_table[] = {
 	{},
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DEVICE_TABLE(of, ehea_device_table);
 
 static struct of_platform_driver ehea_driver = {
+=======
+
+static struct platform_driver ehea_driver = {
+>>>>>>> v3.18
 =======
 
 static struct platform_driver ehea_driver = {
@@ -509,7 +524,11 @@ static int ehea_refill_rq_def(struct ehea_port_res *pr,
 		tmp_addr = ehea_map_vaddr(skb->data);
 		if (tmp_addr == -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
+=======
+			dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -879,7 +898,11 @@ static struct ehea_cqe *ehea_proc_cqes(struct ehea_port_res *pr, int my_quota)
 			index = EHEA_BMASK_GET(EHEA_WR_ID_INDEX, cqe->wr_id);
 			skb = pr->sq_skba.arr[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
+=======
+			dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -1324,7 +1347,11 @@ static int ehea_reg_interrupts(struct net_device *dev)
 	ret = ibmebus_request_irq(port->qp_eq->attr.ist1,
 				  ehea_qp_aff_irq_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  IRQF_DISABLED, port->int_aff_name, port);
+=======
+				  0, port->int_aff_name, port);
+>>>>>>> v3.18
 =======
 				  0, port->int_aff_name, port);
 >>>>>>> v3.18
@@ -1346,8 +1373,12 @@ static int ehea_reg_interrupts(struct net_device *dev)
 		ret = ibmebus_request_irq(pr->eq->attr.ist1,
 					  ehea_recv_irq_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  IRQF_DISABLED, pr->int_send_name,
 					  pr);
+=======
+					  0, pr->int_send_name, pr);
+>>>>>>> v3.18
 =======
 					  0, pr->int_send_name, pr);
 >>>>>>> v3.18
@@ -2029,7 +2060,11 @@ static void xmit_common(struct sk_buff *skb, struct ehea_swqe *swqe)
 	swqe->tx_control |= EHEA_SWQE_IMM_DATA_PRESENT | EHEA_SWQE_CRC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->protocol != htons(ETH_P_IP))
+=======
+	if (vlan_get_protocol(skb) != htons(ETH_P_IP))
+>>>>>>> v3.18
 =======
 	if (vlan_get_protocol(skb) != htons(ETH_P_IP))
 >>>>>>> v3.18
@@ -2084,7 +2119,11 @@ static void ehea_xmit3(struct sk_buff *skb, struct net_device *dev,
 
 	swqe->immediate_data_length = skb->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -3305,8 +3344,12 @@ static void ehea_remove_device_sysfs(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ehea_probe_adapter(struct platform_device *dev,
 			      const struct of_device_id *id)
+=======
+static int ehea_probe_adapter(struct platform_device *dev)
+>>>>>>> v3.18
 =======
 static int ehea_probe_adapter(struct platform_device *dev)
 >>>>>>> v3.18
@@ -3322,7 +3365,11 @@ static int ehea_probe_adapter(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter = kzalloc(sizeof(*adapter), GFP_KERNEL);
+=======
+	adapter = devm_kzalloc(&dev->dev, sizeof(*adapter), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	adapter = devm_kzalloc(&dev->dev, sizeof(*adapter), GFP_KERNEL);
 >>>>>>> v3.18
@@ -3351,7 +3398,11 @@ static int ehea_probe_adapter(struct platform_device *dev)
 	adapter->pd = EHEA_PD_ID;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&dev->dev, adapter);
+=======
+	platform_set_drvdata(dev, adapter);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(dev, adapter);
 >>>>>>> v3.18
@@ -3388,7 +3439,11 @@ static int ehea_probe_adapter(struct platform_device *dev)
 
 	ret = ibmebus_request_irq(adapter->neq->attr.ist1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  ehea_interrupt_neq, IRQF_DISABLED,
+=======
+				  ehea_interrupt_neq, 0,
+>>>>>>> v3.18
 =======
 				  ehea_interrupt_neq, 0,
 >>>>>>> v3.18
@@ -3420,7 +3475,10 @@ out_kill_eq:
 out_free_ad:
 	list_del(&adapter->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(adapter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3433,7 +3491,11 @@ out:
 static int ehea_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ehea_adapter *adapter = dev_get_drvdata(&dev->dev);
+=======
+	struct ehea_adapter *adapter = platform_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct ehea_adapter *adapter = platform_get_drvdata(dev);
 >>>>>>> v3.18
@@ -3454,7 +3516,10 @@ static int ehea_remove(struct platform_device *dev)
 	ehea_remove_adapter_mr(adapter);
 	list_del(&adapter->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(adapter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

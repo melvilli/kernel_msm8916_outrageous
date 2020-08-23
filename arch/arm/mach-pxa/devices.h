@@ -28,6 +28,12 @@ extern struct platform_device pxa27x_device_ssp1;
 extern struct platform_device pxa27x_device_ssp2;
 extern struct platform_device pxa27x_device_ssp3;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct platform_device pxa3xx_device_ssp1;
+extern struct platform_device pxa3xx_device_ssp2;
+extern struct platform_device pxa3xx_device_ssp3;
+>>>>>>> v3.18
 =======
 extern struct platform_device pxa3xx_device_ssp1;
 extern struct platform_device pxa3xx_device_ssp2;

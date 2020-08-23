@@ -4,6 +4,7 @@ This isn't an exhaustive list, but you should add new prefixes to it before
 using them to avoid name-space collisions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ad	Avionic Design GmbH
 adi	Analog Devices, Inc.
 aeroflexgaisler	Aeroflex Gaisler AB
@@ -59,6 +60,8 @@ picochip	Picochip Ltd
 powervr	PowerVR (deprecated, use img)
 qcom	Qualcomm Technologies, Inc
 =======
+=======
+>>>>>>> v3.18
 abilis	Abilis Systems
 active-semi	Active-Semi International Inc
 ad	Avionic Design GmbH
@@ -178,11 +181,15 @@ qcom	Qualcomm Technologies, Inc
 qnap	QNAP Systems, Inc.
 radxa	Radxa
 raidsonic	RaidSonic Technology GmbH
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ralink	Mediatek/Ralink Technology Corp.
 ramtron	Ramtron International
 realtek Realtek Semiconductor Corp.
 renesas	Renesas Electronics Corporation
+<<<<<<< HEAD
 <<<<<<< HEAD
 samsung	Samsung Semiconductor
 sbs	Smart Battery System
@@ -209,6 +216,8 @@ wm	Wondermedia Technologies, Inc.
 winbond Winbond Electronics corp.
 xlnx	Xilinx
 =======
+=======
+>>>>>>> v3.18
 ricoh	Ricoh Co. Ltd.
 rockchip	Fuzhou Rockchip Electronics Co., Ltd
 samsung	Samsung Semiconductor
@@ -251,4 +260,7 @@ xillybus	Xillybus Ltd.
 xlnx	Xilinx
 zyxel	ZyXEL Communications Corp.
 zarlink	Zarlink Semiconductor
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

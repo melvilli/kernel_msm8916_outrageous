@@ -83,7 +83,10 @@
 #include <linux/input.h>
 #include <linux/serio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -133,7 +136,11 @@ static void vsxxxaa_drop_bytes(struct vsxxxaa *mouse, int num)
 		mouse->count = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memmove(mouse->buf, mouse->buf + num - 1, BUFLEN - num);
+=======
+		memmove(mouse->buf, mouse->buf + num, BUFLEN - num);
+>>>>>>> v3.18
 =======
 		memmove(mouse->buf, mouse->buf + num, BUFLEN - num);
 >>>>>>> v3.18

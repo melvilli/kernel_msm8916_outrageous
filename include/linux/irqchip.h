@@ -12,13 +12,19 @@
 #define _LINUX_IRQCHIP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void irqchip_init(void);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IRQCHIP
 void irqchip_init(void);
 #else
 static inline void irqchip_init(void) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

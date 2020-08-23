@@ -405,6 +405,7 @@
 /* MIB */
 #define ALX_MIB_BASE					0x1700
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ALX_MIB_RX_OK					(ALX_MIB_BASE + 0)
 #define ALX_MIB_RX_ERRADDR				(ALX_MIB_BASE + 92)
 #define ALX_MIB_TX_OK					(ALX_MIB_BASE + 96)
@@ -415,6 +416,8 @@
 #define ALX_TX_STATS_BIN				ALX_MIB_TX_OK
 #define ALX_TX_STATS_END				ALX_MIB_TX_MCCNT
 =======
+=======
+>>>>>>> v3.18
 
 #define ALX_MIB_RX_OK					(ALX_MIB_BASE + 0)
 #define ALX_MIB_RX_BCAST				(ALX_MIB_BASE + 4)
@@ -468,6 +471,9 @@
 #define ALX_MIB_TX_MCCNT				(ALX_MIB_BASE + 192)
 #define ALX_MIB_UPDATE					(ALX_MIB_BASE + 196)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ALX_ISR						0x1600

@@ -81,7 +81,10 @@ static char lancestr[] = "LANCE";
 #include <linux/string.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/crc32.h>
@@ -1474,7 +1477,11 @@ no_link_test:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, lp);
+=======
+	platform_set_drvdata(op, lp);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, lp);
 >>>>>>> v3.18
@@ -1509,7 +1516,11 @@ static int sunlance_sbus_probe(struct platform_device *op)
 static int sunlance_sbus_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lance_private *lp = dev_get_drvdata(&op->dev);
+=======
+	struct lance_private *lp = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct lance_private *lp = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1522,8 +1533,11 @@ static int sunlance_sbus_remove(struct platform_device *op)
 	free_netdev(net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

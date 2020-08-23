@@ -12,7 +12,11 @@
 #include <linux/time.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -397,7 +401,11 @@ static int show_journal(struct seq_file *m, void *unused)
 static int r_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, PDE_DATA(inode),
+=======
+	return single_open(file, PDE_DATA(inode), 
+>>>>>>> v3.18
 =======
 	return single_open(file, PDE_DATA(inode), 
 >>>>>>> v3.18
@@ -428,7 +436,11 @@ int reiserfs_proc_info_init(struct super_block *sb)
 
 	/* Some block devices use /'s */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(b, reiserfs_bdevname(sb), BDEVNAME_SIZE);
+=======
+	strlcpy(b, sb->s_id, BDEVNAME_SIZE);
+>>>>>>> v3.18
 =======
 	strlcpy(b, sb->s_id, BDEVNAME_SIZE);
 >>>>>>> v3.18
@@ -462,7 +474,11 @@ int reiserfs_proc_info_done(struct super_block *sb)
 
 		/* Some block devices use /'s */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strlcpy(b, reiserfs_bdevname(sb), BDEVNAME_SIZE);
+=======
+		strlcpy(b, sb->s_id, BDEVNAME_SIZE);
+>>>>>>> v3.18
 =======
 		strlcpy(b, sb->s_id, BDEVNAME_SIZE);
 >>>>>>> v3.18

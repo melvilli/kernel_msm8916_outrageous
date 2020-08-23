@@ -768,7 +768,11 @@ static struct sunqec *get_qec(struct platform_device *child)
 	struct sunqec *qecp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qecp = dev_get_drvdata(&op->dev);
+=======
+	qecp = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	qecp = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -806,7 +810,11 @@ static struct sunqec *get_qec(struct platform_device *child)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_set_drvdata(&op->dev, qecp);
+=======
+			platform_set_drvdata(op, qecp);
+>>>>>>> v3.18
 =======
 			platform_set_drvdata(op, qecp);
 >>>>>>> v3.18
@@ -852,7 +860,11 @@ static int qec_ether_init(struct platform_device *op)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, idprom->id_ethaddr, 6);
+=======
+	memcpy(dev->dev_addr, idprom->id_ethaddr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, idprom->id_ethaddr, ETH_ALEN);
 >>>>>>> v3.18
@@ -915,7 +927,11 @@ static int qec_ether_init(struct platform_device *op)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, qe);
+=======
+	platform_set_drvdata(op, qe);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, qe);
 >>>>>>> v3.18
@@ -951,7 +967,11 @@ static int qec_sbus_probe(struct platform_device *op)
 static int qec_sbus_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sunqe *qp = dev_get_drvdata(&op->dev);
+=======
+	struct sunqe *qp = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct sunqe *qp = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -969,8 +989,11 @@ static int qec_sbus_remove(struct platform_device *op)
 	free_netdev(net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

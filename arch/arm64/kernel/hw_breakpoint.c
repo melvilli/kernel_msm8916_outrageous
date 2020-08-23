@@ -881,7 +881,11 @@ static void hw_breakpoint_reset(void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit hw_breakpoint_reset_notify(struct notifier_block *self,
+=======
+static int hw_breakpoint_reset_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int hw_breakpoint_reset_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -895,7 +899,11 @@ static int hw_breakpoint_reset_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata hw_breakpoint_reset_nb = {
+=======
+static struct notifier_block hw_breakpoint_reset_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block hw_breakpoint_reset_nb = {
 >>>>>>> v3.18

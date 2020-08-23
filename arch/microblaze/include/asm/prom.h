@@ -12,6 +12,7 @@
  * 2 of the License, or (at your option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/of.h>	/* linux/of.h gets to determine #include ordering */
 
@@ -26,10 +27,15 @@
 
 #define HAVE_ARCH_DEVTREE_FIXUPS
 =======
+=======
+>>>>>>> v3.18
 #ifndef _ASM_MICROBLAZE_PROM_H
 #define _ASM_MICROBLAZE_PROM_H
 
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Other Prototypes */
@@ -40,6 +46,7 @@ enum early_consoles {
 
 extern int of_early_console(void *version);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * OF address retreival & translation
@@ -72,6 +79,8 @@ struct device_node *of_get_cpu_node(int cpu, unsigned int *thread);
 #include <linux/of_irq.h>
 #include <linux/platform_device.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_MICROBLAZE_PROM_H */

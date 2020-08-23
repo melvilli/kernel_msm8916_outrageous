@@ -12,7 +12,11 @@ Authors:
         Aurelien Jarno <aurelien@aurel32.net>
         valuable contributions by Jan M. Sendler <sendler@sendler.de>,
 <<<<<<< HEAD
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>
+=======
+        Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
         Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

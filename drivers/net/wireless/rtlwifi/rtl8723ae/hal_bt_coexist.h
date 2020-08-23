@@ -54,8 +54,13 @@
 
 #define BT_COEX_STATE_WIFI_RSSI_LOW		BIT(4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BT_COEX_STATE_WIFI_RSSI_MEDIUM		BIT(5)
 #define BT_COEX_STATE_WIFI_RSSI_HIGH		BIT(6)
+=======
+#define BT_COEX_STATE_WIFI_RSSI_MEDIUM	BIT(5)
+#define BT_COEX_STATE_WIFI_RSSI_HIGH	BIT(6)
+>>>>>>> v3.18
 =======
 #define BT_COEX_STATE_WIFI_RSSI_MEDIUM	BIT(5)
 #define BT_COEX_STATE_WIFI_RSSI_HIGH	BIT(6)
@@ -84,7 +89,11 @@
 #define BT_COEX_STATE_WIFI_RSSI_1_HIGH		BIT(26)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BT_COEX_STATE_BTINFO_COMMON		BIT(30)
+=======
+#define BT_COEX_STATE_BTINFO_COMMON			BIT(30)
+>>>>>>> v3.18
 =======
 #define BT_COEX_STATE_BTINFO_COMMON			BIT(30)
 >>>>>>> v3.18
@@ -143,6 +152,7 @@
 #define	BTINFO_B_CONNECTION			BIT(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void rtl8723ae_btdm_coex_all_off(struct ieee80211_hw *hw);
 void rtl8723ae_dm_bt_fw_coex_all_off(struct ieee80211_hw *hw);
@@ -167,6 +177,8 @@ void rtl8723ae_dm_bt_reject_ap_aggregated_packet(struct ieee80211_hw *hw,
 bool rtl8723ae_dm_bt_is_coexist_state_changed(struct ieee80211_hw *hw);
 bool rtl8723ae_dm_bt_is_wifi_up_link(struct ieee80211_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_btdm_coex_all_off(struct ieee80211_hw *hw);
 void rtl8723e_dm_bt_fw_coex_all_off(struct ieee80211_hw *hw);
 
@@ -188,6 +200,9 @@ void rtl8723e_dm_bt_reject_ap_aggregated_packet(struct ieee80211_hw *hw,
 						bool b_reject);
 bool rtl8723e_dm_bt_is_coexist_state_changed(struct ieee80211_hw *hw);
 bool rtl8723e_dm_bt_is_wifi_up_link(struct ieee80211_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

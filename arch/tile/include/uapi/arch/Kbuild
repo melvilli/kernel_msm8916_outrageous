@@ -2,7 +2,10 @@
 header-y += abi.h
 header-y += chip.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += chip_tile64.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += chip_tilegx.h

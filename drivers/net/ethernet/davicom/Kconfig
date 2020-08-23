@@ -7,7 +7,10 @@ config DM9000
 	depends on ARM || BLACKFIN || MIPS || COLDFIRE
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII

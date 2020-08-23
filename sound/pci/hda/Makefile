@@ -1,15 +1,21 @@
 snd-hda-intel-objs := hda_intel.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 snd-hda-codec-y := hda_codec.o hda_jack.o hda_auto_parser.o
 snd-hda-codec-$(CONFIG_SND_HDA_GENERIC) += hda_generic.o
 =======
+=======
+>>>>>>> v3.18
 snd-hda-controller-objs := hda_controller.o
 snd-hda-tegra-objs := hda_tegra.o
 # for haswell power well
 snd-hda-intel-$(CONFIG_SND_HDA_I915) +=	hda_i915.o
 
 snd-hda-codec-y := hda_codec.o hda_jack.o hda_auto_parser.o hda_sysfs.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 snd-hda-codec-$(CONFIG_PROC_FS) += hda_proc.o
 snd-hda-codec-$(CONFIG_SND_HDA_HWDEP) += hda_hwdep.o
@@ -18,8 +24,14 @@ snd-hda-codec-$(CONFIG_SND_HDA_INPUT_BEEP) += hda_beep.o
 # for trace-points
 CFLAGS_hda_codec.o := -I$(src)
 <<<<<<< HEAD
+<<<<<<< HEAD
 CFLAGS_hda_intel.o := -I$(src)
 
+=======
+CFLAGS_hda_controller.o := -I$(src)
+
+snd-hda-codec-generic-objs :=	hda_generic.o
+>>>>>>> v3.18
 =======
 CFLAGS_hda_controller.o := -I$(src)
 
@@ -38,6 +50,7 @@ snd-hda-codec-via-objs :=	patch_via.o
 snd-hda-codec-hdmi-objs :=	patch_hdmi.o hda_eld.o
 
 # common driver
+<<<<<<< HEAD
 <<<<<<< HEAD
 obj-$(CONFIG_SND_HDA_INTEL) := snd-hda-codec.o
 
@@ -76,6 +89,8 @@ ifdef CONFIG_SND_HDA_CODEC_HDMI
 obj-$(CONFIG_SND_HDA_INTEL) += snd-hda-codec-hdmi.o
 endif
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_SND_HDA) := snd-hda-codec.o
 obj-$(CONFIG_SND_HDA) += snd-hda-controller.o
 
@@ -92,6 +107,9 @@ obj-$(CONFIG_SND_HDA_CODEC_CA0132) += snd-hda-codec-ca0132.o
 obj-$(CONFIG_SND_HDA_CODEC_CONEXANT) += snd-hda-codec-conexant.o
 obj-$(CONFIG_SND_HDA_CODEC_VIA) += snd-hda-codec-via.o
 obj-$(CONFIG_SND_HDA_CODEC_HDMI) += snd-hda-codec-hdmi.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # this must be the last entry after codec drivers;
@@ -99,6 +117,10 @@ obj-$(CONFIG_SND_HDA_CODEC_HDMI) += snd-hda-codec-hdmi.o
 # when built in kernel
 obj-$(CONFIG_SND_HDA_INTEL) += snd-hda-intel.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SND_HDA_TEGRA) += snd-hda-tegra.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SND_HDA_TEGRA) += snd-hda-tegra.o
 >>>>>>> v3.18

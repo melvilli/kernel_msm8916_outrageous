@@ -1,7 +1,11 @@
 * Samsung S5M8767 Voltage and Current Regulator
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The Samsung S5M8767 is a multi-function device which includes volatage and
+=======
+The Samsung S5M8767 is a multi-function device which includes voltage and
+>>>>>>> v3.18
 =======
 The Samsung S5M8767 is a multi-function device which includes voltage and
 >>>>>>> v3.18
@@ -74,7 +78,11 @@ sub-node should be of the format as listed below.
 	};
 The above regulator entries are defined in regulator bindings documentation
 <<<<<<< HEAD
+<<<<<<< HEAD
 except op_mode description.
+=======
+except these properties:
+>>>>>>> v3.18
 =======
 except these properties:
 >>>>>>> v3.18
@@ -85,6 +93,12 @@ except these properties:
 		2 - low power mode
 		3 - suspend mode
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	- s5m8767,pmic-ext-control-gpios: (optional) GPIO specifier for one
+		GPIO controlling this regulator (enable/disable); This is
+		valid only for buck9.
+>>>>>>> v3.18
 =======
 	- s5m8767,pmic-ext-control-gpios: (optional) GPIO specifier for one
 		GPIO controlling this regulator (enable/disable); This is
@@ -98,7 +112,11 @@ as per the datasheet of s5m8767.
 	- LDOn
 		  - valid values for n are 1 to 28
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  - Example: LDO0, LD01, LDO28
+=======
+		  - Example: LDO1, LDO2, LDO28
+>>>>>>> v3.18
 =======
 		  - Example: LDO1, LDO2, LDO28
 >>>>>>> v3.18
@@ -122,6 +140,7 @@ Example:
 		s5m8767,pmic-buck-default-dvs-idx = <0>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5m8767,pmic-buck-dvs-gpios = <&gpx0 0 1 0 0>, /* DVS1 */
 						 <&gpx0 1 1 0 0>, /* DVS2 */
 						 <&gpx0 2 1 0 0>; /* DVS3 */
@@ -130,6 +149,8 @@ Example:
 						<&gpx2 4 1 0 0>, /* SET2 */
 						<&gpx2 5 1 0 0>; /* SET3 */
 =======
+=======
+>>>>>>> v3.18
 		s5m8767,pmic-buck-dvs-gpios = <&gpx0 0 0>, /* DVS1 */
 						 <&gpx0 1 0>, /* DVS2 */
 						 <&gpx0 2 0>; /* DVS3 */
@@ -137,6 +158,9 @@ Example:
 		s5m8767,pmic-buck-ds-gpios = <&gpx2 3 0>, /* SET1 */
 						<&gpx2 4 0>, /* SET2 */
 						<&gpx2 5 0>; /* SET3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		s5m8767,pmic-buck2-dvs-voltage = <1350000>, <1300000>,
@@ -177,7 +201,10 @@ Example:
 				regulator-boot-on;
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			vemmc_reg: BUCK9 {
 				regulator-name = "VMEM_VDD_2.8V";
@@ -186,6 +213,9 @@ Example:
 				op_mode = <3>; /* Standby Mode */
 				s5m8767,pmic-ext-control-gpios = <&gpk0 2 0>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

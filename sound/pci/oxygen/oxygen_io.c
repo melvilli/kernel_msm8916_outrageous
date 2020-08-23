@@ -148,7 +148,11 @@ void oxygen_write_ac97(struct oxygen *chip, unsigned int codec,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AC'97 write timeout\n");
+=======
+	dev_err(chip->card->dev, "AC'97 write timeout\n");
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "AC'97 write timeout\n");
 >>>>>>> v3.18
@@ -184,7 +188,11 @@ u16 oxygen_read_ac97(struct oxygen *chip, unsigned int codec,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AC'97 read timeout on codec %u\n", codec);
+=======
+	dev_err(chip->card->dev, "AC'97 read timeout on codec %u\n", codec);
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "AC'97 read timeout on codec %u\n", codec);
 >>>>>>> v3.18
@@ -203,6 +211,7 @@ void oxygen_write_ac97_masked(struct oxygen *chip, unsigned int codec,
 EXPORT_SYMBOL(oxygen_write_ac97_masked);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data)
 {
 	unsigned int count;
@@ -216,6 +225,8 @@ void oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static int oxygen_wait_spi(struct oxygen *chip)
 {
 	unsigned int count;
@@ -240,6 +251,9 @@ int oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data)
 	 * We need to wait AFTER initiating the SPI transaction,
 	 * otherwise read operations will not work.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	oxygen_write8(chip, OXYGEN_SPI_DATA1, data);
 	oxygen_write8(chip, OXYGEN_SPI_DATA2, data >> 8);
@@ -247,6 +261,10 @@ int oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data)
 		oxygen_write8(chip, OXYGEN_SPI_DATA3, data >> 16);
 	oxygen_write8(chip, OXYGEN_SPI_CONTROL, control);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return oxygen_wait_spi(chip);
+>>>>>>> v3.18
 =======
 	return oxygen_wait_spi(chip);
 >>>>>>> v3.18
@@ -315,7 +333,11 @@ void oxygen_write_eeprom(struct oxygen *chip, unsigned int index, u16 value)
 			return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "EEPROM write timeout\n");
+=======
+	dev_err(chip->card->dev, "EEPROM write timeout\n");
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "EEPROM write timeout\n");
 >>>>>>> v3.18

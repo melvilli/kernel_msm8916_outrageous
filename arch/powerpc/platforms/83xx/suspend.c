@@ -11,7 +11,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pm.h>
@@ -24,6 +27,11 @@
 #include <linux/suspend.h>
 #include <linux/fsl_devices.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -329,7 +337,11 @@ static const struct platform_suspend_ops mpc83xx_suspend_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id pmc_match[];
+=======
+static const struct of_device_id pmc_match[];
+>>>>>>> v3.18
 =======
 static const struct of_device_id pmc_match[];
 >>>>>>> v3.18
@@ -432,7 +444,11 @@ static struct pmc_type pmc_types[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id pmc_match[] = {
+=======
+static const struct of_device_id pmc_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id pmc_match[] = {
 >>>>>>> v3.18

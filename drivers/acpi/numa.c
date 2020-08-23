@@ -30,7 +30,10 @@
 #include <linux/acpi.h>
 #include <linux/numa.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -65,7 +68,11 @@ int node_to_pxm(int node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __acpi_map_pxm_to_node(int pxm, int node)
+=======
+static void __acpi_map_pxm_to_node(int pxm, int node)
+>>>>>>> v3.18
 =======
 static void __acpi_map_pxm_to_node(int pxm, int node)
 >>>>>>> v3.18
@@ -81,7 +88,11 @@ int acpi_map_pxm_to_node(int pxm)
 	int node = pxm_to_node_map[pxm];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (node < 0) {
+=======
+	if (node == NUMA_NO_NODE) {
+>>>>>>> v3.18
 =======
 	if (node == NUMA_NO_NODE) {
 >>>>>>> v3.18
@@ -171,7 +182,11 @@ acpi_table_print_srat_entry(struct acpi_subtable_header *header)
  * Do some quick checks here and only use the SLIT if it passes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __init int slit_valid(struct acpi_table_slit *slit)
+=======
+static int __init slit_valid(struct acpi_table_slit *slit)
+>>>>>>> v3.18
 =======
 static int __init slit_valid(struct acpi_table_slit *slit)
 >>>>>>> v3.18
@@ -210,7 +225,11 @@ static int __init acpi_parse_slit(struct acpi_table_header *table)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init __attribute__ ((weak))
+=======
+void __init __weak
+>>>>>>> v3.18
 =======
 void __init __weak
 >>>>>>> v3.18
@@ -335,7 +354,11 @@ int __init acpi_numa_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_get_pxm(acpi_handle h)
+=======
+static int acpi_get_pxm(acpi_handle h)
+>>>>>>> v3.18
 =======
 static int acpi_get_pxm(acpi_handle h)
 >>>>>>> v3.18
@@ -356,6 +379,7 @@ static int acpi_get_pxm(acpi_handle h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_get_node(acpi_handle *handle)
 {
 	int pxm, node = -1;
@@ -366,6 +390,8 @@ int acpi_get_node(acpi_handle *handle)
 
 	return node;
 =======
+=======
+>>>>>>> v3.18
 int acpi_get_node(acpi_handle handle)
 {
 	int pxm;
@@ -375,6 +401,9 @@ int acpi_get_node(acpi_handle handle)
 		return NUMA_NO_NODE;
 
 	return acpi_map_pxm_to_node(pxm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(acpi_get_node);

@@ -750,7 +750,11 @@ int rds_cmsg_atomic(struct rds_sock *rs, struct rds_message *rm,
 		    struct cmsghdr *cmsg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __rds_put_mr_final(struct rds_mr *mr);
+=======
+void __rds_put_mr_final(struct rds_mr *mr);
+>>>>>>> v3.18
 =======
 void __rds_put_mr_final(struct rds_mr *mr);
 >>>>>>> v3.18

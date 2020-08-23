@@ -112,7 +112,10 @@ static const struct dmi_system_id stk_upside_down_dmi_table[] = {
 		}
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.ident = "T12Rg-H",
 		.matches = {
@@ -120,6 +123,9 @@ static const struct dmi_system_id stk_upside_down_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "T12Rg-H")
 		}
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -927,7 +933,10 @@ static int stk_vidioc_g_fmt_vid_cap(struct file *filp,
 	pix_format->sizeimage = pix_format->bytesperline
 				* pix_format->height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix_format->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -974,7 +983,10 @@ static int stk_try_fmt_vid_cap(struct file *filp,
 	fmtd->fmt.pix.sizeimage = fmtd->fmt.pix.bytesperline
 		* fmtd->fmt.pix.height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmtd->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1276,7 +1288,10 @@ static int stk_register_video_device(struct stk_camera *dev)
 	dev->vdev.debug = debug;
 	dev->vdev.v4l2_dev = &dev->v4l2_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(&dev->vdev, dev);

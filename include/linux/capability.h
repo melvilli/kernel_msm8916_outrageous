@@ -41,6 +41,11 @@ struct dentry;
 struct user_namespace;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct user_namespace *current_user_ns(void);
+
+>>>>>>> v3.18
 =======
 struct user_namespace *current_user_ns(void);
 
@@ -217,7 +222,10 @@ extern bool has_ns_capability_noaudit(struct task_struct *t,
 extern bool capable(int cap);
 extern bool ns_capable(struct user_namespace *ns, int cap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool nsown_capable(int cap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern bool capable_wrt_inode_uidgid(const struct inode *inode, int cap);

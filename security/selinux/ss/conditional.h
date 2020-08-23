@@ -74,10 +74,15 @@ int cond_write_bool(void *key, void *datum, void *ptr);
 int cond_write_list(struct policydb *p, struct cond_node *list, void *fp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cond_compute_av(struct avtab *ctab, struct avtab_key *key,
 		struct av_decision *avd, struct extended_perms *xperms);
 void cond_compute_xperms(struct avtab *ctab, struct avtab_key *key,
 		struct extended_perms_decision *xpermd);
+=======
+void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd);
+
+>>>>>>> v3.18
 =======
 void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd);
 

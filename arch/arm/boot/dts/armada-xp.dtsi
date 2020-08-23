@@ -17,7 +17,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "armada-370-xp.dtsi"
+=======
+#include "armada-370-xp.dtsi"
+>>>>>>> v3.18
 =======
 #include "armada-370-xp.dtsi"
 >>>>>>> v3.18
@@ -27,8 +31,11 @@
 	compatible = "marvell,armadaxp", "marvell,armada-370-xp";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc {
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		eth2 = &eth2;
 	};
@@ -41,6 +48,9 @@
 			reg = <MBUS_ID(0x01, 0x1d) 0 0x100000>;
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal-regs {
 			L2: l2-cache {
@@ -51,6 +61,7 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupt-controller@20000 {
 			      reg = <0x20a00 0x2d0>, <0x21070 0x58>;
 			};
@@ -59,6 +70,8 @@
 				compatible = "marvell,armada-370-xp-pmsu";
 				reg = <0x22100 0x430>, <0x20800 0x20>;
 =======
+=======
+>>>>>>> v3.18
 			i2c0: i2c@11000 {
 				compatible = "marvell,mv78230-i2c", "marvell,mv64xxx-i2c";
 				reg = <0x11000 0x100>;
@@ -67,6 +80,9 @@
 			i2c1: i2c@11100 {
 				compatible = "marvell,mv78230-i2c", "marvell,mv64xxx-i2c";
 				reg = <0x11100 0x100>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -77,6 +93,10 @@
 				interrupts = <43>;
 				reg-io-width = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&coreclk 0>;
+>>>>>>> v3.18
 =======
 				clocks = <&coreclk 0>;
 >>>>>>> v3.18
@@ -89,12 +109,15 @@
 				interrupts = <44>;
 				reg-io-width = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = "disabled";
 			};
 
 			timer@20300 {
 				marvell,timer-25Mhz;
 =======
+=======
+>>>>>>> v3.18
 				clocks = <&coreclk 0>;
 				status = "disabled";
 			};
@@ -109,6 +132,9 @@
 				reg = <0x18220 0x4>;
 				clocks = <&coreclk 0>;
 				#clock-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -118,6 +144,7 @@
 				#clock-cells = <1>;
 			};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			cpuclk: clock-complex@18700 {
 				#clock-cells = <1>;
@@ -142,6 +169,8 @@
 				compatible = "marvell,armada-370-neta";
 				reg = <0x30000 0x2500>;
 =======
+=======
+>>>>>>> v3.18
 			thermal@182b0 {
 				compatible = "marvell,armadaxp-thermal";
 				reg = <0x182b0 0x4
@@ -180,6 +209,9 @@
 			eth2: ethernet@30000 {
 				compatible = "marvell,armada-370-neta";
 				reg = <0x30000 0x4000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				interrupts = <12>;
 				clocks = <&gateclk 2>;
@@ -187,7 +219,10 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			usb@50000 {
 				clocks = <&gateclk 18>;
 			};
@@ -204,6 +239,9 @@
 				status = "disabled";
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			xor@60900 {
 				compatible = "marvell,orion-xor";
@@ -245,6 +283,7 @@
 				};
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			usb@50000 {
 				clocks = <&gateclk 18>;
@@ -269,6 +308,8 @@
 				status = "okay";
 			};
 =======
+=======
+>>>>>>> v3.18
 		};
 	};
 
@@ -278,6 +319,9 @@
 			compatible = "fixed-clock";
 			#clock-cells = <0>;
 			clock-frequency = <25000000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

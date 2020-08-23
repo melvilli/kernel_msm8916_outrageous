@@ -44,7 +44,11 @@ int adis_update_scan_mode(struct iio_dev *indio_dev,
 
 	rx = adis->buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx = rx + scan_count;
+=======
+	tx = rx + indio_dev->scan_bytes;
+>>>>>>> v3.18
 =======
 	tx = rx + indio_dev->scan_bytes;
 >>>>>>> v3.18
@@ -107,6 +111,7 @@ static irqreturn_t adis_trigger_handler(int irq, void *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Guaranteed to be aligned with 8 byte boundary */
 	if (indio_dev->scan_timestamp) {
 		void *b = adis->buffer + indio_dev->scan_bytes - sizeof(s64);
@@ -114,6 +119,10 @@ static irqreturn_t adis_trigger_handler(int irq, void *p)
 	}
 
 	iio_push_to_buffers(indio_dev, adis->buffer);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, adis->buffer,
+		pf->timestamp);
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(indio_dev, adis->buffer,
 		pf->timestamp);

@@ -996,8 +996,13 @@ static struct unwinder dwarf_unwinder = {
 static void dwarf_unwinder_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node **fde_rb_node = &fde_root.rb_node;
 	struct rb_node **cie_rb_node = &cie_root.rb_node;
+=======
+	struct dwarf_fde *fde, *next_fde;
+	struct dwarf_cie *cie, *next_cie;
+>>>>>>> v3.18
 =======
 	struct dwarf_fde *fde, *next_fde;
 	struct dwarf_cie *cie, *next_cie;
@@ -1008,6 +1013,7 @@ static void dwarf_unwinder_cleanup(void)
 	 * Traverse all the FDE/CIE lists and remove and free all the
 	 * memory associated with those data structures.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (*fde_rb_node) {
 		struct dwarf_fde *fde;
@@ -1025,11 +1031,16 @@ static void dwarf_unwinder_cleanup(void)
 		kfree(cie);
 	}
 =======
+=======
+>>>>>>> v3.18
 	rbtree_postorder_for_each_entry_safe(fde, next_fde, &fde_root, node)
 		kfree(fde);
 
 	rbtree_postorder_for_each_entry_safe(cie, next_cie, &cie_root, node)
 		kfree(cie);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kmem_cache_destroy(dwarf_reg_cachep);

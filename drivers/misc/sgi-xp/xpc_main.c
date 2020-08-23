@@ -93,7 +93,11 @@ static int xpc_disengage_min_timelimit;	/* = 0 */
 static int xpc_disengage_max_timelimit = 120;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xpc_sys_xpc_hb_dir[] = {
+=======
+static struct ctl_table xpc_sys_xpc_hb_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xpc_sys_xpc_hb_dir[] = {
 >>>>>>> v3.18
@@ -116,7 +120,11 @@ static struct ctl_table xpc_sys_xpc_hb_dir[] = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xpc_sys_xpc_dir[] = {
+=======
+static struct ctl_table xpc_sys_xpc_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xpc_sys_xpc_dir[] = {
 >>>>>>> v3.18
@@ -135,7 +143,11 @@ static struct ctl_table xpc_sys_xpc_dir[] = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xpc_sys_dir[] = {
+=======
+static struct ctl_table xpc_sys_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xpc_sys_dir[] = {
 >>>>>>> v3.18

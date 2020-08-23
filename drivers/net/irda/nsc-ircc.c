@@ -431,8 +431,13 @@ static int __init nsc_ircc_open(chipio_t *info)
 	/* Allocate memory if needed */
 	self->rx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(NULL, self->rx_buff.truesize,
 				   &self->rx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(NULL, self->rx_buff.truesize,
+				    &self->rx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(NULL, self->rx_buff.truesize,
 				    &self->rx_buff_dma, GFP_KERNEL);
@@ -445,8 +450,13 @@ static int __init nsc_ircc_open(chipio_t *info)
 	
 	self->tx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(NULL, self->tx_buff.truesize,
 				   &self->tx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(NULL, self->tx_buff.truesize,
+				    &self->tx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(NULL, self->tx_buff.truesize,
 				    &self->tx_buff_dma, GFP_KERNEL);
@@ -1046,7 +1056,11 @@ static int nsc_ircc_setup(chipio_t *info)
  * Function nsc_ircc_read_dongle_id (void)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Try to read dongle indentification. This procedure needs to be executed
+=======
+ * Try to read dongle identification. This procedure needs to be executed
+>>>>>>> v3.18
 =======
  * Try to read dongle identification. This procedure needs to be executed
 >>>>>>> v3.18

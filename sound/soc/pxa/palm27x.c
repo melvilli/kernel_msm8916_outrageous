@@ -80,6 +80,7 @@ static int palm27x_ac97_init(struct snd_soc_pcm_runtime *rtd)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* connected pins */
 	if (machine_is_palmld())
 		snd_soc_dapm_enable_pin(dapm, "MIC1");
@@ -88,6 +89,8 @@ static int palm27x_ac97_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_enable_pin(dapm, "LOUT2");
 	snd_soc_dapm_enable_pin(dapm, "ROUT2");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* not connected pins */
@@ -185,6 +188,10 @@ static struct platform_driver palm27x_wm9712_driver = {
 		.name		= "palm27x-asoc",
 		.owner		= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm     = &snd_soc_pm_ops,
 >>>>>>> v3.18

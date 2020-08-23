@@ -20,7 +20,10 @@
 #include <linux/errno.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -351,9 +354,12 @@ static int idmouse_probe(struct usb_interface *interface,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iface_desc->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* allocate memory for our device state and initialize it */
@@ -396,7 +402,11 @@ static int idmouse_probe(struct usb_interface *interface,
 	if (result) {
 		/* something prevented us from registering this device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&interface->dev, "Unble to allocate minor number.\n");
+=======
+		dev_err(&interface->dev, "Unable to allocate minor number.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&interface->dev, "Unable to allocate minor number.\n");
 >>>>>>> v3.18

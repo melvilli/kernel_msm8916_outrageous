@@ -7,10 +7,13 @@ obj-$(CONFIG_NET_VENDOR_8390) += 8390/
 obj-$(CONFIG_NET_VENDOR_ADAPTEC) += adaptec/
 obj-$(CONFIG_GRETH) += aeroflex/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_NET_VENDOR_ALTEON) += alteon/
 obj-$(CONFIG_NET_VENDOR_AMD) += amd/
 obj-$(CONFIG_NET_VENDOR_APPLE) += apple/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_NET_VENDOR_AGERE) += agere/
 obj-$(CONFIG_NET_VENDOR_ALLWINNER) += allwinner/
 obj-$(CONFIG_NET_VENDOR_ALTEON) += alteon/
@@ -19,6 +22,9 @@ obj-$(CONFIG_NET_VENDOR_AMD) += amd/
 obj-$(CONFIG_NET_XGENE) += apm/
 obj-$(CONFIG_NET_VENDOR_APPLE) += apple/
 obj-$(CONFIG_NET_VENDOR_ARC) += arc/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_NET_VENDOR_ATHEROS) += atheros/
 obj-$(CONFIG_NET_CADENCE) += cadence/
@@ -30,6 +36,10 @@ obj-$(CONFIG_NET_VENDOR_CHELSIO) += chelsio/
 obj-$(CONFIG_NET_VENDOR_CIRRUS) += cirrus/
 obj-$(CONFIG_NET_VENDOR_CISCO) += cisco/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_CX_ECAT) += ec_bhf.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CX_ECAT) += ec_bhf.o
 >>>>>>> v3.18
@@ -43,6 +53,10 @@ obj-$(CONFIG_NET_VENDOR_FARADAY) += faraday/
 obj-$(CONFIG_NET_VENDOR_FREESCALE) += freescale/
 obj-$(CONFIG_NET_VENDOR_FUJITSU) += fujitsu/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_NET_VENDOR_HISILICON) += hisilicon/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_NET_VENDOR_HISILICON) += hisilicon/
 >>>>>>> v3.18
@@ -60,7 +74,11 @@ obj-$(CONFIG_NET_VENDOR_MELLANOX) += mellanox/
 obj-$(CONFIG_NET_VENDOR_MICREL) += micrel/
 obj-$(CONFIG_NET_VENDOR_MICROCHIP) += microchip/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ARCH_MSM) += msm/
+=======
+obj-$(CONFIG_NET_VENDOR_MOXART) += moxa/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_NET_VENDOR_MOXART) += moxa/
 >>>>>>> v3.18
@@ -78,6 +96,10 @@ obj-$(CONFIG_NET_PACKET_ENGINE) += packetengines/
 obj-$(CONFIG_NET_VENDOR_PASEMI) += pasemi/
 obj-$(CONFIG_NET_VENDOR_QLOGIC) += qlogic/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_NET_VENDOR_QUALCOMM) += qualcomm/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_NET_VENDOR_QUALCOMM) += qualcomm/
 >>>>>>> v3.18
@@ -86,6 +108,10 @@ obj-$(CONFIG_SH_ETH) += renesas/
 obj-$(CONFIG_NET_VENDOR_RDC) += rdc/
 obj-$(CONFIG_S6GMAC) += s6gmac.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_NET_VENDOR_SAMSUNG) += samsung/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_NET_VENDOR_SAMSUNG) += samsung/
 >>>>>>> v3.18

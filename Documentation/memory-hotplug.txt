@@ -89,6 +89,7 @@ phase by hand.
 1.3. Unit of Memory online/offline operation
 ------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Memory hotplug uses SPARSEMEM memory model. SPARSEMEM divides the whole memory
 into chunks of the same size. The chunk is called a "section". The size of
 a section is architecture dependent. For example, power uses 16MiB, ia64 uses
@@ -100,6 +101,8 @@ To determine the size of sections, please read this file:
 
 This file shows the size of sections in byte.
 =======
+=======
+>>>>>>> v3.18
 Memory hotplug uses SPARSEMEM memory model which allows memory to be divided
 into chunks of the same size. These chunks are called "sections". The size of
 a memory section is architecture dependent. For example, power uses 16MiB, ia64
@@ -115,6 +118,9 @@ To determine the size (in bytes) of a memory block please read this file:
 
 /sys/devices/system/memory/block_size_bytes
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 -----------------------
@@ -142,6 +148,7 @@ config options.
     This option can be kernel module too.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --------------------------------
 4 sysfs files for memory hotplug
 --------------------------------
@@ -156,6 +163,8 @@ section contained in the memory block.  The files 'phys_index' and
 'end_phys_index' under each directory report the beginning and end section id's
 for the memory block covered by the sysfs directory.  It is expected that all
 =======
+=======
+>>>>>>> v3.18
 
 --------------------------------
 3 sysfs files for memory hotplug
@@ -167,6 +176,9 @@ is described under /sys/devices/system/memory as
 (XXX is the memory block id.)
 
 For the memory block covered by the sysfs directory.  It is expected that all
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 memory sections in this range are present and no memory holes exist in the
 range. Currently there is no way to determine if there is a memory hole, but
@@ -174,7 +186,11 @@ the existence of one should not affect the hotplug capabilities of the memory
 block.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 For example, assume 1GiB section size. A device for a memory starting at
+=======
+For example, assume 1GiB memory block size. A device for a memory starting at
+>>>>>>> v3.18
 =======
 For example, assume 1GiB memory block size. A device for a memory starting at
 >>>>>>> v3.18
@@ -182,6 +198,7 @@ For example, assume 1GiB memory block size. A device for a memory starting at
 (0x100000000 / 1Gib = 4)
 This device covers address range [0x100000000 ... 0x140000000)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Under each section, you can see 4 or 5 files, the end_phys_index file being
 a recent addition and not present on older kernels.
@@ -197,6 +214,8 @@ a recent addition and not present on older kernels.
 'end_phys_index'  : read-only and contains section id of the last section
 		    in the memory block.
 =======
+=======
+>>>>>>> v3.18
 Under each memory block, you can see 4 files:
 
 /sys/devices/system/memory/memoryXXX/phys_index
@@ -206,13 +225,20 @@ Under each memory block, you can see 4 files:
 /sys/devices/system/memory/memoryXXX/valid_zones
 
 'phys_index'      : read-only and contains memory block id, same as XXX.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 'state'           : read-write
                     at read:  contains online/offline state of memory.
                     at write: user can specify "online_kernel",
                     "online_movable", "online", "offline" command
 <<<<<<< HEAD
+<<<<<<< HEAD
                     which will be performed on al sections in the block.
+=======
+                    which will be performed on all sections in the block.
+>>>>>>> v3.18
 =======
                     which will be performed on all sections in the block.
 >>>>>>> v3.18
@@ -225,7 +251,10 @@ Under each memory block, you can see 4 files:
                     it is not removable. A memory block is removable only if
                     every section in the block is removable.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 'valid_zones'     : read-only: designed to show which zones this memory block
 		    can be onlined to.
 		    The first column shows it's default zone.
@@ -235,6 +264,9 @@ Under each memory block, you can see 4 files:
 		    "memory7/valid_zones: Movable Normal" shows this memoryblock
 		    can be onlined to ZONE_MOVABLE by default and to ZONE_NORMAL
 		    by online_kernel.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 NOTE:
@@ -250,6 +282,10 @@ A backlink will also be created:
 /sys/devices/system/memory/memory9/node0 -> ../../node/node0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -279,6 +315,7 @@ If memory device is found, memory hotplug code will be called.
 4.2 Notify memory hot-add event by hand
 ------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 In some environments, especially virtualized environment, firmware will not
 notify memory hotplug event to the kernel. For such environment, "probe"
 interface is supported. This interface depends on CONFIG_ARCH_MEMORY_PROBE.
@@ -287,12 +324,17 @@ Now, CONFIG_ARCH_MEMORY_PROBE is supported only by powerpc but it does not
 contain highly architecture codes. Please add config if you need "probe"
 interface.
 =======
+=======
+>>>>>>> v3.18
 On some architectures, the firmware may not notify the kernel of a memory
 hotplug event.  Therefore, the memory "probe" interface is supported to
 explicitly notify the kernel.  This interface depends on
 CONFIG_ARCH_MEMORY_PROBE and can be configured on powerpc, sh, and x86
 if hotplug is supported, although for x86 this should be handled by ACPI
 notification.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Probe interface is located at
@@ -303,16 +345,22 @@ You can tell the physical address of new memory to the kernel by
 % echo start_address_of_new_memory > /sys/devices/system/memory/probe
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Then, [start_address_of_new_memory, start_address_of_new_memory + section_size)
 memory range is hot-added. In this case, hotplug script is not called (in
 current implementation). You'll have to online memory by yourself.
 Please see "How to online memory" in this text.
 
 =======
+=======
+>>>>>>> v3.18
 Then, [start_address_of_new_memory, start_address_of_new_memory +
 memory_block_size] memory range is hot-added. In this case, hotplug script is
 not called (in current implementation). You'll have to online memory by
 yourself.  Please see "How to online memory" in this text.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -323,7 +371,11 @@ yourself.  Please see "How to online memory" in this text.
 5.1. State of memory
 ------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 To see (online/offline) state of memory section, read 'state' file.
+=======
+To see (online/offline) state of a memory block, read 'state' file.
+>>>>>>> v3.18
 =======
 To see (online/offline) state of a memory block, read 'state' file.
 >>>>>>> v3.18
@@ -332,8 +384,13 @@ To see (online/offline) state of a memory block, read 'state' file.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If the memory section is online, you'll read "online".
 If the memory section is offline, you'll read "offline".
+=======
+If the memory block is online, you'll read "online".
+If the memory block is offline, you'll read "offline".
+>>>>>>> v3.18
 =======
 If the memory block is online, you'll read "online".
 If the memory block is offline, you'll read "offline".
@@ -343,6 +400,7 @@ If the memory block is offline, you'll read "offline".
 5.2. How to online memory
 ------------
 Even if the memory is hot-added, it is not at ready-to-use state.
+<<<<<<< HEAD
 <<<<<<< HEAD
 For using newly added memory, you have to "online" the memory section.
 
@@ -363,6 +421,8 @@ And if the memory section is in ZONE_MOVABLE, you can change it to ZONE_NORMAL:
 
 After this, section memoryXXX's state will be 'online' and the amount of
 =======
+=======
+>>>>>>> v3.18
 For using newly added memory, you have to "online" the memory block.
 
 For onlining, you have to write "online" to the memory block's state file as:
@@ -381,6 +441,9 @@ And if the memory block is in ZONE_MOVABLE, you can change it to ZONE_NORMAL:
 (NOTE: current limit: this memory block must be adjacent to ZONE_NORMAL)
 
 After this, memory block XXX's state will be 'online' and the amount of
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 available memory will be increased.
 
@@ -396,6 +459,7 @@ This may be changed in future.
 6.1 Memory offline and ZONE_MOVABLE
 ------------
 Memory offlining is more complicated than memory online. Because memory offline
+<<<<<<< HEAD
 <<<<<<< HEAD
 has to make the whole memory section be unused, memory offline can fail if
 the section includes memory which cannot be freed.
@@ -414,6 +478,8 @@ that the section contains only migratable pages.
 Now, a boot option for making a section which consists of migratable pages is
 supported. By specifying "kernelcore=" or "movablecore=" boot option, you can
 =======
+=======
+>>>>>>> v3.18
 has to make the whole memory block be unused, memory offline can fail if
 the memory block includes memory which cannot be freed.
 
@@ -430,6 +496,9 @@ guarantee that the memory block contains only migratable pages.
 
 Now, a boot option for making a memory block which consists of migratable pages
 is supported. By specifying "kernelcore=" or "movablecore=" boot option, you can
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 create ZONE_MOVABLE...a zone which is just used for movable pages.
 (See also Documentation/kernel-parameters.txt)
@@ -447,7 +516,11 @@ creates ZONE_MOVABLE as following.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Note) Unfortunately, there is no information to show which section belongs
+=======
+Note: Unfortunately, there is no information to show which memory block belongs
+>>>>>>> v3.18
 =======
 Note: Unfortunately, there is no information to show which memory block belongs
 >>>>>>> v3.18
@@ -456,6 +529,7 @@ to ZONE_MOVABLE. This is TBD.
 
 6.2. How to offline memory
 ------------
+<<<<<<< HEAD
 <<<<<<< HEAD
 You can offline a section by using the same sysfs interface that was used in
 memory onlining.
@@ -474,6 +548,8 @@ offline it (or not).
 (For example, a page is referred to by some kernel internal call and released
  soon.)
 =======
+=======
+>>>>>>> v3.18
 You can offline a memory block by using the same sysfs interface that was used
 in memory onlining.
 
@@ -489,6 +565,9 @@ easily.  But under some busy state, it may return -EBUSY. Even if a memory
 block cannot be offlined due to -EBUSY, you can retry offlining it and may be
 able to offline it (or not). (For example, a page is referred to by some kernel
 internal call and released soon.)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Consideration:
@@ -527,17 +606,23 @@ MEMORY_GOING_OFFLINE
   longer possible from the memory but some of the memory to be offlined
   is still in use. The callback can be used to free memory known to a
 <<<<<<< HEAD
+<<<<<<< HEAD
   subsystem from the indicated memory section.
 
 MEMORY_CANCEL_OFFLINE
   Generated if MEMORY_GOING_OFFLINE fails. Memory is available again from
   the section that we attempted to offline.
 =======
+=======
+>>>>>>> v3.18
   subsystem from the indicated memory block.
 
 MEMORY_CANCEL_OFFLINE
   Generated if MEMORY_GOING_OFFLINE fails. Memory is available again from
   the memory block that we attempted to offline.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MEMORY_OFFLINE
@@ -575,8 +660,12 @@ node if necessary.
   - allowing memory hot-add to ZONE_MOVABLE. maybe we need some switch like
     sysctl or new control file.
 <<<<<<< HEAD
+<<<<<<< HEAD
   - showing memory section and physical device relationship.
   - showing memory section is under ZONE_MOVABLE or not
+=======
+  - showing memory block and physical device relationship.
+>>>>>>> v3.18
 =======
   - showing memory block and physical device relationship.
 >>>>>>> v3.18

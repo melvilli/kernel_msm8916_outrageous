@@ -21,6 +21,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -30,6 +31,11 @@
  * source code.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -203,9 +209,12 @@ static int apci1032_cos_cmdtest(struct comedi_device *dev,
 	/* Step 2b : and mutually compatible */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
 		return 2;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Step 3: check if arguments are trivially valid */
@@ -214,7 +223,11 @@ static int apci1032_cos_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, 0);
 	err |= cfc_check_trigger_arg_is(&cmd->convert_arg, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, 1);
+=======
+	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
+>>>>>>> v3.18
 =======
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 >>>>>>> v3.18
@@ -224,10 +237,16 @@ static int apci1032_cos_cmdtest(struct comedi_device *dev,
 		return 3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* step 4: ignored */
 
 	if (err)
 		return 4;
+=======
+	/* Step 4: fix up any arguments */
+
+	/* Step 5: check channel list if it exists */
+>>>>>>> v3.18
 =======
 	/* Step 4: fix up any arguments */
 
@@ -288,7 +307,11 @@ static irqreturn_t apci1032_interrupt(int irq, void *d)
 
 	s->state = inl(dev->iobase + APCI1032_STATUS_REG) & 0xffff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comedi_buf_put(s->async, s->state);
+=======
+	comedi_buf_put(s, s->state);
+>>>>>>> v3.18
 =======
 	comedi_buf_put(s, s->state);
 >>>>>>> v3.18
@@ -320,10 +343,16 @@ static int apci1032_auto_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -369,6 +398,10 @@ static int apci1032_auto_attach(struct comedi_device *dev,
 		s->insn_config	= apci1032_cos_insn_config;
 		s->insn_bits	= apci1032_cos_insn_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		s->len_chanlist	= 1;
+>>>>>>> v3.18
 =======
 		s->len_chanlist	= 1;
 >>>>>>> v3.18
@@ -387,9 +420,13 @@ static void apci1032_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci1032_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->irq)
 		free_irq(dev->irq, dev);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 >>>>>>> v3.18
@@ -409,7 +446,11 @@ static int apci1032_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci1032_pci_table) = {
+=======
+static const struct pci_device_id apci1032_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci1032_pci_table[] = {
 >>>>>>> v3.18
@@ -428,7 +469,11 @@ module_comedi_pci_driver(apci1032_driver, apci1032_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("ADDI-DATA APCI-1032, 32 channel DI boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("ADDI-DATA APCI-1032, 32 channel DI boards");
 >>>>>>> v3.18

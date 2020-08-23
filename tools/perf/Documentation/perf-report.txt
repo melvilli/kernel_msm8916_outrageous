@@ -26,10 +26,13 @@ OPTIONS
         Be more verbose. (show symbol address, etc)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -d::
 --dsos=::
 	Only consider symbols in these dsos. CSV that understands
 	file://filename entries.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 -n::
@@ -46,12 +49,15 @@ OPTIONS
 --comms=::
 	Only consider symbols in these comms. CSV that understands
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file://filename entries.
 -S::
 --symbols=::
 	Only consider these symbols. CSV that understands
 	file://filename entries.
 =======
+=======
+>>>>>>> v3.18
 	file://filename entries.  This option will affect the percentage of
 	the overhead column.  See --percentage for more info.
 -d::
@@ -64,6 +70,9 @@ OPTIONS
 	Only consider these symbols. CSV that understands
 	file://filename entries.  This option will affect the percentage of
 	the overhead column.  See --percentage for more info.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 --symbol-filter=::
@@ -90,8 +99,11 @@ OPTIONS
 	- cpu: cpu number the task ran at the time of sample
 	- srcline: filename and line number executed at the time of sample.  The
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DWARF debuggin info must be provided.
 =======
+=======
+>>>>>>> v3.18
 	DWARF debugging info must be provided.
 	- weight: Event specific weight, e.g. memory latency or transaction
 	abort cost. This is the global weight.
@@ -106,6 +118,9 @@ OPTIONS
 	guest machine
 	- sample: Number of sample
 	- period: Raw number of event count of sample
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	By default, comm, dso and symbol keys are used.
@@ -121,6 +136,11 @@ OPTIONS
 	- symbol_to: name of function branched to
 	- mispredict: "N" for predicted branch, "Y" for mispredicted branch
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	- in_tx: branch in TSX transaction
+	- abort: TSX transaction abort.
+>>>>>>> v3.18
 =======
 	- in_tx: branch in TSX transaction
 	- abort: TSX transaction abort.
@@ -130,7 +150,10 @@ OPTIONS
 	and symbol_to, see '--branch-stack'.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -F::
 --fields=::
 	Specify output field - multiple keys can be specified in CSV format.
@@ -157,6 +180,9 @@ OPTIONS
 	And default sort keys are changed to local_weight, mem, sym, dso,
 	symbol_daddr, dso_daddr, snoop, tlb, locked, see '--mem-mode'.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 -p::
 --parent=<regex>::
@@ -173,7 +199,11 @@ OPTIONS
 --column-widths=<width[,width...]>::
 	Force each column width to the provided list, for large terminal
 <<<<<<< HEAD
+<<<<<<< HEAD
 	readability.
+=======
+	readability.  0 means no limit (default behavior).
+>>>>>>> v3.18
 =======
 	readability.  0 means no limit (default behavior).
 >>>>>>> v3.18
@@ -189,7 +219,11 @@ OPTIONS
         Dump raw trace in ASCII.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -g [type,min[,limit],order]::
+=======
+-g [type,min[,limit],order[,key]]::
+>>>>>>> v3.18
 =======
 -g [type,min[,limit],order[,key]]::
 >>>>>>> v3.18
@@ -207,8 +241,11 @@ OPTIONS
 	- caller: inverted caller based call graph.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Default: fractal,0.5,callee.
 =======
+=======
+>>>>>>> v3.18
 	key can be:
 	- function: compare on functions
 	- address: compare on individual code addresses
@@ -227,6 +264,9 @@ OPTIONS
 	workloads that can have a very long callchain stack.
 
 	Default: 127
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 -G::
@@ -234,12 +274,18 @@ OPTIONS
         alias for inverted caller based call graph.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 --ignore-callees=<regex>::
         Ignore callees of the function(s) matching the given regex.
         This has the effect of collecting the callers of each such
         function into one place in the call-graph tree.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 --pretty=<key>::
         Pretty printing style.  key: normal, raw
@@ -317,7 +363,10 @@ OPTIONS
 	disable with --no-demangle.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 --demangle-kernel::
 	Demangle kernel symbol names to human readable form (for C++ kernels).
 
@@ -350,6 +399,9 @@ OPTIONS
 --header-only::
 	Show only perf.data header (forces --stdio).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SEE ALSO
 --------

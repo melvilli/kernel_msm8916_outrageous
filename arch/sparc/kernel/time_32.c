@@ -37,6 +37,10 @@
 #include <linux/platform_device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mc146818rtc.h>
+>>>>>>> v3.18
 =======
 #include <asm/mc146818rtc.h>
 >>>>>>> v3.18
@@ -52,6 +56,10 @@
 #include <asm/setup.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -92,7 +100,11 @@ unsigned long profile_pc(struct pt_regs *regs)
 EXPORT_SYMBOL(profile_pc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __volatile__ unsigned int *master_l10_counter;
+=======
+volatile u32 __iomem *master_l10_counter;
+>>>>>>> v3.18
 =======
 volatile u32 __iomem *master_l10_counter;
 >>>>>>> v3.18
@@ -156,9 +168,15 @@ static __init void setup_timer_ce(void)
 static unsigned int sbus_cycles_offset(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val, offset;
 
 	val = *master_l10_counter;
+=======
+	u32 val, offset;
+
+	val = sbus_readl(master_l10_counter);
+>>>>>>> v3.18
 =======
 	u32 val, offset;
 

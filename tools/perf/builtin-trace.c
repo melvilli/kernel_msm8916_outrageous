@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "builtin.h"
 #include "util/color.h"
 #include "util/evlist.h"
@@ -11,6 +12,8 @@
 #include <libaudit.h>
 #include <stdlib.h>
 =======
+=======
+>>>>>>> v3.18
 #include <traceevent/event-parse.h>
 #include "builtin.h"
 #include "util/color.h"
@@ -925,11 +928,15 @@ static DEFINE_STRARRAY_OFFSET(tioctls, 0x5401);
 #define STRARRAY(arg, name, array) \
 	  .arg_scnprintf = { [arg] = SCA_STRARRAY, }, \
 	  .arg_parm	 = { [arg] = &strarray__##array, }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct syscall_fmt {
 	const char *name;
 	const char *alias;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool	   errmsg;
 	bool	   timeout;
@@ -948,6 +955,8 @@ static struct syscall_fmt {
 	{ .name	    = "socket",	    .errmsg = true, },
 	{ .name	    = "stat",	    .errmsg = true, .alias = "newstat", },
 =======
+=======
+>>>>>>> v3.18
 	size_t	   (*arg_scnprintf[6])(char *bf, size_t size, struct syscall_arg *arg);
 	void	   *arg_parm[6];
 	bool	   errmsg;
@@ -1148,6 +1157,9 @@ static struct syscall_fmt {
 	  .arg_scnprintf = { [0] = SCA_FD, /* fd */ }, }, 
 	{ .name	    = "writev",	    .errmsg = true,
 	  .arg_scnprintf = { [0] = SCA_FD, /* fd */ }, }, 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1167,13 +1179,19 @@ struct syscall {
 	struct event_format *tp_format;
 	const char	    *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct syscall_fmt  *fmt;
 =======
+=======
+>>>>>>> v3.18
 	bool		    filtered;
 	bool		    is_exit;
 	struct syscall_fmt  *fmt;
 	size_t		    (**arg_scnprintf)(char *bf, size_t size, struct syscall_arg *arg);
 	void		    **arg_parm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1189,7 +1207,11 @@ static size_t fprintf_duration(unsigned long t, FILE *fp)
 	else
 		printed += color_fprintf(fp, PERF_COLOR_NORMAL, "%6.3f ms", duration);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return printed + fprintf(stdout, "): ");
+=======
+	return printed + fprintf(fp, "): ");
+>>>>>>> v3.18
 =======
 	return printed + fprintf(fp, "): ");
 >>>>>>> v3.18
@@ -1201,9 +1223,12 @@ struct thread_trace {
 	bool		  entry_pending;
 	unsigned long	  nr_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char		  *entry_str;
 	double		  runtime_ms;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long	  pfmaj, pfmin;
 	char		  *entry_str;
 	double		  runtime_ms;
@@ -1213,17 +1238,23 @@ struct thread_trace {
 	} paths;
 
 	struct intlist *syscall_stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct thread_trace *thread_trace__new(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return zalloc(sizeof(struct thread_trace));
 }
 
 static struct thread_trace *thread__trace(struct thread *thread)
 =======
+=======
+>>>>>>> v3.18
 	struct thread_trace *ttrace =  zalloc(sizeof(struct thread_trace));
 
 	if (ttrace)
@@ -1235,6 +1266,9 @@ static struct thread_trace *thread__trace(struct thread *thread)
 }
 
 static struct thread_trace *thread__trace(struct thread *thread, FILE *fp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct thread_trace *ttrace;
@@ -1242,6 +1276,7 @@ static struct thread_trace *thread__trace(struct thread *thread, FILE *fp)
 	if (thread == NULL)
 		goto fail;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (thread->priv == NULL)
 		thread->priv = thread_trace__new();
@@ -1251,6 +1286,8 @@ static struct thread_trace *thread__trace(struct thread *thread, FILE *fp)
 
 	ttrace = thread->priv;
 =======
+=======
+>>>>>>> v3.18
 	if (thread__priv(thread) == NULL)
 		thread__set_priv(thread, thread_trace__new());
 		
@@ -1258,13 +1295,20 @@ static struct thread_trace *thread__trace(struct thread *thread, FILE *fp)
 		goto fail;
 
 	ttrace = thread__priv(thread);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	++ttrace->nr_events;
 
 	return ttrace;
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	color_fprintf(stdout, PERF_COLOR_RED,
+=======
+	color_fprintf(fp, PERF_COLOR_RED,
+>>>>>>> v3.18
 =======
 	color_fprintf(fp, PERF_COLOR_RED,
 >>>>>>> v3.18
@@ -1273,9 +1317,12 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct trace {
 	int			audit_machine;
 =======
+=======
+>>>>>>> v3.18
 #define TRACE_PFMAJ		(1 << 0)
 #define TRACE_PFMIN		(1 << 1)
 
@@ -1285,11 +1332,15 @@ struct trace {
 		int		machine;
 		int		open_id;
 	}			audit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct {
 		int		max;
 		struct syscall  *table;
 	} syscalls;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct perf_record_opts opts;
 	struct machine		host;
@@ -1302,6 +1353,8 @@ struct trace {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct record_opts	opts;
 	struct machine		*host;
 	u64			base_time;
@@ -1430,6 +1483,9 @@ static size_t syscall_arg__scnprintf_close_fd(char *bf, size_t size,
 	return printed;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool trace__filter_duration(struct trace *trace, double t)
 {
@@ -1445,17 +1501,23 @@ static size_t trace__fprintf_tstamp(struct trace *trace, u64 tstamp, FILE *fp)
 
 static bool done = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void sig_handler(int sig __maybe_unused)
 {
 	done = true;
 =======
+=======
+>>>>>>> v3.18
 static bool interrupted = false;
 
 static void sig_handler(int sig)
 {
 	done = true;
 	interrupted = sig == SIGINT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1466,21 +1528,32 @@ static size_t trace__fprintf_entry_head(struct trace *trace, struct thread *thre
 	printed += fprintf_duration(duration, fp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (trace->multiple_threads)
 		printed += fprintf(fp, "%d ", thread->pid);
 =======
+=======
+>>>>>>> v3.18
 	if (trace->multiple_threads) {
 		if (trace->show_comm)
 			printed += fprintf(fp, "%.14s/", thread__comm_str(thread));
 		printed += fprintf(fp, "%d ", thread->tid);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return printed;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int trace__process_event(struct machine *machine, union perf_event *event)
+=======
+static int trace__process_event(struct trace *trace, struct machine *machine,
+				union perf_event *event, struct perf_sample *sample)
+>>>>>>> v3.18
 =======
 static int trace__process_event(struct trace *trace, struct machine *machine,
 				union perf_event *event, struct perf_sample *sample)
@@ -1491,17 +1564,23 @@ static int trace__process_event(struct trace *trace, struct machine *machine,
 	switch (event->header.type) {
 	case PERF_RECORD_LOST:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		color_fprintf(stdout, PERF_COLOR_RED,
 			      "LOST %" PRIu64 " events!\n", event->lost.lost);
 		ret = machine__process_lost_event(machine, event);
 	default:
 		ret = machine__process_event(machine, event);
 =======
+=======
+>>>>>>> v3.18
 		color_fprintf(trace->output, PERF_COLOR_RED,
 			      "LOST %" PRIu64 " events!\n", event->lost.lost);
 		ret = machine__process_lost_event(machine, event, sample);
 	default:
 		ret = machine__process_event(machine, event, sample);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -1509,6 +1588,7 @@ static int trace__process_event(struct trace *trace, struct machine *machine,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int trace__tool_process(struct perf_tool *tool __maybe_unused,
 			       union perf_event *event,
@@ -1542,6 +1622,8 @@ static int trace__symbols_init(struct trace *trace, struct perf_evlist *evlist)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 static int trace__tool_process(struct perf_tool *tool,
 			       union perf_event *event,
 			       struct perf_sample *sample,
@@ -1591,6 +1673,9 @@ static int syscall__set_arg_fmts(struct syscall *sc)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1599,7 +1684,11 @@ static int trace__read_syscall_info(struct trace *trace, int id)
 	char tp_name[128];
 	struct syscall *sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *name = audit_syscall_to_name(id, trace->audit_machine);
+=======
+	const char *name = audit_syscall_to_name(id, trace->audit.machine);
+>>>>>>> v3.18
 =======
 	const char *name = audit_syscall_to_name(id, trace->audit.machine);
 >>>>>>> v3.18
@@ -1627,6 +1716,7 @@ static int trace__read_syscall_info(struct trace *trace, int id)
 	sc = trace->syscalls.table + id;
 	sc->name = name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sc->fmt  = syscall_fmt__find(sc->name);
 
 	snprintf(tp_name, sizeof(tp_name), "sys_enter_%s", sc->name);
@@ -1645,6 +1735,8 @@ static size_t syscall__scnprintf_args(struct syscall *sc, char *bf, size_t size,
 {
 	int i = 0;
 =======
+=======
+>>>>>>> v3.18
 
 	if (trace->ev_qualifier) {
 		bool in = strlist__find(trace->ev_qualifier, name) != NULL;
@@ -1681,11 +1773,15 @@ static size_t syscall__scnprintf_args(struct syscall *sc, char *bf, size_t size,
 				      unsigned long *args, struct trace *trace,
 				      struct thread *thread)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t printed = 0;
 
 	if (sc->tp_format != NULL) {
 		struct format_field *field;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		for (field = sc->tp_format->format.fields->next; field; field = field->next) {
@@ -1695,6 +1791,8 @@ static size_t syscall__scnprintf_args(struct syscall *sc, char *bf, size_t size,
 		}
 	} else {
 =======
+=======
+>>>>>>> v3.18
 		u8 bit = 1;
 		struct syscall_arg arg = {
 			.idx	= 0,
@@ -1734,6 +1832,9 @@ static size_t syscall__scnprintf_args(struct syscall *sc, char *bf, size_t size,
 	} else {
 		int i = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		while (i < 6) {
 			printed += scnprintf(bf + printed, size - printed,
@@ -1748,6 +1849,7 @@ static size_t syscall__scnprintf_args(struct syscall *sc, char *bf, size_t size,
 
 typedef int (*tracepoint_handler)(struct trace *trace, struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct perf_sample *sample);
 
 static struct syscall *trace__syscall_info(struct trace *trace,
@@ -1759,6 +1861,8 @@ static struct syscall *trace__syscall_info(struct trace *trace,
 	if (id < 0) {
 		printf("Invalid syscall %d id, skipping...\n", id);
 =======
+=======
+>>>>>>> v3.18
 				  union perf_event *event,
 				  struct perf_sample *sample);
 
@@ -1783,6 +1887,9 @@ static struct syscall *trace__syscall_info(struct trace *trace,
 			fprintf(trace->output, "Invalid syscall %d id, skipping (%s, %" PRIu64 ") ...\n",
 				id, perf_evsel__name(evsel), ++n);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -1798,6 +1905,7 @@ static struct syscall *trace__syscall_info(struct trace *trace,
 
 out_cant_read:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("Problems reading syscall %d", id);
 	if (id <= trace->syscalls.max && trace->syscalls.table[id].name != NULL)
 		printf("(%s)", trace->syscalls.table[id].name);
@@ -1807,6 +1915,8 @@ out_cant_read:
 
 static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 =======
+=======
+>>>>>>> v3.18
 	if (verbose) {
 		fprintf(trace->output, "Problems reading syscall %d", id);
 		if (id <= trace->syscalls.max && trace->syscalls.table[id].name != NULL)
@@ -1844,12 +1954,16 @@ static void thread__update_stats(struct thread_trace *ttrace,
 
 static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 			    union perf_event *event __maybe_unused,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    struct perf_sample *sample)
 {
 	char *msg;
 	void *args;
 	size_t printed = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(&trace->host, sample->tid);
 	struct syscall *sc = trace__syscall_info(trace, evsel, sample);
@@ -1866,6 +1980,8 @@ static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 
 	ttrace = thread->priv;
 =======
+=======
+>>>>>>> v3.18
 	struct thread *thread;
 	int id = perf_evsel__sc_tp_uint(evsel, id, sample);
 	struct syscall *sc = trace__syscall_info(trace, evsel, id);
@@ -1883,6 +1999,9 @@ static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 		return -1;
 
 	args = perf_evsel__sc_tp_ptr(evsel, args, sample);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ttrace->entry_str == NULL) {
@@ -1896,6 +2015,7 @@ static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 	printed += scnprintf(msg + printed, 1024 - printed, "%s(", sc->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printed += syscall__scnprintf_args(sc, msg + printed, 1024 - printed,  args);
 
 	if (!strcmp(sc->name, "exit_group") || !strcmp(sc->name, "exit")) {
@@ -1903,6 +2023,8 @@ static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 			trace__fprintf_entry_head(trace, thread, 1, ttrace->entry_time, stdout);
 			printf("%-70s\n", ttrace->entry_str);
 =======
+=======
+>>>>>>> v3.18
 	printed += syscall__scnprintf_args(sc, msg + printed, 1024 - printed,
 					   args, trace, thread);
 
@@ -1910,6 +2032,9 @@ static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 		if (!trace->duration_filter && !trace->summary_only) {
 			trace__fprintf_entry_head(trace, thread, 1, sample->time, trace->output);
 			fprintf(trace->output, "%-70s\n", ttrace->entry_str);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else
@@ -1919,6 +2044,7 @@ static int trace__sys_enter(struct trace *trace, struct perf_evsel *evsel,
 }
 
 static int trace__sys_exit(struct trace *trace, struct perf_evsel *evsel,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			   struct perf_sample *sample)
 {
@@ -1935,6 +2061,8 @@ static int trace__sys_exit(struct trace *trace, struct perf_evsel *evsel,
 
 	ttrace = thread->priv;
 =======
+=======
+>>>>>>> v3.18
 			   union perf_event *event __maybe_unused,
 			   struct perf_sample *sample)
 {
@@ -1966,6 +2094,9 @@ static int trace__sys_exit(struct trace *trace, struct perf_evsel *evsel,
 		trace->last_vfs_getname = NULL;
 		++trace->stats.vfs_getname;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ttrace->exit_time = sample->time;
@@ -1977,6 +2108,7 @@ static int trace__sys_exit(struct trace *trace, struct perf_evsel *evsel,
 	} else if (trace->duration_filter)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	trace__fprintf_entry_head(trace, thread, duration, ttrace->entry_time, stdout);
 
@@ -2001,6 +2133,8 @@ static int trace__sys_exit(struct trace *trace, struct perf_evsel *evsel,
 
 	putchar('\n');
 =======
+=======
+>>>>>>> v3.18
 	if (trace->summary_only)
 		goto out;
 
@@ -2031,6 +2165,9 @@ signed_print:
 		goto signed_print;
 
 	fputc('\n', trace->output);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	ttrace->entry_pending = false;
@@ -2039,8 +2176,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int trace__sched_stat_runtime(struct trace *trace, struct perf_evsel *evsel,
 =======
+=======
+>>>>>>> v3.18
 static int trace__vfs_getname(struct trace *trace, struct perf_evsel *evsel,
 			      union perf_event *event __maybe_unused,
 			      struct perf_sample *sample)
@@ -2051,19 +2191,28 @@ static int trace__vfs_getname(struct trace *trace, struct perf_evsel *evsel,
 
 static int trace__sched_stat_runtime(struct trace *trace, struct perf_evsel *evsel,
 				     union perf_event *event __maybe_unused,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     struct perf_sample *sample)
 {
         u64 runtime = perf_evsel__intval(evsel, sample, "runtime");
 	double runtime_ms = (double)runtime / NSEC_PER_MSEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(&trace->host, sample->tid);
 	struct thread_trace *ttrace = thread__trace(thread);
 =======
+=======
+>>>>>>> v3.18
 	struct thread *thread = machine__findnew_thread(trace->host,
 							sample->pid,
 							sample->tid);
 	struct thread_trace *ttrace = thread__trace(thread, trace->output);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ttrace == NULL)
@@ -2075,7 +2224,11 @@ static int trace__sched_stat_runtime(struct trace *trace, struct perf_evsel *evs
 
 out_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("%s: comm=%s,pid=%u,runtime=%" PRIu64 ",vruntime=%" PRIu64 ")\n",
+=======
+	fprintf(trace->output, "%s: comm=%s,pid=%u,runtime=%" PRIu64 ",vruntime=%" PRIu64 ")\n",
+>>>>>>> v3.18
 =======
 	fprintf(trace->output, "%s: comm=%s,pid=%u,runtime=%" PRIu64 ",vruntime=%" PRIu64 ")\n",
 >>>>>>> v3.18
@@ -2088,7 +2241,10 @@ out_dump:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void print_location(FILE *f, struct perf_sample *sample,
 			   struct addr_location *al,
 			   bool print_dso, bool print_sym)
@@ -2321,6 +2477,9 @@ static int perf_evlist__add_pgfault(struct perf_evlist *evlist,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int trace__run(struct trace *trace, int argc, const char **argv)
 {
@@ -2329,6 +2488,7 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 	int err = -1, i;
 	unsigned long before;
 	const bool forks = argc > 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (evlist == NULL) {
@@ -2353,6 +2513,8 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 	if (err < 0) {
 		printf("Problems parsing the target to trace, check your options!\n");
 =======
+=======
+>>>>>>> v3.18
 	bool draining = false;
 	char sbuf[STRERR_BUFSIZE];
 
@@ -2387,6 +2549,9 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 	err = perf_evlist__create_maps(evlist, &trace->opts.target);
 	if (err < 0) {
 		fprintf(trace->output, "Problems parsing the target to trace, check your options!\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_delete_evlist;
 	}
@@ -2394,8 +2559,13 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 	err = trace__symbols_init(trace, evlist);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("Problems initializing symbol libraries!\n");
 		goto out_delete_maps;
+=======
+		fprintf(trace->output, "Problems initializing symbol libraries!\n");
+		goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 		fprintf(trace->output, "Problems initializing symbol libraries!\n");
 		goto out_delete_evlist;
@@ -2410,20 +2580,27 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 	if (forks) {
 		err = perf_evlist__prepare_workload(evlist, &trace->opts.target,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    argv, false, false);
 		if (err < 0) {
 			printf("Couldn't run the workload!\n");
 			goto out_delete_maps;
 =======
+=======
+>>>>>>> v3.18
 						    argv, false, NULL);
 		if (err < 0) {
 			fprintf(trace->output, "Couldn't run the workload!\n");
 			goto out_delete_evlist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	err = perf_evlist__open(evlist);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (err < 0) {
 		printf("Couldn't create the events: %s\n", strerror(errno));
@@ -2435,6 +2612,8 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 		printf("Couldn't mmap the events: %s\n", strerror(errno));
 		goto out_close_evlist;
 =======
+=======
+>>>>>>> v3.18
 	if (err < 0)
 		goto out_error_open;
 
@@ -2443,6 +2622,9 @@ static int trace__run(struct trace *trace, int argc, const char **argv)
 		fprintf(trace->output, "Couldn't mmap the events: %s\n",
 			strerror_r(errno, sbuf, sizeof(sbuf)));
 		goto out_delete_evlist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2468,6 +2650,7 @@ again:
 			err = perf_evlist__parse_sample(evlist, event, &sample);
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printf("Can't parse sample, err = %d, skipping...\n", err);
 				continue;
 			}
@@ -2478,6 +2661,8 @@ again:
 			if (type != PERF_RECORD_SAMPLE) {
 				trace__process_event(&trace->host, event);
 =======
+=======
+>>>>>>> v3.18
 				fprintf(trace->output, "Can't parse sample, err = %d, skipping...\n", err);
 				goto next_event;
 			}
@@ -2487,12 +2672,16 @@ again:
 
 			if (type != PERF_RECORD_SAMPLE) {
 				trace__process_event(trace, trace->host, event, &sample);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 			}
 
 			evsel = perf_evlist__id2evsel(evlist, sample.id);
 			if (evsel == NULL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				printf("Unknown tp ID %" PRIu64 ", skipping...\n", sample.id);
 				continue;
@@ -2508,6 +2697,8 @@ again:
 			handler = evsel->handler.func;
 			handler(trace, evsel, &sample);
 =======
+=======
+>>>>>>> v3.18
 				fprintf(trace->output, "Unknown tp ID %" PRIu64 ", skipping...\n", sample.id);
 				goto next_event;
 			}
@@ -2527,11 +2718,15 @@ next_event:
 
 			if (interrupted)
 				goto out_disable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	if (trace->nr_events == before) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (done)
 			goto out_unmap_evlist;
@@ -2554,6 +2749,8 @@ out_delete_evlist:
 	perf_evlist__delete(evlist);
 out:
 =======
+=======
+>>>>>>> v3.18
 		int timeout = done ? 100 : -1;
 
 		if (!draining && perf_evlist__poll(evlist, timeout) > 0) {
@@ -2695,6 +2892,9 @@ static int trace__replay(struct trace *trace)
 out:
 	perf_session__delete(session);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -2704,6 +2904,7 @@ static size_t trace__fprintf_threads_header(FILE *fp)
 	size_t printed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printed  = fprintf(fp, "\n _____________________________________________________________________\n");
 	printed += fprintf(fp," __)    Summary of events    (__\n\n");
 	printed += fprintf(fp,"              [ task - pid ]     [ events ] [ ratio ]  [ runtime ]\n");
@@ -2711,10 +2912,14 @@ static size_t trace__fprintf_threads_header(FILE *fp)
 =======
 	printed  = fprintf(fp, "\n Summary of events:\n\n");
 >>>>>>> v3.18
+=======
+	printed  = fprintf(fp, "\n Summary of events:\n\n");
+>>>>>>> v3.18
 
 	return printed;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static size_t trace__fprintf_thread_summary(struct trace *trace, FILE *fp)
 {
@@ -2748,6 +2953,8 @@ static size_t trace__fprintf_thread_summary(struct trace *trace, FILE *fp)
 
 	return printed;
 =======
+=======
+>>>>>>> v3.18
 static size_t thread__dump_stats(struct thread_trace *ttrace,
 				 struct trace *trace, FILE *fp)
 {
@@ -2840,6 +3047,9 @@ static size_t trace__fprintf_thread_summary(struct trace *trace, FILE *fp)
 	machine__for_each_thread(trace->host, trace__fprintf_one_thread, &data);
 
 	return data.printed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2853,7 +3063,10 @@ static int trace__set_duration(const struct option *opt, const char *str,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int trace__open_output(struct trace *trace, const char *filename)
 {
 	struct stat st;
@@ -2888,6 +3101,9 @@ static int parse_pagefaults(const struct option *opt, const char *str,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 {
@@ -2895,11 +3111,14 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 		"perf trace [<options>] [<command>]",
 		"perf trace [<options>] -- <command> [<options>]",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		NULL
 	};
 	struct trace trace = {
 		.audit_machine = audit_detect_machine(),
 =======
+=======
+>>>>>>> v3.18
 		"perf trace record [<options>] [<command>]",
 		"perf trace record [<options>] -- <command> [<options>]",
 		NULL
@@ -2909,6 +3128,9 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 			.machine = audit_detect_machine(),
 			.open_id = audit_name_to_syscall("open", trace.audit.machine),
 		},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.syscalls = {
 			. max = -1,
@@ -2920,6 +3142,7 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 			},
 			.user_freq     = UINT_MAX,
 			.user_interval = ULLONG_MAX,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			.no_delay      = true,
 			.mmap_pages    = 1024,
@@ -2940,6 +3163,8 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 		     "number of mmap data pages"),
 	OPT_STRING(0, "uid", &trace.opts.target.uid_str, "user",
 =======
+=======
+>>>>>>> v3.18
 			.no_buffering  = true,
 			.mmap_pages    = 1024,
 		},
@@ -2971,6 +3196,9 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 		     "number of mmap data pages",
 		     perf_evlist__parse_mmap_pages),
 	OPT_STRING('u', "uid", &trace.opts.target.uid_str, "user",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   "user to profile"),
 	OPT_CALLBACK(0, "duration", &trace, "float",
@@ -2978,7 +3206,10 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 		     trace__set_duration),
 	OPT_BOOLEAN(0, "sched", &trace.sched, "show blocking scheduler events"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	OPT_INCR('v', "verbose", &verbose, "be more verbose"),
 	OPT_BOOLEAN('T', "time", &trace.full_time,
 		    "Show full timestamp, not time relative to first start"),
@@ -2989,12 +3220,16 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_CALLBACK_DEFAULT('F', "pf", &trace.trace_pgfaults, "all|maj|min",
 		     "Trace pagefaults", parse_pagefaults, "maj"),
 	OPT_BOOLEAN(0, "syscalls", &trace.trace_syscalls, "Trace syscalls"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPT_END()
 	};
 	int err;
 	char bf[BUFSIZ];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	argc = parse_options(argc, argv, trace_options, trace_usage, 0);
 
@@ -3021,6 +3256,8 @@ int cmd_trace(int argc, const char **argv, const char *prefix __maybe_unused)
 		trace__fprintf_thread_summary(&trace, stdout);
 
 =======
+=======
+>>>>>>> v3.18
 	argc = parse_options(argc, argv, trace_options, trace_usage,
 			     PARSE_OPT_STOP_AT_NON_OPTION);
 
@@ -3090,6 +3327,9 @@ out_close:
 	if (output_name != NULL)
 		fclose(trace.output);
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

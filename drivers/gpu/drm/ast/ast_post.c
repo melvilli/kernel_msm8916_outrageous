@@ -34,6 +34,7 @@
 static void ast_init_dram_2300(struct drm_device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 ast_enable_vga(struct drm_device *dev)
 {
@@ -47,6 +48,8 @@ ast_enable_vga(struct drm_device *dev)
 static bool
 ast_is_vga_enabled(struct drm_device *dev)
 =======
+=======
+>>>>>>> v3.18
 void ast_enable_vga(struct drm_device *dev)
 {
 	struct ast_private *ast = dev->dev_private;
@@ -64,6 +67,9 @@ void ast_enable_mmio(struct drm_device *dev)
 
 
 bool ast_is_vga_enabled(struct drm_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ast_private *ast = dev->dev_private;
@@ -73,6 +79,7 @@ bool ast_is_vga_enabled(struct drm_device *dev)
 		/* TODO 1180 */
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ch = ast_io_read8(ast, 0x43);
 		return !!(ch & 0x01);
 	}
@@ -80,6 +87,8 @@ bool ast_is_vga_enabled(struct drm_device *dev)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 		ch = ast_io_read8(ast, AST_IO_VGA_ENABLE_PORT);
 		if (ch) {
 			ast_open_key(ast);
@@ -89,6 +98,9 @@ bool ast_is_vga_enabled(struct drm_device *dev)
 	}
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const u8 extreginfo[] = { 0x0f, 0x04, 0x1c, 0xff };
@@ -107,7 +119,11 @@ ast_set_def_ext_reg(struct drm_device *dev)
 		ast_set_index_reg(ast, AST_IO_CRTC_PORT, i, 0x00);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ast->chip == AST2300) {
+=======
+	if (ast->chip == AST2300 || ast->chip == AST2400) {
+>>>>>>> v3.18
 =======
 	if (ast->chip == AST2300 || ast->chip == AST2400) {
 >>>>>>> v3.18
@@ -135,7 +151,11 @@ ast_set_def_ext_reg(struct drm_device *dev)
 	/* Enable RAMDAC for A1 */
 	reg = 0x04;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ast->chip == AST2300)
+=======
+	if (ast->chip == AST2300 || ast->chip == AST2400)
+>>>>>>> v3.18
 =======
 	if (ast->chip == AST2300 || ast->chip == AST2400)
 >>>>>>> v3.18
@@ -143,6 +163,7 @@ ast_set_def_ext_reg(struct drm_device *dev)
 	ast_set_index_reg_mask(ast, AST_IO_CRTC_PORT, 0xb6, 0xff, reg);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u32 mindwm(struct ast_private *ast, u32 r)
 {
@@ -157,6 +178,8 @@ static inline void moutdwm(struct ast_private *ast, u32 r, u32 v)
 	ast_write32(ast, 0xf004, r & 0xffff0000);
 	ast_write32(ast, 0xf000, 0x1);
 =======
+=======
+>>>>>>> v3.18
 u32 ast_mindwm(struct ast_private *ast, u32 r)
 {
 	uint32_t data;
@@ -178,6 +201,9 @@ void ast_moutdwm(struct ast_private *ast, u32 r, u32 v)
 	do {
 		data = ast_read32(ast, 0xf004) & 0xffff0000;
 	} while (data != (r & 0xffff0000));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ast_write32(ast, 0x10000 + (r & 0x0000ffff), v);
 }
@@ -215,6 +241,7 @@ static u32 mmctestburst2_ast2150(struct ast_private *ast, u32 datagen)
 	u32 data, timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 	moutdwm(ast, 0x1e6e0070, 0x00000001 | (datagen << 3));
 	timeout = 0;
@@ -238,6 +265,8 @@ static u32 mmctestburst2_ast2150(struct ast_private *ast, u32 datagen)
 	data = (mindwm(ast, 0x1e6e0070) & 0x80) >> 7;
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000001 | (datagen << 3));
 	timeout = 0;
@@ -260,6 +289,9 @@ static u32 mmctestburst2_ast2150(struct ast_private *ast, u32 datagen)
 	} while (!data);
 	data = (ast_mindwm(ast, 0x1e6e0070) & 0x80) >> 7;
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return data;
 }
@@ -269,6 +301,7 @@ static u32 mmctestsingle2_ast2150(struct ast_private *ast, u32 datagen)
 {
 	u32 data, timeout;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 	moutdwm(ast, 0x1e6e0070, 0x00000005 | (datagen << 3));
@@ -283,6 +316,8 @@ static u32 mmctestsingle2_ast2150(struct ast_private *ast, u32 datagen)
 	data = (mindwm(ast, 0x1e6e0070) & 0x80) >> 7;
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000005 | (datagen << 3));
 	timeout = 0;
@@ -295,6 +330,9 @@ static u32 mmctestsingle2_ast2150(struct ast_private *ast, u32 datagen)
 	} while (!data);
 	data = (ast_mindwm(ast, 0x1e6e0070) & 0x80) >> 7;
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return data;
 }
@@ -316,7 +354,11 @@ static int cbrscan_ast2150(struct ast_private *ast, int busw)
 
 	for (patcnt = 0; patcnt < CBR_PATNUM_AST2150; patcnt++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1e6e007c, pattern_AST2150[patcnt]);
+=======
+		ast_moutdwm(ast, 0x1e6e007c, pattern_AST2150[patcnt]);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1e6e007c, pattern_AST2150[patcnt]);
 >>>>>>> v3.18
@@ -342,7 +384,11 @@ cbr_start:
 
 	for (dlli = 0; dlli < 100; dlli++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1e6e0068, dlli | (dlli << 8) | (dlli << 16) | (dlli << 24));
+=======
+		ast_moutdwm(ast, 0x1e6e0068, dlli | (dlli << 8) | (dlli << 16) | (dlli << 24));
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1e6e0068, dlli | (dlli << 8) | (dlli << 16) | (dlli << 24));
 >>>>>>> v3.18
@@ -363,7 +409,11 @@ cbr_start:
 
 	dlli = dll_min[0] + (((dll_max[0] - dll_min[0]) * 7) >> 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0068, dlli | (dlli << 8) | (dlli << 16) | (dlli << 24));
+=======
+	ast_moutdwm(ast, 0x1e6e0068, dlli | (dlli << 8) | (dlli << 16) | (dlli << 24));
+>>>>>>> v3.18
 =======
 	ast_moutdwm(ast, 0x1e6e0068, dlli | (dlli << 8) | (dlli << 16) | (dlli << 24));
 >>>>>>> v3.18
@@ -475,6 +525,7 @@ void ast_post_gpu(struct drm_device *dev)
 
 	ast_enable_vga(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ast_open_key(ast);
 	ast_set_def_ext_reg(dev);
 
@@ -483,6 +534,8 @@ void ast_post_gpu(struct drm_device *dev)
 	else
 		ast_init_dram_reg(dev);
 =======
+=======
+>>>>>>> v3.18
 	ast_enable_mmio(dev);
 	ast_open_key(ast);
 	ast_set_def_ext_reg(dev);
@@ -493,6 +546,9 @@ void ast_post_gpu(struct drm_device *dev)
 		ast_init_dram_reg(dev);
 
 	ast_init_3rdtx(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -529,6 +585,10 @@ struct ast2300_dram_param {
  * DQSI DLL CBR Setting
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CBR_SIZE0            ((1  << 10) - 1)
+>>>>>>> v3.18
 =======
 #define CBR_SIZE0            ((1  << 10) - 1)
 >>>>>>> v3.18
@@ -553,7 +613,10 @@ static const u32 pattern[8] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0 /* unused in DDX, included for completeness */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mmc_test_burst(struct ast_private *ast, u32 datagen)
@@ -561,22 +624,29 @@ static int mmc_test_burst(struct ast_private *ast, u32 datagen)
 	u32 data, timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 	moutdwm(ast, 0x1e6e0070, 0x000000c1 | (datagen << 3));
 	timeout = 0;
 	do {
 		data = mindwm(ast, 0x1e6e0070) & 0x3000;
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	ast_moutdwm(ast, 0x1e6e0070, 0x000000c1 | (datagen << 3));
 	timeout = 0;
 	do {
 		data = ast_mindwm(ast, 0x1e6e0070) & 0x3000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (data & 0x2000) {
 			return 0;
 		}
 		if (++timeout > TIMEOUT) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			moutdwm(ast, 0x1e6e0070, 0x00000000);
 			return 0;
@@ -587,6 +657,8 @@ static int mmc_test_burst(struct ast_private *ast, u32 datagen)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 			ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 			return 0;
 		}
@@ -594,12 +666,16 @@ static int mmc_test_burst(struct ast_private *ast, u32 datagen)
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	return 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mmc_test_burst2(struct ast_private *ast, u32 datagen)
 {
 	u32 data, timeout;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 	moutdwm(ast, 0x1e6e0070, 0x00000041 | (datagen << 3));
@@ -619,6 +695,8 @@ static int mmc_test_burst2(struct ast_private *ast, u32 datagen)
 
 #if 0 /* Unused in DDX here for completeness */
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000041 | (datagen << 3));
 	timeout = 0;
@@ -635,11 +713,15 @@ static int mmc_test_burst2(struct ast_private *ast, u32 datagen)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mmc_test_single(struct ast_private *ast, u32 datagen)
 {
 	u32 data, timeout;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 	moutdwm(ast, 0x1e6e0070, 0x000000c5 | (datagen << 3));
@@ -658,6 +740,8 @@ static int mmc_test_single(struct ast_private *ast, u32 datagen)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	ast_moutdwm(ast, 0x1e6e0070, 0x000000c5 | (datagen << 3));
 	timeout = 0;
@@ -673,12 +757,16 @@ static int mmc_test_single(struct ast_private *ast, u32 datagen)
 	ast_moutdwm(ast, 0x1e6e0070, 0x0);
 	return 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mmc_test_single2(struct ast_private *ast, u32 datagen)
 {
 	u32 data, timeout;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1e6e0070, 0x00000000);
 	moutdwm(ast, 0x1e6e0070, 0x00000005 | (datagen << 3));
@@ -694,6 +782,8 @@ static int mmc_test_single2(struct ast_private *ast, u32 datagen)
 	data = (data | (data >> 16)) & 0xffff;
 	moutdwm(ast, 0x1e6e0070, 0x0);
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000000);
 	ast_moutdwm(ast, 0x1e6e0070, 0x00000005 | (datagen << 3));
 	timeout = 0;
@@ -707,6 +797,9 @@ static int mmc_test_single2(struct ast_private *ast, u32 datagen)
 	data = ast_mindwm(ast, 0x1e6e0078);
 	data = (data | (data >> 16)) & 0xffff;
 	ast_moutdwm(ast, 0x1e6e0070, 0x0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return data;
 }
@@ -737,7 +830,11 @@ static int cbr_scan(struct ast_private *ast)
 	data2 = 3;
 	for (patcnt = 0; patcnt < CBR_PATNUM; patcnt++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1e6e007c, pattern[patcnt]);
+=======
+		ast_moutdwm(ast, 0x1e6e007c, pattern[patcnt]);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1e6e007c, pattern[patcnt]);
 >>>>>>> v3.18
@@ -776,17 +873,23 @@ static u32 cbr_scan2(struct ast_private *ast)
 	data2 = 0xffff;
 	for (patcnt = 0; patcnt < CBR_PATNUM; patcnt++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1e6e007c, pattern[patcnt]);
 		for (loop = 0; loop < CBR_PASSNUM2; loop++) {
 			if ((data = cbr_test2(ast)) != 0) {
 				data2 &= data;
 				if (!data)
 =======
+=======
+>>>>>>> v3.18
 		ast_moutdwm(ast, 0x1e6e007c, pattern[patcnt]);
 		for (loop = 0; loop < CBR_PASSNUM2; loop++) {
 			if ((data = cbr_test2(ast)) != 0) {
 				data2 &= data;
 				if (!data2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					return 0;
 				break;
@@ -798,6 +901,7 @@ static u32 cbr_scan2(struct ast_private *ast)
 	return data2;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if 0 /* unused in DDX - added for completeness */
 static void finetuneDQI(struct ast_private *ast, struct ast2300_dram_param *param)
@@ -900,6 +1004,8 @@ static void finetuneDQI_L(struct ast_private *ast, struct ast2300_dram_param *pa
 	u32 gold_sadj[2], dllmin[16], dllmax[16], dlli, data, cnt, mask, passcnt;
 
 =======
+=======
+>>>>>>> v3.18
 static u32 cbr_test3(struct ast_private *ast)
 {
 	if (!mmc_test_burst(ast, 0))
@@ -929,6 +1035,9 @@ static bool finetuneDQI_L(struct ast_private *ast, struct ast2300_dram_param *pa
 {
 	u32 gold_sadj[2], dllmin[16], dllmax[16], dlli, data, cnt, mask, passcnt, retry = 0;
 	bool status = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 FINETUNE_START:
 	for (cnt = 0; cnt < 16; cnt++) {
@@ -937,6 +1046,7 @@ FINETUNE_START:
 	}
 	passcnt = 0;
 	for (dlli = 0; dlli < 76; dlli++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		moutdwm(ast, 0x1E6E0068, 0x00001400 | (dlli << 16) | (dlli << 24));
 		/* Wait DQSI latch phase calibration */
@@ -948,6 +1058,10 @@ FINETUNE_START:
 		moutdwm(ast, 0x1E6E0070, 0x00000000);
 
 		moutdwm(ast, 0x1E6E0074, CBR_SIZE1);
+=======
+		ast_moutdwm(ast, 0x1E6E0068, 0x00001400 | (dlli << 16) | (dlli << 24));
+		ast_moutdwm(ast, 0x1E6E0074, CBR_SIZE1);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E0068, 0x00001400 | (dlli << 16) | (dlli << 24));
 		ast_moutdwm(ast, 0x1E6E0074, CBR_SIZE1);
@@ -980,10 +1094,13 @@ FINETUNE_START:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (passcnt != 16) {
 		goto FINETUNE_START;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (retry++ > 10)
 		goto FINETUNE_DONE;
 	if (passcnt != 16) {
@@ -991,6 +1108,9 @@ FINETUNE_START:
 	}
 	status = true;
 FINETUNE_DONE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gold_sadj[0] = gold_sadj[0] >> 4;
 	gold_sadj[1] = gold_sadj[0];
@@ -1016,7 +1136,11 @@ FINETUNE_DONE:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moutdwm(ast, 0x1E6E0080, data);
+=======
+	ast_moutdwm(ast, 0x1E6E0080, data);
+>>>>>>> v3.18
 =======
 	ast_moutdwm(ast, 0x1E6E0080, data);
 >>>>>>> v3.18
@@ -1044,6 +1168,7 @@ FINETUNE_DONE:
 			data |= dlli << 21;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1E6E0084, data);
 
@@ -1186,6 +1311,8 @@ static void cbr_dll2(struct ast_private *ast, struct ast2300_dram_param *param)
 	finetuneDQI_L(ast, param);
 	finetuneDQI_L2(ast, param);
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1E6E0084, data);
 	return status;
 } /* finetuneDQI_L */
@@ -1288,6 +1415,9 @@ static bool cbr_dll2(struct ast_private *ast, struct ast2300_dram_param *param)
 	finetuneDQSI(ast);
 	if (finetuneDQI_L(ast, param) == false)
 		return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 CBR_START2:
@@ -1295,6 +1425,7 @@ CBR_START2:
 	dllmax[0] = dllmax[1] = 0x0;
 	passcnt = 0;
 	for (dlli = 0; dlli < 76; dlli++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		moutdwm(ast, 0x1E6E0068, 0x00001300 | (dlli << 16) | (dlli << 24));
 		/* Wait DQSI latch phase calibration */
@@ -1306,6 +1437,10 @@ CBR_START2:
 		moutdwm(ast, 0x1E6E0070, 0x00000000);
 
 		moutdwm(ast, 0x1E6E0074, CBR_SIZE2);
+=======
+		ast_moutdwm(ast, 0x1E6E0068, 0x00001300 | (dlli << 16) | (dlli << 24));
+		ast_moutdwm(ast, 0x1E6E0074, CBR_SIZE2);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E0068, 0x00001300 | (dlli << 16) | (dlli << 24));
 		ast_moutdwm(ast, 0x1E6E0074, CBR_SIZE2);
@@ -1334,6 +1469,11 @@ CBR_START2:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (retry++ > 10)
+		goto CBR_DONE2;
+>>>>>>> v3.18
 =======
 	if (retry++ > 10)
 		goto CBR_DONE2;
@@ -1344,6 +1484,7 @@ CBR_START2:
 	if (dllmax[1] == 0 || (dllmax[1]-dllmin[1]) < CBR_THRESHOLD) {
 		goto CBR_START2;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dlli  = (dllmin[1] + dllmax[1]) >> 1;
 	dlli <<= 8;
@@ -1368,6 +1509,8 @@ CBR_START2:
 	} while (!(data & 0x00001000));
 	moutdwm(ast, 0x1E6E0070, 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 	status = true;
 CBR_DONE2:
 	dlli  = (dllmin[1] + dllmax[1]) >> 1;
@@ -1375,6 +1518,9 @@ CBR_DONE2:
 	dlli += (dllmin[0] + dllmax[0]) >> 1;
 	ast_moutdwm(ast, 0x1E6E0068, ast_mindwm(ast, 0x1E720058) | (dlli << 16));
 	return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } /* CBRDLL2 */
 
@@ -1383,15 +1529,21 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 	u32 trap, trap_AC2, trap_MRS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moutdwm(ast, 0x1E6E2000, 0x1688A8A8);
 
 	/* Ger trap info */
 	trap = (mindwm(ast, 0x1E6E2070) >> 25) & 0x3;
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1E6E2000, 0x1688A8A8);
 
 	/* Ger trap info */
 	trap = (ast_mindwm(ast, 0x1E6E2070) >> 25) & 0x3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trap_AC2  = 0x00020000 + (trap << 16);
 	trap_AC2 |= 0x00300000 + ((trap & 0x2) << 19);
@@ -1407,7 +1559,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 	switch (param->dram_freq) {
 	case 336:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0190);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0190);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0190);
 >>>>>>> v3.18
@@ -1418,7 +1574,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->reg_MRS       = 0x04001400 | trap_MRS;
 		param->reg_EMRS      = 0x00000000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		param->reg_IOZ       = 0x00000034;
+=======
+		param->reg_IOZ       = 0x00000023;
+>>>>>>> v3.18
 =======
 		param->reg_IOZ       = 0x00000023;
 >>>>>>> v3.18
@@ -1427,11 +1587,14 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->madj_max      = 96;
 		param->dll2_finetune_step = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	default:
 	case 396:
 		moutdwm(ast, 0x1E6E2020, 0x03F1);
 =======
+=======
+>>>>>>> v3.18
 		switch (param->dram_chipid) {
 		default:
 		case AST_DRAM_512Mx16:
@@ -1449,6 +1612,9 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 	default:
 	case 396:
 		ast_moutdwm(ast, 0x1E6E2020, 0x03F1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		param->wodt          = 1;
 		param->reg_AC1       = 0x33302825;
@@ -1460,7 +1626,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->reg_DRV       = 0x000000FA;
 		param->reg_DQIDLY    = 0x00000089;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		param->reg_FREQ      = 0x000050C0;
+=======
+		param->reg_FREQ      = 0x00005040;
+>>>>>>> v3.18
 =======
 		param->reg_FREQ      = 0x00005040;
 >>>>>>> v3.18
@@ -1484,7 +1654,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 
 	case 408:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x01F0);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x01F0);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x01F0);
 >>>>>>> v3.18
@@ -1495,7 +1669,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->reg_MRS       = 0x04001600 | trap_MRS;
 		param->reg_EMRS      = 0x00000000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		param->reg_IOZ       = 0x00000034;
+=======
+		param->reg_IOZ       = 0x00000023;
+>>>>>>> v3.18
 =======
 		param->reg_IOZ       = 0x00000023;
 >>>>>>> v3.18
@@ -1522,7 +1700,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 456:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0230);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0230);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0230);
 >>>>>>> v3.18
@@ -1540,7 +1722,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 504:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0270);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0270);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0270);
 >>>>>>> v3.18
@@ -1558,7 +1744,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 528:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0290);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0290);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0290);
 >>>>>>> v3.18
@@ -1578,7 +1768,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 576:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0140);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0140);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0140);
 >>>>>>> v3.18
@@ -1600,7 +1794,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 600:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x02E1);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x02E1);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x02E1);
 >>>>>>> v3.18
@@ -1622,7 +1820,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 624:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0160);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0160);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0160);
 >>>>>>> v3.18
@@ -1659,7 +1861,11 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->dram_config = 0x133;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}; /* switch size */
+=======
+	} /* switch size */
+>>>>>>> v3.18
 =======
 	} /* switch size */
 >>>>>>> v3.18
@@ -1684,6 +1890,7 @@ static void get_ddr3_info(struct ast_private *ast, struct ast2300_dram_param *pa
 
 static void ddr3_init(struct ast_private *ast, struct ast2300_dram_param *param)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 data, data2;
 
@@ -1740,6 +1947,8 @@ static void ddr3_init(struct ast_private *ast, struct ast2300_dram_param *param)
 		}
 		moutdwm(ast, 0x1E6E0064, data2);
 =======
+=======
+>>>>>>> v3.18
 	u32 data, data2, retry = 0;
 
 ddr3_init_start:
@@ -1790,12 +1999,16 @@ ddr3_init_start:
 			break;
 		}
 		ast_moutdwm(ast, 0x1E6E0064, data2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (data2 & 0x00100000) {
 			data2 = ((data2 & 0xff) >> 3) + 3;
 		} else {
 			data2 = ((data2 & 0xff) >> 2) + 5;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		data = mindwm(ast, 0x1E6E0068) & 0xffff00ff;
 		data2 += data & 0xff;
@@ -1839,6 +2052,8 @@ ddr3_init_start:
 
 	moutdwm(ast, 0x1E6E000C, 0x7FFF5C01);
 =======
+=======
+>>>>>>> v3.18
 		data = ast_mindwm(ast, 0x1E6E0068) & 0xffff00ff;
 		data2 += data & 0xff;
 		data = data | (data2 << 8);
@@ -1876,6 +2091,9 @@ ddr3_init_start:
 	ast_moutdwm(ast, 0x1E6E0028, 0x00000001);
 
 	ast_moutdwm(ast, 0x1E6E000C, 0x00005C01);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data = 0;
 	if (param->wodt) {
@@ -1884,6 +2102,7 @@ ddr3_init_start:
 	if (param->rodt) {
 		data = data | 0x3000 | ((param->reg_AC2 & 0x60000) >> 3);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1E6E0034, data | 0x3);
 
@@ -1910,6 +2129,8 @@ ddr3_init_start:
 	moutdwm(ast, 0x1E6E0050, 0x80000000);
 	moutdwm(ast, 0x1E6E0050, 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1E6E0034, data | 0x3);
 
 	/* Calibrate the DQSI delay */
@@ -1927,6 +2148,9 @@ ddr3_init_start:
 	ast_moutdwm(ast, 0x1E6E0070, 0x00000000);
 	ast_moutdwm(ast, 0x1E6E0050, 0x80000000);
 	ast_moutdwm(ast, 0x1E6E0050, 0x00000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1938,15 +2162,21 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 	u32 trap, trap_AC2, trap_MRS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moutdwm(ast, 0x1E6E2000, 0x1688A8A8);
 
 	/* Ger trap info */
 	trap = (mindwm(ast, 0x1E6E2070) >> 25) & 0x3;
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1E6E2000, 0x1688A8A8);
 
 	/* Ger trap info */
 	trap = (ast_mindwm(ast, 0x1E6E2070) >> 25) & 0x3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trap_AC2  = (trap << 20) | (trap << 16);
 	trap_AC2 += 0x00110000;
@@ -1962,7 +2192,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 	switch (param->dram_freq) {
 	case 264:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0130);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0130);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0130);
 >>>>>>> v3.18
@@ -1981,7 +2215,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 336:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0190);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0190);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0190);
 >>>>>>> v3.18
@@ -1998,11 +2236,14 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->madj_max      = 96;
 		param->dll2_finetune_step = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	default:
 	case 396:
 		moutdwm(ast, 0x1E6E2020, 0x03F1);
 =======
+=======
+>>>>>>> v3.18
 		switch (param->dram_chipid) {
 		default:
 		case AST_DRAM_512Mx16:
@@ -2022,6 +2263,9 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 	default:
 	case 396:
 		ast_moutdwm(ast, 0x1E6E2020, 0x03F1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		param->wodt          = 1;
 		param->rodt          = 0;
@@ -2034,7 +2278,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->reg_IOZ       = 0x00000034;
 		param->reg_DQIDLY    = 0x00000089;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		param->reg_FREQ      = 0x000050C0;
+=======
+		param->reg_FREQ      = 0x00005040;
+>>>>>>> v3.18
 =======
 		param->reg_FREQ      = 0x00005040;
 >>>>>>> v3.18
@@ -2061,7 +2309,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 
 	case 408:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x01F0);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x01F0);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x01F0);
 >>>>>>> v3.18
@@ -2098,7 +2350,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 456:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0230);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0230);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0230);
 >>>>>>> v3.18
@@ -2117,7 +2373,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 504:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0261);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0261);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0261);
 >>>>>>> v3.18
@@ -2137,7 +2397,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 528:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0120);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0120);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0120);
 >>>>>>> v3.18
@@ -2157,7 +2421,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 552:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x02A1);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x02A1);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x02A1);
 >>>>>>> v3.18
@@ -2177,7 +2445,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		break;
 	case 576:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moutdwm(ast, 0x1E6E2020, 0x0140);
+=======
+		ast_moutdwm(ast, 0x1E6E2020, 0x0140);
+>>>>>>> v3.18
 =======
 		ast_moutdwm(ast, 0x1E6E2020, 0x0140);
 >>>>>>> v3.18
@@ -2212,7 +2484,11 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 		param->dram_config = 0x123;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}; /* switch size */
+=======
+	} /* switch size */
+>>>>>>> v3.18
 =======
 	} /* switch size */
 >>>>>>> v3.18
@@ -2236,6 +2512,7 @@ static void get_ddr2_info(struct ast_private *ast, struct ast2300_dram_param *pa
 
 static void ddr2_init(struct ast_private *ast, struct ast2300_dram_param *param)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 data, data2;
 
@@ -2291,6 +2568,8 @@ static void ddr2_init(struct ast_private *ast, struct ast2300_dram_param *param)
 		}
 		moutdwm(ast, 0x1E6E0064, data2);
 =======
+=======
+>>>>>>> v3.18
 	u32 data, data2, retry = 0;
 
 ddr2_init_start:
@@ -2340,12 +2619,16 @@ ddr2_init_start:
 			break;
 		}
 		ast_moutdwm(ast, 0x1E6E0064, data2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (data2 & 0x00100000) {
 			data2 = ((data2 & 0xff) >> 3) + 3;
 		} else {
 			data2 = ((data2 & 0xff) >> 2) + 5;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		data = mindwm(ast, 0x1E6E0068) & 0xffff00ff;
 		data2 += data & 0xff;
@@ -2394,6 +2677,8 @@ ddr2_init_start:
 
 	moutdwm(ast, 0x1E6E000C, 0x7FFF5C01);
 =======
+=======
+>>>>>>> v3.18
 		data = ast_mindwm(ast, 0x1E6E0068) & 0xffff00ff;
 		data2 += data & 0xff;
 		data = data | (data2 << 8);
@@ -2436,6 +2721,9 @@ ddr2_init_start:
 	ast_moutdwm(ast, 0x1E6E0028, 0x00000003);
 
 	ast_moutdwm(ast, 0x1E6E000C, 0x7FFF5C01);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data = 0;
 	if (param->wodt) {
@@ -2444,6 +2732,7 @@ ddr2_init_start:
 	if (param->rodt) {
 		data = data | 0x3000 | ((param->reg_AC2 & 0x60000) >> 3);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moutdwm(ast, 0x1E6E0034, data | 0x3);
 	moutdwm(ast, 0x1E6E0120, param->reg_FREQ);
@@ -2470,6 +2759,8 @@ ddr2_init_start:
 	moutdwm(ast, 0x1E6E0050, 0x80000000);
 	moutdwm(ast, 0x1E6E0050, 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 	ast_moutdwm(ast, 0x1E6E0034, data | 0x3);
 	ast_moutdwm(ast, 0x1E6E0120, param->reg_FREQ);
 
@@ -2487,6 +2778,9 @@ ddr2_init_start:
 	ast_moutdwm(ast, 0x1E6E0070, 0x00000000);
 	ast_moutdwm(ast, 0x1E6E0050, 0x80000000);
 	ast_moutdwm(ast, 0x1E6E0050, 0x00000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -2534,8 +2828,13 @@ static void ast_init_dram_2300(struct drm_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = mindwm(ast, 0x1e6e2040);
 		moutdwm(ast, 0x1e6e2040, temp | 0x40);
+=======
+		temp = ast_mindwm(ast, 0x1e6e2040);
+		ast_moutdwm(ast, 0x1e6e2040, temp | 0x40);
+>>>>>>> v3.18
 =======
 		temp = ast_mindwm(ast, 0x1e6e2040);
 		ast_moutdwm(ast, 0x1e6e2040, temp | 0x40);

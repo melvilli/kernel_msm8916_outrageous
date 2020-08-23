@@ -67,6 +67,7 @@ struct irq_domain_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct irq_domain - Hardware interrupt number translation object
  * @link: Element in global irq_domain list.
@@ -114,6 +115,8 @@ struct irq_domain {
 
 #ifdef CONFIG_IRQ_DOMAIN
 =======
+=======
+>>>>>>> v3.18
 extern struct irq_domain_ops irq_generic_chip_ops;
 
 struct irq_domain_chip_generic;
@@ -163,6 +166,9 @@ struct irq_domain *__irq_domain_add(struct device_node *of_node, int size,
 				    irq_hw_number_t hwirq_max, int direct_max,
 				    const struct irq_domain_ops *ops,
 				    void *host_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct irq_domain *irq_domain_add_simple(struct device_node *of_node,
 					 unsigned int size,
@@ -175,6 +181,7 @@ struct irq_domain *irq_domain_add_legacy(struct device_node *of_node,
 					 irq_hw_number_t first_hwirq,
 					 const struct irq_domain_ops *ops,
 					 void *host_data);
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct irq_domain *irq_domain_add_linear(struct device_node *of_node,
 					 unsigned int size,
@@ -192,6 +199,8 @@ extern struct irq_domain *irq_find_host(struct device_node *node);
 extern void irq_set_default_host(struct irq_domain *host);
 
 =======
+=======
+>>>>>>> v3.18
 extern struct irq_domain *irq_find_host(struct device_node *node);
 extern void irq_set_default_host(struct irq_domain *host);
 
@@ -216,6 +225,9 @@ static inline struct irq_domain *irq_domain_add_nomap(struct device_node *of_nod
 {
 	return __irq_domain_add(of_node, 0, max_irq, max_irq, ops, host_data);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct irq_domain *irq_domain_add_legacy_isa(
 				struct device_node *of_node,
@@ -225,6 +237,7 @@ static inline struct irq_domain *irq_domain_add_legacy_isa(
 	return irq_domain_add_legacy(of_node, NUM_ISA_INTERRUPTS, 0, 0, ops,
 				     host_data);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 extern void irq_domain_remove(struct irq_domain *host);
@@ -238,6 +251,8 @@ static inline int irq_domain_associate(struct irq_domain *domain, unsigned int i
 	return irq_domain_associate_many(domain, irq, hwirq, 1);
 }
 =======
+=======
+>>>>>>> v3.18
 static inline struct irq_domain *irq_domain_add_tree(struct device_node *of_node,
 					 const struct irq_domain_ops *ops,
 					 void *host_data)
@@ -254,13 +269,19 @@ extern void irq_domain_associate_many(struct irq_domain *domain,
 				      irq_hw_number_t hwirq_base, int count);
 extern void irq_domain_disassociate(struct irq_domain *domain,
 				    unsigned int irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern unsigned int irq_create_mapping(struct irq_domain *host,
 				       irq_hw_number_t hwirq);
 extern void irq_dispose_mapping(unsigned int virq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * irq_linear_revmap() - Find a linux irq from a hw irq number.
@@ -277,6 +298,9 @@ static inline unsigned int irq_linear_revmap(struct irq_domain *domain,
 {
 	return hwirq < domain->revmap_size ? domain->linear_revmap[hwirq] : 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern unsigned int irq_find_mapping(struct irq_domain *host,
 				     irq_hw_number_t hwirq);
@@ -292,9 +316,12 @@ static inline int irq_create_identity_mapping(struct irq_domain *host,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int irq_linear_revmap(struct irq_domain *host,
 				      irq_hw_number_t hwirq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern const struct irq_domain_ops irq_domain_simple_ops;
@@ -311,6 +338,7 @@ int irq_domain_xlate_onetwocell(struct irq_domain *d, struct device_node *ctrlr,
 			irq_hw_number_t *out_hwirq, unsigned int *out_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_OF_IRQ)
 extern void irq_domain_generate_simple(const struct of_device_id *match,
 					u64 phys_base, unsigned int irq_start);
@@ -319,6 +347,8 @@ static inline void irq_domain_generate_simple(const struct of_device_id *match,
 					u64 phys_base, unsigned int irq_start) { }
 #endif /* !CONFIG_OF_IRQ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else /* CONFIG_IRQ_DOMAIN */

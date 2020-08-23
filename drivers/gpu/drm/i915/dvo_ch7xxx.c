@@ -33,6 +33,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #define CH7011_VID		0x83 /* 7010 as well */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CH7010B_VID		0x05
+>>>>>>> v3.18
 =======
 #define CH7010B_VID		0x05
 >>>>>>> v3.18
@@ -43,6 +47,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define CH7xxx_VID		0x84
 #define CH7xxx_DID		0x17
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CH7010_DID		0x16
+>>>>>>> v3.18
 =======
 #define CH7010_DID		0x16
 >>>>>>> v3.18
@@ -96,6 +104,10 @@ static struct ch7xxx_id_struct {
 } ch7xxx_ids[] = {
 	{ CH7011_VID, "CH7011" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ CH7010B_VID, "CH7010B" },
+>>>>>>> v3.18
 =======
 	{ CH7010B_VID, "CH7010B" },
 >>>>>>> v3.18
@@ -105,7 +117,10 @@ static struct ch7xxx_id_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ch7xxx_did_struct {
 	uint8_t did;
 	char *name;
@@ -114,6 +129,9 @@ static struct ch7xxx_did_struct {
 	{ CH7010_DID, "CH7010B" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ch7xxx_priv {
 	bool quiet;
@@ -132,7 +150,10 @@ static char *ch7xxx_get_id(uint8_t vid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static char *ch7xxx_get_did(uint8_t did)
 {
 	int i;
@@ -145,6 +166,9 @@ static char *ch7xxx_get_did(uint8_t did)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** Reads an 8 bit register */
 static bool ch7xxx_readb(struct intel_dvo_device *dvo, int addr, uint8_t *ch)
@@ -176,7 +200,11 @@ static bool ch7xxx_readb(struct intel_dvo_device *dvo, int addr, uint8_t *ch)
 		*ch = in_buf[0];
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -222,7 +250,11 @@ static bool ch7xxx_init(struct intel_dvo_device *dvo,
 	struct ch7xxx_priv *ch7xxx;
 	uint8_t vendor, device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
+=======
+	char *name, *devid;
+>>>>>>> v3.18
 =======
 	char *name, *devid;
 >>>>>>> v3.18
@@ -251,7 +283,12 @@ static bool ch7xxx_init(struct intel_dvo_device *dvo,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device != CH7xxx_DID) {
+=======
+	devid = ch7xxx_get_did(device);
+	if (!devid) {
+>>>>>>> v3.18
 =======
 	devid = ch7xxx_get_did(device);
 	if (!devid) {
@@ -335,7 +372,11 @@ static void ch7xxx_mode_set(struct intel_dvo_device *dvo,
 
 	if (mode->flags & DRM_MODE_FLAG_PVSYNC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		idf |= CH7xxx_IDF_HSP;
+=======
+		idf |= CH7xxx_IDF_VSP;
+>>>>>>> v3.18
 =======
 		idf |= CH7xxx_IDF_VSP;
 >>>>>>> v3.18
@@ -372,9 +413,15 @@ static void ch7xxx_dump_regs(struct intel_dvo_device *dvo)
 		uint8_t val;
 		if ((i % 8) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DRM_LOG_KMS("\n %02X: ", i);
 		ch7xxx_readb(dvo, i, &val);
 		DRM_LOG_KMS("%02X ", val);
+=======
+			DRM_DEBUG_KMS("\n %02X: ", i);
+		ch7xxx_readb(dvo, i, &val);
+		DRM_DEBUG_KMS("%02X ", val);
+>>>>>>> v3.18
 =======
 			DRM_DEBUG_KMS("\n %02X: ", i);
 		ch7xxx_readb(dvo, i, &val);

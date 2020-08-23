@@ -47,7 +47,11 @@
 #define     IQM_RC_ADJ_SEL_B_VSB                                            0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum OperationMode {
+=======
+enum operation_mode {
+>>>>>>> v3.18
 =======
 enum operation_mode {
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ enum operation_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum DRXPowerMode {
+=======
+enum drx_power_mode {
+>>>>>>> v3.18
 =======
 enum drx_power_mode {
 >>>>>>> v3.18
@@ -86,7 +94,11 @@ enum drx_power_mode {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** /brief Intermediate power mode for DRXK, power down OFDM clock domain */
+=======
+/* Intermediate power mode for DRXK, power down OFDM clock domain */
+>>>>>>> v3.18
 =======
 /* Intermediate power mode for DRXK, power down OFDM clock domain */
 >>>>>>> v3.18
@@ -95,7 +107,11 @@ enum drx_power_mode {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** /brief Intermediate power mode for DRXK, power down core (sysclk) */
+=======
+/* Intermediate power mode for DRXK, power down core (sysclk) */
+>>>>>>> v3.18
 =======
 /* Intermediate power mode for DRXK, power down core (sysclk) */
 >>>>>>> v3.18
@@ -104,7 +120,11 @@ enum drx_power_mode {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** /brief Intermediate power mode for DRXK, power down pll (only osc runs) */
+=======
+/* Intermediate power mode for DRXK, power down pll (only osc runs) */
+>>>>>>> v3.18
 =======
 /* Intermediate power mode for DRXK, power down pll (only osc runs) */
 >>>>>>> v3.18
@@ -114,9 +134,12 @@ enum drx_power_mode {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum AGC_CTRL_MODE { DRXK_AGC_CTRL_AUTO = 0, DRXK_AGC_CTRL_USER, DRXK_AGC_CTRL_OFF };
 enum EDrxkState {
 =======
+=======
+>>>>>>> v3.18
 enum agc_ctrl_mode {
 	DRXK_AGC_CTRL_AUTO = 0,
 	DRXK_AGC_CTRL_USER,
@@ -124,6 +147,9 @@ enum agc_ctrl_mode {
 };
 
 enum e_drxk_state {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DRXK_UNINITIALIZED = 0,
 	DRXK_STOPPED,
@@ -134,7 +160,11 @@ enum e_drxk_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum EDrxkCoefArrayIndex {
+=======
+enum e_drxk_coef_array_index {
+>>>>>>> v3.18
 =======
 enum e_drxk_coef_array_index {
 >>>>>>> v3.18
@@ -148,7 +178,11 @@ enum e_drxk_coef_array_index {
 	DRXK_COEF_IDX_MAX
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum EDrxkSifAttenuation {
+=======
+enum e_drxk_sif_attenuation {
+>>>>>>> v3.18
 =======
 enum e_drxk_sif_attenuation {
 >>>>>>> v3.18
@@ -158,7 +192,11 @@ enum e_drxk_sif_attenuation {
 	DRXK_SIF_ATTENUATION_9DB
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum EDrxkConstellation {
+=======
+enum e_drxk_constellation {
+>>>>>>> v3.18
 =======
 enum e_drxk_constellation {
 >>>>>>> v3.18
@@ -176,7 +214,11 @@ enum e_drxk_constellation {
 	DRX_CONSTELLATION_AUTO    = DRX_AUTO
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum EDrxkInterleaveMode {
+=======
+enum e_drxk_interleave_mode {
+>>>>>>> v3.18
 =======
 enum e_drxk_interleave_mode {
 >>>>>>> v3.18
@@ -191,7 +233,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum DRXKCfgDvbtSqiSpeed {
+=======
+enum drxk_cfg_dvbt_sqi_speed {
+>>>>>>> v3.18
 =======
 enum drxk_cfg_dvbt_sqi_speed {
 >>>>>>> v3.18
@@ -202,7 +248,11 @@ enum drxk_cfg_dvbt_sqi_speed {
 } ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum DRXFftmode_t {
+=======
+enum drx_fftmode_t {
+>>>>>>> v3.18
 =======
 enum drx_fftmode_t {
 >>>>>>> v3.18
@@ -214,7 +264,11 @@ enum drx_fftmode_t {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum DRXMPEGStrWidth_t {
+=======
+enum drxmpeg_str_width_t {
+>>>>>>> v3.18
 =======
 enum drxmpeg_str_width_t {
 >>>>>>> v3.18
@@ -223,7 +277,11 @@ enum drxmpeg_str_width_t {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum DRXQamLockRange_t {
+=======
+enum drx_qam_lock_range_t {
+>>>>>>> v3.18
 =======
 enum drx_qam_lock_range_t {
 >>>>>>> v3.18
@@ -231,6 +289,7 @@ enum drx_qam_lock_range_t {
 	DRX_QAM_LOCKRANGE_EXTENDED
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct DRXKCfgDvbtEchoThres_t {
 	u16             threshold;
@@ -264,6 +323,8 @@ struct DRXKOfdmScCmd_t {
 	u16 param3;     /**< General purpous param */
 	u16 param4;     /**< General purpous param */
 =======
+=======
+>>>>>>> v3.18
 struct drxk_cfg_dvbt_echo_thres_t {
 	u16             threshold;
 	enum drx_fftmode_t      fft_mode;
@@ -295,6 +356,9 @@ struct drxk_ofdm_sc_cmd_t {
 	u16 param2;     /* General purpous param */
 	u16 param3;     /* General purpous param */
 	u16 param4;     /* General purpous param */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -309,6 +373,7 @@ struct drxk_state {
 
 	struct mutex mutex;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32    m_Instance;           /**< Channel 1,2,3 or 4 */
 
@@ -426,6 +491,8 @@ struct drxk_state {
 
 	enum DRXPowerMode m_currentPowerMode;
 =======
+=======
+>>>>>>> v3.18
 	u32    m_instance;           /* Channel 1,2,3 or 4 */
 
 	int    m_chunk_size;
@@ -541,6 +608,9 @@ struct drxk_state {
 	u32               m_iqm_rc_rate;
 
 	enum drx_power_mode m_current_power_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* when true, avoids other devices to use the I2C bus */
@@ -552,7 +622,11 @@ struct drxk_state {
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	UIO_mask;	/* Bits used by UIO */
+=======
+	u16	uio_mask;	/* Bits used by UIO */
+>>>>>>> v3.18
 =======
 	u16	uio_mask;	/* Bits used by UIO */
 >>>>>>> v3.18

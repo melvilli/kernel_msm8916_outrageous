@@ -8,6 +8,10 @@ header-y += ioctls.h
 header-y += kvm_para.h
 header-y += mman.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += perf_regs.h
+>>>>>>> v3.18
 =======
 header-y += perf_regs.h
 >>>>>>> v3.18

@@ -58,6 +58,10 @@ static __inline__ __wsum csum_and_copy_to_user
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef HAVE_ARCH_CSUM_ADD
+>>>>>>> v3.18
 =======
 #ifndef HAVE_ARCH_CSUM_ADD
 >>>>>>> v3.18
@@ -68,6 +72,10 @@ static inline __wsum csum_add(__wsum csum, __wsum addend)
 	return (__force __wsum)(res + (res < (__force u32)addend));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -78,7 +86,10 @@ static inline __wsum csum_sub(__wsum csum, __wsum addend)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline __sum16 csum16_add(__sum16 csum, __be16 addend)
 {
 	u16 res = (__force u16)csum;
@@ -92,6 +103,9 @@ static inline __sum16 csum16_sub(__sum16 csum, __be16 addend)
 	return csum16_add(csum, ~addend);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline __wsum
 csum_block_add(__wsum csum, __wsum csum2, int offset)
@@ -104,13 +118,19 @@ csum_block_add(__wsum csum, __wsum csum2, int offset)
 
 static inline __wsum
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 csum_block_add_ext(__wsum csum, __wsum csum2, int offset, int len)
 {
 	return csum_block_add(csum, csum2, offset);
 }
 
 static inline __wsum
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 csum_block_sub(__wsum csum, __wsum csum2, int offset)
 {
@@ -126,17 +146,24 @@ static inline __wsum csum_unfold(__sum16 n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline __wsum csum_partial_ext(const void *buff, int len, __wsum sum)
 {
 	return csum_partial(buff, len, sum);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CSUM_MANGLED_0 ((__force __sum16)0xffff)
 
 static inline void csum_replace4(__sum16 *sum, __be32 from, __be32 to)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__be32 diff[] = { ~from, to };
 
@@ -155,6 +182,8 @@ extern void inet_proto_csum_replace16(__sum16 *sum, struct sk_buff *skb,
 				      const __be32 *from, const __be32 *to,
 				      int pseudohdr);
 =======
+=======
+>>>>>>> v3.18
 	*sum = csum_fold(csum_add(csum_sub(~csum_unfold(*sum), from), to));
 }
 
@@ -175,6 +204,9 @@ void inet_proto_csum_replace4(__sum16 *sum, struct sk_buff *skb,
 void inet_proto_csum_replace16(__sum16 *sum, struct sk_buff *skb,
 			       const __be32 *from, const __be32 *to,
 			       int pseudohdr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void inet_proto_csum_replace2(__sum16 *sum, struct sk_buff *skb,

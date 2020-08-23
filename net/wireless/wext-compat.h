@@ -51,7 +51,11 @@ int cfg80211_wext_siwgenie(struct net_device *dev,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cfg80211_wext_freq(struct wiphy *wiphy, struct iw_freq *freq);
+=======
+int cfg80211_wext_freq(struct iw_freq *freq);
+>>>>>>> v3.18
 =======
 int cfg80211_wext_freq(struct iw_freq *freq);
 >>>>>>> v3.18

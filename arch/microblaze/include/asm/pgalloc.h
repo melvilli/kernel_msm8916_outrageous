@@ -123,9 +123,12 @@ static inline struct page *pte_alloc_one(struct mm_struct *mm,
 
 	ptepage = alloc_pages(flags, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ptepage)
 		clear_highpage(ptepage);
 =======
+=======
+>>>>>>> v3.18
 	if (!ptepage)
 		return NULL;
 	clear_highpage(ptepage);
@@ -133,6 +136,9 @@ static inline struct page *pte_alloc_one(struct mm_struct *mm,
 		__free_page(ptepage);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ptepage;
 }
@@ -169,8 +175,14 @@ extern inline void pte_free_slow(struct page *ptepage)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern inline void pte_free(struct mm_struct *mm, struct page *ptepage)
 {
+=======
+static inline void pte_free(struct mm_struct *mm, struct page *ptepage)
+{
+	pgtable_page_dtor(ptepage);
+>>>>>>> v3.18
 =======
 static inline void pte_free(struct mm_struct *mm, struct page *ptepage)
 {

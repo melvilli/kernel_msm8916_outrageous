@@ -91,7 +91,11 @@ static struct clocksource clocksource_metag = {
 static irqreturn_t metag_timer_interrupt(int irq, void *dummy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clock_event_device *evt = &__get_cpu_var(local_clockevent);
+=======
+	struct clock_event_device *evt = this_cpu_ptr(&local_clockevent);
+>>>>>>> v3.18
 =======
 	struct clock_event_device *evt = this_cpu_ptr(&local_clockevent);
 >>>>>>> v3.18
@@ -114,7 +118,11 @@ unsigned long long sched_clock(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit arch_timer_setup(unsigned int cpu)
+=======
+static void arch_timer_setup(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void arch_timer_setup(unsigned int cpu)
 >>>>>>> v3.18
@@ -163,7 +171,11 @@ static void arch_timer_setup(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit arch_timer_cpu_notify(struct notifier_block *self,
+=======
+static int arch_timer_cpu_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int arch_timer_cpu_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -182,7 +194,11 @@ static int arch_timer_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata arch_timer_cpu_nb = {
+=======
+static struct notifier_block arch_timer_cpu_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block arch_timer_cpu_nb = {
 >>>>>>> v3.18
@@ -201,6 +217,11 @@ int __init metag_generic_timer_init(void)
 	hwtimer_freq = get_coreclock() / (metag_in32(EXPAND_TIMER_DIV) + 1);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_info("Timer frequency: %u Hz\n", hwtimer_freq);
+
+>>>>>>> v3.18
 =======
 	pr_info("Timer frequency: %u Hz\n", hwtimer_freq);
 

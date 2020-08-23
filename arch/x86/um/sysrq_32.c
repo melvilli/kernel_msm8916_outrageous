@@ -31,6 +31,7 @@ void show_regs(struct pt_regs *regs)
 	       0xffff & PT_REGS_DS(regs), 
 	       0xffff & PT_REGS_ES(regs));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         show_trace(NULL, (unsigned long *) &regs);
 }
@@ -98,6 +99,9 @@ void show_trace(struct task_struct* task, unsigned long * stack)
 	printk("\n");
 }
 
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18

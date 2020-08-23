@@ -5,6 +5,11 @@
 #include <linux/init.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <bcm63xx_regs.h>
+
+>>>>>>> v3.18
 =======
 #include <bcm63xx_regs.h>
 
@@ -43,7 +48,10 @@ struct bcm63xx_enet_platform_data {
 			  void (*mii_write)(struct net_device *dev,
 					    int phy_id, int reg, int val));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* DMA channel enable mask */
 	u32 dma_chan_en_mask;
@@ -97,6 +105,9 @@ struct bcm63xx_enetsw_platform_data {
 
 	/* DMA engine has internal SRAM */
 	bool dma_has_sram;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -104,7 +115,10 @@ int __init bcm63xx_enet_register(int unit,
 				 const struct bcm63xx_enet_platform_data *pd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int bcm63xx_enetsw_register(const struct bcm63xx_enetsw_platform_data *pd);
 
 enum bcm63xx_regs_enetdmac {
@@ -126,5 +140,8 @@ static inline unsigned long bcm63xx_enetdmacreg(enum bcm63xx_regs_enetdmac reg)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* ! BCM63XX_DEV_ENET_H_ */

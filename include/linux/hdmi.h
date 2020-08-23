@@ -19,6 +19,10 @@ enum hdmi_infoframe_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HDMI_IEEE_OUI 0x000c03
+>>>>>>> v3.18
 =======
 #define HDMI_IEEE_OUI 0x000c03
 >>>>>>> v3.18
@@ -28,7 +32,10 @@ enum hdmi_infoframe_type {
 #define HDMI_AUDIO_INFOFRAME_SIZE  10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HDMI_INFOFRAME_SIZE(type)	\
 	(HDMI_INFOFRAME_HEADER_SIZE + HDMI_ ## type ## _INFOFRAME_SIZE)
 
@@ -38,6 +45,9 @@ struct hdmi_any_infoframe {
 	unsigned char length;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum hdmi_colorspace {
 	HDMI_COLORSPACE_RGB,
@@ -117,9 +127,12 @@ struct hdmi_avi_infoframe {
 	unsigned char length;
 	enum hdmi_colorspace colorspace;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool active_info_valid;
 	bool horizontal_bar_valid;
 	bool vertical_bar_valid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enum hdmi_scan_mode scan_mode;
@@ -238,7 +251,10 @@ ssize_t hdmi_audio_infoframe_pack(struct hdmi_audio_infoframe *frame,
 				  void *buffer, size_t size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum hdmi_3d_structure {
 	HDMI_3D_STRUCTURE_INVALID = -1,
 	HDMI_3D_STRUCTURE_FRAME_PACKING = 0,
@@ -252,11 +268,15 @@ enum hdmi_3d_structure {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct hdmi_vendor_infoframe {
 	enum hdmi_infoframe_type type;
 	unsigned char version;
 	unsigned char length;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 data[27];
 };
@@ -265,6 +285,8 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 				   void *buffer, size_t size);
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int oui;
 	u8 vic;
 	enum hdmi_3d_structure s3d_struct;
@@ -308,5 +330,8 @@ union hdmi_infoframe {
 ssize_t
 hdmi_infoframe_pack(union hdmi_infoframe *frame, void *buffer, size_t size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _DRM_HDMI_H */

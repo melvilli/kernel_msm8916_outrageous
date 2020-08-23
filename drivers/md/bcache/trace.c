@@ -1,8 +1,13 @@
 #include "bcache.h"
 #include "btree.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "request.h"
 
+=======
+
+#include <linux/blktrace_api.h>
+>>>>>>> v3.18
 =======
 
 #include <linux/blktrace_api.h>
@@ -14,6 +19,7 @@
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_request_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_request_end);
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_passthrough);
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_cache_hit);
@@ -31,6 +37,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_cache_insert);
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_gc_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_gc_end);
 =======
+=======
+>>>>>>> v3.18
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_bypass_sequential);
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_bypass_congested);
@@ -72,4 +80,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_alloc_fail);
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_writeback);
 EXPORT_TRACEPOINT_SYMBOL_GPL(bcache_writeback_collision);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

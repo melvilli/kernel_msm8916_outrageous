@@ -23,7 +23,10 @@
 #define C_CAN_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* message object split */
 #define C_CAN_NO_OF_OBJECTS	32
 #define C_CAN_MSG_OBJ_RX_NUM	16
@@ -41,6 +44,9 @@
 #define C_CAN_MSG_RX_LOW_LAST	(C_CAN_MSG_OBJ_RX_SPLIT - 1)
 #define RECEIVE_OBJECT_BITS	0x0000ffff
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum reg {
 	C_CAN_CTRL_REG = 0,
@@ -82,6 +88,10 @@ enum reg {
 	C_CAN_MSGVAL1_REG,
 	C_CAN_MSGVAL2_REG,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	C_CAN_FUNCTION_REG,
+>>>>>>> v3.18
 =======
 	C_CAN_FUNCTION_REG,
 >>>>>>> v3.18
@@ -137,6 +147,10 @@ static const u16 reg_map_d_can[] = {
 	[C_CAN_INT_REG]		= 0x10,
 	[C_CAN_TEST_REG]	= 0x14,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[C_CAN_FUNCTION_REG]	= 0x18,
+>>>>>>> v3.18
 =======
 	[C_CAN_FUNCTION_REG]	= 0x18,
 >>>>>>> v3.18
@@ -185,6 +199,7 @@ struct c_can_priv {
 	struct net_device *dev;
 	struct device *device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tx_object;
 	int current_status;
 	int last_status;
@@ -202,6 +217,8 @@ struct c_can_priv {
 	unsigned int instance;
 	void (*raminit) (const struct c_can_priv *priv, bool enable);
 =======
+=======
+>>>>>>> v3.18
 	atomic_t tx_active;
 	unsigned long tx_dir;
 	int last_status;
@@ -219,6 +236,9 @@ struct c_can_priv {
 	u32 comm_rcv_high;
 	u32 rxmasked;
 	u32 dlc[C_CAN_MSG_OBJ_TX_NUM];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

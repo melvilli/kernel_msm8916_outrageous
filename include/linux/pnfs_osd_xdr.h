@@ -6,7 +6,11 @@
  *
  *  Benny Halevy <bhalevy@panasas.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *  Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *  Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18

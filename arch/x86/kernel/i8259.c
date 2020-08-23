@@ -112,8 +112,12 @@ static void make_8259A_irq(unsigned int irq)
 	disable_irq_nosync(irq);
 	io_apic_irqs &= ~(1<<irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_set_chip_and_handler_name(irq, &i8259A_chip, handle_level_irq,
 				      i8259A_chip.name);
+=======
+	irq_set_chip_and_handler(irq, &i8259A_chip, handle_level_irq);
+>>>>>>> v3.18
 =======
 	irq_set_chip_and_handler(irq, &i8259A_chip, handle_level_irq);
 >>>>>>> v3.18
@@ -304,6 +308,11 @@ static void init_8259A(int auto_eoi)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char probe_val = ~(1 << PIC_CASCADE_IR);
+	unsigned char new_val;
+>>>>>>> v3.18
 =======
 	unsigned char probe_val = ~(1 << PIC_CASCADE_IR);
 	unsigned char new_val;
@@ -314,9 +323,12 @@ static void init_8259A(int auto_eoi)
 	raw_spin_lock_irqsave(&i8259A_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb(0xff, PIC_MASTER_IMR);	/* mask all of 8259A-1 */
 	outb(0xff, PIC_SLAVE_IMR);	/* mask all of 8259A-2 */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Check to see if we have a PIC.
 	 * Mask all except the cascade and read
@@ -335,6 +347,9 @@ static void init_8259A(int auto_eoi)
 	}
 
 	outb(0xff, PIC_MASTER_IMR);	/* mask all of 8259A-1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -343,8 +358,12 @@ static void init_8259A(int auto_eoi)
 	outb_pic(0x11, PIC_MASTER_CMD);	/* ICW1: select 8259A-1 init */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ICW2: 8259A-1 IR0-7 mapped to 0x30-0x37 on x86-64,
 	   to 0x20-0x27 on i386 */
+=======
+	/* ICW2: 8259A-1 IR0-7 mapped to 0x30-0x37 */
+>>>>>>> v3.18
 =======
 	/* ICW2: 8259A-1 IR0-7 mapped to 0x30-0x37 */
 >>>>>>> v3.18

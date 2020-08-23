@@ -19,7 +19,10 @@
 struct opencores_kbd {
 	struct input_dev *input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *addr_res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem *addr;
@@ -60,6 +63,7 @@ static int opencores_kbd_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	opencores_kbd = kzalloc(sizeof(*opencores_kbd), GFP_KERNEL);
 	input = input_allocate_device();
 	if (!opencores_kbd || !input) {
@@ -90,6 +94,8 @@ static int opencores_kbd_probe(struct platform_device *pdev)
 	input->phys = "opencores-kbd/input0";
 	input->dev.parent = &pdev->dev;
 =======
+=======
+>>>>>>> v3.18
 	opencores_kbd = devm_kzalloc(&pdev->dev, sizeof(*opencores_kbd),
 				     GFP_KERNEL);
 	if (!opencores_kbd)
@@ -109,6 +115,9 @@ static int opencores_kbd_probe(struct platform_device *pdev)
 
 	input->name = pdev->name;
 	input->phys = "opencores-kbd/input0";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	input_set_drvdata(input, opencores_kbd);
@@ -135,18 +144,24 @@ static int opencores_kbd_probe(struct platform_device *pdev)
 	__clear_bit(KEY_RESERVED, input->keybit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_irq(irq, &opencores_kbd_isr,
 			    IRQF_TRIGGER_RISING, pdev->name, opencores_kbd);
 	if (error) {
 		dev_err(&pdev->dev, "unable to claim irq %d\n", irq);
 		goto err_unmap_mem;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_irq(&pdev->dev, irq, &opencores_kbd_isr,
 				 IRQF_TRIGGER_RISING,
 				 pdev->name, opencores_kbd);
 	if (error) {
 		dev_err(&pdev->dev, "unable to claim irq %d\n", irq);
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -154,7 +169,11 @@ static int opencores_kbd_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(&pdev->dev, "unable to register input device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_irq;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -163,6 +182,7 @@ static int opencores_kbd_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, opencores_kbd);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
  err_free_irq:
@@ -195,12 +215,17 @@ static int opencores_kbd_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver opencores_kbd_device_driver = {
 	.probe    = opencores_kbd_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove   = opencores_kbd_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver   = {

@@ -154,6 +154,10 @@ static struct platform_pwm_backlight_data pcm990_backlight_data = {
 	.dft_brightness	= 1023,
 	.pwm_period_ns	= 78770,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -331,7 +335,11 @@ static int pcm990_mci_init(struct device *dev, irq_handler_t mci_detect_int,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_irq(PCM027_MMCDET_IRQ, mci_detect_int, IRQF_DISABLED,
+=======
+	err = request_irq(PCM027_MMCDET_IRQ, mci_detect_int, 0,
+>>>>>>> v3.18
 =======
 	err = request_irq(PCM027_MMCDET_IRQ, mci_detect_int, 0,
 >>>>>>> v3.18
@@ -344,7 +352,11 @@ static int pcm990_mci_init(struct device *dev, irq_handler_t mci_detect_int,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pcm990_mci_setpower(struct device *dev, unsigned int vdd)
+=======
+static int pcm990_mci_setpower(struct device *dev, unsigned int vdd)
+>>>>>>> v3.18
 =======
 static int pcm990_mci_setpower(struct device *dev, unsigned int vdd)
 >>>>>>> v3.18
@@ -361,6 +373,10 @@ static int pcm990_mci_setpower(struct device *dev, unsigned int vdd)
 
 	pcm990_cpld_writeb(PCM990_CTRL_MMC2PWR, PCM990_CTRL_REG5);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -424,7 +440,11 @@ struct pxacamera_platform_data pcm990_pxacamera_platform_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18

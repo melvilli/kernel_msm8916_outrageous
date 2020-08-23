@@ -31,6 +31,10 @@
 #include "../core.h"
 #include "../pci.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../base.h"
+>>>>>>> v3.18
 =======
 #include "../base.h"
 >>>>>>> v3.18
@@ -241,7 +245,11 @@ static struct rtl_hal_ops rtl8192de_hal_ops = {
 	.switch_channel = rtl92d_phy_sw_chnl,
 	.dm_watchdog = rtl92d_dm_watchdog,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_operation_backup = rtl92d_phy_scan_operation_backup,
+=======
+	.scan_operation_backup = rtl_phy_scan_operation_backup,
+>>>>>>> v3.18
 =======
 	.scan_operation_backup = rtl_phy_scan_operation_backup,
 >>>>>>> v3.18
@@ -259,6 +267,10 @@ static struct rtl_hal_ops rtl8192de_hal_ops = {
 	.set_rfreg = rtl92d_phy_set_rf_reg,
 	.linked_set_reg = rtl92d_linked_set_reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_btc_status = rtl_btc_status_false,
+>>>>>>> v3.18
 =======
 	.get_btc_status = rtl_btc_status_false,
 >>>>>>> v3.18

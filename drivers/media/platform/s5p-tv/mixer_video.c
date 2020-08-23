@@ -82,8 +82,14 @@ int mxr_acquire_video(struct mxr_device *mdev,
 
 	mdev->alloc_ctx = vb2_dma_contig_init_ctx(mdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(mdev->alloc_ctx)) {
 		mxr_err(mdev, "could not acquire vb2 allocator\n");
+=======
+	if (IS_ERR(mdev->alloc_ctx)) {
+		mxr_err(mdev, "could not acquire vb2 allocator\n");
+		ret = PTR_ERR(mdev->alloc_ctx);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(mdev->alloc_ctx)) {
 		mxr_err(mdev, "could not acquire vb2 allocator\n");
@@ -515,15 +521,21 @@ static int mxr_enum_dv_timings(struct file *file, void *fh,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* lock protects from changing sd_out */
 	mutex_lock(&mdev->mutex);
 	ret = v4l2_subdev_call(to_outsd(mdev), video, enum_dv_timings, timings);
 =======
+=======
+>>>>>>> v3.18
 	timings->pad = 0;
 
 	/* lock protects from changing sd_out */
 	mutex_lock(&mdev->mutex);
 	ret = v4l2_subdev_call(to_outsd(mdev), pad, enum_dv_timings, timings);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&mdev->mutex);
 
@@ -542,7 +554,11 @@ static int mxr_s_dv_timings(struct file *file, void *fh,
 
 	/* timings change cannot be done while there is an entity
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * dependant on output configuration
+=======
+	 * dependent on output configuration
+>>>>>>> v3.18
 =======
 	 * dependent on output configuration
 >>>>>>> v3.18
@@ -585,15 +601,21 @@ static int mxr_dv_timings_cap(struct file *file, void *fh,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* lock protects from changing sd_out */
 	mutex_lock(&mdev->mutex);
 	ret = v4l2_subdev_call(to_outsd(mdev), video, dv_timings_cap, cap);
 =======
+=======
+>>>>>>> v3.18
 	cap->pad = 0;
 
 	/* lock protects from changing sd_out */
 	mutex_lock(&mdev->mutex);
 	ret = v4l2_subdev_call(to_outsd(mdev), pad, dv_timings_cap, cap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&mdev->mutex);
 
@@ -611,7 +633,11 @@ static int mxr_s_std(struct file *file, void *fh, v4l2_std_id norm)
 
 	/* standard change cannot be done while there is an entity
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * dependant on output configuration
+=======
+	 * dependent on output configuration
+>>>>>>> v3.18
 =======
 	 * dependent on output configuration
 >>>>>>> v3.18
@@ -976,11 +1002,14 @@ static int start_streaming(struct vb2_queue *vq, unsigned int count)
 	mxr_dbg(mdev, "%s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count == 0) {
 		mxr_dbg(mdev, "no output buffers queued\n");
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* block any changes in output configuration */
@@ -1023,7 +1052,11 @@ static void mxr_watchdog(unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *vq)
+=======
+static void stop_streaming(struct vb2_queue *vq)
+>>>>>>> v3.18
 =======
 static void stop_streaming(struct vb2_queue *vq)
 >>>>>>> v3.18
@@ -1073,7 +1106,10 @@ static void stop_streaming(struct vb2_queue *vq)
 	/* allow changes in output configuration */
 	mxr_output_put(mdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1151,8 +1187,11 @@ struct mxr_layer *mxr_base_layer_create(struct mxr_device *mdev,
 	};
 	strlcpy(layer->vfd.name, name, sizeof(layer->vfd.name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* let framework control PRIORITY */
 	set_bit(V4L2_FL_USE_FH_PRIO, &layer->vfd.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1167,6 +1206,10 @@ struct mxr_layer *mxr_base_layer_create(struct mxr_device *mdev,
 		.buf_struct_size = sizeof(struct mxr_buffer),
 		.ops = &mxr_video_qops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.min_buffers_needed = 1,
+>>>>>>> v3.18
 =======
 		.min_buffers_needed = 1,
 >>>>>>> v3.18

@@ -31,7 +31,11 @@ MODULE_PARM_DESC(debug,
 		 DVB_USB_DEBUG_STATUS);
 /* enable obnoxious led */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool dvb_usb_af9005_led = 1;
+=======
+bool dvb_usb_af9005_led = true;
+>>>>>>> v3.18
 =======
 bool dvb_usb_af9005_led = true;
 >>>>>>> v3.18
@@ -1086,12 +1090,18 @@ static int __init af9005_usb_module_init(void)
 		return result;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_MODULE(CONFIG_DVB_USB_AF9005) || defined(CONFIG_DVB_USB_AF9005_REMOTE)
 	/* FIXME: convert to todays kernel IR infrastructure */
 	rc_decode = symbol_request(af9005_rc_decode);
 	rc_keys = symbol_request(rc_map_af9005_table);
 	rc_keys_size = symbol_request(rc_map_af9005_table_size);
 #endif
+=======
+	rc_decode = symbol_request(af9005_rc_decode);
+	rc_keys = symbol_request(rc_map_af9005_table);
+	rc_keys_size = symbol_request(rc_map_af9005_table_size);
+>>>>>>> v3.18
 =======
 	rc_decode = symbol_request(af9005_rc_decode);
 	rc_keys = symbol_request(rc_map_af9005_table);

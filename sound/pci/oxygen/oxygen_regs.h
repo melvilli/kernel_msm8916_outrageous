@@ -319,6 +319,10 @@
 #define  OXYGEN_PLAY_MUTE45		0x0004
 #define  OXYGEN_PLAY_MUTE67		0x0008
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  OXYGEN_PLAY_MUTE_MASK		0x000f
+>>>>>>> v3.18
 =======
 #define  OXYGEN_PLAY_MUTE_MASK		0x000f
 >>>>>>> v3.18

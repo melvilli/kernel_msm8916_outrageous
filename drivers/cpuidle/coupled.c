@@ -148,7 +148,11 @@ static cpumask_t cpuidle_coupled_poked;
  * reuse.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The atomic variable a must be initialized to 0 before any cpu calls
+=======
+ * The atomic variable must be initialized to 0 before any cpu calls
+>>>>>>> v3.18
 =======
  * The atomic variable must be initialized to 0 before any cpu calls
 >>>>>>> v3.18
@@ -328,7 +332,11 @@ static void cpuidle_coupled_poke(int cpu)
 
 	if (!cpumask_test_and_set_cpu(cpu, &cpuidle_coupled_poke_pending))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__smp_call_function_single(cpu, csd, 0);
+=======
+		smp_call_function_single_async(cpu, csd);
+>>>>>>> v3.18
 =======
 		smp_call_function_single_async(cpu, csd);
 >>>>>>> v3.18
@@ -483,6 +491,10 @@ int cpuidle_enter_state_coupled(struct cpuidle_device *dev,
 		entered_state = cpuidle_enter_state(dev, drv,
 			dev->safe_state_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		local_irq_disable();
+>>>>>>> v3.18
 =======
 		local_irq_disable();
 >>>>>>> v3.18
@@ -534,6 +546,10 @@ retry:
 		entered_state = cpuidle_enter_state(dev, drv,
 			dev->safe_state_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		local_irq_disable();
+>>>>>>> v3.18
 =======
 		local_irq_disable();
 >>>>>>> v3.18

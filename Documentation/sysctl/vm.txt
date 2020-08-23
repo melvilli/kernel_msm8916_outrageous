@@ -30,7 +30,10 @@ Currently, these files are in /proc/sys/vm:
 - drop_caches
 - extfrag_threshold
 <<<<<<< HEAD
+<<<<<<< HEAD
 - extra_free_kbytes
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - hugepages_treat_as_movable
@@ -46,8 +49,11 @@ Currently, these files are in /proc/sys/vm:
 - min_unmapped_ratio
 - mmap_min_addr
 <<<<<<< HEAD
+<<<<<<< HEAD
 - mmap_rnd_bits
 - mmap_rnd_compat_bits
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - nr_hugepages
@@ -57,6 +63,10 @@ Currently, these files are in /proc/sys/vm:
 - oom_dump_tasks
 - oom_kill_allocating_task
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- overcommit_kbytes
+>>>>>>> v3.18
 =======
 - overcommit_kbytes
 >>>>>>> v3.18
@@ -133,14 +143,20 @@ other appears as 0 when read.
 dirty_background_ratio
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contains, as a percentage of total system memory, the number of pages at which
 the background kernel flusher threads will start writing out dirty data.
 =======
+=======
+>>>>>>> v3.18
 Contains, as a percentage of total available memory that contains free pages
 and reclaimable pages, the number of pages at which the background kernel
 flusher threads will start writing out dirty data.
 
 The total avaiable memory is not equal to total system memory.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ==============================================================
@@ -173,15 +189,21 @@ interval will be written out next time a flusher thread wakes up.
 dirty_ratio
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contains, as a percentage of total system memory, the number of pages at which
 a process which is generating disk writes will itself start writing out dirty
 data.
 =======
+=======
+>>>>>>> v3.18
 Contains, as a percentage of total available memory that contains free pages
 and reclaimable pages, the number of pages at which a process which is
 generating disk writes will itself start writing out dirty data.
 
 The total avaiable memory is not equal to total system memory.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ==============================================================
@@ -199,6 +221,7 @@ Setting this to zero disables periodic writeback altogether.
 drop_caches
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Writing to this will cause the kernel to drop clean caches, dentries and
 inodes from memory, causing that memory to become free.
 
@@ -212,6 +235,8 @@ To free pagecache, dentries and inodes:
 As this is a non-destructive operation and dirty objects are not freeable, the
 user should run `sync' first.
 =======
+=======
+>>>>>>> v3.18
 Writing to this will cause the kernel to drop clean caches, as well as
 reclaimable slab objects like dentries and inodes.  Once dropped, their
 memory becomes free.
@@ -245,6 +270,9 @@ used:
 
 These are informational only.  They do not mean that anything is wrong
 with your system.  To disable them, echo 4 (bit 3) into drop_caches.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ==============================================================
@@ -263,6 +291,7 @@ fragmentation index is <= extfrag_threshold. The default value is 500.
 
 ==============================================================
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extra_free_kbytes
 
@@ -293,6 +322,8 @@ not running that mlock() a lot of memory, it is likely the huge pages pool
 can grow to the size of ZONE_MOVABLE by repeatedly entering the desired value
 into nr_hugepages and triggering page reclaim.
 =======
+=======
+>>>>>>> v3.18
 hugepages_treat_as_movable
 
 This parameter controls whether we can allocate hugepages from ZONE_MOVABLE
@@ -314,6 +345,9 @@ memory more likely. Note that using ZONE_MOVABLE for non-migratable
 hugepages can do harm to other features like memory hotremove (because
 memory hotremove expects that memory blocks on ZONE_MOVABLE are always
 removable,) so it's a trade-off responsible for the users.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ==============================================================
@@ -544,6 +578,7 @@ against future potential kernel bugs.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 mmap_rnd_bits:
 
 This value can be used to select the number of bits to use to
@@ -571,6 +606,8 @@ This value can be changed after boot using the
 
 ==============================================================
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 nr_hugepages
@@ -645,7 +682,11 @@ will select "node" order in following case.
 (1) if the DMA zone does not exist or
 (2) if the DMA zone comprises greater than 50% of the available memory or
 <<<<<<< HEAD
+<<<<<<< HEAD
 (3) if any node's DMA zone comprises greater than 60% of its local memory and
+=======
+(3) if any node's DMA zone comprises greater than 70% of its local memory and
+>>>>>>> v3.18
 =======
 (3) if any node's DMA zone comprises greater than 70% of its local memory and
 >>>>>>> v3.18
@@ -700,7 +741,10 @@ The default value is 0.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 overcommit_kbytes:
 
 When overcommit_memory is set to 2, the committed address space is not
@@ -712,6 +756,9 @@ then appears as 0 when read).
 
 ==============================================================
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 overcommit_memory:
 
@@ -809,7 +856,12 @@ set to pcp->high/4.  The upper limit of batch is (PAGE_SHIFT * 8)
 
 The initial value is zero.  Kernel does not use this value at boot time to set
 <<<<<<< HEAD
+<<<<<<< HEAD
 the high water marks for each per cpu page list.
+=======
+the high water marks for each per cpu page list.  If the user writes '0' to this
+sysctl, it will revert to this default behavior.
+>>>>>>> v3.18
 =======
 the high water marks for each per cpu page list.  If the user writes '0' to this
 sysctl, it will revert to this default behavior.
@@ -829,7 +881,13 @@ swappiness
 This control is used to define how aggressive the kernel will swap
 memory pages.  Higher values will increase agressiveness, lower values
 <<<<<<< HEAD
+<<<<<<< HEAD
 decrease the amount of swap.
+=======
+decrease the amount of swap.  A value of 0 instructs the kernel not to
+initiate swap until the amount of free and file-backed pages is less
+than the high water mark in a zone.
+>>>>>>> v3.18
 =======
 decrease the amount of swap.  A value of 0 instructs the kernel not to
 initiate swap until the amount of free and file-backed pages is less
@@ -862,8 +920,13 @@ vfs_cache_pressure
 ------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Controls the tendency of the kernel to reclaim the memory which is used for
 caching of directory and inode objects.
+=======
+This percentage value controls the tendency of the kernel to reclaim
+the memory which is used for caching of directory and inode objects.
+>>>>>>> v3.18
 =======
 This percentage value controls the tendency of the kernel to reclaim
 the memory which is used for caching of directory and inode objects.
@@ -878,12 +941,18 @@ lead to out-of-memory conditions. Increasing vfs_cache_pressure beyond 100
 causes the kernel to prefer to reclaim dentries and inodes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Increasing vfs_cache_pressure significantly beyond 100 may have negative
 performance impact. Reclaim code needs to take various locks to find freeable
 directory and inode objects. With vfs_cache_pressure=1000, it will look for
 ten times more freeable objects than there are.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ==============================================================
 
@@ -901,6 +970,7 @@ This is value ORed together of
 4	= Zone reclaim swaps pages
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 zone_reclaim_mode is set during bootup to 1 if it is determined that pages
 from remote zones will cause a measurable performance reduction. The
 page allocator will then reclaim easily reusable pages (those page
@@ -912,6 +982,8 @@ from disk. In that case the caching effect is more important than
 data locality.
 
 =======
+=======
+>>>>>>> v3.18
 zone_reclaim_mode is disabled by default.  For file servers or workloads
 that benefit from having their data cached, zone_reclaim_mode should be
 left disabled as the caching effect is likely to be more important than
@@ -923,6 +995,9 @@ memory would cause a measurable performance reduction.  The page allocator
 will then reclaim easily reusable pages (those page cache pages that are
 currently not used) before allocating off node pages.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Allowing zone reclaim to write out pages stops processes that are
 writing large amounts of data from dirtying pages on other nodes. Zone

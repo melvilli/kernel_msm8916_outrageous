@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* A Bison parser, made by GNU Bison 2.5.  */
 
 /* Bison interface for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
 =======
+=======
+>>>>>>> v3.18
 /* A Bison parser, made by GNU Bison 2.7.12-4996.  */
 
 /* Bison interface for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    
    This program is free software: you can redistribute it and/or modify
@@ -39,7 +45,10 @@
    version 2.2 of Bison.  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef YY_YY_DTC_PARSER_TAB_H_INCLUDED
 # define YY_YY_DTC_PARSER_TAB_H_INCLUDED
 /* Enabling traces.  */
@@ -49,6 +58,9 @@
 #if YYDEBUG
 extern int yydebug;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Tokens.  */
@@ -84,6 +96,7 @@ extern int yydebug;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
@@ -91,10 +104,15 @@ typedef union YYSTYPE
 
 /* Line 2068 of yacc.c  */
 =======
+=======
+>>>>>>> v3.18
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
 /* Line 2053 of yacc.c  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #line 40 "dtc-parser.y"
 
@@ -119,9 +137,14 @@ typedef union YYSTYPE
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 2068 of yacc.c  */
 #line 97 "dtc-parser.tab.h"
+=======
+/* Line 2053 of yacc.c  */
+#line 103 "dtc-parser.tab.h"
+>>>>>>> v3.18
 =======
 /* Line 2053 of yacc.c  */
 #line 103 "dtc-parser.tab.h"
@@ -135,8 +158,11 @@ typedef union YYSTYPE
 extern YYSTYPE yylval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef YYPARSE_PARAM
 #if defined __STDC__ || defined __cplusplus
 int yyparse (void *YYPARSE_PARAM);
@@ -152,4 +178,7 @@ int yyparse ();
 #endif /* ! YYPARSE_PARAM */
 
 #endif /* !YY_YY_DTC_PARSER_TAB_H_INCLUDED  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

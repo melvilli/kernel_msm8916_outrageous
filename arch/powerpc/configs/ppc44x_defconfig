@@ -45,7 +45,10 @@ CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 CONFIG_CONNECTOR=y
 CONFIG_MTD=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_PARTITIONS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_OF_PARTS=y
@@ -132,6 +135,9 @@ CONFIG_CRYPTO_PCBC=y
 # CONFIG_CRYPTO_HW is not set
 CONFIG_VIRTUALIZATION=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_KVM_440=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

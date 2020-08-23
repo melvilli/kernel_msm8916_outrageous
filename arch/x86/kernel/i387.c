@@ -110,7 +110,11 @@ void unlazy_fpu(struct task_struct *tsk)
 		__thread_fpu_end(tsk);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk->fpu_counter = 0;
+=======
+		tsk->thread.fpu_counter = 0;
+>>>>>>> v3.18
 =======
 		tsk->thread.fpu_counter = 0;
 >>>>>>> v3.18
@@ -122,9 +126,15 @@ unsigned int mxcsr_feature_mask __read_mostly = 0xffffffffu;
 unsigned int xstate_size;
 EXPORT_SYMBOL_GPL(xstate_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i387_fxsave_struct fx_scratch __cpuinitdata;
 
 static void __cpuinit mxcsr_feature_mask_init(void)
+=======
+static struct i387_fxsave_struct fx_scratch;
+
+static void mxcsr_feature_mask_init(void)
+>>>>>>> v3.18
 =======
 static struct i387_fxsave_struct fx_scratch;
 
@@ -144,7 +154,11 @@ static void mxcsr_feature_mask_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_thread_xstate(void)
+=======
+static void init_thread_xstate(void)
+>>>>>>> v3.18
 =======
 static void init_thread_xstate(void)
 >>>>>>> v3.18
@@ -155,7 +169,11 @@ static void init_thread_xstate(void)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP) {
+=======
+	if (!cpu_has_fpu) {
+>>>>>>> v3.18
 =======
 	if (!cpu_has_fpu) {
 >>>>>>> v3.18
@@ -181,7 +199,11 @@ static void init_thread_xstate(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit fpu_init(void)
+=======
+void fpu_init(void)
+>>>>>>> v3.18
 =======
 void fpu_init(void)
 >>>>>>> v3.18
@@ -190,7 +212,10 @@ void fpu_init(void)
 	unsigned long cr4_mask = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_MATH_EMULATION
 	if (!cpu_has_fpu) {
 		pr_emerg("No FPU found and no math emulation present\n");
@@ -199,6 +224,9 @@ void fpu_init(void)
 			asm volatile("hlt");
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpu_has_fxsr)
 		cr4_mask |= X86_CR4_OSFXSR;
@@ -210,7 +238,11 @@ void fpu_init(void)
 	cr0 = read_cr0();
 	cr0 &= ~(X86_CR0_TS|X86_CR0_EM); /* clear TS and EM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP)
+=======
+	if (!cpu_has_fpu)
+>>>>>>> v3.18
 =======
 	if (!cpu_has_fpu)
 >>>>>>> v3.18
@@ -232,7 +264,11 @@ void fpu_init(void)
 void fpu_finit(struct fpu *fpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP) {
+=======
+	if (!cpu_has_fpu) {
+>>>>>>> v3.18
 =======
 	if (!cpu_has_fpu) {
 >>>>>>> v3.18
@@ -265,7 +301,11 @@ int init_fpu(struct task_struct *tsk)
 
 	if (tsk_used_math(tsk)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (HAVE_HWFP && tsk == current)
+=======
+		if (cpu_has_fpu && tsk == current)
+>>>>>>> v3.18
 =======
 		if (cpu_has_fpu && tsk == current)
 >>>>>>> v3.18
@@ -413,7 +453,11 @@ int xstateregs_set(struct task_struct *target, const struct user_regset *regset,
 	 * These bits must be zero.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xsave_hdr->reserved1[0] = xsave_hdr->reserved1[1] = 0;
+=======
+	memset(xsave_hdr->reserved, 0, 48);
+>>>>>>> v3.18
 =======
 	memset(xsave_hdr->reserved, 0, 48);
 >>>>>>> v3.18
@@ -570,6 +614,7 @@ int fpregs_get(struct task_struct *target, const struct user_regset *regset,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP)
 		return fpregs_soft_get(target, regset, pos, count, kbuf, ubuf);
 
@@ -579,6 +624,8 @@ int fpregs_get(struct task_struct *target, const struct user_regset *regset,
 					   -1);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!static_cpu_has(X86_FEATURE_FPU))
 		return fpregs_soft_get(target, regset, pos, count, kbuf, ubuf);
 
@@ -586,6 +633,9 @@ int fpregs_get(struct task_struct *target, const struct user_regset *regset,
 		return user_regset_copyout(&pos, &count, &kbuf, &ubuf,
 					   &target->thread.fpu.state->fsave, 0,
 					   -1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sanitize_i387_state(target);
@@ -614,6 +664,7 @@ int fpregs_set(struct task_struct *target, const struct user_regset *regset,
 	sanitize_i387_state(target);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP)
 		return fpregs_soft_set(target, regset, pos, count, kbuf, ubuf);
 
@@ -622,6 +673,8 @@ int fpregs_set(struct task_struct *target, const struct user_regset *regset,
 					  &target->thread.fpu.state->fsave, 0, -1);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!static_cpu_has(X86_FEATURE_FPU))
 		return fpregs_soft_set(target, regset, pos, count, kbuf, ubuf);
 
@@ -629,6 +682,9 @@ int fpregs_set(struct task_struct *target, const struct user_regset *regset,
 		return user_regset_copyin(&pos, &count, &kbuf, &ubuf,
 					  &target->thread.fpu.state->fsave, 0,
 					  -1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pos > 0 || count < sizeof(env))
@@ -671,7 +727,10 @@ EXPORT_SYMBOL(dump_fpu);
 
 #endif	/* CONFIG_X86_32 || CONFIG_IA32_EMULATION */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int __init no_387(char *s)
 {
@@ -702,4 +761,7 @@ void fpu_detect(struct cpuinfo_x86 *c)
 
 	/* The final cr0 value is set in fpu_init() */
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

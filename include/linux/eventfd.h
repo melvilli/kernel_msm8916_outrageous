@@ -10,7 +10,10 @@
 
 #include <linux/fcntl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/file.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/wait.h>
@@ -30,6 +33,11 @@
 #define EFD_FLAGS_SET (EFD_SHARED_FCNTL_FLAGS | EFD_SEMAPHORE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct file;
+
+>>>>>>> v3.18
 =======
 struct file;
 

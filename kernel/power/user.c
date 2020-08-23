@@ -37,14 +37,20 @@ static struct snapshot_data {
 	int swap;
 	int mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char frozen;
 	char ready;
 	char platform_support;
 =======
+=======
+>>>>>>> v3.18
 	bool frozen;
 	bool ready;
 	bool platform_support;
 	bool free_bitmaps;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } snapshot_state;
 
@@ -56,6 +62,12 @@ static int snapshot_open(struct inode *inode, struct file *filp)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hibernation_available())
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (!hibernation_available())
 		return -EPERM;
@@ -74,11 +86,14 @@ static int snapshot_open(struct inode *inode, struct file *filp)
 		goto Unlock;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(create_basic_memory_bitmaps()) {
 		atomic_inc(&snapshot_device_available);
 		error = -ENOMEM;
 		goto Unlock;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nonseekable_open(inode, filp);
@@ -91,6 +106,10 @@ static int snapshot_open(struct inode *inode, struct file *filp)
 			swap_type_of(swsusp_resume_device, 0, NULL) : -1;
 		data->mode = O_RDONLY;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		data->free_bitmaps = false;
+>>>>>>> v3.18
 =======
 		data->free_bitmaps = false;
 >>>>>>> v3.18
@@ -108,6 +127,7 @@ static int snapshot_open(struct inode *inode, struct file *filp)
 		data->mode = O_WRONLY;
 		error = pm_notifier_call_chain(PM_RESTORE_PREPARE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (error)
 			pm_notifier_call_chain(PM_POST_RESTORE);
 	}
@@ -119,6 +139,8 @@ static int snapshot_open(struct inode *inode, struct file *filp)
 	data->ready = 0;
 	data->platform_support = 0;
 =======
+=======
+>>>>>>> v3.18
 		if (!error) {
 			error = create_basic_memory_bitmaps();
 			data->free_bitmaps = !error;
@@ -132,6 +154,9 @@ static int snapshot_open(struct inode *inode, struct file *filp)
 	data->frozen = false;
 	data->ready = false;
 	data->platform_support = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  Unlock:
@@ -148,7 +173,10 @@ static int snapshot_release(struct inode *inode, struct file *filp)
 
 	swsusp_free();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_basic_memory_bitmaps();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	data = filp->private_data;
@@ -156,12 +184,18 @@ static int snapshot_release(struct inode *inode, struct file *filp)
 	if (data->frozen) {
 		pm_restore_gfp_mask();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		thaw_processes();
 =======
+=======
+>>>>>>> v3.18
 		free_basic_memory_bitmaps();
 		thaw_processes();
 	} else if (data->free_bitmaps) {
 		free_basic_memory_bitmaps();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	pm_notifier_call_chain(data->mode == O_RDONLY ?
@@ -254,6 +288,10 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lock_device_hotplug();
+>>>>>>> v3.18
 =======
 	lock_device_hotplug();
 >>>>>>> v3.18
@@ -271,9 +309,12 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 
 		error = freeze_processes();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!error)
 			data->frozen = 1;
 =======
+=======
+>>>>>>> v3.18
 		if (error)
 			break;
 
@@ -283,6 +324,9 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 		else
 			data->frozen = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -291,13 +335,19 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 			break;
 		pm_restore_gfp_mask();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		thaw_processes();
 		data->frozen = 0;
 =======
+=======
+>>>>>>> v3.18
 		free_basic_memory_bitmaps();
 		data->free_bitmaps = false;
 		thaw_processes();
 		data->frozen = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -329,7 +379,11 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 		swsusp_free();
 		memset(&data->handle, 0, sizeof(struct snapshot_handle));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->ready = 0;
+=======
+		data->ready = false;
+>>>>>>> v3.18
 =======
 		data->ready = false;
 >>>>>>> v3.18
@@ -397,7 +451,11 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 		 */
 		error = suspend_devices_and_enter(PM_SUSPEND_MEM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->ready = 0;
+=======
+		data->ready = false;
+>>>>>>> v3.18
 =======
 		data->ready = false;
 >>>>>>> v3.18
@@ -449,6 +507,10 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unlock_device_hotplug();
+>>>>>>> v3.18
 =======
 	unlock_device_hotplug();
 >>>>>>> v3.18

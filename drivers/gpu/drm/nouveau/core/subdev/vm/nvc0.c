@@ -29,17 +29,23 @@
 #include <subdev/fb.h>
 #include <subdev/vm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/ltcg.h>
 
 struct nvc0_vmmgr_priv {
 	struct nouveau_vmmgr base;
 	spinlock_t lock;
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/ltc.h>
 #include <subdev/bar.h>
 
 struct nvc0_vmmgr_priv {
 	struct nouveau_vmmgr base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -125,6 +131,7 @@ nvc0_vm_map(struct nouveau_vma *vma, struct nouveau_gpuobj *pgt,
 
 	if (mem->tag) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct nouveau_ltcg *ltcg =
 			nouveau_ltcg(vma->vm->vmm->base.base.parent);
 		u32 tag = mem->tag->offset + (delta >> 17);
@@ -132,12 +139,17 @@ nvc0_vm_map(struct nouveau_vma *vma, struct nouveau_gpuobj *pgt,
 		next |= (u64)1   << (32 + 12);
 		ltcg->tags_clear(ltcg, tag, cnt);
 =======
+=======
+>>>>>>> v3.18
 		struct nouveau_ltc *ltc =
 			nouveau_ltc(vma->vm->vmm->base.base.parent);
 		u32 tag = mem->tag->offset + (delta >> 17);
 		phys |= (u64)tag << (32 + 12);
 		next |= (u64)1   << (32 + 12);
 		ltc->tags_clear(ltc, tag, cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -178,6 +190,7 @@ nvc0_vm_unmap(struct nouveau_gpuobj *pgt, u32 pte, u32 cnt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 nvc0_vm_flush_engine(struct nouveau_subdev *subdev, u64 addr, int type)
 {
@@ -213,6 +226,8 @@ nvc0_vm_flush(struct nouveau_vm *vm)
 		nvc0_vm_flush_engine(nv_subdev(vm->vmm), vpgd->obj->addr, 1);
 	}
 =======
+=======
+>>>>>>> v3.18
 static void
 nvc0_vm_flush(struct nouveau_vm *vm)
 {
@@ -247,6 +262,9 @@ nvc0_vm_flush(struct nouveau_vm *vm)
 		}
 	}
 	mutex_unlock(&nv_subdev(priv)->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -282,7 +300,10 @@ nvc0_vmmgr_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->base.unmap = nvc0_vm_unmap;
 	priv->base.flush = nvc0_vm_flush;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&priv->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

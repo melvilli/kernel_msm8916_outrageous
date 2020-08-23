@@ -26,8 +26,11 @@
 #include <asm/mac_oss.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOOTINFO_COMPAT_1_0
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/machdep.h>

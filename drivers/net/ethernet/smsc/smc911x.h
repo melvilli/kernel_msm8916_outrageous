@@ -16,8 +16,12 @@
  .
  . You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  . along with this program; if not, write to the Free Software
  . Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ . along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  . along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -232,7 +236,11 @@ static inline void SMC_outsl(struct smc911x_local *lp, int reg,
 {									\
 	if (DCSR(dma) & DCSR_BUSERR) {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: DMA %d bus error!\n", dev->name, dma);	\
+=======
+		netdev_err(dev, "DMA %d bus error!\n", dma);		\
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "DMA %d bus error!\n", dma);		\
 >>>>>>> v3.18

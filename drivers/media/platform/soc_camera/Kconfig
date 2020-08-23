@@ -9,6 +9,12 @@ config SOC_CAMERA
 	  directly to the data bus of an SoC.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config SOC_CAMERA_SCALE_CROP
+	tristate
+
+>>>>>>> v3.18
 =======
 config SOC_CAMERA_SCALE_CROP
 	tristate
@@ -20,6 +26,7 @@ config SOC_CAMERA_PLATFORM
 	help
 	  This is a generic SoC camera platform driver, useful for testing
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MX1_VIDEO
 	bool
@@ -43,12 +50,17 @@ config VIDEO_MX3
 	select VIDEOBUF2_DMA_CONTIG
 	select MX3_VIDEO
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_MX3
 	tristate "i.MX3x Camera Sensor Interface driver"
 	depends on VIDEO_DEV && MX3_IPU && SOC_CAMERA
 	depends on MX3_IPU || COMPILE_TEST
 	depends on HAS_DMA
 	select VIDEOBUF2_DMA_CONTIG
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This is a v4l2 driver for the i.MX3x Camera Sensor Interface
@@ -61,10 +73,13 @@ config VIDEO_PXA27x
 	  This is a v4l2 driver for the PXA27x Quick Capture Interface
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config VIDEO_SH_MOBILE_CSI2
 	tristate "SuperH Mobile MIPI CSI-2 Interface driver"
 	depends on VIDEO_DEV && SOC_CAMERA && HAVE_CLK
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_RCAR_VIN
 	tristate "R-Car Video Input (VIN) support"
 	depends on VIDEO_DEV && SOC_CAMERA
@@ -79,6 +94,9 @@ config VIDEO_SH_MOBILE_CSI2
 	tristate "SuperH Mobile MIPI CSI-2 Interface driver"
 	depends on VIDEO_DEV && SOC_CAMERA && HAVE_CLK
 	depends on ARCH_SHMOBILE || SUPERH || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This is a v4l2 driver for the SuperH MIPI CSI-2 Interface
@@ -87,12 +105,18 @@ config VIDEO_SH_MOBILE_CEU
 	tristate "SuperH Mobile CEU Interface driver"
 	depends on VIDEO_DEV && SOC_CAMERA && HAS_DMA && HAVE_CLK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select VIDEOBUF2_DMA_CONTIG
 =======
+=======
+>>>>>>> v3.18
 	depends on ARCH_SHMOBILE || SUPERH || COMPILE_TEST
 	depends on HAS_DMA
 	select VIDEOBUF2_DMA_CONTIG
 	select SOC_CAMERA_SCALE_CROP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This is a v4l2 driver for the SuperH Mobile CEU Interface
@@ -100,7 +124,13 @@ config VIDEO_SH_MOBILE_CEU
 config VIDEO_OMAP1
 	tristate "OMAP1 Camera Interface driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_DEV && ARCH_OMAP1 && SOC_CAMERA
+=======
+	depends on VIDEO_DEV && SOC_CAMERA
+	depends on ARCH_OMAP1
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on VIDEO_DEV && SOC_CAMERA
 	depends on ARCH_OMAP1
@@ -112,6 +142,7 @@ config VIDEO_OMAP1
 	  This is a v4l2 driver for the TI OMAP1 camera interface
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config VIDEO_MX2_HOSTSUPPORT
 	bool
 
@@ -121,12 +152,17 @@ config VIDEO_MX2
 	select VIDEOBUF2_DMA_CONTIG
 	select VIDEO_MX2_HOSTSUPPORT
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_MX2
 	tristate "i.MX27 Camera Sensor Interface driver"
 	depends on VIDEO_DEV && SOC_CAMERA
 	depends on SOC_IMX27 || COMPILE_TEST
 	depends on HAS_DMA
 	select VIDEOBUF2_DMA_CONTIG
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This is a v4l2 driver for the i.MX27 Camera Sensor Interface
@@ -134,7 +170,13 @@ config VIDEO_MX2
 config VIDEO_ATMEL_ISI
 	tristate "ATMEL Image Sensor Interface (ISI) support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_DEV && SOC_CAMERA && ARCH_AT91
+=======
+	depends on VIDEO_DEV && SOC_CAMERA
+	depends on ARCH_AT91 || COMPILE_TEST
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on VIDEO_DEV && SOC_CAMERA
 	depends on ARCH_AT91 || COMPILE_TEST

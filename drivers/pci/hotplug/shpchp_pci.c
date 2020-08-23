@@ -35,7 +35,11 @@
 #include "shpchp.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __ref shpchp_configure_device(struct slot *p_slot)
+=======
+int shpchp_configure_device(struct slot *p_slot)
+>>>>>>> v3.18
 =======
 int shpchp_configure_device(struct slot *p_slot)
 >>>>>>> v3.18
@@ -44,6 +48,7 @@ int shpchp_configure_device(struct slot *p_slot)
 	struct controller *ctrl = p_slot->ctrl;
 	struct pci_dev *bridge = ctrl->pci_dev;
 	struct pci_bus *parent = bridge->subordinate;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int num;
 
@@ -55,6 +60,8 @@ int shpchp_configure_device(struct slot *p_slot)
 		pci_dev_put(dev);
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int num, ret = 0;
 
 	pci_lock_rescan_remove();
@@ -67,6 +74,9 @@ int shpchp_configure_device(struct slot *p_slot)
 		pci_dev_put(dev);
 		ret = -EINVAL;
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -74,7 +84,12 @@ int shpchp_configure_device(struct slot *p_slot)
 	if (num == 0) {
 		ctrl_err(ctrl, "No new device found\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		ret = -ENODEV;
+		goto out;
+>>>>>>> v3.18
 =======
 		ret = -ENODEV;
 		goto out;
@@ -85,8 +100,12 @@ int shpchp_configure_device(struct slot *p_slot)
 		if (PCI_SLOT(dev->devfn) != p_slot->device)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((dev->hdr_type == PCI_HEADER_TYPE_BRIDGE) ||
 		    (dev->hdr_type == PCI_HEADER_TYPE_CARDBUS))
+=======
+		if (pci_is_bridge(dev))
+>>>>>>> v3.18
 =======
 		if (pci_is_bridge(dev))
 >>>>>>> v3.18
@@ -94,6 +113,7 @@ int shpchp_configure_device(struct slot *p_slot)
 	}
 
 	pci_assign_unassigned_bridge_resources(bridge);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	list_for_each_entry(dev, &parent->devices, bus_list) {
@@ -106,12 +126,17 @@ int shpchp_configure_device(struct slot *p_slot)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	pcie_bus_configure_settings(parent);
 	pci_bus_add_devices(parent);
 
  out:
 	pci_unlock_rescan_remove();
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -127,6 +152,11 @@ int shpchp_unconfigure_device(struct slot *p_slot)
 		 __func__, pci_domain_nr(parent), p_slot->bus, p_slot->device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -151,6 +181,11 @@ int shpchp_unconfigure_device(struct slot *p_slot)
 		pci_dev_put(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 
 	pci_unlock_rescan_remove();

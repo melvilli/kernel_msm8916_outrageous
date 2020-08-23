@@ -27,8 +27,11 @@
 #include <linux/mmc/slot-gpio.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/gpio.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "sdhci-pltfm.h"
@@ -36,18 +39,30 @@
 /* Tegra SDHOST controller vendor register definitions */
 #define SDHCI_TEGRA_VENDOR_MISC_CTRL		0x120
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SDHCI_MISC_CTRL_ENABLE_SDHCI_SPEC_300	0x20
 =======
+=======
+>>>>>>> v3.18
 #define SDHCI_MISC_CTRL_ENABLE_SDR104		0x8
 #define SDHCI_MISC_CTRL_ENABLE_SDR50		0x10
 #define SDHCI_MISC_CTRL_ENABLE_SDHCI_SPEC_300	0x20
 #define SDHCI_MISC_CTRL_ENABLE_DDR50		0x200
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NVQUIRK_FORCE_SDHCI_SPEC_200	BIT(0)
 #define NVQUIRK_ENABLE_BLOCK_GAP_DET	BIT(1)
 #define NVQUIRK_ENABLE_SDHCI_SPEC_300	BIT(2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NVQUIRK_DISABLE_SDR50		BIT(3)
+#define NVQUIRK_DISABLE_SDR104		BIT(4)
+#define NVQUIRK_DISABLE_DDR50		BIT(5)
+>>>>>>> v3.18
 =======
 #define NVQUIRK_DISABLE_SDR50		BIT(3)
 #define NVQUIRK_DISABLE_SDR104		BIT(4)
@@ -65,6 +80,7 @@ struct sdhci_tegra {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 tegra_sdhci_readl(struct sdhci_host *host, int reg)
 {
 	u32 val;
@@ -78,6 +94,8 @@ static u32 tegra_sdhci_readl(struct sdhci_host *host, int reg)
 	return readl(host->ioaddr + reg);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u16 tegra_sdhci_readw(struct sdhci_host *host, int reg)
@@ -128,7 +146,11 @@ static unsigned int tegra_sdhci_get_ro(struct sdhci_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tegra_sdhci_reset_exit(struct sdhci_host *host, u8 mask)
+=======
+static void tegra_sdhci_reset(struct sdhci_host *host, u8 mask)
+>>>>>>> v3.18
 =======
 static void tegra_sdhci_reset(struct sdhci_host *host, u8 mask)
 >>>>>>> v3.18
@@ -137,6 +159,12 @@ static void tegra_sdhci_reset(struct sdhci_host *host, u8 mask)
 	struct sdhci_tegra *tegra_host = pltfm_host->priv;
 	const struct sdhci_tegra_soc_data *soc_data = tegra_host->soc_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 misc_ctrl;
+
+	sdhci_reset(host, mask);
+>>>>>>> v3.18
 =======
 	u32 misc_ctrl;
 
@@ -146,6 +174,7 @@ static void tegra_sdhci_reset(struct sdhci_host *host, u8 mask)
 	if (!(mask & SDHCI_RESET_ALL))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Erratum: Enable SDHCI spec v3.00 support */
 	if (soc_data->nvquirks & NVQUIRK_ENABLE_SDHCI_SPEC_300) {
@@ -159,6 +188,8 @@ static void tegra_sdhci_reset(struct sdhci_host *host, u8 mask)
 
 static int tegra_sdhci_buswidth(struct sdhci_host *host, int bus_width)
 =======
+=======
+>>>>>>> v3.18
 	misc_ctrl = sdhci_readw(host, SDHCI_TEGRA_VENDOR_MISC_CTRL);
 	/* Erratum: Enable SDHCI spec v3.00 support */
 	if (soc_data->nvquirks & NVQUIRK_ENABLE_SDHCI_SPEC_300)
@@ -174,6 +205,9 @@ static int tegra_sdhci_buswidth(struct sdhci_host *host, int bus_width)
 }
 
 static void tegra_sdhci_set_bus_width(struct sdhci_host *host, int bus_width)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 ctrl;
@@ -192,7 +226,10 @@ static void tegra_sdhci_set_bus_width(struct sdhci_host *host, int bus_width)
 	}
 	sdhci_writeb(host, ctrl, SDHCI_HOST_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -200,12 +237,15 @@ static void tegra_sdhci_set_bus_width(struct sdhci_host *host, int bus_width)
 static const struct sdhci_ops tegra_sdhci_ops = {
 	.get_ro     = tegra_sdhci_get_ro,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read_l     = tegra_sdhci_readl,
 	.read_w     = tegra_sdhci_readw,
 	.write_l    = tegra_sdhci_writel,
 	.platform_bus_width = tegra_sdhci_buswidth,
 	.platform_reset_exit = tegra_sdhci_reset_exit,
 =======
+=======
+>>>>>>> v3.18
 	.read_w     = tegra_sdhci_readw,
 	.write_l    = tegra_sdhci_writel,
 	.set_clock  = sdhci_set_clock,
@@ -213,6 +253,9 @@ static const struct sdhci_ops tegra_sdhci_ops = {
 	.reset      = tegra_sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
 	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -221,7 +264,12 @@ static const struct sdhci_pltfm_data sdhci_tegra20_pdata = {
 		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
 		  SDHCI_QUIRK_NO_HISPD_BIT |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC,
+=======
+		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC |
+		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN,
+>>>>>>> v3.18
 =======
 		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC |
 		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN,
@@ -241,7 +289,12 @@ static const struct sdhci_pltfm_data sdhci_tegra30_pdata = {
 		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
 		  SDHCI_QUIRK_NO_HISPD_BIT |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC,
+=======
+		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC |
+		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN,
+>>>>>>> v3.18
 =======
 		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC |
 		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN,
@@ -252,7 +305,13 @@ static const struct sdhci_pltfm_data sdhci_tegra30_pdata = {
 static struct sdhci_tegra_soc_data soc_data_tegra30 = {
 	.pdata = &sdhci_tegra30_pdata,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nvquirks = NVQUIRK_ENABLE_SDHCI_SPEC_300,
+=======
+	.nvquirks = NVQUIRK_ENABLE_SDHCI_SPEC_300 |
+		    NVQUIRK_DISABLE_SDR50 |
+		    NVQUIRK_DISABLE_SDR104,
+>>>>>>> v3.18
 =======
 	.nvquirks = NVQUIRK_ENABLE_SDHCI_SPEC_300 |
 		    NVQUIRK_DISABLE_SDR50 |
@@ -266,7 +325,12 @@ static const struct sdhci_pltfm_data sdhci_tegra114_pdata = {
 		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
 		  SDHCI_QUIRK_NO_HISPD_BIT |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC,
+=======
+		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC |
+		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN,
+>>>>>>> v3.18
 =======
 		  SDHCI_QUIRK_BROKEN_ADMA_ZEROLEN_DESC |
 		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN,
@@ -277,10 +341,13 @@ static const struct sdhci_pltfm_data sdhci_tegra114_pdata = {
 static struct sdhci_tegra_soc_data soc_data_tegra114 = {
 	.pdata = &sdhci_tegra114_pdata,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct of_device_id sdhci_tegra_dt_match[] = {
 =======
+=======
+>>>>>>> v3.18
 	.nvquirks = NVQUIRK_DISABLE_SDR50 |
 		    NVQUIRK_DISABLE_DDR50 |
 		    NVQUIRK_DISABLE_SDR104,
@@ -288,6 +355,9 @@ static const struct of_device_id sdhci_tegra_dt_match[] = {
 
 static const struct of_device_id sdhci_tegra_dt_match[] = {
 	{ .compatible = "nvidia,tegra124-sdhci", .data = &soc_data_tegra114 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "nvidia,tegra114-sdhci", .data = &soc_data_tegra114 },
 	{ .compatible = "nvidia,tegra30-sdhci", .data = &soc_data_tegra30 },
@@ -297,7 +367,11 @@ static const struct of_device_id sdhci_tegra_dt_match[] = {
 MODULE_DEVICE_TABLE(of, sdhci_tegra_dt_match);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sdhci_tegra_parse_dt(struct device *dev)
+=======
+static int sdhci_tegra_parse_dt(struct device *dev)
+>>>>>>> v3.18
 =======
 static int sdhci_tegra_parse_dt(struct device *dev)
 >>>>>>> v3.18
@@ -309,7 +383,11 @@ static int sdhci_tegra_parse_dt(struct device *dev)
 
 	tegra_host->power_gpio = of_get_named_gpio(np, "power-gpios", 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_of_parse(host->mmc);
+=======
+	return mmc_of_parse(host->mmc);
+>>>>>>> v3.18
 =======
 	return mmc_of_parse(host->mmc);
 >>>>>>> v3.18
@@ -331,7 +409,11 @@ static int sdhci_tegra_probe(struct platform_device *pdev)
 	soc_data = match->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = sdhci_pltfm_init(pdev, soc_data->pdata);
+=======
+	host = sdhci_pltfm_init(pdev, soc_data->pdata, 0);
+>>>>>>> v3.18
 =======
 	host = sdhci_pltfm_init(pdev, soc_data->pdata, 0);
 >>>>>>> v3.18
@@ -349,7 +431,13 @@ static int sdhci_tegra_probe(struct platform_device *pdev)
 	pltfm_host->priv = tegra_host;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdhci_tegra_parse_dt(&pdev->dev);
+=======
+	rc = sdhci_tegra_parse_dt(&pdev->dev);
+	if (rc)
+		goto err_parse_dt;
+>>>>>>> v3.18
 =======
 	rc = sdhci_tegra_parse_dt(&pdev->dev);
 	if (rc)
@@ -389,6 +477,10 @@ err_clk_get:
 		gpio_free(tegra_host->power_gpio);
 err_power_req:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_parse_dt:
+>>>>>>> v3.18
 =======
 err_parse_dt:
 >>>>>>> v3.18
@@ -421,7 +513,10 @@ static struct platform_driver sdhci_tegra_driver = {
 	.driver		= {
 		.name	= "sdhci-tegra",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = sdhci_tegra_dt_match,

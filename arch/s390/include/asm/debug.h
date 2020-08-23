@@ -108,12 +108,18 @@ void debug_set_critical(void);
 void debug_stop_all(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool debug_level_enabled(debug_info_t* id, int level)
 {
 	return level <= id->level;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline debug_entry_t*
 debug_event(debug_info_t* id, int level, void* data, int length)

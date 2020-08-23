@@ -9,7 +9,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clk.h>
@@ -28,6 +31,10 @@
 #include <drm/exynos_drm.h>
 #include "exynos_drm_drv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "exynos_drm_g2d.h"
+>>>>>>> v3.18
 =======
 #include "exynos_drm_g2d.h"
 >>>>>>> v3.18
@@ -310,16 +317,22 @@ static void g2d_fini_cmdlist(struct g2d_data *g2d)
 
 	kfree(g2d->cmdlist_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_free_attrs(subdrv->drm_dev->dev, G2D_CMDLIST_POOL_SIZE,
 			g2d->cmdlist_pool_virt,
 			g2d->cmdlist_pool, &g2d->cmdlist_dma_attrs);
 =======
+=======
+>>>>>>> v3.18
 
 	if (g2d->cmdlist_pool_virt && g2d->cmdlist_pool) {
 		dma_free_attrs(subdrv->drm_dev->dev, G2D_CMDLIST_POOL_SIZE,
 				g2d->cmdlist_pool_virt,
 				g2d->cmdlist_pool, &g2d->cmdlist_dma_attrs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -400,6 +413,11 @@ out:
 					g2d_userptr->vma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exynos_gem_put_vma(g2d_userptr->vma);
+
+>>>>>>> v3.18
 =======
 	exynos_gem_put_vma(g2d_userptr->vma);
 
@@ -410,12 +428,18 @@ out:
 	sg_free_table(g2d_userptr->sgt);
 	kfree(g2d_userptr->sgt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	g2d_userptr->sgt = NULL;
 
 	kfree(g2d_userptr->pages);
 	g2d_userptr->pages = NULL;
 	kfree(g2d_userptr);
 	g2d_userptr = NULL;
+=======
+
+	drm_free_large(g2d_userptr->pages);
+	kfree(g2d_userptr);
+>>>>>>> v3.18
 =======
 
 	drm_free_large(g2d_userptr->pages);
@@ -478,10 +502,15 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 
 	g2d_userptr = kzalloc(sizeof(*g2d_userptr), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!g2d_userptr) {
 		DRM_ERROR("failed to allocate g2d_userptr.\n");
 		return ERR_PTR(-ENOMEM);
 	}
+=======
+	if (!g2d_userptr)
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 	if (!g2d_userptr)
 		return ERR_PTR(-ENOMEM);
@@ -496,6 +525,7 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 	g2d_userptr->npages = npages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pages = kzalloc(npages * sizeof(struct page *), GFP_KERNEL);
 	if (!pages) {
 		DRM_ERROR("failed to allocate pages.\n");
@@ -506,6 +536,8 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 	vma = find_vma(current->mm, userptr);
 	if (!vma) {
 =======
+=======
+>>>>>>> v3.18
 	pages = drm_calloc_large(npages, sizeof(struct page *));
 	if (!pages) {
 		DRM_ERROR("failed to allocate pages.\n");
@@ -517,6 +549,9 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 	vma = find_vma(current->mm, userptr);
 	if (!vma) {
 		up_read(&current->mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		DRM_ERROR("failed to get vm region.\n");
 		ret = -EFAULT;
@@ -525,6 +560,10 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 
 	if (vma->vm_end < userptr + size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		up_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 		up_read(&current->mm->mmap_sem);
 >>>>>>> v3.18
@@ -536,6 +575,10 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 	g2d_userptr->vma = exynos_gem_get_vma(vma);
 	if (!g2d_userptr->vma) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		up_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 		up_read(&current->mm->mmap_sem);
 >>>>>>> v3.18
@@ -550,6 +593,10 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 						npages, pages, vma);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		up_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 		up_read(&current->mm->mmap_sem);
 >>>>>>> v3.18
@@ -558,6 +605,10 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	up_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 	up_read(&current->mm->mmap_sem);
 >>>>>>> v3.18
@@ -566,7 +617,10 @@ static dma_addr_t *g2d_userptr_get_dma_addr(struct drm_device *drm_dev,
 	sgt = kzalloc(sizeof(*sgt), GFP_KERNEL);
 	if (!sgt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_ERROR("failed to allocate sg table.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;
@@ -609,7 +663,10 @@ err_sg_free_table:
 err_free_sgt:
 	kfree(sgt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sgt = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -623,15 +680,21 @@ err_put_vma:
 
 err_free_pages:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(pages);
 	kfree(g2d_userptr);
 	pages = NULL;
 	g2d_userptr = NULL;
 =======
+=======
+>>>>>>> v3.18
 	drm_free_large(pages);
 
 err_free:
 	kfree(g2d_userptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ERR_PTR(ret);
@@ -688,7 +751,11 @@ static enum g2d_reg_type g2d_get_reg_type(int reg_offset)
 		DRM_ERROR("Unknown register offset![%d]\n", reg_offset);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -890,15 +957,21 @@ static void g2d_dma_start(struct g2d_data *g2d,
 				list_first_entry(&runqueue_node->run_cmdlist,
 						struct g2d_cmdlist_node, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pm_runtime_get_sync(g2d->dev);
 	clk_enable(g2d->gate_clk);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = pm_runtime_get_sync(g2d->dev);
 	if (ret < 0)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	writel_relaxed(node->dma_addr, g2d->regs + G2D_DMA_SFR_BASE_ADDR);
@@ -953,7 +1026,10 @@ static void g2d_runqueue_worker(struct work_struct *work)
 
 	mutex_lock(&g2d->runqueue_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(g2d->gate_clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm_runtime_put_sync(g2d->dev);
@@ -1131,9 +1207,12 @@ int exynos_g2d_get_ver_ioctl(struct drm_device *drm_dev, void *data,
 			     struct drm_file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_exynos_g2d_get_ver *ver = data;
 
 =======
+=======
+>>>>>>> v3.18
 	struct drm_exynos_file_private *file_priv = file->driver_priv;
 	struct exynos_drm_g2d_private *g2d_priv = file_priv->g2d_priv;
 	struct device *dev;
@@ -1151,6 +1230,9 @@ int exynos_g2d_get_ver_ioctl(struct drm_device *drm_dev, void *data,
 	if (!g2d)
 		return -EFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ver->major = G2D_HW_MAJOR_VER;
 	ver->minor = G2D_HW_MINOR_VER;
@@ -1165,7 +1247,11 @@ int exynos_g2d_set_cmdlist_ioctl(struct drm_device *drm_dev, void *data,
 	struct drm_exynos_file_private *file_priv = file->driver_priv;
 	struct exynos_drm_g2d_private *g2d_priv = file_priv->g2d_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = g2d_priv->dev;
+=======
+	struct device *dev;
+>>>>>>> v3.18
 =======
 	struct device *dev;
 >>>>>>> v3.18
@@ -1180,11 +1266,17 @@ int exynos_g2d_set_cmdlist_ioctl(struct drm_device *drm_dev, void *data,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!g2d_priv)
 		return -ENODEV;
 
 	dev = g2d_priv->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev)
 		return -ENODEV;
@@ -1212,8 +1304,11 @@ int exynos_g2d_set_cmdlist_ioctl(struct drm_device *drm_dev, void *data,
 		e = kzalloc(sizeof(*node->event), GFP_KERNEL);
 		if (!e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(dev, "failed to allocate event\n");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			spin_lock_irqsave(&drm_dev->event_lock, flags);
@@ -1257,7 +1352,11 @@ int exynos_g2d_set_cmdlist_ioctl(struct drm_device *drm_dev, void *data,
 	 * finished.
 	 * Otherwise only ACF bit should be set to INTEN register so
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * that one interrupt is occured after all command lists
+=======
+	 * that one interrupt is occurred after all command lists
+>>>>>>> v3.18
 =======
 	 * that one interrupt is occurred after all command lists
 >>>>>>> v3.18
@@ -1352,7 +1451,11 @@ int exynos_g2d_exec_ioctl(struct drm_device *drm_dev, void *data,
 	struct drm_exynos_file_private *file_priv = file->driver_priv;
 	struct exynos_drm_g2d_private *g2d_priv = file_priv->g2d_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = g2d_priv->dev;
+=======
+	struct device *dev;
+>>>>>>> v3.18
 =======
 	struct device *dev;
 >>>>>>> v3.18
@@ -1363,11 +1466,17 @@ int exynos_g2d_exec_ioctl(struct drm_device *drm_dev, void *data,
 	struct list_head *event_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!g2d_priv)
 		return -ENODEV;
 
 	dev = g2d_priv->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev)
 		return -ENODEV;
@@ -1461,10 +1570,15 @@ static int g2d_open(struct drm_device *drm_dev, struct device *dev,
 
 	g2d_priv = kzalloc(sizeof(*g2d_priv), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!g2d_priv) {
 		dev_err(dev, "failed to allocate g2d private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!g2d_priv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!g2d_priv)
 		return -ENOMEM;
@@ -1525,10 +1639,15 @@ static int g2d_probe(struct platform_device *pdev)
 
 	g2d = devm_kzalloc(dev, sizeof(*g2d), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!g2d) {
 		dev_err(dev, "failed to allocate driver data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!g2d)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!g2d)
 		return -ENOMEM;
@@ -1668,6 +1787,7 @@ static int g2d_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(g2d_pm_ops, g2d_suspend, g2d_resume);
 
 #ifdef CONFIG_OF
@@ -1678,6 +1798,8 @@ static const struct of_device_id exynos_g2d_match[] = {
 MODULE_DEVICE_TABLE(of, exynos_g2d_match);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_RUNTIME
 static int g2d_runtime_suspend(struct device *dev)
 {
@@ -1712,6 +1834,9 @@ static const struct of_device_id exynos_g2d_match[] = {
 	{},
 };
 MODULE_DEVICE_TABLE(of, exynos_g2d_match);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct platform_driver g2d_driver = {
@@ -1722,7 +1847,11 @@ struct platform_driver g2d_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &g2d_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(exynos_g2d_match),
+=======
+		.of_match_table = exynos_g2d_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = exynos_g2d_match,
 >>>>>>> v3.18

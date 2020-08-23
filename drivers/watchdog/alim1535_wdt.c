@@ -302,7 +302,11 @@ static int ali_notify_sys(struct notifier_block *this,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ali_pci_tbl) __used = {
+=======
+static const struct pci_device_id ali_pci_tbl[] __used = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ali_pci_tbl[] __used = {
 >>>>>>> v3.18
@@ -457,6 +461,9 @@ MODULE_AUTHOR("Alan Cox");
 MODULE_DESCRIPTION("ALi M1535 PMU Watchdog Timer driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

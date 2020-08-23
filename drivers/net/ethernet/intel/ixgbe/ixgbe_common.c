@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -49,7 +57,11 @@ static s32 ixgbe_ready_eeprom(struct ixgbe_hw *hw);
 static void ixgbe_standby_eeprom(struct ixgbe_hw *hw);
 static void ixgbe_shift_out_eeprom_bits(struct ixgbe_hw *hw, u16 data,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         u16 count);
+=======
+					u16 count);
+>>>>>>> v3.18
 =======
 					u16 count);
 >>>>>>> v3.18
@@ -78,6 +90,7 @@ static s32 ixgbe_disable_pcie_master(struct ixgbe_hw *hw);
  *  autoneg flow control.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw)
 {
 
@@ -90,6 +103,8 @@ s32 ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw)
 		return IXGBE_ERR_FC_NOT_SUPPORTED;
 	}
 =======
+=======
+>>>>>>> v3.18
 bool ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw)
 {
 	bool supported = false;
@@ -125,6 +140,9 @@ bool ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw)
 	}
 
 	return supported;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -140,7 +158,11 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 	u32 reg = 0, reg_bp = 0;
 	u16 reg_cu = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool got_lock = false;
+=======
+	bool locked = false;
+>>>>>>> v3.18
 =======
 	bool locked = false;
 >>>>>>> v3.18
@@ -152,8 +174,12 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 	if (hw->fc.strict_ieee && hw->fc.requested_mode == ixgbe_fc_rx_pause) {
 		hw_dbg(hw, "ixgbe_fc_rx_pause not valid in strict IEEE mode\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret_val = IXGBE_ERR_INVALID_LINK_SETTINGS;
 		goto out;
+=======
+		return IXGBE_ERR_INVALID_LINK_SETTINGS;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_INVALID_LINK_SETTINGS;
 >>>>>>> v3.18
@@ -173,11 +199,14 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 	 */
 	switch (hw->phy.media_type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ixgbe_media_type_fiber:
 	case ixgbe_media_type_backplane:
 		reg = IXGBE_READ_REG(hw, IXGBE_PCS1GANA);
 		reg_bp = IXGBE_READ_REG(hw, IXGBE_AUTOC);
 =======
+=======
+>>>>>>> v3.18
 	case ixgbe_media_type_backplane:
 		/* some MAC's need RMW protection on AUTOC */
 		ret_val = hw->mac.ops.prot_autoc_read(hw, &locked, &reg_bp);
@@ -188,6 +217,9 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 	case ixgbe_media_type_fiber:
 		reg = IXGBE_READ_REG(hw, IXGBE_PCS1GANA);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case ixgbe_media_type_copper:
@@ -255,9 +287,13 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 	default:
 		hw_dbg(hw, "Flow control param set incorrectly\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret_val = IXGBE_ERR_CONFIG;
 		goto out;
 		break;
+=======
+		return IXGBE_ERR_CONFIG;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_CONFIG;
 >>>>>>> v3.18
@@ -290,6 +326,7 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 		 * it also writes AUTOC.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((hw->mac.type == ixgbe_mac_82599EB) &&
 		    ixgbe_verify_lesm_fw_enabled_82599(hw)) {
 			ret_val = hw->mac.ops.acquire_swfw_sync(hw,
@@ -312,12 +349,17 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 	} else if ((hw->phy.media_type == ixgbe_media_type_copper) &&
 		    (ixgbe_device_supports_autoneg_fc(hw) == 0)) {
 =======
+=======
+>>>>>>> v3.18
 		ret_val = hw->mac.ops.prot_autoc_write(hw, reg_bp, locked);
 		if (ret_val)
 			return ret_val;
 
 	} else if ((hw->phy.media_type == ixgbe_media_type_copper) &&
 		   ixgbe_device_supports_autoneg_fc(hw)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hw->phy.ops.write_reg(hw, MDIO_AN_ADVERTISE,
 				      MDIO_MMD_AN, reg_cu);
@@ -325,7 +367,10 @@ static s32 ixgbe_setup_fc(struct ixgbe_hw *hw)
 
 	hw_dbg(hw, "Set up FC; IXGBE_AUTOC = 0x%08X\n", reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret_val;
@@ -343,6 +388,10 @@ out:
 s32 ixgbe_start_hw_generic(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s32 ret_val;
+>>>>>>> v3.18
 =======
 	s32 ret_val;
 >>>>>>> v3.18
@@ -368,7 +417,13 @@ s32 ixgbe_start_hw_generic(struct ixgbe_hw *hw)
 
 	/* Setup flow control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ixgbe_setup_fc(hw);
+=======
+	ret_val = ixgbe_setup_fc(hw);
+	if (!ret_val)
+		return 0;
+>>>>>>> v3.18
 =======
 	ret_val = ixgbe_setup_fc(hw);
 	if (!ret_val)
@@ -379,7 +434,11 @@ s32 ixgbe_start_hw_generic(struct ixgbe_hw *hw)
 	hw->adapter_stopped = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret_val;
+>>>>>>> v3.18
 =======
 	return ret_val;
 >>>>>>> v3.18
@@ -567,7 +626,11 @@ s32 ixgbe_clear_hw_cntrs_generic(struct ixgbe_hw *hw)
  **/
 s32 ixgbe_read_pba_string_generic(struct ixgbe_hw *hw, u8 *pba_num,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                   u32 pba_num_size)
+=======
+				  u32 pba_num_size)
+>>>>>>> v3.18
 =======
 				  u32 pba_num_size)
 >>>>>>> v3.18
@@ -736,8 +799,11 @@ enum ixgbe_bus_speed ixgbe_convert_bus_speed(u16 link_status)
 s32 ixgbe_get_bus_info_generic(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixgbe_adapter *adapter = hw->back;
 	struct ixgbe_mac_info *mac = &hw->mac;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 link_status;
@@ -746,8 +812,12 @@ s32 ixgbe_get_bus_info_generic(struct ixgbe_hw *hw)
 
 	/* Get the negotiated link width and speed from PCI config space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(adapter->pdev, IXGBE_PCI_LINK_STATUS,
 	                     &link_status);
+=======
+	link_status = ixgbe_read_pci_cfg_word(hw, IXGBE_PCI_LINK_STATUS);
+>>>>>>> v3.18
 =======
 	link_status = ixgbe_read_pci_cfg_word(hw, IXGBE_PCI_LINK_STATUS);
 >>>>>>> v3.18
@@ -756,7 +826,11 @@ s32 ixgbe_get_bus_info_generic(struct ixgbe_hw *hw)
 	hw->bus.speed = ixgbe_convert_bus_speed(link_status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mac->ops.set_lan_id(hw);
+=======
+	hw->mac.ops.set_lan_id(hw);
+>>>>>>> v3.18
 =======
 	hw->mac.ops.set_lan_id(hw);
 >>>>>>> v3.18
@@ -918,9 +992,14 @@ s32 ixgbe_init_eeprom_params_generic(struct ixgbe_hw *hw)
 		else
 			eeprom->address_bits = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw_dbg(hw, "Eeprom params: type = %d, size = %d, address bits: "
 			  "%d\n", eeprom->type, eeprom->word_size,
 			  eeprom->address_bits);
+=======
+		hw_dbg(hw, "Eeprom params: type = %d, size = %d, address bits: %d\n",
+		       eeprom->type, eeprom->word_size, eeprom->address_bits);
+>>>>>>> v3.18
 =======
 		hw_dbg(hw, "Eeprom params: type = %d, size = %d, address bits: %d\n",
 		       eeprom->type, eeprom->word_size, eeprom->address_bits);
@@ -943,7 +1022,11 @@ s32 ixgbe_write_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 					       u16 words, u16 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -951,6 +1034,7 @@ s32 ixgbe_write_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 
 	hw->eeprom.ops.init_params(hw);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (words == 0) {
 		status = IXGBE_ERR_INVALID_ARGUMENT;
@@ -962,11 +1046,16 @@ s32 ixgbe_write_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (words == 0)
 		return IXGBE_ERR_INVALID_ARGUMENT;
 
 	if (offset + words > hw->eeprom.word_size)
 		return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -993,7 +1082,10 @@ s32 ixgbe_write_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return status;
@@ -1020,6 +1112,7 @@ static s32 ixgbe_write_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 
 	/* Prepare the EEPROM for writing  */
 	status = ixgbe_acquire_eeprom(hw);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (status == 0) {
@@ -1080,6 +1173,8 @@ static s32 ixgbe_write_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	if (status)
 		return status;
 
@@ -1135,6 +1230,9 @@ static s32 ixgbe_write_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 	ixgbe_release_eeprom(hw);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1150,6 +1248,7 @@ static s32 ixgbe_write_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 s32 ixgbe_write_eeprom_generic(struct ixgbe_hw *hw, u16 offset, u16 data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status;
 
 	hw->eeprom.ops.init_params(hw);
@@ -1164,12 +1263,17 @@ s32 ixgbe_write_eeprom_generic(struct ixgbe_hw *hw, u16 offset, u16 data)
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	hw->eeprom.ops.init_params(hw);
 
 	if (offset >= hw->eeprom.word_size)
 		return IXGBE_ERR_EEPROM;
 
 	return ixgbe_write_eeprom_buffer_bit_bang(hw, offset, 1, &data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1186,7 +1290,11 @@ s32 ixgbe_read_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 					      u16 words, u16 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -1194,6 +1302,7 @@ s32 ixgbe_read_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 
 	hw->eeprom.ops.init_params(hw);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (words == 0) {
 		status = IXGBE_ERR_INVALID_ARGUMENT;
@@ -1205,11 +1314,16 @@ s32 ixgbe_read_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (words == 0)
 		return IXGBE_ERR_INVALID_ARGUMENT;
 
 	if (offset + words > hw->eeprom.word_size)
 		return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1225,6 +1339,7 @@ s32 ixgbe_read_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 							   count, &data[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status != 0)
 			break;
 	}
@@ -1232,11 +1347,16 @@ s32 ixgbe_read_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 		if (status)
 			return status;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1259,6 +1379,7 @@ static s32 ixgbe_read_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 
 	/* Prepare the EEPROM for reading  */
 	status = ixgbe_acquire_eeprom(hw);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (status == 0) {
@@ -1296,6 +1417,8 @@ static s32 ixgbe_read_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	if (status)
 		return status;
 
@@ -1328,6 +1451,9 @@ static s32 ixgbe_read_eeprom_buffer_bit_bang(struct ixgbe_hw *hw, u16 offset,
 	ixgbe_release_eeprom(hw);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1343,6 +1469,7 @@ s32 ixgbe_read_eeprom_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 				       u16 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status;
 
 	hw->eeprom.ops.init_params(hw);
@@ -1357,12 +1484,17 @@ s32 ixgbe_read_eeprom_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	hw->eeprom.ops.init_params(hw);
 
 	if (offset >= hw->eeprom.word_size)
 		return IXGBE_ERR_EEPROM;
 
 	return ixgbe_read_eeprom_buffer_bit_bang(hw, offset, 1, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1380,7 +1512,11 @@ s32 ixgbe_read_eerd_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 {
 	u32 eerd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -1388,6 +1524,7 @@ s32 ixgbe_read_eerd_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 
 	hw->eeprom.ops.init_params(hw);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (words == 0) {
 		status = IXGBE_ERR_INVALID_ARGUMENT;
@@ -1399,11 +1536,16 @@ s32 ixgbe_read_eerd_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (words == 0)
 		return IXGBE_ERR_INVALID_ARGUMENT;
 
 	if (offset >= hw->eeprom.word_size)
 		return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < words; i++) {
@@ -1419,17 +1561,23 @@ s32 ixgbe_read_eerd_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 		} else {
 			hw_dbg(hw, "Eeprom read timed out\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
 		}
 	}
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 			return status;
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1447,7 +1595,11 @@ static s32 ixgbe_detect_eeprom_page_size_generic(struct ixgbe_hw *hw,
 {
 	u16 data[IXGBE_EEPROM_PAGE_SIZE_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -1461,6 +1613,7 @@ static s32 ixgbe_detect_eeprom_page_size_generic(struct ixgbe_hw *hw,
 					     IXGBE_EEPROM_PAGE_SIZE_MAX, data);
 	hw->eeprom.word_page_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status != 0)
 		goto out;
 
@@ -1468,12 +1621,17 @@ static s32 ixgbe_detect_eeprom_page_size_generic(struct ixgbe_hw *hw,
 	if (status != 0)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (status)
 		return status;
 
 	status = ixgbe_read_eeprom_buffer_bit_bang(hw, offset, 1, data);
 	if (status)
 		return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1483,10 +1641,16 @@ static s32 ixgbe_detect_eeprom_page_size_generic(struct ixgbe_hw *hw,
 	hw->eeprom.word_page_size = IXGBE_EEPROM_PAGE_SIZE_MAX - data[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw_dbg(hw, "Detected EEPROM page size = %d words.",
 	       hw->eeprom.word_page_size);
 out:
 	return status;
+=======
+	hw_dbg(hw, "Detected EEPROM page size = %d words.\n",
+	       hw->eeprom.word_page_size);
+	return 0;
+>>>>>>> v3.18
 =======
 	hw_dbg(hw, "Detected EEPROM page size = %d words.\n",
 	       hw->eeprom.word_page_size);
@@ -1521,7 +1685,11 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 {
 	u32 eewr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -1529,6 +1697,7 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 
 	hw->eeprom.ops.init_params(hw);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (words == 0) {
 		status = IXGBE_ERR_INVALID_ARGUMENT;
@@ -1540,11 +1709,16 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (words == 0)
 		return IXGBE_ERR_INVALID_ARGUMENT;
 
 	if (offset >= hw->eeprom.word_size)
 		return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < words; i++) {
@@ -1554,9 +1728,15 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 
 		status = ixgbe_poll_eerd_eewr_done(hw, IXGBE_NVM_POLL_WRITE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status != 0) {
 			hw_dbg(hw, "Eeprom write EEWR timed out\n");
 			goto out;
+=======
+		if (status) {
+			hw_dbg(hw, "Eeprom write EEWR timed out\n");
+			return status;
+>>>>>>> v3.18
 =======
 		if (status) {
 			hw_dbg(hw, "Eeprom write EEWR timed out\n");
@@ -1568,6 +1748,7 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 
 		status = ixgbe_poll_eerd_eewr_done(hw, IXGBE_NVM_POLL_WRITE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status != 0) {
 			hw_dbg(hw, "Eeprom write EEWR timed out\n");
 			goto out;
@@ -1577,6 +1758,8 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 		if (status) {
 			hw_dbg(hw, "Eeprom write EEWR timed out\n");
 			return status;
@@ -1584,6 +1767,9 @@ out:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1613,7 +1799,10 @@ static s32 ixgbe_poll_eerd_eewr_done(struct ixgbe_hw *hw, u32 ee_reg)
 	u32 i;
 	u32 reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = IXGBE_ERR_EEPROM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1625,6 +1814,7 @@ static s32 ixgbe_poll_eerd_eewr_done(struct ixgbe_hw *hw, u32 ee_reg)
 
 		if (reg & IXGBE_EEPROM_RW_REG_DONE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = 0;
 			break;
 		}
@@ -1632,11 +1822,16 @@ static s32 ixgbe_poll_eerd_eewr_done(struct ixgbe_hw *hw, u32 ee_reg)
 	}
 	return status;
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 		}
 		udelay(5);
 	}
 	return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1650,13 +1845,17 @@ static s32 ixgbe_poll_eerd_eewr_done(struct ixgbe_hw *hw, u32 ee_reg)
 static s32 ixgbe_acquire_eeprom(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 eec;
 	u32 i;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM) != 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status = IXGBE_ERR_SWFW_SYNC;
 
@@ -1695,6 +1894,8 @@ static s32 ixgbe_acquire_eeprom(struct ixgbe_hw *hw)
 	}
 	return status;
 =======
+=======
+>>>>>>> v3.18
 		return IXGBE_ERR_SWFW_SYNC;
 
 	eec = IXGBE_READ_REG(hw, IXGBE_EEC);
@@ -1727,6 +1928,9 @@ static s32 ixgbe_acquire_eeprom(struct ixgbe_hw *hw)
 	IXGBE_WRITE_FLUSH(hw);
 	udelay(1);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1739,7 +1943,10 @@ static s32 ixgbe_acquire_eeprom(struct ixgbe_hw *hw)
 static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = IXGBE_ERR_EEPROM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 timeout = 2000;
@@ -1754,6 +1961,7 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 		 */
 		swsm = IXGBE_READ_REG(hw, IXGBE_SWSM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(swsm & IXGBE_SWSM_SMBI)) {
 			status = 0;
 			break;
@@ -1767,6 +1975,8 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 		/*
 		 * this release is particularly important because our attempts
 =======
+=======
+>>>>>>> v3.18
 		if (!(swsm & IXGBE_SWSM_SMBI))
 			break;
 		usleep_range(50, 100);
@@ -1775,6 +1985,9 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 	if (i == timeout) {
 		hw_dbg(hw, "Driver can't access the Eeprom - SMBI Semaphore not granted.\n");
 		/* this release is particularly important because our attempts
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * above to get the semaphore may have succeeded, and if there
 		 * was a timeout, we should unconditionally clear the semaphore
@@ -1783,9 +1996,14 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 		ixgbe_release_eeprom_semaphore(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		udelay(50);
 		/*
 		 * one last try
+=======
+		usleep_range(50, 100);
+		/* one last try
+>>>>>>> v3.18
 =======
 		usleep_range(50, 100);
 		/* one last try
@@ -1794,6 +2012,7 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 		 * set and we have the semaphore
 		 */
 		swsm = IXGBE_READ_REG(hw, IXGBE_SWSM);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(swsm & IXGBE_SWSM_SMBI))
 			status = 0;
@@ -1836,6 +2055,8 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 		if (swsm & IXGBE_SWSM_SMBI) {
 			hw_dbg(hw, "Software semaphore SMBI between device drivers not granted.\n");
 			return IXGBE_ERR_EEPROM;
@@ -1870,6 +2091,9 @@ static s32 ixgbe_get_eeprom_semaphore(struct ixgbe_hw *hw)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1898,7 +2122,10 @@ static void ixgbe_release_eeprom_semaphore(struct ixgbe_hw *hw)
 static s32 ixgbe_ready_eeprom(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 i;
@@ -1913,7 +2140,11 @@ static s32 ixgbe_ready_eeprom(struct ixgbe_hw *hw)
 	for (i = 0; i < IXGBE_EEPROM_MAX_RETRY_SPI; i += 5) {
 		ixgbe_shift_out_eeprom_bits(hw, IXGBE_EEPROM_RDSR_OPCODE_SPI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		                            IXGBE_EEPROM_OPCODE_BITS);
+=======
+					    IXGBE_EEPROM_OPCODE_BITS);
+>>>>>>> v3.18
 =======
 					    IXGBE_EEPROM_OPCODE_BITS);
 >>>>>>> v3.18
@@ -1932,15 +2163,21 @@ static s32 ixgbe_ready_eeprom(struct ixgbe_hw *hw)
 	if (i >= IXGBE_EEPROM_MAX_RETRY_SPI) {
 		hw_dbg(hw, "SPI EEPROM Status error\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = IXGBE_ERR_EEPROM;
 	}
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 		return IXGBE_ERR_EEPROM;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1973,7 +2210,11 @@ static void ixgbe_standby_eeprom(struct ixgbe_hw *hw)
  **/
 static void ixgbe_shift_out_eeprom_bits(struct ixgbe_hw *hw, u16 data,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         u16 count)
+=======
+					u16 count)
+>>>>>>> v3.18
 =======
 					u16 count)
 >>>>>>> v3.18
@@ -2181,7 +2422,11 @@ u16 ixgbe_calc_eeprom_checksum_generic(struct ixgbe_hw *hw)
  **/
 s32 ixgbe_validate_eeprom_checksum_generic(struct ixgbe_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                            u16 *checksum_val)
+=======
+					   u16 *checksum_val)
+>>>>>>> v3.18
 =======
 					   u16 *checksum_val)
 >>>>>>> v3.18
@@ -2258,7 +2503,11 @@ s32 ixgbe_update_eeprom_checksum_generic(struct ixgbe_hw *hw)
  **/
 s32 ixgbe_set_rar_generic(struct ixgbe_hw *hw, u32 index, u8 *addr, u32 vmdq,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           u32 enable_addr)
+=======
+			  u32 enable_addr)
+>>>>>>> v3.18
 =======
 			  u32 enable_addr)
 >>>>>>> v3.18
@@ -2506,7 +2755,11 @@ s32 ixgbe_update_mc_addr_list_generic(struct ixgbe_hw *hw,
 	if (hw->addr_ctrl.mta_in_use > 0)
 		IXGBE_WRITE_REG(hw, IXGBE_MCSTCTRL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		                IXGBE_MCSTCTRL_MFE | hw->mac.mc_filter_type);
+=======
+				IXGBE_MCSTCTRL_MFE | hw->mac.mc_filter_type);
+>>>>>>> v3.18
 =======
 				IXGBE_MCSTCTRL_MFE | hw->mac.mc_filter_type);
 >>>>>>> v3.18
@@ -2528,7 +2781,11 @@ s32 ixgbe_enable_mc_generic(struct ixgbe_hw *hw)
 	if (a->mta_in_use > 0)
 		IXGBE_WRITE_REG(hw, IXGBE_MCSTCTRL, IXGBE_MCSTCTRL_MFE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		                hw->mac.mc_filter_type);
+=======
+				hw->mac.mc_filter_type);
+>>>>>>> v3.18
 =======
 				hw->mac.mc_filter_type);
 >>>>>>> v3.18
@@ -2561,7 +2818,10 @@ s32 ixgbe_disable_mc_generic(struct ixgbe_hw *hw)
 s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 mflcn_reg, fccfg_reg;
@@ -2569,6 +2829,7 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 	u32 fcrtl, fcrth;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Validate the water mark configuration for packet buffer 0.  Zero
@@ -2582,6 +2843,8 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 		ret_val = IXGBE_ERR_INVALID_LINK_SETTINGS;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	/* Validate the water mark configuration. */
 	if (!hw->fc.pause_time)
 		return IXGBE_ERR_INVALID_LINK_SETTINGS;
@@ -2596,6 +2859,9 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 				return IXGBE_ERR_INVALID_LINK_SETTINGS;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2652,9 +2918,13 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 	default:
 		hw_dbg(hw, "Flow control param set incorrectly\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret_val = IXGBE_ERR_CONFIG;
 		goto out;
 		break;
+=======
+		return IXGBE_ERR_CONFIG;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_CONFIG;
 >>>>>>> v3.18
@@ -2666,8 +2936,11 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 	IXGBE_WRITE_REG(hw, IXGBE_FCCFG, fccfg_reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fcrtl = (hw->fc.low_water << 10) | IXGBE_FCRTL_XONE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set up and enable Rx high/low water mark thresholds, enable XON. */
@@ -2675,6 +2948,10 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 		if ((hw->fc.current_mode & ixgbe_fc_tx_pause) &&
 		    hw->fc.high_water[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			fcrtl = (hw->fc.low_water[i] << 10) | IXGBE_FCRTL_XONE;
+>>>>>>> v3.18
 =======
 			fcrtl = (hw->fc.low_water[i] << 10) | IXGBE_FCRTL_XONE;
 >>>>>>> v3.18
@@ -2702,8 +2979,12 @@ s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw)
 	IXGBE_WRITE_REG(hw, IXGBE_FCRTV, hw->fc.pause_time / 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -2768,7 +3049,11 @@ static s32 ixgbe_fc_autoneg_fiber(struct ixgbe_hw *hw)
 {
 	u32 pcs_anadv_reg, pcs_lpab_reg, linkstat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = IXGBE_ERR_FC_NOT_NEGOTIATED;
+=======
+	s32 ret_val;
+>>>>>>> v3.18
 =======
 	s32 ret_val;
 >>>>>>> v3.18
@@ -2783,7 +3068,11 @@ static s32 ixgbe_fc_autoneg_fiber(struct ixgbe_hw *hw)
 	if ((!!(linkstat & IXGBE_PCS1GLSTA_AN_COMPLETE) == 0) ||
 	    (!!(linkstat & IXGBE_PCS1GLSTA_AN_TIMED_OUT) == 1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return IXGBE_ERR_FC_NOT_NEGOTIATED;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_FC_NOT_NEGOTIATED;
 >>>>>>> v3.18
@@ -2798,7 +3087,10 @@ static s32 ixgbe_fc_autoneg_fiber(struct ixgbe_hw *hw)
 			       IXGBE_PCS1GANA_ASM_PAUSE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret_val;
@@ -2814,7 +3106,11 @@ static s32 ixgbe_fc_autoneg_backplane(struct ixgbe_hw *hw)
 {
 	u32 links2, anlp1_reg, autoc_reg, links;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = IXGBE_ERR_FC_NOT_NEGOTIATED;
+=======
+	s32 ret_val;
+>>>>>>> v3.18
 =======
 	s32 ret_val;
 >>>>>>> v3.18
@@ -2827,7 +3123,11 @@ static s32 ixgbe_fc_autoneg_backplane(struct ixgbe_hw *hw)
 	links = IXGBE_READ_REG(hw, IXGBE_LINKS);
 	if ((links & IXGBE_LINKS_KX_AN_COMP) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return IXGBE_ERR_FC_NOT_NEGOTIATED;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_FC_NOT_NEGOTIATED;
 >>>>>>> v3.18
@@ -2836,7 +3136,11 @@ static s32 ixgbe_fc_autoneg_backplane(struct ixgbe_hw *hw)
 		links2 = IXGBE_READ_REG(hw, IXGBE_LINKS2);
 		if ((links2 & IXGBE_LINKS2_AN_SUPPORTED) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			return IXGBE_ERR_FC_NOT_NEGOTIATED;
+>>>>>>> v3.18
 =======
 			return IXGBE_ERR_FC_NOT_NEGOTIATED;
 >>>>>>> v3.18
@@ -2853,7 +3157,10 @@ static s32 ixgbe_fc_autoneg_backplane(struct ixgbe_hw *hw)
 		IXGBE_ANLP1_SYM_PAUSE, IXGBE_ANLP1_ASM_PAUSE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret_val;
@@ -2927,7 +3234,11 @@ void ixgbe_fc_autoneg(struct ixgbe_hw *hw)
 	/* Autoneg flow control on copper adapters */
 	case ixgbe_media_type_copper:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ixgbe_device_supports_autoneg_fc(hw) == 0)
+=======
+		if (ixgbe_device_supports_autoneg_fc(hw))
+>>>>>>> v3.18
 =======
 		if (ixgbe_device_supports_autoneg_fc(hw))
 >>>>>>> v3.18
@@ -2949,7 +3260,10 @@ out:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ixgbe_pcie_timeout_poll - Return number of times to poll for completion
  * @hw: pointer to hardware structure
  *
@@ -2997,6 +3311,9 @@ static u32 ixgbe_pcie_timeout_poll(struct ixgbe_hw *hw)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  ixgbe_disable_pcie_master - Disable PCI-express master access
  *  @hw: pointer to hardware structure
@@ -3009,9 +3326,13 @@ static u32 ixgbe_pcie_timeout_poll(struct ixgbe_hw *hw)
 static s32 ixgbe_disable_pcie_master(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixgbe_adapter *adapter = hw->back;
 	s32 status = 0;
 	u32 i;
+=======
+	u32 i, poll;
+>>>>>>> v3.18
 =======
 	u32 i, poll;
 >>>>>>> v3.18
@@ -3022,8 +3343,14 @@ static s32 ixgbe_disable_pcie_master(struct ixgbe_hw *hw)
 
 	/* Exit if master requests are blocked */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_GIO))
 		goto out;
+=======
+	if (!(IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_GIO) ||
+	    ixgbe_removed(hw->hw_addr))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (!(IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_GIO) ||
 	    ixgbe_removed(hw->hw_addr))
@@ -3035,7 +3362,11 @@ static s32 ixgbe_disable_pcie_master(struct ixgbe_hw *hw)
 		udelay(100);
 		if (!(IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_GIO))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			return 0;
+>>>>>>> v3.18
 =======
 			return 0;
 >>>>>>> v3.18
@@ -3057,6 +3388,7 @@ static s32 ixgbe_disable_pcie_master(struct ixgbe_hw *hw)
 	 * transactions pending.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < IXGBE_PCI_MASTER_DISABLE_TIMEOUT; i++) {
 		udelay(100);
 		pci_read_config_word(adapter->pdev, IXGBE_PCI_DEVICE_STATUS,
@@ -3071,6 +3403,8 @@ static s32 ixgbe_disable_pcie_master(struct ixgbe_hw *hw)
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	poll = ixgbe_pcie_timeout_poll(hw);
 	for (i = 0; i < poll; i++) {
 		udelay(100);
@@ -3083,6 +3417,9 @@ out:
 
 	hw_dbg(hw, "PCIe transaction pending bit also did not clear.\n");
 	return IXGBE_ERR_MASTER_REQUESTS_PENDING;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3097,6 +3434,7 @@ out:
 s32 ixgbe_acquire_swfw_sync(struct ixgbe_hw *hw, u16 mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 gssr;
 	u32 swmask = mask;
 	u32 fwmask = mask << 5;
@@ -3107,6 +3445,8 @@ s32 ixgbe_acquire_swfw_sync(struct ixgbe_hw *hw, u16 mask)
 		 * SW EEPROM semaphore bit is used for access to all
 		 * SW_FW_SYNC/GSSR bits (not just EEPROM)
 =======
+=======
+>>>>>>> v3.18
 	u32 gssr = 0;
 	u32 swmask = mask;
 	u32 fwmask = mask << 5;
@@ -3117,12 +3457,16 @@ s32 ixgbe_acquire_swfw_sync(struct ixgbe_hw *hw, u16 mask)
 		/*
 		 * SW NVM semaphore bit is used for access to all
 		 * SW_FW_SYNC bits (not just NVM)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (ixgbe_get_eeprom_semaphore(hw))
 			return IXGBE_ERR_SWFW_SYNC;
 
 		gssr = IXGBE_READ_REG(hw, IXGBE_GSSR);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(gssr & (fwmask | swmask)))
 			break;
@@ -3147,6 +3491,8 @@ s32 ixgbe_acquire_swfw_sync(struct ixgbe_hw *hw, u16 mask)
 	ixgbe_release_eeprom_semaphore(hw);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		if (!(gssr & (fwmask | swmask))) {
 			gssr |= swmask;
 			IXGBE_WRITE_REG(hw, IXGBE_GSSR, gssr);
@@ -3165,6 +3511,9 @@ s32 ixgbe_acquire_swfw_sync(struct ixgbe_hw *hw, u16 mask)
 
 	usleep_range(5000, 10000);
 	return IXGBE_ERR_SWFW_SYNC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3192,7 +3541,10 @@ void ixgbe_release_swfw_sync(struct ixgbe_hw *hw, u16 mask)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * prot_autoc_read_generic - Hides MAC differences needed for AUTOC read
  * @hw: pointer to hardware structure
  * @reg_val: Value we read from AUTOC
@@ -3222,6 +3574,9 @@ s32 prot_autoc_write_generic(struct ixgbe_hw *hw, u32 reg_val, bool locked)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  ixgbe_disable_rx_buff_generic - Stops the receive data path
  *  @hw: pointer to hardware structure
@@ -3250,8 +3605,12 @@ s32 ixgbe_disable_rx_buff_generic(struct ixgbe_hw *hw)
 	/* For informational purposes only */
 	if (i >= IXGBE_MAX_SECRX_POLL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw_dbg(hw, "Rx unit being enabled before security "
 		       "path fully disabled.  Continuing with init.\n");
+=======
+		hw_dbg(hw, "Rx unit being enabled before security path fully disabled. Continuing with init.\n");
+>>>>>>> v3.18
 =======
 		hw_dbg(hw, "Rx unit being enabled before security path fully disabled. Continuing with init.\n");
 >>>>>>> v3.18
@@ -3304,7 +3663,12 @@ s32 ixgbe_blink_led_start_generic(struct ixgbe_hw *hw, u32 index)
 	u32 autoc_reg = IXGBE_READ_REG(hw, IXGBE_AUTOC);
 	u32 led_reg = IXGBE_READ_REG(hw, IXGBE_LEDCTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = 0;
+=======
+	bool locked = false;
+	s32 ret_val;
+>>>>>>> v3.18
 =======
 	bool locked = false;
 	s32 ret_val;
@@ -3317,6 +3681,7 @@ s32 ixgbe_blink_led_start_generic(struct ixgbe_hw *hw, u32 index)
 	hw->mac.ops.check_link(hw, &speed, &link_up, false);
 
 	if (!link_up) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Need the SW/FW semaphore around AUTOC writes if 82599 and
 		 * LESM is on.
@@ -3341,6 +3706,8 @@ s32 ixgbe_blink_led_start_generic(struct ixgbe_hw *hw, u32 index)
 			hw->mac.ops.release_swfw_sync(hw,
 						      IXGBE_GSSR_MAC_CSR_SM);
 =======
+=======
+>>>>>>> v3.18
 		ret_val = hw->mac.ops.prot_autoc_read(hw, &locked, &autoc_reg);
 		if (ret_val)
 			return ret_val;
@@ -3354,6 +3721,9 @@ s32 ixgbe_blink_led_start_generic(struct ixgbe_hw *hw, u32 index)
 
 		IXGBE_WRITE_FLUSH(hw);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		usleep_range(10000, 20000);
 	}
@@ -3364,8 +3734,12 @@ s32 ixgbe_blink_led_start_generic(struct ixgbe_hw *hw, u32 index)
 	IXGBE_WRITE_FLUSH(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -3378,6 +3752,7 @@ out:
  **/
 s32 ixgbe_blink_led_stop_generic(struct ixgbe_hw *hw, u32 index)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 autoc_reg = IXGBE_READ_REG(hw, IXGBE_AUTOC);
 	u32 led_reg = IXGBE_READ_REG(hw, IXGBE_LEDCTL);
@@ -3407,6 +3782,8 @@ s32 ixgbe_blink_led_stop_generic(struct ixgbe_hw *hw, u32 index)
 	if (got_lock)
 		hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_MAC_CSR_SM);
 =======
+=======
+>>>>>>> v3.18
 	u32 autoc_reg = 0;
 	u32 led_reg = IXGBE_READ_REG(hw, IXGBE_LEDCTL);
 	bool locked = false;
@@ -3422,6 +3799,9 @@ s32 ixgbe_blink_led_stop_generic(struct ixgbe_hw *hw, u32 index)
 	ret_val = hw->mac.ops.prot_autoc_write(hw, autoc_reg, locked);
 	if (ret_val)
 		return ret_val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	led_reg &= ~IXGBE_LED_MODE_MASK(index);
@@ -3431,8 +3811,12 @@ s32 ixgbe_blink_led_stop_generic(struct ixgbe_hw *hw, u32 index)
 	IXGBE_WRITE_FLUSH(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -3449,23 +3833,32 @@ out:
  **/
 static s32 ixgbe_get_san_mac_addr_offset(struct ixgbe_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         u16 *san_mac_offset)
 {
 =======
+=======
+>>>>>>> v3.18
 					u16 *san_mac_offset)
 {
 	s32 ret_val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * First read the EEPROM pointer to see if the MAC addresses are
 	 * available.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->eeprom.ops.read(hw, IXGBE_SAN_MAC_ADDR_PTR, san_mac_offset);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret_val = hw->eeprom.ops.read(hw, IXGBE_SAN_MAC_ADDR_PTR,
 				      san_mac_offset);
 	if (ret_val)
@@ -3473,6 +3866,9 @@ static s32 ixgbe_get_san_mac_addr_offset(struct ixgbe_hw *hw,
 		       IXGBE_SAN_MAC_ADDR_PTR);
 
 	return ret_val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3491,6 +3887,10 @@ s32 ixgbe_get_san_mac_addr_generic(struct ixgbe_hw *hw, u8 *san_mac_addr)
 	u16 san_mac_data, san_mac_offset;
 	u8 i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s32 ret_val;
+>>>>>>> v3.18
 =======
 	s32 ret_val;
 >>>>>>> v3.18
@@ -3499,6 +3899,7 @@ s32 ixgbe_get_san_mac_addr_generic(struct ixgbe_hw *hw, u8 *san_mac_addr)
 	 * First read the EEPROM pointer to see if the MAC addresses are
 	 * available.  If they're not, no point in calling set_lan_id() here.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ixgbe_get_san_mac_addr_offset(hw, &san_mac_offset);
 
@@ -3513,10 +3914,15 @@ s32 ixgbe_get_san_mac_addr_generic(struct ixgbe_hw *hw, u8 *san_mac_addr)
 		goto san_mac_addr_out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ret_val = ixgbe_get_san_mac_addr_offset(hw, &san_mac_offset);
 	if (ret_val || san_mac_offset == 0 || san_mac_offset == 0xFFFF)
 
 		goto san_mac_addr_clr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* make sure we know which port we need to program */
@@ -3524,10 +3930,13 @@ s32 ixgbe_get_san_mac_addr_generic(struct ixgbe_hw *hw, u8 *san_mac_addr)
 	/* apply the port offset to the address offset */
 	(hw->bus.func) ? (san_mac_offset += IXGBE_SAN_MAC_ADDR_PORT1_OFFSET) :
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                 (san_mac_offset += IXGBE_SAN_MAC_ADDR_PORT0_OFFSET);
 	for (i = 0; i < 3; i++) {
 		hw->eeprom.ops.read(hw, san_mac_offset, &san_mac_data);
 =======
+=======
+>>>>>>> v3.18
 			 (san_mac_offset += IXGBE_SAN_MAC_ADDR_PORT0_OFFSET);
 	for (i = 0; i < 3; i++) {
 		ret_val = hw->eeprom.ops.read(hw, san_mac_offset,
@@ -3537,16 +3946,22 @@ s32 ixgbe_get_san_mac_addr_generic(struct ixgbe_hw *hw, u8 *san_mac_addr)
 			       san_mac_offset);
 			goto san_mac_addr_clr;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		san_mac_addr[i * 2] = (u8)(san_mac_data);
 		san_mac_addr[i * 2 + 1] = (u8)(san_mac_data >> 8);
 		san_mac_offset++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 san_mac_addr_out:
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 
 san_mac_addr_clr:
@@ -3556,6 +3971,9 @@ san_mac_addr_clr:
 	for (i = 0; i < 6; i++)
 		san_mac_addr[i] = 0xFF;
 	return ret_val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3569,8 +3987,12 @@ san_mac_addr_clr:
 u16 ixgbe_get_pcie_msix_count_generic(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixgbe_adapter *adapter = hw->back;
 	u16 msix_count = 1;
+=======
+	u16 msix_count;
+>>>>>>> v3.18
 =======
 	u16 msix_count;
 >>>>>>> v3.18
@@ -3589,17 +4011,23 @@ u16 ixgbe_get_pcie_msix_count_generic(struct ixgbe_hw *hw)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return msix_count;
 	}
 
 	pci_read_config_word(adapter->pdev, pcie_offset, &msix_count);
 =======
+=======
+>>>>>>> v3.18
 		return 1;
 	}
 
 	msix_count = ixgbe_read_pci_cfg_word(hw, pcie_offset);
 	if (ixgbe_removed(hw->hw_addr))
 		msix_count = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msix_count &= IXGBE_PCIE_MSIX_TBL_SZ_MASK;
 
@@ -3633,14 +4061,20 @@ s32 ixgbe_clear_vmdq_generic(struct ixgbe_hw *hw, u32 rar, u32 vmdq)
 	mpsar_hi = IXGBE_READ_REG(hw, IXGBE_MPSAR_HI(rar));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mpsar_lo && !mpsar_hi)
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 	if (ixgbe_removed(hw->hw_addr))
 		return 0;
 
 	if (!mpsar_lo && !mpsar_hi)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (vmdq == IXGBE_CLEAR_VMDQ_ALL) {
@@ -3664,7 +4098,10 @@ s32 ixgbe_clear_vmdq_generic(struct ixgbe_hw *hw, u32 rar, u32 vmdq)
 	if (mpsar_lo == 0 && mpsar_hi == 0 && rar != 0)
 		hw->mac.ops.clear_rar(hw, rar);
 <<<<<<< HEAD
+<<<<<<< HEAD
 done:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -3796,7 +4233,11 @@ static s32 ixgbe_find_vlvf_slot(struct ixgbe_hw *hw, u32 vlan)
  **/
 s32 ixgbe_set_vfta_generic(struct ixgbe_hw *hw, u32 vlan, u32 vind,
 <<<<<<< HEAD
+<<<<<<< HEAD
                            bool vlan_on)
+=======
+			   bool vlan_on)
+>>>>>>> v3.18
 =======
 			   bool vlan_on)
 >>>>>>> v3.18
@@ -3922,9 +4363,15 @@ s32 ixgbe_set_vfta_generic(struct ixgbe_hw *hw, u32 vlan, u32 vind,
 				vfta_changed = false;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else
 			IXGBE_WRITE_REG(hw, IXGBE_VLVF(vlvf_index), 0);
+=======
+		} else {
+			IXGBE_WRITE_REG(hw, IXGBE_VLVF(vlvf_index), 0);
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			IXGBE_WRITE_REG(hw, IXGBE_VLVF(vlvf_index), 0);
@@ -4030,7 +4477,11 @@ s32 ixgbe_check_mac_link_generic(struct ixgbe_hw *hw, ixgbe_link_speed *speed,
  **/
 s32 ixgbe_get_wwn_prefix_generic(struct ixgbe_hw *hw, u16 *wwnn_prefix,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         u16 *wwpn_prefix)
+=======
+					u16 *wwpn_prefix)
+>>>>>>> v3.18
 =======
 					u16 *wwpn_prefix)
 >>>>>>> v3.18
@@ -4043,6 +4494,7 @@ s32 ixgbe_get_wwn_prefix_generic(struct ixgbe_hw *hw, u16 *wwnn_prefix,
 	*wwpn_prefix = 0xFFFF;
 
 	/* check if alternative SAN MAC is supported */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hw->eeprom.ops.read(hw, IXGBE_ALT_SAN_MAC_ADDR_BLK_PTR,
 	                    &alt_san_mac_blk_offset);
@@ -4066,6 +4518,8 @@ s32 ixgbe_get_wwn_prefix_generic(struct ixgbe_hw *hw, u16 *wwnn_prefix,
 
 wwn_prefix_out:
 =======
+=======
+>>>>>>> v3.18
 	offset = IXGBE_ALT_SAN_MAC_ADDR_BLK_PTR;
 	if (hw->eeprom.ops.read(hw, offset, &alt_san_mac_blk_offset))
 		goto wwn_prefix_err;
@@ -4094,6 +4548,9 @@ wwn_prefix_out:
 
 wwn_prefix_err:
 	hw_err(hw, "eeprom read at offset %d failed\n", offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -4285,6 +4742,7 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 	u8 buf_len, dword_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = 0;
 
 	if (length == 0 || length & 0x3 ||
@@ -4293,10 +4751,15 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 		ret_val = IXGBE_ERR_HOST_INTERFACE_COMMAND;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (length == 0 || length & 0x3 ||
 	    length > IXGBE_HI_MAX_BLOCK_BYTE_LENGTH) {
 		hw_dbg(hw, "Buffer length failure.\n");
 		return IXGBE_ERR_HOST_INTERFACE_COMMAND;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4305,8 +4768,12 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 	if ((hicr & IXGBE_HICR_EN) == 0) {
 		hw_dbg(hw, "IXGBE_HOST_EN bit disabled.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret_val = IXGBE_ERR_HOST_INTERFACE_COMMAND;
 		goto out;
+=======
+		return IXGBE_ERR_HOST_INTERFACE_COMMAND;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_HOST_INTERFACE_COMMAND;
 >>>>>>> v3.18
@@ -4338,8 +4805,12 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 	    (!(IXGBE_READ_REG(hw, IXGBE_HICR) & IXGBE_HICR_SV))) {
 		hw_dbg(hw, "Command has failed with no status valid.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret_val = IXGBE_ERR_HOST_INTERFACE_COMMAND;
 		goto out;
+=======
+		return IXGBE_ERR_HOST_INTERFACE_COMMAND;
+>>>>>>> v3.18
 =======
 		return IXGBE_ERR_HOST_INTERFACE_COMMAND;
 >>>>>>> v3.18
@@ -4358,6 +4829,7 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 	buf_len = ((struct ixgbe_hic_hdr *)buffer)->buf_len;
 	if (buf_len == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 
 	if (length < (buf_len + hdr_size)) {
@@ -4365,11 +4837,16 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 		ret_val = IXGBE_ERR_HOST_INTERFACE_COMMAND;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (length < (buf_len + hdr_size)) {
 		hw_dbg(hw, "Buffer not large enough for reply message.\n");
 		return IXGBE_ERR_HOST_INTERFACE_COMMAND;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4383,8 +4860,12 @@ static s32 ixgbe_host_interface_command(struct ixgbe_hw *hw, u32 *buffer,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -4409,6 +4890,7 @@ s32 ixgbe_set_fw_drv_ver_generic(struct ixgbe_hw *hw, u8 maj, u8 min,
 	struct ixgbe_hic_drv_info fw_cmd;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = 0;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_SW_MNG_SM) != 0) {
@@ -4416,10 +4898,15 @@ s32 ixgbe_set_fw_drv_ver_generic(struct ixgbe_hw *hw, u8 maj, u8 min,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	s32 ret_val;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_SW_MNG_SM))
 		return IXGBE_ERR_SWFW_SYNC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fw_cmd.hdr.cmd = FW_CEM_CMD_DRIVER_INFO;
@@ -4453,7 +4940,10 @@ s32 ixgbe_set_fw_drv_ver_generic(struct ixgbe_hw *hw, u8 maj, u8 min,
 
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_SW_MNG_SM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret_val;
@@ -4525,6 +5015,7 @@ static s32 ixgbe_get_ets_data(struct ixgbe_hw *hw, u16 *ets_cfg,
 			      u16 *ets_offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
 
 	status = hw->eeprom.ops.read(hw, IXGBE_ETS_CFG, ets_offset);
@@ -4548,6 +5039,8 @@ static s32 ixgbe_get_ets_data(struct ixgbe_hw *hw, u16 *ets_cfg,
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	s32 status;
 
 	status = hw->eeprom.ops.read(hw, IXGBE_ETS_CFG, ets_offset);
@@ -4565,6 +5058,9 @@ out:
 		return IXGBE_NOT_IMPLEMENTED;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4577,7 +5073,11 @@ out:
 s32 ixgbe_get_thermal_sensor_data_generic(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -4590,6 +5090,7 @@ s32 ixgbe_get_thermal_sensor_data_generic(struct ixgbe_hw *hw)
 
 	/* Only support thermal sensors attached to physical port 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_LAN_ID_1)) {
 		status = IXGBE_NOT_IMPLEMENTED;
 		goto out;
@@ -4599,12 +5100,17 @@ s32 ixgbe_get_thermal_sensor_data_generic(struct ixgbe_hw *hw)
 	if (status)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if ((IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_LAN_ID_1))
 		return IXGBE_NOT_IMPLEMENTED;
 
 	status = ixgbe_get_ets_data(hw, &ets_cfg, &ets_offset);
 	if (status)
 		return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	num_sensors = (ets_cfg & IXGBE_ETS_NUM_SENSORS_MASK);
@@ -4619,7 +5125,11 @@ s32 ixgbe_get_thermal_sensor_data_generic(struct ixgbe_hw *hw)
 					     &ets_sensor);
 		if (status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			return status;
+>>>>>>> v3.18
 =======
 			return status;
 >>>>>>> v3.18
@@ -4636,17 +5146,23 @@ s32 ixgbe_get_thermal_sensor_data_generic(struct ixgbe_hw *hw)
 					&data->sensor[i].temp);
 			if (status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto out;
 		}
 	}
 out:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 				return status;
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4660,7 +5176,11 @@ out:
 s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -4677,6 +5197,7 @@ s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw)
 
 	/* Only support thermal sensors attached to physical port 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_LAN_ID_1)) {
 		status = IXGBE_NOT_IMPLEMENTED;
 		goto out;
@@ -4686,12 +5207,17 @@ s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw)
 	if (status)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if ((IXGBE_READ_REG(hw, IXGBE_STATUS) & IXGBE_STATUS_LAN_ID_1))
 		return IXGBE_NOT_IMPLEMENTED;
 
 	status = ixgbe_get_ets_data(hw, &ets_cfg, &ets_offset);
 	if (status)
 		return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	low_thresh_delta = ((ets_cfg & IXGBE_ETS_LTHRES_DELTA_MASK) >>
@@ -4705,13 +5231,19 @@ s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw)
 		u8  sensor_location;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw->eeprom.ops.read(hw, (ets_offset + 1 + i), &ets_sensor);
 =======
+=======
+>>>>>>> v3.18
 		if (hw->eeprom.ops.read(hw, ets_offset + 1 + i, &ets_sensor)) {
 			hw_err(hw, "eeprom read at offset %d failed\n",
 			       ets_offset + 1 + i);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sensor_index = ((ets_sensor & IXGBE_ETS_DATA_INDEX_MASK) >>
 				IXGBE_ETS_DATA_INDEX_SHIFT);
@@ -4731,8 +5263,13 @@ s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw)
 		data->sensor[i].max_op_thresh = therm_limit - low_thresh_delta;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	return status;
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;

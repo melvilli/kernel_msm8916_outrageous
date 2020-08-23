@@ -116,7 +116,11 @@ static void async_run_entry_fn(struct work_struct *work)
 	/* 1) run (and print duration) */
 	if (initcall_debug && system_state == SYSTEM_BOOTING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "calling  %lli_%pF @ %i\n",
+=======
+		pr_debug("calling  %lli_%pF @ %i\n",
+>>>>>>> v3.18
 =======
 		pr_debug("calling  %lli_%pF @ %i\n",
 >>>>>>> v3.18
@@ -129,7 +133,11 @@ static void async_run_entry_fn(struct work_struct *work)
 		rettime = ktime_get();
 		delta = ktime_sub(rettime, calltime);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "initcall %lli_%pF returned 0 after %lld usecs\n",
+=======
+		pr_debug("initcall %lli_%pF returned 0 after %lld usecs\n",
+>>>>>>> v3.18
 =======
 		pr_debug("initcall %lli_%pF returned 0 after %lld usecs\n",
 >>>>>>> v3.18
@@ -294,7 +302,11 @@ void async_synchronize_cookie_domain(async_cookie_t cookie, struct async_domain 
 
 	if (initcall_debug && system_state == SYSTEM_BOOTING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "async_waiting @ %i\n", task_pid_nr(current));
+=======
+		pr_debug("async_waiting @ %i\n", task_pid_nr(current));
+>>>>>>> v3.18
 =======
 		pr_debug("async_waiting @ %i\n", task_pid_nr(current));
 >>>>>>> v3.18
@@ -308,7 +320,11 @@ void async_synchronize_cookie_domain(async_cookie_t cookie, struct async_domain 
 		delta = ktime_sub(endtime, starttime);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "async_continuing @ %i after %lli usec\n",
+=======
+		pr_debug("async_continuing @ %i after %lli usec\n",
+>>>>>>> v3.18
 =======
 		pr_debug("async_continuing @ %i after %lli usec\n",
 >>>>>>> v3.18

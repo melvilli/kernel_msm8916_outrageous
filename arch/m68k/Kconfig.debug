@@ -12,6 +12,7 @@ config BOOTPARAM_STRING
 
 config EARLY_PRINTK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Early printk" if EMBEDDED
 	depends on MVME16x || MAC
 	default y
@@ -21,6 +22,8 @@ config EARLY_PRINTK
           This is useful for kernel debugging when your machine crashes very
           early before the console code is initialized.
 =======
+=======
+>>>>>>> v3.18
 	bool "Early printk"
 	depends on !(SUN3 || M68360 || M68000 || COLDFIRE)
 	help
@@ -33,6 +36,9 @@ config EARLY_PRINTK
 
           This is useful for kernel debugging when your machine crashes very
           early, i.e. before the normal console driver is loaded.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
           You should normally say N here, unless you want to debug such a crash.
 

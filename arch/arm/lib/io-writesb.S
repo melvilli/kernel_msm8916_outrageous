@@ -46,7 +46,11 @@
 ENTRY(__raw_writesb)
 		teq	r2, #0		@ do we have to check for the zero len?
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 =======
 		reteq	lr
 >>>>>>> v3.18

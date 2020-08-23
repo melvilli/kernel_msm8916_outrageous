@@ -2,9 +2,15 @@
  * adm1029.c - Part of lm_sensors, Linux kernel modules for hardware monitoring
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2006 Corentin LABBE <corentin.labbe@geomatys.fr>
  *
  * Based on LM83 Driver by Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2006 Corentin LABBE <clabbe.montjoie@gmail.com>
+ *
+ * Based on LM83 Driver by Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2006 Corentin LABBE <clabbe.montjoie@gmail.com>
  *
@@ -113,6 +119,7 @@ static const u8 ADM1029_REG_FAN_DIV[] = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Functions declaration
  */
 
@@ -149,12 +156,18 @@ static struct i2c_driver adm1029_driver = {
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Client data (each client gets its own)
  */
 
 struct adm1029_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -170,7 +183,10 @@ struct adm1029_data {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * function that update the status of the chips (temperature for example)
  */
 static struct adm1029_data *adm1029_update_device(struct device *dev)
@@ -215,6 +231,9 @@ static struct adm1029_data *adm1029_update_device(struct device *dev)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Sysfs stuff
  */
@@ -258,8 +277,13 @@ static ssize_t set_fan_div(struct device *dev,
 	    struct device_attribute *devattr, const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1029_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1029_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1029_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -336,7 +360,11 @@ static SENSOR_DEVICE_ATTR(fan2_div, S_IRUGO | S_IWUSR,
 			  show_fan_div, set_fan_div, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *adm1029_attributes[] = {
+=======
+static struct attribute *adm1029_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *adm1029_attrs[] = {
 >>>>>>> v3.18
@@ -359,9 +387,13 @@ static struct attribute *adm1029_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group adm1029_group = {
 	.attrs = adm1029_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(adm1029);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(adm1029);
 >>>>>>> v3.18
@@ -414,6 +446,7 @@ static int adm1029_detect(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adm1029_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -457,10 +490,15 @@ static int adm1029_init_client(struct i2c_client *client)
 {
 	u8 config;
 =======
+=======
+>>>>>>> v3.18
 static int adm1029_init_client(struct i2c_client *client)
 {
 	u8 config;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config = i2c_smbus_read_byte_data(client, ADM1029_REG_CONFIG);
 	if ((config & 0x10) == 0) {
@@ -476,6 +514,7 @@ static int adm1029_init_client(struct i2c_client *client)
 	return 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int adm1029_remove(struct i2c_client *client)
 {
@@ -535,6 +574,8 @@ module_i2c_driver(adm1029_driver);
 
 MODULE_AUTHOR("Corentin LABBE <corentin.labbe@geomatys.fr>");
 =======
+=======
+>>>>>>> v3.18
 static int adm1029_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -582,6 +623,9 @@ static struct i2c_driver adm1029_driver = {
 module_i2c_driver(adm1029_driver);
 
 MODULE_AUTHOR("Corentin LABBE <clabbe.montjoie@gmail.com>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("adm1029 driver");
 MODULE_LICENSE("GPL v2");

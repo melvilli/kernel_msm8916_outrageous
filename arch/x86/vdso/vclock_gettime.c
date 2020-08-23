@@ -5,6 +5,12 @@
  * Fast user context implementation of clock_gettime, gettimeofday, and time.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * 32 Bit compat layer by Stefani Seibold <stefani@seibold.net>
+ *  sponsored by Rohde & Schwarz GmbH & Co. KG Munich/Germany
+ *
+>>>>>>> v3.18
 =======
  * 32 Bit compat layer by Stefani Seibold <stefani@seibold.net>
  *  sponsored by Rohde & Schwarz GmbH & Co. KG Munich/Germany
@@ -14,6 +20,7 @@
  * Check with readelf after changing.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Disable profiling for userspace code: */
 #define DISABLE_BRANCH_PROFILING
@@ -69,6 +76,8 @@ static notrace cycle_t vread_hpet(void)
 {
 	return readl((const void __iomem *)fix_to_virt(VSYSCALL_HPET) + HPET_COUNTER);
 =======
+=======
+>>>>>>> v3.18
 #include <uapi/linux/time.h>
 #include <asm/vgtod.h>
 #include <asm/hpet.h>
@@ -116,6 +125,9 @@ notrace static long vdso_fallback_gtod(struct timeval *tv, struct timezone *tz)
 	asm("syscall" : "=a" (ret) :
 	    "0" (__NR_gettimeofday), "D" (tv), "S" (tz) : "memory");
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -142,7 +154,10 @@ static notrace cycle_t vread_pvclock(int *mode)
 	u64 last;
 	u32 version;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 migrate_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 flags;
@@ -151,10 +166,13 @@ static notrace cycle_t vread_pvclock(int *mode)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * When looping to get a consistent (time-info, tsc) pair, we
 	 * also need to deal with the possibility we can switch vcpus,
 	 * so make sure we always re-fetch time-info for the current vcpu.
 =======
+=======
+>>>>>>> v3.18
 	 * Note: hypervisor must guarantee that:
 	 * 1. cpu ID number maps 1:1 to per-CPU pvclock time info.
 	 * 2. that per-CPU pvclock time info is updated if the
@@ -162,6 +180,9 @@ static notrace cycle_t vread_pvclock(int *mode)
 	 * 3. that version is increased whenever underlying CPU
 	 *    changes.
 	 *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	do {
@@ -174,8 +195,11 @@ static notrace cycle_t vread_pvclock(int *mode)
 		pvti = get_pvti(cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		migrate_count = pvti->migrate_count;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		version = __pvclock_read_cycles(&pvti->pvti, &ret, &flags);
@@ -190,8 +214,12 @@ static notrace cycle_t vread_pvclock(int *mode)
 	} while (unlikely(cpu != cpu1 ||
 			  (pvti->pvti.version & 1) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  pvti->pvti.version != version ||
 			  pvti->migrate_count != migrate_count));
+=======
+			  pvti->pvti.version != version));
+>>>>>>> v3.18
 =======
 			  pvti->pvti.version != version));
 >>>>>>> v3.18
@@ -201,7 +229,11 @@ static notrace cycle_t vread_pvclock(int *mode)
 
 	/* refer to tsc.c read_tsc() comment for rationale */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last = VVAR(vsyscall_gtod_data).clock.cycle_last;
+=======
+	last = gtod->cycle_last;
+>>>>>>> v3.18
 =======
 	last = gtod->cycle_last;
 >>>>>>> v3.18
@@ -214,12 +246,15 @@ static notrace cycle_t vread_pvclock(int *mode)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 notrace static long vdso_fallback_gettime(long clock, struct timespec *ts)
 {
 	long ret;
 	asm("syscall" : "=a" (ret) :
 	    "0" (__NR_clock_gettime),"D" (clock), "S" (ts) : "memory");
 =======
+=======
+>>>>>>> v3.18
 #else
 
 notrace static long vdso_fallback_gettime(long clock, struct timespec *ts)
@@ -234,6 +269,9 @@ notrace static long vdso_fallback_gettime(long clock, struct timespec *ts)
 		: "=a" (ret)
 		: "0" (__NR_clock_gettime), "g" (clock), "c" (ts)
 		: "memory", "edx");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -242,6 +280,7 @@ notrace static long vdso_fallback_gtod(struct timeval *tv, struct timezone *tz)
 {
 	long ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	asm("syscall" : "=a" (ret) :
 	    "0" (__NR_gettimeofday), "D" (tv), "S" (tz) : "memory");
@@ -260,6 +299,8 @@ notrace static inline u64 vgetsns(int *mode)
 #ifdef CONFIG_PARAVIRT_CLOCK
 	else if (gtod->clock.vclock_mode == VCLOCK_PVCLOCK)
 =======
+=======
+>>>>>>> v3.18
 	asm(
 		"mov %%ebx, %%edx \n"
 		"mov %2, %%ebx \n"
@@ -327,14 +368,22 @@ notrace static inline u64 vgetsns(int *mode)
 #endif
 #ifdef CONFIG_PARAVIRT_CLOCK
 	else if (gtod->vclock_mode == VCLOCK_PVCLOCK)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cycles = vread_pvclock(mode);
 #endif
 	else
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = (cycles - gtod->clock.cycle_last) & gtod->clock.mask;
 	return v * gtod->clock.mult;
+=======
+	v = (cycles - gtod->cycle_last) & gtod->mask;
+	return v * gtod->mult;
+>>>>>>> v3.18
 =======
 	v = (cycles - gtod->cycle_last) & gtod->mask;
 	return v * gtod->mult;
@@ -348,6 +397,7 @@ notrace static int __always_inline do_realtime(struct timespec *ts)
 	u64 ns;
 	int mode;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ts->tv_nsec = 0;
 	do {
@@ -365,6 +415,8 @@ notrace static int __always_inline do_realtime(struct timespec *ts)
 
 notrace static int do_monotonic(struct timespec *ts)
 =======
+=======
+>>>>>>> v3.18
 	do {
 		seq = gtod_read_begin(gtod);
 		mode = gtod->vclock_mode;
@@ -381,12 +433,16 @@ notrace static int do_monotonic(struct timespec *ts)
 }
 
 notrace static int __always_inline do_monotonic(struct timespec *ts)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long seq;
 	u64 ns;
 	int mode;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ts->tv_nsec = 0;
 	do {
@@ -399,6 +455,8 @@ notrace static int __always_inline do_monotonic(struct timespec *ts)
 	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
 	timespec_add_ns(ts, ns);
 =======
+=======
+>>>>>>> v3.18
 	do {
 		seq = gtod_read_begin(gtod);
 		mode = gtod->vclock_mode;
@@ -410,11 +468,15 @@ notrace static int __always_inline do_monotonic(struct timespec *ts)
 
 	ts->tv_sec += __iter_div_u64_rem(ns, NSEC_PER_SEC, &ns);
 	ts->tv_nsec = ns;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return mode;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 notrace static int do_realtime_coarse(struct timespec *ts)
 {
@@ -438,6 +500,8 @@ notrace static int do_monotonic_coarse(struct timespec *ts)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 notrace static void do_realtime_coarse(struct timespec *ts)
 {
 	unsigned long seq;
@@ -456,11 +520,15 @@ notrace static void do_monotonic_coarse(struct timespec *ts)
 		ts->tv_sec = gtod->monotonic_time_coarse_sec;
 		ts->tv_nsec = gtod->monotonic_time_coarse_nsec;
 	} while (unlikely(gtod_read_retry(gtod, seq)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 notrace int __vdso_clock_gettime(clockid_t clock, struct timespec *ts)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = VCLOCK_NONE;
 
@@ -481,6 +549,8 @@ notrace int __vdso_clock_gettime(clockid_t clock, struct timespec *ts)
 		return vdso_fallback_gettime(clock, ts);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	switch (clock) {
 	case CLOCK_REALTIME:
 		if (do_realtime(ts) == VCLOCK_NONE)
@@ -503,6 +573,9 @@ notrace int __vdso_clock_gettime(clockid_t clock, struct timespec *ts)
 	return 0;
 fallback:
 	return vdso_fallback_gettime(clock, ts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 int clock_gettime(clockid_t, struct timespec *)
@@ -510,6 +583,7 @@ int clock_gettime(clockid_t, struct timespec *)
 
 notrace int __vdso_gettimeofday(struct timeval *tv, struct timezone *tz)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	long ret = VCLOCK_NONE;
 
@@ -529,6 +603,8 @@ notrace int __vdso_gettimeofday(struct timeval *tv, struct timezone *tz)
 	if (ret == VCLOCK_NONE)
 		return vdso_fallback_gtod(tv, tz);
 =======
+=======
+>>>>>>> v3.18
 	if (likely(tv != NULL)) {
 		if (unlikely(do_realtime((struct timespec *)tv) == VCLOCK_NONE))
 			return vdso_fallback_gtod(tv, tz);
@@ -539,6 +615,9 @@ notrace int __vdso_gettimeofday(struct timeval *tv, struct timezone *tz)
 		tz->tz_dsttime = gtod->tz_dsttime;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -552,8 +631,13 @@ int gettimeofday(struct timeval *, struct timezone *)
 notrace time_t __vdso_time(time_t *t)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This is atomic on x86_64 so we don't need any locks. */
 	time_t result = ACCESS_ONCE(VVAR(vsyscall_gtod_data).wall_time_sec);
+=======
+	/* This is atomic on x86 so we don't need any locks. */
+	time_t result = ACCESS_ONCE(gtod->wall_time_sec);
+>>>>>>> v3.18
 =======
 	/* This is atomic on x86 so we don't need any locks. */
 	time_t result = ACCESS_ONCE(gtod->wall_time_sec);

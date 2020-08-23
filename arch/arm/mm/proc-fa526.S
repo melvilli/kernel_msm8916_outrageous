@@ -33,7 +33,11 @@
  */
 ENTRY(cpu_fa526_proc_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ ENTRY(cpu_fa526_proc_fin)
 	nop
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -81,7 +89,11 @@ ENTRY(cpu_fa526_reset)
 	nop
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 =======
 	ret	r0
 >>>>>>> v3.18
@@ -94,7 +106,11 @@ ENDPROC(cpu_fa526_reset)
 	.align	4
 ENTRY(cpu_fa526_do_idle)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -107,7 +123,11 @@ ENTRY(cpu_fa526_dcache_clean_area)
 	bhi	1b
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -138,7 +158,11 @@ ENTRY(cpu_fa526_switch_mm)
 	mcr	p15, 0, ip, c8, c7, 0		@ invalidate UTLB
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -158,9 +182,13 @@ ENTRY(cpu_fa526_set_pte_ext)
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 
 	__CPUINIT
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -193,7 +221,11 @@ __fa526_setup:
 	ldr	r5, fa526_cr1_set
 	orr	r0, r0, r5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

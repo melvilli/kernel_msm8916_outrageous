@@ -168,7 +168,10 @@ struct fscache_netfs {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * data file or index object cookie
  * - a file will only appear in one cache
  * - a request to cache a file may or may not be honoured, subject to
@@ -205,6 +208,9 @@ static inline bool fscache_cookie_enabled(struct fscache_cookie *cookie)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * slow-path functions for when there is actually caching available, and the
  * netfs does actually have a valid token
@@ -221,8 +227,14 @@ extern struct fscache_cookie *__fscache_acquire_cookie(
 	struct fscache_cookie *,
 	const struct fscache_cookie_def *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *);
 extern void __fscache_relinquish_cookie(struct fscache_cookie *, int);
+=======
+	void *, bool);
+extern void __fscache_relinquish_cookie(struct fscache_cookie *, bool);
+extern int __fscache_check_consistency(struct fscache_cookie *);
+>>>>>>> v3.18
 =======
 	void *, bool);
 extern void __fscache_relinquish_cookie(struct fscache_cookie *, bool);
@@ -254,12 +266,18 @@ extern bool __fscache_maybe_release_page(struct fscache_cookie *, struct page *,
 extern void __fscache_uncache_all_inode_pages(struct fscache_cookie *,
 					      struct inode *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void __fscache_readpages_cancel(struct fscache_cookie *cookie,
 				       struct list_head *pages);
 extern void __fscache_disable_cookie(struct fscache_cookie *, bool);
 extern void __fscache_enable_cookie(struct fscache_cookie *,
 				    bool (*)(void *), void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -340,6 +358,10 @@ void fscache_release_cache_tag(struct fscache_cache_tag *tag)
  * @netfs_data: An arbitrary piece of data to be kept in the cookie to
  * represent the cache object to the netfs
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @enable: Whether or not to enable a data cookie immediately
+>>>>>>> v3.18
 =======
  * @enable: Whether or not to enable a data cookie immediately
 >>>>>>> v3.18
@@ -356,17 +378,23 @@ struct fscache_cookie *fscache_acquire_cookie(
 	struct fscache_cookie *parent,
 	const struct fscache_cookie_def *def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *netfs_data)
 {
 	if (fscache_cookie_valid(parent))
 		return __fscache_acquire_cookie(parent, def, netfs_data);
 =======
+=======
+>>>>>>> v3.18
 	void *netfs_data,
 	bool enable)
 {
 	if (fscache_cookie_valid(parent) && fscache_cookie_enabled(parent))
 		return __fscache_acquire_cookie(parent, def, netfs_data,
 						enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		return NULL;
@@ -386,7 +414,11 @@ struct fscache_cookie *fscache_acquire_cookie(
  */
 static inline
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fscache_relinquish_cookie(struct fscache_cookie *cookie, int retire)
+=======
+void fscache_relinquish_cookie(struct fscache_cookie *cookie, bool retire)
+>>>>>>> v3.18
 =======
 void fscache_relinquish_cookie(struct fscache_cookie *cookie, bool retire)
 >>>>>>> v3.18
@@ -397,7 +429,10 @@ void fscache_relinquish_cookie(struct fscache_cookie *cookie, bool retire)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * fscache_check_consistency - Request that if the cache is updated
  * @cookie: The cookie representing the cache object
  *
@@ -417,6 +452,9 @@ int fscache_check_consistency(struct fscache_cookie *cookie)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * fscache_update_cookie - Request that a cache object be updated
  * @cookie: The cookie representing the cache object
@@ -431,7 +469,11 @@ static inline
 void fscache_update_cookie(struct fscache_cookie *cookie)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -482,7 +524,11 @@ static inline
 int fscache_attr_changed(struct fscache_cookie *cookie)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -508,7 +554,11 @@ static inline
 void fscache_invalidate(struct fscache_cookie *cookie)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -586,7 +636,11 @@ int fscache_read_or_alloc_page(struct fscache_cookie *cookie,
 			       gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -641,7 +695,11 @@ int fscache_read_or_alloc_pages(struct fscache_cookie *cookie,
 				gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -676,7 +734,11 @@ int fscache_alloc_page(struct fscache_cookie *cookie,
 		       gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -687,7 +749,10 @@ int fscache_alloc_page(struct fscache_cookie *cookie,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * fscache_readpages_cancel - Cancel read/alloc on pages
  * @cookie: The cookie representing the inode's cache object.
  * @pages: The netfs pages that we canceled write on in readpages()
@@ -708,6 +773,9 @@ void fscache_readpages_cancel(struct fscache_cookie *cookie,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * fscache_write_page - Request storage of a page in the cache
  * @cookie: The cookie representing the cache object
@@ -732,7 +800,11 @@ int fscache_write_page(struct fscache_cookie *cookie,
 		       gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fscache_cookie_valid(cookie))
+=======
+	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
+>>>>>>> v3.18
 =======
 	if (fscache_cookie_valid(cookie) && fscache_cookie_enabled(cookie))
 >>>>>>> v3.18
@@ -846,7 +918,10 @@ void fscache_uncache_all_inode_pages(struct fscache_cookie *cookie,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * fscache_disable_cookie - Disable a cookie
  * @cookie: The cookie representing the cache object
@@ -890,5 +965,8 @@ void fscache_enable_cookie(struct fscache_cookie *cookie,
 		__fscache_enable_cookie(cookie, can_enable, data);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_FSCACHE_H */

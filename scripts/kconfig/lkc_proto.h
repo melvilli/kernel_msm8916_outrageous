@@ -15,6 +15,10 @@ P(conf_set_message_callback, void,(void (*fn)(const char *fmt, va_list ap)));
 P(rootmenu,struct menu,);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+P(menu_is_empty, bool, (struct menu *menu));
+>>>>>>> v3.18
 =======
 P(menu_is_empty, bool, (struct menu *menu));
 >>>>>>> v3.18

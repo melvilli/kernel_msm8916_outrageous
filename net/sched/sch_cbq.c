@@ -131,15 +131,21 @@ struct cbq_class {
 	struct gnet_stats_basic_packed bstats;
 	struct gnet_stats_queue qstats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est rate_est;
 	struct tc_cbq_xstats	xstats;
 
 	struct tcf_proto	*filter_list;
 =======
+=======
+>>>>>>> v3.18
 	struct gnet_stats_rate_est64 rate_est;
 	struct tc_cbq_xstats	xstats;
 
 	struct tcf_proto __rcu	*filter_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int			refcnt;
@@ -167,7 +173,10 @@ struct cbq_sched_data {
 	int			tx_len;
 	psched_time_t		now;		/* Cached timestamp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psched_time_t		now_rt;		/* Cached real time */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int		pmask;
@@ -233,6 +242,10 @@ cbq_classify(struct sk_buff *skb, struct Qdisc *sch, int *qerr)
 	struct cbq_class *cl = NULL;
 	u32 prio = skb->priority;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto *fl;
+>>>>>>> v3.18
 =======
 	struct tcf_proto *fl;
 >>>>>>> v3.18
@@ -251,18 +264,24 @@ cbq_classify(struct sk_buff *skb, struct Qdisc *sch, int *qerr)
 		defmap = head->defaults;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Step 2+n. Apply classifier.
 		 */
 		if (!head->filter_list ||
 		    (result = tc_classify_compat(skb, head->filter_list, &res)) < 0)
 =======
+=======
+>>>>>>> v3.18
 		fl = rcu_dereference_bh(head->filter_list);
 		/*
 		 * Step 2+n. Apply classifier.
 		 */
 		result = tc_classify_compat(skb, fl, &res);
 		if (!fl || result < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto fallback;
 
@@ -377,12 +396,16 @@ cbq_mark_toplevel(struct cbq_sched_data *q, struct cbq_class *cl)
 
 	if (toplevel > cl->level && !(qdisc_is_throttled(cl->q))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psched_time_t now;
 		psched_tdiff_t incr;
 
 		now = psched_get_time();
 		incr = now - q->now_rt;
 		now = q->now + incr;
+=======
+		psched_time_t now = psched_get_time();
+>>>>>>> v3.18
 =======
 		psched_time_t now = psched_get_time();
 >>>>>>> v3.18
@@ -409,7 +432,11 @@ cbq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	if (cl == NULL) {
 		if (ret & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -431,7 +458,11 @@ cbq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 	if (net_xmit_drop_count(ret)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -657,7 +688,11 @@ static enum hrtimer_restart cbq_undelay(struct hrtimer *timer)
 		time = ktime_set(0, 0);
 		time = ktime_add_ns(time, PSCHED_TICKS2NS(now + delay));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hrtimer_start(&q->delay_timer, time, HRTIMER_MODE_ABS);
+=======
+		hrtimer_start(&q->delay_timer, time, HRTIMER_MODE_ABS_PINNED);
+>>>>>>> v3.18
 =======
 		hrtimer_start(&q->delay_timer, time, HRTIMER_MODE_ABS_PINNED);
 >>>>>>> v3.18
@@ -694,17 +729,23 @@ static int cbq_reshape_fail(struct sk_buff *skb, struct Qdisc *child)
 		}
 		if (net_xmit_drop_count(ret))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
 		return 0;
 	}
 
 	sch->qstats.drops++;
 =======
+=======
+>>>>>>> v3.18
 			qdisc_qstats_drop(sch);
 		return 0;
 	}
 
 	qdisc_qstats_drop(sch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -1;
 }
@@ -748,9 +789,12 @@ cbq_update(struct cbq_sched_data *q)
 	struct cbq_class *cl = this;
 	int len = q->tx_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	q->tx_class = NULL;
 =======
+=======
+>>>>>>> v3.18
 	psched_time_t now;
 
 	q->tx_class = NULL;
@@ -758,6 +802,9 @@ cbq_update(struct cbq_sched_data *q)
 	 * by adding expected packet transmission time.
 	 */
 	now = q->now + L2T(&q->link, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for ( ; cl; cl = cl->share) {
@@ -775,7 +822,11 @@ cbq_update(struct cbq_sched_data *q)
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		idle = q->now - cl->last;
+=======
+		idle = now - cl->last;
+>>>>>>> v3.18
 =======
 		idle = now - cl->last;
 >>>>>>> v3.18
@@ -823,7 +874,11 @@ cbq_update(struct cbq_sched_data *q)
 			idle += L2T(cl, len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cl->undertime = q->now + idle;
+=======
+			cl->undertime = now + idle;
+>>>>>>> v3.18
 =======
 			cl->undertime = now + idle;
 >>>>>>> v3.18
@@ -837,7 +892,12 @@ cbq_update(struct cbq_sched_data *q)
 				cl->avgidle = avgidle;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cl->last = q->now;
+=======
+		if ((s64)(now - cl->last) > 0)
+			cl->last = now;
+>>>>>>> v3.18
 =======
 		if ((s64)(now - cl->last) > 0)
 			cl->last = now;
@@ -1014,6 +1074,7 @@ cbq_dequeue(struct Qdisc *sch)
 	struct cbq_sched_data *q = qdisc_priv(sch);
 	psched_time_t now;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psched_tdiff_t incr;
 
 	now = psched_get_time();
@@ -1040,6 +1101,8 @@ cbq_dequeue(struct Qdisc *sch)
 	}
 	q->now_rt = now;
 =======
+=======
+>>>>>>> v3.18
 
 	now = psched_get_time();
 
@@ -1047,6 +1110,9 @@ cbq_dequeue(struct Qdisc *sch)
 		cbq_update(q);
 
 	q->now = now;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (;;) {
@@ -1092,7 +1158,11 @@ cbq_dequeue(struct Qdisc *sch)
 
 	if (sch->q.qlen) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.overlimits++;
+=======
+		qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -1143,14 +1213,20 @@ static void cbq_normalize_quanta(struct cbq_sched_data *q, int prio)
 					q->quanta[prio];
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cl->quantum <= 0 || cl->quantum>32*qdisc_dev(cl->qdisc)->mtu) {
 				pr_warning("CBQ: class %08x has bad quantum==%ld, repaired.\n",
 					   cl->common.classid, cl->quantum);
 =======
+=======
+>>>>>>> v3.18
 			if (cl->quantum <= 0 ||
 			    cl->quantum > 32*qdisc_dev(cl->qdisc)->mtu) {
 				pr_warn("CBQ: class %08x has bad quantum==%ld, repaired.\n",
 					cl->common.classid, cl->quantum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				cl->quantum = qdisc_dev(cl->qdisc)->mtu/2 + 1;
 			}
@@ -1314,7 +1390,10 @@ cbq_reset(struct Qdisc *sch)
 	q->toplevel = TC_CBQ_MAXLEVEL;
 	q->now = psched_get_time();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->now_rt = q->now;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1497,16 +1576,22 @@ static int cbq_init(struct Qdisc *sch, struct nlattr *opt)
 
 	qdisc_watchdog_init(&q->watchdog, sch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hrtimer_init(&q->delay_timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS);
 	q->delay_timer.function = cbq_undelay;
 	q->toplevel = TC_CBQ_MAXLEVEL;
 	q->now = psched_get_time();
 	q->now_rt = q->now;
 =======
+=======
+>>>>>>> v3.18
 	hrtimer_init(&q->delay_timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS_PINNED);
 	q->delay_timer.function = cbq_undelay;
 	q->toplevel = TC_CBQ_MAXLEVEL;
 	q->now = psched_get_time();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cbq_link_class(&q->link);
@@ -1664,8 +1749,12 @@ static int cbq_dump(struct Qdisc *sch, struct sk_buff *skb)
 	if (cbq_dump_attr(skb, &q->link) < 0)
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nla_nest_end(skb, nest);
 	return skb->len;
+=======
+	return nla_nest_end(skb, nest);
+>>>>>>> v3.18
 =======
 	return nla_nest_end(skb, nest);
 >>>>>>> v3.18
@@ -1704,8 +1793,12 @@ cbq_dump_class(struct Qdisc *sch, unsigned long arg,
 	if (cbq_dump_attr(skb, cl) < 0)
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nla_nest_end(skb, nest);
 	return skb->len;
+=======
+	return nla_nest_end(skb, nest);
+>>>>>>> v3.18
 =======
 	return nla_nest_end(skb, nest);
 >>>>>>> v3.18
@@ -1723,7 +1816,10 @@ cbq_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 	struct cbq_class *cl = (struct cbq_class *)arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cl->qstats.qlen = cl->q->q.qlen;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cl->xstats.avgidle = cl->avgidle;
@@ -1733,9 +1829,15 @@ cbq_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 		cl->xstats.undertime = cl->undertime - q->now;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gnet_stats_copy_basic(d, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
 	    gnet_stats_copy_queue(d, &cl->qstats) < 0)
+=======
+	if (gnet_stats_copy_basic(d, NULL, &cl->bstats) < 0 ||
+	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
+	    gnet_stats_copy_queue(d, NULL, &cl->qstats, cl->q->q.qlen) < 0)
+>>>>>>> v3.18
 =======
 	if (gnet_stats_copy_basic(d, NULL, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
@@ -1897,6 +1999,7 @@ cbq_change_class(struct Qdisc *sch, u32 classid, u32 parentid, struct nlattr **t
 
 		if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = gen_replace_estimator(&cl->bstats, &cl->rate_est,
 						    qdisc_root_sleeping_lock(sch),
 						    tca[TCA_RATE]);
@@ -1904,12 +2007,17 @@ cbq_change_class(struct Qdisc *sch, u32 classid, u32 parentid, struct nlattr **t
 				if (rtab)
 					qdisc_put_rtab(rtab);
 =======
+=======
+>>>>>>> v3.18
 			err = gen_replace_estimator(&cl->bstats, NULL,
 						    &cl->rate_est,
 						    qdisc_root_sleeping_lock(sch),
 						    tca[TCA_RATE]);
 			if (err) {
 				qdisc_put_rtab(rtab);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return err;
 			}
@@ -2000,7 +2108,11 @@ cbq_change_class(struct Qdisc *sch, u32 classid, u32 parentid, struct nlattr **t
 
 	if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = gen_new_estimator(&cl->bstats, &cl->rate_est,
+=======
+		err = gen_new_estimator(&cl->bstats, NULL, &cl->rate_est,
+>>>>>>> v3.18
 =======
 		err = gen_new_estimator(&cl->bstats, NULL, &cl->rate_est,
 >>>>>>> v3.18
@@ -2108,7 +2220,12 @@ static int cbq_delete(struct Qdisc *sch, unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **cbq_find_tcf(struct Qdisc *sch, unsigned long arg)
+=======
+static struct tcf_proto __rcu **cbq_find_tcf(struct Qdisc *sch,
+					     unsigned long arg)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **cbq_find_tcf(struct Qdisc *sch,
 					     unsigned long arg)

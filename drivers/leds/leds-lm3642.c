@@ -314,11 +314,14 @@ static const struct regmap_config lm3642_regmap = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lm3642_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 	struct lm3642_platform_data *pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm3642_flash_attrs[] = {
 	&dev_attr_strobe_pin.attr,
 	NULL
@@ -335,6 +338,9 @@ static int lm3642_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 	struct lm3642_platform_data *pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct lm3642_chip_data *chip;
 
@@ -384,6 +390,10 @@ static int lm3642_probe(struct i2c_client *client,
 	chip->cdev_flash.brightness_set = lm3642_strobe_brightness_set;
 	chip->cdev_flash.default_trigger = "flash";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chip->cdev_flash.groups = lm3642_flash_groups,
+>>>>>>> v3.18
 =======
 	chip->cdev_flash.groups = lm3642_flash_groups,
 >>>>>>> v3.18
@@ -394,11 +404,14 @@ static int lm3642_probe(struct i2c_client *client,
 		goto err_out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = device_create_file(chip->cdev_flash.dev, &dev_attr_strobe_pin);
 	if (err < 0) {
 		dev_err(chip->dev, "failed to create strobe-pin file\n");
 		goto err_create_flash_pin_file;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -409,6 +422,10 @@ static int lm3642_probe(struct i2c_client *client,
 	chip->cdev_torch.brightness_set = lm3642_torch_brightness_set;
 	chip->cdev_torch.default_trigger = "torch";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chip->cdev_torch.groups = lm3642_torch_groups,
+>>>>>>> v3.18
 =======
 	chip->cdev_torch.groups = lm3642_torch_groups,
 >>>>>>> v3.18
@@ -419,11 +436,14 @@ static int lm3642_probe(struct i2c_client *client,
 		goto err_create_torch_file;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = device_create_file(chip->cdev_torch.dev, &dev_attr_torch_pin);
 	if (err < 0) {
 		dev_err(chip->dev, "failed to create torch-pin file\n");
 		goto err_create_torch_pin_file;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -445,12 +465,17 @@ static int lm3642_probe(struct i2c_client *client,
 
 err_create_indicator_file:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(chip->cdev_torch.dev, &dev_attr_torch_pin);
 err_create_torch_pin_file:
 	led_classdev_unregister(&chip->cdev_torch);
 err_create_torch_file:
 	device_remove_file(chip->cdev_flash.dev, &dev_attr_strobe_pin);
 err_create_flash_pin_file:
+=======
+	led_classdev_unregister(&chip->cdev_torch);
+err_create_torch_file:
+>>>>>>> v3.18
 =======
 	led_classdev_unregister(&chip->cdev_torch);
 err_create_torch_file:
@@ -467,10 +492,15 @@ static int lm3642_remove(struct i2c_client *client)
 	led_classdev_unregister(&chip->cdev_indicator);
 	flush_work(&chip->work_indicator);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(chip->cdev_torch.dev, &dev_attr_torch_pin);
 	led_classdev_unregister(&chip->cdev_torch);
 	flush_work(&chip->work_torch);
 	device_remove_file(chip->cdev_flash.dev, &dev_attr_strobe_pin);
+=======
+	led_classdev_unregister(&chip->cdev_torch);
+	flush_work(&chip->work_torch);
+>>>>>>> v3.18
 =======
 	led_classdev_unregister(&chip->cdev_torch);
 	flush_work(&chip->work_torch);

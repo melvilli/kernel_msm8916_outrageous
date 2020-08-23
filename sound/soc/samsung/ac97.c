@@ -20,7 +20,10 @@
 #include <sound/soc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "regs-ac97.h"
@@ -43,6 +46,7 @@ struct s3c_ac97_info {
 static struct s3c_ac97_info s3c_ac97;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct s3c2410_dma_client s3c_dma_client_out = {
 	.name = "AC97 PCMOut"
 };
@@ -60,12 +64,18 @@ static struct s3c_dma_params s3c_ac97_pcm_out = {
 =======
 static struct s3c_dma_params s3c_ac97_pcm_out = {
 >>>>>>> v3.18
+=======
+static struct s3c_dma_params s3c_ac97_pcm_out = {
+>>>>>>> v3.18
 	.dma_size	= 4,
 };
 
 static struct s3c_dma_params s3c_ac97_pcm_in = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.client		= &s3c_dma_client_in,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.dma_size	= 4,
@@ -73,7 +83,10 @@ static struct s3c_dma_params s3c_ac97_pcm_in = {
 
 static struct s3c_dma_params s3c_ac97_mic_in = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.client		= &s3c_dma_client_micin,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.dma_size	= 4,
@@ -88,7 +101,11 @@ static void s3c_ac97_activate(struct snd_ac97 *ac97)
 		return; /* Return if already active */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(s3c_ac97.done);
+=======
+	reinit_completion(&s3c_ac97.done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&s3c_ac97.done);
 >>>>>>> v3.18
@@ -121,7 +138,11 @@ static unsigned short s3c_ac97_read(struct snd_ac97 *ac97,
 	s3c_ac97_activate(ac97);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(s3c_ac97.done);
+=======
+	reinit_completion(&s3c_ac97.done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&s3c_ac97.done);
 >>>>>>> v3.18
@@ -162,7 +183,11 @@ static void s3c_ac97_write(struct snd_ac97 *ac97, unsigned short reg,
 	s3c_ac97_activate(ac97);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(s3c_ac97.done);
+=======
+	reinit_completion(&s3c_ac97.done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&s3c_ac97.done);
 >>>>>>> v3.18
@@ -240,7 +265,11 @@ static irqreturn_t s3c_ac97_irq(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops s3c_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops s3c_ac97_ops = {
 >>>>>>> v3.18
@@ -249,6 +278,7 @@ static struct snd_ac97_bus_ops s3c_ac97_ops = {
 	.warm_reset = s3c_ac97_warm_reset,
 	.reset      = s3c_ac97_cold_reset,
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
 
@@ -271,15 +301,20 @@ static int s3c_ac97_hw_params(struct snd_pcm_substream *substream,
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int s3c_ac97_trigger(struct snd_pcm_substream *substream, int cmd,
 				struct snd_soc_dai *dai)
 {
 	u32 ac_glbctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct s3c_dma_params *dma_data =
 		snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -308,6 +343,7 @@ static int s3c_ac97_trigger(struct snd_pcm_substream *substream, int cmd,
 	writel(ac_glbctrl, s3c_ac97.regs + S3C_AC97_GLBCTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dma_data->ops)
 		dma_data->ops = samsung_dma_get_ops();
 
@@ -330,6 +366,8 @@ static int s3c_ac97_hw_mic_params(struct snd_pcm_substream *substream,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -338,9 +376,12 @@ static int s3c_ac97_mic_trigger(struct snd_pcm_substream *substream,
 {
 	u32 ac_glbctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct s3c_dma_params *dma_data =
 		snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -363,6 +404,7 @@ static int s3c_ac97_mic_trigger(struct snd_pcm_substream *substream,
 	writel(ac_glbctrl, s3c_ac97.regs + S3C_AC97_GLBCTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dma_data->ops)
 		dma_data->ops = samsung_dma_get_ops();
 
@@ -370,12 +412,17 @@ static int s3c_ac97_mic_trigger(struct snd_pcm_substream *substream,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static const struct snd_soc_dai_ops s3c_ac97_dai_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hw_params	= s3c_ac97_hw_params,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.trigger	= s3c_ac97_trigger,
@@ -383,11 +430,14 @@ static const struct snd_soc_dai_ops s3c_ac97_dai_ops = {
 
 static const struct snd_soc_dai_ops s3c_ac97_mic_dai_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hw_params	= s3c_ac97_hw_mic_params,
 	.trigger	= s3c_ac97_mic_trigger,
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.trigger	= s3c_ac97_mic_trigger,
 };
 
@@ -405,6 +455,9 @@ static int s3c_ac97_mic_dai_probe(struct snd_soc_dai *dai)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_dai_driver s3c_ac97_dai[] = {
 	[S3C_AC97_DAI_PCM] = {
@@ -423,6 +476,10 @@ static struct snd_soc_dai_driver s3c_ac97_dai[] = {
 			.rates = SNDRV_PCM_RATE_8000_48000,
 			.formats = SNDRV_PCM_FMTBIT_S16_LE,},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.probe = s3c_ac97_dai_probe,
+>>>>>>> v3.18
 =======
 		.probe = s3c_ac97_dai_probe,
 >>>>>>> v3.18
@@ -438,6 +495,10 @@ static struct snd_soc_dai_driver s3c_ac97_dai[] = {
 			.rates = SNDRV_PCM_RATE_8000_48000,
 			.formats = SNDRV_PCM_FMTBIT_S16_LE,},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.probe = s3c_ac97_mic_dai_probe,
+>>>>>>> v3.18
 =======
 		.probe = s3c_ac97_mic_dai_probe,
 >>>>>>> v3.18
@@ -481,12 +542,15 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!mem_res) {
 		dev_err(&pdev->dev, "Unable to get register resource\n");
 		return -ENXIO;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq_res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
@@ -496,16 +560,22 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!request_mem_region(mem_res->start,
 				resource_size(mem_res), "ac97")) {
 		dev_err(&pdev->dev, "Unable to request register region\n");
 		return -EBUSY;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	s3c_ac97.regs = devm_ioremap_resource(&pdev->dev, mem_res);
 	if (IS_ERR(s3c_ac97.regs))
 		return PTR_ERR(s3c_ac97.regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s3c_ac97_pcm_out.channel = dmatx_res->start;
@@ -519,6 +589,7 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 	mutex_init(&s3c_ac97.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c_ac97.regs = ioremap(mem_res->start, resource_size(mem_res));
 	if (s3c_ac97.regs == NULL) {
 		dev_err(&pdev->dev, "Unable to ioremap register region\n");
@@ -527,6 +598,9 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 	}
 
 	s3c_ac97.ac97_clk = clk_get(&pdev->dev, "ac97");
+=======
+	s3c_ac97.ac97_clk = devm_clk_get(&pdev->dev, "ac97");
+>>>>>>> v3.18
 =======
 	s3c_ac97.ac97_clk = devm_clk_get(&pdev->dev, "ac97");
 >>>>>>> v3.18
@@ -551,8 +625,11 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&pdev->dev, &s3c_ac97_component,
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_set_ac97_ops(&s3c_ac97_ops);
 	if (ret != 0) {
 		dev_err(&pdev->dev, "Failed to set AC'97 ops: %d\n", ret);
@@ -560,11 +637,15 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 	}
 
 	ret = devm_snd_soc_register_component(&pdev->dev, &s3c_ac97_component,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 s3c_ac97_dai, ARRAY_SIZE(s3c_ac97_dai));
 	if (ret)
 		goto err5;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
@@ -576,6 +657,8 @@ static int s3c_ac97_probe(struct platform_device *pdev)
 err6:
 	snd_soc_unregister_component(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	ret = samsung_asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to get register DMA: %d\n", ret);
@@ -583,12 +666,16 @@ err6:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err5:
 	free_irq(irq_res->start, NULL);
 err4:
 err3:
 	clk_disable_unprepare(s3c_ac97.ac97_clk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_put(s3c_ac97.ac97_clk);
 err2:
@@ -600,16 +687,24 @@ err1:
 err2:
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18
+=======
+err2:
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 	return ret;
 }
 
 static int s3c_ac97_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *mem_res, *irq_res;
 
 	asoc_dma_platform_unregister(&pdev->dev);
 	snd_soc_unregister_component(&pdev->dev);
+=======
+	struct resource *irq_res;
+>>>>>>> v3.18
 =======
 	struct resource *irq_res;
 >>>>>>> v3.18
@@ -620,6 +715,7 @@ static int s3c_ac97_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(s3c_ac97.ac97_clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(s3c_ac97.ac97_clk);
 
 	iounmap(s3c_ac97.regs);
@@ -627,6 +723,9 @@ static int s3c_ac97_remove(struct platform_device *pdev)
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (mem_res)
 		release_mem_region(mem_res->start, resource_size(mem_res));
+=======
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18

@@ -36,6 +36,7 @@
 #include <drm/i2c/ch7006.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/i2c.h>
 
 static struct i2c_board_info nv04_tv_encoder_info[] = {
@@ -48,6 +49,8 @@ static struct i2c_board_info nv04_tv_encoder_info[] = {
 			CH7006_POUT_3_3V, CH7006_ACTIVE_HSYNC
 		}
 =======
+=======
+>>>>>>> v3.18
 static struct nouveau_i2c_board_info nv04_tv_encoder_info[] = {
 	{
 		{
@@ -60,6 +63,9 @@ static struct nouveau_i2c_board_info nv04_tv_encoder_info[] = {
 			}
 		},
 		0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{ }
@@ -69,15 +75,21 @@ int nv04_tv_identify(struct drm_device *dev, int i2c_index)
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_i2c *i2c = nouveau_i2c(drm->device);
 
 	return i2c->identify(i2c, i2c_index, "TV encoder",
 			     nv04_tv_encoder_info, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_i2c *i2c = nvkm_i2c(&drm->device);
 
 	return i2c->identify(i2c, i2c_index, "TV encoder",
 			     nv04_tv_encoder_info, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -191,7 +203,12 @@ static void nv04_tv_commit(struct drm_encoder *encoder)
 
 	NV_DEBUG(drm, "Output %s is running on CRTC %d using output %c\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 drm_get_connector_name(&nouveau_encoder_connector_get(nv_encoder)->base), nv_crtc->index, '@' + ffs(nv_encoder->dcb->or));
+=======
+		 nouveau_encoder_connector_get(nv_encoder)->base.name,
+		 nv_crtc->index, '@' + ffs(nv_encoder->dcb->or));
+>>>>>>> v3.18
 =======
 		 nouveau_encoder_connector_get(nv_encoder)->base.name,
 		 nv_crtc->index, '@' + ffs(nv_encoder->dcb->or));
@@ -230,7 +247,11 @@ nv04_tv_create(struct drm_connector *connector, struct dcb_output *entry)
 	struct drm_device *dev = connector->dev;
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_i2c *i2c = nouveau_i2c(drm->device);
+=======
+	struct nouveau_i2c *i2c = nvkm_i2c(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_i2c *i2c = nvkm_i2c(&drm->device);
 >>>>>>> v3.18
@@ -261,7 +282,12 @@ nv04_tv_create(struct drm_connector *connector, struct dcb_output *entry)
 	/* Run the slave-specific initialization */
 	ret = drm_i2c_encoder_init(dev, to_encoder_slave(encoder),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   &port->adapter, &nv04_tv_encoder_info[type]);
+=======
+				   &port->adapter,
+				   &nv04_tv_encoder_info[type].dev);
+>>>>>>> v3.18
 =======
 				   &port->adapter,
 				   &nv04_tv_encoder_info[type].dev);

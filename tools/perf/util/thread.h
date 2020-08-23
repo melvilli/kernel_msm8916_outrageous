@@ -3,15 +3,21 @@
 
 #include <linux/rbtree.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <unistd.h>
 #include <sys/types.h>
 #include "symbol.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include "symbol.h"
 #include <strlist.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct thread {
@@ -20,12 +26,15 @@ struct thread {
 		struct list_head node;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct map_groups	mg;
 	pid_t			pid;
 	char			shortname[3];
 	bool			comm_set;
 	char			*comm;
 =======
+=======
+>>>>>>> v3.18
 	struct map_groups	*mg;
 	pid_t			pid_; /* Not all tools update this */
 	pid_t			tid;
@@ -35,6 +44,9 @@ struct thread {
 	bool			comm_set;
 	bool			dead; /* if set thread has exited */
 	struct list_head	comm_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			comm_len;
 
@@ -42,6 +54,7 @@ struct thread {
 };
 
 struct machine;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct thread *thread__new(pid_t pid);
@@ -60,6 +73,8 @@ static inline struct map *thread__find_map(struct thread *self,
 }
 
 =======
+=======
+>>>>>>> v3.18
 struct comm;
 
 struct thread *thread__new(pid_t pid, pid_t tid);
@@ -86,6 +101,9 @@ void thread__insert_map(struct thread *thread, struct map *map);
 int thread__fork(struct thread *thread, struct thread *parent, u64 timestamp);
 size_t thread__fprintf(struct thread *thread, FILE *fp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void thread__find_addr_map(struct thread *thread, struct machine *machine,
 			   u8 cpumode, enum map_type type, u64 addr,
@@ -94,9 +112,12 @@ void thread__find_addr_map(struct thread *thread, struct machine *machine,
 void thread__find_addr_location(struct thread *thread, struct machine *machine,
 				u8 cpumode, enum map_type type, u64 addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct addr_location *al,
 				symbol_filter_t filter);
 =======
+=======
+>>>>>>> v3.18
 				struct addr_location *al);
 
 void thread__find_cpumode_addr_location(struct thread *thread,
@@ -124,5 +145,8 @@ static inline bool thread__is_filtered(struct thread *thread)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __PERF_THREAD_H */

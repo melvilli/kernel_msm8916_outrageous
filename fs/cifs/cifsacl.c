@@ -85,7 +85,10 @@ static struct key_type cifs_idmap_key_type = {
 	.destroy     = cifs_idmap_key_destroy,
 	.describe    = user_describe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.match       = user_match,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -869,8 +872,13 @@ static int build_sec_desc(struct cifs_ntsd *pntsd, struct cifs_ntsd *pnntsd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cifs_ntsd *get_cifs_acl_by_fid(struct cifs_sb_info *cifs_sb,
 		__u16 fid, u32 *pacllen)
+=======
+struct cifs_ntsd *get_cifs_acl_by_fid(struct cifs_sb_info *cifs_sb,
+		const struct cifs_fid *cifsfid, u32 *pacllen)
+>>>>>>> v3.18
 =======
 struct cifs_ntsd *get_cifs_acl_by_fid(struct cifs_sb_info *cifs_sb,
 		const struct cifs_fid *cifsfid, u32 *pacllen)
@@ -886,7 +894,12 @@ struct cifs_ntsd *get_cifs_acl_by_fid(struct cifs_sb_info *cifs_sb,
 
 	xid = get_xid();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = CIFSSMBGetCIFSACL(xid, tlink_tcon(tlink), fid, &pntsd, pacllen);
+=======
+	rc = CIFSSMBGetCIFSACL(xid, tlink_tcon(tlink), cifsfid->netfid, &pntsd,
+				pacllen);
+>>>>>>> v3.18
 =======
 	rc = CIFSSMBGetCIFSACL(xid, tlink_tcon(tlink), cifsfid->netfid, &pntsd,
 				pacllen);
@@ -909,14 +922,20 @@ static struct cifs_ntsd *get_cifs_acl_by_path(struct cifs_sb_info *cifs_sb,
 	unsigned int xid;
 	int rc, create_options = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 fid;
 	struct cifs_tcon *tcon;
 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
 =======
+=======
+>>>>>>> v3.18
 	struct cifs_tcon *tcon;
 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
 	struct cifs_fid fid;
 	struct cifs_open_parms oparms;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (IS_ERR(tlink))
@@ -929,6 +948,7 @@ static struct cifs_ntsd *get_cifs_acl_by_path(struct cifs_sb_info *cifs_sb,
 		create_options |= CREATE_OPEN_BACKUP_INTENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = CIFSSMBOpen(xid, tcon, path, FILE_OPEN, READ_CONTROL,
 			create_options, &fid, &oplock, NULL, cifs_sb->local_nls,
 			cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR);
@@ -936,6 +956,8 @@ static struct cifs_ntsd *get_cifs_acl_by_path(struct cifs_sb_info *cifs_sb,
 		rc = CIFSSMBGetCIFSACL(xid, tcon, fid, &pntsd, pacllen);
 		CIFSSMBClose(xid, tcon, fid);
 =======
+=======
+>>>>>>> v3.18
 	oparms.tcon = tcon;
 	oparms.cifs_sb = cifs_sb;
 	oparms.desired_access = READ_CONTROL;
@@ -949,6 +971,9 @@ static struct cifs_ntsd *get_cifs_acl_by_path(struct cifs_sb_info *cifs_sb,
 	if (!rc) {
 		rc = CIFSSMBGetCIFSACL(xid, tcon, fid.netfid, &pntsd, pacllen);
 		CIFSSMBClose(xid, tcon, fid.netfid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -975,7 +1000,11 @@ struct cifs_ntsd *get_cifs_acl(struct cifs_sb_info *cifs_sb,
 		return get_cifs_acl_by_path(cifs_sb, path, pacllen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pntsd = get_cifs_acl_by_fid(cifs_sb, open_file->fid.netfid, pacllen);
+=======
+	pntsd = get_cifs_acl_by_fid(cifs_sb, &open_file->fid, pacllen);
+>>>>>>> v3.18
 =======
 	pntsd = get_cifs_acl_by_fid(cifs_sb, &open_file->fid, pacllen);
 >>>>>>> v3.18
@@ -991,16 +1020,22 @@ int set_cifs_acl(struct cifs_ntsd *pnntsd, __u32 acllen,
 	unsigned int xid;
 	int rc, access_flags, create_options = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 fid;
 	struct cifs_tcon *tcon;
 	struct cifs_sb_info *cifs_sb = CIFS_SB(inode->i_sb);
 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
 =======
+=======
+>>>>>>> v3.18
 	struct cifs_tcon *tcon;
 	struct cifs_sb_info *cifs_sb = CIFS_SB(inode->i_sb);
 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
 	struct cifs_fid fid;
 	struct cifs_open_parms oparms;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (IS_ERR(tlink))
@@ -1018,10 +1053,13 @@ int set_cifs_acl(struct cifs_ntsd *pnntsd, __u32 acllen,
 		access_flags = WRITE_DAC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = CIFSSMBOpen(xid, tcon, path, FILE_OPEN, access_flags,
 			create_options, &fid, &oplock, NULL, cifs_sb->local_nls,
 			cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR);
 =======
+=======
+>>>>>>> v3.18
 	oparms.tcon = tcon;
 	oparms.cifs_sb = cifs_sb;
 	oparms.desired_access = access_flags;
@@ -1032,6 +1070,9 @@ int set_cifs_acl(struct cifs_ntsd *pnntsd, __u32 acllen,
 	oparms.reconnect = false;
 
 	rc = CIFS_open(xid, &oparms, &oplock, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc) {
 		cifs_dbg(VFS, "Unable to open file to set ACL\n");
@@ -1039,15 +1080,21 @@ int set_cifs_acl(struct cifs_ntsd *pnntsd, __u32 acllen,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = CIFSSMBSetCIFSACL(xid, tcon, fid, pnntsd, acllen, aclflag);
 	cifs_dbg(NOISY, "SetCIFSACL rc = %d\n", rc);
 
 	CIFSSMBClose(xid, tcon, fid);
 =======
+=======
+>>>>>>> v3.18
 	rc = CIFSSMBSetCIFSACL(xid, tcon, fid.netfid, pnntsd, acllen, aclflag);
 	cifs_dbg(NOISY, "SetCIFSACL rc = %d\n", rc);
 
 	CIFSSMBClose(xid, tcon, fid.netfid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	free_xid(xid);
@@ -1059,7 +1106,12 @@ out:
 int
 cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  struct inode *inode, const char *path, const __u16 *pfid)
+=======
+		  struct inode *inode, const char *path,
+		  const struct cifs_fid *pfid)
+>>>>>>> v3.18
 =======
 		  struct inode *inode, const char *path,
 		  const struct cifs_fid *pfid)
@@ -1068,6 +1120,7 @@ cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
 	struct cifs_ntsd *pntsd = NULL;
 	u32 acllen = 0;
 	int rc = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	cifs_dbg(NOISY, "converting ACL to mode for %s\n", path);
@@ -1078,6 +1131,8 @@ cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
 		pntsd = get_cifs_acl(cifs_sb, inode, path, &acllen);
 
 =======
+=======
+>>>>>>> v3.18
 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
 	struct cifs_tcon *tcon;
 
@@ -1097,6 +1152,9 @@ cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
 		cifs_put_tlink(tlink);
 		return -EOPNOTSUPP;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* if we can retrieve the ACL, now parse Access Control Entries, ACEs */
 	if (IS_ERR(pntsd)) {
@@ -1110,6 +1168,11 @@ cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cifs_put_tlink(tlink);
+
+>>>>>>> v3.18
 =======
 	cifs_put_tlink(tlink);
 

@@ -51,7 +51,10 @@ Default is to monitor all CPUS.
 	Only display functions with more events than this.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -g::
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 --group::
@@ -72,7 +75,13 @@ Default is to monitor all CPUS.
 -m <pages>::
 --mmap-pages=<pages>::
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Number of mmapped data pages.
+=======
+	Number of mmap data pages (must be a power of two) or size
+	specification with appended unit character - B/K/M/G. The
+	size is rounded up to have nearest pages power of two value.
+>>>>>>> v3.18
 =======
 	Number of mmap data pages (must be a power of two) or size
 	specification with appended unit character - B/K/M/G. The
@@ -96,7 +105,10 @@ Default is to monitor all CPUS.
 	Collect data with this RT SCHED_FIFO priority.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -s <symbol>::
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 --sym-annotate=<symbol>::
@@ -111,6 +123,12 @@ Default is to monitor all CPUS.
         Hide user symbols.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+--demangle-kernel::
+        Demangle kernel symbols.
+
+>>>>>>> v3.18
 =======
 --demangle-kernel::
         Demangle kernel symbols.
@@ -131,8 +149,11 @@ Default is to monitor all CPUS.
 -s::
 --sort::
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Sort by key(s): pid, comm, dso, symbol, parent, srcline, weight, local_weight.
 =======
+=======
+>>>>>>> v3.18
 	Sort by key(s): pid, comm, dso, symbol, parent, srcline, weight,
 	local_weight, abort, in_tx, transaction, overhead, sample, period.
 	Please see description of --sort in the perf-report man page.
@@ -145,6 +166,9 @@ Default is to monitor all CPUS.
 
 	By default, every sort keys not specified in --field will be appended
 	automatically.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 -n::
@@ -156,6 +180,7 @@ Default is to monitor all CPUS.
 
 --dsos::
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Only consider symbols in these dsos.
 
 --comms::
@@ -164,6 +189,8 @@ Default is to monitor all CPUS.
 --symbols::
 	Only consider these symbols.
 =======
+=======
+>>>>>>> v3.18
 	Only consider symbols in these dsos.  This option will affect the
 	percentage of the overhead column.  See --percentage for more info.
 
@@ -174,6 +201,9 @@ Default is to monitor all CPUS.
 --symbols::
 	Only consider these symbols.  This option will affect the
 	percentage of the overhead column.  See --percentage for more info.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 -M::
@@ -186,6 +216,7 @@ Default is to monitor all CPUS.
 --asm-raw::
 	Show raw instruction encoding of assembly instructions.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 -G [type,min,order]::
 --call-graph::
@@ -202,6 +233,8 @@ Default is to monitor all CPUS.
 
 	Default: fractal,0.5,callee.
 =======
+=======
+>>>>>>> v3.18
 -g::
 	Enables call-graph (stack chain/backtrace) recording.
 
@@ -246,6 +279,9 @@ Default is to monitor all CPUS.
 	Force each column width to the provided list, for large terminal
 	readability.  0 means no limit (default behavior).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 INTERACTIVE PROMPTING KEYS
@@ -284,7 +320,11 @@ Pressing any unmapped key displays a menu, and prompts for input.
 SEE ALSO
 --------
 <<<<<<< HEAD
+<<<<<<< HEAD
 linkperf:perf-stat[1], linkperf:perf-list[1]
+=======
+linkperf:perf-stat[1], linkperf:perf-list[1], linkperf:perf-report[1]
+>>>>>>> v3.18
 =======
 linkperf:perf-stat[1], linkperf:perf-list[1], linkperf:perf-report[1]
 >>>>>>> v3.18

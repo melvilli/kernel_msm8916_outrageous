@@ -10,7 +10,10 @@
 
 #include <linux/clk-provider.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clk/mvebu.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/dma-mapping.h>
@@ -32,7 +35,10 @@
 #include "common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* These can go away once Dove uses the mvebu-mbus DT binding */
 #define DOVE_MBUS_PCIE0_MEM_TARGET    0x4
 #define DOVE_MBUS_PCIE0_MEM_ATTR      0xe8
@@ -49,6 +55,9 @@
 #define DOVE_MBUS_SCRATCHPAD_TARGET   0xd
 #define DOVE_MBUS_SCRATCHPAD_ATTR     0x0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************************
  * I/O Address Mapping
@@ -132,8 +141,13 @@ static void __init dove_clk_init(void)
 	orion_clkdev_add(NULL, "orion_nand", nand);
 	orion_clkdev_add(NULL, "cafe1000-ccic.0", camera);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	orion_clkdev_add(NULL, "kirkwood-i2s.0", i2s0);
 	orion_clkdev_add(NULL, "kirkwood-i2s.1", i2s1);
+=======
+	orion_clkdev_add(NULL, "mvebu-audio.0", i2s0);
+	orion_clkdev_add(NULL, "mvebu-audio.1", i2s1);
+>>>>>>> v3.18
 =======
 	orion_clkdev_add(NULL, "mvebu-audio.0", i2s0);
 	orion_clkdev_add(NULL, "mvebu-audio.1", i2s1);
@@ -175,7 +189,11 @@ void __init dove_ge00_init(struct mv643xx_eth_platform_data *eth_data)
  * SoC RTC
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init dove_rtc_init(void)
+=======
+static void __init dove_rtc_init(void)
+>>>>>>> v3.18
 =======
 static void __init dove_rtc_init(void)
 >>>>>>> v3.18
@@ -258,7 +276,11 @@ void __init dove_init_early(void)
 	mvebu_mbus_init("marvell,dove-mbus",
 			BRIDGE_WINS_BASE, BRIDGE_WINS_SZ,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DOVE_MC_WINS_BASE, DOVE_MC_WINS_SZ, 0);
+=======
+			DOVE_MC_WINS_BASE, DOVE_MC_WINS_SZ);
+>>>>>>> v3.18
 =======
 			DOVE_MC_WINS_BASE, DOVE_MC_WINS_SZ);
 >>>>>>> v3.18
@@ -278,6 +300,7 @@ void __init dove_timer_init(void)
 
 /*****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Cryptographic Engines and Security Accelerator (CESA)
  ****************************************************************************/
 void __init dove_crypto_init(void)
@@ -295,6 +318,11 @@ void __init dove_xor0_init(void)
  ****************************************************************************/
 static void __init dove_xor0_init(void)
 >>>>>>> v3.18
+=======
+ * XOR 0
+ ****************************************************************************/
+static void __init dove_xor0_init(void)
+>>>>>>> v3.18
 {
 	orion_xor0_init(DOVE_XOR0_PHYS_BASE, DOVE_XOR0_HIGH_PHYS_BASE,
 			IRQ_DOVE_XOR_00, IRQ_DOVE_XOR_01);
@@ -304,7 +332,11 @@ static void __init dove_xor0_init(void)
  * XOR 1
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init dove_xor1_init(void)
+=======
+static void __init dove_xor1_init(void)
+>>>>>>> v3.18
 =======
 static void __init dove_xor1_init(void)
 >>>>>>> v3.18
@@ -379,6 +411,7 @@ void __init dove_setup_cpu_wins(void)
 	/*
 	 * The PCIe windows will no longer be statically allocated
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * here once Dove is migrated to the pci-mvebu driver.
 	 */
 	mvebu_mbus_add_window_remap_flags("pcie0.0",
@@ -408,6 +441,8 @@ void __init dove_setup_cpu_wins(void)
 	mvebu_mbus_add_window("scratchpad", DOVE_SCRATCHPAD_PHYS_BASE,
 			      DOVE_SCRATCHPAD_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	 * here once Dove is migrated to the pci-mvebu driver. The
 	 * non-PCIe windows will no longer be created here once Dove
 	 * fully moves to DT.
@@ -442,6 +477,9 @@ void __init dove_setup_cpu_wins(void)
 				    DOVE_MBUS_SCRATCHPAD_ATTR,
 				    DOVE_SCRATCHPAD_PHYS_BASE,
 				    DOVE_SCRATCHPAD_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

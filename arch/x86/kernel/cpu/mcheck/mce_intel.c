@@ -7,15 +7,21 @@
 
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/interrupt.h>
 #include <linux/percpu.h>
 #include <linux/sched.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/percpu.h>
 #include <linux/sched.h>
 #include <linux/cpumask.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/apic.h>
 #include <asm/processor.h>
@@ -32,7 +38,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * CMCI can be delivered to multiple cpus that share a machine check bank
  * so we need to designate a single cpu to process errors logged in each bank
@@ -45,6 +54,9 @@
  * taking ownership of some of the shared MCA banks that were previously
  * owned by the offlined cpu.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_PER_CPU(mce_banks_t, mce_banks_owned);
 
@@ -97,7 +109,11 @@ void mce_intel_cmci_poll(void)
 	if (__this_cpu_read(cmci_storm_state) == CMCI_STORM_NONE)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	machine_check_poll(MCP_TIMESTAMP, &__get_cpu_var(mce_banks_owned));
+=======
+	machine_check_poll(MCP_TIMESTAMP, this_cpu_ptr(&mce_banks_owned));
+>>>>>>> v3.18
 =======
 	machine_check_poll(MCP_TIMESTAMP, this_cpu_ptr(&mce_banks_owned));
 >>>>>>> v3.18
@@ -153,7 +169,10 @@ unsigned long mce_intel_adjust_timer(unsigned long interval)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void cmci_storm_disable_banks(void)
 {
 	unsigned long flags, *owned;
@@ -170,6 +189,9 @@ static void cmci_storm_disable_banks(void)
 	raw_spin_unlock_irqrestore(&cmci_discover_lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool cmci_storm_detect(void)
 {
@@ -193,7 +215,11 @@ static bool cmci_storm_detect(void)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmci_clear();
+=======
+	cmci_storm_disable_banks();
+>>>>>>> v3.18
 =======
 	cmci_storm_disable_banks();
 >>>>>>> v3.18
@@ -217,7 +243,11 @@ static void intel_threshold_interrupt(void)
 	if (cmci_storm_detect())
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	machine_check_poll(MCP_TIMESTAMP, &__get_cpu_var(mce_banks_owned));
+=======
+	machine_check_poll(MCP_TIMESTAMP, this_cpu_ptr(&mce_banks_owned));
+>>>>>>> v3.18
 =======
 	machine_check_poll(MCP_TIMESTAMP, this_cpu_ptr(&mce_banks_owned));
 >>>>>>> v3.18
@@ -232,7 +262,11 @@ static void intel_threshold_interrupt(void)
 static void cmci_discover(int banks)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *owned = (void *)&__get_cpu_var(mce_banks_owned);
+=======
+	unsigned long *owned = (void *)this_cpu_ptr(&mce_banks_owned);
+>>>>>>> v3.18
 =======
 	unsigned long *owned = (void *)this_cpu_ptr(&mce_banks_owned);
 >>>>>>> v3.18
@@ -249,11 +283,17 @@ static void cmci_discover(int banks)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Skip banks in firmware first mode */
 		if (test_bit(i, mce_banks_ce_disabled))
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rdmsrl(MSR_IA32_MCx_CTL2(i), val);
 
@@ -261,7 +301,11 @@ static void cmci_discover(int banks)
 		if (val & MCI_CTL2_CMCI_EN) {
 			clear_bit(i, owned);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__clear_bit(i, __get_cpu_var(mce_poll_banks));
+=======
+			__clear_bit(i, this_cpu_ptr(mce_poll_banks));
+>>>>>>> v3.18
 =======
 			__clear_bit(i, this_cpu_ptr(mce_poll_banks));
 >>>>>>> v3.18
@@ -289,7 +333,11 @@ static void cmci_discover(int banks)
 		if (val & MCI_CTL2_CMCI_EN) {
 			set_bit(i, owned);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__clear_bit(i, __get_cpu_var(mce_poll_banks));
+=======
+			__clear_bit(i, this_cpu_ptr(mce_poll_banks));
+>>>>>>> v3.18
 =======
 			__clear_bit(i, this_cpu_ptr(mce_poll_banks));
 >>>>>>> v3.18
@@ -304,7 +352,11 @@ static void cmci_discover(int banks)
 				bios_wrong_thresh = 1;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WARN_ON(!test_bit(i, __get_cpu_var(mce_poll_banks)));
+=======
+			WARN_ON(!test_bit(i, this_cpu_ptr(mce_poll_banks)));
+>>>>>>> v3.18
 =======
 			WARN_ON(!test_bit(i, this_cpu_ptr(mce_poll_banks)));
 >>>>>>> v3.18
@@ -329,6 +381,7 @@ void cmci_recheck(void)
 	int banks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mce_available(__this_cpu_ptr(&cpu_info)) || !cmci_supported(&banks))
 		return;
 	local_irq_save(flags);
@@ -337,6 +390,8 @@ void cmci_recheck(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (!mce_available(raw_cpu_ptr(&cpu_info)) || !cmci_supported(&banks))
 		return;
 	local_irq_save(flags);
@@ -357,6 +412,9 @@ static void __cmci_disable_bank(int bank)
 	__clear_bit(bank, this_cpu_ptr(mce_banks_owned));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Disable CMCI on this CPU for all banks it owns when it goes down.
@@ -368,13 +426,17 @@ void cmci_clear(void)
 	int i;
 	int banks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 val;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (!cmci_supported(&banks))
 		return;
 	raw_spin_lock_irqsave(&cmci_discover_lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < banks; i++) {
 		if (!test_bit(i, __get_cpu_var(mce_banks_owned)))
@@ -385,6 +447,10 @@ void cmci_clear(void)
 		wrmsrl(MSR_IA32_MCx_CTL2(i), val);
 		__clear_bit(i, __get_cpu_var(mce_banks_owned));
 	}
+=======
+	for (i = 0; i < banks; i++)
+		__cmci_disable_bank(i);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < banks; i++)
 		__cmci_disable_bank(i);
@@ -423,7 +489,10 @@ void cmci_reenable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void cmci_disable_bank(int bank)
 {
 	int banks;
@@ -437,6 +506,9 @@ void cmci_disable_bank(int bank)
 	raw_spin_unlock_irqrestore(&cmci_discover_lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void intel_init_cmci(void)
 {

@@ -19,7 +19,10 @@
 #include <linux/etherdevice.h>
 #include <linux/ethtool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -787,7 +790,10 @@ static int ep93xx_eth_remove(struct platform_device *pdev)
 	if (dev == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -822,7 +828,11 @@ static int ep93xx_eth_probe(struct platform_device *pdev)
 	if (pdev == NULL)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = pdev->dev.platform_data;
+=======
+	data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

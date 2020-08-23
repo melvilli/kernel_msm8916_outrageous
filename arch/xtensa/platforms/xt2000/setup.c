@@ -93,6 +93,7 @@ void __init platform_setup(char** cmdline)
 /* early initialization */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern sysmem_info_t __initdata sysmem;
 
 void platform_init(bp_tag_t* first)
@@ -105,6 +106,10 @@ void platform_init(bp_tag_t* first)
 		sysmem.bank[0].end = PLATFORM_DEFAULT_MEM_START
 				     + PLATFORM_DEFAULT_MEM_SIZE;
 	}
+=======
+void __init platform_init(bp_tag_t *first)
+{
+>>>>>>> v3.18
 =======
 void __init platform_init(bp_tag_t *first)
 {

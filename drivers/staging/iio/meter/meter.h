@@ -21,6 +21,7 @@
 	IIO_DEVICE_ATTR(volt_c_offset, _mode, _show, _store, _addr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IIO_DEV_ATTR_REACTIVE_POWER_A_OFFSET(_mode, _show, _store, _addr)                \
 	IIO_DEVICE_ATTR(reactive_power_a_offset, _mode, _show, _store, _addr)
 
@@ -77,6 +78,8 @@
 
 #define IIO_DEV_ATTR_REACTIVE_POWER_C_GAIN(_mode, _show, _store, _addr)                \
 =======
+=======
+>>>>>>> v3.18
 #define IIO_DEV_ATTR_REACTIVE_POWER_A_OFFSET(_mode, _show, _store, _addr)   \
 	IIO_DEVICE_ATTR(reactive_power_a_offset, _mode, _show, _store, _addr)
 
@@ -132,6 +135,9 @@
 	IIO_DEVICE_ATTR(reactive_power_b_gain, _mode, _show, _store, _addr)
 
 #define IIO_DEV_ATTR_REACTIVE_POWER_C_GAIN(_mode, _show, _store, _addr)     \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_DEVICE_ATTR(reactive_power_c_gain, _mode, _show, _store, _addr)
 
@@ -391,7 +397,11 @@
 	IIO_DEVICE_ATTR(ipeak, _mode, _show, _store, _addr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IIO_DEV_ATTR_RIPEAK(_mode, _show, _store, _addr)			\
+=======
+#define IIO_DEV_ATTR_RIPEAK(_mode, _show, _store, _addr)		\
+>>>>>>> v3.18
 =======
 #define IIO_DEV_ATTR_RIPEAK(_mode, _show, _store, _addr)		\
 >>>>>>> v3.18
@@ -400,6 +410,7 @@
 #define IIO_DEV_ATTR_VPEAK(_mode, _show, _store, _addr)			\
 	IIO_DEVICE_ATTR(vpeak, _mode, _show, _store, _addr)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IIO_DEV_ATTR_RVPEAK(_mode, _show, _store, _addr)			\
 	IIO_DEVICE_ATTR(rvpeak, _mode, _show, _store, _addr)
@@ -410,6 +421,8 @@
 #define IIO_DEV_ATTR_CH_OFF(_num, _mode, _show, _store, _addr)			\
   IIO_DEVICE_ATTR(choff_##_num, _mode, _show, _store, _addr)
 =======
+=======
+>>>>>>> v3.18
 #define IIO_DEV_ATTR_RVPEAK(_mode, _show, _store, _addr)		\
 	IIO_DEVICE_ATTR(rvpeak, _mode, _show, _store, _addr)
 
@@ -418,6 +431,9 @@
 
 #define IIO_DEV_ATTR_CH_OFF(_num, _mode, _show, _store, _addr)		\
 	IIO_DEVICE_ATTR(choff_##_num, _mode, _show, _store, _addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* active energy register, AENERGY, is more than half full */

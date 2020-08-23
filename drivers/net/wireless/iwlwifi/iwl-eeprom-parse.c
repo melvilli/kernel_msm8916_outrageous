@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -623,15 +631,21 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 
 			if (!(eeprom_ch->flags & EEPROM_CHANNEL_IBSS))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				channel->flags |= IEEE80211_CHAN_NO_IBSS;
 
 			if (!(eeprom_ch->flags & EEPROM_CHANNEL_ACTIVE))
 				channel->flags |= IEEE80211_CHAN_PASSIVE_SCAN;
 =======
+=======
+>>>>>>> v3.18
 				channel->flags |= IEEE80211_CHAN_NO_IR;
 
 			if (!(eeprom_ch->flags & EEPROM_CHANNEL_ACTIVE))
 				channel->flags |= IEEE80211_CHAN_NO_IR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (eeprom_ch->flags & EEPROM_CHANNEL_RADAR)
@@ -748,6 +762,7 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 			  struct iwl_nvm_data *data,
 			  struct ieee80211_sta_ht_cap *ht_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  enum ieee80211_band band)
 {
 	int max_bit_rate = 0;
@@ -760,6 +775,8 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 	else
 		rx_chains = hweight8(data->valid_rx_ant);
 =======
+=======
+>>>>>>> v3.18
 			  enum ieee80211_band band,
 			  u8 tx_chains, u8 rx_chains)
 {
@@ -770,6 +787,9 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 		rx_chains = 1;
 	else
 		rx_chains = hweight8(rx_chains);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(data->sku_cap_11n_enable) || !cfg->ht_params) {
@@ -781,7 +801,10 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 	ht_info->cap = IEEE80211_HT_CAP_DSSSCCK40;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cfg->ht_params->stbc) {
 		ht_info->cap |= (1 << IEEE80211_HT_CAP_RX_STBC_SHIFT);
 
@@ -792,6 +815,9 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 	if (cfg->ht_params->ldpc)
 		ht_info->cap |= IEEE80211_HT_CAP_LDPC_CODING;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (iwlwifi_mod_params.amsdu_size_8K)
 		ht_info->cap |= IEEE80211_HT_CAP_MAX_AMSDU;
@@ -815,7 +841,10 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 		ht_info->cap |= IEEE80211_HT_CAP_SUP_WIDTH_20_40;
 		ht_info->cap |= IEEE80211_HT_CAP_SGI_40;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ht_info->mcs.rx_mask[4] = 0x01;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		max_bit_rate = MAX_BIT_RATE_40_MHZ;
@@ -851,7 +880,12 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 	n_used += iwl_init_sband_channels(data, sband, n_channels,
 					  IEEE80211_BAND_2GHZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_2GHZ);
+=======
+	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_2GHZ,
+			     data->valid_tx_ant, data->valid_rx_ant);
+>>>>>>> v3.18
 =======
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_2GHZ,
 			     data->valid_tx_ant, data->valid_rx_ant);
@@ -864,7 +898,12 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 	n_used += iwl_init_sband_channels(data, sband, n_channels,
 					  IEEE80211_BAND_5GHZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_5GHZ);
+=======
+	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_5GHZ,
+			     data->valid_tx_ant, data->valid_rx_ant);
+>>>>>>> v3.18
 =======
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_5GHZ,
 			     data->valid_tx_ant, data->valid_rx_ant);

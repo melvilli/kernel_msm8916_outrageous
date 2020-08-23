@@ -172,6 +172,11 @@ int vlan_proc_add_dev(struct net_device *vlandev)
 	struct vlan_net *vn = net_generic(dev_net(vlandev), vlan_net_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!strcmp(vlandev->name, name_conf))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!strcmp(vlandev->name, name_conf))
 		return -EINVAL;

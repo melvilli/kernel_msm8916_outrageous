@@ -27,12 +27,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 =======
+=======
+>>>>>>> v3.18
 #define pr_fmt(fmt)	KBUILD_MODNAME ": " fmt
 
 #include <linux/module.h>
 #include <linux/jiffies.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/drbd.h>
 #include <asm/uaccess.h>
@@ -60,6 +66,7 @@
 #include <linux/drbd_limits.h>
 #include "drbd_int.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "drbd_req.h" /* only for _req_mod in tl_release and tl_clear */
 
 #include "drbd_vli.h"
@@ -77,6 +84,8 @@ static void md_sync_timer_fn(unsigned long data);
 static int w_bitmap_io(struct drbd_work *w, int unused);
 static int w_go_diskless(struct drbd_work *w, int unused);
 =======
+=======
+>>>>>>> v3.18
 #include "drbd_protocol.h"
 #include "drbd_req.h" /* only for _req_mod in tl_release and tl_clear */
 #include "drbd_vli.h"
@@ -87,6 +96,9 @@ static int drbd_open(struct block_device *bdev, fmode_t mode);
 static void drbd_release(struct gendisk *gd, fmode_t mode);
 static void md_sync_timer_fn(unsigned long data);
 static int w_bitmap_io(struct drbd_work *w, int unused);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Philipp Reisner <phil@linbit.com>, "
@@ -139,8 +151,13 @@ module_param_string(usermode_helper, usermode_helper, sizeof(usermode_helper), 0
  * as member "struct gendisk *vdisk;"
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct idr minors;
 struct list_head drbd_tconns;  /* list of struct drbd_tconn */
+=======
+struct idr drbd_devices;
+struct list_head drbd_resources;
+>>>>>>> v3.18
 =======
 struct idr drbd_devices;
 struct list_head drbd_resources;
@@ -192,6 +209,7 @@ struct bio *bio_alloc_drbd(gfp_t gfp_mask)
    give tons of false positives. When this is a real functions sparse works.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int _get_ldev_if_state(struct drbd_conf *mdev, enum drbd_disk_state mins)
 {
 	int io_allowed;
@@ -202,6 +220,8 @@ int _get_ldev_if_state(struct drbd_conf *mdev, enum drbd_disk_state mins)
 		if (atomic_dec_and_test(&mdev->local_cnt))
 			wake_up(&mdev->misc_wait);
 =======
+=======
+>>>>>>> v3.18
 int _get_ldev_if_state(struct drbd_device *device, enum drbd_disk_state mins)
 {
 	int io_allowed;
@@ -211,6 +231,9 @@ int _get_ldev_if_state(struct drbd_device *device, enum drbd_disk_state mins)
 	if (!io_allowed) {
 		if (atomic_dec_and_test(&device->local_cnt))
 			wake_up(&device->misc_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return io_allowed;
@@ -221,7 +244,11 @@ int _get_ldev_if_state(struct drbd_device *device, enum drbd_disk_state mins)
 /**
  * tl_release() - mark as BARRIER_ACKED all requests in the corresponding transfer log epoch
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @tconn:	DRBD connection.
+=======
+ * @connection:	DRBD connection.
+>>>>>>> v3.18
 =======
  * @connection:	DRBD connection.
 >>>>>>> v3.18
@@ -233,7 +260,11 @@ int _get_ldev_if_state(struct drbd_device *device, enum drbd_disk_state mins)
  * termination of the connection.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tl_release(struct drbd_tconn *tconn, unsigned int barrier_nr,
+=======
+void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
+>>>>>>> v3.18
 =======
 void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 >>>>>>> v3.18
@@ -245,17 +276,23 @@ void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 	int expect_size = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&tconn->req_lock);
 
 	/* find oldest not yet barrier-acked write request,
 	 * count writes in its epoch. */
 	list_for_each_entry(r, &tconn->transfer_log, tl_requests) {
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&connection->resource->req_lock);
 
 	/* find oldest not yet barrier-acked write request,
 	 * count writes in its epoch. */
 	list_for_each_entry(r, &connection->transfer_log, tl_requests) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		const unsigned s = r->rq_state;
 		if (!req) {
@@ -282,7 +319,11 @@ void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 	/* first some paranoia code */
 	if (req == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_err(tconn, "BAD! BarrierAck #%u received, but no epoch in tl!?\n",
+=======
+		drbd_err(connection, "BAD! BarrierAck #%u received, but no epoch in tl!?\n",
+>>>>>>> v3.18
 =======
 		drbd_err(connection, "BAD! BarrierAck #%u received, but no epoch in tl!?\n",
 >>>>>>> v3.18
@@ -291,7 +332,11 @@ void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 	}
 	if (expect_epoch != barrier_nr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_err(tconn, "BAD! BarrierAck #%u received, expected #%u!\n",
+=======
+		drbd_err(connection, "BAD! BarrierAck #%u received, expected #%u!\n",
+>>>>>>> v3.18
 =======
 		drbd_err(connection, "BAD! BarrierAck #%u received, expected #%u!\n",
 >>>>>>> v3.18
@@ -301,7 +346,11 @@ void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 
 	if (expect_size != set_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_err(tconn, "BAD! BarrierAck #%u received with n_writes=%u, expected n_writes=%u!\n",
+=======
+		drbd_err(connection, "BAD! BarrierAck #%u received with n_writes=%u, expected n_writes=%u!\n",
+>>>>>>> v3.18
 =======
 		drbd_err(connection, "BAD! BarrierAck #%u received with n_writes=%u, expected n_writes=%u!\n",
 >>>>>>> v3.18
@@ -314,22 +363,32 @@ void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 	 * to catch requests being barrier-acked "unexpectedly".
 	 * It usually should find the same req again, or some READ preceding it. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(req, &tconn->transfer_log, tl_requests)
 		if (req->epoch == expect_epoch)
 			break;
 	list_for_each_entry_safe_from(req, r, &tconn->transfer_log, tl_requests) {
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(req, &connection->transfer_log, tl_requests)
 		if (req->epoch == expect_epoch)
 			break;
 	list_for_each_entry_safe_from(req, r, &connection->transfer_log, tl_requests) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (req->epoch != expect_epoch)
 			break;
 		_req_mod(req, BARRIER_ACKED);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&tconn->req_lock);
+=======
+	spin_unlock_irq(&connection->resource->req_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_irq(&connection->resource->req_lock);
 >>>>>>> v3.18
@@ -338,8 +397,13 @@ void tl_release(struct drbd_connection *connection, unsigned int barrier_nr,
 
 bail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&tconn->req_lock);
 	conn_request_state(tconn, NS(conn, C_PROTOCOL_ERROR), CS_HARD);
+=======
+	spin_unlock_irq(&connection->resource->req_lock);
+	conn_request_state(connection, NS(conn, C_PROTOCOL_ERROR), CS_HARD);
+>>>>>>> v3.18
 =======
 	spin_unlock_irq(&connection->resource->req_lock);
 	conn_request_state(connection, NS(conn, C_PROTOCOL_ERROR), CS_HARD);
@@ -350,7 +414,11 @@ bail:
 /**
  * _tl_restart() - Walks the transfer log, and applies an action to all requests
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @connection:	DRBD connection to operate on.
+>>>>>>> v3.18
 =======
  * @connection:	DRBD connection to operate on.
 >>>>>>> v3.18
@@ -360,6 +428,7 @@ bail:
  * RESTART_FROZEN_DISK_IO.
  */
 /* must hold resource->req_lock */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void _tl_restart(struct drbd_tconn *tconn, enum drbd_req_event what)
 {
@@ -375,6 +444,8 @@ void tl_restart(struct drbd_tconn *tconn, enum drbd_req_event what)
 	_tl_restart(tconn, what);
 	spin_unlock_irq(&tconn->req_lock);
 =======
+=======
+>>>>>>> v3.18
 void _tl_restart(struct drbd_connection *connection, enum drbd_req_event what)
 {
 	struct drbd_request *req, *r;
@@ -388,13 +459,20 @@ void tl_restart(struct drbd_connection *connection, enum drbd_req_event what)
 	spin_lock_irq(&connection->resource->req_lock);
 	_tl_restart(connection, what);
 	spin_unlock_irq(&connection->resource->req_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * tl_clear() - Clears all requests and &struct drbd_tl_epoch objects out of the TL
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -403,6 +481,7 @@ void tl_restart(struct drbd_connection *connection, enum drbd_req_event what)
  * by the requests on the transfer gets marked as our of sync. Called from the
  * receiver thread and the worker thread.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void tl_clear(struct drbd_tconn *tconn)
 {
@@ -428,6 +507,8 @@ void tl_abort_disk_io(struct drbd_conf *mdev)
 	}
 	spin_unlock_irq(&tconn->req_lock);
 =======
+=======
+>>>>>>> v3.18
 void tl_clear(struct drbd_connection *connection)
 {
 	tl_restart(connection, CONNECTION_LOST_WHILE_PENDING);
@@ -451,6 +532,9 @@ void tl_abort_disk_io(struct drbd_device *device)
 		_req_mod(req, ABORT_DISK_IO);
 	}
 	spin_unlock_irq(&connection->resource->req_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -458,7 +542,11 @@ static int drbd_thread_setup(void *arg)
 {
 	struct drbd_thread *thi = (struct drbd_thread *) arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_tconn *tconn = thi->tconn;
+=======
+	struct drbd_resource *resource = thi->resource;
+>>>>>>> v3.18
 =======
 	struct drbd_resource *resource = thi->resource;
 >>>>>>> v3.18
@@ -467,7 +555,12 @@ static int drbd_thread_setup(void *arg)
 
 	snprintf(current->comm, sizeof(current->comm), "drbd_%c_%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 thi->name[0], thi->tconn->name);
+=======
+		 thi->name[0],
+		 resource->name);
+>>>>>>> v3.18
 =======
 		 thi->name[0],
 		 resource->name);
@@ -490,7 +583,11 @@ restart:
 
 	if (thi->t_state == RESTARTING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_info(tconn, "Restarting %s thread\n", thi->name);
+=======
+		drbd_info(resource, "Restarting %s thread\n", thi->name);
+>>>>>>> v3.18
 =======
 		drbd_info(resource, "Restarting %s thread\n", thi->name);
 >>>>>>> v3.18
@@ -506,12 +603,15 @@ restart:
 	spin_unlock_irqrestore(&thi->t_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conn_info(tconn, "Terminating %s\n", current->comm);
 
 	/* Release mod reference taken when thread was started */
 
 	kref_put(&tconn->kref, &conn_destroy);
 =======
+=======
+>>>>>>> v3.18
 	drbd_info(resource, "Terminating %s\n", current->comm);
 
 	/* Release mod reference taken when thread was started */
@@ -519,14 +619,22 @@ restart:
 	if (thi->connection)
 		kref_put(&thi->connection->kref, drbd_destroy_connection);
 	kref_put(&resource->kref, drbd_destroy_resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	module_put(THIS_MODULE);
 	return retval;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void drbd_thread_init(struct drbd_tconn *tconn, struct drbd_thread *thi,
 			     int (*func) (struct drbd_thread *), char *name)
+=======
+static void drbd_thread_init(struct drbd_resource *resource, struct drbd_thread *thi,
+			     int (*func) (struct drbd_thread *), const char *name)
+>>>>>>> v3.18
 =======
 static void drbd_thread_init(struct drbd_resource *resource, struct drbd_thread *thi,
 			     int (*func) (struct drbd_thread *), const char *name)
@@ -537,8 +645,14 @@ static void drbd_thread_init(struct drbd_resource *resource, struct drbd_thread 
 	thi->t_state = NONE;
 	thi->function = func;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thi->tconn = tconn;
 	strncpy(thi->name, name, ARRAY_SIZE(thi->name));
+=======
+	thi->resource = resource;
+	thi->connection = NULL;
+	thi->name = name;
+>>>>>>> v3.18
 =======
 	thi->resource = resource;
 	thi->connection = NULL;
@@ -549,7 +663,11 @@ static void drbd_thread_init(struct drbd_resource *resource, struct drbd_thread 
 int drbd_thread_start(struct drbd_thread *thi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_tconn *tconn = thi->tconn;
+=======
+	struct drbd_resource *resource = thi->resource;
+>>>>>>> v3.18
 =======
 	struct drbd_resource *resource = thi->resource;
 >>>>>>> v3.18
@@ -563,7 +681,11 @@ int drbd_thread_start(struct drbd_thread *thi)
 	switch (thi->t_state) {
 	case NONE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_info(tconn, "Starting %s thread (from %s [%d])\n",
+=======
+		drbd_info(resource, "Starting %s thread (from %s [%d])\n",
+>>>>>>> v3.18
 =======
 		drbd_info(resource, "Starting %s thread (from %s [%d])\n",
 >>>>>>> v3.18
@@ -572,7 +694,11 @@ int drbd_thread_start(struct drbd_thread *thi)
 		/* Get ref on module for thread - this is released when thread exits */
 		if (!try_module_get(THIS_MODULE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			conn_err(tconn, "Failed to get module reference in drbd_thread_start\n");
+=======
+			drbd_err(resource, "Failed to get module reference in drbd_thread_start\n");
+>>>>>>> v3.18
 =======
 			drbd_err(resource, "Failed to get module reference in drbd_thread_start\n");
 >>>>>>> v3.18
@@ -581,7 +707,13 @@ int drbd_thread_start(struct drbd_thread *thi)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kref_get(&thi->tconn->kref);
+=======
+		kref_get(&resource->kref);
+		if (thi->connection)
+			kref_get(&thi->connection->kref);
+>>>>>>> v3.18
 =======
 		kref_get(&resource->kref);
 		if (thi->connection)
@@ -596,6 +728,7 @@ int drbd_thread_start(struct drbd_thread *thi)
 
 		nt = kthread_create(drbd_thread_setup, (void *) thi,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    "drbd_%c_%s", thi->name[0], thi->tconn->name);
 
 		if (IS_ERR(nt)) {
@@ -603,6 +736,8 @@ int drbd_thread_start(struct drbd_thread *thi)
 
 			kref_put(&tconn->kref, &conn_destroy);
 =======
+=======
+>>>>>>> v3.18
 				    "drbd_%c_%s", thi->name[0], thi->resource->name);
 
 		if (IS_ERR(nt)) {
@@ -611,6 +746,9 @@ int drbd_thread_start(struct drbd_thread *thi)
 			if (thi->connection)
 				kref_put(&thi->connection->kref, drbd_destroy_connection);
 			kref_put(&resource->kref, drbd_destroy_resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			module_put(THIS_MODULE);
 			return false;
@@ -624,7 +762,11 @@ int drbd_thread_start(struct drbd_thread *thi)
 	case EXITING:
 		thi->t_state = RESTARTING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_info(tconn, "Restarting %s thread (from %s [%d])\n",
+=======
+		drbd_info(resource, "Restarting %s thread (from %s [%d])\n",
+>>>>>>> v3.18
 =======
 		drbd_info(resource, "Restarting %s thread (from %s [%d])\n",
 >>>>>>> v3.18
@@ -677,6 +819,7 @@ void _drbd_thread_stop(struct drbd_thread *thi, int restart, int wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drbd_thread *drbd_task_to_thread(struct drbd_tconn *tconn, struct task_struct *task)
 {
 	struct drbd_thread *thi =
@@ -705,6 +848,8 @@ int conn_lowest_minor(struct drbd_tconn *tconn)
 
 	return m;
 =======
+=======
+>>>>>>> v3.18
 int conn_lowest_minor(struct drbd_connection *connection)
 {
 	struct drbd_peer_device *peer_device;
@@ -717,12 +862,16 @@ int conn_lowest_minor(struct drbd_connection *connection)
 	rcu_read_unlock();
 
 	return minor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 #ifdef CONFIG_SMP
 /**
  * drbd_calc_cpu_mask() - Generate CPU masks, spread over all CPUs
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mdev:	DRBD device.
  *
@@ -747,6 +896,8 @@ void drbd_calc_cpu_mask(struct drbd_tconn *tconn)
 	/* should not be reached */
 	cpumask_setall(tconn->cpu_mask);
 =======
+=======
+>>>>>>> v3.18
  *
  * Forces all threads of a resource onto the same CPU. This is beneficial for
  * DRBD's performance. May be overwritten by user's configuration.
@@ -779,13 +930,20 @@ static void drbd_calc_cpu_mask(cpumask_var_t *cpu_mask)
 		return;
 	}
 	cpumask_set_cpu(min_index, *cpu_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_thread_current_set_cpu() - modifies the cpu mask of the _current_ thread
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -797,6 +955,10 @@ static void drbd_calc_cpu_mask(cpumask_var_t *cpu_mask)
 void drbd_thread_current_set_cpu(struct drbd_thread *thi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drbd_resource *resource = thi->resource;
+>>>>>>> v3.18
 =======
 	struct drbd_resource *resource = thi->resource;
 >>>>>>> v3.18
@@ -806,13 +968,19 @@ void drbd_thread_current_set_cpu(struct drbd_thread *thi)
 		return;
 	thi->reset_cpu_mask = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpus_allowed_ptr(p, thi->tconn->cpu_mask);
 }
 =======
+=======
+>>>>>>> v3.18
 	set_cpus_allowed_ptr(p, resource->cpu_mask);
 }
 #else
 #define drbd_calc_cpu_mask(A) ({})
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -824,9 +992,15 @@ void drbd_thread_current_set_cpu(struct drbd_thread *thi)
  * relies on this.)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int drbd_header_size(struct drbd_tconn *tconn)
 {
 	if (tconn->agreed_pro_version >= 100) {
+=======
+unsigned int drbd_header_size(struct drbd_connection *connection)
+{
+	if (connection->agreed_pro_version >= 100) {
+>>>>>>> v3.18
 =======
 unsigned int drbd_header_size(struct drbd_connection *connection)
 {
@@ -870,6 +1044,7 @@ static unsigned int prepare_header100(struct p_header100 *h, enum drbd_packet cm
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int prepare_header(struct drbd_tconn *tconn, int vnr,
 				   void *buffer, enum drbd_packet cmd, int size)
 {
@@ -877,12 +1052,17 @@ static unsigned int prepare_header(struct drbd_tconn *tconn, int vnr,
 		return prepare_header100(buffer, cmd, size, vnr);
 	else if (tconn->agreed_pro_version >= 95 &&
 =======
+=======
+>>>>>>> v3.18
 static unsigned int prepare_header(struct drbd_connection *connection, int vnr,
 				   void *buffer, enum drbd_packet cmd, int size)
 {
 	if (connection->agreed_pro_version >= 100)
 		return prepare_header100(buffer, cmd, size, vnr);
 	else if (connection->agreed_pro_version >= 95 &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 size > DRBD_MAX_SIZE_H80_PACKET)
 		return prepare_header95(buffer, cmd, size);
@@ -891,7 +1071,11 @@ static unsigned int prepare_header(struct drbd_connection *connection, int vnr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *__conn_prepare_command(struct drbd_tconn *tconn,
+=======
+static void *__conn_prepare_command(struct drbd_connection *connection,
+>>>>>>> v3.18
 =======
 static void *__conn_prepare_command(struct drbd_connection *connection,
 >>>>>>> v3.18
@@ -900,22 +1084,32 @@ static void *__conn_prepare_command(struct drbd_connection *connection,
 	if (!sock->socket)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sock->sbuf + drbd_header_size(tconn);
 }
 
 void *conn_prepare_command(struct drbd_tconn *tconn, struct drbd_socket *sock)
 =======
+=======
+>>>>>>> v3.18
 	return sock->sbuf + drbd_header_size(connection);
 }
 
 void *conn_prepare_command(struct drbd_connection *connection, struct drbd_socket *sock)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void *p;
 
 	mutex_lock(&sock->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = __conn_prepare_command(tconn, sock);
+=======
+	p = __conn_prepare_command(connection, sock);
+>>>>>>> v3.18
 =======
 	p = __conn_prepare_command(connection, sock);
 >>>>>>> v3.18
@@ -926,6 +1120,7 @@ void *conn_prepare_command(struct drbd_connection *connection, struct drbd_socke
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *drbd_prepare_command(struct drbd_conf *mdev, struct drbd_socket *sock)
 {
 	return conn_prepare_command(mdev->tconn, sock);
@@ -933,12 +1128,17 @@ void *drbd_prepare_command(struct drbd_conf *mdev, struct drbd_socket *sock)
 
 static int __send_command(struct drbd_tconn *tconn, int vnr,
 =======
+=======
+>>>>>>> v3.18
 void *drbd_prepare_command(struct drbd_peer_device *peer_device, struct drbd_socket *sock)
 {
 	return conn_prepare_command(peer_device->connection, sock);
 }
 
 static int __send_command(struct drbd_connection *connection, int vnr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  struct drbd_socket *sock, enum drbd_packet cmd,
 			  unsigned int header_size, void *data,
@@ -956,6 +1156,7 @@ static int __send_command(struct drbd_connection *connection, int vnr,
 	 */
 	msg_flags = data ? MSG_MORE : 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	header_size += prepare_header(tconn, vnr, sock->sbuf, cmd,
 				      header_size + size);
@@ -975,6 +1176,8 @@ static int __conn_send_command(struct drbd_tconn *tconn, struct drbd_socket *soc
 
 int conn_send_command(struct drbd_tconn *tconn, struct drbd_socket *sock,
 =======
+=======
+>>>>>>> v3.18
 	header_size += prepare_header(connection, vnr, sock->sbuf, cmd,
 				      header_size + size);
 	err = drbd_send_all(connection, sock->socket, sock->sbuf, header_size,
@@ -997,6 +1200,9 @@ static int __conn_send_command(struct drbd_connection *connection, struct drbd_s
 }
 
 int conn_send_command(struct drbd_connection *connection, struct drbd_socket *sock,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		      enum drbd_packet cmd, unsigned int header_size,
 		      void *data, unsigned int size)
@@ -1004,7 +1210,11 @@ int conn_send_command(struct drbd_connection *connection, struct drbd_socket *so
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __conn_send_command(tconn, sock, cmd, header_size, data, size);
+=======
+	err = __conn_send_command(connection, sock, cmd, header_size, data, size);
+>>>>>>> v3.18
 =======
 	err = __conn_send_command(connection, sock, cmd, header_size, data, size);
 >>>>>>> v3.18
@@ -1013,7 +1223,11 @@ int conn_send_command(struct drbd_connection *connection, struct drbd_socket *so
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_command(struct drbd_conf *mdev, struct drbd_socket *sock,
+=======
+int drbd_send_command(struct drbd_peer_device *peer_device, struct drbd_socket *sock,
+>>>>>>> v3.18
 =======
 int drbd_send_command(struct drbd_peer_device *peer_device, struct drbd_socket *sock,
 >>>>>>> v3.18
@@ -1023,8 +1237,13 @@ int drbd_send_command(struct drbd_peer_device *peer_device, struct drbd_socket *
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __send_command(mdev->tconn, mdev->vnr, sock, cmd, header_size,
 			     data, size);
+=======
+	err = __send_command(peer_device->connection, peer_device->device->vnr,
+			     sock, cmd, header_size, data, size);
+>>>>>>> v3.18
 =======
 	err = __send_command(peer_device->connection, peer_device->device->vnr,
 			     sock, cmd, header_size, data, size);
@@ -1033,6 +1252,7 @@ int drbd_send_command(struct drbd_peer_device *peer_device, struct drbd_socket *
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drbd_send_ping(struct drbd_tconn *tconn)
 {
@@ -1056,6 +1276,8 @@ int drbd_send_ping_ack(struct drbd_tconn *tconn)
 
 int drbd_send_sync_param(struct drbd_conf *mdev)
 =======
+=======
+>>>>>>> v3.18
 int drbd_send_ping(struct drbd_connection *connection)
 {
 	struct drbd_socket *sock;
@@ -1077,13 +1299,20 @@ int drbd_send_ping_ack(struct drbd_connection *connection)
 }
 
 int drbd_send_sync_param(struct drbd_peer_device *peer_device)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drbd_socket *sock;
 	struct p_rs_param_95 *p;
 	int size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int apv = mdev->tconn->agreed_pro_version;
+=======
+	const int apv = peer_device->connection->agreed_pro_version;
+>>>>>>> v3.18
 =======
 	const int apv = peer_device->connection->agreed_pro_version;
 >>>>>>> v3.18
@@ -1092,8 +1321,13 @@ int drbd_send_sync_param(struct drbd_peer_device *peer_device)
 	struct disk_conf *dc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
+=======
+	sock = &peer_device->connection->data;
+	p = drbd_prepare_command(peer_device, sock);
+>>>>>>> v3.18
 =======
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
@@ -1103,7 +1337,11 @@ int drbd_send_sync_param(struct drbd_peer_device *peer_device)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nc = rcu_dereference(mdev->tconn->net_conf);
+=======
+	nc = rcu_dereference(peer_device->connection->net_conf);
+>>>>>>> v3.18
 =======
 	nc = rcu_dereference(peer_device->connection->net_conf);
 >>>>>>> v3.18
@@ -1120,8 +1358,13 @@ int drbd_send_sync_param(struct drbd_peer_device *peer_device)
 	memset(p->verify_alg, 0, 2 * SHARED_SECRET_MAX);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_ldev(mdev)) {
 		dc = rcu_dereference(mdev->ldev->disk_conf);
+=======
+	if (get_ldev(peer_device->device)) {
+		dc = rcu_dereference(peer_device->device->ldev->disk_conf);
+>>>>>>> v3.18
 =======
 	if (get_ldev(peer_device->device)) {
 		dc = rcu_dereference(peer_device->device->ldev->disk_conf);
@@ -1132,7 +1375,11 @@ int drbd_send_sync_param(struct drbd_peer_device *peer_device)
 		p->c_fill_target = cpu_to_be32(dc->c_fill_target);
 		p->c_max_rate = cpu_to_be32(dc->c_max_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_ldev(mdev);
+=======
+		put_ldev(peer_device->device);
+>>>>>>> v3.18
 =======
 		put_ldev(peer_device->device);
 >>>>>>> v3.18
@@ -1151,15 +1398,21 @@ int drbd_send_sync_param(struct drbd_peer_device *peer_device)
 	rcu_read_unlock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drbd_send_command(mdev, sock, cmd, size, NULL, 0);
 }
 
 int __drbd_send_protocol(struct drbd_tconn *tconn, enum drbd_packet cmd)
 =======
+=======
+>>>>>>> v3.18
 	return drbd_send_command(peer_device, sock, cmd, size, NULL, 0);
 }
 
 int __drbd_send_protocol(struct drbd_connection *connection, enum drbd_packet cmd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drbd_socket *sock;
@@ -1168,8 +1421,13 @@ int __drbd_send_protocol(struct drbd_connection *connection, enum drbd_packet cm
 	int size, cf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &tconn->data;
 	p = __conn_prepare_command(tconn, sock);
+=======
+	sock = &connection->data;
+	p = __conn_prepare_command(connection, sock);
+>>>>>>> v3.18
 =======
 	sock = &connection->data;
 	p = __conn_prepare_command(connection, sock);
@@ -1179,6 +1437,7 @@ int __drbd_send_protocol(struct drbd_connection *connection, enum drbd_packet cm
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nc = rcu_dereference(tconn->net_conf);
 
 	if (nc->tentative && tconn->agreed_pro_version < 92) {
@@ -1186,19 +1445,28 @@ int __drbd_send_protocol(struct drbd_connection *connection, enum drbd_packet cm
 		mutex_unlock(&sock->mutex);
 		conn_err(tconn, "--dry-run is not supported by peer");
 =======
+=======
+>>>>>>> v3.18
 	nc = rcu_dereference(connection->net_conf);
 
 	if (nc->tentative && connection->agreed_pro_version < 92) {
 		rcu_read_unlock();
 		mutex_unlock(&sock->mutex);
 		drbd_err(connection, "--dry-run is not supported by peer");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EOPNOTSUPP;
 	}
 
 	size = sizeof(*p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tconn->agreed_pro_version >= 87)
+=======
+	if (connection->agreed_pro_version >= 87)
+>>>>>>> v3.18
 =======
 	if (connection->agreed_pro_version >= 87)
 >>>>>>> v3.18
@@ -1217,6 +1485,7 @@ int __drbd_send_protocol(struct drbd_connection *connection, enum drbd_packet cm
 	p->conn_flags    = cpu_to_be32(cf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tconn->agreed_pro_version >= 87)
 		strcpy(p->integrity_alg, nc->integrity_alg);
 	rcu_read_unlock();
@@ -1232,6 +1501,8 @@ int drbd_send_protocol(struct drbd_tconn *tconn)
 	err = __drbd_send_protocol(tconn, P_PROTOCOL);
 	mutex_unlock(&tconn->data.mutex);
 =======
+=======
+>>>>>>> v3.18
 	if (connection->agreed_pro_version >= 87)
 		strcpy(p->integrity_alg, nc->integrity_alg);
 	rcu_read_unlock();
@@ -1246,14 +1517,23 @@ int drbd_send_protocol(struct drbd_connection *connection)
 	mutex_lock(&connection->data.mutex);
 	err = __drbd_send_protocol(connection, P_PROTOCOL);
 	mutex_unlock(&connection->data.mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int _drbd_send_uuids(struct drbd_conf *mdev, u64 uuid_flags)
 {
+=======
+static int _drbd_send_uuids(struct drbd_peer_device *peer_device, u64 uuid_flags)
+{
+	struct drbd_device *device = peer_device->device;
+>>>>>>> v3.18
 =======
 static int _drbd_send_uuids(struct drbd_peer_device *peer_device, u64 uuid_flags)
 {
@@ -1263,6 +1543,7 @@ static int _drbd_send_uuids(struct drbd_peer_device *peer_device, u64 uuid_flags
 	struct p_uuids *p;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!get_ldev_if_state(mdev, D_NEGOTIATING))
 		return 0;
@@ -1307,6 +1588,8 @@ void drbd_print_uuids(struct drbd_conf *mdev, const char *text)
 		u64 *uuid = mdev->ldev->md.uuid;
 		dev_info(DEV, "%s %016llX:%016llX:%016llX:%016llX\n",
 =======
+=======
+>>>>>>> v3.18
 	if (!get_ldev_if_state(device, D_NEGOTIATING))
 		return 0;
 
@@ -1349,12 +1632,16 @@ void drbd_print_uuids(struct drbd_device *device, const char *text)
 	if (get_ldev_if_state(device, D_NEGOTIATING)) {
 		u64 *uuid = device->ldev->md.uuid;
 		drbd_info(device, "%s %016llX:%016llX:%016llX:%016llX\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     text,
 		     (unsigned long long)uuid[UI_CURRENT],
 		     (unsigned long long)uuid[UI_BITMAP],
 		     (unsigned long long)uuid[UI_HISTORY_START],
 		     (unsigned long long)uuid[UI_HISTORY_END]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		put_ldev(mdev);
 	} else {
@@ -1367,6 +1654,8 @@ void drbd_print_uuids(struct drbd_device *device, const char *text)
 void drbd_gen_and_send_sync_uuid(struct drbd_conf *mdev)
 {
 =======
+=======
+>>>>>>> v3.18
 		put_ldev(device);
 	} else {
 		drbd_info(device, "%s effective data uuid: %016llX\n",
@@ -1378,11 +1667,15 @@ void drbd_gen_and_send_sync_uuid(struct drbd_conf *mdev)
 void drbd_gen_and_send_sync_uuid(struct drbd_peer_device *peer_device)
 {
 	struct drbd_device *device = peer_device->device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drbd_socket *sock;
 	struct p_rs_uuid *p;
 	u64 uuid;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	D_ASSERT(mdev->state.disk == D_UP_TO_DATE);
 
@@ -1392,10 +1685,16 @@ void drbd_gen_and_send_sync_uuid(struct drbd_peer_device *peer_device)
 
 	uuid = device->ldev->md.uuid[UI_BITMAP];
 >>>>>>> v3.18
+=======
+	D_ASSERT(device, device->state.disk == D_UP_TO_DATE);
+
+	uuid = device->ldev->md.uuid[UI_BITMAP];
+>>>>>>> v3.18
 	if (uuid && uuid != UUID_JUST_CREATED)
 		uuid = uuid + UUID_NEW_BM_OFFSET;
 	else
 		get_random_bytes(&uuid, sizeof(u64));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drbd_uuid_set(mdev, UI_BITMAP, uuid);
 	drbd_print_uuids(mdev, "updated sync UUID");
@@ -1412,6 +1711,8 @@ void drbd_gen_and_send_sync_uuid(struct drbd_peer_device *peer_device)
 int drbd_send_sizes(struct drbd_conf *mdev, int trigger_reply, enum dds_flags flags)
 {
 =======
+=======
+>>>>>>> v3.18
 	drbd_uuid_set(device, UI_BITMAP, uuid);
 	drbd_print_uuids(device, "updated sync UUID");
 	drbd_md_sync(device);
@@ -1427,6 +1728,9 @@ int drbd_send_sizes(struct drbd_conf *mdev, int trigger_reply, enum dds_flags fl
 int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enum dds_flags flags)
 {
 	struct drbd_device *device = peer_device->device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drbd_socket *sock;
 	struct p_sizes *p;
@@ -1434,6 +1738,7 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 	int q_order_type;
 	unsigned int max_bio_size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (get_ldev_if_state(mdev, D_NEGOTIATING)) {
 		D_ASSERT(mdev->ldev->backing_bdev);
@@ -1446,6 +1751,8 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 		max_bio_size = min(max_bio_size, DRBD_MAX_BIO_SIZE);
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 	if (get_ldev_if_state(device, D_NEGOTIATING)) {
 		D_ASSERT(device, device->ldev->backing_bdev);
 		d_size = drbd_get_max_capacity(device->ldev);
@@ -1456,6 +1763,9 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 		max_bio_size = queue_max_hw_sectors(device->ldev->backing_bdev->bd_disk->queue) << 9;
 		max_bio_size = min(max_bio_size, DRBD_MAX_BIO_SIZE);
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		d_size = 0;
@@ -1464,6 +1774,7 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 		max_bio_size = DRBD_MAX_BIO_SIZE; /* ... multiple BIOs per peer_request */
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
@@ -1474,6 +1785,8 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 		max_bio_size = min(max_bio_size, DRBD_MAX_SIZE_H80_PACKET);
 	else if (mdev->tconn->agreed_pro_version < 100)
 =======
+=======
+>>>>>>> v3.18
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
 	if (!p)
@@ -1482,11 +1795,15 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 	if (peer_device->connection->agreed_pro_version <= 94)
 		max_bio_size = min(max_bio_size, DRBD_MAX_SIZE_H80_PACKET);
 	else if (peer_device->connection->agreed_pro_version < 100)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		max_bio_size = min(max_bio_size, DRBD_MAX_BIO_SIZE_P95);
 
 	p->d_size = cpu_to_be64(d_size);
 	p->u_size = cpu_to_be64(u_size);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p->c_size = cpu_to_be64(trigger_reply ? 0 : drbd_get_capacity(mdev->this_bdev));
 	p->max_bio_size = cpu_to_be32(max_bio_size);
@@ -1494,20 +1811,31 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
 	p->dds_flags = cpu_to_be16(flags);
 	return drbd_send_command(mdev, sock, P_SIZES, sizeof(*p), NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	p->c_size = cpu_to_be64(trigger_reply ? 0 : drbd_get_capacity(device->this_bdev));
 	p->max_bio_size = cpu_to_be32(max_bio_size);
 	p->queue_order_type = cpu_to_be16(q_order_type);
 	p->dds_flags = cpu_to_be16(flags);
 	return drbd_send_command(peer_device, sock, P_SIZES, sizeof(*p), NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_send_current_state() - Sends the drbd state to the peer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
  */
 int drbd_send_current_state(struct drbd_conf *mdev)
+=======
+ * @peer_device:	DRBD peer device.
+ */
+int drbd_send_current_state(struct drbd_peer_device *peer_device)
+>>>>>>> v3.18
 =======
  * @peer_device:	DRBD peer device.
  */
@@ -1518,6 +1846,7 @@ int drbd_send_current_state(struct drbd_peer_device *peer_device)
 	struct p_state *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
 	if (!p)
@@ -1525,19 +1854,28 @@ int drbd_send_current_state(struct drbd_peer_device *peer_device)
 	p->state = cpu_to_be32(mdev->state.i); /* Within the send mutex */
 	return drbd_send_command(mdev, sock, P_STATE, sizeof(*p), NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
 	if (!p)
 		return -EIO;
 	p->state = cpu_to_be32(peer_device->device->state.i); /* Within the send mutex */
 	return drbd_send_command(peer_device, sock, P_STATE, sizeof(*p), NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_send_state() - After a state change, sends the new state to the peer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:      DRBD device.
+=======
+ * @peer_device:      DRBD peer device.
+>>>>>>> v3.18
 =======
  * @peer_device:      DRBD peer device.
 >>>>>>> v3.18
@@ -1549,7 +1887,11 @@ int drbd_send_current_state(struct drbd_peer_device *peer_device)
  * want to send each intermediary state in the order it occurred.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_state(struct drbd_conf *mdev, union drbd_state state)
+=======
+int drbd_send_state(struct drbd_peer_device *peer_device, union drbd_state state)
+>>>>>>> v3.18
 =======
 int drbd_send_state(struct drbd_peer_device *peer_device, union drbd_state state)
 >>>>>>> v3.18
@@ -1557,6 +1899,7 @@ int drbd_send_state(struct drbd_peer_device *peer_device, union drbd_state state
 	struct drbd_socket *sock;
 	struct p_state *p;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
@@ -1568,6 +1911,8 @@ int drbd_send_state(struct drbd_peer_device *peer_device, union drbd_state state
 
 int drbd_send_state_req(struct drbd_conf *mdev, union drbd_state mask, union drbd_state val)
 =======
+=======
+>>>>>>> v3.18
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
 	if (!p)
@@ -1577,14 +1922,22 @@ int drbd_send_state_req(struct drbd_conf *mdev, union drbd_state mask, union drb
 }
 
 int drbd_send_state_req(struct drbd_peer_device *peer_device, union drbd_state mask, union drbd_state val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drbd_socket *sock;
 	struct p_req_state *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
+=======
+	sock = &peer_device->connection->data;
+	p = drbd_prepare_command(peer_device, sock);
+>>>>>>> v3.18
 =======
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
@@ -1594,15 +1947,21 @@ int drbd_send_state_req(struct drbd_peer_device *peer_device, union drbd_state m
 	p->mask = cpu_to_be32(mask.i);
 	p->val = cpu_to_be32(val.i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drbd_send_command(mdev, sock, P_STATE_CHG_REQ, sizeof(*p), NULL, 0);
 }
 
 int conn_send_state_req(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state val)
 =======
+=======
+>>>>>>> v3.18
 	return drbd_send_command(peer_device, sock, P_STATE_CHG_REQ, sizeof(*p), NULL, 0);
 }
 
 int conn_send_state_req(struct drbd_connection *connection, union drbd_state mask, union drbd_state val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	enum drbd_packet cmd;
@@ -1610,9 +1969,15 @@ int conn_send_state_req(struct drbd_connection *connection, union drbd_state mas
 	struct p_req_state *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd = tconn->agreed_pro_version < 100 ? P_STATE_CHG_REQ : P_CONN_ST_CHG_REQ;
 	sock = &tconn->data;
 	p = conn_prepare_command(tconn, sock);
+=======
+	cmd = connection->agreed_pro_version < 100 ? P_STATE_CHG_REQ : P_CONN_ST_CHG_REQ;
+	sock = &connection->data;
+	p = conn_prepare_command(connection, sock);
+>>>>>>> v3.18
 =======
 	cmd = connection->agreed_pro_version < 100 ? P_STATE_CHG_REQ : P_CONN_ST_CHG_REQ;
 	sock = &connection->data;
@@ -1623,15 +1988,19 @@ int conn_send_state_req(struct drbd_connection *connection, union drbd_state mas
 	p->mask = cpu_to_be32(mask.i);
 	p->val = cpu_to_be32(val.i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return conn_send_command(tconn, sock, cmd, sizeof(*p), NULL, 0);
 }
 
 void drbd_send_sr_reply(struct drbd_conf *mdev, enum drbd_state_rv retcode)
 =======
+=======
+>>>>>>> v3.18
 	return conn_send_command(connection, sock, cmd, sizeof(*p), NULL, 0);
 }
 
 void drbd_send_sr_reply(struct drbd_peer_device *peer_device, enum drbd_state_rv retcode)
+<<<<<<< HEAD
 >>>>>>> v3.18
 {
 	struct drbd_socket *sock;
@@ -1658,6 +2027,12 @@ void conn_send_sr_reply(struct drbd_tconn *tconn, enum drbd_state_rv retcode)
 		p->retcode = cpu_to_be32(retcode);
 		conn_send_command(tconn, sock, cmd, sizeof(*p), NULL, 0);
 =======
+=======
+{
+	struct drbd_socket *sock;
+	struct p_req_state_reply *p;
+
+>>>>>>> v3.18
 	sock = &peer_device->connection->meta;
 	p = drbd_prepare_command(peer_device, sock);
 	if (p) {
@@ -1677,6 +2052,9 @@ void conn_send_sr_reply(struct drbd_connection *connection, enum drbd_state_rv r
 	if (p) {
 		p->retcode = cpu_to_be32(retcode);
 		conn_send_command(connection, sock, cmd, sizeof(*p), NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1699,7 +2077,11 @@ static void dcbp_set_pad_bits(struct p_compressed_bm *p, int n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fill_bitmap_rle_bits(struct drbd_conf *mdev,
+=======
+static int fill_bitmap_rle_bits(struct drbd_device *device,
+>>>>>>> v3.18
 =======
 static int fill_bitmap_rle_bits(struct drbd_device *device,
 >>>>>>> v3.18
@@ -1718,9 +2100,15 @@ static int fill_bitmap_rle_bits(struct drbd_device *device,
 	/* may we use this feature? */
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	use_rle = rcu_dereference(mdev->tconn->net_conf)->use_rle;
 	rcu_read_unlock();
 	if (!use_rle || mdev->tconn->agreed_pro_version < 90)
+=======
+	use_rle = rcu_dereference(first_peer_device(device)->connection->net_conf)->use_rle;
+	rcu_read_unlock();
+	if (!use_rle || first_peer_device(device)->connection->agreed_pro_version < 90)
+>>>>>>> v3.18
 =======
 	use_rle = rcu_dereference(first_peer_device(device)->connection->net_conf)->use_rle;
 	rcu_read_unlock();
@@ -1746,8 +2134,13 @@ static int fill_bitmap_rle_bits(struct drbd_device *device,
 	 * using RLE and VLI. */
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = (toggle == 0) ? _drbd_bm_find_next_zero(mdev, c->bit_offset)
 				    : _drbd_bm_find_next(mdev, c->bit_offset);
+=======
+		tmp = (toggle == 0) ? _drbd_bm_find_next_zero(device, c->bit_offset)
+				    : _drbd_bm_find_next(device, c->bit_offset);
+>>>>>>> v3.18
 =======
 		tmp = (toggle == 0) ? _drbd_bm_find_next_zero(device, c->bit_offset)
 				    : _drbd_bm_find_next(device, c->bit_offset);
@@ -1772,7 +2165,11 @@ static int fill_bitmap_rle_bits(struct drbd_device *device,
 		 * can only happen if bitmap is modified while we scan it. */
 		if (rl == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(DEV, "unexpected zero runlength while encoding bitmap "
+=======
+			drbd_err(device, "unexpected zero runlength while encoding bitmap "
+>>>>>>> v3.18
 =======
 			drbd_err(device, "unexpected zero runlength while encoding bitmap "
 >>>>>>> v3.18
@@ -1785,7 +2182,11 @@ static int fill_bitmap_rle_bits(struct drbd_device *device,
 			break;
 		if (bits <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(DEV, "error while encoding bitmap: %d\n", bits);
+=======
+			drbd_err(device, "error while encoding bitmap: %d\n", bits);
+>>>>>>> v3.18
 =======
 			drbd_err(device, "error while encoding bitmap: %d\n", bits);
 >>>>>>> v3.18
@@ -1826,6 +2227,7 @@ static int fill_bitmap_rle_bits(struct drbd_device *device,
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 send_bitmap_rle_or_plain(struct drbd_conf *mdev, struct bm_xfer_ctx *c)
 {
 	struct drbd_socket *sock = &mdev->tconn->data;
@@ -1835,6 +2237,8 @@ send_bitmap_rle_or_plain(struct drbd_conf *mdev, struct bm_xfer_ctx *c)
 
 	len = fill_bitmap_rle_bits(mdev, p,
 =======
+=======
+>>>>>>> v3.18
 send_bitmap_rle_or_plain(struct drbd_device *device, struct bm_xfer_ctx *c)
 {
 	struct drbd_socket *sock = &first_peer_device(device)->connection->data;
@@ -1843,6 +2247,9 @@ send_bitmap_rle_or_plain(struct drbd_device *device, struct bm_xfer_ctx *c)
 	int len, err;
 
 	len = fill_bitmap_rle_bits(device, p,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			DRBD_SOCKET_BUFFER_SIZE - header_size - sizeof(*p), c);
 	if (len < 0)
@@ -1851,7 +2258,11 @@ send_bitmap_rle_or_plain(struct drbd_device *device, struct bm_xfer_ctx *c)
 	if (len) {
 		dcbp_set_code(p, RLE_VLI_Bits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __send_command(mdev->tconn, mdev->vnr, sock,
+=======
+		err = __send_command(first_peer_device(device)->connection, device->vnr, sock,
+>>>>>>> v3.18
 =======
 		err = __send_command(first_peer_device(device)->connection, device->vnr, sock,
 >>>>>>> v3.18
@@ -1875,8 +2286,13 @@ send_bitmap_rle_or_plain(struct drbd_device *device, struct bm_xfer_ctx *c)
 		len = num_words * sizeof(*p);
 		if (len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drbd_bm_get_lel(mdev, c->word_offset, num_words, p);
 		err = __send_command(mdev->tconn, mdev->vnr, sock, P_BITMAP, len, NULL, 0);
+=======
+			drbd_bm_get_lel(device, c->word_offset, num_words, p);
+		err = __send_command(first_peer_device(device)->connection, device->vnr, sock, P_BITMAP, len, NULL, 0);
+>>>>>>> v3.18
 =======
 			drbd_bm_get_lel(device, c->word_offset, num_words, p);
 		err = __send_command(first_peer_device(device)->connection, device->vnr, sock, P_BITMAP, len, NULL, 0);
@@ -1893,7 +2309,11 @@ send_bitmap_rle_or_plain(struct drbd_device *device, struct bm_xfer_ctx *c)
 	if (!err) {
 		if (len == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			INFO_bm_xfer_stats(mdev, "send", c);
+=======
+			INFO_bm_xfer_stats(device, "send", c);
+>>>>>>> v3.18
 =======
 			INFO_bm_xfer_stats(device, "send", c);
 >>>>>>> v3.18
@@ -1906,7 +2326,11 @@ send_bitmap_rle_or_plain(struct drbd_device *device, struct bm_xfer_ctx *c)
 
 /* See the comment at receive_bitmap() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _drbd_send_bitmap(struct drbd_conf *mdev)
+=======
+static int _drbd_send_bitmap(struct drbd_device *device)
+>>>>>>> v3.18
 =======
 static int _drbd_send_bitmap(struct drbd_device *device)
 >>>>>>> v3.18
@@ -1914,6 +2338,7 @@ static int _drbd_send_bitmap(struct drbd_device *device)
 	struct bm_xfer_ctx c;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!expect(mdev->bitmap))
 		return false;
@@ -1943,6 +2368,8 @@ static int _drbd_send_bitmap(struct drbd_device *device)
 	do {
 		err = send_bitmap_rle_or_plain(mdev, &c);
 =======
+=======
+>>>>>>> v3.18
 	if (!expect(device->bitmap))
 		return false;
 
@@ -1970,6 +2397,9 @@ static int _drbd_send_bitmap(struct drbd_device *device)
 
 	do {
 		err = send_bitmap_rle_or_plain(device, &c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (err > 0);
 
@@ -1977,9 +2407,15 @@ static int _drbd_send_bitmap(struct drbd_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_bitmap(struct drbd_conf *mdev)
 {
 	struct drbd_socket *sock = &mdev->tconn->data;
+=======
+int drbd_send_bitmap(struct drbd_device *device)
+{
+	struct drbd_socket *sock = &first_peer_device(device)->connection->data;
+>>>>>>> v3.18
 =======
 int drbd_send_bitmap(struct drbd_device *device)
 {
@@ -1990,7 +2426,11 @@ int drbd_send_bitmap(struct drbd_device *device)
 	mutex_lock(&sock->mutex);
 	if (sock->socket)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = !_drbd_send_bitmap(mdev);
+=======
+		err = !_drbd_send_bitmap(device);
+>>>>>>> v3.18
 =======
 		err = !_drbd_send_bitmap(device);
 >>>>>>> v3.18
@@ -1999,7 +2439,11 @@ int drbd_send_bitmap(struct drbd_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drbd_send_b_ack(struct drbd_tconn *tconn, u32 barrier_nr, u32 set_size)
+=======
+void drbd_send_b_ack(struct drbd_connection *connection, u32 barrier_nr, u32 set_size)
+>>>>>>> v3.18
 =======
 void drbd_send_b_ack(struct drbd_connection *connection, u32 barrier_nr, u32 set_size)
 >>>>>>> v3.18
@@ -2008,24 +2452,34 @@ void drbd_send_b_ack(struct drbd_connection *connection, u32 barrier_nr, u32 set
 	struct p_barrier_ack *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tconn->cstate < C_WF_REPORT_PARAMS)
 		return;
 
 	sock = &tconn->meta;
 	p = conn_prepare_command(tconn, sock);
 =======
+=======
+>>>>>>> v3.18
 	if (connection->cstate < C_WF_REPORT_PARAMS)
 		return;
 
 	sock = &connection->meta;
 	p = conn_prepare_command(connection, sock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!p)
 		return;
 	p->barrier = barrier_nr;
 	p->set_size = cpu_to_be32(set_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conn_send_command(tconn, sock, P_BARRIER_ACK, sizeof(*p), NULL, 0);
+=======
+	conn_send_command(connection, sock, P_BARRIER_ACK, sizeof(*p), NULL, 0);
+>>>>>>> v3.18
 =======
 	conn_send_command(connection, sock, P_BARRIER_ACK, sizeof(*p), NULL, 0);
 >>>>>>> v3.18
@@ -2034,7 +2488,11 @@ void drbd_send_b_ack(struct drbd_connection *connection, u32 barrier_nr, u32 set
 /**
  * _drbd_send_ack() - Sends an ack packet
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -2044,7 +2502,11 @@ void drbd_send_b_ack(struct drbd_connection *connection, u32 barrier_nr, u32 set
  * @block_id:	Id, big endian byte order
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _drbd_send_ack(struct drbd_conf *mdev, enum drbd_packet cmd,
+=======
+static int _drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
+>>>>>>> v3.18
 =======
 static int _drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 >>>>>>> v3.18
@@ -2054,17 +2516,23 @@ static int _drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet
 	struct p_block_ack *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mdev->state.conn < C_CONNECTED)
 		return -EIO;
 
 	sock = &mdev->tconn->meta;
 	p = drbd_prepare_command(mdev, sock);
 =======
+=======
+>>>>>>> v3.18
 	if (peer_device->device->state.conn < C_CONNECTED)
 		return -EIO;
 
 	sock = &peer_device->connection->meta;
 	p = drbd_prepare_command(peer_device, sock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!p)
 		return -EIO;
@@ -2072,8 +2540,13 @@ static int _drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet
 	p->block_id = block_id;
 	p->blksize = blksize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->seq_num = cpu_to_be32(atomic_inc_return(&mdev->packet_seq));
 	return drbd_send_command(mdev, sock, cmd, sizeof(*p), NULL, 0);
+=======
+	p->seq_num = cpu_to_be32(atomic_inc_return(&peer_device->device->packet_seq));
+	return drbd_send_command(peer_device, sock, cmd, sizeof(*p), NULL, 0);
+>>>>>>> v3.18
 =======
 	p->seq_num = cpu_to_be32(atomic_inc_return(&peer_device->device->packet_seq));
 	return drbd_send_command(peer_device, sock, cmd, sizeof(*p), NULL, 0);
@@ -2083,6 +2556,7 @@ static int _drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet
 /* dp->sector and dp->block_id already/still in network byte order,
  * data_size is payload size according to dp->head,
  * and may need to be corrected for digest size. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void drbd_send_ack_dp(struct drbd_conf *mdev, enum drbd_packet cmd,
 		      struct p_data *dp, int data_size)
@@ -2098,6 +2572,8 @@ void drbd_send_ack_rp(struct drbd_conf *mdev, enum drbd_packet cmd,
 {
 	_drbd_send_ack(mdev, cmd, rp->sector, rp->blksize, rp->block_id);
 =======
+=======
+>>>>>>> v3.18
 void drbd_send_ack_dp(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 		      struct p_data *dp, int data_size)
 {
@@ -2111,11 +2587,15 @@ void drbd_send_ack_rp(struct drbd_peer_device *peer_device, enum drbd_packet cmd
 		      struct p_block_req *rp)
 {
 	_drbd_send_ack(peer_device, cmd, rp->sector, rp->blksize, rp->block_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_send_ack() - Sends an ack packet
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mdev:	DRBD device
  * @cmd:	packet command code
@@ -2126,6 +2606,8 @@ int drbd_send_ack(struct drbd_conf *mdev, enum drbd_packet cmd,
 {
 	return _drbd_send_ack(mdev, cmd,
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device
  * @cmd:	packet command code
  * @peer_req:	peer request
@@ -2134,6 +2616,9 @@ int drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 		  struct drbd_peer_request *peer_req)
 {
 	return _drbd_send_ack(peer_device, cmd,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      cpu_to_be64(peer_req->i.sector),
 			      cpu_to_be32(peer_req->i.size),
@@ -2143,15 +2628,21 @@ int drbd_send_ack(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 /* This function misuses the block_id field to signal if the blocks
  * are is sync or not. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_ack_ex(struct drbd_conf *mdev, enum drbd_packet cmd,
 		     sector_t sector, int blksize, u64 block_id)
 {
 	return _drbd_send_ack(mdev, cmd,
 =======
+=======
+>>>>>>> v3.18
 int drbd_send_ack_ex(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 		     sector_t sector, int blksize, u64 block_id)
 {
 	return _drbd_send_ack(peer_device, cmd,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      cpu_to_be64(sector),
 			      cpu_to_be32(blksize),
@@ -2159,7 +2650,11 @@ int drbd_send_ack_ex(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_drequest(struct drbd_conf *mdev, int cmd,
+=======
+int drbd_send_drequest(struct drbd_peer_device *peer_device, int cmd,
+>>>>>>> v3.18
 =======
 int drbd_send_drequest(struct drbd_peer_device *peer_device, int cmd,
 >>>>>>> v3.18
@@ -2169,8 +2664,13 @@ int drbd_send_drequest(struct drbd_peer_device *peer_device, int cmd,
 	struct p_block_req *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
+=======
+	sock = &peer_device->connection->data;
+	p = drbd_prepare_command(peer_device, sock);
+>>>>>>> v3.18
 =======
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
@@ -2181,15 +2681,21 @@ int drbd_send_drequest(struct drbd_peer_device *peer_device, int cmd,
 	p->block_id = block_id;
 	p->blksize = cpu_to_be32(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drbd_send_command(mdev, sock, cmd, sizeof(*p), NULL, 0);
 }
 
 int drbd_send_drequest_csum(struct drbd_conf *mdev, sector_t sector, int size,
 =======
+=======
+>>>>>>> v3.18
 	return drbd_send_command(peer_device, sock, cmd, sizeof(*p), NULL, 0);
 }
 
 int drbd_send_drequest_csum(struct drbd_peer_device *peer_device, sector_t sector, int size,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    void *digest, int digest_size, enum drbd_packet cmd)
 {
@@ -2199,8 +2705,13 @@ int drbd_send_drequest_csum(struct drbd_peer_device *peer_device, sector_t secto
 	/* FIXME: Put the digest into the preallocated socket buffer.  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
+=======
+	sock = &peer_device->connection->data;
+	p = drbd_prepare_command(peer_device, sock);
+>>>>>>> v3.18
 =======
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
@@ -2210,6 +2721,7 @@ int drbd_send_drequest_csum(struct drbd_peer_device *peer_device, sector_t secto
 	p->sector = cpu_to_be64(sector);
 	p->block_id = ID_SYNCER /* unused */;
 	p->blksize = cpu_to_be32(size);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return drbd_send_command(mdev, sock, cmd, sizeof(*p),
 				 digest, digest_size);
@@ -2217,18 +2729,28 @@ int drbd_send_drequest_csum(struct drbd_peer_device *peer_device, sector_t secto
 
 int drbd_send_ov_request(struct drbd_conf *mdev, sector_t sector, int size)
 =======
+=======
+>>>>>>> v3.18
 	return drbd_send_command(peer_device, sock, cmd, sizeof(*p), digest, digest_size);
 }
 
 int drbd_send_ov_request(struct drbd_peer_device *peer_device, sector_t sector, int size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drbd_socket *sock;
 	struct p_block_req *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
+=======
+	sock = &peer_device->connection->data;
+	p = drbd_prepare_command(peer_device, sock);
+>>>>>>> v3.18
 =======
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
@@ -2239,7 +2761,11 @@ int drbd_send_ov_request(struct drbd_peer_device *peer_device, sector_t sector, 
 	p->block_id = ID_SYNCER /* unused */;
 	p->blksize = cpu_to_be32(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drbd_send_command(mdev, sock, P_OV_REQUEST, sizeof(*p), NULL, 0);
+=======
+	return drbd_send_command(peer_device, sock, P_OV_REQUEST, sizeof(*p), NULL, 0);
+>>>>>>> v3.18
 =======
 	return drbd_send_command(peer_device, sock, P_OV_REQUEST, sizeof(*p), NULL, 0);
 >>>>>>> v3.18
@@ -2249,6 +2775,7 @@ int drbd_send_ov_request(struct drbd_peer_device *peer_device, sector_t sector, 
  * returns false if we should retry,
  * true if we think connection is dead
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int we_should_drop_the_connection(struct drbd_tconn *tconn, struct socket *sock)
 {
@@ -2260,6 +2787,8 @@ static int we_should_drop_the_connection(struct drbd_tconn *tconn, struct socket
 		|| get_t_state(&tconn->asender) != RUNNING
 		|| tconn->cstate < C_WF_REPORT_PARAMS;
 =======
+=======
+>>>>>>> v3.18
 static int we_should_drop_the_connection(struct drbd_connection *connection, struct socket *sock)
 {
 	int drop_it;
@@ -2269,11 +2798,15 @@ static int we_should_drop_the_connection(struct drbd_connection *connection, str
 		|| !connection->asender.task
 		|| get_t_state(&connection->asender) != RUNNING
 		|| connection->cstate < C_WF_REPORT_PARAMS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (drop_it)
 		return true;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drop_it = !--tconn->ko_count;
 	if (!drop_it) {
@@ -2291,6 +2824,8 @@ static void drbd_update_congested(struct drbd_tconn *tconn)
 	if (sk->sk_wmem_queued > sk->sk_sndbuf * 4 / 5)
 		set_bit(NET_CONGESTED, &tconn->flags);
 =======
+=======
+>>>>>>> v3.18
 	drop_it = !--connection->ko_count;
 	if (!drop_it) {
 		drbd_err(connection, "[%s/%d] sock_sendmsg time expired, ko = %u\n",
@@ -2306,6 +2841,9 @@ static void drbd_update_congested(struct drbd_connection *connection)
 	struct sock *sk = connection->data.socket->sk;
 	if (sk->sk_wmem_queued > sk->sk_sndbuf * 4 / 5)
 		set_bit(NET_CONGESTED, &connection->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2331,7 +2869,11 @@ static void drbd_update_congested(struct drbd_connection *connection)
  * with page_count == 0 or PageSlab.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _drbd_no_send_page(struct drbd_conf *mdev, struct page *page,
+=======
+static int _drbd_no_send_page(struct drbd_peer_device *peer_device, struct page *page,
+>>>>>>> v3.18
 =======
 static int _drbd_no_send_page(struct drbd_peer_device *peer_device, struct page *page,
 >>>>>>> v3.18
@@ -2341,6 +2883,7 @@ static int _drbd_no_send_page(struct drbd_peer_device *peer_device, struct page 
 	void *addr;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	socket = mdev->tconn->data.socket;
 	addr = kmap(page) + offset;
@@ -2356,6 +2899,8 @@ static int _drbd_send_page(struct drbd_conf *mdev, struct page *page,
 {
 	struct socket *socket = mdev->tconn->data.socket;
 =======
+=======
+>>>>>>> v3.18
 	socket = peer_device->connection->data.socket;
 	addr = kmap(page) + offset;
 	err = drbd_send_all(peer_device->connection, socket, addr, size, msg_flags);
@@ -2369,6 +2914,9 @@ static int _drbd_send_page(struct drbd_peer_device *peer_device, struct page *pa
 		    int offset, size_t size, unsigned msg_flags)
 {
 	struct socket *socket = peer_device->connection->data.socket;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mm_segment_t oldfs = get_fs();
 	int len = size;
@@ -2382,15 +2930,21 @@ static int _drbd_send_page(struct drbd_peer_device *peer_device, struct page *pa
 	 * by someone, leading to some obscure delayed Oops somewhere else. */
 	if (disable_sendpage || (page_count(page) < 1) || PageSlab(page))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return _drbd_no_send_page(mdev, page, offset, size, msg_flags);
 
 	msg_flags |= MSG_NOSIGNAL;
 	drbd_update_congested(mdev->tconn);
 =======
+=======
+>>>>>>> v3.18
 		return _drbd_no_send_page(peer_device, page, offset, size, msg_flags);
 
 	msg_flags |= MSG_NOSIGNAL;
 	drbd_update_congested(peer_device->connection);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_fs(KERNEL_DS);
 	do {
@@ -2400,17 +2954,23 @@ static int _drbd_send_page(struct drbd_peer_device *peer_device, struct page *pa
 		if (sent <= 0) {
 			if (sent == -EAGAIN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (we_should_drop_the_connection(mdev->tconn, socket))
 					break;
 				continue;
 			}
 			dev_warn(DEV, "%s: size=%d len=%d sent=%d\n",
 =======
+=======
+>>>>>>> v3.18
 				if (we_should_drop_the_connection(peer_device->connection, socket))
 					break;
 				continue;
 			}
 			drbd_warn(peer_device->device, "%s: size=%d len=%d sent=%d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     __func__, (int)size, len, sent);
 			if (sent < 0)
@@ -2420,6 +2980,7 @@ static int _drbd_send_page(struct drbd_peer_device *peer_device, struct page *pa
 		len    -= sent;
 		offset += sent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (len > 0 /* THINK && mdev->cstate >= C_CONNECTED*/);
 	set_fs(oldfs);
 	clear_bit(NET_CONGESTED, &mdev->tconn->flags);
@@ -2428,6 +2989,8 @@ static int _drbd_send_page(struct drbd_peer_device *peer_device, struct page *pa
 		err = 0;
 		mdev->send_cnt += size >> 9;
 =======
+=======
+>>>>>>> v3.18
 	} while (len > 0 /* THINK && device->cstate >= C_CONNECTED*/);
 	set_fs(oldfs);
 	clear_bit(NET_CONGESTED, &peer_device->connection->flags);
@@ -2435,11 +2998,15 @@ static int _drbd_send_page(struct drbd_peer_device *peer_device, struct page *pa
 	if (len == 0) {
 		err = 0;
 		peer_device->device->send_cnt += size >> 9;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int _drbd_send_bio(struct drbd_conf *mdev, struct bio *bio)
 {
@@ -2453,6 +3020,8 @@ static int _drbd_send_bio(struct drbd_conf *mdev, struct bio *bio)
 					 bvec->bv_offset, bvec->bv_len,
 					 i == bio->bi_vcnt - 1 ? 0 : MSG_MORE);
 =======
+=======
+>>>>>>> v3.18
 static int _drbd_send_bio(struct drbd_peer_device *peer_device, struct bio *bio)
 {
 	struct bio_vec bvec;
@@ -2466,6 +3035,9 @@ static int _drbd_send_bio(struct drbd_peer_device *peer_device, struct bio *bio)
 					 bvec.bv_offset, bvec.bv_len,
 					 bio_iter_last(bvec, iter)
 					 ? 0 : MSG_MORE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)
 			return err;
@@ -2473,6 +3045,7 @@ static int _drbd_send_bio(struct drbd_peer_device *peer_device, struct bio *bio)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int _drbd_send_zc_bio(struct drbd_conf *mdev, struct bio *bio)
 {
@@ -2486,6 +3059,8 @@ static int _drbd_send_zc_bio(struct drbd_conf *mdev, struct bio *bio)
 				      bvec->bv_offset, bvec->bv_len,
 				      i == bio->bi_vcnt - 1 ? 0 : MSG_MORE);
 =======
+=======
+>>>>>>> v3.18
 static int _drbd_send_zc_bio(struct drbd_peer_device *peer_device, struct bio *bio)
 {
 	struct bio_vec bvec;
@@ -2498,6 +3073,9 @@ static int _drbd_send_zc_bio(struct drbd_peer_device *peer_device, struct bio *b
 		err = _drbd_send_page(peer_device, bvec.bv_page,
 				      bvec.bv_offset, bvec.bv_len,
 				      bio_iter_last(bvec, iter) ? 0 : MSG_MORE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)
 			return err;
@@ -2506,7 +3084,11 @@ static int _drbd_send_zc_bio(struct drbd_peer_device *peer_device, struct bio *b
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _drbd_send_zc_ee(struct drbd_conf *mdev,
+=======
+static int _drbd_send_zc_ee(struct drbd_peer_device *peer_device,
+>>>>>>> v3.18
 =======
 static int _drbd_send_zc_ee(struct drbd_peer_device *peer_device,
 >>>>>>> v3.18
@@ -2521,7 +3103,11 @@ static int _drbd_send_zc_ee(struct drbd_peer_device *peer_device,
 		unsigned l = min_t(unsigned, len, PAGE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = _drbd_send_page(mdev, page, 0, l,
+=======
+		err = _drbd_send_page(peer_device, page, 0, l,
+>>>>>>> v3.18
 =======
 		err = _drbd_send_page(peer_device, page, 0, l,
 >>>>>>> v3.18
@@ -2534,9 +3120,15 @@ static int _drbd_send_zc_ee(struct drbd_peer_device *peer_device,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 bio_flags_to_wire(struct drbd_conf *mdev, unsigned long bi_rw)
 {
 	if (mdev->tconn->agreed_pro_version >= 95)
+=======
+static u32 bio_flags_to_wire(struct drbd_connection *connection, unsigned long bi_rw)
+{
+	if (connection->agreed_pro_version >= 95)
+>>>>>>> v3.18
 =======
 static u32 bio_flags_to_wire(struct drbd_connection *connection, unsigned long bi_rw)
 {
@@ -2550,6 +3142,7 @@ static u32 bio_flags_to_wire(struct drbd_connection *connection, unsigned long b
 		return bi_rw & REQ_SYNC ? DP_RW_SYNC : 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Used to send write requests
  * R_PRIMARY -> Peer	(P_DATA)
@@ -2566,6 +3159,8 @@ int drbd_send_dblock(struct drbd_conf *mdev, struct drbd_request *req)
 	p = drbd_prepare_command(mdev, sock);
 	dgs = mdev->tconn->integrity_tfm ? crypto_hash_digestsize(mdev->tconn->integrity_tfm) : 0;
 =======
+=======
+>>>>>>> v3.18
 /* Used to send write or TRIM aka REQ_DISCARD requests
  * R_PRIMARY -> Peer	(P_DATA, P_TRIM)
  */
@@ -2582,12 +3177,16 @@ int drbd_send_dblock(struct drbd_peer_device *peer_device, struct drbd_request *
 	p = drbd_prepare_command(peer_device, sock);
 	digest_size = peer_device->connection->integrity_tfm ?
 		      crypto_hash_digestsize(peer_device->connection->integrity_tfm) : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!p)
 		return -EIO;
 	p->sector = cpu_to_be64(req->i.sector);
 	p->block_id = (unsigned long)req;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p->seq_num = cpu_to_be32(atomic_inc_return(&mdev->packet_seq));
 	dp_flags = bio_flags_to_wire(mdev, req->master_bio->bi_rw);
@@ -2605,6 +3204,8 @@ int drbd_send_dblock(struct drbd_peer_device *peer_device, struct drbd_request *
 		drbd_csum_bio(mdev, mdev->tconn->integrity_tfm, req->master_bio, p + 1);
 	err = __send_command(mdev->tconn, mdev->vnr, sock, P_DATA, sizeof(*p) + dgs, NULL, req->i.size);
 =======
+=======
+>>>>>>> v3.18
 	p->seq_num = cpu_to_be32(atomic_inc_return(&device->packet_seq));
 	dp_flags = bio_flags_to_wire(peer_device->connection, req->master_bio->bi_rw);
 	if (device->state.conn >= C_SYNC_SOURCE &&
@@ -2633,6 +3234,9 @@ int drbd_send_dblock(struct drbd_peer_device *peer_device, struct drbd_request *
 	if (digest_size)
 		drbd_csum_bio(peer_device->connection->integrity_tfm, req->master_bio, p + 1);
 	err = __send_command(peer_device->connection, device->vnr, sock, P_DATA, sizeof(*p) + digest_size, NULL, req->i.size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!err) {
 		/* For protocol A, we have to memcpy the payload into
@@ -2646,6 +3250,7 @@ int drbd_send_dblock(struct drbd_peer_device *peer_device, struct drbd_request *
 		 * out ok after sending on this side, but does not fit on the
 		 * receiving side, we sure have detected corruption elsewhere.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(req->rq_state & (RQ_EXP_RECEIVE_ACK | RQ_EXP_WRITE_ACK)) || dgs)
 			err = _drbd_send_bio(mdev, req->master_bio);
@@ -2668,6 +3273,8 @@ int drbd_send_dblock(struct drbd_peer_device *peer_device, struct drbd_request *
 		} */
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (!(req->rq_state & (RQ_EXP_RECEIVE_ACK | RQ_EXP_WRITE_ACK)) || digest_size)
 			err = _drbd_send_bio(peer_device, req->master_bio);
 		else
@@ -2689,6 +3296,9 @@ int drbd_send_dblock(struct drbd_peer_device *peer_device, struct drbd_request *
 		} */
 	}
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&sock->mutex);  /* locked by drbd_prepare_command() */
 
@@ -2699,6 +3309,7 @@ out:
  *  Peer       -> (diskless) R_PRIMARY   (P_DATA_REPLY)
  *  C_SYNC_SOURCE -> C_SYNC_TARGET         (P_RS_DATA_REPLY)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drbd_send_block(struct drbd_conf *mdev, enum drbd_packet cmd,
 		    struct drbd_peer_request *peer_req)
@@ -2713,6 +3324,8 @@ int drbd_send_block(struct drbd_conf *mdev, enum drbd_packet cmd,
 
 	dgs = mdev->tconn->integrity_tfm ? crypto_hash_digestsize(mdev->tconn->integrity_tfm) : 0;
 =======
+=======
+>>>>>>> v3.18
 int drbd_send_block(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 		    struct drbd_peer_request *peer_req)
 {
@@ -2727,6 +3340,9 @@ int drbd_send_block(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 
 	digest_size = peer_device->connection->integrity_tfm ?
 		      crypto_hash_digestsize(peer_device->connection->integrity_tfm) : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!p)
@@ -2736,17 +3352,23 @@ int drbd_send_block(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 	p->seq_num = 0;  /* unused */
 	p->dp_flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dgs)
 		drbd_csum_ee(mdev, mdev->tconn->integrity_tfm, peer_req, p + 1);
 	err = __send_command(mdev->tconn, mdev->vnr, sock, cmd, sizeof(*p) + dgs, NULL, peer_req->i.size);
 	if (!err)
 		err = _drbd_send_zc_ee(mdev, peer_req);
 =======
+=======
+>>>>>>> v3.18
 	if (digest_size)
 		drbd_csum_ee(peer_device->connection->integrity_tfm, peer_req, p + 1);
 	err = __send_command(peer_device->connection, device->vnr, sock, cmd, sizeof(*p) + digest_size, NULL, peer_req->i.size);
 	if (!err)
 		err = _drbd_send_zc_ee(peer_device, peer_req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&sock->mutex);  /* locked by drbd_prepare_command() */
 
@@ -2754,7 +3376,11 @@ int drbd_send_block(struct drbd_peer_device *peer_device, enum drbd_packet cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_out_of_sync(struct drbd_conf *mdev, struct drbd_request *req)
+=======
+int drbd_send_out_of_sync(struct drbd_peer_device *peer_device, struct drbd_request *req)
+>>>>>>> v3.18
 =======
 int drbd_send_out_of_sync(struct drbd_peer_device *peer_device, struct drbd_request *req)
 >>>>>>> v3.18
@@ -2763,8 +3389,13 @@ int drbd_send_out_of_sync(struct drbd_peer_device *peer_device, struct drbd_requ
 	struct p_block_desc *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sock = &mdev->tconn->data;
 	p = drbd_prepare_command(mdev, sock);
+=======
+	sock = &peer_device->connection->data;
+	p = drbd_prepare_command(peer_device, sock);
+>>>>>>> v3.18
 =======
 	sock = &peer_device->connection->data;
 	p = drbd_prepare_command(peer_device, sock);
@@ -2774,7 +3405,11 @@ int drbd_send_out_of_sync(struct drbd_peer_device *peer_device, struct drbd_requ
 	p->sector = cpu_to_be64(req->i.sector);
 	p->blksize = cpu_to_be32(req->i.size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drbd_send_command(mdev, sock, P_OUT_OF_SYNC, sizeof(*p), NULL, 0);
+=======
+	return drbd_send_command(peer_device, sock, P_OUT_OF_SYNC, sizeof(*p), NULL, 0);
+>>>>>>> v3.18
 =======
 	return drbd_send_command(peer_device, sock, P_OUT_OF_SYNC, sizeof(*p), NULL, 0);
 >>>>>>> v3.18
@@ -2797,7 +3432,11 @@ int drbd_send_out_of_sync(struct drbd_peer_device *peer_device, struct drbd_requ
  * you must have down()ed the appropriate [m]sock_mutex elsewhere!
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send(struct drbd_tconn *tconn, struct socket *sock,
+=======
+int drbd_send(struct drbd_connection *connection, struct socket *sock,
+>>>>>>> v3.18
 =======
 int drbd_send(struct drbd_connection *connection, struct socket *sock,
 >>>>>>> v3.18
@@ -2822,17 +3461,23 @@ int drbd_send(struct drbd_connection *connection, struct socket *sock,
 	msg.msg_flags      = msg_flags | MSG_NOSIGNAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sock == tconn->data.socket) {
 		rcu_read_lock();
 		tconn->ko_count = rcu_dereference(tconn->net_conf)->ko_count;
 		rcu_read_unlock();
 		drbd_update_congested(tconn);
 =======
+=======
+>>>>>>> v3.18
 	if (sock == connection->data.socket) {
 		rcu_read_lock();
 		connection->ko_count = rcu_dereference(connection->net_conf)->ko_count;
 		rcu_read_unlock();
 		drbd_update_congested(connection);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	do {
@@ -2846,9 +3491,15 @@ int drbd_send(struct drbd_connection *connection, struct socket *sock,
  * otherwise wake_asender() might interrupt some send_*Ack !
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rv = kernel_sendmsg(sock, &msg, &iov, 1, iov.iov_len);
 		if (rv == -EAGAIN) {
 			if (we_should_drop_the_connection(tconn, sock))
+=======
+		rv = kernel_sendmsg(sock, &msg, &iov, 1, size);
+		if (rv == -EAGAIN) {
+			if (we_should_drop_the_connection(connection, sock))
+>>>>>>> v3.18
 =======
 		rv = kernel_sendmsg(sock, &msg, &iov, 1, size);
 		if (rv == -EAGAIN) {
@@ -2870,6 +3521,7 @@ int drbd_send(struct drbd_connection *connection, struct socket *sock,
 	} while (sent < size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sock == tconn->data.socket)
 		clear_bit(NET_CONGESTED, &tconn->flags);
 
@@ -2882,6 +3534,8 @@ int drbd_send(struct drbd_connection *connection, struct socket *sock,
 		} else
 			conn_request_state(tconn, NS(conn, C_TIMEOUT), CS_HARD);
 =======
+=======
+>>>>>>> v3.18
 	if (sock == connection->data.socket)
 		clear_bit(NET_CONGESTED, &connection->flags);
 
@@ -2893,6 +3547,9 @@ int drbd_send(struct drbd_connection *connection, struct socket *sock,
 			conn_request_state(connection, NS(conn, C_BROKEN_PIPE), CS_HARD);
 		} else
 			conn_request_state(connection, NS(conn, C_TIMEOUT), CS_HARD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2905,7 +3562,11 @@ int drbd_send(struct drbd_connection *connection, struct socket *sock,
  * Returns 0 upon success and a negative error value otherwise.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_send_all(struct drbd_tconn *tconn, struct socket *sock, void *buffer,
+=======
+int drbd_send_all(struct drbd_connection *connection, struct socket *sock, void *buffer,
+>>>>>>> v3.18
 =======
 int drbd_send_all(struct drbd_connection *connection, struct socket *sock, void *buffer,
 >>>>>>> v3.18
@@ -2914,7 +3575,11 @@ int drbd_send_all(struct drbd_connection *connection, struct socket *sock, void 
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = drbd_send(tconn, sock, buffer, size, msg_flags);
+=======
+	err = drbd_send(connection, sock, buffer, size, msg_flags);
+>>>>>>> v3.18
 =======
 	err = drbd_send(connection, sock, buffer, size, msg_flags);
 >>>>>>> v3.18
@@ -2928,7 +3593,11 @@ int drbd_send_all(struct drbd_connection *connection, struct socket *sock, void 
 static int drbd_open(struct block_device *bdev, fmode_t mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev = bdev->bd_disk->private_data;
+=======
+	struct drbd_device *device = bdev->bd_disk->private_data;
+>>>>>>> v3.18
 =======
 	struct drbd_device *device = bdev->bd_disk->private_data;
 >>>>>>> v3.18
@@ -2937,17 +3606,23 @@ static int drbd_open(struct block_device *bdev, fmode_t mode)
 
 	mutex_lock(&drbd_main_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&mdev->tconn->req_lock, flags);
 	/* to have a stable mdev->state.role
 	 * and no race with updating open_cnt */
 
 	if (mdev->state.role != R_PRIMARY) {
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&device->resource->req_lock, flags);
 	/* to have a stable device->state.role
 	 * and no race with updating open_cnt */
 
 	if (device->state.role != R_PRIMARY) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (mode & FMODE_WRITE)
 			rv = -EROFS;
@@ -2957,8 +3632,13 @@ static int drbd_open(struct block_device *bdev, fmode_t mode)
 
 	if (!rv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mdev->open_cnt++;
 	spin_unlock_irqrestore(&mdev->tconn->req_lock, flags);
+=======
+		device->open_cnt++;
+	spin_unlock_irqrestore(&device->resource->req_lock, flags);
+>>>>>>> v3.18
 =======
 		device->open_cnt++;
 	spin_unlock_irqrestore(&device->resource->req_lock, flags);
@@ -2970,6 +3650,7 @@ static int drbd_open(struct block_device *bdev, fmode_t mode)
 
 static void drbd_release(struct gendisk *gd, fmode_t mode)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drbd_conf *mdev = gd->private_data;
 	mutex_lock(&drbd_main_mutex);
@@ -2983,6 +3664,8 @@ static void drbd_set_defaults(struct drbd_conf *mdev)
 	 * between big endian and little endian */
 	mdev->state = (union drbd_dev_state) {
 =======
+=======
+>>>>>>> v3.18
 	struct drbd_device *device = gd->private_data;
 	mutex_lock(&drbd_main_mutex);
 	device->open_cnt--;
@@ -2994,6 +3677,9 @@ static void drbd_set_defaults(struct drbd_device *device)
 	/* Beware! The actual layout differs
 	 * between big endian and little endian */
 	device->state = (union drbd_dev_state) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		{ .role = R_SECONDARY,
 		  .peer = R_UNKNOWN,
@@ -3004,7 +3690,11 @@ static void drbd_set_defaults(struct drbd_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drbd_init_set_defaults(struct drbd_conf *mdev)
+=======
+void drbd_init_set_defaults(struct drbd_device *device)
+>>>>>>> v3.18
 =======
 void drbd_init_set_defaults(struct drbd_device *device)
 >>>>>>> v3.18
@@ -3012,6 +3702,7 @@ void drbd_init_set_defaults(struct drbd_device *device)
 	/* the memset(,0,) did most of this.
 	 * note: only assignments, no allocation in here */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drbd_set_defaults(mdev);
 
@@ -3133,6 +3824,8 @@ void drbd_mdev_cleanup(struct drbd_conf *mdev)
 
 	drbd_set_defaults(mdev);
 =======
+=======
+>>>>>>> v3.18
 	drbd_set_defaults(device);
 
 	atomic_set(&device->ap_bio_cnt, 0);
@@ -3243,6 +3936,9 @@ void drbd_device_cleanup(struct drbd_device *device)
 	D_ASSERT(device, list_empty(&device->unplug_work.list));
 
 	drbd_set_defaults(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3259,7 +3955,11 @@ static void drbd_destroy_mempools(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* D_ASSERT(atomic_read(&drbd_pp_vacant)==0); */
+=======
+	/* D_ASSERT(device, atomic_read(&drbd_pp_vacant)==0); */
+>>>>>>> v3.18
 =======
 	/* D_ASSERT(device, atomic_read(&drbd_pp_vacant)==0); */
 >>>>>>> v3.18
@@ -3369,6 +4069,7 @@ Enomem:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int drbd_notify_sys(struct notifier_block *this, unsigned long code,
 	void *unused)
 {
@@ -3419,6 +4120,8 @@ void drbd_minor_destroy(struct kref *kref)
 	/* paranoia asserts */
 	D_ASSERT(mdev->open_cnt == 0);
 =======
+=======
+>>>>>>> v3.18
 static void drbd_release_all_peer_reqs(struct drbd_device *device)
 {
 	int rr;
@@ -3455,12 +4158,16 @@ void drbd_destroy_device(struct kref *kref)
 
 	/* paranoia asserts */
 	D_ASSERT(device, device->open_cnt == 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* end paranoia asserts */
 
 	/* cleanup stuff that may have been allocated during
 	 * device (re-)configuration or state changes */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mdev->this_bdev)
 		bdput(mdev->this_bdev);
@@ -3486,6 +4193,8 @@ void drbd_destroy_device(struct kref *kref)
 
 	kref_put(&tconn->kref, &conn_destroy);
 =======
+=======
+>>>>>>> v3.18
 	if (device->this_bdev)
 		bdput(device->this_bdev);
 
@@ -3517,6 +4226,9 @@ void drbd_destroy_device(struct kref *kref)
 	memset(device, 0xfd, sizeof(*device));
 	kfree(device);
 	kref_put(&resource->kref, drbd_destroy_resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3543,6 +4255,7 @@ static void do_retry(struct work_struct *ws)
 
 	list_for_each_entry_safe(req, tmp, &writes, tl_requests) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct drbd_conf *mdev = req->w.mdev;
 		struct bio *bio = req->master_bio;
 		unsigned long start_time = req->start_time;
@@ -3550,12 +4263,17 @@ static void do_retry(struct work_struct *ws)
 
 		expected = 
 =======
+=======
+>>>>>>> v3.18
 		struct drbd_device *device = req->device;
 		struct bio *bio = req->master_bio;
 		unsigned long start_jif = req->start_jif;
 		bool expected;
 
 		expected =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			expect(atomic_read(&req->completion_ref) == 0) &&
 			expect(req->rq_state & RQ_POSTPONED) &&
@@ -3564,7 +4282,11 @@ static void do_retry(struct work_struct *ws)
 
 		if (!expected)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(DEV, "req=%p completion_ref=%d rq_state=%x\n",
+=======
+			drbd_err(device, "req=%p completion_ref=%d rq_state=%x\n",
+>>>>>>> v3.18
 =======
 			drbd_err(device, "req=%p completion_ref=%d rq_state=%x\n",
 >>>>>>> v3.18
@@ -3592,12 +4314,15 @@ static void do_retry(struct work_struct *ws)
 		/* We are not just doing generic_make_request(),
 		 * as we want to keep the start_time information. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inc_ap_bio(mdev);
 		__drbd_make_request(mdev, bio, start_time);
 	}
 }
 
 =======
+=======
+>>>>>>> v3.18
 		inc_ap_bio(device);
 		__drbd_make_request(device, bio, start_jif);
 	}
@@ -3605,6 +4330,9 @@ static void do_retry(struct work_struct *ws)
 
 /* called via drbd_req_put_completion_ref(),
  * holds resource->req_lock */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void drbd_restart_request(struct drbd_request *req)
 {
@@ -3617,7 +4345,11 @@ void drbd_restart_request(struct drbd_request *req)
 	 * have been dropped by complete_master_bio.
 	 * do_retry() needs to grab a new one. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dec_ap_bio(req->w.mdev);
+=======
+	dec_ap_bio(req->device);
+>>>>>>> v3.18
 =======
 	dec_ap_bio(req->device);
 >>>>>>> v3.18
@@ -3626,7 +4358,10 @@ void drbd_restart_request(struct drbd_request *req)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void drbd_destroy_resource(struct kref *kref)
 {
 	struct drbd_resource *resource =
@@ -3651,16 +4386,24 @@ void drbd_free_resource(struct drbd_resource *resource)
 	drbd_debugfs_resource_cleanup(resource);
 	kref_put(&resource->kref, drbd_destroy_resource);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void drbd_cleanup(void)
 {
 	unsigned int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev;
 	struct drbd_tconn *tconn, *tmp;
 
 	unregister_reboot_notifier(&drbd_notifier);
+=======
+	struct drbd_device *device;
+	struct drbd_resource *resource, *tmp;
+>>>>>>> v3.18
 =======
 	struct drbd_device *device;
 	struct drbd_resource *resource, *tmp;
@@ -3682,6 +4425,7 @@ static void drbd_cleanup(void)
 
 	drbd_genl_unregister();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	idr_for_each_entry(&minors, mdev, i) {
 		idr_remove(&minors, mdev_to_minor(mdev));
@@ -3698,6 +4442,8 @@ static void drbd_cleanup(void)
 		/* synchronize_rcu(); */
 		kref_put(&tconn->kref, &conn_destroy);
 =======
+=======
+>>>>>>> v3.18
 	drbd_debugfs_cleanup();
 
 	idr_for_each_entry(&drbd_devices, device, i)
@@ -3707,6 +4453,9 @@ static void drbd_cleanup(void)
 	for_each_resource_safe(resource, tmp, &drbd_resources) {
 		list_del(&resource->resources);
 		drbd_free_resource(resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3714,9 +4463,15 @@ static void drbd_cleanup(void)
 	unregister_blkdev(DRBD_MAJOR, "drbd");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idr_destroy(&minors);
 
 	printk(KERN_INFO "drbd: module cleanup done.\n");
+=======
+	idr_destroy(&drbd_devices);
+
+	pr_info("module cleanup done.\n");
+>>>>>>> v3.18
 =======
 	idr_destroy(&drbd_devices);
 
@@ -3734,7 +4489,11 @@ static void drbd_cleanup(void)
 static int drbd_congested(void *congested_data, int bdi_bits)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev = congested_data;
+=======
+	struct drbd_device *device = congested_data;
+>>>>>>> v3.18
 =======
 	struct drbd_device *device = congested_data;
 >>>>>>> v3.18
@@ -3743,7 +4502,11 @@ static int drbd_congested(void *congested_data, int bdi_bits)
 	int r = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!may_inc_ap_bio(mdev)) {
+=======
+	if (!may_inc_ap_bio(device)) {
+>>>>>>> v3.18
 =======
 	if (!may_inc_ap_bio(device)) {
 >>>>>>> v3.18
@@ -3754,7 +4517,11 @@ static int drbd_congested(void *congested_data, int bdi_bits)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(CALLBACK_PENDING, &mdev->tconn->flags)) {
+=======
+	if (test_bit(CALLBACK_PENDING, &first_peer_device(device)->connection->flags)) {
+>>>>>>> v3.18
 =======
 	if (test_bit(CALLBACK_PENDING, &first_peer_device(device)->connection->flags)) {
 >>>>>>> v3.18
@@ -3765,15 +4532,21 @@ static int drbd_congested(void *congested_data, int bdi_bits)
 		 * finish.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!get_ldev_if_state(mdev, D_UP_TO_DATE))
 			r |= (1 << BDI_sync_congested);
 		else
 			put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 		if (!get_ldev_if_state(device, D_UP_TO_DATE))
 			r |= (1 << BDI_sync_congested);
 		else
 			put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r &= bdi_bits;
 		reason = 'c';
@@ -3781,22 +4554,33 @@ static int drbd_congested(void *congested_data, int bdi_bits)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_ldev(mdev)) {
 		q = bdev_get_queue(mdev->ldev->backing_bdev);
 		r = bdi_congested(&q->backing_dev_info, bdi_bits);
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 	if (get_ldev(device)) {
 		q = bdev_get_queue(device->ldev->backing_bdev);
 		r = bdi_congested(&q->backing_dev_info, bdi_bits);
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (r)
 			reason = 'b';
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bdi_bits & (1 << BDI_async_congested) && test_bit(NET_CONGESTED, &mdev->tconn->flags)) {
+=======
+	if (bdi_bits & (1 << BDI_async_congested) &&
+	    test_bit(NET_CONGESTED, &first_peer_device(device)->connection->flags)) {
+>>>>>>> v3.18
 =======
 	if (bdi_bits & (1 << BDI_async_congested) &&
 	    test_bit(NET_CONGESTED, &first_peer_device(device)->connection->flags)) {
@@ -3807,7 +4591,11 @@ static int drbd_congested(void *congested_data, int bdi_bits)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdev->congestion_reason = reason;
+=======
+	device->congestion_reason = reason;
+>>>>>>> v3.18
 =======
 	device->congestion_reason = reason;
 >>>>>>> v3.18
@@ -3822,10 +4610,13 @@ static void drbd_init_workqueue(struct drbd_work_queue* wq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drbd_tconn *conn_get_by_name(const char *name)
 {
 	struct drbd_tconn *tconn;
 =======
+=======
+>>>>>>> v3.18
 struct completion_work {
 	struct drbd_work w;
 	struct completion done;
@@ -3853,12 +4644,16 @@ void drbd_flush_workqueue(struct drbd_work_queue *work_queue)
 struct drbd_resource *drbd_find_resource(const char *name)
 {
 	struct drbd_resource *resource;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!name || !name[0])
 		return NULL;
 
 	rcu_read_lock();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry_rcu(tconn, &drbd_tconns, all_tconn) {
 		if (!strcmp(tconn->name, name)) {
@@ -3892,6 +4687,8 @@ found:
 	rcu_read_unlock();
 	return tconn;
 =======
+=======
+>>>>>>> v3.18
 	for_each_resource_rcu(resource, &drbd_resources) {
 		if (!strcmp(resource->name, name)) {
 			kref_get(&resource->kref);
@@ -3926,6 +4723,9 @@ struct drbd_connection *conn_get_by_addrs(void *my_addr, int my_addr_len,
 found:
 	rcu_read_unlock();
 	return connection;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3946,6 +4746,7 @@ static void drbd_free_socket(struct drbd_socket *socket)
 	free_page((unsigned long) socket->rbuf);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void conn_free_crypto(struct drbd_tconn *tconn)
 {
@@ -3971,6 +4772,8 @@ void conn_free_crypto(struct drbd_tconn *tconn)
 int set_resource_options(struct drbd_tconn *tconn, struct res_opts *res_opts)
 {
 =======
+=======
+>>>>>>> v3.18
 void conn_free_crypto(struct drbd_connection *connection)
 {
 	drbd_free_sock(connection);
@@ -3995,6 +4798,9 @@ void conn_free_crypto(struct drbd_connection *connection)
 int set_resource_options(struct drbd_resource *resource, struct res_opts *res_opts)
 {
 	struct drbd_connection *connection;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpumask_var_t new_cpu_mask;
 	int err;
@@ -4009,12 +4815,15 @@ int set_resource_options(struct drbd_resource *resource, struct res_opts *res_op
 	/* silently ignore cpu mask on UP kernel */
 	if (nr_cpu_ids > 1 && res_opts->cpu_mask[0] != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* FIXME: Get rid of constant 32 here */
 		err = bitmap_parse(res_opts->cpu_mask, 32,
 				   cpumask_bits(new_cpu_mask), nr_cpu_ids);
 		if (err) {
 			conn_warn(tconn, "bitmap_parse() failed with %d\n", err);
 =======
+=======
+>>>>>>> v3.18
 		err = bitmap_parse(res_opts->cpu_mask, DRBD_CPU_MASK_SIZE,
 				   cpumask_bits(new_cpu_mask), nr_cpu_ids);
 		if (err == -EOVERFLOW) {
@@ -4033,11 +4842,15 @@ int set_resource_options(struct drbd_resource *resource, struct res_opts *res_op
 		}
 		if (err) {
 			drbd_warn(resource, "bitmap_parse() failed with %d\n", err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* retcode = ERR_CPU_MASK_PARSE; */
 			goto fail;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tconn->res_opts = *res_opts;
 	if (!cpumask_equal(tconn->cpu_mask, new_cpu_mask)) {
@@ -4047,6 +4860,8 @@ int set_resource_options(struct drbd_resource *resource, struct res_opts *res_op
 		tconn->asender.reset_cpu_mask = 1;
 		tconn->worker.reset_cpu_mask = 1;
 =======
+=======
+>>>>>>> v3.18
 	resource->res_opts = *res_opts;
 	if (cpumask_empty(new_cpu_mask))
 		drbd_calc_cpu_mask(&new_cpu_mask);
@@ -4057,6 +4872,9 @@ int set_resource_options(struct drbd_resource *resource, struct res_opts *res_op
 			connection->asender.reset_cpu_mask = 1;
 			connection->worker.reset_cpu_mask = 1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	err = 0;
@@ -4067,6 +4885,7 @@ fail:
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* caller must be under genl_lock() */
 struct drbd_tconn *conn_create(const char *name, struct res_opts *res_opts)
@@ -4198,6 +5017,8 @@ enum drbd_ret_code conn_new_minor(struct drbd_tconn *tconn, unsigned int minor, 
 
 	drbd_init_set_defaults(mdev);
 =======
+=======
+>>>>>>> v3.18
 struct drbd_resource *drbd_create_resource(const char *name)
 {
 	struct drbd_resource *resource;
@@ -4363,14 +5184,22 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 	device->vnr = vnr;
 
 	drbd_init_set_defaults(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	q = blk_alloc_queue(GFP_KERNEL);
 	if (!q)
 		goto out_no_q;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdev->rq_queue = q;
 	q->queuedata   = mdev;
+=======
+	device->rq_queue = q;
+	q->queuedata   = device;
+>>>>>>> v3.18
 =======
 	device->rq_queue = q;
 	q->queuedata   = device;
@@ -4380,7 +5209,11 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 	if (!disk)
 		goto out_no_disk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdev->vdisk = disk;
+=======
+	device->vdisk = disk;
+>>>>>>> v3.18
 =======
 	device->vdisk = disk;
 >>>>>>> v3.18
@@ -4393,6 +5226,7 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 	disk->fops = &drbd_ops;
 	sprintf(disk->disk_name, "drbd%d", minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk->private_data = mdev;
 
 	mdev->this_bdev = bdget(MKDEV(DRBD_MAJOR, minor));
@@ -4402,6 +5236,8 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 	q->backing_dev_info.congested_fn = drbd_congested;
 	q->backing_dev_info.congested_data = mdev;
 =======
+=======
+>>>>>>> v3.18
 	disk->private_data = device;
 
 	device->this_bdev = bdget(MKDEV(DRBD_MAJOR, minor));
@@ -4410,6 +5246,9 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 
 	q->backing_dev_info.congested_fn = drbd_congested;
 	q->backing_dev_info.congested_data = device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	blk_queue_make_request(q, drbd_make_request);
@@ -4419,6 +5258,7 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 	blk_queue_max_hw_sectors(q, DRBD_MAX_BIO_SIZE_SAFE >> 8);
 	blk_queue_bounce_limit(q, BLK_BOUNCE_ANY);
 	blk_queue_merge_bvec(q, drbd_merge_bvec);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	q->queue_lock = &mdev->tconn->req_lock; /* needed since we use */
 
@@ -4453,6 +5293,8 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 		err = ERR_NOMEM;
 		drbd_msg_put_info("unable to create submit workqueue");
 =======
+=======
+>>>>>>> v3.18
 	q->queue_lock = &resource->req_lock;
 
 	device->md_io.page = alloc_page(GFP_KERNEL);
@@ -4510,11 +5352,15 @@ enum drbd_ret_code drbd_create_device(struct drbd_config_context *adm_ctx, unsig
 	if (init_submitter(device)) {
 		err = ERR_NOMEM;
 		drbd_msg_put_info(adm_ctx->reply_skb, "unable to create submit workqueue");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_idr_remove_vol;
 	}
 
 	add_disk(disk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kref_init(&mdev->kref); /* one ref for both idrs and the the add_disk */
 
@@ -4535,6 +5381,8 @@ out_no_minor_idr:
 out_no_bitmap:
 	__free_page(mdev->md_io_page);
 =======
+=======
+>>>>>>> v3.18
 
 	/* inherit the connection state */
 	device->state.conn = first_connection(resource)->cstate;
@@ -4570,12 +5418,16 @@ out_no_minor_idr:
 	drbd_bm_cleanup(device);
 out_no_bitmap:
 	__free_page(device->md_io.page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_no_io_page:
 	put_disk(disk);
 out_no_disk:
 	blk_cleanup_queue(q);
 out_no_q:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kfree(mdev);
 	kref_put(&tconn->kref, &conn_destroy);
@@ -4584,6 +5436,8 @@ out_no_q:
 
 int __init drbd_init(void)
 =======
+=======
+>>>>>>> v3.18
 	kref_put(&resource->kref, drbd_destroy_resource);
 	kfree(device);
 	return err;
@@ -4612,14 +5466,21 @@ void drbd_delete_device(struct drbd_device *device)
 }
 
 static int __init drbd_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err;
 
 	if (minor_count < DRBD_MINOR_COUNT_MIN || minor_count > DRBD_MINOR_COUNT_MAX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "drbd: invalid minor_count (%d)\n", minor_count);
+=======
+		pr_err("invalid minor_count (%d)\n", minor_count);
+>>>>>>> v3.18
 =======
 		pr_err("invalid minor_count (%d)\n", minor_count);
 >>>>>>> v3.18
@@ -4633,8 +5494,12 @@ static int __init drbd_init(void)
 	err = register_blkdev(DRBD_MAJOR, "drbd");
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "drbd: unable to register block device major %d\n",
+=======
+		pr_err("unable to register block device major %d\n",
+>>>>>>> v3.18
 =======
 		pr_err("unable to register block device major %d\n",
 >>>>>>> v3.18
@@ -4642,6 +5507,7 @@ static int __init drbd_init(void)
 		return err;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = drbd_genl_register();
 	if (err) {
@@ -4662,6 +5528,8 @@ static int __init drbd_init(void)
 	drbd_proc = NULL; /* play safe for drbd_cleanup */
 	idr_init(&minors);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * allocate all necessary structs
 	 */
@@ -4678,12 +5546,16 @@ static int __init drbd_init(void)
 		pr_err("unable to register generic netlink family\n");
 		goto fail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = drbd_create_mempools();
 	if (err)
 		goto fail;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drbd_proc = proc_create_data("drbd", S_IFREG | S_IRUGO , NULL, &drbd_proc_fops, NULL);
 	if (!drbd_proc)	{
@@ -4698,6 +5570,8 @@ static int __init drbd_init(void)
 	if (!retry.wq) {
 		printk(KERN_ERR "drbd: unable to create retry workqueue\n");
 =======
+=======
+>>>>>>> v3.18
 	err = -ENOMEM;
 	drbd_proc = proc_create_data("drbd", S_IFREG | S_IRUGO , NULL, &drbd_proc_fops, NULL);
 	if (!drbd_proc)	{
@@ -4708,6 +5582,9 @@ static int __init drbd_init(void)
 	retry.wq = create_singlethread_workqueue("drbd-reissue");
 	if (!retry.wq) {
 		pr_err("unable to create retry workqueue\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto fail;
 	}
@@ -4715,6 +5592,7 @@ static int __init drbd_init(void)
 	spin_lock_init(&retry.lock);
 	INIT_LIST_HEAD(&retry.writes);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk(KERN_INFO "drbd: initialized. "
 	       "Version: " REL_VERSION " (api:%d/proto:%d-%d)\n",
@@ -4724,6 +5602,8 @@ static int __init drbd_init(void)
 		DRBD_MAJOR);
 
 =======
+=======
+>>>>>>> v3.18
 	if (drbd_debugfs_init())
 		pr_notice("failed to initialize debugfs -- will not be available\n");
 
@@ -4732,12 +5612,16 @@ static int __init drbd_init(void)
 	       API_VERSION, PRO_VERSION_MIN, PRO_VERSION_MAX);
 	pr_info("%s\n", drbd_buildtag());
 	pr_info("registered as block device major %d\n", DRBD_MAJOR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0; /* Success! */
 
 fail:
 	drbd_cleanup();
 	if (err == -ENOMEM)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* currently always the case */
 		printk(KERN_ERR "drbd: ran out of memory\n");
@@ -4748,6 +5632,8 @@ fail:
 
 void drbd_free_bc(struct drbd_backing_dev *ldev)
 =======
+=======
+>>>>>>> v3.18
 		pr_err("ran out of memory\n");
 	else
 		pr_err("initialization failure\n");
@@ -4755,6 +5641,9 @@ void drbd_free_bc(struct drbd_backing_dev *ldev)
 }
 
 void drbd_free_ldev(struct drbd_backing_dev *ldev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (ldev == NULL)
@@ -4767,6 +5656,7 @@ void drbd_free_ldev(struct drbd_backing_dev *ldev)
 	kfree(ldev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void drbd_free_sock(struct drbd_tconn *tconn)
 {
@@ -4800,6 +5690,8 @@ void conn_md_sync(struct drbd_tconn *tconn)
 		drbd_md_sync(mdev);
 		kref_put(&mdev->kref, &drbd_minor_destroy);
 =======
+=======
+>>>>>>> v3.18
 static void drbd_free_one_sock(struct drbd_socket *ds)
 {
 	struct socket *s;
@@ -4838,6 +5730,9 @@ void conn_md_sync(struct drbd_connection *connection)
 		rcu_read_unlock();
 		drbd_md_sync(device);
 		kref_put(&device->kref, drbd_destroy_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcu_read_lock();
 	}
@@ -4868,6 +5763,7 @@ struct meta_data_on_disk {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * drbd_md_sync() - Writes the meta data super block if the MD_DIRTY flag bit is set
  * @mdev:	DRBD device.
@@ -4878,6 +5774,8 @@ void drbd_md_sync(struct drbd_conf *mdev)
 	sector_t sector;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 
 
 void drbd_md_write(struct drbd_device *device, void *b)
@@ -4923,12 +5821,16 @@ void drbd_md_write(struct drbd_device *device, void *b)
 void drbd_md_sync(struct drbd_device *device)
 {
 	struct meta_data_on_disk *buffer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Don't accidentally change the DRBD meta data layout. */
 	BUILD_BUG_ON(UI_SIZE != 4);
 	BUILD_BUG_ON(sizeof(struct meta_data_on_disk) != 4096);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	del_timer(&mdev->md_sync_timer);
 	/* timer may be rearmed by drbd_md_mark_dirty() now. */
@@ -4938,10 +5840,16 @@ void drbd_md_sync(struct drbd_device *device)
 	/* timer may be rearmed by drbd_md_mark_dirty() now. */
 	if (!test_and_clear_bit(MD_DIRTY, &device->flags))
 >>>>>>> v3.18
+=======
+	del_timer(&device->md_sync_timer);
+	/* timer may be rearmed by drbd_md_mark_dirty() now. */
+	if (!test_and_clear_bit(MD_DIRTY, &device->flags))
+>>>>>>> v3.18
 		return;
 
 	/* We use here D_FAILED and not D_ATTACHING because we try to write
 	 * metadata even if we detach due to a disk failure! */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!get_ldev_if_state(mdev, D_FAILED))
 		return;
@@ -4990,6 +5898,8 @@ out:
 
 static int check_activity_log_stripe_size(struct drbd_conf *mdev,
 =======
+=======
+>>>>>>> v3.18
 	if (!get_ldev_if_state(device, D_FAILED))
 		return;
 
@@ -5009,6 +5919,9 @@ out:
 }
 
 static int check_activity_log_stripe_size(struct drbd_device *device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct meta_data_on_disk *on_disk,
 		struct drbd_md *in_core)
@@ -5050,7 +5963,11 @@ static int check_activity_log_stripe_size(struct drbd_device *device,
 	return 0;
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(DEV, "invalid activity log striping: al_stripes=%u, al_stripe_size_4k=%u\n",
+=======
+	drbd_err(device, "invalid activity log striping: al_stripes=%u, al_stripe_size_4k=%u\n",
+>>>>>>> v3.18
 =======
 	drbd_err(device, "invalid activity log striping: al_stripes=%u, al_stripe_size_4k=%u\n",
 >>>>>>> v3.18
@@ -5059,7 +5976,11 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int check_offsets_and_sizes(struct drbd_conf *mdev, struct drbd_backing_dev *bdev)
+=======
+static int check_offsets_and_sizes(struct drbd_device *device, struct drbd_backing_dev *bdev)
+>>>>>>> v3.18
 =======
 static int check_offsets_and_sizes(struct drbd_device *device, struct drbd_backing_dev *bdev)
 >>>>>>> v3.18
@@ -5130,7 +6051,11 @@ static int check_offsets_and_sizes(struct drbd_device *device, struct drbd_backi
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(DEV, "meta data offsets don't make sense: idx=%d "
+=======
+	drbd_err(device, "meta data offsets don't make sense: idx=%d "
+>>>>>>> v3.18
 =======
 	drbd_err(device, "meta data offsets don't make sense: idx=%d "
 >>>>>>> v3.18
@@ -5149,7 +6074,11 @@ err:
 /**
  * drbd_md_read() - Reads in the meta data super block
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -5160,9 +6089,15 @@ err:
  *
  * Called exactly once during drbd_adm_attach(), while still being D_DISKLESS,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * even before @bdev is assigned to @mdev->ldev.
  */
 int drbd_md_read(struct drbd_conf *mdev, struct drbd_backing_dev *bdev)
+=======
+ * even before @bdev is assigned to @device->ldev.
+ */
+int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
+>>>>>>> v3.18
 =======
  * even before @bdev is assigned to @device->ldev.
  */
@@ -5174,15 +6109,21 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 	int i, rv = NO_ERROR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mdev->state.disk != D_DISKLESS)
 		return ERR_DISK_CONFIGURED;
 
 	buffer = drbd_md_get_buffer(mdev);
 =======
+=======
+>>>>>>> v3.18
 	if (device->state.disk != D_DISKLESS)
 		return ERR_DISK_CONFIGURED;
 
 	buffer = drbd_md_get_buffer(device, __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!buffer)
 		return ERR_NOMEM;
@@ -5193,15 +6134,21 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 	bdev->md.md_offset = drbd_md_ss(bdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drbd_md_sync_page_io(mdev, bdev, bdev->md.md_offset, READ)) {
 		/* NOTE: can't do normal error processing here as this is
 		   called BEFORE disk is attached */
 		dev_err(DEV, "Error while reading metadata.\n");
 =======
+=======
+>>>>>>> v3.18
 	if (drbd_md_sync_page_io(device, bdev, bdev->md.md_offset, READ)) {
 		/* NOTE: can't do normal error processing here as this is
 		   called BEFORE disk is attached */
 		drbd_err(device, "Error while reading metadata.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rv = ERR_IO_MD_DISK;
 		goto err;
@@ -5213,7 +6160,11 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 	    (magic == DRBD_MD_MAGIC_08 && !(flags & MDF_AL_CLEAN))) {
 			/* btw: that's Activity Log clean, not "all" clean. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(DEV, "Found unclean meta data. Did you \"drbdadm apply-al\"?\n");
+=======
+		drbd_err(device, "Found unclean meta data. Did you \"drbdadm apply-al\"?\n");
+>>>>>>> v3.18
 =======
 		drbd_err(device, "Found unclean meta data. Did you \"drbdadm apply-al\"?\n");
 >>>>>>> v3.18
@@ -5225,9 +6176,15 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 	if (magic != DRBD_MD_MAGIC_08) {
 		if (magic == DRBD_MD_MAGIC_07)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(DEV, "Found old (0.7) meta data magic. Did you \"drbdadm create-md\"?\n");
 		else
 			dev_err(DEV, "Meta data magic not found. Did you \"drbdadm create-md\"?\n");
+=======
+			drbd_err(device, "Found old (0.7) meta data magic. Did you \"drbdadm create-md\"?\n");
+		else
+			drbd_err(device, "Meta data magic not found. Did you \"drbdadm create-md\"?\n");
+>>>>>>> v3.18
 =======
 			drbd_err(device, "Found old (0.7) meta data magic. Did you \"drbdadm create-md\"?\n");
 		else
@@ -5238,7 +6195,11 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 
 	if (be32_to_cpu(buffer->bm_bytes_per_bit) != BM_BLOCK_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(DEV, "unexpected bm_bytes_per_bit: %u (expected %u)\n",
+=======
+		drbd_err(device, "unexpected bm_bytes_per_bit: %u (expected %u)\n",
+>>>>>>> v3.18
 =======
 		drbd_err(device, "unexpected bm_bytes_per_bit: %u (expected %u)\n",
 >>>>>>> v3.18
@@ -5259,6 +6220,7 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 	bdev->md.bm_offset = be32_to_cpu(buffer->bm_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (check_activity_log_stripe_size(mdev, buffer, &bdev->md))
 		goto err;
 	if (check_offsets_and_sizes(mdev, bdev))
@@ -5267,6 +6229,8 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 	if (be32_to_cpu(buffer->bm_offset) != bdev->md.bm_offset) {
 		dev_err(DEV, "unexpected bm_offset: %d (expected %d)\n",
 =======
+=======
+>>>>>>> v3.18
 	if (check_activity_log_stripe_size(device, buffer, &bdev->md))
 		goto err;
 	if (check_offsets_and_sizes(device, bdev))
@@ -5274,13 +6238,20 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 
 	if (be32_to_cpu(buffer->bm_offset) != bdev->md.bm_offset) {
 		drbd_err(device, "unexpected bm_offset: %d (expected %d)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    be32_to_cpu(buffer->bm_offset), bdev->md.bm_offset);
 		goto err;
 	}
 	if (be32_to_cpu(buffer->md_size_sect) != bdev->md.md_size_sect) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(DEV, "unexpected md_size: %u (expected %u)\n",
+=======
+		drbd_err(device, "unexpected md_size: %u (expected %u)\n",
+>>>>>>> v3.18
 =======
 		drbd_err(device, "unexpected md_size: %u (expected %u)\n",
 >>>>>>> v3.18
@@ -5290,6 +6261,7 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 
 	rv = NO_ERROR;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(&mdev->tconn->req_lock);
 	if (mdev->state.conn < C_CONNECTED) {
@@ -5303,6 +6275,8 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
  err:
 	drbd_md_put_buffer(mdev);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&device->resource->req_lock);
 	if (device->state.conn < C_CONNECTED) {
 		unsigned int peer;
@@ -5314,6 +6288,9 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 
  err:
 	drbd_md_put_buffer(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;
@@ -5322,7 +6299,11 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
 /**
  * drbd_md_mark_dirty() - Mark meta data super block as dirty
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -5332,6 +6313,7 @@ int drbd_md_read(struct drbd_device *device, struct drbd_backing_dev *bdev)
  * timer that ensures that within five seconds you have to call drbd_md_sync().
  */
 #ifdef DEBUG
+<<<<<<< HEAD
 <<<<<<< HEAD
 void drbd_md_mark_dirty_(struct drbd_conf *mdev, unsigned int line, const char *func)
 {
@@ -5351,6 +6333,8 @@ void drbd_md_mark_dirty(struct drbd_conf *mdev)
 
 void drbd_uuid_move_history(struct drbd_conf *mdev) __must_hold(local)
 =======
+=======
+>>>>>>> v3.18
 void drbd_md_mark_dirty_(struct drbd_device *device, unsigned int line, const char *func)
 {
 	if (!test_and_set_bit(MD_DIRTY, &device->flags)) {
@@ -5368,11 +6352,15 @@ void drbd_md_mark_dirty(struct drbd_device *device)
 #endif
 
 void drbd_uuid_move_history(struct drbd_device *device) __must_hold(local)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
 
 	for (i = UI_HISTORY_START; i < UI_HISTORY_END; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mdev->ldev->md.uuid[i+1] = mdev->ldev->md.uuid[i];
 }
@@ -5382,6 +6370,8 @@ void __drbd_uuid_set(struct drbd_conf *mdev, int idx, u64 val) __must_hold(local
 	if (idx == UI_CURRENT) {
 		if (mdev->state.role == R_PRIMARY)
 =======
+=======
+>>>>>>> v3.18
 		device->ldev->md.uuid[i+1] = device->ldev->md.uuid[i];
 }
 
@@ -5389,11 +6379,15 @@ void __drbd_uuid_set(struct drbd_device *device, int idx, u64 val) __must_hold(l
 {
 	if (idx == UI_CURRENT) {
 		if (device->state.role == R_PRIMARY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			val |= 1;
 		else
 			val &= ~((u64)1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		drbd_set_ed_uuid(mdev, val);
 	}
@@ -5421,6 +6415,8 @@ void drbd_uuid_set(struct drbd_conf *mdev, int idx, u64 val) __must_hold(local)
 	__drbd_uuid_set(mdev, idx, val);
 	spin_unlock_irqrestore(&mdev->ldev->md.uuid_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		drbd_set_ed_uuid(device, val);
 	}
 
@@ -5446,13 +6442,20 @@ void drbd_uuid_set(struct drbd_device *device, int idx, u64 val) __must_hold(loc
 	}
 	__drbd_uuid_set(device, idx, val);
 	spin_unlock_irqrestore(&device->ldev->md.uuid_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_uuid_new_current() - Creates a new current UUID
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -5461,7 +6464,11 @@ void drbd_uuid_set(struct drbd_device *device, int idx, u64 val) __must_hold(loc
  * the bitmap slot. Causes an incremental resync upon next connect.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drbd_uuid_new_current(struct drbd_conf *mdev) __must_hold(local)
+=======
+void drbd_uuid_new_current(struct drbd_device *device) __must_hold(local)
+>>>>>>> v3.18
 =======
 void drbd_uuid_new_current(struct drbd_device *device) __must_hold(local)
 >>>>>>> v3.18
@@ -5471,6 +6478,7 @@ void drbd_uuid_new_current(struct drbd_device *device) __must_hold(local)
 
 	get_random_bytes(&val, sizeof(u64));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(&mdev->ldev->md.uuid_lock);
 	bm_uuid = mdev->ldev->md.uuid[UI_BITMAP];
@@ -5509,6 +6517,8 @@ void drbd_uuid_set_bm(struct drbd_conf *mdev, u64 val) __must_hold(local)
 
 	drbd_md_mark_dirty(mdev);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&device->ldev->md.uuid_lock);
 	bm_uuid = device->ldev->md.uuid[UI_BITMAP];
 
@@ -5545,11 +6555,15 @@ void drbd_uuid_set_bm(struct drbd_device *device, u64 val) __must_hold(local)
 	spin_unlock_irqrestore(&device->ldev->md.uuid_lock, flags);
 
 	drbd_md_mark_dirty(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_bmio_set_n_write() - io_fn for drbd_queue_bitmap_io() or drbd_bitmap_io()
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mdev:	DRBD device.
  *
@@ -5573,6 +6587,8 @@ int drbd_bmio_set_n_write(struct drbd_conf *mdev)
 
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device.
  *
  * Sets all bits in the bitmap and writes the whole bitmap to stable storage.
@@ -5590,6 +6606,9 @@ int drbd_bmio_set_n_write(struct drbd_device *device) __must_hold(local)
 	if (!rv) {
 		drbd_md_clear_flag(device, MDF_FULL_SYNC);
 		drbd_md_sync(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -5598,6 +6617,7 @@ int drbd_bmio_set_n_write(struct drbd_device *device) __must_hold(local)
 
 /**
  * drbd_bmio_clear_n_write() - io_fn for drbd_queue_bitmap_io() or drbd_bitmap_io()
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mdev:	DRBD device.
  *
@@ -5616,6 +6636,8 @@ int drbd_bmio_clear_n_write(struct drbd_conf *mdev)
 
 	return rv;
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device.
  *
  * Clears all bits in the bitmap and writes the whole bitmap to stable storage.
@@ -5625,11 +6647,15 @@ int drbd_bmio_clear_n_write(struct drbd_device *device) __must_hold(local)
 	drbd_resume_al(device);
 	drbd_bm_clear_all(device);
 	return drbd_bm_write(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int w_bitmap_io(struct drbd_work *w, int unused)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bm_io_work *work = container_of(w, struct bm_io_work, w);
 	struct drbd_conf *mdev = w->mdev;
@@ -5652,6 +6678,8 @@ static int w_bitmap_io(struct drbd_work *w, int unused)
 
 	clear_bit(BITMAP_IO_QUEUED, &mdev->flags);
 =======
+=======
+>>>>>>> v3.18
 	struct drbd_device *device =
 		container_of(w, struct drbd_device, bm_io_work.w);
 	struct bm_io_work *work = &device->bm_io_work;
@@ -5673,6 +6701,9 @@ static int w_bitmap_io(struct drbd_work *w, int unused)
 		work->done(device, rv);
 
 	clear_bit(BITMAP_IO_QUEUED, &device->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	work->why = NULL;
 	work->flags = 0;
@@ -5680,6 +6711,7 @@ static int w_bitmap_io(struct drbd_work *w, int unused)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void drbd_ldev_destroy(struct drbd_conf *mdev)
 {
@@ -5743,6 +6775,11 @@ static int w_go_diskless(struct drbd_work *w, int unused)
  * drbd_queue_bitmap_io() - Queues an IO operation on the whole bitmap
  * @device:	DRBD device.
 >>>>>>> v3.18
+=======
+/**
+ * drbd_queue_bitmap_io() - Queues an IO operation on the whole bitmap
+ * @device:	DRBD device.
+>>>>>>> v3.18
  * @io_fn:	IO callback to be called when bitmap IO is possible
  * @done:	callback to be called after the bitmap IO was performed
  * @why:	Descriptive text of the reason for doing the IO
@@ -5751,6 +6788,7 @@ static int w_go_diskless(struct drbd_work *w, int unused)
  * that drbd_set_out_of_sync() can not be called. This function MAY ONLY be
  * called from worker context. It MUST NOT be used while a previous such
  * work is still pending!
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 void drbd_queue_bitmap_io(struct drbd_conf *mdev,
@@ -5780,6 +6818,8 @@ void drbd_queue_bitmap_io(struct drbd_conf *mdev,
 	}
 	spin_unlock_irq(&mdev->tconn->req_lock);
 =======
+=======
+>>>>>>> v3.18
  *
  * Its worker function encloses the call of io_fn() by get_ldev() and
  * put_ldev().
@@ -5811,13 +6851,20 @@ void drbd_queue_bitmap_io(struct drbd_device *device,
 					&device->bm_io_work.w);
 	}
 	spin_unlock_irq(&device->resource->req_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_bitmap_io() -  Does an IO operation on the whole bitmap
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -5828,7 +6875,11 @@ void drbd_queue_bitmap_io(struct drbd_device *device,
  * functions MAY NOT be called from worker context.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_bitmap_io(struct drbd_conf *mdev, int (*io_fn)(struct drbd_conf *),
+=======
+int drbd_bitmap_io(struct drbd_device *device, int (*io_fn)(struct drbd_device *),
+>>>>>>> v3.18
 =======
 int drbd_bitmap_io(struct drbd_device *device, int (*io_fn)(struct drbd_device *),
 >>>>>>> v3.18
@@ -5836,6 +6887,7 @@ int drbd_bitmap_io(struct drbd_device *device, int (*io_fn)(struct drbd_device *
 {
 	int rv;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	D_ASSERT(current != mdev->tconn->worker.task);
 
@@ -5849,6 +6901,8 @@ int drbd_bitmap_io(struct drbd_device *device, int (*io_fn)(struct drbd_device *
 	if ((flags & BM_LOCKED_SET_ALLOWED) == 0)
 		drbd_resume_io(mdev);
 =======
+=======
+>>>>>>> v3.18
 	D_ASSERT(device, current != first_peer_device(device)->connection->worker.task);
 
 	if ((flags & BM_LOCKED_SET_ALLOWED) == 0)
@@ -5860,11 +6914,15 @@ int drbd_bitmap_io(struct drbd_device *device, int (*io_fn)(struct drbd_device *
 
 	if ((flags & BM_LOCKED_SET_ALLOWED) == 0)
 		drbd_resume_io(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void drbd_md_set_flag(struct drbd_conf *mdev, int flag) __must_hold(local)
 {
@@ -5880,6 +6938,8 @@ void drbd_md_clear_flag(struct drbd_conf *mdev, int flag) __must_hold(local)
 		drbd_md_mark_dirty(mdev);
 		mdev->ldev->md.flags &= ~flag;
 =======
+=======
+>>>>>>> v3.18
 void drbd_md_set_flag(struct drbd_device *device, int flag) __must_hold(local)
 {
 	if ((device->ldev->md.flags & flag) != flag) {
@@ -5893,6 +6953,9 @@ void drbd_md_clear_flag(struct drbd_device *device, int flag) __must_hold(local)
 	if ((device->ldev->md.flags & flag) != 0) {
 		drbd_md_mark_dirty(device);
 		device->ldev->md.flags &= ~flag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -5903,6 +6966,7 @@ int drbd_md_test_flag(struct drbd_backing_dev *bdev, int flag)
 
 static void md_sync_timer_fn(unsigned long data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drbd_conf *mdev = (struct drbd_conf *) data;
 
@@ -5922,6 +6986,10 @@ static int w_md_sync(struct drbd_work *w, int unused)
 #endif
 	drbd_md_sync(mdev);
 	return 0;
+=======
+	struct drbd_device *device = (struct drbd_device *) data;
+	drbd_device_post_work(device, MD_SYNC);
+>>>>>>> v3.18
 =======
 	struct drbd_device *device = (struct drbd_device *) data;
 	drbd_device_post_work(device, MD_SYNC);
@@ -6001,17 +7069,23 @@ const char *cmdname(enum drbd_packet cmd)
 /**
  * drbd_wait_misc  -  wait for a request to make progress
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	device associated with the request
  * @i:		the struct drbd_interval embedded in struct drbd_request or
  *		struct drbd_peer_request
  */
 int drbd_wait_misc(struct drbd_conf *mdev, struct drbd_interval *i)
 =======
+=======
+>>>>>>> v3.18
  * @device:	device associated with the request
  * @i:		the struct drbd_interval embedded in struct drbd_request or
  *		struct drbd_peer_request
  */
 int drbd_wait_misc(struct drbd_device *device, struct drbd_interval *i)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net_conf *nc;
@@ -6020,7 +7094,11 @@ int drbd_wait_misc(struct drbd_device *device, struct drbd_interval *i)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nc = rcu_dereference(mdev->tconn->net_conf);
+=======
+	nc = rcu_dereference(first_peer_device(device)->connection->net_conf);
+>>>>>>> v3.18
 =======
 	nc = rcu_dereference(first_peer_device(device)->connection->net_conf);
 >>>>>>> v3.18
@@ -6032,6 +7110,7 @@ int drbd_wait_misc(struct drbd_device *device, struct drbd_interval *i)
 	rcu_read_unlock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Indicate to wake up mdev->misc_wait on progress.  */
 	i->waiting = true;
 	prepare_to_wait(&mdev->misc_wait, &wait, TASK_INTERRUPTIBLE);
@@ -6041,6 +7120,8 @@ int drbd_wait_misc(struct drbd_device *device, struct drbd_interval *i)
 	spin_lock_irq(&mdev->tconn->req_lock);
 	if (!timeout || mdev->state.conn < C_CONNECTED)
 =======
+=======
+>>>>>>> v3.18
 	/* Indicate to wake up device->misc_wait on progress.  */
 	i->waiting = true;
 	prepare_to_wait(&device->misc_wait, &wait, TASK_INTERRUPTIBLE);
@@ -6049,6 +7130,9 @@ int drbd_wait_misc(struct drbd_device *device, struct drbd_interval *i)
 	finish_wait(&device->misc_wait, &wait);
 	spin_lock_irq(&device->resource->req_lock);
 	if (!timeout || device->state.conn < C_CONNECTED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ETIMEDOUT;
 	if (signal_pending(current))
@@ -6106,7 +7190,11 @@ _drbd_fault_str(unsigned int type) {
 
 unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 _drbd_insert_fault(struct drbd_conf *mdev, unsigned int type)
+=======
+_drbd_insert_fault(struct drbd_device *device, unsigned int type)
+>>>>>>> v3.18
 =======
 _drbd_insert_fault(struct drbd_device *device, unsigned int type)
 >>>>>>> v3.18
@@ -6116,7 +7204,11 @@ _drbd_insert_fault(struct drbd_device *device, unsigned int type)
 	unsigned int ret = (
 		(fault_devs == 0 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((1 << mdev_to_minor(mdev)) & fault_devs) != 0) &&
+=======
+			((1 << device_to_minor(device)) & fault_devs) != 0) &&
+>>>>>>> v3.18
 =======
 			((1 << device_to_minor(device)) & fault_devs) != 0) &&
 >>>>>>> v3.18
@@ -6127,7 +7219,11 @@ _drbd_insert_fault(struct drbd_device *device, unsigned int type)
 
 		if (__ratelimit(&drbd_ratelimit_state))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_warn(DEV, "***Simulating %s failure\n",
+=======
+			drbd_warn(device, "***Simulating %s failure\n",
+>>>>>>> v3.18
 =======
 			drbd_warn(device, "***Simulating %s failure\n",
 >>>>>>> v3.18

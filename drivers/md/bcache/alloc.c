@@ -64,15 +64,21 @@
 #include "btree.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/random.h>
 
 #define MAX_IN_FLIGHT_DISCARDS		8U
 =======
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/freezer.h>
 #include <linux/kthread.h>
 #include <linux/random.h>
 #include <trace/events/bcache.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bucket heap / gen */
@@ -85,12 +91,15 @@ uint8_t bch_inc_gen(struct cache *ca, struct bucket *b)
 	WARN_ON_ONCE(ca->set->need_gc > BUCKET_GC_GEN_MAX);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (CACHE_SYNC(&ca->set->sb)) {
 		ca->need_save_prio = max(ca->need_save_prio,
 					 bucket_disk_gen(b));
 		WARN_ON_ONCE(ca->need_save_prio > BUCKET_DISK_GEN_MAX);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -129,6 +138,7 @@ void bch_rescale_priorities(struct cache_set *c, int sectors)
 	mutex_unlock(&c->bucket_lock);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Discard/TRIM */
 
@@ -230,6 +240,8 @@ static bool can_invalidate_bucket(struct cache *ca, struct bucket *b)
 {
 	return GC_MARK(b) == GC_MARK_RECLAIMABLE &&
 =======
+=======
+>>>>>>> v3.18
 /*
  * Background allocation thread: scans for buckets to be invalidated,
  * invalidates them, rewrites prios/gens (marking them as invalidated on disk),
@@ -248,11 +260,15 @@ bool bch_can_invalidate_bucket(struct cache *ca, struct bucket *b)
 
 	return (!GC_MARK(b) ||
 		GC_MARK(b) == GC_MARK_RECLAIMABLE) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		!atomic_read(&b->pin) &&
 		can_inc_bucket_gen(b);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void invalidate_one_bucket(struct cache *ca, struct bucket *b)
 {
@@ -265,6 +281,8 @@ static void invalidate_one_bucket(struct cache *ca, struct bucket *b)
 #define bucket_prio(b)				\
 	(((unsigned) (b->prio - ca->set->min_prio)) * GC_SECTORS_USED(b))
 =======
+=======
+>>>>>>> v3.18
 void __bch_invalidate_one_bucket(struct cache *ca, struct bucket *b)
 {
 	lockdep_assert_held(&ca->set->bucket_lock);
@@ -300,6 +318,9 @@ static void bch_invalidate_one_bucket(struct cache *ca, struct bucket *b)
 									\
 	(b->prio - ca->set->min_prio + min_prio) * GC_SECTORS_USED(b);	\
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define bucket_max_cmp(l, r)	(bucket_prio(l) < bucket_prio(r))
@@ -313,6 +334,7 @@ static void invalidate_buckets_lru(struct cache *ca)
 	ca->heap.used = 0;
 
 	for_each_bucket(b, ca) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * If we fill up the unused list, if we then return before
@@ -328,6 +350,9 @@ static void invalidate_buckets_lru(struct cache *ca)
 
 		if (!GC_SECTORS_USED(b) &&
 		    bch_bucket_add_unused(ca, b))
+=======
+		if (!bch_can_invalidate_bucket(ca, b))
+>>>>>>> v3.18
 =======
 		if (!bch_can_invalidate_bucket(ca, b))
 >>>>>>> v3.18
@@ -352,17 +377,23 @@ static void invalidate_buckets_lru(struct cache *ca)
 			 */
 			ca->invalidate_needs_gc = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bch_queue_gc(ca->set);
 			return;
 		}
 
 		invalidate_one_bucket(ca, b);
 =======
+=======
+>>>>>>> v3.18
 			wake_up_gc(ca->set);
 			return;
 		}
 
 		bch_invalidate_one_bucket(ca, b);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -380,6 +411,7 @@ static void invalidate_buckets_fifo(struct cache *ca)
 		b = ca->buckets + ca->fifo_last_bucket++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (can_invalidate_bucket(ca, b))
 			invalidate_one_bucket(ca, b);
 
@@ -387,12 +419,17 @@ static void invalidate_buckets_fifo(struct cache *ca)
 			ca->invalidate_needs_gc = 1;
 			bch_queue_gc(ca->set);
 =======
+=======
+>>>>>>> v3.18
 		if (bch_can_invalidate_bucket(ca, b))
 			bch_invalidate_one_bucket(ca, b);
 
 		if (++checked >= ca->sb.nbuckets) {
 			ca->invalidate_needs_gc = 1;
 			wake_up_gc(ca->set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 		}
@@ -414,6 +451,7 @@ static void invalidate_buckets_random(struct cache *ca)
 		b = ca->buckets + n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (can_invalidate_bucket(ca, b))
 			invalidate_one_bucket(ca, b);
 
@@ -421,12 +459,17 @@ static void invalidate_buckets_random(struct cache *ca)
 			ca->invalidate_needs_gc = 1;
 			bch_queue_gc(ca->set);
 =======
+=======
+>>>>>>> v3.18
 		if (bch_can_invalidate_bucket(ca, b))
 			bch_invalidate_one_bucket(ca, b);
 
 		if (++checked >= ca->sb.nbuckets / 2) {
 			ca->invalidate_needs_gc = 1;
 			wake_up_gc(ca->set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 		}
@@ -436,8 +479,12 @@ static void invalidate_buckets_random(struct cache *ca)
 static void invalidate_buckets(struct cache *ca)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ca->invalidate_needs_gc)
 		return;
+=======
+	BUG_ON(ca->invalidate_needs_gc);
+>>>>>>> v3.18
 =======
 	BUG_ON(ca->invalidate_needs_gc);
 >>>>>>> v3.18
@@ -454,6 +501,7 @@ static void invalidate_buckets(struct cache *ca)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_debug("free %zu/%zu free_inc %zu/%zu unused %zu/%zu",
 		 fifo_used(&ca->free), ca->free.size,
@@ -461,10 +509,13 @@ static void invalidate_buckets(struct cache *ca)
 		 fifo_used(&ca->unused), ca->unused.size);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 #define allocator_wait(ca, cond)					\
 do {									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DEFINE_WAIT(__wait);						\
 									\
@@ -475,10 +526,15 @@ do {									\
 	while (1) {							\
 		set_current_state(TASK_INTERRUPTIBLE);			\
 >>>>>>> v3.18
+=======
+	while (1) {							\
+		set_current_state(TASK_INTERRUPTIBLE);			\
+>>>>>>> v3.18
 		if (cond)						\
 			break;						\
 									\
 		mutex_unlock(&(ca)->set->bucket_lock);			\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (test_bit(CACHE_SET_STOPPING_2, &ca->set->flags)) {	\
 			finish_wait(&ca->set->alloc_wait, &__wait);	\
@@ -496,6 +552,8 @@ void bch_allocator_thread(struct closure *cl)
 {
 	struct cache *ca = container_of(cl, struct cache, alloc);
 =======
+=======
+>>>>>>> v3.18
 		if (kthread_should_stop())				\
 			return 0;					\
 									\
@@ -524,6 +582,9 @@ static int bch_allocator_push(struct cache *ca, long bucket)
 static int bch_allocator_thread(void *arg)
 {
 	struct cache *ca = arg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&ca->set->bucket_lock);
@@ -534,6 +595,7 @@ static int bch_allocator_thread(void *arg)
 		 * possibly issue discards to them, then we add the bucket to
 		 * the free list:
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		while (1) {
 			long bucket;
@@ -558,6 +620,8 @@ static int bch_allocator_thread(void *arg)
 				closure_wake_up(&ca->set->bucket_wait);
 			}
 =======
+=======
+>>>>>>> v3.18
 		while (!fifo_empty(&ca->free_inc)) {
 			long bucket;
 
@@ -574,6 +638,9 @@ static int bch_allocator_thread(void *arg)
 			allocator_wait(ca, bch_allocator_push(ca, bucket));
 			wake_up(&ca->set->btree_cache_wait);
 			wake_up(&ca->set->bucket_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -584,9 +651,15 @@ static int bch_allocator_thread(void *arg)
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		allocator_wait(ca, ca->set->gc_mark_valid &&
 			       (ca->need_save_prio > 64 ||
 				!ca->invalidate_needs_gc));
+=======
+retry_invalidate:
+		allocator_wait(ca, ca->set->gc_mark_valid &&
+			       !ca->invalidate_needs_gc);
+>>>>>>> v3.18
 =======
 retry_invalidate:
 		allocator_wait(ca, ca->set->gc_mark_valid &&
@@ -599,6 +672,7 @@ retry_invalidate:
 		 * new stuff to them:
 		 */
 		allocator_wait(ca, !atomic_read(&ca->set->prio_blocked));
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (CACHE_SYNC(&ca->set->sb) &&
 		    (!fifo_empty(&ca->free_inc) ||
@@ -620,6 +694,8 @@ again:
 		size_t iter;
 		long i;
 =======
+=======
+>>>>>>> v3.18
 		if (CACHE_SYNC(&ca->set->sb)) {
 			/*
 			 * This could deadlock if an allocation with a btree
@@ -678,11 +754,15 @@ out:
 		size_t iter;
 		long i;
 		unsigned j;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		for (iter = 0; iter < prio_buckets(ca) * 2; iter++)
 			BUG_ON(ca->prio_buckets[iter] == (uint64_t) r);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		fifo_for_each(i, &ca->free, iter)
 			BUG_ON(i == r);
@@ -723,6 +803,8 @@ out:
 
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 		for (j = 0; j < RESERVE_NR; j++)
 			fifo_for_each(i, &ca->free[j], iter)
 				BUG_ON(i == r);
@@ -753,6 +835,9 @@ void __bch_bucket_free(struct cache *ca, struct bucket *b)
 {
 	SET_GC_MARK(b, 0);
 	SET_GC_SECTORS_USED(b, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -760,6 +845,7 @@ void bch_bucket_free(struct cache_set *c, struct bkey *k)
 {
 	unsigned i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < KEY_PTRS(k); i++) {
 		struct bucket *b = PTR_BUCKET(c, k, i);
@@ -773,6 +859,8 @@ void bch_bucket_free(struct cache_set *c, struct bkey *k)
 int __bch_bucket_alloc_set(struct cache_set *c, unsigned watermark,
 			   struct bkey *k, int n, struct closure *cl)
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < KEY_PTRS(k); i++)
 		__bch_bucket_free(PTR_CACHE(c, k, i),
 				  PTR_BUCKET(c, k, i));
@@ -780,6 +868,9 @@ int __bch_bucket_alloc_set(struct cache_set *c, unsigned watermark,
 
 int __bch_bucket_alloc_set(struct cache_set *c, unsigned reserve,
 			   struct bkey *k, int n, bool wait)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -794,7 +885,11 @@ int __bch_bucket_alloc_set(struct cache_set *c, unsigned reserve,
 	for (i = 0; i < n; i++) {
 		struct cache *ca = c->cache_by_alloc[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		long b = bch_bucket_alloc(ca, watermark, cl);
+=======
+		long b = bch_bucket_alloc(ca, reserve, wait);
+>>>>>>> v3.18
 =======
 		long b = bch_bucket_alloc(ca, reserve, wait);
 >>>>>>> v3.18
@@ -813,6 +908,7 @@ int __bch_bucket_alloc_set(struct cache_set *c, unsigned reserve,
 err:
 	bch_bucket_free(c, k);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__bkey_put(c, k);
 	return -1;
 }
@@ -824,6 +920,8 @@ int bch_bucket_alloc_set(struct cache_set *c, unsigned watermark,
 	mutex_lock(&c->bucket_lock);
 	ret = __bch_bucket_alloc_set(c, watermark, k, n, cl);
 =======
+=======
+>>>>>>> v3.18
 	bkey_put(c, k);
 	return -1;
 }
@@ -834,11 +932,15 @@ int bch_bucket_alloc_set(struct cache_set *c, unsigned reserve,
 	int ret;
 	mutex_lock(&c->bucket_lock);
 	ret = __bch_bucket_alloc_set(c, reserve, k, n, wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&c->bucket_lock);
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Init */
 
@@ -884,6 +986,8 @@ int bch_cache_allocator_init(struct cache *ca)
 		INIT_WORK(&d->work, discard_finish);
 		list_add(&d->list, &ca->discards);
 =======
+=======
+>>>>>>> v3.18
 /* Sector allocator */
 
 struct open_bucket {
@@ -1061,13 +1165,19 @@ int bch_open_buckets_alloc(struct cache_set *c)
 			return -ENOMEM;
 
 		list_add(&b->list, &c->data_buckets);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int bch_cache_allocator_start(struct cache *ca)
 {
@@ -1079,4 +1189,7 @@ int bch_cache_allocator_start(struct cache *ca)
 	ca->alloc_thread = k;
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

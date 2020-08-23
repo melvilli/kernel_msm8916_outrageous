@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -246,8 +250,13 @@ struct acpi_s3pt_suspend {
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * GTDT - Generic Timer Description Table (ACPI 5.0)
  *        Version 1
+=======
+ * GTDT - Generic Timer Description Table (ACPI 5.1)
+ *        Version 2
+>>>>>>> v3.18
 =======
  * GTDT - Generic Timer Description Table (ACPI 5.1)
  *        Version 2
@@ -257,6 +266,7 @@ struct acpi_s3pt_suspend {
 
 struct acpi_table_gtdt {
 	struct acpi_table_header header;	/* Common ACPI table header */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u64 address;
 	u32 flags;
@@ -279,6 +289,8 @@ struct acpi_table_gtdt {
 #define ACPI_GTDT_INTERRUPT_MODE            1
 #define ACPI_GTDT_INTERRUPT_POLARITY        2
 =======
+=======
+>>>>>>> v3.18
 	u64 counter_block_addresss;
 	u32 reserved;
 	u32 secure_el1_interrupt;
@@ -367,6 +379,9 @@ struct acpi_gtdt_watchdog {
 #define ACPI_GTDT_WATCHDOG_IRQ_MODE         (1)
 #define ACPI_GTDT_WATCHDOG_IRQ_POLARITY     (1<<1)
 #define ACPI_GTDT_WATCHDOG_SECURE           (1<<2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
@@ -475,8 +490,12 @@ struct acpi_table_pcct {
 	struct acpi_table_header header;	/* Common ACPI table header */
 	u32 flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 latency;
 	u32 reserved;
+=======
+	u64 reserved;
+>>>>>>> v3.18
 =======
 	u64 reserved;
 >>>>>>> v3.18
@@ -487,9 +506,12 @@ struct acpi_table_pcct {
 #define ACPI_PCCT_DOORBELL              1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * PCCT subtables
 =======
+=======
+>>>>>>> v3.18
 /* Values for subtable type in struct acpi_subtable_header */
 
 enum acpi_pcct_type {
@@ -500,6 +522,9 @@ enum acpi_pcct_type {
 
 /*
  * PCCT Subtables, correspond to Type in struct acpi_subtable_header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -514,9 +539,12 @@ struct acpi_pcct_subspace {
 	u64 preserve_mask;
 	u64 write_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u32 latency;
 	u32 max_access_rate;
 	u16 min_turnaround_time;
@@ -544,6 +572,9 @@ struct acpi_pcct_hw_reduced {
 #define ACPI_PCCT_INTERRUPT_POLARITY    (1)
 #define ACPI_PCCT_INTERRUPT_MODE        (1<<1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * PCC memory structures (not part of the ACPI table)

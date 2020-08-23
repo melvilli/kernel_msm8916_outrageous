@@ -50,7 +50,11 @@ u64 sched_clock(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init time_init(void)
+=======
+void time_init(void)
+>>>>>>> v3.18
 =======
 void time_init(void)
 >>>>>>> v3.18

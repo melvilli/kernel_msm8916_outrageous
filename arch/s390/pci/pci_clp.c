@@ -6,8 +6,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPONENT "zPCI"
 #define pr_fmt(fmt) COMPONENT ": " fmt
+=======
+#define KMSG_COMPONENT "zpci"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+>>>>>>> v3.18
 =======
 #define KMSG_COMPONENT "zpci"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
@@ -22,7 +27,10 @@
 #include <asm/pci_clp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void zpci_err_clp(unsigned int rsp, int rc)
 {
 	struct {
@@ -33,6 +41,9 @@ static inline void zpci_err_clp(unsigned int rsp, int rc)
 	zpci_err_hex(&data, sizeof(data));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Call Logical Processor
@@ -55,9 +66,15 @@ static inline u8 clp_instr(void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *clp_alloc_block(void)
 {
 	return (void *) __get_free_pages(GFP_KERNEL, get_order(CLP_BLK_SIZE));
+=======
+static void *clp_alloc_block(gfp_t gfp_mask)
+{
+	return (void *) __get_free_pages(gfp_mask, get_order(CLP_BLK_SIZE));
+>>>>>>> v3.18
 =======
 static void *clp_alloc_block(gfp_t gfp_mask)
 {
@@ -79,7 +96,10 @@ static void clp_store_query_pci_fngrp(struct zpci_dev *zdev,
 	zdev->fmb_update = response->mui;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("Supported number of MSI vectors: %u\n", response->noi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (response->version) {
@@ -98,7 +118,11 @@ static int clp_query_pci_fngrp(struct zpci_dev *zdev, u8 pfgid)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rrb = clp_alloc_block();
+=======
+	rrb = clp_alloc_block(GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rrb = clp_alloc_block(GFP_KERNEL);
 >>>>>>> v3.18
@@ -116,8 +140,13 @@ static int clp_query_pci_fngrp(struct zpci_dev *zdev, u8 pfgid)
 		clp_store_query_pci_fngrp(zdev, &rrb->response);
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Query PCI FNGRP failed with response: %x  cc: %d\n",
 			rrb->response.hdr.rsp, rc);
+=======
+		zpci_err("Q PCI FGRP:\n");
+		zpci_err_clp(rrb->response.hdr.rsp, rc);
+>>>>>>> v3.18
 =======
 		zpci_err("Q PCI FGRP:\n");
 		zpci_err_clp(rrb->response.hdr.rsp, rc);
@@ -142,7 +171,10 @@ static int clp_store_query_pci_fn(struct zpci_dev *zdev,
 	zdev->pchid = response->pchid;
 	zdev->pfgid = response->pfgid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	zdev->pft = response->pft;
 	zdev->vfn = response->vfn;
 	zdev->uid = response->uid;
@@ -153,6 +185,9 @@ static int clp_store_query_pci_fn(struct zpci_dev *zdev,
 		       sizeof(zdev->util_str));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -163,7 +198,11 @@ static int clp_query_pci_fn(struct zpci_dev *zdev, u32 fh)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rrb = clp_alloc_block();
+=======
+	rrb = clp_alloc_block(GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rrb = clp_alloc_block(GFP_KERNEL);
 >>>>>>> v3.18
@@ -185,8 +224,13 @@ static int clp_query_pci_fn(struct zpci_dev *zdev, u32 fh)
 			rc = clp_query_pci_fngrp(zdev, rrb->response.pfgid);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Query PCI failed with response: %x  cc: %d\n",
 			 rrb->response.hdr.rsp, rc);
+=======
+		zpci_err("Q PCI FN:\n");
+		zpci_err_clp(rrb->response.hdr.rsp, rc);
+>>>>>>> v3.18
 =======
 		zpci_err("Q PCI FN:\n");
 		zpci_err_clp(rrb->response.hdr.rsp, rc);
@@ -205,9 +249,15 @@ int clp_add_pci_device(u32 fid, u32 fh, int configured)
 
 	zpci_dbg(3, "add fid:%x, fh:%x, c:%d\n", fid, fh, configured);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zdev = zpci_alloc_device();
 	if (IS_ERR(zdev))
 		return PTR_ERR(zdev);
+=======
+	zdev = kzalloc(sizeof(*zdev), GFP_KERNEL);
+	if (!zdev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	zdev = kzalloc(sizeof(*zdev), GFP_KERNEL);
 	if (!zdev)
@@ -234,7 +284,11 @@ int clp_add_pci_device(u32 fid, u32 fh, int configured)
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zpci_free_device(zdev);
+=======
+	kfree(zdev);
+>>>>>>> v3.18
 =======
 	kfree(zdev);
 >>>>>>> v3.18
@@ -248,9 +302,15 @@ static int clp_set_pci_fn(u32 *fh, u8 nr_dma_as, u8 command)
 {
 	struct clp_req_rsp_set_pci *rrb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc, retries = 1000;
 
 	rrb = clp_alloc_block();
+=======
+	int rc, retries = 100;
+
+	rrb = clp_alloc_block(GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	int rc, retries = 100;
 
@@ -274,7 +334,11 @@ static int clp_set_pci_fn(u32 *fh, u8 nr_dma_as, u8 command)
 			if (retries < 0)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			msleep(1);
+=======
+			msleep(20);
+>>>>>>> v3.18
 =======
 			msleep(20);
 >>>>>>> v3.18
@@ -285,8 +349,13 @@ static int clp_set_pci_fn(u32 *fh, u8 nr_dma_as, u8 command)
 		*fh = rrb->response.fh;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zpci_dbg(0, "SPF fh:%x, cc:%d, resp:%x\n", *fh, rc,
 			 rrb->response.hdr.rsp);
+=======
+		zpci_err("Set PCI FN:\n");
+		zpci_err_clp(rrb->response.hdr.rsp, rc);
+>>>>>>> v3.18
 =======
 		zpci_err("Set PCI FN:\n");
 		zpci_err_clp(rrb->response.hdr.rsp, rc);
@@ -320,7 +389,10 @@ int clp_disable_fh(struct zpci_dev *zdev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&zdev->pdev->dev, "disabling fn handle: 0x%x\n", fh);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = clp_set_pci_fn(&fh, 0, CLP_SET_DISABLE_PCI_FN);
@@ -332,6 +404,7 @@ int clp_disable_fh(struct zpci_dev *zdev)
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void clp_check_pcifn_entry(struct clp_fh_list_entry *entry)
 {
@@ -353,6 +426,8 @@ static void clp_check_pcifn_entry(struct clp_fh_list_entry *entry)
 	/* aev 306: function moved to stand-by state */
 	if (present && !entry->config_state) {
 =======
+=======
+>>>>>>> v3.18
 static int clp_list_pci(struct clp_req_rsp_list_pci *rrb,
 			void (*cb)(struct clp_fh_list_entry *entry))
 {
@@ -412,12 +487,16 @@ static void __clp_rescan(struct clp_fh_list_entry *entry)
 	}
 
 	if (!entry->config_state) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * The handle is already disabled, that means no iota/irq freeing via
 		 * the firmware interfaces anymore. Need to free resources manually
 		 * (DMA memory, debug, sysfs)...
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		zpci_stop_device(get_zdev_by_fid(entry->fid));
 		return;
@@ -473,6 +552,8 @@ int clp_find_pci_devices(void)
 		rrb->response.max_fn);
 out:
 =======
+=======
+>>>>>>> v3.18
 		zpci_stop_device(zdev);
 	}
 }
@@ -532,6 +613,9 @@ int clp_rescan_pci_devices_simple(void)
 
 	rc = clp_list_pci(rrb, __clp_update);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clp_free_block(rrb);
 	return rc;

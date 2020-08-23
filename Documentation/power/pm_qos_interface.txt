@@ -6,14 +6,20 @@ one of the parameters.
 
 Two different PM QoS frameworks are available:
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. PM QoS classes for cpu_dma_latency, network_latency, network_throughput.
 2. the per-device PM QoS framework provides the API to manage the per-device latency
 constraints.
 =======
+=======
+>>>>>>> v3.18
 1. PM QoS classes for cpu_dma_latency, network_latency, network_throughput,
 memory_bandwidth.
 2. the per-device PM QoS framework provides the API to manage the per-device latency
 constraints and PM QoS flags.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Each parameters have defined units:
@@ -21,6 +27,10 @@ Each parameters have defined units:
  * timeout: usec
  * throughput: kbs (kilo bit / sec)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * memory bandwidth: mbs (mega bit / sec)
+>>>>>>> v3.18
 =======
  * memory bandwidth: mbs (mega bit / sec)
 >>>>>>> v3.18
@@ -31,7 +41,11 @@ Each parameters have defined units:
 The infrastructure exposes multiple misc device nodes one per implemented
 parameter.  The set of parameters implement is defined by pm_qos_power_init()
 <<<<<<< HEAD
+<<<<<<< HEAD
 and pm_qos.h.  This is done because having the available parameters
+=======
+and pm_qos_params.h.  This is done because having the available parameters
+>>>>>>> v3.18
 =======
 and pm_qos_params.h.  This is done because having the available parameters
 >>>>>>> v3.18
@@ -57,6 +71,7 @@ Clients of pm_qos need to save the returned handle for future use in other
 pm_qos API functions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The handle is a pm_qos_request object. By default the request object sets the
 request type to PM_QOS_REQ_ALL_CORES, in which case, the PM QoS request
 applies to all cores. However, the driver can also specify a request type to
@@ -68,6 +83,8 @@ be either of
 Specify the cpumask when type is set to PM_QOS_REQ_AFFINE_CORES and specify
 the IRQ number with PM_QOS_REQ_AFFINE_IRQ.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void pm_qos_update_request(handle, new_target_value):
@@ -84,6 +101,7 @@ int pm_qos_request(param_class):
 Returns the aggregated value for a given PM QoS class.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pm_qos_request_for_cpu(param_class, cpu):
 Returns the aggregated value for a given PM QoS class for the specified cpu.
 
@@ -91,6 +109,8 @@ int pm_qos_request_for_cpumask(param_class, cpumask):
 Returns the aggregated value for a given PM QoS class for the specified
 cpumask.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int pm_qos_request_active(handle):
@@ -126,6 +146,7 @@ node.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2. PM QoS per-device latency framework
 
 For each device a list of performance requests is maintained along with
@@ -136,6 +157,8 @@ in the parameter list elements.
 Note: the aggregated target value is implemented as an atomic variable so that
 reading the aggregated value does not require any locking mechanism.
 =======
+=======
+>>>>>>> v3.18
 2. PM QoS per-device latency and flags framework
 
 For each device, there are three lists of PM QoS requests. Two of them are
@@ -151,6 +174,9 @@ and PM_QOS_FLAG_REMOTE_WAKEUP.
 
 Note: The aggregated target values are implemented in such a way that reading
 the aggregated value does not require any locking mechanism.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -177,7 +203,10 @@ s32 dev_pm_qos_read_value(device):
 Returns the aggregated value for a given device's constraints list.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum pm_qos_flags_status dev_pm_qos_flags(device, mask)
 Check PM QoS flags of the given device against the given mask of flags.
 The meaning of the return values is as follows:
@@ -212,6 +241,9 @@ void dev_pm_qos_hide_flags(device)
 Drop the request added by dev_pm_qos_expose_flags() from the device's PM QoS list
 of flags and remove sysfs attributes pm_qos_no_power_off and pm_qos_remote_wakeup
 under the device's power directory.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Notification mechanisms:
@@ -222,7 +254,11 @@ int dev_pm_qos_add_notifier(device, notifier):
 Adds a notification callback function for the device.
 The callback is called when the aggregated value of the device constraints list
 <<<<<<< HEAD
+<<<<<<< HEAD
 is changed.
+=======
+is changed (for resume latency device PM QoS only).
+>>>>>>> v3.18
 =======
 is changed (for resume latency device PM QoS only).
 >>>>>>> v3.18
@@ -234,7 +270,12 @@ int dev_pm_qos_add_global_notifier(notifier):
 Adds a notification callback function in the global notification tree of the
 framework.
 <<<<<<< HEAD
+<<<<<<< HEAD
 The callback is called when the aggregated value for any device is changed.
+=======
+The callback is called when the aggregated value for any device is changed
+(for resume latency device PM QoS only).
+>>>>>>> v3.18
 =======
 The callback is called when the aggregated value for any device is changed
 (for resume latency device PM QoS only).
@@ -246,11 +287,14 @@ of the framework.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 From user mode:
 No API for user space access to the per-device latency constraints is provided
 yet - still under discussion.
 
 =======
+=======
+>>>>>>> v3.18
 Active state latency tolerance
 
 This device PM QoS type is used to support systems in which hardware may switch
@@ -288,4 +332,7 @@ requirements from the kernel side in the device's list.
 Kernel code can use the functions described above along with the
 DEV_PM_QOS_LATENCY_TOLERANCE device PM QoS type to add, remove and update
 latency tolerance requirements for devices.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

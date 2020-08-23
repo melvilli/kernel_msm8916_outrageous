@@ -86,7 +86,11 @@ void dm_cell_release_no_holder(struct dm_bio_prison *prison,
 			       struct bio_list *inmates);
 void dm_cell_error(struct dm_bio_prison *prison,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   struct dm_bio_prison_cell *cell);
+=======
+		   struct dm_bio_prison_cell *cell, int error);
+>>>>>>> v3.18
 =======
 		   struct dm_bio_prison_cell *cell, int error);
 >>>>>>> v3.18

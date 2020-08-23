@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * OMAP44xx secure APIs file.
+=======
+ * OMAP34xx and OMAP44xx secure APIs file.
+>>>>>>> v3.18
 =======
  * OMAP34xx and OMAP44xx secure APIs file.
 >>>>>>> v3.18
@@ -9,6 +13,11 @@
  * Written by Santosh Shilimkar <santosh.shilimkar@ti.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
+ * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
  * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
@@ -64,7 +73,10 @@ ENTRY(omap_smc2)
 ENDPROC(omap_smc2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * u32 omap_smc3(u32 service_id, u32 process_id, u32 flag, u32 pargs)
  * Low level common routine for secure HAL and PPA APIs via smc #1
@@ -82,6 +94,9 @@ ENTRY(omap_smc3)
 	ldmfd	sp!, {r4-r11, pc}
 ENDPROC(omap_smc3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENTRY(omap_modify_auxcoreboot0)
 	stmfd   sp!, {r1-r12, lr}

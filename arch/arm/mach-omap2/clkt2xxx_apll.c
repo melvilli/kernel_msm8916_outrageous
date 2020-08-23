@@ -53,7 +53,11 @@ static bool omap2xxx_clk_apll_locked(struct clk_hw *hw)
 	apll_mask = EN_APLL_LOCKED << clk->enable_bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = omap2_cm_read_mod_reg(PLL_MOD, CM_CLKEN);
+=======
+	r = omap2xxx_cm_get_pll_status();
+>>>>>>> v3.18
 =======
 	r = omap2xxx_cm_get_pll_status();
 >>>>>>> v3.18
@@ -131,7 +135,11 @@ u32 omap2xxx_get_apll_clkin(void)
 	u32 aplls, srate = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aplls = omap2_cm_read_mod_reg(PLL_MOD, CM_CLKSEL1);
+=======
+	aplls = omap2xxx_cm_get_pll_config();
+>>>>>>> v3.18
 =======
 	aplls = omap2xxx_cm_get_pll_config();
 >>>>>>> v3.18

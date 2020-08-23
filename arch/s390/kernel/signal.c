@@ -32,8 +32,11 @@
 #include "entry.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Layout of an old-style signal-frame:
  *	-----------------------------------------
@@ -62,12 +65,16 @@ typedef struct
  * Future extensions will be added to _sigregs_ext.
  */
 struct sigframe
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	__u8 callee_used_stack[__SIGNAL_FRAMESIZE];
 	struct sigcontext sc;
 	_sigregs sregs;
 	int signo;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__u8 retcode[S390_SYSCALL_SIZE];
 } sigframe;
@@ -80,6 +87,8 @@ typedef struct
 	struct ucontext uc;
 } rt_sigframe;
 =======
+=======
+>>>>>>> v3.18
 	_sigregs_ext sregs_ext;
 	__u16 svc_insn;		/* Offset of svc_insn is NOT fixed! */
 };
@@ -152,6 +161,9 @@ static void load_sigregs(void)
 #endif
 		restore_fp_regs(current->thread.fp_regs.fprs);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Returns non-zero on fault. */
@@ -159,6 +171,7 @@ static int save_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 {
 	_sigregs user_sregs;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	save_access_regs(current->thread.acrs);
 
@@ -185,6 +198,8 @@ static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 {
 	int err;
 =======
+=======
+>>>>>>> v3.18
 	/* Copy a 'clean' PSW mask to the user to avoid leaking
 	   information about whether PER is currently on.  */
 	user_sregs.regs.psw.mask = PSW_USER_BITS |
@@ -202,12 +217,16 @@ static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 
 static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	_sigregs user_sregs;
 
 	/* Alwys make any pending restarted system call return -EINTR */
 	current_thread_info()->restart_block.fn = do_no_restart_syscall;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = __copy_from_user(&user_sregs, sregs, sizeof(_sigregs));
 	if (err)
@@ -219,6 +238,8 @@ static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 	if ((regs->psw.mask & PSW_MASK_ASC) >= (psw_kernel_bits & PSW_MASK_ASC))
 		regs->psw.mask = (psw_user_bits & PSW_MASK_ASC) |
 =======
+=======
+>>>>>>> v3.18
 	if (__copy_from_user(&user_sregs, sregs, sizeof(user_sregs)))
 		return -EFAULT;
 
@@ -235,6 +256,9 @@ static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 	/* Check for invalid user address space control. */
 	if ((regs->psw.mask & PSW_MASK_ASC) == PSW_ASC_HOME)
 		regs->psw.mask = PSW_ASC_PRIMARY |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			(regs->psw.mask & ~PSW_MASK_ASC);
 	/* Check for invalid amode */
@@ -243,6 +267,7 @@ static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 	regs->psw.addr = user_sregs.regs.psw.addr;
 	memcpy(&regs->gprs, &user_sregs.regs.gprs, sizeof(sregs->regs.gprs));
 	memcpy(&current->thread.acrs, &user_sregs.regs.acrs,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	       sizeof(sregs->regs.acrs));
 	restore_access_regs(current->thread.acrs);
@@ -254,6 +279,8 @@ static int restore_sigregs(struct pt_regs *regs, _sigregs __user *sregs)
 	restore_fp_regs(&current->thread.fp_regs);
 	clear_thread_flag(TIF_SYSCALL);	/* No longer in a system call */
 =======
+=======
+>>>>>>> v3.18
 	       sizeof(current->thread.acrs));
 
 	memcpy(&current->thread.fp_regs, &user_sregs.fpregs,
@@ -305,6 +332,9 @@ static int restore_sigregs_ext(struct pt_regs *regs,
 			*((__u64 *)(current->thread.vxrs + i) + 1) = vxrs[i];
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -313,7 +343,12 @@ SYSCALL_DEFINE0(sigreturn)
 {
 	struct pt_regs *regs = task_pt_regs(current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sigframe __user *frame = (sigframe __user *)regs->gprs[15];
+=======
+	struct sigframe __user *frame =
+		(struct sigframe __user *) regs->gprs[15];
+>>>>>>> v3.18
 =======
 	struct sigframe __user *frame =
 		(struct sigframe __user *) regs->gprs[15];
@@ -326,6 +361,12 @@ SYSCALL_DEFINE0(sigreturn)
 	if (restore_sigregs(regs, &frame->sregs))
 		goto badframe;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (restore_sigregs_ext(regs, &frame->sregs_ext))
+		goto badframe;
+	load_sigregs();
+>>>>>>> v3.18
 =======
 	if (restore_sigregs_ext(regs, &frame->sregs_ext))
 		goto badframe;
@@ -341,7 +382,12 @@ SYSCALL_DEFINE0(rt_sigreturn)
 {
 	struct pt_regs *regs = task_pt_regs(current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt_sigframe __user *frame = (rt_sigframe __user *)regs->gprs[15];
+=======
+	struct rt_sigframe __user *frame =
+		(struct rt_sigframe __user *)regs->gprs[15];
+>>>>>>> v3.18
 =======
 	struct rt_sigframe __user *frame =
 		(struct rt_sigframe __user *)regs->gprs[15];
@@ -352,11 +398,14 @@ SYSCALL_DEFINE0(rt_sigreturn)
 		goto badframe;
 	set_current_blocked(&set);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (restore_sigregs(regs, &frame->uc.uc_mcontext))
 		goto badframe;
 	if (restore_altstack(&frame->uc.uc_stack))
 		goto badframe;
 =======
+=======
+>>>>>>> v3.18
 	if (restore_altstack(&frame->uc.uc_stack))
 		goto badframe;
 	if (restore_sigregs(regs, &frame->uc.uc_mcontext))
@@ -364,6 +413,9 @@ SYSCALL_DEFINE0(rt_sigreturn)
 	if (restore_sigregs_ext(regs, &frame->uc.uc_mcontext_ext))
 		goto badframe;
 	load_sigregs();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return regs->gprs[2];
 badframe:
@@ -373,11 +425,14 @@ badframe:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Set up a signal frame.
  */
 
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Determine which stack to use..
@@ -417,6 +472,7 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 		       sigset_t *set, struct pt_regs * regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sigframe __user *frame;
 
 	frame = get_sigframe(ka, regs, sizeof(sigframe));
@@ -432,6 +488,8 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 	if (__put_user(&frame->sregs, &frame->sc.sregs))
 		goto give_sigsegv;
 =======
+=======
+>>>>>>> v3.18
 	struct sigframe __user *frame;
 	struct sigcontext sc;
 	unsigned long restorer;
@@ -474,11 +532,15 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 	/* Create _sigregs_ext on the signal stack */
 	if (save_sigregs_ext(regs, &frame->sregs_ext))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ka->sa.sa_flags & SA_RESTORER) {
+<<<<<<< HEAD
 <<<<<<< HEAD
                 regs->gprs[14] = (unsigned long)
 			ka->sa.sa_restorer | PSW_ADDR_AMODE;
@@ -500,6 +562,8 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 	regs->psw.mask = PSW_MASK_EA | PSW_MASK_BA |
 		(psw_user_bits & PSW_MASK_ASC) |
 =======
+=======
+>>>>>>> v3.18
 		restorer = (unsigned long) ka->sa.sa_restorer | PSW_ADDR_AMODE;
 	} else {
 		/* Signal frame without vector registers are short ! */
@@ -515,6 +579,9 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 	/* Force default amode and default user address space control. */
 	regs->psw.mask = PSW_MASK_EA | PSW_MASK_BA |
 		(PSW_USER_BITS & PSW_MASK_ASC) |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		(regs->psw.mask & ~PSW_MASK_ASC);
 	regs->psw.addr = (unsigned long) ka->sa.sa_handler | PSW_ADDR_AMODE;
@@ -531,6 +598,7 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 		regs->gprs[5] = regs->int_parm_long;
 		regs->gprs[6] = task_thread_info(current)->last_break;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Place signal number on stack to allow backtrace from handler.  */
@@ -593,6 +661,8 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	regs->gprs[2] = map_signal(sig);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -664,11 +734,15 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	regs->psw.addr = (unsigned long) ksig->ka.sa.sa_handler | PSW_ADDR_AMODE;
 
 	regs->gprs[2] = map_signal(ksig->sig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regs->gprs[3] = (unsigned long) &frame->info;
 	regs->gprs[4] = (unsigned long) &frame->uc;
 	regs->gprs[5] = task_thread_info(current)->last_break;
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 give_sigsegv:
@@ -680,15 +754,21 @@ static void handle_signal(unsigned long sig, struct k_sigaction *ka,
 			 siginfo_t *info, sigset_t *oldset,
 			 struct pt_regs *regs)
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void handle_signal(struct ksignal *ksig, sigset_t *oldset,
 			  struct pt_regs *regs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
 
 	/* Set up the stack frame */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame(sig, ka, info, oldset, regs);
@@ -699,12 +779,17 @@ static void handle_signal(struct ksignal *ksig, sigset_t *oldset,
 	signal_delivered(sig, info, ka, regs,
 				 test_thread_flag(TIF_SINGLE_STEP));
 =======
+=======
+>>>>>>> v3.18
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame(ksig, oldset, regs);
 	else
 		ret = setup_frame(ksig->sig, &ksig->ka, oldset, regs);
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLE_STEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -720,9 +805,13 @@ static void handle_signal(struct ksignal *ksig, sigset_t *oldset,
 void do_signal(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	struct ksignal ksig;
 >>>>>>> v3.18
@@ -735,10 +824,16 @@ void do_signal(struct pt_regs *regs)
 	 */
 	current_thread_info()->system_call =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		test_thread_flag(TIF_SYSCALL) ? regs->int_code : 0;
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 
 	if (signr > 0) {
+=======
+		test_pt_regs_flag(regs, PIF_SYSCALL) ? regs->int_code : 0;
+
+	if (get_signal(&ksig)) {
+>>>>>>> v3.18
 =======
 		test_pt_regs_flag(regs, PIF_SYSCALL) ? regs->int_code : 0;
 
@@ -755,7 +850,11 @@ void do_signal(struct pt_regs *regs)
 				break;
 			case -ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (!(ka.sa.sa_flags & SA_RESTART)) {
+=======
+				if (!(ksig.ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 =======
 				if (!(ksig.ka.sa.sa_flags & SA_RESTART)) {
 >>>>>>> v3.18
@@ -773,6 +872,7 @@ void do_signal(struct pt_regs *regs)
 		}
 		/* No longer in a system call */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_thread_flag(TIF_SYSCALL);
 
 		if (is_compat_task())
@@ -780,19 +880,28 @@ void do_signal(struct pt_regs *regs)
 		else
 			handle_signal(signr, &ka, &info, oldset, regs);
 =======
+=======
+>>>>>>> v3.18
 		clear_pt_regs_flag(regs, PIF_SYSCALL);
 
 		if (is_compat_task())
 			handle_signal32(&ksig, oldset, regs);
 		else
 			handle_signal(&ksig, oldset, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 
 	/* No handlers present - check for system call restart */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_thread_flag(TIF_SYSCALL);
+=======
+	clear_pt_regs_flag(regs, PIF_SYSCALL);
+>>>>>>> v3.18
 =======
 	clear_pt_regs_flag(regs, PIF_SYSCALL);
 >>>>>>> v3.18
@@ -809,9 +918,15 @@ void do_signal(struct pt_regs *regs)
 			/* Restart system call with magic TIF bit. */
 			regs->gprs[2] = regs->orig_gpr2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_thread_flag(TIF_SYSCALL);
 			if (test_thread_flag(TIF_SINGLE_STEP))
 				set_thread_flag(TIF_PER_TRAP);
+=======
+			set_pt_regs_flag(regs, PIF_SYSCALL);
+			if (test_thread_flag(TIF_SINGLE_STEP))
+				clear_pt_regs_flag(regs, PIF_PER_TRAP);
+>>>>>>> v3.18
 =======
 			set_pt_regs_flag(regs, PIF_SYSCALL);
 			if (test_thread_flag(TIF_SINGLE_STEP))

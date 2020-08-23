@@ -213,7 +213,11 @@ static struct clk_lookup clocks[] = {
 	INIT_CK(NULL,			"apb_pclk",	&clk_p),
 	INIT_CK(NULL,			"pll2",		&clk_pll2),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_CK("ep93xx-ohci",		NULL,		&clk_usb_host),
+=======
+	INIT_CK("ohci-platform",	NULL,		&clk_usb_host),
+>>>>>>> v3.18
 =======
 	INIT_CK("ohci-platform",	NULL,		&clk_usb_host),
 >>>>>>> v3.18

@@ -503,7 +503,12 @@ wd33c93_execute(struct Scsi_Host *instance)
 	prev = NULL;
 	while (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(hostdata->busy[cmd->device->id] & (1 << cmd->device->lun)))
+=======
+		if (!(hostdata->busy[cmd->device->id] &
+		      (1 << (cmd->device->lun & 0xff))))
+>>>>>>> v3.18
 =======
 		if (!(hostdata->busy[cmd->device->id] &
 		      (1 << (cmd->device->lun & 0xff))))
@@ -599,15 +604,21 @@ wd33c93_execute(struct Scsi_Host *instance)
 	write_wd33c93(regs, WD_SOURCE_ID, ((cmd->SCp.phase) ? SRCID_ER : 0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_wd33c93(regs, WD_TARGET_LUN, cmd->device->lun);
 	write_wd33c93(regs, WD_SYNCHRONOUS_TRANSFER,
 		      hostdata->sync_xfer[cmd->device->id]);
 	hostdata->busy[cmd->device->id] |= (1 << cmd->device->lun);
 =======
+=======
+>>>>>>> v3.18
 	write_wd33c93(regs, WD_TARGET_LUN, (u8)cmd->device->lun);
 	write_wd33c93(regs, WD_SYNCHRONOUS_TRANSFER,
 		      hostdata->sync_xfer[cmd->device->id]);
 	hostdata->busy[cmd->device->id] |= (1 << (cmd->device->lun & 0xFF));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((hostdata->level2 == L2_NONE) ||
@@ -875,7 +886,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 
 		cmd->result = DID_NO_CONNECT << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -912,7 +927,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		/* construct an IDENTIFY message with correct disconnect bit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hostdata->outgoing_msg[0] = (0x80 | 0x00 | cmd->device->lun);
+=======
+		hostdata->outgoing_msg[0] = IDENTIFY(0, cmd->device->lun);
+>>>>>>> v3.18
 =======
 		hostdata->outgoing_msg[0] = IDENTIFY(0, cmd->device->lun);
 >>>>>>> v3.18
@@ -1200,7 +1219,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 			DB(DB_INTR, printk(":%d.%d", cmd->SCp.Status, lun))
 			    hostdata->connected = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+			hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 			hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -1293,7 +1316,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		DB(DB_INTR, printk("UNEXP_DISC"))
 		    hostdata->connected = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -1329,7 +1356,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		case S_PRE_CMP_DISC:
 			hostdata->connected = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+			hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 			hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -1386,7 +1417,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 				cmd = (struct scsi_cmnd *) hostdata->selecting;
 				hostdata->selecting = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+				hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 				hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -1402,7 +1437,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 				if (phs == 0x00) {
 					hostdata->busy[cmd->device->id] &=
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    ~(1 << cmd->device->lun);
+=======
+						~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 						~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -1489,7 +1528,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		patch = NULL;
 		while (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (id == cmd->device->id && lun == cmd->device->lun)
+=======
+			if (id == cmd->device->id && lun == (u8)cmd->device->lun)
+>>>>>>> v3.18
 =======
 			if (id == cmd->device->id && lun == (u8)cmd->device->lun)
 >>>>>>> v3.18
@@ -1504,7 +1547,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 			printk
 			    ("---TROUBLE: target %d.%d not in disconnect queue---",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     id, lun);
+=======
+			     id, (u8)lun);
+>>>>>>> v3.18
 =======
 			     id, (u8)lun);
 >>>>>>> v3.18
@@ -1754,7 +1801,11 @@ wd33c93_abort(struct scsi_cmnd * cmd)
 		printk("asr=%02x, sr=%02x.", asr, sr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 =======
 		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
 >>>>>>> v3.18
@@ -2222,7 +2273,11 @@ wd33c93_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		if (hd->connected) {
 			cmd = (struct scsi_cmnd *) hd->connected;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)",
+=======
+			seq_printf(m, " %d:%llu(%02x)",
+>>>>>>> v3.18
 =======
 			seq_printf(m, " %d:%llu(%02x)",
 >>>>>>> v3.18
@@ -2234,7 +2289,11 @@ wd33c93_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		cmd = (struct scsi_cmnd *) hd->input_Q;
 		while (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)",
+=======
+			seq_printf(m, " %d:%llu(%02x)",
+>>>>>>> v3.18
 =======
 			seq_printf(m, " %d:%llu(%02x)",
 >>>>>>> v3.18
@@ -2247,7 +2306,11 @@ wd33c93_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		cmd = (struct scsi_cmnd *) hd->disconnected_Q;
 		while (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)",
+=======
+			seq_printf(m, " %d:%llu(%02x)",
+>>>>>>> v3.18
 =======
 			seq_printf(m, " %d:%llu(%02x)",
 >>>>>>> v3.18

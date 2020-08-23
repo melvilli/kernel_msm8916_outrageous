@@ -109,7 +109,11 @@ static void vx2_outb(struct vx_core *chip, int offset, unsigned char val)
 	outb(val, vx2_reg_addr(chip, offset));
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "outb: %x -> %x\n", val, vx2_reg_addr(chip, offset));
+=======
+	dev_dbg(chip->card->dev, "outb: %x -> %x\n", val, vx2_reg_addr(chip, offset));
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "outb: %x -> %x\n", val, vx2_reg_addr(chip, offset));
 >>>>>>> v3.18
@@ -134,7 +138,11 @@ static void vx2_outl(struct vx_core *chip, int offset, unsigned int val)
 {
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "outl: %x -> %x\n", val, vx2_reg_addr(chip, offset));
+=======
+	dev_dbg(chip->card->dev, "outl: %x -> %x\n", val, vx2_reg_addr(chip, offset));
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "outl: %x -> %x\n", val, vx2_reg_addr(chip, offset));
 >>>>>>> v3.18
@@ -182,7 +190,11 @@ static int vx2_test_xilinx(struct vx_core *_chip)
 	unsigned int data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("testing xilinx...\n");
+=======
+	dev_dbg(_chip->card->dev, "testing xilinx...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(_chip->card->dev, "testing xilinx...\n");
 >>>>>>> v3.18
@@ -196,7 +208,11 @@ static int vx2_test_xilinx(struct vx_core *_chip)
 	data = vx_inl(chip, STATUS);
 	if ((data & VX_STATUS_VAL_TEST0_MASK) == VX_STATUS_VAL_TEST0_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("bad!\n");
+=======
+		dev_dbg(_chip->card->dev, "bad!\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(_chip->card->dev, "bad!\n");
 >>>>>>> v3.18
@@ -209,7 +225,11 @@ static int vx2_test_xilinx(struct vx_core *_chip)
 	data = vx_inl(chip, STATUS);
 	if (! (data & VX_STATUS_VAL_TEST0_MASK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("bad! #2\n");
+=======
+		dev_dbg(_chip->card->dev, "bad! #2\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(_chip->card->dev, "bad! #2\n");
 >>>>>>> v3.18
@@ -224,7 +244,11 @@ static int vx2_test_xilinx(struct vx_core *_chip)
 		data = vx_inl(chip, STATUS);
 		if ((data & VX_STATUS_VAL_TEST1_MASK) == VX_STATUS_VAL_TEST1_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("bad! #3\n");
+=======
+			dev_dbg(_chip->card->dev, "bad! #3\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(_chip->card->dev, "bad! #3\n");
 >>>>>>> v3.18
@@ -237,17 +261,23 @@ static int vx2_test_xilinx(struct vx_core *_chip)
 		data = vx_inl(chip, STATUS);
 		if (! (data & VX_STATUS_VAL_TEST1_MASK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("bad! #4\n");
 			return -ENODEV;
 		}
 	}
 	snd_printdd("ok, xilinx fine.\n");
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(_chip->card->dev, "bad! #4\n");
 			return -ENODEV;
 		}
 	}
 	dev_dbg(_chip->card->dev, "ok, xilinx fine.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -430,7 +460,12 @@ static int vx2_load_xilinx_binary(struct vx_core *chip, const struct firmware *x
 		if (i & 0x0100)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "vx222: xilinx test failed after load, GPIOC=0x%x\n", i);
+=======
+		dev_err(chip->card->dev,
+			"xilinx test failed after load, GPIOC=0x%x\n", i);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"xilinx test failed after load, GPIOC=0x%x\n", i);

@@ -620,6 +620,7 @@ static ssize_t sq_write(struct file *file, const char __user *src, size_t uLeft,
 
 	while (uLeft) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (write_sq.count >= write_sq.max_active) {
 			sq_play();
 			if (write_sq.non_blocking)
@@ -630,6 +631,8 @@ static ssize_t sq_write(struct file *file, const char __user *src, size_t uLeft,
 		}
 
 =======
+=======
+>>>>>>> v3.18
 		DEFINE_WAIT(wait);
 
 		while (write_sq.count >= write_sq.max_active) {
@@ -651,6 +654,9 @@ static ssize_t sq_write(struct file *file, const char __user *src, size_t uLeft,
 
 		finish_wait(&write_sq.action_queue, &wait);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Here, we can avoid disabling the interrupt by first
 		 * copying and translating the data, and then updating
@@ -732,11 +738,16 @@ static int sq_open2(struct sound_queue *sq, struct file *file, fmode_t mode,
 				return rc;
 			rc = -EINTR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (sq->busy) {
 				SLEEP(sq->open_queue);
 				if (signal_pending(current))
 					return rc;
 			}
+=======
+			if (wait_event_interruptible(sq->open_queue, !sq->busy))
+				return rc;
+>>>>>>> v3.18
 =======
 			if (wait_event_interruptible(sq->open_queue, !sq->busy))
 				return rc;
@@ -874,7 +885,12 @@ static int sq_fsync(void)
 
 	while (write_sq.active) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SLEEP(write_sq.sync_queue);
+=======
+		wait_event_interruptible_timeout(write_sq.sync_queue,
+						 !write_sq.active, HZ);
+>>>>>>> v3.18
 =======
 		wait_event_interruptible_timeout(write_sq.sync_queue,
 						 !write_sq.active, HZ);

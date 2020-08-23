@@ -83,10 +83,13 @@ static int sg_set_timeout(struct request_queue *q, int __user *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sg_get_reserved_size(struct request_queue *q, int __user *p)
 {
 	unsigned val = min(q->sg_reserved_size, queue_max_sectors(q) << 9);
 =======
+=======
+>>>>>>> v3.18
 static int max_sectors_bytes(struct request_queue *q)
 {
 	unsigned int max_sectors = queue_max_sectors(q);
@@ -99,6 +102,9 @@ static int max_sectors_bytes(struct request_queue *q)
 static int sg_get_reserved_size(struct request_queue *q, int __user *p)
 {
 	int val = min_t(int, q->sg_reserved_size, max_sectors_bytes(q));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return put_user(val, p);
@@ -114,10 +120,15 @@ static int sg_set_reserved_size(struct request_queue *q, int __user *p)
 	if (size < 0)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size > (queue_max_sectors(q) << 9))
 		size = queue_max_sectors(q) << 9;
 
 	q->sg_reserved_size = size;
+=======
+
+	q->sg_reserved_size = min(size, max_sectors_bytes(q));
+>>>>>>> v3.18
 =======
 
 	q->sg_reserved_size = min(size, max_sectors_bytes(q));
@@ -196,9 +207,12 @@ static void blk_set_cmd_filter_defaults(struct blk_cmd_filter *filter)
 	__set_bit(WRITE_LONG, filter->write_ok);
 	__set_bit(WRITE_LONG_2, filter->write_ok);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__set_bit(WRITE_SAME, filter->write_ok);
 	__set_bit(WRITE_SAME_16, filter->write_ok);
 	__set_bit(WRITE_SAME_32, filter->write_ok);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__set_bit(ERASE, filter->write_ok);
@@ -232,10 +246,13 @@ int blk_verify_command(unsigned char *cmd, fmode_t has_write_perm)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if there's no filter set, assume we're filtering everything out */
 	if (!filter)
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Anybody who can open the device can do a read-safe command */
@@ -306,7 +323,10 @@ static int blk_complete_sghdr_rq(struct request *rq, struct sg_io_hdr *hdr,
 	if (!ret)
 		ret = r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_put_request(rq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -318,7 +338,13 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 {
 	unsigned long start_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int writing = 0, ret = 0;
+=======
+	ssize_t ret = 0;
+	int writing = 0;
+	int at_head = 0;
+>>>>>>> v3.18
 =======
 	ssize_t ret = 0;
 	int writing = 0;
@@ -331,8 +357,11 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 	if (hdr->interface_id != 'S')
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdr->cmd_len > BLK_MAX_CDB)
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -350,6 +379,7 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 		case SG_DXFER_FROM_DEV:
 			break;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	rq = blk_get_request(q, writing ? WRITE : READ, GFP_KERNEL);
@@ -395,6 +425,8 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 			iov_data_len += iov[i].iov_len;
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (hdr->flags & SG_FLAG_Q_AT_HEAD)
 		at_head = 1;
 
@@ -428,6 +460,9 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 
 		iov_data_len = ret;
 		ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* SG_IO howto says that the shorter of the two wins */
@@ -439,14 +474,20 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = blk_rq_map_user_iov(q, rq, NULL, sg_iov, hdr->iovec_count,
 					  iov_data_len, GFP_KERNEL);
 		kfree(sg_iov);
 =======
+=======
+>>>>>>> v3.18
 		ret = blk_rq_map_user_iov(q, rq, NULL, (struct sg_iovec *) iov,
 					  hdr->iovec_count,
 					  iov_data_len, GFP_KERNEL);
 		kfree(iov);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (hdr->dxfer_len)
 		ret = blk_rq_map_user(q, rq, NULL, hdr->dxferp, hdr->dxfer_len,
@@ -454,7 +495,11 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_free_cdb;
+>>>>>>> v3.18
 =======
 		goto out_free_cdb;
 >>>>>>> v3.18
@@ -472,6 +517,7 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 	 * N.B. a non-zero SCSI status is _not_ necessarily an error.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_execute_rq(q, bd_disk, rq, 0);
 
 	hdr->duration = jiffies_to_msecs(jiffies - start_time);
@@ -479,6 +525,8 @@ static int sg_io(struct request_queue *q, struct gendisk *bd_disk,
 	return blk_complete_sghdr_rq(rq, hdr, bio);
 out:
 =======
+=======
+>>>>>>> v3.18
 	blk_execute_rq(q, bd_disk, rq, at_head);
 
 	hdr->duration = jiffies_to_msecs(jiffies - start_time);
@@ -489,6 +537,9 @@ out_free_cdb:
 	if (rq->cmd != rq->__cmd)
 		kfree(rq->cmd);
 out_put_request:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	blk_put_request(rq);
 	return ret;
@@ -561,12 +612,18 @@ int sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,
 
 	rq = blk_get_request(q, in_len ? WRITE : READ, __GFP_WAIT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(rq)) {
 		err = PTR_ERR(rq);
 		goto error_free_buffer;
 	}
 	blk_rq_set_block_pc(rq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cmdlen = COMMAND_SIZE(opcode);
@@ -622,7 +679,10 @@ int sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,
 	rq->sense = sense;
 	rq->sense_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_rq_set_block_pc(rq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -643,14 +703,20 @@ int sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,
 	
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(buffer);
 	blk_put_request(rq);
 =======
+=======
+>>>>>>> v3.18
 	blk_put_request(rq);
 
 error_free_buffer:
 	kfree(buffer);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -665,6 +731,11 @@ static int __blk_send_generic(struct request_queue *q, struct gendisk *bd_disk,
 
 	rq = blk_get_request(q, WRITE, __GFP_WAIT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_ERR(rq))
+		return PTR_ERR(rq);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq))
 		return PTR_ERR(rq);

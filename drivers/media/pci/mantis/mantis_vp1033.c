@@ -36,7 +36,11 @@
 #include "mantis_reg.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 lgtdqcs001f_inittab[] = {
+=======
+static u8 lgtdqcs001f_inittab[] = {
+>>>>>>> v3.18
 =======
 static u8 lgtdqcs001f_inittab[] = {
 >>>>>>> v3.18
@@ -155,7 +159,11 @@ static int lgtdqcs001f_set_symbol_rate(struct dvb_frontend *fe,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct stv0299_config lgtdqcs001f_config = {
+=======
+static struct stv0299_config lgtdqcs001f_config = {
+>>>>>>> v3.18
 =======
 static struct stv0299_config lgtdqcs001f_config = {
 >>>>>>> v3.18

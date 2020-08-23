@@ -5,7 +5,11 @@
 // Confidence: Moderate
 // URL: http://coccinelle.lip6.fr/
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Options: -include_headers
+=======
+// Options: --include-headers
+>>>>>>> v3.18
 =======
 // Options: --include-headers
 >>>>>>> v3.18

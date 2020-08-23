@@ -269,7 +269,11 @@ static int spear_pinctrl_endisable(struct pinctrl_dev *pctldev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spear_pinctrl_enable(struct pinctrl_dev *pctldev, unsigned function,
+=======
+static int spear_pinctrl_set_mux(struct pinctrl_dev *pctldev, unsigned function,
+>>>>>>> v3.18
 =======
 static int spear_pinctrl_set_mux(struct pinctrl_dev *pctldev, unsigned function,
 >>>>>>> v3.18
@@ -279,12 +283,15 @@ static int spear_pinctrl_set_mux(struct pinctrl_dev *pctldev, unsigned function,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void spear_pinctrl_disable(struct pinctrl_dev *pctldev,
 		unsigned function, unsigned group)
 {
 	spear_pinctrl_endisable(pctldev, function, group, false);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* gpio with pinmux */
@@ -352,8 +359,12 @@ static const struct pinmux_ops spear_pinmux_ops = {
 	.get_function_name = spear_pinctrl_get_func_name,
 	.get_function_groups = spear_pinctrl_get_func_groups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable = spear_pinctrl_enable,
 	.disable = spear_pinctrl_disable,
+=======
+	.set_mux = spear_pinctrl_set_mux,
+>>>>>>> v3.18
 =======
 	.set_mux = spear_pinctrl_set_mux,
 >>>>>>> v3.18
@@ -379,10 +390,13 @@ int spear_pinctrl_probe(struct platform_device *pdev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pmx = devm_kzalloc(&pdev->dev, sizeof(*pmx), GFP_KERNEL);
@@ -392,16 +406,22 @@ int spear_pinctrl_probe(struct platform_device *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmx->vbase = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 	if (!pmx->vbase) {
 		dev_err(&pdev->dev, "Couldn't ioremap at index 0\n");
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	pmx->vbase = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(pmx->vbase))
 		return PTR_ERR(pmx->vbase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pmx->dev = &pdev->dev;

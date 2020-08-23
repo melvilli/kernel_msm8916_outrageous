@@ -29,11 +29,14 @@
 
 #define VISEntryHalf					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VISEntry
 
 #define VISExitHalf					\
 	VISExit
 =======
+=======
+>>>>>>> v3.18
 	rd		%fprs, %o5;			\
 	andcc		%o5, FPRS_FEF, %g0;		\
 	be,pt		%icc, 297f;			\
@@ -44,6 +47,9 @@
 	clr		%o5;				\
 297:	wr		%o5, FPRS_FEF, %fprs;		\
 298:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VISEntryHalfFast(fail_label)			\
@@ -55,7 +61,11 @@
 297:	wr		%o5, FPRS_FEF, %fprs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VISExitHalfFast					\
+=======
+#define VISExitHalf					\
+>>>>>>> v3.18
 =======
 #define VISExitHalf					\
 >>>>>>> v3.18
@@ -77,7 +87,12 @@ static inline void save_and_clear_fpu(void) {
 		"o5", "g1", "g2", "g3", "g7", "cc");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int vis_emul(struct pt_regs *, unsigned int);
+=======
+
+int vis_emul(struct pt_regs *, unsigned int);
+>>>>>>> v3.18
 =======
 
 int vis_emul(struct pt_regs *, unsigned int);

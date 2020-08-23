@@ -49,6 +49,7 @@
 #include "fsnotify.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache *fsnotify_event_cachep;
 static struct kmem_cache *fsnotify_event_holder_cachep;
 /*
@@ -58,6 +59,8 @@ static struct kmem_cache *fsnotify_event_holder_cachep;
  * get set to 0 so it will never get 'freed'
  */
 static struct fsnotify_event *q_overflow_event;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static atomic_t fsnotify_sync_cookie = ATOMIC_INIT(0);
@@ -79,6 +82,7 @@ bool fsnotify_notify_queue_is_empty(struct fsnotify_group *group)
 	return list_empty(&group->notification_list) ? true : false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void fsnotify_get_event(struct fsnotify_event *event)
 {
@@ -135,6 +139,8 @@ struct fsnotify_event_private_data *fsnotify_remove_priv_from_event(struct fsnot
 	}
 	return priv;
 =======
+=======
+>>>>>>> v3.18
 void fsnotify_destroy_event(struct fsnotify_group *group,
 			    struct fsnotify_event *event)
 {
@@ -144,11 +150,15 @@ void fsnotify_destroy_event(struct fsnotify_group *group,
 	/* If the event is still queued, we have a problem... */
 	WARN_ON(!list_empty(&event->list));
 	group->ops->free_event(event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Add an event to the group notification queue.  The group can later pull this
+<<<<<<< HEAD
 <<<<<<< HEAD
  * event off the queue to deal with.  If the event is successfully added to the
  * group's notification queue, a reference is taken on event.
@@ -179,6 +189,8 @@ alloc_holder:
 			return ERR_PTR(-ENOMEM);
 	}
 =======
+=======
+>>>>>>> v3.18
  * event off the queue to deal with.  The function returns 0 if the event was
  * added to the queue, 1 if the event was merged with some other queued event,
  * 2 if the queue of events has overflown.
@@ -192,11 +204,15 @@ int fsnotify_add_event(struct fsnotify_group *group,
 	struct list_head *list = &group->notification_list;
 
 	pr_debug("%s: group=%p event=%p\n", __func__, group, event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&group->notification_mutex);
 
 	if (group->q_len >= group->max_events) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		event = q_overflow_event;
 
@@ -255,6 +271,8 @@ int fsnotify_add_event(struct fsnotify_group *group,
 		list_add_tail(&priv->event_list, &event->private_data_list);
 	spin_unlock(&event->lock);
 =======
+=======
+>>>>>>> v3.18
 		ret = 2;
 		/* Queue overflow event only if it isn't already queued */
 		if (!list_empty(&group->overflow_event->list)) {
@@ -276,11 +294,15 @@ int fsnotify_add_event(struct fsnotify_group *group,
 queue:
 	group->q_len++;
 	list_add_tail(&event->list, list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&group->notification_mutex);
 
 	wake_up(&group->notification_waitq);
 	kill_fasync(&group->fsn_fa, SIGIO, POLL_IN);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return return_event;
 }
@@ -295,6 +317,8 @@ struct fsnotify_event *fsnotify_remove_notify_event(struct fsnotify_group *group
 	struct fsnotify_event *event;
 	struct fsnotify_event_holder *holder;
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -320,12 +344,16 @@ void fsnotify_remove_event(struct fsnotify_group *group,
 struct fsnotify_event *fsnotify_remove_first_event(struct fsnotify_group *group)
 {
 	struct fsnotify_event *event;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!mutex_is_locked(&group->notification_mutex));
 
 	pr_debug("%s: group=%p\n", __func__, group);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	holder = list_first_entry(&group->notification_list, struct fsnotify_event_holder, event_list);
 
@@ -341,6 +369,8 @@ struct fsnotify_event *fsnotify_remove_first_event(struct fsnotify_group *group)
 		fsnotify_destroy_event_holder(holder);
 
 =======
+=======
+>>>>>>> v3.18
 	event = list_first_entry(&group->notification_list,
 				 struct fsnotify_event, list);
 	/*
@@ -348,6 +378,9 @@ struct fsnotify_event *fsnotify_remove_first_event(struct fsnotify_group *group)
 	 * check in fsnotify_add_event() works
 	 */
 	list_del_init(&event->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	group->q_len--;
 
@@ -355,6 +388,7 @@ struct fsnotify_event *fsnotify_remove_first_event(struct fsnotify_group *group)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This will not remove the event, that must be done with fsnotify_remove_notify_event()
  */
@@ -370,6 +404,8 @@ struct fsnotify_event *fsnotify_peek_notify_event(struct fsnotify_group *group)
 
 	return event;
 =======
+=======
+>>>>>>> v3.18
  * This will not remove the event, that must be done with
  * fsnotify_remove_first_event()
  */
@@ -379,6 +415,9 @@ struct fsnotify_event *fsnotify_peek_first_event(struct fsnotify_group *group)
 
 	return list_first_entry(&group->notification_list,
 				struct fsnotify_event, list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -389,6 +428,7 @@ struct fsnotify_event *fsnotify_peek_first_event(struct fsnotify_group *group)
 void fsnotify_flush_notify(struct fsnotify_group *group)
 {
 	struct fsnotify_event *event;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct fsnotify_event_private_data *priv;
 
@@ -405,16 +445,22 @@ void fsnotify_flush_notify(struct fsnotify_group *group)
 		}
 		fsnotify_put_event(event); /* matches fsnotify_add_notify_event */
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&group->notification_mutex);
 	while (!fsnotify_notify_queue_is_empty(group)) {
 		event = fsnotify_remove_first_event(group);
 		fsnotify_destroy_event(group, event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mutex_unlock(&group->notification_mutex);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void initialize_event(struct fsnotify_event *event)
 {
@@ -498,13 +544,19 @@ struct fsnotify_event *fsnotify_clone_event(struct fsnotify_event *old_event)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * fsnotify_create_event - Allocate a new event which will be sent to each
  * group's handle_event function if the group was interested in this
  * particular event.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @to_tell the inode which is supposed to receive the event (sometimes a
+=======
+ * @inode the inode which is supposed to receive the event (sometimes a
+>>>>>>> v3.18
 =======
  * @inode the inode which is supposed to receive the event (sometimes a
 >>>>>>> v3.18
@@ -514,6 +566,7 @@ struct fsnotify_event *fsnotify_clone_event(struct fsnotify_event *old_event)
  * @data_type flag indication if the data is a file, path, inode, nothing...
  * @name the filename, if available
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct fsnotify_event *fsnotify_create_event(struct inode *to_tell, __u32 mask, void *data,
 					     int data_type, const unsigned char *name,
@@ -584,6 +637,8 @@ static __init int fsnotify_notification_init(void)
 }
 subsys_initcall(fsnotify_notification_init);
 =======
+=======
+>>>>>>> v3.18
 void fsnotify_init_event(struct fsnotify_event *event, struct inode *inode,
 			 u32 mask)
 {
@@ -591,4 +646,7 @@ void fsnotify_init_event(struct fsnotify_event *event, struct inode *inode,
 	event->inode = inode;
 	event->mask = mask;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

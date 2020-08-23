@@ -26,6 +26,7 @@
  *	 the maximum is a tad hairier ...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 LEAF(__strnlen_user_asm)
 	LONG_L		v0, TI_ADDR_LIMIT($28)	# pointer ok?
 	and		v0, a0
@@ -46,6 +47,8 @@ FEXPORT(__strnlen_user_nocheck_asm)
 	move		v0, zero
 	jr		ra
 =======
+=======
+>>>>>>> v3.18
 	.macro __BUILD_STRNLEN_ASM func
 LEAF(__strnlen_\func\()_asm)
 	LONG_L		v0, TI_ADDR_LIMIT($28)	# pointer ok?
@@ -91,4 +94,7 @@ __BUILD_STRNLEN_ASM kernel
 __BUILD_STRNLEN_ASM user
 	.set pop
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

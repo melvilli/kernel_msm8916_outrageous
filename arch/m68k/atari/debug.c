@@ -288,6 +288,11 @@ static void __init atari_init_midi_port(int cflag)
 static int __init atari_debug_setup(char *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool registered;
+
+>>>>>>> v3.18
 =======
 	bool registered;
 
@@ -300,6 +305,10 @@ static int __init atari_debug_setup(char *arg)
 		arg = MACH_IS_FALCON ? "ser2" : "ser1";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	registered = !!atari_console_driver.write;
+>>>>>>> v3.18
 =======
 	registered = !!atari_console_driver.write;
 >>>>>>> v3.18
@@ -327,7 +336,11 @@ static int __init atari_debug_setup(char *arg)
 		atari_console_driver.write = atari_par_console_write;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atari_console_driver.write)
+=======
+	if (atari_console_driver.write && !registered)
+>>>>>>> v3.18
 =======
 	if (atari_console_driver.write && !registered)
 >>>>>>> v3.18

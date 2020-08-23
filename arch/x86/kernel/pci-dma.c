@@ -98,6 +98,7 @@ void *dma_generic_alloc_coherent(struct device *dev, size_t size,
 	dma_mask = dma_alloc_coherent_mask(dev, flag);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flag |= __GFP_ZERO;
 again:
 	page = NULL;
@@ -105,6 +106,8 @@ again:
 	if (flag & __GFP_WAIT)
 		page = dma_alloc_from_contiguous(dev, count, get_order(size));
 =======
+=======
+>>>>>>> v3.18
 	flag &= ~__GFP_ZERO;
 again:
 	page = NULL;
@@ -116,6 +119,9 @@ again:
 			page = NULL;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* fallback */
 	if (!page)
@@ -135,7 +141,11 @@ again:
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	memset(page_address(page), 0, size);
+>>>>>>> v3.18
 =======
 	memset(page_address(page), 0, size);
 >>>>>>> v3.18

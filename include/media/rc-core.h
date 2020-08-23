@@ -2,7 +2,11 @@
  * Remote Controller core header
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2009-2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (C) 2009-2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (C) 2009-2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -31,7 +35,11 @@ extern int rc_core_debug;
 do {								\
 	if (rc_core_debug >= level)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("%s: " fmt, __func__, ##__VA_ARGS__);	\
+=======
+		printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__);	\
+>>>>>>> v3.18
 =======
 		printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__);	\
 >>>>>>> v3.18
@@ -44,9 +52,12 @@ enum rc_driver_type {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct rc_dev - represents a remote control device
  * @dev: driver model's view of this device
 =======
+=======
+>>>>>>> v3.18
  * struct rc_scancode_filter - Filter scan codes.
  * @data:	Scancode data to match.
  * @mask:	Mask of bits of scancode to compare.
@@ -73,6 +84,9 @@ enum rc_filter_type {
  * struct rc_dev - represents a remote control device
  * @dev: driver model's view of this device
  * @sysfs_groups: sysfs attribute groups
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @input_name: name of the input child device
  * @input_phys: physical path to the input child device
@@ -88,10 +102,13 @@ enum rc_filter_type {
  * @driver_type: specifies if protocol decoding is done in hardware or software
  * @idle: used to keep track of RX state
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @allowed_protos: bitmask with the supported RC_BIT_* protocols
  * @enabled_protocols: bitmask with the enabled RC_BIT_* protocols
  * @scanmask: some hardware decoders are not capable of providing the full
 =======
+=======
+>>>>>>> v3.18
  * @allowed_protocols: bitmask with the supported RC_BIT_* protocols
  * @enabled_protocols: bitmask with the enabled RC_BIT_* protocols
  * @allowed_wakeup_protocols: bitmask with the supported RC_BIT_* wakeup protocols
@@ -99,12 +116,19 @@ enum rc_filter_type {
  * @scancode_filter: scancode filter
  * @scancode_wakeup_filter: scancode wakeup filters
  * @scancode_mask: some hardware decoders are not capable of providing the full
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	scancode to the application. As this is a hardware limit, we can't do
  *	anything with it. Yet, as the same keycode table can be used with other
  *	devices, a mask is provided to allow its usage. Drivers should generally
  *	leave this field in blank
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @users: number of current users of the device
+>>>>>>> v3.18
 =======
  * @users: number of current users of the device
 >>>>>>> v3.18
@@ -115,6 +139,10 @@ enum rc_filter_type {
  * @timer_keyup: timer for releasing a keypress
  * @last_keycode: keycode of last keypress
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @last_protocol: protocol of last keypress
+>>>>>>> v3.18
 =======
  * @last_protocol: protocol of last keypress
 >>>>>>> v3.18
@@ -127,6 +155,11 @@ enum rc_filter_type {
  * @tx_resolution: resolution (in ns) of output sampler
  * @change_protocol: allow changing the protocol used on hardware decoders
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @change_wakeup_protocol: allow changing the protocol used for wakeup
+ *	filtering
+>>>>>>> v3.18
 =======
  * @change_wakeup_protocol: allow changing the protocol used for wakeup
  *	filtering
@@ -145,16 +178,22 @@ enum rc_filter_type {
  * @s_learning_mode: enable wide band receiver used for learning
  * @s_carrier_report: enable carrier reports
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct rc_dev {
 	struct device			dev;
 =======
+=======
+>>>>>>> v3.18
  * @s_filter: set the scancode filter
  * @s_wakeup_filter: set the wakeup scancode filter
  */
 struct rc_dev {
 	struct device			dev;
 	const struct attribute_group	*sysfs_groups[5];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char			*input_name;
 	const char			*input_phys;
@@ -169,10 +208,13 @@ struct rc_dev {
 	enum rc_driver_type		driver_type;
 	bool				idle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64				allowed_protos;
 	u64				enabled_protocols;
 	u32				scanmask;
 =======
+=======
+>>>>>>> v3.18
 	u64				allowed_protocols;
 	u64				enabled_protocols;
 	u64				allowed_wakeup_protocols;
@@ -181,6 +223,9 @@ struct rc_dev {
 	struct rc_scancode_filter	scancode_wakeup_filter;
 	u32				scancode_mask;
 	u32				users;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void				*priv;
 	spinlock_t			keylock;
@@ -189,6 +234,10 @@ struct rc_dev {
 	struct timer_list		timer_keyup;
 	u32				last_keycode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum rc_type			last_protocol;
+>>>>>>> v3.18
 =======
 	enum rc_type			last_protocol;
 >>>>>>> v3.18
@@ -201,6 +250,10 @@ struct rc_dev {
 	u32				tx_resolution;
 	int				(*change_protocol)(struct rc_dev *dev, u64 *rc_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int				(*change_wakeup_protocol)(struct rc_dev *dev, u64 *rc_type);
+>>>>>>> v3.18
 =======
 	int				(*change_wakeup_protocol)(struct rc_dev *dev, u64 *rc_type);
 >>>>>>> v3.18
@@ -215,11 +268,17 @@ struct rc_dev {
 	int				(*s_learning_mode)(struct rc_dev *dev, int enable);
 	int				(*s_carrier_report) (struct rc_dev *dev, int enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int				(*s_filter)(struct rc_dev *dev,
 						    struct rc_scancode_filter *filter);
 	int				(*s_wakeup_filter)(struct rc_dev *dev,
 							   struct rc_scancode_filter *filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -238,16 +297,22 @@ int rc_register_device(struct rc_dev *dev);
 void rc_unregister_device(struct rc_dev *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rc_repeat(struct rc_dev *dev);
 void rc_keydown(struct rc_dev *dev, int scancode, u8 toggle);
 void rc_keydown_notimeout(struct rc_dev *dev, int scancode, u8 toggle);
 =======
+=======
+>>>>>>> v3.18
 int rc_open(struct rc_dev *rdev);
 void rc_close(struct rc_dev *rdev);
 
 void rc_repeat(struct rc_dev *dev);
 void rc_keydown(struct rc_dev *dev, enum rc_type protocol, u32 scancode, u8 toggle);
 void rc_keydown_notimeout(struct rc_dev *dev, enum rc_type protocol, u32 scancode, u8 toggle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rc_keyup(struct rc_dev *dev);
 u32 rc_g_keycode_from_table(struct rc_dev *dev, u32 scancode);

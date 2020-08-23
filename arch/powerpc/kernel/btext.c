@@ -26,11 +26,14 @@ static void scrollscreen(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void draw_byte(unsigned char c, long locX, long locY);
 static void draw_byte_32(unsigned char *bits, unsigned int *base, int rb);
 static void draw_byte_16(unsigned char *bits, unsigned int *base, int rb);
 static void draw_byte_8(unsigned char *bits, unsigned int *base, int rb);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __force_data __attribute__((__section__(".data")))
@@ -56,7 +59,10 @@ int boot_text_mapped __force_data = 0;
 int force_printk_to_btext = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void rmci_on(void);
 extern void rmci_off(void);
 
@@ -77,6 +83,9 @@ static inline void rmci_maybe_off(void)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC32
 /* Calc BAT values for mapping the display and store them
@@ -161,7 +170,11 @@ void __init btext_unmap(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void map_boot_text(void)
+=======
+void btext_map(void)
+>>>>>>> v3.18
 =======
 void btext_map(void)
 >>>>>>> v3.18
@@ -240,7 +253,11 @@ int btext_initialize(struct device_node *np)
 	dispDeviceRect[3] = height;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map_boot_text();
+=======
+	btext_map();
+>>>>>>> v3.18
 =======
 	btext_map();
 >>>>>>> v3.18
@@ -318,7 +335,11 @@ void btext_update_display(unsigned long phys, int width, int height,
 		boot_text_mapped = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map_boot_text();
+=======
+	btext_map();
+>>>>>>> v3.18
 =======
 	btext_map();
 >>>>>>> v3.18
@@ -337,6 +358,10 @@ void btext_clearscreen(void)
 	int i,j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rmci_maybe_on();
+>>>>>>> v3.18
 =======
 	rmci_maybe_on();
 >>>>>>> v3.18
@@ -348,6 +373,10 @@ void btext_clearscreen(void)
 		base += (dispDeviceRowBytes >> 2);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rmci_maybe_off();
+>>>>>>> v3.18
 =======
 	rmci_maybe_off();
 >>>>>>> v3.18
@@ -402,6 +431,11 @@ static void scrollscreen(void)
 	int i,j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rmci_maybe_on();
+
+>>>>>>> v3.18
 =======
 	rmci_maybe_on();
 
@@ -423,10 +457,13 @@ static void scrollscreen(void)
 		dst += (dispDeviceRowBytes >> 2);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 #endif /* ndef NO_SCROLL */
 
 =======
+=======
+>>>>>>> v3.18
 
 	rmci_maybe_off();
 }
@@ -537,6 +574,9 @@ static noinline void draw_byte(unsigned char c, long locX, long locY)
 	rmci_maybe_off();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void btext_drawchar(char c)
 {
@@ -629,6 +669,7 @@ void btext_drawhex(unsigned long v)
 	btext_drawchar(' ');
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void draw_byte(unsigned char c, long locX, long locY)
 {
@@ -732,12 +773,17 @@ static void draw_byte_8(unsigned char *font, unsigned int *base, int rb)
 		base = (unsigned int *) ((char *)base + rb);
 	}
 =======
+=======
+>>>>>>> v3.18
 void __init udbg_init_btext(void)
 {
 	/* If btext is enabled, we might have a BAT setup for early display,
 	 * thus we do enable some very basic udbg output
 	 */
 	udbg_putc = btext_drawchar;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1087,6 +1133,7 @@ static unsigned char vga_font[cmapsz] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init udbg_init_btext(void)
 {
 	/* If btext is enabled, we might have a BAT setup for early display,
@@ -1094,5 +1141,7 @@ void __init udbg_init_btext(void)
 	 */
 	udbg_putc = btext_drawchar;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

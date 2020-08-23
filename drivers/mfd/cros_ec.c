@@ -24,21 +24,28 @@
 #include <linux/mfd/cros_ec.h>
 #include <linux/mfd/cros_ec_commands.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int cros_ec_prepare_tx(struct cros_ec_device *ec_dev,
 		       struct cros_ec_msg *msg)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 
 #define EC_COMMAND_RETRIES	50
 
 int cros_ec_prepare_tx(struct cros_ec_device *ec_dev,
 		       struct cros_ec_command *msg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uint8_t *out;
 	int csum, i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BUG_ON(msg->out_len > EC_HOST_PARAM_SIZE);
 	out = ec_dev->dout;
@@ -96,6 +103,8 @@ static irqreturn_t ec_irq_thread(int irq, void *data)
 
 static struct mfd_cell cros_devs[] = {
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(msg->outsize > EC_PROTO2_MAX_PARAM_SIZE);
 	out = ec_dev->dout;
 	out[0] = EC_CMD_VERSION0 + msg->version;
@@ -172,6 +181,9 @@ int cros_ec_cmd_xfer(struct cros_ec_device *ec_dev,
 EXPORT_SYMBOL(cros_ec_cmd_xfer);
 
 static const struct mfd_cell cros_devs[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.name = "cros-ec-keyb",
@@ -179,12 +191,18 @@ static const struct mfd_cell cros_devs[] = {
 		.of_compatible = "google,cros-ec-keyb",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.name = "cros-ec-i2c-tunnel",
 		.id = 2,
 		.of_compatible = "google,cros-ec-i2c-tunnel",
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -193,6 +211,7 @@ int cros_ec_register(struct cros_ec_device *ec_dev)
 	struct device *dev = ec_dev->dev;
 	int err = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BLOCKING_INIT_NOTIFIER_HEAD(&ec_dev->event_notifier);
 
@@ -228,6 +247,8 @@ int cros_ec_register(struct cros_ec_device *ec_dev)
 		goto fail_irq;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (ec_dev->din_size) {
 		ec_dev->din = devm_kzalloc(dev, ec_dev->din_size, GFP_KERNEL);
 		if (!ec_dev->din)
@@ -240,6 +261,9 @@ int cros_ec_register(struct cros_ec_device *ec_dev)
 	}
 
 	mutex_init(&ec_dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = mfd_add_devices(dev, 0, cros_devs,
@@ -247,6 +271,7 @@ int cros_ec_register(struct cros_ec_device *ec_dev)
 			      NULL, ec_dev->irq, NULL);
 	if (err) {
 		dev_err(dev, "failed to add mfd devices\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_mfd;
 	}
@@ -264,12 +289,17 @@ fail_dout:
 fail_din:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
 	dev_info(dev, "Chrome EC device registered\n");
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(cros_ec_register);
@@ -278,9 +308,12 @@ int cros_ec_remove(struct cros_ec_device *ec_dev)
 {
 	mfd_remove_devices(ec_dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(ec_dev->irq, ec_dev);
 	kfree(ec_dev->dout);
 	kfree(ec_dev->din);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -318,6 +351,12 @@ EXPORT_SYMBOL(cros_ec_resume);
 
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("ChromeOS EC core driver");
+>>>>>>> v3.18
 =======
 
 MODULE_LICENSE("GPL");

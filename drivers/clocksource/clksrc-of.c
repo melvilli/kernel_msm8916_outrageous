@@ -28,6 +28,7 @@ void __init clocksource_of_init(void)
 	struct device_node *np;
 	const struct of_device_id *match;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clocksource_of_init_fn init_func;
 
 	for_each_matching_node_and_match(np, __clksrc_of_table, &match) {
@@ -35,6 +36,8 @@ void __init clocksource_of_init(void)
 		init_func(np);
 	}
 =======
+=======
+>>>>>>> v3.18
 	of_init_fn_1 init_func;
 	unsigned clocksources = 0;
 
@@ -48,5 +51,8 @@ void __init clocksource_of_init(void)
 	}
 	if (!clocksources)
 		pr_crit("%s: no matching clocksources found\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

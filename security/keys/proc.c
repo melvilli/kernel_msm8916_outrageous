@@ -183,7 +183,10 @@ static void proc_keys_stop(struct seq_file *p, void *v)
 static int proc_keys_show(struct seq_file *m, void *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cred *cred = current_cred();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rb_node *_p = v;
@@ -192,10 +195,13 @@ static int proc_keys_show(struct seq_file *m, void *v)
 	unsigned long timo;
 	key_ref_t key_ref, skey_ref;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char xbuf[16];
 	int rc;
 
 =======
+=======
+>>>>>>> v3.18
 	char xbuf[12];
 	int rc;
 
@@ -209,6 +215,9 @@ static int proc_keys_show(struct seq_file *m, void *v)
 		.flags			= KEYRING_SEARCH_NO_STATE_CHECK,
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	key_ref = make_key_ref(key, 0);
 
@@ -217,9 +226,13 @@ static int proc_keys_show(struct seq_file *m, void *v)
 	 */
 	if (key->perm & KEY_POS_VIEW) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skey_ref = search_my_process_keyrings(key->type, key,
 						      lookup_user_key_possessed,
 						      true, cred);
+=======
+		skey_ref = search_my_process_keyrings(&ctx);
+>>>>>>> v3.18
 =======
 		skey_ref = search_my_process_keyrings(&ctx);
 >>>>>>> v3.18
@@ -235,7 +248,11 @@ static int proc_keys_show(struct seq_file *m, void *v)
 	 *   access to __current_cred() safe
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = key_task_permission(key_ref, cred, KEY_VIEW);
+=======
+	rc = key_task_permission(key_ref, ctx.cred, KEY_NEED_VIEW);
+>>>>>>> v3.18
 =======
 	rc = key_task_permission(key_ref, ctx.cred, KEY_NEED_VIEW);
 >>>>>>> v3.18

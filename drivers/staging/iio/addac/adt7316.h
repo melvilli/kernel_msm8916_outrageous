@@ -19,15 +19,21 @@ struct adt7316_bus {
 	int irq;
 	int irq_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*read) (void *client, u8 reg, u8 *data);
 	int (*write) (void *client, u8 reg, u8 val);
 	int (*multi_read) (void *client, u8 first_reg, u8 count, u8 *data);
 	int (*multi_write) (void *client, u8 first_reg, u8 count, u8 *data);
 =======
+=======
+>>>>>>> v3.18
 	int (*read)(void *client, u8 reg, u8 *data);
 	int (*write)(void *client, u8 reg, u8 val);
 	int (*multi_read)(void *client, u8 first_reg, u8 count, u8 *data);
 	int (*multi_write)(void *client, u8 first_reg, u8 count, u8 *data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -39,7 +45,10 @@ extern const struct dev_pm_ops adt7316_pm_ops;
 #endif
 int adt7316_probe(struct device *dev, struct adt7316_bus *bus, const char *name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int adt7316_remove(struct device *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

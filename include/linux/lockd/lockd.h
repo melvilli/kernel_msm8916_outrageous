@@ -18,7 +18,10 @@
 #include <linux/kref.h>
 #include <linux/utsname.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/nfsd/nfsfh.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/lockd/bind.h>
@@ -28,6 +31,10 @@
 #endif
 #include <linux/lockd/debug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sunrpc/svc.h>
+>>>>>>> v3.18
 =======
 #include <linux/sunrpc/svc.h>
 >>>>>>> v3.18
@@ -186,7 +193,10 @@ struct nlm_block {
 	struct nlm_file *	b_file;		/* file in question */
 	struct cache_req *	b_cache_req;	/* deferred request handling */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file_lock *	b_fl;		/* set for GETLK */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cache_deferred_req * b_deferred_req;
@@ -247,8 +257,12 @@ struct nlm_host * nlm_get_host(struct nlm_host *);
 void		  nlm_shutdown_hosts(void);
 void		  nlm_shutdown_hosts_net(struct net *net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void		  nlm_host_rebooted(const struct net *net,
 					const struct nlm_reboot *);
+=======
+void		  nlm_host_rebooted(const struct nlm_reboot *);
+>>>>>>> v3.18
 =======
 void		  nlm_host_rebooted(const struct nlm_reboot *);
 >>>>>>> v3.18
@@ -260,6 +274,7 @@ int		  nsm_monitor(const struct nlm_host *host);
 void		  nsm_unmonitor(const struct nlm_host *host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nsm_handle *nsm_get_handle(const struct net *net,
 					const struct sockaddr *sap,
 					const size_t salen,
@@ -268,11 +283,16 @@ struct nsm_handle *nsm_get_handle(const struct net *net,
 struct nsm_handle *nsm_reboot_lookup(const struct net *net,
 					const struct nlm_reboot *info);
 =======
+=======
+>>>>>>> v3.18
 struct nsm_handle *nsm_get_handle(const struct sockaddr *sap,
 					const size_t salen,
 					const char *hostname,
 					const size_t hostname_len);
 struct nsm_handle *nsm_reboot_lookup(const struct nlm_reboot *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void		  nsm_release(struct nsm_handle *nsm);
 
@@ -378,8 +398,12 @@ static inline int nlm_compare_locks(const struct file_lock *fl1,
 				    const struct file_lock *fl2)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return file_inode(fl1->fl_file) == file_inode(fl2->fl_file)
 	     && fl1->fl_pid   == fl2->fl_pid
+=======
+	return	fl1->fl_pid   == fl2->fl_pid
+>>>>>>> v3.18
 =======
 	return	fl1->fl_pid   == fl2->fl_pid
 >>>>>>> v3.18

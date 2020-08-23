@@ -6,7 +6,11 @@
  *
  * Atomic wait-for-completion handler data structures.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See kernel/sched.c for details.
+=======
+ * See kernel/sched/completion.c for details.
+>>>>>>> v3.18
 =======
  * See kernel/sched/completion.c for details.
 >>>>>>> v3.18
@@ -24,8 +28,13 @@
  * See also:  complete(), wait_for_completion() (and friends _timeout,
  * _interruptible, _interruptible_timeout, and _killable), init_completion(),
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and macros DECLARE_COMPLETION(), DECLARE_COMPLETION_ONSTACK(), and
  * INIT_COMPLETION().
+=======
+ * reinit_completion(), and macros DECLARE_COMPLETION(),
+ * DECLARE_COMPLETION_ONSTACK().
+>>>>>>> v3.18
 =======
  * reinit_completion(), and macros DECLARE_COMPLETION(),
  * DECLARE_COMPLETION_ONSTACK().
@@ -75,7 +84,11 @@ struct completion {
 /**
  * init_completion - Initialize a dynamically allocated completion
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @x:  completion structure that is to be initialized
+=======
+ * @x:  pointer to completion structure that is to be initialized
+>>>>>>> v3.18
 =======
  * @x:  pointer to completion structure that is to be initialized
 >>>>>>> v3.18
@@ -90,7 +103,10 @@ static inline void init_completion(struct completion *x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * reinit_completion - reinitialize a completion structure
  * @x:  pointer to completion structure that is to be reinitialized
@@ -103,6 +119,9 @@ static inline void reinit_completion(struct completion *x)
 	x->done = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void wait_for_completion(struct completion *);
 extern void wait_for_completion_io(struct completion *);
@@ -123,6 +142,7 @@ extern void complete(struct completion *);
 extern void complete_all(struct completion *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * INIT_COMPLETION - reinitialize a completion structure
  * @x:  completion structure to be reinitialized
@@ -133,6 +153,8 @@ extern void complete_all(struct completion *);
 #define INIT_COMPLETION(x)	((x).done = 0)
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

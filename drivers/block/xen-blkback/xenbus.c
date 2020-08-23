@@ -36,6 +36,11 @@ static int connect_ring(struct backend_info *);
 static void backend_changed(struct xenbus_watch *, const char **,
 			    unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void xen_blkif_free(struct xen_blkif *blkif);
+static void xen_vbd_free(struct xen_vbd *vbd);
+>>>>>>> v3.18
 =======
 static void xen_blkif_free(struct xen_blkif *blkif);
 static void xen_vbd_free(struct xen_vbd *vbd);
@@ -47,7 +52,10 @@ struct xenbus_device *xen_blkbk_xenbus(struct backend_info *be)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The last request could free the device from softirq context and
  * xen_blkif_free() can sleep.
@@ -60,6 +68,9 @@ static void xen_blkif_deferred_free(struct work_struct *work)
 	xen_blkif_free(blkif);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int blkback_name(struct xen_blkif *blkif, char *buf)
 {
@@ -114,7 +125,11 @@ static void xen_update_blkif_status(struct xen_blkif *blkif)
 	invalidate_inode_pages2(blkif->vbd.bdev->bd_inode->i_mapping);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blkif->xenblkd = kthread_run(xen_blkif_schedule, blkif, name);
+=======
+	blkif->xenblkd = kthread_run(xen_blkif_schedule, blkif, "%s", name);
+>>>>>>> v3.18
 =======
 	blkif->xenblkd = kthread_run(xen_blkif_schedule, blkif, "%s", name);
 >>>>>>> v3.18
@@ -123,6 +138,10 @@ static void xen_update_blkif_status(struct xen_blkif *blkif)
 		blkif->xenblkd = NULL;
 		xenbus_dev_error(blkif->be->dev, err, "start xenblkd");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -133,11 +152,17 @@ static struct xen_blkif *xen_blkif_alloc(domid_t domid)
 {
 	struct xen_blkif *blkif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct pending_req *req, *n;
 	int i, j;
 
 	BUILD_BUG_ON(MAX_INDIRECT_PAGES > BLKIF_MAX_INDIRECT_PAGES_PER_REQUEST);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	blkif = kmem_cache_zalloc(xen_blkif_cachep, GFP_KERNEL);
@@ -152,11 +177,14 @@ static struct xen_blkif *xen_blkif_alloc(domid_t domid)
 	atomic_set(&blkif->drain, 0);
 	blkif->st_print = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&blkif->waiting_to_free);
 	blkif->persistent_gnts.rb_node = NULL;
 
 	return blkif;
 =======
+=======
+>>>>>>> v3.18
 	blkif->persistent_gnts.rb_node = NULL;
 	spin_lock_init(&blkif->free_pages_lock);
 	INIT_LIST_HEAD(&blkif->free_pages);
@@ -213,6 +241,9 @@ fail:
 	kmem_cache_free(xen_blkif_cachep, blkif);
 
 	return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -269,6 +300,7 @@ static int xen_blkif_map(struct xen_blkif *blkif, unsigned long shared_page,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void xen_blkif_disconnect(struct xen_blkif *blkif)
 {
 	if (blkif->xenblkd) {
@@ -280,6 +312,8 @@ static void xen_blkif_disconnect(struct xen_blkif *blkif)
 	wait_event(blkif->waiting_to_free, atomic_read(&blkif->refcnt) == 0);
 	atomic_inc(&blkif->refcnt);
 =======
+=======
+>>>>>>> v3.18
 static int xen_blkif_disconnect(struct xen_blkif *blkif)
 {
 	if (blkif->xenblkd) {
@@ -294,6 +328,9 @@ static int xen_blkif_disconnect(struct xen_blkif *blkif)
 	 */
 	if (atomic_read(&blkif->inflight) > 0)
 		return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (blkif->irq) {
@@ -306,21 +343,30 @@ static int xen_blkif_disconnect(struct xen_blkif *blkif)
 		blkif->blk_rings.common.sring = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Remove all persistent grants and the cache of ballooned pages. */
 	xen_blkbk_free_caches(blkif);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void xen_blkif_free(struct xen_blkif *blkif)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!atomic_dec_and_test(&blkif->refcnt))
 		BUG();
 =======
+=======
+>>>>>>> v3.18
 	struct pending_req *req, *n;
 	int i = 0, j;
 
@@ -351,6 +397,9 @@ static void xen_blkif_free(struct xen_blkif *blkif)
 
 	WARN_ON(i != XEN_BLKIF_REQS);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kmem_cache_free(xen_blkif_cachep, blkif);
 }
@@ -513,24 +562,33 @@ static int xen_blkbk_remove(struct xenbus_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (be->blkif) {
 		xen_blkif_disconnect(be->blkif);
 		xen_vbd_free(&be->blkif->vbd);
 		xen_blkif_free(be->blkif);
 		be->blkif = NULL;
 =======
+=======
+>>>>>>> v3.18
 	dev_set_drvdata(&dev->dev, NULL);
 
 	if (be->blkif) {
 		xen_blkif_disconnect(be->blkif);
 		xen_blkif_put(be->blkif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	kfree(be->mode);
 	kfree(be);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&dev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -556,11 +614,14 @@ static void xen_blkbk_discard(struct xenbus_transaction xbt, struct backend_info
 	struct xen_blkif *blkif = be->blkif;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int state = 0;
 	struct block_device *bdev = be->blkif->vbd.bdev;
 	struct request_queue *q = bdev_get_queue(bdev);
 
 =======
+=======
+>>>>>>> v3.18
 	int state = 0, discard_enable;
 	struct block_device *bdev = be->blkif->vbd.bdev;
 	struct request_queue *q = bdev_get_queue(bdev);
@@ -570,6 +631,9 @@ static void xen_blkbk_discard(struct xenbus_transaction xbt, struct backend_info
 	if (err == 1 && !discard_enable)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (blk_queue_discard(q)) {
 		err = xenbus_printf(xbt, dev->nodename,
@@ -721,7 +785,11 @@ static void backend_changed(struct xenbus_watch *watch,
 
 	/* Front end dir is a number, which is used as the handle. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(strrchr(dev->otherend, '/') + 1, 0, &handle);
+=======
+	err = kstrtoul(strrchr(dev->otherend, '/') + 1, 0, &handle);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(strrchr(dev->otherend, '/') + 1, 0, &handle);
 >>>>>>> v3.18
@@ -791,13 +859,19 @@ static void frontend_changed(struct xenbus_device *dev,
 		 * xen_blkif_disconnect() is idempotent.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xen_blkif_disconnect(be->blkif);
 =======
+=======
+>>>>>>> v3.18
 		err = xen_blkif_disconnect(be->blkif);
 		if (err) {
 			xenbus_dev_fatal(dev, err, "pending I/O");
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		err = connect_ring(be);
@@ -866,12 +940,18 @@ again:
 		goto abort;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = xenbus_printf(xbt, dev->nodename, "feature-max-indirect-segments", "%u",
 			    MAX_INDIRECT_SEGMENTS);
 	if (err)
 		dev_warn(&dev->dev, "writing %s/feature-max-indirect-segments (%d)",
 			 dev->nodename, err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = xenbus_printf(xbt, dev->nodename, "sectors", "%llu",
@@ -900,12 +980,18 @@ again:
 		goto abort;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = xenbus_printf(xbt, dev->nodename, "physical-sector-size", "%u",
 			    bdev_physical_block_size(be->blkif->vbd.bdev));
 	if (err)
 		xenbus_dev_error(dev, err, "writing %s/physical-sector-size",
 				 dev->nodename);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = xenbus_transaction_end(xbt, 0);
@@ -985,10 +1071,13 @@ static int connect_ring(struct backend_info *be)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ** Driver Registration ** */
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct xenbus_device_id xen_blkbk_ids[] = {
@@ -996,6 +1085,7 @@ static const struct xenbus_device_id xen_blkbk_ids[] = {
 	{ "" }
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static DEFINE_XENBUS_DRIVER(xen_blkbk, ,
@@ -1005,12 +1095,17 @@ static DEFINE_XENBUS_DRIVER(xen_blkbk, ,
 );
 
 =======
+=======
+>>>>>>> v3.18
 static struct xenbus_driver xen_blkbk_driver = {
 	.ids  = xen_blkbk_ids,
 	.probe = xen_blkbk_probe,
 	.remove = xen_blkbk_remove,
 	.otherend_changed = frontend_changed
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int xen_blkif_xenbus_init(void)

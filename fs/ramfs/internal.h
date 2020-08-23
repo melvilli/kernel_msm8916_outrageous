@@ -11,7 +11,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct address_space_operations ramfs_aops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern const struct inode_operations ramfs_file_inode_operations;

@@ -12,6 +12,12 @@
 #include "vdso.h"
 #include "build-id.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util.h"
+#include "debug.h"
+#include "machine.h"
+>>>>>>> v3.18
 =======
 #include "util.h"
 #include "debug.h"
@@ -35,10 +41,13 @@ static inline int is_no_dso_memory(const char *filename)
 {
 	return !strncmp(filename, "[stack", 6) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       !strcmp(filename, "[heap]");
 }
 
 =======
+=======
+>>>>>>> v3.18
 	       !strncmp(filename, "/SYSV",5)   ||
 	       !strcmp(filename, "[heap]");
 }
@@ -130,6 +139,9 @@ static inline bool replace_android_lib(const char *filename, char *newfilename)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void map__init(struct map *map, enum map_type type,
 	       u64 start, u64 end, u64 pgoff, struct dso *dso)
@@ -139,6 +151,10 @@ void map__init(struct map *map, enum map_type type,
 	map->end      = end;
 	map->pgoff    = pgoff;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	map->reloc    = 0;
+>>>>>>> v3.18
 =======
 	map->reloc    = 0;
 >>>>>>> v3.18
@@ -152,14 +168,20 @@ void map__init(struct map *map, enum map_type type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct map *map__new(struct list_head *dsos__list, u64 start, u64 len,
 		     u64 pgoff, u32 pid, char *filename,
 		     enum map_type type)
 =======
+=======
+>>>>>>> v3.18
 struct map *map__new(struct machine *machine, u64 start, u64 len,
 		     u64 pgoff, u32 pid, u32 d_maj, u32 d_min, u64 ino,
 		     u64 ino_gen, u32 prot, u32 flags, char *filename,
 		     enum map_type type, struct thread *thread)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct map *map = malloc(sizeof(*map));
@@ -168,8 +190,14 @@ struct map *map__new(struct machine *machine, u64 start, u64 len,
 		char newfilename[PATH_MAX];
 		struct dso *dso;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int anon, no_dso, vdso;
 
+=======
+		int anon, no_dso, vdso, android;
+
+		android = is_android_lib(filename);
+>>>>>>> v3.18
 =======
 		int anon, no_dso, vdso, android;
 
@@ -180,8 +208,11 @@ struct map *map__new(struct machine *machine, u64 start, u64 len,
 		no_dso = is_no_dso_memory(filename);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (anon) {
 =======
+=======
+>>>>>>> v3.18
 		map->maj = d_maj;
 		map->min = d_min;
 		map->ino = ino;
@@ -190,11 +221,15 @@ struct map *map__new(struct machine *machine, u64 start, u64 len,
 		map->flags = flags;
 
 		if ((anon || no_dso) && type == MAP__FUNCTION) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			snprintf(newfilename, sizeof(newfilename), "/tmp/perf-%d.map", pid);
 			filename = newfilename;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (vdso) {
 			pgoff = 0;
@@ -202,6 +237,8 @@ struct map *map__new(struct machine *machine, u64 start, u64 len,
 		} else
 			dso = __dsos__findnew(dsos__list, filename);
 =======
+=======
+>>>>>>> v3.18
 		if (android) {
 			if (replace_android_lib(filename, newfilename))
 				filename = newfilename;
@@ -212,6 +249,9 @@ struct map *map__new(struct machine *machine, u64 start, u64 len,
 			dso = vdso__dso_findnew(machine, thread);
 		} else
 			dso = __dsos__findnew(&machine->user_dsos, filename);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (dso == NULL)
@@ -228,7 +268,11 @@ struct map *map__new(struct machine *machine, u64 start, u64 len,
 			 * unnecessary map__load warning.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (no_dso)
+=======
+			if (type != MAP__FUNCTION)
+>>>>>>> v3.18
 =======
 			if (type != MAP__FUNCTION)
 >>>>>>> v3.18
@@ -312,7 +356,11 @@ int map__load(struct map *map, symbol_filter_t filter)
 		return -1;
 	} else if (nr == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBELF_SUPPORT
+=======
+#ifdef HAVE_LIBELF_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_LIBELF_SUPPORT
 >>>>>>> v3.18
@@ -332,12 +380,15 @@ int map__load(struct map *map, symbol_filter_t filter)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Only applies to the kernel, as its symtabs aren't relative like the
 	 * module ones.
 	 */
 	if (map->dso->kernel)
 		map__reloc_vmlinux(map);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -405,6 +456,7 @@ size_t map__fprintf_dsoname(struct map *map, FILE *fp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * objdump wants/reports absolute IPs for ET_EXEC, and RIPs for ET_DYN.
  * map->dso->adjust_symbols==1 for ET_EXEC-like cases.
@@ -416,6 +468,8 @@ u64 map__rip_2objdump(struct map *map, u64 rip)
 			rip;
 	return addr;
 =======
+=======
+>>>>>>> v3.18
 int map__fprintf_srcline(struct map *map, u64 addr, const char *prefix,
 			 FILE *fp)
 {
@@ -475,6 +529,9 @@ u64 map__objdump_2mem(struct map *map, u64 ip)
 		return map->unmap_ip(map, ip + map->pgoff);
 
 	return ip + map->reloc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -487,6 +544,10 @@ void map_groups__init(struct map_groups *mg)
 	}
 	mg->machine = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mg->refcnt = 1;
+>>>>>>> v3.18
 =======
 	mg->refcnt = 1;
 >>>>>>> v3.18
@@ -526,7 +587,10 @@ void map_groups__exit(struct map_groups *mg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool map_groups__empty(struct map_groups *mg)
 {
 	int i;
@@ -563,6 +627,9 @@ void map_groups__put(struct map_groups *mg)
 		map_groups__delete(mg);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void map_groups__flush(struct map_groups *mg)
 {
@@ -594,7 +661,12 @@ struct symbol *map_groups__find_symbol(struct map_groups *mg,
 	struct map *map = map_groups__find(mg, type, addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (map != NULL) {
+=======
+	/* Ensure map is loaded before using map->map_ip */
+	if (map != NULL && map__load(map, filter) >= 0) {
+>>>>>>> v3.18
 =======
 	/* Ensure map is loaded before using map->map_ip */
 	if (map != NULL && map__load(map, filter) >= 0) {
@@ -630,9 +702,12 @@ struct symbol *map_groups__find_symbol_by_name(struct map_groups *mg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 size_t __map_groups__fprintf_maps(struct map_groups *mg,
 				  enum map_type type, int verbose, FILE *fp)
 =======
+=======
+>>>>>>> v3.18
 int map_groups__find_ams(struct addr_map_symbol *ams, symbol_filter_t filter)
 {
 	if (ams->addr < ams->map->start || ams->addr >= ams->map->end) {
@@ -652,6 +727,9 @@ int map_groups__find_ams(struct addr_map_symbol *ams, symbol_filter_t filter)
 
 size_t __map_groups__fprintf_maps(struct map_groups *mg, enum map_type type,
 				  FILE *fp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	size_t printed = fprintf(fp, "%s:\n", map_type__name[type]);
@@ -671,25 +749,35 @@ size_t __map_groups__fprintf_maps(struct map_groups *mg, enum map_type type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 size_t map_groups__fprintf_maps(struct map_groups *mg, int verbose, FILE *fp)
 {
 	size_t printed = 0, i;
 	for (i = 0; i < MAP__NR_TYPES; ++i)
 		printed += __map_groups__fprintf_maps(mg, i, verbose, fp);
 =======
+=======
+>>>>>>> v3.18
 static size_t map_groups__fprintf_maps(struct map_groups *mg, FILE *fp)
 {
 	size_t printed = 0, i;
 	for (i = 0; i < MAP__NR_TYPES; ++i)
 		printed += __map_groups__fprintf_maps(mg, i, fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return printed;
 }
 
 static size_t __map_groups__fprintf_removed_maps(struct map_groups *mg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 enum map_type type,
 						 int verbose, FILE *fp)
+=======
+						 enum map_type type, FILE *fp)
+>>>>>>> v3.18
 =======
 						 enum map_type type, FILE *fp)
 >>>>>>> v3.18
@@ -710,6 +798,7 @@ static size_t __map_groups__fprintf_removed_maps(struct map_groups *mg,
 
 static size_t map_groups__fprintf_removed_maps(struct map_groups *mg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       int verbose, FILE *fp)
 {
 	size_t printed = 0, i;
@@ -728,6 +817,8 @@ size_t map_groups__fprintf(struct map_groups *mg, int verbose, FILE *fp)
 int map_groups__fixup_overlappings(struct map_groups *mg, struct map *map,
 				   int verbose, FILE *fp)
 =======
+=======
+>>>>>>> v3.18
 					       FILE *fp)
 {
 	size_t printed = 0, i;
@@ -745,6 +836,9 @@ size_t map_groups__fprintf(struct map_groups *mg, FILE *fp)
 
 int map_groups__fixup_overlappings(struct map_groups *mg, struct map *map,
 				   FILE *fp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rb_root *root = &mg->maps[map->type];
@@ -778,7 +872,11 @@ int map_groups__fixup_overlappings(struct map_groups *mg, struct map *map,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			before->end = map->start - 1;
+=======
+			before->end = map->start;
+>>>>>>> v3.18
 =======
 			before->end = map->start;
 >>>>>>> v3.18
@@ -796,7 +894,11 @@ int map_groups__fixup_overlappings(struct map_groups *mg, struct map *map,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			after->start = map->end + 1;
+=======
+			after->start = map->end;
+>>>>>>> v3.18
 =======
 			after->start = map->end;
 >>>>>>> v3.18
@@ -838,6 +940,7 @@ int map_groups__clone(struct map_groups *mg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 map__reloc_map_ip(struct map *map, u64 ip)
 {
 	return ip + (s64)map->pgoff;
@@ -867,6 +970,8 @@ void map__reloc_vmlinux(struct map *map)
 	map->pgoff    = reloc;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void maps__insert(struct rb_root *maps, struct map *map)
@@ -906,7 +1011,11 @@ struct map *maps__find(struct rb_root *maps, u64 ip)
 		if (ip < m->start)
 			p = &(*p)->rb_left;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (ip > m->end)
+=======
+		else if (ip >= m->end)
+>>>>>>> v3.18
 =======
 		else if (ip >= m->end)
 >>>>>>> v3.18
@@ -918,7 +1027,10 @@ struct map *maps__find(struct rb_root *maps, u64 ip)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct map *maps__first(struct rb_root *maps)
 {
@@ -937,4 +1049,7 @@ struct map *maps__next(struct map *map)
 		return rb_entry(next, struct map, rb_node);
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -25,7 +25,10 @@
 #include <net/ip.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int inet_ehashfn(struct net *net, const __be32 laddr,
 				 const __u16 lport, const __be32 faddr,
 				 const __be16 fport)
@@ -51,6 +54,9 @@ static unsigned int inet_sk_ehashfn(const struct sock *sk)
 	return inet_ehashfn(net, laddr, lport, faddr, fport);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Allocate and initialize a new local port bind bucket.
@@ -233,7 +239,11 @@ begin:
 		} else if (score == hiscore && reuseport) {
 			matches++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (((u64)phash * matches) >> 32 == 0)
+=======
+			if (reciprocal_scale(phash, matches) == 0)
+>>>>>>> v3.18
 =======
 			if (reciprocal_scale(phash, matches) == 0)
 >>>>>>> v3.18
@@ -263,7 +273,10 @@ begin:
 EXPORT_SYMBOL_GPL(__inet_lookup_listener);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* All sockets share common refcount, but have different destructors */
 void sock_gen_put(struct sock *sk)
 {
@@ -277,6 +290,9 @@ void sock_gen_put(struct sock *sk)
 }
 EXPORT_SYMBOL_GPL(sock_gen_put);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sock *__inet_lookup_established(struct net *net,
 				  struct inet_hashinfo *hashinfo,
@@ -285,7 +301,11 @@ struct sock *__inet_lookup_established(struct net *net,
 				  const int dif)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INET_ADDR_COOKIE(acookie, saddr, daddr)
+=======
+	INET_ADDR_COOKIE(acookie, saddr, daddr);
+>>>>>>> v3.18
 =======
 	INET_ADDR_COOKIE(acookie, saddr, daddr);
 >>>>>>> v3.18
@@ -308,6 +328,7 @@ begin:
 				      saddr, daddr, ports, dif))) {
 			if (unlikely(!atomic_inc_not_zero(&sk->sk_refcnt)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto begintw;
 			if (unlikely(!INET_MATCH(sk, net, acookie,
 						 saddr, daddr, ports, dif))) {
@@ -316,6 +337,8 @@ begin:
 			}
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 				goto out;
 			if (unlikely(!INET_MATCH(sk, net, acookie,
 						 saddr, daddr, ports, dif))) {
@@ -323,6 +346,9 @@ begin:
 				goto begin;
 			}
 			goto found;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -333,6 +359,7 @@ begin:
 	 */
 	if (get_nulls_value(node) != slot)
 		goto begin;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 begintw:
@@ -370,6 +397,11 @@ out:
 	sk = NULL;
 found:
 >>>>>>> v3.18
+=======
+out:
+	sk = NULL;
+found:
+>>>>>>> v3.18
 	rcu_read_unlock();
 	return sk;
 }
@@ -386,7 +418,11 @@ static int __inet_check_established(struct inet_timewait_death_row *death_row,
 	__be32 saddr = inet->inet_daddr;
 	int dif = sk->sk_bound_dev_if;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INET_ADDR_COOKIE(acookie, saddr, daddr)
+=======
+	INET_ADDR_COOKIE(acookie, saddr, daddr);
+>>>>>>> v3.18
 =======
 	INET_ADDR_COOKIE(acookie, saddr, daddr);
 >>>>>>> v3.18
@@ -399,7 +435,11 @@ static int __inet_check_established(struct inet_timewait_death_row *death_row,
 	struct sock *sk2;
 	const struct hlist_nulls_node *node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inet_timewait_sock *tw;
+=======
+	struct inet_timewait_sock *tw = NULL;
+>>>>>>> v3.18
 =======
 	struct inet_timewait_sock *tw = NULL;
 >>>>>>> v3.18
@@ -407,6 +447,7 @@ static int __inet_check_established(struct inet_timewait_death_row *death_row,
 
 	spin_lock(lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Check TIME-WAIT sockets first. */
 	sk_nulls_for_each(sk2, node, &head->twchain) {
@@ -437,6 +478,8 @@ unique:
 	/* Must record num and sport now. Otherwise we will see
 	 * in hash table socket with a funny identity. */
 =======
+=======
+>>>>>>> v3.18
 	sk_nulls_for_each(sk2, node, &head->chain) {
 		if (sk2->sk_hash != hash)
 			continue;
@@ -455,6 +498,9 @@ unique:
 	/* Must record num and sport now. Otherwise we will see
 	 * in hash table socket with a funny identity.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	inet->inet_num = lport;
 	inet->inet_sport = htons(lport);
@@ -565,7 +611,11 @@ void inet_unhash(struct sock *sk)
 
 	spin_lock_bh(lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	done =__sk_nulls_del_node_init_rcu(sk);
+=======
+	done = __sk_nulls_del_node_init_rcu(sk);
+>>>>>>> v3.18
 =======
 	done = __sk_nulls_del_node_init_rcu(sk);
 >>>>>>> v3.18
@@ -596,7 +646,11 @@ int __inet_hash_connect(struct inet_timewait_death_row *death_row,
 		struct inet_timewait_sock *tw = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inet_get_local_port_range(&low, &high);
+=======
+		inet_get_local_port_range(net, &low, &high);
+>>>>>>> v3.18
 =======
 		inet_get_local_port_range(net, &low, &high);
 >>>>>>> v3.18
@@ -606,7 +660,11 @@ int __inet_hash_connect(struct inet_timewait_death_row *death_row,
 		for (i = 1; i <= remaining; i++) {
 			port = low + (i + offset) % remaining;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (inet_is_reserved_local_port(port))
+=======
+			if (inet_is_local_reserved_port(net, port))
+>>>>>>> v3.18
 =======
 			if (inet_is_local_reserved_port(net, port))
 >>>>>>> v3.18

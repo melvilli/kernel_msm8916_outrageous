@@ -1457,6 +1457,7 @@ zoran_set_norm (struct zoran *zr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (norm == V4L2_STD_ALL) {
 		unsigned int status = 0;
 		v4l2_std_id std = 0;
@@ -1482,6 +1483,8 @@ zoran_set_norm (struct zoran *zr,
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (norm & V4L2_STD_SECAM)
 		zr->timing = zr->card.tvn[2];
 	else if (norm & V4L2_STD_NTSC)
@@ -1496,7 +1499,11 @@ zoran_set_norm (struct zoran *zr,
 		zr36057_overlay(zr, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder_call(zr, core, s_std, norm);
+=======
+	decoder_call(zr, video, s_std, norm);
+>>>>>>> v3.18
 =======
 	decoder_call(zr, video, s_std, norm);
 >>>>>>> v3.18

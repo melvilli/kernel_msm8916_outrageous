@@ -1,7 +1,11 @@
 /* Realtek PCI-Express SD/MMC Card Interface driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -33,6 +40,10 @@
 #include <linux/delay.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/workqueue.h>
+>>>>>>> v3.18
 =======
 #include <linux/workqueue.h>
 >>>>>>> v3.18
@@ -43,6 +54,7 @@
 #include <linux/mfd/rtsx_pci.h>
 #include <asm/unaligned.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* SD Tuning Data Structure
  * Record continuous timing phase path
@@ -56,18 +68,26 @@ struct timing_phase_path {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct realtek_pci_sdmmc {
 	struct platform_device	*pdev;
 	struct rtsx_pcr		*pcr;
 	struct mmc_host		*mmc;
 	struct mmc_request	*mrq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	struct workqueue_struct *workq;
 #define SDMMC_WORKQ_NAME	"rtsx_pci_sdmmc_workq"
 
 	struct work_struct	work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex		host_mutex;
 
@@ -78,11 +98,14 @@ struct realtek_pci_sdmmc {
 	bool			eject;
 	bool			initial_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			ddr_mode;
 	int			power_state;
 #define SDMMC_POWER_ON		1
 #define SDMMC_POWER_OFF		0
 =======
+=======
+>>>>>>> v3.18
 	int			power_state;
 #define SDMMC_POWER_ON		1
 #define SDMMC_POWER_OFF		0
@@ -91,6 +114,9 @@ struct realtek_pci_sdmmc {
 	s32			cookie;
 	unsigned int		cookie_sg_count;
 	bool			using_cookie;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -131,7 +157,10 @@ static void sd_print_debug_regs(struct realtek_pci_sdmmc *host)
 #endif /* DEBUG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * sd_pre_dma_transfer - do dma_map_sg() or using cookie
  *
@@ -203,6 +232,9 @@ static void sdmmc_post_req(struct mmc_host *mmc, struct mmc_request *mrq,
 	data->host_cookie = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sd_read_data(struct realtek_pci_sdmmc *host, u8 *cmd, u16 byte_cnt,
 		u8 *buf, int buf_len, int timeout)
@@ -335,6 +367,10 @@ static void sd_send_cmd_get_rsp(struct realtek_pci_sdmmc *host,
 	u8 rsp_type;
 	int rsp_len = 5;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool clock_toggled = false;
+>>>>>>> v3.18
 =======
 	bool clock_toggled = false;
 >>>>>>> v3.18
@@ -385,6 +421,11 @@ static void sd_send_cmd_get_rsp(struct realtek_pci_sdmmc *host,
 		if (err < 0)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		clock_toggled = true;
+>>>>>>> v3.18
 =======
 
 		clock_toggled = true;
@@ -477,11 +518,17 @@ static void sd_send_cmd_get_rsp(struct realtek_pci_sdmmc *host,
 out:
 	cmd->error = err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (err && clock_toggled)
 		rtsx_pci_write_register(pcr, SD_BUS_STAT,
 				SD_CLK_TOGGLE_EN | SD_CLK_FORCE_STOP, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -492,7 +539,11 @@ static int sd_rw_multi(struct realtek_pci_sdmmc *host, struct mmc_request *mrq)
 	struct mmc_card *card = mmc->card;
 	struct mmc_data *data = mrq->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int uhs = mmc_sd_card_uhs(card);
+=======
+	int uhs = mmc_card_uhs(card);
+>>>>>>> v3.18
 =======
 	int uhs = mmc_card_uhs(card);
 >>>>>>> v3.18
@@ -554,7 +605,11 @@ static int sd_rw_multi(struct realtek_pci_sdmmc *host, struct mmc_request *mrq)
 	rtsx_pci_send_cmd_no_wait(pcr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = rtsx_pci_transfer_data(pcr, data->sg, data->sg_len, read, 10000);
+=======
+	err = rtsx_pci_dma_transfer(pcr, data->sg, host->sg_count, read, 10000);
+>>>>>>> v3.18
 =======
 	err = rtsx_pci_dma_transfer(pcr, data->sg, host->sg_count, read, 10000);
 >>>>>>> v3.18
@@ -616,7 +671,12 @@ static void sd_normal_rw(struct realtek_pci_sdmmc *host,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sd_change_phase(struct realtek_pci_sdmmc *host, u8 sample_point)
+=======
+static int sd_change_phase(struct realtek_pci_sdmmc *host,
+		u8 sample_point, bool rx)
+>>>>>>> v3.18
 =======
 static int sd_change_phase(struct realtek_pci_sdmmc *host,
 		u8 sample_point, bool rx)
@@ -626,8 +686,13 @@ static int sd_change_phase(struct realtek_pci_sdmmc *host,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(sdmmc_dev(host), "%s: sample_point = %d\n",
 			__func__, sample_point);
+=======
+	dev_dbg(sdmmc_dev(host), "%s(%s): sample_point = %d\n",
+			__func__, rx ? "RX" : "TX", sample_point);
+>>>>>>> v3.18
 =======
 	dev_dbg(sdmmc_dev(host), "%s(%s): sample_point = %d\n",
 			__func__, rx ? "RX" : "TX", sample_point);
@@ -637,14 +702,20 @@ static int sd_change_phase(struct realtek_pci_sdmmc *host,
 
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, CLK_CTL, CHANGE_CLK, CHANGE_CLK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD_VPRX_CTL, 0x1F, sample_point);
 =======
+=======
+>>>>>>> v3.18
 	if (rx)
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 				SD_VPRX_CTL, 0x1F, sample_point);
 	else
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 				SD_VPTX_CTL, 0x1F, sample_point);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD_VPCLK0_CTL, PHASE_NOT_RESET, 0);
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD_VPCLK0_CTL,
@@ -659,6 +730,7 @@ static int sd_change_phase(struct realtek_pci_sdmmc *host,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u8 sd_search_final_phase(struct realtek_pci_sdmmc *host, u32 phase_map)
 {
@@ -740,6 +812,8 @@ static u8 sd_search_final_phase(struct realtek_pci_sdmmc *host, u32 phase_map)
 finish:
 	dev_dbg(sdmmc_dev(host), "Final chosen phase: %d\n", final_phase);
 =======
+=======
+>>>>>>> v3.18
 static inline u32 test_phase_bit(u32 phase_map, unsigned int bit)
 {
 	bit %= RTSX_PHASE_MAX;
@@ -781,6 +855,9 @@ static u8 sd_search_final_phase(struct realtek_pci_sdmmc *host, u32 phase_map)
 	dev_dbg(sdmmc_dev(host), "phase: [map:%x] [maxlen:%d] [final:%d]\n",
 		phase_map, len_final, final_phase);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return final_phase;
 }
@@ -806,7 +883,11 @@ static int sd_tuning_rx_cmd(struct realtek_pci_sdmmc *host,
 	u8 cmd[5] = {0};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = sd_change_phase(host, sample_point);
+=======
+	err = sd_change_phase(host, sample_point, true);
+>>>>>>> v3.18
 =======
 	err = sd_change_phase(host, sample_point, true);
 >>>>>>> v3.18
@@ -832,7 +913,11 @@ static int sd_tuning_phase(struct realtek_pci_sdmmc *host,
 	u32 raw_phase_map = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = MAX_PHASE; i >= 0; i--) {
+=======
+	for (i = 0; i < RTSX_PHASE_MAX; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < RTSX_PHASE_MAX; i++) {
 >>>>>>> v3.18
@@ -876,7 +961,11 @@ static int sd_tuning_rx(struct realtek_pci_sdmmc *host, u8 opcode)
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = sd_change_phase(host, final_phase);
+=======
+		err = sd_change_phase(host, final_phase, true);
+>>>>>>> v3.18
 =======
 		err = sd_change_phase(host, final_phase, true);
 >>>>>>> v3.18
@@ -890,6 +979,7 @@ static int sd_tuning_rx(struct realtek_pci_sdmmc *host, u8 opcode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sdmmc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 {
 	struct realtek_pci_sdmmc *host = mmc_priv(mmc);
@@ -897,6 +987,8 @@ static void sdmmc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 	struct mmc_command *cmd = mrq->cmd;
 	struct mmc_data *data = mrq->data;
 =======
+=======
+>>>>>>> v3.18
 static inline int sd_rw_cmd(struct mmc_command *cmd)
 {
 	return mmc_op_multi(cmd->opcode) ||
@@ -915,6 +1007,9 @@ static void sd_request(struct work_struct *work)
 	struct mmc_command *cmd = mrq->cmd;
 	struct mmc_data *data = mrq->data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int data_size = 0;
 	int err;
@@ -948,9 +1043,13 @@ static void sd_request(struct work_struct *work)
 		data_size = data->blocks * data->blksz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data_size || mmc_op_multi(cmd->opcode) ||
 			(cmd->opcode == MMC_READ_SINGLE_BLOCK) ||
 			(cmd->opcode == MMC_WRITE_BLOCK)) {
+=======
+	if (!data_size || sd_rw_cmd(cmd)) {
+>>>>>>> v3.18
 =======
 	if (!data_size || sd_rw_cmd(cmd)) {
 >>>>>>> v3.18
@@ -959,6 +1058,11 @@ static void sd_request(struct work_struct *work)
 		if (!cmd->error && data_size) {
 			sd_rw_multi(host, mrq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (!host->using_cookie)
+				sdmmc_post_req(host->mmc, host->mrq, 0);
+>>>>>>> v3.18
 =======
 			if (!host->using_cookie)
 				sdmmc_post_req(host->mmc, host->mrq, 0);
@@ -992,7 +1096,10 @@ finish:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void sdmmc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 {
 	struct realtek_pci_sdmmc *host = mmc_priv(mmc);
@@ -1008,6 +1115,9 @@ static void sdmmc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 	queue_work(host->workq, &host->work);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sd_set_bus_width(struct realtek_pci_sdmmc *host,
 		unsigned char bus_width)
@@ -1097,8 +1207,12 @@ static int sd_set_power_mode(struct realtek_pci_sdmmc *host,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sd_set_timing(struct realtek_pci_sdmmc *host,
 		unsigned char timing, bool *ddr_mode)
+=======
+static int sd_set_timing(struct realtek_pci_sdmmc *host, unsigned char timing)
+>>>>>>> v3.18
 =======
 static int sd_set_timing(struct realtek_pci_sdmmc *host, unsigned char timing)
 >>>>>>> v3.18
@@ -1107,8 +1221,11 @@ static int sd_set_timing(struct realtek_pci_sdmmc *host, unsigned char timing)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ddr_mode = false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rtsx_pci_init_cmd(pcr);
@@ -1127,9 +1244,14 @@ static int sd_set_timing(struct realtek_pci_sdmmc *host, unsigned char timing)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case MMC_TIMING_UHS_DDR50:
 		*ddr_mode = true;
 
+=======
+	case MMC_TIMING_MMC_DDR52:
+	case MMC_TIMING_UHS_DDR50:
+>>>>>>> v3.18
 =======
 	case MMC_TIMING_MMC_DDR52:
 	case MMC_TIMING_UHS_DDR50:
@@ -1202,7 +1324,11 @@ static void sdmmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	sd_set_bus_width(host, ios->bus_width);
 	sd_set_power_mode(host, ios->power_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd_set_timing(host, ios->timing, &host->ddr_mode);
+=======
+	sd_set_timing(host, ios->timing);
+>>>>>>> v3.18
 =======
 	sd_set_timing(host, ios->timing);
 >>>>>>> v3.18
@@ -1218,6 +1344,10 @@ static void sdmmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		host->double_clk = false;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case MMC_TIMING_MMC_DDR52:
+>>>>>>> v3.18
 =======
 	case MMC_TIMING_MMC_DDR52:
 >>>>>>> v3.18
@@ -1405,6 +1535,10 @@ static int sdmmc_switch_voltage(struct mmc_host *mmc, struct mmc_ios *ios)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -1413,7 +1547,10 @@ out:
 			SD_CLK_TOGGLE_EN | SD_CLK_FORCE_STOP, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&pcr->pcr_mutex);
@@ -1439,10 +1576,13 @@ static int sdmmc_execute_tuning(struct mmc_host *mmc, u32 opcode)
 	rtsx_pci_start_run(pcr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host->ddr_mode)
 		err = sd_tuning_rx(host, MMC_SEND_TUNING_BLOCK);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Set initial TX phase */
 	switch (mmc->ios.timing) {
 	case MMC_TIMING_UHS_SDR104:
@@ -1472,6 +1612,9 @@ static int sdmmc_execute_tuning(struct mmc_host *mmc, u32 opcode)
 		err = sd_change_phase(host, DDR50_RX_PHASE(pcr), true);
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&pcr->pcr_mutex);
 
@@ -1480,6 +1623,11 @@ out:
 
 static const struct mmc_host_ops realtek_pci_sdmmc_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pre_req = sdmmc_pre_req,
+	.post_req = sdmmc_post_req,
+>>>>>>> v3.18
 =======
 	.pre_req = sdmmc_pre_req,
 	.post_req = sdmmc_post_req,
@@ -1492,6 +1640,7 @@ static const struct mmc_host_ops realtek_pci_sdmmc_ops = {
 	.execute_tuning = sdmmc_execute_tuning,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM
 static int rtsx_pci_sdmmc_suspend(struct platform_device *pdev,
@@ -1526,6 +1675,8 @@ static int rtsx_pci_sdmmc_resume(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void init_extra_caps(struct realtek_pci_sdmmc *host)
 {
 	struct mmc_host *mmc = host->mmc;
@@ -1556,6 +1707,10 @@ static void realtek_init_host(struct realtek_pci_sdmmc *host)
 		MMC_CAP_MMC_HIGHSPEED | MMC_CAP_BUS_WIDTH_TEST |
 		MMC_CAP_UHS_SDR12 | MMC_CAP_UHS_SDR25;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mmc->caps2 = MMC_CAP2_NO_PRESCAN_POWERUP | MMC_CAP2_FULL_PWR_CYCLE;
+>>>>>>> v3.18
 =======
 	mmc->caps2 = MMC_CAP2_NO_PRESCAN_POWERUP | MMC_CAP2_FULL_PWR_CYCLE;
 >>>>>>> v3.18
@@ -1601,18 +1756,28 @@ static int rtsx_pci_sdmmc_drv_probe(struct platform_device *pdev)
 
 	host = mmc_priv(mmc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	host->workq = create_singlethread_workqueue(SDMMC_WORKQ_NAME);
 	if (!host->workq) {
 		mmc_free_host(mmc);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host->pcr = pcr;
 	host->mmc = mmc;
 	host->pdev = pdev;
 	host->power_state = SDMMC_POWER_OFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_WORK(&host->work, sd_request);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&host->work, sd_request);
 >>>>>>> v3.18
@@ -1643,7 +1808,12 @@ static int rtsx_pci_sdmmc_drv_remove(struct platform_device *pdev)
 	pcr->slots[RTSX_SD_CARD].card_event = NULL;
 	mmc = host->mmc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->eject = true;
+=======
+
+	cancel_work_sync(&host->work);
+>>>>>>> v3.18
 =======
 
 	cancel_work_sync(&host->work);
@@ -1666,10 +1836,13 @@ static int rtsx_pci_sdmmc_drv_remove(struct platform_device *pdev)
 
 	mmc_remove_host(mmc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_free_host(mmc);
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	host->eject = true;
 
 	flush_workqueue(host->workq);
@@ -1677,6 +1850,9 @@ static int rtsx_pci_sdmmc_drv_remove(struct platform_device *pdev)
 	host->workq = NULL;
 
 	mmc_free_host(mmc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&(pdev->dev),
@@ -1699,10 +1875,14 @@ static struct platform_driver rtsx_pci_sdmmc_driver = {
 	.remove		= rtsx_pci_sdmmc_drv_remove,
 	.id_table       = rtsx_pci_sdmmc_ids,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend	= rtsx_pci_sdmmc_suspend,
 	.resume		= rtsx_pci_sdmmc_resume,
 	.driver		= {
 		.owner	= THIS_MODULE,
+=======
+	.driver		= {
+>>>>>>> v3.18
 =======
 	.driver		= {
 >>>>>>> v3.18

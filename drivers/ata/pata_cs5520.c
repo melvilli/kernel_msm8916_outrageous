@@ -35,7 +35,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -234,7 +237,11 @@ static int cs5520_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -249,7 +256,11 @@ static int cs5520_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
 static int cs5520_reinit_one(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -281,7 +292,11 @@ static int cs5520_reinit_one(struct pci_dev *pdev)
 static int cs5520_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -295,7 +310,11 @@ static int cs5520_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PM */
+=======
+#endif /* CONFIG_PM_SLEEP */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PM_SLEEP */
 >>>>>>> v3.18
@@ -316,7 +335,11 @@ static struct pci_driver cs5520_pci_driver = {
 	.probe 		= cs5520_init_one,
 	.remove		= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

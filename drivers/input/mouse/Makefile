@@ -24,7 +24,11 @@ obj-$(CONFIG_MOUSE_SYNAPTICS_USB)	+= synaptics_usb.o
 obj-$(CONFIG_MOUSE_VSXXXAA)		+= vsxxxaa.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 psmouse-objs := psmouse-base.o synaptics.o
+=======
+psmouse-objs := psmouse-base.o synaptics.o focaltech.o
+>>>>>>> v3.18
 =======
 psmouse-objs := psmouse-base.o synaptics.o focaltech.o
 >>>>>>> v3.18

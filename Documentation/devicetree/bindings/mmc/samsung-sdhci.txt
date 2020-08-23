@@ -4,7 +4,11 @@ Samsung's SDHCI controller is used as a connectivity interface with external
 MMC, SD and eMMC storage mediums. This file documents differences between the
 core mmc properties described by mmc.txt and the properties used by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 Samsung implmentation of the SDHCI controller.
+=======
+Samsung implementation of the SDHCI controller.
+>>>>>>> v3.18
 =======
 Samsung implementation of the SDHCI controller.
 >>>>>>> v3.18

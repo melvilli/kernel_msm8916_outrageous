@@ -132,7 +132,11 @@ static void psc_ac97_cold_reset(struct snd_ac97 *ac97)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops psc_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops psc_ac97_ops = {
 >>>>>>> v3.18
@@ -142,7 +146,10 @@ static struct snd_ac97_bus_ops psc_ac97_ops = {
 	.warm_reset	= psc_ac97_warm_reset,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -298,13 +305,19 @@ static int psc_ac97_of_probe(struct platform_device *op)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = snd_soc_set_ac97_ops(&psc_ac97_ops);
 	if (rc != 0) {
 		dev_err(&op->dev, "Failed to set AC'97 ops: %d\n", rc);
 		return rc;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = snd_soc_register_component(&op->dev, &psc_ac97_component,
 					psc_ac97_dai, ARRAY_SIZE(psc_ac97_dai));
@@ -335,6 +348,10 @@ static int psc_ac97_of_remove(struct platform_device *op)
 	mpc5200_audio_dma_destroy(op);
 	snd_soc_unregister_component(&op->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18

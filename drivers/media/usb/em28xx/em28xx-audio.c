@@ -4,7 +4,11 @@
  *  Copyright (C) 2006 Markus Rechberger <mrechberger@gmail.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2007-2011 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *  Copyright (C) 2007-2014 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2007-2014 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -55,6 +59,12 @@ module_param(debug, int, 0644);
 MODULE_PARM_DESC(debug, "activates debug info");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EM28XX_MAX_AUDIO_BUFS		5
+#define EM28XX_MIN_AUDIO_PACKETS	64
+
+>>>>>>> v3.18
 =======
 #define EM28XX_MAX_AUDIO_BUFS		5
 #define EM28XX_MIN_AUDIO_PACKETS	64
@@ -74,6 +84,7 @@ static int em28xx_deinit_isoc_audio(struct em28xx *dev)
 
 	dprintk("Stopping isoc\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < EM28XX_AUDIO_BUFS; i++) {
 		if (!irqs_disabled())
 			usb_kill_urb(dev->adev.urb[i]);
@@ -86,6 +97,8 @@ static int em28xx_deinit_isoc_audio(struct em28xx *dev)
 		kfree(dev->adev.transfer_buffer[i]);
 		dev->adev.transfer_buffer[i] = NULL;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < dev->adev.num_urb; i++) {
 		struct urb *urb = dev->adev.urb[i];
 
@@ -93,6 +106,9 @@ static int em28xx_deinit_isoc_audio(struct em28xx *dev)
 			usb_kill_urb(urb);
 		else
 			usb_unlink_urb(urb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -112,13 +128,19 @@ static void em28xx_audio_isocirq(struct urb *urb)
 	struct snd_pcm_runtime   *runtime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev->disconnected) {
 		dprintk("device disconnected while streaming. URB status=%d.\n", urb->status);
 		atomic_set(&dev->adev.stream_started, 0);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (urb->status) {
 	case 0:             /* success */
@@ -134,7 +156,11 @@ static void em28xx_audio_isocirq(struct urb *urb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_read(&dev->stream_started) == 0)
+=======
+	if (atomic_read(&dev->adev.stream_started) == 0)
+>>>>>>> v3.18
 =======
 	if (atomic_read(&dev->adev.stream_started) == 0)
 >>>>>>> v3.18
@@ -192,10 +218,16 @@ static void em28xx_audio_isocirq(struct urb *urb)
 
 	status = usb_submit_urb(urb, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status < 0) {
 		em28xx_errdev("resubmit of audio urb failed (error=%i)\n",
 			      status);
 	}
+=======
+	if (status < 0)
+		em28xx_errdev("resubmit of audio urb failed (error=%i)\n",
+			      status);
+>>>>>>> v3.18
 =======
 	if (status < 0)
 		em28xx_errdev("resubmit of audio urb failed (error=%i)\n",
@@ -207,6 +239,7 @@ static void em28xx_audio_isocirq(struct urb *urb)
 static int em28xx_init_audio_isoc(struct em28xx *dev)
 {
 	int       i, errCode;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const int sb_size = EM28XX_NUM_AUDIO_PACKETS *
 			    EM28XX_AUDIO_MAX_PACKET_SIZE;
@@ -258,6 +291,8 @@ static int em28xx_init_audio_isoc(struct em28xx *dev)
 			em28xx_deinit_isoc_audio(dev);
 			atomic_set(&dev->stream_started, 0);
 =======
+=======
+>>>>>>> v3.18
 
 	dprintk("Starting isoc transfers\n");
 
@@ -272,6 +307,9 @@ static int em28xx_init_audio_isoc(struct em28xx *dev)
 				      errCode);
 			em28xx_deinit_isoc_audio(dev);
 			atomic_set(&dev->adev.stream_started, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return errCode;
 		}
@@ -312,7 +350,11 @@ static struct snd_pcm_hardware snd_em28xx_hw_capture = {
 	.formats = SNDRV_PCM_FMTBIT_S16_LE,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rates = SNDRV_PCM_RATE_CONTINUOUS | SNDRV_PCM_RATE_KNOT,
+=======
+	.rates = SNDRV_PCM_RATE_48000,
+>>>>>>> v3.18
 =======
 	.rates = SNDRV_PCM_RATE_48000,
 >>>>>>> v3.18
@@ -323,9 +365,12 @@ static struct snd_pcm_hardware snd_em28xx_hw_capture = {
 	.channels_max = 2,
 	.buffer_bytes_max = 62720 * 8,	/* just about the value in usbaudio.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.period_bytes_min = 64,		/* 12544/2, */
 	.period_bytes_max = 12544,
 =======
+=======
+>>>>>>> v3.18
 
 
 	/*
@@ -339,6 +384,9 @@ static struct snd_pcm_hardware snd_em28xx_hw_capture = {
 	.period_bytes_min = 11059,
 	.period_bytes_max = 13516,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.periods_min = 2,
 	.periods_max = 98,		/* 12544, */
@@ -349,9 +397,13 @@ static int snd_em28xx_capture_open(struct snd_pcm_substream *substream)
 	struct em28xx *dev = snd_pcm_substream_chip(substream);
 	struct snd_pcm_runtime *runtime = substream->runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	dprintk("opening device and trying to acquire exclusive lock\n");
+=======
+	int nonblock, ret = 0;
+>>>>>>> v3.18
 =======
 	int nonblock, ret = 0;
 >>>>>>> v3.18
@@ -362,6 +414,7 @@ static int snd_em28xx_capture_open(struct snd_pcm_substream *substream)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	runtime->hw = snd_em28xx_hw_capture;
 	if ((dev->alt == 0 || dev->audio_ifnum) && dev->adev.users == 0) {
@@ -387,6 +440,8 @@ static int snd_em28xx_capture_open(struct snd_pcm_substream *substream)
 
 	snd_pcm_hw_constraint_integer(runtime, SNDRV_PCM_HW_PARAM_PERIODS);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->disconnected)
 		return -ENODEV;
 
@@ -440,6 +495,9 @@ static int snd_em28xx_capture_open(struct snd_pcm_substream *substream)
 				     dev->adev.period * 95 / 100,
 				     dev->adev.period * 105 / 100);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->adev.capture_pcm_substream = substream;
 
@@ -461,9 +519,15 @@ static int snd_em28xx_pcm_close(struct snd_pcm_substream *substream)
 	mutex_lock(&dev->lock);
 	dev->adev.users--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_read(&dev->stream_started) > 0) {
 		atomic_set(&dev->stream_started, 0);
 		schedule_work(&dev->wq_trigger);
+=======
+	if (atomic_read(&dev->adev.stream_started) > 0) {
+		atomic_set(&dev->adev.stream_started, 0);
+		schedule_work(&dev->adev.wq_trigger);
+>>>>>>> v3.18
 =======
 	if (atomic_read(&dev->adev.stream_started) > 0) {
 		atomic_set(&dev->adev.stream_started, 0);
@@ -479,6 +543,10 @@ static int snd_em28xx_pcm_close(struct snd_pcm_substream *substream)
 	}
 	mutex_unlock(&dev->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kref_put(&dev->ref, em28xx_free_device);
+>>>>>>> v3.18
 =======
 	kref_put(&dev->ref, em28xx_free_device);
 >>>>>>> v3.18
@@ -491,11 +559,17 @@ static int snd_em28xx_hw_capture_params(struct snd_pcm_substream *substream,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct em28xx *dev = snd_pcm_substream_chip(substream);
 
 	if (dev->disconnected)
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dprintk("Setting capture parameters\n");
@@ -522,6 +596,7 @@ static int snd_em28xx_hw_capture_free(struct snd_pcm_substream *substream)
 {
 	struct em28xx *dev = snd_pcm_substream_chip(substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dprintk("Stop capture, if needed\n");
 
@@ -529,6 +604,8 @@ static int snd_em28xx_hw_capture_free(struct snd_pcm_substream *substream)
 		atomic_set(&dev->stream_started, 0);
 		schedule_work(&dev->wq_trigger);
 =======
+=======
+>>>>>>> v3.18
 	struct em28xx_audio *adev = &dev->adev;
 
 	dprintk("Stop capture, if needed\n");
@@ -536,6 +613,9 @@ static int snd_em28xx_hw_capture_free(struct snd_pcm_substream *substream)
 	if (atomic_read(&adev->stream_started) > 0) {
 		atomic_set(&adev->stream_started, 0);
 		schedule_work(&adev->wq_trigger);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -547,6 +627,12 @@ static int snd_em28xx_prepare(struct snd_pcm_substream *substream)
 	struct em28xx *dev = snd_pcm_substream_chip(substream);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev->disconnected)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (dev->disconnected)
 		return -ENODEV;
@@ -561,15 +647,21 @@ static int snd_em28xx_prepare(struct snd_pcm_substream *substream)
 static void audio_trigger(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct em28xx *dev = container_of(work, struct em28xx, wq_trigger);
 
 	if (atomic_read(&dev->stream_started)) {
 =======
+=======
+>>>>>>> v3.18
 	struct em28xx_audio *adev =
 			    container_of(work, struct em28xx_audio, wq_trigger);
 	struct em28xx *dev = container_of(adev, struct em28xx, adev);
 
 	if (atomic_read(&adev->stream_started)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dprintk("starting capture");
 		em28xx_init_audio_isoc(dev);
@@ -586,6 +678,12 @@ static int snd_em28xx_capture_trigger(struct snd_pcm_substream *substream,
 	int retval = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev->disconnected)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (dev->disconnected)
 		return -ENODEV;
@@ -596,7 +694,11 @@ static int snd_em28xx_capture_trigger(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_TRIGGER_RESUME: /* fall through */
 	case SNDRV_PCM_TRIGGER_START:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&dev->stream_started, 1);
+=======
+		atomic_set(&dev->adev.stream_started, 1);
+>>>>>>> v3.18
 =======
 		atomic_set(&dev->adev.stream_started, 1);
 >>>>>>> v3.18
@@ -605,7 +707,11 @@ static int snd_em28xx_capture_trigger(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_TRIGGER_SUSPEND: /* fall through */
 	case SNDRV_PCM_TRIGGER_STOP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&dev->stream_started, 0);
+=======
+		atomic_set(&dev->adev.stream_started, 0);
+>>>>>>> v3.18
 =======
 		atomic_set(&dev->adev.stream_started, 0);
 >>>>>>> v3.18
@@ -614,7 +720,11 @@ static int snd_em28xx_capture_trigger(struct snd_pcm_substream *substream,
 		retval = -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_work(&dev->wq_trigger);
+=======
+	schedule_work(&dev->adev.wq_trigger);
+>>>>>>> v3.18
 =======
 	schedule_work(&dev->adev.wq_trigger);
 >>>>>>> v3.18
@@ -630,6 +740,12 @@ static snd_pcm_uframes_t snd_em28xx_capture_pointer(struct snd_pcm_substream
 
 	dev = snd_pcm_substream_chip(substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev->disconnected)
+		return SNDRV_PCM_POS_XRUN;
+
+>>>>>>> v3.18
 =======
 	if (dev->disconnected)
 		return SNDRV_PCM_POS_XRUN;
@@ -657,12 +773,18 @@ static int em28xx_vol_info(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct em28xx *dev = snd_kcontrol_chip(kcontrol);
 
 	if (dev->disconnected)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	info->type = SNDRV_CTL_ELEM_TYPE_INTEGER;
 	info->count = 2;
@@ -677,12 +799,15 @@ static int em28xx_vol_put(struct snd_kcontrol *kcontrol,
 {
 	struct em28xx *dev = snd_kcontrol_chip(kcontrol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 val = (0x1f - (value->value.integer.value[0] & 0x1f)) |
 		  (0x1f - (value->value.integer.value[1] & 0x1f)) << 8;
 	int rc;
 
 	mutex_lock(&dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_pcm_substream *substream = dev->adev.capture_pcm_substream;
 	u16 val = (0x1f - (value->value.integer.value[0] & 0x1f)) |
 		  (0x1f - (value->value.integer.value[1] & 0x1f)) << 8;
@@ -699,6 +824,9 @@ static int em28xx_vol_put(struct snd_kcontrol *kcontrol,
 			return -EAGAIN;
 	} else
 		mutex_lock(&dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = em28xx_read_ac97(dev, kcontrol->private_value);
 	if (rc < 0)
@@ -725,10 +853,13 @@ static int em28xx_vol_get(struct snd_kcontrol *kcontrol,
 {
 	struct em28xx *dev = snd_kcontrol_chip(kcontrol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val;
 
 	mutex_lock(&dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_pcm_substream *substream = dev->adev.capture_pcm_substream;
 	int nonblock = 0;
 	int val;
@@ -743,6 +874,9 @@ static int em28xx_vol_get(struct snd_kcontrol *kcontrol,
 			return -EAGAIN;
 	} else
 		mutex_lock(&dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	val = em28xx_read_ac97(dev, kcontrol->private_value);
 	mutex_unlock(&dev->lock);
@@ -766,10 +900,13 @@ static int em28xx_vol_put_mute(struct snd_kcontrol *kcontrol,
 	struct em28xx *dev = snd_kcontrol_chip(kcontrol);
 	u16 val = value->value.integer.value[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	mutex_lock(&dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_pcm_substream *substream = dev->adev.capture_pcm_substream;
 	int nonblock = 0;
 	int rc;
@@ -784,6 +921,9 @@ static int em28xx_vol_put_mute(struct snd_kcontrol *kcontrol,
 			return -EAGAIN;
 	} else
 		mutex_lock(&dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = em28xx_read_ac97(dev, kcontrol->private_value);
 	if (rc < 0)
@@ -813,10 +953,13 @@ static int em28xx_vol_get_mute(struct snd_kcontrol *kcontrol,
 {
 	struct em28xx *dev = snd_kcontrol_chip(kcontrol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val;
 
 	mutex_lock(&dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_pcm_substream *substream = dev->adev.capture_pcm_substream;
 	int nonblock = 0;
 	int val;
@@ -831,6 +974,9 @@ static int em28xx_vol_get_mute(struct snd_kcontrol *kcontrol,
 			return -EAGAIN;
 	} else
 		mutex_lock(&dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	val = em28xx_read_ac97(dev, kcontrol->private_value);
 	mutex_unlock(&dev->lock);
@@ -914,7 +1060,10 @@ static struct snd_pcm_ops snd_em28xx_pcm_capture = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void em28xx_audio_free_urb(struct em28xx *dev)
 {
 	int i;
@@ -1092,6 +1241,9 @@ static int em28xx_audio_urb_init(struct em28xx *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int em28xx_audio_init(struct em28xx *dev)
 {
@@ -1100,9 +1252,15 @@ static int em28xx_audio_init(struct em28xx *dev)
 	struct snd_card     *card;
 	static int          devnr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int                 err;
 
 	if (!dev->has_alsa_audio || dev->audio_ifnum < 0) {
+=======
+	int		    err;
+
+	if (dev->usb_audio_type != EM28XX_USB_AUDIO_VENDOR) {
+>>>>>>> v3.18
 =======
 	int		    err;
 
@@ -1115,6 +1273,7 @@ static int em28xx_audio_init(struct em28xx *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "em28xx-audio.c: probing for em28xx Audio Vendor Class\n");
 	printk(KERN_INFO "em28xx-audio.c: Copyright (C) 2006 Markus "
 			 "Rechberger\n");
@@ -1123,6 +1282,8 @@ static int em28xx_audio_init(struct em28xx *dev)
 	err = snd_card_create(index[devnr], "Em28xx Audio", THIS_MODULE, 0,
 			      &card);
 =======
+=======
+>>>>>>> v3.18
 	em28xx_info("Binding audio extension\n");
 
 	kref_get(&dev->ref);
@@ -1134,11 +1295,15 @@ static int em28xx_audio_init(struct em28xx *dev)
 
 	err = snd_card_new(&dev->udev->dev, index[devnr], "Em28xx Audio",
 			   THIS_MODULE, 0, &card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		return err;
 
 	spin_lock_init(&adev->slock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = snd_pcm_new(card, "Em28xx Audio", 0, 0, 1, &pcm);
 	if (err < 0) {
@@ -1146,12 +1311,17 @@ static int em28xx_audio_init(struct em28xx *dev)
 		return err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	adev->sndcard = card;
 	adev->udev = dev->udev;
 
 	err = snd_pcm_new(card, "Em28xx Audio", 0, 0, 1, &pcm);
 	if (err < 0)
 		goto card_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_CAPTURE, &snd_em28xx_pcm_capture);
@@ -1160,7 +1330,10 @@ static int em28xx_audio_init(struct em28xx *dev)
 	strcpy(pcm->name, "Empia 28xx Capture");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &dev->udev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(card->driver, "Em28xx-Audio");
@@ -1168,7 +1341,11 @@ static int em28xx_audio_init(struct em28xx *dev)
 	strcpy(card->longname, "Empia Em28xx Audio");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&dev->wq_trigger, audio_trigger);
+=======
+	INIT_WORK(&adev->wq_trigger, audio_trigger);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&adev->wq_trigger, audio_trigger);
 >>>>>>> v3.18
@@ -1190,6 +1367,7 @@ static int em28xx_audio_init(struct em28xx *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_register(card);
 	if (err < 0) {
 		snd_card_free(card);
@@ -1200,6 +1378,8 @@ static int em28xx_audio_init(struct em28xx *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	err = em28xx_audio_urb_init(dev);
 	if (err)
 		goto card_free;
@@ -1219,6 +1399,9 @@ card_free:
 	adev->sndcard = NULL;
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1228,7 +1411,11 @@ static int em28xx_audio_fini(struct em28xx *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->has_alsa_audio != 1) {
+=======
+	if (dev->usb_audio_type != EM28XX_USB_AUDIO_VENDOR) {
+>>>>>>> v3.18
 =======
 	if (dev->usb_audio_type != EM28XX_USB_AUDIO_VENDOR) {
 >>>>>>> v3.18
@@ -1239,8 +1426,11 @@ static int em28xx_audio_fini(struct em28xx *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->adev.sndcard) {
 =======
+=======
+>>>>>>> v3.18
 	em28xx_info("Closing audio extension");
 
 	if (dev->adev.sndcard) {
@@ -1249,13 +1439,19 @@ static int em28xx_audio_fini(struct em28xx *dev)
 
 		em28xx_audio_free_urb(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snd_card_free(dev->adev.sndcard);
 		dev->adev.sndcard = NULL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	kref_put(&dev->ref, em28xx_free_device);
 	return 0;
 }
@@ -1285,6 +1481,9 @@ static int em28xx_audio_resume(struct em28xx *dev)
 	em28xx_info("Resuming audio extension");
 	/* Nothing to do other than schedule_work() ?? */
 	schedule_work(&dev->adev.wq_trigger);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1295,6 +1494,11 @@ static struct em28xx_ops audio_ops = {
 	.init = em28xx_audio_init,
 	.fini = em28xx_audio_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend = em28xx_audio_suspend,
+	.resume = em28xx_audio_resume,
+>>>>>>> v3.18
 =======
 	.suspend = em28xx_audio_suspend,
 	.resume = em28xx_audio_resume,
@@ -1314,8 +1518,14 @@ static void __exit em28xx_alsa_unregister(void)
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Markus Rechberger <mrechberger@gmail.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
 MODULE_DESCRIPTION("Em28xx Audio driver");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+MODULE_DESCRIPTION(DRIVER_DESC " - audio interface");
+MODULE_VERSION(EM28XX_VERSION);
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 MODULE_DESCRIPTION(DRIVER_DESC " - audio interface");

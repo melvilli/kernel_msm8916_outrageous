@@ -20,7 +20,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _LARGEFILE64_SOURCE
+=======
+#define _FILE_OFFSET_BITS 64
+#define _GNU_SOURCE
+>>>>>>> v3.18
 =======
 #define _FILE_OFFSET_BITS 64
 #define _GNU_SOURCE
@@ -35,11 +40,17 @@
 #include <limits.h>
 #include <assert.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <ftw.h>
 #include <time.h>
 #include <setjmp.h>
 #include <signal.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sys/types.h>
 #include <sys/errno.h>
@@ -47,14 +58,20 @@
 #include <sys/mount.h>
 #include <sys/statfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../include/uapi/linux/magic.h"
 #include "../../include/uapi/linux/kernel-page-flags.h"
 #include <lk/debugfs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <sys/mman.h>
 #include "../../include/uapi/linux/magic.h"
 #include "../../include/uapi/linux/kernel-page-flags.h"
 #include <api/fs/debugfs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef MAX_PATH
@@ -79,6 +96,7 @@
 #define PM_PSHIFT_OFFSET    (PM_STATUS_OFFSET - PM_PSHIFT_BITS)
 #define PM_PSHIFT_MASK      (((1LL << PM_PSHIFT_BITS) - 1) << PM_PSHIFT_OFFSET)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PM_PSHIFT(x)        (((u64) (x) << PM_PSHIFT_OFFSET) & PM_PSHIFT_MASK)
 #define PM_PFRAME_MASK      ((1LL << PM_PSHIFT_OFFSET) - 1)
 #define PM_PFRAME(x)        ((x) & PM_PFRAME_MASK)
@@ -86,6 +104,8 @@
 #define PM_PRESENT          PM_STATUS(4LL)
 #define PM_SWAP             PM_STATUS(2LL)
 =======
+=======
+>>>>>>> v3.18
 #define __PM_PSHIFT(x)      (((uint64_t) (x) << PM_PSHIFT_OFFSET) & PM_PSHIFT_MASK)
 #define PM_PFRAME_MASK      ((1LL << PM_PSHIFT_OFFSET) - 1)
 #define PM_PFRAME(x)        ((x) & PM_PFRAME_MASK)
@@ -94,6 +114,9 @@
 #define PM_PRESENT          PM_STATUS(4LL)
 #define PM_SWAP             PM_STATUS(2LL)
 #define PM_SOFT_DIRTY       __PM_PSHIFT(__PM_SOFT_DIRTY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -114,6 +137,10 @@
 #define KPF_ARCH		38
 #define KPF_UNCACHED		39
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KPF_SOFTDIRTY		40
+>>>>>>> v3.18
 =======
 #define KPF_SOFTDIRTY		40
 >>>>>>> v3.18
@@ -158,6 +185,10 @@ static const char * const page_flag_names[] = {
 	[KPF_KSM]		= "x:ksm",
 	[KPF_THP]		= "t:thp",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[KPF_BALLOON]		= "o:balloon",
+>>>>>>> v3.18
 =======
 	[KPF_BALLOON]		= "o:balloon",
 >>>>>>> v3.18
@@ -171,6 +202,10 @@ static const char * const page_flag_names[] = {
 	[KPF_ARCH]		= "h:arch",
 	[KPF_UNCACHED]		= "c:uncached",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[KPF_SOFTDIRTY]		= "f:softdirty",
+>>>>>>> v3.18
 =======
 	[KPF_SOFTDIRTY]		= "f:softdirty",
 >>>>>>> v3.18
@@ -197,6 +232,10 @@ static int		opt_list;	/* list pages (in ranges) */
 static int		opt_no_summary;	/* don't show summary */
 static pid_t		opt_pid;	/* process to walk */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const char *		opt_file;
+>>>>>>> v3.18
 =======
 const char *		opt_file;
 >>>>>>> v3.18
@@ -296,12 +335,16 @@ static unsigned long do_u64_read(int fd, char *name,
 		fatal("index overflow: %lu\n", index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lseek(fd, index * 8, SEEK_SET) < 0) {
 		perror(name);
 		exit(EXIT_FAILURE);
 	}
 
 	bytes = read(fd, buf, count * 8);
+=======
+	bytes = pread(fd, buf, count * 8, (off_t)index * 8);
+>>>>>>> v3.18
 =======
 	bytes = pread(fd, buf, count * 8, (off_t)index * 8);
 >>>>>>> v3.18
@@ -390,8 +433,13 @@ static char *page_flag_longname(uint64_t flags)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void show_page_range(unsigned long voffset,
 			    unsigned long offset, uint64_t flags)
+=======
+static void show_page_range(unsigned long voffset, unsigned long offset,
+			    unsigned long size, uint64_t flags)
+>>>>>>> v3.18
 =======
 static void show_page_range(unsigned long voffset, unsigned long offset,
 			    unsigned long size, uint64_t flags)
@@ -404,8 +452,13 @@ static void show_page_range(unsigned long voffset, unsigned long offset,
 
 	if (flags == flags0 && offset == index + count &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (!opt_pid || voffset == voff + count)) {
 		count++;
+=======
+	    size && voffset == voff + count) {
+		count += size;
+>>>>>>> v3.18
 =======
 	    size && voffset == voff + count) {
 		count += size;
@@ -417,6 +470,11 @@ static void show_page_range(unsigned long voffset, unsigned long offset,
 		if (opt_pid)
 			printf("%lx\t", voff);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (opt_file)
+			printf("%lu\t", voff);
+>>>>>>> v3.18
 =======
 		if (opt_file)
 			printf("%lu\t", voff);
@@ -429,14 +487,20 @@ static void show_page_range(unsigned long voffset, unsigned long offset,
 	index  = offset;
 	voff   = voffset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count  = 1;
 =======
+=======
+>>>>>>> v3.18
 	count  = size;
 }
 
 static void flush_page_range(void)
 {
 	show_page_range(0, 0, 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -446,6 +510,11 @@ static void show_page(unsigned long voffset,
 	if (opt_pid)
 		printf("%lx\t", voffset);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (opt_file)
+		printf("%lu\t", voffset);
+>>>>>>> v3.18
 =======
 	if (opt_file)
 		printf("%lu\t", voffset);
@@ -497,7 +566,11 @@ static int bit_mask_ok(uint64_t flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uint64_t expand_overloaded_flags(uint64_t flags)
+=======
+static uint64_t expand_overloaded_flags(uint64_t flags, uint64_t pme)
+>>>>>>> v3.18
 =======
 static uint64_t expand_overloaded_flags(uint64_t flags, uint64_t pme)
 >>>>>>> v3.18
@@ -517,6 +590,12 @@ static uint64_t expand_overloaded_flags(uint64_t flags, uint64_t pme)
 		flags ^= BIT(RECLAIM) | BIT(READAHEAD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (pme & PM_SOFT_DIRTY)
+		flags |= BIT(SOFTDIRTY);
+
+>>>>>>> v3.18
 =======
 	if (pme & PM_SOFT_DIRTY)
 		flags |= BIT(SOFTDIRTY);
@@ -538,17 +617,23 @@ static uint64_t well_known_flags(uint64_t flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uint64_t kpageflags_flags(uint64_t flags)
 {
 	flags = expand_overloaded_flags(flags);
 
 	if (!opt_raw)
 =======
+=======
+>>>>>>> v3.18
 static uint64_t kpageflags_flags(uint64_t flags, uint64_t pme)
 {
 	if (opt_raw)
 		flags = expand_overloaded_flags(flags, pme);
 	else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		flags = well_known_flags(flags);
 
@@ -643,9 +728,15 @@ static size_t hash_slot(uint64_t flags)
 
 static void add_page(unsigned long voffset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned long offset, uint64_t flags)
 {
 	flags = kpageflags_flags(flags);
+=======
+		     unsigned long offset, uint64_t flags, uint64_t pme)
+{
+	flags = kpageflags_flags(flags, pme);
+>>>>>>> v3.18
 =======
 		     unsigned long offset, uint64_t flags, uint64_t pme)
 {
@@ -662,7 +753,11 @@ static void add_page(unsigned long voffset,
 
 	if (opt_list == 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		show_page_range(voffset, offset, flags);
+=======
+		show_page_range(voffset, offset, 1, flags);
+>>>>>>> v3.18
 =======
 		show_page_range(voffset, offset, 1, flags);
 >>>>>>> v3.18
@@ -677,7 +772,12 @@ static void add_page(unsigned long voffset,
 static void walk_pfn(unsigned long voffset,
 		     unsigned long index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned long count)
+=======
+		     unsigned long count,
+		     uint64_t pme)
+>>>>>>> v3.18
 =======
 		     unsigned long count,
 		     uint64_t pme)
@@ -696,7 +796,11 @@ static void walk_pfn(unsigned long voffset,
 
 		for (i = 0; i < pages; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			add_page(voffset + i, index + i, buf[i]);
+=======
+			add_page(voffset + i, index + i, buf[i], pme);
+>>>>>>> v3.18
 =======
 			add_page(voffset + i, index + i, buf[i], pme);
 >>>>>>> v3.18
@@ -725,7 +829,11 @@ static void walk_vma(unsigned long index, unsigned long count)
 			pfn = pagemap_pfn(buf[i]);
 			if (pfn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				walk_pfn(index + i, pfn, 1);
+=======
+				walk_pfn(index + i, pfn, 1, buf[i]);
+>>>>>>> v3.18
 =======
 				walk_pfn(index + i, pfn, 1, buf[i]);
 >>>>>>> v3.18
@@ -780,7 +888,11 @@ static void walk_addr_ranges(void)
 	for (i = 0; i < nr_addr_ranges; i++)
 		if (!opt_pid)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			walk_pfn(0, opt_offset[i], opt_size[i]);
+=======
+			walk_pfn(opt_offset[i], opt_offset[i], opt_size[i], 0);
+>>>>>>> v3.18
 =======
 			walk_pfn(opt_offset[i], opt_offset[i], opt_size[i], 0);
 >>>>>>> v3.18
@@ -816,9 +928,13 @@ static void usage(void)
 "            -b|--bits    bits-spec     Walk pages with specified bits\n"
 "            -p|--pid     pid           Walk process address space\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0 /* planned features */
 "            -f|--file    filename      Walk file address space\n"
 #endif
+=======
+"            -f|--file    filename      Walk file address space\n"
+>>>>>>> v3.18
 =======
 "            -f|--file    filename      Walk file address space\n"
 >>>>>>> v3.18
@@ -920,9 +1036,12 @@ static void parse_pid(const char *str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void parse_file(const char *name)
 {
 =======
+=======
+>>>>>>> v3.18
 static void show_file(const char *name, const struct stat *st)
 {
 	unsigned long long size = st->st_size;
@@ -1074,6 +1193,9 @@ static void walk_page_cache(void)
 static void parse_file(const char *name)
 {
 	opt_file = name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1266,6 +1388,11 @@ int main(int argc, char *argv[])
 	if (opt_list && opt_pid)
 		printf("voffset\t");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (opt_list && opt_file)
+		printf("foffset\t");
+>>>>>>> v3.18
 =======
 	if (opt_list && opt_file)
 		printf("foffset\t");
@@ -1276,11 +1403,14 @@ int main(int argc, char *argv[])
 		printf("offset\tflags\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	walk_addr_ranges();
 
 	if (opt_list == 1)
 		show_page_range(0, 0, 0);  /* drain the buffer */
 =======
+=======
+>>>>>>> v3.18
 	if (opt_file)
 		walk_page_cache();
 	else
@@ -1288,6 +1418,9 @@ int main(int argc, char *argv[])
 
 	if (opt_list == 1)
 		flush_page_range();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (opt_no_summary)

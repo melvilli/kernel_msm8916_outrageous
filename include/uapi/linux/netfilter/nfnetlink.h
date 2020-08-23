@@ -19,11 +19,17 @@ enum nfnetlink_groups {
 	NFNLGRP_CONNTRACK_EXP_DESTROY,
 #define NFNLGRP_CONNTRACK_EXP_DESTROY	NFNLGRP_CONNTRACK_EXP_DESTROY
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	NFNLGRP_NFTABLES,
 #define NFNLGRP_NFTABLES                NFNLGRP_NFTABLES
 	NFNLGRP_ACCT_QUOTA,
 #define NFNLGRP_ACCT_QUOTA		NFNLGRP_ACCT_QUOTA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__NFNLGRP_MAX,
 };
@@ -59,8 +65,11 @@ struct nfgenmsg {
 #define NFNL_SUBSYS_CTNETLINK_TIMEOUT	8
 #define NFNL_SUBSYS_CTHELPER		9
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFNL_SUBSYS_COUNT		10
 =======
+=======
+>>>>>>> v3.18
 #define NFNL_SUBSYS_NFTABLES		10
 #define NFNL_SUBSYS_NFT_COMPAT		11
 #define NFNL_SUBSYS_COUNT		12
@@ -68,6 +77,9 @@ struct nfgenmsg {
 /* Reserved control nfnetlink messages */
 #define NFNL_MSG_BATCH_BEGIN		NLMSG_MIN_TYPE
 #define NFNL_MSG_BATCH_END		NLMSG_MIN_TYPE+1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_NFNETLINK_H */

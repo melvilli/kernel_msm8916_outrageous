@@ -7,8 +7,11 @@
 #define _OZAPPIF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ozeventdef.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OZ_IOCTL_MAGIC	0xf4

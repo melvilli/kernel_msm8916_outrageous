@@ -72,6 +72,10 @@ static unsigned int __init smvp_vpe_init(unsigned int tc, unsigned int mvpconf0,
 		/* Record this as available CPU */
 		set_cpu_possible(tc, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		set_cpu_present(tc, true);
+>>>>>>> v3.18
 =======
 		set_cpu_present(tc, true);
 >>>>>>> v3.18
@@ -123,13 +127,19 @@ static void vsmp_send_ipi_single(int cpu, unsigned int action)
 	int vpflags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IRQ_GIC
 	if (gic_present) {
 		gic_send_ipi_single(cpu, action);
 		return;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_save(flags);
 
@@ -163,7 +173,11 @@ static void vsmp_send_ipi_mask(const struct cpumask *mask, unsigned int action)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit vsmp_init_secondary(void)
+=======
+static void vsmp_init_secondary(void)
+>>>>>>> v3.18
 =======
 static void vsmp_init_secondary(void)
 >>>>>>> v3.18
@@ -180,7 +194,11 @@ static void vsmp_init_secondary(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit vsmp_smp_finish(void)
+=======
+static void vsmp_smp_finish(void)
+>>>>>>> v3.18
 =======
 static void vsmp_smp_finish(void)
 >>>>>>> v3.18
@@ -198,10 +216,13 @@ static void vsmp_smp_finish(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vsmp_cpus_done(void)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -213,7 +234,11 @@ static void vsmp_cpus_done(void)
  * assumes a 1:1 mapping of TC => VPE
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit vsmp_boot_secondary(int cpu, struct task_struct *idle)
+=======
+static void vsmp_boot_secondary(int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static void vsmp_boot_secondary(int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -309,7 +334,10 @@ struct plat_smp_ops vsmp_smp_ops = {
 	.init_secondary		= vsmp_init_secondary,
 	.smp_finish		= vsmp_smp_finish,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpus_done		= vsmp_cpus_done,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.boot_secondary		= vsmp_boot_secondary,
@@ -317,7 +345,10 @@ struct plat_smp_ops vsmp_smp_ops = {
 	.prepare_cpus		= vsmp_prepare_cpus,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PROC_FS
 static int proc_cpuinfo_chain_call(struct notifier_block *nfb,
@@ -342,4 +373,7 @@ static int __init proc_cpuinfo_notifier_init(void)
 
 subsys_initcall(proc_cpuinfo_notifier_init);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

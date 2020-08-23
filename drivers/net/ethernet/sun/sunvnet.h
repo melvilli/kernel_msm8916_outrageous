@@ -2,6 +2,11 @@
 #define _SUNVNET_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 
@@ -15,13 +20,19 @@
 #define VNET_TX_TIMEOUT			(5 * HZ)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* length of time (or less) we expect pending descriptors to be marked
  * as VIO_DESC_DONE and skbs ready to be freed
  */
 #define	VNET_CLEAN_TIMEOUT		((HZ/100)+1)
 
 #define VNET_MAXPACKET			(65535ULL + ETH_HLEN + VLAN_HLEN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VNET_TX_RING_SIZE		512
 #define VNET_TX_WAKEUP_THRESH(dr)	((dr)->pending / 4)
@@ -33,17 +44,23 @@
 #define VNET_PACKET_SKIP		6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct vnet_tx_entry {
 	void			*buf;
 	unsigned int		ncookies;
 	struct ldc_trans_cookie	cookies[2];
 =======
+=======
+>>>>>>> v3.18
 #define VNET_MAXCOOKIES			(VNET_MAXPACKET/PAGE_SIZE + 1)
 
 struct vnet_tx_entry {
 	struct sk_buff		*skb;
 	unsigned int		ncookies;
 	struct ldc_trans_cookie	cookies[VNET_MAXCOOKIES];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -62,7 +79,10 @@ struct vnet_port {
 
 	struct list_head	list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	u32			stop_rx_idx;
 	bool			stop_rx;
@@ -71,6 +91,9 @@ struct vnet_port {
 	struct timer_list	clean_timer;
 
 	u64			rmtu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -113,6 +136,11 @@ struct vnet {
 	struct list_head	list;
 	u64			local_mac;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct tasklet_struct	vnet_tx_wakeup;
+>>>>>>> v3.18
 =======
 
 	struct tasklet_struct	vnet_tx_wakeup;

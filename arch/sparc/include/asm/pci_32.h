@@ -17,11 +17,14 @@
 #define PCI_IRQ_NONE		0xffffffff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void pcibios_penalize_isa_irq(int irq, int active)
 {
 	/* We don't do dynamic PCI IRQ allocation */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Dynamic DMA mapping stuff.

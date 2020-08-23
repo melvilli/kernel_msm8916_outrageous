@@ -763,6 +763,7 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* clean up carveout allocations */
 	list_for_each_entry_safe(entry, tmp, &rproc->carveouts, node) {
 		dma_free_coherent(dev->parent, entry->len, entry->va, entry->dma);
@@ -770,6 +771,8 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 		kfree(entry);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* clean up iommu mapping entries */
@@ -787,7 +790,10 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 		kfree(entry);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* clean up carveout allocations */
 	list_for_each_entry_safe(entry, tmp, &rproc->carveouts, node) {
@@ -795,6 +801,9 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 		list_del(&entry->node);
 		kfree(entry);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -829,6 +838,10 @@ static int rproc_fw_boot(struct rproc *rproc, const struct firmware *fw)
 
 	rproc->bootaddr = rproc_get_boot_addr(rproc, fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ret = -EINVAL;
+>>>>>>> v3.18
 =======
 	ret = -EINVAL;
 >>>>>>> v3.18
@@ -837,7 +850,10 @@ static int rproc_fw_boot(struct rproc *rproc, const struct firmware *fw)
 	table = rproc_find_rsc_table(rproc, fw, &tablesz);
 	if (!table) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto clean_up;
@@ -847,7 +863,10 @@ static int rproc_fw_boot(struct rproc *rproc, const struct firmware *fw)
 	if (rproc->table_csum != crc32(0, table, tablesz)) {
 		dev_err(dev, "resource checksum failed, fw changed?\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto clean_up;
@@ -876,13 +895,19 @@ static int rproc_fw_boot(struct rproc *rproc, const struct firmware *fw)
 	 */
 	loaded_table = rproc_find_loaded_rsc_table(rproc, fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!loaded_table)
 		goto clean_up;
 =======
+=======
+>>>>>>> v3.18
 	if (!loaded_table) {
 		ret = -EINVAL;
 		goto clean_up;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(loaded_table, rproc->cached_table, tablesz);
@@ -944,16 +969,22 @@ static void rproc_fw_config_virtio(const struct firmware *fw, void *context)
 	 * cached_table will be copied into devic memory.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rproc->cached_table = kmalloc(tablesz, GFP_KERNEL);
 	if (!rproc->cached_table)
 		goto out;
 
 	memcpy(rproc->cached_table, table, tablesz);
 =======
+=======
+>>>>>>> v3.18
 	rproc->cached_table = kmemdup(table, tablesz, GFP_KERNEL);
 	if (!rproc->cached_table)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rproc->table_ptr = rproc->cached_table;
 

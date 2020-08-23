@@ -22,7 +22,12 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Distance above which we begin to use zone reclaim
+=======
+ * Nodes within this distance are eligible for reclaim by zone_reclaim() when
+ * zone_reclaim_mode is enabled.
+>>>>>>> v3.18
 =======
  * Nodes within this distance are eligible for reclaim by zone_reclaim() when
  * zone_reclaim_mode is enabled.
@@ -52,6 +57,7 @@
 void build_cpu_to_node_map(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SD_CPU_INIT (struct sched_domain) {		\
 	.parent			= NULL,			\
 	.child			= NULL,			\
@@ -78,6 +84,8 @@ void build_cpu_to_node_map(void);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_NUMA */
 
 #ifdef CONFIG_SMP
@@ -86,7 +94,10 @@ void build_cpu_to_node_map(void);
 #define topology_core_cpumask(cpu)		(&cpu_core_map[cpu])
 #define topology_thread_cpumask(cpu)		(&per_cpu(cpu_sibling_map, cpu))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smt_capable() 				(smp_num_siblings > 1)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

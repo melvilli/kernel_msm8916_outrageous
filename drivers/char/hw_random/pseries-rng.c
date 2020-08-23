@@ -18,6 +18,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -27,6 +33,7 @@
 #include <linux/hw_random.h>
 #include <asm/vio.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MODULE_NAME "pseries-rng"
 
@@ -38,6 +45,8 @@ static int pseries_rng_data_read(struct hwrng *rng, u32 *data)
 	}
 	return 8;
 =======
+=======
+>>>>>>> v3.18
 
 static int pseries_rng_read(struct hwrng *rng, void *data, size_t max, bool wait)
 {
@@ -54,6 +63,9 @@ static int pseries_rng_read(struct hwrng *rng, void *data, size_t max, bool wait
 
 	/* The hypervisor interface returns 64 bits */
 	return size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -73,8 +85,13 @@ static unsigned long pseries_rng_get_desired_dma(struct vio_dev *vdev)
 
 static struct hwrng pseries_rng = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= MODULE_NAME,
 	.data_read	= pseries_rng_data_read,
+=======
+	.name		= KBUILD_MODNAME,
+	.read		= pseries_rng_read,
+>>>>>>> v3.18
 =======
 	.name		= KBUILD_MODNAME,
 	.read		= pseries_rng_read,
@@ -101,7 +118,11 @@ MODULE_DEVICE_TABLE(vio, pseries_rng_driver_ids);
 
 static struct vio_driver pseries_rng_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = MODULE_NAME,
+=======
+	.name = KBUILD_MODNAME,
+>>>>>>> v3.18
 =======
 	.name = KBUILD_MODNAME,
 >>>>>>> v3.18
@@ -114,7 +135,11 @@ static struct vio_driver pseries_rng_driver = {
 static int __init rng_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Registering IBM pSeries RNG driver\n");
+=======
+	pr_info("Registering IBM pSeries RNG driver\n");
+>>>>>>> v3.18
 =======
 	pr_info("Registering IBM pSeries RNG driver\n");
 >>>>>>> v3.18

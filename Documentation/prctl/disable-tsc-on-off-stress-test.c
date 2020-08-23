@@ -30,7 +30,12 @@
 /* snippet from wikipedia :-) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 uint64_t rdtsc() {
+=======
+static uint64_t rdtsc(void)
+{
+>>>>>>> v3.18
 =======
 static uint64_t rdtsc(void)
 {
@@ -44,7 +49,11 @@ return (uint64_t)hi << 32 | lo;
 int should_segv = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sigsegv_cb(int sig)
+=======
+static void sigsegv_cb(int sig)
+>>>>>>> v3.18
 =======
 static void sigsegv_cb(int sig)
 >>>>>>> v3.18
@@ -65,7 +74,11 @@ static void sigsegv_cb(int sig)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void task(void)
+=======
+static void task(void)
+>>>>>>> v3.18
 =======
 static void task(void)
 >>>>>>> v3.18

@@ -93,6 +93,11 @@ int ui_browser__input_window(const char *title, const char *text, char *input,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pthread_mutex_lock(&ui__lock);
+
+>>>>>>> v3.18
 =======
 	pthread_mutex_lock(&ui__lock);
 
@@ -126,6 +131,11 @@ int ui_browser__input_window(const char *title, const char *text, char *input,
 	SLsmg_refresh();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pthread_mutex_unlock(&ui__lock);
+
+>>>>>>> v3.18
 =======
 	pthread_mutex_unlock(&ui__lock);
 
@@ -135,10 +145,13 @@ int ui_browser__input_window(const char *title, const char *text, char *input,
 	key = ui__getch(delay_secs);
 	while (key != K_TIMER && key != K_ENTER && key != K_ESC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (key == K_BKSPC) {
 			if (len == 0)
 				goto next_key;
 =======
+=======
+>>>>>>> v3.18
 		pthread_mutex_lock(&ui__lock);
 
 		if (key == K_BKSPC) {
@@ -146,6 +159,9 @@ int ui_browser__input_window(const char *title, const char *text, char *input,
 				pthread_mutex_unlock(&ui__lock);
 				goto next_key;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			SLsmg_gotorc(y, x + --len);
 			SLsmg_write_char(' ');
@@ -157,6 +173,11 @@ int ui_browser__input_window(const char *title, const char *text, char *input,
 		SLsmg_refresh();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pthread_mutex_unlock(&ui__lock);
+
+>>>>>>> v3.18
 =======
 		pthread_mutex_unlock(&ui__lock);
 
@@ -200,6 +221,11 @@ int ui__question_window(const char *title, const char *text,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pthread_mutex_lock(&ui__lock);
+
+>>>>>>> v3.18
 =======
 	pthread_mutex_lock(&ui__lock);
 
@@ -226,6 +252,12 @@ int ui__question_window(const char *title, const char *text,
 	SLsmg_write_nstring((char *)exit_msg, max_len);
 	SLsmg_refresh();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	pthread_mutex_unlock(&ui__lock);
+
+>>>>>>> v3.18
 =======
 
 	pthread_mutex_unlock(&ui__lock);
@@ -252,9 +284,13 @@ static int __ui__warning(const char *title, const char *format, va_list args)
 		int key;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pthread_mutex_lock(&ui__lock);
 		key = ui__question_window(title, s, "Press any key...", 0);
 		pthread_mutex_unlock(&ui__lock);
+=======
+		key = ui__question_window(title, s, "Press any key...", 0);
+>>>>>>> v3.18
 =======
 		key = ui__question_window(title, s, "Press any key...", 0);
 >>>>>>> v3.18

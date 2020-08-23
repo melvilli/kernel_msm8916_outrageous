@@ -40,6 +40,12 @@
 #include <linux/module.h>
 #include <linux/printk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_INFINIBAND_QIB_DCA
+#include <linux/dca.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 #include <linux/dca.h>
@@ -50,11 +56,17 @@
 #include "qib_common.h"
 #include "qib_mad.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 #include "qib_debugfs.h"
 #include "qib_verbs.h"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #undef pr_fmt
@@ -78,12 +90,18 @@ module_param_named(cfgctxts, qib_cfgctxts, ushort, S_IRUGO);
 MODULE_PARM_DESC(cfgctxts, "Set max number of contexts to use");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned qib_numa_aware;
 module_param_named(numa_aware, qib_numa_aware, uint, S_IRUGO);
 MODULE_PARM_DESC(numa_aware,
 	"0 -> PSM allocation close to HCA, 1 -> PSM allocation local to process");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * If set, do not write to any regs if avoidable, hack to allow
@@ -111,8 +129,11 @@ module_param_named(wc_pat, qib_wc_pat, uint, S_IRUGO);
 MODULE_PARM_DESC(wc_pat, "enable write-combining via PAT mechanism");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct workqueue_struct *qib_cq_wq;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void verify_interrupt(unsigned long);
@@ -145,13 +166,19 @@ int qib_create_ctxts(struct qib_devdata *dd)
 {
 	unsigned i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	int local_node_id = pcibus_to_node(dd->pcidev->bus);
 
 	if (local_node_id < 0)
 		local_node_id = numa_node_id();
 	dd->assigned_node_id = local_node_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -163,8 +190,12 @@ int qib_create_ctxts(struct qib_devdata *dd)
 		qib_dev_err(dd,
 			"Unable to allocate ctxtdata array, failing\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto done;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -180,6 +211,7 @@ int qib_create_ctxts(struct qib_devdata *dd)
 
 		ppd = dd->pport + (i % dd->num_pports);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcd = qib_create_ctxtdata(ppd, i);
 		if (!rcd) {
 			qib_dev_err(dd,
@@ -187,6 +219,8 @@ int qib_create_ctxts(struct qib_devdata *dd)
 			ret = -ENOMEM;
 			goto done;
 =======
+=======
+>>>>>>> v3.18
 
 		rcd = qib_create_ctxtdata(ppd, i, dd->assigned_node_id);
 		if (!rcd) {
@@ -195,15 +229,22 @@ int qib_create_ctxts(struct qib_devdata *dd)
 			kfree(dd->rcd);
 			dd->rcd = NULL;
 			return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		rcd->pkeys[0] = QIB_DEFAULT_P_KEY;
 		rcd->seq_cnt = 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 0;
 done:
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -213,7 +254,12 @@ done:
  * Common code for user and kernel context setup.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt)
+=======
+struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt,
+	int node_id)
+>>>>>>> v3.18
 =======
 struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt,
 	int node_id)
@@ -223,14 +269,20 @@ struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt,
 	struct qib_ctxtdata *rcd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcd = kzalloc(sizeof(*rcd), GFP_KERNEL);
 	if (rcd) {
 		INIT_LIST_HEAD(&rcd->qp_wait_list);
 =======
+=======
+>>>>>>> v3.18
 	rcd = kzalloc_node(sizeof(*rcd), GFP_KERNEL, node_id);
 	if (rcd) {
 		INIT_LIST_HEAD(&rcd->qp_wait_list);
 		rcd->node_id = node_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcd->ppd = ppd;
 		rcd->dd = dd;
@@ -238,8 +290,11 @@ struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt,
 		rcd->ctxt = ctxt;
 		dd->rcd[ctxt] = rcd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 		if (ctxt < dd->first_user_ctxt) { /* N/A for PSM contexts */
 			rcd->opstats = kzalloc_node(sizeof(*rcd->opstats),
@@ -252,6 +307,9 @@ struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt,
 			}
 		}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dd->f_init_ctxt(rcd);
 
@@ -283,7 +341,11 @@ struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *ppd, u32 ctxt,
  * Common code for initializing the physical port structure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qib_init_pportdata(struct qib_pportdata *ppd, struct qib_devdata *dd,
+=======
+int qib_init_pportdata(struct qib_pportdata *ppd, struct qib_devdata *dd,
+>>>>>>> v3.18
 =======
 int qib_init_pportdata(struct qib_pportdata *ppd, struct qib_devdata *dd,
 >>>>>>> v3.18
@@ -297,6 +359,10 @@ int qib_init_pportdata(struct qib_pportdata *ppd, struct qib_devdata *dd,
 	spin_lock_init(&ppd->sdma_lock);
 	spin_lock_init(&ppd->lflags_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&ppd->cc_shadow_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&ppd->cc_shadow_lock);
 >>>>>>> v3.18
@@ -308,13 +374,19 @@ int qib_init_pportdata(struct qib_pportdata *ppd, struct qib_devdata *dd,
 
 	ppd->qib_wq = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_init(&ppd->cc_shadow_lock);
 =======
+=======
+>>>>>>> v3.18
 	ppd->ibport_data.pmastats =
 		alloc_percpu(struct qib_pma_counters);
 	if (!ppd->ibport_data.pmastats)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (qib_cc_table_size < IB_CCT_MIN_ENTRIES)
@@ -364,7 +436,11 @@ int qib_init_pportdata(struct qib_pportdata *ppd, struct qib_devdata *dd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -382,7 +458,11 @@ bail:
 	/* User is intentionally disabling the congestion control agent */
 	if (!qib_cc_table_size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -397,7 +477,11 @@ bail:
 	qib_dev_err(dd, "Congestion Control Agent disabled for port %d\n",
 		port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -535,6 +619,10 @@ static int loadtime_init(struct qib_devdata *dd)
 	dd->intrchk_timer.data = (unsigned long) dd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ret = qib_cq_init(dd);
+>>>>>>> v3.18
 =======
 	ret = qib_cq_init(dd);
 >>>>>>> v3.18
@@ -605,6 +693,10 @@ static void verify_interrupt(unsigned long opaque)
 {
 	struct qib_devdata *dd = (struct qib_devdata *) opaque;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 int_counter;
+>>>>>>> v3.18
 =======
 	u64 int_counter;
 >>>>>>> v3.18
@@ -617,7 +709,12 @@ static void verify_interrupt(unsigned long opaque)
 	 * don't bother checking again.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dd->int_counter == 0) {
+=======
+	int_counter = qib_int_counter(dd) - dd->z_int_counter;
+	if (int_counter == 0) {
+>>>>>>> v3.18
 =======
 	int_counter = qib_int_counter(dd) - dd->z_int_counter;
 	if (int_counter == 0) {
@@ -722,13 +819,19 @@ wq_error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qib_free_pportdata(struct qib_pportdata *ppd)
 {
 	free_percpu(ppd->ibport_data.pmastats);
 	ppd->ibport_data.pmastats = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * qib_init - do the actual initialization sequence on the chip
@@ -1018,13 +1121,19 @@ static void qib_shutdown_device(struct qib_devdata *dd)
 			ppd->qib_wq = NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		qib_free_pportdata(ppd);
 	}
 
 	qib_update_eeprom_log(dd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1078,11 +1187,17 @@ void qib_free_ctxtdata(struct qib_devdata *dd, struct qib_ctxtdata *rcd)
 	vfree(rcd->subctxt_rcvegrbuf);
 	vfree(rcd->subctxt_rcvhdr_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	kfree(rcd->opstats);
 	rcd->opstats = NULL;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(rcd);
 }
@@ -1174,7 +1289,10 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void qib_free_devdata(struct qib_devdata *dd)
@@ -1187,10 +1305,13 @@ void qib_free_devdata(struct qib_devdata *dd)
 	spin_unlock_irqrestore(&qib_devs_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ib_dealloc_device(&dd->verbs_dev.ibdev);
 }
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	qib_dbg_ibdev_exit(&dd->verbs_dev);
 #endif
@@ -1222,6 +1343,9 @@ u64 qib_sps_ints(void)
 	return sps_ints;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Allocate our primary per-unit data structure.  Must be done via verbs
@@ -1239,15 +1363,21 @@ struct qib_devdata *qib_alloc_devdata(struct pci_dev *pdev, size_t extra)
 
 	dd = (struct qib_devdata *) ib_alloc_device(sizeof(*dd) + extra);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dd) {
 		dd = ERR_PTR(-ENOMEM);
 		goto bail;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!dd)
 		return ERR_PTR(-ENOMEM);
 
 	INIT_LIST_HEAD(&dd->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	idr_preload(GFP_KERNEL);
@@ -1266,9 +1396,12 @@ struct qib_devdata *qib_alloc_devdata(struct pci_dev *pdev, size_t extra)
 		qib_early_err(&pdev->dev,
 			      "Could not allocate unit ID: error %d\n", -ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib_dealloc_device(&dd->verbs_dev.ibdev);
 		dd = ERR_PTR(ret);
 =======
+=======
+>>>>>>> v3.18
 		goto bail;
 	}
 	dd->int_counter = alloc_percpu(u64);
@@ -1276,6 +1409,9 @@ struct qib_devdata *qib_alloc_devdata(struct pci_dev *pdev, size_t extra)
 		ret = -ENOMEM;
 		qib_early_err(&pdev->dev,
 			      "Could not allocate per-cpu int_counter\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto bail;
 	}
@@ -1291,10 +1427,13 @@ struct qib_devdata *qib_alloc_devdata(struct pci_dev *pdev, size_t extra)
 				"Could not alloc cpulist info, cpu affinity might be wrong\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 bail:
 	return dd;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	qib_dbg_ibdev_init(&dd->verbs_dev);
 #endif
@@ -1304,6 +1443,9 @@ bail:
 		list_del_init(&dd->list);
 	ib_dealloc_device(&dd->verbs_dev.ibdev);
 	return ERR_PTR(ret);;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1348,7 +1490,11 @@ static int qib_init_one(struct pci_dev *, const struct pci_device_id *);
 #define PFX QIB_DRV_NAME ": "
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(qib_pci_tbl) = {
+=======
+static const struct pci_device_id qib_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id qib_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1361,7 +1507,11 @@ static const struct pci_device_id qib_pci_tbl[] = {
 MODULE_DEVICE_TABLE(pci, qib_pci_tbl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_driver qib_driver = {
+=======
+static struct pci_driver qib_driver = {
+>>>>>>> v3.18
 =======
 static struct pci_driver qib_driver = {
 >>>>>>> v3.18
@@ -1373,7 +1523,10 @@ static struct pci_driver qib_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 
 static int qib_notify_dca(struct notifier_block *, unsigned long, void *);
@@ -1403,13 +1556,20 @@ static int qib_notify_dca(struct notifier_block *nb, unsigned long event,
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Do all the generic driver unit- and chip-independent memory
  * allocation and initialization.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init qlogic_ib_init(void)
+=======
+static int __init qib_ib_init(void)
+>>>>>>> v3.18
 =======
 static int __init qib_ib_init(void)
 >>>>>>> v3.18
@@ -1421,12 +1581,15 @@ static int __init qib_ib_init(void)
 		goto bail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qib_cq_wq = create_singlethread_workqueue("qib_cq");
 	if (!qib_cq_wq) {
 		ret = -ENOMEM;
 		goto bail_dev;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1436,11 +1599,14 @@ static int __init qib_ib_init(void)
 	idr_init(&qib_unit_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pci_register_driver(&qib_driver);
 	if (ret < 0) {
 		pr_err("Unable to register driver: error %d\n", -ret);
 		goto bail_unit;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 	dca_register_notify(&dca_notifier);
 #endif
@@ -1451,6 +1617,9 @@ static int __init qib_ib_init(void)
 	if (ret < 0) {
 		pr_err("Unable to register driver: error %d\n", -ret);
 		goto bail_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1460,11 +1629,14 @@ static int __init qib_ib_init(void)
 	goto bail; /* all OK */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bail_unit:
 	idr_destroy(&qib_unit_table);
 	destroy_workqueue(qib_cq_wq);
 bail_dev:
 =======
+=======
+>>>>>>> v3.18
 bail_dev:
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 	dca_unregister_notify(&dca_notifier);
@@ -1473,6 +1645,9 @@ bail_dev:
 	qib_dbg_exit();
 #endif
 	idr_destroy(&qib_unit_table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qib_dev_cleanup();
 bail:
@@ -1480,7 +1655,11 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(qlogic_ib_init);
+=======
+module_init(qib_ib_init);
+>>>>>>> v3.18
 =======
 module_init(qib_ib_init);
 >>>>>>> v3.18
@@ -1489,7 +1668,11 @@ module_init(qib_ib_init);
  * Do the non-unit driver cleanup, memory free, etc. at unload.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __exit qlogic_ib_cleanup(void)
+=======
+static void __exit qib_ib_cleanup(void)
+>>>>>>> v3.18
 =======
 static void __exit qib_ib_cleanup(void)
 >>>>>>> v3.18
@@ -1503,10 +1686,13 @@ static void __exit qib_ib_cleanup(void)
 			-ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_unregister_driver(&qib_driver);
 
 	destroy_workqueue(qib_cq_wq);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 	dca_unregister_notify(&dca_notifier);
 #endif
@@ -1514,6 +1700,9 @@ static void __exit qib_ib_cleanup(void)
 #ifdef CONFIG_DEBUG_FS
 	qib_dbg_exit();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	qib_cpulist_count = 0;
@@ -1524,7 +1713,11 @@ static void __exit qib_ib_cleanup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_exit(qlogic_ib_cleanup);
+=======
+module_exit(qib_ib_cleanup);
+>>>>>>> v3.18
 =======
 module_exit(qib_ib_cleanup);
 >>>>>>> v3.18
@@ -1570,7 +1763,11 @@ static void cleanup_device_data(struct qib_devdata *dd)
 		struct page **tmpp = dd->pageshadow;
 		dma_addr_t *tmpd = dd->physshadow;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int i, cnt = 0;
+=======
+		int i;
+>>>>>>> v3.18
 =======
 		int i;
 >>>>>>> v3.18
@@ -1587,6 +1784,7 @@ static void cleanup_device_data(struct qib_devdata *dd)
 				qib_release_user_pages(&tmpp[i], 1);
 				tmpp[i] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cnt++;
 			}
 		}
@@ -1595,6 +1793,8 @@ static void cleanup_device_data(struct qib_devdata *dd)
 		dd->pageshadow = NULL;
 		vfree(tmpp);
 =======
+=======
+>>>>>>> v3.18
 			}
 		}
 
@@ -1602,6 +1802,9 @@ static void cleanup_device_data(struct qib_devdata *dd)
 		vfree(tmpp);
 		dd->physshadow = NULL;
 		vfree(tmpd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1625,6 +1828,10 @@ static void cleanup_device_data(struct qib_devdata *dd)
 	kfree(tmp);
 	kfree(dd->boardname);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qib_cq_exit(dd);
+>>>>>>> v3.18
 =======
 	qib_cq_exit(dd);
 >>>>>>> v3.18
@@ -1801,6 +2008,10 @@ int qib_create_rcvhdrq(struct qib_devdata *dd, struct qib_ctxtdata *rcd)
 {
 	unsigned amt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int old_node_id;
+>>>>>>> v3.18
 =======
 	int old_node_id;
 >>>>>>> v3.18
@@ -1814,10 +2025,13 @@ int qib_create_rcvhdrq(struct qib_devdata *dd, struct qib_ctxtdata *rcd)
 		gfp_flags = (rcd->ctxt >= dd->first_user_ctxt) ?
 			GFP_USER : GFP_KERNEL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcd->rcvhdrq = dma_alloc_coherent(
 			&dd->pcidev->dev, amt, &rcd->rcvhdrq_phys,
 			gfp_flags | __GFP_COMP);
 =======
+=======
+>>>>>>> v3.18
 
 		old_node_id = dev_to_node(&dd->pcidev->dev);
 		set_dev_node(&dd->pcidev->dev, rcd->node_id);
@@ -1825,6 +2039,9 @@ int qib_create_rcvhdrq(struct qib_devdata *dd, struct qib_ctxtdata *rcd)
 			&dd->pcidev->dev, amt, &rcd->rcvhdrq_phys,
 			gfp_flags | __GFP_COMP);
 		set_dev_node(&dd->pcidev->dev, old_node_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!rcd->rcvhdrq) {
@@ -1842,15 +2059,21 @@ int qib_create_rcvhdrq(struct qib_devdata *dd, struct qib_ctxtdata *rcd)
 
 		if (!(dd->flags & QIB_NODMA_RTAIL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rcd->rcvhdrtail_kvaddr = dma_alloc_coherent(
 				&dd->pcidev->dev, PAGE_SIZE, &phys_hdrqtail,
 				gfp_flags);
 =======
+=======
+>>>>>>> v3.18
 			set_dev_node(&dd->pcidev->dev, rcd->node_id);
 			rcd->rcvhdrtail_kvaddr = dma_alloc_coherent(
 				&dd->pcidev->dev, PAGE_SIZE, &phys_hdrqtail,
 				gfp_flags);
 			set_dev_node(&dd->pcidev->dev, old_node_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!rcd->rcvhdrtail_kvaddr)
 				goto bail_free;
@@ -1896,6 +2119,10 @@ int qib_setup_eagerbufs(struct qib_ctxtdata *rcd)
 	size_t size;
 	gfp_t gfp_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int old_node_id;
+>>>>>>> v3.18
 =======
 	int old_node_id;
 >>>>>>> v3.18
@@ -1918,8 +2145,13 @@ int qib_setup_eagerbufs(struct qib_ctxtdata *rcd)
 	if (!rcd->rcvegrbuf) {
 		rcd->rcvegrbuf =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kzalloc(chunk * sizeof(rcd->rcvegrbuf[0]),
 				GFP_KERNEL);
+=======
+			kzalloc_node(chunk * sizeof(rcd->rcvegrbuf[0]),
+				GFP_KERNEL, rcd->node_id);
+>>>>>>> v3.18
 =======
 			kzalloc_node(chunk * sizeof(rcd->rcvegrbuf[0]),
 				GFP_KERNEL, rcd->node_id);
@@ -1930,8 +2162,13 @@ int qib_setup_eagerbufs(struct qib_ctxtdata *rcd)
 	if (!rcd->rcvegrbuf_phys) {
 		rcd->rcvegrbuf_phys =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kmalloc(chunk * sizeof(rcd->rcvegrbuf_phys[0]),
 				GFP_KERNEL);
+=======
+			kmalloc_node(chunk * sizeof(rcd->rcvegrbuf_phys[0]),
+				GFP_KERNEL, rcd->node_id);
+>>>>>>> v3.18
 =======
 			kmalloc_node(chunk * sizeof(rcd->rcvegrbuf_phys[0]),
 				GFP_KERNEL, rcd->node_id);
@@ -1943,6 +2180,12 @@ int qib_setup_eagerbufs(struct qib_ctxtdata *rcd)
 		if (rcd->rcvegrbuf[e])
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		old_node_id = dev_to_node(&dd->pcidev->dev);
+		set_dev_node(&dd->pcidev->dev, rcd->node_id);
+>>>>>>> v3.18
 =======
 
 		old_node_id = dev_to_node(&dd->pcidev->dev);
@@ -1953,6 +2196,10 @@ int qib_setup_eagerbufs(struct qib_ctxtdata *rcd)
 					   &rcd->rcvegrbuf_phys[e],
 					   gfp_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		set_dev_node(&dd->pcidev->dev, old_node_id);
+>>>>>>> v3.18
 =======
 		set_dev_node(&dd->pcidev->dev, old_node_id);
 >>>>>>> v3.18

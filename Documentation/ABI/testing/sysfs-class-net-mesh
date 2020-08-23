@@ -2,7 +2,11 @@
 What:           /sys/class/net/<mesh_iface>/mesh/aggregated_ogms
 Date:           May 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18
@@ -10,6 +14,7 @@ Description:
                 Indicates whether the batman protocol messages of the
                 mesh <mesh_iface> shall be aggregated or not.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 What:           /sys/class/net/<mesh_iface>/mesh/ap_isolation
 Date:           May 2011
@@ -23,6 +28,8 @@ What:           /sys/class/net/<mesh_iface>/mesh/bonding
 Date:           June 2010
 Contact:        Simon Wunderlich <siwu@hrz.tu-chemnitz.de>
 =======
+=======
+>>>>>>> v3.18
 What:           /sys/class/net/<mesh_iface>/mesh/<vlan_subdir>/ap_isolation
 Date:           May 2011
 Contact:        Antonio Quartulli <antonio@meshcoding.com>
@@ -35,6 +42,9 @@ Description:
 What:           /sys/class/net/<mesh_iface>/mesh/bonding
 Date:           June 2010
 Contact:        Simon Wunderlich <sw@simonwunderlich.de>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Description:
                 Indicates whether the data traffic going through the
@@ -44,7 +54,11 @@ Description:
 What:           /sys/class/net/<mesh_iface>/mesh/bridge_loop_avoidance
 Date:           November 2011
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Simon Wunderlich <siwu@hrz.tu-chemnitz.de>
+=======
+Contact:        Simon Wunderlich <sw@simonwunderlich.de>
+>>>>>>> v3.18
 =======
 Contact:        Simon Wunderlich <sw@simonwunderlich.de>
 >>>>>>> v3.18
@@ -65,7 +79,11 @@ Description:
 What:           /sys/class/net/<mesh_iface>/mesh/gw_bandwidth
 Date:           October 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18
@@ -76,7 +94,11 @@ Description:
 What:           /sys/class/net/<mesh_iface>/mesh/gw_mode
 Date:           October 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18
@@ -87,7 +109,11 @@ Description:
 What:           /sys/class/net/<mesh_iface>/mesh/gw_sel_class
 Date:           October 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18
@@ -103,7 +129,10 @@ Description:
                 originator message's tq-field on every hop.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:		/sys/class/net/<mesh_iface>/mesh/isolation_mark
 Date:		Nov 2013
 Contact:	Antonio Quartulli <antonio@meshcoding.com>
@@ -121,6 +150,9 @@ Description:
                 mesh are going to use classic flooding for any
                 multicast packet with no optimizations.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:           /sys/class/net/<mesh_iface>/mesh/network_coding
 Date:           Nov 2012
@@ -133,7 +165,11 @@ Description:
 What:           /sys/class/net/<mesh_iface>/mesh/orig_interval
 Date:           May 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
+=======
+Contact:        Marek Lindner <mareklindner@neomailbox.ch>
+>>>>>>> v3.18
 =======
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 >>>>>>> v3.18
@@ -143,6 +179,7 @@ Description:
 
 What:           /sys/class/net/<mesh_iface>/mesh/routing_algo
 Date:           Dec 2011
+<<<<<<< HEAD
 <<<<<<< HEAD
 Contact:        Marek Lindner <lindner_marek@yahoo.de>
 Description:
@@ -160,8 +197,13 @@ Description:
                 the local topologies from all nodes. This file allows
                 to activate the collecting (server) mode.
 =======
+=======
+>>>>>>> v3.18
 Contact:        Marek Lindner <mareklindner@neomailbox.ch>
 Description:
                 Defines the routing procotol this mesh instance
                 uses to find the optimal paths through the mesh.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

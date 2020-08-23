@@ -6,8 +6,11 @@
  *                    for convergence integrated media GmbH
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This program is free software; you can redistribute it and/or
@@ -38,11 +41,14 @@
 #define DMX_FILTER_SIZE 16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Min recording chunk upon which event is generated */
 #define DMX_REC_BUFF_CHUNK_MIN_SIZE		(100*188)
 
 #define DMX_MAX_DECODER_BUFFER_NUM		(32)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef enum
@@ -109,6 +115,7 @@ typedef struct dmx_filter
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Filter flags */
 #define DMX_CHECK_CRC		0x01
 #define DMX_ONESHOT		0x02
@@ -117,12 +124,15 @@ typedef struct dmx_filter
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct dmx_sct_filter_params
 {
 	__u16          pid;
 	dmx_filter_t   filter;
 	__u32          timeout;
 	__u32          flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -164,6 +174,8 @@ enum dmx_video_codec {
 #define DMX_IDX_H264_SEI                    0x08000000
 
 =======
+=======
+>>>>>>> v3.18
 #define DMX_CHECK_CRC       1
 #define DMX_ONESHOT         2
 #define DMX_IMMEDIATE_START 4
@@ -171,6 +183,9 @@ enum dmx_video_codec {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dmx_pes_filter_params
 {
@@ -179,6 +194,7 @@ struct dmx_pes_filter_params
 	dmx_output_t   output;
 	dmx_pes_type_t pes_type;
 	__u32          flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -533,10 +549,13 @@ struct dmx_oob_command {
 	} params;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 typedef struct dmx_caps {
 	__u32 caps;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* Indicates whether demux support playback from memory in pull mode */
@@ -637,6 +656,9 @@ typedef struct dmx_caps {
 =======
 	int num_decoders;
 >>>>>>> v3.18
+=======
+	int num_decoders;
+>>>>>>> v3.18
 } dmx_caps_t;
 
 typedef enum {
@@ -650,6 +672,7 @@ typedef enum {
 	DMX_SOURCE_DVR3
 } dmx_source_t;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum dmx_tsp_format_t {
 	DMX_TSP_FORMAT_188 = 0,
@@ -874,12 +897,17 @@ struct dmx_scrambling_bits {
 	__u8 value;
 };
 =======
+=======
+>>>>>>> v3.18
 struct dmx_stc {
 	unsigned int num;	/* input : which STC? 0..N */
 	unsigned int base;	/* output: divisor for stc to get 90 kHz clock */
 	__u64 stc;		/* output: stc in 'base'*90 kHz units */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DMX_START                _IO('o', 41)
@@ -893,6 +921,7 @@ struct dmx_stc {
 #define DMX_GET_STC              _IOWR('o', 50, struct dmx_stc)
 #define DMX_ADD_PID              _IOW('o', 51, __u16)
 #define DMX_REMOVE_PID           _IOW('o', 52, __u16)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DMX_SET_TS_PACKET_FORMAT _IOW('o', 53, enum dmx_tsp_format_t)
 #define DMX_SET_TS_OUT_FORMAT	 _IOW('o', 54, enum dmx_tsp_format_t)
@@ -917,6 +946,8 @@ struct dmx_stc {
 #define DMX_SET_CIPHER _IOW('o', 73, struct dmx_cipher_operations)
 #define DMX_FLUSH_BUFFER _IO('o', 74)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

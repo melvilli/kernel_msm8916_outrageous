@@ -1064,8 +1064,13 @@ static int sdio_uart_probe(struct sdio_func *func,
 
 	if (func->class == SDIO_CLASS_UART) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: need info on UART class basic setup\n",
 		       sdio_func_id(func));
+=======
+		pr_warn("%s: need info on UART class basic setup\n",
+			sdio_func_id(func));
+>>>>>>> v3.18
 =======
 		pr_warn("%s: need info on UART class basic setup\n",
 			sdio_func_id(func));
@@ -1088,9 +1093,14 @@ static int sdio_uart_probe(struct sdio_func *func,
 		}
 		if (!tpl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning(
        "%s: can't find tuple 0x91 subtuple 0 (SUBTPL_SIOREG) for GPS class\n",
 			       sdio_func_id(func));
+=======
+			pr_warn("%s: can't find tuple 0x91 subtuple 0 (SUBTPL_SIOREG) for GPS class\n",
+				sdio_func_id(func));
+>>>>>>> v3.18
 =======
 			pr_warn("%s: can't find tuple 0x91 subtuple 0 (SUBTPL_SIOREG) for GPS class\n",
 				sdio_func_id(func));

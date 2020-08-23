@@ -13,6 +13,11 @@ int snd_usb_endpoint_set_params(struct snd_usb_endpoint *ep,
 				unsigned int channels,
 				unsigned int period_bytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				unsigned int period_frames,
+				unsigned int buffer_periods,
+>>>>>>> v3.18
 =======
 				unsigned int period_frames,
 				unsigned int buffer_periods,
@@ -26,7 +31,12 @@ void snd_usb_endpoint_stop(struct snd_usb_endpoint *ep);
 void snd_usb_endpoint_sync_pending_stop(struct snd_usb_endpoint *ep);
 int  snd_usb_endpoint_activate(struct snd_usb_endpoint *ep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  snd_usb_endpoint_deactivate(struct snd_usb_endpoint *ep);
+=======
+void snd_usb_endpoint_deactivate(struct snd_usb_endpoint *ep);
+void snd_usb_endpoint_release(struct snd_usb_endpoint *ep);
+>>>>>>> v3.18
 =======
 void snd_usb_endpoint_deactivate(struct snd_usb_endpoint *ep);
 void snd_usb_endpoint_release(struct snd_usb_endpoint *ep);

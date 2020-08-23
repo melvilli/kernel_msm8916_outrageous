@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -31,7 +35,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -1775,6 +1782,7 @@ static const struct rt2x00lib_ops rt2400pci_rt2x00_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct data_queue_desc rt2400pci_queue_rx = {
 	.entry_num		= 24,
 	.data_size		= DATA_FRAME_SIZE,
@@ -1803,6 +1811,8 @@ static const struct data_queue_desc rt2400pci_queue_atim = {
 	.priv_size		= sizeof(struct queue_entry_priv_mmio),
 };
 =======
+=======
+>>>>>>> v3.18
 static void rt2400pci_queue_init(struct data_queue *queue)
 {
 	switch (queue->qid) {
@@ -1842,6 +1852,9 @@ static void rt2400pci_queue_init(struct data_queue *queue)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct rt2x00_ops rt2400pci_ops = {
@@ -1851,11 +1864,15 @@ static const struct rt2x00_ops rt2400pci_ops = {
 	.rf_size		= RF_SIZE,
 	.tx_queues		= NUM_TX_QUEUES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.extra_tx_headroom	= 0,
 	.rx			= &rt2400pci_queue_rx,
 	.tx			= &rt2400pci_queue_tx,
 	.bcn			= &rt2400pci_queue_bcn,
 	.atim			= &rt2400pci_queue_atim,
+=======
+	.queue_init		= rt2400pci_queue_init,
+>>>>>>> v3.18
 =======
 	.queue_init		= rt2400pci_queue_init,
 >>>>>>> v3.18
@@ -1870,7 +1887,11 @@ static const struct rt2x00_ops rt2400pci_ops = {
  * RT2400pci module information.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rt2400pci_device_table) = {
+=======
+static const struct pci_device_id rt2400pci_device_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rt2400pci_device_table[] = {
 >>>>>>> v3.18

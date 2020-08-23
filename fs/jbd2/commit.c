@@ -31,17 +31,23 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Default IO end handler for temporary BJ_IO buffer_heads.
  */
 static void journal_end_buffer_io_sync(struct buffer_head *bh, int uptodate)
 {
 =======
+=======
+>>>>>>> v3.18
  * IO end handler for temporary buffer_heads handling writes to the journal.
  */
 static void journal_end_buffer_io_sync(struct buffer_head *bh, int uptodate)
 {
 	struct buffer_head *orig_bh = bh->b_private;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUFFER_TRACE(bh, "");
 	if (uptodate)
@@ -49,12 +55,18 @@ static void journal_end_buffer_io_sync(struct buffer_head *bh, int uptodate)
 	else
 		clear_buffer_uptodate(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (orig_bh) {
 		clear_bit_unlock(BH_Shadow, &orig_bh->b_state);
 		smp_mb__after_atomic();
 		wake_up_bit(&orig_bh->b_state, BH_Shadow);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unlock_buffer(bh);
 }
@@ -103,8 +115,12 @@ nope:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void jbd2_commit_block_csum_set(journal_t *j,
 				       struct journal_head *descriptor)
+=======
+static void jbd2_commit_block_csum_set(journal_t *j, struct buffer_head *bh)
+>>>>>>> v3.18
 =======
 static void jbd2_commit_block_csum_set(journal_t *j, struct buffer_head *bh)
 >>>>>>> v3.18
@@ -112,6 +128,7 @@ static void jbd2_commit_block_csum_set(journal_t *j, struct buffer_head *bh)
 	struct commit_header *h;
 	__u32 csum;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 		return;
@@ -123,6 +140,8 @@ static void jbd2_commit_block_csum_set(journal_t *j, struct buffer_head *bh)
 	csum = jbd2_chksum(j, j->j_csum_seed, jh2bh(descriptor)->b_data,
 			   j->j_blocksize);
 =======
+=======
+>>>>>>> v3.18
 	if (!jbd2_journal_has_csum_v2or3(j))
 		return;
 
@@ -131,6 +150,9 @@ static void jbd2_commit_block_csum_set(journal_t *j, struct buffer_head *bh)
 	h->h_chksum_size = 0;
 	h->h_chksum[0] = 0;
 	csum = jbd2_chksum(j, j->j_csum_seed, bh->b_data, j->j_blocksize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	h->h_chksum[0] = cpu_to_be32(csum);
 }
@@ -149,7 +171,10 @@ static int journal_submit_commit_record(journal_t *journal,
 					__u32 crc32_sum)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct journal_head *descriptor;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct commit_header *tmp;
@@ -163,6 +188,7 @@ static int journal_submit_commit_record(journal_t *journal,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	descriptor = jbd2_journal_get_descriptor_buffer(journal);
 	if (!descriptor)
 		return 1;
@@ -170,10 +196,15 @@ static int journal_submit_commit_record(journal_t *journal,
 	bh = jh2bh(descriptor);
 
 =======
+=======
+>>>>>>> v3.18
 	bh = jbd2_journal_get_descriptor_buffer(journal);
 	if (!bh)
 		return 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tmp = (struct commit_header *)bh->b_data;
 	tmp->h_magic = cpu_to_be32(JBD2_MAGIC_NUMBER);
@@ -189,9 +220,15 @@ static int journal_submit_commit_record(journal_t *journal,
 		tmp->h_chksum[0] 	= cpu_to_be32(crc32_sum);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jbd2_commit_block_csum_set(journal, descriptor);
 
 	JBUFFER_TRACE(descriptor, "submit commit block");
+=======
+	jbd2_commit_block_csum_set(journal, bh);
+
+	BUFFER_TRACE(bh, "submit commit block");
+>>>>>>> v3.18
 =======
 	jbd2_commit_block_csum_set(journal, bh);
 
@@ -229,7 +266,10 @@ static int journal_wait_on_commit_record(journal_t *journal,
 		ret = -EIO;
 	put_bh(bh);            /* One for getblk() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jbd2_journal_put_journal_head(bh2jh(bh));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -364,24 +404,34 @@ static __u32 jbd2_checksum_data(__u32 crc32_sum, struct buffer_head *bh)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void write_tag_block(int tag_bytes, journal_block_tag_t *tag,
 				   unsigned long long block)
 {
 	tag->t_blocknr = cpu_to_be32(block & (u32)~0);
 	if (tag_bytes > JBD2_TAG_SIZE32)
 =======
+=======
+>>>>>>> v3.18
 static void write_tag_block(journal_t *j, journal_block_tag_t *tag,
 				   unsigned long long block)
 {
 	tag->t_blocknr = cpu_to_be32(block & (u32)~0);
 	if (JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_64BIT))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tag->t_blocknr_high = cpu_to_be32((block >> 31) >> 1);
 }
 
 static void jbd2_descr_block_csum_set(journal_t *j,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      struct journal_head *descriptor)
+=======
+				      struct buffer_head *bh)
+>>>>>>> v3.18
 =======
 				      struct buffer_head *bh)
 >>>>>>> v3.18
@@ -389,6 +439,7 @@ static void jbd2_descr_block_csum_set(journal_t *j,
 	struct jbd2_journal_block_tail *tail;
 	__u32 csum;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 		return;
@@ -400,6 +451,8 @@ static void jbd2_descr_block_csum_set(journal_t *j,
 	csum = jbd2_chksum(j, j->j_csum_seed, jh2bh(descriptor)->b_data,
 			   j->j_blocksize);
 =======
+=======
+>>>>>>> v3.18
 	if (!jbd2_journal_has_csum_v2or3(j))
 		return;
 
@@ -407,6 +460,9 @@ static void jbd2_descr_block_csum_set(journal_t *j,
 			sizeof(struct jbd2_journal_block_tail));
 	tail->t_checksum = 0;
 	csum = jbd2_chksum(j, j->j_csum_seed, bh->b_data, j->j_blocksize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tail->t_checksum = cpu_to_be32(csum);
 }
@@ -414,6 +470,7 @@ static void jbd2_descr_block_csum_set(journal_t *j,
 static void jbd2_block_tag_csum_set(journal_t *j, journal_block_tag_t *tag,
 				    struct buffer_head *bh, __u32 sequence)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct page *page = bh->b_page;
 	__u8 *addr;
@@ -432,6 +489,8 @@ static void jbd2_block_tag_csum_set(journal_t *j, journal_block_tag_t *tag,
 
 	tag->t_checksum = cpu_to_be32(csum);
 =======
+=======
+>>>>>>> v3.18
 	journal_block_tag3_t *tag3 = (journal_block_tag3_t *)tag;
 	struct page *page = bh->b_page;
 	__u8 *addr;
@@ -452,6 +511,9 @@ static void jbd2_block_tag_csum_set(journal_t *j, journal_block_tag_t *tag,
 		tag3->t_checksum = cpu_to_be32(csum32);
 	else
 		tag->t_checksum = cpu_to_be16(csum32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 /*
@@ -465,7 +527,12 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 	struct transaction_stats_s stats;
 	transaction_t *commit_transaction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct journal_head *jh, *new_jh, *descriptor;
+=======
+	struct journal_head *jh;
+	struct buffer_head *descriptor;
+>>>>>>> v3.18
 =======
 	struct journal_head *jh;
 	struct buffer_head *descriptor;
@@ -494,13 +561,19 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 	int update_tail;
 	int csum_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (JBD2_HAS_INCOMPAT_FEATURE(journal, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 =======
+=======
+>>>>>>> v3.18
 	LIST_HEAD(io_bufs);
 	LIST_HEAD(log_bufs);
 
 	if (jbd2_journal_has_csum_v2or3(journal))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		csum_size = sizeof(struct jbd2_journal_block_tail);
 
@@ -533,7 +606,10 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 
 	commit_transaction = journal->j_running_transaction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	J_ASSERT(commit_transaction->t_state == T_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -543,6 +619,10 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 
 	write_lock(&journal->j_state_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	J_ASSERT(commit_transaction->t_state == T_RUNNING);
+>>>>>>> v3.18
 =======
 	J_ASSERT(commit_transaction->t_state == T_RUNNING);
 >>>>>>> v3.18
@@ -636,13 +716,19 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 	jbd2_journal_switch_revoke_table(journal);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Reserved credits cannot be claimed anymore, free them
 	 */
 	atomic_sub(atomic_read(&journal->j_reserved_credits),
 		   &commit_transaction->t_outstanding_credits);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_jbd2_commit_flushing(journal, commit_transaction);
 	stats.run.rs_flushing = jiffies;
@@ -658,7 +744,11 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 	write_unlock(&journal->j_state_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jbd_debug(3, "JBD2: commit phase 2\n");
+=======
+	jbd_debug(3, "JBD2: commit phase 2a\n");
+>>>>>>> v3.18
 =======
 	jbd_debug(3, "JBD2: commit phase 2a\n");
 >>>>>>> v3.18
@@ -674,10 +764,16 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 	blk_start_plug(&plug);
 	jbd2_journal_write_revoke_records(journal, commit_transaction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  WRITE_SYNC);
 	blk_finish_plug(&plug);
 
 	jbd_debug(3, "JBD2: commit phase 2\n");
+=======
+					  &log_bufs, WRITE_SYNC);
+
+	jbd_debug(3, "JBD2: commit phase 2b\n");
+>>>>>>> v3.18
 =======
 					  &log_bufs, WRITE_SYNC);
 
@@ -706,9 +802,14 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	descriptor = NULL;
 	bufs = 0;
 	blk_start_plug(&plug);
+=======
+	bufs = 0;
+	descriptor = NULL;
+>>>>>>> v3.18
 =======
 	bufs = 0;
 	descriptor = NULL;
@@ -744,8 +845,11 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 
 		if (!descriptor) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct buffer_head *bh;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			J_ASSERT (bufs == 0);
@@ -759,20 +863,27 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bh = jh2bh(descriptor);
 			jbd_debug(4, "JBD2: got buffer %llu (%p)\n",
 				(unsigned long long)bh->b_blocknr, bh->b_data);
 			header = (journal_header_t *)&bh->b_data[0];
 =======
+=======
+>>>>>>> v3.18
 			jbd_debug(4, "JBD2: got buffer %llu (%p)\n",
 				(unsigned long long)descriptor->b_blocknr,
 				descriptor->b_data);
 			header = (journal_header_t *)descriptor->b_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			header->h_magic     = cpu_to_be32(JBD2_MAGIC_NUMBER);
 			header->h_blocktype = cpu_to_be32(JBD2_DESCRIPTOR_BLOCK);
 			header->h_sequence  = cpu_to_be32(commit_transaction->t_tid);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			tagp = &bh->b_data[sizeof(journal_header_t)];
 			space_left = bh->b_size - sizeof(journal_header_t);
@@ -787,6 +898,8 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 			jbd2_journal_file_buffer(descriptor, commit_transaction,
 					BJ_LogCtl);
 =======
+=======
+>>>>>>> v3.18
 			tagp = &descriptor->b_data[sizeof(journal_header_t)];
 			space_left = descriptor->b_size -
 						sizeof(journal_header_t);
@@ -799,6 +912,9 @@ void jbd2_journal_commit_transaction(journal_t *journal)
                            completion later */
 			BUFFER_TRACE(descriptor, "ph3: file as descriptor");
 			jbd2_file_log_bh(&log_bufs, descriptor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -823,6 +939,7 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 		/* Bump b_count to prevent truncate from stumbling over
                    the shadowed buffer!  @@@ This can go if we ever get
 <<<<<<< HEAD
+<<<<<<< HEAD
                    rid of the BJ_IO/BJ_Shadow pairing of buffers. */
 		atomic_inc(&jh2bh(jh)->b_count);
 
@@ -841,6 +958,8 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 		flags = jbd2_journal_write_metadata_buffer(commit_transaction,
 						      jh, &new_jh, blocknr);
 =======
+=======
+>>>>>>> v3.18
                    rid of the shadow pairing of buffers. */
 		atomic_inc(&jh2bh(jh)->b_count);
 
@@ -852,14 +971,21 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 		JBUFFER_TRACE(jh, "ph3: write metadata");
 		flags = jbd2_journal_write_metadata_buffer(commit_transaction,
 						jh, &wbuf[bufs], blocknr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (flags < 0) {
 			jbd2_journal_abort(journal, flags);
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(BH_JWrite, &jh2bh(new_jh)->b_state);
 		wbuf[bufs++] = jh2bh(new_jh);
+=======
+		jbd2_file_log_bh(&io_bufs, wbuf[bufs]);
+>>>>>>> v3.18
 =======
 		jbd2_file_log_bh(&io_bufs, wbuf[bufs]);
 >>>>>>> v3.18
@@ -875,6 +1001,7 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 
 		tag = (journal_block_tag_t *) tagp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_tag_block(tag_bytes, tag, jh2bh(jh)->b_blocknr);
 		tag->t_flags = cpu_to_be16(tag_flag);
 		jbd2_block_tag_csum_set(journal, tag, jh2bh(new_jh),
@@ -882,6 +1009,8 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 		tagp += tag_bytes;
 		space_left -= tag_bytes;
 =======
+=======
+>>>>>>> v3.18
 		write_tag_block(journal, tag, jh2bh(jh)->b_blocknr);
 		tag->t_flags = cpu_to_be16(tag_flag);
 		jbd2_block_tag_csum_set(journal, tag, wbuf[bufs],
@@ -889,6 +1018,9 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 		tagp += tag_bytes;
 		space_left -= tag_bytes;
 		bufs++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (first_tag) {
@@ -1002,7 +1134,11 @@ start_journal_io:
            complete.  Control buffers being written are on the
            transaction's t_log_list queue, and metadata buffers are on
 <<<<<<< HEAD
+<<<<<<< HEAD
            the t_iobuf_list queue.
+=======
+           the io_bufs list.
+>>>>>>> v3.18
 =======
            the io_bufs list.
 >>>>>>> v3.18
@@ -1014,6 +1150,7 @@ start_journal_io:
 
 	jbd_debug(3, "JBD2: commit phase 3\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * akpm: these are BJ_IO, and j_list_lock is not needed.
@@ -1047,6 +1184,8 @@ wait_for_iobuf:
 		BUFFER_TRACE(bh, "dumping temporary bh");
 		jbd2_journal_put_journal_head(jh);
 =======
+=======
+>>>>>>> v3.18
 	while (!list_empty(&io_bufs)) {
 		struct buffer_head *bh = list_entry(io_bufs.prev,
 						    struct buffer_head,
@@ -1064,11 +1203,15 @@ wait_for_iobuf:
 		 * jbd2_journal_write_metadata_buffer().
 		 */
 		BUFFER_TRACE(bh, "dumping temporary bh");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__brelse(bh);
 		J_ASSERT_BH(bh, atomic_read(&bh->b_count) == 0);
 		free_buffer_head(bh);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* We also have to unlock and free the corresponding
                    shadowed buffer */
@@ -1077,12 +1220,17 @@ wait_for_iobuf:
 		clear_bit(BH_JWrite, &bh->b_state);
 		J_ASSERT_BH(bh, buffer_jbddirty(bh));
 =======
+=======
+>>>>>>> v3.18
 		/* We also have to refile the corresponding shadowed buffer */
 		jh = commit_transaction->t_shadow_list->b_tprev;
 		bh = jh2bh(jh);
 		clear_buffer_jwrite(bh);
 		J_ASSERT_BH(bh, buffer_jbddirty(bh));
 		J_ASSERT_BH(bh, !buffer_shadow(bh));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* The metadata is now released for reuse, but we need
@@ -1091,6 +1239,7 @@ wait_for_iobuf:
                    required. */
 		JBUFFER_TRACE(jh, "file as BJ_Forget");
 		jbd2_journal_file_buffer(jh, commit_transaction, BJ_Forget);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * Wake up any transactions which were waiting for this IO to
@@ -1102,6 +1251,8 @@ wait_for_iobuf:
 		wake_up_bit(&bh->b_state, BH_Unshadow);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		JBUFFER_TRACE(jh, "brelse shadowed buffer");
 		__brelse(bh);
 	}
@@ -1111,6 +1262,7 @@ wait_for_iobuf:
 	jbd_debug(3, "JBD2: commit phase 4\n");
 
 	/* Here we wait for the revoke record and descriptor record buffers */
+<<<<<<< HEAD
 <<<<<<< HEAD
  wait_for_ctlbuf:
 	while (commit_transaction->t_log_list != NULL) {
@@ -1125,12 +1277,17 @@ wait_for_iobuf:
 		if (cond_resched())
 			goto wait_for_ctlbuf;
 =======
+=======
+>>>>>>> v3.18
 	while (!list_empty(&log_bufs)) {
 		struct buffer_head *bh;
 
 		bh = list_entry(log_bufs.prev, struct buffer_head, b_assoc_buffers);
 		wait_on_buffer(bh);
 		cond_resched();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (unlikely(!buffer_uptodate(bh)))
@@ -1139,8 +1296,12 @@ wait_for_iobuf:
 		BUFFER_TRACE(bh, "ph5: control buffer writeout done: unfile");
 		clear_buffer_jwrite(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jbd2_journal_unfile_buffer(journal, jh);
 		jbd2_journal_put_journal_head(jh);
+=======
+		jbd2_unfile_log_bh(bh);
+>>>>>>> v3.18
 =======
 		jbd2_unfile_log_bh(bh);
 >>>>>>> v3.18
@@ -1194,9 +1355,13 @@ wait_for_iobuf:
 	J_ASSERT(commit_transaction->t_buffers == NULL);
 	J_ASSERT(commit_transaction->t_checkpoint_list == NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	J_ASSERT(commit_transaction->t_iobuf_list == NULL);
 	J_ASSERT(commit_transaction->t_shadow_list == NULL);
 	J_ASSERT(commit_transaction->t_log_list == NULL);
+=======
+	J_ASSERT(commit_transaction->t_shadow_list == NULL);
+>>>>>>> v3.18
 =======
 	J_ASSERT(commit_transaction->t_shadow_list == NULL);
 >>>>>>> v3.18
@@ -1343,7 +1508,10 @@ restart_loop:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Add the transaction to the checkpoint list
 	 * __journal_remove_checkpoint() can not destroy transaction
 	 * under us because it is not marked as T_FINISHED yet */
@@ -1363,6 +1531,9 @@ restart_loop:
 	}
 	spin_unlock(&journal->j_list_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Done with this transaction! */
 
@@ -1383,6 +1554,7 @@ restart_loop:
 	trace_jbd2_run_stats(journal->j_fs_dev->bd_dev,
 			     commit_transaction->t_tid, &stats.run);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * Calculate overall stats
@@ -1401,6 +1573,9 @@ restart_loop:
 	journal->j_stats.run.rs_blocks += stats.run.rs_blocks;
 	journal->j_stats.run.rs_blocks_logged += stats.run.rs_blocks_logged;
 	spin_unlock(&journal->j_history_lock);
+=======
+	stats.ts_requested = (commit_transaction->t_requested) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	stats.ts_requested = (commit_transaction->t_requested) ? 1 : 0;
 >>>>>>> v3.18
@@ -1424,6 +1599,7 @@ restart_loop:
 	write_unlock(&journal->j_state_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (journal->j_checkpoint_transactions == NULL) {
 		journal->j_checkpoint_transactions = commit_transaction;
 		commit_transaction->t_cpnext = commit_transaction;
@@ -1444,6 +1620,8 @@ restart_loop:
 	 * under us because it is not marked as T_FINISHED yet */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (journal->j_commit_callback)
 		journal->j_commit_callback(journal, commit_transaction);
 
@@ -1455,7 +1633,11 @@ restart_loop:
 	spin_lock(&journal->j_list_lock);
 	commit_transaction->t_state = T_FINISHED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Recheck checkpoint lists after j_list_lock was dropped */
+=======
+	/* Check if the transaction can be dropped now that we are finished */
+>>>>>>> v3.18
 =======
 	/* Check if the transaction can be dropped now that we are finished */
 >>>>>>> v3.18
@@ -1468,7 +1650,10 @@ restart_loop:
 	write_unlock(&journal->j_state_lock);
 	wake_up(&journal->j_wait_done_commit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Calculate overall stats
@@ -1486,5 +1671,8 @@ restart_loop:
 	journal->j_stats.run.rs_blocks += stats.run.rs_blocks;
 	journal->j_stats.run.rs_blocks_logged += stats.run.rs_blocks_logged;
 	spin_unlock(&journal->j_history_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

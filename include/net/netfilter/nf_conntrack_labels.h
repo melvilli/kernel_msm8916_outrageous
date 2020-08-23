@@ -8,6 +8,11 @@
 #include <uapi/linux/netfilter/xt_connlabel.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NF_CT_LABELS_MAX_SIZE ((XT_CONNLABEL_MAXBIT + 1) / BITS_PER_BYTE)
+
+>>>>>>> v3.18
 =======
 #define NF_CT_LABELS_MAX_SIZE ((XT_CONNLABEL_MAXBIT + 1) / BITS_PER_BYTE)
 
@@ -35,7 +40,11 @@ static inline struct nf_conn_labels *nf_ct_labels_ext_add(struct nf_conn *ct)
 
 	words = ACCESS_ONCE(net->ct.label_words);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (words == 0 || WARN_ON_ONCE(words > 8))
+=======
+	if (words == 0)
+>>>>>>> v3.18
 =======
 	if (words == 0)
 >>>>>>> v3.18

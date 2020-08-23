@@ -1,16 +1,22 @@
 /include/ "skeleton.dtsi"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 / {
 	compatible = "marvell,dove";
 	model = "Marvell Armada 88AP510 SoC";
 =======
+=======
+>>>>>>> v3.18
 #define MBUS_ID(target,attributes) (((target) << 24) | ((attributes) << 16))
 
 / {
 	compatible = "marvell,dove";
 	model = "Marvell Armada 88AP510 SoC";
 	interrupt-parent = <&intc>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	aliases {
@@ -19,6 +25,7 @@
 		gpio2 = &gpio2;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	soc@f1000000 {
 		compatible = "simple-bus";
@@ -267,6 +274,8 @@
 				dmacap,memcpy;
 				dmacap,xor;
 =======
+=======
+>>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -897,6 +906,9 @@
 				reg = <0x820000 0x1000>;
 				interrupts = <47>;
 				status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};

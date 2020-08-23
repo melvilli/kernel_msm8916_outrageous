@@ -26,8 +26,13 @@ When a w1 master driver registers with the w1 subsystem, the following occurs:
  - the w1 bus is periodically searched for new slave devices
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 When a device is found on the bus, w1 core checks if driver for its family is
 loaded. If so, the family driver is attached to the slave.
+=======
+When a device is found on the bus, w1 core tries to load the driver for its family
+and check if it is loaded. If so, the family driver is attached to the slave.
+>>>>>>> v3.18
 =======
 When a device is found on the bus, w1 core tries to load the driver for its family
 and check if it is loaded. If so, the family driver is attached to the slave.
@@ -88,7 +93,11 @@ w1_master_add      - Manually register a slave device
 w1_master_attempts - the number of times a search was attempted
 w1_master_max_slave_count
 <<<<<<< HEAD
+<<<<<<< HEAD
                    - the maximum slaves that may be attached to a master
+=======
+                   - maximum number of slaves to search for at a time
+>>>>>>> v3.18
 =======
                    - maximum number of slaves to search for at a time
 >>>>>>> v3.18

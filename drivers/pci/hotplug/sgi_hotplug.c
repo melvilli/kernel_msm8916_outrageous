@@ -10,6 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #include <asm/sn/sn_sal.h>
 #include <asm/sn/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/sn/acpi.h>
@@ -196,7 +203,11 @@ static int sn_hp_slot_private_alloc(struct hotplug_slot *bss_hotplug_slot,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct hotplug_slot * sn_hp_destroy(void)
+=======
+static struct hotplug_slot *sn_hp_destroy(void)
+>>>>>>> v3.18
 =======
 static struct hotplug_slot *sn_hp_destroy(void)
 >>>>>>> v3.18
@@ -262,8 +273,12 @@ static int sn_slot_enable(struct hotplug_slot *bss_hotplug_slot,
 
 	if (rc == PCI_L1_ERR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&slot->pci_bus->self->dev,
 			"L1 failure %d with message: %s",
+=======
+		dev_dbg(&slot->pci_bus->self->dev, "L1 failure %d with message: %s",
+>>>>>>> v3.18
 =======
 		dev_dbg(&slot->pci_bus->self->dev, "L1 failure %d with message: %s",
 >>>>>>> v3.18
@@ -273,8 +288,12 @@ static int sn_slot_enable(struct hotplug_slot *bss_hotplug_slot,
 
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&slot->pci_bus->self->dev,
 			"insert failed with error %d sub-error %d\n",
+=======
+		dev_dbg(&slot->pci_bus->self->dev, "insert failed with error %d sub-error %d\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(&slot->pci_bus->self->dev, "insert failed with error %d sub-error %d\n",
 >>>>>>> v3.18
@@ -308,8 +327,12 @@ static int sn_slot_disable(struct hotplug_slot *bss_hotplug_slot,
 
 	if ((action == PCI_REQ_SLOT_ELIGIBLE) && (rc == PCI_EMPTY_33MHZ)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&slot->pci_bus->self->dev,
 			"Cannot remove last 33MHz card\n");
+=======
+		dev_dbg(&slot->pci_bus->self->dev, "Cannot remove last 33MHz card\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&slot->pci_bus->self->dev, "Cannot remove last 33MHz card\n");
 >>>>>>> v3.18
@@ -318,8 +341,12 @@ static int sn_slot_disable(struct hotplug_slot *bss_hotplug_slot,
 
 	if ((action == PCI_REQ_SLOT_ELIGIBLE) && (rc == PCI_L1_ERR)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&slot->pci_bus->self->dev,
 			"L1 failure %d with message \n%s\n",
+=======
+		dev_dbg(&slot->pci_bus->self->dev, "L1 failure %d with message \n%s\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(&slot->pci_bus->self->dev, "L1 failure %d with message \n%s\n",
 >>>>>>> v3.18
@@ -329,8 +356,12 @@ static int sn_slot_disable(struct hotplug_slot *bss_hotplug_slot,
 
 	if ((action == PCI_REQ_SLOT_ELIGIBLE) && rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&slot->pci_bus->self->dev,
 			"remove failed with error %d sub-error %d\n",
+=======
+		dev_dbg(&slot->pci_bus->self->dev, "remove failed with error %d sub-error %d\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(&slot->pci_bus->self->dev, "remove failed with error %d sub-error %d\n",
 >>>>>>> v3.18
@@ -446,16 +477,22 @@ static int enable_slot(struct hotplug_slot *bss_hotplug_slot)
 		acpi_status ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phandle = PCI_CONTROLLER(slot->pci_bus)->acpi_handle;
 
 		if (acpi_bus_get_device(phandle, &pdevice)) {
 			dev_dbg(&slot->pci_bus->self->dev,
 				"no parent device, assuming NULL\n");
 =======
+=======
+>>>>>>> v3.18
 		phandle = acpi_device_handle(PCI_CONTROLLER(slot->pci_bus)->companion);
 
 		if (acpi_bus_get_device(phandle, &pdevice)) {
 			dev_dbg(&slot->pci_bus->self->dev, "no parent device, assuming NULL\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pdevice = NULL;
 		}
@@ -486,10 +523,15 @@ static int enable_slot(struct hotplug_slot *bss_hotplug_slot)
 				ret = acpi_bus_scan(chandle);
 				if (ACPI_FAILURE(ret)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(KERN_ERR "%s: acpi_bus_scan "
 					       "failed (0x%x) for slot %d "
 					       "func %d\n", __func__,
 					       ret, (int)(adr>>16),
+=======
+					printk(KERN_ERR "%s: acpi_bus_scan failed (0x%x) for slot %d func %d\n",
+					       __func__, ret, (int)(adr>>16),
+>>>>>>> v3.18
 =======
 					printk(KERN_ERR "%s: acpi_bus_scan failed (0x%x) for slot %d func %d\n",
 					       __func__, ret, (int)(adr>>16),
@@ -503,6 +545,11 @@ static int enable_slot(struct hotplug_slot *bss_hotplug_slot)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -514,6 +561,7 @@ static int enable_slot(struct hotplug_slot *bss_hotplug_slot)
 		pci_bus_add_devices(new_bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&sn_hotplug_mutex);
 
 	if (rc == 0)
@@ -523,6 +571,8 @@ static int enable_slot(struct hotplug_slot *bss_hotplug_slot)
 		dev_dbg(&slot->pci_bus->self->dev,
 			"insert operation failed rc = %d\n", rc);
 =======
+=======
+>>>>>>> v3.18
 	pci_unlock_rescan_remove();
 	mutex_unlock(&sn_hotplug_mutex);
 
@@ -530,6 +580,9 @@ static int enable_slot(struct hotplug_slot *bss_hotplug_slot)
 		dev_dbg(&slot->pci_bus->self->dev, "insert operation successful\n");
 	else
 		dev_dbg(&slot->pci_bus->self->dev, "insert operation failed rc = %d\n", rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -554,7 +607,11 @@ static int disable_slot(struct hotplug_slot *bss_hotplug_slot)
 	/* free the ACPI resources for the slot */
 	if (SN_ACPI_BASE_SUPPORT() &&
 <<<<<<< HEAD
+<<<<<<< HEAD
             PCI_CONTROLLER(slot->pci_bus)->acpi_handle) {
+=======
+            PCI_CONTROLLER(slot->pci_bus)->companion) {
+>>>>>>> v3.18
 =======
             PCI_CONTROLLER(slot->pci_bus)->companion) {
 >>>>>>> v3.18
@@ -567,7 +624,11 @@ static int disable_slot(struct hotplug_slot *bss_hotplug_slot)
 
 		/* Get the rootbus node pointer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phandle = PCI_CONTROLLER(slot->pci_bus)->acpi_handle;
+=======
+		phandle = acpi_device_handle(PCI_CONTROLLER(slot->pci_bus)->companion);
+>>>>>>> v3.18
 =======
 		phandle = acpi_device_handle(PCI_CONTROLLER(slot->pci_bus)->companion);
 >>>>>>> v3.18
@@ -607,6 +668,10 @@ static int disable_slot(struct hotplug_slot *bss_hotplug_slot)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 >>>>>>> v3.18
@@ -621,6 +686,10 @@ static int disable_slot(struct hotplug_slot *bss_hotplug_slot)
 		pci_dev_put(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 >>>>>>> v3.18
@@ -631,8 +700,12 @@ static int disable_slot(struct hotplug_slot *bss_hotplug_slot)
 		ret = acpi_unload_table_id(ssdt_id);
 		if (ACPI_FAILURE(ret)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: acpi_unload_table_id "
 			       "failed (0x%x) for id %d\n",
+=======
+			printk(KERN_ERR "%s: acpi_unload_table_id failed (0x%x) for id %d\n",
+>>>>>>> v3.18
 =======
 			printk(KERN_ERR "%s: acpi_unload_table_id failed (0x%x) for id %d\n",
 >>>>>>> v3.18

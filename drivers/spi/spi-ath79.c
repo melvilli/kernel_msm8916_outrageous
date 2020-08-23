@@ -15,10 +15,15 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/delay.h>
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
+=======
+#include <linux/delay.h>
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 #include <linux/spinlock.h>
@@ -161,9 +166,12 @@ static int ath79_spi_setup(struct spi_device *spi)
 	int status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi->bits_per_word > 32)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!spi->controller_state) {
@@ -233,8 +241,14 @@ static int ath79_spi_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, sp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
 
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 32);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 
@@ -248,7 +262,11 @@ static int ath79_spi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sp->bitbang.master = spi_master_get(master);
+=======
+	sp->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	sp->bitbang.master = master;
 >>>>>>> v3.18
@@ -264,7 +282,11 @@ static int ath79_spi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sp->base = ioremap(r->start, resource_size(r));
+=======
+	sp->base = devm_ioremap(&pdev->dev, r->start, resource_size(r));
+>>>>>>> v3.18
 =======
 	sp->base = devm_ioremap(&pdev->dev, r->start, resource_size(r));
 >>>>>>> v3.18
@@ -274,22 +296,32 @@ static int ath79_spi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sp->clk = clk_get(&pdev->dev, "ahb");
 	if (IS_ERR(sp->clk)) {
 		ret = PTR_ERR(sp->clk);
 		goto err_unmap;
 =======
+=======
+>>>>>>> v3.18
 	sp->clk = devm_clk_get(&pdev->dev, "ahb");
 	if (IS_ERR(sp->clk)) {
 		ret = PTR_ERR(sp->clk);
 		goto err_put_master;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ret = clk_enable(sp->clk);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_clk_put;
+=======
+		goto err_put_master;
+>>>>>>> v3.18
 =======
 		goto err_put_master;
 >>>>>>> v3.18
@@ -316,12 +348,16 @@ err_disable:
 err_clk_disable:
 	clk_disable(sp->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_clk_put:
 	clk_put(sp->clk);
 err_unmap:
 	iounmap(sp->base);
 err_put_master:
 	platform_set_drvdata(pdev, NULL);
+=======
+err_put_master:
+>>>>>>> v3.18
 =======
 err_put_master:
 >>>>>>> v3.18
@@ -338,9 +374,12 @@ static int ath79_spi_remove(struct platform_device *pdev)
 	ath79_spi_disable(sp);
 	clk_disable(sp->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(sp->clk);
 	iounmap(sp->base);
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_master_put(sp->bitbang.master);

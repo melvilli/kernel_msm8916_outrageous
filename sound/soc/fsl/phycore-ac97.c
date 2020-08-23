@@ -34,7 +34,11 @@ static struct snd_soc_dai_link imx_phycore_dai_ac97[] = {
 		.codec_name	= "wm9712-codec",
 		.cpu_dai_name	= "imx-ssi.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.platform_name	= "imx-fiq-pcm-audio.0",
+=======
+		.platform_name	= "imx-ssi.0",
+>>>>>>> v3.18
 =======
 		.platform_name	= "imx-ssi.0",
 >>>>>>> v3.18

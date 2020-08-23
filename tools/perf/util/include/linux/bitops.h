@@ -88,6 +88,11 @@ static __always_inline unsigned long __ffs(unsigned long word)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+typedef const unsigned long __attribute__((__may_alias__)) long_alias_t;
+
+>>>>>>> v3.18
 =======
 typedef const unsigned long __attribute__((__may_alias__)) long_alias_t;
 
@@ -99,7 +104,11 @@ static inline unsigned long
 find_first_bit(const unsigned long *addr, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned long *p = addr;
+=======
+	long_alias_t *p = (long_alias_t *) addr;
+>>>>>>> v3.18
 =======
 	long_alias_t *p = (long_alias_t *) addr;
 >>>>>>> v3.18

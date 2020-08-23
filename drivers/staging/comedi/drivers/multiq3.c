@@ -15,11 +15,14 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -33,6 +36,7 @@ Devices: [Quanser Consulting] MultiQ-3 (multiq3)
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
@@ -41,10 +45,15 @@ Devices: [Quanser Consulting] MultiQ-3 (multiq3)
 #define MULTIQ3_SIZE 16
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * MULTIQ-3 port offsets
@@ -94,10 +103,13 @@ Devices: [Quanser Consulting] MultiQ-3 (multiq3)
 #define MULTIQ3_TIMEOUT 30
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct multiq3_private {
 	unsigned int ao_readback[2];
 };
 =======
+=======
+>>>>>>> v3.18
 static int multiq3_ai_status(struct comedi_device *dev,
 			     struct comedi_subdevice *s,
 			     struct comedi_insn *insn,
@@ -110,6 +122,9 @@ static int multiq3_ai_status(struct comedi_device *dev,
 		return 0;
 	return -EBUSY;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int multiq3_ai_insn_read(struct comedi_device *dev,
@@ -117,20 +132,27 @@ static int multiq3_ai_insn_read(struct comedi_device *dev,
 				struct comedi_insn *insn, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, n;
 	int chan;
 	unsigned int hi, lo;
 =======
+=======
+>>>>>>> v3.18
 	int n;
 	int chan;
 	unsigned int hi, lo;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chan = CR_CHAN(insn->chanspec);
 	outw(MULTIQ3_CONTROL_MUST | MULTIQ3_AD_MUX_EN | (chan << 3),
 	     dev->iobase + MULTIQ3_CONTROL);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < MULTIQ3_TIMEOUT; i++) {
 		if (inw(dev->iobase + MULTIQ3_STATUS) & MULTIQ3_STATUS_EOC)
@@ -149,6 +171,8 @@ static int multiq3_ai_insn_read(struct comedi_device *dev,
 		if (i == MULTIQ3_TIMEOUT)
 			return -ETIMEDOUT;
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_timeout(dev, s, insn, multiq3_ai_status,
 			     MULTIQ3_STATUS_EOC);
 	if (ret)
@@ -161,6 +185,9 @@ static int multiq3_ai_insn_read(struct comedi_device *dev,
 				     MULTIQ3_STATUS_EOC_I);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		hi = inb(dev->iobase + MULTIQ3_AD_CS);
@@ -171,6 +198,7 @@ static int multiq3_ai_insn_read(struct comedi_device *dev,
 	return n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int multiq3_ao_insn_read(struct comedi_device *dev,
 				struct comedi_subdevice *s,
@@ -205,6 +233,8 @@ static int multiq3_ao_insn_write(struct comedi_device *dev,
 
 	return i;
 =======
+=======
+>>>>>>> v3.18
 static int multiq3_ao_insn_write(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
 				 struct comedi_insn *insn,
@@ -224,6 +254,9 @@ static int multiq3_ao_insn_write(struct comedi_device *dev,
 	s->readback[chan] = val;
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -239,17 +272,23 @@ static int multiq3_di_insn_bits(struct comedi_device *dev,
 static int multiq3_do_insn_bits(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
 	s->state &= ~data[0];
 	s->state |= (data[0] & data[1]);
 	outw(s->state, dev->iobase + MULTIQ3_DIGOUT_PORT);
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
 	if (comedi_dio_update_state(s, data))
 		outw(s->state, dev->iobase + MULTIQ3_DIGOUT_PORT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -263,6 +302,7 @@ static int multiq3_encoder_insn_read(struct comedi_device *dev,
 				     unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n;
 	int chan = CR_CHAN(insn->chanspec);
 	int control = MULTIQ3_CONTROL_MUST | MULTIQ3_AD_MUX_EN | (chan << 3);
@@ -270,12 +310,17 @@ static int multiq3_encoder_insn_read(struct comedi_device *dev,
 	for (n = 0; n < insn->n; n++) {
 		int value;
 =======
+=======
+>>>>>>> v3.18
 	int chan = CR_CHAN(insn->chanspec);
 	int control = MULTIQ3_CONTROL_MUST | MULTIQ3_AD_MUX_EN | (chan << 3);
 	int value;
 	int n;
 
 	for (n = 0; n < insn->n; n++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		outw(control, dev->iobase + MULTIQ3_CONTROL);
 		outb(MULTIQ3_BP_RESET, dev->iobase + MULTIQ3_ENC_CONTROL);
@@ -312,16 +357,22 @@ static int multiq3_attach(struct comedi_device *dev,
 			  struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct multiq3_private *devpriv;
 	struct comedi_subdevice *s;
 	int ret;
 
 	ret = comedi_request_region(dev, it->options[0], MULTIQ3_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s;
 	int ret;
 
 	ret = comedi_request_region(dev, it->options[0], 0x10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -331,11 +382,14 @@ static int multiq3_attach(struct comedi_device *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s = &dev->subdevices[0];
@@ -353,11 +407,14 @@ static int multiq3_attach(struct comedi_device *dev,
 	s->subdev_flags = SDF_WRITABLE;
 	s->n_chan = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_read = multiq3_ao_insn_read;
 	s->insn_write = multiq3_ao_insn_write;
 	s->maxdata = 0xfff;
 	s->range_table = &range_bipolar5;
 =======
+=======
+>>>>>>> v3.18
 	s->maxdata = 0xfff;
 	s->range_table = &range_bipolar5;
 	s->insn_write = multiq3_ao_insn_write;
@@ -366,6 +423,9 @@ static int multiq3_attach(struct comedi_device *dev,
 	ret = comedi_alloc_subdev_readback(s);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[2];

@@ -13,8 +13,11 @@ void ia32_cstar_target(void);
 void ia32_sysenter_target(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void syscall32_cpu_init(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void x86_configure_nx(void);

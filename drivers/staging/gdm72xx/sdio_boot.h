@@ -12,6 +12,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __SDIO_BOOT_H__
 #define __SDIO_BOOT_H__
 
@@ -21,6 +22,8 @@ extern int sdio_boot(struct sdio_func *func);
 
 #endif /* __SDIO_BOOT_H__ */
 =======
+=======
+>>>>>>> v3.18
 #ifndef __GDM72XX_SDIO_BOOT_H__
 #define __GDM72XX_SDIO_BOOT_H__
 
@@ -29,4 +32,7 @@ struct sdio_func;
 int sdio_boot(struct sdio_func *func);
 
 #endif /* __GDM72XX_SDIO_BOOT_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

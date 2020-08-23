@@ -10,6 +10,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/clock/mpc512x-clock.h>
+
+>>>>>>> v3.18
 =======
 #include <dt-bindings/clock/mpc512x-clock.h>
 
@@ -55,11 +60,17 @@
 		reg = <0x20000000 0x4000>;
 		interrupts = <66 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clks MPC512x_CLK_MBX_BUS>,
 			 <&clks MPC512x_CLK_MBX_3D>,
 			 <&clks MPC512x_CLK_MBX>;
 		clock-names = "mbx-bus", "mbx-3d", "mbx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -75,6 +86,11 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clks MPC512x_CLK_NFC>;
+		clock-names = "ipg";
+>>>>>>> v3.18
 =======
 		clocks = <&clks MPC512x_CLK_NFC>;
 		clock-names = "ipg";
@@ -91,7 +107,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -103,13 +122,19 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	soc@80000000 {
 		compatible = "fsl,mpc5121-immr";
 		#address-cells = <1>;
 		#size-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		#interrupt-cells = <2>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ranges = <0x0 0x80000000 0x400000>;
@@ -153,16 +178,22 @@
 
 		/* Clock control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clock@f00 {
 			compatible = "fsl,mpc5121-clock";
 			reg = <0xf00 0x100>;
 =======
+=======
+>>>>>>> v3.18
 		clks: clock@f00 {
 			compatible = "fsl,mpc5121-clock";
 			reg = <0xf00 0x100>;
 			#clock-cells = <1>;
 			clocks = <&osc>;
 			clock-names = "osc";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -184,13 +215,19 @@
 			reg = <0x1300 0x80>;
 			interrupts = <12 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&clks MPC512x_CLK_BDLC>,
 				 <&clks MPC512x_CLK_IPS>,
 				 <&clks MPC512x_CLK_SYS>,
 				 <&clks MPC512x_CLK_REF>,
 				 <&clks MPC512x_CLK_MSCAN0_MCLK>;
 			clock-names = "ipg", "ips", "sys", "ref", "mclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -199,13 +236,19 @@
 			reg = <0x1380 0x80>;
 			interrupts = <13 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&clks MPC512x_CLK_BDLC>,
 				 <&clks MPC512x_CLK_IPS>,
 				 <&clks MPC512x_CLK_SYS>,
 				 <&clks MPC512x_CLK_REF>,
 				 <&clks MPC512x_CLK_MSCAN1_MCLK>;
 			clock-names = "ipg", "ips", "sys", "ref", "mclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -216,6 +259,12 @@
 			dmas = <&dma0 30>;
 			dma-names = "rx-tx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_IPS>,
+				 <&clks MPC512x_CLK_SDHC>;
+			clock-names = "ipg", "per";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_IPS>,
 				 <&clks MPC512x_CLK_SDHC>;
@@ -230,6 +279,11 @@
 			reg = <0x1700 0x20>;
 			interrupts = <9 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_I2C>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_I2C>;
 			clock-names = "ipg";
@@ -243,6 +297,11 @@
 			reg = <0x1720 0x20>;
 			interrupts = <10 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_I2C>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_I2C>;
 			clock-names = "ipg";
@@ -256,6 +315,11 @@
 			reg = <0x1740 0x20>;
 			interrupts = <11 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_I2C>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_I2C>;
 			clock-names = "ipg";
@@ -272,6 +336,11 @@
 			reg = <0x2000 0x100>;
 			interrupts = <42 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_AXE>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_AXE>;
 			clock-names = "ipg";
@@ -283,6 +352,11 @@
 			reg = <0x2100 0x100>;
 			interrupts = <64 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_DIU>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_DIU>;
 			clock-names = "ipg";
@@ -294,13 +368,19 @@
 			reg = <0x2300 0x80>;
 			interrupts = <90 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&clks MPC512x_CLK_BDLC>,
 				 <&clks MPC512x_CLK_IPS>,
 				 <&clks MPC512x_CLK_SYS>,
 				 <&clks MPC512x_CLK_REF>,
 				 <&clks MPC512x_CLK_MSCAN2_MCLK>;
 			clock-names = "ipg", "ips", "sys", "ref", "mclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -309,13 +389,19 @@
 			reg = <0x2380 0x80>;
 			interrupts = <91 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&clks MPC512x_CLK_BDLC>,
 				 <&clks MPC512x_CLK_IPS>,
 				 <&clks MPC512x_CLK_SYS>,
 				 <&clks MPC512x_CLK_REF>,
 				 <&clks MPC512x_CLK_MSCAN3_MCLK>;
 			clock-names = "ipg", "ips", "sys", "ref", "mclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -324,6 +410,11 @@
 			reg = <0x2400 0x400>;
 			interrupts = <67 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_VIU>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_VIU>;
 			clock-names = "ipg";
@@ -336,6 +427,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_FEC>;
+			clock-names = "per";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_FEC>;
 			clock-names = "per";
@@ -349,6 +445,11 @@
 			local-mac-address = [ 00 00 00 00 00 00 ];
 			interrupts = <4 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_FEC>;
+			clock-names = "per";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_FEC>;
 			clock-names = "per";
@@ -365,6 +466,11 @@
 			dr_mode = "otg";
 			phy_type = "ulpi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_USB1>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_USB1>;
 			clock-names = "ipg";
@@ -381,6 +487,11 @@
 			dr_mode = "otg";
 			phy_type = "utmi_wide";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_USB2>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_USB2>;
 			clock-names = "ipg";
@@ -404,6 +515,11 @@
 			reg = <0x10200 0x100>;
 			interrupts = <5 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PATA>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PATA>;
 			clock-names = "ipg";
@@ -420,6 +536,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC0>,
+				 <&clks MPC512x_CLK_PSC0_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC0>,
 				 <&clks MPC512x_CLK_PSC0_MCLK>;
@@ -435,6 +557,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC1>,
+				 <&clks MPC512x_CLK_PSC1_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC1>,
 				 <&clks MPC512x_CLK_PSC1_MCLK>;
@@ -450,6 +578,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC2>,
+				 <&clks MPC512x_CLK_PSC2_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC2>,
 				 <&clks MPC512x_CLK_PSC2_MCLK>;
@@ -465,6 +599,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC3>,
+				 <&clks MPC512x_CLK_PSC3_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC3>,
 				 <&clks MPC512x_CLK_PSC3_MCLK>;
@@ -480,6 +620,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC4>,
+				 <&clks MPC512x_CLK_PSC4_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC4>,
 				 <&clks MPC512x_CLK_PSC4_MCLK>;
@@ -495,6 +641,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC5>,
+				 <&clks MPC512x_CLK_PSC5_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC5>,
 				 <&clks MPC512x_CLK_PSC5_MCLK>;
@@ -510,6 +662,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC6>,
+				 <&clks MPC512x_CLK_PSC6_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC6>,
 				 <&clks MPC512x_CLK_PSC6_MCLK>;
@@ -525,6 +683,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC7>,
+				 <&clks MPC512x_CLK_PSC7_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC7>,
 				 <&clks MPC512x_CLK_PSC7_MCLK>;
@@ -540,6 +704,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC8>,
+				 <&clks MPC512x_CLK_PSC8_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC8>,
 				 <&clks MPC512x_CLK_PSC8_MCLK>;
@@ -555,6 +725,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC9>,
+				 <&clks MPC512x_CLK_PSC9_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC9>,
 				 <&clks MPC512x_CLK_PSC9_MCLK>;
@@ -570,6 +746,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC10>,
+				 <&clks MPC512x_CLK_PSC10_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC10>,
 				 <&clks MPC512x_CLK_PSC10_MCLK>;
@@ -585,6 +767,12 @@
 			fsl,rx-fifo-size = <16>;
 			fsl,tx-fifo-size = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC11>,
+				 <&clks MPC512x_CLK_PSC11_MCLK>;
+			clock-names = "ipg", "mclk";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC11>,
 				 <&clks MPC512x_CLK_PSC11_MCLK>;
@@ -597,6 +785,11 @@
 			reg = <0x11f00 0x100>;
 			interrupts = <40 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&clks MPC512x_CLK_PSC_FIFO>;
+			clock-names = "ipg";
+>>>>>>> v3.18
 =======
 			clocks = <&clks MPC512x_CLK_PSC_FIFO>;
 			clock-names = "ipg";
@@ -608,6 +801,10 @@
 			reg = <0x14000 0x1800>;
 			interrupts = <65 0x8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#dma-cells = <1>;
+>>>>>>> v3.18
 =======
 			#dma-cells = <1>;
 >>>>>>> v3.18
@@ -623,6 +820,11 @@
 		#size-cells = <2>;
 		#interrupt-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clks MPC512x_CLK_PCI>;
+		clock-names = "ipg";
+>>>>>>> v3.18
 =======
 		clocks = <&clks MPC512x_CLK_PCI>;
 		clock-names = "ipg";

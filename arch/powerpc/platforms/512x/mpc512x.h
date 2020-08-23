@@ -13,6 +13,7 @@
 #define __MPC512X_H__
 extern void __init mpc512x_init_IRQ(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __init mpc512x_init(void);
 extern int __init mpc5121_clk_init(void);
 void __init mpc512x_declare_of_platform_devices(void);
@@ -28,6 +29,8 @@ void mpc512x_setup_diu(void);
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 extern void __init mpc512x_init_early(void);
 extern void __init mpc512x_init(void);
 extern void __init mpc512x_setup_arch(void);
@@ -36,5 +39,8 @@ extern const char *mpc512x_select_psc_compat(void);
 extern const char *mpc512x_select_reset_compat(void);
 extern void mpc512x_restart(char *cmd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __MPC512X_H__ */

@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -35,6 +38,7 @@
 
 /* drivers should parse below arrays and do the corresponding actions */
 /*3 Power on  Array*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct wlan_pwr_cfg rtl8188e_power_on_flow[RTL8188E_TRANS_CARDEMU_TO_ACT_STEPS +
 					   RTL8188E_TRANS_END_STEPS] = {
@@ -111,6 +115,8 @@ struct wlan_pwr_cfg rtl8188e_leave_lps_flow[RTL8188E_TRANS_LPS_TO_ACT_STEPS
 	RTL8188E_TRANS_LPS_TO_ACT
 	RTL8188E_TRANS_END
 =======
+=======
+>>>>>>> v3.18
 struct wlan_pwr_cfg rtl8188ee_power_on_flow[RTL8188EE_TRANS_CARDEMU_TO_ACT_STEPS
 					+ RTL8188EE_TRANS_END_STEPS] = {
 	RTL8188EE_TRANS_CARDEMU_TO_ACT
@@ -185,5 +191,8 @@ struct wlan_pwr_cfg rtl8188ee_leave_lps_flow[RTL8188EE_TRANS_LPS_TO_ACT_STEPS
 	/*FW behavior*/
 	RTL8188EE_TRANS_LPS_TO_ACT
 	RTL8188EE_TRANS_END
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -105,7 +105,11 @@ enum {
 	NILFS_I_COLLECTED,		/* All dirty blocks are collected */
 	NILFS_I_UPDATED,		/* The file has been written back */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NILFS_I_INODE_DIRTY,		/* write_inode is requested */
+=======
+	NILFS_I_INODE_SYNC,		/* dsync is not allowed for inode */
+>>>>>>> v3.18
 =======
 	NILFS_I_INODE_SYNC,		/* dsync is not allowed for inode */
 >>>>>>> v3.18
@@ -146,6 +150,10 @@ enum {
  * @ti_flags: Flags
  * @ti_count: Nest level
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ti_garbage:	List of inode to be put when releasing semaphore
+>>>>>>> v3.18
 =======
  * @ti_garbage:	List of inode to be put when releasing semaphore
 >>>>>>> v3.18
@@ -158,6 +166,10 @@ struct nilfs_transaction_info {
 	unsigned short		ti_flags;
 	unsigned short		ti_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	ti_garbage;
+>>>>>>> v3.18
 =======
 	struct list_head	ti_garbage;
 >>>>>>> v3.18
@@ -284,7 +296,11 @@ struct inode *nilfs_iget(struct super_block *sb, struct nilfs_root *root,
 extern struct inode *nilfs_iget_for_gc(struct super_block *sb,
 				       unsigned long ino, __u64 cno);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nilfs_update_inode(struct inode *, struct buffer_head *);
+=======
+extern void nilfs_update_inode(struct inode *, struct buffer_head *, int);
+>>>>>>> v3.18
 =======
 extern void nilfs_update_inode(struct inode *, struct buffer_head *, int);
 >>>>>>> v3.18
@@ -297,11 +313,14 @@ int nilfs_load_inode_block(struct inode *inode, struct buffer_head **pbh);
 extern int nilfs_inode_dirty(struct inode *);
 int nilfs_set_file_dirty(struct inode *inode, unsigned nr_dirty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nilfs_mark_inode_dirty(struct inode *);
 extern void nilfs_dirty_inode(struct inode *, int flags);
 int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
 		 __u64 start, __u64 len);
 =======
+=======
+>>>>>>> v3.18
 extern int __nilfs_mark_inode_dirty(struct inode *, int);
 extern void nilfs_dirty_inode(struct inode *, int flags);
 int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
@@ -314,6 +333,9 @@ static inline int nilfs_mark_inode_dirty_sync(struct inode *inode)
 {
 	return __nilfs_mark_inode_dirty(inode, I_DIRTY_SYNC);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* super.c */
@@ -350,7 +372,10 @@ int nilfs_init_gcinode(struct inode *inode);
 void nilfs_remove_all_gcinodes(struct the_nilfs *nilfs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* sysfs.c */
 int __init nilfs_sysfs_init(void);
 void nilfs_sysfs_exit(void);
@@ -359,6 +384,9 @@ void nilfs_sysfs_delete_device_group(struct the_nilfs *);
 int nilfs_sysfs_create_snapshot_group(struct nilfs_root *);
 void nilfs_sysfs_delete_snapshot_group(struct nilfs_root *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Inodes and files operations

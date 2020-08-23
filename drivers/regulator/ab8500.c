@@ -720,6 +720,10 @@ static struct ab8500_regulator_info
 			.volt_table	= ldo_vauxn_voltages,
 			.enable_time	= 200,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.supply_name    = "vin",
+>>>>>>> v3.18
 =======
 			.supply_name    = "vin",
 >>>>>>> v3.18
@@ -746,6 +750,10 @@ static struct ab8500_regulator_info
 			.volt_table	= ldo_vauxn_voltages,
 			.enable_time	= 200,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.supply_name    = "vin",
+>>>>>>> v3.18
 =======
 			.supply_name    = "vin",
 >>>>>>> v3.18
@@ -772,6 +780,10 @@ static struct ab8500_regulator_info
 			.volt_table	= ldo_vaux3_voltages,
 			.enable_time	= 450,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.supply_name    = "vin",
+>>>>>>> v3.18
 =======
 			.supply_name    = "vin",
 >>>>>>> v3.18
@@ -2914,7 +2926,11 @@ static struct of_regulator_match ab8500_regulator_match[] = {
 	{ .name = "ab8500_ldo_audio",   .driver_data = (void *) AB8500_LDO_AUDIO, },
 	{ .name	= "ab8500_ldo_anamic1", .driver_data = (void *) AB8500_LDO_ANAMIC1, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name	= "ab8500_ldo_amamic2", .driver_data = (void *) AB8500_LDO_ANAMIC2, },
+=======
+	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB8500_LDO_ANAMIC2, },
+>>>>>>> v3.18
 =======
 	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB8500_LDO_ANAMIC2, },
 >>>>>>> v3.18
@@ -2934,7 +2950,11 @@ static struct of_regulator_match ab8505_regulator_match[] = {
 	{ .name = "ab8500_ldo_audio",   .driver_data = (void *) AB8505_LDO_AUDIO, },
 	{ .name	= "ab8500_ldo_anamic1", .driver_data = (void *) AB8505_LDO_ANAMIC1, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name	= "ab8500_ldo_amamic2", .driver_data = (void *) AB8505_LDO_ANAMIC2, },
+=======
+	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB8505_LDO_ANAMIC2, },
+>>>>>>> v3.18
 =======
 	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB8505_LDO_ANAMIC2, },
 >>>>>>> v3.18
@@ -2954,7 +2974,11 @@ static struct of_regulator_match ab8540_regulator_match[] = {
 	{ .name = "ab8500_ldo_audio",   .driver_data = (void *) AB8540_LDO_AUDIO, },
 	{ .name	= "ab8500_ldo_anamic1", .driver_data = (void *) AB8540_LDO_ANAMIC1, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name	= "ab8500_ldo_amamic2", .driver_data = (void *) AB8540_LDO_ANAMIC2, },
+=======
+	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB8540_LDO_ANAMIC2, },
+>>>>>>> v3.18
 =======
 	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB8540_LDO_ANAMIC2, },
 >>>>>>> v3.18
@@ -2973,7 +2997,11 @@ static struct of_regulator_match ab9540_regulator_match[] = {
 	{ .name = "ab8500_ldo_audio",   .driver_data = (void *) AB9540_LDO_AUDIO, },
 	{ .name	= "ab8500_ldo_anamic1", .driver_data = (void *) AB9540_LDO_ANAMIC1, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name	= "ab8500_ldo_amamic2", .driver_data = (void *) AB9540_LDO_ANAMIC2, },
+=======
+	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB9540_LDO_ANAMIC2, },
+>>>>>>> v3.18
 =======
 	{ .name	= "ab8500_ldo_anamic2", .driver_data = (void *) AB9540_LDO_ANAMIC2, },
 >>>>>>> v3.18
@@ -3024,6 +3052,7 @@ static void abx500_get_regulator_info(struct ab8500 *ab8500)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ab8500_regulator_init_registers(struct platform_device *pdev,
 					   int id, int mask, int value)
 {
@@ -3057,6 +3086,8 @@ static int ab8500_regulator_init_registers(struct platform_device *pdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ab8500_regulator_register(struct platform_device *pdev,
 				     struct regulator_init_data *init_data,
 				     int id, struct device_node *np)
@@ -3065,7 +3096,10 @@ static int ab8500_regulator_register(struct platform_device *pdev,
 	struct ab8500_regulator_info *info = NULL;
 	struct regulator_config config = { };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3089,6 +3123,7 @@ static int ab8500_regulator_register(struct platform_device *pdev,
 	}
 
 	/* register regulator with framework */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info->regulator = regulator_register(&info->desc, &config);
 	if (IS_ERR(info->regulator)) {
@@ -3119,12 +3154,17 @@ ab8500_regulator_of_probe(struct platform_device *pdev,
 		if (err)
 			return err;
 =======
+=======
+>>>>>>> v3.18
 	info->regulator = devm_regulator_register(&pdev->dev, &info->desc,
 						&config);
 	if (IS_ERR(info->regulator)) {
 		dev_err(&pdev->dev, "failed to register regulator %s\n",
 			info->desc.name);
 		return PTR_ERR(info->regulator);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3136,9 +3176,14 @@ static int ab8500_regulator_probe(struct platform_device *pdev)
 	struct ab8500 *ab8500 = dev_get_drvdata(pdev->dev.parent);
 	struct device_node *np = pdev->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ab8500_platform_data *ppdata;
 	struct ab8500_regulator_platform_data *pdata;
 	int i, err;
+=======
+	struct of_regulator_match *match;
+	int err, i;
+>>>>>>> v3.18
 =======
 	struct of_regulator_match *match;
 	int err, i;
@@ -3151,6 +3196,7 @@ static int ab8500_regulator_probe(struct platform_device *pdev)
 
 	abx500_get_regulator_info(ab8500);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (np) {
 		err = of_regulator_match(&pdev->dev, np,
@@ -3251,6 +3297,8 @@ static int ab8500_regulator_remove(struct platform_device *pdev)
 		return err;
 
 =======
+=======
+>>>>>>> v3.18
 	err = of_regulator_match(&pdev->dev, np,
 				 abx500_regulator.match,
 				 abx500_regulator.match_size);
@@ -3268,6 +3316,9 @@ static int ab8500_regulator_remove(struct platform_device *pdev)
 			return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -3275,7 +3326,10 @@ static int ab8500_regulator_remove(struct platform_device *pdev)
 static struct platform_driver ab8500_regulator_driver = {
 	.probe = ab8500_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ab8500_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver         = {

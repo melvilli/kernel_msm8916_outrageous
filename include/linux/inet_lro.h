@@ -134,6 +134,7 @@ void lro_receive_skb(struct net_lro_mgr *lro_mgr,
 		     struct sk_buff *skb,
 		     void *priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Processes a fragment list
@@ -156,6 +157,8 @@ void lro_receive_frags(struct net_lro_mgr *lro_mgr,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Forward all aggregated SKBs held by lro_mgr to network stack
  */
@@ -163,9 +166,12 @@ void lro_receive_frags(struct net_lro_mgr *lro_mgr,
 void lro_flush_all(struct net_lro_mgr *lro_mgr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void lro_flush_pkt(struct net_lro_mgr *lro_mgr,
 		   struct iphdr *iph, struct tcphdr *tcph);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

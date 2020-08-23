@@ -63,7 +63,11 @@ static void reg_dump(struct ak4117 *ak4117)
 static void snd_ak4117_free(struct ak4117 *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&chip->timer);
+=======
+	del_timer_sync(&chip->timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&chip->timer);
 >>>>>>> v3.18

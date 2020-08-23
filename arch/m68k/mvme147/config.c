@@ -27,6 +27,11 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-vme.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-vme.h>
 #include <asm/byteorder.h>
@@ -57,14 +62,20 @@ irq_handler_t tick_handler;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mvme147_parse_bootinfo(const struct bi_record *bi)
 {
 	if (bi->tag == BI_VME_TYPE || bi->tag == BI_VME_BRDINFO)
 =======
+=======
+>>>>>>> v3.18
 int __init mvme147_parse_bootinfo(const struct bi_record *bi)
 {
 	uint16_t tag = be16_to_cpu(bi->tag);
 	if (tag == BI_VME_TYPE || tag == BI_VME_BRDINFO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	else

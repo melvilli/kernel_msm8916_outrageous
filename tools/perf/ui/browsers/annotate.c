@@ -429,7 +429,10 @@ static void annotate_browser__init_asm_mode(struct annotate_browser *browser)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SYM_TITLE_MAX_SIZE (PATH_MAX + 64)
 
 static int sym_title(struct symbol *sym, struct map *map, char *title,
@@ -438,6 +441,9 @@ static int sym_title(struct symbol *sym, struct map *map, char *title,
 	return snprintf(title, sz, "%s  %s", sym->name, map->dso->long_name);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool annotate_browser__callq(struct annotate_browser *browser,
 				    struct perf_evsel *evsel,
@@ -446,36 +452,49 @@ static bool annotate_browser__callq(struct annotate_browser *browser,
 	struct map_symbol *ms = browser->b.priv;
 	struct disasm_line *dl = browser->selection;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct symbol *sym = ms->sym;
 	struct annotation *notes;
 	struct symbol *target;
 	u64 ip;
 =======
+=======
+>>>>>>> v3.18
 	struct annotation *notes;
 	struct addr_map_symbol target = {
 		.map = ms->map,
 		.addr = map__objdump_2mem(ms->map, dl->ops.target.addr),
 	};
 	char title[SYM_TITLE_MAX_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ins__is_call(dl->ins))
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip = ms->map->map_ip(ms->map, dl->ops.target.addr);
 	target = map__find_symbol(ms->map, ip, NULL);
 	if (target == NULL) {
 =======
+=======
+>>>>>>> v3.18
 	if (map_groups__find_ams(&target, NULL) ||
 	    map__rip_2objdump(target.map, target.map->map_ip(target.map,
 							     target.addr)) !=
 	    dl->ops.target.addr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ui_helpline__puts("The called function was not found.");
 		return true;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	notes = symbol__annotation(target);
 	pthread_mutex_lock(&notes->lock);
@@ -485,6 +504,8 @@ static bool annotate_browser__callq(struct annotate_browser *browser,
 		ui__warning("Not enough memory for annotating '%s' symbol!\n",
 			    target->name);
 =======
+=======
+>>>>>>> v3.18
 	notes = symbol__annotation(target.sym);
 	pthread_mutex_lock(&notes->lock);
 
@@ -492,14 +513,23 @@ static bool annotate_browser__callq(struct annotate_browser *browser,
 		pthread_mutex_unlock(&notes->lock);
 		ui__warning("Not enough memory for annotating '%s' symbol!\n",
 			    target.sym->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	}
 
 	pthread_mutex_unlock(&notes->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	symbol__tui_annotate(target, ms->map, evsel, hbt);
 	ui_browser__show_title(&browser->b, sym->name);
+=======
+	symbol__tui_annotate(target.sym, target.map, evsel, hbt);
+	sym_title(ms->sym, ms->map, title, sizeof(title));
+	ui_browser__show_title(&browser->b, title);
+>>>>>>> v3.18
 =======
 	symbol__tui_annotate(target.sym, target.map, evsel, hbt);
 	sym_title(ms->sym, ms->map, title, sizeof(title));
@@ -539,7 +569,11 @@ static bool annotate_browser__jump(struct annotate_browser *browser)
 	dl = annotate_browser__find_offset(browser, dl->ops.target.offset, &idx);
 	if (dl == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ui_helpline__puts("Invallid jump offset");
+=======
+		ui_helpline__puts("Invalid jump offset");
+>>>>>>> v3.18
 =======
 		ui_helpline__puts("Invalid jump offset");
 >>>>>>> v3.18
@@ -701,13 +735,19 @@ static int annotate_browser__run(struct annotate_browser *browser,
 	int delay_secs = hbt ? hbt->refresh : 0;
 	int key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ui_browser__show(&browser->b, sym->name, help) < 0)
 =======
+=======
+>>>>>>> v3.18
 	char title[SYM_TITLE_MAX_SIZE];
 
 	sym_title(sym, ms->map, title, sizeof(title));
 	if (ui_browser__show(&browser->b, title, help) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 
@@ -775,7 +815,11 @@ static int annotate_browser__run(struct annotate_browser *browser,
 		"/             Search string\n"
 		"r             Run available scripts\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"?             Search previous string\n");
+=======
+		"?             Search string backwards\n");
+>>>>>>> v3.18
 =======
 		"?             Search string backwards\n");
 >>>>>>> v3.18

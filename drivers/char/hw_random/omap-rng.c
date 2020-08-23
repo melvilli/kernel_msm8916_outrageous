@@ -25,6 +25,7 @@
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/io.h>
 
@@ -66,6 +67,8 @@ static inline void omap_rng_write_reg(struct omap_rng_private_data *priv,
 {
 	__raw_writel(val, priv->base + reg);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/of_address.h>
@@ -180,11 +183,15 @@ static inline void omap_rng_write(struct omap_rng_dev *priv, u16 reg,
 				      u32 val)
 {
 	__raw_writel(val, priv->base + priv->pdata->regs[reg]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int omap_rng_data_present(struct hwrng *rng, int wait)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct omap_rng_private_data *priv;
 	int data, i;
@@ -194,6 +201,8 @@ static int omap_rng_data_present(struct hwrng *rng, int wait)
 	for (i = 0; i < 20; i++) {
 		data = omap_rng_read_reg(priv, RNG_STAT_REG) ? 0 : 1;
 =======
+=======
+>>>>>>> v3.18
 	struct omap_rng_dev *priv;
 	int data, i;
 
@@ -201,6 +210,9 @@ static int omap_rng_data_present(struct hwrng *rng, int wait)
 
 	for (i = 0; i < 20; i++) {
 		data = priv->pdata->data_present(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (data || !wait)
 			break;
@@ -217,6 +229,7 @@ static int omap_rng_data_present(struct hwrng *rng, int wait)
 static int omap_rng_data_read(struct hwrng *rng, u32 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_rng_private_data *priv;
 
 	priv = (struct omap_rng_private_data *)rng->priv;
@@ -225,6 +238,8 @@ static int omap_rng_data_read(struct hwrng *rng, u32 *data)
 
 	return sizeof(u32);
 =======
+=======
+>>>>>>> v3.18
 	struct omap_rng_dev *priv;
 	u32 data_size, i;
 
@@ -253,6 +268,9 @@ static void omap_rng_cleanup(struct hwrng *rng)
 
 	priv = (struct omap_rng_dev *)rng->priv;
 	priv->pdata->cleanup(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -260,6 +278,7 @@ static struct hwrng omap_rng_ops = {
 	.name		= "omap",
 	.data_present	= omap_rng_data_present,
 	.data_read	= omap_rng_data_read,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -280,6 +299,8 @@ static int omap_rng_probe(struct platform_device *pdev)
 	priv->mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	priv->base = devm_ioremap_resource(&pdev->dev, priv->mem_res);
 =======
+=======
+>>>>>>> v3.18
 	.init		= omap_rng_init,
 	.cleanup	= omap_rng_cleanup,
 };
@@ -461,11 +482,15 @@ static int omap_rng_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	priv->base = devm_ioremap_resource(dev, res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(priv->base)) {
 		ret = PTR_ERR(priv->base);
 		goto err_ioremap;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, priv);
 
@@ -477,6 +502,8 @@ static int omap_rng_probe(struct platform_device *pdev)
 		goto err_ioremap;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_get_sync(&pdev->dev);
@@ -485,6 +512,9 @@ static int omap_rng_probe(struct platform_device *pdev)
 				get_omap_rng_device_details(priv);
 	if (ret)
 		goto err_ioremap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = hwrng_register(&omap_rng_ops);
@@ -493,9 +523,13 @@ static int omap_rng_probe(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "OMAP Random Number Generator ver. %02x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 omap_rng_read_reg(priv, RNG_REV_REG));
 
 	omap_rng_write_reg(priv, RNG_MASK_REG, 0x1);
+=======
+		 omap_rng_read(priv, RNG_REV_REG));
+>>>>>>> v3.18
 =======
 		 omap_rng_read(priv, RNG_REV_REG));
 >>>>>>> v3.18
@@ -507,8 +541,12 @@ err_register:
 	pm_runtime_disable(&pdev->dev);
 err_ioremap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(priv);
 
+=======
+	dev_err(dev, "initialization failed.\n");
+>>>>>>> v3.18
 =======
 	dev_err(dev, "initialization failed.\n");
 >>>>>>> v3.18
@@ -518,27 +556,36 @@ err_ioremap:
 static int __exit omap_rng_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_rng_private_data *priv = dev_get_drvdata(&pdev->dev);
 
 	hwrng_unregister(&omap_rng_ops);
 
 	omap_rng_write_reg(priv, RNG_MASK_REG, 0x0);
 =======
+=======
+>>>>>>> v3.18
 	struct omap_rng_dev *priv = platform_get_drvdata(pdev);
 
 	hwrng_unregister(&omap_rng_ops);
 
 	priv->pdata->cleanup(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_mem_region(priv->mem_res->start, resource_size(priv->mem_res));
 
 	kfree(priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -549,9 +596,15 @@ static int __exit omap_rng_remove(struct platform_device *pdev)
 static int omap_rng_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_rng_private_data *priv = dev_get_drvdata(dev);
 
 	omap_rng_write_reg(priv, RNG_MASK_REG, 0x0);
+=======
+	struct omap_rng_dev *priv = dev_get_drvdata(dev);
+
+	priv->pdata->cleanup(priv);
+>>>>>>> v3.18
 =======
 	struct omap_rng_dev *priv = dev_get_drvdata(dev);
 
@@ -565,6 +618,7 @@ static int omap_rng_suspend(struct device *dev)
 static int omap_rng_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_rng_private_data *priv = dev_get_drvdata(dev);
 	int ret;
 
@@ -577,10 +631,15 @@ static int omap_rng_resume(struct device *dev)
 
 	omap_rng_write_reg(priv, RNG_MASK_REG, 0x1);
 =======
+=======
+>>>>>>> v3.18
 	struct omap_rng_dev *priv = dev_get_drvdata(dev);
 
 	pm_runtime_get_sync(dev);
 	priv->pdata->init(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -596,9 +655,12 @@ static SIMPLE_DEV_PM_OPS(omap_rng_pm, omap_rng_suspend, omap_rng_resume);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* work with hotplug and coldplug */
 MODULE_ALIAS("platform:omap_rng");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver omap_rng_driver = {
@@ -607,6 +669,10 @@ static struct platform_driver omap_rng_driver = {
 		.owner		= THIS_MODULE,
 		.pm		= OMAP_RNG_PM,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(omap_rng_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(omap_rng_of_match),
 >>>>>>> v3.18
@@ -615,6 +681,7 @@ static struct platform_driver omap_rng_driver = {
 	.remove		= __exit_p(omap_rng_remove),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init omap_rng_init(void)
 {
@@ -629,6 +696,10 @@ static void __exit omap_rng_exit(void)
 module_init(omap_rng_init);
 module_exit(omap_rng_exit);
 
+=======
+module_platform_driver(omap_rng_driver);
+MODULE_ALIAS("platform:omap_rng");
+>>>>>>> v3.18
 =======
 module_platform_driver(omap_rng_driver);
 MODULE_ALIAS("platform:omap_rng");

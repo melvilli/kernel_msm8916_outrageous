@@ -31,6 +31,10 @@
 #include <linux/time.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -460,7 +464,10 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * If we have fewer than thresh credits, extend by OCFS2_MAX_TRANS_DATA.
  * If that fails, restart the transaction & regain write access for the
@@ -496,6 +503,9 @@ bail:
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ocfs2_triggers {
 	struct jbd2_buffer_trigger_type	ot_triggers;
@@ -844,9 +854,15 @@ int ocfs2_journal_init(struct ocfs2_journal *journal, int *dirty)
 	di = (struct ocfs2_dinode *)bh->b_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode->i_size <  OCFS2_MIN_JOURNAL_SIZE) {
 		mlog(ML_ERROR, "Journal file size (%lld) is too small!\n",
 		     inode->i_size);
+=======
+	if (i_size_read(inode) <  OCFS2_MIN_JOURNAL_SIZE) {
+		mlog(ML_ERROR, "Journal file size (%lld) is too small!\n",
+		     i_size_read(inode));
+>>>>>>> v3.18
 =======
 	if (i_size_read(inode) <  OCFS2_MIN_JOURNAL_SIZE) {
 		mlog(ML_ERROR, "Journal file size (%lld) is too small!\n",
@@ -857,7 +873,11 @@ int ocfs2_journal_init(struct ocfs2_journal *journal, int *dirty)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_ocfs2_journal_init(inode->i_size,
+=======
+	trace_ocfs2_journal_init(i_size_read(inode),
+>>>>>>> v3.18
 =======
 	trace_ocfs2_journal_init(i_size_read(inode),
 >>>>>>> v3.18
@@ -1149,7 +1169,11 @@ static int ocfs2_force_read_journal(struct inode *inode)
 	memset(bhs, 0, sizeof(struct buffer_head *) * CONCURRENT_JOURNAL_FILL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_blocks = ocfs2_blocks_for_bytes(inode->i_sb, inode->i_size);
+=======
+	num_blocks = ocfs2_blocks_for_bytes(inode->i_sb, i_size_read(inode));
+>>>>>>> v3.18
 =======
 	num_blocks = ocfs2_blocks_for_bytes(inode->i_sb, i_size_read(inode));
 >>>>>>> v3.18
@@ -1998,6 +2022,10 @@ void ocfs2_orphan_scan_start(struct ocfs2_super *osb)
 
 struct ocfs2_orphan_filldir_priv {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dir_context	ctx;
+>>>>>>> v3.18
 =======
 	struct dir_context	ctx;
 >>>>>>> v3.18
@@ -2038,17 +2066,23 @@ static int ocfs2_queue_orphans(struct ocfs2_super *osb,
 	int status;
 	struct inode *orphan_dir_inode = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocfs2_orphan_filldir_priv priv;
 	loff_t pos = 0;
 
 	priv.osb = osb;
 	priv.head = *head;
 =======
+=======
+>>>>>>> v3.18
 	struct ocfs2_orphan_filldir_priv priv = {
 		.ctx.actor = ocfs2_orphan_filldir,
 		.osb = osb,
 		.head = *head
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	orphan_dir_inode = ocfs2_get_system_file_inode(osb,
@@ -2068,8 +2102,12 @@ static int ocfs2_queue_orphans(struct ocfs2_super *osb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = ocfs2_dir_foreach(orphan_dir_inode, &pos, &priv,
 				   ocfs2_orphan_filldir);
+=======
+	status = ocfs2_dir_foreach(orphan_dir_inode, &priv.ctx);
+>>>>>>> v3.18
 =======
 	status = ocfs2_dir_foreach(orphan_dir_inode, &priv.ctx);
 >>>>>>> v3.18
@@ -2170,12 +2208,15 @@ static int ocfs2_recover_orphans(struct ocfs2_super *osb,
 
 		spin_lock(&oi->ip_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The remote delete code may have set these on the
 		 * assumption that the other node would wipe them
 		 * successfully.  If they are still in the node's
 		 * orphan dir, we need to reset that state. */
 		oi->ip_flags &= ~(OCFS2_INODE_DELETED|OCFS2_INODE_SKIP_DELETE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Set the proper information to get us going into
@@ -2232,9 +2273,12 @@ static int ocfs2_commit_thread(void *arg)
 
 		status = ocfs2_commit_cache(osb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status < 0)
 			mlog_errno(status);
 =======
+=======
+>>>>>>> v3.18
 		if (status < 0) {
 			static unsigned long abort_warn_time;
 
@@ -2249,6 +2293,9 @@ static int ocfs2_commit_thread(void *arg)
 			 */
 			msleep_interruptible(1000);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (kthread_should_stop() && atomic_read(&journal->j_num_trans)){

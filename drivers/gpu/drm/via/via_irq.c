@@ -105,7 +105,11 @@ u32 via_get_vblank_counter(struct drm_device *dev, int crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t via_driver_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t via_driver_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t via_driver_irq_handler(int irq, void *arg)
 >>>>>>> v3.18
@@ -143,7 +147,11 @@ irqreturn_t via_driver_irq_handler(int irq, void *arg)
 		if (status & cur_irq->pending_mask) {
 			atomic_inc(&cur_irq->irq_received);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DRM_WAKEUP(&cur_irq->irq_queue);
+=======
+			wake_up(&cur_irq->irq_queue);
+>>>>>>> v3.18
 =======
 			wake_up(&cur_irq->irq_queue);
 >>>>>>> v3.18
@@ -248,7 +256,11 @@ via_driver_irq_wait(struct drm_device *dev, unsigned int irq, int force_sequence
 
 	if (masks[real_irq][2] && !force_sequence) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_WAIT_ON(ret, cur_irq->irq_queue, 3 * DRM_HZ,
+=======
+		DRM_WAIT_ON(ret, cur_irq->irq_queue, 3 * HZ,
+>>>>>>> v3.18
 =======
 		DRM_WAIT_ON(ret, cur_irq->irq_queue, 3 * HZ,
 >>>>>>> v3.18
@@ -257,7 +269,11 @@ via_driver_irq_wait(struct drm_device *dev, unsigned int irq, int force_sequence
 		cur_irq_sequence = atomic_read(&cur_irq->irq_received);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_WAIT_ON(ret, cur_irq->irq_queue, 3 * DRM_HZ,
+=======
+		DRM_WAIT_ON(ret, cur_irq->irq_queue, 3 * HZ,
+>>>>>>> v3.18
 =======
 		DRM_WAIT_ON(ret, cur_irq->irq_queue, 3 * HZ,
 >>>>>>> v3.18
@@ -304,7 +320,11 @@ void via_driver_irq_preinstall(struct drm_device *dev)
 			cur_irq->enable_mask = dev_priv->irq_masks[i][0];
 			cur_irq->pending_mask = dev_priv->irq_masks[i][1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DRM_INIT_WAITQUEUE(&cur_irq->irq_queue);
+=======
+			init_waitqueue_head(&cur_irq->irq_queue);
+>>>>>>> v3.18
 =======
 			init_waitqueue_head(&cur_irq->irq_queue);
 >>>>>>> v3.18

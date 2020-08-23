@@ -44,6 +44,11 @@ static int cn_already_initialized;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Sends mult (multiple) cn_msg at a time.
+ *
+>>>>>>> v3.18
 =======
  * Sends mult (multiple) cn_msg at a time.
  *
@@ -56,7 +61,11 @@ static int cn_already_initialized;
  * Sequence number is incremented with each message to be sent.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If we expect reply to our message then the sequence number in
+=======
+ * If we expect a reply to our message then the sequence number in
+>>>>>>> v3.18
 =======
  * If we expect a reply to our message then the sequence number in
 >>>>>>> v3.18
@@ -72,9 +81,12 @@ static int cn_already_initialized;
  * a new message.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 int cn_netlink_send(struct cn_msg *msg, u32 __group, gfp_t gfp_mask)
 =======
+=======
+>>>>>>> v3.18
  * If msg->len != len, then additional cn_msg messages are expected following
  * the first msg.
  *
@@ -83,6 +95,9 @@ int cn_netlink_send(struct cn_msg *msg, u32 __group, gfp_t gfp_mask)
  */
 int cn_netlink_send_mult(struct cn_msg *msg, u16 len, u32 portid, u32 __group,
 	gfp_t gfp_mask)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cn_callback_entry *__cbq;
@@ -95,7 +110,13 @@ int cn_netlink_send_mult(struct cn_msg *msg, u16 len, u32 portid, u32 __group,
 	int found = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!__group) {
+=======
+	if (portid || __group) {
+		group = __group;
+	} else {
+>>>>>>> v3.18
 =======
 	if (portid || __group) {
 		group = __group;
@@ -115,6 +136,7 @@ int cn_netlink_send_mult(struct cn_msg *msg, u16 len, u32 portid, u32 __group,
 		if (!found)
 			return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		group = __group;
 	}
@@ -124,12 +146,17 @@ int cn_netlink_send_mult(struct cn_msg *msg, u16 len, u32 portid, u32 __group,
 
 	size = sizeof(*msg) + msg->len;
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	if (!portid && !netlink_has_listeners(dev->nls, group))
 		return -ESRCH;
 
 	size = sizeof(*msg) + len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb = nlmsg_new(size, gfp_mask);
@@ -145,12 +172,15 @@ int cn_netlink_send_mult(struct cn_msg *msg, u16 len, u32 portid, u32 __group,
 	data = nlmsg_data(nlh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(data, msg, sizeof(*data) + msg->len);
 
 	NETLINK_CB(skb).dst_group = group;
 
 	return netlink_broadcast(dev->nls, skb, 0, group, gfp_mask);
 =======
+=======
+>>>>>>> v3.18
 	memcpy(data, msg, size);
 
 	NETLINK_CB(skb).dst_group = group;
@@ -167,6 +197,9 @@ int cn_netlink_send(struct cn_msg *msg, u32 portid, u32 __group,
 	gfp_t gfp_mask)
 {
 	return cn_netlink_send_mult(msg, msg->len, portid, __group, gfp_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(cn_netlink_send);
@@ -194,7 +227,10 @@ static int cn_call_callback(struct sk_buff *skb)
 
 	if (cbq != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		cbq->callback(msg, nsp);
@@ -212,12 +248,15 @@ static int cn_call_callback(struct sk_buff *skb)
  * It checks skb, netlink header and msg sizes, and calls callback helper.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cn_rx_skb(struct sk_buff *skb)
 {
 	struct nlmsghdr *nlh;
 	int len, err;
 
 =======
+=======
+>>>>>>> v3.18
 static void cn_rx_skb(struct sk_buff *__skb)
 {
 	struct nlmsghdr *nlh;
@@ -226,6 +265,9 @@ static void cn_rx_skb(struct sk_buff *__skb)
 
 	skb = skb_get(__skb);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (skb->len >= NLMSG_HDRLEN) {
 		nlh = nlmsg_hdr(skb);
@@ -234,17 +276,23 @@ static void cn_rx_skb(struct sk_buff *__skb)
 		if (len < (int)sizeof(struct cn_msg) ||
 		    skb->len < nlh->nlmsg_len ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    len > CONNECTOR_MAX_MSG_SIZE)
 			return;
 
 		err = cn_call_callback(skb_get(skb));
 =======
+=======
+>>>>>>> v3.18
 		    len > CONNECTOR_MAX_MSG_SIZE) {
 			kfree_skb(skb);
 			return;
 		}
 
 		err = cn_call_callback(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err < 0)
 			kfree_skb(skb);

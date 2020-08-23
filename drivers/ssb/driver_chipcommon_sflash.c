@@ -10,7 +10,10 @@
 #include "ssb_private.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource ssb_sflash_resource = {
 	.name	= "ssb_sflash",
 	.start	= SSB_FLASH2,
@@ -24,6 +27,9 @@ struct platform_device ssb_sflash_dev = {
 	.num_resources	= 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ssb_sflash_tbl_e {
 	char *name;
@@ -33,7 +39,11 @@ struct ssb_sflash_tbl_e {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ssb_sflash_tbl_e ssb_sflash_st_tbl[] = {
+=======
+static const struct ssb_sflash_tbl_e ssb_sflash_st_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct ssb_sflash_tbl_e ssb_sflash_st_tbl[] = {
 >>>>>>> v3.18
@@ -45,15 +55,21 @@ static const struct ssb_sflash_tbl_e ssb_sflash_st_tbl[] = {
 	{ "M25P64", 0x16, 0x10000, 128, },
 	{ "M25FL128", 0x17, 0x10000, 256, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0 },
 };
 
 static struct ssb_sflash_tbl_e ssb_sflash_sst_tbl[] = {
 =======
+=======
+>>>>>>> v3.18
 	{ NULL },
 };
 
 static const struct ssb_sflash_tbl_e ssb_sflash_sst_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "SST25WF512", 1, 0x1000, 16, },
 	{ "SST25VF512", 0x48, 0x1000, 16, },
@@ -70,15 +86,21 @@ static const struct ssb_sflash_tbl_e ssb_sflash_sst_tbl[] = {
 	{ "SST25VF032", 0x4a, 0x1000, 1024, },
 	{ "SST25VF064", 0x4b, 0x1000, 2048, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0 },
 };
 
 static struct ssb_sflash_tbl_e ssb_sflash_at_tbl[] = {
 =======
+=======
+>>>>>>> v3.18
 	{ NULL },
 };
 
 static const struct ssb_sflash_tbl_e ssb_sflash_at_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "AT45DB011", 0xc, 256, 512, },
 	{ "AT45DB021", 0x14, 256, 1024, },
@@ -88,7 +110,11 @@ static const struct ssb_sflash_tbl_e ssb_sflash_at_tbl[] = {
 	{ "AT45DB321", 0x34, 512, 8192, },
 	{ "AT45DB642", 0x3c, 1024, 8192, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0 },
+=======
+	{ NULL },
+>>>>>>> v3.18
 =======
 	{ NULL },
 >>>>>>> v3.18
@@ -112,7 +138,12 @@ static void ssb_sflash_cmd(struct ssb_chipcommon *cc, u32 opcode)
 int ssb_sflash_init(struct ssb_chipcommon *cc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ssb_sflash_tbl_e *e;
+=======
+	struct ssb_sflash *sflash = &cc->dev->bus->mipscore.sflash;
+	const struct ssb_sflash_tbl_e *e;
+>>>>>>> v3.18
 =======
 	struct ssb_sflash *sflash = &cc->dev->bus->mipscore.sflash;
 	const struct ssb_sflash_tbl_e *e;
@@ -175,6 +206,7 @@ int ssb_sflash_init(struct ssb_chipcommon *cc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Found %s serial flash (blocksize: 0x%X, blocks: %d)\n",
 		e->name, e->blocksize, e->numblocks);
 
@@ -182,6 +214,8 @@ int ssb_sflash_init(struct ssb_chipcommon *cc)
 
 	return -ENOTSUPP;
 =======
+=======
+>>>>>>> v3.18
 	sflash->window = SSB_FLASH2;
 	sflash->blocksize = e->blocksize;
 	sflash->numblocks = e->numblocks;
@@ -198,5 +232,8 @@ int ssb_sflash_init(struct ssb_chipcommon *cc)
 	ssb_sflash_dev.dev.platform_data = sflash;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

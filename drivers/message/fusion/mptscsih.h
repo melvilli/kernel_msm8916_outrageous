@@ -99,7 +99,11 @@ typedef struct _internal_cmd {
 	u8		channel;	/* bus number */
 	u8		id;		/* SCSI ID (virtual) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		lun;
+=======
+	u64		lun;
+>>>>>>> v3.18
 =======
 	u64		lun;
 >>>>>>> v3.18
@@ -118,9 +122,15 @@ extern int mptscsih_resume(struct pci_dev *pdev);
 extern int mptscsih_show_info(struct seq_file *, struct Scsi_Host *);
 extern const char * mptscsih_info(struct Scsi_Host *SChost);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int mptscsih_qcmd(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *));
 extern int mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel,
 	u8 id, int lun, int ctx2abort, ulong timeout);
+=======
+extern int mptscsih_qcmd(struct scsi_cmnd *SCpnt);
+extern int mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel,
+	u8 id, u64 lun, int ctx2abort, ulong timeout);
+>>>>>>> v3.18
 =======
 extern int mptscsih_qcmd(struct scsi_cmnd *SCpnt);
 extern int mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel,

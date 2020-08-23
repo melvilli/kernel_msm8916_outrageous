@@ -30,9 +30,12 @@
 #include <asm/div64.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MTD_CHAR_MAJOR 90
 #define MTD_BLOCK_MAJOR 31
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MTD_ERASE_PENDING	0x01
@@ -177,6 +180,12 @@ struct mtd_info {
 	struct nand_ecclayout *ecclayout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* the ecc step size. */
+	unsigned int ecc_step_size;
+
+>>>>>>> v3.18
 =======
 	/* the ecc step size. */
 	unsigned int ecc_step_size;
@@ -214,6 +223,7 @@ struct mtd_info {
 	int (*_write_oob) (struct mtd_info *mtd, loff_t to,
 			   struct mtd_oob_ops *ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*_get_fact_prot_info) (struct mtd_info *mtd, struct otp_info *buf,
 				    size_t len);
 	int (*_read_fact_prot_reg) (struct mtd_info *mtd, loff_t from,
@@ -221,12 +231,17 @@ struct mtd_info {
 	int (*_get_user_prot_info) (struct mtd_info *mtd, struct otp_info *buf,
 				    size_t len);
 =======
+=======
+>>>>>>> v3.18
 	int (*_get_fact_prot_info) (struct mtd_info *mtd, size_t len,
 				    size_t *retlen, struct otp_info *buf);
 	int (*_read_fact_prot_reg) (struct mtd_info *mtd, loff_t from,
 				    size_t len, size_t *retlen, u_char *buf);
 	int (*_get_user_prot_info) (struct mtd_info *mtd, size_t len,
 				    size_t *retlen, struct otp_info *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*_read_user_prot_reg) (struct mtd_info *mtd, loff_t from,
 				    size_t len, size_t *retlen, u_char *buf);
@@ -241,6 +256,10 @@ struct mtd_info {
 	int (*_unlock) (struct mtd_info *mtd, loff_t ofs, uint64_t len);
 	int (*_is_locked) (struct mtd_info *mtd, loff_t ofs, uint64_t len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*_block_isreserved) (struct mtd_info *mtd, loff_t ofs);
+>>>>>>> v3.18
 =======
 	int (*_block_isreserved) (struct mtd_info *mtd, loff_t ofs);
 >>>>>>> v3.18
@@ -301,6 +320,7 @@ static inline int mtd_write_oob(struct mtd_info *mtd, loff_t to,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mtd_get_fact_prot_info(struct mtd_info *mtd, struct otp_info *buf,
 			   size_t len);
 int mtd_read_fact_prot_reg(struct mtd_info *mtd, loff_t from, size_t len,
@@ -308,12 +328,17 @@ int mtd_read_fact_prot_reg(struct mtd_info *mtd, loff_t from, size_t len,
 int mtd_get_user_prot_info(struct mtd_info *mtd, struct otp_info *buf,
 			   size_t len);
 =======
+=======
+>>>>>>> v3.18
 int mtd_get_fact_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
 			   struct otp_info *buf);
 int mtd_read_fact_prot_reg(struct mtd_info *mtd, loff_t from, size_t len,
 			   size_t *retlen, u_char *buf);
 int mtd_get_user_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
 			   struct otp_info *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mtd_read_user_prot_reg(struct mtd_info *mtd, loff_t from, size_t len,
 			   size_t *retlen, u_char *buf);
@@ -334,6 +359,10 @@ int mtd_lock(struct mtd_info *mtd, loff_t ofs, uint64_t len);
 int mtd_unlock(struct mtd_info *mtd, loff_t ofs, uint64_t len);
 int mtd_is_locked(struct mtd_info *mtd, loff_t ofs, uint64_t len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int mtd_block_isreserved(struct mtd_info *mtd, loff_t ofs);
+>>>>>>> v3.18
 =======
 int mtd_block_isreserved(struct mtd_info *mtd, loff_t ofs);
 >>>>>>> v3.18
@@ -387,12 +416,18 @@ static inline int mtd_has_oob(const struct mtd_info *mtd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int mtd_type_is_nand(const struct mtd_info *mtd)
 {
 	return mtd->type == MTD_NANDFLASH || mtd->type == MTD_MLCNANDFLASH;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int mtd_can_have_bb(const struct mtd_info *mtd)
 {

@@ -14,7 +14,10 @@
 #define MAX_FACILITY_BIT (256*8)	/* stfle_fac_list has 256 bytes */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int __test_facility(unsigned long nr, void *facilities)
 {
 	unsigned char *ptr;
@@ -25,6 +28,9 @@ static inline int __test_facility(unsigned long nr, void *facilities)
 	return (*ptr & (0x80 >> (nr & 7))) != 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The test_facility function uses the bit odering where the MSB is bit 0.
@@ -34,12 +40,16 @@ static inline int __test_facility(unsigned long nr, void *facilities)
 static inline int test_facility(unsigned long nr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *ptr;
 
 	if (nr >= MAX_FACILITY_BIT)
 		return 0;
 	ptr = (unsigned char *) &S390_lowcore.stfle_fac_list + (nr >> 3);
 	return (*ptr & (0x80 >> (nr & 7))) != 0;
+=======
+	return __test_facility(nr, &S390_lowcore.stfle_fac_list);
+>>>>>>> v3.18
 =======
 	return __test_facility(nr, &S390_lowcore.stfle_fac_list);
 >>>>>>> v3.18

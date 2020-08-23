@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -12,6 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 
@@ -28,6 +33,8 @@
 static DEFINE_MUTEX(iommu_list_lock);
 static LIST_HEAD(iommu_list);
 =======
+=======
+>>>>>>> v3.18
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -53,6 +60,9 @@ static LIST_HEAD(iommu_list);
 
 #include "msm_iommu_hw-8xxx.h"
 #include "msm_iommu.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MRC(reg, processor, op1, crn, crm, op2)				\
@@ -60,6 +70,7 @@ __asm__ __volatile__ (							\
 "   mrc   "   #processor "," #op1 ", %0,"  #crn "," #crm "," #op2 "\n"  \
 : "=r" (reg))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define RCP15_PRRR(reg)   MRC(reg, p15, 0, c10, c2, 0)
 #define RCP15_NMRR(reg)   MRC(reg, p15, 0, c10, c2, 1)
@@ -238,6 +249,8 @@ u32 msm_iommu_get_nmrr(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define RCP15_PRRR(reg)		MRC(reg, p15, 0, c10, c2, 0)
 #define RCP15_NMRR(reg)		MRC(reg, p15, 0, c10, c2, 1)
 
@@ -933,4 +946,7 @@ subsys_initcall(msm_iommu_init);
 
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR("Stepan Moskovchenko <stepanm@codeaurora.org>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

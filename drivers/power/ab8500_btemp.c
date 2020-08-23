@@ -1046,7 +1046,10 @@ static int ab8500_btemp_remove(struct platform_device *pdev)
 	flush_scheduled_work();
 	power_supply_unregister(&di->btemp_psy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

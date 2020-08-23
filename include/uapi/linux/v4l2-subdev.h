@@ -149,6 +149,7 @@ struct v4l2_subdev_selection {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct v4l2_subdev_edid {
 	__u32 pad;
 	__u32 start_block;
@@ -178,6 +179,8 @@ struct v4l2_subdev_edid {
 #define VIDIOC_SUBDEV_G_EDID	_IOWR('V', 40, struct v4l2_subdev_edid)
 #define VIDIOC_SUBDEV_S_EDID	_IOWR('V', 41, struct v4l2_subdev_edid)
 =======
+=======
+>>>>>>> v3.18
 /* Backwards compatibility define --- to be removed */
 #define v4l2_subdev_edid v4l2_edid
 
@@ -200,6 +203,9 @@ struct v4l2_subdev_edid {
 #define VIDIOC_SUBDEV_ENUM_DV_TIMINGS		_IOWR('V', 98, struct v4l2_enum_dv_timings)
 #define VIDIOC_SUBDEV_QUERY_DV_TIMINGS		_IOR('V', 99, struct v4l2_dv_timings)
 #define VIDIOC_SUBDEV_DV_TIMINGS_CAP		_IOWR('V', 100, struct v4l2_dv_timings_cap)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: scan ioctl and command handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -34,9 +38,12 @@
 
 #define MWIFIEX_DEF_CHANNELS_PER_SCAN_CMD	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MWIFIEX_LIMIT_1_CHANNEL_PER_SCAN_CMD	15
 #define MWIFIEX_LIMIT_2_CHANNELS_PER_SCAN_CMD	27
 #define MWIFIEX_LIMIT_3_CHANNELS_PER_SCAN_CMD	35
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -399,13 +406,19 @@ mwifiex_is_network_compatible(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bss_desc->chan_sw_ie_present) {
 		dev_err(adapter->dev,
 			"Don't connect to AP with WLAN_EID_CHANNEL_SWITCH\n");
 		return -1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mwifiex_is_bss_wapi(priv, bss_desc)) {
 		dev_dbg(adapter->dev, "info: return success for WAPI AP\n");
@@ -526,7 +539,11 @@ mwifiex_scan_create_channel_list(struct mwifiex_private *priv,
 					cpu_to_le16((u16) user_scan_in->
 					chan_list[0].scan_time);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else if (ch->flags & IEEE80211_CHAN_PASSIVE_SCAN)
+=======
+			else if (ch->flags & IEEE80211_CHAN_NO_IR)
+>>>>>>> v3.18
 =======
 			else if (ch->flags & IEEE80211_CHAN_NO_IR)
 >>>>>>> v3.18
@@ -537,7 +554,11 @@ mwifiex_scan_create_channel_list(struct mwifiex_private *priv,
 					cpu_to_le16(adapter->active_scan_time);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ch->flags & IEEE80211_CHAN_PASSIVE_SCAN)
+=======
+			if (ch->flags & IEEE80211_CHAN_NO_IR)
+>>>>>>> v3.18
 =======
 			if (ch->flags & IEEE80211_CHAN_NO_IR)
 >>>>>>> v3.18
@@ -562,7 +583,10 @@ mwifiex_scan_create_channel_list(struct mwifiex_private *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function appends rate TLV to scan config command. */
 static int
 mwifiex_append_rate_tlv(struct mwifiex_private *priv,
@@ -594,6 +618,9 @@ mwifiex_append_rate_tlv(struct mwifiex_private *priv,
 	return rates_size;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This function constructs and sends multiple scan config commands to
@@ -613,6 +640,7 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 			  struct mwifiex_chan_scan_param_set *scan_chan_list)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	struct mwifiex_chan_scan_param_set *tmp_chan_list;
 	struct mwifiex_chan_scan_param_set *start_chan;
@@ -621,6 +649,8 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 	u32 total_scan_time;
 	u32 done_early;
 =======
+=======
+>>>>>>> v3.18
 	struct mwifiex_adapter *adapter = priv->adapter;
 	int ret = 0;
 	struct mwifiex_chan_scan_param_set *tmp_chan_list;
@@ -631,6 +661,9 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 	u32 total_scan_time;
 	u32 done_early;
 	u8 radio_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!scan_cfg_out || !chan_tlv_out || !scan_chan_list) {
@@ -641,6 +674,12 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Check csa channel expiry before preparing scan list */
+	mwifiex_11h_get_csa_closed_channel(priv);
+
+>>>>>>> v3.18
 =======
 	/* Check csa channel expiry before preparing scan list */
 	mwifiex_11h_get_csa_closed_channel(priv);
@@ -660,6 +699,10 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 		tlv_idx = 0;
 		total_scan_time = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		radio_type = 0;
+>>>>>>> v3.18
 =======
 		radio_type = 0;
 >>>>>>> v3.18
@@ -680,13 +723,19 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 		       tmp_chan_list->chan_number && !done_early) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (tmp_chan_list->chan_number == priv->csa_chan) {
 				tmp_chan_list++;
 				continue;
 			}
 
 			radio_type = tmp_chan_list->radio_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_dbg(priv->adapter->dev,
 				"info: Scan: Chan(%3d), Radio(%d),"
@@ -769,6 +818,12 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rates_size = mwifiex_append_rate_tlv(priv, scan_cfg_out,
+						     radio_type);
+
+>>>>>>> v3.18
 =======
 		rates_size = mwifiex_append_rate_tlv(priv, scan_cfg_out,
 						     radio_type);
@@ -779,12 +834,15 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 		/* Send the scan command to the firmware with the specified
 		   cfg */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mwifiex_send_cmd_async(priv, HostCmd_CMD_802_11_SCAN,
 					     HostCmd_ACT_GEN_SET, 0,
 					     scan_cfg_out);
 		if (ret)
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (priv->adapter->ext_scan)
 			cmd_no = HostCmd_CMD_802_11_SCAN_EXT;
 		else
@@ -813,6 +871,9 @@ mwifiex_scan_channel_list(struct mwifiex_private *priv,
 					       flags);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -854,8 +915,14 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 	struct mwifiex_adapter *adapter = priv->adapter;
 	struct mwifiex_ie_types_num_probes *num_probes_tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mwifiex_ie_types_wildcard_ssid_params *wildcard_ssid_tlv;
 	struct mwifiex_ie_types_rates_param_set *rates_tlv;
+=======
+	struct mwifiex_ie_types_scan_chan_gap *chan_gap_tlv;
+	struct mwifiex_ie_types_wildcard_ssid_params *wildcard_ssid_tlv;
+	struct mwifiex_ie_types_bssid_list *bssid_tlv;
+>>>>>>> v3.18
 =======
 	struct mwifiex_ie_types_scan_chan_gap *chan_gap_tlv;
 	struct mwifiex_ie_types_wildcard_ssid_params *wildcard_ssid_tlv;
@@ -873,8 +940,11 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 	int i;
 	u8 ssid_filter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rates[MWIFIEX_SUPPORTED_RATES];
 	u32 rates_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mwifiex_ie_types_htcap *ht_cap;
@@ -929,7 +999,10 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 		       sizeof(scan_cfg_out->specific_bssid));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (adapter->ext_scan &&
 		    !is_zero_ether_addr(scan_cfg_out->specific_bssid)) {
 			bssid_tlv =
@@ -941,6 +1014,9 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 			tlv_pos += sizeof(struct mwifiex_ie_types_bssid_list);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = 0; i < user_scan_in->num_ssids; i++) {
 			ssid_len = user_scan_in->ssid_list[i].ssid_len;
@@ -994,7 +1070,10 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 		    !is_zero_ether_addr(scan_cfg_out->specific_bssid))
 			*filtered_scan = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (user_scan_in->scan_chan_gap) {
 			dev_dbg(adapter->dev, "info: scan: channel gap = %d\n",
@@ -1012,6 +1091,9 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 			tlv_pos +=
 				  sizeof(struct mwifiex_ie_types_scan_chan_gap);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		scan_cfg_out->bss_mode = (u8) adapter->scan_mode;
@@ -1046,6 +1128,7 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Append rates tlv */
 	memset(rates, 0, sizeof(rates));
 
@@ -1061,6 +1144,8 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (ISSUPP_11NENABLED(priv->adapter->fw_cap_info) &&
 	    (priv->adapter->config_bands & BAND_GN ||
 	     priv->adapter->config_bands & BAND_AN)) {
@@ -1072,7 +1157,11 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 		radio_type =
 			mwifiex_band_to_radio_type(priv->adapter->config_bands);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mwifiex_fill_cap_info(priv, radio_type, ht_cap);
+=======
+		mwifiex_fill_cap_info(priv, radio_type, &ht_cap->ht_cap);
+>>>>>>> v3.18
 =======
 		mwifiex_fill_cap_info(priv, radio_type, &ht_cap->ht_cap);
 >>>>>>> v3.18
@@ -1159,6 +1248,7 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * In associated state we will reduce the number of channels scanned per
 	 * scan command to avoid any traffic delay/loss. This number is decided
@@ -1175,6 +1265,8 @@ mwifiex_config_scan(struct mwifiex_private *priv,
 		else
 			*max_chan_per_scan = 4;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1350,7 +1442,10 @@ int mwifiex_update_bss_desc_with_ie(struct mwifiex_adapter *adapter,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case WLAN_EID_PWR_CONSTRAINT:
 			bss_entry->local_constraint = *(current_ptr + 2);
 			bss_entry->sensed_11h = true;
@@ -1364,6 +1459,9 @@ int mwifiex_update_bss_desc_with_ie(struct mwifiex_adapter *adapter,
 			bss_entry->sensed_11h = true;
 		    break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case WLAN_EID_EXT_SUPP_RATES:
 			/*
@@ -1465,6 +1563,7 @@ int mwifiex_update_bss_desc_with_ie(struct mwifiex_adapter *adapter,
 			break;
 		case WLAN_EID_BSS_COEX_2040:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bss_entry->bcn_bss_co_2040 = current_ptr +
 				sizeof(struct ieee_types_header);
 			bss_entry->bss_co_2040_offset = (u16) (current_ptr +
@@ -1483,6 +1582,8 @@ int mwifiex_update_bss_desc_with_ie(struct mwifiex_adapter *adapter,
 				(void *)(current_ptr +
 					 sizeof(struct ieee_types_header));
 =======
+=======
+>>>>>>> v3.18
 			bss_entry->bcn_bss_co_2040 = current_ptr;
 			bss_entry->bss_co_2040_offset =
 				(u16) (current_ptr - bss_entry->beacon_buf);
@@ -1494,6 +1595,9 @@ int mwifiex_update_bss_desc_with_ie(struct mwifiex_adapter *adapter,
 			break;
 		case WLAN_EID_OPMODE_NOTIF:
 			bss_entry->oper_mode = (void *)current_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bss_entry->oper_mode_offset =
 					(u16)((u8 *)bss_entry->oper_mode -
@@ -1731,7 +1835,10 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 mwifiex_parse_single_response_buf(struct mwifiex_private *priv, u8 **bss_info,
 				  u32 *bytes_left, u64 fw_tsf, u8 *radio_type,
@@ -1957,6 +2064,9 @@ static void mwifiex_check_next_scan_command(struct mwifiex_private *priv)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This function handles the command response of scan.
@@ -1983,7 +2093,10 @@ int mwifiex_ret_802_11_scan(struct mwifiex_private *priv,
 	int ret = 0;
 	struct mwifiex_adapter *adapter = priv->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cmd_ctrl_node *cmd_node;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct host_cmd_ds_802_11_scan_rsp *scan_rsp;
@@ -1995,6 +2108,7 @@ int mwifiex_ret_802_11_scan(struct mwifiex_private *priv,
 	u32 idx;
 	u32 tlv_buf_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mwifiex_chan_freq_power *cfp;
 	struct mwifiex_ie_types_chan_band_list_param_set *chan_band_tlv;
 	struct chan_band_param_set *chan_band;
@@ -2002,11 +2116,16 @@ int mwifiex_ret_802_11_scan(struct mwifiex_private *priv,
 	unsigned long flags;
 	struct cfg80211_bss *bss;
 =======
+=======
+>>>>>>> v3.18
 	struct mwifiex_ie_types_chan_band_list_param_set *chan_band_tlv;
 	struct chan_band_param_set *chan_band;
 	u8 is_bgscan_resp;
 	__le64 fw_tsf = 0;
 	u8 *radio_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	is_bgscan_resp = (le16_to_cpu(resp->command)
@@ -2025,6 +2144,12 @@ int mwifiex_ret_802_11_scan(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Check csa channel expiry before parsing scan response */
+	mwifiex_11h_get_csa_closed_channel(priv);
+
+>>>>>>> v3.18
 =======
 	/* Check csa channel expiry before parsing scan response */
 	mwifiex_11h_get_csa_closed_channel(priv);
@@ -2072,6 +2197,7 @@ int mwifiex_ret_802_11_scan(struct mwifiex_private *priv,
 					     &chan_band_tlv);
 
 	for (idx = 0; idx < scan_rsp->number_of_sets && bytes_left; idx++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u8 bssid[ETH_ALEN];
 		s32 rssi;
@@ -2286,6 +2412,8 @@ check_next_scan:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If the TSF TLV was appended to the scan results, save this
 		 * entry's TSF value in the fw_tsf field. It is the firmware's
@@ -2502,6 +2630,9 @@ check_next_scan:
 	if (!event_scan->more_event)
 		mwifiex_check_next_scan_command(priv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

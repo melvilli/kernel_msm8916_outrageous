@@ -37,6 +37,7 @@
  * @PIN_CONFIG_BIAS_PULL_UP: the pin will be pulled up (usually with high
  *	impedance to VDD). If the argument is != 0 pull-up is enabled,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	if it is 0, pull-up is disabled.
  * @PIN_CONFIG_BIAS_PULL_DOWN: the pin will be pulled down (usually with high
  *	impedance to GROUND). If the argument is != 0 pull-down is enabled,
@@ -46,6 +47,8 @@
  *	If the argument is != 0 pull up/down is enabled, if it is 0,
  *	the pull is disabled.
 =======
+=======
+>>>>>>> v3.18
  *	if it is 0, pull-up is total, i.e. the pin is connected to VDD.
  * @PIN_CONFIG_BIAS_PULL_DOWN: the pin will be pulled down (usually with high
  *	impedance to GROUND). If the argument is != 0 pull-down is enabled,
@@ -58,6 +61,9 @@
  *	If the argument is != 0 pull up/down is enabled, if it is 0, the
  *	configuration is ignored. The proper way to disable it is to use
  *	@PIN_CONFIG_BIAS_DISABLE.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @PIN_CONFIG_DRIVE_PUSH_PULL: the pin will be driven actively high and
  *	low, this is the most typical case and is typically achieved with two
@@ -69,7 +75,11 @@
  *	config will enable open drain mode, the argument is ignored.
  * @PIN_CONFIG_DRIVE_OPEN_SOURCE: the pin will be driven with open source
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	(open emitter). Setting this config will enable open drain mode, the
+=======
+ *	(open emitter). Setting this config will enable open source mode, the
+>>>>>>> v3.18
 =======
  *	(open emitter). Setting this config will enable open source mode, the
 >>>>>>> v3.18
@@ -95,8 +105,13 @@
  *	the driver which alternative power source to use.
  * @PIN_CONFIG_SLEW_RATE: if the pin can select slew rate, the argument to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	this parameter (on a custom format) tells the driver which alternative
  * 	slew rate to use.
+=======
+ *	this parameter (on a custom format) tells the driver which alternative
+ *	slew rate to use.
+>>>>>>> v3.18
 =======
  *	this parameter (on a custom format) tells the driver which alternative
  *	slew rate to use.
@@ -106,13 +121,19 @@
  *	passed in the argument on a custom form, else just use argument 1
  *	to indicate low power mode, argument 0 turns low power mode off.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @PIN_CONFIG_OUTPUT: this will configure the pin in output, use argument
  *	1 to indicate high level, argument 0 to indicate low level.
 =======
+=======
+>>>>>>> v3.18
  * @PIN_CONFIG_OUTPUT: this will configure the pin as an output. Use argument
  *	1 to indicate high level, argument 0 to indicate low level. (Please
  *	see Documentation/pinctrl.txt, section "GPIO mode pitfalls" for a
  *	discussion around this parameter.)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @PIN_CONFIG_END: this is the last enumerator for pin configurations, if
  *	you need to pass in custom configurations to the pin controller, use
@@ -169,7 +190,10 @@ static inline unsigned long pinconf_to_config_packed(enum pin_config_param param
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 
 #include <linux/device.h>
@@ -203,6 +227,9 @@ static inline int pinconf_generic_dt_node_to_map_pin(
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_GENERIC_PINCONF */
 

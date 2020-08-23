@@ -107,10 +107,14 @@ static ssize_t show_dump_regs(struct device *dev, struct device_attribute *attr,
 				dump[n1] = pcf50633_reg_read(pcf, n + n1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hex_dump_to_buffer(dump, sizeof(dump), 16, 1, buf1, 128, 0);
 		buf1 += strlen(buf1);
 		*buf1++ = '\n';
 		*buf1 = '\0';
+=======
+		buf1 += sprintf(buf1, "%*ph\n", (int)sizeof(dump), dump);
+>>>>>>> v3.18
 =======
 		buf1 += sprintf(buf1, "%*ph\n", (int)sizeof(dump), dump);
 >>>>>>> v3.18
@@ -200,8 +204,14 @@ static int pcf50633_probe(struct i2c_client *client,
 {
 	struct pcf50633 *pcf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcf50633_platform_data *pdata = client->dev.platform_data;
 	int i, ret;
+=======
+	struct platform_device *pdev;
+	struct pcf50633_platform_data *pdata = dev_get_platdata(&client->dev);
+	int i, j, ret;
+>>>>>>> v3.18
 =======
 	struct platform_device *pdev;
 	struct pcf50633_platform_data *pdata = dev_get_platdata(&client->dev);
@@ -254,6 +264,7 @@ static int pcf50633_probe(struct i2c_client *client,
 
 	for (i = 0; i < PCF50633_NUM_REGULATORS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct platform_device *pdev;
 
 		pdev = platform_device_alloc("pcf50633-regltr", i);
@@ -274,6 +285,8 @@ static int pcf50633_probe(struct i2c_client *client,
 
 		platform_device_add(pdev);
 =======
+=======
+>>>>>>> v3.18
 		pdev = platform_device_alloc("pcf50633-regulator", i);
 		if (!pdev)
 			return -ENOMEM;
@@ -289,13 +302,20 @@ static int pcf50633_probe(struct i2c_client *client,
 			goto err;
 
 		pcf->regulator_pdev[i] = pdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ret = sysfs_create_group(&client->dev.kobj, &pcf_attr_group);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(pcf->dev, "error creating sysfs entries\n");
+=======
+		dev_warn(pcf->dev, "error creating sysfs entries\n");
+>>>>>>> v3.18
 =======
 		dev_warn(pcf->dev, "error creating sysfs entries\n");
 >>>>>>> v3.18
@@ -305,7 +325,10 @@ static int pcf50633_probe(struct i2c_client *client,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 err:
 	platform_device_put(pdev);
@@ -313,6 +336,9 @@ err:
 		platform_device_put(pcf->regulator_pdev[j]);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

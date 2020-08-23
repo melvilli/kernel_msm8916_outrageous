@@ -24,7 +24,11 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -100,7 +104,11 @@ int read_log(struct tpm_bios_log *log)
 	log->bios_event_log_end = log->bios_event_log + len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virt = acpi_os_map_memory(start, len);
+=======
+	virt = acpi_os_map_iomem(start, len);
+>>>>>>> v3.18
 =======
 	virt = acpi_os_map_iomem(start, len);
 >>>>>>> v3.18
@@ -113,7 +121,11 @@ int read_log(struct tpm_bios_log *log)
 	memcpy_fromio(log->bios_event_log, virt, len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_os_unmap_memory(virt, len);
+=======
+	acpi_os_unmap_iomem(virt, len);
+>>>>>>> v3.18
 =======
 	acpi_os_unmap_iomem(virt, len);
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -64,7 +68,10 @@ acpi_ns_dump_one_device(acpi_handle obj_handle,
 
 #if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DEBUGGER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef	ACPI_FUTURE_USAGE
 static acpi_status
@@ -76,6 +83,9 @@ acpi_ns_get_max_depth(acpi_handle obj_handle,
 		      u32 level, void *context, void **return_value);
 #endif				/* ACPI_FUTURE_USAGE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *
@@ -263,6 +273,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 			case ACPI_TYPE_STRING:
 			case ACPI_TYPE_METHOD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -271,6 +285,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -285,18 +303,24 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 		case ACPI_TYPE_PROCESSOR:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acpi_os_printf("ID %02X Len %02X Addr %8.8X%8.8X\n",
 				       obj_desc->processor.proc_id,
 				       obj_desc->processor.length,
 				       ACPI_FORMAT_UINT64(obj_desc->processor.
 							  address));
 =======
+=======
+>>>>>>> v3.18
 			acpi_os_printf("ID %02X Len %02X Addr %p\n",
 				       obj_desc->processor.proc_id,
 				       obj_desc->processor.length,
 				       ACPI_CAST_PTR(void,
 						     obj_desc->processor.
 						     address));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -369,9 +393,14 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 			if (obj_desc->region.flags & AOPOBJ_DATA_VALID) {
 				acpi_os_printf(" Addr %8.8X%8.8X Len %.4X\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       ACPI_FORMAT_UINT64(obj_desc->
 								  region.
 								  address),
+=======
+					       ACPI_FORMAT_NATIVE_UINT
+					       (obj_desc->region.address),
+>>>>>>> v3.18
 =======
 					       ACPI_FORMAT_NATIVE_UINT
 					       (obj_desc->region.address),
@@ -474,6 +503,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -612,6 +645,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		case ACPI_TYPE_BUFFER_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -622,6 +659,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		case ACPI_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -630,6 +671,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		case ACPI_TYPE_METHOD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -638,6 +683,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		case ACPI_TYPE_LOCAL_REGION_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -646,6 +695,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		case ACPI_TYPE_LOCAL_BANK_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -654,6 +707,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		case ACPI_TYPE_LOCAL_INDEX_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -662,6 +719,10 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -672,7 +733,11 @@ acpi_ns_dump_one_object(acpi_handle obj_handle,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -738,7 +803,10 @@ acpi_ns_dump_objects(acpi_object_type type,
 #endif				/* ACPI_FUTURE_USAGE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef	ACPI_FUTURE_USAGE
 /*******************************************************************************
  *
@@ -869,6 +937,9 @@ acpi_ns_dump_object_paths(acpi_object_type type,
 }
 #endif				/* ACPI_FUTURE_USAGE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *

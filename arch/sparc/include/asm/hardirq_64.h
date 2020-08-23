@@ -15,8 +15,11 @@
 void ack_bad_irq(unsigned int irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HARDIRQ_BITS	8
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* !(__SPARC64_HARDIRQ_H) */

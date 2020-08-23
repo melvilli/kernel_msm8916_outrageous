@@ -134,9 +134,15 @@ static void flush_icache_all(void)
 
 	/* Flush I-cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccr = __raw_readl(CCR);
 	ccr |= CCR_CACHE_ICI;
 	__raw_writel(ccr, CCR);
+=======
+	ccr = __raw_readl(SH_CCR);
+	ccr |= CCR_CACHE_ICI;
+	__raw_writel(ccr, SH_CCR);
+>>>>>>> v3.18
 =======
 	ccr = __raw_readl(SH_CCR);
 	ccr |= CCR_CACHE_ICI;

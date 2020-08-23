@@ -141,9 +141,12 @@ void bcma_core_chipcommon_init(struct bcma_drv_cc *cc)
 
 	if (cc->core->id.rev >= 20) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcma_cc_write32(cc, BCMA_CC_GPIOPULLUP, 0);
 		bcma_cc_write32(cc, BCMA_CC_GPIOPULLDOWN, 0);
 =======
+=======
+>>>>>>> v3.18
 		u32 pullup = 0, pulldown = 0;
 
 		if (cc->core->bus->chipinfo.id == BCMA_CHIP_ID_BCM43142) {
@@ -153,6 +156,9 @@ void bcma_core_chipcommon_init(struct bcma_drv_cc *cc)
 
 		bcma_cc_write32(cc, BCMA_CC_GPIOPULLUP, pullup);
 		bcma_cc_write32(cc, BCMA_CC_GPIOPULLDOWN, pulldown);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

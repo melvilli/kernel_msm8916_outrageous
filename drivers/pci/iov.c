@@ -48,13 +48,17 @@ static struct pci_bus *virtfn_add_bus(struct pci_bus *bus, int busnr)
 
 	pci_bus_insert_busn_res(child, busnr, busnr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus->is_added = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	return child;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void virtfn_remove_bus(struct pci_bus *bus, int busnr)
 {
@@ -69,10 +73,15 @@ static void virtfn_remove_bus(struct pci_bus *bus, int busnr)
 	if (list_empty(&child->devices))
 		pci_remove_bus(child);
 =======
+=======
+>>>>>>> v3.18
 static void virtfn_remove_bus(struct pci_bus *physbus, struct pci_bus *virtbus)
 {
 	if (physbus != virtbus && list_empty(&virtbus->devices))
 		pci_remove_bus(virtbus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -80,7 +89,11 @@ static int virtfn_add(struct pci_dev *dev, int id, int reset)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+	int rc = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int rc = -ENOMEM;
 >>>>>>> v3.18
@@ -89,6 +102,7 @@ static int virtfn_add(struct pci_dev *dev, int id, int reset)
 	struct pci_dev *virtfn;
 	struct resource *res;
 	struct pci_sriov *iov = dev->sriov;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	virtfn = alloc_pci_dev();
@@ -103,6 +117,8 @@ static int virtfn_add(struct pci_dev *dev, int id, int reset)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct pci_bus *bus;
 
 	mutex_lock(&iov->dev->sriov->lock);
@@ -114,6 +130,9 @@ static int virtfn_add(struct pci_dev *dev, int id, int reset)
 	if (!virtfn)
 		goto failed0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	virtfn->devfn = virtfn_devfn(dev, id);
 	virtfn->vendor = dev->vendor;
@@ -123,6 +142,10 @@ static int virtfn_add(struct pci_dev *dev, int id, int reset)
 	virtfn->physfn = pci_dev_get(dev);
 	virtfn->is_virtfn = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	virtfn->multifunction = 0;
+>>>>>>> v3.18
 =======
 	virtfn->multifunction = 0;
 >>>>>>> v3.18
@@ -148,7 +171,11 @@ static int virtfn_add(struct pci_dev *dev, int id, int reset)
 	mutex_unlock(&iov->dev->sriov->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pci_bus_add_device(virtfn);
+=======
+	pci_bus_add_device(virtfn);
+>>>>>>> v3.18
 =======
 	pci_bus_add_device(virtfn);
 >>>>>>> v3.18
@@ -171,7 +198,13 @@ failed1:
 	mutex_lock(&iov->dev->sriov->lock);
 	pci_stop_and_remove_bus_device(virtfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtfn_remove_bus(dev->bus, virtfn_bus(dev, id));
+=======
+failed0:
+	virtfn_remove_bus(dev->bus, bus);
+failed:
+>>>>>>> v3.18
 =======
 failed0:
 	virtfn_remove_bus(dev->bus, bus);
@@ -185,6 +218,7 @@ failed:
 static void virtfn_remove(struct pci_dev *dev, int id, int reset)
 {
 	char buf[VIRTFN_ID_LEN];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pci_bus *bus;
 	struct pci_dev *virtfn;
@@ -201,6 +235,8 @@ static void virtfn_remove(struct pci_dev *dev, int id, int reset)
 	pci_dev_put(virtfn);
 
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dev *virtfn;
 	struct pci_sriov *iov = dev->sriov;
 
@@ -210,6 +246,9 @@ static void virtfn_remove(struct pci_dev *dev, int id, int reset)
 	if (!virtfn)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (reset) {
 		device_release_driver(&virtfn->dev);
@@ -228,6 +267,7 @@ static void virtfn_remove(struct pci_dev *dev, int id, int reset)
 
 	mutex_lock(&iov->dev->sriov->lock);
 	pci_stop_and_remove_bus_device(virtfn);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	virtfn_remove_bus(dev->bus, virtfn_bus(dev, id));
 	mutex_unlock(&iov->dev->sriov->lock);
@@ -327,6 +367,8 @@ static void sriov_disable_migration(struct pci_dev *dev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	virtfn_remove_bus(dev->bus, virtfn->bus);
 	mutex_unlock(&iov->dev->sriov->lock);
 
@@ -335,6 +377,9 @@ static void sriov_disable_migration(struct pci_dev *dev)
 	pci_dev_put(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sriov_enable(struct pci_dev *dev, int nr_virtfn)
 {
@@ -363,7 +408,10 @@ static int sriov_enable(struct pci_dev *dev, int nr_virtfn)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, nr_virtfn);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_read_config_word(dev, iov->pos + PCI_SRIOV_VF_OFFSET, &offset);
@@ -402,6 +450,7 @@ static int sriov_enable(struct pci_dev *dev, int nr_virtfn)
 			return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_dev_put(pdev);
 
 		if (!pdev->is_physfn)
@@ -410,6 +459,8 @@ static int sriov_enable(struct pci_dev *dev, int nr_virtfn)
 		rc = sysfs_create_link(&dev->dev.kobj,
 					&pdev->dev.kobj, "dep_link");
 =======
+=======
+>>>>>>> v3.18
 		if (!pdev->is_physfn) {
 			pci_dev_put(pdev);
 			return -ENOSYS;
@@ -418,12 +469,19 @@ static int sriov_enable(struct pci_dev *dev, int nr_virtfn)
 		rc = sysfs_create_link(&dev->dev.kobj,
 					&pdev->dev.kobj, "dep_link");
 		pci_dev_put(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc)
 			return rc;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, nr_virtfn);
+>>>>>>> v3.18
 =======
 	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, nr_virtfn);
 >>>>>>> v3.18
@@ -444,12 +502,15 @@ static int sriov_enable(struct pci_dev *dev, int nr_virtfn)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iov->cap & PCI_SRIOV_CAP_VFM) {
 		rc = sriov_enable_migration(dev, nr_virtfn);
 		if (rc)
 			goto failed;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kobject_uevent(&dev->dev.kobj, KOBJ_CHANGE);
@@ -465,6 +526,10 @@ failed:
 	pci_cfg_access_lock(dev);
 	pci_write_config_word(dev, iov->pos + PCI_SRIOV_CTRL, iov->ctrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, 0);
+>>>>>>> v3.18
 =======
 	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, 0);
 >>>>>>> v3.18
@@ -486,9 +551,12 @@ static void sriov_disable(struct pci_dev *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iov->cap & PCI_SRIOV_CAP_VFM)
 		sriov_disable_migration(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < iov->num_VFs; i++)
@@ -505,6 +573,10 @@ static void sriov_disable(struct pci_dev *dev)
 
 	iov->num_VFs = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, 0);
+>>>>>>> v3.18
 =======
 	pci_write_config_word(dev, iov->pos + PCI_SRIOV_NUM_VF, 0);
 >>>>>>> v3.18
@@ -547,6 +619,10 @@ static int sriov_init(struct pci_dev *dev, int pos)
 found:
 	pci_write_config_word(dev, pos + PCI_SRIOV_CTRL, ctrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_write_config_word(dev, pos + PCI_SRIOV_NUM_VF, 0);
+>>>>>>> v3.18
 =======
 	pci_write_config_word(dev, pos + PCI_SRIOV_NUM_VF, 0);
 >>>>>>> v3.18
@@ -720,7 +796,11 @@ resource_size_t pci_sriov_resource_alignment(struct pci_dev *dev, int resno)
 	enum pci_bar_type type;
 	int reg = pci_iov_resource_bar(dev, resno, &type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -778,7 +858,11 @@ int pci_enable_sriov(struct pci_dev *dev, int nr_virtfn)
 
 	if (!dev->is_physfn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return -ENOSYS;
+>>>>>>> v3.18
 =======
 		return -ENOSYS;
 >>>>>>> v3.18
@@ -804,6 +888,7 @@ EXPORT_SYMBOL_GPL(pci_disable_sriov);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_sriov_migration - notify SR-IOV core of Virtual Function Migration
  * @dev: the PCI device
  *
@@ -823,6 +908,8 @@ irqreturn_t pci_sriov_migration(struct pci_dev *dev)
 EXPORT_SYMBOL_GPL(pci_sriov_migration);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * pci_num_vf - return number of VFs associated with a PF device_release_driver
@@ -845,7 +932,11 @@ EXPORT_SYMBOL_GPL(pci_num_vf);
  *
  * Returns number of VFs belonging to this device that are assigned to a guest.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If device is not a physical function returns -ENODEV.
+=======
+ * If device is not a physical function returns 0.
+>>>>>>> v3.18
 =======
  * If device is not a physical function returns 0.
 >>>>>>> v3.18
@@ -875,7 +966,11 @@ int pci_vfs_assigned(struct pci_dev *dev)
 		 */
 		if (vfdev->is_virtfn && (vfdev->physfn == dev) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (vfdev->dev_flags & PCI_DEV_FLAGS_ASSIGNED))
+=======
+			pci_is_dev_assigned(vfdev))
+>>>>>>> v3.18
 =======
 			pci_is_dev_assigned(vfdev))
 >>>>>>> v3.18
@@ -898,7 +993,12 @@ EXPORT_SYMBOL_GPL(pci_vfs_assigned);
  *
  * Returns 0 if PF is an SRIOV-capable device and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * value of numvfs valid. If not a PF with VFS, return -EINVAL;
+=======
+ * value of numvfs valid. If not a PF return -ENOSYS;
+ * if numvfs is invalid return -EINVAL;
+>>>>>>> v3.18
 =======
  * value of numvfs valid. If not a PF return -ENOSYS;
  * if numvfs is invalid return -EINVAL;
@@ -908,7 +1008,13 @@ EXPORT_SYMBOL_GPL(pci_vfs_assigned);
 int pci_sriov_set_totalvfs(struct pci_dev *dev, u16 numvfs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->is_physfn || (numvfs > dev->sriov->total_VFs))
+=======
+	if (!dev->is_physfn)
+		return -ENOSYS;
+	if (numvfs > dev->sriov->total_VFs)
+>>>>>>> v3.18
 =======
 	if (!dev->is_physfn)
 		return -ENOSYS;
@@ -928,7 +1034,11 @@ EXPORT_SYMBOL_GPL(pci_sriov_set_totalvfs);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_sriov_get_totalvfs -- get total VFs supported on this devic3
+=======
+ * pci_sriov_get_totalvfs -- get total VFs supported on this device
+>>>>>>> v3.18
 =======
  * pci_sriov_get_totalvfs -- get total VFs supported on this device
 >>>>>>> v3.18
@@ -937,7 +1047,11 @@ EXPORT_SYMBOL_GPL(pci_sriov_set_totalvfs);
  * For a PCIe device with SRIOV support, return the PCIe
  * SRIOV capability value of TotalVFs or the value of driver_max_VFs
 <<<<<<< HEAD
+<<<<<<< HEAD
  * if the driver reduced it.  Otherwise, -EINVAL.
+=======
+ * if the driver reduced it.  Otherwise 0.
+>>>>>>> v3.18
 =======
  * if the driver reduced it.  Otherwise 0.
 >>>>>>> v3.18
@@ -946,7 +1060,11 @@ int pci_sriov_get_totalvfs(struct pci_dev *dev)
 {
 	if (!dev->is_physfn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18

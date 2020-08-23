@@ -19,6 +19,7 @@
 #define XCHAL_CP_PORT_MASK		0x00	/* bitmask of only port CPs */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*  Basic parameters of each coprocessor:  */
 #define XCHAL_CP7_NAME			"XTIOP"
 #define XCHAL_CP7_IDENT			XTIOP
@@ -26,6 +27,8 @@
 #define XCHAL_CP7_SA_ALIGN		1	/* min alignment of save area */
 #define XCHAL_CP_ID_XTIOP		7	/* coprocessor ID (0..7) */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*  Filler info for unassigned coprocessors, to simplify arrays etc:  */
@@ -46,6 +49,11 @@
 #define XCHAL_CP6_SA_SIZE		0
 #define XCHAL_CP6_SA_ALIGN		1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XCHAL_CP7_SA_SIZE		0
+#define XCHAL_CP7_SA_ALIGN		1
+>>>>>>> v3.18
 =======
 #define XCHAL_CP7_SA_SIZE		0
 #define XCHAL_CP7_SA_ALIGN		1

@@ -3,7 +3,11 @@
  * Copyright (C) 2009 IBM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
 =======
  * Author: Darrick J. Wong <darrick.wong@oracle.com>
 >>>>>>> v3.18
@@ -35,8 +39,12 @@
 #include <linux/time.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -390,13 +398,19 @@ static ssize_t show_str(struct device *dev,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
 		val = "";
 =======
+=======
+>>>>>>> v3.18
 		WARN(1, "Implementation error: unexpected attribute index %d\n",
 		     attr->index);
 		val = "";
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -452,7 +466,13 @@ static ssize_t show_val(struct device *dev,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Implementation error: unexpected attribute index %d\n",
+		     attr->index);
+		break;
+>>>>>>> v3.18
 =======
 		WARN(1, "Implementation error: unexpected attribute index %d\n",
 		     attr->index);
@@ -620,9 +640,14 @@ static int read_domain_devices(struct acpi_power_meter_resource *resource)
 		/* Create a symlink to domain objects */
 		resource->domain_devices[i] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = acpi_bus_get_device(element->reference.handle,
 					     &resource->domain_devices[i]);
 		if (ACPI_FAILURE(status))
+=======
+		if (acpi_bus_get_device(element->reference.handle,
+					&resource->domain_devices[i]))
+>>>>>>> v3.18
 =======
 		if (acpi_bus_get_device(element->reference.handle,
 					&resource->domain_devices[i]))
@@ -882,7 +907,12 @@ static void acpi_power_meter_notify(struct acpi_device *device, u32 event)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Unexpected event %d\n", event);
+		break;
+>>>>>>> v3.18
 =======
 		WARN(1, "Unexpected event %d\n", event);
 		break;
@@ -1023,7 +1053,11 @@ static int __init acpi_power_meter_init(void)
 	result = acpi_bus_register_driver(&acpi_power_meter_driver);
 	if (result < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return result;
+>>>>>>> v3.18
 =======
 		return result;
 >>>>>>> v3.18
@@ -1037,7 +1071,11 @@ static void __exit acpi_power_meter_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
+=======
+MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
 >>>>>>> v3.18

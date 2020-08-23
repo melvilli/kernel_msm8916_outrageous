@@ -296,6 +296,11 @@ extern void __iounmap(void __iomem *addr);
 	__iounmap(addr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ioremap_wc ioremap_nocache
+
+>>>>>>> v3.18
 =======
 #define ioremap_wc ioremap_nocache
 

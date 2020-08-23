@@ -151,9 +151,13 @@ static int snd_pcm_control_ioctl(struct snd_card *card,
 				goto _error;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_lock(&pcm->open_mutex);
 			err = snd_pcm_info_user(substream, info);
 			mutex_unlock(&pcm->open_mutex);
+=======
+			err = snd_pcm_info_user(substream, info);
+>>>>>>> v3.18
 =======
 			err = snd_pcm_info_user(substream, info);
 >>>>>>> v3.18
@@ -222,6 +226,12 @@ static char *snd_pcm_format_names[] = {
 	FORMAT(DSD_U8),
 	FORMAT(DSD_U16_LE),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FORMAT(DSD_U32_LE),
+	FORMAT(DSD_U16_BE),
+	FORMAT(DSD_U32_BE),
+>>>>>>> v3.18
 =======
 	FORMAT(DSD_U32_LE),
 	FORMAT(DSD_U16_BE),
@@ -308,7 +318,11 @@ static const char *snd_pcm_state_name(snd_pcm_state_t state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_PCM_OSS) || defined(CONFIG_SND_PCM_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_PCM_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_PCM_OSS)
 >>>>>>> v3.18
@@ -355,7 +369,12 @@ static void snd_pcm_proc_info_read(struct snd_pcm_substream *substream,
 	info = kmalloc(sizeof(*info), GFP_KERNEL);
 	if (! info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "snd_pcm_proc_info_read: cannot malloc\n");
+=======
+		pcm_dbg(substream->pcm,
+			"snd_pcm_proc_info_read: cannot malloc\n");
+>>>>>>> v3.18
 =======
 		pcm_dbg(substream->pcm,
 			"snd_pcm_proc_info_read: cannot malloc\n");
@@ -420,7 +439,11 @@ static void snd_pcm_substream_proc_hw_params_read(struct snd_info_entry *entry,
 	snd_iprintf(buffer, "period_size: %lu\n", runtime->period_size);	
 	snd_iprintf(buffer, "buffer_size: %lu\n", runtime->buffer_size);	
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_PCM_OSS) || defined(CONFIG_SND_PCM_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_PCM_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_PCM_OSS)
 >>>>>>> v3.18
@@ -677,7 +700,11 @@ int snd_pcm_new_stream(struct snd_pcm *pcm, int stream, int substream_count)
 	struct snd_pcm_substream *substream, *prev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_PCM_OSS) || defined(CONFIG_SND_PCM_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_PCM_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_PCM_OSS)
 >>>>>>> v3.18
@@ -690,7 +717,11 @@ int snd_pcm_new_stream(struct snd_pcm *pcm, int stream, int substream_count)
 		err = snd_pcm_stream_proc_init(pstr);
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Error in snd_pcm_stream_proc_init\n");
+=======
+			pcm_err(pcm, "Error in snd_pcm_stream_proc_init\n");
+>>>>>>> v3.18
 =======
 			pcm_err(pcm, "Error in snd_pcm_stream_proc_init\n");
 >>>>>>> v3.18
@@ -702,7 +733,11 @@ int snd_pcm_new_stream(struct snd_pcm *pcm, int stream, int substream_count)
 		substream = kzalloc(sizeof(*substream), GFP_KERNEL);
 		if (substream == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Cannot allocate PCM substream\n");
+=======
+			pcm_err(pcm, "Cannot allocate PCM substream\n");
+>>>>>>> v3.18
 =======
 			pcm_err(pcm, "Cannot allocate PCM substream\n");
 >>>>>>> v3.18
@@ -723,7 +758,12 @@ int snd_pcm_new_stream(struct snd_pcm *pcm, int stream, int substream_count)
 			err = snd_pcm_substream_proc_init(substream);
 			if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "Error in snd_pcm_stream_proc_init\n");
+=======
+				pcm_err(pcm,
+					"Error in snd_pcm_stream_proc_init\n");
+>>>>>>> v3.18
 =======
 				pcm_err(pcm,
 					"Error in snd_pcm_stream_proc_init\n");
@@ -739,7 +779,11 @@ int snd_pcm_new_stream(struct snd_pcm *pcm, int stream, int substream_count)
 		substream->group = &substream->self_group;
 		spin_lock_init(&substream->self_group.lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_init(&substream->runtime_lock);
+=======
+		mutex_init(&substream->self_group.mutex);
+>>>>>>> v3.18
 =======
 		mutex_init(&substream->self_group.mutex);
 >>>>>>> v3.18
@@ -772,7 +816,11 @@ static int _snd_pcm_new(struct snd_card *card, const char *id, int device,
 	pcm = kzalloc(sizeof(*pcm), GFP_KERNEL);
 	if (pcm == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Cannot allocate PCM\n");
+=======
+		dev_err(card->dev, "Cannot allocate PCM\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Cannot allocate PCM\n");
 >>>>>>> v3.18
@@ -859,7 +907,11 @@ static void snd_pcm_free_stream(struct snd_pcm_str * pstr)
 {
 	struct snd_pcm_substream *substream, *substream_next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_PCM_OSS) || defined(CONFIG_SND_PCM_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_PCM_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_PCM_OSS)
 >>>>>>> v3.18
@@ -875,7 +927,11 @@ static void snd_pcm_free_stream(struct snd_pcm_str * pstr)
 	}
 	snd_pcm_stream_proc_done(pstr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_PCM_OSS) || defined(CONFIG_SND_PCM_OSS_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_PCM_OSS)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_PCM_OSS)
 >>>>>>> v3.18
@@ -1035,11 +1091,17 @@ void snd_pcm_detach_substream(struct snd_pcm_substream *substream)
 {
 	struct snd_pcm_runtime *runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags = 0;
 
 	if (PCM_RUNTIME_CHECK(substream))
 		return;
 	spin_lock_irqsave(&substream->runtime_lock, flags);
+=======
+
+	if (PCM_RUNTIME_CHECK(substream))
+		return;
+>>>>>>> v3.18
 =======
 
 	if (PCM_RUNTIME_CHECK(substream))
@@ -1062,7 +1124,10 @@ void snd_pcm_detach_substream(struct snd_pcm_substream *substream)
 	substream->pid = NULL;
 	substream->pstr->substream_opened--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&substream->runtime_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1088,9 +1153,12 @@ static ssize_t show_pcm_class(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute pcm_attrs =
 	__ATTR(pcm_class, S_IRUGO, show_pcm_class, NULL);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(pcm_class, S_IRUGO, show_pcm_class, NULL);
 static struct attribute *pcm_dev_attrs[] = {
 	&dev_attr_pcm_class.attr,
@@ -1105,6 +1173,9 @@ static const struct attribute_group *pcm_dev_attr_groups[] = {
 	&pcm_dev_attr_group,
 	NULL
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int snd_pcm_dev_register(struct snd_device *device)
@@ -1156,9 +1227,12 @@ static int snd_pcm_dev_register(struct snd_device *device)
 			return err;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_add_device_sysfs_file(devtype, pcm->card, pcm->device,
 					  &pcm_attrs);
 =======
+=======
+>>>>>>> v3.18
 
 		dev = snd_get_device(devtype, pcm->card, pcm->device);
 		if (dev) {
@@ -1171,6 +1245,9 @@ static int snd_pcm_dev_register(struct snd_device *device)
 			put_device(dev);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (substream = pcm->streams[cidx].substream; substream; substream = substream->next)
 			snd_pcm_timer_init(substream);
@@ -1226,6 +1303,7 @@ static int snd_pcm_dev_disconnect(struct snd_device *device)
 			pcm->streams[cidx].chmap_kctl = NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pcm->streams[cidx].vol_kctl) {
 			snd_ctl_remove(pcm->card, pcm->streams[cidx].vol_kctl);
 			pcm->streams[cidx].vol_kctl = NULL;
@@ -1234,6 +1312,8 @@ static int snd_pcm_dev_disconnect(struct snd_device *device)
 			snd_ctl_remove(pcm->card, pcm->streams[cidx].usr_kctl);
 			pcm->streams[cidx].usr_kctl = NULL;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

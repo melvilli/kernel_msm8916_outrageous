@@ -131,6 +131,7 @@ static inline unsigned int AOUT_FROM_REG(u8 reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adm9240_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id);
 static int adm9240_detect(struct i2c_client *client,
@@ -168,6 +169,11 @@ struct adm9240_data {
 struct adm9240_data {
 	struct i2c_client *client;
 >>>>>>> v3.18
+=======
+/* per client data */
+struct adm9240_data {
+	struct i2c_client *client;
+>>>>>>> v3.18
 	struct mutex update_lock;
 	char valid;
 	unsigned long last_updated_measure;
@@ -188,7 +194,10 @@ struct adm9240_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* write new fan div, callers must hold data->update_lock */
 static void adm9240_write_fan_div(struct i2c_client *client, int nr,
 		u8 fan_div)
@@ -293,6 +302,9 @@ static struct adm9240_data *adm9240_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*** sysfs accessors ***/
 
@@ -317,8 +329,13 @@ static ssize_t set_max(struct device *dev, struct device_attribute *devattr,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm9240_data *data = i2c_get_clientdata(client);
+=======
+	struct adm9240_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm9240_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -378,8 +395,13 @@ static ssize_t set_in_min(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm9240_data *data = i2c_get_clientdata(client);
+=======
+	struct adm9240_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm9240_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -405,8 +427,13 @@ static ssize_t set_in_max(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm9240_data *data = i2c_get_clientdata(client);
+=======
+	struct adm9240_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm9240_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -469,6 +496,7 @@ static ssize_t show_fan_div(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* write new fan div, callers must hold data->update_lock */
 static void adm9240_write_fan_div(struct i2c_client *client, int nr,
 		u8 fan_div)
@@ -485,6 +513,8 @@ static void adm9240_write_fan_div(struct i2c_client *client, int nr,
 		nr + 1, 1 << old, 1 << fan_div);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -504,8 +534,13 @@ static ssize_t set_fan_min(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm9240_data *data = i2c_get_clientdata(client);
+=======
+	struct adm9240_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm9240_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -622,8 +657,13 @@ static ssize_t set_aout(struct device *dev,
 		const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm9240_data *data = i2c_get_clientdata(client);
+=======
+	struct adm9240_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm9240_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -648,8 +688,13 @@ static ssize_t chassis_clear(struct device *dev,
 		const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm9240_data *data = i2c_get_clientdata(client);
+=======
+	struct adm9240_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm9240_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -671,7 +716,11 @@ static SENSOR_DEVICE_ATTR(intrusion0_alarm, S_IRUGO | S_IWUSR, show_alarm,
 		chassis_clear, 12);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *adm9240_attributes[] = {
+=======
+static struct attribute *adm9240_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *adm9240_attrs[] = {
 >>>>>>> v3.18
@@ -719,9 +768,13 @@ static struct attribute *adm9240_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group adm9240_group = {
 	.attrs = adm9240_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(adm9240);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(adm9240);
 >>>>>>> v3.18
@@ -775,6 +828,7 @@ static int adm9240_detect(struct i2c_client *new_client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adm9240_probe(struct i2c_client *new_client,
 			 const struct i2c_device_id *id)
 {
@@ -820,6 +874,8 @@ static int adm9240_remove(struct i2c_client *client)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void adm9240_init_client(struct i2c_client *client)
 {
 	struct adm9240_data *data = i2c_get_clientdata(client);
@@ -862,6 +918,7 @@ static void adm9240_init_client(struct i2c_client *client)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct adm9240_data *adm9240_update_device(struct device *dev)
 {
@@ -951,6 +1008,8 @@ static struct adm9240_data *adm9240_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 static int adm9240_probe(struct i2c_client *new_client,
 			 const struct i2c_device_id *id)
 {
@@ -993,6 +1052,9 @@ static struct i2c_driver adm9240_driver = {
 	.detect		= adm9240_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(adm9240_driver);

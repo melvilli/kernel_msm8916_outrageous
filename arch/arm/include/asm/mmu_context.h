@@ -19,6 +19,10 @@
 #include <asm/cachetype.h>
 #include <asm/proc-fns.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/smp_plat.h>
+>>>>>>> v3.18
 =======
 #include <asm/smp_plat.h>
 >>>>>>> v3.18
@@ -123,6 +127,7 @@ switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	unsigned int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 	/* check for possible thread migration */
 	if (!cpumask_empty(mm_cpumask(next)) &&
@@ -130,6 +135,8 @@ switch_mm(struct mm_struct *prev, struct mm_struct *next,
 		__flush_icache_all();
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * __sync_icache_dcache doesn't broadcast the I-cache invalidation,
 	 * so check for possible thread migration and invalidate the I-cache
@@ -140,6 +147,9 @@ switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	    !cpumask_test_cpu(cpu, mm_cpumask(next)))
 		__flush_icache_all();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!cpumask_test_and_set_cpu(cpu, mm_cpumask(next)) || prev != next) {
 		check_and_switch_context(next, tsk);

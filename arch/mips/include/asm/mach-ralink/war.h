@@ -18,7 +18,10 @@
 #define MIPS_CACHE_SYNC_WAR		0
 #define TX49XX_ICACHE_INDEX_INV_WAR	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RM9000_CDEX_SMP_WAR		0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ICACHE_REFILLS_WORKAROUND_WAR	0

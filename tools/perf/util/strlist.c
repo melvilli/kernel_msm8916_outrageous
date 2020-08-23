@@ -6,6 +6,10 @@
 
 #include "strlist.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util.h"
+>>>>>>> v3.18
 =======
 #include "util.h"
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ static void str_node__delete(struct str_node *snode, bool dupstr)
 {
 	if (dupstr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free((void *)snode->s);
+=======
+		zfree((char **)&snode->s);
+>>>>>>> v3.18
 =======
 		zfree((char **)&snode->s);
 >>>>>>> v3.18

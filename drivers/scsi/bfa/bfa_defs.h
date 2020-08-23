@@ -46,6 +46,10 @@ enum {
 	BFA_MFG_TYPE_PROWLER_D = 1860,   /*  Prowler Dual cards		*/
 	BFA_MFG_TYPE_CHINOOK   = 1867,   /*  Chinook cards		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_MFG_TYPE_CHINOOK2   = 1869,	 /*!< Chinook2 cards		*/
+>>>>>>> v3.18
 =======
 	BFA_MFG_TYPE_CHINOOK2   = 1869,	 /*!< Chinook2 cards		*/
 >>>>>>> v3.18
@@ -64,7 +68,12 @@ enum {
 	(type) == BFA_MFG_TYPE_LIGHTNING_P0 || \
 	(type) == BFA_MFG_TYPE_LIGHTNING || \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(type) == BFA_MFG_TYPE_CHINOOK))
+=======
+	(type) == BFA_MFG_TYPE_CHINOOK || \
+	(type) == BFA_MFG_TYPE_CHINOOK2))
+>>>>>>> v3.18
 =======
 	(type) == BFA_MFG_TYPE_CHINOOK || \
 	(type) == BFA_MFG_TYPE_CHINOOK2))
@@ -140,6 +149,10 @@ enum bfa_status {
 					 *  contact support */
 	BFA_STATUS_EPROTOCOL	= 6,	/*  Protocol error */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_STATUS_BADFLASH	= 9,	/*  Flash is bad */
+>>>>>>> v3.18
 =======
 	BFA_STATUS_BADFLASH	= 9,	/*  Flash is bad */
 >>>>>>> v3.18
@@ -199,6 +212,11 @@ enum bfa_status {
 	BFA_STATUS_FAA_ACQUIRED = 199,	/* FAA is already acquired */
 	BFA_STATUS_FAA_ACQ_ADDR = 200,	/* Acquiring addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_STATUS_BBCR_FC_ONLY = 201, /*!< BBCredit Recovery is supported for *
+					* FC mode only */
+>>>>>>> v3.18
 =======
 	BFA_STATUS_BBCR_FC_ONLY = 201, /*!< BBCredit Recovery is supported for *
 					* FC mode only */
@@ -216,8 +234,11 @@ enum bfa_status {
 	BFA_STATUS_CMD_NOTSUPP_MEZZ = 239, /* Cmd not supported for MEZZ card */
 	BFA_STATUS_FRU_NOT_PRESENT = 240, /* fru module not present */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BFA_STATUS_DPORT_ERR = 245,	/* D-port mode is enabled */
 =======
+=======
+>>>>>>> v3.18
 	BFA_STATUS_DPORT_NO_SFP = 243, /* SFP is not present.\n D-port will be
 					* enabled but it will be operational
 					* only after inserting a valid SFP. */
@@ -246,6 +267,9 @@ enum bfa_status {
 	BFA_STATUS_DPORT_INV_SFP = 271, /* Invalid SFP for D-PORT mode. */
 	BFA_STATUS_DPORT_CMD_NOTSUPP    = 273, /* Dport is not supported by
 					* remote port */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BFA_STATUS_MAX_VAL		/* Unknown error code */
 };
@@ -284,6 +308,10 @@ enum {
 	BFA_ADAPTER_SYM_NAME_LEN    = 64,  /*  adapter symbolic name length */
 	BFA_ADAPTER_OS_TYPE_LEN	    = 64,  /*  adapter os type length */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_ADAPTER_UUID_LEN	    = 16,  /* adapter uuid length */
+>>>>>>> v3.18
 =======
 	BFA_ADAPTER_UUID_LEN	    = 16,  /* adapter uuid length */
 >>>>>>> v3.18
@@ -321,6 +349,10 @@ struct bfa_adapter_attr_s {
 	u16		mfg_year;	/* manufacturing year */
 	u16		rsvd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8		uuid[BFA_ADAPTER_UUID_LEN];
+>>>>>>> v3.18
 =======
 	u8		uuid[BFA_ADAPTER_UUID_LEN];
 >>>>>>> v3.18
@@ -438,7 +470,12 @@ struct bfa_ioc_attr_s {
 	u8				cap_bm;		/*  capability	*/
 	u8				port_mode_cfg;	/*  bfa_mode_s	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8				rsvd[4];	/*  64bit align	*/
+=======
+	u8				def_fn;		/* 1 if default fn */
+	u8				rsvd[3];	/*  64bit align	*/
+>>>>>>> v3.18
 =======
 	u8				def_fn;		/* 1 if default fn */
 	u8				rsvd[3];	/*  64bit align	*/
@@ -580,6 +617,7 @@ struct bfa_ioc_aen_data_s {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	D-port states
  *
 */
@@ -591,6 +629,8 @@ enum bfa_dport_state {
 };
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ---------------------- mfg definitions ------------
@@ -680,6 +720,10 @@ enum {
 	BFA_PCI_DEVICE_ID_CT_FC		= 0x21,
 	BFA_PCI_DEVICE_ID_CT2		= 0x22,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_PCI_DEVICE_ID_CT2_QUAD	= 0x23,
+>>>>>>> v3.18
 =======
 	BFA_PCI_DEVICE_ID_CT2_QUAD	= 0x23,
 >>>>>>> v3.18
@@ -692,7 +736,13 @@ enum {
 	((__d) == BFA_PCI_DEVICE_ID_CT ||	\
 	 (__d) == BFA_PCI_DEVICE_ID_CT_FC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define bfa_asic_id_ct2(__d)	((__d) == BFA_PCI_DEVICE_ID_CT2)
+=======
+#define bfa_asic_id_ct2(__d)			\
+	((__d) == BFA_PCI_DEVICE_ID_CT2 ||	\
+	(__d) == BFA_PCI_DEVICE_ID_CT2_QUAD)
+>>>>>>> v3.18
 =======
 #define bfa_asic_id_ct2(__d)			\
 	((__d) == BFA_PCI_DEVICE_ID_CT2 ||	\
@@ -1202,6 +1252,10 @@ struct bfa_flash_attr_s {
 #define QTEST_CNT_DEFAULT	10
 #define QTEST_PAT_DEFAULT	LB_PATTERN_DEFAULT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DPORT_ENABLE_LOOPCNT_DEFAULT (1024 * 1024)
+>>>>>>> v3.18
 =======
 #define DPORT_ENABLE_LOOPCNT_DEFAULT (1024 * 1024)
 >>>>>>> v3.18
@@ -1234,7 +1288,10 @@ struct bfa_diag_loopback_result_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum bfa_diag_dport_test_status {
 	DPORT_TEST_ST_IDLE	= 0,    /* the test has not started yet. */
 	DPORT_TEST_ST_FINAL	= 1,    /* the test done successfully */
@@ -1283,6 +1340,9 @@ struct bfa_diag_dport_result_s {
 	struct bfa_diag_dport_subtest_result_s subtest[DPORT_TEST_MAX];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bfa_diag_ledtest_s {
 	u32	cmd;    /* bfa_led_op_t */

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,8 +50,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_DEFINE_EXCEPTION_TABLE
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+#define ACPI_DEFINE_EXCEPTION_TABLE
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -157,6 +167,10 @@ const struct acpi_exception_info *acpi_ut_validate_exception(acpi_status status)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -31,6 +31,10 @@
 #include <drm/ttm/ttm_bo_driver.h>
 #include <drm/ttm/ttm_placement.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_vma_manager.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_vma_manager.h>
 >>>>>>> v3.18
@@ -41,6 +45,10 @@
 #include <linux/vmalloc.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reservation.h>
+>>>>>>> v3.18
 =======
 #include <linux/reservation.h>
 >>>>>>> v3.18
@@ -195,7 +203,11 @@ void ttm_mem_io_free_vm(struct ttm_buffer_object *bo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ttm_mem_reg_ioremap(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem,
+=======
+static int ttm_mem_reg_ioremap(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem,
+>>>>>>> v3.18
 =======
 static int ttm_mem_reg_ioremap(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem,
 >>>>>>> v3.18
@@ -231,7 +243,11 @@ static int ttm_mem_reg_ioremap(struct ttm_bo_device *bdev, struct ttm_mem_reg *m
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ttm_mem_reg_iounmap(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem,
+=======
+static void ttm_mem_reg_iounmap(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem,
+>>>>>>> v3.18
 =======
 static void ttm_mem_reg_iounmap(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem,
 >>>>>>> v3.18
@@ -366,11 +382,14 @@ int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Move nonexistent data. NOP.
 	 */
 	if (old_iomap == NULL && ttm == NULL)
 		goto out2;
 =======
+=======
+>>>>>>> v3.18
 	 * Don't move nonexistent data. Clear destination instead.
 	 */
 	if (old_iomap == NULL &&
@@ -379,6 +398,9 @@ int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
 		memset_io(new_iomap, 0, new_mem->num_pages*PAGE_SIZE);
 		goto out2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -467,8 +489,12 @@ static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
 {
 	struct ttm_buffer_object *fbo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ttm_bo_device *bdev = bo->bdev;
 	struct ttm_bo_driver *driver = bdev->driver;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -485,13 +511,17 @@ static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&fbo->event_queue);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&fbo->ddestroy);
 	INIT_LIST_HEAD(&fbo->lru);
 	INIT_LIST_HEAD(&fbo->swap);
 	INIT_LIST_HEAD(&fbo->io_reserve_lru);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fbo->vm_node = NULL;
 	atomic_set(&fbo->cpu_writers, 0);
@@ -507,16 +537,27 @@ static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
 	atomic_set(&fbo->cpu_writers, 0);
 
 >>>>>>> v3.18
+=======
+	drm_vma_node_reset(&fbo->vma_node);
+	atomic_set(&fbo->cpu_writers, 0);
+
+>>>>>>> v3.18
 	kref_init(&fbo->list_kref);
 	kref_init(&fbo->kref);
 	fbo->destroy = &ttm_transfered_destroy;
 	fbo->acc_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	fbo->resv = &fbo->ttm_resv;
 	reservation_object_init(fbo->resv);
 	ret = ww_mutex_trylock(&fbo->resv->lock);
 	WARN_ON(!ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*new_obj = fbo;
@@ -526,17 +567,24 @@ static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
 pgprot_t ttm_io_prot(uint32_t caching_flags, pgprot_t tmp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Cached mappings need no adjustment */
 	if (caching_flags & TTM_PL_FLAG_CACHED)
 		return tmp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(__i386__) || defined(__x86_64__)
 	if (caching_flags & TTM_PL_FLAG_WC)
 		tmp = pgprot_writecombine(tmp);
 	else if (boot_cpu_data.x86 > 3)
 		tmp = pgprot_noncached(tmp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #elif defined(__powerpc__)
@@ -551,6 +599,10 @@ pgprot_t ttm_io_prot(uint32_t caching_flags, pgprot_t tmp)
 #endif
 #if defined(__ia64__) || defined(__arm__) || defined(__powerpc__)
 >>>>>>> v3.18
+=======
+#endif
+#if defined(__ia64__) || defined(__arm__) || defined(__powerpc__)
+>>>>>>> v3.18
 	if (caching_flags & TTM_PL_FLAG_WC)
 		tmp = pgprot_writecombine(tmp);
 	else
@@ -558,8 +610,12 @@ pgprot_t ttm_io_prot(uint32_t caching_flags, pgprot_t tmp)
 #endif
 #if defined(__sparc__) || defined(__mips__)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(caching_flags & TTM_PL_FLAG_CACHED))
 		tmp = pgprot_noncached(tmp);
+=======
+	tmp = pgprot_noncached(tmp);
+>>>>>>> v3.18
 =======
 	tmp = pgprot_noncached(tmp);
 >>>>>>> v3.18
@@ -622,9 +678,13 @@ static int ttm_bo_kmap_ttm(struct ttm_buffer_object *bo,
 		 * or to make the buffer object look contiguous.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prot = (mem->placement & TTM_PL_FLAG_CACHED) ?
 			PAGE_KERNEL :
 			ttm_io_prot(mem->placement, PAGE_KERNEL);
+=======
+		prot = ttm_io_prot(mem->placement, PAGE_KERNEL);
+>>>>>>> v3.18
 =======
 		prot = ttm_io_prot(mem->placement, PAGE_KERNEL);
 >>>>>>> v3.18
@@ -653,7 +713,11 @@ int ttm_bo_kmap(struct ttm_buffer_object *bo,
 		return -EINVAL;
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num_pages > 1 && !DRM_SUSER(DRM_CURPROC))
+=======
+	if (num_pages > 1 && !capable(CAP_SYS_ADMIN))
+>>>>>>> v3.18
 =======
 	if (num_pages > 1 && !capable(CAP_SYS_ADMIN))
 >>>>>>> v3.18
@@ -707,7 +771,11 @@ EXPORT_SYMBOL(ttm_bo_kunmap);
 
 int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      void *sync_obj,
+=======
+			      struct fence *fence,
+>>>>>>> v3.18
 =======
 			      struct fence *fence,
 >>>>>>> v3.18
@@ -717,13 +785,17 @@ int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 {
 	struct ttm_bo_device *bdev = bo->bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ttm_bo_driver *driver = bdev->driver;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ttm_mem_type_manager *man = &bdev->man[new_mem->mem_type];
 	struct ttm_mem_reg *old_mem = &bo->mem;
 	int ret;
 	struct ttm_buffer_object *ghost_obj;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void *tmp_obj = NULL;
 
@@ -739,10 +811,15 @@ int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 		if (tmp_obj)
 			driver->sync_obj_unref(&tmp_obj);
 =======
+=======
+>>>>>>> v3.18
 
 	reservation_object_add_excl_fence(bo->resv, fence);
 	if (evict) {
 		ret = ttm_bo_wait(bo, false, false, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			return ret;
@@ -765,9 +842,12 @@ int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 
 		set_bit(TTM_BO_PRIV_FLAG_MOVING, &bo->priv_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&bdev->fence_lock);
 		if (tmp_obj)
 			driver->sync_obj_unref(&tmp_obj);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -776,6 +856,11 @@ int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 			return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		reservation_object_add_excl_fence(ghost_obj->resv, fence);
+
+>>>>>>> v3.18
 =======
 		reservation_object_add_excl_fence(ghost_obj->resv, fence);
 

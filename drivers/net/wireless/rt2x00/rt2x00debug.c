@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -293,7 +297,11 @@ static ssize_t rt2x00debug_read_queue_dump(struct file *file,
 		return retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = min((size_t)skb->len, length);
+=======
+	status = min_t(size_t, skb->len, length);
+>>>>>>> v3.18
 =======
 	status = min_t(size_t, skb->len, length);
 >>>>>>> v3.18
@@ -759,7 +767,11 @@ void rt2x00debug_register(struct rt2x00_dev *rt2x00dev)
 
 #ifdef CONFIG_RT2X00_LIB_CRYPTO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(CAPABILITY_HW_CRYPTO, &rt2x00dev->cap_flags))
+=======
+	if (rt2x00_has_cap_hw_crypto(rt2x00dev))
+>>>>>>> v3.18
 =======
 	if (rt2x00_has_cap_hw_crypto(rt2x00dev))
 >>>>>>> v3.18

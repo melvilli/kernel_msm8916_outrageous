@@ -1,6 +1,10 @@
 /*
  * Copyright (C) 2007 Oracle.  All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Fujitsu.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Fujitsu.  All rights reserved.
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 
 #ifndef __BTRFS_ASYNC_THREAD_
 #define __BTRFS_ASYNC_THREAD_
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct btrfs_worker_thread;
@@ -122,6 +127,8 @@ void btrfs_init_workers(struct btrfs_workers *workers, char *name, int max,
 void btrfs_requeue_work(struct btrfs_work *work);
 void btrfs_set_work_high_prio(struct btrfs_work *work);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/workqueue.h>
 
 struct btrfs_workqueue;
@@ -181,5 +188,8 @@ void btrfs_queue_work(struct btrfs_workqueue *wq,
 void btrfs_destroy_workqueue(struct btrfs_workqueue *wq);
 void btrfs_workqueue_set_max(struct btrfs_workqueue *wq, int max);
 void btrfs_set_work_high_priority(struct btrfs_work *work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

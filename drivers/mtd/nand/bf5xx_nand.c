@@ -38,7 +38,10 @@
 #include <linux/module.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -175,7 +178,11 @@ static struct bf5xx_nand_info *to_nand_info(struct platform_device *pdev)
 static struct bf5xx_nand_platform *to_nand_plat(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pdev->dev.platform_data;
+=======
+	return dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	return dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -679,8 +686,11 @@ static int bf5xx_nand_remove(struct platform_device *pdev)
 	struct bf5xx_nand_info *info = to_nand_info(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* first thing we need to do is release all our mtds
@@ -693,9 +703,12 @@ static int bf5xx_nand_remove(struct platform_device *pdev)
 	bf5xx_nand_dma_remove(info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* free the common resources */
 	kfree(info);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -759,16 +772,22 @@ static int bf5xx_nand_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
 	if (info == NULL) {
 		dev_err(&pdev->dev, "no memory for flash info\n");
 		err = -ENOMEM;
 		goto out_err_kzalloc;
 =======
+=======
+>>>>>>> v3.18
 	info = devm_kzalloc(&pdev->dev, sizeof(*info), GFP_KERNEL);
 	if (info == NULL) {
 		err = -ENOMEM;
 		goto out_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -815,7 +834,11 @@ static int bf5xx_nand_probe(struct platform_device *pdev)
 	err = bf5xx_nand_hw_init(info);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err_hw_init;
+=======
+		goto out_err;
+>>>>>>> v3.18
 =======
 		goto out_err;
 >>>>>>> v3.18
@@ -856,10 +879,14 @@ static int bf5xx_nand_probe(struct platform_device *pdev)
 out_err_nand_scan:
 	bf5xx_nand_dma_remove(info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_err_hw_init:
 	platform_set_drvdata(pdev, NULL);
 	kfree(info);
 out_err_kzalloc:
+=======
+out_err:
+>>>>>>> v3.18
 =======
 out_err:
 >>>>>>> v3.18
@@ -868,6 +895,7 @@ out_err:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* PM Support */
 #ifdef CONFIG_PM
@@ -893,13 +921,18 @@ static int bf5xx_nand_resume(struct platform_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* driver device registration */
 static struct platform_driver bf5xx_nand_driver = {
 	.probe		= bf5xx_nand_probe,
 	.remove		= bf5xx_nand_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend	= bf5xx_nand_suspend,
 	.resume		= bf5xx_nand_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

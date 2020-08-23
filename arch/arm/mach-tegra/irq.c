@@ -18,6 +18,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
@@ -25,6 +26,8 @@
 #include <linux/of.h>
 #include <linux/irqchip/arm-gic.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/cpu_pm.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -33,6 +36,9 @@
 #include <linux/kernel.h>
 #include <linux/of_address.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/syscore_ops.h>
 
@@ -77,6 +83,10 @@ static u32 cpu_iep[TEGRA_MAX_NUM_ICTLRS];
 
 static u32 ictlr_wake_mask[TEGRA_MAX_NUM_ICTLRS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void __iomem *tegra_gic_cpu_base;
+>>>>>>> v3.18
 =======
 static void __iomem *tegra_gic_cpu_base;
 >>>>>>> v3.18
@@ -112,75 +122,105 @@ static inline void tegra_irq_write_mask(unsigned int irq, unsigned long reg)
 static void tegra_mask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IER_CLR);
 =======
+=======
+>>>>>>> v3.18
 	if (d->hwirq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IER_CLR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void tegra_unmask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IER_SET);
 =======
+=======
+>>>>>>> v3.18
 	if (d->hwirq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IER_SET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void tegra_ack(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IEP_FIR_CLR);
 =======
+=======
+>>>>>>> v3.18
 	if (d->hwirq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IEP_FIR_CLR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void tegra_eoi(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IEP_FIR_CLR);
 =======
+=======
+>>>>>>> v3.18
 	if (d->hwirq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IEP_FIR_CLR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int tegra_retrigger(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return 0;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IEP_FIR_SET);
 =======
+=======
+>>>>>>> v3.18
 	if (d->hwirq < FIRST_LEGACY_IRQ)
 		return 0;
 
 	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IEP_FIR_SET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -190,7 +230,11 @@ static int tegra_retrigger(struct irq_data *d)
 static int tegra_set_wake(struct irq_data *d, unsigned int enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 irq = d->irq;
+=======
+	u32 irq = d->hwirq;
+>>>>>>> v3.18
 =======
 	u32 irq = d->hwirq;
 >>>>>>> v3.18
@@ -268,9 +312,12 @@ int tegra_legacy_irq_syscore_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define tegra_set_wake NULL
 =======
+=======
+>>>>>>> v3.18
 
 static int tegra_gic_notifier(struct notifier_block *self,
 			      unsigned long cmd, void *v)
@@ -308,6 +355,9 @@ static void tegra114_gic_cpu_pm_registration(void)
 #else
 #define tegra_set_wake NULL
 static void tegra114_gic_cpu_pm_registration(void) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -347,6 +397,11 @@ void __init tegra_init_irq(void)
 		gic_init(0, 29, distbase,
 			IO_ADDRESS(TEGRA_ARM_PERIF_BASE + 0x100));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	tegra114_gic_cpu_pm_registration();
+>>>>>>> v3.18
 =======
 
 	tegra114_gic_cpu_pm_registration();

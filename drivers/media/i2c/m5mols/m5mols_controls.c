@@ -545,7 +545,11 @@ int m5mols_init_controls(struct v4l2_subdev *sd)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Determine the firmware dependant control range and step values */
+=======
+	/* Determine the firmware dependent control range and step values */
+>>>>>>> v3.18
 =======
 	/* Determine the firmware dependent control range and step values */
 >>>>>>> v3.18

@@ -148,6 +148,12 @@ int __request_module(bool wait, const char *fmt, ...)
 	WARN_ON_ONCE(wait && current_is_async());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!modprobe_path[0])
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (!modprobe_path[0])
 		return 0;
@@ -200,7 +206,10 @@ EXPORT_SYMBOL(__request_module);
 #endif /* CONFIG_MODULES */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void call_usermodehelper_freeinfo(struct subprocess_info *info)
 {
 	if (info->cleanup)
@@ -222,6 +231,9 @@ static void umh_complete(struct subprocess_info *sub_info)
 		call_usermodehelper_freeinfo(sub_info);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is the task which runs the usermode application
@@ -230,6 +242,10 @@ static int ____call_usermodehelper(void *data)
 {
 	struct subprocess_info *sub_info = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int wait = sub_info->wait & ~UMH_KILLABLE;
+>>>>>>> v3.18
 =======
 	int wait = sub_info->wait & ~UMH_KILLABLE;
 >>>>>>> v3.18
@@ -253,7 +269,11 @@ static int ____call_usermodehelper(void *data)
 	new = prepare_kernel_cred(current);
 	if (!new)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -269,7 +289,11 @@ static int ____call_usermodehelper(void *data)
 		if (retval) {
 			abort_creds(new);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -278,6 +302,7 @@ static int ____call_usermodehelper(void *data)
 
 	commit_creds(new);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval = do_execve(sub_info->path,
 			   (const char __user *const __user *)sub_info->argv,
@@ -289,6 +314,8 @@ static int ____call_usermodehelper(void *data)
 fail:
 	sub_info->retval = retval;
 =======
+=======
+>>>>>>> v3.18
 	retval = do_execve(getname_kernel(sub_info->path),
 			   (const char __user *const __user *)sub_info->argv,
 			   (const char __user *const __user *)sub_info->envp);
@@ -299,6 +326,9 @@ out:
 		umh_complete(sub_info);
 	if (!retval)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	do_exit(0);
 }
@@ -310,6 +340,7 @@ static int call_helper(void *data)
 	return ____call_usermodehelper(data);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void call_usermodehelper_freeinfo(struct subprocess_info *info)
 {
@@ -333,6 +364,8 @@ static void umh_complete(struct subprocess_info *sub_info)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Keventd can't block, but this (a child) can. */
 static int wait_for_helper(void *data)
 {
@@ -341,10 +374,14 @@ static int wait_for_helper(void *data)
 
 	/* If SIGCLD is ignored sys_wait4 won't populate the status. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&current->sighand->siglock);
 	current->sighand->action[SIGCHLD-1].sa.sa_handler = SIG_DFL;
 	spin_unlock_irq(&current->sighand->siglock);
 
+=======
+	kernel_sigaction(SIGCHLD, SIG_DFL);
+>>>>>>> v3.18
 =======
 	kernel_sigaction(SIGCHLD, SIG_DFL);
 >>>>>>> v3.18
@@ -399,6 +436,7 @@ static void __call_usermodehelper(struct work_struct *work)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (wait) {
 	case UMH_NO_WAIT:
 		call_usermodehelper_freeinfo(sub_info);
@@ -411,6 +449,10 @@ static void __call_usermodehelper(struct work_struct *work)
 	case UMH_WAIT_EXEC:
 		if (pid < 0)
 			sub_info->retval = pid;
+=======
+	if (pid < 0) {
+		sub_info->retval = pid;
+>>>>>>> v3.18
 =======
 	if (pid < 0) {
 		sub_info->retval = pid;
@@ -636,6 +678,7 @@ int call_usermodehelper_exec(struct subprocess_info *sub_info, int wait)
 	int retval = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	helper_lock();
 	if (!sub_info->path) {
 		retval = -EINVAL;
@@ -646,11 +689,16 @@ int call_usermodehelper_exec(struct subprocess_info *sub_info, int wait)
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 	if (!sub_info->path) {
 		call_usermodehelper_freeinfo(sub_info);
 		return -EINVAL;
 	}
 	helper_lock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!khelper_wq || usermodehelper_disabled) {
 		retval = -EBUSY;
@@ -668,14 +716,20 @@ int call_usermodehelper_exec(struct subprocess_info *sub_info, int wait)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sub_info->complete = &done;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set the completion pointer only if there is a waiter.
 	 * This makes it possible to use umh_complete to free
 	 * the data structure in case of UMH_NO_WAIT.
 	 */
 	sub_info->complete = (wait == UMH_NO_WAIT) ? NULL : &done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sub_info->wait = wait;
 

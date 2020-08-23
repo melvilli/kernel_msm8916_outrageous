@@ -12,25 +12,34 @@
 #include <scsi/scsi_cmnd.h>
 #include <linux/idr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define PART_BITS 4
 
 static bool use_bio;
 module_param(use_bio, bool, S_IRUGO);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/blk-mq.h>
 #include <linux/numa.h>
 
 #define PART_BITS 4
 #define VQ_NAME_LEN 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int major;
 static DEFINE_IDA(vd_index_ida);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct workqueue_struct *virtblk_wq;
 =======
+=======
+>>>>>>> v3.18
 static struct workqueue_struct *virtblk_wq;
 
 struct virtio_blk_vq {
@@ -38,14 +47,20 @@ struct virtio_blk_vq {
 	spinlock_t lock;
 	char name[VQ_NAME_LEN];
 } ____cacheline_aligned_in_smp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct virtio_blk
 {
 	struct virtio_device *vdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct virtqueue *vq;
 	wait_queue_head_t queue_wait;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,7 +68,12 @@ struct virtio_blk
 	struct gendisk *disk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mempool_t *pool;
+=======
+	/* Block layer tags. */
+	struct blk_mq_tag_set tag_set;
+>>>>>>> v3.18
 =======
 	/* Block layer tags. */
 	struct blk_mq_tag_set tag_set;
@@ -63,12 +83,15 @@ struct virtio_blk
 	struct work_struct config_work;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Lock for config space updates */
 	struct mutex config_lock;
 
 	/* enable config space updates */
 	bool config_enable;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* What host tells us, plus 2 for header & tailer. */
@@ -78,8 +101,14 @@ struct virtio_blk
 	int index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Scatterlist: can be too big for stack. */
 	struct scatterlist sg[/*sg_elems*/];
+=======
+	/* num of vqs */
+	int num_vqs;
+	struct virtio_blk_vq *vqs;
+>>>>>>> v3.18
 =======
 	/* num of vqs */
 	int num_vqs;
@@ -91,6 +120,7 @@ struct virtblk_req
 {
 	struct request *req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio *bio;
 	struct virtio_blk_outhdr out_hdr;
 	struct virtio_scsi_inhdr in_hdr;
@@ -101,10 +131,15 @@ struct virtblk_req
 	struct virtio_blk_outhdr out_hdr;
 	struct virtio_scsi_inhdr in_hdr;
 >>>>>>> v3.18
+=======
+	struct virtio_blk_outhdr out_hdr;
+	struct virtio_scsi_inhdr in_hdr;
+>>>>>>> v3.18
 	u8 status;
 	struct scatterlist sg[];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum {
 	VBLK_IS_FLUSH		= 1,
@@ -113,6 +148,8 @@ enum {
 	VBLK_REQ_FUA		= 8,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int virtblk_result(struct virtblk_req *vbr)
@@ -127,6 +164,7 @@ static inline int virtblk_result(struct virtblk_req *vbr)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct virtblk_req *virtblk_alloc_req(struct virtio_blk *vblk,
 						    gfp_t gfp_mask)
@@ -144,6 +182,8 @@ static inline struct virtblk_req *virtblk_alloc_req(struct virtio_blk *vblk,
 	return vbr;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __virtblk_add_req(struct virtqueue *vq,
@@ -189,6 +229,7 @@ static int __virtblk_add_req(struct virtqueue *vq,
 	return virtqueue_add_sgs(vq, sgs, num_out, num_in, vbr, GFP_ATOMIC);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void virtblk_add_req(struct virtblk_req *vbr, bool have_data)
 {
@@ -273,6 +314,11 @@ static inline void virtblk_request_done(struct request *req)
 {
 	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
 >>>>>>> v3.18
+=======
+static inline void virtblk_request_done(struct request *req)
+{
+	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
+>>>>>>> v3.18
 	int error = virtblk_result(vbr);
 
 	if (req->cmd_type == REQ_TYPE_BLOCK_PC) {
@@ -283,6 +329,7 @@ static inline void virtblk_request_done(struct request *req)
 		req->errors = (error != 0);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__blk_end_request_all(req, error);
 	mempool_free(vbr, vblk->pool);
@@ -326,13 +373,21 @@ static inline void virtblk_bio_done(struct virtblk_req *vbr)
 =======
 	blk_mq_end_request(req, error);
 >>>>>>> v3.18
+=======
+	blk_mq_end_request(req, error);
+>>>>>>> v3.18
 }
 
 static void virtblk_done(struct virtqueue *vq)
 {
 	struct virtio_blk *vblk = vq->vdev->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool bio_done = false, req_done = false;
+=======
+	bool req_done = false;
+	int qid = vq->index;
+>>>>>>> v3.18
 =======
 	bool req_done = false;
 	int qid = vq->index;
@@ -341,6 +396,7 @@ static void virtblk_done(struct virtqueue *vq)
 	unsigned long flags;
 	unsigned int len;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(vblk->disk->queue->queue_lock, flags);
 	do {
@@ -378,6 +434,8 @@ static bool do_req(struct request_queue *q, struct virtio_blk *vblk,
 	vbr->req = req;
 	vbr->bio = NULL;
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&vblk->vqs[qid].lock, flags);
 	do {
 		virtqueue_disable_cb(vq);
@@ -409,6 +467,9 @@ static int virtio_queue_rq(struct blk_mq_hw_ctx *hctx, struct request *req,
 	BUG_ON(req->nr_phys_segments + 2 > vblk->sg_elems);
 
 	vbr->req = req;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (req->cmd_flags & REQ_FLUSH) {
 		vbr->out_hdr.type = VIRTIO_BLK_T_FLUSH;
@@ -438,7 +499,13 @@ static int virtio_queue_rq(struct blk_mq_hw_ctx *hctx, struct request *req,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num = blk_rq_map_sg(q, vbr->req, vblk->sg);
+=======
+	blk_mq_start_request(req);
+
+	num = blk_rq_map_sg(hctx->queue, vbr->req, vbr->sg);
+>>>>>>> v3.18
 =======
 	blk_mq_start_request(req);
 
@@ -451,6 +518,7 @@ static int virtio_queue_rq(struct blk_mq_hw_ctx *hctx, struct request *req,
 			vbr->out_hdr.type |= VIRTIO_BLK_T_IN;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (__virtblk_add_req(vblk->vq, vbr, vblk->sg, num) < 0) {
 		mempool_free(vbr, vblk->pool);
@@ -510,6 +578,8 @@ static void virtblk_make_request(struct request_queue *q, struct bio *bio)
 	else
 		virtblk_bio_send_data(vbr);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&vblk->vqs[qid].lock, flags);
 	err = __virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
 	if (err) {
@@ -530,6 +600,9 @@ static void virtblk_make_request(struct request_queue *q, struct bio *bio)
 	if (notify)
 		virtqueue_notify(vblk->vqs[qid].vq);
 	return BLK_MQ_RQ_QUEUE_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -581,6 +654,7 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
 {
 	struct virtio_blk *vblk = bd->bd_disk->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct virtio_blk_geometry vgeo;
 	int err;
 
@@ -594,6 +668,8 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
 		geo->sectors = vgeo.sectors;
 		geo->cylinders = vgeo.cylinders;
 =======
+=======
+>>>>>>> v3.18
 
 	/* see if the host passed in geometry config */
 	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
@@ -603,6 +679,9 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
 			     geometry.heads, &geo->heads);
 		virtio_cread(vblk->vdev, struct virtio_blk_config,
 			     geometry.sectors, &geo->sectors);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* some standard values, similar to sd */
@@ -661,6 +740,7 @@ static void virtblk_config_changed_work(struct work_struct *work)
 	u64 capacity, size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&vblk->config_lock);
 	if (!vblk->config_enable)
 		goto done;
@@ -668,6 +748,10 @@ static void virtblk_config_changed_work(struct work_struct *work)
 	/* Host must always specify the capacity. */
 	vdev->config->get(vdev, offsetof(struct virtio_blk_config, capacity),
 			  &capacity, sizeof(capacity));
+=======
+	/* Host must always specify the capacity. */
+	virtio_cread(vdev, struct virtio_blk_config, capacity, &capacity);
+>>>>>>> v3.18
 =======
 	/* Host must always specify the capacity. */
 	virtio_cread(vdev, struct virtio_blk_config, capacity, &capacity);
@@ -694,8 +778,11 @@ static void virtblk_config_changed_work(struct work_struct *work)
 	revalidate_disk(vblk->disk);
 	kobject_uevent_env(&disk_to_dev(vblk->disk)->kobj, KOBJ_CHANGE, envp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 done:
 	mutex_unlock(&vblk->config_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -711,6 +798,7 @@ static int init_vq(struct virtio_blk *vblk)
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* We expect one virtqueue, for output. */
 	vblk->vq = virtio_find_single_vq(vblk->vdev, virtblk_done, "requests");
@@ -718,6 +806,8 @@ static int init_vq(struct virtio_blk *vblk)
 		err = PTR_ERR(vblk->vq);
 
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	vq_callback_t **callbacks;
 	const char **names;
@@ -776,6 +866,9 @@ static int init_vq(struct virtio_blk *vblk)
 	if (err)
 		kfree(vblk->vqs);
  out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -814,9 +907,15 @@ static int virtblk_get_cache_mode(struct virtio_device *vdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = virtio_config_val(vdev, VIRTIO_BLK_F_CONFIG_WCE,
 				offsetof(struct virtio_blk_config, wce),
 				&writeback);
+=======
+	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_CONFIG_WCE,
+				   struct virtio_blk_config, wce,
+				   &writeback);
+>>>>>>> v3.18
 =======
 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_CONFIG_WCE,
 				   struct virtio_blk_config, wce,
@@ -854,7 +953,10 @@ virtblk_cache_type_store(struct device *dev, struct device_attribute *attr,
 	struct virtio_device *vdev = vblk->vdev;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 writeback;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -867,11 +969,15 @@ virtblk_cache_type_store(struct device *dev, struct device_attribute *attr,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeback = i;
 	vdev->config->set(vdev,
 			  offsetof(struct virtio_blk_config, wce),
 			  &writeback, sizeof(writeback));
 
+=======
+	virtio_cwrite8(vdev, offsetof(struct virtio_blk_config, wce), i);
+>>>>>>> v3.18
 =======
 	virtio_cwrite8(vdev, offsetof(struct virtio_blk_config, wce), i);
 >>>>>>> v3.18
@@ -899,7 +1005,10 @@ static const struct device_attribute dev_attr_cache_type_rw =
 	       virtblk_cache_type_show, virtblk_cache_type_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int virtblk_init_request(void *data, struct request *rq,
 		unsigned int hctx_idx, unsigned int request_idx,
 		unsigned int numa_node)
@@ -921,6 +1030,9 @@ static struct blk_mq_ops virtio_mq_ops = {
 static unsigned int virtblk_queue_depth;
 module_param_named(queue_depth, virtblk_queue_depth, uint, 0444);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int virtblk_probe(struct virtio_device *vdev)
 {
@@ -928,7 +1040,10 @@ static int virtblk_probe(struct virtio_device *vdev)
 	struct request_queue *q;
 	int err, index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pool_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -945,9 +1060,15 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 	/* We need to know how many segments before we allocate. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = virtio_config_val(vdev, VIRTIO_BLK_F_SEG_MAX,
 				offsetof(struct virtio_blk_config, seg_max),
 				&sg_elems);
+=======
+	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_SEG_MAX,
+				   struct virtio_blk_config, seg_max,
+				   &sg_elems);
+>>>>>>> v3.18
 =======
 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_SEG_MAX,
 				   struct virtio_blk_config, seg_max,
@@ -961,8 +1082,12 @@ static int virtblk_probe(struct virtio_device *vdev)
 	/* We need an extra sg elements at head and tail. */
 	sg_elems += 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vdev->priv = vblk = kmalloc(sizeof(*vblk) +
 				    sizeof(vblk->sg[0]) * sg_elems, GFP_KERNEL);
+=======
+	vdev->priv = vblk = kmalloc(sizeof(*vblk), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	vdev->priv = vblk = kmalloc(sizeof(*vblk), GFP_KERNEL);
 >>>>>>> v3.18
@@ -971,6 +1096,7 @@ static int virtblk_probe(struct virtio_device *vdev)
 		goto out_free_index;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	init_waitqueue_head(&vblk->queue_wait);
 	vblk->vdev = vdev;
@@ -981,16 +1107,22 @@ static int virtblk_probe(struct virtio_device *vdev)
 	INIT_WORK(&vblk->config_work, virtblk_config_changed_work);
 	vblk->config_enable = true;
 =======
+=======
+>>>>>>> v3.18
 	vblk->vdev = vdev;
 	vblk->sg_elems = sg_elems;
 
 	INIT_WORK(&vblk->config_work, virtblk_config_changed_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = init_vq(vblk);
 	if (err)
 		goto out_free_vblk;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pool_size = sizeof(struct virtblk_req);
 	if (use_bio)
@@ -1003,10 +1135,13 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* FIXME: How many partitions?  How long is a piece of string? */
 	vblk->disk = alloc_disk(1 << PART_BITS);
 	if (!vblk->disk) {
 		err = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_mempool;
 	}
@@ -1020,6 +1155,8 @@ static int virtblk_probe(struct virtio_device *vdev)
 	if (use_bio)
 		blk_queue_make_request(q, virtblk_make_request);
 =======
+=======
+>>>>>>> v3.18
 		goto out_free_vq;
 	}
 
@@ -1052,6 +1189,9 @@ static int virtblk_probe(struct virtio_device *vdev)
 		goto out_free_tags;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	q->queuedata = vblk;
 
@@ -1073,8 +1213,12 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 	/* Host must always specify the capacity. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vdev->config->get(vdev, offsetof(struct virtio_blk_config, capacity),
 			  &cap, sizeof(cap));
+=======
+	virtio_cread(vdev, struct virtio_blk_config, capacity, &cap);
+>>>>>>> v3.18
 =======
 	virtio_cread(vdev, struct virtio_blk_config, capacity, &cap);
 >>>>>>> v3.18
@@ -1099,9 +1243,14 @@ static int virtblk_probe(struct virtio_device *vdev)
 	/* Host can optionally specify maximum segment size and number of
 	 * segments. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = virtio_config_val(vdev, VIRTIO_BLK_F_SIZE_MAX,
 				offsetof(struct virtio_blk_config, size_max),
 				&v);
+=======
+	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_SIZE_MAX,
+				   struct virtio_blk_config, size_max, &v);
+>>>>>>> v3.18
 =======
 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_SIZE_MAX,
 				   struct virtio_blk_config, size_max, &v);
@@ -1113,9 +1262,15 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 	/* Host can optionally specify the block size of the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = virtio_config_val(vdev, VIRTIO_BLK_F_BLK_SIZE,
 				offsetof(struct virtio_blk_config, blk_size),
 				&blk_size);
+=======
+	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_BLK_SIZE,
+				   struct virtio_blk_config, blk_size,
+				   &blk_size);
+>>>>>>> v3.18
 =======
 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_BLK_SIZE,
 				   struct virtio_blk_config, blk_size,
@@ -1128,9 +1283,15 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 	/* Use topology information if available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = virtio_config_val(vdev, VIRTIO_BLK_F_TOPOLOGY,
 			offsetof(struct virtio_blk_config, physical_block_exp),
 			&physical_block_exp);
+=======
+	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_TOPOLOGY,
+				   struct virtio_blk_config, physical_block_exp,
+				   &physical_block_exp);
+>>>>>>> v3.18
 =======
 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_TOPOLOGY,
 				   struct virtio_blk_config, physical_block_exp,
@@ -1140,6 +1301,7 @@ static int virtblk_probe(struct virtio_device *vdev)
 		blk_queue_physical_block_size(q,
 				blk_size * (1 << physical_block_exp));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = virtio_config_val(vdev, VIRTIO_BLK_F_TOPOLOGY,
 			offsetof(struct virtio_blk_config, alignment_offset),
@@ -1160,6 +1322,8 @@ static int virtblk_probe(struct virtio_device *vdev)
 		blk_queue_io_opt(q, blk_size * opt_io_size);
 
 =======
+=======
+>>>>>>> v3.18
 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_TOPOLOGY,
 				   struct virtio_blk_config, alignment_offset,
 				   &alignment_offset);
@@ -1180,6 +1344,9 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 	virtio_device_ready(vdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add_disk(vblk->disk);
 	err = device_create_file(disk_to_dev(vblk->disk), &dev_attr_serial);
@@ -1200,15 +1367,21 @@ out_del_disk:
 	del_gendisk(vblk->disk);
 	blk_cleanup_queue(vblk->disk->queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_put_disk:
 	put_disk(vblk->disk);
 out_mempool:
 	mempool_destroy(vblk->pool);
 =======
+=======
+>>>>>>> v3.18
 out_free_tags:
 	blk_mq_free_tag_set(&vblk->tag_set);
 out_put_disk:
 	put_disk(vblk->disk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_free_vq:
 	vdev->config->del_vqs(vdev);
@@ -1227,6 +1400,7 @@ static void virtblk_remove(struct virtio_device *vdev)
 	int refc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Prevent config work handler from accessing the device. */
 	mutex_lock(&vblk->config_lock);
 	vblk->config_enable = false;
@@ -1235,10 +1409,15 @@ static void virtblk_remove(struct virtio_device *vdev)
 	/* Make sure no work handler is accessing the device. */
 	flush_work(&vblk->config_work);
 >>>>>>> v3.18
+=======
+	/* Make sure no work handler is accessing the device. */
+	flush_work(&vblk->config_work);
+>>>>>>> v3.18
 
 	del_gendisk(vblk->disk);
 	blk_cleanup_queue(vblk->disk->queue);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Stop all the virtqueues. */
 	vdev->config->reset(vdev);
@@ -1250,6 +1429,8 @@ static void virtblk_remove(struct virtio_device *vdev)
 	mempool_destroy(vblk->pool);
 	vdev->config->del_vqs(vdev);
 =======
+=======
+>>>>>>> v3.18
 	blk_mq_free_tag_set(&vblk->tag_set);
 
 	/* Stop all the virtqueues. */
@@ -1259,6 +1440,9 @@ static void virtblk_remove(struct virtio_device *vdev)
 	put_disk(vblk->disk);
 	vdev->config->del_vqs(vdev);
 	kfree(vblk->vqs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(vblk);
 
@@ -1268,7 +1452,11 @@ static void virtblk_remove(struct virtio_device *vdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1279,6 +1467,7 @@ static int virtblk_freeze(struct virtio_device *vdev)
 	/* Ensure we don't receive any more interrupts */
 	vdev->config->reset(vdev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Prevent config work handler from accessing the device. */
 	mutex_lock(&vblk->config_lock);
@@ -1292,10 +1481,15 @@ static int virtblk_freeze(struct virtio_device *vdev)
 	spin_unlock_irq(vblk->disk->queue->queue_lock);
 	blk_sync_queue(vblk->disk->queue);
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure no work handler is accessing the device. */
 	flush_work(&vblk->config_work);
 
 	blk_mq_stop_hw_queues(vblk->disk->queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	vdev->config->del_vqs(vdev);
@@ -1308,6 +1502,7 @@ static int virtblk_restore(struct virtio_device *vdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vblk->config_enable = true;
 	ret = init_vq(vdev->priv);
 	if (!ret) {
@@ -1317,6 +1512,8 @@ static int virtblk_restore(struct virtio_device *vdev)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	ret = init_vq(vdev->priv);
 	if (ret)
 		return ret;
@@ -1325,6 +1522,9 @@ static int virtblk_restore(struct virtio_device *vdev)
 
 	blk_mq_start_stopped_hw_queues(vblk->disk->queue, true);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -1338,7 +1538,12 @@ static unsigned int features[] = {
 	VIRTIO_BLK_F_SEG_MAX, VIRTIO_BLK_F_SIZE_MAX, VIRTIO_BLK_F_GEOMETRY,
 	VIRTIO_BLK_F_RO, VIRTIO_BLK_F_BLK_SIZE, VIRTIO_BLK_F_SCSI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VIRTIO_BLK_F_WCE, VIRTIO_BLK_F_TOPOLOGY, VIRTIO_BLK_F_CONFIG_WCE
+=======
+	VIRTIO_BLK_F_WCE, VIRTIO_BLK_F_TOPOLOGY, VIRTIO_BLK_F_CONFIG_WCE,
+	VIRTIO_BLK_F_MQ,
+>>>>>>> v3.18
 =======
 	VIRTIO_BLK_F_WCE, VIRTIO_BLK_F_TOPOLOGY, VIRTIO_BLK_F_CONFIG_WCE,
 	VIRTIO_BLK_F_MQ,
@@ -1355,7 +1560,11 @@ static struct virtio_driver virtio_blk = {
 	.remove			= virtblk_remove,
 	.config_changed		= virtblk_config_changed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

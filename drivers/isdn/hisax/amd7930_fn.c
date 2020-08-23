@@ -315,7 +315,11 @@ Amd7930_empty_Dfifo(struct IsdnCardState *cs, int flag)
 							t += sprintf(t, "Amd7930: empty_Dfifo cnt: %d |", cs->rcvidx);
 							QuickHex(t, cs->rcvbuf, cs->rcvidx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 							debugl1(cs, cs->dlog);
+=======
+							debugl1(cs, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 							debugl1(cs, "%s", cs->dlog);
 >>>>>>> v3.18
@@ -411,7 +415,11 @@ Amd7930_fill_Dfifo(struct IsdnCardState *cs)
 		t += sprintf(t, "Amd7930: fill_Dfifo cnt: %d |", count);
 		QuickHex(t, deb_ptr, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, cs->dlog);
+=======
+		debugl1(cs, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", cs->dlog);
 >>>>>>> v3.18

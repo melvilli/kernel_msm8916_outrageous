@@ -20,8 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -63,7 +67,11 @@
  */
 static const char version[] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <nico@fluxnic.net>\n";
+=======
+	"smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <nico@fluxnic.net>";
+>>>>>>> v3.18
 =======
 	"smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <nico@fluxnic.net>";
 >>>>>>> v3.18
@@ -75,7 +83,10 @@ static const char version[] =
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -94,6 +105,11 @@ static const char version[] =
 #include <linux/workqueue.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
@@ -165,6 +181,7 @@ MODULE_ALIAS("platform:smc91x");
 #define MII_DELAY		1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if SMC_DEBUG > 0
 #define DBG(n, args...)					\
 	do {						\
@@ -178,6 +195,8 @@ MODULE_ALIAS("platform:smc91x");
 #define PRINTK(args...)   printk(KERN_DEBUG args)
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define DBG(n, dev, fmt, ...)					\
 	do {							\
 		if (SMC_DEBUG >= (n))				\
@@ -191,6 +210,9 @@ MODULE_ALIAS("platform:smc91x");
 		else						\
 			netdev_dbg(dev, fmt, ##__VA_ARGS__);	\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if SMC_DEBUG > 3
@@ -206,6 +228,10 @@ static void PRINT_PKT(u_char *buf, int length)
 	for (i = 0; i < lines ; i ++) {
 		int cur;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		printk(KERN_DEBUG);
+>>>>>>> v3.18
 =======
 		printk(KERN_DEBUG);
 >>>>>>> v3.18
@@ -214,21 +240,28 @@ static void PRINT_PKT(u_char *buf, int length)
 			a = *buf++;
 			b = *buf++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("%02x%02x ", a, b);
 		}
 		printk("\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 			pr_cont("%02x%02x ", a, b);
 		}
 		pr_cont("\n");
 	}
 	printk(KERN_DEBUG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < remainder/2 ; i++) {
 		u_char a, b;
 		a = *buf++;
 		b = *buf++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("%02x%02x ", a, b);
 	}
@@ -237,12 +270,17 @@ static void PRINT_PKT(u_char *buf, int length)
 #else
 #define PRINT_PKT(x...)  do { } while(0)
 =======
+=======
+>>>>>>> v3.18
 		pr_cont("%02x%02x ", a, b);
 	}
 	pr_cont("\n");
 }
 #else
 static inline void PRINT_PKT(u_char *buf, int length) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -280,8 +318,13 @@ static inline void PRINT_PKT(u_char *buf, int length) { }
 		while (SMC_GET_MMU_CMD(lp) & MC_BUSY) {		\
 			if (time_after(jiffies, timeout)) {		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("%s: timeout %s line %d\n",	\
 					dev->name, __FILE__, __LINE__);	\
+=======
+				netdev_dbg(dev, "timeout %s line %d\n",	\
+					   __FILE__, __LINE__);		\
+>>>>>>> v3.18
 =======
 				netdev_dbg(dev, "timeout %s line %d\n",	\
 					   __FILE__, __LINE__);		\
@@ -305,7 +348,11 @@ static void smc_reset(struct net_device *dev)
 	struct sk_buff *pending_skb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -402,7 +449,11 @@ static void smc_enable(struct net_device *dev)
 	int mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -440,7 +491,11 @@ static void smc_shutdown(struct net_device *dev)
 	struct sk_buff *pending_skb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", CARDNAME, __func__);
+=======
+	DBG(2, dev, "%s: %s\n", CARDNAME, __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s: %s\n", CARDNAME, __func__);
 >>>>>>> v3.18
@@ -477,17 +532,23 @@ static inline void  smc_rcv(struct net_device *dev)
 	unsigned int packet_number, status, packet_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: %s\n", dev->name, __func__);
 
 	packet_number = SMC_GET_RXFIFO(lp);
 	if (unlikely(packet_number & RXFIFO_REMPTY)) {
 		PRINTK("%s: smc_rcv with nothing on FIFO.\n", dev->name);
 =======
+=======
+>>>>>>> v3.18
 	DBG(3, dev, "%s\n", __func__);
 
 	packet_number = SMC_GET_RXFIFO(lp);
 	if (unlikely(packet_number & RXFIFO_REMPTY)) {
 		PRINTK(dev, "smc_rcv with nothing on FIFO.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -499,9 +560,14 @@ static inline void  smc_rcv(struct net_device *dev)
 	SMC_GET_PKT_HDR(lp, status, packet_len);
 	packet_len &= 0x07ff;  /* mask off top bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: RX PNR 0x%x STATUS 0x%04x LENGTH 0x%04x (%d)\n",
 		dev->name, packet_number, status,
 		packet_len, packet_len);
+=======
+	DBG(2, dev, "RX PNR 0x%x STATUS 0x%04x LENGTH 0x%04x (%d)\n",
+	    packet_number, status, packet_len, packet_len);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "RX PNR 0x%x STATUS 0x%04x LENGTH 0x%04x (%d)\n",
 	    packet_number, status, packet_len, packet_len);
@@ -517,8 +583,13 @@ static inline void  smc_rcv(struct net_device *dev)
 		if (packet_len < 6) {
 			/* bloody hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: fubar (rxlen %u status %x\n",
 					dev->name, packet_len, status);
+=======
+			netdev_err(dev, "fubar (rxlen %u status %x\n",
+				   packet_len, status);
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "fubar (rxlen %u status %x\n",
 				   packet_len, status);
@@ -640,7 +711,11 @@ static void smc_hardware_send_pkt(unsigned long data)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(3, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -661,7 +736,11 @@ static void smc_hardware_send_pkt(unsigned long data)
 	packet_no = SMC_GET_AR(lp);
 	if (unlikely(packet_no & AR_FAILED)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: Memory allocation failed.\n", dev->name);
+=======
+		netdev_err(dev, "Memory allocation failed.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "Memory allocation failed.\n");
 >>>>>>> v3.18
@@ -678,8 +757,13 @@ static void smc_hardware_send_pkt(unsigned long data)
 	buf = skb->data;
 	len = skb->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: TX PNR 0x%x LENGTH 0x%04x (%d) BUF 0x%p\n",
 		dev->name, packet_no, len, len, buf);
+=======
+	DBG(2, dev, "TX PNR 0x%x LENGTH 0x%04x (%d) BUF 0x%p\n",
+	    packet_no, len, len, buf);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "TX PNR 0x%x LENGTH 0x%04x (%d) BUF 0x%p\n",
 	    packet_no, len, len, buf);
@@ -723,7 +807,11 @@ done:	if (!THROTTLE_TX_PKTS)
 		netif_wake_queue(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -743,7 +831,11 @@ static int smc_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(3, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -764,15 +856,21 @@ static int smc_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	numPages = ((skb->len & ~1) + (6 - 1)) >> 8;
 	if (unlikely(numPages > 7)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: Far too big packet error.\n", dev->name);
 		dev->stats.tx_errors++;
 		dev->stats.tx_dropped++;
 		dev_kfree_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 		netdev_warn(dev, "Far too big packet error.\n");
 		dev->stats.tx_errors++;
 		dev->stats.tx_dropped++;
 		dev_kfree_skb_any(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NETDEV_TX_OK;
 	}
@@ -802,7 +900,11 @@ static int smc_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		/* oh well, wait until the chip finds memory later */
 		netif_stop_queue(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(2, "%s: TX memory allocation deferred.\n", dev->name);
+=======
+		DBG(2, dev, "TX memory allocation deferred.\n");
+>>>>>>> v3.18
 =======
 		DBG(2, dev, "TX memory allocation deferred.\n");
 >>>>>>> v3.18
@@ -830,7 +932,11 @@ static void smc_tx(struct net_device *dev)
 	unsigned int saved_packet, packet_no, tx_status, pkt_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(3, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -839,7 +945,11 @@ static void smc_tx(struct net_device *dev)
 	packet_no = SMC_GET_TXFIFO(lp);
 	if (unlikely(packet_no & TXFIFO_TEMPTY)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PRINTK("%s: smc_tx with nothing on FIFO.\n", dev->name);
+=======
+		PRINTK(dev, "smc_tx with nothing on FIFO.\n");
+>>>>>>> v3.18
 =======
 		PRINTK(dev, "smc_tx with nothing on FIFO.\n");
 >>>>>>> v3.18
@@ -854,8 +964,13 @@ static void smc_tx(struct net_device *dev)
 	SMC_SET_PTR(lp, PTR_AUTOINC | PTR_READ);
 	SMC_GET_PKT_HDR(lp, tx_status, pkt_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: TX STATUS 0x%04x PNR 0x%02x\n",
 		dev->name, tx_status, packet_no);
+=======
+	DBG(2, dev, "TX STATUS 0x%04x PNR 0x%02x\n",
+	    tx_status, packet_no);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "TX STATUS 0x%04x PNR 0x%02x\n",
 	    tx_status, packet_no);
@@ -869,7 +984,11 @@ static void smc_tx(struct net_device *dev)
 
 	if (tx_status & (ES_LATCOL | ES_16COL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PRINTK("%s: %s occurred on last xmit\n", dev->name,
+=======
+		PRINTK(dev, "%s occurred on last xmit\n",
+>>>>>>> v3.18
 =======
 		PRINTK(dev, "%s occurred on last xmit\n",
 >>>>>>> v3.18
@@ -878,9 +997,13 @@ static void smc_tx(struct net_device *dev)
 		dev->stats.tx_window_errors++;
 		if (!(dev->stats.tx_window_errors & 63) && net_ratelimit()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "%s: unexpectedly large number of "
 			       "bad collisions. Please check duplex "
 			       "setting.\n", dev->name);
+=======
+			netdev_info(dev, "unexpectedly large number of bad collisions. Please check duplex setting.\n");
+>>>>>>> v3.18
 =======
 			netdev_info(dev, "unexpectedly large number of bad collisions. Please check duplex setting.\n");
 >>>>>>> v3.18
@@ -972,8 +1095,13 @@ static int smc_phy_read(struct net_device *dev, int phyaddr, int phyreg)
 	SMC_SET_MII(lp, SMC_GET_MII(lp) & ~(MII_MCLK|MII_MDOE|MII_MDO));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: phyaddr=0x%x, phyreg=0x%x, phydata=0x%x\n",
 		__func__, phyaddr, phyreg, phydata);
+=======
+	DBG(3, dev, "%s: phyaddr=0x%x, phyreg=0x%x, phydata=0x%x\n",
+	    __func__, phyaddr, phyreg, phydata);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s: phyaddr=0x%x, phyreg=0x%x, phydata=0x%x\n",
 	    __func__, phyaddr, phyreg, phydata);
@@ -1004,8 +1132,13 @@ static void smc_phy_write(struct net_device *dev, int phyaddr, int phyreg,
 	SMC_SET_MII(lp, SMC_GET_MII(lp) & ~(MII_MCLK|MII_MDOE|MII_MDO));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: phyaddr=0x%x, phyreg=0x%x, phydata=0x%x\n",
 		__func__, phyaddr, phyreg, phydata);
+=======
+	DBG(3, dev, "%s: phyaddr=0x%x, phyreg=0x%x, phydata=0x%x\n",
+	    __func__, phyaddr, phyreg, phydata);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s: phyaddr=0x%x, phyreg=0x%x, phydata=0x%x\n",
 	    __func__, phyaddr, phyreg, phydata);
@@ -1023,7 +1156,11 @@ static void smc_phy_detect(struct net_device *dev)
 	int phyaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1042,8 +1179,13 @@ static void smc_phy_detect(struct net_device *dev)
 		id2 = smc_phy_read(dev, phyaddr & 31, MII_PHYSID2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(3, "%s: phy_id1=0x%x, phy_id2=0x%x\n",
 			dev->name, id1, id2);
+=======
+		DBG(3, dev, "phy_id1=0x%x, phy_id2=0x%x\n",
+		    id1, id2);
+>>>>>>> v3.18
 =======
 		DBG(3, dev, "phy_id1=0x%x, phy_id2=0x%x\n",
 		    id1, id2);
@@ -1071,7 +1213,11 @@ static int smc_phy_fixed(struct net_device *dev)
 	int bmcr, cfg1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(3, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1209,7 +1355,11 @@ static void smc_phy_configure(struct work_struct *work)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s:smc_program_phy()\n", dev->name);
+=======
+	DBG(3, dev, "smc_program_phy()\n");
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "smc_program_phy()\n");
 >>>>>>> v3.18
@@ -1224,7 +1374,11 @@ static void smc_phy_configure(struct work_struct *work)
 
 	if (smc_phy_reset(dev, phyaddr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: PHY reset timed out\n", dev->name);
+=======
+		netdev_info(dev, "PHY reset timed out\n");
+>>>>>>> v3.18
 =======
 		netdev_info(dev, "PHY reset timed out\n");
 >>>>>>> v3.18
@@ -1255,7 +1409,11 @@ static void smc_phy_configure(struct work_struct *work)
 
 	if (!(my_phy_caps & BMSR_ANEGCAPABLE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "Auto negotiation NOT supported\n");
+=======
+		netdev_info(dev, "Auto negotiation NOT supported\n");
+>>>>>>> v3.18
 =======
 		netdev_info(dev, "Auto negotiation NOT supported\n");
 >>>>>>> v3.18
@@ -1295,8 +1453,13 @@ static void smc_phy_configure(struct work_struct *work)
 	status = smc_phy_read(dev, phyaddr, MII_ADVERTISE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: phy caps=%x\n", dev->name, my_phy_caps);
 	DBG(2, "%s: phy advertised caps=%x\n", dev->name, my_ad_caps);
+=======
+	DBG(2, dev, "phy caps=%x\n", my_phy_caps);
+	DBG(2, dev, "phy advertised caps=%x\n", my_ad_caps);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "phy caps=%x\n", my_phy_caps);
 	DBG(2, dev, "phy advertised caps=%x\n", my_ad_caps);
@@ -1325,7 +1488,11 @@ static void smc_phy_interrupt(struct net_device *dev)
 	int phy18;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1365,8 +1532,13 @@ static void smc_10bt_check_media(struct net_device *dev, int init)
 		}
 		if (netif_msg_link(lp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "%s: link %s\n", dev->name,
 			       new_carrier ? "up" : "down");
+=======
+			netdev_info(dev, "link %s\n",
+				    new_carrier ? "up" : "down");
+>>>>>>> v3.18
 =======
 			netdev_info(dev, "link %s\n",
 				    new_carrier ? "up" : "down");
@@ -1402,7 +1574,11 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 	int saved_pointer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(3, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(3, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(3, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1425,6 +1601,7 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 		status = SMC_GET_INT(lp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(2, "%s: INT 0x%02x MASK 0x%02x MEM 0x%04x FIFO 0x%04x\n",
 			dev->name, status, mask,
 			({ int meminfo; SMC_SELECT_BANK(lp, 0);
@@ -1432,12 +1609,17 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 			   SMC_SELECT_BANK(lp, 2); meminfo; }),
 			SMC_GET_FIFO(lp));
 =======
+=======
+>>>>>>> v3.18
 		DBG(2, dev, "INT 0x%02x MASK 0x%02x MEM 0x%04x FIFO 0x%04x\n",
 		    status, mask,
 		    ({ int meminfo; SMC_SELECT_BANK(lp, 0);
 		       meminfo = SMC_GET_MIR(lp);
 		       SMC_SELECT_BANK(lp, 2); meminfo; }),
 		    SMC_GET_FIFO(lp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		status &= mask;
@@ -1447,7 +1629,11 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 		if (status & IM_TX_INT) {
 			/* do this before RX as it will free memory quickly */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG(3, "%s: TX int\n", dev->name);
+=======
+			DBG(3, dev, "TX int\n");
+>>>>>>> v3.18
 =======
 			DBG(3, dev, "TX int\n");
 >>>>>>> v3.18
@@ -1456,6 +1642,7 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 			if (THROTTLE_TX_PKTS)
 				netif_wake_queue(dev);
 		} else if (status & IM_RCV_INT) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			DBG(3, "%s: RX irq\n", dev->name);
 			smc_rcv(dev);
@@ -1466,6 +1653,8 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 		} else if (status & IM_TX_EMPTY_INT) {
 			DBG(3, "%s: TX empty\n", dev->name);
 =======
+=======
+>>>>>>> v3.18
 			DBG(3, dev, "RX irq\n");
 			smc_rcv(dev);
 		} else if (status & IM_ALLOC_INT) {
@@ -1474,6 +1663,9 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 			mask &= ~IM_ALLOC_INT;
 		} else if (status & IM_TX_EMPTY_INT) {
 			DBG(3, dev, "TX empty\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mask &= ~IM_TX_EMPTY_INT;
 
@@ -1490,15 +1682,21 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 			dev->stats.collisions += card_stats & 0xF;
 		} else if (status & IM_RX_OVRN_INT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG(1, "%s: RX overrun (EPH_ST 0x%04x)\n", dev->name,
 			       ({ int eph_st; SMC_SELECT_BANK(lp, 0);
 				  eph_st = SMC_GET_EPH_STATUS(lp);
 				  SMC_SELECT_BANK(lp, 2); eph_st; }));
 =======
+=======
+>>>>>>> v3.18
 			DBG(1, dev, "RX overrun (EPH_ST 0x%04x)\n",
 			    ({ int eph_st; SMC_SELECT_BANK(lp, 0);
 			       eph_st = SMC_GET_EPH_STATUS(lp);
 			       SMC_SELECT_BANK(lp, 2); eph_st; }));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			SMC_ACK_INT(lp, IM_RX_OVRN_INT);
 			dev->stats.rx_errors++;
@@ -1511,7 +1709,11 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 		} else if (status & IM_ERCV_INT) {
 			SMC_ACK_INT(lp, IM_ERCV_INT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			PRINTK("%s: UNSUPPORTED: ERCV INTERRUPT\n", dev->name);
+=======
+			PRINTK(dev, "UNSUPPORTED: ERCV INTERRUPT\n");
+>>>>>>> v3.18
 =======
 			PRINTK(dev, "UNSUPPORTED: ERCV INTERRUPT\n");
 >>>>>>> v3.18
@@ -1526,17 +1728,23 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 #ifndef CONFIG_NET_POLL_CONTROLLER
 	if (timeout == MAX_IRQ_LOOPS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PRINTK("%s: spurious interrupt (mask = 0x%02x)\n",
 		       dev->name, mask);
 #endif
 	DBG(3, "%s: Interrupt done (%d loops)\n",
 	       dev->name, MAX_IRQ_LOOPS - timeout);
 =======
+=======
+>>>>>>> v3.18
 		PRINTK(dev, "spurious interrupt (mask = 0x%02x)\n",
 		       mask);
 #endif
 	DBG(3, dev, "Interrupt done (%d loops)\n",
 	    MAX_IRQ_LOOPS - timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1571,7 +1779,11 @@ static void smc_timeout(struct net_device *dev)
 	int status, mask, eph_st, meminfo, fifo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1586,9 +1798,14 @@ static void smc_timeout(struct net_device *dev)
 	SMC_SELECT_BANK(lp, 2);
 	spin_unlock_irq(&lp->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PRINTK( "%s: TX timeout (INT 0x%02x INTMASK 0x%02x "
 		"MEM 0x%04x FIFO 0x%04x EPH_ST 0x%04x)\n",
 		dev->name, status, mask, meminfo, fifo, eph_st );
+=======
+	PRINTK(dev, "TX timeout (INT 0x%02x INTMASK 0x%02x MEM 0x%04x FIFO 0x%04x EPH_ST 0x%04x)\n",
+	       status, mask, meminfo, fifo, eph_st);
+>>>>>>> v3.18
 =======
 	PRINTK(dev, "TX timeout (INT 0x%02x INTMASK 0x%02x MEM 0x%04x FIFO 0x%04x EPH_ST 0x%04x)\n",
 	       status, mask, meminfo, fifo, eph_st);
@@ -1624,15 +1841,21 @@ static void smc_set_multicast_list(struct net_device *dev)
 	int update_multicast = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
 
 	if (dev->flags & IFF_PROMISC) {
 		DBG(2, "%s: RCR_PRMS\n", dev->name);
 =======
+=======
+>>>>>>> v3.18
 	DBG(2, dev, "%s\n", __func__);
 
 	if (dev->flags & IFF_PROMISC) {
 		DBG(2, dev, "RCR_PRMS\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lp->rcr_cur_mode |= RCR_PRMS;
 	}
@@ -1649,7 +1872,11 @@ static void smc_set_multicast_list(struct net_device *dev)
 	 */
 	else if (dev->flags & IFF_ALLMULTI || netdev_mc_count(dev) > 16) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(2, "%s: RCR_ALMUL\n", dev->name);
+=======
+		DBG(2, dev, "RCR_ALMUL\n");
+>>>>>>> v3.18
 =======
 		DBG(2, dev, "RCR_ALMUL\n");
 >>>>>>> v3.18
@@ -1695,7 +1922,11 @@ static void smc_set_multicast_list(struct net_device *dev)
 		update_multicast = 1;
 	} else  {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(2, "%s: ~(RCR_PRMS|RCR_ALMUL)\n", dev->name);
+=======
+		DBG(2, dev, "~(RCR_PRMS|RCR_ALMUL)\n");
+>>>>>>> v3.18
 =======
 		DBG(2, dev, "~(RCR_PRMS|RCR_ALMUL)\n");
 >>>>>>> v3.18
@@ -1732,7 +1963,11 @@ smc_open(struct net_device *dev)
 	struct smc_local *lp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1780,7 +2015,11 @@ static int smc_close(struct net_device *dev)
 	struct smc_local *lp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", dev->name, __func__);
+=======
+	DBG(2, dev, "%s\n", __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, dev, "%s\n", __func__);
 >>>>>>> v3.18
@@ -1964,7 +2203,11 @@ static int smc_ethtool_geteeprom(struct net_device *dev,
 	int imax;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(1, "Reading %d bytes at %d(0x%x)\n",
+=======
+	DBG(1, dev, "Reading %d bytes at %d(0x%x)\n",
+>>>>>>> v3.18
 =======
 	DBG(1, dev, "Reading %d bytes at %d(0x%x)\n",
 >>>>>>> v3.18
@@ -1980,7 +2223,11 @@ static int smc_ethtool_geteeprom(struct net_device *dev,
 		if (ret != 0)
 			return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(2, "Read 0x%x from 0x%x\n", wbuf, offset >> 1);
+=======
+		DBG(2, dev, "Read 0x%x from 0x%x\n", wbuf, offset >> 1);
+>>>>>>> v3.18
 =======
 		DBG(2, dev, "Read 0x%x from 0x%x\n", wbuf, offset >> 1);
 >>>>>>> v3.18
@@ -1997,8 +2244,13 @@ static int smc_ethtool_seteeprom(struct net_device *dev,
 	int imax;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(1, "Writing %d bytes to %d(0x%x)\n",
 			eeprom->len, eeprom->offset, eeprom->offset);
+=======
+	DBG(1, dev, "Writing %d bytes to %d(0x%x)\n",
+	    eeprom->len, eeprom->offset, eeprom->offset);
+>>>>>>> v3.18
 =======
 	DBG(1, dev, "Writing %d bytes to %d(0x%x)\n",
 	    eeprom->len, eeprom->offset, eeprom->offset);
@@ -2012,7 +2264,11 @@ static int smc_ethtool_seteeprom(struct net_device *dev,
 			break;
 		wbuf = (data[i] << 8) | data[i + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(2, "Writing 0x%x to 0x%x\n", wbuf, offset >> 1);
+=======
+		DBG(2, dev, "Writing 0x%x to 0x%x\n", wbuf, offset >> 1);
+>>>>>>> v3.18
 =======
 		DBG(2, dev, "Writing 0x%x to 0x%x\n", wbuf, offset >> 1);
 >>>>>>> v3.18
@@ -2071,7 +2327,11 @@ static int smc_findirq(struct smc_local *lp)
 	unsigned long cookie;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: %s\n", CARDNAME, __func__);
+=======
+	DBG(2, lp->dev, "%s: %s\n", CARDNAME, __func__);
+>>>>>>> v3.18
 =======
 	DBG(2, lp->dev, "%s: %s\n", CARDNAME, __func__);
 >>>>>>> v3.18
@@ -2147,13 +2407,17 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 {
 	struct smc_local *lp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int version_printed = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int retval;
 	unsigned int val, revision_register;
 	const char *version_string;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DBG(2, "%s: %s\n", CARDNAME, __func__);
 
@@ -2166,6 +2430,8 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 				"%s: Detected possible byte-swapped interface"
 				" at IOADDR %p\n", CARDNAME, ioaddr);
 =======
+=======
+>>>>>>> v3.18
 	DBG(2, dev, "%s: %s\n", CARDNAME, __func__);
 
 	/* First, see if the high byte is 0x33 */
@@ -2177,6 +2443,9 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 			netdev_warn(dev,
 				    "%s: Detected possible byte-swapped interface at IOADDR %p\n",
 				    CARDNAME, ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		retval = -ENODEV;
@@ -2204,9 +2473,15 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 	val = SMC_GET_BASE(lp);
 	val = ((val & 0x1F00) >> 3) << SMC_IO_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((unsigned int)ioaddr & (0x3e0 << SMC_IO_SHIFT)) != val) {
 		printk("%s: IOADDR %p doesn't match configuration (%x).\n",
 			CARDNAME, ioaddr, val);
+=======
+	if (((unsigned long)ioaddr & (0x3e0 << SMC_IO_SHIFT)) != val) {
+		netdev_warn(dev, "%s: IOADDR %p doesn't match configuration (%x).\n",
+			    CARDNAME, ioaddr, val);
+>>>>>>> v3.18
 =======
 	if (((unsigned long)ioaddr & (0x3e0 << SMC_IO_SHIFT)) != val) {
 		netdev_warn(dev, "%s: IOADDR %p doesn't match configuration (%x).\n",
@@ -2222,6 +2497,7 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 	SMC_SELECT_BANK(lp, 3);
 	revision_register = SMC_GET_REV(lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2, "%s: revision = 0x%04x\n", CARDNAME, revision_register);
 	version_string = chip_ids[ (revision_register >> 4) & 0xF];
 	if (!version_string || (revision_register & 0xff00) != 0x3300) {
@@ -2230,12 +2506,17 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 			", Contact author.\n", CARDNAME,
 			ioaddr, revision_register);
 =======
+=======
+>>>>>>> v3.18
 	DBG(2, dev, "%s: revision = 0x%04x\n", CARDNAME, revision_register);
 	version_string = chip_ids[ (revision_register >> 4) & 0xF];
 	if (!version_string || (revision_register & 0xff00) != 0x3300) {
 		/* I don't recognize this chip, so... */
 		netdev_warn(dev, "%s: IO %p: Unrecognized revision register 0x%04x, Contact author.\n",
 			    CARDNAME, ioaddr, revision_register);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		retval = -ENODEV;
@@ -2244,8 +2525,12 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 
 	/* At this point I'll assume that the chip is an SMC91x. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (version_printed++ == 0)
 		printk("%s", version);
+=======
+	pr_info_once("%s\n", version);
+>>>>>>> v3.18
 =======
 	pr_info_once("%s\n", version);
 >>>>>>> v3.18
@@ -2267,7 +2552,11 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 	 * If dev->irq is 0, then the device has to be banged on to see
 	 * what the IRQ is.
 <<<<<<< HEAD
+<<<<<<< HEAD
  	 *
+=======
+	 *
+>>>>>>> v3.18
 =======
 	 *
 >>>>>>> v3.18
@@ -2296,8 +2585,12 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 	}
 	if (dev->irq == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: Couldn't autodetect your IRQ. Use irq=xx.\n",
 			dev->name);
+=======
+		netdev_warn(dev, "Couldn't autodetect your IRQ. Use irq=xx.\n");
+>>>>>>> v3.18
 =======
 		netdev_warn(dev, "Couldn't autodetect your IRQ. Use irq=xx.\n");
 >>>>>>> v3.18
@@ -2307,9 +2600,12 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 	dev->irq = irq_canonicalize(dev->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Fill in the fields of the device structure with ethernet values. */
 	ether_setup(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->watchdog_timeo = msecs_to_jiffies(watchdog);
@@ -2368,6 +2664,7 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 	if (retval == 0) {
 		/* now, print out the card info, in a short format.. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: %s (rev %d) at %p IRQ %d",
 			dev->name, version_string, revision_register & 0x0f,
 			lp->base, dev->irq);
@@ -2377,6 +2674,8 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 
 		printk("%s%s\n",
 =======
+=======
+>>>>>>> v3.18
 		netdev_info(dev, "%s (rev %d) at %p IRQ %d",
 			    version_string, revision_register & 0x0f,
 			    lp->base, dev->irq);
@@ -2385,11 +2684,15 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 			pr_cont(" DMA %d", dev->dma);
 
 		pr_cont("%s%s\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			lp->cfg.flags & SMC91X_NOWAIT ? " [nowait]" : "",
 			THROTTLE_TX_PKTS ? " [throttle_tx]" : "");
 
 		if (!is_valid_ether_addr(dev->dev_addr)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			printk("%s: Invalid ethernet MAC address.  Please "
 			       "set using ifconfig\n", dev->name);
@@ -2406,6 +2709,8 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 		} else if ((lp->phy_type & 0xfffffff0) == 0x02821c50) {
 			PRINTK("%s: PHY LAN83C180\n", dev->name);
 =======
+=======
+>>>>>>> v3.18
 			netdev_warn(dev, "Invalid ethernet MAC address. Please set using ifconfig\n");
 		} else {
 			/* Print the Ethernet address */
@@ -2419,6 +2724,9 @@ static int smc_probe(struct net_device *dev, void __iomem *ioaddr,
 			PRINTK(dev, "PHY LAN83C183 (LAN91C111 Internal)\n");
 		} else if ((lp->phy_type & 0xfffffff0) == 0x02821c50) {
 			PRINTK(dev, "PHY LAN83C180\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2530,7 +2838,12 @@ static inline void smc_request_datacs(struct platform_device *pdev, struct net_d
 
 		if(!request_mem_region(res->start, SMC_DATA_EXTENT, CARDNAME)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "%s: failed to request datacs memory region.\n", CARDNAME);
+=======
+			netdev_info(ndev, "%s: failed to request datacs memory region.\n",
+				    CARDNAME);
+>>>>>>> v3.18
 =======
 			netdev_info(ndev, "%s: failed to request datacs memory region.\n",
 				    CARDNAME);
@@ -2559,7 +2872,10 @@ static void smc_release_datacs(struct platform_device *pdev, struct net_device *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_BUILTIN(CONFIG_OF)
 static const struct of_device_id smc91x_match[] = {
 	{ .compatible = "smsc,lan91c94", },
@@ -2604,6 +2920,9 @@ static int try_toggle_control_gpio(struct device *dev,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * smc_init(void)
@@ -2619,6 +2938,7 @@ static int try_toggle_control_gpio(struct device *dev,
 static int smc_drv_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct smc91x_platdata *pd = pdev->dev.platform_data;
 	struct smc_local *lp;
 	struct net_device *ndev;
@@ -2626,6 +2946,8 @@ static int smc_drv_probe(struct platform_device *pdev)
 	unsigned int __iomem *addr;
 	unsigned long irq_flags = SMC_IRQ_FLAGS;
 =======
+=======
+>>>>>>> v3.18
 	struct smc91x_platdata *pd = dev_get_platdata(&pdev->dev);
 	const struct of_device_id *match = NULL;
 	struct smc_local *lp;
@@ -2634,6 +2956,9 @@ static int smc_drv_probe(struct platform_device *pdev)
 	unsigned int __iomem *addr;
 	unsigned long irq_flags = SMC_IRQ_FLAGS;
 	unsigned long irq_resflags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -2650,6 +2975,10 @@ static int smc_drv_probe(struct platform_device *pdev)
 
 	lp = netdev_priv(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lp->cfg.flags = 0;
+>>>>>>> v3.18
 =======
 	lp->cfg.flags = 0;
 >>>>>>> v3.18
@@ -2658,8 +2987,11 @@ static int smc_drv_probe(struct platform_device *pdev)
 		memcpy(&lp->cfg, pd, sizeof(lp->cfg));
 		lp->io_shift = SMC91X_IO_SHIFT(lp->cfg.flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	}
 
 #if IS_BUILTIN(CONFIG_OF)
@@ -2705,6 +3037,9 @@ static int smc_drv_probe(struct platform_device *pdev)
 #endif
 
 	if (!pd && !match) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lp->cfg.flags |= (SMC_CAN_USE_8BIT)  ? SMC91X_USE_8BIT  : 0;
 		lp->cfg.flags |= (SMC_CAN_USE_16BIT) ? SMC91X_USE_16BIT : 0;
@@ -2734,6 +3069,7 @@ static int smc_drv_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ires = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 	if (!ires) {
 		ret = -ENODEV;
@@ -2745,6 +3081,8 @@ static int smc_drv_probe(struct platform_device *pdev)
 	if (irq_flags == -1 || ires->flags & IRQF_TRIGGER_MASK)
 		irq_flags = ires->flags & IRQF_TRIGGER_MASK;
 =======
+=======
+>>>>>>> v3.18
 	ndev->irq = platform_get_irq(pdev, 0);
 	if (ndev->irq <= 0) {
 		ret = -ENODEV;
@@ -2758,6 +3096,9 @@ static int smc_drv_probe(struct platform_device *pdev)
 	irq_resflags = irqd_get_trigger_type(irq_get_irq_data(ndev->irq));
 	if (irq_flags == -1 || irq_resflags & IRQF_TRIGGER_MASK)
 		irq_flags = irq_resflags & IRQF_TRIGGER_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = smc_request_attrib(pdev, ndev);
@@ -2795,7 +3136,10 @@ static int smc_drv_probe(struct platform_device *pdev)
 
  out_iounmap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(addr);
@@ -2807,7 +3151,11 @@ static int smc_drv_probe(struct platform_device *pdev)
 	free_netdev(ndev);
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: not found (%d).\n", CARDNAME, ret);
+=======
+	pr_info("%s: not found (%d).\n", CARDNAME, ret);
+>>>>>>> v3.18
 =======
 	pr_info("%s: not found (%d).\n", CARDNAME, ret);
 >>>>>>> v3.18
@@ -2822,8 +3170,11 @@ static int smc_drv_remove(struct platform_device *pdev)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unregister_netdev(ndev);
@@ -2884,6 +3235,7 @@ static int smc_drv_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 static const struct of_device_id smc91x_match[] = {
 	{ .compatible = "smsc,lan91c94", },
@@ -2893,6 +3245,8 @@ static const struct of_device_id smc91x_match[] = {
 MODULE_DEVICE_TABLE(of, smc91x_match);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct dev_pm_ops smc_drv_pm_ops = {

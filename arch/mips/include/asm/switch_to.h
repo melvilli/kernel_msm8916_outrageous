@@ -16,6 +16,7 @@
 #include <asm/watch.h>
 #include <asm/dsp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct task_struct;
 
@@ -25,6 +26,8 @@ struct task_struct;
  */
 extern asmlinkage void *resume(void *last, void *next, void *next_ti, u32 __usedfpu);
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cop2.h>
 #include <asm/msa.h>
 
@@ -49,6 +52,9 @@ enum {
 extern asmlinkage struct task_struct *resume(struct task_struct *prev,
 		struct task_struct *next, struct thread_info *next_ti,
 		s32 fp_save);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern unsigned int ll_bit;
@@ -94,6 +100,7 @@ do {									\
 #define switch_to(prev, next, last)					\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 __usedfpu;							\
 	__mips_mt_fpaff_switch_to(prev);				\
 	if (cpu_has_dsp)						\
@@ -102,6 +109,8 @@ do {									\
 	__usedfpu = test_and_clear_tsk_thread_flag(prev, TIF_USEDFPU);	\
 	(last) = resume(prev, next, task_thread_info(next), __usedfpu); \
 =======
+=======
+>>>>>>> v3.18
 	u32 __c0_stat;							\
 	s32 __fpsave = FP_SAVE_NONE;					\
 	__mips_mt_fpaff_switch_to(prev);				\
@@ -122,13 +131,19 @@ do {									\
 		__fpsave = FP_SAVE_VECTOR;				\
 	(last) = resume(prev, next, task_thread_info(next), __fpsave);	\
 	disable_msa();							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } while (0)
 
 #define finish_arch_switch(prev)					\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 __c0_stat;							\
 	if (cop2_present && !cop2_lazy_restore &&			\
 			(KSTK_STATUS(current) & ST0_CU2)) {		\
@@ -137,6 +152,9 @@ do {									\
 		cop2_restore(current);					\
 		write_c0_status(__c0_stat & ~ST0_CU2);			\
 	}								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpu_has_dsp)						\
 		__restore_dsp(current);					\

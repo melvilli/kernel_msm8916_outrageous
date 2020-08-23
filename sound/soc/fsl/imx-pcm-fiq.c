@@ -23,6 +23,10 @@
 
 #include <sound/core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -37,6 +41,10 @@
 
 #include "imx-ssi.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "imx-pcm.h"
+>>>>>>> v3.18
 =======
 #include "imx-pcm.h"
 >>>>>>> v3.18
@@ -46,8 +54,11 @@ struct imx_pcm_runtime_data {
 	int periods;
 	unsigned long offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long last_offset;
 	unsigned long size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct hrtimer hrt;
@@ -63,9 +74,13 @@ static enum hrtimer_restart snd_hrtimer_callback(struct hrtimer *hrt)
 		container_of(hrt, struct imx_pcm_runtime_data, hrt);
 	struct snd_pcm_substream *substream = iprtd->substream;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	struct pt_regs regs;
 	unsigned long delta;
+=======
+	struct pt_regs regs;
+>>>>>>> v3.18
 =======
 	struct pt_regs regs;
 >>>>>>> v3.18
@@ -81,6 +96,7 @@ static enum hrtimer_restart snd_hrtimer_callback(struct hrtimer *hrt)
 		iprtd->offset = regs.ARM_r9 & 0xffff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* How much data have we transferred since the last period report? */
 	if (iprtd->offset >= iprtd->last_offset)
 		delta = iprtd->offset - iprtd->last_offset;
@@ -94,6 +110,9 @@ static enum hrtimer_restart snd_hrtimer_callback(struct hrtimer *hrt)
 		snd_pcm_period_elapsed(substream);
 		iprtd->last_offset = iprtd->offset;
 	}
+=======
+	snd_pcm_period_elapsed(substream);
+>>>>>>> v3.18
 =======
 	snd_pcm_period_elapsed(substream);
 >>>>>>> v3.18
@@ -114,11 +133,17 @@ static int snd_imx_pcm_hw_params(struct snd_pcm_substream *substream,
 	struct imx_pcm_runtime_data *iprtd = runtime->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iprtd->size = params_buffer_bytes(params);
 	iprtd->periods = params_periods(params);
 	iprtd->period = params_period_bytes(params) ;
 	iprtd->offset = 0;
 	iprtd->last_offset = 0;
+=======
+	iprtd->periods = params_periods(params);
+	iprtd->period = params_period_bytes(params);
+	iprtd->offset = 0;
+>>>>>>> v3.18
 =======
 	iprtd->periods = params_periods(params);
 	iprtd->period = params_period_bytes(params);
@@ -204,9 +229,12 @@ static struct snd_pcm_hardware snd_imx_hardware = {
 		SNDRV_PCM_INFO_RESUME,
 	.formats = SNDRV_PCM_FMTBIT_S16_LE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rate_min = 8000,
 	.channels_min = 2,
 	.channels_max = 2,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.buffer_bytes_max = IMX_SSI_DMABUF_SIZE,
@@ -259,7 +287,10 @@ static int snd_imx_close(struct snd_pcm_substream *substream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int snd_imx_pcm_mmap(struct snd_pcm_substream *substream,
 		struct vm_area_struct *vma)
 {
@@ -276,6 +307,9 @@ static int snd_imx_pcm_mmap(struct snd_pcm_substream *substream,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_pcm_ops imx_pcm_ops = {
 	.open		= snd_imx_open,
@@ -289,7 +323,10 @@ static struct snd_pcm_ops imx_pcm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int imx_pcm_preallocate_dma_buffer(struct snd_pcm *pcm, int stream)
 {
 	struct snd_pcm_substream *substream = pcm->streams[stream].substream;
@@ -335,6 +372,9 @@ static int imx_pcm_new(struct snd_soc_pcm_runtime *rtd)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ssi_irq = 0;
 
@@ -369,7 +409,10 @@ static int imx_pcm_fiq_new(struct snd_soc_pcm_runtime *rtd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void imx_pcm_free(struct snd_pcm *pcm)
 {
 	struct snd_pcm_substream *substream;
@@ -391,6 +434,9 @@ static void imx_pcm_free(struct snd_pcm *pcm)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void imx_pcm_fiq_free(struct snd_pcm *pcm)
 {
@@ -406,9 +452,15 @@ static struct snd_soc_platform_driver imx_soc_platform_fiq = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int imx_pcm_fiq_init(struct platform_device *pdev)
 {
 	struct imx_ssi *ssi = platform_get_drvdata(pdev);
+=======
+int imx_pcm_fiq_init(struct platform_device *pdev,
+		struct imx_pcm_fiq_params *params)
+{
+>>>>>>> v3.18
 =======
 int imx_pcm_fiq_init(struct platform_device *pdev,
 		struct imx_pcm_fiq_params *params)
@@ -423,6 +475,7 @@ int imx_pcm_fiq_init(struct platform_device *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxc_set_irq_fiq(ssi->irq, 1);
 	ssi_irq = ssi->irq;
 
@@ -433,6 +486,8 @@ int imx_pcm_fiq_init(struct platform_device *pdev,
 	ssi->dma_params_tx.maxburst = 4;
 	ssi->dma_params_rx.maxburst = 6;
 =======
+=======
+>>>>>>> v3.18
 	mxc_set_irq_fiq(params->irq, 1);
 	ssi_irq = params->irq;
 
@@ -442,6 +497,9 @@ int imx_pcm_fiq_init(struct platform_device *pdev,
 
 	params->dma_params_tx->maxburst = 4;
 	params->dma_params_rx->maxburst = 6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = snd_soc_register_platform(&pdev->dev, &imx_soc_platform_fiq);
@@ -457,7 +515,10 @@ failed_register:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(imx_pcm_fiq_init);
 
 void imx_pcm_fiq_exit(struct platform_device *pdev)
@@ -467,4 +528,7 @@ void imx_pcm_fiq_exit(struct platform_device *pdev)
 EXPORT_SYMBOL_GPL(imx_pcm_fiq_exit);
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

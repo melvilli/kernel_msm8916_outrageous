@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -137,8 +141,12 @@ struct acpi_rsconvert_info *acpi_gbl_convert_resource_serial_bus_dispatch[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ACPI_FUTURE_USAGE
 #if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DEBUGGER)
+=======
+#if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DISASSEMBLER) || defined(ACPI_DEBUGGER)
+>>>>>>> v3.18
 =======
 #if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DISASSEMBLER) || defined(ACPI_DEBUGGER)
 >>>>>>> v3.18
@@ -177,7 +185,10 @@ struct acpi_rsdump_info *acpi_gbl_dump_serial_bus_dispatch[] = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* ACPI_FUTURE_USAGE */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

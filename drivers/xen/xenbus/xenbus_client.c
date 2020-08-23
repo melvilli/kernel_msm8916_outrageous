@@ -46,6 +46,10 @@
 #include <xen/xenbus.h>
 #include <xen/xen.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/features.h>
+>>>>>>> v3.18
 =======
 #include <xen/features.h>
 >>>>>>> v3.18
@@ -263,7 +267,10 @@ static void xenbus_va_dev_error(struct xenbus_device *dev, int err,
 				const char *fmt, va_list ap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int len;
@@ -277,9 +284,13 @@ static void xenbus_va_dev_error(struct xenbus_device *dev, int err,
 
 	len = sprintf(printf_buffer, "%i ", -err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = vsnprintf(printf_buffer+len, PRINTF_BUFFER_SIZE-len, fmt, ap);
 
 	BUG_ON(len + ret > PRINTF_BUFFER_SIZE-1);
+=======
+	vsnprintf(printf_buffer+len, PRINTF_BUFFER_SIZE-len, fmt, ap);
+>>>>>>> v3.18
 =======
 	vsnprintf(printf_buffer+len, PRINTF_BUFFER_SIZE-len, fmt, ap);
 >>>>>>> v3.18
@@ -372,8 +383,13 @@ static void xenbus_switch_fatal(struct xenbus_device *dev, int depth, int err,
 
  * Grant access to the given @ring_mfn to the peer of the given device.  Return
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 0 on success, or -errno on error.  On error, the device will switch to
  * XenbusStateClosing, and the error will be saved in the store.
+=======
+ * a grant reference on success, or -errno on error. On error, the device will
+ * switch to XenbusStateClosing, and the error will be saved in the store.
+>>>>>>> v3.18
 =======
  * a grant reference on success, or -errno on error. On error, the device will
  * switch to XenbusStateClosing, and the error will be saved in the store.
@@ -417,6 +433,7 @@ EXPORT_SYMBOL_GPL(xenbus_alloc_evtchn);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Bind to an existing interdomain event channel in another domain. Returns 0
  * on success and stores the local port in *port. On error, returns -errno,
  * switches the device to XenbusStateClosing, and saves the error in XenStore.
@@ -444,6 +461,8 @@ EXPORT_SYMBOL_GPL(xenbus_bind_evtchn);
 
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Free an existing event channel. Returns 0 on success or -errno on error.
@@ -763,7 +782,11 @@ static const struct xenbus_ring_ops ring_ops_hvm = {
 void __init xenbus_ring_ops_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xen_pv_domain())
+=======
+	if (!xen_feature(XENFEAT_auto_translated_physmap))
+>>>>>>> v3.18
 =======
 	if (!xen_feature(XENFEAT_auto_translated_physmap))
 >>>>>>> v3.18

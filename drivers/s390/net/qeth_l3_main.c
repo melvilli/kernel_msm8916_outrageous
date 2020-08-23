@@ -64,7 +64,11 @@ int qeth_l3_string_to_ipaddr4(const char *buf, __u8 *addr)
 {
 	int count = 0, rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int in[4];
+=======
+	unsigned int in[4];
+>>>>>>> v3.18
 =======
 	unsigned int in[4];
 >>>>>>> v3.18
@@ -1664,7 +1668,11 @@ static void qeth_l3_add_vlan_mc(struct qeth_card *card)
 		struct net_device *netdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netdev = __vlan_find_dev_deep(card->dev, htons(ETH_P_8021Q),
+=======
+		netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q),
+>>>>>>> v3.18
 =======
 		netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q),
 >>>>>>> v3.18
@@ -1730,7 +1738,11 @@ static void qeth_l3_add_vlan_mc6(struct qeth_card *card)
 		struct net_device *netdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netdev = __vlan_find_dev_deep(card->dev, htons(ETH_P_8021Q),
+=======
+		netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q),
+>>>>>>> v3.18
 =======
 		netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q),
 >>>>>>> v3.18
@@ -1779,7 +1791,11 @@ static void qeth_l3_free_vlan_addresses4(struct qeth_card *card,
 	QETH_CARD_TEXT(card, 4, "frvaddr4");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev = __vlan_find_dev_deep(card->dev, htons(ETH_P_8021Q), vid);
+=======
+	netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q), vid);
+>>>>>>> v3.18
 =======
 	netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q), vid);
 >>>>>>> v3.18
@@ -1813,7 +1829,11 @@ static void qeth_l3_free_vlan_addresses6(struct qeth_card *card,
 	QETH_CARD_TEXT(card, 4, "frvaddr6");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev = __vlan_find_dev_deep(card->dev, htons(ETH_P_8021Q), vid);
+=======
+	netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q), vid);
+>>>>>>> v3.18
 =======
 	netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q), vid);
 >>>>>>> v3.18
@@ -2110,7 +2130,11 @@ static int qeth_l3_verify_vlan_dev(struct net_device *dev,
 
 		rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netdev = __vlan_find_dev_deep(card->dev, htons(ETH_P_8021Q),
+=======
+		netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q),
+>>>>>>> v3.18
 =======
 		netdev = __vlan_find_dev_deep_rcu(card->dev, htons(ETH_P_8021Q),
 >>>>>>> v3.18
@@ -2951,14 +2975,20 @@ static int qeth_l3_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	int ipv = qeth_get_ip_version(skb);
 	int cast_type = qeth_l3_get_cast_type(card, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qeth_qdio_out_q *queue = card->qdio.out_qs
 		[qeth_get_priority_queue(card, skb, ipv, cast_type)];
 =======
+=======
+>>>>>>> v3.18
 	struct qeth_qdio_out_q *queue =
 		card->qdio.out_qs[card->qdio.do_prio_queueing
 			|| (cast_type && card->info.is_multicast_different) ?
 			qeth_get_priority_queue(card, skb, ipv, cast_type) :
 			card->qdio.default_out_queue];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int tx_bytes = skb->len;
 	bool large_send;
@@ -3317,7 +3347,12 @@ static int qeth_l3_setup_netdev(struct qeth_card *card)
 		}
 	} else if (card->info.type == QETH_CARD_TYPE_IQD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		card->dev = alloc_netdev(0, "hsi%d", ether_setup);
+=======
+		card->dev = alloc_netdev(0, "hsi%d", NET_NAME_UNKNOWN,
+					 ether_setup);
+>>>>>>> v3.18
 =======
 		card->dev = alloc_netdev(0, "hsi%d", NET_NAME_UNKNOWN,
 					 ether_setup);
@@ -3336,17 +3371,23 @@ static int qeth_l3_setup_netdev(struct qeth_card *card)
 	card->dev->watchdog_timeo = QETH_TX_TIMEOUT;
 	card->dev->mtu = card->info.initial_mtu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(card->dev, &qeth_l3_ethtool_ops);
 	card->dev->features |=	NETIF_F_HW_VLAN_CTAG_TX |
 				NETIF_F_HW_VLAN_CTAG_RX |
 				NETIF_F_HW_VLAN_CTAG_FILTER;
 	card->dev->priv_flags &= ~IFF_XMIT_DST_RELEASE;
 =======
+=======
+>>>>>>> v3.18
 	card->dev->ethtool_ops = &qeth_l3_ethtool_ops;
 	card->dev->features |=	NETIF_F_HW_VLAN_CTAG_TX |
 				NETIF_F_HW_VLAN_CTAG_RX |
 				NETIF_F_HW_VLAN_CTAG_FILTER;
 	netif_keep_dst(card->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	card->dev->gso_max_size = 15 * PAGE_SIZE;
 
@@ -3379,7 +3420,10 @@ static void qeth_l3_remove_device(struct ccwgroup_device *cgdev)
 
 	if (card->dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netif_napi_del(&card->napi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		unregister_netdev(card->dev);
@@ -3497,6 +3541,10 @@ out_remove:
 	ccw_device_set_offline(CARD_WDEV(card));
 	ccw_device_set_offline(CARD_RDEV(card));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_free(CARD_DDEV(card));
+>>>>>>> v3.18
 =======
 	qdio_free(CARD_DDEV(card));
 >>>>>>> v3.18
@@ -3547,6 +3595,10 @@ static int __qeth_l3_set_offline(struct ccwgroup_device *cgdev,
 	if (rc)
 		QETH_DBF_TEXT_(SETUP, 2, "1err%d", rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_free(CARD_DDEV(card));
+>>>>>>> v3.18
 =======
 	qdio_free(CARD_DDEV(card));
 >>>>>>> v3.18
@@ -3603,6 +3655,10 @@ static void qeth_l3_shutdown(struct ccwgroup_device *gdev)
 	qeth_qdio_clear_card(card, 0);
 	qeth_clear_qdio_buffers(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_free(CARD_DDEV(card));
+>>>>>>> v3.18
 =======
 	qdio_free(CARD_DDEV(card));
 >>>>>>> v3.18
@@ -3655,7 +3711,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Returns zero if the command is successfully "consumed" */
 static int qeth_l3_control_event(struct qeth_card *card,
 					struct qeth_ipa_cmd *cmd)
@@ -3663,6 +3722,9 @@ static int qeth_l3_control_event(struct qeth_card *card,
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qeth_discipline qeth_l3_discipline = {
 	.start_poll = qeth_qdio_start_poll,
@@ -3678,6 +3740,10 @@ struct qeth_discipline qeth_l3_discipline = {
 	.thaw = qeth_l3_pm_resume,
 	.restore = qeth_l3_pm_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.control_event_handler = qeth_l3_control_event,
+>>>>>>> v3.18
 =======
 	.control_event_handler = qeth_l3_control_event,
 >>>>>>> v3.18

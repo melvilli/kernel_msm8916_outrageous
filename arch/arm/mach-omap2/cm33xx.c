@@ -49,6 +49,7 @@
 
 /* Read a register in a CM instance */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 am33xx_cm_read_reg(s16 inst, u16 idx)
 {
 	return __raw_readl(cm_base + inst + idx);
@@ -59,6 +60,8 @@ static inline void am33xx_cm_write_reg(u32 val, s16 inst, u16 idx)
 {
 	__raw_writel(val, cm_base + inst + idx);
 =======
+=======
+>>>>>>> v3.18
 static inline u32 am33xx_cm_read_reg(u16 inst, u16 idx)
 {
 	return readl_relaxed(cm_base + inst + idx);
@@ -68,6 +71,9 @@ static inline u32 am33xx_cm_read_reg(u16 inst, u16 idx)
 static inline void am33xx_cm_write_reg(u32 val, u16 inst, u16 idx)
 {
 	writel_relaxed(val, cm_base + inst + idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -151,7 +157,11 @@ static bool _is_module_ready(u16 inst, s16 cdoffs, u16 clkctrl_offs)
  * will handle the shift itself.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _clktrctrl_write(u8 c, s16 inst, u16 cdoffs)
+=======
+static void _clktrctrl_write(u8 c, u16 inst, u16 cdoffs)
+>>>>>>> v3.18
 =======
 static void _clktrctrl_write(u8 c, u16 inst, u16 cdoffs)
 >>>>>>> v3.18
@@ -175,7 +185,11 @@ static void _clktrctrl_write(u8 c, u16 inst, u16 cdoffs)
  * is in hardware-supervised idle mode, or 0 otherwise.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool am33xx_cm_is_clkdm_in_hwsup(s16 inst, u16 cdoffs)
+=======
+bool am33xx_cm_is_clkdm_in_hwsup(u16 inst, u16 cdoffs)
+>>>>>>> v3.18
 =======
 bool am33xx_cm_is_clkdm_in_hwsup(u16 inst, u16 cdoffs)
 >>>>>>> v3.18
@@ -198,7 +212,11 @@ bool am33xx_cm_is_clkdm_in_hwsup(u16 inst, u16 cdoffs)
  * hardware-supervised idle mode.  No return value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void am33xx_cm_clkdm_enable_hwsup(s16 inst, u16 cdoffs)
+=======
+void am33xx_cm_clkdm_enable_hwsup(u16 inst, u16 cdoffs)
+>>>>>>> v3.18
 =======
 void am33xx_cm_clkdm_enable_hwsup(u16 inst, u16 cdoffs)
 >>>>>>> v3.18
@@ -216,7 +234,11 @@ void am33xx_cm_clkdm_enable_hwsup(u16 inst, u16 cdoffs)
  * Linux OMAP clockdomain code.  No return value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void am33xx_cm_clkdm_disable_hwsup(s16 inst, u16 cdoffs)
+=======
+void am33xx_cm_clkdm_disable_hwsup(u16 inst, u16 cdoffs)
+>>>>>>> v3.18
 =======
 void am33xx_cm_clkdm_disable_hwsup(u16 inst, u16 cdoffs)
 >>>>>>> v3.18
@@ -233,7 +255,11 @@ void am33xx_cm_clkdm_disable_hwsup(u16 inst, u16 cdoffs)
  * No return value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void am33xx_cm_clkdm_force_sleep(s16 inst, u16 cdoffs)
+=======
+void am33xx_cm_clkdm_force_sleep(u16 inst, u16 cdoffs)
+>>>>>>> v3.18
 =======
 void am33xx_cm_clkdm_force_sleep(u16 inst, u16 cdoffs)
 >>>>>>> v3.18
@@ -250,7 +276,11 @@ void am33xx_cm_clkdm_force_sleep(u16 inst, u16 cdoffs)
  * waking it up.  No return value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void am33xx_cm_clkdm_force_wakeup(s16 inst, u16 cdoffs)
+=======
+void am33xx_cm_clkdm_force_wakeup(u16 inst, u16 cdoffs)
+>>>>>>> v3.18
 =======
 void am33xx_cm_clkdm_force_wakeup(u16 inst, u16 cdoffs)
 >>>>>>> v3.18

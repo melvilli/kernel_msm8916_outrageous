@@ -27,6 +27,10 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 >>>>>>> v3.18
@@ -76,6 +80,7 @@ int m68k_realnum_memory;
 EXPORT_SYMBOL(m68k_realnum_memory);
 unsigned long m68k_memoffset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mem_info m68k_memory[NUM_MEMINFO];
 EXPORT_SYMBOL(m68k_memory);
 
@@ -83,12 +88,17 @@ struct mem_info m68k_ramdisk;
 
 static char m68k_command_line[CL_SIZE];
 =======
+=======
+>>>>>>> v3.18
 struct m68k_mem_info m68k_memory[NUM_MEMINFO];
 EXPORT_SYMBOL(m68k_memory);
 
 static struct m68k_mem_info m68k_ramdisk __initdata;
 
 static char m68k_command_line[CL_SIZE] __initdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void (*mach_sched_init) (irq_handler_t handler) __initdata = NULL;
@@ -157,12 +167,15 @@ extern void paging_init(void);
 static void __init m68k_parse_bootinfo(const struct bi_record *record)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (record->tag != BI_LAST) {
 		int unknown = 0;
 		const unsigned long *data = record->data;
 
 		switch (record->tag) {
 =======
+=======
+>>>>>>> v3.18
 	uint16_t tag;
 
 	save_bootinfo(record);
@@ -173,6 +186,9 @@ static void __init m68k_parse_bootinfo(const struct bi_record *record)
 		uint16_t size = be16_to_cpu(record->size);
 
 		switch (tag) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case BI_MACHTYPE:
 		case BI_CPUTYPE:
@@ -183,6 +199,7 @@ static void __init m68k_parse_bootinfo(const struct bi_record *record)
 
 		case BI_MEMCHUNK:
 			if (m68k_num_memory < NUM_MEMINFO) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				m68k_memory[m68k_num_memory].addr = data[0];
 				m68k_memory[m68k_num_memory].size = data[1];
@@ -199,6 +216,8 @@ static void __init m68k_parse_bootinfo(const struct bi_record *record)
 		case BI_COMMAND_LINE:
 			strlcpy(m68k_command_line, (const char *)data,
 =======
+=======
+>>>>>>> v3.18
 				const struct mem_info *m = data;
 				m68k_memory[m68k_num_memory].addr =
 					be32_to_cpu(m->addr);
@@ -220,6 +239,9 @@ static void __init m68k_parse_bootinfo(const struct bi_record *record)
 
 		case BI_COMMAND_LINE:
 			strlcpy(m68k_command_line, data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				sizeof(m68k_command_line));
 			break;
@@ -248,10 +270,16 @@ static void __init m68k_parse_bootinfo(const struct bi_record *record)
 		}
 		if (unknown)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("m68k_parse_bootinfo: unknown tag 0x%04x ignored\n",
 			       record->tag);
 		record = (struct bi_record *)((unsigned long)record +
 					      record->size);
+=======
+			pr_warn("%s: unknown tag 0x%04x ignored\n", __func__,
+				tag);
+		record = (struct bi_record *)((unsigned long)record + size);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: unknown tag 0x%04x ignored\n", __func__,
 				tag);
@@ -263,8 +291,13 @@ static void __init m68k_parse_bootinfo(const struct bi_record *record)
 #ifdef CONFIG_SINGLE_MEMORY_CHUNK
 	if (m68k_num_memory > 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Ignoring last %i chunks of physical memory\n",
 		       (m68k_num_memory - 1));
+=======
+		pr_warn("%s: ignoring last %i chunks of physical memory\n",
+			__func__, (m68k_num_memory - 1));
+>>>>>>> v3.18
 =======
 		pr_warn("%s: ignoring last %i chunks of physical memory\n",
 			__func__, (m68k_num_memory - 1));
@@ -281,7 +314,11 @@ void __init setup_arch(char **cmdline_p)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The bootinfo is located right after the kernel bss */
+=======
+	/* The bootinfo is located right after the kernel */
+>>>>>>> v3.18
 =======
 	/* The bootinfo is located right after the kernel */
 >>>>>>> v3.18
@@ -313,7 +350,11 @@ void __init setup_arch(char **cmdline_p)
 		     : "=d" (pcr));
 		if (((pcr >> 8) & 0xff) <= 5) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("Enabling workaround for errata I14\n");
+=======
+			pr_warn("Enabling workaround for errata I14\n");
+>>>>>>> v3.18
 =======
 			pr_warn("Enabling workaround for errata I14\n");
 >>>>>>> v3.18
@@ -406,6 +447,11 @@ void __init setup_arch(char **cmdline_p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	paging_init();
+
+>>>>>>> v3.18
 =======
 	paging_init();
 
@@ -415,8 +461,11 @@ void __init setup_arch(char **cmdline_p)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	paging_init();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef CONFIG_SUN3
@@ -431,7 +480,11 @@ void __init setup_arch(char **cmdline_p)
 		initrd_start = (unsigned long)phys_to_virt(m68k_ramdisk.addr);
 		initrd_end = initrd_start + m68k_ramdisk.size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("initrd: %08lx - %08lx\n", initrd_start, initrd_end);
+=======
+		pr_info("initrd: %08lx - %08lx\n", initrd_start, initrd_end);
+>>>>>>> v3.18
 =======
 		pr_info("initrd: %08lx - %08lx\n", initrd_start, initrd_end);
 >>>>>>> v3.18
@@ -620,9 +673,15 @@ void check_bugs(void)
 #ifndef CONFIG_M68KFPU_EMU
 	if (m68k_fputype == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "*** YOU DO NOT HAVE A FLOATING POINT UNIT, "
 			"WHICH IS REQUIRED BY LINUX/M68K ***\n");
 		printk(KERN_EMERG "Upgrade your hardware or join the FPU "
+=======
+		pr_emerg("*** YOU DO NOT HAVE A FLOATING POINT UNIT, "
+			"WHICH IS REQUIRED BY LINUX/M68K ***\n");
+		pr_emerg("Upgrade your hardware or join the FPU "
+>>>>>>> v3.18
 =======
 		pr_emerg("*** YOU DO NOT HAVE A FLOATING POINT UNIT, "
 			"WHICH IS REQUIRED BY LINUX/M68K ***\n");

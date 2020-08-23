@@ -4,8 +4,12 @@
 #include <uapi/asm/unistd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define NR_SYSCALLS			506
+=======
+#define NR_SYSCALLS			511
+>>>>>>> v3.18
 =======
 #define NR_SYSCALLS			511
 >>>>>>> v3.18

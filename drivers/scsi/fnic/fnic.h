@@ -28,6 +28,10 @@
 #include "fnic_res.h"
 #include "fnic_trace.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "fnic_stats.h"
+>>>>>>> v3.18
 =======
 #include "fnic_stats.h"
 >>>>>>> v3.18
@@ -43,7 +47,11 @@
 #define DRV_NAME		"fnic"
 #define DRV_DESCRIPTION		"Cisco FCoE HBA Driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION		"1.5.0.22"
+=======
+#define DRV_VERSION		"1.6.0.11"
+>>>>>>> v3.18
 =======
 #define DRV_VERSION		"1.6.0.11"
 >>>>>>> v3.18
@@ -52,12 +60,18 @@
 
 #define DESC_CLEAN_LOW_WATERMARK 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FNIC_MAX_IO_REQ		2048 /* scsi_cmnd tag map entries */
 =======
+=======
+>>>>>>> v3.18
 #define FNIC_UCSM_DFLT_THROTTLE_CNT_BLD	16 /* UCSM default throttle count */
 #define FNIC_MIN_IO_REQ			256 /* Min IO throttle count */
 #define FNIC_MAX_IO_REQ		1024 /* scsi_cmnd tag map entries */
 #define FNIC_DFLT_IO_REQ        256 /* Default scsi_cmnd tag map entries */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	FNIC_IO_LOCKS		64 /* IO locks: power of 2 */
 #define FNIC_DFLT_QUEUE_DEPTH	32
@@ -170,6 +184,12 @@ do {								\
 			 shost_printk(kern_level, host, fmt, ##args);)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FNIC_MAIN_NOTE(kern_level, host, fmt, args...)          \
+	shost_printk(kern_level, host, fmt, ##args)
+
+>>>>>>> v3.18
 =======
 #define FNIC_MAIN_NOTE(kern_level, host, fmt, args...)          \
 	shost_printk(kern_level, host, fmt, ##args)
@@ -237,6 +257,10 @@ struct fnic {
 	struct vnic_stats *stats;
 	unsigned long stats_time;	/* time of stats update */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long stats_reset_time; /* time of stats reset */
+>>>>>>> v3.18
 =======
 	unsigned long stats_reset_time; /* time of stats reset */
 >>>>>>> v3.18
@@ -245,6 +269,10 @@ struct fnic {
 	struct timer_list notify_timer; /* used for MSI interrupts */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int fnic_max_tag_id;
+>>>>>>> v3.18
 =======
 	unsigned int fnic_max_tag_id;
 >>>>>>> v3.18
@@ -255,7 +283,10 @@ struct fnic {
 	unsigned int cq_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct dentry *fnic_stats_debugfs_host;
 	struct dentry *fnic_stats_debugfs_file;
 	struct dentry *fnic_reset_debugfs_file;
@@ -263,6 +294,9 @@ struct fnic {
 	atomic64_t io_cmpl_skip;
 	struct fnic_stats fnic_stats;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 vlan_hw_insert:1;	        /* let hw insert the tag */
 	u32 in_remove:1;                /* fnic device in removal */
@@ -399,6 +433,10 @@ fnic_chk_state_flags_locked(struct fnic *fnic, unsigned long st_flags)
 }
 void __fnic_set_state_flags(struct fnic *, unsigned long, unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void fnic_dump_fchost_stats(struct Scsi_Host *, struct fc_host_statistics *);
+>>>>>>> v3.18
 =======
 void fnic_dump_fchost_stats(struct Scsi_Host *, struct fc_host_statistics *);
 >>>>>>> v3.18

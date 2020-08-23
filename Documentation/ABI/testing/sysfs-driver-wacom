@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 WWhat:		/sys/class/hidraw/hidraw*/device/oled*_img
 Date:		June 2012
 Contact:	linux-bluetooth@vger.kernel.org
@@ -16,10 +17,14 @@ What:		/sys/class/hidraw/hidraw*/device/speed
 =======
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/speed
 >>>>>>> v3.18
+=======
+What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/speed
+>>>>>>> v3.18
 Date:		April 2010
 Kernel Version:	2.6.35
 Contact:	linux-bluetooth@vger.kernel.org
 Description:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		The /sys/class/hidraw/hidraw*/device/speed file controls
 		reporting speed of Wacom bluetooth tablet. Reading from
@@ -38,6 +43,8 @@ Description:
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/led
 Date:		August 2011
 =======
+=======
+>>>>>>> v3.18
 		The /sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/speed file
 		controls reporting speed of Wacom bluetooth tablet. Reading
 		from this file returns 1 if tablet reports in high speed mode
@@ -46,11 +53,15 @@ Date:		August 2011
 
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/led
 Date:		August 2014
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Contact:	linux-input@vger.kernel.org
 Description:
 		Attribute group for control of the status LEDs and the OLEDs.
 		This attribute group is only available for Intuos 4 M, L,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		and XL (with LEDs and OLEDs), Intuos 5 (LEDs only), and Cintiq
 		21UX2 and Cintiq 24HD (LEDs only). Therefore its presence
@@ -60,6 +71,8 @@ Description:
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/status0_luminance
 Date:		August 2011
 =======
+=======
+>>>>>>> v3.18
 		and XL (with LEDs and OLEDs), Intuos 4 WL, Intuos 5 (LEDs only),
 		Intuos Pro (LEDs only) and Cintiq 21UX2 and Cintiq 24HD
 		(LEDs only). Therefore its presence implicitly signifies the
@@ -67,6 +80,9 @@ Date:		August 2011
 
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status0_luminance
 Date:		August 2014
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Contact:	linux-input@vger.kernel.org
 Description:
@@ -76,8 +92,13 @@ Description:
 		normally lower than the level when a button is pressed.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/status1_luminance
 Date:		August 2011
+=======
+What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status1_luminance
+Date:		August 2014
+>>>>>>> v3.18
 =======
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status1_luminance
 Date:		August 2014
@@ -89,8 +110,13 @@ Description:
 		pressed on the stylus.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/status_led0_select
 Date:		August 2011
+=======
+What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status_led0_select
+Date:		August 2014
+>>>>>>> v3.18
 =======
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status_led0_select
 Date:		August 2014
@@ -103,8 +129,13 @@ Description:
 		same side are always inactive.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/status_led1_select
 Date:		September 2011
+=======
+What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status_led1_select
+Date:		August 2014
+>>>>>>> v3.18
 =======
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/status_led1_select
 Date:		August 2014
@@ -116,8 +147,13 @@ Description:
 		the left are always inactive.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/buttons_luminance
 Date:		August 2011
+=======
+What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/buttons_luminance
+Date:		August 2014
+>>>>>>> v3.18
 =======
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/buttons_luminance
 Date:		August 2014
@@ -128,8 +164,13 @@ Description:
 		of all eight button OLED displays.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/devices/<busnum>-<devnum>:<cfg>.<intf>/wacom_led/button<n>_rawimg
 Date:		August 2011
+=======
+What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/button<n>_rawimg
+Date:		August 2014
+>>>>>>> v3.18
 =======
 What:		/sys/bus/hid/devices/<bus>:<vid>:<pid>.<n>/wacom_led/button<n>_rawimg
 Date:		August 2014
@@ -144,10 +185,16 @@ Description:
 		the display. The low nibble of each byte contains the first
 		line, and the high nibble contains the second line.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		When the Wacom Intuos 4 is connected over Bluetooth, the
 		image has to contain 256 bytes (64x32 px 1 bit colour).
 		The format is also scrambled, like in the USB mode, and it can
 		be summarized by converting 76543210 into GECA6420.
 					    HGFEDCBA      HFDB7531
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

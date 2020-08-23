@@ -21,7 +21,11 @@
 static struct dentry *uhci_debugfs_root;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 >>>>>>> v3.18
@@ -315,6 +319,7 @@ static int uhci_show_status(struct uhci_hcd *uhci, char *buf, int len)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usbcmd    = uhci_readw(uhci, 0);
 	usbstat   = uhci_readw(uhci, 2);
 	usbint    = uhci_readw(uhci, 4);
@@ -324,6 +329,8 @@ static int uhci_show_status(struct uhci_hcd *uhci, char *buf, int len)
 	portsc1   = uhci_readw(uhci, 16);
 	portsc2   = uhci_readw(uhci, 18);
 =======
+=======
+>>>>>>> v3.18
 	usbcmd    = uhci_readw(uhci, USBCMD);
 	usbstat   = uhci_readw(uhci, USBSTS);
 	usbint    = uhci_readw(uhci, USBINTR);
@@ -332,6 +339,9 @@ static int uhci_show_status(struct uhci_hcd *uhci, char *buf, int len)
 	sof       = uhci_readb(uhci, USBSOF);
 	portsc1   = uhci_readw(uhci, USBPORTSC1);
 	portsc2   = uhci_readw(uhci, USBPORTSC2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	out += sprintf(out, "  usbcmd    =     %04x   %s%s%s%s%s%s%s%s\n",
@@ -651,7 +661,11 @@ static const struct file_operations uhci_debug_operations = {
 #endif	/* CONFIG_DEBUG_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else	/* DEBUG */
+=======
+#else	/* CONFIG_DYNAMIC_DEBUG*/
+>>>>>>> v3.18
 =======
 #else	/* CONFIG_DYNAMIC_DEBUG*/
 >>>>>>> v3.18

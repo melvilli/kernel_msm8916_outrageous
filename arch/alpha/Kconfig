@@ -2,6 +2,11 @@ config ALPHA
 	bool
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT
+	select ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_PARPORT
 	select ARCH_MIGHT_HAVE_PC_SERIO
@@ -20,11 +25,14 @@ config ALPHA
 	select ARCH_WANT_IPC_PARSE_VERSION
 	select ARCH_HAVE_NMI_SAFE_CMPXCHG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select GENERIC_SMP_IDLE_THREAD
 	select GENERIC_CMOS_UPDATE
 	select GENERIC_STRNCPY_FROM_USER
 	select GENERIC_STRNLEN_USER
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
 	select AUDIT_ARCH
 	select GENERIC_CLOCKEVENTS
@@ -32,6 +40,9 @@ config ALPHA
 	select GENERIC_STRNCPY_FROM_USER
 	select GENERIC_STRNLEN_USER
 	select HAVE_ARCH_AUDITSYSCALL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_MOD_ARCH_SPECIFIC
 	select MODULES_USE_ELF_RELA
@@ -90,6 +101,11 @@ source "init/Kconfig"
 source "kernel/Kconfig.freezer"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config AUDIT_ARCH
+	bool
+>>>>>>> v3.18
 =======
 config AUDIT_ARCH
 	bool
@@ -507,7 +523,10 @@ config VGA_HOSE
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ALPHA_QEMU
 	bool "Run under QEMU emulation"
 	depends on !ALPHA_GENERIC
@@ -522,6 +541,9 @@ config ALPHA_QEMU
 	  If unsure, say N.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ALPHA_SRM
 	bool "Use SRM as bootloader" if ALPHA_CABRIOLET || ALPHA_AVANTI_CH || ALPHA_EB64P || ALPHA_PC164 || ALPHA_TAKARA || ALPHA_EB164 || ALPHA_ALCOR || ALPHA_MIATA || ALPHA_LX164 || ALPHA_SX164 || ALPHA_NAUTILUS || ALPHA_NONAME
@@ -561,6 +583,7 @@ config SMP
 	---help---
 	  This enables support for systems with more than one CPU. If you have
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
 
@@ -569,6 +592,8 @@ config SMP
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
 =======
+=======
+>>>>>>> v3.18
 	  a system with only one CPU, say N. If you have a system with more
 	  than one CPU, say Y.
 
@@ -576,6 +601,9 @@ config SMP
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  will run faster if you say N here.
 
@@ -618,7 +646,10 @@ config NUMA
 	  server machines.  If in doubt, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ALPHA_WTINT
 	bool "Use WTINT" if ALPHA_SRM || ALPHA_GENERIC
 	default y if ALPHA_QEMU
@@ -643,6 +674,9 @@ config ALPHA_WTINT
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NODES_SHIFT
 	int
@@ -686,10 +720,13 @@ config VERBOSE_MCHECK_ON
 	  Take the default (1) unless you want more control or more info.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HZ
 	int
 	default 1200 if ALPHA_RAWHIDE
 =======
+=======
+>>>>>>> v3.18
 choice
 	prompt "Timer interrupt frequency (HZ)?"
 	default HZ_128 if ALPHA_QEMU
@@ -725,6 +762,9 @@ config HZ
 	default 128 if HZ_128
 	default 256 if HZ_256
 	default 1200 if HZ_1200
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default 1024
 

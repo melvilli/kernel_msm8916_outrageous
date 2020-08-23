@@ -28,8 +28,11 @@
 
 #include <subdev/bios/pll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/clock.h>
 #include <subdev/timer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -95,7 +98,11 @@ NVSetOwner(struct drm_device *dev, int owner)
 		owner *= 3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset == 0x11) {
+=======
+	if (drm->device.info.chipset == 0x11) {
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset == 0x11) {
 >>>>>>> v3.18
@@ -110,7 +117,11 @@ NVSetOwner(struct drm_device *dev, int owner)
 	NVWriteVgaCrtc(dev, 0, NV_CIO_CRE_44, owner);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset == 0x11) {	/* set me harder */
+=======
+	if (drm->device.info.chipset == 0x11) {	/* set me harder */
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset == 0x11) {	/* set me harder */
 >>>>>>> v3.18
@@ -163,7 +174,11 @@ nouveau_hw_decode_pll(struct drm_device *dev, uint32_t reg1, uint32_t pll1,
 		if (nv_two_reg_pll(dev) && pll2 & NV31_RAMDAC_ENABLE_VCO2)
 			pllvals->NM2 = pll2 & 0xffff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (nv_device(drm->device)->chipset == 0x30 || nv_device(drm->device)->chipset == 0x35) {
+=======
+		else if (drm->device.info.chipset == 0x30 || drm->device.info.chipset == 0x35) {
+>>>>>>> v3.18
 =======
 		else if (drm->device.info.chipset == 0x30 || drm->device.info.chipset == 0x35) {
 >>>>>>> v3.18
@@ -183,8 +198,13 @@ nouveau_hw_get_pllvals(struct drm_device *dev, enum nvbios_pll_type plltype,
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
 	struct nouveau_bios *bios = nouveau_bios(device);
+=======
+	struct nvif_device *device = &drm->device;
+	struct nouveau_bios *bios = nvkm_bios(device);
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 	struct nouveau_bios *bios = nvkm_bios(device);
@@ -198,6 +218,7 @@ nouveau_hw_get_pllvals(struct drm_device *dev, enum nvbios_pll_type plltype,
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pll1 = nv_rd32(device, reg1);
 	if (reg1 <= 0x405c)
 		pll2 = nv_rd32(device, reg1 + 4);
@@ -209,6 +230,8 @@ nouveau_hw_get_pllvals(struct drm_device *dev, enum nvbios_pll_type plltype,
 
 	if (nv_device(drm->device)->card_type == 0x40 && reg1 >= NV_PRAMDAC_VPLL_COEFF) {
 =======
+=======
+>>>>>>> v3.18
 	pll1 = nvif_rd32(device, reg1);
 	if (reg1 <= 0x405c)
 		pll2 = nvif_rd32(device, reg1 + 4);
@@ -219,6 +242,9 @@ nouveau_hw_get_pllvals(struct drm_device *dev, enum nvbios_pll_type plltype,
 	}
 
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_CELSIUS && reg1 >= NV_PRAMDAC_VPLL_COEFF) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		uint32_t ramdac580 = NVReadRAMDAC(dev, 0, NV_PRAMDAC_580);
 
@@ -254,16 +280,22 @@ nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
 
 	if (plltype == PLL_MEMORY &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (dev->pci_device & 0x0ff0) == CHIPSET_NFORCE) {
 		uint32_t mpllP;
 
 		pci_read_config_dword(pci_get_bus_and_slot(0, 3), 0x6c, &mpllP);
 		mpllP = (mpllP >> 8) & 0xf;
 =======
+=======
+>>>>>>> v3.18
 	    (dev->pdev->device & 0x0ff0) == CHIPSET_NFORCE) {
 		uint32_t mpllP;
 
 		pci_read_config_dword(pci_get_bus_and_slot(0, 3), 0x6c, &mpllP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!mpllP)
 			mpllP = 4;
@@ -272,17 +304,23 @@ nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
 	} else
 	if (plltype == PLL_MEMORY &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (dev->pci_device & 0xff0) == CHIPSET_NFORCE2) {
 		uint32_t clock;
 
 		pci_read_config_dword(pci_get_bus_and_slot(0, 5), 0x4c, &clock);
 		return clock / 1000;
 =======
+=======
+>>>>>>> v3.18
 	    (dev->pdev->device & 0xff0) == CHIPSET_NFORCE2) {
 		uint32_t clock;
 
 		pci_read_config_dword(pci_get_bus_and_slot(0, 5), 0x4c, &clock);
 		return clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -304,9 +342,15 @@ nouveau_hw_fix_bad_vpll(struct drm_device *dev, int head)
 
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
 	struct nouveau_clock *clk = nouveau_clock(device);
 	struct nouveau_bios *bios = nouveau_bios(device);
+=======
+	struct nvif_device *device = &drm->device;
+	struct nouveau_clock *clk = nvkm_clock(device);
+	struct nouveau_bios *bios = nvkm_bios(device);
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 	struct nouveau_clock *clk = nvkm_clock(device);
@@ -449,7 +493,11 @@ nv_save_state_ramdac(struct drm_device *dev, int head,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_10)
+=======
+	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS)
 >>>>>>> v3.18
@@ -460,7 +508,11 @@ nv_save_state_ramdac(struct drm_device *dev, int head,
 	if (nv_two_heads(dev))
 		state->sel_clk = NVReadRAMDAC(dev, 0, NV_PRAMDAC_SEL_CLK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset == 0x11)
+=======
+	if (drm->device.info.chipset == 0x11)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset == 0x11)
 >>>>>>> v3.18
@@ -471,7 +523,11 @@ nv_save_state_ramdac(struct drm_device *dev, int head,
 	if (nv_gf4_disp_arch(dev))
 		regp->ramdac_630 = NVReadRAMDAC(dev, head, NV_PRAMDAC_630);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset >= 0x30)
+=======
+	if (drm->device.info.chipset >= 0x30)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset >= 0x30)
 >>>>>>> v3.18
@@ -517,7 +573,11 @@ nv_save_state_ramdac(struct drm_device *dev, int head,
 		regp->ramdac_8c0 = NVReadRAMDAC(dev, head, NV_PRAMDAC_8C0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type == NV_40) {
+=======
+	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE) {
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE) {
 >>>>>>> v3.18
@@ -537,7 +597,11 @@ nv_load_state_ramdac(struct drm_device *dev, int head,
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_clock *clk = nouveau_clock(drm->device);
+=======
+	struct nouveau_clock *clk = nvkm_clock(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_clock *clk = nvkm_clock(&drm->device);
 >>>>>>> v3.18
@@ -546,7 +610,11 @@ nv_load_state_ramdac(struct drm_device *dev, int head,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_10)
+=======
+	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS)
 >>>>>>> v3.18
@@ -557,7 +625,11 @@ nv_load_state_ramdac(struct drm_device *dev, int head,
 	if (nv_two_heads(dev))
 		NVWriteRAMDAC(dev, 0, NV_PRAMDAC_SEL_CLK, state->sel_clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset == 0x11)
+=======
+	if (drm->device.info.chipset == 0x11)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset == 0x11)
 >>>>>>> v3.18
@@ -568,7 +640,11 @@ nv_load_state_ramdac(struct drm_device *dev, int head,
 	if (nv_gf4_disp_arch(dev))
 		NVWriteRAMDAC(dev, head, NV_PRAMDAC_630, regp->ramdac_630);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset >= 0x30)
+=======
+	if (drm->device.info.chipset >= 0x30)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset >= 0x30)
 >>>>>>> v3.18
@@ -609,7 +685,11 @@ nv_load_state_ramdac(struct drm_device *dev, int head,
 		NVWriteRAMDAC(dev, head, NV_PRAMDAC_8C0, regp->ramdac_8c0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type == NV_40) {
+=======
+	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE) {
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE) {
 >>>>>>> v3.18
@@ -694,15 +774,21 @@ nv_save_state_ext(struct drm_device *dev, int head,
 	rd_cio_state(dev, head, regp, NV_CIO_CRE_21);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_20)
 		rd_cio_state(dev, head, regp, NV_CIO_CRE_47);
 
 	if (nv_device(drm->device)->card_type >= NV_30)
 =======
+=======
+>>>>>>> v3.18
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_KELVIN)
 		rd_cio_state(dev, head, regp, NV_CIO_CRE_47);
 
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_RANKINE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rd_cio_state(dev, head, regp, 0x9f);
 
@@ -713,6 +799,7 @@ nv_save_state_ext(struct drm_device *dev, int head,
 	rd_cio_state(dev, head, regp, NV_CIO_CRE_ILACE__INDEX);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_10) {
 		regp->crtc_830 = NVReadCRTC(dev, head, NV_PCRTC_830);
 		regp->crtc_834 = NVReadCRTC(dev, head, NV_PCRTC_834);
@@ -722,6 +809,8 @@ nv_save_state_ext(struct drm_device *dev, int head,
 
 		if (nv_device(drm->device)->card_type == NV_40)
 =======
+=======
+>>>>>>> v3.18
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
 		regp->crtc_830 = NVReadCRTC(dev, head, NV_PCRTC_830);
 		regp->crtc_834 = NVReadCRTC(dev, head, NV_PCRTC_834);
@@ -730,6 +819,9 @@ nv_save_state_ext(struct drm_device *dev, int head,
 			regp->gpio_ext = NVReadCRTC(dev, head, NV_PCRTC_GPIO_EXT);
 
 		if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regp->crtc_850 = NVReadCRTC(dev, head, NV_PCRTC_850);
 
@@ -743,7 +835,11 @@ nv_save_state_ext(struct drm_device *dev, int head,
 	rd_cio_state(dev, head, regp, NV_CIO_CRE_SCRATCH3__INDEX);
 	rd_cio_state(dev, head, regp, NV_CIO_CRE_SCRATCH4__INDEX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_10) {
+=======
+	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
 >>>>>>> v3.18
@@ -776,8 +872,13 @@ nv_load_state_ext(struct drm_device *dev, int head,
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
 	struct nouveau_timer *ptimer = nouveau_timer(device);
+=======
+	struct nvif_device *device = &drm->device;
+	struct nouveau_timer *ptimer = nvkm_timer(device);
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 	struct nouveau_timer *ptimer = nvkm_timer(device);
@@ -787,7 +888,11 @@ nv_load_state_ext(struct drm_device *dev, int head,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_10) {
+=======
+	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
 >>>>>>> v3.18
@@ -799,6 +904,7 @@ nv_load_state_ext(struct drm_device *dev, int head,
 			NVWriteCRTC(dev, head, NV_PCRTC_ENGINE_CTRL, regp->crtc_eng_ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(device, NV_PVIDEO_STOP, 1);
 		nv_wr32(device, NV_PVIDEO_INTR_EN, 0);
 		nv_wr32(device, NV_PVIDEO_OFFSET_BUFF(0), 0);
@@ -809,6 +915,8 @@ nv_load_state_ext(struct drm_device *dev, int head,
 		nv_wr32(device, NV_PVIDEO_UVPLANE_LIMIT(1), 0); //drm->fb_available_size - 1);
 		nv_wr32(device, NV_PBUS_POWERCTRL_2, 0);
 =======
+=======
+>>>>>>> v3.18
 		nvif_wr32(device, NV_PVIDEO_STOP, 1);
 		nvif_wr32(device, NV_PVIDEO_INTR_EN, 0);
 		nvif_wr32(device, NV_PVIDEO_OFFSET_BUFF(0), 0);
@@ -818,6 +926,9 @@ nv_load_state_ext(struct drm_device *dev, int head,
 		nvif_wr32(device, NV_PVIDEO_UVPLANE_LIMIT(0), device->info.ram_size - 1);
 		nvif_wr32(device, NV_PVIDEO_UVPLANE_LIMIT(1), device->info.ram_size - 1);
 		nvif_wr32(device, NV_PBUS_POWERCTRL_2, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		NVWriteCRTC(dev, head, NV_PCRTC_CURSOR_CONFIG, regp->cursor_cfg);
@@ -825,15 +936,21 @@ nv_load_state_ext(struct drm_device *dev, int head,
 		NVWriteCRTC(dev, head, NV_PCRTC_834, regp->crtc_834);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nv_device(drm->device)->card_type >= NV_30)
 			NVWriteCRTC(dev, head, NV_PCRTC_GPIO_EXT, regp->gpio_ext);
 
 		if (nv_device(drm->device)->card_type == NV_40) {
 =======
+=======
+>>>>>>> v3.18
 		if (drm->device.info.family >= NV_DEVICE_INFO_V0_RANKINE)
 			NVWriteCRTC(dev, head, NV_PCRTC_GPIO_EXT, regp->gpio_ext);
 
 		if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			NVWriteCRTC(dev, head, NV_PCRTC_850, regp->crtc_850);
 
@@ -858,15 +975,21 @@ nv_load_state_ext(struct drm_device *dev, int head,
 	wr_cio_state(dev, head, regp, NV_CIO_CRE_FFLWM__INDEX);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_20)
 		wr_cio_state(dev, head, regp, NV_CIO_CRE_47);
 
 	if (nv_device(drm->device)->card_type >= NV_30)
 =======
+=======
+>>>>>>> v3.18
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_KELVIN)
 		wr_cio_state(dev, head, regp, NV_CIO_CRE_47);
 
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_RANKINE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wr_cio_state(dev, head, regp, 0x9f);
 
@@ -875,7 +998,11 @@ nv_load_state_ext(struct drm_device *dev, int head,
 	wr_cio_state(dev, head, regp, NV_CIO_CRE_HCUR_ADDR1_INDEX);
 	wr_cio_state(dev, head, regp, NV_CIO_CRE_HCUR_ADDR2_INDEX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type == NV_40)
+=======
+	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family == NV_DEVICE_INFO_V0_CURIE)
 >>>>>>> v3.18
@@ -885,7 +1012,11 @@ nv_load_state_ext(struct drm_device *dev, int head,
 	wr_cio_state(dev, head, regp, NV_CIO_CRE_SCRATCH3__INDEX);
 	wr_cio_state(dev, head, regp, NV_CIO_CRE_SCRATCH4__INDEX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type >= NV_10) {
+=======
+	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family >= NV_DEVICE_INFO_V0_CELSIUS) {
 >>>>>>> v3.18
@@ -897,7 +1028,11 @@ nv_load_state_ext(struct drm_device *dev, int head,
 	/* NV11 and NV20 stop at 0x52. */
 	if (nv_gf4_disp_arch(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nv_device(drm->device)->card_type == NV_10) {
+=======
+		if (drm->device.info.family < NV_DEVICE_INFO_V0_KELVIN) {
+>>>>>>> v3.18
 =======
 		if (drm->device.info.family < NV_DEVICE_INFO_V0_KELVIN) {
 >>>>>>> v3.18
@@ -928,6 +1063,7 @@ nv_save_state_palette(struct drm_device *dev, int head,
 		      struct nv04_mode_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
 	int head_offset = head * NV_PRMDIO_SIZE, i;
 
@@ -938,6 +1074,8 @@ nv_save_state_palette(struct drm_device *dev, int head,
 	for (i = 0; i < 768; i++) {
 		state->crtc_reg[head].DAC[i] = nv_rd08(device,
 =======
+=======
+>>>>>>> v3.18
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 	int head_offset = head * NV_PRMDIO_SIZE, i;
 
@@ -947,6 +1085,9 @@ nv_save_state_palette(struct drm_device *dev, int head,
 
 	for (i = 0; i < 768; i++) {
 		state->crtc_reg[head].DAC[i] = nvif_rd08(device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				NV_PRMDIO_PALETTE_DATA + head_offset);
 	}
@@ -959,6 +1100,7 @@ nouveau_hw_load_state_palette(struct drm_device *dev, int head,
 			      struct nv04_mode_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
 	int head_offset = head * NV_PRMDIO_SIZE, i;
 
@@ -969,6 +1111,8 @@ nouveau_hw_load_state_palette(struct drm_device *dev, int head,
 	for (i = 0; i < 768; i++) {
 		nv_wr08(device, NV_PRMDIO_PALETTE_DATA + head_offset,
 =======
+=======
+>>>>>>> v3.18
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 	int head_offset = head * NV_PRMDIO_SIZE, i;
 
@@ -978,6 +1122,9 @@ nouveau_hw_load_state_palette(struct drm_device *dev, int head,
 
 	for (i = 0; i < 768; i++) {
 		nvif_wr08(device, NV_PRMDIO_PALETTE_DATA + head_offset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				state->crtc_reg[head].DAC[i]);
 	}
@@ -991,7 +1138,11 @@ void nouveau_hw_save_state(struct drm_device *dev, int head,
 	struct nouveau_drm *drm = nouveau_drm(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->chipset == 0x11)
+=======
+	if (drm->device.info.chipset == 0x11)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.chipset == 0x11)
 >>>>>>> v3.18

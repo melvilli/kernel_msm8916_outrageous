@@ -15,7 +15,10 @@ config META21_FPGA
 	  This is a Meta 2.1 FPGA bitstream, just a bare CPU.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SOC_TZ1090
 	bool "Toumaz Xenif TZ1090 SoC (Comet)"
 	select ARCH_WANT_OPTIONAL_GPIOLIB
@@ -30,6 +33,9 @@ config SOC_TZ1090
 	  This is a Toumaz Technology Xenif TZ1090 (A.K.A. Comet) SoC containing
 	  a 2-threaded HTP.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endchoice
 

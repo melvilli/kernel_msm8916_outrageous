@@ -1,6 +1,9 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  linux/arch/arm/mach-exynos4/headsmp.S
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -17,8 +20,11 @@
 #include <linux/init.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

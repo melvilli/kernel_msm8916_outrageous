@@ -72,6 +72,10 @@
 /* USB 2.0 xHCI 1.0 hardware LMP capability - section 7.2.2.1.3.2 */
 #define XHCI_HLC               (1 << 19)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XHCI_BLC               (1 << 20)
+>>>>>>> v3.18
 =======
 #define XHCI_BLC               (1 << 20)
 >>>>>>> v3.18

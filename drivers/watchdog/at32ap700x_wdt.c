@@ -322,6 +322,7 @@ static int __init at32_wdt_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdt = kzalloc(sizeof(struct wdt_at32ap700x), GFP_KERNEL);
 	if (!wdt) {
 		dev_dbg(&pdev->dev, "no memory for wdt structure\n");
@@ -330,12 +331,17 @@ static int __init at32_wdt_probe(struct platform_device *pdev)
 
 	wdt->regs = ioremap(regs->start, resource_size(regs));
 =======
+=======
+>>>>>>> v3.18
 	wdt = devm_kzalloc(&pdev->dev, sizeof(struct wdt_at32ap700x),
 			GFP_KERNEL);
 	if (!wdt)
 		return -ENOMEM;
 
 	wdt->regs = devm_ioremap(&pdev->dev, regs->start, resource_size(regs));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!wdt->regs) {
 		ret = -ENOMEM;
@@ -352,7 +358,11 @@ static int __init at32_wdt_probe(struct platform_device *pdev)
 				"reset or POR due to silicon errata.\n");
 		ret = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_iounmap;
+=======
+		goto err_free;
+>>>>>>> v3.18
 =======
 		goto err_free;
 >>>>>>> v3.18
@@ -378,7 +388,11 @@ static int __init at32_wdt_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_dbg(&pdev->dev, "failed to register wdt miscdev\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_register;
+=======
+		goto err_free;
+>>>>>>> v3.18
 =======
 		goto err_free;
 >>>>>>> v3.18
@@ -391,12 +405,16 @@ static int __init at32_wdt_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_register:
 	platform_set_drvdata(pdev, NULL);
 err_iounmap:
 	iounmap(wdt->regs);
 err_free:
 	kfree(wdt);
+=======
+err_free:
+>>>>>>> v3.18
 =======
 err_free:
 >>>>>>> v3.18
@@ -413,10 +431,14 @@ static int __exit at32_wdt_remove(struct platform_device *pdev)
 
 		misc_deregister(&wdt->miscdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iounmap(wdt->regs);
 		kfree(wdt);
 		wdt = NULL;
 		platform_set_drvdata(pdev, NULL);
+=======
+		wdt = NULL;
+>>>>>>> v3.18
 =======
 		wdt = NULL;
 >>>>>>> v3.18
@@ -467,6 +489,9 @@ MODULE_AUTHOR("Hans-Christian Egtvedt <egtvedt@samfundet.no>");
 MODULE_DESCRIPTION("Watchdog driver for Atmel AT32AP700X");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

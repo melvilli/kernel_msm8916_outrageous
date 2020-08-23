@@ -303,7 +303,11 @@ static void kvm_free_assigned_device(struct kvm *kvm,
 		pci_restore_state(assigned_dev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	assigned_dev->dev->dev_flags &= ~PCI_DEV_FLAGS_ASSIGNED;
+=======
+	pci_clear_dev_assigned(assigned_dev->dev);
+>>>>>>> v3.18
 =======
 	pci_clear_dev_assigned(assigned_dev->dev);
 >>>>>>> v3.18
@@ -400,7 +404,12 @@ static int assigned_device_enable_host_msix(struct kvm *kvm,
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = pci_enable_msix(dev->dev, dev->host_msix_entries, dev->entries_nr);
+=======
+	r = pci_enable_msix_exact(dev->dev,
+				  dev->host_msix_entries, dev->entries_nr);
+>>>>>>> v3.18
 =======
 	r = pci_enable_msix_exact(dev->dev,
 				  dev->host_msix_entries, dev->entries_nr);
@@ -535,13 +544,19 @@ static int assign_guest_irq(struct kvm *kvm,
 		if (dev->ack_notifier.gsi != -1)
 			kvm_register_irq_ack_notifier(kvm, &dev->ack_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		kvm_free_irq_source_id(kvm, dev->irq_source_id);
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		kvm_free_irq_source_id(kvm, dev->irq_source_id);
 		dev->irq_source_id = -1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r;

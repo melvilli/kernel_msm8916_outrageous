@@ -37,7 +37,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ia64, x86: Callback for event delivery. */
+=======
+/* x86: Callback for event delivery. */
+>>>>>>> v3.18
 =======
 /* x86: Callback for event delivery. */
 >>>>>>> v3.18

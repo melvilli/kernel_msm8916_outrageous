@@ -161,6 +161,7 @@ static ssize_t options_write(struct file *file, const char __user *userbuf,
 			     size_t count, loff_t *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char buf[20];
 
 	if (count >= sizeof(buf))
@@ -171,11 +172,16 @@ static ssize_t options_write(struct file *file, const char __user *userbuf,
 	if (strict_strtoul(buf, 0, &gru_options))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul_from_user(userbuf, count, 0, &gru_options);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return count;

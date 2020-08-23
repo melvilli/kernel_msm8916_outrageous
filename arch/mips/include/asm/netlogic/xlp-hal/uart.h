@@ -95,7 +95,12 @@
 #define nlm_write_uart_reg(b, r, v)	nlm_write_reg(b, r, v)
 #define nlm_get_uart_pcibase(node, inst)	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nlm_pcicfg_base(XLP_IO_UART_OFFSET(node, inst))
+=======
+	nlm_pcicfg_base(cpu_is_xlp9xx() ?  XLP9XX_IO_UART_OFFSET(node) : \
+						XLP_IO_UART_OFFSET(node, inst))
+>>>>>>> v3.18
 =======
 	nlm_pcicfg_base(cpu_is_xlp9xx() ?  XLP9XX_IO_UART_OFFSET(node) : \
 						XLP_IO_UART_OFFSET(node, inst))

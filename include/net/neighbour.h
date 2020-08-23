@@ -22,6 +22,10 @@
 #include <linux/rcupdate.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitmap.h>
 >>>>>>> v3.18
@@ -42,7 +46,10 @@
 struct neighbour;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	NEIGH_VAR_MCAST_PROBES,
 	NEIGH_VAR_UCAST_PROBES,
@@ -69,6 +76,9 @@ enum {
 	NEIGH_VAR_MAX
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct neigh_parms {
 #ifdef CONFIG_NET_NS
@@ -87,6 +97,7 @@ struct neigh_parms {
 	struct rcu_head rcu_head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	base_reachable_time;
 	int	retrans_time;
 	int	gc_staletime;
@@ -104,6 +115,8 @@ struct neigh_parms {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int	reachable_time;
 	int	data[NEIGH_VAR_DATA_MAX];
 	DECLARE_BITMAP(data_state, NEIGH_VAR_DATA_MAX);
@@ -133,6 +146,9 @@ static inline void neigh_parms_data_state_cleanall(struct neigh_parms *p)
 	bitmap_zero(p->data_state, NEIGH_VAR_DATA_MAX);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct neigh_statistics {
 	unsigned long allocs;		/* number of allocated neighs */
@@ -229,7 +245,10 @@ struct neigh_table {
 	char			*id;
 	struct neigh_parms	parms;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* HACK. gc_* should follow parms without a gap! */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			gc_interval;
@@ -249,12 +268,18 @@ struct neigh_table {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int neigh_parms_family(struct neigh_parms *p)
 {
 	return p->tbl->family;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NEIGH_PRIV_ALIGN	sizeof(long long)
 #define NEIGH_ENTRY_SIZE(size)	ALIGN((size), NEIGH_PRIV_ALIGN)
@@ -272,6 +297,7 @@ static inline void *neighbour_priv(const struct neighbour *n)
 #define NEIGH_UPDATE_F_ADMIN			0x80000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void			neigh_table_init(struct neigh_table *tbl);
 extern int			neigh_table_clear(struct neigh_table *tbl);
 extern struct neighbour *	neigh_lookup(struct neigh_table *tbl,
@@ -285,6 +311,8 @@ extern struct neighbour *	__neigh_create(struct neigh_table *tbl,
 					       struct net_device *dev,
 					       bool want_ref);
 =======
+=======
+>>>>>>> v3.18
 void neigh_table_init(struct neigh_table *tbl);
 int neigh_table_clear(struct neigh_table *tbl);
 struct neighbour *neigh_lookup(struct neigh_table *tbl, const void *pkey,
@@ -293,6 +321,9 @@ struct neighbour *neigh_lookup_nodev(struct neigh_table *tbl, struct net *net,
 				     const void *pkey);
 struct neighbour *__neigh_create(struct neigh_table *tbl, const void *pkey,
 				 struct net_device *dev, bool want_ref);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct neighbour *neigh_create(struct neigh_table *tbl,
 					     const void *pkey,
@@ -300,6 +331,7 @@ static inline struct neighbour *neigh_create(struct neigh_table *tbl,
 {
 	return __neigh_create(tbl, pkey, dev, true);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void			neigh_destroy(struct neighbour *neigh);
 extern int			__neigh_event_send(struct neighbour *neigh, struct sk_buff *skb);
@@ -321,6 +353,8 @@ extern void			neigh_parms_release(struct neigh_table *tbl, struct neigh_parms *p
 static inline
 struct net			*neigh_parms_net(const struct neigh_parms *parms)
 =======
+=======
+>>>>>>> v3.18
 void neigh_destroy(struct neighbour *neigh);
 int __neigh_event_send(struct neighbour *neigh, struct sk_buff *skb);
 int neigh_update(struct neighbour *neigh, const u8 *lladdr, u8 new, u32 flags);
@@ -341,11 +375,15 @@ void neigh_parms_release(struct neigh_table *tbl, struct neigh_parms *parms);
 
 static inline
 struct net *neigh_parms_net(const struct neigh_parms *parms)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return read_pnet(&parms->net);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned long		neigh_rand_reach_time(unsigned long base);
 
@@ -361,6 +399,8 @@ extern int			pneigh_delete(struct neigh_table *tbl, struct net *net, const void 
 static inline
 struct net			*pneigh_net(const struct pneigh_entry *pneigh)
 =======
+=======
+>>>>>>> v3.18
 unsigned long neigh_rand_reach_time(unsigned long base);
 
 void pneigh_enqueue(struct neigh_table *tbl, struct neigh_parms *p,
@@ -374,17 +414,23 @@ int pneigh_delete(struct neigh_table *tbl, struct net *net, const void *key,
 		  struct net_device *dev);
 
 static inline struct net *pneigh_net(const struct pneigh_entry *pneigh)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return read_pnet(&pneigh->net);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void neigh_app_ns(struct neighbour *n);
 extern void neigh_for_each(struct neigh_table *tbl, void (*cb)(struct neighbour *, void *), void *cookie);
 extern void __neigh_for_each_release(struct neigh_table *tbl, int (*cb)(struct neighbour *));
 extern void pneigh_for_each(struct neigh_table *tbl, void (*cb)(struct pneigh_entry *));
 =======
+=======
+>>>>>>> v3.18
 void neigh_app_ns(struct neighbour *n);
 void neigh_for_each(struct neigh_table *tbl,
 		    void (*cb)(struct neighbour *, void *), void *cookie);
@@ -392,6 +438,9 @@ void __neigh_for_each_release(struct neigh_table *tbl,
 			      int (*cb)(struct neighbour *));
 void pneigh_for_each(struct neigh_table *tbl,
 		     void (*cb)(struct pneigh_entry *));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct neigh_seq_state {
@@ -407,6 +456,7 @@ struct neigh_seq_state {
 #define NEIGH_SEQ_SKIP_NOARP	0x00000004
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *neigh_seq_start(struct seq_file *, loff_t *, struct neigh_table *, unsigned int);
 extern void *neigh_seq_next(struct seq_file *, void *, loff_t *);
 extern void neigh_seq_stop(struct seq_file *, void *);
@@ -417,6 +467,8 @@ extern int			neigh_sysctl_register(struct net_device *dev,
 						      proc_handler *proc_handler);
 extern void			neigh_sysctl_unregister(struct neigh_parms *p);
 =======
+=======
+>>>>>>> v3.18
 void *neigh_seq_start(struct seq_file *, loff_t *, struct neigh_table *,
 		      unsigned int);
 void *neigh_seq_next(struct seq_file *, void *, loff_t *);
@@ -434,6 +486,9 @@ int neigh_proc_dointvec_ms_jiffies(struct ctl_table *ctl, int write,
 int neigh_sysctl_register(struct net_device *dev, struct neigh_parms *p,
 			  proc_handler *proc_handler);
 void neigh_sysctl_unregister(struct neigh_parms *p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void __neigh_parms_put(struct neigh_parms *parms)
@@ -478,7 +533,11 @@ static inline int neigh_event_send(struct neighbour *neigh, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18

@@ -57,7 +57,12 @@ static inline unsigned char reg_read(struct ak4113 *ak4113, unsigned char reg)
 static void snd_ak4113_free(struct ak4113 *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&chip->wq_processing);	/* don't schedule new work */
+=======
+	chip->init = 1;	/* don't schedule new work */
+	mb();
+>>>>>>> v3.18
 =======
 	chip->init = 1;	/* don't schedule new work */
 	mb();
@@ -94,7 +99,10 @@ int snd_ak4113_create(struct snd_card *card, ak4113_read_t *read,
 	chip->private_data = private_data;
 	INIT_DELAYED_WORK(&chip->work, ak4113_stats);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&chip->wq_processing, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -107,7 +115,11 @@ int snd_ak4113_create(struct snd_card *card, ak4113_read_t *read,
 	chip->rcs1 = reg_read(chip, AK4113_REG_RCS1);
 	chip->rcs2 = reg_read(chip, AK4113_REG_RCS2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_device_new(card, SNDRV_DEV_LOWLEVEL, chip, &ops);
+=======
+	err = snd_device_new(card, SNDRV_DEV_CODEC, chip, &ops);
+>>>>>>> v3.18
 =======
 	err = snd_device_new(card, SNDRV_DEV_CODEC, chip, &ops);
 >>>>>>> v3.18
@@ -152,12 +164,15 @@ static void ak4113_init_regs(struct ak4113 *chip)
 void snd_ak4113_reinit(struct ak4113 *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_inc_return(&chip->wq_processing) == 1)
 		cancel_delayed_work_sync(&chip->work);
 	ak4113_init_regs(chip);
 	/* bring up statistics / event queing */
 	if (atomic_dec_and_test(&chip->wq_processing))
 =======
+=======
+>>>>>>> v3.18
 	chip->init = 1;
 	mb();
 	flush_delayed_work(&chip->work);
@@ -165,6 +180,9 @@ void snd_ak4113_reinit(struct ak4113 *chip)
 	/* bring up statistics / event queing */
 	chip->init = 0;
 	if (chip->kctls[0])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		schedule_delayed_work(&chip->work, HZ / 10);
 }
@@ -653,15 +671,21 @@ static void ak4113_stats(struct work_struct *work)
 	struct ak4113 *chip = container_of(work, struct ak4113, work.work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_inc_return(&chip->wq_processing) == 1)
 		snd_ak4113_check_rate_and_errors(chip, chip->check_flags);
 
 	if (atomic_dec_and_test(&chip->wq_processing))
 		schedule_delayed_work(&chip->work, HZ / 10);
 =======
+=======
+>>>>>>> v3.18
 	if (!chip->init)
 		snd_ak4113_check_rate_and_errors(chip, chip->check_flags);
 
 	schedule_delayed_work(&chip->work, HZ / 10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

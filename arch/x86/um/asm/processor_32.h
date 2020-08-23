@@ -34,6 +34,11 @@ struct arch_thread {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define STACKSLOTS_PER_LINE 8
+
+>>>>>>> v3.18
 =======
 #define STACKSLOTS_PER_LINE 8
 
@@ -59,6 +64,12 @@ static inline void arch_copy_thread(struct arch_thread *from,
 	({ void *pc; __asm__("movl $1f,%0\n1:":"=g" (pc)); pc; })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define current_sp() ({ void *sp; __asm__("movl %%esp, %0" : "=r" (sp) : ); sp; })
+#define current_bp() ({ unsigned long bp; __asm__("movl %%ebp, %0" : "=r" (bp) : ); bp; })
+
+>>>>>>> v3.18
 =======
 #define current_sp() ({ void *sp; __asm__("movl %%esp, %0" : "=r" (sp) : ); sp; })
 #define current_bp() ({ unsigned long bp; __asm__("movl %%ebp, %0" : "=r" (bp) : ); bp; })

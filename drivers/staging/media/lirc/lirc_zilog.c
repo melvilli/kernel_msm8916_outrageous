@@ -259,7 +259,10 @@ static void release_ir_rx(struct kref *ref)
 	ir->rx = NULL;
 	/* Don't do the kfree(rx) here; we still need to kill the poll thread */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -516,7 +519,10 @@ static int set_use_inc(void *data)
 static void set_use_dec(void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -625,6 +631,10 @@ static int get_key_data(unsigned char *buf,
 		/* Seek to block */
 		unsigned char *key_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -639,6 +649,10 @@ static int get_key_data(unsigned char *buf,
 			for (i = 0; i < ndiffs; ++i) {
 				unsigned char val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -671,6 +685,10 @@ static int send_data_block(struct IR_tx *tx, unsigned char *data_block)
 	for (i = 0; i < TX_BLOCK_SIZE;) {
 		int tosend = TX_BLOCK_SIZE - i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -786,8 +804,13 @@ static int fw_load(struct IR_tx *tx)
 	ret = request_firmware(&fw_entry, "haup-ir-blaster.bin", tx->ir->l.dev);
 	if (ret != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zilog_error("firmware haup-ir-blaster.bin not available "
 			    "(%d)\n", ret);
+=======
+		zilog_error("firmware haup-ir-blaster.bin not available (%d)\n",
+			    ret);
+>>>>>>> v3.18
 =======
 		zilog_error("firmware haup-ir-blaster.bin not available (%d)\n",
 			    ret);
@@ -862,6 +885,10 @@ static int fw_load(struct IR_tx *tx)
 	for (i = 0; i < num_global_fixed; ++i) {
 		unsigned char pos, val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -920,7 +947,12 @@ out:
 
 /* copied from lirc_dev */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t read(struct file *filep, char *outbuf, size_t n, loff_t *ppos)
+=======
+static ssize_t read(struct file *filep, char __user *outbuf, size_t n,
+		    loff_t *ppos)
+>>>>>>> v3.18
 =======
 static ssize_t read(struct file *filep, char __user *outbuf, size_t n,
 		    loff_t *ppos)
@@ -987,7 +1019,11 @@ static ssize_t read(struct file *filep, char __user *outbuf, size_t n,
 			m = lirc_buffer_read(rbuf, buf);
 			if (m == rbuf->chunk_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ret = copy_to_user((void *)outbuf+written, buf,
+=======
+				ret = copy_to_user(outbuf + written, buf,
+>>>>>>> v3.18
 =======
 				ret = copy_to_user(outbuf + written, buf,
 >>>>>>> v3.18
@@ -1131,8 +1167,13 @@ static int send_code(struct IR_tx *tx, unsigned int code, unsigned int key)
  * multiple concurrent sends which would probably cause the device to explode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t write(struct file *filep, const char *buf, size_t n,
 			  loff_t *ppos)
+=======
+static ssize_t write(struct file *filep, const char __user *buf, size_t n,
+		     loff_t *ppos)
+>>>>>>> v3.18
 =======
 static ssize_t write(struct file *filep, const char __user *buf, size_t n,
 		     loff_t *ppos)
@@ -1279,6 +1320,10 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 {
 	struct IR *ir = filep->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long __user *uptr = (unsigned long __user *)arg;
+>>>>>>> v3.18
 =======
 	unsigned long __user *uptr = (unsigned long __user *)arg;
 >>>>>>> v3.18
@@ -1290,16 +1335,22 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 	switch (cmd) {
 	case LIRC_GET_LENGTH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = put_user((unsigned long)13,
 				  (unsigned long *)arg);
 		break;
 	case LIRC_GET_FEATURES:
 		result = put_user(features, (unsigned long *) arg);
 =======
+=======
+>>>>>>> v3.18
 		result = put_user(13UL, uptr);
 		break;
 	case LIRC_GET_FEATURES:
 		result = put_user(features, uptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case LIRC_GET_REC_MODE:
@@ -1309,7 +1360,11 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 		result = put_user(LIRC_REC2MODE
 				  (features&LIRC_CAN_REC_MASK),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  (unsigned long *)arg);
+=======
+				  uptr);
+>>>>>>> v3.18
 =======
 				  uptr);
 >>>>>>> v3.18
@@ -1319,7 +1374,11 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 			return -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = get_user(mode, (unsigned long *)arg);
+=======
+		result = get_user(mode, uptr);
+>>>>>>> v3.18
 =======
 		result = get_user(mode, uptr);
 >>>>>>> v3.18
@@ -1331,7 +1390,11 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 			return -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = put_user(LIRC_MODE_PULSE, (unsigned long *) arg);
+=======
+		result = put_user(LIRC_MODE_PULSE, uptr);
+>>>>>>> v3.18
 =======
 		result = put_user(LIRC_MODE_PULSE, uptr);
 >>>>>>> v3.18
@@ -1341,7 +1404,11 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 			return -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = get_user(mode, (unsigned long *) arg);
+=======
+		result = get_user(mode, uptr);
+>>>>>>> v3.18
 =======
 		result = get_user(mode, uptr);
 >>>>>>> v3.18
@@ -1404,6 +1471,10 @@ static int close(struct inode *node, struct file *filep)
 	/* find our IR struct */
 	struct IR *ir = filep->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1474,6 +1545,10 @@ static int ir_remove(struct i2c_client *client)
 	if (strncmp("ir_tx_z8", client->name, 8) == 0) {
 		struct IR_tx *tx = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1486,6 +1561,10 @@ static int ir_remove(struct i2c_client *client)
 	} else if (strncmp("ir_rx_z8", client->name, 8) == 0) {
 		struct IR_rx *rx = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -507,12 +507,18 @@ static void send_message(capidrv_contr *card, _cmsg *cmsg)
 	size_t len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capi_cmsg2message(cmsg, cmsg->buf);
 =======
+=======
+>>>>>>> v3.18
 	if (capi_cmsg2message(cmsg, cmsg->buf)) {
 		printk(KERN_ERR "capidrv::send_message: parser failure\n");
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	len = CAPIMSG_LEN(cmsg->buf);
 	skb = alloc_skb(len, GFP_ATOMIC);
@@ -771,7 +777,10 @@ static inline int new_bchan(capidrv_contr *card)
 
 /* ------------------------------------------------------------------- */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static char *capi_info2str(u16 reason)
 {
 #ifndef CONFIG_ISDN_CAPI_CAPIDRV_VERBOSE
@@ -967,6 +976,9 @@ static char *capi_info2str(u16 reason)
 	}
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void handle_controller(_cmsg *cmsg)
@@ -1589,14 +1601,20 @@ static _cmsg s_cmsg;
 static void capidrv_recv_message(struct capi20_appl *ap, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capi_message2cmsg(&s_cmsg, skb->data);
 =======
+=======
+>>>>>>> v3.18
 	if (capi_message2cmsg(&s_cmsg, skb->data)) {
 		printk(KERN_ERR "capidrv: applid=%d: received invalid message\n",
 		       ap->applid);
 		kfree_skb(skb);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (debugmode > 3) {
 		_cdebbuf *cdb = capi_cmsg2str(&s_cmsg);
@@ -1923,13 +1941,19 @@ static int capidrv_command(isdn_ctrl *c, capidrv_contr *card)
 				       NULL	/* Facilitydataarray */
 			);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		capi_cmsg2message(&cmdcmsg, cmdcmsg.buf);
 =======
+=======
+>>>>>>> v3.18
 		if (capi_cmsg2message(&cmdcmsg, cmdcmsg.buf)) {
 			printk(KERN_ERR "capidrv-%d: capidrv_command: parser failure\n",
 			       card->contrnr);
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		plci_change_state(card, bchan->plcip, EV_PLCI_CONNECT_RESP);
 		send_message(card, &cmdcmsg);
@@ -2118,13 +2142,19 @@ static int if_sendbuf(int id, int channel, int doack, struct sk_buff *skb)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capi_cmsg2message(&sendcmsg, sendcmsg.buf);
 =======
+=======
+>>>>>>> v3.18
 	if (capi_cmsg2message(&sendcmsg, sendcmsg.buf)) {
 		printk(KERN_ERR "capidrv-%d: if_sendbuf: parser failure\n",
 		       card->contrnr);
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msglen = CAPIMSG_LEN(sendcmsg.buf);
 	if (skb_headroom(skb) < msglen) {

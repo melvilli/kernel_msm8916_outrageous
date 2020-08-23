@@ -28,12 +28,15 @@ struct ocfs2_acl_entry {
 
 struct posix_acl *ocfs2_iop_get_acl(struct inode *inode, int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ocfs2_acl_chmod(struct inode *);
 extern int ocfs2_init_acl(handle_t *, struct inode *, struct inode *,
 			  struct buffer_head *, struct buffer_head *,
 			  struct ocfs2_alloc_context *,
 			  struct ocfs2_alloc_context *);
 =======
+=======
+>>>>>>> v3.18
 int ocfs2_iop_set_acl(struct inode *inode, struct posix_acl *acl, int type);
 int ocfs2_set_acl(handle_t *handle,
 			 struct inode *inode,
@@ -42,6 +45,9 @@ int ocfs2_set_acl(handle_t *handle,
 			 struct posix_acl *acl,
 			 struct ocfs2_alloc_context *meta_ac,
 			 struct ocfs2_alloc_context *data_ac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* OCFS2_ACL_H */

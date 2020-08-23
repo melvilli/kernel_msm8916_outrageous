@@ -18,6 +18,7 @@
 #include <sound/soc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <trace/events/asoc.h>
 
 #ifdef CONFIG_REGMAP
@@ -172,6 +173,8 @@ int snd_soc_codec_set_cache_io(struct snd_soc_codec *codec,
 EXPORT_SYMBOL_GPL(snd_soc_codec_set_cache_io);
 #endif
 =======
+=======
+>>>>>>> v3.18
 /**
  * snd_soc_component_read() - Read register value
  * @component: Component to read from
@@ -426,4 +429,7 @@ int snd_soc_platform_write(struct snd_soc_platform *platform,
 	return snd_soc_component_write(&platform->component, reg, val);
 }
 EXPORT_SYMBOL_GPL(snd_soc_platform_write);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

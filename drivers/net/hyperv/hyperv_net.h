@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License along with
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place - Suite 330, Boston, MA 02111-1307 USA.
+=======
+ * this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 #include <linux/rndis.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Fwd declaration */
 struct hv_netvsc_packet;
 
@@ -47,6 +52,8 @@ struct xferpage_packet {
 };
 
 =======
+=======
+>>>>>>> v3.18
 /* RSS related */
 #define OID_GEN_RECEIVE_SCALE_CAPABILITIES 0x00010203  /* query only */
 #define OID_GEN_RECEIVE_SCALE_PARAMETERS 0x00010204  /* query and set */
@@ -140,6 +147,9 @@ struct ndis_recv_scale_param { /* NDIS_RECEIVE_SCALE_PARAMETERS */
 /* Fwd declaration */
 struct ndis_tcp_ip_checksum_info;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Represent netvsc packet which contains 1 RNDIS and 1 ethernet frame
@@ -148,7 +158,10 @@ struct ndis_tcp_ip_checksum_info;
 struct hv_netvsc_packet {
 	/* Bookkeeping stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head list_ent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 status;
@@ -157,6 +170,7 @@ struct hv_netvsc_packet {
 	bool is_data_pkt;
 	u16 vlan_tci;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Valid only for receives when we break a xfer page packet
@@ -180,6 +194,8 @@ struct hv_netvsc_packet {
 	/* This points to the memory after page_buf */
 	void *extension;
 =======
+=======
+>>>>>>> v3.18
 	u16 q_idx;
 	struct vmbus_channel *channel;
 
@@ -191,6 +207,9 @@ struct hv_netvsc_packet {
 
 	/* This points to the memory after page_buf */
 	struct rndis_message *rndis_msg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u32 total_data_buflen;
@@ -219,6 +238,10 @@ struct rndis_device {
 	enum rndis_device_state state;
 	bool link_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool link_change;
+>>>>>>> v3.18
 =======
 	bool link_change;
 >>>>>>> v3.18
@@ -238,15 +261,21 @@ int netvsc_send(struct hv_device *device,
 		struct hv_netvsc_packet *packet);
 void netvsc_linkstatus_callback(struct hv_device *device_obj,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned int status);
 int netvsc_recv_callback(struct hv_device *device_obj,
 			struct hv_netvsc_packet *packet);
 =======
+=======
+>>>>>>> v3.18
 				struct rndis_message *resp);
 int netvsc_recv_callback(struct hv_device *device_obj,
 			struct hv_netvsc_packet *packet,
 			struct ndis_tcp_ip_checksum_info *csum_info);
 void netvsc_channel_cb(void *context);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int rndis_filter_open(struct hv_device *dev);
 int rndis_filter_close(struct hv_device *dev);
@@ -257,11 +286,14 @@ int rndis_filter_receive(struct hv_device *dev,
 			struct hv_netvsc_packet *pkt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 int rndis_filter_send(struct hv_device *dev,
 			struct hv_netvsc_packet *pkt);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int rndis_filter_set_packet_filter(struct rndis_device *dev, u32 new_filter);
@@ -273,6 +305,11 @@ int rndis_filter_set_device_mac(struct hv_device *hdev, char *mac);
 #define NVSP_PROTOCOL_VERSION_1		2
 #define NVSP_PROTOCOL_VERSION_2		0x30002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NVSP_PROTOCOL_VERSION_4		0x40000
+#define NVSP_PROTOCOL_VERSION_5		0x50000
+>>>>>>> v3.18
 =======
 #define NVSP_PROTOCOL_VERSION_4		0x40000
 #define NVSP_PROTOCOL_VERSION_5		0x50000
@@ -332,7 +369,10 @@ enum {
 	NVSP_MSG2_TYPE_ALLOC_CHIMNEY_HANDLE,
 	NVSP_MSG2_TYPE_ALLOC_CHIMNEY_HANDLE_COMP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	NVSP_MSG2_MAX = NVSP_MSG2_TYPE_ALLOC_CHIMNEY_HANDLE_COMP,
 
@@ -350,6 +390,9 @@ enum {
 	NVSP_MSG5_TYPE_SEND_INDIRECTION_TABLE,
 
 	NVSP_MSG5_MAX = NVSP_MSG5_TYPE_SEND_INDIRECTION_TABLE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -606,7 +649,10 @@ union nvsp_2_message_uber {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum nvsp_subchannel_operation {
 	NVSP_SUBCHANNEL_NONE = 0,
 	NVSP_SUBCHANNEL_ALLOCATE,
@@ -640,12 +686,19 @@ union nvsp_5_message_uber {
 	struct nvsp_5_send_indirect_table send_table;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 union nvsp_all_messages {
 	union nvsp_message_init_uber init_msg;
 	union nvsp_1_message_uber v1_msg;
 	union nvsp_2_message_uber v2_msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	union nvsp_5_message_uber v5_msg;
+>>>>>>> v3.18
 =======
 	union nvsp_5_message_uber v5_msg;
 >>>>>>> v3.18
@@ -661,6 +714,7 @@ struct nvsp_message {
 #define NETVSC_MTU 65536
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NETVSC_RECEIVE_BUFFER_SIZE		(1024*1024*2)	/* 2MB */
 
 #define NETVSC_RECEIVE_BUFFER_ID		0xcafe
@@ -670,6 +724,8 @@ struct nvsp_message {
 
 #define NETVSC_PACKET_SIZE                      2048
 =======
+=======
+>>>>>>> v3.18
 #define NETVSC_RECEIVE_BUFFER_SIZE		(1024*1024*16)	/* 16MB */
 #define NETVSC_RECEIVE_BUFFER_SIZE_LEGACY	(1024*1024*15)  /* 15MB */
 #define NETVSC_SEND_BUFFER_SIZE			(1024 * 1024 * 15)   /* 15MB */
@@ -681,6 +737,9 @@ struct nvsp_message {
 #define NETVSC_PACKET_SIZE                      4096
 
 #define VRSS_SEND_TAB_SIZE 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Per netvsc channel-specific */
@@ -694,12 +753,15 @@ struct netvsc_device {
 	bool start_remove;
 	bool destroy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * List of free preallocated hv_netvsc_packet to represent receive
 	 * packet
 	 */
 	struct list_head recv_pkt_list;
 	spinlock_t recv_pkt_list_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -711,7 +773,10 @@ struct netvsc_device {
 	struct nvsp_1_receive_buffer_section *recv_section;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Send buffer allocated by us */
 	void *send_buf;
 	u32 send_buf_size;
@@ -721,6 +786,9 @@ struct netvsc_device {
 	unsigned long *send_section_map;
 	int map_words;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Used for NetVSP initialization protocol */
 	struct completion channel_init_wait;
@@ -732,9 +800,12 @@ struct netvsc_device {
 	struct net_device *ndev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Holds rndis device info */
 	void *extension;
 =======
+=======
+>>>>>>> v3.18
 	struct vmbus_channel *chn_table[NR_CPUS];
 	u32 send_table[VRSS_SEND_TAB_SIZE];
 	u32 num_chn;
@@ -749,6 +820,9 @@ struct netvsc_device {
 	unsigned char *cb_buffer;
 	/* The sub channel callback buffer */
 	unsigned char *sub_cb_buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -898,6 +972,10 @@ enum ndis_per_pkt_info_type {
 	ORIGINAL_PKTINFO,
 	PACKET_CANCEL_ID,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NBL_HASH_VALUE = PACKET_CANCEL_ID,
+>>>>>>> v3.18
 =======
 	NBL_HASH_VALUE = PACKET_CANCEL_ID,
 >>>>>>> v3.18
@@ -920,10 +998,13 @@ struct ndis_pkt_8021q_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NDIS_VLAN_PPI_SIZE (sizeof(struct rndis_per_packet_info) + \
 		sizeof(struct ndis_pkt_8021q_info))
 
 =======
+=======
+>>>>>>> v3.18
 struct ndis_oject_header {
 	u8 type;
 	u8 revision;
@@ -1055,6 +1136,9 @@ struct ndis_tcp_lso_info {
 #define NDIS_HASH_PPI_SIZE (sizeof(struct rndis_per_packet_info) + \
 		sizeof(u32))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Format of Information buffer passed in a SetRequest for the OID */
 /* OID_GEN_RNDIS_CONFIG_PARAMETER. */
@@ -1229,12 +1313,15 @@ struct rndis_message {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rndis_filter_packet {
 	void *completion_ctx;
 	void (*completion)(void *context);
 	struct rndis_message msg;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Handy macros */
@@ -1291,7 +1378,10 @@ struct rndis_filter_packet {
 #define NDIS_PACKET_TYPE_MAC_FRAME	0x00000800
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define INFO_IPV4       2
 #define INFO_IPV6       4
 #define INFO_TCP        2
@@ -1302,6 +1392,9 @@ struct rndis_filter_packet {
 #define TRANSPORT_INFO_IPV4_UDP ((INFO_IPV4 << 16) | INFO_UDP)
 #define TRANSPORT_INFO_IPV6_TCP ((INFO_IPV6 << 16) | INFO_TCP)
 #define TRANSPORT_INFO_IPV6_UDP ((INFO_IPV6 << 16) | INFO_UDP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

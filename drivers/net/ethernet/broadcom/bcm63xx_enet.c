@@ -42,8 +42,13 @@ module_param(copybreak, int, 0);
 MODULE_PARM_DESC(copybreak, "Receive copy threshold");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* io memory shared between all devices */
 static void __iomem *bcm_enet_shared_base;
+=======
+/* io registers memory shared between all devices */
+static void __iomem *bcm_enet_shared_base[3];
+>>>>>>> v3.18
 =======
 /* io registers memory shared between all devices */
 static void __iomem *bcm_enet_shared_base[3];
@@ -65,12 +70,15 @@ static inline void enet_writel(struct bcm_enet_priv *priv,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * io helpers to access shared registers
  */
 static inline u32 enet_dma_readl(struct bcm_enet_priv *priv, u32 off)
 {
 	return bcm_readl(bcm_enet_shared_base + off);
 =======
+=======
+>>>>>>> v3.18
  * io helpers to access switch registers
  */
 static inline u32 enetsw_readl(struct bcm_enet_priv *priv, u32 off)
@@ -111,6 +119,9 @@ static inline void enetsw_writeb(struct bcm_enet_priv *priv,
 static inline u32 enet_dma_readl(struct bcm_enet_priv *priv, u32 off)
 {
 	return bcm_readl(bcm_enet_shared_base[0] + off);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -118,8 +129,11 @@ static inline void enet_dma_writel(struct bcm_enet_priv *priv,
 				       u32 val, u32 off)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcm_writel(val, bcm_enet_shared_base + off);
 =======
+=======
+>>>>>>> v3.18
 	bcm_writel(val, bcm_enet_shared_base[0] + off);
 }
 
@@ -145,6 +159,9 @@ static inline void enet_dmas_writel(struct bcm_enet_priv *priv,
 				       u32 val, u32 off, int chan)
 {
 	bcm_writel(val, bcm_enet_shared_base[2] + off + chan * priv->dma_chan_width);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -273,7 +290,10 @@ static int bcm_enet_refill_rx(struct net_device *dev)
 				break;
 			priv->rx_skb[desc_idx] = skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			p = dma_map_single(&priv->pdev->dev, skb->data,
@@ -286,7 +306,11 @@ static int bcm_enet_refill_rx(struct net_device *dev)
 		len_stat |= DMADESC_OWNER_MASK;
 		if (priv->rx_dirty_desc == priv->rx_ring_size - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			len_stat |= DMADESC_WRAP_MASK;
+=======
+			len_stat |= (DMADESC_WRAP_MASK >> priv->dma_desc_shift);
+>>>>>>> v3.18
 =======
 			len_stat |= (DMADESC_WRAP_MASK >> priv->dma_desc_shift);
 >>>>>>> v3.18
@@ -301,12 +325,18 @@ static int bcm_enet_refill_rx(struct net_device *dev)
 
 		/* tell dma engine we allocated one buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		enet_dma_writel(priv, 1, ENETDMA_BUFALLOC_REG(priv->rx_chan));
 =======
+=======
+>>>>>>> v3.18
 		if (priv->dma_has_sram)
 			enet_dma_writel(priv, 1, ENETDMA_BUFALLOC_REG(priv->rx_chan));
 		else
 			enet_dmac_writel(priv, 1, ENETDMAC_BUFALLOC, priv->rx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -384,7 +414,12 @@ static int bcm_enet_receive_queue(struct net_device *dev, int budget)
 		/* if the packet does not have start of packet _and_
 		 * end of packet flag set, then just recycle it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((len_stat & DMADESC_ESOP_MASK) != DMADESC_ESOP_MASK) {
+=======
+		if ((len_stat & (DMADESC_ESOP_MASK >> priv->dma_desc_shift)) !=
+			(DMADESC_ESOP_MASK >> priv->dma_desc_shift)) {
+>>>>>>> v3.18
 =======
 		if ((len_stat & (DMADESC_ESOP_MASK >> priv->dma_desc_shift)) !=
 			(DMADESC_ESOP_MASK >> priv->dma_desc_shift)) {
@@ -395,7 +430,12 @@ static int bcm_enet_receive_queue(struct net_device *dev, int budget)
 
 		/* recycle packet if it's marked as bad */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unlikely(len_stat & DMADESC_ERR_MASK)) {
+=======
+		if (!priv->enet_is_sw &&
+		    unlikely(len_stat & DMADESC_ERR_MASK)) {
+>>>>>>> v3.18
 =======
 		if (!priv->enet_is_sw &&
 		    unlikely(len_stat & DMADESC_ERR_MASK)) {
@@ -454,8 +494,13 @@ static int bcm_enet_receive_queue(struct net_device *dev, int budget)
 
 		/* kick rx dma */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		enet_dma_writel(priv, ENETDMA_CHANCFG_EN_MASK,
 				ENETDMA_CHANCFG_REG(priv->rx_chan));
+=======
+		enet_dmac_writel(priv, priv->dma_chan_en_mask,
+					 ENETDMAC_CHANCFG, priv->rx_chan);
+>>>>>>> v3.18
 =======
 		enet_dmac_writel(priv, priv->dma_chan_en_mask,
 					 ENETDMAC_CHANCFG, priv->rx_chan);
@@ -535,15 +580,21 @@ static int bcm_enet_poll(struct napi_struct *napi, int budget)
 
 	/* ack interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IR_REG(priv->rx_chan));
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IR_REG(priv->tx_chan));
 =======
+=======
+>>>>>>> v3.18
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IR, priv->rx_chan);
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IR, priv->tx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* reclaim sent skb */
@@ -564,15 +615,21 @@ static int bcm_enet_poll(struct napi_struct *napi, int budget)
 
 	/* restore rx/tx interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IRMASK_REG(priv->rx_chan));
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IRMASK_REG(priv->tx_chan));
 =======
+=======
+>>>>>>> v3.18
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IRMASK, priv->rx_chan);
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IRMASK, priv->tx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rx_work_done;
@@ -617,8 +674,13 @@ static irqreturn_t bcm_enet_isr_dma(int irq, void *dev_id)
 
 	/* mask rx/tx interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, 0, ENETDMA_IRMASK_REG(priv->rx_chan));
 	enet_dma_writel(priv, 0, ENETDMA_IRMASK_REG(priv->tx_chan));
+=======
+	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->rx_chan);
+	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->tx_chan);
+>>>>>>> v3.18
 =======
 	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->rx_chan);
 	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->tx_chan);
@@ -655,7 +717,10 @@ static int bcm_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* pad small packets sent on a switch device */
 	if (priv->enet_is_sw && skb->len < 64) {
 		int needed = 64 - skb->len;
@@ -676,6 +741,9 @@ static int bcm_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		memset(data, 0, needed);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* point to the next available desc */
 	desc = &priv->tx_desc_cpu[priv->tx_curr_desc];
@@ -687,7 +755,11 @@ static int bcm_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	len_stat = (skb->len << DMADESC_LENGTH_SHIFT) & DMADESC_LENGTH_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len_stat |= DMADESC_ESOP_MASK |
+=======
+	len_stat |= (DMADESC_ESOP_MASK >> priv->dma_desc_shift) |
+>>>>>>> v3.18
 =======
 	len_stat |= (DMADESC_ESOP_MASK >> priv->dma_desc_shift) |
 >>>>>>> v3.18
@@ -698,7 +770,11 @@ static int bcm_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (priv->tx_curr_desc == priv->tx_ring_size) {
 		priv->tx_curr_desc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len_stat |= DMADESC_WRAP_MASK;
+=======
+		len_stat |= (DMADESC_WRAP_MASK >> priv->dma_desc_shift);
+>>>>>>> v3.18
 =======
 		len_stat |= (DMADESC_WRAP_MASK >> priv->dma_desc_shift);
 >>>>>>> v3.18
@@ -713,8 +789,13 @@ static int bcm_enet_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	/* kick tx dma */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_CHANCFG_EN_MASK,
 			ENETDMA_CHANCFG_REG(priv->tx_chan));
+=======
+	enet_dmac_writel(priv, priv->dma_chan_en_mask,
+				 ENETDMAC_CHANCFG, priv->tx_chan);
+>>>>>>> v3.18
 =======
 	enet_dmac_writel(priv, priv->dma_chan_en_mask,
 				 ENETDMAC_CHANCFG, priv->tx_chan);
@@ -847,6 +928,12 @@ static void bcm_enet_set_flow(struct bcm_enet_priv *priv, int rx_en, int tx_en)
 	enet_writel(priv, val, ENET_RXCFG_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!priv->dma_has_sram)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!priv->dma_has_sram)
 		return;
@@ -1000,8 +1087,13 @@ static int bcm_enet_open(struct net_device *dev)
 	/* mask all interrupts and request them */
 	enet_writel(priv, 0, ENET_IRMASK_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, 0, ENETDMA_IRMASK_REG(priv->rx_chan));
 	enet_dma_writel(priv, 0, ENETDMA_IRMASK_REG(priv->tx_chan));
+=======
+	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->rx_chan);
+	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->tx_chan);
+>>>>>>> v3.18
 =======
 	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->rx_chan);
 	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->tx_chan);
@@ -1012,7 +1104,11 @@ static int bcm_enet_open(struct net_device *dev)
 		goto out_phy_disconnect;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(priv->irq_rx, bcm_enet_isr_dma, IRQF_DISABLED,
+=======
+	ret = request_irq(priv->irq_rx, bcm_enet_isr_dma, 0,
+>>>>>>> v3.18
 =======
 	ret = request_irq(priv->irq_rx, bcm_enet_isr_dma, 0,
 >>>>>>> v3.18
@@ -1022,7 +1118,11 @@ static int bcm_enet_open(struct net_device *dev)
 
 	ret = request_irq(priv->irq_tx, bcm_enet_isr_dma,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  IRQF_DISABLED, dev->name, dev);
+=======
+			  0, dev->name, dev);
+>>>>>>> v3.18
 =======
 			  0, dev->name, dev);
 >>>>>>> v3.18
@@ -1042,8 +1142,12 @@ static int bcm_enet_open(struct net_device *dev)
 	/* allocate rx dma ring */
 	size = priv->rx_ring_size * sizeof(struct bcm_enet_desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = dma_alloc_coherent(kdev, size, &priv->rx_desc_dma,
 			       GFP_KERNEL | __GFP_ZERO);
+=======
+	p = dma_zalloc_coherent(kdev, size, &priv->rx_desc_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	p = dma_zalloc_coherent(kdev, size, &priv->rx_desc_dma, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1058,8 +1162,12 @@ static int bcm_enet_open(struct net_device *dev)
 	/* allocate tx dma ring */
 	size = priv->tx_ring_size * sizeof(struct bcm_enet_desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = dma_alloc_coherent(kdev, size, &priv->tx_desc_dma,
 			       GFP_KERNEL | __GFP_ZERO);
+=======
+	p = dma_zalloc_coherent(kdev, size, &priv->tx_desc_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	p = dma_zalloc_coherent(kdev, size, &priv->tx_desc_dma, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1097,15 +1205,21 @@ static int bcm_enet_open(struct net_device *dev)
 
 	/* initialize flow control buffer allocation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_BUFALLOC_FORCE_MASK | 0,
 			ENETDMA_BUFALLOC_REG(priv->rx_chan));
 =======
+=======
+>>>>>>> v3.18
 	if (priv->dma_has_sram)
 		enet_dma_writel(priv, ENETDMA_BUFALLOC_FORCE_MASK | 0,
 				ENETDMA_BUFALLOC_REG(priv->rx_chan));
 	else
 		enet_dmac_writel(priv, ENETDMA_BUFALLOC_FORCE_MASK | 0,
 				ENETDMAC_BUFALLOC, priv->rx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bcm_enet_refill_rx(dev)) {
@@ -1115,6 +1229,7 @@ static int bcm_enet_open(struct net_device *dev)
 	}
 
 	/* write rx & tx ring addresses */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enet_dma_writel(priv, priv->rx_desc_dma,
 			ENETDMA_RSTART_REG(priv->rx_chan));
@@ -1129,6 +1244,8 @@ static int bcm_enet_open(struct net_device *dev)
 	enet_dma_writel(priv, 0, ENETDMA_SRAM4_REG(priv->rx_chan));
 	enet_dma_writel(priv, 0, ENETDMA_SRAM4_REG(priv->tx_chan));
 =======
+=======
+>>>>>>> v3.18
 	if (priv->dma_has_sram) {
 		enet_dmas_writel(priv, priv->rx_desc_dma,
 				 ENETDMAS_RSTART_REG, priv->rx_chan);
@@ -1153,6 +1270,9 @@ static int bcm_enet_open(struct net_device *dev)
 		enet_dmac_writel(priv, 0, ENETDMAC_FC, priv->rx_chan);
 		enet_dmac_writel(priv, 0, ENETDMAC_FC, priv->tx_chan);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set max rx/tx length */
@@ -1161,15 +1281,21 @@ static int bcm_enet_open(struct net_device *dev)
 
 	/* set dma maximum burst len */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, BCMENET_DMA_MAXBURST,
 			ENETDMA_MAXBURST_REG(priv->rx_chan));
 	enet_dma_writel(priv, BCMENET_DMA_MAXBURST,
 			ENETDMA_MAXBURST_REG(priv->tx_chan));
 =======
+=======
+>>>>>>> v3.18
 	enet_dmac_writel(priv, priv->dma_maxburst,
 			 ENETDMAC_MAXBURST, priv->rx_chan);
 	enet_dmac_writel(priv, priv->dma_maxburst,
 			 ENETDMAC_MAXBURST, priv->tx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set correct transmit fifo watermark */
@@ -1177,11 +1303,14 @@ static int bcm_enet_open(struct net_device *dev)
 
 	/* set flow control low/high threshold to 1/3 / 2/3 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = priv->rx_ring_size / 3;
 	enet_dma_writel(priv, val, ENETDMA_FLOWCL_REG(priv->rx_chan));
 	val = (priv->rx_ring_size * 2) / 3;
 	enet_dma_writel(priv, val, ENETDMA_FLOWCH_REG(priv->rx_chan));
 =======
+=======
+>>>>>>> v3.18
 	if (priv->dma_has_sram) {
 		val = priv->rx_ring_size / 3;
 		enet_dma_writel(priv, val, ENETDMA_FLOWCL_REG(priv->rx_chan));
@@ -1192,6 +1321,9 @@ static int bcm_enet_open(struct net_device *dev)
 		enet_dmac_writel(priv, priv->rx_ring_size, ENETDMAC_LEN, priv->rx_chan);
 		enet_dmac_writel(priv, priv->tx_ring_size, ENETDMAC_LEN, priv->tx_chan);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* all set, enable mac and interrupts, start dma engine and
@@ -1202,8 +1334,13 @@ static int bcm_enet_open(struct net_device *dev)
 	enet_writel(priv, val, ENET_CTL_REG);
 	enet_dma_writel(priv, ENETDMA_CFG_EN_MASK, ENETDMA_CFG_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_CHANCFG_EN_MASK,
 			ENETDMA_CHANCFG_REG(priv->rx_chan));
+=======
+	enet_dmac_writel(priv, priv->dma_chan_en_mask,
+			 ENETDMAC_CHANCFG, priv->rx_chan);
+>>>>>>> v3.18
 =======
 	enet_dmac_writel(priv, priv->dma_chan_en_mask,
 			 ENETDMAC_CHANCFG, priv->rx_chan);
@@ -1215,30 +1352,42 @@ static int bcm_enet_open(struct net_device *dev)
 
 	/* watch "packet transferred" interrupt in rx and tx */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IR_REG(priv->rx_chan));
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IR_REG(priv->tx_chan));
 =======
+=======
+>>>>>>> v3.18
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IR, priv->rx_chan);
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IR, priv->tx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* make sure we enable napi before rx interrupt  */
 	napi_enable(&priv->napi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IRMASK_REG(priv->rx_chan));
 	enet_dma_writel(priv, ENETDMA_IR_PKTDONE_MASK,
 			ENETDMA_IRMASK_REG(priv->tx_chan));
 =======
+=======
+>>>>>>> v3.18
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IRMASK, priv->rx_chan);
 	enet_dmac_writel(priv, priv->dma_chan_int_mask,
 			 ENETDMAC_IRMASK, priv->tx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (priv->has_phy)
@@ -1320,7 +1469,11 @@ static void bcm_enet_disable_dma(struct bcm_enet_priv *priv, int chan)
 	int limit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, 0, ENETDMA_CHANCFG_REG(chan));
+=======
+	enet_dmac_writel(priv, 0, ENETDMAC_CHANCFG, chan);
+>>>>>>> v3.18
 =======
 	enet_dmac_writel(priv, 0, ENETDMAC_CHANCFG, chan);
 >>>>>>> v3.18
@@ -1330,8 +1483,13 @@ static void bcm_enet_disable_dma(struct bcm_enet_priv *priv, int chan)
 		u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = enet_dma_readl(priv, ENETDMA_CHANCFG_REG(chan));
 		if (!(val & ENETDMA_CHANCFG_EN_MASK))
+=======
+		val = enet_dmac_readl(priv, ENETDMAC_CHANCFG, chan);
+		if (!(val & ENETDMAC_CHANCFG_EN_MASK))
+>>>>>>> v3.18
 =======
 		val = enet_dmac_readl(priv, ENETDMAC_CHANCFG, chan);
 		if (!(val & ENETDMAC_CHANCFG_EN_MASK))
@@ -1362,8 +1520,13 @@ static int bcm_enet_stop(struct net_device *dev)
 	/* mask all interrupts */
 	enet_writel(priv, 0, ENET_IRMASK_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enet_dma_writel(priv, 0, ENETDMA_IRMASK_REG(priv->rx_chan));
 	enet_dma_writel(priv, 0, ENETDMA_IRMASK_REG(priv->tx_chan));
+=======
+	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->rx_chan);
+	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->tx_chan);
+>>>>>>> v3.18
 =======
 	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->rx_chan);
 	enet_dmac_writel(priv, 0, ENETDMAC_IRMASK, priv->tx_chan);
@@ -1486,8 +1649,12 @@ static const struct bcm_enet_stats bcm_enet_gstrings_stats[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCM_ENET_STATS_LEN	\
 	(sizeof(bcm_enet_gstrings_stats) / sizeof(struct bcm_enet_stats))
+=======
+#define BCM_ENET_STATS_LEN	ARRAY_SIZE(bcm_enet_gstrings_stats)
+>>>>>>> v3.18
 =======
 #define BCM_ENET_STATS_LEN	ARRAY_SIZE(bcm_enet_gstrings_stats)
 >>>>>>> v3.18
@@ -1609,7 +1776,10 @@ static void bcm_enet_get_ethtool_stats(struct net_device *netdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bcm_enet_nway_reset(struct net_device *dev)
 {
 	struct bcm_enet_priv *priv;
@@ -1624,6 +1794,9 @@ static int bcm_enet_nway_reset(struct net_device *dev)
 	return -EOPNOTSUPP;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bcm_enet_get_settings(struct net_device *dev,
 				 struct ethtool_cmd *cmd)
@@ -1768,6 +1941,10 @@ static const struct ethtool_ops bcm_enet_ethtool_ops = {
 	.get_sset_count		= bcm_enet_get_sset_count,
 	.get_ethtool_stats      = bcm_enet_get_ethtool_stats,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.nway_reset		= bcm_enet_nway_reset,
+>>>>>>> v3.18
 =======
 	.nway_reset		= bcm_enet_nway_reset,
 >>>>>>> v3.18
@@ -1832,7 +2009,11 @@ static int compute_hw_mtu(struct bcm_enet_priv *priv, int mtu)
 	 */
 	priv->rx_skb_size = ALIGN(actual_mtu + ETH_FCS_LEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  BCMENET_DMA_MAXBURST * 4);
+=======
+				  priv->dma_maxburst * 4);
+>>>>>>> v3.18
 =======
 				  priv->dma_maxburst * 4);
 >>>>>>> v3.18
@@ -1907,9 +2088,12 @@ static const struct net_device_ops bcm_enet_ops = {
 	.ndo_do_ioctl		= bcm_enet_ioctl,
 	.ndo_change_mtu		= bcm_enet_change_mtu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NET_POLL_CONTROLLER
 	.ndo_poll_controller = bcm_enet_netpoll,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1930,6 +2114,7 @@ static int bcm_enet_probe(struct platform_device *pdev)
 	/* stop if shared driver failed, assume driver->probe will be
 	 * called in the same order we register devices (correct ?) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bcm_enet_shared_base)
 		return -ENODEV;
 
@@ -1939,6 +2124,8 @@ static int bcm_enet_probe(struct platform_device *pdev)
 	res_irq_tx = platform_get_resource(pdev, IORESOURCE_IRQ, 2);
 	if (!res_mem || !res_irq || !res_irq_rx || !res_irq_tx)
 =======
+=======
+>>>>>>> v3.18
 	if (!bcm_enet_shared_base[0])
 		return -ENODEV;
 
@@ -1946,6 +2133,9 @@ static int bcm_enet_probe(struct platform_device *pdev)
 	res_irq_rx = platform_get_resource(pdev, IORESOURCE_IRQ, 1);
 	res_irq_tx = platform_get_resource(pdev, IORESOURCE_IRQ, 2);
 	if (!res_irq || !res_irq_rx || !res_irq_tx)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 
@@ -1956,6 +2146,12 @@ static int bcm_enet_probe(struct platform_device *pdev)
 	priv = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->enet_is_sw = false;
+	priv->dma_maxburst = BCMENET_DMA_MAXBURST;
+
+>>>>>>> v3.18
 =======
 	priv->enet_is_sw = false;
 	priv->dma_maxburst = BCMENET_DMA_MAXBURST;
@@ -1966,14 +2162,20 @@ static int bcm_enet_probe(struct platform_device *pdev)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base = devm_request_and_ioremap(&pdev->dev, res_mem);
 	if (priv->base == NULL) {
 		ret = -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	res_mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	priv->base = devm_ioremap_resource(&pdev->dev, res_mem);
 	if (IS_ERR(priv->base)) {
 		ret = PTR_ERR(priv->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -2006,7 +2208,11 @@ static int bcm_enet_probe(struct platform_device *pdev)
 	priv->tx_ring_size = BCMENET_DEF_TX_DESC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd = pdev->dev.platform_data;
+=======
+	pd = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pd = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2023,12 +2229,18 @@ static int bcm_enet_probe(struct platform_device *pdev)
 		priv->force_duplex_full = pd->force_duplex_full;
 		priv->force_speed_100 = pd->force_speed_100;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		priv->dma_chan_en_mask = pd->dma_chan_en_mask;
 		priv->dma_chan_int_mask = pd->dma_chan_int_mask;
 		priv->dma_chan_width = pd->dma_chan_width;
 		priv->dma_has_sram = pd->dma_has_sram;
 		priv->dma_desc_shift = pd->dma_desc_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2116,7 +2328,11 @@ static int bcm_enet_probe(struct platform_device *pdev)
 	netif_napi_add(dev, &priv->napi, bcm_enet_poll, 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &bcm_enet_ethtool_ops);
+=======
+	dev->ethtool_ops = &bcm_enet_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &bcm_enet_ethtool_ops;
 >>>>>>> v3.18
@@ -2181,7 +2397,11 @@ static int bcm_enet_remove(struct platform_device *pdev)
 		struct bcm63xx_enet_platform_data *pd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pd = pdev->dev.platform_data;
+=======
+		pd = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		pd = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2199,7 +2419,10 @@ static int bcm_enet_remove(struct platform_device *pdev)
 	clk_put(priv->mac_clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -2216,6 +2439,7 @@ struct platform_driver bcm63xx_enet_driver = {
 };
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * reserve & remap memory space shared between all macs
  */
@@ -2267,6 +2491,8 @@ static int __init bcm_enet_init(void)
 	if (ret)
 		platform_driver_unregister(&bcm63xx_enet_shared_driver);
 =======
+=======
+>>>>>>> v3.18
  * switch mii access callbacks
  */
 static int bcmenet_sw_mdio_read(struct bcm_enet_priv *priv,
@@ -3180,6 +3406,9 @@ static int __init bcm_enet_init(void)
 		platform_driver_unregister(&bcm63xx_enet_driver);
 		platform_driver_unregister(&bcm63xx_enet_shared_driver);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -3189,6 +3418,10 @@ static void __exit bcm_enet_exit(void)
 {
 	platform_driver_unregister(&bcm63xx_enet_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_driver_unregister(&bcm63xx_enetsw_driver);
+>>>>>>> v3.18
 =======
 	platform_driver_unregister(&bcm63xx_enetsw_driver);
 >>>>>>> v3.18

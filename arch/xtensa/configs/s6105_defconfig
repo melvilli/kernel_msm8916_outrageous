@@ -110,7 +110,10 @@ CONFIG_XTENSA_VARIANT_S6000=y
 # CONFIG_XTENSA_UNALIGNED_USER is not set
 CONFIG_PREEMPT=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CONFIG_MATH_EMULATION is not set
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_HIGHMEM is not set
@@ -573,7 +576,10 @@ CONFIG_DEBUG_SPINLOCK_SLEEP=y
 # CONFIG_DEBUG_VM is not set
 CONFIG_DEBUG_NOMMU_REGIONS=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CONFIG_DEBUG_WRITECOUNT is not set
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_DEBUG_MEMORY_INIT is not set

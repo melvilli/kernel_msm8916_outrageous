@@ -37,7 +37,10 @@
 #include <linux/types.h>
 #include <asm/byteorder.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -87,12 +90,18 @@ struct e1000_adapter;
 #define E1000_MAX_INTR			10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Count for polling __E1000_RESET condition every 10-20msec.
  */
 #define E1000_CHECK_RESET_COUNT	50
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* TX/RX descriptor defines */
 #define E1000_DEFAULT_TXD		256
@@ -156,6 +165,7 @@ struct e1000_adapter;
  * so a DMA handle can be stored along with the buffer
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct e1000_buffer {
 	struct sk_buff *skb;
 	dma_addr_t dma;
@@ -167,6 +177,8 @@ struct e1000_buffer {
 	unsigned int bytecount;
 	u16 mapped_as_page;
 =======
+=======
+>>>>>>> v3.18
 struct e1000_tx_buffer {
 	struct sk_buff *skb;
 	dma_addr_t dma;
@@ -184,6 +196,9 @@ struct e1000_rx_buffer {
 		u8 *data; /* else, netdev_alloc_frag */
 	} rxbuf;
 	dma_addr_t dma;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -202,7 +217,11 @@ struct e1000_tx_ring {
 	unsigned int next_to_clean;
 	/* array of buffer information structs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_tx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_tx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -227,7 +246,11 @@ struct e1000_rx_ring {
 	unsigned int next_to_clean;
 	/* array of buffer information structs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_rx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_rx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -352,8 +375,11 @@ struct e1000_adapter {
 	struct delayed_work fifo_stall_task;
 	struct delayed_work phy_info_task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct mutex mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -368,7 +394,11 @@ enum e1000_state_t {
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct net_device *e1000_get_hw_dev(struct e1000_hw *hw);
+=======
+struct net_device *e1000_get_hw_dev(struct e1000_hw *hw);
+>>>>>>> v3.18
 =======
 struct net_device *e1000_get_hw_dev(struct e1000_hw *hw);
 >>>>>>> v3.18
@@ -393,6 +423,7 @@ extern char e1000_driver_name[];
 extern const char e1000_driver_version[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int e1000_up(struct e1000_adapter *adapter);
 extern void e1000_down(struct e1000_adapter *adapter);
 extern void e1000_reinit_locked(struct e1000_adapter *adapter);
@@ -409,6 +440,8 @@ extern void e1000_set_ethtool_ops(struct net_device *netdev);
 extern void e1000_check_options(struct e1000_adapter *adapter);
 extern char *e1000_get_hw_dev_name(struct e1000_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 int e1000_up(struct e1000_adapter *adapter);
 void e1000_down(struct e1000_adapter *adapter);
 void e1000_reinit_locked(struct e1000_adapter *adapter);
@@ -424,6 +457,9 @@ void e1000_power_up_phy(struct e1000_adapter *);
 void e1000_set_ethtool_ops(struct net_device *netdev);
 void e1000_check_options(struct e1000_adapter *adapter);
 char *e1000_get_hw_dev_name(struct e1000_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _E1000_H_ */

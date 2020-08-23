@@ -17,7 +17,10 @@
 #include <asm/disasm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_BIG_ENDIAN
 #define BE		1
 #define FIRST_BYTE_16	"swap %1, %1\n swape %1, %1\n"
@@ -28,6 +31,9 @@
 #define FIRST_BYTE_32
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __get8_unaligned_check(val, addr, err)		\
 	__asm__(					\
@@ -50,9 +56,15 @@
 		unsigned int err = 0, v, a = addr;	\
 		__get8_unaligned_check(v, a, err);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val =  v ;				\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << 8;				\
+=======
+		val =  v << ((BE) ? 8 : 0);		\
+		__get8_unaligned_check(v, a, err);	\
+		val |= v << ((BE) ? 0 : 8);		\
+>>>>>>> v3.18
 =======
 		val =  v << ((BE) ? 8 : 0);		\
 		__get8_unaligned_check(v, a, err);	\
@@ -67,6 +79,7 @@
 		unsigned int err = 0, v, a = addr;	\
 		__get8_unaligned_check(v, a, err);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val =  v << 0;				\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << 8;				\
@@ -75,6 +88,8 @@
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << 24;				\
 =======
+=======
+>>>>>>> v3.18
 		val =  v << ((BE) ? 24 : 0);		\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << ((BE) ? 16 : 8);		\
@@ -82,6 +97,9 @@
 		val |= v << ((BE) ? 8 : 16);		\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << ((BE) ? 0 : 24);		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)				\
 			goto fault;			\
@@ -93,6 +111,10 @@
 							\
 		__asm__(				\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		FIRST_BYTE_16				\
+>>>>>>> v3.18
 =======
 		FIRST_BYTE_16				\
 >>>>>>> v3.18
@@ -121,8 +143,14 @@
 	do {						\
 		unsigned int err = 0, v = val, a = addr;\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__asm__(				\
 							\
+=======
+							\
+		__asm__(				\
+		FIRST_BYTE_32				\
+>>>>>>> v3.18
 =======
 							\
 		__asm__(				\
@@ -227,7 +255,11 @@ fault:	state->fault = 1;
  */
 int misaligned_fixup(unsigned long address, struct pt_regs *regs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned long cause, struct callee_regs *cregs)
+=======
+		     struct callee_regs *cregs)
+>>>>>>> v3.18
 =======
 		     struct callee_regs *cregs)
 >>>>>>> v3.18
@@ -272,9 +304,14 @@ int misaligned_fixup(unsigned long address, struct pt_regs *regs,
 		goto fault;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* clear any remanants of delay slot */
 	if (delay_mode(regs)) {
 		regs->ret = regs->bta & ~1U;
+=======
+	if (delay_mode(regs)) {
+		regs->ret = regs->bta;
+>>>>>>> v3.18
 =======
 	if (delay_mode(regs)) {
 		regs->ret = regs->bta;

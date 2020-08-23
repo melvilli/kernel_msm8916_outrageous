@@ -6,7 +6,11 @@
 
 #ifdef CONFIG_DEBUG_BUGVERBOSE
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void do_BUG(const char *file, int line);
+=======
+void do_BUG(const char *file, int line);
+>>>>>>> v3.18
 =======
 void do_BUG(const char *file, int line);
 >>>>>>> v3.18
@@ -25,7 +29,11 @@ void do_BUG(const char *file, int line);
 
 struct pt_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void die_if_kernel(char *str, struct pt_regs *regs) __attribute__ ((noreturn));
+=======
+void __noreturn die_if_kernel(char *str, struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 void __noreturn die_if_kernel(char *str, struct pt_regs *regs);
 >>>>>>> v3.18

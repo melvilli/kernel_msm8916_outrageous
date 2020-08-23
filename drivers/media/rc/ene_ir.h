@@ -186,7 +186,11 @@
 do {								\
 	if (debug >= level)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug(format "\n", ## __VA_ARGS__);		\
+=======
+		pr_info(format "\n", ## __VA_ARGS__);		\
+>>>>>>> v3.18
 =======
 		pr_info(format "\n", ## __VA_ARGS__);		\
 >>>>>>> v3.18

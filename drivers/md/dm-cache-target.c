@@ -62,7 +62,10 @@ static void free_bitset(unsigned long *bits)
 /*----------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * There are a couple of places where we let a bio run, but want to do some
  * work before calling its endio function.  We do this by temporarily
@@ -97,6 +100,9 @@ static void dm_unhook_bio(struct dm_hook_info *h, struct bio *bio)
 
 /*----------------------------------------------------------------*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PRISON_CELLS 1024
 #define MIGRATION_POOL_SIZE 128
@@ -105,22 +111,32 @@ static void dm_unhook_bio(struct dm_hook_info *h, struct bio *bio)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The block size of the device holding cache data must be >= 32KB
  */
 #define DATA_DEV_BLOCK_SIZE_MIN_SECTORS (32 * 1024 >> SECTOR_SHIFT)
 =======
+=======
+>>>>>>> v3.18
  * The block size of the device holding cache data must be
  * between 32KB and 1GB.
  */
 #define DATA_DEV_BLOCK_SIZE_MIN_SECTORS (32 * 1024 >> SECTOR_SHIFT)
 #define DATA_DEV_BLOCK_SIZE_MAX_SECTORS (1024 * 1024 * 1024 >> SECTOR_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * FIXME: the cache is read/write for the time being.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum cache_mode {
+=======
+enum cache_metadata_mode {
+>>>>>>> v3.18
 =======
 enum cache_metadata_mode {
 >>>>>>> v3.18
@@ -129,10 +145,13 @@ enum cache_metadata_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cache_features {
 	enum cache_mode mode;
 	bool write_through:1;
 =======
+=======
+>>>>>>> v3.18
 enum cache_io_mode {
 	/*
 	 * Data is written to cached blocks only.  These blocks are marked
@@ -159,6 +178,9 @@ enum cache_io_mode {
 struct cache_features {
 	enum cache_metadata_mode mode;
 	enum cache_io_mode io_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -176,7 +198,10 @@ struct cache_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Defines a range of cblocks, begin to (end - 1) are in the range.  end is
  * the one-past-the-end value.
@@ -196,12 +221,20 @@ struct invalidation_request {
 	wait_queue_head_t result_wait;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cache {
 	struct dm_target *ti;
 	struct dm_target_callbacks callbacks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dm_cache_metadata *cmd;
+
+>>>>>>> v3.18
 =======
 	struct dm_cache_metadata *cmd;
 
@@ -223,11 +256,14 @@ struct cache {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Cache features such as write-through.
 	 */
 	struct cache_features features;
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * Size of the origin device in _complete_ blocks and native sectors.
@@ -247,8 +283,11 @@ struct cache {
 	int sectors_per_block_shift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_cache_metadata *cmd;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t lock;
@@ -260,16 +299,22 @@ struct cache {
 	struct list_head need_commit_migrations;
 	sector_t migration_threshold;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t nr_migrations;
 	wait_queue_head_t migration_wait;
 
 	wait_queue_head_t quiescing_wait;
 =======
+=======
+>>>>>>> v3.18
 	wait_queue_head_t migration_wait;
 	atomic_t nr_migrations;
 
 	wait_queue_head_t quiescing_wait;
 	atomic_t quiescing;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_t quiescing_ack;
 
@@ -277,7 +322,11 @@ struct cache {
 	 * cache_size entries, dirty if set
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dm_cblock_t nr_dirty;
+=======
+	atomic_t nr_dirty;
+>>>>>>> v3.18
 =======
 	atomic_t nr_dirty;
 >>>>>>> v3.18
@@ -287,11 +336,14 @@ struct cache {
 	 * origin_blocks entries, discarded if set.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t discard_block_size; /* a power of 2 times sectors per block */
 	dm_dblock_t discard_nr_blocks;
 	unsigned long *discard_bitset;
 
 =======
+=======
+>>>>>>> v3.18
 	dm_oblock_t discard_nr_blocks;
 	unsigned long *discard_bitset;
 
@@ -302,6 +354,9 @@ struct cache {
 	unsigned nr_ctr_args;
 	const char **ctr_args;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dm_kcopyd_client *copier;
 	struct workqueue_struct *wq;
@@ -322,7 +377,11 @@ struct cache {
 	bool need_tick_bio:1;
 	bool sized:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool quiescing:1;
+=======
+	bool invalidate:1;
+>>>>>>> v3.18
 =======
 	bool invalidate:1;
 >>>>>>> v3.18
@@ -330,6 +389,7 @@ struct cache {
 	bool loaded_mappings:1;
 	bool loaded_discards:1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cache_stats stats;
 
@@ -340,6 +400,8 @@ struct cache {
 	unsigned nr_ctr_args;
 	const char **ctr_args;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Cache features such as write-through.
 	 */
@@ -352,6 +414,9 @@ struct cache {
 	 */
 	spinlock_t invalidation_lock;
 	struct list_head invalidation_requests;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -360,6 +425,10 @@ struct per_bio_data {
 	unsigned req_nr:2;
 	struct dm_deferred_entry *all_io_entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dm_hook_info hook_info;
+>>>>>>> v3.18
 =======
 	struct dm_hook_info hook_info;
 >>>>>>> v3.18
@@ -372,7 +441,10 @@ struct per_bio_data {
 	struct cache *cache;
 	dm_cblock_t cblock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio_end_io_t *saved_bi_end_io;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dm_bio_details bio_details;
@@ -392,6 +464,11 @@ struct dm_cache_migration {
 	bool demote:1;
 	bool promote:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool requeue_holder:1;
+	bool invalidate:1;
+>>>>>>> v3.18
 =======
 	bool requeue_holder:1;
 	bool invalidate:1;
@@ -574,7 +651,11 @@ static void set_dirty(struct cache *cache, dm_oblock_t oblock, dm_cblock_t cbloc
 {
 	if (!test_and_set_bit(from_cblock(cblock), cache->dirty_bitset)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cache->nr_dirty = to_cblock(from_cblock(cache->nr_dirty) + 1);
+=======
+		atomic_inc(&cache->nr_dirty);
+>>>>>>> v3.18
 =======
 		atomic_inc(&cache->nr_dirty);
 >>>>>>> v3.18
@@ -587,8 +668,12 @@ static void clear_dirty(struct cache *cache, dm_oblock_t oblock, dm_cblock_t cbl
 	if (test_and_clear_bit(from_cblock(cblock), cache->dirty_bitset)) {
 		policy_clear_dirty(cache->policy, oblock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cache->nr_dirty = to_cblock(from_cblock(cache->nr_dirty) - 1);
 		if (!from_cblock(cache->nr_dirty))
+=======
+		if (atomic_dec_return(&cache->nr_dirty) == 0)
+>>>>>>> v3.18
 =======
 		if (atomic_dec_return(&cache->nr_dirty) == 0)
 >>>>>>> v3.18
@@ -604,11 +689,17 @@ static bool block_size_is_power_of_two(struct cache *cache)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* gcc on ARM generates spurious references to __udivdi3 and __umoddi3 */
 #if defined(CONFIG_ARM) && __GNUC__ == 4 && __GNUC_MINOR__ <= 6
 __always_inline
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static dm_block_t block_div(dm_block_t b, uint32_t n)
 {
@@ -617,6 +708,7 @@ static dm_block_t block_div(dm_block_t b, uint32_t n)
 	return b;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static dm_dblock_t oblock_to_dblock(struct cache *cache, dm_oblock_t oblock)
 {
@@ -637,6 +729,9 @@ static void set_discard(struct cache *cache, dm_dblock_t b)
 =======
 static void set_discard(struct cache *cache, dm_oblock_t b)
 >>>>>>> v3.18
+=======
+static void set_discard(struct cache *cache, dm_oblock_t b)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 
@@ -644,22 +739,29 @@ static void set_discard(struct cache *cache, dm_oblock_t b)
 
 	spin_lock_irqsave(&cache->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(from_dblock(b), cache->discard_bitset);
 	spin_unlock_irqrestore(&cache->lock, flags);
 }
 
 static void clear_discard(struct cache *cache, dm_dblock_t b)
 =======
+=======
+>>>>>>> v3.18
 	set_bit(from_oblock(b), cache->discard_bitset);
 	spin_unlock_irqrestore(&cache->lock, flags);
 }
 
 static void clear_discard(struct cache *cache, dm_oblock_t b)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long flags;
 
 	spin_lock_irqsave(&cache->lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clear_bit(from_dblock(b), cache->discard_bitset);
 	spin_unlock_irqrestore(&cache->lock, flags);
@@ -667,11 +769,16 @@ static void clear_discard(struct cache *cache, dm_oblock_t b)
 
 static bool is_discarded(struct cache *cache, dm_dblock_t b)
 =======
+=======
+>>>>>>> v3.18
 	clear_bit(from_oblock(b), cache->discard_bitset);
 	spin_unlock_irqrestore(&cache->lock, flags);
 }
 
 static bool is_discarded(struct cache *cache, dm_oblock_t b)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r;
@@ -679,7 +786,11 @@ static bool is_discarded(struct cache *cache, dm_oblock_t b)
 
 	spin_lock_irqsave(&cache->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = test_bit(from_dblock(b), cache->discard_bitset);
+=======
+	r = test_bit(from_oblock(b), cache->discard_bitset);
+>>>>>>> v3.18
 =======
 	r = test_bit(from_oblock(b), cache->discard_bitset);
 >>>>>>> v3.18
@@ -695,8 +806,12 @@ static bool is_discarded_oblock(struct cache *cache, dm_oblock_t b)
 
 	spin_lock_irqsave(&cache->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = test_bit(from_dblock(oblock_to_dblock(cache, b)),
 		     cache->discard_bitset);
+=======
+	r = test_bit(from_oblock(b), cache->discard_bitset);
+>>>>>>> v3.18
 =======
 	r = test_bit(from_oblock(b), cache->discard_bitset);
 >>>>>>> v3.18
@@ -741,10 +856,13 @@ static void save_stats(struct cache *cache)
 #define PB_DATA_SIZE_WT (sizeof(struct per_bio_data))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static size_t get_per_bio_data_size(struct cache *cache)
 {
 	return cache->features.write_through ? PB_DATA_SIZE_WT : PB_DATA_SIZE_WB;
 =======
+=======
+>>>>>>> v3.18
 static bool writethrough_mode(struct cache_features *f)
 {
 	return f->io_mode == CM_IO_WRITETHROUGH;
@@ -763,6 +881,9 @@ static bool passthrough_mode(struct cache_features *f)
 static size_t get_per_bio_data_size(struct cache *cache)
 {
 	return writethrough_mode(&cache->features) ? PB_DATA_SIZE_WT : PB_DATA_SIZE_WB;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -796,6 +917,7 @@ static void remap_to_cache(struct cache *cache, struct bio *bio,
 			   dm_cblock_t cblock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t bi_sector = bio->bi_sector;
 
 	bio->bi_bdev = cache->cache_dev->bdev;
@@ -806,6 +928,8 @@ static void remap_to_cache(struct cache *cache, struct bio *bio,
 		bio->bi_sector = (from_cblock(cblock) << cache->sectors_per_block_shift) |
 				(bi_sector & (cache->sectors_per_block - 1));
 =======
+=======
+>>>>>>> v3.18
 	sector_t bi_sector = bio->bi_iter.bi_sector;
 	sector_t block = from_cblock(cblock);
 
@@ -818,6 +942,9 @@ static void remap_to_cache(struct cache *cache, struct bio *bio,
 		bio->bi_iter.bi_sector =
 			(block << cache->sectors_per_block_shift) |
 			(bi_sector & (cache->sectors_per_block - 1));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -843,7 +970,11 @@ static void remap_to_origin_clear_discard(struct cache *cache, struct bio *bio,
 	remap_to_origin(cache, bio);
 	if (bio_data_dir(bio) == WRITE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_discard(cache, oblock_to_dblock(cache, oblock));
+=======
+		clear_discard(cache, oblock);
+>>>>>>> v3.18
 =======
 		clear_discard(cache, oblock);
 >>>>>>> v3.18
@@ -853,16 +984,22 @@ static void remap_to_cache_dirty(struct cache *cache, struct bio *bio,
 				 dm_oblock_t oblock, dm_cblock_t cblock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remap_to_cache(cache, bio, cblock);
 	if (bio_data_dir(bio) == WRITE) {
 		set_dirty(cache, oblock, cblock);
 		clear_discard(cache, oblock_to_dblock(cache, oblock));
 =======
+=======
+>>>>>>> v3.18
 	check_if_tick_bio_needed(cache, bio);
 	remap_to_cache(cache, bio, cblock);
 	if (bio_data_dir(bio) == WRITE) {
 		set_dirty(cache, oblock, cblock);
 		clear_discard(cache, oblock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -870,7 +1007,11 @@ static void remap_to_cache_dirty(struct cache *cache, struct bio *bio,
 static dm_oblock_t get_bio_block(struct cache *cache, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t block_nr = bio->bi_sector;
+=======
+	sector_t block_nr = bio->bi_iter.bi_sector;
+>>>>>>> v3.18
 =======
 	sector_t block_nr = bio->bi_iter.bi_sector;
 >>>>>>> v3.18
@@ -889,7 +1030,10 @@ static int bio_triggers_commit(struct cache *cache, struct bio *bio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * You must increment the deferred set whilst the prison cell is held.  To
  * encourage this, we ask for 'cell' to be passed in.
@@ -906,6 +1050,9 @@ static void inc_ds(struct cache *cache, struct bio *bio,
 	pb->all_io_entry = dm_deferred_entry_inc(cache->all_io_ds);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void issue(struct cache *cache, struct bio *bio)
 {
@@ -927,13 +1074,19 @@ static void issue(struct cache *cache, struct bio *bio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void inc_and_issue(struct cache *cache, struct bio *bio, struct dm_bio_prison_cell *cell)
 {
 	inc_ds(cache, bio, cell);
 	issue(cache, bio);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void defer_writethrough_bio(struct cache *cache, struct bio *bio)
 {
@@ -950,7 +1103,12 @@ static void writethrough_endio(struct bio *bio, int err)
 {
 	struct per_bio_data *pb = get_per_bio_data(bio, PB_DATA_SIZE_WT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_end_io = pb->saved_bi_end_io;
+=======
+
+	dm_unhook_bio(&pb->hook_info, bio);
+>>>>>>> v3.18
 =======
 
 	dm_unhook_bio(&pb->hook_info, bio);
@@ -986,9 +1144,14 @@ static void remap_to_origin_then_cache(struct cache *cache, struct bio *bio,
 	pb->cache = cache;
 	pb->cblock = cblock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pb->saved_bi_end_io = bio->bi_end_io;
 	dm_bio_record(&pb->bio_details, bio);
 	bio->bi_end_io = writethrough_endio;
+=======
+	dm_hook_bio(&pb->hook_info, bio, writethrough_endio, NULL);
+	dm_bio_record(&pb->bio_details, bio);
+>>>>>>> v3.18
 =======
 	dm_hook_bio(&pb->hook_info, bio, writethrough_endio, NULL);
 	dm_bio_record(&pb->bio_details, bio);
@@ -1064,6 +1227,7 @@ static void migration_failure(struct dm_cache_migration *mg)
 		policy_force_mapping(cache->policy, mg->new_oblock, mg->old_oblock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cell_defer(cache, mg->old_ocell, mg->promote ? 0 : 1);
 		if (mg->promote)
 			cell_defer(cache, mg->new_ocell, 1);
@@ -1072,6 +1236,8 @@ static void migration_failure(struct dm_cache_migration *mg)
 		policy_remove_mapping(cache->policy, mg->new_oblock);
 		cell_defer(cache, mg->new_ocell, 1);
 =======
+=======
+>>>>>>> v3.18
 		cell_defer(cache, mg->old_ocell, mg->promote ? false : true);
 		if (mg->promote)
 			cell_defer(cache, mg->new_ocell, true);
@@ -1079,6 +1245,9 @@ static void migration_failure(struct dm_cache_migration *mg)
 		DMWARN_LIMIT("promotion failed; couldn't copy block");
 		policy_remove_mapping(cache->policy, mg->new_oblock);
 		cell_defer(cache, mg->new_ocell, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1092,8 +1261,13 @@ static void migration_success_pre_commit(struct dm_cache_migration *mg)
 
 	if (mg->writeback) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cell_defer(cache, mg->old_ocell, false);
 		clear_dirty(cache, mg->old_oblock, mg->cblock);
+=======
+		clear_dirty(cache, mg->old_oblock, mg->cblock);
+		cell_defer(cache, mg->old_ocell, false);
+>>>>>>> v3.18
 =======
 		clear_dirty(cache, mg->old_oblock, mg->cblock);
 		cell_defer(cache, mg->old_ocell, false);
@@ -1137,7 +1311,11 @@ static void migration_success_post_commit(struct dm_cache_migration *mg)
 
 	} else if (mg->demote) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cell_defer(cache, mg->old_ocell, mg->promote ? 0 : 1);
+=======
+		cell_defer(cache, mg->old_ocell, mg->promote ? false : true);
+>>>>>>> v3.18
 =======
 		cell_defer(cache, mg->old_ocell, mg->promote ? false : true);
 >>>>>>> v3.18
@@ -1150,6 +1328,7 @@ static void migration_success_post_commit(struct dm_cache_migration *mg)
 			spin_unlock_irqrestore(&cache->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			cleanup_migration(mg);
 
@@ -1157,6 +1336,8 @@ static void migration_success_post_commit(struct dm_cache_migration *mg)
 		cell_defer(cache, mg->new_ocell, true);
 		clear_dirty(cache, mg->new_oblock, mg->cblock);
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			if (mg->invalidate)
 				policy_remove_mapping(cache->policy, mg->old_oblock);
@@ -1171,6 +1352,9 @@ static void migration_success_post_commit(struct dm_cache_migration *mg)
 			bio_endio(mg->new_ocell->holder, 0);
 			cell_defer(cache, mg->new_ocell, false);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cleanup_migration(mg);
 	}
@@ -1217,9 +1401,12 @@ static void issue_copy_real(struct dm_cache_migration *mg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (r < 0)
 		migration_failure(mg);
 =======
+=======
+>>>>>>> v3.18
 	if (r < 0) {
 		DMERR_LIMIT("issuing migration failed");
 		migration_failure(mg);
@@ -1267,6 +1454,9 @@ static bool bio_writes_complete_block(struct cache *cache, struct bio *bio)
 {
 	return (bio_data_dir(bio) == WRITE) &&
 		(bio->bi_iter.bi_size == (cache->sectors_per_block << SECTOR_SHIFT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1285,10 +1475,13 @@ static void issue_copy(struct dm_cache_migration *mg)
 		avoid = !is_dirty(cache, mg->cblock) ||
 			is_discarded_oblock(cache, mg->old_oblock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		avoid = is_discarded_oblock(cache, mg->new_oblock);
 
 =======
+=======
+>>>>>>> v3.18
 	else {
 		struct bio *bio = mg->new_ocell->holder;
 
@@ -1300,6 +1493,9 @@ static void issue_copy(struct dm_cache_migration *mg)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	avoid ? avoid_copy(mg) : issue_copy_real(mg);
 }
@@ -1368,8 +1564,12 @@ static void check_for_quiesced_migrations(struct cache *cache,
 
 	INIT_LIST_HEAD(&work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pb->all_io_entry)
 		dm_deferred_entry_dec(pb->all_io_entry, &work);
+=======
+	dm_deferred_entry_dec(pb->all_io_entry, &work);
+>>>>>>> v3.18
 =======
 	dm_deferred_entry_dec(pb->all_io_entry, &work);
 >>>>>>> v3.18
@@ -1395,6 +1595,11 @@ static void promote(struct cache *cache, struct prealloc *structs,
 	mg->demote = false;
 	mg->promote = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mg->requeue_holder = true;
+	mg->invalidate = false;
+>>>>>>> v3.18
 =======
 	mg->requeue_holder = true;
 	mg->invalidate = false;
@@ -1421,6 +1626,11 @@ static void writeback(struct cache *cache, struct prealloc *structs,
 	mg->demote = false;
 	mg->promote = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mg->requeue_holder = true;
+	mg->invalidate = false;
+>>>>>>> v3.18
 =======
 	mg->requeue_holder = true;
 	mg->invalidate = false;
@@ -1449,6 +1659,11 @@ static void demote_then_promote(struct cache *cache, struct prealloc *structs,
 	mg->demote = true;
 	mg->promote = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mg->requeue_holder = true;
+	mg->invalidate = false;
+>>>>>>> v3.18
 =======
 	mg->requeue_holder = true;
 	mg->invalidate = false;
@@ -1466,7 +1681,10 @@ static void demote_then_promote(struct cache *cache, struct prealloc *structs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Invalidate a cache entry.  No writeback occurs; any changes in the cache
  * block are thrown away.
@@ -1494,6 +1712,9 @@ static void invalidate(struct cache *cache, struct prealloc *structs,
 	quiesce_migration(mg);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*----------------------------------------------------------------
  * bio processing
@@ -1515,7 +1736,11 @@ static void process_flush_bio(struct cache *cache, struct bio *bio)
 	struct per_bio_data *pb = get_per_bio_data(bio, pb_data_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(bio->bi_size);
+=======
+	BUG_ON(bio->bi_iter.bi_size);
+>>>>>>> v3.18
 =======
 	BUG_ON(bio->bi_iter.bi_size);
 >>>>>>> v3.18
@@ -1525,12 +1750,18 @@ static void process_flush_bio(struct cache *cache, struct bio *bio)
 		remap_to_cache(cache, bio, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * REQ_FLUSH is not directed at any particular block so we don't
 	 * need to inc_ds().  REQ_FUA's are split into a write + REQ_FLUSH
 	 * by dm-core.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	issue(cache, bio);
 }
@@ -1550,6 +1781,7 @@ static void process_flush_bio(struct cache *cache, struct bio *bio)
 static void process_discard_bio(struct cache *cache, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dm_block_t start_block = dm_sector_div_up(bio->bi_sector,
 						  cache->discard_block_size);
 	dm_block_t end_block = bio->bi_sector + bio_sectors(bio);
@@ -1560,6 +1792,8 @@ static void process_discard_bio(struct cache *cache, struct bio *bio)
 	for (b = start_block; b < end_block; b++)
 		set_discard(cache, to_dblock(b));
 =======
+=======
+>>>>>>> v3.18
 	dm_block_t start_block = dm_sector_div_up(bio->bi_iter.bi_sector,
 						  cache->sectors_per_block);
 	dm_block_t end_block = bio_end_sector(bio);
@@ -1569,6 +1803,9 @@ static void process_discard_bio(struct cache *cache, struct bio *bio)
 
 	for (b = start_block; b < end_block; b++)
 		set_discard(cache, to_oblock(b));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bio_endio(bio, 0);
@@ -1582,6 +1819,7 @@ static bool spare_migration_bandwidth(struct cache *cache)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool is_writethrough_io(struct cache *cache, struct bio *bio,
 			       dm_cblock_t cblock)
 {
@@ -1589,6 +1827,8 @@ static bool is_writethrough_io(struct cache *cache, struct bio *bio,
 		cache->features.write_through && !is_dirty(cache, cblock);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void inc_hit_counter(struct cache *cache, struct bio *bio)
@@ -1612,10 +1852,16 @@ static void process_bio(struct cache *cache, struct prealloc *structs,
 	struct dm_bio_prison_cell *cell_prealloc, *old_ocell, *new_ocell;
 	struct policy_result lookup_result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t pb_data_size = get_per_bio_data_size(cache);
 	struct per_bio_data *pb = get_per_bio_data(bio, pb_data_size);
 	bool discarded_block = is_discarded_oblock(cache, block);
 	bool can_migrate = discarded_block || spare_migration_bandwidth(cache);
+=======
+	bool discarded_block = is_discarded_oblock(cache, block);
+	bool passthrough = passthrough_mode(&cache->features);
+	bool can_migrate = !passthrough && (discarded_block || spare_migration_bandwidth(cache));
+>>>>>>> v3.18
 =======
 	bool discarded_block = is_discarded_oblock(cache, block);
 	bool passthrough = passthrough_mode(&cache->features);
@@ -1642,6 +1888,7 @@ static void process_bio(struct cache *cache, struct prealloc *structs,
 	switch (lookup_result.op) {
 	case POLICY_HIT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inc_hit_counter(cache, bio);
 		pb->all_io_entry = dm_deferred_entry_inc(cache->all_io_ds);
 
@@ -1652,6 +1899,8 @@ static void process_bio(struct cache *cache, struct prealloc *structs,
 
 		issue(cache, bio);
 =======
+=======
+>>>>>>> v3.18
 		if (passthrough) {
 			inc_miss_counter(cache, bio);
 
@@ -1686,15 +1935,23 @@ static void process_bio(struct cache *cache, struct prealloc *structs,
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	case POLICY_MISS:
 		inc_miss_counter(cache, bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pb->all_io_entry = dm_deferred_entry_inc(cache->all_io_ds);
 		remap_to_origin_clear_discard(cache, bio, block);
 		issue(cache, bio);
+=======
+		remap_to_origin_clear_discard(cache, bio, block);
+		inc_and_issue(cache, bio, new_ocell);
+>>>>>>> v3.18
 =======
 		remap_to_origin_clear_discard(cache, bio, block);
 		inc_and_issue(cache, bio, new_ocell);
@@ -1751,6 +2008,7 @@ static int need_commit_due_to_time(struct cache *cache)
 static int commit_if_needed(struct cache *cache)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dm_cache_changed_this_transaction(cache->cmd) &&
 	    (cache->commit_requested || need_commit_due_to_time(cache))) {
 		atomic_inc(&cache->stats.commit_count);
@@ -1761,6 +2019,8 @@ static int commit_if_needed(struct cache *cache)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int r = 0;
 
 	if ((cache->commit_requested || need_commit_due_to_time(cache)) &&
@@ -1772,6 +2032,9 @@ static int commit_if_needed(struct cache *cache)
 	}
 
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1830,6 +2093,12 @@ static void process_deferred_flush_bios(struct cache *cache, bool submit_bios)
 	spin_unlock_irqrestore(&cache->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/*
+	 * These bios have already been through inc_ds()
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * These bios have already been through inc_ds()
@@ -1853,6 +2122,12 @@ static void process_deferred_writethrough_bios(struct cache *cache)
 	spin_unlock_irqrestore(&cache->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/*
+	 * These bios have already been through inc_ds()
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * These bios have already been through inc_ds()
@@ -1894,6 +2169,7 @@ static void writeback_some_dirty_blocks(struct cache *cache)
 
 /*----------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Main worker loop
  *--------------------------------------------------------------*/
 static bool is_quiescing(struct cache *cache)
@@ -1907,6 +2183,8 @@ static bool is_quiescing(struct cache *cache)
 
 	return r;
 =======
+=======
+>>>>>>> v3.18
  * Invalidations.
  * Dropping something from the cache *without* writing back.
  *--------------------------------------------------------------*/
@@ -1964,6 +2242,9 @@ static void process_invalidation_requests(struct cache *cache)
 static bool is_quiescing(struct cache *cache)
 {
 	return atomic_read(&cache->quiescing);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1983,6 +2264,7 @@ static void wait_for_quiescing_ack(struct cache *cache)
 static void start_quiescing(struct cache *cache)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&cache->lock, flags);
@@ -1992,11 +2274,15 @@ static void start_quiescing(struct cache *cache)
 =======
 	atomic_inc(&cache->quiescing);
 >>>>>>> v3.18
+=======
+	atomic_inc(&cache->quiescing);
+>>>>>>> v3.18
 	wait_for_quiescing_ack(cache);
 }
 
 static void stop_quiescing(struct cache *cache)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -2004,6 +2290,9 @@ static void stop_quiescing(struct cache *cache)
 	cache->quiescing = false;
 	spin_unlock_irqrestore(&cache->lock, flags);
 
+=======
+	atomic_set(&cache->quiescing, 0);
+>>>>>>> v3.18
 =======
 	atomic_set(&cache->quiescing, 0);
 >>>>>>> v3.18
@@ -2047,7 +2336,12 @@ static int more_work(struct cache *cache)
 			!list_empty(&cache->quiesced_migrations) ||
 			!list_empty(&cache->completed_migrations) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			!list_empty(&cache->need_commit_migrations);
+=======
+			!list_empty(&cache->need_commit_migrations) ||
+			cache->invalidate;
+>>>>>>> v3.18
 =======
 			!list_empty(&cache->need_commit_migrations) ||
 			cache->invalidate;
@@ -2064,6 +2358,10 @@ static void do_worker(struct work_struct *ws)
 			process_deferred_writethrough_bios(cache);
 			process_deferred_bios(cache);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			process_invalidation_requests(cache);
+>>>>>>> v3.18
 =======
 			process_invalidation_requests(cache);
 >>>>>>> v3.18
@@ -2075,6 +2373,10 @@ static void do_worker(struct work_struct *ws)
 		if (commit_if_needed(cache)) {
 			process_deferred_flush_bios(cache, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			process_migrations(cache, &cache->need_commit_migrations, migration_failure);
+>>>>>>> v3.18
 =======
 			process_migrations(cache, &cache->need_commit_migrations, migration_failure);
 >>>>>>> v3.18
@@ -2339,7 +2641,11 @@ static int parse_block_size(struct cache_args *ca, struct dm_arg_set *as,
 			    char **error)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp;
+=======
+	unsigned long block_size;
+>>>>>>> v3.18
 =======
 	unsigned long block_size;
 >>>>>>> v3.18
@@ -2348,21 +2654,31 @@ static int parse_block_size(struct cache_args *ca, struct dm_arg_set *as,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kstrtoul(dm_shift_arg(as), 10, &tmp) || !tmp ||
 	    tmp < DATA_DEV_BLOCK_SIZE_MIN_SECTORS ||
 	    tmp & (DATA_DEV_BLOCK_SIZE_MIN_SECTORS - 1)) {
 =======
+=======
+>>>>>>> v3.18
 	if (kstrtoul(dm_shift_arg(as), 10, &block_size) || !block_size ||
 	    block_size < DATA_DEV_BLOCK_SIZE_MIN_SECTORS ||
 	    block_size > DATA_DEV_BLOCK_SIZE_MAX_SECTORS ||
 	    block_size & (DATA_DEV_BLOCK_SIZE_MIN_SECTORS - 1)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*error = "Invalid data block size";
 		return -EINVAL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp > ca->cache_sectors) {
+=======
+	if (block_size > ca->cache_sectors) {
+>>>>>>> v3.18
 =======
 	if (block_size > ca->cache_sectors) {
 >>>>>>> v3.18
@@ -2371,7 +2687,11 @@ static int parse_block_size(struct cache_args *ca, struct dm_arg_set *as,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ca->block_size = tmp;
+=======
+	ca->block_size = block_size;
+>>>>>>> v3.18
 =======
 	ca->block_size = block_size;
 >>>>>>> v3.18
@@ -2383,7 +2703,11 @@ static void init_features(struct cache_features *cf)
 {
 	cf->mode = CM_WRITE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cf->write_through = false;
+=======
+	cf->io_mode = CM_IO_WRITEBACK;
+>>>>>>> v3.18
 =======
 	cf->io_mode = CM_IO_WRITEBACK;
 >>>>>>> v3.18
@@ -2412,11 +2736,14 @@ static int parse_features(struct cache_args *ca, struct dm_arg_set *as,
 
 		if (!strcasecmp(arg, "writeback"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cf->write_through = false;
 
 		else if (!strcasecmp(arg, "writethrough"))
 			cf->write_through = true;
 =======
+=======
+>>>>>>> v3.18
 			cf->io_mode = CM_IO_WRITEBACK;
 
 		else if (!strcasecmp(arg, "writethrough"))
@@ -2424,6 +2751,9 @@ static int parse_features(struct cache_args *ca, struct dm_arg_set *as,
 
 		else if (!strcasecmp(arg, "passthrough"))
 			cf->io_mode = CM_IO_PASSTHROUGH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		else {
@@ -2554,6 +2884,7 @@ static int create_cache_policy(struct cache *cache, struct cache_args *ca,
 			       char **error)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache->policy =	dm_cache_policy_create(ca->policy_name,
 					       cache->cache_size,
 					       cache->origin_sectors,
@@ -2563,6 +2894,8 @@ static int create_cache_policy(struct cache *cache, struct cache_args *ca,
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct dm_cache_policy *p = dm_cache_policy_create(ca->policy_name,
 							   cache->cache_size,
 							   cache->origin_sectors,
@@ -2572,11 +2905,15 @@ static int create_cache_policy(struct cache *cache, struct cache_args *ca,
 		return PTR_ERR(p);
 	}
 	cache->policy = p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * We want the discard block size to be a power of two, at least the size
@@ -2607,6 +2944,8 @@ static sector_t calculate_discard_block_size(sector_t cache_block_size,
 	return discard_block_size;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DEFAULT_MIGRATION_THRESHOLD 2048
@@ -2694,7 +3033,10 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 	cache->cmd = cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (passthrough_mode(&cache->features)) {
 		bool all_clean;
 
@@ -2711,6 +3053,9 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&cache->lock);
 	bio_list_init(&cache->deferred_bios);
@@ -2724,16 +3069,22 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 
 	init_waitqueue_head(&cache->quiescing_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&cache->quiescing_ack, 0);
 
 	r = -ENOMEM;
 	cache->nr_dirty = 0;
 =======
+=======
+>>>>>>> v3.18
 	atomic_set(&cache->quiescing, 0);
 	atomic_set(&cache->quiescing_ack, 0);
 
 	r = -ENOMEM;
 	atomic_set(&cache->nr_dirty, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cache->dirty_bitset = alloc_bitset(from_cblock(cache->cache_size));
 	if (!cache->dirty_bitset) {
@@ -2742,6 +3093,7 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 	}
 	clear_bitset(cache->dirty_bitset, from_cblock(cache->cache_size));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cache->discard_block_size =
 		calculate_discard_block_size(cache->sectors_per_block,
@@ -2752,12 +3104,20 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 	cache->discard_nr_blocks = cache->origin_blocks;
 	cache->discard_bitset = alloc_bitset(from_oblock(cache->discard_nr_blocks));
 >>>>>>> v3.18
+=======
+	cache->discard_nr_blocks = cache->origin_blocks;
+	cache->discard_bitset = alloc_bitset(from_oblock(cache->discard_nr_blocks));
+>>>>>>> v3.18
 	if (!cache->discard_bitset) {
 		*error = "could not allocate discard bitset";
 		goto bad;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bitset(cache->discard_bitset, from_dblock(cache->discard_nr_blocks));
+=======
+	clear_bitset(cache->discard_bitset, from_oblock(cache->discard_nr_blocks));
+>>>>>>> v3.18
 =======
 	clear_bitset(cache->discard_bitset, from_oblock(cache->discard_nr_blocks));
 >>>>>>> v3.18
@@ -2802,7 +3162,11 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 	cache->need_tick_bio = true;
 	cache->sized = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache->quiescing = false;
+=======
+	cache->invalidate = false;
+>>>>>>> v3.18
 =======
 	cache->invalidate = false;
 >>>>>>> v3.18
@@ -2820,6 +3184,12 @@ static int cache_create(struct cache_args *ca, struct cache **result)
 	atomic_set(&cache->stats.discard_count, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&cache->invalidation_lock);
+	INIT_LIST_HEAD(&cache->invalidation_requests);
+
+>>>>>>> v3.18
 =======
 	spin_lock_init(&cache->invalidation_lock);
 	INIT_LIST_HEAD(&cache->invalidation_requests);
@@ -2892,10 +3262,15 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cache_map(struct dm_target *ti, struct bio *bio)
 {
 	struct cache *cache = ti->private;
 
+=======
+static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_prison_cell **cell)
+{
+>>>>>>> v3.18
 =======
 static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_prison_cell **cell)
 {
@@ -2906,7 +3281,10 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 	bool can_migrate = false;
 	bool discarded_block;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_bio_prison_cell *cell;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct policy_result lookup_result;
@@ -2931,8 +3309,13 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 	 * Check to see if that block is currently migrating.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cell = alloc_prison_cell(cache);
 	if (!cell) {
+=======
+	*cell = alloc_prison_cell(cache);
+	if (!*cell) {
+>>>>>>> v3.18
 =======
 	*cell = alloc_prison_cell(cache);
 	if (!*cell) {
@@ -2942,9 +3325,15 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = bio_detain(cache, block, bio, cell,
 		       (cell_free_fn) free_prison_cell,
 		       cache, &cell);
+=======
+	r = bio_detain(cache, block, bio, *cell,
+		       (cell_free_fn) free_prison_cell,
+		       cache, cell);
+>>>>>>> v3.18
 =======
 	r = bio_detain(cache, block, bio, *cell,
 		       (cell_free_fn) free_prison_cell,
@@ -2963,7 +3352,11 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 		       bio, &lookup_result);
 	if (r == -EWOULDBLOCK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cell_defer(cache, cell, true);
+=======
+		cell_defer(cache, *cell, true);
+>>>>>>> v3.18
 =======
 		cell_defer(cache, *cell, true);
 >>>>>>> v3.18
@@ -2972,6 +3365,10 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 	} else if (r) {
 		DMERR_LIMIT("Unexpected return from cache replacement policy: %d", r);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cell_defer(cache, *cell, false);
+>>>>>>> v3.18
 =======
 		cell_defer(cache, *cell, false);
 >>>>>>> v3.18
@@ -2979,6 +3376,7 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 		return DM_MAPIO_SUBMITTED;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (lookup_result.op) {
 	case POLICY_HIT:
@@ -2992,6 +3390,8 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 
 		cell_defer(cache, cell, false);
 =======
+=======
+>>>>>>> v3.18
 	r = DM_MAPIO_REMAPPED;
 	switch (lookup_result.op) {
 	case POLICY_HIT:
@@ -3017,14 +3417,20 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 			else
 				remap_to_cache_dirty(cache, bio, block, lookup_result.cblock);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	case POLICY_MISS:
 		inc_miss_counter(cache, bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pb->all_io_entry = dm_deferred_entry_inc(cache->all_io_ds);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (pb->req_nr != 0) {
@@ -3034,6 +3440,7 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 			 */
 			bio_endio(bio, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cell_defer(cache, cell, false);
 			return DM_MAPIO_SUBMITTED;
 		} else {
@@ -3041,12 +3448,17 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 			cell_defer(cache, cell, false);
 		}
 =======
+=======
+>>>>>>> v3.18
 			cell_defer(cache, *cell, false);
 			r = DM_MAPIO_SUBMITTED;
 
 		} else
 			remap_to_origin_clear_discard(cache, bio, block);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -3054,12 +3466,15 @@ static int __cache_map(struct cache *cache, struct bio *bio, struct dm_bio_priso
 		DMERR_LIMIT("%s: erroring bio: unknown policy op: %u", __func__,
 			    (unsigned) lookup_result.op);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio_io_error(bio);
 		return DM_MAPIO_SUBMITTED;
 	}
 
 	return DM_MAPIO_REMAPPED;
 =======
+=======
+>>>>>>> v3.18
 		cell_defer(cache, *cell, false);
 		bio_io_error(bio);
 		r = DM_MAPIO_SUBMITTED;
@@ -3081,6 +3496,9 @@ static int cache_map(struct dm_target *ti, struct bio *bio)
 	}
 
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3123,8 +3541,13 @@ static int write_discard_bitset(struct cache *cache)
 	unsigned i, r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = dm_cache_discard_bitset_resize(cache->cmd, cache->discard_block_size,
 					   cache->discard_nr_blocks);
+=======
+	r = dm_cache_discard_bitset_resize(cache->cmd, cache->sectors_per_block,
+					   cache->origin_blocks);
+>>>>>>> v3.18
 =======
 	r = dm_cache_discard_bitset_resize(cache->cmd, cache->sectors_per_block,
 					   cache->origin_blocks);
@@ -3135,9 +3558,15 @@ static int write_discard_bitset(struct cache *cache)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < from_dblock(cache->discard_nr_blocks); i++) {
 		r = dm_cache_set_discard(cache->cmd, to_dblock(i),
 					 is_discarded(cache, to_dblock(i)));
+=======
+	for (i = 0; i < from_oblock(cache->discard_nr_blocks); i++) {
+		r = dm_cache_set_discard(cache->cmd, to_oblock(i),
+					 is_discarded(cache, to_oblock(i)));
+>>>>>>> v3.18
 =======
 	for (i = 0; i < from_oblock(cache->discard_nr_blocks); i++) {
 		r = dm_cache_set_discard(cache->cmd, to_oblock(i),
@@ -3150,6 +3579,7 @@ static int write_discard_bitset(struct cache *cache)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int save_hint(void *context, dm_cblock_t cblock, dm_oblock_t oblock,
 		     uint32_t hint)
@@ -3177,6 +3607,8 @@ static int write_hints(struct cache *cache)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * returns true on success
  */
@@ -3195,7 +3627,11 @@ static bool sync_metadata(struct cache *cache)
 	save_stats(cache);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r3 = write_hints(cache);
+=======
+	r3 = dm_cache_write_hints(cache->cmd, cache->policy);
+>>>>>>> v3.18
 =======
 	r3 = dm_cache_write_hints(cache->cmd, cache->policy);
 >>>>>>> v3.18
@@ -3247,6 +3683,7 @@ static int load_mapping(void *context, dm_oblock_t oblock, dm_cblock_t cblock,
 
 static int load_discard(void *context, sector_t discard_block_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dm_dblock_t dblock, bool discard)
 {
 	struct cache *cache = context;
@@ -3258,6 +3695,8 @@ static int load_discard(void *context, sector_t discard_block_size,
 	else
 		clear_discard(cache, dblock);
 =======
+=======
+>>>>>>> v3.18
 			dm_oblock_t oblock, bool discard)
 {
 	struct cache *cache = context;
@@ -3308,6 +3747,9 @@ static int resize_cache_dev(struct cache *cache, dm_cblock_t new_size)
 	}
 
 	cache->cache_size = new_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -3318,8 +3760,12 @@ static int cache_preresume(struct dm_target *ti)
 	int r = 0;
 	struct cache *cache = ti->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t actual_cache_size = get_dev_size(cache->cache_dev);
 	(void) sector_div(actual_cache_size, cache->sectors_per_block);
+=======
+	dm_cblock_t csize = get_cache_dev_size(cache);
+>>>>>>> v3.18
 =======
 	dm_cblock_t csize = get_cache_dev_size(cache);
 >>>>>>> v3.18
@@ -3327,6 +3773,7 @@ static int cache_preresume(struct dm_target *ti)
 	/*
 	 * Check to see if the cache has resized.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (from_cblock(cache->cache_size) != actual_cache_size || !cache->sized) {
 		cache->cache_size = to_cblock(actual_cache_size);
@@ -3339,6 +3786,8 @@ static int cache_preresume(struct dm_target *ti)
 
 		cache->sized = true;
 =======
+=======
+>>>>>>> v3.18
 	if (!cache->sized) {
 		r = resize_cache_dev(cache, csize);
 		if (r)
@@ -3353,6 +3802,9 @@ static int cache_preresume(struct dm_target *ti)
 		r = resize_cache_dev(cache, csize);
 		if (r)
 			return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3392,6 +3844,7 @@ static void cache_resume(struct dm_target *ti)
  * Status format:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * <#used metadata blocks>/<#total metadata blocks>
  * <#read hits> <#read misses> <#write hits> <#write misses>
  * <#demotions> <#promotions> <#blocks in cache> <#dirty>
@@ -3399,6 +3852,8 @@ static void cache_resume(struct dm_target *ti)
  * <#core args> <core args>
  * <#policy args> <policy args>*
 =======
+=======
+>>>>>>> v3.18
  * <metadata block size> <#used metadata blocks>/<#total metadata blocks>
  * <cache block size> <#used cache blocks>/<#total cache blocks>
  * <#read hits> <#read misses> <#write hits> <#write misses>
@@ -3406,6 +3861,9 @@ static void cache_resume(struct dm_target *ti)
  * <#features> <features>*
  * <#core args> <core args>
  * <policy name> <#policy args> <policy args>*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void cache_status(struct dm_target *ti, status_type_t type,
@@ -3445,10 +3903,13 @@ static void cache_status(struct dm_target *ti, status_type_t type,
 		residency = policy_residency(cache->policy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMEMIT("%llu/%llu %u %u %u %u %u %u %llu %u ",
 		       (unsigned long long)(nr_blocks_metadata - nr_free_blocks_metadata),
 		       (unsigned long long)nr_blocks_metadata,
 =======
+=======
+>>>>>>> v3.18
 		DMEMIT("%u %llu/%llu %u %llu/%llu %u %u %u %u %u %u %lu ",
 		       (unsigned)DM_CACHE_METADATA_BLOCK_SIZE,
 		       (unsigned long long)(nr_blocks_metadata - nr_free_blocks_metadata),
@@ -3456,6 +3917,9 @@ static void cache_status(struct dm_target *ti, status_type_t type,
 		       cache->sectors_per_block,
 		       (unsigned long long) from_cblock(residency),
 		       (unsigned long long) from_cblock(cache->cache_size),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       (unsigned) atomic_read(&cache->stats.read_hit),
 		       (unsigned) atomic_read(&cache->stats.read_miss),
@@ -3463,6 +3927,7 @@ static void cache_status(struct dm_target *ti, status_type_t type,
 		       (unsigned) atomic_read(&cache->stats.write_miss),
 		       (unsigned) atomic_read(&cache->stats.demotion),
 		       (unsigned) atomic_read(&cache->stats.promotion),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		       (unsigned long long) from_cblock(residency),
 		       cache->nr_dirty);
@@ -3474,6 +3939,8 @@ static void cache_status(struct dm_target *ti, status_type_t type,
 
 		DMEMIT("2 migration_threshold %llu ", (unsigned long long) cache->migration_threshold);
 =======
+=======
+>>>>>>> v3.18
 		       (unsigned long) atomic_read(&cache->nr_dirty));
 
 		if (writethrough_mode(&cache->features))
@@ -3493,6 +3960,9 @@ static void cache_status(struct dm_target *ti, status_type_t type,
 		DMEMIT("2 migration_threshold %llu ", (unsigned long long) cache->migration_threshold);
 
 		DMEMIT("%s ", dm_cache_policy_get_name(cache->policy));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (sz < maxlen) {
 			r = policy_emit_config_values(cache->policy, result + sz, maxlen - sz);
@@ -3524,8 +3994,11 @@ err:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Supports <key> <value>.
 =======
+=======
+>>>>>>> v3.18
  * A cache block range can take two forms:
  *
  * i) A single cblock, eg. '3456'
@@ -3648,6 +4121,9 @@ static int process_invalidate_cblocks_message(struct cache *cache, unsigned coun
  *	"<key> <value>"
  * and
  *     "invalidate_cblocks [(<begin>)|(<begin>-<end>)]*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * The key migration_threshold is supported by the cache target core.
@@ -3657,13 +4133,19 @@ static int cache_message(struct dm_target *ti, unsigned argc, char **argv)
 	struct cache *cache = ti->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!argc)
 		return -EINVAL;
 
 	if (!strcasecmp(argv[0], "invalidate_cblocks"))
 		return process_invalidate_cblocks_message(cache, argc - 1, (const char **) argv + 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (argc != 2)
 		return -EINVAL;
@@ -3710,8 +4192,13 @@ static void set_discard_limits(struct cache *cache, struct queue_limits *limits)
 	 * FIXME: these limits may be incompatible with the cache device
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	limits->max_discard_sectors = cache->discard_block_size * 1024;
 	limits->discard_granularity = cache->discard_block_size << SECTOR_SHIFT;
+=======
+	limits->max_discard_sectors = cache->sectors_per_block;
+	limits->discard_granularity = cache->sectors_per_block << SECTOR_SHIFT;
+>>>>>>> v3.18
 =======
 	limits->max_discard_sectors = cache->sectors_per_block;
 	limits->discard_granularity = cache->sectors_per_block << SECTOR_SHIFT;
@@ -3722,10 +4209,13 @@ static void cache_io_hints(struct dm_target *ti, struct queue_limits *limits)
 {
 	struct cache *cache = ti->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	blk_limits_io_min(limits, 0);
 	blk_limits_io_opt(limits, cache->sectors_per_block << SECTOR_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	uint64_t io_opt_sectors = limits->io_opt >> SECTOR_SHIFT;
 
 	/*
@@ -3737,6 +4227,9 @@ static void cache_io_hints(struct dm_target *ti, struct queue_limits *limits)
 		blk_limits_io_min(limits, cache->sectors_per_block << SECTOR_SHIFT);
 		blk_limits_io_opt(limits, cache->sectors_per_block << SECTOR_SHIFT);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_discard_limits(cache, limits);
 }
@@ -3746,7 +4239,11 @@ static void cache_io_hints(struct dm_target *ti, struct queue_limits *limits)
 static struct target_type cache_target = {
 	.name = "cache",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.version = {1, 1, 1},
+=======
+	.version = {1, 5, 0},
+>>>>>>> v3.18
 =======
 	.version = {1, 5, 0},
 >>>>>>> v3.18

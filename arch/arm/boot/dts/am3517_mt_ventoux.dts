@@ -8,7 +8,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
+=======
+#include "omap34xx.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap34xx.dtsi"
 >>>>>>> v3.18

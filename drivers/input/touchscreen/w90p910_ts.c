@@ -319,8 +319,11 @@ static int w90x900ts_remove(struct platform_device *pdev)
 	kfree(w90p910_ts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

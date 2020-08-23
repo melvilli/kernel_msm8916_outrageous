@@ -7,9 +7,12 @@
 
 #include "symbol.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "debug.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "machine.h"
 #include "vdso.h"
 #include <symbol/kallsyms.h>
@@ -31,6 +34,9 @@ static int elf_getphdrnum(Elf *elf, size_t *dst)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef NT_GNU_BUILD_ID
 #define NT_GNU_BUILD_ID 3
@@ -56,7 +62,12 @@ static inline uint8_t elf_sym__type(const GElf_Sym *sym)
 static inline int elf_sym__is_function(const GElf_Sym *sym)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return elf_sym__type(sym) == STT_FUNC &&
+=======
+	return (elf_sym__type(sym) == STT_FUNC ||
+		elf_sym__type(sym) == STT_GNU_IFUNC) &&
+>>>>>>> v3.18
 =======
 	return (elf_sym__type(sym) == STT_FUNC ||
 		elf_sym__type(sym) == STT_GNU_IFUNC) &&
@@ -149,9 +160,14 @@ static size_t elf_addr_to_index(Elf *elf, GElf_Addr addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static Elf_Scn *elf_section_by_name(Elf *elf, GElf_Ehdr *ep,
 				    GElf_Shdr *shp, const char *name,
 				    size_t *idx)
+=======
+Elf_Scn *elf_section_by_name(Elf *elf, GElf_Ehdr *ep,
+			     GElf_Shdr *shp, const char *name, size_t *idx)
+>>>>>>> v3.18
 =======
 Elf_Scn *elf_section_by_name(Elf *elf, GElf_Ehdr *ep,
 			     GElf_Shdr *shp, const char *name, size_t *idx)
@@ -170,22 +186,32 @@ Elf_Scn *elf_section_by_name(Elf *elf, GElf_Ehdr *ep,
 		gelf_getshdr(sec, shp);
 		str = elf_strptr(elf, ep->e_shstrndx, shp->sh_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strcmp(name, str)) {
 			if (idx)
 				*idx = cnt;
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (str && !strcmp(name, str)) {
 			if (idx)
 				*idx = cnt;
 			return sec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		++cnt;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sec;
+=======
+	return NULL;
+>>>>>>> v3.18
 =======
 	return NULL;
 >>>>>>> v3.18
@@ -517,17 +543,23 @@ int filename__read_debuglink(const char *filename, char *debuglink,
 	ek = elf_kind(elf);
 	if (ek != ELF_K_ELF)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_close;
 
 	if (gelf_getehdr(elf, &ehdr) == NULL) {
 		pr_err("%s: cannot get elf header.\n", __func__);
 		goto out_close;
 =======
+=======
+>>>>>>> v3.18
 		goto out_elf_end;
 
 	if (gelf_getehdr(elf, &ehdr) == NULL) {
 		pr_err("%s: cannot get elf header.\n", __func__);
 		goto out_elf_end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -535,30 +567,42 @@ int filename__read_debuglink(const char *filename, char *debuglink,
 				  ".gnu_debuglink", NULL);
 	if (sec == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_close;
 
 	data = elf_getdata(sec, NULL);
 	if (data == NULL)
 		goto out_close;
 =======
+=======
+>>>>>>> v3.18
 		goto out_elf_end;
 
 	data = elf_getdata(sec, NULL);
 	if (data == NULL)
 		goto out_elf_end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* the start of this section is a zero-terminated string */
 	strncpy(debuglink, data->d_buf, size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	elf_end(elf);
 
 =======
+=======
+>>>>>>> v3.18
 	err = 0;
 
 out_elf_end:
 	elf_end(elf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_close:
 	close(fd);
@@ -606,7 +650,11 @@ bool symsrc__has_symtab(struct symsrc *ss)
 void symsrc__destroy(struct symsrc *ss)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(ss->name);
+=======
+	zfree(&ss->name);
+>>>>>>> v3.18
 =======
 	zfree(&ss->name);
 >>>>>>> v3.18
@@ -652,6 +700,11 @@ int symsrc__init(struct symsrc *ss, struct dso *dso, const char *name,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ss->is_64_bit = (gelf_getclass(elf) == ELFCLASS64);
+
+>>>>>>> v3.18
 =======
 	ss->is_64_bit = (gelf_getclass(elf) == ELFCLASS64);
 
@@ -677,6 +730,11 @@ int symsrc__init(struct symsrc *ss, struct dso *dso, const char *name,
 		GElf_Shdr shdr;
 		ss->adjust_symbols = (ehdr.e_type == ET_EXEC ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				ehdr.e_type == ET_REL ||
+				dso__is_vdso(dso) ||
+>>>>>>> v3.18
 =======
 				ehdr.e_type == ET_REL ||
 				dso__is_vdso(dso) ||
@@ -686,7 +744,12 @@ int symsrc__init(struct symsrc *ss, struct dso *dso, const char *name,
 						     NULL) != NULL);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ss->adjust_symbols = 0;
+=======
+		ss->adjust_symbols = ehdr.e_type == ET_EXEC ||
+				     ehdr.e_type == ET_REL;
+>>>>>>> v3.18
 =======
 		ss->adjust_symbols = ehdr.e_type == ET_EXEC ||
 				     ehdr.e_type == ET_REL;
@@ -712,7 +775,10 @@ out_close:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ref_reloc_sym_not_found - has kernel relocation symbol been found.
  * @kmap: kernel maps and relocation reference symbol
@@ -749,6 +815,9 @@ static bool want_demangle(bool is_kernel_sym)
 	return is_kernel_sym ? symbol_conf.demangle_kernel : symbol_conf.demangle;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int dso__load_sym(struct dso *dso, struct map *map,
 		  struct symsrc *syms_ss, struct symsrc *runtime_ss,
@@ -769,11 +838,14 @@ int dso__load_sym(struct dso *dso, struct map *map,
 	Elf *elf;
 	int nr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dso->symtab_type = syms_ss->type;
 
 	if (!syms_ss->symtab) {
 =======
+=======
+>>>>>>> v3.18
 	bool remap_kernel = false, adjust_kernel_syms = false;
 
 	dso->symtab_type = syms_ss->type;
@@ -796,6 +868,9 @@ int dso__load_sym(struct dso *dso, struct map *map,
 		if (dso->kernel)
 			goto out_elf_end;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		syms_ss->symtab  = syms_ss->dynsym;
 		syms_ss->symshdr = syms_ss->dynshdr;
@@ -822,7 +897,11 @@ int dso__load_sym(struct dso *dso, struct map *map,
 		goto out_elf_end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sec_strndx = elf_getscn(elf, ehdr.e_shstrndx);
+=======
+	sec_strndx = elf_getscn(runtime_ss->elf, runtime_ss->ehdr.e_shstrndx);
+>>>>>>> v3.18
 =======
 	sec_strndx = elf_getscn(runtime_ss->elf, runtime_ss->ehdr.e_shstrndx);
 >>>>>>> v3.18
@@ -837,8 +916,11 @@ int dso__load_sym(struct dso *dso, struct map *map,
 
 	memset(&sym, 0, sizeof(sym));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dso->adjust_symbols = runtime_ss->adjust_symbols;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * The kernel relocation symbol is needed in advance in order to adjust
@@ -866,6 +948,9 @@ int dso__load_sym(struct dso *dso, struct map *map,
 		remap_kernel = true;
 		adjust_kernel_syms = dso->adjust_symbols;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	elf_symtab__for_each_symbol(syms, nr_syms, idx, sym) {
 		struct symbol *f;
@@ -876,10 +961,13 @@ int dso__load_sym(struct dso *dso, struct map *map,
 		bool used_opd = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (kmap && kmap->ref_reloc_sym && kmap->ref_reloc_sym->name &&
 		    strcmp(elf_name, kmap->ref_reloc_sym->name) == 0)
 			kmap->ref_reloc_sym->unrelocated_addr = sym.st_value;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!is_label && !elf_sym__is_a(&sym, map->type))
@@ -934,10 +1022,13 @@ int dso__load_sym(struct dso *dso, struct map *map,
 			--sym.st_value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dso->kernel != DSO_TYPE_USER || kmodule) {
 			char dso_name[PATH_MAX];
 
 =======
+=======
+>>>>>>> v3.18
 		if (dso->kernel || kmodule) {
 			char dso_name[PATH_MAX];
 
@@ -945,6 +1036,9 @@ int dso__load_sym(struct dso *dso, struct map *map,
 			if (adjust_kernel_syms)
 				sym.st_value -= shdr.sh_addr - shdr.sh_offset;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (strcmp(section_name,
 				   (curr_dso->short_name +
@@ -953,7 +1047,10 @@ int dso__load_sym(struct dso *dso, struct map *map,
 
 			if (strcmp(section_name, ".text") == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * The initial kernel mapping is based on
 				 * kallsyms and identity maps.  Overwrite it to
@@ -982,6 +1079,9 @@ int dso__load_sym(struct dso *dso, struct map *map,
 					map->pgoff = shdr.sh_offset;
 				}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				curr_map = map;
 				curr_dso = dso;
@@ -989,6 +1089,12 @@ int dso__load_sym(struct dso *dso, struct map *map,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (!kmap)
+				goto new_symbol;
+
+>>>>>>> v3.18
 =======
 			if (!kmap)
 				goto new_symbol;
@@ -1017,12 +1123,15 @@ int dso__load_sym(struct dso *dso, struct map *map,
 					goto out_elf_end;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				curr_map->map_ip = identity__map_ip;
 				curr_map->unmap_ip = identity__map_ip;
 				curr_dso->symtab_type = dso->symtab_type;
 				map_groups__insert(kmap->kmaps, curr_map);
 				dsos__add(&dso->node, curr_dso);
 =======
+=======
+>>>>>>> v3.18
 				if (adjust_kernel_syms) {
 					curr_map->start = shdr.sh_addr +
 							  ref_reloc(kmap);
@@ -1040,6 +1149,9 @@ int dso__load_sym(struct dso *dso, struct map *map,
 				 */
 				dsos__add(&map->groups->machine->kernel_dsos,
 					  curr_dso);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				dso__set_loaded(curr_dso, map->type);
 			} else
@@ -1057,6 +1169,10 @@ int dso__load_sym(struct dso *dso, struct map *map,
 			sym.st_value -= shdr.sh_addr - shdr.sh_offset;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+new_symbol:
+>>>>>>> v3.18
 =======
 new_symbol:
 >>>>>>> v3.18
@@ -1066,6 +1182,7 @@ new_symbol:
 		 * to it...
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (symbol_conf.demangle) {
 			demangled = bfd_demangle(NULL, elf_name,
 						 DMGL_PARAMS | DMGL_ANSI);
@@ -1074,6 +1191,8 @@ new_symbol:
 		}
 new_symbol:
 =======
+=======
+>>>>>>> v3.18
 		if (want_demangle(dso->kernel || kmodule)) {
 			int demangle_flags = DMGL_NO_OPTS;
 			if (verbose)
@@ -1083,6 +1202,9 @@ new_symbol:
 			if (demangled != NULL)
 				elf_name = demangled;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		f = symbol__new(sym.st_value, sym.st_size,
 				GELF_ST_BIND(sym.st_info), elf_name);
@@ -1103,8 +1225,13 @@ new_symbol:
 	 */
 	if (nr > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		symbols__fixup_end(&dso->symbols[map->type]);
 		symbols__fixup_duplicate(&dso->symbols[map->type]);
+=======
+		symbols__fixup_duplicate(&dso->symbols[map->type]);
+		symbols__fixup_end(&dso->symbols[map->type]);
+>>>>>>> v3.18
 =======
 		symbols__fixup_duplicate(&dso->symbols[map->type]);
 		symbols__fixup_end(&dso->symbols[map->type]);
@@ -1123,7 +1250,10 @@ out_elf_end:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int elf_read_maps(Elf *elf, bool exe, mapfn_t mapfn, void *data)
 {
 	GElf_Phdr phdr;
@@ -1803,6 +1933,9 @@ void kcore_extract__delete(struct kcore_extract *kce)
 	unlink(kce->extract_filename);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void symbol__elf_init(void)
 {

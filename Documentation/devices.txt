@@ -101,8 +101,12 @@ Your cooperation is appreciated.
 		 11 = /dev/kmsg		Writes to this come out as printk's, reads
 					export the buffered printk records.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 12 = /dev/oldmem	Used by crashdump kernels to access
 					the memory of the kernel that crashed.
+=======
+		 12 = /dev/oldmem	OBSOLETE - replaced by /proc/vmcore
+>>>>>>> v3.18
 =======
 		 12 = /dev/oldmem	OBSOLETE - replaced by /proc/vmcore
 >>>>>>> v3.18
@@ -359,6 +363,10 @@ Your cooperation is appreciated.
 		134 = /dev/apm_bios	Advanced Power Management BIOS
 		135 = /dev/rtc		Real Time Clock
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		137 = /dev/vhci		Bluetooth virtual HCI driver
+>>>>>>> v3.18
 =======
 		137 = /dev/vhci		Bluetooth virtual HCI driver
 >>>>>>> v3.18
@@ -419,6 +427,11 @@ Your cooperation is appreciated.
 		194 = /dev/zkshim	Zero-Knowledge network shim control
 		195 = /dev/elographics/e2201	Elographics touchscreen E271-2201
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		196 = /dev/vfio/vfio	VFIO userspace driver interface
+		197 = /dev/pxa3xx-gcu	PXA3xx graphics controller unit driver
+>>>>>>> v3.18
 =======
 		196 = /dev/vfio/vfio	VFIO userspace driver interface
 		197 = /dev/pxa3xx-gcu	PXA3xx graphics controller unit driver
@@ -429,6 +442,10 @@ Your cooperation is appreciated.
 		201 = /dev/button/gulpb	Transmeta GULP-B buttons
 		202 = /dev/emd/ctl	Enhanced Metadisk RAID (EMD) control
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		203 = /dev/cuse		Cuse (character device in user-space)
+>>>>>>> v3.18
 =======
 		203 = /dev/cuse		Cuse (character device in user-space)
 >>>>>>> v3.18
@@ -468,6 +485,10 @@ Your cooperation is appreciated.
 		237 = /dev/loop-control Loopback control device
 		238 = /dev/vhost-net	Host kernel accelerator for virtio net
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		239 = /dev/uhid		User-space I/O driver support for HID subsystem
+>>>>>>> v3.18
 =======
 		239 = /dev/uhid		User-space I/O driver support for HID subsystem
 >>>>>>> v3.18
@@ -1512,6 +1533,12 @@ Your cooperation is appreciated.
 		    ...
 		127 = /dev/radio63	Radio device
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		128 = /dev/swradio0	Software Defined Radio device
+		    ...
+		191 = /dev/swradio63	Software Defined Radio device
+>>>>>>> v3.18
 =======
 		128 = /dev/swradio0	Software Defined Radio device
 		    ...
@@ -1522,11 +1549,17 @@ Your cooperation is appreciated.
 		255 = /dev/vbi31	Vertical blank interrupt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		Minor numbers are allocated dynamically unless
 		CONFIG_VIDEO_FIXED_MINOR_RANGES (default n)
 		configuration option is set.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  81 block	I2O hard disk
 		  0 = /dev/i2o/hdq	17th I2O hard disk, whole disk

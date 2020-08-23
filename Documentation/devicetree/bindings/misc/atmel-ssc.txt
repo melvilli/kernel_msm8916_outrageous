@@ -7,9 +7,12 @@ Required properties:
 - reg: Should contain SSC registers location and length
 - interrupts: Should contain SSC interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Example:
 =======
+=======
+>>>>>>> v3.18
 - clock-names: tuple listing input clock names.
 	Required elements: "pclk"
 - clocks: phandles to input clocks.
@@ -31,13 +34,19 @@ Optional properties:
 
 Examples:
 - PDC transfer:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ssc0: ssc@fffbc000 {
 	compatible = "atmel,at91rm9200-ssc";
 	reg = <0xfffbc000 0x4000>;
 	interrupts = <14 4 5>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks = <&ssc0_clk>;
 	clock-names = "pclk";
 };
@@ -53,5 +62,8 @@ ssc0: ssc@f0010000 {
       pinctrl-names = "default";
       pinctrl-0 = <&pinctrl_ssc0_tx &pinctrl_ssc0_rx>;
       status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

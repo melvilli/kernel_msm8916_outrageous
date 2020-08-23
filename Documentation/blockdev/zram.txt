@@ -99,6 +99,7 @@ size of the disk when not in use so a huge zram is wasteful.
 
 7) Stats:
 <<<<<<< HEAD
+<<<<<<< HEAD
 Per-device statistics are exported as various nodes under /sys/block/zram<id>/
 
 A brief description of exported device attritbutes. For more details please
@@ -173,6 +174,8 @@ line of text and contains the following stats separated by whitespace:
 	zero_pages
 	num_migrated
 =======
+=======
+>>>>>>> v3.18
 	Per-device statistics are exported as various nodes under
 	/sys/block/zram<id>/
 		disksize
@@ -187,6 +190,9 @@ line of text and contains the following stats separated by whitespace:
 		compr_data_size
 		mem_used_total
 		mem_used_max
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 8) Deactivate:

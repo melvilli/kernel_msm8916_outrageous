@@ -31,6 +31,7 @@
 #include <mach/irqs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
 
 #define OMAP1_DMA_BASE			(0xfffed800)
@@ -85,6 +86,8 @@ static u16 reg_map[] = {
 	[CCR2]		= 0x24,
 	[LCH_CTRL]	= 0x2a,
 =======
+=======
+>>>>>>> v3.18
 #define OMAP1_DMA_BASE			(0xfffed800)
 #define OMAP1_LOGICAL_DMA_CH_COUNT	17
 
@@ -132,6 +135,9 @@ static const struct omap_dma_reg reg_map[] = {
 	[COLOR]		= { 0x0020, 0x40, OMAP_DMA_REG_2X16BIT },
 	[CCR2]		= { 0x0024, 0x40, OMAP_DMA_REG_16BIT },
 	[LCH_CTRL]	= { 0x002a, 0x40, OMAP_DMA_REG_16BIT },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -234,6 +240,7 @@ static void __iomem *dma_base;
 static inline void dma_write(u32 val, int reg, int lch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  stride;
 	u32 offset;
 
@@ -247,6 +254,8 @@ static inline void dma_write(u32 val, int reg, int lch)
 		__raw_writew(val >> 16, dma_base + offset2);
 	}
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *addr = dma_base;
 
 	addr += reg_map[reg].offset;
@@ -255,11 +264,15 @@ static inline void dma_write(u32 val, int reg, int lch)
 	__raw_writew(val, addr);
 	if (reg_map[reg].type == OMAP_DMA_REG_2X16BIT)
 		__raw_writew(val >> 16, addr + 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline u32 dma_read(int reg, int lch)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 stride;
 	u32 offset, val;
@@ -276,6 +289,8 @@ static inline u32 dma_read(int reg, int lch)
 		val |= (upper << 16);
 	}
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *addr = dma_base;
 	uint32_t val;
 
@@ -286,6 +301,9 @@ static inline u32 dma_read(int reg, int lch)
 	if (reg_map[reg].type == OMAP_DMA_REG_2X16BIT)
 		val |= __raw_readw(addr + 2) << 16;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return val;
 }
@@ -293,9 +311,15 @@ static inline u32 dma_read(int reg, int lch)
 static void omap1_clear_lch_regs(int lch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = dma_common_ch_start;
 
 	for (; i <= dma_common_ch_end; i += 1)
+=======
+	int i;
+
+	for (i = CPC; i <= COLOR; i += 1)
+>>>>>>> v3.18
 =======
 	int i;
 
@@ -338,8 +362,14 @@ static void omap1_show_dma_caps(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 configure_dma_errata(void)
 {
+=======
+static unsigned configure_dma_errata(void)
+{
+	unsigned errata = 0;
+>>>>>>> v3.18
 =======
 static unsigned configure_dma_errata(void)
 {
@@ -361,7 +391,10 @@ static const struct platform_device_info omap_dma_dev_info = {
 	.id = -1,
 	.dma_mask = DMA_BIT_MASK(32),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.res = res,
 	.num_res = 1,
 };
@@ -374,13 +407,20 @@ static struct omap_system_dma_plat_info dma_plat_info __initdata = {
 	.clear_dma	= omap1_clear_dma,
 	.dma_write	= dma_write,
 	.dma_read	= dma_read,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int __init omap1_system_dma_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_system_dma_plat_info	*p;
+=======
+	struct omap_system_dma_plat_info	p;
+>>>>>>> v3.18
 =======
 	struct omap_system_dma_plat_info	p;
 >>>>>>> v3.18
@@ -410,6 +450,7 @@ static int __init omap1_system_dma_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = kzalloc(sizeof(struct omap_system_dma_plat_info), GFP_KERNEL);
 	if (!p) {
 		dev_err(&pdev->dev, "%s: Unable to allocate 'p' for %s\n",
@@ -420,13 +461,19 @@ static int __init omap1_system_dma_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	d = kzalloc(sizeof(struct omap_dma_dev_attr), GFP_KERNEL);
 	if (!d) {
 		dev_err(&pdev->dev, "%s: Unable to allocate 'd' for %s\n",
 			__func__, pdev->name);
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_release_p;
+=======
+		goto exit_iounmap;
+>>>>>>> v3.18
 =======
 		goto exit_iounmap;
 >>>>>>> v3.18
@@ -451,6 +498,7 @@ static int __init omap1_system_dma_init(void)
 	d->dev_caps		|= IS_WORD_16;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	d->chan = kzalloc(sizeof(struct omap_dma_lch) *
 					(d->lch_count), GFP_KERNEL);
@@ -464,6 +512,8 @@ static int __init omap1_system_dma_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (cpu_is_omap15xx())
 		d->chan_count = 9;
 	else if (cpu_is_omap16xx() || cpu_is_omap7xx()) {
@@ -473,6 +523,7 @@ static int __init omap1_system_dma_init(void)
 			d->chan_count = 9;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p->dma_attr = d;
 
@@ -491,6 +542,8 @@ static int __init omap1_system_dma_init(void)
 			__func__, pdev->name, pdev->id);
 		goto exit_release_chan;
 =======
+=======
+>>>>>>> v3.18
 	p = dma_plat_info;
 	p.dma_attr = d;
 	p.errata = configure_dma_errata();
@@ -500,6 +553,9 @@ static int __init omap1_system_dma_init(void)
 		dev_err(&pdev->dev, "%s: Unable to add resources for %s%d\n",
 			__func__, pdev->name, pdev->id);
 		goto exit_release_d;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -508,6 +564,7 @@ static int __init omap1_system_dma_init(void)
 		dev_err(&pdev->dev, "%s: Unable to add resources for %s%d\n",
 			__func__, pdev->name, pdev->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_release_chan;
 	}
 
@@ -515,6 +572,11 @@ static int __init omap1_system_dma_init(void)
 	dma_common_ch_start	= CPC;
 	dma_common_ch_end	= COLOR;
 
+=======
+		goto exit_release_d;
+	}
+
+>>>>>>> v3.18
 =======
 		goto exit_release_d;
 	}
@@ -531,12 +593,17 @@ static int __init omap1_system_dma_init(void)
 exit_release_pdev:
 	platform_device_del(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_release_chan:
 	kfree(d->chan);
 exit_release_d:
 	kfree(d);
 exit_release_p:
 	kfree(p);
+=======
+exit_release_d:
+	kfree(d);
+>>>>>>> v3.18
 =======
 exit_release_d:
 	kfree(d);

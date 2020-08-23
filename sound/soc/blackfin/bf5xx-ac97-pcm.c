@@ -40,7 +40,10 @@
 #include <asm/dma.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "bf5xx-ac97-pcm.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "bf5xx-ac97.h"
@@ -112,7 +115,10 @@ static const struct snd_pcm_hardware bf5xx_pcm_hardware = {
 				   SNDRV_PCM_INFO_BLOCK_TRANSFER,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.period_bytes_min	= 32,
@@ -423,14 +429,18 @@ static void bf5xx_pcm_free_dma_buffers(struct snd_pcm *pcm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 bf5xx_pcm_dmamask = DMA_BIT_MASK(32);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int bf5xx_pcm_ac97_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
 	struct snd_pcm *pcm = rtd->pcm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = 0;
 
@@ -440,12 +450,17 @@ static int bf5xx_pcm_ac97_new(struct snd_soc_pcm_runtime *rtd)
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(32);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	pr_debug("%s enter\n", __func__);
 	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pcm->streams[SNDRV_PCM_STREAM_PLAYBACK].substream) {

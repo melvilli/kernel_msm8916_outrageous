@@ -61,7 +61,11 @@ static inline void dumpVGAReg(void)
 static int XGIfb_mode_rate_to_dclock(struct vb_device_info *XGI_Pr,
 		struct xgi_hw_device_info *HwDeviceExtension,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned char modeno, unsigned char rateindex)
+=======
+		unsigned char modeno)
+>>>>>>> v3.18
 =======
 		unsigned char modeno)
 >>>>>>> v3.18
@@ -71,14 +75,20 @@ static int XGIfb_mode_rate_to_dclock(struct vb_device_info *XGI_Pr,
 	unsigned short RefreshRateTableIndex = 0;
 	int Clock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	InitTo330Pointer(HwDeviceExtension->jChipType, XGI_Pr);
 
 	XGI_SearchModeID(ModeNo, &ModeIdIndex, XGI_Pr);
 =======
+=======
+>>>>>>> v3.18
 
 	InitTo330Pointer(HwDeviceExtension->jChipType, XGI_Pr);
 
 	XGI_SearchModeID(ModeNo, &ModeIdIndex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	RefreshRateTableIndex = XGI_GetRatePtrCRT2(HwDeviceExtension, ModeNo,
@@ -94,7 +104,11 @@ static int XGIfb_mode_rate_to_dclock(struct vb_device_info *XGI_Pr,
 static int XGIfb_mode_rate_to_ddata(struct vb_device_info *XGI_Pr,
 		struct xgi_hw_device_info *HwDeviceExtension,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned char modeno, unsigned char rateindex,
+=======
+		unsigned char modeno,
+>>>>>>> v3.18
 =======
 		unsigned char modeno,
 >>>>>>> v3.18
@@ -111,8 +125,14 @@ static int XGIfb_mode_rate_to_ddata(struct vb_device_info *XGI_Pr,
 	unsigned char sr_data, cr_data, cr_data2;
 	int B, C, D, F, temp, j;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	InitTo330Pointer(HwDeviceExtension->jChipType, XGI_Pr);
 	if (!XGI_SearchModeID(ModeNo, &ModeIdIndex, XGI_Pr))
+=======
+
+	InitTo330Pointer(HwDeviceExtension->jChipType, XGI_Pr);
+	if (!XGI_SearchModeID(ModeNo, &ModeIdIndex))
+>>>>>>> v3.18
 =======
 
 	InitTo330Pointer(HwDeviceExtension->jChipType, XGI_Pr);
@@ -238,6 +258,10 @@ void XGIRegInit(struct vb_device_info *XGI_Pr, unsigned long BaseAddr)
 	XGI_Pr->P3c9 = BaseAddr + 0x19;
 	XGI_Pr->P3da = BaseAddr + 0x2A;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XGI_Pr->Part0Port = BaseAddr + XGI_CRT2_PORT_00;
+>>>>>>> v3.18
 =======
 	XGI_Pr->Part0Port = BaseAddr + XGI_CRT2_PORT_00;
 >>>>>>> v3.18
@@ -611,6 +635,7 @@ static u8 XGIfb_search_refresh_rate(struct xgifb_video_info *xgifb_info,
 		i++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xgifb_info->rate_idx > 0) {
 		return xgifb_info->rate_idx;
 	} else {
@@ -619,11 +644,16 @@ static u8 XGIfb_search_refresh_rate(struct xgifb_video_info *xgifb_info,
 		return 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (xgifb_info->rate_idx > 0)
 		return xgifb_info->rate_idx;
 	pr_info("Unsupported rate %d for %dx%d\n",
 		rate, xres, yres);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1788,8 +1818,12 @@ static int xgifb_probe(struct pci_dev *pdev,
 		       xgifb_info->video_size);
 		dev_err(&pdev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"Fatal error: Unable to reserve frame buffer memory. "
 			"Is there another framebuffer driver active?\n");
+=======
+			"Fatal error: Unable to reserve frame buffer memory. Is there another framebuffer driver active?\n");
+>>>>>>> v3.18
 =======
 			"Fatal error: Unable to reserve frame buffer memory. Is there another framebuffer driver active?\n");
 >>>>>>> v3.18
@@ -2018,6 +2052,7 @@ static int xgifb_probe(struct pci_dev *pdev,
 			XGIfb_mode_rate_to_dclock(&xgifb_info->dev_info,
 				hw_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				XGIbios_mode[xgifb_info->mode_idx].mode_no,
 				xgifb_info->rate_idx));
 
@@ -2025,10 +2060,15 @@ static int xgifb_probe(struct pci_dev *pdev,
 		XGIbios_mode[xgifb_info->mode_idx].mode_no,
 		xgifb_info->rate_idx,
 =======
+=======
+>>>>>>> v3.18
 				XGIbios_mode[xgifb_info->mode_idx].mode_no));
 
 	if (XGIfb_mode_rate_to_ddata(&xgifb_info->dev_info, hw_info,
 		XGIbios_mode[xgifb_info->mode_idx].mode_no,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		&fb_info->var.left_margin,
 		&fb_info->var.right_margin,
@@ -2117,7 +2157,10 @@ static void xgifb_remove(struct pci_dev *pdev)
 	pci_disable_device(pdev);
 	framebuffer_release(fb_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2138,6 +2181,7 @@ static struct pci_driver xgifb_driver = {
 module_param(mode, charp, 0);
 MODULE_PARM_DESC(mode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"Selects the desired default display mode in the format XxYxDepth "
 	"(eg. 1024x768x16).");
 
@@ -2156,6 +2200,8 @@ MODULE_PARM_DESC(filter,
 	"Selects TV flicker filter type (only for systems with a SiS301 video bridge). "
 	"Possible values 0-7. Default: [no filter]).");
 =======
+=======
+>>>>>>> v3.18
 	"Selects the desired default display mode in the format XxYxDepth (eg. 1024x768x16).");
 
 module_param(forcecrt2type, charp, 0);
@@ -2169,6 +2215,9 @@ MODULE_PARM_DESC(vesa,
 module_param(filter, int, 0);
 MODULE_PARM_DESC(filter,
 	"Selects TV flicker filter type (only for systems with a SiS301 video bridge). Possible values 0-7. Default: [no filter]).");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init xgifb_init(void)

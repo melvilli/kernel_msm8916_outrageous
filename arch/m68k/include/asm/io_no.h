@@ -5,6 +5,10 @@
 
 #include <asm/virtconvert.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm-generic/iomap.h>
+>>>>>>> v3.18
 =======
 #include <asm-generic/iomap.h>
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ static inline unsigned int _swapl(volatile unsigned long v)
 #define __raw_writel writel
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void io_outsb(unsigned int addr, void *buf, int len)
+=======
+static inline void io_outsb(unsigned int addr, const void *buf, int len)
+>>>>>>> v3.18
 =======
 static inline void io_outsb(unsigned int addr, const void *buf, int len)
 >>>>>>> v3.18
@@ -71,7 +79,11 @@ static inline void io_outsb(unsigned int addr, const void *buf, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void io_outsw(unsigned int addr, void *buf, int len)
+=======
+static inline void io_outsw(unsigned int addr, const void *buf, int len)
+>>>>>>> v3.18
 =======
 static inline void io_outsw(unsigned int addr, const void *buf, int len)
 >>>>>>> v3.18
@@ -83,7 +95,11 @@ static inline void io_outsw(unsigned int addr, const void *buf, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void io_outsl(unsigned int addr, void *buf, int len)
+=======
+static inline void io_outsl(unsigned int addr, const void *buf, int len)
+>>>>>>> v3.18
 =======
 static inline void io_outsl(unsigned int addr, const void *buf, int len)
 >>>>>>> v3.18
@@ -195,7 +211,10 @@ static inline void *ioremap_fullcache(unsigned long physaddr, unsigned long size
 #define xlate_dev_kmem_ptr(p)	p
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void __iomem *ioport_map(unsigned long port, unsigned int nr)
 {
 	return (void __iomem *) port;
@@ -205,6 +224,9 @@ static inline void ioport_unmap(void __iomem *p)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __KERNEL__ */
 

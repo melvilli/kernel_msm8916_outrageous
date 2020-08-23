@@ -144,7 +144,11 @@ static irqreturn_t smp_ipi_timer_interrupt(int irq, void *dev_id);
 static struct irqaction local_timer_ipi = {
 	.handler	= smp_ipi_timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_NOBALANCING,
+=======
+	.flags		= IRQF_NOBALANCING,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_NOBALANCING,
 >>>>>>> v3.18

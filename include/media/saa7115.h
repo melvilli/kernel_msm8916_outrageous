@@ -48,15 +48,21 @@
 
 /* config flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Register 0x85 should set bit 0 to 0 (it's 1 by default). This bit
  * controls the IDQ signal polarity which is set to 'inverted' if the bit
  * it 1 and to 'default' if it is 0. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Register 0x85 should set bit 0 to 0 (it's 1 by default). This bit
  * controls the IDQ signal polarity which is set to 'inverted' if the bit
  * it 1 and to 'default' if it is 0.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SAA7115_IDQ_IS_DEFAULT  (1 << 0)
 
@@ -73,7 +79,10 @@
 #define SAA7115_FREQ_FL_DOUBLE_ASCLK (1 << 3) /* SA 39, LRDIV, SAA7114/5 only */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ===== SAA7113 Config enums ===== */
 
 /* Register 0x08 "Horizontal time constant" [Bit 3..4]:
@@ -145,6 +154,9 @@ struct saa7115_platform_data {
 	bool *saa7113_r13_adlsb;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

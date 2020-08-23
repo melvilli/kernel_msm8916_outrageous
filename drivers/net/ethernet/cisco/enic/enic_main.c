@@ -32,7 +32,10 @@
 #include <linux/if_ether.h>
 #include <linux/if_vlan.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ethtool.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/in.h>
@@ -43,7 +46,10 @@
 #include <linux/prefetch.h>
 #include <net/ip6_checksum.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ktime.h>
 #ifdef CONFIG_RFS_ACCEL
 #include <linux/cpu_rmap.h>
@@ -51,6 +57,9 @@
 #ifdef CONFIG_NET_RX_BUSY_POLL
 #include <net/busy_poll.h>
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "cq_enet_desc.h"
@@ -63,6 +72,10 @@
 #include "enic_dev.h"
 #include "enic_pp.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "enic_clsf.h"
+>>>>>>> v3.18
 =======
 #include "enic_clsf.h"
 >>>>>>> v3.18
@@ -77,13 +90,19 @@
 #define PCI_DEVICE_ID_CISCO_VIC_ENET_VF      0x0071  /* enet SRIOV VF */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Supported devices */
 static DEFINE_PCI_DEVICE_TABLE(enic_id_table) = {
 =======
+=======
+>>>>>>> v3.18
 #define RX_COPYBREAK_DEFAULT		256
 
 /* Supported devices */
 static const struct pci_device_id enic_id_table[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_VDEVICE(CISCO, PCI_DEVICE_ID_CISCO_VIC_ENET) },
 	{ PCI_VDEVICE(CISCO, PCI_DEVICE_ID_CISCO_VIC_ENET_DYN) },
@@ -97,6 +116,7 @@ MODULE_LICENSE("GPL");
 MODULE_VERSION(DRV_VERSION);
 MODULE_DEVICE_TABLE(pci, enic_id_table);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct enic_stat {
 	char name[ETH_GSTRING_LEN];
@@ -150,6 +170,8 @@ static const unsigned int enic_n_tx_stats = ARRAY_SIZE(enic_tx_stats);
 static const unsigned int enic_n_rx_stats = ARRAY_SIZE(enic_rx_stats);
 
 =======
+=======
+>>>>>>> v3.18
 #define ENIC_LARGE_PKT_THRESHOLD		1000
 #define ENIC_MAX_COALESCE_TIMERS		10
 /*  Interrupt moderation table, which will be used to decide the
@@ -179,6 +201,9 @@ struct enic_intr_mod_range mod_range[ENIC_MAX_LINK_SPEEDS] = {
 	{3,  6}, /* 10 - 40 Gbps */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int enic_is_dynamic(struct enic *enic)
 {
@@ -204,6 +229,7 @@ int enic_is_valid_vf(struct enic *enic, int vf)
 #endif
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned int enic_cq_rq(struct enic *enic, unsigned int rq)
 {
@@ -423,6 +449,8 @@ static const struct ethtool_ops enic_ethtool_ops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void enic_free_wq_buf(struct vnic_wq *wq, struct vnic_wq_buf *buf)
 {
 	struct enic *enic = vnic_dev_priv(wq->vdev);
@@ -456,15 +484,21 @@ static int enic_wq_service(struct vnic_dev *vdev, struct cq_desc *cq_desc,
 		opaque);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netif_queue_stopped(enic->netdev) &&
 	    vnic_wq_desc_avail(&enic->wq[q_number]) >=
 	    (MAX_SKB_FRAGS + ENIC_DESC_MAX_SPLITS))
 		netif_wake_queue(enic->netdev);
 =======
+=======
+>>>>>>> v3.18
 	if (netif_tx_queue_stopped(netdev_get_tx_queue(enic->netdev, q_number)) &&
 	    vnic_wq_desc_avail(&enic->wq[q_number]) >=
 	    (MAX_SKB_FRAGS + ENIC_DESC_MAX_SPLITS))
 		netif_wake_subqueue(enic->netdev, q_number);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock(&enic->wq_lock[q_number]);
@@ -614,22 +648,29 @@ static irqreturn_t enic_isr_msi(int irq, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t enic_isr_msix_rq(int irq, void *data)
 {
 	struct napi_struct *napi = data;
 
 	/* schedule NAPI polling for RQ cleanup */
 =======
+=======
+>>>>>>> v3.18
 static irqreturn_t enic_isr_msix(int irq, void *data)
 {
 	struct napi_struct *napi = data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	napi_schedule(napi);
 
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static irqreturn_t enic_isr_msix_wq(int irq, void *data)
 {
@@ -650,6 +691,8 @@ static irqreturn_t enic_isr_msix_wq(int irq, void *data)
 	return IRQ_HANDLED;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static irqreturn_t enic_isr_msix_err(int irq, void *data)
@@ -856,6 +899,7 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 {
 	struct enic *enic = netdev_priv(netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vnic_wq *wq = &enic->wq[0];
 	unsigned long flags;
 
@@ -865,6 +909,8 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct vnic_wq *wq;
 	unsigned long flags;
 	unsigned int txq_map;
@@ -877,6 +923,9 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 	txq_map = skb_get_queue_mapping(skb) % enic->wq_count;
 	wq = &enic->wq[txq_map];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Non-TSO sends must fit within ENIC_NON_TSO_MAX_DESC descs,
 	 * which is very likely.  In the off chance it's going to take
@@ -886,6 +935,7 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 	if (skb_shinfo(skb)->gso_size == 0 &&
 	    skb_shinfo(skb)->nr_frags + 1 > ENIC_NON_TSO_MAX_DESC &&
 	    skb_linearize(skb)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_kfree_skb(skb);
 		return NETDEV_TX_OK;
@@ -900,6 +950,8 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 		netdev_err(netdev, "BUG! Tx ring full when queue awake!\n");
 		spin_unlock_irqrestore(&enic->wq_lock[0], flags);
 =======
+=======
+>>>>>>> v3.18
 		dev_kfree_skb_any(skb);
 		return NETDEV_TX_OK;
 	}
@@ -912,6 +964,9 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 		/* This is a hard error, log it */
 		netdev_err(netdev, "BUG! Tx ring full when queue awake!\n");
 		spin_unlock_irqrestore(&enic->wq_lock[txq_map], flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NETDEV_TX_BUSY;
 	}
@@ -920,9 +975,15 @@ static netdev_tx_t enic_hard_start_xmit(struct sk_buff *skb,
 
 	if (vnic_wq_desc_avail(wq) < MAX_SKB_FRAGS + ENIC_DESC_MAX_SPLITS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netif_stop_queue(netdev);
 
 	spin_unlock_irqrestore(&enic->wq_lock[0], flags);
+=======
+		netif_tx_stop_queue(netdev_get_tx_queue(netdev, txq_map));
+
+	spin_unlock_irqrestore(&enic->wq_lock[txq_map], flags);
+>>>>>>> v3.18
 =======
 		netif_tx_stop_queue(netdev_get_tx_queue(netdev, txq_map));
 
@@ -958,9 +1019,12 @@ static struct rtnl_link_stats64 *enic_get_stats(struct net_device *netdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void enic_reset_addr_lists(struct enic *enic)
 {
 =======
+=======
+>>>>>>> v3.18
 static int enic_mc_sync(struct net_device *netdev, const u8 *mc_addr)
 {
 	struct enic *enic = netdev_priv(netdev);
@@ -1026,6 +1090,9 @@ void enic_reset_addr_lists(struct enic *enic)
 	__dev_uc_unsync(netdev, NULL);
 	__dev_mc_unsync(netdev, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enic->mc_count = 0;
 	enic->uc_count = 0;
@@ -1093,6 +1160,7 @@ static int enic_set_mac_address(struct net_device *netdev, void *p)
 	return enic_dev_add_station_addr(enic);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void enic_update_multicast_addr_list(struct enic *enic)
 {
@@ -1202,6 +1270,8 @@ static void enic_update_unicast_addr_list(struct enic *enic)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* netif_tx_lock held, BHs disabled */
 static void enic_set_rx_mode(struct net_device *netdev)
 {
@@ -1225,9 +1295,15 @@ static void enic_set_rx_mode(struct net_device *netdev)
 
 	if (!promisc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		enic_update_unicast_addr_list(enic);
 		if (!allmulti)
 			enic_update_multicast_addr_list(enic);
+=======
+		__dev_uc_sync(netdev, enic_uc_sync, enic_uc_unsync);
+		if (!allmulti)
+			__dev_mc_sync(netdev, enic_mc_sync, enic_mc_unsync);
+>>>>>>> v3.18
 =======
 		__dev_uc_sync(netdev, enic_uc_sync, enic_uc_unsync);
 		if (!allmulti)
@@ -1404,6 +1480,10 @@ static void enic_free_rq_buf(struct vnic_rq *rq, struct vnic_rq_buf *buf)
 		buf->len, PCI_DMA_FROMDEVICE);
 	dev_kfree_skb_any(buf->os_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	buf->os_buf = NULL;
+>>>>>>> v3.18
 =======
 	buf->os_buf = NULL;
 >>>>>>> v3.18
@@ -1418,8 +1498,11 @@ static int enic_rq_alloc_buf(struct vnic_rq *rq)
 	unsigned int os_buf_index = 0;
 	dma_addr_t dma_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	struct vnic_rq_buf *buf = rq->to_use;
 
 	if (buf->os_buf) {
@@ -1428,6 +1511,9 @@ static int enic_rq_alloc_buf(struct vnic_rq *rq)
 
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb = netdev_alloc_skb_ip_align(netdev, len);
 	if (!skb)
@@ -1443,7 +1529,10 @@ static int enic_rq_alloc_buf(struct vnic_rq *rq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void enic_intr_update_pkt_size(struct vnic_rx_bytes_counter *pkt_size,
 				      u32 pkt_len)
 {
@@ -1472,6 +1561,9 @@ static bool enic_rxcopybreak(struct net_device *netdev, struct sk_buff **skb,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void enic_rq_indicate_buf(struct vnic_rq *rq,
 	struct cq_desc *cq_desc, struct vnic_rq_buf *buf,
@@ -1481,6 +1573,10 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 	struct net_device *netdev = enic->netdev;
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vnic_cq *cq = &enic->cq[enic_cq_rq(enic, rq->index)];
+>>>>>>> v3.18
 =======
 	struct vnic_cq *cq = &enic->cq[enic_cq_rq(enic, rq->index)];
 >>>>>>> v3.18
@@ -1498,9 +1594,12 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 
 	skb = buf->os_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prefetch(skb->data - NET_IP_ALIGN);
 	pci_unmap_single(enic->pdev, buf->dma_addr,
 		buf->len, PCI_DMA_FROMDEVICE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1524,12 +1623,18 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb_any(skb);
 =======
+=======
+>>>>>>> v3.18
 		pci_unmap_single(enic->pdev, buf->dma_addr, buf->len,
 				 PCI_DMA_FROMDEVICE);
 		dev_kfree_skb_any(skb);
 		buf->os_buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return;
@@ -1540,6 +1645,7 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 		/* Good receive
 		 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		skb_put(skb, bytes_written);
 		skb->protocol = eth_type_trans(skb, netdev);
@@ -1553,6 +1659,8 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 		    ipv4_csum_ok)
 			skb->ip_summed = CHECKSUM_UNNECESSARY;
 =======
+=======
+>>>>>>> v3.18
 		if (!enic_rxcopybreak(netdev, &skb, buf, bytes_written)) {
 			buf->os_buf = NULL;
 			pci_unmap_single(enic->pdev, buf->dma_addr, buf->len,
@@ -1576,17 +1684,23 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 			skb->csum = htons(checksum);
 			skb->ip_summed = CHECKSUM_COMPLETE;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (vlan_stripped)
 			__vlan_hwaccel_put_tag(skb, htons(ETH_P_8021Q), vlan_tci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (netdev->features & NETIF_F_GRO)
 			napi_gro_receive(&enic->napi[q_number], skb);
 		else
 			netif_receive_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 		skb_mark_napi_id(skb, &enic->napi[rq->index]);
 		if (enic_poll_busy_polling(rq) ||
 		    !(netdev->features & NETIF_F_GRO))
@@ -1596,6 +1710,9 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 		if (enic->rx_coalesce_setting.use_adaptive_rx_coalesce)
 			enic_intr_update_pkt_size(&cq->pkt_size_counter,
 						  bytes_written);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 
@@ -1603,12 +1720,18 @@ static void enic_rq_indicate_buf(struct vnic_rq *rq,
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb_any(skb);
 =======
+=======
+>>>>>>> v3.18
 		pci_unmap_single(enic->pdev, buf->dma_addr, buf->len,
 				 PCI_DMA_FROMDEVICE);
 		dev_kfree_skb_any(skb);
 		buf->os_buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1635,6 +1758,7 @@ static int enic_poll(struct napi_struct *napi, int budget)
 	unsigned int rq_work_to_do = budget;
 	unsigned int wq_work_to_do = -1; /* no limit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int  work_done, rq_work_done, wq_work_done;
 	int err;
 
@@ -1647,6 +1771,8 @@ static int enic_poll(struct napi_struct *napi, int budget)
 	wq_work_done = vnic_cq_service(&enic->cq[cq_wq],
 		wq_work_to_do, enic_wq_service, NULL);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int  work_done, rq_work_done = 0, wq_work_done;
 	int err;
 
@@ -1665,6 +1791,9 @@ static int enic_poll(struct napi_struct *napi, int budget)
 	if (budget > 0)
 		rq_work_done = vnic_cq_service(&enic->cq[cq_rq],
 			rq_work_to_do, enic_rq_service, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Accumulate intr event credits for this polling
@@ -1699,6 +1828,10 @@ static int enic_poll(struct napi_struct *napi, int budget)
 		vnic_intr_unmask(&enic->intr[intr]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enic_poll_unlock_napi(&enic->rq[cq_rq]);
+>>>>>>> v3.18
 =======
 	enic_poll_unlock_napi(&enic->rq[cq_rq]);
 >>>>>>> v3.18
@@ -1707,8 +1840,11 @@ static int enic_poll(struct napi_struct *napi, int budget)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int enic_poll_msix(struct napi_struct *napi, int budget)
 =======
+=======
+>>>>>>> v3.18
 static void enic_set_int_moderation(struct enic *enic, struct vnic_rq *rq)
 {
 	unsigned int intr = enic_msix_rq_intr(enic, rq->index);
@@ -1807,6 +1943,9 @@ static void enic_set_rx_cpu_rmap(struct enic *enic)
 
 #ifdef CONFIG_NET_RX_BUSY_POLL
 int enic_busy_poll(struct napi_struct *napi)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net_device *netdev = napi->dev;
@@ -1814,6 +1953,7 @@ int enic_busy_poll(struct napi_struct *napi)
 	unsigned int rq = (napi - &enic->napi[0]);
 	unsigned int cq = enic_cq_rq(enic, rq);
 	unsigned int intr = enic_msix_rq_intr(enic, rq);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int work_to_do = budget;
 	unsigned int work_done;
@@ -1825,6 +1965,8 @@ int enic_busy_poll(struct napi_struct *napi)
 	work_done = vnic_cq_service(&enic->cq[cq],
 		work_to_do, enic_rq_service, NULL);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int work_to_do = -1; /* clean all pkts possible */
 	unsigned int work_done;
 
@@ -1893,6 +2035,9 @@ static int enic_poll_msix_rq(struct napi_struct *napi, int budget)
 	if (budget > 0)
 		work_done = vnic_cq_service(&enic->cq[cq],
 			work_to_do, enic_rq_service, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Return intr event credits for this polling
@@ -1915,7 +2060,10 @@ static int enic_poll_msix_rq(struct napi_struct *napi, int budget)
 	if (err)
 		work_done = work_to_do;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (enic->rx_coalesce_setting.use_adaptive_rx_coalesce)
 		/* Call the function which refreshes
 		 * the intr coalescing timer value based on
@@ -1923,6 +2071,9 @@ static int enic_poll_msix_rq(struct napi_struct *napi, int budget)
 		 * the case of MSI-x mode
 		 */
 		enic_calc_int_moderation(enic, &enic->rq[rq]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (work_done < work_to_do) {
@@ -1933,14 +2084,20 @@ static int enic_poll_msix_rq(struct napi_struct *napi, int budget)
 
 		napi_complete(napi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vnic_intr_unmask(&enic->intr[intr]);
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (enic->rx_coalesce_setting.use_adaptive_rx_coalesce)
 			enic_set_int_moderation(enic, &enic->rq[rq]);
 		vnic_intr_unmask(&enic->intr[intr]);
 	}
 	enic_poll_unlock_napi(&enic->rq[rq]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return work_done;
@@ -1962,6 +2119,10 @@ static void enic_free_intr(struct enic *enic)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enic_free_rx_cpu_rmap(enic);
+>>>>>>> v3.18
 =======
 	enic_free_rx_cpu_rmap(enic);
 >>>>>>> v3.18
@@ -1990,6 +2151,10 @@ static int enic_request_intr(struct enic *enic)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enic_set_rx_cpu_rmap(enic);
+>>>>>>> v3.18
 =======
 	enic_set_rx_cpu_rmap(enic);
 >>>>>>> v3.18
@@ -2015,7 +2180,11 @@ static int enic_request_intr(struct enic *enic)
 				sizeof(enic->msix[intr].devname),
 				"%.11s-rx-%d", netdev->name, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			enic->msix[intr].isr = enic_isr_msix_rq;
+=======
+			enic->msix[intr].isr = enic_isr_msix;
+>>>>>>> v3.18
 =======
 			enic->msix[intr].isr = enic_isr_msix;
 >>>>>>> v3.18
@@ -2024,6 +2193,11 @@ static int enic_request_intr(struct enic *enic)
 
 		for (i = 0; i < enic->wq_count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			int wq = enic_cq_wq(enic, i);
+
+>>>>>>> v3.18
 =======
 			int wq = enic_cq_wq(enic, i);
 
@@ -2033,8 +2207,13 @@ static int enic_request_intr(struct enic *enic)
 				sizeof(enic->msix[intr].devname),
 				"%.11s-tx-%d", netdev->name, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			enic->msix[intr].isr = enic_isr_msix_wq;
 			enic->msix[intr].devid = enic;
+=======
+			enic->msix[intr].isr = enic_isr_msix;
+			enic->msix[intr].devid = &enic->napi[wq];
+>>>>>>> v3.18
 =======
 			enic->msix[intr].isr = enic_isr_msix;
 			enic->msix[intr].devid = &enic->napi[wq];
@@ -2098,7 +2277,10 @@ static void enic_synchronize_irqs(struct enic *enic)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void enic_set_rx_coal_setting(struct enic *enic)
 {
 	unsigned int speed;
@@ -2135,13 +2317,20 @@ static void enic_set_rx_coal_setting(struct enic *enic)
 	rx_coal->use_adaptive_rx_coalesce = 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int enic_dev_notify_set(struct enic *enic)
 {
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 >>>>>>> v3.18
@@ -2159,7 +2348,11 @@ static int enic_dev_notify_set(struct enic *enic)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&enic->devcmd_lock);
 >>>>>>> v3.18
@@ -2220,12 +2413,15 @@ static int enic_open(struct net_device *netdev)
 	enic_set_rx_mode(netdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_wake_queue(netdev);
 
 	for (i = 0; i < enic->rq_count; i++)
 		napi_enable(&enic->napi[i]);
 
 =======
+=======
+>>>>>>> v3.18
 	netif_tx_wake_all_queues(netdev);
 
 	for (i = 0; i < enic->rq_count; i++) {
@@ -2235,6 +2431,9 @@ static int enic_open(struct net_device *netdev)
 	if (vnic_dev_get_intr_mode(enic->vdev) == VNIC_DEV_INTR_MODE_MSIX)
 		for (i = 0; i < enic->wq_count; i++)
 			napi_enable(&enic->napi[enic_cq_wq(enic, i)]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enic_dev_enable(enic);
 
@@ -2243,6 +2442,10 @@ static int enic_open(struct net_device *netdev)
 
 	enic_notify_timer_start(enic);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enic_rfs_flw_tbl_init(enic);
+>>>>>>> v3.18
 =======
 	enic_rfs_flw_tbl_init(enic);
 >>>>>>> v3.18
@@ -2273,6 +2476,7 @@ static int enic_stop(struct net_device *netdev)
 
 	del_timer_sync(&enic->notify_timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	enic_dev_disable(enic);
 
@@ -2282,6 +2486,8 @@ static int enic_stop(struct net_device *netdev)
 	netif_carrier_off(netdev);
 	netif_tx_disable(netdev);
 =======
+=======
+>>>>>>> v3.18
 	enic_rfs_flw_tbl_free(enic);
 
 	enic_dev_disable(enic);
@@ -2299,6 +2505,9 @@ static int enic_stop(struct net_device *netdev)
 	if (vnic_dev_get_intr_mode(enic->vdev) == VNIC_DEV_INTR_MODE_MSIX)
 		for (i = 0; i < enic->wq_count; i++)
 			napi_disable(&enic->napi[enic_cq_wq(enic, i)]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!enic_is_dynamic(enic) && !enic_is_sriov_vf(enic))
@@ -2380,6 +2589,10 @@ static void enic_change_mtu_work(struct work_struct *work)
 	err = vnic_rq_disable(&enic->rq[0]);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rtnl_unlock();
+>>>>>>> v3.18
 =======
 		rtnl_unlock();
 >>>>>>> v3.18
@@ -2396,6 +2609,10 @@ static void enic_change_mtu_work(struct work_struct *work)
 	/* Need at least one buffer on ring to get going */
 	if (vnic_rq_desc_used(&enic->rq[0]) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rtnl_unlock();
+>>>>>>> v3.18
 =======
 		rtnl_unlock();
 >>>>>>> v3.18
@@ -2426,8 +2643,13 @@ static void enic_poll_controller(struct net_device *netdev)
 		for (i = 0; i < enic->rq_count; i++) {
 			intr = enic_msix_rq_intr(enic, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			enic_isr_msix_rq(enic->msix_entry[intr].vector,
 				&enic->napi[i]);
+=======
+			enic_isr_msix(enic->msix_entry[intr].vector,
+				      &enic->napi[i]);
+>>>>>>> v3.18
 =======
 			enic_isr_msix(enic->msix_entry[intr].vector,
 				      &enic->napi[i]);
@@ -2437,7 +2659,12 @@ static void enic_poll_controller(struct net_device *netdev)
 		for (i = 0; i < enic->wq_count; i++) {
 			intr = enic_msix_wq_intr(enic, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			enic_isr_msix_wq(enic->msix_entry[intr].vector, enic);
+=======
+			enic_isr_msix(enic->msix_entry[intr].vector,
+				      &enic->napi[enic_cq_wq(enic, i)]);
+>>>>>>> v3.18
 =======
 			enic_isr_msix(enic->msix_entry[intr].vector,
 				      &enic->napi[enic_cq_wq(enic, i)]);
@@ -2538,17 +2765,23 @@ static int enic_set_rsskey(struct enic *enic)
 	memcpy(rss_key_buf_va, &rss_key, sizeof(union vnic_rss_key));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = enic_set_rss_key(enic,
 		rss_key_buf_pa,
 		sizeof(union vnic_rss_key));
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&enic->devcmd_lock);
 	err = enic_set_rss_key(enic,
 		rss_key_buf_pa,
 		sizeof(union vnic_rss_key));
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_free_consistent(enic->pdev, sizeof(union vnic_rss_key),
@@ -2573,17 +2806,23 @@ static int enic_set_rsscpu(struct enic *enic, u8 rss_hash_bits)
 		(*rss_cpu_buf_va).cpu[i/4].b[i%4] = i % enic->rq_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = enic_set_rss_cpu(enic,
 		rss_cpu_buf_pa,
 		sizeof(union vnic_rss_cpu));
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&enic->devcmd_lock);
 	err = enic_set_rss_cpu(enic,
 		rss_cpu_buf_pa,
 		sizeof(union vnic_rss_cpu));
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_free_consistent(enic->pdev, sizeof(union vnic_rss_cpu),
@@ -2603,7 +2842,11 @@ static int enic_set_niccfg(struct enic *enic, u8 rss_default_cpu,
 	*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 >>>>>>> v3.18
@@ -2613,7 +2856,11 @@ static int enic_set_niccfg(struct enic *enic, u8 rss_default_cpu,
 		rss_enable, tso_ipid_split_en,
 		ig_vlan_strip_en);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&enic->devcmd_lock);
 >>>>>>> v3.18
@@ -2660,6 +2907,10 @@ static void enic_reset(struct work_struct *work)
 	rtnl_lock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock(&enic->enic_api_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&enic->enic_api_lock);
 >>>>>>> v3.18
@@ -2672,6 +2923,11 @@ static void enic_reset(struct work_struct *work)
 	enic_dev_set_ig_vlan_rewrite_mode(enic);
 	enic_open(enic->netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock(&enic->enic_api_lock);
+	call_netdevice_notifiers(NETDEV_REBOOT, enic->netdev);
+>>>>>>> v3.18
 =======
 	spin_unlock(&enic->enic_api_lock);
 	call_netdevice_notifiers(NETDEV_REBOOT, enic->netdev);
@@ -2711,7 +2967,12 @@ static int enic_set_intr_mode(struct enic *enic)
 	    enic->intr_count >= n + m + 2) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pci_enable_msix(enic->pdev, enic->msix_entry, n + m + 2)) {
+=======
+		if (pci_enable_msix_range(enic->pdev, enic->msix_entry,
+					  n + m + 2, n + m + 2) > 0) {
+>>>>>>> v3.18
 =======
 		if (pci_enable_msix_range(enic->pdev, enic->msix_entry,
 					  n + m + 2, n + m + 2) > 0) {
@@ -2735,7 +2996,12 @@ static int enic_set_intr_mode(struct enic *enic)
 	    enic->cq_count >= 1 + m &&
 	    enic->intr_count >= 1 + m + 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pci_enable_msix(enic->pdev, enic->msix_entry, 1 + m + 2)) {
+=======
+		if (pci_enable_msix_range(enic->pdev, enic->msix_entry,
+					  1 + m + 2, 1 + m + 2) > 0) {
+>>>>>>> v3.18
 =======
 		if (pci_enable_msix_range(enic->pdev, enic->msix_entry,
 					  1 + m + 2, 1 + m + 2) > 0) {
@@ -2839,13 +3105,19 @@ static const struct net_device_ops enic_netdev_dynamic_ops = {
 	.ndo_poll_controller	= enic_poll_controller,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RFS_ACCEL
 	.ndo_rx_flow_steer	= enic_rx_flow_steer,
 #endif
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	.ndo_busy_poll		= enic_busy_poll,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2868,13 +3140,19 @@ static const struct net_device_ops enic_netdev_ops = {
 	.ndo_poll_controller	= enic_poll_controller,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RFS_ACCEL
 	.ndo_rx_flow_steer	= enic_rx_flow_steer,
 #endif
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	.ndo_busy_poll		= enic_busy_poll,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2883,9 +3161,12 @@ static void enic_dev_deinit(struct enic *enic)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < enic->rq_count; i++)
 		netif_napi_del(&enic->napi[i]);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < enic->rq_count; i++) {
 		napi_hash_del(&enic->napi[i]);
 		netif_napi_del(&enic->napi[i]);
@@ -2893,6 +3174,9 @@ static void enic_dev_deinit(struct enic *enic)
 	if (vnic_dev_get_intr_mode(enic->vdev) == VNIC_DEV_INTR_MODE_MSIX)
 		for (i = 0; i < enic->wq_count; i++)
 			netif_napi_del(&enic->napi[enic_cq_wq(enic, i)]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enic_free_vnic_resources(enic);
@@ -2960,12 +3244,15 @@ static int enic_dev_init(struct enic *enic)
 	default:
 		netif_napi_add(netdev, &enic->napi[0], enic_poll, 64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case VNIC_DEV_INTR_MODE_MSIX:
 		for (i = 0; i < enic->rq_count; i++)
 			netif_napi_add(netdev, &enic->napi[i],
 				enic_poll_msix, 64);
 =======
+=======
+>>>>>>> v3.18
 		napi_hash_add(&enic->napi[0]);
 		break;
 	case VNIC_DEV_INTR_MODE_MSIX:
@@ -2977,6 +3264,9 @@ static int enic_dev_init(struct enic *enic)
 		for (i = 0; i < enic->wq_count; i++)
 			netif_napi_add(netdev, &enic->napi[enic_cq_wq(enic, i)],
 				       enic_poll_msix_wq, NAPI_POLL_WEIGHT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -3017,7 +3307,12 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev = alloc_etherdev(sizeof(struct enic));
+=======
+	netdev = alloc_etherdev_mqs(sizeof(struct enic),
+				    ENIC_RQ_MAX, ENIC_WQ_MAX);
+>>>>>>> v3.18
 =======
 	netdev = alloc_etherdev_mqs(sizeof(struct enic),
 				    ENIC_RQ_MAX, ENIC_WQ_MAX);
@@ -3052,17 +3347,23 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	/* Query PCI controller on system for DMA addressing
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * limitation for the device.  Try 40-bit first, and
 	 * fail to 32-bit.
 	 */
 
 	err = pci_set_dma_mask(pdev, DMA_BIT_MASK(40));
 =======
+=======
+>>>>>>> v3.18
 	 * limitation for the device.  Try 64-bit first, and
 	 * fail to 32-bit.
 	 */
 
 	err = pci_set_dma_mask(pdev, DMA_BIT_MASK(64));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		err = pci_set_dma_mask(pdev, DMA_BIT_MASK(32));
@@ -3078,15 +3379,21 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = pci_set_consistent_dma_mask(pdev, DMA_BIT_MASK(40));
 		if (err) {
 			dev_err(dev, "Unable to obtain %u-bit DMA "
 				"for consistent allocations, aborting\n", 40);
 =======
+=======
+>>>>>>> v3.18
 		err = pci_set_consistent_dma_mask(pdev, DMA_BIT_MASK(64));
 		if (err) {
 			dev_err(dev, "Unable to obtain %u-bit DMA "
 				"for consistent allocations, aborting\n", 64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto err_out_release_regions;
 		}
@@ -3161,6 +3468,10 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	spin_lock_init(&enic->devcmd_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&enic->enic_api_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&enic->enic_api_lock);
 >>>>>>> v3.18
@@ -3206,6 +3517,12 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netif_set_real_num_tx_queues(netdev, enic->wq_count);
+	netif_set_real_num_rx_queues(netdev, enic->rq_count);
+
+>>>>>>> v3.18
 =======
 	netif_set_real_num_tx_queues(netdev, enic->wq_count);
 	netif_set_real_num_rx_queues(netdev, enic->rq_count);
@@ -3219,6 +3536,10 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	enic->notify_timer.data = (unsigned long)enic;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enic_set_rx_coal_setting(enic);
+>>>>>>> v3.18
 =======
 	enic_set_rx_coal_setting(enic);
 >>>>>>> v3.18
@@ -3242,6 +3563,12 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	enic->tx_coalesce_usecs = enic->config.intr_timer_usec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* rx coalesce time already got initialized. This gets used
+	 * if adaptive coal is turned off
+	 */
+>>>>>>> v3.18
 =======
 	/* rx coalesce time already got initialized. This gets used
 	 * if adaptive coal is turned off
@@ -3256,7 +3583,11 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	netdev->watchdog_timeo = 2 * HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev->ethtool_ops = &enic_ethtool_ops;
+=======
+	enic_set_ethtool_ops(netdev);
+>>>>>>> v3.18
 =======
 	enic_set_ethtool_ops(netdev);
 >>>>>>> v3.18
@@ -3274,6 +3605,11 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		netdev->hw_features |= NETIF_F_TSO |
 			NETIF_F_TSO6 | NETIF_F_TSO_ECN;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ENIC_SETTING(enic, RSS))
+		netdev->hw_features |= NETIF_F_RXHASH;
+>>>>>>> v3.18
 =======
 	if (ENIC_SETTING(enic, RSS))
 		netdev->hw_features |= NETIF_F_RXHASH;
@@ -3284,11 +3620,17 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	netdev->features |= netdev->hw_features;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RFS_ACCEL
 	netdev->hw_features |= NETIF_F_NTUPLE;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (using_dac)
 		netdev->features |= NETIF_F_HIGHDMA;
@@ -3301,6 +3643,10 @@ static int enic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto err_out_dev_deinit;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enic->rx_copybreak = RX_COPYBREAK_DEFAULT;
+>>>>>>> v3.18
 =======
 	enic->rx_copybreak = RX_COPYBREAK_DEFAULT;
 >>>>>>> v3.18
@@ -3330,7 +3676,10 @@ err_out_disable_device:
 	pci_disable_device(pdev);
 err_out_free_netdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);
@@ -3362,7 +3711,10 @@ static void enic_remove(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		free_netdev(netdev);

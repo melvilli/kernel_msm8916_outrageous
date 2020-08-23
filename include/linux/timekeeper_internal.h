@@ -11,6 +11,7 @@
 #include <linux/time.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Structure holding internal timekeeping values. */
 struct timekeeper {
 	/* Current clocksource used for timekeeping. */
@@ -83,6 +84,8 @@ static inline struct timespec tk_xtime(struct timekeeper *tk)
 
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct tk_read_base - base structure for timekeeping readout
  * @clock:	Current clocksource used for timekeeping.
@@ -177,6 +180,9 @@ struct timekeeper {
 	u32			ntp_err_mult;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_GENERIC_TIME_VSYSCALL
 
@@ -186,6 +192,7 @@ extern void update_vsyscall_tz(void);
 #elif defined(CONFIG_GENERIC_TIME_VSYSCALL_OLD)
 
 extern void update_vsyscall_old(struct timespec *ts, struct timespec *wtm,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct clocksource *c, u32 mult);
 extern void update_vsyscall_tz(void);
@@ -199,10 +206,15 @@ static inline void update_vsyscall(struct timekeeper *tk)
 }
 
 =======
+=======
+>>>>>>> v3.18
 				struct clocksource *c, u32 mult,
 				cycle_t cycle_last);
 extern void update_vsyscall_tz(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 

@@ -66,10 +66,15 @@ static int get_connector_type(struct omap_dss_device *dssdev)
 	case OMAP_DISPLAY_TYPE_HDMI:
 		return DRM_MODE_CONNECTOR_HDMIA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case OMAP_DISPLAY_TYPE_DPI:
 		if (!strcmp(dssdev->name, "dvi"))
 			return DRM_MODE_CONNECTOR_DVID;
 		/* fallthrough */
+=======
+	case OMAP_DISPLAY_TYPE_DVI:
+		return DRM_MODE_CONNECTOR_DVID;
+>>>>>>> v3.18
 =======
 	case OMAP_DISPLAY_TYPE_DVI:
 		return DRM_MODE_CONNECTOR_DVID;
@@ -94,7 +99,10 @@ static bool channel_used(struct drm_device *dev, enum omap_channel channel)
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void omap_disconnect_dssdevs(void)
 {
 	struct omap_dss_device *dssdev = NULL;
@@ -136,6 +144,9 @@ cleanup:
 
 	return r;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int omap_modeset_init(struct drm_device *dev)
@@ -166,6 +177,7 @@ static int omap_modeset_init(struct drm_device *dev)
 		struct drm_encoder *encoder;
 		enum omap_channel channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (!dssdev->driver) {
 			dev_warn(dev->dev, "%s has no driver.. skipping it\n",
@@ -181,10 +193,15 @@ static int omap_modeset_init(struct drm_device *dev)
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 		struct omap_overlay_manager *mgr;
 
 		if (!omapdss_device_is_connected(dssdev))
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		encoder = omap_encoder_init(dev, dssdev);
@@ -229,8 +246,14 @@ static int omap_modeset_init(struct drm_device *dev)
 		 * not considered.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		channel = dssdev->output->dispc_channel;
 
+=======
+
+		mgr = omapdss_find_mgr_from_display(dssdev);
+		channel = mgr->id;
+>>>>>>> v3.18
 =======
 
 		mgr = omapdss_find_mgr_from_display(dssdev);
@@ -310,6 +333,12 @@ static int omap_modeset_init(struct drm_device *dev)
 		struct omap_dss_device *dssdev =
 					omap_encoder_get_dssdev(encoder);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct omap_dss_device *output;
+
+		output = omapdss_find_output_from_display(dssdev);
+>>>>>>> v3.18
 =======
 		struct omap_dss_device *output;
 
@@ -328,15 +357,21 @@ static int omap_modeset_init(struct drm_device *dev)
 				dss_feat_get_supported_outputs(crtc_channel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (supported_outputs & dssdev->output->id)
 				encoder->possible_crtcs |= (1 << id);
 		}
 =======
+=======
+>>>>>>> v3.18
 			if (supported_outputs & output->id)
 				encoder->possible_crtcs |= (1 << id);
 		}
 
 		omap_dss_put_device(output);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -481,7 +516,11 @@ static int ioctl_gem_info(struct drm_device *dev, void *data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_ioctl_desc ioctls[DRM_COMMAND_END - DRM_COMMAND_BASE] = {
+=======
+static const struct drm_ioctl_desc ioctls[DRM_COMMAND_END - DRM_COMMAND_BASE] = {
+>>>>>>> v3.18
 =======
 static const struct drm_ioctl_desc ioctls[DRM_COMMAND_END - DRM_COMMAND_BASE] = {
 >>>>>>> v3.18
@@ -559,6 +598,10 @@ static int dev_unload(struct drm_device *dev)
 {
 	struct omap_drm_private *priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -566,6 +609,7 @@ static int dev_unload(struct drm_device *dev)
 	DBG("unload: dev=%p", dev);
 
 	drm_kms_helper_poll_fini(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drm_vblank_cleanup(dev);
 	omap_drm_irq_uninstall(dev);
@@ -578,6 +622,8 @@ static int dev_unload(struct drm_device *dev)
 	destroy_workqueue(priv->wq);
 
 =======
+=======
+>>>>>>> v3.18
 
 	omap_fbdev_free(dev);
 
@@ -593,6 +639,9 @@ static int dev_unload(struct drm_device *dev)
 	drm_vblank_cleanup(dev);
 	omap_drm_irq_uninstall(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(dev->dev_private);
 	dev->dev_private = NULL;
@@ -612,12 +661,15 @@ static int dev_open(struct drm_device *dev, struct drm_file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dev_firstopen(struct drm_device *dev)
 {
 	DBG("firstopen: dev=%p", dev);
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -659,9 +711,13 @@ static void dev_lastclose(struct drm_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_modeset_lock_all(dev);
 	ret = drm_fb_helper_restore_fbdev_mode(priv->fbdev);
 	drm_modeset_unlock_all(dev);
+=======
+	ret = drm_fb_helper_restore_fbdev_mode_unlocked(priv->fbdev);
+>>>>>>> v3.18
 =======
 	ret = drm_fb_helper_restore_fbdev_mode_unlocked(priv->fbdev);
 >>>>>>> v3.18
@@ -693,7 +749,10 @@ static const struct file_operations omapdriver_fops = {
 		.mmap = omap_gem_mmap,
 		.poll = drm_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.read = drm_read,
@@ -707,15 +766,21 @@ static struct drm_driver omap_drm_driver = {
 		.unload = dev_unload,
 		.open = dev_open,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.firstopen = dev_firstopen,
 		.lastclose = dev_lastclose,
 		.preclose = dev_preclose,
 		.postclose = dev_postclose,
 =======
+=======
+>>>>>>> v3.18
 		.lastclose = dev_lastclose,
 		.preclose = dev_preclose,
 		.postclose = dev_postclose,
 		.set_busid = drm_platform_set_busid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.get_vblank_counter = drm_vblank_count,
 		.enable_vblank = omap_irq_enable_vblank,
@@ -733,7 +798,10 @@ static struct drm_driver omap_drm_driver = {
 		.gem_prime_export = omap_gem_prime_export,
 		.gem_prime_import = omap_gem_prime_import,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.gem_init_object = omap_gem_init_object,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.gem_free_object = omap_gem_free_object,
@@ -741,7 +809,11 @@ static struct drm_driver omap_drm_driver = {
 		.dumb_create = omap_gem_dumb_create,
 		.dumb_map_offset = omap_gem_dumb_map_offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.dumb_destroy = omap_gem_dumb_destroy,
+=======
+		.dumb_destroy = drm_gem_dumb_destroy,
+>>>>>>> v3.18
 =======
 		.dumb_destroy = drm_gem_dumb_destroy,
 >>>>>>> v3.18
@@ -776,10 +848,13 @@ static void pdev_shutdown(struct platform_device *device)
 static int pdev_probe(struct platform_device *device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (omapdss_is_initialized() == false)
 		return -EPROBE_DEFER;
 
 =======
+=======
+>>>>>>> v3.18
 	int r;
 
 	if (omapdss_is_initialized() == false)
@@ -793,6 +868,9 @@ static int pdev_probe(struct platform_device *device)
 		return r;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DBG("%s", device->name);
 	return drm_platform_init(&omap_drm_driver, device);
@@ -802,16 +880,22 @@ static int pdev_remove(struct platform_device *device)
 {
 	DBG("");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_platform_exit(&omap_drm_driver, device);
 
 	platform_driver_unregister(&omap_dmm_driver);
 =======
+=======
+>>>>>>> v3.18
 
 	drm_put_dev(platform_get_drvdata(device));
 
 	omap_disconnect_dssdevs();
 	omap_crtc_pre_uninit();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -840,6 +924,7 @@ static struct platform_driver pdev = {
 static int __init omap_drm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG("init");
 	if (platform_driver_register(&omap_dmm_driver)) {
 		/* we can continue on without DMM.. so not fatal */
@@ -847,6 +932,8 @@ static int __init omap_drm_init(void)
 	}
 	return platform_driver_register(&pdev);
 =======
+=======
+>>>>>>> v3.18
 	int r;
 
 	DBG("init");
@@ -865,6 +952,9 @@ static int __init omap_drm_init(void)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -872,12 +962,18 @@ static void __exit omap_drm_fini(void)
 {
 	DBG("fini");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_driver_unregister(&pdev);
 =======
+=======
+>>>>>>> v3.18
 
 	platform_driver_unregister(&pdev);
 
 	platform_driver_unregister(&omap_dmm_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -106,19 +116,28 @@
 #define APMG_SVR_DIGITAL_VOLTAGE_1_32		(0x00000060)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define APMG_PCIDEV_STT_VAL_L1_ACT_DIS		(0x00000800)
 =======
+=======
+>>>>>>> v3.18
 #define APMG_PCIDEV_STT_VAL_PERSIST_DIS	(0x00000200)
 #define APMG_PCIDEV_STT_VAL_L1_ACT_DIS	(0x00000800)
 
 #define APMG_RTC_INT_STT_RFKILL		(0x10000000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Device system time */
 #define DEVICE_SYSTEM_TIME_REG 0xA0206C
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Device NMI register */
 #define DEVICE_SET_NMI_REG 0x00a01c30
 #define DEVICE_SET_NMI_VAL 0x1
@@ -164,6 +183,9 @@
 #define DTSC_PTAT_AVG		(0x00a10650)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Tx Scheduler
@@ -299,6 +321,10 @@
 #define SCD_AGGR_SEL		(SCD_BASE + 0x248)
 #define SCD_INTERRUPT_MASK	(SCD_BASE + 0x108)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SCD_EN_CTRL		(SCD_BASE + 0x254)
+>>>>>>> v3.18
 =======
 #define SCD_EN_CTRL		(SCD_BASE + 0x254)
 >>>>>>> v3.18
@@ -334,7 +360,10 @@ static inline unsigned int SCD_QUEUE_STATUS_BITS(unsigned int chnl)
 #define OSC_CLK_FORCE_CONTROL		(0x8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* SECURE boot registers */
 #define LMPM_SECURE_BOOT_CONFIG_ADDR	(0x100)
 enum secure_boot_config_reg {
@@ -388,5 +417,8 @@ enum secure_load_status_reg {
 #define MON_BUFF_WRPTR			(0xa03c44)
 #define MON_BUFF_CYCLE_CNT		(0xa03c48)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __iwl_prph_h__ */

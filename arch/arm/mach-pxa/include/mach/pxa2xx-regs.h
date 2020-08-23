@@ -144,7 +144,10 @@
 #define CCCR_L_MASK	0x001f	/* Crystal Frequency to Memory Frequency Multiplier */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CCCR_CPDIS_BIT	(31)
 #define CCCR_PPDIS_BIT	(30)
 #define CCCR_LCD_26_BIT	(27)
@@ -155,6 +158,9 @@
 #define CCSR_L_MASK	CCCR_L_MASK
 #define CCSR_N2_SHIFT	7
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CKEN_AC97CONF   (31)    /* AC97 Controller Configuration */
 #define CKEN_CAMERA	(24)	/* Camera Interface Clock Enable */

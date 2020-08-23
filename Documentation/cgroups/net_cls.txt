@@ -7,6 +7,11 @@ tag network packets with a class identifier (classid).
 The Traffic Controller (tc) can be used to assign
 different priorities to packets from different cgroups.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+Also, Netfilter (iptables) can use this tag to perform
+actions on such packets.
+>>>>>>> v3.18
 =======
 Also, Netfilter (iptables) can use this tag to perform
 actions on such packets.
@@ -38,6 +43,12 @@ tc class add dev eth0 parent 10: classid 10:1 htb rate 40mbit
 
 tc filter add dev eth0 parent 10: protocol ip prio 10 handle 1: cgroup
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+configuring iptables, basic example:
+iptables -A OUTPUT -m cgroup ! --cgroup 0x100001 -j DROP
+>>>>>>> v3.18
 =======
 
 configuring iptables, basic example:

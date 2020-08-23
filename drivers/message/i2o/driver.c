@@ -63,7 +63,11 @@ struct bus_type i2o_bus_type = {
 	.name = "i2o",
 	.match = i2o_bus_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = i2o_device_attrs
+=======
+	.dev_groups = i2o_device_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = i2o_device_groups,
 >>>>>>> v3.18
@@ -89,8 +93,13 @@ int i2o_driver_register(struct i2o_driver *drv)
 
 	if (drv->event) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drv->event_queue = alloc_workqueue(drv->name,
 						   WQ_MEM_RECLAIM, 1);
+=======
+		drv->event_queue = alloc_workqueue("%s", WQ_MEM_RECLAIM, 1,
+						   drv->name);
+>>>>>>> v3.18
 =======
 		drv->event_queue = alloc_workqueue("%s", WQ_MEM_RECLAIM, 1,
 						   drv->name);
@@ -115,7 +124,12 @@ int i2o_driver_register(struct i2o_driver *drv)
 				"max_drivers\n");
 			spin_unlock_irqrestore(&i2o_drivers_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -EFAULT;
+=======
+			rc = -EFAULT;
+			goto out;
+>>>>>>> v3.18
 =======
 			rc = -EFAULT;
 			goto out;
@@ -139,12 +153,15 @@ int i2o_driver_register(struct i2o_driver *drv)
 
 	rc = driver_register(&drv->driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc) {
 		if (drv->event) {
 			destroy_workqueue(drv->event_queue);
 			drv->event_queue = NULL;
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (rc)
 		goto out;
 
@@ -153,6 +170,9 @@ out:
 	if (drv->event_queue) {
 		destroy_workqueue(drv->event_queue);
 		drv->event_queue = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

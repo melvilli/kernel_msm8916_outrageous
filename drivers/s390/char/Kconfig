@@ -103,7 +103,10 @@ config SCLP_ASYNC
 	  need this feature and intend to run your kernel in LPAR.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HMC_DRV
 	def_tristate m
 	prompt "Support for file transfers from HMC drive CD/DVD-ROM"
@@ -117,6 +120,9 @@ config HMC_DRV
 	  transfer cache size from it's default value 0.5MB to N bytes. If N
 	  is zero, then no caching is performed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config S390_TAPE
 	def_tristate m

@@ -22,6 +22,11 @@
 #include <drm/ttm/ttm_module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_gem.h>
 
@@ -169,7 +174,11 @@ struct cirrus_bo {
 	struct ttm_bo_kmap_obj kmap;
 	struct drm_gem_object gem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 placements[3];
+=======
+	struct ttm_place placements[3];
+>>>>>>> v3.18
 =======
 	struct ttm_place placements[3];
 >>>>>>> v3.18
@@ -201,7 +210,10 @@ int cirrus_device_init(struct cirrus_device *cdev,
 		      uint32_t flags);
 void cirrus_device_fini(struct cirrus_device *cdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cirrus_gem_init_object(struct drm_gem_object *obj);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void cirrus_gem_free_object(struct drm_gem_object *obj);
@@ -216,9 +228,12 @@ int cirrus_dumb_create(struct drm_file *file,
 		    struct drm_device *dev,
 		       struct drm_mode_create_dumb *args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cirrus_dumb_destroy(struct drm_file *file,
 		     struct drm_device *dev,
 			uint32_t handle);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -242,7 +257,11 @@ void cirrus_driver_irq_preinstall(struct drm_device *dev);
 int cirrus_driver_irq_postinstall(struct drm_device *dev);
 void cirrus_driver_irq_uninstall(struct drm_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t cirrus_driver_irq_handler(DRM_IRQ_ARGS);
+=======
+irqreturn_t cirrus_driver_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 irqreturn_t cirrus_driver_irq_handler(int irq, void *arg);
 >>>>>>> v3.18
@@ -260,9 +279,12 @@ int cirrus_bo_create(struct drm_device *dev, int size, int align,
 		     uint32_t flags, struct cirrus_bo **pcirrusbo);
 int cirrus_mmap(struct file *filp, struct vm_area_struct *vma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cirrus_bo_reserve(struct cirrus_bo *bo, bool no_wait);
 void cirrus_bo_unreserve(struct cirrus_bo *bo);
 =======
+=======
+>>>>>>> v3.18
 
 static inline int cirrus_bo_reserve(struct cirrus_bo *bo, bool no_wait)
 {
@@ -282,6 +304,9 @@ static inline void cirrus_bo_unreserve(struct cirrus_bo *bo)
 	ttm_bo_unreserve(&bo->bo);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int cirrus_bo_push_sysram(struct cirrus_bo *bo);
 int cirrus_bo_pin(struct cirrus_bo *bo, u32 pl_flag, u64 *gpu_addr);

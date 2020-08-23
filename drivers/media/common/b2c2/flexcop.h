@@ -5,7 +5,11 @@
  */
 #ifndef __FLEXCOP_H__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __FLEXCOP_H___
+=======
+#define __FLEXCOP_H__
+>>>>>>> v3.18
 =======
 #define __FLEXCOP_H__
 >>>>>>> v3.18

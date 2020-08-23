@@ -29,7 +29,10 @@ struct s3c24xx_dma_map {
 
 	unsigned long		 channels[S3C_DMA_CHANNELS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		 channels_rx[S3C_DMA_CHANNELS];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -42,10 +45,13 @@ struct s3c24xx_dma_selection {
 	void	(*select)(struct s3c2410_dma_chan *chan,
 			  struct s3c24xx_dma_map *map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	void	(*direction)(struct s3c2410_dma_chan *chan,
 			     struct s3c24xx_dma_map *map,
 			     enum dma_data_direction dir);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

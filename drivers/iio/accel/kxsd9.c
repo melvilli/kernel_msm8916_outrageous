@@ -82,7 +82,11 @@ static int kxsd9_write_scale(struct iio_dev *indio_dev, int micro)
 	mutex_lock(&st->buf_lock);
 	ret = spi_w8r8(st->us, KXSD9_READ(KXSD9_REG_CTRL_C));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0)
+=======
+	if (ret)
+>>>>>>> v3.18
 =======
 	if (ret)
 >>>>>>> v3.18
@@ -165,6 +169,7 @@ static int kxsd9_read_raw(struct iio_dev *indio_dev,
 			goto error_ret;
 		*val = ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = IIO_VAL_INT;
 		break;
 	case IIO_CHAN_INFO_SCALE:
@@ -173,11 +178,16 @@ static int kxsd9_read_raw(struct iio_dev *indio_dev,
 			goto error_ret;
 		*val = 0;
 =======
+=======
+>>>>>>> v3.18
 		break;
 	case IIO_CHAN_INFO_SCALE:
 		ret = spi_w8r8(st->us, KXSD9_READ(KXSD9_REG_CTRL_C));
 		if (ret)
 			goto error_ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*val2 = kxsd9_micro_scales[ret & KXSD9_FS_MASK];
 		ret = IIO_VAL_INT_PLUS_MICRO;
@@ -238,6 +248,7 @@ static int kxsd9_probe(struct spi_device *spi)
 	struct iio_dev *indio_dev;
 	struct kxsd9_state *st;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	indio_dev = iio_device_alloc(sizeof(*st));
@@ -246,11 +257,16 @@ static int kxsd9_probe(struct spi_device *spi)
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	st = iio_priv(indio_dev);
 	spi_set_drvdata(spi, indio_dev);
@@ -269,6 +285,7 @@ static int kxsd9_probe(struct spi_device *spi)
 	kxsd9_power_up(st);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
@@ -282,13 +299,19 @@ error_ret:
 =======
 	return iio_device_register(indio_dev);
 >>>>>>> v3.18
+=======
+	return iio_device_register(indio_dev);
+>>>>>>> v3.18
 }
 
 static int kxsd9_remove(struct spi_device *spi)
 {
 	iio_device_unregister(spi_get_drvdata(spi));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(spi_get_drvdata(spi));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

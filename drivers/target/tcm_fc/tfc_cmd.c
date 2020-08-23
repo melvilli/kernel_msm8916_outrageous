@@ -29,6 +29,10 @@
 #include <linux/ctype.h>
 #include <linux/hash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/percpu_ida.h>
+>>>>>>> v3.18
 =======
 #include <linux/percpu_ida.h>
 >>>>>>> v3.18
@@ -94,15 +98,21 @@ static void ft_free_cmd(struct ft_cmd *cmd)
 	struct fc_frame *fp;
 	struct fc_lport *lport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!cmd)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	struct ft_sess *sess;
 
 	if (!cmd)
 		return;
 	sess = cmd->sess;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fp = cmd->req_frame;
 	lport = fr_dev(fp);
@@ -110,8 +120,13 @@ static void ft_free_cmd(struct ft_cmd *cmd)
 		lport->tt.seq_release(fr_seq(fp));
 	fc_frame_free(fp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ft_sess_put(cmd->sess);	/* undo get from lookup at recv */
 	kfree(cmd);
+=======
+	percpu_ida_free(&sess->se_sess->sess_tag_pool, cmd->se_cmd.map_tag);
+	ft_sess_put(sess);	/* undo get from lookup at recv */
+>>>>>>> v3.18
 =======
 	percpu_ida_free(&sess->se_sess->sess_tag_pool, cmd->se_cmd.map_tag);
 	ft_sess_put(sess);	/* undo get from lookup at recv */
@@ -143,6 +158,10 @@ int ft_queue_status(struct se_cmd *se_cmd)
 	struct fc_exch *ep;
 	size_t len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -156,14 +175,20 @@ int ft_queue_status(struct se_cmd *se_cmd)
 	fp = fc_frame_alloc(lport, len);
 	if (!fp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* XXX shouldn't just drop it - requeue and retry? */
 		return 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 		se_cmd->scsi_status = SAM_STAT_TASK_SET_FULL;
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fcp = fc_frame_payload_get(fp, len);
 	memset(fcp, 0, len);
@@ -196,8 +221,11 @@ int ft_queue_status(struct se_cmd *se_cmd)
 		       FC_FC_EX_CTX | FC_FC_LAST_SEQ | FC_FC_END_SEQ, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lport->tt.seq_send(lport, cmd->seq, fp);
 =======
+=======
+>>>>>>> v3.18
 	rc = lport->tt.seq_send(lport, cmd->seq, fp);
 	if (rc) {
 		pr_info_ratelimited("%s: Failed to send response frame %p, "
@@ -210,6 +238,9 @@ int ft_queue_status(struct se_cmd *se_cmd)
 		se_cmd->scsi_status = SAM_STAT_TASK_SET_FULL;
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lport->tt.exch_done(cmd->seq);
 	return 0;
@@ -438,7 +469,11 @@ static void ft_send_tm(struct ft_cmd *cmd)
  * Send status from completed task management request.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ft_queue_tm_resp(struct se_cmd *se_cmd)
+=======
+void ft_queue_tm_resp(struct se_cmd *se_cmd)
+>>>>>>> v3.18
 =======
 void ft_queue_tm_resp(struct se_cmd *se_cmd)
 >>>>>>> v3.18
@@ -449,7 +484,11 @@ void ft_queue_tm_resp(struct se_cmd *se_cmd)
 
 	if (cmd->aborted)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -465,10 +504,14 @@ void ft_queue_tm_resp(struct se_cmd *se_cmd)
 		break;
 	case TMR_TASK_DOES_NOT_EXIST:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TMR_TASK_STILL_ALLEGIANT:
 	case TMR_TASK_FAILOVER_NOT_SUPPORTED:
 	case TMR_TASK_MGMT_FUNCTION_NOT_SUPPORTED:
 	case TMR_FUNCTION_AUTHORIZATION_FAILED:
+=======
+	case TMR_TASK_MGMT_FUNCTION_NOT_SUPPORTED:
+>>>>>>> v3.18
 =======
 	case TMR_TASK_MGMT_FUNCTION_NOT_SUPPORTED:
 >>>>>>> v3.18
@@ -480,13 +523,19 @@ void ft_queue_tm_resp(struct se_cmd *se_cmd)
 		  tmr->function, tmr->response, code);
 	ft_send_resp_code(cmd, code);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 }
 
 void ft_aborted_task(struct se_cmd *se_cmd)
 {
 	return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -500,6 +549,7 @@ static void ft_recv_cmd(struct ft_sess *sess, struct fc_frame *fp)
 	struct ft_cmd *cmd;
 	struct fc_lport *lport = sess->tport->lport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cmd = kzalloc(sizeof(*cmd), GFP_ATOMIC);
 	if (!cmd)
@@ -509,6 +559,8 @@ static void ft_recv_cmd(struct ft_sess *sess, struct fc_frame *fp)
 	if (!cmd->seq) {
 		kfree(cmd);
 =======
+=======
+>>>>>>> v3.18
 	struct se_session *se_sess = sess->se_sess;
 	int tag;
 
@@ -524,6 +576,9 @@ static void ft_recv_cmd(struct ft_sess *sess, struct fc_frame *fp)
 	cmd->seq = lport->tt.seq_assign(lport, fp);
 	if (!cmd->seq) {
 		percpu_ida_free(&se_sess->sess_tag_pool, tag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto busy;
 	}

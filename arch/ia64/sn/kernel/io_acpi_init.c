@@ -133,7 +133,11 @@ sn_get_bussoft_ptr(struct pci_bus *bus)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = PCI_CONTROLLER(bus)->acpi_handle;
+=======
+	handle = acpi_device_handle(PCI_CONTROLLER(bus)->companion);
+>>>>>>> v3.18
 =======
 	handle = acpi_device_handle(PCI_CONTROLLER(bus)->companion);
 >>>>>>> v3.18
@@ -365,7 +369,11 @@ sn_acpi_get_pcidev_info(struct pci_dev *dev, struct pcidev_info **pcidev_info,
 	struct acpi_buffer name_buffer = { ACPI_ALLOCATE_BUFFER, NULL };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rootbus_handle = PCI_CONTROLLER(dev)->acpi_handle;
+=======
+	rootbus_handle = acpi_device_handle(PCI_CONTROLLER(dev)->companion);
+>>>>>>> v3.18
 =======
 	rootbus_handle = acpi_device_handle(PCI_CONTROLLER(dev)->companion);
 >>>>>>> v3.18

@@ -93,12 +93,18 @@ enum {
 extern xfs_param_t	xfs_params;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct xfs_globals {
 	int	log_recovery_delay;	/* log recovery delay (secs) */
 };
 extern struct xfs_globals	xfs_globals;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SYSCTL
 extern int xfs_sysctl_register(void);

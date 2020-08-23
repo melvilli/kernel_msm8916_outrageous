@@ -22,7 +22,10 @@
 
 #define PCI_BAR_NO 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPLETE_BAR 0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SYNOPSYS_DW_MCI_VENDOR_ID 0x700
@@ -42,7 +45,11 @@ static struct dw_mci_board pci_board_data = {
 
 static int dw_mci_pci_probe(struct pci_dev *pdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const struct pci_device_id *entries)
+=======
+			    const struct pci_device_id *entries)
+>>>>>>> v3.18
 =======
 			    const struct pci_device_id *entries)
 >>>>>>> v3.18
@@ -50,6 +57,7 @@ static int dw_mci_pci_probe(struct pci_dev *pdev,
 	struct dw_mci *host;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = pci_enable_device(pdev);
 	if (ret)
@@ -65,6 +73,8 @@ static int dw_mci_pci_probe(struct pci_dev *pdev,
 		goto err_release;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ret = pcim_enable_device(pdev);
 	if (ret)
 		return ret;
@@ -72,6 +82,9 @@ static int dw_mci_pci_probe(struct pci_dev *pdev,
 	host = devm_kzalloc(&pdev->dev, sizeof(struct dw_mci), GFP_KERNEL);
 	if (!host)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	host->irq = pdev->irq;
@@ -79,6 +92,7 @@ static int dw_mci_pci_probe(struct pci_dev *pdev,
 	host->dev = &pdev->dev;
 	host->pdata = &pci_board_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	host->regs = pci_iomap(pdev, PCI_BAR_NO, COMPLETE_BAR);
 	if (!host->regs) {
@@ -102,6 +116,8 @@ err_disable_dev:
 	pci_disable_device(pdev);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	ret = pcim_iomap_regions(pdev, 1 << PCI_BAR_NO, pci_name(pdev));
 	if (ret)
 		return ret;
@@ -117,6 +133,9 @@ err_disable_dev:
 	pci_set_drvdata(pdev, host);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -126,11 +145,14 @@ static void dw_mci_pci_remove(struct pci_dev *pdev)
 
 	dw_mci_remove(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 	pci_release_regions(pdev);
 	pci_iounmap(pdev, host->regs);
 	kfree(host);
 	pci_disable_device(pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -139,6 +161,7 @@ static void dw_mci_pci_remove(struct pci_dev *pdev)
 static int dw_mci_pci_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	struct pci_dev *pdev = to_pci_dev(dev);
 	struct dw_mci *host = pci_get_drvdata(pdev);
@@ -146,15 +169,21 @@ static int dw_mci_pci_suspend(struct device *dev)
 	ret = dw_mci_suspend(host);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dev *pdev = to_pci_dev(dev);
 	struct dw_mci *host = pci_get_drvdata(pdev);
 
 	return dw_mci_suspend(host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int dw_mci_pci_resume(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	struct pci_dev *pdev = to_pci_dev(dev);
@@ -167,18 +196,27 @@ static int dw_mci_pci_resume(struct device *dev)
 #define dw_mci_pci_suspend	NULL
 #define dw_mci_pci_resume	NULL
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dev *pdev = to_pci_dev(dev);
 	struct dw_mci *host = pci_get_drvdata(pdev);
 
 	return dw_mci_resume(host);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM_SLEEP */
 
 static SIMPLE_DEV_PM_OPS(dw_mci_pci_pmops, dw_mci_pci_suspend, dw_mci_pci_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dw_mci_pci_id) = {
+=======
+static const struct pci_device_id dw_mci_pci_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id dw_mci_pci_id[] = {
 >>>>>>> v3.18

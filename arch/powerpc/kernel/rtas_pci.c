@@ -67,12 +67,18 @@ int rtas_read_config(struct pci_dn *pdn, int where, int size, u32 *val)
 	if (!config_access_valid(pdn, where))
 		return PCIBIOS_BAD_REGISTER_NUMBER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EEH
 	if (pdn->edev && pdn->edev->pe &&
 	    (pdn->edev->pe->state & EEH_PE_CFG_BLOCKED))
 		return PCIBIOS_SET_FAILED;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	addr = rtas_config_addr(pdn->busno, pdn->devfn, where);
@@ -89,10 +95,13 @@ int rtas_read_config(struct pci_dn *pdn, int where, int size, u32 *val)
 		return PCIBIOS_DEVICE_NOT_FOUND;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (returnval == EEH_IO_ERROR_VALUE(size) &&
 	    eeh_dev_check_failure(of_node_to_eeh_dev(pdn->node)))
 		return PCIBIOS_DEVICE_NOT_FOUND;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return PCIBIOS_SUCCESSFUL;
@@ -103,6 +112,7 @@ static int rtas_pci_read_config(struct pci_bus *bus,
 				int where, int size, u32 *val)
 {
 	struct device_node *busdn, *dn;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	busdn = pci_bus_to_OF_node(bus);
@@ -117,6 +127,8 @@ static int rtas_pci_read_config(struct pci_bus *bus,
 
 	return PCIBIOS_DEVICE_NOT_FOUND;
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dn *pdn;
 	bool found = false;
 	int ret;
@@ -142,6 +154,9 @@ static int rtas_pci_read_config(struct pci_bus *bus,
 		return PCIBIOS_DEVICE_NOT_FOUND;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -155,12 +170,18 @@ int rtas_write_config(struct pci_dn *pdn, int where, int size, u32 val)
 	if (!config_access_valid(pdn, where))
 		return PCIBIOS_BAD_REGISTER_NUMBER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EEH
 	if (pdn->edev && pdn->edev->pe &&
 	    (pdn->edev->pe->state & EEH_PE_CFG_BLOCKED))
 		return PCIBIOS_SET_FAILED;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	addr = rtas_config_addr(pdn->busno, pdn->devfn, where);
@@ -184,6 +205,7 @@ static int rtas_pci_write_config(struct pci_bus *bus,
 {
 	struct device_node *busdn, *dn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	busdn = pci_bus_to_OF_node(bus);
 
@@ -196,6 +218,8 @@ static int rtas_pci_write_config(struct pci_bus *bus,
 	}
 	return PCIBIOS_DEVICE_NOT_FOUND;
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dn *pdn;
 	bool found = false;
 
@@ -214,6 +238,9 @@ static int rtas_pci_write_config(struct pci_bus *bus,
 		return PCIBIOS_DEVICE_NOT_FOUND;
 
 	return rtas_write_config(pdn, where, size, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -292,7 +319,11 @@ static int phb_set_bus_ranges(struct device_node *dev,
 			      struct pci_controller *phb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int *bus_range;
+=======
+	const __be32 *bus_range;
+>>>>>>> v3.18
 =======
 	const __be32 *bus_range;
 >>>>>>> v3.18
@@ -304,8 +335,13 @@ static int phb_set_bus_ranges(struct device_node *dev,
  	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phb->first_busno =  bus_range[0];
 	phb->last_busno  =  bus_range[1];
+=======
+	phb->first_busno = be32_to_cpu(bus_range[0]);
+	phb->last_busno  = be32_to_cpu(bus_range[1]);
+>>>>>>> v3.18
 =======
 	phb->first_busno = be32_to_cpu(bus_range[0]);
 	phb->last_busno  = be32_to_cpu(bus_range[1]);

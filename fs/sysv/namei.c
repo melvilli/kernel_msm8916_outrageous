@@ -28,8 +28,12 @@ static int add_nondir(struct dentry *dentry, struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sysv_hash(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *qstr)
+=======
+static int sysv_hash(const struct dentry *dentry, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 static int sysv_hash(const struct dentry *dentry, struct qstr *qstr)
 >>>>>>> v3.18

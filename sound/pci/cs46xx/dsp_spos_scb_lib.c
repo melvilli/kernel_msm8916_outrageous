@@ -234,14 +234,20 @@ void cs46xx_dsp_proc_free_scb_desc (struct dsp_scb_descriptor * scb)
 	if (scb->proc_info) {
 		struct proc_scb_info * scb_info = scb->proc_info->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		snd_printdd("cs46xx_dsp_proc_free_scb_desc: freeing %s\n",scb->scb_name);
 =======
+=======
+>>>>>>> v3.18
 		struct snd_cs46xx *chip = scb_info->chip;
 
 		dev_dbg(chip->card->dev,
 			"cs46xx_dsp_proc_free_scb_desc: freeing %s\n",
 			scb->scb_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		snd_info_free_entry(scb->proc_info);
@@ -314,7 +320,11 @@ _dsp_create_generic_scb (struct snd_cs46xx *chip, char * name, u32 * scb_data, u
 	scb_data[SCBfuncEntryPtr] |= task_entry->address;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("dsp_spos: creating SCB <%s>\n",name);
+=======
+	dev_dbg(chip->card->dev, "dsp_spos: creating SCB <%s>\n", name);
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "dsp_spos: creating SCB <%s>\n", name);
 >>>>>>> v3.18
@@ -333,10 +343,13 @@ _dsp_create_generic_scb (struct snd_cs46xx *chip, char * name, u32 * scb_data, u
 	if (scb->parent_scb_ptr) {
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk ("scb->parent_scb_ptr = %s\n",scb->parent_scb_ptr->scb_name);
 		printk ("scb->parent_scb_ptr->next_scb_ptr = %s\n",scb->parent_scb_ptr->next_scb_ptr->scb_name);
 		printk ("scb->parent_scb_ptr->sub_list_ptr = %s\n",scb->parent_scb_ptr->sub_list_ptr->scb_name);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(chip->card->dev,
 			"scb->parent_scb_ptr = %s\n",
 			scb->parent_scb_ptr->scb_name);
@@ -346,6 +359,9 @@ _dsp_create_generic_scb (struct snd_cs46xx *chip, char * name, u32 * scb_data, u
 		dev_dbg(chip->card->dev,
 			"scb->parent_scb_ptr->sub_list_ptr = %s\n",
 			scb->parent_scb_ptr->sub_list_ptr->scb_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		/* link to  parent SCB */
@@ -393,7 +409,12 @@ cs46xx_dsp_create_generic_scb (struct snd_cs46xx *chip, char * name, u32 * scb_d
   
 	if (task_entry == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk (KERN_ERR "dsp_spos: symbol %s not found\n",task_entry_name);
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol %s not found\n", task_entry_name);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol %s not found\n", task_entry_name);
@@ -612,7 +633,12 @@ cs46xx_dsp_create_pcm_reader_scb(struct snd_cs46xx * chip, char * scb_name,
     
 		if (ins->null_algorithm == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk (KERN_ERR "dsp_spos: symbol NULLALGORITHM not found\n");
+=======
+			dev_err(chip->card->dev,
+				"dsp_spos: symbol NULLALGORITHM not found\n");
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"dsp_spos: symbol NULLALGORITHM not found\n");
@@ -647,7 +673,12 @@ cs46xx_dsp_create_src_task_scb(struct snd_cs46xx * chip, char * scb_name,
 	unsigned int correctionPerGOF, correctionPerSec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd( "dsp_spos: setting %s rate to %u\n",scb_name,rate);
+=======
+	dev_dbg(chip->card->dev, "dsp_spos: setting %s rate to %u\n",
+		scb_name, rate);
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "dsp_spos: setting %s rate to %u\n",
 		scb_name, rate);
@@ -710,7 +741,12 @@ cs46xx_dsp_create_src_task_scb(struct snd_cs46xx * chip, char * scb_name,
 			
 			if (ins->s16_up == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk (KERN_ERR "dsp_spos: symbol S16_UPSRC not found\n");
+=======
+				dev_err(chip->card->dev,
+					"dsp_spos: symbol S16_UPSRC not found\n");
+>>>>>>> v3.18
 =======
 				dev_err(chip->card->dev,
 					"dsp_spos: symbol S16_UPSRC not found\n");
@@ -1310,7 +1346,11 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 		   alter the raw data stream ...) */
 		if (sample_rate == 48000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd ("IEC958 pass through\n");
+=======
+			dev_dbg(chip->card->dev, "IEC958 pass through\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(chip->card->dev, "IEC958 pass through\n");
 >>>>>>> v3.18
@@ -1348,7 +1388,11 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 
 	if (pcm_index == -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk (KERN_ERR "dsp_spos: no free PCM channel\n");
+=======
+		dev_err(chip->card->dev, "dsp_spos: no free PCM channel\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "dsp_spos: no free PCM channel\n");
 >>>>>>> v3.18
@@ -1358,7 +1402,12 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 	if (src_scb == NULL) {
 		if (ins->nsrc_scb >= DSP_MAX_SRC_NR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "dsp_spos: to many SRC instances\n!");
+=======
+			dev_err(chip->card->dev,
+				"dsp_spos: to many SRC instances\n!");
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"dsp_spos: to many SRC instances\n!");
@@ -1389,7 +1438,12 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 		snprintf (scb_name,DSP_MAX_SCB_NAME,"SrcTask_SCB%d",src_index);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd( "dsp_spos: creating SRC \"%s\"\n",scb_name);
+=======
+		dev_dbg(chip->card->dev,
+			"dsp_spos: creating SRC \"%s\"\n", scb_name);
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"dsp_spos: creating SRC \"%s\"\n", scb_name);
@@ -1406,7 +1460,12 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 
 		if (!src_scb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk (KERN_ERR "dsp_spos: failed to create SRCtaskSCB\n");
+=======
+			dev_err(chip->card->dev,
+				"dsp_spos: failed to create SRCtaskSCB\n");
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"dsp_spos: failed to create SRCtaskSCB\n");
@@ -1423,8 +1482,13 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 	snprintf (scb_name,DSP_MAX_SCB_NAME,"PCMReader_SCB%d",pcm_index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd( "dsp_spos: creating PCM \"%s\" (%d)\n",scb_name,
                  pcm_channel_id);
+=======
+	dev_dbg(chip->card->dev, "dsp_spos: creating PCM \"%s\" (%d)\n",
+		scb_name, pcm_channel_id);
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "dsp_spos: creating PCM \"%s\" (%d)\n",
 		scb_name, pcm_channel_id);
@@ -1442,7 +1506,12 @@ cs46xx_dsp_create_pcm_channel (struct snd_cs46xx * chip,
 
 	if (!pcm_scb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk (KERN_ERR "dsp_spos: failed to create PCMreaderSCB\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: failed to create PCMreaderSCB\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: failed to create PCMreaderSCB\n");
@@ -1497,7 +1566,12 @@ int cs46xx_dsp_pcm_channel_set_period (struct snd_cs46xx * chip,
 		break; 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd ("period size (%d) not supported by HW\n", period_size);
+=======
+		dev_dbg(chip->card->dev,
+			"period size (%d) not supported by HW\n", period_size);
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"period size (%d) not supported by HW\n", period_size);
@@ -1540,7 +1614,12 @@ int cs46xx_dsp_pcm_ostream_set_period (struct snd_cs46xx * chip,
 		break; 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd ("period size (%d) not supported by HW\n", period_size);
+=======
+		dev_dbg(chip->card->dev,
+			"period size (%d) not supported by HW\n", period_size);
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"period size (%d) not supported by HW\n", period_size);

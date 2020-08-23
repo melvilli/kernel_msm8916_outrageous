@@ -33,9 +33,15 @@
 #include "device.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int FIRMWAREbDownload(struct vnt_private *);
 int FIRMWAREbBrach2Sram(struct vnt_private *);
 int FIRMWAREbCheckVersion(struct vnt_private *);
+=======
+int vnt_download_firmware(struct vnt_private *);
+int vnt_firmware_branch_to_sram(struct vnt_private *);
+int vnt_check_firmware_version(struct vnt_private *);
+>>>>>>> v3.18
 =======
 int vnt_download_firmware(struct vnt_private *);
 int vnt_firmware_branch_to_sram(struct vnt_private *);

@@ -23,13 +23,19 @@
 #define DEC_DIR_INODE_NLINK(i) if (i->i_nlink != 1) drop_nlink(i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // directory item contains array of entry headers. This performs
 // binary search through that array
 =======
+=======
+>>>>>>> v3.18
 /*
  * directory item contains array of entry headers. This performs
  * binary search through that array
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bin_search_in_dir_item(struct reiserfs_dir_entry *de, loff_t off)
 {
@@ -39,7 +45,11 @@ static int bin_search_in_dir_item(struct reiserfs_dir_entry *de, loff_t off)
 
 	lbound = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rbound = I_ENTRY_COUNT(ih) - 1;
+=======
+	rbound = ih_entry_count(ih) - 1;
+>>>>>>> v3.18
 =======
 	rbound = ih_entry_count(ih) - 1;
 >>>>>>> v3.18
@@ -55,7 +65,11 @@ static int bin_search_in_dir_item(struct reiserfs_dir_entry *de, loff_t off)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// this is not name found, but matched third key component
+=======
+		/* this is not name found, but matched third key component */
+>>>>>>> v3.18
 =======
 		/* this is not name found, but matched third key component */
 >>>>>>> v3.18
@@ -68,7 +82,13 @@ static int bin_search_in_dir_item(struct reiserfs_dir_entry *de, loff_t off)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // comment?  maybe something like set de to point to what the path points to?
+=======
+/*
+ * comment?  maybe something like set de to point to what the path points to?
+ */
+>>>>>>> v3.18
 =======
 /*
  * comment?  maybe something like set de to point to what the path points to?
@@ -79,7 +99,11 @@ static inline void set_de_item_location(struct reiserfs_dir_entry *de,
 {
 	de->de_bh = get_last_bh(path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	de->de_ih = get_ih(path);
+=======
+	de->de_ih = tp_item_head(path);
+>>>>>>> v3.18
 =======
 	de->de_ih = tp_item_head(path);
 >>>>>>> v3.18
@@ -88,7 +112,13 @@ static inline void set_de_item_location(struct reiserfs_dir_entry *de,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // de_bh, de_ih, de_deh (points to first element of array), de_item_num is set
+=======
+/*
+ * de_bh, de_ih, de_deh (points to first element of array), de_item_num is set
+ */
+>>>>>>> v3.18
 =======
 /*
  * de_bh, de_ih, de_deh (points to first element of array), de_item_num is set
@@ -103,7 +133,11 @@ inline void set_de_name_and_namelen(struct reiserfs_dir_entry *de)
 	de->de_entrylen = entry_length(de->de_bh, de->de_ih, de->de_entry_num);
 	de->de_namelen = de->de_entrylen - (de_with_sd(deh) ? SD_SIZE : 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	de->de_name = B_I_PITEM(de->de_bh, de->de_ih) + deh_location(deh);
+=======
+	de->de_name = ih_item_body(de->de_bh, de->de_ih) + deh_location(deh);
+>>>>>>> v3.18
 =======
 	de->de_name = ih_item_body(de->de_bh, de->de_ih) + deh_location(deh);
 >>>>>>> v3.18
@@ -112,6 +146,7 @@ inline void set_de_name_and_namelen(struct reiserfs_dir_entry *de)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // what entry points to
 static inline void set_de_object_key(struct reiserfs_dir_entry *de)
 {
@@ -119,12 +154,17 @@ static inline void set_de_object_key(struct reiserfs_dir_entry *de)
 	de->de_dir_id = deh_dir_id(&(de->de_deh[de->de_entry_num]));
 	de->de_objectid = deh_objectid(&(de->de_deh[de->de_entry_num]));
 =======
+=======
+>>>>>>> v3.18
 /* what entry points to */
 static inline void set_de_object_key(struct reiserfs_dir_entry *de)
 {
 	BUG_ON(de->de_entry_num >= ih_entry_count(de->de_ih));
 	de->de_dir_id = deh_dir_id(&de->de_deh[de->de_entry_num]);
 	de->de_objectid = deh_objectid(&de->de_deh[de->de_entry_num]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -140,6 +180,7 @@ static inline void store_de_entry_key(struct reiserfs_dir_entry *de)
 	    le32_to_cpu(de->de_ih->ih_key.k_dir_id);
 	de->de_entry_key.on_disk_key.k_objectid =
 	    le32_to_cpu(de->de_ih->ih_key.k_objectid);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	set_cpu_key_k_offset(&(de->de_entry_key), deh_offset(deh));
 	set_cpu_key_k_type(&(de->de_entry_key), TYPE_DIRENTRY);
@@ -157,6 +198,8 @@ entry position in the item
 */
 
 =======
+=======
+>>>>>>> v3.18
 	set_cpu_key_k_offset(&de->de_entry_key, deh_offset(deh));
 	set_cpu_key_k_type(&de->de_entry_key, TYPE_DIRENTRY);
 }
@@ -171,6 +214,9 @@ entry position in the item
  * by search_by_key. Fills the path to the entry, and to the entry position
  * in the item
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* The function is NOT SCHEDULE-SAFE! */
 int search_by_entry_key(struct super_block *sb, const struct cpu_key *key,
@@ -206,7 +252,11 @@ int search_by_entry_key(struct super_block *sb, const struct cpu_key *key,
 #ifdef CONFIG_REISERFS_CHECK
 	if (!is_direntry_le_ih(de->de_ih) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    COMP_SHORT_KEYS(&(de->de_ih->ih_key), key)) {
+=======
+	    COMP_SHORT_KEYS(&de->de_ih->ih_key, key)) {
+>>>>>>> v3.18
 =======
 	    COMP_SHORT_KEYS(&de->de_ih->ih_key, key)) {
 >>>>>>> v3.18
@@ -218,6 +268,7 @@ int search_by_entry_key(struct super_block *sb, const struct cpu_key *key,
 #endif				/* CONFIG_REISERFS_CHECK */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* binary search in directory item by third componen t of the
 	   key. sets de->de_entry_num of de */
 	retval = bin_search_in_dir_item(de, cpu_key_k_offset(key));
@@ -225,6 +276,8 @@ int search_by_entry_key(struct super_block *sb, const struct cpu_key *key,
 	if (retval != NAME_NOT_FOUND) {
 		// ugly, but rename needs de_bh, de_deh, de_name, de_namelen, de_objectid set
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * binary search in directory item by third component of the
 	 * key. sets de->de_entry_num of de
@@ -236,6 +289,9 @@ int search_by_entry_key(struct super_block *sb, const struct cpu_key *key,
 		 * ugly, but rename needs de_bh, de_deh, de_name,
 		 * de_namelen, de_objectid set
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_de_name_and_namelen(de);
 		set_de_object_key(de);
@@ -246,18 +302,24 @@ int search_by_entry_key(struct super_block *sb, const struct cpu_key *key,
 /* Keyed 32-bit hash function using TEA in a Davis-Meyer function */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The third component is hashed, and you can choose from more than
    one hash function.  Per directory hashes are not yet implemented
    but are thought about. This function should be moved to hashes.c
    Jedi, please do so.  -Hans */
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * The third component is hashed, and you can choose from more than
  * one hash function.  Per directory hashes are not yet implemented
  * but are thought about. This function should be moved to hashes.c
  * Jedi, please do so.  -Hans
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __u32 get_third_component(struct super_block *s,
 				 const char *name, int len)
@@ -272,12 +334,15 @@ static __u32 get_third_component(struct super_block *s,
 	res = REISERFS_SB(s)->s_hash_function(name, len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// take bits from 7-th to 30-th including both bounds
 	res = GET_HASH_VALUE(res);
 	if (res == 0)
 		// needed to have no names before "." and ".." those have hash
 		// value == 0 and generation conters 1 and 2 accordingly
 =======
+=======
+>>>>>>> v3.18
 	/* take bits from 7-th to 30-th including both bounds */
 	res = GET_HASH_VALUE(res);
 	if (res == 0)
@@ -285,6 +350,9 @@ static __u32 get_third_component(struct super_block *s,
 		 * needed to have no names before "." and ".." those have hash
 		 * value == 0 and generation conters 1 and 2 accordingly
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		res = 128;
 	return res + MAX_GENERATION_NUMBER;
@@ -307,7 +375,11 @@ static int reiserfs_match(struct reiserfs_dir_entry *de,
 /* de's de_bh, de_ih, de_deh, de_item_num, de_entry_num are set already */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* used when hash collisions exist */
+=======
+/* used when hash collisions exist */
+>>>>>>> v3.18
 =======
 /* used when hash collisions exist */
 >>>>>>> v3.18
@@ -323,7 +395,11 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 	i = de->de_entry_num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i == I_ENTRY_COUNT(de->de_ih) ||
+=======
+	if (i == ih_entry_count(de->de_ih) ||
+>>>>>>> v3.18
 =======
 	if (i == ih_entry_count(de->de_ih) ||
 >>>>>>> v3.18
@@ -339,6 +415,7 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 
 	for (; i >= 0; i--, deh--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (GET_HASH_VALUE(deh_offset(deh)) !=
 		    GET_HASH_VALUE(cpu_key_k_offset(key))) {
 			// hash value does not match, no need to check whole name
@@ -347,6 +424,8 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 
 		/* mark, that this generation number is used */
 =======
+=======
+>>>>>>> v3.18
 		/* hash value does not match, no need to check whole name */
 		if (GET_HASH_VALUE(deh_offset(deh)) !=
 		    GET_HASH_VALUE(cpu_key_k_offset(key))) {
@@ -354,11 +433,15 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 		}
 
 		/* mark that this generation number is used */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (de->de_gen_number_bit_string)
 			set_bit(GET_GENERATION_NUMBER(deh_offset(deh)),
 				de->de_gen_number_bit_string);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// calculate pointer to name and namelen
 		de->de_entry_num = i;
@@ -370,6 +453,8 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 
 			// key of pointed object
 =======
+=======
+>>>>>>> v3.18
 		/* calculate pointer to name and namelen */
 		de->de_entry_num = i;
 		set_de_name_and_namelen(de);
@@ -382,13 +467,20 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 		     reiserfs_match(de, name, namelen)) != NAME_NOT_FOUND) {
 
 			/* key of pointed object */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			set_de_object_key(de);
 
 			store_de_entry_key(de);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// retval can be NAME_FOUND or NAME_FOUND_INVISIBLE
+=======
+			/* retval can be NAME_FOUND or NAME_FOUND_INVISIBLE */
+>>>>>>> v3.18
 =======
 			/* retval can be NAME_FOUND or NAME_FOUND_INVISIBLE */
 >>>>>>> v3.18
@@ -398,6 +490,7 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 
 	if (GET_GENERATION_NUMBER(le_ih_k_offset(de->de_ih)) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* we have reached left most entry in the node. In common we
 		   have to go to the left neighbor, but if generation counter
 		   is 0 already, we know for sure, that there is no name with
@@ -406,6 +499,8 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 		// be 0. Btw, in case of Yura's hash it is probably possible,
 		// so, this is a bug
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * we have reached left most entry in the node. In common we
 		 * have to go to the left neighbor, but if generation counter
@@ -417,6 +512,9 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 		 *  be 0. Btw, in case of Yura's hash it is probably possible,
 		 * so, this is a bug
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NAME_NOT_FOUND;
 
@@ -427,13 +525,19 @@ static int linear_search_in_dir_item(struct cpu_key *key,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // may return NAME_FOUND, NAME_FOUND_INVISIBLE, NAME_NOT_FOUND
 // FIXME: should add something like IOERROR
 =======
+=======
+>>>>>>> v3.18
 /*
  * may return NAME_FOUND, NAME_FOUND_INVISIBLE, NAME_NOT_FOUND
  * FIXME: should add something like IOERROR
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int reiserfs_find_entry(struct inode *dir, const char *name, int namelen,
 			       struct treepath *path_to_entry,
@@ -464,26 +568,38 @@ static int reiserfs_find_entry(struct inode *dir, const char *name, int namelen,
 		    linear_search_in_dir_item(&key_to_search, de, name,
 					      namelen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retval != GOTO_PREVIOUS_ITEM) {
 			/* there is no need to scan directory anymore. Given entry found or does not exist */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * there is no need to scan directory anymore.
 		 * Given entry found or does not exist
 		 */
 		if (retval != GOTO_PREVIOUS_ITEM) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			path_to_entry->pos_in_item = de->de_entry_num;
 			return retval;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* there is left neighboring item of this directory and given entry can be there */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * there is left neighboring item of this directory
 		 * and given entry can be there
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_cpu_key_k_offset(&key_to_search,
 				     le_ih_k_offset(de->de_ih) - 1);
@@ -497,7 +613,10 @@ static struct dentry *reiserfs_lookup(struct inode *dir, struct dentry *dentry,
 {
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int lock_depth;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct inode *inode = NULL;
@@ -508,12 +627,16 @@ static struct dentry *reiserfs_lookup(struct inode *dir, struct dentry *dentry,
 		return ERR_PTR(-ENAMETOOLONG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Might be called with or without the write lock, must be careful
 	 * to not recursively hold it in case we want to release the lock
 	 * before rescheduling.
 	 */
 	lock_depth = reiserfs_write_lock_once(dir->i_sb);
+=======
+	reiserfs_write_lock(dir->i_sb);
+>>>>>>> v3.18
 =======
 	reiserfs_write_lock(dir->i_sb);
 >>>>>>> v3.18
@@ -525,6 +648,7 @@ static struct dentry *reiserfs_lookup(struct inode *dir, struct dentry *dentry,
 	pathrelse(&path_to_entry);
 	if (retval == NAME_FOUND) {
 		inode = reiserfs_iget(dir->i_sb,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				      (struct cpu_key *)&(de.de_dir_id));
 		if (!inode || IS_ERR(inode)) {
@@ -539,6 +663,8 @@ static struct dentry *reiserfs_lookup(struct inode *dir, struct dentry *dentry,
 	}
 	reiserfs_write_unlock_once(dir->i_sb, lock_depth);
 =======
+=======
+>>>>>>> v3.18
 				      (struct cpu_key *)&de.de_dir_id);
 		if (!inode || IS_ERR(inode)) {
 			reiserfs_write_unlock(dir->i_sb);
@@ -553,6 +679,9 @@ static struct dentry *reiserfs_lookup(struct inode *dir, struct dentry *dentry,
 			inode->i_flags |= S_PRIVATE;
 	}
 	reiserfs_write_unlock(dir->i_sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (retval == IO_ERROR) {
 		return ERR_PTR(-EIO);
@@ -563,9 +692,15 @@ static struct dentry *reiserfs_lookup(struct inode *dir, struct dentry *dentry,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** looks up the dentry of the parent directory for child.
 ** taken from ext2_get_parent
 */
+=======
+ * looks up the dentry of the parent directory for child.
+ * taken from ext2_get_parent
+ */
+>>>>>>> v3.18
 =======
  * looks up the dentry of the parent directory for child.
  * taken from ext2_get_parent
@@ -592,7 +727,11 @@ struct dentry *reiserfs_get_parent(struct dentry *child)
 		return ERR_PTR(-ENOENT);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = reiserfs_iget(dir->i_sb, (struct cpu_key *)&(de.de_dir_id));
+=======
+	inode = reiserfs_iget(dir->i_sb, (struct cpu_key *)&de.de_dir_id);
+>>>>>>> v3.18
 =======
 	inode = reiserfs_iget(dir->i_sb, (struct cpu_key *)&de.de_dir_id);
 >>>>>>> v3.18
@@ -618,9 +757,12 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	DECLARE_BITMAP(bit_string, MAX_GENERATION_NUMBER + 1);
 	int gen_number;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char small_buf[32 + DEH_SIZE];	/* 48 bytes now and we avoid kmalloc
 					   if we create file with short name */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * 48 bytes now and we avoid kmalloc if we
@@ -628,6 +770,9 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	 */
 	char small_buf[32 + DEH_SIZE];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *buffer;
 	int buflen, paste_size;
@@ -661,12 +806,18 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	     STAT_DATA_V1) ? (DEH_SIZE + namelen) : buflen;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* fill buffer : directory entry head, name[, dir objectid | , stat data | ,stat data, dir objectid ] */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * fill buffer : directory entry head, name[, dir objectid | ,
 	 * stat data | ,stat data, dir objectid ]
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	deh = (struct reiserfs_de_head *)buffer;
 	deh->deh_location = 0;	/* JDM Endian safe if 0 */
@@ -674,14 +825,20 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	deh->deh_state = 0;	/* JDM Endian safe if 0 */
 	/* put key (ino analog) to de */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deh->deh_dir_id = INODE_PKEY(inode)->k_dir_id;	/* safe: k_dir_id is le */
 	deh->deh_objectid = INODE_PKEY(inode)->k_objectid;	/* safe: k_objectid is le */
 =======
+=======
+>>>>>>> v3.18
 
 	/* safe: k_dir_id is le */
 	deh->deh_dir_id = INODE_PKEY(inode)->k_dir_id;
 	/* safe: k_objectid is le */
 	deh->deh_objectid = INODE_PKEY(inode)->k_objectid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* copy name */
@@ -690,12 +847,18 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	padd_item((char *)(deh + 1), ROUND_UP(namelen), namelen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* entry is ready to be pasted into tree, set 'visibility' and 'stat data in entry' attributes */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * entry is ready to be pasted into tree, set 'visibility'
 	 * and 'stat data in entry' attributes
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mark_de_without_sd(deh);
 	visible ? mark_de_visible(deh) : mark_de_hidden(deh);
@@ -743,7 +906,12 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	PROC_INFO_MAX(th->t_super, max_hash_collisions, gen_number);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gen_number != 0) {	/* we need to re-search for the insertion point */
+=======
+	/* we need to re-search for the insertion point */
+	if (gen_number != 0) {
+>>>>>>> v3.18
 =======
 	/* we need to re-search for the insertion point */
 	if (gen_number != 0) {
@@ -776,7 +944,11 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 	dir->i_mtime = dir->i_ctime = CURRENT_TIME_SEC;
 	if (!S_ISDIR(inode->i_mode) && visible)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// reiserfs_mkdir or reiserfs_rename will do that by itself
+=======
+		/* reiserfs_mkdir or reiserfs_rename will do that by itself */
+>>>>>>> v3.18
 =======
 		/* reiserfs_mkdir or reiserfs_rename will do that by itself */
 >>>>>>> v3.18
@@ -787,18 +959,24 @@ static int reiserfs_add_entry(struct reiserfs_transaction_handle *th,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* quota utility function, call if you've had to abort after calling
 ** new_inode_init, and have not called reiserfs_new_inode yet.
 ** This should only be called on inodes that do not have stat data
 ** inserted into the tree yet.
 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * quota utility function, call if you've had to abort after calling
  * new_inode_init, and have not called reiserfs_new_inode yet.
  * This should only be called on inodes that do not have stat data
  * inserted into the tree yet.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int drop_new_inode(struct inode *inode)
 {
@@ -809,6 +987,7 @@ static int drop_new_inode(struct inode *inode)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* utility function that does setup for reiserfs_new_inode.
 ** dquot_initialize needs lots of credits so it's better to have it
@@ -823,6 +1002,8 @@ static int new_inode_init(struct inode *inode, struct inode *dir, umode_t mode)
 	/* the quota init calls have to know who to charge the quota to, so
 	 ** we have to set uid and gid here
 =======
+=======
+>>>>>>> v3.18
 /*
  * utility function that does setup for reiserfs_new_inode.
  * dquot_initialize needs lots of credits so it's better to have it
@@ -840,6 +1021,9 @@ static int new_inode_init(struct inode *inode, struct inode *dir, umode_t mode)
 	/*
 	 * the quota init calls have to know who to charge the quota to, so
 	 * we have to set uid and gid here
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	inode_init_owner(inode, dir, mode);
@@ -853,12 +1037,18 @@ static int reiserfs_create(struct inode *dir, struct dentry *dentry, umode_t mod
 	int retval;
 	struct inode *inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We need blocks for transaction + (user+group)*(quotas for new inode + update of quota for directory owner) */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need blocks for transaction + (user+group)*(quotas
 	 * for new inode + update of quota for directory owner)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 2 +
@@ -907,7 +1097,11 @@ static int reiserfs_create(struct inode *dir, struct dentry *dentry, umode_t mod
 		drop_nlink(inode);
 		reiserfs_update_sd(&th, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = journal_end(&th, dir->i_sb, jbegin_count);
+=======
+		err = journal_end(&th);
+>>>>>>> v3.18
 =======
 		err = journal_end(&th);
 >>>>>>> v3.18
@@ -923,9 +1117,15 @@ static int reiserfs_create(struct inode *dir, struct dentry *dentry, umode_t mod
 	unlock_new_inode(inode);
 	d_instantiate(dentry, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, dir->i_sb, jbegin_count);
 
       out_failed:
+=======
+	retval = journal_end(&th);
+
+out_failed:
+>>>>>>> v3.18
 =======
 	retval = journal_end(&th);
 
@@ -943,12 +1143,18 @@ static int reiserfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode
 	struct reiserfs_transaction_handle th;
 	struct reiserfs_security_handle security;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We need blocks for transaction + (user+group)*(quotas for new inode + update of quota for directory owner) */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need blocks for transaction + (user+group)*(quotas
 	 * for new inode + update of quota for directory owner)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 3 +
@@ -991,7 +1197,11 @@ static int reiserfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode
 	init_special_inode(inode, inode->i_mode, rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//FIXME: needed for block and char devices only
+=======
+	/* FIXME: needed for block and char devices only */
+>>>>>>> v3.18
 =======
 	/* FIXME: needed for block and char devices only */
 >>>>>>> v3.18
@@ -1008,7 +1218,11 @@ static int reiserfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode
 		drop_nlink(inode);
 		reiserfs_update_sd(&th, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = journal_end(&th, dir->i_sb, jbegin_count);
+=======
+		err = journal_end(&th);
+>>>>>>> v3.18
 =======
 		err = journal_end(&th);
 >>>>>>> v3.18
@@ -1022,9 +1236,15 @@ static int reiserfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode
 	unlock_new_inode(inode);
 	d_instantiate(dentry, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, dir->i_sb, jbegin_count);
 
       out_failed:
+=======
+	retval = journal_end(&th);
+
+out_failed:
+>>>>>>> v3.18
 =======
 	retval = journal_end(&th);
 
@@ -1041,13 +1261,19 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 	struct reiserfs_transaction_handle th;
 	struct reiserfs_security_handle security;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int lock_depth;
 	/* We need blocks for transaction + (user+group)*(quotas for new inode + update of quota for directory owner) */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need blocks for transaction + (user+group)*(quotas
 	 * for new inode + update of quota for directory owner)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 3 +
@@ -1058,12 +1284,18 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 
 #ifdef DISPLACE_NEW_PACKING_LOCALITIES
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set flag that new packing locality created and new blocks for the content     * of that directory are not displaced yet */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * set flag that new packing locality created and new blocks
 	 * for the content of that directory are not displaced yet
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REISERFS_I(dir)->new_packing_locality = 1;
 #endif
@@ -1081,7 +1313,11 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 	}
 	jbegin_count += retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_depth = reiserfs_write_lock_once(dir->i_sb);
+=======
+	reiserfs_write_lock(dir->i_sb);
+>>>>>>> v3.18
 =======
 	reiserfs_write_lock(dir->i_sb);
 >>>>>>> v3.18
@@ -1093,8 +1329,14 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* inc the link count now, so another writer doesn't overflow it while
 	 ** we sleep later on.
+=======
+	/*
+	 * inc the link count now, so another writer doesn't overflow
+	 * it while we sleep later on.
+>>>>>>> v3.18
 =======
 	/*
 	 * inc the link count now, so another writer doesn't overflow
@@ -1119,7 +1361,11 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 	inode->i_fop = &reiserfs_dir_operations;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// note, _this_ add_entry will not update dir's stat data
+=======
+	/* note, _this_ add_entry will not update dir's stat data */
+>>>>>>> v3.18
 =======
 	/* note, _this_ add_entry will not update dir's stat data */
 >>>>>>> v3.18
@@ -1132,7 +1378,11 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 		DEC_DIR_INODE_NLINK(dir);
 		reiserfs_update_sd(&th, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = journal_end(&th, dir->i_sb, jbegin_count);
+=======
+		err = journal_end(&th);
+>>>>>>> v3.18
 =======
 		err = journal_end(&th);
 >>>>>>> v3.18
@@ -1143,7 +1393,11 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 		goto out_failed;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// the above add_entry did not update dir's stat data
+=======
+	/* the above add_entry did not update dir's stat data */
+>>>>>>> v3.18
 =======
 	/* the above add_entry did not update dir's stat data */
 >>>>>>> v3.18
@@ -1152,9 +1406,15 @@ static int reiserfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 	unlock_new_inode(inode);
 	d_instantiate(dentry, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, dir->i_sb, jbegin_count);
 out_failed:
 	reiserfs_write_unlock_once(dir->i_sb, lock_depth);
+=======
+	retval = journal_end(&th);
+out_failed:
+	reiserfs_write_unlock(dir->i_sb);
+>>>>>>> v3.18
 =======
 	retval = journal_end(&th);
 out_failed:
@@ -1166,16 +1426,22 @@ out_failed:
 static inline int reiserfs_empty_dir(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we can cheat because an old format dir cannot have
 	 ** EMPTY_DIR_SIZE, and a new format dir cannot have
 	 ** EMPTY_DIR_SIZE_V1.  So, if the inode is either size,
 	 ** regardless of disk format version, the directory is empty.
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * we can cheat because an old format dir cannot have
 	 * EMPTY_DIR_SIZE, and a new format dir cannot have
 	 * EMPTY_DIR_SIZE_V1.  So, if the inode is either size,
 	 * regardless of disk format version, the directory is empty.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (inode->i_size != EMPTY_DIR_SIZE &&
@@ -1195,17 +1461,23 @@ static int reiserfs_rmdir(struct inode *dir, struct dentry *dentry)
 	struct reiserfs_dir_entry de;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we will be doing 2 balancings and update 2 stat data, we change quotas
 	 * of the owner of the directory and of the owner of the parent directory.
 	 * The quota structure is possibly deleted only on last iput => outside
 	 * of this transaction */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * we will be doing 2 balancings and update 2 stat data, we
 	 * change quotas of the owner of the directory and of the owner
 	 * of the parent directory.  The quota structure is possibly
 	 * deleted only on last iput => outside of this transaction
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 2 + 2 +
@@ -1236,8 +1508,14 @@ static int reiserfs_rmdir(struct inode *dir, struct dentry *dentry)
 
 	if (de.de_objectid != inode->i_ino) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// FIXME: compare key of an object and a key found in the
 		// entry
+=======
+		/*
+		 * FIXME: compare key of an object and a key found in the entry
+		 */
+>>>>>>> v3.18
 =======
 		/*
 		 * FIXME: compare key of an object and a key found in the entry
@@ -1253,7 +1531,12 @@ static int reiserfs_rmdir(struct inode *dir, struct dentry *dentry)
 
 	/* cut entry from dir directory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = reiserfs_cut_from_item(&th, &path, &(de.de_entry_key), dir, NULL,	/* page */
+=======
+	retval = reiserfs_cut_from_item(&th, &path, &de.de_entry_key,
+					dir, NULL,	/* page */
+>>>>>>> v3.18
 =======
 	retval = reiserfs_cut_from_item(&th, &path, &de.de_entry_key,
 					dir, NULL,	/* page */
@@ -1279,6 +1562,7 @@ static int reiserfs_rmdir(struct inode *dir, struct dentry *dentry)
 	add_save_link(&th, inode, 0 /* not truncate */ );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, dir->i_sb, jbegin_count);
 	reiserfs_check_path(&path);
       out_rmdir:
@@ -1292,6 +1576,8 @@ static int reiserfs_rmdir(struct inode *dir, struct dentry *dentry)
 	pathrelse(&path);
 	err = journal_end(&th, dir->i_sb, jbegin_count);
 =======
+=======
+>>>>>>> v3.18
 	retval = journal_end(&th);
 	reiserfs_check_path(&path);
 out_rmdir:
@@ -1306,6 +1592,9 @@ end_rmdir:
 	 */
 	pathrelse(&path);
 	err = journal_end(&th);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reiserfs_write_unlock(dir->i_sb);
 	return err ? err : retval;
@@ -1321,7 +1610,10 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
 	int jbegin_count;
 	unsigned long savelink;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int depth;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1330,11 +1622,14 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
 	inode = dentry->d_inode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* in this transaction we can be doing at max two balancings and update
 	 * two stat datas, we change quotas of the owner of the directory and of
 	 * the owner of the parent directory. The quota structure is possibly
 	 * deleted only on iput => outside of this transaction */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * in this transaction we can be doing at max two balancings and
 	 * update two stat datas, we change quotas of the owner of the
@@ -1342,13 +1637,20 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
 	 * structure is possibly deleted only on iput => outside of
 	 * this transaction
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 2 + 2 +
 	    4 * REISERFS_QUOTA_TRANS_BLOCKS(dir->i_sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depth = reiserfs_write_lock_once(dir->i_sb);
+=======
+	reiserfs_write_lock(dir->i_sb);
+>>>>>>> v3.18
 =======
 	reiserfs_write_lock(dir->i_sb);
 >>>>>>> v3.18
@@ -1372,8 +1674,14 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
 
 	if (de.de_objectid != inode->i_ino) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// FIXME: compare key of an object and a key found in the
 		// entry
+=======
+		/*
+		 * FIXME: compare key of an object and a key found in the entry
+		 */
+>>>>>>> v3.18
 =======
 		/*
 		 * FIXME: compare key of an object and a key found in the entry
@@ -1400,7 +1708,11 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
 
 	retval =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    reiserfs_cut_from_item(&th, &path, &(de.de_entry_key), dir, NULL,
+=======
+	    reiserfs_cut_from_item(&th, &path, &de.de_entry_key, dir, NULL,
+>>>>>>> v3.18
 =======
 	    reiserfs_cut_from_item(&th, &path, &de.de_entry_key, dir, NULL,
 >>>>>>> v3.18
@@ -1421,6 +1733,7 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
 		add_save_link(&th, inode, 0 /* not truncate */ );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, dir->i_sb, jbegin_count);
 	reiserfs_check_path(&path);
 	reiserfs_write_unlock_once(dir->i_sb, depth);
@@ -1435,6 +1748,8 @@ static int reiserfs_unlink(struct inode *dir, struct dentry *dentry)
       out_unlink:
 	reiserfs_write_unlock_once(dir->i_sb, depth);
 =======
+=======
+>>>>>>> v3.18
 	retval = journal_end(&th);
 	reiserfs_check_path(&path);
 	reiserfs_write_unlock(dir->i_sb);
@@ -1448,6 +1763,9 @@ end_unlink:
 		retval = err;
 out_unlink:
 	reiserfs_write_unlock(dir->i_sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -1463,12 +1781,18 @@ static int reiserfs_symlink(struct inode *parent_dir,
 	struct reiserfs_security_handle security;
 	int mode = S_IFLNK | S_IRWXUGO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We need blocks for transaction + (user+group)*(quotas for new inode + update of quota for directory owner) */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need blocks for transaction + (user+group)*(quotas for
 	 * new inode + update of quota for directory owner)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 3 +
@@ -1529,10 +1853,13 @@ static int reiserfs_symlink(struct inode *parent_dir,
 	inode->i_mapping->a_ops = &reiserfs_address_space_operations;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// must be sure this inode is written with this transaction
 	//
 	//reiserfs_update_sd (&th, inode, READ_BLOCKS);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retval = reiserfs_add_entry(&th, parent_dir, dentry->d_name.name,
@@ -1542,7 +1869,11 @@ static int reiserfs_symlink(struct inode *parent_dir,
 		drop_nlink(inode);
 		reiserfs_update_sd(&th, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = journal_end(&th, parent_dir->i_sb, jbegin_count);
+=======
+		err = journal_end(&th);
+>>>>>>> v3.18
 =======
 		err = journal_end(&th);
 >>>>>>> v3.18
@@ -1556,8 +1887,13 @@ static int reiserfs_symlink(struct inode *parent_dir,
 	unlock_new_inode(inode);
 	d_instantiate(dentry, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, parent_dir->i_sb, jbegin_count);
       out_failed:
+=======
+	retval = journal_end(&th);
+out_failed:
+>>>>>>> v3.18
 =======
 	retval = journal_end(&th);
 out_failed:
@@ -1573,12 +1909,18 @@ static int reiserfs_link(struct dentry *old_dentry, struct inode *dir,
 	struct inode *inode = old_dentry->d_inode;
 	struct reiserfs_transaction_handle th;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We need blocks for transaction + update of quotas for the owners of the directory */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need blocks for transaction + update of quotas for
 	 * the owners of the directory
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 3 +
@@ -1589,7 +1931,11 @@ static int reiserfs_link(struct dentry *old_dentry, struct inode *dir,
 	reiserfs_write_lock(dir->i_sb);
 	if (inode->i_nlink >= REISERFS_LINK_MAX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//FIXME: sd_nlink is 32 bit for new files
+=======
+		/* FIXME: sd_nlink is 32 bit for new files */
+>>>>>>> v3.18
 =======
 		/* FIXME: sd_nlink is 32 bit for new files */
 >>>>>>> v3.18
@@ -1619,7 +1965,11 @@ static int reiserfs_link(struct dentry *old_dentry, struct inode *dir,
 		int err;
 		drop_nlink(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = journal_end(&th, dir->i_sb, jbegin_count);
+=======
+		err = journal_end(&th);
+>>>>>>> v3.18
 =======
 		err = journal_end(&th);
 >>>>>>> v3.18
@@ -1633,7 +1983,11 @@ static int reiserfs_link(struct dentry *old_dentry, struct inode *dir,
 	ihold(inode);
 	d_instantiate(dentry, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, dir->i_sb, jbegin_count);
+=======
+	retval = journal_end(&th);
+>>>>>>> v3.18
 =======
 	retval = journal_end(&th);
 >>>>>>> v3.18
@@ -1648,9 +2002,15 @@ static int de_still_valid(const char *name, int len,
 	struct reiserfs_dir_entry tmp = *de;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// recalculate pointer to name and name length
 	set_de_name_and_namelen(&tmp);
 	// FIXME: could check more
+=======
+	/* recalculate pointer to name and name length */
+	set_de_name_and_namelen(&tmp);
+	/* FIXME: could check more */
+>>>>>>> v3.18
 =======
 	/* recalculate pointer to name and name length */
 	set_de_name_and_namelen(&tmp);
@@ -1713,6 +2073,7 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	struct timespec ctime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* three balancings: (1) old name removal, (2) new name insertion
 	   and (3) maybe "save" link insertion
 	   stat data updates: (1) old directory,
@@ -1722,6 +2083,8 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	   renamed directory
 	   quota updates: two parent directories */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * three balancings: (1) old name removal, (2) new name insertion
 	 * and (3) maybe "save" link insertion
@@ -1732,6 +2095,9 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	 * renamed directory
 	 * quota updates: two parent directories
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jbegin_count =
 	    JOURNAL_PER_BALANCE_CNT * 3 + 5 +
@@ -1744,13 +2110,19 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	new_dentry_inode = new_dentry->d_inode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// make sure, that oldname still exists and points to an object we
 	// are going to rename
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * make sure that oldname still exists and points to an object we
 	 * are going to rename
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	old_de.de_gen_number_bit_string = NULL;
 	reiserfs_write_lock(old_dir->i_sb);
@@ -1772,16 +2144,22 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	old_inode_mode = old_inode->i_mode;
 	if (S_ISDIR(old_inode_mode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// make sure, that directory being renamed has correct ".."
 		// and that its new parent directory has not too many links
 		// already
 
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * make sure that directory being renamed has correct ".."
 		 * and that its new parent directory has not too many links
 		 * already
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (new_dentry_inode) {
 			if (!reiserfs_empty_dir(new_dentry_inode)) {
@@ -1791,8 +2169,14 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* directory is renamed, its parent directory will be changed,
 		 ** so find ".." entry
+=======
+		/*
+		 * directory is renamed, its parent directory will be changed,
+		 * so find ".." entry
+>>>>>>> v3.18
 =======
 		/*
 		 * directory is renamed, its parent directory will be changed,
@@ -1833,7 +2217,11 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		}
 	} else if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int err = journal_end(&th, old_dir->i_sb, jbegin_count);
+=======
+		int err = journal_end(&th);
+>>>>>>> v3.18
 =======
 		int err = journal_end(&th);
 >>>>>>> v3.18
@@ -1845,8 +2233,14 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	reiserfs_update_inode_transaction(new_dir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* this makes it so an fsync on an open fd for the old name will
 	 ** commit the rename operation
+=======
+	/*
+	 * this makes it so an fsync on an open fd for the old name will
+	 * commit the rename operation
+>>>>>>> v3.18
 =======
 	/*
 	 * this makes it so an fsync on an open fd for the old name will
@@ -1860,12 +2254,18 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// look for old name using corresponding entry key (found by reiserfs_find_entry)
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * look for old name using corresponding entry key
 		 * (found by reiserfs_find_entry)
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((retval =
 		     search_by_entry_key(new_dir->i_sb, &old_de.de_entry_key,
@@ -1873,7 +2273,11 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 					 &old_de)) != NAME_FOUND) {
 			pathrelse(&old_entry_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			journal_end(&th, old_dir->i_sb, jbegin_count);
+=======
+			journal_end(&th);
+>>>>>>> v3.18
 =======
 			journal_end(&th);
 >>>>>>> v3.18
@@ -1882,23 +2286,30 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		copy_item_head(&old_entry_ih, get_ih(&old_entry_path));
 
 		reiserfs_prepare_for_journal(old_inode->i_sb, old_de.de_bh, 1);
 
 		// look for new name by reiserfs_find_entry
 =======
+=======
+>>>>>>> v3.18
 		copy_item_head(&old_entry_ih, tp_item_head(&old_entry_path));
 
 		reiserfs_prepare_for_journal(old_inode->i_sb, old_de.de_bh, 1);
 
 		/* look for new name by reiserfs_find_entry */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		new_de.de_gen_number_bit_string = NULL;
 		retval =
 		    reiserfs_find_entry(new_dir, new_dentry->d_name.name,
 					new_dentry->d_name.len, &new_entry_path,
 					&new_de);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// reiserfs_add_entry should not return IO_ERROR, because it is called with essentially same parameters from
 		// reiserfs_add_entry above, and we'll catch any i/o errors before we get here.
@@ -1907,6 +2318,8 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 			pathrelse(&old_entry_path);
 			journal_end(&th, old_dir->i_sb, jbegin_count);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * reiserfs_add_entry should not return IO_ERROR,
 		 * because it is called with essentially same parameters from
@@ -1917,13 +2330,20 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 			pathrelse(&new_entry_path);
 			pathrelse(&old_entry_path);
 			journal_end(&th);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			reiserfs_write_unlock(old_dir->i_sb);
 			return -EIO;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		copy_item_head(&new_entry_ih, get_ih(&new_entry_path));
+=======
+		copy_item_head(&new_entry_ih, tp_item_head(&new_entry_path));
+>>>>>>> v3.18
 =======
 		copy_item_head(&new_entry_ih, tp_item_head(&new_entry_path));
 >>>>>>> v3.18
@@ -1940,7 +2360,11 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 				pathrelse(&new_entry_path);
 				pathrelse(&old_entry_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				journal_end(&th, old_dir->i_sb, jbegin_count);
+=======
+				journal_end(&th);
+>>>>>>> v3.18
 =======
 				journal_end(&th);
 >>>>>>> v3.18
@@ -1948,6 +2372,7 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 				return -EIO;
 			}
 			copy_item_head(&dot_dot_ih,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				       get_ih(&dot_dot_entry_path));
 			// node containing ".." gets into transaction
@@ -1967,6 +2392,8 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		 ** of the above checks could have scheduled.  We have to be
 		 ** sure our items haven't been shifted by another process.
 =======
+=======
+>>>>>>> v3.18
 				       tp_item_head(&dot_dot_entry_path));
 			/* node containing ".." gets into transaction */
 			reiserfs_prepare_for_journal(old_inode->i_sb,
@@ -1988,6 +2415,9 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		 * sanity checking before doing the rename - avoid races many
 		 * of the above checks could have scheduled.  We have to be
 		 * sure our items haven't been shifted by another process.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (item_moved(&new_entry_ih, &new_entry_path) ||
@@ -2034,6 +2464,7 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ok, all the changes can be done in one fell swoop when we
 	   have claimed all the buffers needed. */
 
@@ -2053,6 +2484,8 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (new_dentry_inode) {
 		// adjust link number of the victim
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * ok, all the changes can be done in one fell swoop when we
 	 * have claimed all the buffers needed.
@@ -2075,6 +2508,9 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 
 	if (new_dentry_inode) {
 		/* adjust link number of the victim */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (S_ISDIR(new_dentry_inode->i_mode)) {
 			clear_nlink(new_dentry_inode);
@@ -2089,12 +2525,15 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		/* adjust ".." of renamed directory */
 		set_ino_in_dir_entry(&dot_dot_de, INODE_PKEY(new_dir));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		journal_mark_dirty(&th, new_dir->i_sb, dot_dot_de.de_bh);
 
 		if (!new_dentry_inode)
 			/* there (in new_dir) was no directory, so it got new link
 			   (".."  of renamed directory) */
 =======
+=======
+>>>>>>> v3.18
 		journal_mark_dirty(&th, dot_dot_de.de_bh);
 
 		/*
@@ -2102,12 +2541,16 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 		 * (".."  of renamed directory)
 		 */
 		if (!new_dentry_inode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			INC_DIR_INODE_NLINK(new_dir);
 
 		/* old directory lost one link - ".. " of renamed directory */
 		DEC_DIR_INODE_NLINK(old_dir);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// looks like in 2.3.99pre3 brelse is atomic. so we can use pathrelse
 	pathrelse(&new_entry_path);
@@ -2119,6 +2562,8 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (reiserfs_cut_from_item
 	    (&th, &old_entry_path, &(old_de.de_entry_key), old_dir, NULL,
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * looks like in 2.3.99pre3 brelse is atomic.
 	 * so we can use pathrelse
@@ -2133,6 +2578,9 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	 */
 	if (reiserfs_cut_from_item
 	    (&th, &old_entry_path, &old_de.de_entry_key, old_dir, NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     0) < 0)
 		reiserfs_error(old_dir->i_sb, "vs-7060",
@@ -2152,7 +2600,11 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = journal_end(&th, old_dir->i_sb, jbegin_count);
+=======
+	retval = journal_end(&th);
+>>>>>>> v3.18
 =======
 	retval = journal_end(&th);
 >>>>>>> v3.18
@@ -2161,11 +2613,16 @@ static int reiserfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * directories can handle most operations...
  */
 const struct inode_operations reiserfs_dir_inode_operations = {
 	//&reiserfs_dir_operations,   /* default_file_ops */
+=======
+/* directories can handle most operations...  */
+const struct inode_operations reiserfs_dir_inode_operations = {
+>>>>>>> v3.18
 =======
 /* directories can handle most operations...  */
 const struct inode_operations reiserfs_dir_inode_operations = {
@@ -2187,6 +2644,10 @@ const struct inode_operations reiserfs_dir_inode_operations = {
 	.permission = reiserfs_permission,
 	.get_acl = reiserfs_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl = reiserfs_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl = reiserfs_set_acl,
 >>>>>>> v3.18
@@ -2207,8 +2668,11 @@ const struct inode_operations reiserfs_symlink_inode_operations = {
 	.removexattr = reiserfs_removexattr,
 	.permission = reiserfs_permission,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_acl = reiserfs_get_acl,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -2225,6 +2689,10 @@ const struct inode_operations reiserfs_special_inode_operations = {
 	.permission = reiserfs_permission,
 	.get_acl = reiserfs_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl = reiserfs_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl = reiserfs_set_acl,
 >>>>>>> v3.18

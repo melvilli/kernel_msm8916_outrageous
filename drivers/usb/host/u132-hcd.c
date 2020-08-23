@@ -1810,9 +1810,15 @@ static int u132_hcd_start(struct usb_hcd *hcd)
 			to_platform_device(hcd->self.controller);
 		u16 vendor = ((struct u132_platform_data *)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(pdev->dev.platform_data))->vendor;
 		u16 device = ((struct u132_platform_data *)
 			(pdev->dev.platform_data))->device;
+=======
+			dev_get_platdata(&pdev->dev))->vendor;
+		u16 device = ((struct u132_platform_data *)
+			dev_get_platdata(&pdev->dev))->device;
+>>>>>>> v3.18
 =======
 			dev_get_platdata(&pdev->dev))->vendor;
 		u16 device = ((struct u132_platform_data *)
@@ -3041,7 +3047,11 @@ static void u132_initialise(struct u132 *u132, struct platform_device *pdev)
 	int udevs = MAX_U132_UDEVS;
 	int endps = MAX_U132_ENDPS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u132->board = pdev->dev.platform_data;
+=======
+	u132->board = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	u132->board = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -3144,6 +3154,10 @@ static int u132_probe(struct platform_device *pdev)
 			return retval;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 			device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -3232,7 +3246,11 @@ static struct platform_driver u132_platform_driver = {
 	.resume = u132_resume,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   .name = (char *)hcd_name,
+=======
+		   .name = hcd_name,
+>>>>>>> v3.18
 =======
 		   .name = hcd_name,
 >>>>>>> v3.18

@@ -157,7 +157,11 @@ int v9fs_acl_chmod(struct inode *inode, struct p9_fid *fid)
 	acl = v9fs_get_cached_acl(inode, ACL_TYPE_ACCESS);
 	if (acl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = posix_acl_chmod(&acl, GFP_KERNEL, inode->i_mode);
+=======
+		retval = __posix_acl_chmod(&acl, GFP_KERNEL, inode->i_mode);
+>>>>>>> v3.18
 =======
 		retval = __posix_acl_chmod(&acl, GFP_KERNEL, inode->i_mode);
 >>>>>>> v3.18
@@ -205,7 +209,11 @@ int v9fs_acl_mode(struct inode *dir, umode_t *modep,
 		if (S_ISDIR(mode))
 			*dpacl = posix_acl_dup(acl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = posix_acl_create(&acl, GFP_NOFS, &mode);
+=======
+		retval = __posix_acl_create(&acl, GFP_NOFS, &mode);
+>>>>>>> v3.18
 =======
 		retval = __posix_acl_create(&acl, GFP_NOFS, &mode);
 >>>>>>> v3.18
@@ -329,6 +337,7 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 		name = POSIX_ACL_XATTR_ACCESS;
 		if (acl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct iattr iattr;
 			struct posix_acl *old_acl = acl;
 
@@ -353,6 +362,8 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 			 */
 			v9fs_vfs_setattr_dotl(dentry, &iattr);
 =======
+=======
+>>>>>>> v3.18
 			umode_t mode = inode->i_mode;
 			retval = posix_acl_equiv_mode(acl, &mode);
 			if (retval < 0)
@@ -379,6 +390,9 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 				 */
 				v9fs_vfs_setattr_dotl(dentry, &iattr);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;

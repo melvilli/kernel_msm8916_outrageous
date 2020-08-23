@@ -26,6 +26,7 @@ struct msi_desc {
 	struct {
 		__u8	is_msix	: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__u8	multiple: 3;	/* log2 number of messages */
 		__u8	maskbit	: 1; 	/* mask-pending bit supported ?   */
 		__u8	is_64	: 1;	/* Address size: 0=32bit 1=64bit  */
@@ -33,18 +34,27 @@ struct msi_desc {
 		__u16	entry_nr;    	/* specific enabled entry 	  */
 		unsigned default_irq;	/* default pre-assigned irq	  */
 =======
+=======
+>>>>>>> v3.18
 		__u8	multiple: 3;	/* log2 num of messages allocated */
 		__u8	multi_cap : 3;	/* log2 num of messages supported */
 		__u8	maskbit	: 1;	/* mask-pending bit supported ? */
 		__u8	is_64	: 1;	/* Address size: 0=32bit 1=64bit */
 		__u16	entry_nr;	/* specific enabled entry */
 		unsigned default_irq;	/* default pre-assigned irq */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} msi_attrib;
 
 	u32 masked;			/* mask bits */
 	unsigned int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int nvec_used;		/* number of messages */
+>>>>>>> v3.18
 =======
 	unsigned int nvec_used;		/* number of messages */
 >>>>>>> v3.18
@@ -59,6 +69,7 @@ struct msi_desc {
 	/* Last set MSI message */
 	struct msi_msg msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct kobject kobj;
 };
@@ -66,12 +77,17 @@ struct msi_desc {
 /*
  * The arch hook for setup up msi irqs
 =======
+=======
+>>>>>>> v3.18
 };
 
 /*
  * The arch hooks to setup up msi irqs. Those functions are
  * implemented as weak symbols so that they /can/ be overriden by
  * architecture specific code if needed.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc);
@@ -79,8 +95,11 @@ void arch_teardown_msi_irq(unsigned int irq);
 int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type);
 void arch_teardown_msi_irqs(struct pci_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int arch_msi_check_device(struct pci_dev* dev, int nvec, int type);
 =======
+=======
+>>>>>>> v3.18
 void arch_restore_msi_irqs(struct pci_dev *dev);
 
 void default_teardown_msi_irqs(struct pci_dev *dev);
@@ -98,6 +117,9 @@ struct msi_chip {
 			 struct msi_desc *desc);
 	void (*teardown_irq)(struct msi_chip *chip, unsigned int irq);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* LINUX_MSI_H */

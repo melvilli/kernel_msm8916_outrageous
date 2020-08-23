@@ -12,6 +12,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/io.h>
@@ -23,6 +24,8 @@
 #include <linux/stat.h>
 #include <linux/timer.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/basic_mmio_gpio.h>
 #include <linux/err.h>
 #include <linux/io.h>
@@ -33,6 +36,9 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/stat.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/vexpress.h>
 
@@ -41,7 +47,10 @@
 #define SYS_LED			0x008
 #define SYS_100HZ		0x024
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYS_FLAGS		0x030
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SYS_FLAGSSET		0x030
@@ -62,6 +71,7 @@
 #define SYS_CFGSTAT		0x0a8
 
 #define SYS_HBI_MASK		0xfff
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SYS_ID_HBI_SHIFT	16
 #define SYS_PROCIDx_HBI_SHIFT	0
@@ -517,6 +527,8 @@ static int vexpress_sysreg_probe(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 #define SYS_PROCIDx_HBI_SHIFT	0
 
 #define SYS_MCI_CARDIN		(1 << 0)
@@ -720,6 +732,9 @@ static int vexpress_sysreg_probe(struct platform_device *pdev)
 	return mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
 			vexpress_sysreg_cells,
 			ARRAY_SIZE(vexpress_sysreg_cells), mem, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -739,14 +754,20 @@ static struct platform_driver vexpress_sysreg_driver = {
 static int __init vexpress_sysreg_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vexpress_sysreg_of_early_init();
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *node;
 
 	/* Need the sysreg early, before any other device... */
 	for_each_matching_node(node, vexpress_sysreg_match)
 		of_platform_device_create(node, NULL, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return platform_driver_register(&vexpress_sysreg_driver);
 }

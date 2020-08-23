@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood-ns2-common.dtsi"
+=======
+#include "kirkwood-ns2-common.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood-ns2-common.dtsi"
 >>>>>>> v3.18
@@ -18,6 +22,11 @@
 	ocp@f1000000 {
 		sata@80000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pinctrl-0 = <&pmx_ns2_sata0>;
+			pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&pmx_ns2_sata0>;
 			pinctrl-names = "default";
@@ -33,12 +42,15 @@
 		blue-sata {
 			label = "ns2:blue:sata";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio0 30 1>;
 			linux,default-trigger = "default-on";
 		};
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&gpio0 30 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "ide-disk";
 		};
@@ -46,4 +58,7 @@
 };
 
 &ethphy0 { reg = <0>; };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

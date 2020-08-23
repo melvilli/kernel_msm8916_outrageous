@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -77,6 +87,10 @@
 #include <linux/pci.h>
 #include <linux/pci-aspm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -92,7 +106,12 @@
 
 /* Hardware specific file defines the PCI IDs table for that hardware module */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(iwl_hw_card_ids) = {
+=======
+static const struct pci_device_id iwl_hw_card_ids[] = {
+#if IS_ENABLED(CONFIG_IWLDVM)
+>>>>>>> v3.18
 =======
 static const struct pci_device_id iwl_hw_card_ids[] = {
 #if IS_ENABLED(CONFIG_IWLDVM)
@@ -284,13 +303,19 @@ static const struct pci_device_id iwl_hw_card_ids[] = {
 	{IWL_PCI_DEVICE(0x0893, 0x0262, iwl135_bgn_cfg)},
 	{IWL_PCI_DEVICE(0x0892, 0x0462, iwl135_bgn_cfg)},
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* 7000 Series */
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_IWLDVM */
 
 #if IS_ENABLED(CONFIG_IWLMVM)
 /* 7260 Series */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{IWL_PCI_DEVICE(0x08B1, 0x4070, iwl7260_2ac_cfg)},
 	{IWL_PCI_DEVICE(0x08B1, 0x4072, iwl7260_2ac_cfg)},
@@ -315,6 +340,12 @@ static const struct pci_device_id iwl_hw_card_ids[] = {
 	{IWL_PCI_DEVICE(0x08B1, 0x4870, iwl7260_2ac_cfg)},
 	{IWL_PCI_DEVICE(0x08B1, 0x486E, iwl7260_2ac_cfg)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{IWL_PCI_DEVICE(0x08B1, 0x4A70, iwl7260_2ac_cfg_high_temp)},
+	{IWL_PCI_DEVICE(0x08B1, 0x4A6E, iwl7260_2ac_cfg_high_temp)},
+	{IWL_PCI_DEVICE(0x08B1, 0x4A6C, iwl7260_2ac_cfg_high_temp)},
+>>>>>>> v3.18
 =======
 	{IWL_PCI_DEVICE(0x08B1, 0x4A70, iwl7260_2ac_cfg_high_temp)},
 	{IWL_PCI_DEVICE(0x08B1, 0x4A6E, iwl7260_2ac_cfg_high_temp)},
@@ -326,6 +357,12 @@ static const struct pci_device_id iwl_hw_card_ids[] = {
 	{IWL_PCI_DEVICE(0x08B2, 0x4360, iwl7260_2n_cfg)},
 	{IWL_PCI_DEVICE(0x08B1, 0x5070, iwl7260_2ac_cfg)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{IWL_PCI_DEVICE(0x08B1, 0x5072, iwl7260_2ac_cfg)},
+	{IWL_PCI_DEVICE(0x08B1, 0x5170, iwl7260_2ac_cfg)},
+	{IWL_PCI_DEVICE(0x08B1, 0x5770, iwl7260_2ac_cfg)},
+>>>>>>> v3.18
 =======
 	{IWL_PCI_DEVICE(0x08B1, 0x5072, iwl7260_2ac_cfg)},
 	{IWL_PCI_DEVICE(0x08B1, 0x5170, iwl7260_2ac_cfg)},
@@ -385,9 +422,12 @@ static const struct pci_device_id iwl_hw_card_ids[] = {
 	{IWL_PCI_DEVICE(0x08B3, 0x8062, iwl3160_n_cfg)},
 	{IWL_PCI_DEVICE(0x08B4, 0x8270, iwl3160_2ac_cfg)},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{IWL_PCI_DEVICE(0x08B3, 0x8470, iwl3160_2ac_cfg)},
 	{IWL_PCI_DEVICE(0x08B3, 0x8570, iwl3160_2ac_cfg)},
 =======
+=======
+>>>>>>> v3.18
 	{IWL_PCI_DEVICE(0x08B4, 0x8370, iwl3160_2ac_cfg)},
 	{IWL_PCI_DEVICE(0x08B4, 0x8272, iwl3160_2ac_cfg)},
 	{IWL_PCI_DEVICE(0x08B3, 0x8470, iwl3160_2ac_cfg)},
@@ -442,6 +482,9 @@ static const struct pci_device_id iwl_hw_card_ids[] = {
 	{IWL_PCI_DEVICE(0x24F3, 0x0004, iwl8260_2n_cfg)},
 	{IWL_PCI_DEVICE(0x24F4, 0x0030, iwl8260_2ac_cfg)},
 #endif /* CONFIG_IWLMVM */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{0}
@@ -449,7 +492,10 @@ static const struct pci_device_id iwl_hw_card_ids[] = {
 MODULE_DEVICE_TABLE(pci, iwl_hw_card_ids);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ACPI
 #define SPL_METHOD		"SPLC"
 #define SPL_DOMAINTYPE_MODULE	BIT(0)
@@ -526,6 +572,9 @@ static void set_dflt_pwr_limit(struct iwl_trans *trans, struct pci_dev *pdev)
 static void set_dflt_pwr_limit(struct iwl_trans *trans, struct pci_dev *pdev) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PCI registers */
 #define PCI_CFG_RETRY_TIMEOUT	0x041
@@ -539,8 +588,13 @@ static int iwl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	iwl_trans = iwl_trans_pcie_alloc(pdev, ent, cfg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iwl_trans == NULL)
 		return -ENOMEM;
+=======
+	if (IS_ERR(iwl_trans))
+		return PTR_ERR(iwl_trans);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(iwl_trans))
 		return PTR_ERR(iwl_trans);
@@ -552,7 +606,11 @@ static int iwl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	trans_pcie->drv = iwl_drv_start(iwl_trans, cfg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(trans_pcie->drv)) {
+=======
+	if (IS_ERR(trans_pcie->drv)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(trans_pcie->drv)) {
 >>>>>>> v3.18
@@ -561,6 +619,11 @@ static int iwl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_dflt_pwr_limit(iwl_trans, pdev);
+
+>>>>>>> v3.18
 =======
 	set_dflt_pwr_limit(iwl_trans, pdev);
 
@@ -577,7 +640,10 @@ out_free_drv:
 out_free_trans:
 	iwl_trans_pcie_free(iwl_trans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -591,8 +657,11 @@ static void iwl_pci_remove(struct pci_dev *pdev)
 	iwl_drv_stop(trans_pcie->drv);
 	iwl_trans_pcie_free(trans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -602,9 +671,12 @@ static void iwl_pci_remove(struct pci_dev *pdev)
 static int iwl_pci_suspend(struct device *device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pdev = to_pci_dev(device);
 	struct iwl_trans *iwl_trans = pci_get_drvdata(pdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Before you put code here, think about WoWLAN. You cannot check here
@@ -613,7 +685,11 @@ static int iwl_pci_suspend(struct device *device)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_trans_suspend(iwl_trans);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -623,7 +699,12 @@ static int iwl_pci_resume(struct device *device)
 {
 	struct pci_dev *pdev = to_pci_dev(device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_trans *iwl_trans = pci_get_drvdata(pdev);
+=======
+	struct iwl_trans *trans = pci_get_drvdata(pdev);
+	bool hw_rfkill;
+>>>>>>> v3.18
 =======
 	struct iwl_trans *trans = pci_get_drvdata(pdev);
 	bool hw_rfkill;
@@ -641,8 +722,11 @@ static int iwl_pci_resume(struct device *device)
 	pci_write_config_byte(pdev, PCI_CFG_RETRY_TIMEOUT, 0x00);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_trans_resume(iwl_trans);
 =======
+=======
+>>>>>>> v3.18
 	if (!trans->op_mode)
 		return 0;
 
@@ -652,6 +736,9 @@ static int iwl_pci_resume(struct device *device)
 	iwl_trans_pcie_rf_kill(trans, hw_rfkill);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

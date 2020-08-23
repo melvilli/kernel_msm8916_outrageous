@@ -29,6 +29,10 @@
 #include <linux/sched/rt.h>
 #include <linux/freezer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/busy_poll.h>
+>>>>>>> v3.18
 =======
 #include <net/busy_poll.h>
 >>>>>>> v3.18
@@ -242,8 +246,12 @@ int poll_schedule_timeout(struct poll_wqueues *pwq, int state,
 	set_current_state(state);
 	if (!pwq->triggered)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = freezable_schedule_hrtimeout_range(expires, slack,
 							HRTIMER_MODE_ABS);
+=======
+		rc = schedule_hrtimeout_range(expires, slack, HRTIMER_MODE_ABS);
+>>>>>>> v3.18
 =======
 		rc = schedule_hrtimeout_range(expires, slack, HRTIMER_MODE_ABS);
 >>>>>>> v3.18
@@ -395,14 +403,20 @@ get_max:
 
 static inline void wait_key_set(poll_table *wait, unsigned long in,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned long out, unsigned long bit)
 {
 	wait->_key = POLLEX_SET;
 =======
+=======
+>>>>>>> v3.18
 				unsigned long out, unsigned long bit,
 				unsigned int ll_flag)
 {
 	wait->_key = POLLEX_SET | ll_flag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (in & bit)
 		wait->_key |= POLLIN_SET;
@@ -418,6 +432,11 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 	int retval, i, timed_out = 0;
 	unsigned long slack = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int busy_flag = net_busy_loop_on() ? POLL_BUSY_LOOP : 0;
+	unsigned long busy_end = 0;
+>>>>>>> v3.18
 =======
 	unsigned int busy_flag = net_busy_loop_on() ? POLL_BUSY_LOOP : 0;
 	unsigned long busy_end = 0;
@@ -445,6 +464,10 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 	for (;;) {
 		unsigned long *rinp, *routp, *rexp, *inp, *outp, *exp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bool can_busy_loop = false;
+>>>>>>> v3.18
 =======
 		bool can_busy_loop = false;
 >>>>>>> v3.18
@@ -475,8 +498,14 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 					f_op = f.file->f_op;
 					mask = DEFAULT_POLLMASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (f_op && f_op->poll) {
 						wait_key_set(wait, in, out, bit);
+=======
+					if (f_op->poll) {
+						wait_key_set(wait, in, out,
+							     bit, busy_flag);
+>>>>>>> v3.18
 =======
 					if (f_op->poll) {
 						wait_key_set(wait, in, out,
@@ -501,7 +530,10 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 						wait->_qproc = NULL;
 					}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 					/* got something, stop busy polling */
 					if (retval) {
 						can_busy_loop = false;
@@ -514,6 +546,9 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 					} else if (busy_flag & mask)
 						can_busy_loop = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -534,7 +569,10 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* only if found POLL_BUSY_LOOP sockets && not out of time */
 		if (can_busy_loop && !need_resched()) {
 			if (!busy_end) {
@@ -546,6 +584,9 @@ int do_select(int n, fd_set_bits *fds, struct timespec *end_time)
 		}
 		busy_flag = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * If this is the first loop and we have a timeout
@@ -779,7 +820,13 @@ struct poll_list {
  * if pwait->_qproc is non-NULL.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int do_pollfd(struct pollfd *pollfd, poll_table *pwait)
+=======
+static inline unsigned int do_pollfd(struct pollfd *pollfd, poll_table *pwait,
+				     bool *can_busy_poll,
+				     unsigned int busy_flag)
+>>>>>>> v3.18
 =======
 static inline unsigned int do_pollfd(struct pollfd *pollfd, poll_table *pwait,
 				     bool *can_busy_poll,
@@ -797,16 +844,22 @@ static inline unsigned int do_pollfd(struct pollfd *pollfd, poll_table *pwait,
 		if (f.file) {
 			mask = DEFAULT_POLLMASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (f.file->f_op && f.file->f_op->poll) {
 				pwait->_key = pollfd->events|POLLERR|POLLHUP;
 				mask = f.file->f_op->poll(f.file, pwait);
 =======
+=======
+>>>>>>> v3.18
 			if (f.file->f_op->poll) {
 				pwait->_key = pollfd->events|POLLERR|POLLHUP;
 				pwait->_key |= busy_flag;
 				mask = f.file->f_op->poll(f.file, pwait);
 				if (mask & busy_flag)
 					*can_busy_poll = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			/* Mask out unneeded events. */
@@ -827,6 +880,11 @@ static int do_poll(unsigned int nfds,  struct poll_list *list,
 	int timed_out = 0, count = 0;
 	unsigned long slack = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int busy_flag = net_busy_loop_on() ? POLL_BUSY_LOOP : 0;
+	unsigned long busy_end = 0;
+>>>>>>> v3.18
 =======
 	unsigned int busy_flag = net_busy_loop_on() ? POLL_BUSY_LOOP : 0;
 	unsigned long busy_end = 0;
@@ -844,6 +902,10 @@ static int do_poll(unsigned int nfds,  struct poll_list *list,
 	for (;;) {
 		struct poll_list *walk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bool can_busy_loop = false;
+>>>>>>> v3.18
 =======
 		bool can_busy_loop = false;
 >>>>>>> v3.18
@@ -862,10 +924,13 @@ static int do_poll(unsigned int nfds,  struct poll_list *list,
 				 * when we break out and return.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (do_pollfd(pfd, pt)) {
 					count++;
 					pt->_qproc = NULL;
 =======
+=======
+>>>>>>> v3.18
 				if (do_pollfd(pfd, pt, &can_busy_loop,
 					      busy_flag)) {
 					count++;
@@ -873,6 +938,9 @@ static int do_poll(unsigned int nfds,  struct poll_list *list,
 					/* found something, stop busy polling */
 					busy_flag = 0;
 					can_busy_loop = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -891,7 +959,10 @@ static int do_poll(unsigned int nfds,  struct poll_list *list,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* only if found POLL_BUSY_LOOP sockets && not out of time */
 		if (can_busy_loop && !need_resched()) {
 			if (!busy_end) {
@@ -903,6 +974,9 @@ static int do_poll(unsigned int nfds,  struct poll_list *list,
 		}
 		busy_flag = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * If this is the first loop and we have a timeout

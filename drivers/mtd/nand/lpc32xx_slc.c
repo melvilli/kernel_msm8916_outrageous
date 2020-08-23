@@ -726,10 +726,15 @@ static struct lpc32xx_nand_cfg_slc *lpc32xx_parse_dt(struct device *dev)
 
 	ncfg = devm_kzalloc(dev, sizeof(*ncfg), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ncfg) {
 		dev_err(dev, "could not allocate memory for NAND config\n");
 		return NULL;
 	}
+=======
+	if (!ncfg)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!ncfg)
 		return NULL;
@@ -778,10 +783,15 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	/* Allocate memory for the device structure (and zero it) */
 	host = devm_kzalloc(&pdev->dev, sizeof(*host), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host) {
 		dev_err(&pdev->dev, "failed to allocate device structure\n");
 		return -ENOMEM;
 	}
+=======
+	if (!host)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!host)
 		return -ENOMEM;
@@ -802,8 +812,13 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	if (host->ncfg->wp_gpio == -EPROBE_DEFER)
 		return -EPROBE_DEFER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_is_valid(host->ncfg->wp_gpio) &&
 			gpio_request(host->ncfg->wp_gpio, "NAND WP")) {
+=======
+	if (gpio_is_valid(host->ncfg->wp_gpio) && devm_gpio_request(&pdev->dev,
+			host->ncfg->wp_gpio, "NAND WP")) {
+>>>>>>> v3.18
 =======
 	if (gpio_is_valid(host->ncfg->wp_gpio) && devm_gpio_request(&pdev->dev,
 			host->ncfg->wp_gpio, "NAND WP")) {
@@ -814,7 +829,11 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	lpc32xx_wp_disable(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->pdata = pdev->dev.platform_data;
+=======
+	host->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	host->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -828,7 +847,11 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 
 	/* Get NAND clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->clk = clk_get(&pdev->dev, NULL);
+=======
+	host->clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	host->clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -868,12 +891,15 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	chip->ecc.hwctl = lpc32xx_nand_ecc_enable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* bitflip_threshold's default is defined as ecc_strength anyway.
 	 * Unfortunately, it is set only later at add_mtd_device(). Meanwhile
 	 * being 0, it causes bad block table scanning errors in
 	 * nand_scan_tail(), so preparing it here already. */
 	mtd->bitflip_threshold = chip->ecc.strength;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -885,7 +911,10 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 				      GFP_KERNEL);
 	if (host->data_buf == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "Error allocating memory\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		res = -ENOMEM;
@@ -923,7 +952,10 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	/* Avoid extra scan if using BBT, setup BBT support */
 	if (host->ncfg->use_bbt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chip->options |= NAND_SKIP_BBTSCAN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		chip->bbt_options |= NAND_BBT_USE_FLASH;
@@ -948,6 +980,7 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Standard layout in FLASH for bad block tables */
 	if (host->ncfg->use_bbt) {
 		if (nand_default_bbt(mtd) < 0)
@@ -955,6 +988,8 @@ static int lpc32xx_nand_probe(struct platform_device *pdev)
 			       "Error initializing default bad block tables\n");
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mtd->name = "nxp_lpc3220_slc";
@@ -971,11 +1006,16 @@ err_exit3:
 err_exit2:
 	clk_disable(host->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(host->clk);
 	platform_set_drvdata(pdev, NULL);
 err_exit1:
 	lpc32xx_wp_enable(host);
 	gpio_free(host->ncfg->wp_gpio);
+=======
+err_exit1:
+	lpc32xx_wp_enable(host);
+>>>>>>> v3.18
 =======
 err_exit1:
 	lpc32xx_wp_enable(host);
@@ -1003,10 +1043,14 @@ static int lpc32xx_nand_remove(struct platform_device *pdev)
 
 	clk_disable(host->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(host->clk);
 	platform_set_drvdata(pdev, NULL);
 	lpc32xx_wp_enable(host);
 	gpio_free(host->ncfg->wp_gpio);
+=======
+	lpc32xx_wp_enable(host);
+>>>>>>> v3.18
 =======
 	lpc32xx_wp_enable(host);
 >>>>>>> v3.18
@@ -1070,7 +1114,11 @@ static struct platform_driver lpc32xx_nand_driver = {
 		.name	= LPC32XX_MODNAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(lpc32xx_nand_match),
+=======
+		.of_match_table = lpc32xx_nand_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = lpc32xx_nand_match,
 >>>>>>> v3.18

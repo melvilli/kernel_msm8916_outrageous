@@ -19,7 +19,10 @@ Description:
 		battery 'full level'. As batteries age, this value has to be
 		amended over time.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/class/power_supply/max14577-charger/device/fast_charge_timer
 Date:		October 2014
@@ -34,4 +37,7 @@ Description:
 		Valid values:
 		- 5, 6 or 7 (hours),
 		- 0: disabled.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

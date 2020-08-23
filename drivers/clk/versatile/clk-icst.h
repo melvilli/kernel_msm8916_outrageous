@@ -16,6 +16,11 @@ struct clk_icst_desc {
 struct clk *icst_clk_register(struct device *dev,
 			      const struct clk_icst_desc *desc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			      const char *name,
+			      const char *parent_name,
+>>>>>>> v3.18
 =======
 			      const char *name,
 			      const char *parent_name,

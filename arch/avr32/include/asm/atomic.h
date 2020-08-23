@@ -20,6 +20,7 @@
 #define ATOMIC_INIT(i)  { (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
 #define atomic_set(v, i)	(((v)->counter) = i)
 
@@ -48,6 +49,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)
 #define atomic_set(v, i)	(((v)->counter) = i)
 
@@ -88,6 +91,9 @@ ATOMIC_OP_RETURN(add, add, r)
  */
 #define IS_21BIT_CONST(i)						\
 	(__builtin_constant_p(i) && ((i) >= -1048575) && ((i) <= 1048576))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -99,6 +105,7 @@ ATOMIC_OP_RETURN(add, add, r)
  */
 static inline int atomic_add_return(int i, atomic_t *v)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int result;
 
@@ -146,6 +153,8 @@ static inline void atomic_sub_unless(atomic_t *v, int a, int u)
 		: "m"(v->counter), "rKs21"(a), "rKs21"(u)
 		: "cc", "memory");
 =======
+=======
+>>>>>>> v3.18
 	if (IS_21BIT_CONST(i))
 		return __atomic_sub_return(-i, v);
 
@@ -165,6 +174,9 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 		return __atomic_sub_return(i, v);
 
 	return __atomic_add_return(-i, v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -182,10 +194,13 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 	int tmp, old = atomic_read(v);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__builtin_constant_p(a) && (a >= -1048575) && (a <= 1048576))
 		atomic_sub_unless(v, -a, u);
 	else {
 =======
+=======
+>>>>>>> v3.18
 	if (IS_21BIT_CONST(a)) {
 		asm volatile(
 			"/* __atomic_sub_unless */\n"
@@ -201,6 +216,9 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 			: "m"(v->counter), "rKs21"(-a), "rKs21"(u)
 			: "cc", "memory");
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		asm volatile(
 			"/* __atomic_add_unless */\n"
@@ -221,6 +239,11 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef IS_21BIT_CONST
+
+>>>>>>> v3.18
 =======
 #undef IS_21BIT_CONST
 
@@ -272,11 +295,14 @@ static inline int atomic_sub_if_positive(int i, atomic_t *v)
 #define atomic_dec_if_positive(v) atomic_sub_if_positive(1, v)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /*  __ASM_AVR32_ATOMIC_H */

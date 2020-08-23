@@ -236,7 +236,10 @@ struct sadb_x_kmaddress {
 /* sizeof(struct sadb_x_kmaddress) == 8 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* To specify the SA dump filter */
 struct sadb_x_filter {
 	__u16	sadb_x_filter_len;
@@ -249,6 +252,9 @@ struct sadb_x_filter {
 } __attribute__((packed));
 /* sizeof(struct sadb_x_filter) == 40 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Message types */
 #define SADB_RESERVED		0
@@ -374,7 +380,12 @@ struct sadb_x_filter {
 /* Used with MIGRATE to pass @ to IKE for negotiation */
 #define SADB_X_EXT_KMADDRESS		25
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SADB_EXT_MAX			25
+=======
+#define SADB_X_EXT_FILTER		26
+#define SADB_EXT_MAX			26
+>>>>>>> v3.18
 =======
 #define SADB_X_EXT_FILTER		26
 #define SADB_EXT_MAX			26

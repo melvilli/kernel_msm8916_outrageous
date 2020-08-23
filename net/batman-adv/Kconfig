@@ -51,7 +51,10 @@ config BATMAN_ADV_NC
 	  can safely disable it and save some space.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BATMAN_ADV_MCAST
 	bool "Multicast optimisation"
 	depends on BATMAN_ADV
@@ -61,6 +64,9 @@ config BATMAN_ADV_MCAST
 	  reduce the air overhead while improving the reliability of
 	  multicast messages.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config BATMAN_ADV_DEBUG
 	bool "B.A.T.M.A.N. debugging"

@@ -188,6 +188,7 @@ extern int  sysctl_x25_ack_holdback_timeout;
 extern int  sysctl_x25_forward;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int x25_parse_address_block(struct sk_buff *skb,
 		struct x25_address *called_addr,
 		struct x25_address *calling_addr);
@@ -240,6 +241,8 @@ extern int  x25_subscr_ioctl(unsigned int, void __user *);
 extern struct x25_neigh *x25_get_neigh(struct net_device *);
 extern void x25_link_free(void);
 =======
+=======
+>>>>>>> v3.18
 int x25_parse_address_block(struct sk_buff *skb,
 			    struct x25_address *called_addr,
 			    struct x25_address *calling_addr);
@@ -291,6 +294,9 @@ void x25_transmit_link(struct sk_buff *, struct x25_neigh *);
 int x25_subscr_ioctl(unsigned int, void __user *);
 struct x25_neigh *x25_get_neigh(struct net_device *);
 void x25_link_free(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* x25_neigh.c */
@@ -307,6 +313,7 @@ static __inline__ void x25_neigh_put(struct x25_neigh *nb)
 
 /* x25_out.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern  int x25_output(struct sock *, struct sk_buff *);
 extern void x25_kick(struct sock *);
 extern void x25_enquiry_response(struct sock *);
@@ -318,6 +325,8 @@ extern void x25_route_device_down(struct net_device *dev);
 extern int  x25_route_ioctl(unsigned int, void __user *);
 extern void x25_route_free(void);
 =======
+=======
+>>>>>>> v3.18
 int x25_output(struct sock *, struct sk_buff *);
 void x25_kick(struct sock *);
 void x25_enquiry_response(struct sock *);
@@ -328,6 +337,9 @@ struct net_device *x25_dev_get(char *);
 void x25_route_device_down(struct net_device *dev);
 int x25_route_ioctl(unsigned int, void __user *);
 void x25_route_free(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __inline__ void x25_route_hold(struct x25_route *rt)
@@ -342,6 +354,7 @@ static __inline__ void x25_route_put(struct x25_route *rt)
 }
 
 /* x25_subr.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void x25_clear_queues(struct sock *);
 extern void x25_frames_acked(struct sock *, unsigned short);
@@ -368,6 +381,8 @@ extern void x25_check_rbuf(struct sock *);
 extern void x25_register_sysctl(void);
 extern void x25_unregister_sysctl(void);
 =======
+=======
+>>>>>>> v3.18
 void x25_clear_queues(struct sock *);
 void x25_frames_acked(struct sock *, unsigned short);
 void x25_requeue_frames(struct sock *);
@@ -393,6 +408,9 @@ void x25_check_rbuf(struct sock *);
 #ifdef CONFIG_SYSCTL
 void x25_register_sysctl(void);
 void x25_unregister_sysctl(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline void x25_register_sysctl(void) {};
@@ -414,8 +432,13 @@ extern struct list_head x25_neigh_list;
 extern rwlock_t x25_neigh_list_lock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int x25_proc_init(void);
 extern void x25_proc_exit(void);
+=======
+int x25_proc_init(void);
+void x25_proc_exit(void);
+>>>>>>> v3.18
 =======
 int x25_proc_init(void);
 void x25_proc_exit(void);

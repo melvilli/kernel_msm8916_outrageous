@@ -35,7 +35,11 @@ enum {
 
 #ifdef CONFIG_INTEL_TXT
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18

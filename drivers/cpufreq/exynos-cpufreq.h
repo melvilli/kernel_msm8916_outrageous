@@ -18,7 +18,10 @@ enum cpufreq_level_index {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum exynos_soc_type {
 	EXYNOS_SOC_4210,
 	EXYNOS_SOC_4212,
@@ -26,6 +29,9 @@ enum exynos_soc_type {
 	EXYNOS_SOC_5250,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define APLL_FREQ(f, a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, m, p, s) \
 	{ \
@@ -45,6 +51,11 @@ struct apll_freq {
 
 struct exynos_dvfs_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum exynos_soc_type type;
+	struct device	*dev;
+>>>>>>> v3.18
 =======
 	enum exynos_soc_type type;
 	struct device	*dev;
@@ -57,12 +68,15 @@ struct exynos_dvfs_info {
 	void (*set_freq)(unsigned int, unsigned int);
 	bool (*need_apll_change)(unsigned int, unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 extern int exynos4210_cpufreq_init(struct exynos_dvfs_info *);
 extern int exynos4x12_cpufreq_init(struct exynos_dvfs_info *);
 extern int exynos5250_cpufreq_init(struct exynos_dvfs_info *);
 =======
+=======
+>>>>>>> v3.18
 	void __iomem	*cmu_regs;
 };
 
@@ -109,4 +123,7 @@ static inline int exynos5250_cpufreq_init(struct exynos_dvfs_info *info)
 #define EXYNOS5_CLKDIV_CPU1			0x00504
 #define EXYNOS5_CLKDIV_STATCPU0			0x00600
 #define EXYNOS5_CLKDIV_STATCPU1			0x00604
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

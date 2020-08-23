@@ -797,6 +797,10 @@ static void set_running_timeout(unsigned long ptr)
 	dev = (struct pcbit_dev *) ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->l2_state = L2_DOWN;
+>>>>>>> v3.18
 =======
 	dev->l2_state = L2_DOWN;
 >>>>>>> v3.18
@@ -823,7 +827,12 @@ static int set_protocol_running(struct pcbit_dev *dev)
 	add_timer(&dev->set_running_timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	interruptible_sleep_on(&dev->set_running_wq);
+=======
+	wait_event(dev->set_running_wq, dev->l2_state == L2_RUNNING ||
+					dev->l2_state == L2_DOWN);
+>>>>>>> v3.18
 =======
 	wait_event(dev->set_running_wq, dev->l2_state == L2_RUNNING ||
 					dev->l2_state == L2_DOWN);
@@ -852,8 +861,11 @@ static int set_protocol_running(struct pcbit_dev *dev)
 		printk(KERN_DEBUG "pcbit: firmware not loaded\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->l2_state = L2_DOWN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef DEBUG
@@ -1048,7 +1060,11 @@ static void pcbit_set_msn(struct pcbit_dev *dev, char *list)
 		ptr->next = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptr->msn = kmalloc(len, GFP_ATOMIC);
+=======
+		ptr->msn = kmalloc(len + 1, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		ptr->msn = kmalloc(len + 1, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -1059,7 +1075,11 @@ static void pcbit_set_msn(struct pcbit_dev *dev, char *list)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(ptr->msn, sp, len - 1);
+=======
+		memcpy(ptr->msn, sp, len);
+>>>>>>> v3.18
 =======
 		memcpy(ptr->msn, sp, len);
 >>>>>>> v3.18

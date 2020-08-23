@@ -1,7 +1,10 @@
 #ifndef ___ASM_SPARC_CPUDATA_H
 #define ___ASM_SPARC_CPUDATA_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
 
@@ -12,6 +15,9 @@ extern const struct seq_operations cpuinfo_op;
 
 #endif /* !(__ASSEMBLY__) */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(__sparc__) && defined(__arch64__)
 #include <asm/cpudata_64.h>

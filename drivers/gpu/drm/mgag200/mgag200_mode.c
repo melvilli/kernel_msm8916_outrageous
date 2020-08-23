@@ -30,6 +30,10 @@ static void mga_crtc_load_lut(struct drm_crtc *crtc)
 	struct drm_device *dev = crtc->dev;
 	struct mga_device *mdev = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_framebuffer *fb = crtc->primary->fb;
+>>>>>>> v3.18
 =======
 	struct drm_framebuffer *fb = crtc->primary->fb;
 >>>>>>> v3.18
@@ -41,7 +45,10 @@ static void mga_crtc_load_lut(struct drm_crtc *crtc)
 	WREG8(DAC_INDEX + MGA1064_INDEX, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fb && fb->bits_per_pixel == 16) {
 		int inc = (fb->depth == 15) ? 8 : 4;
 		u8 r, b;
@@ -64,6 +71,9 @@ static void mga_crtc_load_lut(struct drm_crtc *crtc)
 		}
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < MGAG200_LUT_SIZE; i++) {
 		/* VGA registers */
@@ -698,7 +708,11 @@ static void mga_g200wb_commit(struct drm_crtc *crtc)
    new addr variable take effect.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mga_set_start_address(struct drm_crtc *crtc, unsigned offset)
+=======
+static void mga_set_start_address(struct drm_crtc *crtc, unsigned offset)
+>>>>>>> v3.18
 =======
 static void mga_set_start_address(struct drm_crtc *crtc, unsigned offset)
 >>>>>>> v3.18
@@ -753,7 +767,11 @@ static int mga_crtc_do_set_base(struct drm_crtc *crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mga_fb = to_mga_framebuffer(crtc->fb);
+=======
+	mga_fb = to_mga_framebuffer(crtc->primary->fb);
+>>>>>>> v3.18
 =======
 	mga_fb = to_mga_framebuffer(crtc->primary->fb);
 >>>>>>> v3.18
@@ -780,8 +798,11 @@ static int mga_crtc_do_set_base(struct drm_crtc *crtc,
 	mgag200_bo_unreserve(bo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_INFO("mga base %llx\n", gpu_addr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mga_set_start_address(crtc, (u32)gpu_addr);
@@ -825,7 +846,11 @@ static int mga_crtc_mode_set(struct drm_crtc *crtc,
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bppshift = mdev->bpp_shifts[(crtc->fb->bits_per_pixel >> 3) - 1];
+=======
+	bppshift = mdev->bpp_shifts[(crtc->primary->fb->bits_per_pixel >> 3) - 1];
+>>>>>>> v3.18
 =======
 	bppshift = mdev->bpp_shifts[(crtc->primary->fb->bits_per_pixel >> 3) - 1];
 >>>>>>> v3.18
@@ -867,7 +892,11 @@ static int mga_crtc_mode_set(struct drm_crtc *crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (crtc->fb->bits_per_pixel) {
+=======
+	switch (crtc->primary->fb->bits_per_pixel) {
+>>>>>>> v3.18
 =======
 	switch (crtc->primary->fb->bits_per_pixel) {
 >>>>>>> v3.18
@@ -876,7 +905,11 @@ static int mga_crtc_mode_set(struct drm_crtc *crtc,
 		break;
 	case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb->depth == 15)
+=======
+		if (crtc->primary->fb->depth == 15)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb->depth == 15)
 >>>>>>> v3.18
@@ -928,9 +961,15 @@ static int mga_crtc_mode_set(struct drm_crtc *crtc,
 	WREG_SEQ(4, 0xe);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pitch = crtc->fb->pitches[0] / (crtc->fb->bits_per_pixel / 8);
 	if (crtc->fb->bits_per_pixel == 24)
 		pitch = pitch >> (4 - bppshift);
+=======
+	pitch = crtc->primary->fb->pitches[0] / (crtc->primary->fb->bits_per_pixel / 8);
+	if (crtc->primary->fb->bits_per_pixel == 24)
+		pitch = (pitch * 3) >> (4 - bppshift);
+>>>>>>> v3.18
 =======
 	pitch = crtc->primary->fb->pitches[0] / (crtc->primary->fb->bits_per_pixel / 8);
 	if (crtc->primary->fb->bits_per_pixel == 24)
@@ -1012,7 +1051,11 @@ static int mga_crtc_mode_set(struct drm_crtc *crtc,
 		((vsyncstart & 0xc00) >> 5) |
 		((vdisplay & 0x400) >> 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (crtc->fb->bits_per_pixel == 24)
+=======
+	if (crtc->primary->fb->bits_per_pixel == 24)
+>>>>>>> v3.18
 =======
 	if (crtc->primary->fb->bits_per_pixel == 24)
 >>>>>>> v3.18
@@ -1076,9 +1119,15 @@ static int mga_crtc_mode_set(struct drm_crtc *crtc,
 			u32 mb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (crtc->fb->bits_per_pixel > 16)
 				bpp = 32;
 			else if (crtc->fb->bits_per_pixel > 8)
+=======
+			if (crtc->primary->fb->bits_per_pixel > 16)
+				bpp = 32;
+			else if (crtc->primary->fb->bits_per_pixel > 8)
+>>>>>>> v3.18
 =======
 			if (crtc->primary->fb->bits_per_pixel > 16)
 				bpp = 32;
@@ -1320,9 +1369,12 @@ static void mga_crtc_destroy(struct drm_crtc *crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These provide the minimum set of functions required to handle a CRTC */
 static const struct drm_crtc_funcs mga_crtc_funcs = {
 =======
+=======
+>>>>>>> v3.18
 static void mga_crtc_disable(struct drm_crtc *crtc)
 {
 	int ret;
@@ -1345,6 +1397,9 @@ static void mga_crtc_disable(struct drm_crtc *crtc)
 static const struct drm_crtc_funcs mga_crtc_funcs = {
 	.cursor_set = mga_crtc_cursor_set,
 	.cursor_move = mga_crtc_cursor_move,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.gamma_set = mga_crtc_gamma_set,
 	.set_config = drm_crtc_helper_set_config,
@@ -1353,6 +1408,10 @@ static const struct drm_crtc_funcs mga_crtc_funcs = {
 
 static const struct drm_crtc_helper_funcs mga_helper_funcs = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.disable = mga_crtc_disable,
+>>>>>>> v3.18
 =======
 	.disable = mga_crtc_disable,
 >>>>>>> v3.18
@@ -1454,7 +1513,11 @@ static void mga_encoder_commit(struct drm_encoder *encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mga_encoder_destroy(struct drm_encoder *encoder)
+=======
+static void mga_encoder_destroy(struct drm_encoder *encoder)
+>>>>>>> v3.18
 =======
 static void mga_encoder_destroy(struct drm_encoder *encoder)
 >>>>>>> v3.18
@@ -1543,11 +1606,15 @@ static int mga_vga_mode_valid(struct drm_connector *connector,
 	struct drm_device *dev = connector->dev;
 	struct mga_device *mdev = (struct mga_device*)dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mga_fbdev *mfbdev = mdev->mfbdev;
 	struct drm_fb_helper *fb_helper = &mfbdev->helper;
 	struct drm_fb_helper_connector *fb_helper_conn = NULL;
 	int bpp = 32;
 	int i = 0;
+=======
+	int bpp = 32;
+>>>>>>> v3.18
 =======
 	int bpp = 32;
 >>>>>>> v3.18
@@ -1593,11 +1660,14 @@ static int mga_vga_mode_valid(struct drm_connector *connector,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((mode->hdisplay % 8) != 0 || (mode->hsync_start % 8) != 0 ||
 	    (mode->hsync_end % 8) != 0 || (mode->htotal % 8) != 0) {
 		return MODE_H_ILLEGAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mode->crtc_hdisplay > 2048 || mode->crtc_hsync_start > 4096 ||
@@ -1608,6 +1678,7 @@ static int mga_vga_mode_valid(struct drm_connector *connector,
 	}
 
 	/* Validate the mode input by the user */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < fb_helper->connector_count; i++) {
 		if (fb_helper->connector_info[i]->connector == connector) {
@@ -1625,6 +1696,8 @@ static int mga_vga_mode_valid(struct drm_connector *connector,
 		if (fb_helper_conn)
 			fb_helper_conn->cmdline_mode.specified = false;
 =======
+=======
+>>>>>>> v3.18
 	if (connector->cmdline_mode.specified) {
 		if (connector->cmdline_mode.bpp_specified)
 			bpp = connector->cmdline_mode.bpp;
@@ -1633,6 +1706,9 @@ static int mga_vga_mode_valid(struct drm_connector *connector,
 	if ((mode->hdisplay * mode->vdisplay * (bpp/8)) > mdev->mc.vram_size) {
 		if (connector->cmdline_mode.specified)
 			connector->cmdline_mode.specified = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return MODE_BAD;
 	}
@@ -1640,6 +1716,7 @@ static int mga_vga_mode_valid(struct drm_connector *connector,
 	return MODE_OK;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct drm_encoder *mga_connector_best_encoder(struct drm_connector
 						  *connector)
@@ -1659,6 +1736,8 @@ struct drm_encoder *mga_connector_best_encoder(struct drm_connector
 		return encoder;
 	}
 =======
+=======
+>>>>>>> v3.18
 static struct drm_encoder *mga_connector_best_encoder(struct drm_connector
 						  *connector)
 {
@@ -1666,6 +1745,9 @@ static struct drm_encoder *mga_connector_best_encoder(struct drm_connector
 	/* pick the encoder ids */
 	if (enc_id)
 		return drm_encoder_find(connector->dev, enc_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -1714,6 +1796,11 @@ static struct drm_connector *mga_vga_init(struct drm_device *dev)
 	drm_connector_helper_add(connector, &mga_vga_connector_helper_funcs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_connector_register(connector);
+
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 

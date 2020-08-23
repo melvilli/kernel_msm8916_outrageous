@@ -5,9 +5,15 @@
 menuconfig WIMAX_GDM72XX
 	tristate "GCT GDM72xx WiMAX support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on NET
 	help
 	  Support for the GCT GDM72xx WiMAX chip
+=======
+	depends on NET && (USB || MMC)
+	help
+	  Support a WiMAX module based on the GCT GDM72xx WiMAX chip.
+>>>>>>> v3.18
 =======
 	depends on NET && (USB || MMC)
 	help
@@ -20,6 +26,12 @@ config WIMAX_GDM72XX_QOS
 	bool "Enable QoS support"
 	default n
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	help
+	  Enable Quality of Service support based on the data protocol of
+	  transmitting packets.
+>>>>>>> v3.18
 =======
 	help
 	  Enable Quality of Service support based on the data protocol of
@@ -30,11 +42,14 @@ config WIMAX_GDM72XX_K_MODE
 	bool "Enable K mode"
 	default n
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config WIMAX_GDM72XX_WIMAX2
 	bool "Enable WIMAX2 support"
 	default n
 =======
+=======
+>>>>>>> v3.18
 	help
 	  Enable support for proprietary functions for KT (Korea Telecom).
 
@@ -44,6 +59,9 @@ config WIMAX_GDM72XX_WIMAX2
 	help
 	  Enable support for transmitting multiple packets (packet
 	  aggregation) from the WiMAX module to the host processor.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 choice
@@ -52,12 +70,15 @@ choice
 config WIMAX_GDM72XX_USB
 	bool "USB interface"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB
 
 config WIMAX_GDM72XX_SDIO
 	bool "SDIO interface"
 	depends on MMC
 =======
+=======
+>>>>>>> v3.18
 	depends on (USB = y || USB = WIMAX_GDM72XX)
 	help
 	  Select this option if the WiMAX module interfaces with the host
@@ -69,6 +90,9 @@ config WIMAX_GDM72XX_SDIO
 	help
 	  Select this option if the WiMAX module interfaces with the host
 	  processor via SDIO.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endchoice
@@ -77,14 +101,20 @@ if WIMAX_GDM72XX_USB
 
 config WIMAX_GDM72XX_USB_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Enable power managerment support"
 	depends on PM_RUNTIME
 =======
+=======
+>>>>>>> v3.18
 	bool "Enable power management support"
 	depends on PM_RUNTIME
 	help
 	  Enable USB power management in order to reduce power consumption
 	  while the interface is not in use.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # WIMAX_GDM72XX_USB

@@ -11,7 +11,10 @@ extern void cmp_smp_finish(void);
 extern void cmp_boot_secondary(int cpu, struct task_struct *t);
 extern void cmp_init_secondary(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cmp_cpus_done(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void cmp_prepare_cpus(unsigned int max_cpus);

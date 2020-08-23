@@ -4,7 +4,10 @@
 #include <linux/notifier.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The pvclock gtod notifier is called when the system time is updated
  * and is used to keep guest time synchronized with host time.
@@ -12,6 +15,9 @@
  * The 'action' parameter in the notifier function is false (0), or
  * true (non-zero) if system time was stepped.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int pvclock_gtod_register_notifier(struct notifier_block *nb);
 extern int pvclock_gtod_unregister_notifier(struct notifier_block *nb);

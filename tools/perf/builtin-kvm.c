@@ -3,6 +3,10 @@
 
 #include "util/evsel.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/evlist.h"
+>>>>>>> v3.18
 =======
 #include "util/evlist.h"
 >>>>>>> v3.18
@@ -12,6 +16,7 @@
 #include "util/thread.h"
 #include "util/header.h"
 #include "util/session.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include "util/parse-options.h"
@@ -24,6 +29,8 @@
 #include <sys/prctl.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include "util/intlist.h"
 #include "util/parse-options.h"
 #include "util/trace-event.h"
@@ -40,11 +47,15 @@
 #endif
 
 #include <termios.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <semaphore.h>
 #include <pthread.h>
 #include <math.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(__i386__) || defined(__x86_64__)
 #include <asm/svm.h>
@@ -143,6 +154,8 @@ static bool kvm_exit_event(struct perf_evsel *evsel)
 static bool exit_event_begin(struct perf_evsel *evsel,
 			     struct perf_sample *sample, struct event_key *key)
 =======
+=======
+>>>>>>> v3.18
 #ifdef HAVE_KVM_STAT_SUPPORT
 #include <asm/kvm_perf.h>
 #include "util/kvm-stat.h"
@@ -162,6 +175,9 @@ bool kvm_exit_event(struct perf_evsel *evsel)
 
 bool exit_event_begin(struct perf_evsel *evsel,
 		      struct perf_sample *sample, struct event_key *key)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (kvm_exit_event(evsel)) {
@@ -173,6 +189,7 @@ bool exit_event_begin(struct perf_evsel *evsel,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool kvm_entry_event(struct perf_evsel *evsel)
 {
 	return !strcmp(evsel->name, "kvm:kvm_entry");
@@ -182,6 +199,8 @@ static bool exit_event_end(struct perf_evsel *evsel,
 			   struct perf_sample *sample __maybe_unused,
 			   struct event_key *key __maybe_unused)
 =======
+=======
+>>>>>>> v3.18
 bool kvm_entry_event(struct perf_evsel *evsel)
 {
 	return !strcmp(evsel->name, KVM_ENTRY_TRACE);
@@ -190,11 +209,15 @@ bool kvm_entry_event(struct perf_evsel *evsel)
 bool exit_event_end(struct perf_evsel *evsel,
 		    struct perf_sample *sample __maybe_unused,
 		    struct event_key *key __maybe_unused)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return kvm_entry_event(evsel);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct exit_reasons_table vmx_exit_reasons[] = {
 	VMX_EXIT_REASONS
@@ -211,11 +234,16 @@ static const char *get_exit_reason(struct perf_kvm_stat *kvm, u64 exit_code)
 
 	while (i--) {
 =======
+=======
+>>>>>>> v3.18
 static const char *get_exit_reason(struct perf_kvm_stat *kvm,
 				   struct exit_reasons_table *tbl,
 				   u64 exit_code)
 {
 	while (tbl->reason != NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (tbl->exit_code == exit_code)
 			return tbl->reason;
@@ -227,6 +255,7 @@ static const char *get_exit_reason(struct perf_kvm_stat *kvm,
 	return "UNKNOWN";
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void exit_event_decode_key(struct perf_kvm_stat *kvm,
 				  struct event_key *key,
@@ -326,6 +355,8 @@ static bool ioport_event_begin(struct perf_evsel *evsel,
 		ioport_event_get_key(evsel, sample, key);
 		return true;
 =======
+=======
+>>>>>>> v3.18
 void exit_event_decode_key(struct perf_kvm_stat *kvm,
 			   struct event_key *key,
 			   char *decode)
@@ -345,12 +376,16 @@ static bool register_kvm_events_ops(struct perf_kvm_stat *kvm)
 			kvm->events_ops = events_ops->ops;
 			return true;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool ioport_event_end(struct perf_evsel *evsel,
 			     struct perf_sample *sample __maybe_unused,
@@ -394,6 +429,8 @@ static bool register_kvm_events_ops(struct perf_kvm_stat *kvm)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct vcpu_event_record {
 	int vcpu_id;
 	u64 start_time;
@@ -410,7 +447,10 @@ static void init_kvm_event_record(struct perf_kvm_stat *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef HAVE_TIMERFD_SUPPORT
 static void clear_events_cache_stats(struct list_head *kvm_events_cache)
 {
@@ -435,6 +475,9 @@ static void clear_events_cache_stats(struct list_head *kvm_events_cache)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int kvm_events_hash_fn(u64 key)
 {
@@ -445,6 +488,10 @@ static bool kvm_event_expand(struct kvm_event *event, int vcpu_id)
 {
 	int old_max_vcpu = event->max_vcpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void *prev;
+>>>>>>> v3.18
 =======
 	void *prev;
 >>>>>>> v3.18
@@ -456,15 +503,21 @@ static bool kvm_event_expand(struct kvm_event *event, int vcpu_id)
 		event->max_vcpu += DEFAULT_VCPU_NUM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event->vcpu = realloc(event->vcpu,
 			      event->max_vcpu * sizeof(*event->vcpu));
 	if (!event->vcpu) {
 =======
+=======
+>>>>>>> v3.18
 	prev = event->vcpu;
 	event->vcpu = realloc(event->vcpu,
 			      event->max_vcpu * sizeof(*event->vcpu));
 	if (!event->vcpu) {
 		free(prev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("Not enough memory\n");
 		return false;
@@ -487,6 +540,10 @@ static struct kvm_event *kvm_alloc_init_event(struct event_key *key)
 
 	event->key = *key;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_stats(&event->total.stats);
+>>>>>>> v3.18
 =======
 	init_stats(&event->total.stats);
 >>>>>>> v3.18
@@ -563,11 +620,14 @@ static bool update_kvm_event(struct kvm_event *event, int vcpu_id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool handle_end_event(struct perf_kvm_stat *kvm,
 			     struct vcpu_event_record *vcpu_record,
 			     struct event_key *key,
 			     u64 timestamp)
 =======
+=======
+>>>>>>> v3.18
 static bool is_child_event(struct perf_kvm_stat *kvm,
 			   struct perf_evsel *evsel,
 			   struct perf_sample *sample,
@@ -620,6 +680,9 @@ static bool handle_end_event(struct perf_kvm_stat *kvm,
 			     struct vcpu_event_record *vcpu_record,
 			     struct event_key *key,
 			     struct perf_sample *sample)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvm_event *event;
@@ -657,10 +720,13 @@ static bool handle_end_event(struct perf_kvm_stat *kvm,
 	vcpu_record->start_time = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(timestamp < time_begin);
 
 	time_diff = timestamp - time_begin;
 =======
+=======
+>>>>>>> v3.18
 	/* seems to happen once in a while during live mode */
 	if (sample->time < time_begin) {
 		pr_debug("End time before begin time; skipping event.\n");
@@ -680,6 +746,9 @@ static bool handle_end_event(struct perf_kvm_stat *kvm,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return update_kvm_event(event, vcpu, time_diff);
 }
@@ -691,7 +760,11 @@ struct vcpu_event_record *per_vcpu_record(struct thread *thread,
 {
 	/* Only kvm_entry records vcpu id. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!thread->priv && kvm_entry_event(evsel)) {
+=======
+	if (!thread__priv(thread) && kvm_entry_event(evsel)) {
+>>>>>>> v3.18
 =======
 	if (!thread__priv(thread) && kvm_entry_event(evsel)) {
 >>>>>>> v3.18
@@ -704,17 +777,23 @@ struct vcpu_event_record *per_vcpu_record(struct thread *thread,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vcpu_record->vcpu_id = perf_evsel__intval(evsel, sample, "vcpu_id");
 		thread->priv = vcpu_record;
 	}
 
 	return thread->priv;
 =======
+=======
+>>>>>>> v3.18
 		vcpu_record->vcpu_id = perf_evsel__intval(evsel, sample, VCPU_ID);
 		thread__set_priv(thread, vcpu_record);
 	}
 
 	return thread__priv(thread);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -725,7 +804,12 @@ static bool handle_kvm_event(struct perf_kvm_stat *kvm,
 {
 	struct vcpu_event_record *vcpu_record;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct event_key key = {.key = INVALID_KEY};
+=======
+	struct event_key key = { .key = INVALID_KEY,
+				 .exit_reasons = kvm->exit_reasons };
+>>>>>>> v3.18
 =======
 	struct event_key key = { .key = INVALID_KEY,
 				 .exit_reasons = kvm->exit_reasons };
@@ -744,14 +828,20 @@ static bool handle_kvm_event(struct perf_kvm_stat *kvm,
 		return handle_begin_event(kvm, vcpu_record, &key, sample->time);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kvm->events_ops->is_end_event(evsel, sample, &key))
 		return handle_end_event(kvm, vcpu_record, &key, sample->time);
 =======
+=======
+>>>>>>> v3.18
 	if (is_child_event(kvm, evsel, sample, &key))
 		return handle_child_event(kvm, vcpu_record, &key, sample);
 
 	if (kvm->events_ops->is_end_event(evsel, sample, &key))
 		return handle_end_event(kvm, vcpu_record, &key, sample);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
@@ -782,6 +872,11 @@ GET_EVENT_KEY(time, time);
 COMPARE_EVENT_KEY(count, stats.n);
 COMPARE_EVENT_KEY(mean, stats.mean);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+GET_EVENT_KEY(max, stats.max);
+GET_EVENT_KEY(min, stats.min);
+>>>>>>> v3.18
 =======
 GET_EVENT_KEY(max, stats.max);
 GET_EVENT_KEY(min, stats.min);
@@ -876,11 +971,14 @@ static struct kvm_event *pop_from_result(struct rb_root *result)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_vcpu_info(int vcpu)
 {
 	pr_info("Analyze events for ");
 
 =======
+=======
+>>>>>>> v3.18
 static void print_vcpu_info(struct perf_kvm_stat *kvm)
 {
 	int vcpu = kvm->trace_vcpu;
@@ -894,6 +992,9 @@ static void print_vcpu_info(struct perf_kvm_stat *kvm)
 	else
 		pr_info("dazed and confused on what is monitored, ");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (vcpu == -1)
 		pr_info("all VCPUs:\n\n");
@@ -901,6 +1002,7 @@ static void print_vcpu_info(struct perf_kvm_stat *kvm)
 		pr_info("VCPU %d:\n\n", vcpu);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void print_result(struct perf_kvm_stat *kvm)
 {
@@ -912,6 +1014,8 @@ static void print_result(struct perf_kvm_stat *kvm)
 	print_vcpu_info(vcpu);
 	pr_info("%20s ", kvm->events_ops->name);
 =======
+=======
+>>>>>>> v3.18
 static void show_timeofday(void)
 {
 	char date[64];
@@ -942,12 +1046,20 @@ static void print_result(struct perf_kvm_stat *kvm)
 	pr_info("\n\n");
 	print_vcpu_info(kvm);
 	pr_info("%*s ", DECODE_STR_LEN, kvm->events_ops->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("%10s ", "Samples");
 	pr_info("%9s ", "Samples%");
 
 	pr_info("%9s ", "Time%");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_info("%11s ", "Min Time");
+	pr_info("%11s ", "Max Time");
+>>>>>>> v3.18
 =======
 	pr_info("%11s ", "Min Time");
 	pr_info("%11s ", "Max Time");
@@ -956,6 +1068,7 @@ static void print_result(struct perf_kvm_stat *kvm)
 	pr_info("\n\n");
 
 	while ((event = pop_from_result(&kvm->result))) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u64 ecount, etime;
 
@@ -968,6 +1081,8 @@ static void print_result(struct perf_kvm_stat *kvm)
 		pr_info("%8.2f%% ", (double)ecount / kvm->total_count * 100);
 		pr_info("%8.2f%% ", (double)etime / kvm->total_time * 100);
 =======
+=======
+>>>>>>> v3.18
 		u64 ecount, etime, max, min;
 
 		ecount = get_event_count(event, vcpu);
@@ -982,6 +1097,9 @@ static void print_result(struct perf_kvm_stat *kvm)
 		pr_info("%8.2f%% ", (double)etime / kvm->total_time * 100);
 		pr_info("%9.2fus ", (double)min / 1e3);
 		pr_info("%9.2fus ", (double)max / 1e3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_info("%9.2fus ( +-%7.2f%% )", (double)etime / ecount/1e3,
 			kvm_event_rel_stddev(vcpu, event));
@@ -991,7 +1109,10 @@ static void print_result(struct perf_kvm_stat *kvm)
 	pr_info("\nTotal Samples:%" PRIu64 ", Total events handled time:%.2fus.\n\n",
 		kvm->total_count, kvm->total_time / 1e3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (kvm->lost_events)
 		pr_info("\nLost events: %" PRIu64 "\n\n", kvm->lost_events);
@@ -1017,6 +1138,9 @@ static bool skip_sample(struct perf_kvm_stat *kvm,
 		return true;
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1027,11 +1151,14 @@ static int process_sample_event(struct perf_tool *tool,
 				struct machine *machine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, sample->tid);
 	struct perf_kvm_stat *kvm = container_of(tool, struct perf_kvm_stat,
 						 tool);
 
 =======
+=======
+>>>>>>> v3.18
 	struct thread *thread;
 	struct perf_kvm_stat *kvm = container_of(tool, struct perf_kvm_stat,
 						 tool);
@@ -1040,6 +1167,9 @@ static int process_sample_event(struct perf_tool *tool,
 		return 0;
 
 	thread = machine__findnew_thread(machine, sample->pid, sample->tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (thread == NULL) {
 		pr_debug("problem processing %d event, skipping it.\n",
@@ -1053,6 +1183,7 @@ static int process_sample_event(struct perf_tool *tool,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int get_cpu_isa(struct perf_session *session)
 {
@@ -1072,6 +1203,8 @@ static int get_cpu_isa(struct perf_session *session)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int cpu_isa_config(struct perf_kvm_stat *kvm)
 {
 	char buf[64], *cpuid;
@@ -1434,6 +1567,9 @@ out:
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int read_events(struct perf_kvm_stat *kvm)
 {
@@ -1442,6 +1578,7 @@ static int read_events(struct perf_kvm_stat *kvm)
 	struct perf_tool eops = {
 		.sample			= process_sample_event,
 		.comm			= perf_event__process_comm,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.ordered_samples	= true,
 	};
@@ -1455,6 +1592,8 @@ static int read_events(struct perf_kvm_stat *kvm)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		.ordered_events		= true,
 	};
 	struct perf_data_file file = {
@@ -1471,6 +1610,9 @@ static int read_events(struct perf_kvm_stat *kvm)
 
 	symbol__init(&kvm->session->header.env);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!perf_session__has_traces(kvm->session, "kvm record"))
 		return -EINVAL;
@@ -1479,6 +1621,7 @@ static int read_events(struct perf_kvm_stat *kvm)
 	 * Do not use 'isa' recorded in kvm_exit tracepoint since it is not
 	 * traced in the old kernel.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = get_cpu_isa(kvm->session);
 
@@ -1503,6 +1646,8 @@ static bool verify_vcpu(int vcpu)
 
 	return true;
 =======
+=======
+>>>>>>> v3.18
 	ret = cpu_isa_config(kvm);
 	if (ret < 0)
 		return ret;
@@ -1521,6 +1666,9 @@ static int parse_target_str(struct perf_kvm_stat *kvm)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1530,6 +1678,12 @@ static int kvm_events_report_vcpu(struct perf_kvm_stat *kvm)
 	int vcpu = kvm->trace_vcpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (parse_target_str(kvm) != 0)
+		goto exit;
+
+>>>>>>> v3.18
 =======
 	if (parse_target_str(kvm) != 0)
 		goto exit;
@@ -1559,6 +1713,7 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char * const record_args[] = {
 	"record",
 	"-R",
@@ -1573,6 +1728,8 @@ static const char * const record_args[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define STRDUP_FAIL_EXIT(s)		\
 	({	char *_p;		\
 	_p = strdup(s);		\
@@ -1585,11 +1742,14 @@ static int
 kvm_events_record(struct perf_kvm_stat *kvm, int argc, const char **argv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int rec_argc, i, j;
 	const char **rec_argv;
 
 	rec_argc = ARRAY_SIZE(record_args) + argc + 2;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int rec_argc, i, j, events_tp_size;
 	const char **rec_argv;
 	const char * const record_args[] = {
@@ -1606,6 +1766,9 @@ kvm_events_record(struct perf_kvm_stat *kvm, int argc, const char **argv)
 
 	rec_argc = ARRAY_SIZE(record_args) + argc + 2 +
 		   2 * events_tp_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rec_argv = calloc(rec_argc + 1, sizeof(char *));
 
@@ -1616,12 +1779,18 @@ kvm_events_record(struct perf_kvm_stat *kvm, int argc, const char **argv)
 		rec_argv[i] = STRDUP_FAIL_EXIT(record_args[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (j = 0; j < events_tp_size; j++) {
 		rec_argv[i++] = "-e";
 		rec_argv[i++] = STRDUP_FAIL_EXIT(kvm_events_tp[j]);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rec_argv[i++] = STRDUP_FAIL_EXIT("-o");
 	rec_argv[i++] = STRDUP_FAIL_EXIT(kvm->file_name);
@@ -1638,7 +1807,12 @@ kvm_events_report(struct perf_kvm_stat *kvm, int argc, const char **argv)
 	const struct option kvm_events_report_options[] = {
 		OPT_STRING(0, "event", &kvm->report_event, "report event",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    "event for reporting: vmexit, mmio, ioport"),
+=======
+			   "event for reporting: vmexit, "
+			   "mmio (x86 only), ioport (x86 only)"),
+>>>>>>> v3.18
 =======
 			   "event for reporting: vmexit, "
 			   "mmio (x86 only), ioport (x86 only)"),
@@ -1649,6 +1823,11 @@ kvm_events_report(struct perf_kvm_stat *kvm, int argc, const char **argv)
 			    "key for sorting: sample(sort by samples number)"
 			    " time (sort by avg time)"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		OPT_STRING('p', "pid", &kvm->opts.target.pid, "pid",
+			   "analyze events only for given process id(s)"),
+>>>>>>> v3.18
 =======
 		OPT_STRING('p', "pid", &kvm->opts.target.pid, "pid",
 			   "analyze events only for given process id(s)"),
@@ -1662,8 +1841,11 @@ kvm_events_report(struct perf_kvm_stat *kvm, int argc, const char **argv)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	symbol__init();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (argc) {
@@ -1676,10 +1858,13 @@ kvm_events_report(struct perf_kvm_stat *kvm, int argc, const char **argv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return kvm_events_report_vcpu(kvm);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (!kvm->opts.target.pid)
 		kvm->opts.target.system_wide = true;
 
@@ -1867,6 +2052,9 @@ out:
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void print_kvm_stat_usage(void)
 {
@@ -1876,6 +2064,10 @@ static void print_kvm_stat_usage(void)
 	printf("\trecord: record kvm events\n");
 	printf("\treport: report statistical data of kvm events\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	printf("\tlive:   live reporting of statistical data of kvm events\n");
+>>>>>>> v3.18
 =======
 	printf("\tlive:   live reporting of statistical data of kvm events\n");
 >>>>>>> v3.18
@@ -1893,9 +2085,12 @@ static int kvm_cmd_stat(const char *file_name, int argc, const char **argv)
 		.sort_key	= "sample",
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.exit_reasons = svm_exit_reasons,
 		.exit_reasons_size = ARRAY_SIZE(svm_exit_reasons),
 		.exit_reasons_isa = "SVM",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -1912,11 +2107,14 @@ static int kvm_cmd_stat(const char *file_name, int argc, const char **argv)
 		return kvm_events_report(&kvm, argc - 1 , argv + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 perf_stat:
 	return cmd_stat(argc, argv, NULL);
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef HAVE_TIMERFD_SUPPORT
 	if (!strncmp(argv[1], "live", 4))
 		return kvm_events_live(&kvm, argc - 1 , argv + 1);
@@ -1926,6 +2124,9 @@ perf_stat:
 	return cmd_stat(argc, argv, NULL);
 }
 #endif /* HAVE_KVM_STAT_SUPPORT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __cmd_record(const char *file_name, int argc, const char **argv)
@@ -2005,6 +2206,7 @@ int cmd_kvm(int argc, const char **argv, const char *prefix __maybe_unused)
 		OPT_STRING(0, "guestmodules", &symbol_conf.default_guest_modules,
 			   "file", "file saving guest os /proc/modules"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OPT_END()
 	};
 
@@ -2014,6 +2216,8 @@ int cmd_kvm(int argc, const char **argv, const char *prefix __maybe_unused)
 		NULL
 	};
 =======
+=======
+>>>>>>> v3.18
 		OPT_INCR('v', "verbose", &verbose,
 			    "be more verbose (show counter open errors, etc)"),
 		OPT_END()
@@ -2022,14 +2226,22 @@ int cmd_kvm(int argc, const char **argv, const char *prefix __maybe_unused)
 	const char *const kvm_subcommands[] = { "top", "record", "report", "diff",
 						"buildid-list", "stat", NULL };
 	const char *kvm_usage[] = { NULL, NULL };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	perf_host  = 0;
 	perf_guest = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	argc = parse_options(argc, argv, kvm_options, kvm_usage,
 			PARSE_OPT_STOP_AT_NON_OPTION);
+=======
+	argc = parse_options_subcommand(argc, argv, kvm_options, kvm_subcommands, kvm_usage,
+					PARSE_OPT_STOP_AT_NON_OPTION);
+>>>>>>> v3.18
 =======
 	argc = parse_options_subcommand(argc, argv, kvm_options, kvm_subcommands, kvm_usage,
 					PARSE_OPT_STOP_AT_NON_OPTION);
@@ -2042,12 +2254,16 @@ int cmd_kvm(int argc, const char **argv, const char *prefix __maybe_unused)
 
 	if (!file_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (perf_host && !perf_guest)
 			file_name = strdup("perf.data.host");
 		else if (!perf_host && perf_guest)
 			file_name = strdup("perf.data.guest");
 		else
 			file_name = strdup("perf.data.kvm");
+=======
+		file_name = get_filename_for_perf_kvm();
+>>>>>>> v3.18
 =======
 		file_name = get_filename_for_perf_kvm();
 >>>>>>> v3.18
@@ -2069,7 +2285,11 @@ int cmd_kvm(int argc, const char **argv, const char *prefix __maybe_unused)
 	else if (!strncmp(argv[0], "buildid-list", 12))
 		return __cmd_buildid_list(file_name, argc, argv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(__i386__) || defined(__x86_64__)
+=======
+#ifdef HAVE_KVM_STAT_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_KVM_STAT_SUPPORT
 >>>>>>> v3.18

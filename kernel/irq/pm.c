@@ -10,6 +10,10 @@
 #include <linux/module.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/suspend.h>
+>>>>>>> v3.18
 =======
 #include <linux/suspend.h>
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 
 #include "internals.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * suspend_device_irqs - disable all currently enabled interrupt lines
@@ -26,6 +31,8 @@
  * It marks all interrupt lines in use, except for the timer ones, as disabled
  * and sets the IRQS_SUSPENDED flag for each of them.
 =======
+=======
+>>>>>>> v3.18
 bool irq_pm_check_wakeup(struct irq_desc *desc)
 {
 	if (irqd_is_wakeup_armed(&desc->irq_data)) {
@@ -120,6 +127,9 @@ static bool suspend_device_irq(struct irq_desc *desc, int irq)
  * The active wakeup sources are handled by the flow handler entry
  * code which checks for the IRQD_WAKEUP_ARMED flag, suspends the
  * interrupt and notifies the pm core about the wakeup.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void suspend_device_irqs(void)
@@ -129,6 +139,7 @@ void suspend_device_irqs(void)
 
 	for_each_irq_desc(irq, desc) {
 		unsigned long flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		raw_spin_lock_irqsave(&desc->lock, flags);
@@ -143,6 +154,8 @@ void suspend_device_irqs(void)
 EXPORT_SYMBOL_GPL(suspend_device_irqs);
 
 =======
+=======
+>>>>>>> v3.18
 		bool sync;
 
 		raw_spin_lock_irqsave(&desc->lock, flags);
@@ -173,6 +186,9 @@ resume:
 	__enable_irq(desc, irq);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void resume_irqs(bool want_early)
 {
@@ -180,7 +196,11 @@ static void resume_irqs(bool want_early)
 	int irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_irq_desc_reverse(irq, desc) {
+=======
+	for_each_irq_desc(irq, desc) {
+>>>>>>> v3.18
 =======
 	for_each_irq_desc(irq, desc) {
 >>>>>>> v3.18
@@ -193,7 +213,11 @@ static void resume_irqs(bool want_early)
 
 		raw_spin_lock_irqsave(&desc->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__enable_irq(desc, irq, true);
+=======
+		resume_irq(desc, irq);
+>>>>>>> v3.18
 =======
 		resume_irq(desc, irq);
 >>>>>>> v3.18
@@ -236,6 +260,7 @@ void resume_device_irqs(void)
 }
 EXPORT_SYMBOL_GPL(resume_device_irqs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * check_wakeup_irqs - check if any wake-up interrupts are pending
@@ -271,5 +296,7 @@ int check_wakeup_irqs(void)
 
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

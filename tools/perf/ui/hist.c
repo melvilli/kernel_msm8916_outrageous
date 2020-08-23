@@ -1,5 +1,9 @@
 #include <math.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -12,6 +16,7 @@
 /* hist period print (hpp) functions */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef int (*hpp_snprint_fn)(char *buf, size_t size, const char *fmt, ...);
 
 static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
@@ -19,6 +24,8 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 		      const char *fmt, hpp_snprint_fn print_fn,
 		      bool fmt_percent)
 =======
+=======
+>>>>>>> v3.18
 #define hpp__call_print_fn(hpp, fn, fmt, ...)			\
 ({								\
 	int __ret = fn(hpp, fmt, ##__VA_ARGS__);		\
@@ -29,11 +36,15 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 		      hpp_field_fn get_field, const char *fmt, int len,
 		      hpp_snprint_fn print_fn, bool fmt_percent)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
 	struct hists *hists = he->hists;
 	struct perf_evsel *evsel = hists_to_evsel(hists);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (fmt_percent) {
@@ -47,6 +58,8 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 	} else
 		ret = print_fn(hpp->buf, hpp->size, fmt, get_field(he));
 =======
+=======
+>>>>>>> v3.18
 	char *buf = hpp->buf;
 	size_t size = hpp->size;
 
@@ -60,6 +73,9 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 		ret = hpp__call_print_fn(hpp, print_fn, fmt, len, percent);
 	} else
 		ret = hpp__call_print_fn(hpp, print_fn, fmt, len, get_field(he));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (perf_evsel__is_group_event(evsel)) {
@@ -72,7 +88,11 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 		list_for_each_entry(pair, &he->pairs.head, pairs.node) {
 			u64 period = get_field(pair);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u64 total = pair->hists->stats.total_period;
+=======
+			u64 total = hists__total_period(pair->hists);
+>>>>>>> v3.18
 =======
 			u64 total = hists__total_period(pair->hists);
 >>>>>>> v3.18
@@ -89,6 +109,7 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 				 * have no sample
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ret += print_fn(hpp->buf + ret, hpp->size - ret,
 						fmt, 0);
 			}
@@ -100,6 +121,8 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 				ret += print_fn(hpp->buf + ret, hpp->size - ret,
 						fmt, period);
 =======
+=======
+>>>>>>> v3.18
 				if (fmt_percent) {
 					ret += hpp__call_print_fn(hpp, print_fn,
 								  fmt, len, 0.0);
@@ -116,6 +139,9 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 				ret += hpp__call_print_fn(hpp, print_fn, fmt,
 							  len, period);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			prev_idx = perf_evsel__group_idx(evsel);
@@ -127,6 +153,7 @@ static int __hpp__fmt(struct perf_hpp *hpp, struct hist_entry *he,
 			/*
 			 * zero-fill group members at last which have no sample
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ret += print_fn(hpp->buf + ret, hpp->size - ret,
 					fmt, 0);
@@ -443,6 +470,8 @@ LIST_HEAD(perf_hpp__list);
 
 #undef HPP_PERCENT_FNS
 =======
+=======
+>>>>>>> v3.18
 			if (fmt_percent) {
 				ret += hpp__call_print_fn(hpp, print_fn,
 							  fmt, len, 0.0);
@@ -779,6 +808,9 @@ LIST_HEAD(perf_hpp__sort_list);
 
 #undef HPP_PERCENT_FNS
 #undef HPP_PERCENT_ACC_FNS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef HPP_RAW_FNS
 
@@ -787,21 +819,30 @@ LIST_HEAD(perf_hpp__sort_list);
 #undef __HPP_COLOR_PERCENT_FN
 #undef __HPP_ENTRY_PERCENT_FN
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __HPP_ENTRY_RAW_FN
 =======
+=======
+>>>>>>> v3.18
 #undef __HPP_COLOR_ACC_PERCENT_FN
 #undef __HPP_ENTRY_ACC_PERCENT_FN
 #undef __HPP_ENTRY_RAW_FN
 #undef __HPP_SORT_FN
 #undef __HPP_SORT_ACC_FN
 #undef __HPP_SORT_RAW_FN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 void perf_hpp__init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct list_head *list;
 	int i;
 
@@ -828,6 +869,9 @@ void perf_hpp__init(void)
 
 	perf_hpp__column_enable(PERF_HPP__OVERHEAD);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (symbol_conf.show_cpu_utilization) {
 		perf_hpp__column_enable(PERF_HPP__OVERHEAD_SYS);
@@ -845,7 +889,10 @@ void perf_hpp__init(void)
 	if (symbol_conf.show_total_period)
 		perf_hpp__column_enable(PERF_HPP__PERIOD);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* prepend overhead field for backward compatiblity.  */
 	list = &perf_hpp__format[PERF_HPP__OVERHEAD].sort_list;
@@ -857,6 +904,9 @@ void perf_hpp__init(void)
 		if (list_empty(list))
 			list_add(list, &perf_hpp__sort_list);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -866,7 +916,10 @@ void perf_hpp__column_register(struct perf_hpp_fmt *format)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void perf_hpp__column_unregister(struct perf_hpp_fmt *format)
 {
 	list_del(&format->list);
@@ -877,6 +930,9 @@ void perf_hpp__register_sort_field(struct perf_hpp_fmt *format)
 	list_add_tail(&format->sort_list, &perf_hpp__sort_list);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void perf_hpp__column_enable(unsigned col)
 {
@@ -884,6 +940,7 @@ void perf_hpp__column_enable(unsigned col)
 	perf_hpp__column_register(&perf_hpp__format[col]);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void advance_hpp(struct perf_hpp *hpp, int inc)
 {
@@ -943,6 +1000,8 @@ int hist_entry__sort_snprintf(struct hist_entry *he, char *s, size_t size,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 void perf_hpp__column_disable(unsigned col)
 {
 	BUG_ON(col >= PERF_HPP__MAX_INDEX);
@@ -1031,6 +1090,9 @@ void perf_hpp__reset_output_field(void)
 		list_del_init(&fmt->list);
 		list_del_init(&fmt->sort_list);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1040,6 +1102,7 @@ void perf_hpp__reset_output_field(void)
 unsigned int hists__sort_list_width(struct hists *hists)
 {
 	struct perf_hpp_fmt *fmt;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sort_entry *se;
 	int i = 0, ret = 0;
@@ -1060,6 +1123,8 @@ unsigned int hists__sort_list_width(struct hists *hists)
 
 	if (verbose) /* Addr + origin */
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	bool first = true;
 	struct perf_hpp dummy_hpp;
@@ -1077,13 +1142,19 @@ unsigned int hists__sort_list_width(struct hists *hists)
 	}
 
 	if (verbose && sort__has_sym) /* Addr + origin */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret += 3 + BITS_PER_LONG / 4;
 
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void perf_hpp__reset_width(struct perf_hpp_fmt *fmt, struct hists *hists)
 {
@@ -1140,4 +1211,7 @@ void perf_hpp__set_user_width(const char *width_list_str)
 			break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

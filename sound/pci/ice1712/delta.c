@@ -426,7 +426,12 @@ static int snd_ice1712_delta1010lt_wordclock_status_get(struct snd_kcontrol *kco
 
 	if (snd_i2c_sendbytes(ice->cs8427, &reg, 1) != 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to send register 0x%x byte to CS8427\n", reg);
+=======
+		dev_err(ice->card->dev,
+			"unable to send register 0x%x byte to CS8427\n", reg);
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev,
 			"unable to send register 0x%x byte to CS8427\n", reg);
@@ -581,7 +586,10 @@ static struct snd_ak4xxx_private akm_vx442_priv = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int snd_ice1712_delta_resume(struct snd_ice1712 *ice)
 {
@@ -631,6 +639,9 @@ static int snd_ice1712_delta_suspend(struct snd_ice1712 *ice)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int snd_ice1712_delta_init(struct snd_ice1712 *ice)
 {
@@ -679,13 +690,19 @@ static int snd_ice1712_delta_init(struct snd_ice1712 *ice)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 	ice->pm_resume = snd_ice1712_delta_resume;
 	ice->pm_suspend = snd_ice1712_delta_suspend;
 	ice->pm_suspend_enabled = 1;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* initialize the SPI clock to high */
 	tmp = snd_ice1712_read(ice, ICE1712_IREG_GPIO_DATA);
@@ -703,7 +720,11 @@ static int snd_ice1712_delta_init(struct snd_ice1712 *ice)
 	case ICE1712_SUBDEVICE_DELTA66E:
 		if ((err = snd_i2c_bus_create(ice->card, "ICE1712 GPIO 1", NULL, &ice->i2c)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "unable to create I2C bus\n");
+=======
+			dev_err(ice->card->dev, "unable to create I2C bus\n");
+>>>>>>> v3.18
 =======
 			dev_err(ice->card->dev, "unable to create I2C bus\n");
 >>>>>>> v3.18

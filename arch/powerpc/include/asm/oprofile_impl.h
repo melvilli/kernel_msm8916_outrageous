@@ -62,7 +62,10 @@ struct op_powerpc_model {
 
 extern struct op_powerpc_model op_model_fsl_emb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct op_powerpc_model op_model_rs64;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct op_powerpc_model op_model_power4;

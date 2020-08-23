@@ -143,7 +143,11 @@ static bool ip6_parse_tlv(const struct tlvtype_proc *procs, struct sk_buff *skb)
 			if (optlen > len)
 				goto bad;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (curr=procs; curr->type >= 0; curr++) {
+=======
+			for (curr = procs; curr->type >= 0; curr++) {
+>>>>>>> v3.18
 =======
 			for (curr = procs; curr->type >= 0; curr++) {
 >>>>>>> v3.18
@@ -732,7 +736,10 @@ ipv6_dup_options(struct sock *sk, struct ipv6_txoptions *opt)
 		if (opt2->srcrt)
 			*((char **)&opt2->srcrt) += dif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&opt2->refcnt, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -799,7 +806,11 @@ ipv6_renew_options(struct sock *sk, struct ipv6_txoptions *opt,
 
 	memset(opt2, 0, tot_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&opt2->refcnt, 1);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

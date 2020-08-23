@@ -75,7 +75,11 @@ static void __init do_one_pass(u64 pattern, u64 start, u64 end)
 	phys_addr_t this_start, this_end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_free_mem_range(i, MAX_NUMNODES, &this_start, &this_end, NULL) {
+=======
+	for_each_free_mem_range(i, NUMA_NO_NODE, &this_start, &this_end, NULL) {
+>>>>>>> v3.18
 =======
 	for_each_free_mem_range(i, NUMA_NO_NODE, &this_start, &this_end, NULL) {
 >>>>>>> v3.18

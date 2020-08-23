@@ -9,6 +9,10 @@
 #include <linux/sched.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kprobes.h>
+>>>>>>> v3.18
 =======
 #include <linux/kprobes.h>
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 #include <asm/debugreg.h>
 #include <asm/sections.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/vsyscall.h>
+>>>>>>> v3.18
 =======
 #include <asm/vsyscall.h>
 >>>>>>> v3.18
@@ -72,7 +80,11 @@ void __init setup_cpu_local_masks(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit default_init(struct cpuinfo_x86 *c)
+=======
+static void default_init(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void default_init(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -93,7 +105,11 @@ static void default_init(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev __cpuinitconst default_cpu = {
+=======
+static const struct cpu_dev default_cpu = {
+>>>>>>> v3.18
 =======
 static const struct cpu_dev default_cpu = {
 >>>>>>> v3.18
@@ -103,7 +119,11 @@ static const struct cpu_dev default_cpu = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev *this_cpu __cpuinitdata = &default_cpu;
+=======
+static const struct cpu_dev *this_cpu = &default_cpu;
+>>>>>>> v3.18
 =======
 static const struct cpu_dev *this_cpu = &default_cpu;
 >>>>>>> v3.18
@@ -169,6 +189,10 @@ static int __init x86_xsave_setup(char *s)
 	setup_clear_cpu_cap(X86_FEATURE_XSAVE);
 	setup_clear_cpu_cap(X86_FEATURE_XSAVEOPT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setup_clear_cpu_cap(X86_FEATURE_XSAVES);
+>>>>>>> v3.18
 =======
 	setup_clear_cpu_cap(X86_FEATURE_XSAVES);
 >>>>>>> v3.18
@@ -186,10 +210,13 @@ static int __init x86_xsaveopt_setup(char *s)
 __setup("noxsaveopt", x86_xsaveopt_setup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_32
 static int cachesize_override __cpuinitdata = -1;
 static int disable_x86_serial_nr __cpuinitdata = 1;
 =======
+=======
+>>>>>>> v3.18
 static int __init x86_xsaves_setup(char *s)
 {
 	setup_clear_cpu_cap(X86_FEATURE_XSAVES);
@@ -200,6 +227,9 @@ __setup("noxsaves", x86_xsaves_setup);
 #ifdef CONFIG_X86_32
 static int cachesize_override = -1;
 static int disable_x86_serial_nr = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init cachesize_setup(char *str)
@@ -255,7 +285,11 @@ static inline int flag_is_changeable_p(u32 flag)
 
 /* Probe for the CPUID instruction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit have_cpuid_p(void)
+=======
+int have_cpuid_p(void)
+>>>>>>> v3.18
 =======
 int have_cpuid_p(void)
 >>>>>>> v3.18
@@ -264,7 +298,11 @@ int have_cpuid_p(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit squash_the_stupid_serial_number(struct cpuinfo_x86 *c)
+=======
+static void squash_the_stupid_serial_number(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void squash_the_stupid_serial_number(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -326,14 +364,20 @@ __setup("nosmap", setup_disable_smap);
 static __always_inline void setup_smap(struct cpuinfo_x86 *c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long eflags = native_save_fl();
 
 	/* This should have been cleared long ago */
 =======
+=======
+>>>>>>> v3.18
 	unsigned long eflags;
 
 	/* This should have been cleared long ago */
 	raw_local_save_flags(eflags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON(eflags & X86_EFLAGS_AC);
 
@@ -357,7 +401,11 @@ struct cpuid_dependent_feature {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpuid_dependent_feature __cpuinitconst
+=======
+static const struct cpuid_dependent_feature
+>>>>>>> v3.18
 =======
 static const struct cpuid_dependent_feature
 >>>>>>> v3.18
@@ -369,7 +417,11 @@ cpuid_dependent_features[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit filter_cpuid_features(struct cpuinfo_x86 *c, bool warn)
+=======
+static void filter_cpuid_features(struct cpuinfo_x86 *c, bool warn)
+>>>>>>> v3.18
 =======
 static void filter_cpuid_features(struct cpuinfo_x86 *c, bool warn)
 >>>>>>> v3.18
@@ -398,8 +450,13 @@ static void filter_cpuid_features(struct cpuinfo_x86 *c, bool warn)
 
 		printk(KERN_WARNING
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       "CPU: CPU feature %s disabled, no CPUID level 0x%x\n",
 				x86_cap_flags[df->feature], df->level);
+=======
+		       "CPU: CPU feature " X86_CAP_FMT " disabled, no CPUID level 0x%x\n",
+				x86_cap_flag(df->feature), df->level);
+>>>>>>> v3.18
 =======
 		       "CPU: CPU feature " X86_CAP_FMT " disabled, no CPUID level 0x%x\n",
 				x86_cap_flag(df->feature), df->level);
@@ -416,14 +473,20 @@ static void filter_cpuid_features(struct cpuinfo_x86 *c, bool warn)
 
 /* Look up CPU names by table lookup. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *__cpuinit table_lookup_model(struct cpuinfo_x86 *c)
 {
 	const struct cpu_model_info *info;
 =======
+=======
+>>>>>>> v3.18
 static const char *table_lookup_model(struct cpuinfo_x86 *c)
 {
 #ifdef CONFIG_X86_32
 	const struct legacy_cpu_model_info *info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (c->x86_model >= 16)
@@ -433,9 +496,15 @@ static const char *table_lookup_model(struct cpuinfo_x86 *c)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = this_cpu->c_models;
 
 	while (info && info->family) {
+=======
+	info = this_cpu->legacy_models;
+
+	while (info->family) {
+>>>>>>> v3.18
 =======
 	info = this_cpu->legacy_models;
 
@@ -446,18 +515,24 @@ static const char *table_lookup_model(struct cpuinfo_x86 *c)
 		info++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NULL;		/* Not found */
 }
 
 __u32 cpu_caps_cleared[NCAPINTS] __cpuinitdata;
 __u32 cpu_caps_set[NCAPINTS] __cpuinitdata;
 =======
+=======
+>>>>>>> v3.18
 #endif
 	return NULL;		/* Not found */
 }
 
 __u32 cpu_caps_cleared[NCAPINTS];
 __u32 cpu_caps_set[NCAPINTS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void load_percpu_segment(int cpu)
@@ -488,9 +563,15 @@ void switch_to_new_gdt(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev *__cpuinitdata cpu_devs[X86_VENDOR_NUM] = {};
 
 static void __cpuinit get_model_name(struct cpuinfo_x86 *c)
+=======
+static const struct cpu_dev *cpu_devs[X86_VENDOR_NUM] = {};
+
+static void get_model_name(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static const struct cpu_dev *cpu_devs[X86_VENDOR_NUM] = {};
 
@@ -525,7 +606,11 @@ static void get_model_name(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_detect_cache_sizes(struct cpuinfo_x86 *c)
+=======
+void cpu_detect_cache_sizes(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void cpu_detect_cache_sizes(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -554,8 +639,13 @@ void cpu_detect_cache_sizes(struct cpuinfo_x86 *c)
 #else
 	/* do processor-specific cache resizing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this_cpu->c_size_cache)
 		l2size = this_cpu->c_size_cache(c, l2size);
+=======
+	if (this_cpu->legacy_cache_size)
+		l2size = this_cpu->legacy_cache_size(c, l2size);
+>>>>>>> v3.18
 =======
 	if (this_cpu->legacy_cache_size)
 		l2size = this_cpu->legacy_cache_size(c, l2size);
@@ -579,6 +669,7 @@ u16 __read_mostly tlb_lld_4k[NR_INFO];
 u16 __read_mostly tlb_lld_2m[NR_INFO];
 u16 __read_mostly tlb_lld_4m[NR_INFO];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * tlb_flushall_shift shows the balance point in replacing cr3 write
@@ -594,10 +685,16 @@ u16 __read_mostly tlb_lld_1g[NR_INFO];
 
 void cpu_detect_tlb(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
+=======
+u16 __read_mostly tlb_lld_1g[NR_INFO];
+
+void cpu_detect_tlb(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 {
 	if (this_cpu->c_detect_tlb)
 		this_cpu->c_detect_tlb(c);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk(KERN_INFO "Last level iTLB entries: 4KB %d, 2MB %d, 4MB %d\n" \
 		"Last level dTLB entries: 4KB %d, 2MB %d, 4MB %d\n"	     \
@@ -610,6 +707,8 @@ void cpu_detect_tlb(struct cpuinfo_x86 *c)
 
 void __cpuinit detect_ht(struct cpuinfo_x86 *c)
 =======
+=======
+>>>>>>> v3.18
 	printk(KERN_INFO "Last level iTLB entries: 4KB %d, 2MB %d, 4MB %d\n"
 		"Last level dTLB entries: 4KB %d, 2MB %d, 4MB %d, 1GB %d\n",
 		tlb_lli_4k[ENTRIES], tlb_lli_2m[ENTRIES],
@@ -619,6 +718,9 @@ void __cpuinit detect_ht(struct cpuinfo_x86 *c)
 }
 
 void detect_ht(struct cpuinfo_x86 *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 #ifdef CONFIG_X86_HT
@@ -671,7 +773,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit get_cpu_vendor(struct cpuinfo_x86 *c)
+=======
+static void get_cpu_vendor(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void get_cpu_vendor(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -702,7 +808,11 @@ static void get_cpu_vendor(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_detect(struct cpuinfo_x86 *c)
+=======
+void cpu_detect(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void cpu_detect(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -736,7 +846,11 @@ void cpu_detect(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit get_cpu_cap(struct cpuinfo_x86 *c)
+=======
+void get_cpu_cap(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void get_cpu_cap(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -763,7 +877,10 @@ void get_cpu_cap(struct cpuinfo_x86 *c)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Extended state features: level 0x0000000d */
 	if (c->cpuid_level >= 0x0000000d) {
 		u32 eax, ebx, ecx, edx;
@@ -773,6 +890,9 @@ void get_cpu_cap(struct cpuinfo_x86 *c)
 		c->x86_capability[10] = eax;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* AMD-defined flags: level 0x80000001 */
 	xlvl = cpuid_eax(0x80000000);
@@ -803,7 +923,11 @@ void get_cpu_cap(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit identify_cpu_without_cpuid(struct cpuinfo_x86 *c)
+=======
+static void identify_cpu_without_cpuid(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void identify_cpu_without_cpuid(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -866,10 +990,16 @@ static void __init early_identify_cpu(struct cpuinfo_x86 *c)
 
 	cpu_detect(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	get_cpu_vendor(c);
 
 	get_cpu_cap(c);
+=======
+	get_cpu_vendor(c);
+	get_cpu_cap(c);
+	fpu_detect(c);
+>>>>>>> v3.18
 =======
 	get_cpu_vendor(c);
 	get_cpu_cap(c);
@@ -885,6 +1015,11 @@ static void __init early_identify_cpu(struct cpuinfo_x86 *c)
 	if (this_cpu->c_bsp_init)
 		this_cpu->c_bsp_init(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	setup_force_cpu_cap(X86_FEATURE_ALWAYS);
+>>>>>>> v3.18
 =======
 
 	setup_force_cpu_cap(X86_FEATURE_ALWAYS);
@@ -934,7 +1069,11 @@ void __init early_cpu_init(void)
  * Enable it explicitly on 64-bit for non-constant inputs of cpu_has().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit detect_nopl(struct cpuinfo_x86 *c)
+=======
+static void detect_nopl(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void detect_nopl(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -947,7 +1086,11 @@ static void detect_nopl(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit generic_identify(struct cpuinfo_x86 *c)
+=======
+static void generic_identify(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void generic_identify(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -988,7 +1131,11 @@ static void generic_identify(struct cpuinfo_x86 *c)
  * This does the hard work of actually picking apart the CPU stuff...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit identify_cpu(struct cpuinfo_x86 *c)
+=======
+static void identify_cpu(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void identify_cpu(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1122,7 +1269,10 @@ static void vgetcpu_set_mode(void)
 		vgetcpu_mode = VGETCPU_LSL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_IA32_EMULATION
 /* May not be __init: called during resume */
@@ -1157,6 +1307,9 @@ void enable_sep_cpu(void)
 	wrmsr(MSR_IA32_SYSENTER_EIP, (unsigned long) ia32_sysenter_target, 0);
 	put_cpu();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1174,7 +1327,11 @@ void __init identify_boot_cpu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit identify_secondary_cpu(struct cpuinfo_x86 *c)
+=======
+void identify_secondary_cpu(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void identify_secondary_cpu(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1193,7 +1350,11 @@ struct msr_range {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct msr_range msr_range_array[] __cpuinitconst = {
+=======
+static const struct msr_range msr_range_array[] = {
+>>>>>>> v3.18
 =======
 static const struct msr_range msr_range_array[] = {
 >>>>>>> v3.18
@@ -1204,7 +1365,11 @@ static const struct msr_range msr_range_array[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit __print_cpu_msr(void)
+=======
+static void __print_cpu_msr(void)
+>>>>>>> v3.18
 =======
 static void __print_cpu_msr(void)
 >>>>>>> v3.18
@@ -1227,7 +1392,11 @@ static void __print_cpu_msr(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int show_msr __cpuinitdata;
+=======
+static int show_msr;
+>>>>>>> v3.18
 =======
 static int show_msr;
 >>>>>>> v3.18
@@ -1247,7 +1416,12 @@ __setup("show_msr=", setup_show_msr);
 static __init int setup_noclflush(char *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_clear_cpu_cap(X86_FEATURE_CLFLSH);
+=======
+	setup_clear_cpu_cap(X86_FEATURE_CLFLUSH);
+	setup_clear_cpu_cap(X86_FEATURE_CLFLUSHOPT);
+>>>>>>> v3.18
 =======
 	setup_clear_cpu_cap(X86_FEATURE_CLFLUSH);
 	setup_clear_cpu_cap(X86_FEATURE_CLFLUSHOPT);
@@ -1257,7 +1431,11 @@ static __init int setup_noclflush(char *arg)
 __setup("noclflush", setup_noclflush);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit print_cpu_info(struct cpuinfo_x86 *c)
+=======
+void print_cpu_info(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void print_cpu_info(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1290,7 +1468,11 @@ void print_cpu_info(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit print_cpu_msr(struct cpuinfo_x86 *c)
+=======
+void print_cpu_msr(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void print_cpu_msr(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -1304,7 +1486,11 @@ static __init int setup_disablecpuid(char *arg)
 	int bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_option(&arg, &bit) && bit >= 0 && bit < NCAPINTS * 32)
+=======
+	if (get_option(&arg, &bit) && bit < NCAPINTS*32)
+>>>>>>> v3.18
 =======
 	if (get_option(&arg, &bit) && bit < NCAPINTS*32)
 >>>>>>> v3.18
@@ -1317,6 +1503,7 @@ static __init int setup_disablecpuid(char *arg)
 __setup("clearcpuid=", setup_disablecpuid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 struct desc_ptr idt_descr = { NR_VECTORS * 16 - 1, (unsigned long) idt_table };
 struct desc_ptr nmi_idt_descr = { NR_VECTORS * 16 - 1,
@@ -1325,6 +1512,8 @@ struct desc_ptr nmi_idt_descr = { NR_VECTORS * 16 - 1,
 DEFINE_PER_CPU_FIRST(union irq_stack_union,
 		     irq_stack_union) __aligned(PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 DEFINE_PER_CPU(unsigned long, kernel_stack) =
 	(unsigned long)&init_thread_union - KERNEL_STACK_OFFSET + THREAD_SIZE;
 EXPORT_PER_CPU_SYMBOL(kernel_stack);
@@ -1336,6 +1525,9 @@ struct desc_ptr debug_idt_descr = { NR_VECTORS * 16 - 1,
 
 DEFINE_PER_CPU_FIRST(union irq_stack_union,
 		     irq_stack_union) __aligned(PAGE_SIZE) __visible;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1347,6 +1539,7 @@ DEFINE_PER_CPU(struct task_struct *, current_task) ____cacheline_aligned =
 EXPORT_PER_CPU_SYMBOL(current_task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PER_CPU(unsigned long, kernel_stack) =
 	(unsigned long)&init_thread_union - KERNEL_STACK_OFFSET + THREAD_SIZE;
 EXPORT_PER_CPU_SYMBOL(kernel_stack);
@@ -1356,6 +1549,8 @@ DEFINE_PER_CPU(char *, irq_stack_ptr) =
 
 DEFINE_PER_CPU(unsigned int, irq_count) = -1;
 =======
+=======
+>>>>>>> v3.18
 DEFINE_PER_CPU(char *, irq_stack_ptr) =
 	init_per_cpu_var(irq_stack_union.irq_stack) + IRQ_STACK_SIZE - 64;
 
@@ -1363,6 +1558,9 @@ DEFINE_PER_CPU(unsigned int, irq_count) __visible = -1;
 
 DEFINE_PER_CPU(int, __preempt_count) = INIT_PREEMPT_COUNT;
 EXPORT_PER_CPU_SYMBOL(__preempt_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DEFINE_PER_CPU(struct task_struct *, fpu_owner_task);
@@ -1415,6 +1613,7 @@ DEFINE_PER_CPU(int, debug_stack_usage);
 int is_debug_stack(unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __get_cpu_var(debug_stack_usage) ||
 		(addr <= __get_cpu_var(debug_stack_addr) &&
 		 addr > (__get_cpu_var(debug_stack_addr) - DEBUG_STKSZ));
@@ -1436,6 +1635,8 @@ void debug_stack_reset(void)
 		load_idt((const struct desc_ptr *)&idt_descr);
 }
 =======
+=======
+>>>>>>> v3.18
 	return __this_cpu_read(debug_stack_usage) ||
 		(addr <= __this_cpu_read(debug_stack_addr) &&
 		 addr > (__this_cpu_read(debug_stack_addr) - DEBUG_STKSZ));
@@ -1459,6 +1660,9 @@ void debug_stack_reset(void)
 		load_current_idt();
 }
 NOKPROBE_SYMBOL(debug_stack_reset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else	/* CONFIG_X86_64 */
@@ -1466,6 +1670,11 @@ NOKPROBE_SYMBOL(debug_stack_reset);
 DEFINE_PER_CPU(struct task_struct *, current_task) = &init_task;
 EXPORT_PER_CPU_SYMBOL(current_task);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DEFINE_PER_CPU(int, __preempt_count) = INIT_PREEMPT_COUNT;
+EXPORT_PER_CPU_SYMBOL(__preempt_count);
+>>>>>>> v3.18
 =======
 DEFINE_PER_CPU(int, __preempt_count) = INIT_PREEMPT_COUNT;
 EXPORT_PER_CPU_SYMBOL(__preempt_count);
@@ -1509,7 +1718,10 @@ static void dbg_restore_debug_regs(void)
 #endif /* ! CONFIG_KGDB */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void wait_for_master_cpu(int cpu)
 {
 #ifdef CONFIG_SMP
@@ -1523,6 +1735,9 @@ static void wait_for_master_cpu(int cpu)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * cpu_init() initializes state that is per-CPU. Some data is already
@@ -1534,7 +1749,11 @@ static void wait_for_master_cpu(int cpu)
 #ifdef CONFIG_X86_64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_init(void)
+=======
+void cpu_init(void)
+>>>>>>> v3.18
 =======
 void cpu_init(void)
 >>>>>>> v3.18
@@ -1544,15 +1763,21 @@ void cpu_init(void)
 	struct tss_struct *t;
 	unsigned long v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cpu;
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 	int cpu = stack_smp_processor_id();
 	int i;
 
 	wait_for_master_cpu(cpu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Load microcode on this cpu if a valid microcode is available.
@@ -1561,7 +1786,10 @@ void cpu_init(void)
 	load_ucode_ap();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu = stack_smp_processor_id();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	t = &per_cpu(init_tss, cpu);
@@ -1576,9 +1804,12 @@ void cpu_init(void)
 	me = current;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpumask_test_and_set_cpu(cpu, cpu_initialized_mask))
 		panic("CPU#%d already initialized!\n", cpu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_debug("Initializing CPU#%d\n", cpu);
@@ -1594,7 +1825,11 @@ void cpu_init(void)
 	loadsegment(fs, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	load_idt((const struct desc_ptr *)&idt_descr);
+=======
+	load_current_idt();
+>>>>>>> v3.18
 =======
 	load_current_idt();
 >>>>>>> v3.18
@@ -1655,7 +1890,11 @@ void cpu_init(void)
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_init(void)
+=======
+void cpu_init(void)
+>>>>>>> v3.18
 =======
 void cpu_init(void)
 >>>>>>> v3.18
@@ -1665,6 +1904,7 @@ void cpu_init(void)
 	struct tss_struct *t = &per_cpu(init_tss, cpu);
 	struct thread_struct *thread = &curr->thread;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	show_ucode_info_early();
 
@@ -1681,6 +1921,8 @@ void cpu_init(void)
 
 	load_idt(&idt_descr);
 =======
+=======
+>>>>>>> v3.18
 	wait_for_master_cpu(cpu);
 
 	show_ucode_info_early();
@@ -1691,6 +1933,9 @@ void cpu_init(void)
 		clear_in_cr4(X86_CR4_VME|X86_CR4_PVI|X86_CR4_TSD|X86_CR4_DE);
 
 	load_current_idt();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch_to_new_gdt(cpu);
 
@@ -1721,7 +1966,10 @@ void cpu_init(void)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_DEBUG_STATIC_CPU_HAS
 void warn_pre_alternatives(void)
@@ -1736,4 +1984,7 @@ inline bool __static_cpu_has_safe(u16 bit)
 	return boot_cpu_has(bit);
 }
 EXPORT_SYMBOL_GPL(__static_cpu_has_safe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

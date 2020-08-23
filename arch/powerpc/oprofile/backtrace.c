@@ -13,6 +13,10 @@
 #include <asm/uaccess.h>
 #include <asm/compat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/oprofile_impl.h>
+>>>>>>> v3.18
 =======
 #include <asm/oprofile_impl.h>
 >>>>>>> v3.18

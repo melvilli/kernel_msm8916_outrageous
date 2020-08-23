@@ -61,6 +61,7 @@ struct nlm_soc_info nlm_nodes[NLM_NR_NODES];
 cpumask_t nlm_cpumask = CPU_MASK_CPU0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init nlm_early_serial_setup(void)
 {
 	struct uart_port s;
@@ -82,6 +83,8 @@ static void __init nlm_early_serial_setup(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void nlm_linux_exit(void)
 {
 	uint64_t gpiobase;
@@ -96,7 +99,10 @@ static void nlm_linux_exit(void)
 void __init plat_mem_setup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panic_timeout	= 5;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	_machine_restart = (void (*)(char *))nlm_linux_exit;
@@ -203,6 +209,10 @@ void __init prom_init(void)
 	int *argv, *envp;		/* passed as 32 bit ptrs */
 	struct psb_info *prom_infop;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void *reset_vec;
+>>>>>>> v3.18
 =======
 	void *reset_vec;
 >>>>>>> v3.18
@@ -219,14 +229,20 @@ void __init prom_init(void)
 	nlm_init_node();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nlm_early_serial_setup();
 =======
+=======
+>>>>>>> v3.18
 	/* Update reset entry point with CPU init code */
 	reset_vec = (void *)CKSEG1ADDR(RESET_VEC_PHYS);
 	memset(reset_vec, 0, RESET_VEC_SIZE);
 	memcpy(reset_vec, (void *)nlm_reset_entry,
 			(nlm_reset_entry_end - nlm_reset_entry));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	build_arcs_cmdline(argv);
 	prom_add_memory();

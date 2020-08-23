@@ -17,6 +17,10 @@ LDFLAGS_vmlinux	:=-p --no-undefined -X
 ifeq ($(CONFIG_CPU_ENDIAN_BE8),y)
 LDFLAGS_vmlinux	+= --be8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+LDFLAGS_MODULE	+= --be8
+>>>>>>> v3.18
 =======
 LDFLAGS_MODULE	+= --be8
 >>>>>>> v3.18
@@ -54,6 +58,7 @@ LD		+= -EL
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 comma = ,
 
 #
@@ -66,10 +71,13 @@ KBUILD_CFLAGS	+= $(call cc-option,-fno-ipa-sra)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 # This selects which instruction set is used.
 # Note that GCC does not numerically define an architecture version
 # macro, but instead defines a whole series of macros which makes
 # testing for a specific architecture or later rather impossible.
+<<<<<<< HEAD
 <<<<<<< HEAD
 arch-$(CONFIG_CPU_32v7)		:=-D__LINUX_ARM_ARCH__=7 $(call cc-option,-march=armv7-a,-march=armv5t -Wa$(comma)-march=armv7-a)
 arch-$(CONFIG_CPU_32v6)		:=-D__LINUX_ARM_ARCH__=6 $(call cc-option,-march=armv6,-march=armv5t -Wa$(comma)-march=armv6)
@@ -118,6 +126,8 @@ tune-$(CONFIG_CPU_V6K)		:=$(call cc-option,-mtune=arm1136j-s,-mtune=strongarm)
 ifeq ($(CONFIG_AEABI),y)
 CFLAGS_ABI	:=-mabi=aapcs-linux -mno-thumb-interwork
 =======
+=======
+>>>>>>> v3.18
 arch-$(CONFIG_CPU_32v7M)	=-D__LINUX_ARM_ARCH__=7 -march=armv7-m -Wa,-march=armv7-m
 arch-$(CONFIG_CPU_32v7)		=-D__LINUX_ARM_ARCH__=7 $(call cc-option,-march=armv7-a,-march=armv5t -Wa$(comma)-march=armv7-a)
 arch-$(CONFIG_CPU_32v6)		=-D__LINUX_ARM_ARCH__=6 $(call cc-option,-march=armv6,-march=armv5t -Wa$(comma)-march=armv6)
@@ -159,6 +169,9 @@ tune-y := $(tune-y)
 
 ifeq ($(CONFIG_AEABI),y)
 CFLAGS_ABI	:=-mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 else
 CFLAGS_ABI	:=$(call cc-option,-mapcs-32,-mabi=apcs-gnu) $(call cc-option,-mno-thumb-interwork,)
@@ -191,6 +204,12 @@ CHECKFLAGS	+= -D__arm__
 #Default value
 head-y		:= arch/arm/kernel/head$(MMUEXT).o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+# Text offset. This list is sorted numerically by address in order to
+# provide a means to avoid/resolve conflicts in multi-arch kernels.
+>>>>>>> v3.18
 =======
 
 # Text offset. This list is sorted numerically by address in order to
@@ -205,19 +224,31 @@ ifeq ($(CONFIG_ARCH_SA1100),y)
 textofs-$(CONFIG_SA1111) := 0x00208000
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 textofs-$(CONFIG_ARCH_MSM7X30) := 0x00208000
 textofs-$(CONFIG_ARCH_MSM8X60) := 0x00208000
 textofs-$(CONFIG_ARCH_MSM8960) := 0x00208000
 textofs-$(CONFIG_ARCH_AXXIA) := 0x00308000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # Machine directory name.  This list is sorted alphanumerically
 # by CONFIG_* macro name.
 machine-$(CONFIG_ARCH_AT91)		+= at91
 <<<<<<< HEAD
+<<<<<<< HEAD
 machine-$(CONFIG_ARCH_BCM)		+= bcm
 machine-$(CONFIG_ARCH_BCM2835)		+= bcm2835
+=======
+machine-$(CONFIG_ARCH_AXXIA)		+= axxia
+machine-$(CONFIG_ARCH_BCM)		+= bcm
+machine-$(CONFIG_ARCH_BERLIN)		+= berlin
+>>>>>>> v3.18
 =======
 machine-$(CONFIG_ARCH_AXXIA)		+= axxia
 machine-$(CONFIG_ARCH_BCM)		+= bcm
@@ -229,10 +260,13 @@ machine-$(CONFIG_ARCH_DAVINCI)		+= davinci
 machine-$(CONFIG_ARCH_DOVE)		+= dove
 machine-$(CONFIG_ARCH_EBSA110)		+= ebsa110
 <<<<<<< HEAD
+<<<<<<< HEAD
 machine-$(CONFIG_ARCH_EP93XX)		+= ep93xx
 machine-$(CONFIG_ARCH_GEMINI)		+= gemini
 machine-$(CONFIG_ARCH_HIGHBANK)		+= highbank
 =======
+=======
+>>>>>>> v3.18
 machine-$(CONFIG_ARCH_EFM32)		+= efm32
 machine-$(CONFIG_ARCH_EP93XX)		+= ep93xx
 machine-$(CONFIG_ARCH_EXYNOS)		+= exynos
@@ -240,12 +274,16 @@ machine-$(CONFIG_ARCH_FOOTBRIDGE)	+= footbridge
 machine-$(CONFIG_ARCH_GEMINI)		+= gemini
 machine-$(CONFIG_ARCH_HIGHBANK)		+= highbank
 machine-$(CONFIG_ARCH_HISI)		+= hisi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 machine-$(CONFIG_ARCH_INTEGRATOR)	+= integrator
 machine-$(CONFIG_ARCH_IOP13XX)		+= iop13xx
 machine-$(CONFIG_ARCH_IOP32X)		+= iop32x
 machine-$(CONFIG_ARCH_IOP33X)		+= iop33x
 machine-$(CONFIG_ARCH_IXP4XX)		+= ixp4xx
+<<<<<<< HEAD
 <<<<<<< HEAD
 machine-$(CONFIG_ARCH_KIRKWOOD)		+= kirkwood
 machine-$(CONFIG_ARCH_KS8695)		+= ks8695
@@ -259,6 +297,8 @@ machine-$(CONFIG_ARCH_MVEBU)		+= mvebu
 machine-$(CONFIG_ARCH_NETX)		+= netx
 machine-$(CONFIG_ARCH_NOMADIK)		+= nomadik
 =======
+=======
+>>>>>>> v3.18
 machine-$(CONFIG_ARCH_KEYSTONE)		+= keystone
 machine-$(CONFIG_ARCH_KS8695)		+= ks8695
 machine-$(CONFIG_ARCH_LPC32XX)		+= lpc32xx
@@ -274,11 +314,15 @@ machine-$(CONFIG_ARCH_MXS)		+= mxs
 machine-$(CONFIG_ARCH_NETX)		+= netx
 machine-$(CONFIG_ARCH_NOMADIK)		+= nomadik
 machine-$(CONFIG_ARCH_NSPIRE)		+= nspire
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 machine-$(CONFIG_ARCH_OMAP1)		+= omap1
 machine-$(CONFIG_ARCH_OMAP2PLUS)	+= omap2
 machine-$(CONFIG_ARCH_ORION5X)		+= orion5x
 machine-$(CONFIG_ARCH_PICOXCELL)	+= picoxcell
+<<<<<<< HEAD
 <<<<<<< HEAD
 machine-$(CONFIG_ARCH_PRIMA2)		+= prima2
 machine-$(CONFIG_ARCH_PXA)		+= pxa
@@ -294,6 +338,8 @@ machine-$(CONFIG_ARCH_SA1100)		+= sa1100
 machine-$(CONFIG_ARCH_SHARK)		+= shark
 machine-$(CONFIG_ARCH_SHMOBILE) 	+= shmobile
 =======
+=======
+>>>>>>> v3.18
 machine-$(CONFIG_ARCH_PXA)		+= pxa
 machine-$(CONFIG_ARCH_QCOM)		+= qcom
 machine-$(CONFIG_ARCH_REALVIEW)		+= realview
@@ -308,6 +354,9 @@ machine-$(CONFIG_ARCH_SIRF)		+= prima2
 machine-$(CONFIG_ARCH_SOCFPGA)		+= socfpga
 machine-$(CONFIG_ARCH_STI)		+= sti
 machine-$(CONFIG_ARCH_SUNXI)		+= sunxi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 machine-$(CONFIG_ARCH_TEGRA)		+= tegra
 machine-$(CONFIG_ARCH_U300)		+= u300
@@ -316,6 +365,7 @@ machine-$(CONFIG_ARCH_VERSATILE)	+= versatile
 machine-$(CONFIG_ARCH_VEXPRESS)		+= vexpress
 machine-$(CONFIG_ARCH_VT8500)		+= vt8500
 machine-$(CONFIG_ARCH_W90X900)		+= w90x900
+<<<<<<< HEAD
 <<<<<<< HEAD
 machine-$(CONFIG_FOOTBRIDGE)		+= footbridge
 machine-$(CONFIG_ARCH_SOCFPGA)		+= socfpga
@@ -329,6 +379,8 @@ machine-$(CONFIG_ARCH_SUNXI)		+= sunxi
 plat-$(CONFIG_ARCH_OMAP)	+= omap
 plat-$(CONFIG_ARCH_S3C64XX)	+= samsung
 =======
+=======
+>>>>>>> v3.18
 machine-$(CONFIG_ARCH_ZYNQ)		+= zynq
 machine-$(CONFIG_PLAT_SPEAR)		+= spear
 
@@ -338,13 +390,19 @@ plat-$(CONFIG_ARCH_EXYNOS)	+= samsung
 plat-$(CONFIG_ARCH_OMAP)	+= omap
 plat-$(CONFIG_ARCH_S3C64XX)	+= samsung
 plat-$(CONFIG_ARCH_S5PV210)	+= samsung
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 plat-$(CONFIG_PLAT_IOP)		+= iop
 plat-$(CONFIG_PLAT_ORION)	+= orion
 plat-$(CONFIG_PLAT_PXA)		+= pxa
 plat-$(CONFIG_PLAT_S3C24XX)	+= samsung
 <<<<<<< HEAD
+<<<<<<< HEAD
 plat-$(CONFIG_PLAT_S5P)		+= samsung
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 plat-$(CONFIG_PLAT_VERSATILE)	+= versatile
@@ -371,7 +429,11 @@ endif
 
 machdirs := $(patsubst %,arch/arm/mach-%/,$(machine-y))
 <<<<<<< HEAD
+<<<<<<< HEAD
 platdirs := $(patsubst %,arch/arm/plat-%/,$(plat-y))
+=======
+platdirs := $(patsubst %,arch/arm/plat-%/,$(sort $(plat-y)))
+>>>>>>> v3.18
 =======
 platdirs := $(patsubst %,arch/arm/plat-%/,$(sort $(plat-y)))
 >>>>>>> v3.18
@@ -403,6 +465,10 @@ core-y				+= arch/arm/kernel/ arch/arm/mm/ arch/arm/common/
 core-y				+= arch/arm/net/
 core-y				+= arch/arm/crypto/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+core-y				+= arch/arm/firmware/
+>>>>>>> v3.18
 =======
 core-y				+= arch/arm/firmware/
 >>>>>>> v3.18
@@ -416,8 +482,11 @@ libs-y				:= arch/arm/lib/ $(libs-y)
 ifeq ($(CONFIG_XIP_KERNEL),y)
 KBUILD_IMAGE := xipImage
 <<<<<<< HEAD
+<<<<<<< HEAD
 else ifeq ($(CONFIG_BUILD_ARM_APPENDED_DTB_IMAGE),y)
 KBUILD_IMAGE := zImage-dtb
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 else
@@ -430,8 +499,11 @@ KBUILD_DTBS := dtbs
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DTSSUBDIR := qcom
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 all:	$(KBUILD_IMAGE) $(KBUILD_DTBS)
@@ -444,6 +516,7 @@ archprepare:
 # Convert bzImage to zImage
 bzImage: zImage
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 zImage Image xipImage bootpImage uImage: vmlinux
 	$(Q)$(MAKE) $(build)=$(boot) MACHINE=$(MACHINE) $(boot)/$@
@@ -461,6 +534,8 @@ dtbs: scripts
 zImage-dtb: vmlinux scripts dtbs
 	$(Q)$(MAKE) $(build)=$(boot) MACHINE=$(MACHINE) DTSSUBDIR=$(DTSSUBDIR) $(boot)/$@
 =======
+=======
+>>>>>>> v3.18
 BOOT_TARGETS	= zImage Image xipImage bootpImage uImage
 INSTALL_TARGETS	= zinstall uinstall install
 
@@ -478,6 +553,9 @@ $(INSTALL_TARGETS):
 PHONY += dtbs dtbs_install
 dtbs dtbs_install: prepare scripts
 	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) $@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # We use MRPROPER_FILES and CLEAN_FILES now
@@ -498,6 +576,10 @@ define archhelp
   echo  '                  (supply initrd image via make variable INITRD=<path>)'
   echo  '* dtbs          - Build device tree blobs for enabled boards'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  echo  '  dtbs_install  - Install dtbs to $(INSTALL_DTBS_PATH)'
+>>>>>>> v3.18
 =======
   echo  '  dtbs_install  - Install dtbs to $(INSTALL_DTBS_PATH)'
 >>>>>>> v3.18

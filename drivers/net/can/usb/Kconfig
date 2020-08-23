@@ -14,7 +14,10 @@ config CAN_ESD_USB2
           from esd electronic system design gmbh (http://www.esd.eu).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CAN_GS_USB
 	tristate "Geschwister Schneider UG interfaces"
 	---help---
@@ -23,6 +26,9 @@ config CAN_GS_USB
 	  choose Y for built in support,
 	  M to compile as module (module will be named: gs_usb).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CAN_KVASER_USB
 	tristate "Kvaser CAN/USB interface"
@@ -31,7 +37,11 @@ config CAN_KVASER_USB
 	  Leaf Light.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  The driver gives support for the following devices:
+=======
+	  The driver provides support for the following devices:
+>>>>>>> v3.18
 =======
 	  The driver provides support for the following devices:
 >>>>>>> v3.18
@@ -52,6 +62,11 @@ config CAN_KVASER_USB
 	    - Kvaser BlackBird SemiPro
 	    - Kvaser USBcan R
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    - Kvaser Leaf Light v2
+	    - Kvaser Mini PCI Express HS
+>>>>>>> v3.18
 =======
 	    - Kvaser Leaf Light v2
 	    - Kvaser Mini PCI Express HS

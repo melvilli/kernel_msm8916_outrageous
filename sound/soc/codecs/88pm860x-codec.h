@@ -13,6 +13,7 @@
 #define __88PM860X_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The offset of these registers are 0xb0 */
 #define PM860X_PCM_IFACE_1		0x00
 #define PM860X_PCM_IFACE_2		0x01
@@ -75,6 +76,8 @@
 #define PM860X_PCM_IFACE_4		0x39
 #define PM860X_I2S_IFACE_5		0x3a
 =======
+=======
+>>>>>>> v3.18
 #define PM860X_PCM_IFACE_1		0xb0
 #define PM860X_PCM_IFACE_2		0xb1
 #define PM860X_PCM_IFACE_3		0xb2
@@ -135,6 +138,9 @@
 
 #define PM860X_PCM_IFACE_4		0xe9
 #define PM860X_I2S_IFACE_5		0xea
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PM860X_SHORTS			0x3b

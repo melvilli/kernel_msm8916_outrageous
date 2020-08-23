@@ -6,10 +6,13 @@ Required properties:
   - "nvidia,tegra30-pwm"
 - reg: physical base address and length of the controller's registers
 <<<<<<< HEAD
+<<<<<<< HEAD
 - #pwm-cells: On Tegra the number of cells used to specify a PWM is 2. The
   first cell specifies the per-chip index of the PWM to use and the second
   cell is the period in nanoseconds.
 =======
+=======
+>>>>>>> v3.18
 - #pwm-cells: should be 2. See pwm.txt in this directory for a description of
   the cells format.
 - clocks: Must contain one entry, for the module clock.
@@ -18,6 +21,9 @@ Required properties:
   See ../reset/reset.txt for details.
 - reset-names: Must include the following entries:
   - pwm
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -27,6 +33,12 @@ Example:
 		reg = <0x7000a000 0x100>;
 		#pwm-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&tegra_car 17>;
+		resets = <&tegra_car 17>;
+		reset-names = "pwm";
+>>>>>>> v3.18
 =======
 		clocks = <&tegra_car 17>;
 		resets = <&tegra_car 17>;

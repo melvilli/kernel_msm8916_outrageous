@@ -111,7 +111,10 @@ static int send_hcill_cmd(u8 cmd, struct hci_uart *hu)
 	hcill_packet = (struct hcill_cmd *) skb_put(skb, 1);
 	hcill_packet->cmd = cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = (void *) hu->hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -350,7 +353,11 @@ static int ll_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ll_check_data_len(struct ll_struct *ll, int len)
+=======
+static inline int ll_check_data_len(struct hci_dev *hdev, struct ll_struct *ll, int len)
+>>>>>>> v3.18
 =======
 static inline int ll_check_data_len(struct hci_dev *hdev, struct ll_struct *ll, int len)
 >>>>>>> v3.18
@@ -361,7 +368,11 @@ static inline int ll_check_data_len(struct hci_dev *hdev, struct ll_struct *ll, 
 
 	if (!len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hci_recv_frame(ll->rx_skb);
+=======
+		hci_recv_frame(hdev, ll->rx_skb);
+>>>>>>> v3.18
 =======
 		hci_recv_frame(hdev, ll->rx_skb);
 >>>>>>> v3.18
@@ -407,7 +418,11 @@ static int ll_recv(struct hci_uart *hu, void *data, int count)
 			case HCILL_W4_DATA:
 				BT_DBG("Complete data");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hci_recv_frame(ll->rx_skb);
+=======
+				hci_recv_frame(hu->hdev, ll->rx_skb);
+>>>>>>> v3.18
 =======
 				hci_recv_frame(hu->hdev, ll->rx_skb);
 >>>>>>> v3.18
@@ -422,7 +437,11 @@ static int ll_recv(struct hci_uart *hu, void *data, int count)
 				BT_DBG("Event header: evt 0x%2.2x plen %d", eh->evt, eh->plen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ll_check_data_len(ll, eh->plen);
+=======
+				ll_check_data_len(hu->hdev, ll, eh->plen);
+>>>>>>> v3.18
 =======
 				ll_check_data_len(hu->hdev, ll, eh->plen);
 >>>>>>> v3.18
@@ -435,7 +454,11 @@ static int ll_recv(struct hci_uart *hu, void *data, int count)
 				BT_DBG("ACL header: dlen %d", dlen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ll_check_data_len(ll, dlen);
+=======
+				ll_check_data_len(hu->hdev, ll, dlen);
+>>>>>>> v3.18
 =======
 				ll_check_data_len(hu->hdev, ll, dlen);
 >>>>>>> v3.18
@@ -447,7 +470,11 @@ static int ll_recv(struct hci_uart *hu, void *data, int count)
 				BT_DBG("SCO header: dlen %d", sh->dlen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ll_check_data_len(ll, sh->dlen);
+=======
+				ll_check_data_len(hu->hdev, ll, sh->dlen);
+>>>>>>> v3.18
 =======
 				ll_check_data_len(hu->hdev, ll, sh->dlen);
 >>>>>>> v3.18
@@ -522,7 +549,10 @@ static int ll_recv(struct hci_uart *hu, void *data, int count)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ll->rx_skb->dev = (void *) hu->hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bt_cb(ll->rx_skb)->pkt_type = type;

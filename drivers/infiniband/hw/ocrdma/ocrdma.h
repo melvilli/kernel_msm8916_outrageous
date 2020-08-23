@@ -36,6 +36,10 @@
 #include <rdma/ib_verbs.h>
 #include <rdma/ib_user_verbs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <rdma/ib_addr.h>
+>>>>>>> v3.18
 =======
 #include <rdma/ib_addr.h>
 >>>>>>> v3.18
@@ -44,12 +48,15 @@
 #include "ocrdma_sli.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OCRDMA_ROCE_DEV_VERSION "1.0.0"
 #define OCRDMA_NODE_DESC "Emulex OneConnect RoCE HCA"
 
 #define ocrdma_err(format, arg...) printk(KERN_ERR format, ##arg)
 
 =======
+=======
+>>>>>>> v3.18
 #define OCRDMA_ROCE_DRV_VERSION "10.2.287.0u"
 
 #define OCRDMA_ROCE_DRV_DESC "Emulex OneConnect RoCE Driver"
@@ -60,12 +67,20 @@
 
 #define OC_SKH_DEVICE_PF 0x720
 #define OC_SKH_DEVICE_VF 0x728
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define OCRDMA_MAX_AH 512
 
 #define OCRDMA_UVERBS(CMD_NAME) (1ull << IB_USER_VERBS_CMD_##CMD_NAME)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define convert_to_64bit(lo, hi) ((u64)hi << 32 | (u64)lo)
+
+>>>>>>> v3.18
 =======
 #define convert_to_64bit(lo, hi) ((u64)hi << 32 | (u64)lo)
 
@@ -81,6 +96,10 @@ struct ocrdma_dev_attr {
 	u16 max_wqe;
 	u16 max_rqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 max_srq;
+>>>>>>> v3.18
 =======
 	u16 max_srq;
 >>>>>>> v3.18
@@ -89,15 +108,21 @@ struct ocrdma_dev_attr {
 	int max_recv_sge;
 	int max_srq_sge;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int max_mr;
 	u64 max_mr_size;
 	u32 max_num_mr_pbl;
 =======
+=======
+>>>>>>> v3.18
 	int max_rdma_sge;
 	int max_mr;
 	u64 max_mr_size;
 	u32 max_num_mr_pbl;
 	int max_mw;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int max_fmr;
 	int max_map_per_fmr;
@@ -118,13 +143,19 @@ struct ocrdma_dev_attr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ocrdma_dma_mem {
 	void *va;
 	dma_addr_t pa;
 	u32 size;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ocrdma_pbl {
 	void *va;
@@ -141,7 +172,10 @@ struct ocrdma_queue_info {
 	u16 head, tail;
 	bool created;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t used;		/* Number of valid elements in the queue */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -168,7 +202,10 @@ struct mqe_ctx {
 	u16 ext_status;
 	bool cmd_done;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool fw_error_state;
 };
 
@@ -216,6 +253,9 @@ struct phy_info {
 	u16 fixed_speeds_supported;
 	u16 phy_type;
 	u16 interface_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -230,8 +270,12 @@ struct ocrdma_dev {
 	struct ocrdma_qp **qp_tbl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocrdma_eq meq;
 	struct ocrdma_eq *qp_eq_tbl;
+=======
+	struct ocrdma_eq *eq_tbl;
+>>>>>>> v3.18
 =======
 	struct ocrdma_eq *eq_tbl;
 >>>>>>> v3.18
@@ -268,6 +312,12 @@ struct ocrdma_dev {
 
 	struct be_dev_info nic_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct phy_info phy;
+	char model_number[32];
+	u32 hba_port_num;
+>>>>>>> v3.18
 =======
 	struct phy_info phy;
 	char model_number[32];
@@ -278,7 +328,10 @@ struct ocrdma_dev {
 	struct rcu_head rcu;
 	int id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u64 *stag_arr;
 	u8 sl; /* service level */
 	bool pfc_state;
@@ -299,13 +352,19 @@ struct ocrdma_dev {
 	struct ocrdma_stats tx_dbg_stats;
 	struct ocrdma_stats rx_dbg_stats;
 	struct dentry *dir;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct ocrdma_cq {
 	struct ib_cq ibcq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocrdma_dev *dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ocrdma_cqe *va;
@@ -317,8 +376,13 @@ struct ocrdma_cq {
 	u32 max_hw_cqe;
 	bool phase_change;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool armed, solicited;
 	bool arm_needed;
+=======
+	bool deferred_arm, deferred_sol;
+	bool first_arm;
+>>>>>>> v3.18
 =======
 	bool deferred_arm, deferred_sol;
 	bool first_arm;
@@ -336,7 +400,11 @@ struct ocrdma_cq {
 	dma_addr_t pa;
 	u32 len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t use_cnt;
+=======
+	u32 cqe_cnt;
+>>>>>>> v3.18
 =======
 	u32 cqe_cnt;
 >>>>>>> v3.18
@@ -350,9 +418,13 @@ struct ocrdma_cq {
 struct ocrdma_pd {
 	struct ib_pd ibpd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocrdma_dev *dev;
 	struct ocrdma_ucontext *uctx;
 	atomic_t use_cnt;
+=======
+	struct ocrdma_ucontext *uctx;
+>>>>>>> v3.18
 =======
 	struct ocrdma_ucontext *uctx;
 >>>>>>> v3.18
@@ -365,7 +437,10 @@ struct ocrdma_pd {
 struct ocrdma_ah {
 	struct ib_ah ibah;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocrdma_dev *dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ocrdma_av *av;
@@ -388,6 +463,7 @@ struct ocrdma_qp_hwq_info {
 struct ocrdma_srq {
 	struct ib_srq ibsrq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ocrdma_dev *dev;
 	u8 __iomem *db;
 	/* provide synchronization to multiple context(s) posting rqe */
@@ -401,6 +477,8 @@ struct ocrdma_srq {
 	u32 *idx_bit_fields;
 	u32 bit_fields_len;
 =======
+=======
+>>>>>>> v3.18
 	u8 __iomem *db;
 	struct ocrdma_qp_hwq_info rq;
 	u64 *rqe_wr_id_tbl;
@@ -412,6 +490,9 @@ struct ocrdma_srq {
 
 	struct ocrdma_pd *pd;
 	u32 id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -421,8 +502,11 @@ struct ocrdma_qp {
 
 	u8 __iomem *sq_db;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* provide synchronization to multiple context(s) posting wqe, rqe */
 	spinlock_t q_lock ____cacheline_aligned;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ocrdma_qp_hwq_info sq;
@@ -435,6 +519,12 @@ struct ocrdma_qp {
 	} *wqe_wr_id_tbl;
 	u32 max_inline_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* provide synchronization to multiple context(s) posting wqe, rqe */
+	spinlock_t q_lock ____cacheline_aligned;
+>>>>>>> v3.18
 =======
 
 	/* provide synchronization to multiple context(s) posting wqe, rqe */
@@ -465,6 +555,7 @@ struct ocrdma_qp {
 	u32 qkey;
 	bool dpp_enabled;
 	u8 *ird_q_va;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -501,22 +592,31 @@ struct ocrdma_mr {
 =======
 	bool signaled;
 >>>>>>> v3.18
+=======
+	bool signaled;
+>>>>>>> v3.18
 };
 
 struct ocrdma_ucontext {
 	struct ib_ucontext ibucontext;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ocrdma_dev *dev;
 
 	struct list_head mm_head;
 	struct mutex mm_list_lock; /* protects list entries of mm type */
 =======
+=======
+>>>>>>> v3.18
 
 	struct list_head mm_head;
 	struct mutex mm_list_lock; /* protects list entries of mm type */
 	struct ocrdma_pd *cntxt_pd;
 	int pd_in_use;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct {
 		u32 *va;
@@ -575,7 +675,10 @@ static inline struct ocrdma_srq *get_ocrdma_srq(struct ib_srq *ibsrq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int is_cqe_valid(struct ocrdma_cq *cq, struct ocrdma_cqe *cqe)
 {
 	int cqe_valid;
@@ -674,5 +777,8 @@ static inline u8 ocrdma_is_enabled_and_synced(u32 state)
 		(state & OCRDMA_STATE_FLAG_SYNC);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

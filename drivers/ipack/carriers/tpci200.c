@@ -573,7 +573,12 @@ static int tpci200_pci_probe(struct pci_dev *pdev,
 	tpci200->info->ipack_bus = ipack_bus_register(&pdev->dev,
 						      TPCI200_NB_SLOT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      &tpci200_bus_ops);
+=======
+						      &tpci200_bus_ops,
+						      THIS_MODULE);
+>>>>>>> v3.18
 =======
 						      &tpci200_bus_ops,
 						      THIS_MODULE);
@@ -624,7 +629,11 @@ static void tpci200_pci_remove(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tpci200_idtable) = {
+=======
+static const struct pci_device_id tpci200_idtable[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id tpci200_idtable[] = {
 >>>>>>> v3.18

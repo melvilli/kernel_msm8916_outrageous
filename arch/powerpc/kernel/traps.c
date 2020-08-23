@@ -61,6 +61,10 @@
 #include <asm/tm.h>
 #include <asm/debug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sysdev/fsl_pci.h>
+>>>>>>> v3.18
 =======
 #include <sysdev/fsl_pci.h>
 >>>>>>> v3.18
@@ -289,7 +293,10 @@ void system_reset_exception(struct pt_regs *regs)
 	/* What should we do here? We could issue a shutdown or hard reset. */
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * This function is called in real mode. Strictly no printk's please.
@@ -317,6 +324,9 @@ long hmi_exception_realmode(struct pt_regs *regs)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -385,8 +395,13 @@ static inline int check_io_access(struct pt_regs *regs)
 
 /* single-step stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define single_stepping(regs)	(current->thread.dbcr0 & DBCR0_IC)
 #define clear_single_step(regs)	(current->thread.dbcr0 &= ~DBCR0_IC)
+=======
+#define single_stepping(regs)	(current->thread.debug.dbcr0 & DBCR0_IC)
+#define clear_single_step(regs)	(current->thread.debug.dbcr0 &= ~DBCR0_IC)
+>>>>>>> v3.18
 =======
 #define single_stepping(regs)	(current->thread.debug.dbcr0 & DBCR0_IC)
 #define clear_single_step(regs)	(current->thread.debug.dbcr0 &= ~DBCR0_IC)
@@ -605,6 +620,11 @@ int machine_check_e500(struct pt_regs *regs)
 		if (fsl_rio_mcheck_exception(regs))
 			return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (fsl_pci_mcheck_exception(regs))
+			return 1;
+>>>>>>> v3.18
 =======
 		if (fsl_pci_mcheck_exception(regs))
 			return 1;
@@ -634,7 +654,11 @@ int machine_check_e500(struct pt_regs *regs)
 		printk("Bus - Read Data Bus Error\n");
 	if (reason & MCSR_BUS_WBERR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Bus - Read Data Bus Error\n");
+=======
+		printk("Bus - Write Data Bus Error\n");
+>>>>>>> v3.18
 =======
 		printk("Bus - Write Data Bus Error\n");
 >>>>>>> v3.18
@@ -767,7 +791,10 @@ void SMIException(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void handle_hmi_exception(struct pt_regs *regs)
 {
 	struct pt_regs *old_regs;
@@ -782,6 +809,9 @@ void handle_hmi_exception(struct pt_regs *regs)
 	set_irq_regs(old_regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void unknown_exception(struct pt_regs *regs)
 {
@@ -879,7 +909,11 @@ static void parse_fpe(struct pt_regs *regs)
 	flush_fp_to_thread(current);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	code = __parse_fpscr(current->thread.fpscr.val);
+=======
+	code = __parse_fpscr(current->thread.fp_state.fpscr);
+>>>>>>> v3.18
 =======
 	code = __parse_fpscr(current->thread.fp_state.fpscr);
 >>>>>>> v3.18
@@ -934,11 +968,17 @@ static int emulate_string_inst(struct pt_regs *regs, u32 instword)
 		u32 shift = 8 * (3 - (pos & 0x3));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* if process is 32-bit, clear upper 32 bits of EA */
 		if ((regs->msr & MSR_64BIT) == 0)
 			EA &= 0xFFFFFFFF;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch ((instword & PPC_INST_STRING_MASK)) {
 			case PPC_INST_LSWX:
@@ -1035,7 +1075,11 @@ static int emulate_instruction(struct pt_regs *regs)
 	u32 rd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!user_mode(regs) || (regs->msr & MSR_LE))
+=======
+	if (!user_mode(regs))
+>>>>>>> v3.18
 =======
 	if (!user_mode(regs))
 >>>>>>> v3.18
@@ -1092,7 +1136,10 @@ static int emulate_instruction(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Emulate sync instruction variants */
 	if ((instword & PPC_INST_SYNC_MASK) == PPC_INST_SYNC) {
 		PPC_WARN_EMULATED(sync, regs);
@@ -1100,6 +1147,9 @@ static int emulate_instruction(struct pt_regs *regs)
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC64
 	/* Emulate the mfspr rD, DSCR. */
@@ -1137,7 +1187,10 @@ int is_valid_bugaddr(unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MATH_EMULATION
 static int emulate_math(struct pt_regs *regs)
 {
@@ -1169,13 +1222,19 @@ static int emulate_math(struct pt_regs *regs)
 static inline int emulate_math(struct pt_regs *regs) { return -1; }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __kprobes program_check_exception(struct pt_regs *regs)
 {
 	enum ctx_state prev_state = exception_enter();
 	unsigned int reason = get_reason(regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern int do_mathemu(struct pt_regs *regs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1240,7 +1299,10 @@ void __kprobes program_check_exception(struct pt_regs *regs)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If we took the program check in the kernel skip down to sending a
 	 * SIGILL. The subsequent cases all relate to emulating instructions
@@ -1251,13 +1313,19 @@ void __kprobes program_check_exception(struct pt_regs *regs)
 	if (!user_mode(regs))
 		goto sigill;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* We restore the interrupt state now */
 	if (!arch_irq_disabled_regs(regs))
 		local_irq_enable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MATH_EMULATION
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* (reason & REASON_ILLEGAL) would be the obvious thing here,
@@ -1266,6 +1334,7 @@ void __kprobes program_check_exception(struct pt_regs *regs)
 	 * ESR_DST (!?) or 0.  In the process of chasing this with the
 	 * hardware people - not sure if it can happen on any illegal
 	 * instruction or only on FP instructions, whether there is a
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * pattern to occurrences etc. -dgibson 31/Mar/2003 */
 	switch (do_mathemu(regs)) {
@@ -1285,10 +1354,15 @@ void __kprobes program_check_exception(struct pt_regs *regs)
 	/* fall through on any other errors */
 #endif /* CONFIG_MATH_EMULATION */
 =======
+=======
+>>>>>>> v3.18
 	 * pattern to occurrences etc. -dgibson 31/Mar/2003
 	 */
 	if (!emulate_math(regs))
 		goto bail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Try to emulate it if we should. */
@@ -1305,6 +1379,10 @@ void __kprobes program_check_exception(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+sigill:
+>>>>>>> v3.18
 =======
 sigill:
 >>>>>>> v3.18
@@ -1463,6 +1541,7 @@ void facility_unavailable_exception(struct pt_regs *regs)
 		/* User is acessing the DSCR.  Set the inherit bit and allow
 		 * the user to set it directly in future by setting via the
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * H/FSCR DSCR bit.
 		 */
 		current->thread.dscr_inherit = 1;
@@ -1471,10 +1550,15 @@ void facility_unavailable_exception(struct pt_regs *regs)
 		else
 			mtspr(SPRN_FSCR,  value | FSCR_DSCR);
 =======
+=======
+>>>>>>> v3.18
 		 * FSCR DSCR bit.  We always leave HFSCR DSCR set.
 		 */
 		current->thread.dscr_inherit = 1;
 		mtspr(SPRN_FSCR, value | FSCR_DSCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -1488,8 +1572,14 @@ void facility_unavailable_exception(struct pt_regs *regs)
 		local_irq_enable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_err("%sFacility '%s' unavailable, exception at 0x%lx, MSR=%lx\n",
 	       hv ? "Hypervisor " : "", facility, regs->nip, regs->msr);
+=======
+	pr_err_ratelimited(
+		"%sFacility '%s' unavailable, exception at 0x%lx, MSR=%lx\n",
+		hv ? "Hypervisor " : "", facility, regs->nip, regs->msr);
+>>>>>>> v3.18
 =======
 	pr_err_ratelimited(
 		"%sFacility '%s' unavailable, exception at 0x%lx, MSR=%lx\n",
@@ -1508,8 +1598,11 @@ void facility_unavailable_exception(struct pt_regs *regs)
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void do_load_up_fpu(struct pt_regs *regs);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void fp_unavailable_tm(struct pt_regs *regs)
@@ -1519,7 +1612,10 @@ void fp_unavailable_tm(struct pt_regs *regs)
 	TM_DEBUG("FP Unavailable trap whilst transactional at 0x%lx, MSR=%lx\n",
 		 regs->nip, regs->msr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm_enable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1531,8 +1627,12 @@ void fp_unavailable_tm(struct pt_regs *regs)
          * checkpointed FP registers need to be loaded.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm_reclaim(&current->thread, current->thread.regs->msr,
 		   TM_CAUSE_FAC_UNAV);
+=======
+	tm_reclaim_current(TM_CAUSE_FAC_UNAV);
+>>>>>>> v3.18
 =======
 	tm_reclaim_current(TM_CAUSE_FAC_UNAV);
 >>>>>>> v3.18
@@ -1545,6 +1645,7 @@ void fp_unavailable_tm(struct pt_regs *regs)
 	 * thread.fpr[].  They will remain in registers after the
 	 * checkpoint so we don't need to reload them after.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	tm_recheckpoint(&current->thread, regs->msr);
 }
@@ -1552,6 +1653,8 @@ void fp_unavailable_tm(struct pt_regs *regs)
 #ifdef CONFIG_ALTIVEC
 extern void do_load_up_altivec(struct pt_regs *regs);
 =======
+=======
+>>>>>>> v3.18
 	 * If VMX is in use, the VRs now hold checkpointed values,
 	 * so we don't want to load the VRs from the thread_struct.
 	 */
@@ -1564,6 +1667,9 @@ extern void do_load_up_altivec(struct pt_regs *regs);
 		regs->msr |= MSR_VSX;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void altivec_unavailable_tm(struct pt_regs *regs)
@@ -1575,6 +1681,7 @@ void altivec_unavailable_tm(struct pt_regs *regs)
 	TM_DEBUG("Vector Unavailable trap whilst transactional at 0x%lx,"
 		 "MSR=%lx\n",
 		 regs->nip, regs->msr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tm_enable();
 	tm_reclaim(&current->thread, current->thread.regs->msr,
@@ -1589,6 +1696,8 @@ void altivec_unavailable_tm(struct pt_regs *regs)
 void vsx_unavailable_tm(struct pt_regs *regs)
 {
 =======
+=======
+>>>>>>> v3.18
 	tm_reclaim_current(TM_CAUSE_FAC_UNAV);
 	regs->msr |= MSR_VEC;
 	tm_recheckpoint(&current->thread, MSR_VEC);
@@ -1604,6 +1713,9 @@ void vsx_unavailable_tm(struct pt_regs *regs)
 {
 	unsigned long orig_msr = regs->msr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* See the comments in fp_unavailable_tm().  This works similarly,
 	 * though we're loading both FP and VEC registers in here.
@@ -1616,6 +1728,7 @@ void vsx_unavailable_tm(struct pt_regs *regs)
 		 "MSR=%lx\n",
 		 regs->nip, regs->msr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tm_enable();
 	/* This reclaims FP and/or VR regs if they're already enabled */
@@ -1630,6 +1743,8 @@ void vsx_unavailable_tm(struct pt_regs *regs)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	current->thread.used_vsr = 1;
 
 	/* If FP and VMX are already loaded, we have all the state we need */
@@ -1654,6 +1769,9 @@ void vsx_unavailable_tm(struct pt_regs *regs)
 	if (orig_msr & MSR_VEC)
 		do_load_up_transact_altivec(&current->thread);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC_TRANSACTIONAL_MEM */
 
@@ -1668,6 +1786,7 @@ void performance_monitor_exception(struct pt_regs *regs)
 void SoftwareEmulation(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern int do_mathemu(struct pt_regs *);
 	extern int Soft_emulate_8xx(struct pt_regs *);
 #if defined(CONFIG_MATH_EMULATION) || defined(CONFIG_8XX_MINIMAL_FPEMU)
@@ -1676,10 +1795,13 @@ void SoftwareEmulation(struct pt_regs *regs)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	CHECK_FULL_REGS(regs);
 
 	if (!user_mode(regs)) {
 		debugger(regs);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		die("Kernel Mode Software FPU Emulation", regs, SIGFPE);
 	}
@@ -1727,6 +1849,8 @@ void SoftwareEmulation(struct pt_regs *regs)
 	_exception(SIGILL, regs, ILL_ILLOPC, regs->nip);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		die("Kernel Mode Unimplemented Instruction or SW FPU Emulation",
 			regs, SIGFPE);
 	}
@@ -1735,6 +1859,9 @@ void SoftwareEmulation(struct pt_regs *regs)
 		return;
 
 	_exception(SIGILL, regs, ILL_ILLOPC, regs->nip);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif /* CONFIG_8xx */
@@ -1751,7 +1878,11 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 		dbcr_dac(current) &= ~(DBCR_DAC1R | DBCR_DAC1W);
 #ifdef CONFIG_PPC_ADV_DEBUG_DAC_RANGE
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current->thread.dbcr2 &= ~DBCR2_DAC12MODE;
+=======
+		current->thread.debug.dbcr2 &= ~DBCR2_DAC12MODE;
+>>>>>>> v3.18
 =======
 		current->thread.debug.dbcr2 &= ~DBCR2_DAC12MODE;
 >>>>>>> v3.18
@@ -1766,7 +1897,11 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 		changed |= 0x01;
 	}  else if (debug_status & DBSR_IAC1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current->thread.dbcr0 &= ~DBCR0_IAC1;
+=======
+		current->thread.debug.dbcr0 &= ~DBCR0_IAC1;
+>>>>>>> v3.18
 =======
 		current->thread.debug.dbcr0 &= ~DBCR0_IAC1;
 >>>>>>> v3.18
@@ -1776,7 +1911,11 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 		changed |= 0x01;
 	}  else if (debug_status & DBSR_IAC2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current->thread.dbcr0 &= ~DBCR0_IAC2;
+=======
+		current->thread.debug.dbcr0 &= ~DBCR0_IAC2;
+>>>>>>> v3.18
 =======
 		current->thread.debug.dbcr0 &= ~DBCR0_IAC2;
 >>>>>>> v3.18
@@ -1785,7 +1924,11 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 		changed |= 0x01;
 	}  else if (debug_status & DBSR_IAC3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current->thread.dbcr0 &= ~DBCR0_IAC3;
+=======
+		current->thread.debug.dbcr0 &= ~DBCR0_IAC3;
+>>>>>>> v3.18
 =======
 		current->thread.debug.dbcr0 &= ~DBCR0_IAC3;
 >>>>>>> v3.18
@@ -1795,7 +1938,11 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 		changed |= 0x01;
 	}  else if (debug_status & DBSR_IAC4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current->thread.dbcr0 &= ~DBCR0_IAC4;
+=======
+		current->thread.debug.dbcr0 &= ~DBCR0_IAC4;
+>>>>>>> v3.18
 =======
 		current->thread.debug.dbcr0 &= ~DBCR0_IAC4;
 >>>>>>> v3.18
@@ -1809,6 +1956,7 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 	 * back on or not.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DBCR_ACTIVE_EVENTS(current->thread.dbcr0, current->thread.dbcr1))
 		regs->msr |= MSR_DE;
 	else
@@ -1818,6 +1966,8 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 	if (changed & 0x01)
 		mtspr(SPRN_DBCR0, current->thread.dbcr0);
 =======
+=======
+>>>>>>> v3.18
 	if (DBCR_ACTIVE_EVENTS(current->thread.debug.dbcr0,
 			       current->thread.debug.dbcr1))
 		regs->msr |= MSR_DE;
@@ -1827,13 +1977,20 @@ static void handle_debug(struct pt_regs *regs, unsigned long debug_status)
 
 	if (changed & 0x01)
 		mtspr(SPRN_DBCR0, current->thread.debug.dbcr0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void __kprobes DebugException(struct pt_regs *regs, unsigned long debug_status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->thread.dbsr = debug_status;
+=======
+	current->thread.debug.dbsr = debug_status;
+>>>>>>> v3.18
 =======
 	current->thread.debug.dbsr = debug_status;
 >>>>>>> v3.18
@@ -1854,8 +2011,13 @@ void __kprobes DebugException(struct pt_regs *regs, unsigned long debug_status)
 		/* Do the single step trick only when coming from userspace */
 		if (user_mode(regs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			current->thread.dbcr0 &= ~DBCR0_BT;
 			current->thread.dbcr0 |= DBCR0_IDM | DBCR0_IC;
+=======
+			current->thread.debug.dbcr0 &= ~DBCR0_BT;
+			current->thread.debug.dbcr0 |= DBCR0_IDM | DBCR0_IC;
+>>>>>>> v3.18
 =======
 			current->thread.debug.dbcr0 &= ~DBCR0_BT;
 			current->thread.debug.dbcr0 |= DBCR0_IDM | DBCR0_IC;
@@ -1888,6 +2050,7 @@ void __kprobes DebugException(struct pt_regs *regs, unsigned long debug_status)
 
 		if (user_mode(regs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			current->thread.dbcr0 &= ~DBCR0_IC;
 			if (DBCR_ACTIVE_EVENTS(current->thread.dbcr0,
 					       current->thread.dbcr1))
@@ -1896,6 +2059,8 @@ void __kprobes DebugException(struct pt_regs *regs, unsigned long debug_status)
 				/* Make sure the IDM bit is off */
 				current->thread.dbcr0 &= ~DBCR0_IDM;
 =======
+=======
+>>>>>>> v3.18
 			current->thread.debug.dbcr0 &= ~DBCR0_IC;
 			if (DBCR_ACTIVE_EVENTS(current->thread.debug.dbcr0,
 					       current->thread.debug.dbcr1))
@@ -1903,6 +2068,9 @@ void __kprobes DebugException(struct pt_regs *regs, unsigned long debug_status)
 			else
 				/* Make sure the IDM bit is off */
 				current->thread.debug.dbcr0 &= ~DBCR0_IDM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1950,7 +2118,11 @@ void altivec_assist_exception(struct pt_regs *regs)
 		printk_ratelimited(KERN_ERR "Unrecognized altivec instruction "
 				   "in %s at %lx\n", current->comm, regs->nip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current->thread.vscr.u[3] |= 0x10000;
+=======
+		current->thread.vr_state.vscr.u[3] |= 0x10000;
+>>>>>>> v3.18
 =======
 		current->thread.vr_state.vscr.u[3] |= 0x10000;
 >>>>>>> v3.18
@@ -2135,16 +2307,22 @@ struct ppc_emulated ppc_emulated = {
 	WARN_EMULATED_SETUP(spe),
 	WARN_EMULATED_SETUP(string),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_EMULATED_SETUP(unaligned),
 #ifdef CONFIG_MATH_EMULATION
 	WARN_EMULATED_SETUP(math),
 #elif defined(CONFIG_8XX_MINIMAL_FPEMU)
 	WARN_EMULATED_SETUP(8xx),
 =======
+=======
+>>>>>>> v3.18
 	WARN_EMULATED_SETUP(sync),
 	WARN_EMULATED_SETUP(unaligned),
 #ifdef CONFIG_MATH_EMULATION
 	WARN_EMULATED_SETUP(math),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_VSX
@@ -2154,6 +2332,10 @@ struct ppc_emulated ppc_emulated = {
 	WARN_EMULATED_SETUP(mfdscr),
 	WARN_EMULATED_SETUP(mtdscr),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_EMULATED_SETUP(lq_stq),
+>>>>>>> v3.18
 =======
 	WARN_EMULATED_SETUP(lq_stq),
 >>>>>>> v3.18

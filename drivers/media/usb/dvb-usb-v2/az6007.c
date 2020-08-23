@@ -8,7 +8,11 @@
  * The original driver's license is GPL, as declared with MODULE_LICENSE()
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010-2012 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2010-2012 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010-2012 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -73,7 +77,10 @@ static struct drxk_config terratec_h7_drxk = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct drxk_config cablestar_hdci_drxk = {
 	.adr = 0x29,
 	.parallel_ts = true,
@@ -87,6 +94,9 @@ static struct drxk_config cablestar_hdci_drxk = {
 	.microcode_name = "dvb-usb-technisat-cablestar-hdci-drxk.fw",
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int drxk_gate_ctrl(struct dvb_frontend *fe, int enable)
 {
@@ -215,7 +225,11 @@ static int az6007_rc_query(struct dvb_usb_device *d)
 {
 	struct az6007_device_state *st = d_to_priv(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned code = 0;
+=======
+	unsigned code;
+>>>>>>> v3.18
 =======
 	unsigned code;
 >>>>>>> v3.18
@@ -225,6 +239,7 @@ static int az6007_rc_query(struct dvb_usb_device *d)
 	if (st->data[1] == 0x44)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((st->data[1] ^ st->data[2]) == 0xff)
 		code = st->data[1];
@@ -238,6 +253,8 @@ static int az6007_rc_query(struct dvb_usb_device *d)
 
 	rc_keydown(d->rc_dev, code, st->data[5]);
 =======
+=======
+>>>>>>> v3.18
 	if ((st->data[3] ^ st->data[4]) == 0xff) {
 		if ((st->data[1] ^ st->data[2]) == 0xff)
 			code = RC_SCANCODE_NEC(st->data[1], st->data[3]);
@@ -252,6 +269,9 @@ static int az6007_rc_query(struct dvb_usb_device *d)
 	}
 
 	rc_keydown(d->rc_dev, RC_TYPE_NEC, code, st->data[5]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -672,7 +692,10 @@ static int az6007_frontend_attach(struct dvb_usb_adapter *adap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int az6007_cablestar_hdci_frontend_attach(struct dvb_usb_adapter *adap)
 {
 	struct az6007_device_state *st = adap_to_priv(adap);
@@ -694,6 +717,9 @@ static int az6007_cablestar_hdci_frontend_attach(struct dvb_usb_adapter *adap)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int az6007_tuner_attach(struct dvb_usb_adapter *adap)
 {
@@ -934,7 +960,10 @@ static struct dvb_usb_device_properties az6007_props = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct dvb_usb_device_properties az6007_cablestar_hdci_props = {
 	.driver_name         = KBUILD_MODNAME,
 	.owner               = THIS_MODULE,
@@ -958,6 +987,9 @@ static struct dvb_usb_device_properties az6007_cablestar_hdci_props = {
 	}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct usb_device_id az6007_usb_table[] = {
 	{DVB_USB_DEVICE(USB_VID_AZUREWAVE, USB_PID_AZUREWAVE_6007,
@@ -967,6 +999,11 @@ static struct usb_device_id az6007_usb_table[] = {
 	{DVB_USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_H7_2,
 		&az6007_props, "Terratec H7", RC_MAP_NEC_TERRATEC_CINERGY_XS)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{DVB_USB_DEVICE(USB_VID_TECHNISAT, USB_PID_TECHNISAT_USB2_CABLESTAR_HDCI,
+		&az6007_cablestar_hdci_props, "Technisat CableStar Combo HD CI", RC_MAP_EMPTY)},
+>>>>>>> v3.18
 =======
 	{DVB_USB_DEVICE(USB_VID_TECHNISAT, USB_PID_TECHNISAT_USB2_CABLESTAR_HDCI,
 		&az6007_cablestar_hdci_props, "Technisat CableStar Combo HD CI", RC_MAP_EMPTY)},
@@ -1013,7 +1050,11 @@ module_usb_driver(az6007_usb_driver);
 
 MODULE_AUTHOR("Henry Wang <Henry.wang@AzureWave.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

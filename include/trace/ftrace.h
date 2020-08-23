@@ -18,7 +18,10 @@
 
 #include <linux/ftrace_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/coresight-stm.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -49,13 +52,19 @@
 #define __field_ext(type, item, filter_type)	type	item;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef __field_struct
 #define __field_struct(type, item)	type	item;
 
 #undef __field_struct_ext
 #define __field_struct_ext(type, item, filter_type)	type	item;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef __array
 #define __array(type, item, len)	type	item[len];
@@ -67,6 +76,12 @@
 #define __string(item, src) __dynamic_array(char, item, -1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef __bitmask
+#define __bitmask(item, nr_bits) __dynamic_array(char, item, -1)
+
+>>>>>>> v3.18
 =======
 #undef __bitmask
 #define __bitmask(item, nr_bits) __dynamic_array(char, item, -1)
@@ -91,11 +106,17 @@
 	__attribute__((__aligned__(4))) event_##name
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef DEFINE_EVENT_FN
 #define DEFINE_EVENT_FN(template, name, proto, args, reg, unreg)	\
 	DEFINE_EVENT(template, name, PARAMS(proto), PARAMS(args))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef DEFINE_EVENT_PRINT
 #define DEFINE_EVENT_PRINT(template, name, proto, args, print)	\
@@ -113,11 +134,17 @@
 	__TRACE_EVENT_FLAGS(name, value)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef TRACE_EVENT_PERF_PERM
 #define TRACE_EVENT_PERF_PERM(name, expr...)				\
 	__TRACE_EVENT_PERF_PERM(name, expr)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include TRACE_INCLUDE(TRACE_INCLUDE_FILE)
 
@@ -145,13 +172,19 @@
 #define __field_ext(type, item, filter_type)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef __field_struct
 #define __field_struct(type, item)
 
 #undef __field_struct_ext
 #define __field_struct_ext(type, item, filter_type)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef __array
 #define __array(type, item, len)
@@ -163,6 +196,12 @@
 #define __string(item, src) __dynamic_array(char, item, -1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef __bitmask
+#define __bitmask(item, nr_bits) __dynamic_array(unsigned long, item, -1)
+
+>>>>>>> v3.18
 =======
 #undef __bitmask
 #define __bitmask(item, nr_bits) __dynamic_array(unsigned long, item, -1)
@@ -185,6 +224,12 @@
 #define TRACE_EVENT_FLAGS(event, flag)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef TRACE_EVENT_PERF_PERM
+#define TRACE_EVENT_PERF_PERM(event, expr...)
+
+>>>>>>> v3.18
 =======
 #undef TRACE_EVENT_PERF_PERM
 #define TRACE_EVENT_PERF_PERM(event, expr...)
@@ -241,10 +286,13 @@
 		((void *)__entry + (__entry->__data_loc_##field & 0xffff))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __get_str
 #define __get_str(field) (char *)__get_dynamic_array(field)
 
 =======
+=======
+>>>>>>> v3.18
 #undef __get_dynamic_array_len
 #define __get_dynamic_array_len(field)	\
 		((__entry->__data_loc_##field >> 16) & 0xffff)
@@ -261,6 +309,9 @@
 		ftrace_print_bitmask_seq(p, __bitmask, __bitmask_size);	\
 	})
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef __print_flags
 #define __print_flags(flag, delim, flag_array...)			\
@@ -328,11 +379,17 @@ ftrace_raw_output_##call(struct trace_iterator *iter, int flags,	\
 			 struct trace_event *event)			\
 {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct trace_seq *s = &iter->seq;				\
 	struct ftrace_raw_##template *field;				\
 	struct trace_entry *entry;					\
 	struct trace_seq *p = &iter->tmp_seq;				\
 	int ret;							\
+=======
+	struct ftrace_raw_##template *field;				\
+	struct trace_entry *entry;					\
+	struct trace_seq *p = &iter->tmp_seq;				\
+>>>>>>> v3.18
 =======
 	struct ftrace_raw_##template *field;				\
 	struct trace_entry *entry;					\
@@ -350,6 +407,7 @@ ftrace_raw_output_##call(struct trace_iterator *iter, int flags,	\
 									\
 	trace_seq_init(p);						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = trace_seq_printf(s, "%s: ", #call);			\
 	if (ret)							\
 		ret = trace_seq_printf(s, print);			\
@@ -357,6 +415,9 @@ ftrace_raw_output_##call(struct trace_iterator *iter, int flags,	\
 		return TRACE_TYPE_PARTIAL_LINE;				\
 									\
 	return TRACE_TYPE_HANDLED;					\
+=======
+	return ftrace_output_call(iter, #call, print);			\
+>>>>>>> v3.18
 =======
 	return ftrace_output_call(iter, #call, print);			\
 >>>>>>> v3.18
@@ -377,10 +438,13 @@ static struct trace_event_functions ftrace_event_type_funcs_##call = {	\
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __field
 #define __field(type, item)	__field_ext(type, item, FILTER_OTHER)
 
 =======
+=======
+>>>>>>> v3.18
 #undef __field_struct_ext
 #define __field_struct_ext(type, item, filter_type)			\
 	ret = trace_define_field(event_call, #type, #item,		\
@@ -396,6 +460,9 @@ static struct trace_event_functions ftrace_event_type_funcs_##call = {	\
 #undef __field_struct
 #define __field_struct(type, item) __field_struct_ext(type, item, FILTER_OTHER)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef __array
 #define __array(type, item, len)					\
@@ -421,6 +488,12 @@ static struct trace_event_functions ftrace_event_type_funcs_##call = {	\
 #define __string(item, src) __dynamic_array(char, item, -1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef __bitmask
+#define __bitmask(item, nr_bits) __dynamic_array(unsigned long, item, -1)
+
+>>>>>>> v3.18
 =======
 #undef __bitmask
 #define __bitmask(item, nr_bits) __dynamic_array(unsigned long, item, -1)
@@ -462,13 +535,19 @@ ftrace_define_fields_##call(struct ftrace_event_call *event_call)	\
 #define __field_ext(type, item, filter_type)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef __field_struct
 #define __field_struct(type, item)
 
 #undef __field_struct_ext
 #define __field_struct_ext(type, item, filter_type)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef __array
 #define __array(type, item, len)
@@ -476,16 +555,22 @@ ftrace_define_fields_##call(struct ftrace_event_call *event_call)	\
 #undef __dynamic_array
 #define __dynamic_array(type, item, len)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__data_offsets->item = __data_size +				\
 			       offsetof(typeof(*entry), __data);	\
 	__data_offsets->item |= (len * sizeof(type)) << 16;		\
 	__data_size += (len) * sizeof(type);
 =======
+=======
+>>>>>>> v3.18
 	__item_length = (len) * sizeof(type);				\
 	__data_offsets->item = __data_size +				\
 			       offsetof(typeof(*entry), __data);	\
 	__data_offsets->item |= __item_length << 16;			\
 	__data_size += __item_length;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #undef __string
@@ -493,7 +578,10 @@ ftrace_define_fields_##call(struct ftrace_event_call *event_call)	\
 		    strlen((src) ? (const char *)(src) : "(null)") + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * __bitmask_size_in_bytes_raw is the number of bytes needed to hold
  * num_possible_cpus().
@@ -517,6 +605,9 @@ ftrace_define_fields_##call(struct ftrace_event_call *event_call)	\
 #define __bitmask(item, nr_bits) __dynamic_array(unsigned long, item,	\
 					 __bitmask_size_in_longs(nr_bits))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef DECLARE_EVENT_CLASS
 #define DECLARE_EVENT_CLASS(call, proto, args, tstruct, assign, print)	\
@@ -525,6 +616,10 @@ static inline notrace int ftrace_get_offsets_##call(			\
 {									\
 	int __data_size = 0;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int __maybe_unused __item_length;				\
+>>>>>>> v3.18
 =======
 	int __maybe_unused __item_length;				\
 >>>>>>> v3.18
@@ -559,6 +654,11 @@ static inline notrace int ftrace_get_offsets_##call(			\
  *	struct ftrace_event_call *event_call = ftrace_file->event_call;
  *	struct ftrace_data_offsets_<call> __maybe_unused __data_offsets;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	unsigned long eflags = ftrace_file->flags;
+ *	enum event_trigger_type __tt = ETT_NONE;
+>>>>>>> v3.18
 =======
  *	unsigned long eflags = ftrace_file->flags;
  *	enum event_trigger_type __tt = ETT_NONE;
@@ -571,16 +671,22 @@ static inline notrace int ftrace_get_offsets_##call(			\
  *	int pc;
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	if (test_bit(FTRACE_EVENT_FL_SOFT_DISABLED_BIT,
  *		     &ftrace_file->flags))
  *		return;
 =======
+=======
+>>>>>>> v3.18
  *	if (!(eflags & FTRACE_EVENT_FL_TRIGGER_COND)) {
  *		if (eflags & FTRACE_EVENT_FL_TRIGGER_MODE)
  *			event_triggers_call(ftrace_file, NULL);
  *		if (eflags & FTRACE_EVENT_FL_SOFT_DISABLED)
  *			return;
  *	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *	local_save_flags(irq_flags);
@@ -600,10 +706,13 @@ static inline notrace int ftrace_get_offsets_##call(			\
  *			   __array macros.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	if (!filter_current_check_discard(buffer, event_call, entry, event))
  *		trace_nowake_buffer_unlock_commit(buffer,
  *						   event, irq_flags, pc);
 =======
+=======
+>>>>>>> v3.18
  *	if (eflags & FTRACE_EVENT_FL_TRIGGER_COND)
  *		__tt = event_triggers_call(ftrace_file, entry);
  *
@@ -615,6 +724,9 @@ static inline notrace int ftrace_get_offsets_##call(			\
  *
  *	if (__tt)
  *		event_triggers_post_call(ftrace_file, __tt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * }
  *
@@ -635,11 +747,14 @@ static inline notrace int ftrace_get_offsets_##call(			\
  *
  * static struct ftrace_event_call event_<call> = {
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	.name			= "<call>",
  *	.class			= event_class_<template>,
  *	.event			= &ftrace_event_type_<call>,
  *	.print_fmt		= print_fmt_<call>,
 =======
+=======
+>>>>>>> v3.18
  *	.class			= event_class_<template>,
  *	{
  *		.tp			= &__tracepoint_<call>,
@@ -647,6 +762,9 @@ static inline notrace int ftrace_get_offsets_##call(			\
  *	.event			= &ftrace_event_type_<call>,
  *	.print_fmt		= print_fmt_<call>,
  *	.flags			= TRACE_EVENT_FL_TRACEPOINT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * };
  * // its only safe to use pointers when doing linker tricks to
@@ -677,6 +795,12 @@ static inline notrace int ftrace_get_offsets_##call(			\
 #define __field(type, item)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef __field_struct
+#define __field_struct(type, item)
+
+>>>>>>> v3.18
 =======
 #undef __field_struct
 #define __field_struct(type, item)
@@ -691,7 +815,11 @@ static inline notrace int ftrace_get_offsets_##call(			\
 
 #undef __string
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __string(item, src) __dynamic_array(char, item, -1)       	\
+=======
+#define __string(item, src) __dynamic_array(char, item, -1)
+>>>>>>> v3.18
 =======
 #define __string(item, src) __dynamic_array(char, item, -1)
 >>>>>>> v3.18
@@ -701,12 +829,15 @@ static inline notrace int ftrace_get_offsets_##call(			\
 	strcpy(__get_str(dst), (src) ? (const char *)(src) : "(null)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef TP_fast_assign
 #define TP_fast_assign(args...) args
 
 #undef TP_perf_assign
 #define TP_perf_assign(args...)
 =======
+=======
+>>>>>>> v3.18
 #undef __bitmask
 #define __bitmask(item, nr_bits) __dynamic_array(unsigned long, item, -1)
 
@@ -728,6 +859,9 @@ static inline notrace int ftrace_get_offsets_##call(			\
 
 #undef __perf_task
 #define __perf_task(t)	(t)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #undef DECLARE_EVENT_CLASS
@@ -737,6 +871,7 @@ static notrace void							\
 ftrace_raw_event_##call(void *__data, proto)				\
 {									\
 	struct ftrace_event_file *ftrace_file = __data;			\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ftrace_event_call *event_call = ftrace_file->event_call;	\
 	struct ftrace_data_offsets_##call __maybe_unused __data_offsets;\
@@ -764,6 +899,8 @@ ftrace_raw_event_##call(void *__data, proto)				\
 		return;							\
 	entry	= ring_buffer_event_data(event);			\
 =======
+=======
+>>>>>>> v3.18
 	struct ftrace_data_offsets_##call __maybe_unused __data_offsets;\
 	struct ftrace_event_buffer fbuffer;				\
 	struct ftrace_raw_##call *entry;				\
@@ -779,6 +916,9 @@ ftrace_raw_event_##call(void *__data, proto)				\
 									\
 	if (!entry)							\
 		return;							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 									\
 	tstruct								\
@@ -786,11 +926,15 @@ ftrace_raw_event_##call(void *__data, proto)				\
 	{ assign; }							\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_current_check_discard(buffer, event_call, entry, event)) { \
 		stm_log(OST_ENTITY_FTRACE_EVENTS, entry,		\
 			sizeof(*entry) + __data_size);			\
 		trace_buffer_unlock_commit(buffer, event, irq_flags, pc); \
 	}								\
+=======
+	ftrace_event_buffer_commit(&fbuffer);				\
+>>>>>>> v3.18
 =======
 	ftrace_event_buffer_commit(&fbuffer);				\
 >>>>>>> v3.18
@@ -821,7 +965,13 @@ static inline void ftrace_test_probe_##call(void)			\
 #undef __print_hex
 #undef __get_dynamic_array
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __get_str
+=======
+#undef __get_dynamic_array_len
+#undef __get_str
+#undef __get_bitmask
+>>>>>>> v3.18
 =======
 #undef __get_dynamic_array_len
 #undef __get_str
@@ -850,11 +1000,14 @@ static struct ftrace_event_class __used __refdata event_class_##call = { \
 									\
 static struct ftrace_event_call __used event_##call = {			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name			= #call,				\
 	.class			= &event_class_##template,		\
 	.event.funcs		= &ftrace_event_type_funcs_##template,	\
 	.print_fmt		= print_fmt_##template,			\
 =======
+=======
+>>>>>>> v3.18
 	.class			= &event_class_##template,		\
 	{								\
 		.tp			= &__tracepoint_##call,		\
@@ -862,6 +1015,9 @@ static struct ftrace_event_call __used event_##call = {			\
 	.event.funcs		= &ftrace_event_type_funcs_##template,	\
 	.print_fmt		= print_fmt_##template,			\
 	.flags			= TRACE_EVENT_FL_TRACEPOINT,		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };									\
 static struct ftrace_event_call __used					\
@@ -874,11 +1030,14 @@ static const char print_fmt_##call[] = print;				\
 									\
 static struct ftrace_event_call __used event_##call = {			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name			= #call,				\
 	.class			= &event_class_##template,		\
 	.event.funcs		= &ftrace_event_type_funcs_##call,	\
 	.print_fmt		= print_fmt_##call,			\
 =======
+=======
+>>>>>>> v3.18
 	.class			= &event_class_##template,		\
 	{								\
 		.tp			= &__tracepoint_##call,		\
@@ -886,6 +1045,9 @@ static struct ftrace_event_call __used event_##call = {			\
 	.event.funcs		= &ftrace_event_type_funcs_##call,	\
 	.print_fmt		= print_fmt_##call,			\
 	.flags			= TRACE_EVENT_FL_TRACEPOINT,		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };									\
 static struct ftrace_event_call __used					\
@@ -904,6 +1066,7 @@ __attribute__((section("_ftrace_events"))) *__event_##call = &event_##call
 		((void *)__entry + (__entry->__data_loc_##field & 0xffff))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __get_str
 #define __get_str(field) (char *)__get_dynamic_array(field)
 
@@ -919,6 +1082,8 @@ __attribute__((section("_ftrace_events"))) *__event_##call = &event_##call
 #undef TP_perf_assign
 #define TP_perf_assign(args...) args
 =======
+=======
+>>>>>>> v3.18
 #undef __get_dynamic_array_len
 #define __get_dynamic_array_len(field)	\
 		((__entry->__data_loc_##field >> 16) & 0xffff)
@@ -937,6 +1102,9 @@ __attribute__((section("_ftrace_events"))) *__event_##call = &event_##call
 
 #undef __perf_task
 #define __perf_task(t)	(__task = (t))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #undef DECLARE_EVENT_CLASS
@@ -956,10 +1124,13 @@ perf_trace_##call(void *__data, proto)					\
 	int rctx;							\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_fetch_caller_regs(&__regs);				\
 									\
 	__data_size = ftrace_get_offsets_##call(&__data_offsets, args); \
 =======
+=======
+>>>>>>> v3.18
 	__data_size = ftrace_get_offsets_##call(&__data_offsets, args); \
 									\
 	head = this_cpu_ptr(event_call->perf_events);			\
@@ -967,11 +1138,15 @@ perf_trace_##call(void *__data, proto)					\
 				hlist_empty(head))			\
 		return;							\
 									\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__entry_size = ALIGN(__data_size + sizeof(*entry) + sizeof(u32),\
 			     sizeof(u64));				\
 	__entry_size -= sizeof(u32);					\
 									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (WARN_ONCE(__entry_size > PERF_MAX_TRACE_SIZE,		\
 		      "profile buffer not large enough"))		\
@@ -979,6 +1154,11 @@ perf_trace_##call(void *__data, proto)					\
 									\
 	entry = (struct ftrace_raw_##call *)perf_trace_buf_prepare(	\
 		__entry_size, event_call->event.type, &__regs, &rctx);	\
+=======
+	perf_fetch_caller_regs(&__regs);				\
+	entry = perf_trace_buf_prepare(__entry_size,			\
+			event_call->event.type, &__regs, &rctx);	\
+>>>>>>> v3.18
 =======
 	perf_fetch_caller_regs(&__regs);				\
 	entry = perf_trace_buf_prepare(__entry_size,			\
@@ -992,7 +1172,10 @@ perf_trace_##call(void *__data, proto)					\
 	{ assign; }							\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	head = this_cpu_ptr(event_call->perf_events);			\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	perf_trace_buf_submit(entry, __entry_size, rctx, __addr,	\

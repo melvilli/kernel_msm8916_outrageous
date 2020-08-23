@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -80,6 +84,10 @@ acpi_ex_do_debug_object(union acpi_operand_object *source_desc,
 {
 	u32 i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 timer;
+>>>>>>> v3.18
 =======
 	u32 timer;
 >>>>>>> v3.18
@@ -95,7 +103,10 @@ acpi_ex_do_debug_object(union acpi_operand_object *source_desc,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * We will emit the current timer value (in microseconds) with each
 	 * debug output. Only need the lower 26 bits. This allows for 67
 	 * million microseconds or 67 seconds before rollover.
@@ -104,13 +115,20 @@ acpi_ex_do_debug_object(union acpi_operand_object *source_desc,
 	timer &= 0x03FFFFFF;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Print line header as long as we are not in the middle of an
 	 * object display
 	 */
 	if (!((level > 0) && index == 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_os_printf("[ACPI Debug] %*s", level, " ");
+=======
+		acpi_os_printf("[ACPI Debug %.8u] %*s", timer, level, " ");
+>>>>>>> v3.18
 =======
 		acpi_os_printf("[ACPI Debug %.8u] %*s", timer, level, " ");
 >>>>>>> v3.18
@@ -217,6 +235,10 @@ acpi_ex_do_debug_object(union acpi_operand_object *source_desc,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -254,6 +276,10 @@ acpi_ex_do_debug_object(union acpi_operand_object *source_desc,
 
 				default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

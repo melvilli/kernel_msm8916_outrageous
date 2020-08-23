@@ -3,7 +3,11 @@
  *
  * Copyright (c) 2002-2006, Ericsson AB
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2004-2007, 2010-2012, Wind River Systems
+=======
+ * Copyright (c) 2004-2007, 2010-2013, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2004-2007, 2010-2013, Wind River Systems
 >>>>>>> v3.18
@@ -40,6 +44,7 @@
 
 #include "core.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "port.h"
 #include "name_table.h"
 #include "config.h"
@@ -51,6 +56,8 @@ static u32 config_port_ref;
 static DEFINE_SPINLOCK(config_lock);
 
 =======
+=======
+>>>>>>> v3.18
 #include "socket.h"
 #include "name_table.h"
 #include "config.h"
@@ -58,13 +65,19 @@ static DEFINE_SPINLOCK(config_lock);
 
 #define REPLY_TRUNCATED "<truncated>\n"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const void *req_tlv_area;	/* request message TLV area */
 static int req_tlv_space;		/* request message TLV area size */
 static int rep_headroom;		/* reply message headroom to use */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct sk_buff *tipc_cfg_reply_alloc(int payload_size)
@@ -199,6 +212,7 @@ static struct sk_buff *cfg_set_own_addr(void)
 		return tipc_cfg_reply_error_string(TIPC_CFG_NOT_SUPPORTED
 						   " (cannot change node address once assigned)");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * Must temporarily release configuration spinlock while switching into
@@ -225,10 +239,15 @@ static struct sk_buff *cfg_set_remote_mng(void)
 	tipc_remote_management = (value != 0);
 	return tipc_cfg_reply_none();
 =======
+=======
+>>>>>>> v3.18
 	if (!tipc_net_start(addr))
 		return tipc_cfg_reply_none();
 
 	return tipc_cfg_reply_error_string("cannot change to network mode");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -273,7 +292,11 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 	struct sk_buff *rep_tlv_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&config_lock);
+=======
+	rtnl_lock();
+>>>>>>> v3.18
 =======
 	rtnl_lock();
 >>>>>>> v3.18
@@ -286,6 +309,7 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 	/* Check command authorization */
 	if (likely(in_own_node(orig_node))) {
 		/* command is permitted */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else if (cmd >= 0x8000) {
 		rep_tlv_buf = tipc_cfg_reply_error_string(TIPC_CFG_NOT_SUPPORTED
@@ -303,10 +327,15 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 			goto exit;
 		}
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		rep_tlv_buf = tipc_cfg_reply_error_string(TIPC_CFG_NOT_SUPPORTED
 							  " (cannot be done remotely)");
 		goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -338,7 +367,11 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 		break;
 	case TIPC_CMD_SHOW_PORTS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rep_tlv_buf = tipc_port_get_ports();
+=======
+		rep_tlv_buf = tipc_sk_socks_show();
+>>>>>>> v3.18
 =======
 		rep_tlv_buf = tipc_sk_socks_show();
 >>>>>>> v3.18
@@ -361,9 +394,12 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 		rep_tlv_buf = cfg_set_own_addr();
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TIPC_CMD_SET_REMOTE_MNG:
 		rep_tlv_buf = cfg_set_remote_mng();
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case TIPC_CMD_SET_MAX_PORTS:
@@ -373,9 +409,12 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 		rep_tlv_buf = cfg_set_netid();
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TIPC_CMD_GET_REMOTE_MNG:
 		rep_tlv_buf = tipc_cfg_reply_unsigned(tipc_remote_management);
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case TIPC_CMD_GET_MAX_PORTS:
@@ -402,6 +441,11 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 	case TIPC_CMD_GET_MAX_PUBL:
 	case TIPC_CMD_SET_LOG_SIZE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case TIPC_CMD_SET_REMOTE_MNG:
+	case TIPC_CMD_GET_REMOTE_MNG:
+>>>>>>> v3.18
 =======
 	case TIPC_CMD_SET_REMOTE_MNG:
 	case TIPC_CMD_GET_REMOTE_MNG:
@@ -427,6 +471,7 @@ struct sk_buff *tipc_cfg_do_cmd(u32 orig_node, u16 cmd, const void *request_area
 
 	/* Return reply buffer */
 exit:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_unlock_bh(&config_lock);
 	return rep_tlv_buf;
@@ -520,6 +565,11 @@ void tipc_cfg_stop(void)
 	tipc_deleteport(config_port_ref);
 	config_port_ref = 0;
 }
+=======
+	rtnl_unlock();
+	return rep_tlv_buf;
+}
+>>>>>>> v3.18
 =======
 	rtnl_unlock();
 	return rep_tlv_buf;

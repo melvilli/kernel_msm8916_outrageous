@@ -8,7 +8,10 @@ lib-y	+= $(zlib:.c=.o) zmem.o
 
 ccflags-y	:= -Ilib/zlib_inflate
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifdef CONFIG_FUNCTION_TRACER
 CFLAGS_REMOVE_inflate.o = -pg
 CFLAGS_REMOVE_zmem.o = -pg
@@ -16,6 +19,9 @@ CFLAGS_REMOVE_inftrees.o = -pg
 CFLAGS_REMOVE_inffast.o = -pg
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 quiet_cmd_copy_zlib = COPY    $@

@@ -734,6 +734,7 @@ static struct platform_driver amiga_audio_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init amiga_audio_init(void)
 {
 	return platform_driver_probe(&amiga_audio_driver, amiga_audio_probe);
@@ -747,6 +748,9 @@ static void __exit amiga_audio_exit(void)
 }
 
 module_exit(amiga_audio_exit);
+=======
+module_platform_driver_probe(amiga_audio_driver, amiga_audio_probe);
+>>>>>>> v3.18
 =======
 module_platform_driver_probe(amiga_audio_driver, amiga_audio_probe);
 >>>>>>> v3.18

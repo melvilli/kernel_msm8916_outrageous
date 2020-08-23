@@ -60,6 +60,7 @@
 #include <linux/workqueue.h>
 #include <linux/cgroup.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Tracks how many cpusets are currently defined in system.
@@ -71,6 +72,11 @@ int number_of_cpusets __read_mostly;
 /* Forward declare cgroup structures */
 struct cgroup_subsys cpuset_subsys;
 struct cpuset;
+=======
+#include <linux/wait.h>
+
+struct static_key cpusets_enabled_key __read_mostly = STATIC_KEY_INIT_FALSE;
+>>>>>>> v3.18
 =======
 #include <linux/wait.h>
 
@@ -91,10 +97,13 @@ struct cpuset {
 
 	unsigned long flags;		/* "unsigned long" so bitops work */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpumask_var_t cpus_allowed;	/* CPUs allowed to tasks in cpuset */
 	cpumask_var_t cpus_requested;   /* CPUS requested, but not used because of hotplug */
 	nodemask_t mems_allowed;	/* Memory Nodes allowed to tasks */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * On default hierarchy:
@@ -135,6 +144,9 @@ struct cpuset {
 	 *   then old_mems_allowed is updated to mems_allowed.
 	 */
 	nodemask_t old_mems_allowed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct fmeter fmeter;		/* memory_pressure filter */
@@ -151,6 +163,7 @@ struct cpuset {
 	/* for custom sched domain */
 	int relax_domain_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct work_struct hotplug_work;
 };
@@ -161,17 +174,23 @@ static inline struct cpuset *cgroup_cs(struct cgroup *cont)
 	return container_of(cgroup_subsys_state(cont, cpuset_subsys_id),
 			    struct cpuset, css);
 =======
+=======
+>>>>>>> v3.18
 };
 
 static inline struct cpuset *css_cs(struct cgroup_subsys_state *css)
 {
 	return css ? container_of(css, struct cpuset, css) : NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* Retrieve the cpuset for a task */
 static inline struct cpuset *task_cs(struct task_struct *task)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return container_of(task_subsys_state(task, cpuset_subsys_id),
 			    struct cpuset, css);
@@ -185,12 +204,17 @@ static inline struct cpuset *parent_cs(const struct cpuset *cs)
 		return cgroup_cs(pcgrp);
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	return css_cs(task_css(task, cpuset_cgrp_id));
 }
 
 static inline struct cpuset *parent_cs(struct cpuset *cs)
 {
 	return css_cs(cs->css.parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -269,7 +293,11 @@ static struct cpuset top_cpuset = {
  * cpuset_for_each_child - traverse online children of a cpuset
  * @child_cs: loop cursor pointing to the current child
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pos_cgrp: used for iteration
+=======
+ * @pos_css: used for iteration
+>>>>>>> v3.18
 =======
  * @pos_css: used for iteration
 >>>>>>> v3.18
@@ -279,9 +307,15 @@ static struct cpuset top_cpuset = {
  * with RCU read locked.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpuset_for_each_child(child_cs, pos_cgrp, parent_cs)		\
 	cgroup_for_each_child((pos_cgrp), (parent_cs)->css.cgroup)	\
 		if (is_cpuset_online(((child_cs) = cgroup_cs((pos_cgrp)))))
+=======
+#define cpuset_for_each_child(child_cs, pos_css, parent_cs)		\
+	css_for_each_child((pos_css), &(parent_cs)->css)		\
+		if (is_cpuset_online(((child_cs) = css_cs((pos_css)))))
+>>>>>>> v3.18
 =======
 #define cpuset_for_each_child(child_cs, pos_css, parent_cs)		\
 	css_for_each_child((pos_css), &(parent_cs)->css)		\
@@ -291,6 +325,7 @@ static struct cpuset top_cpuset = {
 /**
  * cpuset_for_each_descendant_pre - pre-order walk of a cpuset's descendants
  * @des_cs: loop cursor pointing to the current descendant
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @pos_cgrp: used for iteration
  * @root_cs: target cpuset to walk ancestor of
@@ -303,6 +338,8 @@ static struct cpuset top_cpuset = {
 	cgroup_for_each_descendant_pre((pos_cgrp), (root_cs)->css.cgroup) \
 		if (is_cpuset_online(((des_cs) = cgroup_cs((pos_cgrp)))))
 =======
+=======
+>>>>>>> v3.18
  * @pos_css: used for iteration
  * @root_cs: target cpuset to walk ancestor of
  *
@@ -314,6 +351,9 @@ static struct cpuset top_cpuset = {
 #define cpuset_for_each_descendant_pre(des_cs, pos_css, root_cs)	\
 	css_for_each_descendant_pre((pos_css), &(root_cs)->css)		\
 		if (is_cpuset_online(((des_cs) = css_cs((pos_css)))))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -359,6 +399,7 @@ static DEFINE_MUTEX(callback_mutex);
  * CPU / memory hotplug is handled asynchronously.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct workqueue_struct *cpuset_propagate_hotplug_wq;
 
 static void cpuset_hotplug_workfn(struct work_struct *work);
@@ -368,11 +409,16 @@ static void schedule_cpuset_propagate_hotplug(struct cpuset *cs);
 static DECLARE_WORK(cpuset_hotplug_work, cpuset_hotplug_workfn);
 
 =======
+=======
+>>>>>>> v3.18
 static void cpuset_hotplug_workfn(struct work_struct *work);
 static DECLARE_WORK(cpuset_hotplug_work, cpuset_hotplug_workfn);
 
 static DECLARE_WAIT_QUEUE_HEAD(cpuset_attach_wq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is ugly, but preserves the userspace API for existing cpuset
@@ -404,10 +450,15 @@ static struct file_system_type cpuset_fs_type = {
  * Return in pmask the portion of a cpusets's cpus_allowed that
  * are online.  If none are online, walk up the cpuset hierarchy
 <<<<<<< HEAD
+<<<<<<< HEAD
  * until we find one that does have some online cpus.  If we get
  * all the way to the top and still haven't found any online cpus,
  * return cpu_online_mask.  Or if passed a NULL cs from an exit'ing
  * task, return cpu_online_mask.
+=======
+ * until we find one that does have some online cpus.  The top
+ * cpuset always has some cpus online.
+>>>>>>> v3.18
 =======
  * until we find one that does have some online cpus.  The top
  * cpuset always has some cpus online.
@@ -418,6 +469,7 @@ static struct file_system_type cpuset_fs_type = {
  *
  * Call with callback_mutex held.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static void guarantee_online_cpus(const struct cpuset *cs,
@@ -431,11 +483,16 @@ static void guarantee_online_cpus(const struct cpuset *cs,
 		cpumask_copy(pmask, cpu_online_mask);
 	BUG_ON(!cpumask_intersects(pmask, cpu_online_mask));
 =======
+=======
+>>>>>>> v3.18
 static void guarantee_online_cpus(struct cpuset *cs, struct cpumask *pmask)
 {
 	while (!cpumask_intersects(cs->effective_cpus, cpu_online_mask))
 		cs = parent_cs(cs);
 	cpumask_and(pmask, cs->effective_cpus, cpu_online_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -444,8 +501,12 @@ static void guarantee_online_cpus(struct cpuset *cs, struct cpumask *pmask)
  * are online, with memory.  If none are online with memory, walk
  * up the cpuset hierarchy until we find one that does have some
 <<<<<<< HEAD
+<<<<<<< HEAD
  * online mems.  If we get all the way to the top and still haven't
  * found any online mems, return node_states[N_MEMORY].
+=======
+ * online mems.  The top cpuset always has some mems online.
+>>>>>>> v3.18
 =======
  * online mems.  The top cpuset always has some mems online.
 >>>>>>> v3.18
@@ -455,6 +516,7 @@ static void guarantee_online_cpus(struct cpuset *cs, struct cpumask *pmask)
  *
  * Call with callback_mutex held.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static void guarantee_online_mems(const struct cpuset *cs, nodemask_t *pmask)
@@ -469,11 +531,16 @@ static void guarantee_online_mems(const struct cpuset *cs, nodemask_t *pmask)
 		*pmask = node_states[N_MEMORY];
 	BUG_ON(!nodes_intersects(*pmask, node_states[N_MEMORY]));
 =======
+=======
+>>>>>>> v3.18
 static void guarantee_online_mems(struct cpuset *cs, nodemask_t *pmask)
 {
 	while (!nodes_intersects(cs->effective_mems, node_states[N_MEMORY]))
 		cs = parent_cs(cs);
 	nodes_and(*pmask, cs->effective_mems, node_states[N_MEMORY]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -487,6 +554,7 @@ static void cpuset_update_task_spread_flag(struct cpuset *cs,
 {
 	if (is_spread_page(cs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk->flags |= PF_SPREAD_PAGE;
 	else
 		tsk->flags &= ~PF_SPREAD_PAGE;
@@ -495,6 +563,8 @@ static void cpuset_update_task_spread_flag(struct cpuset *cs,
 	else
 		tsk->flags &= ~PF_SPREAD_SLAB;
 =======
+=======
+>>>>>>> v3.18
 		task_set_spread_page(tsk);
 	else
 		task_clear_spread_page(tsk);
@@ -503,6 +573,9 @@ static void cpuset_update_task_spread_flag(struct cpuset *cs,
 		task_set_spread_slab(tsk);
 	else
 		task_clear_spread_slab(tsk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -517,7 +590,11 @@ static void cpuset_update_task_spread_flag(struct cpuset *cs,
 static int is_cpuset_subset(const struct cpuset *p, const struct cpuset *q)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return	cpumask_subset(p->cpus_requested, q->cpus_requested) &&
+=======
+	return	cpumask_subset(p->cpus_allowed, q->cpus_allowed) &&
+>>>>>>> v3.18
 =======
 	return	cpumask_subset(p->cpus_allowed, q->cpus_allowed) &&
 >>>>>>> v3.18
@@ -531,7 +608,11 @@ static int is_cpuset_subset(const struct cpuset *p, const struct cpuset *q)
  * @cs: the cpuset that the trial cpuset duplicates
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpuset *alloc_trial_cpuset(const struct cpuset *cs)
+=======
+static struct cpuset *alloc_trial_cpuset(struct cpuset *cs)
+>>>>>>> v3.18
 =======
 static struct cpuset *alloc_trial_cpuset(struct cpuset *cs)
 >>>>>>> v3.18
@@ -543,6 +624,7 @@ static struct cpuset *alloc_trial_cpuset(struct cpuset *cs)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!alloc_cpumask_var(&trial->cpus_allowed, GFP_KERNEL)) {
 		kfree(trial);
 		return NULL;
@@ -551,6 +633,8 @@ static struct cpuset *alloc_trial_cpuset(struct cpuset *cs)
 
 	return trial;
 =======
+=======
+>>>>>>> v3.18
 	if (!alloc_cpumask_var(&trial->cpus_allowed, GFP_KERNEL))
 		goto free_cs;
 	if (!alloc_cpumask_var(&trial->effective_cpus, GFP_KERNEL))
@@ -565,6 +649,9 @@ free_cpus:
 free_cs:
 	kfree(trial);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -575,6 +662,10 @@ free_cs:
 static void free_trial_cpuset(struct cpuset *trial)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free_cpumask_var(trial->effective_cpus);
+>>>>>>> v3.18
 =======
 	free_cpumask_var(trial->effective_cpus);
 >>>>>>> v3.18
@@ -603,9 +694,15 @@ static void free_trial_cpuset(struct cpuset *trial)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int validate_change(const struct cpuset *cur, const struct cpuset *trial)
 {
 	struct cgroup *cont;
+=======
+static int validate_change(struct cpuset *cur, struct cpuset *trial)
+{
+	struct cgroup_subsys_state *css;
+>>>>>>> v3.18
 =======
 static int validate_change(struct cpuset *cur, struct cpuset *trial)
 {
@@ -619,7 +716,11 @@ static int validate_change(struct cpuset *cur, struct cpuset *trial)
 	/* Each of our child cpusets must be a subset of us */
 	ret = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuset_for_each_child(c, cont, cur)
+=======
+	cpuset_for_each_child(c, css, cur)
+>>>>>>> v3.18
 =======
 	cpuset_for_each_child(c, css, cur)
 >>>>>>> v3.18
@@ -634,9 +735,15 @@ static int validate_change(struct cpuset *cur, struct cpuset *trial)
 	par = parent_cs(cur);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We must be a subset of our parent cpuset */
 	ret = -EACCES;
 	if (!is_cpuset_subset(trial, par))
+=======
+	/* On legacy hiearchy, we must be a subset of our parent cpuset. */
+	ret = -EACCES;
+	if (!cgroup_on_dfl(cur->css.cgroup) && !is_cpuset_subset(trial, par))
+>>>>>>> v3.18
 =======
 	/* On legacy hiearchy, we must be a subset of our parent cpuset. */
 	ret = -EACCES;
@@ -650,15 +757,21 @@ static int validate_change(struct cpuset *cur, struct cpuset *trial)
 	 */
 	ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuset_for_each_child(c, cont, par) {
 		if ((is_cpu_exclusive(trial) || is_cpu_exclusive(c)) &&
 		    c != cur &&
 		    cpumask_intersects(trial->cpus_requested, c->cpus_requested))
 =======
+=======
+>>>>>>> v3.18
 	cpuset_for_each_child(c, css, par) {
 		if ((is_cpu_exclusive(trial) || is_cpu_exclusive(c)) &&
 		    c != cur &&
 		    cpumask_intersects(trial->cpus_allowed, c->cpus_allowed))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out;
 		if ((is_mem_exclusive(trial) || is_mem_exclusive(c)) &&
@@ -670,6 +783,7 @@ static int validate_change(struct cpuset *cur, struct cpuset *trial)
 	/*
 	 * Cpusets with tasks - existing or newly being attached - can't
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * have empty cpus_allowed or mems_allowed.
 	 */
 	ret = -ENOSPC;
@@ -678,6 +792,8 @@ static int validate_change(struct cpuset *cur, struct cpuset *trial)
 	     nodes_empty(trial->mems_allowed)))
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	 * be changed to have empty cpus_allowed or mems_allowed.
 	 */
 	ret = -ENOSPC;
@@ -689,6 +805,9 @@ static int validate_change(struct cpuset *cur, struct cpuset *trial)
 		    nodes_empty(trial->mems_allowed))
 			goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = 0;
@@ -701,17 +820,23 @@ out:
 /*
  * Helper routine for generate_sched_domains().
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Do cpusets a, b have overlapping cpus_allowed masks?
  */
 static int cpusets_overlap(struct cpuset *a, struct cpuset *b)
 {
 	return cpumask_intersects(a->cpus_allowed, b->cpus_allowed);
 =======
+=======
+>>>>>>> v3.18
  * Do cpusets a, b have overlapping effective cpus_allowed masks?
  */
 static int cpusets_overlap(struct cpuset *a, struct cpuset *b)
 {
 	return cpumask_intersects(a->effective_cpus, b->effective_cpus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -728,6 +853,7 @@ static void update_domain_attr_tree(struct sched_domain_attr *dattr,
 {
 	struct cpuset *cp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cgroup *pos_cgrp;
 
 	rcu_read_lock();
@@ -736,6 +862,8 @@ static void update_domain_attr_tree(struct sched_domain_attr *dattr,
 		if (cpumask_empty(cp->cpus_allowed)) {
 			pos_cgrp = cgroup_rightmost_descendant(pos_cgrp);
 =======
+=======
+>>>>>>> v3.18
 	struct cgroup_subsys_state *pos_css;
 
 	rcu_read_lock();
@@ -746,6 +874,9 @@ static void update_domain_attr_tree(struct sched_domain_attr *dattr,
 		/* skip the whole subtree if @cp doesn't have any CPU */
 		if (cpumask_empty(cp->cpus_allowed)) {
 			pos_css = css_rightmost_descendant(pos_css);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -763,7 +894,11 @@ static void update_domain_attr_tree(struct sched_domain_attr *dattr,
  * A 'partial partition' is a set of non-overlapping subsets whose
  * union is a subset of that set.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The output of this function needs to be passed to kernel/sched.c
+=======
+ * The output of this function needs to be passed to kernel/sched/core.c
+>>>>>>> v3.18
 =======
  * The output of this function needs to be passed to kernel/sched/core.c
 >>>>>>> v3.18
@@ -796,7 +931,11 @@ static void update_domain_attr_tree(struct sched_domain_attr *dattr,
  *	   many such domains as possible, each as small as possible.
  * doms  - Conversion of 'csa' to an array of cpumasks, for passing to
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	   the kernel/sched.c routine partition_sched_domains() in a
+=======
+ *	   the kernel/sched/core.c routine partition_sched_domains() in a
+>>>>>>> v3.18
 =======
  *	   the kernel/sched/core.c routine partition_sched_domains() in a
 >>>>>>> v3.18
@@ -830,7 +969,11 @@ static int generate_sched_domains(cpumask_var_t **domains,
 	int ndoms = 0;		/* number of sched domains in result */
 	int nslot;		/* next empty doms[] struct cpumask slot */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cgroup *pos_cgrp;
+=======
+	struct cgroup_subsys_state *pos_css;
+>>>>>>> v3.18
 =======
 	struct cgroup_subsys_state *pos_css;
 >>>>>>> v3.18
@@ -852,7 +995,11 @@ static int generate_sched_domains(cpumask_var_t **domains,
 			update_domain_attr_tree(dattr, &top_cpuset);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpumask_copy(doms[0], top_cpuset.cpus_allowed);
+=======
+		cpumask_copy(doms[0], top_cpuset.effective_cpus);
+>>>>>>> v3.18
 =======
 		cpumask_copy(doms[0], top_cpuset.effective_cpus);
 >>>>>>> v3.18
@@ -861,7 +1008,11 @@ static int generate_sched_domains(cpumask_var_t **domains,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	csa = kmalloc(number_of_cpusets * sizeof(cp), GFP_KERNEL);
+=======
+	csa = kmalloc(nr_cpusets() * sizeof(cp), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	csa = kmalloc(nr_cpusets() * sizeof(cp), GFP_KERNEL);
 >>>>>>> v3.18
@@ -871,7 +1022,13 @@ static int generate_sched_domains(cpumask_var_t **domains,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuset_for_each_descendant_pre(cp, pos_cgrp, &top_cpuset) {
+=======
+	cpuset_for_each_descendant_pre(cp, pos_css, &top_cpuset) {
+		if (cp == &top_cpuset)
+			continue;
+>>>>>>> v3.18
 =======
 	cpuset_for_each_descendant_pre(cp, pos_css, &top_cpuset) {
 		if (cp == &top_cpuset)
@@ -894,7 +1051,11 @@ static int generate_sched_domains(cpumask_var_t **domains,
 
 		/* skip @cp's subtree */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos_cgrp = cgroup_rightmost_descendant(pos_cgrp);
+=======
+		pos_css = css_rightmost_descendant(pos_css);
+>>>>>>> v3.18
 =======
 		pos_css = css_rightmost_descendant(pos_css);
 >>>>>>> v3.18
@@ -958,11 +1119,16 @@ restart:
 			static int warnings = 10;
 			if (warnings) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING
 				 "rebuild_sched_domains confused:"
 				  " nslot %d, ndoms %d, csn %d, i %d,"
 				  " apn %d\n",
 				  nslot, ndoms, csn, i, apn);
+=======
+				pr_warn("rebuild_sched_domains confused: nslot %d, ndoms %d, csn %d, i %d, apn %d\n",
+					nslot, ndoms, csn, i, apn);
+>>>>>>> v3.18
 =======
 				pr_warn("rebuild_sched_domains confused: nslot %d, ndoms %d, csn %d, i %d, apn %d\n",
 					nslot, ndoms, csn, i, apn);
@@ -980,7 +1146,11 @@ restart:
 
 			if (apn == b->pn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cpumask_or(dp, dp, b->cpus_allowed);
+=======
+				cpumask_or(dp, dp, b->effective_cpus);
+>>>>>>> v3.18
 =======
 				cpumask_or(dp, dp, b->effective_cpus);
 >>>>>>> v3.18
@@ -1036,7 +1206,11 @@ static void rebuild_sched_domains_locked(void)
 	 * Anyways, hotplug work item will rebuild sched domains.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpumask_equal(top_cpuset.cpus_allowed, cpu_active_mask))
+=======
+	if (!cpumask_equal(top_cpuset.effective_cpus, cpu_active_mask))
+>>>>>>> v3.18
 =======
 	if (!cpumask_equal(top_cpuset.effective_cpus, cpu_active_mask))
 >>>>>>> v3.18
@@ -1064,6 +1238,7 @@ void rebuild_sched_domains(void)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * cpuset_test_cpumask - test a task's cpus_allowed versus its cpuset's
  * @tsk: task to test
@@ -1121,6 +1296,8 @@ static void update_tasks_cpumask(struct cpuset *cs, struct ptr_heap *heap)
 	scan.heap = heap;
 	cgroup_scan_tasks(&scan);
 =======
+=======
+>>>>>>> v3.18
  * update_tasks_cpumask - Update the cpumasks of tasks in the cpuset.
  * @cs: the cpuset in which each task's cpus_allowed mask needs to be changed
  *
@@ -1204,6 +1381,9 @@ static void update_cpumasks_hier(struct cpuset *cs, struct cpumask *new_cpus)
 
 	if (need_rebuild_sched_domains)
 		rebuild_sched_domains_locked();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1211,6 +1391,10 @@ static void update_cpumasks_hier(struct cpuset *cs, struct cpumask *new_cpus)
  * update_cpumask - update the cpus_allowed mask of a cpuset and all tasks in it
  * @cs: the cpuset to consider
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @trialcs: trial cpuset
+>>>>>>> v3.18
 =======
  * @trialcs: trial cpuset
 >>>>>>> v3.18
@@ -1220,9 +1404,13 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 			  const char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ptr_heap heap;
 	int retval;
 	int is_load_balanced;
+=======
+	int retval;
+>>>>>>> v3.18
 =======
 	int retval;
 >>>>>>> v3.18
@@ -1240,6 +1428,7 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 	if (!*buf) {
 		cpumask_clear(trialcs->cpus_allowed);
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		retval = cpulist_parse(buf, trialcs->cpus_requested);
 		if (retval < 0)
@@ -1280,6 +1469,8 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 	if (is_load_balanced)
 		rebuild_sched_domains_locked();
 =======
+=======
+>>>>>>> v3.18
 		retval = cpulist_parse(buf, trialcs->cpus_allowed);
 		if (retval < 0)
 			return retval;
@@ -1303,6 +1494,9 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 
 	/* use trialcs->cpus_allowed as a temp variable */
 	update_cpumasks_hier(cs, trialcs->cpus_allowed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1316,12 +1510,15 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
  *    so that the migration code can allocate pages on these nodes.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Call holding cpuset_mutex, so current's cpuset won't change
  *    during this call, as manage_mutex holds off any cpuset_attach()
  *    calls.  Therefore we don't need to take task_lock around the
  *    call to guarantee_online_mems(), as we know no one is changing
  *    our task's cpuset.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *    While the mm_struct we are migrating is typically from some
@@ -1340,7 +1537,13 @@ static void cpuset_migrate_mm(struct mm_struct *mm, const nodemask_t *from,
 	do_migrate_pages(mm, from, to, MPOL_MF_MOVE_ALL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	guarantee_online_mems(task_cs(tsk),&tsk->mems_allowed);
+=======
+	rcu_read_lock();
+	guarantee_online_mems(task_cs(tsk), &tsk->mems_allowed);
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	guarantee_online_mems(task_cs(tsk), &tsk->mems_allowed);
@@ -1375,7 +1578,11 @@ static void cpuset_change_task_nodemask(struct task_struct *tsk,
 	/*
 	 * Determine if a loop is necessary if another thread is doing
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * get_mems_allowed().  If at least one node remains unchanged and
+=======
+	 * read_mems_allowed_begin().  If at least one node remains unchanged and
+>>>>>>> v3.18
 =======
 	 * read_mems_allowed_begin().  If at least one node remains unchanged and
 >>>>>>> v3.18
@@ -1404,6 +1611,7 @@ static void cpuset_change_task_nodemask(struct task_struct *tsk,
 	task_unlock(tsk);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Update task's mems_allowed and rebind its mempolicy and vmas' mempolicy
@@ -1438,11 +1646,14 @@ static void cpuset_change_nodemask(struct task_struct *p,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void *cpuset_being_rebound;
 
 /**
  * update_tasks_nodemask - Update the nodemasks of tasks in the cpuset.
  * @cs: the cpuset in which each task's mems_allowed mask needs to be changed
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @oldmem: old mems_allowed of cpuset cs
  * @heap: if NULL, defer allocating heap memory to cgroup_scan_tasks()
@@ -1464,6 +1675,8 @@ static void update_tasks_nodemask(struct cpuset *cs, const nodemask_t *oldmem,
 	scan.heap = heap;
 	scan.data = (nodemask_t *)oldmem;
 =======
+=======
+>>>>>>> v3.18
  *
  * Iterate through each task of @cs updating its mems_allowed to the
  * effective cpuset's.  As this function is called with cpuset_mutex held,
@@ -1478,6 +1691,9 @@ static void update_tasks_nodemask(struct cpuset *cs)
 	cpuset_being_rebound = cs;		/* causes mpol_dup() rebind */
 
 	guarantee_online_mems(cs, &newmems);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1491,8 +1707,11 @@ static void update_tasks_nodemask(struct cpuset *cs)
 	 * is idempotent.  Also migrate pages in each mm to new nodes.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cgroup_scan_tasks(&scan);
 =======
+=======
+>>>>>>> v3.18
 	css_task_iter_start(&cs->css, &it);
 	while ((task = css_task_iter_next(&it))) {
 		struct mm_struct *mm;
@@ -1518,6 +1737,9 @@ static void update_tasks_nodemask(struct cpuset *cs)
 	 * cs->old_mems_allowed.
 	 */
 	cs->old_mems_allowed = newmems;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We're done rebinding vmas to this cpuset's new mems_allowed. */
@@ -1526,7 +1748,10 @@ static void update_tasks_nodemask(struct cpuset *cs)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * update_nodemasks_hier - Update effective nodemasks and tasks in the subtree
  * @cs: the cpuset to consider
  * @new_mems: a temp variable for calculating new effective_mems
@@ -1582,6 +1807,9 @@ static void update_nodemasks_hier(struct cpuset *cs, nodemask_t *new_mems)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Handle user request to change the 'mems' memory placement
  * of a cpuset.  Needs to validate the request, update the
@@ -1599,12 +1827,16 @@ static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
 			   const char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NODEMASK_ALLOC(nodemask_t, oldmem, GFP_KERNEL);
 	int retval;
 	struct ptr_heap heap;
 
 	if (!oldmem)
 		return -ENOMEM;
+=======
+	int retval;
+>>>>>>> v3.18
 =======
 	int retval;
 >>>>>>> v3.18
@@ -1633,6 +1865,7 @@ static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
 
 		if (!nodes_subset(trialcs->mems_allowed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				node_states[N_MEMORY])) {
 			retval =  -EINVAL;
 			goto done;
@@ -1641,6 +1874,8 @@ static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
 	*oldmem = cs->mems_allowed;
 	if (nodes_equal(*oldmem, trialcs->mems_allowed)) {
 =======
+=======
+>>>>>>> v3.18
 				  top_cpuset.mems_allowed)) {
 			retval = -EINVAL;
 			goto done;
@@ -1648,6 +1883,9 @@ static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
 	}
 
 	if (nodes_equal(cs->mems_allowed, trialcs->mems_allowed)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = 0;		/* Too easy - nothing to do */
 		goto done;
@@ -1657,10 +1895,13 @@ static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = heap_init(&heap, PAGE_SIZE, GFP_KERNEL, NULL);
 	if (retval < 0)
 		goto done;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&callback_mutex);
@@ -1668,11 +1909,17 @@ static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
 	mutex_unlock(&callback_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	update_tasks_nodemask(cs, oldmem, &heap);
 
 	heap_free(&heap);
 done:
 	NODEMASK_FREE(oldmem);
+=======
+	/* use trialcs->mems_allowed as a temp variable */
+	update_nodemasks_hier(cs, &cs->mems_allowed);
+done:
+>>>>>>> v3.18
 =======
 	/* use trialcs->mems_allowed as a temp variable */
 	update_nodemasks_hier(cs, &cs->mems_allowed);
@@ -1709,6 +1956,7 @@ static int update_relax_domain_level(struct cpuset *cs, s64 val)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * cpuset_change_flag - make a task's spread flags the same as its cpuset's
@@ -1749,6 +1997,8 @@ static void update_tasks_flags(struct cpuset *cs, struct ptr_heap *heap)
 	scan.heap = heap;
 	cgroup_scan_tasks(&scan);
 =======
+=======
+>>>>>>> v3.18
 /**
  * update_tasks_flags - update the spread flags of tasks in the cpuset.
  * @cs: the cpuset in which each task's spread flags needs to be changed
@@ -1766,6 +2016,9 @@ static void update_tasks_flags(struct cpuset *cs)
 	while ((task = css_task_iter_next(&it)))
 		cpuset_update_task_spread_flag(cs, task);
 	css_task_iter_end(&it);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1785,7 +2038,10 @@ static int update_flag(cpuset_flagbits_t bit, struct cpuset *cs,
 	int balance_flag_changed;
 	int spread_flag_changed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ptr_heap heap;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err;
@@ -1804,10 +2060,13 @@ static int update_flag(cpuset_flagbits_t bit, struct cpuset *cs,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = heap_init(&heap, PAGE_SIZE, GFP_KERNEL, NULL);
 	if (err < 0)
 		goto out;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	balance_flag_changed = (is_sched_load_balance(cs) !=
@@ -1825,8 +2084,12 @@ static int update_flag(cpuset_flagbits_t bit, struct cpuset *cs,
 
 	if (spread_flag_changed)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		update_tasks_flags(cs, &heap);
 	heap_free(&heap);
+=======
+		update_tasks_flags(cs);
+>>>>>>> v3.18
 =======
 		update_tasks_flags(cs);
 >>>>>>> v3.18
@@ -1934,6 +2197,7 @@ static int fmeter_getrate(struct fmeter *fmp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Called by cgroups to determine if a cpuset is usable; cpuset_mutex held */
 static int cpuset_can_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 {
@@ -1949,6 +2213,8 @@ static int cpuset_can_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 
 	cgroup_taskset_for_each(task, cgrp, tset) {
 =======
+=======
+>>>>>>> v3.18
 static struct cpuset *cpuset_attach_old_cs;
 
 /* Called by cgroups to determine if a cpuset is usable; cpuset_mutex held */
@@ -1971,6 +2237,9 @@ static int cpuset_can_attach(struct cgroup_subsys_state *css,
 		goto out_unlock;
 
 	cgroup_taskset_for_each(task, tset) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Kthreads which disallow setaffinity shouldn't be moved
@@ -2001,6 +2270,7 @@ out_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuset_allow_attach(struct cgroup *cgrp,
 			       struct cgroup_taskset *tset)
 {
@@ -2024,11 +2294,16 @@ static void cpuset_cancel_attach(struct cgroup *cgrp,
 	mutex_lock(&cpuset_mutex);
 	cgroup_cs(cgrp)->attach_in_progress--;
 =======
+=======
+>>>>>>> v3.18
 static void cpuset_cancel_attach(struct cgroup_subsys_state *css,
 				 struct cgroup_taskset *tset)
 {
 	mutex_lock(&cpuset_mutex);
 	css_cs(css)->attach_in_progress--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&cpuset_mutex);
 }
@@ -2041,24 +2316,35 @@ static void cpuset_cancel_attach(struct cgroup_subsys_state *css,
 static cpumask_var_t cpus_attach;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cpuset_attach(struct cgroup *cgrp, struct cgroup_taskset *tset)
 {
 	/* static bufs protected by cpuset_mutex */
 	static nodemask_t cpuset_attach_nodemask_from;
 =======
+=======
+>>>>>>> v3.18
 static void cpuset_attach(struct cgroup_subsys_state *css,
 			  struct cgroup_taskset *tset)
 {
 	/* static buf protected by cpuset_mutex */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static nodemask_t cpuset_attach_nodemask_to;
 	struct mm_struct *mm;
 	struct task_struct *task;
 	struct task_struct *leader = cgroup_taskset_first(tset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cgroup *oldcgrp = cgroup_taskset_cur_cgroup(tset);
 	struct cpuset *cs = cgroup_cs(cgrp);
 	struct cpuset *oldcs = cgroup_cs(oldcgrp);
+=======
+	struct cpuset *cs = css_cs(css);
+	struct cpuset *oldcs = cpuset_attach_old_cs;
+>>>>>>> v3.18
 =======
 	struct cpuset *cs = css_cs(css);
 	struct cpuset *oldcs = cpuset_attach_old_cs;
@@ -2075,7 +2361,11 @@ static void cpuset_attach(struct cgroup_subsys_state *css,
 	guarantee_online_mems(cs, &cpuset_attach_nodemask_to);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cgroup_taskset_for_each(task, cgrp, tset) {
+=======
+	cgroup_taskset_for_each(task, tset) {
+>>>>>>> v3.18
 =======
 	cgroup_taskset_for_each(task, tset) {
 >>>>>>> v3.18
@@ -2093,6 +2383,7 @@ static void cpuset_attach(struct cgroup_subsys_state *css,
 	 * Change mm, possibly for multiple threads in a threadgroup. This is
 	 * expensive and may sleep.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpuset_attach_nodemask_from = oldcs->mems_allowed;
 	cpuset_attach_nodemask_to = cs->mems_allowed;
@@ -2115,6 +2406,8 @@ static void cpuset_attach(struct cgroup_subsys_state *css,
 	if (cpumask_empty(cs->cpus_allowed) || nodes_empty(cs->mems_allowed))
 		schedule_cpuset_propagate_hotplug(cs);
 =======
+=======
+>>>>>>> v3.18
 	cpuset_attach_nodemask_to = cs->effective_mems;
 	mm = get_task_mm(leader);
 	if (mm) {
@@ -2139,6 +2432,9 @@ static void cpuset_attach(struct cgroup_subsys_state *css,
 	cs->attach_in_progress--;
 	if (!cs->attach_in_progress)
 		wake_up(&cpuset_attach_wq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&cpuset_mutex);
@@ -2151,6 +2447,11 @@ typedef enum {
 	FILE_CPULIST,
 	FILE_MEMLIST,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FILE_EFFECTIVE_CPULIST,
+	FILE_EFFECTIVE_MEMLIST,
+>>>>>>> v3.18
 =======
 	FILE_EFFECTIVE_CPULIST,
 	FILE_EFFECTIVE_MEMLIST,
@@ -2167,14 +2468,20 @@ typedef enum {
 } cpuset_filetype_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuset_write_u64(struct cgroup *cgrp, struct cftype *cft, u64 val)
 {
 	struct cpuset *cs = cgroup_cs(cgrp);
 =======
+=======
+>>>>>>> v3.18
 static int cpuset_write_u64(struct cgroup_subsys_state *css, struct cftype *cft,
 			    u64 val)
 {
 	struct cpuset *cs = css_cs(css);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpuset_filetype_t type = cft->private;
 	int retval = 0;
@@ -2223,14 +2530,20 @@ out_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuset_write_s64(struct cgroup *cgrp, struct cftype *cft, s64 val)
 {
 	struct cpuset *cs = cgroup_cs(cgrp);
 =======
+=======
+>>>>>>> v3.18
 static int cpuset_write_s64(struct cgroup_subsys_state *css, struct cftype *cft,
 			    s64 val)
 {
 	struct cpuset *cs = css_cs(css);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpuset_filetype_t type = cft->private;
 	int retval = -ENODEV;
@@ -2256,6 +2569,7 @@ out_unlock:
  * Common handling for a write to a "cpus" or "mems" file.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuset_write_resmask(struct cgroup *cgrp, struct cftype *cft,
 				const char *buf)
 {
@@ -2264,6 +2578,8 @@ static int cpuset_write_resmask(struct cgroup *cgrp, struct cftype *cft,
 	int retval = -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 				    char *buf, size_t nbytes, loff_t off)
 {
@@ -2273,6 +2589,9 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 
 	buf = strstrip(buf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * CPU or memory hotunplug may leave @cs w/o any execution
@@ -2286,6 +2605,7 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 	 * after execution capability is restored.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Flushing cpuset_hotplug_work is enough to synchronize against
 	 * hotplug hanlding; however, cpuset_attach() may schedule
 	 * propagation work directly.  Flush the workqueue too.
@@ -2293,6 +2613,8 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 	flush_work(&cpuset_hotplug_work);
 	flush_workqueue(cpuset_propagate_hotplug_wq);
 =======
+=======
+>>>>>>> v3.18
 	 * cpuset_hotplug_work calls back into cgroup core via
 	 * cgroup_transfer_tasks() and waiting for it from a cgroupfs
 	 * operation like this one can lead to a deadlock through kernfs
@@ -2304,6 +2626,9 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 	css_get(&cs->css);
 	kernfs_break_active_protection(of->kn);
 	flush_work(&cpuset_hotplug_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&cpuset_mutex);
@@ -2317,7 +2642,11 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (cft->private) {
+=======
+	switch (of_cft(of)->private) {
+>>>>>>> v3.18
 =======
 	switch (of_cft(of)->private) {
 >>>>>>> v3.18
@@ -2336,7 +2665,13 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 out_unlock:
 	mutex_unlock(&cpuset_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return retval;
+=======
+	kernfs_unbreak_active_protection(of->kn);
+	css_put(&cs->css);
+	return retval ?: nbytes;
+>>>>>>> v3.18
 =======
 	kernfs_unbreak_active_protection(of->kn);
 	css_put(&cs->css);
@@ -2351,6 +2686,7 @@ out_unlock:
  * used, list of ranges of sequential numbers, is variable length,
  * and since these maps can change value dynamically, one could read
  * gibberish by doing partial reads while a list was changing.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * A single large read to a buffer that crosses a page boundary is
  * ok, because the result being copied to user land is not recomputed
@@ -2419,6 +2755,8 @@ static u64 cpuset_read_u64(struct cgroup *cont, struct cftype *cft)
 {
 	struct cpuset *cs = cgroup_cs(cont);
 =======
+=======
+>>>>>>> v3.18
  */
 static int cpuset_common_seq_show(struct seq_file *sf, void *v)
 {
@@ -2465,6 +2803,9 @@ out_unlock:
 static u64 cpuset_read_u64(struct cgroup_subsys_state *css, struct cftype *cft)
 {
 	struct cpuset *cs = css_cs(css);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpuset_filetype_t type = cft->private;
 	switch (type) {
@@ -2495,9 +2836,15 @@ static u64 cpuset_read_u64(struct cgroup_subsys_state *css, struct cftype *cft)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static s64 cpuset_read_s64(struct cgroup *cont, struct cftype *cft)
 {
 	struct cpuset *cs = cgroup_cs(cont);
+=======
+static s64 cpuset_read_s64(struct cgroup_subsys_state *css, struct cftype *cft)
+{
+	struct cpuset *cs = css_cs(css);
+>>>>>>> v3.18
 =======
 static s64 cpuset_read_s64(struct cgroup_subsys_state *css, struct cftype *cft)
 {
@@ -2524,8 +2871,13 @@ static struct cftype files[] = {
 	{
 		.name = "cpus",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.read = cpuset_common_file_read,
 		.write_string = cpuset_write_resmask,
+=======
+		.seq_show = cpuset_common_seq_show,
+		.write = cpuset_write_resmask,
+>>>>>>> v3.18
 =======
 		.seq_show = cpuset_common_seq_show,
 		.write = cpuset_write_resmask,
@@ -2537,8 +2889,13 @@ static struct cftype files[] = {
 	{
 		.name = "mems",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.read = cpuset_common_file_read,
 		.write_string = cpuset_write_resmask,
+=======
+		.seq_show = cpuset_common_seq_show,
+		.write = cpuset_write_resmask,
+>>>>>>> v3.18
 =======
 		.seq_show = cpuset_common_seq_show,
 		.write = cpuset_write_resmask,
@@ -2549,7 +2906,10 @@ static struct cftype files[] = {
 
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.name = "effective_cpus",
 		.seq_show = cpuset_common_seq_show,
 		.private = FILE_EFFECTIVE_CPULIST,
@@ -2562,6 +2922,9 @@ static struct cftype files[] = {
 	},
 
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name = "cpu_exclusive",
 		.read_u64 = cpuset_read_u64,
@@ -2640,6 +3003,7 @@ static struct cftype files[] = {
 /*
  *	cpuset_css_alloc - allocate a cpuset css
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	cont:	control group that the new cpuset will be part of
  */
 
@@ -2649,6 +3013,8 @@ static struct cgroup_subsys_state *cpuset_css_alloc(struct cgroup *cont)
 
 	if (!cont->parent)
 =======
+=======
+>>>>>>> v3.18
  *	cgrp:	control group that the new cpuset will be part of
  */
 
@@ -2658,6 +3024,9 @@ cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
 	struct cpuset *cs;
 
 	if (!parent_css)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return &top_cpuset.css;
 
@@ -2665,6 +3034,7 @@ cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
 	if (!cs)
 		return ERR_PTR(-ENOMEM);
 	if (!alloc_cpumask_var(&cs->cpus_allowed, GFP_KERNEL))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_allowed;
 	if (!alloc_cpumask_var(&cs->cpus_requested, GFP_KERNEL))
@@ -2677,6 +3047,8 @@ cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
 	fmeter_init(&cs->fmeter);
 	INIT_WORK(&cs->hotplug_work, cpuset_propagate_hotplug_workfn);
 =======
+=======
+>>>>>>> v3.18
 		goto free_cs;
 	if (!alloc_cpumask_var(&cs->effective_cpus, GFP_KERNEL))
 		goto free_cpus;
@@ -2687,15 +3059,24 @@ cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
 	cpumask_clear(cs->effective_cpus);
 	nodes_clear(cs->effective_mems);
 	fmeter_init(&cs->fmeter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cs->relax_domain_level = -1;
 
 	return &cs->css;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_requested:
 	free_cpumask_var(cs->cpus_allowed);
 error_allowed:
+=======
+free_cpus:
+	free_cpumask_var(cs->cpus_allowed);
+free_cs:
+>>>>>>> v3.18
 =======
 free_cpus:
 	free_cpumask_var(cs->cpus_allowed);
@@ -2706,6 +3087,7 @@ free_cs:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpuset_css_online(struct cgroup *cgrp)
 {
 	struct cpuset *cs = cgroup_cs(cgrp);
@@ -2713,12 +3095,17 @@ static int cpuset_css_online(struct cgroup *cgrp)
 	struct cpuset *tmp_cs;
 	struct cgroup *pos_cg;
 =======
+=======
+>>>>>>> v3.18
 static int cpuset_css_online(struct cgroup_subsys_state *css)
 {
 	struct cpuset *cs = css_cs(css);
 	struct cpuset *parent = parent_cs(cs);
 	struct cpuset *tmp_cs;
 	struct cgroup_subsys_state *pos_css;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!parent)
@@ -2733,10 +3120,13 @@ static int cpuset_css_online(struct cgroup_subsys_state *css)
 		set_bit(CS_SPREAD_SLAB, &cs->flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	number_of_cpusets++;
 
 	if (!test_bit(CGRP_CPUSET_CLONE_CHILDREN, &cgrp->flags))
 =======
+=======
+>>>>>>> v3.18
 	cpuset_inc();
 
 	mutex_lock(&callback_mutex);
@@ -2747,6 +3137,9 @@ static int cpuset_css_online(struct cgroup_subsys_state *css)
 	mutex_unlock(&callback_mutex);
 
 	if (!test_bit(CGRP_CPUSET_CLONE_CHILDREN, &css->cgroup->flags))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_unlock;
 
@@ -2765,7 +3158,11 @@ static int cpuset_css_online(struct cgroup_subsys_state *css)
 	 */
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuset_for_each_child(tmp_cs, pos_cg, parent) {
+=======
+	cpuset_for_each_child(tmp_cs, pos_css, parent) {
+>>>>>>> v3.18
 =======
 	cpuset_for_each_child(tmp_cs, pos_css, parent) {
 >>>>>>> v3.18
@@ -2780,7 +3177,10 @@ static int cpuset_css_online(struct cgroup_subsys_state *css)
 	cs->mems_allowed = parent->mems_allowed;
 	cpumask_copy(cs->cpus_allowed, parent->cpus_allowed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpumask_copy(cs->cpus_requested, parent->cpus_requested);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&callback_mutex);
@@ -2790,10 +3190,13 @@ out_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cpuset_css_offline(struct cgroup *cgrp)
 {
 	struct cpuset *cs = cgroup_cs(cgrp);
 =======
+=======
+>>>>>>> v3.18
 /*
  * If the cpuset being removed has its flag 'sched_load_balance'
  * enabled, then simulate turning sched_load_balance off, which
@@ -2803,6 +3206,9 @@ static void cpuset_css_offline(struct cgroup *cgrp)
 static void cpuset_css_offline(struct cgroup_subsys_state *css)
 {
 	struct cpuset *cs = css_cs(css);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&cpuset_mutex);
@@ -2811,7 +3217,11 @@ static void cpuset_css_offline(struct cgroup_subsys_state *css)
 		update_flag(CS_SCHED_LOAD_BALANCE, cs, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	number_of_cpusets--;
+=======
+	cpuset_dec();
+>>>>>>> v3.18
 =======
 	cpuset_dec();
 >>>>>>> v3.18
@@ -2820,6 +3230,7 @@ static void cpuset_css_offline(struct cgroup_subsys_state *css)
 	mutex_unlock(&cpuset_mutex);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * If the cpuset being removed has its flag 'sched_load_balance'
@@ -2850,6 +3261,8 @@ struct cgroup_subsys cpuset_subsys = {
 	.base_cftypes = files,
 	.early_init = 1,
 =======
+=======
+>>>>>>> v3.18
 static void cpuset_css_free(struct cgroup_subsys_state *css)
 {
 	struct cpuset *cs = css_cs(css);
@@ -2888,6 +3301,9 @@ struct cgroup_subsys cpuset_cgrp_subsys = {
 	.bind		= cpuset_bind,
 	.legacy_cftypes	= files,
 	.early_init	= 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2904,6 +3320,7 @@ int __init cpuset_init(void)
 	if (!alloc_cpumask_var(&top_cpuset.cpus_allowed, GFP_KERNEL))
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!alloc_cpumask_var(&top_cpuset.cpus_requested, GFP_KERNEL))
 		BUG();
 
@@ -2911,6 +3328,8 @@ int __init cpuset_init(void)
 	cpumask_setall(top_cpuset.cpus_requested);
 	nodes_setall(top_cpuset.mems_allowed);
 =======
+=======
+>>>>>>> v3.18
 	if (!alloc_cpumask_var(&top_cpuset.effective_cpus, GFP_KERNEL))
 		BUG();
 
@@ -2918,6 +3337,9 @@ int __init cpuset_init(void)
 	nodes_setall(top_cpuset.mems_allowed);
 	cpumask_setall(top_cpuset.effective_cpus);
 	nodes_setall(top_cpuset.effective_mems);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fmeter_init(&top_cpuset.fmeter);
@@ -2932,7 +3354,10 @@ int __init cpuset_init(void)
 		BUG();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	number_of_cpusets = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2959,6 +3384,7 @@ static void remove_tasks_in_empty_cpuset(struct cpuset *cs)
 		parent = parent_cs(parent);
 
 	if (cgroup_transfer_tasks(parent->css.cgroup, cs->css.cgroup)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcu_read_lock();
 		printk(KERN_ERR "cpuset: failed to transfer tasks out of empty cpuset %s\n",
@@ -3009,6 +3435,8 @@ static void cpuset_propagate_hotplug_workfn(struct work_struct *work)
 	is_empty = cpumask_empty(cs->cpus_allowed) ||
 		nodes_empty(cs->mems_allowed);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("cpuset: failed to transfer tasks out of empty cpuset ");
 		pr_cont_cgroup_name(cs->css.cgroup);
 		pr_cont("\n");
@@ -3040,11 +3468,15 @@ hotplug_update_tasks_legacy(struct cpuset *cs,
 
 	is_empty = cpumask_empty(cs->cpus_allowed) ||
 		   nodes_empty(cs->mems_allowed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&cpuset_mutex);
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * If @cs became empty, move tasks to the nearest ancestor with
 	 * execution resources.  This is full cgroup operation which will
@@ -3054,10 +3486,16 @@ hotplug_update_tasks_legacy(struct cpuset *cs,
 	 * This is full cgroup operation which will also call back into
 	 * cpuset. Should be done outside any lock.
 >>>>>>> v3.18
+=======
+	 * Move tasks to the nearest ancestor with execution resources,
+	 * This is full cgroup operation which will also call back into
+	 * cpuset. Should be done outside any lock.
+>>>>>>> v3.18
 	 */
 	if (is_empty)
 		remove_tasks_in_empty_cpuset(cs);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* the following may free @cs, should be the last operation */
 	css_put(&cs->css);
@@ -3087,6 +3525,8 @@ static void schedule_cpuset_propagate_hotplug(struct cpuset *cs)
 	if (!queue_work(cpuset_propagate_hotplug_wq, &cs->hotplug_work))
 		css_put(&cs->css);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&cpuset_mutex);
 }
 
@@ -3153,6 +3593,9 @@ retry:
 					    cpus_updated, mems_updated);
 
 	mutex_unlock(&cpuset_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3167,8 +3610,13 @@ retry:
  *
  * Non-root cpusets are only affected by offlining.  If any CPUs or memory
 <<<<<<< HEAD
+<<<<<<< HEAD
  * nodes have been taken down, cpuset_propagate_hotplug() is invoked on all
  * descendants.
+=======
+ * nodes have been taken down, cpuset_hotplug_update_tasks() is invoked on
+ * all descendants.
+>>>>>>> v3.18
 =======
  * nodes have been taken down, cpuset_hotplug_update_tasks() is invoked on
  * all descendants.
@@ -3180,15 +3628,21 @@ retry:
 static void cpuset_hotplug_workfn(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static cpumask_t new_cpus, tmp_cpus;
 	static nodemask_t new_mems, tmp_mems;
 	bool cpus_updated, mems_updated;
 	bool cpus_offlined, mems_offlined;
 =======
+=======
+>>>>>>> v3.18
 	static cpumask_t new_cpus;
 	static nodemask_t new_mems;
 	bool cpus_updated, mems_updated;
 	bool on_dfl = cgroup_on_dfl(top_cpuset.css.cgroup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&cpuset_mutex);
@@ -3197,6 +3651,7 @@ static void cpuset_hotplug_workfn(struct work_struct *work)
 	cpumask_copy(&new_cpus, cpu_active_mask);
 	new_mems = node_states[N_MEMORY];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpus_updated = !cpumask_equal(top_cpuset.cpus_allowed, &new_cpus);
 	cpus_offlined = cpumask_andnot(&tmp_cpus, top_cpuset.cpus_allowed,
@@ -3209,12 +3664,22 @@ static void cpuset_hotplug_workfn(struct work_struct *work)
 	cpus_updated = !cpumask_equal(top_cpuset.effective_cpus, &new_cpus);
 	mems_updated = !nodes_equal(top_cpuset.effective_mems, new_mems);
 >>>>>>> v3.18
+=======
+	cpus_updated = !cpumask_equal(top_cpuset.effective_cpus, &new_cpus);
+	mems_updated = !nodes_equal(top_cpuset.effective_mems, new_mems);
+>>>>>>> v3.18
 
 	/* synchronize cpus_allowed to cpu_active_mask */
 	if (cpus_updated) {
 		mutex_lock(&callback_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpumask_copy(top_cpuset.cpus_allowed, &new_cpus);
+=======
+		if (!on_dfl)
+			cpumask_copy(top_cpuset.cpus_allowed, &new_cpus);
+		cpumask_copy(top_cpuset.effective_cpus, &new_cpus);
+>>>>>>> v3.18
 =======
 		if (!on_dfl)
 			cpumask_copy(top_cpuset.cpus_allowed, &new_cpus);
@@ -3226,6 +3691,7 @@ static void cpuset_hotplug_workfn(struct work_struct *work)
 
 	/* synchronize mems_allowed to N_MEMORY */
 	if (mems_updated) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tmp_mems = top_cpuset.mems_allowed;
 		mutex_lock(&callback_mutex);
@@ -3250,6 +3716,8 @@ static void cpuset_hotplug_workfn(struct work_struct *work)
 	/* wait for propagations to finish */
 	flush_workqueue(cpuset_propagate_hotplug_wq);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&callback_mutex);
 		if (!on_dfl)
 			top_cpuset.mems_allowed = new_mems;
@@ -3278,6 +3746,9 @@ static void cpuset_hotplug_workfn(struct work_struct *work)
 		}
 		rcu_read_unlock();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* rebuild sched domains if cpus_allowed has changed */
@@ -3328,6 +3799,7 @@ void __init cpuset_init_smp(void)
 	cpumask_copy(top_cpuset.cpus_allowed, cpu_active_mask);
 	top_cpuset.mems_allowed = node_states[N_MEMORY];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	register_hotmemory_notifier(&cpuset_track_online_nodes_nb);
 
@@ -3335,12 +3807,17 @@ void __init cpuset_init_smp(void)
 		alloc_ordered_workqueue("cpuset_hotplug", 0);
 	BUG_ON(!cpuset_propagate_hotplug_wq);
 =======
+=======
+>>>>>>> v3.18
 	top_cpuset.old_mems_allowed = top_cpuset.mems_allowed;
 
 	cpumask_copy(top_cpuset.effective_cpus, cpu_active_mask);
 	top_cpuset.effective_mems = node_states[N_MEMORY];
 
 	register_hotmemory_notifier(&cpuset_track_online_nodes_nb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3359,9 +3836,15 @@ void cpuset_cpus_allowed(struct task_struct *tsk, struct cpumask *pmask)
 {
 	mutex_lock(&callback_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task_lock(tsk);
 	guarantee_online_cpus(task_cs(tsk), pmask);
 	task_unlock(tsk);
+=======
+	rcu_read_lock();
+	guarantee_online_cpus(task_cs(tsk), pmask);
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	guarantee_online_cpus(task_cs(tsk), pmask);
@@ -3373,12 +3856,17 @@ void cpuset_cpus_allowed(struct task_struct *tsk, struct cpumask *pmask)
 void cpuset_cpus_allowed_fallback(struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cpuset *cs;
 
 	rcu_read_lock();
 	cs = task_cs(tsk);
 	if (cs)
 		do_set_cpus_allowed(tsk, cs->cpus_allowed);
+=======
+	rcu_read_lock();
+	do_set_cpus_allowed(tsk, task_cs(tsk)->effective_cpus);
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	do_set_cpus_allowed(tsk, task_cs(tsk)->effective_cpus);
@@ -3425,9 +3913,15 @@ nodemask_t cpuset_mems_allowed(struct task_struct *tsk)
 
 	mutex_lock(&callback_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task_lock(tsk);
 	guarantee_online_mems(task_cs(tsk), &mask);
 	task_unlock(tsk);
+=======
+	rcu_read_lock();
+	guarantee_online_mems(task_cs(tsk), &mask);
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	guarantee_online_mems(task_cs(tsk), &mask);
@@ -3456,7 +3950,11 @@ int cpuset_nodemask_valid_mems_allowed(nodemask_t *nodemask)
  * (an unusual configuration), then returns the root cpuset.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpuset *nearest_hardwall_ancestor(const struct cpuset *cs)
+=======
+static struct cpuset *nearest_hardwall_ancestor(struct cpuset *cs)
+>>>>>>> v3.18
 =======
 static struct cpuset *nearest_hardwall_ancestor(struct cpuset *cs)
 >>>>>>> v3.18
@@ -3530,7 +4028,11 @@ static struct cpuset *nearest_hardwall_ancestor(struct cpuset *cs)
 int __cpuset_node_allowed_softwall(int node, gfp_t gfp_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cpuset *cs;	/* current cpuset ancestors */
+=======
+	struct cpuset *cs;		/* current cpuset ancestors */
+>>>>>>> v3.18
 =======
 	struct cpuset *cs;		/* current cpuset ancestors */
 >>>>>>> v3.18
@@ -3557,15 +4059,21 @@ int __cpuset_node_allowed_softwall(int node, gfp_t gfp_mask)
 	mutex_lock(&callback_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task_lock(current);
 	cs = nearest_hardwall_ancestor(task_cs(current));
 	allowed = node_isset(node, cs->mems_allowed);
 	task_unlock(current);
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	cs = nearest_hardwall_ancestor(task_cs(current));
 	allowed = node_isset(node, cs->mems_allowed);
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&callback_mutex);
@@ -3690,16 +4198,22 @@ int cpuset_mems_allowed_intersects(const struct task_struct *tsk1,
 /**
  * cpuset_print_task_mems_allowed - prints task's cpuset and mems_allowed
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @task: pointer to task_struct of some task.
  *
  * Description: Prints @task's name, cpuset name, and cached copy of its
  * mems_allowed to the kernel log.  Must hold task_lock(task) to allow
  * dereferencing task_cs(task).
 =======
+=======
+>>>>>>> v3.18
  * @tsk: pointer to task_struct of some task.
  *
  * Description: Prints @task's name, cpuset name, and cached copy of its
  * mems_allowed to the kernel log.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void cpuset_print_task_mems_allowed(struct task_struct *tsk)
@@ -3707,6 +4221,7 @@ void cpuset_print_task_mems_allowed(struct task_struct *tsk)
 	 /* Statically allocated to prevent using excess stack. */
 	static char cpuset_nodelist[CPUSET_NODELIST_LEN];
 	static DEFINE_SPINLOCK(cpuset_buffer_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	struct cgroup *cgrp = task_cs(tsk)->css.cgroup;
@@ -3722,6 +4237,8 @@ void cpuset_print_task_mems_allowed(struct task_struct *tsk)
 	spin_unlock(&cpuset_buffer_lock);
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	struct cgroup *cgrp;
 
 	spin_lock(&cpuset_buffer_lock);
@@ -3736,6 +4253,9 @@ void cpuset_print_task_mems_allowed(struct task_struct *tsk)
 
 	rcu_read_unlock();
 	spin_unlock(&cpuset_buffer_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3768,9 +4288,15 @@ int cpuset_memory_pressure_enabled __read_mostly;
 void __cpuset_memory_pressure_bump(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task_lock(current);
 	fmeter_markevent(&task_cs(current)->fmeter);
 	task_unlock(current);
+=======
+	rcu_read_lock();
+	fmeter_markevent(&task_cs(current)->fmeter);
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	fmeter_markevent(&task_cs(current)->fmeter);
@@ -3789,21 +4315,28 @@ void __cpuset_memory_pressure_bump(void)
  *    anyway.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_cpuset_show(struct seq_file *m, void *unused_v)
 {
 	struct pid *pid;
 	struct task_struct *tsk;
 	char *buf;
 =======
+=======
+>>>>>>> v3.18
 int proc_cpuset_show(struct seq_file *m, struct pid_namespace *ns,
 		     struct pid *pid, struct task_struct *tsk)
 {
 	char *buf, *p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cgroup_subsys_state *css;
 	int retval;
 
 	retval = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buf = kmalloc(PAGE_SIZE, GFP_KERNEL);
 	if (!buf)
@@ -3826,6 +4359,8 @@ int proc_cpuset_show(struct seq_file *m, struct pid_namespace *ns,
 out_put_task:
 	put_task_struct(tsk);
 =======
+=======
+>>>>>>> v3.18
 	buf = kmalloc(PATH_MAX, GFP_KERNEL);
 	if (!buf)
 		goto out;
@@ -3840,6 +4375,9 @@ out_put_task:
 	seq_puts(m, p);
 	seq_putc(m, '\n');
 	retval = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_free:
 	kfree(buf);
@@ -3852,6 +4390,7 @@ out:
 void cpuset_task_status_allowed(struct seq_file *m, struct task_struct *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m, "Mems_allowed:\t");
 	seq_nodemask(m, &task->mems_allowed);
 	seq_printf(m, "\n");
@@ -3859,11 +4398,16 @@ void cpuset_task_status_allowed(struct seq_file *m, struct task_struct *task)
 	seq_nodemask_list(m, &task->mems_allowed);
 	seq_printf(m, "\n");
 =======
+=======
+>>>>>>> v3.18
 	seq_puts(m, "Mems_allowed:\t");
 	seq_nodemask(m, &task->mems_allowed);
 	seq_puts(m, "\n");
 	seq_puts(m, "Mems_allowed_list:\t");
 	seq_nodemask_list(m, &task->mems_allowed);
 	seq_puts(m, "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -982,7 +982,11 @@ struct lbs_private *lbs_add_card(void *card, struct device *dmdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(0, "wlan%d", ether_setup);
+=======
+	dev = alloc_netdev(0, "wlan%d", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(0, "wlan%d", NET_NAME_UNKNOWN, ether_setup);
 >>>>>>> v3.18

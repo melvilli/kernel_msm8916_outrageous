@@ -7,6 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -175,7 +180,11 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		vma = find_vma(mm, addr);
 		if (TASK_SIZE - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18
@@ -376,8 +385,11 @@ static void truncate_hugepages(struct inode *inode, loff_t lstart)
 static void hugetlbfs_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_hugepages(inode, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct resv_map *resv_map;
 
 	truncate_hugepages(inode, 0);
@@ -385,6 +397,9 @@ static void hugetlbfs_evict_inode(struct inode *inode)
 	/* root inode doesn't have the resv_map, so we should check it */
 	if (resv_map)
 		resv_map_release(&resv_map->refs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clear_inode(inode);
 }
@@ -483,7 +498,10 @@ static struct inode *hugetlbfs_get_root(struct super_block *sb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Hugetlbfs is not reclaimable; therefore its i_mmap_mutex will never
  * be taken from reclaim -- unlike regular filesystems. This needs an
@@ -492,6 +510,9 @@ static struct inode *hugetlbfs_get_root(struct super_block *sb,
  */
 static struct lock_class_key hugetlbfs_i_mmap_mutex_key;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct inode *hugetlbfs_get_inode(struct super_block *sb,
 					struct inode *dir,
@@ -499,12 +520,18 @@ static struct inode *hugetlbfs_get_inode(struct super_block *sb,
 {
 	struct inode *inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct resv_map *resv_map;
 
 	resv_map = resv_map_alloc();
 	if (!resv_map)
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	inode = new_inode(sb);
@@ -513,17 +540,23 @@ static struct inode *hugetlbfs_get_inode(struct super_block *sb,
 		inode->i_ino = get_next_ino();
 		inode_init_owner(inode, dir, mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inode->i_mapping->a_ops = &hugetlbfs_aops;
 		inode->i_mapping->backing_dev_info =&hugetlbfs_backing_dev_info;
 		inode->i_atime = inode->i_mtime = inode->i_ctime = CURRENT_TIME;
 		INIT_LIST_HEAD(&inode->i_mapping->private_list);
 =======
+=======
+>>>>>>> v3.18
 		lockdep_set_class(&inode->i_mapping->i_mmap_mutex,
 				&hugetlbfs_i_mmap_mutex_key);
 		inode->i_mapping->a_ops = &hugetlbfs_aops;
 		inode->i_mapping->backing_dev_info =&hugetlbfs_backing_dev_info;
 		inode->i_atime = inode->i_mtime = inode->i_ctime = CURRENT_TIME;
 		inode->i_mapping->private_data = resv_map;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		info = HUGETLBFS_I(inode);
 		/*
@@ -555,7 +588,13 @@ static struct inode *hugetlbfs_get_inode(struct super_block *sb,
 		}
 		lockdep_annotate_inode_mutex_key(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+	} else
+		kref_put(&resv_map->refs, resv_map_release);
+
+>>>>>>> v3.18
 =======
 	} else
 		kref_put(&resv_map->refs, resv_map_release);
@@ -854,8 +893,12 @@ hugetlbfs_parse_options(char *options, struct hugetlbfs_config *pconfig)
 			pconfig->hstate = size_to_hstate(ps);
 			if (!pconfig->hstate) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR
 				"hugetlbfs: Unsupported page size %lu MB\n",
+=======
+				pr_err("Unsupported page size %lu MB\n",
+>>>>>>> v3.18
 =======
 				pr_err("Unsupported page size %lu MB\n",
 >>>>>>> v3.18
@@ -867,8 +910,12 @@ hugetlbfs_parse_options(char *options, struct hugetlbfs_config *pconfig)
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "hugetlbfs: Bad mount option: \"%s\"\n",
 				 p);
+=======
+			pr_err("Bad mount option: \"%s\"\n", p);
+>>>>>>> v3.18
 =======
 			pr_err("Bad mount option: \"%s\"\n", p);
 >>>>>>> v3.18
@@ -892,8 +939,12 @@ hugetlbfs_parse_options(char *options, struct hugetlbfs_config *pconfig)
 
 bad_val:
 <<<<<<< HEAD
+<<<<<<< HEAD
  	printk(KERN_ERR "hugetlbfs: Bad value '%s' for mount option '%s'\n",
 	       args[0].from, p);
+=======
+	pr_err("Bad value '%s' for mount option '%s'\n", args[0].from, p);
+>>>>>>> v3.18
 =======
 	pr_err("Bad value '%s' for mount option '%s'\n", args[0].from, p);
 >>>>>>> v3.18
@@ -945,8 +996,12 @@ hugetlbfs_fill_super(struct super_block *sb, void *data, int silent)
 	return 0;
 out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sbinfo->spool)
 		kfree(sbinfo->spool);
+=======
+	kfree(sbinfo->spool);
+>>>>>>> v3.18
 =======
 	kfree(sbinfo->spool);
 >>>>>>> v3.18
@@ -986,7 +1041,11 @@ static int get_hstate_idx(int page_size_log)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry_operations anon_ops = {
+=======
+static const struct dentry_operations anon_ops = {
+>>>>>>> v3.18
 =======
 static const struct dentry_operations anon_ops = {
 >>>>>>> v3.18
@@ -1021,8 +1080,12 @@ struct file *hugetlb_file_setup(const char *name, size_t size,
 		if (user_shm_lock(size, *user)) {
 			task_lock(current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk_once(KERN_WARNING
 				"%s (%d): Using mlock ulimits for SHM_HUGETLB is deprecated\n",
+=======
+			pr_warn_once("%s (%d): Using mlock ulimits for SHM_HUGETLB is deprecated\n",
+>>>>>>> v3.18
 =======
 			pr_warn_once("%s (%d): Using mlock ulimits for SHM_HUGETLB is deprecated\n",
 >>>>>>> v3.18
@@ -1085,12 +1148,18 @@ static int __init init_hugetlbfs_fs(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!hugepages_supported()) {
 		pr_info("disabling because there are no supported hugepage sizes\n");
 		return -ENOTSUPP;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = bdi_init(&hugetlbfs_backing_dev_info);
 	if (error)
@@ -1118,7 +1187,11 @@ static int __init init_hugetlbfs_fs(void)
 
 		if (IS_ERR(hugetlbfs_vfsmount[i])) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("hugetlb: Cannot mount internal hugetlbfs for "
+=======
+			pr_err("Cannot mount internal hugetlbfs for "
+>>>>>>> v3.18
 =======
 			pr_err("Cannot mount internal hugetlbfs for "
 >>>>>>> v3.18

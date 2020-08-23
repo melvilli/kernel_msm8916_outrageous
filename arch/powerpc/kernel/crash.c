@@ -18,7 +18,10 @@
 #include <linux/crash_dump.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/irq.h>
@@ -86,7 +89,11 @@ void crash_ipi_callback(struct pt_regs *regs)
 
 	atomic_inc(&cpus_in_crash);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_mb__after_atomic_inc();
+=======
+	smp_mb__after_atomic();
+>>>>>>> v3.18
 =======
 	smp_mb__after_atomic();
 >>>>>>> v3.18

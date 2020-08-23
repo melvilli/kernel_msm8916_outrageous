@@ -10,13 +10,19 @@
 #define __LINUX_UIO_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <uapi/linux/uio.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <uapi/linux/uio.h>
 
 struct page;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct kvec {
@@ -25,7 +31,10 @@ struct kvec {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	ITER_IOVEC = 0,
 	ITER_KVEC = 2,
@@ -43,6 +52,9 @@ struct iov_iter {
 	unsigned long nr_segs;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Total number of bytes covered by an iovec.
@@ -62,11 +74,14 @@ static inline size_t iov_length(const struct iovec *iov, unsigned long nr_segs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long iov_shorten(struct iovec *iov, unsigned long nr_segs, size_t to);
 
 int memcpy_fromiovec(unsigned char *kdata, struct iovec *iov, int len);
 int memcpy_toiovec(struct iovec *iov, unsigned char *kdata, int len);
 =======
+=======
+>>>>>>> v3.18
 static inline struct iovec iov_iter_iovec(const struct iov_iter *iter)
 {
 	return (struct iovec) {
@@ -145,5 +160,8 @@ int memcpy_fromiovecend(unsigned char *kdata, const struct iovec *iov,
 int memcpy_toiovecend(const struct iovec *v, unsigned char *kdata,
 		      int offset, int len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

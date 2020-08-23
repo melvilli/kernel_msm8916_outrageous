@@ -26,6 +26,10 @@
 #include <linux/slab.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ratelimit.h>
+>>>>>>> v3.18
 =======
 #include <linux/ratelimit.h>
 >>>>>>> v3.18
@@ -50,6 +54,7 @@ void ext4_exit_pageio(void)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This function is called by ext4_evict_inode() to make sure there is
  * no more pending I/O completion work left to do.
@@ -80,6 +85,8 @@ void ext4_free_io_end(ext4_io_end_t *io)
 
 /* check a range of space and convert unwritten extents to written. */
 =======
+=======
+>>>>>>> v3.18
  * Print an buffer I/O error compatible with the fs/buffer.c.  This
  * provides compatibility with dmesg scrapers that look for a specific
  * buffer I/O error message.  We really need a unified error reporting
@@ -177,6 +184,9 @@ static void ext4_clear_io_unwritten_flag(ext4_io_end_t *io_end)
  * cannot get to ext4_ext_truncate() before all IOs overlapping that range are
  * completed (happens from ext4_free_ioend()).
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ext4_end_io(ext4_io_end_t *io)
 {
@@ -184,6 +194,10 @@ static int ext4_end_io(ext4_io_end_t *io)
 	loff_t offset = io->offset;
 	ssize_t size = io->size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	handle_t *handle = io->handle;
+>>>>>>> v3.18
 =======
 	handle_t *handle = io->handle;
 >>>>>>> v3.18
@@ -194,7 +208,12 @@ static int ext4_end_io(ext4_io_end_t *io)
 		   io, inode->i_ino, io->list.next, io->list.prev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ext4_convert_unwritten_extents(inode, offset, size);
+=======
+	io->handle = NULL;	/* Following call will use up the handle */
+	ret = ext4_convert_unwritten_extents(handle, inode, offset, size);
+>>>>>>> v3.18
 =======
 	io->handle = NULL;	/* Following call will use up the handle */
 	ret = ext4_convert_unwritten_extents(handle, inode, offset, size);
@@ -206,6 +225,7 @@ static int ext4_end_io(ext4_io_end_t *io)
 			 "(inode %lu, offset %llu, size %zd, error %d)",
 			 inode->i_ino, offset, size, ret);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Wake up anyone waiting on unwritten extent conversion */
 	if (atomic_dec_and_test(&EXT4_I(inode)->i_unwritten))
@@ -219,18 +239,24 @@ static int ext4_end_io(ext4_io_end_t *io)
 
 static void dump_completed_IO(struct inode *inode)
 =======
+=======
+>>>>>>> v3.18
 	ext4_clear_io_unwritten_flag(io);
 	ext4_release_io_end(io);
 	return ret;
 }
 
 static void dump_completed_IO(struct inode *inode, struct list_head *head)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 #ifdef	EXT4FS_DEBUG
 	struct list_head *cur, *before, *after;
 	ext4_io_end_t *io, *io0, *io1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (list_empty(&EXT4_I(inode)->i_completed_io_list)) {
 		ext4_debug("inode %lu completed_io list is empty\n",
@@ -241,11 +267,16 @@ static void dump_completed_IO(struct inode *inode, struct list_head *head)
 	ext4_debug("Dump inode %lu completed_io list\n", inode->i_ino);
 	list_for_each_entry(io, &EXT4_I(inode)->i_completed_io_list, list) {
 =======
+=======
+>>>>>>> v3.18
 	if (list_empty(head))
 		return;
 
 	ext4_debug("Dump inode %lu completed io list\n", inode->i_ino);
 	list_for_each_entry(io, head, list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cur = &io->list;
 		before = cur->prev;
@@ -260,6 +291,7 @@ static void dump_completed_IO(struct inode *inode, struct list_head *head)
 }
 
 /* Add the io_end to per-inode completed end_io list. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ext4_add_complete_io(ext4_io_end_t *io_end)
 {
@@ -279,6 +311,8 @@ void ext4_add_complete_io(ext4_io_end_t *io_end)
 
 static int ext4_do_flush_completed_IO(struct inode *inode)
 =======
+=======
+>>>>>>> v3.18
 static void ext4_add_complete_io(ext4_io_end_t *io_end)
 {
 	struct ext4_inode_info *ei = EXT4_I(io_end->inode);
@@ -299,6 +333,9 @@ static void ext4_add_complete_io(ext4_io_end_t *io_end)
 
 static int ext4_do_flush_completed_IO(struct inode *inode,
 				      struct list_head *head)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	ext4_io_end_t *io;
@@ -309,8 +346,13 @@ static int ext4_do_flush_completed_IO(struct inode *inode,
 
 	spin_lock_irqsave(&ei->i_completed_io_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_completed_IO(inode);
 	list_replace_init(&ei->i_completed_io_list, &unwritten);
+=======
+	dump_completed_IO(inode, head);
+	list_replace_init(head, &unwritten);
+>>>>>>> v3.18
 =======
 	dump_completed_IO(inode, head);
 	list_replace_init(head, &unwritten);
@@ -326,8 +368,11 @@ static int ext4_do_flush_completed_IO(struct inode *inode,
 		if (unlikely(!ret && err))
 			ret = err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		io->flag &= ~EXT4_IO_END_UNWRITTEN;
 		ext4_free_io_end(io);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -335,6 +380,7 @@ static int ext4_do_flush_completed_IO(struct inode *inode,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * work on completed aio dio IO, to convert unwritten extents to extents
  */
@@ -354,6 +400,8 @@ int ext4_flush_unwritten_io(struct inode *inode)
 	ext4_unwritten_wait(inode);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
  * work on completed IO, to convert unwritten extents to extents
  */
 void ext4_end_io_rsv_work(struct work_struct *work)
@@ -361,6 +409,9 @@ void ext4_end_io_rsv_work(struct work_struct *work)
 	struct ext4_inode_info *ei = container_of(work, struct ext4_inode_info,
 						  i_rsv_conversion_work);
 	ext4_do_flush_completed_IO(&ei->vfs_inode, &ei->i_rsv_conversion_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -372,6 +423,10 @@ ext4_io_end_t *ext4_init_io_end(struct inode *inode, gfp_t flags)
 		io->inode = inode;
 		INIT_LIST_HEAD(&io->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic_set(&io->count, 1);
+>>>>>>> v3.18
 =======
 		atomic_set(&io->count, 1);
 >>>>>>> v3.18
@@ -379,6 +434,7 @@ ext4_io_end_t *ext4_init_io_end(struct inode *inode, gfp_t flags)
 	return io;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Print an buffer I/O error compatible with the fs/buffer.c.  This
@@ -457,6 +513,8 @@ static void ext4_end_bio(struct bio *bio, int error)
 			     "(offset %llu size %ld starting block %llu)",
 			     inode->i_ino,
 =======
+=======
+>>>>>>> v3.18
 void ext4_put_io_end_defer(ext4_io_end_t *io_end)
 {
 	if (atomic_dec_and_test(&io_end->count)) {
@@ -508,11 +566,15 @@ static void ext4_end_bio(struct bio *bio, int error)
 		ext4_warning(inode->i_sb, "I/O error %d writing to inode %lu "
 			     "(offset %llu size %ld starting block %llu)",
 			     error, inode->i_ino,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     (unsigned long long) io_end->offset,
 			     (long) io_end->size,
 			     (unsigned long long)
 			     bi_sector >> (inode->i_blkbits - 9));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -523,6 +585,8 @@ static void ext4_end_bio(struct bio *bio, int error)
 
 	ext4_add_complete_io(io_end);
 =======
+=======
+>>>>>>> v3.18
 		mapping_set_error(inode->i_mapping, error);
 	}
 
@@ -543,6 +607,9 @@ static void ext4_end_bio(struct bio *bio, int error)
 		ext4_finish_bio(bio);
 		bio_put(bio);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -557,6 +624,7 @@ void ext4_io_submit(struct ext4_io_submit *io)
 		bio_put(io->io_bio);
 	}
 	io->io_bio = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	io->io_op = 0;
 	io->io_end = NULL;
@@ -586,6 +654,8 @@ static int io_submit_init(struct ext4_io_submit *io,
 	io->io_bio = bio;
 	io->io_op = (wbc->sync_mode == WB_SYNC_ALL ?  WRITE_SYNC : WRITE);
 =======
+=======
+>>>>>>> v3.18
 }
 
 void ext4_io_submit_init(struct ext4_io_submit *io,
@@ -610,6 +680,9 @@ static int io_submit_init_bio(struct ext4_io_submit *io,
 	bio->bi_end_io = ext4_end_bio;
 	bio->bi_private = ext4_get_io_end(io->io_end);
 	io->io_bio = bio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	io->io_next_block = bh->b_blocknr;
 	return 0;
@@ -618,10 +691,15 @@ static int io_submit_init_bio(struct ext4_io_submit *io,
 static int io_submit_add_bh(struct ext4_io_submit *io,
 			    struct inode *inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct writeback_control *wbc,
 			    struct buffer_head *bh)
 {
 	ext4_io_end_t *io_end;
+=======
+			    struct buffer_head *bh)
+{
+>>>>>>> v3.18
 =======
 			    struct buffer_head *bh)
 {
@@ -633,6 +711,7 @@ submit_and_retry:
 		ext4_io_submit(io);
 	}
 	if (io->io_bio == NULL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = io_submit_init(io, inode, wbc, bh);
 		if (ret)
@@ -647,6 +726,8 @@ submit_and_retry:
 	if (ret != bh->b_size)
 		goto submit_and_retry;
 =======
+=======
+>>>>>>> v3.18
 		ret = io_submit_init_bio(io, bh);
 		if (ret)
 			return ret;
@@ -655,6 +736,9 @@ submit_and_retry:
 	if (ret != bh->b_size)
 		goto submit_and_retry;
 	io->io_next_block++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -663,7 +747,12 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
 			struct page *page,
 			int len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct writeback_control *wbc)
+=======
+			struct writeback_control *wbc,
+			bool keep_towrite)
+>>>>>>> v3.18
 =======
 			struct writeback_control *wbc,
 			bool keep_towrite)
@@ -681,12 +770,15 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
 	BUG_ON(PageWriteback(page));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_page_writeback(page);
 	ClearPageError(page);
 
 	/*
 	 * Comments copied from block_write_full_page_endio:
 =======
+=======
+>>>>>>> v3.18
 	if (keep_towrite)
 		set_page_writeback_keepwrite(page);
 	else
@@ -695,6 +787,9 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
 
 	/*
 	 * Comments copied from block_write_full_page:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *
 	 * The page straddles i_size.  It must be zeroed out on each and every
@@ -742,7 +837,11 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
 		if (!buffer_async_write(bh))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = io_submit_add_bh(io, inode, wbc, bh);
+=======
+		ret = io_submit_add_bh(io, inode, bh);
+>>>>>>> v3.18
 =======
 		ret = io_submit_add_bh(io, inode, bh);
 >>>>>>> v3.18

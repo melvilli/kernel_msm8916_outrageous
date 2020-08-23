@@ -46,7 +46,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -64,6 +67,12 @@
 #define USB_PRODUCT_IPHONE_4	0x1297
 #define USB_PRODUCT_IPAD 0x129a
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PRODUCT_IPAD_2	0x12a2
+#define USB_PRODUCT_IPAD_3	0x12a6
+#define USB_PRODUCT_IPAD_MINI    0x12ab
+>>>>>>> v3.18
 =======
 #define USB_PRODUCT_IPAD_2	0x12a2
 #define USB_PRODUCT_IPAD_3	0x12a6
@@ -117,7 +126,10 @@ static struct usb_device_id ipheth_table[] = {
 		IPHETH_USBINTF_PROTO) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		USB_VENDOR_APPLE, USB_PRODUCT_IPAD_2,
 		IPHETH_USBINTF_CLASS, IPHETH_USBINTF_SUBCLASS,
 		IPHETH_USBINTF_PROTO) },
@@ -130,6 +142,9 @@ static struct usb_device_id ipheth_table[] = {
 		IPHETH_USBINTF_CLASS, IPHETH_USBINTF_SUBCLASS,
 		IPHETH_USBINTF_PROTO) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		USB_VENDOR_APPLE, USB_PRODUCT_IPHONE_4_VZW,
 		IPHETH_USBINTF_CLASS, IPHETH_USBINTF_SUBCLASS,
@@ -545,7 +560,11 @@ static int ipheth_probe(struct usb_interface *intf,
 
 	SET_NETDEV_DEV(netdev, &intf->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ops);
+=======
+	netdev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ops;
 >>>>>>> v3.18

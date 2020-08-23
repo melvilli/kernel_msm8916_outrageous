@@ -33,7 +33,10 @@ config BSC9131_RDB
 	  Manufacturer : Freescale Semiconductor, Inc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config C293_PCIE
 	  bool "Freescale C293PCIE"
 	  select DEFAULT_UIMAGE
@@ -49,6 +52,9 @@ config BSC9132_QDS
 	  and dual StarCore SC3850 DSP cores.
 	  Manufacturer : Freescale Semiconductor, Inc
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MPC8540_ADS
 	bool "Freescale MPC8540 ADS"
@@ -130,12 +136,15 @@ config P1022_RDK
 	  reference board.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config P1023_RDS
 	bool "Freescale P1023 RDS"
 	select DEFAULT_UIMAGE
 	help
 	  This option enables support for the P1023 RDS board
 =======
+=======
+>>>>>>> v3.18
 config P1023_RDB
 	bool "Freescale P1023 RDB"
 	select DEFAULT_UIMAGE
@@ -147,6 +156,9 @@ config TWR_P102x
 	select DEFAULT_UIMAGE
 	help
 	  This option enables support for the TWR-P1025 board.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SOCRATES
@@ -245,6 +257,7 @@ config GE_IMP3A
 	  P2020 processor.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config P2041_RDB
 	bool "Freescale P2041 RDB"
 	select DEFAULT_UIMAGE
@@ -286,12 +299,18 @@ config P4080_DS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config SGY_CTS1000
 	tristate "Servergy CTS-1000 support"
 	select GPIOLIB
 	select OF_GPIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on P4080_DS
+=======
+	depends on CORENET_GENERIC
+>>>>>>> v3.18
 =======
 	depends on CORENET_GENERIC
 >>>>>>> v3.18
@@ -300,6 +319,7 @@ config SGY_CTS1000
 
 endif # PPC32
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config P5020_DS
 	bool "Freescale P5020 DS"
@@ -331,6 +351,8 @@ config P5040_DS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config PPC_QEMU_E500
 	bool "QEMU generic e500 platform"
 	select DEFAULT_UIMAGE
@@ -347,10 +369,15 @@ config PPC_QEMU_E500
 	  of KVM).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if PPC64
 
 config T4240_QDS
 	bool "Freescale T4240 QDS"
+=======
+config CORENET_GENERIC
+	bool "Freescale CoreNet Generic"
+>>>>>>> v3.18
 =======
 config CORENET_GENERIC
 	bool "Freescale CoreNet Generic"
@@ -365,6 +392,7 @@ config CORENET_GENERIC
 	select HAS_RAPIDIO
 	select PPC_EPAPR_HV_PIC
 	help
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  This option enables support for the T4240 QDS board
 
@@ -387,6 +415,8 @@ config B4_QDS
 
 endif
 =======
+=======
+>>>>>>> v3.18
 	  This option enables support for the FSL CoreNet based boards.
 	  For 32bit kernel, the following boards are supported:
 	    P2041 RDB, P3041 DS, P4080 DS, kmcoge4, and OCA4080
@@ -395,6 +425,9 @@ endif
 	  The following boards are supported for both 32bit and 64bit kernel:
 	    P5020 DS, P5040 DS and T104xQDS/RDB
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # FSL_SOC_BOOKE
 

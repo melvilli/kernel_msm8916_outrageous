@@ -27,6 +27,10 @@
 #include <linux/platform_device.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -233,7 +237,12 @@ static int fakelb_probe(struct platform_device *pdev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv = kzalloc(sizeof(struct fakelb_priv), GFP_KERNEL);
+=======
+	priv = devm_kzalloc(&pdev->dev, sizeof(struct fakelb_priv),
+			    GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	priv = devm_kzalloc(&pdev->dev, sizeof(struct fakelb_priv),
 			    GFP_KERNEL);
@@ -258,7 +267,10 @@ err_slave:
 	list_for_each_entry(dp, &priv->list, list)
 		fakelb_del(dp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(priv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_alloc:
@@ -273,7 +285,10 @@ static int fakelb_remove(struct platform_device *pdev)
 	list_for_each_entry_safe(dp, temp, &priv->list, list)
 		fakelb_del(dp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(priv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

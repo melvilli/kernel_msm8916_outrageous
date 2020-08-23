@@ -27,6 +27,10 @@ struct kgdb_state {
 	long			kgdb_usethreadid;
 	struct pt_regs		*linux_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t		*send_ready;
+>>>>>>> v3.18
 =======
 	atomic_t		*send_ready;
 >>>>>>> v3.18

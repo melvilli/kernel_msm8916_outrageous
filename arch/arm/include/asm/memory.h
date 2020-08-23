@@ -19,6 +19,11 @@
 #include <linux/sizes.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cache.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/cache.h>
 
@@ -34,6 +39,7 @@
 #define UL(x) _AC(x, UL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMU
 
 /*
@@ -43,6 +49,8 @@
  */
 #define PAGE_OFFSET		UL(CONFIG_PAGE_OFFSET)
 =======
+=======
+>>>>>>> v3.18
 /* PAGE_OFFSET - the virtual address of the start of the kernel image */
 #define PAGE_OFFSET		UL(CONFIG_PAGE_OFFSET)
 
@@ -52,6 +60,9 @@
  * TASK_SIZE - the maximum size of a user space task.
  * TASK_UNMAPPED_BASE - the lower boundary of the mmap VM area
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TASK_SIZE		(UL(CONFIG_PAGE_OFFSET) - UL(SZ_16M))
 #define TASK_UNMAPPED_BASE	ALIGN(TASK_SIZE / 3, SZ_16M)
@@ -98,8 +109,11 @@
 #define IOREMAP_MAX_ORDER	24
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CONSISTENT_END		(0xffe00000UL)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else /* CONFIG_MMU */
@@ -111,9 +125,13 @@
  * Fortunately, there is no reference for this in noMMU mode, for now.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef TASK_SIZE
 #define TASK_SIZE		(CONFIG_DRAM_SIZE)
 #endif
+=======
+#define TASK_SIZE		UL(0xffffffff)
+>>>>>>> v3.18
 =======
 #define TASK_SIZE		UL(0xffffffff)
 >>>>>>> v3.18
@@ -127,10 +145,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef PAGE_OFFSET
 #define PAGE_OFFSET		PLAT_PHYS_OFFSET
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -166,6 +187,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PLAT_PHYS_OFFSET is the offset (from zero) of the start of physical
  * memory.  This is used for XIP and NoMMU kernels, or by kernels which
  * have their own mach/memory.h.  Assembly code must always use
@@ -175,6 +197,8 @@
 #define PLAT_PHYS_OFFSET	UL(CONFIG_PHYS_OFFSET)
 #endif
 =======
+=======
+>>>>>>> v3.18
  * Minimum guaranted alignment in pgd_alloc().  The page table pointers passed
  * around in head.S and proc-*.S are shifted by this amount, in order to
  * leave spare high bits for systems with physical address extension.  This
@@ -195,6 +219,9 @@
  * PLAT_PHYS_OFFSET and not PHYS_OFFSET.
  */
 #define PLAT_PHYS_OFFSET	UL(CONFIG_PHYS_OFFSET)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
@@ -204,10 +231,13 @@
  * private definitions which should NOT be used outside memory.h
  * files.  Use virt_to_phys/phys_to_virt/__pa/__va instead.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #ifndef __virt_to_phys
 #ifdef CONFIG_ARM_PATCH_PHYS_VIRT
 =======
+=======
+>>>>>>> v3.18
  *
  * PFNs are used to describe any physical page; this means
  * PFN 0 == physical address 0.
@@ -219,6 +249,9 @@
 #define virt_to_pfn(kaddr) (__pa(kaddr) >> PAGE_SHIFT)
 
 #elif defined(CONFIG_ARM_PATCH_PHYS_VIRT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -227,10 +260,13 @@
  */
 #define __PV_BITS_31_24	0x81000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern unsigned long __pv_phys_offset;
 #define PHYS_OFFSET __pv_phys_offset
 =======
+=======
+>>>>>>> v3.18
 #define __PV_BITS_7_0	0x81
 
 extern unsigned long __pv_phys_pfn_offset;
@@ -244,6 +280,9 @@ extern const void *__pv_table_begin, *__pv_table_end;
 #define virt_to_pfn(kaddr) \
 	((((unsigned long)(kaddr) - PAGE_OFFSET) >> PAGE_SHIFT) + \
 	 PHYS_PFN_OFFSET)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __pv_stub(from,to,instr,type)			\
@@ -255,6 +294,7 @@ extern const void *__pv_table_begin, *__pv_table_end;
 	: "=r" (to)					\
 	: "r" (from), "I" (type))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned long __virt_to_phys(unsigned long x)
 {
@@ -289,6 +329,8 @@ static inline unsigned long __phys_to_virt(unsigned long x)
  */
 #define PHYS_PFN_OFFSET	((unsigned long)(PHYS_OFFSET >> PAGE_SHIFT))
 =======
+=======
+>>>>>>> v3.18
 #define __pv_stub_mov_hi(t)				\
 	__asm__ volatile("@ __pv_stub_mov\n"		\
 	"1:	mov	%R0, %1\n"			\
@@ -356,6 +398,9 @@ static inline unsigned long __phys_to_virt(phys_addr_t x)
 	 PHYS_PFN_OFFSET)
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -372,7 +417,11 @@ static inline phys_addr_t virt_to_phys(const volatile void *x)
 static inline void *phys_to_virt(phys_addr_t x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (void *)(__phys_to_virt((unsigned long)(x)));
+=======
+	return (void *)__phys_to_virt(x);
+>>>>>>> v3.18
 =======
 	return (void *)__phys_to_virt(x);
 >>>>>>> v3.18
@@ -383,10 +432,13 @@ static inline void *phys_to_virt(phys_addr_t x)
  */
 #define __pa(x)			__virt_to_phys((unsigned long)(x))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __va(x)			((void *)__phys_to_virt((unsigned long)(x)))
 #define pfn_to_kaddr(pfn)	__va((pfn) << PAGE_SHIFT)
 
 =======
+=======
+>>>>>>> v3.18
 #define __va(x)			((void *)__phys_to_virt((phys_addr_t)(x)))
 #define pfn_to_kaddr(pfn)	__va((pfn) << PAGE_SHIFT)
 
@@ -407,6 +459,9 @@ static inline phys_addr_t __virt_to_idmap(unsigned long x)
 
 #define virt_to_idmap(x)	__virt_to_idmap((unsigned long)(x))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Virtual <-> DMA view memory address translations
@@ -437,12 +492,15 @@ static inline __deprecated void *bus_to_virt(unsigned long x)
  * Conversion between a struct page and a physical address.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note: when converting an unknown physical address to a
  * struct page, the resulting pointer must be validated
  * using VALID_PAGE().  It must return an invalid struct page
  * for any physical address not corresponding to a system
  * RAM address.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  page_to_pfn(page)	convert a struct page * to a PFN number
@@ -453,6 +511,7 @@ static inline __deprecated void *bus_to_virt(unsigned long x)
  */
 #define ARCH_PFN_OFFSET		PHYS_PFN_OFFSET
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define virt_to_page(kaddr)	pfn_to_page(__pa(kaddr) >> PAGE_SHIFT)
 #define virt_addr_valid(kaddr)	(((unsigned long)(kaddr) >= PAGE_OFFSET && (unsigned long)(kaddr) < (unsigned long)high_memory) \
@@ -465,10 +524,15 @@ static inline __deprecated void *bus_to_virt(unsigned long x)
 #define arch_has_speculative_dfetch()	0
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define virt_to_page(kaddr)	pfn_to_page(virt_to_pfn(kaddr))
 #define virt_addr_valid(kaddr)	(((unsigned long)(kaddr) >= PAGE_OFFSET && (unsigned long)(kaddr) < (unsigned long)high_memory) \
 					&& pfn_valid(virt_to_pfn(kaddr)))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

@@ -23,6 +23,10 @@
 #include <linux/device.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci_hotplug.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci_hotplug.h>
 >>>>>>> v3.18
@@ -110,6 +114,7 @@ static bool pcie_ari_disabled;
  * including the given PCI bus and its list of child PCI buses.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char pci_bus_max_busnr(struct pci_bus* bus)
 {
 	struct list_head *tmp;
@@ -120,6 +125,8 @@ unsigned char pci_bus_max_busnr(struct pci_bus* bus)
 		n = pci_bus_max_busnr(pci_bus_b(tmp));
 		if(n > max)
 =======
+=======
+>>>>>>> v3.18
 unsigned char pci_bus_max_busnr(struct pci_bus *bus)
 {
 	struct pci_bus *tmp;
@@ -129,6 +136,9 @@ unsigned char pci_bus_max_busnr(struct pci_bus *bus)
 	list_for_each_entry(tmp, &bus->children, node) {
 		n = pci_bus_max_busnr(tmp);
 		if (n > max)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			max = n;
 	}
@@ -214,7 +224,11 @@ static int __pci_bus_find_cap_start(struct pci_bus *bus,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_find_capability - query for devices' capabilities 
+=======
+ * pci_find_capability - query for devices' capabilities
+>>>>>>> v3.18
 =======
  * pci_find_capability - query for devices' capabilities
 >>>>>>> v3.18
@@ -227,6 +241,7 @@ static int __pci_bus_find_cap_start(struct pci_bus *bus,
  * support it.  Possible values for @cap:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  %PCI_CAP_ID_PM           Power Management 
  *  %PCI_CAP_ID_AGP          Accelerated Graphics Port 
  *  %PCI_CAP_ID_VPD          Vital Product Data 
@@ -234,12 +249,17 @@ static int __pci_bus_find_cap_start(struct pci_bus *bus,
  *  %PCI_CAP_ID_MSI          Message Signalled Interrupts
  *  %PCI_CAP_ID_CHSWP        CompactPCI HotSwap 
 =======
+=======
+>>>>>>> v3.18
  *  %PCI_CAP_ID_PM           Power Management
  *  %PCI_CAP_ID_AGP          Accelerated Graphics Port
  *  %PCI_CAP_ID_VPD          Vital Product Data
  *  %PCI_CAP_ID_SLOTID       Slot Identification
  *  %PCI_CAP_ID_MSI          Message Signalled Interrupts
  *  %PCI_CAP_ID_CHSWP        CompactPCI HotSwap
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  %PCI_CAP_ID_PCIX         PCI-X
  *  %PCI_CAP_ID_EXP          PCI Express
@@ -255,14 +275,20 @@ int pci_find_capability(struct pci_dev *dev, int cap)
 	return pos;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * pci_bus_find_capability - query for devices' capabilities 
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(pci_find_capability);
 
 /**
  * pci_bus_find_capability - query for devices' capabilities
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @bus:   the PCI bus to query
  * @devfn: PCI device to query
@@ -270,7 +296,11 @@ EXPORT_SYMBOL(pci_find_capability);
  *
  * Like pci_find_capability() but works for pci devices that do not have a
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_dev structure set up yet. 
+=======
+ * pci_dev structure set up yet.
+>>>>>>> v3.18
 =======
  * pci_dev structure set up yet.
 >>>>>>> v3.18
@@ -293,6 +323,10 @@ int pci_bus_find_capability(struct pci_bus *bus, unsigned int devfn, int cap)
 	return pos;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_bus_find_capability);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_bus_find_capability);
 >>>>>>> v3.18
@@ -445,6 +479,7 @@ EXPORT_SYMBOL_GPL(pci_find_ht_capability);
  *
  *  For given resource region of given device, return the resource
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  region of parent bus the given region is contained in or where
  *  it should be allocated from.
  */
@@ -455,6 +490,8 @@ pci_find_parent_resource(const struct pci_dev *dev, struct resource *res)
 	int i;
 	struct resource *best = NULL, *r;
 =======
+=======
+>>>>>>> v3.18
  *  region of parent bus the given region is contained in.
  */
 struct resource *pci_find_parent_resource(const struct pci_dev *dev,
@@ -463,11 +500,15 @@ struct resource *pci_find_parent_resource(const struct pci_dev *dev,
 	const struct pci_bus *bus = dev->bus;
 	struct resource *r;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_bus_for_each_resource(bus, r, i) {
 		if (!r)
 			continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (res->start && !(res->start >= r->start && res->end <= r->end))
 			continue;	/* Not contained */
@@ -484,6 +525,8 @@ struct resource *pci_find_parent_resource(const struct pci_dev *dev,
 	}
 	return best;
 =======
+=======
+>>>>>>> v3.18
 		if (res->start && resource_contains(r, res)) {
 
 			/*
@@ -533,6 +576,9 @@ int pci_wait_for_pending(struct pci_dev *dev, int pos, u16 mask)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -544,8 +590,12 @@ int pci_wait_for_pending(struct pci_dev *dev, int pos, u16 mask)
  * accessible by its driver.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 pci_restore_bars(struct pci_dev *dev)
+=======
+static void pci_restore_bars(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 static void pci_restore_bars(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -574,7 +624,11 @@ static inline bool platform_pci_power_manageable(struct pci_dev *dev)
 
 static inline int platform_pci_set_power_state(struct pci_dev *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 pci_power_t t)
+=======
+					       pci_power_t t)
+>>>>>>> v3.18
 =======
 					       pci_power_t t)
 >>>>>>> v3.18
@@ -630,7 +684,11 @@ static int pci_raw_set_power_state(struct pci_dev *dev, pci_power_t state)
 
 	/* Validate current state:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Can enter D0 from any state, but if we can only go deeper 
+=======
+	 * Can enter D0 from any state, but if we can only go deeper
+>>>>>>> v3.18
 =======
 	 * Can enter D0 from any state, but if we can only go deeper
 >>>>>>> v3.18
@@ -639,8 +697,13 @@ static int pci_raw_set_power_state(struct pci_dev *dev, pci_power_t state)
 	if (state != PCI_D0 && dev->current_state <= PCI_D3cold
 	    && dev->current_state > state) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->dev, "invalid power transition "
 			"(from state %d to %d)\n", dev->current_state, state);
+=======
+		dev_err(&dev->dev, "invalid power transition (from state %d to %d)\n",
+			dev->current_state, state);
+>>>>>>> v3.18
 =======
 		dev_err(&dev->dev, "invalid power transition (from state %d to %d)\n",
 			dev->current_state, state);
@@ -692,8 +755,13 @@ static int pci_raw_set_power_state(struct pci_dev *dev, pci_power_t state)
 	dev->current_state = (pmcsr & PCI_PM_CTRL_STATE_MASK);
 	if (dev->current_state != state && printk_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&dev->dev, "Refused to change power state, "
 			"currently in D%d\n", dev->current_state);
+=======
+		dev_info(&dev->dev, "Refused to change power state, currently in D%d\n",
+			 dev->current_state);
+>>>>>>> v3.18
 =======
 		dev_info(&dev->dev, "Refused to change power state, currently in D%d\n",
 			 dev->current_state);
@@ -786,7 +854,10 @@ static int pci_platform_power_transition(struct pci_dev *dev, pci_power_t state)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pci_wakeup - Wake up a PCI device
  * @pci_dev: Device to handle.
  * @ign: ignored parameter
@@ -809,6 +880,9 @@ static void pci_wakeup_bus(struct pci_bus *bus)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * __pci_start_power_transition - Start power transition of a PCI device
  * @dev: PCI device to handle.
@@ -936,6 +1010,7 @@ int pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 	if (!__pci_complete_power_transition(dev, state))
 		error = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * When aspm_policy is "powersave" this call ensures
 	 * that ASPM is configured.
@@ -946,10 +1021,15 @@ int pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 	return error;
 }
 =======
+=======
+>>>>>>> v3.18
 
 	return error;
 }
 EXPORT_SYMBOL(pci_set_power_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -967,7 +1047,11 @@ pci_power_t pci_choose_state(struct pci_dev *dev, pm_message_t state)
 	pci_power_t ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pci_find_capability(dev, PCI_CAP_ID_PM))
+=======
+	if (!dev->pm_cap)
+>>>>>>> v3.18
 =======
 	if (!dev->pm_cap)
 >>>>>>> v3.18
@@ -994,7 +1078,10 @@ pci_power_t pci_choose_state(struct pci_dev *dev, pm_message_t state)
 	return PCI_D0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(pci_choose_state);
@@ -1002,9 +1089,14 @@ EXPORT_SYMBOL(pci_choose_state);
 #define PCI_EXP_SAVE_REGS	7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct pci_cap_saved_state *pci_find_saved_cap(
 	struct pci_dev *pci_dev, char cap)
+=======
+static struct pci_cap_saved_state *_pci_find_saved_cap(struct pci_dev *pci_dev,
+						       u16 cap, bool extended)
+>>>>>>> v3.18
 =======
 static struct pci_cap_saved_state *_pci_find_saved_cap(struct pci_dev *pci_dev,
 						       u16 cap, bool extended)
@@ -1014,7 +1106,11 @@ static struct pci_cap_saved_state *_pci_find_saved_cap(struct pci_dev *pci_dev,
 
 	hlist_for_each_entry(tmp, &pci_dev->saved_cap_space, next) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tmp->cap.cap_nr == cap)
+=======
+		if (tmp->cap.cap_extended == extended && tmp->cap.cap_nr == cap)
+>>>>>>> v3.18
 =======
 		if (tmp->cap.cap_extended == extended && tmp->cap.cap_nr == cap)
 >>>>>>> v3.18
@@ -1024,7 +1120,10 @@ static struct pci_cap_saved_state *_pci_find_saved_cap(struct pci_dev *pci_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct pci_cap_saved_state *pci_find_saved_cap(struct pci_dev *dev, char cap)
 {
 	return _pci_find_saved_cap(dev, cap, false);
@@ -1035,6 +1134,9 @@ struct pci_cap_saved_state *pci_find_saved_ext_cap(struct pci_dev *dev, u16 cap)
 	return _pci_find_saved_cap(dev, cap, true);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pci_save_pcie_state(struct pci_dev *dev)
 {
@@ -1126,8 +1228,12 @@ static void pci_restore_pcix_state(struct pci_dev *dev)
  * @dev: - PCI device that we're dealing with
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 pci_save_state(struct pci_dev *dev)
+=======
+int pci_save_state(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 int pci_save_state(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -1138,6 +1244,7 @@ int pci_save_state(struct pci_dev *dev)
 		pci_read_config_dword(dev, i * 4, &dev->saved_config_space[i]);
 	dev->state_saved = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((i = pci_save_pcie_state(dev)) != 0)
 		return i;
 	if ((i = pci_save_pcix_state(dev)) != 0)
@@ -1145,6 +1252,8 @@ int pci_save_state(struct pci_dev *dev)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 
 	i = pci_save_pcie_state(dev);
 	if (i != 0)
@@ -1161,6 +1270,9 @@ int pci_save_state(struct pci_dev *dev)
 	return 0;
 }
 EXPORT_SYMBOL(pci_save_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void pci_restore_config_dword(struct pci_dev *pdev, int offset,
@@ -1174,8 +1286,13 @@ static void pci_restore_config_dword(struct pci_dev *pdev, int offset,
 
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&pdev->dev, "restoring config space at offset "
 			"%#x (was %#x, writing %#x)\n", offset, val, saved_val);
+=======
+		dev_dbg(&pdev->dev, "restoring config space at offset %#x (was %#x, writing %#x)\n",
+			offset, val, saved_val);
+>>>>>>> v3.18
 =======
 		dev_dbg(&pdev->dev, "restoring config space at offset %#x (was %#x, writing %#x)\n",
 			offset, val, saved_val);
@@ -1216,7 +1333,11 @@ static void pci_restore_config_space(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** 
+=======
+/**
+>>>>>>> v3.18
 =======
 /**
 >>>>>>> v3.18
@@ -1232,6 +1353,10 @@ void pci_restore_state(struct pci_dev *dev)
 	pci_restore_pcie_state(dev);
 	pci_restore_ats_state(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_restore_vc_state(dev);
+>>>>>>> v3.18
 =======
 	pci_restore_vc_state(dev);
 >>>>>>> v3.18
@@ -1245,6 +1370,10 @@ void pci_restore_state(struct pci_dev *dev)
 	dev->state_saved = false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_restore_state);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_restore_state);
 >>>>>>> v3.18
@@ -1260,7 +1389,11 @@ struct pci_saved_state {
  * @dev: PCI device that we're dealing with
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Rerturn NULL if no state or error.
+=======
+ * Return NULL if no state or error.
+>>>>>>> v3.18
 =======
  * Return NULL if no state or error.
 >>>>>>> v3.18
@@ -1305,7 +1438,12 @@ EXPORT_SYMBOL_GPL(pci_store_saved_state);
  * @state: Saved state returned from pci_store_saved_state()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pci_load_saved_state(struct pci_dev *dev, struct pci_saved_state *state)
+=======
+static int pci_load_saved_state(struct pci_dev *dev,
+				struct pci_saved_state *state)
+>>>>>>> v3.18
 =======
 static int pci_load_saved_state(struct pci_dev *dev,
 				struct pci_saved_state *state)
@@ -1326,7 +1464,11 @@ static int pci_load_saved_state(struct pci_dev *dev,
 		struct pci_cap_saved_state *tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = pci_find_saved_cap(dev, cap->cap_nr);
+=======
+		tmp = _pci_find_saved_cap(dev, cap->cap_nr, cap->cap_extended);
+>>>>>>> v3.18
 =======
 		tmp = _pci_find_saved_cap(dev, cap->cap_nr, cap->cap_extended);
 >>>>>>> v3.18
@@ -1342,7 +1484,10 @@ static int pci_load_saved_state(struct pci_dev *dev,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(pci_load_saved_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1363,10 +1508,13 @@ int pci_load_and_free_saved_state(struct pci_dev *dev,
 EXPORT_SYMBOL_GPL(pci_load_and_free_saved_state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_pci_enable_device(struct pci_dev *dev, int bars)
 {
 	int err;
 =======
+=======
+>>>>>>> v3.18
 int __weak pcibios_enable_device(struct pci_dev *dev, int bars)
 {
 	return pci_enable_resources(dev, bars);
@@ -1376,6 +1524,9 @@ static int do_pci_enable_device(struct pci_dev *dev, int bars)
 {
 	int err;
 	struct pci_dev *bridge;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 cmd;
 	u8 pin;
@@ -1384,12 +1535,18 @@ static int do_pci_enable_device(struct pci_dev *dev, int bars)
 	if (err < 0 && err != -EIO)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	bridge = pci_upstream_bridge(dev);
 	if (bridge)
 		pcie_aspm_powersave_config_link(bridge);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = pcibios_enable_device(dev, bars);
 	if (err < 0)
@@ -1424,10 +1581,13 @@ int pci_reenable_device(struct pci_dev *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int pci_enable_device_flags(struct pci_dev *dev, unsigned long flags)
 {
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(pci_reenable_device);
 
 static void pci_enable_bridge(struct pci_dev *dev)
@@ -1455,6 +1615,9 @@ static void pci_enable_bridge(struct pci_dev *dev)
 static int pci_enable_device_flags(struct pci_dev *dev, unsigned long flags)
 {
 	struct pci_dev *bridge;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 	int i, bars = 0;
@@ -1475,11 +1638,17 @@ static int pci_enable_device_flags(struct pci_dev *dev, unsigned long flags)
 		return 0;		/* already enabled */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bridge = pci_upstream_bridge(dev);
 	if (bridge)
 		pci_enable_bridge(bridge);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* only skip sriov related */
 	for (i = 0; i <= PCI_ROM_RESOURCE; i++)
@@ -1508,6 +1677,10 @@ int pci_enable_device_io(struct pci_dev *dev)
 	return pci_enable_device_flags(dev, IORESOURCE_IO);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_enable_device_io);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_enable_device_io);
 >>>>>>> v3.18
@@ -1525,6 +1698,10 @@ int pci_enable_device_mem(struct pci_dev *dev)
 	return pci_enable_device_flags(dev, IORESOURCE_MEM);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_enable_device_mem);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_enable_device_mem);
 >>>>>>> v3.18
@@ -1545,6 +1722,10 @@ int pci_enable_device(struct pci_dev *dev)
 	return pci_enable_device_flags(dev, IORESOURCE_MEM | IORESOURCE_IO);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_enable_device);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_enable_device);
 >>>>>>> v3.18
@@ -1586,7 +1767,11 @@ static void pcim_release(struct device *gendev, void *res)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_devres * get_pci_dr(struct pci_dev *pdev)
+=======
+static struct pci_devres *get_pci_dr(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static struct pci_devres *get_pci_dr(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -1604,7 +1789,11 @@ static struct pci_devres *get_pci_dr(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_devres * find_pci_dr(struct pci_dev *pdev)
+=======
+static struct pci_devres *find_pci_dr(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static struct pci_devres *find_pci_dr(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -1639,6 +1828,10 @@ int pcim_enable_device(struct pci_dev *pdev)
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pcim_enable_device);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pcim_enable_device);
 >>>>>>> v3.18
@@ -1661,6 +1854,10 @@ void pcim_pin_device(struct pci_dev *pdev)
 		dr->pinned = 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pcim_pin_device);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pcim_pin_device);
 >>>>>>> v3.18
@@ -1674,7 +1871,11 @@ EXPORT_SYMBOL(pcim_pin_device);
  * implementations can override this.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __weak pcibios_add_device (struct pci_dev *dev)
+=======
+int __weak pcibios_add_device(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 int __weak pcibios_add_device(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -1684,7 +1885,10 @@ int __weak pcibios_add_device(struct pci_dev *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pcibios_release_device - provide arch specific hooks when releasing device dev
  * @dev: the PCI device being released
  *
@@ -1695,6 +1899,9 @@ int __weak pcibios_add_device(struct pci_dev *dev)
 void __weak pcibios_release_device(struct pci_dev *dev) {}
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pcibios_disable_device - disable arch specific PCI resources for device dev
  * @dev: the PCI device to disable
@@ -1706,7 +1913,10 @@ void __weak pcibios_release_device(struct pci_dev *dev) {}
 void __weak pcibios_disable_device (struct pci_dev *dev) {}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * pcibios_penalize_isa_irq - penalize an ISA IRQ
  * @irq: ISA IRQ to penalize
@@ -1718,6 +1928,9 @@ void __weak pcibios_disable_device (struct pci_dev *dev) {}
  */
 void __weak pcibios_penalize_isa_irq(int irq, int active) {}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void do_pci_disable_device(struct pci_dev *dev)
 {
@@ -1756,8 +1969,12 @@ void pci_disable_enabled_device(struct pci_dev *dev)
  * pci_enable_device() have called pci_disable_device().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 pci_disable_device(struct pci_dev *dev)
+=======
+void pci_disable_device(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 void pci_disable_device(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -1779,6 +1996,10 @@ void pci_disable_device(struct pci_dev *dev)
 	dev->is_busmaster = 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_disable_device);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_disable_device);
 >>>>>>> v3.18
@@ -1811,6 +2032,10 @@ int pci_set_pcie_reset_state(struct pci_dev *dev, enum pcie_reset_state state)
 	return pcibios_set_pcie_reset_state(dev, state);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(pci_set_pcie_reset_state);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(pci_set_pcie_reset_state);
 >>>>>>> v3.18
@@ -1881,6 +2106,7 @@ void pci_pme_wakeup_bus(struct pci_bus *bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * pci_wakeup - Wake up a PCI device
  * @pci_dev: Device to handle.
@@ -1904,6 +2130,8 @@ void pci_wakeup_bus(struct pci_bus *bus)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /**
  * pci_pme_capable - check the capability of PCI device to generate PME#
@@ -1918,6 +2146,10 @@ bool pci_pme_capable(struct pci_dev *dev, pci_power_t state)
 	return !!(dev->pme_support & (1 << state));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_pme_capable);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_pme_capable);
 >>>>>>> v3.18
@@ -1927,6 +2159,7 @@ static void pci_pme_list_scan(struct work_struct *work)
 	struct pci_pme_device *pme_dev, *n;
 
 	mutex_lock(&pci_pme_list_mutex);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!list_empty(&pci_pme_list)) {
 		list_for_each_entry_safe(pme_dev, n, &pci_pme_list, list) {
@@ -1952,6 +2185,8 @@ static void pci_pme_list_scan(struct work_struct *work)
 					      msecs_to_jiffies(PME_TIMEOUT));
 	}
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_safe(pme_dev, n, &pci_pme_list, list) {
 		if (pme_dev->dev->pme_poll) {
 			struct pci_dev *bridge;
@@ -1973,6 +2208,9 @@ static void pci_pme_list_scan(struct work_struct *work)
 	if (!list_empty(&pci_pme_list))
 		schedule_delayed_work(&pci_pme_work,
 				      msecs_to_jiffies(PME_TIMEOUT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&pci_pme_list_mutex);
 }
@@ -2026,13 +2264,19 @@ void pci_pme_active(struct pci_dev *dev, bool enable)
 			pme_dev = kmalloc(sizeof(struct pci_pme_device),
 					  GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!pme_dev)
 				goto out;
 =======
+=======
+>>>>>>> v3.18
 			if (!pme_dev) {
 				dev_warn(&dev->dev, "can't enable PME#\n");
 				return;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pme_dev->dev = dev;
 			mutex_lock(&pci_pme_list_mutex);
@@ -2055,9 +2299,15 @@ void pci_pme_active(struct pci_dev *dev, bool enable)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	dev_dbg(&dev->dev, "PME# %s\n", enable ? "enabled" : "disabled");
 }
+=======
+	dev_dbg(&dev->dev, "PME# %s\n", enable ? "enabled" : "disabled");
+}
+EXPORT_SYMBOL(pci_pme_active);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->dev, "PME# %s\n", enable ? "enabled" : "disabled");
 }
@@ -2149,6 +2399,10 @@ int pci_wake_from_d3(struct pci_dev *dev, bool enable)
 			pci_enable_wake(dev, PCI_D3hot, enable);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_wake_from_d3);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_wake_from_d3);
 >>>>>>> v3.18
@@ -2162,7 +2416,11 @@ EXPORT_SYMBOL(pci_wake_from_d3);
  * can generate wake events, based on any available PME info.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 pci_power_t pci_target_state(struct pci_dev *dev)
+=======
+static pci_power_t pci_target_state(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 static pci_power_t pci_target_state(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -2222,10 +2480,13 @@ int pci_prepare_to_sleep(struct pci_dev *dev)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* D3cold during system suspend/hibernate is not supported */
 	if (target_state > PCI_D3hot)
 		target_state = PCI_D3hot;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_enable_wake(dev, target_state, device_may_wakeup(&dev->dev));
@@ -2238,6 +2499,10 @@ int pci_prepare_to_sleep(struct pci_dev *dev)
 	return error;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_prepare_to_sleep);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_prepare_to_sleep);
 >>>>>>> v3.18
@@ -2254,6 +2519,10 @@ int pci_back_from_sleep(struct pci_dev *dev)
 	return pci_set_power_state(dev, PCI_D0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_back_from_sleep);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_back_from_sleep);
 >>>>>>> v3.18
@@ -2292,7 +2561,11 @@ int pci_finish_runtime_suspend(struct pci_dev *dev)
  * @dev: Device to check.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return true if the device itself is cabable of generating wake-up events
+=======
+ * Return true if the device itself is capable of generating wake-up events
+>>>>>>> v3.18
 =======
  * Return true if the device itself is capable of generating wake-up events
 >>>>>>> v3.18
@@ -2437,6 +2710,7 @@ static void pci_add_saved_cap(struct pci_dev *pci_dev,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_add_save_buffer - allocate buffer for saving given capability registers
  * @dev: the PCI device
  * @cap: the capability to allocate the buffer for
@@ -2445,6 +2719,8 @@ static void pci_add_saved_cap(struct pci_dev *pci_dev,
 static int pci_add_cap_save_buffer(
 	struct pci_dev *dev, char cap, unsigned int size)
 =======
+=======
+>>>>>>> v3.18
  * _pci_add_cap_save_buffer - allocate buffer for saving given
  *                            capability registers
  * @dev: the PCI device
@@ -2454,19 +2730,28 @@ static int pci_add_cap_save_buffer(
  */
 static int _pci_add_cap_save_buffer(struct pci_dev *dev, u16 cap,
 				    bool extended, unsigned int size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int pos;
 	struct pci_cap_saved_state *save_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = pci_find_capability(dev, cap);
 =======
+=======
+>>>>>>> v3.18
 	if (extended)
 		pos = pci_find_ext_capability(dev, cap);
 	else
 		pos = pci_find_capability(dev, cap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pos <= 0)
 		return 0;
@@ -2477,6 +2762,10 @@ static int _pci_add_cap_save_buffer(struct pci_dev *dev, u16 cap,
 
 	save_state->cap.cap_nr = cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	save_state->cap.cap_extended = extended;
+>>>>>>> v3.18
 =======
 	save_state->cap.cap_extended = extended;
 >>>>>>> v3.18
@@ -2487,7 +2776,10 @@ static int _pci_add_cap_save_buffer(struct pci_dev *dev, u16 cap,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int pci_add_cap_save_buffer(struct pci_dev *dev, char cap, unsigned int size)
 {
 	return _pci_add_cap_save_buffer(dev, cap, false, size);
@@ -2498,6 +2790,9 @@ int pci_add_ext_cap_save_buffer(struct pci_dev *dev, u16 cap, unsigned int size)
 	return _pci_add_cap_save_buffer(dev, cap, true, size);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * pci_allocate_cap_save_buffers - allocate buffers for saving capabilities
@@ -2518,6 +2813,11 @@ void pci_allocate_cap_save_buffers(struct pci_dev *dev)
 		dev_err(&dev->dev,
 			"unable to preallocate PCI-X save buffer\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	pci_allocate_vc_save_buffers(dev);
+>>>>>>> v3.18
 =======
 
 	pci_allocate_vc_save_buffers(dev);
@@ -2567,6 +2867,7 @@ void pci_configure_ari(struct pci_dev *dev)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * pci_enable_ido - enable ID-based Ordering on a device
@@ -2895,6 +3196,8 @@ bool pci_acs_enabled(struct pci_dev *pdev, u16 acs_flags)
  * Walk up a device tree from start to end testing PCI ACS support.  If
  * any step along the way does not support the required flags, return false.
 =======
+=======
+>>>>>>> v3.18
 static int pci_acs_enable;
 
 /**
@@ -3063,6 +3366,9 @@ bool pci_acs_enabled(struct pci_dev *pdev, u16 acs_flags)
  *
  * Walk up a device tree from start to end testing PCI ACS support.  If
  * any step along the way does not support the required flags, return false.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 bool pci_acs_path_enabled(struct pci_dev *start,
@@ -3089,7 +3395,11 @@ bool pci_acs_path_enabled(struct pci_dev *start,
  * pci_swizzle_interrupt_pin - swizzle INTx for device behind bridge
  * @dev: the PCI device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pin: the INTx pin (1=INTA, 2=INTB, 3=INTD, 4=INTD)
+=======
+ * @pin: the INTx pin (1=INTA, 2=INTB, 3=INTC, 4=INTD)
+>>>>>>> v3.18
 =======
  * @pin: the INTx pin (1=INTA, 2=INTB, 3=INTC, 4=INTD)
 >>>>>>> v3.18
@@ -3113,8 +3423,12 @@ u8 pci_swizzle_interrupt_pin(const struct pci_dev *dev, u8 pin)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 pci_get_interrupt_pin(struct pci_dev *dev, struct pci_dev **bridge)
+=======
+int pci_get_interrupt_pin(struct pci_dev *dev, struct pci_dev **bridge)
+>>>>>>> v3.18
 =======
 int pci_get_interrupt_pin(struct pci_dev *dev, struct pci_dev **bridge)
 >>>>>>> v3.18
@@ -3180,6 +3494,10 @@ void pci_release_region(struct pci_dev *pdev, int bar)
 		dr->region_mask &= ~(1 << bar);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_release_region);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_release_region);
 >>>>>>> v3.18
@@ -3199,7 +3517,11 @@ EXPORT_SYMBOL(pci_release_region);
  *	If @exclusive is set, then the region is marked so that userspace
  *	is explicitly not allowed to map the resource via /dev/mem or
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	sysfs MMIO access.
+=======
+ *	sysfs MMIO access.
+>>>>>>> v3.18
 =======
  *	sysfs MMIO access.
 >>>>>>> v3.18
@@ -3208,8 +3530,13 @@ EXPORT_SYMBOL(pci_release_region);
  *	message is also printed on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __pci_request_region(struct pci_dev *pdev, int bar, const char *res_name,
 									int exclusive)
+=======
+static int __pci_request_region(struct pci_dev *pdev, int bar,
+				const char *res_name, int exclusive)
+>>>>>>> v3.18
 =======
 static int __pci_request_region(struct pci_dev *pdev, int bar,
 				const char *res_name, int exclusive)
@@ -3220,7 +3547,11 @@ static int __pci_request_region(struct pci_dev *pdev, int bar,
 	if (pci_resource_len(pdev, bar) == 0)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3229,8 +3560,12 @@ static int __pci_request_region(struct pci_dev *pdev, int bar,
 			    pci_resource_len(pdev, bar), res_name))
 			goto err_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	else if (pci_resource_flags(pdev, bar) & IORESOURCE_MEM) {
+=======
+	} else if (pci_resource_flags(pdev, bar) & IORESOURCE_MEM) {
+>>>>>>> v3.18
 =======
 	} else if (pci_resource_flags(pdev, bar) & IORESOURCE_MEM) {
 >>>>>>> v3.18
@@ -3271,6 +3606,10 @@ int pci_request_region(struct pci_dev *pdev, int bar, const char *res_name)
 	return __pci_request_region(pdev, bar, res_name, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_request_region);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_request_region);
 >>>>>>> v3.18
@@ -3292,6 +3631,7 @@ EXPORT_SYMBOL(pci_request_region);
  *	The key difference that _exclusive makes it that userspace is
  *	explicitly not allowed to map the resource via /dev/mem or
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	sysfs.
  */
 int pci_request_region_exclusive(struct pci_dev *pdev, int bar, const char *res_name)
@@ -3299,6 +3639,8 @@ int pci_request_region_exclusive(struct pci_dev *pdev, int bar, const char *res_
 	return __pci_request_region(pdev, bar, res_name, IORESOURCE_EXCLUSIVE);
 }
 =======
+=======
+>>>>>>> v3.18
  *	sysfs.
  */
 int pci_request_region_exclusive(struct pci_dev *pdev, int bar,
@@ -3308,6 +3650,9 @@ int pci_request_region_exclusive(struct pci_dev *pdev, int bar,
 }
 EXPORT_SYMBOL(pci_request_region_exclusive);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * pci_release_selected_regions - Release selected PCI I/O and memory resources
@@ -3326,14 +3671,20 @@ void pci_release_selected_regions(struct pci_dev *pdev, int bars)
 			pci_release_region(pdev, i);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __pci_request_selected_regions(struct pci_dev *pdev, int bars,
 				 const char *res_name, int excl)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(pci_release_selected_regions);
 
 static int __pci_request_selected_regions(struct pci_dev *pdev, int bars,
 					  const char *res_name, int excl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -3346,7 +3697,11 @@ static int __pci_request_selected_regions(struct pci_dev *pdev, int bars,
 
 err_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while(--i >= 0)
+=======
+	while (--i >= 0)
+>>>>>>> v3.18
 =======
 	while (--i >= 0)
 >>>>>>> v3.18
@@ -3369,20 +3724,30 @@ int pci_request_selected_regions(struct pci_dev *pdev, int bars,
 	return __pci_request_selected_regions(pdev, bars, res_name, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int pci_request_selected_regions_exclusive(struct pci_dev *pdev,
 				 int bars, const char *res_name)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(pci_request_selected_regions);
 
 int pci_request_selected_regions_exclusive(struct pci_dev *pdev, int bars,
 					   const char *res_name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return __pci_request_selected_regions(pdev, bars, res_name,
 			IORESOURCE_EXCLUSIVE);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_request_selected_regions_exclusive);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_request_selected_regions_exclusive);
 >>>>>>> v3.18
@@ -3401,6 +3766,10 @@ void pci_release_regions(struct pci_dev *pdev)
 	pci_release_selected_regions(pdev, (1 << 6) - 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_release_regions);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_release_regions);
 >>>>>>> v3.18
@@ -3423,6 +3792,10 @@ int pci_request_regions(struct pci_dev *pdev, const char *res_name)
 	return pci_request_selected_regions(pdev, ((1 << 6) - 1), res_name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_request_regions);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_request_regions);
 >>>>>>> v3.18
@@ -3439,7 +3812,11 @@ EXPORT_SYMBOL(pci_request_regions);
  *
  *	pci_request_regions_exclusive() will mark the region so that
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	/dev/mem and the sysfs MMIO access will not be allowed.
+=======
+ *	/dev/mem and the sysfs MMIO access will not be allowed.
+>>>>>>> v3.18
 =======
  *	/dev/mem and the sysfs MMIO access will not be allowed.
 >>>>>>> v3.18
@@ -3453,7 +3830,10 @@ int pci_request_regions_exclusive(struct pci_dev *pdev, const char *res_name)
 					((1 << 6) - 1), res_name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(pci_request_regions_exclusive);
 
 /**
@@ -3486,6 +3866,9 @@ int __weak pci_remap_iospace(const struct resource *res, phys_addr_t phys_addr)
 	return -ENODEV;
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __pci_set_master(struct pci_dev *dev, bool enable)
@@ -3541,7 +3924,11 @@ void __weak pcibios_set_master(struct pci_dev *dev)
 	else
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_printk(KERN_DEBUG, &dev->dev, "setting latency timer to %d\n", lat);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3561,6 +3948,10 @@ void pci_set_master(struct pci_dev *dev)
 	pcibios_set_master(dev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_set_master);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_set_master);
 >>>>>>> v3.18
@@ -3574,6 +3965,10 @@ void pci_clear_master(struct pci_dev *dev)
 	__pci_set_master(dev, false);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_clear_master);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_clear_master);
 >>>>>>> v3.18
@@ -3610,8 +4005,13 @@ int pci_set_cacheline_size(struct pci_dev *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_printk(KERN_DEBUG, &dev->dev, "cache line size of %d is not "
 		   "supported\n", pci_cache_line_size << 2);
+=======
+	dev_printk(KERN_DEBUG, &dev->dev, "cache line size of %d is not supported\n",
+		   pci_cache_line_size << 2);
+>>>>>>> v3.18
 =======
 	dev_printk(KERN_DEBUG, &dev->dev, "cache line size of %d is not supported\n",
 		   pci_cache_line_size << 2);
@@ -3621,6 +4021,7 @@ int pci_set_cacheline_size(struct pci_dev *dev)
 }
 EXPORT_SYMBOL_GPL(pci_set_cacheline_size);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef PCI_DISABLE_MWI
 int pci_set_mwi(struct pci_dev *dev)
@@ -3641,6 +4042,8 @@ void pci_clear_mwi(struct pci_dev *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * pci_set_mwi - enables memory-write-invalidate PCI transaction
  * @dev: the PCI device for which MWI is enabled
@@ -3650,15 +4053,21 @@ void pci_clear_mwi(struct pci_dev *dev)
  * RETURNS: An appropriate -ERRNO error value on error, or zero for success.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 pci_set_mwi(struct pci_dev *dev)
 {
 =======
+=======
+>>>>>>> v3.18
 int pci_set_mwi(struct pci_dev *dev)
 {
 #ifdef PCI_DISABLE_MWI
 	return 0;
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 	u16 cmd;
@@ -3669,7 +4078,11 @@ int pci_set_mwi(struct pci_dev *dev)
 
 	pci_read_config_word(dev, PCI_COMMAND, &cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (! (cmd & PCI_COMMAND_INVALIDATE)) {
+=======
+	if (!(cmd & PCI_COMMAND_INVALIDATE)) {
+>>>>>>> v3.18
 =======
 	if (!(cmd & PCI_COMMAND_INVALIDATE)) {
 >>>>>>> v3.18
@@ -3678,14 +4091,20 @@ int pci_set_mwi(struct pci_dev *dev)
 		pci_write_config_word(dev, PCI_COMMAND, cmd);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 #endif
 }
 EXPORT_SYMBOL(pci_set_mwi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -3700,10 +4119,13 @@ EXPORT_SYMBOL(pci_set_mwi);
 int pci_try_set_mwi(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = pci_set_mwi(dev);
 	return rc;
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef PCI_DISABLE_MWI
 	return 0;
 #else
@@ -3711,6 +4133,9 @@ int pci_try_set_mwi(struct pci_dev *dev)
 #endif
 }
 EXPORT_SYMBOL(pci_try_set_mwi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -3720,9 +4145,15 @@ EXPORT_SYMBOL(pci_try_set_mwi);
  * Disables PCI Memory-Write-Invalidate transaction on the device
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 pci_clear_mwi(struct pci_dev *dev)
 {
+=======
+void pci_clear_mwi(struct pci_dev *dev)
+{
+#ifndef PCI_DISABLE_MWI
+>>>>>>> v3.18
 =======
 void pci_clear_mwi(struct pci_dev *dev)
 {
@@ -3736,8 +4167,14 @@ void pci_clear_mwi(struct pci_dev *dev)
 		pci_write_config_word(dev, PCI_COMMAND, cmd);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 #endif /* ! PCI_DISABLE_MWI */
+=======
+#endif
+}
+EXPORT_SYMBOL(pci_clear_mwi);
+>>>>>>> v3.18
 =======
 #endif
 }
@@ -3752,8 +4189,12 @@ EXPORT_SYMBOL(pci_clear_mwi);
  * Enables/disables PCI INTx for device dev
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 pci_intx(struct pci_dev *pdev, int enable)
+=======
+void pci_intx(struct pci_dev *pdev, int enable)
+>>>>>>> v3.18
 =======
 void pci_intx(struct pci_dev *pdev, int enable)
 >>>>>>> v3.18
@@ -3763,16 +4204,22 @@ void pci_intx(struct pci_dev *pdev, int enable)
 	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (enable) {
 		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
 	} else {
 		new = pci_command | PCI_COMMAND_INTX_DISABLE;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (enable)
 		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
 	else
 		new = pci_command | PCI_COMMAND_INTX_DISABLE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (new != pci_command) {
@@ -3788,6 +4235,10 @@ void pci_intx(struct pci_dev *pdev, int enable)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(pci_intx);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(pci_intx);
 >>>>>>> v3.18
@@ -3821,8 +4272,13 @@ bool pci_intx_mask_supported(struct pci_dev *dev)
 	 */
 	if ((new ^ orig) & ~PCI_COMMAND_INTX_DISABLE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->dev, "Command register changed from "
 			"0x%x to 0x%x: driver or hardware bug?\n", orig, new);
+=======
+		dev_err(&dev->dev, "Command register changed from 0x%x to 0x%x: driver or hardware bug?\n",
+			orig, new);
+>>>>>>> v3.18
 =======
 		dev_err(&dev->dev, "Command register changed from 0x%x to 0x%x: driver or hardware bug?\n",
 			orig, new);
@@ -3898,7 +4354,11 @@ EXPORT_SYMBOL_GPL(pci_check_and_mask_intx);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_check_and_mask_intx - unmask INTx of no interrupt is pending
+=======
+ * pci_check_and_unmask_intx - unmask INTx if no interrupt is pending
+>>>>>>> v3.18
 =======
  * pci_check_and_unmask_intx - unmask INTx if no interrupt is pending
 >>>>>>> v3.18
@@ -3916,6 +4376,7 @@ EXPORT_SYMBOL_GPL(pci_check_and_unmask_intx);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_msi_off - disables any msi or msix capabilities
  * @dev: the PCI device to operate on
  *
@@ -3923,12 +4384,17 @@ EXPORT_SYMBOL_GPL(pci_check_and_unmask_intx);
  * This is a lower level primitive that allows us to disable
  * msi operation at the device level.
 =======
+=======
+>>>>>>> v3.18
  * pci_msi_off - disables any MSI or MSI-X capabilities
  * @dev: the PCI device to operate on
  *
  * If you want to use MSI, see pci_enable_msi() and friends.
  * This is a lower-level primitive that allows us to disable
  * MSI operation at the device level.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void pci_msi_off(struct pci_dev *dev)
@@ -3937,12 +4403,18 @@ void pci_msi_off(struct pci_dev *dev)
 	u16 control;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This looks like it could go in msi.c, but we need it even when
 	 * CONFIG_PCI_MSI=n.  For the same reason, we can't use
 	 * dev->msi_cap or dev->msix_cap here.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pos = pci_find_capability(dev, PCI_CAP_ID_MSI);
 	if (pos) {
@@ -3972,12 +4444,15 @@ int pci_set_dma_seg_boundary(struct pci_dev *dev, unsigned long mask)
 EXPORT_SYMBOL(pci_set_dma_seg_boundary);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcie_flr(struct pci_dev *dev, int probe)
 {
 	int i;
 	u32 cap;
 	u16 status;
 =======
+=======
+>>>>>>> v3.18
 /**
  * pci_wait_for_pending_transaction - waits for pending transaction
  * @dev: the PCI device to operate on
@@ -3997,6 +4472,9 @@ EXPORT_SYMBOL(pci_wait_for_pending_transaction);
 static int pcie_flr(struct pci_dev *dev, int probe)
 {
 	u32 cap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pcie_capability_read_dword(dev, PCI_EXP_DEVCAP, &cap);
@@ -4006,6 +4484,7 @@ static int pcie_flr(struct pci_dev *dev, int probe)
 	if (probe)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Wait for Transaction Pending bit clean */
 	for (i = 0; i < 4; i++) {
@@ -4026,6 +4505,11 @@ clear:
 		dev_err(&dev->dev, "transaction is not cleared; proceeding with reset anyway\n");
 
 >>>>>>> v3.18
+=======
+	if (!pci_wait_for_pending_transaction(dev))
+		dev_err(&dev->dev, "transaction is not cleared; proceeding with reset anyway\n");
+
+>>>>>>> v3.18
 	pcie_capability_set_word(dev, PCI_EXP_DEVCTL, PCI_EXP_DEVCTL_BCR_FLR);
 
 	msleep(100);
@@ -4036,10 +4520,15 @@ clear:
 static int pci_af_flr(struct pci_dev *dev, int probe)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	int pos;
 	u8 cap;
 	u8 status;
+=======
+	int pos;
+	u8 cap;
+>>>>>>> v3.18
 =======
 	int pos;
 	u8 cap;
@@ -4057,6 +4546,7 @@ static int pci_af_flr(struct pci_dev *dev, int probe)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Wait for Transaction Pending bit clean */
 	for (i = 0; i < 4; i++) {
 		if (i)
@@ -4070,6 +4560,8 @@ static int pci_af_flr(struct pci_dev *dev, int probe)
 	dev_err(&dev->dev, "transaction is not cleared; "
 			"proceeding with reset anyway\n");
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Wait for Transaction Pending bit to clear.  A word-aligned test
 	 * is used, so we use the conrol offset rather than status and shift
@@ -4080,6 +4572,9 @@ static int pci_af_flr(struct pci_dev *dev, int probe)
 		goto clear;
 
 	dev_err(&dev->dev, "transaction is not cleared; proceeding with reset anyway\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 clear:
@@ -4102,7 +4597,11 @@ clear:
  * NOTE: This causes the caller to sleep for twice the device power transition
  * cooldown period, which for the D0->D3hot and D3hot->D0 transitions is 10 ms
 <<<<<<< HEAD
+<<<<<<< HEAD
  * by devault (i.e. unless the @dev's d3_delay field has a different value).
+=======
+ * by default (i.e. unless the @dev's d3_delay field has a different value).
+>>>>>>> v3.18
 =======
  * by default (i.e. unless the @dev's d3_delay field has a different value).
 >>>>>>> v3.18
@@ -4139,10 +4638,13 @@ static int pci_pm_reset(struct pci_dev *dev, int probe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pci_parent_bus_reset(struct pci_dev *dev, int probe)
 {
 	u16 ctrl;
 =======
+=======
+>>>>>>> v3.18
 void pci_reset_secondary_bus(struct pci_dev *dev)
 {
 	u16 ctrl;
@@ -4189,6 +4691,9 @@ EXPORT_SYMBOL_GPL(pci_reset_bridge_secondary_bus);
 
 static int pci_parent_bus_reset(struct pci_dev *dev, int probe)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pci_dev *pdev;
 
@@ -4203,6 +4708,7 @@ static int pci_parent_bus_reset(struct pci_dev *dev, int probe)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(dev->bus->self, PCI_BRIDGE_CONTROL, &ctrl);
 	ctrl |= PCI_BRIDGE_CTL_BUS_RESET;
 	pci_write_config_word(dev->bus->self, PCI_BRIDGE_CONTROL, ctrl);
@@ -4214,10 +4720,14 @@ static int pci_parent_bus_reset(struct pci_dev *dev, int probe)
 =======
 	pci_reset_bridge_secondary_bus(dev->bus->self);
 >>>>>>> v3.18
+=======
+	pci_reset_bridge_secondary_bus(dev->bus->self);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __pci_dev_reset(struct pci_dev *dev, int probe)
 {
@@ -4240,6 +4750,8 @@ static int __pci_dev_reset(struct pci_dev *dev, int probe)
 	rc = pci_pm_reset(dev, probe);
 	if (rc != -ENOTTY)
 =======
+=======
+>>>>>>> v3.18
 static int pci_reset_hotplug_slot(struct hotplug_slot *hotplug, int probe)
 {
 	int rc = -ENOTTY;
@@ -4293,6 +4805,9 @@ static int __pci_dev_reset(struct pci_dev *dev, int probe)
 
 	rc = pci_dev_reset_slot_function(dev, probe);
 	if (rc != -ENOTTY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto done;
 
@@ -4302,7 +4817,10 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void pci_dev_lock(struct pci_dev *dev)
 {
 	pci_cfg_access_lock(dev);
@@ -4373,11 +4891,15 @@ static void pci_dev_restore(struct pci_dev *dev)
 	pci_reset_notify(dev, false);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pci_dev_reset(struct pci_dev *dev, int probe)
 {
 	int rc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!probe) {
 		pci_cfg_access_lock(dev);
@@ -4394,6 +4916,8 @@ static int pci_dev_reset(struct pci_dev *dev, int probe)
 	return rc;
 }
 =======
+=======
+>>>>>>> v3.18
 	if (!probe)
 		pci_dev_lock(dev);
 
@@ -4405,6 +4929,9 @@ static int pci_dev_reset(struct pci_dev *dev, int probe)
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * __pci_reset_function - reset a PCI device function
@@ -4495,6 +5022,7 @@ int pci_reset_function(struct pci_dev *dev)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_save_state(dev);
 
 	/*
@@ -4507,11 +5035,16 @@ int pci_reset_function(struct pci_dev *dev)
 
 	pci_restore_state(dev);
 =======
+=======
+>>>>>>> v3.18
 	pci_dev_save_and_disable(dev);
 
 	rc = pci_dev_reset(dev, 0);
 
 	pci_dev_restore(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -4520,7 +5053,10 @@ EXPORT_SYMBOL_GPL(pci_reset_function);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pci_try_reset_function - quiesce and reset a PCI device function
  * @dev: PCI device to reset
  *
@@ -4897,6 +5433,9 @@ int pci_try_reset_bus(struct pci_bus *bus)
 EXPORT_SYMBOL_GPL(pci_try_reset_bus);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pcix_get_max_mmrbc - get PCI-X maximum designed memory read byte count
  * @dev: PCI device to query
@@ -5032,8 +5571,11 @@ int pcie_set_readrq(struct pci_dev *dev, int rq)
 		int mps = pcie_get_mps(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mps < 0)
 			return mps;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (mps < rq)
@@ -5053,7 +5595,10 @@ EXPORT_SYMBOL(pcie_set_readrq);
  *
  * Returns maximum payload size in bytes
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    or appropriate error value.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -5066,6 +5611,10 @@ int pcie_get_mps(struct pci_dev *dev)
 	return 128 << ((ctl & PCI_EXP_DEVCTL_PAYLOAD) >> 5);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pcie_get_mps);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pcie_get_mps);
 >>>>>>> v3.18
@@ -5087,7 +5636,11 @@ int pcie_set_mps(struct pci_dev *dev, int mps)
 
 	v = ffs(mps) - 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v > dev->pcie_mpss) 
+=======
+	if (v > dev->pcie_mpss)
+>>>>>>> v3.18
 =======
 	if (v > dev->pcie_mpss)
 >>>>>>> v3.18
@@ -5098,7 +5651,10 @@ int pcie_set_mps(struct pci_dev *dev, int mps)
 						  PCI_EXP_DEVCTL_PAYLOAD, v);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(pcie_set_mps);
 
 /**
@@ -5143,6 +5699,9 @@ int pcie_get_minimum_link(struct pci_dev *dev, enum pci_bus_speed *speed,
 	return 0;
 }
 EXPORT_SYMBOL(pcie_get_minimum_link);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -5161,6 +5720,10 @@ int pci_select_bars(struct pci_dev *dev, unsigned long flags)
 	return bars;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_select_bars);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_select_bars);
 >>>>>>> v3.18
@@ -5204,7 +5767,11 @@ void __init pci_register_set_vga_state(arch_set_vga_state_t func)
 
 static int pci_set_vga_state_arch(struct pci_dev *dev, bool decode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      unsigned int command_bits, u32 flags)
+=======
+				  unsigned int command_bits, u32 flags)
+>>>>>>> v3.18
 =======
 				  unsigned int command_bits, u32 flags)
 >>>>>>> v3.18
@@ -5269,7 +5836,10 @@ int pci_set_vga_state(struct pci_dev *dev, bool decode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool pci_device_is_present(struct pci_dev *pdev)
 {
 	u32 v;
@@ -5278,6 +5848,9 @@ bool pci_device_is_present(struct pci_dev *pdev)
 }
 EXPORT_SYMBOL_GPL(pci_device_is_present);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RESOURCE_ALIGNMENT_PARAM_SIZE COMMAND_LINE_SIZE
 static char resource_alignment_param[RESOURCE_ALIGNMENT_PARAM_SIZE] = {0};
@@ -5323,16 +5896,22 @@ static resource_size_t pci_specified_resource_alignment(struct pci_dev *dev)
 			slot == PCI_SLOT(dev->devfn) &&
 			func == PCI_FUNC(dev->devfn)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (align_order == -1) {
 				align = PAGE_SIZE;
 			} else {
 				align = 1 << align_order;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (align_order == -1)
 				align = PAGE_SIZE;
 			else
 				align = 1 << align_order;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Found */
 			break;
@@ -5391,6 +5970,10 @@ void pci_reassigndev_resource_alignment(struct pci_dev *dev)
 				i, (unsigned long long)size);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		r->flags |= IORESOURCE_UNSET;
+>>>>>>> v3.18
 =======
 		r->flags |= IORESOURCE_UNSET;
 >>>>>>> v3.18
@@ -5408,6 +5991,10 @@ void pci_reassigndev_resource_alignment(struct pci_dev *dev)
 			if (!(r->flags & IORESOURCE_MEM))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			r->flags |= IORESOURCE_UNSET;
+>>>>>>> v3.18
 =======
 			r->flags |= IORESOURCE_UNSET;
 >>>>>>> v3.18
@@ -5458,7 +6045,10 @@ static int __init pci_resource_alignment_sysfs_init(void)
 					&bus_attr_resource_alignment);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 late_initcall(pci_resource_alignment_sysfs_init);
@@ -5471,7 +6061,10 @@ static void pci_no_domains(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_DOMAINS
 static atomic_t __domain_nr = ATOMIC_INIT(-1);
 
@@ -5481,6 +6074,9 @@ int pci_get_new_domain_nr(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * pci_ext_cfg_avail - can we access extended PCI config space?
@@ -5552,6 +6148,7 @@ static int __init pci_setup(char *str)
 }
 early_param("pci", pci_setup);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(pci_reenable_device);
 EXPORT_SYMBOL(pci_enable_device_io);
@@ -5591,5 +6188,7 @@ EXPORT_SYMBOL(pci_target_state);
 EXPORT_SYMBOL(pci_prepare_to_sleep);
 EXPORT_SYMBOL(pci_back_from_sleep);
 EXPORT_SYMBOL_GPL(pci_set_pcie_reset_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

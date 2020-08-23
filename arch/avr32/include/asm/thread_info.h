@@ -67,8 +67,11 @@ static inline struct thread_info *current_thread_info(void)
 #endif /* !__ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x40000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

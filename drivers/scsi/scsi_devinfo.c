@@ -203,6 +203,10 @@ static struct {
 	{"INSITE", "Floptical   F*8I", NULL, BLIST_KEY},
 	{"INSITE", "I325VM", NULL, BLIST_KEY},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"Intel", "Multi-Flex", NULL, BLIST_NO_RSOC},
+>>>>>>> v3.18
 =======
 	{"Intel", "Multi-Flex", NULL, BLIST_NO_RSOC},
 >>>>>>> v3.18
@@ -227,6 +231,10 @@ static struct {
 	{"PIONEER", "CD-ROM DRM-604X", NULL, BLIST_FORCELUN | BLIST_SINGLELUN},
 	{"PIONEER", "CD-ROM DRM-624X", NULL, BLIST_FORCELUN | BLIST_SINGLELUN},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"Promise", "VTrak E610f", NULL, BLIST_SPARSELUN | BLIST_NO_RSOC},
+>>>>>>> v3.18
 =======
 	{"Promise", "VTrak E610f", NULL, BLIST_SPARSELUN | BLIST_NO_RSOC},
 >>>>>>> v3.18
@@ -237,6 +245,10 @@ static struct {
 	{"SEAGATE", "ST34555N", "0930", BLIST_NOTQ},	/* Chokes on tagged INQUIRY */
 	{"SEAGATE", "ST3390N", "9546", BLIST_NOTQ},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"SEAGATE", "ST900MM0006", NULL, BLIST_SKIP_VPD_PAGES},
+>>>>>>> v3.18
 =======
 	{"SEAGATE", "ST900MM0006", NULL, BLIST_SKIP_VPD_PAGES},
 >>>>>>> v3.18

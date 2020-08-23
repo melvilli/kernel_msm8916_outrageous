@@ -14,6 +14,7 @@
 	for (pos = rcu_dereference(start); pos; pos = rcu_dereference(pos->next))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* often modified stats are per cpu, other are shared (netdev->stats) */
 struct pcpu_tstats {
 	u64	rx_packets;
@@ -23,6 +24,8 @@ struct pcpu_tstats {
 	struct u64_stats_sync	syncp;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _IF_TUNNEL_H_ */

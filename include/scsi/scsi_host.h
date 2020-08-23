@@ -8,6 +8,10 @@
 #include <linux/mutex.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/blk-mq.h>
+>>>>>>> v3.18
 =======
 #include <linux/blk-mq.h>
 >>>>>>> v3.18
@@ -20,6 +24,10 @@ struct module;
 struct scsi_cmnd;
 struct scsi_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct scsi_host_cmd_pool;
+>>>>>>> v3.18
 =======
 struct scsi_host_cmd_pool;
 >>>>>>> v3.18
@@ -140,6 +148,7 @@ struct scsi_host_template {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * The transfer functions are used to queue a scsi command to
 	 * the LLD. When the driver is finished processing the command
 	 * the done callback is invoked.
@@ -161,6 +170,8 @@ struct scsi_host_template {
 				  void (*done)(struct scsi_cmnd *));
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * This is an error handling strategy routine.  You don't need to
@@ -419,7 +430,11 @@ struct scsi_host_template {
 	 * Set this if the host adapter has limitations beside segment count.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short max_sectors;
+=======
+	unsigned int max_sectors;
+>>>>>>> v3.18
 =======
 	unsigned int max_sectors;
 >>>>>>> v3.18
@@ -495,12 +510,18 @@ struct scsi_host_template {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * True if asynchronous aborts are not supported
 	 */
 	unsigned no_async_abort:1;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Countdown for host blocking with no commands outstanding.
 	 */
@@ -543,7 +564,10 @@ struct scsi_host_template {
 	 */
 	u64 vendor_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Additional per-command data allocated for the driver.
@@ -553,6 +577,9 @@ struct scsi_host_template {
 
 	/* temporary flag to disable blk-mq I/O path */
 	bool disable_blk_mq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -625,6 +652,7 @@ struct Scsi_Host {
 	 * NULL if not).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct blk_queue_tag	*bqt;
 
 	/*
@@ -650,6 +678,8 @@ struct Scsi_Host {
 	unsigned int max_lun;
 	unsigned int max_channel;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct blk_queue_tag	*bqt;
 		struct blk_mq_tag_set	tag_set;
@@ -678,6 +708,9 @@ struct Scsi_Host {
 	unsigned int max_channel;
 	unsigned int max_id;
 	u64 max_lun;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -704,7 +737,11 @@ struct Scsi_Host {
 	short unsigned int sg_tablesize;
 	short unsigned int sg_prot_tablesize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short unsigned int max_sectors;
+=======
+	unsigned int max_sectors;
+>>>>>>> v3.18
 =======
 	unsigned int max_sectors;
 >>>>>>> v3.18
@@ -751,11 +788,17 @@ struct Scsi_Host {
 	unsigned no_write_same:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Set "SELECT REPORT" field to allow detection of well known logical
 	 * units along with standard LUs.
 	 */
 	unsigned report_wlus:1;
+=======
+	unsigned use_blk_mq:1;
+	unsigned use_cmd_list:1;
+
+>>>>>>> v3.18
 =======
 	unsigned use_blk_mq:1;
 	unsigned use_cmd_list:1;
@@ -769,16 +812,22 @@ struct Scsi_Host {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Host has rejected a command because it was busy.
 	 */
 	unsigned int host_blocked;
 =======
+=======
+>>>>>>> v3.18
 	 * Task management function work queue
 	 */
 	struct workqueue_struct *tmf_work_q;
 
 	/* The transport requires the LUN bits NOT to be stored in CDB[1] */
 	unsigned no_scsi2_lun_in_cdb:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -871,7 +920,10 @@ static inline int scsi_host_in_recovery(struct Scsi_Host *shost)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern bool scsi_use_blk_mq;
 
 static inline bool shost_use_blk_mq(struct Scsi_Host *shost)
@@ -879,6 +931,9 @@ static inline bool shost_use_blk_mq(struct Scsi_Host *shost)
 	return shost->use_blk_mq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int scsi_queue_work(struct Scsi_Host *, struct work_struct *);
 extern void scsi_flush_work(struct Scsi_Host *);
@@ -897,8 +952,11 @@ extern const char *scsi_host_state_name(enum scsi_host_state);
 extern void scsi_cmd_get_serial(struct Scsi_Host *, struct scsi_cmnd *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u64 scsi_calculate_bounce_limit(struct Scsi_Host *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int __must_check scsi_add_host(struct Scsi_Host *host,

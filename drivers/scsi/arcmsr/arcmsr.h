@@ -46,6 +46,7 @@
 struct device_attribute;
 /*The limit of outstanding scsi command that firmware can handle*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCMSR_MAX_OUTSTANDING_CMD						256
 #ifdef CONFIG_XEN
 	#define ARCMSR_MAX_FREECCB_NUM	160
@@ -54,6 +55,8 @@ struct device_attribute;
 #endif
 #define ARCMSR_DRIVER_VERSION		     "Driver Version 1.20.00.15 2010/08/05"
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_XEN
 	#define ARCMSR_MAX_FREECCB_NUM	160
 #define ARCMSR_MAX_OUTSTANDING_CMD	155
@@ -62,6 +65,9 @@ struct device_attribute;
 #define ARCMSR_MAX_OUTSTANDING_CMD	255
 #endif
 #define ARCMSR_DRIVER_VERSION		"v1.30.00.04-20140919"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ARCMSR_SCSI_INITIATOR_ID						255
 #define ARCMSR_MAX_XFER_SECTORS							512
@@ -74,12 +80,15 @@ struct device_attribute;
 #define ARCMSR_DEFAULT_SG_ENTRIES						38
 #define ARCMSR_MAX_HBB_POSTQUEUE						264
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCMSR_MAX_XFER_LEN							0x26000 /* 152K */
 #define ARCMSR_CDB_SG_PAGE_LENGTH						256 
 #ifndef PCI_DEVICE_ID_ARECA_1880
 #define PCI_DEVICE_ID_ARECA_1880 0x1880
  #endif
 =======
+=======
+>>>>>>> v3.18
 #define ARCMSR_MAX_ARC1214_POSTQUEUE	256
 #define ARCMSR_MAX_ARC1214_DONEQUEUE	257
 #define ARCMSR_MAX_XFER_LEN							0x26000 /* 152K */
@@ -91,6 +100,9 @@ struct device_attribute;
 #ifndef PCI_DEVICE_ID_ARECA_1214
 	#define PCI_DEVICE_ID_ARECA_1214	0x1214
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
 **********************************************************************************
@@ -126,16 +138,22 @@ struct CMD_MESSAGE
 *******************************************************************************
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct CMD_MESSAGE_FIELD
 {
     struct CMD_MESSAGE			cmdmessage;
     uint8_t				messagedatabuffer[1032];
 =======
+=======
+>>>>>>> v3.18
 #define	ARCMSR_API_DATA_BUFLEN	1032
 struct CMD_MESSAGE_FIELD
 {
     struct CMD_MESSAGE			cmdmessage;
     uint8_t				messagedatabuffer[ARCMSR_API_DATA_BUFLEN];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 /* IOP message transfer */
@@ -371,7 +389,10 @@ struct FIRMWARE_INFO
 /*
 *******************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 **                SPEC. for Areca Type D adapter
 *******************************************************************************
 */
@@ -422,6 +443,9 @@ struct FIRMWARE_INFO
 #define ARCMSR_ARC1214_OUTBOUND_LIST_INTERRUPT_CLEAR	0x00000001
 /*
 *******************************************************************************
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 **    ARECA SCSI COMMAND DESCRIPTOR BLOCK size 0x1F8 (504)
 *******************************************************************************
@@ -444,7 +468,11 @@ struct ARCMSR_CDB
 
 	uint8_t							msgPages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t						Context;
+=======
+	uint32_t						msgContext;
+>>>>>>> v3.18
 =======
 	uint32_t						msgContext;
 >>>>>>> v3.18
@@ -585,7 +613,10 @@ struct MessageUnit_C{
 };
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 *********************************************************************
 **     Messaging Unit (MU) of Type D processor
 *********************************************************************
@@ -636,6 +667,9 @@ struct MessageUnit_D {
 	u32 __iomem *msgcode_rwbuffer;		/* 0x2200 */
 };
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 *******************************************************************************
 **                 Adapter Control Block
@@ -649,15 +683,21 @@ struct AdapterControlBlock
 	#define ACB_ADAPTER_TYPE_C            0x00000004	/* hbc P IOP */
 	#define ACB_ADAPTER_TYPE_D            0x00000008	/* hbd A IOP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *		pdev;
 	struct Scsi_Host *		host;
 	unsigned long			vir2phy_offset;
 =======
+=======
+>>>>>>> v3.18
 	u32				roundup_ccbsize;
 	struct pci_dev *		pdev;
 	struct Scsi_Host *		host;
 	unsigned long			vir2phy_offset;
 	struct msix_entry	entries[ARCMST_NUM_MSIX_VECTORS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Offset is used in making arc cdb physical to virtual calculations */
 	uint32_t			outbound_int_enable;
@@ -666,17 +706,27 @@ struct AdapterControlBlock
 	spinlock_t                      			eh_lock;
 	spinlock_t                      			ccblist_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t			postq_lock;
 	spinlock_t			doneq_lock;
 	spinlock_t			rqbuffer_lock;
 	spinlock_t			wqbuffer_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union {
 		struct MessageUnit_A __iomem *pmuA;
 		struct MessageUnit_B 	*pmuB;
 		struct MessageUnit_C __iomem *pmuC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct MessageUnit_D 	*pmuD;
+>>>>>>> v3.18
 =======
 		struct MessageUnit_D 	*pmuD;
 >>>>>>> v3.18
@@ -707,6 +757,11 @@ struct AdapterControlBlock
 	#define ACB_F_ABORT				0x0200
 	#define ACB_F_FIRMWARE_TRAP           		0x0400
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	#define ACB_F_MSI_ENABLED		0x1000
+	#define ACB_F_MSIX_ENABLED		0x2000
+>>>>>>> v3.18
 =======
 	#define ACB_F_MSI_ENABLED		0x1000
 	#define ACB_F_MSIX_ENABLED		0x2000
@@ -725,6 +780,7 @@ struct AdapterControlBlock
 	dma_addr_t			dma_coherent_handle;
 	/* dma_coherent_handle used for memory free */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t				dma_coherent_handle_hbb_mu;
 	unsigned int				uncache_size;
 	uint8_t				rqbuffer[ARCMSR_MAX_QBUFFER];
@@ -739,6 +795,8 @@ struct AdapterControlBlock
 	/* first of write buffer */
 	int32_t				wqbuf_lastindex;
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t				dma_coherent_handle2;
 	void				*dma_coherent2;
 	unsigned int				uncache_size;
@@ -753,6 +811,9 @@ struct AdapterControlBlock
 	int32_t				wqbuf_getIndex;
 	/* first of write buffer */
 	int32_t				wqbuf_putIndex;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* last of write buffer  */
 	uint8_t				devstate[ARCMSR_MAX_TARGETID][ARCMSR_MAX_TARGETLUN];
@@ -779,6 +840,11 @@ struct AdapterControlBlock
 	atomic_t 			rq_map_token;
 	atomic_t			ante_token_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t	maxOutstanding;
+	int		msix_vector_count;
+>>>>>>> v3.18
 =======
 	uint32_t	maxOutstanding;
 	int		msix_vector_count;
@@ -796,7 +862,11 @@ struct CommandControlBlock{
 	struct scsi_cmnd		*pcmd;				/*8 bytes pointer of linux scsi command */
 	struct AdapterControlBlock	*acb;				/*x32: 4byte, x64: 8byte*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t			cdb_phyaddr_pattern;		/*x32: 4byte, x64: 4byte*/
+=======
+	uint32_t			cdb_phyaddr;			/*x32: 4byte, x64: 4byte*/
+>>>>>>> v3.18
 =======
 	uint32_t			cdb_phyaddr;			/*x32: 4byte, x64: 4byte*/
 >>>>>>> v3.18
@@ -878,13 +948,19 @@ struct SENSE_DATA
 #define     ARCMSR_MU_OUTBOUND_ALL_INTMASKENABLE                    0x1F
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void arcmsr_post_ioctldata2iop(struct AdapterControlBlock *);
 extern void arcmsr_iop_message_read(struct AdapterControlBlock *);
 =======
+=======
+>>>>>>> v3.18
 extern void arcmsr_write_ioctldata2iop(struct AdapterControlBlock *);
 extern uint32_t arcmsr_Read_iop_rqbuffer_data(struct AdapterControlBlock *,
 	struct QBUFFER __iomem *);
 extern void arcmsr_clear_iop2drv_rqueue_buffer(struct AdapterControlBlock *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct QBUFFER __iomem *arcmsr_get_iop_rqbuffer(struct AdapterControlBlock *);
 extern struct device_attribute *arcmsr_host_attrs[];

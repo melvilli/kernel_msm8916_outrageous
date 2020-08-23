@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -103,7 +111,10 @@ int iwl_send_calib_results(struct iwl_priv *priv)
 	struct iwl_host_cmd hcmd = {
 		.id = REPLY_PHY_CALIBRATION_CMD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -533,7 +544,11 @@ static int iwl_enhance_sensitivity_write(struct iwl_priv *priv)
 	iwl_prepare_legacy_sensitivity_tbl(priv, data, &cmd.enhance_table[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->base_params->hd_v2) {
+=======
+	if (priv->lib->hd_v2) {
+>>>>>>> v3.18
 =======
 	if (priv->lib->hd_v2) {
 >>>>>>> v3.18
@@ -911,7 +926,11 @@ static void iwlagn_gain_computation(struct iwl_priv *priv,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		delta_g = (priv->cfg->base_params->chain_noise_scale *
+=======
+		delta_g = (priv->lib->chain_noise_scale *
+>>>>>>> v3.18
 =======
 		delta_g = (priv->lib->chain_noise_scale *
 >>>>>>> v3.18
@@ -1071,8 +1090,13 @@ void iwl_chain_noise_calibration(struct iwl_priv *priv)
 
 	/* Analyze signal for disconnected antenna */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist) {
+=======
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist) {
+>>>>>>> v3.18
 =======
 	if (priv->lib->bt_params &&
 	    priv->lib->bt_params->advanced_bt_coexist) {

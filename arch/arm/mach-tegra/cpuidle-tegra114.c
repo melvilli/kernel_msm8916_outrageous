@@ -15,12 +15,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/cpuidle.h>
 
 #include <asm/cpuidle.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/firmware.h>
 #include <linux/clockchips.h>
 #include <linux/cpuidle.h>
@@ -69,16 +72,22 @@ static int tegra114_idle_power_down(struct cpuidle_device *dev,
 	return index;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct cpuidle_driver tegra_idle_driver = {
 	.name = "tegra_idle",
 	.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.state_count = 1,
 	.states = {
 		[0] = ARM_CPUIDLE_WFI_STATE_PWR(600),
 =======
+=======
+>>>>>>> v3.18
 	.state_count = TEGRA114_MAX_STATES,
 	.states = {
 		[0] = ARM_CPUIDLE_WFI_STATE_PWR(600),
@@ -93,6 +102,9 @@ static struct cpuidle_driver tegra_idle_driver = {
 			.desc			= "CPU power gated",
 		},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

@@ -162,7 +162,11 @@ static struct inode *ext2_alloc_inode(struct super_block *sb)
 {
 	struct ext2_inode_info *ei;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ei = (struct ext2_inode_info *)kmem_cache_alloc(ext2_inode_cachep, GFP_KERNEL);
+=======
+	ei = kmem_cache_alloc(ext2_inode_cachep, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ei = kmem_cache_alloc(ext2_inode_cachep, GFP_KERNEL);
 >>>>>>> v3.18
@@ -197,7 +201,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18
@@ -1076,6 +1084,7 @@ static int ext2_fill_super(struct super_block *sb, void *data, int silent)
 
 	err = percpu_counter_init(&sbi->s_freeblocks_counter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ext2_count_free_blocks(sb));
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_freeinodes_counter,
@@ -1085,6 +1094,8 @@ static int ext2_fill_super(struct super_block *sb, void *data, int silent)
 		err = percpu_counter_init(&sbi->s_dirs_counter,
 				ext2_count_dirs(sb));
 =======
+=======
+>>>>>>> v3.18
 				ext2_count_free_blocks(sb), GFP_KERNEL);
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_freeinodes_counter,
@@ -1093,6 +1104,9 @@ static int ext2_fill_super(struct super_block *sb, void *data, int silent)
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_dirs_counter,
 				ext2_count_dirs(sb), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (err) {
@@ -1274,6 +1288,10 @@ static int ext2_remount (struct super_block * sb, int * flags, char * data)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18

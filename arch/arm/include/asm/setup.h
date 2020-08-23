@@ -22,12 +22,16 @@
 static const struct tagtable __tagtable_##fn __tag = { tag, fn }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Memory map description
  */
 #define NR_BANKS	CONFIG_ARM_NR_BANKS
 
 extern int arm_add_memory(phys_addr_t start, phys_addr_t size);
+=======
+extern int arm_add_memory(u64 start, u64 size);
+>>>>>>> v3.18
 =======
 extern int arm_add_memory(u64 start, u64 size);
 >>>>>>> v3.18

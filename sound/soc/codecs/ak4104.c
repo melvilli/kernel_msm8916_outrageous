@@ -12,6 +12,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sound/core.h>
 #include <sound/soc.h>
 #include <sound/initval.h>
@@ -20,6 +21,8 @@
 #include <linux/of_gpio.h>
 #include <sound/asoundef.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/spi/spi.h>
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
@@ -28,6 +31,9 @@
 #include <sound/core.h>
 #include <sound/soc.h>
 #include <sound/initval.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* AK4104 registers addresses */
@@ -57,11 +63,14 @@
 #define AK4104_TX_V			(1 << 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_NAME "ak4104-codec"
 
 struct ak4104_private {
 	struct regmap *regmap;
 =======
+=======
+>>>>>>> v3.18
 struct ak4104_private {
 	struct regmap *regmap;
 	struct regulator *regulator;
@@ -76,6 +85,9 @@ SND_SOC_DAPM_OUTPUT("TX"),
 static const struct snd_soc_dapm_route ak4104_dapm_routes[] = {
 	{ "TXE", NULL, "Playback" },
 	{ "TX", NULL, "TXE" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -167,6 +179,7 @@ static int ak4104_hw_params(struct snd_pcm_substream *substream,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable transmitter */
 	ret = regmap_update_bits(ak4104->regmap, AK4104_REG_TX,
 				 AK4104_TX_TXE, AK4104_TX_TXE);
@@ -197,6 +210,13 @@ static const struct snd_soc_dai_ops ak4101_dai_ops = {
 static const struct snd_soc_dai_ops ak4101_dai_ops = {
 	.hw_params = ak4104_hw_params,
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+static const struct snd_soc_dai_ops ak4101_dai_ops = {
+	.hw_params = ak4104_hw_params,
+>>>>>>> v3.18
 	.set_fmt = ak4104_set_dai_fmt,
 };
 
@@ -220,13 +240,19 @@ static int ak4104_probe(struct snd_soc_codec *codec)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = ak4104->regmap;
 =======
+=======
+>>>>>>> v3.18
 	ret = regulator_enable(ak4104->regulator);
 	if (ret < 0) {
 		dev_err(codec->dev, "Unable to enable regulator: %d\n", ret);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set power-up and non-reset bits */
@@ -235,7 +261,11 @@ static int ak4104_probe(struct snd_soc_codec *codec)
 				 AK4104_CONTROL1_PW | AK4104_CONTROL1_RSTN);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
+=======
+		goto exit_disable_regulator;
+>>>>>>> v3.18
 =======
 		goto exit_disable_regulator;
 >>>>>>> v3.18
@@ -245,10 +275,13 @@ static int ak4104_probe(struct snd_soc_codec *codec)
 				 AK4104_TX_TXE, AK4104_TX_TXE);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto exit_disable_regulator;
 
 	return 0;
@@ -256,6 +289,9 @@ static int ak4104_probe(struct snd_soc_codec *codec)
 exit_disable_regulator:
 	regulator_disable(ak4104->regulator);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -266,6 +302,10 @@ static int ak4104_remove(struct snd_soc_codec *codec)
 	regmap_update_bits(ak4104->regmap, AK4104_REG_CONTROL1,
 			   AK4104_CONTROL1_PW | AK4104_CONTROL1_RSTN, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	regulator_disable(ak4104->regulator);
+>>>>>>> v3.18
 =======
 	regulator_disable(ak4104->regulator);
 >>>>>>> v3.18
@@ -274,10 +314,13 @@ static int ak4104_remove(struct snd_soc_codec *codec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_soc_codec_driver soc_codec_device_ak4104 = {
 	.probe =	ak4104_probe,
 	.remove =	ak4104_remove,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static int ak4104_soc_suspend(struct snd_soc_codec *codec)
 {
@@ -314,6 +357,9 @@ static struct snd_soc_codec_driver soc_codec_device_ak4104 = {
 	.num_dapm_widgets = ARRAY_SIZE(ak4104_dapm_widgets),
 	.dapm_routes = ak4104_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(ak4104_dapm_routes),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -347,7 +393,10 @@ static int ak4104_spi_probe(struct spi_device *spi)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ak4104->regulator = devm_regulator_get(&spi->dev, "vdd");
 	if (IS_ERR(ak4104->regulator)) {
 		ret = PTR_ERR(ak4104->regulator);
@@ -355,6 +404,9 @@ static int ak4104_spi_probe(struct spi_device *spi)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ak4104->regmap = devm_regmap_init_spi(spi, &ak4104_regmap);
 	if (IS_ERR(ak4104->regmap)) {
@@ -405,6 +457,7 @@ static const struct of_device_id ak4104_of_match[] = {
 MODULE_DEVICE_TABLE(of, ak4104_of_match);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct spi_driver ak4104_spi_driver = {
 	.driver  = {
 		.name   = DRV_NAME,
@@ -412,6 +465,8 @@ static struct spi_driver ak4104_spi_driver = {
 		.of_match_table = ak4104_of_match,
 	},
 =======
+=======
+>>>>>>> v3.18
 static const struct spi_device_id ak4104_id_table[] = {
 	{ "ak4104", 0 },
 	{ }
@@ -425,6 +480,9 @@ static struct spi_driver ak4104_spi_driver = {
 		.of_match_table = ak4104_of_match,
 	},
 	.id_table = ak4104_id_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.probe  = ak4104_spi_probe,
 	.remove = ak4104_spi_remove,

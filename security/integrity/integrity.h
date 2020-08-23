@@ -31,6 +31,11 @@
 #define IMA_DIGSIG		0x01000000
 #define IMA_DIGSIG_REQUIRED	0x02000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMA_PERMIT_DIRECTIO	0x04000000
+#define IMA_NEW_FILE		0x08000000
+>>>>>>> v3.18
 =======
 #define IMA_PERMIT_DIRECTIO	0x04000000
 #define IMA_NEW_FILE		0x08000000
@@ -51,11 +56,14 @@
 #define IMA_MODULE_APPRAISE	0x00004000
 #define IMA_MODULE_APPRAISED	0x00008000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMA_APPRAISE_SUBMASK	(IMA_FILE_APPRAISE | IMA_MMAP_APPRAISE | \
 				 IMA_BPRM_APPRAISE | IMA_MODULE_APPRAISE)
 #define IMA_APPRAISED_SUBMASK	(IMA_FILE_APPRAISED | IMA_MMAP_APPRAISED | \
 				 IMA_BPRM_APPRAISED | IMA_MODULE_APPRAISED)
 =======
+=======
+>>>>>>> v3.18
 #define IMA_FIRMWARE_APPRAISE	0x00010000
 #define IMA_FIRMWARE_APPRAISED	0x00020000
 #define IMA_APPRAISE_SUBMASK	(IMA_FILE_APPRAISE | IMA_MMAP_APPRAISE | \
@@ -64,6 +72,9 @@
 #define IMA_APPRAISED_SUBMASK	(IMA_FILE_APPRAISED | IMA_MMAP_APPRAISED | \
 				 IMA_BPRM_APPRAISED | IMA_MODULE_APPRAISED | \
 				 IMA_FIRMWARE_APPRAISED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum evm_ima_xattr_type {
@@ -71,6 +82,11 @@ enum evm_ima_xattr_type {
 	EVM_XATTR_HMAC,
 	EVM_IMA_XATTR_DIGSIG,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IMA_XATTR_DIGEST_NG,
+	IMA_XATTR_LAST
+>>>>>>> v3.18
 =======
 	IMA_XATTR_DIGEST_NG,
 	IMA_XATTR_LAST
@@ -80,6 +96,7 @@ enum evm_ima_xattr_type {
 struct evm_ima_xattr_data {
 	u8 type;
 	u8 digest[SHA1_DIGEST_SIZE];
+<<<<<<< HEAD
 <<<<<<< HEAD
 }  __attribute__((packed));
 
@@ -91,6 +108,8 @@ struct integrity_iint_cache {
 	unsigned long flags;
 	struct evm_ima_xattr_data ima_xattr;
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 #define IMA_MAX_DIGEST_SIZE	64
@@ -130,13 +149,22 @@ struct integrity_iint_cache {
 	struct inode *inode;	/* back pointer to inode in question */
 	u64 version;		/* track inode changes */
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enum integrity_status ima_file_status:4;
 	enum integrity_status ima_mmap_status:4;
 	enum integrity_status ima_bprm_status:4;
 	enum integrity_status ima_module_status:4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum integrity_status evm_status:4;
+=======
+	enum integrity_status ima_firmware_status:4;
+	enum integrity_status evm_status:4;
+	struct ima_digest_data *ima_hash;
+>>>>>>> v3.18
 =======
 	enum integrity_status ima_firmware_status:4;
 	enum integrity_status evm_status:4;
@@ -148,7 +176,10 @@ struct integrity_iint_cache {
  * integrity data associated with an inode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct integrity_iint_cache *integrity_iint_insert(struct inode *inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct integrity_iint_cache *integrity_iint_find(struct inode *inode);
@@ -162,8 +193,14 @@ struct integrity_iint_cache *integrity_iint_find(struct inode *inode);
 
 int integrity_digsig_verify(const unsigned int id, const char *sig, int siglen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					const char *digest, int digestlen);
 
+=======
+			    const char *digest, int digestlen);
+
+int integrity_init_keyring(const unsigned int id);
+>>>>>>> v3.18
 =======
 			    const char *digest, int digestlen);
 
@@ -179,11 +216,17 @@ static inline int integrity_digsig_verify(const unsigned int id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int integrity_init_keyring(const unsigned int id)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_INTEGRITY_SIGNATURE */
 
@@ -199,7 +242,10 @@ static inline int asymmetric_verify(struct key *keyring, const char *sig,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_INTEGRITY_AUDIT
 /* declarations */
 void integrity_audit_msg(int audit_msgno, struct inode *inode,
@@ -214,6 +260,9 @@ static inline void integrity_audit_msg(int audit_msgno, struct inode *inode,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* set during initialization */
 extern int iint_initialized;

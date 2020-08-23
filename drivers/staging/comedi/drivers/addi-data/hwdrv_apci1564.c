@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
 @verbatim
 
@@ -261,6 +262,8 @@ static int i_APCI1564_ConfigDigitalOutput(struct comedi_device *dev,
 
 static int apci1564_do_insn_bits(struct comedi_device *dev,
 =======
+=======
+>>>>>>> v3.18
 /* Digital Input IRQ Function Selection */
 #define APCI1564_DI_INT_OR				(0 << 1)
 #define APCI1564_DI_INT_AND				(1 << 1)
@@ -337,11 +340,15 @@ static int apci1564_do_insn_bits(struct comedi_device *dev,
  * data[6] Counter Direction
  */
 static int apci1564_timer_config(struct comedi_device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 struct comedi_subdevice *s,
 				 struct comedi_insn *insn,
 				 unsigned int *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct addi_private *devpriv = dev->private;
 	unsigned int mask = data[0];
@@ -489,6 +496,8 @@ static int i_APCI1564_ConfigTimerCounterWatchdog(struct comedi_device *dev,
 
       /******************************/
 =======
+=======
+>>>>>>> v3.18
 	struct apci1564_private *devpriv = dev->private;
 	unsigned int ul_Command1 = 0;
 
@@ -546,6 +555,9 @@ static int i_APCI1564_ConfigTimerCounterWatchdog(struct comedi_device *dev,
 		outl(data[3], dev->iobase +
 					APCI1564_COUNTER_RELOAD_REG(data[5] - 1));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Set the mode :             */
 		/* - Disable the hardware     */
@@ -554,6 +566,7 @@ static int i_APCI1564_ConfigTimerCounterWatchdog(struct comedi_device *dev,
 		/* - Disable the reset        */
 		/* - Disable the timer mode   */
 		/* - Enable the counter mode  */
+<<<<<<< HEAD
 <<<<<<< HEAD
       /******************************/
 		ul_Command1 =
@@ -582,6 +595,8 @@ static int i_APCI1564_ConfigTimerCounterWatchdog(struct comedi_device *dev,
 	}			/*  else if  (data[0]==ADDIDATA_WATCHDOG) */
 
 =======
+=======
+>>>>>>> v3.18
 
 		ul_Command1 =
 			(ul_Command1 & 0xFFFC19E2UL) | 0x80000UL |
@@ -601,11 +616,15 @@ static int i_APCI1564_ConfigTimerCounterWatchdog(struct comedi_device *dev,
 	} else {
 		dev_err(dev->class_dev, "Invalid subdevice.\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return insn->n;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 +----------------------------------------------------------------------------+
 | Function   Name   : int i_APCI1564_StartStopWriteTimerCounterWatchdog      |
@@ -708,6 +727,8 @@ static int i_APCI1564_StartStopWriteTimerCounterWatchdog(struct comedi_device *d
 					1) * 0x20) + APCI1564_TCW_PROG);
 	}			/*  if (devpriv->b_TimerSelectMode==ADDIDATA_COUNTER) */
 =======
+=======
+>>>>>>> v3.18
  * Start / Stop The Selected Timer or Counter
  *
  * data[0] Configure as: 0 = Timer, 1 = Counter
@@ -755,6 +776,7 @@ static int apci1564_timer_write(struct comedi_device *dev,
 	} else {
 		dev_err(dev->class_dev, "Invalid subdevice.\n");
 	}
+<<<<<<< HEAD
 >>>>>>> v3.18
 	return insn->n;
 }
@@ -843,10 +865,13 @@ static int i_APCI1564_ReadTimerCounterWatchdog(struct comedi_device *dev,
 		&& (devpriv->b_TimerSelectMode != ADDIDATA_COUNTER)) {
 		printk("\n Invalid Subdevice !!!\n");
 	}			/*  else if ((devpriv->b_TimerSelectMode!=ADDIDATA_TIMER) && (devpriv->b_TimerSelectMode!=ADDIDATA_WATCHDOG)&& (devpriv->b_TimerSelectMode!=ADDIDATA_COUNTER)) */
+=======
+>>>>>>> v3.18
 	return insn->n;
 }
 
 /*
+<<<<<<< HEAD
 +----------------------------------------------------------------------------+
 | Function   Name   :  int i_APCI1564_ReadInterruptStatus                    |
 |			  (struct comedi_device *dev,struct comedi_subdevice *s,               |
@@ -1101,6 +1126,8 @@ static int i_APCI1564_Reset(struct comedi_device *dev)
 	outl(0x0, devpriv->iobase + APCI1564_COUNTER4 + APCI1564_TCW_PROG);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
  * Read The Selected Timer or Counter
  */
 static int apci1564_timer_read(struct comedi_device *dev,
@@ -1141,5 +1168,8 @@ static int apci1564_timer_read(struct comedi_device *dev,
 		dev_err(dev->class_dev, "Invalid subdevice.\n");
 	}
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

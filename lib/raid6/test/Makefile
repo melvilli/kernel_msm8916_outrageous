@@ -23,7 +23,10 @@ ifeq ($(ARCH),x86_64)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(ARCH),arm)
         CFLAGS += -I../../../arch/arm/include -mfpu=neon
         HAS_NEON = yes
@@ -33,6 +36,9 @@ ifeq ($(ARCH),arm64)
         HAS_NEON = yes
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ifeq ($(IS_X86),yes)
         OBJS   += mmx.o sse1.o sse2.o avx2.o recov_ssse3.o recov_avx2.o
@@ -40,14 +46,20 @@ ifeq ($(IS_X86),yes)
                     gcc -c -x assembler - >&/dev/null &&	\
                     rm ./-.o && echo -DCONFIG_AS_AVX2=1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 else
         HAS_ALTIVEC := $(shell echo -e '\#include <altivec.h>\nvector int a;' |\
 =======
+=======
+>>>>>>> v3.18
 else ifeq ($(HAS_NEON),yes)
         OBJS   += neon.o neon1.o neon2.o neon4.o neon8.o
         CFLAGS += -DCONFIG_KERNEL_MODE_NEON=1
 else
         HAS_ALTIVEC := $(shell printf '\#include <altivec.h>\nvector int a;\n' |\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                          gcc -c -x c - >&/dev/null && \
                          rm ./-.o && echo yes)
@@ -56,6 +68,12 @@ else
         endif
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ifeq ($(ARCH),tilegx)
+OBJS += tilegx8.o
+endif
+>>>>>>> v3.18
 =======
 ifeq ($(ARCH),tilegx)
 OBJS += tilegx8.o
@@ -82,7 +100,10 @@ raid6test: test.c raid6.a
 	$(CC) $(CFLAGS) -o raid6test $^
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 neon1.c: neon.uc ../unroll.awk
 	$(AWK) ../unroll.awk -vN=1 < neon.uc > $@
 
@@ -95,6 +116,9 @@ neon4.c: neon.uc ../unroll.awk
 neon8.c: neon.uc ../unroll.awk
 	$(AWK) ../unroll.awk -vN=8 < neon.uc > $@
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 altivec1.c: altivec.uc ../unroll.awk
 	$(AWK) ../unroll.awk -vN=1 < altivec.uc > $@
@@ -127,6 +151,12 @@ int32.c: int.uc ../unroll.awk
 	$(AWK) ../unroll.awk -vN=32 < int.uc > $@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+tilegx8.c: tilegx.uc ../unroll.awk
+	$(AWK) ../unroll.awk -vN=8 < tilegx.uc > $@
+
+>>>>>>> v3.18
 =======
 tilegx8.c: tilegx.uc ../unroll.awk
 	$(AWK) ../unroll.awk -vN=8 < tilegx.uc > $@
@@ -137,7 +167,12 @@ tables.c: mktables
 
 clean:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rm -f *.o *.a mktables mktables.c *.uc int*.c altivec*.c tables.c raid6test
+=======
+	rm -f *.o *.a mktables mktables.c *.uc int*.c altivec*.c neon*.c tables.c raid6test
+	rm -f tilegx*.c
+>>>>>>> v3.18
 =======
 	rm -f *.o *.a mktables mktables.c *.uc int*.c altivec*.c neon*.c tables.c raid6test
 	rm -f tilegx*.c

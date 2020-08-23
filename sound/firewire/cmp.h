@@ -8,20 +8,31 @@
 struct fw_unit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum cmp_direction {
 	CMP_INPUT = 0,
 	CMP_OUTPUT,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct cmp_connection - manages an isochronous connection to a device
  * @speed: the connection's actual speed
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This structure manages (using CMP) an isochronous stream from the local
  * computer to a device's input plug (iPCR).
+=======
+ * This structure manages (using CMP) an isochronous stream between the local
+ * computer and a device's input plug (iPCR) and output plug (oPCR).
+>>>>>>> v3.18
 =======
  * This structure manages (using CMP) an isochronous stream between the local
  * computer and a device's input plug (iPCR) and output plug (oPCR).
@@ -40,6 +51,10 @@ struct cmp_connection {
 	unsigned int pcr_index;
 	unsigned int max_speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum cmp_direction direction;
+>>>>>>> v3.18
 =======
 	enum cmp_direction direction;
 >>>>>>> v3.18
@@ -48,7 +63,13 @@ struct cmp_connection {
 int cmp_connection_init(struct cmp_connection *connection,
 			struct fw_unit *unit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned int ipcr_index);
+=======
+			enum cmp_direction direction,
+			unsigned int pcr_index);
+int cmp_connection_check_used(struct cmp_connection *connection, bool *used);
+>>>>>>> v3.18
 =======
 			enum cmp_direction direction,
 			unsigned int pcr_index);

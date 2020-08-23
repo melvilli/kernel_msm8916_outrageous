@@ -47,18 +47,24 @@
 #include <asm/synch.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * clear_bit doesn't imply a memory barrier
  */
 #define smp_mb__before_clear_bit()	smp_mb()
 #define smp_mb__after_clear_bit()	smp_mb()
 =======
+=======
+>>>>>>> v3.18
 /* PPC bit number conversion */
 #define PPC_BITLSHIFT(be)	(BITS_PER_LONG - 1 - (be))
 #define PPC_BIT(bit)		(1UL << PPC_BITLSHIFT(bit))
 #define PPC_BITMASK(bs, be)	((PPC_BIT(bs) - PPC_BIT(be)) | PPC_BIT(bs))
 
 #include <asm/barrier.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Macro for generating the ***_bits() functions */

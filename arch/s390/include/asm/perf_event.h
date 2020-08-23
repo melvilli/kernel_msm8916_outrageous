@@ -2,7 +2,11 @@
  * Performance event support - s390 specific definitions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2009, 2012
+=======
+ * Copyright IBM Corp. 2009, 2013
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2009, 2013
 >>>>>>> v3.18
@@ -11,11 +15,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cpu_mf.h>
 
 /* CPU-measurement counter facility */
 #define PERF_CPUM_CF_MAX_CTR		256
 =======
+=======
+>>>>>>> v3.18
 #ifndef _ASM_S390_PERF_EVENT_H
 #define _ASM_S390_PERF_EVENT_H
 
@@ -24,13 +31,19 @@
 #include <linux/perf_event.h>
 #include <linux/device.h>
 #include <asm/cpu_mf.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Per-CPU flags for PMU states */
 #define PMU_F_RESERVED			0x1000
 #define PMU_F_ENABLED			0x2000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PMU_F_IN_USE			0x4000
 #define PMU_F_ERR_IBE			0x0100
 #define PMU_F_ERR_LSDA			0x0200
@@ -107,4 +120,7 @@ void perf_release_sampling(void);
 
 #endif /* CONFIG_64BIT */
 #endif /* _ASM_S390_PERF_EVENT_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

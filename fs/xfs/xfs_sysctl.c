@@ -26,17 +26,23 @@ static struct ctl_table_header *xfs_table_header;
 STATIC int
 xfs_stats_clear_proc_handler(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table	*ctl,
 	int		write,
 	void		__user *buffer,
 	size_t		*lenp,
 	loff_t		*ppos)
 =======
+=======
+>>>>>>> v3.18
 	struct ctl_table	*ctl,
 	int			write,
 	void			__user *buffer,
 	size_t			*lenp,
 	loff_t			*ppos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int		c, ret, *valp = ctl->data;
@@ -64,17 +70,23 @@ xfs_stats_clear_proc_handler(
 STATIC int
 xfs_panic_mask_proc_handler(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table	*ctl,
 	int		write,
 	void		__user *buffer,
 	size_t		*lenp,
 	loff_t		*ppos)
 =======
+=======
+>>>>>>> v3.18
 	struct ctl_table	*ctl,
 	int			write,
 	void			__user *buffer,
 	size_t			*lenp,
 	loff_t			*ppos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int		ret, *valp = ctl->data;
@@ -91,7 +103,11 @@ xfs_panic_mask_proc_handler(
 #endif /* CONFIG_PROC_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xfs_table[] = {
+=======
+static struct ctl_table xfs_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xfs_table[] = {
 >>>>>>> v3.18
@@ -248,7 +264,11 @@ static struct ctl_table xfs_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xfs_dir_table[] = {
+=======
+static struct ctl_table xfs_dir_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xfs_dir_table[] = {
 >>>>>>> v3.18
@@ -261,7 +281,11 @@ static struct ctl_table xfs_dir_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xfs_root_table[] = {
+=======
+static struct ctl_table xfs_root_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xfs_root_table[] = {
 >>>>>>> v3.18

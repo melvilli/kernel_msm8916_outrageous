@@ -155,7 +155,11 @@ static int pnp_bus_match(struct device *dev, struct device_driver *drv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pnp_bus_suspend(struct device *dev, pm_message_t state)
+=======
+static int __pnp_bus_suspend(struct device *dev, pm_message_t state)
+>>>>>>> v3.18
 =======
 static int __pnp_bus_suspend(struct device *dev, pm_message_t state)
 >>>>>>> v3.18
@@ -168,7 +172,10 @@ static int __pnp_bus_suspend(struct device *dev, pm_message_t state)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pnp_drv->driver.pm && pnp_drv->driver.pm->suspend) {
 		error = pnp_drv->driver.pm->suspend(dev);
 		suspend_report_result(pnp_drv->driver.pm->suspend, error);
@@ -176,6 +183,9 @@ static int __pnp_bus_suspend(struct device *dev, pm_message_t state)
 			return error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pnp_drv->suspend) {
 		error = pnp_drv->suspend(pnp_dev, state);
@@ -195,7 +205,10 @@ static int __pnp_bus_suspend(struct device *dev, pm_message_t state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pnp_bus_suspend(struct device *dev)
 {
 	return __pnp_bus_suspend(dev, PMSG_SUSPEND);
@@ -211,6 +224,9 @@ static int pnp_bus_poweroff(struct device *dev)
 	return __pnp_bus_suspend(dev, PMSG_HIBERNATE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pnp_bus_resume(struct device *dev)
 {
@@ -234,13 +250,19 @@ static int pnp_bus_resume(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pnp_drv->driver.pm && pnp_drv->driver.pm->resume) {
 		error = pnp_drv->driver.pm->resume(dev);
 		if (error)
 			return error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pnp_drv->resume) {
 		error = pnp_drv->resume(pnp_dev);
@@ -252,7 +274,10 @@ static int pnp_bus_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops pnp_bus_dev_pm_ops = {
 	/* Suspend callbacks */
 	.suspend = pnp_bus_suspend,
@@ -264,6 +289,9 @@ static const struct dev_pm_ops pnp_bus_dev_pm_ops = {
 	.restore = pnp_bus_resume,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bus_type pnp_bus_type = {
 	.name    = "pnp",
@@ -272,9 +300,14 @@ struct bus_type pnp_bus_type = {
 	.remove  = pnp_device_remove,
 	.shutdown = pnp_device_shutdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend = pnp_bus_suspend,
 	.resume  = pnp_bus_resume,
 	.dev_attrs = pnp_interface_attrs,
+=======
+	.pm	 = &pnp_bus_dev_pm_ops,
+	.dev_groups = pnp_dev_groups,
+>>>>>>> v3.18
 =======
 	.pm	 = &pnp_bus_dev_pm_ops,
 	.dev_groups = pnp_dev_groups,

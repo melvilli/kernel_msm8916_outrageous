@@ -37,7 +37,11 @@ struct tcp_congestion_ops;
  */
 struct inet_connection_sock_af_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	    (*queue_xmit)(struct sk_buff *skb, struct flowi *fl);
+=======
+	int	    (*queue_xmit)(struct sock *sk, struct sk_buff *skb, struct flowi *fl);
+>>>>>>> v3.18
 =======
 	int	    (*queue_xmit)(struct sock *sk, struct sk_buff *skb, struct flowi *fl);
 >>>>>>> v3.18
@@ -152,9 +156,15 @@ static inline void *inet_csk_ca(const struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sock *inet_csk_clone_lock(const struct sock *sk,
 					const struct request_sock *req,
 					const gfp_t priority);
+=======
+struct sock *inet_csk_clone_lock(const struct sock *sk,
+				 const struct request_sock *req,
+				 const gfp_t priority);
+>>>>>>> v3.18
 =======
 struct sock *inet_csk_clone_lock(const struct sock *sk,
 				 const struct request_sock *req,
@@ -169,17 +179,23 @@ enum inet_csk_ack_state_t {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet_csk_init_xmit_timers(struct sock *sk,
 				      void (*retransmit_handler)(unsigned long),
 				      void (*delack_handler)(unsigned long),
 				      void (*keepalive_handler)(unsigned long));
 extern void inet_csk_clear_xmit_timers(struct sock *sk);
 =======
+=======
+>>>>>>> v3.18
 void inet_csk_init_xmit_timers(struct sock *sk,
 			       void (*retransmit_handler)(unsigned long),
 			       void (*delack_handler)(unsigned long),
 			       void (*keepalive_handler)(unsigned long));
 void inet_csk_clear_xmit_timers(struct sock *sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void inet_csk_schedule_ack(struct sock *sk)
@@ -198,8 +214,13 @@ static inline void inet_csk_delack_init(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet_csk_delete_keepalive_timer(struct sock *sk);
 extern void inet_csk_reset_keepalive_timer(struct sock *sk, unsigned long timeout);
+=======
+void inet_csk_delete_keepalive_timer(struct sock *sk);
+void inet_csk_reset_keepalive_timer(struct sock *sk, unsigned long timeout);
+>>>>>>> v3.18
 =======
 void inet_csk_delete_keepalive_timer(struct sock *sk);
 void inet_csk_reset_keepalive_timer(struct sock *sk, unsigned long timeout);
@@ -266,6 +287,7 @@ static inline void inet_csk_reset_xmit_timer(struct sock *sk, const int what,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sock *inet_csk_accept(struct sock *sk, int flags, int *err);
 
 extern struct request_sock *inet_csk_search_req(const struct sock *sk,
@@ -284,6 +306,8 @@ extern struct dst_entry* inet_csk_route_child_sock(struct sock *sk,
 						   struct sock *newsk,
 						   const struct request_sock *req);
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long
 inet_csk_rto_backoff(const struct inet_connection_sock *icsk,
 		     unsigned long max_when)
@@ -308,6 +332,9 @@ struct dst_entry *inet_csk_route_req(struct sock *sk, struct flowi4 *fl4,
 				     const struct request_sock *req);
 struct dst_entry *inet_csk_route_child_sock(struct sock *sk, struct sock *newsk,
 					    const struct request_sock *req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void inet_csk_reqsk_queue_add(struct sock *sk,
@@ -318,9 +345,14 @@ static inline void inet_csk_reqsk_queue_add(struct sock *sk,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet_csk_reqsk_queue_hash_add(struct sock *sk,
 					  struct request_sock *req,
 					  unsigned long timeout);
+=======
+void inet_csk_reqsk_queue_hash_add(struct sock *sk, struct request_sock *req,
+				   unsigned long timeout);
+>>>>>>> v3.18
 =======
 void inet_csk_reqsk_queue_hash_add(struct sock *sk, struct request_sock *req,
 				   unsigned long timeout);
@@ -372,6 +404,7 @@ static inline void inet_csk_reqsk_queue_drop(struct sock *sk,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet_csk_reqsk_queue_prune(struct sock *parent,
 				       const unsigned long interval,
 				       const unsigned long timeout,
@@ -380,6 +413,8 @@ extern void inet_csk_reqsk_queue_prune(struct sock *parent,
 extern void inet_csk_destroy_sock(struct sock *sk);
 extern void inet_csk_prepare_forced_close(struct sock *sk);
 =======
+=======
+>>>>>>> v3.18
 void inet_csk_reqsk_queue_prune(struct sock *parent,
 				const unsigned long interval,
 				const unsigned long timeout,
@@ -387,6 +422,9 @@ void inet_csk_reqsk_queue_prune(struct sock *parent,
 
 void inet_csk_destroy_sock(struct sock *sk);
 void inet_csk_prepare_forced_close(struct sock *sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -398,6 +436,7 @@ static inline unsigned int inet_csk_listen_poll(const struct sock *sk)
 			(POLLIN | POLLRDNORM) : 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int  inet_csk_listen_start(struct sock *sk, const int nr_table_entries);
 extern void inet_csk_listen_stop(struct sock *sk);
@@ -411,6 +450,8 @@ extern int inet_csk_compat_setsockopt(struct sock *sk, int level, int optname,
 
 extern struct dst_entry *inet_csk_update_pmtu(struct sock *sk, u32 mtu);
 =======
+=======
+>>>>>>> v3.18
 int inet_csk_listen_start(struct sock *sk, const int nr_table_entries);
 void inet_csk_listen_stop(struct sock *sk);
 
@@ -422,5 +463,8 @@ int inet_csk_compat_setsockopt(struct sock *sk, int level, int optname,
 			       char __user *optval, unsigned int optlen);
 
 struct dst_entry *inet_csk_update_pmtu(struct sock *sk, u32 mtu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _INET_CONNECTION_SOCK_H */

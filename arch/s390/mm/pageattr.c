@@ -7,15 +7,21 @@
 #include <linux/mm.h>
 #include <asm/cacheflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/pgtable.h>
 #include <asm/page.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/facility.h>
 #include <asm/pgtable.h>
 #include <asm/page.h>
 
 #if PAGE_DEFAULT_KEY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long sske_frame(unsigned long addr, unsigned char skey)
 {
@@ -25,7 +31,11 @@ static inline unsigned long sske_frame(unsigned long addr, unsigned char skey)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void storage_key_init_range(unsigned long start, unsigned long end)
+=======
+void __storage_key_init_range(unsigned long start, unsigned long end)
+>>>>>>> v3.18
 =======
 void __storage_key_init_range(unsigned long start, unsigned long end)
 >>>>>>> v3.18
@@ -49,6 +59,10 @@ void __storage_key_init_range(unsigned long start, unsigned long end)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -118,10 +132,13 @@ int set_memory_x(unsigned long addr, int numpages)
 
 #ifdef CONFIG_DEBUG_PAGEALLOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kernel_map_pages(struct page *page, int numpages, int enable)
 {
 	unsigned long address;
 =======
+=======
+>>>>>>> v3.18
 
 static void ipte_range(pte_t *pte, unsigned long address, int nr)
 {
@@ -142,15 +159,23 @@ void kernel_map_pages(struct page *page, int numpages, int enable)
 {
 	unsigned long address;
 	int nr, i, j;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pgd_t *pgd;
 	pud_t *pud;
 	pmd_t *pmd;
 	pte_t *pte;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	for (i = 0; i < numpages; i++) {
+=======
+
+	for (i = 0; i < numpages;) {
+>>>>>>> v3.18
 =======
 
 	for (i = 0; i < numpages;) {
@@ -161,6 +186,7 @@ void kernel_map_pages(struct page *page, int numpages, int enable)
 		pmd = pmd_offset(pud, address);
 		pte = pte_offset_kernel(pmd, address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!enable) {
 			__ptep_ipte(address, pte);
 			pte_val(*pte) = _PAGE_TYPE_EMPTY;
@@ -168,6 +194,8 @@ void kernel_map_pages(struct page *page, int numpages, int enable)
 		}
 		pte_val(*pte) = __pa(address);
 =======
+=======
+>>>>>>> v3.18
 		nr = (unsigned long)pte >> ilog2(sizeof(long));
 		nr = PTRS_PER_PTE - (nr & (PTRS_PER_PTE - 1));
 		nr = min(numpages - i, nr);
@@ -181,6 +209,9 @@ void kernel_map_pages(struct page *page, int numpages, int enable)
 			ipte_range(pte, address, nr);
 		}
 		i += nr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

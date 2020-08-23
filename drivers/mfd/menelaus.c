@@ -443,7 +443,11 @@ void menelaus_unregister_mmc_callback(void)
 
 	the_menelaus->mmc_callback = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	the_menelaus->mmc_callback_data = 0;
+=======
+	the_menelaus->mmc_callback_data = NULL;
+>>>>>>> v3.18
 =======
 	the_menelaus->mmc_callback_data = NULL;
 >>>>>>> v3.18
@@ -471,8 +475,11 @@ static int menelaus_set_voltage(const struct menelaus_vtg *vtg, int mV,
 
 	mutex_lock(&the_menelaus->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vtg == 0)
 		goto set_voltage;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -490,7 +497,10 @@ static int menelaus_set_voltage(const struct menelaus_vtg *vtg, int mV,
 	if (ret < 0)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 set_voltage:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = menelaus_write_reg(vtg->mode_reg, mode);
@@ -1197,15 +1207,21 @@ static int menelaus_probe(struct i2c_client *client,
 {
 	struct menelaus_chip	*menelaus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			rev = 0, val;
 	int			err = 0;
 	struct menelaus_platform_data *menelaus_pdata =
 					client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	int			rev = 0;
 	int			err = 0;
 	struct menelaus_platform_data *menelaus_pdata =
 					dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (the_menelaus) {
@@ -1215,7 +1231,11 @@ static int menelaus_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	menelaus = kzalloc(sizeof *menelaus, GFP_KERNEL);
+=======
+	menelaus = devm_kzalloc(&client->dev, sizeof(*menelaus), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	menelaus = devm_kzalloc(&client->dev, sizeof(*menelaus), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1232,8 +1252,12 @@ static int menelaus_probe(struct i2c_client *client,
 	if (rev < 0) {
 		pr_err(DRIVER_NAME ": device not found");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENODEV;
 		goto fail1;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -1257,7 +1281,11 @@ static int menelaus_probe(struct i2c_client *client,
 			dev_dbg(&client->dev,  "can't get IRQ %d, err %d\n",
 					client->irq, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail1;
+=======
+			return err;
+>>>>>>> v3.18
 =======
 			return err;
 >>>>>>> v3.18
@@ -1270,15 +1298,21 @@ static int menelaus_probe(struct i2c_client *client,
 	pr_info("Menelaus rev %d.%d\n", rev >> 4, rev & 0x0f);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = menelaus_read_reg(MENELAUS_VCORE_CTRL1);
 	if (val < 0)
 		goto fail2;
 	if (val & (1 << 7))
 =======
+=======
+>>>>>>> v3.18
 	err = menelaus_read_reg(MENELAUS_VCORE_CTRL1);
 	if (err < 0)
 		goto fail;
 	if (err & BIT(7))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		menelaus->vcore_hw_mode = 1;
 	else
@@ -1288,7 +1322,11 @@ static int menelaus_probe(struct i2c_client *client,
 		err = menelaus_pdata->late_init(&client->dev);
 		if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail2;
+=======
+			goto fail;
+>>>>>>> v3.18
 =======
 			goto fail;
 >>>>>>> v3.18
@@ -1298,11 +1336,17 @@ static int menelaus_probe(struct i2c_client *client,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail2:
 	free_irq(client->irq, menelaus);
 	flush_work(&menelaus->work);
 fail1:
 	kfree(menelaus);
+=======
+fail:
+	free_irq(client->irq, menelaus);
+	flush_work(&menelaus->work);
+>>>>>>> v3.18
 =======
 fail:
 	free_irq(client->irq, menelaus);
@@ -1318,7 +1362,10 @@ static int __exit menelaus_remove(struct i2c_client *client)
 	free_irq(client->irq, menelaus);
 	flush_work(&menelaus->work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(menelaus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	the_menelaus = NULL;
@@ -1340,6 +1387,7 @@ static struct i2c_driver menelaus_i2c_driver = {
 	.id_table	= menelaus_id,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init menelaus_init(void)
 {
@@ -1363,13 +1411,19 @@ static void __exit menelaus_exit(void)
 =======
 module_i2c_driver(menelaus_i2c_driver);
 >>>>>>> v3.18
+=======
+module_i2c_driver(menelaus_i2c_driver);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Texas Instruments, Inc. (and others)");
 MODULE_DESCRIPTION("I2C interface for Menelaus.");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(menelaus_init);
 module_exit(menelaus_exit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

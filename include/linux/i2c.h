@@ -206,7 +206,10 @@ struct i2c_driver {
  *	generic enough to hide second-sourcing and compatible revisions.
  * @adapter: manages the bus segment hosting this I2C device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @driver: device's driver, hence pointer to access routines
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @dev: Driver model device node for the slave.
@@ -226,7 +229,10 @@ struct i2c_client {
 	char name[I2C_NAME_SIZE];
 	struct i2c_adapter *adapter;	/* the adapter we sit on	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_driver *driver;	/* and our access routines	*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device dev;		/* the device structure		*/
@@ -351,8 +357,11 @@ i2c_register_board_info(int busnum, struct i2c_board_info const *info,
 #endif /* I2C_BOARDINFO */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct i2c_algorithm - represent I2C transfer method
  * @master_xfer: Issue a set of i2c transactions to the given I2C adapter
@@ -364,17 +373,26 @@ i2c_register_board_info(int busnum, struct i2c_board_info const *info,
  * @functionality: Return the flags that this algorithm/adapter pair supports
  *   from the I2C_FUNC_* flags.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The following structs are for those who like to implement new bus drivers:
  * i2c_algorithm is the interface to a class of hardware solutions which can
  * be addressed using the same bus algorithms - i.e. bit-banging or the PCF8584
  * to name two of the most common.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * The return codes from the @master_xfer field should indicate the type of
  * error code that occured during the transfer, as documented in the kernel
  * Documentation file Documentation/i2c/fault-codes.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct i2c_algorithm {
@@ -475,6 +493,10 @@ static inline struct i2c_adapter *
 i2c_parent_is_i2c_adapter(const struct i2c_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_I2C_MUX)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C_MUX)
 >>>>>>> v3.18
@@ -484,6 +506,10 @@ i2c_parent_is_i2c_adapter(const struct i2c_adapter *adapter)
 		return to_i2c_adapter(parent);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -509,6 +535,10 @@ void i2c_unlock_adapter(struct i2c_adapter *);
 #define I2C_CLASS_DDC		(1<<3)	/* DDC bus on graphics adapters */
 #define I2C_CLASS_SPD		(1<<7)	/* Memory modules */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define I2C_CLASS_DEPRECATED	(1<<8)	/* Warn users that adapter will stop using classes */
+>>>>>>> v3.18
 =======
 #define I2C_CLASS_DEPRECATED	(1<<8)	/* Warn users that adapter will stop using classes */
 >>>>>>> v3.18
@@ -582,12 +612,15 @@ static inline int i2c_adapter_id(struct i2c_adapter *adap)
 #endif /* I2C */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_ACPI_I2C)
 extern void acpi_i2c_register_devices(struct i2c_adapter *adap);
 #else
 static inline void acpi_i2c_register_devices(struct i2c_adapter *adap) {}
 #endif
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_OF)
 /* must call put_device() when done with returned i2c_client device */
 extern struct i2c_client *of_find_i2c_device_by_node(struct device_node *node);
@@ -607,6 +640,9 @@ static inline struct i2c_adapter *of_find_i2c_adapter_by_node(struct device_node
 	return NULL;
 }
 #endif /* CONFIG_OF */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _LINUX_I2C_H */

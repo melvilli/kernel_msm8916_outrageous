@@ -11,6 +11,10 @@ config CIFS
 	select CRYPTO_DES
 	select CRYPTO_SHA256
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRYPTO_CMAC
+>>>>>>> v3.18
 =======
 	select CRYPTO_CMAC
 >>>>>>> v3.18
@@ -26,12 +30,18 @@ config CIFS
 	  well.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  The module also provides optional support for the followon
 	  protocols for CIFS including SMB3, which enables
 	  useful performance and security features (see the description
 	  of CONFIG_CIFS_SMB2).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  The cifs module provides an advanced network file system
 	  client for mounting to CIFS compliant servers.  It includes
@@ -133,7 +143,12 @@ config CIFS_ACL
 	  help
 	    Allows fetching CIFS/NTFS ACL from the server.  The DACL blob
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    is handed over to the application/caller.
+=======
+	    is handed over to the application/caller.  See the man
+	    page for getcifsacl for more information.
+>>>>>>> v3.18
 =======
 	    is handed over to the application/caller.  See the man
 	    page for getcifsacl for more information.
@@ -179,7 +194,11 @@ config CIFS_NFSD_EXPORT
 
 config CIFS_SMB2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "SMB2 network file system support"
+=======
+	bool "SMB2 and SMB3 network file system support"
+>>>>>>> v3.18
 =======
 	bool "SMB2 and SMB3 network file system support"
 >>>>>>> v3.18
@@ -190,6 +209,7 @@ config CIFS_SMB2
 	select DNS_RESOLVER
 
 	help
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  This enables experimental support for the SMB2 (Server Message Block
 	  version 2) protocol. The SMB2 protocol is the successor to the
@@ -202,6 +222,8 @@ config CIFS_SMB2
 
 	  Unless you are a developer or tester, say N.
 =======
+=======
+>>>>>>> v3.18
 	  This enables support for the Server Message Block version 2
 	  family of protocols, including SMB3.  SMB3 support is
 	  enabled on mount by specifying "vers=3.0" in the mount
@@ -217,6 +239,9 @@ config CIFS_SMB2
 	  than SMB3 mounts do though). Note that SMB2/SMB3 mount
 	  options are also slightly simpler (compared to CIFS) due
 	  to protocol improvements.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config CIFS_FSCACHE

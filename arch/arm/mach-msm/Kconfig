@@ -1,6 +1,7 @@
 if ARCH_MSM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "MSM SoC Type"
 
 config ARCH_MSM8974
@@ -1051,6 +1052,8 @@ config FSM9900_GSM_NL
 	  The serial port connection can be established to communicate with the
 	  GSM NL module.
 =======
+=======
+>>>>>>> v3.18
 choice
 	prompt "Qualcomm MSM SoC Type"
 	default ARCH_MSM7X00A
@@ -1156,6 +1159,9 @@ config MSM_GPIOMUX
 	bool
 	help
 	  Support for MSM V1 TLMM GPIOMUX architecture.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif

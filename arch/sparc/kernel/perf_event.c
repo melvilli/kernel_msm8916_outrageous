@@ -111,7 +111,11 @@ struct cpu_hw_events {
 	unsigned int		group_flag;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PER_CPU(struct cpu_hw_events, cpu_hw_events) = { .enabled = 1, };
+=======
+static DEFINE_PER_CPU(struct cpu_hw_events, cpu_hw_events) = { .enabled = 1, };
+>>>>>>> v3.18
 =======
 static DEFINE_PER_CPU(struct cpu_hw_events, cpu_hw_events) = { .enabled = 1, };
 >>>>>>> v3.18
@@ -965,8 +969,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sparc_pmu_start(struct perf_event *event, int flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* On this PMU each PIC has it's own PCR control register.  */
@@ -982,6 +989,10 @@ static void calculate_multiple_pcrs(struct cpu_hw_events *cpuc)
 		struct hw_perf_event *hwc = &cp->hw;
 		int idx = hwc->idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u64 enc;
+>>>>>>> v3.18
 =======
 		u64 enc;
 >>>>>>> v3.18
@@ -990,10 +1001,13 @@ static void calculate_multiple_pcrs(struct cpu_hw_events *cpuc)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpuc->current_idx[i] = idx;
 
 		sparc_pmu_start(cp, PERF_EF_RELOAD);
 =======
+=======
+>>>>>>> v3.18
 		sparc_perf_event_set_period(cp, hwc, idx);
 		cpuc->current_idx[i] = idx;
 
@@ -1003,6 +1017,9 @@ static void calculate_multiple_pcrs(struct cpu_hw_events *cpuc)
 			cpuc->pcr[idx] |= nop_for_index(idx);
 		else
 			cpuc->pcr[idx] |= event_encoding(enc, idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -1032,7 +1049,11 @@ static void update_pcrs_for_enable(struct cpu_hw_events *cpuc)
 static void sparc_pmu_enable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1054,7 +1075,11 @@ static void sparc_pmu_enable(struct pmu *pmu)
 static void sparc_pmu_disable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1092,7 +1117,11 @@ static int active_event_index(struct cpu_hw_events *cpuc,
 static void sparc_pmu_start(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1111,7 +1140,11 @@ static void sparc_pmu_start(struct perf_event *event, int flags)
 static void sparc_pmu_stop(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1131,7 +1164,11 @@ static void sparc_pmu_stop(struct perf_event *event, int flags)
 static void sparc_pmu_del(struct perf_event *event, int _flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1140,6 +1177,10 @@ static void sparc_pmu_del(struct perf_event *event, int _flags)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	perf_pmu_disable(event->pmu);
+>>>>>>> v3.18
 =======
 	perf_pmu_disable(event->pmu);
 >>>>>>> v3.18
@@ -1169,6 +1210,10 @@ static void sparc_pmu_del(struct perf_event *event, int _flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	perf_pmu_enable(event->pmu);
+>>>>>>> v3.18
 =======
 	perf_pmu_enable(event->pmu);
 >>>>>>> v3.18
@@ -1178,7 +1223,11 @@ static void sparc_pmu_del(struct perf_event *event, int _flags)
 static void sparc_pmu_read(struct perf_event *event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1194,7 +1243,11 @@ static DEFINE_MUTEX(pmc_grab_mutex);
 static void perf_stop_nmi_watchdog(void *unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1206,7 +1259,11 @@ static void perf_stop_nmi_watchdog(void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void perf_event_grab_pmc(void)
+=======
+static void perf_event_grab_pmc(void)
+>>>>>>> v3.18
 =======
 static void perf_event_grab_pmc(void)
 >>>>>>> v3.18
@@ -1226,7 +1283,11 @@ static void perf_event_grab_pmc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void perf_event_release_pmc(void)
+=======
+static void perf_event_release_pmc(void)
+>>>>>>> v3.18
 =======
 static void perf_event_release_pmc(void)
 >>>>>>> v3.18
@@ -1417,7 +1478,11 @@ static int collect_events(struct perf_event *group, int max_count,
 static int sparc_pmu_add(struct perf_event *event, int ef_flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1426,6 +1491,10 @@ static int sparc_pmu_add(struct perf_event *event, int ef_flags)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	perf_pmu_disable(event->pmu);
+>>>>>>> v3.18
 =======
 	perf_pmu_disable(event->pmu);
 >>>>>>> v3.18
@@ -1462,6 +1531,10 @@ nocheck:
 	ret = 0;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	perf_pmu_enable(event->pmu);
+>>>>>>> v3.18
 =======
 	perf_pmu_enable(event->pmu);
 >>>>>>> v3.18
@@ -1569,7 +1642,11 @@ static int sparc_pmu_event_init(struct perf_event *event)
 static void sparc_pmu_start_txn(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1586,7 +1663,11 @@ static void sparc_pmu_start_txn(struct pmu *pmu)
 static void sparc_pmu_cancel_txn(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1603,7 +1684,11 @@ static void sparc_pmu_cancel_txn(struct pmu *pmu)
 static int sparc_pmu_commit_txn(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1613,7 +1698,11 @@ static int sparc_pmu_commit_txn(struct pmu *pmu)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1688,7 +1777,11 @@ static int __kprobes perf_event_nmi_handler(struct notifier_block *self,
 	regs = args->regs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1753,7 +1846,12 @@ static bool __init supported_pmu(void)
 		return true;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(sparc_pmu_type, "niagara4")) {
+=======
+	if (!strcmp(sparc_pmu_type, "niagara4") ||
+	    !strcmp(sparc_pmu_type, "niagara5")) {
+>>>>>>> v3.18
 =======
 	if (!strcmp(sparc_pmu_type, "niagara4") ||
 	    !strcmp(sparc_pmu_type, "niagara5")) {
@@ -1765,12 +1863,15 @@ static bool __init supported_pmu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init init_hw_perf_events(void)
 {
 	pr_info("Performance events: ");
 
 	if (!supported_pmu()) {
 =======
+=======
+>>>>>>> v3.18
 static int __init init_hw_perf_events(void)
 {
 	int err;
@@ -1779,6 +1880,9 @@ static int __init init_hw_perf_events(void)
 
 	err = pcr_arch_init();
 	if (err || !supported_pmu()) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_cont("No support for PMU type '%s'\n", sparc_pmu_type);
 		return 0;
@@ -1792,7 +1896,11 @@ static int __init init_hw_perf_events(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 early_initcall(init_hw_perf_events);
+=======
+pure_initcall(init_hw_perf_events);
+>>>>>>> v3.18
 =======
 pure_initcall(init_hw_perf_events);
 >>>>>>> v3.18
@@ -1853,16 +1961,22 @@ static void perf_callchain_user_64(struct perf_callchain_entry *entry,
 	ufp = regs->u_regs[UREG_I6] + STACK_BIAS;
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sparc_stackf *usf, sf;
 		unsigned long pc;
 
 		usf = (struct sparc_stackf *) ufp;
 =======
+=======
+>>>>>>> v3.18
 		struct sparc_stackf __user *usf;
 		struct sparc_stackf sf;
 		unsigned long pc;
 
 		usf = (struct sparc_stackf __user *)ufp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (__copy_from_user_inatomic(&sf, usf, sizeof(sf)))
 			break;
@@ -1884,16 +1998,22 @@ static void perf_callchain_user_32(struct perf_callchain_entry *entry,
 
 		if (thread32_stack_is_64bit(ufp)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct sparc_stackf *usf, sf;
 
 			ufp += STACK_BIAS;
 			usf = (struct sparc_stackf *) ufp;
 =======
+=======
+>>>>>>> v3.18
 			struct sparc_stackf __user *usf;
 			struct sparc_stackf sf;
 
 			ufp += STACK_BIAS;
 			usf = (struct sparc_stackf __user *)ufp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (__copy_from_user_inatomic(&sf, usf, sizeof(sf)))
 				break;
@@ -1901,8 +2021,14 @@ static void perf_callchain_user_32(struct perf_callchain_entry *entry,
 			ufp = ((unsigned long) sf.fp) & 0xffffffff;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct sparc_stackf32 *usf, sf;
 			usf = (struct sparc_stackf32 *) ufp;
+=======
+			struct sparc_stackf32 __user *usf;
+			struct sparc_stackf32 sf;
+			usf = (struct sparc_stackf32 __user *)ufp;
+>>>>>>> v3.18
 =======
 			struct sparc_stackf32 __user *usf;
 			struct sparc_stackf32 sf;

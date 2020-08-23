@@ -469,7 +469,10 @@ void vx_set_mic_boost(struct vx_core *chip, int boost)
 {
 	struct snd_vxpocket *pchip = (struct snd_vxpocket *)chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -477,7 +480,11 @@ void vx_set_mic_boost(struct vx_core *chip, int boost)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&chip->lock, flags);
+=======
+	mutex_lock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->lock);
 >>>>>>> v3.18
@@ -494,7 +501,11 @@ void vx_set_mic_boost(struct vx_core *chip, int boost)
 		vx_outb(chip, CDSP, pchip->regCDSP);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->lock, flags);
+=======
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->lock);
 >>>>>>> v3.18
@@ -523,7 +534,10 @@ void vx_set_mic_level(struct vx_core *chip, int level)
 {
 	struct snd_vxpocket *pchip = (struct snd_vxpocket *)chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -531,7 +545,11 @@ void vx_set_mic_level(struct vx_core *chip, int level)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&chip->lock, flags);
+=======
+	mutex_lock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->lock);
 >>>>>>> v3.18
@@ -540,7 +558,11 @@ void vx_set_mic_level(struct vx_core *chip, int level)
 		vx_outb(chip, MICRO, level);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->lock, flags);
+=======
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->lock);
 >>>>>>> v3.18

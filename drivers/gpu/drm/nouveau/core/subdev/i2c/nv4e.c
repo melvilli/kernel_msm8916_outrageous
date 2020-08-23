@@ -23,14 +23,20 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/i2c.h>
 #include <subdev/vga.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/vga.h>
 
 #include "priv.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nv4e_i2c_priv {
 	struct nouveau_i2c base;
@@ -92,7 +98,12 @@ nv4e_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     &nouveau_i2c_bit_algo, &port);
+=======
+				      &nouveau_i2c_bit_algo, &nv4e_i2c_func,
+				      &port);
+>>>>>>> v3.18
 =======
 				      &nouveau_i2c_bit_algo, &nv4e_i2c_func,
 				      &port);
@@ -102,7 +113,10 @@ nv4e_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->base.func = &nv4e_i2c_func;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	port->addr = 0x600800 + info->drive;
@@ -122,6 +136,7 @@ nv4e_i2c_sclass[] = {
 	{}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nv4e_i2c_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -145,18 +160,29 @@ nv4e_i2c_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv4e_i2c_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv4e_i2c_oclass = &(struct nouveau_i2c_impl) {
 	.base.handle = NV_SUBDEV(I2C, 0x4e),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = _nouveau_i2c_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_i2c_dtor,
 		.init = _nouveau_i2c_init,
 		.fini = _nouveau_i2c_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.sclass = nv4e_i2c_sclass,
+	.pad_x = &nv04_i2c_pad_oclass,
+}.base;
+>>>>>>> v3.18
 =======
 	.sclass = nv4e_i2c_sclass,
 	.pad_x = &nv04_i2c_pad_oclass,

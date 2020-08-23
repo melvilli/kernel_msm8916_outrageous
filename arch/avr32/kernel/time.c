@@ -60,7 +60,11 @@ static struct irqaction timer_irqaction = {
 	.handler	= timer_interrupt,
 	/* Oprofile uses the same irq as the timer, so allow it to be shared */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_TIMER | IRQF_DISABLED | IRQF_SHARED,
+=======
+	.flags		= IRQF_TIMER | IRQF_SHARED,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_SHARED,
 >>>>>>> v3.18

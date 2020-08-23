@@ -12,7 +12,10 @@
 #include <linux/fs.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -79,7 +82,11 @@ int uflash_devinit(struct platform_device *op, struct device_node *dp)
 	up->name = of_get_property(dp, "model", NULL);
 	if (up->name && 0 < strlen(up->name))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		up->map.name = (char *)up->name;
+=======
+		up->map.name = up->name;
+>>>>>>> v3.18
 =======
 		up->map.name = up->name;
 >>>>>>> v3.18

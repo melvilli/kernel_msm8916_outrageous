@@ -91,6 +91,11 @@
 #include <asm/sibyte/sb1250.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "sleep.h"
+
+>>>>>>> v3.18
 =======
 #include "sleep.h"
 
@@ -754,7 +759,11 @@ static int serdma_reg_access(struct cs4297a_state *s, u64 data)
                    request in */
                 s->reg_request = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 interruptible_sleep_on(&s->dma_dac.reg_wait);
+=======
+		oss_broken_sleep_on(&s->dma_dac.reg_wait, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 		oss_broken_sleep_on(&s->dma_dac.reg_wait, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -800,7 +809,11 @@ static int cs4297a_read_ac97(struct cs4297a_state *s, u32 offset,
                 return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         interruptible_sleep_on(&s->dma_adc.reg_wait);
+=======
+	oss_broken_sleep_on(&s->dma_adc.reg_wait, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 	oss_broken_sleep_on(&s->dma_adc.reg_wait, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -1754,7 +1767,11 @@ static ssize_t cs4297a_read(struct file *file, char *buffer, size_t count,
 			if (file->f_flags & O_NONBLOCK)
 				return ret ? ret : -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&s->dma_adc.wait);
+=======
+			oss_broken_sleep_on(&s->dma_adc.wait, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 			oss_broken_sleep_on(&s->dma_adc.wait, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -1854,7 +1871,11 @@ static ssize_t cs4297a_write(struct file *file, const char *buffer,
 			if (file->f_flags & O_NONBLOCK)
 				return ret ? ret : -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&d->wait);
+=======
+			oss_broken_sleep_on(&d->wait, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 			oss_broken_sleep_on(&d->wait, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -2474,7 +2495,11 @@ static int cs4297a_locked_open(struct inode *inode, struct file *file)
 			}
 			mutex_unlock(&s->open_sem_dac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&s->open_wait_dac);
+=======
+			oss_broken_sleep_on(&s->open_wait_dac, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 			oss_broken_sleep_on(&s->open_wait_dac, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -2495,7 +2520,11 @@ static int cs4297a_locked_open(struct inode *inode, struct file *file)
 			}
 			mutex_unlock(&s->open_sem_adc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&s->open_wait_adc);
+=======
+			oss_broken_sleep_on(&s->open_wait_adc, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 			oss_broken_sleep_on(&s->open_wait_adc, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -2653,10 +2682,15 @@ static int __init cs4297a_init(void)
 	mm_segment_t fs;
 	int rval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_BCM_CS4297A_CSWARM
 	u64 cfg;
 	int mdio_val;
 #endif
+=======
+	u64 cfg;
+	int mdio_val;
+>>>>>>> v3.18
 =======
 	u64 cfg;
 	int mdio_val;
@@ -2666,7 +2700,10 @@ static int __init cs4297a_init(void)
 		"cs4297a: cs4297a_init_module()+ \n"));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_BCM_CS4297A_CSWARM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         mdio_val = __raw_readq(KSEG1 + A_MAC_REGISTER(2, R_MAC_MDIO)) &
@@ -2695,7 +2732,10 @@ static int __init cs4297a_init(void)
         /* Give the codec some time to finish resetting (start the bit clock) */
         udelay(100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

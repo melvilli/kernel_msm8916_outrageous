@@ -378,8 +378,11 @@
 #define __NR_finit_module	353
 #define __NR_kcmp		354
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr	355
 #define __NR_sched_getattr	356
 #define __NR_renameat2		357
@@ -387,6 +390,9 @@
 #define __NR_getrandom		359
 #define __NR_memfd_create	360
 #define __NR_bpf		361
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_ASM_POWERPC_UNISTD_H_ */

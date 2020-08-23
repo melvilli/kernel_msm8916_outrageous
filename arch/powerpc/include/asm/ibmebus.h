@@ -49,8 +49,13 @@
 extern struct bus_type ibmebus_bus_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ibmebus_register_driver(struct of_platform_driver *drv);
 void ibmebus_unregister_driver(struct of_platform_driver *drv);
+=======
+int ibmebus_register_driver(struct platform_driver *drv);
+void ibmebus_unregister_driver(struct platform_driver *drv);
+>>>>>>> v3.18
 =======
 int ibmebus_register_driver(struct platform_driver *drv);
 void ibmebus_unregister_driver(struct platform_driver *drv);

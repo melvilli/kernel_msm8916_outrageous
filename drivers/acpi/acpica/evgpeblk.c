@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -92,9 +96,15 @@ acpi_ev_install_gpe_block(struct acpi_gpe_block_info *gpe_block,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpe_xrupt_block = acpi_ev_get_gpe_xrupt_block(interrupt_number);
 	if (!gpe_xrupt_block) {
 		status = AE_NO_MEMORY;
+=======
+	status =
+	    acpi_ev_get_gpe_xrupt_block(interrupt_number, &gpe_xrupt_block);
+	if (ACPI_FAILURE(status)) {
+>>>>>>> v3.18
 =======
 	status =
 	    acpi_ev_get_gpe_xrupt_block(interrupt_number, &gpe_xrupt_block);
@@ -122,8 +132,13 @@ acpi_ev_install_gpe_block(struct acpi_gpe_block_info *gpe_block,
 	acpi_os_release_lock(acpi_gbl_gpe_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
 	status = acpi_ut_release_mutex(ACPI_MTX_EVENTS);
+=======
+unlock_and_exit:
+	(void)acpi_ut_release_mutex(ACPI_MTX_EVENTS);
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 	(void)acpi_ut_release_mutex(ACPI_MTX_EVENTS);
@@ -194,7 +209,11 @@ acpi_status acpi_ev_delete_gpe_block(struct acpi_gpe_block_info *gpe_block)
 	ACPI_FREE(gpe_block);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -272,6 +291,7 @@ acpi_ev_create_gpe_info_blocks(struct acpi_gpe_block_info *gpe_block)
 		/* Init the register_info for this GPE register (8 GPEs) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this_register->base_gpe_number =
 		    (u8) (gpe_block->block_base_number +
 			  (i * ACPI_GPE_REGISTER_WIDTH));
@@ -288,6 +308,8 @@ acpi_ev_create_gpe_info_blocks(struct acpi_gpe_block_info *gpe_block)
 		this_register->enable_address.space_id =
 		    gpe_block->block_address.space_id;
 =======
+=======
+>>>>>>> v3.18
 		this_register->base_gpe_number = (u16)
 		    (gpe_block->block_base_number +
 		     (i * ACPI_GPE_REGISTER_WIDTH));
@@ -299,6 +321,9 @@ acpi_ev_create_gpe_info_blocks(struct acpi_gpe_block_info *gpe_block)
 
 		this_register->status_address.space_id = gpe_block->space_id;
 		this_register->enable_address.space_id = gpe_block->space_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		this_register->status_address.bit_width =
 		    ACPI_GPE_REGISTER_WIDTH;
@@ -336,7 +361,11 @@ acpi_ev_create_gpe_info_blocks(struct acpi_gpe_block_info *gpe_block)
 	return_ACPI_STATUS(AE_OK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18
@@ -372,14 +401,20 @@ error_exit:
 acpi_status
 acpi_ev_create_gpe_block(struct acpi_namespace_node *gpe_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct acpi_generic_address *gpe_block_address,
 			 u32 register_count,
 			 u8 gpe_block_base_number,
 =======
+=======
+>>>>>>> v3.18
 			 u64 address,
 			 u8 space_id,
 			 u32 register_count,
 			 u16 gpe_block_base_number,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 u32 interrupt_number,
 			 struct acpi_gpe_block_info **return_gpe_block)
@@ -404,6 +439,11 @@ acpi_ev_create_gpe_block(struct acpi_namespace_node *gpe_device,
 	/* Initialize the new GPE block */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gpe_block->address = address;
+	gpe_block->space_id = space_id;
+>>>>>>> v3.18
 =======
 	gpe_block->address = address;
 	gpe_block->space_id = space_id;
@@ -415,9 +455,12 @@ acpi_ev_create_gpe_block(struct acpi_namespace_node *gpe_device,
 	gpe_block->block_base_number = gpe_block_base_number;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_MEMCPY(&gpe_block->block_address, gpe_block_address,
 		    sizeof(struct acpi_generic_address));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -435,6 +478,11 @@ acpi_ev_create_gpe_block(struct acpi_namespace_node *gpe_device,
 	status = acpi_ev_install_gpe_block(gpe_block, interrupt_number);
 	if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ACPI_FREE(gpe_block->register_info);
+		ACPI_FREE(gpe_block->event_info);
+>>>>>>> v3.18
 =======
 		ACPI_FREE(gpe_block->register_info);
 		ACPI_FREE(gpe_block->event_info);
@@ -464,7 +512,11 @@ acpi_ev_create_gpe_block(struct acpi_namespace_node *gpe_device,
 
 	ACPI_DEBUG_PRINT_RAW((ACPI_DB_INIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      "    Initialized GPE %02X to %02X [%4.4s] %u regs on interrupt 0x%X\n",
+=======
+			      "    Initialized GPE %02X to %02X [%4.4s] %u regs on interrupt 0x%X%s\n",
+>>>>>>> v3.18
 =======
 			      "    Initialized GPE %02X to %02X [%4.4s] %u regs on interrupt 0x%X%s\n",
 >>>>>>> v3.18
@@ -473,7 +525,13 @@ acpi_ev_create_gpe_block(struct acpi_namespace_node *gpe_device,
 				    (gpe_block->gpe_count - 1)),
 			      gpe_device->name.ascii, gpe_block->register_count,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      interrupt_number));
+=======
+			      interrupt_number,
+			      interrupt_number ==
+			      acpi_gbl_FADT.sci_interrupt ? " (SCI)" : ""));
+>>>>>>> v3.18
 =======
 			      interrupt_number,
 			      interrupt_number ==

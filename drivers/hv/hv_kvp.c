@@ -30,7 +30,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Pre win8 version numbers used in ws2008 and ws 2008 r2 (win7)
  */
@@ -45,6 +48,9 @@
 #define WIN8_SRV_MAJOR   4
 #define WIN8_SRV_MINOR   0
 #define WIN8_SRV_VERSION     (WIN8_SRV_MAJOR << 16 | WIN8_SRV_MINOR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -94,7 +100,13 @@ static u8 *recv_buffer;
  * Register the kernel component with the user-level daemon.
  * As part of this registration, pass the LIC version number.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
+=======
+ * This number has no meaning, it satisfies the registration protocol.
+ */
+#define HV_DRV_VERSION           "3.1"
+>>>>>>> v3.18
 =======
  * This number has no meaning, it satisfies the registration protocol.
  */
@@ -121,7 +133,11 @@ kvp_register(int reg_value)
 		strcpy(version, HV_DRV_VERSION);
 		msg->len = sizeof(struct hv_kvp_msg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cn_netlink_send(msg, 0, GFP_ATOMIC);
+=======
+		cn_netlink_send(msg, 0, 0, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		cn_netlink_send(msg, 0, 0, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -141,6 +157,7 @@ kvp_work_func(struct work_struct *dummy)
 static void poll_channel(struct vmbus_channel *channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&channel->inbound_lock, flags);
@@ -149,6 +166,8 @@ static void poll_channel(struct vmbus_channel *channel)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (channel->target_cpu != smp_processor_id())
 		smp_call_function_single(channel->target_cpu,
 					 hv_kvp_onchannelcallback,
@@ -158,6 +177,9 @@ static void poll_channel(struct vmbus_channel *channel)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int kvp_handle_handshake(struct hv_kvp_msg *msg)
 {
@@ -468,7 +490,11 @@ kvp_send_key(struct work_struct *dummy)
 
 	msg->len = sizeof(struct hv_kvp_msg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, 0, GFP_ATOMIC);
+=======
+	cn_netlink_send(msg, 0, 0, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, 0, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -606,7 +632,10 @@ response_done:
 				VM_PKT_DATA_INBAND, 0);
 	poll_channel(channel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -632,6 +661,11 @@ void hv_kvp_onchannelcallback(void *context)
 	struct icmsg_hdr *icmsghdrp;
 	struct icmsg_negotiate *negop = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int util_fw_version;
+	int kvp_srv_version;
+>>>>>>> v3.18
 =======
 	int util_fw_version;
 	int kvp_srv_version;
@@ -655,9 +689,12 @@ void hv_kvp_onchannelcallback(void *context)
 
 		if (icmsghdrp->icmsgtype == ICMSGTYPE_NEGOTIATE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vmbus_prep_negotiate_resp(icmsghdrp, negop,
 				 recv_buffer, MAX_SRV_VER, MAX_SRV_VER);
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * Based on the host, select appropriate
 			 * framework and service versions we will
@@ -680,6 +717,9 @@ void hv_kvp_onchannelcallback(void *context)
 				 recv_buffer, util_fw_version,
 				 kvp_srv_version);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			kvp_msg = (struct hv_kvp_msg *)&recv_buffer[

@@ -91,6 +91,11 @@
 #define TIOCCBRK	0x5428  /* BSD compatibility */
 #define TIOCGSID	0x5429  /* Return the session ID of FD */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIOCGRS485	_IOR('T', 0x2E, struct serial_rs485)
+#define TIOCSRS485	_IOWR('T', 0x2F, struct serial_rs485)
+>>>>>>> v3.18
 =======
 #define TIOCGRS485	_IOR('T', 0x2E, struct serial_rs485)
 #define TIOCSRS485	_IOWR('T', 0x2F, struct serial_rs485)

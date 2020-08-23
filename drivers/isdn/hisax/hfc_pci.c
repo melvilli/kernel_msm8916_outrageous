@@ -902,7 +902,11 @@ Begin:
 					*ptr++ = '\n';
 					*ptr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+					HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 					HiSax_putstatus(cs, NULL, "%s", cs->dlog);
 >>>>>>> v3.18
@@ -1648,10 +1652,13 @@ setup_hfcpci(struct IsdnCard *card)
 	struct pci_dev *tmp_hfcpci = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __BIG_ENDIAN
 #error "not running on big endian machines now"
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(tmp, hfcpci_revision);

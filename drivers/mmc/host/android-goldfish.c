@@ -547,8 +547,11 @@ static int goldfish_mmc_remove(struct platform_device *pdev)
 	struct goldfish_mmc_host *host = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(host == NULL);

@@ -94,7 +94,11 @@ struct symbol {
 #define SYMBOL_VALID      0x0080  /* set when symbol.curr is calculated */
 #define SYMBOL_OPTIONAL   0x0100  /* choice is optional - values can be 'n' */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYMBOL_WRITE      0x0200  /* ? */
+=======
+#define SYMBOL_WRITE      0x0200  /* write symbol to file (KCONFIG_CONFIG) */
+>>>>>>> v3.18
 =======
 #define SYMBOL_WRITE      0x0200  /* write symbol to file (KCONFIG_CONFIG) */
 >>>>>>> v3.18
@@ -114,6 +118,12 @@ struct symbol {
 #define SYMBOL_NEED_SET_CHOICE_VALUES  0x100000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Set symbol to y if allnoconfig; used for symbols that hide others */
+#define SYMBOL_ALLNOCONFIG_Y 0x200000
+
+>>>>>>> v3.18
 =======
 /* Set symbol to y if allnoconfig; used for symbols that hide others */
 #define SYMBOL_ALLNOCONFIG_Y 0x200000

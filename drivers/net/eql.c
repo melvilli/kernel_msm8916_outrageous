@@ -200,7 +200,11 @@ static void __init eql_setup(struct net_device *dev)
 	dev->type       	= ARPHRD_SLIP;
 	dev->tx_queue_len 	= 5;		/* Hands them off fast */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->priv_flags	       &= ~IFF_XMIT_DST_RELEASE;
+=======
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 =======
 	netif_keep_dst(dev);
 >>>>>>> v3.18
@@ -400,6 +404,10 @@ static int __eql_insert_slave(slave_queue_t *queue, slave_t *slave)
 			eql_kill_one_slave(queue, duplicate_slave);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_hold(slave->dev);
+>>>>>>> v3.18
 =======
 		dev_hold(slave->dev);
 >>>>>>> v3.18
@@ -421,6 +429,7 @@ static int eql_enslave(struct net_device *master_dev, slaving_request_t __user *
 	if (copy_from_user(&srq, srqp, sizeof (slaving_request_t)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	slave_dev  = dev_get_by_name(&init_net, srq.slave_name);
 	if (slave_dev) {
@@ -456,6 +465,8 @@ static int eql_enslave(struct net_device *master_dev, slaving_request_t __user *
 		}
 		dev_put(slave_dev);
 =======
+=======
+>>>>>>> v3.18
 	slave_dev = __dev_get_by_name(&init_net, srq.slave_name);
 	if (!slave_dev)
 		return -ENODEV;
@@ -485,6 +496,9 @@ static int eql_enslave(struct net_device *master_dev, slaving_request_t __user *
 
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -501,6 +515,7 @@ static int eql_emancipate(struct net_device *master_dev, slaving_request_t __use
 	if (copy_from_user(&srq, srqp, sizeof (slaving_request_t)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	slave_dev = dev_get_by_name(&init_net, srq.slave_name);
 	ret = -EINVAL;
@@ -521,6 +536,8 @@ static int eql_emancipate(struct net_device *master_dev, slaving_request_t __use
 		spin_unlock_bh(&eql->queue.lock);
 	}
 =======
+=======
+>>>>>>> v3.18
 	slave_dev = __dev_get_by_name(&init_net, srq.slave_name);
 	if (!slave_dev)
 		return -ENODEV;
@@ -535,6 +552,9 @@ static int eql_emancipate(struct net_device *master_dev, slaving_request_t __use
 		}
 	}
 	spin_unlock_bh(&eql->queue.lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -552,7 +572,11 @@ static int eql_g_slave_cfg(struct net_device *dev, slave_config_t __user *scp)
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	slave_dev = dev_get_by_name(&init_net, sc.slave_name);
+=======
+	slave_dev = __dev_get_by_name(&init_net, sc.slave_name);
+>>>>>>> v3.18
 =======
 	slave_dev = __dev_get_by_name(&init_net, sc.slave_name);
 >>>>>>> v3.18
@@ -572,8 +596,11 @@ static int eql_g_slave_cfg(struct net_device *dev, slave_config_t __user *scp)
 	spin_unlock_bh(&eql->queue.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_put(slave_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ret && copy_to_user(scp, &sc, sizeof (slave_config_t)))
@@ -594,7 +621,11 @@ static int eql_s_slave_cfg(struct net_device *dev, slave_config_t __user *scp)
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	slave_dev = dev_get_by_name(&init_net, sc.slave_name);
+=======
+	slave_dev = __dev_get_by_name(&init_net, sc.slave_name);
+>>>>>>> v3.18
 =======
 	slave_dev = __dev_get_by_name(&init_net, sc.slave_name);
 >>>>>>> v3.18
@@ -617,8 +648,11 @@ static int eql_s_slave_cfg(struct net_device *dev, slave_config_t __user *scp)
 	spin_unlock_bh(&eql->queue.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_put(slave_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -668,7 +702,12 @@ static int __init eql_init_module(void)
 	pr_info("%s\n", version);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_eql = alloc_netdev(sizeof(equalizer_t), "eql", eql_setup);
+=======
+	dev_eql = alloc_netdev(sizeof(equalizer_t), "eql", NET_NAME_UNKNOWN,
+			       eql_setup);
+>>>>>>> v3.18
 =======
 	dev_eql = alloc_netdev(sizeof(equalizer_t), "eql", NET_NAME_UNKNOWN,
 			       eql_setup);

@@ -16,6 +16,10 @@ sctp_conn_schedule(int af, struct sk_buff *skb, struct ip_vs_proto_data *pd,
 	struct net *net;
 	struct ip_vs_service *svc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct netns_ipvs *ipvs;
+>>>>>>> v3.18
 =======
 	struct netns_ipvs *ipvs;
 >>>>>>> v3.18
@@ -23,6 +27,7 @@ sctp_conn_schedule(int af, struct sk_buff *skb, struct ip_vs_proto_data *pd,
 	sctp_sctphdr_t *sh, _sctph;
 
 	sh = skb_header_pointer(skb, iph->len, sizeof(_sctph), &_sctph);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (sh == NULL)
 		return 0;
@@ -35,6 +40,8 @@ sctp_conn_schedule(int af, struct sk_buff *skb, struct ip_vs_proto_data *pd,
 	rcu_read_lock();
 	if ((sch->type == SCTP_CID_INIT) &&
 =======
+=======
+>>>>>>> v3.18
 	if (sh == NULL) {
 		*verdict = NF_DROP;
 		return 0;
@@ -51,13 +58,20 @@ sctp_conn_schedule(int af, struct sk_buff *skb, struct ip_vs_proto_data *pd,
 	ipvs = net_ipvs(net);
 	rcu_read_lock();
 	if ((sch->type == SCTP_CID_INIT || sysctl_sloppy_sctp(ipvs)) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    (svc = ip_vs_service_find(net, af, skb->mark, iph->protocol,
 				      &iph->daddr, sh->dest))) {
 		int ignored;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ip_vs_todrop(net_ipvs(net))) {
+=======
+		if (ip_vs_todrop(ipvs)) {
+>>>>>>> v3.18
 =======
 		if (ip_vs_todrop(ipvs)) {
 >>>>>>> v3.18
@@ -92,6 +106,7 @@ static void sctp_nat_csum(struct sk_buff *skb, sctp_sctphdr_t *sctph,
 			  unsigned int sctphoff)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 crc32;
 	struct sk_buff *iter;
 
@@ -101,6 +116,9 @@ static void sctp_nat_csum(struct sk_buff *skb, sctp_sctphdr_t *sctph,
 					  skb_headlen(iter), crc32);
 	sctph->checksum = sctp_end_cksum(crc32);
 
+=======
+	sctph->checksum = sctp_compute_cksum(skb, sctphoff);
+>>>>>>> v3.18
 =======
 	sctph->checksum = sctp_compute_cksum(skb, sctphoff);
 >>>>>>> v3.18
@@ -114,6 +132,10 @@ sctp_snat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 	sctp_sctphdr_t *sctph;
 	unsigned int sctphoff = iph->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool payload_csum = false;
+>>>>>>> v3.18
 =======
 	bool payload_csum = false;
 >>>>>>> v3.18
@@ -129,6 +151,11 @@ sctp_snat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 	if (unlikely(cp->app != NULL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		int ret;
+
+>>>>>>> v3.18
 =======
 		int ret;
 
@@ -139,6 +166,7 @@ sctp_snat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 		/* Call application helper if needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ip_vs_app_pkt_out(cp, skb))
 			return 0;
 	}
@@ -148,6 +176,8 @@ sctp_snat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 	sctp_nat_csum(skb, sctph, sctphoff);
 =======
+=======
+>>>>>>> v3.18
 		ret = ip_vs_app_pkt_out(cp, skb);
 		if (ret == 0)
 			return 0;
@@ -166,6 +196,9 @@ sctp_snat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 	} else {
 		skb->ip_summed = CHECKSUM_UNNECESSARY;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -178,6 +211,10 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 	sctp_sctphdr_t *sctph;
 	unsigned int sctphoff = iph->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool payload_csum = false;
+>>>>>>> v3.18
 =======
 	bool payload_csum = false;
 >>>>>>> v3.18
@@ -193,6 +230,11 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 	if (unlikely(cp->app != NULL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		int ret;
+
+>>>>>>> v3.18
 =======
 		int ret;
 
@@ -203,6 +245,7 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 		/* Call application helper if needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ip_vs_app_pkt_in(cp, skb))
 			return 0;
 	}
@@ -212,6 +255,8 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 	sctp_nat_csum(skb, sctph, sctphoff);
 =======
+=======
+>>>>>>> v3.18
 		ret = ip_vs_app_pkt_in(cp, skb);
 		if (ret == 0)
 			return 0;
@@ -231,6 +276,9 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 	} else if (skb->ip_summed != CHECKSUM_PARTIAL) {
 		skb->ip_summed = CHECKSUM_UNNECESSARY;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -242,10 +290,14 @@ sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp)
 	unsigned int sctphoff;
 	struct sctphdr *sh, _sctph;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *iter;
 	__le32 cmp;
 	__le32 val;
 	__u32 tmp;
+=======
+	__le32 cmp, val;
+>>>>>>> v3.18
 =======
 	__le32 cmp, val;
 >>>>>>> v3.18
@@ -263,6 +315,7 @@ sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp)
 
 	cmp = sh->checksum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	tmp = sctp_start_cksum((__u8 *) sh, skb_headlen(skb));
 	skb_walk_frags(skb, iter)
@@ -270,6 +323,9 @@ sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp)
 					skb_headlen(iter), tmp);
 
 	val = sctp_end_cksum(tmp);
+=======
+	val = sctp_compute_cksum(skb, sctphoff);
+>>>>>>> v3.18
 =======
 	val = sctp_compute_cksum(skb, sctphoff);
 >>>>>>> v3.18
@@ -283,6 +339,7 @@ sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp)
 	return 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct ipvs_sctp_nextstate {
 	int next_state;
@@ -989,6 +1046,8 @@ static const char *sctp_state_name_table[IP_VS_SCTP_S_LAST + 1] = {
 	[IP_VS_SCTP_S_CLOSED]       =    "CLOSED",
 	[IP_VS_SCTP_S_LAST]         =    "BUG!"
 =======
+=======
+>>>>>>> v3.18
 enum ipvs_sctp_event_t {
 	IP_VS_SCTP_DATA = 0,		/* DATA, SACK, HEARTBEATs */
 	IP_VS_SCTP_INIT,
@@ -1142,6 +1201,9 @@ static const char *sctp_state_name_table[IP_VS_SCTP_S_LAST + 1] = {
 	[IP_VS_SCTP_S_REJECTED]			= "REJECTED",
 	[IP_VS_SCTP_S_CLOSED]			= "CLOSED",
 	[IP_VS_SCTP_S_LAST]			= "BUG!",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1200,6 +1262,7 @@ set_sctp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event = sctp_events[chunk_type];
 
 	/*
@@ -1212,6 +1275,8 @@ set_sctp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 	 */
 	next_state = sctp_states_table[cp->state][event].next_state;
 =======
+=======
+>>>>>>> v3.18
 	event = (chunk_type < sizeof(sctp_events)) ?
 		sctp_events[chunk_type] : IP_VS_SCTP_DATA;
 
@@ -1226,6 +1291,9 @@ set_sctp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 	}
 
 	next_state = sctp_states[direction][event][cp->state];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (next_state != cp->state) {
@@ -1237,7 +1305,11 @@ set_sctp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 				((direction == IP_VS_DIR_OUTPUT) ?
 				 "output " : "input "),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IP_VS_DBG_ADDR(cp->af, &cp->daddr),
+=======
+				IP_VS_DBG_ADDR(cp->daf, &cp->daddr),
+>>>>>>> v3.18
 =======
 				IP_VS_DBG_ADDR(cp->daf, &cp->daddr),
 >>>>>>> v3.18

@@ -8,7 +8,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap2420.dtsi"
+=======
+#include "omap2420.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap2420.dtsi"
 >>>>>>> v3.18
@@ -55,6 +59,7 @@
 			reg = <0 0x20000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		partition@0x20000 {
 			label = "params";
 			reg = <0x20000 0x20000>;
@@ -65,6 +70,8 @@
 		};
 		partition@0x240000 {
 =======
+=======
+>>>>>>> v3.18
 		partition@20000 {
 			label = "params";
 			reg = <0x20000 0x20000>;
@@ -74,6 +81,9 @@
 			reg = <0x40000 0x200000>;
 		};
 		partition@240000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			label = "file-system";
 			reg = <0x240000 0x3dc0000>;

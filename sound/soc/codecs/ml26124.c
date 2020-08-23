@@ -74,17 +74,23 @@ static const char * const ml26124_companding[] = {"16bit PCM", "u-law",
 						  "A-law"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ml26124_adc_companding_enum
 	= SOC_ENUM_SINGLE(ML26124_SAI_TRANS_CTL, 6, 3, ml26124_companding);
 
 static const struct soc_enum ml26124_dac_companding_enum
 	= SOC_ENUM_SINGLE(ML26124_SAI_RCV_CTL, 6, 3, ml26124_companding);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(ml26124_adc_companding_enum,
 			    ML26124_SAI_TRANS_CTL, 6, ml26124_companding);
 
 static SOC_ENUM_SINGLE_DECL(ml26124_dac_companding_enum,
 			    ML26124_SAI_RCV_CTL, 6, ml26124_companding);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new ml26124_snd_controls[] = {
@@ -145,8 +151,13 @@ static const char * const ml26124_input_select[] = {"Analog MIC SingleEnded in",
 				"Digital MIC in", "Analog MIC Differential in"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ml26124_insel_enum =
 	SOC_ENUM_SINGLE(ML26124_MIC_IF_CTL, 0, 3, ml26124_input_select);
+=======
+static SOC_ENUM_SINGLE_DECL(ml26124_insel_enum,
+			    ML26124_MIC_IF_CTL, 0, ml26124_input_select);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ml26124_insel_enum,
 			    ML26124_MIC_IF_CTL, 0, ml26124_input_select);
@@ -356,6 +367,11 @@ static int ml26124_hw_params(struct snd_pcm_substream *substream,
 	int i = get_coeff(priv->mclk, params_rate(hw_params));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (i < 0)
+		return i;
+>>>>>>> v3.18
 =======
 	if (i < 0)
 		return i;
@@ -582,6 +598,7 @@ static struct snd_soc_dai_driver ml26124_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int ml26124_suspend(struct snd_soc_codec *codec)
 {
@@ -617,13 +634,20 @@ static int ml26124_probe(struct snd_soc_codec *codec)
 static int ml26124_probe(struct snd_soc_codec *codec)
 {
 >>>>>>> v3.18
+=======
+static int ml26124_probe(struct snd_soc_codec *codec)
+{
+>>>>>>> v3.18
 	/* Software Reset */
 	snd_soc_update_bits(codec, ML26124_SW_RST, 0x01, 1);
 	snd_soc_update_bits(codec, ML26124_SW_RST, 0x01, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ml26124_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -632,9 +656,14 @@ static int ml26124_probe(struct snd_soc_codec *codec)
 static struct snd_soc_codec_driver soc_codec_dev_ml26124 = {
 	.probe =	ml26124_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend =	ml26124_suspend,
 	.resume =	ml26124_resume,
 	.set_bias_level = ml26124_set_bias_level,
+=======
+	.set_bias_level = ml26124_set_bias_level,
+	.suspend_bias_off = true,
+>>>>>>> v3.18
 =======
 	.set_bias_level = ml26124_set_bias_level,
 	.suspend_bias_off = true,

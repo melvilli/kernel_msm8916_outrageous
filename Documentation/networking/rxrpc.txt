@@ -28,6 +28,11 @@ Contents of this document:
  (*) AF_RXRPC kernel interface.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ (*) Configurable parameters.
+
+>>>>>>> v3.18
 =======
  (*) Configurable parameters.
 
@@ -150,7 +155,11 @@ An overview of the RxRPC protocol:
      explicitly sequenced per call.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  (*) There are two types of positive acknowledgement: hard-ACKs and soft-ACKs.
+=======
+ (*) There are two types of positive acknowledgment: hard-ACKs and soft-ACKs.
+>>>>>>> v3.18
 =======
  (*) There are two types of positive acknowledgment: hard-ACKs and soft-ACKs.
 >>>>>>> v3.18
@@ -874,7 +883,10 @@ The kernel interface functions are as follows:
      This is used to allocate a null RxRPC key that can be used to indicate
      anonymous security for a particular domain.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 =======================
@@ -954,4 +966,7 @@ adjusted through sysctls in /proc/net/rxrpc/:
      header plus exactly 1412 bytes of data.  The terminal packet must contain
      a four byte header plus any amount of data.  In any event, a jumbo packet
      may not exceed rxrpc_rx_mtu in size.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

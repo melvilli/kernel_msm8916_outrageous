@@ -25,6 +25,7 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "fuse.h"
 #include "cpuidle.h"
 
@@ -51,6 +52,8 @@ static int __init tegra_cpuidle_init(void)
 }
 device_initcall(tegra_cpuidle_init);
 =======
+=======
+>>>>>>> v3.18
 #include <soc/tegra/fuse.h>
 
 #include "cpuidle.h"
@@ -84,4 +87,7 @@ void tegra_cpuidle_pcie_irqs_in_use(void)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

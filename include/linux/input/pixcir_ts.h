@@ -2,11 +2,14 @@
 #define	_PIXCIR_I2C_TS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pixcir_ts_platform_data {
 	int (*attb_read_val)(void);
 	int x_max;
 	int y_max;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Register map
  */
@@ -65,6 +68,9 @@ struct pixcir_ts_platform_data {
 	int y_max;
 	int gpio_attb;		/* GPIO connected to ATTB line */
 	struct pixcir_i2c_chip_data chip;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

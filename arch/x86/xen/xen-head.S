@@ -12,9 +12,12 @@
 
 #include <xen/interface/elfnote.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/xen/interface.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <xen/interface/features.h>
 #include <asm/xen/interface.h>
 
@@ -37,6 +40,9 @@
 #define PVH_FEATURES (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__INIT
 ENTRY(startup_xen)
@@ -53,7 +59,10 @@ ENTRY(startup_xen)
 	__FINIT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_XEN_PVH
 /*
  * xen_pvh_early_cpu_init() - early PVH VCPU initialization
@@ -89,6 +98,9 @@ ENTRY(xen_pvh_early_cpu_init)
 
 #endif /* CONFIG_XEN_PVH */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .pushsection .text
 	.balign PAGE_SIZE
@@ -159,12 +171,18 @@ NEXT_HYPERCALL(arch_6)
 	ELFNOTE(Xen, XEN_ELFNOTE_ENTRY,          _ASM_PTR startup_xen)
 	ELFNOTE(Xen, XEN_ELFNOTE_HYPERCALL_PAGE, _ASM_PTR hypercall_page)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ELFNOTE(Xen, XEN_ELFNOTE_FEATURES,       .asciz "!writable_page_tables|pae_pgdir_above_4gb")
 =======
+=======
+>>>>>>> v3.18
 	ELFNOTE(Xen, XEN_ELFNOTE_FEATURES,       .ascii "!writable_page_tables|pae_pgdir_above_4gb"; .asciz PVH_FEATURES_STR)
 	ELFNOTE(Xen, XEN_ELFNOTE_SUPPORTED_FEATURES, .long (PVH_FEATURES) |
 						(1 << XENFEAT_writable_page_tables) |
 						(1 << XENFEAT_dom0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ELFNOTE(Xen, XEN_ELFNOTE_PAE_MODE,       .asciz "yes")
 	ELFNOTE(Xen, XEN_ELFNOTE_LOADER,         .asciz "generic")
@@ -172,6 +190,10 @@ NEXT_HYPERCALL(arch_6)
 		.quad _PAGE_PRESENT; .quad _PAGE_PRESENT)
 	ELFNOTE(Xen, XEN_ELFNOTE_SUSPEND_CANCEL, .long 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ELFNOTE(Xen, XEN_ELFNOTE_MOD_START_PFN,  .long 1)
+>>>>>>> v3.18
 =======
 	ELFNOTE(Xen, XEN_ELFNOTE_MOD_START_PFN,  .long 1)
 >>>>>>> v3.18

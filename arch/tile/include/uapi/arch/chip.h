@@ -13,9 +13,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if __tile_chip__ == 0
 #include <arch/chip_tile64.h>
 #elif __tile_chip__ == 1
+=======
+#if __tile_chip__ == 1
+>>>>>>> v3.18
 =======
 #if __tile_chip__ == 1
 >>>>>>> v3.18

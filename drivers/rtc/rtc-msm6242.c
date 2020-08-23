@@ -112,8 +112,13 @@ static void msm6242_lock(struct msm6242_priv *priv)
 
 	if (!cnt)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("msm6242: timed out waiting for RTC (0x%x)\n",
 			   msm6242_read(priv, MSM6242_CD));
+=======
+		pr_warn("msm6242: timed out waiting for RTC (0x%x)\n",
+			msm6242_read(priv, MSM6242_CD));
+>>>>>>> v3.18
 =======
 		pr_warn("msm6242: timed out waiting for RTC (0x%x)\n",
 			msm6242_read(priv, MSM6242_CD));
@@ -205,7 +210,10 @@ static int __init msm6242_rtc_probe(struct platform_device *pdev)
 	struct msm6242_priv *priv;
 	struct rtc_device *rtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -225,6 +233,7 @@ static int __init msm6242_rtc_probe(struct platform_device *pdev)
 	rtc = devm_rtc_device_register(&pdev->dev, "rtc-msm6242",
 				&msm6242_rtc_ops, THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(rtc)) {
 		error = PTR_ERR(rtc);
 		goto out_unmap;
@@ -242,11 +251,16 @@ static int __exit msm6242_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(rtc))
 		return PTR_ERR(rtc);
 
 	priv->rtc = rtc;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -256,7 +270,10 @@ static struct platform_driver msm6242_rtc_driver = {
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= __exit_p(msm6242_rtc_remove),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

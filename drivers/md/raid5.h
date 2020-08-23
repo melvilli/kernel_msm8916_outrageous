@@ -50,7 +50,11 @@
  * from parity calculations, and a clean block that has been
  * successfully written to the spare ( or to parity when resyncing).
 <<<<<<< HEAD
+<<<<<<< HEAD
  * To distingush these states we have a stripe bit STRIPE_INSYNC that
+=======
+ * To distinguish these states we have a stripe bit STRIPE_INSYNC that
+>>>>>>> v3.18
 =======
  * To distinguish these states we have a stripe bit STRIPE_INSYNC that
 >>>>>>> v3.18
@@ -160,7 +164,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Operations state - intermediate states that are visible outside of 
+=======
+ * Operations state - intermediate states that are visible outside of
+>>>>>>> v3.18
 =======
  * Operations state - intermediate states that are visible outside of
 >>>>>>> v3.18
@@ -206,6 +214,10 @@ struct stripe_head {
 	struct hlist_node	hash;
 	struct list_head	lru;	      /* inactive_list or handle_list */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct llist_node	release_list;
+>>>>>>> v3.18
 =======
 	struct llist_node	release_list;
 >>>>>>> v3.18
@@ -217,6 +229,10 @@ struct stripe_head {
 	short			qd_idx;		/* 'Q' disk index for raid6 */
 	short			ddf_layout;/* use DDF ordering to calculate Q */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	short			hash_lock_index;
+>>>>>>> v3.18
 =======
 	short			hash_lock_index;
 >>>>>>> v3.18
@@ -228,6 +244,11 @@ struct stripe_head {
 	enum reconstruct_states reconstruct_state;
 	spinlock_t		stripe_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			cpu;
+	struct r5worker_group	*group;
+>>>>>>> v3.18
 =======
 	int			cpu;
 	struct r5worker_group	*group;
@@ -250,7 +271,11 @@ struct stripe_head {
 		struct bio	req, rreq;
 		struct bio_vec	vec, rvec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct page	*page;
+=======
+		struct page	*page, *orig_page;
+>>>>>>> v3.18
 =======
 		struct page	*page, *orig_page;
 >>>>>>> v3.18
@@ -321,6 +346,10 @@ enum r5dev_flags {
 			 */
 	R5_Discard,	/* Discard the stripe */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	R5_SkipCopy,	/* Don't copy data from bio to stripe cache */
+>>>>>>> v3.18
 =======
 	R5_SkipCopy,	/* Don't copy data from bio to stripe cache */
 >>>>>>> v3.18
@@ -351,6 +380,10 @@ enum {
 	STRIPE_ON_UNPLUG_LIST,
 	STRIPE_DISCARD,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STRIPE_ON_RELEASE_LIST,
+>>>>>>> v3.18
 =======
 	STRIPE_ON_RELEASE_LIST,
 >>>>>>> v3.18
@@ -392,7 +425,10 @@ enum {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct disk_info {
@@ -400,9 +436,12 @@ struct disk_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct r5conf {
 	struct hlist_head	*stripe_hashtbl;
 =======
+=======
+>>>>>>> v3.18
 /* NOTE NR_STRIPE_HASH_LOCKS must remain below 64.
  * This is because we sometimes take all the spinlocks
  * and creating that much locking depth can cause
@@ -429,6 +468,9 @@ struct r5conf {
 	struct hlist_head	*stripe_hashtbl;
 	/* only protect corresponding hash list and inactive_list */
 	spinlock_t		hash_locks[NR_STRIPE_HASH_LOCKS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mddev		*mddev;
 	int			chunk_sectors;
@@ -452,6 +494,10 @@ struct r5conf {
 	int			prev_algo;
 	short			generation; /* increments with every reshape */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	seqcount_t		gen_lock;	/* lock against generation changes */
+>>>>>>> v3.18
 =======
 	seqcount_t		gen_lock;	/* lock against generation changes */
 >>>>>>> v3.18
@@ -476,6 +522,10 @@ struct r5conf {
 	int			bypass_count; /* bypassed prereads */
 	int			bypass_threshold; /* preread nice */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			skip_copy; /* Don't copy data from bio to stripe cache */
+>>>>>>> v3.18
 =======
 	int			skip_copy; /* Don't copy data from bio to stripe cache */
 >>>>>>> v3.18
@@ -518,7 +568,13 @@ struct r5conf {
 	 */
 	atomic_t		active_stripes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	inactive_list;
+=======
+	struct list_head	inactive_list[NR_STRIPE_HASH_LOCKS];
+	atomic_t		empty_inactive_list_nr;
+	struct llist_head	released_stripes;
+>>>>>>> v3.18
 =======
 	struct list_head	inactive_list[NR_STRIPE_HASH_LOCKS];
 	atomic_t		empty_inactive_list_nr;
@@ -538,11 +594,17 @@ struct r5conf {
 	 */
 	struct md_thread	*thread;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct list_head	temp_inactive_list[NR_STRIPE_HASH_LOCKS];
 	struct r5worker_group	*worker_groups;
 	int			group_cnt;
 	int			worker_cnt_per_group;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -577,7 +639,10 @@ struct r5conf {
 #define ALGORITHM_ROTATING_N_CONTINUE	10 /*DDF PRL=6 RLQ=3 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* For every RAID5 algorithm we define a RAID6 algorithm

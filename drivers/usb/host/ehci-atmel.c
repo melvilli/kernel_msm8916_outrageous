@@ -31,7 +31,11 @@ static struct hc_driver __read_mostly ehci_atmel_hc_driver;
 
 /* interface and function clocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk *iclk, *fclk;
+=======
+static struct clk *iclk, *fclk, *uclk;
+>>>>>>> v3.18
 =======
 static struct clk *iclk, *fclk, *uclk;
 >>>>>>> v3.18
@@ -42,15 +46,21 @@ static int clocked;
 static void atmel_start_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(iclk);
 	clk_enable(fclk);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_COMMON_CLK)) {
 		clk_set_rate(uclk, 48000000);
 		clk_prepare_enable(uclk);
 	}
 	clk_prepare_enable(iclk);
 	clk_prepare_enable(fclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clocked = 1;
 }
@@ -58,13 +68,19 @@ static void atmel_start_clock(void)
 static void atmel_stop_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(fclk);
 	clk_disable(iclk);
 =======
+=======
+>>>>>>> v3.18
 	clk_disable_unprepare(fclk);
 	clk_disable_unprepare(iclk);
 	if (IS_ENABLED(CONFIG_COMMON_CLK))
 		clk_disable_unprepare(uclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clocked = 0;
 }
@@ -111,10 +127,16 @@ static int ehci_atmel_drv_probe(struct platform_device *pdev)
 	 * Once we have dma capability bindings this can go away.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.dma_mask)
 		pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
 	if (!pdev->dev.coherent_dma_mask)
 		pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	retval = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (retval)
+		goto fail_create_hcd;
+>>>>>>> v3.18
 =======
 	retval = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 	if (retval)
@@ -157,7 +179,10 @@ static int ehci_atmel_drv_probe(struct platform_device *pdev)
 		goto fail_request_resource;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_COMMON_CLK)) {
 		uclk = devm_clk_get(&pdev->dev, "usb_clk");
 		if (IS_ERR(uclk)) {
@@ -166,6 +191,9 @@ static int ehci_atmel_drv_probe(struct platform_device *pdev)
 			goto fail_request_resource;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ehci = hcd_to_ehci(hcd);
@@ -178,6 +206,10 @@ static int ehci_atmel_drv_probe(struct platform_device *pdev)
 	if (retval)
 		goto fail_add_hcd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18

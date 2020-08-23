@@ -14,7 +14,11 @@
 #include <linux/ext2_fs.h>
 #include <linux/romfs_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cramfs_fs.h>
+=======
+#include <uapi/linux/cramfs_fs.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/cramfs_fs.h>
 >>>>>>> v3.18
@@ -62,12 +66,18 @@ static int __init crd_load(int in_fd, int out_fd, decompress_fn deco);
  *	squashfs
  *	gzip
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *	bzip2
  *	lzma
  *	xz
  *	lzo
  *	lz4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int __init
@@ -319,9 +329,15 @@ static int decompress_error;
 static int crd_infd, crd_outfd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init compr_fill(void *buf, unsigned int len)
 {
 	int r = sys_read(crd_infd, buf, len);
+=======
+static long __init compr_fill(void *buf, unsigned long len)
+{
+	long r = sys_read(crd_infd, buf, len);
+>>>>>>> v3.18
 =======
 static long __init compr_fill(void *buf, unsigned long len)
 {
@@ -335,6 +351,7 @@ static long __init compr_fill(void *buf, unsigned long len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init compr_flush(void *window, unsigned int outcnt)
 {
 	int written = sys_write(crd_outfd, window, outcnt);
@@ -343,6 +360,8 @@ static int __init compr_flush(void *window, unsigned int outcnt)
 			printk(KERN_ERR
 			       "RAMDISK: incomplete write (%d != %d)\n",
 =======
+=======
+>>>>>>> v3.18
 static long __init compr_flush(void *window, unsigned long outcnt)
 {
 	long written = sys_write(crd_outfd, window, outcnt);
@@ -350,6 +369,9 @@ static long __init compr_flush(void *window, unsigned long outcnt)
 		if (decompress_error == 0)
 			printk(KERN_ERR
 			       "RAMDISK: incomplete write (%ld != %ld)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       written, outcnt);
 		decompress_error = 1;
@@ -371,7 +393,10 @@ static int __init crd_load(int in_fd, int out_fd, decompress_fn deco)
 	crd_infd = in_fd;
 	crd_outfd = out_fd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (!deco) {
 		pr_emerg("Invalid ramdisk decompression routine.  "
@@ -379,6 +404,9 @@ static int __init crd_load(int in_fd, int out_fd, decompress_fn deco)
 		panic("Could not decompress initial ramdisk image.");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	result = deco(NULL, 0, compr_fill, compr_flush, NULL, NULL, error);
 	if (decompress_error)

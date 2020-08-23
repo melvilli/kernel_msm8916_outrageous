@@ -61,7 +61,11 @@ static void reg_dump(struct ak4114 *ak4114)
 	printk(KERN_DEBUG "AK4114 REG DUMP:\n");
 	for (i = 0; i < 0x20; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "reg[%02x] = %02x (%02x)\n", i, reg_read(ak4114, i), i < sizeof(ak4114->regmap) ? ak4114->regmap[i] : 0);
+=======
+		printk(KERN_DEBUG "reg[%02x] = %02x (%02x)\n", i, reg_read(ak4114, i), i < ARRAY_SIZE(ak4114->regmap) ? ak4114->regmap[i] : 0);
+>>>>>>> v3.18
 =======
 		printk(KERN_DEBUG "reg[%02x] = %02x (%02x)\n", i, reg_read(ak4114, i), i < ARRAY_SIZE(ak4114->regmap) ? ak4114->regmap[i] : 0);
 >>>>>>> v3.18
@@ -71,7 +75,12 @@ static void reg_dump(struct ak4114 *ak4114)
 static void snd_ak4114_free(struct ak4114 *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&chip->wq_processing);	/* don't schedule new work */
+=======
+	chip->init = 1;	/* don't schedule new work */
+	mb();
+>>>>>>> v3.18
 =======
 	chip->init = 1;	/* don't schedule new work */
 	mb();
@@ -90,7 +99,11 @@ static int snd_ak4114_dev_free(struct snd_device *device)
 int snd_ak4114_create(struct snd_card *card,
 		      ak4114_read_t *read, ak4114_write_t *write,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      const unsigned char pgm[7], const unsigned char txcsb[5],
+=======
+		      const unsigned char pgm[6], const unsigned char txcsb[5],
+>>>>>>> v3.18
 =======
 		      const unsigned char pgm[6], const unsigned char txcsb[5],
 >>>>>>> v3.18
@@ -113,9 +126,14 @@ int snd_ak4114_create(struct snd_card *card,
 	chip->private_data = private_data;
 	INIT_DELAYED_WORK(&chip->work, ak4114_stats);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&chip->wq_processing, 0);
 
 	for (reg = 0; reg < 7; reg++)
+=======
+
+	for (reg = 0; reg < 6; reg++)
+>>>>>>> v3.18
 =======
 
 	for (reg = 0; reg < 6; reg++)
@@ -130,7 +148,11 @@ int snd_ak4114_create(struct snd_card *card,
 	chip->rcs1 = reg_read(chip, AK4114_REG_RCS1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((err = snd_device_new(card, SNDRV_DEV_LOWLEVEL, chip, &ops)) < 0)
+=======
+	if ((err = snd_device_new(card, SNDRV_DEV_CODEC, chip, &ops)) < 0)
+>>>>>>> v3.18
 =======
 	if ((err = snd_device_new(card, SNDRV_DEV_CODEC, chip, &ops)) < 0)
 >>>>>>> v3.18
@@ -165,7 +187,11 @@ static void ak4114_init_regs(struct ak4114 *chip)
 	reg_write(chip, AK4114_REG_PWRDN, (old | AK4114_RST) & ~AK4114_PWN);
 	udelay(200);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (reg = 1; reg < 7; reg++)
+=======
+	for (reg = 1; reg < 6; reg++)
+>>>>>>> v3.18
 =======
 	for (reg = 1; reg < 6; reg++)
 >>>>>>> v3.18
@@ -179,12 +205,15 @@ static void ak4114_init_regs(struct ak4114 *chip)
 void snd_ak4114_reinit(struct ak4114 *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_inc_return(&chip->wq_processing) == 1)
 		cancel_delayed_work_sync(&chip->work);
 	ak4114_init_regs(chip);
 	/* bring up statistics / event queing */
 	if (atomic_dec_and_test(&chip->wq_processing))
 =======
+=======
+>>>>>>> v3.18
 	chip->init = 1;
 	mb();
 	flush_delayed_work(&chip->work);
@@ -192,6 +221,9 @@ void snd_ak4114_reinit(struct ak4114 *chip)
 	/* bring up statistics / event queing */
 	chip->init = 0;
 	if (chip->kctls[0])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		schedule_delayed_work(&chip->work, HZ / 10);
 }
@@ -647,15 +679,21 @@ static void ak4114_stats(struct work_struct *work)
 	struct ak4114 *chip = container_of(work, struct ak4114, work.work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_inc_return(&chip->wq_processing) == 1)
 		snd_ak4114_check_rate_and_errors(chip, chip->check_flags);
 	if (atomic_dec_and_test(&chip->wq_processing))
 		schedule_delayed_work(&chip->work, HZ / 10);
 =======
+=======
+>>>>>>> v3.18
 	if (!chip->init)
 		snd_ak4114_check_rate_and_errors(chip, chip->check_flags);
 
 	schedule_delayed_work(&chip->work, HZ / 10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

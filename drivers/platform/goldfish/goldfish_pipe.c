@@ -57,6 +57,10 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/goldfish.h>
+>>>>>>> v3.18
 =======
 #include <linux/goldfish.h>
 >>>>>>> v3.18
@@ -71,13 +75,19 @@
 #define PIPE_REG_STATUS			0x04  /* read */
 #define PIPE_REG_CHANNEL		0x08  /* read/write: channel id */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PIPE_REG_SIZE			0x0c  /* read/write: buffer size */
 #define PIPE_REG_ADDRESS		0x10  /* write: physical address */
 =======
+=======
+>>>>>>> v3.18
 #define PIPE_REG_CHANNEL_HIGH	        0x30  /* read/write: channel id */
 #define PIPE_REG_SIZE			0x0c  /* read/write: buffer size */
 #define PIPE_REG_ADDRESS		0x10  /* write: physical address */
 #define PIPE_REG_ADDRESS_HIGH	        0x34  /* write: physical address */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PIPE_REG_WAKES			0x14  /* read: wake flags */
 #define PIPE_REG_PARAMS_ADDR_LOW	0x18  /* read/write: batch data address */
@@ -121,9 +131,15 @@
 
 struct access_params {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 channel;
 	u32 size;
 	u32 address;
+=======
+	unsigned long channel;
+	u32 size;
+	unsigned long address;
+>>>>>>> v3.18
 =======
 	unsigned long channel;
 	u32 size;
@@ -167,7 +183,11 @@ enum {
 
 static u32 goldfish_cmd_status(struct goldfish_pipe *pipe, u32 cmd)
 <<<<<<< HEAD
+<<<<<<< HEAD
 { 
+=======
+{
+>>>>>>> v3.18
 =======
 {
 >>>>>>> v3.18
@@ -177,7 +197,12 @@ static u32 goldfish_cmd_status(struct goldfish_pipe *pipe, u32 cmd)
 
 	spin_lock_irqsave(&dev->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel((u32)pipe, dev->base + PIPE_REG_CHANNEL);
+=======
+	gf_write64((u64)(unsigned long)pipe, dev->base + PIPE_REG_CHANNEL,
+				dev->base + PIPE_REG_CHANNEL_HIGH);
+>>>>>>> v3.18
 =======
 	gf_write64((u64)(unsigned long)pipe, dev->base + PIPE_REG_CHANNEL,
 				dev->base + PIPE_REG_CHANNEL_HIGH);
@@ -190,7 +215,11 @@ static u32 goldfish_cmd_status(struct goldfish_pipe *pipe, u32 cmd)
 
 static void goldfish_cmd(struct goldfish_pipe *pipe, u32 cmd)
 <<<<<<< HEAD
+<<<<<<< HEAD
 { 
+=======
+{
+>>>>>>> v3.18
 =======
 {
 >>>>>>> v3.18
@@ -199,7 +228,12 @@ static void goldfish_cmd(struct goldfish_pipe *pipe, u32 cmd)
 
 	spin_lock_irqsave(&dev->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel((u32)pipe, dev->base + PIPE_REG_CHANNEL);
+=======
+	gf_write64((u64)(unsigned long)pipe, dev->base + PIPE_REG_CHANNEL,
+				dev->base + PIPE_REG_CHANNEL_HIGH);
+>>>>>>> v3.18
 =======
 	gf_write64((u64)(unsigned long)pipe, dev->base + PIPE_REG_CHANNEL,
 				dev->base + PIPE_REG_CHANNEL_HIGH);
@@ -358,16 +392,22 @@ static ssize_t goldfish_pipe_read_write(struct file *filp, char __user *buffer,
 		if (access_with_param(dev, CMD_WRITE_BUFFER + cmd_offset,
 				address, avail, pipe, &status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			writel((u32)pipe, dev->base + PIPE_REG_CHANNEL);
 			writel(avail, dev->base + PIPE_REG_SIZE);
 			writel(address, dev->base + PIPE_REG_ADDRESS);
 =======
+=======
+>>>>>>> v3.18
 			gf_write64((u64)(unsigned long)pipe,
 				   dev->base + PIPE_REG_CHANNEL,
 				   dev->base + PIPE_REG_CHANNEL_HIGH);
 			writel(avail, dev->base + PIPE_REG_SIZE);
 			gf_write64(address, dev->base + PIPE_REG_ADDRESS,
 				dev->base + PIPE_REG_ADDRESS_HIGH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			writel(CMD_WRITE_BUFFER + cmd_offset,
 					dev->base + PIPE_REG_COMMAND);
@@ -492,8 +532,11 @@ static irqreturn_t goldfish_pipe_interrupt(int irq, void *dev_id)
 		struct goldfish_pipe *pipe;
 		unsigned long wakes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long channel = readl(dev->base + PIPE_REG_CHANNEL);
 =======
+=======
+>>>>>>> v3.18
 		unsigned long channel = 0;
 
 #ifdef CONFIG_64BIT
@@ -503,6 +546,9 @@ static irqreturn_t goldfish_pipe_interrupt(int irq, void *dev_id)
 			break;
 #endif
 		channel |= readl(dev->base + PIPE_REG_CHANNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (channel == 0)

@@ -111,15 +111,21 @@ enum {
 	INET_DIAG_SKMEMINFO,
 	INET_DIAG_SHUTDOWN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define INET_DIAG_MAX INET_DIAG_SHUTDOWN
 
 =======
+=======
+>>>>>>> v3.18
 	INET_DIAG_DCTCPINFO,
 };
 
 #define INET_DIAG_MAX INET_DIAG_DCTCPINFO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* INET_DIAG_MEM */
@@ -141,7 +147,10 @@ struct tcpvegas_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* INET_DIAG_DCTCPINFO */
 
 struct tcp_dctcp_info {
@@ -151,6 +160,9 @@ struct tcp_dctcp_info {
 	__u32	dctcp_ab_ecn;
 	__u32	dctcp_ab_tot;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_INET_DIAG_H_ */

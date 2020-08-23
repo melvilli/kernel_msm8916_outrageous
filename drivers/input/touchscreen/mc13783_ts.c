@@ -234,8 +234,11 @@ static int mc13783_ts_remove(struct platform_device *pdev)
 	struct mc13783_ts_priv *priv = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	destroy_workqueue(priv->workq);

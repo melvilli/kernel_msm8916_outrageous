@@ -461,7 +461,11 @@ static void ccdc_config_black_compense(struct ccdc_black_compensation *bcomp)
  * write an entry in the dfc table.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ccdc_write_dfc_entry(int index, struct ccdc_vertical_dft *dfc)
+=======
+static int ccdc_write_dfc_entry(int index, struct ccdc_vertical_dft *dfc)
+>>>>>>> v3.18
 =======
 static int ccdc_write_dfc_entry(int index, struct ccdc_vertical_dft *dfc)
 >>>>>>> v3.18

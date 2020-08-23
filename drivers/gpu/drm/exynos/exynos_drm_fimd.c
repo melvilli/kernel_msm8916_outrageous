@@ -15,6 +15,7 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/clk.h>
@@ -23,6 +24,8 @@
 
 #include <video/of_display_timing.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 #include <linux/of.h>
@@ -34,6 +37,9 @@
 
 #include <video/of_display_timing.h>
 #include <video/of_videomode.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <video/samsung_fimd.h>
 #include <drm/exynos_drm.h>
@@ -45,7 +51,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FIMD is stand for Fully Interactive Mobile Display and
+=======
+ * FIMD stands for Fully Interactive Mobile Display and
+>>>>>>> v3.18
 =======
  * FIMD stands for Fully Interactive Mobile Display and
 >>>>>>> v3.18
@@ -55,6 +65,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FIMD_DEFAULT_FRAMERATE 60
+#define MIN_FB_WIDTH_FOR_16WORD_BURST 128
+
+>>>>>>> v3.18
 =======
 #define FIMD_DEFAULT_FRAMERATE 60
 #define MIN_FB_WIDTH_FOR_16WORD_BURST 128
@@ -81,6 +97,7 @@
 #define WKEYCON1_BASE(x)		((WKEYCON1 + 0x140) + ((x - 1) * 8))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* FIMD has totally five hardware windows. */
 #define WINDOWS_NR	5
 
@@ -89,6 +106,8 @@
 struct fimd_driver_data {
 	unsigned int timing_base;
 =======
+=======
+>>>>>>> v3.18
 /* I80 / RGB trigger control register */
 #define TRIGCON				0x1A4
 #define TRGMODE_I80_RGB_ENABLE_I80	(1 << 0)
@@ -136,29 +155,44 @@ static struct fimd_driver_data exynos3_fimd_driver_data = {
 	.lcdblk_bypass_shift = 1,
 	.has_shadowcon = 1,
 	.has_vidoutcon = 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct fimd_driver_data exynos4_fimd_driver_data = {
 	.timing_base = 0x0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.lcdblk_offset = 0x210,
 	.lcdblk_vt_shift = 10,
 	.lcdblk_bypass_shift = 1,
 	.has_shadowcon = 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct fimd_driver_data exynos5_fimd_driver_data = {
 	.timing_base = 0x20000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.lcdblk_offset = 0x214,
 	.lcdblk_vt_shift = 24,
 	.lcdblk_bypass_shift = 15,
 	.has_shadowcon = 1,
 	.has_vidoutcon = 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -171,6 +205,10 @@ struct fimd_win_data {
 	unsigned int		fb_height;
 	unsigned int		bpp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		pixel_format;
+>>>>>>> v3.18
 =======
 	unsigned int		pixel_format;
 >>>>>>> v3.18
@@ -183,6 +221,7 @@ struct fimd_win_data {
 
 struct fimd_context {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct exynos_drm_subdrv	subdrv;
 	int				irq;
 	struct drm_crtc			*crtc;
@@ -192,6 +231,8 @@ struct fimd_context {
 	struct fimd_win_data		win_data[WINDOWS_NR];
 	unsigned int			clkdiv;
 =======
+=======
+>>>>>>> v3.18
 	struct device			*dev;
 	struct drm_device		*drm_dev;
 	struct clk			*bus_clk;
@@ -200,11 +241,15 @@ struct fimd_context {
 	struct regmap			*sysreg;
 	struct drm_display_mode		mode;
 	struct fimd_win_data		win_data[WINDOWS_NR];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int			default_win;
 	unsigned long			irq_flags;
 	u32				vidcon0;
 	u32				vidcon1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool				suspended;
 	struct mutex			lock;
@@ -217,6 +262,8 @@ struct fimd_context {
 #ifdef CONFIG_OF
 static const struct of_device_id fimd_driver_dt_match[] = {
 =======
+=======
+>>>>>>> v3.18
 	u32				vidout_con;
 	u32				i80ifcon;
 	bool				i80_if;
@@ -237,6 +284,9 @@ static const struct of_device_id fimd_driver_dt_match[] = {
 	  .data = &s3c64xx_fimd_driver_data },
 	{ .compatible = "samsung,exynos3250-fimd",
 	  .data = &exynos3_fimd_driver_data },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "samsung,exynos4210-fimd",
 	  .data = &exynos4_fimd_driver_data },
@@ -246,13 +296,17 @@ static const struct of_device_id fimd_driver_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, fimd_driver_dt_match);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 static inline struct fimd_driver_data *drm_fimd_get_driver_data(
 	struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_OF
 	const struct of_device_id *of_id =
@@ -299,6 +353,8 @@ static int fimd_display_power_on(struct device *dev, int mode)
 
 	/* TODO */
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *of_id =
 			of_match_device(fimd_driver_dt_match, &pdev->dev);
 
@@ -379,11 +435,15 @@ static int fimd_mgr_initialize(struct exynos_drm_manager *mgr,
 		fimd_clear_channel(mgr);
 		drm_iommu_attach_device(ctx->drm_dev, ctx->dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct exynos_drm_display_ops fimd_display_ops = {
 	.type = EXYNOS_DISPLAY_TYPE_LCD,
@@ -493,6 +553,8 @@ static void fimd_commit(struct device *dev)
 	else
 		val &= ~VIDCON0_CLKDIR;	/* 1:1 clock */
 =======
+=======
+>>>>>>> v3.18
 static void fimd_mgr_remove(struct exynos_drm_manager *mgr)
 {
 	struct fimd_context *ctx = mgr->ctx;
@@ -621,12 +683,16 @@ static void fimd_commit(struct exynos_drm_manager *mgr)
 	       VIDTCON2_LINEVAL_E(mode->vdisplay - 1) |
 	       VIDTCON2_HOZVAL_E(mode->hdisplay - 1);
 	writel(val, ctx->regs + driver_data->timing_base + VIDTCON2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * fields of register with prefix '_F' would be updated
 	 * at vsync(same as dma start)
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	val |= VIDCON0_ENVID | VIDCON0_ENVID_F;
 	writel(val, ctx->regs + VIDCON0);
@@ -640,6 +706,8 @@ static int fimd_enable_vblank(struct device *dev)
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 =======
+=======
+>>>>>>> v3.18
 	val = ctx->vidcon0;
 	val |= VIDCON0_ENVID | VIDCON0_ENVID_F;
 
@@ -658,6 +726,9 @@ static int fimd_enable_vblank(struct exynos_drm_manager *mgr)
 	struct fimd_context *ctx = mgr->ctx;
 	u32 val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ctx->suspended)
 		return -EPERM;
@@ -680,6 +751,7 @@ static int fimd_enable_vblank(struct exynos_drm_manager *mgr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fimd_disable_vblank(struct device *dev)
 {
 	struct fimd_context *ctx = get_fimd_context(dev);
@@ -688,11 +760,16 @@ static void fimd_disable_vblank(struct device *dev)
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 =======
+=======
+>>>>>>> v3.18
 static void fimd_disable_vblank(struct exynos_drm_manager *mgr)
 {
 	struct fimd_context *ctx = mgr->ctx;
 	u32 val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ctx->suspended)
 		return;
@@ -707,6 +784,7 @@ static void fimd_disable_vblank(struct exynos_drm_manager *mgr)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void fimd_wait_for_vblank(struct device *dev)
 {
@@ -741,20 +819,30 @@ static void fimd_win_mode_set(struct device *dev,
 {
 	struct fimd_context *ctx = get_fimd_context(dev);
 =======
+=======
+>>>>>>> v3.18
 static void fimd_win_mode_set(struct exynos_drm_manager *mgr,
 			struct exynos_drm_overlay *overlay)
 {
 	struct fimd_context *ctx = mgr->ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fimd_win_data *win_data;
 	int win;
 	unsigned long offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	if (!overlay) {
 		dev_err(dev, "overlay is NULL\n");
+=======
+	if (!overlay) {
+		DRM_ERROR("overlay is NULL\n");
+>>>>>>> v3.18
 =======
 	if (!overlay) {
 		DRM_ERROR("overlay is NULL\n");
@@ -767,7 +855,11 @@ static void fimd_win_mode_set(struct exynos_drm_manager *mgr,
 		win = ctx->default_win;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (win < 0 || win > WINDOWS_NR)
+=======
+	if (win < 0 || win >= WINDOWS_NR)
+>>>>>>> v3.18
 =======
 	if (win < 0 || win >= WINDOWS_NR)
 >>>>>>> v3.18
@@ -789,6 +881,10 @@ static void fimd_win_mode_set(struct exynos_drm_manager *mgr,
 	win_data->dma_addr = overlay->dma_addr[0] + offset;
 	win_data->bpp = overlay->bpp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	win_data->pixel_format = overlay->pixel_format;
+>>>>>>> v3.18
 =======
 	win_data->pixel_format = overlay->pixel_format;
 >>>>>>> v3.18
@@ -805,6 +901,7 @@ static void fimd_win_mode_set(struct exynos_drm_manager *mgr,
 			overlay->fb_width, overlay->crtc_width);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void fimd_win_set_pixfmt(struct device *dev, unsigned int win)
 {
@@ -834,6 +931,8 @@ static void fimd_win_set_pixfmt(struct device *dev, unsigned int win)
 		break;
 	case 8:
 =======
+=======
+>>>>>>> v3.18
 static void fimd_win_set_pixfmt(struct fimd_context *ctx, unsigned int win)
 {
 	struct fimd_win_data *win_data = &ctx->win_data[win];
@@ -852,27 +951,40 @@ static void fimd_win_set_pixfmt(struct fimd_context *ctx, unsigned int win)
 
 	switch (win_data->pixel_format) {
 	case DRM_FORMAT_C8:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val |= WINCON0_BPPMODE_8BPP_PALETTE;
 		val |= WINCONx_BURSTLEN_8WORD;
 		val |= WINCONx_BYTSWP;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 16:
 =======
+=======
+>>>>>>> v3.18
 	case DRM_FORMAT_XRGB1555:
 		val |= WINCON0_BPPMODE_16BPP_1555;
 		val |= WINCONx_HAWSWP;
 		val |= WINCONx_BURSTLEN_16WORD;
 		break;
 	case DRM_FORMAT_RGB565:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val |= WINCON0_BPPMODE_16BPP_565;
 		val |= WINCONx_HAWSWP;
 		val |= WINCONx_BURSTLEN_16WORD;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 24:
+=======
+	case DRM_FORMAT_XRGB8888:
+>>>>>>> v3.18
 =======
 	case DRM_FORMAT_XRGB8888:
 >>>>>>> v3.18
@@ -881,8 +993,13 @@ static void fimd_win_set_pixfmt(struct fimd_context *ctx, unsigned int win)
 		val |= WINCONx_BURSTLEN_16WORD;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 32:
 		val |= WINCON1_BPPMODE_28BPP_A4888
+=======
+	case DRM_FORMAT_ARGB8888:
+		val |= WINCON1_BPPMODE_25BPP_A1888
+>>>>>>> v3.18
 =======
 	case DRM_FORMAT_ARGB8888:
 		val |= WINCON1_BPPMODE_25BPP_A1888
@@ -903,6 +1020,7 @@ static void fimd_win_set_pixfmt(struct fimd_context *ctx, unsigned int win)
 	DRM_DEBUG_KMS("bpp = %d\n", win_data->bpp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(val, ctx->regs + WINCON(win));
 }
 
@@ -914,6 +1032,8 @@ static void fimd_win_set_colkey(struct device *dev, unsigned int win)
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * In case of exynos, setting dma-burst to 16Word causes permanent
 	 * tearing for very small buffers, e.g. cursor buffer. Burst Mode
@@ -934,6 +1054,9 @@ static void fimd_win_set_colkey(struct fimd_context *ctx, unsigned int win)
 {
 	unsigned int keycon0 = 0, keycon1 = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	keycon0 = ~(WxKEYCON0_KEYBL_EN | WxKEYCON0_KEYEN_F |
 			WxKEYCON0_DIRCON) | WxKEYCON0_COMPKEY(0);
@@ -945,10 +1068,13 @@ static void fimd_win_set_colkey(struct fimd_context *ctx, unsigned int win)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fimd_win_commit(struct device *dev, int zpos)
 {
 	struct fimd_context *ctx = get_fimd_context(dev);
 =======
+=======
+>>>>>>> v3.18
 /**
  * shadow_protect_win() - disable updating values from shadow registers at vsync
  *
@@ -979,6 +1105,9 @@ static void fimd_shadow_protect_win(struct fimd_context *ctx,
 static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 {
 	struct fimd_context *ctx = mgr->ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fimd_win_data *win_data;
 	int win = zpos;
@@ -987,8 +1116,11 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 	unsigned int last_y;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ctx->suspended)
@@ -998,7 +1130,11 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 		win = ctx->default_win;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (win < 0 || win > WINDOWS_NR)
+=======
+	if (win < 0 || win >= WINDOWS_NR)
+>>>>>>> v3.18
 =======
 	if (win < 0 || win >= WINDOWS_NR)
 >>>>>>> v3.18
@@ -1007,9 +1143,12 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 	win_data = &ctx->win_data[win];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * SHADOWCON register is used for enabling timing.
 =======
+=======
+>>>>>>> v3.18
 	/* If suspended, enable this on resume */
 	if (ctx->suspended) {
 		win_data->resume = true;
@@ -1018,6 +1157,9 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 
 	/*
 	 * SHADOWCON/PRTCON register is used for enabling timing.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *
 	 * for example, once only width value of a register is set,
@@ -1029,9 +1171,13 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 
 	/* protect windows */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(ctx->regs + SHADOWCON);
 	val |= SHADOWCON_WINx_PROTECT(win);
 	writel(val, ctx->regs + SHADOWCON);
+=======
+	fimd_shadow_protect_win(ctx, win, true);
+>>>>>>> v3.18
 =======
 	fimd_shadow_protect_win(ctx, win, true);
 >>>>>>> v3.18
@@ -1101,17 +1247,23 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimd_win_set_pixfmt(dev, win);
 
 	/* hardware window 0 doesn't support color key. */
 	if (win != 0)
 		fimd_win_set_colkey(dev, win);
 =======
+=======
+>>>>>>> v3.18
 	fimd_win_set_pixfmt(ctx, win);
 
 	/* hardware window 0 doesn't support color key. */
 	if (win != 0)
 		fimd_win_set_colkey(ctx, win);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* wincon */
@@ -1120,6 +1272,7 @@ static void fimd_win_commit(struct exynos_drm_manager *mgr, int zpos)
 	writel(val, ctx->regs + WINCON(win));
 
 	/* Enable DMA channel and unprotect windows */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	val = readl(ctx->regs + SHADOWCON);
 	val |= SHADOWCON_CHx_ENABLE(win);
@@ -1133,6 +1286,8 @@ static void fimd_win_disable(struct device *dev, int zpos)
 {
 	struct fimd_context *ctx = get_fimd_context(dev);
 =======
+=======
+>>>>>>> v3.18
 	fimd_shadow_protect_win(ctx, win, false);
 
 	if (ctx->driver_data->has_shadowcon) {
@@ -1150,11 +1305,15 @@ static void fimd_win_disable(struct device *dev, int zpos)
 static void fimd_win_disable(struct exynos_drm_manager *mgr, int zpos)
 {
 	struct fimd_context *ctx = mgr->ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fimd_win_data *win_data;
 	int win = zpos;
 	u32 val;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
@@ -1163,10 +1322,15 @@ static void fimd_win_disable(struct exynos_drm_manager *mgr, int zpos)
 
 	if (win < 0 || win > WINDOWS_NR)
 =======
+=======
+>>>>>>> v3.18
 	if (win == DEFAULT_ZPOS)
 		win = ctx->default_win;
 
 	if (win < 0 || win >= WINDOWS_NR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -1180,9 +1344,13 @@ static void fimd_win_disable(struct exynos_drm_manager *mgr, int zpos)
 
 	/* protect windows */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(ctx->regs + SHADOWCON);
 	val |= SHADOWCON_WINx_PROTECT(win);
 	writel(val, ctx->regs + SHADOWCON);
+=======
+	fimd_shadow_protect_win(ctx, win, true);
+>>>>>>> v3.18
 =======
 	fimd_shadow_protect_win(ctx, win, true);
 >>>>>>> v3.18
@@ -1194,11 +1362,14 @@ static void fimd_win_disable(struct exynos_drm_manager *mgr, int zpos)
 
 	/* unprotect windows */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(ctx->regs + SHADOWCON);
 	val &= ~SHADOWCON_CHx_ENABLE(win);
 	val &= ~SHADOWCON_WINx_PROTECT(win);
 	writel(val, ctx->regs + SHADOWCON);
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->driver_data->has_shadowcon) {
 		val = readl(ctx->regs + SHADOWCON);
 		val &= ~SHADOWCON_CHx_ENABLE(win);
@@ -1206,11 +1377,15 @@ static void fimd_win_disable(struct exynos_drm_manager *mgr, int zpos)
 	}
 
 	fimd_shadow_protect_win(ctx, win, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	win_data->enabled = false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct exynos_drm_overlay_ops fimd_overlay_ops = {
 	.mode_set = fimd_win_mode_set,
@@ -1433,6 +1608,8 @@ static int fimd_activate(struct fimd_context *ctx, bool enable)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void fimd_window_suspend(struct exynos_drm_manager *mgr)
 {
 	struct fimd_context *ctx = mgr->ctx;
@@ -1713,11 +1890,15 @@ static const struct component_ops fimd_component_ops = {
 	.unbind = fimd_unbind,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fimd_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 	struct fimd_context *ctx;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct exynos_drm_subdrv *subdrv;
 	struct exynos_drm_fimd_pdata *pdata;
@@ -1759,6 +1940,8 @@ static int fimd_probe(struct platform_device *pdev)
 	if (!ctx)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *i80_if_timings;
 	struct resource *res;
 	int ret = -EINVAL;
@@ -1825,13 +2008,21 @@ static int fimd_probe(struct platform_device *pdev)
 		dev_warn(dev, "failed to get system register.\n");
 		ctx->sysreg = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ctx->bus_clk = devm_clk_get(dev, "fimd");
 	if (IS_ERR(ctx->bus_clk)) {
 		dev_err(dev, "failed to get bus clock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return PTR_ERR(ctx->bus_clk);
+=======
+		ret = PTR_ERR(ctx->bus_clk);
+		goto err_del_component;
+>>>>>>> v3.18
 =======
 		ret = PTR_ERR(ctx->bus_clk);
 		goto err_del_component;
@@ -1842,7 +2033,12 @@ static int fimd_probe(struct platform_device *pdev)
 	if (IS_ERR(ctx->lcd_clk)) {
 		dev_err(dev, "failed to get lcd clock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return PTR_ERR(ctx->lcd_clk);
+=======
+		ret = PTR_ERR(ctx->lcd_clk);
+		goto err_del_component;
+>>>>>>> v3.18
 =======
 		ret = PTR_ERR(ctx->lcd_clk);
 		goto err_del_component;
@@ -1852,6 +2048,7 @@ static int fimd_probe(struct platform_device *pdev)
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 
 	ctx->regs = devm_ioremap_resource(dev, res);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (IS_ERR(ctx->regs))
 		return PTR_ERR(ctx->regs);
@@ -1905,6 +2102,8 @@ static int fimd_probe(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(ctx->regs)) {
 		ret = PTR_ERR(ctx->regs);
 		goto err_del_component;
@@ -1950,11 +2149,15 @@ err_disable_pm_runtime:
 err_del_component:
 	exynos_drm_component_del(&pdev->dev, EXYNOS_DEVICE_TYPE_CRTC);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int fimd_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device *dev = &pdev->dev;
 	struct fimd_context *ctx = platform_get_drvdata(pdev);
@@ -1988,10 +2191,13 @@ static int fimd_suspend(struct device *dev)
 	if (!pm_runtime_suspended(dev))
 		return fimd_activate(ctx, false);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_disable(&pdev->dev);
 
 	component_del(&pdev->dev, &fimd_component_ops);
 	exynos_drm_component_del(&pdev->dev, EXYNOS_DEVICE_TYPE_CRTC);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return 0;
@@ -2063,10 +2269,16 @@ static const struct dev_pm_ops fimd_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(fimd_suspend, fimd_resume)
 	SET_RUNTIME_PM_OPS(fimd_runtime_suspend, fimd_runtime_resume, NULL)
 };
+=======
+
+	return 0;
+}
+>>>>>>> v3.18
 
 struct platform_driver fimd_driver = {
 	.probe		= fimd_probe,
 	.remove		= fimd_remove,
+<<<<<<< HEAD
 	.id_table       = fimd_driver_ids,
 	.driver		= {
 		.name	= "exynos4-fb",
@@ -2077,10 +2289,15 @@ struct platform_driver fimd_driver = {
 struct platform_driver fimd_driver = {
 	.probe		= fimd_probe,
 	.remove		= fimd_remove,
+=======
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "exynos4-fb",
 		.owner	= THIS_MODULE,
 		.of_match_table = fimd_driver_dt_match,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

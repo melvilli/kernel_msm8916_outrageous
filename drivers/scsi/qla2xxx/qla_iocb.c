@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -37,15 +41,21 @@ qla2x00_get_cmd_direction(srb_t *sp)
 		cflags = CF_WRITE;
 		vha->qla_stats.output_bytes += scsi_bufflen(cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (cmd->sc_data_direction == DMA_FROM_DEVICE) {
 		cflags = CF_READ;
 		vha->qla_stats.input_bytes += scsi_bufflen(cmd);
 =======
+=======
+>>>>>>> v3.18
 		vha->qla_stats.output_requests++;
 	} else if (cmd->sc_data_direction == DMA_FROM_DEVICE) {
 		cflags = CF_READ;
 		vha->qla_stats.input_bytes += scsi_bufflen(cmd);
 		vha->qla_stats.input_requests++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return (cflags);
@@ -487,7 +497,11 @@ qla2x00_start_iocbs(struct scsi_qla_host *vha, struct req_que *req)
 	device_reg_t __iomem *reg = ISP_QUE_REG(ha, req->id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha)) {
+=======
+	if (IS_P3P_TYPE(ha)) {
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha)) {
 >>>>>>> v3.18
@@ -503,7 +517,11 @@ qla2x00_start_iocbs(struct scsi_qla_host *vha, struct req_que *req)
 
 		/* Set chip new ring index. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ha->mqenable || IS_QLA83XX(ha)) {
+=======
+		if (ha->mqenable || IS_QLA83XX(ha) || IS_QLA27XX(ha)) {
+>>>>>>> v3.18
 =======
 		if (ha->mqenable || IS_QLA83XX(ha) || IS_QLA27XX(ha)) {
 >>>>>>> v3.18
@@ -539,16 +557,22 @@ static int
 __qla2x00_marker(struct scsi_qla_host *vha, struct req_que *req,
 			struct rsp_que *rsp, uint16_t loop_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint16_t lun, uint8_t type)
 {
 	mrk_entry_t *mrk;
 	struct mrk_entry_24xx *mrk24 = NULL;
 	struct mrk_entry_fx00 *mrkfx = NULL;
 =======
+=======
+>>>>>>> v3.18
 			uint64_t lun, uint8_t type)
 {
 	mrk_entry_t *mrk;
 	struct mrk_entry_24xx *mrk24 = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct qla_hw_data *ha = vha->hw;
@@ -567,6 +591,7 @@ __qla2x00_marker(struct scsi_qla_host *vha, struct req_que *req,
 	mrk->modifier = type;
 	if (type != MK_SYNC_ALL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_QLAFX00(ha)) {
 			mrkfx = (struct mrk_entry_fx00 *) mrk;
 			mrkfx->handle = MAKE_HANDLE(req->id, mrkfx->handle);
@@ -581,10 +606,15 @@ __qla2x00_marker(struct scsi_qla_host *vha, struct req_que *req,
 			mrk24->lun[1] = LSB(lun);
 			mrk24->lun[2] = MSB(lun);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_FWI2_CAPABLE(ha)) {
 			mrk24 = (struct mrk_entry_24xx *) mrk;
 			mrk24->nport_handle = cpu_to_le16(loop_id);
 			int_to_scsilun(lun, (struct scsi_lun *)&mrk24->lun);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			host_to_fcp_swap(mrk24->lun, sizeof(mrk24->lun));
 			mrk24->vp_index = vha->vp_idx;
@@ -592,7 +622,11 @@ __qla2x00_marker(struct scsi_qla_host *vha, struct req_que *req,
 		} else {
 			SET_TARGET_ID(ha, mrk->target, loop_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mrk->lun = cpu_to_le16(lun);
+=======
+			mrk->lun = cpu_to_le16((uint16_t)lun);
+>>>>>>> v3.18
 =======
 			mrk->lun = cpu_to_le16((uint16_t)lun);
 >>>>>>> v3.18
@@ -608,7 +642,11 @@ __qla2x00_marker(struct scsi_qla_host *vha, struct req_que *req,
 int
 qla2x00_marker(struct scsi_qla_host *vha, struct req_que *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct rsp_que *rsp, uint16_t loop_id, uint16_t lun,
+=======
+		struct rsp_que *rsp, uint16_t loop_id, uint64_t lun,
+>>>>>>> v3.18
 =======
 		struct rsp_que *rsp, uint16_t loop_id, uint64_t lun,
 >>>>>>> v3.18
@@ -685,6 +723,10 @@ qla24xx_build_scsi_type_6_iocbs(srb_t *sp, struct cmd_type_6 *cmd_pkt,
 		    __constant_cpu_to_le16(CF_WRITE_DATA);
 		vha->qla_stats.output_bytes += scsi_bufflen(cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vha->qla_stats.output_requests++;
+>>>>>>> v3.18
 =======
 		vha->qla_stats.output_requests++;
 >>>>>>> v3.18
@@ -693,6 +735,10 @@ qla24xx_build_scsi_type_6_iocbs(srb_t *sp, struct cmd_type_6 *cmd_pkt,
 		    __constant_cpu_to_le16(CF_READ_DATA);
 		vha->qla_stats.input_bytes += scsi_bufflen(cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vha->qla_stats.input_requests++;
+>>>>>>> v3.18
 =======
 		vha->qla_stats.input_requests++;
 >>>>>>> v3.18
@@ -809,6 +855,10 @@ qla24xx_build_scsi_iocbs(srb_t *sp, struct cmd_type_7 *cmd_pkt,
 		    __constant_cpu_to_le16(TMF_WRITE_DATA);
 		vha->qla_stats.output_bytes += scsi_bufflen(cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vha->qla_stats.output_requests++;
+>>>>>>> v3.18
 =======
 		vha->qla_stats.output_requests++;
 >>>>>>> v3.18
@@ -817,6 +867,10 @@ qla24xx_build_scsi_iocbs(srb_t *sp, struct cmd_type_7 *cmd_pkt,
 		    __constant_cpu_to_le16(TMF_READ_DATA);
 		vha->qla_stats.input_bytes += scsi_bufflen(cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vha->qla_stats.input_requests++;
+>>>>>>> v3.18
 =======
 		vha->qla_stats.input_requests++;
 >>>>>>> v3.18
@@ -998,9 +1052,15 @@ qla24xx_get_one_block_sg(uint32_t blk_sz, struct qla2_sgx *sgx,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
 	uint32_t *dsd, uint16_t tot_dsds)
+=======
+int
+qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
+	uint32_t *dsd, uint16_t tot_dsds, struct qla_tgt_cmd *tc)
+>>>>>>> v3.18
 =======
 int
 qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
@@ -1016,7 +1076,11 @@ qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
 	uint16_t	used_dsds = tot_dsds;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t	prot_int;
+=======
+	uint32_t	prot_int; /* protection interval */
+>>>>>>> v3.18
 =======
 	uint32_t	prot_int; /* protection interval */
 >>>>>>> v3.18
@@ -1024,6 +1088,7 @@ qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
 	struct qla2_sgx sgx;
 	dma_addr_t	sle_dma;
 	uint32_t	sle_dma_len, tot_prot_dma_len = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct scsi_cmnd *cmd = GET_CMD_SP(sp);
 
@@ -1036,6 +1101,8 @@ qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
 
 	sg_prot = scsi_prot_sglist(cmd);
 =======
+=======
+>>>>>>> v3.18
 	struct scsi_cmnd *cmd;
 	struct scsi_qla_host *vha;
 
@@ -1060,6 +1127,9 @@ qla24xx_walk_and_build_sglist_no_difb(struct qla_hw_data *ha, srb_t *sp,
 		BUG();
 		return 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (qla24xx_get_one_block_sg(prot_int, &sgx, &partial)) {
@@ -1094,11 +1164,14 @@ alloc_and_fill:
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add_tail(&dsd_ptr->list,
 			    &((struct crc_context *)sp->u.scmd.ctx)->dsd_list);
 
 			sp->flags |= SRB_CRC_CTX_DSD_VALID;
 =======
+=======
+>>>>>>> v3.18
 			if (sp) {
 				list_add_tail(&dsd_ptr->list,
 				    &((struct crc_context *)
@@ -1111,6 +1184,9 @@ alloc_and_fill:
 				tc->ctx_dsd_alloced = 1;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* add new list to cmd iocb or last list */
@@ -1147,9 +1223,15 @@ alloc_and_fill:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 	uint16_t tot_dsds)
+=======
+int
+qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
+	uint16_t tot_dsds, struct qla_tgt_cmd *tc)
+>>>>>>> v3.18
 =======
 int
 qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
@@ -1161,6 +1243,7 @@ qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 	uint32_t dsd_list_len;
 	struct dsd_dma *dsd_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct scatterlist *sg;
 	uint32_t *cur_dsd = dsd;
 	int	i;
@@ -1169,6 +1252,8 @@ qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 
 	scsi_for_each_sg(cmd, sg, tot_dsds, i) {
 =======
+=======
+>>>>>>> v3.18
 	struct scatterlist *sg, *sgl;
 	uint32_t *cur_dsd = dsd;
 	int	i;
@@ -1190,6 +1275,9 @@ qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 
 
 	for_each_sg(sgl, sg, tot_dsds, i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dma_addr_t	sle_dma;
 
@@ -1220,11 +1308,14 @@ qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add_tail(&dsd_ptr->list,
 			    &((struct crc_context *)sp->u.scmd.ctx)->dsd_list);
 
 			sp->flags |= SRB_CRC_CTX_DSD_VALID;
 =======
+=======
+>>>>>>> v3.18
 			if (sp) {
 				list_add_tail(&dsd_ptr->list,
 				    &((struct crc_context *)
@@ -1236,6 +1327,9 @@ qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 				    &(tc->ctx->dsd_list));
 				tc->ctx_dsd_alloced = 1;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* add new list to cmd iocb or last list */
@@ -1260,10 +1354,16 @@ qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 							uint32_t *dsd,
 	uint16_t tot_dsds)
+=======
+int
+qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
+	uint32_t *dsd, uint16_t tot_dsds, struct qla_tgt_cmd *tc)
+>>>>>>> v3.18
 =======
 int
 qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
@@ -1275,6 +1375,7 @@ qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 	uint32_t dsd_list_len;
 	struct dsd_dma *dsd_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct scatterlist *sg;
 	int	i;
 	struct scsi_cmnd *cmd;
@@ -1284,6 +1385,8 @@ qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 	cmd = GET_CMD_SP(sp);
 	scsi_for_each_prot_sg(cmd, sg, tot_dsds, i) {
 =======
+=======
+>>>>>>> v3.18
 	struct scatterlist *sg, *sgl;
 	int	i;
 	struct scsi_cmnd *cmd;
@@ -1307,6 +1410,9 @@ qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 		"%s: enter\n", __func__);
 
 	for_each_sg(sgl, sg, tot_dsds, i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dma_addr_t	sle_dma;
 
@@ -1337,11 +1443,14 @@ qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add_tail(&dsd_ptr->list,
 			    &((struct crc_context *)sp->u.scmd.ctx)->dsd_list);
 
 			sp->flags |= SRB_CRC_CTX_DSD_VALID;
 =======
+=======
+>>>>>>> v3.18
 			if (sp) {
 				list_add_tail(&dsd_ptr->list,
 				    &((struct crc_context *)
@@ -1353,6 +1462,9 @@ qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 				    &(tc->ctx->dsd_list));
 				tc->ctx_dsd_alloced = 1;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* add new list to cmd iocb or last list */
@@ -1392,7 +1504,10 @@ qla24xx_build_scsi_crc_2_iocbs(srb_t *sp, struct cmd_type_crc_2 *cmd_pkt,
 	scsi_qla_host_t		*vha;
 	struct scsi_cmnd	*cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct scatterlist	*cur_seg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			sgc;
@@ -1594,22 +1709,31 @@ qla24xx_build_scsi_crc_2_iocbs(srb_t *sp, struct cmd_type_crc_2 *cmd_pkt,
 	if (!bundling && tot_prot_dsds) {
 		if (qla24xx_walk_and_build_sglist_no_difb(ha, sp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    cur_dsd, tot_dsds))
 			goto crc_queuing_error;
 	} else if (qla24xx_walk_and_build_sglist(ha, sp, cur_dsd,
 	    (tot_dsds - tot_prot_dsds)))
 =======
+=======
+>>>>>>> v3.18
 			cur_dsd, tot_dsds, NULL))
 			goto crc_queuing_error;
 	} else if (qla24xx_walk_and_build_sglist(ha, sp, cur_dsd,
 			(tot_dsds - tot_prot_dsds), NULL))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto crc_queuing_error;
 
 	if (bundling && tot_prot_dsds) {
 		/* Walks dif segments */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cur_seg = scsi_prot_sglist(cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		cmd_pkt->control_flags |=
@@ -1617,7 +1741,11 @@ qla24xx_build_scsi_crc_2_iocbs(srb_t *sp, struct cmd_type_crc_2 *cmd_pkt,
 		cur_dsd = (uint32_t *) &crc_ctx_pkt->u.bundling.dif_address;
 		if (qla24xx_walk_and_build_prot_sglist(ha, sp, cur_dsd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    tot_prot_dsds))
+=======
+				tot_prot_dsds, NULL))
+>>>>>>> v3.18
 =======
 				tot_prot_dsds, NULL))
 >>>>>>> v3.18
@@ -1701,8 +1829,13 @@ qla24xx_start_scsi(srb_t *sp)
 	req_cnt = qla24xx_calc_iocbs(vha, tot_dsds);
 	if (req->cnt < (req_cnt + 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cnt = RD_REG_DWORD_RELAXED(req->req_q_out);
 
+=======
+		cnt = IS_SHADOW_REG_CAPABLE(ha) ? *req->out_ptr :
+		    RD_REG_DWORD_RELAXED(req->req_q_out);
+>>>>>>> v3.18
 =======
 		cnt = IS_SHADOW_REG_CAPABLE(ha) ? *req->out_ptr :
 		    RD_REG_DWORD_RELAXED(req->req_q_out);
@@ -1925,8 +2058,13 @@ qla24xx_dif_start_scsi(srb_t *sp)
 	tot_dsds += nseg;
 	if (req->cnt < (req_cnt + 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cnt = RD_REG_DWORD_RELAXED(req->req_q_out);
 
+=======
+		cnt = IS_SHADOW_REG_CAPABLE(ha) ? *req->out_ptr :
+		    RD_REG_DWORD_RELAXED(req->req_q_out);
+>>>>>>> v3.18
 =======
 		cnt = IS_SHADOW_REG_CAPABLE(ha) ? *req->out_ptr :
 		    RD_REG_DWORD_RELAXED(req->req_q_out);
@@ -2028,7 +2166,10 @@ static void qla25xx_set_que(srb_t *sp, struct rsp_que **rsp)
 
 /* Generic Control-SRB manipulation functions. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* hardware_lock assumed to be held. */
 void *
@@ -2040,6 +2181,9 @@ qla2x00_alloc_iocbs_ready(scsi_qla_host_t *vha, srb_t *sp)
 	return qla2x00_alloc_iocbs(vha, sp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void *
 qla2x00_alloc_iocbs(scsi_qla_host_t *vha, srb_t *sp)
@@ -2061,7 +2205,11 @@ qla2x00_alloc_iocbs(scsi_qla_host_t *vha, srb_t *sp)
 	/* Check for room in outstanding command list. */
 	handle = req->current_outstanding_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (index = 1; req->num_outstanding_cmds; index++) {
+=======
+	for (index = 1; index < req->num_outstanding_cmds; index++) {
+>>>>>>> v3.18
 =======
 	for (index = 1; index < req->num_outstanding_cmds; index++) {
 >>>>>>> v3.18
@@ -2089,15 +2237,21 @@ qla2x00_alloc_iocbs(scsi_qla_host_t *vha, srb_t *sp)
 skip_cmd_array:
 	/* Check for room on request queue. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->cnt < req_cnt) {
 		if (ha->mqenable || IS_QLA83XX(ha))
 			cnt = RD_REG_DWORD(&reg->isp25mq.req_q_out);
 		else if (IS_QLA82XX(ha))
 =======
+=======
+>>>>>>> v3.18
 	if (req->cnt < req_cnt + 2) {
 		if (ha->mqenable || IS_QLA83XX(ha) || IS_QLA27XX(ha))
 			cnt = RD_REG_DWORD(&reg->isp25mq.req_q_out);
 		else if (IS_P3P_TYPE(ha))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cnt = RD_REG_DWORD(&reg->isp82.req_q_out);
 		else if (IS_FWI2_CAPABLE(ha))
@@ -2115,7 +2269,11 @@ skip_cmd_array:
 			    (req->ring_index - cnt);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->cnt < req_cnt)
+=======
+	if (req->cnt < req_cnt + 2)
+>>>>>>> v3.18
 =======
 	if (req->cnt < req_cnt + 2)
 >>>>>>> v3.18
@@ -2127,8 +2285,13 @@ skip_cmd_array:
 	memset(pkt, 0, REQUEST_ENTRY_SIZE);
 	if (IS_QLAFX00(ha)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRT_REG_BYTE(&pkt->entry_count, req_cnt);
 		WRT_REG_WORD(&pkt->handle, handle);
+=======
+		WRT_REG_BYTE((void __iomem *)&pkt->entry_count, req_cnt);
+		WRT_REG_WORD((void __iomem *)&pkt->handle, handle);
+>>>>>>> v3.18
 =======
 		WRT_REG_BYTE((void __iomem *)&pkt->entry_count, req_cnt);
 		WRT_REG_WORD((void __iomem *)&pkt->handle, handle);
@@ -2250,7 +2413,11 @@ qla24xx_tm_iocb(srb_t *sp, struct tsk_mgmt_entry *tsk)
 {
 	uint32_t flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int lun;
+=======
+	uint64_t lun;
+>>>>>>> v3.18
 =======
 	uint64_t lun;
 >>>>>>> v3.18
@@ -2324,6 +2491,11 @@ qla24xx_els_iocb(srb_t *sp, struct els_entry_24xx *els_iocb)
         els_iocb->rx_len = cpu_to_le32(sg_dma_len
             (bsg_job->reply_payload.sg_list));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	sp->fcport->vha->qla_stats.control_requests++;
+>>>>>>> v3.18
 =======
 
 	sp->fcport->vha->qla_stats.control_requests++;
@@ -2406,6 +2578,11 @@ qla2x00_ct_iocb(srb_t *sp, ms_iocb_entry_t *ct_iocb)
 	}
 	ct_iocb->entry_count = entry_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	sp->fcport->vha->qla_stats.control_requests++;
+>>>>>>> v3.18
 =======
 
 	sp->fcport->vha->qla_stats.control_requests++;
@@ -2862,7 +3039,10 @@ queuing_error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 qla24xx_abort_iocb(srb_t *sp, struct abort_entry_24xx *abt_iocb)
 {
@@ -2886,6 +3066,9 @@ qla24xx_abort_iocb(srb_t *sp, struct abort_entry_24xx *abt_iocb)
 	wmb();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 qla2x00_start_sp(srb_t *sp)
@@ -2941,7 +3124,13 @@ qla2x00_start_sp(srb_t *sp)
 		break;
 	case SRB_ABT_CMD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlafx00_abort_iocb(sp, pkt);
+=======
+		IS_QLAFX00(ha) ?
+			qlafx00_abort_iocb(sp, pkt) :
+			qla24xx_abort_iocb(sp, pkt);
+>>>>>>> v3.18
 =======
 		IS_QLAFX00(ha) ?
 			qlafx00_abort_iocb(sp, pkt) :
@@ -2995,6 +3184,12 @@ qla25xx_build_bidir_iocb(srb_t *sp, struct scsi_qla_host *vha,
 	vha->bidi_stats.io_count++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vha->qla_stats.output_bytes += req_data_len;
+	vha->qla_stats.output_requests++;
+
+>>>>>>> v3.18
 =======
 	vha->qla_stats.output_bytes += req_data_len;
 	vha->qla_stats.output_requests++;
@@ -3112,8 +3307,13 @@ qla2x00_start_bidir(srb_t *sp, struct scsi_qla_host *vha, uint32_t tot_dsds)
 	/* Check for room on request queue. */
 	if (req->cnt < req_cnt + 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cnt = RD_REG_DWORD_RELAXED(req->req_q_out);
 
+=======
+		cnt = IS_SHADOW_REG_CAPABLE(ha) ? *req->out_ptr :
+		    RD_REG_DWORD_RELAXED(req->req_q_out);
+>>>>>>> v3.18
 =======
 		cnt = IS_SHADOW_REG_CAPABLE(ha) ? *req->out_ptr :
 		    RD_REG_DWORD_RELAXED(req->req_q_out);

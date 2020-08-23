@@ -3,7 +3,11 @@
  *	TeVii S600, S630, S650, S660, S480, S421, S632
  *	Prof 1100, 7500,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Geniatech SU3000 Cards
+=======
+ *	Geniatech SU3000, T220 Cards
+>>>>>>> v3.18
 =======
  *	Geniatech SU3000, T220 Cards
 >>>>>>> v3.18
@@ -34,6 +38,11 @@
 #include "stb6100_proc.h"
 #include "m88rs2000.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "tda18271.h"
+#include "cxd2820r.h"
+>>>>>>> v3.18
 =======
 #include "tda18271.h"
 #include "cxd2820r.h"
@@ -120,11 +129,14 @@
 		"on firmware-problems."
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rc_map_dvb_usb_table_table {
 	struct rc_map_table *rc_keys;
 	int rc_keys_size;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct su3000_state {
@@ -142,12 +154,15 @@ MODULE_PARM_DESC(debug, "set debugging level (1=info 2=xfer 4=rc(or-able))."
 						DVB_USB_DEBUG_STATUS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* keymaps */
 static int ir_keymap;
 module_param_named(keymap, ir_keymap, int, 0644);
 MODULE_PARM_DESC(keymap, "set keymap 0=default 1=dvbworld 2=tevii 3=tbs  ..."
 			" 256=none");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* demod probe */
@@ -692,7 +707,11 @@ static int s6x0_i2c_transfer(struct i2c_adapter *adap, struct i2c_msg msg[],
 				memcpy(obuf + 2, msg[j].buf, msg[j].len);
 				dw210x_op_rw(d->udev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						udev->descriptor.idProduct ==
+=======
+						le16_to_cpu(udev->descriptor.idProduct) ==
+>>>>>>> v3.18
 =======
 						le16_to_cpu(udev->descriptor.idProduct) ==
 >>>>>>> v3.18
@@ -1065,14 +1084,20 @@ static struct ds3000_config dw2104_ds3000_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ts2020_config dw2104_ts2020_config  = {
 	.tuner_address = 0x60,
 	.clk_out_div = 1,
 =======
+=======
+>>>>>>> v3.18
 static struct ts2020_config dw2104_ts2020_config = {
 	.tuner_address = 0x60,
 	.clk_out_div = 1,
 	.frequency_div = 1060000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1083,13 +1108,19 @@ static struct ds3000_config s660_ds3000_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ts2020_config s660_ts2020_config = {
 	.tuner_address = 0x60,
 	.clk_out_div = 1,
 	.frequency_div = 1146000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct stv0900_config dw2104a_stv0900_config = {
 	.demod_address = 0x6a,
@@ -1144,7 +1175,10 @@ static struct ds3000_config su3000_ds3000_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct cxd2820r_config cxd2820r_config = {
 	.i2c_address = 0x6c, /* (0xd8 >> 1) */
 	.ts_mode = 0x38,
@@ -1156,6 +1190,9 @@ static struct tda18271_config tda18271_config = {
 	.gate = TDA18271_GATE_DIGITAL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u8 m88rs2000_inittab[] = {
 	DEMOD_WRITE, 0x9a, 0x30,
@@ -1345,7 +1382,11 @@ static int ds3000_frontend_attach(struct dvb_usb_adapter *d)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dvb_attach(ts2020_attach, d->fe_adap[0].fe, &dw2104_ts2020_config,
+=======
+	dvb_attach(ts2020_attach, d->fe_adap[0].fe, &s660_ts2020_config,
+>>>>>>> v3.18
 =======
 	dvb_attach(ts2020_attach, d->fe_adap[0].fe, &s660_ts2020_config,
 >>>>>>> v3.18
@@ -1357,7 +1398,11 @@ static int ds3000_frontend_attach(struct dvb_usb_adapter *d)
 	dw210x_op_rw(d->dev->udev, 0x8a, 0, 0, obuf, 2, DW210X_WRITE_MSG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info("Attached ds3000+ds2020!\n");
+=======
+	info("Attached ds3000+ts2020!\n");
+>>>>>>> v3.18
 =======
 	info("Attached ds3000+ts2020!\n");
 >>>>>>> v3.18
@@ -1435,7 +1480,10 @@ static int su3000_frontend_attach(struct dvb_usb_adapter *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int t220_frontend_attach(struct dvb_usb_adapter *d)
 {
 	u8 obuf[3] = { 0xe, 0x87, 0 };
@@ -1486,6 +1534,9 @@ static int t220_frontend_attach(struct dvb_usb_adapter *d)
 	return -EIO;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int m88rs2000_frontend_attach(struct dvb_usb_adapter *d)
 {
@@ -1527,6 +1578,7 @@ static int dw3101_tuner_attach(struct dvb_usb_adapter *adap)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct rc_map_table rc_map_dw210x_table[] = {
 	{ 0xf80a, KEY_POWER2 },		/*power*/
@@ -1697,6 +1749,8 @@ static int dw2102_rc_query(struct dvb_usb_device *d, u32 *event, int *state)
 	struct rc_map_table *keymap = d->props.rc.legacy.rc_map_table;
 	int keymap_size = d->props.rc.legacy.rc_map_size;
 =======
+=======
+>>>>>>> v3.18
 static int dw2102_rc_query(struct dvb_usb_device *d)
 {
 	u8 key[2];
@@ -1720,6 +1774,9 @@ static int dw2102_rc_query(struct dvb_usb_device *d)
 
 static int prof_rc_query(struct dvb_usb_device *d)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 key[2];
 	struct i2c_msg msg = {
@@ -1728,6 +1785,7 @@ static int prof_rc_query(struct dvb_usb_device *d)
 		.buf = key,
 		.len = 2
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	/* override keymap */
@@ -1756,6 +1814,8 @@ static int prof_rc_query(struct dvb_usb_device *d)
 					__func__, key[0], key[1]);
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (d->props.i2c_algo->master_xfer(&d->i2c_adap, &msg, 1) == 1) {
 		if (msg.buf[0] != 0xff) {
@@ -1785,6 +1845,9 @@ static int su3000_rc_query(struct dvb_usb_device *d)
 			rc_keydown(d->rc_dev, RC_TYPE_RC5,
 				   RC_SCANCODE_RC5(key[1], key[0]), 0);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1812,6 +1875,10 @@ enum dw2102_table_entry {
 	TERRATEC_CINERGY_S2_R2,
 	GOTVIEW_SAT_HD,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GENIATECH_T220,
+>>>>>>> v3.18
 =======
 	GENIATECH_T220,
 >>>>>>> v3.18
@@ -1838,6 +1905,10 @@ static struct usb_device_id dw2102_table[] = {
 	[TERRATEC_CINERGY_S2_R2] = {USB_DEVICE(USB_VID_TERRATEC, 0x00b0)},
 	[GOTVIEW_SAT_HD] = {USB_DEVICE(0x1FE1, USB_PID_GOTVIEW_SAT_HD)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[GENIATECH_T220] = {USB_DEVICE(0x1f4d, 0xD220)},
+>>>>>>> v3.18
 =======
 	[GENIATECH_T220] = {USB_DEVICE(0x1f4d, 0xD220)},
 >>>>>>> v3.18
@@ -1856,7 +1927,11 @@ static int dw2102_load_firmware(struct usb_device *dev,
 	const struct firmware *fw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (dev->descriptor.idProduct) {
+=======
+	switch (le16_to_cpu(dev->descriptor.idProduct)) {
+>>>>>>> v3.18
 =======
 	switch (le16_to_cpu(dev->descriptor.idProduct)) {
 >>>>>>> v3.18
@@ -1903,11 +1978,17 @@ static int dw2102_load_firmware(struct usb_device *dev,
 		}
 		/* init registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (dev->descriptor.idProduct) {
 		case USB_PID_TEVII_S650:
 			dw2104_properties.rc.legacy.rc_map_table = rc_map_tevii_table;
 			dw2104_properties.rc.legacy.rc_map_size =
 					ARRAY_SIZE(rc_map_tevii_table);
+=======
+		switch (le16_to_cpu(dev->descriptor.idProduct)) {
+		case USB_PID_TEVII_S650:
+			dw2104_properties.rc.core.rc_codes = RC_MAP_TEVII_NEC;
+>>>>>>> v3.18
 =======
 		switch (le16_to_cpu(dev->descriptor.idProduct)) {
 		case USB_PID_TEVII_S650:
@@ -1977,16 +2058,22 @@ static struct dvb_usb_device_properties dw2102_properties = {
 	.i2c_algo = &dw2102_serit_i2c_algo,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rc.legacy = {
 		.rc_map_table = rc_map_dw210x_table,
 		.rc_map_size = ARRAY_SIZE(rc_map_dw210x_table),
 		.rc_interval = 150,
 =======
+=======
+>>>>>>> v3.18
 	.rc.core = {
 		.rc_interval = 150,
 		.rc_codes = RC_MAP_DM1105_NEC,
 		.module_name = "dw2102",
 		.allowed_protos   = RC_BIT_NEC,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.rc_query = dw2102_rc_query,
 	},
@@ -2039,16 +2126,22 @@ static struct dvb_usb_device_properties dw2104_properties = {
 
 	.i2c_algo = &dw2104_i2c_algo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rc.legacy = {
 		.rc_map_table = rc_map_dw210x_table,
 		.rc_map_size = ARRAY_SIZE(rc_map_dw210x_table),
 		.rc_interval = 150,
 =======
+=======
+>>>>>>> v3.18
 	.rc.core = {
 		.rc_interval = 150,
 		.rc_codes = RC_MAP_DM1105_NEC,
 		.module_name = "dw2102",
 		.allowed_protos   = RC_BIT_NEC,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.rc_query = dw2102_rc_query,
 	},
@@ -2097,16 +2190,22 @@ static struct dvb_usb_device_properties dw3101_properties = {
 
 	.i2c_algo = &dw3101_i2c_algo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rc.legacy = {
 		.rc_map_table = rc_map_dw210x_table,
 		.rc_map_size = ARRAY_SIZE(rc_map_dw210x_table),
 		.rc_interval = 150,
 =======
+=======
+>>>>>>> v3.18
 	.rc.core = {
 		.rc_interval = 150,
 		.rc_codes = RC_MAP_DM1105_NEC,
 		.module_name = "dw2102",
 		.allowed_protos   = RC_BIT_NEC,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.rc_query = dw2102_rc_query,
 	},
@@ -2153,16 +2252,22 @@ static struct dvb_usb_device_properties s6x0_properties = {
 
 	.i2c_algo = &s6x0_i2c_algo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rc.legacy = {
 		.rc_map_table = rc_map_tevii_table,
 		.rc_map_size = ARRAY_SIZE(rc_map_tevii_table),
 		.rc_interval = 150,
 =======
+=======
+>>>>>>> v3.18
 	.rc.core = {
 		.rc_interval = 150,
 		.rc_codes = RC_MAP_TEVII_NEC,
 		.module_name = "dw2102",
 		.allowed_protos   = RC_BIT_NEC,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.rc_query = dw2102_rc_query,
 	},
@@ -2199,7 +2304,11 @@ static struct dvb_usb_device_properties s6x0_properties = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dvb_usb_device_properties *p1100;
+=======
+static struct dvb_usb_device_properties *p1100;
+>>>>>>> v3.18
 =======
 static struct dvb_usb_device_properties *p1100;
 >>>>>>> v3.18
@@ -2210,7 +2319,11 @@ static struct dvb_usb_device_description d1100 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dvb_usb_device_properties *s660;
+=======
+static struct dvb_usb_device_properties *s660;
+>>>>>>> v3.18
 =======
 static struct dvb_usb_device_properties *s660;
 >>>>>>> v3.18
@@ -2233,7 +2346,11 @@ static struct dvb_usb_device_description d480_2 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dvb_usb_device_properties *p7500;
+=======
+static struct dvb_usb_device_properties *p7500;
+>>>>>>> v3.18
 =======
 static struct dvb_usb_device_properties *p7500;
 >>>>>>> v3.18
@@ -2244,7 +2361,11 @@ static struct dvb_usb_device_description d7500 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dvb_usb_device_properties *s421;
+=======
+static struct dvb_usb_device_properties *s421;
+>>>>>>> v3.18
 =======
 static struct dvb_usb_device_properties *s421;
 >>>>>>> v3.18
@@ -2270,18 +2391,24 @@ static struct dvb_usb_device_properties su3000_properties = {
 	.i2c_algo = &su3000_i2c_algo,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rc.legacy = {
 		.rc_map_table = rc_map_su3000_table,
 		.rc_map_size = ARRAY_SIZE(rc_map_su3000_table),
 		.rc_interval = 150,
 		.rc_query = dw2102_rc_query,
 =======
+=======
+>>>>>>> v3.18
 	.rc.core = {
 		.rc_interval = 150,
 		.rc_codes = RC_MAP_SU3000,
 		.module_name = "dw2102",
 		.allowed_protos   = RC_BIT_RC5,
 		.rc_query = su3000_rc_query,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 
@@ -2334,7 +2461,10 @@ static struct dvb_usb_device_properties su3000_properties = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct dvb_usb_device_properties t220_properties = {
 	.caps = DVB_USB_IS_AN_I2C_ADAPTER,
 	.usb_ctrl = DEVICE_SPECIFIC,
@@ -2384,6 +2514,9 @@ static struct dvb_usb_device_properties t220_properties = {
 	}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dw2102_probe(struct usb_interface *intf,
 		const struct usb_device_id *id)
@@ -2397,8 +2530,13 @@ static int dw2102_probe(struct usb_interface *intf,
 	p1100->firmware = P1100_FIRMWARE;
 	p1100->devices[0] = d1100;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p1100->rc.legacy.rc_map_table = rc_map_tbs_table;
 	p1100->rc.legacy.rc_map_size = ARRAY_SIZE(rc_map_tbs_table);
+=======
+	p1100->rc.core.rc_query = prof_rc_query;
+	p1100->rc.core.rc_codes = RC_MAP_TBS_NEC;
+>>>>>>> v3.18
 =======
 	p1100->rc.core.rc_query = prof_rc_query;
 	p1100->rc.core.rc_codes = RC_MAP_TBS_NEC;
@@ -2428,8 +2566,13 @@ static int dw2102_probe(struct usb_interface *intf,
 	p7500->firmware = P7500_FIRMWARE;
 	p7500->devices[0] = d7500;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p7500->rc.legacy.rc_map_table = rc_map_tbs_table;
 	p7500->rc.legacy.rc_map_size = ARRAY_SIZE(rc_map_tbs_table);
+=======
+	p7500->rc.core.rc_query = prof_rc_query;
+	p7500->rc.core.rc_codes = RC_MAP_TBS_NEC;
+>>>>>>> v3.18
 =======
 	p7500->rc.core.rc_query = prof_rc_query;
 	p7500->rc.core.rc_codes = RC_MAP_TBS_NEC;
@@ -2468,7 +2611,13 @@ static int dw2102_probe(struct usb_interface *intf,
 			THIS_MODULE, NULL, adapter_nr) ||
 	    0 == dvb_usb_device_init(intf, &su3000_properties,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     THIS_MODULE, NULL, adapter_nr))
+=======
+			 THIS_MODULE, NULL, adapter_nr) ||
+	    0 == dvb_usb_device_init(intf, &t220_properties,
+			 THIS_MODULE, NULL, adapter_nr))
+>>>>>>> v3.18
 =======
 			 THIS_MODULE, NULL, adapter_nr) ||
 	    0 == dvb_usb_device_init(intf, &t220_properties,
@@ -2494,7 +2643,11 @@ MODULE_DESCRIPTION("Driver for DVBWorld DVB-S 2101, 2102, DVB-S2 2104,"
 			" TeVii S600, S630, S650, S660, S480, S421, S632"
 			" Prof 1100, 7500 USB2.0,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			" Geniatech SU3000 devices");
+=======
+			" Geniatech SU3000, T220 devices");
+>>>>>>> v3.18
 =======
 			" Geniatech SU3000, T220 devices");
 >>>>>>> v3.18

@@ -17,6 +17,7 @@
 #define __ARCH_MPIPE_CONSTANTS_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPIPE_NUM_CLASSIFIERS 10
 #define MPIPE_CLS_MHZ 1200
 
@@ -25,6 +26,8 @@
 #define MPIPE_NUM_SGMII_MACS 16
 #define MPIPE_NUM_XAUI_MACS 4
 =======
+=======
+>>>>>>> v3.18
 #define MPIPE_NUM_CLASSIFIERS 16
 #define MPIPE_CLS_MHZ 1200
 
@@ -32,6 +35,9 @@
 
 #define MPIPE_NUM_SGMII_MACS 16
 #define MPIPE_NUM_XAUI_MACS 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MPIPE_NUM_LOOPBACK_CHANNELS 4
 #define MPIPE_NUM_NON_LB_CHANNELS 28

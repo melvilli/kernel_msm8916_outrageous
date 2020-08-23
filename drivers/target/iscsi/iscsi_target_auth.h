@@ -2,6 +2,10 @@
 #define _ISCSI_CHAP_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CHAP_DIGEST_UNKNOWN	0
+>>>>>>> v3.18
 =======
 #define CHAP_DIGEST_UNKNOWN	0
 >>>>>>> v3.18

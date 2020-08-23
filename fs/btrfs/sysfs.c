@@ -23,6 +23,12 @@
 #include <linux/buffer_head.h>
 #include <linux/kobject.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+#include <linux/genhd.h>
+#include <linux/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 #include <linux/genhd.h>
@@ -33,7 +39,10 @@
 #include "disk-io.h"
 #include "transaction.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "sysfs.h"
 #include "volumes.h"
 
@@ -670,11 +679,15 @@ int btrfs_kobj_add_device(struct btrfs_fs_info *fs_info,
 
 	return error;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* /sys/fs/btrfs/ entry */
 static struct kset *btrfs_kset;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int btrfs_init_sysfs(void)
 {
@@ -683,6 +696,8 @@ int btrfs_init_sysfs(void)
 		return -ENOMEM;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 /* /sys/kernel/debug/btrfs */
 static struct dentry *btrfs_debugfs_root_dentry;
 
@@ -761,13 +776,22 @@ int btrfs_init_sysfs(void)
 	ret = sysfs_create_group(&btrfs_kset->kobj, &btrfs_feature_attr_group);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void btrfs_exit_sysfs(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kset_unregister(btrfs_kset);
+=======
+	sysfs_remove_group(&btrfs_kset->kobj, &btrfs_feature_attr_group);
+	kset_unregister(btrfs_kset);
+	debugfs_remove_recursive(btrfs_debugfs_root_dentry);
+>>>>>>> v3.18
 =======
 	sysfs_remove_group(&btrfs_kset->kobj, &btrfs_feature_attr_group);
 	kset_unregister(btrfs_kset);

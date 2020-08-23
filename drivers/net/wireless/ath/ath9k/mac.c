@@ -312,8 +312,11 @@ int ath9k_hw_setuptxqueue(struct ath_hw *ah, enum ath9k_tx_queue type,
 		break;
 	case ATH9K_TX_QUEUE_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		q = qinfo->tqi_subtype;
 =======
+=======
+>>>>>>> v3.18
 		for (q = 0; q < ATH9K_NUM_TX_QUEUES; q++)
 			if (ah->txq[q].tqi_type ==
 			    ATH9K_TX_QUEUE_INACTIVE)
@@ -322,6 +325,9 @@ int ath9k_hw_setuptxqueue(struct ath_hw *ah, enum ath9k_tx_queue type,
 			ath_err(common, "No available TX queue\n");
 			return -1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -379,7 +385,10 @@ bool ath9k_hw_resettxqueue(struct ath_hw *ah, u32 q)
 {
 	struct ath_common *common = ath9k_hw_common(ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath9k_channel *chan = ah->curchan;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath9k_tx_queue_info *qi;
@@ -395,10 +404,14 @@ bool ath9k_hw_resettxqueue(struct ath_hw *ah, u32 q)
 
 	if (qi->tqi_cwmin == ATH9K_TXQ_USEDEFAULT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chan && IS_CHAN_B(chan))
 			chanCwMin = INIT_CWMIN_11B;
 		else
 			chanCwMin = INIT_CWMIN;
+=======
+		chanCwMin = INIT_CWMIN;
+>>>>>>> v3.18
 =======
 		chanCwMin = INIT_CWMIN;
 >>>>>>> v3.18
@@ -497,8 +510,12 @@ bool ath9k_hw_resettxqueue(struct ath_hw *ah, u32 q)
 		value = (qi->tqi_readyTime -
 			 (ah->config.sw_beacon_response_time -
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  ah->config.dma_beacon_response_time) -
 			 ah->config.additional_swba_backoff) * 1024;
+=======
+			  ah->config.dma_beacon_response_time)) * 1024;
+>>>>>>> v3.18
 =======
 			  ah->config.dma_beacon_response_time)) * 1024;
 >>>>>>> v3.18
@@ -563,6 +580,10 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 	rs->rs_status = 0;
 	rs->rs_flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rs->flag = 0;
+>>>>>>> v3.18
 =======
 	rs->flag = 0;
 >>>>>>> v3.18
@@ -572,6 +593,7 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 
 	if (ads.ds_rxstatus8 & AR_PostDelimCRCErr) {
 		rs->rs_rssi = ATH9K_RSSI_BAD;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rs->rs_rssi_ctl0 = ATH9K_RSSI_BAD;
 		rs->rs_rssi_ctl1 = ATH9K_RSSI_BAD;
@@ -593,6 +615,8 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 						AR_RxRSSIAnt11);
 		rs->rs_rssi_ext2 = MS(ads.ds_rxstatus4,
 =======
+=======
+>>>>>>> v3.18
 		rs->rs_rssi_ctl[0] = ATH9K_RSSI_BAD;
 		rs->rs_rssi_ctl[1] = ATH9K_RSSI_BAD;
 		rs->rs_rssi_ctl[2] = ATH9K_RSSI_BAD;
@@ -612,6 +636,9 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 		rs->rs_rssi_ext[1] = MS(ads.ds_rxstatus4,
 						AR_RxRSSIAnt11);
 		rs->rs_rssi_ext[2] = MS(ads.ds_rxstatus4,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						AR_RxRSSIAnt12);
 	}
@@ -624,6 +651,7 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 	rs->rs_more = (ads.ds_rxstatus1 & AR_RxMore) ? 1 : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rs->rs_isaggr = (ads.ds_rxstatus8 & AR_RxAggr) ? 1 : 0;
 	rs->rs_moreaggr =
 		(ads.ds_rxstatus8 & AR_RxMoreAggr) ? 1 : 0;
@@ -633,6 +661,8 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 	rs->rs_flags |=
 		(ads.ds_rxstatus3 & AR_2040) ? ATH9K_RX_2040 : 0;
 =======
+=======
+>>>>>>> v3.18
 	rs->rs_firstaggr = (ads.ds_rxstatus8 & AR_RxFirstAggr) ? 1 : 0;
 	rs->rs_isaggr = (ads.ds_rxstatus8 & AR_RxAggr) ? 1 : 0;
 	rs->rs_moreaggr = (ads.ds_rxstatus8 & AR_RxMoreAggr) ? 1 : 0;
@@ -648,6 +678,9 @@ int ath9k_hw_rxprocdesc(struct ath_hw *ah, struct ath_desc *ds,
 			(ads.ds_rxstatus3 & AR_STBC) ?
 				/* we can only Nss=1 STBC */
 				(1 << RX_FLAG_STBC_SHIFT) : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ads.ds_rxstatus8 & AR_PreDelimCRCErr)
@@ -884,7 +917,11 @@ void ath9k_hw_enable_interrupts(struct ath_hw *ah)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (AR_SREV_9340(ah) || AR_SREV_9550(ah))
+=======
+	if (AR_SREV_9340(ah) || AR_SREV_9550(ah) || AR_SREV_9531(ah))
+>>>>>>> v3.18
 =======
 	if (AR_SREV_9340(ah) || AR_SREV_9550(ah) || AR_SREV_9531(ah))
 >>>>>>> v3.18
@@ -983,12 +1020,15 @@ void ath9k_hw_set_interrupts(struct ath_hw *ah)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath_dbg(common, INTERRUPT, "new IMR 0x%x\n", mask);
 	REG_WRITE(ah, AR_IMR, mask);
 	ah->imrs2_reg &= ~(AR_IMR_S2_TIM | AR_IMR_S2_DTIM | AR_IMR_S2_DTIMSYNC |
 			   AR_IMR_S2_CABEND | AR_IMR_S2_CABTO |
 			   AR_IMR_S2_TSFOOR | AR_IMR_S2_GTT | AR_IMR_S2_CST);
 =======
+=======
+>>>>>>> v3.18
 	if (ah->config.hw_hang_checks & HW_BB_WATCHDOG) {
 		if (ints & ATH9K_INT_BB_WATCHDOG) {
 			mask |= AR_IMR_BCNMISC;
@@ -1012,6 +1052,9 @@ void ath9k_hw_set_interrupts(struct ath_hw *ah)
 			ah->imrs2_reg &= ~AR_IMR_S2_BB_WATCHDOG;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ah->imrs2_reg |= mask2;
 	REG_WRITE(ah, AR_IMR_S2, ah->imrs2_reg);
@@ -1027,7 +1070,10 @@ void ath9k_hw_set_interrupts(struct ath_hw *ah)
 }
 EXPORT_SYMBOL(ath9k_hw_set_interrupts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define ATH9K_HW_MAX_DCU       10
 #define ATH9K_HW_SLICE_PER_DCU 16
@@ -1050,4 +1096,7 @@ void ath9k_hw_set_tx_filter(struct ath_hw *ah, u8 destidx, bool set)
 	}
 }
 EXPORT_SYMBOL(ath9k_hw_set_tx_filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

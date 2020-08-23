@@ -173,8 +173,12 @@ static inline void __raw_read_lock_irq(rwlock_t *lock)
 static inline void __raw_read_lock_bh(rwlock_t *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_disable();
 	preempt_disable();
+=======
+	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18
@@ -205,8 +209,12 @@ static inline void __raw_write_lock_irq(rwlock_t *lock)
 static inline void __raw_write_lock_bh(rwlock_t *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_disable();
 	preempt_disable();
+=======
+	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18
@@ -259,8 +267,12 @@ static inline void __raw_read_unlock_bh(rwlock_t *lock)
 	rwlock_release(&lock->dep_map, 1, _RET_IP_);
 	do_raw_read_unlock(lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable_no_resched();
 	local_bh_enable_ip((unsigned long)__builtin_return_address(0));
+=======
+	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18
@@ -288,8 +300,12 @@ static inline void __raw_write_unlock_bh(rwlock_t *lock)
 	rwlock_release(&lock->dep_map, 1, _RET_IP_);
 	do_raw_write_unlock(lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable_no_resched();
 	local_bh_enable_ip((unsigned long)__builtin_return_address(0));
+=======
+	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18

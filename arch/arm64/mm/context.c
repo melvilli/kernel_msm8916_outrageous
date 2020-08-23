@@ -93,6 +93,7 @@ static void reset_context(void *info)
 	struct mm_struct *mm = current->active_mm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * current->active_mm could be init_mm for the idle thread immediately
 	 * after secondary CPU boot or hotplug. TTBR0_EL1 is already set to
@@ -101,6 +102,8 @@ static void reset_context(void *info)
 	if (mm == &init_mm)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	smp_rmb();

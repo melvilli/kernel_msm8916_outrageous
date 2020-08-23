@@ -1,7 +1,13 @@
 config ARM64
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
+=======
+	select ARCH_BINFMT_ELF_RANDOMIZE_PIE
+	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 	select ARCH_BINFMT_ELF_RANDOMIZE_PIE
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
@@ -17,6 +23,7 @@ config ARM64
 	select ARM_ARCH_TIMER
 	select ARM_GIC
 <<<<<<< HEAD
+<<<<<<< HEAD
         select AUDIT_ARCH_COMPAT_GENERIC
 	select BUILDTIME_EXTABLE_SORT
 	select CLONE_BACKWARDS
@@ -25,6 +32,8 @@ config ARM64
 	select DCACHE_WORD_ACCESS
 	select EDAC_SUPPORT
 =======
+=======
+>>>>>>> v3.18
 	select AUDIT_ARCH_COMPAT_GENERIC
 	select ARM_GIC_V3
 	select BUILDTIME_EXTABLE_SORT
@@ -33,6 +42,9 @@ config ARM64
 	select CPU_PM if (SUSPEND || CPU_IDLE)
 	select DCACHE_WORD_ACCESS
 	select GENERIC_ALLOCATOR
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select GENERIC_CLOCKEVENTS
 	select GENERIC_CLOCKEVENTS_BROADCAST if SMP
@@ -47,6 +59,7 @@ config ARM64
 	select GENERIC_STRNLEN_USER
 	select GENERIC_TIME_VSYSCALL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HARDIRQS_SW_RESEND
         select HAVE_ARCH_AUDITSYSCALL
 	select HAVE_ARCH_JUMP_LABEL
@@ -56,6 +69,8 @@ config ARM64
 	select HAVE_ARCH_SECCOMP_FILTER
 	select HAVE_ARCH_TRACEHOOK
 =======
+=======
+>>>>>>> v3.18
 	select HANDLE_DOMAIN_IRQ
 	select HARDIRQS_SW_RESEND
 	select HAVE_ARCH_AUDITSYSCALL
@@ -63,6 +78,9 @@ config ARM64
 	select HAVE_ARCH_KGDB
 	select HAVE_ARCH_TRACEHOOK
 	select HAVE_BPF_JIT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_C_RECORDMCOUNT
 	select HAVE_CC_STACKPROTECTOR
@@ -78,6 +96,7 @@ config ARM64
 	select HAVE_FUNCTION_GRAPH_TRACER
 	select HAVE_GENERIC_DMA_COHERENT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_MEMBLOCK
 	select HAVE_PATA_PLATFORM
 	select HAVE_PERF_EVENTS
@@ -85,6 +104,8 @@ config ARM64
 	select HAVE_PERF_REGS
 	select HAVE_PERF_USER_STACK_DUMP
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_HW_BREAKPOINT if PERF_EVENTS
 	select HAVE_MEMBLOCK
 	select HAVE_PATA_PLATFORM
@@ -93,6 +114,9 @@ config ARM64
 	select HAVE_PERF_USER_STACK_DUMP
 	select HAVE_RCU_TABLE_FREE
 	select HAVE_SYSCALL_TRACEPOINTS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select IRQ_DOMAIN
 	select MODULES_USE_ELF_RELA
@@ -107,7 +131,11 @@ config ARM64
 	select SPARSE_IRQ
 	select SYSCTL_EXCEPTION_TRACE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MSM_JTAGV8 if CORESIGHT_ETMV4
+=======
+	select HAVE_CONTEXT_TRACKING
+>>>>>>> v3.18
 =======
 	select HAVE_CONTEXT_TRACKING
 >>>>>>> v3.18
@@ -124,6 +152,7 @@ config MMU
 	def_bool y
 
 config NO_IOPORT_MAP
+<<<<<<< HEAD
 <<<<<<< HEAD
 	def_bool y
 
@@ -146,15 +175,21 @@ config ARCH_MMAP_RND_COMPAT_BITS_MAX
 =======
 	def_bool y if !PCI
 >>>>>>> v3.18
+=======
+	def_bool y if !PCI
+>>>>>>> v3.18
 
 config STACKTRACE_SUPPORT
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ILLEGAL_POINTER_VALUE
 	hex
 	default 0xdead000000000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config LOCKDEP_SUPPORT
@@ -167,10 +202,13 @@ config RWSEM_XCHGADD_ALGORITHM
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GENERIC_BUG
 	def_bool y
 	depends on BUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config GENERIC_HWEIGHT
@@ -186,6 +224,12 @@ config ZONE_DMA
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config HAVE_GENERIC_RCU_GUP
+	def_bool y
+
+>>>>>>> v3.18
 =======
 config HAVE_GENERIC_RCU_GUP
 	def_bool y
@@ -200,6 +244,7 @@ config NEED_DMA_MAP_STATE
 config NEED_SG_DMA_LENGTH
 	def_bool y
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARM64_DMA_USE_IOMMU
 	bool
@@ -229,6 +274,8 @@ endif
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config SWIOTLB
 	def_bool y
 
@@ -239,6 +286,7 @@ config KERNEL_MODE_NEON
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_HAS_CPUFREQ
 	bool
 	help
@@ -246,6 +294,8 @@ config ARCH_HAS_CPUFREQ
 	  and that the relevant menu configurations are displayed for
 	  it.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config FIX_EARLYCON_MEM
@@ -258,12 +308,18 @@ source "kernel/Kconfig.freezer"
 menu "Platform selection"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_THUNDER
 	bool "Cavium Inc. Thunder SoC Family"
 	help
 	  This enables support for Cavium's Thunder Family of SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ARCH_VEXPRESS
 	bool "ARMv8 software model (Versatile Express)"
@@ -275,6 +331,7 @@ config ARCH_VEXPRESS
 	  This enables support for the ARMv8 software model (Versatile
 	  Express).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARCH_MSM
 	bool "Qualcomm Platforms"
@@ -339,6 +396,8 @@ config ARCH_MSM8992
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ARCH_XGENE
 	bool "AppliedMicro X-Gene SOC Family"
 	help
@@ -352,6 +411,7 @@ config ARM_AMBA
 	bool
 
 config PCI
+<<<<<<< HEAD
 <<<<<<< HEAD
        bool "PCI support"
        help
@@ -370,6 +430,8 @@ config PCI_SYSCALL
 source "drivers/pci/Kconfig"
 source "drivers/pci/pcie/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 	bool "PCI support"
 	help
 	  This feature enables support for PCI bus system. If you say Y
@@ -389,11 +451,15 @@ source "drivers/pci/Kconfig"
 source "drivers/pci/pcie/Kconfig"
 source "drivers/pci/hotplug/Kconfig"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 
 menu "Kernel Features"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARM64_DCACHE_DISABLE
 	bool "Disable CPU Data Caches"
@@ -417,6 +483,8 @@ config ARM64_ICACHE_DISABLE
 config ARM64_64K_PAGES
 	bool "Enable 64KB pages support"
 =======
+=======
+>>>>>>> v3.18
 choice
 	prompt "Page size"
 	default ARM64_4K_PAGES
@@ -430,6 +498,9 @@ config ARM64_4K_PAGES
 
 config ARM64_64K_PAGES
 	bool "64KB"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This feature enables 64KB pages support (4KB by default)
@@ -437,6 +508,7 @@ config ARM64_64K_PAGES
 	  look-up. AArch32 emulation is not available when this feature
 	  is enabled.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config CPU_BIG_ENDIAN
        bool "Build big-endian kernel"
@@ -478,6 +550,8 @@ config ARM64_A57_ERRATA_832075
 	  c) Following the branch instruction, there are six or more loads
 	  to device memory locations
 =======
+=======
+>>>>>>> v3.18
 endchoice
 
 choice
@@ -520,6 +594,9 @@ config CPU_BIG_ENDIAN
        bool "Build big-endian kernel"
        help
          Say Y if you plan on running a kernel in big-endian mode.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SMP
@@ -552,6 +629,7 @@ config SCHED_SMT
 	  places. If unsure say N here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_WANTS_CTXSW_LOGGING
 	bool "Enable logging in context switch"
 	depends on SMP
@@ -565,12 +643,17 @@ config NR_CPUS
 	# These have to remain sorted largest to smallest
 	default "8"
 =======
+=======
+>>>>>>> v3.18
 config NR_CPUS
 	int "Maximum number of CPUs (2-64)"
 	range 2 64
 	depends on SMP
 	# These have to remain sorted largest to smallest
 	default "64"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HOTPLUG_CPU
@@ -582,6 +665,7 @@ config HOTPLUG_CPU
 
 source kernel/Kconfig.preempt
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SWP_EMULATE
 	bool "Emulate SWP/SWPB instructions"
@@ -614,6 +698,11 @@ config HZ
 	int
 	default 100
 >>>>>>> v3.18
+=======
+config HZ
+	int
+	default 100
+>>>>>>> v3.18
 
 config ARCH_HAS_HOLES_MEMORYMODEL
 	def_bool y if SPARSEMEM
@@ -640,6 +729,7 @@ config HW_PERF_EVENTS
 	  disabled, perf events will use software events only.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PERF_EVENTS_USERMODE
 	bool "Enable usermode access for perf events"
 	depends on PERF_EVENTS
@@ -662,6 +752,8 @@ config PERF_EVENTS_RESET_PMU_DEBUGFS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config SYS_SUPPORTS_HUGETLBFS
 	def_bool y
 
@@ -677,6 +769,7 @@ config HAVE_ARCH_TRANSPARENT_HUGEPAGE
 config ARCH_HAS_CACHE_LINE_SIZE
 	def_bool y
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARMV7_COMPAT
 	bool "Kernel support for ARMv7 applications"
@@ -701,6 +794,8 @@ config ARMV7_COMPAT_CPUINFO
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 source "mm/Kconfig"
 
 config XEN_DOM0
@@ -709,7 +804,11 @@ config XEN_DOM0
 
 config XEN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Xen guest support on ARM64 (EXPERIMENTAL)"
+=======
+	bool "Xen guest support on ARM64"
+>>>>>>> v3.18
 =======
 	bool "Xen guest support on ARM64"
 >>>>>>> v3.18
@@ -723,6 +822,7 @@ config FORCE_MAX_ZONEORDER
 	default "14" if (ARM64_64K_PAGES && TRANSPARENT_HUGEPAGE)
 	default "11"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SECCOMP
 	bool "Enable seccomp to safely compute untrusted bytecode"
@@ -740,6 +840,8 @@ config SECCOMP
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 endmenu
 
 menu "Boot options"
@@ -752,6 +854,7 @@ config CMDLINE
 	  entering them here. As a minimum, you should specify the the
 	  root device (e.g. root=/dev/nfs).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 choice
 	prompt "Kernel command line type" if CMDLINE != ""
@@ -772,6 +875,8 @@ config CMDLINE_EXTEND
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config CMDLINE_FORCE
 	bool "Always use the default kernel command string"
 	help
@@ -779,6 +884,7 @@ config CMDLINE_FORCE
 	  loader passes other arguments to the kernel.
 	  This is useful if you cannot or don't want to change the
 	  command-line options your boot loader passes to the kernel.
+<<<<<<< HEAD
 <<<<<<< HEAD
 endchoice
 
@@ -821,6 +927,11 @@ config BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES
 config EFI_STUB
 	bool
 >>>>>>> v3.18
+=======
+
+config EFI_STUB
+	bool
+>>>>>>> v3.18
 
 config EFI
 	bool "UEFI runtime support"
@@ -829,11 +940,17 @@ config EFI
 	select UCS2_STRING
 	select EFI_PARAMS_FROM_FDT
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	select EFI_RUNTIME_WRAPPERS
 	select EFI_STUB
 	select EFI_ARMSTUB
 	default y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This option provides support for runtime services provided
@@ -884,6 +1001,7 @@ endmenu
 menu "CPU Power Management"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if ARCH_HAS_CPUFREQ
 source "drivers/cpufreq/Kconfig"
 endif
@@ -891,10 +1009,15 @@ endif
 source "drivers/cpuidle/Kconfig"
 
 =======
+=======
+>>>>>>> v3.18
 source "drivers/cpuidle/Kconfig"
 
 source "drivers/cpufreq/Kconfig"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 
@@ -919,7 +1042,10 @@ endif
 
 source "lib/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 source "arch/arm64/mm/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

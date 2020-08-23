@@ -16,6 +16,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -99,6 +103,7 @@
 #define MCTRL_OBIT(cfg, sig)		((((cfg) >> (sig)) & 0xf) - LINE_OP0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Supported chip types */
 enum {
 	SCCNXP_TYPE_SC2681	= 2681,
@@ -110,6 +115,8 @@ enum {
 	SCCNXP_TYPE_SC68681	= 68681,
 	SCCNXP_TYPE_SC68692	= 68692,
 =======
+=======
+>>>>>>> v3.18
 #define SCCNXP_HAVE_IO		0x00000001
 #define SCCNXP_HAVE_MR0		0x00000002
 
@@ -121,6 +128,9 @@ struct sccnxp_chip {
 	unsigned long		freq_max;
 	unsigned int		flags;
 	unsigned int		fifosize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -129,6 +139,7 @@ struct sccnxp_port {
 	struct uart_port	port[SCCNXP_MAX_UARTS];
 	bool			opened[SCCNXP_MAX_UARTS];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const char		*name;
 	int			irq;
@@ -141,10 +152,15 @@ struct sccnxp_port {
 #define SCCNXP_HAVE_IO		0x00000001
 #define SCCNXP_HAVE_MR0		0x00000002
 =======
+=======
+>>>>>>> v3.18
 	int			irq;
 	u8			imr;
 
 	struct sccnxp_chip	*chip;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SERIAL_SCCNXP_CONSOLE
@@ -161,6 +177,7 @@ struct sccnxp_port {
 	struct regulator	*regulator;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u8 sccnxp_raw_read(void __iomem *base, u8 reg, u8 shift)
 {
@@ -179,6 +196,8 @@ static inline u8 sccnxp_read(struct uart_port *port, u8 reg)
 	return sccnxp_raw_read(port->membase, reg & s->addr_mask,
 			       port->regshift);
 =======
+=======
+>>>>>>> v3.18
 static const struct sccnxp_chip sc2681 = {
 	.name		= "SC2681",
 	.nr		= 2,
@@ -262,15 +281,22 @@ static const struct sccnxp_chip sc68692 = {
 static inline u8 sccnxp_read(struct uart_port *port, u8 reg)
 {
 	return readb(port->membase + (reg << port->regshift));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void sccnxp_write(struct uart_port *port, u8 reg, u8 v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sccnxp_port *s = dev_get_drvdata(port->dev);
 
 	sccnxp_raw_write(port->membase, reg & s->addr_mask, port->regshift, v);
+=======
+	writeb(v, port->membase + (reg << port->regshift));
+>>>>>>> v3.18
 =======
 	writeb(v, port->membase + (reg << port->regshift));
 >>>>>>> v3.18
@@ -340,6 +366,10 @@ static int sccnxp_set_baud(struct uart_port *port, int baud)
 	struct sccnxp_port *s = dev_get_drvdata(port->dev);
 	int div_std, tmp_baud, bestbaud = baud, besterr = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sccnxp_chip *chip = s->chip;
+>>>>>>> v3.18
 =======
 	struct sccnxp_chip *chip = s->chip;
 >>>>>>> v3.18
@@ -348,9 +378,15 @@ static int sccnxp_set_baud(struct uart_port *port, int baud)
 	/* Find best baud from table */
 	for (i = 0; baud_std[i].baud && besterr; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (baud_std[i].mr0 && !(s->flags & SCCNXP_HAVE_MR0))
 			continue;
 		div_std = DIV_ROUND_CLOSEST(s->freq_std, baud_std[i].baud);
+=======
+		if (baud_std[i].mr0 && !(chip->flags & SCCNXP_HAVE_MR0))
+			continue;
+		div_std = DIV_ROUND_CLOSEST(chip->freq_std, baud_std[i].baud);
+>>>>>>> v3.18
 =======
 		if (baud_std[i].mr0 && !(chip->flags & SCCNXP_HAVE_MR0))
 			continue;
@@ -366,7 +402,11 @@ static int sccnxp_set_baud(struct uart_port *port, int baud)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s->flags & SCCNXP_HAVE_MR0) {
+=======
+	if (chip->flags & SCCNXP_HAVE_MR0) {
+>>>>>>> v3.18
 =======
 	if (chip->flags & SCCNXP_HAVE_MR0) {
 >>>>>>> v3.18
@@ -493,7 +533,11 @@ static void sccnxp_handle_tx(struct uart_port *port)
 
 			/* Set direction to input */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (s->flags & SCCNXP_HAVE_IO)
+=======
+			if (s->chip->flags & SCCNXP_HAVE_IO)
+>>>>>>> v3.18
 =======
 			if (s->chip->flags & SCCNXP_HAVE_IO)
 >>>>>>> v3.18
@@ -546,9 +590,13 @@ static void sccnxp_timer(unsigned long data)
 	spin_unlock_irqrestore(&s->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!timer_pending(&s->timer))
 		mod_timer(&s->timer, jiffies +
 			  usecs_to_jiffies(s->pdata.poll_time_us));
+=======
+	mod_timer(&s->timer, jiffies + usecs_to_jiffies(s->pdata.poll_time_us));
+>>>>>>> v3.18
 =======
 	mod_timer(&s->timer, jiffies + usecs_to_jiffies(s->pdata.poll_time_us));
 >>>>>>> v3.18
@@ -575,7 +623,11 @@ static void sccnxp_start_tx(struct uart_port *port)
 
 	/* Set direction to output */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s->flags & SCCNXP_HAVE_IO)
+=======
+	if (s->chip->flags & SCCNXP_HAVE_IO)
+>>>>>>> v3.18
 =======
 	if (s->chip->flags & SCCNXP_HAVE_IO)
 >>>>>>> v3.18
@@ -615,11 +667,14 @@ static unsigned int sccnxp_tx_empty(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sccnxp_enable_ms(struct uart_port *port)
 {
 	/* Do nothing */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void sccnxp_set_mctrl(struct uart_port *port, unsigned int mctrl)
@@ -628,7 +683,11 @@ static void sccnxp_set_mctrl(struct uart_port *port, unsigned int mctrl)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(s->flags & SCCNXP_HAVE_IO))
+=======
+	if (!(s->chip->flags & SCCNXP_HAVE_IO))
+>>>>>>> v3.18
 =======
 	if (!(s->chip->flags & SCCNXP_HAVE_IO))
 >>>>>>> v3.18
@@ -650,7 +709,11 @@ static unsigned int sccnxp_get_mctrl(struct uart_port *port)
 	unsigned int mctrl = TIOCM_DSR | TIOCM_CTS | TIOCM_CAR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(s->flags & SCCNXP_HAVE_IO))
+=======
+	if (!(s->chip->flags & SCCNXP_HAVE_IO))
+>>>>>>> v3.18
 =======
 	if (!(s->chip->flags & SCCNXP_HAVE_IO))
 >>>>>>> v3.18
@@ -758,7 +821,11 @@ static void sccnxp_set_termios(struct uart_port *port,
 	if (termios->c_iflag & INPCK)
 		port->read_status_mask |= SR_PE | SR_FE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -769,6 +836,11 @@ static void sccnxp_set_termios(struct uart_port *port,
 	if (termios->c_iflag & IGNBRK)
 		port->ignore_status_mask |= SR_BRK;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (termios->c_iflag & IGNPAR)
+		port->ignore_status_mask |= SR_PE;
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & IGNPAR)
 		port->ignore_status_mask |= SR_PE;
@@ -779,7 +851,11 @@ static void sccnxp_set_termios(struct uart_port *port,
 	/* Setup baudrate */
 	baud = uart_get_baud_rate(port, termios, old, 50,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  (s->flags & SCCNXP_HAVE_MR0) ?
+=======
+				  (s->chip->flags & SCCNXP_HAVE_MR0) ?
+>>>>>>> v3.18
 =======
 				  (s->chip->flags & SCCNXP_HAVE_MR0) ?
 >>>>>>> v3.18
@@ -807,7 +883,11 @@ static int sccnxp_startup(struct uart_port *port)
 	spin_lock_irqsave(&s->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s->flags & SCCNXP_HAVE_IO) {
+=======
+	if (s->chip->flags & SCCNXP_HAVE_IO) {
+>>>>>>> v3.18
 =======
 	if (s->chip->flags & SCCNXP_HAVE_IO) {
 >>>>>>> v3.18
@@ -851,7 +931,11 @@ static void sccnxp_shutdown(struct uart_port *port)
 
 	/* Leave direction to input */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s->flags & SCCNXP_HAVE_IO)
+=======
+	if (s->chip->flags & SCCNXP_HAVE_IO)
+>>>>>>> v3.18
 =======
 	if (s->chip->flags & SCCNXP_HAVE_IO)
 >>>>>>> v3.18
@@ -865,7 +949,11 @@ static const char *sccnxp_type(struct uart_port *port)
 	struct sccnxp_port *s = dev_get_drvdata(port->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (port->type == PORT_SC26XX) ? s->name : NULL;
+=======
+	return (port->type == PORT_SC26XX) ? s->chip->name : NULL;
+>>>>>>> v3.18
 =======
 	return (port->type == PORT_SC26XX) ? s->chip->name : NULL;
 >>>>>>> v3.18
@@ -906,7 +994,10 @@ static const struct uart_ops sccnxp_ops = {
 	.start_tx	= sccnxp_start_tx,
 	.stop_rx	= sccnxp_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= sccnxp_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= sccnxp_break_ctl,
@@ -959,6 +1050,7 @@ static int sccnxp_console_setup(struct console *co, char *options)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sccnxp_probe(struct platform_device *pdev)
 {
 	struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -973,6 +1065,8 @@ static int sccnxp_probe(struct platform_device *pdev)
 		return -EADDRNOTAVAIL;
 	}
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_id sccnxp_id_table[] = {
 	{ .name = "sc2681",	.driver_data = (kernel_ulong_t)&sc2681, },
 	{ .name = "sc2691",	.driver_data = (kernel_ulong_t)&sc2691, },
@@ -998,6 +1092,9 @@ static int sccnxp_probe(struct platform_device *pdev)
 	membase = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(membase))
 		return PTR_ERR(membase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = devm_kzalloc(&pdev->dev, sizeof(struct sccnxp_port), GFP_KERNEL);
@@ -1009,6 +1106,7 @@ static int sccnxp_probe(struct platform_device *pdev)
 
 	spin_lock_init(&s->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Individual chip settings */
 	switch (chiptype) {
@@ -1104,6 +1202,8 @@ static int sccnxp_probe(struct platform_device *pdev)
 		s->pdata.frequency = s->freq_std;
 	} else
 =======
+=======
+>>>>>>> v3.18
 	s->chip = (struct sccnxp_chip *)pdev->id_entry->driver_data;
 
 	s->regulator = devm_regulator_get(&pdev->dev, "vcc");
@@ -1136,6 +1236,9 @@ static int sccnxp_probe(struct platform_device *pdev)
 	}
 
 	if (pdata)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(&s->pdata, pdata, sizeof(struct sccnxp_pdata));
 
@@ -1154,6 +1257,7 @@ static int sccnxp_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Check input frequency */
 	if ((s->pdata.frequency < freq_min) ||
@@ -1181,11 +1285,17 @@ static int sccnxp_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	s->uart.owner		= THIS_MODULE;
 	s->uart.dev_name	= "ttySC";
 	s->uart.major		= SCCNXP_MAJOR;
 	s->uart.minor		= SCCNXP_MINOR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s->uart.nr		= s->chip->nr;
+>>>>>>> v3.18
 =======
 	s->uart.nr		= s->chip->nr;
 >>>>>>> v3.18
@@ -1211,7 +1321,11 @@ static int sccnxp_probe(struct platform_device *pdev)
 		s->port[i].irq		= s->irq;
 		s->port[i].type		= PORT_SC26XX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s->port[i].fifosize	= fifosize;
+=======
+		s->port[i].fifosize	= s->chip->fifosize;
+>>>>>>> v3.18
 =======
 		s->port[i].fifosize	= s->chip->fifosize;
 >>>>>>> v3.18
@@ -1221,17 +1335,23 @@ static int sccnxp_probe(struct platform_device *pdev)
 		s->port[i].membase	= membase;
 		s->port[i].regshift	= s->pdata.reg_shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s->port[i].uartclk	= s->pdata.frequency;
 		s->port[i].ops		= &sccnxp_ops;
 		uart_add_one_port(&s->uart, &s->port[i]);
 		/* Set direction to input */
 		if (s->flags & SCCNXP_HAVE_IO)
 =======
+=======
+>>>>>>> v3.18
 		s->port[i].uartclk	= uartclk;
 		s->port[i].ops		= &sccnxp_ops;
 		uart_add_one_port(&s->uart, &s->port[i]);
 		/* Set direction to input */
 		if (s->chip->flags & SCCNXP_HAVE_IO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sccnxp_set_bit(&s->port[i], DIR_OP, 0);
 	}
@@ -1259,13 +1379,19 @@ static int sccnxp_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_out:
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	uart_unregister_driver(&s->uart);
 err_out:
 	if (!IS_ERR(s->regulator))
 		return regulator_disable(s->regulator);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1286,7 +1412,10 @@ static int sccnxp_remove(struct platform_device *pdev)
 
 	uart_unregister_driver(&s->uart);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1296,6 +1425,7 @@ static int sccnxp_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct platform_device_id sccnxp_id_table[] = {
 	{ "sc2681",	SCCNXP_TYPE_SC2681 },
@@ -1310,6 +1440,8 @@ static const struct platform_device_id sccnxp_id_table[] = {
 };
 MODULE_DEVICE_TABLE(platform, sccnxp_id_table);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver sccnxp_uart_driver = {

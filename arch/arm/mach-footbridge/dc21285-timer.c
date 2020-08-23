@@ -10,6 +10,10 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched_clock.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched_clock.h>
 >>>>>>> v3.18
@@ -51,7 +55,10 @@ static struct clocksource cksrc_dc21285 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ckevt_dc21285_set_next_event(unsigned long delta,
 	struct clock_event_device *c)
 {
@@ -62,6 +69,9 @@ static int ckevt_dc21285_set_next_event(unsigned long delta,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ckevt_dc21285_set_mode(enum clock_event_mode mode,
 	struct clock_event_device *c)
@@ -76,7 +86,13 @@ static void ckevt_dc21285_set_mode(enum clock_event_mode mode,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
+=======
+	case CLOCK_EVT_MODE_ONESHOT:
+	case CLOCK_EVT_MODE_UNUSED:
+	case CLOCK_EVT_MODE_SHUTDOWN:
+>>>>>>> v3.18
 =======
 	case CLOCK_EVT_MODE_ONESHOT:
 	case CLOCK_EVT_MODE_UNUSED:
@@ -90,15 +106,21 @@ static void ckevt_dc21285_set_mode(enum clock_event_mode mode,
 static struct clock_event_device ckevt_dc21285 = {
 	.name		= "dc21285_timer1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.features	= CLOCK_EVT_FEAT_PERIODIC,
 	.rating		= 200,
 	.irq		= IRQ_TIMER1,
 =======
+=======
+>>>>>>> v3.18
 	.features	= CLOCK_EVT_FEAT_PERIODIC |
 			  CLOCK_EVT_FEAT_ONESHOT,
 	.rating		= 200,
 	.irq		= IRQ_TIMER1,
 	.set_next_event	= ckevt_dc21285_set_next_event,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set_mode	= ckevt_dc21285_set_mode,
 };
@@ -110,11 +132,17 @@ static irqreturn_t timer1_interrupt(int irq, void *dev_id)
 	*CSR_TIMER1_CLR = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Stop the timer if in one-shot mode */
 	if (ce->mode == CLOCK_EVT_MODE_ONESHOT)
 		*CSR_TIMER1_CNTL = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ce->event_handler(ce);
 
@@ -125,7 +153,11 @@ static struct irqaction footbridge_timer_irq = {
 	.name		= "dc21285_timer1",
 	.handler	= timer1_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -148,7 +180,10 @@ void __init footbridge_timer_init(void)
 	clockevents_config_and_register(ce, rate, 0x4, 0xffffff);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static u64 notrace footbridge_read_sched_clock(void)
 {
@@ -165,4 +200,7 @@ void __init footbridge_sched_clock(void)
 
 	sched_clock_register(footbridge_read_sched_clock, 24, rate);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

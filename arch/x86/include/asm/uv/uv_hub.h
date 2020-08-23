@@ -6,7 +6,11 @@
  * SGI UV architectural definitions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2013 Silicon Graphics, Inc. All rights reserved.
+=======
+ * Copyright (C) 2007-2014 Silicon Graphics, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2014 Silicon Graphics, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -169,7 +173,11 @@ struct uv_hub_info_s {
 
 DECLARE_PER_CPU(struct uv_hub_info_s, __uv_hub_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define uv_hub_info		(&__get_cpu_var(__uv_hub_info))
+=======
+#define uv_hub_info		this_cpu_ptr(&__uv_hub_info)
+>>>>>>> v3.18
 =======
 #define uv_hub_info		this_cpu_ptr(&__uv_hub_info)
 >>>>>>> v3.18
@@ -213,6 +221,7 @@ static inline int is_uvx_hub(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int is_uv2_1_hub(void)
 {
 	return uv_hub_info->hub_revision == UV2_HUB_REVISION_BASE;
@@ -223,6 +232,8 @@ static inline int is_uv2_2_hub(void)
 	return uv_hub_info->hub_revision == UV2_HUB_REVISION_BASE + 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 union uvh_apicid {
@@ -514,8 +525,13 @@ struct uv_blade_info {
 	unsigned short	pnode;
 	short		memory_nid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t	nmi_lock;
 	unsigned long	nmi_count;
+=======
+	spinlock_t	nmi_lock;	/* obsolete, see uv_hub_nmi */
+	unsigned long	nmi_count;	/* obsolete, see uv_hub_nmi */
+>>>>>>> v3.18
 =======
 	spinlock_t	nmi_lock;	/* obsolete, see uv_hub_nmi */
 	unsigned long	nmi_count;	/* obsolete, see uv_hub_nmi */
@@ -593,7 +609,10 @@ static inline int uv_num_possible_blades(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Per Hub NMI support */
 extern void uv_nmi_setup(void);
 
@@ -647,6 +666,9 @@ DECLARE_PER_CPU(struct uv_cpu_nmi_s, uv_cpu_nmi);
 #define	UV_NMI_STATE_DUMP		2
 #define	UV_NMI_STATE_DUMP_DONE		3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Update SCIR state */
 static inline void uv_set_scir_bits(unsigned char value)

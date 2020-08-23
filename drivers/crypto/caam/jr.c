@@ -6,6 +6,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+#include <linux/of_address.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
@@ -18,7 +24,10 @@
 #include "intern.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct jr_driver_data {
 	/* List of Physical JobR's with the Driver */
 	struct list_head	jr_list;
@@ -126,6 +135,9 @@ static int caam_jr_remove(struct platform_device *pdev)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Main per-ring interrupt handler */
 static irqreturn_t caam_jr_interrupt(int irq, void *st_dev)
@@ -243,6 +255,7 @@ static void caam_jr_dequeue(unsigned long devarg)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * caam_jr_register() - Alloc a ring for someone to use as needed. Returns
  * an ordinal of the rings allocated, else returns -ENODEV if no rings
  * are available.
@@ -308,6 +321,8 @@ int caam_jr_deregister(struct device *rdev)
 }
 EXPORT_SYMBOL(caam_jr_deregister);
 =======
+=======
+>>>>>>> v3.18
  * caam_jr_alloc() - Alloc a job ring for someone to use as needed.
  *
  * returns :  pointer to the newly allocated physical
@@ -359,6 +374,9 @@ void caam_jr_free(struct device *rdev)
 	atomic_dec(&jrpriv->tfm_count);
 }
 EXPORT_SYMBOL(caam_jr_free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -442,6 +460,7 @@ int caam_jr_enqueue(struct device *dev, u32 *desc,
 EXPORT_SYMBOL(caam_jr_enqueue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int caam_reset_hw_jr(struct device *dev)
 {
 	struct caam_drv_private_jr *jrp = dev_get_drvdata(dev);
@@ -484,6 +503,8 @@ static int caam_reset_hw_jr(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Init JobR independent of platform property detection
  */
@@ -500,7 +521,11 @@ static int caam_jr_init(struct device *dev)
 	/* Connect job ring interrupt handler. */
 	error = request_irq(jrp->irq, caam_jr_interrupt, IRQF_SHARED,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    "caam-jobr", dev);
+=======
+			    dev_name(dev), dev);
+>>>>>>> v3.18
 =======
 			    dev_name(dev), dev);
 >>>>>>> v3.18
@@ -556,6 +581,7 @@ static int caam_jr_init(struct device *dev)
 		  (JOBR_INTC_COUNT_THLD << JRCFG_ICDCT_SHIFT) |
 		  (JOBR_INTC_TIME_THLD << JRCFG_ICTT_SHIFT));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	jrp->assign = JOBR_UNASSIGNED;
 	return 0;
@@ -661,6 +687,8 @@ int caam_jr_probe(struct platform_device *pdev, struct device_node *np,
 	return error;
 }
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -764,4 +792,7 @@ module_exit(jr_driver_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("FSL CAAM JR request backend");
 MODULE_AUTHOR("Freescale Semiconductor - NMG/STC");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -38,7 +38,11 @@ static inline u32 u32_field_get(const u8 *preq_elem, int offset, bool ae)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 u16_field_get(const u8 *preq_elem, int offset, bool ae)
+=======
+static inline u16 u16_field_get(const u8 *preq_elem, int offset, bool ae)
+>>>>>>> v3.18
 =======
 static inline u16 u16_field_get(const u8 *preq_elem, int offset, bool ae)
 >>>>>>> v3.18
@@ -107,6 +111,7 @@ static const u8 broadcast_addr[ETH_ALEN] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
 
 static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const u8 *orig_addr, __le32 orig_sn,
 				  u8 target_flags, const u8 *target,
 				  __le32 target_sn, const u8 *da,
@@ -114,11 +119,16 @@ static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 				  __le32 lifetime, __le32 metric,
 				  __le32 preq_id,
 =======
+=======
+>>>>>>> v3.18
 				  const u8 *orig_addr, u32 orig_sn,
 				  u8 target_flags, const u8 *target,
 				  u32 target_sn, const u8 *da,
 				  u8 hop_count, u8 ttl,
 				  u32 lifetime, u32 metric, u32 preq_id,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  struct ieee80211_sub_if_data *sdata)
 {
@@ -171,7 +181,10 @@ static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 		kfree_skb(skb);
 		return -ENOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -183,22 +196,29 @@ static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 		memcpy(pos, target, ETH_ALEN);
 		pos += ETH_ALEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(pos, &target_sn, 4);
 		pos += 4;
 	} else {
 		if (action == MPATH_PREQ) {
 			memcpy(pos, &preq_id, 4);
 =======
+=======
+>>>>>>> v3.18
 		put_unaligned_le32(target_sn, pos);
 		pos += 4;
 	} else {
 		if (action == MPATH_PREQ) {
 			put_unaligned_le32(preq_id, pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pos += 4;
 		}
 		memcpy(pos, orig_addr, ETH_ALEN);
 		pos += ETH_ALEN;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		memcpy(pos, &orig_sn, 4);
 		pos += 4;
@@ -207,12 +227,17 @@ static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 	pos += 4;
 	memcpy(pos, &metric, 4);
 =======
+=======
+>>>>>>> v3.18
 		put_unaligned_le32(orig_sn, pos);
 		pos += 4;
 	}
 	put_unaligned_le32(lifetime, pos); /* interval for RANN */
 	pos += 4;
 	put_unaligned_le32(metric, pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pos += 4;
 	if (action == MPATH_PREQ) {
@@ -221,7 +246,11 @@ static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 		memcpy(pos, target, ETH_ALEN);
 		pos += ETH_ALEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(pos, &target_sn, 4);
+=======
+		put_unaligned_le32(target_sn, pos);
+>>>>>>> v3.18
 =======
 		put_unaligned_le32(target_sn, pos);
 >>>>>>> v3.18
@@ -230,7 +259,11 @@ static int mesh_path_sel_frame_tx(enum mpath_frame_type action, u8 flags,
 		memcpy(pos, orig_addr, ETH_ALEN);
 		pos += ETH_ALEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(pos, &orig_sn, 4);
+=======
+		put_unaligned_le32(orig_sn, pos);
+>>>>>>> v3.18
 =======
 		put_unaligned_le32(orig_sn, pos);
 >>>>>>> v3.18
@@ -280,8 +313,13 @@ static void prepare_frame_for_deferred_tx(struct ieee80211_sub_if_data *sdata,
  */
 int mesh_path_error_tx(struct ieee80211_sub_if_data *sdata,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       u8 ttl, const u8 *target, __le32 target_sn,
 		       __le16 target_rcode, const u8 *ra)
+=======
+		       u8 ttl, const u8 *target, u32 target_sn,
+		       u16 target_rcode, const u8 *ra)
+>>>>>>> v3.18
 =======
 		       u8 ttl, const u8 *target, u32 target_sn,
 		       u16 target_rcode, const u8 *ra)
@@ -300,7 +338,11 @@ int mesh_path_error_tx(struct ieee80211_sub_if_data *sdata,
 
 	skb = dev_alloc_skb(local->tx_headroom +
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    IEEE80211_ENCRYPT_HEADROOM +
+=======
+			    sdata->encrypt_headroom +
+>>>>>>> v3.18
 =======
 			    sdata->encrypt_headroom +
 >>>>>>> v3.18
@@ -310,7 +352,11 @@ int mesh_path_error_tx(struct ieee80211_sub_if_data *sdata,
 	if (!skb)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_reserve(skb, local->tx_headroom + IEEE80211_ENCRYPT_HEADROOM);
+=======
+	skb_reserve(skb, local->tx_headroom + sdata->encrypt_headroom);
+>>>>>>> v3.18
 =======
 	skb_reserve(skb, local->tx_headroom + sdata->encrypt_headroom);
 >>>>>>> v3.18
@@ -347,9 +393,15 @@ int mesh_path_error_tx(struct ieee80211_sub_if_data *sdata,
 	memcpy(pos, target, ETH_ALEN);
 	pos += ETH_ALEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(pos, &target_sn, 4);
 	pos += 4;
 	memcpy(pos, &target_rcode, 2);
+=======
+	put_unaligned_le32(target_sn, pos);
+	pos += 4;
+	put_unaligned_le16(target_rcode, pos);
+>>>>>>> v3.18
 =======
 	put_unaligned_le32(target_sn, pos);
 	pos += 4;
@@ -605,14 +657,20 @@ static void hwmp_preq_frame_process(struct ieee80211_sub_if_data *sdata,
 					net_traversal_jiffies(sdata)) ||
 		    time_before(jiffies, ifmsh->last_sn_update)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			target_sn = ++ifmsh->sn;
 			ifmsh->last_sn_update = jiffies;
 		}
 =======
+=======
+>>>>>>> v3.18
 			++ifmsh->sn;
 			ifmsh->last_sn_update = jiffies;
 		}
 		target_sn = ifmsh->sn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (is_broadcast_ether_addr(target_addr) &&
 		   (target_flags & IEEE80211_PREQ_TO_FLAG)) {
@@ -659,10 +717,16 @@ static void hwmp_preq_frame_process(struct ieee80211_sub_if_data *sdata,
 			mhwmp_dbg(sdata, "replying to the PREQ\n");
 			mesh_path_sel_frame_tx(MPATH_PREP, 0, orig_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cpu_to_le32(orig_sn), 0, target_addr,
 				cpu_to_le32(target_sn), mgmt->sa, 0, ttl,
 				cpu_to_le32(lifetime), cpu_to_le32(metric),
 				0, sdata);
+=======
+					       orig_sn, 0, target_addr,
+					       target_sn, mgmt->sa, 0, ttl,
+					       lifetime, metric, 0, sdata);
+>>>>>>> v3.18
 =======
 					       orig_sn, 0, target_addr,
 					       target_sn, mgmt->sa, 0, ttl,
@@ -698,11 +762,17 @@ static void hwmp_preq_frame_process(struct ieee80211_sub_if_data *sdata,
 
 		mesh_path_sel_frame_tx(MPATH_PREQ, flags, orig_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cpu_to_le32(orig_sn), target_flags, target_addr,
 				cpu_to_le32(target_sn), da,
 				hopcount, ttl, cpu_to_le32(lifetime),
 				cpu_to_le32(metric), cpu_to_le32(preq_id),
 				sdata);
+=======
+				       orig_sn, target_flags, target_addr,
+				       target_sn, da, hopcount, ttl, lifetime,
+				       metric, preq_id, sdata);
+>>>>>>> v3.18
 =======
 				       orig_sn, target_flags, target_addr,
 				       target_sn, da, hopcount, ttl, lifetime,
@@ -774,11 +844,17 @@ static void hwmp_prep_frame_process(struct ieee80211_sub_if_data *sdata,
 	orig_sn = PREP_IE_ORIG_SN(prep_elem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mesh_path_sel_frame_tx(MPATH_PREP, flags, orig_addr,
 		cpu_to_le32(orig_sn), 0, target_addr,
 		cpu_to_le32(target_sn), next_hop, hopcount,
 		ttl, cpu_to_le32(lifetime), cpu_to_le32(metric),
 		0, sdata);
+=======
+	mesh_path_sel_frame_tx(MPATH_PREP, flags, orig_addr, orig_sn, 0,
+			       target_addr, target_sn, next_hop, hopcount,
+			       ttl, lifetime, metric, 0, sdata);
+>>>>>>> v3.18
 =======
 	mesh_path_sel_frame_tx(MPATH_PREP, flags, orig_addr, orig_sn, 0,
 			       target_addr, target_sn, next_hop, hopcount,
@@ -835,8 +911,12 @@ static void hwmp_perr_frame_process(struct ieee80211_sub_if_data *sdata,
 				goto endperr;
 			mesh_path_error_tx(sdata, ttl, target_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   cpu_to_le32(target_sn),
 					   cpu_to_le16(target_rcode),
+=======
+					   target_sn, target_rcode,
+>>>>>>> v3.18
 =======
 					   target_sn, target_rcode,
 >>>>>>> v3.18
@@ -936,11 +1016,17 @@ static void hwmp_rann_frame_process(struct ieee80211_sub_if_data *sdata,
 	if (ifmsh->mshcfg.dot11MeshForwarding) {
 		mesh_path_sel_frame_tx(MPATH_RANN, flags, orig_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       cpu_to_le32(orig_sn),
 				       0, NULL, 0, broadcast_addr,
 				       hopcount, ttl, cpu_to_le32(interval),
 				       cpu_to_le32(metric + metric_txsta),
 				       0, sdata);
+=======
+				       orig_sn, 0, NULL, 0, broadcast_addr,
+				       hopcount, ttl, interval,
+				       metric + metric_txsta, 0, sdata);
+>>>>>>> v3.18
 =======
 				       orig_sn, 0, NULL, 0, broadcast_addr,
 				       hopcount, ttl, interval,
@@ -1144,11 +1230,17 @@ void mesh_path_start_discovery(struct ieee80211_sub_if_data *sdata)
 	spin_unlock_bh(&mpath->state_lock);
 	da = (mpath->is_root) ? mpath->rann_snd_addr : broadcast_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mesh_path_sel_frame_tx(MPATH_PREQ, 0, sdata->vif.addr,
 			cpu_to_le32(ifmsh->sn), target_flags, mpath->dst,
 			cpu_to_le32(mpath->sn), da, 0,
 			ttl, cpu_to_le32(lifetime), 0,
 			cpu_to_le32(ifmsh->preq_id++), sdata);
+=======
+	mesh_path_sel_frame_tx(MPATH_PREQ, 0, sdata->vif.addr, ifmsh->sn,
+			       target_flags, mpath->dst, mpath->sn, da, 0,
+			       ttl, lifetime, 0, ifmsh->preq_id++, sdata);
+>>>>>>> v3.18
 =======
 	mesh_path_sel_frame_tx(MPATH_PREQ, 0, sdata->vif.addr, ifmsh->sn,
 			       target_flags, mpath->dst, mpath->sn, da, 0,
@@ -1313,10 +1405,16 @@ void mesh_path_tx_root_frame(struct ieee80211_sub_if_data *sdata)
 	case IEEE80211_PROACTIVE_RANN:
 		mesh_path_sel_frame_tx(MPATH_RANN, flags, sdata->vif.addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       cpu_to_le32(++ifmsh->sn),
 			       0, NULL, 0, broadcast_addr,
 			       0, ifmsh->mshcfg.element_ttl,
 			       cpu_to_le32(interval), 0, 0, sdata);
+=======
+				       ++ifmsh->sn, 0, NULL, 0, broadcast_addr,
+				       0, ifmsh->mshcfg.element_ttl,
+				       interval, 0, 0, sdata);
+>>>>>>> v3.18
 =======
 				       ++ifmsh->sn, 0, NULL, 0, broadcast_addr,
 				       0, ifmsh->mshcfg.element_ttl,
@@ -1331,16 +1429,22 @@ void mesh_path_tx_root_frame(struct ieee80211_sub_if_data *sdata)
 				IEEE80211_PREQ_USN_FLAG;
 		mesh_path_sel_frame_tx(MPATH_PREQ, flags, sdata->vif.addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cpu_to_le32(++ifmsh->sn), target_flags,
 				(u8 *) broadcast_addr, 0, broadcast_addr,
 				0, ifmsh->mshcfg.element_ttl,
 				cpu_to_le32(interval),
 				0, cpu_to_le32(ifmsh->preq_id++), sdata);
 =======
+=======
+>>>>>>> v3.18
 				       ++ifmsh->sn, target_flags,
 				       (u8 *) broadcast_addr, 0, broadcast_addr,
 				       0, ifmsh->mshcfg.element_ttl, interval,
 				       0, ifmsh->preq_id++, sdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:

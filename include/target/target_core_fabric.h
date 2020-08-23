@@ -62,7 +62,12 @@ struct target_core_fabric_ops {
 	int (*queue_data_in)(struct se_cmd *);
 	int (*queue_status)(struct se_cmd *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*queue_tm_rsp)(struct se_cmd *);
+=======
+	void (*queue_tm_rsp)(struct se_cmd *);
+	void (*aborted_task)(struct se_cmd *);
+>>>>>>> v3.18
 =======
 	void (*queue_tm_rsp)(struct se_cmd *);
 	void (*aborted_task)(struct se_cmd *);
@@ -89,13 +94,19 @@ struct target_core_fabric_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct se_session *transport_init_session(void);
 =======
+=======
+>>>>>>> v3.18
 struct se_session *transport_init_session(enum target_prot_op);
 int transport_alloc_session_tags(struct se_session *, unsigned int,
 		unsigned int);
 struct se_session *transport_init_session_tags(unsigned int, unsigned int,
 		enum target_prot_op);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void	__transport_register_session(struct se_portal_group *,
 		struct se_node_acl *, struct se_session *, void *);
@@ -116,7 +127,12 @@ sense_reason_t target_setup_cmd_from_cdb(struct se_cmd *, unsigned char *);
 int	target_submit_cmd_map_sgls(struct se_cmd *, struct se_session *,
 		unsigned char *, unsigned char *, u32, u32, int, int, int,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct scatterlist *, u32, struct scatterlist *, u32);
+=======
+		struct scatterlist *, u32, struct scatterlist *, u32,
+		struct scatterlist *, u32);
+>>>>>>> v3.18
 =======
 		struct scatterlist *, u32, struct scatterlist *, u32,
 		struct scatterlist *, u32);
@@ -150,14 +166,20 @@ void	core_tmr_release_req(struct se_tmr_req *);
 int	transport_generic_handle_tmr(struct se_cmd *);
 void	transport_generic_request_failure(struct se_cmd *, sense_reason_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int	transport_lookup_tmr_lun(struct se_cmd *, u32);
 
 =======
+=======
+>>>>>>> v3.18
 void	__target_execute_cmd(struct se_cmd *);
 int	transport_lookup_tmr_lun(struct se_cmd *, u32);
 
 struct se_node_acl *core_tpg_get_initiator_node_acl(struct se_portal_group *tpg,
 		unsigned char *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct se_node_acl *core_tpg_check_initiator_node_acl(struct se_portal_group *,
 		unsigned char *);
@@ -202,7 +224,10 @@ char	*iscsi_parse_pr_out_transport_id(struct se_portal_group *, const char *,
 		u32 *, char **);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The LIO target core uses DMA_TO_DEVICE to mean that data is going
  * to the target (eg handling a WRITE) and DMA_FROM_DEVICE to mean
@@ -229,5 +254,8 @@ target_reverse_dma_direction(struct se_cmd *se_cmd)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* TARGET_CORE_FABRICH */

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Whatt:		/sys/devices/.../sun
+=======
+What:		/sys/devices/.../sun
+>>>>>>> v3.18
 =======
 What:		/sys/devices/.../sun
 >>>>>>> v3.18

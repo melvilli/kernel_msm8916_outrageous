@@ -172,6 +172,10 @@ static struct of_device_id __initdata octeon_ids[] = {
 	{ .compatible = "simple-bus", },
 	{ .compatible = "cavium,octeon-6335-uctl", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "cavium,octeon-5750-usbn", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "cavium,octeon-5750-usbn", },
 >>>>>>> v3.18
@@ -339,9 +343,13 @@ static void __init octeon_fdt_pip_iface(int pip, int idx, u64 *pmac)
 	int iface;
 	int p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int count;
 
 	count = cvmx_helper_interface_enumerate(idx);
+=======
+	int count = 0;
+>>>>>>> v3.18
 =======
 	int count = 0;
 >>>>>>> v3.18
@@ -352,6 +360,12 @@ static void __init octeon_fdt_pip_iface(int pip, int idx, u64 *pmac)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cvmx_helper_interface_enumerate(idx) == 0)
+		count = cvmx_helper_ports_on_interface(idx);
+
+>>>>>>> v3.18
 =======
 	if (cvmx_helper_interface_enumerate(idx) == 0)
 		count = cvmx_helper_ports_on_interface(idx);
@@ -505,9 +519,12 @@ int __init octeon_prune_device_tree(void)
 		if (alias_prop) {
 			uart = fdt_path_offset(initial_boot_params, alias_prop);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (uart_mask & (1 << i))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 			if (uart_mask & (1 << i)) {
 				__be32 f;
 
@@ -517,6 +534,9 @@ int __init octeon_prune_device_tree(void)
 						    &f, sizeof(f));
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pr_debug("Deleting uart%d\n", i);
 			fdt_nop_node(initial_boot_params, uart);
@@ -701,7 +721,10 @@ end_led:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* DWC2 USB */
 	alias_prop = fdt_getprop(initial_boot_params, aliases,
 				 "usbn", NULL);
@@ -733,6 +756,9 @@ end_led:
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

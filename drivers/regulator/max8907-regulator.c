@@ -35,7 +35,10 @@
 struct max8907_regulator {
 	struct regulator_desc desc[MAX8907_NUM_REGULATORS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev *rdev[MAX8907_NUM_REGULATORS];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -231,17 +234,23 @@ static int max8907_regulator_parse_dt(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np = of_node_get(pdev->dev.parent->of_node);
 	if (!np)
 		return 0;
 
 	regulators = of_find_node_by_name(np, "regulators");
 =======
+=======
+>>>>>>> v3.18
 	np = pdev->dev.parent->of_node;
 	if (!np)
 		return 0;
 
 	regulators = of_get_child_by_name(np, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!regulators) {
 		dev_err(&pdev->dev, "regulators node not found\n");
@@ -304,10 +313,16 @@ static int max8907_regulator_probe(struct platform_device *pdev)
 
 	pmic = devm_kzalloc(&pdev->dev, sizeof(*pmic), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pmic) {
 		dev_err(&pdev->dev, "Failed to alloc pmic\n");
 		return -ENOMEM;
 	}
+=======
+	if (!pmic)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!pmic)
 		return -ENOMEM;
@@ -329,6 +344,11 @@ static int max8907_regulator_probe(struct platform_device *pdev)
 
 	for (i = 0; i < MAX8907_NUM_REGULATORS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct regulator_dev *rdev;
+
+>>>>>>> v3.18
 =======
 		struct regulator_dev *rdev;
 
@@ -373,6 +393,7 @@ static int max8907_regulator_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pmic->rdev[i] = regulator_register(&pmic->desc[i], &config);
 		if (IS_ERR(pmic->rdev[i])) {
 			dev_err(&pdev->dev,
@@ -381,6 +402,8 @@ static int max8907_regulator_probe(struct platform_device *pdev)
 			ret = PTR_ERR(pmic->rdev[i]);
 			goto err_unregister_regulator;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&pdev->dev,
 						&pmic->desc[i], &config);
 		if (IS_ERR(rdev)) {
@@ -388,11 +411,15 @@ static int max8907_regulator_probe(struct platform_device *pdev)
 				"failed to register %s regulator\n",
 				pmic->desc[i].name);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_unregister_regulator:
@@ -412,6 +439,8 @@ static int max8907_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver max8907_regulator_driver = {
@@ -421,7 +450,10 @@ static struct platform_driver max8907_regulator_driver = {
 		   },
 	.probe = max8907_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max8907_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

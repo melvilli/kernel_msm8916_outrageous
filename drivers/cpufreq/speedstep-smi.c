@@ -43,9 +43,15 @@ static enum speedstep_processor speedstep_processor;
  */
 static struct cpufreq_frequency_table speedstep_freqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{SPEEDSTEP_HIGH,	0},
 	{SPEEDSTEP_LOW,		0},
 	{0,			CPUFREQ_TABLE_END},
+=======
+	{0, SPEEDSTEP_HIGH,	0},
+	{0, SPEEDSTEP_LOW,	0},
+	{0, 0,			CPUFREQ_TABLE_END},
+>>>>>>> v3.18
 =======
 	{0, SPEEDSTEP_HIGH,	0},
 	{0, SPEEDSTEP_LOW,	0},
@@ -148,6 +154,7 @@ static int speedstep_smi_get_freqs(unsigned int *low, unsigned int *high)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * speedstep_get_state - set the SpeedStep state
  * @state: processor frequency state (SPEEDSTEP_LOW or SPEEDSTEP_HIGH)
  *
@@ -182,6 +189,8 @@ static int speedstep_get_state(void)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * speedstep_set_state - set the SpeedStep state
  * @state: new processor frequency state (SPEEDSTEP_LOW or SPEEDSTEP_HIGH)
  *
@@ -198,7 +207,10 @@ static void speedstep_set_state(unsigned int state)
 
 	/* Disable IRQs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	local_irq_save(flags);
@@ -211,6 +223,7 @@ static void speedstep_set_state(unsigned int state)
 
 	do {
 		if (retry) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/*
 			 * We need to enable interrupts, otherwise the blockage
@@ -225,6 +238,11 @@ static void speedstep_set_state(unsigned int state)
 			local_irq_enable();
 			mdelay(retry * 50);
 			local_irq_disable();
+=======
+			pr_debug("retry %u, previous result %u, waiting...\n",
+					retry, result);
+			mdelay(retry * 50);
+>>>>>>> v3.18
 =======
 			pr_debug("retry %u, previous result %u, waiting...\n",
 					retry, result);
@@ -247,7 +265,10 @@ static void speedstep_set_state(unsigned int state)
 	/* enable IRQs */
 	local_irq_restore(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -268,6 +289,7 @@ static void speedstep_set_state(unsigned int state)
 /**
  * speedstep_target - set a new CPUFreq policy
  * @policy: new policy
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @target_freq: new freq
  * @relation:
@@ -294,6 +316,8 @@ static int speedstep_target(struct cpufreq_policy *policy,
 	speedstep_set_state(newstate);
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 =======
+=======
+>>>>>>> v3.18
  * @index: index of new freq
  *
  * Sets a new CPUFreq policy/freq.
@@ -301,12 +325,16 @@ static int speedstep_target(struct cpufreq_policy *policy,
 static int speedstep_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	speedstep_set_state(index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * speedstep_verify - verifies a new CPUFreq policy
@@ -325,6 +353,11 @@ static int speedstep_cpu_init(struct cpufreq_policy *policy)
 {
 	int result;
 	unsigned int speed, state;
+=======
+static int speedstep_cpu_init(struct cpufreq_policy *policy)
+{
+	int result;
+>>>>>>> v3.18
 =======
 static int speedstep_cpu_init(struct cpufreq_policy *policy)
 {
@@ -366,6 +399,7 @@ static int speedstep_cpu_init(struct cpufreq_policy *policy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* get current speed setting */
 	state = speedstep_get_state();
 	speed = speedstep_freqs[state].frequency;
@@ -396,6 +430,10 @@ static int speedstep_cpu_exit(struct cpufreq_policy *policy)
 	policy->cpuinfo.transition_latency = CPUFREQ_ETERNAL;
 	return cpufreq_table_validate_and_show(policy, speedstep_freqs);
 >>>>>>> v3.18
+=======
+	policy->cpuinfo.transition_latency = CPUFREQ_ETERNAL;
+	return cpufreq_table_validate_and_show(policy, speedstep_freqs);
+>>>>>>> v3.18
 }
 
 static unsigned int speedstep_get(unsigned int cpu)
@@ -417,6 +455,7 @@ static int speedstep_resume(struct cpufreq_policy *policy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct freq_attr *speedstep_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
 	NULL,
@@ -432,6 +471,8 @@ static struct cpufreq_driver speedstep_driver = {
 	.resume		= speedstep_resume,
 	.attr		= speedstep_attr,
 =======
+=======
+>>>>>>> v3.18
 static struct cpufreq_driver speedstep_driver = {
 	.name		= "speedstep-smi",
 	.verify		= cpufreq_generic_frequency_table_verify,
@@ -440,6 +481,9 @@ static struct cpufreq_driver speedstep_driver = {
 	.get		= speedstep_get,
 	.resume		= speedstep_resume,
 	.attr		= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -483,8 +527,13 @@ static int __init speedstep_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("signature:0x%.8ulx, command:0x%.8ulx, "
 		"event:0x%.8ulx, perf_level:0x%.8ulx.\n",
+=======
+	pr_debug("signature:0x%.8x, command:0x%.8x, "
+		"event:0x%.8x, perf_level:0x%.8x.\n",
+>>>>>>> v3.18
 =======
 	pr_debug("signature:0x%.8x, command:0x%.8x, "
 		"event:0x%.8x, perf_level:0x%.8x.\n",

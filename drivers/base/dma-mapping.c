@@ -11,6 +11,11 @@
 #include <linux/export.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+#include <linux/vmalloc.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
@@ -181,7 +186,11 @@ static void dmam_coherent_decl_release(struct device *dev, void *res)
  * dmam_declare_coherent_memory - Managed dma_declare_coherent_memory()
  * @dev: Device to declare coherent memory for
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @bus_addr: Bus address of coherent memory to be declared
+=======
+ * @phys_addr: Physical address of coherent memory to be declared
+>>>>>>> v3.18
 =======
  * @phys_addr: Physical address of coherent memory to be declared
 >>>>>>> v3.18
@@ -195,7 +204,11 @@ static void dmam_coherent_decl_release(struct device *dev, void *res)
  * 0 on success, -errno on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dmam_declare_coherent_memory(struct device *dev, dma_addr_t bus_addr,
+=======
+int dmam_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
+>>>>>>> v3.18
 =======
 int dmam_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
 >>>>>>> v3.18
@@ -209,7 +222,11 @@ int dmam_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = dma_declare_coherent_memory(dev, bus_addr, device_addr, size,
+=======
+	rc = dma_declare_coherent_memory(dev, phys_addr, device_addr, size,
+>>>>>>> v3.18
 =======
 	rc = dma_declare_coherent_memory(dev, phys_addr, device_addr, size,
 >>>>>>> v3.18
@@ -285,7 +302,10 @@ int dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
 }
 EXPORT_SYMBOL(dma_common_mmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MMU
 /*
@@ -356,4 +376,7 @@ void dma_common_free_remap(void *cpu_addr, size_t size, unsigned long vm_flags)
 	vunmap(cpu_addr);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

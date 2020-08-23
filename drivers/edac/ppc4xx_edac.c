@@ -922,7 +922,11 @@ static int ppc4xx_edac_init_csrows(struct mem_ctl_info *mci, u32 mcopt1)
 
 	for (row = 0; row < mci->nr_csrows; row++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct csrow_info *csi = mci->csrows[row];
+=======
+		struct csrow_info *csi = &mci->csrows[row];
+>>>>>>> v3.18
 =======
 		struct csrow_info *csi = &mci->csrows[row];
 >>>>>>> v3.18
@@ -979,7 +983,11 @@ static int ppc4xx_edac_init_csrows(struct mem_ctl_info *mci, u32 mcopt1)
 		 */
 		for (j = 0; j < csi->nr_channels; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct dimm_info *dimm = csi->channels[j].dimm;
+=======
+			struct dimm_info *dimm = csi->channels[j]->dimm;
+>>>>>>> v3.18
 =======
 			struct dimm_info *dimm = csi->channels[j]->dimm;
 >>>>>>> v3.18

@@ -25,7 +25,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -368,7 +371,11 @@ static int rdc_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 static void rdc_remove_one(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -391,7 +398,11 @@ static struct pci_driver rdc_pci_driver = {
 	.probe			= rdc_init_one,
 	.remove			= rdc_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

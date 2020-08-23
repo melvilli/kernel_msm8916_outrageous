@@ -181,7 +181,10 @@ static int gpiomux_s_audio_routing(struct v4l2_subdev *sd,
 static const struct v4l2_subdev_core_ops gpiomux_core_ops = {
 	.log_status = gpiomux_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = gpiomux_s_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -195,17 +198,27 @@ static const struct v4l2_subdev_audio_ops gpiomux_audio_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_video_ops gpiomux_video_ops = {
 	.s_std = gpiomux_s_std,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct v4l2_subdev_ops gpiomux_ops = {
 	.core = &gpiomux_core_ops,
 	.tuner = &gpiomux_tuner_ops,
 	.audio = &gpiomux_audio_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.video = &gpiomux_video_ops,
+>>>>>>> v3.18
 =======
 	.video = &gpiomux_video_ops,
 >>>>>>> v3.18

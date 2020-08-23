@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -36,6 +37,8 @@
 #include "xfs_trans_priv.h"
 #include "xfs_qm.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -50,6 +53,9 @@
 #include "xfs_trans_priv.h"
 #include "xfs_qm.h"
 #include "xfs_log.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct xfs_dq_logitem *DQUOT_ITEM(struct xfs_log_item *lip)
@@ -61,6 +67,7 @@ static inline struct xfs_dq_logitem *DQUOT_ITEM(struct xfs_log_item *lip)
  * returns the number of iovecs needed to log the given dquot item.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC uint
 xfs_qm_dquot_logitem_size(
 	struct xfs_log_item	*lip)
@@ -70,6 +77,8 @@ xfs_qm_dquot_logitem_size(
 	 */
 	return 2;
 =======
+=======
+>>>>>>> v3.18
 STATIC void
 xfs_qm_dquot_logitem_size(
 	struct xfs_log_item	*lip,
@@ -79,6 +88,9 @@ xfs_qm_dquot_logitem_size(
 	*nvecs += 2;
 	*nbytes += sizeof(struct xfs_dq_logformat) +
 		   sizeof(struct xfs_disk_dquot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -88,6 +100,7 @@ xfs_qm_dquot_logitem_size(
 STATIC void
 xfs_qm_dquot_logitem_format(
 	struct xfs_log_item	*lip,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xfs_log_iovec	*logvec)
 {
@@ -104,6 +117,8 @@ xfs_qm_dquot_logitem_format(
 	qlip->qli_format.qlf_size = 2;
 
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_log_vec	*lv)
 {
 	struct xfs_dq_logitem	*qlip = DQUOT_ITEM(lip);
@@ -122,6 +137,9 @@ xfs_qm_dquot_logitem_format(
 	xlog_copy_iovec(lv, &vecp, XLOG_REG_TYPE_DQUOT,
 			&qlip->qli_dquot->q_core,
 			sizeof(struct xfs_disk_dquot));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -191,7 +209,12 @@ STATIC uint
 xfs_qm_dquot_logitem_push(
 	struct xfs_log_item	*lip,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	*buffer_list)
+=======
+	struct list_head	*buffer_list) __releases(&lip->li_ailp->xa_lock)
+					      __acquires(&lip->li_ailp->xa_lock)
+>>>>>>> v3.18
 =======
 	struct list_head	*buffer_list) __releases(&lip->li_ailp->xa_lock)
 					      __acquires(&lip->li_ailp->xa_lock)
@@ -314,6 +337,7 @@ xfs_qm_dquot_logitem_init(
 					&xfs_dquot_item_ops);
 	lp->qli_dquot = dqp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->qli_format.qlf_type = XFS_LI_DQUOT;
 	lp->qli_format.qlf_id = be32_to_cpu(dqp->q_core.d_id);
 	lp->qli_format.qlf_blkno = dqp->q_blkno;
@@ -326,6 +350,8 @@ xfs_qm_dquot_logitem_init(
 	 * here, and recompute it at recovery time.
 	 */
 	lp->qli_format.qlf_boffset = (__uint32_t)dqp->q_bufoffset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -343,6 +369,7 @@ static inline struct xfs_qoff_logitem *QOFF_ITEM(struct xfs_log_item *lip)
  * We only need 1 iovec for an quotaoff item.  It just logs the
  * quotaoff_log_format structure.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 STATIC uint
 xfs_qm_qoff_logitem_size(
@@ -372,6 +399,8 @@ xfs_qm_qoff_logitem_format(
 	log_vector->i_type = XLOG_REG_TYPE_QUOTAOFF;
 	qflip->qql_format.qf_size = 1;
 =======
+=======
+>>>>>>> v3.18
 STATIC void
 xfs_qm_qoff_logitem_size(
 	struct xfs_log_item	*lip,
@@ -396,6 +425,9 @@ xfs_qm_qoff_logitem_format(
 	qlf->qf_size = 1;
 	qlf->qf_flags = qflip->qql_flags;
 	xlog_finish_iovec(lv, vecp, sizeof(struct xfs_qoff_logitem));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -537,9 +569,14 @@ xfs_qm_qoff_logitem_init(
 			&xfs_qm_qoffend_logitem_ops : &xfs_qm_qoff_logitem_ops);
 	qf->qql_item.li_mountp = mp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qf->qql_format.qf_type = XFS_LI_QUOTAOFF;
 	qf->qql_format.qf_flags = flags;
 	qf->qql_start_lip = start;
+=======
+	qf->qql_start_lip = start;
+	qf->qql_flags = flags;
+>>>>>>> v3.18
 =======
 	qf->qql_start_lip = start;
 	qf->qql_flags = flags;

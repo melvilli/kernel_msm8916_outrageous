@@ -136,7 +136,11 @@
 #define MX27_INT_RTIC		(NR_IRQS_LEGACY + 5)
 #define MX27_INT_CSPI3		(NR_IRQS_LEGACY + 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MX27_INT_SDHC		(NR_IRQS_LEGACY + 7)
+=======
+#define MX27_INT_MSHC		(NR_IRQS_LEGACY + 7)
+>>>>>>> v3.18
 =======
 #define MX27_INT_MSHC		(NR_IRQS_LEGACY + 7)
 >>>>>>> v3.18

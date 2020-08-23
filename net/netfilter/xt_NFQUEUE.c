@@ -12,10 +12,13 @@
 #include <linux/skbuff.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ip.h>
 #include <linux/ipv6.h>
 #include <linux/jhash.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netfilter.h>
@@ -24,6 +27,11 @@
 #include <linux/netfilter/xt_NFQUEUE.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_queue.h>
+
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_queue.h>
 
@@ -37,7 +45,10 @@ MODULE_ALIAS("arpt_NFQUEUE");
 
 static u32 jhash_initval __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool rnd_inited __read_mostly;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -49,6 +60,7 @@ nfqueue_tg(struct sk_buff *skb, const struct xt_action_param *par)
 	return NF_QUEUE_NR(tinfo->queuenum);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 hash_v4(const struct sk_buff *skb)
 {
@@ -106,6 +118,8 @@ nfqueue_hash(const struct sk_buff *skb, const struct xt_action_param *par)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned int
 nfqueue_tg_v1(struct sk_buff *skb, const struct xt_action_param *par)
 {
@@ -113,14 +127,20 @@ nfqueue_tg_v1(struct sk_buff *skb, const struct xt_action_param *par)
 	u32 queue = info->queuenum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (info->queues_total > 1)
 		queue = nfqueue_hash(skb, par);
 
 =======
+=======
+>>>>>>> v3.18
 	if (info->queues_total > 1) {
 		queue = nfqueue_hash(skb, queue, info->queues_total,
 				     par->family, jhash_initval);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NF_QUEUE_NR(queue);
 }
@@ -142,10 +162,15 @@ static int nfqueue_tg_check(const struct xt_tgchk_param *par)
 	u32 maxid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!rnd_inited)) {
 		get_random_bytes(&jhash_initval, sizeof(jhash_initval));
 		rnd_inited = true;
 	}
+=======
+	init_hashrandom(&jhash_initval);
+
+>>>>>>> v3.18
 =======
 	init_hashrandom(&jhash_initval);
 
@@ -174,6 +199,10 @@ nfqueue_tg_v3(struct sk_buff *skb, const struct xt_action_param *par)
 	const struct xt_NFQ_info_v3 *info = par->targinfo;
 	u32 queue = info->queuenum;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -184,12 +213,15 @@ nfqueue_tg_v3(struct sk_buff *skb, const struct xt_action_param *par)
 
 			queue = info->queuenum + cpu % info->queues_total;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			queue = nfqueue_hash(skb, par);
 	}
 
 	return NF_QUEUE_NR(queue);
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			queue = nfqueue_hash(skb, queue, info->queues_total,
 					     par->family, jhash_initval);
@@ -201,6 +233,9 @@ nfqueue_tg_v3(struct sk_buff *skb, const struct xt_action_param *par)
 		ret |= NF_VERDICT_FLAG_QUEUE_BYPASS;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

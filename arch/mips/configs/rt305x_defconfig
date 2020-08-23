@@ -82,7 +82,10 @@ CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 CONFIG_MTD=y
 CONFIG_MTD_CMDLINE_PARTS=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_CHAR=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_BLOCK=y
@@ -93,6 +96,10 @@ CONFIG_MTD_PHYSMAP=y
 CONFIG_MTD_PHYSMAP_OF=y
 CONFIG_MTD_M25P80=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_MTD_SPI_NOR=y
+>>>>>>> v3.18
 =======
 CONFIG_MTD_SPI_NOR=y
 >>>>>>> v3.18

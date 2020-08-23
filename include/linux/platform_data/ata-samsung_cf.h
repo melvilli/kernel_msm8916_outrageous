@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* linux/arch/arm/plat-samsung/include/plat/ata.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -15,8 +19,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_PLAT_ATA_H
 #define __ASM_PLAT_ATA_H __FILE__
+=======
+#ifndef __ATA_SAMSUNG_CF_H
+#define __ATA_SAMSUNG_CF_H __FILE__
+>>>>>>> v3.18
 =======
 #ifndef __ATA_SAMSUNG_CF_H
 #define __ATA_SAMSUNG_CF_H __FILE__
@@ -40,10 +49,16 @@ extern void s3c_ide_set_platdata(struct s3c_ide_platdata *pdata);
 /* architecture-specific IDE configuration */
 extern void s3c64xx_ide_setup_gpio(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s5pc100_ide_setup_gpio(void);
 extern void s5pv210_ide_setup_gpio(void);
 
 #endif /*__ASM_PLAT_ATA_H */
+=======
+extern void s5pv210_ide_setup_gpio(void);
+
+#endif /*__ATA_SAMSUNG_CF_H */
+>>>>>>> v3.18
 =======
 extern void s5pv210_ide_setup_gpio(void);
 

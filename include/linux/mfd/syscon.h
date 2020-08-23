@@ -16,14 +16,20 @@
 #define __LINUX_MFD_SYSCON_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device_node;
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 
 struct device_node;
 
 #ifdef CONFIG_MFD_SYSCON
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct regmap *syscon_node_to_regmap(struct device_node *np);
 extern struct regmap *syscon_regmap_lookup_by_compatible(const char *s);
@@ -32,7 +38,10 @@ extern struct regmap *syscon_regmap_lookup_by_phandle(
 					struct device_node *np,
 					const char *property);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static inline struct regmap *syscon_node_to_regmap(struct device_node *np)
 {
@@ -57,5 +66,8 @@ static inline struct regmap *syscon_regmap_lookup_by_phandle(
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_MFD_SYSCON_H__ */

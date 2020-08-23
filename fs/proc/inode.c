@@ -24,7 +24,10 @@
 #include <linux/mount.h>
 #include <linux/magic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/namei.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -40,7 +43,11 @@ static void proc_evict_inode(struct inode *inode)
 	void *ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -56,7 +63,11 @@ static void proc_evict_inode(struct inode *inode)
 	head = PROC_I(inode)->sysctl;
 	if (head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_assign_pointer(PROC_I(inode)->sysctl, NULL);
+=======
+		RCU_INIT_POINTER(PROC_I(inode)->sysctl, NULL);
+>>>>>>> v3.18
 =======
 		RCU_INIT_POINTER(PROC_I(inode)->sysctl, NULL);
 >>>>>>> v3.18
@@ -298,7 +309,10 @@ static int proc_reg_mmap(struct file *file, struct vm_area_struct *vma)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long
 proc_reg_get_unmapped_area(struct file *file, unsigned long orig_addr,
 			   unsigned long len, unsigned long pgoff,
@@ -325,6 +339,9 @@ proc_reg_get_unmapped_area(struct file *file, unsigned long orig_addr,
 	return rv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int proc_reg_open(struct inode *inode, struct file *file)
 {
@@ -398,6 +415,10 @@ static const struct file_operations proc_reg_file_ops = {
 #endif
 	.mmap		= proc_reg_mmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_unmapped_area = proc_reg_get_unmapped_area,
+>>>>>>> v3.18
 =======
 	.get_unmapped_area = proc_reg_get_unmapped_area,
 >>>>>>> v3.18
@@ -414,6 +435,10 @@ static const struct file_operations proc_reg_file_ops_no_compat = {
 	.unlocked_ioctl	= proc_reg_unlocked_ioctl,
 	.mmap		= proc_reg_mmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_unmapped_area = proc_reg_get_unmapped_area,
+>>>>>>> v3.18
 =======
 	.get_unmapped_area = proc_reg_get_unmapped_area,
 >>>>>>> v3.18
@@ -422,6 +447,7 @@ static const struct file_operations proc_reg_file_ops_no_compat = {
 };
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void *proc_follow_link(struct dentry *dentry, struct nameidata *nd)
 {
@@ -443,6 +469,8 @@ const struct inode_operations proc_link_inode_operations = {
 	.put_link	= proc_put_link,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct inode *proc_get_inode(struct super_block *sb, struct proc_dir_entry *de)
@@ -487,6 +515,10 @@ int proc_fill_super(struct super_block *s)
 {
 	struct inode *root_inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -512,12 +544,18 @@ int proc_fill_super(struct super_block *s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return proc_setup_self(s);
 =======
+=======
+>>>>>>> v3.18
 	ret = proc_setup_self(s);
 	if (ret) {
 		return ret;
 	}
 	return proc_setup_thread_self(s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

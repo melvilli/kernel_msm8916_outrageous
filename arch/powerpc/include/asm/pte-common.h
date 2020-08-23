@@ -99,12 +99,18 @@ extern unsigned long bad_call_to_PMD_PAGE_SIZE(void);
 			 _PAGE_RW | _PAGE_HWWRITE | _PAGE_DIRTY | _PAGE_EXEC)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NUMA_BALANCING
 /* Mask of bits that distinguish present and numa ptes */
 #define _PAGE_NUMA_MASK (_PAGE_NUMA|_PAGE_PRESENT)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * We define 2 sets of base prot bits, one for basic pages (ie,

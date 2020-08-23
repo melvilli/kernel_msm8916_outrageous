@@ -19,7 +19,10 @@
 #include "st_magn.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id st_magn_of_match[] = {
 	{
@@ -41,6 +44,9 @@ MODULE_DEVICE_TABLE(of, st_magn_of_match);
 #define st_magn_of_match NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int st_magn_i2c_probe(struct i2c_client *client,
 						const struct i2c_device_id *id)
@@ -49,6 +55,7 @@ static int st_magn_i2c_probe(struct i2c_client *client,
 	struct st_sensor_data *mdata;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*mdata));
 	if (indio_dev == NULL) {
@@ -72,6 +79,8 @@ st_magn_common_probe_error:
 iio_device_alloc_error:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*mdata));
 	if (!indio_dev)
 		return -ENOMEM;
@@ -87,6 +96,9 @@ iio_device_alloc_error:
 		return err;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -111,6 +123,10 @@ static struct i2c_driver st_magn_driver = {
 		.owner = THIS_MODULE,
 		.name = "st-magn-i2c",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(st_magn_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(st_magn_of_match),
 >>>>>>> v3.18

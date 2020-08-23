@@ -18,6 +18,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+KBUILD_IMAGE := vmlinuz
+
+>>>>>>> v3.18
 =======
 KBUILD_IMAGE := vmlinuz
 
@@ -103,7 +108,11 @@ PALOCONF := $(shell if [ -f $(src)/palo.conf ]; then echo $(src)/palo.conf; \
 	fi)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 palo: vmlinux
+=======
+palo lifimage: vmlinuz
+>>>>>>> v3.18
 =======
 palo lifimage: vmlinuz
 >>>>>>> v3.18
@@ -122,6 +131,7 @@ palo lifimage: vmlinuz
 	$(PALO) -f $(PALOCONF)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Shorthands for known targets not supported by parisc, use vmlinux as default
 Image zImage bzImage: vmlinux
 
@@ -129,6 +139,8 @@ install: vmlinux
 	sh $(src)/arch/parisc/install.sh \
 			$(KERNELRELEASE) $< System.map "$(INSTALL_PATH)"
 =======
+=======
+>>>>>>> v3.18
 BOOT_TARGETS    = zImage Image palo lifimage
 INSTALL_TARGETS = zinstall install
 
@@ -146,6 +158,9 @@ install:
 zinstall:
 	$(CONFIG_SHELL) $(src)/arch/parisc/install.sh \
 			$(KERNELRELEASE) vmlinuz System.map "$(INSTALL_PATH)"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 CLEAN_FILES	+= lifimage
@@ -154,12 +169,15 @@ MRPROPER_FILES	+= palo.conf
 define archhelp
 	@echo  '* vmlinux	- Uncompressed kernel image (./vmlinux)'
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@echo  '  palo		- Bootable image (./lifimage)'
 	@echo  '  install	- Install kernel using'
 	@echo  '		  (your) ~/bin/$(INSTALLKERNEL) or'
 	@echo  '		  (distribution) /sbin/$(INSTALLKERNEL) or'
 	@echo  '		  copy to $$(INSTALL_PATH)'
 =======
+=======
+>>>>>>> v3.18
 	@echo  '  vmlinuz	- Compressed kernel image (./vmlinuz)'
 	@echo  '  palo		- Bootable image (./lifimage)'
 	@echo  '  install	- Install uncompressed vmlinux kernel using'
@@ -167,6 +185,9 @@ define archhelp
 	@echo  '		  (distribution) /sbin/$(INSTALLKERNEL) or'
 	@echo  '		  copy to $$(INSTALL_PATH)'
 	@echo  '  zinstall	- Install compressed vmlinuz kernel'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endef
 

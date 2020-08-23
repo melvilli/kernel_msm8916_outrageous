@@ -11,6 +11,10 @@
 #include <net/inet_ecn.h>
 #include <net/ip.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netns/generic.h>
+>>>>>>> v3.18
 =======
 #include <net/netns/generic.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@ struct ip_tunnel_6rd_parm {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ip_tunnel_encap {
 	__u16			type;
 	__u16			flags;
@@ -44,6 +51,9 @@ struct ip_tunnel_encap {
 	__be16			dport;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ip_tunnel_prl_entry {
 	struct ip_tunnel_prl_entry __rcu *next;
@@ -53,18 +63,28 @@ struct ip_tunnel_prl_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ip_tunnel_dst {
 	struct dst_entry __rcu 		*dst;
 	__be32				 saddr;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ip_tunnel {
 	struct ip_tunnel __rcu	*next;
 	struct hlist_node hash_node;
 	struct net_device	*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net		*net;	/* netns for packet i/o */
+>>>>>>> v3.18
 =======
 	struct net		*net;	/* netns for packet i/o */
 >>>>>>> v3.18
@@ -77,12 +97,15 @@ struct ip_tunnel {
 	__u32		i_seqno;	/* The last seen seqno	*/
 	__u32		o_seqno;	/* The last output seqno */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		hlen;		/* Precalculated header length */
 	int		mlink;
 
 	struct ip_tunnel_parm parms;
 
 =======
+=======
+>>>>>>> v3.18
 	int		tun_hlen;	/* Precalculated header length */
 	int		mlink;
 
@@ -95,6 +118,9 @@ struct ip_tunnel {
 
 	int		hlen;		/* tun_hlen + encap_hlen */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* for SIT */
 #ifdef CONFIG_IPV6_SIT_6RD
@@ -107,6 +133,7 @@ struct ip_tunnel {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TUNNEL_CSUM	__cpu_to_be16(0x01)
 #define TUNNEL_ROUTING	__cpu_to_be16(0x02)
 #define TUNNEL_KEY	__cpu_to_be16(0x04)
@@ -116,6 +143,8 @@ struct ip_tunnel {
 #define TUNNEL_VERSION	__cpu_to_be16(0x40)
 #define TUNNEL_NO_KEY	__cpu_to_be16(0x80)
 =======
+=======
+>>>>>>> v3.18
 #define TUNNEL_CSUM		__cpu_to_be16(0x01)
 #define TUNNEL_ROUTING		__cpu_to_be16(0x02)
 #define TUNNEL_KEY		__cpu_to_be16(0x04)
@@ -128,6 +157,9 @@ struct ip_tunnel {
 #define TUNNEL_OAM		__cpu_to_be16(0x0200)
 #define TUNNEL_CRIT_OPT		__cpu_to_be16(0x0400)
 #define TUNNEL_OPTIONS_PRESENT	__cpu_to_be16(0x0800)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct tnl_ptk_info {
@@ -141,6 +173,7 @@ struct tnl_ptk_info {
 #define PACKET_REJECT	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IP_TNL_HASH_BITS   10
 #define IP_TNL_HASH_SIZE   (1 << IP_TNL_HASH_BITS)
 
@@ -150,6 +183,8 @@ struct ip_tunnel_net {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define IP_TNL_HASH_BITS   7
 #define IP_TNL_HASH_SIZE   (1 << IP_TNL_HASH_BITS)
 
@@ -160,6 +195,9 @@ struct ip_tunnel_net {
 
 #ifdef CONFIG_INET
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ip_tunnel_init(struct net_device *dev);
 void ip_tunnel_uninit(struct net_device *dev);
@@ -168,12 +206,15 @@ int ip_tunnel_init_net(struct net *net, int ip_tnl_net_id,
 		       struct rtnl_link_ops *ops, char *devname);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ip_tunnel_delete_net(struct ip_tunnel_net *itn);
 
 void ip_tunnel_xmit(struct sk_buff *skb, struct net_device *dev,
 		    const struct iphdr *tnl_params);
 int ip_tunnel_ioctl(struct net_device *dev, struct ip_tunnel_parm *p, int cmd);
 =======
+=======
+>>>>>>> v3.18
 void ip_tunnel_delete_net(struct ip_tunnel_net *itn, struct rtnl_link_ops *ops);
 
 void ip_tunnel_xmit(struct sk_buff *skb, struct net_device *dev,
@@ -181,6 +222,9 @@ void ip_tunnel_xmit(struct sk_buff *skb, struct net_device *dev,
 int ip_tunnel_ioctl(struct net_device *dev, struct ip_tunnel_parm *p, int cmd);
 int ip_tunnel_encap(struct sk_buff *skb, struct ip_tunnel *t,
 		    u8 *protocol, struct flowi4 *fl4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ip_tunnel_change_mtu(struct net_device *dev, int new_mtu);
 
@@ -193,7 +237,11 @@ struct ip_tunnel *ip_tunnel_lookup(struct ip_tunnel_net *itn,
 
 int ip_tunnel_rcv(struct ip_tunnel *tunnel, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  const struct tnl_ptk_info *tpi, int hdr_len, bool log_ecn_error);
+=======
+		  const struct tnl_ptk_info *tpi, bool log_ecn_error);
+>>>>>>> v3.18
 =======
 		  const struct tnl_ptk_info *tpi, bool log_ecn_error);
 >>>>>>> v3.18
@@ -203,6 +251,12 @@ int ip_tunnel_newlink(struct net_device *dev, struct nlattr *tb[],
 		      struct ip_tunnel_parm *p);
 void ip_tunnel_setup(struct net_device *dev, int net_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void ip_tunnel_dst_reset_all(struct ip_tunnel *t);
+int ip_tunnel_encap_setup(struct ip_tunnel *t,
+			  struct ip_tunnel_encap *ipencap);
+>>>>>>> v3.18
 =======
 void ip_tunnel_dst_reset_all(struct ip_tunnel *t);
 int ip_tunnel_encap_setup(struct ip_tunnel *t,
@@ -231,6 +285,7 @@ static inline u8 ip_tunnel_ecn_encap(u8 tos, const struct iphdr *iph,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void iptunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 	int err;
@@ -251,6 +306,8 @@ static inline void iptunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 int iptunnel_pull_header(struct sk_buff *skb, int hdr_len, __be16 inner_proto);
 int iptunnel_xmit(struct sock *sk, struct rtable *rt, struct sk_buff *skb,
 		  __be32 src, __be32 dst, __u8 proto,
@@ -280,5 +337,8 @@ static inline void iptunnel_xmit_stats(int err,
 
 #endif /* CONFIG_INET */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __NET_IP_TUNNELS_H */

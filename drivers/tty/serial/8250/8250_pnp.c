@@ -13,7 +13,10 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -369,11 +372,14 @@ static const struct pnp_device_id pnp_dev_table[] = {
 	   of it to prevent the legacy serial driver from probing it */
 	{	"WEC1022",		CIR_PORT	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * SMSC IrCC SIR/FIR port, should not be probed by serial driver
 	 * as well so its own driver can bind to it.
 	 */
 	{	"SMCF010",		CIR_PORT	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{	"",			0	}

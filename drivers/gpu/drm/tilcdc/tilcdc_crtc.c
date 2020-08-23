@@ -16,7 +16,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kfifo.h>
+=======
+#include "drm_flip_work.h"
+>>>>>>> v3.18
 =======
 #include "drm_flip_work.h"
 >>>>>>> v3.18
@@ -40,6 +44,7 @@ struct tilcdc_crtc {
 
 	/* for deferred fb unref's: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_KFIFO_PTR(unref_fifo, struct drm_framebuffer *);
 	struct work_struct work;
 };
@@ -55,6 +60,8 @@ static void unref_worker(struct work_struct *work)
 	while (kfifo_get(&tilcdc_crtc->unref_fifo, &fb))
 		drm_framebuffer_unreference(fb);
 =======
+=======
+>>>>>>> v3.18
 	struct drm_flip_work unref_work;
 };
 #define to_tilcdc_crtc(x) container_of(x, struct tilcdc_crtc, base)
@@ -67,6 +74,9 @@ static void unref_worker(struct drm_flip_work *work, void *val)
 
 	mutex_lock(&dev->mode_config.mutex);
 	drm_framebuffer_unreference(val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->mode_config.mutex);
 }
@@ -75,17 +85,23 @@ static void set_scanout(struct drm_crtc *crtc, int n)
 {
 	static const uint32_t base_reg[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			LCDC_DMA_FB_BASE_ADDR_0_REG, LCDC_DMA_FB_BASE_ADDR_1_REG,
 	};
 	static const uint32_t ceil_reg[] = {
 			LCDC_DMA_FB_CEILING_ADDR_0_REG, LCDC_DMA_FB_CEILING_ADDR_1_REG,
 =======
+=======
+>>>>>>> v3.18
 			LCDC_DMA_FB_BASE_ADDR_0_REG,
 			LCDC_DMA_FB_BASE_ADDR_1_REG,
 	};
 	static const uint32_t ceil_reg[] = {
 			LCDC_DMA_FB_CEILING_ADDR_0_REG,
 			LCDC_DMA_FB_CEILING_ADDR_1_REG,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	static const uint32_t stat[] = {
@@ -94,6 +110,10 @@ static void set_scanout(struct drm_crtc *crtc, int n)
 	struct tilcdc_crtc *tilcdc_crtc = to_tilcdc_crtc(crtc);
 	struct drm_device *dev = crtc->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tilcdc_drm_private *priv = dev->dev_private;
+>>>>>>> v3.18
 =======
 	struct tilcdc_drm_private *priv = dev->dev_private;
 >>>>>>> v3.18
@@ -102,6 +122,7 @@ static void set_scanout(struct drm_crtc *crtc, int n)
 	tilcdc_write(dev, base_reg[n], tilcdc_crtc->start);
 	tilcdc_write(dev, ceil_reg[n], tilcdc_crtc->end);
 	if (tilcdc_crtc->scanout[n]) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (kfifo_put(&tilcdc_crtc->unref_fifo,
 				(const struct drm_framebuffer **)&tilcdc_crtc->scanout[n])) {
@@ -114,10 +135,15 @@ static void set_scanout(struct drm_crtc *crtc, int n)
 	}
 	tilcdc_crtc->scanout[n] = crtc->fb;
 =======
+=======
+>>>>>>> v3.18
 		drm_flip_work_queue(&tilcdc_crtc->unref_work, tilcdc_crtc->scanout[n]);
 		drm_flip_work_commit(&tilcdc_crtc->unref_work, priv->wq);
 	}
 	tilcdc_crtc->scanout[n] = crtc->primary->fb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drm_framebuffer_reference(tilcdc_crtc->scanout[n]);
 	tilcdc_crtc->dirty &= ~stat[n];
@@ -129,7 +155,11 @@ static void update_scanout(struct drm_crtc *crtc)
 	struct tilcdc_crtc *tilcdc_crtc = to_tilcdc_crtc(crtc);
 	struct drm_device *dev = crtc->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_framebuffer *fb = crtc->fb;
+=======
+	struct drm_framebuffer *fb = crtc->primary->fb;
+>>>>>>> v3.18
 =======
 	struct drm_framebuffer *fb = crtc->primary->fb;
 >>>>>>> v3.18
@@ -190,8 +220,13 @@ static void tilcdc_crtc_destroy(struct drm_crtc *crtc)
 
 	drm_crtc_cleanup(crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(!kfifo_is_empty(&tilcdc_crtc->unref_fifo));
 	kfifo_free(&tilcdc_crtc->unref_fifo);
+=======
+	drm_flip_work_cleanup(&tilcdc_crtc->unref_work);
+
+>>>>>>> v3.18
 =======
 	drm_flip_work_cleanup(&tilcdc_crtc->unref_work);
 
@@ -202,7 +237,12 @@ static void tilcdc_crtc_destroy(struct drm_crtc *crtc)
 static int tilcdc_crtc_page_flip(struct drm_crtc *crtc,
 		struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct drm_pending_vblank_event *event)
+=======
+		struct drm_pending_vblank_event *event,
+		uint32_t page_flip_flags)
+>>>>>>> v3.18
 =======
 		struct drm_pending_vblank_event *event,
 		uint32_t page_flip_flags)
@@ -217,7 +257,11 @@ static int tilcdc_crtc_page_flip(struct drm_crtc *crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = fb;
+=======
+	crtc->primary->fb = fb;
+>>>>>>> v3.18
 =======
 	crtc->primary->fb = fb;
 >>>>>>> v3.18
@@ -252,7 +296,12 @@ static void tilcdc_crtc_dpms(struct drm_crtc *crtc, int mode)
 		stop(crtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* if necessary wait for framedone irq which will still come
+=======
+		/*
+		 * if necessary wait for framedone irq which will still come
+>>>>>>> v3.18
 =======
 		/*
 		 * if necessary wait for framedone irq which will still come
@@ -352,11 +401,14 @@ static int tilcdc_crtc_mode_set(struct drm_crtc *crtc,
 	reg |= LCDC_AC_BIAS_FREQUENCY(info->ac_bias) |
 		LCDC_AC_BIAS_TRANSITIONS_PER_INT(info->ac_bias_intrpt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->rev == 2) {
 		reg |= (hfp & 0x300) >> 8;
 		reg |= (hbp & 0x300) >> 4;
 		reg |= (hsw & 0x3c0) << 21;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * subtract one from hfp, hbp, hsw because the hardware uses
@@ -368,15 +420,24 @@ static int tilcdc_crtc_mode_set(struct drm_crtc *crtc,
 		reg |= ((hfp-1) & 0x300) >> 8;
 		reg |= ((hbp-1) & 0x300) >> 4;
 		reg |= ((hsw-1) & 0x3c0) << 21;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	tilcdc_write(dev, LCDC_RASTER_TIMING_2_REG, reg);
 
 	reg = (((mode->hdisplay >> 4) - 1) << 4) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		((hbp & 0xff) << 24) |
 		((hfp & 0xff) << 16) |
 		((hsw & 0x3f) << 10);
+=======
+		(((hbp-1) & 0xff) << 24) |
+		(((hfp-1) & 0xff) << 16) |
+		(((hsw-1) & 0x3f) << 10);
+>>>>>>> v3.18
 =======
 		(((hbp-1) & 0xff) << 24) |
 		(((hfp-1) & 0xff) << 16) |
@@ -390,10 +451,13 @@ static int tilcdc_crtc_mode_set(struct drm_crtc *crtc,
 		((vbp & 0xff) << 24) |
 		((vfp & 0xff) << 16) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		((vsw & 0x3f) << 10);
 	tilcdc_write(dev, LCDC_RASTER_TIMING_1_REG, reg);
 
 =======
+=======
+>>>>>>> v3.18
 		(((vsw-1) & 0x3f) << 10);
 	tilcdc_write(dev, LCDC_RASTER_TIMING_1_REG, reg);
 
@@ -412,6 +476,9 @@ static int tilcdc_crtc_mode_set(struct drm_crtc *crtc,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Configure display type: */
 	reg = tilcdc_read(dev, LCDC_RASTER_CTRL_REG) &
@@ -424,7 +491,11 @@ static int tilcdc_crtc_mode_set(struct drm_crtc *crtc,
 		unsigned int depth, bpp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_fb_get_bpp_depth(crtc->fb->pixel_format, &depth, &bpp);
+=======
+		drm_fb_get_bpp_depth(crtc->primary->fb->pixel_format, &depth, &bpp);
+>>>>>>> v3.18
 =======
 		drm_fb_get_bpp_depth(crtc->primary->fb->pixel_format, &depth, &bpp);
 >>>>>>> v3.18
@@ -461,14 +532,20 @@ static int tilcdc_crtc_mode_set(struct drm_crtc *crtc,
 		tilcdc_clear(dev, LCDC_RASTER_TIMING_2_REG, LCDC_SYNC_EDGE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mode->flags & DRM_MODE_FLAG_NHSYNC)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * use value from adjusted_mode here as this might have been
 	 * changed as part of the fixup for slave encoders to solve the
 	 * issue where tilcdc timings are not VESA compliant
 	 */
 	if (adjusted_mode->flags & DRM_MODE_FLAG_NHSYNC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tilcdc_set(dev, LCDC_RASTER_TIMING_2_REG, LCDC_INVERT_HSYNC);
 	else
@@ -501,10 +578,13 @@ static int tilcdc_crtc_mode_set_base(struct drm_crtc *crtc, int x, int y,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tilcdc_crtc_load_lut(struct drm_crtc *crtc)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct drm_crtc_funcs tilcdc_crtc_funcs = {
@@ -521,7 +601,10 @@ static const struct drm_crtc_helper_funcs tilcdc_crtc_helper_funcs = {
 		.mode_set       = tilcdc_crtc_mode_set,
 		.mode_set_base  = tilcdc_crtc_mode_set_base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.load_lut       = tilcdc_crtc_load_lut,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -545,14 +628,20 @@ int tilcdc_crtc_mode_valid(struct drm_crtc *crtc, struct drm_display_mode *mode)
 	struct tilcdc_drm_private *priv = crtc->dev->dev_private;
 	unsigned int bandwidth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	uint32_t hbp, hfp, hsw, vbp, vfp, vsw;
 
 	/*
 	 * check to see if the width is within the range that
 	 * the LCD Controller physically supports
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mode->hdisplay > tilcdc_crtc_max_width(crtc))
 		return MODE_VIRTUAL_X;
@@ -565,11 +654,14 @@ int tilcdc_crtc_mode_valid(struct drm_crtc *crtc, struct drm_display_mode *mode)
 		return MODE_VIRTUAL_Y;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* filter out modes that would require too much memory bandwidth: */
 	bandwidth = mode->hdisplay * mode->vdisplay * drm_mode_vrefresh(mode);
 	if (bandwidth > priv->max_bandwidth)
 		return MODE_BAD;
 =======
+=======
+>>>>>>> v3.18
 	DBG("Processing mode %dx%d@%d with pixel clock %d",
 		mode->hdisplay, mode->vdisplay,
 		drm_mode_vrefresh(mode), mode->clock);
@@ -634,6 +726,9 @@ int tilcdc_crtc_mode_valid(struct drm_crtc *crtc, struct drm_display_mode *mode)
 		DBG("Pruning mode: exceeds defined bandwidth limit");
 		return MODE_BAD;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return MODE_OK;
@@ -779,7 +874,12 @@ struct drm_crtc *tilcdc_crtc_create(struct drm_device *dev)
 	init_waitqueue_head(&tilcdc_crtc->frame_done_wq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = kfifo_alloc(&tilcdc_crtc->unref_fifo, 16, GFP_KERNEL);
+=======
+	ret = drm_flip_work_init(&tilcdc_crtc->unref_work, 16,
+			"unref", unref_worker);
+>>>>>>> v3.18
 =======
 	ret = drm_flip_work_init(&tilcdc_crtc->unref_work, 16,
 			"unref", unref_worker);
@@ -790,8 +890,11 @@ struct drm_crtc *tilcdc_crtc_create(struct drm_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&tilcdc_crtc->work, unref_worker);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = drm_crtc_init(dev, crtc, &tilcdc_crtc_funcs);

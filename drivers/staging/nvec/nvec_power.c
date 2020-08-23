@@ -227,6 +227,10 @@ static int nvec_power_get_property(struct power_supply *psy,
 {
 	struct nvec_power *power = dev_get_drvdata(psy->dev->parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

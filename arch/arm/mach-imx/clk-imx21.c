@@ -8,6 +8,7 @@
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -26,6 +27,8 @@
 #include <linux/module.h>
 #include <linux/err.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/clk.h>
@@ -34,12 +37,16 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <dt-bindings/clock/imx21-clock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "clk.h"
 #include "common.h"
 #include "hardware.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IO_ADDR_CCM(off)	(MX21_IO_ADDRESS(MX21_CCM_BASE_ADDR + (off)))
 
@@ -191,6 +198,8 @@ int __init mx21_clocks_init(unsigned long lref, unsigned long href)
 	clk_register_clkdev(clk[sdhc1_ipg_gate], "sdhc1", NULL);
 	clk_register_clkdev(clk[sdhc2_ipg_gate], "sdhc2", NULL);
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *ccm __initdata;
 
 /* Register offsets */
@@ -323,6 +332,9 @@ int __init mx21_clocks_init(unsigned long lref, unsigned long href)
 	clk_register_clkdev(clk[IMX21_CLK_WDOG_GATE], NULL, "imx2-wdt.0");
 	clk_register_clkdev(clk[IMX21_CLK_I2C_GATE], NULL, "imx21-i2c.0");
 	clk_register_clkdev(clk[IMX21_CLK_OWIRE_GATE], NULL, "mxc_w1.0");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mxc_timer_init(MX21_IO_ADDRESS(MX21_GPT1_BASE_ADDR), MX21_INT_GPT1);
@@ -330,7 +342,10 @@ int __init mx21_clocks_init(unsigned long lref, unsigned long href)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void __init mx21_clocks_init_dt(struct device_node *np)
 {
@@ -343,4 +358,7 @@ static void __init mx21_clocks_init_dt(struct device_node *np)
 	of_clk_add_provider(np, of_clk_src_onecell_get, &clk_data);
 }
 CLK_OF_DECLARE(imx27_ccm, "fsl,imx21-ccm", mx21_clocks_init_dt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

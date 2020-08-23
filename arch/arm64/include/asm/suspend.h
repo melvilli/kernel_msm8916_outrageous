@@ -22,6 +22,10 @@ struct sleep_save_sp {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long));
+>>>>>>> v3.18
 =======
 extern int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long));
 >>>>>>> v3.18

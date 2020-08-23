@@ -27,8 +27,13 @@
 #define L2X0_CTRL			0x100
 #define L2X0_AUX_CTRL			0x104
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define L2X0_TAG_LATENCY_CTRL		0x108
 #define L2X0_DATA_LATENCY_CTRL		0x10C
+=======
+#define L310_TAG_LATENCY_CTRL		0x108
+#define L310_DATA_LATENCY_CTRL		0x10C
+>>>>>>> v3.18
 =======
 #define L310_TAG_LATENCY_CTRL		0x108
 #define L310_DATA_LATENCY_CTRL		0x10C
@@ -60,8 +65,13 @@
 #define L2X0_LOCKDOWN_WAY_I_BASE	0x904
 #define L2X0_LOCKDOWN_STRIDE		0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define L2X0_ADDR_FILTER_START		0xC00
 #define L2X0_ADDR_FILTER_END		0xC04
+=======
+#define L310_ADDR_FILTER_START		0xC00
+#define L310_ADDR_FILTER_END		0xC04
+>>>>>>> v3.18
 =======
 #define L310_ADDR_FILTER_START		0xC00
 #define L310_ADDR_FILTER_END		0xC04
@@ -70,6 +80,7 @@
 #define L2X0_LINE_DATA			0xF10
 #define L2X0_LINE_TAG			0xF30
 #define L2X0_DEBUG_CTRL			0xF40
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define L2X0_PREFETCH_CTRL		0xF60
 #define L2X0_POWER_CTRL			0xF80
@@ -116,6 +127,8 @@
 
 #define L2X0_ADDR_FILTER_EN		1
 =======
+=======
+>>>>>>> v3.18
 #define L310_PREFETCH_CTRL		0xF60
 #define L310_POWER_CTRL			0xF80
 #define   L310_DYNAMIC_CLK_GATING_EN	(1 << 1)
@@ -197,12 +210,16 @@
 #define L310_PREFETCH_CTRL_DATA_PREFETCH	BIT(28)
 #define L310_PREFETCH_CTRL_INSTR_PREFETCH	BIT(29)
 #define L310_PREFETCH_CTRL_DBL_LINEFILL		BIT(30)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define L2X0_CTRL_EN			1
 
 #define L2X0_WAY_SIZE_SHIFT		3
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define L2X0_PREFETCH_CTRL_OFFSET_SHIFT		0
 #define L2X0_PREFETCH_CTRL_WRAP8_INC_SHIFT	23
@@ -215,6 +232,9 @@ extern void __iomem *l2x0_base;
 extern void l2cc_suspend(void);
 extern void l2cc_resume(void);
 extern void l2x0_cache_sync(void);
+=======
+#ifndef __ASSEMBLY__
+>>>>>>> v3.18
 =======
 #ifndef __ASSEMBLY__
 >>>>>>> v3.18
@@ -243,6 +263,10 @@ struct l2x0_regs {
 	unsigned long pwr_ctrl;
 	unsigned long ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long aux2_ctrl;
+>>>>>>> v3.18
 =======
 	unsigned long aux2_ctrl;
 >>>>>>> v3.18

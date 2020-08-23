@@ -12,6 +12,12 @@
 #include <asm/memory.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/xen.h>
+#include <asm/xen/hypervisor.h>
+
+>>>>>>> v3.18
 =======
 #include <xen/xen.h>
 #include <asm/xen/hypervisor.h>
@@ -22,7 +28,11 @@ extern struct dma_map_ops arm_dma_ops;
 extern struct dma_map_ops arm_coherent_dma_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct dma_map_ops *get_dma_ops(struct device *dev)
+=======
+static inline struct dma_map_ops *__generic_dma_ops(struct device *dev)
+>>>>>>> v3.18
 =======
 static inline struct dma_map_ops *__generic_dma_ops(struct device *dev)
 >>>>>>> v3.18
@@ -33,7 +43,10 @@ static inline struct dma_map_ops *__generic_dma_ops(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 {
 	if (xen_initial_domain())
@@ -42,6 +55,9 @@ static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 		return __generic_dma_ops(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void set_dma_ops(struct device *dev, struct dma_map_ops *ops)
 {
@@ -69,6 +85,11 @@ static inline int dma_set_mask(struct device *dev, u64 mask)
 static inline dma_addr_t pfn_to_dma(struct device *dev, unsigned long pfn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev)
+		pfn -= dev->dma_pfn_offset;
+>>>>>>> v3.18
 =======
 	if (dev)
 		pfn -= dev->dma_pfn_offset;
@@ -79,27 +100,39 @@ static inline dma_addr_t pfn_to_dma(struct device *dev, unsigned long pfn)
 static inline unsigned long dma_to_pfn(struct device *dev, dma_addr_t addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __bus_to_pfn(addr);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long pfn = __bus_to_pfn(addr);
 
 	if (dev)
 		pfn += dev->dma_pfn_offset;
 
 	return pfn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void *dma_to_virt(struct device *dev, dma_addr_t addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev) {
 		unsigned long pfn = dma_to_pfn(dev, addr);
 
 		return phys_to_virt(__pfn_to_phys(pfn));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (void *)__bus_to_virt((unsigned long)addr);
 }
@@ -107,15 +140,21 @@ static inline void *dma_to_virt(struct device *dev, dma_addr_t addr)
 static inline dma_addr_t virt_to_dma(struct device *dev, void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (dma_addr_t)__virt_to_bus((unsigned long)(addr));
 }
 =======
+=======
+>>>>>>> v3.18
 	if (dev)
 		return pfn_to_dma(dev, virt_to_pfn(addr));
 
 	return (dma_addr_t)__virt_to_bus((unsigned long)(addr));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline dma_addr_t pfn_to_dma(struct device *dev, unsigned long pfn)
@@ -140,7 +179,10 @@ static inline dma_addr_t virt_to_dma(struct device *dev, void *addr)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* The ARM override for dma_max_pfn() */
 static inline unsigned long dma_max_pfn(struct device *dev)
 {
@@ -188,6 +230,9 @@ static inline bool dma_capable(struct device *dev, dma_addr_t addr, size_t size)
 
 static inline void dma_mark_clean(void *addr, size_t size) { }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * DMA errors are defined by all-bits-set in the DMA address.
@@ -217,6 +262,7 @@ extern int dma_supported(struct device *dev, u64 mask);
 
 extern int arm_dma_set_mask(struct device *dev, u64 dma_mask);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * dma_coherent_pre_ops - barrier functions for coherent memory before DMA.
@@ -251,6 +297,8 @@ static inline void dma_coherent_post_ops(void)
 #endif
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -330,6 +378,7 @@ extern int arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 			struct dma_attrs *attrs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void *dma_alloc_writecombine(struct device *dev, size_t size,
 				       dma_addr_t *dma_handle, gfp_t flag)
 {
@@ -398,6 +447,8 @@ static inline int dma_mmap_nonconsistent(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * This can be called during early boot to increase the size of the atomic
  * coherent DMA pool above the default value of 256KiB. It must be called
@@ -444,6 +495,7 @@ extern int dmabounce_register_dev(struct device *, unsigned long,
  */
 extern void dmabounce_unregister_dev(struct device *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * dma_cache_pre_ops - clean or invalidate cache before dma transfer is
@@ -494,6 +546,9 @@ static inline void dma_cache_post_ops(void *virtual_addr,
 		___dma_single_cpu_to_dev(virtual_addr,
 					 size, DMA_FROM_DEVICE);
 }
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

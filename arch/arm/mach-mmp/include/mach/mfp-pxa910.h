@@ -24,7 +24,10 @@
 #define SM_ADV_SM_ADV		MFP_CFG(SM_ADV, AF0)
 #define SM_SCLK_SM_SCLK		MFP_CFG(SM_SCLK, AF0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SM_SCLK_SM_SCLK		MFP_CFG(SM_SCLK, AF0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SM_BE0_SM_BE0		MFP_CFG(SM_BE0, AF1)

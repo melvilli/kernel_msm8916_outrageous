@@ -14,6 +14,10 @@
 /dts-v1/;
 /include/ "sun4i-a10.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/include/ "sunxi-common-regulators.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "sunxi-common-regulators.dtsi"
 >>>>>>> v3.18
@@ -23,12 +27,15 @@
 	compatible = "miniand,hackberry", "allwinner,sun4i-a10";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chosen {
 		bootargs = "earlyprintk console=ttyS0,115200";
 	};
 
 	soc@01c20000 {
 =======
+=======
+>>>>>>> v3.18
 	soc@01c00000 {
 		emac: ethernet@01c0b000 {
 			pinctrl-names = "default";
@@ -103,6 +110,9 @@
 			status = "okay";
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		uart0: serial@01c28000 {
 			pinctrl-names = "default";
@@ -110,7 +120,10 @@
 			status = "okay";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		i2c0: i2c@01c2ac00 {
 			pinctrl-names = "default";
@@ -145,6 +158,9 @@
 		pinctrl-0 = <&usb2_vbus_pin_hackberry>;
 		gpio = <&pio 7 12 0>;
 		status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

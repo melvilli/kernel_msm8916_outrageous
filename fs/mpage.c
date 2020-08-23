@@ -29,6 +29,10 @@
 #include <linux/pagevec.h>
 #include <linux/cleancache.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "internal.h"
+>>>>>>> v3.18
 =======
 #include "internal.h"
 >>>>>>> v3.18
@@ -47,6 +51,7 @@
  */
 static void mpage_end_io(struct bio *bio, int err)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const int uptodate = test_bit(BIO_UPTODATE, &bio->bi_flags);
 	struct bio_vec *bvec = bio->bi_io_vec + bio->bi_vcnt - 1;
@@ -74,6 +79,8 @@ static void mpage_end_io(struct bio *bio, int err)
 		}
 	} while (bvec >= bio->bi_io_vec);
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec *bv;
 	int i;
 
@@ -82,6 +89,9 @@ static void mpage_end_io(struct bio *bio, int err)
 		page_endio(page, bio_data_dir(bio), err);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bio_put(bio);
 }
@@ -90,6 +100,10 @@ static struct bio *mpage_bio_submit(int rw, struct bio *bio)
 {
 	bio->bi_end_io = mpage_end_io;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	guard_bio_eod(rw, bio);
+>>>>>>> v3.18
 =======
 	guard_bio_eod(rw, bio);
 >>>>>>> v3.18
@@ -114,7 +128,11 @@ mpage_alloc(struct block_device *bdev,
 	if (bio) {
 		bio->bi_bdev = bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = first_sector;
+=======
+		bio->bi_iter.bi_sector = first_sector;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = first_sector;
 >>>>>>> v3.18
@@ -310,12 +328,18 @@ do_mpage_readpage(struct bio *bio, struct page *page, unsigned nr_pages,
 alloc_new:
 	if (bio == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (first_hole == blocks_per_page) {
 			if (!bdev_read_page(bdev, blocks[0] << (blkbits - 9),
 								page))
 				goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bio = mpage_alloc(bdev, blocks[0] << (blkbits - 9),
 			  	min_t(int, nr_pages, bio_get_nr_vecs(bdev)),
@@ -472,7 +496,10 @@ struct mpage_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * We have our BIO, so we can now mark the buffers clean.  Make
  * sure to only clean buffers which we know we'll be writing.
@@ -502,6 +529,9 @@ static void clean_buffers(struct page *page, unsigned first_unmapped)
 		try_to_free_buffers(page);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __mpage_writepage(struct page *page, struct writeback_control *wbc,
 		      void *data)
@@ -639,7 +669,10 @@ page_is_mapped:
 alloc_new:
 	if (bio == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (first_unmapped == blocks_per_page) {
 			if (!bdev_write_page(bdev, blocks[0] << (blkbits - 9),
 								page, wbc)) {
@@ -647,6 +680,9 @@ alloc_new:
 				goto out;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bio = mpage_alloc(bdev, blocks[0] << (blkbits - 9),
 				bio_get_nr_vecs(bdev), GFP_NOFS|__GFP_HIGH);
@@ -665,6 +701,7 @@ alloc_new:
 		goto alloc_new;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * OK, we have our BIO, so we can now mark the buffers clean.  Make
@@ -690,6 +727,9 @@ alloc_new:
 		if (buffer_heads_over_limit && PageUptodate(page))
 			try_to_free_buffers(page);
 	}
+=======
+	clean_buffers(page, first_unmapped);
+>>>>>>> v3.18
 =======
 	clean_buffers(page, first_unmapped);
 >>>>>>> v3.18

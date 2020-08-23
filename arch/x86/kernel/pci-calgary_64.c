@@ -1208,7 +1208,11 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __init determine_tce_table_size(u64 ram)
+=======
+static inline int __init determine_tce_table_size(void)
+>>>>>>> v3.18
 =======
 static inline int __init determine_tce_table_size(void)
 >>>>>>> v3.18
@@ -1218,6 +1222,7 @@ static inline int __init determine_tce_table_size(void)
 	if (specified_table_size != TCE_TABLE_SIZE_UNSPECIFIED)
 		return specified_table_size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Table sizes are from 0 to 7 (TCE_TABLE_SIZE_64K to
@@ -1230,6 +1235,8 @@ static inline int __init determine_tce_table_size(void)
 	if (ret > TCE_TABLE_SIZE_8M)
 		ret = TCE_TABLE_SIZE_8M;
 =======
+=======
+>>>>>>> v3.18
 	if (is_kdump_kernel() && saved_max_pfn) {
 		/*
 		 * Table sizes are from 0 to 7 (TCE_TABLE_SIZE_64K to
@@ -1248,6 +1255,9 @@ static inline int __init determine_tce_table_size(void)
 		 */
 		ret = TCE_TABLE_SIZE_8M;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1444,8 +1454,12 @@ int __init detect_calgary(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	specified_table_size = determine_tce_table_size((is_kdump_kernel() ?
 					saved_max_pfn : max_pfn) * PAGE_SIZE);
+=======
+	specified_table_size = determine_tce_table_size();
+>>>>>>> v3.18
 =======
 	specified_table_size = determine_tce_table_size();
 >>>>>>> v3.18

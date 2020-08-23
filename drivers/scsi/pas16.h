@@ -130,8 +130,11 @@ static int pas16_bus_reset(Scsi_Cmnd *);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NCR5380_implementation_fields \
@@ -175,7 +178,10 @@ static int pas16_bus_reset(Scsi_Cmnd *);
 #define PAS16_IRQS 0xd4a8 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* else def HOSTS_C */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ndef ASM */

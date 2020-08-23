@@ -72,7 +72,10 @@ struct xt_set_info_match_v3 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Revision 3 target */
 
 struct xt_set_info_target_v3 {
@@ -83,5 +86,8 @@ struct xt_set_info_target_v3 {
 	__u32 timeout;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /*_XT_SET_H*/

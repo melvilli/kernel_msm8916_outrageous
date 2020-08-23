@@ -12,6 +12,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * balloon_devinfo_alloc - allocates a balloon device information descriptor.
  * @balloon_dev_descriptor: pointer to reference the balloon device which
  *                          this struct balloon_dev_info will be servicing.
@@ -40,6 +41,8 @@ EXPORT_SYMBOL_GPL(balloon_devinfo_alloc);
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * balloon_page_enqueue - allocates a new page and inserts it into the balloon
  *			  page list.
  * @b_dev_info: balloon device decriptor where we will insert a new page to
@@ -65,7 +68,12 @@ struct page *balloon_page_enqueue(struct balloon_dev_info *b_dev_info)
 	BUG_ON(!trylock_page(page));
 	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	balloon_page_insert(page, b_dev_info->mapping, &b_dev_info->pages);
+=======
+	balloon_page_insert(b_dev_info, page);
+	__count_vm_event(BALLOON_INFLATE);
+>>>>>>> v3.18
 =======
 	balloon_page_insert(b_dev_info, page);
 	__count_vm_event(BALLOON_INFLATE);
@@ -102,6 +110,7 @@ struct page *balloon_page_dequeue(struct balloon_dev_info *b_dev_info)
 		 */
 		if (trylock_page(page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 			/*
 			 * Raise the page refcount here to prevent any wrong
@@ -115,6 +124,8 @@ struct page *balloon_page_dequeue(struct balloon_dev_info *b_dev_info)
 			get_page(page);
 			balloon_page_delete(page);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BALLOON_COMPACTION
 			if (!PagePrivate(page)) {
 				/* raced with isolation */
@@ -125,6 +136,9 @@ struct page *balloon_page_dequeue(struct balloon_dev_info *b_dev_info)
 			spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 			balloon_page_delete(page);
 			__count_vm_event(BALLOON_DEFLATE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			spin_unlock_irqrestore(&b_dev_info->pages_lock, flags);
 			unlock_page(page);
@@ -153,6 +167,7 @@ struct page *balloon_page_dequeue(struct balloon_dev_info *b_dev_info)
 EXPORT_SYMBOL_GPL(balloon_page_dequeue);
 
 #ifdef CONFIG_BALLOON_COMPACTION
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * balloon_mapping_alloc - allocates a special ->mapping for ballooned pages.
@@ -211,6 +226,8 @@ static inline void __isolate_balloon_page(struct page *page)
 	unsigned long flags;
 	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 
 static inline void __isolate_balloon_page(struct page *page)
 {
@@ -219,6 +236,9 @@ static inline void __isolate_balloon_page(struct page *page)
 
 	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 	ClearPagePrivate(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_del(&page->lru);
 	b_dev_info->isolated_pages++;
@@ -228,15 +248,21 @@ static inline void __isolate_balloon_page(struct page *page)
 static inline void __putback_balloon_page(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct balloon_dev_info *b_dev_info = page->mapping->private_data;
 	unsigned long flags;
 	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct balloon_dev_info *b_dev_info = balloon_page_device(page);
 	unsigned long flags;
 
 	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 	SetPagePrivate(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_add(&page->lru, &b_dev_info->pages);
 	b_dev_info->isolated_pages--;
@@ -244,12 +270,15 @@ static inline void __putback_balloon_page(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __migrate_balloon_page(struct address_space *mapping,
 		struct page *newpage, struct page *page, enum migrate_mode mode)
 {
 	return page->mapping->a_ops->migratepage(mapping, newpage, page, mode);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* __isolate_lru_page() counterpart for a ballooned page */
@@ -279,6 +308,7 @@ bool balloon_page_isolate(struct page *page)
 		if (likely(trylock_page(page))) {
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * A ballooned page, by default, has just one refcount.
 			 * Prevent concurrent compaction threads from isolating
 			 * an already isolated balloon page by refcount check.
@@ -286,11 +316,16 @@ bool balloon_page_isolate(struct page *page)
 			if (__is_movable_balloon_page(page) &&
 			    page_count(page) == 2) {
 =======
+=======
+>>>>>>> v3.18
 			 * A ballooned page, by default, has PagePrivate set.
 			 * Prevent concurrent compaction threads from isolating
 			 * an already isolated balloon page by clearing it.
 			 */
 			if (balloon_page_movable(page)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				__isolate_balloon_page(page);
 				unlock_page(page);
@@ -319,7 +354,11 @@ void balloon_page_putback(struct page *page)
 	} else {
 		WARN_ON(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dump_page(page);
+=======
+		dump_page(page, "not movable balloon page");
+>>>>>>> v3.18
 =======
 		dump_page(page, "not movable balloon page");
 >>>>>>> v3.18
@@ -332,7 +371,11 @@ int balloon_page_migrate(struct page *newpage,
 			 struct page *page, enum migrate_mode mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct address_space *mapping;
+=======
+	struct balloon_dev_info *balloon = balloon_page_device(page);
+>>>>>>> v3.18
 =======
 	struct balloon_dev_info *balloon = balloon_page_device(page);
 >>>>>>> v3.18
@@ -347,7 +390,11 @@ int balloon_page_migrate(struct page *newpage,
 
 	if (WARN_ON(!__is_movable_balloon_page(page))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dump_page(page);
+=======
+		dump_page(page, "not movable balloon page");
+>>>>>>> v3.18
 =======
 		dump_page(page, "not movable balloon page");
 >>>>>>> v3.18
@@ -356,9 +403,14 @@ int balloon_page_migrate(struct page *newpage,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mapping = page->mapping;
 	if (mapping)
 		rc = __migrate_balloon_page(mapping, newpage, page, mode);
+=======
+	if (balloon && balloon->migratepage)
+		rc = balloon->migratepage(balloon, newpage, page, mode);
+>>>>>>> v3.18
 =======
 	if (balloon && balloon->migratepage)
 		rc = balloon->migratepage(balloon, newpage, page, mode);

@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -23,15 +27,21 @@
  *
  *	Mitsuru KANDA @USAGI       : IPv6 Support
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Kazunori MIYAZAWA @USAGI   :
  * 	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  *
  * 	This file is derived from net/ipv4/esp.c
 =======
+=======
+>>>>>>> v3.18
  *	Kazunori MIYAZAWA @USAGI   :
  *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  *
  *	This file is derived from net/ipv4/esp.c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -176,10 +186,16 @@ static int esp6_output(struct xfrm_state *x, struct sk_buff *skb)
 	u8 *tail;
 	__be32 *seqhi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 
 	/* skb is pure payload to encrypt */
 	aead = esp->aead;
+=======
+
+	/* skb is pure payload to encrypt */
+	aead = x->data;
+>>>>>>> v3.18
 =======
 
 	/* skb is pure payload to encrypt */
@@ -199,8 +215,11 @@ static int esp6_output(struct xfrm_state *x, struct sk_buff *skb)
 	blksize = ALIGN(crypto_aead_blocksize(aead), 4);
 	clen = ALIGN(skb->len + 2 + tfclen, blksize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (esp->padlen)
 		clen = ALIGN(clen, esp->padlen);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	plen = clen - skb->len - tfclen;
@@ -292,8 +311,12 @@ static int esp_input_done2(struct sk_buff *skb, int err)
 {
 	struct xfrm_state *x = xfrm_input_state(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 	struct crypto_aead *aead = esp->aead;
+=======
+	struct crypto_aead *aead = x->data;
+>>>>>>> v3.18
 =======
 	struct crypto_aead *aead = x->data;
 >>>>>>> v3.18
@@ -350,8 +373,12 @@ static int esp6_input(struct xfrm_state *x, struct sk_buff *skb)
 {
 	struct ip_esp_hdr *esph;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 	struct crypto_aead *aead = esp->aead;
+=======
+	struct crypto_aead *aead = x->data;
+>>>>>>> v3.18
 =======
 	struct crypto_aead *aead = x->data;
 >>>>>>> v3.18
@@ -443,9 +470,14 @@ out:
 static u32 esp6_get_mtu(struct xfrm_state *x, int mtu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 	u32 blksize = ALIGN(crypto_aead_blocksize(esp->aead), 4);
 	u32 align = max_t(u32, blksize, esp->padlen);
+=======
+	struct crypto_aead *aead = x->data;
+	u32 blksize = ALIGN(crypto_aead_blocksize(aead), 4);
+>>>>>>> v3.18
 =======
 	struct crypto_aead *aead = x->data;
 	u32 blksize = ALIGN(crypto_aead_blocksize(aead), 4);
@@ -458,6 +490,7 @@ static u32 esp6_get_mtu(struct xfrm_state *x, int mtu)
 		net_adj = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((mtu - x->props.header_len - crypto_aead_authsize(esp->aead) -
 		 net_adj) & ~(align - 1)) + (net_adj - 2);
 }
@@ -465,12 +498,17 @@ static u32 esp6_get_mtu(struct xfrm_state *x, int mtu)
 static void esp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		     u8 type, u8 code, int offset, __be32 info)
 =======
+=======
+>>>>>>> v3.18
 	return ((mtu - x->props.header_len - crypto_aead_authsize(aead) -
 		 net_adj) & ~(blksize - 1)) + net_adj - 2;
 }
 
 static int esp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		    u8 type, u8 code, int offset, __be32 info)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net *net = dev_net(skb->dev);
@@ -478,6 +516,7 @@ static int esp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	struct ip_esp_hdr *esph = (struct ip_esp_hdr *)(skb->data + offset);
 	struct xfrm_state *x;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (type != ICMPV6_DEST_UNREACH &&
 	    type != ICMPV6_PKT_TOOBIG &&
@@ -488,10 +527,16 @@ static int esp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	    type != NDISC_REDIRECT)
 		return 0;
 >>>>>>> v3.18
+=======
+	if (type != ICMPV6_PKT_TOOBIG &&
+	    type != NDISC_REDIRECT)
+		return 0;
+>>>>>>> v3.18
 
 	x = xfrm_state_lookup(net, skb->mark, (const xfrm_address_t *)&iph->daddr,
 			      esph->spi, IPPROTO_ESP, AF_INET6);
 	if (!x)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -501,6 +546,8 @@ static int esp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		ip6_update_pmtu(skb, net, info, 0, 0);
 	xfrm_state_put(x);
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (type == NDISC_REDIRECT)
@@ -510,11 +557,15 @@ static int esp6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void esp6_destroy(struct xfrm_state *x)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct esp_data *esp = x->data;
 
@@ -524,19 +575,27 @@ static void esp6_destroy(struct xfrm_state *x)
 	crypto_free_aead(esp->aead);
 	kfree(esp);
 =======
+=======
+>>>>>>> v3.18
 	struct crypto_aead *aead = x->data;
 
 	if (!aead)
 		return;
 
 	crypto_free_aead(aead);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int esp_init_aead(struct xfrm_state *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct crypto_aead *aead;
@@ -548,7 +607,11 @@ static int esp_init_aead(struct xfrm_state *x)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp->aead = aead;
+=======
+	x->data = aead;
+>>>>>>> v3.18
 =======
 	x->data = aead;
 >>>>>>> v3.18
@@ -569,7 +632,10 @@ error:
 static int esp_init_authenc(struct xfrm_state *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct crypto_aead *aead;
@@ -607,7 +673,11 @@ static int esp_init_authenc(struct xfrm_state *x)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp->aead = aead;
+=======
+	x->data = aead;
+>>>>>>> v3.18
 =======
 	x->data = aead;
 >>>>>>> v3.18
@@ -666,7 +736,10 @@ error:
 static int esp6_init_state(struct xfrm_state *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct crypto_aead *aead;
@@ -677,11 +750,15 @@ static int esp6_init_state(struct xfrm_state *x)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp = kzalloc(sizeof(*esp), GFP_KERNEL);
 	if (esp == NULL)
 		return -ENOMEM;
 
 	x->data = esp;
+=======
+	x->data = NULL;
+>>>>>>> v3.18
 =======
 	x->data = NULL;
 >>>>>>> v3.18
@@ -695,9 +772,13 @@ static int esp6_init_state(struct xfrm_state *x)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aead = esp->aead;
 
 	esp->padlen = 0;
+=======
+	aead = x->data;
+>>>>>>> v3.18
 =======
 	aead = x->data;
 >>>>>>> v3.18
@@ -709,7 +790,11 @@ static int esp6_init_state(struct xfrm_state *x)
 		if (x->sel.family != AF_INET6)
 			x->props.header_len += IPV4_BEET_PHMAXLEN +
 <<<<<<< HEAD
+<<<<<<< HEAD
 				               (sizeof(struct ipv6hdr) - sizeof(struct iphdr));
+=======
+					       (sizeof(struct ipv6hdr) - sizeof(struct iphdr));
+>>>>>>> v3.18
 =======
 					       (sizeof(struct ipv6hdr) - sizeof(struct iphdr));
 >>>>>>> v3.18
@@ -725,9 +810,13 @@ static int esp6_init_state(struct xfrm_state *x)
 
 	align = ALIGN(crypto_aead_blocksize(aead), 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (esp->padlen)
 		align = max_t(u32, align, esp->padlen);
 	x->props.trailer_len = align + 1 + crypto_aead_authsize(esp->aead);
+=======
+	x->props.trailer_len = align + 1 + crypto_aead_authsize(aead);
+>>>>>>> v3.18
 =======
 	x->props.trailer_len = align + 1 + crypto_aead_authsize(aead);
 >>>>>>> v3.18
@@ -737,12 +826,15 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct xfrm_type esp6_type =
 {
 	.description	= "ESP6",
 	.owner	     	= THIS_MODULE,
 	.proto	     	= IPPROTO_ESP,
 =======
+=======
+>>>>>>> v3.18
 static int esp6_rcv_cb(struct sk_buff *skb, int err)
 {
 	return 0;
@@ -752,6 +844,9 @@ static const struct xfrm_type esp6_type = {
 	.description	= "ESP6",
 	.owner		= THIS_MODULE,
 	.proto		= IPPROTO_ESP,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.flags		= XFRM_TYPE_REPLAY_PROT,
 	.init_state	= esp6_init_state,
@@ -763,16 +858,22 @@ static const struct xfrm_type esp6_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct inet6_protocol esp6_protocol = {
 	.handler 	=	xfrm6_rcv,
 	.err_handler	=	esp6_err,
 	.flags		=	INET6_PROTO_NOPOLICY,
 =======
+=======
+>>>>>>> v3.18
 static struct xfrm6_protocol esp6_protocol = {
 	.handler	=	xfrm6_rcv,
 	.cb_handler	=	esp6_rcv_cb,
 	.err_handler	=	esp6_err,
 	.priority	=	0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -783,7 +884,11 @@ static int __init esp6_init(void)
 		return -EAGAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet6_add_protocol(&esp6_protocol, IPPROTO_ESP) < 0) {
+=======
+	if (xfrm6_protocol_register(&esp6_protocol, IPPROTO_ESP) < 0) {
+>>>>>>> v3.18
 =======
 	if (xfrm6_protocol_register(&esp6_protocol, IPPROTO_ESP) < 0) {
 >>>>>>> v3.18
@@ -798,7 +903,11 @@ static int __init esp6_init(void)
 static void __exit esp6_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet6_del_protocol(&esp6_protocol, IPPROTO_ESP) < 0)
+=======
+	if (xfrm6_protocol_deregister(&esp6_protocol, IPPROTO_ESP) < 0)
+>>>>>>> v3.18
 =======
 	if (xfrm6_protocol_deregister(&esp6_protocol, IPPROTO_ESP) < 0)
 >>>>>>> v3.18

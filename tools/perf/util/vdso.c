@@ -12,11 +12,14 @@
 #include "util.h"
 #include "symbol.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "linux/string.h"
 
 static bool vdso_found;
 static char vdso_file[] = "/tmp/perf-vdso.so-XXXXXX";
 =======
+=======
+>>>>>>> v3.18
 #include "machine.h"
 #include "linux/string.h"
 #include "debug.h"
@@ -45,6 +48,9 @@ static struct vdso_info *vdso_info__new(void)
 
 	return memdup(&vdso_info_init, sizeof(vdso_info_init));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int find_vdso_map(void **start, void **end)
@@ -79,7 +85,11 @@ static int find_vdso_map(void **start, void **end)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char *get_file(void)
+=======
+static char *get_file(struct vdso_file *vdso_file)
+>>>>>>> v3.18
 =======
 static char *get_file(struct vdso_file *vdso_file)
 >>>>>>> v3.18
@@ -91,15 +101,21 @@ static char *get_file(struct vdso_file *vdso_file)
 	int fd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vdso_found)
 		return vdso_file;
 
 	if (find_vdso_map(&start, &end))
 =======
+=======
+>>>>>>> v3.18
 	if (vdso_file->found)
 		return vdso_file->temp_file_name;
 
 	if (vdso_file->error || find_vdso_map(&start, &end))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 
@@ -110,7 +126,11 @@ static char *get_file(struct vdso_file *vdso_file)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fd = mkstemp(vdso_file);
+=======
+	fd = mkstemp(vdso_file->temp_file_name);
+>>>>>>> v3.18
 =======
 	fd = mkstemp(vdso_file->temp_file_name);
 >>>>>>> v3.18
@@ -119,7 +139,11 @@ static char *get_file(struct vdso_file *vdso_file)
 
 	if (size == (size_t) write(fd, buf, size))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vdso = vdso_file;
+=======
+		vdso = vdso_file->temp_file_name;
+>>>>>>> v3.18
 =======
 		vdso = vdso_file->temp_file_name;
 >>>>>>> v3.18
@@ -129,6 +153,7 @@ static char *get_file(struct vdso_file *vdso_file)
  out:
 	free(buf);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vdso_found = (vdso != NULL);
 	return vdso;
@@ -157,6 +182,8 @@ struct dso *vdso__dso_findnew(struct list_head *head)
 			dso__set_long_name(dso, file);
 		}
 =======
+=======
+>>>>>>> v3.18
 	vdso_file->found = (vdso != NULL);
 	vdso_file->error = !vdso_file->found;
 	return vdso;
@@ -211,16 +238,25 @@ struct dso *vdso__dso_findnew(struct machine *machine,
 			return NULL;
 
 		dso = vdso__new(machine, DSO__NAME_VDSO, file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return dso;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 bool dso__is_vdso(struct dso *dso)
 {
 	return !strcmp(dso->short_name, DSO__NAME_VDSO);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

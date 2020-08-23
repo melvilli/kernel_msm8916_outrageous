@@ -25,9 +25,12 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	PRIV(tp)	((struct tcindex_data *) (tp)->root)
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct tcindex_filter_result {
@@ -39,7 +42,12 @@ struct tcindex_filter {
 	u16 key;
 	struct tcindex_filter_result result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcindex_filter *next;
+=======
+	struct tcindex_filter __rcu *next;
+	struct rcu_head rcu;
+>>>>>>> v3.18
 =======
 	struct tcindex_filter __rcu *next;
 	struct rcu_head rcu;
@@ -49,6 +57,7 @@ struct tcindex_filter {
 
 struct tcindex_data {
 	struct tcindex_filter_result *perfect; /* perfect hash; NULL if none */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tcindex_filter **h; /* imperfect hash; only used if !perfect;
 				      NULL if unused */
@@ -63,6 +72,8 @@ static const struct tcf_ext_map tcindex_ext_map = {
 	.police = TCA_TCINDEX_POLICE,
 	.action = TCA_TCINDEX_ACT
 =======
+=======
+>>>>>>> v3.18
 	struct tcindex_filter __rcu **h; /* imperfect hash; */
 	struct tcf_proto *tp;
 	u16 mask;		/* AND key with mask */
@@ -71,6 +82,9 @@ static const struct tcf_ext_map tcindex_ext_map = {
 	u32 alloc_hash;		/* allocated size */
 	u32 fall_through;	/* 0: only classify if explicit match */
 	struct rcu_head rcu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -84,6 +98,7 @@ static struct tcindex_filter_result *
 tcindex_lookup(struct tcindex_data *p, u16 key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcindex_filter *f;
 
 	if (p->perfect)
@@ -92,6 +107,8 @@ tcindex_lookup(struct tcindex_data *p, u16 key)
 	else if (p->h) {
 		for (f = p->h[key % p->hash]; f; f = f->next)
 =======
+=======
+>>>>>>> v3.18
 	if (p->perfect) {
 		struct tcindex_filter_result *f = p->perfect + key;
 
@@ -104,6 +121,9 @@ tcindex_lookup(struct tcindex_data *p, u16 key)
 		for (f = rcu_dereference_bh_rtnl(*fp);
 		     f;
 		     fp = &f->next, f = rcu_dereference_bh_rtnl(*fp))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (f->key == key)
 				return &f->result;
@@ -117,7 +137,11 @@ static int tcindex_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 			    struct tcf_result *res)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcindex_data *p = PRIV(tp);
+=======
+	struct tcindex_data *p = rcu_dereference_bh(tp->root);
+>>>>>>> v3.18
 =======
 	struct tcindex_data *p = rcu_dereference_bh(tp->root);
 >>>>>>> v3.18
@@ -146,7 +170,11 @@ static int tcindex_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 static unsigned long tcindex_get(struct tcf_proto *tp, u32 handle)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcindex_data *p = PRIV(tp);
+=======
+	struct tcindex_data *p = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct tcindex_data *p = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -180,6 +208,7 @@ static int tcindex_init(struct tcf_proto *tp)
 	p->fall_through = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tp->root = p;
 	return 0;
 }
@@ -194,6 +223,8 @@ __tcindex_delete(struct tcf_proto *tp, unsigned long arg, int lock)
 
 	pr_debug("tcindex_delete(tp %p,arg 0x%lx),p %p,f %p\n", tp, arg, p, f);
 =======
+=======
+>>>>>>> v3.18
 	rcu_assign_pointer(tp->root, p);
 	return 0;
 }
@@ -207,12 +238,16 @@ tcindex_delete(struct tcf_proto *tp, unsigned long arg)
 	struct tcindex_filter *f = NULL;
 
 	pr_debug("tcindex_delete(tp %p,arg 0x%lx),p %p\n", tp, arg, p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p->perfect) {
 		if (!r->res.class)
 			return -ENOENT;
 	} else {
 		int i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct tcindex_filter **walk = NULL;
 
@@ -240,6 +275,8 @@ static int tcindex_delete(struct tcf_proto *tp, unsigned long arg)
 {
 	return __tcindex_delete(tp, arg, 1);
 =======
+=======
+>>>>>>> v3.18
 
 		for (i = 0; i < p->hash; i++) {
 			walk = p->h + i;
@@ -275,6 +312,9 @@ static void __tcindex_destroy(struct rcu_head *head)
 	kfree(p->perfect);
 	kfree(p->h);
 	kfree(p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -293,7 +333,10 @@ static const struct nla_policy tcindex_policy[TCA_TCINDEX_MAX + 1] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tcindex_filter_result_init(struct tcindex_filter_result *r)
 {
 	memset(r, 0, sizeof(*r));
@@ -308,13 +351,20 @@ static void __tcindex_partial_destroy(struct rcu_head *head)
 	kfree(p);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 		  u32 handle, struct tcindex_data *p,
 		  struct tcindex_filter_result *r, struct nlattr **tb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 struct nlattr *est)
+=======
+		  struct nlattr *est, bool ovr)
+>>>>>>> v3.18
 =======
 		  struct nlattr *est, bool ovr)
 >>>>>>> v3.18
@@ -322,6 +372,7 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 	int err, balloc = 0;
 	struct tcindex_filter_result new_filter_result, *old_r = r;
 	struct tcindex_filter_result cr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tcindex_data cp;
 	struct tcindex_filter *f = NULL; /* make gcc behave */
@@ -376,6 +427,8 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 	if (!cp.perfect && !cp.h)
 		cp.alloc_hash = cp.hash;
 =======
+=======
+>>>>>>> v3.18
 	struct tcindex_data *cp, *oldp;
 	struct tcindex_filter *f = NULL; /* make gcc behave */
 	struct tcf_exts e;
@@ -458,6 +511,9 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 
 	if (!cp->perfect && !cp->h)
 		cp->alloc_hash = cp->hash;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Note: this could be as restrictive as if (handle & ~(mask >> shift))
@@ -465,6 +521,7 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 	 * mask change. While this is extremely unlikely to ever matter,
 	 * the check below is safer (and also more backwards-compatible).
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cp.perfect || valid_perfect_hash(&cp))
 		if (handle >= cp.alloc_hash)
@@ -483,6 +540,8 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 			if (!cp.h)
 				goto errout;
 =======
+=======
+>>>>>>> v3.18
 	if (cp->perfect || valid_perfect_hash(cp))
 		if (handle >= cp->alloc_hash)
 			goto errout_alloc;
@@ -512,21 +571,30 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 				goto errout_alloc;
 
 			cp->h = hash;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			balloc = 2;
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cp.perfect)
 		r = cp.perfect + handle;
 	else
 		r = tcindex_lookup(&cp, handle) ? : &new_filter_result;
 =======
+=======
+>>>>>>> v3.18
 	if (cp->perfect)
 		r = cp->perfect + handle;
 	else
 		r = tcindex_lookup(cp, handle) ? : &new_filter_result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (r == &new_filter_result) {
@@ -534,6 +602,12 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 		if (!f)
 			goto errout_alloc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		f->key = handle;
+		tcindex_filter_result_init(&f->result);
+		f->next = NULL;
+>>>>>>> v3.18
 =======
 		f->key = handle;
 		tcindex_filter_result_init(&f->result);
@@ -546,6 +620,7 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 		tcf_bind_filter(tp, &cr.res, base);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tcf_exts_change(tp, &cr.exts, &e);
 
@@ -569,6 +644,8 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 	tcf_tree_unlock(tp);
 
 =======
+=======
+>>>>>>> v3.18
 	if (old_r)
 		tcf_exts_change(tp, &r->exts, &e);
 	else
@@ -598,11 +675,15 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 
 	if (oldp)
 		call_rcu(&oldp->rcu, __tcindex_partial_destroy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
 errout_alloc:
 	if (balloc == 1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		kfree(cp.perfect);
 	else if (balloc == 2)
@@ -610,12 +691,17 @@ errout_alloc:
 errout:
 	tcf_exts_destroy(tp, &e);
 =======
+=======
+>>>>>>> v3.18
 		kfree(cp->perfect);
 	else if (balloc == 2)
 		kfree(cp->h);
 errout:
 	kfree(cp);
 	tcf_exts_destroy(&e);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -624,17 +710,23 @@ static int
 tcindex_change(struct net *net, struct sk_buff *in_skb,
 	       struct tcf_proto *tp, unsigned long base, u32 handle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       struct nlattr **tca, unsigned long *arg)
 {
 	struct nlattr *opt = tca[TCA_OPTIONS];
 	struct nlattr *tb[TCA_TCINDEX_MAX + 1];
 	struct tcindex_data *p = PRIV(tp);
 =======
+=======
+>>>>>>> v3.18
 	       struct nlattr **tca, unsigned long *arg, bool ovr)
 {
 	struct nlattr *opt = tca[TCA_OPTIONS];
 	struct nlattr *tb[TCA_TCINDEX_MAX + 1];
 	struct tcindex_data *p = rtnl_dereference(tp->root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tcindex_filter_result *r = (struct tcindex_filter_result *) *arg;
 	int err;
@@ -652,6 +744,7 @@ tcindex_change(struct net *net, struct sk_buff *in_skb,
 
 	return tcindex_set_parms(net, tp, base, handle, p, r, tb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 tca[TCA_RATE]);
 }
 
@@ -660,12 +753,17 @@ static void tcindex_walk(struct tcf_proto *tp, struct tcf_walker *walker)
 {
 	struct tcindex_data *p = PRIV(tp);
 =======
+=======
+>>>>>>> v3.18
 				 tca[TCA_RATE], ovr);
 }
 
 static void tcindex_walk(struct tcf_proto *tp, struct tcf_walker *walker)
 {
 	struct tcindex_data *p = rtnl_dereference(tp->root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tcindex_filter *f, *next;
 	int i;
@@ -690,8 +788,13 @@ static void tcindex_walk(struct tcf_proto *tp, struct tcf_walker *walker)
 		return;
 	for (i = 0; i < p->hash; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (f = p->h[i]; f; f = next) {
 			next = f->next;
+=======
+		for (f = rtnl_dereference(p->h[i]); f; f = next) {
+			next = rtnl_dereference(f->next);
+>>>>>>> v3.18
 =======
 		for (f = rtnl_dereference(p->h[i]); f; f = next) {
 			next = rtnl_dereference(f->next);
@@ -709,6 +812,7 @@ static void tcindex_walk(struct tcf_proto *tp, struct tcf_walker *walker)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int tcindex_destroy_element(struct tcf_proto *tp,
     unsigned long arg, struct tcf_walker *walker)
@@ -725,11 +829,17 @@ static void tcindex_destroy(struct tcf_proto *tp)
 {
 	struct tcindex_data *p = rtnl_dereference(tp->root);
 >>>>>>> v3.18
+=======
+static void tcindex_destroy(struct tcf_proto *tp)
+{
+	struct tcindex_data *p = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 	struct tcf_walker walker;
 
 	pr_debug("tcindex_destroy(tp %p),p %p\n", tp, p);
 	walker.count = 0;
 	walker.skip = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	walker.fn = &tcindex_destroy_element;
 	tcindex_walk(tp, &walker);
@@ -745,6 +855,8 @@ static int tcindex_dump(struct tcf_proto *tp, unsigned long fh,
 {
 	struct tcindex_data *p = PRIV(tp);
 =======
+=======
+>>>>>>> v3.18
 	walker.fn = tcindex_destroy_element;
 	tcindex_walk(tp, &walker);
 
@@ -757,6 +869,9 @@ static int tcindex_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
     struct sk_buff *skb, struct tcmsg *t)
 {
 	struct tcindex_data *p = rtnl_dereference(tp->root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tcindex_filter_result *r = (struct tcindex_filter_result *) fh;
 	unsigned char *b = skb_tail_pointer(skb);
@@ -781,27 +896,39 @@ static int tcindex_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 	} else {
 		if (p->perfect) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			t->tcm_handle = r-p->perfect;
 		} else {
 			struct tcindex_filter *f;
 =======
+=======
+>>>>>>> v3.18
 			t->tcm_handle = r - p->perfect;
 		} else {
 			struct tcindex_filter *f;
 			struct tcindex_filter __rcu **fp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			int i;
 
 			t->tcm_handle = 0;
 			for (i = 0; !t->tcm_handle && i < p->hash; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				for (f = p->h[i]; !t->tcm_handle && f;
 				     f = f->next) {
 =======
+=======
+>>>>>>> v3.18
 				fp = &p->h[i];
 				for (f = rtnl_dereference(*fp);
 				     !t->tcm_handle && f;
 				     fp = &f->next, f = rtnl_dereference(*fp)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					if (&f->result == r)
 						t->tcm_handle = f->key;
@@ -814,17 +941,23 @@ static int tcindex_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 			goto nla_put_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tcf_exts_dump(skb, &r->exts, &tcindex_ext_map) < 0)
 			goto nla_put_failure;
 		nla_nest_end(skb, nest);
 
 		if (tcf_exts_dump_stats(skb, &r->exts, &tcindex_ext_map) < 0)
 =======
+=======
+>>>>>>> v3.18
 		if (tcf_exts_dump(skb, &r->exts) < 0)
 			goto nla_put_failure;
 		nla_nest_end(skb, nest);
 
 		if (tcf_exts_dump_stats(skb, &r->exts) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto nla_put_failure;
 	}

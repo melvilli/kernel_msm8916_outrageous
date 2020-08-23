@@ -29,7 +29,11 @@
 		user_led1 {
 			label = "user_led1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 20 1>;
+=======
+			gpios = <&pioB 20 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 20 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -40,7 +44,11 @@
 *		user_led2 {
 *			label = "user_led2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 *			gpios = <&pioB 21 1>;
+=======
+*			gpios = <&pioB 21 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 *			gpios = <&pioB 21 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -49,7 +57,11 @@
 		user_led3 {
 			label = "user_led3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 22 1>;
+=======
+			gpios = <&pioB 22 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 22 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -58,7 +70,11 @@
 		user_led4 {
 			label = "user_led4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 23 1>;
+=======
+			gpios = <&pioB 23 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 23 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -67,7 +83,11 @@
 		red {
 			label = "red";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 24 1>;
+=======
+			gpios = <&pioB 24 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 24 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -76,7 +96,11 @@
 		orange {
 			label = "orange";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 30 1>;
+=======
+			gpios = <&pioB 30 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 30 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -85,7 +109,11 @@
 		green {
 			label = "green";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 31 1>;
+=======
+			gpios = <&pioB 31 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 31 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -100,7 +128,11 @@
 		user_pb1 {
 			label = "user_pb1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 25 1>;
+=======
+			gpios = <&pioB 25 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 25 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -110,7 +142,11 @@
 		user_pb2 {
 			label = "user_pb2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 13 1>;
+=======
+			gpios = <&pioB 13 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 13 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -120,7 +156,11 @@
 		user_pb3 {
 			label = "user_pb3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioA 26 1>;
+=======
+			gpios = <&pioA 26 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioA 26 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -130,7 +170,11 @@
 		user_pb4 {
 			label = "user_pb4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 9 1>;
+=======
+			gpios = <&pioC 9 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 9 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

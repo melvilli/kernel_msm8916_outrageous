@@ -106,6 +106,7 @@ struct lapb_cb {
 
 /* lapb_iface.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void lapb_connect_confirmation(struct lapb_cb *lapb, int);
 extern void lapb_connect_indication(struct lapb_cb *lapb, int);
 extern void lapb_disconnect_confirmation(struct lapb_cb *lapb, int);
@@ -141,6 +142,8 @@ extern void lapb_stop_t1timer(struct lapb_cb *lapb);
 extern void lapb_stop_t2timer(struct lapb_cb *lapb);
 extern int  lapb_t1timer_running(struct lapb_cb *lapb);
 =======
+=======
+>>>>>>> v3.18
 void lapb_connect_confirmation(struct lapb_cb *lapb, int);
 void lapb_connect_indication(struct lapb_cb *lapb, int);
 void lapb_disconnect_confirmation(struct lapb_cb *lapb, int);
@@ -175,6 +178,9 @@ void lapb_start_t2timer(struct lapb_cb *lapb);
 void lapb_stop_t1timer(struct lapb_cb *lapb);
 void lapb_stop_t2timer(struct lapb_cb *lapb);
 int lapb_t1timer_running(struct lapb_cb *lapb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

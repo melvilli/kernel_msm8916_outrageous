@@ -32,6 +32,10 @@
 #include <drm/drmP.h>
 #include <drm/via_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_legacy.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_legacy.h>
 >>>>>>> v3.18

@@ -70,6 +70,11 @@
 #define SGI_KEYBD_IRQ	SGINT_LOCAL2 + 4	/* keyboard */
 #define SGI_SERIAL_IRQ	SGINT_LOCAL2 + 5	/* onboard serial */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SGI_GIOEXP0_IRQ	(SGINT_LOCAL2 + 6)	/* Indy GIO EXP0 */
+#define SGI_GIOEXP1_IRQ	(SGINT_LOCAL2 + 7)	/* Indy GIO EXP1 */
+>>>>>>> v3.18
 =======
 #define SGI_GIOEXP0_IRQ	(SGINT_LOCAL2 + 6)	/* Indy GIO EXP0 */
 #define SGI_GIOEXP1_IRQ	(SGINT_LOCAL2 + 7)	/* Indy GIO EXP1 */

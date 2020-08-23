@@ -283,6 +283,7 @@ find_pa_parent_type(const struct parisc_device *padev, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 static inline int is_pci_dev(struct device *dev)
 {
@@ -295,6 +296,8 @@ static inline int is_pci_dev(struct device *dev)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -310,7 +313,11 @@ static void get_node_path(struct device *dev, struct hardware_path *path)
 	memset(&path->bc, -1, 6);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_pci_dev(dev)) {
+=======
+	if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 =======
 	if (dev_is_pci(dev)) {
 >>>>>>> v3.18
@@ -322,7 +329,11 @@ static void get_node_path(struct device *dev, struct hardware_path *path)
 
 	while (dev != &root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_pci_dev(dev)) {
+=======
+		if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 =======
 		if (dev_is_pci(dev)) {
 >>>>>>> v3.18
@@ -707,7 +718,11 @@ static int check_parent(struct device * dev, void * data)
 			if (match_parisc_device(dev, d->index, d->modpath))
 				d->dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (is_pci_dev(dev)) {
+=======
+		} else if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 =======
 		} else if (dev_is_pci(dev)) {
 >>>>>>> v3.18
@@ -769,7 +784,11 @@ struct device *hwpath_to_device(struct hardware_path *modpath)
 			return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_pci_dev(parent)) /* pci devices already parse MOD */
+=======
+	if (dev_is_pci(parent)) /* pci devices already parse MOD */
+>>>>>>> v3.18
 =======
 	if (dev_is_pci(parent)) /* pci devices already parse MOD */
 >>>>>>> v3.18
@@ -792,7 +811,11 @@ void device_to_hwpath(struct device *dev, struct hardware_path *path)
 		get_node_path(dev->parent, path);
 		path->mod = padev->hw_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (is_pci_dev(dev)) {
+=======
+	} else if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 =======
 	} else if (dev_is_pci(dev)) {
 >>>>>>> v3.18

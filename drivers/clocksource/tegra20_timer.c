@@ -28,6 +28,10 @@
 #include <linux/of_irq.h>
 #include <linux/sched_clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -58,6 +62,11 @@ static struct timespec persistent_ts;
 static u64 persistent_ms, last_persistent_ms;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct delay_timer tegra_delay_timer;
+
+>>>>>>> v3.18
 =======
 static struct delay_timer tegra_delay_timer;
 
@@ -108,7 +117,11 @@ static struct clock_event_device tegra_clockevent = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace tegra_read_sched_clock(void)
+=======
+static u64 notrace tegra_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace tegra_read_sched_clock(void)
 >>>>>>> v3.18
@@ -153,12 +166,18 @@ static void tegra_read_persistent_clock(struct timespec *ts)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long tegra_delay_timer_read_counter_long(void)
 {
 	return readl(timer_reg_base + TIMERUS_CNTR_1US);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t tegra_timer_interrupt(int irq, void *dev_id)
 {
@@ -171,7 +190,11 @@ static irqreturn_t tegra_timer_interrupt(int irq, void *dev_id)
 static struct irqaction tegra_timer_irq = {
 	.name		= "timer0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_TRIGGER_HIGH,
+=======
+	.flags		= IRQF_TIMER | IRQF_TRIGGER_HIGH,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_TRIGGER_HIGH,
 >>>>>>> v3.18
@@ -207,8 +230,11 @@ static void __init tegra20_init_timer(struct device_node *np)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_node_put(np);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (rate) {
@@ -229,7 +255,11 @@ static void __init tegra20_init_timer(struct device_node *np)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(tegra_read_sched_clock, 32, 1000000);
+=======
+	sched_clock_register(tegra_read_sched_clock, 32, 1000000);
+>>>>>>> v3.18
 =======
 	sched_clock_register(tegra_read_sched_clock, 32, 1000000);
 >>>>>>> v3.18
@@ -241,12 +271,18 @@ static void __init tegra20_init_timer(struct device_node *np)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	tegra_delay_timer.read_current_timer =
 			tegra_delay_timer_read_counter_long;
 	tegra_delay_timer.freq = 1000000;
 	register_current_timer_delay(&tegra_delay_timer);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = setup_irq(tegra_timer_irq.irq, &tegra_timer_irq);
 	if (ret) {
@@ -282,8 +318,11 @@ static void __init tegra20_init_rtc(struct device_node *np)
 		clk_prepare_enable(clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_node_put(np);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	register_persistent_clock(NULL, tegra_read_persistent_clock);

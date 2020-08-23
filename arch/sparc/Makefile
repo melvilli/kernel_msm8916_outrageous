@@ -69,6 +69,12 @@ image zImage uImage tftpboot.img vmlinux.aout: vmlinux
 	$(Q)$(MAKE) $(build)=$(boot) $(boot)/$@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+install:
+	$(Q)$(MAKE) $(build)=$(boot) $@
+
+>>>>>>> v3.18
 =======
 install:
 	$(Q)$(MAKE) $(build)=$(boot) $@

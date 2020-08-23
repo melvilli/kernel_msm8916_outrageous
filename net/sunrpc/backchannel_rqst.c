@@ -61,16 +61,22 @@ static void xprt_free_allocation(struct rpc_rqst *req)
 	dprintk("RPC:        free allocations for req= %p\n", req);
 	WARN_ON_ONCE(test_bit(RPC_BC_PA_IN_USE, &req->rq_bc_pa_state));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xbufp = &req->rq_rcv_buf;
 	free_page((unsigned long)xbufp->head[0].iov_base);
 	xbufp = &req->rq_snd_buf;
 	free_page((unsigned long)xbufp->head[0].iov_base);
 	list_del(&req->rq_bc_pa_list);
 =======
+=======
+>>>>>>> v3.18
 	xbufp = &req->rq_private_buf;
 	free_page((unsigned long)xbufp->head[0].iov_base);
 	xbufp = &req->rq_snd_buf;
 	free_page((unsigned long)xbufp->head[0].iov_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(req);
 }
@@ -176,13 +182,19 @@ out_free:
 	 * Memory allocation failed, free the temporary list
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(req, tmp, &tmp_list, rq_bc_pa_list)
 		xprt_free_allocation(req);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_safe(req, tmp, &tmp_list, rq_bc_pa_list) {
 		list_del(&req->rq_bc_pa_list);
 		xprt_free_allocation(req);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dprintk("RPC:       setup backchannel transport failed\n");
@@ -213,6 +225,10 @@ void xprt_destroy_backchannel(struct rpc_xprt *xprt, unsigned int max_reqs)
 	list_for_each_entry_safe(req, tmp, &xprt->bc_pa_list, rq_bc_pa_list) {
 		dprintk("RPC:        req=%p\n", req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		list_del(&req->rq_bc_pa_list);
+>>>>>>> v3.18
 =======
 		list_del(&req->rq_bc_pa_list);
 >>>>>>> v3.18
@@ -228,6 +244,7 @@ out:
 }
 EXPORT_SYMBOL_GPL(xprt_destroy_backchannel);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * One or more rpc_rqst structure have been preallocated during the
@@ -263,6 +280,8 @@ struct rpc_rqst *xprt_alloc_bc_request(struct rpc_xprt *xprt)
 			sizeof(req->rq_private_buf));
 	}
 =======
+=======
+>>>>>>> v3.18
 static struct rpc_rqst *xprt_alloc_bc_request(struct rpc_xprt *xprt, __be32 xid)
 {
 	struct rpc_rqst *req = NULL;
@@ -280,6 +299,9 @@ static struct rpc_rqst *xprt_alloc_bc_request(struct rpc_xprt *xprt, __be32 xid)
 	req->rq_xid = xid;
 	req->rq_connect_cookie = xprt->connect_cookie;
 not_found:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dprintk("RPC:       backchannel req=%p\n", req);
 	return req;
@@ -296,6 +318,10 @@ void xprt_free_bc_request(struct rpc_rqst *req)
 	dprintk("RPC:       free backchannel req=%p\n", req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	req->rq_connect_cookie = xprt->connect_cookie - 1;
+>>>>>>> v3.18
 =======
 	req->rq_connect_cookie = xprt->connect_cookie - 1;
 >>>>>>> v3.18
@@ -322,11 +348,14 @@ void xprt_free_bc_request(struct rpc_rqst *req)
 	 */
 	spin_lock_bh(&xprt->bc_pa_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&req->rq_bc_pa_list, &xprt->bc_pa_list);
 	spin_unlock_bh(&xprt->bc_pa_lock);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	list_add_tail(&req->rq_bc_pa_list, &xprt->bc_pa_list);
 	spin_unlock_bh(&xprt->bc_pa_lock);
 }
@@ -381,4 +410,7 @@ void xprt_complete_bc_request(struct rpc_rqst *req, uint32_t copied)
 	spin_unlock(&bc_serv->sv_cb_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

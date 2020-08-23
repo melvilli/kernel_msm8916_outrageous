@@ -1629,7 +1629,10 @@ struct dvb_frontend *stb0899_attach(struct stb0899_config *config, struct i2c_ad
 {
 	struct stb0899_state *state = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum stb0899_inversion inversion;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1638,7 +1641,10 @@ struct dvb_frontend *stb0899_attach(struct stb0899_config *config, struct i2c_ad
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inversion				= config->inversion;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	state->verbose				= &verbose;
@@ -1647,7 +1653,12 @@ struct dvb_frontend *stb0899_attach(struct stb0899_config *config, struct i2c_ad
 	state->frontend.ops			= stb0899_ops;
 	state->frontend.demodulator_priv	= state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->internal.inversion		= inversion;
+=======
+	/* use configured inversion as default -- we'll later autodetect inversion */
+	state->internal.inversion		= config->inversion;
+>>>>>>> v3.18
 =======
 	/* use configured inversion as default -- we'll later autodetect inversion */
 	state->internal.inversion		= config->inversion;

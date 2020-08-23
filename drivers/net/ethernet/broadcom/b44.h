@@ -281,14 +281,20 @@ struct ring_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define B44_MCAST_TABLE_SIZE	32
 #define B44_PHY_ADDR_NO_PHY	30
 #define B44_MDC_RATIO		5000000
 =======
+=======
+>>>>>>> v3.18
 #define B44_MCAST_TABLE_SIZE		32
 #define B44_PHY_ADDR_NO_LOCAL_PHY	30 /* no local phy regs */
 #define B44_PHY_ADDR_NO_PHY		31 /* no phy present at all */
 #define B44_MDC_RATIO			5000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	B44_STAT_REG_DECLARE		\
@@ -352,6 +358,12 @@ B44_STAT_REG_DECLARE
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	B44_BOARDFLAG_ROBO		0x0010  /* Board has robo switch */
+#define	B44_BOARDFLAG_ADM		0x0080  /* Board has ADMtek switch */
+
+>>>>>>> v3.18
 =======
 #define	B44_BOARDFLAG_ROBO		0x0010  /* Board has robo switch */
 #define	B44_BOARDFLAG_ADM		0x0080  /* Board has ADMtek switch */
@@ -390,7 +402,11 @@ struct b44 {
 #define B44_FLAG_ADV_100HALF	0x04000000
 #define B44_FLAG_ADV_100FULL	0x08000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define B44_FLAG_INTERNAL_PHY	0x10000000
+=======
+#define B44_FLAG_EXTERNAL_PHY	0x10000000
+>>>>>>> v3.18
 =======
 #define B44_FLAG_EXTERNAL_PHY	0x10000000
 >>>>>>> v3.18
@@ -414,6 +430,12 @@ struct b44 {
 	u8			phy_addr;
 	u8			force_copybreak;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct phy_device	*phydev;
+	struct mii_bus		*mii_bus;
+	int			old_link;
+>>>>>>> v3.18
 =======
 	struct phy_device	*phydev;
 	struct mii_bus		*mii_bus;

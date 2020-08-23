@@ -14,11 +14,14 @@
 
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/highmem.h>
 #include <asm/cacheflush.h>
 #include <asm/cp15.h>
 #include <plat/cache-feroceon-l2.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/highmem.h>
@@ -28,6 +31,9 @@
 #include <asm/hardware/cache-feroceon-l2.h>
 
 #define L2_WRITETHROUGH_KIRKWOOD	BIT(4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -344,7 +350,13 @@ static void __init enable_l2(void)
 		if (d)
 			enable_dcache();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+	} else
+		pr_err(FW_BUG
+		       "Feroceon L2: bootloader left the L2 cache on!\n");
+>>>>>>> v3.18
 =======
 	} else
 		pr_err(FW_BUG
@@ -362,7 +374,10 @@ void __init feroceon_l2_init(int __l2_wt_override)
 	outer_cache.clean_range = feroceon_l2_clean_range;
 	outer_cache.flush_range = feroceon_l2_flush_range;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outer_cache.inv_all = l2_inv_all;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -372,7 +387,10 @@ void __init feroceon_l2_init(int __l2_wt_override)
 			 l2_wt_override ? ", in WT override mode" : "");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id feroceon_ids[] __initconst = {
 	{ .compatible = "marvell,kirkwood-cache"},
@@ -411,4 +429,7 @@ int __init feroceon_of_init(void)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

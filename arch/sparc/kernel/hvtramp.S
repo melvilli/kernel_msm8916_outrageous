@@ -4,7 +4,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -20,7 +23,10 @@
 #include <asm/pil.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.align		8
@@ -118,7 +124,10 @@ hv_cpu_startup:
 	sub		%g5, (STACKFRAME_SZ + STACK_BIAS), %g5
 	add		%g6, %g5, %sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov		0, %fp
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

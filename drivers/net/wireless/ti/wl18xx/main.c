@@ -24,6 +24,10 @@
 #include <linux/ip.h>
 #include <linux/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -460,17 +464,23 @@ static struct wlcore_conf wl18xx_conf = {
 	},
 	.fwlog = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mode                         = WL12XX_FWLOG_ON_DEMAND,
 		.mem_blocks                   = 2,
 		.severity                     = 0,
 		.timestamp                    = WL12XX_FWLOG_TIMESTAMP_DISABLED,
 		.output                       = WL12XX_FWLOG_OUTPUT_HOST,
 =======
+=======
+>>>>>>> v3.18
 		.mode                         = WL12XX_FWLOG_CONTINUOUS,
 		.mem_blocks                   = 2,
 		.severity                     = 0,
 		.timestamp                    = WL12XX_FWLOG_TIMESTAMP_DISABLED,
 		.output                       = WL12XX_FWLOG_OUTPUT_DBG_PINS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.threshold                    = 0,
 	},
@@ -517,7 +527,11 @@ static struct wlcore_conf wl18xx_conf = {
 static struct wl18xx_priv_conf wl18xx_default_priv_conf = {
 	.ht = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mode				= HT_MODE_DEFAULT,
+=======
+		.mode				= HT_MODE_WIDE,
+>>>>>>> v3.18
 =======
 		.mode				= HT_MODE_WIDE,
 >>>>>>> v3.18
@@ -532,7 +546,11 @@ static struct wl18xx_priv_conf wl18xx_default_priv_conf = {
 		.dedicated_fem			= FEM_NONE,
 		.low_band_component		= COMPONENT_3_WAY_SWITCH,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.low_band_component_type	= 0x04,
+=======
+		.low_band_component_type	= 0x05,
+>>>>>>> v3.18
 =======
 		.low_band_component_type	= 0x05,
 >>>>>>> v3.18
@@ -576,6 +594,7 @@ static struct wl18xx_priv_conf wl18xx_default_priv_conf = {
 						    0xff, 0xff, 0xff },
 		.psat				= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.low_power_val			= 0x08,
 		.med_power_val			= 0x12,
 		.high_power_val			= 0x18,
@@ -586,6 +605,8 @@ static struct wl18xx_priv_conf wl18xx_default_priv_conf = {
 		.number_of_assembled_ant2_4	= 2,
 		.number_of_assembled_ant5	= 1,
 =======
+=======
+>>>>>>> v3.18
 		.external_pa_dc2dc		= 0,
 		.number_of_assembled_ant2_4	= 2,
 		.number_of_assembled_ant5	= 1,
@@ -595,6 +616,9 @@ static struct wl18xx_priv_conf wl18xx_default_priv_conf = {
 		.low_power_val_2nd		= 0xff,
 		.med_power_val_2nd		= 0xff,
 		.high_power_val_2nd		= 0xff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.tx_rf_margin			= 1,
 	},
@@ -627,8 +651,13 @@ static const struct wlcore_partition_set wl18xx_ptable[PART_TABLE_LEN] = {
 	},
 	[PART_PHY_INIT] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mem  = { .start = 0x80926000,
 			  .size = sizeof(struct wl18xx_mac_and_phy_params) },
+=======
+		.mem  = { .start = WL18XX_PHY_INIT_MEM_ADDR,
+			  .size  = WL18XX_PHY_INIT_MEM_SIZE },
+>>>>>>> v3.18
 =======
 		.mem  = { .start = WL18XX_PHY_INIT_MEM_ADDR,
 			  .size  = WL18XX_PHY_INIT_MEM_SIZE },
@@ -660,7 +689,10 @@ static const int wl18xx_rtable[REG_TABLE_LEN] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct wl18xx_clk_cfg wl18xx_clk_table_coex[NUM_CLOCK_CONFIGS] = {
 	[CLOCK_CONFIG_16_2_M]	= { 8,  121, 0, 0, false },
 	[CLOCK_CONFIG_16_368_M]	= { 8,  120, 0, 0, false },
@@ -673,6 +705,9 @@ static const struct wl18xx_clk_cfg wl18xx_clk_table_coex[NUM_CLOCK_CONFIGS] = {
 	[CLOCK_CONFIG_52_M]	= { 11, 104, 0, 0, false },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct wl18xx_clk_cfg wl18xx_clk_table[NUM_CLOCK_CONFIGS] = {
 	[CLOCK_CONFIG_16_2_M]	= { 7,  104,  801, 4,  true },
@@ -688,7 +723,11 @@ static const struct wl18xx_clk_cfg wl18xx_clk_table[NUM_CLOCK_CONFIGS] = {
 
 /* TODO: maybe move to a new header file? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WL18XX_FW_NAME "ti-connectivity/wl18xx-fw-2.bin"
+=======
+#define WL18XX_FW_NAME "ti-connectivity/wl18xx-fw-3.bin"
+>>>>>>> v3.18
 =======
 #define WL18XX_FW_NAME "ti-connectivity/wl18xx-fw-3.bin"
 >>>>>>> v3.18
@@ -730,6 +769,12 @@ static int wl18xx_identify_chip(struct wl1271 *wl)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wl->fw_mem_block_size = 272;
+	wl->fwlog_end = 0x40000000;
+
+>>>>>>> v3.18
 =======
 	wl->fw_mem_block_size = 272;
 	wl->fwlog_end = 0x40000000;
@@ -766,7 +811,10 @@ static int wl18xx_set_clk(struct wl1271 *wl)
 		     wl18xx_clk_table[clk_freq].swallow ? "swallow" : "spit");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* coex PLL configuration */
 	ret = wl18xx_top_reg_write(wl, PLLSH_COEX_PLL_N,
 				   wl18xx_clk_table_coex[clk_freq].n);
@@ -784,6 +832,9 @@ static int wl18xx_set_clk(struct wl1271 *wl)
 	if (ret < 0)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = wl18xx_top_reg_write(wl, PLLSH_WCS_PLL_N,
 				   wl18xx_clk_table[clk_freq].n);
@@ -827,7 +878,10 @@ static int wl18xx_set_clk(struct wl1271 *wl)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* choose WCS PLL */
 	ret = wl18xx_top_reg_write(wl, PLLSH_WL_PLL_SEL,
 				   PLLSH_WL_PLL_SEL_WCS_PLL);
@@ -852,6 +906,9 @@ static int wl18xx_set_clk(struct wl1271 *wl)
 	if (ret < 0)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return ret;
@@ -909,6 +966,12 @@ static int wl18xx_pre_upload(struct wl1271 *wl)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUILD_BUG_ON(sizeof(struct wl18xx_mac_and_phy_params) >
+		WL18XX_PHY_INIT_MEM_SIZE);
+
+>>>>>>> v3.18
 =======
 	BUILD_BUG_ON(sizeof(struct wl18xx_mac_and_phy_params) >
 		WL18XX_PHY_INIT_MEM_SIZE);
@@ -931,7 +994,10 @@ static int wl18xx_pre_upload(struct wl1271 *wl)
 
 	ret = wlcore_read32(wl, WL18XX_SCR_PAD2, &tmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ret < 0)
 		goto out;
 
@@ -961,6 +1027,9 @@ static int wl18xx_pre_upload(struct wl1271 *wl)
 	/* re-enable FDSP clock */
 	ret = wlcore_write32(wl, WL18XX_PHY_FPGA_SPARE_1,
 			     MEM_FDSP_CLK_120_ENABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -1050,10 +1119,13 @@ static int wl18xx_boot(struct wl1271 *wl)
 		REMAIN_ON_CHANNEL_COMPLETE_EVENT_ID |
 		INACTIVE_STA_EVENT_ID |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MAX_TX_FAILURE_EVENT_ID |
 		CHANNEL_SWITCH_COMPLETE_EVENT_ID |
 		DFS_CHANNELS_CONFIG_COMPLETE_EVENT;
 =======
+=======
+>>>>>>> v3.18
 		CHANNEL_SWITCH_COMPLETE_EVENT_ID |
 		DFS_CHANNELS_CONFIG_COMPLETE_EVENT |
 		SMART_CONFIG_SYNC_EVENT_ID |
@@ -1061,6 +1133,9 @@ static int wl18xx_boot(struct wl1271 *wl)
 ;
 
 	wl->ap_event_mask = MAX_TX_FAILURE_EVENT_ID;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = wlcore_boot_run_firmware(wl);
@@ -1201,7 +1276,10 @@ static int wl18xx_hw_init(struct wl1271 *wl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void wl18xx_convert_fw_status(struct wl1271 *wl, void *raw_fw_status,
 				     struct wl_fw_status *fw_status)
 {
@@ -1235,6 +1313,9 @@ static void wl18xx_convert_fw_status(struct wl1271 *wl, void *raw_fw_status,
 	fw_status->priv = &int_fw_status->priv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void wl18xx_set_tx_desc_csum(struct wl1271 *wl,
 				    struct wl1271_tx_hw_descr *desc,
@@ -1336,11 +1417,14 @@ static u32 wl18xx_ap_get_mimo_wide_rate_mask(struct wl1271 *wl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wl18xx_get_pg_ver(struct wl1271 *wl, s8 *ver)
 {
 	u32 fuse;
 	s8 rom = 0, metal = 0, pg_ver = 0, rdl_ver = 0;
 =======
+=======
+>>>>>>> v3.18
 static const char *wl18xx_rdl_name(enum wl18xx_rdl_num rdl_num)
 {
 	switch (rdl_num) {
@@ -1371,6 +1455,9 @@ static int wl18xx_get_pg_ver(struct wl1271 *wl, s8 *ver)
 {
 	u32 fuse;
 	s8 rom = 0, metal = 0, pg_ver = 0, rdl_ver = 0, package_type = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -1379,13 +1466,19 @@ static int wl18xx_get_pg_ver(struct wl1271 *wl, s8 *ver)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = wlcore_read32(wl, WL18XX_REG_FUSE_DATA_2_3, &fuse);
 	if (ret < 0)
 		goto out;
 
 	package_type = (fuse >> WL18XX_PACKAGE_TYPE_OFFSET) & 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = wlcore_read32(wl, WL18XX_REG_FUSE_DATA_1_3, &fuse);
 	if (ret < 0)
@@ -1395,7 +1488,11 @@ static int wl18xx_get_pg_ver(struct wl1271 *wl, s8 *ver)
 	rom = (fuse & WL18XX_ROM_VER_MASK) >> WL18XX_ROM_VER_OFFSET;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rom <= 0xE)
+=======
+	if ((rom <= 0xE) && (package_type == WL18XX_PACKAGE_TYPE_WSP))
+>>>>>>> v3.18
 =======
 	if ((rom <= 0xE) && (package_type == WL18XX_PACKAGE_TYPE_WSP))
 >>>>>>> v3.18
@@ -1411,11 +1508,17 @@ static int wl18xx_get_pg_ver(struct wl1271 *wl, s8 *ver)
 
 	rdl_ver = (fuse & WL18XX_RDL_VER_MASK) >> WL18XX_RDL_VER_OFFSET;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdl_ver > RDL_MAX)
 		rdl_ver = RDL_NONE;
 
 	wl1271_info("wl18xx HW: RDL %d, %s, PG %x.%x (ROM %x)",
 		    rdl_ver, rdl_names[rdl_ver], pg_ver, metal, rom);
+=======
+
+	wl1271_info("wl18xx HW: %s, PG %d.%d (ROM 0x%x)",
+		    wl18xx_rdl_name(rdl_ver), pg_ver, metal, rom);
+>>>>>>> v3.18
 =======
 
 	wl1271_info("wl18xx HW: %s, PG %d.%d (ROM 0x%x)",
@@ -1532,7 +1635,10 @@ static int wl18xx_get_mac(struct wl1271 *wl)
 	wl->fuse_nic_addr = (mac1 & 0xffffff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!wl->fuse_oui_addr && !wl->fuse_nic_addr) {
 		u8 mac[ETH_ALEN];
 
@@ -1543,6 +1649,9 @@ static int wl18xx_get_mac(struct wl1271 *wl)
 		wl1271_warning("MAC address from fuse not available, using random locally administered addresses.");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = wlcore_set_partition(wl, &wl->ptable[PART_DOWN]);
 
@@ -1701,6 +1810,7 @@ static bool wl18xx_lnk_high_prio(struct wl1271 *wl, u8 hlid,
 	u8 thold;
 	struct wl18xx_fw_status_priv *status_priv =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(struct wl18xx_fw_status_priv *)wl->fw_status_2->priv;
 	u32 suspend_bitmap = le32_to_cpu(status_priv->link_suspend_bitmap);
 
@@ -1712,6 +1822,8 @@ static bool wl18xx_lnk_high_prio(struct wl1271 *wl, u8 hlid,
 	if (test_bit(hlid, (unsigned long *)&wl->fw_fast_lnk_map) &&
 	    !test_bit(hlid, (unsigned long *)&wl->ap_fw_ps_map))
 =======
+=======
+>>>>>>> v3.18
 		(struct wl18xx_fw_status_priv *)wl->fw_status->priv;
 	unsigned long suspend_bitmap;
 
@@ -1727,6 +1839,9 @@ static bool wl18xx_lnk_high_prio(struct wl1271 *wl, u8 hlid,
 	/* the priority thresholds are taken from FW */
 	if (test_bit(hlid, &wl->fw_fast_lnk_map) &&
 	    !test_bit(hlid, &wl->ap_fw_ps_map))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		thold = status_priv->tx_fast_link_prio_threshold;
 	else
@@ -1741,6 +1856,7 @@ static bool wl18xx_lnk_low_prio(struct wl1271 *wl, u8 hlid,
 	u8 thold;
 	struct wl18xx_fw_status_priv *status_priv =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(struct wl18xx_fw_status_priv *)wl->fw_status_2->priv;
 	u32 suspend_bitmap = le32_to_cpu(status_priv->link_suspend_bitmap);
 
@@ -1749,6 +1865,8 @@ static bool wl18xx_lnk_low_prio(struct wl1271 *wl, u8 hlid,
 	else if (test_bit(hlid, (unsigned long *)&wl->fw_fast_lnk_map) &&
 		 !test_bit(hlid, (unsigned long *)&wl->ap_fw_ps_map))
 =======
+=======
+>>>>>>> v3.18
 		(struct wl18xx_fw_status_priv *)wl->fw_status->priv;
 	unsigned long suspend_bitmap;
 
@@ -1761,6 +1879,9 @@ static bool wl18xx_lnk_low_prio(struct wl1271 *wl, u8 hlid,
 		thold = status_priv->tx_suspend_threshold;
 	else if (test_bit(hlid, &wl->fw_fast_lnk_map) &&
 		 !test_bit(hlid, &wl->ap_fw_ps_map))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		thold = status_priv->tx_fast_stop_threshold;
 	else
@@ -1770,12 +1891,18 @@ static bool wl18xx_lnk_low_prio(struct wl1271 *wl, u8 hlid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 wl18xx_convert_hwaddr(struct wl1271 *wl, u32 hwaddr)
 {
 	return hwaddr & ~0x80000000;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int wl18xx_setup(struct wl1271 *wl);
 
@@ -1797,6 +1924,10 @@ static struct wlcore_ops wl18xx_ops = {
 	.tx_delayed_compl = NULL,
 	.hw_init	= wl18xx_hw_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.convert_fw_status = wl18xx_convert_fw_status,
+>>>>>>> v3.18
 =======
 	.convert_fw_status = wl18xx_convert_fw_status,
 >>>>>>> v3.18
@@ -1819,15 +1950,21 @@ static struct wlcore_ops wl18xx_ops = {
 	.sta_rc_update	= wl18xx_sta_rc_update,
 	.set_peer_cap	= wl18xx_set_peer_cap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.lnk_high_prio	= wl18xx_lnk_high_prio,
 	.lnk_low_prio	= wl18xx_lnk_low_prio,
 =======
+=======
+>>>>>>> v3.18
 	.convert_hwaddr = wl18xx_convert_hwaddr,
 	.lnk_high_prio	= wl18xx_lnk_high_prio,
 	.lnk_low_prio	= wl18xx_lnk_low_prio,
 	.smart_config_start = wl18xx_cmd_smart_config_start,
 	.smart_config_stop  = wl18xx_cmd_smart_config_stop,
 	.smart_config_set_group_key = wl18xx_cmd_smart_config_set_group_key,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1890,7 +2027,10 @@ static struct ieee80211_sta_ht_cap wl18xx_mimo_ht_cap_2ghz = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct ieee80211_iface_limit wl18xx_iface_limits[] = {
 	{
 		.max = 3,
@@ -1927,6 +2067,9 @@ wl18xx_iface_combinations[] = {
 	}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int wl18xx_setup(struct wl1271 *wl)
 {
@@ -1934,11 +2077,14 @@ static int wl18xx_setup(struct wl1271 *wl)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl->rtable = wl18xx_rtable;
 	wl->num_tx_desc = WL18XX_NUM_TX_DESCRIPTORS;
 	wl->num_rx_desc = WL18XX_NUM_RX_DESCRIPTORS;
 	wl->num_channels = 2;
 =======
+=======
+>>>>>>> v3.18
 	BUILD_BUG_ON(WL18XX_MAX_LINKS > WLCORE_MAX_LINKS);
 	BUILD_BUG_ON(WL18XX_MAX_AP_STATIONS > WL18XX_MAX_LINKS);
 
@@ -1949,12 +2095,19 @@ static int wl18xx_setup(struct wl1271 *wl)
 	wl->max_ap_stations = WL18XX_MAX_AP_STATIONS;
 	wl->iface_combinations = wl18xx_iface_combinations;
 	wl->n_iface_combinations = ARRAY_SIZE(wl18xx_iface_combinations);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wl->num_mac_addr = WL18XX_NUM_MAC_ADDRESSES;
 	wl->band_rate_to_idx = wl18xx_band_rate_to_idx;
 	wl->hw_tx_rate_tbl_size = WL18XX_CONF_HW_RXTX_RATE_MAX;
 	wl->hw_min_ht_rate = WL18XX_CONF_HW_RXTX_RATE_MCS0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wl->fw_status_len = sizeof(struct wl18xx_fw_status);
+>>>>>>> v3.18
 =======
 	wl->fw_status_len = sizeof(struct wl18xx_fw_status);
 >>>>>>> v3.18

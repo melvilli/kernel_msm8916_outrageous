@@ -33,6 +33,7 @@
 #include "device.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int PIPEnsControlOut(struct vnt_private *, u8 byRequest, u16 wValue,
 		u16 wIndex, u16 wLength, u8 *pbyBuffer);
 int PIPEnsControlOutAsyn(struct vnt_private *, u8 byRequest,
@@ -44,6 +45,8 @@ int PIPEnsInterruptRead(struct vnt_private *);
 int PIPEnsBulkInUsbRead(struct vnt_private *, PRCB pRCB);
 int PIPEnsSendBulkOut(struct vnt_private *, PUSB_SEND_CONTEXT pContext);
 =======
+=======
+>>>>>>> v3.18
 int vnt_control_out(struct vnt_private *, u8, u16, u16, u16, u8 *);
 int vnt_control_in(struct vnt_private *, u8, u16, u16, u16,  u8 *);
 
@@ -53,6 +56,9 @@ void vnt_control_in_u8(struct vnt_private *, u8, u8, u8 *);
 int vnt_start_interrupt_urb(struct vnt_private *);
 int vnt_submit_rx_urb(struct vnt_private *, struct vnt_rcb *);
 int vnt_tx_context(struct vnt_private *, struct vnt_usb_send_context *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __USBPIPE_H__ */

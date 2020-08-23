@@ -102,7 +102,11 @@ extern int s3c_i2sv2_probe(struct snd_soc_dai *dai,
  */
 extern int s3c_i2sv2_register_component(struct device *dev, int id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					const struct snd_soc_component_driver *cmp_drv,
+=======
+					struct snd_soc_component_driver *cmp_drv,
+>>>>>>> v3.18
 =======
 					struct snd_soc_component_driver *cmp_drv,
 >>>>>>> v3.18

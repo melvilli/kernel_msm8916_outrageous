@@ -115,6 +115,7 @@ over a rather long period of time, but improvements are always welcome!
 
 		The rcu_dereference() primitive is also an excellent
 <<<<<<< HEAD
+<<<<<<< HEAD
 		documentation aid, letting the person reading the code
 		know exactly which pointers are protected by RCU.
 		Please note that compilers can also reorder code, and
@@ -122,6 +123,8 @@ over a rather long period of time, but improvements are always welcome!
 		just that.  The rcu_dereference() primitive therefore
 		also prevents destructive compiler optimizations.
 =======
+=======
+>>>>>>> v3.18
 		documentation aid, letting the person reading the
 		code know exactly which pointers are protected by RCU.
 		Please note that compilers can also reorder code, and
@@ -132,6 +135,9 @@ over a rather long period of time, but improvements are always welcome!
 		mishandle the return value from rcu_dereference().
 		Please see rcu_dereference.txt in this directory for
 		more information.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		The rcu_dereference() primitive is used by the
@@ -216,8 +222,13 @@ over a rather long period of time, but improvements are always welcome!
 	the corresponding readers must disable preemption, possibly
 	by calling rcu_read_lock_sched() and rcu_read_unlock_sched().
 <<<<<<< HEAD
+<<<<<<< HEAD
 	If the updater uses synchronize_srcu() or call_srcu(),
 	the the corresponding readers must use srcu_read_lock() and
+=======
+	If the updater uses synchronize_srcu() or call_srcu(), then
+	the corresponding readers must use srcu_read_lock() and
+>>>>>>> v3.18
 =======
 	If the updater uses synchronize_srcu() or call_srcu(), then
 	the corresponding readers must use srcu_read_lock() and
@@ -275,15 +286,21 @@ over a rather long period of time, but improvements are always welcome!
 
 	b.	Limiting update rate.  For example, if updates occur only
 <<<<<<< HEAD
+<<<<<<< HEAD
 		once per hour, then no explicit rate limiting is required,
 		unless your system is already badly broken.  The dcache
 		subsystem takes this approach -- updates are guarded
 		by a global lock, limiting their rate.
 =======
+=======
+>>>>>>> v3.18
 		once per hour, then no explicit rate limiting is
 		required, unless your system is already badly broken.
 		Older versions of the dcache subsystem take this approach,
 		guarding updates with a global lock, limiting their rate.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	c.	Trusted update -- if updates can only be done manually by
@@ -294,7 +311,12 @@ over a rather long period of time, but improvements are always welcome!
 
 	d.	Use call_rcu_bh() rather than call_rcu(), in order to take
 <<<<<<< HEAD
+<<<<<<< HEAD
 		advantage of call_rcu_bh()'s faster grace periods.
+=======
+		advantage of call_rcu_bh()'s faster grace periods.  (This
+		is only a partial solution, though.)
+>>>>>>> v3.18
 =======
 		advantage of call_rcu_bh()'s faster grace periods.  (This
 		is only a partial solution, though.)
@@ -307,7 +329,10 @@ over a rather long period of time, but improvements are always welcome!
 	call_srcu(), and kfree_rcu().
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	Note that although these primitives do take action to avoid memory
 	exhaustion when any given CPU has too many callbacks, a determined
 	user could still exhaust memory.  This is especially the case
@@ -315,6 +340,9 @@ over a rather long period of time, but improvements are always welcome!
 	offload all of its RCU callbacks onto a single CPU, or if the
 	system has relatively little free memory.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 9.	All RCU list-traversal primitives, which include
 	rcu_dereference(), list_for_each_entry_rcu(), and
@@ -395,12 +423,15 @@ over a rather long period of time, but improvements are always welcome!
 	and easier to use than is SRCU.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	If you need to enter your read-side critical section in a
 	hardirq or exception handler, and then exit that same read-side
 	critical section in the task that was interrupted, then you need
 	to srcu_read_lock_raw() and srcu_read_unlock_raw(), which avoid
 	the lockdep checking that would otherwise this practice illegal.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	Also unlike other forms of RCU, explicit initialization

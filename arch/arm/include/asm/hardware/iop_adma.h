@@ -83,8 +83,11 @@ struct iop_adma_chan {
  * @slots_per_op: number of slots per operation
  * @idx: pool index
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @unmap_src_cnt: number of xor sources
  * @unmap_len: transaction bytecount
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @tx_list: list of descriptors that are associated with one operation
@@ -103,8 +106,11 @@ struct iop_adma_desc_slot {
 	u16 slots_per_op;
 	u16 idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 unmap_src_cnt;
 	size_t unmap_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head tx_list;

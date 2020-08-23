@@ -135,7 +135,10 @@ void plist_del(struct plist_node *node, struct plist_head *head)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * plist_requeue - Requeue @node at end of same-prio entries.
  *
@@ -176,6 +179,9 @@ void plist_requeue(struct plist_node *node, struct plist_head *head)
 	plist_check_head(head);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_PI_LIST
 #include <linux/sched.h>
@@ -214,7 +220,10 @@ static void __init plist_test_check(int nr_expect)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init plist_test_requeue(struct plist_node *node)
 {
 	plist_requeue(node, &test_head);
@@ -223,6 +232,9 @@ static void __init plist_test_requeue(struct plist_node *node)
 		BUG_ON(node->prio == plist_next(node)->prio);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int  __init plist_test(void)
 {
@@ -230,7 +242,11 @@ static int  __init plist_test(void)
 	unsigned int r = local_clock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("start plist test\n");
+=======
+	printk(KERN_DEBUG "start plist test\n");
+>>>>>>> v3.18
 =======
 	printk(KERN_DEBUG "start plist test\n");
 >>>>>>> v3.18
@@ -252,11 +268,17 @@ static int  __init plist_test(void)
 		}
 		plist_test_check(nr_expect);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (!plist_node_empty(test_node + i)) {
 			plist_test_requeue(test_node + i);
 			plist_test_check(nr_expect);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -269,7 +291,11 @@ static int  __init plist_test(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("end plist test\n");
+=======
+	printk(KERN_DEBUG "end plist test\n");
+>>>>>>> v3.18
 =======
 	printk(KERN_DEBUG "end plist test\n");
 >>>>>>> v3.18

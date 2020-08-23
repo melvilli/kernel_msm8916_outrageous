@@ -4,6 +4,7 @@
 #include <asm/atomic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Provide __deprecated wrappers for the new interface, avoid flag day changes.
  * We need the ugly external functions to break header recursion hell.
@@ -40,6 +41,8 @@ static inline void __deprecated smp_mb__after_atomic_dec(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

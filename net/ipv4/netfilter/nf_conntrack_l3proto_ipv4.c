@@ -26,6 +26,10 @@
 #include <net/netfilter/nf_conntrack_zones.h>
 #include <net/netfilter/nf_conntrack_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_conntrack_seqadj.h>
 >>>>>>> v3.18
@@ -96,7 +100,11 @@ static int ipv4_get_l4proto(const struct sk_buff *skb, unsigned int nhoff,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv4_helper(unsigned int hooknum,
+=======
+static unsigned int ipv4_helper(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv4_helper(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -129,7 +137,11 @@ static unsigned int ipv4_helper(const struct nf_hook_ops *ops,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv4_confirm(unsigned int hooknum,
+=======
+static unsigned int ipv4_confirm(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv4_confirm(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -149,11 +161,15 @@ static unsigned int ipv4_confirm(const struct nf_hook_ops *ops,
 	if (test_bit(IPS_SEQ_ADJUST_BIT, &ct->status) &&
 	    !nf_is_loopback_packet(skb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		typeof(nf_nat_seq_adjust_hook) seq_adjust;
 
 		seq_adjust = rcu_dereference(nf_nat_seq_adjust_hook);
 		if (!seq_adjust ||
 		    !seq_adjust(skb, ct, ctinfo, ip_hdrlen(skb))) {
+=======
+		if (!nf_ct_seq_adjust(skb, ct, ctinfo, ip_hdrlen(skb))) {
+>>>>>>> v3.18
 =======
 		if (!nf_ct_seq_adjust(skb, ct, ctinfo, ip_hdrlen(skb))) {
 >>>>>>> v3.18
@@ -167,7 +183,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv4_conntrack_in(unsigned int hooknum,
+=======
+static unsigned int ipv4_conntrack_in(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv4_conntrack_in(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -177,15 +197,21 @@ static unsigned int ipv4_conntrack_in(const struct nf_hook_ops *ops,
 				      int (*okfn)(struct sk_buff *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nf_conntrack_in(dev_net(in), PF_INET, hooknum, skb);
 }
 
 static unsigned int ipv4_conntrack_local(unsigned int hooknum,
 =======
+=======
+>>>>>>> v3.18
 	return nf_conntrack_in(dev_net(in), PF_INET, ops->hooknum, skb);
 }
 
 static unsigned int ipv4_conntrack_local(const struct nf_hook_ops *ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 struct sk_buff *skb,
 					 const struct net_device *in,
@@ -197,7 +223,11 @@ static unsigned int ipv4_conntrack_local(const struct nf_hook_ops *ops,
 	    ip_hdrlen(skb) < sizeof(struct iphdr))
 		return NF_ACCEPT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nf_conntrack_in(dev_net(out), PF_INET, hooknum, skb);
+=======
+	return nf_conntrack_in(dev_net(out), PF_INET, ops->hooknum, skb);
+>>>>>>> v3.18
 =======
 	return nf_conntrack_in(dev_net(out), PF_INET, ops->hooknum, skb);
 >>>>>>> v3.18
@@ -255,7 +285,11 @@ static int log_invalid_proto_min = 0;
 static int log_invalid_proto_max = 255;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ip_ct_sysctl_table[] = {
+=======
+static struct ctl_table ip_ct_sysctl_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ip_ct_sysctl_table[] = {
 >>>>>>> v3.18
@@ -353,7 +387,11 @@ getorigdst(struct sock *sk, int optval, void __user *user, int *len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 >>>>>>> v3.18
@@ -401,7 +439,11 @@ static struct nf_sockopt_ops so_getorigdst = {
 	.get_optmin	= SO_ORIGINAL_DST,
 	.get_optmax	= SO_ORIGINAL_DST+1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get		= &getorigdst,
+=======
+	.get		= getorigdst,
+>>>>>>> v3.18
 =======
 	.get		= getorigdst,
 >>>>>>> v3.18
@@ -435,7 +477,11 @@ struct nf_conntrack_l3proto nf_conntrack_l3proto_ipv4 __read_mostly = {
 	.print_tuple	 = ipv4_print_tuple,
 	.get_l4proto	 = ipv4_get_l4proto,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 >>>>>>> v3.18
@@ -599,11 +645,14 @@ static void __exit nf_conntrack_l3proto_ipv4_fini(void)
 module_init(nf_conntrack_l3proto_ipv4_init);
 module_exit(nf_conntrack_l3proto_ipv4_fini);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void need_ipv4_conntrack(void)
 {
 	return;
 }
 EXPORT_SYMBOL_GPL(need_ipv4_conntrack);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

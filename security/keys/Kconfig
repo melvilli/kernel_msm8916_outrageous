@@ -5,6 +5,10 @@
 config KEYS
 	bool "Enable access key retention support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ASSOCIATIVE_ARRAY
+>>>>>>> v3.18
 =======
 	select ASSOCIATIVE_ARRAY
 >>>>>>> v3.18
@@ -24,7 +28,10 @@ config KEYS
 	  If you are unsure as to whether this is required, answer N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PERSISTENT_KEYRINGS
 	bool "Enable register of persistent per-UID keyrings"
 	depends on KEYS
@@ -53,6 +60,9 @@ config BIG_KEYS
 
 	  If you are unsure as to whether this is required, answer N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TRUSTED_KEYS
 	tristate "TRUSTED KEYS"

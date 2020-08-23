@@ -7,7 +7,11 @@ int InterfaceFileDownload(PVOID arg, struct file *flp, unsigned int on_chip_loc)
 	int errno = 0, len = 0; /* ,is_config_file = 0 */
 	loff_t pos = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_interface_adapter *psIntfAdapter = (struct bcm_interface_adapter *)arg;
+=======
+	struct bcm_interface_adapter *psIntfAdapter = arg;
+>>>>>>> v3.18
 =======
 	struct bcm_interface_adapter *psIntfAdapter = arg;
 >>>>>>> v3.18
@@ -25,6 +29,7 @@ int InterfaceFileDownload(PVOID arg, struct file *flp, unsigned int on_chip_loc)
 		set_fs(oldfs);
 		if (len <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (len < 0) {
 				BCM_DEBUG_PRINT(psIntfAdapter->psAdapter,
 						DBG_TYPE_INITEXIT, MP_INIT,
@@ -38,10 +43,15 @@ int InterfaceFileDownload(PVOID arg, struct file *flp, unsigned int on_chip_loc)
 						"Got end of file!");
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (len < 0)
 				errno = len;
 			else
 				errno = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -51,12 +61,17 @@ int InterfaceFileDownload(PVOID arg, struct file *flp, unsigned int on_chip_loc)
 		 */
 		errno = InterfaceWRM(psIntfAdapter, on_chip_loc, buff, len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (errno) {
 			BCM_DEBUG_PRINT(psIntfAdapter->psAdapter,
 					DBG_TYPE_PRINTK, 0, 0,
 					"WRM Failed! status: %d", errno);
 			break;
 		}
+=======
+		if (errno)
+			break;
+>>>>>>> v3.18
 =======
 		if (errno)
 			break;
@@ -69,7 +84,12 @@ int InterfaceFileDownload(PVOID arg, struct file *flp, unsigned int on_chip_loc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp, unsigned int on_chip_loc)
+=======
+int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
+				unsigned int on_chip_loc)
+>>>>>>> v3.18
 =======
 int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 				unsigned int on_chip_loc)
@@ -83,17 +103,23 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 	static int fw_down;
 	INT Status = STATUS_SUCCESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_interface_adapter *psIntfAdapter = (struct bcm_interface_adapter *)arg;
 	int bytes;
 
 	buff = kmalloc(MAX_TRANSFER_CTRL_BYTE_USB, GFP_DMA);
 	buff_readback = kmalloc(MAX_TRANSFER_CTRL_BYTE_USB , GFP_DMA);
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_interface_adapter *psIntfAdapter = arg;
 	int bytes;
 
 	buff = kzalloc(MAX_TRANSFER_CTRL_BYTE_USB, GFP_DMA);
 	buff_readback = kzalloc(MAX_TRANSFER_CTRL_BYTE_USB , GFP_DMA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!buff || !buff_readback) {
 		kfree(buff);
@@ -105,6 +131,7 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 	is_config_file = (on_chip_loc == CONFIG_BEGIN_ADDR) ? 1 : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buff_readback, 0, MAX_TRANSFER_CTRL_BYTE_USB);
 	memset(buff, 0, MAX_TRANSFER_CTRL_BYTE_USB);
 	while (1) {
@@ -112,16 +139,22 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 		set_fs(get_ds());
 		len = vfs_read(flp, (void __force __user *)buff, MAX_TRANSFER_CTRL_BYTE_USB, &pos);
 =======
+=======
+>>>>>>> v3.18
 	while (1) {
 		oldfs = get_fs();
 		set_fs(get_ds());
 		len = vfs_read(flp, (void __force __user *)buff,
 				MAX_TRANSFER_CTRL_BYTE_USB, &pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_fs(oldfs);
 		fw_down++;
 
 		if (len <= 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (len < 0) {
 				BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "len < 0");
@@ -138,6 +171,8 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 			Status = bytes;
 			BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "RDM of len %d Failed! %d", len, reg);
 =======
+=======
+>>>>>>> v3.18
 			if (len < 0)
 				errno = len;
 			else
@@ -149,6 +184,9 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 					buff_readback, len);
 		if (bytes < 0) {
 			Status = bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto exit;
 		}
@@ -156,8 +194,11 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 		if ((len-sizeof(unsigned int)) < 4) {
 			if (memcmp(buff_readback, buff, len)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Firmware Download is not proper %d", fw_down);
 				BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Length is: %d", len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				Status = -EIO;
@@ -168,10 +209,15 @@ int InterfaceFileReadbackFromChip(PVOID arg, struct file *flp,
 
 			while (len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (*(unsigned int *)&buff_readback[len] != *(unsigned int *)&buff[len]) {
 					BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Firmware Download is not proper %d", fw_down);
 					BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Val from Binary %x, Val From Read Back %x ", *(unsigned int *)&buff[len], *(unsigned int*)&buff_readback[len]);
 					BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "len =%x!!!", len);
+=======
+				if (*(unsigned int *)&buff_readback[len] !=
+						 *(unsigned int *)&buff[len]) {
+>>>>>>> v3.18
 =======
 				if (*(unsigned int *)&buff_readback[len] !=
 						 *(unsigned int *)&buff[len]) {
@@ -192,7 +238,12 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcm_download_config_file(struct bcm_mini_adapter *Adapter, struct bcm_firmware_info *psFwInfo)
+=======
+static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
+				struct bcm_firmware_info *psFwInfo)
+>>>>>>> v3.18
 =======
 static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 				struct bcm_firmware_info *psFwInfo)
@@ -203,7 +254,12 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 
 	if (Adapter->pstargetparams == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Adapter->pstargetparams = kmalloc(sizeof(struct bcm_target_params), GFP_KERNEL);
+=======
+		Adapter->pstargetparams =
+			kmalloc(sizeof(struct bcm_target_params), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		Adapter->pstargetparams =
 			kmalloc(sizeof(struct bcm_target_params), GFP_KERNEL);
@@ -216,7 +272,13 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = copy_from_user(Adapter->pstargetparams, psFwInfo->pvMappedFirmwareAddress, psFwInfo->u32FirmwareLength);
+=======
+	retval = copy_from_user(Adapter->pstargetparams,
+			psFwInfo->pvMappedFirmwareAddress,
+			psFwInfo->u32FirmwareLength);
+>>>>>>> v3.18
 =======
 	retval = copy_from_user(Adapter->pstargetparams,
 			psFwInfo->pvMappedFirmwareAddress,
@@ -236,6 +298,7 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 	retval = InitLedSettings(Adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "INIT LED Failed\n");
 		return retval;
@@ -244,19 +307,29 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 	if (Adapter->LEDInfo.led_thread_running & BCM_LED_THREAD_RUNNING_ACTIVELY) {
 		Adapter->LEDInfo.bLedInitDone = FALSE;
 =======
+=======
+>>>>>>> v3.18
 	if (retval)
 		return retval;
 
 	if (Adapter->LEDInfo.led_thread_running &
 			BCM_LED_THREAD_RUNNING_ACTIVELY) {
 		Adapter->LEDInfo.bLedInitDone = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		Adapter->DriverState = DRIVER_INIT;
 		wake_up(&Adapter->LEDInfo.notify_led_event);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (Adapter->LEDInfo.led_thread_running & BCM_LED_THREAD_RUNNING_ACTIVELY) {
+=======
+	if (Adapter->LEDInfo.led_thread_running &
+			BCM_LED_THREAD_RUNNING_ACTIVELY) {
+>>>>>>> v3.18
 =======
 	if (Adapter->LEDInfo.led_thread_running &
 			BCM_LED_THREAD_RUNNING_ACTIVELY) {
@@ -267,6 +340,7 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 
 	/* Initialize the DDR Controller */
 	retval = ddr_init(Adapter);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (retval) {
 		BCM_DEBUG_PRINT (Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "DDR Init Failed\n");
@@ -290,6 +364,8 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 	if (retval)
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "configuration file not downloaded properly");
 =======
+=======
+>>>>>>> v3.18
 	if (retval)
 		return retval;
 
@@ -312,6 +388,9 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT,
 				MP_INIT, DBG_LVL_ALL,
 				"configuration file not downloaded properly");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		Adapter->bCfgDownloaded = TRUE;
@@ -320,7 +399,12 @@ static int bcm_download_config_file(struct bcm_mini_adapter *Adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter, struct bcm_firmware_info *psFwInfo)
+=======
+int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
+			struct bcm_firmware_info *psFwInfo)
+>>>>>>> v3.18
 =======
 int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
 			struct bcm_firmware_info *psFwInfo)
@@ -334,15 +418,21 @@ int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
 	 * Application
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&Adapter->uiMBupdate, FALSE);
 	if (!Adapter->bCfgDownloaded && psFwInfo->u32StartingAddress != CONFIG_BEGIN_ADDR) {
 		/* Can't Download Firmware. */
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Download the config File first\n");
 =======
+=======
+>>>>>>> v3.18
 	atomic_set(&Adapter->uiMBupdate, false);
 	if (!Adapter->bCfgDownloaded &&
 		psFwInfo->u32StartingAddress != CONFIG_BEGIN_ADDR) {
 		/* Can't Download Firmware. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -353,6 +443,7 @@ int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
 	} else {
 		buff = kzalloc(psFwInfo->u32FirmwareLength, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (buff == NULL) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Failed in allocation memory");
 			return -ENOMEM;
@@ -362,6 +453,8 @@ int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
 		if (retval != STATUS_SUCCESS) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "copying buffer from user space failed");
 =======
+=======
+>>>>>>> v3.18
 		if (buff == NULL)
 			return -ENOMEM;
 
@@ -369,6 +462,9 @@ int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
 			psFwInfo->pvMappedFirmwareAddress,
 			psFwInfo->u32FirmwareLength);
 		if (retval != STATUS_SUCCESS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			retval = -EFAULT;
 			goto error;
@@ -380,10 +476,15 @@ int bcm_ioctl_fw_download(struct bcm_mini_adapter *Adapter,
 					psFwInfo->u32StartingAddress);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retval != STATUS_SUCCESS) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "f/w download failed status :%d", retval);
 			goto error;
 		}
+=======
+		if (retval != STATUS_SUCCESS)
+			goto error;
+>>>>>>> v3.18
 =======
 		if (retval != STATUS_SUCCESS)
 			goto error;
@@ -396,11 +497,14 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static INT buffDnld(struct bcm_mini_adapter *Adapter, PUCHAR mappedbuffer, UINT u32FirmwareLength, ULONG u32StartingAddress)
 {
 	unsigned int len = 0;
 	int retval = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 static INT buffDnld(struct bcm_mini_adapter *Adapter,
 			PUCHAR mappedbuffer, UINT u32FirmwareLength,
 			ULONG u32StartingAddress)
@@ -408,6 +512,9 @@ static INT buffDnld(struct bcm_mini_adapter *Adapter,
 	unsigned int len = 0;
 	int retval = STATUS_SUCCESS;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	len = u32FirmwareLength;
 
@@ -416,10 +523,15 @@ static INT buffDnld(struct bcm_mini_adapter *Adapter,
 		retval = wrm(Adapter, u32StartingAddress, mappedbuffer, len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retval) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "wrm failed with status :%d", retval);
 			break;
 		}
+=======
+		if (retval)
+			break;
+>>>>>>> v3.18
 =======
 		if (retval)
 			break;
@@ -432,7 +544,13 @@ static INT buffDnld(struct bcm_mini_adapter *Adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static INT buffRdbkVerify(struct bcm_mini_adapter *Adapter, PUCHAR mappedbuffer, UINT u32FirmwareLength, ULONG u32StartingAddress)
+=======
+static INT buffRdbkVerify(struct bcm_mini_adapter *Adapter,
+			PUCHAR mappedbuffer, UINT u32FirmwareLength,
+			ULONG u32StartingAddress)
+>>>>>>> v3.18
 =======
 static INT buffRdbkVerify(struct bcm_mini_adapter *Adapter,
 			PUCHAR mappedbuffer, UINT u32FirmwareLength,
@@ -445,10 +563,15 @@ static INT buffRdbkVerify(struct bcm_mini_adapter *Adapter,
 	int bytes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (NULL == readbackbuff) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "MEMORY ALLOCATION FAILED");
 		return -ENOMEM;
 	}
+=======
+	if (NULL == readbackbuff)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (NULL == readbackbuff)
 		return -ENOMEM;
@@ -461,7 +584,10 @@ static INT buffRdbkVerify(struct bcm_mini_adapter *Adapter,
 		if (bytes < 0) {
 			retval = bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "rdm failed with status %d", retval);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break;
@@ -483,6 +609,7 @@ static INT buffRdbkVerify(struct bcm_mini_adapter *Adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 INT buffDnldVerify(struct bcm_mini_adapter *Adapter, unsigned char *mappedbuffer, unsigned int u32FirmwareLength, unsigned long u32StartingAddress)
 {
 	INT status = STATUS_SUCCESS;
@@ -499,6 +626,8 @@ INT buffDnldVerify(struct bcm_mini_adapter *Adapter, unsigned char *mappedbuffer
 		goto error;
 	}
 =======
+=======
+>>>>>>> v3.18
 INT buffDnldVerify(struct bcm_mini_adapter *Adapter,
 			unsigned char *mappedbuffer,
 			unsigned int u32FirmwareLength,
@@ -515,6 +644,9 @@ INT buffDnldVerify(struct bcm_mini_adapter *Adapter,
 			u32FirmwareLength, u32StartingAddress);
 	if (status != STATUS_SUCCESS)
 		goto error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error:
 	return status;

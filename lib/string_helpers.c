@@ -9,6 +9,11 @@
 #include <linux/export.h>
 #include <linux/ctype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/errno.h>
+#include <linux/string.h>
+>>>>>>> v3.18
 =======
 #include <linux/errno.h>
 #include <linux/string.h>
@@ -31,6 +36,7 @@ int string_get_size(u64 size, const enum string_size_units units,
 		    char *buf, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const char *units_10[] = { "B", "kB", "MB", "GB", "TB", "PB",
 				   "EB", "ZB", "YB", NULL};
 	static const char *units_2[] = {"B", "KiB", "MiB", "GiB", "TiB", "PiB",
@@ -38,6 +44,8 @@ int string_get_size(u64 size, const enum string_size_units units,
 	static const char **units_str[] = {
 		[STRING_UNITS_10] =  units_10,
 =======
+=======
+>>>>>>> v3.18
 	static const char *const units_10[] = {
 		"B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", NULL
 	};
@@ -47,6 +55,9 @@ int string_get_size(u64 size, const enum string_size_units units,
 	};
 	static const char *const *const units_str[] = {
 		[STRING_UNITS_10] = units_10,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		[STRING_UNITS_2] = units_2,
 	};
@@ -183,7 +194,10 @@ static bool unescape_special(char **src, char **dst)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * string_unescape - unquote characters in the given string
  * @src:	source buffer (escaped)
@@ -222,6 +236,9 @@ static bool unescape_special(char **src, char **dst)
  * The amount of the characters processed to the destination buffer excluding
  * trailing '\0' is returned.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int string_unescape(char *src, char *dst, size_t size, unsigned int flags)
 {
@@ -258,7 +275,10 @@ int string_unescape(char *src, char *dst, size_t size, unsigned int flags)
 }
 EXPORT_SYMBOL(string_unescape);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int escape_passthrough(unsigned char c, char **dst, size_t *osz)
 {
@@ -531,4 +551,7 @@ int string_escape_mem(const char *src, size_t isz, char **dst, size_t osz,
 	return p - out;
 }
 EXPORT_SYMBOL(string_escape_mem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

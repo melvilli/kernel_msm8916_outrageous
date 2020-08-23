@@ -24,7 +24,10 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -35,6 +38,7 @@
 #include "hda_jack.h"
 #include "hda_generic.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define NUM_PINS	11
 
@@ -573,6 +577,10 @@ static const struct hda_codec_ops cmi9880_patch_ops = {
 struct cmi_spec {
 	struct hda_gen_spec gen;
 >>>>>>> v3.18
+=======
+struct cmi_spec {
+	struct hda_gen_spec gen;
+>>>>>>> v3.18
 };
 
 /*
@@ -587,6 +595,7 @@ static const struct hda_codec_ops cmi_auto_patch_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cmi_parse_auto_config(struct hda_codec *codec)
 {
 	struct cmi_spec *spec = codec->spec;
@@ -594,6 +603,8 @@ static int cmi_parse_auto_config(struct hda_codec *codec)
 	int err;
 
 =======
+=======
+>>>>>>> v3.18
 static int patch_cmi9880(struct hda_codec *codec)
 {
 	struct cmi_spec *spec;
@@ -606,11 +617,15 @@ static int patch_cmi9880(struct hda_codec *codec)
 
 	codec->spec = spec;
 	cfg = &spec->gen.autocfg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_hda_gen_spec_init(&spec->gen);
 
 	err = snd_hda_parse_pin_defcfg(codec, cfg, NULL, 0);
 	if (err < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return err;
 	err = snd_hda_gen_parse_auto_config(codec, cfg);
@@ -694,6 +709,8 @@ static int patch_cmi9880(struct hda_codec *codec)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto error;
 	err = snd_hda_gen_parse_auto_config(codec, cfg);
 	if (err < 0)
@@ -750,6 +767,9 @@ static int patch_cmi8888(struct hda_codec *codec)
  error:
 	snd_hda_gen_free(codec);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -758,6 +778,10 @@ static int patch_cmi8888(struct hda_codec *codec)
  */
 static const struct hda_codec_preset snd_hda_preset_cmedia[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .id = 0x13f68888, .name = "CMI8888", .patch = patch_cmi8888 },
+>>>>>>> v3.18
 =======
 	{ .id = 0x13f68888, .name = "CMI8888", .patch = patch_cmi8888 },
 >>>>>>> v3.18
@@ -767,6 +791,10 @@ static const struct hda_codec_preset snd_hda_preset_cmedia[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("snd-hda-codec-id:13f68888");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("snd-hda-codec-id:13f68888");
 >>>>>>> v3.18

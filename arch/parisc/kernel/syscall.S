@@ -75,7 +75,11 @@ ENTRY(linux_gateway_page)
 	/* Light-weight-syscall entry must always be located at 0xb0 */
 	/* WARNING: Keep this number updated with table size changes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_lws_entries (2)
+=======
+#define __NR_lws_entries (3)
+>>>>>>> v3.18
 =======
 #define __NR_lws_entries (3)
 >>>>>>> v3.18
@@ -111,6 +115,11 @@ linux_gateway_entry:
 	mtsp	%r0,%sr5			/* get kernel space into sr5 */
 	mtsp	%r0,%sr6			/* get kernel space into sr6 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mfsp    %sr7,%r1                        /* save user sr7 */
+	mtsp    %r1,%sr3                        /* and store it in sr3 */
+>>>>>>> v3.18
 =======
 	mfsp    %sr7,%r1                        /* save user sr7 */
 	mtsp    %r1,%sr3                        /* and store it in sr3 */
@@ -141,6 +150,7 @@ linux_gateway_entry:
 1:	
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* We use a rsm/ssm pair to prevent sr3 from being clobbered
 	 * by external interrupts.
@@ -149,6 +159,8 @@ linux_gateway_entry:
 	rsm	PSW_SM_I, %r0			/* disable interrupts */
 	mtsp    %r1,%sr3                        /* and store it in sr3 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mfctl   %cr30,%r1
@@ -166,7 +178,10 @@ linux_gateway_entry:
 
 	mtsp	%r0,%sr7			/* get kernel space into sr7 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssm	PSW_SM_I, %r0			/* enable interrupts */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	STREGM	%r1,FRAME_SIZE(%r30)		/* save r1 (usp) here for now */
@@ -525,7 +540,11 @@ lws_exit:
 	
 	/***************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Implementing CAS as an atomic operation:
+=======
+		Implementing 32bit CAS as an atomic operation:
+>>>>>>> v3.18
 =======
 		Implementing 32bit CAS as an atomic operation:
 >>>>>>> v3.18
@@ -616,6 +635,11 @@ cas_nocontend:
 /* ENABLE_LWS_DEBUG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rsm	PSW_SM_I, %r0				/* Disable interrupts */
+	/* COW breaks can cause contention on UP systems */
+>>>>>>> v3.18
 =======
 	rsm	PSW_SM_I, %r0				/* Disable interrupts */
 	/* COW breaks can cause contention on UP systems */
@@ -625,6 +649,10 @@ cas_nocontend:
 cas_wouldblock:
 	ldo	2(%r0), %r28				/* 2nd case */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ssm	PSW_SM_I, %r0
+>>>>>>> v3.18
 =======
 	ssm	PSW_SM_I, %r0
 >>>>>>> v3.18
@@ -655,23 +683,34 @@ cas_action:
 #endif
 	/* The load and store could fail */
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	ldw	0(%sr3,%r26), %r28
 	sub,<>	%r28, %r25, %r0
 2:	stw	%r24, 0(%sr3,%r26)
 	/* Free lock */
 	stw	%r20, 0(%sr2,%r20)
 =======
+=======
+>>>>>>> v3.18
 1:	ldw,ma	0(%sr3,%r26), %r28
 	sub,<>	%r28, %r25, %r0
 2:	stw,ma	%r24, 0(%sr3,%r26)
 	/* Free lock */
 	stw,ma	%r20, 0(%sr2,%r20)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if ENABLE_LWS_DEBUG
 	/* Clear thread register indicator */
 	stw	%r0, 4(%sr2,%r20)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Enable interrupts */
+	ssm	PSW_SM_I, %r0
+>>>>>>> v3.18
 =======
 	/* Enable interrupts */
 	ssm	PSW_SM_I, %r0
@@ -688,6 +727,10 @@ cas_action:
 	stw	%r0, 4(%sr2,%r20)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ssm	PSW_SM_I, %r0
+>>>>>>> v3.18
 =======
 	ssm	PSW_SM_I, %r0
 >>>>>>> v3.18
@@ -702,12 +745,15 @@ cas_action:
 	   the other for the store. Either return -EFAULT.
 	   Each of the entries must be relocated. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.section __ex_table,"aw"
 	ASM_ULONG_INSN (1b - linux_gateway_page), (3b - linux_gateway_page)
 	ASM_ULONG_INSN (2b - linux_gateway_page), (3b - linux_gateway_page)
 	.previous
 
 =======
+=======
+>>>>>>> v3.18
 	ASM_EXCEPTIONTABLE_ENTRY(1b-linux_gateway_page, 3b-linux_gateway_page)
 	ASM_EXCEPTIONTABLE_ENTRY(2b-linux_gateway_page, 3b-linux_gateway_page)
 
@@ -935,6 +981,9 @@ cas2_end:
 	ASM_EXCEPTIONTABLE_ENTRY(12b-linux_gateway_page, 22b-linux_gateway_page)
 	ASM_EXCEPTIONTABLE_ENTRY(21b-linux_gateway_page, 22b-linux_gateway_page)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Make sure nothing else is placed on this page */
@@ -954,8 +1003,14 @@ ENTRY(end_linux_gateway_page)
 	/* Start of lws table. */
 ENTRY(lws_table)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LWS_ENTRY(compare_and_swap32)	/* 0 - ELF32 Atomic compare and swap */
 	LWS_ENTRY(compare_and_swap64)	/* 1 - ELF64 Atomic compare and swap */
+=======
+	LWS_ENTRY(compare_and_swap32)		/* 0 - ELF32 Atomic 32bit CAS */
+	LWS_ENTRY(compare_and_swap64)		/* 1 - ELF64 Atomic 32bit CAS */
+	LWS_ENTRY(compare_and_swap_2)		/* 2 - ELF32 Atomic 64bit CAS */
+>>>>>>> v3.18
 =======
 	LWS_ENTRY(compare_and_swap32)		/* 0 - ELF32 Atomic 32bit CAS */
 	LWS_ENTRY(compare_and_swap64)		/* 1 - ELF64 Atomic 32bit CAS */

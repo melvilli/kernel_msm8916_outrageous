@@ -89,9 +89,13 @@ ENDPROC(lclear_user)
 	.previous
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.section __ex_table,"aw"
 	ASM_ULONG_INSN 1b,2b
 	.previous
+=======
+	ASM_EXCEPTIONTABLE_ENTRY(1b,2b)
+>>>>>>> v3.18
 =======
 	ASM_EXCEPTIONTABLE_ENTRY(1b,2b)
 >>>>>>> v3.18
@@ -134,10 +138,15 @@ ENDPROC(lstrnlen_user)
 	.previous
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.section __ex_table,"aw"
 	ASM_ULONG_INSN 1b,3b
 	ASM_ULONG_INSN 2b,3b
 	.previous
+=======
+	ASM_EXCEPTIONTABLE_ENTRY(1b,3b)
+	ASM_EXCEPTIONTABLE_ENTRY(2b,3b)
+>>>>>>> v3.18
 =======
 	ASM_EXCEPTIONTABLE_ENTRY(1b,3b)
 	ASM_EXCEPTIONTABLE_ENTRY(2b,3b)

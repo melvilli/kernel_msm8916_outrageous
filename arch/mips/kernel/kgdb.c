@@ -33,6 +33,10 @@
 #include <asm/processor.h>
 #include <asm/sigcontext.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <asm/uaccess.h>
 >>>>>>> v3.18
@@ -213,8 +217,11 @@ void arch_kgdb_breakpoint(void)
 static void kgdb_call_nmi_hook(void *ignored)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kgdb_nmicallback(raw_smp_processor_id(), NULL);
 =======
+=======
+>>>>>>> v3.18
 	mm_segment_t old_fs;
 
 	old_fs = get_fs();
@@ -223,6 +230,9 @@ static void kgdb_call_nmi_hook(void *ignored)
 	kgdb_nmicallback(raw_smp_processor_id(), NULL);
 
 	set_fs(old_fs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -252,6 +262,12 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 {
 	int reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct thread_info *ti = task_thread_info(p);
+	unsigned long ksp = (unsigned long)ti + THREAD_SIZE - 32;
+	struct pt_regs *regs = (struct pt_regs *)ksp - 1;
+>>>>>>> v3.18
 =======
 	struct thread_info *ti = task_thread_info(p);
 	unsigned long ksp = (unsigned long)ti + THREAD_SIZE - 32;
@@ -265,6 +281,7 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 
 	for (reg = 0; reg < 16; reg++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*(ptr++) = 0;
 
 	/* S0 - S7 */
@@ -277,17 +294,23 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 	*(ptr++) = p->thread.reg22;
 	*(ptr++) = p->thread.reg23;
 =======
+=======
+>>>>>>> v3.18
 		*(ptr++) = regs->regs[reg];
 
 	/* S0 - S7 */
 	for (reg = 16; reg < 24; reg++)
 		*(ptr++) = regs->regs[reg];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (reg = 24; reg < 28; reg++)
 		*(ptr++) = 0;
 
 	/* GP, SP, FP, RA */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	*(ptr++) = (long)p;
 	*(ptr++) = p->thread.reg29;
@@ -314,6 +337,8 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 	 */
 	*(ptr++) = p->thread.reg31;
 =======
+=======
+>>>>>>> v3.18
 	for (reg = 28; reg < 32; reg++)
 		*(ptr++) = regs->regs[reg];
 
@@ -323,6 +348,9 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 	*(ptr++) = regs->cp0_badvaddr;
 	*(ptr++) = regs->cp0_cause;
 	*(ptr++) = regs->cp0_epc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -342,6 +370,10 @@ static int kgdb_mips_notify(struct notifier_block *self, unsigned long cmd,
 	struct pt_regs *regs = args->regs;
 	int trap = (regs->cp0_cause & 0x7c) >> 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mm_segment_t old_fs;
+>>>>>>> v3.18
 =======
 	mm_segment_t old_fs;
 >>>>>>> v3.18
@@ -360,12 +392,15 @@ static int kgdb_mips_notify(struct notifier_block *self, unsigned long cmd,
 		return NOTIFY_DONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_read(&kgdb_active) != -1)
 		kgdb_nmicallback(smp_processor_id(), regs);
 
 	if (kgdb_handle_exception(trap, compute_signal(trap), cmd, regs))
 		return NOTIFY_DONE;
 =======
+=======
+>>>>>>> v3.18
 	/* Kernel mode. Set correct address limit */
 	old_fs = get_fs();
 	set_fs(get_ds());
@@ -377,6 +412,9 @@ static int kgdb_mips_notify(struct notifier_block *self, unsigned long cmd,
 		set_fs(old_fs);
 		return NOTIFY_DONE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (atomic_read(&kgdb_setting_breakpoint))
@@ -388,6 +426,10 @@ static int kgdb_mips_notify(struct notifier_block *self, unsigned long cmd,
 	__flush_cache_all();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_fs(old_fs);
+>>>>>>> v3.18
 =======
 	set_fs(old_fs);
 >>>>>>> v3.18

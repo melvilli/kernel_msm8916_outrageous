@@ -74,6 +74,7 @@ static int ext4_sync_parent(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * __sync_file - generic_file_fsync without the locking and filemap_write
  * @inode:	inode to sync
@@ -102,6 +103,8 @@ static int __sync_inode(struct inode *inode, int datasync)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * akpm: A new design for ext4_sync_file().
  *
@@ -120,7 +123,11 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 	struct ext4_inode_info *ei = EXT4_I(inode);
 	journal_t *journal = EXT4_SB(inode->i_sb)->s_journal;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, err;
+=======
+	int ret = 0, err;
+>>>>>>> v3.18
 =======
 	int ret = 0, err;
 >>>>>>> v3.18
@@ -131,6 +138,7 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 
 	trace_ext4_sync_file_enter(file, datasync);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = filemap_write_and_wait_range(inode->i_mapping, start, end);
 	if (ret)
@@ -147,6 +155,8 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 	if (!journal) {
 		ret = __sync_inode(inode, datasync);
 =======
+=======
+>>>>>>> v3.18
 	if (inode->i_sb->s_flags & MS_RDONLY) {
 		/* Make sure that we read updated s_mount_flags value */
 		smp_rmb();
@@ -157,6 +167,9 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 
 	if (!journal) {
 		ret = generic_file_fsync(file, start, end, datasync);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!ret && !hlist_empty(&inode->i_dentry))
 			ret = ext4_sync_parent(inode);
@@ -164,6 +177,12 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ret = filemap_write_and_wait_range(inode->i_mapping, start, end);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = filemap_write_and_wait_range(inode->i_mapping, start, end);
 	if (ret)
@@ -199,8 +218,12 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 			ret = err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
  out:
 	mutex_unlock(&inode->i_mutex);
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18

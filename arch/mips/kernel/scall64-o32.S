@@ -54,7 +54,11 @@ NESTED(handle_sys, PT_SIZE, sp)
 
 	dsll	t0, v0, 3		# offset into table
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	t2, (sys_call_table - (__NR_O32_Linux * 8))(t0)
+=======
+	ld	t2, (sys32_call_table - (__NR_O32_Linux * 8))(t0)
+>>>>>>> v3.18
 =======
 	ld	t2, (sys32_call_table - (__NR_O32_Linux * 8))(t0)
 >>>>>>> v3.18
@@ -117,8 +121,11 @@ trace_a_syscall:
 	move	s0, t2			# Save syscall pointer
 	move	a0, sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal	syscall_trace_enter
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * absolute syscall number is in v0 unless we called syscall(__NR_###)
 	 * where the real syscall number is in a0
@@ -137,6 +144,9 @@ trace_a_syscall:
 1:	jal	syscall_trace_enter
 
 	bltz	v0, 2f			# seccomp failed? Skip syscall
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	move	t0, s0
@@ -162,7 +172,11 @@ trace_a_syscall:
 1:	sd	v0, PT_R2(sp)		# result
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j	syscall_exit
+=======
+2:	j	syscall_exit
+>>>>>>> v3.18
 =======
 2:	j	syscall_exit
 >>>>>>> v3.18
@@ -198,7 +212,11 @@ LEAF(sys32_syscall)
 	dsll	t1, t0, 3
 	beqz	v0, einval
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	t2, sys_call_table(t1)		# syscall routine
+=======
+	ld	t2, sys32_call_table(t1)		# syscall routine
+>>>>>>> v3.18
 =======
 	ld	t2, sys32_call_table(t1)		# syscall routine
 >>>>>>> v3.18
@@ -224,8 +242,13 @@ einval: li	v0, -ENOSYS
 
 	.align	3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.type	sys_call_table,@object
 sys_call_table:
+=======
+	.type	sys32_call_table,@object
+EXPORT(sys32_call_table)
+>>>>>>> v3.18
 =======
 	.type	sys32_call_table,@object
 EXPORT(sys32_call_table)
@@ -499,9 +522,15 @@ EXPORT(sys32_call_table)
 	PTR	sys_tgkill
 	PTR	compat_sys_utimes
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_ni_syscall			/* sys_mbind */
 	PTR	sys_ni_syscall			/* sys_get_mempolicy */
 	PTR	sys_ni_syscall			/* 4270 sys_set_mempolicy */
+=======
+	PTR	compat_sys_mbind
+	PTR	compat_sys_get_mempolicy
+	PTR	compat_sys_set_mempolicy	/* 4270 */
+>>>>>>> v3.18
 =======
 	PTR	compat_sys_mbind
 	PTR	compat_sys_get_mempolicy
@@ -519,7 +548,11 @@ EXPORT(sys32_call_table)
 	PTR	sys_add_key			/* 4280 */
 	PTR	sys_request_key
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	compat_sys_keyctl
+=======
+	PTR	sys_keyctl
+>>>>>>> v3.18
 =======
 	PTR	sys_keyctl
 >>>>>>> v3.18
@@ -528,7 +561,11 @@ EXPORT(sys32_call_table)
 	PTR	sys_inotify_add_watch		/* 4285 */
 	PTR	sys_inotify_rm_watch
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_migrate_pages
+=======
+	PTR	compat_sys_migrate_pages
+>>>>>>> v3.18
 =======
 	PTR	compat_sys_migrate_pages
 >>>>>>> v3.18
@@ -594,8 +631,11 @@ EXPORT(sys32_call_table)
 	PTR	sys_kcmp
 	PTR	sys_finit_module
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.size	sys_call_table,.-sys_call_table
 =======
+=======
+>>>>>>> v3.18
 	PTR	sys_sched_setattr
 	PTR	sys_sched_getattr		/* 4350 */
 	PTR	sys_renameat2
@@ -604,4 +644,7 @@ EXPORT(sys32_call_table)
 	PTR	sys_memfd_create
 	PTR	sys_bpf				/* 4355 */
 	.size	sys32_call_table,.-sys32_call_table
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -34,6 +34,11 @@
 				   MX3_CAMERA_DATAWIDTH_10 | MX3_CAMERA_DATAWIDTH_15)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct v4l2_async_subdev;
+
+>>>>>>> v3.18
 =======
 struct v4l2_async_subdev;
 
@@ -49,6 +54,11 @@ struct mx3_camera_pdata {
 	unsigned long mclk_10khz;
 	struct device *dma_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
+	int *asd_sizes;			/* 0-terminated array of asd group sizes */
+>>>>>>> v3.18
 =======
 	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
 	int *asd_sizes;			/* 0-terminated array of asd group sizes */

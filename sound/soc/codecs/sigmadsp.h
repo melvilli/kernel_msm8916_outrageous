@@ -13,7 +13,10 @@
 #include <linux/regmap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sigma_action {
 	u8 instr;
 	u8 len_hi;
@@ -34,6 +37,9 @@ struct sigma_firmware {
 int _process_sigma_firmware(struct device *dev,
 	struct sigma_firmware *ssfw, const char *name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct i2c_client;
 

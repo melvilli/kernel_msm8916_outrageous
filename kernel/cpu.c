@@ -20,8 +20,13 @@
 #include <linux/gfp.h>
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <trace/events/sched.h>
+=======
+#include <linux/lockdep.h>
+#include <trace/events/power.h>
+>>>>>>> v3.18
 =======
 #include <linux/lockdep.h>
 #include <trace/events/power.h>
@@ -70,22 +75,31 @@ static struct {
 	 */
 	int refcount;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* And allows lockless put_online_cpus(). */
 	atomic_t puts_pending;
 
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map dep_map;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } cpu_hotplug = {
 	.active_writer = NULL,
 	.lock = __MUTEX_INITIALIZER(cpu_hotplug.lock),
 	.refcount = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	.dep_map = {.name = "cpu_hotplug.lock" },
 #endif
@@ -98,12 +112,16 @@ static struct {
 #define cpuhp_lock_acquire()      lock_map_acquire(&cpu_hotplug.dep_map)
 #define cpuhp_lock_release()      lock_map_release(&cpu_hotplug.dep_map)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void get_online_cpus(void)
 {
 	might_sleep();
 	if (cpu_hotplug.active_writer == current)
 		return;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&cpu_hotplug.lock);
 	cpu_hotplug.refcount++;
@@ -113,6 +131,8 @@ void get_online_cpus(void)
 EXPORT_SYMBOL_GPL(get_online_cpus);
 
 =======
+=======
+>>>>>>> v3.18
 	cpuhp_lock_acquire_read();
 	mutex_lock(&cpu_hotplug.lock);
 	cpu_hotplug.refcount++;
@@ -133,19 +153,28 @@ bool try_get_online_cpus(void)
 }
 EXPORT_SYMBOL_GPL(try_get_online_cpus);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void put_online_cpus(void)
 {
 	if (cpu_hotplug.active_writer == current)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&cpu_hotplug.lock);
 =======
+=======
+>>>>>>> v3.18
 	if (!mutex_trylock(&cpu_hotplug.lock)) {
 		atomic_inc(&cpu_hotplug.puts_pending);
 		cpuhp_lock_release();
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (WARN_ON(!cpu_hotplug.refcount))
@@ -155,6 +184,10 @@ void put_online_cpus(void)
 		wake_up_process(cpu_hotplug.active_writer);
 	mutex_unlock(&cpu_hotplug.lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpuhp_lock_release();
+>>>>>>> v3.18
 =======
 	cpuhp_lock_release();
 >>>>>>> v3.18
@@ -185,6 +218,7 @@ EXPORT_SYMBOL_GPL(put_online_cpus);
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cpu_hotplug_begin(void)
 {
 	cpu_hotplug.active_writer = current;
@@ -192,6 +226,8 @@ static void cpu_hotplug_begin(void)
 	for (;;) {
 		mutex_lock(&cpu_hotplug.lock);
 =======
+=======
+>>>>>>> v3.18
 void cpu_hotplug_begin(void)
 {
 	cpu_hotplug.active_writer = current;
@@ -205,6 +241,9 @@ void cpu_hotplug_begin(void)
 			delta = atomic_xchg(&cpu_hotplug.puts_pending, 0);
 			cpu_hotplug.refcount -= delta;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (likely(!cpu_hotplug.refcount))
 			break;
@@ -215,16 +254,22 @@ void cpu_hotplug_begin(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cpu_hotplug_done(void)
 {
 	cpu_hotplug.active_writer = NULL;
 	mutex_unlock(&cpu_hotplug.lock);
 =======
+=======
+>>>>>>> v3.18
 void cpu_hotplug_done(void)
 {
 	cpu_hotplug.active_writer = NULL;
 	mutex_unlock(&cpu_hotplug.lock);
 	cpuhp_lock_release();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -250,10 +295,14 @@ void cpu_hotplug_enable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* #if CONFIG_HOTPLUG_CPU */
 static void cpu_hotplug_begin(void) {}
 static void cpu_hotplug_done(void) {}
 #endif	/* #else #if CONFIG_HOTPLUG_CPU */
+=======
+#endif	/* CONFIG_HOTPLUG_CPU */
+>>>>>>> v3.18
 =======
 #endif	/* CONFIG_HOTPLUG_CPU */
 >>>>>>> v3.18
@@ -290,6 +339,11 @@ static int cpu_notify(unsigned long val, void *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_HOTPLUG_CPU
+
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_HOTPLUG_CPU
 
@@ -316,7 +370,10 @@ void __ref __unregister_cpu_notifier(struct notifier_block *nb)
 EXPORT_SYMBOL(__unregister_cpu_notifier);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG_CPU
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -361,6 +418,7 @@ void clear_tasks_mm_cpumask(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void check_for_tasks(int cpu)
 {
 	struct task_struct *p;
@@ -378,6 +436,8 @@ static inline void check_for_tasks(int cpu)
 	}
 	write_unlock_irq(&tasklist_lock);
 =======
+=======
+>>>>>>> v3.18
 static inline void check_for_tasks(int dead_cpu)
 {
 	struct task_struct *g, *p;
@@ -400,6 +460,9 @@ static inline void check_for_tasks(int dead_cpu)
 			p->comm, task_pid_nr(p), dead_cpu, p->state, p->flags);
 	} while_each_thread(g, p);
 	read_unlock_irq(&tasklist_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -449,6 +512,7 @@ static int __ref _cpu_down(unsigned int cpu, int tasks_frozen)
 		nr_calls--;
 		__cpu_notify(CPU_DOWN_FAILED | mod, hcpu, nr_calls, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: attempt to take down CPU %u failed\n",
 				__func__, cpu);
 		goto out_release;
@@ -456,6 +520,8 @@ static int __ref _cpu_down(unsigned int cpu, int tasks_frozen)
 	smpboot_park_threads(cpu);
 
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("%s: attempt to take down CPU %u failed\n",
 			__func__, cpu);
 		goto out_release;
@@ -482,6 +548,9 @@ static int __ref _cpu_down(unsigned int cpu, int tasks_frozen)
 	 * So now all preempt/rcu users must observe !cpu_active().
 	 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = __stop_machine(take_cpu_down, &tcd_param, cpumask_of(cpu));
 	if (err) {
@@ -513,7 +582,10 @@ static int __ref _cpu_down(unsigned int cpu, int tasks_frozen)
 out_release:
 	cpu_hotplug_done();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_sched_cpu_hotplug(cpu, err, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!err)
@@ -543,7 +615,11 @@ EXPORT_SYMBOL(cpu_down);
 
 /* Requires cpu_add_remove_lock to be held */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit _cpu_up(unsigned int cpu, int tasks_frozen)
+=======
+static int _cpu_up(unsigned int cpu, int tasks_frozen)
+>>>>>>> v3.18
 =======
 static int _cpu_up(unsigned int cpu, int tasks_frozen)
 >>>>>>> v3.18
@@ -574,8 +650,13 @@ static int _cpu_up(unsigned int cpu, int tasks_frozen)
 	if (ret) {
 		nr_calls--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: attempt to bring up CPU %u failed\n",
 				__func__, cpu);
+=======
+		pr_warn("%s: attempt to bring up CPU %u failed\n",
+			__func__, cpu);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: attempt to bring up CPU %u failed\n",
 			__func__, cpu);
@@ -601,13 +682,17 @@ out_notify:
 out:
 	cpu_hotplug_done();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_sched_cpu_hotplug(cpu, ret, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __cpuinit cpu_up(unsigned int cpu)
 {
@@ -625,6 +710,8 @@ int __cpuinit cpu_up(unsigned int cpu)
 		printk(KERN_ERR "please check additional_cpus= boot "
 				"parameter\n");
 =======
+=======
+>>>>>>> v3.18
 int cpu_up(unsigned int cpu)
 {
 	int err = 0;
@@ -634,11 +721,15 @@ int cpu_up(unsigned int cpu)
 		       cpu);
 #if defined(CONFIG_IA64)
 		pr_err("please check additional_cpus= boot parameter\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef	CONFIG_MEMORY_HOTPLUG
 	nid = cpu_to_node(cpu);
@@ -661,6 +752,11 @@ int cpu_up(unsigned int cpu)
 		mutex_unlock(&zonelists_mutex);
 	}
 #endif
+=======
+	err = try_online_node(cpu_to_node(cpu));
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	err = try_online_node(cpu_to_node(cpu));
 	if (err)
@@ -698,6 +794,7 @@ int disable_nonboot_cpus(void)
 	cpumask_clear(frozen_cpus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Disabling non-boot CPUs ...\n");
 	for_each_online_cpu(cpu) {
 		if (cpu == first_cpu)
@@ -709,6 +806,8 @@ int disable_nonboot_cpus(void)
 			printk(KERN_ERR "Error taking CPU%d down: %d\n",
 				cpu, error);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("Disabling non-boot CPUs ...\n");
 	for_each_online_cpu(cpu) {
 		if (cpu == first_cpu)
@@ -720,6 +819,9 @@ int disable_nonboot_cpus(void)
 			cpumask_set_cpu(cpu, frozen_cpus);
 		else {
 			pr_err("Error taking CPU%d down: %d\n", cpu, error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -731,7 +833,11 @@ int disable_nonboot_cpus(void)
 		cpu_hotplug_disabled = 1;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Non-boot CPUs are not disabled\n");
+=======
+		pr_err("Non-boot CPUs are not disabled\n");
+>>>>>>> v3.18
 =======
 		pr_err("Non-boot CPUs are not disabled\n");
 >>>>>>> v3.18
@@ -759,7 +865,11 @@ void __ref enable_nonboot_cpus(void)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Enabling non-boot CPUs ...\n");
+=======
+	pr_info("Enabling non-boot CPUs ...\n");
+>>>>>>> v3.18
 =======
 	pr_info("Enabling non-boot CPUs ...\n");
 >>>>>>> v3.18
@@ -768,6 +878,7 @@ void __ref enable_nonboot_cpus(void)
 
 	for_each_cpu(cpu, frozen_cpus) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = _cpu_up(cpu, 1);
 		if (!error) {
 			printk(KERN_INFO "CPU%d is up\n", cpu);
@@ -775,6 +886,8 @@ void __ref enable_nonboot_cpus(void)
 		}
 		printk(KERN_WARNING "Error taking CPU%d up: %d\n", cpu, error);
 =======
+=======
+>>>>>>> v3.18
 		trace_suspend_resume(TPS("CPU_ON"), cpu, true);
 		error = _cpu_up(cpu, 1);
 		trace_suspend_resume(TPS("CPU_ON"), cpu, false);
@@ -783,6 +896,9 @@ void __ref enable_nonboot_cpus(void)
 			continue;
 		}
 		pr_warn("Error taking CPU%d up: %d\n", cpu, error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -859,7 +975,11 @@ core_initcall(cpu_hotplug_pm_sync_init);
  * enables interrupts and before the "boot" cpu returns from __cpu_up().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit notify_cpu_starting(unsigned int cpu)
+=======
+void notify_cpu_starting(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void notify_cpu_starting(unsigned int cpu)
 >>>>>>> v3.18
@@ -973,6 +1093,7 @@ void init_cpu_online(const struct cpumask *src)
 	cpumask_copy(to_cpumask(cpu_online_bits), src);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ATOMIC_NOTIFIER_HEAD(idle_notifier);
 
@@ -993,5 +1114,7 @@ void idle_notifier_call_chain(unsigned long val)
 	atomic_notifier_call_chain(&idle_notifier, val, NULL);
 }
 EXPORT_SYMBOL_GPL(idle_notifier_call_chain);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

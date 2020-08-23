@@ -20,6 +20,10 @@
  * Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
  * Alexander Smirnov <alex.bluesman.smirnov@gmail.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Alexander Aring <aar@pengutronix.de>
+>>>>>>> v3.18
 =======
  * Alexander Aring <aar@pengutronix.de>
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/delay.h>
@@ -59,6 +64,8 @@ struct at86rf230_local {
 	bool irq_busy;
 	bool is_tx;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irq.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
@@ -130,6 +137,9 @@ struct at86rf230_local {
 	struct completion tx_complete;
 	struct sk_buff *tx_skb;
 	struct at86rf230_state_change tx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -179,12 +189,18 @@ struct at86rf230_local {
 #define	RG_TRX_CTRL_2	(0x0c)
 #define	SR_OQPSK_DATA_RATE	0x0c, 0x03, 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	SR_RESERVED_0c_2	0x0c, 0x7c, 2
 =======
+=======
+>>>>>>> v3.18
 #define	SR_SUB_MODE		0x0c, 0x04, 2
 #define	SR_BPSK_QPSK		0x0c, 0x08, 3
 #define	SR_OQPSK_SUB1_RC_EN	0x0c, 0x10, 4
 #define	SR_RESERVED_0c_5	0x0c, 0x60, 5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	SR_RX_SAFE_MODE		0x0c, 0x80, 7
 #define	RG_ANT_DIV	(0x0d)
@@ -231,7 +247,11 @@ struct at86rf230_local {
 #define	SR_AACK_UPLD_RES_FT	0x17, 0x10, 4
 #define	SR_AACK_FLTR_RES_FT	0x17, 0x20, 5
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	SR_RESERVED_17_2	0x17, 0x40, 6
+=======
+#define	SR_CSMA_LBT_MODE	0x17, 0x40, 6
+>>>>>>> v3.18
 =======
 #define	SR_CSMA_LBT_MODE	0x17, 0x40, 6
 >>>>>>> v3.18
@@ -324,6 +344,10 @@ struct at86rf230_local {
 /* 0x0a - 0x0e */			/* 0x0a - UNSUPPORTED_ATTRIBUTE */
 #define STATE_SLEEP		0x0F
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define STATE_PREP_DEEP_SLEEP	0x10
+>>>>>>> v3.18
 =======
 #define STATE_PREP_DEEP_SLEEP	0x10
 >>>>>>> v3.18
@@ -336,6 +360,7 @@ struct at86rf230_local {
 #define STATE_BUSY_RX_AACK_NOCLK 0x1E
 #define STATE_TRANSITION_IN_PROGRESS 0x1F
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 __at86rf230_write(struct at86rf230_local *lp, u8 addr, u8 data)
@@ -715,6 +740,8 @@ err:
 	kfree_skb(skb);
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 #define AT86RF2XX_NUMREGS 0x3F
 
 static int
@@ -1515,6 +1542,9 @@ at86rf230_channel(struct ieee802154_dev *dev, int page, int channel)
 	dev->phy->current_page = page;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1526,6 +1556,7 @@ at86rf230_set_hw_addr_filt(struct ieee802154_dev *dev,
 	struct at86rf230_local *lp = dev->priv;
 
 	if (changed & IEEE802515_AFILT_SADDR_CHANGED) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_vdbg(&lp->spi->dev,
 			"at86rf230_set_hw_addr_filt called for saddr\n");
@@ -1552,6 +1583,8 @@ at86rf230_set_hw_addr_filt(struct ieee802154_dev *dev,
 		at86rf230_write_subreg(lp, SR_IEEE_ADDR_6, filt->ieee_addr[1]);
 		at86rf230_write_subreg(lp, SR_IEEE_ADDR_7, filt->ieee_addr[0]);
 =======
+=======
+>>>>>>> v3.18
 		u16 addr = le16_to_cpu(filt->short_addr);
 
 		dev_vdbg(&lp->spi->dev,
@@ -1577,6 +1610,9 @@ at86rf230_set_hw_addr_filt(struct ieee802154_dev *dev,
 			"at86rf230_set_hw_addr_filt called for IEEE addr\n");
 		for (i = 0; i < 8; i++)
 			__at86rf230_write(lp, RG_IEEE_ADDR_0 + i, addr[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1592,6 +1628,7 @@ at86rf230_set_hw_addr_filt(struct ieee802154_dev *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct ieee802154_ops at86rf230_ops = {
 	.owner = THIS_MODULE,
@@ -1702,6 +1739,8 @@ static int at86rf230_hw_init(struct at86rf230_local *lp)
 
 	rc = at86rf230_irq_polarity(lp, irq_pol);
 =======
+=======
+>>>>>>> v3.18
 static int
 at86rf230_set_txpower(struct ieee802154_dev *dev, int db)
 {
@@ -1882,6 +1921,9 @@ static int at86rf230_hw_init(struct at86rf230_local *lp)
 		return rc;
 
 	rc = at86rf230_write_subreg(lp, SR_RX_SAFE_MODE, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		return rc;
@@ -1891,7 +1933,10 @@ static int at86rf230_hw_init(struct at86rf230_local *lp)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	get_random_bytes(csma_seed, ARRAY_SIZE(csma_seed));
 	rc = at86rf230_write_subreg(lp, SR_CSMA_SEED_0, csma_seed[0]);
 	if (rc)
@@ -1900,6 +1945,9 @@ static int at86rf230_hw_init(struct at86rf230_local *lp)
 	if (rc)
 		return rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* CLKM changes are applied immediately */
 	rc = at86rf230_write_subreg(lp, SR_CLKM_SHA_SEL, 0x00);
@@ -1911,6 +1959,7 @@ static int at86rf230_hw_init(struct at86rf230_local *lp)
 	if (rc)
 		return rc;
 	/* Wait the next SLEEP cycle */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	msleep(100);
 
@@ -1952,6 +2001,8 @@ static void at86rf230_fill_data(struct spi_device *spi)
 	lp->slp_tr = pdata->slp_tr;
 	lp->dig2 = pdata->dig2;
 =======
+=======
+>>>>>>> v3.18
 	usleep_range(lp->data->t_sleep_cycle,
 		     lp->data->t_sleep_cycle + 100);
 
@@ -2082,6 +2133,9 @@ at86rf230_setup_spi_messages(struct at86rf230_local *lp)
 	lp->tx.trx.tx_buf = lp->tx.buf;
 	lp->tx.trx.rx_buf = lp->tx.buf;
 	spi_message_add_tail(&lp->tx.trx, &lp->tx.msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2091,11 +2145,16 @@ static int at86rf230_probe(struct spi_device *spi)
 	struct ieee802154_dev *dev;
 	struct at86rf230_local *lp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 man_id_0, man_id_1, status;
 	irq_handler_t irq_handler;
 	work_func_t irq_worker;
 	int rc, supported = 0;
 	const char *chip;
+=======
+	unsigned int status;
+	int rc, irq_type;
+>>>>>>> v3.18
 =======
 	unsigned int status;
 	int rc, irq_type;
@@ -2107,7 +2166,11 @@ static int at86rf230_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = at86rf230_get_pdata(spi);
+>>>>>>> v3.18
 =======
 	pdata = at86rf230_get_pdata(spi);
 >>>>>>> v3.18
@@ -2116,6 +2179,7 @@ static int at86rf230_probe(struct spi_device *spi)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev = ieee802154_alloc_device(sizeof(*lp), &at86rf230_ops);
 	if (!dev)
@@ -2228,6 +2292,8 @@ static int at86rf230_probe(struct spi_device *spi)
 	if (rc)
 		goto err_gpio_dir;
 =======
+=======
+>>>>>>> v3.18
 	if (gpio_is_valid(pdata->rstn)) {
 		rc = devm_gpio_request_one(&spi->dev, pdata->rstn,
 					   GPIOF_OUT_INIT_HIGH, "rstn");
@@ -2283,11 +2349,15 @@ static int at86rf230_probe(struct spi_device *spi)
 	rc = at86rf230_hw_init(lp);
 	if (rc)
 		goto free_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Read irq status register to reset irq line */
 	rc = at86rf230_read_subreg(lp, RG_IRQ_STATUS, 0xff, 0, &status);
 	if (rc)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_irq;
 
@@ -2310,6 +2380,8 @@ err_rstn:
 	mutex_destroy(&lp->bmux);
 	ieee802154_free_device(lp->dev);
 =======
+=======
+>>>>>>> v3.18
 		goto free_dev;
 
 	irq_type = irq_get_trigger_type(spi->irq);
@@ -2330,6 +2402,9 @@ err_rstn:
 free_dev:
 	ieee802154_free_device(lp->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -2338,6 +2413,7 @@ static int at86rf230_remove(struct spi_device *spi)
 {
 	struct at86rf230_local *lp = spi_get_drvdata(spi);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ieee802154_unregister_device(lp->dev);
 
@@ -2359,6 +2435,8 @@ static int at86rf230_remove(struct spi_device *spi)
 static struct spi_driver at86rf230_driver = {
 	.driver = {
 =======
+=======
+>>>>>>> v3.18
 	/* mask all at86rf230 irq's */
 	at86rf230_write_subreg(lp, SR_IRQ_MASK, 0);
 	ieee802154_unregister_device(lp->dev);
@@ -2390,6 +2468,9 @@ static struct spi_driver at86rf230_driver = {
 	.id_table = at86rf230_device_id,
 	.driver = {
 		.of_match_table = of_match_ptr(at86rf230_of_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name	= "at86rf230",
 		.owner	= THIS_MODULE,

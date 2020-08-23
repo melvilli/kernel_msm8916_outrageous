@@ -2,7 +2,11 @@
 #define __PERF_SESSION_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hist.h"
+=======
+#include "trace-event.h"
+>>>>>>> v3.18
 =======
 #include "trace-event.h"
 >>>>>>> v3.18
@@ -11,6 +15,7 @@
 #include "machine.h"
 #include "symbol.h"
 #include "thread.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/rbtree.h>
 #include <linux/perf_event.h>
@@ -65,6 +70,8 @@ int perf_session__process_events(struct perf_session *self,
 
 int perf_session__resolve_callchain(struct perf_session *self, struct perf_evsel *evsel,
 =======
+=======
+>>>>>>> v3.18
 #include "data.h"
 #include "ordered-events.h"
 #include <linux/rbtree.h>
@@ -126,11 +133,15 @@ int perf_session__deliver_event(struct perf_session *session,
 
 int perf_session__resolve_callchain(struct perf_session *session,
 				    struct perf_evsel *evsel,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    struct thread *thread,
 				    struct ip_callchain *chain,
 				    struct symbol **parent);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool perf_session__has_traces(struct perf_session *self, const char *msg);
 
@@ -140,16 +151,22 @@ void perf_event__attr_swap(struct perf_event_attr *attr);
 
 int perf_session__create_kernel_maps(struct perf_session *self);
 =======
+=======
+>>>>>>> v3.18
 bool perf_session__has_traces(struct perf_session *session, const char *msg);
 
 void perf_event__attr_swap(struct perf_event_attr *attr);
 
 int perf_session__create_kernel_maps(struct perf_session *session);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void perf_session__set_id_hdr_size(struct perf_session *session);
 
 static inline
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct machine *perf_session__find_machine(struct perf_session *self, pid_t pid)
 {
@@ -167,6 +184,8 @@ size_t perf_session__fprintf(struct perf_session *self, FILE *fp);
 
 size_t perf_session__fprintf_dsos(struct perf_session *self, FILE *fp);
 =======
+=======
+>>>>>>> v3.18
 struct machine *perf_session__find_machine(struct perf_session *session, pid_t pid)
 {
 	return machines__find(&session->machines, pid);
@@ -182,6 +201,9 @@ struct thread *perf_session__findnew(struct perf_session *session, pid_t pid);
 size_t perf_session__fprintf(struct perf_session *session, FILE *fp);
 
 size_t perf_session__fprintf_dsos(struct perf_session *session, FILE *fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 size_t perf_session__fprintf_dsos_buildid(struct perf_session *session, FILE *fp,
@@ -193,9 +215,15 @@ struct perf_evsel *perf_session__find_first_evtype(struct perf_session *session,
 					    unsigned int type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void perf_evsel__print_ip(struct perf_evsel *evsel, union perf_event *event,
 			  struct perf_sample *sample, struct machine *machine,
 			  int print_sym, int print_dso, int print_symoffset);
+=======
+void perf_evsel__print_ip(struct perf_evsel *evsel, struct perf_sample *sample,
+			  struct addr_location *al,
+			  unsigned int print_opts, unsigned int stack_depth);
+>>>>>>> v3.18
 =======
 void perf_evsel__print_ip(struct perf_evsel *evsel, struct perf_sample *sample,
 			  struct addr_location *al,
@@ -216,10 +244,16 @@ int __perf_session__set_tracepoints_handlers(struct perf_session *session,
 #define perf_session__set_tracepoints_handlers(session, array) \
 	__perf_session__set_tracepoints_handlers(session, array, ARRAY_SIZE(array))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 extern volatile int session_done;
 
 #define session_done()	ACCESS_ONCE(session_done)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PERF_SESSION_H */

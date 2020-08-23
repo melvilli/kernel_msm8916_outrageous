@@ -2,7 +2,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum tveeprom_audio_processor {
 	/* No audio processor present */
 	TVEEPROM_AUDPROC_NONE,
@@ -16,6 +19,9 @@ enum tveeprom_audio_processor {
 
 #include <linux/if_ether.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tveeprom {
 	u32 has_radio;
@@ -46,7 +52,11 @@ struct tveeprom {
 	u32 serial_number;
 	char rev_str[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 MAC_address[6];
+=======
+	u8 MAC_address[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8 MAC_address[ETH_ALEN];
 >>>>>>> v3.18

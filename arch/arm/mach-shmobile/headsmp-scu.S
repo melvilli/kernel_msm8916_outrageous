@@ -24,9 +24,14 @@
 #include <asm/memory.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 /*
  * Reset vector for secondary CPUs.
+=======
+/*
+ * Boot code for secondary CPUs.
+>>>>>>> v3.18
 =======
 /*
  * Boot code for secondary CPUs.
@@ -35,6 +40,7 @@
  * First we turn on L1 cache coherency for our CPU. Then we jump to
  * shmobile_invalidate_start that invalidates the cache and hands over control
  * to the common ARM startup code.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This function will be mapped to address 0 by the SBAR register.
  * A normal branch is out of range here so we need a long jump. We jump to
@@ -59,6 +65,8 @@ ENDPROC(shmobile_secondary_vector_scu)
 
 	.text
 =======
+=======
+>>>>>>> v3.18
  */
 ENTRY(shmobile_boot_scu)
 					@ r0 = SCU base address
@@ -76,6 +84,9 @@ ENDPROC(shmobile_boot_scu)
 
 	.text
 	.align	2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.globl	shmobile_scu_base
 shmobile_scu_base:

@@ -65,15 +65,21 @@ static void icp_deliver_irq(struct kvmppc_xics *xics, struct kvmppc_icp *icp,
 			    u32 new_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ics_deliver_irq(struct kvmppc_xics *xics, u32 irq, u32 level,
 			   bool report_status)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return value ideally indicates how the interrupt was handled, but no
  * callers look at it (given that we don't implement KVM_IRQ_LINE_STATUS),
  * so just return 0.
  */
 static int ics_deliver_irq(struct kvmppc_xics *xics, u32 irq, u32 level)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ics_irq_state *state;
@@ -92,9 +98,12 @@ static int ics_deliver_irq(struct kvmppc_xics *xics, u32 irq, u32 level)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (report_status)
 		return state->asserted;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -103,9 +112,15 @@ static int ics_deliver_irq(struct kvmppc_xics *xics, u32 irq, u32 level)
 	 * to begin with.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (level == KVM_INTERRUPT_SET_LEVEL)
 		state->asserted = 1;
 	else if (level == KVM_INTERRUPT_UNSET) {
+=======
+	if (level == 1 || level == KVM_INTERRUPT_SET_LEVEL)
+		state->asserted = 1;
+	else if (level == 0 || level == KVM_INTERRUPT_UNSET) {
+>>>>>>> v3.18
 =======
 	if (level == 1 || level == KVM_INTERRUPT_SET_LEVEL)
 		state->asserted = 1;
@@ -119,7 +134,11 @@ static int ics_deliver_irq(struct kvmppc_xics *xics, u32 irq, u32 level)
 	icp_deliver_irq(xics, NULL, irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->asserted;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -795,6 +814,11 @@ static noinline int kvmppc_h_eoi(struct kvm_vcpu *vcpu, unsigned long xirr)
 		icp_deliver_irq(xics, icp, irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvm_notify_acked_irq(vcpu->kvm, 0, irq);
+
+>>>>>>> v3.18
 =======
 	kvm_notify_acked_irq(vcpu->kvm, 0, irq);
 
@@ -817,6 +841,11 @@ static noinline int kvmppc_xics_rm_complete(struct kvm_vcpu *vcpu, u32 hcall)
 	if (icp->rm_action & XICS_RM_REJECT)
 		icp_deliver_irq(xics, icp, icp->rm_reject);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (icp->rm_action & XICS_RM_NOTIFY_EOI)
+		kvm_notify_acked_irq(vcpu->kvm, 0, icp->rm_eoied_irq);
+>>>>>>> v3.18
 =======
 	if (icp->rm_action & XICS_RM_NOTIFY_EOI)
 		kvm_notify_acked_irq(vcpu->kvm, 0, icp->rm_eoied_irq);
@@ -851,7 +880,11 @@ int kvmppc_xics_hcall(struct kvm_vcpu *vcpu, u32 req)
 
 	/* Check for real mode returning too hard */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xics->real_mode)
+=======
+	if (xics->real_mode && is_kvmppc_hv_enabled(vcpu->kvm))
+>>>>>>> v3.18
 =======
 	if (xics->real_mode && is_kvmppc_hv_enabled(vcpu->kvm))
 >>>>>>> v3.18
@@ -877,6 +910,10 @@ int kvmppc_xics_hcall(struct kvm_vcpu *vcpu, u32 req)
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvmppc_xics_hcall);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvmppc_xics_hcall);
 >>>>>>> v3.18
@@ -1210,8 +1247,11 @@ int kvm_set_irq(struct kvm *kvm, int irq_source_id, u32 irq, int level,
 	struct kvmppc_xics *xics = kvm->arch.xics;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ics_deliver_irq(xics, irq, level, line_status);
 =======
+=======
+>>>>>>> v3.18
 	return ics_deliver_irq(xics, irq, level);
 }
 
@@ -1222,6 +1262,9 @@ int kvm_set_msi(struct kvm_kernel_irq_routing_entry *irq_entry, struct kvm *kvm,
 		return -1;
 	return kvm_set_irq(kvm, irq_source_id, irq_entry->gsi,
 			   level, line_status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1299,6 +1342,7 @@ static int kvmppc_xics_create(struct kvm_device *dev, u32 type)
 	mutex_unlock(&kvm->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		return ret;
 
@@ -1306,6 +1350,8 @@ static int kvmppc_xics_create(struct kvm_device *dev, u32 type)
 
 #ifdef CONFIG_KVM_BOOK3S_64_HV
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		kfree(xics);
 		return ret;
@@ -1314,6 +1360,9 @@ static int kvmppc_xics_create(struct kvm_device *dev, u32 type)
 	xics_debugfs_init(xics);
 
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpu_has_feature(CPU_FTR_ARCH_206)) {
 		/* Enable real mode support */
@@ -1321,7 +1370,11 @@ static int kvmppc_xics_create(struct kvm_device *dev, u32 type)
 		xics->real_mode_dbg = DEBUG_REALMODE;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_KVM_BOOK3S_64_HV */
+=======
+#endif /* CONFIG_KVM_BOOK3S_HV_POSSIBLE */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_KVM_BOOK3S_HV_POSSIBLE */
 >>>>>>> v3.18
@@ -1367,7 +1420,10 @@ void kvmppc_xics_free_icp(struct kvm_vcpu *vcpu)
 	vcpu->arch.irq_type = KVMPPC_IRQ_DEFAULT;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int xics_set_irq(struct kvm_kernel_irq_routing_entry *e,
 			struct kvm *kvm, int irq_source_id, int level,
@@ -1391,4 +1447,7 @@ int kvm_irq_map_chip_pin(struct kvm *kvm, unsigned irqchip, unsigned pin)
 {
 	return pin;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

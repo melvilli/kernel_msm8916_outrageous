@@ -187,7 +187,11 @@ static void __iomem *_sparc_alloc_io(unsigned int busno, unsigned long phys,
 	if (name == NULL) name = "???";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((xres = xres_alloc()) != 0) {
+=======
+	if ((xres = xres_alloc()) != NULL) {
+>>>>>>> v3.18
 =======
 	if ((xres = xres_alloc()) != NULL) {
 >>>>>>> v3.18
@@ -283,7 +287,12 @@ static void *sbus_alloc_coherent(struct device *dev, size_t len,
 
 	order = get_order(len_total);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((va = __get_free_pages(GFP_KERNEL|__GFP_COMP, order)) == 0)
+=======
+	va = __get_free_pages(gfp, order);
+	if (va == 0)
+>>>>>>> v3.18
 =======
 	va = __get_free_pages(gfp, order);
 	if (va == 0)
@@ -410,7 +419,11 @@ static void sbus_sync_sg_for_device(struct device *dev, struct scatterlist *sg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_map_ops sbus_dma_ops = {
+=======
+static struct dma_map_ops sbus_dma_ops = {
+>>>>>>> v3.18
 =======
 static struct dma_map_ops sbus_dma_ops = {
 >>>>>>> v3.18
@@ -457,7 +470,11 @@ static void *pci32_alloc_coherent(struct device *dev, size_t len,
 
 	order = get_order(len_total);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	va = (void *) __get_free_pages(GFP_KERNEL, order);
+=======
+	va = (void *) __get_free_pages(gfp, order);
+>>>>>>> v3.18
 =======
 	va = (void *) __get_free_pages(gfp, order);
 >>>>>>> v3.18
@@ -684,10 +701,16 @@ EXPORT_SYMBOL(dma_ops);
 int dma_supported(struct device *dev, u64 mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 	if (dev->bus == &pci_bus_type)
 		return 1;
 #endif
+=======
+	if (dev_is_pci(dev))
+		return 1;
+
+>>>>>>> v3.18
 =======
 	if (dev_is_pci(dev))
 		return 1;
@@ -706,7 +729,11 @@ static int sparc_io_proc_show(struct seq_file *m, void *v)
 
 	for (r = root->child; r != NULL; r = r->sibling) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((nm = r->name) == 0) nm = "???";
+=======
+		if ((nm = r->name) == NULL) nm = "???";
+>>>>>>> v3.18
 =======
 		if ((nm = r->name) == NULL) nm = "???";
 >>>>>>> v3.18

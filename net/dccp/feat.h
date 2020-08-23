@@ -108,6 +108,7 @@ extern int	     sysctl_dccp_rx_ccid;
 extern int	     sysctl_dccp_tx_ccid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  dccp_feat_init(struct sock *sk);
 extern void dccp_feat_initialise_sysctls(void);
 extern int  dccp_feat_register_sp(struct sock *sk, u8 feat, u8 is_local,
@@ -116,6 +117,8 @@ extern int  dccp_feat_parse_options(struct sock *, struct dccp_request_sock *,
 				    u8 mand, u8 opt, u8 feat, u8 *val, u8 len);
 extern int  dccp_feat_clone_list(struct list_head const *, struct list_head *);
 =======
+=======
+>>>>>>> v3.18
 int dccp_feat_init(struct sock *sk);
 void dccp_feat_initialise_sysctls(void);
 int dccp_feat_register_sp(struct sock *sk, u8 feat, u8 is_local,
@@ -123,6 +126,9 @@ int dccp_feat_register_sp(struct sock *sk, u8 feat, u8 is_local,
 int dccp_feat_parse_options(struct sock *, struct dccp_request_sock *,
 			    u8 mand, u8 opt, u8 feat, u8 *val, u8 len);
 int dccp_feat_clone_list(struct list_head const *, struct list_head *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -138,6 +144,7 @@ int dccp_feat_clone_list(struct list_head const *, struct list_head *);
 #define DCCP_OPTVAL_MAXLEN	6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dccp_encode_value_var(const u64 value, u8 *to, const u8 len);
 extern u64  dccp_decode_value_var(const u8 *bf, const u8 len);
 extern u64  dccp_feat_nn_get(struct sock *sk, u8 feat);
@@ -146,6 +153,8 @@ extern int  dccp_insert_option_mandatory(struct sk_buff *skb);
 extern int  dccp_insert_fn_opt(struct sk_buff *skb, u8 type, u8 feat,
 			       u8 *val, u8 len, bool repeat_first);
 =======
+=======
+>>>>>>> v3.18
 void dccp_encode_value_var(const u64 value, u8 *to, const u8 len);
 u64 dccp_decode_value_var(const u8 *bf, const u8 len);
 u64 dccp_feat_nn_get(struct sock *sk, u8 feat);
@@ -153,5 +162,8 @@ u64 dccp_feat_nn_get(struct sock *sk, u8 feat);
 int dccp_insert_option_mandatory(struct sk_buff *skb);
 int dccp_insert_fn_opt(struct sk_buff *skb, u8 type, u8 feat, u8 *val, u8 len,
 		       bool repeat_first);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _DCCP_FEAT_H */

@@ -25,7 +25,10 @@ config MSPRO_BLOCK
 	  to mount the filesystem. Almost everyone wishing MemoryStick
 	  support should say Y or M here.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config MS_BLOCK
 	tristate "MemoryStick Standard device driver"
@@ -38,4 +41,7 @@ config MS_BLOCK
 	  but not PRO. Say Y if you have such card.
 	  Driver is new and not yet well tested, thus it can damage your card
 	  (even permanently)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

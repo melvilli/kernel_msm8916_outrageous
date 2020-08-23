@@ -58,6 +58,10 @@
 #include "ni_reg.h"
 #include "si_reg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cik_reg.h"
+>>>>>>> v3.18
 =======
 #include "cik_reg.h"
 >>>>>>> v3.18

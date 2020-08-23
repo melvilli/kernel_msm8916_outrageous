@@ -26,10 +26,15 @@
 #include <linux/slab.h>
 #include <linux/power_supply.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/video.h>
 
+=======
+#include <linux/vga_switcheroo.h>
+#include <acpi/video.h>
+>>>>>>> v3.18
 =======
 #include <linux/vga_switcheroo.h>
 #include <acpi/video.h>
@@ -41,8 +46,11 @@
 #include "atom.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vga_switcheroo.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ACPI_AC_CLASS           "ac_adapter"
@@ -87,7 +95,10 @@ struct atcs_verify_interface {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ATCS_VALID_FLAGS_MASK	0x3
 
 struct atcs_pref_req_input {
@@ -104,6 +115,9 @@ struct atcs_pref_req_output {
 	u8 ret_val;		/* return value */
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Call the ATIF method
  */
@@ -381,7 +395,11 @@ int radeon_atif_handler(struct radeon_device *rdev,
 
 	/* Check pending SBIOS requests */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&rdev->pdev->dev);
+=======
+	handle = ACPI_HANDLE(&rdev->pdev->dev);
+>>>>>>> v3.18
 =======
 	handle = ACPI_HANDLE(&rdev->pdev->dev);
 >>>>>>> v3.18
@@ -538,7 +556,10 @@ out:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * radeon_acpi_is_pcie_performance_request_supported
  *
  * @rdev: radeon_device pointer
@@ -668,6 +689,9 @@ int radeon_acpi_pcie_performance_request(struct radeon_device *rdev,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * radeon_acpi_event - handle notify events
  *
@@ -718,7 +742,11 @@ int radeon_acpi_init(struct radeon_device *rdev)
 
 	/* Get the device handle */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&rdev->pdev->dev);
+=======
+	handle = ACPI_HANDLE(&rdev->pdev->dev);
+>>>>>>> v3.18
 =======
 	handle = ACPI_HANDLE(&rdev->pdev->dev);
 >>>>>>> v3.18

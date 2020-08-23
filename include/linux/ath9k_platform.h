@@ -33,15 +33,21 @@ struct ath9k_platform_data {
 
 	bool is_clk_25mhz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*get_mac_revision)(void);
 	int (*external_reset)(void);
 =======
+=======
+>>>>>>> v3.18
 	bool tx_gain_buffalo;
 
 	int (*get_mac_revision)(void);
 	int (*external_reset)(void);
 
 	bool use_eeprom;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

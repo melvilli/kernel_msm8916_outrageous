@@ -2,7 +2,10 @@
 
 #include <media/saa7146_vv.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-event.h>
@@ -992,6 +995,7 @@ static int vidioc_streamoff(struct file *file, void *__fh, enum v4l2_buf_type ty
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vidioc_g_chip_ident(struct file *file, void *__fh,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -1014,6 +1018,8 @@ static int vidioc_g_chip_ident(struct file *file, void *__fh,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 const struct v4l2_ioctl_ops saa7146_video_ioctl_ops = {
 	.vidioc_querycap             = vidioc_querycap,
 	.vidioc_enum_fmt_vid_cap     = vidioc_enum_fmt_vid_cap,
@@ -1025,7 +1031,10 @@ const struct v4l2_ioctl_ops saa7146_video_ioctl_ops = {
 	.vidioc_try_fmt_vid_overlay  = vidioc_try_fmt_vid_overlay,
 	.vidioc_s_fmt_vid_overlay    = vidioc_s_fmt_vid_overlay,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident         = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1049,7 +1058,10 @@ const struct v4l2_ioctl_ops saa7146_vbi_ioctl_ops = {
 	.vidioc_querycap             = vidioc_querycap,
 	.vidioc_g_fmt_vbi_cap        = vidioc_g_fmt_vbi_cap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident         = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

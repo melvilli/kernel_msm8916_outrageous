@@ -265,7 +265,11 @@ static void octeon_irq_ciu_enable_local(struct irq_data *data)
 	unsigned long flags;
 	union octeon_ciu_chip_data cd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_spinlock_t *lock = &__get_cpu_var(octeon_irq_ciu_spinlock);
+=======
+	raw_spinlock_t *lock = this_cpu_ptr(&octeon_irq_ciu_spinlock);
+>>>>>>> v3.18
 =======
 	raw_spinlock_t *lock = this_cpu_ptr(&octeon_irq_ciu_spinlock);
 >>>>>>> v3.18
@@ -275,7 +279,11 @@ static void octeon_irq_ciu_enable_local(struct irq_data *data)
 	raw_spin_lock_irqsave(lock, flags);
 	if (cd.s.line == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pen = &__get_cpu_var(octeon_irq_ciu0_en_mirror);
+=======
+		pen = this_cpu_ptr(&octeon_irq_ciu0_en_mirror);
+>>>>>>> v3.18
 =======
 		pen = this_cpu_ptr(&octeon_irq_ciu0_en_mirror);
 >>>>>>> v3.18
@@ -288,7 +296,11 @@ static void octeon_irq_ciu_enable_local(struct irq_data *data)
 		cvmx_write_csr(CVMX_CIU_INTX_EN0(cvmx_get_core_num() * 2), *pen);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pen = &__get_cpu_var(octeon_irq_ciu1_en_mirror);
+=======
+		pen = this_cpu_ptr(&octeon_irq_ciu1_en_mirror);
+>>>>>>> v3.18
 =======
 		pen = this_cpu_ptr(&octeon_irq_ciu1_en_mirror);
 >>>>>>> v3.18
@@ -309,7 +321,11 @@ static void octeon_irq_ciu_disable_local(struct irq_data *data)
 	unsigned long flags;
 	union octeon_ciu_chip_data cd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_spinlock_t *lock = &__get_cpu_var(octeon_irq_ciu_spinlock);
+=======
+	raw_spinlock_t *lock = this_cpu_ptr(&octeon_irq_ciu_spinlock);
+>>>>>>> v3.18
 =======
 	raw_spinlock_t *lock = this_cpu_ptr(&octeon_irq_ciu_spinlock);
 >>>>>>> v3.18
@@ -319,7 +335,11 @@ static void octeon_irq_ciu_disable_local(struct irq_data *data)
 	raw_spin_lock_irqsave(lock, flags);
 	if (cd.s.line == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pen = &__get_cpu_var(octeon_irq_ciu0_en_mirror);
+=======
+		pen = this_cpu_ptr(&octeon_irq_ciu0_en_mirror);
+>>>>>>> v3.18
 =======
 		pen = this_cpu_ptr(&octeon_irq_ciu0_en_mirror);
 >>>>>>> v3.18
@@ -332,7 +352,11 @@ static void octeon_irq_ciu_disable_local(struct irq_data *data)
 		cvmx_write_csr(CVMX_CIU_INTX_EN0(cvmx_get_core_num() * 2), *pen);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pen = &__get_cpu_var(octeon_irq_ciu1_en_mirror);
+=======
+		pen = this_cpu_ptr(&octeon_irq_ciu1_en_mirror);
+>>>>>>> v3.18
 =======
 		pen = this_cpu_ptr(&octeon_irq_ciu1_en_mirror);
 >>>>>>> v3.18
@@ -456,17 +480,23 @@ static void octeon_irq_ciu_enable_local_v2(struct irq_data *data)
 	if (cd.s.line == 0) {
 		int index = cvmx_get_core_num() * 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(cd.s.bit, &__get_cpu_var(octeon_irq_ciu0_en_mirror));
 		cvmx_write_csr(CVMX_CIU_INTX_EN0_W1S(index), mask);
 	} else {
 		int index = cvmx_get_core_num() * 2 + 1;
 		set_bit(cd.s.bit, &__get_cpu_var(octeon_irq_ciu1_en_mirror));
 =======
+=======
+>>>>>>> v3.18
 		set_bit(cd.s.bit, this_cpu_ptr(&octeon_irq_ciu0_en_mirror));
 		cvmx_write_csr(CVMX_CIU_INTX_EN0_W1S(index), mask);
 	} else {
 		int index = cvmx_get_core_num() * 2 + 1;
 		set_bit(cd.s.bit, this_cpu_ptr(&octeon_irq_ciu1_en_mirror));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cvmx_write_csr(CVMX_CIU_INTX_EN1_W1S(index), mask);
 	}
@@ -483,17 +513,23 @@ static void octeon_irq_ciu_disable_local_v2(struct irq_data *data)
 	if (cd.s.line == 0) {
 		int index = cvmx_get_core_num() * 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(cd.s.bit, &__get_cpu_var(octeon_irq_ciu0_en_mirror));
 		cvmx_write_csr(CVMX_CIU_INTX_EN0_W1C(index), mask);
 	} else {
 		int index = cvmx_get_core_num() * 2 + 1;
 		clear_bit(cd.s.bit, &__get_cpu_var(octeon_irq_ciu1_en_mirror));
 =======
+=======
+>>>>>>> v3.18
 		clear_bit(cd.s.bit, this_cpu_ptr(&octeon_irq_ciu0_en_mirror));
 		cvmx_write_csr(CVMX_CIU_INTX_EN0_W1C(index), mask);
 	} else {
 		int index = cvmx_get_core_num() * 2 + 1;
 		clear_bit(cd.s.bit, this_cpu_ptr(&octeon_irq_ciu1_en_mirror));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cvmx_write_csr(CVMX_CIU_INTX_EN1_W1C(index), mask);
 	}
@@ -648,7 +684,11 @@ static void octeon_irq_ciu_gpio_ack(struct irq_data *data)
 static void octeon_irq_handle_gpio(unsigned int irq, struct irq_desc *desc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irqd_get_trigger_type(irq_desc_get_irq_data(desc)) & IRQ_TYPE_EDGE_BOTH)
+=======
+	if (irq_get_trigger_type(irq) & IRQ_TYPE_EDGE_BOTH)
+>>>>>>> v3.18
 =======
 	if (irq_get_trigger_type(irq) & IRQ_TYPE_EDGE_BOTH)
 >>>>>>> v3.18
@@ -854,6 +894,10 @@ static struct irq_chip octeon_irq_chip_ciu_gpio_v2 = {
 #ifdef CONFIG_SMP
 	.irq_set_affinity = octeon_irq_ciu_set_affinity_v2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_cpu_offline = octeon_irq_cpu_offline_ciu,
+>>>>>>> v3.18
 =======
 	.irq_cpu_offline = octeon_irq_cpu_offline_ciu,
 >>>>>>> v3.18
@@ -872,6 +916,10 @@ static struct irq_chip octeon_irq_chip_ciu_gpio = {
 #ifdef CONFIG_SMP
 	.irq_set_affinity = octeon_irq_ciu_set_affinity,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_cpu_offline = octeon_irq_cpu_offline_ciu,
+>>>>>>> v3.18
 =======
 	.irq_cpu_offline = octeon_irq_cpu_offline_ciu,
 >>>>>>> v3.18
@@ -1028,10 +1076,13 @@ static int octeon_irq_ciu_xlat(struct irq_domain *d,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* These are the GPIO lines */
 	if (ciu == 0 && bit >= 16 && bit < 32)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*out_hwirq = (ciu << 6) | bit;
@@ -1063,11 +1114,17 @@ static int octeon_irq_ciu_map(struct irq_domain *d,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Don't map irq if it is reserved for GPIO. */
 	if (line == 0 && bit >= 16 && bit <32)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (line > 1 || octeon_irq_ciu_to_irq[line][bit] != 0)
 		return -EINVAL;
@@ -1126,7 +1183,11 @@ static void octeon_irq_ip2_ciu(void)
 	u64 ciu_sum = cvmx_read_csr(CVMX_CIU_INTX_SUM0(core_id * 2));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ciu_sum &= __get_cpu_var(octeon_irq_ciu0_en_mirror);
+=======
+	ciu_sum &= __this_cpu_read(octeon_irq_ciu0_en_mirror);
+>>>>>>> v3.18
 =======
 	ciu_sum &= __this_cpu_read(octeon_irq_ciu0_en_mirror);
 >>>>>>> v3.18
@@ -1147,7 +1208,11 @@ static void octeon_irq_ip3_ciu(void)
 	u64 ciu_sum = cvmx_read_csr(CVMX_CIU_INT_SUM1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ciu_sum &= __get_cpu_var(octeon_irq_ciu1_en_mirror);
+=======
+	ciu_sum &= __this_cpu_read(octeon_irq_ciu1_en_mirror);
+>>>>>>> v3.18
 =======
 	ciu_sum &= __this_cpu_read(octeon_irq_ciu1_en_mirror);
 >>>>>>> v3.18
@@ -1166,7 +1231,11 @@ static void octeon_irq_ip3_ciu(void)
 static bool octeon_irq_use_ip4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit octeon_irq_local_enable_ip4(void *arg)
+=======
+static void octeon_irq_local_enable_ip4(void *arg)
+>>>>>>> v3.18
 =======
 static void octeon_irq_local_enable_ip4(void *arg)
 >>>>>>> v3.18
@@ -1185,9 +1254,15 @@ static void (*octeon_irq_ip3)(void);
 static void (*octeon_irq_ip4)(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinitdata (*octeon_irq_setup_secondary)(void);
 
 void __cpuinit octeon_irq_set_ip4_handler(octeon_irq_ip4_handler_t h)
+=======
+void (*octeon_irq_setup_secondary)(void);
+
+void octeon_irq_set_ip4_handler(octeon_irq_ip4_handler_t h)
+>>>>>>> v3.18
 =======
 void (*octeon_irq_setup_secondary)(void);
 
@@ -1200,7 +1275,11 @@ void octeon_irq_set_ip4_handler(octeon_irq_ip4_handler_t h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit octeon_irq_percpu_enable(void)
+=======
+static void octeon_irq_percpu_enable(void)
+>>>>>>> v3.18
 =======
 static void octeon_irq_percpu_enable(void)
 >>>>>>> v3.18
@@ -1209,7 +1288,11 @@ static void octeon_irq_percpu_enable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit octeon_irq_init_ciu_percpu(void)
+=======
+static void octeon_irq_init_ciu_percpu(void)
+>>>>>>> v3.18
 =======
 static void octeon_irq_init_ciu_percpu(void)
 >>>>>>> v3.18
@@ -1218,15 +1301,21 @@ static void octeon_irq_init_ciu_percpu(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(octeon_irq_ciu0_en_mirror) = 0;
 	__get_cpu_var(octeon_irq_ciu1_en_mirror) = 0;
 	wmb();
 	raw_spin_lock_init(&__get_cpu_var(octeon_irq_ciu_spinlock));
 =======
+=======
+>>>>>>> v3.18
 	__this_cpu_write(octeon_irq_ciu0_en_mirror, 0);
 	__this_cpu_write(octeon_irq_ciu1_en_mirror, 0);
 	wmb();
 	raw_spin_lock_init(this_cpu_ptr(&octeon_irq_ciu_spinlock));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Disable All CIU Interrupts. The ones we need will be
@@ -1263,7 +1352,11 @@ static void octeon_irq_init_ciu2_percpu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit octeon_irq_setup_secondary_ciu(void)
+=======
+static void octeon_irq_setup_secondary_ciu(void)
+>>>>>>> v3.18
 =======
 static void octeon_irq_setup_secondary_ciu(void)
 >>>>>>> v3.18
@@ -1360,6 +1453,10 @@ static void __init octeon_irq_init_ciu(void)
 		octeon_irq_force_ciu_mapping(ciu_domain, i + OCTEON_IRQ_PCI_MSI0, 0, i + 40);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	octeon_irq_force_ciu_mapping(ciu_domain, OCTEON_IRQ_TWSI, 0, 45);
+>>>>>>> v3.18
 =======
 	octeon_irq_force_ciu_mapping(ciu_domain, OCTEON_IRQ_TWSI, 0, 45);
 >>>>>>> v3.18
@@ -1369,6 +1466,10 @@ static void __init octeon_irq_init_ciu(void)
 
 	octeon_irq_force_ciu_mapping(ciu_domain, OCTEON_IRQ_USB0, 0, 56);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	octeon_irq_force_ciu_mapping(ciu_domain, OCTEON_IRQ_TWSI2, 0, 59);
+>>>>>>> v3.18
 =======
 	octeon_irq_force_ciu_mapping(ciu_domain, OCTEON_IRQ_TWSI2, 0, 59);
 >>>>>>> v3.18
@@ -1633,10 +1734,13 @@ static int octeon_irq_ciu2_xlat(struct irq_domain *d,
 	bit = intspec[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Line 7  are the GPIO lines */
 	if (ciu > 6 || bit > 63)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*out_hwirq = (ciu << 6) | bit;
@@ -1681,9 +1785,12 @@ static int octeon_irq_ciu2_map(struct irq_domain *d,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Line 7  are the GPIO lines */
 	if (line > 6 || octeon_irq_ciu_to_irq[line][bit] != 0)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Don't map irq if it is reserved for GPIO.
 	 * (Line 7 are the GPIO lines.)
@@ -1692,6 +1799,9 @@ static int octeon_irq_ciu2_map(struct irq_domain *d,
 		return 0;
 
 	if (line > 7 || octeon_irq_ciu_to_irq[line][bit] != 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -1898,7 +2008,11 @@ asmlinkage void plat_irq_dispatch(void)
 #ifdef CONFIG_HOTPLUG_CPU
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fixup_irqs(void)
+=======
+void octeon_fixup_irqs(void)
+>>>>>>> v3.18
 =======
 void octeon_fixup_irqs(void)
 >>>>>>> v3.18

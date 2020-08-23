@@ -325,12 +325,18 @@ static twa_message_type twa_error_table[] = {
 #define TW_CURRENT_DRIVER_BRANCH 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Phase defines */
 #define TW_PHASE_INITIAL 0
 #define TW_PHASE_SINGLE  1
 #define TW_PHASE_SGLIST  2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Misc defines */
 #define TW_9550SX_DRAIN_COMPLETED	      0xFFFF

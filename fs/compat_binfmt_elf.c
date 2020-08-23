@@ -89,12 +89,18 @@ static void cputime_to_compat_timeval(const cputime_t cputime,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef	COMPAT_ELF_HWCAP2
 #undef	ELF_HWCAP2
 #define	ELF_HWCAP2		COMPAT_ELF_HWCAP2
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef	COMPAT_ARCH_DLINFO
 #undef	ARCH_DLINFO

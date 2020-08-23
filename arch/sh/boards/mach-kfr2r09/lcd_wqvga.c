@@ -277,6 +277,7 @@ void kfr2r09_lcd_start(void *sohandle, struct sh_mobile_lcdc_sys_bus_ops *so)
 	write_memory_start(sohandle, so);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define CTRL_CKSW       0x10
 #define CTRL_C10        0x20
@@ -325,5 +326,7 @@ int kfr2r09_lcd_set_brightness(int brightness)
 
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

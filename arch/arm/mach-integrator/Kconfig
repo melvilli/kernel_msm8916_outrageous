@@ -7,8 +7,13 @@ config ARCH_INTEGRATOR_AP
 	select CLKSRC_MMIO
 	select MIGHT_HAVE_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SERIAL_AMBA_PL010
 	select SERIAL_AMBA_PL010_CONSOLE
+=======
+	select SERIAL_AMBA_PL010 if TTY
+	select SERIAL_AMBA_PL010_CONSOLE if TTY
+>>>>>>> v3.18
 =======
 	select SERIAL_AMBA_PL010 if TTY
 	select SERIAL_AMBA_PL010_CONSOLE if TTY
@@ -23,9 +28,14 @@ config ARCH_INTEGRATOR_CP
 	select ARCH_CINTEGRATOR
 	select ARM_TIMER_SP804
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PLAT_VERSATILE_CLCD
 	select SERIAL_AMBA_PL011
 	select SERIAL_AMBA_PL011_CONSOLE
+=======
+	select SERIAL_AMBA_PL011 if TTY
+	select SERIAL_AMBA_PL011_CONSOLE if TTY
+>>>>>>> v3.18
 =======
 	select SERIAL_AMBA_PL011 if TTY
 	select SERIAL_AMBA_PL011_CONSOLE if TTY
@@ -39,14 +49,20 @@ config ARCH_CINTEGRATOR
 
 config INTEGRATOR_IMPD1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Include support for Integrator/IM-PD1"
 	depends on ARCH_INTEGRATOR_AP
 =======
+=======
+>>>>>>> v3.18
 	bool "Include support for Integrator/IM-PD1"
 	depends on ARCH_INTEGRATOR_AP
 	select ARCH_REQUIRE_GPIOLIB
 	select ARM_VIC
 	select GPIO_PL061 if GPIOLIB
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  The IM-PD1 is an add-on logic module for the Integrator which

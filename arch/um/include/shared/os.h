@@ -137,6 +137,10 @@ extern int os_get_ifname(int fd, char *namebuf);
 extern int os_set_slip(int fd);
 extern int os_mode_fd(int fd, int mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int os_fsync_file(int fd);
+>>>>>>> v3.18
 =======
 extern int os_fsync_file(int fd);
 >>>>>>> v3.18
@@ -146,6 +150,10 @@ extern int os_open_file(const char *file, struct openflags flags, int mode);
 extern int os_read_file(int fd, void *buf, int len);
 extern int os_write_file(int fd, const void *buf, int count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int os_sync_file(int fd);
+>>>>>>> v3.18
 =======
 extern int os_sync_file(int fd);
 >>>>>>> v3.18
@@ -235,6 +243,10 @@ extern void unblock_signals(void);
 extern int get_signals(void);
 extern int set_signals(int enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int os_is_signal_stack(void);
+>>>>>>> v3.18
 =======
 extern int os_is_signal_stack(void);
 >>>>>>> v3.18
@@ -247,6 +259,10 @@ extern void setup_hostinfo(char *buf, int len);
 extern void os_dump_core(void) __attribute__ ((noreturn));
 extern void um_early_printk(const char *s, unsigned int n);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void os_fix_helper_signals(void);
+>>>>>>> v3.18
 =======
 extern void os_fix_helper_signals(void);
 >>>>>>> v3.18

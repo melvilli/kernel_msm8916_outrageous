@@ -127,7 +127,10 @@ static int subdev_close(struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_VIDEO_V4L2_SUBDEV_API)
 static int check_format(struct v4l2_subdev *sd,
 			struct v4l2_subdev_format *format)
@@ -179,6 +182,9 @@ static int check_edid(struct v4l2_subdev *sd, struct v4l2_subdev_edid *edid)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 {
@@ -188,6 +194,10 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 #if defined(CONFIG_VIDEO_V4L2_SUBDEV_API)
 	struct v4l2_subdev_fh *subdev_fh = to_v4l2_subdev_fh(vfh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rval;
+>>>>>>> v3.18
 =======
 	int rval;
 >>>>>>> v3.18
@@ -198,6 +208,12 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		return v4l2_queryctrl(vfh->ctrl_handler, arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case VIDIOC_QUERY_EXT_CTRL:
+		return v4l2_query_ext_ctrl(vfh->ctrl_handler, arg);
+
+>>>>>>> v3.18
 =======
 	case VIDIOC_QUERY_EXT_CTRL:
 		return v4l2_query_ext_ctrl(vfh->ctrl_handler, arg);
@@ -268,12 +284,18 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		struct v4l2_subdev_format *format = arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (format->which != V4L2_SUBDEV_FORMAT_TRY &&
 		    format->which != V4L2_SUBDEV_FORMAT_ACTIVE)
 			return -EINVAL;
 
 		if (format->pad >= sd->entity.num_pads)
 			return -EINVAL;
+=======
+		rval = check_format(sd, format);
+		if (rval)
+			return rval;
+>>>>>>> v3.18
 =======
 		rval = check_format(sd, format);
 		if (rval)
@@ -287,12 +309,18 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		struct v4l2_subdev_format *format = arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (format->which != V4L2_SUBDEV_FORMAT_TRY &&
 		    format->which != V4L2_SUBDEV_FORMAT_ACTIVE)
 			return -EINVAL;
 
 		if (format->pad >= sd->entity.num_pads)
 			return -EINVAL;
+=======
+		rval = check_format(sd, format);
+		if (rval)
+			return rval;
+>>>>>>> v3.18
 =======
 		rval = check_format(sd, format);
 		if (rval)
@@ -306,6 +334,7 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		struct v4l2_subdev_crop *crop = arg;
 		struct v4l2_subdev_selection sel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int rval;
 
 		if (crop->which != V4L2_SUBDEV_FORMAT_TRY &&
@@ -315,10 +344,15 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		if (crop->pad >= sd->entity.num_pads)
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 
 		rval = check_crop(sd, crop);
 		if (rval)
 			return rval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rval = v4l2_subdev_call(sd, pad, get_crop, subdev_fh, crop);
@@ -342,6 +376,7 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		struct v4l2_subdev_crop *crop = arg;
 		struct v4l2_subdev_selection sel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int rval;
 
 		if (crop->which != V4L2_SUBDEV_FORMAT_TRY &&
@@ -351,10 +386,15 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		if (crop->pad >= sd->entity.num_pads)
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 
 		rval = check_crop(sd, crop);
 		if (rval)
 			return rval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rval = v4l2_subdev_call(sd, pad, set_crop, subdev_fh, crop);
@@ -396,12 +436,15 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case VIDIOC_SUBDEV_G_FRAME_INTERVAL:
 		return v4l2_subdev_call(sd, video, g_frame_interval, arg);
 
 	case VIDIOC_SUBDEV_S_FRAME_INTERVAL:
 		return v4l2_subdev_call(sd, video, s_frame_interval, arg);
 =======
+=======
+>>>>>>> v3.18
 	case VIDIOC_SUBDEV_G_FRAME_INTERVAL: {
 		struct v4l2_subdev_frame_interval *fi = arg;
 
@@ -419,6 +462,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 
 		return v4l2_subdev_call(sd, video, s_frame_interval, arg);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case VIDIOC_SUBDEV_ENUM_FRAME_INTERVAL: {
@@ -435,12 +481,18 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		struct v4l2_subdev_selection *sel = arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sel->which != V4L2_SUBDEV_FORMAT_TRY &&
 		    sel->which != V4L2_SUBDEV_FORMAT_ACTIVE)
 			return -EINVAL;
 
 		if (sel->pad >= sd->entity.num_pads)
 			return -EINVAL;
+=======
+		rval = check_selection(sd, sel);
+		if (rval)
+			return rval;
+>>>>>>> v3.18
 =======
 		rval = check_selection(sd, sel);
 		if (rval)
@@ -454,6 +506,7 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 	case VIDIOC_SUBDEV_S_SELECTION: {
 		struct v4l2_subdev_selection *sel = arg;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (sel->which != V4L2_SUBDEV_FORMAT_TRY &&
 		    sel->which != V4L2_SUBDEV_FORMAT_ACTIVE)
@@ -472,6 +525,8 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 	case VIDIOC_SUBDEV_S_EDID:
 		return v4l2_subdev_call(sd, pad, set_edid, arg);
 =======
+=======
+>>>>>>> v3.18
 		rval = check_selection(sd, sel);
 		if (rval)
 			return rval;
@@ -526,6 +581,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 
 	case VIDIOC_SUBDEV_S_DV_TIMINGS:
 		return v4l2_subdev_call(sd, video, s_dv_timings, arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	default:
@@ -542,7 +600,10 @@ static long subdev_ioctl(struct file *file, unsigned int cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 static long subdev_compat_ioctl32(struct file *file, unsigned int cmd,
 	unsigned long arg)
@@ -554,6 +615,9 @@ static long subdev_compat_ioctl32(struct file *file, unsigned int cmd,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int subdev_poll(struct file *file, poll_table *wait)
 {
@@ -577,6 +641,12 @@ const struct v4l2_file_operations v4l2_subdev_fops = {
 	.open = subdev_open,
 	.unlocked_ioctl = subdev_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_COMPAT
+	.compat_ioctl32 = subdev_compat_ioctl32,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_COMPAT
 	.compat_ioctl32 = subdev_compat_ioctl32,
@@ -593,6 +663,10 @@ int v4l2_subdev_link_validate_default(struct v4l2_subdev *sd,
 				      struct v4l2_subdev_format *sink_fmt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* The width, height and code must match. */
+>>>>>>> v3.18
 =======
 	/* The width, height and code must match. */
 >>>>>>> v3.18
@@ -602,7 +676,10 @@ int v4l2_subdev_link_validate_default(struct v4l2_subdev *sd,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* The field order must match, or the sink field order must be NONE
 	 * to support interlaced hardware connected to bridges that support
 	 * progressive formats only.
@@ -611,6 +688,9 @@ int v4l2_subdev_link_validate_default(struct v4l2_subdev *sd,
 	    sink_fmt->format.field != V4L2_FIELD_NONE)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

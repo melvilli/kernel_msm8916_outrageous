@@ -115,7 +115,11 @@ static void tcp_veno_cwnd_event(struct sock *sk, enum tcp_ca_event event)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -125,7 +129,11 @@ static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 
 	if (!veno->doing_veno_now) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+		tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 =======
 		tcp_reno_cong_avoid(sk, ack, acked);
 >>>>>>> v3.18
@@ -134,7 +142,11 @@ static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 
 	/* limited by applications */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tcp_is_cwnd_limited(sk, in_flight))
+=======
+	if (!tcp_is_cwnd_limited(sk))
+>>>>>>> v3.18
 =======
 	if (!tcp_is_cwnd_limited(sk))
 >>>>>>> v3.18
@@ -146,7 +158,11 @@ static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 		 * calculation, so we'll behave like Reno.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+		tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 =======
 		tcp_reno_cong_avoid(sk, ack, acked);
 >>>>>>> v3.18
@@ -169,7 +185,11 @@ static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 		if (tp->snd_cwnd <= tp->snd_ssthresh) {
 			/* Slow start.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tcp_slow_start(tp);
+=======
+			tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 =======
 			tcp_slow_start(tp, acked);
 >>>>>>> v3.18
@@ -196,7 +216,10 @@ static void tcp_veno_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 					tp->snd_cwnd_cnt++;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -226,7 +249,10 @@ static u32 tcp_veno_ssthresh(struct sock *sk)
 
 static struct tcp_congestion_ops tcp_veno __read_mostly = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= TCP_CONG_RTT_STAMP,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init		= tcp_veno_init,

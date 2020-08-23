@@ -61,6 +61,7 @@
 #include <linux/kernel.h>
 #include <linux/kprobes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 
 #include "kprobes.h"
@@ -69,10 +70,15 @@
 
 #define branch_displacement(insn) sign_extend(((insn) & 0xffffff) << 2, 25)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ptrace.h>
 
 #include "kprobes.h"
 #include "probes-arm.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if  __LINUX_ARM_ARCH__ >= 6
@@ -82,6 +88,7 @@
 			"mov	pc, "reg"	\n\t"
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * To avoid the complications of mimicing single-stepping on a
@@ -170,11 +177,16 @@ emulate_ldrdstrd(struct kprobe *p, struct pt_regs *regs)
 	kprobe_opcode_t insn = p->opcode;
 	unsigned long pc = (unsigned long)p->addr + 8;
 =======
+=======
+>>>>>>> v3.18
 static void __kprobes
 emulate_ldrdstrd(probes_opcode_t insn,
 	struct arch_probes_insn *asi, struct pt_regs *regs)
 {
 	unsigned long pc = regs->ARM_pc + 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rt = (insn >> 12) & 0xf;
 	int rn = (insn >> 16) & 0xf;
@@ -191,7 +203,11 @@ emulate_ldrdstrd(probes_opcode_t insn,
 		: "=r" (rtv), "=r" (rt2v), "=r" (rnv)
 		: "0" (rtv), "1" (rt2v), "2" (rnv), "r" (rmv),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  [fn] "r" (p->ainsn.insn_fn)
+=======
+		  [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		  [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -206,15 +222,21 @@ emulate_ldrdstrd(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_ldr(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
 	unsigned long pc = (unsigned long)p->addr + 8;
 =======
+=======
+>>>>>>> v3.18
 emulate_ldr(probes_opcode_t insn,
 	struct arch_probes_insn *asi, struct pt_regs *regs)
 {
 	unsigned long pc = regs->ARM_pc + 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rt = (insn >> 12) & 0xf;
 	int rn = (insn >> 16) & 0xf;
@@ -229,7 +251,11 @@ emulate_ldr(probes_opcode_t insn,
 		BLX("%[fn]")
 		: "=r" (rtv), "=r" (rnv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "1" (rnv), "r" (rmv), [fn] "r" (p->ainsn.insn_fn)
+=======
+		: "1" (rnv), "r" (rmv), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		: "1" (rnv), "r" (rmv), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -247,17 +273,23 @@ emulate_ldr(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_str(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
 	unsigned long rtpc = (unsigned long)p->addr + str_pc_offset;
 	unsigned long rnpc = (unsigned long)p->addr + 8;
 =======
+=======
+>>>>>>> v3.18
 emulate_str(probes_opcode_t insn,
 	struct arch_probes_insn *asi, struct pt_regs *regs)
 {
 	unsigned long rtpc = regs->ARM_pc - 4 + str_pc_offset;
 	unsigned long rnpc = regs->ARM_pc + 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rt = (insn >> 12) & 0xf;
 	int rn = (insn >> 16) & 0xf;
@@ -273,7 +305,11 @@ emulate_str(probes_opcode_t insn,
 		BLX("%[fn]")
 		: "=r" (rnv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "r" (rtv), "0" (rnv), "r" (rmv), [fn] "r" (p->ainsn.insn_fn)
+=======
+		: "r" (rtv), "0" (rnv), "r" (rmv), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		: "r" (rtv), "0" (rnv), "r" (rmv), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -286,15 +322,21 @@ emulate_str(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_rd12rn16rm0rs8_rwflags(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
 	unsigned long pc = (unsigned long)p->addr + 8;
 =======
+=======
+>>>>>>> v3.18
 emulate_rd12rn16rm0rs8_rwflags(probes_opcode_t insn,
 	struct arch_probes_insn *asi, struct pt_regs *regs)
 {
 	unsigned long pc = regs->ARM_pc + 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rd = (insn >> 12) & 0xf;
 	int rn = (insn >> 16) & 0xf;
@@ -316,7 +358,11 @@ emulate_rd12rn16rm0rs8_rwflags(probes_opcode_t insn,
 		: "=r" (rdv), [cpsr] "=r" (cpsr)
 		: "0" (rdv), "r" (rnv), "r" (rmv), "r" (rsv),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "1" (cpsr), [fn] "r" (p->ainsn.insn_fn)
+=======
+		  "1" (cpsr), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		  "1" (cpsr), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -332,9 +378,15 @@ emulate_rd12rn16rm0rs8_rwflags(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_rd12rn16rm0_rwflags_nopc(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
+=======
+emulate_rd12rn16rm0_rwflags_nopc(probes_opcode_t insn,
+	struct arch_probes_insn *asi, struct pt_regs *regs)
+{
+>>>>>>> v3.18
 =======
 emulate_rd12rn16rm0_rwflags_nopc(probes_opcode_t insn,
 	struct arch_probes_insn *asi, struct pt_regs *regs)
@@ -356,7 +408,11 @@ emulate_rd12rn16rm0_rwflags_nopc(probes_opcode_t insn,
 		: "=r" (rdv), [cpsr] "=r" (cpsr)
 		: "0" (rdv), "r" (rnv), "r" (rmv),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "1" (cpsr), [fn] "r" (p->ainsn.insn_fn)
+=======
+		  "1" (cpsr), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		  "1" (cpsr), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -369,14 +425,20 @@ emulate_rd12rn16rm0_rwflags_nopc(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_rd16rn12rm0rs8_rwflags_nopc(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
 =======
+=======
+>>>>>>> v3.18
 emulate_rd16rn12rm0rs8_rwflags_nopc(probes_opcode_t insn,
 	struct arch_probes_insn *asi,
 	struct pt_regs *regs)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rd = (insn >> 16) & 0xf;
 	int rn = (insn >> 12) & 0xf;
@@ -396,7 +458,11 @@ emulate_rd16rn12rm0rs8_rwflags_nopc(probes_opcode_t insn,
 		: "=r" (rdv), [cpsr] "=r" (cpsr)
 		: "0" (rdv), "r" (rnv), "r" (rmv), "r" (rsv),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "1" (cpsr), [fn] "r" (p->ainsn.insn_fn)
+=======
+		  "1" (cpsr), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		  "1" (cpsr), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -409,9 +475,15 @@ emulate_rd16rn12rm0rs8_rwflags_nopc(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_rd12rm0_noflags_nopc(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
+=======
+emulate_rd12rm0_noflags_nopc(probes_opcode_t insn,
+	struct arch_probes_insn *asi, struct pt_regs *regs)
+{
+>>>>>>> v3.18
 =======
 emulate_rd12rm0_noflags_nopc(probes_opcode_t insn,
 	struct arch_probes_insn *asi, struct pt_regs *regs)
@@ -427,7 +499,11 @@ emulate_rd12rm0_noflags_nopc(probes_opcode_t insn,
 		BLX("%[fn]")
 		: "=r" (rdv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "0" (rdv), "r" (rmv), [fn] "r" (p->ainsn.insn_fn)
+=======
+		: "0" (rdv), "r" (rmv), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		: "0" (rdv), "r" (rmv), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -439,14 +515,20 @@ emulate_rd12rm0_noflags_nopc(probes_opcode_t insn,
 
 static void __kprobes
 <<<<<<< HEAD
+<<<<<<< HEAD
 emulate_rdlo12rdhi16rn0rm8_rwflags_nopc(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
 =======
+=======
+>>>>>>> v3.18
 emulate_rdlo12rdhi16rn0rm8_rwflags_nopc(probes_opcode_t insn,
 	struct arch_probes_insn *asi,
 	struct pt_regs *regs)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rdlo = (insn >> 12) & 0xf;
 	int rdhi = (insn >> 16) & 0xf;
@@ -466,7 +548,11 @@ emulate_rdlo12rdhi16rn0rm8_rwflags_nopc(probes_opcode_t insn,
 		: "=r" (rdlov), "=r" (rdhiv), [cpsr] "=r" (cpsr)
 		: "0" (rdlov), "1" (rdhiv), "r" (rnv), "r" (rmv),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "2" (cpsr), [fn] "r" (p->ainsn.insn_fn)
+=======
+		  "2" (cpsr), [fn] "r" (asi->insn_fn)
+>>>>>>> v3.18
 =======
 		  "2" (cpsr), [fn] "r" (asi->insn_fn)
 >>>>>>> v3.18
@@ -478,6 +564,7 @@ emulate_rdlo12rdhi16rn0rm8_rwflags_nopc(probes_opcode_t insn,
 	regs->ARM_cpsr = (regs->ARM_cpsr & ~APSR_MASK) | (cpsr & APSR_MASK);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * For the instruction masking and comparisons in all the "space_*"
@@ -1100,6 +1187,8 @@ arm_kprobe_decode_insn(kprobe_opcode_t insn, struct arch_specific_insn *asi)
 	return kprobe_decode_insn(insn, asi, kprobe_decode_arm_table, false);
 }
 =======
+=======
+>>>>>>> v3.18
 const union decode_action kprobes_arm_actions[NUM_PROBES_ARM_ACTIONS] = {
 	[PROBES_EMULATE_NONE] = {.handler = probes_emulate_none},
 	[PROBES_SIMULATE_NOP] = {.handler = probes_simulate_nop},
@@ -1140,4 +1229,7 @@ const union decode_action kprobes_arm_actions[NUM_PROBES_ARM_ACTIONS] = {
 	[PROBES_BRANCH] = {.handler = simulate_bbl},
 	[PROBES_LDMSTM] = {.decoder = kprobe_decode_ldmstm}
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

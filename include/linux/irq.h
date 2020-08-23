@@ -71,6 +71,12 @@ typedef	void (*irq_preflow_handler_t)(struct irq_data *data);
  * IRQ_NESTED_TRHEAD		- Interrupt nests into another thread
  * IRQ_PER_CPU_DEVID		- Dev_id is a per-cpu variable
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * IRQ_IS_POLLED		- Always polled by another interrupt. Exclude
+ *				  it from the spurious interrupt detection
+ *				  mechanism and from core side polling.
+>>>>>>> v3.18
 =======
  * IRQ_IS_POLLED		- Always polled by another interrupt. Exclude
  *				  it from the spurious interrupt detection
@@ -101,6 +107,10 @@ enum {
 	IRQ_NOTHREAD		= (1 << 16),
 	IRQ_PER_CPU_DEVID	= (1 << 17),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IRQ_IS_POLLED		= (1 << 18),
+>>>>>>> v3.18
 =======
 	IRQ_IS_POLLED		= (1 << 18),
 >>>>>>> v3.18
@@ -110,7 +120,12 @@ enum {
 	(IRQ_TYPE_SENSE_MASK | IRQ_NOPROBE | IRQ_NOREQUEST | \
 	 IRQ_NOAUTOEN | IRQ_MOVE_PCNTXT | IRQ_LEVEL | IRQ_NO_BALANCING | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 IRQ_PER_CPU | IRQ_NESTED_THREAD | IRQ_NOTHREAD | IRQ_PER_CPU_DEVID)
+=======
+	 IRQ_PER_CPU | IRQ_NESTED_THREAD | IRQ_NOTHREAD | IRQ_PER_CPU_DEVID | \
+	 IRQ_IS_POLLED)
+>>>>>>> v3.18
 =======
 	 IRQ_PER_CPU | IRQ_NESTED_THREAD | IRQ_NOTHREAD | IRQ_PER_CPU_DEVID | \
 	 IRQ_IS_POLLED)
@@ -135,6 +150,10 @@ struct irq_domain;
 /**
  * struct irq_data - per irq and irq chip data passed down to chip functions
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @mask:		precomputed bitmask for accessing the chip registers
+>>>>>>> v3.18
 =======
  * @mask:		precomputed bitmask for accessing the chip registers
 >>>>>>> v3.18
@@ -158,6 +177,10 @@ struct irq_domain;
  */
 struct irq_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			mask;
+>>>>>>> v3.18
 =======
 	u32			mask;
 >>>>>>> v3.18
@@ -190,6 +213,10 @@ struct irq_data {
  * IRQD_IRQ_MASKED		- Masked state of the interrupt
  * IRQD_IRQ_INPROGRESS		- In progress state of the interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * IRQD_WAKEUP_ARMED		- Wakeup mode armed
+>>>>>>> v3.18
 =======
  * IRQD_WAKEUP_ARMED		- Wakeup mode armed
 >>>>>>> v3.18
@@ -207,6 +234,10 @@ enum {
 	IRQD_IRQ_MASKED			= (1 << 17),
 	IRQD_IRQ_INPROGRESS		= (1 << 18),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IRQD_WAKEUP_ARMED		= (1 << 19),
+>>>>>>> v3.18
 =======
 	IRQD_WAKEUP_ARMED		= (1 << 19),
 >>>>>>> v3.18
@@ -282,13 +313,19 @@ static inline bool irqd_irq_inprogress(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool irqd_is_wakeup_armed(struct irq_data *d)
 {
 	return d->state_use_accessors & IRQD_WAKEUP_ARMED;
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Functions for chained handlers which can be enabled/disabled by the
@@ -328,7 +365,10 @@ static inline irq_hw_number_t irqd_to_hwirq(struct irq_data *d)
  * @irq_set_type:	set the flow type (IRQ_TYPE_LEVEL/etc.) of an IRQ
  * @irq_set_wake:	enable/disable power-management wake-on of an IRQ
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @irq_read_line:	return the current value on the irq line
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @irq_bus_lock:	function to lock access to slow bus (i2c) chips
@@ -339,14 +379,20 @@ static inline irq_hw_number_t irqd_to_hwirq(struct irq_data *d)
  * @irq_resume:		function called from core code on resume once per chip
  * @irq_pm_shutdown:	function called from core code on shutdown once per chip
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @irq_print_chip:	optional to print special chip info in show_interrupts
 =======
+=======
+>>>>>>> v3.18
  * @irq_calc_mask:	Optional function to set irq_data.mask for special cases
  * @irq_print_chip:	optional to print special chip info in show_interrupts
  * @irq_request_resources:	optional to request resources before calling
  *				any other callback related to this irq
  * @irq_release_resources:	optional to release resources acquired with
  *				irq_request_resources
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @flags:		chip specific flags
  */
@@ -367,7 +413,10 @@ struct irq_chip {
 	int		(*irq_retrigger)(struct irq_data *data);
 	int		(*irq_set_type)(struct irq_data *data, unsigned int flow_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		(*irq_read_line)(struct irq_data *data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int		(*irq_set_wake)(struct irq_data *data, unsigned int on);
@@ -383,13 +432,19 @@ struct irq_chip {
 	void		(*irq_pm_shutdown)(struct irq_data *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		(*irq_print_chip)(struct irq_data *data, struct seq_file *p);
 =======
+=======
+>>>>>>> v3.18
 	void		(*irq_calc_mask)(struct irq_data *data);
 
 	void		(*irq_print_chip)(struct irq_data *data, struct seq_file *p);
 	int		(*irq_request_resources)(struct irq_data *data);
 	void		(*irq_release_resources)(struct irq_data *data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned long	flags;
@@ -405,6 +460,11 @@ struct irq_chip {
  *				when irq enabled
  * IRQCHIP_SKIP_SET_WAKE:	Skip chip.irq_set_wake(), for this irq chip
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * IRQCHIP_ONESHOT_SAFE:	One shot does not require mask/unmask
+ * IRQCHIP_EOI_THREADED:	Chip requires eoi() on unmask in threaded mode
+>>>>>>> v3.18
 =======
  * IRQCHIP_ONESHOT_SAFE:	One shot does not require mask/unmask
  * IRQCHIP_EOI_THREADED:	Chip requires eoi() on unmask in threaded mode
@@ -418,6 +478,10 @@ enum {
 	IRQCHIP_SKIP_SET_WAKE		= (1 <<  4),
 	IRQCHIP_ONESHOT_SAFE		= (1 <<  5),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IRQCHIP_EOI_THREADED		= (1 <<  6),
+>>>>>>> v3.18
 =======
 	IRQCHIP_EOI_THREADED		= (1 <<  6),
 >>>>>>> v3.18
@@ -490,8 +554,11 @@ extern void note_interrupt(unsigned int irq, struct irq_desc *desc,
 			   irqreturn_t action_ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Resending of interrupts :*/
 void check_irq_resend(struct irq_desc *desc, unsigned int irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -586,6 +653,7 @@ static inline void irq_set_percpu_devid_flags(unsigned int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Handle dynamic irq creation and destruction */
 extern unsigned int create_irq_nr(unsigned int irq_want, int node);
 extern unsigned int __create_irqs(unsigned int from, unsigned int count,
@@ -604,6 +672,8 @@ static inline void dynamic_irq_init(unsigned int irq)
 	dynamic_irq_cleanup(irq);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Set/get chip/data for an IRQ: */
@@ -661,7 +731,10 @@ static inline struct msi_desc *irq_data_get_msi(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u32 irq_get_trigger_type(unsigned int irq)
 {
 	struct irq_data *d = irq_get_irq_data(irq);
@@ -670,6 +743,9 @@ static inline u32 irq_get_trigger_type(unsigned int irq)
 
 unsigned int arch_dynirq_lower_bound(unsigned int from);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __irq_alloc_descs(int irq, unsigned int from, unsigned int cnt, int node,
 		struct module *owner);
@@ -692,8 +768,11 @@ int __irq_alloc_descs(int irq, unsigned int from, unsigned int cnt, int node,
 
 void irq_free_descs(unsigned int irq, unsigned int cnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int irq_reserve_irqs(unsigned int from, unsigned int cnt);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void irq_free_desc(unsigned int irq)
@@ -702,11 +781,14 @@ static inline void irq_free_desc(unsigned int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int irq_reserve_irq(unsigned int irq)
 {
 	return irq_reserve_irqs(irq, 1);
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_GENERIC_IRQ_LEGACY_ALLOC_HWIRQ
 unsigned int irq_alloc_hwirqs(int cnt, int node);
 static inline unsigned int irq_alloc_hwirq(int node)
@@ -725,6 +807,9 @@ void arch_teardown_hwirq(unsigned int irq);
 #ifdef CONFIG_GENERIC_IRQ_LEGACY
 void irq_init_desc(unsigned int irq);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef irq_reg_writel
@@ -761,6 +846,11 @@ struct irq_chip_regs {
  * @handler:		Flow handler associated with this chip
  * @type:		Chip can handle these flow types
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @mask_cache_priv:	Cached mask register private to the chip type
+ * @mask_cache:		Pointer to cached mask register
+>>>>>>> v3.18
 =======
  * @mask_cache_priv:	Cached mask register private to the chip type
  * @mask_cache:		Pointer to cached mask register
@@ -776,6 +866,11 @@ struct irq_chip_type {
 	irq_flow_handler_t	handler;
 	u32			type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			mask_cache_priv;
+	u32			*mask_cache;
+>>>>>>> v3.18
 =======
 	u32			mask_cache_priv;
 	u32			*mask_cache;
@@ -789,7 +884,11 @@ struct irq_chip_type {
  * @irq_base:		Interrupt base nr for this chip
  * @irq_cnt:		Number of interrupts handled by this chip
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mask_cache:		Cached mask register
+=======
+ * @mask_cache:		Cached mask register shared between all chip types
+>>>>>>> v3.18
 =======
  * @mask_cache:		Cached mask register shared between all chip types
 >>>>>>> v3.18
@@ -800,6 +899,12 @@ struct irq_chip_type {
  * @num_ct:		Number of available irq_chip_type instances (usually 1)
  * @private:		Private data for non generic chip callbacks
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @installed:		bitfield to denote installed interrupts
+ * @unused:		bitfield to denote unused interrupts
+ * @domain:		irq domain pointer
+>>>>>>> v3.18
 =======
  * @installed:		bitfield to denote installed interrupts
  * @unused:		bitfield to denote unused interrupts
@@ -827,6 +932,12 @@ struct irq_chip_generic {
 	unsigned int		num_ct;
 	void			*private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long		installed;
+	unsigned long		unused;
+	struct irq_domain	*domain;
+>>>>>>> v3.18
 =======
 	unsigned long		installed;
 	unsigned long		unused;
@@ -843,6 +954,11 @@ struct irq_chip_generic {
  *				irq chips which need to call irq_set_wake() on
  *				the parent irq. Usually GPIO implementations
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @IRQ_GC_MASK_CACHE_PER_TYPE:	Mask cache is chip type private
+ * @IRQ_GC_NO_MASK:		Do not calculate irq_data->mask
+>>>>>>> v3.18
 =======
  * @IRQ_GC_MASK_CACHE_PER_TYPE:	Mask cache is chip type private
  * @IRQ_GC_NO_MASK:		Do not calculate irq_data->mask
@@ -852,7 +968,10 @@ enum irq_gc_flags {
 	IRQ_GC_INIT_MASK_CACHE		= 1 << 0,
 	IRQ_GC_INIT_NESTED_LOCK		= 1 << 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IRQ_GC_MASK_CACHE_PER_TYPE	= 1 << 2,
 	IRQ_GC_NO_MASK			= 1 << 3,
 };
@@ -873,6 +992,9 @@ struct irq_domain_chip_generic {
 	unsigned int		irq_flags_to_set;
 	enum irq_gc_flags	gc_flags;
 	struct irq_chip_generic	*gc[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -890,6 +1012,11 @@ int irq_gc_set_wake(struct irq_data *d, unsigned int on);
 
 /* Setup functions for irq_chip_generic */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int irq_map_generic_chip(struct irq_domain *d, unsigned int virq,
+			 irq_hw_number_t hw_irq);
+>>>>>>> v3.18
 =======
 int irq_map_generic_chip(struct irq_domain *d, unsigned int virq,
 			 irq_hw_number_t hw_irq);
@@ -905,7 +1032,10 @@ void irq_remove_generic_chip(struct irq_chip_generic *gc, u32 msk,
 			     unsigned int clr, unsigned int set);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct irq_chip_generic *irq_get_domain_generic_chip(struct irq_domain *d, unsigned int hw_irq);
 int irq_alloc_domain_generic_chips(struct irq_domain *d, int irqs_per_chip,
 				   int num_ct, const char *name,
@@ -914,6 +1044,9 @@ int irq_alloc_domain_generic_chips(struct irq_domain *d, int irqs_per_chip,
 				   enum irq_gc_flags flags);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct irq_chip_type *irq_data_get_chip_type(struct irq_data *d)
 {

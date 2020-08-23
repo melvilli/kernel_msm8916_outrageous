@@ -39,7 +39,11 @@
 #include "mpc83xx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata mpc834x_itx_ids[] = {
+=======
+static const struct of_device_id mpc834x_itx_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc834x_itx_ids[] __initconst = {
 >>>>>>> v3.18

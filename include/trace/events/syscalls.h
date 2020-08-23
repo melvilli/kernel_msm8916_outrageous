@@ -1,7 +1,10 @@
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM raw_syscalls
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef TRACE_INCLUDE_FILE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TRACE_INCLUDE_FILE syscalls
@@ -18,9 +21,12 @@
 #ifdef CONFIG_HAVE_SYSCALL_TRACEPOINTS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void syscall_regfunc(void);
 extern void syscall_unregfunc(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 TRACE_EVENT_FN(sys_enter,

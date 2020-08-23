@@ -12,6 +12,10 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -20,6 +24,11 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <linux/clk.h>
@@ -33,10 +42,13 @@
 #include "max98090.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEBUG
 #define EXTMIC_METHOD
 #define EXTMIC_METHOD_TEST
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Allows for sparsely populated register maps */
@@ -403,6 +415,10 @@ static const DECLARE_TLV_DB_SCALE(max98090_alcmakeup_tlv, 0, 100, 0);
 static const DECLARE_TLV_DB_SCALE(max98090_alccomp_tlv, -3100, 100, 0);
 static const DECLARE_TLV_DB_SCALE(max98090_drcexp_tlv, -6600, 100, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static const DECLARE_TLV_DB_SCALE(max98090_sdg_tlv, 50, 200, 0);
+>>>>>>> v3.18
 =======
 static const DECLARE_TLV_DB_SCALE(max98090_sdg_tlv, 50, 200, 0);
 >>>>>>> v3.18
@@ -444,7 +460,11 @@ static int max98090_get_enab_tlv(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -488,7 +508,11 @@ static int max98090_put_enab_tlv(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -539,6 +563,7 @@ static const char *max98090_pwr_perf_text[] =
 	{ "Low Power", "High Performance" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum max98090_vcmbandgap_enum =
 	SOC_ENUM_SINGLE(M98090_REG_BIAS_CONTROL, M98090_VCM_MODE_SHIFT,
 		ARRAY_SIZE(max98090_pwr_perf_text), max98090_pwr_perf_text);
@@ -560,6 +585,8 @@ static const struct soc_enum max98090_filter_dmic34mode_enum =
 		M98090_FLT_DMIC34MODE_SHIFT,
 		ARRAY_SIZE(max98090_mode_text), max98090_mode_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(max98090_vcmbandgap_enum,
 			    M98090_REG_BIAS_CONTROL,
 			    M98090_VCM_MODE_SHIFT,
@@ -583,39 +610,55 @@ static SOC_ENUM_SINGLE_DECL(max98090_filter_dmic34mode_enum,
 			    M98090_REG_FILTER_CONFIG,
 			    M98090_FLT_DMIC34MODE_SHIFT,
 			    max98090_mode_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *max98090_drcatk_text[] =
 	{ "0.5ms", "1ms", "5ms", "10ms", "25ms", "50ms", "100ms", "200ms" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum max98090_drcatk_enum =
 	SOC_ENUM_SINGLE(M98090_REG_DRC_TIMING, M98090_DRCATK_SHIFT,
 		ARRAY_SIZE(max98090_drcatk_text), max98090_drcatk_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(max98090_drcatk_enum,
 			    M98090_REG_DRC_TIMING,
 			    M98090_DRCATK_SHIFT,
 			    max98090_drcatk_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *max98090_drcrls_text[] =
 	{ "8s", "4s", "2s", "1s", "0.5s", "0.25s", "0.125s", "0.0625s" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum max98090_drcrls_enum =
 	SOC_ENUM_SINGLE(M98090_REG_DRC_TIMING, M98090_DRCRLS_SHIFT,
 		ARRAY_SIZE(max98090_drcrls_text), max98090_drcrls_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(max98090_drcrls_enum,
 			    M98090_REG_DRC_TIMING,
 			    M98090_DRCRLS_SHIFT,
 			    max98090_drcrls_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *max98090_alccmp_text[] =
 	{ "1:1", "1:1.5", "1:2", "1:4", "1:INF" };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum max98090_alccmp_enum =
 	SOC_ENUM_SINGLE(M98090_REG_DRC_COMPRESSOR, M98090_DRCCMP_SHIFT,
@@ -639,6 +682,8 @@ static const struct soc_enum max98090_adchp_enum =
 	SOC_ENUM_SINGLE(M98090_REG_ADC_CONTROL, M98090_ADCHP_SHIFT,
 		ARRAY_SIZE(max98090_pwr_perf_text), max98090_pwr_perf_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(max98090_alccmp_enum,
 			    M98090_REG_DRC_COMPRESSOR,
 			    M98090_DRCCMP_SHIFT,
@@ -665,6 +710,9 @@ static SOC_ENUM_SINGLE_DECL(max98090_adchp_enum,
 			    M98090_REG_ADC_CONTROL,
 			    M98090_ADCHP_SHIFT,
 			    max98090_pwr_perf_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_snd_controls[] = {
@@ -750,7 +798,11 @@ static const struct snd_kcontrol_new max98090_snd_controls[] = {
 		M98090_REG_ADC_SIDETONE, M98090_DVST_SHIFT,
 		M98090_DVST_NUM - 1, 1, max98090_get_enab_tlv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max98090_put_enab_tlv, max98090_micboost_tlv),
+=======
+		max98090_put_enab_tlv, max98090_sdg_tlv),
+>>>>>>> v3.18
 =======
 		max98090_put_enab_tlv, max98090_sdg_tlv),
 >>>>>>> v3.18
@@ -904,7 +956,10 @@ static int max98090_micinput_event(struct snd_soc_dapm_widget *w,
 		val = (val & M98090_MIC_PA2EN_MASK) >> M98090_MIC_PA2EN_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (val >= 1) {
@@ -944,14 +999,20 @@ static int max98090_micinput_event(struct snd_soc_dapm_widget *w,
 static const char *mic1_mux_text[] = { "IN12", "IN56" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum mic1_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_INPUT_MODE, M98090_EXTMIC1_SHIFT,
 		ARRAY_SIZE(mic1_mux_text), mic1_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(mic1_mux_enum,
 			    M98090_REG_INPUT_MODE,
 			    M98090_EXTMIC1_SHIFT,
 			    mic1_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_mic1_mux =
@@ -960,19 +1021,26 @@ static const struct snd_kcontrol_new max98090_mic1_mux =
 static const char *mic2_mux_text[] = { "IN34", "IN56" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum mic2_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_INPUT_MODE, M98090_EXTMIC2_SHIFT,
 		ARRAY_SIZE(mic2_mux_text), mic2_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(mic2_mux_enum,
 			    M98090_REG_INPUT_MODE,
 			    M98090_EXTMIC2_SHIFT,
 			    mic2_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_mic2_mux =
 	SOC_DAPM_ENUM("MIC2 Mux", mic2_mux_enum);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char *max98090_micpre_text[] = { "Off", "On" };
 
@@ -984,6 +1052,8 @@ static const struct soc_enum max98090_pa2en_enum =
 	SOC_ENUM_SINGLE(M98090_REG_MIC2_INPUT_LEVEL, M98090_MIC_PA2EN_SHIFT,
 		ARRAY_SIZE(max98090_micpre_text), max98090_micpre_text);
 =======
+=======
+>>>>>>> v3.18
 static const char *dmic_mux_text[] = { "ADC", "DMIC" };
 
 static SOC_ENUM_SINGLE_VIRT_DECL(dmic_mux_enum, dmic_mux_text);
@@ -1002,6 +1072,9 @@ static SOC_ENUM_SINGLE_DECL(max98090_pa2en_enum,
 			    M98090_REG_MIC2_INPUT_LEVEL,
 			    M98090_MIC_PA2EN_SHIFT,
 			    max98090_micpre_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* LINEA mixer switch */
@@ -1067,6 +1140,7 @@ static const struct snd_kcontrol_new max98090_right_adc_mixer_controls[] = {
 static const char *lten_mux_text[] = { "Normal", "Loopthrough" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ltenl_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_IO_CONFIGURATION, M98090_LTEN_SHIFT,
 		ARRAY_SIZE(lten_mux_text), lten_mux_text);
@@ -1075,6 +1149,8 @@ static const struct soc_enum ltenr_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_IO_CONFIGURATION, M98090_LTEN_SHIFT,
 		ARRAY_SIZE(lten_mux_text), lten_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(ltenl_mux_enum,
 			    M98090_REG_IO_CONFIGURATION,
 			    M98090_LTEN_SHIFT,
@@ -1084,6 +1160,9 @@ static SOC_ENUM_SINGLE_DECL(ltenr_mux_enum,
 			    M98090_REG_IO_CONFIGURATION,
 			    M98090_LTEN_SHIFT,
 			    lten_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_ltenl_mux =
@@ -1095,6 +1174,7 @@ static const struct snd_kcontrol_new max98090_ltenr_mux =
 static const char *lben_mux_text[] = { "Normal", "Loopback" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum lbenl_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_IO_CONFIGURATION, M98090_LBEN_SHIFT,
 		ARRAY_SIZE(lben_mux_text), lben_mux_text);
@@ -1103,6 +1183,8 @@ static const struct soc_enum lbenr_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_IO_CONFIGURATION, M98090_LBEN_SHIFT,
 		ARRAY_SIZE(lben_mux_text), lben_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(lbenl_mux_enum,
 			    M98090_REG_IO_CONFIGURATION,
 			    M98090_LBEN_SHIFT,
@@ -1112,6 +1194,9 @@ static SOC_ENUM_SINGLE_DECL(lbenr_mux_enum,
 			    M98090_REG_IO_CONFIGURATION,
 			    M98090_LBEN_SHIFT,
 			    lben_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_lbenl_mux =
@@ -1125,6 +1210,7 @@ static const char *stenl_mux_text[] = { "Normal", "Sidetone Left" };
 static const char *stenr_mux_text[] = { "Normal", "Sidetone Right" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum stenl_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_ADC_SIDETONE, M98090_DSTSL_SHIFT,
 		ARRAY_SIZE(stenl_mux_text), stenl_mux_text);
@@ -1133,6 +1219,8 @@ static const struct soc_enum stenr_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_ADC_SIDETONE, M98090_DSTSR_SHIFT,
 		ARRAY_SIZE(stenr_mux_text), stenr_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(stenl_mux_enum,
 			    M98090_REG_ADC_SIDETONE,
 			    M98090_DSTSL_SHIFT,
@@ -1142,6 +1230,9 @@ static SOC_ENUM_SINGLE_DECL(stenr_mux_enum,
 			    M98090_REG_ADC_SIDETONE,
 			    M98090_DSTSR_SHIFT,
 			    stenr_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_stenl_mux =
@@ -1251,14 +1342,20 @@ static const struct snd_kcontrol_new max98090_right_rcv_mixer_controls[] = {
 static const char *linmod_mux_text[] = { "Left Only", "Left and Right" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum linmod_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_LOUTR_MIXER, M98090_LINMOD_SHIFT,
 		ARRAY_SIZE(linmod_mux_text), linmod_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(linmod_mux_enum,
 			    M98090_REG_LOUTR_MIXER,
 			    M98090_LINMOD_SHIFT,
 			    linmod_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_linmod_mux =
@@ -1270,28 +1367,40 @@ static const char *mixhpsel_mux_text[] = { "DAC Only", "HP Mixer" };
  * This is a mux as it selects the HP output, but to DAPM it is a Mixer enable
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum mixhplsel_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_HP_CONTROL, M98090_MIXHPLSEL_SHIFT,
 		ARRAY_SIZE(mixhpsel_mux_text), mixhpsel_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(mixhplsel_mux_enum,
 			    M98090_REG_HP_CONTROL,
 			    M98090_MIXHPLSEL_SHIFT,
 			    mixhpsel_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_mixhplsel_mux =
 	SOC_DAPM_ENUM("MIXHPLSEL Mux", mixhplsel_mux_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum mixhprsel_mux_enum =
 	SOC_ENUM_SINGLE(M98090_REG_HP_CONTROL, M98090_MIXHPRSEL_SHIFT,
 		ARRAY_SIZE(mixhpsel_mux_text), mixhpsel_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(mixhprsel_mux_enum,
 			    M98090_REG_HP_CONTROL,
 			    M98090_MIXHPRSEL_SHIFT,
 			    mixhpsel_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new max98090_mixhprsel_mux =
@@ -1299,7 +1408,10 @@ static const struct snd_kcontrol_new max98090_mixhprsel_mux =
 
 static const struct snd_soc_dapm_widget max98090_dapm_widgets[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SND_SOC_DAPM_INPUT("MIC1"),
@@ -1342,6 +1454,11 @@ static const struct snd_soc_dapm_widget max98090_dapm_widgets[] = {
 		0, 0, &max98090_mic2_mux),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SND_SOC_DAPM_MUX("DMIC Mux", SND_SOC_NOPM, 0, 0, &max98090_dmic_mux),
+
+>>>>>>> v3.18
 =======
 	SND_SOC_DAPM_MUX("DMIC Mux", SND_SOC_NOPM, 0, 0, &max98090_dmic_mux),
 
@@ -1469,7 +1586,10 @@ static const struct snd_soc_dapm_widget max98090_dapm_widgets[] = {
 
 static const struct snd_soc_dapm_widget max98091_dapm_widgets[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SND_SOC_DAPM_INPUT("DMIC3"),
@@ -1483,12 +1603,18 @@ static const struct snd_soc_dapm_widget max98091_dapm_widgets[] = {
 
 static const struct snd_soc_dapm_route max98090_dapm_routes[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	{"MIC1 Input", NULL, "MIC1"},
 	{"MIC2 Input", NULL, "MIC2"},
 
 	{"DMICL", NULL, "DMICL_ENA"},
 	{"DMICR", NULL, "DMICR_ENA"},
+=======
+	{"MIC1 Input", NULL, "MIC1"},
+	{"MIC2 Input", NULL, "MIC2"},
+
+>>>>>>> v3.18
 =======
 	{"MIC1 Input", NULL, "MIC1"},
 	{"MIC2 Input", NULL, "MIC2"},
@@ -1548,12 +1674,15 @@ static const struct snd_soc_dapm_route max98090_dapm_routes[] = {
 	{"ADCR", NULL, "SHDN"},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"LBENL Mux", "Normal", "ADCL"},
 	{"LBENL Mux", "Normal", "DMICL"},
 	{"LBENL Mux", "Loopback", "LTENL Mux"},
 	{"LBENR Mux", "Normal", "ADCR"},
 	{"LBENR Mux", "Normal", "DMICR"},
 =======
+=======
+>>>>>>> v3.18
 	{"DMIC Mux", "ADC", "ADCL"},
 	{"DMIC Mux", "ADC", "ADCR"},
 	{"DMIC Mux", "DMIC", "DMICL"},
@@ -1564,6 +1693,9 @@ static const struct snd_soc_dapm_route max98090_dapm_routes[] = {
 	{"LBENL Mux", "Normal", "DMIC Mux"},
 	{"LBENL Mux", "Loopback", "LTENL Mux"},
 	{"LBENR Mux", "Normal", "DMIC Mux"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{"LBENR Mux", "Loopback", "LTENR Mux"},
 
@@ -1587,8 +1719,13 @@ static const struct snd_soc_dapm_route max98090_dapm_routes[] = {
 	{"STENR Mux", "Sidetone Right", "ADCR"},
 	{"STENR Mux", "Sidetone Right", "DMICR"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"DACL", NULL, "STENL Mux"},
 	{"DACR", NULL, "STENL Mux"},
+=======
+	{"DACL", "NULL", "STENL Mux"},
+	{"DACR", "NULL", "STENL Mux"},
+>>>>>>> v3.18
 =======
 	{"DACL", "NULL", "STENL Mux"},
 	{"DACR", "NULL", "STENL Mux"},
@@ -1682,11 +1819,17 @@ static const struct snd_soc_dapm_route max98090_dapm_routes[] = {
 	{"RCVL", NULL, "RCV Left Out"},
 	{"RCVR", NULL, "RCV Right Out"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 };
 
 static const struct snd_soc_dapm_route max98091_dapm_routes[] = {
 
+=======
+};
+
+static const struct snd_soc_dapm_route max98091_dapm_routes[] = {
+>>>>>>> v3.18
 =======
 };
 
@@ -1698,7 +1841,10 @@ static const struct snd_soc_dapm_route max98091_dapm_routes[] = {
 	{"DMIC3", NULL, "AHPF"},
 	{"DMIC4", NULL, "AHPF"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1729,7 +1875,10 @@ static int max98090_add_widgets(struct snd_soc_codec *codec)
 		snd_soc_dapm_add_routes(dapm, max98091_dapm_routes,
 			ARRAY_SIZE(max98091_dapm_routes));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1749,6 +1898,7 @@ static const int lrclk_rates[] = {
 
 static const int user_pclk_rates[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	13000000, 13000000
 };
 
@@ -1763,6 +1913,8 @@ static const unsigned long long ni_value[] = {
 static const unsigned long long mi_value[] = {
 	8125, 1625
 =======
+=======
+>>>>>>> v3.18
 	13000000, 13000000, 19200000, 19200000,
 };
 
@@ -1776,6 +1928,9 @@ static const unsigned long long ni_value[] = {
 
 static const unsigned long long mi_value[] = {
 	8125, 1625, 1500, 25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1894,6 +2049,10 @@ static int max98090_dai_set_fmt(struct snd_soc_dai *codec_dai,
 			snd_soc_update_bits(codec, M98090_REG_CLOCK_MODE,
 				M98090_USE_M1_MASK, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			max98090->master = false;
+>>>>>>> v3.18
 =======
 			max98090->master = false;
 >>>>>>> v3.18
@@ -1914,6 +2073,10 @@ static int max98090_dai_set_fmt(struct snd_soc_dai *codec_dai,
 					M98090_BSEL_32;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			max98090->master = true;
+>>>>>>> v3.18
 =======
 			max98090->master = true;
 >>>>>>> v3.18
@@ -2021,6 +2184,7 @@ static int max98090_set_bias_level(struct snd_soc_codec *codec,
 	switch (level) {
 	case SND_SOC_BIAS_ON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (max98090->jack_state == M98090_JACK_STATE_HEADSET) {
 			/*
 			 * Set to normal bias level.
@@ -2032,6 +2196,8 @@ static int max98090_set_bias_level(struct snd_soc_codec *codec,
 
 	case SND_SOC_BIAS_PREPARE:
 =======
+=======
+>>>>>>> v3.18
 		break;
 
 	case SND_SOC_BIAS_PREPARE:
@@ -2048,6 +2214,9 @@ static int max98090_set_bias_level(struct snd_soc_codec *codec,
 			else
 				clk_prepare_enable(max98090->mclk);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -2111,8 +2280,13 @@ static int max98090_dai_hw_params(struct snd_pcm_substream *substream,
 	max98090->lrclk = params_rate(params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+>>>>>>> v3.18
 =======
 	switch (params_width(params)) {
 	case 16:
@@ -2125,7 +2299,12 @@ static int max98090_dai_hw_params(struct snd_pcm_substream *substream,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max98090_configure_bclk(codec);
+=======
+	if (max98090->master)
+		max98090_configure_bclk(codec);
+>>>>>>> v3.18
 =======
 	if (max98090->master)
 		max98090_configure_bclk(codec);
@@ -2188,18 +2367,25 @@ static int max98090_dai_set_sysclk(struct snd_soc_dai *dai,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(max98090->mclk)) {
 		freq = clk_round_rate(max98090->mclk, freq);
 		clk_set_rate(max98090->mclk, freq);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Setup clocks for slave mode, and using the PLL
 	 * PSCLK = 0x01 (when master clk is 10MHz to 20MHz)
 	 *		 0x02 (when master clk is 20MHz to 40MHz)..
 	 *		 0x03 (when master clk is 40MHz to 60MHz)..
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((freq >= 10000000) && (freq < 20000000)) {
 		snd_soc_write(codec, M98090_REG_SYSTEM_CLOCK,
@@ -2209,6 +2395,8 @@ static int max98090_dai_set_sysclk(struct snd_soc_dai *dai,
 			M98090_PSCLK_DIV2);
 	} else if ((freq >= 40000000) && (freq < 60000000)) {
 =======
+=======
+>>>>>>> v3.18
 	if ((freq >= 10000000) && (freq <= 20000000)) {
 		snd_soc_write(codec, M98090_REG_SYSTEM_CLOCK,
 			M98090_PSCLK_DIV1);
@@ -2216,6 +2404,9 @@ static int max98090_dai_set_sysclk(struct snd_soc_dai *dai,
 		snd_soc_write(codec, M98090_REG_SYSTEM_CLOCK,
 			M98090_PSCLK_DIV2);
 	} else if ((freq > 40000000) && (freq <= 60000000)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snd_soc_write(codec, M98090_REG_SYSTEM_CLOCK,
 			M98090_PSCLK_DIV4);
@@ -2227,8 +2418,11 @@ static int max98090_dai_set_sysclk(struct snd_soc_dai *dai,
 	max98090->sysclk = freq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max98090_configure_bclk(codec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2247,7 +2441,10 @@ static int max98090_dai_digital_mute(struct snd_soc_dai *codec_dai, int mute)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int max98090_dai_trigger(struct snd_pcm_substream *substream, int cmd,
 				struct snd_soc_dai *dai)
 {
@@ -2344,6 +2541,9 @@ static void max98090_pll_work(struct work_struct *work)
 	msleep(10);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void max98090_jack_work(struct work_struct *work)
 {
@@ -2437,8 +2637,13 @@ static void max98090_jack_work(struct work_struct *work)
 static irqreturn_t max98090_interrupt(int irq, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = data;
 	struct max98090_priv *max98090 = snd_soc_codec_get_drvdata(codec);
+=======
+	struct max98090_priv *max98090 = data;
+	struct snd_soc_codec *codec = max98090->codec;
+>>>>>>> v3.18
 =======
 	struct max98090_priv *max98090 = data;
 	struct snd_soc_codec *codec = max98090->codec;
@@ -2448,11 +2653,17 @@ static irqreturn_t max98090_interrupt(int irq, void *data)
 	unsigned int active;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Treat interrupt before codec is initialized as spurious */
 	if (codec == NULL)
 		return IRQ_NONE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_dbg(codec->dev, "***** max98090_interrupt *****\n");
 
@@ -2489,13 +2700,19 @@ static irqreturn_t max98090_interrupt(int irq, void *data)
 		dev_dbg(codec->dev, "M98090_SLD_MASK\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (active & M98090_ULK_MASK)
 		dev_err(codec->dev, "M98090_ULK_MASK\n");
 =======
+=======
+>>>>>>> v3.18
 	if (active & M98090_ULK_MASK) {
 		dev_dbg(codec->dev, "M98090_ULK_MASK\n");
 		schedule_work(&max98090->pll_work);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (active & M98090_JDET_MASK) {
@@ -2504,8 +2721,14 @@ static irqreturn_t max98090_interrupt(int irq, void *data)
 		pm_wakeup_event(codec->dev, 100);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&max98090->jack_work,
 			msecs_to_jiffies(100));
+=======
+		queue_delayed_work(system_power_efficient_wq,
+				   &max98090->jack_work,
+				   msecs_to_jiffies(100));
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq,
 				   &max98090->jack_work,
@@ -2558,8 +2781,14 @@ int max98090_mic_detect(struct snd_soc_codec *codec,
 			    SND_JACK_HEADSET | SND_JACK_BTN_0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&max98090->jack_work,
 		msecs_to_jiffies(100));
+=======
+	queue_delayed_work(system_power_efficient_wq,
+			   &max98090->jack_work,
+			   msecs_to_jiffies(100));
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq,
 			   &max98090->jack_work,
@@ -2580,6 +2809,10 @@ static struct snd_soc_dai_ops max98090_dai_ops = {
 	.hw_params = max98090_dai_hw_params,
 	.digital_mute = max98090_dai_digital_mute,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.trigger = max98090_dai_trigger,
+>>>>>>> v3.18
 =======
 	.trigger = max98090_dai_trigger,
 >>>>>>> v3.18
@@ -2607,6 +2840,7 @@ static struct snd_soc_dai_driver max98090_dai[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void max98090_handle_pdata(struct snd_soc_codec *codec)
 {
 	struct max98090_priv *max98090 = snd_soc_codec_get_drvdata(codec);
@@ -2621,11 +2855,17 @@ static void max98090_handle_pdata(struct snd_soc_codec *codec)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int max98090_probe(struct snd_soc_codec *codec)
 {
 	struct max98090_priv *max98090 = snd_soc_codec_get_drvdata(codec);
 	struct max98090_cdata *cdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum max98090_type devtype;
+>>>>>>> v3.18
 =======
 	enum max98090_type devtype;
 >>>>>>> v3.18
@@ -2633,6 +2873,7 @@ static int max98090_probe(struct snd_soc_codec *codec)
 
 	dev_dbg(codec->dev, "max98090_probe\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	max98090->codec = codec;
 
@@ -2644,11 +2885,16 @@ static int max98090_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	max98090->mclk = devm_clk_get(codec->dev, "mclk");
 	if (PTR_ERR(max98090->mclk) == -EPROBE_DEFER)
 		return -EPROBE_DEFER;
 
 	max98090->codec = codec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Reset the codec, the DSP core, and disable all interrupts */
@@ -2658,6 +2904,10 @@ static int max98090_probe(struct snd_soc_codec *codec)
 
 	max98090->sysclk = (unsigned)-1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	max98090->master = false;
+>>>>>>> v3.18
 =======
 	max98090->master = false;
 >>>>>>> v3.18
@@ -2670,7 +2920,10 @@ static int max98090_probe(struct snd_soc_codec *codec)
 	max98090->pa1en = 0;
 	max98090->pa2en = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max98090->extmic_mux = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2682,6 +2935,7 @@ static int max98090_probe(struct snd_soc_codec *codec)
 	}
 
 	if ((ret >= M98090_REVA) && (ret <= M98090_REVA + 0x0f)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		max98090->devtype = MAX98090;
 		dev_info(codec->dev, "MAX98090 REVID=0x%02x\n", ret);
@@ -2697,6 +2951,8 @@ static int max98090_probe(struct snd_soc_codec *codec)
 
 	INIT_DELAYED_WORK(&max98090->jack_work, max98090_jack_work);
 =======
+=======
+>>>>>>> v3.18
 		devtype = MAX98090;
 		dev_info(codec->dev, "MAX98090 REVID=0x%02x\n", ret);
 	} else if ((ret >= M98091_REVA) && (ret <= M98091_REVA + 0x0f)) {
@@ -2720,12 +2976,16 @@ static int max98090_probe(struct snd_soc_codec *codec)
 	INIT_WORK(&max98090->pll_det_disable_work,
 		  max98090_pll_det_disable_work);
 	INIT_WORK(&max98090->pll_work, max98090_pll_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Enable jack detection */
 	snd_soc_write(codec, M98090_REG_JACK_DETECT,
 		M98090_JDETEN_MASK | M98090_JDEB_25MS);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register for interrupts */
 	dev_dbg(codec->dev, "irq = %d\n", max98090->irq);
@@ -2738,6 +2998,8 @@ static int max98090_probe(struct snd_soc_codec *codec)
 			ret);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -2763,7 +3025,12 @@ static int max98090_probe(struct snd_soc_codec *codec)
 		M98090_VCM_MODE_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max98090_handle_pdata(codec);
+=======
+	snd_soc_update_bits(codec, M98090_REG_MIC_BIAS_VOLTAGE,
+		M98090_MBVSEL_MASK, M98090_MBVSEL_2V8);
+>>>>>>> v3.18
 =======
 	snd_soc_update_bits(codec, M98090_REG_MIC_BIAS_VOLTAGE,
 		M98090_MBVSEL_MASK, M98090_MBVSEL_2V8);
@@ -2781,11 +3048,17 @@ static int max98090_remove(struct snd_soc_codec *codec)
 
 	cancel_delayed_work_sync(&max98090->jack_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cancel_delayed_work_sync(&max98090->pll_det_enable_work);
 	cancel_work_sync(&max98090->pll_det_disable_work);
 	cancel_work_sync(&max98090->pll_work);
 	max98090->codec = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2811,15 +3084,21 @@ static const struct regmap_config max98090_regmap = {
 
 static int max98090_i2c_probe(struct i2c_client *i2c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 const struct i2c_device_id *id)
 {
 	struct max98090_priv *max98090;
 =======
+=======
+>>>>>>> v3.18
 				 const struct i2c_device_id *i2c_id)
 {
 	struct max98090_priv *max98090;
 	const struct acpi_device_id *acpi_id;
 	kernel_ulong_t driver_data = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -2831,12 +3110,15 @@ static int max98090_i2c_probe(struct i2c_client *i2c,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max98090->devtype = id->driver_data;
 	i2c_set_clientdata(i2c, max98090);
 	max98090->control_data = i2c;
 	max98090->pdata = i2c->dev.platform_data;
 	max98090->irq = i2c->irq;
 =======
+=======
+>>>>>>> v3.18
 	if (ACPI_HANDLE(&i2c->dev)) {
 		acpi_id = acpi_match_device(i2c->dev.driver->acpi_match_table,
 					    &i2c->dev);
@@ -2852,6 +3134,9 @@ static int max98090_i2c_probe(struct i2c_client *i2c,
 	max98090->devtype = driver_data;
 	i2c_set_clientdata(i2c, max98090);
 	max98090->pdata = i2c->dev.platform_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	max98090->regmap = devm_regmap_init_i2c(i2c, &max98090_regmap);
@@ -2862,7 +3147,10 @@ static int max98090_i2c_probe(struct i2c_client *i2c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_request_threaded_irq(&i2c->dev, i2c->irq, NULL,
 		max98090_interrupt, IRQF_TRIGGER_FALLING | IRQF_ONESHOT,
 		"max98090_interrupt", max98090);
@@ -2872,6 +3160,9 @@ static int max98090_i2c_probe(struct i2c_client *i2c,
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_codec(&i2c->dev,
 			&soc_codec_dev_max98090, max98090_dai,
@@ -2887,6 +3178,10 @@ static int max98090_i2c_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_RUNTIME
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_RUNTIME
 >>>>>>> v3.18
@@ -2912,7 +3207,10 @@ static int max98090_runtime_suspend(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_PM_SLEEP
@@ -2938,12 +3236,19 @@ static int max98090_suspend(struct device *dev)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct dev_pm_ops max98090_pm = {
 	SET_RUNTIME_PM_OPS(max98090_runtime_suspend,
 		max98090_runtime_resume, NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SET_SYSTEM_SLEEP_PM_OPS(max98090_suspend, max98090_resume)
+>>>>>>> v3.18
 =======
 	SET_SYSTEM_SLEEP_PM_OPS(max98090_suspend, max98090_resume)
 >>>>>>> v3.18
@@ -2952,6 +3257,10 @@ static const struct dev_pm_ops max98090_pm = {
 static const struct i2c_device_id max98090_i2c_id[] = {
 	{ "max98090", MAX98090 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "max98091", MAX98091 },
+>>>>>>> v3.18
 =======
 	{ "max98091", MAX98091 },
 >>>>>>> v3.18
@@ -2960,7 +3269,10 @@ static const struct i2c_device_id max98090_i2c_id[] = {
 MODULE_DEVICE_TABLE(i2c, max98090_i2c_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id max98090_of_match[] = {
 	{ .compatible = "maxim,max98090", },
 	{ .compatible = "maxim,max98091", },
@@ -2976,6 +3288,9 @@ static struct acpi_device_id max98090_acpi_match[] = {
 MODULE_DEVICE_TABLE(acpi, max98090_acpi_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver max98090_i2c_driver = {
 	.driver = {
@@ -2983,6 +3298,11 @@ static struct i2c_driver max98090_i2c_driver = {
 		.owner = THIS_MODULE,
 		.pm = &max98090_pm,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(max98090_of_match),
+		.acpi_match_table = ACPI_PTR(max98090_acpi_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(max98090_of_match),
 		.acpi_match_table = ACPI_PTR(max98090_acpi_match),

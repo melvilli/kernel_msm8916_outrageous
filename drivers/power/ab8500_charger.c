@@ -767,7 +767,10 @@ static int ab8500_charger_max_usb_curr(struct ab8500_charger *di,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case USB_STAT_CARKIT_1:
@@ -778,6 +781,10 @@ static int ab8500_charger_max_usb_curr(struct ab8500_charger *di,
 		dev_dbg(di->dev, "USB Type - 0x%02x MaxCurr: %d", link_status,
 				di->max_usb_in_curr.usb_type_max);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -1394,15 +1401,21 @@ static int ab8500_charger_ac_en(struct ux500_charger *charger,
 		 */
 		if (!di->vddadc_en_ac) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			regulator_enable(di->regu);
 			di->vddadc_en_ac = true;
 =======
+=======
+>>>>>>> v3.18
 			ret = regulator_enable(di->regu);
 			if (ret)
 				dev_warn(di->dev,
 					"Failed to enable regulator\n");
 			else
 				di->vddadc_en_ac = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1572,15 +1585,21 @@ static int ab8500_charger_usb_en(struct ux500_charger *charger,
 		 */
 		if (!di->vddadc_en_usb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			regulator_enable(di->regu);
 			di->vddadc_en_usb = true;
 =======
+=======
+>>>>>>> v3.18
 			ret = regulator_enable(di->regu);
 			if (ret)
 				dev_warn(di->dev,
 					"Failed to enable regulator\n");
 			else
 				di->vddadc_en_usb = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -3451,8 +3470,11 @@ static int ab8500_charger_remove(struct platform_device *pdev)
 		power_supply_unregister(&di->ac_chg.psy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

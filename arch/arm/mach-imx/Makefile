@@ -13,17 +13,23 @@ obj-$(CONFIG_SOC_IMX35) += mm-imx3.o cpu-imx35.o clk-imx35.o ehci-imx35.o pm-imx
 
 imx5-pm-$(CONFIG_PM) += pm-imx5.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SOC_IMX5) += cpu-imx5.o mm-imx5.o clk-imx51-imx53.o ehci-imx5.o $(imx5-pm-y)
 
 obj-$(CONFIG_COMMON_CLK) += clk-pllv1.o clk-pllv2.o clk-pllv3.o clk-gate2.o \
 			    clk-pfd.o clk-busy.o clk.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_SOC_IMX5) += cpu-imx5.o clk-imx51-imx53.o $(imx5-pm-y)
 
 obj-$(CONFIG_COMMON_CLK) += clk-pllv1.o clk-pllv2.o clk-pllv3.o clk-gate2.o \
 			    clk-pfd.o clk-busy.o clk.o \
 			    clk-fixup-div.o clk-fixup-mux.o \
 			    clk-gate-exclusive.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 obj-$(CONFIG_IMX_HAVE_IOMUX_V1) += iomux-v1.o
@@ -33,7 +39,10 @@ obj-$(CONFIG_MXC_TZIC) += tzic.o
 obj-$(CONFIG_MXC_AVIC) += avic.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MXC_ULPI) += ulpi.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MXC_USE_EPIT) += epit.o
@@ -43,6 +52,12 @@ ifeq ($(CONFIG_CPU_IDLE),y)
 obj-$(CONFIG_SOC_IMX5) += cpuidle-imx5.o
 obj-$(CONFIG_SOC_IMX6Q) += cpuidle-imx6q.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SOC_IMX6SL) += cpuidle-imx6sl.o
+# i.MX6SX reuses i.MX6Q cpuidle driver
+obj-$(CONFIG_SOC_IMX6SX) += cpuidle-imx6q.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SOC_IMX6SL) += cpuidle-imx6sl.o
 # i.MX6SX reuses i.MX6Q cpuidle driver
@@ -56,6 +71,7 @@ obj-y += ssi-fiq-ksym.o
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Support for CMOS sensor interface
 obj-$(CONFIG_MX1_VIDEO) += mx1-camera-fiq.o mx1-camera-fiq-ksym.o
 
@@ -64,10 +80,15 @@ obj-$(CONFIG_ARCH_MX1ADS) += mach-mx1ads.o
 obj-$(CONFIG_MACH_SCB9328) += mach-scb9328.o
 obj-$(CONFIG_MACH_APF9328) += mach-apf9328.o
 =======
+=======
+>>>>>>> v3.18
 # i.MX1 based machines
 obj-$(CONFIG_MACH_SCB9328) += mach-scb9328.o
 obj-$(CONFIG_MACH_APF9328) += mach-apf9328.o
 obj-$(CONFIG_MACH_IMX1_DT) += imx1-dt.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # i.MX21 based machines
@@ -82,6 +103,7 @@ obj-$(CONFIG_MACH_IMX25_DT) += imx25-dt.o
 # i.MX27 based machines
 obj-$(CONFIG_MACH_MX27ADS) += mach-mx27ads.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_PCM038) += mach-pcm038.o
 obj-$(CONFIG_MACH_PCM970_BASEBOARD) += pcm970-baseboard.o
 obj-$(CONFIG_MACH_MX27_3DS) += mach-mx27_3ds.o
@@ -92,6 +114,11 @@ obj-$(CONFIG_MACH_EUKREA_MBIMX27_BASEBOARD) += eukrea_mbimx27-baseboard.o
 obj-$(CONFIG_MACH_PCA100) += mach-pca100.o
 obj-$(CONFIG_MACH_MXT_TD60) += mach-mxt_td60.o
 obj-$(CONFIG_MACH_IMX27IPCAM) += mach-imx27ipcam.o
+=======
+obj-$(CONFIG_MACH_MX27_3DS) += mach-mx27_3ds.o
+obj-$(CONFIG_MACH_IMX27_VISSTRIM_M10) += mach-imx27_visstrim_m10.o
+obj-$(CONFIG_MACH_PCA100) += mach-pca100.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MACH_MX27_3DS) += mach-mx27_3ds.o
 obj-$(CONFIG_MACH_IMX27_VISSTRIM_M10) += mach-imx27_visstrim_m10.o
@@ -121,6 +148,10 @@ obj-$(CONFIG_MACH_EUKREA_CPUIMX35SD) += mach-cpuimx35.o
 obj-$(CONFIG_MACH_EUKREA_MBIMXSD35_BASEBOARD) += eukrea_mbimxsd35-baseboard.o
 obj-$(CONFIG_MACH_VPR200) += mach-vpr200.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MACH_IMX35_DT) += imx35-dt.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MACH_IMX35_DT) += imx35-dt.o
 >>>>>>> v3.18
@@ -129,6 +160,7 @@ obj-$(CONFIG_HAVE_IMX_ANATOP) += anatop.o
 obj-$(CONFIG_HAVE_IMX_GPC) += gpc.o
 obj-$(CONFIG_HAVE_IMX_MMDC) += mmdc.o
 obj-$(CONFIG_HAVE_IMX_SRC) += src.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 AFLAGS_headsmp.o :=-Wa,-march=armv7-a
 obj-$(CONFIG_SMP) += headsmp.o platsmp.o
@@ -148,6 +180,8 @@ obj-$(CONFIG_MACH_IMX51_DT) += imx51-dt.o
 obj-$(CONFIG_SOC_IMX53) += mach-imx53.o
 
 =======
+=======
+>>>>>>> v3.18
 ifdef CONFIG_SOC_IMX6
 AFLAGS_headsmp.o :=-Wa,-march=armv7-a
 obj-$(CONFIG_SMP) += headsmp.o platsmp.o
@@ -169,5 +203,8 @@ obj-$(CONFIG_SOC_IMX53) += mach-imx53.o
 
 obj-$(CONFIG_SOC_VF610) += clk-vf610.o mach-vf610.o
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-y += devices/

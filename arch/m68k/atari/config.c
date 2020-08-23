@@ -38,6 +38,11 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-atari.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-atari.h>
 #include <asm/byteorder.h>
@@ -135,6 +140,7 @@ int __init atari_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u_long *data = record->data;
 
 	switch (record->tag) {
@@ -144,6 +150,8 @@ int __init atari_parse_bootinfo(const struct bi_record *record)
 	case BI_ATARI_MCH_TYPE:
 		atari_mch_type = *data;
 =======
+=======
+>>>>>>> v3.18
 	const void *data = record->data;
 
 	switch (be16_to_cpu(record->tag)) {
@@ -152,6 +160,9 @@ int __init atari_parse_bootinfo(const struct bi_record *record)
 		break;
 	case BI_ATARI_MCH_TYPE:
 		atari_mch_type = be32_to_cpup(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:

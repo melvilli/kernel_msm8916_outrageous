@@ -1,8 +1,14 @@
 config DRM_EXYNOS
 	tristate "DRM Support for Samsung SoC EXYNOS Series"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM && (PLAT_SAMSUNG || ARCH_MULTIPLATFORM)
 	select DRM_KMS_HELPER
+=======
+	depends on OF && DRM && (PLAT_SAMSUNG || ARCH_MULTIPLATFORM)
+	select DRM_KMS_HELPER
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 =======
 	depends on OF && DRM && (PLAT_SAMSUNG || ARCH_MULTIPLATFORM)
 	select DRM_KMS_HELPER
@@ -13,6 +19,10 @@ config DRM_EXYNOS
 	select FB_CFB_IMAGEBLIT
 	select VT_HW_CONSOLE_BINDING if FRAMEBUFFER_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select VIDEOMODE_HELPERS
+>>>>>>> v3.18
 =======
 	select VIDEOMODE_HELPERS
 >>>>>>> v3.18
@@ -35,6 +45,7 @@ config DRM_EXYNOS_DMABUF
 config DRM_EXYNOS_FIMD
 	bool "Exynos DRM FIMD"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on OF && DRM_EXYNOS && !FB_S3C && !ARCH_MULTIPLATFORM
 	select FB_MODE_HELPERS
 	select VIDEOMODE_HELPERS
@@ -42,6 +53,8 @@ config DRM_EXYNOS_FIMD
 	  Choose this option if you want to use Exynos FIMD for DRM.
 
 =======
+=======
+>>>>>>> v3.18
 	depends on DRM_EXYNOS && !FB_S3C
 	select FB_MODE_HELPERS
 	select MFD_SYSCON
@@ -73,6 +86,9 @@ config DRM_EXYNOS_DP
 	help
 	  This enables support for DP device.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DRM_EXYNOS_HDMI
 	bool "Exynos DRM HDMI"
@@ -95,7 +111,11 @@ config DRM_EXYNOS_G2D
 config DRM_EXYNOS_IPP
 	bool "Exynos DRM IPP"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM_EXYNOS && !ARCH_MULTIPLATFORM
+=======
+	depends on DRM_EXYNOS
+>>>>>>> v3.18
 =======
 	depends on DRM_EXYNOS
 >>>>>>> v3.18
@@ -105,7 +125,11 @@ config DRM_EXYNOS_IPP
 config DRM_EXYNOS_FIMC
 	bool "Exynos DRM FIMC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM_EXYNOS_IPP && MFD_SYSCON && OF
+=======
+	depends on DRM_EXYNOS_IPP && MFD_SYSCON
+>>>>>>> v3.18
 =======
 	depends on DRM_EXYNOS_IPP && MFD_SYSCON
 >>>>>>> v3.18
@@ -121,7 +145,11 @@ config DRM_EXYNOS_ROTATOR
 config DRM_EXYNOS_GSC
 	bool "Exynos DRM GSC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM_EXYNOS_IPP && ARCH_EXYNOS5
+=======
+	depends on DRM_EXYNOS_IPP && ARCH_EXYNOS5 && !ARCH_MULTIPLATFORM
+>>>>>>> v3.18
 =======
 	depends on DRM_EXYNOS_IPP && ARCH_EXYNOS5 && !ARCH_MULTIPLATFORM
 >>>>>>> v3.18

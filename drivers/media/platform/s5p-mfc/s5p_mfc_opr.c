@@ -22,7 +22,11 @@ static struct s5p_mfc_hw_ops *s5p_mfc_ops;
 void s5p_mfc_init_hw_ops(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev)) {
+=======
+	if (IS_MFCV6_PLUS(dev)) {
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev)) {
 >>>>>>> v3.18
@@ -36,20 +40,30 @@ void s5p_mfc_init_hw_ops(struct s5p_mfc_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void s5p_mfc_init_regs(struct s5p_mfc_dev *dev)
 {
 	if (IS_MFCV6_PLUS(dev))
 		dev->mfc_regs = s5p_mfc_init_regs_v6_plus(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int s5p_mfc_alloc_priv_buf(struct device *dev,
 					struct s5p_mfc_priv_buf *b)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_debug(3, "Allocating priv: %d\n", b->size);
+=======
+	mfc_debug(3, "Allocating priv: %zu\n", b->size);
+>>>>>>> v3.18
 =======
 	mfc_debug(3, "Allocating priv: %zu\n", b->size);
 >>>>>>> v3.18
@@ -62,7 +76,11 @@ int s5p_mfc_alloc_priv_buf(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_debug(3, "Allocated addr %p %08x\n", b->virt, b->dma);
+=======
+	mfc_debug(3, "Allocated addr %p %pad\n", b->virt, &b->dma);
+>>>>>>> v3.18
 =======
 	mfc_debug(3, "Allocated addr %p %pad\n", b->virt, &b->dma);
 >>>>>>> v3.18

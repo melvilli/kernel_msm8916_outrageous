@@ -43,7 +43,11 @@ static void print_buttons(WINDOW * dialog, int height, int width, int selected)
  */
 int dialog_inputbox(const char *title, const char *prompt, int height, int width,
 <<<<<<< HEAD
+<<<<<<< HEAD
                     const char *init)
+=======
+		    const char *init)
+>>>>>>> v3.18
 =======
 		    const char *init)
 >>>>>>> v3.18
@@ -61,6 +65,7 @@ int dialog_inputbox(const char *title, const char *prompt, int height, int width
 
 do_resize:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (getmaxy(stdscr) <= (height - 2))
 		return -ERRDISPLAYTOOSMALL;
 	if (getmaxx(stdscr) <= (width - 2))
@@ -70,6 +75,8 @@ do_resize:
 	x = (COLS - width) / 2;
 	y = (LINES - height) / 2;
 =======
+=======
+>>>>>>> v3.18
 	if (getmaxy(stdscr) <= (height - INPUTBOX_HEIGTH_MIN))
 		return -ERRDISPLAYTOOSMALL;
 	if (getmaxx(stdscr) <= (width - INPUTBOX_WIDTH_MIN))
@@ -78,6 +85,9 @@ do_resize:
 	/* center dialog box on screen */
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	draw_shadow(stdscr, y, x, height, width);

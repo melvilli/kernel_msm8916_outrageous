@@ -21,7 +21,11 @@ int blk_rq_append_bio(struct request_queue *q, struct request *rq,
 		rq->biotail = bio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rq->__data_len += bio->bi_size;
+=======
+		rq->__data_len += bio->bi_iter.bi_size;
+>>>>>>> v3.18
 =======
 		rq->__data_len += bio->bi_iter.bi_size;
 >>>>>>> v3.18
@@ -81,7 +85,11 @@ static int __blk_rq_map_user(struct request_queue *q, struct request *rq,
 	ret = blk_rq_append_bio(q, rq, bio);
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return bio->bi_size;
+=======
+		return bio->bi_iter.bi_size;
+>>>>>>> v3.18
 =======
 		return bio->bi_iter.bi_size;
 >>>>>>> v3.18
@@ -164,7 +172,10 @@ int blk_rq_map_user(struct request_queue *q, struct request *rq,
 		rq->cmd_flags |= REQ_COPY_USER;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq->buffer = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -200,7 +211,11 @@ EXPORT_SYMBOL(blk_rq_map_user);
  */
 int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct rq_map_data *map_data, struct sg_iovec *iov,
+=======
+			struct rq_map_data *map_data, const struct sg_iovec *iov,
+>>>>>>> v3.18
 =======
 			struct rq_map_data *map_data, const struct sg_iovec *iov,
 >>>>>>> v3.18
@@ -236,7 +251,11 @@ int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
 		return PTR_ERR(bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio->bi_size != len) {
+=======
+	if (bio->bi_iter.bi_size != len) {
+>>>>>>> v3.18
 =======
 	if (bio->bi_iter.bi_size != len) {
 >>>>>>> v3.18
@@ -258,7 +277,10 @@ int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
 	bio_get(bio);
 	blk_rq_bio_prep(q, rq, bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq->buffer = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -308,7 +330,11 @@ EXPORT_SYMBOL(blk_rq_unmap_user);
  * Description:
  *    Data will be mapped directly if possible. Otherwise a bounce
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    buffer is used. Can be called multple times to append multple
+=======
+ *    buffer is used. Can be called multiple times to append multiple
+>>>>>>> v3.18
 =======
  *    buffer is used. Can be called multiple times to append multiple
 >>>>>>> v3.18
@@ -352,7 +378,10 @@ int blk_rq_map_kern(struct request_queue *q, struct request *rq, void *kbuf,
 
 	blk_queue_bounce(q, &rq->bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq->buffer = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

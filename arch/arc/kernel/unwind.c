@@ -290,6 +290,11 @@ static void __init setup_unwind_table(struct unwind_table *table,
 			 * return;
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			WARN(1, "unwinder: FDE->initial_location NULL %p\n",
+				(const u8 *)(fde + 1) + *fde);
+>>>>>>> v3.18
 =======
 			WARN(1, "unwinder: FDE->initial_location NULL %p\n",
 				(const u8 *)(fde + 1) + *fde);
@@ -990,6 +995,7 @@ int arc_unwind(struct unwind_frame_info *frame)
 									 1) +
 							    *fde, ptrType);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (pc >= endLoc) {
 					fde = NULL;
 					cie = NULL;
@@ -998,6 +1004,8 @@ int arc_unwind(struct unwind_frame_info *frame)
 				fde = NULL;
 				cie = NULL;
 =======
+=======
+>>>>>>> v3.18
 				if (pc >= endLoc)
 					fde = NULL;
 			} else
@@ -1034,6 +1042,9 @@ int arc_unwind(struct unwind_frame_info *frame)
 							    *fde, ptrType);
 				if (pc >= startLoc && pc < endLoc)
 					break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}

@@ -27,6 +27,10 @@
 #include <linux/smp.h>
 #include <linux/cpumask.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <linux/audit.h>
 >>>>>>> v3.18
@@ -123,15 +127,21 @@ ebt_dev_check(const char *entry, const struct net_device *device)
 	while (entry[i] != '\0' && entry[i] != 1 && entry[i] == devname[i])
 		i++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (devname[i] != entry[i] && entry[i] != 1);
 }
 
 #define FWINV2(bool,invflg) ((bool) ^ !!(e->invflags & invflg))
 =======
+=======
+>>>>>>> v3.18
 	return devname[i] != entry[i] && entry[i] != 1;
 }
 
 #define FWINV2(bool, invflg) ((bool) ^ !!(e->invflags & invflg))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* process standard matches */
 static inline int
@@ -339,10 +349,14 @@ find_inlist_lock_noload(struct list_head *head, const char *name, int *error,
 	} *e;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*error = mutex_lock_interruptible(mutex);
 	if (*error != 0)
 		return NULL;
 
+=======
+	mutex_lock(mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(mutex);
 >>>>>>> v3.18
@@ -1077,7 +1091,10 @@ static int do_replace_finish(struct net *net, struct ebt_replace *repl,
 
 	vfree(counterstmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_AUDIT
 	if (audit_enabled) {
@@ -1092,6 +1109,9 @@ static int do_replace_finish(struct net *net, struct ebt_replace *repl,
 		}
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 
@@ -1236,10 +1256,14 @@ ebt_register_table(struct net *net, const struct ebt_table *input_table)
 	table->private = newinfo;
 	rwlock_init(&table->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mutex_lock_interruptible(&ebt_mutex);
 	if (ret != 0)
 		goto free_chainstack;
 
+=======
+	mutex_lock(&ebt_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&ebt_mutex);
 >>>>>>> v3.18
@@ -1375,7 +1399,11 @@ static inline int ebt_make_matchname(const struct ebt_entry_match *m,
 	/* ebtables expects 32 bytes long names but xt_match names are 29 bytes
 	   long. Copy 29 bytes and fill remaining bytes with zeroes. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(name, m->u.match->name, sizeof(name));
+=======
+	strlcpy(name, m->u.match->name, sizeof(name));
+>>>>>>> v3.18
 =======
 	strlcpy(name, m->u.match->name, sizeof(name));
 >>>>>>> v3.18
@@ -1391,7 +1419,11 @@ static inline int ebt_make_watchername(const struct ebt_entry_watcher *w,
 	char name[EBT_FUNCTION_MAXNAMELEN] = {};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(name, w->u.watcher->name, sizeof(name));
+=======
+	strlcpy(name, w->u.watcher->name, sizeof(name));
+>>>>>>> v3.18
 =======
 	strlcpy(name, w->u.watcher->name, sizeof(name));
 >>>>>>> v3.18
@@ -1421,7 +1453,11 @@ ebt_make_names(struct ebt_entry *e, const char *base, char __user *ubase)
 	if (ret != 0)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(name, t->u.target->name, sizeof(name));
+=======
+	strlcpy(name, t->u.target->name, sizeof(name));
+>>>>>>> v3.18
 =======
 	strlcpy(name, t->u.target->name, sizeof(name));
 >>>>>>> v3.18
@@ -1489,7 +1525,11 @@ static int copy_everything_to_user(struct ebt_table *t, void __user *user,
 
 	if (*len != sizeof(struct ebt_replace) + entries_size +
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   (tmp.num_counters? nentries * sizeof(struct ebt_counter): 0))
+=======
+	   (tmp.num_counters ? nentries * sizeof(struct ebt_counter) : 0))
+>>>>>>> v3.18
 =======
 	   (tmp.num_counters ? nentries * sizeof(struct ebt_counter) : 0))
 >>>>>>> v3.18
@@ -1529,7 +1569,11 @@ static int do_ebt_set_ctl(struct sock *sk,
 		return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(cmd) {
+=======
+	switch (cmd) {
+>>>>>>> v3.18
 =======
 	switch (cmd) {
 >>>>>>> v3.18
@@ -1563,15 +1607,21 @@ static int do_ebt_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(cmd) {
 	case EBT_SO_GET_INFO:
 	case EBT_SO_GET_INIT_INFO:
 		if (*len != sizeof(struct ebt_replace)){
 =======
+=======
+>>>>>>> v3.18
 	switch (cmd) {
 	case EBT_SO_GET_INFO:
 	case EBT_SO_GET_INIT_INFO:
 		if (*len != sizeof(struct ebt_replace)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -EINVAL;
 			mutex_unlock(&ebt_mutex);
@@ -1588,7 +1638,11 @@ static int do_ebt_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 		}
 		mutex_unlock(&ebt_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_to_user(user, &tmp, *len) != 0){
+=======
+		if (copy_to_user(user, &tmp, *len) != 0) {
+>>>>>>> v3.18
 =======
 		if (copy_to_user(user, &tmp, *len) != 0) {
 >>>>>>> v3.18
@@ -2442,8 +2496,12 @@ static int compat_do_ebt_get_ctl(struct sock *sk, int cmd,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nf_sockopt_ops ebt_sockopts =
 {
+=======
+static struct nf_sockopt_ops ebt_sockopts = {
+>>>>>>> v3.18
 =======
 static struct nf_sockopt_ops ebt_sockopts = {
 >>>>>>> v3.18

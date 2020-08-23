@@ -112,9 +112,15 @@ static const char usbhsh_hcd_name[] = "renesas_usbhs host";
 
 #define __usbhsh_for_each_udev(start, pos, h, i)	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = start, pos = (h)->udev + i;		\
 	     i < USBHSH_DEVICE_MAX;			\
 	     i++, pos = (h)->udev + i)
+=======
+	for ((i) = start;						\
+	     ((i) < USBHSH_DEVICE_MAX) && ((pos) = (h)->udev + (i));	\
+	     (i)++)
+>>>>>>> v3.18
 =======
 	for ((i) = start;						\
 	     ((i) < USBHSH_DEVICE_MAX) && ((pos) = (h)->udev + (i));	\
@@ -1476,6 +1482,10 @@ static int usbhsh_start(struct usbhs_priv *priv)
 	if (ret < 0)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18

@@ -20,7 +20,11 @@ static int xen_dbgp_op(struct usb_hcd *hcd, int op)
 
 #ifdef CONFIG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctrlr->bus == &pci_bus_type) {
+=======
+	if (dev_is_pci(ctrlr)) {
+>>>>>>> v3.18
 =======
 	if (dev_is_pci(ctrlr)) {
 >>>>>>> v3.18

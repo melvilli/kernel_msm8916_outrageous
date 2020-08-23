@@ -33,8 +33,11 @@ struct aligninfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_XFORM(inst)	(((inst) >> 26) == 31)
 #define IS_DSFORM(inst)	(((inst) >> 26) >= 56)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -59,8 +62,11 @@ struct aligninfo {
 #define DCBZ	0x5f	/* 8xx/82xx dcbz faults when cache not enabled */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SWAP(a, b)	(t = (a), (a) = (b), (b) = t)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -83,7 +89,11 @@ static struct aligninfo aligninfo[128] = {
 	{ 4, ST+F+S },		/* 00 0 1010: stfs */
 	{ 8, ST+F },		/* 00 0 1011: stfd */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INVALID,		/* 00 0 1100 */
+=======
+	{ 16, LD },		/* 00 0 1100: lq */
+>>>>>>> v3.18
 =======
 	{ 16, LD },		/* 00 0 1100: lq */
 >>>>>>> v3.18
@@ -154,7 +164,11 @@ static struct aligninfo aligninfo[128] = {
 	{ 4, LD+SE },		/* 10 0 1101  lwa */
 	{ 2, ST+SW },		/* 10 0 1110: sthbrx */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INVALID,		/* 10 0 1111 */
+=======
+	{ 16, ST },		/* 10 0 1111: stq */
+>>>>>>> v3.18
 =======
 	{ 16, ST },		/* 10 0 1111: stq */
 >>>>>>> v3.18
@@ -210,6 +224,7 @@ static struct aligninfo aligninfo[128] = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Create a DSISR value from the instruction
  */
 static inline unsigned make_dsisr(unsigned instr)
@@ -241,6 +256,8 @@ static inline unsigned make_dsisr(unsigned instr)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The dcbz (data cache block zero) instruction
@@ -275,6 +292,10 @@ static int emulate_dcbz(struct pt_regs *regs, unsigned char __user *addr)
  * top 4 bytes of the affected register.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __BIG_ENDIAN__
+>>>>>>> v3.18
 =======
 #ifdef __BIG_ENDIAN__
 >>>>>>> v3.18
@@ -284,12 +305,18 @@ static int emulate_dcbz(struct pt_regs *regs, unsigned char __user *addr)
 #define REG_BYTE(rp, i)		*((u8 *)(rp) + (i))
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifdef __LITTLE_ENDIAN__
 #define REG_BYTE(rp, i)		(*(((u8 *)((rp) + ((i)>>2)) + ((i)&3))))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SWIZ_PTR(p)		((unsigned char __user *)((p) ^ swiz))
@@ -336,7 +363,10 @@ static int emulate_multiple(struct pt_regs *regs, unsigned char __user *addr,
 			nb = 128 - reg * 4;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 		/*
 		 *  String instructions are endian neutral but the code
@@ -346,6 +376,9 @@ static int emulate_multiple(struct pt_regs *regs, unsigned char __user *addr,
 		 */
 		flags ^= SW;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* lwm, stmw */
@@ -415,8 +448,11 @@ static int emulate_fp_pair(unsigned char __user *addr, unsigned int reg,
 	int i, ret, sw = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(flags & F))
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (reg & 1)
@@ -439,7 +475,10 @@ static int emulate_fp_pair(unsigned char __user *addr, unsigned int reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64
 static int emulate_lq_stq(struct pt_regs *regs, unsigned char __user *addr,
 			  unsigned int reg, unsigned int flags)
@@ -468,6 +507,9 @@ static int emulate_lq_stq(struct pt_regs *regs, unsigned char __user *addr,
 }
 #endif /* CONFIG_PPC64 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SPE
 
@@ -535,7 +577,11 @@ static int emulate_spe(struct pt_regs *regs, unsigned int reg,
 		       unsigned int instr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int t, ret;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -662,6 +708,7 @@ static int emulate_spe(struct pt_regs *regs, unsigned int reg,
 		switch (flags & 0xf0) {
 		case E8:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SWAP(data.v[0], data.v[7]);
 			SWAP(data.v[1], data.v[6]);
 			SWAP(data.v[2], data.v[5]);
@@ -681,6 +728,8 @@ static int emulate_spe(struct pt_regs *regs, unsigned int reg,
 			SWAP(data.v[4], data.v[5]);
 			SWAP(data.v[6], data.v[7]);
 =======
+=======
+>>>>>>> v3.18
 			data.ll = swab64(data.ll);
 			break;
 		case E4:
@@ -693,6 +742,9 @@ static int emulate_spe(struct pt_regs *regs, unsigned int reg,
 			data.h[1] = swab16(data.h[1]);
 			data.h[2] = swab16(data.h[2]);
 			data.h[3] = swab16(data.h[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -747,6 +799,7 @@ static int emulate_vsx(unsigned char __user *addr, unsigned int reg,
 	int i, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_vsx_to_thread(current);
 
 	if (reg < 32)
@@ -759,6 +812,8 @@ static int emulate_vsx(unsigned char __user *addr, unsigned int reg,
 	if (flags & SW)
 		sw = elsize-1;
 =======
+=======
+>>>>>>> v3.18
 	/* userland only */
 	if (unlikely(!user_mode(regs)))
 		return 0;
@@ -791,6 +846,9 @@ static int emulate_vsx(unsigned char __user *addr, unsigned int reg,
 	if (flags & SW)
 		sw = elsize-1;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (j = 0; j < length; j += elsize) {
@@ -802,10 +860,13 @@ static int emulate_vsx(unsigned char __user *addr, unsigned int reg,
 		}
 		ptr  += elsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr += elsize;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 		addr -= elsize;
 #else
@@ -821,6 +882,9 @@ static int emulate_vsx(unsigned char __user *addr, unsigned int reg,
 #define VSX_LO 0
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ret) {
 		if (flags & U)
@@ -829,15 +893,21 @@ static int emulate_vsx(unsigned char __user *addr, unsigned int reg,
 		/* Splat load copies the same data to top and bottom 8 bytes */
 		if (flags & SPLT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			lptr[1] = lptr[0];
 		/* For 8 byte loads, zero the top 8 bytes */
 		else if (!(flags & ST) && (8 == length))
 			lptr[1] = 0;
 =======
+=======
+>>>>>>> v3.18
 			lptr[VSX_LO] = lptr[VSX_HI];
 		/* For 8 byte loads, zero the low 8 bytes */
 		else if (!(flags & ST) && (8 == length))
 			lptr[VSX_LO] = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else
 		return -EFAULT;
@@ -862,8 +932,13 @@ int fix_alignment(struct pt_regs *regs)
 	unsigned char __user *addr;
 	unsigned long p, swiz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, t;
 	union {
+=======
+	int ret, i;
+	union data {
+>>>>>>> v3.18
 =======
 	int ret, i;
 	union data {
@@ -873,6 +948,7 @@ int fix_alignment(struct pt_regs *regs)
 		unsigned char v[8];
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned hi32;
 			int	 low32;
 		} x32;
@@ -880,6 +956,8 @@ int fix_alignment(struct pt_regs *regs)
 			unsigned char hi48[6];
 			short	      low16;
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 			int	 low32;
 			unsigned hi32;
@@ -896,6 +974,9 @@ int fix_alignment(struct pt_regs *regs)
 			unsigned char hi48[6];
 			short	      low16;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} x16;
 	} data;
@@ -944,6 +1025,7 @@ int fix_alignment(struct pt_regs *regs)
 	flags = aligninfo[instr].flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Handle some cases which give overlaps in the DSISR values.
 	 */
@@ -964,6 +1046,8 @@ int fix_alignment(struct pt_regs *regs)
 			return 0;	/* not emulated ever */
 		}
 =======
+=======
+>>>>>>> v3.18
 	/* ldbrx/stdbrx overlap lfs/stfs in the DSISR unfortunately */
 	if (IS_XFORM(instruction) && ((instruction >> 1) & 0x3ff) == 532) {
 		nb = 8;
@@ -972,14 +1056,23 @@ int fix_alignment(struct pt_regs *regs)
 		   ((instruction >> 1) & 0x3ff) == 660) {
 		nb = 8;
 		flags = ST+SW;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Byteswap little endian loads and stores */
 	swiz = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (regs->msr & MSR_LE) {
 		flags ^= SW;
+=======
+	if ((regs->msr & MSR_LE) != (MSR_KERNEL & MSR_LE)) {
+		flags ^= SW;
+#ifdef __BIG_ENDIAN__
+>>>>>>> v3.18
 =======
 	if ((regs->msr & MSR_LE) != (MSR_KERNEL & MSR_LE)) {
 		flags ^= SW;
@@ -998,6 +1091,10 @@ int fix_alignment(struct pt_regs *regs)
 		if (cpu_has_feature(CPU_FTR_PPC_LE))
 			swiz = 7;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1026,7 +1123,11 @@ int fix_alignment(struct pt_regs *regs)
 
 		flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (regs->msr & MSR_LE)
+=======
+		if ((regs->msr & MSR_LE) != (MSR_KERNEL & MSR_LE))
+>>>>>>> v3.18
 =======
 		if ((regs->msr & MSR_LE) != (MSR_KERNEL & MSR_LE))
 >>>>>>> v3.18
@@ -1078,11 +1179,14 @@ int fix_alignment(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Special case for 16-byte FP loads and stores */
 	if (nb == 16) {
 		PPC_WARN_ALIGNMENT(fp_pair, regs);
 		return emulate_fp_pair(addr, reg, flags);
 =======
+=======
+>>>>>>> v3.18
 	if ((nb == 16)) {
 		if (flags & F) {
 			/* Special case for 16-byte FP loads and stores */
@@ -1097,6 +1201,9 @@ int fix_alignment(struct pt_regs *regs)
 			return 0;
 #endif
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1106,6 +1213,7 @@ int fix_alignment(struct pt_regs *regs)
 	 * get it from register values
 	 */
 	if (!(flags & ST)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		data.ll = 0;
 		ret = 0;
@@ -1128,6 +1236,8 @@ int fix_alignment(struct pt_regs *regs)
 	} else if (flags & F) {
 		data.dd = current->thread.TS_FPR(reg);
 =======
+=======
+>>>>>>> v3.18
 		unsigned int start = 0;
 
 		switch (nb) {
@@ -1152,6 +1262,9 @@ int fix_alignment(struct pt_regs *regs)
 
 	} else if (flags & F) {
 		data.ll = current->thread.TS_FPR(reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (flags & S) {
 			/* Single-precision FP store requires conversion... */
@@ -1159,7 +1272,11 @@ int fix_alignment(struct pt_regs *regs)
 			preempt_disable();
 			enable_kernel_fp();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cvt_df(&data.dd, (float *)&data.v[4]);
+=======
+			cvt_df(&data.dd, (float *)&data.x32.low32);
+>>>>>>> v3.18
 =======
 			cvt_df(&data.dd, (float *)&data.x32.low32);
 >>>>>>> v3.18
@@ -1175,6 +1292,7 @@ int fix_alignment(struct pt_regs *regs)
 		switch (nb) {
 		case 8:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SWAP(data.v[0], data.v[7]);
 			SWAP(data.v[1], data.v[6]);
 			SWAP(data.v[2], data.v[5]);
@@ -1187,6 +1305,8 @@ int fix_alignment(struct pt_regs *regs)
 		case 2:
 			SWAP(data.v[6], data.v[7]);
 =======
+=======
+>>>>>>> v3.18
 			data.ll = swab64(data.ll);
 			break;
 		case 4:
@@ -1194,6 +1314,9 @@ int fix_alignment(struct pt_regs *regs)
 			break;
 		case 2:
 			data.x16.low16 = swab16(data.x16.low16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1217,7 +1340,11 @@ int fix_alignment(struct pt_regs *regs)
 		preempt_disable();
 		enable_kernel_fp();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cvt_fd((float *)&data.v[4], &data.dd);
+=======
+		cvt_fd((float *)&data.x32.low32, &data.dd);
+>>>>>>> v3.18
 =======
 		cvt_fd((float *)&data.x32.low32, &data.dd);
 >>>>>>> v3.18
@@ -1230,6 +1357,7 @@ int fix_alignment(struct pt_regs *regs)
 
 	/* Store result to memory or update registers */
 	if (flags & ST) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = 0;
 		p = (unsigned long) addr;
@@ -1251,6 +1379,8 @@ int fix_alignment(struct pt_regs *regs)
 	} else if (flags & F)
 		current->thread.TS_FPR(reg) = data.dd;
 =======
+=======
+>>>>>>> v3.18
 		unsigned int start = 0;
 
 		switch (nb) {
@@ -1273,6 +1403,9 @@ int fix_alignment(struct pt_regs *regs)
 			return -EFAULT;
 	} else if (flags & F)
 		current->thread.TS_FPR(reg) = data.ll;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		regs->gpr[reg] = data.ll;

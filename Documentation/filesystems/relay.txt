@@ -32,7 +32,11 @@ Semantics
 Each relay channel has one buffer per CPU, each buffer has one or more
 sub-buffers.  Messages are written to the first sub-buffer until it is
 <<<<<<< HEAD
+<<<<<<< HEAD
 too full to contain a new message, in which case it it is written to
+=======
+too full to contain a new message, in which case it is written to
+>>>>>>> v3.18
 =======
 too full to contain a new message, in which case it is written to
 >>>>>>> v3.18

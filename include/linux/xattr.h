@@ -32,7 +32,11 @@ struct xattr_handler {
 
 struct xattr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
+=======
+	const char *name;
+>>>>>>> v3.18
 =======
 	const char *name;
 >>>>>>> v3.18

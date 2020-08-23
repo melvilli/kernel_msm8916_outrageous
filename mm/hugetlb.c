@@ -14,6 +14,10 @@
 #include <linux/pagemap.h>
 #include <linux/mempolicy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -27,6 +31,10 @@
 #include <linux/swapops.h>
 #include <linux/page-isolation.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jhash.h>
+>>>>>>> v3.18
 =======
 #include <linux/jhash.h>
 >>>>>>> v3.18
@@ -42,8 +50,11 @@
 #include "internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const unsigned long hugetlb_zero = 0, hugetlb_infinity = ~0UL;
 static gfp_t htlb_alloc_mask = GFP_HIGHUSER;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned long hugepages_treat_as_movable;
@@ -61,11 +72,14 @@ static unsigned long __initdata default_hstate_size;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Protects updates to hugepage_freelists, nr_huge_pages, and free_huge_pages
  */
 DEFINE_SPINLOCK(hugetlb_lock);
 
 =======
+=======
+>>>>>>> v3.18
  * Protects updates to hugepage_freelists, hugepage_activelist, nr_huge_pages,
  * free_huge_pages, and surplus_huge_pages.
  */
@@ -78,6 +92,9 @@ DEFINE_SPINLOCK(hugetlb_lock);
 static int num_fault_mutexes;
 static struct mutex *htlb_fault_mutex_table ____cacheline_aligned_in_smp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void unlock_or_release_subpool(struct hugepage_subpool *spool)
 {
@@ -162,6 +179,7 @@ static inline struct hugepage_subpool *subpool_vma(struct vm_area_struct *vma)
  *                    across the pages in a mapping.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The region data structures are protected by a combination of the mmap_sem
  * and the hugetlb_instantion_mutex.  To access or modify a region the caller
  * must either hold the mmap_sem for write, or the mmap_sem for read and
@@ -175,6 +193,10 @@ static inline struct hugepage_subpool *subpool_vma(struct vm_area_struct *vma)
  * The region data structures are embedded into a resv_map and
  * protected by a resv_map's lock
 >>>>>>> v3.18
+=======
+ * The region data structures are embedded into a resv_map and
+ * protected by a resv_map's lock
+>>>>>>> v3.18
  */
 struct file_region {
 	struct list_head link;
@@ -183,17 +205,23 @@ struct file_region {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long region_add(struct list_head *head, long f, long t)
 {
 	struct file_region *rg, *nrg, *trg;
 
 =======
+=======
+>>>>>>> v3.18
 static long region_add(struct resv_map *resv, long f, long t)
 {
 	struct list_head *head = &resv->regions;
 	struct file_region *rg, *nrg, *trg;
 
 	spin_lock(&resv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Locate the region we are either in or before. */
 	list_for_each_entry(rg, head, link)
@@ -225,6 +253,7 @@ static long region_add(struct resv_map *resv, long f, long t)
 	nrg->from = f;
 	nrg->to = t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -234,6 +263,8 @@ static long region_chg(struct list_head *head, long f, long t)
 	long chg = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&resv->lock);
 	return 0;
 }
@@ -246,6 +277,9 @@ static long region_chg(struct resv_map *resv, long f, long t)
 
 retry:
 	spin_lock(&resv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Locate the region we are before or in. */
 	list_for_each_entry(rg, head, link)
@@ -257,6 +291,7 @@ retry:
 	 * size such that we can guarantee to record the reservation. */
 	if (&rg->link == head || t < rg->from) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nrg = kmalloc(sizeof(*nrg), GFP_KERNEL);
 		if (!nrg)
 			return -ENOMEM;
@@ -267,6 +302,8 @@ retry:
 
 		return t - f;
 =======
+=======
+>>>>>>> v3.18
 		if (!nrg) {
 			spin_unlock(&resv->lock);
 			nrg = kmalloc(sizeof(*nrg), GFP_KERNEL);
@@ -282,6 +319,9 @@ retry:
 		list_add(&nrg->link, rg->link.prev);
 		chg = t - f;
 		goto out_nrg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -296,7 +336,11 @@ retry:
 			break;
 		if (rg->from > t)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return chg;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -311,6 +355,7 @@ retry:
 		chg -= rg->to - rg->from;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return chg;
 }
 
@@ -320,6 +365,8 @@ static long region_truncate(struct list_head *head, long end)
 	long chg = 0;
 
 =======
+=======
+>>>>>>> v3.18
 
 out:
 	spin_unlock(&resv->lock);
@@ -338,6 +385,9 @@ static long region_truncate(struct resv_map *resv, long end)
 	long chg = 0;
 
 	spin_lock(&resv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Locate the region we are either in or before. */
 	list_for_each_entry(rg, head, link)
@@ -345,7 +395,11 @@ static long region_truncate(struct resv_map *resv, long end)
 			break;
 	if (&rg->link == head)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -366,6 +420,7 @@ static long region_truncate(struct resv_map *resv, long end)
 		kfree(rg);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return chg;
 }
 
@@ -375,6 +430,8 @@ static long region_count(struct list_head *head, long f, long t)
 	long chg = 0;
 
 =======
+=======
+>>>>>>> v3.18
 
 out:
 	spin_unlock(&resv->lock);
@@ -388,6 +445,9 @@ static long region_count(struct resv_map *resv, long f, long t)
 	long chg = 0;
 
 	spin_lock(&resv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Locate each segment we overlap with, and count that overlap. */
 	list_for_each_entry(rg, head, link) {
@@ -405,6 +465,10 @@ static long region_count(struct resv_map *resv, long f, long t)
 		chg += seg_to - seg_from;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock(&resv->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&resv->lock);
 >>>>>>> v3.18
@@ -443,7 +507,11 @@ unsigned long vma_kernel_pagesize(struct vm_area_struct *vma)
 	hstate = hstate_vma(vma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1UL << (hstate->order + PAGE_SHIFT);
+=======
+	return 1UL << huge_page_shift(hstate);
+>>>>>>> v3.18
 =======
 	return 1UL << huge_page_shift(hstate);
 >>>>>>> v3.18
@@ -503,12 +571,16 @@ static void set_vma_private_data(struct vm_area_struct *vma,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct resv_map {
 	struct kref refs;
 	struct list_head regions;
 };
 
 static struct resv_map *resv_map_alloc(void)
+=======
+struct resv_map *resv_map_alloc(void)
+>>>>>>> v3.18
 =======
 struct resv_map *resv_map_alloc(void)
 >>>>>>> v3.18
@@ -519,6 +591,10 @@ struct resv_map *resv_map_alloc(void)
 
 	kref_init(&resv_map->refs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&resv_map->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&resv_map->lock);
 >>>>>>> v3.18
@@ -528,7 +604,11 @@ struct resv_map *resv_map_alloc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void resv_map_release(struct kref *ref)
+=======
+void resv_map_release(struct kref *ref)
+>>>>>>> v3.18
 =======
 void resv_map_release(struct kref *ref)
 >>>>>>> v3.18
@@ -536,6 +616,7 @@ void resv_map_release(struct kref *ref)
 	struct resv_map *resv_map = container_of(ref, struct resv_map, refs);
 
 	/* Clear out any active regions before we release the map. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	region_truncate(&resv_map->regions, 0);
 	kfree(resv_map);
@@ -549,6 +630,8 @@ static struct resv_map *vma_resv_map(struct vm_area_struct *vma)
 							~HPAGE_RESV_MASK);
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	region_truncate(resv_map, 0);
 	kfree(resv_map);
 }
@@ -571,14 +654,22 @@ static struct resv_map *vma_resv_map(struct vm_area_struct *vma)
 		return (struct resv_map *)(get_vma_private_data(vma) &
 							~HPAGE_RESV_MASK);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void set_vma_resv_map(struct vm_area_struct *vma, struct resv_map *map)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!is_vm_hugetlb_page(vma));
 	VM_BUG_ON(vma->vm_flags & VM_MAYSHARE);
+=======
+	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
+	VM_BUG_ON_VMA(vma->vm_flags & VM_MAYSHARE, vma);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
 	VM_BUG_ON_VMA(vma->vm_flags & VM_MAYSHARE, vma);
@@ -591,8 +682,13 @@ static void set_vma_resv_map(struct vm_area_struct *vma, struct resv_map *map)
 static void set_vma_resv_flags(struct vm_area_struct *vma, unsigned long flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!is_vm_hugetlb_page(vma));
 	VM_BUG_ON(vma->vm_flags & VM_MAYSHARE);
+=======
+	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
+	VM_BUG_ON_VMA(vma->vm_flags & VM_MAYSHARE, vma);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
 	VM_BUG_ON_VMA(vma->vm_flags & VM_MAYSHARE, vma);
@@ -604,7 +700,11 @@ static void set_vma_resv_flags(struct vm_area_struct *vma, unsigned long flags)
 static int is_vma_resv_set(struct vm_area_struct *vma, unsigned long flag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!is_vm_hugetlb_page(vma));
+=======
+	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
 >>>>>>> v3.18
@@ -612,6 +712,7 @@ static int is_vma_resv_set(struct vm_area_struct *vma, unsigned long flag)
 	return (get_vma_private_data(vma) & flag) != 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Decrement the reserved pages in the hugepage pool by one */
 static void decrement_hugepage_resv_vma(struct hstate *h,
@@ -637,16 +738,22 @@ void reset_vma_resv_huge_pages(struct vm_area_struct *vma)
 {
 	VM_BUG_ON(!is_vm_hugetlb_page(vma));
 =======
+=======
+>>>>>>> v3.18
 /* Reset counters to 0 and clear all HPAGE_RESV_* flags */
 void reset_vma_resv_huge_pages(struct vm_area_struct *vma)
 {
 	VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(vma->vm_flags & VM_MAYSHARE))
 		vma->vm_private_data = (void *)0;
 }
 
 /* Returns true if the VMA has associated reserve pages */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int vma_has_reserves(struct vm_area_struct *vma)
 {
@@ -690,6 +797,8 @@ void copy_huge_page(struct page *dst, struct page *src)
 		copy_highpage(dst + i, src + i);
 	}
 =======
+=======
+>>>>>>> v3.18
 static int vma_has_reserves(struct vm_area_struct *vma, long chg)
 {
 	if (vma->vm_flags & VM_NORESERVE) {
@@ -720,6 +829,9 @@ static int vma_has_reserves(struct vm_area_struct *vma, long chg)
 		return 1;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -752,10 +864,13 @@ static struct page *dequeue_huge_page_node(struct hstate *h, int nid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct page *dequeue_huge_page_vma(struct hstate *h,
 				struct vm_area_struct *vma,
 				unsigned long address, int avoid_reserve)
 =======
+=======
+>>>>>>> v3.18
 /* Movability of hugepages depends on migration support. */
 static inline gfp_t htlb_alloc_mask(struct hstate *h)
 {
@@ -769,6 +884,9 @@ static struct page *dequeue_huge_page_vma(struct hstate *h,
 				struct vm_area_struct *vma,
 				unsigned long address, int avoid_reserve,
 				long chg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct page *page = NULL;
@@ -780,10 +898,13 @@ static struct page *dequeue_huge_page_vma(struct hstate *h,
 	unsigned int cpuset_mems_cookie;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 retry_cpuset:
 	cpuset_mems_cookie = get_mems_allowed();
 	zonelist = huge_zonelist(vma, address,
 					htlb_alloc_mask, &mpol, &nodemask);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -792,7 +913,11 @@ retry_cpuset:
 	 * not "stolen". The child may still get SIGKILLed
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vma_has_reserves(vma) &&
+=======
+	if (!vma_has_reserves(vma, chg) &&
+>>>>>>> v3.18
 =======
 	if (!vma_has_reserves(vma, chg) &&
 >>>>>>> v3.18
@@ -804,6 +929,7 @@ retry_cpuset:
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_zone_zonelist_nodemask(zone, z, zonelist,
 						MAX_NR_ZONES - 1, nodemask) {
 		if (cpuset_zone_allowed_softwall(zone, htlb_alloc_mask)) {
@@ -812,6 +938,8 @@ retry_cpuset:
 				if (!avoid_reserve)
 					decrement_hugepage_resv_vma(h, vma);
 =======
+=======
+>>>>>>> v3.18
 retry_cpuset:
 	cpuset_mems_cookie = read_mems_allowed_begin();
 	zonelist = huge_zonelist(vma, address,
@@ -829,6 +957,9 @@ retry_cpuset:
 
 				SetPagePrivate(page);
 				h->resv_huge_pages--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -837,7 +968,11 @@ retry_cpuset:
 
 	mpol_cond_put(mpol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!put_mems_allowed(cpuset_mems_cookie) && !page))
+=======
+	if (unlikely(!page && read_mems_allowed_retry(cpuset_mems_cookie)))
+>>>>>>> v3.18
 =======
 	if (unlikely(!page && read_mems_allowed_retry(cpuset_mems_cookie)))
 >>>>>>> v3.18
@@ -846,11 +981,14 @@ retry_cpuset:
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpol_cond_put(mpol);
 	return NULL;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return NULL;
 }
 
@@ -1065,13 +1203,21 @@ static inline int alloc_fresh_gigantic_page(struct hstate *h,
 					nodemask_t *nodes_allowed) { return 0; }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void update_and_free_page(struct hstate *h, struct page *page)
 {
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(h->order >= MAX_ORDER);
+=======
+	if (hstate_is_gigantic(h) && !gigantic_page_supported())
+		return;
+>>>>>>> v3.18
 =======
 	if (hstate_is_gigantic(h) && !gigantic_page_supported())
 		return;
@@ -1083,6 +1229,7 @@ static void update_and_free_page(struct hstate *h, struct page *page)
 		page[i].flags &= ~(1 << PG_locked | 1 << PG_error |
 				1 << PG_referenced | 1 << PG_dirty |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				1 << PG_active | 1 << PG_reserved |
 				1 << PG_private | 1 << PG_writeback);
 	}
@@ -1092,6 +1239,8 @@ static void update_and_free_page(struct hstate *h, struct page *page)
 	arch_release_hugepage(page);
 	__free_pages(page, huge_page_order(h));
 =======
+=======
+>>>>>>> v3.18
 				1 << PG_active | 1 << PG_private |
 				1 << PG_writeback);
 	}
@@ -1105,6 +1254,9 @@ static void update_and_free_page(struct hstate *h, struct page *page)
 		arch_release_hugepage(page);
 		__free_pages(page, huge_page_order(h));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1120,7 +1272,11 @@ struct hstate *size_to_hstate(unsigned long size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void free_huge_page(struct page *page)
+=======
+void free_huge_page(struct page *page)
+>>>>>>> v3.18
 =======
 void free_huge_page(struct page *page)
 >>>>>>> v3.18
@@ -1134,6 +1290,10 @@ void free_huge_page(struct page *page)
 	struct hugepage_subpool *spool =
 		(struct hugepage_subpool *)page_private(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool restore_reserve;
+>>>>>>> v3.18
 =======
 	bool restore_reserve;
 >>>>>>> v3.18
@@ -1143,6 +1303,11 @@ void free_huge_page(struct page *page)
 	BUG_ON(page_count(page));
 	BUG_ON(page_mapcount(page));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	restore_reserve = PagePrivate(page);
+	ClearPagePrivate(page);
+>>>>>>> v3.18
 =======
 	restore_reserve = PagePrivate(page);
 	ClearPagePrivate(page);
@@ -1152,12 +1317,18 @@ void free_huge_page(struct page *page)
 	hugetlb_cgroup_uncharge_page(hstate_index(h),
 				     pages_per_huge_page(h), page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h->surplus_huge_pages_node[nid] && huge_page_order(h) < MAX_ORDER) {
 =======
+=======
+>>>>>>> v3.18
 	if (restore_reserve)
 		h->resv_huge_pages++;
 
 	if (h->surplus_huge_pages_node[nid]) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* remove the page from active list */
 		list_del(&page->lru);
@@ -1194,9 +1365,12 @@ static void prep_compound_gigantic_page(struct page *page, unsigned long order)
 	set_compound_order(page, order);
 	__SetPageHead(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i < nr_pages; i++, p = mem_map_next(p, page, i)) {
 		__SetPageTail(p);
 =======
+=======
+>>>>>>> v3.18
 	__ClearPageReserved(page);
 	for (i = 1; i < nr_pages; i++, p = mem_map_next(p, page, i)) {
 		__SetPageTail(p);
@@ -1213,6 +1387,9 @@ static void prep_compound_gigantic_page(struct page *page, unsigned long order)
 		 * after get_user_pages().
 		 */
 		__ClearPageReserved(p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_page_count(p, 0);
 		p->first_page = page;
@@ -1227,8 +1404,11 @@ static void prep_compound_gigantic_page(struct page *page, unsigned long order)
 int PageHuge(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compound_page_dtor *dtor;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!PageCompound(page))
@@ -1236,9 +1416,13 @@ int PageHuge(struct page *page)
 
 	page = compound_head(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dtor = get_compound_page_dtor(page);
 
 	return dtor == free_huge_page;
+=======
+	return get_compound_page_dtor(page) == free_huge_page;
+>>>>>>> v3.18
 =======
 	return get_compound_page_dtor(page) == free_huge_page;
 >>>>>>> v3.18
@@ -1252,6 +1436,7 @@ EXPORT_SYMBOL_GPL(PageHuge);
 int PageHeadHuge(struct page *page_head)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compound_page_dtor *dtor;
 
 	if (!PageHead(page_head))
@@ -1263,11 +1448,16 @@ int PageHeadHuge(struct page *page_head)
 }
 EXPORT_SYMBOL_GPL(PageHeadHuge);
 =======
+=======
+>>>>>>> v3.18
 	if (!PageHead(page_head))
 		return 0;
 
 	return get_compound_page_dtor(page_head) == free_huge_page;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 pgoff_t __basepage_index(struct page *page)
@@ -1292,11 +1482,16 @@ static struct page *alloc_fresh_huge_page_node(struct hstate *h, int nid)
 	struct page *page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h->order >= MAX_ORDER)
 		return NULL;
 
 	page = alloc_pages_exact_node(nid,
 		htlb_alloc_mask|__GFP_COMP|__GFP_THISNODE|
+=======
+	page = alloc_pages_exact_node(nid,
+		htlb_alloc_mask(h)|__GFP_COMP|__GFP_THISNODE|
+>>>>>>> v3.18
 =======
 	page = alloc_pages_exact_node(nid,
 		htlb_alloc_mask(h)|__GFP_COMP|__GFP_THISNODE|
@@ -1314,6 +1509,7 @@ static struct page *alloc_fresh_huge_page_node(struct hstate *h, int nid)
 	return page;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * common helper functions for hstate_next_node_to_{alloc|free}.
@@ -1371,6 +1567,8 @@ static int alloc_fresh_huge_page(struct hstate *h, nodemask_t *nodes_allowed)
 	do {
 		page = alloc_fresh_huge_page_node(h, next_nid);
 =======
+=======
+>>>>>>> v3.18
 static int alloc_fresh_huge_page(struct hstate *h, nodemask_t *nodes_allowed)
 {
 	struct page *page;
@@ -1379,14 +1577,21 @@ static int alloc_fresh_huge_page(struct hstate *h, nodemask_t *nodes_allowed)
 
 	for_each_node_mask_to_alloc(h, nr_nodes, node, nodes_allowed) {
 		page = alloc_fresh_huge_page_node(h, node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (page) {
 			ret = 1;
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		next_nid = hstate_next_node_to_alloc(h, nodes_allowed);
 	} while (next_nid != start_nid);
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1400,6 +1605,7 @@ static int alloc_fresh_huge_page(struct hstate *h, nodemask_t *nodes_allowed)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * helper for free_pool_huge_page() - return the previously saved
  * node ["this node"] from which to free a huge page.  Advance the
@@ -1421,6 +1627,8 @@ static int hstate_next_node_to_free(struct hstate *h, nodemask_t *nodes_allowed)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Free huge page from pool from next node to free.
  * Attempt to keep persistent huge pages more or less
  * balanced over allowed nodes.
@@ -1429,6 +1637,7 @@ static int hstate_next_node_to_free(struct hstate *h, nodemask_t *nodes_allowed)
 static int free_pool_huge_page(struct hstate *h, nodemask_t *nodes_allowed,
 							 bool acct_surplus)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int start_nid;
 	int next_nid;
@@ -1439,15 +1648,21 @@ static int free_pool_huge_page(struct hstate *h, nodemask_t *nodes_allowed,
 
 	do {
 =======
+=======
+>>>>>>> v3.18
 	int nr_nodes, node;
 	int ret = 0;
 
 	for_each_node_mask_to_free(h, nr_nodes, node, nodes_allowed) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * If we're returning unused surplus pages, only examine
 		 * nodes with surplus pages.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ((!acct_surplus || h->surplus_huge_pages_node[next_nid]) &&
 		    !list_empty(&h->hugepage_freelists[next_nid])) {
@@ -1461,6 +1676,8 @@ static int free_pool_huge_page(struct hstate *h, nodemask_t *nodes_allowed,
 				h->surplus_huge_pages--;
 				h->surplus_huge_pages_node[next_nid]--;
 =======
+=======
+>>>>>>> v3.18
 		if ((!acct_surplus || h->surplus_huge_pages_node[node]) &&
 		    !list_empty(&h->hugepage_freelists[node])) {
 			struct page *page =
@@ -1472,6 +1689,9 @@ static int free_pool_huge_page(struct hstate *h, nodemask_t *nodes_allowed,
 			if (acct_surplus) {
 				h->surplus_huge_pages--;
 				h->surplus_huge_pages_node[node]--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			update_and_free_page(h, page);
@@ -1479,8 +1699,12 @@ static int free_pool_huge_page(struct hstate *h, nodemask_t *nodes_allowed,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		next_nid = hstate_next_node_to_free(h, nodes_allowed);
 	} while (next_nid != start_nid);
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1489,7 +1713,10 @@ static int free_pool_huge_page(struct hstate *h, nodemask_t *nodes_allowed,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Dissolve a given free hugepage into free buddy pages. This function does
  * nothing for in-use (including surplus) hugepages.
@@ -1531,6 +1758,9 @@ void dissolve_free_huge_pages(unsigned long start_pfn, unsigned long end_pfn)
 		dissolve_free_huge_page(pfn_to_page(pfn));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct page *alloc_buddy_huge_page(struct hstate *h, int nid)
 {
@@ -1538,7 +1768,11 @@ static struct page *alloc_buddy_huge_page(struct hstate *h, int nid)
 	unsigned int r_nid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h->order >= MAX_ORDER)
+=======
+	if (hstate_is_gigantic(h))
+>>>>>>> v3.18
 =======
 	if (hstate_is_gigantic(h))
 >>>>>>> v3.18
@@ -1579,7 +1813,11 @@ static struct page *alloc_buddy_huge_page(struct hstate *h, int nid)
 
 	if (nid == NUMA_NO_NODE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page = alloc_pages(htlb_alloc_mask|__GFP_COMP|
+=======
+		page = alloc_pages(htlb_alloc_mask(h)|__GFP_COMP|
+>>>>>>> v3.18
 =======
 		page = alloc_pages(htlb_alloc_mask(h)|__GFP_COMP|
 >>>>>>> v3.18
@@ -1588,7 +1826,11 @@ static struct page *alloc_buddy_huge_page(struct hstate *h, int nid)
 	else
 		page = alloc_pages_exact_node(nid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			htlb_alloc_mask|__GFP_COMP|__GFP_THISNODE|
+=======
+			htlb_alloc_mask(h)|__GFP_COMP|__GFP_THISNODE|
+>>>>>>> v3.18
 =======
 			htlb_alloc_mask(h)|__GFP_COMP|__GFP_THISNODE|
 >>>>>>> v3.18
@@ -1629,16 +1871,22 @@ static struct page *alloc_buddy_huge_page(struct hstate *h, int nid)
 struct page *alloc_huge_page_node(struct hstate *h, int nid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *page;
 
 	spin_lock(&hugetlb_lock);
 	page = dequeue_huge_page_node(h, nid);
 =======
+=======
+>>>>>>> v3.18
 	struct page *page = NULL;
 
 	spin_lock(&hugetlb_lock);
 	if (h->free_huge_pages - h->resv_huge_pages > 0)
 		page = dequeue_huge_page_node(h, nid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&hugetlb_lock);
 
@@ -1721,7 +1969,11 @@ retry:
 		 */
 		put_page_testzero(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		VM_BUG_ON(page_count(page));
+=======
+		VM_BUG_ON_PAGE(page_count(page), page);
+>>>>>>> v3.18
 =======
 		VM_BUG_ON_PAGE(page_count(page), page);
 >>>>>>> v3.18
@@ -1732,11 +1984,16 @@ free:
 
 	/* Free unnecessary surplus pages to the buddy allocator */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!list_empty(&surplus_list)) {
 		list_for_each_entry_safe(page, tmp, &surplus_list, lru) {
 			put_page(page);
 		}
 	}
+=======
+	list_for_each_entry_safe(page, tmp, &surplus_list, lru)
+		put_page(page);
+>>>>>>> v3.18
 =======
 	list_for_each_entry_safe(page, tmp, &surplus_list, lru)
 		put_page(page);
@@ -1747,6 +2004,7 @@ free:
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This routine has two main purposes:
  * 1) Decrement the reservation count (resv_huge_pages) by the value passed
@@ -1761,10 +2019,15 @@ free:
  * freeing.  Do this by ensuring resv_huge_page always is greater than the
  * number of huge pages we plan to free when dropping the lock.
 =======
+=======
+>>>>>>> v3.18
  * When releasing a hugetlb pool reservation, any surplus pages that were
  * allocated to satisfy the reservation must be explicitly freed if they were
  * never used.
  * Called with hugetlb_lock held.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void return_unused_surplus_pages(struct hstate *h,
@@ -1772,6 +2035,7 @@ static void return_unused_surplus_pages(struct hstate *h,
 {
 	unsigned long nr_pages;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Cannot return gigantic pages currently */
 	if (h->order >= MAX_ORDER)
@@ -1782,6 +2046,8 @@ static void return_unused_surplus_pages(struct hstate *h,
 	 * by pre-allocated pages. Only free surplus pages.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	/* Uncommit the reservation */
 	h->resv_huge_pages -= unused_resv_pages;
 
@@ -1789,6 +2055,9 @@ static void return_unused_surplus_pages(struct hstate *h,
 	if (hstate_is_gigantic(h))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nr_pages = min(unused_resv_pages, h->surplus_huge_pages);
 
@@ -1799,6 +2068,7 @@ static void return_unused_surplus_pages(struct hstate *h,
 	 * when the nodes with surplus pages have no free pages.
 	 * free_pool_huge_page() will balance the the freed pages across the
 	 * on-line nodes with memory and will handle the hstate accounting.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * Note that we decrement resv_huge_pages as we free the pages.  If
@@ -1817,12 +2087,17 @@ out:
 	/* Fully uncommit the reservation */
 	h->resv_huge_pages -= unused_resv_pages;
 =======
+=======
+>>>>>>> v3.18
 	 */
 	while (nr_pages--) {
 		if (!free_pool_huge_page(h, &node_states[N_MEMORY], 1))
 			break;
 		cond_resched_lock(&hugetlb_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1839,6 +2114,7 @@ out:
 static long vma_needs_reservation(struct hstate *h,
 			struct vm_area_struct *vma, unsigned long addr)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct address_space *mapping = vma->vm_file->f_mapping;
 	struct inode *inode = mapping->host;
@@ -1862,6 +2138,8 @@ static long vma_needs_reservation(struct hstate *h,
 		return 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct resv_map *resv;
 	pgoff_t idx;
 	long chg;
@@ -1877,11 +2155,15 @@ static long vma_needs_reservation(struct hstate *h,
 		return chg;
 	else
 		return chg < 0 ? chg : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 static void vma_commit_reservation(struct hstate *h,
 			struct vm_area_struct *vma, unsigned long addr)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct address_space *mapping = vma->vm_file->f_mapping;
 	struct inode *inode = mapping->host;
@@ -1898,6 +2180,8 @@ static void vma_commit_reservation(struct hstate *h,
 		region_add(&reservations->regions, idx, idx + 1);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct resv_map *resv;
 	pgoff_t idx;
 
@@ -1907,6 +2191,9 @@ static void vma_commit_reservation(struct hstate *h,
 
 	idx = vma_hugecache_offset(h, vma, addr);
 	region_add(resv, idx, idx + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1932,6 +2219,7 @@ static struct page *alloc_huge_page(struct vm_area_struct *vma,
 	chg = vma_needs_reservation(h, vma, addr);
 	if (chg < 0)
 		return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (chg)
 		if (hugepage_subpool_get_pages(spool, chg))
@@ -1966,6 +2254,8 @@ static struct page *alloc_huge_page(struct vm_area_struct *vma,
 		spin_unlock(&hugetlb_lock);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (chg || avoid_reserve)
 		if (hugepage_subpool_get_pages(spool, 1))
 			return ERR_PTR(-ENOSPC);
@@ -1988,6 +2278,9 @@ static struct page *alloc_huge_page(struct vm_area_struct *vma,
 	}
 	hugetlb_cgroup_commit_charge(idx, pages_per_huge_page(h), h_cg, page);
 	spin_unlock(&hugetlb_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	set_page_private(page, (unsigned long)spool);
@@ -1995,7 +2288,10 @@ static struct page *alloc_huge_page(struct vm_area_struct *vma,
 	vma_commit_reservation(h, vma, addr);
 	return page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 out_uncharge_cgroup:
 	hugetlb_cgroup_uncharge_cgroup(idx, pages_per_huge_page(h), h_cg);
@@ -2017,12 +2313,16 @@ struct page *alloc_huge_page_noerr(struct vm_area_struct *vma,
 	if (IS_ERR(page))
 		page = NULL;
 	return page;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int __weak alloc_bootmem_huge_page(struct hstate *h)
 {
 	struct huge_bootmem_page *m;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int nr_nodes = nodes_weight(node_states[N_MEMORY]);
 
@@ -2035,6 +2335,8 @@ int __weak alloc_bootmem_huge_page(struct hstate *h)
 				huge_page_size(h), huge_page_size(h), 0);
 
 =======
+=======
+>>>>>>> v3.18
 	int nr_nodes, node;
 
 	for_each_node_mask_to_alloc(h, nr_nodes, node, &node_states[N_MEMORY]) {
@@ -2043,6 +2345,9 @@ int __weak alloc_bootmem_huge_page(struct hstate *h)
 		addr = memblock_virt_alloc_try_nid_nopanic(
 				huge_page_size(h), huge_page_size(h),
 				0, BOOTMEM_ALLOC_ACCESSIBLE, node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (addr) {
 			/*
@@ -2054,7 +2359,10 @@ int __weak alloc_bootmem_huge_page(struct hstate *h)
 			goto found;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nr_nodes--;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2069,7 +2377,11 @@ found:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void prep_compound_huge_page(struct page *page, int order)
+=======
+static void __init prep_compound_huge_page(struct page *page, int order)
+>>>>>>> v3.18
 =======
 static void __init prep_compound_huge_page(struct page *page, int order)
 >>>>>>> v3.18
@@ -2092,6 +2404,7 @@ static void __init gather_bootmem_prealloc(void)
 #ifdef CONFIG_HIGHMEM
 		page = pfn_to_page(m->phys >> PAGE_SHIFT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_bootmem_late((unsigned long)m,
 				  sizeof(struct huge_bootmem_page));
 #else
@@ -2101,6 +2414,8 @@ static void __init gather_bootmem_prealloc(void)
 		WARN_ON(page_count(page) != 1);
 		prep_compound_huge_page(page, h->order);
 =======
+=======
+>>>>>>> v3.18
 		memblock_free_late(__pa(m),
 				   sizeof(struct huge_bootmem_page));
 #else
@@ -2109,6 +2424,9 @@ static void __init gather_bootmem_prealloc(void)
 		WARN_ON(page_count(page) != 1);
 		prep_compound_huge_page(page, h->order);
 		WARN_ON(PageReserved(page));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		prep_new_huge_page(h, page, page_to_nid(page));
 		/*
@@ -2118,8 +2436,13 @@ static void __init gather_bootmem_prealloc(void)
 		 * side-effects, like CommitLimit going negative.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (h->order > (MAX_ORDER - 1))
 			totalram_pages += 1 << h->order;
+=======
+		if (hstate_is_gigantic(h))
+			adjust_managed_page_count(page, 1 << h->order);
+>>>>>>> v3.18
 =======
 		if (hstate_is_gigantic(h))
 			adjust_managed_page_count(page, 1 << h->order);
@@ -2133,7 +2456,11 @@ static void __init hugetlb_hstate_alloc_pages(struct hstate *h)
 
 	for (i = 0; i < h->max_huge_pages; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (h->order >= MAX_ORDER) {
+=======
+		if (hstate_is_gigantic(h)) {
+>>>>>>> v3.18
 =======
 		if (hstate_is_gigantic(h)) {
 >>>>>>> v3.18
@@ -2153,7 +2480,11 @@ static void __init hugetlb_init_hstates(void)
 	for_each_hstate(h) {
 		/* oversize hugepages were init'ed in early boot */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (h->order < MAX_ORDER)
+=======
+		if (!hstate_is_gigantic(h))
+>>>>>>> v3.18
 =======
 		if (!hstate_is_gigantic(h))
 >>>>>>> v3.18
@@ -2191,7 +2522,11 @@ static void try_to_free_low(struct hstate *h, unsigned long count,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h->order >= MAX_ORDER)
+=======
+	if (hstate_is_gigantic(h))
+>>>>>>> v3.18
 =======
 	if (hstate_is_gigantic(h))
 >>>>>>> v3.18
@@ -2227,6 +2562,7 @@ static inline void try_to_free_low(struct hstate *h, unsigned long count,
 static int adjust_pool_surplus(struct hstate *h, nodemask_t *nodes_allowed,
 				int delta)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int start_nid, next_nid;
 	int ret = 0;
@@ -2271,6 +2607,8 @@ static int adjust_pool_surplus(struct hstate *h, nodemask_t *nodes_allowed,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	int nr_nodes, node;
 
 	VM_BUG_ON(delta != -1 && delta != 1);
@@ -2293,6 +2631,9 @@ found:
 	h->surplus_huge_pages += delta;
 	h->surplus_huge_pages_node[node] += delta;
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2303,7 +2644,11 @@ static unsigned long set_max_huge_pages(struct hstate *h, unsigned long count,
 	unsigned long min_count, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h->order >= MAX_ORDER)
+=======
+	if (hstate_is_gigantic(h) && !gigantic_page_supported())
+>>>>>>> v3.18
 =======
 	if (hstate_is_gigantic(h) && !gigantic_page_supported())
 >>>>>>> v3.18
@@ -2334,12 +2679,18 @@ static unsigned long set_max_huge_pages(struct hstate *h, unsigned long count,
 		 */
 		spin_unlock(&hugetlb_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = alloc_fresh_huge_page(h, nodes_allowed);
 =======
+=======
+>>>>>>> v3.18
 		if (hstate_is_gigantic(h))
 			ret = alloc_fresh_gigantic_page(h, nodes_allowed);
 		else
 			ret = alloc_fresh_huge_page(h, nodes_allowed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&hugetlb_lock);
 		if (!ret)
@@ -2426,6 +2777,7 @@ static ssize_t nr_hugepages_show_common(struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t nr_hugepages_store_common(bool obey_mempolicy,
 			struct kobject *kobj, struct kobj_attribute *attr,
 			const char *buf, size_t len)
@@ -2443,6 +2795,8 @@ static ssize_t nr_hugepages_store_common(bool obey_mempolicy,
 	h = kobj_to_hstate(kobj, &nid);
 	if (h->order >= MAX_ORDER) {
 =======
+=======
+>>>>>>> v3.18
 static ssize_t __nr_hugepages_store_common(bool obey_mempolicy,
 					   struct hstate *h, int nid,
 					   unsigned long count, size_t len)
@@ -2451,6 +2805,9 @@ static ssize_t __nr_hugepages_store_common(bool obey_mempolicy,
 	NODEMASK_ALLOC(nodemask_t, nodes_allowed, GFP_KERNEL | __GFP_NORETRY);
 
 	if (hstate_is_gigantic(h) && !gigantic_page_supported()) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -EINVAL;
 		goto out;
@@ -2487,7 +2844,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t nr_hugepages_store_common(bool obey_mempolicy,
 					 struct kobject *kobj, const char *buf,
 					 size_t len)
@@ -2505,6 +2865,9 @@ static ssize_t nr_hugepages_store_common(bool obey_mempolicy,
 	return __nr_hugepages_store_common(obey_mempolicy, h, nid, count, len);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t nr_hugepages_show(struct kobject *kobj,
 				       struct kobj_attribute *attr, char *buf)
@@ -2516,7 +2879,11 @@ static ssize_t nr_hugepages_store(struct kobject *kobj,
 	       struct kobj_attribute *attr, const char *buf, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nr_hugepages_store_common(false, kobj, attr, buf, len);
+=======
+	return nr_hugepages_store_common(false, kobj, buf, len);
+>>>>>>> v3.18
 =======
 	return nr_hugepages_store_common(false, kobj, buf, len);
 >>>>>>> v3.18
@@ -2539,7 +2906,11 @@ static ssize_t nr_hugepages_mempolicy_store(struct kobject *kobj,
 	       struct kobj_attribute *attr, const char *buf, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nr_hugepages_store_common(true, kobj, attr, buf, len);
+=======
+	return nr_hugepages_store_common(true, kobj, buf, len);
+>>>>>>> v3.18
 =======
 	return nr_hugepages_store_common(true, kobj, buf, len);
 >>>>>>> v3.18
@@ -2563,15 +2934,21 @@ static ssize_t nr_overcommit_hugepages_store(struct kobject *kobj,
 	struct hstate *h = kobj_to_hstate(kobj, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h->order >= MAX_ORDER)
 		return -EINVAL;
 
 	err = strict_strtoul(buf, 10, &input);
 =======
+=======
+>>>>>>> v3.18
 	if (hstate_is_gigantic(h))
 		return -EINVAL;
 
 	err = kstrtoul(buf, 10, &input);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		return err;
@@ -2854,6 +3231,10 @@ static void __exit hugetlb_exit(void)
 
 	kobject_put(hugepages_kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(htlb_fault_mutex_table);
+>>>>>>> v3.18
 =======
 	kfree(htlb_fault_mutex_table);
 >>>>>>> v3.18
@@ -2863,11 +3244,17 @@ module_exit(hugetlb_exit);
 static int __init hugetlb_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Some platform decide whether they support huge pages at boot
 	 * time. On these, such as powerpc, HPAGE_SHIFT is set to 0 when
 	 * there is no such support
 	 */
 	if (HPAGE_SHIFT == 0)
+=======
+	int i;
+
+	if (!hugepages_supported())
+>>>>>>> v3.18
 =======
 	int i;
 
@@ -2893,7 +3280,10 @@ static int __init hugetlb_init(void)
 	hugetlb_cgroup_file_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	num_fault_mutexes = roundup_pow_of_two(8 * num_possible_cpus());
 #else
@@ -2905,6 +3295,9 @@ static int __init hugetlb_init(void)
 
 	for (i = 0; i < num_fault_mutexes; i++)
 		mutex_init(&htlb_fault_mutex_table[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -3000,6 +3393,7 @@ static int hugetlb_sysctl_handler_common(bool obey_mempolicy,
 {
 	struct hstate *h = &default_hstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp;
 	int ret;
 
@@ -3008,11 +3402,16 @@ static int hugetlb_sysctl_handler_common(bool obey_mempolicy,
 	if (write && h->order >= MAX_ORDER)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long tmp = h->max_huge_pages;
 	int ret;
 
 	if (!hugepages_supported())
 		return -ENOTSUPP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	table->data = &tmp;
@@ -3021,6 +3420,7 @@ static int hugetlb_sysctl_handler_common(bool obey_mempolicy,
 	if (ret)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (write) {
 		NODEMASK_ALLOC(nodemask_t, nodes_allowed,
@@ -3035,6 +3435,11 @@ static int hugetlb_sysctl_handler_common(bool obey_mempolicy,
 		if (nodes_allowed != &node_states[N_MEMORY])
 			NODEMASK_FREE(nodes_allowed);
 	}
+=======
+	if (write)
+		ret = __nr_hugepages_store_common(obey_mempolicy, h,
+						  NUMA_NO_NODE, tmp, *length);
+>>>>>>> v3.18
 =======
 	if (write)
 		ret = __nr_hugepages_store_common(obey_mempolicy, h,
@@ -3062,6 +3467,7 @@ int hugetlb_mempolicy_sysctl_handler(struct ctl_table *table, int write,
 #endif /* CONFIG_NUMA */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hugetlb_treat_movable_handler(struct ctl_table *table, int write,
 			void __user *buffer,
 			size_t *length, loff_t *ppos)
@@ -3076,6 +3482,8 @@ int hugetlb_treat_movable_handler(struct ctl_table *table, int write,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int hugetlb_overcommit_handler(struct ctl_table *table, int write,
 			void __user *buffer,
 			size_t *length, loff_t *ppos)
@@ -3085,16 +3493,22 @@ int hugetlb_overcommit_handler(struct ctl_table *table, int write,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = h->nr_overcommit_huge_pages;
 
 	if (write && h->order >= MAX_ORDER)
 =======
+=======
+>>>>>>> v3.18
 	if (!hugepages_supported())
 		return -ENOTSUPP;
 
 	tmp = h->nr_overcommit_huge_pages;
 
 	if (write && hstate_is_gigantic(h))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -3119,6 +3533,11 @@ void hugetlb_report_meminfo(struct seq_file *m)
 {
 	struct hstate *h = &default_hstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hugepages_supported())
+		return;
+>>>>>>> v3.18
 =======
 	if (!hugepages_supported())
 		return;
@@ -3140,6 +3559,11 @@ int hugetlb_report_node_meminfo(int nid, char *buf)
 {
 	struct hstate *h = &default_hstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hugepages_supported())
+		return 0;
+>>>>>>> v3.18
 =======
 	if (!hugepages_supported())
 		return 0;
@@ -3159,6 +3583,12 @@ void hugetlb_show_meminfo(void)
 	int nid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hugepages_supported())
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!hugepages_supported())
 		return;
@@ -3229,7 +3659,11 @@ out:
 static void hugetlb_vm_op_open(struct vm_area_struct *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resv_map *reservations = vma_resv_map(vma);
+=======
+	struct resv_map *resv = vma_resv_map(vma);
+>>>>>>> v3.18
 =======
 	struct resv_map *resv = vma_resv_map(vma);
 >>>>>>> v3.18
@@ -3242,6 +3676,7 @@ static void hugetlb_vm_op_open(struct vm_area_struct *vma)
 	 * after this open call completes.  It is therefore safe to take a
 	 * new reference here without additional locking.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (reservations)
 		kref_get(&reservations->refs);
@@ -3258,11 +3693,16 @@ static void resv_map_put(struct vm_area_struct *vma)
 	if (resv && is_vma_resv_set(vma, HPAGE_RESV_OWNER))
 		kref_get(&resv->refs);
 >>>>>>> v3.18
+=======
+	if (resv && is_vma_resv_set(vma, HPAGE_RESV_OWNER))
+		kref_get(&resv->refs);
+>>>>>>> v3.18
 }
 
 static void hugetlb_vm_op_close(struct vm_area_struct *vma)
 {
 	struct hstate *h = hstate_vma(vma);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resv_map *reservations = vma_resv_map(vma);
 	struct hugepage_subpool *spool = subpool_vma(vma);
@@ -3284,6 +3724,8 @@ static void hugetlb_vm_op_close(struct vm_area_struct *vma)
 			hugepage_subpool_put_pages(spool, reserve);
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct resv_map *resv = vma_resv_map(vma);
 	struct hugepage_subpool *spool = subpool_vma(vma);
 	unsigned long reserve, start, end;
@@ -3301,6 +3743,9 @@ static void hugetlb_vm_op_close(struct vm_area_struct *vma)
 	if (reserve) {
 		hugetlb_acct_memory(h, -reserve);
 		hugepage_subpool_put_pages(spool, reserve);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -3388,11 +3833,14 @@ int copy_hugetlb_page_range(struct mm_struct *dst, struct mm_struct *src,
 	struct hstate *h = hstate_vma(vma);
 	unsigned long sz = huge_page_size(h);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cow = (vma->vm_flags & (VM_SHARED | VM_MAYWRITE)) == VM_MAYWRITE;
 
 	for (addr = vma->vm_start; addr < vma->vm_end; addr += sz) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long mmun_start;	/* For mmu_notifiers */
 	unsigned long mmun_end;		/* For mmu_notifiers */
 	int ret = 0;
@@ -3406,19 +3854,28 @@ int copy_hugetlb_page_range(struct mm_struct *dst, struct mm_struct *src,
 
 	for (addr = vma->vm_start; addr < vma->vm_end; addr += sz) {
 		spinlock_t *src_ptl, *dst_ptl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		src_pte = huge_pte_offset(src, addr);
 		if (!src_pte)
 			continue;
 		dst_pte = huge_pte_alloc(dst, addr, sz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!dst_pte)
 			goto nomem;
 =======
+=======
+>>>>>>> v3.18
 		if (!dst_pte) {
 			ret = -ENOMEM;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* If the pagetables are shared don't copy or take references */
@@ -3426,8 +3883,14 @@ int copy_hugetlb_page_range(struct mm_struct *dst, struct mm_struct *src,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&dst->page_table_lock);
 		spin_lock_nested(&src->page_table_lock, SINGLE_DEPTH_NESTING);
+=======
+		dst_ptl = huge_pte_lock(h, dst, dst_pte);
+		src_ptl = huge_pte_lockptr(h, src, src_pte);
+		spin_lock_nested(src_ptl, SINGLE_DEPTH_NESTING);
+>>>>>>> v3.18
 =======
 		dst_ptl = huge_pte_lock(h, dst, dst_pte);
 		src_ptl = huge_pte_lockptr(h, src, src_pte);
@@ -3460,6 +3923,7 @@ int copy_hugetlb_page_range(struct mm_struct *dst, struct mm_struct *src,
 			set_huge_pte_at(dst, addr, dst_pte, entry);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&src->page_table_lock);
 		spin_unlock(&dst->page_table_lock);
 	}
@@ -3468,6 +3932,8 @@ int copy_hugetlb_page_range(struct mm_struct *dst, struct mm_struct *src,
 nomem:
 	return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock(src_ptl);
 		spin_unlock(dst_ptl);
 	}
@@ -3476,6 +3942,9 @@ nomem:
 		mmu_notifier_invalidate_range_end(src, mmun_start, mmun_end);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3489,6 +3958,10 @@ void __unmap_hugepage_range(struct mmu_gather *tlb, struct vm_area_struct *vma,
 	pte_t *ptep;
 	pte_t pte;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t *ptl;
+>>>>>>> v3.18
 =======
 	spinlock_t *ptl;
 >>>>>>> v3.18
@@ -3506,7 +3979,10 @@ void __unmap_hugepage_range(struct mmu_gather *tlb, struct vm_area_struct *vma,
 	mmu_notifier_invalidate_range_start(mm, mmun_start, mmun_end);
 again:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&mm->page_table_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (address = start; address < end; address += sz) {
@@ -3514,6 +3990,7 @@ again:
 		if (!ptep)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (huge_pmd_unshare(mm, &address, ptep))
 			continue;
@@ -3530,6 +4007,8 @@ again:
 			huge_pte_clear(mm, address, ptep);
 			continue;
 =======
+=======
+>>>>>>> v3.18
 		ptl = huge_pte_lock(h, mm, ptep);
 		if (huge_pmd_unshare(mm, &address, ptep))
 			goto unlock;
@@ -3544,6 +4023,9 @@ again:
 		if (unlikely(is_hugetlb_entry_hwpoisoned(pte))) {
 			huge_pte_clear(mm, address, ptep);
 			goto unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -3556,7 +4038,11 @@ again:
 		if (ref_page) {
 			if (page != ref_page)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				continue;
+=======
+				goto unlock;
+>>>>>>> v3.18
 =======
 				goto unlock;
 >>>>>>> v3.18
@@ -3577,6 +4063,7 @@ again:
 		page_remove_rmap(page);
 		force_flush = !__tlb_remove_page(tlb, page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (force_flush)
 			break;
 		/* Bail out after unmapping reference page if supplied */
@@ -3585,6 +4072,8 @@ again:
 	}
 	spin_unlock(&mm->page_table_lock);
 =======
+=======
+>>>>>>> v3.18
 		if (force_flush) {
 			spin_unlock(ptl);
 			break;
@@ -3597,6 +4086,9 @@ again:
 unlock:
 		spin_unlock(ptl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * mmu_gather ran out of room to batch pages, we break out of
@@ -3652,8 +4144,13 @@ void unmap_hugepage_range(struct vm_area_struct *vma, unsigned long start,
  * same region.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
 				struct page *page, unsigned long address)
+=======
+static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
+			      struct page *page, unsigned long address)
+>>>>>>> v3.18
 =======
 static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
 			      struct page *page, unsigned long address)
@@ -3686,6 +4183,7 @@ static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Shared VMAs have their own reserves and do not affect
 		 * MAP_PRIVATE accounting but it is possible that a shared
 		 * VMA is using the same page so check and skip such VMAs.
@@ -3694,6 +4192,8 @@ static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
 			continue;
 
 		/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 * Unmap the page from other VMAs without their own reserves.
@@ -3708,8 +4208,11 @@ static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
 	}
 	mutex_unlock(&mapping->i_mmap_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3723,6 +4226,7 @@ static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
 static int hugetlb_cow(struct mm_struct *mm, struct vm_area_struct *vma,
 			unsigned long address, pte_t *ptep, pte_t pte,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct page *pagecache_page)
 {
 	struct hstate *h = hstate_vma(vma);
@@ -3730,11 +4234,16 @@ static int hugetlb_cow(struct mm_struct *mm, struct vm_area_struct *vma,
 	int avoidcopy;
 	int outside_reserve = 0;
 =======
+=======
+>>>>>>> v3.18
 			struct page *pagecache_page, spinlock_t *ptl)
 {
 	struct hstate *h = hstate_vma(vma);
 	struct page *old_page, *new_page;
 	int ret = 0, outside_reserve = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long mmun_start;	/* For mmu_notifiers */
 	unsigned long mmun_end;		/* For mmu_notifiers */
@@ -3745,10 +4254,15 @@ retry_avoidcopy:
 	/* If no-one else is actually using this page, avoid the copy
 	 * and just make the page writable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	avoidcopy = (page_mapcount(old_page) == 1);
 	if (avoidcopy) {
 		if (PageAnon(old_page))
 			page_move_anon_rmap(old_page, vma, address);
+=======
+	if (page_mapcount(old_page) == 1 && PageAnon(old_page)) {
+		page_move_anon_rmap(old_page, vma, address);
+>>>>>>> v3.18
 =======
 	if (page_mapcount(old_page) == 1 && PageAnon(old_page)) {
 		page_move_anon_rmap(old_page, vma, address);
@@ -3767,8 +4281,12 @@ retry_avoidcopy:
 	 * of the full address range.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(vma->vm_flags & VM_MAYSHARE) &&
 			is_vma_resv_set(vma, HPAGE_RESV_OWNER) &&
+=======
+	if (is_vma_resv_set(vma, HPAGE_RESV_OWNER) &&
+>>>>>>> v3.18
 =======
 	if (is_vma_resv_set(vma, HPAGE_RESV_OWNER) &&
 >>>>>>> v3.18
@@ -3777,6 +4295,7 @@ retry_avoidcopy:
 
 	page_cache_get(old_page);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Drop page_table_lock as buddy allocator may be called */
 	spin_unlock(&mm->page_table_lock);
@@ -3787,6 +4306,8 @@ retry_avoidcopy:
 		page_cache_release(old_page);
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Drop page table lock as buddy allocator may be called. It will
 	 * be acquired again before returning to the caller, as expected.
@@ -3795,6 +4316,9 @@ retry_avoidcopy:
 	new_page = alloc_huge_page(vma, address, outside_reserve);
 
 	if (IS_ERR(new_page)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * If a process owning a MAP_PRIVATE mapping fails to COW,
@@ -3804,6 +4328,7 @@ retry_avoidcopy:
 		 * may get SIGKILLed if it later faults.
 		 */
 		if (outside_reserve) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			BUG_ON(huge_pte_none(pte));
 			if (unmap_ref_private(mm, vma, old_page, address)) {
@@ -3828,6 +4353,8 @@ retry_avoidcopy:
 		else
 			return VM_FAULT_SIGBUS;
 =======
+=======
+>>>>>>> v3.18
 			page_cache_release(old_page);
 			BUG_ON(huge_pte_none(pte));
 			unmap_ref_private(mm, vma, old_page, address);
@@ -3847,6 +4374,9 @@ retry_avoidcopy:
 		ret = (PTR_ERR(new_page) == -ENOMEM) ?
 			VM_FAULT_OOM : VM_FAULT_SIGBUS;
 		goto out_release_old;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3856,11 +4386,16 @@ retry_avoidcopy:
 	 */
 	if (unlikely(anon_vma_prepare(vma))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page_cache_release(new_page);
 		page_cache_release(old_page);
 		/* Caller expects lock to be held */
 		spin_lock(&mm->page_table_lock);
 		return VM_FAULT_OOM;
+=======
+		ret = VM_FAULT_OOM;
+		goto out_release_all;
+>>>>>>> v3.18
 =======
 		ret = VM_FAULT_OOM;
 		goto out_release_all;
@@ -3875,6 +4410,7 @@ retry_avoidcopy:
 	mmun_end = mmun_start + huge_page_size(h);
 	mmu_notifier_invalidate_range_start(mm, mmun_start, mmun_end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Retake the page_table_lock to check for racing updates
 	 * before the page tables are altered
@@ -3883,6 +4419,8 @@ retry_avoidcopy:
 	ptep = huge_pte_offset(mm, address & huge_page_mask(h));
 	if (likely(pte_same(huge_ptep_get(ptep), pte))) {
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Retake the page table lock to check for racing updates
@@ -3893,6 +4431,9 @@ retry_avoidcopy:
 	if (likely(ptep && pte_same(huge_ptep_get(ptep), pte))) {
 		ClearPagePrivate(new_page);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Break COW */
 		huge_ptep_clear_flush(vma, address, ptep);
@@ -3904,6 +4445,7 @@ retry_avoidcopy:
 		new_page = old_page;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&mm->page_table_lock);
 	mmu_notifier_invalidate_range_end(mm, mmun_start, mmun_end);
 	/* Caller expects lock to be held */
@@ -3912,6 +4454,8 @@ retry_avoidcopy:
 	page_cache_release(old_page);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(ptl);
 	mmu_notifier_invalidate_range_end(mm, mmun_start, mmun_end);
 out_release_all:
@@ -3921,6 +4465,9 @@ out_release_old:
 
 	spin_lock(ptl); /* Caller expects lock to be held */
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3959,7 +4506,12 @@ static bool hugetlbfs_pagecache_present(struct hstate *h,
 
 static int hugetlb_no_page(struct mm_struct *mm, struct vm_area_struct *vma,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long address, pte_t *ptep, unsigned int flags)
+=======
+			   struct address_space *mapping, pgoff_t idx,
+			   unsigned long address, pte_t *ptep, unsigned int flags)
+>>>>>>> v3.18
 =======
 			   struct address_space *mapping, pgoff_t idx,
 			   unsigned long address, pte_t *ptep, unsigned int flags)
@@ -3969,16 +4521,22 @@ static int hugetlb_no_page(struct mm_struct *mm, struct vm_area_struct *vma,
 	int ret = VM_FAULT_SIGBUS;
 	int anon_rmap = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgoff_t idx;
 	unsigned long size;
 	struct page *page;
 	struct address_space *mapping;
 	pte_t new_pte;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long size;
 	struct page *page;
 	pte_t new_pte;
 	spinlock_t *ptl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -3993,9 +4551,12 @@ static int hugetlb_no_page(struct mm_struct *mm, struct vm_area_struct *vma,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mapping = vma->vm_file->f_mapping;
 	idx = vma_hugecache_offset(h, vma, address);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -4032,6 +4593,10 @@ retry:
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ClearPagePrivate(page);
+>>>>>>> v3.18
 =======
 			ClearPagePrivate(page);
 >>>>>>> v3.18
@@ -4073,7 +4638,12 @@ retry:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&mm->page_table_lock);
+=======
+	ptl = huge_pte_lockptr(h, mm, ptep);
+	spin_lock(ptl);
+>>>>>>> v3.18
 =======
 	ptl = huge_pte_lockptr(h, mm, ptep);
 	spin_lock(ptl);
@@ -4087,14 +4657,20 @@ retry:
 		goto backout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (anon_rmap)
 		hugepage_add_new_anon_rmap(page, vma, address);
 	else
 =======
+=======
+>>>>>>> v3.18
 	if (anon_rmap) {
 		ClearPagePrivate(page);
 		hugepage_add_new_anon_rmap(page, vma, address);
 	} else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		page_dup_rmap(page);
 	new_pte = make_huge_pte(vma, page, ((vma->vm_flags & VM_WRITE)
@@ -4104,15 +4680,21 @@ retry:
 	if ((flags & FAULT_FLAG_WRITE) && !(vma->vm_flags & VM_SHARED)) {
 		/* Optimization, do the COW without a second fault */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = hugetlb_cow(mm, vma, address, ptep, new_pte, page);
 	}
 
 	spin_unlock(&mm->page_table_lock);
 =======
+=======
+>>>>>>> v3.18
 		ret = hugetlb_cow(mm, vma, address, ptep, new_pte, page, ptl);
 	}
 
 	spin_unlock(ptl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unlock_page(page);
 out:
@@ -4120,7 +4702,11 @@ out:
 
 backout:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&mm->page_table_lock);
+=======
+	spin_unlock(ptl);
+>>>>>>> v3.18
 =======
 	spin_unlock(ptl);
 >>>>>>> v3.18
@@ -4130,6 +4716,7 @@ backout_unlocked:
 	goto out;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 			unsigned long address, unsigned int flags)
@@ -4142,6 +4729,8 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 	static DEFINE_MUTEX(hugetlb_instantiation_mutex);
 	struct hstate *h = hstate_vma(vma);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 static u32 fault_mutex_hash(struct hstate *h, struct mm_struct *mm,
 			    struct vm_area_struct *vma,
@@ -4189,6 +4778,9 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 	struct page *pagecache_page = NULL;
 	struct hstate *h = hstate_vma(vma);
 	struct address_space *mapping;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	address &= huge_page_mask(h);
@@ -4198,7 +4790,11 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 		entry = huge_ptep_get(ptep);
 		if (unlikely(is_hugetlb_entry_migration(entry))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			migration_entry_wait_huge(mm, ptep);
+=======
+			migration_entry_wait_huge(vma, mm, ptep);
+>>>>>>> v3.18
 =======
 			migration_entry_wait_huge(vma, mm, ptep);
 >>>>>>> v3.18
@@ -4213,6 +4809,12 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 		return VM_FAULT_OOM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mapping = vma->vm_file->f_mapping;
+	idx = vma_hugecache_offset(h, vma, address);
+
+>>>>>>> v3.18
 =======
 	mapping = vma->vm_file->f_mapping;
 	idx = vma_hugecache_offset(h, vma, address);
@@ -4224,17 +4826,23 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 	 * the same page in the page cache.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&hugetlb_instantiation_mutex);
 	entry = huge_ptep_get(ptep);
 	if (huge_pte_none(entry)) {
 		ret = hugetlb_no_page(mm, vma, address, ptep, flags);
 =======
+=======
+>>>>>>> v3.18
 	hash = fault_mutex_hash(h, mm, vma, mapping, idx, address);
 	mutex_lock(&htlb_fault_mutex_table[hash]);
 
 	entry = huge_ptep_get(ptep);
 	if (huge_pte_none(entry)) {
 		ret = hugetlb_no_page(mm, vma, mapping, idx, address, ptep, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_mutex;
 	}
@@ -4273,16 +4881,22 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 		lock_page(page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&mm->page_table_lock);
 	/* Check for a racing update before calling hugetlb_cow */
 	if (unlikely(!pte_same(entry, huge_ptep_get(ptep))))
 		goto out_page_table_lock;
 =======
+=======
+>>>>>>> v3.18
 	ptl = huge_pte_lockptr(h, mm, ptep);
 	spin_lock(ptl);
 	/* Check for a racing update before calling hugetlb_cow */
 	if (unlikely(!pte_same(entry, huge_ptep_get(ptep))))
 		goto out_ptl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -4290,8 +4904,13 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 		if (!huge_pte_write(entry)) {
 			ret = hugetlb_cow(mm, vma, address, ptep, entry,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							pagecache_page);
 			goto out_page_table_lock;
+=======
+					pagecache_page, ptl);
+			goto out_ptl;
+>>>>>>> v3.18
 =======
 					pagecache_page, ptl);
 			goto out_ptl;
@@ -4305,8 +4924,13 @@ int hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 		update_mmu_cache(vma, address, ptep);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_page_table_lock:
 	spin_unlock(&mm->page_table_lock);
+=======
+out_ptl:
+	spin_unlock(ptl);
+>>>>>>> v3.18
 =======
 out_ptl:
 	spin_unlock(ptl);
@@ -4321,6 +4945,7 @@ out_ptl:
 	put_page(page);
 
 out_mutex:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_unlock(&hugetlb_instantiation_mutex);
 
@@ -4337,10 +4962,15 @@ follow_huge_pud(struct mm_struct *mm, unsigned long address,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&htlb_fault_mutex_table[hash]);
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long follow_hugetlb_page(struct mm_struct *mm, struct vm_area_struct *vma,
 			 struct page **pages, struct vm_area_struct **vmas,
@@ -4353,9 +4983,15 @@ long follow_hugetlb_page(struct mm_struct *mm, struct vm_area_struct *vma,
 	struct hstate *h = hstate_vma(vma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&mm->page_table_lock);
 	while (vaddr < vma->vm_end && remainder) {
 		pte_t *pte;
+=======
+	while (vaddr < vma->vm_end && remainder) {
+		pte_t *pte;
+		spinlock_t *ptl = NULL;
+>>>>>>> v3.18
 =======
 	while (vaddr < vma->vm_end && remainder) {
 		pte_t *pte;
@@ -4369,15 +5005,21 @@ long follow_hugetlb_page(struct mm_struct *mm, struct vm_area_struct *vma,
 		 * each hugepage.  We have to make sure we get the
 		 * first, for the page indexing below to work.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 */
 		pte = huge_pte_offset(mm, vaddr & huge_page_mask(h));
 =======
+=======
+>>>>>>> v3.18
 		 *
 		 * Note that page table lock is not held when pte is null.
 		 */
 		pte = huge_pte_offset(mm, vaddr & huge_page_mask(h));
 		if (pte)
 			ptl = huge_pte_lock(h, mm, pte);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		absent = !pte || huge_pte_none(huge_ptep_get(pte));
 
@@ -4391,6 +5033,11 @@ long follow_hugetlb_page(struct mm_struct *mm, struct vm_area_struct *vma,
 		if (absent && (flags & FOLL_DUMP) &&
 		    !hugetlbfs_pagecache_present(h, vma, vaddr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (pte)
+				spin_unlock(ptl);
+>>>>>>> v3.18
 =======
 			if (pte)
 				spin_unlock(ptl);
@@ -4415,15 +5062,21 @@ long follow_hugetlb_page(struct mm_struct *mm, struct vm_area_struct *vma,
 			int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock(&mm->page_table_lock);
 			ret = hugetlb_fault(mm, vma, vaddr,
 				(flags & FOLL_WRITE) ? FAULT_FLAG_WRITE : 0);
 			spin_lock(&mm->page_table_lock);
 =======
+=======
+>>>>>>> v3.18
 			if (pte)
 				spin_unlock(ptl);
 			ret = hugetlb_fault(mm, vma, vaddr,
 				(flags & FOLL_WRITE) ? FAULT_FLAG_WRITE : 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!(ret & VM_FAULT_ERROR))
 				continue;
@@ -4438,7 +5091,11 @@ same_page:
 		if (pages) {
 			pages[i] = mem_map_offset(page, pfn_offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			get_page(pages[i]);
+=======
+			get_page_foll(pages[i]);
+>>>>>>> v3.18
 =======
 			get_page_foll(pages[i]);
 >>>>>>> v3.18
@@ -4460,8 +5117,13 @@ same_page:
 			goto same_page;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	spin_unlock(&mm->page_table_lock);
+=======
+		spin_unlock(ptl);
+	}
+>>>>>>> v3.18
 =======
 		spin_unlock(ptl);
 	}
@@ -4486,6 +5148,7 @@ unsigned long hugetlb_change_protection(struct vm_area_struct *vma,
 	flush_cache_range(vma, address, end);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&vma->vm_file->f_mapping->i_mmap_mutex);
 	spin_lock(&mm->page_table_lock);
 	for (; address < end; address += huge_page_size(h)) {
@@ -4495,6 +5158,8 @@ unsigned long hugetlb_change_protection(struct vm_area_struct *vma,
 		if (huge_pmd_unshare(mm, &address, ptep)) {
 			pages++;
 =======
+=======
+>>>>>>> v3.18
 	mmu_notifier_invalidate_range_start(mm, start, end);
 	mutex_lock(&vma->vm_file->f_mapping->i_mmap_mutex);
 	for (; address < end; address += huge_page_size(h)) {
@@ -4506,6 +5171,9 @@ unsigned long hugetlb_change_protection(struct vm_area_struct *vma,
 		if (huge_pmd_unshare(mm, &address, ptep)) {
 			pages++;
 			spin_unlock(ptl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -4517,8 +5185,13 @@ unsigned long hugetlb_change_protection(struct vm_area_struct *vma,
 			pages++;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	spin_unlock(&mm->page_table_lock);
+=======
+		spin_unlock(ptl);
+	}
+>>>>>>> v3.18
 =======
 		spin_unlock(ptl);
 	}
@@ -4532,6 +5205,10 @@ unsigned long hugetlb_change_protection(struct vm_area_struct *vma,
 	flush_tlb_range(vma, start, end);
 	mutex_unlock(&vma->vm_file->f_mapping->i_mmap_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mmu_notifier_invalidate_range_end(mm, start, end);
+>>>>>>> v3.18
 =======
 	mmu_notifier_invalidate_range_end(mm, start, end);
 >>>>>>> v3.18
@@ -4548,6 +5225,10 @@ int hugetlb_reserve_pages(struct inode *inode,
 	struct hstate *h = hstate_inode(inode);
 	struct hugepage_subpool *spool = subpool_inode(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resv_map *resv_map;
+>>>>>>> v3.18
 =======
 	struct resv_map *resv_map;
 >>>>>>> v3.18
@@ -4567,11 +5248,14 @@ int hugetlb_reserve_pages(struct inode *inode,
 	 * called to make the mapping read-write. Assume !vma is a shm mapping
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vma || vma->vm_flags & VM_MAYSHARE)
 		chg = region_chg(&inode->i_mapping->private_list, from, to);
 	else {
 		struct resv_map *resv_map = resv_map_alloc();
 =======
+=======
+>>>>>>> v3.18
 	if (!vma || vma->vm_flags & VM_MAYSHARE) {
 		resv_map = inode_resv_map(inode);
 
@@ -4579,6 +5263,9 @@ int hugetlb_reserve_pages(struct inode *inode,
 
 	} else {
 		resv_map = resv_map_alloc();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!resv_map)
 			return -ENOMEM;
@@ -4623,17 +5310,23 @@ int hugetlb_reserve_pages(struct inode *inode,
 	 */
 	if (!vma || vma->vm_flags & VM_MAYSHARE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		region_add(&inode->i_mapping->private_list, from, to);
 	return 0;
 out_err:
 	if (vma)
 		resv_map_put(vma);
 =======
+=======
+>>>>>>> v3.18
 		region_add(resv_map, from, to);
 	return 0;
 out_err:
 	if (vma && is_vma_resv_set(vma, HPAGE_RESV_OWNER))
 		kref_put(&resv_map->refs, resv_map_release);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -4642,16 +5335,22 @@ void hugetlb_unreserve_pages(struct inode *inode, long offset, long freed)
 {
 	struct hstate *h = hstate_inode(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long chg = region_truncate(&inode->i_mapping->private_list, offset);
 	struct hugepage_subpool *spool = subpool_inode(inode);
 
 =======
+=======
+>>>>>>> v3.18
 	struct resv_map *resv_map = inode_resv_map(inode);
 	long chg = 0;
 	struct hugepage_subpool *spool = subpool_inode(inode);
 
 	if (resv_map)
 		chg = region_truncate(resv_map, offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock(&inode->i_lock);
 	inode->i_blocks -= (blocks_per_huge_page(h) * freed);
@@ -4662,7 +5361,10 @@ void hugetlb_unreserve_pages(struct inode *inode, long offset, long freed)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARCH_WANT_HUGE_PMD_SHARE
 static unsigned long page_table_shareable(struct vm_area_struct *svma,
 				struct vm_area_struct *vma,
@@ -4875,6 +5577,9 @@ follow_huge_pud(struct mm_struct *mm, unsigned long address,
 
 #endif /* CONFIG_ARCH_WANT_GENERAL_HUGETLB */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MEMORY_FAILURE
 
@@ -4921,7 +5626,10 @@ int dequeue_hwpoisoned_huge_page(struct page *hpage)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 bool isolate_huge_page(struct page *page, struct list_head *list)
 {
@@ -4964,4 +5672,7 @@ bool is_hugepage_active(struct page *page)
 		return false;
 	return page_count(page) > 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

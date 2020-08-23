@@ -25,7 +25,11 @@ plane (and the image), but is half as tall in pixels. The chroma plane is also
 grouped into 64x32 macroblocks.</para>
 	<para>Width of the buffer has to be aligned to the multiple of 128, and
 <<<<<<< HEAD
+<<<<<<< HEAD
 height alignment is 32. Every four adjactent buffers - two horizontally and two
+=======
+height alignment is 32. Every four adjacent buffers - two horizontally and two
+>>>>>>> v3.18
 =======
 height alignment is 32. Every four adjacent buffers - two horizontally and two
 >>>>>>> v3.18

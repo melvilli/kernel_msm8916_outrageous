@@ -1,10 +1,13 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004, 2005 MIPS Technologies, Inc.  All rights reserved.
  *
  */
 
 =======
+=======
+>>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file "COPYING" in the main directory of this archive
  * for more details.
@@ -12,6 +15,9 @@
  * Copyright (C) 2004, 2005 MIPS Technologies, Inc.  All rights reserved.
  * Copyright (C) 2013 Imagination Technologies Ltd.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASM_RTLX_H_
 #define __ASM_RTLX_H_
@@ -19,6 +25,11 @@
 #include <irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTLX_MODULE_NAME "rtlx"
+
+>>>>>>> v3.18
 =======
 #define RTLX_MODULE_NAME "rtlx"
 
@@ -31,6 +42,10 @@
 #define RTLX_xID 0x12345600
 #define RTLX_ID (RTLX_xID | RTLX_VERSION)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTLX_BUFFER_SIZE 2048
+>>>>>>> v3.18
 =======
 #define RTLX_BUFFER_SIZE 2048
 >>>>>>> v3.18
@@ -41,6 +56,7 @@
 #define RTLX_CHANNEL_SYSIO	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int rtlx_open(int index, int can_sleep);
 extern int rtlx_release(int index);
 extern ssize_t rtlx_read(int index, void __user *buff, size_t count);
@@ -48,6 +64,8 @@ extern ssize_t rtlx_write(int index, const void __user *buffer, size_t count);
 extern unsigned int rtlx_read_poll(int index, int can_sleep);
 extern unsigned int rtlx_write_poll(int index);
 =======
+=======
+>>>>>>> v3.18
 void rtlx_starting(int vpe);
 void rtlx_stopping(int vpe);
 
@@ -66,6 +84,9 @@ void _interrupt_sp(void);
 extern struct vpe_notifications rtlx_notify;
 extern const struct file_operations rtlx_fops;
 extern void (*aprp_hook)(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum rtlx_state {
@@ -76,11 +97,14 @@ enum rtlx_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTLX_BUFFER_SIZE 2048
 
 /* each channel supports read and write.
    linux (vpe0) reads lx_buffer	 and writes rt_buffer
 =======
+=======
+>>>>>>> v3.18
 extern struct chan_waitqueues {
 	wait_queue_head_t rt_queue;
 	wait_queue_head_t lx_queue;
@@ -90,6 +114,9 @@ extern struct chan_waitqueues {
 
 /* each channel supports read and write.
    linux (vpe0) reads lx_buffer and writes rt_buffer
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    SP (vpe1) reads rt_buffer and writes lx_buffer
 */
@@ -108,6 +135,7 @@ struct rtlx_channel {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rtlx_info {
 	unsigned long id;
 	enum rtlx_state state;
@@ -116,6 +144,8 @@ struct rtlx_info {
 };
 
 =======
+=======
+>>>>>>> v3.18
 extern struct rtlx_info {
 	unsigned long id;
 	enum rtlx_state state;
@@ -123,5 +153,8 @@ extern struct rtlx_info {
 
 	struct rtlx_channel channel[RTLX_CHANNELS];
 } *rtlx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_RTLX_H_ */

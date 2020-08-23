@@ -114,7 +114,11 @@ static void __init db120_pci_init(u8 *eeprom)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void db120_pci_init(void) {}
+=======
+static inline void db120_pci_init(u8 *eeprom) {}
+>>>>>>> v3.18
 =======
 static inline void db120_pci_init(u8 *eeprom) {}
 >>>>>>> v3.18

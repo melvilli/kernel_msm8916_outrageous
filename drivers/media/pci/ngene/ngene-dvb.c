@@ -48,7 +48,11 @@
 /****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ts_write(struct file *file, const char *buf,
+=======
+static ssize_t ts_write(struct file *file, const char __user *buf,
+>>>>>>> v3.18
 =======
 static ssize_t ts_write(struct file *file, const char __user *buf,
 >>>>>>> v3.18
@@ -64,7 +68,11 @@ static ssize_t ts_write(struct file *file, const char __user *buf,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dvb_ringbuffer_write(&dev->tsout_rbuf, buf, count);
+=======
+	dvb_ringbuffer_write_user(&dev->tsout_rbuf, buf, count);
+>>>>>>> v3.18
 =======
 	dvb_ringbuffer_write_user(&dev->tsout_rbuf, buf, count);
 >>>>>>> v3.18
@@ -73,7 +81,11 @@ static ssize_t ts_write(struct file *file, const char __user *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ts_read(struct file *file, char *buf,
+=======
+static ssize_t ts_read(struct file *file, char __user *buf,
+>>>>>>> v3.18
 =======
 static ssize_t ts_read(struct file *file, char __user *buf,
 >>>>>>> v3.18
@@ -110,7 +122,10 @@ static const struct file_operations ci_fops = {
 
 struct dvb_device ngene_dvbdev_ci = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.priv    = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.readers = -1,

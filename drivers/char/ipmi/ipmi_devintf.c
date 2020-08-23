@@ -811,6 +811,10 @@ static long compat_ipmi_ioctl(struct file *filep, unsigned int cmd,
 		struct ipmi_recv   recv64;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		memset(&recv64, 0, sizeof(recv64));
+>>>>>>> v3.18
 =======
 		memset(&recv64, 0, sizeof(recv64));
 >>>>>>> v3.18

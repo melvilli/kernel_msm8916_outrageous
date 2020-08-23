@@ -24,14 +24,20 @@
 
 	cpus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,xscale";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <0>;
 		#size-cells = <0>;
 		cpu {
 			compatible = "marvell,xscale";
 			device_type = "cpu";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -119,7 +125,11 @@
 
 		usb0: ohci@4c000000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "mrvl,pxa-ohci";
+=======
+			compatible = "marvell,pxa-ohci";
+>>>>>>> v3.18
 =======
 			compatible = "marvell,pxa-ohci";
 >>>>>>> v3.18
@@ -130,7 +140,11 @@
 
 		mmc0: mmc@41100000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "mrvl,pxa-mmc";
+=======
+			compatible = "marvell,pxa-mmc";
+>>>>>>> v3.18
 =======
 			compatible = "marvell,pxa-mmc";
 >>>>>>> v3.18

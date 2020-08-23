@@ -14,10 +14,13 @@
 #include <cpu-feature-overrides.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef current_cpu_type
 #define current_cpu_type()	current_cpu_data.cputype
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -28,7 +31,10 @@
 #define cpu_has_tlb		(cpu_data[0].options & MIPS_CPU_TLB)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef cpu_has_tlbinv
 #define cpu_has_tlbinv		(cpu_data[0].options & MIPS_CPU_TLBINV)
 #endif
@@ -57,6 +63,9 @@
 #ifndef cpu_has_3kex
 #define cpu_has_3kex		(!cpu_has_4kex)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef cpu_has_4kex
 #define cpu_has_4kex		(cpu_data[0].options & MIPS_CPU_4KEX)
@@ -122,6 +131,7 @@
 #endif
 #ifndef cpu_has_mdmx
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_mdmx	       (cpu_data[0].ases & MIPS_ASE_MDMX)
 #endif
 #ifndef cpu_has_mips3d
@@ -137,6 +147,8 @@
 #define cpu_has_mmips		(cpu_data[0].options & MIPS_CPU_MICROMIPS)
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define cpu_has_mdmx		(cpu_data[0].ases & MIPS_ASE_MDMX)
 #endif
 #ifndef cpu_has_mips3d
@@ -162,6 +174,9 @@
 # endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef cpu_has_vtag_icache
 #define cpu_has_vtag_icache	(cpu_data[0].icache.flags & MIPS_CACHE_VTAG)
@@ -174,7 +189,11 @@
 #endif
 #ifndef cpu_has_pindexed_dcache
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_pindexed_dcache (cpu_data[0].dcache.flags & MIPS_CACHE_PINDEX)
+=======
+#define cpu_has_pindexed_dcache	(cpu_data[0].dcache.flags & MIPS_CACHE_PINDEX)
+>>>>>>> v3.18
 =======
 #define cpu_has_pindexed_dcache	(cpu_data[0].dcache.flags & MIPS_CACHE_PINDEX)
 >>>>>>> v3.18
@@ -203,7 +222,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define cpu_has_mips_1		(cpu_data[0].isa_level & MIPS_CPU_ISA_I)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef cpu_has_mips_2
@@ -219,6 +241,7 @@
 # define cpu_has_mips_5		(cpu_data[0].isa_level & MIPS_CPU_ISA_V)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ifndef cpu_has_mips32r1
 # define cpu_has_mips32r1	(cpu_data[0].isa_level & MIPS_CPU_ISA_M32R1)
 # endif
@@ -232,6 +255,8 @@
 # define cpu_has_mips64r2	(cpu_data[0].isa_level & MIPS_CPU_ISA_M64R2)
 # endif
 =======
+=======
+>>>>>>> v3.18
 #ifndef cpu_has_mips32r1
 # define cpu_has_mips32r1	(cpu_data[0].isa_level & MIPS_CPU_ISA_M32R1)
 #endif
@@ -244,13 +269,19 @@
 #ifndef cpu_has_mips64r2
 # define cpu_has_mips64r2	(cpu_data[0].isa_level & MIPS_CPU_ISA_M64R2)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Shortcuts ...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define cpu_has_mips_2_3_4_5	(cpu_has_mips_2 | cpu_has_mips_3_4_5)
 #define cpu_has_mips_3_4_5	(cpu_has_mips_3 | cpu_has_mips_4_5)
 #define cpu_has_mips_4_5	(cpu_has_mips_4 | cpu_has_mips_5)
@@ -262,6 +293,9 @@
 
 #define cpu_has_mips_4_5_r2	(cpu_has_mips_4_5 | cpu_has_mips_r2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define cpu_has_mips32	(cpu_has_mips32r1 | cpu_has_mips32r2)
 #define cpu_has_mips64	(cpu_has_mips64r1 | cpu_has_mips64r2)
@@ -277,6 +311,7 @@
 /*
  * MIPS32, MIPS64, VR5500, IDT32332, IDT32334 and maybe a few other
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pre-MIPS32/MIPS53 processors have CLO, CLZ.	The IDT RC64574 is 64-bit and
  * has CLO and CLZ but not DCLO nor DCLZ.  For 64-bit kernels
  * cpu_has_clo_clz also indicates the availability of DCLO and DCLZ.
@@ -285,6 +320,8 @@
 # define cpu_has_clo_clz	cpu_has_mips_r
 # endif
 =======
+=======
+>>>>>>> v3.18
  * pre-MIPS32/MIPS64 processors have CLO, CLZ.	The IDT RC64574 is 64-bit and
  * has CLO and CLZ but not DCLO nor DCLZ.  For 64-bit kernels
  * cpu_has_clo_clz also indicates the availability of DCLO and DCLZ.
@@ -302,6 +339,9 @@
 #ifndef cpu_has_wsbh
 #define cpu_has_wsbh		cpu_has_mips_r2
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef cpu_has_dsp
@@ -329,7 +369,11 @@
 # endif
 # ifndef cpu_has_64bit_zero_reg
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define cpu_has_64bit_zero_reg (cpu_data[0].isa_level & MIPS_CPU_ISA_64BIT)
+=======
+# define cpu_has_64bit_zero_reg	(cpu_data[0].isa_level & MIPS_CPU_ISA_64BIT)
+>>>>>>> v3.18
 =======
 # define cpu_has_64bit_zero_reg	(cpu_data[0].isa_level & MIPS_CPU_ISA_64BIT)
 >>>>>>> v3.18
@@ -406,12 +450,18 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_HAS_MSA) && !defined(cpu_has_msa)
 # define cpu_has_msa		(cpu_data[0].ases & MIPS_ASE_MSA)
 #elif !defined(cpu_has_msa)
 # define cpu_has_msa		0
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_CPU_FEATURES_H */

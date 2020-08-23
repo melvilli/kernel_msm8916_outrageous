@@ -74,7 +74,11 @@ config ATARI_ETHERNEC
 	  is quite slow.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This driver also suppports the ethernet part of the NetUSBee ROM
+=======
+	  This driver also supports the ethernet part of the NetUSBee ROM
+>>>>>>> v3.18
 =======
 	  This driver also supports the ethernet part of the NetUSBee ROM
 >>>>>>> v3.18
@@ -100,7 +104,11 @@ config ATARI_DSP56K
 config AMIGA_BUILTIN_SERIAL
 	tristate "Amiga builtin serial support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on AMIGA
+=======
+	depends on AMIGA && TTY
+>>>>>>> v3.18
 =======
 	depends on AMIGA && TTY
 >>>>>>> v3.18

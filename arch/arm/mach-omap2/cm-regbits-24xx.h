@@ -15,6 +15,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Bits shared between registers */
 
 /* CM_FCLKEN1_CORE and CM_ICLKEN1_CORE shared bits */
@@ -451,6 +452,8 @@
 
 
 =======
+=======
+>>>>>>> v3.18
 #define OMAP24XX_EN_CAM_SHIFT				31
 #define OMAP24XX_EN_WDT4_SHIFT				29
 #define OMAP2420_EN_WDT3_SHIFT				28
@@ -569,5 +572,8 @@
 #define OMAP2430_AUTOSTATE_MDM_MASK			(1 << 0)
 #define OMAP24XX_CLKSTCTRL_DISABLE_AUTO		0x0
 #define OMAP24XX_CLKSTCTRL_ENABLE_AUTO		0x1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -46,8 +46,13 @@ static const char nconf_global_help[] = N_(
 "available options.\n"
 "\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "A trailing \"--->\" designates a submenu.\n"
 "\n"
+=======
+"A trailing \"--->\" designates a submenu, a trailing \"----\" an\n"
+"empty submenu.\n"
+>>>>>>> v3.18
 =======
 "A trailing \"--->\" designates a submenu, a trailing \"----\" an\n"
 "empty submenu.\n"
@@ -137,7 +142,11 @@ static const char nconf_global_help[] = N_(
 menu_no_f_instructions[] = N_(
 "Legend:  [*] built-in  [ ] excluded  <M> module  < > module capable.\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "Submenus are designated by a trailing \"--->\".\n"
+=======
+"Submenus are designated by a trailing \"--->\", empty ones by \"----\".\n"
+>>>>>>> v3.18
 =======
 "Submenus are designated by a trailing \"--->\", empty ones by \"----\".\n"
 >>>>>>> v3.18
@@ -158,7 +167,11 @@ menu_no_f_instructions[] = N_(
 menu_instructions[] = N_(
 "Legend:  [*] built-in  [ ] excluded  <M> module  < > module capable.\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "Submenus are designated by a trailing \"--->\".\n"
+=======
+"Submenus are designated by a trailing \"--->\", empty ones by \"----\".\n"
+>>>>>>> v3.18
 =======
 "Submenus are designated by a trailing \"--->\", empty ones by \"----\".\n"
 >>>>>>> v3.18
@@ -379,23 +392,33 @@ static void print_function_line(void)
 	int offset = 1;
 	const int skip = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for (i = 0; i < function_keys_num; i++) {
 		(void) wattrset(main_window, attributes[FUNCTION_HIGHLIGHT]);
 		mvwprintw(main_window, LINES-3, offset,
 =======
+=======
+>>>>>>> v3.18
 	int lines = getmaxy(stdscr);
 
 	for (i = 0; i < function_keys_num; i++) {
 		(void) wattrset(main_window, attributes[FUNCTION_HIGHLIGHT]);
 		mvwprintw(main_window, lines-3, offset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				"%s",
 				function_keys[i].key_str);
 		(void) wattrset(main_window, attributes[FUNCTION_TEXT]);
 		offset += strlen(function_keys[i].key_str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvwprintw(main_window, LINES-3,
+=======
+		mvwprintw(main_window, lines-3,
+>>>>>>> v3.18
 =======
 		mvwprintw(main_window, lines-3,
 >>>>>>> v3.18
@@ -720,8 +743,13 @@ static void search_conf(void)
 
 	title = str_new();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	str_printf( &title, _("Enter %s (sub)string to search for "
 			      "(with or without \"%s\")"), CONFIG_, CONFIG_);
+=======
+	str_printf( &title, _("Enter (sub)string or regexp to search for "
+			      "(with or without \"%s\")"), CONFIG_);
+>>>>>>> v3.18
 =======
 	str_printf( &title, _("Enter (sub)string or regexp to search for "
 			      "(with or without \"%s\")"), CONFIG_);
@@ -790,9 +818,15 @@ static void build_conf(struct menu *menu)
 				} else
 					item_make(menu, 'm',
 <<<<<<< HEAD
+<<<<<<< HEAD
 						"   %*c%s  --->",
 						indent + 1,
 						' ', prompt);
+=======
+						  "   %*c%s  %s",
+						  indent + 1, ' ', prompt,
+						  menu_is_empty(menu) ? "----" : "--->");
+>>>>>>> v3.18
 =======
 						  "   %*c%s  %s",
 						  indent + 1, ' ', prompt,
@@ -940,7 +974,11 @@ static void build_conf(struct menu *menu)
 				"" : _(" (NEW)"));
 		if (menu->prompt && menu->prompt->type == P_MENU) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			item_add_str("  --->");
+=======
+			item_add_str("  %s", menu_is_empty(menu) ? "----" : "--->");
+>>>>>>> v3.18
 =======
 			item_add_str("  %s", menu_is_empty(menu) ? "----" : "--->");
 >>>>>>> v3.18
@@ -995,7 +1033,11 @@ static void show_menu(const char *prompt, const char *instructions,
 	clear();
 	(void) wattrset(main_window, attributes[NORMAL]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_in_middle(stdscr, 1, 0, COLS,
+=======
+	print_in_middle(stdscr, 1, 0, getmaxx(stdscr),
+>>>>>>> v3.18
 =======
 	print_in_middle(stdscr, 1, 0, getmaxx(stdscr),
 >>>>>>> v3.18
@@ -1500,26 +1542,38 @@ static void conf_save(void)
 void setup_windows(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int lines, columns;
 
 	getmaxyx(stdscr, lines, columns);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (main_window != NULL)
 		delwin(main_window);
 
 	/* set up the menu and menu window */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	main_window = newwin(LINES-2, COLS-2, 2, 1);
 	keypad(main_window, TRUE);
 	mwin_max_lines = LINES-7;
 	mwin_max_cols = COLS-6;
 =======
+=======
+>>>>>>> v3.18
 	main_window = newwin(lines-2, columns-2, 2, 1);
 	keypad(main_window, TRUE);
 	mwin_max_lines = lines-7;
 	mwin_max_cols = columns-6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* panels order is from bottom to top */
@@ -1529,6 +1583,10 @@ void setup_windows(void)
 int main(int ac, char **av)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int lines, columns;
+>>>>>>> v3.18
 =======
 	int lines, columns;
 >>>>>>> v3.18
@@ -1558,7 +1616,12 @@ int main(int ac, char **av)
 	curs_set(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (COLS < 75 || LINES < 20) {
+=======
+	getmaxyx(stdscr, lines, columns);
+	if (columns < 75 || lines < 20) {
+>>>>>>> v3.18
 =======
 	getmaxyx(stdscr, lines, columns);
 	if (columns < 75 || lines < 20) {
@@ -1615,6 +1678,9 @@ int main(int ac, char **av)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

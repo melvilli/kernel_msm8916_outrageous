@@ -28,7 +28,10 @@
 
 typedef unsigned int __bitwise__ samsung_gpio_pull_t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef unsigned int __bitwise__ s5p_gpio_drvstr_t;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -184,6 +187,7 @@ static inline int s3c_gpio_cfgrange_nopull(unsigned int pin, unsigned int size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Define values for the drvstr available for each gpio pin.
  *
  * These values control the value of the output signal driver strength,
@@ -247,6 +251,8 @@ extern int s5p_register_gpioint_bank(int chain_irq, int start, int nr_groups);
 #define s5p_register_gpioint_bank(chain_irq, start, nr_groups) do { } while (0)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __PLAT_GPIO_CFG_H */

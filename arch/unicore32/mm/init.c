@@ -67,9 +67,12 @@ void show_mem(unsigned int filter)
 	show_free_areas(filter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filter & SHOW_MEM_FILTER_PAGE_COUNT)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_bank(i, mi) {
@@ -387,10 +390,13 @@ static void __init free_unused_memmap(struct meminfo *mi)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long reserved_pages, free_pages;
 	struct memblock_region *reg;
 	int i;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	max_mapnr   = pfn_to_page(max_pfn + PHYS_PFN_OFFSET) - mem_map;
@@ -400,6 +406,7 @@ void __init mem_init(void)
 	/* this will put all unused low memory onto the freelists */
 	free_all_bootmem();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reserved_pages = free_pages = 0;
 
@@ -446,6 +453,9 @@ void __init mem_init(void)
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 	printk(KERN_NOTICE "Virtual kernel memory layout:\n"
 		"    vector  : 0x%08lx - 0x%08lx   (%4ld kB)\n"
 		"    vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n"
@@ -475,7 +485,11 @@ void __init mem_init(void)
 	BUG_ON(TASK_SIZE				> MODULES_VADDR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (PAGE_SIZE >= 16384 && num_physpages <= 128) {
+=======
+	if (PAGE_SIZE >= 16384 && get_num_physpages() <= 128) {
+>>>>>>> v3.18
 =======
 	if (PAGE_SIZE >= 16384 && get_num_physpages() <= 128) {
 >>>>>>> v3.18
@@ -491,7 +505,11 @@ void __init mem_init(void)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -505,7 +523,11 @@ void free_initrd_mem(unsigned long start, unsigned long end)
 {
 	if (!keep_initrd)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_reserved_area(start, end, 0, "initrd");
+=======
+		free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 		free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18

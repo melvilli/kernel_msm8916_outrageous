@@ -135,7 +135,10 @@ static irqreturn_t timer_interrupt(int irq, void *dev_id)
 static struct irqaction irq0 = {
 	.handler = timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.name = "MFT2",

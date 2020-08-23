@@ -13,8 +13,13 @@
  * consent.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
  * Written by: Ariel Elior <ariele@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+ * Written by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
  * Written by: Ariel Elior <ariel.elior@qlogic.com>
@@ -57,6 +62,10 @@ struct hw_sb_info {
 #define VFPF_QUEUE_FLG_HC		0x0100
 #define VFPF_QUEUE_FLG_DHC		0x0200
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VFPF_QUEUE_FLG_LEADING_RSS	0x0400
+>>>>>>> v3.18
 =======
 #define VFPF_QUEUE_FLG_LEADING_RSS	0x0400
 >>>>>>> v3.18
@@ -74,6 +83,10 @@ struct hw_sb_info {
 #define VFPF_RX_MASK_ACCEPT_BROADCAST		0x00000010
 #define BULLETIN_CONTENT_SIZE		(sizeof(struct pf_vf_bulletin_content))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BULLETIN_CONTENT_LEGACY_SIZE	(32)
+>>>>>>> v3.18
 =======
 #define BULLETIN_CONTENT_LEGACY_SIZE	(32)
 >>>>>>> v3.18
@@ -130,8 +143,11 @@ struct vfpf_acquire_tlv {
 		u8  vf_id;		/* ME register value */
 		u8  vf_os;		/* e.g. Linux, W2K8 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 padding[2];
 =======
+=======
+>>>>>>> v3.18
 #define VF_OS_SUBVERSION_MASK	(0x1f)
 #define VF_OS_MASK		(0xe0)
 #define VF_OS_SHIFT		(5)
@@ -141,6 +157,9 @@ struct vfpf_acquire_tlv {
 		u8 padding;
 		u8 caps;
 #define VF_CAP_SUPPORT_EXT_BULLETIN	(1 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} vfdev_info;
 
@@ -157,7 +176,10 @@ struct vfpf_q_op_tlv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* receive side scaling tlv */
 struct vfpf_rss_tlv {
 	struct vfpf_first_tlv	first_tlv;
@@ -179,6 +201,9 @@ struct vfpf_rss_tlv {
 	u32			rss_key[T_ETH_RSS_KEY];	/* hash values */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* acquire response tlv - carries the allocated resources */
 struct pfvf_acquire_resp_tlv {
@@ -190,6 +215,10 @@ struct pfvf_acquire_resp_tlv {
 #define PFVF_CAP_DHC		0x00000002
 #define PFVF_CAP_TPA		0x00000004
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PFVF_CAP_TPA_UPDATE	0x00000008
+>>>>>>> v3.18
 =======
 #define PFVF_CAP_TPA_UPDATE	0x00000008
 >>>>>>> v3.18
@@ -220,7 +249,10 @@ struct pfvf_acquire_resp_tlv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct vfpf_port_phys_id_resp_tlv {
 	struct channel_tlv tl;
 	u8 id[ETH_ALEN];
@@ -232,6 +264,9 @@ struct vfpf_port_phys_id_resp_tlv {
 						  * the leading RSS queue
 						  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Init VF */
 struct vfpf_init_tlv {
@@ -240,6 +275,12 @@ struct vfpf_init_tlv {
 	aligned_u64 spq_addr;
 	aligned_u64 stats_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 stats_stride;
+	u32 flags;
+	u32 padding[2];
+>>>>>>> v3.18
 =======
 	u16 stats_stride;
 	u32 flags;
@@ -341,7 +382,10 @@ struct vfpf_set_q_filters_tlv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct vfpf_tpa_tlv {
 	struct vfpf_first_tlv	first_tlv;
 
@@ -361,6 +405,9 @@ struct vfpf_tpa_tlv {
 	} tpa_client_info;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* close VF (disable VF) */
 struct vfpf_close_tlv {
@@ -389,20 +436,30 @@ union vfpf_tlvs {
 	struct vfpf_setup_q_tlv		setup_q;
 	struct vfpf_set_q_filters_tlv	set_q_filters;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vfpf_release_tlv         release;
 	struct channel_list_end_tlv     list_end;
 =======
+=======
+>>>>>>> v3.18
 	struct vfpf_release_tlv		release;
 	struct vfpf_rss_tlv		update_rss;
 	struct vfpf_tpa_tlv		update_tpa;
 	struct channel_list_end_tlv	list_end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tlv_buffer_size		tlv_buf_size;
 };
 
 union pfvf_tlvs {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pfvf_general_resp_tlv    general_resp;
+=======
+	struct pfvf_general_resp_tlv	general_resp;
+>>>>>>> v3.18
 =======
 	struct pfvf_general_resp_tlv	general_resp;
 >>>>>>> v3.18
@@ -438,8 +495,11 @@ struct pf_vf_bulletin_content {
 					 * the vfpf channel
 					 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define CHANNEL_DOWN		2	/* vfpf channel is disabled. VFs are not
 					 * to attempt to send messages on the
 					 * channel after this bit is set
@@ -447,6 +507,9 @@ struct pf_vf_bulletin_content {
 #define LINK_VALID		3	/* alert the VF thet a new link status
 					 * update is available for it
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 mac[ETH_ALEN];
 	u8 mac_padding[2];
@@ -454,7 +517,10 @@ struct pf_vf_bulletin_content {
 	u16 vlan;
 	u8 vlan_padding[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	u16 link_speed;			 /* Effective line speed */
 	u8 link_speed_padding[6];
@@ -464,6 +530,9 @@ struct pf_vf_bulletin_content {
 #define VFPF_LINK_REPORT_RX_FC_ON	 (1 << 2)
 #define VFPF_LINK_REPORT_TX_FC_ON	 (1 << 3)
 	u8 link_flags_padding[4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -481,16 +550,22 @@ enum channel_tlvs {
 	CHANNEL_TLV_SETUP_Q,
 	CHANNEL_TLV_SET_Q_FILTERS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CHANNEL_TLV_TEARDOWN_Q,
 	CHANNEL_TLV_CLOSE,
 	CHANNEL_TLV_RELEASE,
 =======
+=======
+>>>>>>> v3.18
 	CHANNEL_TLV_ACTIVATE_Q,
 	CHANNEL_TLV_DEACTIVATE_Q,
 	CHANNEL_TLV_TEARDOWN_Q,
 	CHANNEL_TLV_CLOSE,
 	CHANNEL_TLV_RELEASE,
 	CHANNEL_TLV_UPDATE_RSS_DEPRECATED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CHANNEL_TLV_PF_RELEASE_VF,
 	CHANNEL_TLV_LIST_END,
@@ -498,6 +573,12 @@ enum channel_tlvs {
 	CHANNEL_TLV_PF_SET_MAC,
 	CHANNEL_TLV_PF_SET_VLAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CHANNEL_TLV_UPDATE_RSS,
+	CHANNEL_TLV_PHYS_PORT_ID,
+	CHANNEL_TLV_UPDATE_TPA,
+>>>>>>> v3.18
 =======
 	CHANNEL_TLV_UPDATE_RSS,
 	CHANNEL_TLV_PHYS_PORT_ID,

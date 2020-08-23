@@ -103,10 +103,13 @@
  */
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: t128.c,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/signal.h>
@@ -263,7 +266,11 @@ found:
 
 	if (instance->irq != SCSI_IRQ_NONE) 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    if (request_irq(instance->irq, t128_intr, IRQF_DISABLED, "t128",
+=======
+	    if (request_irq(instance->irq, t128_intr, 0, "t128",
+>>>>>>> v3.18
 =======
 	    if (request_irq(instance->irq, t128_intr, 0, "t128",
 >>>>>>> v3.18

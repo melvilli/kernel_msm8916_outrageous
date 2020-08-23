@@ -2,7 +2,12 @@
  * Device Tree Source for the Lager board
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013 Renesas Solutions Corp.
+=======
+ * Copyright (C) 2013-2014 Renesas Solutions Corp.
+ * Copyright (C) 2014 Cogent Embedded, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014 Renesas Solutions Corp.
  * Copyright (C) 2014 Cogent Embedded, Inc.
@@ -15,7 +20,13 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "r8a7790.dtsi"
+=======
+#include "r8a7790.dtsi"
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+>>>>>>> v3.18
 =======
 #include "r8a7790.dtsi"
 #include <dt-bindings/gpio/gpio.h>
@@ -27,9 +38,12 @@
 	compatible = "renesas,lager", "renesas,r8a7790";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chosen {
 		bootargs = "console=ttySC6,115200 ignore_loglevel";
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		serial6 = &scif0;
 		serial7 = &scif1;
@@ -37,20 +51,29 @@
 
 	chosen {
 		bootargs = "console=ttySC6,115200 ignore_loglevel rw root=/dev/nfs ip=dhcp";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	memory@40000000 {
 		device_type = "memory";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = <0 0x40000000 0 0x80000000>;
 =======
+=======
+>>>>>>> v3.18
 		reg = <0 0x40000000 0 0x40000000>;
 	};
 
 	memory@140000000 {
 		device_type = "memory";
 		reg = <1 0x40000000 0 0xc0000000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -59,7 +82,10 @@
 		#size-cells = <1>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	gpio_keys {
 		compatible = "gpio-keys";
@@ -459,5 +485,8 @@
 			bus-width = <8>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

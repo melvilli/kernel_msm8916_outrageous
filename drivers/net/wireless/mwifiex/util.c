@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: utility functions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ int mwifiex_init_shutdown_fw(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mwifiex_send_cmd_sync(priv, cmd, HostCmd_ACT_GEN_SET, 0, NULL);
+=======
+	return mwifiex_send_cmd(priv, cmd, HostCmd_ACT_GEN_SET, 0, NULL, true);
+>>>>>>> v3.18
 =======
 	return mwifiex_send_cmd(priv, cmd, HostCmd_ACT_GEN_SET, 0, NULL, true);
 >>>>>>> v3.18
@@ -113,6 +121,10 @@ int mwifiex_get_debug_info(struct mwifiex_private *priv,
 		info->is_hs_configured = adapter->is_hs_configured;
 		info->hs_activated = adapter->hs_activated;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		info->is_cmd_timedout = adapter->is_cmd_timedout;
+>>>>>>> v3.18
 =======
 		info->is_cmd_timedout = adapter->is_cmd_timedout;
 >>>>>>> v3.18
@@ -132,7 +144,10 @@ int mwifiex_get_debug_info(struct mwifiex_private *priv,
 					adapter->dbg.num_cmd_assoc_failure;
 		info->num_tx_timeout = adapter->dbg.num_tx_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->num_cmd_timeout = adapter->dbg.num_cmd_timeout;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		info->timeout_cmd_id = adapter->dbg.timeout_cmd_id;
@@ -187,8 +202,13 @@ mwifiex_process_mgmt_packet(struct mwifiex_private *priv,
 
 	cfg80211_rx_mgmt(priv->wdev, priv->roc_cfg.chan.center_freq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 CAL_RSSI(rx_pd->snr, rx_pd->nf),
 			 skb->data, pkt_len, GFP_ATOMIC);
+=======
+			 CAL_RSSI(rx_pd->snr, rx_pd->nf), skb->data, pkt_len,
+			 0);
+>>>>>>> v3.18
 =======
 			 CAL_RSSI(rx_pd->snr, rx_pd->nf), skb->data, pkt_len,
 			 0);
@@ -212,6 +232,12 @@ int mwifiex_recv_packet(struct mwifiex_private *priv, struct sk_buff *skb)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->stats.rx_bytes += skb->len;
+	priv->stats.rx_packets++;
+
+>>>>>>> v3.18
 =======
 	priv->stats.rx_bytes += skb->len;
 	priv->stats.rx_packets++;
@@ -244,8 +270,11 @@ int mwifiex_recv_packet(struct mwifiex_private *priv, struct sk_buff *skb)
 		skb->truesize += (skb->len - MWIFIEX_RX_DATA_BUF_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->stats.rx_bytes += skb->len;
 	priv->stats.rx_packets++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (in_interrupt())
@@ -281,7 +310,10 @@ int mwifiex_complete_cmd(struct mwifiex_adapter *adapter,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* This function will return the pointer to station entry in station list
  * table which matches specified mac address.
@@ -396,4 +428,7 @@ void mwifiex_del_all_sta_list(struct mwifiex_private *priv)
 	spin_unlock_irqrestore(&priv->sta_list_spinlock, flags);
 	return;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

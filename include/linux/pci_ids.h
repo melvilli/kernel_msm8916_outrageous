@@ -7,6 +7,11 @@
  *	are shared between multiple drivers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef _LINUX_PCI_IDS_H
+#define _LINUX_PCI_IDS_H
+>>>>>>> v3.18
 =======
 #ifndef _LINUX_PCI_IDS_H
 #define _LINUX_PCI_IDS_H
@@ -534,6 +539,11 @@
 #define PCI_DEVICE_ID_AMD_16H_NB_F3	0x1533
 #define PCI_DEVICE_ID_AMD_16H_NB_F4	0x1534
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_AMD_16H_M30H_NB_F3 0x1583
+#define PCI_DEVICE_ID_AMD_16H_M30H_NB_F4 0x1584
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_AMD_16H_M30H_NB_F3 0x1583
 #define PCI_DEVICE_ID_AMD_16H_M30H_NB_F4 0x1584
@@ -569,7 +579,10 @@
 #define PCI_DEVICE_ID_AMD_8131_APIC	0x7451
 #define PCI_DEVICE_ID_AMD_8132_BRIDGE	0x7458
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_AMD_HUDSON2_SMBUS	0x780b
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_AMD_CS5535_IDE    0x208F
@@ -584,8 +597,14 @@
 #define PCI_DEVICE_ID_AMD_LX_VIDEO  0x2081
 #define PCI_DEVICE_ID_AMD_LX_AES    0x2082
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_AMD_HUDSON2_IDE		0x780c
 #define PCI_DEVICE_ID_AMD_HUDSON2_SATA_IDE	0x7800
+=======
+#define PCI_DEVICE_ID_AMD_HUDSON2_SATA_IDE	0x7800
+#define PCI_DEVICE_ID_AMD_HUDSON2_SMBUS		0x780b
+#define PCI_DEVICE_ID_AMD_HUDSON2_IDE		0x780c
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_AMD_HUDSON2_SATA_IDE	0x7800
 #define PCI_DEVICE_ID_AMD_HUDSON2_SMBUS		0x780b
@@ -746,6 +765,10 @@
 
 #define PCI_VENDOR_ID_HP		0x103c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_VENDOR_ID_HP_3PAR		0x1590
+>>>>>>> v3.18
 =======
 #define PCI_VENDOR_ID_HP_3PAR		0x1590
 >>>>>>> v3.18
@@ -782,6 +805,10 @@
 #define PCI_DEVICE_ID_HP_CISSF		0x323b
 #define PCI_DEVICE_ID_HP_CISSH		0x323c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_HP_CISSI		0x3239
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_HP_CISSI		0x3239
 >>>>>>> v3.18
@@ -1341,6 +1368,11 @@
 #define PCI_DEVICE_ID_IMS_TT3D		0x9135
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_VENDOR_ID_AMCC		0x10e8
+
+>>>>>>> v3.18
 =======
 #define PCI_VENDOR_ID_AMCC		0x10e8
 
@@ -1658,8 +1690,11 @@
 
 #define PCI_VENDOR_ID_SPECIALIX		0x11cb
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_SPECIALIX_IO8	0x2000
 #define PCI_DEVICE_ID_SPECIALIX_RIO	0x8000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_SUBDEVICE_ID_SPECIALIX_SPEED4 0xa004
@@ -2275,6 +2310,11 @@
 #define PCI_DEVICE_ID_RASTEL_2PORT	0x2000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_VENDOR_ID_VMWARE		0x15ad
+
+>>>>>>> v3.18
 =======
 #define PCI_VENDOR_ID_VMWARE		0x15ad
 
@@ -2299,7 +2339,10 @@
  * ADDI-DATA GmbH communication cards <info@addi-data.com>
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_ADDIDATA_OLD             0x10E8
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_VENDOR_ID_ADDIDATA                 0x15B8
@@ -2307,7 +2350,10 @@
 #define PCI_DEVICE_ID_ADDIDATA_APCI7420        0x7001
 #define PCI_DEVICE_ID_ADDIDATA_APCI7300        0x7002
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_ADDIDATA_APCI7800        0x818E
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_ADDIDATA_APCI7500_2      0x7009
@@ -2519,6 +2565,7 @@
 #define PCI_DEVICE_ID_KORENIX_JETCARDF3	0x17ff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_NETRONOME		0x19ee
 #define PCI_DEVICE_ID_NETRONOME_NFP3200	0x3200
 #define PCI_DEVICE_ID_NETRONOME_NFP3240	0x3240
@@ -2528,6 +2575,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define PCI_VENDOR_ID_QMI		0x1a32
 
 #define PCI_VENDOR_ID_AZWAVE		0x1a3b
@@ -2535,6 +2584,12 @@
 #define PCI_VENDOR_ID_ASMEDIA		0x1b21
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_VENDOR_ID_CIRCUITCO		0x1cc8
+#define PCI_SUBSYSTEM_ID_CIRCUITCO_MINNOWBOARD	0x0001
+
+>>>>>>> v3.18
 =======
 #define PCI_VENDOR_ID_CIRCUITCO		0x1cc8
 #define PCI_SUBSYSTEM_ID_CIRCUITCO_MINNOWBOARD	0x0001
@@ -2590,11 +2645,17 @@
 #define PCI_VENDOR_ID_INTEL		0x8086
 #define PCI_DEVICE_ID_INTEL_EESSC	0x0008
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_INTEL_SNB_IMC	0x0100
 #define PCI_DEVICE_ID_INTEL_IVB_IMC	0x0154
 #define PCI_DEVICE_ID_INTEL_IVB_E3_IMC	0x0150
 #define PCI_DEVICE_ID_INTEL_HSW_IMC	0x0c00
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_INTEL_PXHD_0	0x0320
 #define PCI_DEVICE_ID_INTEL_PXHD_1	0x0321
@@ -2617,6 +2678,10 @@
 #define PCI_DEVICE_ID_INTEL_MFD_EMMC1	0x0824
 #define PCI_DEVICE_ID_INTEL_MRST_SD2	0x084F
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_INTEL_QUARK_X1000_ILB	0x095E
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_INTEL_QUARK_X1000_ILB	0x095E
 >>>>>>> v3.18
@@ -2882,8 +2947,11 @@
 #define PCI_DEVICE_ID_INTEL_UNC_R3QPI0	0x3c44
 #define PCI_DEVICE_ID_INTEL_UNC_R3QPI1	0x3c45
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_INTEL_JAKETOWN_UBOX	0x3ce0
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_INTEL_SBRIDGE_IMC_RAS	0x3c71	/* 15.1 */
 #define PCI_DEVICE_ID_INTEL_SBRIDGE_IMC_ERR0	0x3c72	/* 16.2 */
 #define PCI_DEVICE_ID_INTEL_SBRIDGE_IMC_ERR1	0x3c73	/* 16.3 */
@@ -2900,6 +2968,9 @@
 #define PCI_DEVICE_ID_INTEL_SBRIDGE_SAD0	0x3cf4	/* 12.6 */
 #define PCI_DEVICE_ID_INTEL_SBRIDGE_BR		0x3cf5	/* 13.6 */
 #define PCI_DEVICE_ID_INTEL_SBRIDGE_SAD1	0x3cf6	/* 12.7 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_INTEL_IOAT_SNB	0x402f
 #define PCI_DEVICE_ID_INTEL_5100_16	0x65f0
@@ -2943,6 +3014,10 @@
 #define PCI_DEVICE_ID_INTEL_SCH_LPC	0x8119
 #define PCI_DEVICE_ID_INTEL_SCH_IDE	0x811a
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_INTEL_E6XX_CU	0x8183
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_INTEL_E6XX_CU	0x8183
 >>>>>>> v3.18
@@ -2961,7 +3036,10 @@
 
 #define PCI_VENDOR_ID_COMPUTONE		0x8e0e
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_COMPUTONE_IP2EX	0x0291
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_COMPUTONE_PG	0x0302
@@ -3061,6 +3139,11 @@
 
 #define PCI_VENDOR_ID_OCZ		0x1b85
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /* _LINUX_PCI_IDS_H */
+>>>>>>> v3.18
 =======
 
 #endif /* _LINUX_PCI_IDS_H */

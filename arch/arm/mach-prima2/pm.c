@@ -10,7 +10,11 @@
 #include <linux/suspend.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -39,12 +43,18 @@ static void sirfsoc_set_wakeup_source(void)
 		SIRFSOC_PWRC_TRIGGER_EN);
 #define X_ON_KEY_B (1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sirfsoc_rtc_iobrg_writel(pwr_trigger_en_reg | X_ON_KEY_B,
 =======
+=======
+>>>>>>> v3.18
 #define RTC_ALARM0_B (1 << 2)
 #define RTC_ALARM1_B (1 << 3)
 	sirfsoc_rtc_iobrg_writel(pwr_trigger_en_reg | X_ON_KEY_B |
 		RTC_ALARM0_B | RTC_ALARM1_B,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sirfsoc_pwrc_base + SIRFSOC_PWRC_TRIGGER_EN);
 }
@@ -80,7 +90,10 @@ static int sirfsoc_pm_enter(suspend_state_t state)
 		sirfsoc_pre_suspend_power_off();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outer_flush_all();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		outer_disable();
@@ -100,12 +113,15 @@ static const struct platform_suspend_ops sirfsoc_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init sirfsoc_pm_init(void)
 {
 	suspend_set_ops(&sirfsoc_pm_ops);
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id pwrc_ids[] = {
@@ -136,7 +152,10 @@ static int __init sirfsoc_of_pwrc_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 postcore_initcall(sirfsoc_of_pwrc_init);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -170,8 +189,11 @@ static int __init sirfsoc_memc_init(void)
 	return platform_driver_register(&sirfsoc_memc_driver);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 postcore_initcall(sirfsoc_memc_init);
 =======
+=======
+>>>>>>> v3.18
 
 int __init sirfsoc_pm_init(void)
 {
@@ -180,4 +202,7 @@ int __init sirfsoc_pm_init(void)
 	suspend_set_ops(&sirfsoc_pm_ops);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

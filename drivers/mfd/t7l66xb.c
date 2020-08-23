@@ -282,7 +282,11 @@ static int t7l66xb_suspend(struct platform_device *dev, pm_message_t state)
 {
 	struct t7l66xb *t7l66xb = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct t7l66xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -298,7 +302,11 @@ static int t7l66xb_resume(struct platform_device *dev)
 {
 	struct t7l66xb *t7l66xb = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct t7l66xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -322,7 +330,11 @@ static int t7l66xb_resume(struct platform_device *dev)
 static int t7l66xb_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct t7l66xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -422,7 +434,11 @@ err_noirq:
 static int t7l66xb_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct t7l66xb_platform_data *pdata = dev->dev.platform_data;
+=======
+	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct t7l66xb_platform_data *pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -439,7 +455,10 @@ static int t7l66xb_remove(struct platform_device *dev)
 	release_resource(&t7l66xb->rscr);
 	mfd_remove_devices(&dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(t7l66xb);

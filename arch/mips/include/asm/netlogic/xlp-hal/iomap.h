@@ -49,13 +49,19 @@
 #define XLP_IO_PCI_HDRSZ		0x100
 #define XLP_IO_DEV(node, dev)		((dev) + (node) * 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XLP_HDR_OFFSET(node, bus, dev, fn)	(((bus) << 20) | \
 				((XLP_IO_DEV(node, dev)) << 15) | ((fn) << 12))
 =======
+=======
+>>>>>>> v3.18
 #define XLP_IO_PCI_OFFSET(b, d, f)	(((b) << 20) | ((d) << 15) | ((f) << 12))
 
 #define XLP_HDR_OFFSET(node, bus, dev, fn) \
 		XLP_IO_PCI_OFFSET(bus, XLP_IO_DEV(node, dev), fn)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define XLP_IO_BRIDGE_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 0, 0)
@@ -80,7 +86,10 @@
 #define XLP_IO_USB_OHCI3_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 2, 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define XLP_IO_SATA_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 3, 2)
 
 /* XLP2xx has an updated USB block */
@@ -89,6 +98,9 @@
 #define XLP2XX_IO_USB_XHCI1_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 4, 2)
 #define XLP2XX_IO_USB_XHCI2_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 4, 3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XLP_IO_NAE_OFFSET(node)		XLP_HDR_OFFSET(node, 0, 3, 0)
 #define XLP_IO_POE_OFFSET(node)		XLP_HDR_OFFSET(node, 0, 3, 1)
@@ -107,6 +119,12 @@
 #define XLP_IO_I2C1_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 6, 3)
 #define XLP_IO_GPIO_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 6, 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* on 2XX, all I2C busses are on the same block */
+#define XLP2XX_IO_I2C_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 6, 7)
+
+>>>>>>> v3.18
 =======
 /* on 2XX, all I2C busses are on the same block */
 #define XLP2XX_IO_I2C_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 6, 7)
@@ -117,6 +135,7 @@
 #define XLP_IO_JTAG_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 6, 6)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XLP_IO_NOR_OFFSET(node)		XLP_HDR_OFFSET(node, 0, 7, 0)
 #define XLP_IO_NAND_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 7, 1)
 #define XLP_IO_SPI_OFFSET(node)		XLP_HDR_OFFSET(node, 0, 7, 2)
@@ -125,6 +144,8 @@
 #define XLP_IO_MMC_OFFSET(node, slot)	\
 		((XLP_IO_SD_OFFSET(node))+(slot*0x100)+XLP_IO_PCI_HDRSZ)
 =======
+=======
+>>>>>>> v3.18
 /* Flash */
 #define XLP_IO_NOR_OFFSET(node)		XLP_HDR_OFFSET(node, 0, 7, 0)
 #define XLP_IO_NAND_OFFSET(node)	XLP_HDR_OFFSET(node, 0, 7, 1)
@@ -162,6 +183,9 @@
 #define XLP9XX_IO_NAND_OFFSET(node)		XLP9XX_HDR_OFFSET(node, 7, 1)
 #define XLP9XX_IO_SPI_OFFSET(node)		XLP9XX_HDR_OFFSET(node, 7, 2)
 #define XLP9XX_IO_MMC_OFFSET(node)		XLP9XX_HDR_OFFSET(node, 7, 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* PCI config header register id's */
@@ -210,13 +234,19 @@
 #define PCI_DEVICE_ID_NLM_NAND		0x1016
 #define PCI_DEVICE_ID_NLM_MMC		0x1018
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_NLM_SATA		0x101A
 #define PCI_DEVICE_ID_NLM_XHCI		0x101D
 
 #define PCI_DEVICE_ID_XLP9XX_MMC	0x9018
 #define PCI_DEVICE_ID_XLP9XX_SATA	0x901A
 #define PCI_DEVICE_ID_XLP9XX_XHCI	0x901D
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
@@ -225,7 +255,10 @@
 #define nlm_write_pci_reg(b, r, v)	nlm_write_reg(b, r, v)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int xlp9xx_get_socbus(int node)
 {
 	uint64_t socbridge;
@@ -235,6 +268,9 @@ static inline int xlp9xx_get_socbus(int node)
 	socbridge = nlm_pcicfg_base(XLP9XX_IO_BRIDGE_OFFSET(node));
 	return (nlm_read_pci_reg(socbridge, 0x6) >> 8) & 0xff;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !__ASSEMBLY */
 

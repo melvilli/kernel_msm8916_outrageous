@@ -74,8 +74,12 @@ static dma_cookie_t shdma_tx_submit(struct dma_async_tx_descriptor *tx)
 {
 	struct shdma_desc *chunk, *c, *desc =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		container_of(tx, struct shdma_desc, async_tx),
 		*last = desc;
+=======
+		container_of(tx, struct shdma_desc, async_tx);
+>>>>>>> v3.18
 =======
 		container_of(tx, struct shdma_desc, async_tx);
 >>>>>>> v3.18
@@ -103,6 +107,7 @@ static dma_cookie_t shdma_tx_submit(struct dma_async_tx_descriptor *tx)
 			break;
 		chunk->mark = DESC_SUBMITTED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Callback goes to the last chunk */
 		chunk->async_tx.callback = NULL;
 		chunk->cookie = cookie;
@@ -117,6 +122,8 @@ static dma_cookie_t shdma_tx_submit(struct dma_async_tx_descriptor *tx)
 	last->async_tx.callback_param = tx->callback_param;
 
 =======
+=======
+>>>>>>> v3.18
 		if (chunk->chunks == 1) {
 			chunk->async_tx.callback = callback;
 			chunk->async_tx.callback_param = tx->callback_param;
@@ -131,6 +138,9 @@ static dma_cookie_t shdma_tx_submit(struct dma_async_tx_descriptor *tx)
 			tx->cookie, &chunk->async_tx, schan->id);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (power_up) {
 		int ret;
@@ -193,12 +203,15 @@ static struct shdma_desc *shdma_get_desc(struct shdma_chan *schan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int shdma_setup_slave(struct shdma_chan *schan, int slave_id)
 {
 	struct shdma_dev *sdev = to_shdma_dev(schan->dma_chan.device);
 	const struct shdma_ops *ops = sdev->ops;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 static int shdma_setup_slave(struct shdma_chan *schan, int slave_id,
 			     dma_addr_t slave_addr)
 {
@@ -216,6 +229,9 @@ static int shdma_setup_slave(struct shdma_chan *schan, int slave_id,
 	} else {
 		match = slave_id;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (slave_id < 0 || slave_id >= slave_num)
@@ -225,7 +241,11 @@ static int shdma_setup_slave(struct shdma_chan *schan, int slave_id,
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ops->set_slave(schan, slave_id, false);
+=======
+	ret = ops->set_slave(schan, match, slave_addr, false);
+>>>>>>> v3.18
 =======
 	ret = ops->set_slave(schan, match, slave_addr, false);
 >>>>>>> v3.18
@@ -239,6 +259,7 @@ static int shdma_setup_slave(struct shdma_chan *schan, int slave_id,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This is the standard shdma filter function to be used as a replacement to the
@@ -278,6 +299,8 @@ EXPORT_SYMBOL(shdma_chan_filter);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int shdma_alloc_chan_resources(struct dma_chan *chan)
 {
 	struct shdma_chan *schan = to_shdma_chan(chan);
@@ -294,7 +317,11 @@ static int shdma_alloc_chan_resources(struct dma_chan *chan)
 	if (slave) {
 		/* Legacy mode: .private is set in filter */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = shdma_setup_slave(schan, slave->slave_id);
+=======
+		ret = shdma_setup_slave(schan, slave->slave_id, 0);
+>>>>>>> v3.18
 =======
 		ret = shdma_setup_slave(schan, slave->slave_id, 0);
 >>>>>>> v3.18
@@ -333,7 +360,10 @@ esetslave:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is the standard shdma filter function to be used as a replacement to the
  * "old" method, using the .private pointer. If for some reason you allocate a
@@ -379,6 +409,9 @@ bool shdma_chan_filter(struct dma_chan *chan, void *arg)
 }
 EXPORT_SYMBOL(shdma_chan_filter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static dma_async_tx_callback __ld_cleanup(struct shdma_chan *schan, bool all)
 {
@@ -390,6 +423,10 @@ static dma_async_tx_callback __ld_cleanup(struct shdma_chan *schan, bool all)
 	void *param = NULL;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LIST_HEAD(cyclic_list);
+>>>>>>> v3.18
 =======
 	LIST_HEAD(cyclic_list);
 >>>>>>> v3.18
@@ -459,11 +496,14 @@ static dma_async_tx_callback __ld_cleanup(struct shdma_chan *schan, bool all)
 		      desc->mark == DESC_WAITING) &&
 		     async_tx_test_ack(&desc->async_tx)) || all) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Remove from ld_queue list */
 			desc->mark = DESC_IDLE;
 
 			list_move(&desc->node, &schan->ld_free);
 =======
+=======
+>>>>>>> v3.18
 
 			if (all || !desc->cyclic) {
 				/* Remove from ld_queue list */
@@ -474,6 +514,9 @@ static dma_async_tx_callback __ld_cleanup(struct shdma_chan *schan, bool all)
 				desc->mark = DESC_SUBMITTED;
 				list_move_tail(&desc->node, &cyclic_list);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (list_empty(&schan->ld_queue)) {
@@ -492,6 +535,11 @@ static dma_async_tx_callback __ld_cleanup(struct shdma_chan *schan, bool all)
 		schan->dma_chan.completed_cookie = schan->dma_chan.cookie;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	list_splice_tail(&cyclic_list, &schan->ld_queue);
+
+>>>>>>> v3.18
 =======
 	list_splice_tail(&cyclic_list, &schan->ld_queue);
 
@@ -599,8 +647,13 @@ static struct shdma_desc *shdma_add_desc(struct shdma_chan *schan,
 
 	dev_dbg(schan->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"chaining (%u/%u)@%x -> %x with %p, cookie %d\n",
 		copy_size, *len, *src, *dst, &new->async_tx,
+=======
+		"chaining (%zu/%zu)@%pad -> %pad with %p, cookie %d\n",
+		copy_size, *len, src, dst, &new->async_tx,
+>>>>>>> v3.18
 =======
 		"chaining (%zu/%zu)@%pad -> %pad with %p, cookie %d\n",
 		copy_size, *len, src, dst, &new->async_tx,
@@ -634,7 +687,11 @@ static struct shdma_desc *shdma_add_desc(struct shdma_chan *schan,
 static struct dma_async_tx_descriptor *shdma_prep_sg(struct shdma_chan *schan,
 	struct scatterlist *sgl, unsigned int sg_len, dma_addr_t *addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum dma_transfer_direction direction, unsigned long flags)
+=======
+	enum dma_transfer_direction direction, unsigned long flags, bool cyclic)
+>>>>>>> v3.18
 =======
 	enum dma_transfer_direction direction, unsigned long flags, bool cyclic)
 >>>>>>> v3.18
@@ -672,8 +729,13 @@ static struct dma_async_tx_descriptor *shdma_prep_sg(struct shdma_chan *schan,
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_dbg(schan->dev, "Add SG #%d@%p[%d], dma %llx\n",
 				i, sg, len, (unsigned long long)sg_addr);
+=======
+			dev_dbg(schan->dev, "Add SG #%d@%p[%zu], dma %pad\n",
+				i, sg, len, &sg_addr);
+>>>>>>> v3.18
 =======
 			dev_dbg(schan->dev, "Add SG #%d@%p[%zu], dma %pad\n",
 				i, sg, len, &sg_addr);
@@ -691,13 +753,19 @@ static struct dma_async_tx_descriptor *shdma_prep_sg(struct shdma_chan *schan,
 				goto err_get_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			new->chunks = chunks--;
 =======
+=======
+>>>>>>> v3.18
 			new->cyclic = cyclic;
 			if (cyclic)
 				new->chunks = 1;
 			else
 				new->chunks = chunks--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			list_add_tail(&new->node, &tx_list);
 		} while (len);
@@ -742,7 +810,12 @@ static struct dma_async_tx_descriptor *shdma_prep_memcpy(
 	sg_dma_len(&sg) = len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return shdma_prep_sg(schan, &sg, 1, &dma_dest, DMA_MEM_TO_MEM, flags);
+=======
+	return shdma_prep_sg(schan, &sg, 1, &dma_dest, DMA_MEM_TO_MEM,
+			     flags, false);
+>>>>>>> v3.18
 =======
 	return shdma_prep_sg(schan, &sg, 1, &dma_dest, DMA_MEM_TO_MEM,
 			     flags, false);
@@ -775,8 +848,11 @@ static struct dma_async_tx_descriptor *shdma_prep_slave_sg(
 
 	return shdma_prep_sg(schan, sgl, sg_len, &slave_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      direction, flags);
 =======
+=======
+>>>>>>> v3.18
 			     direction, flags, false);
 }
 
@@ -842,6 +918,9 @@ static struct dma_async_tx_descriptor *shdma_prep_dma_cyclic(
 
 	kfree(sgl);
 	return desc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -884,7 +963,13 @@ static int shdma_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 		 */
 		config = (struct dma_slave_config *)arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = shdma_setup_slave(schan, config->slave_id);
+=======
+		ret = shdma_setup_slave(schan, config->slave_id,
+					config->direction == DMA_DEV_TO_MEM ?
+					config->src_addr : config->dst_addr);
+>>>>>>> v3.18
 =======
 		ret = shdma_setup_slave(schan, config->slave_id,
 					config->direction == DMA_DEV_TO_MEM ?
@@ -931,7 +1016,11 @@ static enum dma_status shdma_tx_status(struct dma_chan *chan,
 	 * to report error
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status != DMA_SUCCESS) {
+=======
+	if (status != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (status != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1045,8 +1134,13 @@ int shdma_request_irq(struct shdma_chan *schan, int irq,
 			   unsigned long flags, const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = request_threaded_irq(irq, chan_irq, chan_irqt,
 				       flags, name, schan);
+=======
+	int ret = devm_request_threaded_irq(schan->dev, irq, chan_irq,
+					    chan_irqt, flags, name, schan);
+>>>>>>> v3.18
 =======
 	int ret = devm_request_threaded_irq(schan->dev, irq, chan_irq,
 					    chan_irqt, flags, name, schan);
@@ -1059,6 +1153,7 @@ int shdma_request_irq(struct shdma_chan *schan, int irq,
 EXPORT_SYMBOL(shdma_request_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void shdma_free_irq(struct shdma_chan *schan)
 {
 	if (schan->irq >= 0)
@@ -1066,6 +1161,8 @@ void shdma_free_irq(struct shdma_chan *schan)
 }
 EXPORT_SYMBOL(shdma_free_irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void shdma_chan_probe(struct shdma_dev *sdev,
@@ -1141,6 +1238,10 @@ int shdma_init(struct device *dev, struct shdma_dev *sdev,
 	/* Compulsory for DMA_SLAVE fields */
 	dma_dev->device_prep_slave_sg = shdma_prep_slave_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma_dev->device_prep_dma_cyclic = shdma_prep_dma_cyclic;
+>>>>>>> v3.18
 =======
 	dma_dev->device_prep_dma_cyclic = shdma_prep_dma_cyclic;
 >>>>>>> v3.18

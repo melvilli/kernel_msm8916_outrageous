@@ -206,6 +206,7 @@ typedef struct compat_siginfo {
 			int _fd;
 		} _sigpoll;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* SIGSYS */
 		struct {
@@ -213,6 +214,8 @@ typedef struct compat_siginfo {
 			int _syscall;	/* triggering system call number */
 			unsigned int _arch;	/* AUDIT_ARCH_* of syscall */
 		} _sigsys;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} _sifields;

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -462,7 +466,11 @@ struct acpi_hest_aer_common {
 	u32 records_to_preallocate;
 	u32 max_sections_per_record;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 bus;
+=======
+	u32 bus;		/* Bus and Segment numbers */
+>>>>>>> v3.18
 =======
 	u32 bus;		/* Bus and Segment numbers */
 >>>>>>> v3.18
@@ -482,7 +490,10 @@ struct acpi_hest_aer_common {
 #define ACPI_HEST_GLOBAL                (1<<1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Macros to access the bus/segment numbers in Bus field above:
  *  Bus number is encoded in bits 7:0
@@ -491,6 +502,9 @@ struct acpi_hest_aer_common {
 #define ACPI_HEST_BUS(bus)              ((bus) & 0xFF)
 #define ACPI_HEST_SEGMENT(bus)          (((bus) >> 8) & 0xFFFF)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Hardware Error Notification */
 
@@ -683,12 +697,15 @@ enum acpi_madt_type {
 	ACPI_MADT_TYPE_GENERIC_INTERRUPT = 11,
 	ACPI_MADT_TYPE_GENERIC_DISTRIBUTOR = 12,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_MADT_TYPE_RESERVED = 13	/* 13 and greater are reserved */
 };
 
 /*
  * MADT Sub-tables, correspond to Type in struct acpi_subtable_header
 =======
+=======
+>>>>>>> v3.18
 	ACPI_MADT_TYPE_GENERIC_MSI_FRAME = 13,
 	ACPI_MADT_TYPE_GENERIC_REDISTRIBUTOR = 14,
 	ACPI_MADT_TYPE_RESERVED = 15	/* 15 and greater are reserved */
@@ -696,6 +713,9 @@ enum acpi_madt_type {
 
 /*
  * MADT Subtables, correspond to Type in struct acpi_subtable_header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -819,7 +839,11 @@ struct acpi_madt_generic_interrupt {
 	struct acpi_subtable_header header;
 	u16 reserved;		/* reserved - must be zero */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 gic_id;
+=======
+	u32 cpu_interface_number;
+>>>>>>> v3.18
 =======
 	u32 cpu_interface_number;
 >>>>>>> v3.18
@@ -830,9 +854,12 @@ struct acpi_madt_generic_interrupt {
 	u64 parked_address;
 	u64 base_address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u64 gicv_base_address;
 	u64 gich_base_address;
 	u32 vgic_interrupt;
@@ -846,6 +873,9 @@ struct acpi_madt_generic_interrupt {
 #define ACPI_MADT_PERFORMANCE_IRQ_MODE  (1<<1)	/* 01: Performance Interrupt Mode */
 #define ACPI_MADT_VGIC_IRQ_MODE         (1<<2)	/* 02: VGIC Maintenance Interrupt mode */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 12: Generic Distributor (ACPI 5.0) */
 
@@ -859,7 +889,10 @@ struct acpi_madt_generic_distributor {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 13: Generic MSI Frame (ACPI 5.1) */
 
 struct acpi_madt_generic_msi_frame {
@@ -885,13 +918,20 @@ struct acpi_madt_generic_redistributor {
 	u32 length;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Common flags fields for MADT subtables
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MADT Local APIC flags (lapic_flags) and GIC flags */
+=======
+/* MADT Local APIC flags */
+>>>>>>> v3.18
 =======
 /* MADT Local APIC flags */
 >>>>>>> v3.18
@@ -988,18 +1028,24 @@ enum acpi_srat_type {
 	ACPI_SRAT_TYPE_MEMORY_AFFINITY = 1,
 	ACPI_SRAT_TYPE_X2APIC_CPU_AFFINITY = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_SRAT_TYPE_RESERVED = 3	/* 3 and greater are reserved */
 };
 
 /*
  * SRAT Sub-tables, correspond to Type in struct acpi_subtable_header
 =======
+=======
+>>>>>>> v3.18
 	ACPI_SRAT_TYPE_GICC_AFFINITY = 3,
 	ACPI_SRAT_TYPE_RESERVED = 4	/* 4 and greater are reserved */
 };
 
 /*
  * SRAT Subtables, correspond to Type in struct acpi_subtable_header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -1013,7 +1059,11 @@ struct acpi_srat_cpu_affinity {
 	u8 local_sapic_eid;
 	u8 proximity_domain_hi[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved;		/* Reserved, must be zero */
+=======
+	u32 clock_domain;
+>>>>>>> v3.18
 =======
 	u32 clock_domain;
 >>>>>>> v3.18
@@ -1059,7 +1109,10 @@ struct acpi_srat_x2apic_cpu_affinity {
 #define ACPI_SRAT_CPU_ENABLED       (1)	/* 00: Use affinity structure */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 3: GICC Affinity (ACPI 5.1) */
 
 struct acpi_srat_gicc_affinity {
@@ -1074,6 +1127,9 @@ struct acpi_srat_gicc_affinity {
 
 #define ACPI_SRAT_GICC_ENABLED     (1)	/* 00: Use affinity structure */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Reset to default packing */
 

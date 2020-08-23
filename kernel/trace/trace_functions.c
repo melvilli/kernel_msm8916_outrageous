@@ -14,6 +14,10 @@
 #include <linux/uaccess.h>
 #include <linux/ftrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 
 #include "trace.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* function tracing enabled */
 static int			ftrace_function_enabled;
@@ -34,6 +39,8 @@ static int function_trace_init(struct trace_array *tr)
 {
 	func_trace = tr;
 =======
+=======
+>>>>>>> v3.18
 static void tracing_start_function_trace(struct trace_array *tr);
 static void tracing_stop_function_trace(struct trace_array *tr);
 static void
@@ -116,13 +123,20 @@ static int function_trace_init(struct trace_array *tr)
 
 	ftrace_init_array_ops(tr, func);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tr->trace_buffer.cpu = get_cpu();
 	put_cpu();
 
 	tracing_start_cmdline_record();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_start_function_trace();
+=======
+	tracing_start_function_trace(tr);
+>>>>>>> v3.18
 =======
 	tracing_start_function_trace(tr);
 >>>>>>> v3.18
@@ -132,8 +146,14 @@ static int function_trace_init(struct trace_array *tr)
 static void function_trace_reset(struct trace_array *tr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_stop_function_trace();
 	tracing_stop_cmdline_record();
+=======
+	tracing_stop_function_trace(tr);
+	tracing_stop_cmdline_record();
+	ftrace_reset_array_ops(tr);
+>>>>>>> v3.18
 =======
 	tracing_stop_function_trace(tr);
 	tracing_stop_cmdline_record();
@@ -147,6 +167,7 @@ static void function_trace_start(struct trace_array *tr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Our option */
 enum {
 	TRACE_FUNC_OPT_STACK	= 0x1,
@@ -156,12 +177,18 @@ static struct tracer_flags func_flags;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void
 function_trace_call(unsigned long ip, unsigned long parent_ip,
 		    struct ftrace_ops *op, struct pt_regs *pt_regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct trace_array *tr = func_trace;
+=======
+	struct trace_array *tr = op->private;
+>>>>>>> v3.18
 =======
 	struct trace_array *tr = op->private;
 >>>>>>> v3.18
@@ -172,7 +199,11 @@ function_trace_call(unsigned long ip, unsigned long parent_ip,
 	int pc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!ftrace_function_enabled))
+=======
+	if (unlikely(!tr->function_enabled))
+>>>>>>> v3.18
 =======
 	if (unlikely(!tr->function_enabled))
 >>>>>>> v3.18
@@ -202,7 +233,11 @@ function_stack_trace_call(unsigned long ip, unsigned long parent_ip,
 			  struct ftrace_ops *op, struct pt_regs *pt_regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct trace_array *tr = func_trace;
+=======
+	struct trace_array *tr = op->private;
+>>>>>>> v3.18
 =======
 	struct trace_array *tr = op->private;
 >>>>>>> v3.18
@@ -213,7 +248,11 @@ function_stack_trace_call(unsigned long ip, unsigned long parent_ip,
 	int pc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!ftrace_function_enabled))
+=======
+	if (unlikely(!tr->function_enabled))
+>>>>>>> v3.18
 =======
 	if (unlikely(!tr->function_enabled))
 >>>>>>> v3.18
@@ -247,6 +286,7 @@ function_stack_trace_call(unsigned long ip, unsigned long parent_ip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct ftrace_ops trace_ops __read_mostly =
 {
@@ -262,6 +302,8 @@ static struct ftrace_ops trace_stack_ops __read_mostly =
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct tracer_opt func_opts[] = {
 #ifdef CONFIG_STACKTRACE
 	{ TRACER_OPT(func_stack_trace, TRACE_FUNC_OPT_STACK) },
@@ -274,6 +316,7 @@ static struct tracer_flags func_flags = {
 	.opts = func_opts
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tracing_start_function_trace(void)
 {
@@ -299,6 +342,8 @@ static void tracing_stop_function_trace(void)
 
 static int func_set_flag(u32 old_flags, u32 bit, int set)
 =======
+=======
+>>>>>>> v3.18
 static void tracing_start_function_trace(struct trace_array *tr)
 {
 	tr->function_enabled = 0;
@@ -314,6 +359,9 @@ static void tracing_stop_function_trace(struct trace_array *tr)
 
 static int
 func_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	switch (bit) {
@@ -323,6 +371,7 @@ func_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (set) {
 			unregister_ftrace_function(&trace_ops);
 			register_ftrace_function(&trace_stack_ops);
@@ -330,6 +379,8 @@ func_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
 			unregister_ftrace_function(&trace_stack_ops);
 			register_ftrace_function(&trace_ops);
 =======
+=======
+>>>>>>> v3.18
 		unregister_ftrace_function(tr->ops);
 
 		if (set) {
@@ -338,6 +389,9 @@ func_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
 		} else {
 			tr->ops->func = function_trace_call;
 			register_ftrace_function(tr->ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -350,7 +404,11 @@ func_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tracer function_trace __read_mostly =
+=======
+static struct tracer function_trace __tracer_data =
+>>>>>>> v3.18
 =======
 static struct tracer function_trace __tracer_data =
 >>>>>>> v3.18
@@ -360,9 +418,15 @@ static struct tracer function_trace __tracer_data =
 	.reset		= function_trace_reset,
 	.start		= function_trace_start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.wait_pipe	= poll_wait_pipe,
 	.flags		= &func_flags,
 	.set_flag	= func_set_flag,
+=======
+	.flags		= &func_flags,
+	.set_flag	= func_set_flag,
+	.allow_instances = true,
+>>>>>>> v3.18
 =======
 	.flags		= &func_flags,
 	.set_flag	= func_set_flag,
@@ -451,7 +515,10 @@ ftrace_stacktrace_count(unsigned long ip, unsigned long parent_ip, void **data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 ftrace_dump_probe(unsigned long ip, unsigned long parent_ip, void **data)
 {
@@ -467,6 +534,9 @@ ftrace_cpudump_probe(unsigned long ip, unsigned long parent_ip, void **data)
 		ftrace_dump(DUMP_ORIG);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 ftrace_probe_print(const char *name, struct seq_file *m,
@@ -506,7 +576,10 @@ ftrace_stacktrace_print(struct seq_file *m, unsigned long ip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 ftrace_dump_print(struct seq_file *m, unsigned long ip,
 			struct ftrace_probe_ops *ops, void *data)
@@ -521,6 +594,9 @@ ftrace_cpudump_print(struct seq_file *m, unsigned long ip,
 	return ftrace_probe_print("cpudump", m, ip, data);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ftrace_probe_ops traceon_count_probe_ops = {
 	.func			= ftrace_traceon_count,
@@ -538,7 +614,10 @@ static struct ftrace_probe_ops stacktrace_count_probe_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ftrace_probe_ops dump_probe_ops = {
 	.func			= ftrace_dump_probe,
 	.print			= ftrace_dump_print,
@@ -549,6 +628,9 @@ static struct ftrace_probe_ops cpudump_probe_ops = {
 	.print			= ftrace_cpudump_print,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ftrace_probe_ops traceon_probe_ops = {
 	.func			= ftrace_traceon,
@@ -634,7 +716,10 @@ ftrace_stacktrace_callback(struct ftrace_hash *hash,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 ftrace_dump_callback(struct ftrace_hash *hash,
 			   char *glob, char *cmd, char *param, int enable)
@@ -661,6 +746,9 @@ ftrace_cpudump_callback(struct ftrace_hash *hash,
 					   "1", enable);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ftrace_func_command ftrace_traceon_cmd = {
 	.name			= "traceon",
@@ -678,7 +766,10 @@ static struct ftrace_func_command ftrace_stacktrace_cmd = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ftrace_func_command ftrace_dump_cmd = {
 	.name			= "dump",
 	.func			= ftrace_dump_callback,
@@ -689,6 +780,9 @@ static struct ftrace_func_command ftrace_cpudump_cmd = {
 	.func			= ftrace_cpudump_callback,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init init_func_cmd_traceon(void)
 {
@@ -701,6 +795,7 @@ static int __init init_func_cmd_traceon(void)
 	ret = register_ftrace_command(&ftrace_traceon_cmd);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unregister_ftrace_command(&ftrace_traceoff_cmd);
 
 	ret = register_ftrace_command(&ftrace_stacktrace_cmd);
@@ -709,6 +804,8 @@ static int __init init_func_cmd_traceon(void)
 		unregister_ftrace_command(&ftrace_traceon_cmd);
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto out_free_traceoff;
 
 	ret = register_ftrace_command(&ftrace_stacktrace_cmd);
@@ -734,6 +831,9 @@ static int __init init_func_cmd_traceon(void)
  out_free_traceoff:
 	unregister_ftrace_command(&ftrace_traceoff_cmd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

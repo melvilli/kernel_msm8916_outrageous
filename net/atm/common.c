@@ -301,7 +301,11 @@ static int adjust_tp(struct atm_trafprm *tp, unsigned char aal)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("AAL problems ... (%d)\n", aal);
+=======
+		pr_warn("AAL problems ... (%d)\n", aal);
+>>>>>>> v3.18
 =======
 		pr_warn("AAL problems ... (%d)\n", aal);
 >>>>>>> v3.18

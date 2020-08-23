@@ -25,6 +25,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/vga.h>
 
@@ -35,19 +36,30 @@ struct nv10_devinit_priv {
 	u8 owner;
 };
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/vga.h>
 
 #include "fbmem.h"
 #include "nv04.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void
 nv10_devinit_meminit(struct nouveau_devinit *devinit)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv10_devinit_priv *priv = (void *)devinit;
 	const int mem_width[] = { 0x10, 0x00, 0x20 };
 	const int mem_width_count = nv_device(priv)->chipset >= 0x17 ? 3 : 2;
+=======
+	struct nv04_devinit_priv *priv = (void *)devinit;
+	static const int mem_width[] = { 0x10, 0x00, 0x20 };
+	int mem_width_count;
+>>>>>>> v3.18
 =======
 	struct nv04_devinit_priv *priv = (void *)devinit;
 	static const int mem_width[] = { 0x10, 0x00, 0x20 };
@@ -58,9 +70,12 @@ nv10_devinit_meminit(struct nouveau_devinit *devinit)
 	int i, j, k;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Map the framebuffer aperture */
 	fb = fbmem_init(nv_device(priv)->pdev);
 =======
+=======
+>>>>>>> v3.18
 	if (nv_device(priv)->card_type >= NV_11 &&
 	    nv_device(priv)->chipset >= 0x17)
 		mem_width_count = 3;
@@ -69,6 +84,9 @@ nv10_devinit_meminit(struct nouveau_devinit *devinit)
 
 	/* Map the framebuffer aperture */
 	fb = fbmem_init(nv_device(priv));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!fb) {
 		nv_error(priv, "failed to map fb\n");
@@ -120,6 +138,7 @@ amount_found:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nv10_devinit_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_oclass *oclass, void *data, u32 size,
@@ -143,18 +162,29 @@ nv10_devinit_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv10_devinit_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv10_devinit_oclass = &(struct nouveau_devinit_impl) {
 	.base.handle = NV_SUBDEV(DEVINIT, 0x10),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_devinit_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = nv04_devinit_dtor,
 		.init = nv04_devinit_init,
 		.fini = nv04_devinit_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.meminit = nv10_devinit_meminit,
+	.pll_set = nv04_devinit_pll_set,
+}.base;
+>>>>>>> v3.18
 =======
 	.meminit = nv10_devinit_meminit,
 	.pll_set = nv04_devinit_pll_set,

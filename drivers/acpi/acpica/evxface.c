@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -248,7 +257,11 @@ acpi_remove_notify_handler(acpi_handle device,
 	union acpi_operand_object *handler_obj;
 	union acpi_operand_object *previous_handler_obj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_status status;
+=======
+	acpi_status status = AE_OK;
+>>>>>>> v3.18
 =======
 	acpi_status status = AE_OK;
 >>>>>>> v3.18
@@ -264,6 +277,7 @@ acpi_remove_notify_handler(acpi_handle device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure all deferred notify tasks are completed */
 
 	acpi_os_wait_events_complete();
@@ -275,19 +289,27 @@ acpi_remove_notify_handler(acpi_handle device,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Root Object. Global handlers are removed here */
 
 	if (device == ACPI_ROOT_OBJECT) {
 		for (i = 0; i < ACPI_NUM_NOTIFY_TYPES; i++) {
 			if (handler_type & (i + 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				status =
 				    acpi_ut_acquire_mutex(ACPI_MTX_NAMESPACE);
 				if (ACPI_FAILURE(status)) {
 					return_ACPI_STATUS(status);
 				}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (!acpi_gbl_global_notify[i].handler ||
 				    (acpi_gbl_global_notify[i].handler !=
@@ -302,11 +324,14 @@ acpi_remove_notify_handler(acpi_handle device,
 				acpi_gbl_global_notify[i].handler = NULL;
 				acpi_gbl_global_notify[i].context = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 		}
 
 		goto unlock_and_exit;
 =======
+=======
+>>>>>>> v3.18
 
 				(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
@@ -317,6 +342,9 @@ acpi_remove_notify_handler(acpi_handle device,
 		}
 
 		return_ACPI_STATUS(AE_OK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -324,8 +352,12 @@ acpi_remove_notify_handler(acpi_handle device,
 
 	if (!acpi_ev_is_notify_object(node)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = AE_TYPE;
 		goto unlock_and_exit;
+=======
+		return_ACPI_STATUS(AE_TYPE);
+>>>>>>> v3.18
 =======
 		return_ACPI_STATUS(AE_TYPE);
 >>>>>>> v3.18
@@ -336,8 +368,12 @@ acpi_remove_notify_handler(acpi_handle device,
 	obj_desc = acpi_ns_get_attached_object(node);
 	if (!obj_desc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = AE_NOT_EXIST;
 		goto unlock_and_exit;
+=======
+		return_ACPI_STATUS(AE_NOT_EXIST);
+>>>>>>> v3.18
 =======
 		return_ACPI_STATUS(AE_NOT_EXIST);
 >>>>>>> v3.18
@@ -348,12 +384,18 @@ acpi_remove_notify_handler(acpi_handle device,
 	for (i = 0; i < ACPI_NUM_NOTIFY_TYPES; i++) {
 		if (handler_type & (i + 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			status = acpi_ut_acquire_mutex(ACPI_MTX_NAMESPACE);
 			if (ACPI_FAILURE(status)) {
 				return_ACPI_STATUS(status);
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			handler_obj = obj_desc->common_notify.notify_list[i];
 			previous_handler_obj = NULL;
@@ -383,18 +425,29 @@ acpi_remove_notify_handler(acpi_handle device,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
 			/* Make sure all deferred notify tasks are completed */
 
 			acpi_os_wait_events_complete();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			acpi_ut_remove_reference(handler_obj);
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return_ACPI_STATUS(status);
+
+>>>>>>> v3.18
 =======
 	return_ACPI_STATUS(status);
 
@@ -442,7 +495,11 @@ acpi_status acpi_install_exception_handler(acpi_exception_handler handler)
 	acpi_gbl_exception_handler = handler;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -457,7 +514,10 @@ ACPI_EXPORT_SYMBOL(acpi_install_exception_handler)
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_install_sci_handler
  *
  * PARAMETERS:  address             - Address of the handler
@@ -599,6 +659,9 @@ ACPI_EXPORT_SYMBOL(acpi_remove_sci_handler)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_install_global_event_handler
  *
@@ -642,7 +705,11 @@ acpi_install_global_event_handler(acpi_gbl_event_handler handler, void *context)
 	acpi_gbl_global_event_handler_context = context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -718,7 +785,11 @@ acpi_install_fixed_event_handler(u32 event,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -855,7 +926,11 @@ acpi_install_gpe_handler(acpi_handle gpe_device,
 	handler->original_flags = (u8)(gpe_event_info->flags &
 				       (ACPI_GPE_XRUPT_TYPE_MASK |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				        ACPI_GPE_DISPATCH_MASK));
+=======
+					ACPI_GPE_DISPATCH_MASK));
+>>>>>>> v3.18
 =======
 					ACPI_GPE_DISPATCH_MASK));
 >>>>>>> v3.18
@@ -866,12 +941,15 @@ acpi_install_gpe_handler(acpi_handle gpe_device,
 	 * disabled now to avoid spurious execution of the handler.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if ((handler->original_flags & ACPI_GPE_DISPATCH_METHOD)
 	    && gpe_event_info->runtime_count) {
 		handler->originally_enabled = 1;
 		(void)acpi_ev_remove_gpe_reference(gpe_event_info);
 =======
+=======
+>>>>>>> v3.18
 	if (((handler->original_flags & ACPI_GPE_DISPATCH_METHOD) ||
 	     (handler->original_flags & ACPI_GPE_DISPATCH_NOTIFY)) &&
 	    gpe_event_info->runtime_count) {
@@ -885,6 +963,9 @@ acpi_install_gpe_handler(acpi_handle gpe_device,
 			ACPI_WARNING((AE_INFO,
 				      "GPE type mismatch (level/edge)"));
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -897,7 +978,11 @@ acpi_install_gpe_handler(acpi_handle gpe_device,
 	gpe_event_info->flags &=
 	    ~(ACPI_GPE_XRUPT_TYPE_MASK | ACPI_GPE_DISPATCH_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpe_event_info->flags |= (u8) (type | ACPI_GPE_DISPATCH_HANDLER);
+=======
+	gpe_event_info->flags |= (u8)(type | ACPI_GPE_DISPATCH_HANDLER);
+>>>>>>> v3.18
 =======
 	gpe_event_info->flags |= (u8)(type | ACPI_GPE_DISPATCH_HANDLER);
 >>>>>>> v3.18
@@ -948,10 +1033,13 @@ acpi_remove_gpe_handler(acpi_handle gpe_device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure all deferred GPE tasks are completed */
 
 	acpi_os_wait_events_complete();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = acpi_ut_acquire_mutex(ACPI_MTX_EVENTS);
@@ -993,7 +1081,11 @@ acpi_remove_gpe_handler(acpi_handle gpe_device,
 	gpe_event_info->dispatch.method_node = handler->method_node;
 	gpe_event_info->flags &=
 <<<<<<< HEAD
+<<<<<<< HEAD
 		~(ACPI_GPE_XRUPT_TYPE_MASK | ACPI_GPE_DISPATCH_MASK);
+=======
+	    ~(ACPI_GPE_XRUPT_TYPE_MASK | ACPI_GPE_DISPATCH_MASK);
+>>>>>>> v3.18
 =======
 	    ~(ACPI_GPE_XRUPT_TYPE_MASK | ACPI_GPE_DISPATCH_MASK);
 >>>>>>> v3.18
@@ -1005,7 +1097,12 @@ acpi_remove_gpe_handler(acpi_handle gpe_device,
 	 * post-initialization configuration.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((handler->original_flags & ACPI_GPE_DISPATCH_METHOD) &&
+=======
+	if (((handler->original_flags & ACPI_GPE_DISPATCH_METHOD) ||
+	     (handler->original_flags & ACPI_GPE_DISPATCH_NOTIFY)) &&
+>>>>>>> v3.18
 =======
 	if (((handler->original_flags & ACPI_GPE_DISPATCH_METHOD) ||
 	     (handler->original_flags & ACPI_GPE_DISPATCH_NOTIFY)) &&
@@ -1015,10 +1112,13 @@ acpi_remove_gpe_handler(acpi_handle gpe_device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Now we can free the handler object */
 
 	ACPI_FREE(handler);
 =======
+=======
+>>>>>>> v3.18
 	acpi_os_release_lock(acpi_gbl_gpe_lock, flags);
 	(void)acpi_ut_release_mutex(ACPI_MTX_EVENTS);
 
@@ -1030,6 +1130,9 @@ acpi_remove_gpe_handler(acpi_handle gpe_device,
 
 	ACPI_FREE(handler);
 	return_ACPI_STATUS(status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 unlock_and_exit:
@@ -1061,7 +1164,11 @@ ACPI_EXPORT_SYMBOL(acpi_remove_gpe_handler)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_acquire_global_lock(u16 timeout, u32 * handle)
+=======
+acpi_status acpi_acquire_global_lock(u16 timeout, u32 *handle)
+>>>>>>> v3.18
 =======
 acpi_status acpi_acquire_global_lock(u16 timeout, u32 *handle)
 >>>>>>> v3.18

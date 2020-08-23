@@ -92,6 +92,7 @@ int btrfs_find_name_in_ext_backref(struct btrfs_path *path, u64 ref_objectid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct btrfs_inode_ref *
 btrfs_lookup_inode_ref(struct btrfs_trans_handle *trans,
 		       struct btrfs_root *root,
@@ -118,6 +119,8 @@ btrfs_lookup_inode_ref(struct btrfs_trans_handle *trans,
 	return ref;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Returns NULL if no extref found */
@@ -147,6 +150,7 @@ btrfs_lookup_inode_extref(struct btrfs_trans_handle *trans,
 	return extref;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int btrfs_get_inode_ref_index(struct btrfs_trans_handle *trans,
 			      struct btrfs_root *root,
@@ -189,6 +193,8 @@ int btrfs_get_inode_ref_index(struct btrfs_trans_handle *trans,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int btrfs_del_inode_extref(struct btrfs_trans_handle *trans,
 				  struct btrfs_root *root,
 				  const char *name, int name_len,
@@ -207,7 +213,11 @@ static int btrfs_del_inode_extref(struct btrfs_trans_handle *trans,
 
 	key.objectid = inode_objectid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_INODE_EXTREF_KEY);
+=======
+	key.type = BTRFS_INODE_EXTREF_KEY;
+>>>>>>> v3.18
 =======
 	key.type = BTRFS_INODE_EXTREF_KEY;
 >>>>>>> v3.18
@@ -285,7 +295,11 @@ int btrfs_del_inode_ref(struct btrfs_trans_handle *trans,
 	key.objectid = inode_objectid;
 	key.offset = ref_objectid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_INODE_REF_KEY);
+=======
+	key.type = BTRFS_INODE_REF_KEY;
+>>>>>>> v3.18
 =======
 	key.type = BTRFS_INODE_REF_KEY;
 >>>>>>> v3.18
@@ -384,7 +398,11 @@ static int btrfs_insert_inode_extref(struct btrfs_trans_handle *trans,
 
 	leaf = path->nodes[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	item = btrfs_item_nr(leaf, path->slots[0]);
+=======
+	item = btrfs_item_nr(path->slots[0]);
+>>>>>>> v3.18
 =======
 	item = btrfs_item_nr(path->slots[0]);
 >>>>>>> v3.18
@@ -421,7 +439,11 @@ int btrfs_insert_inode_ref(struct btrfs_trans_handle *trans,
 	key.objectid = inode_objectid;
 	key.offset = ref_objectid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_INODE_REF_KEY);
+=======
+	key.type = BTRFS_INODE_REF_KEY;
+>>>>>>> v3.18
 =======
 	key.type = BTRFS_INODE_REF_KEY;
 >>>>>>> v3.18
@@ -488,7 +510,11 @@ int btrfs_insert_empty_inode(struct btrfs_trans_handle *trans,
 	int ret;
 	key.objectid = objectid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_INODE_ITEM_KEY);
+=======
+	key.type = BTRFS_INODE_ITEM_KEY;
+>>>>>>> v3.18
 =======
 	key.type = BTRFS_INODE_ITEM_KEY;
 >>>>>>> v3.18
@@ -512,7 +538,11 @@ int btrfs_lookup_inode(struct btrfs_trans_handle *trans, struct btrfs_root
 
 	ret = btrfs_search_slot(trans, root, location, path, ins_len, cow);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret > 0 && btrfs_key_type(location) == BTRFS_ROOT_ITEM_KEY &&
+=======
+	if (ret > 0 && location->type == BTRFS_ROOT_ITEM_KEY &&
+>>>>>>> v3.18
 =======
 	if (ret > 0 && location->type == BTRFS_ROOT_ITEM_KEY &&
 >>>>>>> v3.18
@@ -522,7 +552,11 @@ int btrfs_lookup_inode(struct btrfs_trans_handle *trans, struct btrfs_root
 		btrfs_item_key_to_cpu(leaf, &found_key, slot);
 		if (found_key.objectid == location->objectid &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    btrfs_key_type(&found_key) == btrfs_key_type(location)) {
+=======
+		    found_key.type == location->type) {
+>>>>>>> v3.18
 =======
 		    found_key.type == location->type) {
 >>>>>>> v3.18

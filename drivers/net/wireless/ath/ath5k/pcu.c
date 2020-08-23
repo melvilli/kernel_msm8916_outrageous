@@ -145,6 +145,10 @@ ath5k_hw_get_frame_duration(struct ath5k_hw *ah, enum ieee80211_band band,
 		preamble *= 2;
 		sym_time *= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bitrate = DIV_ROUND_UP(bitrate, 2);
+>>>>>>> v3.18
 =======
 		bitrate = DIV_ROUND_UP(bitrate, 2);
 >>>>>>> v3.18
@@ -154,6 +158,10 @@ ath5k_hw_get_frame_duration(struct ath5k_hw *ah, enum ieee80211_band band,
 		preamble *= 4;
 		sym_time *= 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bitrate = DIV_ROUND_UP(bitrate, 4);
+>>>>>>> v3.18
 =======
 		bitrate = DIV_ROUND_UP(bitrate, 4);
 >>>>>>> v3.18

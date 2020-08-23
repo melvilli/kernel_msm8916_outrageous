@@ -298,9 +298,15 @@ srcpos_verror(struct srcpos *pos, char const *fmt, va_list va)
        srcstr = srcpos_string(pos);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        fprintf(stdout, "Error: %s ", srcstr);
        vfprintf(stdout, fmt, va);
        fprintf(stdout, "\n");
+=======
+       fprintf(stderr, "Error: %s ", srcstr);
+       vfprintf(stderr, fmt, va);
+       fprintf(stderr, "\n");
+>>>>>>> v3.18
 =======
        fprintf(stderr, "Error: %s ", srcstr);
        vfprintf(stderr, fmt, va);

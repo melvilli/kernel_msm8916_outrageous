@@ -6,6 +6,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/percpu_ida.h>
+>>>>>>> v3.18
 =======
 #include <linux/percpu_ida.h>
 >>>>>>> v3.18
@@ -14,7 +18,11 @@
 #include <net/tcp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TARGET_CORE_MOD_VERSION		"v4.1.0-rc2-ml"
+=======
+#define TARGET_CORE_MOD_VERSION		"v4.1.0"
+>>>>>>> v3.18
 =======
 #define TARGET_CORE_MOD_VERSION		"v4.1.0"
 >>>>>>> v3.18
@@ -45,6 +53,12 @@
 #define SPC_SENSE_KEY_OFFSET			2
 #define SPC_ADD_SENSE_LEN_OFFSET		7
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SPC_DESC_TYPE_OFFSET			8
+#define SPC_ADDITIONAL_DESC_LEN_OFFSET		9
+#define SPC_VALIDITY_OFFSET			10
+>>>>>>> v3.18
 =======
 #define SPC_DESC_TYPE_OFFSET			8
 #define SPC_ADDITIONAL_DESC_LEN_OFFSET		9
@@ -111,17 +125,28 @@
  */
 #define DA_EMULATE_TPWS				0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Emulation for CompareAndWrite (AtomicTestandSet) by default */
 #define DA_EMULATE_CAW				1
 /* Emulation for 3rd Party Copy (ExtendedCopy) by default */
 #define DA_EMULATE_3PC				1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* No Emulation for PSCSI by default */
 #define DA_EMULATE_ALUA				0
 /* Enforce SCSI Initiator Port TransportID with 'ISID' for PR */
 #define DA_ENFORCE_PR_ISIDS			1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Force SPC-3 PR Activate Persistence across Target Power Loss */
+#define DA_FORCE_PR_APTPL			0
+>>>>>>> v3.18
 =======
 /* Force SPC-3 PR Activate Persistence across Target Power Loss */
 #define DA_FORCE_PR_APTPL			0
@@ -134,7 +159,11 @@
 #define DA_EMULATE_REST_REORD			0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SE_INQUIRY_BUF				512
+=======
+#define SE_INQUIRY_BUF				1024
+>>>>>>> v3.18
 =======
 #define SE_INQUIRY_BUF				1024
 >>>>>>> v3.18
@@ -185,11 +214,14 @@ enum se_cmd_flags_table {
 	SCF_OVERFLOW_BIT		= 0x00001000,
 	SCF_UNDERFLOW_BIT		= 0x00002000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCF_SENT_DELAYED_TAS		= 0x00004000,
 	SCF_ALUA_NON_OPTIMIZED		= 0x00008000,
 	SCF_PASSTHROUGH_SG_TO_MEM_NOALLOC = 0x00020000,
 	SCF_ACK_KREF			= 0x00040000,
 =======
+=======
+>>>>>>> v3.18
 	SCF_SEND_DELAYED_TAS		= 0x00004000,
 	SCF_ALUA_NON_OPTIMIZED		= 0x00008000,
 	SCF_PASSTHROUGH_SG_TO_MEM_NOALLOC = 0x00020000,
@@ -197,6 +229,9 @@ enum se_cmd_flags_table {
 	SCF_COMPARE_AND_WRITE		= 0x00080000,
 	SCF_COMPARE_AND_WRITE_POST	= 0x00100000,
 	SCF_CMD_XCOPY_PASSTHROUGH	= 0x00200000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -237,11 +272,17 @@ enum tcm_sense_reason_table {
 	TCM_OUT_OF_RESOURCES			= R(0x12),
 	TCM_PARAMETER_LIST_LENGTH_ERROR		= R(0x13),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	TCM_MISCOMPARE_VERIFY			= R(0x14),
 	TCM_LOGICAL_BLOCK_GUARD_CHECK_FAILED	= R(0x15),
 	TCM_LOGICAL_BLOCK_APP_TAG_CHECK_FAILED	= R(0x16),
 	TCM_LOGICAL_BLOCK_REF_TAG_CHECK_FAILED	= R(0x17),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef R
 };
@@ -266,6 +307,7 @@ enum tcm_tmreq_table {
 /* fabric independent task management response values */
 enum tcm_tmrsp_table {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TMR_FUNCTION_COMPLETE		= 0,
 	TMR_TASK_DOES_NOT_EXIST		= 1,
 	TMR_LUN_DOES_NOT_EXIST		= 2,
@@ -275,12 +317,17 @@ enum tcm_tmrsp_table {
 	TMR_FUNCTION_AUTHORIZATION_FAILED = 6,
 	TMR_FUNCTION_REJECTED		= 255,
 =======
+=======
+>>>>>>> v3.18
 	TMR_FUNCTION_FAILED		= 0,
 	TMR_FUNCTION_COMPLETE		= 1,
 	TMR_TASK_DOES_NOT_EXIST		= 2,
 	TMR_LUN_DOES_NOT_EXIST		= 3,
 	TMR_TASK_MGMT_FUNCTION_NOT_SUPPORTED	= 4,
 	TMR_FUNCTION_REJECTED		= 5,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -297,7 +344,10 @@ typedef enum {
 struct se_cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct t10_alua_lba_map_member {
 	struct list_head lba_map_mem_list;
 	int lba_map_mem_alua_state;
@@ -311,18 +361,27 @@ struct t10_alua_lba_map {
 	struct list_head lba_map_mem_list;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct t10_alua {
 	/* ALUA Target Port Group ID */
 	u16	alua_tg_pt_gps_counter;
 	u32	alua_tg_pt_gps_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Referrals support */
 	spinlock_t lba_map_lock;
 	u32     lba_map_segment_size;
 	u32     lba_map_segment_multiplier;
 	struct list_head lba_map_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t tg_pt_gps_lock;
 	struct se_device *t10_dev;
@@ -357,6 +416,12 @@ struct t10_alua_tg_pt_gp {
 	u16	tg_pt_gp_id;
 	int	tg_pt_gp_valid_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int	tg_pt_gp_alua_supported_states;
+	int	tg_pt_gp_alua_pending_state;
+	int	tg_pt_gp_alua_previous_state;
+>>>>>>> v3.18
 =======
 	int	tg_pt_gp_alua_supported_states;
 	int	tg_pt_gp_alua_pending_state;
@@ -367,12 +432,18 @@ struct t10_alua_tg_pt_gp {
 	int	tg_pt_gp_nonop_delay_msecs;
 	int	tg_pt_gp_trans_delay_msecs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	tg_pt_gp_implict_trans_secs;
 	int	tg_pt_gp_pref;
 	int	tg_pt_gp_write_metadata;
 	/* Used by struct t10_alua_tg_pt_gp->tg_pt_gp_md_buf_len */
 #define ALUA_MD_BUF_LEN				1024
 	u32	tg_pt_gp_md_buf_len;
+=======
+	int	tg_pt_gp_implicit_trans_secs;
+	int	tg_pt_gp_pref;
+	int	tg_pt_gp_write_metadata;
+>>>>>>> v3.18
 =======
 	int	tg_pt_gp_implicit_trans_secs;
 	int	tg_pt_gp_pref;
@@ -388,11 +459,17 @@ struct t10_alua_tg_pt_gp {
 	struct list_head tg_pt_gp_list;
 	struct list_head tg_pt_gp_mem_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct se_port *tg_pt_gp_alua_port;
 	struct se_node_acl *tg_pt_gp_alua_nacl;
 	struct delayed_work tg_pt_gp_transition_work;
 	struct completion *tg_pt_gp_transition_complete;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -439,8 +516,11 @@ struct t10_pr_registration {
 #define PR_APTPL_MAX_TPORT_LEN			256
 	unsigned char pr_tport[PR_APTPL_MAX_TPORT_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For writing out live meta data */
 	unsigned char *pr_aptpl_buf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 pr_aptpl_rpti;
@@ -477,9 +557,13 @@ struct t10_reservation {
 	 * for SCSI device */
 	int pr_aptpl_active;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used by struct t10_reservation->pr_aptpl_buf_len */
 #define PR_APTPL_BUF_LEN			8192
 	u32 pr_aptpl_buf_len;
+=======
+#define PR_APTPL_BUF_LEN			8192
+>>>>>>> v3.18
 =======
 #define PR_APTPL_BUF_LEN			8192
 >>>>>>> v3.18
@@ -517,7 +601,10 @@ struct se_tmr_req {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum target_prot_op {
 	TARGET_PROT_NORMAL	= 0,
 	TARGET_PROT_DIN_INSERT	= (1 << 0),
@@ -551,6 +638,9 @@ struct se_dif_v1_tuple {
 	__be32			ref_tag;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct se_cmd {
 	/* SAM response code being sent to initiator */
@@ -565,15 +655,21 @@ struct se_cmd {
 	/* For SAM Task Attribute */
 	int			sam_task_attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Transport protocol dependent state, see transport_state_table */
 	enum transport_state_table t_state;
 	/* Used to signal cmd->se_tfo->check_release_cmd() usage per cmd */
 	unsigned		check_release:1;
 =======
+=======
+>>>>>>> v3.18
 	/* Used for se_sess->sess_tag_pool */
 	unsigned int		map_tag;
 	/* Transport protocol dependent state, see transport_state_table */
 	enum transport_state_table t_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned		cmd_wait_set:1;
 	unsigned		unknown_data_length:1;
@@ -590,7 +686,10 @@ struct se_cmd {
 	void			*sense_buffer;
 	struct list_head	se_delayed_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	se_lun_node;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head	se_qf_node;
@@ -606,7 +705,13 @@ struct se_cmd {
 	struct target_core_fabric_ops *se_tfo;
 	sense_reason_t		(*execute_cmd)(struct se_cmd *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*transport_complete_callback)(struct se_cmd *);
+=======
+	sense_reason_t		(*execute_rw)(struct se_cmd *, struct scatterlist *,
+					      u32, enum dma_data_direction);
+	sense_reason_t (*transport_complete_callback)(struct se_cmd *);
+>>>>>>> v3.18
 =======
 	sense_reason_t		(*execute_rw)(struct se_cmd *, struct scatterlist *,
 					      u32, enum dma_data_direction);
@@ -617,7 +722,11 @@ struct se_cmd {
 	unsigned char		__t_task_cdb[TCM_MAX_COMMAND_SIZE];
 	unsigned long long	t_task_lba;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t		t_fe_count;
+=======
+	unsigned int		t_task_nolb;
+>>>>>>> v3.18
 =======
 	unsigned int		t_task_nolb;
 >>>>>>> v3.18
@@ -627,6 +736,7 @@ struct se_cmd {
 #define CMD_T_COMPLETE		(1 << 2)
 #define CMD_T_SENT		(1 << 4)
 #define CMD_T_STOP		(1 << 5)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CMD_T_FAILED		(1 << 6)
 #define CMD_T_LUN_STOP		(1 << 7)
@@ -639,18 +749,29 @@ struct se_cmd {
 	struct completion	transport_lun_fe_stop_comp;
 	struct completion	transport_lun_stop_comp;
 =======
+=======
+>>>>>>> v3.18
 #define CMD_T_DEV_ACTIVE	(1 << 7)
 #define CMD_T_REQUEST_STOP	(1 << 8)
 #define CMD_T_BUSY		(1 << 9)
 	spinlock_t		t_state_lock;
 	struct completion	t_transport_stop_comp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct work_struct	work;
 
 	struct scatterlist	*t_data_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		t_data_nents;
+=======
+	struct scatterlist	*t_data_sg_orig;
+	unsigned int		t_data_nents;
+	unsigned int		t_data_nents_orig;
+>>>>>>> v3.18
 =======
 	struct scatterlist	*t_data_sg_orig;
 	unsigned int		t_data_nents;
@@ -669,7 +790,10 @@ struct se_cmd {
 	/* backend private data */
 	void			*priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Used for lun->lun_ref counting */
 	int			lun_ref_active;
@@ -685,6 +809,9 @@ struct se_cmd {
 	sense_reason_t		pi_err;
 	sector_t		bad_sector;
 	bool			prot_pto;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -693,7 +820,10 @@ struct se_ua {
 	u8			ua_ascq;
 	struct se_node_acl	*ua_nacl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	ua_dev_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head	ua_nacl_list;
@@ -709,10 +839,13 @@ struct se_node_acl {
 #define MAX_ACL_TAG_SIZE 64
 	char			acl_tag[MAX_ACL_TAG_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64			num_cmds;
 	u64			read_bytes;
 	u64			write_bytes;
 	spinlock_t		stats_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Used for PR SPEC_I_PT=1 and REGISTER_AND_MOVE */
@@ -738,6 +871,10 @@ struct se_session {
 	unsigned		sess_tearing_down:1;
 	u64			sess_bin_isid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum target_prot_op	sup_prot_ops;
+>>>>>>> v3.18
 =======
 	enum target_prot_op	sup_prot_ops;
 >>>>>>> v3.18
@@ -751,6 +888,11 @@ struct se_session {
 	spinlock_t		sess_cmd_lock;
 	struct kref		sess_kref;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void			*sess_cmd_map;
+	struct percpu_ida	sess_tag_pool;
+>>>>>>> v3.18
 =======
 	void			*sess_cmd_map;
 	struct percpu_ida	sess_tag_pool;
@@ -809,8 +951,11 @@ struct se_dev_attrib {
 	int		emulate_tpu;
 	int		emulate_tpws;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		enforce_pr_isids;
 =======
+=======
+>>>>>>> v3.18
 	int		emulate_caw;
 	int		emulate_3pc;
 	int		pi_prot_format;
@@ -818,6 +963,9 @@ struct se_dev_attrib {
 	enum target_prot_type hw_pi_prot_type;
 	int		enforce_pr_isids;
 	int		force_pr_aptpl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int		is_nonrot;
 	int		emulate_rest_reord;
@@ -839,7 +987,10 @@ struct se_dev_attrib {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct se_port_stat_grps {
 	struct config_group stat_group;
 	struct config_group scsi_port_group;
@@ -868,6 +1019,9 @@ struct se_lun {
 	struct percpu_ref	lun_ref;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct se_dev_stat_grps {
 	struct config_group stat_group;
@@ -898,16 +1052,22 @@ struct se_device {
 	u32			dev_index;
 	u64			creation_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			num_resets;
 	u64			num_cmds;
 	u64			read_bytes;
 	u64			write_bytes;
 	spinlock_t		stats_lock;
 =======
+=======
+>>>>>>> v3.18
 	atomic_long_t		num_resets;
 	atomic_long_t		num_cmds;
 	atomic_long_t		read_bytes;
 	atomic_long_t		write_bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Active commands on this virtual SE device */
 	atomic_t		simple_cmds;
@@ -925,6 +1085,10 @@ struct se_device {
 	spinlock_t		se_tmr_lock;
 	spinlock_t		qf_cmd_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct semaphore	caw_sem;
+>>>>>>> v3.18
 =======
 	struct semaphore	caw_sem;
 >>>>>>> v3.18
@@ -942,6 +1106,10 @@ struct se_device {
 	struct list_head	state_list;
 	struct list_head	qf_cmd_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	g_dev_node;
+>>>>>>> v3.18
 =======
 	struct list_head	g_dev_node;
 >>>>>>> v3.18
@@ -966,6 +1134,12 @@ struct se_device {
 	/* Linked list for struct se_hba struct se_device list */
 	struct list_head	dev_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct se_lun		xcopy_lun;
+	/* Protection Information */
+	int			prot_length;
+>>>>>>> v3.18
 =======
 	struct se_lun		xcopy_lun;
 	/* Protection Information */
@@ -990,6 +1164,7 @@ struct se_hba {
 	struct se_subsystem_api *transport;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct se_port_stat_grps {
 	struct config_group stat_group;
@@ -1020,6 +1195,8 @@ struct se_lun {
 	struct se_port_stat_grps port_stat_grps;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct scsi_port_stats {
@@ -1079,7 +1256,11 @@ struct se_portal_group {
 	struct se_wwn		*se_tpg_wwn;
 	struct config_group	tpg_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct config_group	*tpg_default_groups[6];
+=======
+	struct config_group	*tpg_default_groups[7];
+>>>>>>> v3.18
 =======
 	struct config_group	*tpg_default_groups[7];
 >>>>>>> v3.18
@@ -1088,6 +1269,10 @@ struct se_portal_group {
 	struct config_group	tpg_acl_group;
 	struct config_group	tpg_attrib_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct config_group	tpg_auth_group;
+>>>>>>> v3.18
 =======
 	struct config_group	tpg_auth_group;
 >>>>>>> v3.18
@@ -1102,7 +1287,10 @@ struct se_wwn {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void atomic_inc_mb(atomic_t *v)
 {
 	smp_mb__before_atomic();
@@ -1117,5 +1305,8 @@ static inline void atomic_dec_mb(atomic_t *v)
 	smp_mb__after_atomic();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* TARGET_CORE_BASE_H */

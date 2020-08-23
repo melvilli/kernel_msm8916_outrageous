@@ -11,6 +11,10 @@
 #include <linux/clockchips.h>
 #include <linux/clocksource.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu.h>
 >>>>>>> v3.18
@@ -23,8 +27,13 @@
 #include <linux/of_address.h>
 #include <linux/sched_clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/localtimer.h>
 #include <asm/mach/time.h>
+=======
+
+#define MARCO_CLOCK_FREQ 1000000
+>>>>>>> v3.18
 =======
 
 #define MARCO_CLOCK_FREQ 1000000
@@ -72,7 +81,11 @@ static inline void sirfsoc_timer_count_disable(int idx)
 static inline void sirfsoc_timer_count_enable(int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel_relaxed(readl_relaxed(sirfsoc_timer_base + SIRFSOC_TIMER_32COUNTER_0_CTRL + 4 * idx) | 0x7,
+=======
+	writel_relaxed(readl_relaxed(sirfsoc_timer_base + SIRFSOC_TIMER_32COUNTER_0_CTRL + 4 * idx) | 0x3,
+>>>>>>> v3.18
 =======
 	writel_relaxed(readl_relaxed(sirfsoc_timer_base + SIRFSOC_TIMER_32COUNTER_0_CTRL + 4 * idx) | 0x3,
 >>>>>>> v3.18
@@ -116,6 +129,12 @@ static int sirfsoc_timer_set_next_event(unsigned long delta,
 	int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* disable timer first, then modify the related registers */
+	sirfsoc_timer_count_disable(cpu);
+
+>>>>>>> v3.18
 =======
 	/* disable timer first, then modify the related registers */
 	sirfsoc_timer_count_disable(cpu);
@@ -171,6 +190,7 @@ static void sirfsoc_clocksource_resume(struct clocksource *cs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clock_event_device sirfsoc_clockevent = {
 	.name = "sirfsoc_clockevent",
 	.rating = 200,
@@ -178,6 +198,9 @@ static struct clock_event_device sirfsoc_clockevent = {
 	.set_mode = sirfsoc_timer_set_mode,
 	.set_next_event = sirfsoc_timer_set_next_event,
 };
+=======
+static struct clock_event_device __percpu *sirfsoc_clockevent;
+>>>>>>> v3.18
 =======
 static struct clock_event_device __percpu *sirfsoc_clockevent;
 >>>>>>> v3.18
@@ -197,11 +220,16 @@ static struct irqaction sirfsoc_timer_irq = {
 	.flags = IRQF_TIMER | IRQF_NOBALANCING,
 	.handler = sirfsoc_timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_id = &sirfsoc_clockevent,
 };
 
 #ifdef CONFIG_LOCAL_TIMERS
 
+=======
+};
+
+>>>>>>> v3.18
 =======
 };
 
@@ -212,6 +240,7 @@ static struct irqaction sirfsoc_timer1_irq = {
 	.handler = sirfsoc_timer_interrupt,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __cpuinit sirfsoc_local_timer_setup(struct clock_event_device *ce)
 {
@@ -234,6 +263,8 @@ static int __cpuinit sirfsoc_local_timer_setup(struct clock_event_device *ce)
 	BUG_ON(setup_irq(ce->irq, &sirfsoc_timer1_irq));
 	irq_set_affinity(sirfsoc_timer1_irq.irq, cpumask_of(1));
 =======
+=======
+>>>>>>> v3.18
 static int sirfsoc_local_timer_setup(struct clock_event_device *ce)
 {
 	int cpu = smp_processor_id();
@@ -258,6 +289,9 @@ static int sirfsoc_local_timer_setup(struct clock_event_device *ce)
 	action->dev_id = ce;
 	BUG_ON(setup_irq(ce->irq, action));
 	irq_force_affinity(action->irq, cpumask_of(cpu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clockevents_register_device(ce);
@@ -266,6 +300,7 @@ static int sirfsoc_local_timer_setup(struct clock_event_device *ce)
 
 static void sirfsoc_local_timer_stop(struct clock_event_device *ce)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sirfsoc_timer_count_disable(1);
 
@@ -297,6 +332,8 @@ static void __init sirfsoc_clockevent_init(void)
 /* initialize the kernel jiffy timer source */
 static void __init sirfsoc_marco_timer_init(void)
 =======
+=======
+>>>>>>> v3.18
 	int cpu = smp_processor_id();
 
 	sirfsoc_timer_count_disable(1);
@@ -343,12 +380,16 @@ static void __init sirfsoc_clockevent_init(void)
 
 /* initialize the kernel jiffy timer source */
 static void __init sirfsoc_marco_timer_init(struct device_node *np)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long rate;
 	u32 timer_div;
 	struct clk *clk;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* timer's input clock is io clock */
 	clk = clk_get_sys("io", NULL);
@@ -362,6 +403,8 @@ static void __init sirfsoc_marco_timer_init(struct device_node *np)
 	/* Initialize the timer dividers */
 	timer_div = rate / CLOCK_TICK_RATE - 1;
 =======
+=======
+>>>>>>> v3.18
 	clk = of_clk_get(np, 0);
 	BUG_ON(IS_ERR(clk));
 
@@ -374,6 +417,9 @@ static void __init sirfsoc_marco_timer_init(struct device_node *np)
 
 	/* Initialize the timer dividers */
 	timer_div = rate / MARCO_CLOCK_FREQ - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel_relaxed(timer_div << 16, sirfsoc_timer_base + SIRFSOC_TIMER_64COUNTER_CTRL);
 	writel_relaxed(timer_div << 16, sirfsoc_timer_base + SIRFSOC_TIMER_32COUNTER_0_CTRL);
@@ -391,9 +437,13 @@ static void __init sirfsoc_marco_timer_init(struct device_node *np)
 	writel_relaxed(0xFFFF, sirfsoc_timer_base + SIRFSOC_TIMER_INTR_STATUS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(clocksource_register_hz(&sirfsoc_clocksource, CLOCK_TICK_RATE));
 
 	BUG_ON(setup_irq(sirfsoc_timer_irq.irq, &sirfsoc_timer_irq));
+=======
+	BUG_ON(clocksource_register_hz(&sirfsoc_clocksource, MARCO_CLOCK_FREQ));
+>>>>>>> v3.18
 =======
 	BUG_ON(clocksource_register_hz(&sirfsoc_clocksource, MARCO_CLOCK_FREQ));
 >>>>>>> v3.18
@@ -412,6 +462,7 @@ static void __init sirfsoc_of_timer_init(struct device_node *np)
 		panic("No irq passed for timer0 via DT\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_LOCAL_TIMERS
 	sirfsoc_timer1_irq.irq = irq_of_parse_and_map(np, 1);
 	if (!sirfsoc_timer1_irq.irq)
@@ -420,11 +471,16 @@ static void __init sirfsoc_of_timer_init(struct device_node *np)
 
 	sirfsoc_marco_timer_init();
 =======
+=======
+>>>>>>> v3.18
 	sirfsoc_timer1_irq.irq = irq_of_parse_and_map(np, 1);
 	if (!sirfsoc_timer1_irq.irq)
 		panic("No irq passed for timer1 via DT\n");
 
 	sirfsoc_marco_timer_init(np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 CLOCKSOURCE_OF_DECLARE(sirfsoc_marco_timer, "sirf,marco-tick", sirfsoc_of_timer_init );

@@ -5,6 +5,7 @@
 #define PTRACE_SETREGS		13
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PC		32
 #define CONDITION	33
 #define ECR		34
@@ -16,6 +17,8 @@
 #define STCR		40
 #define PSR		41
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SINGLESTEP16_INSN	0x7006

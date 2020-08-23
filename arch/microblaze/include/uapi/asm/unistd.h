@@ -94,7 +94,11 @@
 #define __NR_getgroups		80 /* ok */
 #define __NR_setgroups		81 /* ok */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_select		82 /* obsolete -> sys_pselect7 */
+=======
+#define __NR_select		82 /* obsolete -> sys_pselect6 */
+>>>>>>> v3.18
 =======
 #define __NR_select		82 /* obsolete -> sys_pselect6 */
 >>>>>>> v3.18
@@ -325,7 +329,11 @@
 #define __NR_fchmodat		306 /* ok */
 #define __NR_faccessat		307 /* ok */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_pselect6		308 /* obsolete -> sys_pselect7 */
+=======
+#define __NR_pselect6		308 /* ok */
+>>>>>>> v3.18
 =======
 #define __NR_pselect6		308 /* ok */
 >>>>>>> v3.18
@@ -405,9 +413,12 @@
 #define __NR_kcmp		379
 #define __NR_finit_module	380
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define __NR_syscalls		381
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr	381
 #define __NR_sched_getattr	382
 #define __NR_renameat2		383
@@ -415,6 +426,9 @@
 #define __NR_getrandom		385
 #define __NR_memfd_create	386
 #define __NR_bpf		387
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_ASM_MICROBLAZE_UNISTD_H */

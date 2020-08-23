@@ -210,7 +210,11 @@ static void cpia2_usb_complete(struct urb *urb)
 	int i;
 	unsigned char *cdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int frame_ready = false;
+=======
+	static bool frame_ready = false;
+>>>>>>> v3.18
 =======
 	static bool frame_ready = false;
 >>>>>>> v3.18

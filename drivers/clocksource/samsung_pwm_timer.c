@@ -45,11 +45,14 @@
 #define TCFG1_MUX_MASK	  		0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TCON_START(chan)		(1 << (4 * (chan) + 0))
 #define TCON_MANUALUPDATE(chan)		(1 << (4 * (chan) + 1))
 #define TCON_INVERT(chan)		(1 << (4 * (chan) + 2))
 #define TCON_AUTORELOAD(chan)		(1 << (4 * (chan) + 3))
 =======
+=======
+>>>>>>> v3.18
 /*
  * Each channel occupies 4 bits in TCON register, but there is a gap of 4
  * bits (one channel) after channel 0, so channels have different numbering
@@ -65,6 +68,9 @@
 #define _TCON_AUTORELOAD4(chan)		(1 << (4 * (chan) + 2))
 #define TCON_AUTORELOAD(chan)		\
 	((chan < 5) ? _TCON_AUTORELOAD(chan) : _TCON_AUTORELOAD4(chan))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DEFINE_SPINLOCK(samsung_pwm_lock);
@@ -73,6 +79,10 @@ EXPORT_SYMBOL(samsung_pwm_lock);
 struct samsung_pwm_clocksource {
 	void __iomem *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *source_reg;
+>>>>>>> v3.18
 =======
 	void __iomem *source_reg;
 >>>>>>> v3.18
@@ -218,6 +228,7 @@ static int samsung_set_next_event(unsigned long cycles,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void samsung_timer_resume(void)
 {
 	/* event timer restart */
@@ -229,6 +240,8 @@ static void samsung_timer_resume(void)
 	samsung_time_start(pwm.source_id, true);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void samsung_set_mode(enum clock_event_mode mode,
@@ -248,10 +261,14 @@ static void samsung_set_mode(enum clock_event_mode mode,
 	case CLOCK_EVT_MODE_UNUSED:
 	case CLOCK_EVT_MODE_SHUTDOWN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 
 	case CLOCK_EVT_MODE_RESUME:
 		samsung_timer_resume();
+=======
+	case CLOCK_EVT_MODE_RESUME:
+>>>>>>> v3.18
 =======
 	case CLOCK_EVT_MODE_RESUME:
 >>>>>>> v3.18
@@ -260,7 +277,10 @@ static void samsung_set_mode(enum clock_event_mode mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void samsung_clockevent_resume(struct clock_event_device *cev)
 {
 	samsung_timer_set_prescale(pwm.event_id, pwm.tscaler_div);
@@ -272,6 +292,9 @@ static void samsung_clockevent_resume(struct clock_event_device *cev)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clock_event_device time_event_device = {
 	.name		= "samsung_event_timer",
@@ -280,6 +303,10 @@ static struct clock_event_device time_event_device = {
 	.set_next_event	= samsung_set_next_event,
 	.set_mode	= samsung_set_mode,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resume		= samsung_clockevent_resume,
+>>>>>>> v3.18
 =======
 	.resume		= samsung_clockevent_resume,
 >>>>>>> v3.18
@@ -302,7 +329,11 @@ static irqreturn_t samsung_clock_event_isr(int irq, void *dev_id)
 static struct irqaction samsung_clock_event_irq = {
 	.name		= "samsung_time_irq",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -338,6 +369,7 @@ static void __init samsung_clockevent_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __iomem *samsung_timer_reg(void)
 {
 	switch (pwm.source_id) {
@@ -356,6 +388,8 @@ static void __iomem *samsung_timer_reg(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void samsung_clocksource_suspend(struct clocksource *cs)
 {
 	samsung_time_stop(pwm.source_id);
@@ -384,6 +418,9 @@ static struct clocksource samsung_clocksource = {
 	.flags		= CLOCK_SOURCE_IS_CONTINUOUS,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Override the global weak sched_clock symbol with this
@@ -392,6 +429,7 @@ static struct clocksource samsung_clocksource = {
  * this wraps around for now, since it is just a relative time
  * stamp. (Inspired by U300 implementation.)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 notrace samsung_read_sched_clock(void)
 {
@@ -406,12 +444,20 @@ static u64 notrace samsung_read_sched_clock(void)
 {
 	return samsung_clocksource_read(NULL);
 >>>>>>> v3.18
+=======
+static u64 notrace samsung_read_sched_clock(void)
+{
+	return samsung_clocksource_read(NULL);
+>>>>>>> v3.18
 }
 
 static void __init samsung_clocksource_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *reg = samsung_timer_reg();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long pclk;
@@ -429,6 +475,7 @@ static void __init samsung_clocksource_init(void)
 	samsung_time_start(pwm.source_id, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(samsung_read_sched_clock,
 						pwm.variant.bits, clock_rate);
 
@@ -436,6 +483,8 @@ static void __init samsung_clocksource_init(void)
 					clock_rate, 250, pwm.variant.bits,
 					clocksource_mmio_readl_down);
 =======
+=======
+>>>>>>> v3.18
 	if (pwm.source_id == 4)
 		pwm.source_reg = pwm.base + 0x40;
 	else
@@ -446,6 +495,9 @@ static void __init samsung_clocksource_init(void)
 
 	samsung_clocksource.mask = CLOCKSOURCE_MASK(pwm.variant.bits);
 	ret = clocksource_register_hz(&samsung_clocksource, clock_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		panic("samsung_clocksource_timer: can't register clocksource\n");
@@ -454,10 +506,13 @@ static void __init samsung_clocksource_init(void)
 static void __init samsung_timer_resources(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwm.timerclk = clk_get(NULL, "timers");
 	if (IS_ERR(pwm.timerclk))
 		panic("failed to get timers clock for timer");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk_prepare_enable(pwm.timerclk);
@@ -505,11 +560,17 @@ void __init samsung_pwm_clocksource_init(void __iomem *base,
 	memcpy(pwm.irq, irqs, SAMSUNG_PWM_NUM * sizeof(*irqs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pwm.timerclk = clk_get(NULL, "timers");
 	if (IS_ERR(pwm.timerclk))
 		panic("failed to get timers clock for timer");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	_samsung_pwm_clocksource_init();
 }
@@ -519,7 +580,10 @@ static void __init samsung_pwm_alloc(struct device_node *np,
 				     const struct samsung_pwm_variant *variant)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct property *prop;
@@ -541,6 +605,7 @@ static void __init samsung_pwm_alloc(struct device_node *np,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_address_to_resource(np, 0, &res);
 	if (!request_mem_region(res.start,
 				resource_size(&res), "samsung-pwm")) {
@@ -556,6 +621,8 @@ static void __init samsung_pwm_alloc(struct device_node *np,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	pwm.base = of_iomap(np, 0);
 	if (!pwm.base) {
 		pr_err("%s: failed to map PWM registers\n", __func__);
@@ -566,6 +633,9 @@ static void __init samsung_pwm_alloc(struct device_node *np,
 	if (IS_ERR(pwm.timerclk))
 		panic("failed to get timers clock for timer");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	_samsung_pwm_clocksource_init();
 }

@@ -29,9 +29,12 @@
 #define CMD_DIGITAL       0x51
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cxusb_state {
 	u8 gpio_write_state[3];
 =======
+=======
+>>>>>>> v3.18
 #define CMD_SP2_CI_WRITE  0x70
 #define CMD_SP2_CI_READ   0x71
 
@@ -40,6 +43,9 @@ struct cxusb_state {
 	struct i2c_client *i2c_client_demod;
 	struct i2c_client *i2c_client_tuner;
 	struct i2c_client *i2c_client_ci;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

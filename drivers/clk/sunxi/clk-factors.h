@@ -4,16 +4,22 @@
 #include <linux/clk-provider.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define SUNXI_FACTORS_NOT_APPLICABLE	(0)
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 
 #define SUNXI_FACTORS_NOT_APPLICABLE	(0)
 
 #define SUNXI_FACTORS_MUX_MASK 0x3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct clk_factors_config {
 	u8 nshift;
@@ -28,6 +34,7 @@ struct clk_factors_config {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct clk *clk_register_factors(struct device *dev, const char *name,
 				 const char *parent_name,
 				 unsigned long flags, void __iomem *reg,
@@ -36,6 +43,8 @@ struct clk *clk_register_factors(struct device *dev, const char *name,
 						      u8 *n, u8 *k, u8 *m, u8 *p),
 				 spinlock_t *lock);
 =======
+=======
+>>>>>>> v3.18
 struct factors_data {
 	int enable;
 	int mux;
@@ -56,5 +65,8 @@ struct clk * __init sunxi_factors_register(struct device_node *node,
 					   const struct factors_data *data,
 					   spinlock_t *lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

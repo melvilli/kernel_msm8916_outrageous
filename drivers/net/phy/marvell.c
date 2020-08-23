@@ -35,9 +35,15 @@
 #include <linux/of.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>
 #include <asm/irq.h>
 #include <asm/uaccess.h>
+=======
+#include <linux/io.h>
+#include <asm/irq.h>
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 #include <asm/irq.h>
@@ -57,6 +63,10 @@
 #define MII_M1011_PHY_SCR_AUTO_CROSS	0x0060
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MII_M1145_PHY_EXT_SR		0x1b
+>>>>>>> v3.18
 =======
 #define MII_M1145_PHY_EXT_SR		0x1b
 >>>>>>> v3.18
@@ -65,11 +75,17 @@
 #define MII_M1145_RGMII_TX_DELAY	0x0002
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MII_M1145_HWCFG_MODE_SGMII_NO_CLK	0x4
 #define MII_M1145_HWCFG_MODE_MASK		0xf
 #define MII_M1145_HWCFG_FIBER_COPPER_AUTO	0x8000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MII_M1111_PHY_LED_CONTROL	0x18
 #define MII_M1111_PHY_LED_DIRECT	0x4100
@@ -134,6 +150,11 @@
 #define MII_M1011_PHY_STATUS_LINK	0x0400
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MII_M1116R_CONTROL_REG_MAC	21
+
+>>>>>>> v3.18
 =======
 #define MII_M1116R_CONTROL_REG_MAC	21
 
@@ -395,7 +416,10 @@ static int m88e1318_config_aneg(struct phy_device *phydev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int m88e1510_config_aneg(struct phy_device *phydev)
 {
 	int err;
@@ -456,6 +480,9 @@ static int m88e1116r_config_init(struct phy_device *phydev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int m88e1111_config_init(struct phy_device *phydev)
 {
@@ -700,7 +727,10 @@ static int m88e1145_config_init(struct phy_device *phydev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phydev->interface == PHY_INTERFACE_MODE_SGMII) {
 		int temp = phy_read(phydev, MII_M1145_PHY_EXT_SR);
 		if (temp < 0)
@@ -715,6 +745,9 @@ static int m88e1145_config_init(struct phy_device *phydev)
 			return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = marvell_of_reg_init(phydev);
 	if (err < 0)
@@ -759,6 +792,11 @@ static int marvell_read_status(struct phy_device *phydev)
 			return adv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		lpa &= adv;
+
+>>>>>>> v3.18
 =======
 		lpa &= adv;
 
@@ -938,6 +976,11 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -956,6 +999,11 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -974,6 +1022,11 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -992,6 +1045,11 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -1010,6 +1068,11 @@ static struct phy_driver marvell_drivers[] = {
 		.config_intr = &marvell_config_intr,
 		.did_interrupt = &m88e1121_did_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -1030,6 +1093,11 @@ static struct phy_driver marvell_drivers[] = {
 		.get_wol = &m88e1318_get_wol,
 		.set_wol = &m88e1318_set_wol,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -1048,6 +1116,11 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -1066,6 +1139,11 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.resume = &genphy_resume,
+		.suspend = &genphy_suspend,
+>>>>>>> v3.18
 =======
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
@@ -1084,7 +1162,10 @@ static struct phy_driver marvell_drivers[] = {
 		.ack_interrupt = &marvell_ack_interrupt,
 		.config_intr = &marvell_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
 		.driver = { .owner = THIS_MODULE },
@@ -1117,6 +1198,9 @@ static struct phy_driver marvell_drivers[] = {
 		.did_interrupt = &m88e1121_did_interrupt,
 		.resume = &genphy_resume,
 		.suspend = &genphy_suspend,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.driver = { .owner = THIS_MODULE },
 	},
@@ -1139,6 +1223,7 @@ module_exit(marvell_exit);
 
 static struct mdio_device_id __maybe_unused marvell_tbl[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x01410c60, 0xfffffff0 },
 	{ 0x01410c90, 0xfffffff0 },
 	{ 0x01410cc0, 0xfffffff0 },
@@ -1149,6 +1234,8 @@ static struct mdio_device_id __maybe_unused marvell_tbl[] = {
 	{ 0x01410e30, 0xfffffff0 },
 	{ 0x01410e90, 0xfffffff0 },
 =======
+=======
+>>>>>>> v3.18
 	{ MARVELL_PHY_ID_88E1101, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E1112, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E1111, MARVELL_PHY_ID_MASK },
@@ -1160,6 +1247,9 @@ static struct mdio_device_id __maybe_unused marvell_tbl[] = {
 	{ MARVELL_PHY_ID_88E1318S, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E1116R, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E1510, MARVELL_PHY_ID_MASK },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };

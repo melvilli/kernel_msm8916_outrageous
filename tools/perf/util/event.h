@@ -8,6 +8,7 @@
 #include "map.h"
 #include "build-id.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * PERF_SAMPLE_IP | PERF_SAMPLE_TID | *
@@ -21,6 +22,8 @@ struct ip_event {
 
 struct mmap_event {
 =======
+=======
+>>>>>>> v3.18
 #include "perf_regs.h"
 
 struct mmap_event {
@@ -33,6 +36,9 @@ struct mmap_event {
 };
 
 struct mmap2_event {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct perf_event_header header;
 	u32 pid, tid;
@@ -40,13 +46,19 @@ struct mmap2_event {
 	u64 len;
 	u64 pgoff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 maj;
 	u32 min;
 	u64 ino;
 	u64 ino_generation;
 	u32 prot;
 	u32 flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char filename[PATH_MAX];
 };
@@ -83,13 +95,19 @@ struct read_event {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct throttle_event {
 	struct perf_event_header header;
 	u64 time;
 	u64 id;
 	u64 stream_id;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PERF_SAMPLE_MASK				\
@@ -97,13 +115,19 @@ struct throttle_event {
 	 PERF_SAMPLE_TIME | PERF_SAMPLE_ADDR |		\
 	PERF_SAMPLE_ID | PERF_SAMPLE_STREAM_ID |	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 PERF_SAMPLE_CPU | PERF_SAMPLE_PERIOD)
 =======
+=======
+>>>>>>> v3.18
 	 PERF_SAMPLE_CPU | PERF_SAMPLE_PERIOD |		\
 	 PERF_SAMPLE_IDENTIFIER)
 
 /* perf sample has 16 bits size limit */
 #define PERF_SAMPLE_MAX_SIZE (1 << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sample_event {
@@ -113,8 +137,11 @@ struct sample_event {
 
 struct regs_dump {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *regs;
 =======
+=======
+>>>>>>> v3.18
 	u64 abi;
 	u64 mask;
 	u64 *regs;
@@ -122,6 +149,9 @@ struct regs_dump {
 	/* Cached values/mask filled by first register access. */
 	u64 cache_regs[PERF_REGS_MAX];
 	u64 cache_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -132,7 +162,10 @@ struct stack_dump {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sample_read_value {
 	u64 value;
 	u64 id;
@@ -174,6 +207,9 @@ struct branch_stack {
 	struct branch_entry	entries[0];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct perf_sample {
 	u64 ip;
@@ -185,16 +221,22 @@ struct perf_sample {
 	u64 period;
 	u64 weight;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 cpu;
 	u32 raw_size;
 	u64 data_src;
 =======
+=======
+>>>>>>> v3.18
 	u64 transaction;
 	u32 cpu;
 	u32 raw_size;
 	u64 data_src;
 	u32 flags;
 	u16 insn_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *raw_data;
 	struct ip_callchain *callchain;
@@ -202,6 +244,10 @@ struct perf_sample {
 	struct regs_dump  user_regs;
 	struct stack_dump user_stack;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sample_read read;
+>>>>>>> v3.18
 =======
 	struct sample_read read;
 >>>>>>> v3.18
@@ -225,7 +271,11 @@ enum perf_user_event_type { /* above any possible kernel type */
 	PERF_RECORD_USER_TYPE_START		= 64,
 	PERF_RECORD_HEADER_ATTR			= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PERF_RECORD_HEADER_EVENT_TYPE		= 65,
+=======
+	PERF_RECORD_HEADER_EVENT_TYPE		= 65, /* depreceated */
+>>>>>>> v3.18
 =======
 	PERF_RECORD_HEADER_EVENT_TYPE		= 65, /* depreceated */
 >>>>>>> v3.18
@@ -236,7 +286,10 @@ enum perf_user_event_type { /* above any possible kernel type */
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The kernel collects the number of events it couldn't send in a stretch and
  * when possible sends this number in a PERF_RECORD_LOST event. The number of
@@ -263,6 +316,9 @@ struct events_stats {
 	u32 nr_unprocessable_samples;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct attr_event {
 	struct perf_event_header header;
@@ -290,8 +346,13 @@ struct tracing_data_event {
 union perf_event {
 	struct perf_event_header	header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ip_event			ip;
 	struct mmap_event		mmap;
+=======
+	struct mmap_event		mmap;
+	struct mmap2_event		mmap2;
+>>>>>>> v3.18
 =======
 	struct mmap_event		mmap;
 	struct mmap2_event		mmap2;
@@ -301,6 +362,10 @@ union perf_event {
 	struct lost_event		lost;
 	struct read_event		read;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct throttle_event		throttle;
+>>>>>>> v3.18
 =======
 	struct throttle_event		throttle;
 >>>>>>> v3.18
@@ -325,6 +390,7 @@ int perf_event__synthesize_thread_map(struct perf_tool *tool,
 				      struct thread_map *threads,
 				      perf_event__handler_t process,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      struct machine *machine);
 int perf_event__synthesize_threads(struct perf_tool *tool,
 				   perf_event__handler_t process,
@@ -334,6 +400,8 @@ int perf_event__synthesize_kernel_mmap(struct perf_tool *tool,
 				       struct machine *machine,
 				       const char *symbol_name);
 =======
+=======
+>>>>>>> v3.18
 				      struct machine *machine, bool mmap_data);
 int perf_event__synthesize_threads(struct perf_tool *tool,
 				   perf_event__handler_t process,
@@ -341,6 +409,9 @@ int perf_event__synthesize_threads(struct perf_tool *tool,
 int perf_event__synthesize_kernel_mmap(struct perf_tool *tool,
 				       perf_event__handler_t process,
 				       struct machine *machine);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int perf_event__synthesize_modules(struct perf_tool *tool,
@@ -360,11 +431,17 @@ int perf_event__process_mmap(struct perf_tool *tool,
 			     struct perf_sample *sample,
 			     struct machine *machine);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int perf_event__process_mmap2(struct perf_tool *tool,
 			     union perf_event *event,
 			     struct perf_sample *sample,
 			     struct machine *machine);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int perf_event__process_fork(struct perf_tool *tool,
 			     union perf_event *event,
@@ -380,6 +457,7 @@ int perf_event__process(struct perf_tool *tool,
 			struct machine *machine);
 
 struct addr_location;
+<<<<<<< HEAD
 <<<<<<< HEAD
 int perf_event__preprocess_sample(const union perf_event *self,
 				  struct machine *machine,
@@ -399,6 +477,8 @@ size_t perf_event__fprintf_task(union perf_event *event, FILE *fp);
 size_t perf_event__fprintf(union perf_event *event, FILE *fp);
 
 =======
+=======
+>>>>>>> v3.18
 
 int perf_event__preprocess_sample(const union perf_event *event,
 				  struct machine *machine,
@@ -440,5 +520,8 @@ size_t perf_event__fprintf(union perf_event *event, FILE *fp);
 u64 kallsyms__get_function_start(const char *kallsyms_filename,
 				 const char *symbol_name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PERF_RECORD_H */

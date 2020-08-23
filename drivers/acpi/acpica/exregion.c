@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -93,6 +97,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 	switch (bit_width) {
 	case 8:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -101,6 +109,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -109,6 +121,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	case 32:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -117,6 +133,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	case 64:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -125,6 +145,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -201,7 +225,11 @@ acpi_ex_system_memory_space_handler(u32 function,
 			ACPI_ERROR((AE_INFO,
 				    "Could not map memory at 0x%8.8X%8.8X, size %u",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    ACPI_FORMAT_UINT64(address),
+=======
+				    ACPI_FORMAT_NATIVE_UINT(address),
+>>>>>>> v3.18
 =======
 				    ACPI_FORMAT_NATIVE_UINT(address),
 >>>>>>> v3.18
@@ -226,7 +254,12 @@ acpi_ex_system_memory_space_handler(u32 function,
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 			  "System-Memory (width %u) R/W %u Address=%8.8X%8.8X\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  bit_width, function, ACPI_FORMAT_UINT64(address)));
+=======
+			  bit_width, function,
+			  ACPI_FORMAT_NATIVE_UINT(address)));
+>>>>>>> v3.18
 =======
 			  bit_width, function,
 			  ACPI_FORMAT_NATIVE_UINT(address)));
@@ -247,6 +280,7 @@ acpi_ex_system_memory_space_handler(u32 function,
 		switch (bit_width) {
 		case 8:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*value = (u64) ACPI_GET8(logical_addr_ptr);
 			break;
 
@@ -265,6 +299,8 @@ acpi_ex_system_memory_space_handler(u32 function,
 		default:
 			/* bit_width was already validated */
 =======
+=======
+>>>>>>> v3.18
 
 			*value = (u64)ACPI_GET8(logical_addr_ptr);
 			break;
@@ -288,6 +324,9 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 			/* bit_width was already validated */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -298,6 +337,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 		switch (bit_width) {
 		case 8:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -306,6 +349,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 		case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -314,6 +361,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 		case 32:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -322,6 +373,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 		case 64:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -330,7 +385,13 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* bit_width was already validated */
+=======
+
+			/* bit_width was already validated */
+
+>>>>>>> v3.18
 =======
 
 			/* bit_width was already validated */
@@ -342,6 +403,10 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -385,7 +450,12 @@ acpi_ex_system_io_space_handler(u32 function,
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 			  "System-IO (width %u) R/W %u Address=%8.8X%8.8X\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  bit_width, function, ACPI_FORMAT_UINT64(address)));
+=======
+			  bit_width, function,
+			  ACPI_FORMAT_NATIVE_UINT(address)));
+>>>>>>> v3.18
 =======
 			  bit_width, function,
 			  ACPI_FORMAT_NATIVE_UINT(address)));
@@ -409,6 +479,10 @@ acpi_ex_system_io_space_handler(u32 function,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -474,6 +548,10 @@ acpi_ex_pci_config_space_handler(u32 function,
 	case ACPI_READ:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		*value = 0;
+>>>>>>> v3.18
 =======
 		*value = 0;
 >>>>>>> v3.18

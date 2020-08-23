@@ -22,6 +22,10 @@ enum bch_ecc {
 	BCH4_ECC = 0,
 	BCH8_ECC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BCH16_ECC,
+>>>>>>> v3.18
 =======
 	BCH16_ECC,
 >>>>>>> v3.18
@@ -31,6 +35,7 @@ enum bch_ecc {
 #define ERROR_VECTOR_MAX		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCH8_ECC_OOB_BYTES		13
 #define BCH4_ECC_OOB_BYTES		7
 /* RBL requires 14 byte even though BCH8 uses only 13 byte */
@@ -38,6 +43,8 @@ enum bch_ecc {
 /* Uses 1 extra byte to handle erased pages */
 #define BCH4_SIZE			(BCH4_ECC_OOB_BYTES + 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -53,6 +60,7 @@ struct elm_errorvec {
 	bool error_uncorrectable;
 	int error_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error_loc[ERROR_VECTOR_MAX];
 };
 
@@ -60,6 +68,8 @@ void elm_decode_bch_error_page(struct device *dev, u8 *ecc_calc,
 		struct elm_errorvec *err_vec);
 int elm_config(struct device *dev, enum bch_ecc bch_type);
 =======
+=======
+>>>>>>> v3.18
 	int error_loc[16];
 };
 
@@ -83,5 +93,8 @@ static inline int elm_config(struct device *dev, enum bch_ecc bch_type,
 }
 #endif /* CONFIG_MTD_NAND_ECC_BCH */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ELM_H */

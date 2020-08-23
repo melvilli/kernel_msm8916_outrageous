@@ -25,7 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/bug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
@@ -70,7 +73,10 @@ enum max77686_ramp_rate {
 
 struct max77686_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev *rdev[MAX77686_REGULATORS];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int opmode[MAX77686_REGULATORS];
@@ -404,17 +410,23 @@ static int max77686_pmic_dt_parse_pdata(struct platform_device *pdev,
 	struct device_node *pmic_np, *regulators_np;
 	struct max77686_regulator_data *rdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_regulator_match rmatch;
 	unsigned int i;
 
 	pmic_np = iodev->dev->of_node;
 	regulators_np = of_find_node_by_name(pmic_np, "voltage-regulators");
 =======
+=======
+>>>>>>> v3.18
 	struct of_regulator_match rmatch = { };
 	unsigned int i;
 
 	pmic_np = iodev->dev->of_node;
 	regulators_np = of_get_child_by_name(pmic_np, "voltage-regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!regulators_np) {
 		dev_err(&pdev->dev, "could not find regulators sub-node\n");
@@ -426,8 +438,12 @@ static int max77686_pmic_dt_parse_pdata(struct platform_device *pdev,
 			     pdata->num_regulators, GFP_KERNEL);
 	if (!rdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev,
 			"could not allocate memory for regulator data\n");
+=======
+		of_node_put(regulators_np);
+>>>>>>> v3.18
 =======
 		of_node_put(regulators_np);
 >>>>>>> v3.18
@@ -445,6 +461,10 @@ static int max77686_pmic_dt_parse_pdata(struct platform_device *pdev,
 
 	pdata->regulators = rdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(regulators_np);
+>>>>>>> v3.18
 =======
 	of_node_put(regulators_np);
 >>>>>>> v3.18
@@ -498,6 +518,11 @@ static int max77686_pmic_probe(struct platform_device *pdev)
 
 	for (i = 0; i < MAX77686_REGULATORS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct regulator_dev *rdev;
+
+>>>>>>> v3.18
 =======
 		struct regulator_dev *rdev;
 
@@ -507,6 +532,7 @@ static int max77686_pmic_probe(struct platform_device *pdev)
 
 		max77686->opmode[i] = regulators[i].enable_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max77686->rdev[i] = regulator_register(&regulators[i], &config);
 		if (IS_ERR(max77686->rdev[i])) {
 			ret = PTR_ERR(max77686->rdev[i]);
@@ -515,17 +541,23 @@ static int max77686_pmic_probe(struct platform_device *pdev)
 			max77686->rdev[i] = NULL;
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&pdev->dev,
 						&regulators[i], &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&pdev->dev,
 				"regulator init failed for %d\n", i);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 err:
 	while (--i >= 0)
@@ -544,6 +576,8 @@ static int max77686_pmic_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct platform_device_id max77686_pmic_id[] = {
@@ -559,7 +593,10 @@ static struct platform_driver max77686_pmic_driver = {
 	},
 	.probe = max77686_pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max77686_pmic_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max77686_pmic_id,

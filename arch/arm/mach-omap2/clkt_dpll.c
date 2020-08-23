@@ -22,10 +22,14 @@
 #include <asm/div64.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
 #include "clock.h"
 #include "cm-regbits-24xx.h"
 #include "cm-regbits-34xx.h"
+=======
+#include "clock.h"
+>>>>>>> v3.18
 =======
 #include "clock.h"
 >>>>>>> v3.18
@@ -49,12 +53,15 @@
 					 (DPLL_SCALE_FACTOR / DPLL_SCALE_BASE))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* DPLL valid Fint frequency band limits - from 34xx TRM Section 4.7.6.2 */
 #define OMAP3430_DPLL_FINT_BAND1_MIN	750000
 #define OMAP3430_DPLL_FINT_BAND1_MAX	2100000
 #define OMAP3430_DPLL_FINT_BAND2_MIN	7500000
 #define OMAP3430_DPLL_FINT_BAND2_MAX	21000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -64,8 +71,11 @@
 #define OMAP3PLUS_DPLL_FINT_JTYPE_MIN	500000
 #define OMAP3PLUS_DPLL_FINT_JTYPE_MAX	2500000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OMAP3PLUS_DPLL_FINT_MIN		32000
 #define OMAP3PLUS_DPLL_FINT_MAX		52000000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -87,7 +97,11 @@
  * should skip to the next iteration (again assuming N is increasing).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _dpll_test_fint(struct clk_hw_omap *clk, u8 n)
+=======
+static int _dpll_test_fint(struct clk_hw_omap *clk, unsigned int n)
+>>>>>>> v3.18
 =======
 static int _dpll_test_fint(struct clk_hw_omap *clk, unsigned int n)
 >>>>>>> v3.18
@@ -101,6 +115,7 @@ static int _dpll_test_fint(struct clk_hw_omap *clk, unsigned int n)
 	/* DPLL divider must result in a valid jitter correction val */
 	fint = __clk_get_rate(__clk_get_parent(clk->hw.clk)) / n;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu_is_omap24xx()) {
 		/* Should not be called for OMAP2, so warn if it is called */
@@ -119,6 +134,8 @@ static int _dpll_test_fint(struct clk_hw_omap *clk, unsigned int n)
 
 	if (fint < fint_min) {
 =======
+=======
+>>>>>>> v3.18
 	if (dd->flags & DPLL_J_TYPE) {
 		fint_min = OMAP3PLUS_DPLL_FINT_JTYPE_MIN;
 		fint_max = OMAP3PLUS_DPLL_FINT_JTYPE_MAX;
@@ -133,13 +150,20 @@ static int _dpll_test_fint(struct clk_hw_omap *clk, unsigned int n)
 	}
 
 	if (fint < ti_clk_features.fint_min) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_debug("rejecting n=%d due to Fint failure, lowering max_divider\n",
 			 n);
 		dd->max_divider = n;
 		ret = DPLL_FINT_UNDERFLOW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (fint > fint_max) {
+=======
+	} else if (fint > ti_clk_features.fint_max) {
+>>>>>>> v3.18
 =======
 	} else if (fint > ti_clk_features.fint_max) {
 >>>>>>> v3.18
@@ -148,8 +172,13 @@ static int _dpll_test_fint(struct clk_hw_omap *clk, unsigned int n)
 		dd->min_divider = n;
 		ret = DPLL_FINT_INVALID;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (cpu_is_omap3430() && fint > OMAP3430_DPLL_FINT_BAND1_MAX &&
 		   fint < OMAP3430_DPLL_FINT_BAND2_MIN) {
+=======
+	} else if (fint > ti_clk_features.fint_band1_max &&
+		   fint < ti_clk_features.fint_band2_min) {
+>>>>>>> v3.18
 =======
 	} else if (fint > ti_clk_features.fint_band1_max &&
 		   fint < ti_clk_features.fint_band2_min) {
@@ -226,7 +255,10 @@ static int _dpll_test_mult(int *m, int n, unsigned long *new_rate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * _omap2_dpll_is_in_bypass - check if DPLL is in bypass mode or not
  * @v: bitfield value of the DPLL enable
@@ -255,6 +287,9 @@ static int _omap2_dpll_is_in_bypass(u32 v)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Public functions */
 u8 omap2_init_dpll_parent(struct clk_hw *hw)
@@ -268,7 +303,11 @@ u8 omap2_init_dpll_parent(struct clk_hw *hw)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->control_reg);
+=======
+	v = omap2_clk_readl(clk, dd->control_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, dd->control_reg);
 >>>>>>> v3.18
@@ -276,6 +315,7 @@ u8 omap2_init_dpll_parent(struct clk_hw *hw)
 	v >>= __ffs(dd->enable_mask);
 
 	/* Reparent the struct clk in case the dpll is in bypass */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu_is_omap24xx()) {
 		if (v == OMAP2XXX_EN_DPLL_LPBYPASS ||
@@ -291,6 +331,11 @@ u8 omap2_init_dpll_parent(struct clk_hw *hw)
 		    v == OMAP4XXX_EN_DPLL_MNBYPASS)
 			return 1;
 	}
+=======
+	if (_omap2_dpll_is_in_bypass(v))
+		return 1;
+
+>>>>>>> v3.18
 =======
 	if (_omap2_dpll_is_in_bypass(v))
 		return 1;
@@ -325,6 +370,7 @@ unsigned long omap2_get_dpll_rate(struct clk_hw_omap *clk)
 
 	/* Return bypass rate if DPLL is bypassed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->control_reg);
 	v &= dd->enable_mask;
 	v >>= __ffs(dd->enable_mask);
@@ -346,6 +392,8 @@ unsigned long omap2_get_dpll_rate(struct clk_hw_omap *clk)
 
 	v = __raw_readl(dd->mult_div1_reg);
 =======
+=======
+>>>>>>> v3.18
 	v = omap2_clk_readl(clk, dd->control_reg);
 	v &= dd->enable_mask;
 	v >>= __ffs(dd->enable_mask);
@@ -354,6 +402,9 @@ unsigned long omap2_get_dpll_rate(struct clk_hw_omap *clk)
 		return __clk_get_rate(dd->clk_bypass);
 
 	v = omap2_clk_readl(clk, dd->mult_div1_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dpll_mult = v & dd->mult_mask;
 	dpll_mult >>= __ffs(dd->mult_mask);
@@ -386,6 +437,10 @@ long omap2_dpll_round_rate(struct clk_hw *hw, unsigned long target_rate,
 	struct clk_hw_omap *clk = to_clk_hw_omap(hw);
 	int m, n, r, scaled_max_m;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int min_delta_m = INT_MAX, min_delta_n = INT_MAX;
+>>>>>>> v3.18
 =======
 	int min_delta_m = INT_MAX, min_delta_n = INT_MAX;
 >>>>>>> v3.18
@@ -394,6 +449,11 @@ long omap2_dpll_round_rate(struct clk_hw *hw, unsigned long target_rate,
 	struct dpll_data *dd;
 	unsigned long ref_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	long delta;
+	long prev_min_delta = LONG_MAX;
+>>>>>>> v3.18
 =======
 	long delta;
 	long prev_min_delta = LONG_MAX;
@@ -408,7 +468,11 @@ long omap2_dpll_round_rate(struct clk_hw *hw, unsigned long target_rate,
 	ref_rate = __clk_get_rate(dd->clk_ref);
 	clk_name = __clk_get_name(hw->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("clock: %s: starting DPLL round_rate, target rate %ld\n",
+=======
+	pr_debug("clock: %s: starting DPLL round_rate, target rate %lu\n",
+>>>>>>> v3.18
 =======
 	pr_debug("clock: %s: starting DPLL round_rate, target rate %lu\n",
 >>>>>>> v3.18
@@ -448,6 +512,7 @@ long omap2_dpll_round_rate(struct clk_hw *hw, unsigned long target_rate,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("clock: %s: m = %d: n = %d: new_rate = %ld\n",
 			 clk_name, m, n, new_rate);
 
@@ -462,6 +527,8 @@ long omap2_dpll_round_rate(struct clk_hw *hw, unsigned long target_rate,
 	if (target_rate != new_rate) {
 		pr_debug("clock: %s: cannot round to rate %ld\n",
 =======
+=======
+>>>>>>> v3.18
 		/* skip rates above our target rate */
 		delta = target_rate - new_rate;
 		if (delta < 0)
@@ -482,19 +549,28 @@ long omap2_dpll_round_rate(struct clk_hw *hw, unsigned long target_rate,
 
 	if (prev_min_delta == LONG_MAX) {
 		pr_debug("clock: %s: cannot round to rate %lu\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 clk_name, target_rate);
 		return ~0;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return target_rate;
 =======
+=======
+>>>>>>> v3.18
 	dd->last_rounded_m = min_delta_m;
 	dd->last_rounded_n = min_delta_n;
 	dd->last_rounded_rate = target_rate - prev_min_delta;
 
 	return dd->last_rounded_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

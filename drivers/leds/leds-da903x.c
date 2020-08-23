@@ -15,7 +15,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -97,7 +100,11 @@ static void da903x_led_set(struct led_classdev *led_cdev,
 static int da903x_led_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct led_info *pdata = pdev->dev.platform_data;
+=======
+	struct led_info *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct led_info *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -117,10 +124,15 @@ static int da903x_led_probe(struct platform_device *pdev)
 
 	led = devm_kzalloc(&pdev->dev, sizeof(struct da903x_led), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (led == NULL) {
 		dev_err(&pdev->dev, "failed to alloc memory for LED%d\n", id);
 		return -ENOMEM;
 	}
+=======
+	if (!led)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!led)
 		return -ENOMEM;

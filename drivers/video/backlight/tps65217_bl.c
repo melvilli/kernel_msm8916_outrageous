@@ -110,6 +110,7 @@ static int tps65217_bl_update_status(struct backlight_device *bl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tps65217_bl_get_brightness(struct backlight_device *bl)
 {
 	return bl->props.brightness;
@@ -119,6 +120,11 @@ static const struct backlight_ops tps65217_bl_ops = {
 	.options	= BL_CORE_SUSPENDRESUME,
 	.update_status	= tps65217_bl_update_status,
 	.get_brightness	= tps65217_bl_get_brightness
+=======
+static const struct backlight_ops tps65217_bl_ops = {
+	.options	= BL_CORE_SUSPENDRESUME,
+	.update_status	= tps65217_bl_update_status,
+>>>>>>> v3.18
 =======
 static const struct backlight_ops tps65217_bl_ops = {
 	.options	= BL_CORE_SUSPENDRESUME,
@@ -207,7 +213,10 @@ tps65217_bl_parse_dt(struct platform_device *pdev)
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "failed to allocate platform data\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = ERR_PTR(-ENOMEM);
@@ -297,6 +306,7 @@ static int tps65217_bl_probe(struct platform_device *pdev)
 			return PTR_ERR(pdata);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pdev->dev.platform_data) {
 			dev_err(&pdev->dev, "no platform data provided\n");
 			return -EINVAL;
@@ -304,21 +314,31 @@ static int tps65217_bl_probe(struct platform_device *pdev)
 
 		pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 		pdata = dev_get_platdata(&pdev->dev);
 		if (!pdata) {
 			dev_err(&pdev->dev, "no platform data provided\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	tps65217_bl = devm_kzalloc(&pdev->dev, sizeof(*tps65217_bl),
 				GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tps65217_bl == NULL) {
 		dev_err(&pdev->dev, "allocation of struct tps65217_bl failed\n");
 		return -ENOMEM;
 	}
+=======
+	if (tps65217_bl == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (tps65217_bl == NULL)
 		return -ENOMEM;
@@ -337,7 +357,11 @@ static int tps65217_bl_probe(struct platform_device *pdev)
 	bl_props.max_brightness = 100;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tps65217_bl->bl = backlight_device_register(pdev->name,
+=======
+	tps65217_bl->bl = devm_backlight_device_register(&pdev->dev, pdev->name,
+>>>>>>> v3.18
 =======
 	tps65217_bl->bl = devm_backlight_device_register(&pdev->dev, pdev->name,
 >>>>>>> v3.18
@@ -357,6 +381,7 @@ static int tps65217_bl_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tps65217_bl_remove(struct platform_device *pdev)
 {
 	struct tps65217_bl *tps65217_bl = platform_get_drvdata(pdev);
@@ -371,6 +396,11 @@ static struct platform_driver tps65217_bl_driver = {
 	.remove		= tps65217_bl_remove,
 	.driver		= {
 		.owner	= THIS_MODULE,
+=======
+static struct platform_driver tps65217_bl_driver = {
+	.probe		= tps65217_bl_probe,
+	.driver		= {
+>>>>>>> v3.18
 =======
 static struct platform_driver tps65217_bl_driver = {
 	.probe		= tps65217_bl_probe,

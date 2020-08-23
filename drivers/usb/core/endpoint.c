@@ -13,7 +13,10 @@
 #include <linux/spinlock.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/idr.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/usb.h>
@@ -37,7 +40,11 @@ struct ep_attribute {
 
 #define usb_ep_attr(field, format_string)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_ep_##field(struct device *dev,		\
+=======
+static ssize_t field##_show(struct device *dev,			\
+>>>>>>> v3.18
 =======
 static ssize_t field##_show(struct device *dev,			\
 >>>>>>> v3.18
@@ -47,6 +54,7 @@ static ssize_t field##_show(struct device *dev,			\
 	struct ep_device *ep = to_ep_device(dev);		\
 	return sprintf(buf, format_string, ep->desc->field);	\
 }								\
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(field, S_IRUGO, show_ep_##field, NULL);
 
@@ -58,6 +66,8 @@ usb_ep_attr(bInterval, "%02x\n")
 static ssize_t show_ep_wMaxPacketSize(struct device *dev,
 				      struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(field)
 
 usb_ep_attr(bLength, "%02x\n");
@@ -67,6 +77,9 @@ usb_ep_attr(bInterval, "%02x\n");
 
 static ssize_t wMaxPacketSize_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ep_device *ep = to_ep_device(dev);
@@ -74,15 +87,21 @@ static ssize_t wMaxPacketSize_show(struct device *dev,
 		        usb_endpoint_maxp(ep->desc) & 0x07ff);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(wMaxPacketSize, S_IRUGO, show_ep_wMaxPacketSize, NULL);
 
 static ssize_t show_ep_type(struct device *dev, struct device_attribute *attr,
 			    char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(wMaxPacketSize);
 
 static ssize_t type_show(struct device *dev, struct device_attribute *attr,
 			 char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ep_device *ep = to_ep_device(dev);
@@ -105,15 +124,21 @@ static ssize_t type_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", type);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(type, S_IRUGO, show_ep_type, NULL);
 
 static ssize_t show_ep_interval(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(type);
 
 static ssize_t interval_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ep_device *ep = to_ep_device(dev);
@@ -158,15 +183,21 @@ static ssize_t interval_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d%cs\n", interval, unit);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(interval, S_IRUGO, show_ep_interval, NULL);
 
 static ssize_t show_ep_direction(struct device *dev,
 				 struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(interval);
 
 static ssize_t direction_show(struct device *dev, struct device_attribute *attr,
 			      char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ep_device *ep = to_ep_device(dev);
@@ -181,7 +212,11 @@ static ssize_t direction_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", direction);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(direction, S_IRUGO, show_ep_direction, NULL);
+=======
+static DEVICE_ATTR_RO(direction);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(direction);
 >>>>>>> v3.18

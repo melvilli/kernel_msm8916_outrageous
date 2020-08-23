@@ -53,7 +53,11 @@ module_param(codecs, int, 0444);
 MODULE_PARM_DESC(codecs, "Set bit to indicate that codec number is expected to be present (default 1)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_sis7019_ids) = {
+=======
+static const struct pci_device_id snd_sis7019_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_sis7019_ids[] = {
 >>>>>>> v3.18
@@ -1409,8 +1413,11 @@ static int sis_chip_create(struct snd_card *card,
 		goto error_out_cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1448,7 +1455,12 @@ static int snd_sis7019_probe(struct pci_dev *pci,
 		codecs = SIS_PRIMARY_CODEC_PRESENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = snd_card_create(index, id, THIS_MODULE, sizeof(*sis), &card);
+=======
+	rc = snd_card_new(&pci->dev, index, id, THIS_MODULE,
+			  sizeof(*sis), &card);
+>>>>>>> v3.18
 =======
 	rc = snd_card_new(&pci->dev, index, id, THIS_MODULE,
 			  sizeof(*sis), &card);
@@ -1495,7 +1507,10 @@ static void snd_sis7019_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

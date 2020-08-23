@@ -109,6 +109,11 @@
 	{ EXIT_REASON_EPT_VIOLATION,         "EPT_VIOLATION" }, \
 	{ EXIT_REASON_EPT_MISCONFIG,         "EPT_MISCONFIG" }, \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ EXIT_REASON_INVEPT,                "INVEPT" }, \
+	{ EXIT_REASON_PREEMPTION_TIMER,      "PREEMPTION_TIMER" }, \
+>>>>>>> v3.18
 =======
 	{ EXIT_REASON_INVEPT,                "INVEPT" }, \
 	{ EXIT_REASON_PREEMPTION_TIMER,      "PREEMPTION_TIMER" }, \
@@ -120,8 +125,12 @@
 	{ EXIT_REASON_INVD,                  "INVD" }, \
 	{ EXIT_REASON_INVVPID,               "INVVPID" }, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ EXIT_REASON_INVPCID,               "INVPCID" }, \
 	{ EXIT_REASON_PREEMPTION_TIMER,      "PREEMPTION_TIMER" }
+=======
+	{ EXIT_REASON_INVPCID,               "INVPCID" }
+>>>>>>> v3.18
 =======
 	{ EXIT_REASON_INVPCID,               "INVPCID" }
 >>>>>>> v3.18

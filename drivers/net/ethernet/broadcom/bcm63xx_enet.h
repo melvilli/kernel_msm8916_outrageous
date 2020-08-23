@@ -19,6 +19,10 @@
 /* maximum burst len for dma (4 bytes unit) */
 #define BCMENET_DMA_MAXBURST	16
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCMENETSW_DMA_MAXBURST	8
+>>>>>>> v3.18
 =======
 #define BCMENETSW_DMA_MAXBURST	8
 >>>>>>> v3.18
@@ -89,7 +93,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * SW MIB Counters register definitions
 */
@@ -138,6 +145,9 @@
 #define ETHSW_MIB_RX_8192_9728			47
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bcm_enet_mib_counters {
 	u64 tx_gd_octets;
@@ -145,6 +155,10 @@ struct bcm_enet_mib_counters {
 	u32 tx_all_octets;
 	u32 tx_all_pkts;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 tx_unicast;
+>>>>>>> v3.18
 =======
 	u32 tx_unicast;
 >>>>>>> v3.18
@@ -157,14 +171,20 @@ struct bcm_enet_mib_counters {
 	u32 tx_512_1023;
 	u32 tx_1024_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tx_jab;
 =======
+=======
+>>>>>>> v3.18
 	u32 tx_1523_2047;
 	u32 tx_2048_4095;
 	u32 tx_4096_8191;
 	u32 tx_8192_9728;
 	u32 tx_jab;
 	u32 tx_drop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 tx_ovr;
 	u32 tx_frag;
@@ -183,6 +203,10 @@ struct bcm_enet_mib_counters {
 	u32 rx_all_pkts;
 	u32 rx_brdcast;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 rx_unicast;
+>>>>>>> v3.18
 =======
 	u32 rx_unicast;
 >>>>>>> v3.18
@@ -270,6 +294,12 @@ struct bcm_enet_priv {
 	int tx_ring_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* maximum dma burst size */
+	int dma_maxburst;
+
+>>>>>>> v3.18
 =======
 	/* maximum dma burst size */
 	int dma_maxburst;
@@ -348,9 +378,12 @@ struct bcm_enet_priv {
 	/* maximum hardware transmit/receive size */
 	unsigned int hw_mtu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	bool enet_is_sw;
 
@@ -380,5 +413,8 @@ struct bcm_enet_priv {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* ! BCM63XX_ENET_H_ */

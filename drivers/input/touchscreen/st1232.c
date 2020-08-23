@@ -25,6 +25,10 @@
 #include <linux/interrupt.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -138,7 +142,12 @@ static irqreturn_t st1232_ts_irq_handler(int irq, void *dev_id)
 		/* First contact, request 100 us latency. */
 		dev_pm_qos_add_ancestor_request(&ts->client->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						&ts->low_latency_req, 100);
+=======
+						&ts->low_latency_req,
+						DEV_PM_QOS_RESUME_LATENCY, 100);
+>>>>>>> v3.18
 =======
 						&ts->low_latency_req,
 						DEV_PM_QOS_RESUME_LATENCY, 100);
@@ -163,7 +172,11 @@ static int st1232_ts_probe(struct i2c_client *client,
 {
 	struct st1232_ts_data *ts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct st1232_pdata *pdata = client->dev.platform_data;
+=======
+	struct st1232_pdata *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct st1232_pdata *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

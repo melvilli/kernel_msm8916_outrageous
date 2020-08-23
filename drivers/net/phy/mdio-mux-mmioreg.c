@@ -16,7 +16,10 @@
 #include <linux/of_mdio.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/phy.h>
@@ -52,7 +55,11 @@ static int mdio_mux_mmioreg_switch_fn(int current_child, int desired_child,
 
 	if (current_child ^ desired_child) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void *p = ioremap(s->phys, 1);
+=======
+		void __iomem *p = ioremap(s->phys, 1);
+>>>>>>> v3.18
 =======
 		void __iomem *p = ioremap(s->phys, 1);
 >>>>>>> v3.18

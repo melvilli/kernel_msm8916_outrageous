@@ -77,6 +77,7 @@ ip6t_mangle_out(struct sk_buff *skb, const struct net_device *out)
 /* The work comes in here from netfilter.c. */
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip6table_mangle_hook(unsigned int hook, struct sk_buff *skb,
 		     const struct net_device *in, const struct net_device *out,
 		     int (*okfn)(struct sk_buff *))
@@ -89,6 +90,8 @@ ip6table_mangle_hook(unsigned int hook, struct sk_buff *skb,
 	/* INPUT/FORWARD */
 	return ip6t_do_table(skb, hook, in, out,
 =======
+=======
+>>>>>>> v3.18
 ip6table_mangle_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 		     const struct net_device *in, const struct net_device *out,
 		     int (*okfn)(struct sk_buff *))
@@ -100,6 +103,9 @@ ip6table_mangle_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 				     dev_net(out)->ipv6.ip6table_mangle);
 	/* INPUT/FORWARD */
 	return ip6t_do_table(skb, ops->hooknum, in, out,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     dev_net(in)->ipv6.ip6table_mangle);
 }
@@ -116,7 +122,11 @@ static int __net_init ip6table_mangle_net_init(struct net *net)
 		ip6t_register_table(net, &packet_mangler, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv6.ip6table_mangle);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_mangle);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_mangle);
 >>>>>>> v3.18

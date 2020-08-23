@@ -115,6 +115,7 @@ static int ____smiapp_read(struct smiapp_sensor *sensor, u16 reg,
 	/* high byte comes first */
 	switch (len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SMIA_REG_32BIT:
 		*val = (data[0] << 24) + (data[1] << 16) + (data[2] << 8) +
 			data[3];
@@ -124,6 +125,8 @@ static int ____smiapp_read(struct smiapp_sensor *sensor, u16 reg,
 		break;
 	case SMIA_REG_8BIT:
 =======
+=======
+>>>>>>> v3.18
 	case SMIAPP_REG_32BIT:
 		*val = (data[0] << 24) + (data[1] << 16) + (data[2] << 8) +
 			data[3];
@@ -132,6 +135,9 @@ static int ____smiapp_read(struct smiapp_sensor *sensor, u16 reg,
 		*val = (data[0] << 8) + data[1];
 		break;
 	case SMIAPP_REG_8BIT:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*val = data[0];
 		break;
@@ -177,6 +183,7 @@ static int __smiapp_read(struct smiapp_sensor *sensor, u32 reg, u32 *val,
 {
 	struct i2c_client *client = v4l2_get_subdevdata(&sensor->src->sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int len = (u8)(reg >> 16);
 	int rval;
 
@@ -197,6 +204,8 @@ static int __smiapp_read(struct smiapp_sensor *sensor, u32 reg, u32 *val,
 found_quirk:
 	if (reg & SMIA_REG_FLAG_FLOAT)
 =======
+=======
+>>>>>>> v3.18
 	u8 len = SMIAPP_REG_WIDTH(reg);
 	int rval;
 
@@ -213,6 +222,9 @@ found_quirk:
 		return rval;
 
 	if (reg & SMIAPP_REG_FLAG_FLOAT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*val = float_to_u32_mul_1000000(client, *val);
 
@@ -220,7 +232,11 @@ found_quirk:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int smiapp_read(struct smiapp_sensor *sensor, u32 reg, u32 *val)
+=======
+int smiapp_read_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 *val)
+>>>>>>> v3.18
 =======
 int smiapp_read_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 *val)
 >>>>>>> v3.18
@@ -231,6 +247,7 @@ int smiapp_read_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 *val)
 				   SMIAPP_QUIRK_FLAG_8BIT_READ_ONLY));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int smiapp_read_8only(struct smiapp_sensor *sensor, u32 reg, u32 *val)
 {
@@ -243,6 +260,8 @@ int smiapp_read_8only(struct smiapp_sensor *sensor, u32 reg, u32 *val)
  */
 int smiapp_write(struct smiapp_sensor *sensor, u32 reg, u32 val)
 =======
+=======
+>>>>>>> v3.18
 int smiapp_read(struct smiapp_sensor *sensor, u32 reg, u32 *val)
 {
 	int rval;
@@ -272,12 +291,16 @@ int smiapp_read_8only(struct smiapp_sensor *sensor, u32 reg, u32 *val)
 }
 
 int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct i2c_client *client = v4l2_get_subdevdata(&sensor->src->sd);
 	struct i2c_msg msg;
 	unsigned char data[6];
 	unsigned int retries;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int flags = reg >> 24;
 	unsigned int len = (u8)(reg >> 16);
@@ -287,6 +310,8 @@ int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
 	if ((len != SMIA_REG_8BIT && len != SMIA_REG_16BIT &&
 	     len != SMIA_REG_32BIT) || flags)
 =======
+=======
+>>>>>>> v3.18
 	u8 flags = SMIAPP_REG_FLAGS(reg);
 	u8 len = SMIAPP_REG_WIDTH(reg);
 	u16 offset = SMIAPP_REG_ADDR(reg);
@@ -294,6 +319,9 @@ int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
 
 	if ((len != SMIAPP_REG_8BIT && len != SMIAPP_REG_16BIT &&
 	     len != SMIAPP_REG_32BIT) || flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -308,6 +336,7 @@ int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
 
 	switch (len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SMIA_REG_8BIT:
 		data[2] = val;
 		break;
@@ -317,6 +346,8 @@ int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
 		break;
 	case SMIA_REG_32BIT:
 =======
+=======
+>>>>>>> v3.18
 	case SMIAPP_REG_8BIT:
 		data[2] = val;
 		break;
@@ -325,6 +356,9 @@ int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
 		data[3] = val;
 		break;
 	case SMIAPP_REG_32BIT:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data[2] = val >> 24;
 		data[3] = val >> 16;
@@ -359,7 +393,10 @@ int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val)
 	return r;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Write to a 8/16-bit register.
@@ -377,4 +414,7 @@ int smiapp_write(struct smiapp_sensor *sensor, u32 reg, u32 val)
 
 	return smiapp_write_no_quirk(sensor, reg, val);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

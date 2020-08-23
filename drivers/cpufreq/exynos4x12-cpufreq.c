@@ -17,8 +17,13 @@
 #include <linux/slab.h>
 #include <linux/cpufreq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/regs-clock.h>
+=======
+#include <linux/of.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_address.h>
@@ -31,6 +36,10 @@ static struct clk *moutcore;
 static struct clk *mout_mpll;
 static struct clk *mout_apll;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct exynos_dvfs_info *cpufreq;
+>>>>>>> v3.18
 =======
 static struct exynos_dvfs_info *cpufreq;
 >>>>>>> v3.18
@@ -41,6 +50,7 @@ static unsigned int exynos4x12_volt_table[] = {
 };
 
 static struct cpufreq_frequency_table exynos4x12_freq_table[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{L0, CPUFREQ_ENTRY_INVALID},
 	{L1, 1400 * 1000},
@@ -58,6 +68,8 @@ static struct cpufreq_frequency_table exynos4x12_freq_table[] = {
 	{L13, 200 * 1000},
 	{0, CPUFREQ_TABLE_END},
 =======
+=======
+>>>>>>> v3.18
 	{CPUFREQ_BOOST_FREQ, L0, 1500 * 1000},
 	{0, L1, 1400 * 1000},
 	{0, L2, 1300 * 1000},
@@ -73,6 +85,9 @@ static struct cpufreq_frequency_table exynos4x12_freq_table[] = {
 	{0, L12, 300 * 1000},
 	{0, L13, 200 * 1000},
 	{0, 0, CPUFREQ_TABLE_END},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -130,7 +145,10 @@ static void exynos4x12_set_clkdiv(unsigned int div_index)
 {
 	unsigned int tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int stat_cpu1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -139,20 +157,27 @@ static void exynos4x12_set_clkdiv(unsigned int div_index)
 	tmp = apll_freq_4x12[div_index].clk_div_cpu0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(tmp, EXYNOS4_CLKDIV_CPU);
 
 	while (__raw_readl(EXYNOS4_CLKDIV_STATCPU) & 0x11111111)
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(tmp, cpufreq->cmu_regs + EXYNOS4_CLKDIV_CPU);
 
 	while (__raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKDIV_STATCPU)
 	       & 0x11111111)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cpu_relax();
 
 	/* Change Divider - CPU1 */
 	tmp = apll_freq_4x12[div_index].clk_div_cpu1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__raw_writel(tmp, EXYNOS4_CLKDIV_CPU1);
 	if (soc_is_exynos4212())
@@ -163,21 +188,32 @@ static void exynos4x12_set_clkdiv(unsigned int div_index)
 	while (__raw_readl(EXYNOS4_CLKDIV_STATCPU1) & stat_cpu1)
 		cpu_relax();
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(tmp, cpufreq->cmu_regs + EXYNOS4_CLKDIV_CPU1);
 
 	do {
 		cpu_relax();
 		tmp = __raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKDIV_STATCPU1);
 	} while (tmp != 0x0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void exynos4x12_set_apll(unsigned int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int tmp, pdiv;
 
 	/* 1. MUX_CORE_SEL = MPLL, ARMCLK uses MPLL for lock time */
+=======
+	unsigned int tmp, freq = apll_freq_4x12[index].freq;
+
+	/* MUX_CORE_SEL = MPLL, ARMCLK uses MPLL for lock time */
+>>>>>>> v3.18
 =======
 	unsigned int tmp, freq = apll_freq_4x12[index].freq;
 
@@ -188,7 +224,11 @@ static void exynos4x12_set_apll(unsigned int index)
 	do {
 		cpu_relax();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = (__raw_readl(EXYNOS4_CLKMUX_STATCPU)
+=======
+		tmp = (__raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKMUX_STATCPU)
+>>>>>>> v3.18
 =======
 		tmp = (__raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKMUX_STATCPU)
 >>>>>>> v3.18
@@ -196,6 +236,7 @@ static void exynos4x12_set_apll(unsigned int index)
 		tmp &= 0x7;
 	} while (tmp != 0x2);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* 2. Set APLL Lock time */
 	pdiv = ((apll_freq_4x12[index].mps >> 8) & 0x3f);
@@ -220,12 +261,21 @@ static void exynos4x12_set_apll(unsigned int index)
 
 	/* MUX_CORE_SEL = APLL */
 >>>>>>> v3.18
+=======
+	clk_set_rate(mout_apll, freq * 1000);
+
+	/* MUX_CORE_SEL = APLL */
+>>>>>>> v3.18
 	clk_set_parent(moutcore, mout_apll);
 
 	do {
 		cpu_relax();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = __raw_readl(EXYNOS4_CLKMUX_STATCPU);
+=======
+		tmp = __raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKMUX_STATCPU);
+>>>>>>> v3.18
 =======
 		tmp = __raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKMUX_STATCPU);
 >>>>>>> v3.18
@@ -233,6 +283,7 @@ static void exynos4x12_set_apll(unsigned int index)
 	} while (tmp != (0x1 << EXYNOS4_CLKSRC_CPU_MUXCORE_SHIFT));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool exynos4x12_pms_change(unsigned int old_index, unsigned int new_index)
 {
@@ -281,6 +332,8 @@ static void exynos4x12_set_frequency(unsigned int old_index,
 			exynos4x12_set_clkdiv(new_index);
 		}
 =======
+=======
+>>>>>>> v3.18
 static void exynos4x12_set_frequency(unsigned int old_index,
 				  unsigned int new_index)
 {
@@ -290,6 +343,9 @@ static void exynos4x12_set_frequency(unsigned int old_index,
 	} else if (old_index < new_index) {
 		exynos4x12_set_apll(new_index);
 		exynos4x12_set_clkdiv(new_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -297,9 +353,12 @@ static void exynos4x12_set_frequency(unsigned int old_index,
 int exynos4x12_cpufreq_init(struct exynos_dvfs_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long rate;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np;
 	unsigned long rate;
 
@@ -324,6 +383,9 @@ int exynos4x12_cpufreq_init(struct exynos_dvfs_info *info)
 		return -EFAULT;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpu_clk = clk_get(NULL, "armclk");
 	if (IS_ERR(cpu_clk))
@@ -344,7 +406,11 @@ int exynos4x12_cpufreq_init(struct exynos_dvfs_info *info)
 		goto err_mout_apll;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (soc_is_exynos4212())
+=======
+	if (info->type == EXYNOS_SOC_4212)
+>>>>>>> v3.18
 =======
 	if (info->type == EXYNOS_SOC_4212)
 >>>>>>> v3.18
@@ -360,7 +426,12 @@ int exynos4x12_cpufreq_init(struct exynos_dvfs_info *info)
 	info->freq_table = exynos4x12_freq_table;
 	info->set_freq = exynos4x12_set_frequency;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->need_apll_change = exynos4x12_pms_change;
+=======
+
+	cpufreq = info;
+>>>>>>> v3.18
 =======
 
 	cpufreq = info;
@@ -379,6 +450,9 @@ err_moutcore:
 	return -EINVAL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(exynos4x12_cpufreq_init);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

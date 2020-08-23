@@ -5,7 +5,11 @@
  * handlers for TCM fabric modules
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2010-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2010-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2010-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -399,9 +403,15 @@ char *iscsi_parse_pr_out_transport_id(
 	 * entire iSCSI Tarnsport ID now.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 if (out_tid_len != NULL) {
 		add_len = ((buf[2] >> 8) & 0xff);
 		add_len |= (buf[3] & 0xff);
+=======
+	if (out_tid_len) {
+		/* The shift works thanks to integer promotion rules */
+		add_len = (buf[2] << 8) | buf[3];
+>>>>>>> v3.18
 =======
 	if (out_tid_len) {
 		/* The shift works thanks to integer promotion rules */

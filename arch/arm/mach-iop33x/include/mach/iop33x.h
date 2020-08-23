@@ -19,7 +19,10 @@
  * located at different addresses.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IOP3XX_GPIO_REG(reg)	(IOP3XX_PERIPHERAL_VIRT_BASE + 0x1780 + (reg))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IOP3XX_TIMER_REG(reg)	(IOP3XX_PERIPHERAL_VIRT_BASE + 0x07d0 + (reg))

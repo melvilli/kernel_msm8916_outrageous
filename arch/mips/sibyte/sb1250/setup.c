@@ -23,6 +23,10 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 >>>>>>> v3.18
@@ -187,7 +191,11 @@ void __init sb1250_setup(void)
 	int bad_config = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb1_pass = read_c0_prid() & 0xff;
+=======
+	sb1_pass = read_c0_prid() & PRID_REV_MASK;
+>>>>>>> v3.18
 =======
 	sb1_pass = read_c0_prid() & PRID_REV_MASK;
 >>>>>>> v3.18

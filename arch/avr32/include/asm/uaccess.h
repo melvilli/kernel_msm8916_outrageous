@@ -75,7 +75,11 @@ extern __kernel_size_t __copy_user(void *to, const void *from,
 extern __kernel_size_t copy_to_user(void __user *to, const void *from,
 				    __kernel_size_t n);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __kernel_size_t ___copy_from_user(void *to, const void __user *from,
+=======
+extern __kernel_size_t copy_from_user(void *to, const void __user *from,
+>>>>>>> v3.18
 =======
 extern __kernel_size_t copy_from_user(void *to, const void __user *from,
 >>>>>>> v3.18
@@ -93,6 +97,7 @@ static inline __kernel_size_t __copy_from_user(void *to,
 	return __copy_user(to, (const void __force *)from, n);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __kernel_size_t copy_from_user(void *to,
 					       const void __user *from,
 					       __kernel_size_t n)
@@ -102,6 +107,8 @@ static inline __kernel_size_t copy_from_user(void *to,
 		memset(to + (n - res), 0, res);
 	return res;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -45,6 +45,10 @@
 #include <linux/pm_runtime.h>
 #include <linux/regulator/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmc/sdio.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmc/sdio.h>
 >>>>>>> v3.18
@@ -134,18 +138,25 @@ static void tmio_mmc_enable_sdio_irq(struct mmc_host *mmc, int enable)
 	struct tmio_mmc_host *host = mmc_priv(mmc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (enable) {
 =======
+=======
+>>>>>>> v3.18
 	if (enable && !host->sdio_irq_enabled) {
 		/* Keep device active while SDIO irq is enabled */
 		pm_runtime_get_sync(mmc_dev(mmc));
 		host->sdio_irq_enabled = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		host->sdio_irq_mask = TMIO_SDIO_MASK_ALL &
 					~TMIO_SDIO_STAT_IOIRQ;
 		sd_ctrl_write16(host, CTL_TRANSACTION_CTL, 0x0001);
 		sd_ctrl_write16(host, CTL_SDIO_IRQ_MASK, host->sdio_irq_mask);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {
 		host->sdio_irq_mask = TMIO_SDIO_MASK_ALL;
@@ -156,6 +167,8 @@ static void tmio_mmc_enable_sdio_irq(struct mmc_host *mmc, int enable)
 
 static void tmio_mmc_set_clock(struct tmio_mmc_host *host, int new_clock)
 =======
+=======
+>>>>>>> v3.18
 	} else if (!enable && host->sdio_irq_enabled) {
 		host->sdio_irq_mask = TMIO_SDIO_MASK_ALL;
 		sd_ctrl_write16(host, CTL_SDIO_IRQ_MASK, host->sdio_irq_mask);
@@ -169,6 +182,9 @@ static void tmio_mmc_set_clock(struct tmio_mmc_host *host, int new_clock)
 
 static void tmio_mmc_set_clock(struct tmio_mmc_host *host,
 				unsigned int new_clock)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 clk = 0, clock;
@@ -178,13 +194,19 @@ static void tmio_mmc_set_clock(struct tmio_mmc_host *host,
 			new_clock >= (clock<<1); clk >>= 1)
 			clock <<= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk |= 0x100;
 =======
+=======
+>>>>>>> v3.18
 
 		/* 1/1 clock is option */
 		if ((host->pdata->flags & TMIO_MMC_CLK_ACTUAL) &&
 		    ((clk >> 22) & 0x1))
 			clk |= 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -198,10 +220,15 @@ static void tmio_mmc_set_clock(struct tmio_mmc_host *host,
 static void tmio_mmc_clk_stop(struct tmio_mmc_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res = platform_get_resource(host->pdev, IORESOURCE_MEM, 0);
 
 	/* implicit BUG_ON(!res) */
 	if (resource_size(res) > 0x100) {
+=======
+	/* implicit BUG_ON(!res) */
+	if (host->pdata->flags & TMIO_MMC_HAVE_HIGH_REG) {
+>>>>>>> v3.18
 =======
 	/* implicit BUG_ON(!res) */
 	if (host->pdata->flags & TMIO_MMC_HAVE_HIGH_REG) {
@@ -218,8 +245,11 @@ static void tmio_mmc_clk_stop(struct tmio_mmc_host *host)
 static void tmio_mmc_clk_start(struct tmio_mmc_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res = platform_get_resource(host->pdev, IORESOURCE_MEM, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sd_ctrl_write16(host, CTL_SD_CARD_CLK_CTL, 0x0100 |
@@ -228,7 +258,11 @@ static void tmio_mmc_clk_start(struct tmio_mmc_host *host)
 
 	/* implicit BUG_ON(!res) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (resource_size(res) > 0x100) {
+=======
+	if (host->pdata->flags & TMIO_MMC_HAVE_HIGH_REG) {
+>>>>>>> v3.18
 =======
 	if (host->pdata->flags & TMIO_MMC_HAVE_HIGH_REG) {
 >>>>>>> v3.18
@@ -240,6 +274,7 @@ static void tmio_mmc_clk_start(struct tmio_mmc_host *host)
 static void tmio_mmc_reset(struct tmio_mmc_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res = platform_get_resource(host->pdev, IORESOURCE_MEM, 0);
 
 	/* FIXME - should we set stop clock reg here */
@@ -251,6 +286,8 @@ static void tmio_mmc_reset(struct tmio_mmc_host *host)
 	sd_ctrl_write16(host, CTL_RESET_SD, 0x0001);
 	if (resource_size(res) > 0x100)
 =======
+=======
+>>>>>>> v3.18
 	/* FIXME - should we set stop clock reg here */
 	sd_ctrl_write16(host, CTL_RESET_SD, 0x0000);
 	/* implicit BUG_ON(!res) */
@@ -259,6 +296,9 @@ static void tmio_mmc_reset(struct tmio_mmc_host *host)
 	msleep(10);
 	sd_ctrl_write16(host, CTL_RESET_SD, 0x0001);
 	if (host->pdata->flags & TMIO_MMC_HAVE_HIGH_REG)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sd_ctrl_write16(host, CTL_RESET_SDIO, 0x0001);
 	msleep(10);
@@ -311,6 +351,12 @@ static void tmio_mmc_reset_work(struct work_struct *work)
 	tmio_mmc_abort_dma(host);
 	mmc_request_done(host->mmc, mrq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	pm_runtime_mark_last_busy(mmc_dev(host->mmc));
+	pm_runtime_put_autosuspend(mmc_dev(host->mmc));
+>>>>>>> v3.18
 =======
 
 	pm_runtime_mark_last_busy(mmc_dev(host->mmc));
@@ -346,6 +392,12 @@ static void tmio_mmc_finish_request(struct tmio_mmc_host *host)
 
 	mmc_request_done(host->mmc, mrq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	pm_runtime_mark_last_busy(mmc_dev(host->mmc));
+	pm_runtime_put_autosuspend(mmc_dev(host->mmc));
+>>>>>>> v3.18
 =======
 
 	pm_runtime_mark_last_busy(mmc_dev(host->mmc));
@@ -373,6 +425,10 @@ static void tmio_mmc_done_work(struct work_struct *work)
 #define TRANSFER_MULTI 0x2000
 #define SECURITY_CMD   0x4000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NO_CMD12_ISSUE 0x4000 /* TMIO_MMC_HAVE_CMD12_CTRL */
+>>>>>>> v3.18
 =======
 #define NO_CMD12_ISSUE 0x4000 /* TMIO_MMC_HAVE_CMD12_CTRL */
 >>>>>>> v3.18
@@ -413,7 +469,10 @@ static int tmio_mmc_start_command(struct tmio_mmc_host *host, struct mmc_command
 			sd_ctrl_write16(host, CTL_STOP_INTERNAL_ACTION, 0x100);
 			c |= TRANSFER_MULTI;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			/*
 			 * Disable auto CMD12 at IO_RW_EXTENDED when
@@ -422,6 +481,9 @@ static int tmio_mmc_start_command(struct tmio_mmc_host *host, struct mmc_command
 			if ((host->pdata->flags & TMIO_MMC_HAVE_CMD12_CTRL) &&
 			    (cmd->opcode == SD_IO_RW_EXTENDED))
 				c |= NO_CMD12_ISSUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (data->flags & MMC_DATA_READ)
@@ -440,7 +502,10 @@ static int tmio_mmc_start_command(struct tmio_mmc_host *host, struct mmc_command
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tmio_mmc_transfer_data(struct tmio_mmc_host *host,
 				   unsigned short *buf,
 				   unsigned int count)
@@ -475,6 +540,9 @@ static void tmio_mmc_transfer_data(struct tmio_mmc_host *host,
 		sd_ctrl_write16(host, CTL_SD_DATA_PORT, *buf8);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This chip always returns (at least?) as much data as you ask for.
@@ -509,10 +577,14 @@ static void tmio_mmc_pio_irq(struct tmio_mmc_host *host)
 
 	/* Transfer the data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->flags & MMC_DATA_READ)
 		sd_ctrl_read16_rep(host, CTL_SD_DATA_PORT, buf, count >> 1);
 	else
 		sd_ctrl_write16_rep(host, CTL_SD_DATA_PORT, buf, count >> 1);
+=======
+	tmio_mmc_transfer_data(host, buf, count);
+>>>>>>> v3.18
 =======
 	tmio_mmc_transfer_data(host, buf, count);
 >>>>>>> v3.18
@@ -599,6 +671,12 @@ static void tmio_mmc_data_irq(struct tmio_mmc_host *host)
 
 	if (host->chan_tx && (data->flags & MMC_DATA_WRITE) && !host->force_pio) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u32 status = sd_ctrl_read32(host, CTL_STATUS);
+		bool done = false;
+
+>>>>>>> v3.18
 =======
 		u32 status = sd_ctrl_read32(host, CTL_STATUS);
 		bool done = false;
@@ -613,8 +691,11 @@ static void tmio_mmc_data_irq(struct tmio_mmc_host *host)
 		 * waiting for one more interrupt fixes the problem.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(sd_ctrl_read32(host, CTL_STATUS) & TMIO_STAT_CMD_BUSY)) {
 =======
+=======
+>>>>>>> v3.18
 		if (host->pdata->flags & TMIO_MMC_HAS_IDLE_WAIT) {
 			if (status & TMIO_STAT_ILL_FUNC)
 				done = true;
@@ -624,6 +705,9 @@ static void tmio_mmc_data_irq(struct tmio_mmc_host *host)
 		}
 
 		if (done) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tmio_mmc_disable_mmc_irqs(host, TMIO_STAT_DATAEND);
 			tasklet_schedule(&host->dma_complete);
@@ -709,6 +793,12 @@ static void tmio_mmc_card_irq_status(struct tmio_mmc_host *host,
 	pr_debug_status(*status);
 	pr_debug_status(*ireg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Clear the status except the interrupt status */
+	sd_ctrl_write32(host, CTL_STATUS, TMIO_MASK_IRQ);
+>>>>>>> v3.18
 =======
 
 	/* Clear the status except the interrupt status */
@@ -795,6 +885,10 @@ irqreturn_t tmio_mmc_sdio_irq(int irq, void *devid)
 	struct tmio_mmc_data *pdata = host->pdata;
 	unsigned int ireg, status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int sdio_status;
+>>>>>>> v3.18
 =======
 	unsigned int sdio_status;
 >>>>>>> v3.18
@@ -806,13 +900,19 @@ irqreturn_t tmio_mmc_sdio_irq(int irq, void *devid)
 	ireg = status & TMIO_SDIO_MASK_ALL & ~host->sdcard_irq_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd_ctrl_write16(host, CTL_SDIO_STATUS, status & ~TMIO_SDIO_MASK_ALL);
 =======
+=======
+>>>>>>> v3.18
 	sdio_status = status & ~TMIO_SDIO_MASK_ALL;
 	if (pdata->flags & TMIO_MMC_SDIO_STATUS_QUIRK)
 		sdio_status |= 6;
 
 	sd_ctrl_write16(host, CTL_SDIO_STATUS, sdio_status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mmc->caps & MMC_CAP_SDIO_IRQ && ireg & TMIO_SDIO_STAT_IOIRQ)
@@ -898,6 +998,11 @@ static void tmio_mmc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 	spin_unlock_irqrestore(&host->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_runtime_get_sync(mmc_dev(mmc));
+
+>>>>>>> v3.18
 =======
 	pm_runtime_get_sync(mmc_dev(mmc));
 
@@ -921,12 +1026,15 @@ fail:
 	mrq->cmd->error = ret;
 	mmc_request_done(mmc, mrq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static int tmio_mmc_clk_update(struct mmc_host *mmc)
 {
 	struct tmio_mmc_host *host = mmc_priv(mmc);
 =======
+=======
+>>>>>>> v3.18
 
 	pm_runtime_mark_last_busy(mmc_dev(mmc));
 	pm_runtime_put_autosuspend(mmc_dev(mmc));
@@ -935,6 +1043,9 @@ static int tmio_mmc_clk_update(struct mmc_host *mmc)
 static int tmio_mmc_clk_update(struct tmio_mmc_host *host)
 {
 	struct mmc_host *mmc = host->mmc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tmio_mmc_data *pdata = host->pdata;
 	int ret;
@@ -975,10 +1086,13 @@ static void tmio_mmc_power_on(struct tmio_mmc_host *host, unsigned short vdd)
 	 */
 	if (!IS_ERR(mmc->supply.vqmmc) && !ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regulator_enable(mmc->supply.vqmmc);
 		udelay(200);
 	}
 =======
+=======
+>>>>>>> v3.18
 		ret = regulator_enable(mmc->supply.vqmmc);
 		udelay(200);
 	}
@@ -986,6 +1100,9 @@ static void tmio_mmc_power_on(struct tmio_mmc_host *host, unsigned short vdd)
 	if (ret < 0)
 		dev_dbg(&host->pdev->dev, "Regulators failed to power up: %d\n",
 			ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1004,7 +1121,10 @@ static void tmio_mmc_power_off(struct tmio_mmc_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tmio_mmc_set_bus_width(struct tmio_mmc_host *host,
 				unsigned char bus_width)
 {
@@ -1018,6 +1138,9 @@ static void tmio_mmc_set_bus_width(struct tmio_mmc_host *host,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Set MMC clock / power.
  * Note: This controller uses a simple divider scheme therefore it cannot
@@ -1032,6 +1155,11 @@ static void tmio_mmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_runtime_get_sync(mmc_dev(mmc));
+
+>>>>>>> v3.18
 =======
 	pm_runtime_get_sync(mmc_dev(mmc));
 
@@ -1062,6 +1190,7 @@ static void tmio_mmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 
 	spin_unlock_irqrestore(&host->lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * host->power toggles between false and true in both cases - either
@@ -1105,6 +1234,8 @@ static void tmio_mmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		break;
 		}
 =======
+=======
+>>>>>>> v3.18
 	switch (ios->power_mode) {
 	case MMC_POWER_OFF:
 		tmio_mmc_power_off(host);
@@ -1121,6 +1252,9 @@ static void tmio_mmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		tmio_mmc_clk_start(host);
 		tmio_mmc_set_bus_width(host, ios->bus_width);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1134,14 +1268,20 @@ static void tmio_mmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	host->mrq = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&host->ios_lock);
 =======
+=======
+>>>>>>> v3.18
 	host->clk_cache = ios->clock;
 
 	mutex_unlock(&host->ios_lock);
 
 	pm_runtime_mark_last_busy(mmc_dev(mmc));
 	pm_runtime_put_autosuspend(mmc_dev(mmc));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1153,6 +1293,7 @@ static int tmio_mmc_get_ro(struct mmc_host *mmc)
 	if (ret >= 0)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return !((pdata->flags & TMIO_MMC_WRPROTECT_DISABLE) ||
 		 (sd_ctrl_read32(host, CTL_STATUS) & TMIO_STAT_WRPROTECT));
@@ -1171,6 +1312,8 @@ static int tmio_mmc_get_cd(struct mmc_host *mmc)
 	else
 		return pdata->get_cd(host->pdev);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_get_sync(mmc_dev(mmc));
 	ret = !((pdata->flags & TMIO_MMC_WRPROTECT_DISABLE) ||
 		(sd_ctrl_read32(host, CTL_STATUS) & TMIO_STAT_WRPROTECT));
@@ -1190,6 +1333,9 @@ static int tmio_multi_io_quirk(struct mmc_card *card,
 		return pdata->multi_io_quirk(card, direction, blk_size);
 
 	return blk_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1198,18 +1344,24 @@ static const struct mmc_host_ops tmio_mmc_ops = {
 	.set_ios	= tmio_mmc_set_ios,
 	.get_ro         = tmio_mmc_get_ro,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_cd		= tmio_mmc_get_cd,
 	.enable_sdio_irq = tmio_mmc_enable_sdio_irq,
 };
 
 static void tmio_mmc_init_ocr(struct tmio_mmc_host *host)
 =======
+=======
+>>>>>>> v3.18
 	.get_cd		= mmc_gpio_get_cd,
 	.enable_sdio_irq = tmio_mmc_enable_sdio_irq,
 	.multi_io_quirk	= tmio_multi_io_quirk,
 };
 
 static int tmio_mmc_init_ocr(struct tmio_mmc_host *host)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct tmio_mmc_data *pdata = host->pdata;
@@ -1218,11 +1370,14 @@ static int tmio_mmc_init_ocr(struct tmio_mmc_host *host)
 	mmc_regulator_get_supply(mmc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mmc->ocr_avail)
 		mmc->ocr_avail = pdata->ocr_mask ? : MMC_VDD_32_33 | MMC_VDD_33_34;
 	else if (pdata->ocr_mask)
 		dev_warn(mmc_dev(mmc), "Platform OCR mask is ignored\n");
 =======
+=======
+>>>>>>> v3.18
 	/* use ocr_mask if no regulator */
 	if (!mmc->ocr_avail)
 		mmc->ocr_avail =  pdata->ocr_mask;
@@ -1235,6 +1390,9 @@ static int tmio_mmc_init_ocr(struct tmio_mmc_host *host)
 		return -EPROBE_DEFER;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1273,7 +1431,13 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_of_parse(mmc);
+=======
+	ret = mmc_of_parse(mmc);
+	if (ret < 0)
+		goto host_free;
+>>>>>>> v3.18
 =======
 	ret = mmc_of_parse(mmc);
 	if (ret < 0)
@@ -1291,8 +1455,14 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	_host->set_clk_div = pdata->set_clk_div;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SD control register space size is 0x200, 0x400 for bus_shift=1 */
 	_host->bus_shift = resource_size(res_ctl) >> 10;
+=======
+	ret = tmio_mmc_init_ocr(_host);
+	if (ret < 0)
+		goto host_free;
+>>>>>>> v3.18
 =======
 	ret = tmio_mmc_init_ocr(_host);
 	if (ret < 0)
@@ -1308,7 +1478,11 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	mmc->ops = &tmio_mmc_ops;
 	mmc->caps |= MMC_CAP_4_BIT_DATA | pdata->capabilities;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc->caps2 = pdata->capabilities2;
+=======
+	mmc->caps2 |= pdata->capabilities2;
+>>>>>>> v3.18
 =======
 	mmc->caps2 |= pdata->capabilities2;
 >>>>>>> v3.18
@@ -1319,7 +1493,10 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	mmc->max_req_size = mmc->max_blk_size * mmc->max_blk_count;
 	mmc->max_seg_size = mmc->max_req_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmio_mmc_init_ocr(_host);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1328,6 +1505,7 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 				  mmc->caps & MMC_CAP_NONREMOVABLE ||
 				  mmc->slot.cd_irq >= 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_host->power = false;
 	pm_runtime_enable(&pdev->dev);
@@ -1339,11 +1517,15 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 =======
 	if (tmio_mmc_clk_update(_host) < 0) {
 >>>>>>> v3.18
+=======
+	if (tmio_mmc_clk_update(_host) < 0) {
+>>>>>>> v3.18
 		mmc->f_max = pdata->hclk;
 		mmc->f_min = mmc->f_max / 512;
 	}
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * There are 4 different scenarios for the card detection:
 	 *  1) an external gpio irq handles the cd (best for power savings)
@@ -1356,6 +1538,8 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	 *  must additionally ensure that in case 2) the tmio mmc hardware stays
 	 *  powered on during runtime for the card detection to work.
 =======
+=======
+>>>>>>> v3.18
 	 * Check the sanity of mmc->f_min to prevent tmio_mmc_set_clock() from
 	 * looping forever...
 	 */
@@ -1367,6 +1551,9 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	/*
 	 * While using internal tmio hardware logic for card detection, we need
 	 * to ensure it stays powered for it to work.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (_host->native_hotplug)
@@ -1389,15 +1576,21 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	_host->sdcard_irq_mask &= ~irq_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->flags & TMIO_MMC_SDIO_IRQ)
 		tmio_mmc_enable_sdio_irq(mmc, 0);
 =======
+=======
+>>>>>>> v3.18
 	_host->sdio_irq_enabled = false;
 	if (pdata->flags & TMIO_MMC_SDIO_IRQ) {
 		_host->sdio_irq_mask = TMIO_SDIO_MASK_ALL;
 		sd_ctrl_write16(_host, CTL_SDIO_IRQ_MASK, _host->sdio_irq_mask);
 		sd_ctrl_write16(_host, CTL_TRANSACTION_CTL, 0x0000);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&_host->lock);
@@ -1411,16 +1604,22 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	tmio_mmc_request_dma(_host, pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mmc_add_host(mmc);
 	if (pdata->clk_disable)
 		pdata->clk_disable(pdev);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_set_active(&pdev->dev);
 	pm_runtime_set_autosuspend_delay(&pdev->dev, 50);
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
 
 	ret = mmc_add_host(mmc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0) {
 		tmio_mmc_host_remove(_host);
@@ -1431,7 +1630,11 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 
 	if (pdata->flags & TMIO_MMC_USE_GPIO_CD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mmc_gpio_request_cd(mmc, pdata->cd_gpio);
+=======
+		ret = mmc_gpio_request_cd(mmc, pdata->cd_gpio, 0);
+>>>>>>> v3.18
 =======
 		ret = mmc_gpio_request_cd(mmc, pdata->cd_gpio, 0);
 >>>>>>> v3.18
@@ -1440,6 +1643,10 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 			return ret;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mmc_gpiod_request_cd_irq(mmc);
+>>>>>>> v3.18
 =======
 		mmc_gpiod_request_cd_irq(mmc);
 >>>>>>> v3.18
@@ -1450,9 +1657,12 @@ int tmio_mmc_host_probe(struct tmio_mmc_host **host,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pm_disable:
 	pm_runtime_disable(&pdev->dev);
 	iounmap(_host->ctl);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 host_free:
@@ -1487,6 +1697,7 @@ EXPORT_SYMBOL(tmio_mmc_host_remove);
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tmio_mmc_host_suspend(struct device *dev)
 {
 	struct mmc_host *mmc = dev_get_drvdata(dev);
@@ -1504,10 +1715,14 @@ int tmio_mmc_host_resume(struct device *dev)
 =======
 int tmio_mmc_host_runtime_suspend(struct device *dev)
 >>>>>>> v3.18
+=======
+int tmio_mmc_host_runtime_suspend(struct device *dev)
+>>>>>>> v3.18
 {
 	struct mmc_host *mmc = dev_get_drvdata(dev);
 	struct tmio_mmc_host *host = mmc_priv(mmc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tmio_mmc_reset(host);
 	tmio_mmc_enable_dma(host, true);
@@ -1522,6 +1737,8 @@ EXPORT_SYMBOL(tmio_mmc_host_resume);
 int tmio_mmc_host_runtime_suspend(struct device *dev)
 {
 =======
+=======
+>>>>>>> v3.18
 	tmio_mmc_disable_mmc_irqs(host, TMIO_MASK_ALL);
 
 	if (host->clk_cache)
@@ -1530,6 +1747,9 @@ int tmio_mmc_host_runtime_suspend(struct device *dev)
 	if (host->pdata->clk_disable)
 		host->pdata->clk_disable(host->pdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1542,7 +1762,10 @@ int tmio_mmc_host_runtime_resume(struct device *dev)
 
 	tmio_mmc_reset(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	tmio_mmc_clk_update(host);
 
 	if (host->clk_cache) {
@@ -1550,6 +1773,9 @@ int tmio_mmc_host_runtime_resume(struct device *dev)
 		tmio_mmc_clk_start(host);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tmio_mmc_enable_dma(host, true);
 
@@ -1557,6 +1783,10 @@ int tmio_mmc_host_runtime_resume(struct device *dev)
 }
 EXPORT_SYMBOL(tmio_mmc_host_runtime_resume);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

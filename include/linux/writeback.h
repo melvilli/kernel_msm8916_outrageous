@@ -48,20 +48,29 @@ enum wb_reason {
 	WB_REASON_FREE_MORE_MEM,
 	WB_REASON_FS_FREE_SPACE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * There is no bdi forker thread any more and works are done
 	 * by emergency worker, however, this is TPs userland visible
 	 * and we'll be exposing exactly the same information,
 	 * so it has a mismatch name.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WB_REASON_FORKER_THREAD,
 
 	WB_REASON_MAX,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char *wb_reason_name[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -91,6 +100,10 @@ struct writeback_control {
 	unsigned for_reclaim:1;		/* Invoked from the page allocator */
 	unsigned range_cyclic:1;	/* range_start is cyclic */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned for_sync:1;		/* sync(2) WB_SYNC_ALL writeback */
+>>>>>>> v3.18
 =======
 	unsigned for_sync:1;		/* sync(2) WB_SYNC_ALL writeback */
 >>>>>>> v3.18
@@ -101,7 +114,10 @@ struct writeback_control {
  */	
 struct bdi_writeback;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int inode_wait(void *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void writeback_inodes_sb(struct super_block *, enum wb_reason reason);
@@ -112,9 +128,12 @@ int try_to_writeback_inodes_sb_nr(struct super_block *, unsigned long nr,
 				  enum wb_reason reason);
 void sync_inodes_sb(struct super_block *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 long writeback_inodes_wb(struct bdi_writeback *wb, long nr_pages,
 				enum wb_reason reason);
 long wb_do_writeback(struct bdi_writeback *wb, int force_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void wakeup_flusher_threads(long nr_pages, enum wb_reason reason);
@@ -125,7 +144,11 @@ static inline void wait_on_inode(struct inode *inode)
 {
 	might_sleep();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_on_bit(&inode->i_state, __I_NEW, inode_wait, TASK_UNINTERRUPTIBLE);
+=======
+	wait_on_bit(&inode->i_state, __I_NEW, TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 	wait_on_bit(&inode->i_state, __I_NEW, TASK_UNINTERRUPTIBLE);
 >>>>>>> v3.18
@@ -202,7 +225,11 @@ int write_cache_pages(struct address_space *mapping,
 		      void *data);
 int do_writepages(struct address_space *mapping, struct writeback_control *wbc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void set_page_dirty_balance(struct page *page, int page_mkwrite);
+=======
+void set_page_dirty_balance(struct page *page);
+>>>>>>> v3.18
 =======
 void set_page_dirty_balance(struct page *page);
 >>>>>>> v3.18

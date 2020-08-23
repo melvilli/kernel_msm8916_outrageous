@@ -50,6 +50,11 @@ int nilfs_ifile_delete_inode(struct inode *, ino_t);
 int nilfs_ifile_get_inode_block(struct inode *, ino_t, struct buffer_head **);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nilfs_ifile_count_free_inodes(struct inode *, u64 *, u64 *);
+
+>>>>>>> v3.18
 =======
 int nilfs_ifile_count_free_inodes(struct inode *, u64 *, u64 *);
 

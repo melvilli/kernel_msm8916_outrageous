@@ -4,6 +4,11 @@
  *         ST-Ericsson.
  * Author: Daniel Lezcano <daniel.lezcano@linaro.org> for Linaro.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Author: Ulf Hansson <ulf.hansson@linaro.org> for Linaro.
+ *
+>>>>>>> v3.18
 =======
  * Author: Ulf Hansson <ulf.hansson@linaro.org> for Linaro.
  *
@@ -17,6 +22,10 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/suspend.h>
+>>>>>>> v3.18
 =======
 #include <linux/suspend.h>
 >>>>>>> v3.18
@@ -138,8 +147,13 @@ bool prcmu_pending_irq(void)
 bool prcmu_is_cpu_in_wfi(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return readl(PRCM_ARM_WFI_STANDBY) &
 		(cpu ? PRCM_ARM_WFI_STANDBY_WFI1 : PRCM_ARM_WFI_STANDBY_WFI0);
+=======
+	return readl(PRCM_ARM_WFI_STANDBY) & cpu ? PRCM_ARM_WFI_STANDBY_WFI1 :
+		     PRCM_ARM_WFI_STANDBY_WFI0;
+>>>>>>> v3.18
 =======
 	return readl(PRCM_ARM_WFI_STANDBY) & cpu ? PRCM_ARM_WFI_STANDBY_WFI1 :
 		     PRCM_ARM_WFI_STANDBY_WFI0;
@@ -167,7 +181,10 @@ int prcmu_copy_gic_settings(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SUSPEND
 static int ux500_suspend_enter(suspend_state_t state)
 {
@@ -189,6 +206,9 @@ static const struct platform_suspend_ops ux500_suspend_ops = {
 #define UX500_SUSPEND_OPS	NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init ux500_pm_init(u32 phy_base, u32 size)
 {
@@ -203,6 +223,12 @@ void __init ux500_pm_init(u32 phy_base, u32 size)
 	 */
 	prcmu_gic_recouple();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Set up ux500 suspend callbacks. */
+	suspend_set_ops(UX500_SUSPEND_OPS);
+>>>>>>> v3.18
 =======
 
 	/* Set up ux500 suspend callbacks. */

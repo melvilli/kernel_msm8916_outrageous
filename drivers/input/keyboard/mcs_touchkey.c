@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -112,7 +115,11 @@ static int mcs_touchkey_probe(struct i2c_client *client,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -156,7 +163,11 @@ static int mcs_touchkey_probe(struct i2c_client *client,
 	dev_info(&client->dev, "Firmware version: %d\n", fw_ver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_dev->name = "MELPAS MCS Touchkey";
+=======
+	input_dev->name = "MELFAS MCS Touchkey";
+>>>>>>> v3.18
 =======
 	input_dev->name = "MELFAS MCS Touchkey";
 >>>>>>> v3.18

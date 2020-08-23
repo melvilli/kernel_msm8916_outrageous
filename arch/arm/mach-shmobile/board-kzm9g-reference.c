@@ -22,6 +22,7 @@
 
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/io.h>
 #include <linux/irq.h>
@@ -33,16 +34,22 @@
 #include <mach/sh73a0.h>
 #include <mach/common.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <linux/input.h>
 #include <linux/of_platform.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned long pin_pullup_conf[] = {
 	PIN_CONF_PACKED(PIN_CONFIG_BIAS_PULL_UP, 0),
@@ -84,10 +91,15 @@ static const struct pinctrl_map kzm_pinctrl_map[] = {
 #include "common.h"
 #include "sh73a0.h"
 >>>>>>> v3.18
+=======
+#include "common.h"
+#include "sh73a0.h"
+>>>>>>> v3.18
 
 static void __init kzm_init(void)
 {
 	sh73a0_add_standard_devices_dt();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pinctrl_register_mappings(kzm_pinctrl_map, ARRAY_SIZE(kzm_pinctrl_map));
 	sh73a0_pinmux_init();
@@ -102,10 +114,15 @@ static void __init kzm_init(void)
 	/* Early BRESP enable, Shared attribute override enable, 64K*8way */
 	l2x0_init(IOMEM(0xf0100000), 0x40460000, 0x82000fff);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_CACHE_L2X0
 	/* Shared attribute override enable, 64K*8way */
 	l2x0_init(IOMEM(0xf0100000), 0x00400000, 0xc20f0fff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -119,11 +136,17 @@ DT_MACHINE_START(KZM9G_DT, "kzm9g-reference")
 	.smp		= smp_ops(sh73a0_smp_ops),
 	.map_io		= sh73a0_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= sh73a0_init_delay,
 	.nr_irqs	= NR_IRQS_LEGACY,
 	.init_irq	= irqchip_init,
 	.init_machine	= kzm_init,
 	.init_time	= shmobile_timer_init,
+=======
+	.init_early	= shmobile_init_delay,
+	.init_machine	= kzm_init,
+	.init_late	= shmobile_init_late,
+>>>>>>> v3.18
 =======
 	.init_early	= shmobile_init_delay,
 	.init_machine	= kzm_init,

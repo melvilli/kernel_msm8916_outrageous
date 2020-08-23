@@ -94,6 +94,10 @@ enum {
 
 #define WL1251_DEFAULT_RX_CONFIG (CFG_UNI_FILTER_EN |	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  CFG_MC_FILTER_EN |	\
+>>>>>>> v3.18
 =======
 				  CFG_MC_FILTER_EN |	\
 >>>>>>> v3.18
@@ -280,17 +284,23 @@ struct wl1251 {
 	const struct wl1251_if_operations *if_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_power)(bool enable);
 	int irq;
 	bool use_eeprom;
 
 =======
+=======
+>>>>>>> v3.18
 	int power_gpio;
 	int irq;
 	bool use_eeprom;
 
 	struct regulator *vio;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t wl_lock;
 
@@ -317,6 +327,11 @@ struct wl1251 {
 	u8 listen_int;
 	int channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool monitor_present;
+	bool joined;
+>>>>>>> v3.18
 =======
 	bool monitor_present;
 	bool joined;
@@ -387,6 +402,12 @@ struct wl1251 {
 	bool psm_requested;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* retry counter for PSM entries */
+	u8 psm_entry_retry;
+
+>>>>>>> v3.18
 =======
 	/* retry counter for PSM entries */
 	u8 psm_entry_retry;
@@ -449,8 +470,13 @@ void wl1251_disable_interrupts(struct wl1251 *wl);
 #define CHIP_ID_1271_PG20	           (0x4030111)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WL1251_FW_NAME "wl1251-fw.bin"
 #define WL1251_NVS_NAME "wl1251-nvs.bin"
+=======
+#define WL1251_FW_NAME "ti-connectivity/wl1251-fw.bin"
+#define WL1251_NVS_NAME "ti-connectivity/wl1251-nvs.bin"
+>>>>>>> v3.18
 =======
 #define WL1251_FW_NAME "ti-connectivity/wl1251-fw.bin"
 #define WL1251_NVS_NAME "ti-connectivity/wl1251-nvs.bin"

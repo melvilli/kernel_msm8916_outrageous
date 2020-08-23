@@ -17,15 +17,21 @@
 #include <drm/drm_fb_helper.h>
 #include <drm/drm_crtc_helper.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "exynos_drm_drv.h"
 #include "exynos_drm_fb.h"
 =======
+=======
+>>>>>>> v3.18
 #include <drm/exynos_drm.h>
 
 #include "exynos_drm_drv.h"
 #include "exynos_drm_fb.h"
 #include "exynos_drm_fbdev.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "exynos_drm_gem.h"
 #include "exynos_drm_iommu.h"
@@ -52,8 +58,11 @@ static int exynos_drm_fb_mmap(struct fb_info *info,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
@@ -96,8 +105,11 @@ static int exynos_drm_fbdev_update(struct drm_fb_helper *helper,
 	unsigned long offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	drm_fb_helper_fill_fix(fbi, fb->pitches[0], fb->depth);
@@ -107,7 +119,11 @@ static int exynos_drm_fbdev_update(struct drm_fb_helper *helper,
 	buffer = exynos_drm_fb_buffer(fb, 0);
 	if (!buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_LOG_KMS("buffer is null.\n");
+=======
+		DRM_DEBUG_KMS("buffer is null.\n");
+>>>>>>> v3.18
 =======
 		DRM_DEBUG_KMS("buffer is null.\n");
 >>>>>>> v3.18
@@ -120,7 +136,12 @@ static int exynos_drm_fbdev_update(struct drm_fb_helper *helper,
 			unsigned int nr_pages = buffer->size >> PAGE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buffer->kvaddr = vmap(buffer->pages, nr_pages, VM_MAP,
+=======
+			buffer->kvaddr = (void __iomem *) vmap(buffer->pages,
+					nr_pages, VM_MAP,
+>>>>>>> v3.18
 =======
 			buffer->kvaddr = (void __iomem *) vmap(buffer->pages,
 					nr_pages, VM_MAP,
@@ -130,7 +151,11 @@ static int exynos_drm_fbdev_update(struct drm_fb_helper *helper,
 			phys_addr_t dma_addr = buffer->dma_addr;
 			if (dma_addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				buffer->kvaddr = phys_to_virt(dma_addr);
+=======
+				buffer->kvaddr = (void __iomem *)phys_to_virt(dma_addr);
+>>>>>>> v3.18
 =======
 				buffer->kvaddr = (void __iomem *)phys_to_virt(dma_addr);
 >>>>>>> v3.18
@@ -150,6 +175,7 @@ static int exynos_drm_fbdev_update(struct drm_fb_helper *helper,
 	offset += fbi->var.yoffset * fb->pitches[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->mode_config.fb_base = (resource_size_t)buffer->dma_addr;
 	fbi->screen_base = buffer->kvaddr + offset;
 	if (is_drm_iommu_supported(dev))
@@ -158,6 +184,9 @@ static int exynos_drm_fbdev_update(struct drm_fb_helper *helper,
 	else
 		fbi->fix.smem_start = (unsigned long)buffer->dma_addr;
 
+=======
+	fbi->screen_base = buffer->kvaddr + offset;
+>>>>>>> v3.18
 =======
 	fbi->screen_base = buffer->kvaddr + offset;
 >>>>>>> v3.18
@@ -180,8 +209,11 @@ static int exynos_drm_fbdev_create(struct drm_fb_helper *helper,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DRM_DEBUG_KMS("surface width(%d), height(%d) and bpp(%d\n",
@@ -206,9 +238,12 @@ static int exynos_drm_fbdev_create(struct drm_fb_helper *helper,
 	size = mode_cmd.pitches[0] * mode_cmd.height;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 0 means to allocate physically continuous memory */
 	exynos_gem_obj = exynos_drm_gem_create(dev, 0, size);
 =======
+=======
+>>>>>>> v3.18
 	exynos_gem_obj = exynos_drm_gem_create(dev, EXYNOS_BO_CONTIG, size);
 	/*
 	 * If physically contiguous memory allocation fails and if IOMMU is
@@ -221,6 +256,9 @@ static int exynos_drm_fbdev_create(struct drm_fb_helper *helper,
 							size);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(exynos_gem_obj)) {
 		ret = PTR_ERR(exynos_gem_obj);
@@ -276,11 +314,14 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs exynos_drm_fb_helper_funcs = {
 	.fb_probe =	exynos_drm_fbdev_create,
 };
 
 =======
+=======
+>>>>>>> v3.18
 static const struct drm_fb_helper_funcs exynos_drm_fb_helper_funcs = {
 	.fb_probe =	exynos_drm_fbdev_create,
 };
@@ -303,6 +344,9 @@ static bool exynos_drm_fbdev_is_anything_connected(struct drm_device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int exynos_drm_fbdev_init(struct drm_device *dev)
 {
@@ -312,6 +356,7 @@ int exynos_drm_fbdev_init(struct drm_device *dev)
 	unsigned int num_crtc;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
@@ -327,6 +372,8 @@ int exynos_drm_fbdev_init(struct drm_device *dev)
 	private->fb_helper = helper = &fbdev->drm_fb_helper;
 	helper->funcs = &exynos_drm_fb_helper_funcs;
 =======
+=======
+>>>>>>> v3.18
 	if (!dev->mode_config.num_crtc || !dev->mode_config.num_connector)
 		return 0;
 
@@ -340,6 +387,9 @@ int exynos_drm_fbdev_init(struct drm_device *dev)
 	private->fb_helper = helper = &fbdev->drm_fb_helper;
 
 	drm_fb_helper_prepare(dev, helper, &exynos_drm_fb_helper_funcs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	num_crtc = dev->mode_config.num_crtc;
@@ -427,9 +477,12 @@ void exynos_drm_fbdev_fini(struct drm_device *dev)
 	fbdev = to_exynos_fbdev(private->fb_helper);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fbdev->exynos_gem_obj)
 		exynos_drm_gem_destroy(fbdev->exynos_gem_obj);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	exynos_drm_fbdev_destroy(dev, private->fb_helper);
@@ -445,9 +498,13 @@ void exynos_drm_fbdev_restore_mode(struct drm_device *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_modeset_lock_all(dev);
 	drm_fb_helper_restore_fbdev_mode(private->fb_helper);
 	drm_modeset_unlock_all(dev);
+=======
+	drm_fb_helper_restore_fbdev_mode_unlocked(private->fb_helper);
+>>>>>>> v3.18
 =======
 	drm_fb_helper_restore_fbdev_mode_unlocked(private->fb_helper);
 >>>>>>> v3.18

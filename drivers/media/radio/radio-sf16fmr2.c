@@ -15,7 +15,11 @@
 #include <linux/isa.h>
 #include <linux/pnp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sound/tea575x-tuner.h>
+=======
+#include <media/tea575x.h>
+>>>>>>> v3.18
 =======
 #include <media/tea575x.h>
 >>>>>>> v3.18
@@ -79,8 +83,13 @@ static u8 fmr2_tea575x_get_pins(struct snd_tea575x *tea)
 	u8 bits = inb(fmr2->io);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return  (bits & STR_DATA) ? TEA575X_DATA : 0 |
 		(bits & STR_MOST) ? TEA575X_MOST : 0;
+=======
+	return  ((bits & STR_DATA) ? TEA575X_DATA : 0) |
+		((bits & STR_MOST) ? TEA575X_MOST : 0);
+>>>>>>> v3.18
 =======
 	return  ((bits & STR_DATA) ? TEA575X_DATA : 0) |
 		((bits & STR_MOST) ? TEA575X_MOST : 0);
@@ -305,7 +314,10 @@ static int fmr2_isa_remove(struct device *pdev, unsigned int ndev)
 {
 	fmr2_remove(dev_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -319,7 +331,11 @@ static void fmr2_pnp_remove(struct pnp_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct isa_driver fmr2_isa_driver = {
+=======
+static struct isa_driver fmr2_isa_driver = {
+>>>>>>> v3.18
 =======
 static struct isa_driver fmr2_isa_driver = {
 >>>>>>> v3.18
@@ -331,7 +347,11 @@ static struct isa_driver fmr2_isa_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pnp_driver fmr2_pnp_driver = {
+=======
+static struct pnp_driver fmr2_pnp_driver = {
+>>>>>>> v3.18
 =======
 static struct pnp_driver fmr2_pnp_driver = {
 >>>>>>> v3.18

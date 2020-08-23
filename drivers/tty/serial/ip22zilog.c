@@ -604,6 +604,11 @@ static void ip22zilog_start_tx(struct uart_port *port)
 		struct circ_buf *xmit = &port->state->xmit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (uart_circ_empty(xmit))
+			return;
+>>>>>>> v3.18
 =======
 		if (uart_circ_empty(xmit))
 			return;
@@ -838,7 +843,11 @@ ip22zilog_convert_to_zs(struct uart_ip22zilog_port *up, unsigned int cflag,
 		up->parity_mask = 0xff;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -860,7 +869,11 @@ ip22zilog_convert_to_zs(struct uart_ip22zilog_port *up, unsigned int cflag,
 	if (iflag & INPCK)
 		up->port.read_status_mask |= CRC_ERR | PAR_ERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iflag & (BRKINT | PARMRK))
+=======
+	if (iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18

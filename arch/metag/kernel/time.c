@@ -6,6 +6,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 
 #include <clocksource/metag_generic.h>
@@ -13,6 +14,8 @@
 void __init time_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 #include <clocksource/metag_generic.h>
 #include <linux/clk-provider.h>
 #include <linux/init.h>
@@ -29,6 +32,9 @@ void __init time_init(void)
 	init_metag_clocks();
 
 	/* Set up the timer clock sources */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	metag_generic_timer_init();
 }

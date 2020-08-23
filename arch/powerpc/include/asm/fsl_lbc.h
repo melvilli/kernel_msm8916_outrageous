@@ -286,7 +286,11 @@ struct fsl_lbc_ctrl {
 	struct device			*dev;
 	struct fsl_lbc_regs __iomem	*regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				irq;
+=======
+	int				irq[2];
+>>>>>>> v3.18
 =======
 	int				irq[2];
 >>>>>>> v3.18

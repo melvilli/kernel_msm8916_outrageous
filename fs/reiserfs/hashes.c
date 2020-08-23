@@ -13,12 +13,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // keyed_hash
 // yura_hash
 // r5_hash
 //
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -60,7 +63,11 @@ u32 keyed_hash(const signed char *msg, int len)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//      assert(len >= 0 && len < 256);
+=======
+	/*      assert(len >= 0 && len < 256); */
+>>>>>>> v3.18
 =======
 	/*      assert(len >= 0 && len < 256); */
 >>>>>>> v3.18
@@ -135,14 +142,20 @@ u32 keyed_hash(const signed char *msg, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* What follows in this file is copyright 2000 by Hans Reiser, and the
  * licensing of what follows is governed by reiserfs/README */
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * What follows in this file is copyright 2000 by Hans Reiser, and the
  * licensing of what follows is governed by reiserfs/README
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u32 yura_hash(const signed char *msg, int len)
 {

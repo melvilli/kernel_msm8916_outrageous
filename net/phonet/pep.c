@@ -463,10 +463,16 @@ queue:
 	skb->dev = NULL;
 	skb_set_owner_r(skb, sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = skb->len;
 	skb_queue_tail(queue, skb);
 	if (!sock_flag(sk, SOCK_DEAD))
 		sk->sk_data_ready(sk, err);
+=======
+	skb_queue_tail(queue, skb);
+	if (!sock_flag(sk, SOCK_DEAD))
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	skb_queue_tail(queue, skb);
 	if (!sock_flag(sk, SOCK_DEAD))
@@ -594,10 +600,16 @@ static int pipe_handler_do_rcv(struct sock *sk, struct sk_buff *skb)
 		skb->dev = NULL;
 		skb_set_owner_r(skb, sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = skb->len;
 		skb_queue_tail(&sk->sk_receive_queue, skb);
 		if (!sock_flag(sk, SOCK_DEAD))
 			sk->sk_data_ready(sk, err);
+=======
+		skb_queue_tail(&sk->sk_receive_queue, skb);
+		if (!sock_flag(sk, SOCK_DEAD))
+			sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		skb_queue_tail(&sk->sk_receive_queue, skb);
 		if (!sock_flag(sk, SOCK_DEAD))
@@ -711,7 +723,11 @@ static int pep_do_rcv(struct sock *sk, struct sk_buff *skb)
 		sk_acceptq_added(sk);
 		if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sk->sk_data_ready(sk, 0);
+=======
+			sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 			sk->sk_data_ready(sk);
 >>>>>>> v3.18

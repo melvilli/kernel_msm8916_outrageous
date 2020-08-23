@@ -17,6 +17,10 @@
 
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/asoc-ux500-msp.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/asoc-ux500-msp.h>
 >>>>>>> v3.18
@@ -346,11 +350,14 @@ enum msp_compress_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum msp_spi_burst_mode {
 	MSP_SPI_BURST_MODE_DISABLE = 0,
 	MSP_SPI_BURST_MODE_ENABLE = 1
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum msp_expand_mode {
@@ -378,6 +385,7 @@ enum msp_protocol {
 #define MAX_MSP_BACKUP_REGS 36
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum enum_i2s_controller {
 	MSP_0_I2S_CONTROLLER = 0,
 	MSP_1_I2S_CONTROLLER,
@@ -385,6 +393,8 @@ enum enum_i2s_controller {
 	MSP_3_I2S_CONTROLLER,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum i2s_direction_t {
@@ -465,6 +475,7 @@ struct msp_protdesc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct i2s_message {
 	enum i2s_direction_t i2s_direction;
 	void *txdata;
@@ -493,6 +504,8 @@ struct i2s_controller {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct ux500_msp_config {
 	unsigned int f_inputclk;
 	unsigned int rx_clk_sel;
@@ -505,8 +518,11 @@ struct ux500_msp_config {
 	unsigned int rx_fifo_config;
 	unsigned int tx_fifo_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int spi_clk_mode;
 	unsigned int spi_burst_mode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int loopback_enable;
@@ -518,6 +534,7 @@ struct ux500_msp_config {
 	unsigned int direction;
 	unsigned int protocol;
 	unsigned int frame_freq;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int frame_size;
 	enum msp_data_size data_size;
@@ -557,6 +574,8 @@ struct ux500_msp_dma_params {
 	unsigned int data_size;
 	struct stedma40_chan_cfg *dma_cfg;
 =======
+=======
+>>>>>>> v3.18
 	enum msp_data_size data_size;
 	unsigned int def_elem_len;
 	unsigned int iodelay;
@@ -579,6 +598,9 @@ struct ux500_msp {
 	unsigned int dir_busy;
 	int loopback_enable;
 	unsigned int f_bitclk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

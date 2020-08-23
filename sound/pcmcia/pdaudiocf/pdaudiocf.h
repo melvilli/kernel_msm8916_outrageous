@@ -89,10 +89,16 @@ struct snd_pdacf {
 	int irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t reg_lock;
 	unsigned short regmap[8];
 	unsigned short suspend_reg_scr;
 	struct tasklet_struct tq;
+=======
+	struct mutex reg_lock;
+	unsigned short regmap[8];
+	unsigned short suspend_reg_scr;
+>>>>>>> v3.18
 =======
 	struct mutex reg_lock;
 	unsigned short regmap[8];
@@ -143,7 +149,11 @@ int snd_pdacf_resume(struct snd_pdacf *chip);
 int snd_pdacf_pcm_new(struct snd_pdacf *chip);
 irqreturn_t pdacf_interrupt(int irq, void *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pdacf_tasklet(unsigned long private_data);
+=======
+irqreturn_t pdacf_threaded_irq(int irq, void *dev);
+>>>>>>> v3.18
 =======
 irqreturn_t pdacf_threaded_irq(int irq, void *dev);
 >>>>>>> v3.18

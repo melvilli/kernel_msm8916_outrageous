@@ -15,6 +15,11 @@
 #define __DM9000_PLATFORM_DATA __FILE__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 
@@ -33,7 +38,11 @@
 struct dm9000_plat_data {
 	unsigned int	flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char	dev_addr[6];
+=======
+	unsigned char	dev_addr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	unsigned char	dev_addr[ETH_ALEN];
 >>>>>>> v3.18

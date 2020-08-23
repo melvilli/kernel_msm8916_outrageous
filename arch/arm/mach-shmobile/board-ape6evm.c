@@ -20,10 +20,13 @@
 
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/irqchip.h>
 #include <linux/kernel.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/gpio_keys.h>
 #include <linux/input.h>
 #include <linux/interrupt.h>
@@ -32,11 +35,15 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/sh_mmcif.h>
 #include <linux/mmc/sh_mobile_sdhi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/pinctrl/machine.h>
 #include <linux/platform_device.h>
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/smsc911x.h>
 #include <mach/common.h>
@@ -46,6 +53,8 @@
 #include <asm/mach/arch.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sh_clk.h>
 #include <linux/smsc911x.h>
 
@@ -108,6 +117,9 @@ static struct gpio_keys_platform_data ape6evm_keys_pdata __initdata = {
 	.nbuttons	= ARRAY_SIZE(gpio_buttons),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Dummy supplies, where voltage doesn't matter */
 static struct regulator_consumer_supply dummy_supplies[] = {
@@ -117,7 +129,11 @@ static struct regulator_consumer_supply dummy_supplies[] = {
 
 /* SMSC LAN9220 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct resource lan9220_res[] = {
+=======
+static const struct resource lan9220_res[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct resource lan9220_res[] __initconst = {
 >>>>>>> v3.18
@@ -129,7 +145,11 @@ static const struct resource lan9220_res[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct smsc911x_platform_config lan9220_data = {
+=======
+static const struct smsc911x_platform_config lan9220_data __initconst = {
+>>>>>>> v3.18
 =======
 static const struct smsc911x_platform_config lan9220_data __initconst = {
 >>>>>>> v3.18
@@ -139,8 +159,11 @@ static const struct smsc911x_platform_config lan9220_data __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct pinctrl_map ape6evm_pinctrl_map[] = {
 =======
+=======
+>>>>>>> v3.18
 /*
  * MMC0 power supplies:
  * Both Vcc and VccQ to eMMC on APE6EVM are supplied by a tps80032 voltage
@@ -225,6 +248,9 @@ static const struct resource sdhi1_resources[] __initconst = {
 };
 
 static const struct pinctrl_map ape6evm_pinctrl_map[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* SCIFA0 console */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh-sci.0", "pfc-r8a73a4",
@@ -233,7 +259,10 @@ static const struct pinctrl_map ape6evm_pinctrl_map[] __initconst = {
 	PIN_MAP_MUX_GROUP_DEFAULT("smsc911x", "pfc-r8a73a4",
 				  "irqc_irq40", "irqc"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* MMCIF0 */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mmcif.0", "pfc-r8a73a4",
 				  "mmc0_data8", "mmc0"),
@@ -251,14 +280,20 @@ static const struct pinctrl_map ape6evm_pinctrl_map[] __initconst = {
 				  "sdhi1_data4", "sdhi1"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.1", "pfc-r8a73a4",
 				  "sdhi1_ctrl", "sdhi1"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static void __init ape6evm_add_standard_devices(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r8a73a4_clock_init();
 =======
+=======
+>>>>>>> v3.18
 
 	struct clk *parent;
 	struct clk *mp;
@@ -274,6 +309,9 @@ static void __init ape6evm_add_standard_devices(void)
 	clk_put(parent);
 	clk_put(mp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pinctrl_register_mappings(ape6evm_pinctrl_map,
 				  ARRAY_SIZE(ape6evm_pinctrl_map));
@@ -286,10 +324,13 @@ static void __init ape6evm_add_standard_devices(void)
 	regulator_register_fixed(0, dummy_supplies, ARRAY_SIZE(dummy_supplies));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register_resndata(&platform_bus, "smsc911x", -1,
 					  lan9220_res, ARRAY_SIZE(lan9220_res),
 					  &lan9220_data, sizeof(lan9220_data));
 =======
+=======
+>>>>>>> v3.18
 	platform_device_register_resndata(NULL, "smsc911x", -1,
 					  lan9220_res, ARRAY_SIZE(lan9220_res),
 					  &lan9220_data, sizeof(lan9220_data));
@@ -315,6 +356,9 @@ static void __init ape6evm_add_standard_devices(void)
 	platform_device_register_data(NULL, "leds-gpio", -1,
 				      &ape6evm_leds_pdata,
 				      sizeof(ape6evm_leds_pdata));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -325,9 +369,15 @@ static const char *ape6evm_boards_compat_dt[] __initdata = {
 
 DT_MACHINE_START(APE6EVM_DT, "ape6evm")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= irqchip_init,
 	.init_time	= shmobile_timer_init,
 	.init_machine	= ape6evm_add_standard_devices,
+=======
+	.init_early	= shmobile_init_delay,
+	.init_machine	= ape6evm_add_standard_devices,
+	.init_late	= shmobile_init_late,
+>>>>>>> v3.18
 =======
 	.init_early	= shmobile_init_delay,
 	.init_machine	= ape6evm_add_standard_devices,

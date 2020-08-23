@@ -22,6 +22,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -33,12 +34,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -46,9 +52,12 @@
  *    La Monte H.P. Yarroll <piggy@acm.org>
  *    Sridhar Samudrala     <sri@us.ibm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -58,6 +67,10 @@
 #include <linux/skbuff.h>
 #include <net/sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/busy_poll.h>
+>>>>>>> v3.18
 =======
 #include <net/busy_poll.h>
 >>>>>>> v3.18
@@ -67,9 +80,15 @@
 
 /* Forward declarations for internal helpers.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sctp_ulpevent * sctp_ulpq_reasm(struct sctp_ulpq *ulpq,
 					      struct sctp_ulpevent *);
 static struct sctp_ulpevent * sctp_ulpq_order(struct sctp_ulpq *,
+=======
+static struct sctp_ulpevent *sctp_ulpq_reasm(struct sctp_ulpq *ulpq,
+					      struct sctp_ulpevent *);
+static struct sctp_ulpevent *sctp_ulpq_order(struct sctp_ulpq *,
+>>>>>>> v3.18
 =======
 static struct sctp_ulpevent *sctp_ulpq_reasm(struct sctp_ulpq *ulpq,
 					      struct sctp_ulpevent *);
@@ -137,7 +156,11 @@ int sctp_ulpq_tail_data(struct sctp_ulpq *ulpq, struct sctp_chunk *chunk,
 
 	/* Do ordering if needed.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((event) && (event->msg_flags & MSG_EOR)){
+=======
+	if ((event) && (event->msg_flags & MSG_EOR)) {
+>>>>>>> v3.18
 =======
 	if ((event) && (event->msg_flags & MSG_EOR)) {
 >>>>>>> v3.18
@@ -238,6 +261,12 @@ int sctp_ulpq_tail_event(struct sctp_ulpq *ulpq, struct sctp_ulpevent *event)
 		goto out_free;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!sctp_ulpevent_is_notification(event))
+		sk_mark_napi_id(sk, skb);
+
+>>>>>>> v3.18
 =======
 	if (!sctp_ulpevent_is_notification(event))
 		sk_mark_napi_id(sk, skb);
@@ -299,7 +328,11 @@ int sctp_ulpq_tail_event(struct sctp_ulpq *ulpq, struct sctp_ulpevent *event)
 
 	if (queue == &sk->sk_receive_queue)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, 0);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -380,7 +413,12 @@ static struct sctp_ulpevent *sctp_make_reassembled_event(struct net *net,
 
 	/* Get the last skb in the f_frag's frag_list if present. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (last = list; list; last = list, list = list->next);
+=======
+	for (last = list; list; last = list, list = list->next)
+		;
+>>>>>>> v3.18
 =======
 	for (last = list; list; last = list, list = list->next)
 		;
@@ -775,7 +813,11 @@ static void sctp_ulpq_reasm_drain(struct sctp_ulpq *ulpq)
 	while ((event = sctp_ulpq_retrieve_reassembled(ulpq)) != NULL) {
 		/* Do ordering if needed.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((event) && (event->msg_flags & MSG_EOR)){
+=======
+		if ((event) && (event->msg_flags & MSG_EOR)) {
+>>>>>>> v3.18
 =======
 		if ((event) && (event->msg_flags & MSG_EOR)) {
 >>>>>>> v3.18
@@ -1187,7 +1229,11 @@ void sctp_ulpq_abort_pd(struct sctp_ulpq *ulpq, gfp_t gfp)
 	/* If there is data waiting, send it up the socket now. */
 	if (sctp_ulpq_clear_pd(ulpq) || ev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, 0);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18

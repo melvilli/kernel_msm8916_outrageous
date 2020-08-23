@@ -17,6 +17,7 @@ clean-files := inat-tables.c
 obj-$(CONFIG_SMP) += msr-smp.o cache-smp.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 lib-y := delay.o
 lib-y += thunk_$(BITS).o
 lib-y += usercopy_$(BITS).o usercopy.o getuser.o putuser.o
@@ -27,6 +28,8 @@ lib-$(CONFIG_INSTRUCTION_DECODER) += insn.o inat.o
 
 obj-y += msr.o msr-reg.o msr-reg-export.o
 =======
+=======
+>>>>>>> v3.18
 lib-y := delay.o misc.o cmdline.o
 lib-y += thunk_$(BITS).o
 lib-y += usercopy_$(BITS).o usercopy.o getuser.o putuser.o
@@ -35,6 +38,9 @@ lib-$(CONFIG_RWSEM_XCHGADD_ALGORITHM) += rwsem.o
 lib-$(CONFIG_INSTRUCTION_DECODER) += insn.o inat.o
 
 obj-y += msr.o msr-reg.o msr-reg-export.o hash.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ifeq ($(CONFIG_X86_32),y)
@@ -51,7 +57,11 @@ else
         obj-y += iomap_copy_64.o
         lib-y += csum-partial_64.o csum-copy_64.o csum-wrappers_64.o
 <<<<<<< HEAD
+<<<<<<< HEAD
         lib-y += thunk_64.o clear_page_64.o copy_page_64.o
+=======
+        lib-y += clear_page_64.o copy_page_64.o
+>>>>>>> v3.18
 =======
         lib-y += clear_page_64.o copy_page_64.o
 >>>>>>> v3.18

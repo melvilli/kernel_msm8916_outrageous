@@ -667,8 +667,14 @@ static int omap_dmm_probe(struct platform_device *dev)
 
 	/* set dma mask for device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* NOTE: this is a workaround for the hwmod not initializing properly */
 	dev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_set_coherent_mask(&dev->dev, DMA_BIT_MASK(32));
+	if (ret)
+		goto fail;
+>>>>>>> v3.18
 =======
 	ret = dma_set_coherent_mask(&dev->dev, DMA_BIT_MASK(32));
 	if (ret)
@@ -880,7 +886,11 @@ int tiler_map_show(struct seq_file *s, void *arg)
 
 	for (lut_idx = 0; lut_idx < omap_dmm->num_lut; lut_idx++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(map, 0, sizeof(h_adj * sizeof(*map)));
+=======
+		memset(map, 0, h_adj * sizeof(*map));
+>>>>>>> v3.18
 =======
 		memset(map, 0, h_adj * sizeof(*map));
 >>>>>>> v3.18
@@ -981,7 +991,10 @@ static const struct dev_pm_ops omap_dmm_pm_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 static const struct of_device_id dmm_of_match[] = {
 	{ .compatible = "ti,omap4-dmm", },
@@ -990,6 +1003,9 @@ static const struct of_device_id dmm_of_match[] = {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct platform_driver omap_dmm_driver = {
 	.probe = omap_dmm_probe,
@@ -998,6 +1014,10 @@ struct platform_driver omap_dmm_driver = {
 		.owner = THIS_MODULE,
 		.name = DMM_DRIVER_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(dmm_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(dmm_of_match),
 >>>>>>> v3.18

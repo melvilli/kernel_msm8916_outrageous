@@ -52,6 +52,11 @@
 #include <rdma/rdma_cm.h>
 #include <rdma/iw_cm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <rdma/rdma_netlink.h>
+#include <rdma/iw_portmap.h>
+>>>>>>> v3.18
 =======
 #include <rdma/rdma_netlink.h>
 #include <rdma/iw_portmap.h>
@@ -136,6 +141,10 @@
 #define NES_DBG_SHUTDOWN    0x00080000
 #define NES_DBG_PAU         0x00100000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NES_DBG_NLMSG       0x00200000
+>>>>>>> v3.18
 =======
 #define NES_DBG_NLMSG       0x00200000
 >>>>>>> v3.18

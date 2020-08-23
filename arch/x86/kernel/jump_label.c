@@ -25,6 +25,7 @@ union jump_code_union {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __jump_label_transform(struct jump_entry *entry,
 				   enum jump_label_type type,
 				   void *(*poker)(void *, const void *, size_t))
@@ -40,6 +41,8 @@ static void __jump_label_transform(struct jump_entry *entry,
 
 	(*poker)((void *)entry->code, &code, JUMP_LABEL_NOP_SIZE);
 =======
+=======
+>>>>>>> v3.18
 static void bug_at(unsigned char *ip, int line)
 {
 	/*
@@ -116,6 +119,9 @@ static void __jump_label_transform(struct jump_entry *entry,
 	else
 		text_poke_bp((void *)entry->code, &code, JUMP_LABEL_NOP_SIZE,
 			     (void *)entry->code + JUMP_LABEL_NOP_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -125,7 +131,11 @@ void arch_jump_label_transform(struct jump_entry *entry,
 	get_online_cpus();
 	mutex_lock(&text_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__jump_label_transform(entry, type, text_poke_smp);
+=======
+	__jump_label_transform(entry, type, NULL, 0);
+>>>>>>> v3.18
 =======
 	__jump_label_transform(entry, type, NULL, 0);
 >>>>>>> v3.18
@@ -134,11 +144,14 @@ void arch_jump_label_transform(struct jump_entry *entry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __init_or_module void arch_jump_label_transform_static(struct jump_entry *entry,
 				      enum jump_label_type type)
 {
 	__jump_label_transform(entry, type, text_poke_early);
 =======
+=======
+>>>>>>> v3.18
 static enum {
 	JL_STATE_START,
 	JL_STATE_NO_UPDATE,
@@ -166,6 +179,9 @@ __init_or_module void arch_jump_label_transform_static(struct jump_entry *entry,
 	}
 	if (jlstate == JL_STATE_UPDATE)
 		__jump_label_transform(entry, type, text_poke_early, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

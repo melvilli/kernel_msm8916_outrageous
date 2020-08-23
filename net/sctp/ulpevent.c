@@ -23,6 +23,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -34,12 +35,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -48,9 +54,12 @@
  *    Ardelle Fan	    <ardelle.fan@intel.com>
  *    Sridhar Samudrala     <sri@us.ibm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -70,9 +79,15 @@ static void sctp_ulpevent_release_frag_data(struct sctp_ulpevent *event);
 
 /* Initialize an ULP event from an given skb.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCTP_STATIC void sctp_ulpevent_init(struct sctp_ulpevent *event,
 				    int msg_flags,
 				    unsigned int len)
+=======
+static void sctp_ulpevent_init(struct sctp_ulpevent *event,
+			       int msg_flags,
+			       unsigned int len)
+>>>>>>> v3.18
 =======
 static void sctp_ulpevent_init(struct sctp_ulpevent *event,
 			       int msg_flags,
@@ -86,8 +101,13 @@ static void sctp_ulpevent_init(struct sctp_ulpevent *event,
 
 /* Create a new sctp_ulpevent.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCTP_STATIC struct sctp_ulpevent *sctp_ulpevent_new(int size, int msg_flags,
 						    gfp_t gfp)
+=======
+static struct sctp_ulpevent *sctp_ulpevent_new(int size, int msg_flags,
+					       gfp_t gfp)
+>>>>>>> v3.18
 =======
 static struct sctp_ulpevent *sctp_ulpevent_new(int size, int msg_flags,
 					       gfp_t gfp)
@@ -372,7 +392,11 @@ struct sctp_ulpevent *sctp_ulpevent_make_peer_addr_change(
 
 	/* Map ipv4 address into v4-mapped-on-v6 address.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_get_pf_specific(asoc->base.sk->sk_family)->addr_v4map(
+=======
+	sctp_get_pf_specific(asoc->base.sk->sk_family)->addr_to_user(
+>>>>>>> v3.18
 =======
 	sctp_get_pf_specific(asoc->base.sk->sk_family)->addr_to_user(
 >>>>>>> v3.18
@@ -921,7 +945,10 @@ void sctp_ulpevent_read_sndrcvinfo(const struct sctp_ulpevent *event,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* RFC6458, Section 5.3.5 SCTP Receive Information Structure
  * (SCTP_SNDRCV)
  */
@@ -985,6 +1012,9 @@ void sctp_ulpevent_read_nxtinfo(const struct sctp_ulpevent *event,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Do accounting for bytes received and hold a reference to the association
  * for each skb.

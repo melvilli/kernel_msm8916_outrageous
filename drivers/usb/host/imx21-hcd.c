@@ -63,11 +63,17 @@
 #include "imx21-hcd.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 #define DEBUG
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef DEBUG
 #define DEBUG_LOG_FRAME(imx21, etd, event) \
@@ -817,6 +823,7 @@ static int imx21_hc_urb_enqueue_isoc(struct usb_hcd *hcd,
 	/* calculate frame */
 	cur_frame = imx21_hc_get_frame(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (urb->transfer_flags & URB_ISO_ASAP) {
 		if (list_empty(&ep_priv->td_list))
 			urb->start_frame = cur_frame + 5;
@@ -838,6 +845,8 @@ static int imx21_hc_urb_enqueue_isoc(struct usb_hcd *hcd,
 	td = urb_priv->isoc_td;
 	for (i = 0; i < urb->number_of_packets; i++, td++) {
 =======
+=======
+>>>>>>> v3.18
 	i = 0;
 	if (list_empty(&ep_priv->td_list)) {
 		urb->start_frame = wrap_frame(cur_frame + 5);
@@ -868,6 +877,9 @@ static int imx21_hc_urb_enqueue_isoc(struct usb_hcd *hcd,
 	urb_priv->isoc_remaining = urb->number_of_packets - i;
 	td = urb_priv->isoc_td;
 	for (; i < urb->number_of_packets; i++, td++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int offset = urb->iso_frame_desc[i].offset;
 		td->ep = ep;
@@ -881,7 +893,10 @@ static int imx21_hc_urb_enqueue_isoc(struct usb_hcd *hcd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	urb_priv->isoc_remaining = urb->number_of_packets;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_vdbg(imx21->dev, "setup %d packets for iso frame %d->%d\n",
@@ -1895,7 +1910,11 @@ static int imx21_probe(struct platform_device *pdev)
 	imx21->hcd = hcd;
 	imx21->dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx21->pdata = pdev->dev.platform_data;
+=======
+	imx21->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	imx21->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1945,6 +1964,10 @@ static int imx21_probe(struct platform_device *pdev)
 		goto failed_add_hcd;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -1969,7 +1992,11 @@ failed_request_mem:
 static struct platform_driver imx21_hcd_driver = {
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   .name = (char *)hcd_name,
+=======
+		   .name = hcd_name,
+>>>>>>> v3.18
 =======
 		   .name = hcd_name,
 >>>>>>> v3.18

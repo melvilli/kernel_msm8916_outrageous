@@ -169,7 +169,11 @@ static void mma8450_close(struct input_polled_dev *dev)
  */
 static int mma8450_probe(struct i2c_client *c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   const struct i2c_device_id *id)
+=======
+			 const struct i2c_device_id *id)
+>>>>>>> v3.18
 =======
 			 const struct i2c_device_id *id)
 >>>>>>> v3.18
@@ -209,6 +213,11 @@ static int mma8450_probe(struct i2c_client *c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2c_set_clientdata(c, m);
+
+>>>>>>> v3.18
 =======
 	i2c_set_clientdata(c, m);
 

@@ -28,6 +28,10 @@
 
 struct host1x_syncpt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct host1x_syncpt_base;
+>>>>>>> v3.18
 =======
 struct host1x_syncpt_base;
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ struct host1x_syncpt_ops {
 	void (*load_wait_base)(struct host1x_syncpt *syncpt);
 	u32 (*load)(struct host1x_syncpt *syncpt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*cpu_incr)(struct host1x_syncpt *syncpt);
+=======
+	int (*cpu_incr)(struct host1x_syncpt *syncpt);
+>>>>>>> v3.18
 =======
 	int (*cpu_incr)(struct host1x_syncpt *syncpt);
 >>>>>>> v3.18
@@ -111,6 +119,10 @@ struct host1x {
 	void __iomem *regs;
 	struct host1x_syncpt *syncpt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct host1x_syncpt_base *bases;
+>>>>>>> v3.18
 =======
 	struct host1x_syncpt_base *bases;
 >>>>>>> v3.18
@@ -138,12 +150,18 @@ struct host1x {
 	struct dentry *debugfs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *drm_data;
 =======
+=======
+>>>>>>> v3.18
 	struct mutex devices_lock;
 	struct list_head devices;
 
 	struct list_head list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -177,15 +195,21 @@ static inline u32 host1x_hw_syncpt_load(struct host1x *host,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void host1x_hw_syncpt_cpu_incr(struct host1x *host,
 					     struct host1x_syncpt *sp)
 {
 	host->syncpt_op->cpu_incr(sp);
 =======
+=======
+>>>>>>> v3.18
 static inline int host1x_hw_syncpt_cpu_incr(struct host1x *host,
 					    struct host1x_syncpt *sp)
 {
 	return host->syncpt_op->cpu_incr(sp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -328,9 +352,13 @@ static inline void host1x_hw_show_mlocks(struct host1x *host, struct output *o)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct platform_driver tegra_hdmi_driver;
 extern struct platform_driver tegra_dc_driver;
 extern struct platform_driver tegra_gr2d_driver;
+=======
+extern struct platform_driver tegra_mipi_driver;
+>>>>>>> v3.18
 =======
 extern struct platform_driver tegra_mipi_driver;
 >>>>>>> v3.18

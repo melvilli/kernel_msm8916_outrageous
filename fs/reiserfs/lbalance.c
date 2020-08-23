@@ -3,7 +3,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -12,6 +16,7 @@
 #include "reiserfs.h"
 #include <linux/buffer_head.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* these are used in do_balance.c */
 
@@ -27,10 +32,15 @@
 
 /* copy copy_count entries from source directory item to dest buffer (creating new item if needed) */
 =======
+=======
+>>>>>>> v3.18
 /*
  * copy copy_count entries from source directory item to dest buffer
  * (creating new item if needed)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 				  struct buffer_head *source, int last_first,
@@ -38,23 +48,30 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 {
 	struct buffer_head *dest = dest_bi->bi_bh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int item_num_in_dest;	/* either the number of target item,
 				   or if we must create a new item,
 				   the number of the item we will
 				   create it next to */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * either the number of target item, or if we must create a
 	 * new item, the number of the item we will create it next to
 	 */
 	int item_num_in_dest;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct item_head *ih;
 	struct reiserfs_de_head *deh;
 	int copy_records_len;	/* length of all records in item to be copied */
 	char *records;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(source, item_num);
 
@@ -70,6 +87,8 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 		    source->b_data + ih_location(ih) +
 		    deh_location(&(deh[from + copy_count - 1]));
 =======
+=======
+>>>>>>> v3.18
 	ih = item_head(source, item_num);
 
 	RFALSE(!is_direntry_le_ih(ih), "vs-10000: item must be directory item");
@@ -86,6 +105,9 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 		records =
 		    source->b_data + ih_location(ih) +
 		    deh_location(&deh[from + copy_count - 1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		copy_records_len = 0;
@@ -99,19 +121,29 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 							       - 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if there are no items in dest or the first/last item in dest is not item of the same directory */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * if there are no items in dest or the first/last item in
 	 * dest is not item of the same directory
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((item_num_in_dest == -1) ||
 	    (last_first == FIRST_TO_LAST && le_ih_k_offset(ih) == DOT_OFFSET) ||
 	    (last_first == LAST_TO_FIRST
 	     && comp_short_le_keys /*COMP_SHORT_KEYS */ (&ih->ih_key,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							 B_N_PKEY(dest,
+=======
+							 leaf_key(dest,
+>>>>>>> v3.18
 =======
 							 leaf_key(dest,
 >>>>>>> v3.18
@@ -131,6 +163,7 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 		if (last_first == LAST_TO_FIRST) {
 			/* form key by the following way */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (from < I_ENTRY_COUNT(ih)) {
 				set_le_ih_k_offset(&new_ih,
 						   deh_offset(&(deh[from])));
@@ -142,6 +175,8 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 			}
 			set_le_key_k_type(KEY_FORMAT_3_5, &(new_ih.ih_key),
 =======
+=======
+>>>>>>> v3.18
 			if (from < ih_entry_count(ih)) {
 				set_le_ih_k_offset(&new_ih,
 						   deh_offset(&deh[from]));
@@ -158,6 +193,9 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 				 */
 			}
 			set_le_key_k_type(KEY_FORMAT_3_5, &new_ih.ih_key,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  TYPE_DIRENTRY);
 		}
@@ -183,7 +221,11 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 	leaf_paste_entries(dest_bi, item_num_in_dest,
 			   (last_first ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    FIRST_TO_LAST) ? I_ENTRY_COUNT(B_N_PITEM_HEAD(dest,
+=======
+			    FIRST_TO_LAST) ? ih_entry_count(item_head(dest,
+>>>>>>> v3.18
 =======
 			    FIRST_TO_LAST) ? ih_entry_count(item_head(dest,
 >>>>>>> v3.18
@@ -193,16 +235,22 @@ static void leaf_copy_dir_entries(struct buffer_info *dest_bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copy the first (if last_first == FIRST_TO_LAST) or last (last_first == LAST_TO_FIRST) item or
    part of it or nothing (see the return 0 below) from SOURCE to the end
    (if last_first) or beginning (!last_first) of the DEST */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Copy the first (if last_first == FIRST_TO_LAST) or last
  * (last_first == LAST_TO_FIRST) item or part of it or nothing
  * (see the return 0 below) from SOURCE to the end (if last_first)
  * or beginning (!last_first) of the DEST
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* returns 1 if anything was copied, else 0 */
 static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
@@ -211,7 +259,12 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 {
 	struct buffer_head *dest = dest_bi->bi_bh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dest_nr_item, src_nr_item;	/* number of items in the source and destination buffers */
+=======
+	/* number of items in the source and destination buffers */
+	int dest_nr_item, src_nr_item;
+>>>>>>> v3.18
 =======
 	/* number of items in the source and destination buffers */
 	int dest_nr_item, src_nr_item;
@@ -221,6 +274,7 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 
 	dest_nr_item = B_NR_ITEMS(dest);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (last_first == FIRST_TO_LAST) {
 		/* if ( DEST is empty or first item of SOURCE and last item of DEST are the items of different objects
@@ -232,6 +286,8 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 		    || (!op_is_left_mergeable(&(ih->ih_key), src->b_size)))
 			/* there is nothing to merge */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * if ( DEST is empty or first item of SOURCE and last item of
 	 * DEST are the items of different objects or of different types )
@@ -245,6 +301,9 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 		/* there is nothing to merge */
 		if (!dest_nr_item
 		    || (!op_is_left_mergeable(&ih->ih_key, src->b_size)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 
@@ -261,14 +320,20 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* copy part of the body of the first item of SOURCE to the end of the body of the last item of the DEST
 		   part defined by 'bytes_or_entries'; if bytes_or_entries == -1 copy whole body; don't create new item header
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * copy part of the body of the first item of SOURCE
 		 * to the end of the body of the last item of the DEST
 		 * part defined by 'bytes_or_entries'; if bytes_or_entries
 		 * == -1 copy whole body; don't create new item header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (bytes_or_entries == -1)
@@ -288,12 +353,15 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* merge first item (or its part) of src buffer with the last
 		   item of dest buffer. Both are of the same file */
 		leaf_paste_in_buffer(dest_bi,
 				     dest_nr_item - 1, ih_item_len(dih),
 				     bytes_or_entries, B_I_PITEM(src, ih), 0);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * merge first item (or its part) of src buffer with the last
 		 * item of dest buffer. Both are of the same file
@@ -301,6 +369,9 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 		leaf_paste_in_buffer(dest_bi,
 				     dest_nr_item - 1, ih_item_len(dih),
 				     bytes_or_entries, ih_item_body(src, ih), 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (is_indirect_le_ih(dih)) {
@@ -317,6 +388,7 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 	/* copy boundary item to right (last_first == LAST_TO_FIRST) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ( DEST is empty or last item of SOURCE and first item of DEST
 	   are the items of different object or of different types )
 	 */
@@ -331,6 +403,8 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 		if (bytes_or_entries == -1)
 			/* bytes_or_entries = entries number in last item body of SOURCE */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * (DEST is empty or last item of SOURCE and first item of DEST
 	 * are the items of different object or of different types)
@@ -348,6 +422,9 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 		 * item body of SOURCE
 		 */
 		if (bytes_or_entries == -1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bytes_or_entries = ih_entry_count(ih);
 
@@ -359,15 +436,21 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* copy part of the body of the last item of SOURCE to the begin of the body of the first item of the DEST;
 	   part defined by 'bytes_or_entries'; if byte_or_entriess == -1 copy whole body; change first item key of the DEST;
 	   don't create new item header
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * copy part of the body of the last item of SOURCE to the
 	 * begin of the body of the first item of the DEST; part defined
 	 * by 'bytes_or_entries'; if byte_or_entriess == -1 copy whole body;
 	 * change first item key of the DEST; don't create new item header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 
@@ -420,7 +503,11 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 
 	leaf_paste_in_buffer(dest_bi, 0, 0, bytes_or_entries,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     B_I_PITEM(src,
+=======
+			     ih_item_body(src,
+>>>>>>> v3.18
 =======
 			     ih_item_body(src,
 >>>>>>> v3.18
@@ -430,16 +517,22 @@ static int leaf_copy_boundary_item(struct buffer_info *dest_bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* copy cpy_mun items from buffer src to buffer dest
  * last_first == FIRST_TO_LAST means, that we copy cpy_num  items beginning from first-th item in src to tail of dest
  * last_first == LAST_TO_FIRST means, that we copy cpy_num  items beginning from first-th item in src to head of dest
 =======
+=======
+>>>>>>> v3.18
 /*
  * copy cpy_mun items from buffer src to buffer dest
  * last_first == FIRST_TO_LAST means, that we copy cpy_num items beginning
  *                             from first-th item in src to tail of dest
  * last_first == LAST_TO_FIRST means, that we copy cpy_num items beginning
  *                             from first-th item in src to head of dest
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
@@ -474,12 +567,15 @@ static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
 	free_space = blkh_free_space(blkh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we will insert items before 0-th or nr-th item in dest buffer. It depends of last_first parameter */
 	dest_before = (last_first == LAST_TO_FIRST) ? 0 : nr;
 
 	/* location of head of first new item */
 	ih = B_N_PITEM_HEAD(dest, dest_before);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * we will insert items before 0-th or nr-th item in dest buffer.
 	 * It depends of last_first parameter
@@ -488,6 +584,9 @@ static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
 
 	/* location of head of first new item */
 	ih = item_head(dest, dest_before);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	RFALSE(blkh_free_space(blkh) < cpy_num * IH_SIZE,
@@ -499,7 +598,11 @@ static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
 
 	/* copy item headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(ih, B_N_PITEM_HEAD(src, first), cpy_num * IH_SIZE);
+=======
+	memcpy(ih, item_head(src, first), cpy_num * IH_SIZE);
+>>>>>>> v3.18
 =======
 	memcpy(ih, item_head(src, first), cpy_num * IH_SIZE);
 >>>>>>> v3.18
@@ -516,8 +619,13 @@ static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
 
 	/* prepare space for items */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_loc = ih_location(&(ih[nr + cpy_num - 1 - dest_before]));
 	last_inserted_loc = ih_location(&(ih[cpy_num - 1]));
+=======
+	last_loc = ih_location(&ih[nr + cpy_num - 1 - dest_before]);
+	last_inserted_loc = ih_location(&ih[cpy_num - 1]);
+>>>>>>> v3.18
 =======
 	last_loc = ih_location(&ih[nr + cpy_num - 1 - dest_before]);
 	last_inserted_loc = ih_location(&ih[cpy_num - 1]);
@@ -535,7 +643,12 @@ static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
 	/* copy items */
 	memcpy(dest->b_data + last_inserted_loc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       B_N_PITEM(src, (first + cpy_num - 1)), j - last_inserted_loc);
+=======
+	       item_body(src, (first + cpy_num - 1)),
+	       j - last_inserted_loc);
+>>>>>>> v3.18
 =======
 	       item_body(src, (first + cpy_num - 1)),
 	       j - last_inserted_loc);
@@ -564,13 +677,19 @@ static void leaf_copy_items_entirely(struct buffer_info *dest_bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This function splits the (liquid) item into two items (useful when
    shifting part of an item into another node.) */
 =======
+=======
+>>>>>>> v3.18
 /*
  * This function splits the (liquid) item into two items (useful when
  * shifting part of an item into another node.)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void leaf_item_bottle(struct buffer_info *dest_bi,
 			     struct buffer_head *src, int last_first,
@@ -584,14 +703,20 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 
 	if (last_first == FIRST_TO_LAST) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* if ( if item in position item_num in buffer SOURCE is directory item ) */
 		ih = B_N_PITEM_HEAD(src, item_num);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * if ( if item in position item_num in buffer SOURCE
 		 * is directory item )
 		 */
 		ih = item_head(src, item_num);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (is_direntry_le_ih(ih))
 			leaf_copy_dir_entries(dest_bi, src, FIRST_TO_LAST,
@@ -600,15 +725,21 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 			struct item_head n_ih;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* copy part of the body of the item number 'item_num' of SOURCE to the end of the DEST
 			   part defined by 'cpy_bytes'; create new item header; change old item_header (????);
 			   n_ih = new item_header;
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * copy part of the body of the item number 'item_num'
 			 * of SOURCE to the end of the DEST part defined by
 			 * 'cpy_bytes'; create new item header; change old
 			 * item_header (????); n_ih = new item_header;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 */
 			memcpy(&n_ih, ih, IH_SIZE);
@@ -621,6 +752,7 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 				set_ih_free_space(&n_ih, 0);
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			RFALSE(op_is_left_mergeable(&(ih->ih_key), src->b_size),
 			       "vs-10190: bad mergeability of item %h", ih);
@@ -636,6 +768,8 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 					      item_num,
 					      I_ENTRY_COUNT(ih) - cpy_bytes,
 =======
+=======
+>>>>>>> v3.18
 			RFALSE(op_is_left_mergeable(&ih->ih_key, src->b_size),
 			       "vs-10190: bad mergeability of item %h", ih);
 			n_ih.ih_version = ih->ih_version;	/* JDM Endian safe, both le */
@@ -652,11 +786,15 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 			leaf_copy_dir_entries(dest_bi, src, LAST_TO_FIRST,
 					      item_num,
 					      ih_entry_count(ih) - cpy_bytes,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      cpy_bytes);
 		else {
 			struct item_head n_ih;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* copy part of the body of the item number 'item_num' of SOURCE to the begin of the DEST
 			   part defined by 'cpy_bytes'; create new item header;
@@ -666,6 +804,8 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 
 			n_ih.ih_version = ih->ih_version;	/* JDM Endian safe, both le */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * copy part of the body of the item number 'item_num'
 			 * of SOURCE to the begin of the DEST part defined by
@@ -676,6 +816,9 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 
 			/* Endian safe, both le */
 			n_ih.ih_version = ih->ih_version;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (is_direct_le_ih(ih)) {
@@ -701,6 +844,7 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 			put_ih_item_len(&n_ih, cpy_bytes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			n_ih.ih_version = ih->ih_version;	/* JDM Endian safe, both le */
 
 			leaf_insert_into_buf(dest_bi, 0, &n_ih,
@@ -708,29 +852,40 @@ static void leaf_item_bottle(struct buffer_info *dest_bi,
 						       item_num) +
 					     ih_item_len(ih) - cpy_bytes, 0);
 =======
+=======
+>>>>>>> v3.18
 			/* Endian safe, both le */
 			n_ih.ih_version = ih->ih_version;
 
 			leaf_insert_into_buf(dest_bi, 0, &n_ih,
 					     item_body(src, item_num) +
 						ih_item_len(ih) - cpy_bytes, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* If cpy_bytes equals minus one than copy cpy_num whole items from SOURCE to DEST.
    If cpy_bytes not equal to minus one than copy cpy_num-1 whole items from SOURCE to DEST.
    From last item copy cpy_num bytes for regular item and cpy_num directory entries for
    directory item. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * If cpy_bytes equals minus one than copy cpy_num whole items from SOURCE
  * to DEST.  If cpy_bytes not equal to minus one than copy cpy_num-1 whole
  * items from SOURCE to DEST.  From last item copy cpy_num bytes for regular
  * item and cpy_num directory entries for directory item.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 			   int last_first, int cpy_num, int cpy_bytes)
@@ -759,12 +914,18 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 			bytes = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* copy the first item or it part or nothing to the end of the DEST (i = leaf_copy_boundary_item(DEST,SOURCE,0,bytes)) */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * copy the first item or it part or nothing to the end of
 		 * the DEST (i = leaf_copy_boundary_item(DEST,SOURCE,0,bytes))
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		i = leaf_copy_boundary_item(dest_bi, src, FIRST_TO_LAST, bytes);
 		cpy_num -= i;
@@ -772,6 +933,7 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 			return i;
 		pos += i;
 		if (cpy_bytes == -1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* copy first cpy_num items starting from position 'pos' of SOURCE to end of DEST */
 			leaf_copy_items_entirely(dest_bi, src, FIRST_TO_LAST,
@@ -783,6 +945,8 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 
 			/* copy part of the item which number is cpy_num+pos-1 to the end of the DEST */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * copy first cpy_num items starting from position
 			 * 'pos' of SOURCE to end of DEST
@@ -801,6 +965,9 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 			 * copy part of the item which number is
 			 * cpy_num+pos-1 to the end of the DEST
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			leaf_item_bottle(dest_bi, src, FIRST_TO_LAST,
 					 cpy_num + pos - 1, cpy_bytes);
@@ -814,13 +981,19 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 			bytes = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* copy the last item or it part or nothing to the begin of the DEST (i = leaf_copy_boundary_item(DEST,SOURCE,1,bytes)); */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * copy the last item or it part or nothing to the
 		 * begin of the DEST
 		 * (i = leaf_copy_boundary_item(DEST,SOURCE,1,bytes));
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		i = leaf_copy_boundary_item(dest_bi, src, LAST_TO_FIRST, bytes);
 
@@ -830,6 +1003,7 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 
 		pos = src_nr_item - cpy_num - i;
 		if (cpy_bytes == -1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* starting from position 'pos' copy last cpy_num items of SOURCE to begin of DEST */
 			leaf_copy_items_entirely(dest_bi, src, LAST_TO_FIRST,
@@ -841,6 +1015,8 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 
 			/* copy part of the item which number is pos to the begin of the DEST */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * starting from position 'pos' copy last cpy_num
 			 * items of SOURCE to begin of DEST
@@ -859,6 +1035,9 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 			 * copy part of the item which number is pos to
 			 * the begin of the DEST
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			leaf_item_bottle(dest_bi, src, LAST_TO_FIRST, pos,
 					 cpy_bytes);
@@ -868,15 +1047,21 @@ static int leaf_copy_items(struct buffer_info *dest_bi, struct buffer_head *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* there are types of coping: from S[0] to L[0], from S[0] to R[0],
    from R[0] to L[0]. for each of these we have to define parent and
    positions of destination and source buffers */
 =======
+=======
+>>>>>>> v3.18
 /*
  * there are types of coping: from S[0] to L[0], from S[0] to R[0],
  * from R[0] to L[0]. for each of these we have to define parent and
  * positions of destination and source buffers
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void leaf_define_dest_src_infos(int shift_mode, struct tree_balance *tb,
 				       struct buffer_info *dest_bi,
@@ -894,7 +1079,13 @@ static void leaf_define_dest_src_infos(int shift_mode, struct tree_balance *tb,
 		src_bi->bi_bh = PATH_PLAST_BUFFER(tb->tb_path);
 		src_bi->bi_parent = PATH_H_PPARENT(tb->tb_path, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		src_bi->bi_position = PATH_H_B_ITEM_ORDER(tb->tb_path, 0);	/* src->b_item_order */
+=======
+
+		/* src->b_item_order */
+		src_bi->bi_position = PATH_H_B_ITEM_ORDER(tb->tb_path, 0);
+>>>>>>> v3.18
 =======
 
 		/* src->b_item_order */
@@ -965,13 +1156,19 @@ static void leaf_define_dest_src_infos(int shift_mode, struct tree_balance *tb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* copy mov_num items and mov_bytes of the (mov_num-1)th item to
    neighbor. Delete them from source */
 =======
+=======
+>>>>>>> v3.18
 /*
  * copy mov_num items and mov_bytes of the (mov_num-1)th item to
  * neighbor. Delete them from source
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int leaf_move_items(int shift_mode, struct tree_balance *tb, int mov_num,
 		    int mov_bytes, struct buffer_head *Snew)
@@ -996,13 +1193,19 @@ int leaf_move_items(int shift_mode, struct tree_balance *tb, int mov_num,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Shift shift_num items (and shift_bytes of last shifted item if shift_bytes != -1)
    from S[0] to L[0] and replace the delimiting key */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Shift shift_num items (and shift_bytes of last shifted item if
  * shift_bytes != -1) from S[0] to L[0] and replace the delimiting key
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int leaf_shift_left(struct tree_balance *tb, int shift_num, int shift_bytes)
 {
@@ -1010,12 +1213,15 @@ int leaf_shift_left(struct tree_balance *tb, int shift_num, int shift_bytes)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* move shift_num (and shift_bytes bytes) items from S[0] to left neighbor L[0] */
 	i = leaf_move_items(LEAF_FROM_S_TO_L, tb, shift_num, shift_bytes, NULL);
 
 	if (shift_num) {
 		if (B_NR_ITEMS(S0) == 0) {	/* number of items in S[0] == 0 */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * move shift_num (and shift_bytes bytes) items from S[0]
 	 * to left neighbor L[0]
@@ -1025,6 +1231,9 @@ int leaf_shift_left(struct tree_balance *tb, int shift_num, int shift_bytes)
 	if (shift_num) {
 		/* number of items in S[0] == 0 */
 		if (B_NR_ITEMS(S0) == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			RFALSE(shift_bytes != -1,
@@ -1049,15 +1258,21 @@ int leaf_shift_left(struct tree_balance *tb, int shift_num, int shift_bytes)
 
 			RFALSE((shift_bytes != -1 &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				!(is_direntry_le_ih(B_N_PITEM_HEAD(S0, 0))
 				  && !I_ENTRY_COUNT(B_N_PITEM_HEAD(S0, 0)))) &&
 			       (!op_is_left_mergeable
 				(B_N_PKEY(S0, 0), S0->b_size)),
 =======
+=======
+>>>>>>> v3.18
 				!(is_direntry_le_ih(item_head(S0, 0))
 				  && !ih_entry_count(item_head(S0, 0)))) &&
 			       (!op_is_left_mergeable
 				(leaf_key(S0, 0), S0->b_size)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       "vs-10280: item must be mergeable");
 		}
@@ -1069,6 +1284,7 @@ int leaf_shift_left(struct tree_balance *tb, int shift_num, int shift_bytes)
 /* CLEANING STOPPED HERE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Shift shift_num (shift_bytes) items from S[0] to the right neighbor, and replace the delimiting key */
 int leaf_shift_right(struct tree_balance *tb, int shift_num, int shift_bytes)
 {
@@ -1077,6 +1293,8 @@ int leaf_shift_right(struct tree_balance *tb, int shift_num, int shift_bytes)
 
 	/* move shift_num (and shift_bytes) items from S[0] to right neighbor R[0] */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Shift shift_num (shift_bytes) items from S[0] to the right neighbor,
  * and replace the delimiting key
@@ -1089,6 +1307,9 @@ int leaf_shift_right(struct tree_balance *tb, int shift_num, int shift_bytes)
 	 * move shift_num (and shift_bytes) items from S[0] to
 	 * right neighbor R[0]
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret_value =
 	    leaf_move_items(LEAF_FROM_S_TO_R, tb, shift_num, shift_bytes, NULL);
@@ -1105,6 +1326,7 @@ int leaf_shift_right(struct tree_balance *tb, int shift_num, int shift_bytes)
 static void leaf_delete_items_entirely(struct buffer_info *bi,
 				       int first, int del_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*  If del_bytes == -1, starting from position 'first' delete del_num items in whole in buffer CUR.
     If not.
     If last_first == 0. Starting from position 'first' delete del_num-1 items in whole. Delete part of body of
@@ -1112,6 +1334,8 @@ static void leaf_delete_items_entirely(struct buffer_info *bi,
     If last_first == 1. Starting from position 'first+1' delete del_num-1 items in whole. Delete part of body of
     the last item . Part defined by del_bytes. Don't delete last item header.
 =======
+=======
+>>>>>>> v3.18
 /*
  * If del_bytes == -1, starting from position 'first' delete del_num
  * items in whole in buffer CUR.
@@ -1122,6 +1346,9 @@ static void leaf_delete_items_entirely(struct buffer_info *bi,
  *   If last_first == 1. Starting from position 'first+1' delete del_num-1
  *   items in whole. Delete part of body of the last item . Part defined by
  *   del_bytes. Don't delete last item header.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
@@ -1154,12 +1381,15 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 	else {
 		if (last_first == FIRST_TO_LAST) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* delete del_num-1 items beginning from item in position first  */
 			leaf_delete_items_entirely(cur_bi, first, del_num - 1);
 
 			/* delete the part of the first item of the bh
 			   do not delete item header
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * delete del_num-1 items beginning from
 			 * item in position first
@@ -1169,6 +1399,9 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 			/*
 			 * delete the part of the first item of the bh
 			 * do not delete item header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 */
 			leaf_cut_from_buffer(cur_bi, 0, 0, del_bytes);
@@ -1176,6 +1409,7 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 			struct item_head *ih;
 			int len;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* delete del_num-1 items beginning from item in position first+1  */
 			leaf_delete_items_entirely(cur_bi, first + 1,
@@ -1186,6 +1420,8 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 				/* the last item is directory  */
 				/* len = numbers of directory entries in this item */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * delete del_num-1 items beginning from
 			 * item in position first+1
@@ -1200,6 +1436,9 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 				 * len = numbers of directory entries
 				 * in this item
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				len = ih_entry_count(ih);
 			else
@@ -1207,8 +1446,14 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 				len = ih_item_len(ih);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* delete the part of the last item of the bh
 			   do not delete item header
+=======
+			/*
+			 * delete the part of the last item of the bh
+			 * do not delete item header
+>>>>>>> v3.18
 =======
 			/*
 			 * delete the part of the last item of the bh
@@ -1224,8 +1469,14 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first,
 /* insert item into the leaf node in position before */
 void leaf_insert_into_buf(struct buffer_info *bi, int before,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct item_head *inserted_item_ih,
 			  const char *inserted_item_body, int zeros_number)
+=======
+			  struct item_head * const inserted_item_ih,
+			  const char * const inserted_item_body,
+			  int zeros_number)
+>>>>>>> v3.18
 =======
 			  struct item_head * const inserted_item_ih,
 			  const char * const inserted_item_body,
@@ -1254,15 +1505,21 @@ void leaf_insert_into_buf(struct buffer_info *bi, int before,
 
 	/* get item new item must be inserted before */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(bh, before);
 
 	/* prepare space for the body of new item */
 	last_loc = nr ? ih_location(&(ih[nr - before - 1])) : bh->b_size;
 =======
+=======
+>>>>>>> v3.18
 	ih = item_head(bh, before);
 
 	/* prepare space for the body of new item */
 	last_loc = nr ? ih_location(&ih[nr - before - 1]) : bh->b_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unmoved_loc = before ? ih_location(ih - 1) : bh->b_size;
 
@@ -1287,8 +1544,13 @@ void leaf_insert_into_buf(struct buffer_info *bi, int before,
 	/* change locations */
 	for (i = before; i < nr + 1; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unmoved_loc -= ih_item_len(&(ih[i - before]));
 		put_ih_location(&(ih[i - before]), unmoved_loc);
+=======
+		unmoved_loc -= ih_item_len(&ih[i - before]);
+		put_ih_location(&ih[i - before], unmoved_loc);
+>>>>>>> v3.18
 =======
 		unmoved_loc -= ih_item_len(&ih[i - before]);
 		put_ih_location(&ih[i - before], unmoved_loc);
@@ -1313,13 +1575,19 @@ void leaf_insert_into_buf(struct buffer_info *bi, int before,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* paste paste_size bytes to affected_item_num-th item.
    When item is a directory, this only prepare space for new entries */
 =======
+=======
+>>>>>>> v3.18
 /*
  * paste paste_size bytes to affected_item_num-th item.
  * When item is a directory, this only prepare space for new entries
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void leaf_paste_in_buffer(struct buffer_info *bi, int affected_item_num,
 			  int pos_in_item, int paste_size,
@@ -1355,9 +1623,15 @@ void leaf_paste_in_buffer(struct buffer_info *bi, int affected_item_num,
 
 	/* item to be appended */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(bh, affected_item_num);
 
 	last_loc = ih_location(&(ih[nr - affected_item_num - 1]));
+=======
+	ih = item_head(bh, affected_item_num);
+
+	last_loc = ih_location(&ih[nr - affected_item_num - 1]);
+>>>>>>> v3.18
 =======
 	ih = item_head(bh, affected_item_num);
 
@@ -1372,8 +1646,13 @@ void leaf_paste_in_buffer(struct buffer_info *bi, int affected_item_num,
 	/* change locations */
 	for (i = affected_item_num; i < nr; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_ih_location(&(ih[i - affected_item_num]),
 				ih_location(&(ih[i - affected_item_num])) -
+=======
+		put_ih_location(&ih[i - affected_item_num],
+				ih_location(&ih[i - affected_item_num]) -
+>>>>>>> v3.18
 =======
 		put_ih_location(&ih[i - affected_item_num],
 				ih_location(&ih[i - affected_item_num]) -
@@ -1421,17 +1700,23 @@ void leaf_paste_in_buffer(struct buffer_info *bi, int affected_item_num,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* cuts DEL_COUNT entries beginning from FROM-th entry. Directory item
    does not have free space, so it moves DEHs and remaining records as
    necessary. Return value is size of removed part of directory item
    in bytes. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * cuts DEL_COUNT entries beginning from FROM-th entry. Directory item
  * does not have free space, so it moves DEHs and remaining records as
  * necessary. Return value is size of removed part of directory item
  * in bytes.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int leaf_cut_entries(struct buffer_head *bh,
 			    struct item_head *ih, int from, int del_count)
@@ -1444,6 +1729,7 @@ static int leaf_cut_entries(struct buffer_head *bh,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* make sure, that item is directory and there are enough entries to
 	   remove */
 	RFALSE(!is_direntry_le_ih(ih), "10180: item is not directory item");
@@ -1451,6 +1737,8 @@ static int leaf_cut_entries(struct buffer_head *bh,
 	       "10185: item contains not enough entries: entry_count = %d, from = %d, to delete = %d",
 	       I_ENTRY_COUNT(ih), from, del_count);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * make sure that item is directory and there are enough entries to
 	 * remove
@@ -1459,6 +1747,9 @@ static int leaf_cut_entries(struct buffer_head *bh,
 	RFALSE(ih_entry_count(ih) < from + del_count,
 	       "10185: item contains not enough entries: entry_count = %d, from = %d, to delete = %d",
 	       ih_entry_count(ih), from, del_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (del_count == 0)
@@ -1470,6 +1761,7 @@ static int leaf_cut_entries(struct buffer_head *bh,
 	/* entry head array */
 	deh = B_I_DEH(bh, ih);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* first byte of remaining entries, those are BEFORE cut entries
 	   (prev_record) and length of all removed records (cut_records_len) */
@@ -1483,6 +1775,8 @@ static int leaf_cut_entries(struct buffer_head *bh,
 	for (i = I_ENTRY_COUNT(ih) - 1; i > from + del_count - 1; i--)
 		put_deh_location(&(deh[i]),
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * first byte of remaining entries, those are BEFORE cut entries
 	 * (prev_record) and length of all removed records (cut_records_len)
@@ -1496,13 +1790,20 @@ static int leaf_cut_entries(struct buffer_head *bh,
 	/* adjust locations of remaining entries */
 	for (i = ih_entry_count(ih) - 1; i > from + del_count - 1; i--)
 		put_deh_location(&deh[i],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 deh_location(&deh[i]) -
 				 (DEH_SIZE * del_count));
 
 	for (i = 0; i < from; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_deh_location(&(deh[i]),
+=======
+		put_deh_location(&deh[i],
+>>>>>>> v3.18
 =======
 		put_deh_location(&deh[i],
 >>>>>>> v3.18
@@ -1525,6 +1826,7 @@ static int leaf_cut_entries(struct buffer_head *bh,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*  when cut item is part of regular file
         pos_in_item - first byte that must be cut
         cut_size - number of bytes to be cut beginning from pos_in_item
@@ -1534,6 +1836,8 @@ static int leaf_cut_entries(struct buffer_head *bh,
         cut_size - count of deleted entries
     */
 =======
+=======
+>>>>>>> v3.18
 /*
  * when cut item is part of regular file
  *      pos_in_item - first byte that must be cut
@@ -1543,6 +1847,9 @@ static int leaf_cut_entries(struct buffer_head *bh,
  *      pos_in_item - number of first deleted entry
  *      cut_size - count of deleted entries
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void leaf_cut_from_buffer(struct buffer_info *bi, int cut_item_num,
 			  int pos_in_item, int cut_size)
@@ -1559,7 +1866,11 @@ void leaf_cut_from_buffer(struct buffer_info *bi, int cut_item_num,
 
 	/* item head of truncated item */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(bh, cut_item_num);
+=======
+	ih = item_head(bh, cut_item_num);
+>>>>>>> v3.18
 =======
 	ih = item_head(bh, cut_item_num);
 >>>>>>> v3.18
@@ -1575,7 +1886,10 @@ void leaf_cut_from_buffer(struct buffer_info *bi, int cut_item_num,
 			/* change item key by key of first entry in the item */
 			set_le_ih_k_offset(ih, deh_offset(B_I_DEH(bh, ih)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*memcpy (&ih->ih_key.k_offset, &(B_I_DEH (bh, ih)->deh_offset), SHORT_KEY_SIZE); */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -1612,7 +1926,11 @@ void leaf_cut_from_buffer(struct buffer_info *bi, int cut_item_num,
 
 	/* location of the last item */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_loc = ih_location(&(ih[nr - cut_item_num - 1]));
+=======
+	last_loc = ih_location(&ih[nr - cut_item_num - 1]);
+>>>>>>> v3.18
 =======
 	last_loc = ih_location(&ih[nr - cut_item_num - 1]);
 >>>>>>> v3.18
@@ -1635,7 +1953,11 @@ void leaf_cut_from_buffer(struct buffer_info *bi, int cut_item_num,
 	/* change locations */
 	for (i = cut_item_num; i < nr; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_ih_location(&(ih[i - cut_item_num]),
+=======
+		put_ih_location(&ih[i - cut_item_num],
+>>>>>>> v3.18
 =======
 		put_ih_location(&ih[i - cut_item_num],
 >>>>>>> v3.18
@@ -1687,7 +2009,11 @@ static void leaf_delete_items_entirely(struct buffer_info *bi,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(bh, first);
+=======
+	ih = item_head(bh, first);
+>>>>>>> v3.18
 =======
 	ih = item_head(bh, first);
 >>>>>>> v3.18
@@ -1697,8 +2023,13 @@ static void leaf_delete_items_entirely(struct buffer_info *bi,
 
 	/* delete items */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_loc = ih_location(&(ih[nr - 1 - first]));
 	last_removed_loc = ih_location(&(ih[del_num - 1]));
+=======
+	last_loc = ih_location(&ih[nr - 1 - first]);
+	last_removed_loc = ih_location(&ih[del_num - 1]);
+>>>>>>> v3.18
 =======
 	last_loc = ih_location(&ih[nr - 1 - first]);
 	last_removed_loc = ih_location(&ih[del_num - 1]);
@@ -1713,8 +2044,13 @@ static void leaf_delete_items_entirely(struct buffer_info *bi,
 	/* change item location */
 	for (i = first; i < nr - del_num; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_ih_location(&(ih[i - first]),
 				ih_location(&(ih[i - first])) + (j -
+=======
+		put_ih_location(&ih[i - first],
+				ih_location(&ih[i - first]) + (j -
+>>>>>>> v3.18
 =======
 		put_ih_location(&ih[i - first],
 				ih_location(&ih[i - first]) + (j -
@@ -1740,12 +2076,18 @@ static void leaf_delete_items_entirely(struct buffer_info *bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* paste new_entry_count entries (new_dehs, records) into position before to item_num-th item */
 =======
+=======
+>>>>>>> v3.18
 /*
  * paste new_entry_count entries (new_dehs, records) into position
  * before to item_num-th item
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void leaf_paste_entries(struct buffer_info *bi,
 			int item_num,
@@ -1765,6 +2107,7 @@ void leaf_paste_entries(struct buffer_info *bi,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(bh, item_num);
 
 	/* make sure, that item is directory, and there are enough records in it */
@@ -1773,6 +2116,8 @@ void leaf_paste_entries(struct buffer_info *bi,
 	       "10230: there are no entry we paste entries before. entry_count = %d, before = %d",
 	       I_ENTRY_COUNT(ih), before);
 =======
+=======
+>>>>>>> v3.18
 	ih = item_head(bh, item_num);
 
 	/*
@@ -1783,6 +2128,9 @@ void leaf_paste_entries(struct buffer_info *bi,
 	RFALSE(ih_entry_count(ih) < before,
 	       "10230: there are no entry we paste entries before. entry_count = %d, before = %d",
 	       ih_entry_count(ih), before);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* first byte of dest item */
@@ -1795,6 +2143,7 @@ void leaf_paste_entries(struct buffer_info *bi,
 	insert_point =
 	    item +
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (before ? deh_location(&(deh[before - 1]))
 	     : (ih_item_len(ih) - paste_size));
 
@@ -1803,6 +2152,8 @@ void leaf_paste_entries(struct buffer_info *bi,
 		put_deh_location(&(deh[i]),
 				 deh_location(&(deh[i])) +
 =======
+=======
+>>>>>>> v3.18
 	    (before ? deh_location(&deh[before - 1])
 	     : (ih_item_len(ih) - paste_size));
 
@@ -1810,21 +2161,30 @@ void leaf_paste_entries(struct buffer_info *bi,
 	for (i = ih_entry_count(ih) - 1; i >= before; i--)
 		put_deh_location(&deh[i],
 				 deh_location(&deh[i]) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 (DEH_SIZE * new_entry_count));
 
 	/* adjust locations of records that will be BEFORE new records */
 	for (i = 0; i < before; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_deh_location(&(deh[i]),
 				 deh_location(&(deh[i])) + paste_size);
 
 	old_entry_num = I_ENTRY_COUNT(ih);
 =======
+=======
+>>>>>>> v3.18
 		put_deh_location(&deh[i],
 				 deh_location(&deh[i]) + paste_size);
 
 	old_entry_num = ih_entry_count(ih);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	put_ih_entry_count(ih, ih_entry_count(ih) + new_entry_count);
 
@@ -1848,15 +2208,21 @@ void leaf_paste_entries(struct buffer_info *bi,
 	/* set locations of new records */
 	for (i = 0; i < new_entry_count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_deh_location(&(deh[i]),
 				 deh_location(&(deh[i])) +
 				 (-deh_location
 				  (&(new_dehs[new_entry_count - 1])) +
 =======
+=======
+>>>>>>> v3.18
 		put_deh_location(&deh[i],
 				 deh_location(&deh[i]) +
 				 (-deh_location
 				  (&new_dehs[new_entry_count - 1]) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  insert_point + DEH_SIZE * new_entry_count -
 				  item));
@@ -1866,8 +2232,11 @@ void leaf_paste_entries(struct buffer_info *bi,
 	if (!before) {
 		set_le_ih_k_offset(ih, deh_offset(new_dehs));
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*      memcpy (&ih->ih_key.k_offset,
 		       &new_dehs->deh_offset, SHORT_KEY_SIZE);*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1876,6 +2245,7 @@ void leaf_paste_entries(struct buffer_info *bi,
 		int prev, next;
 		/* check record locations */
 		deh = B_I_DEH(bh, ih);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < I_ENTRY_COUNT(ih); i++) {
 			next =
@@ -1886,6 +2256,8 @@ void leaf_paste_entries(struct buffer_info *bi,
 
 			if (prev && prev <= deh_location(&(deh[i])))
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i < ih_entry_count(ih); i++) {
 			next =
 			    (i <
@@ -1894,6 +2266,9 @@ void leaf_paste_entries(struct buffer_info *bi,
 			prev = (i != 0) ? deh_location(&deh[i - 1]) : 0;
 
 			if (prev && prev <= deh_location(&deh[i]))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				reiserfs_error(sb_from_bi(bi), "vs-10240",
 					       "directory item (%h) "
@@ -1901,7 +2276,11 @@ void leaf_paste_entries(struct buffer_info *bi,
 					       "cur(%d) %a)",
 					       ih, deh + i - 1, i, deh + i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (next && next >= deh_location(&(deh[i])))
+=======
+			if (next && next >= deh_location(&deh[i]))
+>>>>>>> v3.18
 =======
 			if (next && next >= deh_location(&deh[i]))
 >>>>>>> v3.18

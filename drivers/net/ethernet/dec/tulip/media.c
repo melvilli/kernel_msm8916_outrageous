@@ -13,7 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/mii.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -462,7 +465,11 @@ void tulip_find_mii(struct net_device *dev, int board_idx)
 	   Doing this in open() would allow detecting external xcvrs later,
 	   but takes much time. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (phyn = 1; phyn <= 32 && phy_idx < sizeof (tp->phys); phyn++) {
+=======
+	for (phyn = 1; phyn <= 32 && phy_idx < ARRAY_SIZE(tp->phys); phyn++) {
+>>>>>>> v3.18
 =======
 	for (phyn = 1; phyn <= 32 && phy_idx < ARRAY_SIZE(tp->phys); phyn++) {
 >>>>>>> v3.18

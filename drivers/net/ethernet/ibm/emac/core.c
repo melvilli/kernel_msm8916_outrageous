@@ -40,6 +40,11 @@
 #include <linux/workqueue.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -2318,7 +2323,11 @@ static int emac_check_deps(struct emac_instance *dev,
 			continue;
 		if (deps[i].drvdata == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			deps[i].drvdata = dev_get_drvdata(&deps[i].ofdev->dev);
+=======
+			deps[i].drvdata = platform_get_drvdata(deps[i].ofdev);
+>>>>>>> v3.18
 =======
 			deps[i].drvdata = platform_get_drvdata(deps[i].ofdev);
 >>>>>>> v3.18
@@ -2686,7 +2695,11 @@ static int emac_init_config(struct emac_instance *dev)
 		return -ENXIO;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->ndev->dev_addr, p, 6);
+=======
+	memcpy(dev->ndev->dev_addr, p, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->ndev->dev_addr, p, ETH_ALEN);
 >>>>>>> v3.18
@@ -2813,9 +2826,15 @@ static int emac_probe(struct platform_device *ofdev)
 		goto err_reg_unmap;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->mal = dev_get_drvdata(&dev->mal_dev->dev);
 	if (dev->mdio_dev != NULL)
 		dev->mdio_instance = dev_get_drvdata(&dev->mdio_dev->dev);
+=======
+	dev->mal = platform_get_drvdata(dev->mal_dev);
+	if (dev->mdio_dev != NULL)
+		dev->mdio_instance = platform_get_drvdata(dev->mdio_dev);
+>>>>>>> v3.18
 =======
 	dev->mal = platform_get_drvdata(dev->mal_dev);
 	if (dev->mdio_dev != NULL)
@@ -2897,7 +2916,11 @@ static int emac_probe(struct platform_device *ofdev)
 	} else
 		ndev->netdev_ops = &emac_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &emac_ethtool_ops);
+=======
+	ndev->ethtool_ops = &emac_ethtool_ops;
+>>>>>>> v3.18
 =======
 	ndev->ethtool_ops = &emac_ethtool_ops;
 >>>>>>> v3.18
@@ -2916,7 +2939,11 @@ static int emac_probe(struct platform_device *ofdev)
 	 */
 	wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 >>>>>>> v3.18
@@ -2979,6 +3006,7 @@ static int emac_probe(struct platform_device *ofdev)
 static int emac_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct emac_instance *dev = dev_get_drvdata(&ofdev->dev);
 
 	DBG(dev, "remove" NL);
@@ -2986,10 +3014,15 @@ static int emac_remove(struct platform_device *ofdev)
 	dev_set_drvdata(&ofdev->dev, NULL);
 
 =======
+=======
+>>>>>>> v3.18
 	struct emac_instance *dev = platform_get_drvdata(ofdev);
 
 	DBG(dev, "remove" NL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unregister_netdev(dev->ndev);
 

@@ -18,6 +18,10 @@
 #include <linux/io.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -31,6 +35,11 @@
 #include "cm2xxx_3xxx.h"
 #include "prm-regbits-34xx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cm3xxx.h"
+#include "cm-regbits-34xx.h"
+>>>>>>> v3.18
 =======
 #include "cm3xxx.h"
 #include "cm-regbits-34xx.h"
@@ -53,6 +62,10 @@ static struct omap_prcm_irq_setup omap3_prcm_irq_setup = {
 	.save_and_clear_irqen	= &omap3xxx_prm_save_and_clear_irqen,
 	.restore_irqen		= &omap3xxx_prm_restore_irqen,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.reconfigure_io_chain	= NULL,
+>>>>>>> v3.18
 =======
 	.reconfigure_io_chain	= NULL,
 >>>>>>> v3.18
@@ -219,8 +232,11 @@ void omap3xxx_prm_restore_irqen(u32 *saved_mask)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * omap3xxx_prm_reconfigure_io_chain - clear latches and reconfigure I/O chain
 =======
+=======
+>>>>>>> v3.18
  * omap3xxx_prm_clear_mod_irqs - clear wake-up events from PRCM interrupt
  * @module: PRM module to clear wakeups from
  * @regs: register set to clear, 1 or 3
@@ -398,6 +414,9 @@ void omap3430_pre_es3_1_reconfigure_io_chain(void)
 
 /**
  * omap3_prm_reconfigure_io_chain - clear latches and reconfigure I/O chain
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Clear any previously-latched I/O wakeup events and ensure that the
@@ -405,9 +424,15 @@ void omap3430_pre_es3_1_reconfigure_io_chain(void)
  * by asserting WUCLKIN, waiting for WUCLKOUT to be asserted, and then
  * deasserting WUCLKIN and clearing the ST_IO_CHAIN WKST bit.  No
 <<<<<<< HEAD
+<<<<<<< HEAD
  * return value.
  */
 void omap3xxx_prm_reconfigure_io_chain(void)
+=======
+ * return value. These registers are only available in 3430 es3.1 and later.
+ */
+void omap3_prm_reconfigure_io_chain(void)
+>>>>>>> v3.18
 =======
  * return value. These registers are only available in 3430 es3.1 and later.
  */
@@ -436,7 +461,10 @@ void omap3_prm_reconfigure_io_chain(void)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * omap3xxx_prm_reconfigure_io_chain - reconfigure I/O chain
  */
 void omap3xxx_prm_reconfigure_io_chain(void)
@@ -446,6 +474,9 @@ void omap3xxx_prm_reconfigure_io_chain(void)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * omap3xxx_prm_enable_io_wakeup - enable wakeup events from I/O wakeup latches
  *
@@ -458,7 +489,11 @@ void omap3xxx_prm_reconfigure_io_chain(void)
 static void __init omap3xxx_prm_enable_io_wakeup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (omap3_has_io_wakeup())
+=======
+	if (prm_features & PRM_HAS_IO_WAKEUP)
+>>>>>>> v3.18
 =======
 	if (prm_features & PRM_HAS_IO_WAKEUP)
 >>>>>>> v3.18
@@ -491,7 +526,10 @@ static u32 omap3xxx_prm_read_reset_sources(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * omap3xxx_prm_iva_idle - ensure IVA is in idle so it can be put into retention
  *
@@ -562,6 +600,9 @@ void omap3_prm_save_scratchpad_contents(u32 *ptr)
 					OMAP3_PRM_CLKSEL_OFFSET);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Powerdomain low-level functions */
 
@@ -689,22 +730,33 @@ struct pwrdm_ops omap3_pwrdm_operations = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct prm_ll_data omap3xxx_prm_ll_data = {
 	.read_reset_sources = &omap3xxx_prm_read_reset_sources,
 =======
+=======
+>>>>>>> v3.18
 static int omap3xxx_prm_late_init(void);
 
 static struct prm_ll_data omap3xxx_prm_ll_data = {
 	.read_reset_sources = &omap3xxx_prm_read_reset_sources,
 	.late_init = &omap3xxx_prm_late_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 int __init omap3xxx_prm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap34xx())
 		return 0;
+=======
+	if (omap3_has_io_wakeup())
+		prm_features |= PRM_HAS_IO_WAKEUP;
+>>>>>>> v3.18
 =======
 	if (omap3_has_io_wakeup())
 		prm_features |= PRM_HAS_IO_WAKEUP;
@@ -714,6 +766,7 @@ int __init omap3xxx_prm_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init omap3xxx_prm_late_init(void)
 {
 	int ret;
@@ -722,6 +775,8 @@ static int __init omap3xxx_prm_late_init(void)
 		return 0;
 
 =======
+=======
+>>>>>>> v3.18
 static struct of_device_id omap3_prm_dt_match_table[] = {
 	{ .compatible = "ti,omap3-prm" },
 	{ }
@@ -753,6 +808,9 @@ static int omap3xxx_prm_late_init(void)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	omap3xxx_prm_enable_io_wakeup();
 	ret = omap_prcm_register_chain_handler(&omap3_prcm_irq_setup);
@@ -762,6 +820,7 @@ static int omap3xxx_prm_late_init(void)
 
 	return ret;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 omap_subsys_initcall(omap3xxx_prm_late_init);
 
@@ -774,10 +833,15 @@ static void __exit omap3xxx_prm_exit(void)
 	WARN(prm_unregister(&omap3xxx_prm_ll_data),
 	     "%s: prm_ll_data function pointer mismatch\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 
 static void __exit omap3xxx_prm_exit(void)
 {
 	prm_unregister(&omap3xxx_prm_ll_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 __exitcall(omap3xxx_prm_exit);

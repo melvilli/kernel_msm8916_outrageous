@@ -33,6 +33,12 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+&uart0 {
+	status = "okay";
+};
+>>>>>>> v3.18
 =======
 &uart0 {
 	status = "okay";

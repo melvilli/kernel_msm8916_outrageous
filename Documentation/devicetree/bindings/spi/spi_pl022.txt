@@ -5,9 +5,15 @@ Required properties:
 - reg : Offset and length of the register set for the device
 - interrupts : Should contain SPI controller interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - num-cs : total number of chipselects
 
 Optional properties:
+=======
+
+Optional properties:
+- num-cs : total number of chipselects
+>>>>>>> v3.18
 =======
 
 Optional properties:

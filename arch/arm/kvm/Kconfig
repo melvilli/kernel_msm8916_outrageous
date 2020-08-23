@@ -21,6 +21,10 @@ config KVM
 	select PREEMPT_NOTIFIERS
 	select ANON_INODES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_CPU_RELAX_INTERCEPT
+>>>>>>> v3.18
 =======
 	select HAVE_KVM_CPU_RELAX_INTERCEPT
 >>>>>>> v3.18
@@ -46,9 +50,15 @@ config KVM_ARM_HOST
 
 config KVM_ARM_MAX_VCPUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int "Number maximum supported virtual CPUs per VM" if KVM_ARM_HOST
 	default 4 if KVM_ARM_HOST
 	default 0
+=======
+	int "Number maximum supported virtual CPUs per VM"
+	depends on KVM_ARM_HOST
+	default 4
+>>>>>>> v3.18
 =======
 	int "Number maximum supported virtual CPUs per VM"
 	depends on KVM_ARM_HOST
@@ -78,8 +88,11 @@ config KVM_ARM_TIMER
 	  Adds support for the Architected Timers in virtual machines
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source drivers/virtio/Kconfig
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif # VIRTUALIZATION

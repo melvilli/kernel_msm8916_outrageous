@@ -331,7 +331,11 @@ static const struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sis190_pci_tbl) = {
+=======
+static const struct pci_device_id sis190_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sis190_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1775,9 +1779,12 @@ static void sis190_get_regs(struct net_device *dev, struct ethtool_regs *regs,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (regs->len > SIS190_REGS_SIZE)
 		regs->len = SIS190_REGS_SIZE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&tp->lock, flags);
@@ -1888,7 +1895,11 @@ static int sis190_init_one(struct pci_dev *pdev,
 	dev->netdev_ops = &sis190_netdev_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &sis190_ethtool_ops);
+=======
+	dev->ethtool_ops = &sis190_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &sis190_ethtool_ops;
 >>>>>>> v3.18
@@ -1936,7 +1947,10 @@ static void sis190_remove_one(struct pci_dev *pdev)
 	unregister_netdev(dev);
 	sis190_release_board(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1948,6 +1962,7 @@ static struct pci_driver sis190_pci_driver = {
 	.remove		= sis190_remove_one,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init sis190_init_module(void)
 {
@@ -1961,6 +1976,9 @@ static void __exit sis190_cleanup_module(void)
 
 module_init(sis190_init_module);
 module_exit(sis190_cleanup_module);
+=======
+module_pci_driver(sis190_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(sis190_pci_driver);
 >>>>>>> v3.18

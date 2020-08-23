@@ -37,8 +37,13 @@
  * @prevent_sleep_time: Total time this source has been preventing autosleep.
  * @event_count: Number of signaled wakeup events.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @active_count: Number of times the wakeup sorce was activated.
  * @relax_count: Number of times the wakeup sorce was deactivated.
+=======
+ * @active_count: Number of times the wakeup source was activated.
+ * @relax_count: Number of times the wakeup source was deactivated.
+>>>>>>> v3.18
 =======
  * @active_count: Number of times the wakeup source was activated.
  * @relax_count: Number of times the wakeup source was deactivated.
@@ -52,7 +57,10 @@ struct wakeup_source {
 	const char 		*name;
 	struct list_head	entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rcu_head		rcu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t		lock;
@@ -69,7 +77,10 @@ struct wakeup_source {
 	unsigned long		expire_count;
 	unsigned long		wakeup_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			inserted;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool			active:1;

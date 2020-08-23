@@ -151,7 +151,11 @@
 #define NFS4_SECINFO_STYLE4_PARENT	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFS4_MAX_UINT64	(~(u64)0)
+=======
+#define NFS4_MAX_UINT64	(~(__u64)0)
+>>>>>>> v3.18
 =======
 #define NFS4_MAX_UINT64	(~(__u64)0)
 >>>>>>> v3.18

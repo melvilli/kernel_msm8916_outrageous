@@ -2,6 +2,7 @@
  * Linker script for 32-bit vDSO.
  * We #include the file to define the layout details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Here we only choose the prelinked virtual address.
  *
  * This file defines the version script giving the user-exported symbols in
@@ -11,6 +12,8 @@
 
 #define VDSO_PRELINK 0
 =======
+=======
+>>>>>>> v3.18
  *
  * This file defines the version script giving the user-exported symbols in
  * the DSO.
@@ -20,6 +23,9 @@
 
 #define BUILD_VDSO32
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "../vdso-layout.lds.S"
 
@@ -32,7 +38,10 @@ ENTRY(__kernel_vsyscall);
 VERSION
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	LINUX_2.6 {
 	global:
 		__vdso_clock_gettime;
@@ -40,6 +49,9 @@ VERSION
 		__vdso_time;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	LINUX_2.5 {
 	global:
@@ -50,6 +62,7 @@ VERSION
 	};
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Symbols we define here called VDSO* get their values into vdso32-syms.h.
@@ -58,5 +71,7 @@ VDSO32_PRELINK		= VDSO_PRELINK;
 VDSO32_vsyscall		= __kernel_vsyscall;
 VDSO32_sigreturn	= __kernel_sigreturn;
 VDSO32_rt_sigreturn	= __kernel_rt_sigreturn;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

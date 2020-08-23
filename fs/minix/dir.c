@@ -17,7 +17,11 @@ typedef struct minix_dir_entry minix_dirent;
 typedef struct minix3_dir_entry minix3_dirent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int minix_readdir(struct file *, void *, filldir_t);
+=======
+static int minix_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int minix_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -26,7 +30,11 @@ const struct file_operations minix_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= minix_readdir,
+=======
+	.iterate	= minix_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= minix_readdir,
 >>>>>>> v3.18
@@ -91,6 +99,7 @@ static inline void *minix_next_entry(void *de, struct minix_sb_info *sbi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int minix_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
 	unsigned long pos = filp->f_pos;
@@ -108,6 +117,8 @@ static int minix_readdir(struct file * filp, void * dirent, filldir_t filldir)
 	if (pos >= inode->i_size)
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 static int minix_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
@@ -125,6 +136,9 @@ static int minix_readdir(struct file *file, struct dir_context *ctx)
 
 	offset = pos & ~PAGE_CACHE_MASK;
 	n = pos >> PAGE_CACHE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for ( ; n < npages; n++, offset = 0) {
@@ -138,6 +152,11 @@ static int minix_readdir(struct file *file, struct dir_context *ctx)
 		limit = kaddr + minix_last_byte(inode, n) - chunk_size;
 		for ( ; p <= limit; p = minix_next_entry(p, sbi)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			const char *name;
+			__u32 inumber;
+>>>>>>> v3.18
 =======
 			const char *name;
 			__u32 inumber;
@@ -152,6 +171,7 @@ static int minix_readdir(struct file *file, struct dir_context *ctx)
 				inumber = de->inode;
 			}
 			if (inumber) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				int over;
 
@@ -172,6 +192,8 @@ static int minix_readdir(struct file *file, struct dir_context *ctx)
 done:
 	filp->f_pos = (n << PAGE_CACHE_SHIFT) | offset;
 =======
+=======
+>>>>>>> v3.18
 				unsigned l = strnlen(name, sbi->s_namelen);
 				if (!dir_emit(ctx, name, l,
 					      inumber, DT_UNKNOWN)) {
@@ -183,6 +205,9 @@ done:
 		}
 		dir_put_page(page);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

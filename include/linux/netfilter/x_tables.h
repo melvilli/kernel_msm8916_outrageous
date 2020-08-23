@@ -230,6 +230,7 @@ struct xt_table_info {
 #define XT_TABLE_INFO_SZ (offsetof(struct xt_table_info, entries) \
 			  + nr_cpu_ids * sizeof(char *))
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xt_register_target(struct xt_target *target);
 extern void xt_unregister_target(struct xt_target *target);
 extern int xt_register_targets(struct xt_target *target, unsigned int n);
@@ -282,6 +283,8 @@ extern void xt_proto_fini(struct net *net, u_int8_t af);
 extern struct xt_table_info *xt_alloc_table_info(unsigned int size);
 extern void xt_free_table_info(struct xt_table_info *info);
 =======
+=======
+>>>>>>> v3.18
 int xt_register_target(struct xt_target *target);
 void xt_unregister_target(struct xt_target *target);
 int xt_register_targets(struct xt_target *target, unsigned int n);
@@ -324,6 +327,9 @@ void xt_proto_fini(struct net *net, u_int8_t af);
 
 struct xt_table_info *xt_alloc_table_info(unsigned int size);
 void xt_free_table_info(struct xt_table_info *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -406,8 +412,13 @@ static inline unsigned long ifname_compare_aligned(const char *_a,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct nf_hook_ops *xt_hook_link(const struct xt_table *, nf_hookfn *);
 extern void xt_hook_unlink(const struct xt_table *, struct nf_hook_ops *);
+=======
+struct nf_hook_ops *xt_hook_link(const struct xt_table *, nf_hookfn *);
+void xt_hook_unlink(const struct xt_table *, struct nf_hook_ops *);
+>>>>>>> v3.18
 =======
 struct nf_hook_ops *xt_hook_link(const struct xt_table *, nf_hookfn *);
 void xt_hook_unlink(const struct xt_table *, struct nf_hook_ops *);
@@ -472,6 +483,7 @@ struct _compat_xt_align {
 #define COMPAT_XT_ALIGN(s) __ALIGN_KERNEL((s), __alignof__(struct _compat_xt_align))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xt_compat_lock(u_int8_t af);
 extern void xt_compat_unlock(u_int8_t af);
 
@@ -495,6 +507,8 @@ int xt_compat_check_entry_offsets(const void *base, const char *elems,
                                   unsigned int target_offset,
                                   unsigned int next_offset);
 =======
+=======
+>>>>>>> v3.18
 void xt_compat_lock(u_int8_t af);
 void xt_compat_unlock(u_int8_t af);
 
@@ -514,6 +528,9 @@ void xt_compat_target_from_user(struct xt_entry_target *t, void **dstptr,
 				unsigned int *size);
 int xt_compat_target_to_user(const struct xt_entry_target *t,
 			     void __user **dstptr, unsigned int *size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_COMPAT */

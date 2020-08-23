@@ -430,7 +430,10 @@ err_out_disable:
 	pci_disable_device(pdev);
 err_out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -454,7 +457,10 @@ static void uli526x_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -616,7 +622,11 @@ static netdev_tx_t uli526x_start_xmit(struct sk_buff *skb,
 	if (skb->len > MAX_PACKET_SIZE) {
 		netdev_err(dev, "big packet = %d\n", (u16)skb->len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -661,7 +671,11 @@ static netdev_tx_t uli526x_start_xmit(struct sk_buff *skb,
 
 	/* free this SKB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -979,8 +993,13 @@ ULi_ethtool_gset(struct uli526x_board_info *db, struct ethtool_cmd *ecmd)
 	if(db->link_failed)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
 		ecmd->duplex = DUPLEX_UNKNOWN;
@@ -1214,9 +1233,12 @@ static int uli526x_suspend(struct pci_dev *pdev, pm_message_t state)
 	ULI526X_DBUG(0, "uli526x_suspend", 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netdev_priv(dev))
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_save_state(pdev);
@@ -1253,9 +1275,12 @@ static int uli526x_resume(struct pci_dev *pdev)
 	ULI526X_DBUG(0, "uli526x_resume", 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netdev_priv(dev))
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_restore_state(pdev);
@@ -1802,7 +1827,11 @@ static u16 phy_read_1bit(struct uli526x_board_info *db)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(uli526x_pci_tbl) = {
+=======
+static const struct pci_device_id uli526x_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id uli526x_pci_tbl[] = {
 >>>>>>> v3.18

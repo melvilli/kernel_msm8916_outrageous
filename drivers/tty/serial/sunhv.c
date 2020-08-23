@@ -269,6 +269,12 @@ static void sunhv_send_xchar(struct uart_port *port, char ch)
 	int limit = 10000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ch == __DISABLED_CHAR)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (ch == __DISABLED_CHAR)
 		return;
@@ -292,11 +298,14 @@ static void sunhv_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* port->lock held by caller.  */
 static void sunhv_enable_ms(struct uart_port *port)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* port->lock is not held.  */
@@ -389,7 +398,10 @@ static struct uart_ops sunhv_pops = {
 	.send_xchar	= sunhv_send_xchar,
 	.stop_rx	= sunhv_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= sunhv_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= sunhv_break_ctl,
@@ -446,6 +458,7 @@ static void sunhv_console_write_paged(struct console *con, const char *s, unsign
 	int locked = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_save(flags);
 	if (port->sysrq) {
 		locked = 0;
@@ -454,10 +467,15 @@ static void sunhv_console_write_paged(struct console *con, const char *s, unsign
 	} else
 		spin_lock(&port->lock);
 =======
+=======
+>>>>>>> v3.18
 	if (port->sysrq || oops_in_progress)
 		locked = spin_trylock_irqsave(&port->lock, flags);
 	else
 		spin_lock_irqsave(&port->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (n > 0) {
@@ -490,8 +508,12 @@ static void sunhv_console_write_paged(struct console *con, const char *s, unsign
 
 	if (locked)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&port->lock);
 	local_irq_restore(flags);
+=======
+		spin_unlock_irqrestore(&port->lock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&port->lock, flags);
 >>>>>>> v3.18
@@ -516,12 +538,18 @@ static void sunhv_console_write_bychar(struct console *con, const char *s, unsig
 	int i, locked = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_save(flags);
 =======
+=======
+>>>>>>> v3.18
 	if (port->sysrq || oops_in_progress)
 		locked = spin_trylock_irqsave(&port->lock, flags);
 	else
 		spin_lock_irqsave(&port->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (port->sysrq) {
 		locked = 0;
@@ -538,8 +566,12 @@ static void sunhv_console_write_bychar(struct console *con, const char *s, unsig
 
 	if (locked)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&port->lock);
 	local_irq_restore(flags);
+=======
+		spin_unlock_irqrestore(&port->lock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&port->lock, flags);
 >>>>>>> v3.18
@@ -612,7 +644,11 @@ static int hv_probe(struct platform_device *op)
 		goto out_remove_port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, port);
+=======
+	platform_set_drvdata(op, port);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, port);
 >>>>>>> v3.18
@@ -640,7 +676,11 @@ out_free_port:
 static int hv_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_port *port = dev_get_drvdata(&dev->dev);
+=======
+	struct uart_port *port = platform_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct uart_port *port = platform_get_drvdata(dev);
 >>>>>>> v3.18
@@ -655,8 +695,11 @@ static int hv_remove(struct platform_device *dev)
 	sunhv_port = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&dev->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -51,7 +51,11 @@ static void inftl_add_mtd(struct mtd_blktrans_ops *tr, struct mtd_info *mtd)
 	unsigned long temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mtd->type != MTD_NANDFLASH || mtd->size > UINT_MAX)
+=======
+	if (!mtd_type_is_nand(mtd) || mtd->size > UINT_MAX)
+>>>>>>> v3.18
 =======
 	if (!mtd_type_is_nand(mtd) || mtd->size > UINT_MAX)
 >>>>>>> v3.18

@@ -87,6 +87,7 @@ static int bbc_spkr_event(struct input_dev *dev, unsigned int type, unsigned int
 
 	if (count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(0x01,                 info->regs + 0);
 		outb(0x00,                 info->regs + 2);
 		outb((count >> 16) & 0xff, info->regs + 3);
@@ -95,6 +96,8 @@ static int bbc_spkr_event(struct input_dev *dev, unsigned int type, unsigned int
 	} else {
 		outb(0x00,                 info->regs + 0);
 =======
+=======
+>>>>>>> v3.18
 		sbus_writeb(0x01,                 info->regs + 0);
 		sbus_writeb(0x00,                 info->regs + 2);
 		sbus_writeb((count >> 16) & 0xff, info->regs + 3);
@@ -102,6 +105,9 @@ static int bbc_spkr_event(struct input_dev *dev, unsigned int type, unsigned int
 		sbus_writeb(0x00,                 info->regs + 5);
 	} else {
 		sbus_writeb(0x00,                 info->regs + 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -134,6 +140,7 @@ static int grover_spkr_event(struct input_dev *dev, unsigned int type, unsigned 
 	if (count) {
 		/* enable counter 2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outb(inb(info->enable_reg) | 3, info->enable_reg);
 		/* set command for counter 2, 2 byte write */
 		outb(0xB6, info->freq_regs + 1);
@@ -144,6 +151,8 @@ static int grover_spkr_event(struct input_dev *dev, unsigned int type, unsigned 
 		/* disable counter 2 */
 		outb(inb_p(info->enable_reg) & 0xFC, info->enable_reg);
 =======
+=======
+>>>>>>> v3.18
 		sbus_writeb(sbus_readb(info->enable_reg) | 3, info->enable_reg);
 		/* set command for counter 2, 2 byte write */
 		sbus_writeb(0xB6, info->freq_regs + 1);
@@ -153,6 +162,9 @@ static int grover_spkr_event(struct input_dev *dev, unsigned int type, unsigned 
 	} else {
 		/* disable counter 2 */
 		sbus_writeb(sbus_readb(info->enable_reg) & 0xFC, info->enable_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -198,7 +210,11 @@ static int sparcspkr_probe(struct device *dev)
 static void sparcspkr_shutdown(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sparcspkr_state *state = dev_get_drvdata(&dev->dev);
+=======
+	struct sparcspkr_state *state = platform_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct sparcspkr_state *state = platform_get_drvdata(dev);
 >>>>>>> v3.18
@@ -238,7 +254,11 @@ static int bbc_beep_probe(struct platform_device *op)
 		goto out_free;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, state);
+=======
+	platform_set_drvdata(op, state);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, state);
 >>>>>>> v3.18
@@ -251,7 +271,10 @@ static int bbc_beep_probe(struct platform_device *op)
 
 out_clear_drvdata:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	of_iounmap(&op->resource[0], info->regs, 6);
@@ -265,7 +288,11 @@ out_err:
 static int bbc_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sparcspkr_state *state = dev_get_drvdata(&op->dev);
+=======
+	struct sparcspkr_state *state = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct sparcspkr_state *state = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -280,7 +307,10 @@ static int bbc_remove(struct platform_device *op)
 	of_iounmap(&op->resource[0], info->regs, 6);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(state);
@@ -331,7 +361,11 @@ static int grover_beep_probe(struct platform_device *op)
 		goto out_unmap_freq_regs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, state);
+=======
+	platform_set_drvdata(op, state);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, state);
 >>>>>>> v3.18
@@ -344,7 +378,10 @@ static int grover_beep_probe(struct platform_device *op)
 
 out_clear_drvdata:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	of_iounmap(&op->resource[3], info->enable_reg, 1);
@@ -360,7 +397,11 @@ out_err:
 static int grover_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sparcspkr_state *state = dev_get_drvdata(&op->dev);
+=======
+	struct sparcspkr_state *state = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct sparcspkr_state *state = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -376,7 +417,10 @@ static int grover_remove(struct platform_device *op)
 	of_iounmap(&op->resource[2], info->freq_regs, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(state);

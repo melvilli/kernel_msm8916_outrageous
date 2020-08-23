@@ -207,7 +207,11 @@ void uvc_status_cleanup(struct uvc_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int uvc_status_start(struct uvc_device *dev)
+=======
+int uvc_status_start(struct uvc_device *dev, gfp_t flags)
+>>>>>>> v3.18
 =======
 int uvc_status_start(struct uvc_device *dev, gfp_t flags)
 >>>>>>> v3.18
@@ -216,7 +220,11 @@ int uvc_status_start(struct uvc_device *dev, gfp_t flags)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return usb_submit_urb(dev->int_urb, GFP_KERNEL);
+=======
+	return usb_submit_urb(dev->int_urb, flags);
+>>>>>>> v3.18
 =======
 	return usb_submit_urb(dev->int_urb, flags);
 >>>>>>> v3.18
@@ -226,6 +234,7 @@ void uvc_status_stop(struct uvc_device *dev)
 {
 	usb_kill_urb(dev->int_urb);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int uvc_status_suspend(struct uvc_device *dev)
@@ -244,5 +253,7 @@ int uvc_status_resume(struct uvc_device *dev)
 	return usb_submit_urb(dev->int_urb, GFP_NOIO);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -92,7 +92,11 @@
 	  	[MTD Interface]</para><para>
 		These functions provide the interface to the MTD kernel API. 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		They are not replacable and provide functionality
+=======
+		They are not replaceable and provide functionality
+>>>>>>> v3.18
 =======
 		They are not replaceable and provide functionality
 >>>>>>> v3.18
@@ -105,7 +109,11 @@
 		<listitem><para>
 	  	[GENERIC]</para><para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Generic functions are not replacable and provide functionality
+=======
+		Generic functions are not replaceable and provide functionality
+>>>>>>> v3.18
 =======
 		Generic functions are not replaceable and provide functionality
 >>>>>>> v3.18
@@ -116,7 +124,11 @@
 		Default functions provide hardware related functionality which is suitable
 		for most of the implementations. These functions can be replaced by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 		board driver if neccecary. Those functions are called via pointers in the
+=======
+		board driver if necessary. Those functions are called via pointers in the
+>>>>>>> v3.18
 =======
 		board driver if necessary. Those functions are called via pointers in the
 >>>>>>> v3.18
@@ -277,7 +289,11 @@ static void board_hwcontrol(struct mtd_info *mtd, int cmd)
 			detect and identify then chip. If a chip is found all the
 			internal data fields are initialized accordingly.
 <<<<<<< HEAD
+<<<<<<< HEAD
 			The structure(s) have to be zeroed out first and then filled with the neccecary 
+=======
+			The structure(s) have to be zeroed out first and then filled with the necessary
+>>>>>>> v3.18
 =======
 			The structure(s) have to be zeroed out first and then filled with the necessary
 >>>>>>> v3.18
@@ -344,7 +360,11 @@ module_init(board_init);
 		<title>Exit function</title>
 		<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			The exit function is only neccecary if the driver is
+=======
+			The exit function is only necessary if the driver is
+>>>>>>> v3.18
 =======
 			The exit function is only necessary if the driver is
 >>>>>>> v3.18
@@ -515,7 +535,11 @@ static void board_select_chip (struct mtd_info *mtd, int chip)
 				implementation reference. In those cases we must also
 				use bad block tables on FLASH, because the ECC layout is
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interferring with the bad block marker positions.
+=======
+				interfering with the bad block marker positions.
+>>>>>>> v3.18
 =======
 				interfering with the bad block marker positions.
 >>>>>>> v3.18
@@ -567,7 +591,11 @@ static void board_select_chip (struct mtd_info *mtd, int chip)
 			nand_scan() calls the function nand_default_bbt(). 
 			nand_default_bbt() selects appropriate default
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bad block table desriptors depending on the chip information
+=======
+			bad block table descriptors depending on the chip information
+>>>>>>> v3.18
 =======
 			bad block table descriptors depending on the chip information
 >>>>>>> v3.18
@@ -583,7 +611,11 @@ static void board_select_chip (struct mtd_info *mtd, int chip)
 			<title>Flash based tables</title>
 			<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				It may be desired or neccecary to keep a bad block table in FLASH. 
+=======
+				It may be desired or necessary to keep a bad block table in FLASH.
+>>>>>>> v3.18
 =======
 				It may be desired or necessary to keep a bad block table in FLASH.
 >>>>>>> v3.18
@@ -598,15 +630,21 @@ static void board_select_chip (struct mtd_info *mtd, int chip)
 			</para>
 			<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				The blocks in which the tables are stored are procteted against
 				accidental access by marking them bad in the memory bad block
 				table. The bad block table management functions are allowed
 				to circumvernt this protection.
 =======
+=======
+>>>>>>> v3.18
 				The blocks in which the tables are stored are protected against
 				accidental access by marking them bad in the memory bad block
 				table. The bad block table management functions are allowed
 				to circumvent this protection.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			</para>
 			<para>
@@ -632,7 +670,11 @@ static void board_select_chip (struct mtd_info *mtd, int chip)
 				nand_bbt_descr structure and storing the pointer in the
 				nand_chip structure member bbt_td before calling nand_scan(). 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				If a mirror table is neccecary a second structure must be
+=======
+				If a mirror table is necessary a second structure must be
+>>>>>>> v3.18
 =======
 				If a mirror table is necessary a second structure must be
 >>>>>>> v3.18
@@ -710,7 +752,11 @@ static void board_select_chip (struct mtd_info *mtd, int chip)
 				For automatic placement some blocks must be reserved for
 				bad block table storage. The number of reserved blocks is defined 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				in the maxblocks member of the babd block table description structure.
+=======
+				in the maxblocks member of the bad block table description structure.
+>>>>>>> v3.18
 =======
 				in the maxblocks member of the bad block table description structure.
 >>>>>>> v3.18
@@ -1116,17 +1162,23 @@ in this page</entry>
      	<title>Filesystem support</title>
 	<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		The NAND driver provides all neccecary functions for a
 		filesystem via the MTD interface.
 	</para>
 	<para>
 		Filesystems must be aware of the NAND pecularities and
 =======
+=======
+>>>>>>> v3.18
 		The NAND driver provides all necessary functions for a
 		filesystem via the MTD interface.
 	</para>
 	<para>
 		Filesystems must be aware of the NAND peculiarities and
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		restrictions. One major restrictions of NAND Flash is, that you cannot 
 		write as often as you want to a page. The consecutive writes to a page, 
@@ -1278,11 +1330,15 @@ in this page</entry>
 /* Create a bbt if none axists */
 #define NAND_BBT_CREATE		0x00000200
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Search good / bad pattern through all pages of a block */
 #define NAND_BBT_SCANALLPAGES	0x00000400
 /* Scan block empty during good / bad block scan */
 #define NAND_BBT_SCANEMPTY	0x00000800
 /* Write bbt if neccecary */
+=======
+/* Write bbt if necessary */
+>>>>>>> v3.18
 =======
 /* Write bbt if necessary */
 >>>>>>> v3.18

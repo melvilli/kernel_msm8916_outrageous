@@ -171,7 +171,11 @@ char item_tag(void);
 #define MAXITEMSTR 200
 struct dialog_item {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char str[MAXITEMSTR];	/* promtp displayed */
+=======
+	char str[MAXITEMSTR];	/* prompt displayed */
+>>>>>>> v3.18
 =======
 	char str[MAXITEMSTR];	/* prompt displayed */
 >>>>>>> v3.18
@@ -205,7 +209,10 @@ int on_key_esc(WINDOW *win);
 int on_key_resize(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* minimum (re)size values */
 #define CHECKLIST_HEIGTH_MIN 6	/* For dialog_checklist() */
 #define CHECKLIST_WIDTH_MIN 6
@@ -220,6 +227,9 @@ int on_key_resize(void);
 #define WINDOW_HEIGTH_MIN 19	/* For init_dialog() */
 #define WINDOW_WIDTH_MIN 80
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int init_dialog(const char *backtitle);
 void set_dialog_backtitle(const char *backtitle);

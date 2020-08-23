@@ -65,7 +65,11 @@ static int menu_width, item_x;
  */
 static void do_print_item(WINDOW * win, const char *item, int line_y,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           int selected, int hotkey)
+=======
+			  int selected, int hotkey)
+>>>>>>> v3.18
 =======
 			  int selected, int hotkey)
 >>>>>>> v3.18
@@ -187,7 +191,11 @@ static void do_scroll(WINDOW *win, int *scroll, int n)
  */
 int dialog_menu(const char *title, const char *prompt,
 <<<<<<< HEAD
+<<<<<<< HEAD
                 const void *selected, int *s_scroll)
+=======
+		const void *selected, int *s_scroll)
+>>>>>>> v3.18
 =======
 		const void *selected, int *s_scroll)
 >>>>>>> v3.18
@@ -202,7 +210,11 @@ do_resize:
 	height = getmaxy(stdscr);
 	width = getmaxx(stdscr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (height < 15 || width < 65)
+=======
+	if (height < MENUBOX_HEIGTH_MIN || width < MENUBOX_WIDTH_MIN)
+>>>>>>> v3.18
 =======
 	if (height < MENUBOX_HEIGTH_MIN || width < MENUBOX_WIDTH_MIN)
 >>>>>>> v3.18
@@ -216,8 +228,13 @@ do_resize:
 
 	/* center dialog box on screen */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	x = (COLS - width) / 2;
 	y = (LINES - height) / 2;
+=======
+	x = (getmaxx(stdscr) - width) / 2;
+	y = (getmaxy(stdscr) - height) / 2;
+>>>>>>> v3.18
 =======
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;

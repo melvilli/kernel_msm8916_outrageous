@@ -47,6 +47,7 @@
 static bool is_offset_valid;
 static u8 smps_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Flag to ensure Smartreflex bit in TWL
  * being cleared in board file is not overwritten.
@@ -56,6 +57,10 @@ static bool __initdata twl_sr_enable_autoinit;
 #define TWL4030_DCDC_GLOBAL_CFG        0x06
 #define REG_SMPS_OFFSET         0xE0
 #define SMARTREFLEX_ENABLE     BIT(3)
+=======
+
+#define REG_SMPS_OFFSET         0xE0
+>>>>>>> v3.18
 =======
 
 #define REG_SMPS_OFFSET         0xE0
@@ -257,6 +262,7 @@ int __init omap3_twl_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * The smartreflex bit on twl4030 specifies if the setting of voltage
 	 * is done over the I2C_SR path. Since this setting is independent of
@@ -271,6 +277,8 @@ int __init omap3_twl_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	voltdm = voltdm_lookup("mpu_iva");
 	omap_voltage_register_pmic(voltdm, &omap3_mpu_pmic);
 
@@ -279,6 +287,7 @@ int __init omap3_twl_init(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -321,5 +330,7 @@ err:
 	pr_err("%s: Error access to TWL4030 (%d)\n", __func__, ret);
 	return ret;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

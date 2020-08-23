@@ -14,6 +14,10 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -72,12 +76,15 @@ static inline void bfset_mem_set_bit(int nr, volatile unsigned long *vaddr)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * clear_bit() doesn't provide any barrier for the compiler.
  */
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void bclr_reg_clear_bit(int nr, volatile unsigned long *vaddr)

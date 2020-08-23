@@ -28,7 +28,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -41,6 +44,10 @@
 #include <linux/delay.h>
 #include <asm/intel_scu_ipc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -589,6 +596,7 @@ static int mrstouch_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsdev = kzalloc(sizeof(struct mrstouch_dev), GFP_KERNEL);
 	input = input_allocate_device();
 	if (!tsdev || !input) {
@@ -596,6 +604,8 @@ static int mrstouch_probe(struct platform_device *pdev)
 		err = -ENOMEM;
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	tsdev = devm_kzalloc(&pdev->dev, sizeof(struct mrstouch_dev),
 			     GFP_KERNEL);
 	if (!tsdev) {
@@ -607,6 +617,9 @@ static int mrstouch_probe(struct platform_device *pdev)
 	if (!input) {
 		dev_err(&pdev->dev, "unable to allocate input device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -621,7 +634,11 @@ static int mrstouch_probe(struct platform_device *pdev)
 	if (err) {
 		dev_err(&pdev->dev, "ADC initialization failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_mem;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -645,24 +662,31 @@ static int mrstouch_probe(struct platform_device *pdev)
 			     MRST_PRESSURE_MIN, MRST_PRESSURE_MAX, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_threaded_irq(tsdev->irq, NULL, mrstouch_pendet_irq,
 				   IRQF_ONESHOT, "mrstouch", tsdev);
 	if (err) {
 		dev_err(tsdev->dev, "unable to allocate irq\n");
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	err = devm_request_threaded_irq(&pdev->dev, tsdev->irq, NULL,
 					mrstouch_pendet_irq, IRQF_ONESHOT,
 					"mrstouch", tsdev);
 	if (err) {
 		dev_err(tsdev->dev, "unable to allocate irq\n");
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = input_register_device(tsdev->input);
 	if (err) {
 		dev_err(tsdev->dev, "unable to register input device\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free_irq;
 	}
@@ -693,6 +717,11 @@ static int mrstouch_remove(struct platform_device *pdev)
 	}
 
 >>>>>>> v3.18
+=======
+		return err;
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -703,7 +732,10 @@ static struct platform_driver mrstouch_driver = {
 	},
 	.probe		= mrstouch_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= mrstouch_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

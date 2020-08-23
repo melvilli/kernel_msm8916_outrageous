@@ -21,7 +21,10 @@
 #include <linux/ioport.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -35,7 +38,13 @@
 #include <linux/fs.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_device.h>
+=======
+#include <linux/of_address.h>
+#include <linux/of_device.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_device.h>
@@ -50,7 +59,10 @@
 #include <asm/8xx_immap.h>
 #include <asm/pgtable.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mpc8xx.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/cpm1.h>
@@ -111,7 +123,11 @@ static int do_pd_setup(struct fs_enet_private *fep)
 	struct platform_device *ofdev = to_platform_device(fep->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fep->interrupt = of_irq_to_resource(ofdev->dev.of_node, 0, NULL);
+=======
+	fep->interrupt = irq_of_parse_and_map(ofdev->dev.of_node, 0);
+>>>>>>> v3.18
 =======
 	fep->interrupt = irq_of_parse_and_map(ofdev->dev.of_node, 0);
 >>>>>>> v3.18
@@ -127,6 +143,10 @@ static int do_pd_setup(struct fs_enet_private *fep)
 
 #define FEC_NAPI_RX_EVENT_MSK	(FEC_ENET_RXF | FEC_ENET_RXB)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FEC_NAPI_TX_EVENT_MSK	(FEC_ENET_TXF | FEC_ENET_TXB)
+>>>>>>> v3.18
 =======
 #define FEC_NAPI_TX_EVENT_MSK	(FEC_ENET_TXF | FEC_ENET_TXB)
 >>>>>>> v3.18
@@ -147,6 +167,10 @@ static int setup_data(struct net_device *dev)
 
 	fep->ev_napi_rx = FEC_NAPI_RX_EVENT_MSK;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fep->ev_napi_tx = FEC_NAPI_TX_EVENT_MSK;
+>>>>>>> v3.18
 =======
 	fep->ev_napi_tx = FEC_NAPI_TX_EVENT_MSK;
 >>>>>>> v3.18
@@ -364,6 +388,12 @@ static void restart(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Restore multicast and promiscuous settings */
+	set_multicast_list(dev);
+
+>>>>>>> v3.18
 =======
 	/* Restore multicast and promiscuous settings */
 	set_multicast_list(dev);
@@ -446,7 +476,10 @@ static void napi_disable_rx(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void napi_clear_tx_event(struct net_device *dev)
 {
 	struct fs_enet_private *fep = netdev_priv(dev);
@@ -471,6 +504,9 @@ static void napi_disable_tx(struct net_device *dev)
 	FC(fecp, imask, FEC_NAPI_TX_EVENT_MSK);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rx_bd_done(struct net_device *dev)
 {
@@ -545,6 +581,12 @@ const struct fs_ops fs_fec_ops = {
 	.napi_enable_rx		= napi_enable_rx,
 	.napi_disable_rx	= napi_disable_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.napi_clear_tx_event	= napi_clear_tx_event,
+	.napi_enable_tx		= napi_enable_tx,
+	.napi_disable_tx	= napi_disable_tx,
+>>>>>>> v3.18
 =======
 	.napi_clear_tx_event	= napi_clear_tx_event,
 	.napi_enable_tx		= napi_enable_tx,

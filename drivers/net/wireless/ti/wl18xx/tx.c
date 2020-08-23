@@ -31,9 +31,15 @@
 static
 void wl18xx_get_last_tx_rate(struct wl1271 *wl, struct ieee80211_vif *vif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     struct ieee80211_tx_rate *rate)
 {
 	u8 fw_rate = wl->fw_status_2->counters.tx_last_rate;
+=======
+			     u8 band, struct ieee80211_tx_rate *rate)
+{
+	u8 fw_rate = wl->fw_status->counters.tx_last_rate;
+>>>>>>> v3.18
 =======
 			     u8 band, struct ieee80211_tx_rate *rate)
 {
@@ -50,6 +56,11 @@ void wl18xx_get_last_tx_rate(struct wl1271 *wl, struct ieee80211_vif *vif,
 	if (fw_rate <= CONF_HW_RATE_INDEX_54MBPS) {
 		rate->idx = fw_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (band == IEEE80211_BAND_5GHZ)
+			rate->idx -= CONF_HW_RATE_INDEX_6MBPS;
+>>>>>>> v3.18
 =======
 		if (band == IEEE80211_BAND_5GHZ)
 			rate->idx -= CONF_HW_RATE_INDEX_6MBPS;
@@ -114,7 +125,12 @@ static void wl18xx_tx_complete_packet(struct wl1271 *wl, u8 tx_stat_byte)
 	 * the info->status structures
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl18xx_get_last_tx_rate(wl, info->control.vif, &info->status.rates[0]);
+=======
+	wl18xx_get_last_tx_rate(wl, info->control.vif,
+				info->band, &info->status.rates[0]);
+>>>>>>> v3.18
 =======
 	wl18xx_get_last_tx_rate(wl, info->control.vif,
 				info->band, &info->status.rates[0]);
@@ -156,7 +172,11 @@ void wl18xx_tx_immediate_complete(struct wl1271 *wl)
 {
 	struct wl18xx_fw_status_priv *status_priv =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(struct wl18xx_fw_status_priv *)wl->fw_status_2->priv;
+=======
+		(struct wl18xx_fw_status_priv *)wl->fw_status->priv;
+>>>>>>> v3.18
 =======
 		(struct wl18xx_fw_status_priv *)wl->fw_status->priv;
 >>>>>>> v3.18

@@ -9,13 +9,19 @@ the case where there is a device on the bus that has errata and/or bugs
 that makes standard multimaster mode not feasible.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Note that this scheme works well enough but has some downsides:
 * It is nonstandard (not using standard I2C multimaster)
 * Having two masters on a bus in general makes it relatively hard to debug
   problems (hard to tell if i2c issues were caused by one master, another, or
   some device on the bus).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Algorithm:

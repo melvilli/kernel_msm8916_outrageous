@@ -161,6 +161,7 @@ extern int  sysctl_rose_link_fail_timeout;
 extern int  sysctl_rose_maximum_vcs;
 extern int  sysctl_rose_window_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  rosecmp(rose_address *, rose_address *);
 extern int  rosecmpm(rose_address *, rose_address *, unsigned short);
 extern char *rose2asc(char *buf, const rose_address *);
@@ -194,6 +195,8 @@ extern int  rose_loopback_queue(struct sk_buff *, struct rose_neigh *);
 extern void rose_kick(struct sock *);
 extern void rose_enquiry_response(struct sock *);
 =======
+=======
+>>>>>>> v3.18
 
 int rosecmp(rose_address *, rose_address *);
 int rosecmpm(rose_address *, rose_address *, unsigned short);
@@ -230,6 +233,9 @@ int rose_loopback_queue(struct sk_buff *, struct rose_neigh *);
 /* rose_out.c */
 void rose_kick(struct sock *);
 void rose_enquiry_response(struct sock *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* rose_route.c */
@@ -238,6 +244,7 @@ extern const struct file_operations rose_neigh_fops;
 extern const struct file_operations rose_nodes_fops;
 extern const struct file_operations rose_routes_fops;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void rose_add_loopback_neigh(void);
 extern int __must_check rose_add_loopback_node(rose_address *);
@@ -278,6 +285,8 @@ extern void rose_stop_idletimer(struct sock *);
 extern void rose_register_sysctl(void);
 extern void rose_unregister_sysctl(void);
 =======
+=======
+>>>>>>> v3.18
 void rose_add_loopback_neigh(void);
 int __must_check rose_add_loopback_node(rose_address *);
 void rose_del_loopback_node(rose_address *);
@@ -318,6 +327,9 @@ void rose_stop_idletimer(struct sock *);
 /* sysctl_net_rose.c */
 void rose_register_sysctl(void);
 void rose_unregister_sysctl(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -193,7 +193,11 @@ static int psurge_secondary_ipi_init(void)
 	int rc = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psurge_host = irq_domain_add_nomap(NULL, 0, &psurge_host_ops, NULL);
+=======
+	psurge_host = irq_domain_add_nomap(NULL, ~0, &psurge_host_ops, NULL);
+>>>>>>> v3.18
 =======
 	psurge_host = irq_domain_add_nomap(NULL, ~0, &psurge_host_ops, NULL);
 >>>>>>> v3.18
@@ -582,7 +586,11 @@ static void __init smp_core99_setup_i2c_hwsync(int ncpus)
 
 	/* Look for the clock chip */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((cc = of_find_node_by_name(cc, "i2c-hwclock")) != NULL) {
+=======
+	for_each_node_by_name(cc, "i2c-hwclock") {
+>>>>>>> v3.18
 =======
 	for_each_node_by_name(cc, "i2c-hwclock") {
 >>>>>>> v3.18
@@ -894,7 +902,11 @@ static int smp_core99_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata smp_core99_cpu_nb = {
+=======
+static struct notifier_block smp_core99_cpu_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block smp_core99_cpu_nb = {
 >>>>>>> v3.18

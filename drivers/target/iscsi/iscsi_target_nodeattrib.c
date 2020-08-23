@@ -2,9 +2,13 @@
  * This file contains the main functions related to Initiator Node Attributes.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -40,7 +44,12 @@ static inline char *iscsit_na_get_initiatorname(
 
 void iscsit_set_default_node_attribues(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_node_acl *acl)
+=======
+	struct iscsi_node_acl *acl,
+	struct iscsi_portal_group *tpg)
+>>>>>>> v3.18
 =======
 	struct iscsi_node_acl *acl,
 	struct iscsi_portal_group *tpg)
@@ -56,7 +65,11 @@ void iscsit_set_default_node_attribues(
 	a->random_datain_seq_offsets = NA_RANDOM_DATAIN_SEQ_OFFSETS;
 	a->random_r2t_offsets = NA_RANDOM_R2T_OFFSETS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	a->default_erl = NA_DEFAULT_ERL;
+=======
+	a->default_erl = tpg->tpg_attrib.default_erl;
+>>>>>>> v3.18
 =======
 	a->default_erl = tpg->tpg_attrib.default_erl;
 >>>>>>> v3.18

@@ -1,16 +1,22 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Linux Base Driver for 10 Gigabit PCI Express Intel(R) Network Connection
 ========================================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2010 Intel Corporation.
 =======
+=======
+>>>>>>> v3.18
 Linux* Base Driver for the Intel(R) Ethernet 10 Gigabit PCI Express Family of
 Adapters
 =============================================================================
 
 Intel 10 Gigabit Linux driver.
 Copyright(c) 1999 - 2013 Intel Corporation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Contents
@@ -26,8 +32,13 @@ Identifying Your Adapter
 ========================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The driver in this release is compatible with 82598 and 82599-based Intel
 Network Connections.
+=======
+The driver in this release is compatible with 82598, 82599 and X540-based
+Intel Network Connections.
+>>>>>>> v3.18
 =======
 The driver in this release is compatible with 82598, 82599 and X540-based
 Intel Network Connections.
@@ -87,7 +98,11 @@ Laser turns off for SFP+ when ifconfig down
 -------------------------------------------
 "ifconfig down" turns off the laser for 82599-based SFP+ fiber adapters.
 <<<<<<< HEAD
+<<<<<<< HEAD
 "ifconfig up" turns on the later.
+=======
+"ifconfig up" turns on the laser.
+>>>>>>> v3.18
 =======
 "ifconfig up" turns on the laser.
 >>>>>>> v3.18
@@ -137,7 +152,10 @@ behavior is changed to off.  Flow control in 1 gig mode on these devices can
 lead to Tx hangs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Intel(R) Ethernet Flow Director
 -------------------------------
 Supports advanced filters that direct receive packets by their flows to
@@ -225,6 +243,9 @@ Default Value: 0
   max_vfs worth of virtual function.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Additional Configurations
 =========================
@@ -330,14 +351,20 @@ Known Issues
 ============
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   Enabling SR-IOV in a 32-bit Microsoft* Windows* Server 2008 Guest OS using
   Intel (R) 82576-based GbE or Intel (R) 82599-based 10GbE controller under KVM
   -----------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
   Enabling SR-IOV in a 32-bit or 64-bit Microsoft* Windows* Server 2008/R2
   Guest OS using Intel (R) 82576-based GbE or Intel (R) 82599-based 10GbE
   controller under KVM
   ------------------------------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   KVM Hypervisor/VMM supports direct assignment of a PCIe device to a VM.  This
   includes traditional PCIe devices, as well as SR-IOV-capable devices using

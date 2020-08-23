@@ -166,7 +166,10 @@ struct adis16400_state {
 
 	struct adis adis;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long avail_scan_mask[2];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -88,6 +88,10 @@
 #define PL080_CONTROL_SB_SIZE_SHIFT		(12)
 #define PL080_CONTROL_TRANSFER_SIZE_MASK	(0xfff << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PL080S_CONTROL_TRANSFER_SIZE_MASK	(0x1ffffff << 0)
+>>>>>>> v3.18
 =======
 #define PL080S_CONTROL_TRANSFER_SIZE_MASK	(0x1ffffff << 0)
 >>>>>>> v3.18

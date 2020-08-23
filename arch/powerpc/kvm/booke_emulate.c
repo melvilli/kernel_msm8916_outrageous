@@ -26,6 +26,10 @@
 #define OP_19_XOP_RFI     50
 #define OP_19_XOP_RFCI    51
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OP_19_XOP_RFDI    39
+>>>>>>> v3.18
 =======
 #define OP_19_XOP_RFDI    39
 >>>>>>> v3.18
@@ -42,13 +46,19 @@ static void kvmppc_emul_rfi(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void kvmppc_emul_rfdi(struct kvm_vcpu *vcpu)
 {
 	vcpu->arch.pc = vcpu->arch.dsrr0;
 	kvmppc_set_msr(vcpu, vcpu->arch.dsrr1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void kvmppc_emul_rfci(struct kvm_vcpu *vcpu)
 {
@@ -79,13 +89,19 @@ int kvmppc_booke_emulate_op(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case OP_19_XOP_RFDI:
 			kvmppc_emul_rfdi(vcpu);
 			kvmppc_set_exit_type(vcpu, EMULATED_RFDI_EXITS);
 			*advance = 0;
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			emulated = EMULATE_FAIL;
@@ -141,6 +157,10 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 {
 	int emulated = EMULATE_DONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool debug_inst = false;
+>>>>>>> v3.18
 =======
 	bool debug_inst = false;
 >>>>>>> v3.18
@@ -159,6 +179,7 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 		vcpu->arch.csrr1 = spr_val;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SPRN_DBCR0:
 		vcpu->arch.dbg_reg.dbcr0 = spr_val;
 		break;
@@ -168,6 +189,8 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 	case SPRN_DBSR:
 		vcpu->arch.dbsr &= ~spr_val;
 =======
+=======
+>>>>>>> v3.18
 	case SPRN_DSRR0:
 		vcpu->arch.dsrr0 = spr_val;
 		break;
@@ -290,6 +313,9 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 		vcpu->arch.dbsr &= ~spr_val;
 		if (!(vcpu->arch.dbsr & ~DBSR_IDE))
 			kvmppc_core_dequeue_debug(vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SPRN_TSR:
@@ -317,6 +343,7 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 	 */
 	case SPRN_SPRG4:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vcpu->arch.shared->sprg4 = spr_val;
 		break;
 	case SPRN_SPRG5:
@@ -328,6 +355,8 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 	case SPRN_SPRG7:
 		vcpu->arch.shared->sprg7 = spr_val;
 =======
+=======
+>>>>>>> v3.18
 		kvmppc_set_sprg4(vcpu, spr_val);
 		break;
 	case SPRN_SPRG5:
@@ -338,6 +367,9 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 		break;
 	case SPRN_SPRG7:
 		kvmppc_set_sprg7(vcpu, spr_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -417,11 +449,17 @@ int kvmppc_booke_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (debug_inst) {
 		current->thread.debug = vcpu->arch.dbg_reg;
 		switch_booke_debug_regs(&vcpu->arch.dbg_reg);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return emulated;
 }
@@ -450,9 +488,12 @@ int kvmppc_booke_emulate_mfspr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val)
 		*spr_val = vcpu->arch.csrr1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SPRN_DBCR0:
 		*spr_val = vcpu->arch.dbg_reg.dbcr0;
 =======
+=======
+>>>>>>> v3.18
 	case SPRN_DSRR0:
 		*spr_val = vcpu->arch.dsrr0;
 		break;
@@ -483,12 +524,21 @@ int kvmppc_booke_emulate_mfspr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val)
 		*spr_val = vcpu->arch.dbg_reg.dbcr0;
 		if (vcpu->guest_debug)
 			*spr_val = *spr_val | DBCR0_EDM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SPRN_DBCR1:
 		*spr_val = vcpu->arch.dbg_reg.dbcr1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case SPRN_DBCR2:
+		*spr_val = vcpu->arch.dbg_reg.dbcr2;
+		break;
+>>>>>>> v3.18
 =======
 	case SPRN_DBCR2:
 		*spr_val = vcpu->arch.dbg_reg.dbcr2;

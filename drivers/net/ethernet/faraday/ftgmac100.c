@@ -25,7 +25,10 @@
 #include <linux/etherdevice.h>
 #include <linux/ethtool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -771,7 +774,11 @@ static void ftgmac100_free_buffers(struct ftgmac100 *priv)
 
 		dma_unmap_single(priv->dev, map, skb_headlen(skb), DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		kfree_skb(skb);
+>>>>>>> v3.18
 =======
 		kfree_skb(skb);
 >>>>>>> v3.18
@@ -786,10 +793,16 @@ static int ftgmac100_alloc_buffers(struct ftgmac100 *priv)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->descs = dma_alloc_coherent(priv->dev,
 					 sizeof(struct ftgmac100_descs),
 					 &priv->descs_dma_addr,
 					 GFP_KERNEL | __GFP_ZERO);
+=======
+	priv->descs = dma_zalloc_coherent(priv->dev,
+					  sizeof(struct ftgmac100_descs),
+					  &priv->descs_dma_addr, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	priv->descs = dma_zalloc_coherent(priv->dev,
 					  sizeof(struct ftgmac100_descs),
@@ -956,11 +969,14 @@ static int ftgmac100_mdiobus_write(struct mii_bus *bus, int phy_addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ftgmac100_mdiobus_reset(struct mii_bus *bus)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /******************************************************************************
@@ -1167,7 +1183,11 @@ static int ftgmac100_hard_start_xmit(struct sk_buff *skb,
 
 		netdev->stats.tx_dropped++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		kfree_skb(skb);
+>>>>>>> v3.18
 =======
 		kfree_skb(skb);
 >>>>>>> v3.18
@@ -1182,7 +1202,11 @@ static int ftgmac100_hard_start_xmit(struct sk_buff *skb,
 
 		netdev->stats.tx_dropped++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		kfree_skb(skb);
+>>>>>>> v3.18
 =======
 		kfree_skb(skb);
 >>>>>>> v3.18
@@ -1242,7 +1266,11 @@ static int ftgmac100_probe(struct platform_device *pdev)
 	SET_NETDEV_DEV(netdev, &pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ftgmac100_ethtool_ops);
+=======
+	netdev->ethtool_ops = &ftgmac100_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ftgmac100_ethtool_ops;
 >>>>>>> v3.18
@@ -1293,7 +1321,10 @@ static int ftgmac100_probe(struct platform_device *pdev)
 	priv->mii_bus->read = ftgmac100_mdiobus_read;
 	priv->mii_bus->write = ftgmac100_mdiobus_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->mii_bus->reset = ftgmac100_mdiobus_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->mii_bus->irq = priv->phy_irq;
@@ -1343,7 +1374,10 @@ err_ioremap:
 err_req_mem:
 	netif_napi_del(&priv->napi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);
@@ -1370,7 +1404,10 @@ static int __exit ftgmac100_remove(struct platform_device *pdev)
 
 	netif_napi_del(&priv->napi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);

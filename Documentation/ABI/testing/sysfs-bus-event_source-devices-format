@@ -10,13 +10,19 @@ Description:
 		name/value pairs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		Userspace must be prepared for the possibility that attributes
 		define overlapping bit ranges. For example:
 			attr1 = 'config:0-23'
 			attr2 = 'config:0-7'
 			attr3 = 'config:12-35'
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		Example: 'config1:1,6-10,44'
 		Defines contents of attribute that occupies bits 1,6-10,44 of

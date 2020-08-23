@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -29,6 +32,7 @@
 
 #include "../comedi.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define i8253_cascade_ns_to_timer i8253_cascade_ns_to_timer_2div
 
@@ -131,6 +135,8 @@ static inline void i8253_cascade_ns_to_timer_2div(int i8253_osc_base,
 						  unsigned int *nanosec,
 						  int round_mode)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Common oscillator base values in nanoseconds
  */
@@ -145,6 +151,9 @@ static inline void i8253_cascade_ns_to_timer(int i8253_osc_base,
 					     unsigned int *d2,
 					     unsigned int *nanosec,
 					     unsigned int flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int divider;
@@ -202,9 +211,14 @@ static inline void i8253_cascade_ns_to_timer(int i8253_osc_base,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	round_mode &= TRIG_ROUND_MASK;
 	switch (round_mode) {
 	case TRIG_ROUND_NEAREST:
+=======
+	switch (flags & CMDF_ROUND_MASK) {
+	case CMDF_ROUND_NEAREST:
+>>>>>>> v3.18
 =======
 	switch (flags & CMDF_ROUND_MASK) {
 	case CMDF_ROUND_NEAREST:
@@ -221,17 +235,23 @@ static inline void i8253_cascade_ns_to_timer(int i8253_osc_base,
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TRIG_ROUND_UP:
 		div1 = div1_lub;
 		div2 = div2_lub;
 		break;
 	case TRIG_ROUND_DOWN:
 =======
+=======
+>>>>>>> v3.18
 	case CMDF_ROUND_UP:
 		div1 = div1_lub;
 		div2 = div2_lub;
 		break;
 	case CMDF_ROUND_DOWN:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		div1 = div1_glb;
 		div2 = div2_glb;
@@ -243,7 +263,10 @@ static inline void i8253_cascade_ns_to_timer(int i8253_osc_base,
 	*d1 = div1 & 0xffff;
 	*d2 = div2 & 0xffff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -419,7 +442,11 @@ static inline int i8254_set_mode(unsigned long base_address,
 	if (counter_number > 2)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mode > (I8254_MODE5 | I8254_BINARY))
+=======
+	if (mode > (I8254_MODE5 | I8254_BCD))
+>>>>>>> v3.18
 =======
 	if (mode > (I8254_MODE5 | I8254_BCD))
 >>>>>>> v3.18
@@ -443,7 +470,11 @@ static inline int i8254_mm_set_mode(void __iomem *base_address,
 	if (counter_number > 2)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mode > (I8254_MODE5 | I8254_BINARY))
+=======
+	if (mode > (I8254_MODE5 | I8254_BCD))
+>>>>>>> v3.18
 =======
 	if (mode > (I8254_MODE5 | I8254_BCD))
 >>>>>>> v3.18

@@ -16,6 +16,10 @@
 #include <asm/octeon/cvmx-pci-defs.h>
 #include <asm/octeon/cvmx-npei-defs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/octeon/cvmx-sli-defs.h>
+>>>>>>> v3.18
 =======
 #include <asm/octeon/cvmx-sli-defs.h>
 >>>>>>> v3.18
@@ -77,8 +81,12 @@ int arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
 	 * configured_private_bits and request_private_bits equal 0.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(dev, desc->msi_attrib.pos + PCI_MSI_FLAGS,
 			     &control);
+=======
+	pci_read_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS, &control);
+>>>>>>> v3.18
 =======
 	pci_read_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS, &control);
 >>>>>>> v3.18
@@ -159,6 +167,10 @@ msi_irq_allocated:
 			((128ul << 20) + CVMX_PCI_MSI_RCV) & 0xffffffff;
 		msg.address_hi = ((128ul << 20) + CVMX_PCI_MSI_RCV) >> 32;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -174,12 +186,18 @@ msi_irq_allocated:
 		msg.address_hi = (0 + CVMX_NPEI_PCIE_MSI_RCV) >> 32;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case OCTEON_DMA_BAR_TYPE_PCIE2:
 		/* When using PCIe2, Bar 0 is based at 0 */
 		msg.address_lo = (0 + CVMX_SLI_PCIE_MSI_RCV) & 0xffffffff;
 		msg.address_hi = (0 + CVMX_SLI_PCIE_MSI_RCV) >> 32;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		panic("arch_setup_msi_irq: Invalid octeon_dma_bar_type");
@@ -190,8 +208,12 @@ msi_irq_allocated:
 	control &= ~PCI_MSI_FLAGS_QSIZE;
 	control |= request_private_bits << 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_write_config_word(dev, desc->msi_attrib.pos + PCI_MSI_FLAGS,
 			      control);
+=======
+	pci_write_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS, control);
+>>>>>>> v3.18
 =======
 	pci_write_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS, control);
 >>>>>>> v3.18

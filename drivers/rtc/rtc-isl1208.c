@@ -145,11 +145,15 @@ static int
 isl1208_i2c_get_sr(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sr = i2c_smbus_read_byte_data(client, ISL1208_REG_SR);
 	if (sr < 0)
 		return -EIO;
 
 	return sr;
+=======
+	return i2c_smbus_read_byte_data(client, ISL1208_REG_SR);
+>>>>>>> v3.18
 =======
 	return i2c_smbus_read_byte_data(client, ISL1208_REG_SR);
 >>>>>>> v3.18
@@ -652,16 +656,22 @@ isl1208_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 	if (client->irq > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = request_threaded_irq(client->irq, NULL,
 					  isl1208_rtc_interrupt,
 					  IRQF_SHARED,
 					  isl1208_driver.driver.name, client);
 =======
+=======
+>>>>>>> v3.18
 		rc = devm_request_threaded_irq(&client->dev, client->irq, NULL,
 					       isl1208_rtc_interrupt,
 					       IRQF_SHARED,
 					       isl1208_driver.driver.name,
 					       client);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!rc) {
 			device_init_wakeup(&client->dev, 1);
@@ -675,6 +685,7 @@ isl1208_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc = rtc_device_register(isl1208_driver.driver.name,
 				  &client->dev, &isl1208_rtc_ops,
 				  THIS_MODULE);
@@ -683,11 +694,16 @@ isl1208_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		goto exit_free_irq;
 	}
 =======
+=======
+>>>>>>> v3.18
 	rtc = devm_rtc_device_register(&client->dev, isl1208_driver.driver.name,
 				  &isl1208_rtc_ops,
 				  THIS_MODULE);
 	if (IS_ERR(rtc))
 		return PTR_ERR(rtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c_set_clientdata(client, rtc);
@@ -696,7 +712,11 @@ isl1208_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	if (rc < 0) {
 		dev_err(&client->dev, "reading status failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_unregister;
+=======
+		return rc;
+>>>>>>> v3.18
 =======
 		return rc;
 >>>>>>> v3.18
@@ -708,6 +728,7 @@ isl1208_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 	rc = sysfs_create_group(&client->dev.kobj, &isl1208_rtc_sysfs_files);
 	if (rc)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto exit_unregister;
 
@@ -725,11 +746,17 @@ exit_free_irq:
 
 	return 0;
 >>>>>>> v3.18
+=======
+		return rc;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int
 isl1208_remove(struct i2c_client *client)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rtc_device *rtc = i2c_get_clientdata(client);
 
@@ -737,6 +764,9 @@ isl1208_remove(struct i2c_client *client)
 	rtc_device_unregister(rtc);
 	if (client->irq)
 		free_irq(client->irq, client);
+=======
+	sysfs_remove_group(&client->dev.kobj, &isl1208_rtc_sysfs_files);
+>>>>>>> v3.18
 =======
 	sysfs_remove_group(&client->dev.kobj, &isl1208_rtc_sysfs_files);
 >>>>>>> v3.18

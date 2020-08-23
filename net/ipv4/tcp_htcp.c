@@ -99,7 +99,12 @@ static inline void measure_rtt(struct sock *sk, u32 srtt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void measure_achieved_throughput(struct sock *sk, u32 pkts_acked, s32 rtt)
+=======
+static void measure_achieved_throughput(struct sock *sk,
+					u32 pkts_acked, s32 rtt)
+>>>>>>> v3.18
 =======
 static void measure_achieved_throughput(struct sock *sk,
 					u32 pkts_acked, s32 rtt)
@@ -154,8 +159,13 @@ static inline void htcp_beta_update(struct htcp *ca, u32 minRTT, u32 maxRTT)
 		u32 maxB = ca->maxB;
 		u32 old_maxB = ca->old_maxB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ca->old_maxB = ca->maxB;
 
+=======
+
+		ca->old_maxB = ca->maxB;
+>>>>>>> v3.18
 =======
 
 		ca->old_maxB = ca->maxB;
@@ -238,7 +248,11 @@ static u32 htcp_recalc_ssthresh(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void htcp_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void htcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void htcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -247,17 +261,23 @@ static void htcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 	struct htcp *ca = inet_csk_ca(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tcp_is_cwnd_limited(sk, in_flight))
 		return;
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp);
 =======
+=======
+>>>>>>> v3.18
 	if (!tcp_is_cwnd_limited(sk))
 		return;
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp, acked);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		/* In dangerous area, increase slowly.
@@ -293,6 +313,10 @@ static void htcp_state(struct sock *sk, u8 new_state)
 		{
 			struct htcp *ca = inet_csk_ca(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -13,15 +13,21 @@
 #include <linux/errno.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/spi/spi.h>
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/spi/spi.h>
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 #include <asm/unaligned.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FIRMWARE_NAME	"lattice-ecp3.bit"
@@ -87,12 +93,18 @@ static void firmware_load(const struct firmware *fw, void *context)
 	u32 status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fw == NULL) {
 		dev_err(&spi->dev, "Cannot load firmware, aborting\n");
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (fw->size == 0) {
 		dev_err(&spi->dev, "Error: Firmware size is 0!\n");
@@ -108,8 +120,13 @@ static void firmware_load(const struct firmware *fw, void *context)
 	txbuf[0] = FPGA_CMD_READ_ID;
 	ret = spi_write_then_read(spi, txbuf, 8, rxbuf, rx_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&spi->dev, "FPGA JTAG ID=%08x\n", *(u32 *)&rxbuf[4]);
 	jedec_id = *(u32 *)&rxbuf[4];
+=======
+	jedec_id = get_unaligned_be32(&rxbuf[4]);
+	dev_dbg(&spi->dev, "FPGA JTAG ID=%08x\n", jedec_id);
+>>>>>>> v3.18
 =======
 	jedec_id = get_unaligned_be32(&rxbuf[4]);
 	dev_dbg(&spi->dev, "FPGA JTAG ID=%08x\n", jedec_id);
@@ -131,7 +148,12 @@ static void firmware_load(const struct firmware *fw, void *context)
 	txbuf[0] = FPGA_CMD_READ_STATUS;
 	ret = spi_write_then_read(spi, txbuf, 8, rxbuf, rx_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&spi->dev, "FPGA Status=%08x\n", *(u32 *)&rxbuf[4]);
+=======
+	status = get_unaligned_be32(&rxbuf[4]);
+	dev_dbg(&spi->dev, "FPGA Status=%08x\n", status);
+>>>>>>> v3.18
 =======
 	status = get_unaligned_be32(&rxbuf[4]);
 	dev_dbg(&spi->dev, "FPGA Status=%08x\n", status);
@@ -168,7 +190,11 @@ static void firmware_load(const struct firmware *fw, void *context)
 		txbuf[0] = FPGA_CMD_READ_STATUS;
 		ret = spi_write_then_read(spi, txbuf, 8, rxbuf, rx_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = *(u32 *)&rxbuf[4];
+=======
+		status = get_unaligned_be32(&rxbuf[4]);
+>>>>>>> v3.18
 =======
 		status = get_unaligned_be32(&rxbuf[4]);
 >>>>>>> v3.18
@@ -195,6 +221,7 @@ static void firmware_load(const struct firmware *fw, void *context)
 	txbuf[0] = FPGA_CMD_READ_STATUS;
 	ret = spi_write_then_read(spi, txbuf, 8, rxbuf, rx_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&spi->dev, "FPGA Status=%08x\n", *(u32 *)&rxbuf[4]);
 	status = *(u32 *)&rxbuf[4];
 
@@ -202,12 +229,17 @@ static void firmware_load(const struct firmware *fw, void *context)
 	if (status & FPGA_STATUS_DONE)
 		dev_info(&spi->dev, "FPGA succesfully configured!\n");
 =======
+=======
+>>>>>>> v3.18
 	status = get_unaligned_be32(&rxbuf[4]);
 	dev_dbg(&spi->dev, "FPGA Status=%08x\n", status);
 
 	/* Check result */
 	if (status & FPGA_STATUS_DONE)
 		dev_info(&spi->dev, "FPGA successfully configured!\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		dev_info(&spi->dev, "FPGA not configured (DONE not set)\n");
@@ -236,7 +268,11 @@ static int lattice_ecp3_probe(struct spi_device *spi)
 
 	init_completion(&data->fw_loaded);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_firmware_nowait(THIS_MODULE, FW_ACTION_NOHOTPLUG,
+=======
+	err = request_firmware_nowait(THIS_MODULE, FW_ACTION_HOTPLUG,
+>>>>>>> v3.18
 =======
 	err = request_firmware_nowait(THIS_MODULE, FW_ACTION_HOTPLUG,
 >>>>>>> v3.18
@@ -284,6 +320,10 @@ MODULE_AUTHOR("Stefan Roese <sr@denx.de>");
 MODULE_DESCRIPTION("Lattice ECP3 FPGA configuration via SPI");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE(FIRMWARE_NAME);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(FIRMWARE_NAME);
 >>>>>>> v3.18

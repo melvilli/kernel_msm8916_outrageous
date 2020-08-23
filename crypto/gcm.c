@@ -110,7 +110,11 @@ static int crypto_gcm_setkey(struct crypto_aead *aead, const u8 *key,
 	struct {
 		be128 hash;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 iv[16];
+=======
+		u8 iv[8];
+>>>>>>> v3.18
 =======
 		u8 iv[8];
 >>>>>>> v3.18
@@ -233,7 +237,11 @@ static void gcm_hash_final_done(struct crypto_async_request *areq, int err);
 static int gcm_hash_update(struct aead_request *req,
 			   struct crypto_gcm_req_priv_ctx *pctx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   crypto_completion_t complete,
+=======
+			   crypto_completion_t compl,
+>>>>>>> v3.18
 =======
 			   crypto_completion_t compl,
 >>>>>>> v3.18
@@ -244,7 +252,11 @@ static int gcm_hash_update(struct aead_request *req,
 
 	ahash_request_set_callback(ahreq, aead_request_flags(req),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   complete, req);
+=======
+				   compl, req);
+>>>>>>> v3.18
 =======
 				   compl, req);
 >>>>>>> v3.18
@@ -257,7 +269,11 @@ static int gcm_hash_remain(struct aead_request *req,
 			   struct crypto_gcm_req_priv_ctx *pctx,
 			   unsigned int remain,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   crypto_completion_t complete)
+=======
+			   crypto_completion_t compl)
+>>>>>>> v3.18
 =======
 			   crypto_completion_t compl)
 >>>>>>> v3.18
@@ -266,7 +282,11 @@ static int gcm_hash_remain(struct aead_request *req,
 
 	ahash_request_set_callback(ahreq, aead_request_flags(req),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   complete, req);
+=======
+				   compl, req);
+>>>>>>> v3.18
 =======
 				   compl, req);
 >>>>>>> v3.18
@@ -396,7 +416,11 @@ static void __gcm_hash_assoc_remain_done(struct aead_request *req, int err)
 	struct crypto_gcm_req_priv_ctx *pctx = crypto_gcm_reqctx(req);
 	struct crypto_gcm_ghash_ctx *gctx = &pctx->ghash_ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete;
+=======
+	crypto_completion_t compl;
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl;
 >>>>>>> v3.18
@@ -405,9 +429,15 @@ static void __gcm_hash_assoc_remain_done(struct aead_request *req, int err)
 	if (!err && gctx->cryptlen) {
 		remain = gcm_remain(gctx->cryptlen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		complete = remain ? gcm_hash_crypt_done :
 			gcm_hash_crypt_remain_done;
 		err = gcm_hash_update(req, pctx, complete,
+=======
+		compl = remain ? gcm_hash_crypt_done :
+			gcm_hash_crypt_remain_done;
+		err = gcm_hash_update(req, pctx, compl,
+>>>>>>> v3.18
 =======
 		compl = remain ? gcm_hash_crypt_done :
 			gcm_hash_crypt_remain_done;
@@ -460,7 +490,11 @@ static void __gcm_hash_init_done(struct aead_request *req, int err)
 {
 	struct crypto_gcm_req_priv_ctx *pctx = crypto_gcm_reqctx(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete;
+=======
+	crypto_completion_t compl;
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl;
 >>>>>>> v3.18
@@ -469,9 +503,15 @@ static void __gcm_hash_init_done(struct aead_request *req, int err)
 	if (!err && req->assoclen) {
 		remain = gcm_remain(req->assoclen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		complete = remain ? gcm_hash_assoc_done :
 			gcm_hash_assoc_remain_done;
 		err = gcm_hash_update(req, pctx, complete,
+=======
+		compl = remain ? gcm_hash_assoc_done :
+			gcm_hash_assoc_remain_done;
+		err = gcm_hash_update(req, pctx, compl,
+>>>>>>> v3.18
 =======
 		compl = remain ? gcm_hash_assoc_done :
 			gcm_hash_assoc_remain_done;
@@ -503,7 +543,11 @@ static int gcm_hash(struct aead_request *req,
 	struct crypto_gcm_ctx *ctx = crypto_tfm_ctx(req->base.tfm);
 	unsigned int remain;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete;
+=======
+	crypto_completion_t compl;
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl;
 >>>>>>> v3.18
@@ -518,8 +562,13 @@ static int gcm_hash(struct aead_request *req,
 		return err;
 	remain = gcm_remain(req->assoclen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete = remain ? gcm_hash_assoc_done : gcm_hash_assoc_remain_done;
 	err = gcm_hash_update(req, pctx, complete, req->assoc, req->assoclen);
+=======
+	compl = remain ? gcm_hash_assoc_done : gcm_hash_assoc_remain_done;
+	err = gcm_hash_update(req, pctx, compl, req->assoc, req->assoclen);
+>>>>>>> v3.18
 =======
 	compl = remain ? gcm_hash_assoc_done : gcm_hash_assoc_remain_done;
 	err = gcm_hash_update(req, pctx, compl, req->assoc, req->assoclen);
@@ -534,8 +583,13 @@ static int gcm_hash(struct aead_request *req,
 	}
 	remain = gcm_remain(gctx->cryptlen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete = remain ? gcm_hash_crypt_done : gcm_hash_crypt_remain_done;
 	err = gcm_hash_update(req, pctx, complete, gctx->src, gctx->cryptlen);
+=======
+	compl = remain ? gcm_hash_crypt_done : gcm_hash_crypt_remain_done;
+	err = gcm_hash_update(req, pctx, compl, gctx->src, gctx->cryptlen);
+>>>>>>> v3.18
 =======
 	compl = remain ? gcm_hash_crypt_done : gcm_hash_crypt_remain_done;
 	err = gcm_hash_update(req, pctx, compl, gctx->src, gctx->cryptlen);
@@ -771,9 +825,13 @@ static struct crypto_instance *crypto_gcm_alloc_common(struct rtattr **tb,
 	ghash_alg = crypto_find_alg(ghash_name, &crypto_ahash_type,
 				    CRYPTO_ALG_TYPE_HASH,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    CRYPTO_ALG_TYPE_AHASH_MASK |
 				    crypto_requires_sync(algt->type,
 							 algt->mask));
+=======
+				    CRYPTO_ALG_TYPE_AHASH_MASK);
+>>>>>>> v3.18
 =======
 				    CRYPTO_ALG_TYPE_AHASH_MASK);
 >>>>>>> v3.18
@@ -1234,9 +1292,12 @@ static struct aead_request *crypto_rfc4543_crypt(struct aead_request *req,
 	aead_request_set_callback(subreq, req->base.flags, crypto_rfc4543_done,
 				  req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!enc)
 		aead_request_set_callback(subreq, req->base.flags,
 					  req->base.complete, req->base.data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	aead_request_set_crypt(subreq, cipher, cipher, enc ? 0 : authsize, iv);
@@ -1508,10 +1569,16 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Galois/Counter Mode");
 MODULE_AUTHOR("Mikko Herranen <mh1@iki.fi>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("gcm_base");
 MODULE_ALIAS_CRYPTO("rfc4106");
 MODULE_ALIAS_CRYPTO("rfc4543");
 MODULE_ALIAS_CRYPTO("gcm");
+=======
+MODULE_ALIAS("gcm_base");
+MODULE_ALIAS("rfc4106");
+MODULE_ALIAS("rfc4543");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("gcm_base");
 MODULE_ALIAS("rfc4106");

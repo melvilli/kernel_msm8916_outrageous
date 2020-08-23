@@ -2,12 +2,15 @@
  * Linux Socket Filter - Kernel level socket filtering
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author:
  *     Jay Schulist <jschlst@samba.org>
  *
  * Based on the design of:
  *     - The Berkeley Packet Filter
 =======
+=======
+>>>>>>> v3.18
  * Based on the design of the Berkeley Packet Filter. The new
  * internal format has been designed by PLUMgrid:
  *
@@ -18,6 +21,9 @@
  *	Jay Schulist <jschlst@samba.org>
  *	Alexei Starovoitov <ast@plumgrid.com>
  *	Daniel Borkmann <dborkman@redhat.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or
@@ -27,7 +33,11 @@
  *
  * Andi Kleen - Fix a few bad bugs and races.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Kris Katterjohn - Added many additional checks in sk_chk_filter()
+=======
+ * Kris Katterjohn - Added many additional checks in bpf_check_classic()
+>>>>>>> v3.18
 =======
  * Kris Katterjohn - Added many additional checks in bpf_check_classic()
 >>>>>>> v3.18
@@ -57,6 +67,7 @@
 #include <linux/seccomp.h>
 #include <linux/if_vlan.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* No hurry in this branch
  *
@@ -99,6 +110,8 @@ static inline void *load_pointer(const struct sk_buff *skb, int k,
  */
 int sk_filter_trim_cap(struct sock *sk, struct sk_buff *skb, unsigned int cap)
 =======
+=======
+>>>>>>> v3.18
 /**
  *	sk_filter - run a packet through a socket filter
  *	@sk: sock associated with &sk_buff
@@ -112,6 +125,9 @@ int sk_filter_trim_cap(struct sock *sk, struct sk_buff *skb, unsigned int cap)
  *
  */
 int sk_filter(struct sock *sk, struct sk_buff *skb)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err;
@@ -134,7 +150,12 @@ int sk_filter(struct sock *sk, struct sk_buff *skb)
 	if (filter) {
 		unsigned int pkt_len = SK_RUN_FILTER(filter, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = pkt_len ? pskb_trim(skb, max(cap, pkt_len)) : -EPERM;
+=======
+
+		err = pkt_len ? pskb_trim(skb, pkt_len) : -EPERM;
+>>>>>>> v3.18
 =======
 
 		err = pkt_len ? pskb_trim(skb, pkt_len) : -EPERM;
@@ -144,6 +165,7 @@ int sk_filter(struct sock *sk, struct sk_buff *skb)
 
 	return err;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(sk_filter_trim_cap);
 
@@ -464,6 +486,8 @@ static int check_load_and_stores(struct sock_filter *filter, int flen)
 	if (!masks)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(sk_filter);
 
 static u64 __skb_get_pay_offset(u64 ctx, u64 a, u64 x, u64 r4, u64 r5)
@@ -961,6 +985,9 @@ static int check_load_and_stores(const struct sock_filter *filter, int flen)
 	if (!masks)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(masks, 0xff, flen * sizeof(*masks));
 
@@ -969,6 +996,7 @@ static int check_load_and_stores(const struct sock_filter *filter, int flen)
 
 		switch (filter[pc].code) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ST:
 		case BPF_S_STX:
 			memvalid |= (1 << filter[pc].k);
@@ -976,18 +1004,24 @@ static int check_load_and_stores(const struct sock_filter *filter, int flen)
 		case BPF_S_LD_MEM:
 		case BPF_S_LDX_MEM:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ST:
 		case BPF_STX:
 			memvalid |= (1 << filter[pc].k);
 			break;
 		case BPF_LD | BPF_MEM:
 		case BPF_LDX | BPF_MEM:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!(memvalid & (1 << filter[pc].k))) {
 				ret = -EINVAL;
 				goto error;
 			}
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_JMP_JA:
 			/* a jump must set masks on target */
@@ -1004,6 +1038,8 @@ static int check_load_and_stores(const struct sock_filter *filter, int flen)
 		case BPF_S_JMP_JSET_K:
 			/* a jump must set masks on targets */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_JMP | BPF_JA:
 			/* A jump must set masks on target */
 			masks[pc + 1 + filter[pc].k] &= memvalid;
@@ -1018,6 +1054,9 @@ static int check_load_and_stores(const struct sock_filter *filter, int flen)
 		case BPF_JMP | BPF_JSET | BPF_K:
 		case BPF_JMP | BPF_JSET | BPF_X:
 			/* A jump must set masks on targets */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			masks[pc + 1 + filter[pc].jt] &= memvalid;
 			masks[pc + 1 + filter[pc].jf] &= memvalid;
@@ -1031,9 +1070,12 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  *	sk_chk_filter - verify socket filter code
 =======
+=======
+>>>>>>> v3.18
 static bool chk_code_allowed(u16 code_to_probe)
 {
 	static const bool codes[] = {
@@ -1102,6 +1144,9 @@ static bool chk_code_allowed(u16 code_to_probe)
 
 /**
  *	bpf_check_classic - verify socket filter code
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	@filter: filter to verify
  *	@flen: length of filter
@@ -1115,6 +1160,7 @@ static bool chk_code_allowed(u16 code_to_probe)
  *
  * Returns 0 if the rule set is legal or -EINVAL if not.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int sk_chk_filter(struct sock_filter *filter, unsigned int flen)
 {
@@ -1176,15 +1222,21 @@ int sk_chk_filter(struct sock_filter *filter, unsigned int flen)
 	int pc;
 	bool anc_found;
 =======
+=======
+>>>>>>> v3.18
 int bpf_check_classic(const struct sock_filter *filter, unsigned int flen)
 {
 	bool anc_found;
 	int pc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (flen == 0 || flen > BPF_MAXINSNS)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* check the filter code now */
 	for (pc = 0; pc < flen; pc++) {
@@ -1231,6 +1283,8 @@ int bpf_check_classic(const struct sock_filter *filter, unsigned int flen)
 		case BPF_S_JMP_JSET_K:
 			/* for conditionals both must be safe */
 =======
+=======
+>>>>>>> v3.18
 	/* Check the filter code now */
 	for (pc = 0; pc < flen; pc++) {
 		const struct sock_filter *ftest = &filter[pc];
@@ -1272,11 +1326,15 @@ int bpf_check_classic(const struct sock_filter *filter, unsigned int flen)
 		case BPF_JMP | BPF_JSET | BPF_K:
 		case BPF_JMP | BPF_JSET | BPF_X:
 			/* Both conditionals must be safe */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (pc + ftest->jt + 1 >= flen ||
 			    pc + ftest->jf + 1 >= flen)
 				return -EINVAL;
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_LD_W_ABS:
 		case BPF_S_LD_H_ABS:
@@ -1320,6 +1378,8 @@ int bpf_check_classic(const struct sock_filter *filter, unsigned int flen)
 }
 EXPORT_SYMBOL(sk_chk_filter);
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LD | BPF_W | BPF_ABS:
 		case BPF_LD | BPF_H | BPF_ABS:
 		case BPF_LD | BPF_B | BPF_ABS:
@@ -1385,12 +1445,16 @@ static void __sk_filter_release(struct sk_filter *fp)
 	__bpf_prog_release(fp->prog);
 	kfree(fp);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * 	sk_filter_release_rcu - Release a socket filter by rcu_head
  *	@rcu: rcu_head that contains the sk_filter to free
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void sk_filter_release_rcu(struct rcu_head *rcu)
 {
@@ -1420,6 +1484,8 @@ static int __sk_prepare_filter(struct sk_filter *fp)
  *	@fprog: the filter program
  *	@pfp: the unattached filter that is created
 =======
+=======
+>>>>>>> v3.18
 static void sk_filter_release_rcu(struct rcu_head *rcu)
 {
 	struct sk_filter *fp = container_of(rcu, struct sk_filter, rcu);
@@ -1561,6 +1627,9 @@ static struct bpf_prog *bpf_prepare_filter(struct bpf_prog *fp)
  *	bpf_prog_create - create an unattached filter
  *	@pfp: the unattached filter that is created
  *	@fprog: the filter program
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Create a filter independent of any socket. We first run some
@@ -1569,6 +1638,7 @@ static struct bpf_prog *bpf_prepare_filter(struct bpf_prog *fp)
  * a negative errno code is returned. On success the return is zero.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sk_unattached_filter_create(struct sk_filter **pfp,
 				struct sock_fprog *fprog)
 {
@@ -1576,16 +1646,22 @@ int sk_unattached_filter_create(struct sk_filter **pfp,
 	unsigned int fsize = sizeof(struct sock_filter) * fprog->len;
 	int err;
 =======
+=======
+>>>>>>> v3.18
 int bpf_prog_create(struct bpf_prog **pfp, struct sock_fprog_kern *fprog)
 {
 	unsigned int fsize = bpf_classic_proglen(fprog);
 	struct bpf_prog *fp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Make sure new filter is there and in the right amounts. */
 	if (fprog->filter == NULL)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fp = kmalloc(fsize + sizeof(*fp), GFP_KERNEL);
 	if (!fp)
@@ -1613,6 +1689,8 @@ void sk_unattached_filter_destroy(struct sk_filter *fp)
 }
 EXPORT_SYMBOL_GPL(sk_unattached_filter_destroy);
 =======
+=======
+>>>>>>> v3.18
 	fp = bpf_prog_alloc(bpf_prog_size(fprog->len), 0);
 	if (!fp)
 		return -ENOMEM;
@@ -1643,6 +1721,9 @@ void bpf_prog_destroy(struct bpf_prog *fp)
 	__bpf_prog_release(fp);
 }
 EXPORT_SYMBOL_GPL(bpf_prog_destroy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1659,7 +1740,13 @@ int sk_attach_filter(struct sock_fprog *fprog, struct sock *sk)
 {
 	struct sk_filter *fp, *old_fp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int fsize = sizeof(struct sock_filter) * fprog->len;
+=======
+	unsigned int fsize = bpf_classic_proglen(fprog);
+	unsigned int bpf_fsize = bpf_prog_size(fprog->len);
+	struct bpf_prog *prog;
+>>>>>>> v3.18
 =======
 	unsigned int fsize = bpf_classic_proglen(fprog);
 	unsigned int bpf_fsize = bpf_prog_size(fprog->len);
@@ -1674,6 +1761,7 @@ int sk_attach_filter(struct sock_fprog *fprog, struct sock *sk)
 	if (fprog->filter == NULL)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fp = sock_kmalloc(sk, fsize+sizeof(*fp), GFP_KERNEL);
 	if (!fp)
@@ -1691,6 +1779,8 @@ int sk_attach_filter(struct sock_fprog *fprog, struct sock *sk)
 		sk_filter_uncharge(sk, fp);
 		return err;
 =======
+=======
+>>>>>>> v3.18
 	prog = bpf_prog_alloc(bpf_fsize, 0);
 	if (!prog)
 		return -ENOMEM;
@@ -1727,6 +1817,9 @@ int sk_attach_filter(struct sock_fprog *fprog, struct sock *sk)
 	if (!sk_filter_charge(sk, fp)) {
 		__sk_filter_release(fp);
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1737,6 +1830,10 @@ int sk_attach_filter(struct sock_fprog *fprog, struct sock *sk)
 	if (old_fp)
 		sk_filter_uncharge(sk, old_fp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1760,6 +1857,10 @@ int sk_detach_filter(struct sock *sk)
 		ret = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1767,6 +1868,7 @@ int sk_detach_filter(struct sock *sk)
 }
 EXPORT_SYMBOL_GPL(sk_detach_filter);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void sk_decode_filter(struct sock_filter *filt, struct sock_filter *to)
 {
@@ -1875,6 +1977,8 @@ int sk_get_filter(struct sock *sk, struct sock_filter __user *ubuf, unsigned int
 
 	ret = filter->len;
 =======
+=======
+>>>>>>> v3.18
 int sk_get_filter(struct sock *sk, struct sock_filter __user *ubuf,
 		  unsigned int len)
 {
@@ -1910,6 +2014,9 @@ int sk_get_filter(struct sock *sk, struct sock_filter __user *ubuf,
 	 * of filter blocks.
 	 */
 	ret = fprog->len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	release_sock(sk);

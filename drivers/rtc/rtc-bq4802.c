@@ -187,6 +187,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bq4802_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
@@ -194,6 +195,8 @@ static int bq4802_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* work with hotplug and coldplug */
@@ -206,7 +209,10 @@ static struct platform_driver bq4802_driver = {
 	},
 	.probe		= bq4802_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= bq4802_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

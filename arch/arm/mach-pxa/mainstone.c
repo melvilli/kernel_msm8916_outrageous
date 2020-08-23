@@ -339,6 +339,10 @@ static struct platform_pwm_backlight_data mainstone_backlight_data = {
 	.dft_brightness	= 1023,
 	.pwm_period_ns	= 78770,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -405,7 +409,11 @@ static int mainstone_mci_init(struct device *dev, irq_handler_t mstone_detect_in
 	MST_MSCWR1 &= ~MST_MSCWR1_MS_SEL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_irq(MAINSTONE_MMC_IRQ, mstone_detect_int, IRQF_DISABLED,
+=======
+	err = request_irq(MAINSTONE_MMC_IRQ, mstone_detect_int, 0,
+>>>>>>> v3.18
 =======
 	err = request_irq(MAINSTONE_MMC_IRQ, mstone_detect_int, 0,
 >>>>>>> v3.18
@@ -417,7 +425,11 @@ static int mainstone_mci_init(struct device *dev, irq_handler_t mstone_detect_in
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mainstone_mci_setpower(struct device *dev, unsigned int vdd)
+=======
+static int mainstone_mci_setpower(struct device *dev, unsigned int vdd)
+>>>>>>> v3.18
 =======
 static int mainstone_mci_setpower(struct device *dev, unsigned int vdd)
 >>>>>>> v3.18
@@ -433,6 +445,10 @@ static int mainstone_mci_setpower(struct device *dev, unsigned int vdd)
 		MST_MSCWR1 &= ~MST_MSCWR1_MMC_ON;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -515,7 +531,11 @@ static struct pxaohci_platform_data mainstone_ohci_platform_data = {
 
 #if defined(CONFIG_KEYBOARD_PXA27x) || defined(CONFIG_KEYBOARD_PXA27x_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int mainstone_matrix_keys[] = {
+=======
+static const unsigned int mainstone_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int mainstone_matrix_keys[] = {
 >>>>>>> v3.18
@@ -548,12 +568,15 @@ static const unsigned int mainstone_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pxa27x_keypad_platform_data mainstone_keypad_info = {
 	.matrix_key_rows	= 6,
 	.matrix_key_cols	= 7,
 	.matrix_key_map		= mainstone_matrix_keys,
 	.matrix_key_map_size	= ARRAY_SIZE(mainstone_matrix_keys),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data mainstone_matrix_keymap_data = {
 	.keymap			= mainstone_matrix_keys,
 	.keymap_size		= ARRAY_SIZE(mainstone_matrix_keys),
@@ -563,6 +586,9 @@ struct pxa27x_keypad_platform_data mainstone_keypad_info = {
 	.matrix_key_rows	= 6,
 	.matrix_key_cols	= 7,
 	.matrix_keymap_data	= &mainstone_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.enable_rotary0		= 1,

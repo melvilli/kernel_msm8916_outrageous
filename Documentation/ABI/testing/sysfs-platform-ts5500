@@ -31,7 +31,10 @@ Description:
 		2, 3 and 4 are set.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:		/sys/devices/platform/ts5500/name
 Date:		July 2014
 KernelVersion:	3.16
@@ -39,6 +42,9 @@ Contact:	"Savoir-faire Linux Inc." <kernel@savoirfairelinux.com>
 Description:
 		Model name of the TS board, e.g. "TS-5500".
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:		/sys/devices/platform/ts5500/rs485
 Date:		January 2013

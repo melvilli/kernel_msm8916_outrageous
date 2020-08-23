@@ -25,7 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/io.h>
@@ -63,8 +66,11 @@ static int cfi_amdstd_suspend (struct mtd_info *);
 static void cfi_amdstd_resume (struct mtd_info *);
 static int cfi_amdstd_reboot(struct notifier_block *, unsigned long, void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cfi_amdstd_secsi_read (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
 =======
+=======
+>>>>>>> v3.18
 static int cfi_amdstd_get_fact_prot_info(struct mtd_info *, size_t,
 					 size_t *, struct otp_info *);
 static int cfi_amdstd_get_user_prot_info(struct mtd_info *, size_t,
@@ -77,6 +83,9 @@ static int cfi_amdstd_read_user_prot_reg(struct mtd_info *, loff_t, size_t,
 static int cfi_amdstd_write_user_prot_reg(struct mtd_info *, loff_t, size_t,
 					  size_t *, u_char *);
 static int cfi_amdstd_lock_user_prot_reg(struct mtd_info *, loff_t, size_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int cfi_amdstd_panic_write(struct mtd_info *mtd, loff_t to, size_t len,
@@ -526,10 +535,15 @@ struct mtd_info *cfi_cmdset_0002(struct map_info *map, int primary)
 
 	mtd = kzalloc(sizeof(*mtd), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd) {
 		printk(KERN_WARNING "Failed to allocate memory for MTD device\n");
 		return NULL;
 	}
+=======
+	if (!mtd)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!mtd)
 		return NULL;
@@ -545,13 +559,19 @@ struct mtd_info *cfi_cmdset_0002(struct map_info *map, int primary)
 	mtd->_suspend = cfi_amdstd_suspend;
 	mtd->_resume  = cfi_amdstd_resume;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mtd->_read_user_prot_reg = cfi_amdstd_read_user_prot_reg;
 	mtd->_read_fact_prot_reg = cfi_amdstd_read_fact_prot_reg;
 	mtd->_get_fact_prot_info = cfi_amdstd_get_fact_prot_info;
 	mtd->_get_user_prot_info = cfi_amdstd_get_user_prot_info;
 	mtd->_write_user_prot_reg = cfi_amdstd_write_user_prot_reg;
 	mtd->_lock_user_prot_reg = cfi_amdstd_lock_user_prot_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtd->flags   = MTD_CAP_NORFLASH;
 	mtd->name    = map->name;
@@ -664,7 +684,10 @@ struct mtd_info *cfi_cmdset_0002(struct map_info *map, int primary)
 		cfi->chips[i].buffer_write_time = 1<<cfi->cfiq->BufWriteTimeoutTyp;
 		cfi->chips[i].erase_time = 1<<cfi->cfiq->BlockEraseTimeoutTyp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * First calculate the timeout max according to timeout field
 		 * of struct cfi_ident that probed from chip's CFI aera, if
@@ -682,6 +705,9 @@ struct mtd_info *cfi_cmdset_0002(struct map_info *map, int primary)
 		cfi->chips[i].buffer_write_time_max =
 			max(cfi->chips[i].buffer_write_time_max, 2000);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cfi->chips[i].ref_point_counter = 0;
 		init_waitqueue_head(&(cfi->chips[i].wq));
@@ -714,10 +740,15 @@ static struct mtd_info *cfi_amdstd_setup(struct mtd_info *mtd)
 	mtd->eraseregions = kmalloc(sizeof(struct mtd_erase_region_info)
 				    * mtd->numeraseregions, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd->eraseregions) {
 		printk(KERN_WARNING "Failed to allocate memory for MTD erase region info\n");
 		goto setup_err;
 	}
+=======
+	if (!mtd->eraseregions)
+		goto setup_err;
+>>>>>>> v3.18
 =======
 	if (!mtd->eraseregions)
 		goto setup_err;
@@ -1200,6 +1231,7 @@ static int cfi_amdstd_read (struct mtd_info *mtd, loff_t from, size_t len, size_
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline int do_read_secsi_onechip(struct map_info *map, struct flchip *chip, loff_t adr, size_t len, u_char *buf)
 {
@@ -1207,6 +1239,8 @@ static inline int do_read_secsi_onechip(struct map_info *map, struct flchip *chi
 	unsigned long timeo = jiffies + HZ;
 	struct cfi_private *cfi = map->fldrv_priv;
 =======
+=======
+>>>>>>> v3.18
 typedef int (*otp_op_t)(struct map_info *map, struct flchip *chip,
 			loff_t adr, size_t len, u_char *buf, size_t grouplen);
 
@@ -1249,6 +1283,9 @@ static inline int do_read_secsi_onechip(struct map_info *map,
 {
 	DECLARE_WAITQUEUE(wait, current);
 	unsigned long timeo = jiffies + HZ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  retry:
@@ -1272,6 +1309,7 @@ static inline int do_read_secsi_onechip(struct map_info *map,
 	chip->state = FL_READY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfi_send_gen_cmd(0xAA, cfi->addr_unlock1, chip->start, map, cfi, cfi->device_type, NULL);
 	cfi_send_gen_cmd(0x55, cfi->addr_unlock2, chip->start, map, cfi, cfi->device_type, NULL);
 	cfi_send_gen_cmd(0x88, cfi->addr_unlock1, chip->start, map, cfi, cfi->device_type, NULL);
@@ -1282,6 +1320,11 @@ static inline int do_read_secsi_onechip(struct map_info *map,
 	cfi_send_gen_cmd(0x55, cfi->addr_unlock2, chip->start, map, cfi, cfi->device_type, NULL);
 	cfi_send_gen_cmd(0x90, cfi->addr_unlock1, chip->start, map, cfi, cfi->device_type, NULL);
 	cfi_send_gen_cmd(0x00, cfi->addr_unlock1, chip->start, map, cfi, cfi->device_type, NULL);
+=======
+	otp_enter(map, chip, adr, len);
+	map_copy_from(map, buf, adr, len);
+	otp_exit(map, chip, adr, len);
+>>>>>>> v3.18
 =======
 	otp_enter(map, chip, adr, len);
 	map_copy_from(map, buf, adr, len);
@@ -1319,7 +1362,12 @@ static int cfi_amdstd_secsi_read (struct mtd_info *mtd, loff_t from, size_t len,
 			thislen = len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = do_read_secsi_onechip(map, &cfi->chips[chipnum], ofs, thislen, buf);
+=======
+		ret = do_read_secsi_onechip(map, &cfi->chips[chipnum], ofs,
+					    thislen, buf, 0);
+>>>>>>> v3.18
 =======
 		ret = do_read_secsi_onechip(map, &cfi->chips[chipnum], ofs,
 					    thislen, buf, 0);
@@ -1338,9 +1386,12 @@ static int cfi_amdstd_secsi_read (struct mtd_info *mtd, loff_t from, size_t len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip, unsigned long adr, map_word datum)
 =======
+=======
+>>>>>>> v3.18
 static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 				     unsigned long adr, map_word datum,
 				     int mode);
@@ -1606,6 +1657,9 @@ static int cfi_amdstd_lock_user_prot_reg(struct mtd_info *mtd, loff_t from,
 static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 				     unsigned long adr, map_word datum,
 				     int mode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cfi_private *cfi = map->fldrv_priv;
@@ -1628,7 +1682,11 @@ static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 
 	mutex_lock(&chip->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = get_chip(map, chip, adr, FL_WRITING);
+=======
+	ret = get_chip(map, chip, adr, mode);
+>>>>>>> v3.18
 =======
 	ret = get_chip(map, chip, adr, mode);
 >>>>>>> v3.18
@@ -1641,6 +1699,12 @@ static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 	       __func__, adr, datum.x[0] );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mode == FL_OTP_WRITE)
+		otp_enter(map, chip, adr, map_bankwidth(map));
+
+>>>>>>> v3.18
 =======
 	if (mode == FL_OTP_WRITE)
 		otp_enter(map, chip, adr, map_bankwidth(map));
@@ -1663,6 +1727,10 @@ static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 	ENABLE_VPP(map);
 	xip_disable(map, chip, adr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1672,7 +1740,11 @@ static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 	cfi_send_gen_cmd(0xA0, cfi->addr_unlock1, chip->start, map, cfi, cfi->device_type, NULL);
 	map_write(map, datum, adr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->state = FL_WRITING;
+=======
+	chip->state = mode;
+>>>>>>> v3.18
 =======
 	chip->state = mode;
 >>>>>>> v3.18
@@ -1685,7 +1757,11 @@ static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 	timeo = jiffies + uWriteTimeout;
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chip->state != FL_WRITING) {
+=======
+		if (chip->state != mode) {
+>>>>>>> v3.18
 =======
 		if (chip->state != mode) {
 >>>>>>> v3.18
@@ -1729,6 +1805,11 @@ static int __xipram do_write_oneword(struct map_info *map, struct flchip *chip,
 	xip_enable(map, chip, adr);
  op_done:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mode == FL_OTP_WRITE)
+		otp_exit(map, chip, adr, map_bankwidth(map));
+>>>>>>> v3.18
 =======
 	if (mode == FL_OTP_WRITE)
 		otp_exit(map, chip, adr, map_bankwidth(map));
@@ -1789,7 +1870,11 @@ static int cfi_amdstd_write_words(struct mtd_info *mtd, loff_t to, size_t len,
 
 		ret = do_write_oneword(map, &cfi->chips[chipnum],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       bus_ofs, tmp_buf);
+=======
+				       bus_ofs, tmp_buf, FL_WRITING);
+>>>>>>> v3.18
 =======
 				       bus_ofs, tmp_buf, FL_WRITING);
 >>>>>>> v3.18
@@ -1817,7 +1902,11 @@ static int cfi_amdstd_write_words(struct mtd_info *mtd, loff_t to, size_t len,
 
 		ret = do_write_oneword(map, &cfi->chips[chipnum],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       ofs, datum);
+=======
+				       ofs, datum, FL_WRITING);
+>>>>>>> v3.18
 =======
 				       ofs, datum, FL_WRITING);
 >>>>>>> v3.18
@@ -1864,7 +1953,11 @@ static int cfi_amdstd_write_words(struct mtd_info *mtd, loff_t to, size_t len,
 
 		ret = do_write_oneword(map, &cfi->chips[chipnum],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ofs, tmp_buf);
+=======
+				       ofs, tmp_buf, FL_WRITING);
+>>>>>>> v3.18
 =======
 				       ofs, tmp_buf, FL_WRITING);
 >>>>>>> v3.18
@@ -1888,15 +1981,21 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
 	struct cfi_private *cfi = map->fldrv_priv;
 	unsigned long timeo = jiffies + HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* see comments in do_write_oneword() regarding uWriteTimeo. */
 	unsigned long uWriteTimeout = ( HZ / 1000 ) + 1;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Timeout is calculated according to CFI data, if available.
 	 * See more comments in cfi_cmdset_0002().
 	 */
 	unsigned long uWriteTimeout =
 				usecs_to_jiffies(chip->buffer_write_time_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret = -EIO;
 	unsigned long cmd_adr;
@@ -2001,8 +2100,13 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
 	/* FIXME - should have reset delay before continuing */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "MTD %s(): software timeout\n",
 	       __func__ );
+=======
+	printk(KERN_WARNING "MTD %s(): software timeout, address:0x%.8lx.\n",
+	       __func__, adr);
+>>>>>>> v3.18
 =======
 	printk(KERN_WARNING "MTD %s(): software timeout, address:0x%.8lx.\n",
 	       __func__, adr);
@@ -2136,6 +2240,11 @@ static int cfi_amdstd_panic_wait(struct map_info *map, struct flchip *chip,
 			udelay(1);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		retries--;
+>>>>>>> v3.18
 =======
 
 		retries--;

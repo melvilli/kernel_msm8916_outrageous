@@ -34,7 +34,11 @@ static inline u32 ioasic_read(unsigned int reg)
 extern void init_ioasic_irqs(int base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dec_ioasic_clocksource_init(void);
+=======
+extern int dec_ioasic_clocksource_init(void);
+>>>>>>> v3.18
 =======
 extern int dec_ioasic_clocksource_init(void);
 >>>>>>> v3.18

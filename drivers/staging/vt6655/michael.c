@@ -48,6 +48,7 @@
 
 /*---------------------  Static Functions  --------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
   static unsigned long s_dwGetUINT32(unsigned char *p);         // Get unsigned long from 4 bytes LSByte first
   static void s_vPutUINT32(unsigned char *p, unsigned long val); // Put unsigned long into 4 bytes LSByte first
@@ -63,6 +64,8 @@ static unsigned long L, R;           // Current state
 static unsigned long K0, K1;         // Key
 static unsigned long M;              // Message accumulator (single word)
 =======
+=======
+>>>>>>> v3.18
 
 static void s_vClear(void);                       // Clear the internal message,
 // resets the object to the state just after construction.
@@ -74,11 +77,15 @@ static u32 L, R;	/* Current state */
 
 static u32 K0, K1;	/* Key */
 static u32 M;		/* Message accumulator (single word) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int nBytesInM;      // # bytes in M
 
 /*---------------------  Export Functions  --------------------------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
   static unsigned long s_dwGetUINT32 (unsigned char *p)
@@ -106,6 +113,8 @@ static void s_vPutUINT32 (unsigned char *p, unsigned long val)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void s_vClear(void)
 {
 	// Reset the state to the empty message.
@@ -116,7 +125,11 @@ static void s_vClear(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void s_vSetKey(unsigned long dwK0, unsigned long dwK1)
+=======
+static void s_vSetKey(u32 dwK0, u32 dwK1)
+>>>>>>> v3.18
 =======
 static void s_vSetKey(u32 dwK0, u32 dwK1)
 >>>>>>> v3.18
@@ -151,7 +164,11 @@ static void s_vAppendByte(unsigned char b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void MIC_vInit(unsigned long dwK0, unsigned long dwK1)
+=======
+void MIC_vInit(u32 dwK0, u32 dwK1)
+>>>>>>> v3.18
 =======
 void MIC_vInit(u32 dwK0, u32 dwK1)
 >>>>>>> v3.18
@@ -181,7 +198,11 @@ void MIC_vAppend(unsigned char *src, unsigned int nBytes)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void MIC_vGetMIC(unsigned long *pdwL, unsigned long *pdwR)
+=======
+void MIC_vGetMIC(u32 *pdwL, u32 *pdwR)
+>>>>>>> v3.18
 =======
 void MIC_vGetMIC(u32 *pdwL, u32 *pdwR)
 >>>>>>> v3.18
@@ -194,9 +215,15 @@ void MIC_vGetMIC(u32 *pdwL, u32 *pdwR)
 	s_vAppendByte(0);
 	// and then zeroes until the length is a multiple of 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (nBytesInM != 0) {
 		s_vAppendByte(0);
 	}
+=======
+	while (nBytesInM != 0)
+		s_vAppendByte(0);
+
+>>>>>>> v3.18
 =======
 	while (nBytesInM != 0)
 		s_vAppendByte(0);

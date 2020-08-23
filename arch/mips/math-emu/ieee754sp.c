@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -32,6 +36,8 @@
 
 int ieee754sp_class(ieee754sp x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -40,6 +46,9 @@ int ieee754sp_class(ieee754sp x)
 #include "ieee754sp.h"
 
 int ieee754sp_class(union ieee754sp x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	COMPXSP;
@@ -48,7 +57,11 @@ int ieee754sp_class(union ieee754sp x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ieee754sp_isnan(ieee754sp x)
+=======
+int ieee754sp_isnan(union ieee754sp x)
+>>>>>>> v3.18
 =======
 int ieee754sp_isnan(union ieee754sp x)
 >>>>>>> v3.18
@@ -56,6 +69,7 @@ int ieee754sp_isnan(union ieee754sp x)
 	return ieee754sp_class(x) >= IEEE754_CLASS_SNAN;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ieee754sp_issnan(ieee754sp x)
 {
@@ -85,6 +99,8 @@ ieee754sp ieee754sp_nanxcpt(ieee754sp r, const char *op, ...)
 	struct ieee754xctx ax;
 
 =======
+=======
+>>>>>>> v3.18
 static inline int ieee754sp_issnan(union ieee754sp x)
 {
 	assert(ieee754sp_isnan(x));
@@ -94,6 +110,9 @@ static inline int ieee754sp_issnan(union ieee754sp x)
 
 union ieee754sp __cold ieee754sp_nanxcpt(union ieee754sp r)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	assert(ieee754sp_isnan(r));
 
@@ -101,9 +120,15 @@ union ieee754sp __cold ieee754sp_nanxcpt(union ieee754sp r)
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!SETANDTESTCX(IEEE754_INVALID_OPERATION)) {
 		/* not enabled convert to a quiet NaN */
 		SPMANT(r) &= (~SP_MBIT(SP_MBITS-1));
+=======
+	if (!ieee754_setandtestcx(IEEE754_INVALID_OPERATION)) {
+		/* not enabled convert to a quiet NaN */
+		SPMANT(r) &= (~SP_MBIT(SP_FBITS-1));
+>>>>>>> v3.18
 =======
 	if (!ieee754_setandtestcx(IEEE754_INVALID_OPERATION)) {
 		/* not enabled convert to a quiet NaN */
@@ -115,6 +140,7 @@ union ieee754sp __cold ieee754sp_nanxcpt(union ieee754sp r)
 			return ieee754sp_indef();
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ax.op = op;
 	ax.rt = 0;
@@ -139,16 +165,22 @@ ieee754sp ieee754sp_bestnan(ieee754sp x, ieee754sp y)
 
 static unsigned get_rounding(int sn, unsigned xm)
 =======
+=======
+>>>>>>> v3.18
 	return r;
 }
 
 static unsigned ieee754sp_get_rounding(int sn, unsigned xm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* inexact must round of 3 bits
 	 */
 	if (xm & (SP_MBIT(3) - 1)) {
 		switch (ieee754_csr.rm) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case IEEE754_RZ:
 			break;
@@ -162,6 +194,8 @@ static unsigned ieee754sp_get_rounding(int sn, unsigned xm)
 			break;
 		case IEEE754_RD:	/* toward -Infinity */
 =======
+=======
+>>>>>>> v3.18
 		case FPU_CSR_RZ:
 			break;
 		case FPU_CSR_RN:
@@ -173,6 +207,9 @@ static unsigned ieee754sp_get_rounding(int sn, unsigned xm)
 				xm += 0x8;
 			break;
 		case FPU_CSR_RD:	/* toward -Infinity */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sn) /* ?? */
 				xm += 0x8;
@@ -189,17 +226,23 @@ static unsigned ieee754sp_get_rounding(int sn, unsigned xm)
  * xm is 3bit extended precision value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 {
 	assert(xm);		/* we don't gen exact zeros (probably should) */
 
 	assert((xm >> (SP_MBITS + 1 + 3)) == 0);	/* no execess */
 =======
+=======
+>>>>>>> v3.18
 union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 {
 	assert(xm);		/* we don't gen exact zeros (probably should) */
 
 	assert((xm >> (SP_FBITS + 1 + 3)) == 0);	/* no execess */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	assert(xm & (SP_HIDDEN_BIT << 3));
 
@@ -208,6 +251,7 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 		int es = SP_EMIN - xe;
 
 		if (ieee754_csr.nod) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			SETCX(IEEE754_UNDERFLOW);
 			SETCX(IEEE754_INEXACT);
@@ -224,6 +268,8 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 			case IEEE754_RD:      /* toward -Infinity */
 				if(sn == 0)
 =======
+=======
+>>>>>>> v3.18
 			ieee754_setcx(IEEE754_UNDERFLOW);
 			ieee754_setcx(IEEE754_INEXACT);
 
@@ -238,6 +284,9 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 					return ieee754sp_zero(1);
 			case FPU_CSR_RD:      /* toward -Infinity */
 				if (sn == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					return ieee754sp_zero(0);
 				else
@@ -246,6 +295,7 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (xe == SP_EMIN - 1
 				&& get_rounding(sn, xm) >> (SP_MBITS + 1 + 3))
 		{
@@ -253,20 +303,29 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 			SETCX(IEEE754_INEXACT);
 			xm = get_rounding(sn, xm);
 =======
+=======
+>>>>>>> v3.18
 		if (xe == SP_EMIN - 1 &&
 		    ieee754sp_get_rounding(sn, xm) >> (SP_FBITS + 1 + 3))
 		{
 			/* Not tiny after rounding */
 			ieee754_setcx(IEEE754_INEXACT);
 			xm = ieee754sp_get_rounding(sn, xm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			xm >>= 1;
 			/* Clear grs bits */
 			xm &= ~(SP_MBIT(3) - 1);
 			xe++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else {
+=======
+		} else {
+>>>>>>> v3.18
 =======
 		} else {
 >>>>>>> v3.18
@@ -279,9 +338,15 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 	}
 	if (xm & (SP_MBIT(3) - 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INEXACT);
 		if ((xm & (SP_HIDDEN_BIT << 3)) == 0) {
 			SETCX(IEEE754_UNDERFLOW);
+=======
+		ieee754_setcx(IEEE754_INEXACT);
+		if ((xm & (SP_HIDDEN_BIT << 3)) == 0) {
+			ieee754_setcx(IEEE754_UNDERFLOW);
+>>>>>>> v3.18
 =======
 		ieee754_setcx(IEEE754_INEXACT);
 		if ((xm & (SP_HIDDEN_BIT << 3)) == 0) {
@@ -292,15 +357,21 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 		/* inexact must round of 3 bits
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xm = get_rounding(sn, xm);
 		/* adjust exponent for rounding add overflowing
 		 */
 		if (xm >> (SP_MBITS + 1 + 3)) {
 =======
+=======
+>>>>>>> v3.18
 		xm = ieee754sp_get_rounding(sn, xm);
 		/* adjust exponent for rounding add overflowing
 		 */
 		if (xm >> (SP_FBITS + 1 + 3)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* add causes mantissa overflow */
 			xm >>= 1;
@@ -310,6 +381,7 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 	/* strip grs bits */
 	xm >>= 3;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	assert((xm >> (SP_MBITS + 1)) == 0);	/* no execess */
 	assert(xe >= SP_EMIN);
@@ -325,6 +397,8 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 			return ieee754sp_max(sn);
 		case IEEE754_RU:	/* toward +Infinity */
 =======
+=======
+>>>>>>> v3.18
 	assert((xm >> (SP_FBITS + 1)) == 0);	/* no execess */
 	assert(xe >= SP_EMIN);
 
@@ -338,13 +412,20 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 		case FPU_CSR_RZ:
 			return ieee754sp_max(sn);
 		case FPU_CSR_RU:	/* toward +Infinity */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sn == 0)
 				return ieee754sp_inf(0);
 			else
 				return ieee754sp_max(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case IEEE754_RD:	/* toward -Infinity */
+=======
+		case FPU_CSR_RD:	/* toward -Infinity */
+>>>>>>> v3.18
 =======
 		case FPU_CSR_RD:	/* toward -Infinity */
 >>>>>>> v3.18
@@ -361,15 +442,21 @@ union ieee754sp ieee754sp_format(int sn, int xe, unsigned xm)
 		assert(xe == SP_EMIN);
 		if (ieee754_csr.mx & IEEE754_UNDERFLOW)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SETCX(IEEE754_UNDERFLOW);
 		return buildsp(sn, SP_EMIN - 1 + SP_EBIAS, xm);
 	} else {
 		assert((xm >> (SP_MBITS + 1)) == 0);	/* no execess */
 =======
+=======
+>>>>>>> v3.18
 			ieee754_setcx(IEEE754_UNDERFLOW);
 		return buildsp(sn, SP_EMIN - 1 + SP_EBIAS, xm);
 	} else {
 		assert((xm >> (SP_FBITS + 1)) == 0);	/* no execess */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		assert(xm & SP_HIDDEN_BIT);
 

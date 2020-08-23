@@ -7,8 +7,12 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9g20.dtsi"
 /include/ "usb_a9260_common.dtsi"
+=======
+#include "usb_a9g20_common.dtsi"
+>>>>>>> v3.18
 =======
 #include "usb_a9g20_common.dtsi"
 >>>>>>> v3.18
@@ -16,6 +20,7 @@
 / {
 	model = "Calao USB A9G20";
 	compatible = "calao,usb-a9g20", "atmel,at91sam9g20", "atmel,at91sam9";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	chosen {
@@ -32,6 +37,8 @@
 			reg = <0x56>;
 		};
 	};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

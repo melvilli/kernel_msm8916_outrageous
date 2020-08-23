@@ -2,7 +2,11 @@
  *	DEC I/O ASIC interrupts.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Copyright (c) 2002, 2003  Maciej W. Rozycki
+=======
+ *	Copyright (c) 2002, 2003, 2013  Maciej W. Rozycki
+>>>>>>> v3.18
 =======
  *	Copyright (c) 2002, 2003, 2013  Maciej W. Rozycki
 >>>>>>> v3.18
@@ -56,6 +60,7 @@ static struct irq_chip ioasic_irq_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct irq_chip ioasic_dma_irq_type = {
 	.name = "IO-ASIC-DMA",
 	.irq_ack = ack_ioasic_irq,
@@ -65,6 +70,8 @@ static struct irq_chip ioasic_dma_irq_type = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static void clear_ioasic_dma_irq(struct irq_data *d)
 {
 	u32 sir;
@@ -110,6 +117,9 @@ static struct irq_chip ioasic_dma_irq_type = {
 	 IO_IRQ_MASK(IO_INR_ISDN_RXDMA) |				\
 	 IO_IRQ_MASK(IO_INR_ASC_DMA))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init init_ioasic_irqs(int base)
 {
@@ -124,7 +134,13 @@ void __init init_ioasic_irqs(int base)
 					 handle_level_irq);
 	for (; i < base + IO_IRQ_LINES; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_set_chip(i, &ioasic_dma_irq_type);
+=======
+		irq_set_chip_and_handler(i, &ioasic_dma_irq_type,
+					 1 << (i - base) & IO_IRQ_DMA_INFO ?
+					 handle_edge_irq : handle_fasteoi_irq);
+>>>>>>> v3.18
 =======
 		irq_set_chip_and_handler(i, &ioasic_dma_irq_type,
 					 1 << (i - base) & IO_IRQ_DMA_INFO ?

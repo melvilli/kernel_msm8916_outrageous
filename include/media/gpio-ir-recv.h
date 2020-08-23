@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2012, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -23,8 +27,11 @@ struct gpio_ir_recv_platform_data {
 	u64		allowed_protos;
 	const char	*map_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		can_wakeup;
 	u32		swfi_latency;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

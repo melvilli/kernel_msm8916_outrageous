@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -90,16 +98,22 @@ struct iwl_nvm_data {
 	bool sku_cap_band_52GHz_enable;
 	bool sku_cap_11n_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool sku_cap_amt_enable;
 	bool sku_cap_ipan_enable;
 
 	u8 radio_cfg_type;
 =======
+=======
+>>>>>>> v3.18
 	bool sku_cap_11ac_enable;
 	bool sku_cap_amt_enable;
 	bool sku_cap_ipan_enable;
 
 	u16 radio_cfg_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 radio_cfg_step;
 	u8 radio_cfg_dash;
@@ -107,7 +121,11 @@ struct iwl_nvm_data {
 	u8 valid_tx_ant, valid_rx_ant;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 nvm_version;
+=======
+	u32 nvm_version;
+>>>>>>> v3.18
 =======
 	u32 nvm_version;
 >>>>>>> v3.18
@@ -154,7 +172,12 @@ void iwl_init_ht_hw_capab(const struct iwl_cfg *cfg,
 			  struct iwl_nvm_data *data,
 			  struct ieee80211_sta_ht_cap *ht_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  enum ieee80211_band band);
+=======
+			  enum ieee80211_band band,
+			  u8 tx_chains, u8 rx_chains);
+>>>>>>> v3.18
 =======
 			  enum ieee80211_band band,
 			  u8 tx_chains, u8 rx_chains);

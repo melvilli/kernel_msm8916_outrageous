@@ -51,9 +51,14 @@ EXPORT_SYMBOL(I_BDEV);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Move the inode from its current bdi to a new bdi. If the inode is dirty we
  * need to move it onto the dirty list of @dst so that the inode is always on
  * the right list.
+=======
+ * Move the inode from its current bdi to a new bdi.  Make sure the inode
+ * is clean before moving so that it doesn't linger on the old bdi.
+>>>>>>> v3.18
 =======
  * Move the inode from its current bdi to a new bdi.  Make sure the inode
  * is clean before moving so that it doesn't linger on the old bdi.
@@ -62,6 +67,7 @@ EXPORT_SYMBOL(I_BDEV);
 static void bdev_inode_switch_bdi(struct inode *inode,
 			struct backing_dev_info *dst)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct backing_dev_info *old = inode->i_data.backing_dev_info;
 	bool wakeup_bdi = false;
@@ -83,6 +89,8 @@ static void bdev_inode_switch_bdi(struct inode *inode,
 	if (wakeup_bdi)
 		bdi_wakeup_thread_delayed(dst);
 =======
+=======
+>>>>>>> v3.18
 	while (true) {
 		spin_lock(&inode->i_lock);
 		if (!(inode->i_state & I_DIRTY)) {
@@ -93,6 +101,9 @@ static void bdev_inode_switch_bdi(struct inode *inode,
 		spin_unlock(&inode->i_lock);
 		WARN_ON_ONCE(write_inode_now(inode, true));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -102,7 +113,11 @@ void kill_bdev(struct block_device *bdev)
 	struct address_space *mapping = bdev->bd_inode->i_mapping;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mapping->nrpages == 0)
+=======
+	if (mapping->nrpages == 0 && mapping->nrshadows == 0)
+>>>>>>> v3.18
 =======
 	if (mapping->nrpages == 0 && mapping->nrshadows == 0)
 >>>>>>> v3.18
@@ -188,8 +203,13 @@ blkdev_get_block(struct inode *inode, sector_t iblock,
 
 static ssize_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 blkdev_direct_IO(int rw, struct kiocb *iocb, const struct iovec *iov,
 			loff_t offset, unsigned long nr_segs)
+=======
+blkdev_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
+			loff_t offset)
+>>>>>>> v3.18
 =======
 blkdev_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 			loff_t offset)
@@ -199,8 +219,14 @@ blkdev_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 	struct inode *inode = file->f_mapping->host;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __blockdev_direct_IO(rw, iocb, inode, I_BDEV(inode), iov, offset,
 				    nr_segs, blkdev_get_block, NULL, NULL, 0);
+=======
+	return __blockdev_direct_IO(rw, iocb, inode, I_BDEV(inode), iter,
+				    offset, blkdev_get_block,
+				    NULL, NULL, 0);
+>>>>>>> v3.18
 =======
 	return __blockdev_direct_IO(rw, iocb, inode, I_BDEV(inode), iter,
 				    offset, blkdev_get_block,
@@ -337,13 +363,19 @@ static int blkdev_readpage(struct file * file, struct page * page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int blkdev_readpages(struct file *file, struct address_space *mapping,
 			struct list_head *pages, unsigned nr_pages)
 {
 	return mpage_readpages(mapping, pages, nr_pages, blkdev_get_block);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int blkdev_write_begin(struct file *file, struct address_space *mapping,
 			loff_t pos, unsigned len, unsigned flags,
@@ -375,6 +407,7 @@ static loff_t block_llseek(struct file *file, loff_t offset, int whence)
 {
 	struct inode *bd_inode = file->f_mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t size;
 	loff_t retval;
 
@@ -401,10 +434,15 @@ static loff_t block_llseek(struct file *file, loff_t offset, int whence)
 	}
 out:
 =======
+=======
+>>>>>>> v3.18
 	loff_t retval;
 
 	mutex_lock(&bd_inode->i_mutex);
 	retval = fixed_size_llseek(file, offset, whence, i_size_read(bd_inode));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&bd_inode->i_mutex);
 	return retval;
@@ -434,7 +472,10 @@ int blkdev_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
 EXPORT_SYMBOL(blkdev_fsync);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * bdev_read_page() - Start reading a page from a block device
  * @bdev: The device to read the page from
@@ -498,6 +539,9 @@ int bdev_write_page(struct block_device *bdev, sector_t sector,
 }
 EXPORT_SYMBOL_GPL(bdev_write_page);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * pseudo-fs
@@ -556,7 +600,11 @@ static void bdev_evict_inode(struct inode *inode)
 	struct block_device *bdev = &BDEV_I(inode)->bdev;
 	struct list_head *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -733,7 +781,11 @@ static struct block_device *bd_acquire(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sb_is_blkdev_sb(struct super_block *sb)
+=======
+int sb_is_blkdev_sb(struct super_block *sb)
+>>>>>>> v3.18
 =======
 int sb_is_blkdev_sb(struct super_block *sb)
 >>>>>>> v3.18
@@ -779,7 +831,11 @@ static bool bd_may_claim(struct block_device *bdev, struct block_device *whole,
 	else if (bdev->bd_holder != NULL)
 		return false; 	 /* held by someone else */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (whole == bdev)
+=======
+	else if (bdev->bd_contains == bdev)
+>>>>>>> v3.18
 =======
 	else if (bdev->bd_contains == bdev)
 >>>>>>> v3.18
@@ -1258,8 +1314,11 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, int for_part)
 				bd_set_size(bdev,(loff_t)get_capacity(disk)<<9);
 				bdi = blk_get_backing_dev_info(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (bdi == NULL)
 					bdi = &default_backing_dev_info;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				bdev_inode_switch_bdi(bdev->bd_inode, bdi);
@@ -1660,8 +1719,12 @@ static long block_ioctl(struct file *file, unsigned cmd, unsigned long arg)
  * use.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t blkdev_aio_write(struct kiocb *iocb, const struct iovec *iov,
 			 unsigned long nr_segs, loff_t pos)
+=======
+ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
+>>>>>>> v3.18
 =======
 ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
 >>>>>>> v3.18
@@ -1670,6 +1733,7 @@ ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	struct blk_plug plug;
 	ssize_t ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BUG_ON(iocb->ki_pos != pos);
 
@@ -1681,18 +1745,24 @@ ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		err = generic_write_sync(file, pos, ret);
 		if (err < 0 && ret > 0)
 =======
+=======
+>>>>>>> v3.18
 	blk_start_plug(&plug);
 	ret = __generic_file_write_iter(iocb, from);
 	if (ret > 0) {
 		ssize_t err;
 		err = generic_write_sync(file, iocb->ki_pos - ret, ret);
 		if (err < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = err;
 	}
 	blk_finish_plug(&plug);
 	return ret;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(blkdev_aio_write);
 
@@ -1703,11 +1773,20 @@ EXPORT_SYMBOL_GPL(blkdev_write_iter);
 
 ssize_t blkdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
 >>>>>>> v3.18
+=======
+EXPORT_SYMBOL_GPL(blkdev_write_iter);
+
+ssize_t blkdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
+>>>>>>> v3.18
 {
 	struct file *file = iocb->ki_filp;
 	struct inode *bd_inode = file->f_mapping->host;
 	loff_t size = i_size_read(bd_inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	loff_t pos = iocb->ki_pos;
+>>>>>>> v3.18
 =======
 	loff_t pos = iocb->ki_pos;
 >>>>>>> v3.18
@@ -1717,15 +1796,21 @@ ssize_t blkdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
 
 	size -= pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size < iocb->ki_left)
 		nr_segs = iov_shorten((struct iovec *)iov, nr_segs, size);
 	return generic_file_aio_read(iocb, iov, nr_segs, pos);
 }
 =======
+=======
+>>>>>>> v3.18
 	iov_iter_truncate(to, size);
 	return generic_file_read_iter(iocb, to);
 }
 EXPORT_SYMBOL_GPL(blkdev_read_iter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1745,6 +1830,10 @@ static int blkdev_releasepage(struct page *page, gfp_t wait)
 static const struct address_space_operations def_blk_aops = {
 	.readpage	= blkdev_readpage,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.readpages	= blkdev_readpages,
+>>>>>>> v3.18
 =======
 	.readpages	= blkdev_readpages,
 >>>>>>> v3.18
@@ -1762,15 +1851,21 @@ const struct file_operations def_blk_fops = {
 	.release	= blkdev_close,
 	.llseek		= block_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= blkdev_aio_read,
 	.aio_write	= blkdev_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.write		= new_sync_write,
 	.read_iter	= blkdev_read_iter,
 	.write_iter	= blkdev_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.fsync		= blkdev_fsync,
@@ -1780,7 +1875,11 @@ const struct file_operations def_blk_fops = {
 #endif
 	.splice_read	= generic_file_splice_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.splice_write	= generic_file_splice_write,
+=======
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 =======
 	.splice_write	= iter_file_splice_write,
 >>>>>>> v3.18
@@ -1869,7 +1968,10 @@ void iterate_bdevs(void (*func)(struct block_device *, void *), void *arg)
 	list_for_each_entry(inode, &blockdev_superblock->s_inodes, i_sb_list) {
 		struct address_space *mapping = inode->i_mapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct block_device *bdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1893,12 +1995,17 @@ void iterate_bdevs(void (*func)(struct block_device *, void *), void *arg)
 		iput(old_inode);
 		old_inode = inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bdev = I_BDEV(inode);
 
 		mutex_lock(&bdev->bd_mutex);
 		if (bdev->bd_openers)
 			func(bdev, arg);
 		mutex_unlock(&bdev->bd_mutex);
+=======
+
+		func(I_BDEV(inode), arg);
+>>>>>>> v3.18
 =======
 
 		func(I_BDEV(inode), arg);

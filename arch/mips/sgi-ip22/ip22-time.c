@@ -124,7 +124,11 @@ void __irq_entry indy_8254timer_irq(void)
 
 	irq_enter();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kstat_incr_irqs_this_cpu(irq, irq_to_desc(irq));
+=======
+	kstat_incr_irq_this_cpu(irq);
+>>>>>>> v3.18
 =======
 	kstat_incr_irq_this_cpu(irq);
 >>>>>>> v3.18

@@ -79,7 +79,12 @@ tape_std_assign(struct tape_device *device)
 	rc = tape_do_io_interruptible(device, request);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&timeout);
+=======
+	del_timer_sync(&timeout);
+	destroy_timer_on_stack(&timeout);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&timeout);
 	destroy_timer_on_stack(&timeout);

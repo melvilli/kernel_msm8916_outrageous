@@ -1,6 +1,7 @@
 #ifndef _NET_P8022_H
 #define _NET_P8022_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct datalink_proto *
 	register_8022_client(unsigned char type,
 			     int (*func)(struct sk_buff *skb,
@@ -12,6 +13,8 @@ extern void unregister_8022_client(struct datalink_proto *proto);
 extern struct datalink_proto *make_8023_client(void);
 extern void destroy_8023_client(struct datalink_proto *dl);
 =======
+=======
+>>>>>>> v3.18
 struct datalink_proto *
 register_8022_client(unsigned char type,
 		     int (*func)(struct sk_buff *skb,
@@ -22,5 +25,8 @@ void unregister_8022_client(struct datalink_proto *proto);
 
 struct datalink_proto *make_8023_client(void);
 void destroy_8023_client(struct datalink_proto *dl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

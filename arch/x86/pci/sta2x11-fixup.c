@@ -174,9 +174,13 @@ static void *sta2x11_swiotlb_alloc_coherent(struct device *dev,
 	void *vaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vaddr = dma_generic_alloc_coherent(dev, size, dma_handle, flags, attrs);
 	if (!vaddr)
 		vaddr = swiotlb_alloc_coherent(dev, size, dma_handle, flags);
+=======
+	vaddr = x86_swiotlb_alloc_coherent(dev, size, dma_handle, flags, attrs);
+>>>>>>> v3.18
 =======
 	vaddr = x86_swiotlb_alloc_coherent(dev, size, dma_handle, flags, attrs);
 >>>>>>> v3.18
@@ -188,7 +192,11 @@ static void *sta2x11_swiotlb_alloc_coherent(struct device *dev,
 static struct dma_map_ops sta2x11_dma_ops = {
 	.alloc = sta2x11_swiotlb_alloc_coherent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.free = swiotlb_free_coherent,
+=======
+	.free = x86_swiotlb_free_coherent,
+>>>>>>> v3.18
 =======
 	.free = x86_swiotlb_free_coherent,
 >>>>>>> v3.18

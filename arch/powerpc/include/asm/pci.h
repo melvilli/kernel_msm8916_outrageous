@@ -47,11 +47,14 @@ struct pci_dev;
 	(pci_has_flag(PCI_REASSIGN_ALL_BUS))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void pcibios_penalize_isa_irq(int irq, int active)
 {
 	/* We don't do dynamic PCI IRQ allocation */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define HAVE_ARCH_PCI_GET_LEGACY_IDE_IRQ
@@ -117,11 +120,14 @@ extern int pci_domain_nr(struct pci_bus *bus);
 extern int pci_proc_domain(struct pci_bus *bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MSI arch hooks */
 #define arch_setup_msi_irqs arch_setup_msi_irqs
 #define arch_teardown_msi_irqs arch_teardown_msi_irqs
 #define arch_msi_check_device arch_msi_check_device
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct vm_area_struct;

@@ -26,7 +26,12 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/tegra-ahb.h>
+=======
+
+#include <soc/tegra/ahb.h>
+>>>>>>> v3.18
 =======
 
 #include <soc/tegra/ahb.h>
@@ -262,8 +267,11 @@ static int tegra_ahb_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ahb->regs = devm_ioremap_resource(&pdev->dev, res);

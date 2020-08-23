@@ -130,16 +130,22 @@ unsigned long __init setup_memory(void)
 #define MAX_LOW_PFN(nid)	(NODE_DATA(nid)->bdata->node_low_pfn)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __init zone_sizes_init(void)
 {
 	unsigned long zones_size[MAX_NR_ZONES], zholes_size[MAX_NR_ZONES];
 	unsigned long low, start_pfn;
 	unsigned long holes = 0;
 =======
+=======
+>>>>>>> v3.18
 void __init zone_sizes_init(void)
 {
 	unsigned long zones_size[MAX_NR_ZONES], zholes_size[MAX_NR_ZONES];
 	unsigned long low, start_pfn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int nid, i;
 	mem_prof_t *mp;
@@ -155,7 +161,10 @@ void __init zone_sizes_init(void)
 		zones_size[ZONE_DMA] = low - start_pfn;
 		zholes_size[ZONE_DMA] = mp->holes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		holes += zholes_size[ZONE_DMA];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -172,8 +181,11 @@ void __init zone_sizes_init(void)
 	NODE_DATA(1)->node_zones->watermark[WMARK_LOW] = 0;
 	NODE_DATA(1)->node_zones->watermark[WMARK_HIGH] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return holes;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

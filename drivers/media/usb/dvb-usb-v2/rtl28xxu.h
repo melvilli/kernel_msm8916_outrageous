@@ -56,7 +56,13 @@ struct rtl28xxu_priv {
 	char *tuner_name;
 	u8 page; /* integrated demod active register page */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool rc_active;
+=======
+	struct i2c_adapter *demod_i2c_adapter;
+	bool rc_active;
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_adapter *demod_i2c_adapter;
 	bool rc_active;
@@ -90,6 +96,10 @@ enum rtl28xxu_tuner {
 	TUNER_RTL2832_FC0013,
 	TUNER_RTL2832_R820T,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TUNER_RTL2832_R828D,
+>>>>>>> v3.18
 =======
 	TUNER_RTL2832_R828D,
 >>>>>>> v3.18
@@ -108,13 +118,19 @@ struct rtl28xxu_reg_val {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rtl28xxu_reg_val_mask {
 	u16 reg;
 	u8 val;
 	u8 mask;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * memory map

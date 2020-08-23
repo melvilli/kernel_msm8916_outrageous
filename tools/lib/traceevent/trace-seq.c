@@ -23,6 +23,10 @@
 #include <stdarg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bug.h>
+>>>>>>> v3.18
 =======
 #include <asm/bug.h>
 >>>>>>> v3.18
@@ -37,11 +41,14 @@
 #define TRACE_SEQ_CHECK(s)						\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((s)->buffer == TRACE_SEQ_POISON)			\
 		die("Usage of trace_seq after it was destroyed");	\
 } while (0)
 
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ONCE((s)->buffer == TRACE_SEQ_POISON,			\
 		      "Usage of trace_seq after it was destroyed"))	\
 		(s)->state = TRACE_SEQ__BUFFER_POISONED;		\
@@ -57,6 +64,9 @@ do {						\
 #define TRACE_SEQ_CHECK_RET(s)   TRACE_SEQ_CHECK_RET_N(s, )
 #define TRACE_SEQ_CHECK_RET0(s)  TRACE_SEQ_CHECK_RET_N(s, 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * trace_seq_init - initialize the trace_seq structure
@@ -68,8 +78,11 @@ void trace_seq_init(struct trace_seq *s)
 	s->readpos = 0;
 	s->buffer_size = TRACE_SEQ_BUF_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->buffer = malloc_or_die(s->buffer_size);
 =======
+=======
+>>>>>>> v3.18
 	s->buffer = malloc(s->buffer_size);
 	if (s->buffer != NULL)
 		s->state = TRACE_SEQ__GOOD;
@@ -88,6 +101,9 @@ void trace_seq_reset(struct trace_seq *s)
 	TRACE_SEQ_CHECK(s);
 	s->len = 0;
 	s->readpos = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -102,7 +118,11 @@ void trace_seq_destroy(struct trace_seq *s)
 	if (!s)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_SEQ_CHECK(s);
+=======
+	TRACE_SEQ_CHECK_RET(s);
+>>>>>>> v3.18
 =======
 	TRACE_SEQ_CHECK_RET(s);
 >>>>>>> v3.18
@@ -113,11 +133,14 @@ void trace_seq_destroy(struct trace_seq *s)
 static void expand_buffer(struct trace_seq *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->buffer_size += TRACE_SEQ_BUF_SIZE;
 	s->buffer = realloc(s->buffer, s->buffer_size);
 	if (!s->buffer)
 		die("Can't allocate trace_seq buffer memory");
 =======
+=======
+>>>>>>> v3.18
 	char *buf;
 
 	buf = realloc(s->buffer, s->buffer_size + TRACE_SEQ_BUF_SIZE);
@@ -128,6 +151,9 @@ static void expand_buffer(struct trace_seq *s)
 
 	s->buffer = buf;
 	s->buffer_size += TRACE_SEQ_BUF_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -153,9 +179,15 @@ trace_seq_printf(struct trace_seq *s, const char *fmt, ...)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_SEQ_CHECK(s);
 
  try_again:
+=======
+ try_again:
+	TRACE_SEQ_CHECK_RET0(s);
+
+>>>>>>> v3.18
 =======
  try_again:
 	TRACE_SEQ_CHECK_RET0(s);
@@ -195,9 +227,15 @@ trace_seq_vprintf(struct trace_seq *s, const char *fmt, va_list args)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_SEQ_CHECK(s);
 
  try_again:
+=======
+ try_again:
+	TRACE_SEQ_CHECK_RET0(s);
+
+>>>>>>> v3.18
 =======
  try_again:
 	TRACE_SEQ_CHECK_RET0(s);
@@ -232,7 +270,11 @@ int trace_seq_puts(struct trace_seq *s, const char *str)
 	int len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_SEQ_CHECK(s);
+=======
+	TRACE_SEQ_CHECK_RET0(s);
+>>>>>>> v3.18
 =======
 	TRACE_SEQ_CHECK_RET0(s);
 >>>>>>> v3.18
@@ -243,6 +285,11 @@ int trace_seq_puts(struct trace_seq *s, const char *str)
 		expand_buffer(s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_SEQ_CHECK_RET0(s);
+
+>>>>>>> v3.18
 =======
 	TRACE_SEQ_CHECK_RET0(s);
 
@@ -256,7 +303,11 @@ int trace_seq_puts(struct trace_seq *s, const char *str)
 int trace_seq_putc(struct trace_seq *s, unsigned char c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_SEQ_CHECK(s);
+=======
+	TRACE_SEQ_CHECK_RET0(s);
+>>>>>>> v3.18
 =======
 	TRACE_SEQ_CHECK_RET0(s);
 >>>>>>> v3.18
@@ -265,6 +316,11 @@ int trace_seq_putc(struct trace_seq *s, unsigned char c)
 		expand_buffer(s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_SEQ_CHECK_RET0(s);
+
+>>>>>>> v3.18
 =======
 	TRACE_SEQ_CHECK_RET0(s);
 
@@ -277,7 +333,11 @@ int trace_seq_putc(struct trace_seq *s, unsigned char c)
 void trace_seq_terminate(struct trace_seq *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_SEQ_CHECK(s);
+=======
+	TRACE_SEQ_CHECK_RET(s);
+>>>>>>> v3.18
 =======
 	TRACE_SEQ_CHECK_RET(s);
 >>>>>>> v3.18
@@ -290,8 +350,11 @@ int trace_seq_do_printf(struct trace_seq *s)
 {
 	TRACE_SEQ_CHECK(s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return printf("%.*s", s->len, s->buffer);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (s->state) {
 	case TRACE_SEQ__GOOD:
@@ -304,5 +367,8 @@ int trace_seq_do_printf(struct trace_seq *s)
 		break;
 	}
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

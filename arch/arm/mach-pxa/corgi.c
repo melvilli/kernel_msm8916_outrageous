@@ -27,7 +27,10 @@
 #include <linux/i2c/pxa-i2c.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/regulator/machine.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/spi/spi.h>
@@ -37,7 +40,13 @@
 #include <linux/mtd/sharpsl.h>
 #include <linux/input/matrix_keypad.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+#include <linux/gpio_keys.h>
+#include <linux/module.h>
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio_keys.h>
 #include <linux/module.h>
@@ -416,7 +425,10 @@ static struct platform_device corgikbd_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct gpio_keys_button corgi_gpio_keys[] = {
 	{
 		.type	= EV_SW,
@@ -455,6 +467,9 @@ static struct platform_device corgi_gpio_keys_device = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Corgi LEDs
@@ -526,7 +541,11 @@ static struct pxa2xx_udc_mach_info udc_info __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_PXA2XX) || defined(CONFIG_SPI_PXA2XX_MASTER)
+=======
+#if IS_ENABLED(CONFIG_SPI_PXA2XX)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_PXA2XX)
 >>>>>>> v3.18
@@ -702,6 +721,10 @@ static struct platform_device *devices[] __initdata = {
 	&corgiscoop_device,
 	&corgifb_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&corgi_gpio_keys_device,
+>>>>>>> v3.18
 =======
 	&corgi_gpio_keys_device,
 >>>>>>> v3.18
@@ -771,6 +794,7 @@ static void __init corgi_init(void)
 
 	platform_add_devices(devices, ARRAY_SIZE(devices));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	regulator_has_full_constraints();
 }
@@ -786,6 +810,8 @@ static void __init fixup_corgi(struct tag *tags, char **cmdline,
 	else
 		mi->bank[0].size = (64*1024*1024);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void __init fixup_corgi(struct tag *tags, char **cmdline)
@@ -795,6 +821,9 @@ static void __init fixup_corgi(struct tag *tags, char **cmdline)
 		memblock_add(0xa0000000, SZ_32M);
 	else
 		memblock_add(0xa0000000, SZ_64M);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

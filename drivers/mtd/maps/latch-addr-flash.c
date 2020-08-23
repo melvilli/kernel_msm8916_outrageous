@@ -11,7 +11,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -106,9 +109,14 @@ static int latch_addr_flash_remove(struct platform_device *dev)
 	if (info == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
 	latch_addr_data = dev->dev.platform_data;
+=======
+
+	latch_addr_data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 
 	latch_addr_data = dev_get_platdata(&dev->dev);
@@ -144,7 +152,11 @@ static int latch_addr_flash_probe(struct platform_device *dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	latch_addr_data = dev->dev.platform_data;
+=======
+	latch_addr_data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	latch_addr_data = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18

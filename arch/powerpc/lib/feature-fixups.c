@@ -165,7 +165,11 @@ static long calc_offset(struct fixup_entry *entry, unsigned int *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void test_basic_patching(void)
+=======
+static void test_basic_patching(void)
+>>>>>>> v3.18
 =======
 static void test_basic_patching(void)
 >>>>>>> v3.18

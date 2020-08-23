@@ -9,12 +9,18 @@ Supported chips:
 	http://www.ti.com/lit/gpn/lm25056
 	http://www.ti.com/lit/gpn/lm25056a
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   * TI LM25063
     Prefix: 'lm25063'
     Addresses scanned: -
     Datasheet:
 	To be announced
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   * National Semiconductor LM25066
     Prefix: 'lm25066'
@@ -41,7 +47,11 @@ Description
 
 This driver supports hardware montoring for National Semiconductor / TI LM25056,
 <<<<<<< HEAD
+<<<<<<< HEAD
 LM25066, LM5064, and LM5064 Power Management, Monitoring, Control, and
+=======
+LM25063, LM25066, LM5064, and LM5066 Power Management, Monitoring, Control, and
+>>>>>>> v3.18
 =======
 LM25063, LM25066, LM5064, and LM5066 Power Management, Monitoring, Control, and
 >>>>>>> v3.18
@@ -77,15 +87,21 @@ in1_average		Average measured input voltage.
 in1_min			Minimum input voltage.
 in1_max			Maximum input voltage.
 <<<<<<< HEAD
+<<<<<<< HEAD
 in1_min_alarm		Input voltage low alarm.
 in1_max_alarm		Input voltage high alarm.
 =======
+=======
+>>>>>>> v3.18
 in1_crit		Critical high input voltage (LM25063 only).
 in1_lcrit		Critical low input voltage (LM25063 only).
 in1_min_alarm		Input voltage low alarm.
 in1_max_alarm		Input voltage high alarm.
 in1_lcrit_alarm		Input voltage critical low alarm (LM25063 only).
 in1_crit_alarm		Input voltage critical high alarm. (LM25063 only).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 in2_label		"vmon"
@@ -102,6 +118,11 @@ in3_average		Average measured output voltage.
 in3_min			Minimum output voltage.
 in3_min_alarm		Output voltage low alarm.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+in3_highest		Historical minimum output voltage (LM25063 only).
+in3_lowest		Historical maximum output voltage (LM25063 only).
+>>>>>>> v3.18
 =======
 in3_highest		Historical minimum output voltage (LM25063 only).
 in3_lowest		Historical maximum output voltage (LM25063 only).
@@ -112,7 +133,13 @@ curr1_input		Measured input current.
 curr1_average		Average measured input current.
 curr1_max		Maximum input current.
 <<<<<<< HEAD
+<<<<<<< HEAD
 curr1_max_alarm		Input current high alarm.
+=======
+curr1_crit		Critical input current (LM25063 only).
+curr1_max_alarm		Input current high alarm.
+curr1_crit_alarm	Input current critical high alarm (LM25063 only).
+>>>>>>> v3.18
 =======
 curr1_crit		Critical input current (LM25063 only).
 curr1_max_alarm		Input current high alarm.
@@ -128,12 +155,18 @@ power1_input_highest	Historical maximum power.
 power1_reset_history	Write any value to reset maximum power history.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 power2_label		"pout". LM25063 only.
 power2_input		Measured output power.
 power2_max		Maximum output power limit.
 power2_crit		Critical output power limit.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 temp1_input		Measured temperature.
 temp1_max		Maximum temperature.

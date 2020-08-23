@@ -20,10 +20,13 @@
 #include <linux/kfifo.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SERIAL_TTY_MAJOR	188	/* Nice legal number now */
 #define SERIAL_TTY_MINORS	254	/* loads of devices :) */
 #define SERIAL_TTY_NO_MINOR	255	/* No minor was assigned */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* The maximum number of ports one device can grab at once */
@@ -41,7 +44,12 @@
  * @port: pointer to the corresponding tty_port for this port.
  * @lock: spinlock to grab when updating portions of this structure.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @number: the number of the port (the minor number).
+=======
+ * @minor: the minor number of the port
+ * @port_number: the struct usb_serial port number of this port (starts at 0)
+>>>>>>> v3.18
 =======
  * @minor: the minor number of the port
  * @port_number: the struct usb_serial port number of this port (starts at 0)
@@ -89,7 +97,12 @@ struct usb_serial_port {
 	struct tty_port		port;
 	spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char		number;
+=======
+	u32			minor;
+	u8			port_number;
+>>>>>>> v3.18
 =======
 	u32			minor;
 	u8			port_number;
@@ -154,7 +167,10 @@ static inline void usb_set_serial_port_data(struct usb_serial_port *port,
  * @type: pointer to the struct usb_serial_driver for this device
  * @interface: pointer to the struct usb_interface for this device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @minor: the starting minor number for this device
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @num_ports: the number of ports this device has
@@ -176,7 +192,11 @@ struct usb_serial {
 	unsigned char			suspending:1;
 	unsigned char			attached:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char			minor;
+=======
+	unsigned char			minors_reserved:1;
+>>>>>>> v3.18
 =======
 	unsigned char			minors_reserved:1;
 >>>>>>> v3.18
@@ -214,7 +234,12 @@ static inline void usb_set_serial_data(struct usb_serial *serial, void *data)
  * @bulk_in_size: minimum number of bytes to allocate for bulk-in buffer
  *	(0 = end-point size)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @bulk_out_size: bytes to allocate for bulk-out buffer (0 = end-point size)
+=======
+ * @bulk_out_size: minimum number of bytes to allocate for bulk-out buffer
+ *	(0 = end-point size)
+>>>>>>> v3.18
 =======
  * @bulk_out_size: minimum number of bytes to allocate for bulk-out buffer
  *	(0 = end-point size)
@@ -345,17 +370,23 @@ static inline void usb_serial_console_disconnect(struct usb_serial *serial) {}
 
 /* Functions needed by other parts of the usbserial core */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct usb_serial *usb_serial_get_by_index(unsigned int minor);
 extern void usb_serial_put(struct usb_serial *serial);
 extern int usb_serial_generic_open(struct tty_struct *tty,
 	struct usb_serial_port *port);
 =======
+=======
+>>>>>>> v3.18
 extern struct usb_serial_port *usb_serial_port_get_by_minor(unsigned int minor);
 extern void usb_serial_put(struct usb_serial *serial);
 extern int usb_serial_generic_open(struct tty_struct *tty,
 	struct usb_serial_port *port);
 extern int usb_serial_generic_write_start(struct usb_serial_port *port,
 							gfp_t mem_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int usb_serial_generic_write(struct tty_struct *tty,
 	struct usb_serial_port *port, const unsigned char *buf, int count);

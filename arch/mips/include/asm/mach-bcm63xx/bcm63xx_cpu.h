@@ -10,6 +10,10 @@
  * arm mach-types)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM3368_CPU_ID		0x3368
+>>>>>>> v3.18
 =======
 #define BCM3368_CPU_ID		0x3368
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 #define BCM6368_CPU_ID		0x6368
 
 void __init bcm63xx_cpu_init(void);
+<<<<<<< HEAD
 <<<<<<< HEAD
 u16 __bcm63xx_get_cpu_id(void);
 u8 bcm63xx_get_cpu_rev(void);
@@ -123,6 +128,8 @@ unsigned int bcm63xx_get_cpu_freq(void);
 #error "No CPU support configured"
 #endif
 =======
+=======
+>>>>>>> v3.18
 u8 bcm63xx_get_cpu_rev(void);
 unsigned int bcm63xx_get_cpu_freq(void);
 
@@ -185,6 +192,9 @@ static inline u16 __pure bcm63xx_get_cpu_id(void)
 #define BCMCPU_IS_6358()	(bcm63xx_get_cpu_id() == BCM6358_CPU_ID)
 #define BCMCPU_IS_6362()	(bcm63xx_get_cpu_id() == BCM6362_CPU_ID)
 #define BCMCPU_IS_6368()	(bcm63xx_get_cpu_id() == BCM6368_CPU_ID)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -201,6 +211,10 @@ enum bcm63xx_regs_set {
 	RSET_GPIO,
 	RSET_SPI,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RSET_HSSPI,
+>>>>>>> v3.18
 =======
 	RSET_HSSPI,
 >>>>>>> v3.18
@@ -247,10 +261,13 @@ enum bcm63xx_regs_set {
 #define BCM_6368_RSET_SPI_SIZE		1804
 #define RSET_ENET_SIZE			2048
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RSET_ENETDMA_SIZE		2048
 #define RSET_ENETSW_SIZE		65536
 #define RSET_UART_SIZE			24
 =======
+=======
+>>>>>>> v3.18
 #define RSET_ENETDMA_SIZE		256
 #define RSET_6345_ENETDMA_SIZE		64
 #define RSET_ENETDMAC_SIZE(chans)	(16 * (chans))
@@ -258,6 +275,9 @@ enum bcm63xx_regs_set {
 #define RSET_ENETSW_SIZE		65536
 #define RSET_UART_SIZE			24
 #define RSET_HSSPI_SIZE			1536
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RSET_UDC_SIZE			256
 #define RSET_OHCI_SIZE			256
@@ -275,7 +295,10 @@ enum bcm63xx_regs_set {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * 3368 register sets base address
  */
 #define BCM_3368_DSL_LMEM_BASE		(0xdeadbeef)
@@ -323,6 +346,9 @@ enum bcm63xx_regs_set {
 #define BCM_3368_MISC_BASE		(0xdeadbeef)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * 6328 register sets base address
  */
@@ -335,6 +361,10 @@ enum bcm63xx_regs_set {
 #define BCM_6328_GPIO_BASE		(0xb0000080)
 #define BCM_6328_SPI_BASE		(0xdeadbeef)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6328_HSSPI_BASE		(0xb0001000)
+>>>>>>> v3.18
 =======
 #define BCM_6328_HSSPI_BASE		(0xb0001000)
 >>>>>>> v3.18
@@ -373,6 +403,11 @@ enum bcm63xx_regs_set {
 #define BCM_6328_RNG_BASE		(0xdeadbeef)
 #define BCM_6328_MISC_BASE		(0xb0001800)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6328_OTP_BASE		(0xb0000600)
+
+>>>>>>> v3.18
 =======
 #define BCM_6328_OTP_BASE		(0xb0000600)
 
@@ -390,6 +425,10 @@ enum bcm63xx_regs_set {
 #define BCM_6338_GPIO_BASE		(0xfffe0400)
 #define BCM_6338_SPI_BASE		(0xfffe0c00)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6338_HSSPI_BASE		(0xdeadbeef)
+>>>>>>> v3.18
 =======
 #define BCM_6338_HSSPI_BASE		(0xdeadbeef)
 >>>>>>> v3.18
@@ -441,6 +480,10 @@ enum bcm63xx_regs_set {
 #define BCM_6345_GPIO_BASE		(0xfffe0400)
 #define BCM_6345_SPI_BASE		(0xdeadbeef)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6345_HSSPI_BASE		(0xdeadbeef)
+>>>>>>> v3.18
 =======
 #define BCM_6345_HSSPI_BASE		(0xdeadbeef)
 >>>>>>> v3.18
@@ -449,7 +492,11 @@ enum bcm63xx_regs_set {
 #define BCM_6345_ENET0_BASE		(0xfffe1800)
 #define BCM_6345_ENETDMA_BASE		(0xfffe2800)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCM_6345_ENETDMAC_BASE		(0xfffe2900)
+=======
+#define BCM_6345_ENETDMAC_BASE		(0xfffe2840)
+>>>>>>> v3.18
 =======
 #define BCM_6345_ENETDMAC_BASE		(0xfffe2840)
 >>>>>>> v3.18
@@ -495,6 +542,10 @@ enum bcm63xx_regs_set {
 #define BCM_6348_GPIO_BASE		(0xfffe0400)
 #define BCM_6348_SPI_BASE		(0xfffe0c00)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6348_HSSPI_BASE		(0xdeadbeef)
+>>>>>>> v3.18
 =======
 #define BCM_6348_HSSPI_BASE		(0xdeadbeef)
 >>>>>>> v3.18
@@ -544,6 +595,10 @@ enum bcm63xx_regs_set {
 #define BCM_6358_GPIO_BASE		(0xfffe0080)
 #define BCM_6358_SPI_BASE		(0xfffe0800)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6358_HSSPI_BASE		(0xdeadbeef)
+>>>>>>> v3.18
 =======
 #define BCM_6358_HSSPI_BASE		(0xdeadbeef)
 >>>>>>> v3.18
@@ -650,6 +705,10 @@ enum bcm63xx_regs_set {
 #define BCM_6368_GPIO_BASE		(0xb0000080)
 #define BCM_6368_SPI_BASE		(0xb0000800)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6368_HSSPI_BASE		(0xdeadbeef)
+>>>>>>> v3.18
 =======
 #define BCM_6368_HSSPI_BASE		(0xdeadbeef)
 >>>>>>> v3.18
@@ -690,6 +749,7 @@ enum bcm63xx_regs_set {
 
 extern const unsigned long *bcm63xx_regs_base;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __GEN_RSET_BASE(__cpu, __rset)					\
 	case RSET_## __rset :						\
@@ -741,6 +801,8 @@ extern const unsigned long *bcm63xx_regs_base;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define __GEN_CPU_REGS_TABLE(__cpu)					\
 	[RSET_DSL_LMEM]		= BCM_## __cpu ##_DSL_LMEM_BASE,	\
 	[RSET_PERF]		= BCM_## __cpu ##_PERF_BASE,		\
@@ -751,6 +813,10 @@ extern const unsigned long *bcm63xx_regs_base;
 	[RSET_GPIO]		= BCM_## __cpu ##_GPIO_BASE,		\
 	[RSET_SPI]		= BCM_## __cpu ##_SPI_BASE,		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[RSET_HSSPI]		= BCM_## __cpu ##_HSSPI_BASE,		\
+>>>>>>> v3.18
 =======
 	[RSET_HSSPI]		= BCM_## __cpu ##_HSSPI_BASE,		\
 >>>>>>> v3.18
@@ -791,6 +857,7 @@ extern const unsigned long *bcm63xx_regs_base;
 static inline unsigned long bcm63xx_regset_address(enum bcm63xx_regs_set set)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef BCMCPU_RUNTIME_DETECT
 	return bcm63xx_regs_base[set];
 #else
@@ -821,6 +888,9 @@ static inline unsigned long bcm63xx_regset_address(enum bcm63xx_regs_set set)
 =======
 	return bcm63xx_regs_base[set];
 >>>>>>> v3.18
+=======
+	return bcm63xx_regs_base[set];
+>>>>>>> v3.18
 }
 
 /*
@@ -836,6 +906,10 @@ enum bcm63xx_irq {
 	IRQ_ENET1,
 	IRQ_ENET_PHY,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IRQ_HSSPI,
+>>>>>>> v3.18
 =======
 	IRQ_HSSPI,
 >>>>>>> v3.18
@@ -869,7 +943,10 @@ enum bcm63xx_irq {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * 3368 irqs
  */
 #define BCM_3368_TIMER_IRQ		(IRQ_INTERNAL_BASE + 0)
@@ -916,6 +993,9 @@ enum bcm63xx_irq {
 
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * 6328 irqs
  */
@@ -931,6 +1011,10 @@ enum bcm63xx_irq {
 #define BCM_6328_ENET1_IRQ		0
 #define BCM_6328_ENET_PHY_IRQ		(IRQ_INTERNAL_BASE + 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6328_HSSPI_IRQ		(IRQ_INTERNAL_BASE + 29)
+>>>>>>> v3.18
 =======
 #define BCM_6328_HSSPI_IRQ		(IRQ_INTERNAL_BASE + 29)
 >>>>>>> v3.18
@@ -980,6 +1064,10 @@ enum bcm63xx_irq {
 #define BCM_6338_ENET1_IRQ		0
 #define BCM_6338_ENET_PHY_IRQ		(IRQ_INTERNAL_BASE + 9)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6338_HSSPI_IRQ		0
+>>>>>>> v3.18
 =======
 #define BCM_6338_HSSPI_IRQ		0
 >>>>>>> v3.18
@@ -1022,6 +1110,10 @@ enum bcm63xx_irq {
 #define BCM_6345_ENET1_IRQ		0
 #define BCM_6345_ENET_PHY_IRQ		(IRQ_INTERNAL_BASE + 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6345_HSSPI_IRQ		0
+>>>>>>> v3.18
 =======
 #define BCM_6345_HSSPI_IRQ		0
 >>>>>>> v3.18
@@ -1064,6 +1156,10 @@ enum bcm63xx_irq {
 #define BCM_6348_ENET1_IRQ		(IRQ_INTERNAL_BASE + 7)
 #define BCM_6348_ENET_PHY_IRQ		(IRQ_INTERNAL_BASE + 9)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6348_HSSPI_IRQ		0
+>>>>>>> v3.18
 =======
 #define BCM_6348_HSSPI_IRQ		0
 >>>>>>> v3.18
@@ -1106,6 +1202,10 @@ enum bcm63xx_irq {
 #define BCM_6358_ENET1_IRQ		(IRQ_INTERNAL_BASE + 6)
 #define BCM_6358_ENET_PHY_IRQ		(IRQ_INTERNAL_BASE + 9)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6358_HSSPI_IRQ		0
+>>>>>>> v3.18
 =======
 #define BCM_6358_HSSPI_IRQ		0
 >>>>>>> v3.18
@@ -1222,6 +1322,10 @@ enum bcm63xx_irq {
 #define BCM_6368_ENET1_IRQ		0
 #define BCM_6368_ENET_PHY_IRQ		(IRQ_INTERNAL_BASE + 15)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BCM_6368_HSSPI_IRQ		0
+>>>>>>> v3.18
 =======
 #define BCM_6368_HSSPI_IRQ		0
 >>>>>>> v3.18
@@ -1273,6 +1377,10 @@ extern const int *bcm63xx_irqs;
 	[IRQ_ENET1]		= BCM_## __cpu ##_ENET1_IRQ,		\
 	[IRQ_ENET_PHY]		= BCM_## __cpu ##_ENET_PHY_IRQ,		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IRQ_HSSPI]		= BCM_## __cpu ##_HSSPI_IRQ,		\
+>>>>>>> v3.18
 =======
 	[IRQ_HSSPI]		= BCM_## __cpu ##_HSSPI_IRQ,		\
 >>>>>>> v3.18

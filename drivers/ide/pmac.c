@@ -417,8 +417,12 @@ static void pmac_ide_apply_timings(ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -439,8 +443,12 @@ static void pmac_ide_kauai_apply_timings(ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -463,8 +471,12 @@ pmac_ide_do_update_timings(ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -513,8 +525,12 @@ static void pmac_write_devctl(ide_hwif_t *hwif, u8 ctl)
 static void pmac_ide_set_pio_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -798,8 +814,12 @@ set_timings_mdma(ide_drive_t *drive, int intf_type, u32 *timings, u32 *timings2,
 static void pmac_ide_set_dma_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -940,8 +960,12 @@ static int pmac_ide_do_resume(pmac_ide_hwif_t *pmif)
 static u8 pmac_ide_cable_detect(ide_hwif_t *hwif)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -976,8 +1000,12 @@ static void pmac_ide_init_dev(ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1257,8 +1285,12 @@ static int
 pmac_ide_macio_suspend(struct macio_dev *mdev, pm_message_t mesg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(&mdev->ofdev.dev);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(&mdev->ofdev.dev);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(&mdev->ofdev.dev);
 >>>>>>> v3.18
@@ -1278,8 +1310,12 @@ static int
 pmac_ide_macio_resume(struct macio_dev *mdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(&mdev->ofdev.dev);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(&mdev->ofdev.dev);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(&mdev->ofdev.dev);
 >>>>>>> v3.18
@@ -1355,7 +1391,10 @@ static int pmac_ide_pci_attach(struct pci_dev *pdev,
 	if (rc != 0) {
 		/* The inteface is released to the common IDE layer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		iounmap(base);
@@ -1405,8 +1444,12 @@ pmac_ide_pci_resume(struct pci_dev *pdev)
 static void pmac_ide_macio_mb_event(struct macio_dev* mdev, int mb_state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(&mdev->ofdev.dev);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(&mdev->ofdev.dev);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(&mdev->ofdev.dev);
 >>>>>>> v3.18
@@ -1512,8 +1555,12 @@ static int pmac_ide_build_dmatable(ide_drive_t *drive, struct ide_cmd *cmd)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1594,8 +1641,12 @@ static int pmac_ide_dma_setup(ide_drive_t *drive, struct ide_cmd *cmd)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1624,8 +1675,12 @@ pmac_ide_dma_start(ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1646,8 +1701,12 @@ pmac_ide_dma_end (ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1675,8 +1734,12 @@ pmac_ide_dma_test_irq (ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1734,8 +1797,12 @@ pmac_ide_dma_lost_irq (ide_drive_t *drive)
 {
 	ide_hwif_t *hwif = drive->hwif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18
@@ -1761,8 +1828,12 @@ static const struct ide_dma_ops pmac_dma_ops = {
 static int pmac_ide_init_dma(ide_hwif_t *hwif, const struct ide_port_info *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmac_ide_hwif_t *pmif =
 		(pmac_ide_hwif_t *)dev_get_drvdata(hwif->gendev.parent);
+=======
+	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
+>>>>>>> v3.18
 =======
 	pmac_ide_hwif_t *pmif = dev_get_drvdata(hwif->gendev.parent);
 >>>>>>> v3.18

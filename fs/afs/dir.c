@@ -23,7 +23,11 @@ static struct dentry *afs_lookup(struct inode *dir, struct dentry *dentry,
 				 unsigned int flags);
 static int afs_dir_open(struct inode *inode, struct file *file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int afs_readdir(struct file *file, void *dirent, filldir_t filldir);
+=======
+static int afs_readdir(struct file *file, struct dir_context *ctx);
+>>>>>>> v3.18
 =======
 static int afs_readdir(struct file *file, struct dir_context *ctx);
 >>>>>>> v3.18
@@ -48,7 +52,11 @@ const struct file_operations afs_dir_file_operations = {
 	.open		= afs_dir_open,
 	.release	= afs_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= afs_readdir,
+=======
+	.iterate	= afs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= afs_readdir,
 >>>>>>> v3.18
@@ -128,9 +136,15 @@ struct afs_dir_page {
 
 struct afs_lookup_cookie {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct afs_fid	fid;
 	const char	*name;
 	size_t		nlen;
+=======
+	struct dir_context ctx;
+	struct afs_fid	fid;
+	struct qstr name;
+>>>>>>> v3.18
 =======
 	struct dir_context ctx;
 	struct afs_fid	fid;
@@ -243,6 +257,7 @@ static int afs_dir_open(struct inode *inode, struct file *file)
  * deal with one block in an AFS directory
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int afs_dir_iterate_block(unsigned *fpos,
 				 union afs_dir_block *block,
 				 unsigned blkoff,
@@ -253,10 +268,16 @@ static int afs_dir_iterate_block(struct dir_context *ctx,
 				 union afs_dir_block *block,
 				 unsigned blkoff)
 >>>>>>> v3.18
+=======
+static int afs_dir_iterate_block(struct dir_context *ctx,
+				 union afs_dir_block *block,
+				 unsigned blkoff)
+>>>>>>> v3.18
 {
 	union afs_dirent *dire;
 	unsigned offset, next, curr;
 	size_t nlen;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int tmp, ret;
 
@@ -264,11 +285,16 @@ static int afs_dir_iterate_block(struct dir_context *ctx,
 
 	curr = (*fpos - blkoff) / sizeof(union afs_dirent);
 =======
+=======
+>>>>>>> v3.18
 	int tmp;
 
 	_enter("%u,%x,%p,,",(unsigned)ctx->pos,blkoff,block);
 
 	curr = (ctx->pos - blkoff) / sizeof(union afs_dirent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* walk through the block, an entry at a time */
@@ -285,7 +311,11 @@ static int afs_dir_iterate_block(struct dir_context *ctx,
 			       blkoff / sizeof(union afs_dir_block), offset);
 			if (offset >= curr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				*fpos = blkoff +
+=======
+				ctx->pos = blkoff +
+>>>>>>> v3.18
 =======
 				ctx->pos = blkoff +
 >>>>>>> v3.18
@@ -335,6 +365,7 @@ static int afs_dir_iterate_block(struct dir_context *ctx,
 
 		/* found the next entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = filldir(cookie,
 			      dire->u.name,
 			      nlen,
@@ -344,17 +375,26 @@ static int afs_dir_iterate_block(struct dir_context *ctx,
 			      ntohl(dire->u.unique) : DT_UNKNOWN);
 		if (ret < 0) {
 =======
+=======
+>>>>>>> v3.18
 		if (!dir_emit(ctx, dire->u.name, nlen,
 			      ntohl(dire->u.vnode),
 			      ctx->actor == afs_lookup_filldir ?
 			      ntohl(dire->u.unique) : DT_UNKNOWN)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			_leave(" = 0 [full]");
 			return 0;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*fpos = blkoff + next * sizeof(union afs_dirent);
+=======
+		ctx->pos = blkoff + next * sizeof(union afs_dirent);
+>>>>>>> v3.18
 =======
 		ctx->pos = blkoff + next * sizeof(union afs_dirent);
 >>>>>>> v3.18
@@ -368,8 +408,13 @@ static int afs_dir_iterate_block(struct dir_context *ctx,
  * iterate through the data blob that lists the contents of an AFS directory
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int afs_dir_iterate(struct inode *dir, unsigned *fpos, void *cookie,
 			   filldir_t filldir, struct key *key)
+=======
+static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
+			   struct key *key)
+>>>>>>> v3.18
 =======
 static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 			   struct key *key)
@@ -382,7 +427,11 @@ static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_enter("{%lu},%u,,", dir->i_ino, *fpos);
+=======
+	_enter("{%lu},%u,,", dir->i_ino, (unsigned)ctx->pos);
+>>>>>>> v3.18
 =======
 	_enter("{%lu},%u,,", dir->i_ino, (unsigned)ctx->pos);
 >>>>>>> v3.18
@@ -394,6 +443,7 @@ static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 
 	/* round the file position up to the next entry boundary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*fpos += sizeof(union afs_dirent) - 1;
 	*fpos &= ~(sizeof(union afs_dirent) - 1);
 
@@ -402,6 +452,8 @@ static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 	while (*fpos < dir->i_size) {
 		blkoff = *fpos & ~(sizeof(union afs_dir_block) - 1);
 =======
+=======
+>>>>>>> v3.18
 	ctx->pos += sizeof(union afs_dirent) - 1;
 	ctx->pos &= ~(sizeof(union afs_dirent) - 1);
 
@@ -409,6 +461,9 @@ static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 	ret = 0;
 	while (ctx->pos < dir->i_size) {
 		blkoff = ctx->pos & ~(sizeof(union afs_dir_block) - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* fetch the appropriate page from the directory */
@@ -427,8 +482,12 @@ static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 			dblock = &dbuf->blocks[(blkoff % PAGE_SIZE) /
 					       sizeof(union afs_dir_block)];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = afs_dir_iterate_block(fpos, dblock, blkoff,
 						    cookie, filldir);
+=======
+			ret = afs_dir_iterate_block(ctx, dblock, blkoff);
+>>>>>>> v3.18
 =======
 			ret = afs_dir_iterate_block(ctx, dblock, blkoff);
 >>>>>>> v3.18
@@ -440,7 +499,11 @@ static int afs_dir_iterate(struct inode *dir, struct dir_context *ctx,
 			blkoff += sizeof(union afs_dir_block);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while (*fpos < dir->i_size && blkoff < limit);
+=======
+		} while (ctx->pos < dir->i_size && blkoff < limit);
+>>>>>>> v3.18
 =======
 		} while (ctx->pos < dir->i_size && blkoff < limit);
 >>>>>>> v3.18
@@ -457,6 +520,7 @@ out:
 /*
  * read an AFS directory
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int afs_readdir(struct file *file, void *cookie, filldir_t filldir)
 {
@@ -476,10 +540,15 @@ static int afs_readdir(struct file *file, void *cookie, filldir_t filldir)
 	_leave(" = %d", ret);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int afs_readdir(struct file *file, struct dir_context *ctx)
 {
 	return afs_dir_iterate(file_inode(file), 
 			      ctx, file->private_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -494,8 +563,13 @@ static int afs_lookup_filldir(void *_cookie, const char *name, int nlen,
 	struct afs_lookup_cookie *cookie = _cookie;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_enter("{%s,%Zu},%s,%u,,%llu,%u",
 	       cookie->name, cookie->nlen, name, nlen,
+=======
+	_enter("{%s,%u},%s,%u,,%llu,%u",
+	       cookie->name.name, cookie->name.len, name, nlen,
+>>>>>>> v3.18
 =======
 	_enter("{%s,%u},%s,%u,,%llu,%u",
 	       cookie->name.name, cookie->name.len, name, nlen,
@@ -507,7 +581,12 @@ static int afs_lookup_filldir(void *_cookie, const char *name, int nlen,
 	BUILD_BUG_ON(sizeof(union afs_dirent) != 32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cookie->nlen != nlen || memcmp(cookie->name, name, nlen) != 0) {
+=======
+	if (cookie->name.len != nlen ||
+	    memcmp(cookie->name.name, name, nlen) != 0) {
+>>>>>>> v3.18
 =======
 	if (cookie->name.len != nlen ||
 	    memcmp(cookie->name.name, name, nlen) != 0) {
@@ -532,21 +611,28 @@ static int afs_do_lookup(struct inode *dir, struct dentry *dentry,
 			 struct afs_fid *fid, struct key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct afs_lookup_cookie cookie;
 	struct afs_super_info *as;
 	unsigned fpos;
 =======
+=======
+>>>>>>> v3.18
 	struct afs_super_info *as = dir->i_sb->s_fs_info;
 	struct afs_lookup_cookie cookie = {
 		.ctx.actor = afs_lookup_filldir,
 		.name = dentry->d_name,
 		.fid.vid = as->volume->vid
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	_enter("{%lu},%p{%s},", dir->i_ino, dentry, dentry->d_name.name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	as = dir->i_sb->s_fs_info;
 
@@ -559,6 +645,10 @@ static int afs_do_lookup(struct inode *dir, struct dentry *dentry,
 	fpos = 0;
 	ret = afs_dir_iterate(dir, &fpos, &cookie, afs_lookup_filldir,
 			      key);
+=======
+	/* search the directory */
+	ret = afs_dir_iterate(dir, &cookie.ctx, key);
+>>>>>>> v3.18
 =======
 	/* search the directory */
 	ret = afs_dir_iterate(dir, &cookie.ctx, key);
@@ -727,9 +817,12 @@ static int afs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	/* lock down the parent dentry so we can peer at it */
 	parent = dget_parent(dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!parent->d_inode)
 		goto out_bad;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dir = AFS_FS_I(parent->d_inode);
@@ -802,7 +895,10 @@ static int afs_d_revalidate(struct dentry *dentry, unsigned int flags)
 out_valid:
 	dentry->d_fsdata = dir_version;
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_skip:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dput(parent);
@@ -818,6 +914,7 @@ not_found:
 
 out_bad:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dentry->d_inode) {
 		/* don't unhash if we have submounts */
 		if (have_submounts(dentry))
@@ -828,6 +925,10 @@ out_bad:
 	       parent->d_name.name, dentry->d_name.name);
 	shrink_dcache_parent(dentry);
 	d_drop(dentry);
+=======
+	_debug("dropping dentry %s/%s",
+	       parent->d_name.name, dentry->d_name.name);
+>>>>>>> v3.18
 =======
 	_debug("dropping dentry %s/%s",
 	       parent->d_name.name, dentry->d_name.name);
@@ -893,10 +994,13 @@ static int afs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	       dvnode->fid.vid, dvnode->fid.vnode, dentry->d_name.name, mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENAMETOOLONG;
 	if (dentry->d_name.len >= AFSNAMEMAX)
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	key = afs_request_key(dvnode->volume->cell);
@@ -961,10 +1065,13 @@ static int afs_rmdir(struct inode *dir, struct dentry *dentry)
 	       dvnode->fid.vid, dvnode->fid.vnode, dentry->d_name.name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENAMETOOLONG;
 	if (dentry->d_name.len >= AFSNAMEMAX)
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	key = afs_request_key(dvnode->volume->cell);
@@ -1084,10 +1191,13 @@ static int afs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 	       dvnode->fid.vid, dvnode->fid.vnode, dentry->d_name.name, mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENAMETOOLONG;
 	if (dentry->d_name.len >= AFSNAMEMAX)
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	key = afs_request_key(dvnode->volume->cell);
@@ -1156,10 +1266,13 @@ static int afs_link(struct dentry *from, struct inode *dir,
 	       dentry->d_name.name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENAMETOOLONG;
 	if (dentry->d_name.len >= AFSNAMEMAX)
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	key = afs_request_key(dvnode->volume->cell);
@@ -1207,10 +1320,13 @@ static int afs_symlink(struct inode *dir, struct dentry *dentry,
 	       content);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENAMETOOLONG;
 	if (dentry->d_name.len >= AFSNAMEMAX)
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = -EINVAL;
@@ -1284,10 +1400,13 @@ static int afs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	       new_dentry->d_name.name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENAMETOOLONG;
 	if (new_dentry->d_name.len >= AFSNAMEMAX)
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	key = afs_request_key(orig_dvnode->volume->cell);

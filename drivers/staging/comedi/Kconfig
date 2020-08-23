@@ -43,6 +43,7 @@ menuconfig COMEDI_MISC_DRIVERS
 if COMEDI_MISC_DRIVERS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_KCOMEDILIB
 	tristate "Comedi kcomedilib"
 	---help---
@@ -56,11 +57,21 @@ config COMEDI_BOND
 	tristate "Comedi device bonding support"
 	select COMEDI_KCOMEDILIB
 >>>>>>> v3.18
+=======
+config COMEDI_BOND
+	tristate "Comedi device bonding support"
+	select COMEDI_KCOMEDILIB
+>>>>>>> v3.18
 	---help---
 	  Enable support for a driver to 'bond' (merge) multiple subdevices
 	  from multiple devices together as one.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  Currently, it only handles digital I/O subdevices.
+
+>>>>>>> v3.18
 =======
 	  Currently, it only handles digital I/O subdevices.
 
@@ -71,7 +82,10 @@ config COMEDI_BOND
 config COMEDI_TEST
 	tristate "Fake waveform generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -103,6 +117,7 @@ config COMEDI_SERIAL2002
 	  called serial2002.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_SKEL
 	tristate "Comedi skeleton driver"
 	---help---
@@ -111,6 +126,8 @@ config COMEDI_SKEL
 	  To compile this driver as a module, choose M here: the module will be
 	  called skel.
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_SSV_DNP
 	tristate "SSV Embedded Systems DIL/Net-PC support"
 	depends on X86_32 || COMPILE_TEST
@@ -119,6 +136,9 @@ config COMEDI_SSV_DNP
 
 	  To compile this driver as a module, choose M here: the module will be
 	  called ssv_dnp.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # COMEDI_MISC_DRIVERS
@@ -126,7 +146,10 @@ endif # COMEDI_MISC_DRIVERS
 menuconfig COMEDI_ISA_DRIVERS
 	bool "Comedi ISA and PC/104 drivers"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ISA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -139,6 +162,7 @@ menuconfig COMEDI_ISA_DRIVERS
 if COMEDI_ISA_DRIVERS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_ACL7225B
 	tristate "ADlink NuDAQ ACL-7225b and compatibles support"
 	---help---
@@ -148,6 +172,8 @@ config COMEDI_ACL7225B
 	  To compile this driver as a module, choose M here: the module will be
 	  called acl7225b.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config COMEDI_PCL711
@@ -163,6 +189,7 @@ config COMEDI_PCL724
 	select COMEDI_8255
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Enable support for Advantech PCL-724, PCL-722, PCL-731 and
 	  ADlink ACL-7122, ACL-7124, PET-48DIO ISA cards
 
@@ -177,6 +204,8 @@ config COMEDI_PCL725
 	  To compile this driver as a module, choose M here: the module will be
 	  called pcl725.
 =======
+=======
+>>>>>>> v3.18
 	  Enable support for ISA and PC/104 based 8255 digital i/o boards. This
 	  driver provides a legacy comedi driver wrapper for the generic 8255
 	  support driver.
@@ -193,6 +222,9 @@ config COMEDI_PCL725
 
 	  To compile this driver as a module, choose M here: the module will be
 	  called pcl724.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config COMEDI_PCL726
@@ -205,11 +237,14 @@ config COMEDI_PCL726
 
 config COMEDI_PCL730
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Advantech PCL-730 and ADlink ACL-7130 ISA card support"
 	---help---
 	  Enable support for Advantech PCL-730, ICP ISO-730 and ADlink
 	  ACL-7130 ISA cards
 =======
+=======
+>>>>>>> v3.18
 	tristate "Simple Digital I/O board support (8-bit ports)"
 	---help---
 	  Enable support for various simple ISA or PC/104 Digital I/O boards.
@@ -228,6 +263,9 @@ config COMEDI_PCL730
 	  Diamond Systems OPMM-1616-XT  iso - 16 in/16 out
 	  Diamond Systems PEARL-MM-P    iso - 16 out
 	  Diamond Systems IR104-PBF     iso - 20 in/20 out
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the module will be
@@ -273,6 +311,7 @@ config COMEDI_PCM3724
 	  called pcm3724.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_PCM3730
 	tristate "Advantech PCM-3730 and clone PC/104 board support"
 	---help---
@@ -281,6 +320,8 @@ config COMEDI_PCM3730
 	  To compile this driver as a module, choose M here: the module will be
 	  called pcm3730.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config COMEDI_AMPLC_DIO200_ISA
@@ -328,11 +369,14 @@ config COMEDI_RTI802
 	  called rti802.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_DAS16M1
 	tristate "MeasurementComputing CIO-DAS16/M1DAS-16 ISA card support"
 	select COMEDI_8255
 	select COMEDI_FC
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_DAC02
 	tristate "Keithley Metrabyte DAC02 compatible ISA card support"
 	---help---
@@ -344,6 +388,9 @@ config COMEDI_DAC02
 config COMEDI_DAS16M1
 	tristate "MeasurementComputing CIO-DAS16/M1DAS-16 ISA card support"
 	select COMEDI_8255
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  Enable support for Measurement Computing CIO-DAS16/M1 ISA cards.
@@ -369,7 +416,10 @@ config COMEDI_DAS16
 	depends on ISA_DMA_API
 	select COMEDI_8255
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -388,7 +438,10 @@ config COMEDI_DAS16
 config COMEDI_DAS800
 	tristate "DAS800 and compatible ISA card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -404,7 +457,10 @@ config COMEDI_DAS1800
 	tristate "DAS1800 and compatible ISA card support"
 	depends on VIRT_TO_BUS && ISA_DMA_API
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -470,7 +526,10 @@ config COMEDI_DT2817
 config COMEDI_DT282X
 	tristate "Data Translation DT2821 series and DT-EZ ISA card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	depends on VIRT_TO_BUS && ISA_DMA_API
@@ -492,7 +551,10 @@ config COMEDI_DMM32AT
 	  called dmm32at.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_UNIOXX5
 	tristate "Fastwel UNIOxx-5 analog and digital io board support"
 	---help---
@@ -501,6 +563,9 @@ config COMEDI_UNIOXX5
 	  To compile this driver as a module, choose M here: the module will be
 	  called unioxx5.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config COMEDI_FL512
 	tristate "FL512 ISA card support"
@@ -529,7 +594,10 @@ config COMEDI_AIO_IIRO_16
 	  called aio_iiro_16.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_II_PCI20KC
 	tristate "Intelligent Instruments PCI-20001C carrier support"
 	depends on HAS_IOMEM
@@ -540,6 +608,9 @@ config COMEDI_II_PCI20KC
 	  To compile this driver as a module, choose M here: the module will be
 	  called ii_pci20kc.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config COMEDI_C6XDIGIO
 	tristate "Mechatronic Systems Inc. C6x_DIGIO DSP daughter card support"
@@ -569,7 +640,10 @@ config COMEDI_ADQ12B
 config COMEDI_NI_AT_A2150
 	tristate "NI AT-A2150 ISA card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	depends on VIRT_TO_BUS && ISA_DMA_API
@@ -590,7 +664,10 @@ config COMEDI_NI_AT_AO
 config COMEDI_NI_ATMIO
 	tristate "NI AT-MIO E series ISA-PNP card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ISAPNP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select COMEDI_8255
@@ -606,16 +683,22 @@ config COMEDI_NI_ATMIO
 
 config COMEDI_NI_ATMIO16D
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "NI AT-MIO16/AT-MIO16D series ISA-PNP card support"
 	depends on ISAPNP
 	select COMEDI_8255
 	---help---
 	  Enable support for National Instruments AT-MIO16/AT-MIO16D cards.
 =======
+=======
+>>>>>>> v3.18
 	tristate "NI AT-MIO-16/AT-MIO-16D series ISA card support"
 	select COMEDI_8255
 	---help---
 	  Enable support for National Instruments AT-MIO-16/AT-MIO-16D cards.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the module will be
@@ -625,7 +708,11 @@ config COMEDI_NI_LABPC_ISA
 	tristate "NI Lab-PC and compatibles ISA support"
 	select COMEDI_NI_LABPC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIRT_TO_BUS
+=======
+	select COMEDI_NI_LABPC_ISADMA if ISA_DMA_API && VIRT_TO_BUS
+>>>>>>> v3.18
 =======
 	select COMEDI_NI_LABPC_ISADMA if ISA_DMA_API && VIRT_TO_BUS
 >>>>>>> v3.18
@@ -681,6 +768,7 @@ config COMEDI_MULTIQ3
 	  called multiq3.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_POC
 	tristate "Generic driver for very simple devices"
 	---help---
@@ -691,6 +779,8 @@ config COMEDI_POC
 	  To compile this driver as a module, choose M here: the module will be
 	  called poc.
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_S526
 	tristate "Sensoray s526 support"
 	---help---
@@ -698,6 +788,9 @@ config COMEDI_S526
 
 	  To compile this driver as a module, choose M here: the module will be
 	  called s526.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # COMEDI_ISA_DRIVERS
@@ -772,6 +865,10 @@ config COMEDI_ADDI_APCI_1516
 config COMEDI_ADDI_APCI_1564
 	tristate "ADDI-DATA APCI_1564 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select COMEDI_ADDI_WATCHDOG
+>>>>>>> v3.18
 =======
 	select COMEDI_ADDI_WATCHDOG
 >>>>>>> v3.18
@@ -810,8 +907,12 @@ config COMEDI_ADDI_APCI_2200
 config COMEDI_ADDI_APCI_3120
 	tristate "ADDI-DATA APCI_3120/3001 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIRT_TO_BUS
 	select COMEDI_FC
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18
@@ -867,7 +968,10 @@ config COMEDI_ADL_PCI8164
 config COMEDI_ADL_PCI9111
 	tristate "ADLink PCI-9111HR support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -879,7 +983,11 @@ config COMEDI_ADL_PCI9111
 config COMEDI_ADL_PCI9118
 	tristate "ADLink PCI-9118DG, PCI-9118HG, PCI-9118HR support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18
@@ -947,7 +1055,11 @@ config COMEDI_AMPLC_PC236_PCI
 
 	  To compile this driver as a module, choose M here: the module will be
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  called amplc_pc236.
+=======
+	  called amplc_pci236.
+>>>>>>> v3.18
 =======
 	  called amplc_pci236.
 >>>>>>> v3.18
@@ -964,7 +1076,10 @@ config COMEDI_AMPLC_PC263_PCI
 config COMEDI_AMPLC_PCI224
 	tristate "Amplicon PCI224 and PCI234 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1020,6 +1135,7 @@ config COMEDI_DYNA_PCI10XX
 	  called dyna_pci10xx.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_UNIOXX5
 	tristate "Fastwel UNIOxx-5 analog and digital io board support"
 	---help---
@@ -1035,6 +1151,10 @@ config COMEDI_GSC_HPDI
 config COMEDI_GSC_HPDI
 	tristate "General Standards PCI-HPDI32 / PMC-HPDI32 support"
 >>>>>>> v3.18
+=======
+config COMEDI_GSC_HPDI
+	tristate "General Standards PCI-HPDI32 / PMC-HPDI32 support"
+>>>>>>> v3.18
 	---help---
 	  Enable support for General Standards Corporation high speed parallel
 	  digital interface rs485 boards PCI-HPDI32 and PMC-HPDI32.
@@ -1044,13 +1164,19 @@ config COMEDI_GSC_HPDI
 	  called gsc_hpdi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_MF6X4
 	tristate "Humusoft MF634 and MF624 DAQ Card support"
 	---help---
 	  This driver supports both Humusoft MF634 and MF624 Data acquisition
 	  cards. The legacy Humusoft MF614 card is not supported.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config COMEDI_ICP_MULTI
 	tristate "Inova ICP_MULTI support"
@@ -1061,6 +1187,7 @@ config COMEDI_ICP_MULTI
 	  called icp_multi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_II_PCI20KC
 	tristate "Intelligent Instruments PCI-20001C carrier support"
 	---help---
@@ -1070,6 +1197,8 @@ config COMEDI_II_PCI20KC
 	  To compile this driver as a module, choose M here: the module will be
 	  called ii_pci20kc.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config COMEDI_DAQBOARD2000
@@ -1101,7 +1230,10 @@ config COMEDI_CB_PCIDAS64
 	tristate "MeasurementComputing PCI-DAS 64xx, 60xx, and 4020 support"
 	select COMEDI_8255
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1115,7 +1247,10 @@ config COMEDI_CB_PCIDAS
 	tristate "MeasurementComputing PCI-DAS support"
 	select COMEDI_8255
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1178,8 +1313,11 @@ config COMEDI_ME_DAQ
 config COMEDI_NI_6527
 	tristate "NI 6527 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_DMA
 	select COMEDI_MITE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1191,8 +1329,11 @@ config COMEDI_NI_6527
 config COMEDI_NI_65XX
 	tristate "NI 65xx static dio PCI card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_DMA
 	select COMEDI_MITE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1219,8 +1360,11 @@ config COMEDI_NI_660X
 config COMEDI_NI_670X
 	tristate "NI 670x PCI card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_DMA
 	select COMEDI_MITE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1232,9 +1376,13 @@ config COMEDI_NI_670X
 config COMEDI_NI_LABPC_PCI
 	tristate "NI Lab-PC PCI-1200 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAS_DMA
 	select COMEDI_NI_LABPC
 	select COMEDI_MITE
+=======
+	select COMEDI_NI_LABPC
+>>>>>>> v3.18
 =======
 	select COMEDI_NI_LABPC
 >>>>>>> v3.18
@@ -1262,7 +1410,10 @@ config COMEDI_NI_PCIMIO
 	select COMEDI_NI_TIOCMD
 	select COMEDI_8255
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1289,6 +1440,7 @@ config COMEDI_RTD520
 	  called rtd520.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_S526
 	tristate "Sensoray s526 support"
 	---help---
@@ -1304,12 +1456,17 @@ config COMEDI_S626
 config COMEDI_S626
 	tristate "Sensoray 626 support"
 >>>>>>> v3.18
+=======
+config COMEDI_S626
+	tristate "Sensoray 626 support"
+>>>>>>> v3.18
 	---help---
 	  Enable support for Sensoray 626
 
 	  To compile this driver as a module, choose M here: the module will be
 	  called s626.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config COMEDI_SSV_DNP
 	tristate "SSV Embedded Systems DIL/Net-PC support"
@@ -1319,6 +1476,8 @@ config COMEDI_SSV_DNP
 	  To compile this driver as a module, choose M here: the module will be
 	  called ssv_dnp.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config COMEDI_MITE
@@ -1391,7 +1550,10 @@ config COMEDI_NI_MIO_CS
 	select COMEDI_NI_TIO
 	select COMEDI_8255
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1430,7 +1592,10 @@ config COMEDI_DT9812
 	  called dt9812.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_NI_USB6501
 	tristate "NI USB-6501 support"
 	---help---
@@ -1442,6 +1607,9 @@ config COMEDI_NI_USB6501
 	  To compile this driver as a module, choose M here: the module will be
 	  called ni_usb6501.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config COMEDI_USBDUX
 	tristate "ITL USB-DUX-D support"
@@ -1454,7 +1622,10 @@ config COMEDI_USBDUX
 config COMEDI_USBDUXFAST
 	tristate "ITL USB-DUXfast support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1466,7 +1637,10 @@ config COMEDI_USBDUXFAST
 config COMEDI_USBDUXSIGMA
 	tristate "ITL USB-DUXsigma support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1502,9 +1676,12 @@ config COMEDI_8255
 	  called 8255.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMEDI_FC
 	tristate
 =======
+=======
+>>>>>>> v3.18
 config COMEDI_KCOMEDILIB
 	tristate "Comedi kcomedilib"
 	---help---
@@ -1518,6 +1695,9 @@ config COMEDI_KCOMEDILIB
 
 	  To compile kcomedilib as a module, choose M here: the module will be
 	  called kcomedilib.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config COMEDI_AMPLC_DIO200
@@ -1535,7 +1715,13 @@ config COMEDI_NI_LABPC
 	tristate
 	select COMEDI_8255
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMEDI_FC
+=======
+
+config COMEDI_NI_LABPC_ISADMA
+	tristate
+>>>>>>> v3.18
 =======
 
 config COMEDI_NI_LABPC_ISADMA

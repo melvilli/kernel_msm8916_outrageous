@@ -92,7 +92,11 @@ static void pmic_program_irqtype(int gpio, int type)
 static int pmic_gpio_direction_input(struct gpio_chip *chip, unsigned offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (offset > 8) {
+=======
+	if (offset >= 8) {
+>>>>>>> v3.18
 =======
 	if (offset >= 8) {
 >>>>>>> v3.18
@@ -135,7 +139,11 @@ static int pmic_gpio_get(struct gpio_chip *chip, unsigned offset)
 
 	/* we only have 8 GPIO pins we can use as input */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (offset > 8)
+=======
+	if (offset >= 8)
+>>>>>>> v3.18
 =======
 	if (offset >= 8)
 >>>>>>> v3.18
@@ -297,7 +305,11 @@ static int platform_pmic_gpio_probe(struct platform_device *pdev)
 	if (retval) {
 		pr_warn("Interrupt request failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		goto fail_request_irq;
+>>>>>>> v3.18
 =======
 		goto fail_request_irq;
 >>>>>>> v3.18
@@ -312,6 +324,12 @@ static int platform_pmic_gpio_probe(struct platform_device *pdev)
 	}
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+fail_request_irq:
+	gpiochip_remove(&pg->chip);
+>>>>>>> v3.18
 =======
 
 fail_request_irq:

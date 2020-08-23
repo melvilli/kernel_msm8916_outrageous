@@ -33,6 +33,7 @@
 #define RTC_RBUDR_SHIFT			4
 #define RTC_RBUDR_MASK			(1 << RTC_RBUDR_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* WTSR and SMPL Register */
 #define WTSRT_SHIFT			0
 #define SMPLT_SHIFT			2
@@ -44,6 +45,8 @@
 #define SMPL_EN_MASK			(1 << SMPL_EN_SHIFT)
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* RTC Hour register */
 #define HOUR_PM_SHIFT			6
 #define HOUR_PM_MASK			(1 << HOUR_PM_SHIFT)
@@ -53,7 +56,10 @@
 
 #define MAX77686_RTC_UPDATE_DELAY	16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef MAX77686_RTC_WTSR_SMPL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -87,6 +93,7 @@ enum MAX77686_RTC_OP {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int max77686_rtc_calculate_wday(u8 shifted)
 {
 	int counter = -1;
@@ -97,6 +104,8 @@ static inline int max77686_rtc_calculate_wday(u8 shifted)
 	return counter;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void max77686_rtc_data_to_tm(u8 *data, struct rtc_time *tm,
@@ -113,7 +122,12 @@ static void max77686_rtc_data_to_tm(u8 *data, struct rtc_time *tm,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm->tm_wday = max77686_rtc_calculate_wday(data[RTC_WEEKDAY] & 0x7f);
+=======
+	/* Only a single bit is set in data[], so fls() would be equivalent */
+	tm->tm_wday = ffs(data[RTC_WEEKDAY] & 0x7f) - 1;
+>>>>>>> v3.18
 =======
 	/* Only a single bit is set in data[], so fls() would be equivalent */
 	tm->tm_wday = ffs(data[RTC_WEEKDAY] & 0x7f) - 1;
@@ -134,7 +148,11 @@ static int max77686_rtc_tm_to_data(struct rtc_time *tm, u8 *data)
 	data[RTC_DATE] = tm->tm_mday;
 	data[RTC_MONTH] = tm->tm_mon + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data[RTC_YEAR] = tm->tm_year > 100 ? (tm->tm_year - 100) : 0 ;
+=======
+	data[RTC_YEAR] = tm->tm_year > 100 ? (tm->tm_year - 100) : 0;
+>>>>>>> v3.18
 =======
 	data[RTC_YEAR] = tm->tm_year > 100 ? (tm->tm_year - 100) : 0;
 >>>>>>> v3.18
@@ -431,6 +449,7 @@ static const struct rtc_class_ops max77686_rtc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef MAX77686_RTC_WTSR_SMPL
 static void max77686_rtc_enable_wtsr(struct max77686_rtc_info *info, bool enable)
 {
@@ -491,6 +510,8 @@ static void max77686_rtc_enable_smpl(struct max77686_rtc_info *info, bool enable
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int max77686_rtc_init_reg(struct max77686_rtc_info *info)
 {
 	u8 data[2];
@@ -514,6 +535,7 @@ static int max77686_rtc_init_reg(struct max77686_rtc_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regmap_config max77686_rtc_regmap_config = {
 	.reg_bits = 8,
 	.val_bits = 8,
@@ -521,12 +543,18 @@ static struct regmap_config max77686_rtc_regmap_config = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int max77686_rtc_probe(struct platform_device *pdev)
 {
 	struct max77686_dev *max77686 = dev_get_drvdata(pdev->dev.parent);
 	struct max77686_rtc_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, virq;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -543,6 +571,7 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 	info->max77686 = max77686;
 	info->rtc = max77686->rtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->max77686->rtc_regmap = devm_regmap_init_i2c(info->max77686->rtc,
 					 &max77686_rtc_regmap_config);
 	if (IS_ERR(info->max77686->rtc_regmap)) {
@@ -551,6 +580,9 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 				ret);
 		return ret;
 	}
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -564,11 +596,14 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef MAX77686_RTC_WTSR_SMPL
 	max77686_rtc_enable_wtsr(info, true);
 	max77686_rtc_enable_smpl(info, true);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_init_wakeup(&pdev->dev, 1);
@@ -578,8 +613,11 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 
 	if (IS_ERR(info->rtc_dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&pdev->dev, "%s: fail\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = PTR_ERR(info->rtc_dev);
@@ -588,6 +626,7 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 			ret = -EINVAL;
 		goto err_rtc;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	virq = irq_create_mapping(max77686->irq_domain, MAX77686_RTCIRQ_RTCA1);
 	if (!virq) {
@@ -599,6 +638,8 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 	ret = devm_request_threaded_irq(&pdev->dev, virq, NULL,
 				max77686_rtc_alarm_irq, 0, "rtc-alarm0", info);
 =======
+=======
+>>>>>>> v3.18
 
 	if (!max77686->rtc_irq_data) {
 		ret = -EINVAL;
@@ -615,6 +656,9 @@ static int max77686_rtc_probe(struct platform_device *pdev)
 
 	ret = devm_request_threaded_irq(&pdev->dev, info->virq, NULL,
 				max77686_rtc_alarm_irq, 0, "rtc-alarm1", info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		dev_err(&pdev->dev, "Failed to request alarm IRQ: %d: %d\n",
@@ -624,6 +668,7 @@ err_rtc:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int max77686_rtc_remove(struct platform_device *pdev)
 {
@@ -657,6 +702,8 @@ static void max77686_rtc_shutdown(struct platform_device *pdev)
 #endif /* MAX77686_RTC_WTSR_SMPL */
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int max77686_rtc_suspend(struct device *dev)
 {
@@ -683,6 +730,9 @@ static int max77686_rtc_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(max77686_rtc_pm_ops,
 			 max77686_rtc_suspend, max77686_rtc_resume);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct platform_device_id rtc_id[] = {
@@ -695,10 +745,16 @@ static struct platform_driver max77686_rtc_driver = {
 		.name	= "max77686-rtc",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.probe		= max77686_rtc_probe,
 	.remove		= max77686_rtc_remove,
 	.shutdown	= max77686_rtc_shutdown,
+=======
+		.pm	= &max77686_rtc_pm_ops,
+	},
+	.probe		= max77686_rtc_probe,
+>>>>>>> v3.18
 =======
 		.pm	= &max77686_rtc_pm_ops,
 	},

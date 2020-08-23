@@ -177,7 +177,11 @@ struct abituguru3_data {
 	/*
 	 * The abituguru3 supports up to 48 sensors, and thus has registers
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * sets for 48 sensors, for convienence reasons / simplicity of the
+=======
+	 * sets for 48 sensors, for convenience reasons / simplicity of the
+>>>>>>> v3.18
 =======
 	 * sets for 48 sensors, for convenience reasons / simplicity of the
 >>>>>>> v3.18
@@ -1084,7 +1088,10 @@ static int abituguru3_remove(struct platform_device *pdev)
 	struct abituguru3_data *data = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hwmon_device_unregister(data->hwmon_dev);

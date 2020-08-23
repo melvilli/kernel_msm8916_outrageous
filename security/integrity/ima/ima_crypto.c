@@ -11,11 +11,14 @@
  *
  * File: ima_crypto.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Calculates md5/sha1 file hash, template hash, boot-aggreate hash
  */
 
 #include <linux/kernel.h>
 =======
+=======
+>>>>>>> v3.18
  *	Calculates md5/sha1 file hash, template hash, boot-aggreate hash
  */
 
@@ -24,6 +27,9 @@
 #include <linux/kernel.h>
 #include <linux/moduleparam.h>
 #include <linux/ratelimit.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/file.h>
 #include <linux/crypto.h>
@@ -32,10 +38,13 @@
 #include <linux/slab.h>
 #include <crypto/hash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ima.h"
 
 static struct crypto_shash *ima_shash_tfm;
 =======
+=======
+>>>>>>> v3.18
 #include <crypto/hash_info.h>
 #include "ima.h"
 
@@ -78,6 +87,9 @@ MODULE_PARM_DESC(ahash_bufsize, "Maximum ahash buffer size");
 
 static struct crypto_shash *ima_shash_tfm;
 static struct crypto_ahash *ima_ahash_tfm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -94,6 +106,7 @@ static int ima_kernel_read(struct file *file, loff_t offset,
 	mm_segment_t old_fs;
 	char __user *buf = addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t ret;
 
 	if (!(file->f_mode & FMODE_READ))
@@ -101,10 +114,15 @@ static int ima_kernel_read(struct file *file, loff_t offset,
 	if (!file->f_op->read && !file->f_op->aio_read)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	ssize_t ret = -EINVAL;
 
 	if (!(file->f_mode & FMODE_READ))
 		return -EBADF;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	old_fs = get_fs();
@@ -112,18 +130,25 @@ static int ima_kernel_read(struct file *file, loff_t offset,
 	if (file->f_op->read)
 		ret = file->f_op->read(file, buf, count, &offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		ret = do_sync_read(file, buf, count, &offset);
 =======
+=======
+>>>>>>> v3.18
 	else if (file->f_op->aio_read)
 		ret = do_sync_read(file, buf, count, &offset);
 	else if (file->f_op->read_iter)
 		ret = new_sync_read(file, buf, count, &offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_fs(old_fs);
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ima_init_crypto(void)
 {
@@ -134,6 +159,8 @@ int ima_init_crypto(void)
 		rc = PTR_ERR(ima_shash_tfm);
 		pr_err("Can not allocate %s (reason: %ld)\n", ima_hash, rc);
 =======
+=======
+>>>>>>> v3.18
 int __init ima_init_crypto(void)
 {
 	long rc;
@@ -143,6 +170,9 @@ int __init ima_init_crypto(void)
 		rc = PTR_ERR(ima_shash_tfm);
 		pr_err("Can not allocate %s (reason: %ld)\n",
 		       hash_algo_name[ima_hash_algo], rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return rc;
 	}
@@ -150,11 +180,14 @@ int __init ima_init_crypto(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Calculate the MD5/SHA1 file digest
  */
 int ima_calc_file_hash(struct file *file, char *digest)
 =======
+=======
+>>>>>>> v3.18
 static struct crypto_shash *ima_alloc_tfm(enum hash_algo algo)
 {
 	struct crypto_shash *tfm = ima_shash_tfm;
@@ -426,11 +459,15 @@ static int ima_calc_file_ahash(struct file *file, struct ima_digest_data *hash)
 static int ima_calc_file_hash_tfm(struct file *file,
 				  struct ima_digest_data *hash,
 				  struct crypto_shash *tfm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	loff_t i_size, offset = 0;
 	char *rbuf;
 	int rc, read = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct {
 		struct shash_desc shash;
@@ -450,6 +487,8 @@ static int ima_calc_file_hash_tfm(struct file *file,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	SHASH_DESC_ON_STACK(shash, tfm);
 
 	shash->tfm = tfm;
@@ -470,13 +509,20 @@ static int ima_calc_file_hash_tfm(struct file *file,
 	if (!rbuf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(file->f_mode & FMODE_READ)) {
 		file->f_mode |= FMODE_READ;
 		read = 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i_size = i_size_read(file_inode(file));
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -493,6 +539,7 @@ static int ima_calc_file_hash_tfm(struct file *file,
 		offset += rbuf_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = crypto_shash_update(&desc.shash, rbuf, rbuf_len);
 		if (rc)
 			break;
@@ -504,6 +551,8 @@ static int ima_calc_file_hash_tfm(struct file *file,
 		file->f_mode &= ~FMODE_READ;
 out:
 =======
+=======
+>>>>>>> v3.18
 		rc = crypto_shash_update(shash, rbuf, rbuf_len);
 		if (rc)
 			break;
@@ -530,11 +579,15 @@ static int ima_calc_file_shash(struct file *file, struct ima_digest_data *hash)
 
 	ima_free_tfm(tfm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Calculate the hash of a given buffer
  */
@@ -550,6 +603,8 @@ int ima_calc_buffer_hash(const void *data, int len, char *digest)
 
 	return crypto_shash_digest(&desc.shash, data, len, digest);
 =======
+=======
+>>>>>>> v3.18
  * ima_calc_file_hash - calculate file hash
  *
  * Asynchronous hash (ahash) allows using HW acceleration for calculating
@@ -643,6 +698,9 @@ int ima_calc_field_array_hash(struct ima_field_data *field_data,
 	ima_free_tfm(tfm);
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -653,7 +711,11 @@ static void __init ima_pcrread(int idx, u8 *pcr)
 
 	if (tpm_pcr_read(TPM_ANY_NUM, idx, pcr) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("IMA: Error Communicating to TPM chip\n");
+=======
+		pr_err("Error Communicating to TPM chip\n");
+>>>>>>> v3.18
 =======
 		pr_err("Error Communicating to TPM chip\n");
 >>>>>>> v3.18
@@ -662,6 +724,7 @@ static void __init ima_pcrread(int idx, u8 *pcr)
 /*
  * Calculate the boot aggregate hash
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __init ima_calc_boot_aggregate(char *digest)
 {
@@ -677,6 +740,8 @@ int __init ima_calc_boot_aggregate(char *digest)
 
 	rc = crypto_shash_init(&desc.shash);
 =======
+=======
+>>>>>>> v3.18
 static int __init ima_calc_boot_aggregate_tfm(char *digest,
 					      struct crypto_shash *tfm)
 {
@@ -688,6 +753,9 @@ static int __init ima_calc_boot_aggregate_tfm(char *digest,
 	shash->flags = 0;
 
 	rc = crypto_shash_init(shash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc != 0)
 		return rc;
@@ -697,11 +765,14 @@ static int __init ima_calc_boot_aggregate_tfm(char *digest,
 		ima_pcrread(i, pcr_i);
 		/* now accumulate with current aggregate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = crypto_shash_update(&desc.shash, pcr_i, IMA_DIGEST_SIZE);
 	}
 	if (!rc)
 		crypto_shash_final(&desc.shash, digest);
 =======
+=======
+>>>>>>> v3.18
 		rc = crypto_shash_update(shash, pcr_i, TPM_DIGEST_SIZE);
 	}
 	if (!rc)
@@ -723,6 +794,9 @@ int __init ima_calc_boot_aggregate(struct ima_digest_data *hash)
 
 	ima_free_tfm(tfm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }

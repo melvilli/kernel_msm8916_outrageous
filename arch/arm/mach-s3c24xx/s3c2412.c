@@ -21,6 +21,10 @@
 #include <linux/syscore_ops.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -41,7 +45,10 @@
 #include <mach/regs-gpio.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/cpu.h>
@@ -49,9 +56,13 @@
 #include <plat/devs.h>
 #include <plat/nand-core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/pll.h>
 #include <plat/pm.h>
 #include <plat/regs-serial.h>
+=======
+#include <plat/pm.h>
+>>>>>>> v3.18
 =======
 #include <plat/pm.h>
 >>>>>>> v3.18
@@ -62,9 +73,12 @@
 #include "s3c2412-power.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S3C2412_SWRST			(S3C24XX_VA_CLKPWR + 0x30)
 #define S3C2412_SWRST_RESET		(0x533C2412)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef CONFIG_CPU_S3C2412_ONLY
@@ -145,6 +159,7 @@ static void s3c2412_idle(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void s3c2412_restart(enum reboot_mode mode, const char *cmd)
 {
 	if (mode == REBOOT_SOFT)
@@ -165,6 +180,8 @@ void s3c2412_restart(enum reboot_mode mode, const char *cmd)
 	mdelay(1);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* s3c2412_map_io
@@ -188,6 +205,7 @@ void __init s3c2412_map_io(void)
 	iotable_init(s3c2412_iodesc, ARRAY_SIZE(s3c2412_iodesc));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init_or_cpufreq s3c2412_setup_clocks(void)
 {
@@ -236,6 +254,8 @@ void __init s3c2412_init_clocks(int xtal)
 	s3c2412_baseclk_add();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* need to register the subsystem before we actually register the device, and

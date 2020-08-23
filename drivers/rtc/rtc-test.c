@@ -105,8 +105,12 @@ static int test_probe(struct platform_device *plat_dev)
 				&test_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = PTR_ERR(rtc);
 		return err;
+=======
+		return PTR_ERR(rtc);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(rtc);
 >>>>>>> v3.18
@@ -115,7 +119,12 @@ static int test_probe(struct platform_device *plat_dev)
 	err = device_create_file(&plat_dev->dev, &dev_attr_irq);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		dev_err(&plat_dev->dev, "Unable to create sysfs entry: %s\n",
+			dev_attr_irq.attr.name);
+>>>>>>> v3.18
 =======
 		dev_err(&plat_dev->dev, "Unable to create sysfs entry: %s\n",
 			dev_attr_irq.attr.name);
@@ -125,9 +134,12 @@ static int test_probe(struct platform_device *plat_dev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

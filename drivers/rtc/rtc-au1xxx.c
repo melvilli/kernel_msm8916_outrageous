@@ -33,7 +33,11 @@ static int au1xtoy_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	unsigned long t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = au_readl(SYS_TOYREAD);
+=======
+	t = alchemy_rdsys(AU1000_SYS_TOYREAD);
+>>>>>>> v3.18
 =======
 	t = alchemy_rdsys(AU1000_SYS_TOYREAD);
 >>>>>>> v3.18
@@ -50,8 +54,12 @@ static int au1xtoy_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	rtc_tm_to_time(tm, &t);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(t, SYS_TOYWRITE);
 	au_sync();
+=======
+	alchemy_wrsys(t, AU1000_SYS_TOYWRITE);
+>>>>>>> v3.18
 =======
 	alchemy_wrsys(t, AU1000_SYS_TOYWRITE);
 >>>>>>> v3.18
@@ -60,7 +68,11 @@ static int au1xtoy_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	 * take up to 6 seconds...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_C0S)
+=======
+	while (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_C0S)
+>>>>>>> v3.18
 =======
 	while (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_C0S)
 >>>>>>> v3.18
@@ -81,7 +93,11 @@ static int au1xtoy_rtc_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = au_readl(SYS_COUNTER_CNTRL);
+=======
+	t = alchemy_rdsys(AU1000_SYS_CNTRCTRL);
+>>>>>>> v3.18
 =======
 	t = alchemy_rdsys(AU1000_SYS_CNTRCTRL);
 >>>>>>> v3.18
@@ -95,15 +111,21 @@ static int au1xtoy_rtc_probe(struct platform_device *pdev)
 
 	/* set counter0 tickrate to 1Hz if necessary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (au_readl(SYS_TOYTRIM) != 32767) {
 		/* wait until hardware gives access to TRIM register */
 		t = 0x00100000;
 		while ((au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_T0S) && --t)
 =======
+=======
+>>>>>>> v3.18
 	if (alchemy_rdsys(AU1000_SYS_TOYTRIM) != 32767) {
 		/* wait until hardware gives access to TRIM register */
 		t = 0x00100000;
 		while ((alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_T0S) && --t)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			msleep(1);
 
@@ -117,6 +139,7 @@ static int au1xtoy_rtc_probe(struct platform_device *pdev)
 
 		/* set 1Hz TOY tick rate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_writel(32767, SYS_TOYTRIM);
 		au_sync();
 	}
@@ -124,11 +147,16 @@ static int au1xtoy_rtc_probe(struct platform_device *pdev)
 	/* wait until the hardware allows writes to the counter reg */
 	while (au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_C0S)
 =======
+=======
+>>>>>>> v3.18
 		alchemy_wrsys(32767, AU1000_SYS_TOYTRIM);
 	}
 
 	/* wait until the hardware allows writes to the counter reg */
 	while (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_C0S)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		msleep(1);
 
@@ -148,6 +176,7 @@ out_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int au1xtoy_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
@@ -157,13 +186,18 @@ static int au1xtoy_rtc_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver au1xrtc_driver = {
 	.driver		= {
 		.name	= "rtc-au1xxx",
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= au1xtoy_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

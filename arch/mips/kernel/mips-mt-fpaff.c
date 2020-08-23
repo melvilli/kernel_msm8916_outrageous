@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * General MIPS MT support routines, usable in AP/SP, SMVP, or SMTC kernels
+=======
+ * General MIPS MT support routines, usable in AP/SP and SMVP.
+>>>>>>> v3.18
 =======
  * General MIPS MT support routines, usable in AP/SP and SMVP.
 >>>>>>> v3.18
@@ -32,7 +36,11 @@ unsigned long mt_fpemul_threshold;
  * This code is 98% identical with the sys_sched_setaffinity()
  * and sys_sched_getaffinity() system calls, and should be
 <<<<<<< HEAD
+<<<<<<< HEAD
  * updated when kernel/sched.c changes.
+=======
+ * updated when kernel/sched/core.c changes.
+>>>>>>> v3.18
 =======
  * updated when kernel/sched/core.c changes.
 >>>>>>> v3.18
@@ -41,7 +49,11 @@ unsigned long mt_fpemul_threshold;
 /*
  * find_process_by_pid - find a process with a matching PID value.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * used in sys_sched_set/getaffinity() in kernel/sched.c, so
+=======
+ * used in sys_sched_set/getaffinity() in kernel/sched/core.c, so
+>>>>>>> v3.18
 =======
  * used in sys_sched_set/getaffinity() in kernel/sched/core.c, so
 >>>>>>> v3.18
@@ -167,7 +179,11 @@ asmlinkage long mipsmt_sys_sched_getaffinity(pid_t pid, unsigned int len,
 {
 	unsigned int real_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpumask_t allowed, mask;
+=======
+	cpumask_t mask;
+>>>>>>> v3.18
 =======
 	cpumask_t mask;
 >>>>>>> v3.18
@@ -190,8 +206,12 @@ asmlinkage long mipsmt_sys_sched_getaffinity(pid_t pid, unsigned int len,
 		goto out_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpumask_or(&allowed, &p->thread.user_cpus_allowed, &p->cpus_allowed);
 	cpumask_and(&mask, &allowed, cpu_active_mask);
+=======
+	cpumask_and(&mask, &p->thread.user_cpus_allowed, cpu_possible_mask);
+>>>>>>> v3.18
 =======
 	cpumask_and(&mask, &p->thread.user_cpus_allowed, cpu_possible_mask);
 >>>>>>> v3.18

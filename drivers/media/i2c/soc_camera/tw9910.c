@@ -28,7 +28,11 @@
 #include <media/soc_camera.h>
 #include <media/tw9910.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 >>>>>>> v3.18
@@ -233,6 +237,10 @@ struct tw9910_scale_ctrl {
 struct tw9910_priv {
 	struct v4l2_subdev		subdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_clk			*clk;
+>>>>>>> v3.18
 =======
 	struct v4l2_clk			*clk;
 >>>>>>> v3.18
@@ -527,6 +535,7 @@ static int tw9910_s_std(struct v4l2_subdev *sd, v4l2_std_id norm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tw9910_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
 {
@@ -541,6 +550,8 @@ static int tw9910_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int tw9910_g_register(struct v4l2_subdev *sd,
 			     struct v4l2_dbg_register *reg)
@@ -552,6 +563,10 @@ static int tw9910_g_register(struct v4l2_subdev *sd,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	reg->size = 1;
+>>>>>>> v3.18
 =======
 	reg->size = 1;
 >>>>>>> v3.18
@@ -586,8 +601,14 @@ static int tw9910_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct tw9910_priv *priv = to_tw9910(client);
+
+	return soc_camera_set_power(&client->dev, ssdd, priv->clk, on);
+>>>>>>> v3.18
 =======
 	struct tw9910_priv *priv = to_tw9910(client);
 
@@ -845,9 +866,12 @@ done:
 
 static struct v4l2_subdev_core_ops tw9910_subdev_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident	= tw9910_g_chip_ident,
 	.s_std		= tw9910_s_std,
 	.g_std		= tw9910_g_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -907,8 +931,11 @@ static int tw9910_s_mbus_config(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct v4l2_subdev_video_ops tw9910_subdev_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 static int tw9910_g_tvnorms(struct v4l2_subdev *sd, v4l2_std_id *norm)
 {
 	*norm = V4L2_STD_NTSC | V4L2_STD_PAL;
@@ -918,6 +945,9 @@ static int tw9910_g_tvnorms(struct v4l2_subdev *sd, v4l2_std_id *norm)
 static struct v4l2_subdev_video_ops tw9910_subdev_video_ops = {
 	.s_std		= tw9910_s_std,
 	.g_std		= tw9910_g_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.s_stream	= tw9910_s_stream,
 	.g_mbus_fmt	= tw9910_g_fmt,
@@ -929,6 +959,10 @@ static struct v4l2_subdev_video_ops tw9910_subdev_video_ops = {
 	.g_mbus_config	= tw9910_g_mbus_config,
 	.s_mbus_config	= tw9910_s_mbus_config,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.g_tvnorms	= tw9910_g_tvnorms,
+>>>>>>> v3.18
 =======
 	.g_tvnorms	= tw9910_g_tvnorms,
 >>>>>>> v3.18
@@ -953,6 +987,10 @@ static int tw9910_probe(struct i2c_client *client,
 		to_i2c_adapter(client->dev.parent);
 	struct soc_camera_subdev_desc	*ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -980,8 +1018,11 @@ static int tw9910_probe(struct i2c_client *client,
 	v4l2_i2c_subdev_init(&priv->subdev, client, &tw9910_subdev_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return tw9910_video_probe(client);
 =======
+=======
+>>>>>>> v3.18
 	priv->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(priv->clk))
 		return PTR_ERR(priv->clk);
@@ -991,12 +1032,20 @@ static int tw9910_probe(struct i2c_client *client,
 		v4l2_clk_put(priv->clk);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int tw9910_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tw9910_priv *priv = to_tw9910(client);
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 =======
 	struct tw9910_priv *priv = to_tw9910(client);
 	v4l2_clk_put(priv->clk);

@@ -26,7 +26,11 @@
 PyMODINIT_FUNC initperf_trace_context(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static PyObject *perf_trace_context_common_pc(PyObject *self, PyObject *args)
+=======
+static PyObject *perf_trace_context_common_pc(PyObject *obj, PyObject *args)
+>>>>>>> v3.18
 =======
 static PyObject *perf_trace_context_common_pc(PyObject *obj, PyObject *args)
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ static PyObject *perf_trace_context_common_pc(PyObject *obj, PyObject *args)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static PyObject *perf_trace_context_common_flags(PyObject *self,
+=======
+static PyObject *perf_trace_context_common_flags(PyObject *obj,
+>>>>>>> v3.18
 =======
 static PyObject *perf_trace_context_common_flags(PyObject *obj,
 >>>>>>> v3.18
@@ -65,7 +73,11 @@ static PyObject *perf_trace_context_common_flags(PyObject *obj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static PyObject *perf_trace_context_common_lock_depth(PyObject *self,
+=======
+static PyObject *perf_trace_context_common_lock_depth(PyObject *obj,
+>>>>>>> v3.18
 =======
 static PyObject *perf_trace_context_common_lock_depth(PyObject *obj,
 >>>>>>> v3.18

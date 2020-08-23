@@ -61,11 +61,14 @@
 #endif
 		.endm
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_ARCH_S3C24XX)
 		.macro loadsp, rb, tmp
 		mov	\rb, #0x50000000
 		add	\rb, \rb, #0x4000 * CONFIG_S3C_LOWLEVEL_UART_PORT
 		.endm
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
@@ -134,12 +137,15 @@ start:
  THUMB(		bx	r12		)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.word	0x016f2818		@ Magic numbers to help the loader
 		.word	start			@ absolute load/run zImage address
 		.word	_edata			@ zImage end address
  THUMB(		.thumb			)
 1:
 =======
+=======
+>>>>>>> v3.18
 		.word	_magic_sig	@ Magic numbers to help the loader
 		.word	_magic_start	@ absolute load/run zImage address
 		.word	_magic_end	@ zImage end address
@@ -148,6 +154,9 @@ start:
  THUMB(		.thumb			)
 1:
  ARM_BE8(	setend	be )			@ go BE8 if compiled for BE8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mrs	r9, cpsr
 #ifdef CONFIG_ARM_VIRT_EXT
@@ -157,7 +166,10 @@ start:
 		mov	r8, r2			@ save atags pointer
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ARM_ARCH_2__
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -176,10 +188,13 @@ not_angel:
 		msr	spsr_cxsf, r9		@ Save the CPU boot mode in
 						@ SPSR
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 		teqp	pc, #0x0c000003		@ turn off interrupts
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -204,8 +219,11 @@ not_angel:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bl	cache_on
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Set up a page table only if it won't overwrite ourself.
 		 * That means r4 < pc && r4 - 16k page directory > &_end.
@@ -219,6 +237,9 @@ not_angel:
 		cmpcc	r4, r0
 		orrcc	r4, r4, #1		@ remember we skipped cache_on
 		blcs	cache_on
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 restart:	adr	r0, LC0
@@ -266,7 +287,11 @@ restart:	adr	r0, LC0
  *   r2  = BSS start
  *   r3  = BSS end
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   r4  = final kernel address
+=======
+ *   r4  = final kernel address (possibly with LSB set)
+>>>>>>> v3.18
 =======
  *   r4  = final kernel address (possibly with LSB set)
 >>>>>>> v3.18
@@ -318,6 +343,10 @@ restart:	adr	r0, LC0
 		cmp	r0, #1
 		sub	r0, r4, #TEXT_OFFSET
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bic	r0, r0, #1
+>>>>>>> v3.18
 =======
 		bic	r0, r0, #1
 >>>>>>> v3.18
@@ -368,7 +397,11 @@ dtb_check_done:
 /*
  * Check to see if we will overwrite ourselves.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   r4  = final kernel address
+=======
+ *   r4  = final kernel address (possibly with LSB set)
+>>>>>>> v3.18
 =======
  *   r4  = final kernel address (possibly with LSB set)
 >>>>>>> v3.18
@@ -378,6 +411,10 @@ dtb_check_done:
  *   r4 - 16k page directory >= r10 -> OK
  *   r4 + image length <= address of wont_overwrite -> OK
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Note: the possible LSB in r4 is harmless here.
+>>>>>>> v3.18
 =======
  * Note: the possible LSB in r4 is harmless here.
 >>>>>>> v3.18
@@ -455,7 +492,11 @@ wont_overwrite:
  *   r2  = BSS start
  *   r3  = BSS end
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   r4  = kernel execution address
+=======
+ *   r4  = kernel execution address (possibly with LSB set)
+>>>>>>> v3.18
 =======
  *   r4  = kernel execution address (possibly with LSB set)
 >>>>>>> v3.18
@@ -522,7 +563,10 @@ not_relocated:	mov	r0, #0
 		blo	1b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Did we skip the cache setup earlier?
 		 * That is indicated by the LSB in r4.
@@ -532,6 +576,9 @@ not_relocated:	mov	r0, #0
 		bic	r4, r4, #1
 		blne	cache_on
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The C runtime environment should now be setup sufficiently.
@@ -582,6 +629,10 @@ LC0:		.word	LC0			@ r1
 		.word	_got_end		@ ip
 		.word	.L_user_stack_end	@ sp
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.word	_end - restart + 16384 + 1024*1024
+>>>>>>> v3.18
 =======
 		.word	_end - restart + 16384 + 1024*1024
 >>>>>>> v3.18
@@ -695,7 +746,11 @@ __setup_mmu:	sub	r3, r4, #16384		@ Page directory size
 		mov	r9, r0, lsr #18
 		mov	r9, r9, lsl #18		@ start of RAM
 <<<<<<< HEAD
+<<<<<<< HEAD
 		add	r10, r9, #CONFIG_ARM_DECOMPRESSOR_LIMIT
+=======
+		add	r10, r9, #0x10000000	@ a reasonable RAM size
+>>>>>>> v3.18
 =======
 		add	r10, r9, #0x10000000	@ a reasonable RAM size
 >>>>>>> v3.18
@@ -756,9 +811,13 @@ __armv4_mmu_cache_on:
 		orr	r0, r0, #0x5000		@ I-cache enable, RR cache replacement
 		orr	r0, r0, #0x0030
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 		orr	r0, r0, #1 << 25	@ big-endian page tables
 #endif
+=======
+ ARM_BE8(	orr	r0, r0, #1 << 25 )	@ big-endian page tables
+>>>>>>> v3.18
 =======
  ARM_BE8(	orr	r0, r0, #1 << 25 )	@ big-endian page tables
 >>>>>>> v3.18
@@ -789,9 +848,13 @@ __armv7_mmu_cache_on:
 						@ (needed for ARM1176)
 #ifdef CONFIG_MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 		orr	r0, r0, #1 << 25	@ big-endian page tables
 #endif
+=======
+ ARM_BE8(	orr	r0, r0, #1 << 25 )	@ big-endian page tables
+>>>>>>> v3.18
 =======
  ARM_BE8(	orr	r0, r0, #1 << 25 )	@ big-endian page tables
 >>>>>>> v3.18
@@ -800,10 +863,15 @@ __armv7_mmu_cache_on:
 		movne	r1, #0xfffffffd		@ domain 0 = client
 		bic     r6, r6, #1 << 31        @ 32-bit translation system
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bic     r6, r6, #(7 << 0) | (1 << 4)	@ use only ttbr0
 		mcrne	p15, 0, r3, c2, c0, 0	@ load page table pointer
 		mcrne	p15, 0, r0, c8, c7, 0	@ flush I,D TLBs
 		mcr	p15, 0, r0, c7, c5, 4	@ ISB
+=======
+		bic     r6, r6, #3 << 0         @ use only ttbr0
+		mcrne	p15, 0, r3, c2, c0, 0	@ load page table pointer
+>>>>>>> v3.18
 =======
 		bic     r6, r6, #3 << 0         @ use only ttbr0
 		mcrne	p15, 0, r3, c2, c0, 0	@ load page table pointer
@@ -1125,6 +1193,11 @@ cache_clean_flush:
 
 __armv4_mpu_cache_flush:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tst	r4, #1
+		movne	pc, lr
+>>>>>>> v3.18
 =======
 		tst	r4, #1
 		movne	pc, lr
@@ -1147,6 +1220,11 @@ __armv4_mpu_cache_flush:
 		
 __fa526_cache_flush:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tst	r4, #1
+		movne	pc, lr
+>>>>>>> v3.18
 =======
 		tst	r4, #1
 		movne	pc, lr
@@ -1160,20 +1238,31 @@ __fa526_cache_flush:
 __armv6_mmu_cache_flush:
 		mov	r1, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcr	p15, 0, r1, c7, c14, 0	@ clean+invalidate D
 		mcr	p15, 0, r1, c7, c5, 0	@ invalidate I+BTB
 		mcr	p15, 0, r1, c7, c15, 0	@ clean+invalidate unified
 =======
+=======
+>>>>>>> v3.18
 		tst	r4, #1
 		mcreq	p15, 0, r1, c7, c14, 0	@ clean+invalidate D
 		mcr	p15, 0, r1, c7, c5, 0	@ invalidate I+BTB
 		mcreq	p15, 0, r1, c7, c15, 0	@ clean+invalidate unified
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mcr	p15, 0, r1, c7, c10, 4	@ drain WB
 		mov	pc, lr
 
 __armv7_mmu_cache_flush:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tst	r4, #1
+		bne	iflush
+>>>>>>> v3.18
 =======
 		tst	r4, #1
 		bne	iflush
@@ -1239,6 +1328,11 @@ iflush:
 
 __armv5tej_mmu_cache_flush:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tst	r4, #1
+		movne	pc, lr
+>>>>>>> v3.18
 =======
 		tst	r4, #1
 		movne	pc, lr
@@ -1251,6 +1345,11 @@ __armv5tej_mmu_cache_flush:
 
 __armv4_mmu_cache_flush:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tst	r4, #1
+		movne	pc, lr
+>>>>>>> v3.18
 =======
 		tst	r4, #1
 		movne	pc, lr
@@ -1289,6 +1388,11 @@ no_cache_id:
 __armv3_mmu_cache_flush:
 __armv3_mpu_cache_flush:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tst	r4, #1
+		movne	pc, lr
+>>>>>>> v3.18
 =======
 		tst	r4, #1
 		movne	pc, lr

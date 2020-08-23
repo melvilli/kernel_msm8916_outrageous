@@ -34,17 +34,23 @@ oldconfig: $(obj)/conf
 
 silentoldconfig: $(obj)/conf
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(Q)mkdir -p include/generated
 	$< --$@ $(Kconfig)
 
 localyesconfig localmodconfig: $(obj)/streamline_config.pl $(obj)/conf
 	$(Q)mkdir -p include/generated
 =======
+=======
+>>>>>>> v3.18
 	$(Q)mkdir -p include/config include/generated
 	$< --$@ $(Kconfig)
 
 localyesconfig localmodconfig: $(obj)/streamline_config.pl $(obj)/conf
 	$(Q)mkdir -p include/config include/generated
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	$(Q)perl $< --$@ $(srctree) $(Kconfig) > .tmp.config
 	$(Q)if [ -f .config ]; then 					\
@@ -113,7 +119,10 @@ endif
 	$(Q)$< --defconfig=arch/$(SRCARCH)/configs/$@ $(Kconfig)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 configfiles=$(wildcard $(srctree)/kernel/configs/$(1).config $(srctree)/arch/$(SRCARCH)/configs/$(1).config)
 
 define mergeconfig
@@ -131,6 +140,9 @@ PHONY += tinyconfig
 tinyconfig: allnoconfig
 	$(call mergeconfig,tiny)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Help text used by make help
 help:
@@ -153,6 +165,11 @@ help:
 	@echo  '  listnewconfig   - List new options'
 	@echo  '  olddefconfig	  - Same as silentoldconfig but sets new symbols to their default value'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	@echo  '  kvmconfig	  - Enable additional options for guest kernel support'
+	@echo  '  tinyconfig	  - Configure the tiniest possible kernel'
+>>>>>>> v3.18
 =======
 	@echo  '  kvmconfig	  - Enable additional options for guest kernel support'
 	@echo  '  tinyconfig	  - Configure the tiniest possible kernel'
@@ -191,6 +208,7 @@ qconf-objs	:= zconf.tab.o
 gconf-objs	:= gconf.o zconf.tab.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 hostprogs-y := conf
 
 ifeq ($(MAKECMDGOALS),nconfig)
@@ -225,10 +243,15 @@ clean-files	:= qconf.moc .tmp_qtcheck .tmp_gtkcheck
 clean-files	+= zconf.tab.c zconf.lex.c zconf.hash.c gconf.glade.h
 clean-files     += mconf qconf gconf nconf
 =======
+=======
+>>>>>>> v3.18
 hostprogs-y := conf nconf mconf kxgettext qconf gconf
 
 clean-files	:= qconf.moc .tmp_qtcheck .tmp_gtkcheck
 clean-files	+= zconf.tab.c zconf.lex.c zconf.hash.c gconf.glade.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 clean-files     += config.pot linux.pot
 
@@ -261,18 +284,24 @@ HOSTLOADLIBES_mconf   = $(shell $(CONFIG_SHELL) $(check-lxdialog) -ldflags $(HOS
 
 HOSTLOADLIBES_nconf	= $(shell \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pkg-config --libs menu panel ncurses 2>/dev/null \
 				|| echo "-lmenu -lpanel -lncurses"  )
 $(obj)/qconf.o: $(obj)/.tmp_qtcheck
 
 ifeq ($(qconf-target),1)
 =======
+=======
+>>>>>>> v3.18
 				pkg-config --libs menuw panelw ncursesw 2>/dev/null \
 				|| pkg-config --libs menu panel ncurses 2>/dev/null \
 				|| echo "-lmenu -lpanel -lncurses"  )
 $(obj)/qconf.o: $(obj)/.tmp_qtcheck
 
 ifeq ($(MAKECMDGOALS),xconfig)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 $(obj)/.tmp_qtcheck: $(src)/Makefile
 -include $(obj)/.tmp_qtcheck
@@ -331,7 +360,11 @@ endif
 $(obj)/gconf.o: $(obj)/.tmp_gtkcheck
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(gconf-target),1)
+=======
+ifeq ($(MAKECMDGOALS),gconfig)
+>>>>>>> v3.18
 =======
 ifeq ($(MAKECMDGOALS),gconfig)
 >>>>>>> v3.18
@@ -373,6 +406,9 @@ $(obj)/gconf.glade.h: $(obj)/gconf.glade
 	$(Q)intltool-extract --type=gettext/glade --srcdir=$(srctree) \
 	$(obj)/gconf.glade
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

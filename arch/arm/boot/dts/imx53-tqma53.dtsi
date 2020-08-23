@@ -23,16 +23,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_3p3v: 3p3v {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_3p3v: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "3P3V";
 			regulator-min-microvolt = <3300000>;
@@ -45,7 +51,13 @@
 &esdhc2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc2_1>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc2>,
+		    <&pinctrl_esdhc2_cdwp>;
+	vmmc-supply = <&reg_3p3v>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc2>,
 		    <&pinctrl_esdhc2_cdwp>;
@@ -59,7 +71,11 @@
 &uart3 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart3_2>;
+=======
+	pinctrl-0 = <&pinctrl_uart3>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart3>;
 >>>>>>> v3.18
@@ -69,7 +85,11 @@
 &ecspi1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_ecspi1_1>;
+=======
+	pinctrl-0 = <&pinctrl_ecspi1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_ecspi1>;
 >>>>>>> v3.18
@@ -82,7 +102,11 @@
 &esdhc3 { /* EMMC */
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc3_1>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc3>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc3>;
 >>>>>>> v3.18
@@ -96,6 +120,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2s {
 		pinctrl_i2s_1: i2s-grp1 {
@@ -123,6 +148,8 @@
 				 MX53_PAD_GPIO_0__GPIO1_0        0x10000 /* SYSTEM_DOWN */
 				 MX53_PAD_GPIO_3__GPIO1_3        0x10000
 =======
+=======
+>>>>>>> v3.18
 	imx53-tqma53 {
 		pinctrl_hog: hoggrp {
 			fsl,pins = <
@@ -259,6 +286,9 @@
 			fsl,pins = <
 				MX53_PAD_PATA_CS_0__UART3_TXD_MUX	0x1e4
 				MX53_PAD_PATA_CS_1__UART3_RXD_MUX	0x1e4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			>;
 		};
@@ -268,7 +298,11 @@
 &uart1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart1_2>;
+=======
+	pinctrl-0 = <&pinctrl_uart1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart1>;
 >>>>>>> v3.18
@@ -279,7 +313,11 @@
 &uart2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart2_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart2>;
 >>>>>>> v3.18
@@ -289,7 +327,11 @@
 &can1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_can1_2>;
+=======
+	pinctrl-0 = <&pinctrl_can1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_can1>;
 >>>>>>> v3.18
@@ -299,7 +341,11 @@
 &can2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_can2_1>;
+=======
+	pinctrl-0 = <&pinctrl_can2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_can2>;
 >>>>>>> v3.18
@@ -309,7 +355,11 @@
 &i2c3 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_i2c3_1>;
+=======
+	pinctrl-0 = <&pinctrl_i2c3>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_i2c3>;
 >>>>>>> v3.18
@@ -319,7 +369,11 @@
 &cspi {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_cspi_1>;
+=======
+	pinctrl-0 = <&pinctrl_cspi>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_cspi>;
 >>>>>>> v3.18
@@ -332,7 +386,11 @@
 &i2c2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_i2c2_1>;
+=======
+	pinctrl-0 = <&pinctrl_i2c2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_i2c2>;
 >>>>>>> v3.18
@@ -344,7 +402,11 @@
 		fsl,mc13xxx-uses-rtc;
 		interrupt-parent = <&gpio2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <6 8>; /* PDATA_DATA6, low active */
+=======
+		interrupts = <6 4>; /* PATA_DATA6, active high */
+>>>>>>> v3.18
 =======
 		interrupts = <6 4>; /* PATA_DATA6, active high */
 >>>>>>> v3.18
@@ -365,7 +427,11 @@
 &fec {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_fec_1>;
+=======
+	pinctrl-0 = <&pinctrl_fec>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_fec>;
 >>>>>>> v3.18

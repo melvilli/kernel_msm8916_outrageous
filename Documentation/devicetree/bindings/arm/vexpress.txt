@@ -81,6 +81,7 @@ environmental data like temperature, power consumption etc. Even
 the video output switch (FPGA) is controlled that way.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Nodes describing devices controlled by this infrastructure should
 point at the bridge device node:
 - bridge phandle:
@@ -88,6 +89,8 @@ point at the bridge device node:
 This property can be also defined in a parent node (eg. for a DCC)
 and is effective for all children.
 =======
+=======
+>>>>>>> v3.18
 The controllers are not mapped into normal memory address space
 and must be accessed through bridges - other devices capable
 of generating transactions on the configuration bus.
@@ -99,6 +102,9 @@ the following properties:
 - bridge phandle:
 	arm,vexpress,config-bridge = <phandle>;
 and children describing available functions.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -212,7 +218,11 @@ Example of a VE tile description (simplified)
 
 	dcc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "simple-bus";
+=======
+		compatible = "arm,vexpress,config-bus";
+>>>>>>> v3.18
 =======
 		compatible = "arm,vexpress,config-bus";
 >>>>>>> v3.18

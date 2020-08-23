@@ -40,6 +40,11 @@ enum sdma_peripheral_type {
 	IMX_DMATYPE_ASRC,	/* ASRC */
 	IMX_DMATYPE_ESAI,	/* ESAI */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IMX_DMATYPE_SSI_DUAL,	/* SSI Dual FIFO */
+	IMX_DMATYPE_ASRC_SP,	/* Shared ASRC */
+>>>>>>> v3.18
 =======
 	IMX_DMATYPE_SSI_DUAL,	/* SSI Dual FIFO */
 	IMX_DMATYPE_ASRC_SP,	/* Shared ASRC */
@@ -55,6 +60,10 @@ enum imx_dma_prio {
 struct imx_dma_data {
 	int dma_request; /* DMA request line */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int dma_request2; /* secondary DMA request line */
+>>>>>>> v3.18
 =======
 	int dma_request2; /* secondary DMA request line */
 >>>>>>> v3.18
@@ -70,10 +79,15 @@ static inline int imx_dma_is_ipu(struct dma_chan *chan)
 static inline int imx_dma_is_general_purpose(struct dma_chan *chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return strstr(dev_name(chan->device->dev), "sdma") ||
 		!strcmp(dev_name(chan->device->dev), "imx1-dma") ||
 		!strcmp(dev_name(chan->device->dev), "imx21-dma") ||
 		!strcmp(dev_name(chan->device->dev), "imx27-dma");
+=======
+	return !strcmp(chan->device->dev->driver->name, "imx-sdma") ||
+		!strcmp(chan->device->dev->driver->name, "imx-dma");
+>>>>>>> v3.18
 =======
 	return !strcmp(chan->device->dev->driver->name, "imx-sdma") ||
 		!strcmp(chan->device->dev->driver->name, "imx-dma");

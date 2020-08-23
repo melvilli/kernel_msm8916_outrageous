@@ -119,7 +119,11 @@
  *
  * We handle the IRQ according to _our_ priority (see setup.c),
 <<<<<<< HEAD
+<<<<<<< HEAD
  * then we just return.	 If multiple IRQs are pending then we will
+=======
+ * then we just return.  If multiple IRQs are pending then we will
+>>>>>>> v3.18
 =======
  * then we just return.  If multiple IRQs are pending then we will
 >>>>>>> v3.18
@@ -151,7 +155,11 @@
 		 * Find irq with highest priority
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 PTR_LA t1,cpu_mask_nr_tbl
+=======
+		 PTR_LA	t1,cpu_mask_nr_tbl
+>>>>>>> v3.18
 =======
 		 PTR_LA	t1,cpu_mask_nr_tbl
 >>>>>>> v3.18
@@ -204,7 +212,11 @@
 		 * Find irq with highest priority
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 PTR_LA t1,asic_mask_nr_tbl
+=======
+		 PTR_LA	t1,asic_mask_nr_tbl
+>>>>>>> v3.18
 =======
 		 PTR_LA	t1,asic_mask_nr_tbl
 >>>>>>> v3.18
@@ -234,7 +246,11 @@
 		li	a0,DEC_CPU_IRQ_BASE
 		srl	t0,CAUSEB_IP
 <<<<<<< HEAD
+<<<<<<< HEAD
 		li	t1,CAUSEF_IP>>CAUSEB_IP # mask
+=======
+		li	t1,CAUSEF_IP>>CAUSEB_IP	# mask
+>>>>>>> v3.18
 =======
 		li	t1,CAUSEF_IP>>CAUSEB_IP	# mask
 >>>>>>> v3.18

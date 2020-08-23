@@ -64,7 +64,11 @@ static int ioctl_send_fib(struct aac_dev * dev, void __user *arg)
 	struct hw_fib * hw_fib = (struct hw_fib *)0;
 	dma_addr_t hw_fib_pa = (dma_addr_t)0LL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int size, osize;
+=======
+	unsigned size;
+>>>>>>> v3.18
 =======
 	unsigned size;
 >>>>>>> v3.18
@@ -92,8 +96,12 @@ static int ioctl_send_fib(struct aac_dev * dev, void __user *arg)
 	 *	an error if we would.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	osize = size = le16_to_cpu(kfib->header.Size) +
 		sizeof(struct aac_fibhdr);
+=======
+	size = le16_to_cpu(kfib->header.Size) + sizeof(struct aac_fibhdr);
+>>>>>>> v3.18
 =======
 	size = le16_to_cpu(kfib->header.Size) + sizeof(struct aac_fibhdr);
 >>>>>>> v3.18
@@ -128,6 +136,7 @@ static int ioctl_send_fib(struct aac_dev * dev, void __user *arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sanity check the second copy */
 	if ((osize != le16_to_cpu(kfib->header.Size) +
 		sizeof(struct aac_fibhdr))
@@ -136,6 +145,8 @@ static int ioctl_send_fib(struct aac_dev * dev, void __user *arg)
 		goto cleanup;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (kfib->header.Command == cpu_to_le16(TakeABreakPt)) {
@@ -339,7 +350,12 @@ return_fib:
 			ssleep(1);
 			dev->aif_thread = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev->thread = kthread_run(aac_command_thread, dev, dev->name);
+=======
+			dev->thread = kthread_run(aac_command_thread, dev,
+						  "%s", dev->name);
+>>>>>>> v3.18
 =======
 			dev->thread = kthread_run(aac_command_thread, dev,
 						  "%s", dev->name);

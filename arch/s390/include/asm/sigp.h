@@ -6,6 +6,10 @@
 #define SIGP_EXTERNAL_CALL	      2
 #define SIGP_EMERGENCY_SIGNAL	      3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SIGP_START		      4
+>>>>>>> v3.18
 =======
 #define SIGP_START		      4
 >>>>>>> v3.18
@@ -17,7 +21,13 @@
 #define SIGP_STORE_STATUS_AT_ADDRESS 14
 #define SIGP_SET_ARCHITECTURE	     18
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIGP_SENSE_RUNNING	     21
+=======
+#define SIGP_COND_EMERGENCY_SIGNAL   19
+#define SIGP_SENSE_RUNNING	     21
+#define SIGP_STORE_ADDITIONAL_STATUS 23
+>>>>>>> v3.18
 =======
 #define SIGP_COND_EMERGENCY_SIGNAL   19
 #define SIGP_SENSE_RUNNING	     21
@@ -40,7 +50,10 @@
 #define SIGP_STATUS_NOT_RUNNING		0x00000400UL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 static inline int __pcpu_sigp(u16 addr, u8 order, unsigned long parm,
@@ -61,5 +74,8 @@ static inline int __pcpu_sigp(u16 addr, u8 order, unsigned long parm,
 
 #endif /* __ASSEMBLY__ */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __S390_ASM_SIGP_H */

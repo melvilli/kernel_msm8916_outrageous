@@ -142,6 +142,7 @@ int wusbhc_rh_status_data(struct usb_hcd *usb_hcd, char *_buf)
 {
 	struct wusbhc *wusbhc = usb_hcd_to_wusbhc(usb_hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t cnt, size;
 	unsigned long *buf = (unsigned long *) _buf;
 
@@ -155,6 +156,8 @@ int wusbhc_rh_status_data(struct usb_hcd *usb_hcd, char *_buf)
 			clear_bit(cnt + 1, buf);
 	return size;
 =======
+=======
+>>>>>>> v3.18
 	size_t cnt, size, bits_set = 0;
 
 	/* WE DON'T LOCK, see comment */
@@ -175,6 +178,9 @@ int wusbhc_rh_status_data(struct usb_hcd *usb_hcd, char *_buf)
 	}
 
 	return bits_set ? size : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(wusbhc_rh_status_data);
@@ -417,6 +423,7 @@ int wusbhc_rh_control(struct usb_hcd *usb_hcd, u16 reqntype, u16 wValue,
 EXPORT_SYMBOL_GPL(wusbhc_rh_control);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wusbhc_rh_suspend(struct usb_hcd *usb_hcd)
 {
 	struct wusbhc *wusbhc = usb_hcd_to_wusbhc(usb_hcd);
@@ -437,6 +444,8 @@ int wusbhc_rh_resume(struct usb_hcd *usb_hcd)
 }
 EXPORT_SYMBOL_GPL(wusbhc_rh_resume);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int wusbhc_rh_start_port_reset(struct usb_hcd *usb_hcd, unsigned port_idx)

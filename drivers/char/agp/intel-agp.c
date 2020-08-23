@@ -15,9 +15,12 @@
 #include <drm/intel-gtt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int intel_agp_enabled;
 EXPORT_SYMBOL(intel_agp_enabled);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int intel_fetch_size(void)
@@ -122,7 +125,10 @@ static void intel_8xx_cleanup(void)
 static int intel_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -135,8 +141,13 @@ static int intel_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -160,7 +171,11 @@ static int intel_configure(void)
 static int intel_815_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp, addr;
+=======
+	u32 addr;
+>>>>>>> v3.18
 =======
 	u32 addr;
 >>>>>>> v3.18
@@ -183,8 +198,13 @@ static int intel_815_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -229,7 +249,10 @@ static void intel_820_cleanup(void)
 static int intel_820_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 temp2;
@@ -242,8 +265,13 @@ static int intel_820_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -268,7 +296,10 @@ static int intel_820_configure(void)
 static int intel_840_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -281,8 +312,13 @@ static int intel_840_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -305,7 +341,10 @@ static int intel_840_configure(void)
 static int intel_845_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 temp2;
@@ -322,9 +361,15 @@ static int intel_845_configure(void)
 	} else {
 		/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 		agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
 		agp_bridge->apbase_config = temp;
+=======
+		agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+							    AGP_APERTURE_BAR);
+		agp_bridge->apbase_config = agp_bridge->gart_bus_addr;
+>>>>>>> v3.18
 =======
 		agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 							    AGP_APERTURE_BAR);
@@ -349,7 +394,10 @@ static int intel_845_configure(void)
 static int intel_850_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -362,8 +410,13 @@ static int intel_850_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -386,7 +439,10 @@ static int intel_850_configure(void)
 static int intel_860_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -399,8 +455,13 @@ static int intel_860_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -423,7 +484,10 @@ static int intel_860_configure(void)
 static int intel_830mp_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -436,8 +500,13 @@ static int intel_830mp_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -460,7 +529,10 @@ static int intel_830mp_configure(void)
 static int intel_7505_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -473,8 +545,13 @@ static int intel_7505_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);
@@ -892,8 +969,11 @@ found_gmch:
 	pci_set_drvdata(pdev, bridge);
 	err = agp_add_bridge(bridge);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!err)
 		intel_agp_enabled = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;

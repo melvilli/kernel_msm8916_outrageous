@@ -95,7 +95,11 @@ PS/2 packet format
 Note that the device never signals overflow condition.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ALPS Absolute Mode - Protocol Verion 1
+=======
+ALPS Absolute Mode - Protocol Version 1
+>>>>>>> v3.18
 =======
 ALPS Absolute Mode - Protocol Version 1
 >>>>>>> v3.18

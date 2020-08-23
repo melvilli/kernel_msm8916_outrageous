@@ -176,7 +176,11 @@ hysdn_log_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 	hysdn_card *card = PDE_DATA(file_inode(file));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!*((struct log_data **) file->private_data)) {
+=======
+	if (!(inf = *((struct log_data **) file->private_data))) {
+>>>>>>> v3.18
 =======
 	if (!(inf = *((struct log_data **) file->private_data))) {
 >>>>>>> v3.18
@@ -185,14 +189,20 @@ hysdn_log_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 			return (-EAGAIN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&(pd->rd_queue));
 	}
 	if (!(inf = *((struct log_data **) file->private_data)))
 =======
+=======
+>>>>>>> v3.18
 		wait_event_interruptible(pd->rd_queue, (inf =
 				*((struct log_data **) file->private_data)));
 	}
 	if (!inf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return (0);
 

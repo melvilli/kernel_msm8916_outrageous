@@ -136,11 +136,16 @@ static int lpddr_chip_setup(struct map_info *map, struct lpddr_private *lpddr)
 
 	lpddr->qinfo = kzalloc(sizeof(struct qinfo_chip), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!lpddr->qinfo) {
 		printk(KERN_WARNING "%s: no memory for LPDDR qinfo structure\n",
 				map->name);
 		return 0;
 	}
+=======
+	if (!lpddr->qinfo)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (!lpddr->qinfo)
 		return 0;

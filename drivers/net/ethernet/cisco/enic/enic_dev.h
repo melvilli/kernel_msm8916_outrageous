@@ -21,6 +21,10 @@
 
 #include "vnic_dev.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "vnic_vic.h"
+>>>>>>> v3.18
 =======
 #include "vnic_vic.h"
 >>>>>>> v3.18
@@ -32,7 +36,11 @@
 #define ENIC_DEVCMD_PROXY_BY_INDEX(vf, err, enic, vnicdevcmdfn, ...) \
 	do { \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&enic->devcmd_lock); \
+=======
+		spin_lock_bh(&enic->devcmd_lock); \
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&enic->devcmd_lock); \
 >>>>>>> v3.18
@@ -44,7 +52,11 @@
 			err = vnicdevcmdfn(enic->vdev, ##__VA_ARGS__); \
 		} \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&enic->devcmd_lock); \
+=======
+		spin_unlock_bh(&enic->devcmd_lock); \
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&enic->devcmd_lock); \
 >>>>>>> v3.18
@@ -57,8 +69,13 @@ int enic_dev_del_station_addr(struct enic *enic);
 int enic_dev_packet_filter(struct enic *enic, int directed, int multicast,
 	int broadcast, int promisc, int allmulti);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int enic_dev_add_addr(struct enic *enic, u8 *addr);
 int enic_dev_del_addr(struct enic *enic, u8 *addr);
+=======
+int enic_dev_add_addr(struct enic *enic, const u8 *addr);
+int enic_dev_del_addr(struct enic *enic, const u8 *addr);
+>>>>>>> v3.18
 =======
 int enic_dev_add_addr(struct enic *enic, const u8 *addr);
 int enic_dev_del_addr(struct enic *enic, const u8 *addr);

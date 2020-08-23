@@ -18,11 +18,17 @@
 #include <asm/mce.h>
 #include <asm/hw_irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/desc.h>
 
 #define CREATE_TRACE_POINTS
 #include <asm/trace/irq_vectors.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 atomic_t irq_err_count;
@@ -130,13 +136,19 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 	seq_printf(p, "  Machine check polls\n");
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_HYPERV) || defined(CONFIG_XEN)
 	seq_printf(p, "%*s: ", prec, "THR");
 	for_each_online_cpu(j)
 		seq_printf(p, "%10u ", irq_stats(j)->irq_hv_callback_count);
 	seq_printf(p, "  Hypervisor callback interrupts\n");
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_printf(p, "%*s: %10u\n", prec, "ERR", atomic_read(&irq_err_count));
 #if defined(CONFIG_X86_IO_APIC)
@@ -191,7 +203,11 @@ u64 arch_irq_stat(void)
  * handlers).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __irq_entry do_IRQ(struct pt_regs *regs)
+=======
+__visible unsigned int __irq_entry do_IRQ(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 __visible unsigned int __irq_entry do_IRQ(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -211,10 +227,13 @@ __visible unsigned int __irq_entry do_IRQ(struct pt_regs *regs)
 		ack_APIC_irq();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (printk_ratelimit())
 			pr_emerg("%s: %d.%d No irq handler for vector (irq %d)\n",
 				__func__, smp_processor_id(), vector, irq);
 =======
+=======
+>>>>>>> v3.18
 		if (irq != VECTOR_RETRIGGERED) {
 			pr_emerg_ratelimited("%s: %d.%d No irq handler for vector (irq %d)\n",
 					     __func__, smp_processor_id(),
@@ -222,6 +241,9 @@ __visible unsigned int __irq_entry do_IRQ(struct pt_regs *regs)
 		} else {
 			__this_cpu_write(vector_irq[vector], VECTOR_UNDEFINED);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -234,6 +256,7 @@ __visible unsigned int __irq_entry do_IRQ(struct pt_regs *regs)
 /*
  * Handler for X86_PLATFORM_IPI_VECTOR.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void smp_x86_platform_ipi(struct pt_regs *regs)
 {
@@ -249,15 +272,22 @@ void smp_x86_platform_ipi(struct pt_regs *regs)
 void __smp_x86_platform_ipi(void)
 {
 >>>>>>> v3.18
+=======
+void __smp_x86_platform_ipi(void)
+{
+>>>>>>> v3.18
 	inc_irq_stat(x86_platform_ipis);
 
 	if (x86_platform_ipi_callback)
 		x86_platform_ipi_callback();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	irq_exit();
 
 =======
+=======
+>>>>>>> v3.18
 }
 
 __visible void smp_x86_platform_ipi(struct pt_regs *regs)
@@ -267,6 +297,9 @@ __visible void smp_x86_platform_ipi(struct pt_regs *regs)
 	entering_ack_irq();
 	__smp_x86_platform_ipi();
 	exiting_irq();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_irq_regs(old_regs);
 }
@@ -276,7 +309,11 @@ __visible void smp_x86_platform_ipi(struct pt_regs *regs)
  * Handler for POSTED_INTERRUPT_VECTOR.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void smp_kvm_posted_intr_ipi(struct pt_regs *regs)
+=======
+__visible void smp_kvm_posted_intr_ipi(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 __visible void smp_kvm_posted_intr_ipi(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -298,10 +335,13 @@ __visible void smp_kvm_posted_intr_ipi(struct pt_regs *regs)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(vector_used_by_percpu_irq);
 
 #ifdef CONFIG_HOTPLUG_CPU
 =======
+=======
+>>>>>>> v3.18
 __visible void smp_trace_x86_platform_ipi(struct pt_regs *regs)
 {
 	struct pt_regs *old_regs = set_irq_regs(regs);
@@ -401,6 +441,9 @@ int check_irq_vectors_for_cpu_disable(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* A cpu has been removed from cpu_online_mask.  Reset irq affinities. */
 void fixup_irqs(void)
@@ -411,6 +454,10 @@ void fixup_irqs(void)
 	struct irq_data *data;
 	struct irq_chip *chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -453,11 +500,14 @@ void fixup_irqs(void)
 			chip->irq_mask(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chip->irq_set_affinity)
 			chip->irq_set_affinity(data, affinity, true);
 		else if (!(warned++))
 			set_affinity = 0;
 =======
+=======
+>>>>>>> v3.18
 		if (chip->irq_set_affinity) {
 			ret = chip->irq_set_affinity(data, affinity, true);
 			if (ret == -ENOSPC)
@@ -466,6 +516,9 @@ void fixup_irqs(void)
 			if (!(warned++))
 				set_affinity = 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -500,7 +553,11 @@ void fixup_irqs(void)
 		unsigned int irr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (__this_cpu_read(vector_irq[vector]) < 0)
+=======
+		if (__this_cpu_read(vector_irq[vector]) <= VECTOR_UNDEFINED)
+>>>>>>> v3.18
 =======
 		if (__this_cpu_read(vector_irq[vector]) <= VECTOR_UNDEFINED)
 >>>>>>> v3.18
@@ -515,12 +572,15 @@ void fixup_irqs(void)
 			chip = irq_data_get_irq_chip(data);
 			raw_spin_lock(&desc->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (chip->irq_retrigger)
 				chip->irq_retrigger(data);
 			raw_spin_unlock(&desc->lock);
 		}
 		__this_cpu_write(vector_irq[vector], -1);
 =======
+=======
+>>>>>>> v3.18
 			if (chip->irq_retrigger) {
 				chip->irq_retrigger(data);
 				__this_cpu_write(vector_irq[vector], VECTOR_RETRIGGERED);
@@ -529,6 +589,9 @@ void fixup_irqs(void)
 		}
 		if (__this_cpu_read(vector_irq[vector]) != VECTOR_RETRIGGERED)
 			__this_cpu_write(vector_irq[vector], VECTOR_UNDEFINED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

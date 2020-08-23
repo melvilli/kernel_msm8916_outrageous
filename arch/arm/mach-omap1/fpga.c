@@ -136,8 +136,12 @@ static struct irq_chip omap_fpga_irq = {
  * fpga_mask_ack_irq() to fpga_ack_irq() so that the specific FPGA interrupt
  * being serviced is left unmasked.  We can do this because the FPGA cascade
 <<<<<<< HEAD
+<<<<<<< HEAD
  * interrupt is installed with the IRQF_DISABLED flag, which leaves all
  * interrupts masked at the CPU while an FPGA interrupt handler executes.
+=======
+ * interrupt is run with all interrupts masked.
+>>>>>>> v3.18
 =======
  * interrupt is run with all interrupts masked.
 >>>>>>> v3.18

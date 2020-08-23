@@ -22,7 +22,11 @@ TRACE_EVENT(drm_vblank_event,
 		    __entry->seq = seq;
 		    ),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_printk("crtc=%d, seq=%d", __entry->crtc, __entry->seq)
+=======
+	    TP_printk("crtc=%d, seq=%u", __entry->crtc, __entry->seq)
+>>>>>>> v3.18
 =======
 	    TP_printk("crtc=%d, seq=%u", __entry->crtc, __entry->seq)
 >>>>>>> v3.18
@@ -42,7 +46,11 @@ TRACE_EVENT(drm_vblank_event_queued,
 		    __entry->seq = seq;
 		    ),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_printk("pid=%d, crtc=%d, seq=%d", __entry->pid, __entry->crtc, \
+=======
+	    TP_printk("pid=%d, crtc=%d, seq=%u", __entry->pid, __entry->crtc, \
+>>>>>>> v3.18
 =======
 	    TP_printk("pid=%d, crtc=%d, seq=%u", __entry->pid, __entry->crtc, \
 >>>>>>> v3.18
@@ -63,7 +71,11 @@ TRACE_EVENT(drm_vblank_event_delivered,
 		    __entry->seq = seq;
 		    ),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_printk("pid=%d, crtc=%d, seq=%d", __entry->pid, __entry->crtc, \
+=======
+	    TP_printk("pid=%d, crtc=%d, seq=%u", __entry->pid, __entry->crtc, \
+>>>>>>> v3.18
 =======
 	    TP_printk("pid=%d, crtc=%d, seq=%u", __entry->pid, __entry->crtc, \
 >>>>>>> v3.18

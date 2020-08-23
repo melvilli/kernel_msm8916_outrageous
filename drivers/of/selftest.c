@@ -8,21 +8,28 @@
 #include <linux/err.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/of.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hashtable.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_fdt.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/mutex.h>
 #include <linux/slab.h>
 #include <linux/device.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool selftest_passed = true;
 #define selftest(result, fmt, ...) { \
@@ -35,6 +42,8 @@ static bool selftest_passed = true;
 }
 
 =======
+=======
+>>>>>>> v3.18
 #include "of_private.h"
 
 static struct selftest_results {
@@ -254,6 +263,9 @@ static void __init of_selftest_check_phandles(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init of_selftest_parse_phandle_with_args(void)
 {
@@ -364,7 +376,10 @@ static void __init of_selftest_property_string(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("start\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	np = of_find_node_by_path("/testcase-data/phandle-tests/consumer-a");
@@ -443,10 +458,13 @@ static void __init of_selftest_property_string(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init of_selftest(void)
 {
 	struct device_node *np;
 =======
+=======
+>>>>>>> v3.18
 #define propcmp(p1, p2) (((p1)->length == (p2)->length) && \
 			(p1)->value && (p2)->value && \
 			!memcmp((p1)->value, (p2)->value, (p1)->length) && \
@@ -953,6 +971,9 @@ static int __init of_selftest(void)
 		return res;
 	if (!of_aliases)
 		of_aliases = of_find_node_by_path("/aliases");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = of_find_node_by_path("/testcase-data/phandle-tests/consumer-a");
@@ -964,10 +985,13 @@ static int __init of_selftest(void)
 
 	pr_info("start of selftest - you will see error messages\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_selftest_parse_phandle_with_args();
 	of_selftest_property_string();
 	pr_info("end of selftest - %s\n", selftest_passed ? "PASS" : "FAIL");
 =======
+=======
+>>>>>>> v3.18
 	of_selftest_check_tree_linkage();
 	of_selftest_check_phandles();
 	of_selftest_find_node_by_name();
@@ -990,6 +1014,9 @@ static int __init of_selftest(void)
 	pr_info("end of selftest - %i passed, %i failed\n",
 		selftest_results.passed, selftest_results.failed);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

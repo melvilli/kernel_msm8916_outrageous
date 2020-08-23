@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -189,7 +193,11 @@ acpi_rs_create_resource_list(union acpi_operand_object *aml_buffer,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_rs_create_aml_resources(struct acpi_resource *linked_list_buffer,
+=======
+acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
+>>>>>>> v3.18
 =======
 acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
 >>>>>>> v3.18
@@ -236,8 +244,13 @@ acpi_rs_get_list_length(u8 * aml_buffer,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_rs_get_aml_length(struct acpi_resource *linked_list_buffer,
 		       acpi_size * size_needed);
+=======
+acpi_rs_get_aml_length(struct acpi_resource *resource_list,
+		       acpi_size resource_list_size, acpi_size * size_needed);
+>>>>>>> v3.18
 =======
 acpi_rs_get_aml_length(struct acpi_resource *resource_list,
 		       acpi_size resource_list_size, acpi_size * size_needed);

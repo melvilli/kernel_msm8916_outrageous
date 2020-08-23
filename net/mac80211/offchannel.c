@@ -120,7 +120,12 @@ void ieee80211_offchannel_stop_vifs(struct ieee80211_local *local)
 	 */
 	ieee80211_stop_queues_by_reason(&local->hw, IEEE80211_MAX_QUEUE_MAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_QUEUE_STOP_REASON_OFFCHANNEL);
+=======
+					IEEE80211_QUEUE_STOP_REASON_OFFCHANNEL,
+					false);
+>>>>>>> v3.18
 =======
 					IEEE80211_QUEUE_STOP_REASON_OFFCHANNEL,
 					false);
@@ -188,7 +193,12 @@ void ieee80211_offchannel_return(struct ieee80211_local *local)
 
 	ieee80211_wake_queues_by_reason(&local->hw, IEEE80211_MAX_QUEUE_MAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_QUEUE_STOP_REASON_OFFCHANNEL);
+=======
+					IEEE80211_QUEUE_STOP_REASON_OFFCHANNEL,
+					false);
+>>>>>>> v3.18
 =======
 					IEEE80211_QUEUE_STOP_REASON_OFFCHANNEL,
 					false);
@@ -372,7 +382,13 @@ void ieee80211_sw_roc_work(struct work_struct *work)
 		 * other ROC operations won't interfere with this one.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		roc->on_channel = roc->chan == local->_oper_chandef.chan;
+=======
+		roc->on_channel = roc->chan == local->_oper_chandef.chan &&
+				  local->_oper_chandef.width != NL80211_CHAN_WIDTH_5 &&
+				  local->_oper_chandef.width != NL80211_CHAN_WIDTH_10;
+>>>>>>> v3.18
 =======
 		roc->on_channel = roc->chan == local->_oper_chandef.chan &&
 				  local->_oper_chandef.width != NL80211_CHAN_WIDTH_5 &&
@@ -423,6 +439,11 @@ void ieee80211_sw_roc_work(struct work_struct *work)
 		if (started)
 			ieee80211_start_next_roc(local);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		else if (list_empty(&local->roc_list))
+			ieee80211_run_deferred_scan(local);
+>>>>>>> v3.18
 =======
 		else if (list_empty(&local->roc_list))
 			ieee80211_run_deferred_scan(local);

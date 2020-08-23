@@ -32,11 +32,17 @@ DEFINE_SPINLOCK(w1_flock);
 static LIST_HEAD(w1_families);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * w1_register_family() - register a device family driver
  * @newf:	family to register
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int w1_register_family(struct w1_family *newf)
 {
@@ -67,11 +73,17 @@ int w1_register_family(struct w1_family *newf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * w1_unregister_family() - unregister a device family driver
  * @fent:	family to unregister
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void w1_unregister_family(struct w1_family *fent)
 {
@@ -94,7 +106,11 @@ void w1_unregister_family(struct w1_family *fent)
 
 	while (atomic_read(&fent->refcnt)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "Waiting for family %u to become free: refcnt=%d.\n",
+=======
+		pr_info("Waiting for family %u to become free: refcnt=%d.\n",
+>>>>>>> v3.18
 =======
 		pr_info("Waiting for family %u to become free: refcnt=%d.\n",
 >>>>>>> v3.18

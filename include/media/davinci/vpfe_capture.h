@@ -27,6 +27,10 @@
 #include <linux/clk.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-fh.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-fh.h>
 >>>>>>> v3.18
@@ -115,8 +119,11 @@ struct vpfe_device {
 	/* parent device */
 	struct device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used to keep track of state of the priority */
 	struct v4l2_prio_state prio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* number of open instances of the channel */
@@ -182,16 +189,22 @@ struct vpfe_device {
 /* File handle structure */
 struct vpfe_fh {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpfe_device *vpfe_dev;
 	/* Indicates whether this file handle is doing IO */
 	u8 io_allowed;
 	/* Used to keep track priority of this instance */
 	enum v4l2_priority prio;
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_fh fh;
 	struct vpfe_device *vpfe_dev;
 	/* Indicates whether this file handle is doing IO */
 	u8 io_allowed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

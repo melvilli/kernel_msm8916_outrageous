@@ -370,7 +370,12 @@ static void snd_emu10k1x_pcm_interrupt(struct emu10k1x *emu, struct emu10k1x_voi
 		return;
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_INFO "IRQ: position = 0x%x, period = 0x%x, size = 0x%x\n",
+=======
+	dev_info(emu->card->dev,
+		 "IRQ: position = 0x%x, period = 0x%x, size = 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_info(emu->card->dev,
 		 "IRQ: position = 0x%x, period = 0x%x, size = 0x%x\n",
@@ -493,13 +498,19 @@ static int snd_emu10k1x_pcm_trigger(struct snd_pcm_substream *substream,
 	int result = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	snd_printk(KERN_INFO "trigger - emu10k1x = 0x%x, cmd = %i, pointer = %d\n", (int)emu, cmd, (int)substream->ops->pointer(substream));
 =======
+=======
+>>>>>>> v3.18
 	/*
 	dev_dbg(emu->card->dev,
 		"trigger - emu10k1x = 0x%x, cmd = %i, pointer = %d\n",
 		(int)emu, cmd, (int)substream->ops->pointer(substream));
 	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (cmd) {
@@ -840,7 +851,11 @@ static irqreturn_t snd_emu10k1x_interrupt(int irq, void *dev_id)
 	outl(status, chip->port + IPR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// snd_printk(KERN_INFO "interrupt %08x\n", status);
+=======
+	/* dev_dbg(chip->card->dev, "interrupt %08x\n", status); */
+>>>>>>> v3.18
 =======
 	/* dev_dbg(chip->card->dev, "interrupt %08x\n", status); */
 >>>>>>> v3.18
@@ -937,7 +952,11 @@ static int snd_emu10k1x_create(struct snd_card *card,
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(28)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(28)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "error to set 28bit mask DMA\n");
+=======
+		dev_err(card->dev, "error to set 28bit mask DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "error to set 28bit mask DMA\n");
 >>>>>>> v3.18
@@ -962,7 +981,12 @@ static int snd_emu10k1x_create(struct snd_card *card,
 	if ((chip->res_port = request_region(chip->port, 8,
 					     "EMU10K1X")) == NULL) { 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "emu10k1x: cannot allocate the port 0x%lx\n", chip->port);
+=======
+		dev_err(card->dev, "cannot allocate the port 0x%lx\n",
+			chip->port);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot allocate the port 0x%lx\n",
 			chip->port);
@@ -974,7 +998,11 @@ static int snd_emu10k1x_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_emu10k1x_interrupt,
 			IRQF_SHARED, KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "emu10k1x: cannot grab irq %d\n", pci->irq);
+=======
+		dev_err(card->dev, "cannot grab irq %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot grab irq %d\n", pci->irq);
 >>>>>>> v3.18
@@ -995,7 +1023,11 @@ static int snd_emu10k1x_create(struct snd_card *card,
 	pci_read_config_dword(pci, PCI_SUBSYSTEM_VENDOR_ID, &chip->serial);
 	pci_read_config_word(pci, PCI_SUBSYSTEM_ID, &chip->model);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_INFO "Model %04x Rev %08x Serial %08x\n", chip->model,
+=======
+	dev_info(card->dev, "Model %04x Rev %08x Serial %08x\n", chip->model,
+>>>>>>> v3.18
 =======
 	dev_info(card->dev, "Model %04x Rev %08x Serial %08x\n", chip->model,
 >>>>>>> v3.18
@@ -1283,7 +1315,13 @@ static void mpu401_clear_rx(struct emu10k1x *emu, struct emu10k1x_midi *mpu)
 #ifdef CONFIG_SND_DEBUG
 	if (timeout <= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "cmd: clear rx timeout (status = 0x%x)\n", mpu401_read_stat(emu, mpu));
+=======
+		dev_err(emu->card->dev,
+			"cmd: clear rx timeout (status = 0x%x)\n",
+			mpu401_read_stat(emu, mpu));
+>>>>>>> v3.18
 =======
 		dev_err(emu->card->dev,
 			"cmd: clear rx timeout (status = 0x%x)\n",
@@ -1363,7 +1401,12 @@ static int snd_emu10k1x_midi_cmd(struct emu10k1x * emu,
 	spin_unlock_irqrestore(&midi->input_lock, flags);
 	if (!ok) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "midi_cmd: 0x%x failed at 0x%lx (status = 0x%x, data = 0x%x)!!!\n",
+=======
+		dev_err(emu->card->dev,
+			"midi_cmd: 0x%x failed at 0x%lx (status = 0x%x, data = 0x%x)!!!\n",
+>>>>>>> v3.18
 =======
 		dev_err(emu->card->dev,
 			"midi_cmd: 0x%x failed at 0x%lx (status = 0x%x, data = 0x%x)!!!\n",
@@ -1610,7 +1653,12 @@ static int snd_emu10k1x_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -1659,8 +1707,11 @@ static int snd_emu10k1x_probe(struct pci_dev *pci,
 		card->shortname, chip->port, chip->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_card_register(card)) < 0) {
@@ -1677,16 +1728,22 @@ static void snd_emu10k1x_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
 }
 
 // PCI IDs
 static DEFINE_PCI_DEVICE_TABLE(snd_emu10k1x_ids) = {
 =======
+=======
+>>>>>>> v3.18
 }
 
 // PCI IDs
 static const struct pci_device_id snd_emu10k1x_ids[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_VDEVICE(CREATIVE, 0x0006), 0 },	/* Dell OEM version (EMU10K1) */
 	{ 0, }

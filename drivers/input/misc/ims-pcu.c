@@ -52,6 +52,11 @@ struct ims_pcu_backlight {
 #define IMS_PCU_BL_RESET_REASON_LEN	(2 + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMS_PCU_PCU_B_DEVICE_ID		5
+
+>>>>>>> v3.18
 =======
 #define IMS_PCU_PCU_B_DEVICE_ID		5
 
@@ -74,6 +79,12 @@ struct ims_pcu {
 	char reset_reason[IMS_PCU_BL_RESET_REASON_LEN];
 	int update_firmware_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 device_id;
+
+	u8 ofn_reg_addr;
+>>>>>>> v3.18
 =======
 	u8 device_id;
 
@@ -383,6 +394,11 @@ static void ims_pcu_destroy_gamepad(struct ims_pcu *pcu)
 #define IMS_PCU_CMD_SPECIAL_INFO	0xb0
 #define IMS_PCU_CMD_BOOTLOADER		0xb1	/* Pass data to bootloader */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMS_PCU_CMD_OFN_SET_CONFIG	0xb3
+#define IMS_PCU_CMD_OFN_GET_CONFIG	0xb4
+>>>>>>> v3.18
 =======
 #define IMS_PCU_CMD_OFN_SET_CONFIG	0xb3
 #define IMS_PCU_CMD_OFN_GET_CONFIG	0xb4
@@ -406,6 +422,12 @@ static void ims_pcu_destroy_gamepad(struct ims_pcu *pcu)
 #define IMS_PCU_RSP_SPECIAL_INFO	0xd0
 #define IMS_PCU_RSP_BOOTLOADER		0xd1	/* Bootloader response */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMS_PCU_RSP_OFN_SET_CONFIG	0xd2
+#define IMS_PCU_RSP_OFN_GET_CONFIG	0xd3
+
+>>>>>>> v3.18
 =======
 #define IMS_PCU_RSP_OFN_SET_CONFIG	0xd2
 #define IMS_PCU_RSP_OFN_GET_CONFIG	0xd3
@@ -1279,7 +1301,10 @@ static struct attribute_group ims_pcu_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Support for a separate OFN attribute group */
 
 #define OFN_REG_RESULT_OFFSET	2
@@ -1499,6 +1524,9 @@ static struct attribute_group ims_pcu_ofn_attr_group = {
 	.attrs	= ims_pcu_ofn_attrs,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ims_pcu_irq(struct urb *urb)
 {
@@ -1582,6 +1610,10 @@ static int ims_pcu_buffers_alloc(struct ims_pcu *pcu)
 		dev_err(pcu->dev,
 			"Failed to allocate memory for read buffer\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		error = -ENOMEM;
+>>>>>>> v3.18
 =======
 		error = -ENOMEM;
 >>>>>>> v3.18
@@ -1682,6 +1714,7 @@ static int ims_pcu_parse_cdc_data(struct usb_interface *intf, struct ims_pcu *pc
 	pcu->ctrl_intf = usb_ifnum_to_if(pcu->udev,
 					 union_desc->bMasterInterface0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pcu->ctrl_intf)
 		return -EINVAL;
 
@@ -1694,14 +1727,21 @@ static int ims_pcu_parse_cdc_data(struct usb_interface *intf, struct ims_pcu *pc
 
 	alt = pcu->ctrl_intf->cur_altsetting;
 >>>>>>> v3.18
+=======
+
+	alt = pcu->ctrl_intf->cur_altsetting;
+>>>>>>> v3.18
 	pcu->ep_ctrl = &alt->endpoint[0].desc;
 	pcu->max_ctrl_size = usb_endpoint_maxp(pcu->ep_ctrl);
 
 	pcu->data_intf = usb_ifnum_to_if(pcu->udev,
 					 union_desc->bSlaveInterface0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pcu->data_intf)
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1889,7 +1929,10 @@ static int ims_pcu_init_application_mode(struct ims_pcu *pcu)
 
 	const struct ims_pcu_device_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 device_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int error;
@@ -1901,7 +1944,11 @@ static int ims_pcu_init_application_mode(struct ims_pcu *pcu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ims_pcu_identify_type(pcu, &device_id);
+=======
+	error = ims_pcu_identify_type(pcu, &pcu->device_id);
+>>>>>>> v3.18
 =======
 	error = ims_pcu_identify_type(pcu, &pcu->device_id);
 >>>>>>> v3.18
@@ -1917,9 +1964,15 @@ static int ims_pcu_init_application_mode(struct ims_pcu *pcu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device_id >= ARRAY_SIZE(ims_pcu_device_info) ||
 	    !ims_pcu_device_info[device_id].keymap) {
 		dev_err(pcu->dev, "Device ID %d is not valid\n", device_id);
+=======
+	if (pcu->device_id >= ARRAY_SIZE(ims_pcu_device_info) ||
+	    !ims_pcu_device_info[pcu->device_id].keymap) {
+		dev_err(pcu->dev, "Device ID %d is not valid\n", pcu->device_id);
+>>>>>>> v3.18
 =======
 	if (pcu->device_id >= ARRAY_SIZE(ims_pcu_device_info) ||
 	    !ims_pcu_device_info[pcu->device_id].keymap) {
@@ -1933,7 +1986,10 @@ static int ims_pcu_init_application_mode(struct ims_pcu *pcu)
 	pcu->device_no = atomic_inc_return(&device_no) - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * PCU-B devices, both GEN_1 and GEN_2 do not have OFN sensor
 	 */
@@ -1944,13 +2000,20 @@ static int ims_pcu_init_application_mode(struct ims_pcu *pcu)
 			return error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = ims_pcu_setup_backlight(pcu);
 	if (error)
 		return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = &ims_pcu_device_info[device_id];
+=======
+	info = &ims_pcu_device_info[pcu->device_id];
+>>>>>>> v3.18
 =======
 	info = &ims_pcu_device_info[pcu->device_id];
 >>>>>>> v3.18
@@ -1969,15 +2032,21 @@ static int ims_pcu_init_application_mode(struct ims_pcu *pcu)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_destroy_backlight:
 	ims_pcu_destroy_backlight(pcu);
 err_destroy_buttons:
 	ims_pcu_destroy_buttons(pcu);
 =======
+=======
+>>>>>>> v3.18
 err_destroy_buttons:
 	ims_pcu_destroy_buttons(pcu);
 err_destroy_backlight:
 	ims_pcu_destroy_backlight(pcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return error;
 }
@@ -1993,11 +2062,17 @@ static void ims_pcu_destroy_application_mode(struct ims_pcu *pcu)
 		ims_pcu_destroy_buttons(pcu);
 		ims_pcu_destroy_backlight(pcu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (pcu->device_id != IMS_PCU_PCU_B_DEVICE_ID)
 			sysfs_remove_group(&pcu->dev->kobj,
 					   &ims_pcu_ofn_attr_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

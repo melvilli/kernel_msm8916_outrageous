@@ -19,7 +19,10 @@
 #include <linux/module.h>
 #include <linux/device-mapper.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reboot.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <crypto/hash.h>
@@ -27,9 +30,12 @@
 #define DM_MSG_PREFIX			"verity"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DM_VERITY_ENV_LENGTH		42
 #define DM_VERITY_ENV_VAR_NAME		"VERITY_ERR_BLOCK_NR"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DM_VERITY_IO_VEC_INLINE		16
@@ -38,7 +44,10 @@
 
 #define DM_VERITY_MAX_LEVELS		63
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DM_VERITY_MAX_CORRUPTED_ERRS	100
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -46,6 +55,7 @@ static unsigned dm_verity_prefetch_cluster = DM_VERITY_DEFAULT_PREFETCH_SIZE;
 
 module_param_named(prefetch_cluster, dm_verity_prefetch_cluster, uint, S_IRUGO | S_IWUSR);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum verity_mode {
 	DM_VERITY_MODE_EIO = 0,
@@ -58,6 +68,8 @@ enum verity_block_type {
 	DM_VERITY_BLOCK_TYPE_METADATA
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dm_verity {
@@ -83,8 +95,11 @@ struct dm_verity {
 	unsigned shash_descsize;/* the size of temporary space for crypto */
 	int hash_failed;	/* set to 1 if hash of any block failed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum verity_mode mode;	/* mode for handling verification errors */
 	unsigned corrupted_errs;/* Number of errors for corrupted blocks */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -107,6 +122,7 @@ struct dm_verity_io {
 	unsigned n_blocks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* saved bio vector */
 	struct bio_vec *io_vec;
 	unsigned io_vec_size;
@@ -117,10 +133,15 @@ struct dm_verity_io {
 	struct bio_vec io_vec_inline[DM_VERITY_IO_VEC_INLINE];
 
 =======
+=======
+>>>>>>> v3.18
 	struct bvec_iter iter;
 
 	struct work_struct work;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Three variably-size fields follow this struct:
@@ -221,6 +242,7 @@ static void verity_hash_at_level(struct dm_verity *v, sector_t block, int level,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Handle verification errors.
  */
 static int verity_handle_err(struct dm_verity *v, enum verity_block_type type,
@@ -269,6 +291,8 @@ out:
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Verify hash of a metadata block pertaining to the specified data block
@@ -348,6 +372,7 @@ static int verity_verify_level(struct dm_verity_io *io, sector_t block,
 		}
 		if (unlikely(memcmp(result, io_want_digest(v, io), v->digest_size))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			v->hash_failed = 1;
 
 			if (verity_handle_err(v, DM_VERITY_BLOCK_TYPE_METADATA,
@@ -356,11 +381,16 @@ static int verity_verify_level(struct dm_verity_io *io, sector_t block,
 				goto release_ret_r;
 			}
 =======
+=======
+>>>>>>> v3.18
 			DMERR_LIMIT("metadata block %llu is corrupted",
 				(unsigned long long)hash_block);
 			v->hash_failed = 1;
 			r = -EIO;
 			goto release_ret_r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			aux->hash_verified = 1;
@@ -386,14 +416,20 @@ static int verity_verify_io(struct dm_verity_io *io)
 {
 	struct dm_verity *v = io->v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned b;
 	int i;
 	unsigned vector = 0, offset = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct bio *bio = dm_bio_from_per_bio_data(io,
 						   v->ti->per_bio_data_size);
 	unsigned b;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (b = 0; b < io->n_blocks; b++) {
@@ -443,6 +479,7 @@ test_block_hash:
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		todo = 1 << v->data_dev_block_bits;
 		do {
@@ -460,6 +497,8 @@ test_block_hash:
 					page + bv->bv_offset + offset, len);
 			kunmap_atomic(page);
 =======
+=======
+>>>>>>> v3.18
 		todo = 1 << v->data_dev_block_bits;
 		do {
 			u8 *page;
@@ -473,17 +512,25 @@ test_block_hash:
 			r = crypto_shash_update(desc, page + bv.bv_offset, len);
 			kunmap_atomic(page);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (r < 0) {
 				DMERR("crypto_shash_update failed: %d", r);
 				return r;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset += len;
 			if (likely(offset == bv->bv_len)) {
 				offset = 0;
 				vector++;
 			}
+=======
+
+			bio_advance_iter(bio, &io->iter, len);
+>>>>>>> v3.18
 =======
 
 			bio_advance_iter(bio, &io->iter, len);
@@ -507,6 +554,7 @@ test_block_hash:
 		}
 		if (unlikely(memcmp(result, io_want_digest(v, io), v->digest_size))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			v->hash_failed = 1;
 
 			if (verity_handle_err(v, DM_VERITY_BLOCK_TYPE_DATA,
@@ -517,12 +565,17 @@ test_block_hash:
 	BUG_ON(vector != io->io_vec_size);
 	BUG_ON(offset);
 =======
+=======
+>>>>>>> v3.18
 			DMERR_LIMIT("data block %llu is corrupted",
 				(unsigned long long)(io->block + b));
 			v->hash_failed = 1;
 			return -EIO;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -540,10 +593,14 @@ static void verity_finish_io(struct dm_verity_io *io, int error)
 	bio->bi_private = io->orig_bi_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (io->io_vec != io->io_vec_inline)
 		mempool_free(io->io_vec, v->vec_mempool);
 
 	bio_endio(bio, error);
+=======
+	bio_endio_nodec(bio, error);
+>>>>>>> v3.18
 =======
 	bio_endio_nodec(bio, error);
 >>>>>>> v3.18
@@ -595,7 +652,11 @@ static void verity_prefetch_io(struct work_struct *work)
 
 			if (unlikely(cluster & (cluster - 1)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cluster = 1 << (fls(cluster) - 1);
+=======
+				cluster = 1 << __fls(cluster);
+>>>>>>> v3.18
 =======
 				cluster = 1 << __fls(cluster);
 >>>>>>> v3.18
@@ -641,9 +702,15 @@ static int verity_map(struct dm_target *ti, struct bio *bio)
 
 	bio->bi_bdev = v->data_dev->bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = verity_map_sector(v, bio->bi_sector);
 
 	if (((unsigned)bio->bi_sector | bio_sectors(bio)) &
+=======
+	bio->bi_iter.bi_sector = verity_map_sector(v, bio->bi_iter.bi_sector);
+
+	if (((unsigned)bio->bi_iter.bi_sector | bio_sectors(bio)) &
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = verity_map_sector(v, bio->bi_iter.bi_sector);
 
@@ -668,6 +735,7 @@ static int verity_map(struct dm_target *ti, struct bio *bio)
 	io->orig_bi_end_io = bio->bi_end_io;
 	io->orig_bi_private = bio->bi_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io->block = bio->bi_sector >> (v->data_dev_block_bits - SECTOR_SHIFT);
 	io->n_blocks = bio->bi_size >> v->data_dev_block_bits;
 
@@ -681,12 +749,17 @@ static int verity_map(struct dm_target *ti, struct bio *bio)
 	memcpy(io->io_vec, bio_iovec(bio),
 	       io->io_vec_size * sizeof(struct bio_vec));
 =======
+=======
+>>>>>>> v3.18
 	io->block = bio->bi_iter.bi_sector >> (v->data_dev_block_bits - SECTOR_SHIFT);
 	io->n_blocks = bio->bi_iter.bi_size >> v->data_dev_block_bits;
 
 	bio->bi_end_io = verity_end_io;
 	bio->bi_private = io;
 	io->iter = bio->bi_iter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	verity_submit_prefetch(v, io);
@@ -852,8 +925,13 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (argc < 10 || argc > 11) {
 		ti->error = "Invalid argument count: 10-11 arguments required";
+=======
+	if (argc != 10) {
+		ti->error = "Invalid argument count: exactly 10 arguments required";
+>>>>>>> v3.18
 =======
 	if (argc != 10) {
 		ti->error = "Invalid argument count: exactly 10 arguments required";
@@ -863,8 +941,13 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sscanf(argv[0], "%d%c", &num, &dummy) != 1 ||
 	    num < 0 || num > 1) {
+=======
+	if (sscanf(argv[0], "%u%c", &num, &dummy) != 1 ||
+	    num > 1) {
+>>>>>>> v3.18
 =======
 	if (sscanf(argv[0], "%u%c", &num, &dummy) != 1 ||
 	    num > 1) {
@@ -896,7 +979,11 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 		goto bad;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v->data_dev_block_bits = ffs(num) - 1;
+=======
+	v->data_dev_block_bits = __ffs(num);
+>>>>>>> v3.18
 =======
 	v->data_dev_block_bits = __ffs(num);
 >>>>>>> v3.18
@@ -910,7 +997,11 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 		goto bad;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v->hash_dev_block_bits = ffs(num) - 1;
+=======
+	v->hash_dev_block_bits = __ffs(num);
+>>>>>>> v3.18
 =======
 	v->hash_dev_block_bits = __ffs(num);
 >>>>>>> v3.18
@@ -992,6 +1083,7 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (argc > 10) {
 		if (sscanf(argv[10], "%d%c", &num, &dummy) != 1 ||
 			num < DM_VERITY_MODE_EIO ||
@@ -1005,6 +1097,10 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 
 	v->hash_per_block_bits =
 		fls((1 << v->hash_dev_block_bits) / v->digest_size) - 1;
+=======
+	v->hash_per_block_bits =
+		__fls((1 << v->hash_dev_block_bits) / v->digest_size);
+>>>>>>> v3.18
 =======
 	v->hash_per_block_bits =
 		__fls((1 << v->hash_dev_block_bits) / v->digest_size);

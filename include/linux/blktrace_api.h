@@ -6,6 +6,10 @@
 #include <linux/compat.h>
 #include <uapi/linux/blktrace_api.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/list.h>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@ struct blk_trace {
 	struct dentry *dropped_file;
 	struct dentry *msg_file;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head running_list;
+>>>>>>> v3.18
 =======
 	struct list_head running_list;
 >>>>>>> v3.18
@@ -96,7 +104,11 @@ static inline int blk_trace_init_sysfs(struct device *dev)
 
 struct compat_blk_user_trace_setup {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[32];
+=======
+	char name[BLKTRACE_BDEV_SIZE];
+>>>>>>> v3.18
 =======
 	char name[BLKTRACE_BDEV_SIZE];
 >>>>>>> v3.18

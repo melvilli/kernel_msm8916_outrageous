@@ -88,17 +88,23 @@ static void br_forward_delay_timer_expired(unsigned long arg)
 	spin_lock(&br->lock);
 	if (p->state == BR_STATE_LISTENING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->state = BR_STATE_LEARNING;
 		mod_timer(&p->forward_delay_timer,
 			  jiffies + br->forward_delay);
 	} else if (p->state == BR_STATE_LEARNING) {
 		p->state = BR_STATE_FORWARDING;
 =======
+=======
+>>>>>>> v3.18
 		br_set_state(p, BR_STATE_LEARNING);
 		mod_timer(&p->forward_delay_timer,
 			  jiffies + br->forward_delay);
 	} else if (p->state == BR_STATE_LEARNING) {
 		br_set_state(p, BR_STATE_FORWARDING);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (br_is_designated_for_some_port(br))
 			br_topology_change_detection(br);
@@ -119,7 +125,11 @@ static void br_tcn_timer_expired(unsigned long arg)
 		br_transmit_tcn(br);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mod_timer(&br->tcn_timer,jiffies + br->bridge_hello_time);
+=======
+		mod_timer(&br->tcn_timer, jiffies + br->bridge_hello_time);
+>>>>>>> v3.18
 =======
 		mod_timer(&br->tcn_timer, jiffies + br->bridge_hello_time);
 >>>>>>> v3.18

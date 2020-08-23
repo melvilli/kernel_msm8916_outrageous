@@ -16,6 +16,12 @@ menuconfig BLK_DEV
 if BLK_DEV
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config BLK_DEV_NULL_BLK
+	tristate "Null test block driver"
+
+>>>>>>> v3.18
 =======
 config BLK_DEV_NULL_BLK
 	tristate "Null test block driver"
@@ -116,7 +122,11 @@ source "drivers/block/zram/Kconfig"
 config BLK_CPQ_DA
 	tristate "Compaq SMART2 support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && VIRT_TO_BUS
+=======
+	depends on PCI && VIRT_TO_BUS && 0
+>>>>>>> v3.18
 =======
 	depends on PCI && VIRT_TO_BUS && 0
 >>>>>>> v3.18
@@ -329,7 +339,10 @@ config BLK_DEV_NVME
 	  module will be called nvme.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BLK_DEV_SKD
 	tristate "STEC S1120 Block Driver"
 	depends on PCI
@@ -340,6 +353,9 @@ config BLK_DEV_SKD
 
 	Use device /dev/skd$N amd /dev/skd$Np$M.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config BLK_DEV_OSD
 	tristate "OSD object-as-blkdev support"
@@ -381,7 +397,12 @@ config BLK_DEV_RAM
 
 	  To compile this driver as a module, choose M here: the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  module will be called rd.
+=======
+	  module will be called brd. An alias "rd" has been defined
+	  for historical reasons.
+>>>>>>> v3.18
 =======
 	  module will be called brd. An alias "rd" has been defined
 	  for historical reasons.
@@ -536,7 +557,11 @@ config BLK_DEV_HD
 	bool "Very old hard disk (MFM/RLL/IDE) driver"
 	depends on HAVE_IDE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ARM || ARCH_RPC || ARCH_SHARK || BROKEN
+=======
+	depends on !ARM || ARCH_RPC || BROKEN
+>>>>>>> v3.18
 =======
 	depends on !ARM || ARCH_RPC || BROKEN
 >>>>>>> v3.18
@@ -567,17 +592,23 @@ config BLK_DEV_RBD
 
 config BLK_DEV_RSXX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "IBM FlashSystem 70/80 PCIe SSD Device Driver"
 	depends on PCI
 	help
 	  Device driver for IBM's high speed PCIe SSD
 	  storage devices: FlashSystem-70 and FlashSystem-80.
 =======
+=======
+>>>>>>> v3.18
 	tristate "IBM Flash Adapter 900GB Full Height PCIe Device Driver"
 	depends on PCI
 	help
 	  Device driver for IBM's high speed PCIe SSD
 	  storage device: Flash Adapter 900GB Full Height.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the

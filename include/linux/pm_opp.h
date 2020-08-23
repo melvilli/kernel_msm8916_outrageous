@@ -16,6 +16,7 @@
 
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cpufreq.h>
 #include <linux/notifier.h>
 
@@ -24,18 +25,24 @@ struct device;
 
 enum opp_event {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/notifier.h>
 
 struct dev_pm_opp;
 struct device;
 
 enum dev_pm_opp_event {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPP_EVENT_ADD, OPP_EVENT_ENABLE, OPP_EVENT_DISABLE,
 };
 
 #if defined(CONFIG_PM_OPP)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 unsigned long dev_pm_opp_get_voltage(struct opp *opp);
 
@@ -50,6 +57,8 @@ struct opp *dev_pm_opp_find_freq_floor(struct device *dev, unsigned long *freq);
 
 struct opp *dev_pm_opp_find_freq_ceil(struct device *dev, unsigned long *freq);
 =======
+=======
+>>>>>>> v3.18
 unsigned long dev_pm_opp_get_voltage(struct dev_pm_opp *opp);
 
 unsigned long dev_pm_opp_get_freq(struct dev_pm_opp *opp);
@@ -65,6 +74,9 @@ struct dev_pm_opp *dev_pm_opp_find_freq_floor(struct device *dev,
 
 struct dev_pm_opp *dev_pm_opp_find_freq_ceil(struct device *dev,
 					     unsigned long *freq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int dev_pm_opp_add(struct device *dev, unsigned long freq,
@@ -77,7 +89,11 @@ int dev_pm_opp_disable(struct device *dev, unsigned long freq);
 struct srcu_notifier_head *dev_pm_opp_get_notifier(struct device *dev);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long dev_pm_opp_get_voltage(struct opp *opp)
+=======
+static inline unsigned long dev_pm_opp_get_voltage(struct dev_pm_opp *opp)
+>>>>>>> v3.18
 =======
 static inline unsigned long dev_pm_opp_get_voltage(struct dev_pm_opp *opp)
 >>>>>>> v3.18
@@ -86,7 +102,11 @@ static inline unsigned long dev_pm_opp_get_voltage(struct dev_pm_opp *opp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long dev_pm_opp_get_freq(struct opp *opp)
+=======
+static inline unsigned long dev_pm_opp_get_freq(struct dev_pm_opp *opp)
+>>>>>>> v3.18
 =======
 static inline unsigned long dev_pm_opp_get_freq(struct dev_pm_opp *opp)
 >>>>>>> v3.18
@@ -100,7 +120,11 @@ static inline int dev_pm_opp_get_opp_count(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct opp *dev_pm_opp_find_freq_exact(struct device *dev,
+=======
+static inline struct dev_pm_opp *dev_pm_opp_find_freq_exact(struct device *dev,
+>>>>>>> v3.18
 =======
 static inline struct dev_pm_opp *dev_pm_opp_find_freq_exact(struct device *dev,
 >>>>>>> v3.18
@@ -110,7 +134,11 @@ static inline struct dev_pm_opp *dev_pm_opp_find_freq_exact(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct opp *dev_pm_opp_find_freq_floor(struct device *dev,
+=======
+static inline struct dev_pm_opp *dev_pm_opp_find_freq_floor(struct device *dev,
+>>>>>>> v3.18
 =======
 static inline struct dev_pm_opp *dev_pm_opp_find_freq_floor(struct device *dev,
 >>>>>>> v3.18
@@ -120,7 +148,11 @@ static inline struct dev_pm_opp *dev_pm_opp_find_freq_floor(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct opp *dev_pm_opp_find_freq_ceil(struct device *dev,
+=======
+static inline struct dev_pm_opp *dev_pm_opp_find_freq_ceil(struct device *dev,
+>>>>>>> v3.18
 =======
 static inline struct dev_pm_opp *dev_pm_opp_find_freq_ceil(struct device *dev,
 >>>>>>> v3.18
@@ -162,6 +194,7 @@ static inline int of_init_opp_table(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_FREQ) && defined(CONFIG_PM_OPP)
 int dev_pm_opp_init_cpufreq_table(struct device *dev,
 			    struct cpufreq_frequency_table **table);
@@ -181,6 +214,8 @@ void dev_pm_opp_free_cpufreq_table(struct device *dev,
 }
 #endif		/* CONFIG_CPU_FREQ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif		/* __LINUX_OPP_H__ */

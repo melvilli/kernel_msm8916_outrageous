@@ -15,7 +15,13 @@
 #include <linux/rtc.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_device.h>
+=======
+#include <linux/of_address.h>
+#include <linux/of_device.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_device.h>
@@ -75,7 +81,11 @@ struct mpc5121_rtc_regs {
 	/*
 	 * actual_time:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * 	readonly time since VBAT_RTC was last connected
+=======
+	 *	readonly time since VBAT_RTC was last connected
+>>>>>>> v3.18
 =======
 	 *	readonly time since VBAT_RTC was last connected
 >>>>>>> v3.18
@@ -323,7 +333,11 @@ static int mpc5121_rtc_probe(struct platform_device *op)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc = kzalloc(sizeof(*rtc), GFP_KERNEL);
+=======
+	rtc = devm_kzalloc(&op->dev, sizeof(*rtc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rtc = devm_kzalloc(&op->dev, sizeof(*rtc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -334,8 +348,12 @@ static int mpc5121_rtc_probe(struct platform_device *op)
 	if (!rtc->regs) {
 		dev_err(&op->dev, "%s: couldn't map io space\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENOSYS;
 		goto out_free;
+=======
+		return -ENOSYS;
+>>>>>>> v3.18
 =======
 		return -ENOSYS;
 >>>>>>> v3.18
@@ -344,7 +362,11 @@ static int mpc5121_rtc_probe(struct platform_device *op)
 	device_init_wakeup(&op->dev, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, rtc);
+=======
+	platform_set_drvdata(op, rtc);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, rtc);
 >>>>>>> v3.18
@@ -377,15 +399,21 @@ static int mpc5121_rtc_probe(struct platform_device *op)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtc->rtc = rtc_device_register("mpc5121-rtc", &op->dev,
 						&mpc5121_rtc_ops, THIS_MODULE);
 	} else {
 		rtc->rtc = rtc_device_register("mpc5200-rtc", &op->dev,
 =======
+=======
+>>>>>>> v3.18
 		rtc->rtc = devm_rtc_device_register(&op->dev, "mpc5121-rtc",
 						&mpc5121_rtc_ops, THIS_MODULE);
 	} else {
 		rtc->rtc = devm_rtc_device_register(&op->dev, "mpc5200-rtc",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						&mpc5200_rtc_ops, THIS_MODULE);
 	}
@@ -407,8 +435,11 @@ out_dispose:
 	irq_dispose_mapping(rtc->irq);
 	iounmap(rtc->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free:
 	kfree(rtc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -418,7 +449,11 @@ out_free:
 static int mpc5121_rtc_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc5121_rtc_data *rtc = dev_get_drvdata(&op->dev);
+=======
+	struct mpc5121_rtc_data *rtc = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct mpc5121_rtc_data *rtc = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -429,7 +464,10 @@ static int mpc5121_rtc_remove(struct platform_device *op)
 	out_8(&regs->int_enable, in_8(&regs->int_enable) & ~0x1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc_device_unregister(rtc->rtc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(rtc->regs);
@@ -438,8 +476,11 @@ static int mpc5121_rtc_remove(struct platform_device *op)
 	irq_dispose_mapping(rtc->irq);
 	irq_dispose_mapping(rtc->irq_periodic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 	kfree(rtc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -448,7 +489,11 @@ static int mpc5121_rtc_remove(struct platform_device *op)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc5121_rtc_match[] = {
+=======
+static const struct of_device_id mpc5121_rtc_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc5121_rtc_match[] = {
 >>>>>>> v3.18

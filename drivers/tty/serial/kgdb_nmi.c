@@ -16,7 +16,10 @@
 #include <linux/module.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -47,8 +50,11 @@ module_param_named(magic, kgdb_nmi_magic, charp, 0600);
 MODULE_PARM_DESC(magic, "magic sequence to enter NMI debugger (default $3#33)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool kgdb_nmi_tty_enabled;
 =======
+=======
+>>>>>>> v3.18
 static atomic_t kgdb_nmi_num_readers = ATOMIC_INIT(0);
 
 static int kgdb_nmi_console_setup(struct console *co, char *options)
@@ -64,6 +70,9 @@ static int kgdb_nmi_console_setup(struct console *co, char *options)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void kgdb_nmi_console_write(struct console *co, const char *s, uint c)
@@ -71,9 +80,12 @@ static void kgdb_nmi_console_write(struct console *co, const char *s, uint c)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!kgdb_nmi_tty_enabled || atomic_read(&kgdb_active) >= 0)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < c; i++)
@@ -91,14 +103,20 @@ static struct tty_driver *kgdb_nmi_console_device(struct console *co, int *idx)
 static struct console kgdb_nmi_console = {
 	.name	= "ttyNMI",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write	= kgdb_nmi_console_write,
 	.device	= kgdb_nmi_console_device,
 	.flags	= CON_PRINTBUFFER | CON_ANYTIME | CON_ENABLED,
 =======
+=======
+>>>>>>> v3.18
 	.setup  = kgdb_nmi_console_setup,
 	.write	= kgdb_nmi_console_write,
 	.device	= kgdb_nmi_console_device,
 	.flags	= CON_PRINTBUFFER | CON_ANYTIME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.index	= -1,
 };
@@ -112,6 +130,7 @@ static struct console kgdb_nmi_console = {
 
 struct kgdb_nmi_tty_priv {
 	struct tty_port port;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tasklet_struct tlet;
 	STRUCT_KFIFO(char, KGDB_NMI_FIFO_SIZE) fifo;
@@ -137,10 +156,15 @@ static inline void kgdb_tty_poke(void) {}
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	struct timer_list timer;
 	STRUCT_KFIFO(char, KGDB_NMI_FIFO_SIZE) fifo;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct tty_port *kgdb_nmi_port;
 
@@ -153,7 +177,11 @@ static void kgdb_tty_recv(int ch)
 		return;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Can't use port->tty->driver_data as tty might be not there. Tasklet
+=======
+	 * Can't use port->tty->driver_data as tty might be not there. Timer
+>>>>>>> v3.18
 =======
 	 * Can't use port->tty->driver_data as tty might be not there. Timer
 >>>>>>> v3.18
@@ -162,9 +190,14 @@ static void kgdb_tty_recv(int ch)
 	 * possible.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv = kgdb_nmi_port_to_priv(kgdb_nmi_port);
 	kfifo_in(&priv->fifo, &c, 1);
 	kgdb_tty_poke();
+=======
+	priv = container_of(kgdb_nmi_port, struct kgdb_nmi_tty_priv, port);
+	kfifo_in(&priv->fifo, &c, 1);
+>>>>>>> v3.18
 =======
 	priv = container_of(kgdb_nmi_port, struct kgdb_nmi_tty_priv, port);
 	kfifo_in(&priv->fifo, &c, 1);
@@ -195,7 +228,11 @@ static int kgdb_nmi_poll_one_knock(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kgdb_nmi_tty_enabled) {
+=======
+	if (atomic_read(&kgdb_nmi_num_readers)) {
+>>>>>>> v3.18
 =======
 	if (atomic_read(&kgdb_nmi_num_readers)) {
 >>>>>>> v3.18
@@ -257,15 +294,21 @@ static void kgdb_nmi_tty_receiver(unsigned long data)
 	char ch;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tasklet_schedule(&priv->tlet);
 
 	if (likely(!kgdb_nmi_tty_enabled || !kfifo_len(&priv->fifo)))
 =======
+=======
+>>>>>>> v3.18
 	priv->timer.expires = jiffies + (HZ/100);
 	add_timer(&priv->timer);
 
 	if (likely(!atomic_read(&kgdb_nmi_num_readers) ||
 		   !kfifo_len(&priv->fifo)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -277,11 +320,14 @@ static void kgdb_nmi_tty_receiver(unsigned long data)
 static int kgdb_nmi_tty_activate(struct tty_port *port, struct tty_struct *tty)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kgdb_nmi_tty_priv *priv = tty->driver_data;
 
 	kgdb_nmi_port = port;
 	tasklet_schedule(&priv->tlet);
 =======
+=======
+>>>>>>> v3.18
 	struct kgdb_nmi_tty_priv *priv =
 	    container_of(port, struct kgdb_nmi_tty_priv, port);
 
@@ -289,6 +335,9 @@ static int kgdb_nmi_tty_activate(struct tty_port *port, struct tty_struct *tty)
 	priv->timer.expires = jiffies + (HZ/100);
 	add_timer(&priv->timer);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -296,14 +345,20 @@ static int kgdb_nmi_tty_activate(struct tty_port *port, struct tty_struct *tty)
 static void kgdb_nmi_tty_shutdown(struct tty_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kgdb_nmi_tty_priv *priv = port->tty->driver_data;
 
 	tasklet_kill(&priv->tlet);
 =======
+=======
+>>>>>>> v3.18
 	struct kgdb_nmi_tty_priv *priv =
 	    container_of(port, struct kgdb_nmi_tty_priv, port);
 
 	del_timer(&priv->timer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kgdb_nmi_port = NULL;
 }
@@ -324,7 +379,11 @@ static int kgdb_nmi_tty_install(struct tty_driver *drv, struct tty_struct *tty)
 
 	INIT_KFIFO(priv->fifo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tasklet_init(&priv->tlet, kgdb_nmi_tty_receiver, (unsigned long)priv);
+=======
+	setup_timer(&priv->timer, kgdb_nmi_tty_receiver, (unsigned long)priv);
+>>>>>>> v3.18
 =======
 	setup_timer(&priv->timer, kgdb_nmi_tty_receiver, (unsigned long)priv);
 >>>>>>> v3.18
@@ -357,9 +416,12 @@ static int kgdb_nmi_tty_open(struct tty_struct *tty, struct file *file)
 {
 	struct kgdb_nmi_tty_priv *priv = tty->driver_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return tty_port_open(&priv->port, tty, file);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int mode = file->f_flags & O_ACCMODE;
 	int ret;
 
@@ -368,6 +430,9 @@ static int kgdb_nmi_tty_open(struct tty_struct *tty, struct file *file)
 		atomic_inc(&kgdb_nmi_num_readers);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -375,11 +440,17 @@ static void kgdb_nmi_tty_close(struct tty_struct *tty, struct file *file)
 {
 	struct kgdb_nmi_tty_priv *priv = tty->driver_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int mode = file->f_flags & O_ACCMODE;
 
 	if (mode == O_RDONLY || mode == O_RDWR)
 		atomic_dec(&kgdb_nmi_num_readers);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tty_port_close(&priv->port, tty, file);
@@ -418,12 +489,15 @@ static const struct tty_operations kgdb_nmi_tty_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int kgdb_nmi_enable_console(int argc, const char *argv[])
 {
 	kgdb_nmi_tty_enabled = !(argc == 1 && !strcmp(argv[1], "off"));
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kgdb_register_nmi_console(void)
@@ -456,6 +530,7 @@ int kgdb_register_nmi_console(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = kdb_register("nmi_console", kgdb_nmi_enable_console, "[off]",
 			   "switch to Linux NMI console", 0);
 	if (ret) {
@@ -469,6 +544,11 @@ int kgdb_register_nmi_console(void)
 	return 0;
 err_kdb_reg:
 	tty_unregister_driver(kgdb_nmi_tty_driver);
+=======
+	register_console(&kgdb_nmi_console);
+
+	return 0;
+>>>>>>> v3.18
 =======
 	register_console(&kgdb_nmi_console);
 
@@ -489,8 +569,11 @@ int kgdb_unregister_nmi_console(void)
 	arch_kgdb_ops.enable_nmi(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kdb_unregister("nmi_console");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = unregister_console(&kgdb_nmi_console);

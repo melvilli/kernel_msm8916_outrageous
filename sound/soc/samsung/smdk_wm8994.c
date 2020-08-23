@@ -10,13 +10,19 @@
 #include "../codecs/wm8994.h"
 #include <sound/pcm_params.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/of.h>
 =======
+=======
+>>>>>>> v3.18
 #include <sound/soc.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  /*
@@ -45,7 +51,10 @@
 #define SMDK_WM8994_FREQ 16934000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct smdk_wm8994_data {
 	int mclk1_rate;
 };
@@ -55,13 +64,19 @@ static struct smdk_wm8994_data smdk_board_data = {
 	.mclk1_rate = SMDK_WM8994_FREQ,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int smdk_hw_params(struct snd_pcm_substream *substream,
 	struct snd_pcm_hw_params *params)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
@@ -70,7 +85,11 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 
 	/* AIF1CLK should be >=3MHz for optimal performance */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (params_format(params) == SNDRV_PCM_FORMAT_S24_LE)
+=======
+	if (params_width(params) == 24)
+>>>>>>> v3.18
 =======
 	if (params_width(params) == 24)
 >>>>>>> v3.18
@@ -80,6 +99,7 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 	else
 		pll_out = params_rate(params) * 256;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = snd_soc_dai_set_fmt(codec_dai, SND_SOC_DAIFMT_I2S
 					 | SND_SOC_DAIFMT_NB_NF
@@ -93,6 +113,8 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 	if (ret < 0)
 		return ret;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = snd_soc_dai_set_pll(codec_dai, WM8994_FLL1, WM8994_FLL_SRC_MCLK1,
@@ -121,6 +143,7 @@ static int smdk_wm8994_init_paiftx(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* HeadPhone */
 	snd_soc_dapm_enable_pin(dapm, "HPOUT1R");
 	snd_soc_dapm_enable_pin(dapm, "HPOUT1L");
@@ -133,6 +156,8 @@ static int smdk_wm8994_init_paiftx(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_enable_pin(dapm, "IN2LN");
 	snd_soc_dapm_enable_pin(dapm, "IN2RN");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Other pins NC */
@@ -164,6 +189,11 @@ static struct snd_soc_dai_link smdk_dai[] = {
 		.codec_name = "wm8994-codec",
 		.init = smdk_wm8994_init_paiftx,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
+			SND_SOC_DAIFMT_CBM_CFM,
+>>>>>>> v3.18
 =======
 		.dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
 			SND_SOC_DAIFMT_CBM_CFM,
@@ -177,6 +207,11 @@ static struct snd_soc_dai_link smdk_dai[] = {
 		.platform_name = "samsung-i2s-sec",
 		.codec_name = "wm8994-codec",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
+			SND_SOC_DAIFMT_CBM_CFM,
+>>>>>>> v3.18
 =======
 		.dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
 			SND_SOC_DAIFMT_CBM_CFM,
@@ -193,12 +228,18 @@ static struct snd_soc_card smdk = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id samsung_wm8994_of_match[] = {
 	{ .compatible = "samsung,smdk-wm8994", .data = &smdk_board_data },
 	{},
 };
 MODULE_DEVICE_TABLE(of, samsung_wm8994_of_match);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int smdk_audio_probe(struct platform_device *pdev)
@@ -207,10 +248,13 @@ static int smdk_audio_probe(struct platform_device *pdev)
 	struct device_node *np = pdev->dev.of_node;
 	struct snd_soc_card *card = &smdk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	card->dev = &pdev->dev;
 
 =======
+=======
+>>>>>>> v3.18
 	struct smdk_wm8994_data *board;
 	const struct of_device_id *id;
 
@@ -220,6 +264,9 @@ static int smdk_audio_probe(struct platform_device *pdev)
 	if (!board)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (np) {
 		smdk_dai[0].cpu_dai_name = NULL;
@@ -236,8 +283,11 @@ static int smdk_audio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_card(card);
 =======
+=======
+>>>>>>> v3.18
 	id = of_match_device(of_match_ptr(samsung_wm8994_of_match), &pdev->dev);
 	if (id)
 		*board = *((struct smdk_wm8994_data *)id->data);
@@ -245,6 +295,9 @@ static int smdk_audio_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, board);
 
 	ret = devm_snd_soc_register_card(&pdev->dev, card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -253,6 +306,7 @@ static int smdk_audio_probe(struct platform_device *pdev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int smdk_audio_remove(struct platform_device *pdev)
 {
@@ -280,6 +334,8 @@ static struct platform_driver smdk_audio_driver = {
 	.probe		= smdk_audio_probe,
 	.remove		= smdk_audio_remove,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver smdk_audio_driver = {
 	.driver		= {
 		.name	= "smdk-audio-wm8994",
@@ -288,6 +344,9 @@ static struct platform_driver smdk_audio_driver = {
 		.pm	= &snd_soc_pm_ops,
 	},
 	.probe		= smdk_audio_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -296,7 +355,11 @@ module_platform_driver(smdk_audio_driver);
 MODULE_DESCRIPTION("ALSA SoC SMDK WM8994");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:smdk-audio");
+=======
+MODULE_ALIAS("platform:smdk-audio-wm8994");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:smdk-audio-wm8994");
 >>>>>>> v3.18

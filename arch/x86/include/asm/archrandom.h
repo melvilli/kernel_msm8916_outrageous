@@ -2,7 +2,11 @@
  * This file is part of the Linux kernel.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011, Intel Corporation
+=======
+ * Copyright (c) 2011-2014, Intel Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011-2014, Intel Corporation
 >>>>>>> v3.18
@@ -36,11 +40,14 @@
 
 #define RDRAND_INT	".byte 0x0f,0xc7,0xf0"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 # define RDRAND_LONG	".byte 0x48,0x0f,0xc7,0xf0"
 #else
 # define RDRAND_LONG	RDRAND_INT
 =======
+=======
+>>>>>>> v3.18
 #define RDSEED_INT	".byte 0x0f,0xc7,0xf8"
 #ifdef CONFIG_X86_64
 # define RDRAND_LONG	".byte 0x48,0x0f,0xc7,0xf0"
@@ -48,13 +55,19 @@
 #else
 # define RDRAND_LONG	RDRAND_INT
 # define RDSEED_LONG	RDSEED_INT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_ARCH_RANDOM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Instead of arch_get_random_long() when alternatives haven't run. */
 static inline int rdrand_long(unsigned long *v)
 {
@@ -79,6 +92,9 @@ static inline bool rdseed_long(unsigned long *v)
 	return ok;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GET_RANDOM(name, type, rdrand, nop)			\
 static inline int name(type *v)					\
@@ -98,7 +114,10 @@ static inline int name(type *v)					\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GET_SEED(name, type, rdseed, nop)			\
 static inline int name(type *v)					\
 {								\
@@ -112,6 +131,9 @@ static inline int name(type *v)					\
 	return ok;						\
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_64
 
@@ -119,6 +141,12 @@ GET_RANDOM(arch_get_random_long, unsigned long, RDRAND_LONG, ASM_NOP5);
 GET_RANDOM(arch_get_random_int, unsigned int, RDRAND_INT, ASM_NOP4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+GET_SEED(arch_get_random_seed_long, unsigned long, RDSEED_LONG, ASM_NOP5);
+GET_SEED(arch_get_random_seed_int, unsigned int, RDSEED_INT, ASM_NOP4);
+
+>>>>>>> v3.18
 =======
 GET_SEED(arch_get_random_seed_long, unsigned long, RDSEED_LONG, ASM_NOP5);
 GET_SEED(arch_get_random_seed_int, unsigned int, RDSEED_INT, ASM_NOP4);
@@ -130,9 +158,12 @@ GET_RANDOM(arch_get_random_long, unsigned long, RDRAND_LONG, ASM_NOP3);
 GET_RANDOM(arch_get_random_int, unsigned int, RDRAND_INT, ASM_NOP3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_X86_64 */
 
 =======
+=======
+>>>>>>> v3.18
 GET_SEED(arch_get_random_seed_long, unsigned long, RDSEED_LONG, ASM_NOP4);
 GET_SEED(arch_get_random_seed_int, unsigned int, RDSEED_INT, ASM_NOP4);
 
@@ -153,6 +184,9 @@ static inline bool rdseed_long(unsigned long *v)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif  /* CONFIG_ARCH_RANDOM */
 

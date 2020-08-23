@@ -18,6 +18,7 @@
  * It is possible to store an auxiliary value along with the key.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The implementation is preliminary and can probably be sped up
  * significantly. A first step would be to store the values in an rbtree
  * as soon as ULIST_SIZE is exceeded.
@@ -31,12 +32,17 @@
 struct ulist_iterator {
 	int i;
 =======
+=======
+>>>>>>> v3.18
  */
 struct ulist_iterator {
 #ifdef CONFIG_BTRFS_DEBUG
 	int i;
 #endif
 	struct list_head *cur_list;  /* hint to start search */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -47,13 +53,19 @@ struct ulist_node {
 	u64 val;		/* value to store */
 	u64 aux;		/* auxiliary value saved along with the val */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_BTRFS_DEBUG
 	int seqnum;		/* sequence number this node is added */
 #endif
 
 	struct list_head list;  /* used to link node */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rb_node rb_node;	/* used to speed up search */
 };
@@ -64,6 +76,7 @@ struct ulist {
 	 */
 	unsigned long nnodes;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * number of nodes we already have room for
@@ -88,11 +101,16 @@ struct ulist {
 void ulist_init(struct ulist *ulist);
 void ulist_fini(struct ulist *ulist);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head nodes;
 	struct rb_root root;
 };
 
 void ulist_init(struct ulist *ulist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ulist_reinit(struct ulist *ulist);
 struct ulist *ulist_alloc(gfp_t gfp_mask);
@@ -101,11 +119,14 @@ int ulist_add(struct ulist *ulist, u64 val, u64 aux, gfp_t gfp_mask);
 int ulist_add_merge(struct ulist *ulist, u64 val, u64 aux,
 		    u64 *old_aux, gfp_t gfp_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ulist_node *ulist_next(struct ulist *ulist,
 			      struct ulist_iterator *uiter);
 
 #define ULIST_ITER_INIT(uiter) ((uiter)->i = 0)
 =======
+=======
+>>>>>>> v3.18
 
 /* just like ulist_add_merge() but take a pointer for the aux data */
 static inline int ulist_add_merge_ptr(struct ulist *ulist, u64 val, void *aux,
@@ -125,6 +146,9 @@ struct ulist_node *ulist_next(struct ulist *ulist,
 			      struct ulist_iterator *uiter);
 
 #define ULIST_ITER_INIT(uiter) ((uiter)->cur_list = NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -94,7 +94,11 @@ static int keene_cmd_main(struct keene_device *radio, unsigned freq, bool play)
 	   If bit 3 is set, then unmute; if bit 2 is set, then mute.
 	   If bit 1 is set, then enter idle mode; if bit 0 is set,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   then enter transit mode.
+=======
+	   then enter transmit mode.
+>>>>>>> v3.18
 =======
 	   then enter transmit mode.
 >>>>>>> v3.18
@@ -128,7 +132,11 @@ static int keene_cmd_set(struct keene_device *radio)
 	   If bit 2 is set, then enable 75 us preemphasis, otherwise
 	   it is 50 us. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radio->buffer[3] = (!radio->stereo) | (radio->preemph_75_us ? 4 : 0);
+=======
+	radio->buffer[3] = (radio->stereo ? 0 : 1) | (radio->preemph_75_us ? 4 : 0);
+>>>>>>> v3.18
 =======
 	radio->buffer[3] = (radio->stereo ? 0 : 1) | (radio->preemph_75_us ? 4 : 0);
 >>>>>>> v3.18
@@ -274,7 +282,11 @@ static int keene_s_ctrl(struct v4l2_ctrl *ctrl)
 
 	case V4L2_CID_AUDIO_COMPRESSION_GAIN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		radio->tx = db2tx[(ctrl->val - ctrl->minimum) / ctrl->step];
+=======
+		radio->tx = db2tx[(ctrl->val - (s32)ctrl->minimum) / (s32)ctrl->step];
+>>>>>>> v3.18
 =======
 		radio->tx = db2tx[(ctrl->val - (s32)ctrl->minimum) / (s32)ctrl->step];
 >>>>>>> v3.18
@@ -363,7 +375,10 @@ static int usb_keene_probe(struct usb_interface *intf,
 	radio->tx = 0x32;
 	radio->stereo = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radio->curfreq = 95.16 * FREQ_MUL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hdl->error) {
@@ -397,12 +412,18 @@ static int usb_keene_probe(struct usb_interface *intf,
 
 	video_set_drvdata(&radio->vdev, radio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &radio->vdev.flags);
 =======
+=======
+>>>>>>> v3.18
 
 	/* at least 11ms is needed in order to settle hardware */
 	msleep(20);
 	keene_cmd_main(radio, 95.16 * FREQ_MUL, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	retval = video_register_device(&radio->vdev, VFL_TYPE_RADIO, -1);
@@ -436,6 +457,7 @@ static struct usb_driver usb_keene_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init keene_init(void)
 {
 	int retval = usb_register(&usb_keene_driver);
@@ -454,6 +476,9 @@ static void __exit keene_exit(void)
 
 module_init(keene_init);
 module_exit(keene_exit);
+=======
+module_usb_driver(usb_keene_driver);
+>>>>>>> v3.18
 =======
 module_usb_driver(usb_keene_driver);
 >>>>>>> v3.18

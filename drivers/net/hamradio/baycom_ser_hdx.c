@@ -491,7 +491,11 @@ static int ser12_open(struct net_device *dev)
 	outb(0x0d, MCR(dev->base_addr));
 	outb(0, IER(dev->base_addr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(dev->irq, ser12_interrupt, IRQF_DISABLED | IRQF_SHARED,
+=======
+	if (request_irq(dev->irq, ser12_interrupt, IRQF_SHARED,
+>>>>>>> v3.18
 =======
 	if (request_irq(dev->irq, ser12_interrupt, IRQF_SHARED,
 >>>>>>> v3.18

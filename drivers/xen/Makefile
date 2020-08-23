@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifneq ($(CONFIG_ARM),y)
 obj-y	+= manage.o
 obj-$(CONFIG_HOTPLUG_CPU)		+= cpu_hotplug.o
@@ -6,12 +7,17 @@ endif
 obj-$(CONFIG_X86)			+= fallback.o
 obj-y	+= grant-table.o features.o events.o balloon.o
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(filter y, $(CONFIG_ARM) $(CONFIG_ARM64)),)
 obj-$(CONFIG_HOTPLUG_CPU)		+= cpu_hotplug.o
 endif
 obj-$(CONFIG_X86)			+= fallback.o
 obj-y	+= grant-table.o features.o balloon.o manage.o
 obj-y	+= events/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-y	+= xenbus/
 
@@ -19,6 +25,11 @@ nostackp := $(call cc-option, -fno-stack-protector)
 CFLAGS_features.o			:= $(nostackp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CFLAGS_efi.o				+= -fshort-wchar
+
+>>>>>>> v3.18
 =======
 CFLAGS_efi.o				+= -fshort-wchar
 
@@ -31,7 +42,10 @@ dom0-$(CONFIG_X86) += pcpu.o
 obj-$(CONFIG_XEN_DOM0)			+= $(dom0-y)
 obj-$(CONFIG_BLOCK)			+= biomerge.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_XEN_XENCOMM)		+= xencomm.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_XEN_BALLOON)		+= xen-balloon.o
@@ -52,6 +66,11 @@ obj-$(CONFIG_XEN_ACPI_HOTPLUG_MEMORY)	+= xen-acpi-memhotplug.o
 obj-$(CONFIG_XEN_ACPI_HOTPLUG_CPU)	+= xen-acpi-cpuhotplug.o
 obj-$(CONFIG_XEN_ACPI_PROCESSOR)	+= xen-acpi-processor.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_XEN_EFI)			+= efi.o
+obj-$(CONFIG_XEN_SCSI_BACKEND)		+= xen-scsiback.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_XEN_EFI)			+= efi.o
 obj-$(CONFIG_XEN_SCSI_BACKEND)		+= xen-scsiback.o

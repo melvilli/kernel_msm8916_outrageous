@@ -19,6 +19,10 @@
 #include <linux/module.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/asoc-imx-ssi.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/asoc-imx-ssi.h>
 >>>>>>> v3.18

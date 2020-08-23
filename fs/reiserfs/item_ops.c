@@ -6,6 +6,7 @@
 #include "reiserfs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // this contains item handlers for old item types: sd, direct,
 // indirect, directory
 
@@ -16,6 +17,8 @@
 // stat data functions
 //
 =======
+=======
+>>>>>>> v3.18
 /*
  * this contains item handlers for old item types: sd, direct,
  * indirect, directory
@@ -27,6 +30,9 @@
  */
 
 /* stat data functions */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sd_bytes_number(struct item_head *ih, int block_size)
 {
@@ -67,7 +73,11 @@ static void sd_print_item(struct item_head *ih, char *item)
 		struct stat_data *sd = (struct stat_data *)item;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("\t0%-6o | %6Lu | %2u | %d | %s\n", sd_v2_mode(sd),
+=======
+		printk("\t0%-6o | %6llu | %2u | %d | %s\n", sd_v2_mode(sd),
+>>>>>>> v3.18
 =======
 		printk("\t0%-6o | %6llu | %2u | %d | %s\n", sd_v2_mode(sd),
 >>>>>>> v3.18
@@ -79,7 +89,11 @@ static void sd_print_item(struct item_head *ih, char *item)
 static void sd_check_item(struct item_head *ih, char *item)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// FIXME: type something here!
+=======
+	/* unused */
+>>>>>>> v3.18
 =======
 	/* unused */
 >>>>>>> v3.18
@@ -91,7 +105,10 @@ static int sd_create_vi(struct virtual_node *vn,
 {
 	vi->vi_index = TYPE_STAT_DATA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//vi->vi_type |= VI_TYPE_STAT_DATA;// not needed?
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -143,9 +160,13 @@ static struct item_operations stat_data_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////
 // direct item functions
 //
+=======
+/* direct item functions */
+>>>>>>> v3.18
 =======
 /* direct item functions */
 >>>>>>> v3.18
@@ -155,7 +176,11 @@ static int direct_bytes_number(struct item_head *ih, int block_size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // FIXME: this should probably switch to indirect as well
+=======
+/* FIXME: this should probably switch to indirect as well */
+>>>>>>> v3.18
 =======
 /* FIXME: this should probably switch to indirect as well */
 >>>>>>> v3.18
@@ -178,7 +203,11 @@ static void direct_print_item(struct item_head *ih, char *item)
 	int j = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    return;
+=======
+/*    return; */
+>>>>>>> v3.18
 =======
 /*    return; */
 >>>>>>> v3.18
@@ -191,7 +220,11 @@ static void direct_print_item(struct item_head *ih, char *item)
 static void direct_check_item(struct item_head *ih, char *item)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// FIXME: type something here!
+=======
+	/* unused */
+>>>>>>> v3.18
 =======
 	/* unused */
 >>>>>>> v3.18
@@ -203,7 +236,10 @@ static int direct_create_vi(struct virtual_node *vn,
 {
 	vi->vi_index = TYPE_DIRECT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//vi->vi_type |= VI_TYPE_DIRECT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -256,6 +292,7 @@ static struct item_operations direct_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////
 // indirect item functions
 //
@@ -267,6 +304,8 @@ static int indirect_bytes_number(struct item_head *ih, int block_size)
 
 // decrease offset, if it becomes 0, change type to stat data
 =======
+=======
+>>>>>>> v3.18
 /* indirect item functions */
 static int indirect_bytes_number(struct item_head *ih, int block_size)
 {
@@ -274,6 +313,9 @@ static int indirect_bytes_number(struct item_head *ih, int block_size)
 }
 
 /* decrease offset, if it becomes 0, change type to stat data */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void indirect_decrement_key(struct cpu_key *key)
 {
@@ -283,7 +325,11 @@ static void indirect_decrement_key(struct cpu_key *key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // if it is not first item of the body, then it is mergeable
+=======
+/* if it is not first item of the body, then it is mergeable */
+>>>>>>> v3.18
 =======
 /* if it is not first item of the body, then it is mergeable */
 >>>>>>> v3.18
@@ -295,7 +341,11 @@ static int indirect_is_left_mergeable(struct reiserfs_key *key,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // printing of indirect item
+=======
+/* printing of indirect item */
+>>>>>>> v3.18
 =======
 /* printing of indirect item */
 >>>>>>> v3.18
@@ -358,7 +408,11 @@ static void indirect_print_item(struct item_head *ih, char *item)
 static void indirect_check_item(struct item_head *ih, char *item)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// FIXME: type something here!
+=======
+	/* unused */
+>>>>>>> v3.18
 =======
 	/* unused */
 >>>>>>> v3.18
@@ -370,7 +424,10 @@ static int indirect_create_vi(struct virtual_node *vn,
 {
 	vi->vi_index = TYPE_INDIRECT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//vi->vi_type |= VI_TYPE_INDIRECT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -391,11 +448,14 @@ static int indirect_check_right(struct virtual_item *vi, int free)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // return size in bytes of 'units' units. If first == 0 - calculate from the head (left), otherwise - from tail (right)
 static int indirect_part_size(struct virtual_item *vi, int first, int units)
 {
 	// unit of indirect item is byte (yet)
 =======
+=======
+>>>>>>> v3.18
 /*
  * return size in bytes of 'units' units. If first == 0 - calculate
  * from the head (left), otherwise - from tail (right)
@@ -403,6 +463,9 @@ static int indirect_part_size(struct virtual_item *vi, int first, int units)
 static int indirect_part_size(struct virtual_item *vi, int first, int units)
 {
 	/* unit of indirect item is byte (yet) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return units;
 }
@@ -410,7 +473,11 @@ static int indirect_part_size(struct virtual_item *vi, int first, int units)
 static int indirect_unit_num(struct virtual_item *vi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// unit of indirect item is byte (yet)
+=======
+	/* unit of indirect item is byte (yet) */
+>>>>>>> v3.18
 =======
 	/* unit of indirect item is byte (yet) */
 >>>>>>> v3.18
@@ -440,10 +507,14 @@ static struct item_operations indirect_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////
 // direntry functions
 //
 
+=======
+/* direntry functions */
+>>>>>>> v3.18
 =======
 /* direntry functions */
 >>>>>>> v3.18
@@ -484,7 +555,11 @@ static void direntry_print_item(struct item_head *ih, char *item)
 	deh = (struct reiserfs_de_head *)item;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < I_ENTRY_COUNT(ih); i++, deh++) {
+=======
+	for (i = 0; i < ih_entry_count(ih); i++, deh++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ih_entry_count(ih); i++, deh++) {
 >>>>>>> v3.18
@@ -506,7 +581,11 @@ static void direntry_print_item(struct item_head *ih, char *item)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%d:  %-15s%-15d%-15d%-15Ld%-15Ld(%s)\n",
+=======
+		printk("%d:  %-15s%-15d%-15d%-15lld%-15lld(%s)\n",
+>>>>>>> v3.18
 =======
 		printk("%d:  %-15s%-15d%-15d%-15lld%-15lld(%s)\n",
 >>>>>>> v3.18
@@ -524,9 +603,15 @@ static void direntry_check_item(struct item_head *ih, char *item)
 	struct reiserfs_de_head *deh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// FIXME: type something here!
 	deh = (struct reiserfs_de_head *)item;
 	for (i = 0; i < I_ENTRY_COUNT(ih); i++, deh++) {
+=======
+	/* unused */
+	deh = (struct reiserfs_de_head *)item;
+	for (i = 0; i < ih_entry_count(ih); i++, deh++) {
+>>>>>>> v3.18
 =======
 	/* unused */
 	deh = (struct reiserfs_de_head *)item;
@@ -541,7 +626,12 @@ static void direntry_check_item(struct item_head *ih, char *item)
 /*
  * function returns old entry number in directory item in real node
 <<<<<<< HEAD
+<<<<<<< HEAD
  * using new entry number in virtual item in virtual node */
+=======
+ * using new entry number in virtual item in virtual node
+ */
+>>>>>>> v3.18
 =======
  * using new entry number in virtual item in virtual node
  */
@@ -570,15 +660,21 @@ static inline int old_entry_num(int is_affected, int virtual_entry_num,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Create an array of sizes of directory entries for virtual
    item. Return space used by an item. FIXME: no control over
    consuming of space used by this item handler */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Create an array of sizes of directory entries for virtual
  * item. Return space used by an item. FIXME: no control over
  * consuming of space used by this item handler
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int direntry_create_vi(struct virtual_node *vn,
 			      struct virtual_item *vi,
@@ -609,8 +705,13 @@ static int direntry_create_vi(struct virtual_node *vn,
 				  vn->vn_mode);
 		dir_u->entry_sizes[i] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (j ? deh_location(&(deh[j - 1])) : ih_item_len(vi->vi_ih)) -
 		    deh_location(&(deh[j])) + DEH_SIZE;
+=======
+		    (j ? deh_location(&deh[j - 1]) : ih_item_len(vi->vi_ih)) -
+		    deh_location(&deh[j]) + DEH_SIZE;
+>>>>>>> v3.18
 =======
 		    (j ? deh_location(&deh[j - 1]) : ih_item_len(vi->vi_ih)) -
 		    deh_location(&deh[j]) + DEH_SIZE;
@@ -649,15 +750,21 @@ static int direntry_create_vi(struct virtual_node *vn,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // return number of entries which may fit into specified amount of
 // free space, or -1 if free space is not enough even for 1 entry
 //
 =======
+=======
+>>>>>>> v3.18
 /*
  * return number of entries which may fit into specified amount of
  * free space, or -1 if free space is not enough even for 1 entry
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int direntry_check_left(struct virtual_item *vi, int free,
 			       int start_skip, int end_skip)
@@ -668,8 +775,13 @@ static int direntry_check_left(struct virtual_item *vi, int free,
 
 	for (i = start_skip; i < dir_u->entry_count - end_skip; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dir_u->entry_sizes[i] > free)
 			/* i-th entry doesn't fit into the remaining free space */
+=======
+		/* i-th entry doesn't fit into the remaining free space */
+		if (dir_u->entry_sizes[i] > free)
+>>>>>>> v3.18
 =======
 		/* i-th entry doesn't fit into the remaining free space */
 		if (dir_u->entry_sizes[i] > free)
@@ -702,8 +814,13 @@ static int direntry_check_right(struct virtual_item *vi, int free)
 
 	for (i = dir_u->entry_count - 1; i >= 0; i--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dir_u->entry_sizes[i] > free)
 			/* i-th entry doesn't fit into the remaining free space */
+=======
+		/* i-th entry doesn't fit into the remaining free space */
+		if (dir_u->entry_sizes[i] > free)
+>>>>>>> v3.18
 =======
 		/* i-th entry doesn't fit into the remaining free space */
 		if (dir_u->entry_sizes[i] > free)
@@ -780,9 +897,13 @@ static struct item_operations direntry_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////
 // Error catching functions to catch errors caused by incorrect item types.
 //
+=======
+/* Error catching functions to catch errors caused by incorrect item types. */
+>>>>>>> v3.18
 =======
 /* Error catching functions to catch errors caused by incorrect item types. */
 >>>>>>> v3.18
@@ -826,15 +947,21 @@ static int errcatch_create_vi(struct virtual_node *vn,
 	reiserfs_warning(NULL, "green-16006",
 			 "Invalid item type observed, run fsck ASAP");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;		// We might return -1 here as well, but it won't help as create_virtual_node() from where
 	// this operation is called from is of return type void.
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We might return -1 here as well, but it won't help as
 	 * create_virtual_node() from where this operation is called
 	 * from is of return type void.
 	 */
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -889,9 +1016,12 @@ static struct item_operations errcatch_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////
 //
 //
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if ! (TYPE_STAT_DATA == 0 && TYPE_INDIRECT == 1 && TYPE_DIRECT == 2 && TYPE_DIRENTRY == 3)

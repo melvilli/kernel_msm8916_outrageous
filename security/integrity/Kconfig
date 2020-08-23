@@ -1,6 +1,7 @@
 #
 config INTEGRITY
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_bool y
 	depends on IMA || EVM
 
@@ -8,6 +9,8 @@ config INTEGRITY_SIGNATURE
 	boolean "Digital signature verification using multiple keyrings"
 	depends on INTEGRITY && KEYS
 =======
+=======
+>>>>>>> v3.18
 	bool "Integrity subsystem"
 	depends on SECURITY
 	default y
@@ -26,6 +29,9 @@ if INTEGRITY
 config INTEGRITY_SIGNATURE
 	boolean "Digital signature verification using multiple keyrings"
 	depends on KEYS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default n
 	select SIGNATURE
@@ -51,9 +57,12 @@ config INTEGRITY_ASYMMETRIC_KEYS
 	  asymmetric keys.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source security/integrity/ima/Kconfig
 source security/integrity/evm/Kconfig
 =======
+=======
+>>>>>>> v3.18
 config INTEGRITY_AUDIT
 	bool "Enables integrity auditing support "
 	depends on AUDIT
@@ -73,4 +82,7 @@ source security/integrity/ima/Kconfig
 source security/integrity/evm/Kconfig
 
 endif   # if INTEGRITY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

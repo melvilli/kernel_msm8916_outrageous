@@ -7,8 +7,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -23,22 +26,29 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
  */
 
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include <linux/compiler.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "ieee754int.h"
 
 #define assert(expr) ((void)0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* 3bit extended double precision sticky right shift */
 #define XDPSRS(v,rs)	\
@@ -60,6 +70,8 @@ static inline ieee754dp builddp(int s, int bx, u64 m)
 {
 	ieee754dp r;
 =======
+=======
+>>>>>>> v3.18
 #define DP_EBIAS	1023
 #define DP_EMIN		(-1022)
 #define DP_EMAX		1023
@@ -98,11 +110,15 @@ static inline int ieee754dp_finite(union ieee754dp x)
 static inline union ieee754dp builddp(int s, int bx, u64 m)
 {
 	union ieee754dp r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	assert((s) == 0 || (s) == 1);
 	assert((bx) >= DP_EMIN - 1 + DP_EBIAS
 	       && (bx) <= DP_EMAX + 1 + DP_EBIAS);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	assert(((m) >> DP_MBITS) == 0);
 
@@ -133,6 +149,8 @@ extern ieee754dp ieee754dp_format(int, int, u64);
 
 #define DPNORMRET1(s, e, m, name, a0)  DPNORMRET2(s, e, m, name, a0, a0)
 =======
+=======
+>>>>>>> v3.18
 	assert(((m) >> DP_FBITS) == 0);
 
 	r.sign = s;
@@ -145,4 +163,7 @@ extern ieee754dp ieee754dp_format(int, int, u64);
 extern int ieee754dp_isnan(union ieee754dp);
 extern union ieee754dp __cold ieee754dp_nanxcpt(union ieee754dp);
 extern union ieee754dp ieee754dp_format(int, int, u64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

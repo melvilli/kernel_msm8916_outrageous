@@ -55,7 +55,11 @@ DEFINE_PER_CPU(unsigned long, xen_mc_irq_flags);
 void xen_mc_flush(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc_buffer *b = &__get_cpu_var(mc_buffer);
+=======
+	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
+>>>>>>> v3.18
 =======
 	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
 >>>>>>> v3.18
@@ -136,7 +140,11 @@ void xen_mc_flush(void)
 struct multicall_space __xen_mc_entry(size_t args)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc_buffer *b = &__get_cpu_var(mc_buffer);
+=======
+	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
+>>>>>>> v3.18
 =======
 	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
 >>>>>>> v3.18
@@ -171,7 +179,11 @@ struct multicall_space __xen_mc_entry(size_t args)
 struct multicall_space xen_mc_extend_args(unsigned long op, size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc_buffer *b = &__get_cpu_var(mc_buffer);
+=======
+	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
+>>>>>>> v3.18
 =======
 	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
 >>>>>>> v3.18
@@ -205,7 +217,11 @@ out:
 void xen_mc_callback(void (*fn)(void *), void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc_buffer *b = &__get_cpu_var(mc_buffer);
+=======
+	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
+>>>>>>> v3.18
 =======
 	struct mc_buffer *b = this_cpu_ptr(&mc_buffer);
 >>>>>>> v3.18

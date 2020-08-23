@@ -549,7 +549,11 @@ static struct pcie_link_state *alloc_pcie_link_state(struct pci_dev *pdev)
 /*
  * pcie_aspm_init_link_state: Initiate PCI express link state.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * It is called after the pcie and its children devices are scaned.
+=======
+ * It is called after the pcie and its children devices are scanned.
+>>>>>>> v3.18
 =======
  * It is called after the pcie and its children devices are scanned.
 >>>>>>> v3.18
@@ -719,10 +723,13 @@ void pcie_aspm_powersave_config_link(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * pci_disable_link_state - disable pci device's link state, so the link will
  * never enter specific states
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem,
@@ -732,9 +739,12 @@ static void __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem,
 	struct pcie_link_state *link;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (aspm_disabled && !force)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!pci_is_pcie(pdev))
@@ -747,7 +757,10 @@ static void __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * A driver requested that ASPM be disabled on this device, but
 	 * if we don't have permission to manage ASPM (e.g., on ACPI
@@ -761,6 +774,9 @@ static void __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem,
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sem)
 		down_read(&pci_bus_sem);
@@ -788,7 +804,10 @@ void pci_disable_link_state_locked(struct pci_dev *pdev, int state)
 EXPORT_SYMBOL(pci_disable_link_state_locked);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * pci_disable_link_state - Disable device's link state, so the link will
  * never enter specific states.  Note that if the BIOS didn't grant ASPM
@@ -798,6 +817,9 @@ EXPORT_SYMBOL(pci_disable_link_state_locked);
  * @pdev: PCI device
  * @state: ASPM link state to disable
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pci_disable_link_state(struct pci_dev *pdev, int state)
 {
@@ -1008,6 +1030,7 @@ void pcie_no_aspm(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * pcie_aspm_enabled - is PCIe ASPM enabled?
  *
@@ -1020,6 +1043,8 @@ int pcie_aspm_enabled(void)
 }
 EXPORT_SYMBOL(pcie_aspm_enabled);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool pcie_aspm_support_enabled(void)

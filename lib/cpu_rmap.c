@@ -236,7 +236,11 @@ void free_irq_cpu_rmap(struct cpu_rmap *rmap)
 	for (index = 0; index < rmap->used; index++) {
 		glue = rmap->obj[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_release_affinity_notifier(&glue->notify);
+=======
+		irq_set_affinity_notifier(glue->notify.irq, NULL);
+>>>>>>> v3.18
 =======
 		irq_set_affinity_notifier(glue->notify.irq, NULL);
 >>>>>>> v3.18

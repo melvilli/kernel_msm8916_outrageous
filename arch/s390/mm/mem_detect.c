@@ -7,11 +7,17 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/memblock.h>
 #include <linux/init.h>
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/ipl.h>
 #include <asm/sclp.h>
@@ -20,12 +26,15 @@
 #define ADDR2G (1ULL << 31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void find_memory_chunks(struct mem_chunk chunk[], unsigned long maxsize)
 {
 	unsigned long long memsize, rnmax, rzm;
 	unsigned long addr = 0, size;
 	int i = 0, type;
 =======
+=======
+>>>>>>> v3.18
 #define CHUNK_READ_WRITE 0
 #define CHUNK_READ_ONLY  1
 
@@ -40,6 +49,9 @@ void __init detect_memory_memblock(void)
 	unsigned long long memsize, rnmax, rzm;
 	unsigned long addr, size;
 	int type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rzm = sclp_get_rzm();
@@ -48,6 +60,7 @@ void __init detect_memory_memblock(void)
 	if (!rzm)
 		rzm = 1ULL << 17;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sizeof(long) == 4) {
 		rzm = min(ADDR2G, rzm);
 		memsize = memsize ? min(ADDR2G, memsize) : ADDR2G;
@@ -55,6 +68,8 @@ void __init detect_memory_memblock(void)
 	if (maxsize)
 		memsize = memsize ? min((unsigned long)memsize, maxsize) : maxsize;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_32BIT)) {
 		rzm = min(ADDR2G, rzm);
 		memsize = min(ADDR2G, memsize);
@@ -63,12 +78,16 @@ void __init detect_memory_memblock(void)
 	addr = 0;
 	/* keep memblock lists close to the kernel */
 	memblock_set_bottom_up(true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	do {
 		size = 0;
 		type = tprot(addr);
 		do {
 			size += rzm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (memsize && addr + size >= memsize)
 				break;
@@ -169,6 +188,8 @@ void create_mem_hole(struct mem_chunk mem_chunk[], unsigned long addr,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			if (max_physmem_end && addr + size >= max_physmem_end)
 				break;
 		} while (type == tprot(addr + size));
@@ -182,5 +203,8 @@ void create_mem_hole(struct mem_chunk mem_chunk[], unsigned long addr,
 	memblock_set_bottom_up(false);
 	if (!max_physmem_end)
 		max_physmem_end = memblock_end_of_DRAM();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

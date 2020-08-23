@@ -11,6 +11,11 @@
 #define __ASM_ARCH_IMX_ESDHC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -38,6 +43,10 @@ enum cd_types {
  * @wp_type:	type of write_protect method (see wp_types enum above)
  * @cd_type:	type of card_detect method (see cd_types enum above)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @support_vsel:  indicate it supports 1.8v switching
+>>>>>>> v3.18
 =======
  * @support_vsel:  indicate it supports 1.8v switching
 >>>>>>> v3.18
@@ -50,6 +59,12 @@ struct esdhc_platform_data {
 	enum cd_types cd_type;
 	int max_bus_width;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int f_max;
+	bool support_vsel;
+	unsigned int delay_line;
+>>>>>>> v3.18
 =======
 	unsigned int f_max;
 	bool support_vsel;

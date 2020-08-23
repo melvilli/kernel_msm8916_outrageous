@@ -20,6 +20,11 @@
 static void __init imx25_dt_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxc_arch_reset_init_dt();
+
+>>>>>>> v3.18
 =======
 	mxc_arch_reset_init_dt();
 
@@ -33,6 +38,7 @@ static const char * const imx25_dt_board_compat[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init imx25_timer_init(void)
 {
 	mx25_clocks_init_dt();
@@ -40,13 +46,18 @@ static void __init imx25_timer_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 DT_MACHINE_START(IMX25_DT, "Freescale i.MX25 (Device Tree Support)")
 	.map_io		= mx25_map_io,
 	.init_early	= imx25_init_early,
 	.init_irq	= mx25_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= imx25_handle_irq,
 	.init_time	= imx25_timer_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= imx25_dt_init,

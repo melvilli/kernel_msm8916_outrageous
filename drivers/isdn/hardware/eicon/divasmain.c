@@ -482,7 +482,11 @@ int diva_os_register_irq(void *context, byte irq, const char *name)
 {
 	int result = request_irq(irq, diva_os_irq_wrapper,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 IRQF_DISABLED | IRQF_SHARED, name, context);
+=======
+				 IRQF_SHARED, name, context);
+>>>>>>> v3.18
 =======
 				 IRQF_SHARED, name, context);
 >>>>>>> v3.18

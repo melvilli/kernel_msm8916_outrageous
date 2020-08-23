@@ -33,7 +33,11 @@ static int submit(int rw, struct block_device *bdev, sector_t sector,
 
 	bio = bio_alloc(__GFP_WAIT | __GFP_HIGH, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = sector;
+=======
+	bio->bi_iter.bi_sector = sector;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = sector;
 >>>>>>> v3.18

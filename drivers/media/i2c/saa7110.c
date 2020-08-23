@@ -36,7 +36,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -207,7 +210,11 @@ static v4l2_std_id determine_norm(struct v4l2_subdev *sd)
 	if (status & 0x40) {
 		v4l2_dbg(1, debug, sd, "status=0x%02x (no signal)\n", status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return decoder->norm;	/* no change*/
+=======
+		return V4L2_STD_UNKNOWN;
+>>>>>>> v3.18
 =======
 		return V4L2_STD_UNKNOWN;
 >>>>>>> v3.18
@@ -273,7 +280,11 @@ static int saa7110_g_input_status(struct v4l2_subdev *sd, u32 *pstatus)
 static int saa7110_querystd(struct v4l2_subdev *sd, v4l2_std_id *std)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*(v4l2_std_id *)std = determine_norm(sd);
+=======
+	*std &= determine_norm(sd);
+>>>>>>> v3.18
 =======
 	*std &= determine_norm(sd);
 >>>>>>> v3.18
@@ -364,6 +375,7 @@ static int saa7110_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int saa7110_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -371,6 +383,8 @@ static int saa7110_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_SAA7110, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* ----------------------------------------------------------------------- */
@@ -381,7 +395,10 @@ static const struct v4l2_ctrl_ops saa7110_ctrl_ops = {
 
 static const struct v4l2_subdev_core_ops saa7110_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = saa7110_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -392,15 +409,21 @@ static const struct v4l2_subdev_core_ops saa7110_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = saa7110_s_std,
 };
 
 static const struct v4l2_subdev_video_ops saa7110_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const struct v4l2_subdev_video_ops saa7110_video_ops = {
 	.s_std = saa7110_s_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.s_routing = saa7110_s_routing,
 	.s_stream = saa7110_s_stream,
@@ -431,7 +454,11 @@ static int saa7110_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder = kzalloc(sizeof(struct saa7110), GFP_KERNEL);
+=======
+	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -457,7 +484,10 @@ static int saa7110_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&decoder->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -501,7 +531,10 @@ static int saa7110_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&decoder->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

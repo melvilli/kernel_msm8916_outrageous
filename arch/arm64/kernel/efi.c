@@ -90,7 +90,12 @@ static int __init uefi_init(void)
 	if (efi.systab->hdr.signature != EFI_SYSTEM_TABLE_SIGNATURE) {
 		pr_err("System table signature incorrect\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		retval = -EINVAL;
+		goto out;
+>>>>>>> v3.18
 =======
 		retval = -EINVAL;
 		goto out;
@@ -109,6 +114,10 @@ static int __init uefi_init(void)
 			vendor[i] = c16[i];
 		vendor[i] = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		early_memunmap(c16, sizeof(vendor));
+>>>>>>> v3.18
 =======
 		early_memunmap(c16, sizeof(vendor));
 >>>>>>> v3.18
@@ -122,6 +131,7 @@ static int __init uefi_init(void)
 	if (retval == 0)
 		set_bit(EFI_CONFIG_TABLES, &efi.flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	early_memunmap(c16, sizeof(vendor));
 	early_memunmap(efi.systab,  sizeof(efi_system_table_t));
@@ -147,11 +157,16 @@ static __initdata char memory_type_name[][32] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 out:
 	early_memunmap(efi.systab,  sizeof(efi_system_table_t));
 	return retval;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Return true for RAM regions we want to permanently reserve.
@@ -184,11 +199,14 @@ static __init void reserve_regions(void)
 		npages = md->num_pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (uefi_debug)
 			pr_info("  0x%012llx-0x%012llx [%s]",
 				paddr, paddr + (npages << EFI_PAGE_SHIFT) - 1,
 				memory_type_name[md->type]);
 =======
+=======
+>>>>>>> v3.18
 		if (uefi_debug) {
 			char buf[64];
 
@@ -196,6 +214,9 @@ static __init void reserve_regions(void)
 				paddr, paddr + (npages << EFI_PAGE_SHIFT) - 1,
 				efi_md_typeattr_format(buf, sizeof(buf), md));
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		memrange_efi_to_native(&paddr, &npages);
@@ -216,6 +237,11 @@ static __init void reserve_regions(void)
 			pr_cont("\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	set_bit(EFI_MEMMAP, &efi.flags);
+>>>>>>> v3.18
 =======
 
 	set_bit(EFI_MEMMAP, &efi.flags);
@@ -424,12 +450,15 @@ static int __init arm64_enter_virtual_mode(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Remapping and enabling EFI services.\n");
 
 	/* replace early memmap mapping with permanent mapping */
 	mapsize = memmap.map_end - memmap.map;
 	early_memunmap(memmap.map, mapsize);
 =======
+=======
+>>>>>>> v3.18
 	mapsize = memmap.map_end - memmap.map;
 	early_memunmap(memmap.map, mapsize);
 
@@ -440,6 +469,9 @@ static int __init arm64_enter_virtual_mode(void)
 
 	pr_info("Remapping and enabling EFI services.\n");
 	/* replace early memmap mapping with permanent mapping */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memmap.map = (__force void *)ioremap_cache((phys_addr_t)memmap.phys_map,
 						   mapsize);
@@ -460,6 +492,7 @@ static int __init arm64_enter_virtual_mode(void)
 		if (!(md->attribute & EFI_MEMORY_RUNTIME))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (remap_region(md, &virt_md))
 			++count;
 	}
@@ -468,6 +501,8 @@ static int __init arm64_enter_virtual_mode(void)
 	if (efi.systab)
 		set_bit(EFI_SYSTEM_TABLES, &efi.flags);
 =======
+=======
+>>>>>>> v3.18
 		if (!remap_region(md, &virt_md))
 			goto err_unmap;
 		++count;
@@ -486,6 +521,9 @@ static int __init arm64_enter_virtual_mode(void)
 		goto err_unmap;
 	}
 	set_bit(EFI_SYSTEM_TABLES, &efi.flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_save(flags);
@@ -516,6 +554,7 @@ static int __init arm64_enter_virtual_mode(void)
 	/* Set up runtime services function pointers */
 	runtime = efi.systab->runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efi.get_time = runtime->get_time;
 	efi.set_time = runtime->set_time;
 	efi.get_wakeup_time = runtime->get_wakeup_time;
@@ -533,6 +572,8 @@ static int __init arm64_enter_virtual_mode(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	efi_native_runtime_setup();
 	set_bit(EFI_RUNTIME_SERVICES, &efi.flags);
 
@@ -548,6 +589,9 @@ err_unmap:
 	}
 	kfree(virtmap);
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 early_initcall(arm64_enter_virtual_mode);

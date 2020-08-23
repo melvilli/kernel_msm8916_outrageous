@@ -13,6 +13,10 @@
 #include <asm/x86_init.h>
 #include <asm/apic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hpet.h>
+>>>>>>> v3.18
 =======
 #include <asm/hpet.h>
 >>>>>>> v3.18
@@ -56,6 +60,7 @@ static void irq_remapping_disable_io_apic(void)
 static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int node, ret, sub_handle, index = 0;
 	unsigned int irq;
 	struct msi_desc *msidesc;
@@ -63,15 +68,21 @@ static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 	nvec = __roundup_pow_of_two(nvec);
 
 =======
+=======
+>>>>>>> v3.18
 	int ret, sub_handle, nvec_pow2, index = 0;
 	unsigned int irq;
 	struct msi_desc *msidesc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WARN_ON(!list_is_singular(&dev->msi_list));
 	msidesc = list_entry(dev->msi_list.next, struct msi_desc, list);
 	WARN_ON(msidesc->irq);
 	WARN_ON(msidesc->msi_attrib.multiple);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	node = dev_to_node(&dev->dev);
@@ -84,6 +95,8 @@ static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 		if (!sub_handle) {
 			index = msi_alloc_remapped_irq(dev, irq, nvec);
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(msidesc->nvec_used);
 
 	irq = irq_alloc_hwirqs(nvec, dev_to_node(&dev->dev));
@@ -96,6 +109,9 @@ static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 	for (sub_handle = 0; sub_handle < nvec; sub_handle++) {
 		if (!sub_handle) {
 			index = msi_alloc_remapped_irq(dev, irq, nvec_pow2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (index < 0) {
 				ret = index;
@@ -115,7 +131,11 @@ static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destroy_irqs(irq, nvec);
+=======
+	irq_free_hwirqs(irq, nvec);
+>>>>>>> v3.18
 =======
 	irq_free_hwirqs(irq, nvec);
 >>>>>>> v3.18
@@ -126,6 +146,10 @@ error:
 	 */
 	msidesc->irq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	msidesc->nvec_used = 0;
+>>>>>>> v3.18
 =======
 	msidesc->nvec_used = 0;
 >>>>>>> v3.18
@@ -142,7 +166,10 @@ static int do_setup_msix_irqs(struct pci_dev *dev, int nvec)
 
 	node		= dev_to_node(&dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq		= get_nr_irqs_gsi();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sub_handle	= 0;
@@ -150,7 +177,11 @@ static int do_setup_msix_irqs(struct pci_dev *dev, int nvec)
 	list_for_each_entry(msidesc, &dev->msi_list, list) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq = create_irq_nr(irq, node);
+=======
+		irq = irq_alloc_hwirq(node);
+>>>>>>> v3.18
 =======
 		irq = irq_alloc_hwirq(node);
 >>>>>>> v3.18
@@ -177,7 +208,11 @@ static int do_setup_msix_irqs(struct pci_dev *dev, int nvec)
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destroy_irq(irq);
+=======
+	irq_free_hwirq(irq);
+>>>>>>> v3.18
 =======
 	irq_free_hwirq(irq);
 >>>>>>> v3.18
@@ -194,7 +229,11 @@ static int irq_remapping_setup_msi_irqs(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void eoi_ioapic_pin_remapped(int apic, int pin, int vector)
+=======
+static void eoi_ioapic_pin_remapped(int apic, int pin, int vector)
+>>>>>>> v3.18
 =======
 static void eoi_ioapic_pin_remapped(int apic, int pin, int vector)
 >>>>>>> v3.18
@@ -343,8 +382,13 @@ int setup_ioapic_remapped_entry(int irq,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int set_remapped_irq_affinity(struct irq_data *data, const struct cpumask *mask,
 			      bool force)
+=======
+static int set_remapped_irq_affinity(struct irq_data *data,
+				     const struct cpumask *mask, bool force)
+>>>>>>> v3.18
 =======
 static int set_remapped_irq_affinity(struct irq_data *data,
 				     const struct cpumask *mask, bool force)
@@ -400,11 +444,14 @@ static int msi_setup_remapped_irq(struct pci_dev *pdev, unsigned int irq,
 int setup_hpet_msi_remapped(unsigned int irq, unsigned int id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!remap_ops || !remap_ops->setup_hpet_msi)
 		return -ENODEV;
 
 	return remap_ops->setup_hpet_msi(irq, id);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (!remap_ops || !remap_ops->alloc_hpet_msi)
@@ -415,6 +462,9 @@ int setup_hpet_msi_remapped(unsigned int irq, unsigned int id)
 		return -EINVAL;
 
 	return default_setup_hpet_msi(irq, id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

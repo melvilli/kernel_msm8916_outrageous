@@ -923,8 +923,13 @@ static int smscore_load_firmware_family2(struct smscore_device_t *coredev,
 	u8 *payload = firmware->payload;
 	int rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	firmware->start_address = le32_to_cpu(firmware->start_address);
 	firmware->length = le32_to_cpu(firmware->length);
+=======
+	firmware->start_address = le32_to_cpup((__le32 *)&firmware->start_address);
+	firmware->length = le32_to_cpup((__le32 *)&firmware->length);
+>>>>>>> v3.18
 =======
 	firmware->start_address = le32_to_cpup((__le32 *)&firmware->start_address);
 	firmware->length = le32_to_cpup((__le32 *)&firmware->length);
@@ -988,7 +993,11 @@ static int smscore_load_firmware_family2(struct smscore_device_t *coredev,
 		goto exit_fw_download;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sms_err("sending MSG_SMS_DATA_VALIDITY_REQ expecting 0x%x",
+=======
+	sms_debug("sending MSG_SMS_DATA_VALIDITY_REQ expecting 0x%x",
+>>>>>>> v3.18
 =======
 	sms_debug("sending MSG_SMS_DATA_VALIDITY_REQ expecting 0x%x",
 >>>>>>> v3.18
@@ -1164,7 +1173,11 @@ static int smscore_load_firmware_from_file(struct smscore_device_t *coredev,
 	char *fw_filename = smscore_get_fw_filename(coredev, mode);
 	if (!fw_filename) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sms_info("mode %d not supported on this device", mode);
+=======
+		sms_err("mode %d not supported on this device", mode);
+>>>>>>> v3.18
 =======
 		sms_err("mode %d not supported on this device", mode);
 >>>>>>> v3.18
@@ -1179,7 +1192,11 @@ static int smscore_load_firmware_from_file(struct smscore_device_t *coredev,
 	rc = request_firmware(&fw, fw_filename, coredev->device);
 	if (rc < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sms_info("failed to open \"%s\"", fw_filename);
+=======
+		sms_err("failed to open firmware file \"%s\"", fw_filename);
+>>>>>>> v3.18
 =======
 		sms_err("failed to open firmware file \"%s\"", fw_filename);
 >>>>>>> v3.18
@@ -1189,6 +1206,7 @@ static int smscore_load_firmware_from_file(struct smscore_device_t *coredev,
 	fw_buf = kmalloc(ALIGN(fw->size, SMS_ALLOC_ALIGNMENT),
 			 GFP_KERNEL | GFP_DMA);
 	if (!fw_buf) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sms_info("failed to allocate firmware buffer");
 		return -ENOMEM;
@@ -1201,6 +1219,8 @@ static int smscore_load_firmware_from_file(struct smscore_device_t *coredev,
 		: loadfirmware_handler(coredev->context, fw_buf,
 		fw_buf_size);
 =======
+=======
+>>>>>>> v3.18
 		sms_err("failed to allocate firmware buffer");
 		rc = -ENOMEM;
 	} else {
@@ -1212,6 +1232,9 @@ static int smscore_load_firmware_from_file(struct smscore_device_t *coredev,
 			: loadfirmware_handler(coredev->context, fw_buf,
 			fw_buf_size);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(fw_buf);
@@ -1593,7 +1616,11 @@ void smscore_onresponse(struct smscore_device_t *coredev,
 			struct sms_msg_data *validity = (struct sms_msg_data *) phdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sms_err("MSG_SMS_DATA_VALIDITY_RES, checksum = 0x%x",
+=======
+			sms_debug("MSG_SMS_DATA_VALIDITY_RES, checksum = 0x%x",
+>>>>>>> v3.18
 =======
 			sms_debug("MSG_SMS_DATA_VALIDITY_RES, checksum = 0x%x",
 >>>>>>> v3.18
@@ -2164,8 +2191,11 @@ int smscore_gpio_get_level(struct smscore_device_t *coredev, u8 pin_num,
 static int __init smscore_module_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&g_smscore_notifyees);
@@ -2176,7 +2206,11 @@ static int __init smscore_module_init(void)
 	kmutex_init(&g_smscore_registrylock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

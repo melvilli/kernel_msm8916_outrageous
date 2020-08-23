@@ -31,7 +31,11 @@ extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
  */
 extern void __init smp_init_cpus(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __init first_lines_of_secondary(void);
+=======
+extern void first_lines_of_secondary(void);
+>>>>>>> v3.18
 =======
 extern void first_lines_of_secondary(void);
 >>>>>>> v3.18
@@ -51,8 +55,13 @@ extern int smp_ipi_irq_setup(int cpu, int irq);
  * @info:		SoC SMP specific info for /proc/cpuinfo etc
  * @cpu_kick:		For Master to kickstart a cpu (optionally at a PC)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ipi_send:		To send IPI to a @cpumask
  * @ips_clear:		To clear IPI received by @cpu at @irq
+=======
+ * @ipi_send:		To send IPI to a @cpu
+ * @ips_clear:		To clear IPI received at @irq
+>>>>>>> v3.18
 =======
  * @ipi_send:		To send IPI to a @cpu
  * @ips_clear:		To clear IPI received at @irq
@@ -62,8 +71,13 @@ struct plat_smp_ops {
 	const char 	*info;
 	void		(*cpu_kick)(int cpu, unsigned long pc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		(*ipi_send)(void *callmap);
 	void		(*ipi_clear)(int cpu, int irq);
+=======
+	void		(*ipi_send)(int cpu);
+	void		(*ipi_clear)(int irq);
+>>>>>>> v3.18
 =======
 	void		(*ipi_send)(int cpu);
 	void		(*ipi_clear)(int irq);
@@ -74,8 +88,11 @@ struct plat_smp_ops {
 extern struct plat_smp_ops  plat_smp_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif  /* CONFIG_SMP */
 =======
+=======
+>>>>>>> v3.18
 #else /* CONFIG_SMP */
 
 static inline void smp_init_cpus(void) {}
@@ -85,6 +102,9 @@ static inline const char *arc_platform_smp_cpuinfo(void)
 }
 
 #endif  /* !CONFIG_SMP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

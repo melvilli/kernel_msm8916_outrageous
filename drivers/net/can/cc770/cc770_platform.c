@@ -153,7 +153,11 @@ static int cc770_get_platform_data(struct platform_device *pdev,
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cc770_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct cc770_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct cc770_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -208,7 +212,11 @@ static int cc770_platform_probe(struct platform_device *pdev)
 	if (pdev->dev.of_node)
 		err = cc770_get_of_node_data(pdev, priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (pdev->dev.platform_data)
+=======
+	else if (dev_get_platdata(&pdev->dev))
+>>>>>>> v3.18
 =======
 	else if (dev_get_platdata(&pdev->dev))
 >>>>>>> v3.18
@@ -225,7 +233,11 @@ static int cc770_platform_probe(struct platform_device *pdev)
 		 priv->cpu_interface, priv->bus_config, priv->clkout);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, dev);
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, dev);
 >>>>>>> v3.18
@@ -253,7 +265,11 @@ exit_release_mem:
 static int cc770_platform_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pdev);
 >>>>>>> v3.18

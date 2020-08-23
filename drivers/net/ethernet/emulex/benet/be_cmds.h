@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005 - 2014 Emulex
 >>>>>>> v3.18
@@ -55,7 +59,11 @@ struct be_mcc_wrb {
 
 /* Completion Status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
+=======
+enum mcc_base_status {
+>>>>>>> v3.18
 =======
 enum mcc_base_status {
 >>>>>>> v3.18
@@ -66,6 +74,7 @@ enum mcc_base_status {
 	MCC_STATUS_INSUFFICIENT_BUFFER = 4,
 	MCC_STATUS_UNAUTHORIZED_REQUEST = 5,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MCC_STATUS_NOT_SUPPORTED = 66
 };
 
@@ -74,6 +83,8 @@ enum mcc_base_status {
 #define CQE_STATUS_EXTD_MASK		0xFFFF
 #define CQE_STATUS_EXTD_SHIFT		16	/* bits 16 - 31 */
 =======
+=======
+>>>>>>> v3.18
 	MCC_STATUS_NOT_SUPPORTED = 66,
 	MCC_STATUS_FEATURE_NOT_SUPPORTED = 68
 };
@@ -97,6 +108,9 @@ enum mcc_addl_status {
 		((enum mcc_addl_status)	\
 			(status > 0 ? (status >> CQE_ADDL_STATUS_SHIFT) & \
 					CQE_ADDL_STATUS_MASK : 0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct be_mcc_compl {
@@ -107,6 +121,7 @@ struct be_mcc_compl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* When the async bit of mcc_compl is set, the last 4 bytes of
  * mcc_compl is interpreted as follows:
  */
@@ -115,6 +130,8 @@ struct be_mcc_compl {
 #define ASYNC_TRAILER_EVENT_TYPE_SHIFT	16
 #define ASYNC_TRAILER_EVENT_TYPE_MASK	0xFF
 =======
+=======
+>>>>>>> v3.18
 /* When the async bit of mcc_compl flags is set, flags
  * is interpreted as follows:
  */
@@ -122,6 +139,9 @@ struct be_mcc_compl {
 #define ASYNC_EVENT_CODE_MASK		0xFF
 #define ASYNC_EVENT_TYPE_SHIFT		16
 #define ASYNC_EVENT_TYPE_MASK		0xFF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ASYNC_EVENT_CODE_LINK_STATE	0x1
 #define ASYNC_EVENT_CODE_GRP_5		0x5
@@ -132,10 +152,13 @@ struct be_mcc_compl {
 #define ASYNC_DEBUG_EVENT_TYPE_QNQ	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct be_async_event_trailer {
 	u32 code;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum {
@@ -146,7 +169,11 @@ enum {
 #define LOGICAL_LINK_STATUS_MASK		0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* When the event code of an async trailer is link-state, the mcc_compl
+=======
+/* When the event code of compl->flags is link-state, the mcc_compl
+>>>>>>> v3.18
 =======
 /* When the event code of compl->flags is link-state, the mcc_compl
 >>>>>>> v3.18
@@ -160,15 +187,21 @@ struct be_async_event_link_state {
 	u8 port_fault;
 	u8 rsvd0[7];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_async_event_trailer trailer;
 } __packed;
 
 /* When the event code of an async trailer is GRP-5 and event_type is QOS_SPEED
 =======
+=======
+>>>>>>> v3.18
 	u32 flags;
 } __packed;
 
 /* When the event code of compl->flags is GRP-5 and event_type is QOS_SPEED
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * the mcc_compl must be interpreted as follows
  */
@@ -178,15 +211,21 @@ struct be_async_event_grp5_qos_link_speed {
 	u16 qos_link_speed;
 	u32 event_tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_async_event_trailer trailer;
 } __packed;
 
 /* When the event code of an async trailer is GRP5 and event type is
 =======
+=======
+>>>>>>> v3.18
 	u32 flags;
 } __packed;
 
 /* When the event code of compl->flags is GRP5 and event type is
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * CoS-Priority, the mcc_compl must be interpreted as follows
  */
@@ -198,15 +237,21 @@ struct be_async_event_grp5_cos_priority {
 	u8 rsvd0;
 	u8 event_tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_async_event_trailer trailer;
 } __packed;
 
 /* When the event code of an async trailer is GRP5 and event type is
 =======
+=======
+>>>>>>> v3.18
 	u32 flags;
 } __packed;
 
 /* When the event code of compl->flags is GRP5 and event type is
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * PVID state, the mcc_compl must be interpreted as follows
  */
@@ -217,7 +262,11 @@ struct be_async_event_grp5_pvid_state {
 	u32 event_tag;
 	u32 rsvd1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_async_event_trailer trailer;
+=======
+	u32 flags;
+>>>>>>> v3.18
 =======
 	u32 flags;
 >>>>>>> v3.18
@@ -231,7 +280,11 @@ struct be_async_event_qnq {
 	u32 event_tag;
 	u8 rsvd1[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_async_event_trailer trailer;
+=======
+	u32 flags;
+>>>>>>> v3.18
 =======
 	u32 flags;
 >>>>>>> v3.18
@@ -282,7 +335,13 @@ struct be_mcc_mailbox {
 #define OPCODE_COMMON_READ_TRANSRECV_DATA		73
 #define OPCODE_COMMON_GET_PORT_NAME			77
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OPCODE_COMMON_SET_INTERRUPT_ENABLE		89
+=======
+#define OPCODE_COMMON_SET_LOGICAL_LINK_CONFIG		80
+#define OPCODE_COMMON_SET_INTERRUPT_ENABLE		89
+#define OPCODE_COMMON_SET_FN_PRIVILEGES			100
+>>>>>>> v3.18
 =======
 #define OPCODE_COMMON_SET_LOGICAL_LINK_CONFIG		80
 #define OPCODE_COMMON_SET_INTERRUPT_ENABLE		89
@@ -300,6 +359,10 @@ struct be_mcc_mailbox {
 #define OPCODE_COMMON_GET_PROFILE_CONFIG		164
 #define OPCODE_COMMON_SET_PROFILE_CONFIG		165
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OPCODE_COMMON_GET_ACTIVE_PROFILE		167
+>>>>>>> v3.18
 =======
 #define OPCODE_COMMON_GET_ACTIVE_PROFILE		167
 >>>>>>> v3.18
@@ -308,6 +371,11 @@ struct be_mcc_mailbox {
 #define OPCODE_COMMON_READ_OBJECT			171
 #define OPCODE_COMMON_WRITE_OBJECT			172
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OPCODE_COMMON_DELETE_OBJECT			174
+#define OPCODE_COMMON_MANAGE_IFACE_FILTERS		193
+>>>>>>> v3.18
 =======
 #define OPCODE_COMMON_DELETE_OBJECT			174
 #define OPCODE_COMMON_MANAGE_IFACE_FILTERS		193
@@ -348,8 +416,13 @@ struct be_cmd_resp_hdr {
 	u8 subsystem;		/* dword 0 */
 	u8 rsvd[2];		/* dword 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 status;		/* dword 1 */
 	u8 add_status;		/* dword 1 */
+=======
+	u8 base_status;		/* dword 1 */
+	u8 addl_status;		/* dword 1 */
+>>>>>>> v3.18
 =======
 	u8 base_status;		/* dword 1 */
 	u8 addl_status;		/* dword 1 */
@@ -407,7 +480,11 @@ struct be_cmd_resp_eq_create {
 	struct be_cmd_resp_hdr resp_hdr;
 	u16 eq_id;		/* sword */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 rsvd0;		/* sword */
+=======
+	u16 msix_idx;		/* available only in v2 */
+>>>>>>> v3.18
 =======
 	u16 msix_idx;		/* available only in v2 */
 >>>>>>> v3.18
@@ -554,7 +631,11 @@ struct amap_mcc_context_be {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct amap_mcc_context_lancer {
+=======
+struct amap_mcc_context_v1 {
+>>>>>>> v3.18
 =======
 struct amap_mcc_context_v1 {
 >>>>>>> v3.18
@@ -582,7 +663,11 @@ struct be_cmd_req_mcc_ext_create {
 	u16 cq_id;
 	u32 async_event_bitmap[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 context[sizeof(struct amap_mcc_context_be) / 8];
+=======
+	u8 context[sizeof(struct amap_mcc_context_v1) / 8];
+>>>>>>> v3.18
 =======
 	u8 context[sizeof(struct amap_mcc_context_v1) / 8];
 >>>>>>> v3.18
@@ -676,13 +761,19 @@ enum be_if_flags {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BE_IF_CAP_FLAGS_WANT (BE_IF_FLAGS_RSS | BE_IF_FLAGS_PROMISCUOUS |\
 			 BE_IF_FLAGS_BROADCAST | BE_IF_FLAGS_VLAN_PROMISCUOUS |\
 			 BE_IF_FLAGS_VLAN | BE_IF_FLAGS_MCAST_PROMISCUOUS |\
 			 BE_IF_FLAGS_PASS_L3L4_ERRORS | BE_IF_FLAGS_MULTICAST |\
 			 BE_IF_FLAGS_UNTAGGED)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* An RX interface is an object with one or more MAC addresses and
  * filtering capabilities. */
@@ -1081,12 +1172,18 @@ enum {
 	PHY_LINK_SPEED_100MBPS = 0x2,
 	PHY_LINK_SPEED_1GBPS = 0x3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PHY_LINK_SPEED_10GBPS = 0x4
 =======
+=======
+>>>>>>> v3.18
 	PHY_LINK_SPEED_10GBPS = 0x4,
 	PHY_LINK_SPEED_20GBPS = 0x5,
 	PHY_LINK_SPEED_25GBPS = 0x6,
 	PHY_LINK_SPEED_40GBPS = 0x7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1108,8 +1205,13 @@ struct be_cmd_resp_link_status {
 struct be_cmd_req_port_type {
 	struct be_cmd_req_hdr hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 page_num;
 	u32 port;
+=======
+	__le32 page_num;
+	__le32 port;
+>>>>>>> v3.18
 =======
 	__le32 page_num;
 	__le32 port;
@@ -1122,7 +1224,10 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* From SFF-8436 QSFP+ spec */
 #define	QSFP_PLUS_CABLE_TYPE_OFFSET	0x83
 #define	QSFP_PLUS_CR4_CABLE		0x8
@@ -1135,11 +1240,15 @@ enum {
 #define	SFP_PLUS_COPPER_CABLE		0x4
 
 #define PAGE_DATA_LEN   256
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct be_cmd_resp_port_type {
 	struct be_cmd_resp_hdr hdr;
 	u32 page_num;
 	u32 port;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct data {
 		u8 identifier;
@@ -1159,6 +1268,9 @@ struct be_cmd_resp_port_type {
 		u8 vendor_pn[16];
 		u8 vendor_rev[4];
 	} data;
+=======
+	u8  page_data[PAGE_DATA_LEN];
+>>>>>>> v3.18
 =======
 	u8  page_data[PAGE_DATA_LEN];
 >>>>>>> v3.18
@@ -1198,6 +1310,7 @@ struct be_cmd_resp_get_flow_control {
 
 /******************** Modify EQ Delay *******************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct be_cmd_req_modify_eq_delay {
 	struct be_cmd_req_hdr hdr;
 	u32 num_eq;
@@ -1212,6 +1325,8 @@ struct be_cmd_resp_modify_eq_delay {
 	struct be_cmd_resp_hdr hdr;
 	u32 rsvd0;
 =======
+=======
+>>>>>>> v3.18
 struct be_set_eqd {
 	u32 eq_id;
 	u32 phase;
@@ -1222,6 +1337,9 @@ struct be_cmd_req_modify_eq_delay {
 	struct be_cmd_req_hdr hdr;
 	u32 num_eq;
 	struct be_set_eqd set_eqd[MAX_EVT_QS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -1231,7 +1349,11 @@ struct be_cmd_req_modify_eq_delay {
  */
 #define RDMA_ENABLED				0x4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FLEX10_MODE				0x400
+=======
+#define QNQ_MODE				0x400
+>>>>>>> v3.18
 =======
 #define QNQ_MODE				0x400
 >>>>>>> v3.18
@@ -1300,11 +1422,14 @@ struct be_cmd_req_enable_disable_beacon {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct be_cmd_resp_enable_disable_beacon {
 	struct be_cmd_resp_hdr resp_hdr;
 	u32 rsvd0;
 } __packed;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct be_cmd_req_get_beacon_state {
@@ -1342,7 +1467,12 @@ struct be_cmd_read_flash_crc {
 	u8 crc[4];
 	u8 rsvd[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __packed;
+
+>>>>>>> v3.18
 =======
 } __packed;
 
@@ -1414,7 +1544,10 @@ struct lancer_cmd_resp_read_object {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct lancer_cmd_req_delete_object {
 	struct be_cmd_req_hdr hdr;
 	u32 rsvd1;
@@ -1422,6 +1555,9 @@ struct lancer_cmd_req_delete_object {
 	u8 object_name[104];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /************************ WOL *******************************/
 struct be_cmd_req_acpi_wol_magic_config{
@@ -1487,11 +1623,14 @@ struct be_cmd_req_set_lmode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct be_cmd_resp_set_lmode {
 	struct be_cmd_resp_hdr resp_hdr;
 	u8 rsvd0[4];
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /********************** DDR DMA test *********************/
@@ -1538,6 +1677,12 @@ enum {
 	PHY_TYPE_BASEX_1GB,
 	PHY_TYPE_SGMII,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PHY_TYPE_QSFP,
+	PHY_TYPE_KR4_40GB,
+	PHY_TYPE_KR2_20GB,
+>>>>>>> v3.18
 =======
 	PHY_TYPE_QSFP,
 	PHY_TYPE_KR4_40GB,
@@ -1552,6 +1697,11 @@ enum {
 #define BE_SUPPORTED_SPEED_1GBPS	4
 #define BE_SUPPORTED_SPEED_10GBPS	8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BE_SUPPORTED_SPEED_20GBPS	0x10
+#define BE_SUPPORTED_SPEED_40GBPS	0x20
+>>>>>>> v3.18
 =======
 #define BE_SUPPORTED_SPEED_20GBPS	0x10
 #define BE_SUPPORTED_SPEED_40GBPS	0x20
@@ -1609,11 +1759,14 @@ struct be_cmd_req_set_qos {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct be_cmd_resp_set_qos {
 	struct be_cmd_resp_hdr hdr;
 	u32 rsvd;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*********************** Controller Attributes ***********************/
@@ -1679,12 +1832,18 @@ struct be_cmd_resp_get_fn_privileges {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct be_cmd_req_set_fn_privileges {
 	struct be_cmd_req_hdr hdr;
 	u32 privileges;		/* Used by BE3, SH-R */
 	u32 privileges_lancer;	/* Used by Lancer */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /******************** GET/SET_MACLIST  **************************/
@@ -1731,6 +1890,12 @@ struct be_cmd_req_set_mac_list {
 
 /*********************** HSW Config ***********************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PORT_FWD_TYPE_VEPA		0x3
+#define PORT_FWD_TYPE_VEB		0x2
+
+>>>>>>> v3.18
 =======
 #define PORT_FWD_TYPE_VEPA		0x3
 #define PORT_FWD_TYPE_VEB		0x2
@@ -1741,13 +1906,19 @@ struct amap_set_hsw_context {
 	u8 rsvd0[14];
 	u8 pvid_valid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rsvd1;
 	u8 rsvd2[16];
 =======
+=======
+>>>>>>> v3.18
 	u8 pport;
 	u8 rsvd1[6];
 	u8 port_fwd_type[3];
 	u8 rsvd2[7];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 pvid[16];
 	u8 rsvd3[32];
@@ -1761,11 +1932,14 @@ struct be_cmd_req_set_hsw_config {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct be_cmd_resp_set_hsw_config {
 	struct be_cmd_resp_hdr hdr;
 	u32 rsvd;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct amap_get_hsw_req_context {
@@ -1777,7 +1951,13 @@ struct amap_get_hsw_req_context {
 
 struct amap_get_hsw_resp_context {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rsvd1[16];
+=======
+	u8 rsvd0[6];
+	u8 port_fwd_type[3];
+	u8 rsvd1[7];
+>>>>>>> v3.18
 =======
 	u8 rsvd0[6];
 	u8 port_fwd_type[3];
@@ -1871,7 +2051,10 @@ struct be_erx_stats_v1 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct be_port_rxf_stats_v2 {
 	u32 rsvd0[10];
 	u32 roce_bytes_received_lsd;
@@ -1933,6 +2116,9 @@ struct be_rxf_stats_v2 {
 	u32 rsvd2[35];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct be_hw_stats_v1 {
 	struct be_rxf_stats_v1 rxf;
@@ -1953,7 +2139,10 @@ struct be_cmd_resp_get_stats_v1 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct be_erx_stats_v2 {
 	u32 rx_drops_no_fragments[136];     /* dwordS 0 to 135*/
 	u32 rsvd[3];
@@ -1977,6 +2166,9 @@ struct be_cmd_resp_get_stats_v2 {
 	struct be_hw_stats_v2 hw_stats;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /************** get fat capabilites *******************/
 #define MAX_MODULES 27
@@ -2028,6 +2220,7 @@ struct be_cmd_req_set_ext_fat_caps {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RESOURCE_DESC_SIZE			88
 #define NIC_RESOURCE_DESC_TYPE_V0		0x41
 #define NIC_RESOURCE_DESC_TYPE_V1		0x51
@@ -2046,6 +2239,8 @@ struct be_nic_resource_desc {
 	u8 desc_len;
 	u8 rsvd1;
 =======
+=======
+>>>>>>> v3.18
 #define RESOURCE_DESC_SIZE_V0			72
 #define RESOURCE_DESC_SIZE_V1			88
 #define PCIE_RESOURCE_DESC_TYPE_V0		0x40
@@ -2105,6 +2300,9 @@ struct be_nic_res_desc {
 	u8 rsvd1;
 
 #define QUN_SHIFT				4 /* QoS is in absolute units */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 flags;
 	u8 vf_num;
@@ -2124,17 +2322,23 @@ struct be_nic_res_desc {
 	u16 toe_conn_count;
 	u16 eq_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rsvd5;
 	u32 cap_flags;
 	u8 link_param;
 	u8 rsvd6[3];
 =======
+=======
+>>>>>>> v3.18
 	u16 vlan_id;
 	u16 iface_count;
 	u32 cap_flags;
 	u8 link_param;
 	u8 rsvd6;
 	u16 channel_id_param;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 bw_min;
 	u32 bw_max;
@@ -2142,10 +2346,13 @@ struct be_nic_res_desc {
 	u8 wol_param;
 	u16 rsvd7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rsvd8[3];
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u16 tunnel_iface_count;
 	u16 direct_tenant_iface_count;
 	u32 rsvd8[6];
@@ -2168,6 +2375,9 @@ static inline bool be_is_mc(struct be_adapter *adapter)
 	return adapter->mc_type > MC_NONE;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct be_cmd_req_get_func_config {
 	struct be_cmd_req_hdr hdr;
@@ -2177,7 +2387,11 @@ struct be_cmd_resp_get_func_config {
 	struct be_cmd_resp_hdr hdr;
 	u32 desc_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 func_param[MAX_RESOURCE_DESC * RESOURCE_DESC_SIZE];
+=======
+	u8 func_param[MAX_RESOURCE_DESC * RESOURCE_DESC_SIZE_V1];
+>>>>>>> v3.18
 =======
 	u8 func_param[MAX_RESOURCE_DESC * RESOURCE_DESC_SIZE_V1];
 >>>>>>> v3.18
@@ -2193,6 +2407,7 @@ struct be_cmd_req_get_profile_config {
 
 struct be_cmd_resp_get_profile_config {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_cmd_req_hdr hdr;
 	u32 desc_count;
 	u8 func_param[MAX_RESOURCE_DESC * RESOURCE_DESC_SIZE];
@@ -2207,12 +2422,18 @@ struct be_cmd_resp_get_profile_config_v1 {
 	u32 desc_count;
 	u8 func_param[MAX_RESOURCE_DESC * RESOURCE_DESC_SIZE_V1];
 >>>>>>> v3.18
+=======
+	struct be_cmd_resp_hdr hdr;
+	u32 desc_count;
+	u8 func_param[MAX_RESOURCE_DESC * RESOURCE_DESC_SIZE_V1];
+>>>>>>> v3.18
 };
 
 struct be_cmd_req_set_profile_config {
 	struct be_cmd_req_hdr hdr;
 	u32 rsvd;
 	u32 desc_count;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct be_nic_resource_desc nic_desc;
 };
@@ -2221,6 +2442,8 @@ struct be_cmd_resp_set_profile_config {
 	struct be_cmd_req_hdr hdr;
 };
 =======
+=======
+>>>>>>> v3.18
 	u8 desc[2 * RESOURCE_DESC_SIZE_V1];
 } __packed;
 
@@ -2234,6 +2457,9 @@ struct be_cmd_resp_get_active_profile {
 	u16 active_profile_id;
 	u16 next_profile_id;
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct be_cmd_enable_disable_vf {
@@ -2270,6 +2496,7 @@ struct be_cmd_resp_get_iface_list {
 	struct be_if_desc if_desc;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int be_pci_fnum_get(struct be_adapter *adapter);
 extern int be_fw_wait_ready(struct be_adapter *adapter);
@@ -2397,6 +2624,8 @@ extern int be_cmd_get_if_id(struct be_adapter *adapter,
 extern int be_cmd_enable_vf(struct be_adapter *adapter, u8 domain);
 extern int be_cmd_intr_set(struct be_adapter *adapter, bool intr_enable);
 =======
+=======
+>>>>>>> v3.18
 /*************** Set logical link ********************/
 #define PLINK_TRACK_SHIFT	8
 struct be_cmd_req_set_ll_link {
@@ -2554,4 +2783,7 @@ int be_cmd_set_vxlan_port(struct be_adapter *adapter, __be16 port);
 int be_cmd_manage_iface(struct be_adapter *adapter, u32 iface, u8 op);
 int be_cmd_set_sriov_config(struct be_adapter *adapter,
 			    struct be_resources res, u16 num_vfs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

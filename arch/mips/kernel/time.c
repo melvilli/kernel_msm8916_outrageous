@@ -25,8 +25,13 @@
 
 #include <asm/cpu-features.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/div64.h>
 #include <asm/smtc_ipi.h>
+=======
+#include <asm/cpu-type.h>
+#include <asm/div64.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 #include <asm/div64.h>
@@ -127,8 +132,11 @@ void __init time_init(void)
 	plat_time_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mips_clockevent_init() || !cpu_has_mfc0_count_bug())
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The use of the R4k timer as a clock event takes precedence;
 	 * if reading the Count register might interfere with the timer
@@ -138,6 +146,9 @@ void __init time_init(void)
 	 * matter then, because we don't use the interrupt.
 	 */
 	if (mips_clockevent_init() != 0 || !cpu_has_mfc0_count_bug())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		init_mips_clocksource();
 }

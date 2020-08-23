@@ -248,7 +248,11 @@ static void sdma_abort_task(unsigned long opaque)
 	/* ipath_sdma_abort() is done, waiting for interrupt */
 	if (status == IPATH_SDMA_ABORT_DISARMED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (jiffies < dd->ipath_sdma_abort_intr_timeout)
+=======
+		if (time_before(jiffies, dd->ipath_sdma_abort_intr_timeout))
+>>>>>>> v3.18
 =======
 		if (time_before(jiffies, dd->ipath_sdma_abort_intr_timeout))
 >>>>>>> v3.18
@@ -346,7 +350,11 @@ resched:
 	 * state change
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (jiffies > dd->ipath_sdma_abort_jiffies) {
+=======
+	if (time_after(jiffies, dd->ipath_sdma_abort_jiffies)) {
+>>>>>>> v3.18
 =======
 	if (time_after(jiffies, dd->ipath_sdma_abort_jiffies)) {
 >>>>>>> v3.18

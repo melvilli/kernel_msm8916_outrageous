@@ -14,8 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -428,6 +432,11 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Evgeniy Polyakov <zbr@ioremap.net>");
 MODULE_DESCRIPTION("Passive OS fingerprint matching.");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("ipt_osf");
+MODULE_ALIAS("ip6t_osf");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("ipt_osf");
 MODULE_ALIAS("ip6t_osf");

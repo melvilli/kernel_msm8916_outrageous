@@ -8,15 +8,21 @@
 #include <linux/blkdev.h>
 #include <linux/blktrace_api.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "blk.h"
 #include "blk-cgroup.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/blk-mq.h>
 
 #include "blk.h"
 #include "blk-cgroup.h"
 #include "blk-mq.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct queue_sysfs_entry {
@@ -38,7 +44,11 @@ queue_var_store(unsigned long *var, const char *page, size_t count)
 	unsigned long v;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = strict_strtoul(page, 10, &v);
+=======
+	err = kstrtoul(page, 10, &v);
+>>>>>>> v3.18
 =======
 	err = kstrtoul(page, 10, &v);
 >>>>>>> v3.18
@@ -59,16 +69,22 @@ static ssize_t
 queue_requests_store(struct request_queue *q, const char *page, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct request_list *rl;
 	unsigned long nr;
 	int ret;
 
 	if (!q->request_fn)
 =======
+=======
+>>>>>>> v3.18
 	unsigned long nr;
 	int ret, err;
 
 	if (!q->request_fn && !q->mq_ops)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -79,6 +95,7 @@ queue_requests_store(struct request_queue *q, const char *page, size_t count)
 	if (nr < BLKDEV_MIN_RQ)
 		nr = BLKDEV_MIN_RQ;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(q->queue_lock);
 	q->nr_requests = nr;
@@ -115,6 +132,8 @@ queue_requests_store(struct request_queue *q, const char *page, size_t count)
 
 	spin_unlock_irq(q->queue_lock);
 =======
+=======
+>>>>>>> v3.18
 	if (q->request_fn)
 		err = blk_update_nr_requests(q, nr);
 	else
@@ -123,6 +142,9 @@ queue_requests_store(struct request_queue *q, const char *page, size_t count)
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -573,12 +595,18 @@ static void blk_release_queue(struct kobject *kobj)
 		__blk_queue_free_tags(q);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (q->mq_ops)
 		blk_mq_free_queue(q);
 	else
 		blk_free_flush_queue(q->fq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	blk_trace_shutdown(q);
 
@@ -610,11 +638,14 @@ int blk_register_queue(struct gendisk *disk)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Initialization must be complete by now.  Finish the initial
 	 * bypass from queue allocation.
 	 */
 	blk_queue_bypass_end(q);
 =======
+=======
+>>>>>>> v3.18
 	 * SCSI probing may synchronously create and destroy a lot of
 	 * request_queues for non-existent devices.  Shutting down a fully
 	 * functional queue takes measureable wallclock time as RCU grace
@@ -629,6 +660,9 @@ int blk_register_queue(struct gendisk *disk)
 		if (q->mq_ops)
 			blk_mq_finish_init(q);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = blk_trace_init_sysfs(dev);
@@ -644,6 +678,12 @@ int blk_register_queue(struct gendisk *disk)
 	kobject_uevent(&q->kobj, KOBJ_ADD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (q->mq_ops)
+		blk_mq_register_disk(disk);
+
+>>>>>>> v3.18
 =======
 	if (q->mq_ops)
 		blk_mq_register_disk(disk);
@@ -672,6 +712,12 @@ void blk_unregister_queue(struct gendisk *disk)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (q->mq_ops)
+		blk_mq_unregister_disk(disk);
+
+>>>>>>> v3.18
 =======
 	if (q->mq_ops)
 		blk_mq_unregister_disk(disk);

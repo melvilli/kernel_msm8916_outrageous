@@ -31,9 +31,12 @@ board-specific compatible values:
   nvidia,ventana
   nvidia,whistler
 <<<<<<< HEAD
+<<<<<<< HEAD
   toradex,colibri_t20-512
   toradex,iris
 =======
+=======
+>>>>>>> v3.18
   toradex,apalis_t30
   toradex,apalis_t30-eval
   toradex,colibri_t20-512
@@ -43,4 +46,7 @@ Trusted Foundations
 -------------------------------------------
 Tegra supports the Trusted Foundation secure monitor. See the
 "tlm,trusted-foundations" binding's documentation for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

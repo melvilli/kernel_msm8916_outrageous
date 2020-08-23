@@ -53,7 +53,11 @@ int usb_stor_euscsi_init(struct us_data *us)
 	result = usb_stor_control_msg(us, us->send_ctrl_pipe,
 			0x0C, USB_RECIP_INTERFACE | USB_TYPE_VENDOR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0x01, 0x0, us->iobuf, 0x1, 5000);
+=======
+			0x01, 0x0, us->iobuf, 0x1, 5 * HZ);
+>>>>>>> v3.18
 =======
 			0x01, 0x0, us->iobuf, 0x1, 5 * HZ);
 >>>>>>> v3.18
@@ -105,7 +109,11 @@ int usb_stor_huawei_e220_init(struct us_data *us)
 				      USB_REQ_SET_FEATURE,
 				      USB_TYPE_STANDARD | USB_RECIP_DEVICE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      0x01, 0x0, NULL, 0x0, 1000);
+=======
+				      0x01, 0x0, NULL, 0x0, 1 * HZ);
+>>>>>>> v3.18
 =======
 				      0x01, 0x0, NULL, 0x0, 1 * HZ);
 >>>>>>> v3.18

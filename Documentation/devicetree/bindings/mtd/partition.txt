@@ -5,6 +5,10 @@ on platforms which have strong conventions about which portions of a flash are
 used for what purposes, but which don't use an on-flash partition table such
 as RedBoot.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOTE: if the sub-node has a compatible string, then it is not a partition.
+>>>>>>> v3.18
 =======
 NOTE: if the sub-node has a compatible string, then it is not a partition.
 >>>>>>> v3.18

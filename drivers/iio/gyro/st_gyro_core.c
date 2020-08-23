@@ -28,6 +28,11 @@
 #include "st_gyro.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ST_GYRO_NUMBER_DATA_CHANNELS		3
+
+>>>>>>> v3.18
 =======
 #define ST_GYRO_NUMBER_DATA_CHANNELS		3
 
@@ -64,7 +69,11 @@
 #define ST_GYRO_1_BDU_MASK			0x80
 #define ST_GYRO_1_DRDY_IRQ_ADDR			0x22
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ST_GYRO_1_DRDY_IRQ_MASK			0x08
+=======
+#define ST_GYRO_1_DRDY_IRQ_INT2_MASK		0x08
+>>>>>>> v3.18
 =======
 #define ST_GYRO_1_DRDY_IRQ_INT2_MASK		0x08
 >>>>>>> v3.18
@@ -92,6 +101,7 @@
 #define ST_GYRO_2_BDU_MASK			0x80
 #define ST_GYRO_2_DRDY_IRQ_ADDR			0x22
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ST_GYRO_2_DRDY_IRQ_MASK			0x08
 #define ST_GYRO_2_MULTIREAD_BIT			true
 
@@ -106,6 +116,8 @@ static const struct iio_chan_spec st_gyro_16bit_channels[] = {
 		IIO_MOD_Z, IIO_LE, ST_SENSORS_DEFAULT_16_REALBITS,
 						ST_GYRO_DEFAULT_OUT_Z_L_ADDR),
 =======
+=======
+>>>>>>> v3.18
 #define ST_GYRO_2_DRDY_IRQ_INT2_MASK		0x08
 #define ST_GYRO_2_MULTIREAD_BIT			true
 
@@ -122,6 +134,9 @@ static const struct iio_chan_spec st_gyro_16bit_channels[] = {
 			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
 			ST_SENSORS_SCAN_Z, 1, IIO_MOD_Z, 's', IIO_LE, 16, 16,
 			ST_GYRO_DEFAULT_OUT_Z_L_ADDR),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_CHAN_SOFT_TIMESTAMP(3)
 };
@@ -182,7 +197,11 @@ static const struct st_sensors st_gyro_sensors[] = {
 		.drdy_irq = {
 			.addr = ST_GYRO_1_DRDY_IRQ_ADDR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.mask = ST_GYRO_1_DRDY_IRQ_MASK,
+=======
+			.mask_int2 = ST_GYRO_1_DRDY_IRQ_INT2_MASK,
+>>>>>>> v3.18
 =======
 			.mask_int2 = ST_GYRO_1_DRDY_IRQ_INT2_MASK,
 >>>>>>> v3.18
@@ -248,7 +267,11 @@ static const struct st_sensors st_gyro_sensors[] = {
 		.drdy_irq = {
 			.addr = ST_GYRO_2_DRDY_IRQ_ADDR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.mask = ST_GYRO_2_DRDY_IRQ_MASK,
+=======
+			.mask_int2 = ST_GYRO_2_DRDY_IRQ_INT2_MASK,
+>>>>>>> v3.18
 =======
 			.mask_int2 = ST_GYRO_2_DRDY_IRQ_INT2_MASK,
 >>>>>>> v3.18
@@ -277,6 +300,12 @@ static int st_gyro_read_raw(struct iio_dev *indio_dev,
 		*val2 = gdata->current_fullscale->gain;
 		return IIO_VAL_INT_PLUS_MICRO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		*val = gdata->odr;
+		return IIO_VAL_INT;
+>>>>>>> v3.18
 =======
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		*val = gdata->odr;
@@ -300,7 +329,10 @@ static int st_gyro_write_raw(struct iio_dev *indio_dev,
 		err = st_sensors_set_fullscale_by_gain(indio_dev, val2);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		if (val2)
 			return -EINVAL;
@@ -308,6 +340,9 @@ static int st_gyro_write_raw(struct iio_dev *indio_dev,
 		err = st_sensors_set_odr(indio_dev, val);
 		mutex_unlock(&indio_dev->mlock);
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -EINVAL;
@@ -317,7 +352,10 @@ static int st_gyro_write_raw(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ST_SENSOR_DEV_ATTR_SAMP_FREQ();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ST_SENSORS_DEV_ATTR_SAMP_FREQ_AVAIL();
@@ -327,7 +365,10 @@ static struct attribute *st_gyro_attributes[] = {
 	&iio_dev_attr_sampling_frequency_available.dev_attr.attr,
 	&iio_dev_attr_in_anglvel_scale_available.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&iio_dev_attr_sampling_frequency.dev_attr.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	NULL,
@@ -355,22 +396,29 @@ static const struct iio_trigger_ops st_gyro_trigger_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int st_gyro_common_probe(struct iio_dev *indio_dev)
 {
 	int err;
 	struct st_sensor_data *gdata = iio_priv(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 int st_gyro_common_probe(struct iio_dev *indio_dev,
 					struct st_sensors_platform_data *pdata)
 {
 	struct st_sensor_data *gdata = iio_priv(indio_dev);
 	int irq = gdata->get_irq_data_ready(indio_dev);
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	indio_dev->modes = INDIO_DIRECT_MODE;
 	indio_dev->info = &gyro_info;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = st_sensors_check_device_support(indio_dev,
 				ARRAY_SIZE(st_gyro_sensors), st_gyro_sensors);
@@ -378,6 +426,8 @@ int st_gyro_common_probe(struct iio_dev *indio_dev,
 		goto st_gyro_common_probe_error;
 
 =======
+=======
+>>>>>>> v3.18
 	st_sensors_power_enable(indio_dev);
 
 	err = st_sensors_check_device_support(indio_dev,
@@ -386,6 +436,9 @@ int st_gyro_common_probe(struct iio_dev *indio_dev,
 		return err;
 
 	gdata->num_data_channels = ST_GYRO_NUMBER_DATA_CHANNELS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gdata->multiread_bit = gdata->sensor->multi_read_bit;
 	indio_dev->channels = gdata->sensor->ch;
@@ -395,6 +448,7 @@ int st_gyro_common_probe(struct iio_dev *indio_dev,
 						&gdata->sensor->fs.fs_avl[0];
 	gdata->odr = gdata->sensor->odr.odr_avl[0].hz;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = st_sensors_init_sensor(indio_dev);
 	if (err < 0)
@@ -406,6 +460,8 @@ int st_gyro_common_probe(struct iio_dev *indio_dev,
 			goto st_gyro_common_probe_error;
 
 =======
+=======
+>>>>>>> v3.18
 	err = st_sensors_init_sensor(indio_dev, pdata);
 	if (err < 0)
 		return err;
@@ -415,6 +471,9 @@ int st_gyro_common_probe(struct iio_dev *indio_dev,
 		return err;
 
 	if (irq > 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = st_sensors_allocate_trigger(indio_dev,
 						  ST_GYRO_TRIGGER_OPS);
@@ -427,6 +486,7 @@ int st_gyro_common_probe(struct iio_dev *indio_dev,
 		goto st_gyro_device_register_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
 
 st_gyro_device_register_error:
@@ -437,6 +497,8 @@ st_gyro_probe_trigger_error:
 		st_gyro_deallocate_ring(indio_dev);
 st_gyro_common_probe_error:
 =======
+=======
+>>>>>>> v3.18
 	dev_info(&indio_dev->dev, "registered gyroscope %s\n",
 		 indio_dev->name);
 
@@ -448,6 +510,9 @@ st_gyro_device_register_error:
 st_gyro_probe_trigger_error:
 	st_gyro_deallocate_ring(indio_dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -458,6 +523,7 @@ void st_gyro_common_remove(struct iio_dev *indio_dev)
 	struct st_sensor_data *gdata = iio_priv(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_unregister(indio_dev);
 	if (gdata->get_irq_data_ready(indio_dev) > 0) {
 		st_sensors_deallocate_trigger(indio_dev);
@@ -465,6 +531,8 @@ void st_gyro_common_remove(struct iio_dev *indio_dev)
 	}
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 	st_sensors_power_disable(indio_dev);
 
 	iio_device_unregister(indio_dev);
@@ -472,6 +540,9 @@ void st_gyro_common_remove(struct iio_dev *indio_dev)
 		st_sensors_deallocate_trigger(indio_dev);
 
 	st_gyro_deallocate_ring(indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(st_gyro_common_remove);

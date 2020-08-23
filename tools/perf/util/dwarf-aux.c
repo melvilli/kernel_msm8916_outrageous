@@ -264,7 +264,10 @@ bool die_is_signed_type(Dwarf_Die *tp_die)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * die_is_func_def - Ensure that this DIE is a subprogram and definition
  * @dw_die: a DIE
  *
@@ -280,6 +283,9 @@ bool die_is_func_def(Dwarf_Die *dw_die)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * die_get_data_member_location - Get the data-member offset
  * @mb_die: a DIE of a member of a data structure
@@ -411,11 +417,17 @@ static int __die_search_func_cb(Dwarf_Die *fn_die, void *data)
 	struct __addr_die_search_param *ad = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Since a declaration entry doesn't has given pc, this always returns
 	 * function definition entry.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dwarf_tag(fn_die) == DW_TAG_subprogram &&
 	    dwarf_haspc(fn_die, ad->addr)) {
@@ -433,7 +445,11 @@ static int __die_search_func_cb(Dwarf_Die *fn_die, void *data)
  *
  * Search a non-inlined function DIE which includes @addr. Stores the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * DIE to @die_mem and returns it if found. Returns NULl if failed.
+=======
+ * DIE to @die_mem and returns it if found. Returns NULL if failed.
+>>>>>>> v3.18
 =======
  * DIE to @die_mem and returns it if found. Returns NULL if failed.
 >>>>>>> v3.18
@@ -465,9 +481,12 @@ static int __die_find_inline_cb(Dwarf_Die *die_mem, void *data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * die_find_inlinefunc - Search an inlined function at given address
  * @cu_die: a CU DIE which including @addr
 =======
+=======
+>>>>>>> v3.18
  * die_find_top_inlinefunc - Search the top inlined function at given address
  * @sp_die: a subprogram DIE which including @addr
  * @addr: target address
@@ -487,15 +506,24 @@ Dwarf_Die *die_find_top_inlinefunc(Dwarf_Die *sp_die, Dwarf_Addr addr,
 /**
  * die_find_inlinefunc - Search an inlined function at given address
  * @sp_die: a subprogram DIE which including @addr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @addr: target address
  * @die_mem: a buffer for result DIE
  *
  * Search an inlined function DIE which includes @addr. Stores the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * DIE to @die_mem and returns it if found. Returns NULl if failed.
  * If several inlined functions are expanded recursively, this trace
  * it and returns deepest one.
+=======
+ * DIE to @die_mem and returns it if found. Returns NULL if failed.
+ * If several inlined functions are expanded recursively, this trace
+ * it down and returns deepest one.
+>>>>>>> v3.18
 =======
  * DIE to @die_mem and returns it if found. Returns NULL if failed.
  * If several inlined functions are expanded recursively, this trace
@@ -769,6 +797,10 @@ static int __die_find_variable_cb(Dwarf_Die *die_mem, void *data)
 {
 	struct __find_variable_param *fvp = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Dwarf_Attribute attr;
+>>>>>>> v3.18
 =======
 	Dwarf_Attribute attr;
 >>>>>>> v3.18
@@ -778,15 +810,21 @@ static int __die_find_variable_cb(Dwarf_Die *die_mem, void *data)
 	if ((tag == DW_TAG_formal_parameter ||
 	     tag == DW_TAG_variable) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    die_compare_name(die_mem, fvp->name))
 		return DIE_FIND_CB_END;
 
 =======
+=======
+>>>>>>> v3.18
 	    die_compare_name(die_mem, fvp->name) &&
 	/* Does the DIE have location information or external instance? */
 	    (dwarf_attr(die_mem, DW_AT_external, &attr) ||
 	     dwarf_attr(die_mem, DW_AT_location, &attr)))
 		return DIE_FIND_CB_END;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dwarf_haspc(die_mem, fvp->addr))
 		return DIE_FIND_CB_CONTINUE;

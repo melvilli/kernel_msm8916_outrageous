@@ -202,7 +202,11 @@ static int a2091_probe(struct zorro_dev *z, const struct zorro_device_id *ent)
 	instance->unique_id = z->slotaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs = (struct a2091_scsiregs *)ZTWO_VADDR(z->resource.start);
+=======
+	regs = ZTWO_VADDR(z->resource.start);
+>>>>>>> v3.18
 =======
 	regs = ZTWO_VADDR(z->resource.start);
 >>>>>>> v3.18

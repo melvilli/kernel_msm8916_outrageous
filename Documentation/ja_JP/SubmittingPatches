@@ -99,11 +99,14 @@ Quilt:
 http://savannah.nongnu.org/projects/quilt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Andrew Morton's patch scripts:
 http://userweb.kernel.org/~akpm/stuff/patch-scripts.tar.gz
 このリンクの先のスクリプトの代わりとして、quilt がパッチマネジメント
 ツールとして推奨されています(上のリンクを見てください)。
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 2) パッチに対する説明
@@ -699,7 +702,11 @@ gcc においては、マクロと同じくらい軽いです。
 
 Andrew Morton, "The perfect patch" (tpp).
 <<<<<<< HEAD
+<<<<<<< HEAD
   <http://userweb.kernel.org/~akpm/stuff/tpp.txt>
+=======
+  <http://www.ozlabs.org/~akpm/stuff/tpp.txt>
+>>>>>>> v3.18
 =======
   <http://www.ozlabs.org/~akpm/stuff/tpp.txt>
 >>>>>>> v3.18
@@ -715,7 +722,11 @@ Greg Kroah-Hartman, "How to piss off a kernel subsystem maintainer".
 
 NO!!!! No more huge patch bombs to linux-kernel@vger.kernel.org people!
 <<<<<<< HEAD
+<<<<<<< HEAD
   <http://marc.theaimsgroup.com/?l=linux-kernel&m=112112749912944&w=2>
+=======
+  <https://lkml.org/lkml/2005/7/11/336>
+>>>>>>> v3.18
 =======
   <https://lkml.org/lkml/2005/7/11/336>
 >>>>>>> v3.18

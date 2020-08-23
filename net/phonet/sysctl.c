@@ -62,7 +62,11 @@ void phonet_get_local_port_range(int *min, int *max)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_local_port_range(ctl_table *table, int write,
+=======
+static int proc_local_port_range(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_local_port_range(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -72,7 +76,11 @@ static int proc_local_port_range(struct ctl_table *table, int write,
 	int ret;
 	int range[2] = {local_port_range[0], local_port_range[1]};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table tmp = {
+=======
+	struct ctl_table tmp = {
+>>>>>>> v3.18
 =======
 	struct ctl_table tmp = {
 >>>>>>> v3.18

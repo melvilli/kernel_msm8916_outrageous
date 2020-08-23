@@ -15,12 +15,18 @@ before submitting code.  If you are submitting a driver, also read
 Documentation/SubmittingDrivers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 Many of these steps describe the default behavior of the git version
 control system; if you use git to prepare your patches, you'll find much
 of the mechanical work done for you, though you'll still need to prepare
 and document a sensible set of patches.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 --------------------------------------------
@@ -33,7 +39,13 @@ SECTION 1 - CREATING AND SENDING YOUR CHANGE
 ------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Use "diff -up" or "diff -uprN" to create patches.
+=======
+Use "diff -up" or "diff -uprN" to create patches.  git generates patches
+in this form by default; if you're using git, you can skip this section
+entirely.
+>>>>>>> v3.18
 =======
 Use "diff -up" or "diff -uprN" to create patches.  git generates patches
 in this form by default; if you're using git, you can skip this section
@@ -80,6 +92,7 @@ belong in a patch submission.  Make sure to review your patch -after-
 generated it with diff(1), to ensure accuracy.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If your changes produce a lot of deltas, you may want to look into
 splitting them into individual patches which modify things in
 logical stages.  This will facilitate easier reviewing by other
@@ -94,6 +107,8 @@ http://userweb.kernel.org/~akpm/stuff/patch-scripts.tar.gz
 Instead of these scripts, quilt is the recommended patch management
 tool (see above).
 =======
+=======
+>>>>>>> v3.18
 If your changes produce a lot of deltas, you need to split them into
 individual patches which modify things in logical stages; see section
 #3.  This will facilitate easier reviewing by other kernel developers,
@@ -102,6 +117,9 @@ very important if you want your patch accepted.
 If you're using git, "git rebase -i" can help you with this process.  If
 you're not using git, quilt <http://savannah.nongnu.org/projects/quilt>
 is another popular alternative.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -109,12 +127,15 @@ is another popular alternative.
 2) Describe your changes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Describe the technical detail of the change(s) your patch includes.
 
 Be as specific as possible.  The WORST descriptions possible include
 things like "update driver X", "bug fix for driver X", or "this patch
 includes updates for subsystem X.  Please apply."
 =======
+=======
+>>>>>>> v3.18
 Describe your problem.  Whether your patch is a one-line bug fix or
 5000 lines of a new feature, there must be an underlying problem that
 motivated you to do this work.  Convince the reviewer that there is a
@@ -143,6 +164,9 @@ Once the problem is established, describe what you are actually doing
 about it in technical detail.  It's important to describe the change
 in plain English for the reviewer to verify that the code is behaving
 as you intend it to.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The maintainer will thank you if you write your patch description in a
@@ -150,8 +174,14 @@ form which can be easily pulled into Linux's source code management
 system, git, as a "commit log".  See #15, below.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If your description starts to get long, that's a sign that you probably
 need to split up your patch.  See #3, next.
+=======
+Solve only one problem per patch.  If your description starts to get
+long, that's a sign that you probably need to split up your patch.
+See #3, next.
+>>>>>>> v3.18
 =======
 Solve only one problem per patch.  If your description starts to get
 long, that's a sign that you probably need to split up your patch.
@@ -168,10 +198,13 @@ This benefits both the patch merger(s) and reviewers.  Some reviewers
 probably didn't even receive earlier versions of the patch.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If the patch fixes a logged bug entry, refer to that bug entry by
 number and URL.
 
 =======
+=======
+>>>>>>> v3.18
 Describe your changes in imperative mood, e.g. "make xyzzy do frotz"
 instead of "[This patch] makes xyzzy do frotz" or "[I] changed xyzzy
 to do frotz", as if you are giving orders to the codebase to change
@@ -212,6 +245,9 @@ outputting the above style in the git log or git show commands
 		abbrev = 12
 	[pretty]
 		fixes = Fixes: %h (\"%s\")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 3) Separate your changes.
@@ -236,6 +272,7 @@ then only post say 15 or so at a time and wait for review and integration.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If your patch fixes a bug in a specific commit, e.g. you found an issue using
 git-bisect, please use the 'Fixes:' tag with the first 12 characters of the
 SHA-1 ID, and the one line summary.
@@ -250,6 +287,8 @@ outputting the above style in the git log or git show commands
 		abbrev = 12
 	[pretty]
 		fixes = Fixes: %h (\"%s\")
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -481,7 +520,11 @@ you are responsible for last-minute changes. Example :
 	Signed-off-by: Lucky K Maintainer <lucky@maintainer.example.org>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This practise is particularly helpful if you maintain a stable branch and
+=======
+This practice is particularly helpful if you maintain a stable branch and
+>>>>>>> v3.18
 =======
 This practice is particularly helpful if you maintain a stable branch and
 >>>>>>> v3.18
@@ -491,7 +534,11 @@ can you change the author's identity (the From header), as it is the one
 which appears in the changelog.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Special note to back-porters: It seems to be a common and useful practise
+=======
+Special note to back-porters: It seems to be a common and useful practice
+>>>>>>> v3.18
 =======
 Special note to back-porters: It seems to be a common and useful practice
 >>>>>>> v3.18
@@ -552,6 +599,7 @@ have been included in the discussion
 14) Using Reported-by:, Tested-by:, Reviewed-by:, Suggested-by: and Fixes:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If this patch fixes a problem reported by somebody else, consider adding a
 Reported-by: tag to credit the reporter for their contribution.  Please
 note that this tag should not be added without the reporter's permission,
@@ -559,10 +607,15 @@ especially if the problem was not reported in a public forum.  That said,
 if we diligently credit our bug reporters, they will, hopefully, be
 inspired to help us again in the future.
 =======
+=======
+>>>>>>> v3.18
 The Reported-by tag gives credit to people who find bugs and report them and it
 hopefully inspires them to help us again in the future.  Please note that if
 the bug was reported in private, then ask for permission first before using the
 Reported-by tag.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 A Tested-by: tag indicates that the patch has been successfully tested (in
@@ -727,7 +780,12 @@ If you are going to include a diffstat after the "---" marker, please
 use diffstat options "-p 1 -w 70" so that filenames are listed from
 the top of the kernel source tree and don't use too much horizontal
 <<<<<<< HEAD
+<<<<<<< HEAD
 space (easily fit in 80 columns, maybe with some indentation).
+=======
+space (easily fit in 80 columns, maybe with some indentation).  (git
+generates appropriate diffstats by default.)
+>>>>>>> v3.18
 =======
 space (easily fit in 80 columns, maybe with some indentation).  (git
 generates appropriate diffstats by default.)
@@ -863,7 +921,11 @@ SECTION 3 - REFERENCES
 
 Andrew Morton, "The perfect patch" (tpp).
 <<<<<<< HEAD
+<<<<<<< HEAD
   <http://userweb.kernel.org/~akpm/stuff/tpp.txt>
+=======
+  <http://www.ozlabs.org/~akpm/stuff/tpp.txt>
+>>>>>>> v3.18
 =======
   <http://www.ozlabs.org/~akpm/stuff/tpp.txt>
 >>>>>>> v3.18
@@ -878,14 +940,20 @@ Greg Kroah-Hartman, "How to piss off a kernel subsystem maintainer".
   <http://www.kroah.com/log/linux/maintainer-04.html>
   <http://www.kroah.com/log/linux/maintainer-05.html>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 NO!!!! No more huge patch bombs to linux-kernel@vger.kernel.org people!
   <http://marc.theaimsgroup.com/?l=linux-kernel&m=112112749912944&w=2>
 =======
+=======
+>>>>>>> v3.18
   <http://www.kroah.com/log/linux/maintainer-06.html>
 
 NO!!!! No more huge patch bombs to linux-kernel@vger.kernel.org people!
   <https://lkml.org/lkml/2005/7/11/336>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Kernel Documentation/CodingStyle:

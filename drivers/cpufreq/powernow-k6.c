@@ -38,6 +38,7 @@ MODULE_PARM_DESC(bus_frequency, "Bus frequency in kHz");
 /* Clock ratio multiplied by 10 - see table 27 in AMD#23446 */
 static struct cpufreq_frequency_table clock_ratio[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{60,  /* 110 -> 6.0x */ 0},
 	{55,  /* 011 -> 5.5x */ 0},
 	{50,  /* 001 -> 5.0x */ 0},
@@ -48,6 +49,8 @@ static struct cpufreq_frequency_table clock_ratio[] = {
 	{20,  /* 100 -> 2.0x */ 0},
 	{0, CPUFREQ_TABLE_END}
 =======
+=======
+>>>>>>> v3.18
 	{0, 60,  /* 110 -> 6.0x */ 0},
 	{0, 55,  /* 011 -> 5.5x */ 0},
 	{0, 50,  /* 001 -> 5.0x */ 0},
@@ -57,6 +60,9 @@ static struct cpufreq_frequency_table clock_ratio[] = {
 	{0, 30,  /* 101 -> 3.0x */ 0},
 	{0, 20,  /* 100 -> 2.0x */ 0},
 	{0, 0, CPUFREQ_TABLE_END}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -68,6 +74,10 @@ static const struct {
 	unsigned mult;
 } usual_frequency_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 350000, 35 },	// 100   * 3.5
+>>>>>>> v3.18
 =======
 	{ 350000, 35 },	// 100   * 3.5
 >>>>>>> v3.18
@@ -147,7 +157,11 @@ static void powernow_k6_set_cpu_multiplier(unsigned int best_i)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * powernow_k6_set_state - set the PowerNow! multiplier
+=======
+ * powernow_k6_target - set the PowerNow! multiplier
+>>>>>>> v3.18
 =======
  * powernow_k6_target - set the PowerNow! multiplier
 >>>>>>> v3.18
@@ -155,6 +169,7 @@ static void powernow_k6_set_cpu_multiplier(unsigned int best_i)
  *
  *   Tries to change the PowerNow! multiplier
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void powernow_k6_set_state(struct cpufreq_policy *policy,
 		unsigned int best_i)
@@ -214,6 +229,8 @@ static int powernow_k6_target(struct cpufreq_policy *policy,
 	powernow_k6_set_state(policy, newstate);
 
 =======
+=======
+>>>>>>> v3.18
 static int powernow_k6_target(struct cpufreq_policy *policy,
 		unsigned int best_i)
 {
@@ -225,6 +242,9 @@ static int powernow_k6_target(struct cpufreq_policy *policy,
 
 	powernow_k6_set_cpu_multiplier(best_i);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -232,8 +252,13 @@ static int powernow_k6_target(struct cpufreq_policy *policy,
 static int powernow_k6_cpu_init(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i, f;
 	int result;
+=======
+	struct cpufreq_frequency_table *pos;
+	unsigned int i, f;
+>>>>>>> v3.18
 =======
 	struct cpufreq_frequency_table *pos;
 	unsigned int i, f;
@@ -255,6 +280,7 @@ static int powernow_k6_cpu_init(struct cpufreq_policy *policy)
 	}
 	if (param_max_multiplier) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; (clock_ratio[i].frequency != CPUFREQ_TABLE_END); i++) {
 			if (clock_ratio[i].driver_data == param_max_multiplier) {
 				max_multiplier = param_max_multiplier;
@@ -262,11 +288,16 @@ static int powernow_k6_cpu_init(struct cpufreq_policy *policy)
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 		cpufreq_for_each_entry(pos, clock_ratio)
 			if (pos->driver_data == param_max_multiplier) {
 				max_multiplier = param_max_multiplier;
 				goto have_max_multiplier;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "powernow-k6: invalid max_multiplier parameter, valid parameters 20, 30, 35, 40, 45, 50, 55, 60\n");
 		return -EINVAL;
@@ -296,6 +327,7 @@ have_busfreq:
 
 	/* table init */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; (clock_ratio[i].frequency != CPUFREQ_TABLE_END); i++) {
 		f = clock_ratio[i].driver_data;
 		if (f > max_multiplier)
@@ -303,17 +335,23 @@ have_busfreq:
 		else
 			clock_ratio[i].frequency = busfreq * f;
 =======
+=======
+>>>>>>> v3.18
 	cpufreq_for_each_entry(pos, clock_ratio) {
 		f = pos->driver_data;
 		if (f > max_multiplier)
 			pos->frequency = CPUFREQ_ENTRY_INVALID;
 		else
 			pos->frequency = busfreq * f;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* cpuinfo and default policy values */
 	policy->cpuinfo.transition_latency = 500000;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cur = busfreq * max_multiplier;
 
@@ -328,6 +366,10 @@ have_busfreq:
 
 	return cpufreq_table_validate_and_show(policy, clock_ratio);
 >>>>>>> v3.18
+=======
+
+	return cpufreq_table_validate_and_show(policy, clock_ratio);
+>>>>>>> v3.18
 }
 
 
@@ -335,12 +377,15 @@ static int powernow_k6_cpu_exit(struct cpufreq_policy *policy)
 {
 	unsigned int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 8; i++) {
 		if (i == max_multiplier)
 			powernow_k6_set_state(policy, i);
 	}
 	cpufreq_frequency_table_put_attr(policy->cpu);
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; (clock_ratio[i].frequency != CPUFREQ_TABLE_END); i++) {
 		if (clock_ratio[i].driver_data == max_multiplier) {
@@ -356,6 +401,9 @@ static int powernow_k6_cpu_exit(struct cpufreq_policy *policy)
 			break;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -367,6 +415,7 @@ static unsigned int powernow_k6_get(unsigned int cpu)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct freq_attr *powernow_k6_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
@@ -381,12 +430,21 @@ static struct cpufreq_driver powernow_k6_driver = {
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= powernow_k6_target,
 >>>>>>> v3.18
+=======
+static struct cpufreq_driver powernow_k6_driver = {
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= powernow_k6_target,
+>>>>>>> v3.18
 	.init		= powernow_k6_cpu_init,
 	.exit		= powernow_k6_cpu_exit,
 	.get		= powernow_k6_get,
 	.name		= "powernow-k6",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attr		= powernow_k6_attr,
+=======
+	.attr		= cpufreq_generic_attr,
+>>>>>>> v3.18
 =======
 	.attr		= cpufreq_generic_attr,
 >>>>>>> v3.18

@@ -619,7 +619,11 @@ static int snd_cx25821_pcm(struct cx25821_audio_dev *chip, int device,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cx25821_audio_pci_tbl) = {
+=======
+static const struct pci_device_id cx25821_audio_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cx25821_audio_pci_tbl[] = {
 >>>>>>> v3.18
@@ -650,8 +654,14 @@ static int cx25821_audio_initdev(struct cx25821_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[devno], id[devno], THIS_MODULE,
 			sizeof(struct cx25821_audio_dev), &card);
+=======
+	err = snd_card_new(&dev->pci->dev, index[devno], id[devno],
+			   THIS_MODULE,
+			   sizeof(struct cx25821_audio_dev), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&dev->pci->dev, index[devno], id[devno],
 			   THIS_MODULE,
@@ -693,8 +703,11 @@ static int cx25821_audio_initdev(struct cx25821_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &chip->pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(card->shortname, "cx25821");

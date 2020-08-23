@@ -53,10 +53,16 @@
  * saves one instruction and avoids clobbering a temp register.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __this_cpu_ptr(ptr)				\
 ({							\
 	unsigned long tcp_ptr__;			\
 	__verify_pcpu_ptr(ptr);				\
+=======
+#define arch_raw_cpu_ptr(ptr)				\
+({							\
+	unsigned long tcp_ptr__;			\
+>>>>>>> v3.18
 =======
 #define arch_raw_cpu_ptr(ptr)				\
 ({							\
@@ -135,7 +141,12 @@ do {									\
 	typedef typeof(var) pao_T__;					\
 	const int pao_ID__ = (__builtin_constant_p(val) &&		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      ((val) == 1 || (val) == -1)) ? (val) : 0;	\
+=======
+			      ((val) == 1 || (val) == -1)) ?		\
+				(int)(val) : 0;				\
+>>>>>>> v3.18
 =======
 			      ((val) == 1 || (val) == -1)) ?		\
 				(int)(val) : 0;				\
@@ -373,6 +384,7 @@ do {									\
 #define this_cpu_read_stable(var)	percpu_from_op("mov", var, "p" (&(var)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __this_cpu_read_1(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
 #define __this_cpu_read_2(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
 #define __this_cpu_read_4(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
@@ -396,6 +408,8 @@ do {									\
 #define __this_cpu_xchg_2(pcp, val)	percpu_xchg_op(pcp, val)
 #define __this_cpu_xchg_4(pcp, val)	percpu_xchg_op(pcp, val)
 =======
+=======
+>>>>>>> v3.18
 #define raw_cpu_read_1(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
 #define raw_cpu_read_2(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
 #define raw_cpu_read_4(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
@@ -415,6 +429,9 @@ do {									\
 #define raw_cpu_xchg_1(pcp, val)	percpu_xchg_op(pcp, val)
 #define raw_cpu_xchg_2(pcp, val)	percpu_xchg_op(pcp, val)
 #define raw_cpu_xchg_4(pcp, val)	percpu_xchg_op(pcp, val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define this_cpu_read_1(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
@@ -433,15 +450,19 @@ do {									\
 #define this_cpu_or_2(pcp, val)		percpu_to_op("or", (pcp), val)
 #define this_cpu_or_4(pcp, val)		percpu_to_op("or", (pcp), val)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define this_cpu_xor_1(pcp, val)	percpu_to_op("xor", (pcp), val)
 #define this_cpu_xor_2(pcp, val)	percpu_to_op("xor", (pcp), val)
 #define this_cpu_xor_4(pcp, val)	percpu_to_op("xor", (pcp), val)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define this_cpu_xchg_1(pcp, nval)	percpu_xchg_op(pcp, nval)
 #define this_cpu_xchg_2(pcp, nval)	percpu_xchg_op(pcp, nval)
 #define this_cpu_xchg_4(pcp, nval)	percpu_xchg_op(pcp, nval)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __this_cpu_add_return_1(pcp, val) percpu_add_return_op(pcp, val)
 #define __this_cpu_add_return_2(pcp, val) percpu_add_return_op(pcp, val)
@@ -454,6 +475,8 @@ do {									\
 #define this_cpu_add_return_2(pcp, val)	percpu_add_return_op(pcp, val)
 #define this_cpu_add_return_4(pcp, val)	percpu_add_return_op(pcp, val)
 =======
+=======
+>>>>>>> v3.18
 #define raw_cpu_add_return_1(pcp, val)		percpu_add_return_op(pcp, val)
 #define raw_cpu_add_return_2(pcp, val)		percpu_add_return_op(pcp, val)
 #define raw_cpu_add_return_4(pcp, val)		percpu_add_return_op(pcp, val)
@@ -464,6 +487,9 @@ do {									\
 #define this_cpu_add_return_1(pcp, val)		percpu_add_return_op(pcp, val)
 #define this_cpu_add_return_2(pcp, val)		percpu_add_return_op(pcp, val)
 #define this_cpu_add_return_4(pcp, val)		percpu_add_return_op(pcp, val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define this_cpu_cmpxchg_1(pcp, oval, nval)	percpu_cmpxchg_op(pcp, oval, nval)
 #define this_cpu_cmpxchg_2(pcp, oval, nval)	percpu_cmpxchg_op(pcp, oval, nval)
@@ -482,7 +508,11 @@ do {									\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __this_cpu_cmpxchg_double_4	percpu_cmpxchg8b_double
+=======
+#define raw_cpu_cmpxchg_double_4	percpu_cmpxchg8b_double
+>>>>>>> v3.18
 =======
 #define raw_cpu_cmpxchg_double_4	percpu_cmpxchg8b_double
 >>>>>>> v3.18
@@ -494,6 +524,7 @@ do {									\
  * 32 bit must fall back to generic operations.
  */
 #ifdef CONFIG_X86_64
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __this_cpu_read_8(pcp)		percpu_from_op("mov", (pcp), "m"(pcp))
 #define __this_cpu_write_8(pcp, val)	percpu_to_op("mov", (pcp), val)
@@ -514,6 +545,8 @@ do {									\
 #define this_cpu_add_return_8(pcp, val)	percpu_add_return_op(pcp, val)
 #define this_cpu_xchg_8(pcp, nval)	percpu_xchg_op(pcp, nval)
 =======
+=======
+>>>>>>> v3.18
 #define raw_cpu_read_8(pcp)			percpu_from_op("mov", (pcp), "m"(pcp))
 #define raw_cpu_write_8(pcp, val)		percpu_to_op("mov", (pcp), val)
 #define raw_cpu_add_8(pcp, val)			percpu_add_op((pcp), val)
@@ -530,6 +563,9 @@ do {									\
 #define this_cpu_or_8(pcp, val)			percpu_to_op("or", (pcp), val)
 #define this_cpu_add_return_8(pcp, val)		percpu_add_return_op(pcp, val)
 #define this_cpu_xchg_8(pcp, nval)		percpu_xchg_op(pcp, nval)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define this_cpu_cmpxchg_8(pcp, oval, nval)	percpu_cmpxchg_op(pcp, oval, nval)
 
@@ -554,7 +590,11 @@ do {									\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __this_cpu_cmpxchg_double_8	percpu_cmpxchg16b_double
+=======
+#define raw_cpu_cmpxchg_double_8	percpu_cmpxchg16b_double
+>>>>>>> v3.18
 =======
 #define raw_cpu_cmpxchg_double_8	percpu_cmpxchg16b_double
 >>>>>>> v3.18
@@ -579,9 +619,15 @@ static __always_inline int x86_this_cpu_constant_test_bit(unsigned int nr,
 
 #ifdef CONFIG_X86_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((1UL << (nr % BITS_PER_LONG)) & __this_cpu_read_8(*a)) != 0;
 #else
 	return ((1UL << (nr % BITS_PER_LONG)) & __this_cpu_read_4(*a)) != 0;
+=======
+	return ((1UL << (nr % BITS_PER_LONG)) & raw_cpu_read_8(*a)) != 0;
+#else
+	return ((1UL << (nr % BITS_PER_LONG)) & raw_cpu_read_4(*a)) != 0;
+>>>>>>> v3.18
 =======
 	return ((1UL << (nr % BITS_PER_LONG)) & raw_cpu_read_8(*a)) != 0;
 #else

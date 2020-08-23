@@ -15,6 +15,7 @@
 	 * a value and does the barriers.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(atomic_add) /* %o0 = increment, %o1 = atomic_ptr */
 	BACKOFF_SETUP(%o2)
 1:	lduw	[%o1], %g1
@@ -119,6 +120,8 @@ ENTRY(atomic64_sub_ret) /* %o0 = decrement, %o1 = atomic_ptr */
 2:	BACKOFF_SPIN(%o2, %o3, 1b)
 ENDPROC(atomic64_sub_ret)
 =======
+=======
+>>>>>>> v3.18
 
 #define ATOMIC_OP(op)							\
 ENTRY(atomic_##op) /* %o0 = increment, %o1 = atomic_ptr */		\
@@ -193,6 +196,9 @@ ATOMIC64_OPS(sub)
 #undef ATOMIC64_OPS
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ENTRY(atomic64_dec_if_positive) /* %o0 = atomic_ptr */

@@ -21,6 +21,7 @@ II. Known problems
   None.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 III. To do
 
  Add DMA data transfers (non-messaging).
@@ -29,6 +30,8 @@ III. To do
 IV. Version History
 
 =======
+=======
+>>>>>>> v3.18
 III. DMA Engine Support
 
 Tsi721 mport driver supports DMA data transfers between local system memory and
@@ -49,6 +52,9 @@ IV. Version History
 
   1.1.0 - DMA operations re-worked to support data scatter/gather lists larger
           than hardware buffer descriptors ring.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   1.0.0 - Initial driver release.
 

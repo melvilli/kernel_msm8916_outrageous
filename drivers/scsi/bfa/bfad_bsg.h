@@ -35,6 +35,10 @@ enum {
 	IOCMD_IOC_SET_ADAPTER_NAME,
 	IOCMD_IOC_SET_PORT_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IOCMD_IOC_FW_SIG_INV,
+>>>>>>> v3.18
 =======
 	IOCMD_IOC_FW_SIG_INV,
 >>>>>>> v3.18
@@ -51,8 +55,14 @@ enum {
 	IOCMD_PORT_CFG_MAXFRSZ,
 	IOCMD_PORT_CLR_ALPA,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IOCMD_PORT_BBSC_ENABLE,
 	IOCMD_PORT_BBSC_DISABLE,
+=======
+	IOCMD_PORT_BBCR_ENABLE,
+	IOCMD_PORT_BBCR_DISABLE,
+	IOCMD_PORT_BBCR_GET_ATTR,
+>>>>>>> v3.18
 =======
 	IOCMD_PORT_BBCR_ENABLE,
 	IOCMD_PORT_BBCR_DISABLE,
@@ -154,7 +164,10 @@ enum {
 	IOCMD_DIAG_DPORT_ENABLE,
 	IOCMD_DIAG_DPORT_DISABLE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IOCMD_DIAG_DPORT_GET_STATE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	IOCMD_QOS_SET_BW,
@@ -166,6 +179,11 @@ enum {
 	IOCMD_FRUVPD_UPDATE,
 	IOCMD_FRUVPD_GET_MAX_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IOCMD_DIAG_DPORT_SHOW,
+	IOCMD_DIAG_DPORT_START,
+>>>>>>> v3.18
 =======
 	IOCMD_DIAG_DPORT_SHOW,
 	IOCMD_DIAG_DPORT_START,
@@ -514,7 +532,10 @@ struct bfa_bsg_port_cfg_mode_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct bfa_bsg_bbcr_enable_s {
 	bfa_status_t    status;
 	u16		bfad_num;
@@ -529,6 +550,9 @@ struct bfa_bsg_bbcr_attr_s {
 	struct bfa_bbcr_attr_s attr;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bfa_bsg_faa_attr_s {
 	bfa_status_t		status;
@@ -614,7 +638,10 @@ struct bfa_bsg_diag_loopback_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct bfa_bsg_diag_dport_show_s {
 	bfa_status_t	status;
 	u16		bfad_num;
@@ -630,6 +657,9 @@ struct bfa_bsg_dport_enable_s {
 	u16		pat;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bfa_bsg_diag_fwping_s {
 	bfa_status_t	status;
@@ -679,6 +709,7 @@ struct bfa_bsg_diag_lb_stat_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bfa_bsg_diag_dport_get_state_s {
 	bfa_status_t	status;
 	u16		bfad_num;
@@ -686,6 +717,8 @@ struct bfa_bsg_diag_dport_get_state_s {
 	enum bfa_dport_state state;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct bfa_bsg_phy_attr_s {
@@ -827,17 +860,23 @@ struct bfa_bsg_fruvpd_s {
 	bfa_status_t	status;
 	u16		bfad_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16		rsvd;
 	u32		offset;
 	u32		len;
 	u8		data[BFA_MAX_FRUVPD_TRANSFER_SIZE];
 =======
+=======
+>>>>>>> v3.18
 	u16		rsvd1;
 	u32		offset;
 	u32		len;
 	u8		data[BFA_MAX_FRUVPD_TRANSFER_SIZE];
 	u8		trfr_cmpl;
 	u8		rsvd2[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -861,17 +900,23 @@ struct bfa_bsg_fcpt_s {
 #define bfa_bsg_fcpt_t struct bfa_bsg_fcpt_s
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bfa_bsg_data {
 	int payload_len;
 	void *payload;
 };
 =======
+=======
+>>>>>>> v3.18
 #pragma pack(1)
 struct bfa_bsg_data {
 	int payload_len;
 	u64 payload;
 };
 #pragma pack()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define bfad_chk_iocmd_sz(__payload_len, __hdrsz, __bufsz)	\

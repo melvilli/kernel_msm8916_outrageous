@@ -2,6 +2,10 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -12,21 +16,30 @@
 #include <linux/swap.h>
 #include <linux/swapops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mman.h>
 #include <linux/hugetlb.h>
 #include <linux/vmalloc.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/uaccess.h>
 
 #include "internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CREATE_TRACE_POINTS
 #include <trace/events/kmem.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -123,6 +136,7 @@ void *memdup_user(const void __user *src, size_t len)
 EXPORT_SYMBOL(memdup_user);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __always_inline void *__do_krealloc(const void *p, size_t new_size,
 					   gfp_t flags)
 {
@@ -216,6 +230,8 @@ EXPORT_SYMBOL(kzfree);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * strndup_user - duplicate an existing string from user space
  * @s: The string to duplicate
@@ -278,6 +294,7 @@ static int vm_is_stack_for_task(struct task_struct *t,
  * Check if the vma is being used as a stack.
  * If is_group is non-zero, check in the entire thread group or else
 <<<<<<< HEAD
+<<<<<<< HEAD
  * just check in the current task. Returns the pid of the task that
  * the vma is stack for.
  */
@@ -289,6 +306,8 @@ pid_t vm_is_stack(struct task_struct *task,
 	if (vm_is_stack_for_task(task, vma))
 		return task->pid;
 =======
+=======
+>>>>>>> v3.18
  * just check in the current task. Returns the task_struct of the task
  * that the vma is stack for. Must be called under rcu_read_lock().
  */
@@ -297,11 +316,15 @@ struct task_struct *task_of_stack(struct task_struct *task,
 {
 	if (vm_is_stack_for_task(task, vma))
 		return task;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (in_group) {
 		struct task_struct *t;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcu_read_lock();
 		for_each_thread(task, t) {
@@ -316,6 +339,8 @@ done:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		for_each_thread(task, t) {
 			if (vm_is_stack_for_task(t, vma))
 				return t;
@@ -323,6 +348,9 @@ done:
 	}
 
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -341,7 +369,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
  * page pinned
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __attribute__((weak)) __get_user_pages_fast(unsigned long start,
+=======
+int __weak __get_user_pages_fast(unsigned long start,
+>>>>>>> v3.18
 =======
 int __weak __get_user_pages_fast(unsigned long start,
 >>>>>>> v3.18
@@ -376,7 +408,11 @@ EXPORT_SYMBOL_GPL(__get_user_pages_fast);
  * get_user_pages_fast simply falls back to get_user_pages.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __attribute__((weak)) get_user_pages_fast(unsigned long start,
+=======
+int __weak get_user_pages_fast(unsigned long start,
+>>>>>>> v3.18
 =======
 int __weak get_user_pages_fast(unsigned long start,
 >>>>>>> v3.18
@@ -441,13 +477,19 @@ struct address_space *page_mapping(struct page *page)
 	struct address_space *mapping = page->mapping;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(PageSlab(page));
 #ifdef CONFIG_SWAP
 =======
+=======
+>>>>>>> v3.18
 	/* This happens if someone calls flush_dcache_page on slab page */
 	if (unlikely(PageSlab(page)))
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(PageSwapCache(page))) {
 		swp_entry_t entry;
@@ -455,9 +497,13 @@ struct address_space *page_mapping(struct page *page)
 		entry.val = page_private(page);
 		mapping = swap_address_space(entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 #endif
 	if ((unsigned long)mapping & PAGE_MAPPING_ANON)
+=======
+	} else if ((unsigned long)mapping & PAGE_MAPPING_ANON)
+>>>>>>> v3.18
 =======
 	} else if ((unsigned long)mapping & PAGE_MAPPING_ANON)
 >>>>>>> v3.18
@@ -465,6 +511,7 @@ struct address_space *page_mapping(struct page *page)
 	return mapping;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Tracepoints definitions. */
 EXPORT_TRACEPOINT_SYMBOL(kmalloc);
@@ -474,6 +521,8 @@ EXPORT_TRACEPOINT_SYMBOL(kmem_cache_alloc_node);
 EXPORT_TRACEPOINT_SYMBOL(kfree);
 EXPORT_TRACEPOINT_SYMBOL(kmem_cache_free);
 =======
+=======
+>>>>>>> v3.18
 int overcommit_ratio_handler(struct ctl_table *table, int write,
 			     void __user *buffer, size_t *lenp,
 			     loff_t *ppos)
@@ -563,4 +612,7 @@ out_mm:
 out:
 	return res;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

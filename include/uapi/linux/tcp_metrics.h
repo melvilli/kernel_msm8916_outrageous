@@ -12,8 +12,13 @@
 
 enum tcp_metric_index {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TCP_METRIC_RTT,
 	TCP_METRIC_RTTVAR,
+=======
+	TCP_METRIC_RTT,		/* in ms units */
+	TCP_METRIC_RTTVAR,	/* in ms units */
+>>>>>>> v3.18
 =======
 	TCP_METRIC_RTT,		/* in ms units */
 	TCP_METRIC_RTTVAR,	/* in ms units */
@@ -23,6 +28,12 @@ enum tcp_metric_index {
 	TCP_METRIC_REORDERING,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TCP_METRIC_RTT_US,	/* in usec units */
+	TCP_METRIC_RTTVAR_US,	/* in usec units */
+
+>>>>>>> v3.18
 =======
 	TCP_METRIC_RTT_US,	/* in usec units */
 	TCP_METRIC_RTTVAR_US,	/* in usec units */
@@ -47,6 +58,11 @@ enum {
 	TCP_METRICS_ATTR_FOPEN_SYN_DROP_TS,	/* msecs age */
 	TCP_METRICS_ATTR_FOPEN_COOKIE,		/* binary */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TCP_METRICS_ATTR_SADDR_IPV4,		/* u32 */
+	TCP_METRICS_ATTR_SADDR_IPV6,		/* binary */
+>>>>>>> v3.18
 =======
 	TCP_METRICS_ATTR_SADDR_IPV4,		/* u32 */
 	TCP_METRICS_ATTR_SADDR_IPV6,		/* binary */

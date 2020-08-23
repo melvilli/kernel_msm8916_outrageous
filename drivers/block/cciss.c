@@ -1015,6 +1015,7 @@ static CommandList_struct *cmd_special_alloc(ctlr_info_t *h)
 	dma_addr_t cmd_dma_handle, err_dma_handle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c = (CommandList_struct *) pci_alloc_consistent(h->pdev,
 		sizeof(CommandList_struct), &cmd_dma_handle);
 	if (c == NULL)
@@ -1027,6 +1028,8 @@ static CommandList_struct *cmd_special_alloc(ctlr_info_t *h)
 	    pci_alloc_consistent(h->pdev, sizeof(ErrorInfo_struct),
 		    &err_dma_handle);
 =======
+=======
+>>>>>>> v3.18
 	c = pci_zalloc_consistent(h->pdev, sizeof(CommandList_struct),
 				  &cmd_dma_handle);
 	if (c == NULL)
@@ -1036,6 +1039,9 @@ static CommandList_struct *cmd_special_alloc(ctlr_info_t *h)
 
 	c->err_info = pci_zalloc_consistent(h->pdev, sizeof(ErrorInfo_struct),
 					    &err_dma_handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (c->err_info == NULL) {
@@ -1044,7 +1050,10 @@ static CommandList_struct *cmd_special_alloc(ctlr_info_t *h)
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(c->err_info, 0, sizeof(ErrorInfo_struct));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2824,7 +2833,11 @@ resend_cmd2:
 		memset(c->err_info, 0, sizeof(ErrorInfo_struct));
 		return_status = IO_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(wait);
+=======
+		reinit_completion(&wait);
+>>>>>>> v3.18
 =======
 		reinit_completion(&wait);
 >>>>>>> v3.18
@@ -3689,7 +3702,11 @@ static int add_to_scan_list(struct ctlr_info *h)
 	}
 	if (!found && !h->busy_scanning) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(h->scan_wait);
+=======
+		reinit_completion(&h->scan_wait);
+>>>>>>> v3.18
 =======
 		reinit_completion(&h->scan_wait);
 >>>>>>> v3.18
@@ -4104,7 +4121,11 @@ static void cciss_interrupt_mode(ctlr_info_t *h)
 
 	if (pci_find_capability(h->pdev, PCI_CAP_ID_MSIX)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = pci_enable_msix(h->pdev, cciss_msix_entries, 4);
+=======
+		err = pci_enable_msix_exact(h->pdev, cciss_msix_entries, 4);
+>>>>>>> v3.18
 =======
 		err = pci_enable_msix_exact(h->pdev, cciss_msix_entries, 4);
 >>>>>>> v3.18
@@ -4116,6 +4137,7 @@ static void cciss_interrupt_mode(ctlr_info_t *h)
 			h->msix_vector = 1;
 			return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		if (err > 0) {
 			dev_warn(&h->pdev->dev,
@@ -4125,6 +4147,11 @@ static void cciss_interrupt_mode(ctlr_info_t *h)
 			dev_warn(&h->pdev->dev,
 				"MSI-X init failed %d\n", err);
 			goto default_int_mode;
+=======
+		} else {
+			dev_warn(&h->pdev->dev,
+				"MSI-X init failed %d\n", err);
+>>>>>>> v3.18
 =======
 		} else {
 			dev_warn(&h->pdev->dev,
@@ -4293,7 +4320,10 @@ static void cciss_find_board_params(ctlr_info_t *h)
 	h->maxsgentries = readl(&(h->cfgtable->MaxSGElements));
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * The P600 may exhibit poor performnace under some workloads
 	 * if we use the value in the configuration table. Limit this
 	 * controller to MAXSGENTRIES (32) instead.
@@ -4301,6 +4331,9 @@ static void cciss_find_board_params(ctlr_info_t *h)
 	if (h->board_id == 0x3225103C)
 		h->maxsgentries = MAXSGENTRIES;
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Limit in-command s/g elements to 32 save dma'able memory.
 	 * Howvever spec says if 0, use 31
@@ -5041,7 +5074,11 @@ reinit_after_soft_reset:
 	i = alloc_cciss_hba(pdev);
 	if (i < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -5224,7 +5261,11 @@ reinit_after_soft_reset:
 	cciss_engage_scsi(h);
 	h->busy_initializing = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -5250,7 +5291,11 @@ clean_no_release_regions:
 	pci_set_drvdata(pdev, NULL);
 	free_hba(h);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
+=======
+	return -ENODEV;
+>>>>>>> v3.18
 =======
 	return -ENODEV;
 >>>>>>> v3.18

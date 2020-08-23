@@ -32,6 +32,10 @@
 #include <linux/mm.h>
 #include <linux/tboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 >>>>>>> v3.18
@@ -305,7 +309,10 @@ static int tboot_sleep(u8 sleep_state, u32 pm1a_control, u32 pm1b_control)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int tboot_extended_sleep(u8 sleep_state, u32 val_a, u32 val_b)
 {
 	if (!tboot_enabled())
@@ -315,6 +322,9 @@ static int tboot_extended_sleep(u8 sleep_state, u32 val_a, u32 val_b)
 	return -ENODEV;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static atomic_t ap_wfs_count;
 
@@ -336,8 +346,13 @@ static int tboot_wait_for_aps(int num_aps)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit tboot_cpu_callback(struct notifier_block *nfb,
 			unsigned long action, void *hcpu)
+=======
+static int tboot_cpu_callback(struct notifier_block *nfb, unsigned long action,
+			      void *hcpu)
+>>>>>>> v3.18
 =======
 static int tboot_cpu_callback(struct notifier_block *nfb, unsigned long action,
 			      void *hcpu)
@@ -355,7 +370,11 @@ static int tboot_cpu_callback(struct notifier_block *nfb, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block tboot_cpu_notifier __cpuinitdata =
+=======
+static struct notifier_block tboot_cpu_notifier =
+>>>>>>> v3.18
 =======
 static struct notifier_block tboot_cpu_notifier =
 >>>>>>> v3.18
@@ -364,7 +383,10 @@ static struct notifier_block tboot_cpu_notifier =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 
 #define TBOOT_LOG_UUID	{ 0x26, 0x25, 0x19, 0xc0, 0x30, 0x6b, 0xb4, 0x4d, \
@@ -432,6 +454,9 @@ static const struct file_operations tboot_log_fops = {
 
 #endif /* CONFIG_DEBUG_FS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __init int tboot_late_init(void)
 {
@@ -444,8 +469,11 @@ static __init int tboot_late_init(void)
 	register_hotcpu_notifier(&tboot_cpu_notifier);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_os_set_prepare_sleep(&tboot_sleep);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	debugfs_create_file("tboot_log", S_IRUSR,
 			arch_debugfs_dir, NULL, &tboot_log_fops);
@@ -453,6 +481,9 @@ static __init int tboot_late_init(void)
 
 	acpi_os_set_prepare_sleep(&tboot_sleep);
 	acpi_os_set_prepare_extended_sleep(&tboot_extended_sleep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

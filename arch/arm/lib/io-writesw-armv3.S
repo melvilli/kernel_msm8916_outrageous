@@ -29,17 +29,23 @@
 		str	r3, [r0]
 		subs	r2, r2, #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
 
 ENTRY(__raw_writesw)
 		teq	r2, #0		@ do we have to check for the zero len?
 		moveq	pc, lr
 =======
+=======
+>>>>>>> v3.18
 		reteq	lr
 
 ENTRY(__raw_writesw)
 		teq	r2, #0		@ do we have to check for the zero len?
 		reteq	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tst	r1, #3
 		bne	.Loutsw_align

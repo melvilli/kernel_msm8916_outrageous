@@ -3,7 +3,11 @@
  * debug feature declarations
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2008, 2016
+=======
+ * Copyright IBM Corp. 2008, 2010
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2008, 2010
 >>>>>>> v3.18
@@ -22,11 +26,14 @@
 #define ZFCP_DBF_INVALID_LUN	0xFFFFFFFFFFFFFFFFull
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum zfcp_dbf_pseudo_erp_act_type {
 	ZFCP_PSEUDO_ERP_ACTION_RPORT_ADD = 0xff,
 	ZFCP_PSEUDO_ERP_ACTION_RPORT_DEL = 0xfe,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -123,7 +130,10 @@ struct zfcp_dbf_san {
 #define ZFCP_DBF_SAN_MAX_PAYLOAD (FC_CT_HDR_LEN + 32)
 	char payload[ZFCP_DBF_SAN_MAX_PAYLOAD];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 pl_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } __packed;
@@ -143,8 +153,11 @@ struct zfcp_dbf_hba_res {
 	u32 fsf_status;
 	u8  fsf_status_qual[FSF_STATUS_QUALIFIER_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 port_handle;
 	u32 lun_handle;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } __packed;
@@ -297,6 +310,7 @@ struct zfcp_dbf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * zfcp_dbf_hba_fsf_resp_suppress - true if we should not trace by default
  * @req: request that has been completed
@@ -327,11 +341,16 @@ void zfcp_dbf_hba_fsf_resp(char *tag, int level, struct zfcp_fsf_req *req)
 	if (level <= req->adapter->dbf->hba->level)
 		zfcp_dbf_hba_fsf_res(tag, level, req);
 =======
+=======
+>>>>>>> v3.18
 static inline
 void zfcp_dbf_hba_fsf_resp(char *tag, int level, struct zfcp_fsf_req *req)
 {
 	if (debug_level_enabled(req->adapter->dbf->hba, level))
 		zfcp_dbf_hba_fsf_res(tag, req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -345,6 +364,7 @@ void zfcp_dbf_hba_fsf_response(struct zfcp_fsf_req *req)
 	struct fsf_qtcb *qtcb = req->qtcb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(req->status & (ZFCP_STATUS_FSFREQ_DISMISSED |
 				    ZFCP_STATUS_FSFREQ_ERROR))) {
 		zfcp_dbf_hba_fsf_resp("fs_rerr", 3, req);
@@ -353,14 +373,21 @@ void zfcp_dbf_hba_fsf_response(struct zfcp_fsf_req *req)
 =======
 	if ((qtcb->prefix.prot_status != FSF_PROT_GOOD) &&
 >>>>>>> v3.18
+=======
+	if ((qtcb->prefix.prot_status != FSF_PROT_GOOD) &&
+>>>>>>> v3.18
 	    (qtcb->prefix.prot_status != FSF_PROT_FSF_STATUS_PRESENTED)) {
 		zfcp_dbf_hba_fsf_resp("fs_perr", 1, req);
 
 	} else if (qtcb->header.fsf_status != FSF_GOOD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_dbf_hba_fsf_resp("fs_ferr",
 				      zfcp_dbf_hba_fsf_resp_suppress(req)
 				      ? 5 : 1, req);
+=======
+		zfcp_dbf_hba_fsf_resp("fs_ferr", 1, req);
+>>>>>>> v3.18
 =======
 		zfcp_dbf_hba_fsf_resp("fs_ferr", 1, req);
 >>>>>>> v3.18
@@ -385,8 +412,13 @@ void _zfcp_dbf_scsi(char *tag, int level, struct scsi_cmnd *scmd,
 					scmd->device->host->hostdata[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (level <= adapter->dbf->scsi->level)
 		zfcp_dbf_scsi(tag, level, scmd, req);
+=======
+	if (debug_level_enabled(adapter->dbf->scsi, level))
+		zfcp_dbf_scsi(tag, scmd, req);
+>>>>>>> v3.18
 =======
 	if (debug_level_enabled(adapter->dbf->scsi, level))
 		zfcp_dbf_scsi(tag, scmd, req);
@@ -453,6 +485,7 @@ void zfcp_dbf_scsi_devreset(char *tag, struct scsi_cmnd *scmnd, u8 flag)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * zfcp_dbf_scsi_nullcmnd() - trace NULLify of SCSI command in dev/tgt-reset.
  * @scmnd: SCSI command that was NULLified.
@@ -464,6 +497,8 @@ static inline void zfcp_dbf_scsi_nullcmnd(struct scsi_cmnd *scmnd,
 	_zfcp_dbf_scsi("scfc__1", 3, scmnd, fsf_req);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ZFCP_DBF_H */

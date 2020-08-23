@@ -82,7 +82,11 @@ bfa_fcs_attach(struct bfa_fcs_s *fcs, struct bfa_s *bfa, struct bfad_s *bfad,
 	fcbuild_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < sizeof(fcs_modules) / sizeof(fcs_modules[0]); i++) {
+=======
+	for (i = 0; i < ARRAY_SIZE(fcs_modules); i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ARRAY_SIZE(fcs_modules); i++) {
 >>>>>>> v3.18
@@ -102,7 +106,11 @@ bfa_fcs_init(struct bfa_fcs_s *fcs)
 	struct bfa_fcs_mod_s  *mod;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < sizeof(fcs_modules) / sizeof(fcs_modules[0]); i++) {
+=======
+	for (i = 0; i < ARRAY_SIZE(fcs_modules); i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ARRAY_SIZE(fcs_modules); i++) {
 >>>>>>> v3.18
@@ -193,7 +201,11 @@ bfa_fcs_exit(struct bfa_fcs_s *fcs)
 	bfa_wc_init(&fcs->wc, bfa_fcs_exit_comp, fcs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nmods = sizeof(fcs_modules) / sizeof(fcs_modules[0]);
+=======
+	nmods = ARRAY_SIZE(fcs_modules);
+>>>>>>> v3.18
 =======
 	nmods = ARRAY_SIZE(fcs_modules);
 >>>>>>> v3.18
@@ -253,9 +265,12 @@ static void bfa_fcs_fabric_flogiacc_comp(void *fcsarg,
 					 u32 resid_len,
 					 struct fchs_s *rspfchs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 bfa_fcs_fabric_oper_bbscn(struct bfa_fcs_fabric_s *fabric);
 static bfa_boolean_t bfa_fcs_fabric_is_bbscn_enabled(
 				struct bfa_fcs_fabric_s *fabric);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -420,8 +435,12 @@ bfa_fcs_fabric_sm_flogi(struct bfa_fcs_fabric_s *fabric,
 
 		bfa_fcport_set_tx_bbcredit(fabric->fcs->bfa,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   fabric->bb_credit,
 					   bfa_fcs_fabric_oper_bbscn(fabric));
+=======
+					   fabric->bb_credit);
+>>>>>>> v3.18
 =======
 					   fabric->bb_credit);
 >>>>>>> v3.18
@@ -453,8 +472,12 @@ bfa_fcs_fabric_sm_flogi(struct bfa_fcs_fabric_s *fabric,
 		fabric->fab_type = BFA_FCS_FABRIC_N2N;
 		bfa_fcport_set_tx_bbcredit(fabric->fcs->bfa,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   fabric->bb_credit,
 					   bfa_fcs_fabric_oper_bbscn(fabric));
+=======
+					   fabric->bb_credit);
+>>>>>>> v3.18
 =======
 					   fabric->bb_credit);
 >>>>>>> v3.18
@@ -626,8 +649,12 @@ bfa_fcs_fabric_sm_nofabric(struct bfa_fcs_fabric_s *fabric,
 		bfa_trc(fabric->fcs, fabric->bb_credit);
 		bfa_fcport_set_tx_bbcredit(fabric->fcs->bfa,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   fabric->bb_credit,
 					   bfa_fcs_fabric_oper_bbscn(fabric));
+=======
+					   fabric->bb_credit);
+>>>>>>> v3.18
 =======
 					   fabric->bb_credit);
 >>>>>>> v3.18
@@ -993,10 +1020,13 @@ bfa_cb_lps_flogi_comp(void *bfad, void *uarg, bfa_status_t status)
 	case BFA_STATUS_FABRIC_RJT:
 		fabric->stats.flogi_rejects++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fabric->lps->lsrjt_rsn == FC_LS_RJT_RSN_LOGICAL_ERROR &&
 		    fabric->lps->lsrjt_expl == FC_LS_RJT_EXP_NO_ADDL_INFO)
 			fabric->fcs->bbscn_flogi_rjt = BFA_TRUE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bfa_sm_send_event(fabric, BFA_FCS_FABRIC_SM_RETRY_OP);
@@ -1045,6 +1075,7 @@ bfa_fcs_fabric_login(struct bfa_fcs_fabric_s *fabric)
 	struct bfa_s		*bfa = fabric->fcs->bfa;
 	struct bfa_lport_cfg_s	*pcfg = &fabric->bport.port_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			alpa = 0, bb_scn = 0;
 
 	if (bfa_fcs_fabric_is_bbscn_enabled(fabric) &&
@@ -1054,11 +1085,16 @@ bfa_fcs_fabric_login(struct bfa_fcs_fabric_s *fabric)
 	bfa_lps_flogi(fabric->lps, fabric, alpa, bfa_fcport_get_maxfrsize(bfa),
 		      pcfg->pwwn, pcfg->nwwn, fabric->auth_reqd, bb_scn);
 =======
+=======
+>>>>>>> v3.18
 	u8			alpa = 0;
 
 
 	bfa_lps_flogi(fabric->lps, fabric, alpa, bfa_fcport_get_maxfrsize(bfa),
 		      pcfg->pwwn, pcfg->nwwn, fabric->auth_reqd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fabric->stats.flogi_sent++;
@@ -1141,6 +1177,7 @@ bfa_fcs_fabric_stop(struct bfa_fcs_fabric_s *fabric)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Computes operating BB_SCN value
  */
 static u8
@@ -1175,6 +1212,8 @@ bfa_fcs_fabric_is_bbscn_enabled(struct bfa_fcs_fabric_s *fabric)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Delete all vports and wait for vport delete completions.
@@ -1315,7 +1354,10 @@ bfa_fcs_fabric_link_down(struct bfa_fcs_fabric_s *fabric)
 {
 	bfa_trc(fabric->fcs, fabric->bport.port_cfg.pwwn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fabric->fcs->bbscn_flogi_rjt = BFA_FALSE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bfa_sm_send_event(fabric, BFA_FCS_FABRIC_SM_LINK_DOWN);
@@ -1525,7 +1567,10 @@ bfa_fcs_fabric_process_flogi(struct bfa_fcs_fabric_s *fabric,
 
 	fabric->bb_credit = be16_to_cpu(flogi->csp.bbcred);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fabric->lps->pr_bbscn = (be16_to_cpu(flogi->csp.rxsz) >> 12);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bport->port_topo.pn2n.rem_port_wwn = flogi->port_name;
@@ -1561,8 +1606,12 @@ bfa_fcs_fabric_send_flogi_acc(struct bfa_fcs_fabric_s *fabric)
 				    pcfg->nwwn,
 				    bfa_fcport_get_maxfrsize(bfa),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    bfa_fcport_get_rx_bbcredit(bfa),
 				    bfa_fcs_fabric_oper_bbscn(fabric));
+=======
+				    bfa_fcport_get_rx_bbcredit(bfa), 0);
+>>>>>>> v3.18
 =======
 				    bfa_fcport_get_rx_bbcredit(bfa), 0);
 >>>>>>> v3.18

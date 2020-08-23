@@ -6,7 +6,11 @@
 #include <linux/kernel.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -17,8 +21,11 @@
 ACPI_MODULE_NAME("sysfs");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREFIX "ACPI: "
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ACPI_DEBUG
@@ -234,7 +241,11 @@ module_param_call(trace_state, param_set_trace_state, param_get_trace_state,
 
 module_param_named(aml_debug_output, acpi_gbl_enable_aml_debug_object,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   bool, 0644);
+=======
+		   byte, 0644);
+>>>>>>> v3.18
 =======
 		   byte, 0644);
 >>>>>>> v3.18
@@ -321,7 +332,11 @@ static void acpi_table_attr_init(struct acpi_table_attr *table_attr,
 			table_attr->instance);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	table_attr->attr.size = 0;
+=======
+	table_attr->attr.size = table_header->length;
+>>>>>>> v3.18
 =======
 	table_attr->attr.size = table_header->length;
 >>>>>>> v3.18
@@ -370,8 +385,14 @@ static int acpi_tables_sysfs_init(void)
 	struct acpi_table_attr *table_attr;
 	struct acpi_table_header *table_header = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int table_index = 0;
 	int result;
+=======
+	int table_index;
+	acpi_status status;
+	int ret;
+>>>>>>> v3.18
 =======
 	int table_index;
 	acpi_status status;
@@ -386,6 +407,7 @@ static int acpi_tables_sysfs_init(void)
 	if (!dynamic_tables_kobj)
 		goto err_dynamic_tables;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do {
 		result = acpi_get_table_by_index(table_index, &table_header);
@@ -415,6 +437,8 @@ static int acpi_tables_sysfs_init(void)
 
 	return result == AE_OK ? 0 : -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	for (table_index = 0;; table_index++) {
 		status = acpi_get_table_by_index(table_index, &table_header);
 
@@ -443,6 +467,9 @@ static int acpi_tables_sysfs_init(void)
 	status = acpi_install_table_handler(acpi_sysfs_table_handler, NULL);
 
 	return ACPI_FAILURE(status) ? -EINVAL : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_dynamic_tables:
 	kobject_put(tables_kobj);
@@ -545,15 +572,21 @@ static int get_status(u32 index, acpi_event_status *status,
 		      acpi_handle *handle)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result;
 
 	if (index >= num_gpes + ACPI_NUM_FIXED_EVENTS)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int result = 0;
 
 	if (index >= num_gpes + ACPI_NUM_FIXED_EVENTS)
 		goto end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (index < num_gpes) {
@@ -562,7 +595,11 @@ static int get_status(u32 index, acpi_event_status *status,
 			ACPI_EXCEPTION((AE_INFO, AE_NOT_FOUND,
 					"Invalid GPE 0x%x", index));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return result;
+=======
+			goto end;
+>>>>>>> v3.18
 =======
 			goto end;
 >>>>>>> v3.18
@@ -572,6 +609,10 @@ static int get_status(u32 index, acpi_event_status *status,
 		result = acpi_get_event_status(index - num_gpes, status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+end:
+>>>>>>> v3.18
 =======
 end:
 >>>>>>> v3.18
@@ -604,7 +645,11 @@ static ssize_t counter_show(struct kobject *kobj,
 		goto end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(status & ACPI_EVENT_FLAG_HANDLE))
+=======
+	if (!(status & ACPI_EVENT_FLAG_HAS_HANDLER))
+>>>>>>> v3.18
 =======
 	if (!(status & ACPI_EVENT_FLAG_HAS_HANDLER))
 >>>>>>> v3.18
@@ -635,6 +680,10 @@ static ssize_t counter_set(struct kobject *kobj,
 	acpi_handle handle;
 	int result = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long tmp;
+>>>>>>> v3.18
 =======
 	unsigned long tmp;
 >>>>>>> v3.18
@@ -655,7 +704,11 @@ static ssize_t counter_set(struct kobject *kobj,
 		goto end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(status & ACPI_EVENT_FLAG_HANDLE)) {
+=======
+	if (!(status & ACPI_EVENT_FLAG_HAS_HANDLER)) {
+>>>>>>> v3.18
 =======
 	if (!(status & ACPI_EVENT_FLAG_HAS_HANDLER)) {
 >>>>>>> v3.18
@@ -675,13 +728,19 @@ static ssize_t counter_set(struct kobject *kobj,
 			 (status & ACPI_EVENT_FLAG_SET))
 			result = acpi_clear_gpe(handle, index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			all_counters[index].count = strtoul(buf, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 		else if (!kstrtoul(buf, 0, &tmp))
 			all_counters[index].count = tmp;
 		else
 			result = -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (index < num_gpes + ACPI_NUM_FIXED_EVENTS) {
 		int event = index - num_gpes;
@@ -695,13 +754,19 @@ static ssize_t counter_set(struct kobject *kobj,
 			 (status & ACPI_EVENT_FLAG_SET))
 			result = acpi_clear_event(event);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			all_counters[index].count = strtoul(buf, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 		else if (!kstrtoul(buf, 0, &tmp))
 			all_counters[index].count = tmp;
 		else
 			result = -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else
 		all_counters[index].count = strtoul(buf, NULL, 0);
@@ -770,10 +835,16 @@ void acpi_irq_stats_init(void)
 			sprintf(buffer, "bug%02X", i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name = kzalloc(strlen(buffer) + 1, GFP_KERNEL);
 		if (name == NULL)
 			goto fail;
 		strncpy(name, buffer, strlen(buffer) + 1);
+=======
+		name = kstrdup(buffer, GFP_KERNEL);
+		if (name == NULL)
+			goto fail;
+>>>>>>> v3.18
 =======
 		name = kstrdup(buffer, GFP_KERNEL);
 		if (name == NULL)
@@ -862,6 +933,7 @@ void acpi_sysfs_add_hotplug_profile(struct acpi_hotplug_profile *hotplug,
 		goto err_out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kobject_init(&hotplug->kobj, &acpi_hotplug_profile_ktype);
 	error = kobject_set_name(&hotplug->kobj, "%s", name);
 	if (error)
@@ -869,6 +941,10 @@ void acpi_sysfs_add_hotplug_profile(struct acpi_hotplug_profile *hotplug,
 
 	hotplug->kobj.parent = hotplug_kobj;
 	error = kobject_add(&hotplug->kobj, hotplug_kobj, NULL);
+=======
+	error = kobject_init_and_add(&hotplug->kobj,
+		&acpi_hotplug_profile_ktype, hotplug_kobj, "%s", name);
+>>>>>>> v3.18
 =======
 	error = kobject_init_and_add(&hotplug->kobj,
 		&acpi_hotplug_profile_ktype, hotplug_kobj, "%s", name);
@@ -884,7 +960,10 @@ void acpi_sysfs_add_hotplug_profile(struct acpi_hotplug_profile *hotplug,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t force_remove_show(struct kobject *kobj,
 				 struct kobj_attribute *attr, char *buf)
 {
@@ -912,6 +991,9 @@ static const struct kobj_attribute force_remove_attr =
 	__ATTR(force_remove, S_IRUGO | S_IWUSR, force_remove_show,
 	       force_remove_store);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __init acpi_sysfs_init(void)
 {
@@ -923,11 +1005,17 @@ int __init acpi_sysfs_init(void)
 
 	hotplug_kobj = kobject_create_and_add("hotplug", acpi_kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	result = sysfs_create_file(hotplug_kobj, &force_remove_attr.attr);
 	if (result)
 		return result;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	result = sysfs_create_file(acpi_kobj, &pm_profile_attr.attr);
 	return result;

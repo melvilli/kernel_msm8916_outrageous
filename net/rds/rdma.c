@@ -565,7 +565,11 @@ int rds_cmsg_rdma_args(struct rds_sock *rs, struct rds_message *rm,
 	if (rs->rs_bound_addr == 0) {
 		ret = -ENOTCONN; /* XXX not a great errno */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_ret;
+>>>>>>> v3.18
 =======
 		goto out_ret;
 >>>>>>> v3.18
@@ -574,7 +578,11 @@ int rds_cmsg_rdma_args(struct rds_sock *rs, struct rds_message *rm,
 	if (args->nr_local > UIO_MAXIOV) {
 		ret = -EMSGSIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_ret;
+>>>>>>> v3.18
 =======
 		goto out_ret;
 >>>>>>> v3.18
@@ -587,7 +595,11 @@ int rds_cmsg_rdma_args(struct rds_sock *rs, struct rds_message *rm,
 		if (!iovs) {
 			ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			goto out_ret;
+>>>>>>> v3.18
 =======
 			goto out_ret;
 >>>>>>> v3.18
@@ -709,6 +721,10 @@ out:
 		sock_kfree_s(rds_rs_to_sk(rs), iovs, iov_size);
 	kfree(pages);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_ret:
+>>>>>>> v3.18
 =======
 out_ret:
 >>>>>>> v3.18

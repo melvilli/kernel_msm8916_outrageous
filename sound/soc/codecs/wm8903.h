@@ -173,7 +173,11 @@ extern int wm8903_mic_detect(struct snd_soc_codec *codec,
 
 #define WM8903_VMID_RES_50K                          2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WM8903_VMID_RES_250K                         4
+=======
+#define WM8903_VMID_RES_250K                         3
+>>>>>>> v3.18
 =======
 #define WM8903_VMID_RES_250K                         3
 >>>>>>> v3.18

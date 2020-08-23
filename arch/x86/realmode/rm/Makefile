@@ -53,8 +53,14 @@ OBJCOPYFLAGS_realmode.bin := -O binary
 
 targets += realmode.bin
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj)/realmode.bin: $(obj)/realmode.elf $(obj)/realmode.relocs
 	$(call if_changed,objcopy)
+=======
+$(obj)/realmode.bin: $(obj)/realmode.elf $(obj)/realmode.relocs FORCE
+	$(call if_changed,objcopy)
+	@:
+>>>>>>> v3.18
 =======
 $(obj)/realmode.bin: $(obj)/realmode.elf $(obj)/realmode.relocs FORCE
 	$(call if_changed,objcopy)
@@ -71,6 +77,7 @@ $(obj)/realmode.relocs: $(obj)/realmode.elf FORCE
 # ---------------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # How to compile the 16-bit code.  Note we always compile for -march=i386,
 # that way we can complain to the user if the CPU is insufficient.
 KBUILD_CFLAGS	:= $(LINUXINCLUDE) -m32 -g -Os -D_SETUP -D__KERNEL__ -D_WAKEUP \
@@ -86,6 +93,10 @@ KBUILD_CFLAGS	:= $(LINUXINCLUDE) -m32 -g -Os -D_SETUP -D__KERNEL__ -D_WAKEUP \
 		   $(call cc-option, -fno-unit-at-a-time)) \
 		   $(call cc-option, -fno-stack-protector) \
 		   $(call cc-option, -mpreferred-stack-boundary=2)
+=======
+KBUILD_CFLAGS	:= $(LINUXINCLUDE) $(REALMODE_CFLAGS) -D_SETUP -D_WAKEUP \
+		   -I$(srctree)/arch/x86/boot
+>>>>>>> v3.18
 =======
 KBUILD_CFLAGS	:= $(LINUXINCLUDE) $(REALMODE_CFLAGS) -D_SETUP -D_WAKEUP \
 		   -I$(srctree)/arch/x86/boot

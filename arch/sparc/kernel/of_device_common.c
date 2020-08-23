@@ -2,7 +2,10 @@
 #include <linux/kernel.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/export.h>
@@ -10,13 +13,19 @@
 #include <linux/errno.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_device.h>
 #include <linux/of_platform.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/of_address.h>
 #include <linux/of_device.h>
 #include <linux/of_irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "of_device_common.h"

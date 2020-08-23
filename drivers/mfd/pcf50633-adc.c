@@ -20,7 +20,10 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/device.h>
@@ -207,7 +210,11 @@ static int pcf50633_adc_probe(struct platform_device *pdev)
 	struct pcf50633_adc *adc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adc = kzalloc(sizeof(*adc), GFP_KERNEL);
+=======
+	adc = devm_kzalloc(&pdev->dev, sizeof(*adc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	adc = devm_kzalloc(&pdev->dev, sizeof(*adc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -244,7 +251,10 @@ static int pcf50633_adc_remove(struct platform_device *pdev)
 
 	mutex_unlock(&adc->queue_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(adc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

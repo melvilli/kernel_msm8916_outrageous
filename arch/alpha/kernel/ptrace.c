@@ -15,6 +15,10 @@
 #include <linux/signal.h>
 #include <linux/tracehook.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <linux/audit.h>
 >>>>>>> v3.18
@@ -321,15 +325,21 @@ asmlinkage unsigned long syscall_trace_enter(void)
 {
 	unsigned long ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_thread_flag(TIF_SYSCALL_TRACE) &&
 	    tracehook_report_syscall_entry(current_pt_regs()))
 		ret = -1UL;
 =======
+=======
+>>>>>>> v3.18
 	struct pt_regs *regs = current_pt_regs();
 	if (test_thread_flag(TIF_SYSCALL_TRACE) &&
 	    tracehook_report_syscall_entry(current_pt_regs()))
 		ret = -1UL;
 	audit_syscall_entry(regs->r0, regs->r16, regs->r17, regs->r18, regs->r19);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret ?: current_pt_regs()->r0;
 }
@@ -338,6 +348,10 @@ asmlinkage void
 syscall_trace_leave(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	audit_syscall_exit(current_pt_regs());
+>>>>>>> v3.18
 =======
 	audit_syscall_exit(current_pt_regs());
 >>>>>>> v3.18

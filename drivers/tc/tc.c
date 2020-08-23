@@ -130,12 +130,18 @@ static void __init tc_bus_add_devices(struct tc_bus *tbus)
 		tc_device_get_irq(tdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device_register(&tdev->dev);
 =======
+=======
+>>>>>>> v3.18
 		if (device_register(&tdev->dev)) {
 			put_device(&tdev->dev);
 			goto out_err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_add_tail(&tdev->node, &tbus->devices);
 
@@ -156,12 +162,18 @@ static int __init tc_init(void)
 	INIT_LIST_HEAD(&tc_bus.devices);
 	dev_set_name(&tc_bus.dev, "tc");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_register(&tc_bus.dev);
 =======
+=======
+>>>>>>> v3.18
 	if (device_register(&tc_bus.dev)) {
 		put_device(&tc_bus.dev);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (tc_bus.info.slot_size) {

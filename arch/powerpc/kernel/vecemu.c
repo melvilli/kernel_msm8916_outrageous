@@ -272,7 +272,11 @@ int emulate_altivec(struct pt_regs *regs)
 	vc = (instr >> 6) & 0x1f;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vrs = current->thread.vr;
+=======
+	vrs = current->thread.vr_state.vr;
+>>>>>>> v3.18
 =======
 	vrs = current->thread.vr_state.vr;
 >>>>>>> v3.18
@@ -325,7 +329,11 @@ int emulate_altivec(struct pt_regs *regs)
 			for (i = 0; i < 4; ++i)
 				vrs[vd].u[i] = ctuxs(vrs[vb].u[i], va,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						&current->thread.vscr.u[3]);
+=======
+					&current->thread.vr_state.vscr.u[3]);
+>>>>>>> v3.18
 =======
 					&current->thread.vr_state.vscr.u[3]);
 >>>>>>> v3.18
@@ -334,7 +342,11 @@ int emulate_altivec(struct pt_regs *regs)
 			for (i = 0; i < 4; ++i)
 				vrs[vd].u[i] = ctsxs(vrs[vb].u[i], va,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						&current->thread.vscr.u[3]);
+=======
+					&current->thread.vr_state.vscr.u[3]);
+>>>>>>> v3.18
 =======
 					&current->thread.vr_state.vscr.u[3]);
 >>>>>>> v3.18

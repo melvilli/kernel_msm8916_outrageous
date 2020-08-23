@@ -56,6 +56,11 @@ extern int gfs2_file_dealloc(struct gfs2_inode *ip);
 extern int gfs2_write_alloc_required(struct gfs2_inode *ip, u64 offset,
 				     unsigned int len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int gfs2_map_journal_extents(struct gfs2_sbd *sdp, struct gfs2_jdesc *jd);
+extern void gfs2_free_journal_extents(struct gfs2_jdesc *jd);
+>>>>>>> v3.18
 =======
 extern int gfs2_map_journal_extents(struct gfs2_sbd *sdp, struct gfs2_jdesc *jd);
 extern void gfs2_free_journal_extents(struct gfs2_jdesc *jd);

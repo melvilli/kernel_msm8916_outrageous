@@ -79,6 +79,10 @@ ENTRY(_UserExceptionVector)
 	addx4	a0, a0, a3		# find entry in table
 	l32i	a0, a0, EXC_TABLE_FAST_USER	# load handler
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xsr	a3, excsave1		# restore a3 and dispatch table
+>>>>>>> v3.18
 =======
 	xsr	a3, excsave1		# restore a3 and dispatch table
 >>>>>>> v3.18
@@ -109,6 +113,10 @@ ENTRY(_KernelExceptionVector)
 	addx4	a0, a0, a3		# find entry in table
 	l32i	a0, a0, EXC_TABLE_FAST_KERNEL	# load handler address
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xsr	a3, excsave1		# restore a3 and dispatch table
+>>>>>>> v3.18
 =======
 	xsr	a3, excsave1		# restore a3 and dispatch table
 >>>>>>> v3.18
@@ -177,7 +185,11 @@ ENDPROC(_KernelExceptionVector)
  *	a0:	   DEPC
  *	a1: 	   a1
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	a2:	   trashed, original value in EXC_TABLE_DOUBLE_A2
+=======
+ *	a2:	   trashed, original value in EXC_TABLE_DOUBLE_SAVE
+>>>>>>> v3.18
 =======
  *	a2:	   trashed, original value in EXC_TABLE_DOUBLE_SAVE
 >>>>>>> v3.18
@@ -217,6 +229,7 @@ ENDPROC(_KernelExceptionVector)
 	.section .DoubleExceptionVector.text, "ax"
 	.begin literal_prefix .DoubleExceptionVector
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ENTRY(_DoubleExceptionVector)
 
@@ -229,6 +242,8 @@ ENTRY(_DoubleExceptionVector)
 	rsr	a3, ps
 	_bbci.l	a3, PS_UM_BIT, .Lksp
 =======
+=======
+>>>>>>> v3.18
 	.globl _DoubleExceptionVector_WindowUnderflow
 	.globl _DoubleExceptionVector_WindowOverflow
 
@@ -241,6 +256,9 @@ ENTRY(_DoubleExceptionVector)
 
 	rsr	a2, ps
 	_bbci.l	a2, PS_UM_BIT, .Lksp
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check if we are currently handling a window exception. */
@@ -248,6 +266,7 @@ ENTRY(_DoubleExceptionVector)
 
 	xsr	a0, depc		# get DEPC, save a0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	movi	a3, WINDOW_VECTORS_VADDR
 	_bltu	a0, a3, .Lfixup
@@ -274,6 +293,8 @@ ENTRY(_DoubleExceptionVector)
 
 	/* Restart window underflow exception.
 =======
+=======
+>>>>>>> v3.18
 	movi	a2, WINDOW_VECTORS_VADDR
 	_bltu	a0, a2, .Lfixup
 	addi	a2, a2, WINDOW_VECTORS_SIZE
@@ -296,6 +317,9 @@ ENTRY(_DoubleExceptionVector)
 	 *	a3 = excsave_1
 	 *	excsave_1 = orig a3
 	 *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * We return to the instruction in user space that caused the window
 	 * underflow exception. Therefore, we change window base to the value
@@ -305,16 +329,22 @@ ENTRY(_DoubleExceptionVector)
 	 * Note: We can trash the current window frame (a0...a3) and depc!
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	wsr	a2, depc		# save stack pointer temporarily
 	rsr	a0, ps
 	extui	a0, a0, PS_OWB_SHIFT, 4
 =======
+=======
+>>>>>>> v3.18
 _DoubleExceptionVector_WindowUnderflow:
 	xsr	a3, excsave1
 	wsr	a2, depc		# save stack pointer temporarily
 	rsr	a0, ps
 	extui	a0, a0, PS_OWB_SHIFT, PS_OWB_WIDTH
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wsr	a0, windowbase
 	rsync
@@ -323,6 +353,7 @@ _DoubleExceptionVector_WindowUnderflow:
 
 	xsr	a2, depc		# save a2 and get stack pointer
 	s32i	a0, a2, PT_AREG0
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	wsr	a3, excsave1		# save a3
@@ -341,6 +372,8 @@ _DoubleExceptionVector_WindowUnderflow:
 	l32r	a3, .Lexc_table
 	s32i	a2, a3, EXC_TABLE_DOUBLE_SAVE	# temporary variable
 =======
+=======
+>>>>>>> v3.18
 	xsr	a3, excsave1
 	rsr	a0, exccause
 	s32i	a0, a2, PT_DEPC		# mark it as a regular exception
@@ -386,6 +419,9 @@ _DoubleExceptionVector_WindowUnderflow:
 .Lfixup:/* Check for a fixup handler or if we were in a critical section. */
 
 	/* a0: depc, a1: a1, a2: trash, a3: exctable, depc: a0, excsave1: a3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Enter critical section. */
@@ -393,7 +429,11 @@ _DoubleExceptionVector_WindowUnderflow:
 	l32i	a2, a3, EXC_TABLE_FIXUP
 	s32i	a3, a3, EXC_TABLE_FIXUP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beq	a2, a3, .Lunrecoverable_fixup	# critical!
+=======
+	beq	a2, a3, .Lunrecoverable_fixup	# critical section
+>>>>>>> v3.18
 =======
 	beq	a2, a3, .Lunrecoverable_fixup	# critical section
 >>>>>>> v3.18
@@ -405,6 +445,7 @@ _DoubleExceptionVector_WindowUnderflow:
 
 .Ldflt:	/* Get stack pointer. */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	l32i	a3, a3, EXC_TABLE_DOUBLE_SAVE
 	addi	a2, a3, -PT_USER_SIZE
@@ -423,6 +464,8 @@ _DoubleExceptionVector_WindowUnderflow:
 	rsr	a0, exccause
 	addx4	a0, a0, a3
 =======
+=======
+>>>>>>> v3.18
 	l32i	a2, a3, EXC_TABLE_DOUBLE_SAVE
 	addi	a2, a2, -PT_USER_SIZE
 
@@ -438,11 +481,15 @@ _DoubleExceptionVector_WindowUnderflow:
 	rsr	a0, exccause
 	addx4	a0, a0, a3
 	xsr	a3, excsave1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	l32i	a0, a0, EXC_TABLE_FAST_USER
 	jx	a0
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * We only allow the ITLB miss exception if we are in kernel space.
 	 * All other exceptions are unexpected and thus unrecoverable!
@@ -479,6 +526,8 @@ _DoubleExceptionVector_WindowUnderflow:
 
 	.end literal_prefix
 =======
+=======
+>>>>>>> v3.18
 	 * Restart window OVERFLOW exception.
 	 * Currently:
 	 *	depc = orig a0,
@@ -611,13 +660,19 @@ _DoubleExceptionVector_handle_exception:
 	rotw	-3
 	j	1b
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ENDPROC(_DoubleExceptionVector)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Fixup handler for TLB miss in double exception handler for window owerflow.
  * We get here with windowbase set to the window that was being spilled and
  * a0 trashed. a0 bit 7 determines if this is a call8 (bit clear) or call12
@@ -728,6 +783,9 @@ ENDPROC(window_overflow_restore_a0_fixup)
 
 	.end literal_prefix
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Debug interrupt vector
  *

@@ -35,7 +35,10 @@
 #include <media/saa7127.h>
 #include <media/tveeprom.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-event.h>
@@ -356,7 +359,10 @@ static int ivtv_g_fmt_vid_cap(struct file *file, void *fh, struct v4l2_format *f
 	pixfmt->colorspace = V4L2_COLORSPACE_SMPTE170M;
 	pixfmt->field = V4L2_FIELD_INTERLACED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pixfmt->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (id->type == IVTV_ENC_STREAM_TYPE_YUV) {
@@ -426,7 +432,10 @@ static int ivtv_g_fmt_vid_out(struct file *file, void *fh, struct v4l2_format *f
 	pixfmt->colorspace = V4L2_COLORSPACE_SMPTE170M;
 	pixfmt->field = V4L2_FIELD_INTERLACED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pixfmt->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (id->type == IVTV_DEC_STREAM_TYPE_YUV) {
@@ -702,6 +711,7 @@ static int ivtv_s_fmt_vid_out_overlay(struct file *file, void *fh, struct v4l2_f
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ivtv_g_chip_ident(struct file *file, void *fh, struct v4l2_dbg_chip_ident *chip)
 {
 	struct ivtv *itv = fh2id(fh)->itv;
@@ -722,14 +732,21 @@ static int ivtv_g_chip_ident(struct file *file, void *fh, struct v4l2_dbg_chip_i
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int ivtv_itvc(struct ivtv *itv, bool get, u64 reg, u64 *val)
 {
 	volatile u8 __iomem *reg_start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+	if (reg & 0x3)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (reg & 0x3)
 		return -EINVAL;
@@ -756,6 +773,7 @@ static int ivtv_g_register(struct file *file, void *fh, struct v4l2_dbg_register
 	struct ivtv *itv = fh2id(fh)->itv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v4l2_chip_match_host(&reg->match)) {
 		reg->size = 4;
 		return ivtv_itvc(itv, true, reg->reg, &reg->val);
@@ -768,11 +786,16 @@ static int ivtv_g_register(struct file *file, void *fh, struct v4l2_dbg_register
 	reg->size = 4;
 	return ivtv_itvc(itv, true, reg->reg, &reg->val);
 >>>>>>> v3.18
+=======
+	reg->size = 4;
+	return ivtv_itvc(itv, true, reg->reg, &reg->val);
+>>>>>>> v3.18
 }
 
 static int ivtv_s_register(struct file *file, void *fh, const struct v4l2_dbg_register *reg)
 {
 	struct ivtv *itv = fh2id(fh)->itv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (v4l2_chip_match_host(&reg->match)) {
@@ -784,6 +807,11 @@ static int ivtv_s_register(struct file *file, void *fh, const struct v4l2_dbg_re
 	   subdev helper function. */
 	ivtv_call_all(itv, core, s_register, reg);
 	return 0;
+=======
+	u64 val = reg->val;
+
+	return ivtv_itvc(itv, false, reg->reg, &val);
+>>>>>>> v3.18
 =======
 	u64 val = reg->val;
 
@@ -1151,7 +1179,11 @@ void ivtv_s_std_enc(struct ivtv *itv, v4l2_std_id std)
 
 	/* Tuner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ivtv_call_all(itv, core, s_std, itv->std);
+=======
+	ivtv_call_all(itv, video, s_std, itv->std);
+>>>>>>> v3.18
 =======
 	ivtv_call_all(itv, video, s_std, itv->std);
 >>>>>>> v3.18
@@ -1449,7 +1481,10 @@ static int ivtv_g_fbuf(struct file *file, void *fh, struct v4l2_framebuffer *fb)
 	fb->fmt.colorspace = V4L2_COLORSPACE_SMPTE170M;
 	fb->fmt.field = V4L2_FIELD_INTERLACED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fb->fmt.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (fb->fmt.pixelformat != V4L2_PIX_FMT_PAL8)
@@ -1950,7 +1985,10 @@ static const struct v4l2_ioctl_ops ivtv_ioctl_ops = {
 	.vidioc_try_fmt_sliced_vbi_out 	    = ivtv_try_fmt_sliced_vbi_out,
 	.vidioc_g_sliced_vbi_cap 	    = ivtv_g_sliced_vbi_cap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident 		    = ivtv_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG

@@ -17,6 +17,11 @@
 #include <linux/interrupt.h>
 #include <linux/fsl_devices.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
@@ -185,7 +190,11 @@ static void __init mpc8272_ads_setup_arch(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

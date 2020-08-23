@@ -39,9 +39,12 @@
 #define FTDI_LUMEL_PD12_PID	0x6002
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Cyber Cortex AV by Fabulous Silicon (http://fabuloussilicon.com) */
 #define CYBER_CORTEX_AV_PID	0x8698
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -159,7 +162,10 @@
 #define XSENS_AWINDA_DONGLE_PID 0x0102
 #define XSENS_MTW_PID		0x0200	/* Xsens MTw */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XSENS_MTDEVBOARD_PID	0x0300	/* Motion Tracker Development Board */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define XSENS_CONVERTER_PID	0xD00D	/* Xsens USB-serial converter */
@@ -569,6 +575,7 @@
 #define FTDI_NT_ORIONLXM_PID	0x7c90	/* OrionLXm Substation Automation Platform */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Synapse Wireless product ids (FTDI_VID)
  * http://www.synapse-wireless.com
@@ -583,6 +590,8 @@
 #define FTDI_CUSTOMWARE_MINIPLEX2WI_PID	0xfd4a	/* MiniPlex-2Wi */
 #define FTDI_CUSTOMWARE_MINIPLEX3_PID	0xfd4b	/* MiniPlex-3 series */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -625,7 +634,10 @@
 #define RATOC_VENDOR_ID		0x0584
 #define RATOC_PRODUCT_ID_USB60F	0xb020
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RATOC_PRODUCT_ID_SCU18	0xb03a
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1464,11 +1476,17 @@
  */
 #define FTDI_EKEY_CONV_USB_PID		0xCB08	/* Converter USB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * GE Healthcare devices
  */
 #define GE_HEALTHCARE_VID		0x1901
 #define GE_HEALTHCARE_NEMO_TRACKER_PID	0x0015
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

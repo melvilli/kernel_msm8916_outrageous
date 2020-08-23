@@ -26,6 +26,7 @@
 static int st_magn_buffer_preenable(struct iio_dev *indio_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = st_sensors_set_enable(indio_dev, true);
@@ -36,6 +37,9 @@ static int st_magn_buffer_preenable(struct iio_dev *indio_dev)
 
 st_magn_set_enable_error:
 	return err;
+=======
+	return st_sensors_set_enable(indio_dev, true);
+>>>>>>> v3.18
 =======
 	return st_sensors_set_enable(indio_dev, true);
 >>>>>>> v3.18

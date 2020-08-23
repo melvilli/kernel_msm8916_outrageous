@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: major functions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -30,6 +34,11 @@
 
 const char driver_version[] = "mwifiex " VERSION " (%s) ";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static char *cal_data_cfg;
+module_param(cal_data_cfg, charp, 0);
+>>>>>>> v3.18
 =======
 static char *cal_data_cfg;
 module_param(cal_data_cfg, charp, 0);
@@ -117,12 +126,18 @@ static int mwifiex_unregister(struct mwifiex_adapter *adapter)
 	s32 i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&adapter->cmd_timer);
 =======
+=======
+>>>>>>> v3.18
 	if (adapter->if_ops.cleanup_if)
 		adapter->if_ops.cleanup_if(adapter);
 
 	del_timer_sync(&adapter->cmd_timer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Free private structures */
@@ -138,7 +153,10 @@ static int mwifiex_unregister(struct mwifiex_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mwifiex_process_rx(struct mwifiex_adapter *adapter)
 {
 	unsigned long flags;
@@ -171,6 +189,9 @@ exit_rx_proc:
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The main process.
@@ -210,7 +231,10 @@ process_start:
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* If we process interrupts first, it would increase RX pending
 		 * even further. Avoid this by checking if rx_pending has
 		 * crossed high threshold and schedule rx work queue
@@ -224,6 +248,9 @@ process_start:
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Handle pending interrupt if any */
 		if (adapter->int_status) {
@@ -234,6 +261,12 @@ process_start:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (adapter->rx_work_enabled && adapter->data_received)
+			queue_work(adapter->rx_workqueue, &adapter->rx_work);
+
+>>>>>>> v3.18
 =======
 		if (adapter->rx_work_enabled && adapter->data_received)
 			queue_work(adapter->rx_workqueue, &adapter->rx_work);
@@ -252,6 +285,10 @@ process_start:
 
 		if (IS_CARD_RX_RCVD(adapter)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			adapter->data_received = false;
+>>>>>>> v3.18
 =======
 			adapter->data_received = false;
 >>>>>>> v3.18
@@ -267,8 +304,13 @@ process_start:
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((adapter->scan_processing &&
 			     !adapter->scan_delay_cnt) || adapter->data_sent ||
+=======
+			if ((!adapter->scan_chan_gap_enabled &&
+			     adapter->scan_processing) || adapter->data_sent ||
+>>>>>>> v3.18
 =======
 			if ((!adapter->scan_chan_gap_enabled &&
 			     adapter->scan_processing) || adapter->data_sent ||
@@ -286,13 +328,19 @@ process_start:
 				mwifiex_handle_rx_packet(adapter, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Check for event */
 		if (adapter->event_received) {
 			adapter->event_received = false;
 			mwifiex_process_event(adapter);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Check for Cmd Resp */
 		if (adapter->cmd_resp_received) {
@@ -307,12 +355,15 @@ process_start:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Check for event */
 		if (adapter->event_received) {
 			adapter->event_received = false;
 			mwifiex_process_event(adapter);
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Check if we need to confirm Sleep Request
@@ -339,7 +390,12 @@ process_start:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((!adapter->scan_processing || adapter->scan_delay_cnt) &&
+=======
+		if ((adapter->scan_chan_gap_enabled ||
+		     !adapter->scan_processing) &&
+>>>>>>> v3.18
 =======
 		if ((adapter->scan_chan_gap_enabled ||
 		     !adapter->scan_processing) &&
@@ -371,7 +427,12 @@ process_start:
 
 	spin_lock_irqsave(&adapter->main_proc_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((adapter->int_status) || IS_CARD_RX_RCVD(adapter)) {
+=======
+	if (!adapter->delay_main_work &&
+	    (adapter->int_status || IS_CARD_RX_RCVD(adapter))) {
+>>>>>>> v3.18
 =======
 	if (!adapter->delay_main_work &&
 	    (adapter->int_status || IS_CARD_RX_RCVD(adapter))) {
@@ -409,7 +470,10 @@ static void mwifiex_free_adapter(struct mwifiex_adapter *adapter)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This function cancels all works in the queue and destroys
  * the main workqueue.
  */
@@ -427,6 +491,9 @@ static void mwifiex_terminate_workqueue(struct mwifiex_adapter *adapter)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This function gets firmware and initializes it.
  *
@@ -442,6 +509,12 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 	struct mwifiex_adapter *adapter = context;
 	struct mwifiex_fw_image fw;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct semaphore *sem = adapter->card_sem;
+	bool init_failed = false;
+	struct wireless_dev *wdev;
+>>>>>>> v3.18
 =======
 	struct semaphore *sem = adapter->card_sem;
 	bool init_failed = false;
@@ -452,7 +525,11 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 		dev_err(adapter->dev,
 			"Failed to get firmware %s\n", adapter->fw_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto done;
+=======
+		goto err_dnld_fw;
+>>>>>>> v3.18
 =======
 		goto err_dnld_fw;
 >>>>>>> v3.18
@@ -469,6 +546,7 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 		ret = mwifiex_dnld_fw(adapter, &fw);
 	if (ret == -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto done;
 
 	dev_notice(adapter->dev, "WLAN FW is active\n");
@@ -478,6 +556,8 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 	if (ret == -1) {
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 		goto err_dnld_fw;
 
 	dev_notice(adapter->dev, "WLAN FW is active\n");
@@ -499,6 +579,9 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 	ret = mwifiex_init_fw(adapter);
 	if (ret == -1) {
 		goto err_init_fw;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (!ret) {
 		adapter->hw_status = MWIFIEX_HW_STATUS_READY;
@@ -509,7 +592,11 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 				 adapter->init_wait_q_woken);
 	if (adapter->hw_status != MWIFIEX_HW_STATUS_READY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto done;
+=======
+		goto err_init_fw;
+>>>>>>> v3.18
 =======
 		goto err_init_fw;
 >>>>>>> v3.18
@@ -523,15 +610,21 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 	rtnl_lock();
 	/* Create station interface by default */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mwifiex_add_virtual_intf(adapter->wiphy, "mlan%d",
 				      NL80211_IFTYPE_STATION, NULL, NULL)) {
 		dev_err(adapter->dev, "cannot create default STA interface\n");
 =======
+=======
+>>>>>>> v3.18
 	wdev = mwifiex_add_virtual_intf(adapter->wiphy, "mlan%d",
 					NL80211_IFTYPE_STATION, NULL, NULL);
 	if (IS_ERR(wdev)) {
 		dev_err(adapter->dev, "cannot create default STA interface\n");
 		rtnl_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_add_intf;
 	}
@@ -543,6 +636,7 @@ static void mwifiex_fw_dpc(const struct firmware *firmware, void *context)
 
 err_add_intf:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mwifiex_del_virtual_intf(adapter->wiphy, priv->wdev);
 	rtnl_unlock();
 err_init_fw:
@@ -552,6 +646,8 @@ done:
 	release_firmware(adapter->firmware);
 	complete(&adapter->fw_load);
 =======
+=======
+>>>>>>> v3.18
 	wiphy_unregister(adapter->wiphy);
 	wiphy_free(adapter->wiphy);
 err_init_fw:
@@ -586,6 +682,9 @@ done:
 	if (init_failed)
 		mwifiex_free_adapter(adapter);
 	up(sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }
@@ -598,7 +697,10 @@ static int mwifiex_init_hw_fw(struct mwifiex_adapter *adapter)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&adapter->fw_load);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = request_firmware_nowait(THIS_MODULE, 1, adapter->fw_name,
@@ -635,6 +737,10 @@ mwifiex_close(struct net_device *dev)
 		cfg80211_scan_done(priv->scan_request, 1);
 		priv->scan_request = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		priv->scan_aborting = true;
+>>>>>>> v3.18
 =======
 		priv->scan_aborting = true;
 >>>>>>> v3.18
@@ -663,9 +769,12 @@ int mwifiex_queue_tx_pkt(struct mwifiex_private *priv, struct sk_buff *skb)
 	mwifiex_wmm_add_buf_txqueue(priv, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->adapter->scan_delay_cnt)
 		atomic_set(&priv->adapter->is_tx_received, true);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	queue_work(priv->adapter->workqueue, &priv->adapter->main_work);
@@ -683,7 +792,10 @@ mwifiex_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	struct sk_buff *new_skb;
 	struct mwifiex_txinfo *tx_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timeval tv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -725,6 +837,10 @@ mwifiex_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	tx_info->bss_num = priv->bss_num;
 	tx_info->bss_type = priv->bss_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tx_info->pkt_len = skb->len;
+>>>>>>> v3.18
 =======
 	tx_info->pkt_len = skb->len;
 >>>>>>> v3.18
@@ -737,8 +853,12 @@ mwifiex_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	 * MSDU lifetime expiry.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_gettimeofday(&tv);
 	skb->tstamp = timeval_to_ktime(tv);
+=======
+	__net_timestamp(skb);
+>>>>>>> v3.18
 =======
 	__net_timestamp(skb);
 >>>>>>> v3.18
@@ -762,8 +882,13 @@ mwifiex_set_mac_address(struct net_device *dev, void *addr)
 
 	/* Send request to firmware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mwifiex_send_cmd_sync(priv, HostCmd_CMD_802_11_MAC_ADDRESS,
 				    HostCmd_ACT_GEN_SET, 0, NULL);
+=======
+	ret = mwifiex_send_cmd(priv, HostCmd_CMD_802_11_MAC_ADDRESS,
+			       HostCmd_ACT_GEN_SET, 0, NULL, true);
+>>>>>>> v3.18
 =======
 	ret = mwifiex_send_cmd(priv, HostCmd_CMD_802_11_MAC_ADDRESS,
 			       HostCmd_ACT_GEN_SET, 0, NULL, true);
@@ -836,7 +961,12 @@ static struct net_device_stats *mwifiex_get_stats(struct net_device *dev)
 
 static u16
 <<<<<<< HEAD
+<<<<<<< HEAD
 mwifiex_netdev_select_wmm_queue(struct net_device *dev, struct sk_buff *skb)
+=======
+mwifiex_netdev_select_wmm_queue(struct net_device *dev, struct sk_buff *skb,
+				void *accel_priv, select_queue_fallback_t fallback)
+>>>>>>> v3.18
 =======
 mwifiex_netdev_select_wmm_queue(struct net_device *dev, struct sk_buff *skb,
 				void *accel_priv, select_queue_fallback_t fallback)
@@ -913,7 +1043,10 @@ int is_command_pending(struct mwifiex_adapter *adapter)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This is the RX work queue function.
  *
  * It handles the RX operations.
@@ -929,6 +1062,9 @@ static void mwifiex_rx_work_queue(struct work_struct *work)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This is the main work queue function.
  *
@@ -947,6 +1083,7 @@ static void mwifiex_main_work_queue(struct work_struct *work)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function cancels all works in the queue and destroys
  * the main workqueue.
  */
@@ -959,6 +1096,8 @@ mwifiex_terminate_workqueue(struct mwifiex_adapter *adapter)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This function adds the card.
@@ -989,6 +1128,10 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 
 	adapter->iface_type = iface_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	adapter->card_sem = sem;
+>>>>>>> v3.18
 =======
 	adapter->card_sem = sem;
 >>>>>>> v3.18
@@ -1000,7 +1143,10 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 	adapter->hs_activated = false;
 	init_waitqueue_head(&adapter->hs_activate_wait_q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->cmd_wait_q_required = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	init_waitqueue_head(&adapter->cmd_wait_q.wait);
@@ -1008,8 +1154,11 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 	adapter->scan_wait_q_woken = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->workqueue = create_workqueue("MWIFIEX_WORK_QUEUE");
 =======
+=======
+>>>>>>> v3.18
 	if (num_possible_cpus() > 1) {
 		adapter->rx_work_enabled = true;
 		pr_notice("rx work enabled, cpus %d\n", num_possible_cpus());
@@ -1018,6 +1167,9 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 	adapter->workqueue =
 		alloc_workqueue("MWIFIEX_WORK_QUEUE",
 				WQ_HIGHPRI | WQ_MEM_RECLAIM | WQ_UNBOUND, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!adapter->workqueue)
 		goto err_kmalloc;
@@ -1025,9 +1177,12 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 	INIT_WORK(&adapter->main_work, mwifiex_main_work_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register the device. Fill up the private data structure with relevant
 	   information from the card and request for the required IRQ. */
 =======
+=======
+>>>>>>> v3.18
 	if (adapter->rx_work_enabled) {
 		adapter->rx_workqueue = alloc_workqueue("MWIFIEX_RX_WORK_QUEUE",
 							WQ_HIGHPRI |
@@ -1044,6 +1199,9 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 
 	/* Register the device. Fill up the private data structure with relevant
 	   information from the card. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (adapter->if_ops.register_dev(adapter)) {
 		pr_err("%s: failed to register mwifiex device\n", __func__);
@@ -1056,7 +1214,10 @@ mwifiex_add_card(void *card, struct semaphore *sem,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	up(sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1066,10 +1227,13 @@ err_init_fw:
 	if (adapter->if_ops.unregister_dev)
 		adapter->if_ops.unregister_dev(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_registerdev:
 	adapter->surprise_removed = true;
 	mwifiex_terminate_workqueue(adapter);
 err_kmalloc:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((adapter->hw_status == MWIFIEX_HW_STATUS_FW_READY) ||
@@ -1082,12 +1246,18 @@ err_kmalloc:
 						 adapter->init_wait_q_woken);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 err_registerdev:
 	adapter->surprise_removed = true;
 	mwifiex_terminate_workqueue(adapter);
 err_kmalloc:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mwifiex_free_adapter(adapter);
 
@@ -1122,12 +1292,18 @@ int mwifiex_remove_card(struct mwifiex_adapter *adapter, struct semaphore *sem)
 		goto exit_remove;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* We can no longer handle interrupts once we start doing the teardown
 	 * below. */
 	if (adapter->if_ops.disable_int)
 		adapter->if_ops.disable_int(adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adapter->surprise_removed = true;
 
@@ -1171,6 +1347,7 @@ int mwifiex_remove_card(struct mwifiex_adapter *adapter, struct semaphore *sem)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv = adapter->priv[0];
 	if (!priv || !priv->wdev)
 		goto exit_remove;
@@ -1183,6 +1360,10 @@ int mwifiex_remove_card(struct mwifiex_adapter *adapter, struct semaphore *sem)
 		if (priv)
 			kfree(priv->wdev);
 	}
+=======
+	wiphy_unregister(adapter->wiphy);
+	wiphy_free(adapter->wiphy);
+>>>>>>> v3.18
 =======
 	wiphy_unregister(adapter->wiphy);
 	wiphy_free(adapter->wiphy);

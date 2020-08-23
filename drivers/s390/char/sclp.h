@@ -16,16 +16,22 @@
 /* maximum number of pages concerning our own memory management */
 #define MAX_KMEM_PAGES (sizeof(unsigned long) << 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_CONSOLE_PAGES	6
 
 #define EVTYP_OPCMD		0x01
 #define EVTYP_MSG		0x02
 =======
+=======
+>>>>>>> v3.18
 #define SCLP_CONSOLE_PAGES	6
 
 #define EVTYP_OPCMD		0x01
 #define EVTYP_MSG		0x02
 #define EVTYP_DIAG_TEST		0x07
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EVTYP_STATECHANGE	0x08
 #define EVTYP_PMSGCMD		0x09
@@ -41,6 +47,10 @@
 #define EVTYP_OPCMD_MASK	0x80000000
 #define EVTYP_MSG_MASK		0x40000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EVTYP_DIAG_TEST_MASK	0x02000000
+>>>>>>> v3.18
 =======
 #define EVTYP_DIAG_TEST_MASK	0x02000000
 >>>>>>> v3.18
@@ -112,6 +122,10 @@ struct init_sccb {
 
 extern u64 sclp_facilities;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -149,12 +163,18 @@ struct sclp_req {
 	void (*callback)(struct sclp_req *, void *data);
 	void *callback_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int queue_timeout;		/* request queue timeout (sec), set by
 					   caller of sclp_add_request(), if
 					   needed */
 	/* Internal fields */
 	unsigned long queue_expires;	/* request queue timeout (jiffies) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -164,6 +184,12 @@ struct sclp_req {
 #define SCLP_REQ_DONE	  0x03	/* request is completed successfully */
 #define SCLP_REQ_FAILED	  0x05	/* request is finally failed */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SCLP_REQ_QUEUED_TIMEOUT 0x06	/* request on queue timed out */
+
+#define SCLP_QUEUE_INTERVAL 5	/* timeout interval for request queue */
+>>>>>>> v3.18
 =======
 #define SCLP_REQ_QUEUED_TIMEOUT 0x06	/* request on queue timed out */
 
@@ -202,6 +228,11 @@ int sclp_deactivate(void);
 int sclp_reactivate(void);
 int sclp_service_call(sclp_cmdw_t command, void *sccb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int sclp_sync_request(sclp_cmdw_t command, void *sccb);
+int sclp_sync_request_timeout(sclp_cmdw_t command, void *sccb, int timeout);
+>>>>>>> v3.18
 =======
 int sclp_sync_request(sclp_cmdw_t command, void *sccb);
 int sclp_sync_request_timeout(sclp_cmdw_t command, void *sccb, int timeout);
@@ -211,7 +242,10 @@ int sclp_sdias_init(void);
 void sclp_sdias_exit(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int sclp_console_pages;
 extern int sclp_console_drop;
 extern unsigned long sclp_console_full;
@@ -219,6 +253,9 @@ extern u8 sclp_fac84;
 extern unsigned long long sclp_rzm;
 extern unsigned long long sclp_rnmax;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* useful inlines */
 

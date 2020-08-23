@@ -76,6 +76,7 @@ static inline int xen_acpi_get_pxm(acpi_handle h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xen_acpi_notify_hypervisor_state(u8 sleep_state,
 				     u32 pm1a_cnt, u32 pm1b_cnd);
 
@@ -85,6 +86,8 @@ static inline void xen_acpi_sleep_register(void)
 		acpi_os_set_prepare_sleep(
 			&xen_acpi_notify_hypervisor_state);
 =======
+=======
+>>>>>>> v3.18
 int xen_acpi_notify_hypervisor_sleep(u8 sleep_state,
 				     u32 pm1a_cnt, u32 pm1b_cnd);
 int xen_acpi_notify_hypervisor_extended_sleep(u8 sleep_state,
@@ -111,6 +114,9 @@ static inline void xen_acpi_sleep_register(void)
 
 		acpi_suspend_lowlevel = xen_acpi_suspend_lowlevel;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else

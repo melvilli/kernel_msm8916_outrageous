@@ -81,8 +81,11 @@ good_area:
 			if (fault & VM_FAULT_OOM) {
 				goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (fault & VM_FAULT_SIGSEGV) {
 				goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			} else if (fault & VM_FAULT_SIGBUS) {
@@ -212,16 +215,22 @@ unsigned long segv(struct faultinfo fi, unsigned long ip, int is_user,
 	unsigned long address = FAULT_ADDRESS(fi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_user && (address >= start_vm) && (address < end_vm)) {
 		flush_tlb_kernel_vm();
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!is_user && regs)
 		current->thread.segv_regs = container_of(regs, struct pt_regs, regs);
 
 	if (!is_user && (address >= start_vm) && (address < end_vm)) {
 		flush_tlb_kernel_vm();
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	else if (current->mm == NULL) {
@@ -245,7 +254,11 @@ unsigned long segv(struct faultinfo fi, unsigned long ip, int is_user,
 	catcher = current->thread.fault_catcher;
 	if (!err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -257,7 +270,11 @@ unsigned long segv(struct faultinfo fi, unsigned long ip, int is_user,
 		panic("fault_addr set but no fault catcher");
 	else if (!is_user && arch_fixup(ip, regs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -285,12 +302,18 @@ unsigned long segv(struct faultinfo fi, unsigned long ip, int is_user,
 		force_sig_info(SIGSEGV, &si, current);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 out:
 	if (regs)
 		current->thread.segv_regs = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

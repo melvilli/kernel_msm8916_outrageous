@@ -103,14 +103,20 @@
 #define CS4245_ADC_UNDRFL	0x01
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define CS4245_SPI_ADDRESS	(0x9e << 16)
 #define CS4245_SPI_WRITE	(0 << 16)
 =======
+=======
+>>>>>>> v3.18
 #define CS4245_SPI_ADDRESS_S	(0x9e << 16)
 #define CS4245_SPI_WRITE_S	(0 << 16)
 
 #define CS4245_SPI_ADDRESS	0x9e
 #define CS4245_SPI_WRITE	0
 #define CS4245_SPI_READ		1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

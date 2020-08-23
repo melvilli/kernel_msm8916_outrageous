@@ -56,7 +56,11 @@ static char *number(char *str, long num, int base, int size, int precision,
 	if (type & LEFT)
 		type &= ~ZEROPAD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (base < 2 || base > 36)
+=======
+	if (base < 2 || base > 16)
+>>>>>>> v3.18
 =======
 	if (base < 2 || base > 16)
 >>>>>>> v3.18

@@ -26,6 +26,10 @@
 #define	BFI_FLASH_CHUNK_SZ			256	/*!< Flash chunk size */
 #define	BFI_FLASH_CHUNK_SZ_WORDS	(BFI_FLASH_CHUNK_SZ/sizeof(u32))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BFI_FLASH_IMAGE_SZ		0x100000
+>>>>>>> v3.18
 =======
 #define BFI_FLASH_IMAGE_SZ		0x100000
 >>>>>>> v3.18
@@ -238,8 +242,11 @@ struct bfi_ioc_getattr_reply {
 
 #define BFI_IOC_FW_SIGNATURE	(0xbfadbfad)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BFI_IOC_MD5SUM_SZ	4
 =======
+=======
+>>>>>>> v3.18
 #define BFI_IOC_FW_INV_SIGN	(0xdeaddead)
 #define BFI_IOC_MD5SUM_SZ	4
 
@@ -263,6 +270,9 @@ struct bfi_ioc_fwver {
 #endif
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bfi_ioc_image_hdr {
 	u32	signature;	/*!< constant signature */
@@ -273,11 +283,14 @@ struct bfi_ioc_image_hdr {
 	u32	exec;		/*!< exec vector	*/
 	u32	bootenv;	/*!< firmware boot env */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	rsvd_b[4];
 	u32	md5sum[BFI_IOC_MD5SUM_SZ];
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u32	rsvd_b[2];
 	struct bfi_ioc_fwver fwver;
 	u32	md5sum[BFI_IOC_MD5SUM_SZ];
@@ -290,6 +303,9 @@ enum bfi_ioc_img_ver_cmp {
 	BFI_IOC_IMG_VER_BETTER
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BFI_FWBOOT_DEVMODE_OFF		4
 #define BFI_FWBOOT_TYPE_OFF		8

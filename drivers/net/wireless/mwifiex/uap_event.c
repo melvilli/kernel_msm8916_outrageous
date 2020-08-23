@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: AP event handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012, Marvell International Ltd.
+=======
+ * Copyright (C) 2012-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -25,6 +29,7 @@
 #include "main.h"
 #include "11n.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This function will return the pointer to station entry in station list
@@ -149,6 +154,10 @@ static void mwifiex_del_all_sta_list(struct mwifiex_private *priv)
 	spin_unlock_irqrestore(&priv->sta_list_spinlock, flags);
 	return;
 }
+=======
+
+
+>>>>>>> v3.18
 =======
 
 
@@ -281,9 +290,15 @@ int mwifiex_process_uap_event(struct mwifiex_private *priv)
 		dev_dbg(adapter->dev, "event: ADDBA Request\n");
 		if (priv->media_connected)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mwifiex_send_cmd_async(priv, HostCmd_CMD_11N_ADDBA_RSP,
 					       HostCmd_ACT_GEN_SET, 0,
 					       adapter->event_body);
+=======
+			mwifiex_send_cmd(priv, HostCmd_CMD_11N_ADDBA_RSP,
+					 HostCmd_ACT_GEN_SET, 0,
+					 adapter->event_body, false);
+>>>>>>> v3.18
 =======
 			mwifiex_send_cmd(priv, HostCmd_CMD_11N_ADDBA_RSP,
 					 HostCmd_ACT_GEN_SET, 0,
@@ -303,13 +318,19 @@ int mwifiex_process_uap_event(struct mwifiex_private *priv)
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case EVENT_EXT_SCAN_REPORT:
 		dev_dbg(adapter->dev, "event: EXT_SCAN Report\n");
 		if (adapter->ext_scan)
 			return mwifiex_handle_event_ext_scan_report(priv,
 						adapter->event_skb->data);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_dbg(adapter->dev, "event: unknown event id: %#x\n",
@@ -320,7 +341,10 @@ int mwifiex_process_uap_event(struct mwifiex_private *priv)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* This function deletes station entry from associated station list.
  * Also if both AP and STA are 11n enabled, RxReorder tables and TxBA stream
@@ -337,4 +361,7 @@ void mwifiex_uap_del_sta_data(struct mwifiex_private *priv,
 
 	return;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

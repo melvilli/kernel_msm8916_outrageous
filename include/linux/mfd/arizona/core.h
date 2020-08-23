@@ -19,7 +19,11 @@
 #include <linux/mfd/arizona/pdata.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARIZONA_MAX_CORE_SUPPLIES 3
+=======
+#define ARIZONA_MAX_CORE_SUPPLIES 2
+>>>>>>> v3.18
 =======
 #define ARIZONA_MAX_CORE_SUPPLIES 2
 >>>>>>> v3.18
@@ -28,6 +32,10 @@ enum arizona_type {
 	WM5102 = 1,
 	WM5110 = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WM8997 = 3,
+>>>>>>> v3.18
 =======
 	WM8997 = 3,
 >>>>>>> v3.18
@@ -54,8 +62,13 @@ enum arizona_type {
 #define ARIZONA_IRQ_DSP_IRQ7              18
 #define ARIZONA_IRQ_DSP_IRQ8              19
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARIZONA_IRQ_SPK_SHUTDOWN_WARN     20
 #define ARIZONA_IRQ_SPK_SHUTDOWN          21
+=======
+#define ARIZONA_IRQ_SPK_OVERHEAT_WARN     20
+#define ARIZONA_IRQ_SPK_OVERHEAT          21
+>>>>>>> v3.18
 =======
 #define ARIZONA_IRQ_SPK_OVERHEAT_WARN     20
 #define ARIZONA_IRQ_SPK_OVERHEAT          21
@@ -91,9 +104,12 @@ enum arizona_type {
 #define ARIZONA_IRQ_MICD_CLAMP_RISE	  50
 #define ARIZONA_IRQ_MICD_CLAMP_FALL	  51
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ARIZONA_NUM_IRQ                   52
 =======
+=======
+>>>>>>> v3.18
 #define ARIZONA_IRQ_HP3R_DONE             52
 #define ARIZONA_IRQ_HP3L_DONE             53
 #define ARIZONA_IRQ_HP2R_DONE             54
@@ -119,6 +135,9 @@ enum arizona_type {
 #define ARIZONA_IRQ_HP1L_SC_POS           74
 
 #define ARIZONA_NUM_IRQ                   75
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct snd_soc_dapm_context;
@@ -137,6 +156,11 @@ struct arizona {
 	struct arizona_pdata pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int external_dcvdd:1;
+
+>>>>>>> v3.18
 =======
 	unsigned int external_dcvdd:1;
 
@@ -153,8 +177,11 @@ struct arizona {
 	int clk32k_ref;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_context *dapm;
 =======
+=======
+>>>>>>> v3.18
 	bool ctrlif_error;
 
 	struct snd_soc_dapm_context *dapm;
@@ -164,6 +191,9 @@ struct arizona {
 
 	uint16_t dac_comp_coeff;
 	uint8_t dac_comp_enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -178,11 +208,17 @@ int arizona_set_irq_wake(struct arizona *arizona, int irq, int on);
 int wm5102_patch(struct arizona *arizona);
 int wm5110_patch(struct arizona *arizona);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int wm8997_patch(struct arizona *arizona);
 
 extern int arizona_of_get_named_gpio(struct arizona *arizona, const char *prop,
 				     bool mandatory);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

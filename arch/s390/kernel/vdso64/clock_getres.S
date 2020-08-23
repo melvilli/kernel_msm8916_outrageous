@@ -20,20 +20,32 @@
 __kernel_clock_getres:
 	.cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	larl	%r1,4f
 	cghi	%r2,__CLOCK_REALTIME_COARSE
 	je	0f
 	cghi	%r2,__CLOCK_MONOTONIC_COARSE
 	je	0f
 	larl	%r1,3f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cghi	%r2,__CLOCK_REALTIME
 	je	0f
 	cghi	%r2,__CLOCK_MONOTONIC
 	je	0f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cghi	%r2,-2		/* CLOCK_THREAD_CPUTIME_ID for this thread */
+=======
+	cghi	%r2,__CLOCK_THREAD_CPUTIME_ID
+	je	0f
+	cghi	%r2,-2		/* Per-thread CPUCLOCK with PID=0, VIRT=1 */
+>>>>>>> v3.18
 =======
 	cghi	%r2,__CLOCK_THREAD_CPUTIME_ID
 	je	0f
@@ -46,7 +58,10 @@ __kernel_clock_getres:
 0:	ltgr	%r3,%r3
 	jz	1f				/* res == NULL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	larl	%r1,3f
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lg	%r0,0(%r1)
@@ -59,6 +74,10 @@ __kernel_clock_getres:
 	br	%r14
 3:	.quad	__CLOCK_REALTIME_RES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+4:	.quad	__CLOCK_COARSE_RES
+>>>>>>> v3.18
 =======
 4:	.quad	__CLOCK_COARSE_RES
 >>>>>>> v3.18

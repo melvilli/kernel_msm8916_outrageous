@@ -597,7 +597,12 @@ static int sixpack_open(struct tty_struct *tty)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct sixpack), "sp%d", sp_setup);
+=======
+	dev = alloc_netdev(sizeof(struct sixpack), "sp%d", NET_NAME_UNKNOWN,
+			   sp_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(struct sixpack), "sp%d", NET_NAME_UNKNOWN,
 			   sp_setup);
@@ -668,7 +673,12 @@ static int sixpack_open(struct tty_struct *tty)
 
 	/* Now we're ready to register. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (register_netdev(dev))
+=======
+	err = register_netdev(dev);
+	if (err)
+>>>>>>> v3.18
 =======
 	err = register_netdev(dev);
 	if (err)

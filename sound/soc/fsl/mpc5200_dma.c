@@ -11,6 +11,11 @@
 #include <linux/dma-mapping.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -204,10 +209,13 @@ static const struct snd_pcm_hardware psc_dma_hardware = {
 	.formats = SNDRV_PCM_FMTBIT_S8 | SNDRV_PCM_FMTBIT_S16_BE |
 		SNDRV_PCM_FMTBIT_S24_BE | SNDRV_PCM_FMTBIT_S32_BE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rate_min = 8000,
 	.rate_max = 48000,
 	.channels_min = 1,
 	.channels_max = 2,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.period_bytes_max	= 1024 * 1024,
@@ -308,7 +316,10 @@ static struct snd_pcm_ops psc_dma_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 psc_dma_dmamask = DMA_BIT_MASK(32);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int psc_dma_new(struct snd_soc_pcm_runtime *rtd)
@@ -319,7 +330,11 @@ static int psc_dma_new(struct snd_soc_pcm_runtime *rtd)
 	struct psc_dma *psc_dma = snd_soc_dai_get_drvdata(rtd->cpu_dai);
 	size_t size = psc_dma_hardware.buffer_bytes_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -328,10 +343,16 @@ static int psc_dma_new(struct snd_soc_pcm_runtime *rtd)
 		card, dai, pcm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!card->dev->dma_mask)
 		card->dev->dma_mask = &psc_dma_dmamask;
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	rc = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 =======
 	rc = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
 	if (rc)

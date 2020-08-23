@@ -7,7 +7,11 @@
  *			     Mark D. Studebaker <mdsxyz123@yahoo.com>
  * Ported to Linux 2.6 by Aurelien Jarno <aurelien@aurel32.net> with
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the help of Jean Delvare <khali@linux-fr.org>
+=======
+ * the help of Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * the help of Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -759,7 +763,11 @@ static struct sis5595_data *sis5595_update_device(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sis5595_pci_ids) = {
+=======
+static const struct pci_device_id sis5595_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sis5595_pci_ids[] = {
 >>>>>>> v3.18

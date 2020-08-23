@@ -26,15 +26,21 @@
 #define GHASH_DIGEST_SIZE	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void clmul_ghash_mul(char *dst, const be128 *shash);
 
 void clmul_ghash_update(char *dst, const char *src, unsigned int srclen,
 			const be128 *shash);
 =======
+=======
+>>>>>>> v3.18
 void clmul_ghash_mul(char *dst, const u128 *shash);
 
 void clmul_ghash_update(char *dst, const char *src, unsigned int srclen,
 			const u128 *shash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ghash_async_ctx {
@@ -43,7 +49,11 @@ struct ghash_async_ctx {
 
 struct ghash_ctx {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	be128 shash;
+=======
+	u128 shash;
+>>>>>>> v3.18
 =======
 	u128 shash;
 >>>>>>> v3.18
@@ -80,17 +90,23 @@ static int ghash_setkey(struct crypto_shash *tfm,
 	b = be64_to_cpu(x->b);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->shash.a = (__be64)((b << 1) | (a >> 63));
 	ctx->shash.b = (__be64)((a << 1) | (b >> 63));
 
 	if (a >> 63)
 		ctx->shash.b ^= cpu_to_be64(0xc2);
 =======
+=======
+>>>>>>> v3.18
 	ctx->shash.a = (b << 1) | (a >> 63);
 	ctx->shash.b = (a << 1) | (b >> 63);
 
 	if (a >> 63)
 		ctx->shash.b ^= ((u64)0xc2) << 56;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -238,6 +254,7 @@ static int ghash_async_final(struct ahash_request *req)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ghash_async_import(struct ahash_request *req, const void *in)
 {
 	struct ahash_request *cryptd_req = ahash_request_ctx(req);
@@ -261,6 +278,8 @@ static int ghash_async_export(struct ahash_request *req, void *out)
 
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ghash_async_digest(struct ahash_request *req)
@@ -331,6 +350,7 @@ static struct ahash_alg ghash_async_alg = {
 	.setkey		= ghash_async_setkey,
 	.digest		= ghash_async_digest,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.export		= ghash_async_export,
 	.import		= ghash_async_import,
 	.halg = {
@@ -340,12 +360,19 @@ static struct ahash_alg ghash_async_alg = {
 	.halg = {
 		.digestsize	= GHASH_DIGEST_SIZE,
 >>>>>>> v3.18
+=======
+	.halg = {
+		.digestsize	= GHASH_DIGEST_SIZE,
+>>>>>>> v3.18
 		.base = {
 			.cra_name		= "ghash",
 			.cra_driver_name	= "ghash-clmulni",
 			.cra_priority		= 400,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.cra_ctxsize		= sizeof(struct ghash_async_ctx),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			.cra_flags		= CRYPTO_ALG_TYPE_AHASH | CRYPTO_ALG_ASYNC,
@@ -399,7 +426,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("GHASH Message Digest Algorithm, "
 		   "acclerated by PCLMULQDQ-NI");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("ghash");
+=======
+MODULE_ALIAS("ghash");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("ghash");
 >>>>>>> v3.18

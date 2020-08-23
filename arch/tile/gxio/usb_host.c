@@ -27,7 +27,11 @@
 #include <gxio/usb_host.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_usb_host_init(gxio_usb_host_context_t * context, int usb_index,
+=======
+int gxio_usb_host_init(gxio_usb_host_context_t *context, int usb_index,
+>>>>>>> v3.18
 =======
 int gxio_usb_host_init(gxio_usb_host_context_t *context, int usb_index,
 >>>>>>> v3.18
@@ -68,7 +72,11 @@ int gxio_usb_host_init(gxio_usb_host_context_t *context, int usb_index,
 EXPORT_SYMBOL_GPL(gxio_usb_host_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_usb_host_destroy(gxio_usb_host_context_t * context)
+=======
+int gxio_usb_host_destroy(gxio_usb_host_context_t *context)
+>>>>>>> v3.18
 =======
 int gxio_usb_host_destroy(gxio_usb_host_context_t *context)
 >>>>>>> v3.18
@@ -85,7 +93,11 @@ int gxio_usb_host_destroy(gxio_usb_host_context_t *context)
 EXPORT_SYMBOL_GPL(gxio_usb_host_destroy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t * context)
+=======
+void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t *context)
+>>>>>>> v3.18
 =======
 void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t *context)
 >>>>>>> v3.18
@@ -96,7 +108,11 @@ void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t *context)
 EXPORT_SYMBOL_GPL(gxio_usb_host_get_reg_start);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 size_t gxio_usb_host_get_reg_len(gxio_usb_host_context_t * context)
+=======
+size_t gxio_usb_host_get_reg_len(gxio_usb_host_context_t *context)
+>>>>>>> v3.18
 =======
 size_t gxio_usb_host_get_reg_len(gxio_usb_host_context_t *context)
 >>>>>>> v3.18

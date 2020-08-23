@@ -85,6 +85,11 @@
 #define R2057_LOGEN_SEL_PKDET			0x04d
 #define R2057_CMOSBUF_SHAREIQ_PTAT		0x04e
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/* MISC core 0 */
+>>>>>>> v3.18
 =======
 
 /* MISC core 0 */
@@ -210,6 +215,11 @@
 #define R2057_LPF_GAIN_CORE0			0x0d2
 #define R2057_DACBUF_IDACS_BW_CORE0		0x0d3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/* MISC core 1 */
+>>>>>>> v3.18
 =======
 
 /* MISC core 1 */
@@ -335,6 +345,10 @@
 #define R2057_LPF_GAIN_CORE1			0x157
 #define R2057_DACBUF_IDACS_BW_CORE1		0x158
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -360,6 +374,11 @@
 #define R2057_RCCAL_HPC_VAL			0x16c
 #define R2057_RCCAL_OVERRIDES			0x16d
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/* TX core 0 */
+>>>>>>> v3.18
 =======
 
 /* TX core 0 */
@@ -382,6 +401,11 @@
 #define R2057_TX0_TXRXCOUPLE_5G_ATTEN		0x17f
 #define R2057_TX0_TXRXCOUPLE_5G_PWRUP		0x180
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/* TX core 1 */
+>>>>>>> v3.18
 =======
 
 /* TX core 1 */
@@ -404,6 +428,10 @@
 #define R2057_TX1_TXRXCOUPLE_5G_ATTEN		0x19f
 #define R2057_TX1_TXRXCOUPLE_5G_PWRUP		0x1a0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -454,9 +482,12 @@
 #define R2057_VCM_MASK				0x7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r2057_upload_inittabs(struct b43_wldev *dev);
 
 =======
+=======
+>>>>>>> v3.18
 struct b43_nphy_chantabent_rev7 {
 	/* The channel frequency in MHz */
 	u16 freq;
@@ -525,5 +556,8 @@ void r2057_get_chantabent_rev7(struct b43_wldev *dev, u16 freq,
 			       const struct b43_nphy_chantabent_rev7 **tabent_r7,
 			       const struct b43_nphy_chantabent_rev7_2g **tabent_r7_2g);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* B43_RADIO_2057_H_ */

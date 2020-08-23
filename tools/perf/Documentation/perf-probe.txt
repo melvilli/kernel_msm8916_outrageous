@@ -105,6 +105,12 @@ OPTIONS
 	space tracing. Can also be used with --funcs option.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+--demangle-kernel::
+	Demangle kernel symbols.
+
+>>>>>>> v3.18
 =======
 --demangle-kernel::
 	Demangle kernel symbols.
@@ -143,6 +149,11 @@ Each probe argument follows below syntax.
 'TYPE' casts the type of this argument (optional). If omitted, perf probe automatically set the type based on debuginfo. You can specify 'string' type only for the local variable or structure member which is an array of or a pointer to 'char' or 'unsigned char' type.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+On x86 systems %REG is always the short form of the register: for example %AX. %RAX or %EAX is not valid.
+
+>>>>>>> v3.18
 =======
 On x86 systems %REG is always the short form of the register: for example %AX. %RAX or %EAX is not valid.
 

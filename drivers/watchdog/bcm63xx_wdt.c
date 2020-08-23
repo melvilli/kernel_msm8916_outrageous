@@ -16,7 +16,11 @@
 #include <linux/errno.h>
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -49,7 +53,10 @@ static struct {
 	void __iomem *regs;
 	struct timer_list timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int default_ticks;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long inuse;
@@ -257,7 +264,12 @@ static int bcm63xx_wdt_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcm63xx_wdt_device.regs = ioremap_nocache(r->start, resource_size(r));
+=======
+	bcm63xx_wdt_device.regs = devm_ioremap_nocache(&pdev->dev, r->start,
+							resource_size(r));
+>>>>>>> v3.18
 =======
 	bcm63xx_wdt_device.regs = devm_ioremap_nocache(&pdev->dev, r->start,
 							resource_size(r));
@@ -271,7 +283,11 @@ static int bcm63xx_wdt_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(&pdev->dev, "failed to register wdt timer isr\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto unmap;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -298,8 +314,11 @@ static int bcm63xx_wdt_probe(struct platform_device *pdev)
 unregister_timer:
 	bcm63xx_timer_unregister(TIMER_WDT_ID);
 <<<<<<< HEAD
+<<<<<<< HEAD
 unmap:
 	iounmap(bcm63xx_wdt_device.regs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -313,7 +332,10 @@ static int bcm63xx_wdt_remove(struct platform_device *pdev)
 	misc_deregister(&bcm63xx_wdt_miscdev);
 	bcm63xx_timer_unregister(TIMER_WDT_ID);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(bcm63xx_wdt_device.regs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -341,7 +363,10 @@ MODULE_AUTHOR("Florian Fainelli <florian@openwrt.org>");
 MODULE_DESCRIPTION("Driver for the Broadcom BCM63xx SoC watchdog");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:bcm63xx-wdt");

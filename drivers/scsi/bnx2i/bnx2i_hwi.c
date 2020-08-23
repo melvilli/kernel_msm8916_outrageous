@@ -1,16 +1,22 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2i_hwi.c: Broadcom NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2012 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
 =======
+=======
+>>>>>>> v3.18
 /* bnx2i_hwi.c: QLogic NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2013 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,7 +25,12 @@
  *
  * Written by: Anil Veerabhadrappa (anilgv@broadcom.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+=======
+ * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+ * Maintained by: QLogic-Storage-Upstream@qlogic.com
+>>>>>>> v3.18
 =======
  * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
  * Maintained by: QLogic-Storage-Upstream@qlogic.com
@@ -76,7 +87,11 @@ static void bnx2i_adjust_qp_size(struct bnx2i_hba *hba)
 	 */
 	/* adjust SQ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_elements_per_pg = PAGE_SIZE / BNX2I_SQ_WQE_SIZE;
+=======
+	num_elements_per_pg = CNIC_PAGE_SIZE / BNX2I_SQ_WQE_SIZE;
+>>>>>>> v3.18
 =======
 	num_elements_per_pg = CNIC_PAGE_SIZE / BNX2I_SQ_WQE_SIZE;
 >>>>>>> v3.18
@@ -88,7 +103,11 @@ static void bnx2i_adjust_qp_size(struct bnx2i_hba *hba)
 
 	/* adjust CQ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_elements_per_pg = PAGE_SIZE / BNX2I_CQE_SIZE;
+=======
+	num_elements_per_pg = CNIC_PAGE_SIZE / BNX2I_CQE_SIZE;
+>>>>>>> v3.18
 =======
 	num_elements_per_pg = CNIC_PAGE_SIZE / BNX2I_CQE_SIZE;
 >>>>>>> v3.18
@@ -100,7 +119,11 @@ static void bnx2i_adjust_qp_size(struct bnx2i_hba *hba)
 
 	/* adjust RQ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_elements_per_pg = PAGE_SIZE / BNX2I_RQ_WQE_SIZE;
+=======
+	num_elements_per_pg = CNIC_PAGE_SIZE / BNX2I_RQ_WQE_SIZE;
+>>>>>>> v3.18
 =======
 	num_elements_per_pg = CNIC_PAGE_SIZE / BNX2I_RQ_WQE_SIZE;
 >>>>>>> v3.18
@@ -153,7 +176,11 @@ static void bnx2i_iscsi_license_error(struct bnx2i_hba *hba, u32 error_code)
 /**
  * bnx2i_arm_cq_event_coalescing - arms CQ to enable EQ notification
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		endpoint (transport indentifier) structure
+=======
+ * @ep:		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -787,7 +814,11 @@ void bnx2i_send_cmd_cleanup_req(struct bnx2i_hba *hba, struct bnx2i_cmd *cmd)
  * bnx2i_send_conn_destroy - initiates iscsi connection teardown process
  * @hba:	adapter structure pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		endpoint (transport indentifier) structure
+=======
+ * @ep:		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -826,7 +857,11 @@ int bnx2i_send_conn_destroy(struct bnx2i_hba *hba, struct bnx2i_endpoint *ep)
  * bnx2i_570x_send_conn_ofld_req - initiates iscsi conn context setup process
  * @hba: 		adapter structure pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep: 		endpoint (transport indentifier) structure
+=======
+ * @ep: 		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep: 		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -890,7 +925,11 @@ static int bnx2i_570x_send_conn_ofld_req(struct bnx2i_hba *hba,
  * bnx2i_5771x_send_conn_ofld_req - initiates iscsi connection context creation
  * @hba: 		adapter structure pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep: 		endpoint (transport indentifier) structure
+=======
+ * @ep: 		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep: 		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -963,7 +1002,11 @@ static int bnx2i_5771x_send_conn_ofld_req(struct bnx2i_hba *hba,
  *
  * @hba: 		adapter structure pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep: 		endpoint (transport indentifier) structure
+=======
+ * @ep: 		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep: 		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -986,7 +1029,11 @@ int bnx2i_send_conn_ofld_req(struct bnx2i_hba *hba, struct bnx2i_endpoint *ep)
 /**
  * setup_qp_page_tables - iscsi QP page table setup function
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		endpoint (transport indentifier) structure
+=======
+ * @ep:		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -1010,7 +1057,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 	/* SQ page table */
 	memset(ep->qp.sq_pgtbl_virt, 0, ep->qp.sq_pgtbl_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_pages = ep->qp.sq_mem_size / PAGE_SIZE;
+=======
+	num_pages = ep->qp.sq_mem_size / CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	num_pages = ep->qp.sq_mem_size / CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1028,7 +1079,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 			*ptbl = (u32) ((u64) page >> 32);
 			ptbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page += PAGE_SIZE;
+=======
+			page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 			page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1040,7 +1095,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 			*ptbl = (u32) page;
 			ptbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page += PAGE_SIZE;
+=======
+			page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 			page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1050,7 +1109,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 	/* RQ page table */
 	memset(ep->qp.rq_pgtbl_virt, 0, ep->qp.rq_pgtbl_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_pages = ep->qp.rq_mem_size / PAGE_SIZE;
+=======
+	num_pages = ep->qp.rq_mem_size / CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	num_pages = ep->qp.rq_mem_size / CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1068,7 +1131,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 			*ptbl = (u32) ((u64) page >> 32);
 			ptbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page += PAGE_SIZE;
+=======
+			page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 			page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1080,7 +1147,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 			*ptbl = (u32) page;
 			ptbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page += PAGE_SIZE;
+=======
+			page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 			page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1090,7 +1161,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 	/* CQ page table */
 	memset(ep->qp.cq_pgtbl_virt, 0, ep->qp.cq_pgtbl_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_pages = ep->qp.cq_mem_size / PAGE_SIZE;
+=======
+	num_pages = ep->qp.cq_mem_size / CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	num_pages = ep->qp.cq_mem_size / CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1108,7 +1183,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 			*ptbl = (u32) ((u64) page >> 32);
 			ptbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page += PAGE_SIZE;
+=======
+			page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 			page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1120,7 +1199,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
 			*ptbl = (u32) page;
 			ptbl++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page += PAGE_SIZE;
+=======
+			page += CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 			page += CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1133,7 +1216,11 @@ static void setup_qp_page_tables(struct bnx2i_endpoint *ep)
  * bnx2i_alloc_qp_resc - allocates required resources for QP.
  * @hba:	adapter structure pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		endpoint (transport indentifier) structure
+=======
+ * @ep:		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -1155,17 +1242,23 @@ int bnx2i_alloc_qp_resc(struct bnx2i_hba *hba, struct bnx2i_endpoint *ep)
 	ep->qp.sq_mem_size = hba->max_sqes * BNX2I_SQ_WQE_SIZE;
 	ep->qp.sq_mem_size =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(ep->qp.sq_mem_size + (PAGE_SIZE - 1)) & PAGE_MASK;
 	ep->qp.sq_pgtbl_size =
 		(ep->qp.sq_mem_size / PAGE_SIZE) * sizeof(void *);
 	ep->qp.sq_pgtbl_size =
 		(ep->qp.sq_pgtbl_size + (PAGE_SIZE - 1)) & PAGE_MASK;
 =======
+=======
+>>>>>>> v3.18
 		(ep->qp.sq_mem_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
 	ep->qp.sq_pgtbl_size =
 		(ep->qp.sq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
 	ep->qp.sq_pgtbl_size =
 		(ep->qp.sq_pgtbl_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ep->qp.sq_pgtbl_virt =
@@ -1200,17 +1293,23 @@ int bnx2i_alloc_qp_resc(struct bnx2i_hba *hba, struct bnx2i_endpoint *ep)
 	ep->qp.cq_mem_size = hba->max_cqes * BNX2I_CQE_SIZE;
 	ep->qp.cq_mem_size =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(ep->qp.cq_mem_size + (PAGE_SIZE - 1)) & PAGE_MASK;
 	ep->qp.cq_pgtbl_size =
 		(ep->qp.cq_mem_size / PAGE_SIZE) * sizeof(void *);
 	ep->qp.cq_pgtbl_size =
 		(ep->qp.cq_pgtbl_size + (PAGE_SIZE - 1)) & PAGE_MASK;
 =======
+=======
+>>>>>>> v3.18
 		(ep->qp.cq_mem_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
 	ep->qp.cq_pgtbl_size =
 		(ep->qp.cq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
 	ep->qp.cq_pgtbl_size =
 		(ep->qp.cq_pgtbl_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ep->qp.cq_pgtbl_virt =
@@ -1251,17 +1350,23 @@ int bnx2i_alloc_qp_resc(struct bnx2i_hba *hba, struct bnx2i_endpoint *ep)
 	ep->qp.rq_mem_size = hba->max_rqes * BNX2I_RQ_WQE_SIZE;
 	ep->qp.rq_mem_size =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(ep->qp.rq_mem_size + (PAGE_SIZE - 1)) & PAGE_MASK;
 	ep->qp.rq_pgtbl_size =
 		(ep->qp.rq_mem_size / PAGE_SIZE) * sizeof(void *);
 	ep->qp.rq_pgtbl_size =
 		(ep->qp.rq_pgtbl_size + (PAGE_SIZE - 1)) & PAGE_MASK;
 =======
+=======
+>>>>>>> v3.18
 		(ep->qp.rq_mem_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
 	ep->qp.rq_pgtbl_size =
 		(ep->qp.rq_mem_size / CNIC_PAGE_SIZE) * sizeof(void *);
 	ep->qp.rq_pgtbl_size =
 		(ep->qp.rq_pgtbl_size + (CNIC_PAGE_SIZE - 1)) & CNIC_PAGE_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ep->qp.rq_pgtbl_virt =
@@ -1306,7 +1411,11 @@ mem_alloc_err:
  * bnx2i_free_qp_resc - free memory resources held by QP
  * @hba:	adapter structure pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:	endpoint (transport indentifier) structure
+=======
+ * @ep:	endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:	endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -1389,7 +1498,11 @@ int bnx2i_send_fw_iscsi_init_msg(struct bnx2i_hba *hba)
 
 	iscsi_init.flags =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ISCSI_PAGE_SIZE_4K << ISCSI_KWQE_INIT1_PAGE_SIZE_SHIFT;
+=======
+		(CNIC_PAGE_BITS - 8) << ISCSI_KWQE_INIT1_PAGE_SIZE_SHIFT;
+>>>>>>> v3.18
 =======
 		(CNIC_PAGE_BITS - 8) << ISCSI_KWQE_INIT1_PAGE_SIZE_SHIFT;
 >>>>>>> v3.18
@@ -1411,6 +1524,7 @@ int bnx2i_send_fw_iscsi_init_msg(struct bnx2i_hba *hba)
 	iscsi_init.num_ccells_per_conn = hba->num_ccell;
 	iscsi_init.num_tasks_per_conn = hba->max_sqes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iscsi_init.sq_wqes_per_page = PAGE_SIZE / BNX2I_SQ_WQE_SIZE;
 	iscsi_init.sq_num_wqes = hba->max_sqes;
 	iscsi_init.cq_log_wqes_per_page =
@@ -1421,6 +1535,8 @@ int bnx2i_send_fw_iscsi_init_msg(struct bnx2i_hba *hba)
 	iscsi_init.sq_num_pages = (hba->max_sqes * BNX2I_SQ_WQE_SIZE +
 				   (PAGE_SIZE - 1)) / PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	iscsi_init.sq_wqes_per_page = CNIC_PAGE_SIZE / BNX2I_SQ_WQE_SIZE;
 	iscsi_init.sq_num_wqes = hba->max_sqes;
 	iscsi_init.cq_log_wqes_per_page =
@@ -1430,6 +1546,9 @@ int bnx2i_send_fw_iscsi_init_msg(struct bnx2i_hba *hba)
 				   (CNIC_PAGE_SIZE - 1)) / CNIC_PAGE_SIZE;
 	iscsi_init.sq_num_pages = (hba->max_sqes * BNX2I_SQ_WQE_SIZE +
 				   (CNIC_PAGE_SIZE - 1)) / CNIC_PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iscsi_init.rq_buffer_size = BNX2I_RQ_WQE_SIZE;
 	iscsi_init.rq_num_wqes = hba->max_rqes;
@@ -1496,7 +1615,11 @@ int bnx2i_process_scsi_cmd_resp(struct iscsi_session *session,
 
 	resp_cqe = (struct bnx2i_cmd_response *)cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->back_lock);
 >>>>>>> v3.18
@@ -1571,7 +1694,11 @@ done:
 			     conn->data, datalen);
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->back_lock);
 >>>>>>> v3.18
@@ -1600,7 +1727,11 @@ static int bnx2i_process_login_resp(struct iscsi_session *session,
 
 	login = (struct bnx2i_login_response *) cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1647,7 +1778,11 @@ static int bnx2i_process_login_resp(struct iscsi_session *session,
 		bnx2i_conn->gen_pdu.resp_wr_ptr - bnx2i_conn->gen_pdu.resp_buf);
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -1676,7 +1811,11 @@ static int bnx2i_process_text_resp(struct iscsi_session *session,
 
 	text = (struct bnx2i_text_response *) cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1716,7 +1855,11 @@ static int bnx2i_process_text_resp(struct iscsi_session *session,
 			     bnx2i_conn->gen_pdu.resp_buf);
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -1743,7 +1886,11 @@ static int bnx2i_process_tmf_resp(struct iscsi_session *session,
 
 	tmf_cqe = (struct bnx2i_tmf_response *)cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1763,7 +1910,11 @@ static int bnx2i_process_tmf_resp(struct iscsi_session *session,
 	__iscsi_complete_pdu(conn, (struct iscsi_hdr *)resp_hdr, NULL, 0);
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -1790,7 +1941,11 @@ static int bnx2i_process_logout_resp(struct iscsi_session *session,
 
 	logout = (struct bnx2i_logout_response *) cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1818,7 +1973,11 @@ static int bnx2i_process_logout_resp(struct iscsi_session *session,
 	bnx2i_conn->ep->state = EP_STATE_LOGOUT_RESP_RCVD;
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -1843,7 +2002,11 @@ static void bnx2i_process_nopin_local_cmpl(struct iscsi_session *session,
 
 	nop_in = (struct bnx2i_nop_in_msg *)cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1852,7 +2015,11 @@ static void bnx2i_process_nopin_local_cmpl(struct iscsi_session *session,
 	if (task)
 		__iscsi_put_task(task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -1895,7 +2062,11 @@ static int bnx2i_process_nopin_mesg(struct iscsi_session *session,
 	nop_in = (struct bnx2i_nop_in_msg *)cqe;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1925,7 +2096,11 @@ static int bnx2i_process_nopin_mesg(struct iscsi_session *session,
 done:
 	__iscsi_complete_pdu(conn, (struct iscsi_hdr *)hdr, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -1962,7 +2137,11 @@ static void bnx2i_process_async_mesg(struct iscsi_session *session,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -1985,7 +2164,11 @@ static void bnx2i_process_async_mesg(struct iscsi_session *session,
 	__iscsi_complete_pdu(bnx2i_conn->cls_conn->dd_data,
 			     (struct iscsi_hdr *)resp_hdr, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -2016,7 +2199,11 @@ static void bnx2i_process_reject_mesg(struct iscsi_session *session,
 		bnx2i_unsol_pdu_adjust_rq(bnx2i_conn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -2031,7 +2218,11 @@ static void bnx2i_process_reject_mesg(struct iscsi_session *session,
 	__iscsi_complete_pdu(conn, (struct iscsi_hdr *)hdr, conn->data,
 			     reject->data_length);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -2055,7 +2246,11 @@ static void bnx2i_process_cmd_cleanup_resp(struct iscsi_session *session,
 
 	cmd_clean_rsp = (struct bnx2i_cleanup_response *)cqe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->back_lock);
 >>>>>>> v3.18
@@ -2065,7 +2260,11 @@ static void bnx2i_process_cmd_cleanup_resp(struct iscsi_session *session,
 		printk(KERN_ALERT "bnx2i: cmd clean ITT %x not active\n",
 			cmd_clean_rsp->itt & ISCSI_CLEANUP_RESPONSE_INDEX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -2085,7 +2284,11 @@ int bnx2i_percpu_io_thread(void *arg)
 	LIST_HEAD(work_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -2140,17 +2343,23 @@ static int bnx2i_queue_scsi_cmd_resp(struct iscsi_session *session,
 	int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
 	task = iscsi_itt_to_task(bnx2i_conn->cls_conn->dd_data,
 				 cqe->itt & ISCSI_CMD_RESPONSE_INDEX);
 	if (!task || !task->sc) {
 		spin_unlock(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&session->back_lock);
 	task = iscsi_itt_to_task(bnx2i_conn->cls_conn->dd_data,
 				 cqe->itt & ISCSI_CMD_RESPONSE_INDEX);
 	if (!task || !task->sc) {
 		spin_unlock(&session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -2162,7 +2371,11 @@ static int bnx2i_queue_scsi_cmd_resp(struct iscsi_session *session,
 		cpu = sc->request->cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->back_lock);
 >>>>>>> v3.18
@@ -2969,8 +3182,12 @@ int bnx2i_map_ep_dbell_regs(struct bnx2i_endpoint *ep)
 		reg_base = pci_resource_start(ep->hba->pcidev,
 					      BNX2X_DOORBELL_PCI_BAR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_off = BNX2I_5771X_DBELL_PAGE_SIZE * (cid_num & 0x1FFFF) +
 			  DPM_TRIGER_TYPE;
+=======
+		reg_off = (1 << BNX2X_DB_SHIFT) * (cid_num & 0x1FFFF);
+>>>>>>> v3.18
 =======
 		reg_off = (1 << BNX2X_DB_SHIFT) * (cid_num & 0x1FFFF);
 >>>>>>> v3.18

@@ -181,13 +181,19 @@ int main(void)
 	DEVID_FIELD(mei_cl_device_id, name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	DEVID(rio_device_id);
 	DEVID_FIELD(rio_device_id, did);
 	DEVID_FIELD(rio_device_id, vid);
 	DEVID_FIELD(rio_device_id, asm_did);
 	DEVID_FIELD(rio_device_id, asm_vid);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

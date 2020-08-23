@@ -54,6 +54,7 @@ struct llc_sap;
 typedef int (*llc_sap_ev_t)(struct llc_sap *sap, struct sk_buff *skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int llc_sap_ev_activation_req(struct llc_sap *sap, struct sk_buff *skb);
 extern int llc_sap_ev_rx_ui(struct llc_sap *sap, struct sk_buff *skb);
 extern int llc_sap_ev_unitdata_req(struct llc_sap *sap, struct sk_buff *skb);
@@ -66,6 +67,8 @@ extern int llc_sap_ev_rx_test_r(struct llc_sap *sap, struct sk_buff *skb);
 extern int llc_sap_ev_deactivation_req(struct llc_sap *sap,
 				       struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 int llc_sap_ev_activation_req(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_ev_rx_ui(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_ev_unitdata_req(struct llc_sap *sap, struct sk_buff *skb);
@@ -76,5 +79,8 @@ int llc_sap_ev_test_req(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_ev_rx_test_c(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_ev_rx_test_r(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_ev_deactivation_req(struct llc_sap *sap, struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LLC_S_EV_H */

@@ -125,7 +125,11 @@ static int mqprio_init(struct Qdisc *sch, struct nlattr *opt)
 	for (i = 0; i < dev->num_tx_queues; i++) {
 		dev_queue = netdev_get_tx_queue(dev, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qdisc = qdisc_create_dflt(dev_queue, &pfifo_fast_ops,
+=======
+		qdisc = qdisc_create_dflt(dev_queue, default_qdisc_ops,
+>>>>>>> v3.18
 =======
 		qdisc = qdisc_create_dflt(dev_queue, default_qdisc_ops,
 >>>>>>> v3.18
@@ -172,7 +176,11 @@ static void mqprio_attach(struct Qdisc *sch)
 	struct net_device *dev = qdisc_dev(sch);
 	struct mqprio_sched *priv = qdisc_priv(sch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct Qdisc *qdisc;
+=======
+	struct Qdisc *qdisc, *old;
+>>>>>>> v3.18
 =======
 	struct Qdisc *qdisc, *old;
 >>>>>>> v3.18
@@ -182,15 +190,21 @@ static void mqprio_attach(struct Qdisc *sch)
 	for (ntx = 0; ntx < dev->num_tx_queues; ntx++) {
 		qdisc = priv->qdiscs[ntx];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qdisc = dev_graft_qdisc(qdisc->dev_queue, qdisc);
 		if (qdisc)
 			qdisc_destroy(qdisc);
 =======
+=======
+>>>>>>> v3.18
 		old = dev_graft_qdisc(qdisc->dev_queue, qdisc);
 		if (old)
 			qdisc_destroy(old);
 		if (ntx < dev->real_num_tx_queues)
 			qdisc_list_add(qdisc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	kfree(priv->qdiscs);
@@ -246,7 +260,11 @@ static int mqprio_dump(struct Qdisc *sch, struct sk_buff *skb)
 
 	for (i = 0; i < dev->num_tx_queues; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qdisc = netdev_get_tx_queue(dev, i)->qdisc;
+=======
+		qdisc = rtnl_dereference(netdev_get_tx_queue(dev, i)->qdisc);
+>>>>>>> v3.18
 =======
 		qdisc = rtnl_dereference(netdev_get_tx_queue(dev, i)->qdisc);
 >>>>>>> v3.18
@@ -255,7 +273,10 @@ static int mqprio_dump(struct Qdisc *sch, struct sk_buff *skb)
 		sch->bstats.bytes	+= qdisc->bstats.bytes;
 		sch->bstats.packets	+= qdisc->bstats.packets;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.qlen	+= qdisc->qstats.qlen;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sch->qstats.backlog	+= qdisc->qstats.backlog;
@@ -349,6 +370,10 @@ static int mqprio_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 	if (cl <= netdev_get_num_tc(dev)) {
 		int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__u32 qlen = 0;
+>>>>>>> v3.18
 =======
 		__u32 qlen = 0;
 >>>>>>> v3.18
@@ -366,12 +391,15 @@ static int mqprio_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 
 		for (i = tc.offset; i < tc.offset + tc.count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			qdisc = netdev_get_tx_queue(dev, i)->qdisc;
 			spin_lock_bh(qdisc_lock(qdisc));
 			bstats.bytes      += qdisc->bstats.bytes;
 			bstats.packets    += qdisc->bstats.packets;
 			qstats.qlen       += qdisc->qstats.qlen;
 =======
+=======
+>>>>>>> v3.18
 			struct netdev_queue *q = netdev_get_tx_queue(dev, i);
 
 			qdisc = rtnl_dereference(q->qdisc);
@@ -379,6 +407,9 @@ static int mqprio_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 			qlen		  += qdisc->q.qlen;
 			bstats.bytes      += qdisc->bstats.bytes;
 			bstats.packets    += qdisc->bstats.packets;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			qstats.backlog    += qdisc->qstats.backlog;
 			qstats.drops      += qdisc->qstats.drops;
@@ -389,8 +420,13 @@ static int mqprio_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 		/* Reclaim root sleeping lock before completing stats */
 		spin_lock_bh(d->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (gnet_stats_copy_basic(d, &bstats) < 0 ||
 		    gnet_stats_copy_queue(d, &qstats) < 0)
+=======
+		if (gnet_stats_copy_basic(d, NULL, &bstats) < 0 ||
+		    gnet_stats_copy_queue(d, NULL, &qstats, qlen) < 0)
+>>>>>>> v3.18
 =======
 		if (gnet_stats_copy_basic(d, NULL, &bstats) < 0 ||
 		    gnet_stats_copy_queue(d, NULL, &qstats, qlen) < 0)
@@ -401,9 +437,15 @@ static int mqprio_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 
 		sch = dev_queue->qdisc_sleeping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.qlen = sch->q.qlen;
 		if (gnet_stats_copy_basic(d, &sch->bstats) < 0 ||
 		    gnet_stats_copy_queue(d, &sch->qstats) < 0)
+=======
+		if (gnet_stats_copy_basic(d, NULL, &sch->bstats) < 0 ||
+		    gnet_stats_copy_queue(d, NULL,
+					  &sch->qstats, sch->q.qlen) < 0)
+>>>>>>> v3.18
 =======
 		if (gnet_stats_copy_basic(d, NULL, &sch->bstats) < 0 ||
 		    gnet_stats_copy_queue(d, NULL,

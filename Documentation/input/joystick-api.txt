@@ -17,7 +17,11 @@ joystick.
 By default, the device is opened in blocking mode.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int fd = open ("/dev/js0", O_RDONLY);
+=======
+	int fd = open ("/dev/input/js0", O_RDONLY);
+>>>>>>> v3.18
 =======
 	int fd = open ("/dev/input/js0", O_RDONLY);
 >>>>>>> v3.18
@@ -28,7 +32,11 @@ By default, the device is opened in blocking mode.
 
 	struct js_event e;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read (fd, &e, sizeof(struct js_event));
+=======
+	read (fd, &e, sizeof(e));
+>>>>>>> v3.18
 =======
 	read (fd, &e, sizeof(e));
 >>>>>>> v3.18
@@ -43,8 +51,13 @@ where js_event is defined as
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If the read is successful, it will return sizeof(struct js_event), unless
 you wanted to read more than one event per read as described in section 3.1.
+=======
+If the read is successful, it will return sizeof(e), unless you wanted to read
+more than one event per read as described in section 3.1.
+>>>>>>> v3.18
 =======
 If the read is successful, it will return sizeof(e), unless you wanted to read
 more than one event per read as described in section 3.1.
@@ -113,9 +126,15 @@ may work well if you handle JS_EVENT_INIT events separately,
 	if ((js_event.type & ~JS_EVENT_INIT) == JS_EVENT_BUTTON) {
 		if (js_event.value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        	buttons_state |= (1 << js_event.number);
 	   	else
 	      		buttons_state &= ~(1 << js_event.number);
+=======
+			buttons_state |= (1 << js_event.number);
+		else
+			buttons_state &= ~(1 << js_event.number);
+>>>>>>> v3.18
 =======
 			buttons_state |= (1 << js_event.number);
 		else
@@ -164,6 +183,7 @@ For example,
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (read (fd, &e, sizeof(struct js_event)) > 0) {
 	        	process_event (e);
 	   	}
@@ -173,6 +193,8 @@ For example,
 	   	}
 	   	/* do something interesting with processed events */
 =======
+=======
+>>>>>>> v3.18
 		while (read (fd, &e, sizeof(e)) > 0) {
 			process_event (e);
 		}
@@ -181,6 +203,9 @@ For example,
 			/* error */
 		}
 		/* do something interesting with processed events */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -212,7 +237,11 @@ replace the read above with something like
 
 	struct js_event mybuffer[0xff];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = read (fd, mybuffer, sizeof(struct mybuffer));
+=======
+	int i = read (fd, mybuffer, sizeof(mybuffer));
+>>>>>>> v3.18
 =======
 	int i = read (fd, mybuffer, sizeof(mybuffer));
 >>>>>>> v3.18
@@ -304,9 +333,15 @@ The driver offers backward compatibility, though. Here's a quick summary:
 	while (1) {
 		if (read (fd, &js, JS_RETURN) != JS_RETURN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      		/* error */
 	   	}
 	   	usleep (1000);
+=======
+			/* error */
+		}
+		usleep (1000);
+>>>>>>> v3.18
 =======
 			/* error */
 		}

@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ struct ibmveth_stat ibmveth_stats[] = {
 static inline u32 ibmveth_rxq_flags(struct ibmveth_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return adapter->rx_queue.queue_addr[adapter->rx_queue.index].flags_off;
+=======
+	return be32_to_cpu(adapter->rx_queue.queue_addr[adapter->rx_queue.index].flags_off);
+>>>>>>> v3.18
 =======
 	return be32_to_cpu(adapter->rx_queue.queue_addr[adapter->rx_queue.index].flags_off);
 >>>>>>> v3.18
@@ -141,7 +149,11 @@ static inline int ibmveth_rxq_frame_offset(struct ibmveth_adapter *adapter)
 static inline int ibmveth_rxq_frame_length(struct ibmveth_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return adapter->rx_queue.queue_addr[adapter->rx_queue.index].length;
+=======
+	return be32_to_cpu(adapter->rx_queue.queue_addr[adapter->rx_queue.index].length);
+>>>>>>> v3.18
 =======
 	return be32_to_cpu(adapter->rx_queue.queue_addr[adapter->rx_queue.index].length);
 >>>>>>> v3.18
@@ -547,11 +559,14 @@ retry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ibmveth_open(struct net_device *netdev)
 {
 	struct ibmveth_adapter *adapter = netdev_priv(netdev);
 	u64 mac_address = 0;
 =======
+=======
+>>>>>>> v3.18
 static u64 ibmveth_encode_mac_addr(u8 *mac)
 {
 	int i;
@@ -567,6 +582,9 @@ static int ibmveth_open(struct net_device *netdev)
 {
 	struct ibmveth_adapter *adapter = netdev_priv(netdev);
 	u64 mac_address;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rxq_entries = 1;
 	unsigned long lpar_rc;
@@ -622,8 +640,12 @@ static int ibmveth_open(struct net_device *netdev)
 	adapter->rx_queue.toggle = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&mac_address, netdev->dev_addr, netdev->addr_len);
 	mac_address = mac_address >> 16;
+=======
+	mac_address = ibmveth_encode_mac_addr(netdev->dev_addr);
+>>>>>>> v3.18
 =======
 	mac_address = ibmveth_encode_mac_addr(netdev->dev_addr);
 >>>>>>> v3.18
@@ -1080,7 +1102,11 @@ retry_bounce:
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -1112,7 +1138,11 @@ static int ibmveth_poll(struct napi_struct *napi, int budget)
 
 restart_poll:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do {
+=======
+	while (frames_processed < budget) {
+>>>>>>> v3.18
 =======
 	while (frames_processed < budget) {
 >>>>>>> v3.18
@@ -1165,7 +1195,11 @@ restart_poll:
 			frames_processed++;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (frames_processed < budget);
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1241,8 +1275,13 @@ static void ibmveth_set_multicast_list(struct net_device *netdev)
 		netdev_for_each_mc_addr(ha, netdev) {
 			/* add the multicast address to the filter table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long mcast_addr = 0;
 			memcpy(((char *)&mcast_addr)+2, ha->addr, 6);
+=======
+			u64 mcast_addr;
+			mcast_addr = ibmveth_encode_mac_addr(ha->addr);
+>>>>>>> v3.18
 =======
 			u64 mcast_addr;
 			mcast_addr = ibmveth_encode_mac_addr(ha->addr);
@@ -1338,6 +1377,10 @@ static unsigned long ibmveth_get_desired_dma(struct vio_dev *vdev)
 	struct net_device *netdev = dev_get_drvdata(&vdev->dev);
 	struct ibmveth_adapter *adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iommu_table *tbl;
+>>>>>>> v3.18
 =======
 	struct iommu_table *tbl;
 >>>>>>> v3.18
@@ -1346,22 +1389,32 @@ static unsigned long ibmveth_get_desired_dma(struct vio_dev *vdev)
 	int rxqentries = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* netdev inits at probe time along with the structures we need below*/
 	if (netdev == NULL)
 		return IOMMU_PAGE_ALIGN(IBMVETH_IO_ENTITLEMENT_DEFAULT);
 =======
+=======
+>>>>>>> v3.18
 	tbl = get_iommu_table_base(&vdev->dev);
 
 	/* netdev inits at probe time along with the structures we need below*/
 	if (netdev == NULL)
 		return IOMMU_PAGE_ALIGN(IBMVETH_IO_ENTITLEMENT_DEFAULT, tbl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	adapter = netdev_priv(netdev);
 
 	ret = IBMVETH_BUFF_LIST_SIZE + IBMVETH_FILT_LIST_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret += IOMMU_PAGE_ALIGN(netdev->mtu);
+=======
+	ret += IOMMU_PAGE_ALIGN(netdev->mtu, tbl);
+>>>>>>> v3.18
 =======
 	ret += IOMMU_PAGE_ALIGN(netdev->mtu, tbl);
 >>>>>>> v3.18
@@ -1373,18 +1426,24 @@ static unsigned long ibmveth_get_desired_dma(struct vio_dev *vdev)
 			    adapter->rx_buff_pool[i].size *
 			    IOMMU_PAGE_ALIGN(adapter->rx_buff_pool[i].
 <<<<<<< HEAD
+<<<<<<< HEAD
 			            buff_size);
 		rxqentries += adapter->rx_buff_pool[i].size;
 	}
 	/* add the size of the receive queue entries */
 	ret += IOMMU_PAGE_ALIGN(rxqentries * sizeof(struct ibmveth_rx_q_entry));
 =======
+=======
+>>>>>>> v3.18
 					     buff_size, tbl);
 		rxqentries += adapter->rx_buff_pool[i].size;
 	}
 	/* add the size of the receive queue entries */
 	ret += IOMMU_PAGE_ALIGN(
 		rxqentries * sizeof(struct ibmveth_rx_q_entry), tbl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1456,9 +1515,12 @@ static int ibmveth_probe(struct vio_dev *dev, const struct vio_device_id *id)
 	netif_napi_add(netdev, &adapter->napi, ibmveth_poll, 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->mac_addr = 0;
 	memcpy(&adapter->mac_addr, mac_addr_p, 6);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netdev->irq = dev->irq;
@@ -1470,7 +1532,11 @@ static int ibmveth_probe(struct vio_dev *dev, const struct vio_device_id *id)
 	netdev->features |= netdev->hw_features;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(netdev->dev_addr, &adapter->mac_addr, netdev->addr_len);
+=======
+	memcpy(netdev->dev_addr, mac_addr_p, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(netdev->dev_addr, mac_addr_p, ETH_ALEN);
 >>>>>>> v3.18

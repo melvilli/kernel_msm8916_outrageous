@@ -18,6 +18,7 @@
 #include "bpf_jit.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN
 /* There are endianness assumptions herein. */
 #error "Little-endian PPC not supported in BPF compiler"
@@ -30,6 +31,10 @@ int bpf_jit_enable __read_mostly;
 int bpf_jit_enable __read_mostly;
 
 >>>>>>> v3.18
+=======
+int bpf_jit_enable __read_mostly;
+
+>>>>>>> v3.18
 static inline void bpf_flush_icache(void *start, void *end)
 {
 	smp_wmb();
@@ -37,7 +42,11 @@ static inline void bpf_flush_icache(void *start, void *end)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bpf_jit_build_prologue(struct sk_filter *fp, u32 *image,
+=======
+static void bpf_jit_build_prologue(struct bpf_prog *fp, u32 *image,
+>>>>>>> v3.18
 =======
 static void bpf_jit_build_prologue(struct bpf_prog *fp, u32 *image,
 >>>>>>> v3.18
@@ -95,6 +104,7 @@ static void bpf_jit_build_prologue(struct bpf_prog *fp, u32 *image,
 
 	switch (filter[0].code) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BPF_S_RET_K:
 	case BPF_S_LD_W_LEN:
 	case BPF_S_ANC_PROTOCOL:
@@ -109,11 +119,16 @@ static void bpf_jit_build_prologue(struct bpf_prog *fp, u32 *image,
 	case BPF_S_LD_H_ABS:
 	case BPF_S_LD_B_ABS:
 =======
+=======
+>>>>>>> v3.18
 	case BPF_RET | BPF_K:
 	case BPF_LD | BPF_W | BPF_LEN:
 	case BPF_LD | BPF_W | BPF_ABS:
 	case BPF_LD | BPF_H | BPF_ABS:
 	case BPF_LD | BPF_B | BPF_ABS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* first instruction sets A register (or is RET 'constant') */
 		break;
@@ -153,7 +168,11 @@ static void bpf_jit_build_epilogue(u32 *image, struct codegen_context *ctx)
 
 /* Assemble the body code between the prologue & epilogue. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bpf_jit_build_body(struct sk_filter *fp, u32 *image,
+=======
+static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
+>>>>>>> v3.18
 =======
 static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 >>>>>>> v3.18
@@ -172,6 +191,10 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 	for (i = 0; i < flen; i++) {
 		unsigned int K = filter[i].k;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u16 code = bpf_anc_helper(&filter[i]);
+>>>>>>> v3.18
 =======
 		u16 code = bpf_anc_helper(&filter[i]);
 >>>>>>> v3.18
@@ -183,6 +206,7 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 		addrs[i] = ctx->idx * 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (filter[i].code) {
 			/*** ALU ops ***/
 		case BPF_S_ALU_ADD_X: /* A += X; */
@@ -191,6 +215,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			break;
 		case BPF_S_ALU_ADD_K: /* A += K; */
 =======
+=======
+>>>>>>> v3.18
 		switch (code) {
 			/*** ALU ops ***/
 		case BPF_ALU | BPF_ADD | BPF_X: /* A += X; */
@@ -198,6 +224,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			PPC_ADD(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_ADD | BPF_K: /* A += K; */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!K)
 				break;
@@ -206,17 +235,23 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				PPC_ADDIS(r_A, r_A, IMM_HA(K));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_SUB_X: /* A -= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_SUB(r_A, r_A, r_X);
 			break;
 		case BPF_S_ALU_SUB_K: /* A -= K */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_SUB | BPF_X: /* A -= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_SUB(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_SUB | BPF_K: /* A -= K */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!K)
 				break;
@@ -225,17 +260,23 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				PPC_ADDIS(r_A, r_A, IMM_HA(-K));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_MUL_X: /* A *= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_MUL(r_A, r_A, r_X);
 			break;
 		case BPF_S_ALU_MUL_K: /* A *= K */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_MUL | BPF_X: /* A *= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_MUL(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_MUL | BPF_K: /* A *= K */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (K < 32768)
 				PPC_MULI(r_A, r_A, K);
@@ -245,8 +286,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_DIV_X: /* A /= X; */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_MOD | BPF_X: /* A %= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_CMPWI(r_X, 0);
@@ -268,6 +312,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			PPC_SUB(r_A, r_A, r_scratch1);
 			break;
 		case BPF_ALU | BPF_DIV | BPF_X: /* A /= X; */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->seen |= SEEN_XREG;
 			PPC_CMPWI(r_X, 0);
@@ -285,7 +332,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			PPC_DIVWU(r_A, r_A, r_X);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_DIV_K: /* A /= K */
+=======
+		case BPF_ALU | BPF_DIV | BPF_K: /* A /= K */
+>>>>>>> v3.18
 =======
 		case BPF_ALU | BPF_DIV | BPF_K: /* A /= K */
 >>>>>>> v3.18
@@ -295,17 +346,23 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			PPC_DIVWU(r_A, r_A, r_scratch1);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_AND_X:
 			ctx->seen |= SEEN_XREG;
 			PPC_AND(r_A, r_A, r_X);
 			break;
 		case BPF_S_ALU_AND_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_AND | BPF_X:
 			ctx->seen |= SEEN_XREG;
 			PPC_AND(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_AND | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!IMM_H(K))
 				PPC_ANDI(r_A, r_A, K);
@@ -315,23 +372,30 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_OR_X:
 			ctx->seen |= SEEN_XREG;
 			PPC_OR(r_A, r_A, r_X);
 			break;
 		case BPF_S_ALU_OR_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_OR | BPF_X:
 			ctx->seen |= SEEN_XREG;
 			PPC_OR(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_OR | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (IMM_L(K))
 				PPC_ORI(r_A, r_A, IMM_L(K));
 			if (K >= 65536)
 				PPC_ORIS(r_A, r_A, IMM_H(K));
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ANC_ALU_XOR_X:
 		case BPF_S_ALU_XOR_X: /* A ^= X */
@@ -340,12 +404,17 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			break;
 		case BPF_S_ALU_XOR_K: /* A ^= K */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ANC | SKF_AD_ALU_XOR_X:
 		case BPF_ALU | BPF_XOR | BPF_X: /* A ^= X */
 			ctx->seen |= SEEN_XREG;
 			PPC_XOR(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_XOR | BPF_K: /* A ^= K */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (IMM_L(K))
 				PPC_XORI(r_A, r_A, IMM_L(K));
@@ -353,17 +422,23 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				PPC_XORIS(r_A, r_A, IMM_H(K));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_LSH_X: /* A <<= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_SLW(r_A, r_A, r_X);
 			break;
 		case BPF_S_ALU_LSH_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_LSH | BPF_X: /* A <<= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_SLW(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_LSH | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (K == 0)
 				break;
@@ -371,17 +446,23 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				PPC_SLWI(r_A, r_A, K);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_RSH_X: /* A >>= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_SRW(r_A, r_A, r_X);
 			break;
 		case BPF_S_ALU_RSH_K: /* A >>= K; */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_RSH | BPF_X: /* A >>= X; */
 			ctx->seen |= SEEN_XREG;
 			PPC_SRW(r_A, r_A, r_X);
 			break;
 		case BPF_ALU | BPF_RSH | BPF_K: /* A >>= K; */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (K == 0)
 				break;
@@ -389,15 +470,21 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				PPC_SRWI(r_A, r_A, K);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_NEG:
 			PPC_NEG(r_A, r_A);
 			break;
 		case BPF_S_RET_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_NEG:
 			PPC_NEG(r_A, r_A);
 			break;
 		case BPF_RET | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			PPC_LI32(r_ret, K);
 			if (!K) {
@@ -426,7 +513,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_RET_A:
+=======
+		case BPF_RET | BPF_A:
+>>>>>>> v3.18
 =======
 		case BPF_RET | BPF_A:
 >>>>>>> v3.18
@@ -439,21 +530,28 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_MISC_TAX: /* X = A */
 			PPC_MR(r_X, r_A);
 			break;
 		case BPF_S_MISC_TXA: /* A = X */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_MISC | BPF_TAX: /* X = A */
 			PPC_MR(r_X, r_A);
 			break;
 		case BPF_MISC | BPF_TXA: /* A = X */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->seen |= SEEN_XREG;
 			PPC_MR(r_A, r_X);
 			break;
 
 			/*** Constant loads/M[] access ***/
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_LD_IMM: /* A = K */
 			PPC_LI32(r_A, K);
@@ -483,6 +581,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			break;
 		case BPF_S_LDX_W_LEN: /* X = skb->len; */
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LD | BPF_IMM: /* A = K */
 			PPC_LI32(r_A, K);
 			break;
@@ -510,11 +610,15 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			PPC_LWZ_OFFS(r_A, r_skb, offsetof(struct sk_buff, len));
 			break;
 		case BPF_LDX | BPF_W | BPF_LEN: /* X = skb->len; */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			PPC_LWZ_OFFS(r_X, r_skb, offsetof(struct sk_buff, len));
 			break;
 
 			/*** Ancillary info loads ***/
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			/* None of the BPF_S_ANC* codes appear to be passed by
@@ -531,6 +635,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			break;
 		case BPF_S_ANC_IFINDEX:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ANC | SKF_AD_PROTOCOL: /* A = ntohs(skb->protocol); */
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff,
 						  protocol) != 2);
@@ -538,6 +644,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 							    protocol));
 			break;
 		case BPF_ANC | SKF_AD_IFINDEX:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			PPC_LD_OFFS(r_scratch1, r_skb, offsetof(struct sk_buff,
 								dev));
@@ -556,7 +665,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				     offsetof(struct net_device, ifindex));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_MARK:
+=======
+		case BPF_ANC | SKF_AD_MARK:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_MARK:
 >>>>>>> v3.18
@@ -564,6 +677,7 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			PPC_LWZ_OFFS(r_A, r_skb, offsetof(struct sk_buff,
 							  mark));
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ANC_RXHASH:
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, rxhash) != 4);
@@ -582,6 +696,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			break;
 		case BPF_S_ANC_QUEUE:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ANC | SKF_AD_RXHASH:
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, hash) != 4);
 			PPC_LWZ_OFFS(r_A, r_skb, offsetof(struct sk_buff,
@@ -602,6 +718,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			}
 			break;
 		case BPF_ANC | SKF_AD_QUEUE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff,
 						  queue_mapping) != 2);
@@ -609,7 +728,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 							  queue_mapping));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_CPU:
+=======
+		case BPF_ANC | SKF_AD_CPU:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_CPU:
 >>>>>>> v3.18
@@ -629,6 +752,7 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 
 			/*** Absolute loads from packet header/data ***/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_LD_W_ABS:
 			func = CHOOSE_LOAD_FUNC(K, sk_load_word);
 			goto common_load;
@@ -637,6 +761,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			goto common_load;
 		case BPF_S_LD_B_ABS:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LD | BPF_W | BPF_ABS:
 			func = CHOOSE_LOAD_FUNC(K, sk_load_word);
 			goto common_load;
@@ -644,6 +770,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			func = CHOOSE_LOAD_FUNC(K, sk_load_half);
 			goto common_load;
 		case BPF_LD | BPF_B | BPF_ABS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			func = CHOOSE_LOAD_FUNC(K, sk_load_byte);
 		common_load:
@@ -662,6 +791,7 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 
 			/*** Indirect loads from packet header/data ***/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_LD_W_IND:
 			func = sk_load_word;
 			goto common_load_ind;
@@ -670,6 +800,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			goto common_load_ind;
 		case BPF_S_LD_B_IND:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LD | BPF_W | BPF_IND:
 			func = sk_load_word;
 			goto common_load_ind;
@@ -677,6 +809,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			func = sk_load_half;
 			goto common_load_ind;
 		case BPF_LD | BPF_B | BPF_IND:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			func = sk_load_byte;
 		common_load_ind:
@@ -696,7 +831,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_LDX_B_MSH:
+=======
+		case BPF_LDX | BPF_B | BPF_MSH:
+>>>>>>> v3.18
 =======
 		case BPF_LDX | BPF_B | BPF_MSH:
 >>>>>>> v3.18
@@ -706,7 +845,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 
 			/*** Jump and branches ***/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_JMP_JA:
+=======
+		case BPF_JMP | BPF_JA:
+>>>>>>> v3.18
 =======
 		case BPF_JMP | BPF_JA:
 >>>>>>> v3.18
@@ -714,6 +857,7 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				PPC_JMP(addrs[i + 1 + K]);
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_JMP_JGT_K:
 		case BPF_S_JMP_JGT_X:
@@ -730,6 +874,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 		case BPF_S_JMP_JSET_K:
 		case BPF_S_JMP_JSET_X:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_JMP | BPF_JGT | BPF_K:
 		case BPF_JMP | BPF_JGT | BPF_X:
 			true_cond = COND_GT;
@@ -744,6 +890,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			goto cond_branch;
 		case BPF_JMP | BPF_JSET | BPF_K:
 		case BPF_JMP | BPF_JSET | BPF_X:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			true_cond = COND_NE;
 			/* Fall through */
@@ -755,6 +904,7 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				break;
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			switch (filter[i].code) {
 			case BPF_S_JMP_JGT_X:
@@ -771,6 +921,8 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			case BPF_S_JMP_JGT_K:
 			case BPF_S_JMP_JGE_K:
 =======
+=======
+>>>>>>> v3.18
 			switch (code) {
 			case BPF_JMP | BPF_JGT | BPF_X:
 			case BPF_JMP | BPF_JGE | BPF_X:
@@ -785,6 +937,9 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 			case BPF_JMP | BPF_JEQ | BPF_K:
 			case BPF_JMP | BPF_JGT | BPF_K:
 			case BPF_JMP | BPF_JGE | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (K < 32768)
 					PPC_CMPLWI(r_A, K);
@@ -794,7 +949,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 				}
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case BPF_S_JMP_JSET_K:
+=======
+			case BPF_JMP | BPF_JSET | BPF_K:
+>>>>>>> v3.18
 =======
 			case BPF_JMP | BPF_JSET | BPF_K:
 >>>>>>> v3.18
@@ -841,7 +1000,11 @@ static int bpf_jit_build_body(struct bpf_prog *fp, u32 *image,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bpf_jit_compile(struct sk_filter *fp)
+=======
+void bpf_jit_compile(struct bpf_prog *fp)
+>>>>>>> v3.18
 =======
 void bpf_jit_compile(struct bpf_prog *fp)
 >>>>>>> v3.18
@@ -931,8 +1094,12 @@ void bpf_jit_compile(struct bpf_prog *fp)
 	proglen = cgctx.idx * 4;
 	alloclen = proglen + FUNCTION_DESCR_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	image = module_alloc(max_t(unsigned int, alloclen,
 				   sizeof(struct work_struct)));
+=======
+	image = module_alloc(alloclen);
+>>>>>>> v3.18
 =======
 	image = module_alloc(alloclen);
 >>>>>>> v3.18
@@ -967,6 +1134,10 @@ void bpf_jit_compile(struct bpf_prog *fp)
 		((u64 *)image)[1] = local_paca->kernel_toc;
 		fp->bpf_func = (void *)image;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fp->jited = true;
+>>>>>>> v3.18
 =======
 		fp->jited = true;
 >>>>>>> v3.18
@@ -976,6 +1147,7 @@ out:
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void jit_free_defer(struct work_struct *arg)
 {
@@ -994,11 +1166,16 @@ void bpf_jit_free(struct sk_filter *fp)
 		schedule_work(work);
 	}
 =======
+=======
+>>>>>>> v3.18
 void bpf_jit_free(struct bpf_prog *fp)
 {
 	if (fp->jited)
 		module_free(NULL, fp->bpf_func);
 
 	bpf_prog_unlock_free(fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

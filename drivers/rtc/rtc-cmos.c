@@ -327,7 +327,11 @@ static int cmos_set_alarm(struct device *dev, struct rtc_wkalrm *t)
 {
 	struct cmos_rtc	*cmos = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
        unsigned char   mon, mday, hrs, min, sec, rtc_control;
+=======
+	unsigned char mon, mday, hrs, min, sec, rtc_control;
+>>>>>>> v3.18
 =======
 	unsigned char mon, mday, hrs, min, sec, rtc_control;
 >>>>>>> v3.18
@@ -609,8 +613,11 @@ static irqreturn_t cmos_interrupt(int irq, void *p)
 	if (is_hpet_enabled())
 		irqstat = (unsigned long)irq & 0xF0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irqstat &= (rtc_control & RTC_IRQMASK) | RTC_IRQF;
 =======
+=======
+>>>>>>> v3.18
 
 	/* If we were suspended, RTC_CONTROL may not be accurate since the
 	 * bios may have cleared it.
@@ -619,6 +626,9 @@ static irqreturn_t cmos_interrupt(int irq, void *p)
 		irqstat &= (rtc_control & RTC_IRQMASK) | RTC_IRQF;
 	else
 		irqstat &= (cmos_rtc.suspend_ctrl & RTC_IRQMASK) | RTC_IRQF;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* All Linux RTC alarms should be treated as if they were oneshot.
@@ -627,15 +637,21 @@ static irqreturn_t cmos_interrupt(int irq, void *p)
 	 */
 	if (irqstat & RTC_AIE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtc_control &= ~RTC_AIE;
 		CMOS_WRITE(rtc_control, RTC_CONTROL);
 		hpet_mask_rtc_irq_bit(RTC_AIE);
 
 =======
+=======
+>>>>>>> v3.18
 		cmos_rtc.suspend_ctrl &= ~RTC_AIE;
 		rtc_control &= ~RTC_AIE;
 		CMOS_WRITE(rtc_control, RTC_CONTROL);
 		hpet_mask_rtc_irq_bit(RTC_AIE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		CMOS_READ(RTC_INTR_FLAGS);
 	}
@@ -659,16 +675,22 @@ static int INITSECTION
 cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cmos_rtc_board_info	*info = dev->platform_data;
 	int				retval = 0;
 	unsigned char			rtc_control;
 	unsigned			address_space;
 =======
+=======
+>>>>>>> v3.18
 	struct cmos_rtc_board_info	*info = dev_get_platdata(dev);
 	int				retval = 0;
 	unsigned char			rtc_control;
 	unsigned			address_space;
 	u32				flags = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* there can be only one ... */
@@ -684,16 +706,22 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 	 * (needing ioremap etc), not i/o space resources like this ...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ports = request_region(ports->start,
 			resource_size(ports),
 			driver_name);
 =======
+=======
+>>>>>>> v3.18
 	if (RTC_IOMAPPED)
 		ports = request_region(ports->start, resource_size(ports),
 				       driver_name);
 	else
 		ports = request_mem_region(ports->start, resource_size(ports),
 					   driver_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ports) {
 		dev_dbg(dev, "i/o registers already in use\n");
@@ -732,12 +760,18 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 	 */
 	if (info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (info->flags)
 			flags = info->flags;
 		if (info->address_space)
 			address_space = info->address_space;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (info->rtc_day_alarm && info->rtc_day_alarm < 128)
 			cmos_rtc.day_alrm = info->rtc_day_alarm;
@@ -767,6 +801,7 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 	spin_lock_irq(&rtc_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* force periodic irq to CMOS reset default of 1024Hz;
 	 *
 	 * REVISIT it's been reported that at least one x86_64 ALI mobo
@@ -780,6 +815,8 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 	/* disable irqs */
 	cmos_irq_disable(&cmos_rtc, RTC_PIE | RTC_AIE | RTC_UIE);
 =======
+=======
+>>>>>>> v3.18
 	if (!(flags & CMOS_RTC_FLAGS_NOFREQ)) {
 		/* force periodic irq to CMOS reset default of 1024Hz;
 		 *
@@ -795,6 +832,9 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 	/* disable irqs */
 	if (is_valid_irq(rtc_irq))
 		cmos_irq_disable(&cmos_rtc, RTC_PIE | RTC_AIE | RTC_UIE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rtc_control = CMOS_READ(RTC_CONTROL);
@@ -805,7 +845,11 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 	 * <asm-generic/rtc.h> doesn't know 12-hour mode either.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
        if (is_valid_irq(rtc_irq) && !(rtc_control & RTC_24H)) {
+=======
+	if (is_valid_irq(rtc_irq) && !(rtc_control & RTC_24H)) {
+>>>>>>> v3.18
 =======
 	if (is_valid_irq(rtc_irq) && !(rtc_control & RTC_24H)) {
 >>>>>>> v3.18
@@ -819,11 +863,17 @@ cmos_do_probe(struct device *dev, struct resource *ports, int rtc_irq)
 
 		if (is_hpet_enabled()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int err;
 
 			rtc_cmos_int_handler = hpet_rtc_interrupt;
 			err = hpet_register_irq_handler(cmos_interrupt);
 			if (err != 0) {
+=======
+			rtc_cmos_int_handler = hpet_rtc_interrupt;
+			retval = hpet_register_irq_handler(cmos_interrupt);
+			if (retval) {
+>>>>>>> v3.18
 =======
 			rtc_cmos_int_handler = hpet_rtc_interrupt;
 			retval = hpet_register_irq_handler(cmos_interrupt);
@@ -873,6 +923,7 @@ cleanup1:
 	rtc_device_unregister(cmos_rtc.rtc);
 cleanup0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_region(ports->start, resource_size(ports));
 	return retval;
 }
@@ -882,6 +933,8 @@ static void cmos_do_shutdown(void)
 	spin_lock_irq(&rtc_lock);
 	cmos_irq_disable(&cmos_rtc, RTC_IRQMASK);
 =======
+=======
+>>>>>>> v3.18
 	if (RTC_IOMAPPED)
 		release_region(ports->start, resource_size(ports));
 	else
@@ -894,6 +947,9 @@ static void cmos_do_shutdown(int rtc_irq)
 	spin_lock_irq(&rtc_lock);
 	if (is_valid_irq(rtc_irq))
 		cmos_irq_disable(&cmos_rtc, RTC_IRQMASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&rtc_lock);
 }
@@ -904,7 +960,11 @@ static void __exit cmos_do_remove(struct device *dev)
 	struct resource *ports;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmos_do_shutdown();
+=======
+	cmos_do_shutdown(cmos->irq);
+>>>>>>> v3.18
 =======
 	cmos_do_shutdown(cmos->irq);
 >>>>>>> v3.18
@@ -921,6 +981,7 @@ static void __exit cmos_do_remove(struct device *dev)
 
 	ports = cmos->iomem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_region(ports->start, resource_size(ports));
 	cmos->iomem = NULL;
 
@@ -930,6 +991,8 @@ static void __exit cmos_do_remove(struct device *dev)
 
 #ifdef	CONFIG_PM
 =======
+=======
+>>>>>>> v3.18
 	if (RTC_IOMAPPED)
 		release_region(ports->start, resource_size(ports));
 	else
@@ -940,6 +1003,9 @@ static void __exit cmos_do_remove(struct device *dev)
 }
 
 #ifdef CONFIG_PM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int cmos_suspend(struct device *dev)
@@ -992,12 +1058,15 @@ static inline int cmos_poweroff(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cmos_resume(struct device *dev)
 {
 	struct cmos_rtc	*cmos = dev_get_drvdata(dev);
 	unsigned char	tmp = cmos->suspend_ctrl;
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef	CONFIG_PM_SLEEP
 
 static int cmos_resume(struct device *dev)
@@ -1016,11 +1085,15 @@ static int cmos_resume(struct device *dev)
 	spin_lock_irq(&rtc_lock);
 	tmp = cmos->suspend_ctrl;
 	cmos->suspend_ctrl = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* re-enable any irqs previously active */
 	if (tmp & RTC_IRQMASK) {
 		unsigned char	mask;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (cmos->enabled_wake) {
 			if (cmos->wake_off)
@@ -1031,6 +1104,8 @@ static int cmos_resume(struct device *dev)
 		}
 
 		spin_lock_irq(&rtc_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (device_may_wakeup(dev))
@@ -1053,8 +1128,13 @@ static int cmos_resume(struct device *dev)
 			hpet_mask_rtc_irq_bit(RTC_AIE);
 		} while (mask & RTC_AIE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irq(&rtc_lock);
 	}
+=======
+	}
+	spin_unlock_irq(&rtc_lock);
+>>>>>>> v3.18
 =======
 	}
 	spin_unlock_irq(&rtc_lock);
@@ -1066,8 +1146,12 @@ static int cmos_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(cmos_pm_ops, cmos_suspend, cmos_resume);
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1081,6 +1165,11 @@ static inline int cmos_poweroff(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static SIMPLE_DEV_PM_OPS(cmos_pm_ops, cmos_suspend, cmos_resume);
+
+>>>>>>> v3.18
 =======
 static SIMPLE_DEV_PM_OPS(cmos_pm_ops, cmos_suspend, cmos_resume);
 
@@ -1185,7 +1274,11 @@ static int cmos_pnp_probe(struct pnp_dev *pnp, const struct pnp_device_id *id)
 	cmos_wake_setup(&pnp->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pnp_port_start(pnp,0) == 0x70 && !pnp_irq_valid(pnp,0))
+=======
+	if (pnp_port_start(pnp, 0) == 0x70 && !pnp_irq_valid(pnp, 0))
+>>>>>>> v3.18
 =======
 	if (pnp_port_start(pnp, 0) == 0x70 && !pnp_irq_valid(pnp, 0))
 >>>>>>> v3.18
@@ -1206,6 +1299,7 @@ static void __exit cmos_pnp_remove(struct pnp_dev *pnp)
 	cmos_do_remove(&pnp->dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef	CONFIG_PM
 
@@ -1231,6 +1325,8 @@ static void cmos_pnp_shutdown(struct pnp_dev *pnp)
 
 	cmos_do_shutdown();
 =======
+=======
+>>>>>>> v3.18
 static void cmos_pnp_shutdown(struct pnp_dev *pnp)
 {
 	struct device *dev = &pnp->dev;
@@ -1240,6 +1336,9 @@ static void cmos_pnp_shutdown(struct pnp_dev *pnp)
 		return;
 
 	cmos_do_shutdown(cmos->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1261,8 +1360,14 @@ static struct pnp_driver cmos_pnp_driver = {
 	/* flag ensures resume() gets called, and stops syslog spam */
 	.flags		= PNP_DRIVER_RES_DO_NOT_CHANGE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend	= cmos_pnp_suspend,
 	.resume		= cmos_pnp_resume,
+=======
+	.driver		= {
+			.pm = &cmos_pm_ops,
+	},
+>>>>>>> v3.18
 =======
 	.driver		= {
 			.pm = &cmos_pm_ops,
@@ -1321,12 +1426,15 @@ static inline void cmos_of_init(struct platform_device *pdev) {}
 static int __init cmos_platform_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmos_of_init(pdev);
 	cmos_wake_setup(&pdev->dev);
 	return cmos_do_probe(&pdev->dev,
 			platform_get_resource(pdev, IORESOURCE_IO, 0),
 			platform_get_irq(pdev, 0));
 =======
+=======
+>>>>>>> v3.18
 	struct resource *resource;
 	int irq;
 
@@ -1342,6 +1450,9 @@ static int __init cmos_platform_probe(struct platform_device *pdev)
 		irq = -1;
 
 	return cmos_do_probe(&pdev->dev, resource, irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1354,11 +1465,14 @@ static int __exit cmos_platform_remove(struct platform_device *pdev)
 static void cmos_platform_shutdown(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (system_state == SYSTEM_POWER_OFF && !cmos_poweroff(&pdev->dev))
 		return;
 
 	cmos_do_shutdown();
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	struct cmos_rtc	*cmos = dev_get_drvdata(dev);
 
@@ -1366,6 +1480,9 @@ static void cmos_platform_shutdown(struct platform_device *pdev)
 		return;
 
 	cmos_do_shutdown(cmos->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1377,7 +1494,11 @@ static struct platform_driver cmos_platform_driver = {
 	.shutdown	= cmos_platform_shutdown,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= (char *) driver_name,
+=======
+		.name		= driver_name,
+>>>>>>> v3.18
 =======
 		.name		= driver_name,
 >>>>>>> v3.18

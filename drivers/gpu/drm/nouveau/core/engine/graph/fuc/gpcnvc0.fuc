@@ -1,7 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* fuc microcode for nvc0 PGRAPH/GPC
  *
  * Copyright 2011 Red Hat Inc.
+=======
+/*
+ * Copyright 2013 Red Hat Inc.
+>>>>>>> v3.18
 =======
 /*
  * Copyright 2013 Red Hat Inc.
@@ -25,6 +30,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Authors: Ben Skeggs
  */
@@ -549,6 +555,8 @@ ctx_xfer:
 
 .align 256
 =======
+=======
+>>>>>>> v3.18
  * Authors: Ben Skeggs <bskeggs@redhat.com>
  */
 
@@ -570,4 +578,7 @@ bra #init
 #include "gpc.fuc"
 .align 256
 #undef INCLUDE_CODE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

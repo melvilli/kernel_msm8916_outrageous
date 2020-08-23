@@ -105,6 +105,12 @@ do {						\
 
 #define DEV_IS_EXPANDER(type)	((type == SAS_EDGE_EXPANDER_DEVICE) || (type == SAS_FANOUT_EXPANDER_DEVICE))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IS_SPCV_12G(dev)	((dev->device == 0X8074)		\
+				|| (dev->device == 0X8076)		\
+				|| (dev->device == 0X8077))
+>>>>>>> v3.18
 =======
 #define IS_SPCV_12G(dev)	((dev->device == 0X8074)		\
 				|| (dev->device == 0X8076)		\
@@ -136,7 +142,10 @@ struct pm8001_ioctl_payload {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MPI_FATAL_ERROR_TABLE_OFFSET_MASK 0xFFFFFF
 #define MPI_FATAL_ERROR_TABLE_SIZE(value) ((0xFF000000 & value) >> SHIFT24)
 #define MPI_FATAL_EDUMP_TABLE_LO_OFFSET            0x00     /* HNFBUFL */
@@ -192,6 +201,9 @@ struct forensic_data {
 #define SPCV_MSGU_CFG_TABLE_TRANSFER_DEBUG_INFO  0x80
 #define MAIN_MERRDCTO_MERRDCES		         0xA0/* DWORD 0x28) */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pm8001_dispatch {
 	char *name;
@@ -408,6 +420,10 @@ union main_cfg_table {
 	u32			port_recovery_timer;
 	u32			interrupt_reassertion_delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			fatal_n_non_fatal_dump;	        /* 0x28 */
+>>>>>>> v3.18
 =======
 	u32			fatal_n_non_fatal_dump;	        /* 0x28 */
 >>>>>>> v3.18
@@ -476,11 +492,17 @@ struct pm8001_hba_memspace {
 	u32			memsize;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct isr_param {
 	struct pm8001_hba_info *drv_inst;
 	u32 irq_id;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pm8001_hba_info {
 	char			name[PM8001_NAME_LENGTH];
@@ -488,6 +510,10 @@ struct pm8001_hba_info {
 	unsigned long		flags;
 	spinlock_t		lock;/* host-wide lock */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t		bitmap_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t		bitmap_lock;
 >>>>>>> v3.18
@@ -497,7 +523,10 @@ struct pm8001_hba_info {
 	struct mpi_mem_req	memoryMap;
 	struct encrypt		encrypt_info; /* support encryption */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct forensic_data	forensic_info;
 	u32			fatal_bar_loc;
 	u32			forensic_last_offset;
@@ -505,6 +534,9 @@ struct pm8001_hba_info {
 	u32			forensic_fatal_step;
 	u32			evtlog_ib_offset;
 	u32			evtlog_ob_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem	*msg_unit_tbl_addr;/*Message Unit Table Addr*/
 	void __iomem	*main_cfg_tbl_addr;/*Main Config Table Addr*/
@@ -515,6 +547,10 @@ struct pm8001_hba_info {
 			/*MPI SAS PHY attributes Queue Config Table Addr*/
 	void __iomem	*ivt_tbl_addr; /*MPI IVT Table Addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem	*fatal_tbl_addr; /*MPI IVT Table Addr */
+>>>>>>> v3.18
 =======
 	void __iomem	*fatal_tbl_addr; /*MPI IVT Table Addr */
 >>>>>>> v3.18
@@ -546,7 +582,11 @@ struct pm8001_hba_info {
 #endif
 #ifdef PM8001_USE_TASKLET
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tasklet_struct	tasklet;
+=======
+	struct tasklet_struct	tasklet[PM8001_MAX_MSIX_VEC];
+>>>>>>> v3.18
 =======
 	struct tasklet_struct	tasklet[PM8001_MAX_MSIX_VEC];
 >>>>>>> v3.18
@@ -555,9 +595,14 @@ struct pm8001_hba_info {
 	u32			fw_status;
 	u32			smp_exp_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			int_vector;
 	const struct firmware 	*fw_image;
 	u8			outq[PM8001_MAX_MSIX_VEC];
+=======
+	const struct firmware 	*fw_image;
+	struct isr_param irq_vector[PM8001_MAX_MSIX_VEC];
+>>>>>>> v3.18
 =======
 	const struct firmware 	*fw_image;
 	struct isr_param irq_vector[PM8001_MAX_MSIX_VEC];
@@ -649,7 +694,10 @@ int pm8001_tag_alloc(struct pm8001_hba_info *pm8001_ha, u32 *tag_out);
 void pm8001_tag_init(struct pm8001_hba_info *pm8001_ha);
 u32 pm8001_get_ncq_tag(struct sas_task *task, u32 *tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pm8001_ccb_free(struct pm8001_hba_info *pm8001_ha, u32 ccb_idx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void pm8001_ccb_task_free(struct pm8001_hba_info *pm8001_ha,
@@ -735,11 +783,14 @@ int pm80xx_set_thermal_config(struct pm8001_hba_info *pm8001_ha);
 
 int pm8001_bar4_shift(struct pm8001_hba_info *pm8001_ha, u32 shiftValue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ctl shared API */
 extern struct device_attribute *pm8001_host_attrs[];
 
 =======
+=======
+>>>>>>> v3.18
 void pm8001_set_phy_profile(struct pm8001_hba_info *pm8001_ha,
 	u32 length, u8 *buf);
 int pm80xx_bar4_shift(struct pm8001_hba_info *pm8001_ha, u32 shiftValue);
@@ -761,6 +812,9 @@ pm8001_ccb_task_free_done(struct pm8001_hba_info *pm8001_ha,
 	spin_lock(&pm8001_ha->lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

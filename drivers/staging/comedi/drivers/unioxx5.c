@@ -19,10 +19,13 @@
  *  GNU General Public License for more details.                           *
  *                                                                         *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  You should have received a copy of the GNU General Public License      *
  *  along with this program; if not, write to the Free Software            *
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.              *
  *                                                                         *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  ***************************************************************************/
@@ -46,6 +49,7 @@ Devices: [Fastwel] UNIOxx-5 (unioxx5),
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include "../comedidev.h"
@@ -54,11 +58,16 @@ Devices: [Fastwel] UNIOxx-5 (unioxx5),
 
 #define DRIVER_NAME "unioxx5"
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/module.h>
 #include <linux/delay.h>
 #include "../comedidev.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UNIOXX5_SIZE 0x10
 #define UNIOXX5_SUBDEV_BASE 0xA000	/* base addr of first subdev */
@@ -107,6 +116,7 @@ static int __unioxx5_define_chan_offset(int chan_num)
 
 #if 0				/* not used? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __unioxx5_digital_config(struct unioxx5_subd_priv *usp, int mode)
 {
 	int i, mask;
@@ -114,6 +124,8 @@ static void __unioxx5_digital_config(struct unioxx5_subd_priv *usp, int mode)
 	mask = (mode == ALL_2_OUTPUT) ? 0xFF : 0x00;
 	printk("COMEDI: mode = %d\n", mask);
 =======
+=======
+>>>>>>> v3.18
 static void __unioxx5_digital_config(struct comedi_subdevice *s, int mode)
 {
 	struct unioxx5_subd_priv *usp = s->private;
@@ -122,6 +134,9 @@ static void __unioxx5_digital_config(struct comedi_subdevice *s, int mode)
 
 	mask = (mode == ALL_2_OUTPUT) ? 0xFF : 0x00;
 	dev_dbg(csdev, "mode = %d\n", mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	outb(1, usp->usp_iobase + 0);
@@ -162,23 +177,35 @@ static void __unioxx5_analog_config(struct unioxx5_subd_priv *usp, int channel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __unioxx5_digital_read(struct unioxx5_subd_priv *usp,
 				  unsigned int *data, int channel, int minor)
 {
 =======
+=======
+>>>>>>> v3.18
 static int __unioxx5_digital_read(struct comedi_subdevice *s,
 				  unsigned int *data, int channel, int minor)
 {
 	struct unioxx5_subd_priv *usp = s->private;
 	struct device *csdev = s->device->class_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int channel_offset, mask = 1 << (channel & 0x07);
 
 	channel_offset = __unioxx5_define_chan_offset(channel);
 	if (channel_offset < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("comedi%d: undefined channel %d. channel range is 0 .. 23\n",
 		       minor, channel);
+=======
+		dev_err(csdev,
+			"undefined channel %d. channel range is 0 .. 23\n",
+			channel);
+>>>>>>> v3.18
 =======
 		dev_err(csdev,
 			"undefined channel %d. channel range is 0 .. 23\n",
@@ -198,15 +225,21 @@ static int __unioxx5_digital_read(struct comedi_subdevice *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __unioxx5_analog_read(struct unioxx5_subd_priv *usp,
 				 unsigned int *data, int channel, int minor)
 {
 =======
+=======
+>>>>>>> v3.18
 static int __unioxx5_analog_read(struct comedi_subdevice *s,
 				 unsigned int *data, int channel, int minor)
 {
 	struct unioxx5_subd_priv *usp = s->private;
 	struct device *csdev = s->device->class_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int module_no, read_ch;
 	char control;
@@ -217,8 +250,14 @@ static int __unioxx5_analog_read(struct comedi_subdevice *s,
 	/* defining if given module can work on input */
 	if (usp->usp_module_type[module_no] & MODULE_OUTPUT_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("comedi%d: module in position %d with id 0x%02x is for output only",
 		       minor, module_no, usp->usp_module_type[module_no]);
+=======
+		dev_err(csdev,
+			"module in position %d with id 0x%02x is for output only",
+			module_no, usp->usp_module_type[module_no]);
+>>>>>>> v3.18
 =======
 		dev_err(csdev,
 			"module in position %d with id 0x%02x is for output only",
@@ -240,7 +279,11 @@ static int __unioxx5_analog_read(struct comedi_subdevice *s,
 	/* if four bytes readding error occurs - return 0(false) */
 	if ((control & Rx4CA_ERR_MASK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("COMEDI: 4 bytes error\n");
+=======
+		dev_err(csdev, "4 bytes error\n");
+>>>>>>> v3.18
 =======
 		dev_err(csdev, "4 bytes error\n");
 >>>>>>> v3.18
@@ -256,15 +299,21 @@ static int __unioxx5_analog_read(struct comedi_subdevice *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __unioxx5_digital_write(struct unioxx5_subd_priv *usp,
 				   unsigned int *data, int channel, int minor)
 {
 =======
+=======
+>>>>>>> v3.18
 static int __unioxx5_digital_write(struct comedi_subdevice *s,
 				   unsigned int *data, int channel, int minor)
 {
 	struct unioxx5_subd_priv *usp = s->private;
 	struct device *csdev = s->device->class_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int channel_offset, val;
 	int mask = 1 << (channel & 0x07);
@@ -272,8 +321,14 @@ static int __unioxx5_digital_write(struct comedi_subdevice *s,
 	channel_offset = __unioxx5_define_chan_offset(channel);
 	if (channel_offset < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("comedi%d: undefined channel %d. channel range is 0 .. 23\n",
 		       minor, channel);
+=======
+		dev_err(csdev,
+			"undefined channel %d. channel range is 0 .. 23\n",
+			channel);
+>>>>>>> v3.18
 =======
 		dev_err(csdev,
 			"undefined channel %d. channel range is 0 .. 23\n",
@@ -298,15 +353,21 @@ static int __unioxx5_digital_write(struct comedi_subdevice *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __unioxx5_analog_write(struct unioxx5_subd_priv *usp,
 				  unsigned int *data, int channel, int minor)
 {
 =======
+=======
+>>>>>>> v3.18
 static int __unioxx5_analog_write(struct comedi_subdevice *s,
 				  unsigned int *data, int channel, int minor)
 {
 	struct unioxx5_subd_priv *usp = s->private;
 	struct device *csdev = s->device->class_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int module, i;
 
@@ -316,8 +377,14 @@ static int __unioxx5_analog_write(struct comedi_subdevice *s,
 	/* defining if given module can work on output */
 	if (!(usp->usp_module_type[module] & MODULE_OUTPUT_MASK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("comedi%d: module in position %d with id 0x%0x is for input only!\n",
 		       minor, module, usp->usp_module_type[module]);
+=======
+		dev_err(csdev,
+			"module in position %d with id 0x%0x is for input only!\n",
+			module, usp->usp_module_type[module]);
+>>>>>>> v3.18
 =======
 		dev_err(csdev,
 			"module in position %d with id 0x%0x is for input only!\n",
@@ -360,15 +427,21 @@ static int unioxx5_subdev_read(struct comedi_device *dev,
 
 	if (type == MODULE_DIGITAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!__unioxx5_digital_read(usp, data, channel, dev->minor))
 			return -1;
 	} else {
 		if (!__unioxx5_analog_read(usp, data, channel, dev->minor))
 =======
+=======
+>>>>>>> v3.18
 		if (!__unioxx5_digital_read(subdev, data, channel, dev->minor))
 			return -1;
 	} else {
 		if (!__unioxx5_analog_read(subdev, data, channel, dev->minor))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -1;
 	}
@@ -389,15 +462,21 @@ static int unioxx5_subdev_write(struct comedi_device *dev,
 
 	if (type == MODULE_DIGITAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!__unioxx5_digital_write(usp, data, channel, dev->minor))
 			return -1;
 	} else {
 		if (!__unioxx5_analog_write(usp, data, channel, dev->minor))
 =======
+=======
+>>>>>>> v3.18
 		if (!__unioxx5_digital_write(subdev, data, channel, dev->minor))
 			return -1;
 	} else {
 		if (!__unioxx5_analog_write(subdev, data, channel, dev->minor))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -1;
 	}
@@ -419,8 +498,12 @@ static int unioxx5_insn_config(struct comedi_device *dev,
 	if (type != MODULE_DIGITAL) {
 		dev_err(dev->class_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"comedi%d: channel configuration accessible only for digital modules\n",
 			dev->minor);
+=======
+			"channel configuration accessible only for digital modules\n");
+>>>>>>> v3.18
 =======
 			"channel configuration accessible only for digital modules\n");
 >>>>>>> v3.18
@@ -431,8 +514,13 @@ static int unioxx5_insn_config(struct comedi_device *dev,
 	if (channel_offset < 0) {
 		dev_err(dev->class_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"comedi%d: undefined channel %d. channel range is 0 .. 23\n",
 			dev->minor, channel);
+=======
+			"undefined channel %d. channel range is 0 .. 23\n",
+			channel);
+>>>>>>> v3.18
 =======
 			"undefined channel %d. channel range is 0 .. 23\n",
 			channel);
@@ -452,8 +540,12 @@ static int unioxx5_insn_config(struct comedi_device *dev,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev->class_dev,
 			"comedi%d: unknown flag\n", dev->minor);
+=======
+		dev_err(dev->class_dev, "unknown flag\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "unknown flag\n");
 >>>>>>> v3.18
@@ -485,6 +577,7 @@ static int __unioxx5_subdev_init(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usp = kzalloc(sizeof(*usp), GFP_KERNEL);
 	if (usp == NULL)
 		return -ENOMEM;
@@ -495,6 +588,8 @@ static int __unioxx5_subdev_init(struct comedi_device *dev,
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	usp = comedi_alloc_spriv(s, sizeof(*usp));
 	if (!usp)
 		return -ENOMEM;
@@ -502,6 +597,9 @@ static int __unioxx5_subdev_init(struct comedi_device *dev,
 	ret = __comedi_request_region(dev, iobase, UNIOXX5_SIZE);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usp->usp_iobase = iobase;
 
@@ -537,7 +635,10 @@ static int __unioxx5_subdev_init(struct comedi_device *dev,
 	/* initial subdevice for digital or analog i/o */
 	s->type = COMEDI_SUBD_DIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->private = usp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s->subdev_flags = SDF_READABLE | SDF_WRITABLE;
@@ -565,14 +666,20 @@ static int unioxx5_attach(struct comedi_device *dev,
 	dev->iobase = iobase;
 	iobase += UNIOXX5_SUBDEV_BASE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* defining number of subdevices and getting they types (it must be 'g01')  */
 	for (i = n_subd = 0, ba = iobase; i < 4; i++, ba += UNIOXX5_SUBDEV_ODDS) {
 =======
+=======
+>>>>>>> v3.18
 	n_subd = 0;
 
 	/* getting number of subdevices with types 'g01' */
 	for (i = 0, ba = iobase; i < 4; i++, ba += UNIOXX5_SUBDEV_ODDS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		id = inb(ba + 0xE);
 		num = inb(ba + 0xF);
@@ -608,6 +715,7 @@ static int unioxx5_attach(struct comedi_device *dev,
 static void unioxx5_detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	struct comedi_subdevice *subdev;
 	struct unioxx5_subd_priv *usp;
@@ -618,6 +726,8 @@ static void unioxx5_detach(struct comedi_device *dev)
 		release_region(usp->usp_iobase, UNIOXX5_SIZE);
 		kfree(subdev->private);
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s;
 	struct unioxx5_subd_priv *spriv;
 	int i;
@@ -627,13 +737,20 @@ static void unioxx5_detach(struct comedi_device *dev)
 		spriv = s->private;
 		if (spriv && spriv->usp_iobase)
 			release_region(spriv->usp_iobase, UNIOXX5_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 static struct comedi_driver unioxx5_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_name	= DRIVER_NAME,
+=======
+	.driver_name	= "unioxx5",
+>>>>>>> v3.18
 =======
 	.driver_name	= "unioxx5",
 >>>>>>> v3.18

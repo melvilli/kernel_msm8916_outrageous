@@ -640,6 +640,7 @@ static int venc_probe(struct platform_device *pdev)
 	struct venc_state *venc;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	venc = kzalloc(sizeof(struct venc_state), GFP_KERNEL);
@@ -707,6 +708,8 @@ static int venc_probe(struct platform_device *pdev)
 			goto release_vdaccfg_mem_region;
 		}
 =======
+=======
+>>>>>>> v3.18
 
 	if (!pdev->dev.platform_data) {
 		dev_err(&pdev->dev, "No platform data for VENC sub device");
@@ -737,11 +740,15 @@ static int venc_probe(struct platform_device *pdev)
 		venc->vdaccfg_reg = devm_ioremap_resource(&pdev->dev, res);
 		if (IS_ERR(venc->vdaccfg_reg))
 			return PTR_ERR(venc->vdaccfg_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_lock_init(&venc->lock);
 	platform_set_drvdata(pdev, venc);
 	dev_notice(venc->pdev, "VENC sub device probe success\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 
@@ -759,10 +766,15 @@ free_mem:
 
 	return 0;
 >>>>>>> v3.18
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int venc_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct venc_state *venc = platform_get_drvdata(pdev);
 	struct resource *res;
@@ -777,6 +789,8 @@ static int venc_remove(struct platform_device *pdev)
 	}
 	kfree(venc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

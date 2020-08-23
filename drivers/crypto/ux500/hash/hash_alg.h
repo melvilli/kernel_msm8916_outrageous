@@ -12,6 +12,10 @@
 
 #define HASH_BLOCK_SIZE			64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HASH_DMA_FIFO			4
+>>>>>>> v3.18
 =======
 #define HASH_DMA_FIFO			4
 >>>>>>> v3.18
@@ -352,7 +356,12 @@ struct hash_req_ctx {
 /**
  * struct hash_device_data - structure for a hash device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @base:		Pointer to the hardware base address.
+=======
+ * @base:		Pointer to virtual base address of the hash device.
+ * @phybase:		Pointer to physical memory location of the hash device.
+>>>>>>> v3.18
 =======
  * @base:		Pointer to virtual base address of the hash device.
  * @phybase:		Pointer to physical memory location of the hash device.
@@ -371,6 +380,10 @@ struct hash_req_ctx {
 struct hash_device_data {
 	struct hash_register __iomem	*base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phys_addr_t             phybase;
+>>>>>>> v3.18
 =======
 	phys_addr_t             phybase;
 >>>>>>> v3.18

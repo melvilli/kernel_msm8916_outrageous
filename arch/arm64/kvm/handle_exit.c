@@ -67,6 +67,11 @@ static int kvm_handle_wfx(struct kvm_vcpu *vcpu, struct kvm_run *run)
 		kvm_vcpu_block(vcpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvm_skip_instr(vcpu, kvm_vcpu_trap_il_is32bit(vcpu));
+
+>>>>>>> v3.18
 =======
 	kvm_skip_instr(vcpu, kvm_vcpu_trap_il_is32bit(vcpu));
 
@@ -79,9 +84,15 @@ static exit_handle_fn arm_exit_handlers[] = {
 	[ESR_EL2_EC_CP15_32]	= kvm_handle_cp15_32,
 	[ESR_EL2_EC_CP15_64]	= kvm_handle_cp15_64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[ESR_EL2_EC_CP14_MR]	= kvm_handle_cp14_access,
 	[ESR_EL2_EC_CP14_LS]	= kvm_handle_cp14_load_store,
 	[ESR_EL2_EC_CP14_64]	= kvm_handle_cp14_access,
+=======
+	[ESR_EL2_EC_CP14_MR]	= kvm_handle_cp14_32,
+	[ESR_EL2_EC_CP14_LS]	= kvm_handle_cp14_load_store,
+	[ESR_EL2_EC_CP14_64]	= kvm_handle_cp14_64,
+>>>>>>> v3.18
 =======
 	[ESR_EL2_EC_CP14_MR]	= kvm_handle_cp14_32,
 	[ESR_EL2_EC_CP14_LS]	= kvm_handle_cp14_load_store,
@@ -103,7 +114,11 @@ static exit_handle_fn kvm_get_exit_handler(struct kvm_vcpu *vcpu)
 	if (hsr_ec >= ARRAY_SIZE(arm_exit_handlers) ||
 	    !arm_exit_handlers[hsr_ec]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kvm_err("Unkown exception class: hsr: %#08x\n",
+=======
+		kvm_err("Unknown exception class: hsr: %#08x\n",
+>>>>>>> v3.18
 =======
 		kvm_err("Unknown exception class: hsr: %#08x\n",
 >>>>>>> v3.18

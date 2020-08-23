@@ -69,8 +69,12 @@ static int __init cachefiles_init(void)
 				  cachefiles_object_init_once);
 	if (!cachefiles_object_jar) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_NOTICE
 		       "CacheFiles: Failed to allocate an object jar\n");
+=======
+		pr_notice("Failed to allocate an object jar\n");
+>>>>>>> v3.18
 =======
 		pr_notice("Failed to allocate an object jar\n");
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ static int __init cachefiles_init(void)
 		goto error_proc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "CacheFiles: Loaded\n");
+=======
+	pr_info("Loaded\n");
+>>>>>>> v3.18
 =======
 	pr_info("Loaded\n");
 >>>>>>> v3.18
@@ -94,7 +102,11 @@ error_object_jar:
 	misc_deregister(&cachefiles_dev);
 error_dev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kerror("failed to register: %d", ret);
+=======
+	pr_err("failed to register: %d\n", ret);
+>>>>>>> v3.18
 =======
 	pr_err("failed to register: %d\n", ret);
 >>>>>>> v3.18
@@ -109,7 +121,11 @@ fs_initcall(cachefiles_init);
 static void __exit cachefiles_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "CacheFiles: Unloading\n");
+=======
+	pr_info("Unloading\n");
+>>>>>>> v3.18
 =======
 	pr_info("Unloading\n");
 >>>>>>> v3.18

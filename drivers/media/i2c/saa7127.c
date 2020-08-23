@@ -55,7 +55,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/saa7127.h>
@@ -255,11 +258,14 @@ static struct i2c_reg_value saa7127_init_config_50hz_secam[] = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct saa7127_state {
 	struct v4l2_subdev sd;
 	v4l2_std_id std;
 	u32 ident;
 =======
+=======
+>>>>>>> v3.18
 enum saa712x_model {
 	SAA7127,
 	SAA7129,
@@ -269,6 +275,9 @@ struct saa7127_state {
 	struct v4l2_subdev sd;
 	v4l2_std_id std;
 	enum saa712x_model ident;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enum saa7127_input_type input_type;
 	enum saa7127_output_type output_type;
@@ -498,7 +507,11 @@ static int saa7127_set_std(struct v4l2_subdev *sd, v4l2_std_id std)
 		state->reg_61 = SAA7127_60HZ_DAC_CONTROL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (state->ident == V4L2_IDENT_SAA7129 &&
+=======
+	} else if (state->ident == SAA7129 &&
+>>>>>>> v3.18
 =======
 	} else if (state->ident == SAA7129 &&
 >>>>>>> v3.18
@@ -537,7 +550,11 @@ static int saa7127_set_output_type(struct v4l2_subdev *sd, int output)
 
 	case SAA7127_OUTPUT_TYPE_COMPOSITE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (state->ident == V4L2_IDENT_SAA7129)
+=======
+		if (state->ident == SAA7129)
+>>>>>>> v3.18
 =======
 		if (state->ident == SAA7129)
 >>>>>>> v3.18
@@ -549,7 +566,11 @@ static int saa7127_set_output_type(struct v4l2_subdev *sd, int output)
 
 	case SAA7127_OUTPUT_TYPE_SVIDEO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (state->ident == V4L2_IDENT_SAA7129)
+=======
+		if (state->ident == SAA7129)
+>>>>>>> v3.18
 =======
 		if (state->ident == SAA7129)
 >>>>>>> v3.18
@@ -571,7 +592,11 @@ static int saa7127_set_output_type(struct v4l2_subdev *sd, int output)
 
 	case SAA7127_OUTPUT_TYPE_BOTH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (state->ident == V4L2_IDENT_SAA7129)
+=======
+		if (state->ident == SAA7129)
+>>>>>>> v3.18
 =======
 		if (state->ident == SAA7129)
 >>>>>>> v3.18
@@ -693,12 +718,15 @@ static int saa7127_s_vbi_data(struct v4l2_subdev *sd, const struct v4l2_sliced_v
 static int saa7127_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->val = saa7127_read(sd, reg->reg & 0xff);
@@ -709,6 +737,7 @@ static int saa7127_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 static int saa7127_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -717,11 +746,14 @@ static int saa7127_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regi
 		return -EPERM;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	saa7127_write(sd, reg->reg & 0xff, reg->val & 0xff);
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int saa7127_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
@@ -731,6 +763,8 @@ static int saa7127_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 	return v4l2_chip_ident_i2c_client(client, chip, state->ident, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int saa7127_log_status(struct v4l2_subdev *sd)
@@ -753,7 +787,10 @@ static int saa7127_log_status(struct v4l2_subdev *sd)
 static const struct v4l2_subdev_core_ops saa7127_core_ops = {
 	.log_status = saa7127_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = saa7127_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -796,7 +833,11 @@ static int saa7127_probe(struct i2c_client *client,
 			client->addr << 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct saa7127_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -815,7 +856,10 @@ static int saa7127_probe(struct i2c_client *client,
 			(saa7127_read(sd, 0x29) & 0x3f) != 0x1d) {
 		v4l2_dbg(1, debug, sd, "saa7127 not found\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -ENODEV;
@@ -833,15 +877,21 @@ static int saa7127_probe(struct i2c_client *client,
 			saa7127_write(sd, SAA7129_REG_FADE_KEY_COL2,
 					read_result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			state->ident = V4L2_IDENT_SAA7129;
 			strlcpy(client->name, "saa7129", I2C_NAME_SIZE);
 		} else {
 			state->ident = V4L2_IDENT_SAA7127;
 =======
+=======
+>>>>>>> v3.18
 			state->ident = SAA7129;
 			strlcpy(client->name, "saa7129", I2C_NAME_SIZE);
 		} else {
 			state->ident = SAA7127;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			strlcpy(client->name, "saa7127", I2C_NAME_SIZE);
 		}
@@ -867,7 +917,11 @@ static int saa7127_probe(struct i2c_client *client,
 	saa7127_set_video_enable(sd, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state->ident == V4L2_IDENT_SAA7129)
+=======
+	if (state->ident == SAA7129)
+>>>>>>> v3.18
 =======
 	if (state->ident == SAA7129)
 >>>>>>> v3.18
@@ -885,7 +939,10 @@ static int saa7127_remove(struct i2c_client *client)
 	/* Turn off TV output */
 	saa7127_set_video_enable(sd, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -896,15 +953,21 @@ static int saa7127_remove(struct i2c_client *client)
 static struct i2c_device_id saa7127_id[] = {
 	{ "saa7127_auto", 0 },	/* auto-detection */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "saa7126", V4L2_IDENT_SAA7127 },
 	{ "saa7127", V4L2_IDENT_SAA7127 },
 	{ "saa7128", V4L2_IDENT_SAA7129 },
 	{ "saa7129", V4L2_IDENT_SAA7129 },
 =======
+=======
+>>>>>>> v3.18
 	{ "saa7126", SAA7127 },
 	{ "saa7127", SAA7127 },
 	{ "saa7128", SAA7129 },
 	{ "saa7129", SAA7129 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };

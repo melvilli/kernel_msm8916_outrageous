@@ -40,7 +40,10 @@ typedef int (*nfsd_dirop_t)(struct inode *, struct dentry *, int, int);
 
 /* nfsd/vfs.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int		fh_lock_parent(struct svc_fh *, struct dentry *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int		nfsd_racache_init(int);
@@ -57,9 +60,14 @@ __be32		nfsd_setattr(struct svc_rqst *, struct svc_fh *,
 int nfsd_mountpoint(struct dentry *, struct svc_export *);
 #ifdef CONFIG_NFSD_V4
 <<<<<<< HEAD
+<<<<<<< HEAD
 __be32          nfsd4_set_nfs4_acl(struct svc_rqst *, struct svc_fh *,
                     struct nfs4_acl *);
 int             nfsd4_get_nfs4_acl(struct svc_rqst *, struct dentry *, struct nfs4_acl **);
+=======
+__be32          nfsd4_set_nfs4_label(struct svc_rqst *, struct svc_fh *,
+		    struct xdr_netobj *);
+>>>>>>> v3.18
 =======
 __be32          nfsd4_set_nfs4_label(struct svc_rqst *, struct svc_fh *,
 		    struct xdr_netobj *);
@@ -81,11 +89,14 @@ __be32		nfsd_open(struct svc_rqst *, struct svc_fh *, umode_t,
 				int, struct file **);
 void		nfsd_close(struct file *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 __be32 		nfsd_read(struct svc_rqst *, struct svc_fh *,
 				loff_t, struct kvec *, int, unsigned long *);
 __be32 		nfsd_read_file(struct svc_rqst *, struct svc_fh *, struct file *,
 				loff_t, struct kvec *, int, unsigned long *);
 =======
+=======
+>>>>>>> v3.18
 struct raparms;
 __be32		nfsd_get_tmp_read_open(struct svc_rqst *, struct svc_fh *,
 				struct file **, struct raparms **);
@@ -96,6 +107,9 @@ __be32		nfsd_readv(struct file *, loff_t, struct kvec *, int,
 				unsigned long *);
 __be32 		nfsd_read(struct svc_rqst *, struct svc_fh *,
 				loff_t, struct kvec *, int, unsigned long *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __be32 		nfsd_write(struct svc_rqst *, struct svc_fh *,struct file *,
 				loff_t, struct kvec *,int, unsigned long *, int *);
@@ -103,8 +117,13 @@ __be32		nfsd_readlink(struct svc_rqst *, struct svc_fh *,
 				char *, int *);
 __be32		nfsd_symlink(struct svc_rqst *, struct svc_fh *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				char *name, int len, char *path, int plen,
 				struct svc_fh *res, struct iattr *);
+=======
+				char *name, int len, char *path,
+				struct svc_fh *res);
+>>>>>>> v3.18
 =======
 				char *name, int len, char *path,
 				struct svc_fh *res);
@@ -114,6 +133,7 @@ __be32		nfsd_link(struct svc_rqst *, struct svc_fh *,
 __be32		nfsd_rename(struct svc_rqst *,
 				struct svc_fh *, char *, int,
 				struct svc_fh *, char *, int);
+<<<<<<< HEAD
 <<<<<<< HEAD
 __be32		nfsd_remove(struct svc_rqst *,
 				struct svc_fh *, char *, int);
@@ -125,11 +145,16 @@ int		nfsd_truncate(struct svc_rqst *, struct svc_fh *,
 __be32		nfsd_unlink(struct svc_rqst *, struct svc_fh *, int type,
 				char *name, int len);
 >>>>>>> v3.18
+=======
+__be32		nfsd_unlink(struct svc_rqst *, struct svc_fh *, int type,
+				char *name, int len);
+>>>>>>> v3.18
 __be32		nfsd_readdir(struct svc_rqst *, struct svc_fh *,
 			     loff_t *, struct readdir_cd *, filldir_t);
 __be32		nfsd_statfs(struct svc_rqst *, struct svc_fh *,
 				struct kstatfs *, int access);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int		nfsd_notify_change(struct inode *, struct iattr *);
 __be32		nfsd_permission(struct svc_rqst *, struct svc_export *,
@@ -140,6 +165,10 @@ int		nfsd_sync_dir(struct dentry *dp);
 struct posix_acl *nfsd_get_posix_acl(struct svc_fh *, int);
 int nfsd_set_posix_acl(struct svc_fh *, int, struct posix_acl *);
 #endif
+=======
+__be32		nfsd_permission(struct svc_rqst *, struct svc_export *,
+				struct dentry *, int);
+>>>>>>> v3.18
 =======
 __be32		nfsd_permission(struct svc_rqst *, struct svc_export *,
 				struct dentry *, int);

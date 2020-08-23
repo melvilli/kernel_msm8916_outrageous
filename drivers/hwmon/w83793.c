@@ -354,6 +354,12 @@ store_vrm(struct device *dev, struct device_attribute *attr,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (val > 255)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (val > 255)
 		return -EINVAL;
@@ -815,7 +821,11 @@ show_sf_ctrl(struct device *dev, struct device_attribute *attr, char *buf)
 		val = data->temp_fan_map[index];
 	} else if (nr == TEMP_PWM_ENABLE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* +2 to transfrom into 2 and 3 to conform with sysfs intf */
+=======
+		/* +2 to transform into 2 and 3 to conform with sysfs intf */
+>>>>>>> v3.18
 =======
 		/* +2 to transform into 2 and 3 to conform with sysfs intf */
 >>>>>>> v3.18
@@ -1210,7 +1220,12 @@ static void w83793_init_client(struct i2c_client *client)
 static int watchdog_set_timeout(struct w83793_data *data, int timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, mtimeout;
+=======
+	unsigned int mtimeout;
+	int ret;
+>>>>>>> v3.18
 =======
 	unsigned int mtimeout;
 	int ret;

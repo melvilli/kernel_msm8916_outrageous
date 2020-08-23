@@ -883,8 +883,13 @@ brcms_c_dotxstatus(struct brcms_c_info *wlc, struct tx_status *txs)
 
 	if (txs->phyerr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcms_err(wlc->hw->d11core, "phyerr 0x%x, rate 0x%x\n",
 			  txs->phyerr, txh->MainRates);
+=======
+		brcms_dbg_tx(wlc->hw->d11core, "phyerr 0x%x, rate 0x%x\n",
+			     txs->phyerr, txh->MainRates);
+>>>>>>> v3.18
 =======
 		brcms_dbg_tx(wlc->hw->d11core, "phyerr 0x%x, rate 0x%x\n",
 			     txs->phyerr, txh->MainRates);
@@ -1912,7 +1917,11 @@ static void brcms_c_get_macaddr(struct brcms_hardware *wlc_hw, u8 etheraddr[ETH_
 	/* If macaddr exists, use it (Sromrev4, CIS, ...). */
 	if (!is_zero_ether_addr(sprom->il0mac)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(etheraddr, sprom->il0mac, 6);
+=======
+		memcpy(etheraddr, sprom->il0mac, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(etheraddr, sprom->il0mac, ETH_ALEN);
 >>>>>>> v3.18
@@ -1921,9 +1930,15 @@ static void brcms_c_get_macaddr(struct brcms_hardware *wlc_hw, u8 etheraddr[ETH_
 
 	if (wlc_hw->_nbands > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(etheraddr, sprom->et1mac, 6);
 	else
 		memcpy(etheraddr, sprom->il0mac, 6);
+=======
+		memcpy(etheraddr, sprom->et1mac, ETH_ALEN);
+	else
+		memcpy(etheraddr, sprom->il0mac, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(etheraddr, sprom->et1mac, ETH_ALEN);
 	else
@@ -4668,7 +4683,13 @@ static int brcms_b_attach(struct brcms_c_info *wlc, struct bcma_device *core,
 		wlc->band->radioid = wlc_hw->band->radioid;
 		wlc->band->radiorev = wlc_hw->band->radiorev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+		brcms_dbg_info(core, "wl%d: phy %u/%u radio %x/%u\n", unit,
+			       wlc->band->phytype, wlc->band->phyrev,
+			       wlc->band->radioid, wlc->band->radiorev);
+>>>>>>> v3.18
 =======
 		brcms_dbg_info(core, "wl%d: phy %u/%u radio %x/%u\n", unit,
 			       wlc->band->phytype, wlc->band->phyrev,
@@ -4689,7 +4710,11 @@ static int brcms_b_attach(struct brcms_c_info *wlc, struct bcma_device *core,
 
 	/* Match driver "down" state */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ai_pci_down(wlc_hw->sih);
+=======
+	bcma_core_pci_down(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 =======
 	bcma_core_pci_down(wlc_hw->d11core->bus);
 >>>>>>> v3.18
@@ -4731,6 +4756,7 @@ static int brcms_b_attach(struct brcms_c_info *wlc, struct bcma_device *core,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void brcms_c_attach_antgain_init(struct brcms_c_info *wlc)
 {
 	uint unit;
@@ -4766,6 +4792,8 @@ static void brcms_c_attach_antgain_init(struct brcms_c_info *wlc)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static bool brcms_c_attach_stf_ant_init(struct brcms_c_info *wlc)
@@ -4807,8 +4835,11 @@ static bool brcms_c_attach_stf_ant_init(struct brcms_c_info *wlc)
 		wlc->band->antgain = sprom->antenna_gain.a0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcms_c_attach_antgain_init(wlc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return true;
@@ -4900,7 +4931,11 @@ static void brcms_c_detach_module(struct brcms_c_info *wlc)
  * low level detach
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int brcms_b_detach(struct brcms_c_info *wlc)
+=======
+static void brcms_b_detach(struct brcms_c_info *wlc)
+>>>>>>> v3.18
 =======
 static void brcms_b_detach(struct brcms_c_info *wlc)
 >>>>>>> v3.18
@@ -4909,9 +4944,12 @@ static void brcms_b_detach(struct brcms_c_info *wlc)
 	struct brcms_hw_band *band;
 	struct brcms_hardware *wlc_hw = wlc->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int callbacks;
 
 	callbacks = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4937,9 +4975,12 @@ static void brcms_b_detach(struct brcms_c_info *wlc)
 		wlc_hw->sih = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return callbacks;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4957,7 +4998,11 @@ static void brcms_b_detach(struct brcms_c_info *wlc)
 uint brcms_c_detach(struct brcms_c_info *wlc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint callbacks = 0;
+=======
+	uint callbacks;
+>>>>>>> v3.18
 =======
 	uint callbacks;
 >>>>>>> v3.18
@@ -4966,14 +5011,20 @@ uint brcms_c_detach(struct brcms_c_info *wlc)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	callbacks += brcms_b_detach(wlc);
 
 	/* delete software timers */
 =======
+=======
+>>>>>>> v3.18
 	brcms_b_detach(wlc);
 
 	/* delete software timers */
 	callbacks = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!brcms_c_radio_monitor_stop(wlc))
 		callbacks++;
@@ -5063,7 +5114,11 @@ static int brcms_b_up_prep(struct brcms_hardware *wlc_hw)
 	if (brcms_b_radio_read_hwdisabled(wlc_hw)) {
 		/* put SB PCI in down state again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ai_pci_down(wlc_hw->sih);
+=======
+		bcma_core_pci_down(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 =======
 		bcma_core_pci_down(wlc_hw->d11core->bus);
 >>>>>>> v3.18
@@ -5072,7 +5127,11 @@ static int brcms_b_up_prep(struct brcms_hardware *wlc_hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ai_pci_up(wlc_hw->sih);
+=======
+	bcma_core_pci_up(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 =======
 	bcma_core_pci_up(wlc_hw->d11core->bus);
 >>>>>>> v3.18
@@ -5273,7 +5332,11 @@ static int brcms_b_down_finish(struct brcms_hardware *wlc_hw)
 		/* turn off primary xtal and pll */
 		if (!wlc_hw->noreset) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ai_pci_down(wlc_hw->sih);
+=======
+			bcma_core_pci_down(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 =======
 			bcma_core_pci_down(wlc_hw->d11core->bus);
 >>>>>>> v3.18
@@ -5758,7 +5821,11 @@ static bool brcms_c_chipmatch_pci(struct bcma_device *core)
 	if ((device == BCM43224_D11N_ID) || (device == BCM43225_D11N2G_ID))
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device == BCM4313_D11N2G_ID)
+=======
+	if (device == BCM4313_D11N2G_ID || device == BCM4313_CHIP_ID)
+>>>>>>> v3.18
 =======
 	if (device == BCM4313_D11N2G_ID || device == BCM4313_CHIP_ID)
 >>>>>>> v3.18
@@ -7175,7 +7242,10 @@ prep_mac80211_status(struct brcms_c_info *wlc, struct d11rxhdr *rxh,
 		     struct ieee80211_rx_status *rx_status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int preamble;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int channel;
@@ -7261,7 +7331,10 @@ prep_mac80211_status(struct brcms_c_info *wlc, struct d11rxhdr *rxh,
 
 		/* Determine short preamble and rate_idx */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		preamble = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (is_cck_rate(rspec)) {

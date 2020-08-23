@@ -260,7 +260,11 @@ start_ap:
 	 */
 	movl r16=(IA64_PSR_IT|IA64_PSR_IC|IA64_PSR_DT|IA64_PSR_RT|IA64_PSR_DFH|IA64_PSR_BN \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  |IA64_PSR_DI|IA64_PSR_AC)
+=======
+		  |IA64_PSR_DI)
+>>>>>>> v3.18
 =======
 		  |IA64_PSR_DI)
 >>>>>>> v3.18
@@ -421,8 +425,11 @@ start_ap:
 default_setup_hook = 0		// Currently nothing needs to be done.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.weak xen_setup_hook
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.global hypervisor_type
@@ -434,7 +441,10 @@ hypervisor_type:
 hypervisor_setup_hooks:
 	data8		default_setup_hook
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data8		xen_setup_hook
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 num_hypervisor_hooks = (. - hypervisor_setup_hooks) / 8
@@ -1046,7 +1056,11 @@ END(ia64_delay_loop)
  * NOT synchronized across CPUs its return value must never be
  * compared against the values returned on another CPU.  The usage in
 <<<<<<< HEAD
+<<<<<<< HEAD
  * kernel/sched.c ensures that.
+=======
+ * kernel/sched/core.c ensures that.
+>>>>>>> v3.18
 =======
  * kernel/sched/core.c ensures that.
 >>>>>>> v3.18

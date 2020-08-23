@@ -32,15 +32,21 @@
 #include <sound/memalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
 
 #include <mach/cpu.h>
 #include <mach/gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/dma-dw.h>
 #include <linux/dma/dw.h>
 
 #include <mach/cpu.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_AT91
@@ -954,8 +960,14 @@ static int atmel_ac97c_probe(struct platform_device *pdev)
 	clk_enable(pclk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			THIS_MODULE, sizeof(struct atmel_ac97c), &card);
+=======
+	retval = snd_card_new(&pdev->dev, SNDRV_DEFAULT_IDX1,
+			      SNDRV_DEFAULT_STR1, THIS_MODULE,
+			      sizeof(struct atmel_ac97c), &card);
+>>>>>>> v3.18
 =======
 	retval = snd_card_new(&pdev->dev, SNDRV_DEFAULT_IDX1,
 			      SNDRV_DEFAULT_STR1, THIS_MODULE,
@@ -1005,8 +1017,11 @@ static int atmel_ac97c_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atmel_ac97c_reset(chip);
@@ -1131,8 +1146,11 @@ err_dma:
 	}
 err_ac97_bus:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (gpio_is_valid(chip->reset_pin))
@@ -1216,7 +1234,10 @@ static int atmel_ac97c_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_card_free(card);
@@ -1226,6 +1247,10 @@ static int atmel_ac97c_remove(struct platform_device *pdev)
 
 static struct platform_driver atmel_ac97c_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe		= atmel_ac97c_probe,
+>>>>>>> v3.18
 =======
 	.probe		= atmel_ac97c_probe,
 >>>>>>> v3.18
@@ -1236,6 +1261,7 @@ static struct platform_driver atmel_ac97c_driver = {
 		.pm	= ATMEL_AC97C_PM_OPS,
 	},
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __init atmel_ac97c_init(void)
@@ -1250,6 +1276,9 @@ static void __exit atmel_ac97c_exit(void)
 	platform_driver_unregister(&atmel_ac97c_driver);
 }
 module_exit(atmel_ac97c_exit);
+=======
+module_platform_driver(atmel_ac97c_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(atmel_ac97c_driver);
 >>>>>>> v3.18

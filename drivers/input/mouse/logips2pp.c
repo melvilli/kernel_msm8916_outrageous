@@ -221,7 +221,11 @@ static const struct ps2pp_info *get_model_info(unsigned char model)
 				PS2PP_WHEEL | PS2PP_SIDE_BTN | PS2PP_TASK_BTN |
 				PS2PP_EXTRA_BTN | PS2PP_NAV_BTN },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ 66,	PS2PP_KIND_MX,					/* MX3100 reciver */
+=======
+		{ 66,	PS2PP_KIND_MX,					/* MX3100 receiver */
+>>>>>>> v3.18
 =======
 		{ 66,	PS2PP_KIND_MX,					/* MX3100 receiver */
 >>>>>>> v3.18

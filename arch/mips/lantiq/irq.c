@@ -62,7 +62,11 @@
 #define MIPS_CPU_IRQ_CASCADE		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MIPS_MT_SMP) || defined(CONFIG_MIPS_MT_SMTC)
+=======
+#ifdef CONFIG_MIPS_MT_SMP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MIPS_MT_SMP
 >>>>>>> v3.18
@@ -395,7 +399,11 @@ int __init icu_of_init(struct device_node *node, struct device_node *parent)
 						ltq_eiu_irq, exin_avail);
 		if (ret != exin_avail)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			panic("failed to load external irq resources\n");
+=======
+			panic("failed to load external irq resources");
+>>>>>>> v3.18
 =======
 			panic("failed to load external irq resources");
 >>>>>>> v3.18
@@ -449,7 +457,11 @@ int __init icu_of_init(struct device_node *node, struct device_node *parent)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(CONFIG_MIPS_MT_SMP) && !defined(CONFIG_MIPS_MT_SMTC)
+=======
+#ifndef CONFIG_MIPS_MT_SMP
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_MIPS_MT_SMP
 >>>>>>> v3.18
@@ -474,7 +486,11 @@ int __init icu_of_init(struct device_node *node, struct device_node *parent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18

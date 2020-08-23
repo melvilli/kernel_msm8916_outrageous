@@ -22,9 +22,15 @@
 #include <mach/hardware.h>
 #include <mach/irqs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/gpio.h>
 
 #define GPIO_BASE(x)		IO_ADDRESS(GEMINI_GPIO_BASE(x))
+=======
+
+#define GPIO_BASE(x)		IO_ADDRESS(GEMINI_GPIO_BASE(x))
+#define irq_to_gpio(x)		((x) - GPIO_IRQ_BASE)
+>>>>>>> v3.18
 =======
 
 #define GPIO_BASE(x)		IO_ADDRESS(GEMINI_GPIO_BASE(x))

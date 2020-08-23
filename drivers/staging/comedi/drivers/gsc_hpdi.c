@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/gsc_hpdi.c
     This is a driver for the General Standards Corporation High
     Speed Parallel Digital Interface rs485 boards.
@@ -26,6 +27,8 @@
 
 ************************************************************************/
 =======
+=======
+>>>>>>> v3.18
  * gsc_hpdi.c
  * Comedi driver the General Standards Corporation
  * High Speed Parallel Digital Interface rs485 boards.
@@ -46,6 +49,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -69,8 +75,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -83,6 +93,7 @@
 #include "plx9080.h"
 #include "comedi_fc.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void abort_dma(struct comedi_device *dev, unsigned int channel);
 static int hpdi_cmd(struct comedi_device *dev, struct comedi_subdevice *s);
@@ -216,6 +227,8 @@ struct hpdi_board {
 	int device_id;		/*  pci device id */
 	int subdevice_id;	/*  pci subdevice id */
 =======
+=======
+>>>>>>> v3.18
 /*
  * PCI BAR2 Register map (dev->mmio)
  */
@@ -295,11 +308,15 @@ struct hpdi_board {
 	const char *name;
 	int device_id;
 	int subdevice_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static const struct hpdi_board hpdi_boards[] = {
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 .name = "pci-hpdi32",
 	 .device_id = PCI_DEVICE_ID_PLX_9080,
@@ -311,6 +328,8 @@ static const struct hpdi_board hpdi_boards[] = {
 	 .device_id = 0x9656,
 	 .subdevice_id = 0x2705,
 =======
+=======
+>>>>>>> v3.18
 		.name		= "pci-hpdi32",
 		.device_id	= PCI_DEVICE_ID_PLX_9080,
 		.subdevice_id	= 0x2400,
@@ -320,6 +339,9 @@ static const struct hpdi_board hpdi_boards[] = {
 		.name		= "pxi-hpdi32",
 		.device_id	= 0x9656,
 		.subdevice_id	= 0x2705,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 },
 #endif
@@ -327,9 +349,13 @@ static const struct hpdi_board hpdi_boards[] = {
 
 struct hpdi_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*  base addresses (ioremapped) */
 	void __iomem *plx9080_iobase;
 	void __iomem *hpdi_iobase;
+=======
+	void __iomem *plx9080_mmio;
+>>>>>>> v3.18
 =======
 	void __iomem *plx9080_mmio;
 >>>>>>> v3.18
@@ -345,6 +371,7 @@ struct hpdi_private {
 	/* pointer to start of buffers indexed by descriptor */
 	uint32_t *desc_dio_buffer[NUM_DMA_DESCRIPTORS];
 	/* index of the dma descriptor that is currently being used */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	volatile unsigned int dma_desc_index;
 	unsigned int tx_fifo_size;
@@ -735,6 +762,8 @@ static int di_cmd_test(struct comedi_device *dev, struct comedi_subdevice *s,
 	int err = 0;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int dma_desc_index;
 	unsigned int tx_fifo_size;
 	unsigned int rx_fifo_size;
@@ -958,6 +987,9 @@ static int gsc_hpdi_cmd_test(struct comedi_device *dev,
 
 	if (s->io_bits)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
@@ -983,7 +1015,13 @@ static int gsc_hpdi_cmd_test(struct comedi_device *dev,
 	/* Step 3: check if arguments are trivially valid */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cmd->chanlist_len) {
+=======
+	err |= cfc_check_trigger_arg_is(&cmd->start_arg, 0);
+
+	if (!cmd->chanlist_len || !cmd->chanlist) {
+>>>>>>> v3.18
 =======
 	err |= cfc_check_trigger_arg_is(&cmd->start_arg, 0);
 
@@ -994,6 +1032,7 @@ static int gsc_hpdi_cmd_test(struct comedi_device *dev,
 	}
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (cmd->stop_src) {
 	case TRIG_COUNT:
@@ -1006,15 +1045,21 @@ static int gsc_hpdi_cmd_test(struct comedi_device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
 	else	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
 		return 3;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* step 4: fix up any arguments */
 
@@ -1034,18 +1079,24 @@ static int gsc_hpdi_cmd_test(struct comedi_device *dev,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Step 4: fix up any arguments */
 
 	/* Step 5: check channel list if it exists */
 
 	if (cmd->chanlist && cmd->chanlist_len > 0)
 		err |= gsc_hpdi_check_chanlist(dev, s, cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
 		return 5;
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -1120,6 +1171,8 @@ static int di_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	DEBUG_PRINT("hpdi: starting rx\n");
 	hpdi_writel(dev, RX_ENABLE_BIT, BOARD_CONTROL_REG);
 =======
+=======
+>>>>>>> v3.18
 
 }
 
@@ -1244,11 +1297,15 @@ static int gsc_hpdi_init(struct comedi_device *dev)
 	    ICS_AERR | ICS_PERR | ICS_PIE | ICS_PLIE | ICS_PAIE | ICS_LIE |
 	    ICS_DMA0_E;
 	writel(plx_intcsr_bits, devpriv->plx9080_mmio + PLX_INTRCS_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int hpdi_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
@@ -1421,6 +1478,8 @@ static int hpdi_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void gsc_hpdi_init_plx9080(struct comedi_device *dev)
 {
 	struct hpdi_private *devpriv = dev->private;
@@ -1579,6 +1638,9 @@ static void gsc_hpdi_detach(struct comedi_device *dev)
 	}
 	comedi_pci_disable(dev);
 	gsc_hpdi_free_dma(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1586,8 +1648,13 @@ static struct comedi_driver gsc_hpdi_driver = {
 	.driver_name	= "gsc_hpdi",
 	.module		= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.auto_attach	= hpdi_auto_attach,
 	.detach		= hpdi_detach,
+=======
+	.auto_attach	= gsc_hpdi_auto_attach,
+	.detach		= gsc_hpdi_detach,
+>>>>>>> v3.18
 =======
 	.auto_attach	= gsc_hpdi_auto_attach,
 	.detach		= gsc_hpdi_detach,
@@ -1601,7 +1668,11 @@ static int gsc_hpdi_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(gsc_hpdi_pci_table) = {
+=======
+static const struct pci_device_id gsc_hpdi_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id gsc_hpdi_pci_table[] = {
 >>>>>>> v3.18

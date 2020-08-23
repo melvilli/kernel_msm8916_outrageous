@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* PTP 1588 Hardware Clock (PHC)
@@ -71,6 +77,10 @@ static int e1000e_phc_adjfreq(struct ptp_clock_info *ptp, s32 delta)
 	struct e1000_hw *hw = &adapter->hw;
 	bool neg_adj = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -92,6 +102,11 @@ static int e1000e_phc_adjfreq(struct ptp_clock_info *ptp, s32 delta)
 		return ret_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&adapter->systim_lock, flags);
+
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&adapter->systim_lock, flags);
 
@@ -110,6 +125,11 @@ static int e1000e_phc_adjfreq(struct ptp_clock_info *ptp, s32 delta)
 	ew32(TIMINCA, timinca);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&adapter->systim_lock, flags);
+
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&adapter->systim_lock, flags);
 
@@ -229,6 +249,10 @@ static const struct ptp_clock_info e1000e_ptp_clock_info = {
 	.n_ext_ts	= 0,
 	.n_per_out	= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 =======
 	.n_pins		= 0,
 >>>>>>> v3.18

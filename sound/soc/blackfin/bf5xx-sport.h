@@ -129,7 +129,11 @@ void sport_done(struct sport_device *sport);
  *  NOT / 8 ! all channels are enabled by default */
 int sport_set_multichannel(struct sport_device *sport, int tdm_count,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 mask, int packed);
+=======
+		u32 tx_mask, u32 rx_mask, int packed);
+>>>>>>> v3.18
 =======
 		u32 tx_mask, u32 rx_mask, int packed);
 >>>>>>> v3.18

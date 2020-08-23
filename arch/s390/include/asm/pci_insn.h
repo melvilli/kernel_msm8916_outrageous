@@ -55,11 +55,17 @@ struct zpci_fib {
 	u32 fmt		:  8;	/* format */
 	u32		: 24;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved1;
 	u8 fc;			/* function controls */
 	u8 reserved2;
 	u16 reserved3;
 	u32 reserved4;
+=======
+	u32		: 32;
+	u8 fc;			/* function controls */
+	u64		: 56;
+>>>>>>> v3.18
 =======
 	u32		: 32;
 	u8 fc;			/* function controls */
@@ -77,6 +83,7 @@ struct zpci_fib {
 	u32		:  1;
 	u32 aisbo	:  6;	/* Adapter int summary bit offset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved5;
 	u64 aibv;		/* Adapter int bit vector address */
 	u64 aisb;		/* Adapter int summary bit address */
@@ -93,6 +100,8 @@ int s390pci_store(u64 data, u64 req, u64 offset);
 int s390pci_store_block(const u64 *data, u64 req, u64 offset);
 void set_irq_ctrl(u16 ctl, char *unused, u8 isc);
 =======
+=======
+>>>>>>> v3.18
 	u32		: 32;
 	u64 aibv;		/* Adapter int bit vector address */
 	u64 aisb;		/* Adapter int summary bit address */
@@ -107,6 +116,9 @@ int zpci_load(u64 *data, u64 req, u64 offset);
 int zpci_store(u64 data, u64 req, u64 offset);
 int zpci_store_block(const u64 *data, u64 req, u64 offset);
 void zpci_set_irq_ctrl(u16 ctl, char *unused, u8 isc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

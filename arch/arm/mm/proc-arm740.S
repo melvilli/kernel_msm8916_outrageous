@@ -33,7 +33,11 @@ ENTRY(cpu_arm740_do_idle)
 ENTRY(cpu_arm740_dcache_clean_area)
 ENTRY(cpu_arm740_switch_mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -47,7 +51,11 @@ ENTRY(cpu_arm740_proc_fin)
 	bic	r0, r0, #0x0000000c		@ w-buffer/cache
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -65,6 +73,7 @@ ENTRY(cpu_arm740_reset)
 	bic	ip, ip, #0x0000000c		@ ............wc..
 	mcr	p15, 0, ip, c1, c0, 0		@ ctrl register
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
 ENDPROC(cpu_arm740_reset)
 	.popsection
@@ -72,10 +81,15 @@ ENDPROC(cpu_arm740_reset)
 	__CPUINIT
 
 =======
+=======
+>>>>>>> v3.18
 	ret	r0
 ENDPROC(cpu_arm740_reset)
 	.popsection
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.type	__arm740_setup, #function
 __arm740_setup:
@@ -133,7 +147,11 @@ __arm740_setup:
 	orr	r0, r0, #0x0000000d		@ MPU/Cache/WB
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

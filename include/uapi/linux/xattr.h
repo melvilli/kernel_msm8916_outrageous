@@ -8,12 +8,15 @@
   Copyright (c) 2004 Red Hat, Inc., James Morris <jmorris@redhat.com>
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _UAPI_LINUX_XATTR_H
 #define _UAPI_LINUX_XATTR_H
 
 #define XATTR_CREATE	0x1	/* set value, fail if attr already exists */
 #define XATTR_REPLACE	0x2	/* set value, fail if attr does not exist */
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/libc-compat.h>
 
@@ -26,6 +29,9 @@
 #define XATTR_CREATE	0x1	/* set value, fail if attr already exists */
 #define XATTR_REPLACE	0x2	/* set value, fail if attr does not exist */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Namespaces */
@@ -36,6 +42,12 @@
 #define XATTR_MAC_OSX_PREFIX_LEN (sizeof(XATTR_MAC_OSX_PREFIX) - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XATTR_BTRFS_PREFIX "btrfs."
+#define XATTR_BTRFS_PREFIX_LEN (sizeof(XATTR_BTRFS_PREFIX) - 1)
+
+>>>>>>> v3.18
 =======
 #define XATTR_BTRFS_PREFIX "btrfs."
 #define XATTR_BTRFS_PREFIX_LEN (sizeof(XATTR_BTRFS_PREFIX) - 1)

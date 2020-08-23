@@ -9,6 +9,10 @@
 
 #include <keys/ceph-type.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <keys/user-type.h>
+>>>>>>> v3.18
 =======
 #include <keys/user-type.h>
 >>>>>>> v3.18
@@ -501,6 +505,7 @@ int ceph_encrypt(struct ceph_crypto_key *secret, void *dst, size_t *dst_len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ceph_aes_crypt(const struct ceph_crypto_key *key, bool encrypt,
 			  void *buf, int buf_len, int in_len, int *pout_len)
 {
@@ -590,6 +595,8 @@ int ceph_crypt(const struct ceph_crypto_key *key, bool encrypt,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int ceph_encrypt2(struct ceph_crypto_key *secret, void *dst, size_t *dst_len,
 		  const void *src1, size_t src1_len,
 		  const void *src2, size_t src2_len)
@@ -613,8 +620,12 @@ int ceph_encrypt2(struct ceph_crypto_key *secret, void *dst, size_t *dst_len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ceph_key_instantiate(struct key *key,
 				struct key_preparsed_payload *prep)
+=======
+static int ceph_key_preparse(struct key_preparsed_payload *prep)
+>>>>>>> v3.18
 =======
 static int ceph_key_preparse(struct key_preparsed_payload *prep)
 >>>>>>> v3.18
@@ -629,10 +640,13 @@ static int ceph_key_preparse(struct key_preparsed_payload *prep)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = key_payload_reserve(key, datalen);
 	if (ret < 0)
 		goto err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = -ENOMEM;
@@ -647,7 +661,12 @@ static int ceph_key_preparse(struct key_preparsed_payload *prep)
 		goto err_ckey;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key->payload.data = ckey;
+=======
+	prep->payload[0] = ckey;
+	prep->quotalen = datalen;
+>>>>>>> v3.18
 =======
 	prep->payload[0] = ckey;
 	prep->quotalen = datalen;
@@ -661,6 +680,7 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ceph_key_match(const struct key *key, const void *description)
 {
 	return strcmp(key->description, description) == 0;
@@ -668,6 +688,8 @@ static int ceph_key_match(const struct key *key, const void *description)
 
 static void ceph_key_destroy(struct key *key) {
 =======
+=======
+>>>>>>> v3.18
 static void ceph_key_free_preparse(struct key_preparsed_payload *prep)
 {
 	struct ceph_crypto_key *ckey = prep->payload[0];
@@ -677,6 +699,9 @@ static void ceph_key_free_preparse(struct key_preparsed_payload *prep)
 
 static void ceph_key_destroy(struct key *key)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ceph_crypto_key *ckey = key->payload.data;
 
@@ -687,8 +712,14 @@ static void ceph_key_destroy(struct key *key)
 struct key_type key_type_ceph = {
 	.name		= "ceph",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.instantiate	= ceph_key_instantiate,
 	.match		= ceph_key_match,
+=======
+	.preparse	= ceph_key_preparse,
+	.free_preparse	= ceph_key_free_preparse,
+	.instantiate	= generic_key_instantiate,
+>>>>>>> v3.18
 =======
 	.preparse	= ceph_key_preparse,
 	.free_preparse	= ceph_key_free_preparse,

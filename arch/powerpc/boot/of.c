@@ -27,6 +27,12 @@
 static unsigned long claim_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void epapr_platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
+			 unsigned long r6, unsigned long r7);
+
+>>>>>>> v3.18
 =======
 void epapr_platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
 			 unsigned long r6, unsigned long r7);
@@ -44,8 +50,13 @@ static void *of_try_claim(unsigned long size)
 		printf("    trying: 0x%08lx\n\r", claim_base);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr = (unsigned long)of_claim(claim_base, size, 0);
 		if ((void *)addr != (void *)-1)
+=======
+		addr = (unsigned long) of_claim(claim_base, size, 0);
+		if (addr != PROM_ERROR)
+>>>>>>> v3.18
 =======
 		addr = (unsigned long) of_claim(claim_base, size, 0);
 		if (addr != PROM_ERROR)
@@ -73,7 +84,11 @@ static void of_image_hdr(const void *hdr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void platform_init(unsigned long a1, unsigned long a2, void *promptr)
+=======
+static void of_platform_init(unsigned long a1, unsigned long a2, void *promptr)
+>>>>>>> v3.18
 =======
 static void of_platform_init(unsigned long a1, unsigned long a2, void *promptr)
 >>>>>>> v3.18
@@ -97,7 +112,10 @@ static void of_platform_init(unsigned long a1, unsigned long a2, void *promptr)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
 		   unsigned long r6, unsigned long r7)
@@ -109,4 +127,7 @@ void platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
 		epapr_platform_init(r3, r4, r5, r6, r7);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

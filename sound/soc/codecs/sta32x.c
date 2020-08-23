@@ -244,7 +244,11 @@ static int sta32x_coefficient_get(struct snd_kcontrol *kcontrol,
 				  struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -277,7 +281,11 @@ static int sta32x_coefficient_put(struct snd_kcontrol *kcontrol,
 				  struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -372,8 +380,14 @@ static void sta32x_watchdog(struct work_struct *work)
 
 	if (!sta32x->shutdown)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&sta32x->watchdog_work,
 				      round_jiffies_relative(HZ));
+=======
+		queue_delayed_work(system_power_efficient_wq,
+				   &sta32x->watchdog_work,
+				   round_jiffies_relative(HZ));
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq,
 				   &sta32x->watchdog_work,
@@ -386,8 +400,14 @@ static void sta32x_watchdog_start(struct sta32x_priv *sta32x)
 	if (sta32x->pdata->needs_esd_watchdog) {
 		sta32x->shutdown = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&sta32x->watchdog_work,
 				      round_jiffies_relative(HZ));
+=======
+		queue_delayed_work(system_power_efficient_wq,
+				   &sta32x->watchdog_work,
+				   round_jiffies_relative(HZ));
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq,
 				   &sta32x->watchdog_work,
@@ -697,6 +717,7 @@ static int sta32x_hw_params(struct snd_pcm_substream *substream,
 	confb = snd_soc_read(codec, STA32X_CONFB);
 	confb &= ~(STA32X_CONFB_SAI_MASK | STA32X_CONFB_SAIFB);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S24_LE:
 	case SNDRV_PCM_FORMAT_S24_BE:
@@ -707,11 +728,16 @@ static int sta32x_hw_params(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_FORMAT_S32_LE:
 	case SNDRV_PCM_FORMAT_S32_BE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 24:
 		pr_debug("24bit\n");
 		/* fall through */
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_debug("24bit or 32bit\n");
 		switch (sta32x->format) {
@@ -728,8 +754,12 @@ static int sta32x_hw_params(struct snd_pcm_substream *substream,
 
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SNDRV_PCM_FORMAT_S20_3LE:
 	case SNDRV_PCM_FORMAT_S20_3BE:
+=======
+	case 20:
+>>>>>>> v3.18
 =======
 	case 20:
 >>>>>>> v3.18
@@ -748,8 +778,12 @@ static int sta32x_hw_params(struct snd_pcm_substream *substream,
 
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SNDRV_PCM_FORMAT_S18_3LE:
 	case SNDRV_PCM_FORMAT_S18_3BE:
+=======
+	case 18:
+>>>>>>> v3.18
 =======
 	case 18:
 >>>>>>> v3.18
@@ -768,8 +802,12 @@ static int sta32x_hw_params(struct snd_pcm_substream *substream,
 
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SNDRV_PCM_FORMAT_S16_LE:
 	case SNDRV_PCM_FORMAT_S16_BE:
+=======
+	case 16:
+>>>>>>> v3.18
 =======
 	case 16:
 >>>>>>> v3.18
@@ -911,6 +949,7 @@ static int sta32x_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Tell ASoC what kind of I/O to use to read the registers.  ASoC will
 	 * then do the I2C transactions itself.
 	 */
@@ -921,6 +960,8 @@ static int sta32x_probe(struct snd_soc_codec *codec)
 		goto err;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Chip documentation explicitly requires that the reset values
@@ -988,10 +1029,13 @@ static int sta32x_probe(struct snd_soc_codec *codec)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	regulator_bulk_disable(ARRAY_SIZE(sta32x->supplies), sta32x->supplies);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

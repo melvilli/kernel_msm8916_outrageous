@@ -382,7 +382,10 @@ static struct clk_hw_omap dpll4_ck_hw = {
 DEFINE_STRUCT_CLK(dpll4_ck, dpll3_ck_parent_names, dpll4_ck_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct clk_div_table dpll4_mx_ck_div_table[] = {
 	{ .div = 1, .val = 1 },
 	{ .div = 2, .val = 2 },
@@ -419,6 +422,9 @@ static const struct clk_div_table dpll4_mx_ck_div_table[] = {
 	{ .div = 0 },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DEFINE_CLK_DIVIDER(dpll4_m5_ck, "dpll4_ck", &dpll4_ck, 0x0,
 		   OMAP_CM_REGADDR(OMAP3430_CAM_MOD, CM_CLKSEL),
@@ -437,7 +443,13 @@ static const struct clk_ops dpll4_m5x2_ck_ops = {
 	.disable	= &omap2_dflt_clk_disable,
 	.is_enabled	= &omap2_dflt_clk_is_enabled,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.recalc_rate	= &omap3_clkoutx2_recalc,
+=======
+	.set_rate	= &omap3_clkoutx2_set_rate,
+	.recalc_rate	= &omap3_clkoutx2_recalc,
+	.round_rate	= &omap3_clkoutx2_round_rate,
+>>>>>>> v3.18
 =======
 	.set_rate	= &omap3_clkoutx2_set_rate,
 	.recalc_rate	= &omap3_clkoutx2_recalc,
@@ -571,15 +583,21 @@ static const struct clksel_rate clkout2_src_54m_rates[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_CLK_DIVIDER(dpll4_m3_ck, "dpll4_ck", &dpll4_ck, 0x0,
 		   OMAP_CM_REGADDR(OMAP3430_DSS_MOD, CM_CLKSEL),
 		   OMAP3430_CLKSEL_TV_SHIFT, OMAP3630_CLKSEL_TV_WIDTH,
 		   CLK_DIVIDER_ONE_BASED, NULL);
 =======
+=======
+>>>>>>> v3.18
 DEFINE_CLK_DIVIDER_TABLE(dpll4_m3_ck, "dpll4_ck", &dpll4_ck, 0x0,
 		   OMAP_CM_REGADDR(OMAP3430_DSS_MOD, CM_CLKSEL),
 		   OMAP3430_CLKSEL_TV_SHIFT, OMAP3630_CLKSEL_TV_WIDTH,
 		   0, dpll4_mx_ck_div_table, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct clk dpll4_m3x2_ck;
@@ -901,15 +919,21 @@ static struct clk dpll3_m3x2_ck_3630 = {
 DEFINE_CLK_FIXED_FACTOR(dpll3_x2_ck, "dpll3_ck", &dpll3_ck, 0x0, 2, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_CLK_DIVIDER(dpll4_m4_ck, "dpll4_ck", &dpll4_ck, 0x0,
 		   OMAP_CM_REGADDR(OMAP3430_DSS_MOD, CM_CLKSEL),
 		   OMAP3430_CLKSEL_DSS1_SHIFT, OMAP3630_CLKSEL_DSS1_WIDTH,
 		   CLK_DIVIDER_ONE_BASED, NULL);
 =======
+=======
+>>>>>>> v3.18
 DEFINE_CLK_DIVIDER_TABLE(dpll4_m4_ck, "dpll4_ck", &dpll4_ck, 0x0,
 		   OMAP_CM_REGADDR(OMAP3430_DSS_MOD, CM_CLKSEL),
 		   OMAP3430_CLKSEL_DSS1_SHIFT, OMAP3630_CLKSEL_DSS1_WIDTH,
 		   0, dpll4_mx_ck_div_table, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct clk dpll4_m4x2_ck;
@@ -930,7 +954,12 @@ static struct clk_hw_omap dpll4_m4x2_ck_hw = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_STRUCT_CLK(dpll4_m4x2_ck, dpll4_m4x2_ck_parent_names, dpll4_m5x2_ck_ops);
+=======
+DEFINE_STRUCT_CLK_FLAGS(dpll4_m4x2_ck, dpll4_m4x2_ck_parent_names,
+		dpll4_m5x2_ck_ops, CLK_SET_RATE_PARENT);
+>>>>>>> v3.18
 =======
 DEFINE_STRUCT_CLK_FLAGS(dpll4_m4x2_ck, dpll4_m4x2_ck_parent_names,
 		dpll4_m5x2_ck_ops, CLK_SET_RATE_PARENT);
@@ -943,6 +972,10 @@ static struct clk dpll4_m4x2_ck_3630 = {
 	.num_parents	= ARRAY_SIZE(dpll4_m4x2_ck_parent_names),
 	.ops		= &dpll4_m5x2_ck_3630_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags		= CLK_SET_RATE_PARENT,
+>>>>>>> v3.18
 =======
 	.flags		= CLK_SET_RATE_PARENT,
 >>>>>>> v3.18
@@ -1038,8 +1071,14 @@ static struct clk_hw_omap dss1_alwon_fck_3430es1_hw = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_STRUCT_CLK(dss1_alwon_fck_3430es1, dss1_alwon_fck_3430es1_parent_names,
 		  aes2_ick_ops);
+=======
+DEFINE_STRUCT_CLK_FLAGS(dss1_alwon_fck_3430es1,
+		dss1_alwon_fck_3430es1_parent_names, aes2_ick_ops,
+		CLK_SET_RATE_PARENT);
+>>>>>>> v3.18
 =======
 DEFINE_STRUCT_CLK_FLAGS(dss1_alwon_fck_3430es1,
 		dss1_alwon_fck_3430es1_parent_names, aes2_ick_ops,
@@ -1059,8 +1098,14 @@ static struct clk_hw_omap dss1_alwon_fck_3430es2_hw = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_STRUCT_CLK(dss1_alwon_fck_3430es2, dss1_alwon_fck_3430es1_parent_names,
 		  aes2_ick_ops);
+=======
+DEFINE_STRUCT_CLK_FLAGS(dss1_alwon_fck_3430es2,
+		dss1_alwon_fck_3430es1_parent_names, aes2_ick_ops,
+		CLK_SET_RATE_PARENT);
+>>>>>>> v3.18
 =======
 DEFINE_STRUCT_CLK_FLAGS(dss1_alwon_fck_3430es2,
 		dss1_alwon_fck_3430es1_parent_names, aes2_ick_ops,
@@ -3357,6 +3402,10 @@ static struct omap_clk omap34xx_omap36xx_clks[] = {
 	CLK(NULL,	"aes1_ick",	&aes1_ick),
 	CLK("omap_rng",	"ick",		&rng_ick),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLK("omap3-rom-rng",	"ick",	&rng_ick),
+>>>>>>> v3.18
 =======
 	CLK("omap3-rom-rng",	"ick",	&rng_ick),
 >>>>>>> v3.18
@@ -3415,11 +3464,15 @@ static struct omap_clk omap36xx_am35xx_omap3430es2plus_clks[] = {
 	CLK(NULL,	"ts_fck",	&ts_fck),
 	CLK(NULL,	"usbtll_fck",	&usbtll_fck),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("usbhs_omap",	"usbtll_fck",	&usbtll_fck),
 	CLK("usbhs_tll",	"usbtll_fck",	&usbtll_fck),
 	CLK(NULL,	"usbtll_ick",	&usbtll_ick),
 	CLK("usbhs_omap",	"usbtll_ick",	&usbtll_ick),
 	CLK("usbhs_tll",	"usbtll_ick",	&usbtll_ick),
+=======
+	CLK(NULL,	"usbtll_ick",	&usbtll_ick),
+>>>>>>> v3.18
 =======
 	CLK(NULL,	"usbtll_ick",	&usbtll_ick),
 >>>>>>> v3.18
@@ -3433,7 +3486,10 @@ static struct omap_clk omap36xx_am35xx_omap3430es2plus_clks[] = {
 	CLK(NULL,	"usbhost_48m_fck", &usbhost_48m_fck),
 	CLK(NULL,	"usbhost_ick",	&usbhost_ick),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("usbhs_omap",	"usbhost_ick",	&usbhost_ick),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -3552,6 +3608,7 @@ static struct omap_clk omap3xxx_clks[] = {
 	CLK(NULL,	"dss_96m_fck",	&dss_96m_fck),
 	CLK(NULL,	"dss2_alwon_fck",	&dss2_alwon_fck),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK(NULL,	"utmi_p1_gfclk",	&dummy_ck),
 	CLK(NULL,	"utmi_p2_gfclk",	&dummy_ck),
 	CLK(NULL,	"xclk60mhsp1_ck",	&dummy_ck),
@@ -3562,6 +3619,8 @@ static struct omap_clk omap3xxx_clks[] = {
 	CLK("usbhs_omap",	"usb_tll_hs_usb_ch1_clk",	&dummy_ck),
 	CLK("usbhs_tll",	"usb_tll_hs_usb_ch0_clk",	&dummy_ck),
 	CLK("usbhs_tll",	"usb_tll_hs_usb_ch1_clk",	&dummy_ck),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	CLK(NULL,	"init_60m_fclk",	&dummy_ck),

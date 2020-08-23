@@ -179,7 +179,12 @@ static int __init nuc900_set_cpufreq(char *str)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strict_strtoul(str, 0, &cpufreq);
+=======
+	if (kstrtoul(str, 0, &cpufreq))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (kstrtoul(str, 0, &cpufreq))
 		return 0;

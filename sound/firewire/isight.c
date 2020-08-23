@@ -218,7 +218,11 @@ static void isight_packet(struct fw_iso_context *context, u32 cycle,
 static int isight_connect(struct isight *isight)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ch, err, rcode, errors = 0;
+=======
+	int ch, err;
+>>>>>>> v3.18
 =======
 	int ch, err;
 >>>>>>> v3.18
@@ -234,6 +238,7 @@ retry_after_bus_reset:
 	}
 
 	value = cpu_to_be32(ch | (isight->device->max_speed << SPEED_SHIFT));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (;;) {
 		rcode = fw_run_transaction(
@@ -257,6 +262,8 @@ retry_after_bus_reset:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	err = snd_fw_transaction(isight->unit, TCODE_WRITE_QUADLET_REQUEST,
 				 isight->audio_base + REG_ISO_TX_CONFIG,
 				 &value, 4, FW_FIXED_GENERATION |
@@ -270,6 +277,9 @@ retry_after_bus_reset:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_resources:
 	fw_iso_resources_free(&isight->resources);
@@ -336,7 +346,11 @@ static int reg_read(struct isight *isight, int offset, __be32 *value)
 {
 	return snd_fw_transaction(isight->unit, TCODE_READ_QUADLET_REQUEST,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  isight->audio_base + offset, value, 4);
+=======
+				  isight->audio_base + offset, value, 4, 0);
+>>>>>>> v3.18
 =======
 				  isight->audio_base + offset, value, 4, 0);
 >>>>>>> v3.18
@@ -346,7 +360,11 @@ static int reg_write(struct isight *isight, int offset, __be32 value)
 {
 	return snd_fw_transaction(isight->unit, TCODE_WRITE_QUADLET_REQUEST,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  isight->audio_base + offset, &value, 4);
+=======
+				  isight->audio_base + offset, &value, 4, 0);
+>>>>>>> v3.18
 =======
 				  isight->audio_base + offset, &value, 4, 0);
 >>>>>>> v3.18
@@ -355,6 +373,11 @@ static int reg_write(struct isight *isight, int offset, __be32 value)
 static void isight_stop_streaming(struct isight *isight)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be32 value;
+
+>>>>>>> v3.18
 =======
 	__be32 value;
 
@@ -367,12 +390,18 @@ static void isight_stop_streaming(struct isight *isight)
 	isight->context = NULL;
 	fw_iso_resources_free(&isight->resources);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_write(isight, REG_AUDIO_ENABLE, 0);
 =======
+=======
+>>>>>>> v3.18
 	value = 0;
 	snd_fw_transaction(isight->unit, TCODE_WRITE_QUADLET_REQUEST,
 			   isight->audio_base + REG_AUDIO_ENABLE,
 			   &value, 4, FW_QUIET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -667,9 +696,15 @@ static u64 get_unit_base(struct fw_unit *unit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int isight_probe(struct device *unit_dev)
 {
 	struct fw_unit *unit = fw_unit(unit_dev);
+=======
+static int isight_probe(struct fw_unit *unit,
+			const struct ieee1394_device_id *id)
+{
+>>>>>>> v3.18
 =======
 static int isight_probe(struct fw_unit *unit,
 			const struct ieee1394_device_id *id)
@@ -681,15 +716,21 @@ static int isight_probe(struct fw_unit *unit,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(-1, NULL, THIS_MODULE, sizeof(*isight), &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, unit_dev);
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(&unit->device, -1, NULL, THIS_MODULE,
 			   sizeof(*isight), &card);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	isight = card->private_data;
@@ -728,7 +769,11 @@ static int isight_probe(struct fw_unit *unit,
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(unit_dev, isight);
+=======
+	dev_set_drvdata(&unit->device, isight);
+>>>>>>> v3.18
 =======
 	dev_set_drvdata(&unit->device, isight);
 >>>>>>> v3.18
@@ -743,6 +788,7 @@ error:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int isight_remove(struct device *dev)
 {
@@ -763,6 +809,8 @@ static int isight_remove(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void isight_bus_reset(struct fw_unit *unit)
 {
 	struct isight *isight = dev_get_drvdata(&unit->device);
@@ -777,7 +825,10 @@ static void isight_bus_reset(struct fw_unit *unit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void isight_remove(struct fw_unit *unit)
 {
 	struct isight *isight = dev_get_drvdata(&unit->device);
@@ -793,6 +844,9 @@ static void isight_remove(struct fw_unit *unit)
 	snd_card_free_when_closed(isight->card);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct ieee1394_device_id isight_id_table[] = {
 	{
@@ -811,15 +865,21 @@ static struct fw_driver isight_driver = {
 		.name	= KBUILD_MODNAME,
 		.bus	= &fw_bus_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.probe	= isight_probe,
 		.remove	= isight_remove,
 	},
 	.update   = isight_bus_reset,
 =======
+=======
+>>>>>>> v3.18
 	},
 	.probe    = isight_probe,
 	.update   = isight_bus_reset,
 	.remove   = isight_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table = isight_id_table,
 };

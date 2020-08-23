@@ -370,7 +370,11 @@ def trace_end():
 def sched__sched_stat_runtime(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, runtime, vruntime):
+=======
+	common_callchain, comm, pid, runtime, vruntime):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, runtime, vruntime):
 >>>>>>> v3.18
@@ -379,7 +383,11 @@ def sched__sched_stat_runtime(event_name, context, common_cpu,
 def sched__sched_stat_iowait(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, delay):
+=======
+	common_callchain, comm, pid, delay):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, delay):
 >>>>>>> v3.18
@@ -388,7 +396,11 @@ def sched__sched_stat_iowait(event_name, context, common_cpu,
 def sched__sched_stat_sleep(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, delay):
+=======
+	common_callchain, comm, pid, delay):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, delay):
 >>>>>>> v3.18
@@ -397,7 +409,11 @@ def sched__sched_stat_sleep(event_name, context, common_cpu,
 def sched__sched_stat_wait(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, delay):
+=======
+	common_callchain, comm, pid, delay):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, delay):
 >>>>>>> v3.18
@@ -406,7 +422,11 @@ def sched__sched_stat_wait(event_name, context, common_cpu,
 def sched__sched_process_fork(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parent_comm, parent_pid, child_comm, child_pid):
+=======
+	common_callchain, parent_comm, parent_pid, child_comm, child_pid):
+>>>>>>> v3.18
 =======
 	common_callchain, parent_comm, parent_pid, child_comm, child_pid):
 >>>>>>> v3.18
@@ -415,7 +435,11 @@ def sched__sched_process_fork(event_name, context, common_cpu,
 def sched__sched_process_wait(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, prio):
+=======
+	common_callchain, comm, pid, prio):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, prio):
 >>>>>>> v3.18
@@ -424,7 +448,11 @@ def sched__sched_process_wait(event_name, context, common_cpu,
 def sched__sched_process_exit(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, prio):
+=======
+	common_callchain, comm, pid, prio):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, prio):
 >>>>>>> v3.18
@@ -433,7 +461,11 @@ def sched__sched_process_exit(event_name, context, common_cpu,
 def sched__sched_process_free(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, prio):
+=======
+	common_callchain, comm, pid, prio):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, prio):
 >>>>>>> v3.18
@@ -441,6 +473,7 @@ def sched__sched_process_free(event_name, context, common_cpu,
 
 def sched__sched_migrate_task(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	comm, pid, prio, orig_cpu,
 	dest_cpu):
@@ -451,6 +484,8 @@ def sched__sched_migrate_task(event_name, context, common_cpu,
 def sched__sched_switch(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 =======
+=======
+>>>>>>> v3.18
 	common_callchain, comm, pid, prio, orig_cpu,
 	dest_cpu):
 	headers = EventHeaders(common_cpu, common_secs, common_nsecs,
@@ -459,13 +494,20 @@ def sched__sched_switch(event_name, context, common_cpu,
 
 def sched__sched_switch(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm, common_callchain,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prev_comm, prev_pid, prev_prio, prev_state,
 	next_comm, next_pid, next_prio):
 
 	headers = EventHeaders(common_cpu, common_secs, common_nsecs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				common_pid, common_comm)
+=======
+				common_pid, common_comm, common_callchain)
+>>>>>>> v3.18
 =======
 				common_pid, common_comm, common_callchain)
 >>>>>>> v3.18
@@ -475,37 +517,53 @@ def sched__sched_switch(event_name, context, common_cpu,
 def sched__sched_wakeup_new(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, prio, success,
 	target_cpu):
 	headers = EventHeaders(common_cpu, common_secs, common_nsecs,
 				common_pid, common_comm)
 =======
+=======
+>>>>>>> v3.18
 	common_callchain, comm, pid, prio, success,
 	target_cpu):
 	headers = EventHeaders(common_cpu, common_secs, common_nsecs,
 				common_pid, common_comm, common_callchain)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	parser.wake_up(headers, comm, pid, success, target_cpu, 1)
 
 def sched__sched_wakeup(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, prio, success,
 	target_cpu):
 	headers = EventHeaders(common_cpu, common_secs, common_nsecs,
 				common_pid, common_comm)
 =======
+=======
+>>>>>>> v3.18
 	common_callchain, comm, pid, prio, success,
 	target_cpu):
 	headers = EventHeaders(common_cpu, common_secs, common_nsecs,
 				common_pid, common_comm, common_callchain)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	parser.wake_up(headers, comm, pid, success, target_cpu, 0)
 
 def sched__sched_wait_task(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid, prio):
+=======
+	common_callchain, comm, pid, prio):
+>>>>>>> v3.18
 =======
 	common_callchain, comm, pid, prio):
 >>>>>>> v3.18
@@ -514,7 +572,11 @@ def sched__sched_wait_task(event_name, context, common_cpu,
 def sched__sched_kthread_stop_ret(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret):
+=======
+	common_callchain, ret):
+>>>>>>> v3.18
 =======
 	common_callchain, ret):
 >>>>>>> v3.18
@@ -523,15 +585,21 @@ def sched__sched_kthread_stop_ret(event_name, context, common_cpu,
 def sched__sched_kthread_stop(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comm, pid):
 	pass
 
 def trace_unhandled(event_name, context, common_cpu, common_secs, common_nsecs,
 		common_pid, common_comm):
 =======
+=======
+>>>>>>> v3.18
 	common_callchain, comm, pid):
 	pass
 
 def trace_unhandled(event_name, context, event_fields_dict):
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pass

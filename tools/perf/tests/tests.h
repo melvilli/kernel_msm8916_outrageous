@@ -2,7 +2,10 @@
 #define TESTS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TEST_ASSERT_VAL(text, cond)					 \
 do {									 \
 	if (!(cond)) {							 \
@@ -11,6 +14,9 @@ do {									 \
 	}								 \
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	TEST_OK   =  0,
@@ -32,6 +38,11 @@ int test__pmu(void);
 int test__attr(void);
 int test__dso_data(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int test__dso_data_cache(void);
+int test__dso_data_reopen(void);
+>>>>>>> v3.18
 =======
 int test__dso_data_cache(void);
 int test__dso_data_reopen(void);
@@ -44,8 +55,11 @@ int test__bp_signal_overflow(void);
 int test__task_exit(void);
 int test__sw_clock_freq(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 int test__perf_time_to_tsc(void);
 int test__code_reading(void);
 int test__sample_parsing(void);
@@ -69,5 +83,8 @@ int test__arch_unwind_sample(struct perf_sample *sample,
 			     struct thread *thread);
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* TESTS_H */

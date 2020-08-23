@@ -14,8 +14,12 @@
  *
  *  You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -845,7 +849,11 @@ islpci_setup(struct pci_dev *pdev)
 	ndev->addr_len = ETH_ALEN;
 	/* Get a non-zero dummy MAC address for nameif. Jean II */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(ndev->dev_addr, dummy_mac, 6);
+=======
+	memcpy(ndev->dev_addr, dummy_mac, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(ndev->dev_addr, dummy_mac, ETH_ALEN);
 >>>>>>> v3.18
@@ -923,7 +931,10 @@ islpci_setup(struct pci_dev *pdev)
 	islpci_free_memory(priv);
       do_free_netdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(ndev);

@@ -63,11 +63,17 @@
 #define ALCATEL_PRODUCT_ID	0x02df
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Samsung I330 phone cradle */
 #define SAMSUNG_VENDOR_ID	0x04e8
 #define SAMSUNG_PRODUCT_ID	0x8001
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SIEMENS_VENDOR_ID	0x11f5
 #define SIEMENS_PRODUCT_ID_SX1	0x0001

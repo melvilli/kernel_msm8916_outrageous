@@ -30,7 +30,10 @@
 
 _F(void, setup, (char** cmd), { });
 <<<<<<< HEAD
+<<<<<<< HEAD
 _F(void, init_irq, (void), { });
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 _F(void, restart, (void), { while(1); });
@@ -46,7 +49,11 @@ _F(void, calibrate_ccount, (void),
 {
 	pr_err("ERROR: Cannot calibrate cpu frequency! Assuming 10MHz.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccount_per_jiffy = 10 * (1000000UL/HZ);
+=======
+	ccount_freq = 10 * 1000000UL;
+>>>>>>> v3.18
 =======
 	ccount_freq = 10 * 1000000UL;
 >>>>>>> v3.18

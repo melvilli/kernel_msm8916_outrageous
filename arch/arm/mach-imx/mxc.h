@@ -35,7 +35,13 @@
 #define MXC_CPU_MX51		51
 #define MXC_CPU_MX53		53
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MXC_CPU_IMX6DL		0x61
+=======
+#define MXC_CPU_IMX6SL		0x60
+#define MXC_CPU_IMX6DL		0x61
+#define MXC_CPU_IMX6SX		0x62
+>>>>>>> v3.18
 =======
 #define MXC_CPU_IMX6SL		0x60
 #define MXC_CPU_IMX6DL		0x61
@@ -48,6 +54,11 @@
 #define IMX_CHIP_REVISION_1_2		0x12
 #define IMX_CHIP_REVISION_1_3		0x13
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMX_CHIP_REVISION_1_4		0x14
+#define IMX_CHIP_REVISION_1_5		0x15
+>>>>>>> v3.18
 =======
 #define IMX_CHIP_REVISION_1_4		0x14
 #define IMX_CHIP_REVISION_1_5		0x15
@@ -164,7 +175,10 @@ extern unsigned int __mxc_cpu_type;
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SOC_IMX6SL
 static inline bool cpu_is_imx6sl(void)
 {
@@ -177,6 +191,9 @@ static inline bool cpu_is_imx6sl(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool cpu_is_imx6dl(void)
 {
@@ -184,12 +201,18 @@ static inline bool cpu_is_imx6dl(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool cpu_is_imx6sx(void)
 {
 	return __mxc_cpu_type == MXC_CPU_IMX6SX;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool cpu_is_imx6q(void)
 {

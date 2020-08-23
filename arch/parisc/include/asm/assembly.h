@@ -516,7 +516,10 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * ASM_EXCEPTIONTABLE_ENTRY
 	 *
@@ -529,6 +532,9 @@
 	.previous
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY__ */
 #endif

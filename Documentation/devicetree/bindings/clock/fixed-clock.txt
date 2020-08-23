@@ -11,7 +11,12 @@ Required properties:
 
 Optional properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - gpios : From common gpio binding; gpio connection to clock enable pin.
+=======
+- clock-accuracy : accuracy of clock in ppb (parts per billion).
+		   Should be a single cell.
+>>>>>>> v3.18
 =======
 - clock-accuracy : accuracy of clock in ppb (parts per billion).
 		   Should be a single cell.
@@ -24,6 +29,10 @@ Example:
 		#clock-cells = <0>;
 		clock-frequency = <1000000000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clock-accuracy = <100>;
+>>>>>>> v3.18
 =======
 		clock-accuracy = <100>;
 >>>>>>> v3.18

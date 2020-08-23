@@ -30,6 +30,10 @@
 #define CH_LOWER_SB			0x02
 #define CH_EWA_VALID			0x04
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CH_30MHZ_APART			6
+>>>>>>> v3.18
 =======
 #define CH_30MHZ_APART			6
 >>>>>>> v3.18
@@ -87,7 +91,10 @@
 #define WLC_N_BW_20IN2G_40IN5G		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define WLC_BW_20MHZ_BIT		BIT(0)
 #define WLC_BW_40MHZ_BIT		BIT(1)
 #define WLC_BW_80MHZ_BIT		BIT(2)
@@ -102,6 +109,9 @@
 					 WLC_BW_40MHZ_BIT|WLC_BW_20MHZ_BIT)
 #define WLC_BW_CAP_UNRESTRICTED		0xFF
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* band types */
 #define	WLC_BAND_AUTO			0	/* auto-select */
@@ -225,6 +235,12 @@ static inline bool ac_bitmap_tst(u8 bitmap, int prec)
 /* to go into transition mode without setting wep */
 #define SES_OW_ENABLED		0x0040
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* MFP */
+#define MFP_CAPABLE		0x0200
+#define MFP_REQUIRED		0x0400
+>>>>>>> v3.18
 =======
 /* MFP */
 #define MFP_CAPABLE		0x0200

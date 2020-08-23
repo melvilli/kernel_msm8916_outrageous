@@ -147,7 +147,11 @@ set_termios()		Notify the tty driver that the device's termios
 			bits in the request it cannot fulfill to indicate
 			the actual modes being used. A device with no
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hardware capability for change (eg a USB dongle or
+=======
+			hardware capability for change (e.g. a USB dongle or
+>>>>>>> v3.18
 =======
 			hardware capability for change (e.g. a USB dongle or
 >>>>>>> v3.18
@@ -263,7 +267,11 @@ put_char()	-	Stuff a single character onto the queue. The
 flush_chars()	-	Ask the kernel to write put_char queue
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 write_room()	-	Return the number of characters tht can be stuffed
+=======
+write_room()	-	Return the number of characters that can be stuffed
+>>>>>>> v3.18
 =======
 write_room()	-	Return the number of characters that can be stuffed
 >>>>>>> v3.18

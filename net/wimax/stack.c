@@ -117,8 +117,14 @@ struct sk_buff *wimax_gnl_re_state_change_alloc(
 		goto error_new;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = genlmsg_put(report_skb, 0, wimax_gnl_mcg.id, &wimax_gnl_family,
 			   0, WIMAX_GNL_RE_STATE_CHANGE);
+=======
+	/* FIXME: sending a group ID as the seq is wrong */
+	data = genlmsg_put(report_skb, 0, wimax_gnl_family.mcgrp_offset,
+			   &wimax_gnl_family, 0, WIMAX_GNL_RE_STATE_CHANGE);
+>>>>>>> v3.18
 =======
 	/* FIXME: sending a group ID as the seq is wrong */
 	data = genlmsg_put(report_skb, 0, wimax_gnl_family.mcgrp_offset,
@@ -184,7 +190,11 @@ int wimax_gnl_re_state_change_send(
 	}
 	genlmsg_end(report_skb, header);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	genlmsg_multicast(report_skb, 0, wimax_gnl_mcg.id, GFP_KERNEL);
+=======
+	genlmsg_multicast(&wimax_gnl_family, report_skb, 0, 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	genlmsg_multicast(&wimax_gnl_family, report_skb, 0, 0, GFP_KERNEL);
 >>>>>>> v3.18
@@ -201,8 +211,13 @@ void __check_new_state(enum wimax_st old_state, enum wimax_st new_state,
 {
 	if (WARN_ON(((1 << new_state) & allowed_states_bm) == 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "SW BUG! Forbidden state change %u -> %u\n",
 			old_state, new_state);
+=======
+		pr_err("SW BUG! Forbidden state change %u -> %u\n",
+		       old_state, new_state);
+>>>>>>> v3.18
 =======
 		pr_err("SW BUG! Forbidden state change %u -> %u\n",
 		       old_state, new_state);
@@ -418,6 +433,7 @@ void wimax_dev_init(struct wimax_dev *wimax_dev)
 EXPORT_SYMBOL_GPL(wimax_dev_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This extern is declared here because it's easier to keep track --
  * both declarations are a list of the same
@@ -435,6 +451,8 @@ struct genl_ops *wimax_gnl_ops[] = {
 	&wimax_gnl_rfkill,
 	&wimax_gnl_state_get,
 =======
+=======
+>>>>>>> v3.18
 static const struct nla_policy wimax_gnl_policy[WIMAX_GNL_ATTR_MAX + 1] = {
 	[WIMAX_GNL_RESET_IFIDX] = { .type = NLA_U32, },
 	[WIMAX_GNL_RFKILL_IFIDX] = { .type = NLA_U32, },
@@ -473,6 +491,9 @@ static const struct genl_ops wimax_gnl_ops[] = {
 		.policy = wimax_gnl_policy,
 		.doit = wimax_gnl_doit_state_get,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -614,8 +635,13 @@ struct genl_family wimax_gnl_family = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct genl_multicast_group wimax_gnl_mcg = {
 	.name = "msg",
+=======
+static const struct genl_multicast_group wimax_gnl_mcgrps[] = {
+	{ .name = "msg", },
+>>>>>>> v3.18
 =======
 static const struct genl_multicast_group wimax_gnl_mcgrps[] = {
 	{ .name = "msg", },
@@ -629,7 +655,11 @@ static
 int __init wimax_subsys_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result, cnt;
+=======
+	int result;
+>>>>>>> v3.18
 =======
 	int result;
 >>>>>>> v3.18
@@ -640,6 +670,7 @@ int __init wimax_subsys_init(void)
 
 	snprintf(wimax_gnl_family.name, sizeof(wimax_gnl_family.name),
 		 "WiMAX");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	result = genl_register_family(&wimax_gnl_family);
 	if (unlikely(result < 0)) {
@@ -674,6 +705,8 @@ error_register_ops:
 				    wimax_gnl_ops[cnt]);
 	genl_unregister_family(&wimax_gnl_family);
 =======
+=======
+>>>>>>> v3.18
 	result = genl_register_family_with_ops_groups(&wimax_gnl_family,
 						      wimax_gnl_ops,
 						      wimax_gnl_mcgrps);
@@ -685,6 +718,9 @@ error_register_ops:
 	d_fnend(4, NULL, "() = 0\n");
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_register_family:
 	d_fnend(4, NULL, "() = %d\n", result);
@@ -699,12 +735,16 @@ static
 void __exit wimax_subsys_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cnt;
 	wimax_id_table_release();
 	genl_unregister_mc_group(&wimax_gnl_family, &wimax_gnl_mcg);
 	for (cnt = ARRAY_SIZE(wimax_gnl_ops) - 1; cnt >= 0; cnt--)
 		genl_unregister_ops(&wimax_gnl_family,
 				    wimax_gnl_ops[cnt]);
+=======
+	wimax_id_table_release();
+>>>>>>> v3.18
 =======
 	wimax_id_table_release();
 >>>>>>> v3.18

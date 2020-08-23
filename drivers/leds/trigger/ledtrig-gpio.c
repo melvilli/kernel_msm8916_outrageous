@@ -49,7 +49,11 @@ static void gpio_trig_work(struct work_struct *work)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = gpio_get_value(gpio_data->gpio);
+=======
+	tmp = gpio_get_value_cansleep(gpio_data->gpio);
+>>>>>>> v3.18
 =======
 	tmp = gpio_get_value_cansleep(gpio_data->gpio);
 >>>>>>> v3.18

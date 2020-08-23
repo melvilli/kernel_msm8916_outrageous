@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ISDN_DRV_AVMB1_VERBOSE_REASON
 	bool "Verbose reason code reporting"
 	default y
@@ -7,6 +8,8 @@ config ISDN_DRV_AVMB1_VERBOSE_REASON
 	  disconnecting. This will increase the size of the kernel by 7 KB. If
 	  unsure, say Y.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CAPI_TRACE
@@ -20,10 +23,13 @@ config CAPI_TRACE
 	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ISDN_CAPI_MIDDLEWARE
 	bool "CAPI2.0 Middleware support"
 	depends on TTY
 =======
+=======
+>>>>>>> v3.18
 config ISDN_CAPI_CAPI20
 	tristate "CAPI2.0 /dev/capi20 support"
 	help
@@ -35,6 +41,9 @@ config ISDN_CAPI_CAPI20
 config ISDN_CAPI_MIDDLEWARE
 	bool "CAPI2.0 Middleware support"
 	depends on ISDN_CAPI_CAPI20 && TTY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This option will enhance the capabilities of the /dev/capi20
@@ -43,6 +52,7 @@ config ISDN_CAPI_MIDDLEWARE
 	  device.  If you want to use pppd with pppdcapiplugin to dial up to
 	  your ISP, say Y here.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ISDN_CAPI_CAPI20
 	tristate "CAPI2.0 /dev/capi support"
@@ -54,6 +64,8 @@ config ISDN_CAPI_CAPI20
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ISDN_CAPI_CAPIDRV
 	tristate "CAPI2.0 capidrv interface support"
 	depends on ISDN_I4L
@@ -63,7 +75,10 @@ config ISDN_CAPI_CAPIDRV
 	  supported by a CAPI driver, but still want to use old features like
 	  ippp interfaces or ttyI emulation, say Y/M here.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config ISDN_CAPI_CAPIDRV_VERBOSE
 	bool "Verbose reason code reporting"
@@ -72,4 +87,7 @@ config ISDN_CAPI_CAPIDRV_VERBOSE
 	  If you say Y here, the capidrv interface will give verbose reasons
 	  for disconnecting. This will increase the size of the kernel by 7 KB.
 	  If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

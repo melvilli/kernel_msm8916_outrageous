@@ -114,12 +114,15 @@ static int ocfs2_claim_suballoc_bits(struct ocfs2_alloc_context *ac,
 static int ocfs2_test_bg_bit_allocatable(struct buffer_head *bg_bh,
 					 int nr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ocfs2_block_group_set_bits(handle_t *handle,
 					     struct inode *alloc_inode,
 					     struct ocfs2_group_desc *bg,
 					     struct buffer_head *group_bh,
 					     unsigned int bit_off,
 					     unsigned int num_bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ocfs2_relink_block_group(handle_t *handle,
@@ -485,7 +488,11 @@ ocfs2_block_group_alloc_contig(struct ocfs2_super *osb, handle_t *handle,
 	bg_bh = sb_getblk(osb->sb, bg_blkno);
 	if (!bg_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = -EIO;
+=======
+		status = -ENOMEM;
+>>>>>>> v3.18
 =======
 		status = -ENOMEM;
 >>>>>>> v3.18
@@ -669,7 +676,11 @@ ocfs2_block_group_alloc_discontig(handle_t *handle,
 	bg_bh = sb_getblk(osb->sb, bg_blkno);
 	if (!bg_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = -EIO;
+=======
+		status = -ENOMEM;
+>>>>>>> v3.18
 =======
 		status = -ENOMEM;
 >>>>>>> v3.18
@@ -789,6 +800,10 @@ static int ocfs2_block_group_alloc(struct ocfs2_super *osb,
 	i_size_write(alloc_inode, le64_to_cpu(fe->i_size));
 	alloc_inode->i_blocks = ocfs2_inode_sector_count(alloc_inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, alloc_inode, 0);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, alloc_inode, 0);
 >>>>>>> v3.18
@@ -1359,7 +1374,11 @@ static int ocfs2_block_group_find_clear_bits(struct ocfs2_super *osb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ocfs2_block_group_set_bits(handle_t *handle,
+=======
+int ocfs2_block_group_set_bits(handle_t *handle,
+>>>>>>> v3.18
 =======
 int ocfs2_block_group_set_bits(handle_t *handle,
 >>>>>>> v3.18
@@ -1408,8 +1427,11 @@ int ocfs2_block_group_set_bits(handle_t *handle,
 
 bail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status)
 		mlog_errno(status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return status;
@@ -1445,7 +1467,11 @@ static int ocfs2_relink_block_group(handle_t *handle,
 	/* there is a really tiny chance the journal calls could fail,
 	 * but we wouldn't want inconsistent blocks in *any* case. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 fe_ptr, bg_ptr, prev_bg_ptr;
+=======
+	u64 bg_ptr, prev_bg_ptr;
+>>>>>>> v3.18
 =======
 	u64 bg_ptr, prev_bg_ptr;
 >>>>>>> v3.18
@@ -1464,7 +1490,10 @@ static int ocfs2_relink_block_group(handle_t *handle,
 		(unsigned long long)le64_to_cpu(prev_bg->bg_blkno));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fe_ptr = le64_to_cpu(fe->id2.i_chain.cl_recs[chain].c_blkno);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bg_ptr = le64_to_cpu(bg->bg_next_group);
@@ -1474,10 +1503,15 @@ static int ocfs2_relink_block_group(handle_t *handle,
 					 prev_bg_bh,
 					 OCFS2_JOURNAL_ACCESS_WRITE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status < 0) {
 		mlog_errno(status);
 		goto out_rollback;
 	}
+=======
+	if (status < 0)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (status < 0)
 		goto out;
@@ -1489,10 +1523,15 @@ static int ocfs2_relink_block_group(handle_t *handle,
 	status = ocfs2_journal_access_gd(handle, INODE_CACHE(alloc_inode),
 					 bg_bh, OCFS2_JOURNAL_ACCESS_WRITE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status < 0) {
 		mlog_errno(status);
 		goto out_rollback;
 	}
+=======
+	if (status < 0)
+		goto out_rollback_prev_bg;
+>>>>>>> v3.18
 =======
 	if (status < 0)
 		goto out_rollback_prev_bg;
@@ -1504,6 +1543,7 @@ static int ocfs2_relink_block_group(handle_t *handle,
 	status = ocfs2_journal_access_di(handle, INODE_CACHE(alloc_inode),
 					 fe_bh, OCFS2_JOURNAL_ACCESS_WRITE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status < 0) {
 		mlog_errno(status);
 		goto out_rollback;
@@ -1512,10 +1552,15 @@ static int ocfs2_relink_block_group(handle_t *handle,
 	if (status < 0)
 		goto out_rollback_bg;
 >>>>>>> v3.18
+=======
+	if (status < 0)
+		goto out_rollback_bg;
+>>>>>>> v3.18
 
 	fe->id2.i_chain.cl_recs[chain].c_blkno = bg->bg_blkno;
 	ocfs2_journal_dirty(handle, fe_bh);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_rollback:
 	if (status < 0) {
@@ -1528,6 +1573,8 @@ out_rollback:
 		mlog_errno(status);
 	return status;
 =======
+=======
+>>>>>>> v3.18
 out:
 	if (status < 0)
 		mlog_errno(status);
@@ -1538,6 +1585,9 @@ out_rollback_bg:
 out_rollback_prev_bg:
 	prev_bg->bg_next_group = cpu_to_le64(prev_bg_ptr);
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1653,7 +1703,11 @@ static int ocfs2_block_group_search(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ocfs2_alloc_dinode_update_counts(struct inode *inode,
+=======
+int ocfs2_alloc_dinode_update_counts(struct inode *inode,
+>>>>>>> v3.18
 =======
 int ocfs2_alloc_dinode_update_counts(struct inode *inode,
 >>>>>>> v3.18
@@ -1684,7 +1738,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ocfs2_rollback_alloc_dinode_counts(struct inode *inode,
 				       struct buffer_head *di_bh,
 				       u32 num_bits,
@@ -1700,6 +1757,9 @@ void ocfs2_rollback_alloc_dinode_counts(struct inode *inode,
 	le32_add_cpu(&cl->cl_recs[chain].c_free, num_bits);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ocfs2_bg_discontig_fix_by_rec(struct ocfs2_suballoc_result *res,
 					 struct ocfs2_extent_rec *rec,
@@ -1802,15 +1862,21 @@ static int ocfs2_search_one_group(struct ocfs2_alloc_context *ac,
 	ret = ocfs2_block_group_set_bits(handle, alloc_inode, gd, group_bh,
 					 res->sr_bit_offset, res->sr_bits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0)
 		mlog_errno(ret);
 =======
+=======
+>>>>>>> v3.18
 	if (ret < 0) {
 		ocfs2_rollback_alloc_dinode_counts(alloc_inode, ac->ac_bh,
 					       res->sr_bits,
 					       le16_to_cpu(gd->bg_chain));
 		mlog_errno(ret);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out_loc_only:
@@ -1942,6 +2008,11 @@ static int ocfs2_search_chain(struct ocfs2_alloc_context *ac,
 					    res->sr_bits);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ocfs2_rollback_alloc_dinode_counts(alloc_inode,
+					ac->ac_bh, res->sr_bits, chain);
+>>>>>>> v3.18
 =======
 		ocfs2_rollback_alloc_dinode_counts(alloc_inode,
 					ac->ac_bh, res->sr_bits, chain);
@@ -2200,7 +2271,11 @@ int ocfs2_find_new_inode_loc(struct inode *dir,
 	ac->ac_find_loc_priv = res;
 	*fe_blkno = res->sr_blkno;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 0);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 0);
 >>>>>>> v3.18
@@ -2262,6 +2337,11 @@ int ocfs2_claim_new_inode_at_loc(handle_t *handle,
 					 res->sr_bits);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ocfs2_rollback_alloc_dinode_counts(ac->ac_inode,
+					       ac->ac_bh, res->sr_bits, chain);
+>>>>>>> v3.18
 =======
 		ocfs2_rollback_alloc_dinode_counts(ac->ac_inode,
 					       ac->ac_bh, res->sr_bits, chain);
@@ -2988,6 +3068,10 @@ int ocfs2_test_inode_bit(struct ocfs2_super *osb, u64 blkno, int *res)
 	if (status < 0) {
 		mutex_unlock(&inode_alloc_inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		iput(inode_alloc_inode);
+>>>>>>> v3.18
 =======
 		iput(inode_alloc_inode);
 >>>>>>> v3.18

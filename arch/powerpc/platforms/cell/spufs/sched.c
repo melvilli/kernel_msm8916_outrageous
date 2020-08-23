@@ -84,7 +84,10 @@ static struct timer_list spuloadavg_timer;
 #define DEF_SPU_TIMESLICE	(100 * HZ / (1000 * SPUSCHED_TICK))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_USER_PRIO		(MAX_PRIO - MAX_RT_PRIO)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SCALE_PRIO(x, prio) \
@@ -1044,7 +1047,10 @@ void spuctx_switch_state(struct spu_context *ctx,
 	unsigned long long curtime;
 	signed long long delta;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct spu *spu;
@@ -1052,8 +1058,12 @@ void spuctx_switch_state(struct spu_context *ctx,
 	int node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts);
 	curtime = timespec_to_ns(&ts);
+=======
+	curtime = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	curtime = ktime_get_ns();
 >>>>>>> v3.18

@@ -51,7 +51,11 @@
 #define MADV_DONTDUMP   16		/* Explicity exclude from the core dump,
 					   overrides the coredump filter bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MADV_DODUMP	17		/* Clear the MADV_NODUMP flag */
+=======
+#define MADV_DODUMP	17		/* Clear the MADV_DONTDUMP flag */
+>>>>>>> v3.18
 =======
 #define MADV_DODUMP	17		/* Clear the MADV_DONTDUMP flag */
 >>>>>>> v3.18

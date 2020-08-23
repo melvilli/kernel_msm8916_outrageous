@@ -15,7 +15,11 @@ Example:
 
 aliases {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdio-gpio0 = <&mdio0>;
+=======
+	mdio-gpio0 = &mdio0;
+>>>>>>> v3.18
 =======
 	mdio-gpio0 = &mdio0;
 >>>>>>> v3.18

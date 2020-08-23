@@ -148,12 +148,18 @@ static struct attribute_group input_polldev_attribute_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct attribute_group *input_polldev_attribute_groups[] = {
 	&input_polldev_attribute_group,
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * input_allocate_polled_device - allocate memory for polled device
@@ -180,7 +186,10 @@ struct input_polled_dev *input_allocate_polled_device(void)
 EXPORT_SYMBOL(input_allocate_polled_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct input_polled_devres {
 	struct input_polled_dev *polldev;
 };
@@ -266,6 +275,9 @@ struct input_polled_dev *devm_input_allocate_polled_device(struct device *dev)
 }
 EXPORT_SYMBOL(devm_input_allocate_polled_device);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * input_free_polled_device - free memory allocated for polled device
@@ -278,14 +290,20 @@ void input_free_polled_device(struct input_polled_dev *dev)
 {
 	if (dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		input_free_device(dev->input);
 =======
+=======
+>>>>>>> v3.18
 		if (dev->devres_managed)
 			WARN_ON(devres_destroy(dev->input->dev.parent,
 						devm_input_polldev_release,
 						devm_input_polldev_match,
 						dev));
 		input_put_device(dev->input);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(dev);
 	}
@@ -305,12 +323,15 @@ EXPORT_SYMBOL(input_free_polled_device);
 int input_register_polled_device(struct input_polled_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct input_dev *input = dev->input;
 	int error;
 
 	input_set_drvdata(input, dev);
 	INIT_DELAYED_WORK(&dev->work, input_polled_device_work);
 =======
+=======
+>>>>>>> v3.18
 	struct input_polled_devres *devres = NULL;
 	struct input_dev *input = dev->input;
 	int error;
@@ -327,11 +348,15 @@ int input_register_polled_device(struct input_polled_dev *dev)
 	input_set_drvdata(input, dev);
 	INIT_DELAYED_WORK(&dev->work, input_polled_device_work);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev->poll_interval)
 		dev->poll_interval = 500;
 	if (!dev->poll_interval_max)
 		dev->poll_interval_max = dev->poll_interval;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input->open = input_open_polled_device;
 	input->close = input_close_polled_device;
@@ -345,6 +370,8 @@ int input_register_polled_device(struct input_polled_dev *dev)
 	if (error) {
 		input_unregister_device(input);
 =======
+=======
+>>>>>>> v3.18
 
 	input->open = input_open_polled_device;
 	input->close = input_close_polled_device;
@@ -354,6 +381,9 @@ int input_register_polled_device(struct input_polled_dev *dev)
 	error = input_register_device(input);
 	if (error) {
 		devres_free(devres);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return error;
 	}
@@ -368,13 +398,19 @@ int input_register_polled_device(struct input_polled_dev *dev)
 	input_get_device(input);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev->devres_managed) {
 		dev_dbg(input->dev.parent, "%s: registering %s with devres.\n",
 			__func__, dev_name(&input->dev));
 		devres_add(input->dev.parent, devres);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -391,14 +427,20 @@ EXPORT_SYMBOL(input_register_polled_device);
 void input_unregister_polled_device(struct input_polled_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_group(&dev->input->dev.kobj,
 			   &input_polldev_attribute_group);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->devres_managed)
 		WARN_ON(devres_destroy(dev->input->dev.parent,
 					devm_input_polldev_unregister,
 					devm_input_polldev_match,
 					dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	input_unregister_device(dev->input);

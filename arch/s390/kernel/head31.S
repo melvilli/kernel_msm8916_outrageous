@@ -60,7 +60,10 @@ ENTRY(startup_continue)
 	.long	0xc0000000		# cr14: machine check handling off
 	.long	0			# cr15: linkage stack operations
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lmchunk:.long	memory_chunk
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 .Lbss_bgn:  .long __bss_start

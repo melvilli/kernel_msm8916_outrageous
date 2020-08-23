@@ -301,7 +301,12 @@ int poseidon_audio_init(struct poseidon *p)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_card_create(-1, "Telegent", THIS_MODULE, 0, &card);
+=======
+	ret = snd_card_new(&p->interface->dev, -1, "Telegent",
+			   THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	ret = snd_card_new(&p->interface->dev, -1, "Telegent",
 			   THIS_MODULE, 0, &card);

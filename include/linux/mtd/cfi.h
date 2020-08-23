@@ -154,7 +154,11 @@ struct cfi_ident {
 	uint8_t  NumEraseRegions;
 	uint32_t EraseRegionInfo[0]; /* Not host ordered */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -166,7 +170,11 @@ struct cfi_extquery {
 	uint8_t  MajorVersion;
 	uint8_t  MinorVersion;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -189,7 +197,11 @@ struct cfi_pri_intelext {
 	uint8_t  UserProtRegSize;
 	uint8_t  extra[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -201,7 +213,11 @@ struct cfi_intelext_otpinfo {
 	uint16_t UserGroups;
 	uint8_t  UserProtRegSize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -213,7 +229,11 @@ struct cfi_intelext_blockinfo {
 	uint8_t  BitsPerCell;
 	uint8_t  BlockCap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -226,7 +246,11 @@ struct cfi_intelext_regioninfo {
 	uint8_t  NumBlockTypes;
 	struct cfi_intelext_blockinfo BlockTypes[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -239,7 +263,11 @@ struct cfi_intelext_programming_regioninfo {
 	uint8_t  ControlInvalid;
 	uint8_t  Reserved3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -262,7 +290,11 @@ struct cfi_pri_amdstd {
 	uint8_t  VppMax;
 	uint8_t  TopBottom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -278,7 +310,11 @@ struct cfi_pri_atmel {
 	uint8_t BurstMode;
 	uint8_t PageMode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -287,7 +323,11 @@ struct cfi_pri_query {
 	uint8_t  NumFields;
 	uint32_t ProtField[1]; /* Not host ordered */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -297,7 +337,11 @@ struct cfi_bri_query {
 	uint8_t  NumFields;
 	uint32_t ConfField[1]; /* Not host ordered */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18

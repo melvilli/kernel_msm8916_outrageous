@@ -22,7 +22,11 @@
 
 /* List of platforms this NAND controller has be integrated into */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(denali_pci_ids) = {
+=======
+static const struct pci_device_id denali_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id denali_pci_ids[] = {
 >>>>>>> v3.18
@@ -124,7 +128,10 @@ static void denali_pci_remove(struct pci_dev *dev)
 	pci_release_regions(dev);
 	pci_disable_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(denali);
@@ -140,7 +147,10 @@ static struct pci_driver denali_pci_driver = {
 static int denali_init_pci(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Spectra MTD driver built on %s @ %s\n", __DATE__, __TIME__);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return pci_register_driver(&denali_pci_driver);

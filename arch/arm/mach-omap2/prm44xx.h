@@ -26,6 +26,10 @@
 #define __ARCH_ARM_MACH_OMAP2_PRM44XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "prm44xx_54xx.h"
+>>>>>>> v3.18
 =======
 #include "prm44xx_54xx.h"
 >>>>>>> v3.18
@@ -749,6 +753,7 @@
 #define OMAP4430_PRM_VC_ERRST				OMAP44XX_PRM_REGADDR(OMAP4430_PRM_DEVICE_INST, 0x00f8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Function prototypes */
 # ifndef __ASSEMBLER__
 
@@ -781,6 +786,8 @@ extern u32 omap44xx_prm_get_reset_sources(void);
 
 # endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

@@ -77,8 +77,13 @@ struct fintek_dev {
 
 	/* Config register index/data port pair */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 cr_ip;
 	u8 cr_dp;
+=======
+	u32 cr_ip;
+	u32 cr_dp;
+>>>>>>> v3.18
 =======
 	u32 cr_ip;
 	u32 cr_dp;

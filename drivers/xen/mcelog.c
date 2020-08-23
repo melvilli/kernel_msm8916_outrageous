@@ -33,6 +33,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen_mcelog: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen_mcelog: " fmt
 
@@ -57,8 +62,11 @@
 #include <asm/xen/hypervisor.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XEN_MCELOG "xen_mcelog: "
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct mc_info g_mi;
@@ -236,7 +244,11 @@ static int convert_log(struct mc_info *mi)
 	x86_mcinfo_lookup(&mic, mi, MC_TYPE_GLOBAL);
 	if (unlikely(!mic)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_MCELOG "Failed to find global error info\n");
+=======
+		pr_warn("Failed to find global error info\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to find global error info\n");
 >>>>>>> v3.18
@@ -254,8 +266,12 @@ static int convert_log(struct mc_info *mi)
 			break;
 	if (unlikely(i == ncpus)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_MCELOG "Failed to match cpu with apicid %d\n",
 			   m.apicid);
+=======
+		pr_warn("Failed to match cpu with apicid %d\n", m.apicid);
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to match cpu with apicid %d\n", m.apicid);
 >>>>>>> v3.18
@@ -271,7 +287,11 @@ static int convert_log(struct mc_info *mi)
 	x86_mcinfo_lookup(&mic, mi, MC_TYPE_BANK);
 	if (unlikely(!mic)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_MCELOG "Fail to find bank error info\n");
+=======
+		pr_warn("Fail to find bank error info\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Fail to find bank error info\n");
 >>>>>>> v3.18
@@ -316,9 +336,14 @@ static int mc_queue_handle(uint32_t flags)
 		ret = HYPERVISOR_mca(&mc_op);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err(XEN_MCELOG "Failed to fetch %s error log\n",
 			       (flags == XEN_MC_URGENT) ?
 			       "urgnet" : "nonurgent");
+=======
+			pr_err("Failed to fetch %surgent error log\n",
+			       flags == XEN_MC_URGENT ? "" : "non");
+>>>>>>> v3.18
 =======
 			pr_err("Failed to fetch %surgent error log\n",
 			       flags == XEN_MC_URGENT ? "" : "non");
@@ -333,9 +358,13 @@ static int mc_queue_handle(uint32_t flags)
 			ret = convert_log(&g_mi);
 			if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning(XEN_MCELOG
 					   "Failed to convert this error log, "
 					   "continue acking it anyway\n");
+=======
+				pr_warn("Failed to convert this error log, continue acking it anyway\n");
+>>>>>>> v3.18
 =======
 				pr_warn("Failed to convert this error log, continue acking it anyway\n");
 >>>>>>> v3.18
@@ -344,8 +373,12 @@ static int mc_queue_handle(uint32_t flags)
 			ret = HYPERVISOR_mca(&mc_op);
 			if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_err(XEN_MCELOG
 				       "Failed to ack previous error log\n");
+=======
+				pr_err("Failed to ack previous error log\n");
+>>>>>>> v3.18
 =======
 				pr_err("Failed to ack previous error log\n");
 >>>>>>> v3.18
@@ -368,9 +401,13 @@ static void xen_mce_work_fn(struct work_struct *work)
 	err = mc_queue_handle(XEN_MC_URGENT);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG
 		       "Failed to handle urgent mc_info queue, "
 		       "continue handling nonurgent mc_info queue anyway.\n");
+=======
+		pr_err("Failed to handle urgent mc_info queue, continue handling nonurgent mc_info queue anyway\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to handle urgent mc_info queue, continue handling nonurgent mc_info queue anyway\n");
 >>>>>>> v3.18
@@ -379,8 +416,12 @@ static void xen_mce_work_fn(struct work_struct *work)
 	err = mc_queue_handle(XEN_MC_NONURGENT);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG
 		       "Failed to handle nonurgent mc_info queue.\n");
+=======
+		pr_err("Failed to handle nonurgent mc_info queue\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to handle nonurgent mc_info queue\n");
 >>>>>>> v3.18
@@ -412,7 +453,11 @@ static int bind_virq_for_mce(void)
 	ret = HYPERVISOR_mca(&mc_op);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG "Failed to get CPU numbers\n");
+=======
+		pr_err("Failed to get CPU numbers\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to get CPU numbers\n");
 >>>>>>> v3.18
@@ -429,7 +474,11 @@ static int bind_virq_for_mce(void)
 	ret = HYPERVISOR_mca(&mc_op);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG "Failed to get CPU info\n");
+=======
+		pr_err("Failed to get CPU info\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to get CPU info\n");
 >>>>>>> v3.18
@@ -441,7 +490,11 @@ static int bind_virq_for_mce(void)
 				       xen_mce_interrupt, 0, "mce", NULL);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG "Failed to bind virq\n");
+=======
+		pr_err("Failed to bind virq\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to bind virq\n");
 >>>>>>> v3.18

@@ -198,9 +198,15 @@ struct hif_scatter_req {
 	u8 *virt_dma_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hif_scatter_item scat_list[1];
 
 	u32 scat_q_depth;
+=======
+	u32 scat_q_depth;
+
+	struct hif_scatter_item scat_list[0];
+>>>>>>> v3.18
 =======
 	u32 scat_q_depth;
 

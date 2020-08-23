@@ -72,6 +72,10 @@ config NFSD_V4
 	select SUNRPC_GSS
 	select CRYPTO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GRACE_PERIOD
+>>>>>>> v3.18
 =======
 	select GRACE_PERIOD
 >>>>>>> v3.18
@@ -86,7 +90,10 @@ config NFSD_V4
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NFSD_V4_SECURITY_LABEL
 	bool "Provide Security Label support for NFSv4 server"
 	depends on NFSD_V4 && SECURITY
@@ -100,6 +107,9 @@ config NFSD_V4_SECURITY_LABEL
 	If you do not wish to enable fine-grained security labels SELinux or
 	Smack policies on NFSv4 files, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NFSD_FAULT_INJECTION
 	bool "NFS server manual fault injection"

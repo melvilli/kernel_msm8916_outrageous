@@ -56,6 +56,7 @@ static inline pmd_t native_pmdp_get_and_clear(pmd_t *xp)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Bits _PAGE_BIT_PRESENT, _PAGE_BIT_FILE and _PAGE_BIT_PROTNONE are taken,
  * split up the 29 bits of offset into this range:
@@ -98,6 +99,8 @@ static inline pmd_t native_pmdp_get_and_clear(pmd_t *xp)
 #define SWP_OFFSET_SHIFT (_PAGE_BIT_FILE + 1)
 #endif
 =======
+=======
+>>>>>>> v3.18
 /* Bit manipulation helper on pte/pgoff entry */
 static inline unsigned long pte_bitop(unsigned long value, unsigned int rightshift,
 				      unsigned long mask, unsigned int leftshift)
@@ -144,6 +147,9 @@ static __always_inline pte_t pgoff_to_pte(pgoff_t off)
 /* Encode and de-code a swap entry */
 #define SWP_TYPE_BITS (_PAGE_BIT_FILE - _PAGE_BIT_PRESENT - 1)
 #define SWP_OFFSET_SHIFT (_PAGE_BIT_PROTNONE + 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MAX_SWAPFILES_CHECK() BUILD_BUG_ON(MAX_SWAPFILES_SHIFT > SWP_TYPE_BITS)

@@ -47,6 +47,12 @@ config NF_CONNTRACK
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config NF_LOG_COMMON
+	tristate
+
+>>>>>>> v3.18
 =======
 config NF_LOG_COMMON
 	tristate
@@ -415,6 +421,7 @@ config NF_NAT_TFTP
 	default NF_NAT && NF_CONNTRACK_TFTP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif # NF_CONNTRACK
 
 # transparent proxy support
@@ -431,6 +438,8 @@ config NETFILTER_TPROXY
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 =======
+=======
+>>>>>>> v3.18
 config NETFILTER_SYNPROXY
 	tristate
 
@@ -565,6 +574,9 @@ config NFT_COMPAT
 	  This is required if you intend to use any of existing
 	  x_tables match/target extensions over the nf_tables
 	  framework.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config NETFILTER_XTABLES
@@ -752,6 +764,7 @@ config NETFILTER_XT_TARGET_IDLETIMER
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NETFILTER_XT_TARGET_HARDIDLETIMER
 	tristate  "HARDIDLETIMER target support"
 	depends on NETFILTER_ADVANCED
@@ -766,6 +779,8 @@ config NETFILTER_XT_TARGET_HARDIDLETIMER
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config NETFILTER_XT_TARGET_LED
@@ -795,6 +810,12 @@ config NETFILTER_XT_TARGET_LED
 config NETFILTER_XT_TARGET_LOG
 	tristate "LOG target support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select NF_LOG_COMMON
+	select NF_LOG_IPV4
+	select NF_LOG_IPV6 if IPV6
+>>>>>>> v3.18
 =======
 	select NF_LOG_COMMON
 	select NF_LOG_IPV4
@@ -817,7 +838,10 @@ config NETFILTER_XT_TARGET_MARK
 	CONFIG_NETFILTER_XT_MARK (combined mark/MARK module).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NETFILTER_XT_NAT
 	tristate '"SNAT and DNAT" targets support'
 	depends on NF_NAT
@@ -826,6 +850,9 @@ config NETFILTER_XT_NAT
 
 	To compile it as a module, choose M here. If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NETFILTER_XT_TARGET_NETMAP
 	tristate '"NETMAP" target support'
@@ -898,16 +925,22 @@ config NETFILTER_XT_TARGET_TEE
 
 config NETFILTER_XT_TARGET_TPROXY
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate '"TPROXY" target support'
 	depends on NETFILTER_TPROXY
 	depends on NETFILTER_XTABLES
 	depends on NETFILTER_ADVANCED
 =======
+=======
+>>>>>>> v3.18
 	tristate '"TPROXY" target transparent proxying support'
 	depends on NETFILTER_XTABLES
 	depends on NETFILTER_ADVANCED
 	depends on (IPV6 || IPV6=n)
 	depends on IP_NF_MANGLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select NF_DEFRAG_IPV4
 	select NF_DEFRAG_IPV6 if IP6_NF_IPTABLES
@@ -917,6 +950,12 @@ config NETFILTER_XT_TARGET_TPROXY
 	  to redirect traffic to a transparent proxy.  It does _not_ depend
 	  on Netfilter connection tracking and NAT, unlike REDIRECT.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  For it to work you will have to configure certain iptables rules
+	  and use policy routing. For more information on how to set it up
+	  see Documentation/networking/tproxy.txt.
+>>>>>>> v3.18
 =======
 	  For it to work you will have to configure certain iptables rules
 	  and use policy routing. For more information on how to set it up
@@ -1006,7 +1045,10 @@ config NETFILTER_XT_MATCH_BPF
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NETFILTER_XT_MATCH_CGROUP
 	tristate '"control group" match support'
 	depends on NETFILTER_ADVANCED
@@ -1017,6 +1059,9 @@ config NETFILTER_XT_MATCH_CGROUP
 	generated packets based on which net_cls control group processes
 	belong to.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NETFILTER_XT_MATCH_CLUSTER
 	tristate '"cluster" match support'
@@ -1070,7 +1115,11 @@ config NETFILTER_XT_MATCH_CONNLABEL
 
 config NETFILTER_XT_MATCH_CONNLIMIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate '"connlimit" match support"'
+=======
+	tristate '"connlimit" match support'
+>>>>>>> v3.18
 =======
 	tristate '"connlimit" match support'
 >>>>>>> v3.18
@@ -1200,7 +1249,10 @@ config NETFILTER_XT_MATCH_HL
 	header of the packet.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NETFILTER_XT_MATCH_IPCOMP
 	tristate '"ipcomp" match support'
 	depends on NETFILTER_ADVANCED
@@ -1210,6 +1262,9 @@ config NETFILTER_XT_MATCH_IPCOMP
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NETFILTER_XT_MATCH_IPRANGE
 	tristate '"iprange" address range match support'
@@ -1232,7 +1287,10 @@ config NETFILTER_XT_MATCH_IPVS
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NETFILTER_XT_MATCH_L2TP
 	tristate '"l2tp" match support'
 	depends on NETFILTER_ADVANCED
@@ -1243,6 +1301,9 @@ config NETFILTER_XT_MATCH_L2TP
 
 	To compile it as a module, choose M here. If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NETFILTER_XT_MATCH_LENGTH
 	tristate '"length" match support'
@@ -1323,8 +1384,11 @@ config NETFILTER_XT_MATCH_OWNER
 	possible to check whether a socket actually exists.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Conflicts with '"quota, tag, uid" match'
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config NETFILTER_XT_MATCH_POLICY
@@ -1361,6 +1425,7 @@ config NETFILTER_XT_MATCH_PKTTYPE
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NETFILTER_XT_MATCH_QTAGUID
 	bool '"quota, tag, owner" match and stats support'
         depends on NETFILTER_XT_MATCH_SOCKET
@@ -1379,6 +1444,8 @@ config NETFILTER_XT_MATCH_QTAGUID
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config NETFILTER_XT_MATCH_QUOTA
 	tristate '"quota" match support'
 	depends on NETFILTER_ADVANCED
@@ -1389,6 +1456,7 @@ config NETFILTER_XT_MATCH_QUOTA
 	  If you want to compile it as a module, say M here and read
 	  <file:Documentation/kbuild/modules.txt>.  If unsure, say `N'.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config NETFILTER_XT_MATCH_QUOTA2
 	tristate '"quota2" match support'
@@ -1414,6 +1482,8 @@ config NETFILTER_XT_MATCH_QUOTA2_LOG
 
 	  If unsure, say `N'.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config NETFILTER_XT_MATCH_RATEEST
@@ -1465,15 +1535,21 @@ config NETFILTER_XT_MATCH_SCTP
 config NETFILTER_XT_MATCH_SOCKET
 	tristate '"socket" match support'
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on NETFILTER_TPROXY
 	depends on NETFILTER_XTABLES
 	depends on NETFILTER_ADVANCED
 	depends on !NF_CONNTRACK || NF_CONNTRACK
 =======
+=======
+>>>>>>> v3.18
 	depends on NETFILTER_XTABLES
 	depends on NETFILTER_ADVANCED
 	depends on !NF_CONNTRACK || NF_CONNTRACK
 	depends on (IPV6 || IPV6=n)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select NF_DEFRAG_IPV4
 	select NF_DEFRAG_IPV6 if IP6_NF_IPTABLES

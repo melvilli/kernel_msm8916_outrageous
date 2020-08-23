@@ -3,10 +3,14 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y :=
 
 # IOP32X
 obj-$(CONFIG_ARCH_IOP32X) += gpio.o
+=======
+# IOP32X
+>>>>>>> v3.18
 =======
 # IOP32X
 >>>>>>> v3.18
@@ -21,7 +25,10 @@ obj-$(CONFIG_ARCH_IOP32X) += restart.o
 
 # IOP33X
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ARCH_IOP33X) += gpio.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ARCH_IOP33X) += i2c.o
@@ -37,9 +44,12 @@ obj-$(CONFIG_ARCH_IOP33X) += restart.o
 obj-$(CONFIG_ARCH_IOP13XX) += cp6.o
 obj-$(CONFIG_ARCH_IOP13XX) += time.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 obj-m                  :=
 obj-n                  :=
 obj-                   :=
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

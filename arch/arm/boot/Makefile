@@ -16,12 +16,15 @@ include $(srctree)/$(MACHINE)/Makefile.boot
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 include $(srctree)/arch/arm/boot/dts/qcom/Makefile
 ifneq ($(DTSSUBDIR),)
 DTSSUBDIR_INCS=$(foreach DIR, $(DTSSUBDIR), $(addsuffix /Makefile, $(addprefix $(srctree)/arch/arm/boot/dts/, $(DIR))))
 include $(DTSSUBDIR_INCS)
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # Note: the following conditions must always be true:
@@ -37,6 +40,7 @@ export ZRELADDR INITRD_PHYS PARAMS_PHYS
 targets := Image zImage xipImage bootpImage uImage
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DTB_NAMES := $(subst $\",,$(CONFIG_BUILD_ARM_APPENDED_DTB_IMAGE_NAMES))
 ifneq ($(DTB_NAMES),)
 DTB_LIST := $(addsuffix .dtb,$(DTB_NAMES))
@@ -45,6 +49,8 @@ DTB_LIST := $(dtb-y)
 endif
 DTB_OBJS := $(addprefix $(obj)/dts/,$(DTB_LIST))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ifeq ($(CONFIG_XIP_KERNEL),y)
@@ -76,10 +82,13 @@ $(obj)/zImage:	$(obj)/compressed/vmlinux FORCE
 	@$(kecho) '  Kernel: $@ is ready'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj)/zImage-dtb:	$(obj)/zImage $(DTB_OBJS) FORCE
 	$(call if_changed,cat)
 	@echo '  Kernel: $@ is ready'
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif
@@ -123,6 +132,7 @@ initrd:
 	(echo You must specify INITRD; exit -1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 install: $(obj)/Image
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh $(KERNELRELEASE) \
 	$(obj)/Image System.map "$(INSTALL_PATH)"
@@ -142,6 +152,8 @@ zi:
 i:
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh $(KERNELRELEASE) \
 =======
+=======
+>>>>>>> v3.18
 install:
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh "$(KERNELRELEASE)" \
 	$(obj)/Image System.map "$(INSTALL_PATH)"
@@ -160,6 +172,9 @@ zi:
 
 i:
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh "$(KERNELRELEASE)" \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	$(obj)/Image System.map "$(INSTALL_PATH)"
 

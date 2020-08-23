@@ -8,7 +8,11 @@
 # 2 of the License, or (at your option) any later version.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # This script checks the relcoations of a vmlinux for "suspicious"
+=======
+# This script checks the relocations of a vmlinux for "suspicious"
+>>>>>>> v3.18
 =======
 # This script checks the relocations of a vmlinux for "suspicious"
 >>>>>>> v3.18
@@ -33,7 +37,11 @@ while (<FD>) {
 	study $_;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# Only look at relcoation lines.
+=======
+	# Only look at relocation lines.
+>>>>>>> v3.18
 =======
 	# Only look at relocation lines.
 >>>>>>> v3.18
@@ -54,7 +62,11 @@ while (<FD>) {
 		 /\bR_PPC_NONE\b/);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# If we see this type of relcoation it's an idication that
+=======
+	# If we see this type of relocation it's an idication that
+>>>>>>> v3.18
 =======
 	# If we see this type of relocation it's an idication that
 >>>>>>> v3.18
@@ -74,8 +86,13 @@ if ($bad_relocs_count) {
 
 if ($old_binutils) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print "WARNING: You need at binutils >= 2.19 to build a ".
 	      "CONFIG_RELCOATABLE kernel\n";
+=======
+	print "WARNING: You need at least binutils >= 2.19 to build a ".
+	      "CONFIG_RELOCATABLE kernel\n";
+>>>>>>> v3.18
 =======
 	print "WARNING: You need at least binutils >= 2.19 to build a ".
 	      "CONFIG_RELOCATABLE kernel\n";

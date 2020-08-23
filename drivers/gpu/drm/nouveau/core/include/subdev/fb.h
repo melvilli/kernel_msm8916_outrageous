@@ -54,6 +54,7 @@ struct nouveau_fb {
 	bool (*memtype_valid)(struct nouveau_fb *, u32 memtype);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		enum {
 			NV_MEM_TYPE_UNKNOWN = 0,
@@ -82,6 +83,9 @@ struct nouveau_fb {
 =======
 	struct nouveau_ram *ram;
 >>>>>>> v3.18
+=======
+	struct nouveau_ram *ram;
+>>>>>>> v3.18
 
 	struct nouveau_mm vram;
 	struct nouveau_mm tags;
@@ -103,6 +107,7 @@ struct nouveau_fb {
 static inline struct nouveau_fb *
 nouveau_fb(void *obj)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_FB];
 }
@@ -173,6 +178,8 @@ void nv46_fb_tile_init(struct nouveau_fb *, int i, u32 addr, u32 size,
 
 void nv50_fb_vram_del(struct nouveau_fb *, struct nouveau_mem **);
 =======
+=======
+>>>>>>> v3.18
 	/* fbram uses this before device subdev pointer is valid */
 	if (nv_iclass(obj, NV_SUBDEV_CLASS) &&
 	    nv_subidx(obj) == NVDEV_SUBDEV_FB)
@@ -253,6 +260,9 @@ struct nouveau_ram {
 	struct nouveau_ram_data xition;
 	struct nouveau_ram_data target;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -27,7 +27,10 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -71,6 +74,7 @@ static ssize_t audmux_read_file(struct file *file, char __user *user_buf,
 {
 	ssize_t ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *buf = kmalloc(PAGE_SIZE, GFP_KERNEL);
 	int port = (int)file->private_data;
 	u32 pdcr, ptcr;
@@ -81,6 +85,8 @@ static ssize_t audmux_read_file(struct file *file, char __user *user_buf,
 	if (audmux_clk)
 		clk_prepare_enable(audmux_clk);
 =======
+=======
+>>>>>>> v3.18
 	char *buf;
 	uintptr_t port = (uintptr_t)file->private_data;
 	u32 pdcr, ptcr;
@@ -90,6 +96,9 @@ static ssize_t audmux_read_file(struct file *file, char __user *user_buf,
 		if (ret)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ptcr = readl(audmux_base + IMX_AUDMUX_V2_PTCR(port));
@@ -99,11 +108,17 @@ static ssize_t audmux_read_file(struct file *file, char __user *user_buf,
 		clk_disable_unprepare(audmux_clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	buf = kmalloc(PAGE_SIZE, GFP_KERNEL);
 	if (!buf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snprintf(buf, PAGE_SIZE, "PDCR: %08x\nPTCR: %08x\n",
 		       pdcr, ptcr);
@@ -165,9 +180,15 @@ static const struct file_operations audmux_debugfs_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init audmux_debugfs_init(void)
 {
 	int i;
+=======
+static void audmux_debugfs_init(void)
+{
+	uintptr_t i;
+>>>>>>> v3.18
 =======
 static void audmux_debugfs_init(void)
 {
@@ -183,15 +204,21 @@ static void audmux_debugfs_init(void)
 
 	for (i = 0; i < MX31_AUDMUX_PORT7_SSI_PINS_7 + 1; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(buf, sizeof(buf), "ssi%d", i);
 		if (!debugfs_create_file(buf, 0444, audmux_debugfs_root,
 					 (void *)i, &audmux_debugfs_fops))
 			pr_warning("Failed to create AUDMUX port %d debugfs file\n",
 =======
+=======
+>>>>>>> v3.18
 		snprintf(buf, sizeof(buf), "ssi%lu", i);
 		if (!debugfs_create_file(buf, 0444, audmux_debugfs_root,
 					 (void *)i, &audmux_debugfs_fops))
 			pr_warning("Failed to create AUDMUX port %lu debugfs file\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   i);
 	}
@@ -261,6 +288,11 @@ int imx_audmux_v2_configure_port(unsigned int port, unsigned int ptcr,
 		unsigned int pdcr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -272,14 +304,20 @@ int imx_audmux_v2_configure_port(unsigned int port, unsigned int ptcr,
 		return -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (audmux_clk)
 		clk_prepare_enable(audmux_clk);
 =======
+=======
+>>>>>>> v3.18
 	if (audmux_clk) {
 		ret = clk_prepare_enable(audmux_clk);
 		if (ret)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	writel(ptcr, audmux_base + IMX_AUDMUX_V2_PTCR(port));
@@ -293,11 +331,14 @@ int imx_audmux_v2_configure_port(unsigned int port, unsigned int ptcr,
 EXPORT_SYMBOL_GPL(imx_audmux_v2_configure_port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int imx_audmux_probe(struct platform_device *pdev)
 {
 	struct resource *res;
 	struct pinctrl *pinctrl;
 =======
+=======
+>>>>>>> v3.18
 static int imx_audmux_parse_dt_defaults(struct platform_device *pdev,
 		struct device_node *of_node)
 {
@@ -361,6 +402,9 @@ static int imx_audmux_parse_dt_defaults(struct platform_device *pdev,
 static int imx_audmux_probe(struct platform_device *pdev)
 {
 	struct resource *res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct of_device_id *of_id =
 			of_match_device(imx_audmux_dt_ids, &pdev->dev);
@@ -371,12 +415,15 @@ static int imx_audmux_probe(struct platform_device *pdev)
 		return PTR_ERR(audmux_base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		dev_err(&pdev->dev, "setup pinctrl failed!");
 		return PTR_ERR(pinctrl);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	audmux_clk = devm_clk_get(&pdev->dev, "audmux");
@@ -393,6 +440,12 @@ static int imx_audmux_probe(struct platform_device *pdev)
 		audmux_debugfs_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_id)
+		imx_audmux_parse_dt_defaults(pdev, pdev->dev.of_node);
+
+>>>>>>> v3.18
 =======
 	if (of_id)
 		imx_audmux_parse_dt_defaults(pdev, pdev->dev.of_node);

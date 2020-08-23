@@ -220,7 +220,13 @@ extern void ccw_device_get_id(struct ccw_device *, struct ccw_dev_id *);
 #define to_ccwdrv(n) container_of(n, struct ccw_driver, driver)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct ccw_device *ccw_device_probe_console(struct ccw_driver *);
+=======
+extern struct ccw_device *ccw_device_create_console(struct ccw_driver *);
+extern void ccw_device_destroy_console(struct ccw_device *);
+extern int ccw_device_enable_console(struct ccw_device *);
+>>>>>>> v3.18
 =======
 extern struct ccw_device *ccw_device_create_console(struct ccw_driver *);
 extern void ccw_device_destroy_console(struct ccw_device *);
@@ -234,7 +240,11 @@ int ccw_device_siosl(struct ccw_device *);
 extern void ccw_device_get_schid(struct ccw_device *, struct subchannel_id *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *ccw_device_get_chp_desc(struct ccw_device *, int);
+=======
+struct channel_path_desc *ccw_device_get_chp_desc(struct ccw_device *, int);
+>>>>>>> v3.18
 =======
 struct channel_path_desc *ccw_device_get_chp_desc(struct ccw_device *, int);
 >>>>>>> v3.18

@@ -22,7 +22,11 @@
 #define FPSID_NODOUBLE		(1<<20)
 #define FPSID_ARCH_BIT		(16)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FPSID_ARCH_MASK		(0x7F  << FPSID_ARCH_BIT)
+=======
+#define FPSID_ARCH_MASK		(0xF  << FPSID_ARCH_BIT)
+>>>>>>> v3.18
 =======
 #define FPSID_ARCH_MASK		(0xF  << FPSID_ARCH_BIT)
 >>>>>>> v3.18
@@ -87,10 +91,13 @@
 #define VFPOPDESC_UNUSED_MASK	(0xFF << VFPOPDESC_UNUSED_BIT)
 #define VFPOPDESC_OPDESC_MASK	(~(VFPOPDESC_LENGTH_MASK | VFPOPDESC_UNUSED_MASK))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef __ASSEMBLY__
 int vfp_pm_suspend(void);
 void vfp_pm_resume(void);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

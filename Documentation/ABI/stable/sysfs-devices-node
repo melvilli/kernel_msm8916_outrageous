@@ -86,6 +86,7 @@ Description:
 		into blocks which have as many contiguous pages as possible
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/devices/system/node/nodeX/scan_unevictable_pages
 Date:		October 2008
 Contact:	Lee Schermerhorn <lee.schermerhorn@hp.com>
@@ -94,6 +95,8 @@ Description:
 		and move any pages that have become evictable onto the respective
 		zone's inactive list. See mm/vmscan.c
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 What:		/sys/devices/system/node/nodeX/hugepages/hugepages-<size>/

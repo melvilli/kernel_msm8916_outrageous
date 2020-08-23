@@ -5,6 +5,10 @@
 
 extern void pxa168_timer_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __init icu_init_irq(void);
+>>>>>>> v3.18
 =======
 extern void __init icu_init_irq(void);
 >>>>>>> v3.18

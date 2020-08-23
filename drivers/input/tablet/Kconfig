@@ -74,6 +74,7 @@ config TABLET_USB_KBTAB
 	  module will be called kbtab.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TABLET_USB_WACOM
 	tristate "Wacom Intuos/Graphire tablet support (USB)"
 	depends on USB_ARCH_HAS_HCD
@@ -90,6 +91,8 @@ config TABLET_USB_WACOM
 	  To compile this driver as a module, choose M here: the
 	  module will be called wacom.
 =======
+=======
+>>>>>>> v3.18
 config TABLET_SERIAL_WACOM4
 	tristate "Wacom protocol 4 serial tablet support"
 	select SERIO
@@ -99,6 +102,9 @@ config TABLET_SERIAL_WACOM4
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called wacom_serial4.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif

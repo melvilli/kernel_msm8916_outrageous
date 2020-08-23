@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _LINUX_PERCPU_DEFS_H
 #define _LINUX_PERCPU_DEFS_H
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * linux/percpu-defs.h - basic definitions for percpu areas
  *
@@ -40,6 +43,9 @@
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Base implementations of per-CPU variable declarations and definitions, where
@@ -60,6 +66,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Macro which verifies @ptr is a percpu pointer without evaluating
  * @ptr.  This is to be used in percpu accessors to verify that the
  * input parameter is a percpu pointer.
@@ -73,6 +80,8 @@
 } while (0)
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * s390 and alpha modules require percpu variables to be defined as
@@ -113,6 +122,10 @@
 	extern __PCPU_DUMMY_ATTRS char __pcpu_unique_##name;		\
 	__PCPU_DUMMY_ATTRS char __pcpu_unique_##name;			\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	extern __PCPU_ATTRS(sec) __typeof__(type) name;			\
+>>>>>>> v3.18
 =======
 	extern __PCPU_ATTRS(sec) __typeof__(type) name;			\
 >>>>>>> v3.18
@@ -193,15 +206,21 @@
  */
 #define DECLARE_PER_CPU_READ_MOSTLY(type, name)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_PER_CPU_SECTION(type, name, "..readmostly")
 
 #define DEFINE_PER_CPU_READ_MOSTLY(type, name)				\
 	DEFINE_PER_CPU_SECTION(type, name, "..readmostly")
 =======
+=======
+>>>>>>> v3.18
 	DECLARE_PER_CPU_SECTION(type, name, "..read_mostly")
 
 #define DEFINE_PER_CPU_READ_MOSTLY(type, name)				\
 	DEFINE_PER_CPU_SECTION(type, name, "..read_mostly")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -218,7 +237,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Accessors and operations.
  */
@@ -549,5 +571,8 @@ do {									\
 #define this_cpu_dec_return(pcp)	this_cpu_add_return(pcp, -1)
 
 #endif /* __ASSEMBLY__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_PERCPU_DEFS_H */

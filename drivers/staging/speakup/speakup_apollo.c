@@ -54,6 +54,7 @@ static struct var_t vars[] = {
  */
 static struct kobj_attribute caps_start_attribute =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(caps_start, USER_RW, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, USER_RW, spk_var_show, spk_var_store);
@@ -79,6 +80,8 @@ static struct kobj_attribute jiffy_delta_attribute =
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, ROOT_W, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(caps_start, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
@@ -103,6 +106,9 @@ static struct kobj_attribute jiffy_delta_attribute =
 	__ATTR(jiffy_delta, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -176,6 +182,7 @@ static void do_catch_up(struct spk_synth *synth)
 	delay_time = spk_get_var(DELAY);
 	full_time = spk_get_var(FULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 	jiffy_delta_val = jiffy_delta->u.n.value;
 	spk_unlock(flags);
@@ -184,6 +191,8 @@ static void do_catch_up(struct spk_synth *synth)
 	while (!kthread_should_stop()) {
 		spk_lock(flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 	jiffy_delta_val = jiffy_delta->u.n.value;
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
@@ -191,6 +200,9 @@ static void do_catch_up(struct spk_synth *synth)
 
 	while (!kthread_should_stop()) {
 		spin_lock_irqsave(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		jiffy_delta_val = jiffy_delta->u.n.value;
 		full_time_val = full_time->u.n.value;
@@ -198,7 +210,11 @@ static void do_catch_up(struct spk_synth *synth)
 		if (speakup_info.flushing) {
 			speakup_info.flushing = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spk_unlock(flags);
+=======
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -207,7 +223,11 @@ static void do_catch_up(struct spk_synth *synth)
 		}
 		if (synth_buffer_empty()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spk_unlock(flags);
+=======
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -217,7 +237,11 @@ static void do_catch_up(struct spk_synth *synth)
 		set_current_state(TASK_INTERRUPTIBLE);
 		full_time_val = full_time->u.n.value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_unlock(flags);
+=======
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -229,6 +253,7 @@ static void do_catch_up(struct spk_synth *synth)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((jiffies >= jiff_max) && (ch == SPACE)) {
 			spk_lock(flags);
 			jiffy_delta_val = jiffy_delta->u.n.value;
@@ -236,12 +261,17 @@ static void do_catch_up(struct spk_synth *synth)
 			delay_time_val = delay_time->u.n.value;
 			spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 		if (time_after_eq(jiffies, jiff_max) && (ch == SPACE)) {
 			spin_lock_irqsave(&speakup_info.spinlock, flags);
 			jiffy_delta_val = jiffy_delta->u.n.value;
 			full_time_val = full_time->u.n.value;
 			delay_time_val = delay_time->u.n.value;
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (spk_serial_out(synth->procspeech))
 				schedule_timeout(msecs_to_jiffies
@@ -253,9 +283,15 @@ static void do_catch_up(struct spk_synth *synth)
 		}
 		set_current_state(TASK_RUNNING);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_lock(flags);
 		synth_buffer_getc();
 		spk_unlock(flags);
+=======
+		spin_lock_irqsave(&speakup_info.spinlock, flags);
+		synth_buffer_getc();
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_lock_irqsave(&speakup_info.spinlock, flags);
 		synth_buffer_getc();

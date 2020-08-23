@@ -134,9 +134,13 @@ static inline void access_error060 (struct frame *fp)
 	unsigned long fslw = fp->un.fmt4.pc; /* is really FSLW for access error */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk("fslw=%#lx, fa=%#lx\n", fslw, fp->un.fmt4.effaddr);
 #endif
+=======
+	pr_debug("fslw=%#lx, fa=%#lx\n", fslw, fp->un.fmt4.effaddr);
+>>>>>>> v3.18
 =======
 	pr_debug("fslw=%#lx, fa=%#lx\n", fslw, fp->un.fmt4.effaddr);
 >>>>>>> v3.18
@@ -167,9 +171,13 @@ static inline void access_error060 (struct frame *fp)
 		if (fslw & MMU060_W)
 			errorcode |= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 		printk("errorcode = %d\n", errorcode );
 #endif
+=======
+		pr_debug("errorcode = %ld\n", errorcode);
+>>>>>>> v3.18
 =======
 		pr_debug("errorcode = %ld\n", errorcode);
 >>>>>>> v3.18
@@ -182,8 +190,14 @@ static inline void access_error060 (struct frame *fp)
 	} else if (!(fslw & (MMU060_RE|MMU060_WE)) ||
 		   send_fault_sig(&fp->ptregs) > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("pc=%#lx, fa=%#lx\n", fp->ptregs.pc, fp->un.fmt4.effaddr);
 		printk( "68060 access error, fslw=%lx\n", fslw );
+=======
+		pr_err("pc=%#lx, fa=%#lx\n", fp->ptregs.pc,
+		       fp->un.fmt4.effaddr);
+		pr_err("68060 access error, fslw=%lx\n", fslw);
+>>>>>>> v3.18
 =======
 		pr_err("pc=%#lx, fa=%#lx\n", fp->ptregs.pc,
 		       fp->un.fmt4.effaddr);
@@ -240,9 +254,13 @@ static inline int do_040writeback1(unsigned short wbs, unsigned long wba,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk("do_040writeback1, res=%d\n",res);
 #endif
+=======
+	pr_debug("do_040writeback1, res=%d\n", res);
+>>>>>>> v3.18
 =======
 	pr_debug("do_040writeback1, res=%d\n", res);
 >>>>>>> v3.18
@@ -268,7 +286,11 @@ static inline void do_040writebacks(struct frame *fp)
 #if 0
 	if (fp->un.fmt7.wb1s & WBV_040)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("access_error040: cannot handle 1st writeback. oops.\n");
+=======
+		pr_err("access_error040: cannot handle 1st writeback. oops.\n");
+>>>>>>> v3.18
 =======
 		pr_err("access_error040: cannot handle 1st writeback. oops.\n");
 >>>>>>> v3.18
@@ -325,6 +347,7 @@ static inline void access_error040(struct frame *fp)
 	unsigned long mmusr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk("ssw=%#x, fa=%#lx\n", ssw, fp->un.fmt7.faddr);
         printk("wb1s=%#x, wb2s=%#x, wb3s=%#x\n", fp->un.fmt7.wb1s,
@@ -334,12 +357,17 @@ static inline void access_error040(struct frame *fp)
 		fp->un.fmt7.wb2d, fp->un.fmt7.wb3d);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("ssw=%#x, fa=%#lx\n", ssw, fp->un.fmt7.faddr);
 	pr_debug("wb1s=%#x, wb2s=%#x, wb3s=%#x\n", fp->un.fmt7.wb1s,
 		fp->un.fmt7.wb2s, fp->un.fmt7.wb3s);
 	pr_debug("wb2a=%lx, wb3a=%lx, wb2d=%lx, wb3d=%lx\n",
 		fp->un.fmt7.wb2a, fp->un.fmt7.wb3a,
 		fp->un.fmt7.wb2d, fp->un.fmt7.wb3d);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ssw & ATC_040) {
@@ -356,9 +384,13 @@ static inline void access_error040(struct frame *fp)
 		/* MMU error, get the MMUSR info for this access */
 		mmusr = probe040(!(ssw & RW_040), addr, ssw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 		printk("mmusr = %lx\n", mmusr);
 #endif
+=======
+		pr_debug("mmusr = %lx\n", mmusr);
+>>>>>>> v3.18
 =======
 		pr_debug("mmusr = %lx\n", mmusr);
 >>>>>>> v3.18
@@ -376,6 +408,7 @@ static inline void access_error040(struct frame *fp)
 
 		if (do_page_fault(&fp->ptregs, addr, errorcode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 			printk("do_page_fault() !=0\n");
 #endif
@@ -385,10 +418,15 @@ static inline void access_error040(struct frame *fp)
 			        printk(".. was usermode - return\n");
 #endif
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("do_page_fault() !=0\n");
 			if (user_mode(&fp->ptregs)){
 				/* delay writebacks after signal delivery */
 				pr_debug(".. was usermode - return\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return;
 			}
@@ -398,9 +436,13 @@ static inline void access_error040(struct frame *fp)
 			 */
 disable_wb:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 			printk(".. disabling wb2\n");
 #endif
+=======
+			pr_debug(".. disabling wb2\n");
+>>>>>>> v3.18
 =======
 			pr_debug(".. disabling wb2\n");
 >>>>>>> v3.18
@@ -418,7 +460,11 @@ disable_wb:
 		current->thread.faddr = fp->un.fmt7.faddr;
 		if (send_fault_sig(&fp->ptregs) >= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("68040 bus error (ssw=%x, faddr=%lx)\n", ssw,
+=======
+			pr_err("68040 bus error (ssw=%x, faddr=%lx)\n", ssw,
+>>>>>>> v3.18
 =======
 			pr_err("68040 bus error (ssw=%x, faddr=%lx)\n", ssw,
 >>>>>>> v3.18
@@ -445,9 +491,14 @@ static inline void bus_error030 (struct frame *fp)
 	extern unsigned long _sun3_map_test_start, _sun3_map_test_end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	if (ssw & (FC | FB))
 		printk ("Instruction fault at %#010lx\n",
+=======
+	if (ssw & (FC | FB))
+		pr_debug("Instruction fault at %#010lx\n",
+>>>>>>> v3.18
 =======
 	if (ssw & (FC | FB))
 		pr_debug("Instruction fault at %#010lx\n",
@@ -458,16 +509,22 @@ static inline void bus_error030 (struct frame *fp)
 			fp->ptregs.format == 0xa ? fp->ptregs.pc + 4 : fp->un.fmtb.baddr);
 	if (ssw & DF)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk ("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 			ssw & RW ? "read" : "write",
 			fp->un.fmtb.daddr,
 			space_names[ssw & DFC], fp->ptregs.pc);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 			ssw & RW ? "read" : "write",
 			fp->un.fmtb.daddr,
 			space_names[ssw & DFC], fp->ptregs.pc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -492,7 +549,11 @@ static inline void bus_error030 (struct frame *fp)
 			/* instruction fault or kernel data fault! */
 			if (ssw & (FC | FB))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk ("Instruction fault at %#010lx\n",
+=======
+				pr_err("Instruction fault at %#010lx\n",
+>>>>>>> v3.18
 =======
 				pr_err("Instruction fault at %#010lx\n",
 >>>>>>> v3.18
@@ -506,7 +567,11 @@ static inline void bus_error030 (struct frame *fp)
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk ("Data %s fault at %#010lx in %s (pc=%#lx)\n",
+=======
+				pr_err("Data %s fault at %#010lx in %s (pc=%#lx)\n",
+>>>>>>> v3.18
 =======
 				pr_err("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 >>>>>>> v3.18
@@ -515,7 +580,11 @@ static inline void bus_error030 (struct frame *fp)
 					space_names[ssw & DFC], fp->ptregs.pc);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk ("BAD KERNEL BUSERR\n");
+=======
+			pr_err("BAD KERNEL BUSERR\n");
+>>>>>>> v3.18
 =======
 			pr_err("BAD KERNEL BUSERR\n");
 >>>>>>> v3.18
@@ -548,6 +617,7 @@ static inline void bus_error030 (struct frame *fp)
 			errorcode = 0x00;
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 			printk ("*** unexpected busfault type=%#04x\n", buserr_type);
 			printk ("invalid %s access at %#lx from pc %#lx\n",
@@ -555,11 +625,16 @@ static inline void bus_error030 (struct frame *fp)
 				fp->ptregs.pc);
 #endif
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("*** unexpected busfault type=%#04x\n",
 				 buserr_type);
 			pr_debug("invalid %s access at %#lx from pc %#lx\n",
 				 !(ssw & RW) ? "write" : "read", addr,
 				 fp->ptregs.pc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			die_if_kernel ("Oops", &fp->ptregs, buserr_type);
 			force_sig (SIGBUS, current);
@@ -592,9 +667,13 @@ static inline void bus_error030 (struct frame *fp)
 			do_page_fault (&fp->ptregs, addr, 0);
        } else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 		printk ("protection fault on insn access (segv).\n");
 #endif
+=======
+		pr_debug("protection fault on insn access (segv).\n");
+>>>>>>> v3.18
 =======
 		pr_debug("protection fault on insn access (segv).\n");
 >>>>>>> v3.18
@@ -612,6 +691,7 @@ static inline void bus_error030 (struct frame *fp)
 #ifdef DEBUG
 	unsigned long desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	printk ("pid = %x  ", current->pid);
 	printk ("SSW=%#06x  ", ssw);
@@ -619,6 +699,8 @@ static inline void bus_error030 (struct frame *fp)
 	if (ssw & (FC | FB))
 		printk ("Instruction fault at %#010lx\n",
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 	pr_debug("pid = %x  ", current->pid);
@@ -626,6 +708,9 @@ static inline void bus_error030 (struct frame *fp)
 
 	if (ssw & (FC | FB))
 		pr_debug("Instruction fault at %#010lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ssw & FC ?
 			fp->ptregs.format == 0xa ? fp->ptregs.pc + 2 : fp->un.fmtb.baddr - 2
@@ -633,16 +718,22 @@ static inline void bus_error030 (struct frame *fp)
 			fp->ptregs.format == 0xa ? fp->ptregs.pc + 4 : fp->un.fmtb.baddr);
 	if (ssw & DF)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk ("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 			ssw & RW ? "read" : "write",
 			fp->un.fmtb.daddr,
 			space_names[ssw & DFC], fp->ptregs.pc);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 			ssw & RW ? "read" : "write",
 			fp->un.fmtb.daddr,
 			space_names[ssw & DFC], fp->ptregs.pc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ++andreas: If a data fault and an instruction fault happen
@@ -658,11 +749,17 @@ static inline void bus_error030 (struct frame *fp)
 			      : "=a&" (desc), "=m" (temp)
 			      : "a" (addr), "d" (ssw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("mmusr is %#x for addr %#lx in task %p\n",
 			 temp, addr, current);
 		pr_debug("descriptor address is 0x%p, contents %#lx\n",
 			 __va(desc), *(unsigned long *)__va(desc));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 		asm volatile ("ptestr %2,%1@,#7\n\t"
@@ -670,6 +767,7 @@ static inline void bus_error030 (struct frame *fp)
 			      : "=m" (temp) : "a" (addr), "d" (ssw));
 #endif
 		mmusr = temp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef DEBUG
@@ -681,6 +779,8 @@ static inline void bus_error030 (struct frame *fp)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		errorcode = (mmusr & MMU_I) ? 0 : 1;
 		if (!(ssw & RW) || (ssw & RM))
 			errorcode |= 2;
@@ -688,7 +788,11 @@ static inline void bus_error030 (struct frame *fp)
 		if (mmusr & (MMU_I | MMU_WP)) {
 			if (ssw & 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("Data %s fault at %#010lx in %s (pc=%#lx)\n",
+=======
+				pr_err("Data %s fault at %#010lx in %s (pc=%#lx)\n",
+>>>>>>> v3.18
 =======
 				pr_err("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 >>>>>>> v3.18
@@ -705,14 +809,20 @@ static inline void bus_error030 (struct frame *fp)
 			/* probably a 020 cas fault */
 			if (!(ssw & RM) && send_fault_sig(&fp->ptregs) > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("unexpected bus error (%#x,%#x)\n", ssw, mmusr);
 		} else if (mmusr & (MMU_B|MMU_L|MMU_S)) {
 			printk("invalid %s access at %#lx from pc %#lx\n",
 =======
+=======
+>>>>>>> v3.18
 				pr_err("unexpected bus error (%#x,%#x)\n", ssw,
 				       mmusr);
 		} else if (mmusr & (MMU_B|MMU_L|MMU_S)) {
 			pr_err("invalid %s access at %#lx from pc %#lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       !(ssw & RW) ? "write" : "read", addr,
 			       fp->ptregs.pc);
@@ -725,7 +835,11 @@ static inline void bus_error030 (struct frame *fp)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("weird %s access at %#lx from pc %#lx (ssw is %#x)\n",
+=======
+			pr_err("weird %s access at %#lx from pc %#lx (ssw is %#x)\n",
+>>>>>>> v3.18
 =======
 			pr_err("weird %s access at %#lx from pc %#lx (ssw is %#x)\n",
 >>>>>>> v3.18
@@ -737,6 +851,7 @@ static inline void bus_error030 (struct frame *fp)
 				      : "a" (addr));
 			mmusr = temp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			printk ("level 0 mmusr is %#x\n", mmusr);
 #if 0
@@ -751,6 +866,8 @@ static inline void bus_error030 (struct frame *fp)
 			printk("Unknown SIGSEGV - 1\n");
 #endif
 =======
+=======
+>>>>>>> v3.18
 			pr_err("level 0 mmusr is %#x\n", mmusr);
 #if 0
 			asm volatile ("pmove %%tt0,%0"
@@ -761,6 +878,9 @@ static inline void bus_error030 (struct frame *fp)
 			pr_debug("tt1 is %#lx\n", tlong);
 #endif
 			pr_debug("Unknown SIGSEGV - 1\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			die_if_kernel("Oops",&fp->ptregs,mmusr);
 			force_sig(SIGSEGV, current);
@@ -783,10 +903,16 @@ static inline void bus_error030 (struct frame *fp)
 
 	if (fp->ptregs.sr & PS_S) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Instruction fault at %#010lx\n",
 			fp->ptregs.pc);
 	buserr:
 		printk ("BAD KERNEL BUSERR\n");
+=======
+		pr_err("Instruction fault at %#010lx\n", fp->ptregs.pc);
+	buserr:
+		pr_err("BAD KERNEL BUSERR\n");
+>>>>>>> v3.18
 =======
 		pr_err("Instruction fault at %#010lx\n", fp->ptregs.pc);
 	buserr:
@@ -816,11 +942,17 @@ static inline void bus_error030 (struct frame *fp)
 		      : "=a&" (desc), "=m" (temp)
 		      : "a" (addr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("mmusr is %#x for addr %#lx in task %p\n",
 		temp, addr, current);
 	pr_debug("descriptor address is 0x%p, contents %#lx\n",
 		__va(desc), *(unsigned long *)__va(desc));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	asm volatile ("ptestr #1,%1@,#7\n\t"
@@ -828,6 +960,7 @@ static inline void bus_error030 (struct frame *fp)
 		      : "=m" (temp) : "a" (addr));
 #endif
 	mmusr = temp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef DEBUG
@@ -846,12 +979,17 @@ static inline void bus_error030 (struct frame *fp)
 		printk("Unknown SIGSEGV - 2\n");
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (mmusr & MMU_I)
 		do_page_fault (&fp->ptregs, addr, 0);
 	else if (mmusr & (MMU_B|MMU_L|MMU_S)) {
 		pr_err("invalid insn access at %#lx from pc %#lx\n",
 			addr, fp->ptregs.pc);
 		pr_debug("Unknown SIGSEGV - 2\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		die_if_kernel("Oops",&fp->ptregs,mmusr);
 		force_sig(SIGSEGV, current);
@@ -955,9 +1093,13 @@ asmlinkage void buserr_c(struct frame *fp)
 		current->thread.esp0 = (unsigned long) fp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	printk ("*** Bus Error *** Format is %x\n", fp->ptregs.format);
 #endif
+=======
+	pr_debug("*** Bus Error *** Format is %x\n", fp->ptregs.format);
+>>>>>>> v3.18
 =======
 	pr_debug("*** Bus Error *** Format is %x\n", fp->ptregs.format);
 >>>>>>> v3.18
@@ -1004,9 +1146,13 @@ asmlinkage void buserr_c(struct frame *fp)
 	default:
 	  die_if_kernel("bad frame format",&fp->ptregs,0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	  printk("Unknown SIGSEGV - 4\n");
 #endif
+=======
+	  pr_debug("Unknown SIGSEGV - 4\n");
+>>>>>>> v3.18
 =======
 	  pr_debug("Unknown SIGSEGV - 4\n");
 >>>>>>> v3.18
@@ -1024,7 +1170,11 @@ void show_trace(unsigned long *stack)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Call Trace:");
+=======
+	pr_info("Call Trace:");
+>>>>>>> v3.18
 =======
 	pr_info("Call Trace:");
 >>>>>>> v3.18
@@ -1045,6 +1195,7 @@ void show_trace(unsigned long *stack)
 #ifndef CONFIG_KALLSYMS
 			if (i % 5 == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("\n       ");
 #endif
 			printk(" [<%08lx>] %pS\n", addr, (void *)addr);
@@ -1053,6 +1204,8 @@ void show_trace(unsigned long *stack)
 	}
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_cont("\n       ");
 #endif
 			pr_cont(" [<%08lx>] %pS\n", addr, (void *)addr);
@@ -1060,6 +1213,9 @@ void show_trace(unsigned long *stack)
 		}
 	}
 	pr_cont("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1072,6 +1228,7 @@ void show_registers(struct pt_regs *regs)
 	int i;
 
 	print_modules();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk("PC: [<%08lx>] %pS\n", regs->pc, (void *)regs->pc);
 	printk("SR: %04x  SP: %p  a2: %08lx\n", regs->sr, regs, regs->a2);
@@ -1110,6 +1267,8 @@ void show_registers(struct pt_regs *regs)
 			fp->un.fmt7.wb3s, fp->un.fmt7.wb3a, fp->un.fmt7.wb3d);
 		printk("push data: %08lx %08lx %08lx %08lx\n",
 =======
+=======
+>>>>>>> v3.18
 	pr_info("PC: [<%08lx>] %pS\n", regs->pc, (void *)regs->pc);
 	pr_info("SR: %04x  SP: %p  a2: %08lx\n", regs->sr, regs, regs->a2);
 	pr_info("d0: %08lx    d1: %08lx    d2: %08lx    d3: %08lx\n",
@@ -1149,6 +1308,9 @@ void show_registers(struct pt_regs *regs)
 		pr_info("wb 3 stat/addr/data: %04x %08lx %08lx\n",
 			fp->un.fmt7.wb3s, fp->un.fmt7.wb3a, fp->un.fmt7.wb3d);
 		pr_info("push data: %08lx %08lx %08lx %08lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fp->un.fmt7.wb1dpd0, fp->un.fmt7.pd1, fp->un.fmt7.pd2,
 			fp->un.fmt7.pd3);
@@ -1156,17 +1318,23 @@ void show_registers(struct pt_regs *regs)
 		break;
 	case 0x9:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("instr addr=%08lx\n", fp->un.fmt9.iaddr);
 		addr += sizeof(fp->un.fmt9);
 		break;
 	case 0xa:
 		printk("ssw=%04x isc=%04x isb=%04x daddr=%08lx dobuf=%08lx\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_cont("instr addr=%08lx\n", fp->un.fmt9.iaddr);
 		addr += sizeof(fp->un.fmt9);
 		break;
 	case 0xa:
 		pr_cont("ssw=%04x isc=%04x isb=%04x daddr=%08lx dobuf=%08lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fp->un.fmta.ssw, fp->un.fmta.isc, fp->un.fmta.isb,
 			fp->un.fmta.daddr, fp->un.fmta.dobuf);
@@ -1174,20 +1342,27 @@ void show_registers(struct pt_regs *regs)
 		break;
 	case 0xb:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("ssw=%04x isc=%04x isb=%04x daddr=%08lx dobuf=%08lx\n",
 			fp->un.fmtb.ssw, fp->un.fmtb.isc, fp->un.fmtb.isb,
 			fp->un.fmtb.daddr, fp->un.fmtb.dobuf);
 		printk("baddr=%08lx dibuf=%08lx ver=%x\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_cont("ssw=%04x isc=%04x isb=%04x daddr=%08lx dobuf=%08lx\n",
 			fp->un.fmtb.ssw, fp->un.fmtb.isc, fp->un.fmtb.isb,
 			fp->un.fmtb.daddr, fp->un.fmtb.dobuf);
 		pr_info("baddr=%08lx dibuf=%08lx ver=%x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fp->un.fmtb.baddr, fp->un.fmtb.dibuf, fp->un.fmtb.ver);
 		addr += sizeof(fp->un.fmtb);
 		break;
 	default:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("\n");
 	}
@@ -1195,16 +1370,22 @@ void show_registers(struct pt_regs *regs)
 
 	printk("Code:");
 =======
+=======
+>>>>>>> v3.18
 		pr_cont("\n");
 	}
 	show_stack(NULL, (unsigned long *)addr);
 
 	pr_info("Code:");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_fs(KERNEL_DS);
 	cp = (u16 *)regs->pc;
 	for (i = -8; i < 16; i++) {
 		if (get_user(c, cp + i) && i >= 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			printk(" Bad PC value.");
 			break;
@@ -1214,6 +1395,8 @@ void show_registers(struct pt_regs *regs)
 	set_fs(old_fs);
 	printk ("\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_cont(" Bad PC value.");
 			break;
 		}
@@ -1224,6 +1407,9 @@ void show_registers(struct pt_regs *regs)
 	}
 	set_fs(old_fs);
 	pr_cont("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1242,7 +1428,11 @@ void show_stack(struct task_struct *task, unsigned long *stack)
 	endstack = (unsigned long *)(((unsigned long)stack + THREAD_SIZE - 1) & -THREAD_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Stack from %08lx:", (unsigned long)stack);
+=======
+	pr_info("Stack from %08lx:", (unsigned long)stack);
+>>>>>>> v3.18
 =======
 	pr_info("Stack from %08lx:", (unsigned long)stack);
 >>>>>>> v3.18
@@ -1252,15 +1442,21 @@ void show_stack(struct task_struct *task, unsigned long *stack)
 			break;
 		if (i % 8 == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("\n       ");
 		printk(" %08lx", *p++);
 	}
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_cont("\n       ");
 		pr_cont(" %08lx", *p++);
 	}
 	pr_cont("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	show_trace(stack);
 }
@@ -1280,22 +1476,29 @@ void bad_super_trap (struct frame *fp)
 	console_verbose();
 	if (vector < ARRAY_SIZE(vec_names))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk ("*** %s ***   FORMAT=%X\n",
 			vec_names[vector],
 			fp->ptregs.format);
 	else
 		printk ("*** Exception %d ***   FORMAT=%X\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_err("*** %s ***   FORMAT=%X\n",
 			vec_names[vector],
 			fp->ptregs.format);
 	else
 		pr_err("*** Exception %d ***   FORMAT=%X\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			vector, fp->ptregs.format);
 	if (vector == VEC_ADDRERR && CPU_IS_020_OR_030) {
 		unsigned short ssw = fp->un.fmtb.ssw;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk ("SSW=%#06x  ", ssw);
 
@@ -1310,6 +1513,8 @@ void bad_super_trap (struct frame *fp)
 		if (ssw & DF)
 			printk ("Data %s fault at %#010lx in %s (pc=%#lx)\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_err("SSW=%#06x  ", ssw);
 
 		if (ssw & RC)
@@ -1322,13 +1527,20 @@ void bad_super_trap (struct frame *fp)
 				fp->ptregs.pc + 4 : fp->un.fmtb.baddr);
 		if (ssw & DF)
 			pr_err("Data %s fault at %#010lx in %s (pc=%#lx)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ssw & RW ? "read" : "write",
 				fp->un.fmtb.daddr, space_names[ssw & DFC],
 				fp->ptregs.pc);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk ("Current process id is %d\n", task_pid_nr(current));
+=======
+	pr_err("Current process id is %d\n", task_pid_nr(current));
+>>>>>>> v3.18
 =======
 	pr_err("Current process id is %d\n", task_pid_nr(current));
 >>>>>>> v3.18
@@ -1464,7 +1676,11 @@ void die_if_kernel (char *str, struct pt_regs *fp, int nr)
 
 	console_verbose();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: %08x\n",str,nr);
+=======
+	pr_crit("%s: %08x\n", str, nr);
+>>>>>>> v3.18
 =======
 	pr_crit("%s: %08x\n", str, nr);
 >>>>>>> v3.18

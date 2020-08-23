@@ -62,6 +62,11 @@ extern ssize_t jfs_listxattr(struct dentry *, char *, size_t);
 extern int jfs_removexattr(struct dentry *, const char *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct xattr_handler *jfs_xattr_handlers[];
+
+>>>>>>> v3.18
 =======
 extern const struct xattr_handler *jfs_xattr_handlers[];
 

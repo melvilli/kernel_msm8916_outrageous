@@ -16,18 +16,27 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	chosen {
 		stdout-path = &uart0;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memory {
 		reg = <0x0 0x08000000>;
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	xtal24mhz: xtal24mhz@24M {
 		#clock-cells = <0>;
 		compatible = "fixed-clock";
@@ -63,6 +72,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	flash@34000000 {
 		compatible = "arm,versatile-flash";
@@ -105,6 +117,11 @@
 			#interrupt-cells = <1>;
 			reg = <0x10140000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clear-mask = <0xffffffff>;
+			valid-mask = <0xffffffff>;
+>>>>>>> v3.18
 =======
 			clear-mask = <0xffffffff>;
 			valid-mask = <0xffffffff>;
@@ -119,6 +136,11 @@
 			interrupt-parent = <&vic>;
 			interrupts = <31>; /* Cascaded to vic */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clear-mask = <0xffffffff>;
+			valid-mask = <0xffc203f8>;
+>>>>>>> v3.18
 =======
 			clear-mask = <0xffffffff>;
 			valid-mask = <0xffc203f8>;
@@ -130,6 +152,11 @@
 			reg = <0x10130000 0x1000>;
 			interrupts = <17>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -141,6 +168,11 @@
 			reg = <0x101f1000 0x1000>;
 			interrupts = <12>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&xtal24mhz>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&xtal24mhz>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -152,6 +184,11 @@
 			reg = <0x101f2000 0x1000>;
 			interrupts = <13>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&xtal24mhz>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&xtal24mhz>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -163,6 +200,11 @@
 			reg = <0x101f3000 0x1000>;
 			interrupts = <14>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&xtal24mhz>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&xtal24mhz>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -173,6 +215,11 @@
 			compatible = "arm,primecell";
 			reg = <0x10100000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -183,6 +230,11 @@
 			compatible = "arm,primecell";
 			reg = <0x10110000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -194,6 +246,11 @@
 			reg = <0x10120000 0x1000>;
 			interrupts = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&osc1>, <&pclk>;
+			clock-names = "clcd", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&osc1>, <&pclk>;
 			clock-names = "clcd", "apb_pclk";
@@ -204,6 +261,11 @@
 			compatible = "arm,primecell";
 			reg = <0x101e0000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -215,6 +277,11 @@
 			reg = <0x101e1000 0x1000>;
 			interrupts = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -226,6 +293,11 @@
 			reg = <0x101e2000 0x1000>;
 			interrupts = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&timclk>, <&timclk>, <&pclk>;
+			clock-names = "timer0", "timer1", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&timclk>, <&timclk>, <&pclk>;
 			clock-names = "timer0", "timer1", "apb_pclk";
@@ -237,6 +309,11 @@
 			reg = <0x101e3000 0x1000>;
 			interrupts = <5>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&timclk>, <&timclk>, <&pclk>;
+			clock-names = "timer0", "timer1", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&timclk>, <&timclk>, <&pclk>;
 			clock-names = "timer0", "timer1", "apb_pclk";
@@ -252,6 +329,11 @@
 			interrupt-controller;
 			#interrupt-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -267,6 +349,11 @@
 			interrupt-controller;
 			#interrupt-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -278,6 +365,11 @@
 			reg = <0x101e8000 0x1000>;
 			interrupts = <10>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -289,6 +381,11 @@
 			reg = <0x101f0000 0x1000>;
 			interrupts = <15>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -300,6 +397,11 @@
 			reg = <0x101f4000 0x1000>;
 			interrupts = <11>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&xtal24mhz>, <&pclk>;
+			clock-names = "SSPCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&xtal24mhz>, <&pclk>;
 			clock-names = "SSPCLK", "apb_pclk";
@@ -317,12 +419,15 @@
 				reg = <0x4000 0x1000>;
 				interrupts = <24>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			};
 			mmc@5000 {
 				compatible = "arm,primecell";
 				reg = < 0x5000 0x1000>;
 				interrupts = <22 34>;
 =======
+=======
+>>>>>>> v3.18
 				clocks = <&pclk>;
 				clock-names = "apb_pclk";
 			};
@@ -332,6 +437,9 @@
 				interrupts-extended = <&vic 22 &sic 2>;
 				clocks = <&xtal24mhz>, <&pclk>;
 				clock-names = "mclk", "apb_pclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 			kmi@6000 {
@@ -340,6 +448,11 @@
 				interrupt-parent = <&sic>;
 				interrupts = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&xtal24mhz>, <&pclk>;
+				clock-names = "KMIREFCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 				clocks = <&xtal24mhz>, <&pclk>;
 				clock-names = "KMIREFCLK", "apb_pclk";
@@ -351,6 +464,11 @@
 				interrupt-parent = <&sic>;
 				interrupts = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&xtal24mhz>, <&pclk>;
+				clock-names = "KMIREFCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 				clocks = <&xtal24mhz>, <&pclk>;
 				clock-names = "KMIREFCLK", "apb_pclk";

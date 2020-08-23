@@ -83,7 +83,11 @@ struct kvm_vcpu *kvm_arm_get_running_vcpu(void)
  * kvm_arm_get_running_vcpus - get the per-CPU array of currently running vcpus.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_vcpu __percpu **kvm_get_running_vcpus(void)
+=======
+struct kvm_vcpu * __percpu *kvm_get_running_vcpus(void)
+>>>>>>> v3.18
 =======
 struct kvm_vcpu * __percpu *kvm_get_running_vcpus(void)
 >>>>>>> v3.18
@@ -92,7 +96,11 @@ struct kvm_vcpu * __percpu *kvm_get_running_vcpus(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_arch_hardware_enable(void *garbage)
+=======
+int kvm_arch_hardware_enable(void)
+>>>>>>> v3.18
 =======
 int kvm_arch_hardware_enable(void)
 >>>>>>> v3.18
@@ -106,10 +114,13 @@ int kvm_arch_vcpu_should_kick(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_hardware_disable(void *garbage)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kvm_arch_hardware_setup(void)
@@ -118,10 +129,13 @@ int kvm_arch_hardware_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_hardware_unsetup(void)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void kvm_arch_check_processor_compat(void *rtn)
@@ -130,9 +144,12 @@ void kvm_arch_check_processor_compat(void *rtn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_sync_events(struct kvm *kvm)
 {
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -156,6 +173,11 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
 		goto out_free_stage2_pgd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvm_timer_init(kvm);
+
+>>>>>>> v3.18
 =======
 	kvm_timer_init(kvm);
 
@@ -176,6 +198,7 @@ int kvm_arch_vcpu_fault(struct kvm_vcpu *vcpu, struct vm_fault *vmf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_free_memslot(struct kvm_memory_slot *free,
 			   struct kvm_memory_slot *dont)
 {
@@ -185,6 +208,8 @@ int kvm_arch_create_memslot(struct kvm_memory_slot *slot, unsigned long npages)
 {
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -205,15 +230,21 @@ void kvm_arch_destroy_vm(struct kvm *kvm)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 int kvm_dev_ioctl_check_extension(long ext)
 =======
+=======
+>>>>>>> v3.18
 
 	kvm_vgic_destroy(kvm);
 }
 
 int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r;
@@ -222,6 +253,10 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
 		r = vgic_present;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KVM_CAP_DEVICE_CTRL:
+>>>>>>> v3.18
 =======
 	case KVM_CAP_DEVICE_CTRL:
 >>>>>>> v3.18
@@ -231,6 +266,11 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
 	case KVM_CAP_ONE_REG:
 	case KVM_CAP_ARM_PSCI:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KVM_CAP_ARM_PSCI_0_2:
+	case KVM_CAP_READONLY_MEM:
+>>>>>>> v3.18
 =======
 	case KVM_CAP_ARM_PSCI_0_2:
 	case KVM_CAP_READONLY_MEM:
@@ -263,6 +303,7 @@ long kvm_arch_dev_ioctl(struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_arch_prepare_memory_region(struct kvm *kvm,
 				   struct kvm_memory_slot *memslot,
 				   struct kvm_userspace_memory_region *mem,
@@ -286,6 +327,8 @@ void kvm_arch_flush_shadow_memslot(struct kvm *kvm,
 				   struct kvm_memory_slot *slot)
 {
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -327,6 +370,10 @@ void kvm_arch_vcpu_free(struct kvm_vcpu *vcpu)
 	kvm_mmu_free_memory_caches(vcpu);
 	kvm_timer_vcpu_terminate(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvm_vgic_vcpu_destroy(vcpu);
+>>>>>>> v3.18
 =======
 	kvm_vgic_vcpu_destroy(vcpu);
 >>>>>>> v3.18
@@ -346,6 +393,7 @@ int kvm_cpu_has_pending_timer(struct kvm_vcpu *vcpu)
 int kvm_arch_vcpu_init(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	/* Force users to call KVM_ARM_VCPU_INIT */
@@ -361,6 +409,11 @@ int kvm_arch_vcpu_init(struct kvm_vcpu *vcpu)
 	vcpu->arch.target = -1;
 
 >>>>>>> v3.18
+=======
+	/* Force users to call KVM_ARM_VCPU_INIT */
+	vcpu->arch.target = -1;
+
+>>>>>>> v3.18
 	/* Set up the timer */
 	kvm_timer_vcpu_init(vcpu);
 
@@ -368,10 +421,13 @@ int kvm_arch_vcpu_init(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_vcpu_uninit(struct kvm_vcpu *vcpu)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
@@ -394,7 +450,10 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The arch-generic KVM code expects the cpu field of a vcpu to be -1
 	 * if the vcpu is no longer assigned to a cpu.  This is used for the
@@ -402,6 +461,9 @@ void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu)
 	 */
 	vcpu->cpu = -1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kvm_arm_set_running_vcpu(NULL);
 }
@@ -517,15 +579,21 @@ static void update_vttbr(struct kvm *kvm)
 
 	/* update vttbr to be used with the new vmid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgd_phys = virt_to_phys(kvm->arch.pgd);
 	vmid = ((u64)(kvm->arch.vmid) << VTTBR_VMID_SHIFT) & VTTBR_VMID_MASK;
 	kvm->arch.vttbr = pgd_phys & VTTBR_BADDR_MASK;
 	kvm->arch.vttbr |= vmid;
 =======
+=======
+>>>>>>> v3.18
 	pgd_phys = virt_to_phys(kvm_get_hwpgd(kvm));
 	BUG_ON(pgd_phys & ~VTTBR_BADDR_MASK);
 	vmid = ((u64)(kvm->arch.vmid) << VTTBR_VMID_SHIFT) & VTTBR_VMID_MASK;
 	kvm->arch.vttbr = pgd_phys | vmid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock(&kvm_vmid_lock);
@@ -534,6 +602,11 @@ static void update_vttbr(struct kvm *kvm)
 static int kvm_vcpu_first_run_init(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -548,9 +621,14 @@ static int kvm_vcpu_first_run_init(struct kvm_vcpu *vcpu)
 	 * this VM.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irqchip_in_kernel(vcpu->kvm) &&
 	    unlikely(!vgic_initialized(vcpu->kvm))) {
 		int ret = kvm_vgic_init(vcpu->kvm);
+=======
+	if (unlikely(!vgic_initialized(vcpu->kvm))) {
+		ret = kvm_vgic_init(vcpu->kvm);
+>>>>>>> v3.18
 =======
 	if (unlikely(!vgic_initialized(vcpu->kvm))) {
 		ret = kvm_vgic_init(vcpu->kvm);
@@ -862,7 +940,11 @@ static int kvm_vm_ioctl_set_device_addr(struct kvm *kvm,
 		if (!vgic_present)
 			return -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return kvm_vgic_set_addr(kvm, type, dev_addr->addr);
+=======
+		return kvm_vgic_addr(kvm, type, &dev_addr->addr, true);
+>>>>>>> v3.18
 =======
 		return kvm_vgic_addr(kvm, type, &dev_addr->addr, true);
 >>>>>>> v3.18
@@ -892,7 +974,10 @@ long kvm_arch_vm_ioctl(struct file *filp,
 		return kvm_vm_ioctl_set_device_addr(kvm, &dev_addr);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case KVM_ARM_PREFERRED_TARGET: {
 		int err;
 		struct kvm_vcpu_init init;
@@ -906,6 +991,9 @@ long kvm_arch_vm_ioctl(struct file *filp,
 
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -915,8 +1003,13 @@ long kvm_arch_vm_ioctl(struct file *filp,
 static void cpu_init_hyp_mode(void *dummy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long long boot_pgd_ptr;
 	unsigned long long pgd_ptr;
+=======
+	phys_addr_t boot_pgd_ptr;
+	phys_addr_t pgd_ptr;
+>>>>>>> v3.18
 =======
 	phys_addr_t boot_pgd_ptr;
 	phys_addr_t pgd_ptr;
@@ -929,8 +1022,13 @@ static void cpu_init_hyp_mode(void *dummy)
 	__hyp_set_vectors(kvm_get_idmap_vector());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	boot_pgd_ptr = (unsigned long long)kvm_mmu_get_boot_httbr();
 	pgd_ptr = (unsigned long long)kvm_mmu_get_httbr();
+=======
+	boot_pgd_ptr = kvm_mmu_get_boot_httbr();
+	pgd_ptr = kvm_mmu_get_httbr();
+>>>>>>> v3.18
 =======
 	boot_pgd_ptr = kvm_mmu_get_boot_httbr();
 	pgd_ptr = kvm_mmu_get_httbr();
@@ -949,7 +1047,12 @@ static int hyp_init_cpu_notify(struct notifier_block *self,
 	case CPU_STARTING:
 	case CPU_STARTING_FROZEN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu_init_hyp_mode(NULL);
+=======
+		if (__hyp_get_vectors() == hyp_default_vectors)
+			cpu_init_hyp_mode(NULL);
+>>>>>>> v3.18
 =======
 		if (__hyp_get_vectors() == hyp_default_vectors)
 			cpu_init_hyp_mode(NULL);
@@ -1143,6 +1246,11 @@ int kvm_arch_init(void *opaque)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -1152,7 +1260,11 @@ int kvm_arch_init(void *opaque)
 		goto out_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = register_cpu_notifier(&hyp_init_cpu_nb);
+=======
+	err = __register_cpu_notifier(&hyp_init_cpu_nb);
+>>>>>>> v3.18
 =======
 	err = __register_cpu_notifier(&hyp_init_cpu_nb);
 >>>>>>> v3.18
@@ -1162,6 +1274,11 @@ int kvm_arch_init(void *opaque)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_done();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_done();
 
@@ -1172,6 +1289,10 @@ int kvm_arch_init(void *opaque)
 	return 0;
 out_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_done();
 >>>>>>> v3.18

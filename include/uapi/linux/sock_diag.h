@@ -5,7 +5,10 @@
 
 #define SOCK_DIAG_BY_FAMILY 20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SOCK_DESTROY_BACKPORT 21
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

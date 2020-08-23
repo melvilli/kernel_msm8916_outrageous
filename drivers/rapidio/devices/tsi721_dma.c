@@ -2,7 +2,11 @@
  * DMA Engine support for Tsi721 PCIExpress-to-SRIO bridge
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2011 Integrated Device Technology, Inc.
+=======
+ * Copyright (c) 2011-2014 Integrated Device Technology, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011-2014 Integrated Device Technology, Inc.
 >>>>>>> v3.18
@@ -19,9 +23,14 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59
  * Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * The full GNU General Public License is included in this distribution in the
+ * file called COPYING.
+>>>>>>> v3.18
 =======
  * The full GNU General Public License is included in this distribution in the
  * file called COPYING.
@@ -42,10 +51,13 @@
 #include <linux/kfifo.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "tsi721.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "../../dma/dmaengine.h"
 
 #include "tsi721.h"
@@ -62,6 +74,9 @@ module_param(dma_desc_per_channel, uint, S_IWUSR | S_IRUGO);
 MODULE_PARM_DESC(dma_desc_per_channel,
 		 "Number of DMA descriptors per channel (default: 128)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct tsi721_bdma_chan *to_tsi721_chan(struct dma_chan *chan)
 {
@@ -88,7 +103,11 @@ struct tsi721_tx_desc *tsi721_dma_first_active(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan)
+=======
+static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
+>>>>>>> v3.18
 =======
 static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 >>>>>>> v3.18
@@ -100,6 +119,7 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 	dma_addr_t	sts_phys;
 	int		sts_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		bd_num = bdma_chan->bd_num;
 
 	dev_dbg(dev, "Init Block DMA Engine, CH%d\n", bdma_chan->id);
@@ -108,6 +128,8 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 	bd_ptr = dma_zalloc_coherent(dev,
 				bd_num * sizeof(struct tsi721_dma_desc),
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 	struct tsi721_device *priv = to_tsi721(bdma_chan->dchan.device);
 #endif
@@ -120,12 +142,19 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 	 */
 	bd_ptr = dma_zalloc_coherent(dev,
 				(bd_num + 1) * sizeof(struct tsi721_dma_desc),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				&bd_phys, GFP_KERNEL);
 	if (!bd_ptr)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bdma_chan->bd_num = bd_num;
+>>>>>>> v3.18
 =======
 	bdma_chan->bd_num = bd_num;
 >>>>>>> v3.18
@@ -137,8 +166,13 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 
 	/* Allocate space for descriptor status FIFO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sts_size = (bd_num >= TSI721_DMA_MINSTSSZ) ?
 					bd_num : TSI721_DMA_MINSTSSZ;
+=======
+	sts_size = ((bd_num + 1) >= TSI721_DMA_MINSTSSZ) ?
+					(bd_num + 1) : TSI721_DMA_MINSTSSZ;
+>>>>>>> v3.18
 =======
 	sts_size = ((bd_num + 1) >= TSI721_DMA_MINSTSSZ) ?
 					(bd_num + 1) : TSI721_DMA_MINSTSSZ;
@@ -151,7 +185,11 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 		/* Free space allocated for DMA descriptors */
 		dma_free_coherent(dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  bd_num * sizeof(struct tsi721_dma_desc),
+=======
+				  (bd_num + 1) * sizeof(struct tsi721_dma_desc),
+>>>>>>> v3.18
 =======
 				  (bd_num + 1) * sizeof(struct tsi721_dma_desc),
 >>>>>>> v3.18
@@ -169,17 +207,23 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 		sts_ptr, (unsigned long long)sts_phys, sts_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize DMA descriptors ring */
 	bd_ptr[bd_num - 1].type_id = cpu_to_le32(DTYPE3 << 29);
 	bd_ptr[bd_num - 1].next_lo = cpu_to_le32((u64)bd_phys &
 						 TSI721_DMAC_DPTRL_MASK);
 	bd_ptr[bd_num - 1].next_hi = cpu_to_le32((u64)bd_phys >> 32);
 =======
+=======
+>>>>>>> v3.18
 	/* Initialize DMA descriptors ring using added link descriptor */
 	bd_ptr[bd_num].type_id = cpu_to_le32(DTYPE3 << 29);
 	bd_ptr[bd_num].next_lo = cpu_to_le32((u64)bd_phys &
 						 TSI721_DMAC_DPTRL_MASK);
 	bd_ptr[bd_num].next_hi = cpu_to_le32((u64)bd_phys >> 32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Setup DMA descriptor pointers */
@@ -203,7 +247,10 @@ static int tsi721_bdma_ch_init(struct tsi721_bdma_chan *bdma_chan, int bd_num)
 	ioread32(bdma_chan->regs + TSI721_DMAC_INT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 	/* Request interrupt service if we are in MSI-X mode */
 	if (priv->flags & TSI721_USING_MSIX) {
@@ -253,6 +300,9 @@ err_out:
 	}
 #endif /* CONFIG_PCI_MSI */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Toggle DMA channel initialization */
 	iowrite32(TSI721_DMAC_CTL_INIT,	bdma_chan->regs + TSI721_DMAC_CTL);
@@ -268,6 +318,12 @@ static int tsi721_bdma_ch_free(struct tsi721_bdma_chan *bdma_chan)
 {
 	u32 ch_stat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI_MSI
+	struct tsi721_device *priv = to_tsi721(bdma_chan->dchan.device);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PCI_MSI
 	struct tsi721_device *priv = to_tsi721(bdma_chan->dchan.device);
@@ -286,10 +342,13 @@ static int tsi721_bdma_ch_free(struct tsi721_bdma_chan *bdma_chan)
 	iowrite32(TSI721_DMAC_CTL_INIT,	bdma_chan->regs + TSI721_DMAC_CTL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Free space allocated for DMA descriptors */
 	dma_free_coherent(bdma_chan->dchan.device->dev,
 		bdma_chan->bd_num * sizeof(struct tsi721_dma_desc),
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 	if (priv->flags & TSI721_USING_MSIX) {
 		free_irq(priv->msix[TSI721_VECT_DMA0_DONE +
@@ -302,6 +361,9 @@ static int tsi721_bdma_ch_free(struct tsi721_bdma_chan *bdma_chan)
 	/* Free space allocated for DMA descriptors */
 	dma_free_coherent(bdma_chan->dchan.device->dev,
 		(bdma_chan->bd_num + 1) * sizeof(struct tsi721_dma_desc),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bdma_chan->bd_base, bdma_chan->bd_phys);
 	bdma_chan->bd_base = NULL;
@@ -385,8 +447,13 @@ static void tsi721_start_dma(struct tsi721_bdma_chan *bdma_chan)
 
 	dev_dbg(bdma_chan->dchan.device->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"tx_chan: %p, chan: %d, regs: %p\n",
 		bdma_chan, bdma_chan->dchan.chan_id, bdma_chan->regs);
+=======
+		"%s: chan_%d (wrc=%d)\n", __func__, bdma_chan->id,
+		bdma_chan->wr_count_next);
+>>>>>>> v3.18
 =======
 		"%s: chan_%d (wrc=%d)\n", __func__, bdma_chan->id,
 		bdma_chan->wr_count_next);
@@ -399,6 +466,7 @@ static void tsi721_start_dma(struct tsi721_bdma_chan *bdma_chan)
 	bdma_chan->wr_count = bdma_chan->wr_count_next;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tsi721_desc_put(struct tsi721_bdma_chan *bdma_chan,
 			    struct tsi721_tx_desc *desc)
@@ -487,6 +555,8 @@ tsi721_fill_desc(struct tsi721_bdma_chan *bdma_chan,
 	bd_ptr->bcount = cpu_to_le32(((desc->rio_addr & 0x3) << 30) |
 					(sys_size << 26) | sg_dma_len(sg));
 =======
+=======
+>>>>>>> v3.18
 static int
 tsi721_desc_fill_init(struct tsi721_tx_desc *desc,
 		      struct tsi721_dma_desc *bd_ptr,
@@ -502,6 +572,9 @@ tsi721_desc_fill_init(struct tsi721_tx_desc *desc,
 				      (desc->rtype << 19) | desc->destid);
 	bd_ptr->bcount = cpu_to_le32(((desc->rio_addr & 0x3) << 30) |
 				     (sys_size << 26));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rio_addr = (desc->rio_addr >> 2) |
 				((u64)(desc->rio_addr_u & 0x3) << 62);
@@ -517,9 +590,12 @@ tsi721_desc_fill_init(struct tsi721_tx_desc *desc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tsi721_dma_chain_complete(struct tsi721_bdma_chan *bdma_chan,
 				      struct tsi721_tx_desc *desc)
 =======
+=======
+>>>>>>> v3.18
 static int
 tsi721_desc_fill_end(struct tsi721_dma_desc *bd_ptr, u32 bcount, bool interrupt)
 {
@@ -536,6 +612,9 @@ tsi721_desc_fill_end(struct tsi721_dma_desc *bd_ptr, u32 bcount, bool interrupt)
 
 static void tsi721_dma_tx_err(struct tsi721_bdma_chan *bdma_chan,
 			      struct tsi721_tx_desc *desc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dma_async_tx_descriptor *txd = &desc->txd;
@@ -543,9 +622,13 @@ static void tsi721_dma_tx_err(struct tsi721_bdma_chan *bdma_chan,
 	void *param = txd->callback_param;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_splice_init(&desc->tx_list, &bdma_chan->free_list);
 	list_move(&desc->desc_node, &bdma_chan->free_list);
 	bdma_chan->completed_cookie = txd->cookie;
+=======
+	list_move(&desc->desc_node, &bdma_chan->free_list);
+>>>>>>> v3.18
 =======
 	list_move(&desc->desc_node, &bdma_chan->free_list);
 >>>>>>> v3.18
@@ -554,6 +637,7 @@ static void tsi721_dma_tx_err(struct tsi721_bdma_chan *bdma_chan,
 		callback(param);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tsi721_dma_complete_all(struct tsi721_bdma_chan *bdma_chan)
 {
@@ -572,6 +656,8 @@ static void tsi721_dma_complete_all(struct tsi721_bdma_chan *bdma_chan)
 		tsi721_dma_chain_complete(bdma_chan, desc);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void tsi721_clr_stat(struct tsi721_bdma_chan *bdma_chan)
@@ -598,6 +684,7 @@ static void tsi721_clr_stat(struct tsi721_bdma_chan *bdma_chan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tsi721_advance_work(struct tsi721_bdma_chan *bdma_chan)
 {
 	if (list_empty(&bdma_chan->active_list) ||
@@ -613,6 +700,8 @@ static void tsi721_advance_work(struct tsi721_bdma_chan *bdma_chan)
 		tsi721_start_dma(bdma_chan);
 	}
 =======
+=======
+>>>>>>> v3.18
 /* Must be called with the channel spinlock held */
 static int tsi721_submit_sg(struct tsi721_tx_desc *desc)
 {
@@ -766,6 +855,9 @@ static void tsi721_advance_work(struct tsi721_bdma_chan *bdma_chan)
 	}
 
 	dev_dbg(bdma_chan->dchan.device->dev, "%s: Exit\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -795,9 +887,12 @@ static void tsi721_dma_tasklet(unsigned long data)
 
 	if (dmac_int & (TSI721_DMAC_INT_DONE | TSI721_DMAC_INT_IOFDONE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsi721_clr_stat(bdma_chan);
 		spin_lock(&bdma_chan->lock);
 =======
+=======
+>>>>>>> v3.18
 		struct tsi721_tx_desc *desc;
 
 		tsi721_clr_stat(bdma_chan);
@@ -821,6 +916,9 @@ static void tsi721_dma_tasklet(unsigned long data)
 			spin_lock(&bdma_chan->lock);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tsi721_advance_work(bdma_chan);
 		spin_unlock(&bdma_chan->lock);
@@ -836,6 +934,7 @@ static dma_cookie_t tsi721_tx_submit(struct dma_async_tx_descriptor *txd)
 	struct tsi721_bdma_chan *bdma_chan = to_tsi721_chan(txd->chan);
 	dma_cookie_t cookie;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&bdma_chan->lock);
 
@@ -853,6 +952,8 @@ static dma_cookie_t tsi721_tx_submit(struct dma_async_tx_descriptor *txd)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	/* Check if the descriptor is detached from any lists */
 	if (!list_empty(&desc->desc_node)) {
 		dev_err(bdma_chan->dchan.device->dev,
@@ -871,6 +972,9 @@ static dma_cookie_t tsi721_tx_submit(struct dma_async_tx_descriptor *txd)
 	desc->status = DMA_IN_PROGRESS;
 	list_add_tail(&desc->desc_node, &bdma_chan->queue);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_bh(&bdma_chan->lock);
 	return cookie;
@@ -879,6 +983,7 @@ static dma_cookie_t tsi721_tx_submit(struct dma_async_tx_descriptor *txd)
 static int tsi721_alloc_chan_resources(struct dma_chan *dchan)
 {
 	struct tsi721_bdma_chan *bdma_chan = to_tsi721_chan(dchan);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PCI_MSI
 	struct tsi721_device *priv = to_tsi721(dchan->device);
@@ -901,6 +1006,8 @@ static int tsi721_alloc_chan_resources(struct dma_chan *dchan)
 	/* Alocate matching number of logical descriptors */
 	desc = kcalloc((bdma_chan->bd_num - 1), sizeof(struct tsi721_tx_desc),
 =======
+=======
+>>>>>>> v3.18
 	struct tsi721_tx_desc *desc = NULL;
 	int i;
 
@@ -919,14 +1026,22 @@ static int tsi721_alloc_chan_resources(struct dma_chan *dchan)
 
 	/* Allocate queue of transaction descriptors */
 	desc = kcalloc(TSI721_DMA_TX_QUEUE_SZ, sizeof(struct tsi721_tx_desc),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			GFP_KERNEL);
 	if (!desc) {
 		dev_err(dchan->device->dev,
 			"Failed to allocate logical descriptors\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -ENOMEM;
 		goto err_out;
+=======
+		tsi721_bdma_ch_free(bdma_chan);
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		tsi721_bdma_ch_free(bdma_chan);
 		return -ENOMEM;
@@ -935,6 +1050,7 @@ static int tsi721_alloc_chan_resources(struct dma_chan *dchan)
 
 	bdma_chan->tx_desc = desc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < bdma_chan->bd_num - 1; i++) {
 		dma_async_tx_descriptor_init(&desc[i].txd, dchan);
@@ -988,6 +1104,8 @@ static int tsi721_alloc_chan_resources(struct dma_chan *dchan)
 	}
 #endif /* CONFIG_PCI_MSI */
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < TSI721_DMA_TX_QUEUE_SZ; i++) {
 		dma_async_tx_descriptor_init(&desc[i].txd, dchan);
 		desc[i].txd.tx_submit = tsi721_tx_submit;
@@ -996,11 +1114,15 @@ static int tsi721_alloc_chan_resources(struct dma_chan *dchan)
 	}
 
 	dma_cookie_init(dchan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bdma_chan->active = true;
 	tsi721_bdma_interrupt_enable(bdma_chan, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return bdma_chan->bd_num - 1;
 
@@ -1027,12 +1149,17 @@ static void tsi721_free_chan_resources(struct dma_chan *dchan)
 	tsi721_bdma_interrupt_enable(bdma_chan, 0);
 	bdma_chan->active = false;
 =======
+=======
+>>>>>>> v3.18
 	return TSI721_DMA_TX_QUEUE_SZ;
 }
 
 static void tsi721_sync_dma_irq(struct tsi721_bdma_chan *bdma_chan)
 {
 	struct tsi721_device *priv = to_tsi721(bdma_chan->dchan.device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PCI_MSI
@@ -1044,6 +1171,7 @@ static void tsi721_sync_dma_irq(struct tsi721_bdma_chan *bdma_chan)
 	} else
 #endif
 	synchronize_irq(priv->pdev->irq);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	tasklet_kill(&bdma_chan->tasklet);
@@ -1064,6 +1192,8 @@ static void tsi721_sync_dma_irq(struct tsi721_bdma_chan *bdma_chan)
 	tsi721_bdma_ch_free(bdma_chan);
 	kfree(bdma_chan->tx_desc);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void tsi721_free_chan_resources(struct dma_chan *dchan)
@@ -1086,6 +1216,9 @@ static void tsi721_free_chan_resources(struct dma_chan *dchan)
 	INIT_LIST_HEAD(&bdma_chan->free_list);
 	kfree(bdma_chan->tx_desc);
 	tsi721_bdma_ch_free(bdma_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1093,6 +1226,7 @@ static
 enum dma_status tsi721_tx_status(struct dma_chan *dchan, dma_cookie_t cookie,
 				 struct dma_tx_state *txstate)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tsi721_bdma_chan *bdma_chan = to_tsi721_chan(dchan);
 	dma_cookie_t		last_used;
@@ -1116,12 +1250,16 @@ enum dma_status tsi721_tx_status(struct dma_chan *dchan, dma_cookie_t cookie,
 =======
 	return dma_cookie_status(dchan, cookie, txstate);
 >>>>>>> v3.18
+=======
+	return dma_cookie_status(dchan, cookie, txstate);
+>>>>>>> v3.18
 }
 
 static void tsi721_issue_pending(struct dma_chan *dchan)
 {
 	struct tsi721_bdma_chan *bdma_chan = to_tsi721_chan(dchan);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(dchan->device->dev, "%s: Entry\n", __func__);
 
@@ -1133,6 +1271,8 @@ static void tsi721_issue_pending(struct dma_chan *dchan)
 		dev_dbg(dchan->device->dev,
 			"%s: DMA channel still busy\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dchan->device->dev, "%s: Enter\n", __func__);
 
 	if (tsi721_dma_is_idle(bdma_chan) && bdma_chan->active) {
@@ -1140,6 +1280,9 @@ static void tsi721_issue_pending(struct dma_chan *dchan)
 		tsi721_advance_work(bdma_chan);
 		spin_unlock_bh(&bdma_chan->lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1151,6 +1294,7 @@ struct dma_async_tx_descriptor *tsi721_prep_rio_sg(struct dma_chan *dchan,
 {
 	struct tsi721_bdma_chan *bdma_chan = to_tsi721_chan(dchan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tsi721_tx_desc *desc = NULL;
 	struct tsi721_tx_desc *first = NULL;
 	struct scatterlist *sg;
@@ -1160,10 +1304,15 @@ struct dma_async_tx_descriptor *tsi721_prep_rio_sg(struct dma_chan *dchan,
 	u32 sys_size = dma_to_mport(dchan->device)->sys_size;
 	enum dma_rtype rtype;
 =======
+=======
+>>>>>>> v3.18
 	struct tsi721_tx_desc *desc, *_d;
 	struct rio_dma_ext *rext = tinfo;
 	enum dma_rtype rtype;
 	struct dma_async_tx_descriptor *txd = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!sgl || !sg_len) {
@@ -1172,6 +1321,12 @@ struct dma_async_tx_descriptor *tsi721_prep_rio_sg(struct dma_chan *dchan,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_dbg(dchan->device->dev, "%s: %s\n", __func__,
+		(dir == DMA_DEV_TO_MEM)?"READ":"WRITE");
+
+>>>>>>> v3.18
 =======
 	dev_dbg(dchan->device->dev, "%s: %s\n", __func__,
 		(dir == DMA_DEV_TO_MEM)?"READ":"WRITE");
@@ -1198,6 +1353,7 @@ struct dma_async_tx_descriptor *tsi721_prep_rio_sg(struct dma_chan *dchan,
 		return NULL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_sg(sgl, sg, sg_len, i) {
 		int err;
@@ -1243,6 +1399,8 @@ err_desc_get:
 	tsi721_desc_put(bdma_chan, first);
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&bdma_chan->lock);
 
 	list_for_each_entry_safe(desc, _d, &bdma_chan->free_list, desc_node) {
@@ -1263,6 +1421,9 @@ err_desc_get:
 	spin_unlock_bh(&bdma_chan->lock);
 
 	return txd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1272,6 +1433,10 @@ static int tsi721_device_control(struct dma_chan *dchan, enum dma_ctrl_cmd cmd,
 	struct tsi721_bdma_chan *bdma_chan = to_tsi721_chan(dchan);
 	struct tsi721_tx_desc *desc, *_d;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 dmac_int;
+>>>>>>> v3.18
 =======
 	u32 dmac_int;
 >>>>>>> v3.18
@@ -1281,6 +1446,7 @@ static int tsi721_device_control(struct dma_chan *dchan, enum dma_ctrl_cmd cmd,
 
 	if (cmd != DMA_TERMINATE_ALL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENXIO;
 
 	spin_lock_bh(&bdma_chan->lock);
@@ -1288,6 +1454,8 @@ static int tsi721_device_control(struct dma_chan *dchan, enum dma_ctrl_cmd cmd,
 	/* make sure to stop the transfer */
 	iowrite32(TSI721_DMAC_CTL_SUSP, bdma_chan->regs + TSI721_DMAC_CTL);
 =======
+=======
+>>>>>>> v3.18
 		return -ENOSYS;
 
 	spin_lock_bh(&bdma_chan->lock);
@@ -1304,6 +1472,9 @@ static int tsi721_device_control(struct dma_chan *dchan, enum dma_ctrl_cmd cmd,
 			dmac_int = ioread32(bdma_chan->regs + TSI721_DMAC_INT);
 		} while ((dmac_int & TSI721_DMAC_INT_SUSP) == 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	list_splice_init(&bdma_chan->active_list, &list);
@@ -1311,7 +1482,11 @@ static int tsi721_device_control(struct dma_chan *dchan, enum dma_ctrl_cmd cmd,
 
 	list_for_each_entry_safe(desc, _d, &list, desc_node)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsi721_dma_chain_complete(bdma_chan, desc);
+=======
+		tsi721_dma_tx_err(bdma_chan, desc);
+>>>>>>> v3.18
 =======
 		tsi721_dma_tx_err(bdma_chan, desc);
 >>>>>>> v3.18
@@ -1325,6 +1500,7 @@ int tsi721_register_dma(struct tsi721_device *priv)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nr_channels = TSI721_DMA_MAXCH;
 	int err;
 	struct rio_mport *mport = priv->mport;
@@ -1336,6 +1512,8 @@ int tsi721_register_dma(struct tsi721_device *priv)
 
 	for (i = 0; i < nr_channels; i++) {
 =======
+=======
+>>>>>>> v3.18
 	int nr_channels = 0;
 	int err;
 	struct rio_mport *mport = priv->mport;
@@ -1343,6 +1521,9 @@ int tsi721_register_dma(struct tsi721_device *priv)
 	INIT_LIST_HEAD(&mport->dma.channels);
 
 	for (i = 0; i < TSI721_DMA_MAXCH; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct tsi721_bdma_chan *bdma_chan = &priv->bdma[i];
 
@@ -1350,7 +1531,10 @@ int tsi721_register_dma(struct tsi721_device *priv)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bdma_chan->bd_num = 64;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bdma_chan->regs = priv->regs + TSI721_DMAC_BASE(i);
@@ -1372,19 +1556,29 @@ int tsi721_register_dma(struct tsi721_device *priv)
 		list_add_tail(&bdma_chan->dchan.device_node,
 			      &mport->dma.channels);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		nr_channels++;
 	}
 
 	mport->dma.chancnt = nr_channels;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_cap_zero(mport->dma.cap_mask);
 	dma_cap_set(DMA_PRIVATE, mport->dma.cap_mask);
 	dma_cap_set(DMA_SLAVE, mport->dma.cap_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mport->dma.dev = &priv->pdev->dev;
+>>>>>>> v3.18
 =======
 	mport->dma.dev = &priv->pdev->dev;
 >>>>>>> v3.18

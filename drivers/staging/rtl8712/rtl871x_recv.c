@@ -73,9 +73,15 @@ sint _r8712_init_recv_priv(struct recv_priv *precvpriv,
 	precvpriv->adapter = padapter;
 	precvpriv->free_recvframe_cnt = NR_RECVFRAME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	precvpriv->pallocated_frame_buf = _malloc(NR_RECVFRAME *
 					   sizeof(union recv_frame) +
 					   RXFRAME_ALIGN_SZ);
+=======
+	precvpriv->pallocated_frame_buf = kmalloc(NR_RECVFRAME *
+				sizeof(union recv_frame) + RXFRAME_ALIGN_SZ,
+				GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	precvpriv->pallocated_frame_buf = kmalloc(NR_RECVFRAME *
 				sizeof(union recv_frame) + RXFRAME_ALIGN_SZ,
@@ -93,8 +99,13 @@ sint _r8712_init_recv_priv(struct recv_priv *precvpriv,
 	precvframe = (union recv_frame *)precvpriv->precv_frame_buf;
 	for (i = 0; i < NR_RECVFRAME; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_init_listhead(&(precvframe->u.list));
 		list_insert_tail(&(precvframe->u.list),
+=======
+		INIT_LIST_HEAD(&(precvframe->u.list));
+		list_add_tail(&(precvframe->u.list),
+>>>>>>> v3.18
 =======
 		INIT_LIST_HEAD(&(precvframe->u.list));
 		list_add_tail(&(precvframe->u.list),
@@ -124,6 +135,7 @@ union recv_frame *r8712_alloc_recvframe(struct  __queue *pfree_recv_queue)
 
 	spin_lock_irqsave(&pfree_recv_queue->lock, irqL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (_queue_empty(pfree_recv_queue) == true)
 		precvframe = NULL;
 	else {
@@ -132,6 +144,8 @@ union recv_frame *r8712_alloc_recvframe(struct  __queue *pfree_recv_queue)
 		precvframe = LIST_CONTAINOR(plist, union recv_frame, u);
 		list_delete(&precvframe->u.hdr.list);
 =======
+=======
+>>>>>>> v3.18
 	if (list_empty(&pfree_recv_queue->queue))
 		precvframe = NULL;
 	else {
@@ -139,6 +153,9 @@ union recv_frame *r8712_alloc_recvframe(struct  __queue *pfree_recv_queue)
 		plist = phead->next;
 		precvframe = LIST_CONTAINOR(plist, union recv_frame, u);
 		list_del_init(&precvframe->u.hdr.list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		padapter = precvframe->u.hdr.adapter;
 		if (padapter != NULL) {
@@ -167,17 +184,23 @@ void r8712_free_recvframe_queue(struct  __queue *pframequeue,
 
 	spin_lock(&pframequeue->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(pframequeue);
 	plist = get_next(phead);
 	while (end_of_queue_search(phead, plist) == false) {
 		precvframe = LIST_CONTAINOR(plist, union recv_frame, u);
 		plist = get_next(plist);
 =======
+=======
+>>>>>>> v3.18
 	phead = &pframequeue->queue;
 	plist = phead->next;
 	while (end_of_queue_search(phead, plist) == false) {
 		precvframe = LIST_CONTAINOR(plist, union recv_frame, u);
 		plist = plist->next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r8712_free_recvframe(precvframe, pfree_recv_queue);
 	}
@@ -635,8 +658,11 @@ sint r8712_wlanhdr_to_ethhdr(union recv_frame *precvframe)
 	u8	*psnap_type;
 	struct ieee80211_snap_hdr *psnap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sint ret = _SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct _adapter	*adapter = precvframe->u.hdr.adapter;
@@ -666,7 +692,11 @@ sint r8712_wlanhdr_to_ethhdr(union recv_frame *precvframe)
 		  (bsnaphdr ? SNAP_SIZE : 0);
 	len = precvframe->u.hdr.len - rmv_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((check_fwstate(pmlmepriv, WIFI_MP_STATE) == true)) {
+=======
+	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == true) {
+>>>>>>> v3.18
 =======
 	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == true) {
 >>>>>>> v3.18
@@ -690,7 +720,11 @@ sint r8712_wlanhdr_to_ethhdr(union recv_frame *precvframe)
 		memcpy(ptr + 12, &len, 2);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return _SUCCESS;
+>>>>>>> v3.18
 =======
 	return _SUCCESS;
 >>>>>>> v3.18

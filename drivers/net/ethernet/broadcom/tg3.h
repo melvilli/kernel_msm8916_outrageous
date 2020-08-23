@@ -5,7 +5,11 @@
  * Copyright (C) 2001 Jeff Garzik (jgarzik@pobox.com)
  * Copyright (C) 2004 Sun Microsystems Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2013 Broadcom Corporation.
+=======
+ * Copyright (C) 2007-2014 Broadcom Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2014 Broadcom Corporation.
 >>>>>>> v3.18
@@ -73,6 +77,12 @@
 #define  TG3PCI_DEVICE_TIGON3_5725	 0x1643
 #define  TG3PCI_DEVICE_TIGON3_5727	 0x16f3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  TG3PCI_DEVICE_TIGON3_57764	 0x1642
+#define  TG3PCI_DEVICE_TIGON3_57767	 0x1683
+#define  TG3PCI_DEVICE_TIGON3_57787	 0x1641
+>>>>>>> v3.18
 =======
 #define  TG3PCI_DEVICE_TIGON3_57764	 0x1642
 #define  TG3PCI_DEVICE_TIGON3_57767	 0x1683
@@ -543,6 +553,10 @@
 #define  RX_MODE_RSS_ENABLE		 0x00800000
 #define  RX_MODE_IPV6_CSUM_ENABLE	 0x01000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  RX_MODE_IPV4_FRAG_FIX		 0x02000000
+>>>>>>> v3.18
 =======
 #define  RX_MODE_IPV4_FRAG_FIX		 0x02000000
 >>>>>>> v3.18
@@ -1157,6 +1171,12 @@
 #define  CPMU_CLCK_ORIDE_MAC_ORIDE_EN	 0x80000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TG3_CPMU_CLCK_ORIDE_ENABLE	0x00003628
+#define  TG3_CPMU_MAC_ORIDE_ENABLE	 (1 << 13)
+
+>>>>>>> v3.18
 =======
 #define TG3_CPMU_CLCK_ORIDE_ENABLE	0x00003628
 #define  TG3_CPMU_MAC_ORIDE_ENABLE	 (1 << 13)
@@ -1167,6 +1187,10 @@
 #define  TG3_CPMU_STATUS_FMSK_5719	 0xc0000000
 #define  TG3_CPMU_STATUS_FSHFT_5719	 30
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  TG3_CPMU_STATUS_LINK_MASK	 0x180000
+>>>>>>> v3.18
 =======
 #define  TG3_CPMU_STATUS_LINK_MASK	 0x180000
 >>>>>>> v3.18
@@ -1200,6 +1224,10 @@
 #define  TG3_CPMU_DBTMR1_PCIEXIT_2047US	 0x07ff0000
 #define  TG3_CPMU_DBTMR1_LNKIDLE_2047US	 0x000007ff
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  TG3_CPMU_DBTMR1_LNKIDLE_MAX	 0x0000ffff
+>>>>>>> v3.18
 =======
 #define  TG3_CPMU_DBTMR1_LNKIDLE_MAX	 0x0000ffff
 >>>>>>> v3.18
@@ -1846,7 +1874,10 @@
 #define  TG3_EAV_REF_CLCK_CTL_STOP	 0x00000002
 #define  TG3_EAV_REF_CLCK_CTL_RESUME	 0x00000004
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define  TG3_EAV_CTL_TSYNC_GPIO_MASK	 (0x3 << 16)
 #define  TG3_EAV_CTL_TSYNC_WDOG0	 (1 << 17)
 
@@ -1855,6 +1886,9 @@
 #define  TG3_EAV_WATCHDOG0_EN		 (1 << 31)
 #define  TG3_EAV_WATCHDOG_MSB_MASK	0x7fffffff
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TG3_EAV_REF_CLK_CORRECT_CTL	0x00006928
 #define  TG3_EAV_REF_CLK_CORRECT_EN	 (1 << 31)
@@ -1862,7 +1896,12 @@
 
 #define TG3_EAV_REF_CLK_CORRECT_MASK	0xffffff
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 0x690c --> 0x7000 unused */
+=======
+
+/* 0x692c --> 0x7000 unused */
+>>>>>>> v3.18
 =======
 
 /* 0x692c --> 0x7000 unused */
@@ -2235,7 +2274,11 @@
 #define NIC_SRAM_DATA_CFG_2		0x00000d38
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  NIC_SRAM_DATA_CFG_2_APD_EN	 0x00000400
+=======
+#define  NIC_SRAM_DATA_CFG_2_APD_EN	 0x00004000
+>>>>>>> v3.18
 =======
 #define  NIC_SRAM_DATA_CFG_2_APD_EN	 0x00004000
 >>>>>>> v3.18
@@ -2261,6 +2304,12 @@
 #define  NIC_SRAM_CPMUSTAT_SIG_MSK	0x0000ffff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NIC_SRAM_DATA_CFG_5		0x00000e0c
+#define  NIC_SRAM_DISABLE_1G_HALF_ADV	0x00000002
+
+>>>>>>> v3.18
 =======
 #define NIC_SRAM_DATA_CFG_5		0x00000e0c
 #define  NIC_SRAM_DISABLE_1G_HALF_ADV	0x00000002
@@ -3059,6 +3108,10 @@ enum TG3_FLAGS {
 	TG3_FLAG_ASPM_WORKAROUND,
 	TG3_FLAG_POLL_SERDES,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TG3_FLAG_POLL_CPMU_LINK,
+>>>>>>> v3.18
 =======
 	TG3_FLAG_POLL_CPMU_LINK,
 >>>>>>> v3.18
@@ -3286,7 +3339,10 @@ struct tg3 {
 
 	int				pci_fn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				pm_cap;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int				msi_cap;
@@ -3378,6 +3434,10 @@ struct tg3 {
 #define TG3_PHYFLG_KEEP_LINK_ON_PWRDN	0x00100000
 #define TG3_PHYFLG_MDIX_STATE		0x00200000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TG3_PHYFLG_DISABLE_1G_HD_ADV	0x00400000
+>>>>>>> v3.18
 =======
 #define TG3_PHYFLG_DISABLE_1G_HD_ADV	0x00400000
 >>>>>>> v3.18
@@ -3442,6 +3502,10 @@ struct tg3 {
 
 	struct ethtool_coalesce		coal;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ethtool_eee		eee;
+>>>>>>> v3.18
 =======
 	struct ethtool_eee		eee;
 >>>>>>> v3.18
@@ -3454,6 +3518,10 @@ struct tg3 {
 	struct device			*hwmon_dev;
 	bool				link_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool				pcierr_recovery;
+>>>>>>> v3.18
 =======
 	bool				pcierr_recovery;
 >>>>>>> v3.18

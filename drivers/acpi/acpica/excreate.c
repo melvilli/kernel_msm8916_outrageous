@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -108,7 +112,10 @@ acpi_status acpi_ex_create_alias(struct acpi_walk_state *walk_state)
 	case ACPI_TYPE_PACKAGE:
 	case ACPI_TYPE_BUFFER_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -121,7 +128,10 @@ acpi_status acpi_ex_create_alias(struct acpi_walk_state *walk_state)
 	case ACPI_TYPE_THERMAL:
 	case ACPI_TYPE_LOCAL_SCOPE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -135,7 +145,10 @@ acpi_status acpi_ex_create_alias(struct acpi_walk_state *walk_state)
 
 	case ACPI_TYPE_METHOD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -210,7 +223,11 @@ acpi_status acpi_ex_create_event(struct acpi_walk_state *walk_state)
 				  operands[0], obj_desc, ACPI_TYPE_EVENT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -269,7 +286,11 @@ acpi_status acpi_ex_create_mutex(struct acpi_walk_state *walk_state)
 				  ACPI_TYPE_MUTEX);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -372,7 +393,11 @@ acpi_ex_create_region(u8 * aml_start,
 	status = acpi_ns_attach_object(node, obj_desc, ACPI_TYPE_REGION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -549,7 +574,11 @@ acpi_ex_create_method(u8 * aml_start,
 	acpi_ut_remove_reference(obj_desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

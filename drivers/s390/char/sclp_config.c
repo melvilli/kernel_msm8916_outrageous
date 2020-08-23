@@ -33,7 +33,11 @@ static void sclp_cpu_capability_notify(struct work_struct *work)
 
 	s390_adjust_jiffies();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("cpu capability changed.\n");
+=======
+	pr_info("CPU capability may have changed\n");
+>>>>>>> v3.18
 =======
 	pr_info("CPU capability may have changed\n");
 >>>>>>> v3.18

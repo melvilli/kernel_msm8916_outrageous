@@ -13,8 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -33,9 +38,12 @@
 #include <linux/cache.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void rcu_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long get_state_synchronize_rcu(void)
 {
 	return 0;
@@ -44,6 +52,9 @@ static inline unsigned long get_state_synchronize_rcu(void)
 static inline void cond_synchronize_rcu(unsigned long oldstate)
 {
 	might_sleep();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -58,8 +69,11 @@ static inline void rcu_barrier_sched(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_TINY_RCU
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void synchronize_rcu_expedited(void)
@@ -73,6 +87,7 @@ static inline void rcu_barrier(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* #ifdef CONFIG_TINY_RCU */
 
 void synchronize_rcu_expedited(void);
@@ -84,6 +99,8 @@ static inline void rcu_barrier(void)
 
 #endif /* #else #ifdef CONFIG_TINY_RCU */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void synchronize_rcu_bh(void)
@@ -107,6 +124,7 @@ static inline void kfree_call_rcu(struct rcu_head *head,
 	call_rcu(head, func);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_TINY_RCU
 
@@ -137,6 +155,11 @@ static inline void rcu_note_context_switch(int cpu)
 {
 	rcu_sched_qs(cpu);
 	rcu_preempt_note_context_switch();
+=======
+static inline void rcu_note_context_switch(int cpu)
+{
+	rcu_sched_qs();
+>>>>>>> v3.18
 =======
 static inline void rcu_note_context_switch(int cpu)
 {
@@ -181,21 +204,30 @@ static inline void rcu_sched_force_quiescent_state(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void show_rcu_gp_kthreads(void)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void rcu_cpu_stall_reset(void)
 {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 extern int rcu_scheduler_active __read_mostly;
 extern void rcu_scheduler_starting(void);
 =======
+=======
+>>>>>>> v3.18
 static inline void exit_rcu(void)
 {
 }
@@ -203,6 +235,9 @@ static inline void exit_rcu(void)
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 extern int rcu_scheduler_active __read_mostly;
 void rcu_scheduler_starting(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* #ifdef CONFIG_DEBUG_LOCK_ALLOC */
 static inline void rcu_scheduler_starting(void)
@@ -211,7 +246,10 @@ static inline void rcu_scheduler_starting(void)
 #endif /* #else #ifdef CONFIG_DEBUG_LOCK_ALLOC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_RCU_TRACE)
 
 static inline bool rcu_is_watching(void)
@@ -229,5 +267,8 @@ static inline bool rcu_is_watching(void)
 
 #endif /* #else defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_RCU_TRACE) */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_RCUTINY_H */

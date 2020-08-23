@@ -46,7 +46,11 @@
  */
 struct sht21 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -90,6 +94,7 @@ static inline int sht21_rh_ticks_to_per_cent_mille(int ticks)
 /**
  * sht21_update_measurements() - get updated measurements from device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @client: I2C client device
  *
  * Returns 0 on success, else negative errno.
@@ -99,6 +104,8 @@ static int sht21_update_measurements(struct i2c_client *client)
 	int ret = 0;
 	struct sht21 *sht21 = i2c_get_clientdata(client);
 =======
+=======
+>>>>>>> v3.18
  * @dev: device
  *
  * Returns 0 on success, else negative errno.
@@ -108,6 +115,9 @@ static int sht21_update_measurements(struct device *dev)
 	int ret = 0;
 	struct sht21 *sht21 = dev_get_drvdata(dev);
 	struct i2c_client *client = sht21->client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&sht21->lock);
@@ -150,14 +160,20 @@ static ssize_t sht21_show_temperature(struct device *dev,
 	char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct sht21 *sht21 = i2c_get_clientdata(client);
 	int ret = sht21_update_measurements(client);
 =======
+=======
+>>>>>>> v3.18
 	struct sht21 *sht21 = dev_get_drvdata(dev);
 	int ret;
 
 	ret = sht21_update_measurements(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -178,14 +194,20 @@ static ssize_t sht21_show_humidity(struct device *dev,
 	char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct sht21 *sht21 = i2c_get_clientdata(client);
 	int ret = sht21_update_measurements(client);
 =======
+=======
+>>>>>>> v3.18
 	struct sht21 *sht21 = dev_get_drvdata(dev);
 	int ret;
 
 	ret = sht21_update_measurements(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -199,7 +221,11 @@ static SENSOR_DEVICE_ATTR(humidity1_input, S_IRUGO, sht21_show_humidity,
 	NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *sht21_attributes[] = {
+=======
+static struct attribute *sht21_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *sht21_attrs[] = {
 >>>>>>> v3.18
@@ -208,6 +234,7 @@ static struct attribute *sht21_attrs[] = {
 	NULL
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct attribute_group sht21_attr_group = {
 	.attrs = sht21_attributes,
@@ -228,6 +255,8 @@ static int sht21_probe(struct i2c_client *client,
 	struct sht21 *sht21;
 	int err;
 =======
+=======
+>>>>>>> v3.18
 ATTRIBUTE_GROUPS(sht21);
 
 static int sht21_probe(struct i2c_client *client,
@@ -236,6 +265,9 @@ static int sht21_probe(struct i2c_client *client,
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct sht21 *sht21;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!i2c_check_functionality(client->adapter,
@@ -245,6 +277,7 @@ static int sht21_probe(struct i2c_client *client,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sht21 = devm_kzalloc(&client->dev, sizeof(*sht21), GFP_KERNEL);
 	if (!sht21)
@@ -288,6 +321,8 @@ static int sht21_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	sht21 = devm_kzalloc(dev, sizeof(*sht21), GFP_KERNEL);
 	if (!sht21)
 		return -ENOMEM;
@@ -299,6 +334,9 @@ static int sht21_remove(struct i2c_client *client)
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   sht21, sht21_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -313,7 +351,10 @@ static struct i2c_driver sht21_driver = {
 	.driver.name = "sht21",
 	.probe       = sht21_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove      = sht21_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table    = sht21_id,

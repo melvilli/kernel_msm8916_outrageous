@@ -87,6 +87,7 @@
 #define TX_POWER_NEAR_FIELD_THRESH_LVL1		67
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct swat_t {
 	u8 failure_cnt;
 	u8 try_flag;
@@ -151,6 +152,8 @@ enum dm_dig_connect_e {
 	DIG_CONNECT_MAX
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void rtl92c_dm_init(struct ieee80211_hw *hw);

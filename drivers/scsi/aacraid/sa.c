@@ -388,8 +388,12 @@ int aac_sa_init(struct aac_dev *dev)
 	dev->sync_mode = 0;	/* sync. mode not supported */
 	if (request_irq(dev->pdev->irq, dev->a_ops.adapter_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_SHARED|IRQF_DISABLED,
 			"aacraid", (void *)dev ) < 0) {
+=======
+			IRQF_SHARED, "aacraid", (void *)dev) < 0) {
+>>>>>>> v3.18
 =======
 			IRQF_SHARED, "aacraid", (void *)dev) < 0) {
 >>>>>>> v3.18

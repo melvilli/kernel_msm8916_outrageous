@@ -13,6 +13,12 @@ obj-$(CONFIG_SND_SOC_SH4_FSI)	+= snd-soc-fsi.o
 obj-$(CONFIG_SND_SOC_SH4_SIU)	+= snd-soc-siu.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+## audio units for R-Car
+obj-$(CONFIG_SND_SOC_RCAR)	+= rcar/
+
+>>>>>>> v3.18
 =======
 ## audio units for R-Car
 obj-$(CONFIG_SND_SOC_RCAR)	+= rcar/

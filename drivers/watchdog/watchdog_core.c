@@ -78,8 +78,13 @@ int watchdog_init_timeout(struct watchdog_device *wdd,
 	watchdog_check_min_max_timeout(wdd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* try to get the tiemout module parameter first */
 	if (!watchdog_timeout_invalid(wdd, timeout_parm)) {
+=======
+	/* try to get the timeout module parameter first */
+	if (!watchdog_timeout_invalid(wdd, timeout_parm) && timeout_parm) {
+>>>>>>> v3.18
 =======
 	/* try to get the timeout module parameter first */
 	if (!watchdog_timeout_invalid(wdd, timeout_parm) && timeout_parm) {
@@ -95,7 +100,11 @@ int watchdog_init_timeout(struct watchdog_device *wdd,
 		return ret;
 	of_property_read_u32(dev->of_node, "timeout-sec", &t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!watchdog_timeout_invalid(wdd, t))
+=======
+	if (!watchdog_timeout_invalid(wdd, t) && t)
+>>>>>>> v3.18
 =======
 	if (!watchdog_timeout_invalid(wdd, t) && t)
 >>>>>>> v3.18

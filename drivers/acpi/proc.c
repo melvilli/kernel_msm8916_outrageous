@@ -4,6 +4,7 @@
 #include <linux/suspend.h>
 #include <linux/bcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 
 #include <acpi/acpi_bus.h>
@@ -15,11 +16,16 @@
 
 #include "sleep.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <asm/uaccess.h>
 
 #include "sleep.h"
 #include "internal.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _COMPONENT		ACPI_SYSTEM_COMPONENT
@@ -27,7 +33,10 @@
 /*
  * this file provides support for:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * /proc/acpi/alarm
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * /proc/acpi/wakeup
@@ -35,6 +44,7 @@
 
 ACPI_MODULE_NAME("sleep")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_RTC_DRV_CMOS) || defined(CONFIG_RTC_DRV_CMOS_MODULE) || !defined(CONFIG_X86)
 /* use /sys/class/rtc/rtcX/wakealarm instead; it's not ACPI-specific */
@@ -305,6 +315,8 @@ acpi_system_write_alarm(struct file *file,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int
 acpi_system_wakeup_device_seq_show(struct seq_file *seq, void *offset)
 {
@@ -348,7 +360,11 @@ acpi_system_wakeup_device_seq_show(struct seq_file *seq, void *offset)
 					dev->wakeup.flags.run_wake ? '*' : ' ',
 					(device_may_wakeup(&dev->dev) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(ldev && device_may_wakeup(ldev))) ?
+=======
+					device_may_wakeup(ldev)) ?
+>>>>>>> v3.18
 =======
 					device_may_wakeup(ldev)) ?
 >>>>>>> v3.18
@@ -436,6 +452,7 @@ static const struct file_operations acpi_system_wakeup_device_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef	HAVE_ACPI_LEGACY_ALARM
 static const struct file_operations acpi_system_alarm_fops = {
 	.owner = THIS_MODULE,
@@ -471,6 +488,10 @@ int __init acpi_sleep_proc_init(void)
 	acpi_disable_event(ACPI_EVENT_RTC, 0);
 #endif				/* HAVE_ACPI_LEGACY_ALARM */
 
+=======
+int __init acpi_sleep_proc_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init acpi_sleep_proc_init(void)
 {

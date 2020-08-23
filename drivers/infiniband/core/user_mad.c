@@ -34,6 +34,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "user_mad: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "user_mad: " fmt
 
@@ -510,6 +515,7 @@ static ssize_t ib_umad_write(struct file *filp, const char __user *buf,
 	rmpp_mad = (struct ib_rmpp_mad *) packet->mad.data;
 	hdr_len = ib_get_mad_data_offset(rmpp_mad->mad_hdr.mgmt_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ib_is_mad_class_rmpp(rmpp_mad->mad_hdr.mgmt_class)) {
 		copy_offset = IB_MGMT_MAD_HDR;
 		rmpp_active = 0;
@@ -518,6 +524,8 @@ static ssize_t ib_umad_write(struct file *filp, const char __user *buf,
 		rmpp_active = ib_get_rmpp_flags(&rmpp_mad->rmpp_hdr) &
 			      IB_MGMT_RMPP_FLAG_ACTIVE;
 =======
+=======
+>>>>>>> v3.18
 
 	if (ib_is_mad_class_rmpp(rmpp_mad->mad_hdr.mgmt_class)
 	    && ib_mad_kernel_rmpp_agent(agent)) {
@@ -527,6 +535,9 @@ static ssize_t ib_umad_write(struct file *filp, const char __user *buf,
 	} else {
 		copy_offset = IB_MGMT_MAD_HDR;
 		rmpp_active = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -574,6 +585,7 @@ static ssize_t ib_umad_write(struct file *filp, const char __user *buf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&file->send_lock);
 	ret = is_duplicate(file, packet);
 	if (!ret)
@@ -583,6 +595,8 @@ static ssize_t ib_umad_write(struct file *filp, const char __user *buf,
 		ret = -EINVAL;
 		goto err_msg;
 =======
+=======
+>>>>>>> v3.18
 	if (!ib_mad_kernel_rmpp_agent(agent)
 	   && ib_is_mad_class_rmpp(rmpp_mad->mad_hdr.mgmt_class)
 	   && (ib_get_rmpp_flags(&rmpp_mad->rmpp_hdr) & IB_MGMT_RMPP_FLAG_ACTIVE)) {
@@ -599,6 +613,9 @@ static ssize_t ib_umad_write(struct file *filp, const char __user *buf,
 			ret = -EINVAL;
 			goto err_msg;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -651,6 +668,11 @@ static int ib_umad_reg_agent(struct ib_umad_file *file, void __user *arg,
 
 	if (!file->port->ib_dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_notice(file->port->dev,
+			   "ib_umad_reg_agent: invalid device\n");
+>>>>>>> v3.18
 =======
 		dev_notice(file->port->dev,
 			   "ib_umad_reg_agent: invalid device\n");
@@ -666,6 +688,12 @@ static int ib_umad_reg_agent(struct ib_umad_file *file, void __user *arg,
 
 	if (ureq.qpn != 0 && ureq.qpn != 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_notice(file->port->dev,
+			   "ib_umad_reg_agent: invalid QPN %d specified\n",
+			   ureq.qpn);
+>>>>>>> v3.18
 =======
 		dev_notice(file->port->dev,
 			   "ib_umad_reg_agent: invalid QPN %d specified\n",
@@ -680,6 +708,12 @@ static int ib_umad_reg_agent(struct ib_umad_file *file, void __user *arg,
 			goto found;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_notice(file->port->dev,
+		   "ib_umad_reg_agent: Max Agents (%u) reached\n",
+		   IB_UMAD_MAX_AGENTS);
+>>>>>>> v3.18
 =======
 	dev_notice(file->port->dev,
 		   "ib_umad_reg_agent: Max Agents (%u) reached\n",
@@ -691,6 +725,10 @@ static int ib_umad_reg_agent(struct ib_umad_file *file, void __user *arg,
 found:
 	if (ureq.mgmt_class) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		memset(&req, 0, sizeof(req));
+>>>>>>> v3.18
 =======
 		memset(&req, 0, sizeof(req));
 >>>>>>> v3.18
@@ -715,7 +753,11 @@ found:
 				      ureq.mgmt_class ? &req : NULL,
 				      ureq.rmpp_version,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      send_handler, recv_handler, file);
+=======
+				      send_handler, recv_handler, file, 0);
+>>>>>>> v3.18
 =======
 				      send_handler, recv_handler, file, 0);
 >>>>>>> v3.18
@@ -735,16 +777,22 @@ found:
 		file->already_used = 1;
 		if (!file->use_pkey_index) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "user_mad: process %s did not enable "
 			       "P_Key index support.\n", current->comm);
 			printk(KERN_WARNING "user_mad:   Documentation/infiniband/user_mad.txt "
 			       "has info on the new ABI.\n");
 =======
+=======
+>>>>>>> v3.18
 			dev_warn(file->port->dev,
 				"process %s did not enable P_Key index support.\n",
 				current->comm);
 			dev_warn(file->port->dev,
 				"   Documentation/infiniband/user_mad.txt has info on the new ABI.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -764,7 +812,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ib_umad_reg_agent2(struct ib_umad_file *file, void __user *arg)
 {
 	struct ib_user_mad_reg_req2 ureq;
@@ -878,6 +929,9 @@ out:
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ib_umad_unreg_agent(struct ib_umad_file *file, u32 __user *arg)
 {
@@ -935,6 +989,11 @@ static long ib_umad_ioctl(struct file *filp, unsigned int cmd,
 	case IB_USER_MAD_ENABLE_PKEY:
 		return ib_umad_enable_pkey(filp->private_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IB_USER_MAD_REGISTER_AGENT2:
+		return ib_umad_reg_agent2(filp->private_data, (void __user *) arg);
+>>>>>>> v3.18
 =======
 	case IB_USER_MAD_REGISTER_AGENT2:
 		return ib_umad_reg_agent2(filp->private_data, (void __user *) arg);
@@ -956,6 +1015,11 @@ static long ib_umad_compat_ioctl(struct file *filp, unsigned int cmd,
 	case IB_USER_MAD_ENABLE_PKEY:
 		return ib_umad_enable_pkey(filp->private_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IB_USER_MAD_REGISTER_AGENT2:
+		return ib_umad_reg_agent2(filp->private_data, compat_ptr(arg));
+>>>>>>> v3.18
 =======
 	case IB_USER_MAD_REGISTER_AGENT2:
 		return ib_umad_reg_agent2(filp->private_data, compat_ptr(arg));
@@ -1179,7 +1243,11 @@ static CLASS_ATTR_STRING(abi_version, S_IRUGO,
 static dev_t overflow_maj;
 static DECLARE_BITMAP(overflow_map, IB_UMAD_MAX_PORTS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int find_overflow_devnum(void)
+=======
+static int find_overflow_devnum(struct ib_device *device)
+>>>>>>> v3.18
 =======
 static int find_overflow_devnum(struct ib_device *device)
 >>>>>>> v3.18
@@ -1191,7 +1259,12 @@ static int find_overflow_devnum(struct ib_device *device)
 					  "infiniband_mad");
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "user_mad: couldn't register dynamic device number\n");
+=======
+			dev_err(&device->dev,
+				"couldn't register dynamic device number\n");
+>>>>>>> v3.18
 =======
 			dev_err(&device->dev,
 				"couldn't register dynamic device number\n");
@@ -1219,7 +1292,11 @@ static int ib_umad_init_port(struct ib_device *device, int port_num,
 	if (devnum >= IB_UMAD_MAX_PORTS) {
 		spin_unlock(&port_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		devnum = find_overflow_devnum();
+=======
+		devnum = find_overflow_devnum(device);
+>>>>>>> v3.18
 =======
 		devnum = find_overflow_devnum(device);
 >>>>>>> v3.18
@@ -1409,7 +1486,11 @@ static int __init ib_umad_init(void)
 				     "infiniband_mad");
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "user_mad: couldn't register device number\n");
+=======
+		pr_err("couldn't register device number\n");
+>>>>>>> v3.18
 =======
 		pr_err("couldn't register device number\n");
 >>>>>>> v3.18
@@ -1420,7 +1501,11 @@ static int __init ib_umad_init(void)
 	if (IS_ERR(umad_class)) {
 		ret = PTR_ERR(umad_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "user_mad: couldn't create class infiniband_mad\n");
+=======
+		pr_err("couldn't create class infiniband_mad\n");
+>>>>>>> v3.18
 =======
 		pr_err("couldn't create class infiniband_mad\n");
 >>>>>>> v3.18
@@ -1432,7 +1517,11 @@ static int __init ib_umad_init(void)
 	ret = class_create_file(umad_class, &class_attr_abi_version.attr);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "user_mad: couldn't create abi_version attribute\n");
+=======
+		pr_err("couldn't create abi_version attribute\n");
+>>>>>>> v3.18
 =======
 		pr_err("couldn't create abi_version attribute\n");
 >>>>>>> v3.18
@@ -1442,7 +1531,11 @@ static int __init ib_umad_init(void)
 	ret = ib_register_client(&umad_client);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "user_mad: couldn't register ib_umad client\n");
+=======
+		pr_err("couldn't register ib_umad client\n");
+>>>>>>> v3.18
 =======
 		pr_err("couldn't register ib_umad client\n");
 >>>>>>> v3.18

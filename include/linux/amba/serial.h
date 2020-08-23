@@ -41,7 +41,11 @@
 #define UART010_CR		0x14	/* Control register. */
 #define UART01x_FR		0x18	/* Flag register (Read only). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART010_IIR		0x1C	/* Interrupt indentification register (Read). */
+=======
+#define UART010_IIR		0x1C	/* Interrupt identification register (Read). */
+>>>>>>> v3.18
 =======
 #define UART010_IIR		0x1C	/* Interrupt identification register (Read). */
 >>>>>>> v3.18

@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _CAN_PLATFORM_SJA1000_H_
 #define _CAN_PLATFORM_SJA1000_H_
+=======
+#ifndef _CAN_PLATFORM_SJA1000_H
+#define _CAN_PLATFORM_SJA1000_H
+>>>>>>> v3.18
 =======
 #ifndef _CAN_PLATFORM_SJA1000_H
 #define _CAN_PLATFORM_SJA1000_H
@@ -38,7 +43,11 @@ struct sja1000_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* !_CAN_PLATFORM_SJA1000_H_ */
+=======
+#endif	/* !_CAN_PLATFORM_SJA1000_H */
+>>>>>>> v3.18
 =======
 #endif	/* !_CAN_PLATFORM_SJA1000_H */
 >>>>>>> v3.18

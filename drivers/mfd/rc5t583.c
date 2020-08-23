@@ -75,7 +75,11 @@ static struct deepsleep_control_data deepsleep_data[] = {
 	(RC5T583_EXT_PWRREQ1_CONTROL | RC5T583_EXT_PWRREQ2_CONTROL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell rc5t583_subdevs[] = {
+=======
+static const struct mfd_cell rc5t583_subdevs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell rc5t583_subdevs[] = {
 >>>>>>> v3.18
@@ -255,7 +259,11 @@ static int rc5t583_i2c_probe(struct i2c_client *i2c,
 {
 	struct rc5t583 *rc5t583;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rc5t583_platform_data *pdata = i2c->dev.platform_data;
+=======
+	struct rc5t583_platform_data *pdata = dev_get_platdata(&i2c->dev);
+>>>>>>> v3.18
 =======
 	struct rc5t583_platform_data *pdata = dev_get_platdata(&i2c->dev);
 >>>>>>> v3.18

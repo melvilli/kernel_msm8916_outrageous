@@ -462,8 +462,12 @@ static void
 mptspi_target_destroy(struct scsi_target *starget)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (starget->hostdata)
 		kfree(starget->hostdata);
+=======
+	kfree(starget->hostdata);
+>>>>>>> v3.18
 =======
 	kfree(starget->hostdata);
 >>>>>>> v3.18
@@ -625,7 +629,11 @@ static void mptspi_read_parameters(struct scsi_target *starget)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -789,9 +797,15 @@ static int mptspi_slave_configure(struct scsi_device *sdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 mptspi_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 {
 	struct _MPT_SCSI_HOST *hd = shost_priv(SCpnt->device->host);
+=======
+mptspi_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
+{
+	struct _MPT_SCSI_HOST *hd = shost_priv(shost);
+>>>>>>> v3.18
 =======
 mptspi_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 {
@@ -803,7 +817,11 @@ mptspi_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 	if (!vdevice || !vdevice->vtarget) {
 		SCpnt->result = DID_NO_CONNECT << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done(SCpnt);
+=======
+		SCpnt->scsi_done(SCpnt);
+>>>>>>> v3.18
 =======
 		SCpnt->scsi_done(SCpnt);
 >>>>>>> v3.18
@@ -814,7 +832,11 @@ mptspi_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 		mptscsih_is_phys_disk(ioc, 0, SCpnt->device->id) == 0) {
 		SCpnt->result = DID_NO_CONNECT << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done(SCpnt);
+=======
+		SCpnt->scsi_done(SCpnt);
+>>>>>>> v3.18
 =======
 		SCpnt->scsi_done(SCpnt);
 >>>>>>> v3.18
@@ -825,11 +847,17 @@ mptspi_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 		ddvprintk(ioc, scsi_print_command(SCpnt));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mptscsih_qcmd(SCpnt,done);
 }
 
 static DEF_SCSI_QCMD(mptspi_qcmd)
 
+=======
+	return mptscsih_qcmd(SCpnt);
+}
+
+>>>>>>> v3.18
 =======
 	return mptscsih_qcmd(SCpnt);
 }

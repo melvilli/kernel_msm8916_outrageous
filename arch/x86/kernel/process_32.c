@@ -25,7 +25,10 @@
 #include <linux/delay.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mc146818rtc.h>
@@ -114,12 +117,15 @@ void __show_regs(struct pt_regs *regs, int all)
 	get_debugreg(d2, 2);
 	get_debugreg(d3, 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEFAULT "DR0: %08lx DR1: %08lx DR2: %08lx DR3: %08lx\n",
 			d0, d1, d2, d3);
 
 	get_debugreg(d6, 6);
 	get_debugreg(d7, 7);
 =======
+=======
+>>>>>>> v3.18
 	get_debugreg(d6, 6);
 	get_debugreg(d7, 7);
 
@@ -130,6 +136,9 @@ void __show_regs(struct pt_regs *regs, int all)
 
 	printk(KERN_DEFAULT "DR0: %08lx DR1: %08lx DR2: %08lx DR3: %08lx\n",
 			d0, d1, d2, d3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk(KERN_DEFAULT "DR6: %08lx DR7: %08lx\n",
 			d6, d7);
@@ -151,6 +160,10 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	p->thread.sp = (unsigned long) childregs;
 	p->thread.sp0 = (unsigned long) (childregs+1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(p->thread.ptrace_bps, 0, sizeof(p->thread.ptrace_bps));
+>>>>>>> v3.18
 =======
 	memset(p->thread.ptrace_bps, 0, sizeof(p->thread.ptrace_bps));
 >>>>>>> v3.18
@@ -169,9 +182,13 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 		childregs->cs = __KERNEL_CS | get_kernel_rpl();
 		childregs->flags = X86_EFLAGS_IF | X86_EFLAGS_FIXED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->fpu_counter = 0;
 		p->thread.io_bitmap_ptr = NULL;
 		memset(p->thread.ptrace_bps, 0, sizeof(p->thread.ptrace_bps));
+=======
+		p->thread.io_bitmap_ptr = NULL;
+>>>>>>> v3.18
 =======
 		p->thread.io_bitmap_ptr = NULL;
 >>>>>>> v3.18
@@ -186,7 +203,10 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	task_user_gs(p) = get_user_gs(current_pt_regs());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->fpu_counter = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	p->thread.io_bitmap_ptr = NULL;
@@ -194,8 +214,11 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	err = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(p->thread.ptrace_bps, 0, sizeof(p->thread.ptrace_bps));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (unlikely(test_tsk_thread_flag(tsk, TIF_IO_BITMAP))) {
@@ -273,7 +296,11 @@ EXPORT_SYMBOL_GPL(start_thread);
  * for example.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 __notrace_funcgraph struct task_struct *
+=======
+__visible __notrace_funcgraph struct task_struct *
+>>>>>>> v3.18
 =======
 __visible __notrace_funcgraph struct task_struct *
 >>>>>>> v3.18
@@ -322,7 +349,10 @@ __switch_to(struct task_struct *prev_p, struct task_struct *next_p)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * If it were not for PREEMPT_ACTIVE we could guarantee that the
 	 * preempt_count of all tasks was equal here and this would not be
 	 * needed.
@@ -331,6 +361,9 @@ __switch_to(struct task_struct *prev_p, struct task_struct *next_p)
 	this_cpu_write(__preempt_count, task_thread_info(next_p)->saved_preempt_count);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Now maybe handle debug registers and/or IO bitmaps
 	 */
@@ -348,11 +381,17 @@ __switch_to(struct task_struct *prev_p, struct task_struct *next_p)
 	arch_end_context_switch(next_p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	this_cpu_write(kernel_stack,
 		  (unsigned long)task_stack_page(next_p) +
 		  THREAD_SIZE - KERNEL_STACK_OFFSET);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Restore %gs if needed (which is common)

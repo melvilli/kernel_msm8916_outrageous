@@ -42,9 +42,12 @@ static inline int crypto_set_driver_name(struct crypto_alg *alg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int crypto_check_alg(struct crypto_alg *alg)
 {
 =======
+=======
+>>>>>>> v3.18
 static inline void crypto_check_module_sig(struct module *mod)
 {
 #ifdef CONFIG_CRYPTO_FIPS
@@ -59,6 +62,9 @@ static int crypto_check_alg(struct crypto_alg *alg)
 {
 	crypto_check_module_sig(alg->cra_module);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (alg->cra_alignmask & (alg->cra_alignmask + 1))
 		return -EINVAL;
@@ -343,7 +349,11 @@ static void crypto_wait_for_test(struct crypto_larval *larval)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = wait_for_completion_killable(&larval->completion);
+=======
+	err = wait_for_completion_interruptible(&larval->completion);
+>>>>>>> v3.18
 =======
 	err = wait_for_completion_interruptible(&larval->completion);
 >>>>>>> v3.18
@@ -359,7 +369,10 @@ int crypto_register_alg(struct crypto_alg *alg)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alg->cra_flags &= ~CRYPTO_ALG_DEAD;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = crypto_check_alg(alg);
@@ -456,6 +469,11 @@ int crypto_register_template(struct crypto_template *tmpl)
 	down_write(&crypto_alg_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	crypto_check_module_sig(tmpl->module);
+
+>>>>>>> v3.18
 =======
 	crypto_check_module_sig(tmpl->module);
 
@@ -526,8 +544,13 @@ static struct crypto_template *__crypto_lookup_template(const char *name)
 struct crypto_template *crypto_lookup_template(const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return try_then_request_module(__crypto_lookup_template(name),
 				       "crypto-%s", name);
+=======
+	return try_then_request_module(__crypto_lookup_template(name), "%s",
+				       name);
+>>>>>>> v3.18
 =======
 	return try_then_request_module(__crypto_lookup_template(name), "%s",
 				       name);

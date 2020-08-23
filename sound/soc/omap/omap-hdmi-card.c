@@ -34,9 +34,15 @@ static struct snd_soc_dai_link omap_hdmi_dai = {
 	.stream_name = "HDMI",
 	.cpu_dai_name = "omap-hdmi-audio-dai",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name = "omap-pcm-audio",
 	.codec_name = "hdmi-audio-codec",
 	.codec_dai_name = "omap-hdmi-hifi",
+=======
+	.platform_name = "omap-hdmi-audio-dai",
+	.codec_name = "hdmi-audio-codec",
+	.codec_dai_name = "hdmi-hifi",
+>>>>>>> v3.18
 =======
 	.platform_name = "omap-hdmi-audio-dai",
 	.codec_name = "hdmi-audio-codec",

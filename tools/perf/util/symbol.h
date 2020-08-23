@@ -13,13 +13,19 @@
 #include <libgen.h>
 #include "build-id.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef LIBELF_SUPPORT
 =======
+=======
+>>>>>>> v3.18
 #include "event.h"
 #include "util.h"
 
 #ifdef HAVE_LIBELF_SUPPORT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <libelf.h>
 #include <gelf.h>
@@ -29,7 +35,11 @@
 #include "dso.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_CPLUS_DEMANGLE
+=======
+#ifdef HAVE_CPLUS_DEMANGLE_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_CPLUS_DEMANGLE_SUPPORT
 >>>>>>> v3.18
@@ -58,7 +68,11 @@ static inline char *bfd_demangle(void __maybe_unused *v,
  * for newer versions we can use mmap to reduce memory usage:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBELF_MMAP
+=======
+#ifdef HAVE_LIBELF_MMAP_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_LIBELF_MMAP_SUPPORT
 >>>>>>> v3.18
@@ -68,8 +82,11 @@ static inline char *bfd_demangle(void __maybe_unused *v,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef DMGL_PARAMS
 =======
+=======
+>>>>>>> v3.18
 #ifdef HAVE_LIBELF_SUPPORT
 extern Elf_Scn *elf_section_by_name(Elf *elf, GElf_Ehdr *ep,
 				GElf_Shdr *shp, const char *name, size_t *idx);
@@ -77,6 +94,9 @@ extern Elf_Scn *elf_section_by_name(Elf *elf, GElf_Ehdr *ep,
 
 #ifndef DMGL_PARAMS
 #define DMGL_NO_OPTS     0              /* For readability... */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DMGL_PARAMS      (1 << 0)       /* Include function args */
 #define DMGL_ANSI        (1 << 1)       /* Include const, volatile, etc */
@@ -100,10 +120,13 @@ void symbol__delete(struct symbol *sym);
 void symbols__delete(struct rb_root *symbols);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline size_t symbol__size(const struct symbol *sym)
 {
 	return sym->end - sym->start + 1;
 =======
+=======
+>>>>>>> v3.18
 /* symbols__for_each_entry - iterate over symbols (rb_root)
  *
  * @symbols: the rb_root of symbols
@@ -118,6 +141,9 @@ static inline size_t symbol__size(const struct symbol *sym)
 static inline size_t symbol__size(const struct symbol *sym)
 {
 	return sym->end - sym->start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -128,6 +154,10 @@ struct symbol_conf {
 	unsigned short	nr_events;
 	bool		try_vmlinux_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ignore_vmlinux,
+>>>>>>> v3.18
 =======
 			ignore_vmlinux,
 >>>>>>> v3.18
@@ -138,6 +168,10 @@ struct symbol_conf {
 			show_total_period,
 			use_callchain,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cumulate_callchain,
+>>>>>>> v3.18
 =======
 			cumulate_callchain,
 >>>>>>> v3.18
@@ -149,12 +183,18 @@ struct symbol_conf {
 			annotate_src,
 			event_group,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			demangle;
 =======
+=======
+>>>>>>> v3.18
 			demangle,
 			demangle_kernel,
 			filter_relative,
 			show_hist_headers;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char	*vmlinux_name,
 			*kallsyms_name,
@@ -180,7 +220,10 @@ struct symbol_conf {
 
 extern struct symbol_conf symbol_conf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int __symbol__join_symfs(char *bf, size_t size, const char *path)
 {
@@ -189,6 +232,9 @@ static inline int __symbol__join_symfs(char *bf, size_t size, const char *path)
 
 #define symbol__join_symfs(bf, path) __symbol__join_symfs(bf, sizeof(bf), path)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int vmlinux_path__nr_entries;
 extern char **vmlinux_path;
@@ -232,6 +278,10 @@ struct mem_info {
 
 struct addr_location {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct machine *machine;
+>>>>>>> v3.18
 =======
 	struct machine *machine;
 >>>>>>> v3.18
@@ -241,7 +291,11 @@ struct addr_location {
 	u64	      addr;
 	char	      level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool	      filtered;
+=======
+	u8	      filtered;
+>>>>>>> v3.18
 =======
 	u8	      filtered;
 >>>>>>> v3.18
@@ -255,7 +309,11 @@ struct symsrc {
 	enum dso_binary_type type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBELF_SUPPORT
+=======
+#ifdef HAVE_LIBELF_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_LIBELF_SUPPORT
 >>>>>>> v3.18
@@ -275,6 +333,10 @@ struct symsrc {
 
 	bool adjust_symbols;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_64_bit;
+>>>>>>> v3.18
 =======
 	bool is_64_bit;
 >>>>>>> v3.18
@@ -290,7 +352,12 @@ bool symsrc__possibly_runtime(struct symsrc *ss);
 int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter);
 int dso__load_vmlinux(struct dso *dso, struct map *map,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      const char *vmlinux, symbol_filter_t filter);
+=======
+		      const char *vmlinux, bool vmlinux_allocated,
+		      symbol_filter_t filter);
+>>>>>>> v3.18
 =======
 		      const char *vmlinux, bool vmlinux_allocated,
 		      symbol_filter_t filter);
@@ -306,6 +373,7 @@ struct symbol *dso__find_symbol_by_name(struct dso *dso, enum map_type type,
 					const char *name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int filename__read_build_id(const char *filename, void *bf, size_t size);
 int sysfs__read_build_id(const char *filename, void *bf, size_t size);
 int kallsyms__parse(const char *filename, void *arg,
@@ -316,6 +384,8 @@ int filename__read_debuglink(const char *filename, char *debuglink,
 
 int symbol__init(void);
 =======
+=======
+>>>>>>> v3.18
 struct symbol *dso__first_symbol(struct dso *dso, enum map_type type);
 struct symbol *dso__next_symbol(struct symbol *sym);
 
@@ -331,6 +401,9 @@ int filename__read_debuglink(const char *filename, char *debuglink,
 
 struct perf_session_env;
 int symbol__init(struct perf_session_env *env);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void symbol__exit(void);
 void symbol__elf_init(void);
@@ -343,6 +416,10 @@ bool symbol_type__is_a(char symbol_type, enum map_type map_type);
 bool symbol__restricted_filename(const char *filename,
 				 const char *restricted_filename);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool symbol__is_idle(struct symbol *sym);
+>>>>>>> v3.18
 =======
 bool symbol__is_idle(struct symbol *sym);
 >>>>>>> v3.18
@@ -359,7 +436,10 @@ void symbols__fixup_end(struct rb_root *symbols);
 void __map_groups__fixup_end(struct map_groups *mg, enum map_type type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef int (*mapfn_t)(u64 start, u64 len, u64 pgoff, void *data);
 int file__read_maps(int fd, bool exe, mapfn_t mapfn, void *data,
 		    bool *is_64_bit);
@@ -384,5 +464,8 @@ int compare_proc_modules(const char *from, const char *to);
 int setup_list(struct strlist **list, const char *list_str,
 	       const char *list_name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PERF_SYMBOL */

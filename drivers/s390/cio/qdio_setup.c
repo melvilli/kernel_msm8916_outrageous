@@ -18,6 +18,11 @@
 #include "qdio_debug.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QBUFF_PER_PAGE (PAGE_SIZE / sizeof(struct qdio_buffer))
+
+>>>>>>> v3.18
 =======
 #define QBUFF_PER_PAGE (PAGE_SIZE / sizeof(struct qdio_buffer))
 
@@ -38,7 +43,10 @@ void qdio_release_aob(struct qaob *aob)
 EXPORT_SYMBOL_GPL(qdio_release_aob);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * qdio_free_buffers() - free qdio buffers
  * @buf: array of pointers to qdio buffers
@@ -90,6 +98,9 @@ void qdio_reset_buffers(struct qdio_buffer **buf, unsigned int count)
 }
 EXPORT_SYMBOL_GPL(qdio_reset_buffers);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * qebsm is only available under 64bit but the adapter sets the feature
@@ -314,6 +325,7 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 
 	DBF_EVENT("getssqd:%4x", schid->sch_no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq_ptr != NULL)
 		ssqd = (struct chsc_ssqd_area *)irq_ptr->chsc_page;
 	else
@@ -334,6 +346,8 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 	if (rc)
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 	if (!irq_ptr) {
 		ssqd = (struct chsc_ssqd_area *)__get_free_page(GFP_KERNEL);
 		if (!ssqd)
@@ -345,11 +359,15 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 	rc = chsc_ssqd(*schid, ssqd);
 	if (rc)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(ssqd->qdio_ssqd.flags & CHSC_FLAG_QDIO_CAPABILITY) ||
 	    !(ssqd->qdio_ssqd.flags & CHSC_FLAG_VALIDITY) ||
 	    (ssqd->qdio_ssqd.sch != schid->sch_no))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -EINVAL;
 
@@ -363,6 +381,8 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		rc = -EINVAL;
 
 	if (!rc)
@@ -373,6 +393,9 @@ out:
 		free_page((unsigned long)ssqd);
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -382,7 +405,11 @@ void qdio_setup_ssqd_info(struct qdio_irq *irq_ptr)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = qdio_setup_get_ssqd(irq_ptr, &irq_ptr->schid, NULL);
+=======
+	rc = qdio_setup_get_ssqd(irq_ptr, &irq_ptr->schid, &irq_ptr->ssqd_desc);
+>>>>>>> v3.18
 =======
 	rc = qdio_setup_get_ssqd(irq_ptr, &irq_ptr->schid, &irq_ptr->ssqd_desc);
 >>>>>>> v3.18

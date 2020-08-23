@@ -5,7 +5,11 @@ for the davinci_emac interface contains.
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: "ti,davinci-dm6467-emac";
+=======
+- compatible: "ti,davinci-dm6467-emac" or "ti,am3517-emac"
+>>>>>>> v3.18
 =======
 - compatible: "ti,davinci-dm6467-emac" or "ti,am3517-emac"
 >>>>>>> v3.18
@@ -15,10 +19,13 @@ Required properties:
 - ti,davinci-ctrl-ram-offset: offset to control module ram
 - ti,davinci-ctrl-ram-size: size of control module ram
 <<<<<<< HEAD
+<<<<<<< HEAD
 - ti,davinci-rmii-en: use RMII
 - ti,davinci-no-bd-ram: has the emac controller BD RAM
 - phy-handle: Contains a phandle to an Ethernet PHY.
               if not, davinci_emac driver defaults to 100/FULL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - interrupts: interrupt mapping for the davinci emac interrupts sources:
@@ -29,12 +36,18 @@ Required properties:
 
 Optional properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - local-mac-address : 6 bytes, mac address
 =======
+=======
+>>>>>>> v3.18
 - phy-handle: See ethernet.txt file in the same directory.
               If absent, davinci_emac driver defaults to 100/FULL.
 - ti,davinci-rmii-en: 1 byte, 1 means use RMII
 - ti,davinci-no-bd-ram: boolean, does EMAC have BD RAM?
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example (enbw_cmc board):

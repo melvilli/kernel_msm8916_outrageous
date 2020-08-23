@@ -57,7 +57,11 @@
 #define USB_CDC_NCM_TYPE		0x1a
 #define USB_CDC_MBIM_TYPE		0x1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_CDC_EXT_MBB_TYPE		0x1c
+=======
+#define USB_CDC_MBIM_EXTENDED_TYPE	0x1c
+>>>>>>> v3.18
 =======
 #define USB_CDC_MBIM_EXTENDED_TYPE	0x1c
 >>>>>>> v3.18
@@ -211,8 +215,13 @@ struct usb_cdc_mbim_desc {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* "Extended MBIM Functional Descriptor" */
 struct usb_cdc_ext_mbb_desc {
+=======
+/* "MBIM Extended Functional Descriptor" from CDC MBIM spec 1.0 errata-1 */
+struct usb_cdc_mbim_extended_desc {
+>>>>>>> v3.18
 =======
 /* "MBIM Extended Functional Descriptor" from CDC MBIM spec 1.0 errata-1 */
 struct usb_cdc_mbim_extended_desc {
@@ -222,15 +231,21 @@ struct usb_cdc_mbim_extended_desc {
 	__u8	bDescriptorSubType;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16	bcdMbbExtendedVersion;
 	__u8	bMaxOutstandingCmdMsges;
 	__le16	wMTU;
 } __packed;
 =======
+=======
+>>>>>>> v3.18
 	__le16	bcdMBIMExtendedVersion;
 	__u8	bMaxOutstandingCommandMessages;
 	__le16	wMTU;
 } __attribute__ ((packed));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*-------------------------------------------------------------------------*/
@@ -248,7 +263,10 @@ struct usb_cdc_mbim_extended_desc {
 #define USB_CDC_SEND_ENCAPSULATED_COMMAND	0x00
 #define USB_CDC_GET_ENCAPSULATED_RESPONSE	0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_CDC_RESET_FUNCTION			0x05
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define USB_CDC_REQ_SET_LINE_CODING		0x20

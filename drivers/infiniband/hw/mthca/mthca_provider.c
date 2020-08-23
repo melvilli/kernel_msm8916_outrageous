@@ -978,7 +978,11 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 {
 	struct mthca_dev *dev = to_mdev(pd->device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
+=======
+	struct scatterlist *sg;
+>>>>>>> v3.18
 =======
 	struct scatterlist *sg;
 >>>>>>> v3.18
@@ -987,7 +991,11 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	u64 *pages;
 	int shift, n, len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, k;
+=======
+	int i, k, entry;
+>>>>>>> v3.18
 =======
 	int i, k, entry;
 >>>>>>> v3.18
@@ -1019,10 +1027,14 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 
 	shift = ffs(mr->umem->page_size) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	n = 0;
 	list_for_each_entry(chunk, &mr->umem->chunk_list, list)
 		n += chunk->nents;
+=======
+	n = mr->umem->nmap;
+>>>>>>> v3.18
 =======
 	n = mr->umem->nmap;
 >>>>>>> v3.18
@@ -1044,6 +1056,7 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	write_mtt_size = min(mthca_write_mtt_size(dev), (int) (PAGE_SIZE / sizeof *pages));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(chunk, &mr->umem->chunk_list, list)
 		for (j = 0; j < chunk->nmap; ++j) {
 			len = sg_dma_len(&chunk->page_list[j]) >> shift;
@@ -1064,6 +1077,8 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 	for_each_sg(mr->umem->sg_head.sgl, sg, mr->umem->nmap, entry) {
 		len = sg_dma_len(sg) >> shift;
 		for (k = 0; k < len; ++k) {
@@ -1082,6 +1097,9 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i)

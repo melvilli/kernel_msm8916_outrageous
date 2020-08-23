@@ -90,6 +90,7 @@
 typedef int (*llc_conn_action_t)(struct sock *sk, struct sk_buff *skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int llc_conn_ac_clear_remote_busy(struct sock *sk, struct sk_buff *skb);
 extern int llc_conn_ac_conn_ind(struct sock *sk, struct sk_buff *skb);
 extern int llc_conn_ac_conn_confirm(struct sock* sk, struct sk_buff *skb);
@@ -201,6 +202,8 @@ extern void llc_conn_rej_tmr_cb(unsigned long timeout_data);
 
 extern void llc_conn_set_p_flag(struct sock *sk, u8 value);
 =======
+=======
+>>>>>>> v3.18
 int llc_conn_ac_clear_remote_busy(struct sock *sk, struct sk_buff *skb);
 int llc_conn_ac_conn_ind(struct sock *sk, struct sk_buff *skb);
 int llc_conn_ac_conn_confirm(struct sock *sk, struct sk_buff *skb);
@@ -289,5 +292,8 @@ void llc_conn_ack_tmr_cb(unsigned long timeout_data);
 void llc_conn_rej_tmr_cb(unsigned long timeout_data);
 
 void llc_conn_set_p_flag(struct sock *sk, u8 value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LLC_C_AC_H */

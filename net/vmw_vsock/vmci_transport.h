@@ -20,8 +20,13 @@
 #include <linux/vmw_vmci_api.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "vsock_addr.h"
 #include "af_vsock.h"
+=======
+#include <net/vsock_addr.h>
+#include <net/af_vsock.h>
+>>>>>>> v3.18
 =======
 #include <net/vsock_addr.h>
 #include <net/af_vsock.h>

@@ -227,6 +227,10 @@ static struct ib_cq *iwch_create_cq(struct ib_device *ibdev, int entries, int ve
 					     sizeof(struct t3_cqe));
 			uresp.memsize = mm->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			uresp.reserved = 0;
+>>>>>>> v3.18
 =======
 			uresp.reserved = 0;
 >>>>>>> v3.18
@@ -622,9 +626,14 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	__be64 *pages;
 	int shift, n, len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, k;
 	int err = 0;
 	struct ib_umem_chunk *chunk;
+=======
+	int i, k, entry;
+	int err = 0;
+>>>>>>> v3.18
 =======
 	int i, k, entry;
 	int err = 0;
@@ -634,7 +643,11 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	struct iwch_mr *mhp;
 	struct iwch_reg_user_mr_resp uresp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct scatterlist *sg;
+>>>>>>> v3.18
 =======
 	struct scatterlist *sg;
 >>>>>>> v3.18
@@ -658,9 +671,13 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	shift = ffs(mhp->umem->page_size) - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = 0;
 	list_for_each_entry(chunk, &mhp->umem->chunk_list, list)
 		n += chunk->nents;
+=======
+	n = mhp->umem->nmap;
+>>>>>>> v3.18
 =======
 	n = mhp->umem->nmap;
 >>>>>>> v3.18
@@ -678,6 +695,7 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	i = n = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(chunk, &mhp->umem->chunk_list, list)
 		for (j = 0; j < chunk->nmap; ++j) {
 			len = sg_dma_len(&chunk->page_list[j]) >> shift;
@@ -685,10 +703,15 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				pages[i++] = cpu_to_be64(sg_dma_address(
 					&chunk->page_list[j]) +
 =======
+=======
+>>>>>>> v3.18
 	for_each_sg(mhp->umem->sg_head.sgl, sg, mhp->umem->nmap, entry) {
 			len = sg_dma_len(sg) >> shift;
 			for (k = 0; k < len; ++k) {
 				pages[i++] = cpu_to_be64(sg_dma_address(sg) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					mhp->umem->page_size * k);
 				if (i == PAGE_SIZE / sizeof *pages) {
@@ -700,7 +723,11 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

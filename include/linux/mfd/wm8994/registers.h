@@ -2669,11 +2669,17 @@
  * R772 (0x304) - AIF1ADC LRCLK
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define WM8958_AIF1_LRCLK_INV                   0x1000  /* AIF1_LRCLK_INV */
 #define WM8958_AIF1_LRCLK_INV_MASK              0x1000  /* AIF1_LRCLK_INV */
 #define WM8958_AIF1_LRCLK_INV_SHIFT                 12  /* AIF1_LRCLK_INV */
 #define WM8958_AIF1_LRCLK_INV_WIDTH                  1  /* AIF1_LRCLK_INV */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WM8994_AIF1ADC_LRCLK_DIR                0x0800  /* AIF1ADC_LRCLK_DIR */
 #define WM8994_AIF1ADC_LRCLK_DIR_MASK           0x0800  /* AIF1ADC_LRCLK_DIR */
@@ -2687,11 +2693,17 @@
  * R773 (0x305) - AIF1DAC LRCLK
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define WM8958_AIF1_LRCLK_INV                   0x1000  /* AIF1_LRCLK_INV */
 #define WM8958_AIF1_LRCLK_INV_MASK              0x1000  /* AIF1_LRCLK_INV */
 #define WM8958_AIF1_LRCLK_INV_SHIFT                 12  /* AIF1_LRCLK_INV */
 #define WM8958_AIF1_LRCLK_INV_WIDTH                  1  /* AIF1_LRCLK_INV */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WM8994_AIF1DAC_LRCLK_DIR                0x0800  /* AIF1DAC_LRCLK_DIR */
 #define WM8994_AIF1DAC_LRCLK_DIR_MASK           0x0800  /* AIF1DAC_LRCLK_DIR */

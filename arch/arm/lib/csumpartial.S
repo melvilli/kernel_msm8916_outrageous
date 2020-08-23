@@ -98,7 +98,11 @@ td3	.req	lr
 #endif
 		adcnes	sum, sum, td0		@ update checksum
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

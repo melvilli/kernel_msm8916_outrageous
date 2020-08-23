@@ -22,6 +22,7 @@ int mc13xxx_reg_rmw(struct mc13xxx *mc13xxx, unsigned int offset,
 		u32 mask, u32 val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mc13xxx_get_flags(struct mc13xxx *mc13xxx);
 
 int mc13xxx_irq_request(struct mc13xxx *mc13xxx, int irq,
@@ -36,12 +37,17 @@ int mc13xxx_irq_status(struct mc13xxx *mc13xxx, int irq,
 		int *enabled, int *pending);
 int mc13xxx_irq_ack(struct mc13xxx *mc13xxx, int irq);
 =======
+=======
+>>>>>>> v3.18
 int mc13xxx_irq_request(struct mc13xxx *mc13xxx, int irq,
 		irq_handler_t handler, const char *name, void *dev);
 int mc13xxx_irq_free(struct mc13xxx *mc13xxx, int irq, void *dev);
 
 int mc13xxx_irq_status(struct mc13xxx *mc13xxx, int irq,
 		int *enabled, int *pending);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int mc13xxx_get_flags(struct mc13xxx *mc13xxx);
@@ -51,7 +57,10 @@ int mc13xxx_adc_do_conversion(struct mc13xxx *mc13xxx,
 		u8 ato, bool atox, unsigned int *sample);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Deprecated calls */
 static inline int mc13xxx_irq_ack(struct mc13xxx *mc13xxx, int irq)
 {
@@ -75,6 +84,9 @@ int mc13xxx_irq_unmask(struct mc13xxx *mc13xxx, int irq);
 #define MC13783_AUDIO_CODEC	40
 #define MC13783_AUDIO_DAC	41
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MC13XXX_IRQ_ADCDONE	0
 #define MC13XXX_IRQ_ADCBISDONE	1
@@ -99,8 +111,11 @@ int mc13xxx_irq_unmask(struct mc13xxx *mc13xxx, int irq);
 #define MC13XXX_IRQ_CLK		38
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MC13XXX_NUM_IRQ		46
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct regulator_init_data;
@@ -116,6 +131,7 @@ struct mc13xxx_regulator_platform_data {
 	struct mc13xxx_regulator_init_data *regulators;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct mc13xxx_led_platform_data {
 #define MC13783_LED_MD		0
@@ -183,6 +199,8 @@ struct mc13xxx_leds_platform_data {
 
 struct mc13xxx_buttons_platform_data {
 =======
+=======
+>>>>>>> v3.18
 enum {
 	/* MC13783 LED IDs */
 	MC13783_LED_MD,
@@ -272,6 +290,9 @@ struct mc13xxx_leds_platform_data {
 	u32 led_control[MAX_LED_CONTROL_REGS];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MC13783_BUTTON_DBNC_0MS		0
 #define MC13783_BUTTON_DBNC_30MS	1
@@ -281,6 +302,11 @@ struct mc13xxx_leds_platform_data {
 #define MC13783_BUTTON_POL_INVERT	(1 << 3)
 #define MC13783_BUTTON_RESET_EN		(1 << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+struct mc13xxx_buttons_platform_data {
+>>>>>>> v3.18
 =======
 
 struct mc13xxx_buttons_platform_data {
@@ -294,6 +320,12 @@ struct mc13xxx_buttons_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC13783_TS_ATO_FIRST	false
+#define MC13783_TS_ATO_EACH	true
+
+>>>>>>> v3.18
 =======
 #define MC13783_TS_ATO_FIRST	false
 #define MC13783_TS_ATO_EACH	true
@@ -305,9 +337,12 @@ struct mc13xxx_ts_platform_data {
 	 * about 30.5ms */
 	u8 ato;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MC13783_TS_ATO_FIRST false
 #define MC13783_TS_ATO_EACH  true
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Use the ATO delay only for the first conversion or for each one */
@@ -325,18 +360,24 @@ struct mc13xxx_codec_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mc13xxx_platform_data {
 #define MC13XXX_USE_TOUCHSCREEN (1 << 0)
 #define MC13XXX_USE_CODEC	(1 << 1)
 #define MC13XXX_USE_ADC		(1 << 2)
 #define MC13XXX_USE_RTC		(1 << 3)
 =======
+=======
+>>>>>>> v3.18
 #define MC13XXX_USE_TOUCHSCREEN	(1 << 0)
 #define MC13XXX_USE_CODEC	(1 << 1)
 #define MC13XXX_USE_ADC		(1 << 2)
 #define MC13XXX_USE_RTC		(1 << 3)
 
 struct mc13xxx_platform_data {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int flags;
 

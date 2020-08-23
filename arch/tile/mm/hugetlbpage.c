@@ -50,6 +50,7 @@ int huge_shift[HUGE_SHIFT_ENTRIES] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This routine is a hybrid of pte_alloc_map() and pte_alloc_kernel().
  * It assumes that L2 PTEs are never in HIGHMEM (we don't support that).
@@ -84,6 +85,8 @@ static pte_t *pte_alloc_hugetlb(struct mm_struct *mm, pmd_t *pmd,
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif
 
 pte_t *huge_pte_alloc(struct mm_struct *mm,
@@ -113,7 +116,11 @@ pte_t *huge_pte_alloc(struct mm_struct *mm,
 			if (sz != PAGE_SIZE << huge_shift[HUGE_SHIFT_PAGE])
 				panic("Unexpected page size %#lx\n", sz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return pte_alloc_hugetlb(mm, pmd, addr);
+=======
+			return pte_alloc_map(mm, NULL, pmd, addr);
+>>>>>>> v3.18
 =======
 			return pte_alloc_map(mm, NULL, pmd, addr);
 >>>>>>> v3.18
@@ -152,8 +159,11 @@ pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 	/* Get the top-level page table entry. */
 	pgd = (pgd_t *)get_pte((pte_t *)mm->pgd, pgd_index(addr), 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pgd_present(*pgd))
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -163,6 +173,11 @@ pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 # error support fourth page table level
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pud_present(*pud))
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!pud_present(*pud))
 		return NULL;
@@ -214,11 +229,14 @@ int pud_huge(pud_t pud)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct page *follow_huge_pmd(struct mm_struct *mm, unsigned long address,
@@ -321,7 +339,11 @@ unsigned long hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		vma = find_vma(mm, addr);
 		if (TASK_SIZE - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18

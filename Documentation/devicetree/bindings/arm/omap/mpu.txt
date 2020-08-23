@@ -8,11 +8,14 @@ Required properties:
 - compatible : Should be "ti,omap3-mpu" for OMAP3
                Should be "ti,omap4-mpu" for OMAP4
 <<<<<<< HEAD
+<<<<<<< HEAD
 - ti,hwmods: "mpu"
 
 Examples:
 
 =======
+=======
+>>>>>>> v3.18
 	       Should be "ti,omap5-mpu" for OMAP5
 - ti,hwmods: "mpu"
 
@@ -28,6 +31,9 @@ mpu {
     ti,hwmods = "mpu"
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - For an OMAP4 SMP system:
 

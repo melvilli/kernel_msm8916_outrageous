@@ -76,8 +76,11 @@ static inline int get_hub_status_data(struct uhci_hcd *uhci, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OK(x)			len = (x); break
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CLR_RH_PORTSTAT(x) \
@@ -248,7 +251,11 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 {
 	struct uhci_hcd *uhci = hcd_to_uhci(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status, lstatus, retval = 0, len = 0;
+=======
+	int status, lstatus, retval = 0;
+>>>>>>> v3.18
 =======
 	int status, lstatus, retval = 0;
 >>>>>>> v3.18
@@ -266,7 +273,12 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 	case GetHubStatus:
 		*(__le32 *)buf = cpu_to_le32(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OK(4);		/* hub power */
+=======
+		retval = 4; /* hub power */
+		break;
+>>>>>>> v3.18
 =======
 		retval = 4; /* hub power */
 		break;
@@ -324,7 +336,12 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		*(__le16 *)buf = cpu_to_le16(wPortStatus);
 		*(__le16 *)(buf + 2) = cpu_to_le16(wPortChange);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OK(4);
+=======
+		retval = 4;
+		break;
+>>>>>>> v3.18
 =======
 		retval = 4;
 		break;
@@ -335,7 +352,11 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case C_HUB_OVER_CURRENT:
 		case C_HUB_LOCAL_POWER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OK(0);
+=======
+			break;
+>>>>>>> v3.18
 =======
 			break;
 >>>>>>> v3.18
@@ -351,7 +372,11 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case USB_PORT_FEAT_SUSPEND:
 			SET_RH_PORTSTAT(USBPORTSC_SUSP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OK(0);
+=======
+			break;
+>>>>>>> v3.18
 =======
 			break;
 >>>>>>> v3.18
@@ -364,15 +389,21 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			/* USB v2.0 7.1.7.5 */
 			uhci->ports_timeout = jiffies + msecs_to_jiffies(50);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OK(0);
 		case USB_PORT_FEAT_POWER:
 			/* UHCI has no power switching */
 			OK(0);
 =======
+=======
+>>>>>>> v3.18
 			break;
 		case USB_PORT_FEAT_POWER:
 			/* UHCI has no power switching */
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			goto err;
@@ -389,15 +420,21 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			/* Disable terminates Resume signalling */
 			uhci_finish_suspend(uhci, port, port_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OK(0);
 		case USB_PORT_FEAT_C_ENABLE:
 			CLR_RH_PORTSTAT(USBPORTSC_PEC);
 			OK(0);
 =======
+=======
+>>>>>>> v3.18
 			break;
 		case USB_PORT_FEAT_C_ENABLE:
 			CLR_RH_PORTSTAT(USBPORTSC_PEC);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case USB_PORT_FEAT_SUSPEND:
 			if (!(uhci_readw(uhci, port_addr) & USBPORTSC_SUSP)) {
@@ -422,15 +459,21 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 						msecs_to_jiffies(20);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OK(0);
 		case USB_PORT_FEAT_C_SUSPEND:
 			clear_bit(port, &uhci->port_c_suspend);
 			OK(0);
 =======
+=======
+>>>>>>> v3.18
 			break;
 		case USB_PORT_FEAT_C_SUSPEND:
 			clear_bit(port, &uhci->port_c_suspend);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case USB_PORT_FEAT_POWER:
 			/* UHCI has no power switching */
@@ -438,6 +481,7 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case USB_PORT_FEAT_C_CONNECTION:
 			CLR_RH_PORTSTAT(USBPORTSC_CSC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OK(0);
 		case USB_PORT_FEAT_C_OVER_CURRENT:
 			CLR_RH_PORTSTAT(USBPORTSC_OCC);
@@ -446,6 +490,8 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			/* this driver won't report these */
 			OK(0);
 =======
+=======
+>>>>>>> v3.18
 			break;
 		case USB_PORT_FEAT_C_OVER_CURRENT:
 			CLR_RH_PORTSTAT(USBPORTSC_OCC);
@@ -453,6 +499,9 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case USB_PORT_FEAT_C_RESET:
 			/* this driver won't report these */
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			goto err;
@@ -460,17 +509,23 @@ static int uhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		break;
 	case GetHubDescriptor:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = min_t(unsigned int, sizeof(root_hub_hub_des), wLength);
 		memcpy(buf, root_hub_hub_des, len);
 		if (len > 2)
 			buf[2] = uhci->rh_numports;
 		OK(len);
 =======
+=======
+>>>>>>> v3.18
 		retval = min_t(unsigned int, sizeof(root_hub_hub_des), wLength);
 		memcpy(buf, root_hub_hub_des, retval);
 		if (retval > 2)
 			buf[2] = uhci->rh_numports;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 err:

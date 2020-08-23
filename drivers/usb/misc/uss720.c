@@ -76,7 +76,11 @@ struct uss720_async_request {
 	struct completion compl;
 	struct urb *urb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_ctrlrequest dr;
+=======
+	struct usb_ctrlrequest *dr;
+>>>>>>> v3.18
 =======
 	struct usb_ctrlrequest *dr;
 >>>>>>> v3.18
@@ -103,6 +107,10 @@ static void destroy_async(struct kref *kref)
 	if (likely(rq->urb))
 		usb_free_urb(rq->urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(rq->dr);
+>>>>>>> v3.18
 =======
 	kfree(rq->dr);
 >>>>>>> v3.18
@@ -129,7 +137,11 @@ static void async_complete(struct urb *urb)
 		dev_err(&urb->dev->dev, "async_complete: urb error %d\n",
 			status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (rq->dr.bRequest == 3) {
+=======
+	} else if (rq->dr->bRequest == 3) {
+>>>>>>> v3.18
 =======
 	} else if (rq->dr->bRequest == 3) {
 >>>>>>> v3.18
@@ -165,7 +177,11 @@ static struct uss720_async_request *submit_async_request(struct parport_uss720_p
 	if (!usbdev)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq = kmalloc(sizeof(struct uss720_async_request), mem_flags);
+=======
+	rq = kzalloc(sizeof(struct uss720_async_request), mem_flags);
+>>>>>>> v3.18
 =======
 	rq = kzalloc(sizeof(struct uss720_async_request), mem_flags);
 >>>>>>> v3.18
@@ -185,6 +201,7 @@ static struct uss720_async_request *submit_async_request(struct parport_uss720_p
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq->dr.bRequestType = requesttype;
 	rq->dr.bRequest = request;
 	rq->dr.wValue = cpu_to_le16(value);
@@ -193,6 +210,8 @@ static struct uss720_async_request *submit_async_request(struct parport_uss720_p
 	usb_fill_control_urb(rq->urb, usbdev, (requesttype & 0x80) ? usb_rcvctrlpipe(usbdev, 0) : usb_sndctrlpipe(usbdev, 0),
 			     (unsigned char *)&rq->dr,
 =======
+=======
+>>>>>>> v3.18
 	rq->dr = kmalloc(sizeof(*rq->dr), mem_flags);
 	if (!rq->dr) {
 		kref_put(&rq->ref_count, destroy_async);
@@ -205,6 +224,9 @@ static struct uss720_async_request *submit_async_request(struct parport_uss720_p
 	rq->dr->wLength = cpu_to_le16((request == 3) ? sizeof(rq->reg) : 0);
 	usb_fill_control_urb(rq->urb, usbdev, (requesttype & 0x80) ? usb_rcvctrlpipe(usbdev, 0) : usb_sndctrlpipe(usbdev, 0),
 			     (unsigned char *)rq->dr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     (request == 3) ? rq->reg : NULL, (request == 3) ? sizeof(rq->reg) : 0, async_complete, rq);
 	/* rq->urb->transfer_flags |= URB_ASYNC_UNLINK; */
@@ -741,11 +763,14 @@ static int uss720_probe(struct usb_interface *intf,
 	interface = intf->cur_altsetting;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (interface->desc.bNumEndpoints < 3) {
 		usb_put_dev(usbdev);
 		return -ENODEV;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

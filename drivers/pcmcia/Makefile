@@ -24,7 +24,10 @@ obj-$(CONFIG_I82365)				+= i82365.o
 obj-$(CONFIG_I82092)				+= i82092.o
 obj-$(CONFIG_TCIC)				+= tcic.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PCMCIA_M8XX)			+= m8xx_pcmcia.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_PCMCIA_SOC_COMMON)			+= soc_common.o
@@ -53,6 +56,10 @@ sa1100_cs-$(CONFIG_SA1100_ASSABET)		+= sa1100_assabet.o
 sa1100_cs-$(CONFIG_SA1100_CERF)			+= sa1100_cerf.o
 sa1100_cs-$(CONFIG_SA1100_COLLIE)		+= pxa2xx_sharpsl.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+sa1100_cs-$(CONFIG_SA1100_H3100)		+= sa1100_h3600.o
+>>>>>>> v3.18
 =======
 sa1100_cs-$(CONFIG_SA1100_H3100)		+= sa1100_h3600.o
 >>>>>>> v3.18

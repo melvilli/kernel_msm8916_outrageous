@@ -378,10 +378,13 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
@@ -391,6 +394,7 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	pdata->devtype = pdev->id_entry->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, res->start,
 				     resource_size(res), pdev->name))
 		return -EBUSY;
@@ -398,15 +402,21 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	pdata->ioaddr = devm_ioremap(&pdev->dev, res->start,
 				     resource_size(res));
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	pdata->ioaddr = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(pdata->ioaddr))
 		return PTR_ERR(pdata->ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdata->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(pdata->clk)) {
 		dev_err(&pdev->dev, "unable to get clock!\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = PTR_ERR(pdata->clk);
 		goto exit_free_pdata;
@@ -414,6 +424,8 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 
 	clk_prepare_enable(pdata->clk);
 =======
+=======
+>>>>>>> v3.18
 		return PTR_ERR(pdata->clk);
 	}
 
@@ -421,6 +433,9 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rate = clk_get_rate(pdata->clk);
 
@@ -457,7 +472,11 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->irq >=0)
+=======
+	if (pdata->irq >= 0)
+>>>>>>> v3.18
 =======
 	if (pdata->irq >= 0)
 >>>>>>> v3.18
@@ -468,7 +487,11 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(rtc)) {
 		ret = PTR_ERR(rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_clr_drvdata;
+=======
+		goto exit_put_clk;
+>>>>>>> v3.18
 =======
 		goto exit_put_clk;
 >>>>>>> v3.18
@@ -479,6 +502,7 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_clr_drvdata:
 	platform_set_drvdata(pdev, NULL);
 exit_put_clk:
@@ -486,6 +510,11 @@ exit_put_clk:
 
 exit_free_pdata:
 
+=======
+exit_put_clk:
+	clk_disable_unprepare(pdata->clk);
+
+>>>>>>> v3.18
 =======
 exit_put_clk:
 	clk_disable_unprepare(pdata->clk);
@@ -500,7 +529,10 @@ static int mxc_rtc_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(pdata->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

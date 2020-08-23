@@ -28,6 +28,10 @@
 #include <asm/cputable.h>
 #include <asm/trace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/machdep.h>
+>>>>>>> v3.18
 =======
 #include <asm/machdep.h>
 >>>>>>> v3.18
@@ -167,7 +171,11 @@ static int __init hcall_inst_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 __initcall(hcall_inst_init);
+=======
+machine_device_initcall(pseries, hcall_inst_init);
+>>>>>>> v3.18
 =======
 machine_device_initcall(pseries, hcall_inst_init);
 >>>>>>> v3.18

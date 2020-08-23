@@ -56,11 +56,14 @@ unsigned int (*nf_nat_ftp_hook)(struct sk_buff *skb,
 EXPORT_SYMBOL_GPL(nf_nat_ftp_hook);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int try_rfc959(const char *, size_t, struct nf_conntrack_man *, char);
 static int try_eprt(const char *, size_t, struct nf_conntrack_man *, char);
 static int try_epsv_response(const char *, size_t, struct nf_conntrack_man *,
 			     char);
 =======
+=======
+>>>>>>> v3.18
 static int try_rfc959(const char *, size_t, struct nf_conntrack_man *,
 		      char, unsigned int *);
 static int try_rfc1123(const char *, size_t, struct nf_conntrack_man *,
@@ -69,6 +72,9 @@ static int try_eprt(const char *, size_t, struct nf_conntrack_man *,
 		    char, unsigned int *);
 static int try_epsv_response(const char *, size_t, struct nf_conntrack_man *,
 			     char, unsigned int *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct ftp_search {
@@ -78,7 +84,11 @@ static struct ftp_search {
 	char term;
 	enum nf_ct_ftp_type ftptype;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*getnum)(const char *, size_t, struct nf_conntrack_man *, char);
+=======
+	int (*getnum)(const char *, size_t, struct nf_conntrack_man *, char, unsigned int *);
+>>>>>>> v3.18
 =======
 	int (*getnum)(const char *, size_t, struct nf_conntrack_man *, char, unsigned int *);
 >>>>>>> v3.18
@@ -106,10 +116,15 @@ static struct ftp_search {
 			.pattern	= "227 ",
 			.plen		= sizeof("227 ") - 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.skip		= '(',
 			.term		= ')',
 			.ftptype	= NF_CT_FTP_PASV,
 			.getnum		= try_rfc959,
+=======
+			.ftptype	= NF_CT_FTP_PASV,
+			.getnum		= try_rfc1123,
+>>>>>>> v3.18
 =======
 			.ftptype	= NF_CT_FTP_PASV,
 			.getnum		= try_rfc1123,
@@ -153,8 +168,14 @@ static int try_number(const char *data, size_t dlen, u_int32_t array[],
 		else {
 			/* Unexpected character; true if it's the
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   terminator and we're finished. */
 			if (*data == term && i == array_size - 1)
+=======
+			   terminator (or we don't care about one)
+			   and we're finished. */
+			if ((*data == term || !term) && i == array_size - 1)
+>>>>>>> v3.18
 =======
 			   terminator (or we don't care about one)
 			   and we're finished. */
@@ -175,7 +196,12 @@ static int try_number(const char *data, size_t dlen, u_int32_t array[],
 /* Returns 0, or length of numbers: 192,168,1,1,5,6 */
 static int try_rfc959(const char *data, size_t dlen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      struct nf_conntrack_man *cmd, char term)
+=======
+		      struct nf_conntrack_man *cmd, char term,
+		      unsigned int *offset)
+>>>>>>> v3.18
 =======
 		      struct nf_conntrack_man *cmd, char term,
 		      unsigned int *offset)
@@ -195,7 +221,10 @@ static int try_rfc959(const char *data, size_t dlen,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * From RFC 1123:
  * The format of the 227 reply to a PASV command is not
@@ -223,6 +252,9 @@ static int try_rfc1123(const char *data, size_t dlen,
 	return try_rfc959(data + i, dlen - i, cmd, 0, offset);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Grab port: number up to delimiter */
 static int get_port(const char *data, int start, size_t dlen, char delim,
@@ -253,7 +285,11 @@ static int get_port(const char *data, int start, size_t dlen, char delim,
 /* Returns 0, or length of numbers: |1|132.235.1.2|6275| or |2|3ffe::1|6275| */
 static int try_eprt(const char *data, size_t dlen, struct nf_conntrack_man *cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    char term)
+=======
+		    char term, unsigned int *offset)
+>>>>>>> v3.18
 =======
 		    char term, unsigned int *offset)
 >>>>>>> v3.18
@@ -305,7 +341,12 @@ static int try_eprt(const char *data, size_t dlen, struct nf_conntrack_man *cmd,
 /* Returns 0, or length of numbers: |||6446| */
 static int try_epsv_response(const char *data, size_t dlen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     struct nf_conntrack_man *cmd, char term)
+=======
+			     struct nf_conntrack_man *cmd, char term,
+			     unsigned int *offset)
+>>>>>>> v3.18
 =======
 			     struct nf_conntrack_man *cmd, char term,
 			     unsigned int *offset)
@@ -332,14 +373,20 @@ static int find_pattern(const char *data, size_t dlen,
 			struct nf_conntrack_man *cmd,
 			int (*getnum)(const char *, size_t,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      struct nf_conntrack_man *, char))
 {
 	size_t i;
 =======
+=======
+>>>>>>> v3.18
 				      struct nf_conntrack_man *, char,
 				      unsigned int *))
 {
 	size_t i = plen;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("find_pattern `%s': dlen = %Zu\n", pattern, dlen);
@@ -349,7 +396,11 @@ static int find_pattern(const char *data, size_t dlen,
 	if (dlen <= plen) {
 		/* Short packet: try for partial? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(data, pattern, dlen) == 0)
+=======
+		if (strncasecmp(data, pattern, dlen) == 0)
+>>>>>>> v3.18
 =======
 		if (strncasecmp(data, pattern, dlen) == 0)
 >>>>>>> v3.18
@@ -358,7 +409,11 @@ static int find_pattern(const char *data, size_t dlen,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strnicmp(data, pattern, plen) != 0) {
+=======
+	if (strncasecmp(data, pattern, plen) != 0) {
+>>>>>>> v3.18
 =======
 	if (strncasecmp(data, pattern, plen) != 0) {
 >>>>>>> v3.18
@@ -379,12 +434,15 @@ static int find_pattern(const char *data, size_t dlen,
 	/* Now we've found the constant string, try to skip
 	   to the 'skip' character */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = plen; data[i] != skip; i++)
 		if (i == dlen - 1) return -1;
 
 	/* Skip over the last character */
 	i++;
 =======
+=======
+>>>>>>> v3.18
 	if (skip) {
 		for (i = plen; data[i] != skip; i++)
 			if (i == dlen - 1) return -1;
@@ -392,13 +450,20 @@ static int find_pattern(const char *data, size_t dlen,
 		/* Skip over the last character */
 		i++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("Skipped up to `%c'!\n", skip);
 
 	*numoff = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*numlen = getnum(data + i, dlen - i, cmd, term);
+=======
+	*numlen = getnum(data + i, dlen - i, cmd, term, numoff);
+>>>>>>> v3.18
 =======
 	*numlen = getnum(data + i, dlen - i, cmd, term, numoff);
 >>>>>>> v3.18

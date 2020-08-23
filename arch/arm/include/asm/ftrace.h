@@ -46,7 +46,11 @@ void *return_address(unsigned int);
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern inline void *return_address(unsigned int level)
+=======
+static inline void *return_address(unsigned int level)
+>>>>>>> v3.18
 =======
 static inline void *return_address(unsigned int level)
 >>>>>>> v3.18

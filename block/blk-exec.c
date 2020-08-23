@@ -6,6 +6,10 @@
 #include <linux/bio.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/blk-mq.h>
+>>>>>>> v3.18
 =======
 #include <linux/blk-mq.h>
 >>>>>>> v3.18
@@ -29,7 +33,10 @@ static void blk_end_sync_rq(struct request *rq, int error)
 
 	rq->end_io_data = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__blk_put_request(rq->q, rq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -64,10 +71,13 @@ void blk_execute_rq_nowait(struct request_queue *q, struct gendisk *bd_disk,
 
 	WARN_ON(irqs_disabled());
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rq->rq_disk = bd_disk;
 	rq->end_io = done;
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(rq->cmd_type == REQ_TYPE_FS);
 
 	rq->rq_disk = bd_disk;
@@ -82,6 +92,9 @@ void blk_execute_rq_nowait(struct request_queue *q, struct gendisk *bd_disk,
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * need to check this before __blk_run_queue(), because rq can
@@ -93,9 +106,15 @@ void blk_execute_rq_nowait(struct request_queue *q, struct gendisk *bd_disk,
 
 	if (unlikely(blk_queue_dying(q))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rq->errors = -ENXIO;
 		if (rq->end_io)
 			rq->end_io(rq, rq->errors);
+=======
+		rq->cmd_flags |= REQ_QUIET; 
+		rq->errors = -ENXIO;
+		__blk_end_request_all(rq, rq->errors);
+>>>>>>> v3.18
 =======
 		rq->cmd_flags |= REQ_QUIET; 
 		rq->errors = -ENXIO;
@@ -134,12 +153,15 @@ int blk_execute_rq(struct request_queue *q, struct gendisk *bd_disk,
 	unsigned long hang_check;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * we need an extra reference to the request, so we can look at
 	 * it after io completion
 	 */
 	rq->ref_count++;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!rq->sense) {
@@ -162,12 +184,18 @@ int blk_execute_rq(struct request_queue *q, struct gendisk *bd_disk,
 		err = -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (rq->sense == sense)	{
 		rq->sense = NULL;
 		rq->sense_len = 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

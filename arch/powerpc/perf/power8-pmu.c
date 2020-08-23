@@ -11,16 +11,22 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/perf_event.h>
 #include <asm/firmware.h>
 =======
+=======
+>>>>>>> v3.18
 #define pr_fmt(fmt)	"power8-pmu: " fmt
 
 #include <linux/kernel.h>
 #include <linux/perf_event.h>
 #include <asm/firmware.h>
 #include <asm/cputable.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -35,7 +41,10 @@
 #define PM_BR_MPRED_CMPL		0x400f6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* All L1 D cache load references counted at finish, gated by reject */
 #define PM_LD_REF_L1			0x100ee
 /* Load Missed L1 */
@@ -67,6 +76,9 @@
 /* ITLB Reloaded */
 #define PM_ITLB_MISS			0x400fc
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -75,15 +87,21 @@
  *        60        56        52        48        44        40        36        32
  * | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - |
 <<<<<<< HEAD
+<<<<<<< HEAD
  *                                     [      thresh_cmp     ]   [  thresh_ctl   ]
  *                                                                       |
  *                                       thresh start/stop OR FAB match -*
 =======
+=======
+>>>>>>> v3.18
  *   | | [ ]                           [      thresh_cmp     ]   [  thresh_ctl   ]
  *   | |  |                                                              |
  *   | |  *- IFM (Linux)                 thresh start/stop OR FAB match -*
  *   | *- BHRB (Linux)
  *   *- EBB (Linux)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *        28        24        20        16        12         8         4         0
@@ -135,9 +153,12 @@
  *	MMCRA[61:62] = sample[3:4]	(RAND_SAMP_MODE)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 =======
+=======
+>>>>>>> v3.18
  * if EBB and BHRB:
  *	MMCRA[32:33] = IFM
  *
@@ -150,6 +171,9 @@
 #define EVENT_WANTS_BHRB	(EVENT_BHRB_MASK << EVENT_BHRB_SHIFT)
 #define EVENT_IFM_MASK		3ull
 #define EVENT_IFM_SHIFT		60
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EVENT_THR_CMP_SHIFT	40	/* Threshold CMP value */
 #define EVENT_THR_CMP_MASK	0x3ff
@@ -176,13 +200,19 @@
 #define EVENT_PSEL_MASK		0xff	/* PMCxSEL value */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bits defined by Linux */
 #define EVENT_LINUX_MASK	\
 	((EVENT_EBB_MASK  << EVENT_EBB_SHIFT)			|	\
 	 (EVENT_BHRB_MASK << EVENT_BHRB_SHIFT)			|	\
 	 (EVENT_IFM_MASK  << EVENT_IFM_SHIFT))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EVENT_VALID_MASK	\
 	((EVENT_THRESH_MASK    << EVENT_THRESH_SHIFT)		|	\
@@ -193,6 +223,10 @@
 	 (EVENT_COMBINE_MASK   << EVENT_COMBINE_SHIFT)		|	\
 	 (EVENT_MARKED_MASK    << EVENT_MARKED_SHIFT)		|	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  EVENT_LINUX_MASK					|	\
+>>>>>>> v3.18
 =======
 	  EVENT_LINUX_MASK					|	\
 >>>>>>> v3.18
@@ -220,16 +254,22 @@
  *        28        24        20        16        12         8         4         0
  * | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - |
 <<<<<<< HEAD
+<<<<<<< HEAD
  *                       [ ]   [  sample ]   [     ]   [6] [5]   [4] [3]   [2] [1]
  *                        |                     |
  *      L1 I/D qualifier -*                     |      Count of events for each PMC.
  *                                              |        p1, p2, p3, p4, p5, p6.
 =======
+=======
+>>>>>>> v3.18
  *               [ ] |   [ ]   [  sample ]   [     ]   [6] [5]   [4] [3]   [2] [1]
  *                |  |    |                     |
  *      BHRB IFM -*  |    |                     |      Count of events for each PMC.
  *              EBB -*    |                     |        p1, p2, p3, p4, p5, p6.
  *      L1 I/D qualifier -*                     |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *                     nc - number of counters -*
  *
@@ -247,13 +287,19 @@
 #define CNST_THRESH_MASK	CNST_THRESH_VAL(EVENT_THRESH_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CNST_EBB_VAL(v)		(((v) & EVENT_EBB_MASK) << 24)
 #define CNST_EBB_MASK		CNST_EBB_VAL(EVENT_EBB_MASK)
 
 #define CNST_IFM_VAL(v)		(((v) & EVENT_IFM_MASK) << 25)
 #define CNST_IFM_MASK		CNST_IFM_VAL(EVENT_IFM_MASK)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CNST_L1_QUAL_VAL(v)	(((v) & 3) << 22)
 #define CNST_L1_QUAL_MASK	CNST_L1_QUAL_VAL(3)
@@ -302,13 +348,19 @@
 #define MMCRA_THR_CMP_SHIFT		32
 #define MMCRA_SDAR_MODE_TLB		(1ull << 42)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MMCRA_IFM_SHIFT			30
 
 /* Bits in MMCR2 for POWER8 */
 #define MMCR2_FCS(pmc)			(1ull << (63 - (((pmc) - 1) * 9)))
 #define MMCR2_FCP(pmc)			(1ull << (62 - (((pmc) - 1) * 9)))
 #define MMCR2_FCH(pmc)			(1ull << (57 - (((pmc) - 1) * 9)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -324,7 +376,11 @@ static inline bool event_is_fab_match(u64 event)
 static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long *valp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int unit, pmc, cache;
+=======
+	unsigned int unit, pmc, cache, ebb;
+>>>>>>> v3.18
 =======
 	unsigned int unit, pmc, cache, ebb;
 >>>>>>> v3.18
@@ -335,6 +391,7 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 	if (event & ~EVENT_VALID_MASK)
 		return -1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pmc   = (event >> EVENT_PMC_SHIFT)       & EVENT_PMC_MASK;
 	unit  = (event >> EVENT_UNIT_SHIFT)      & EVENT_UNIT_MASK;
@@ -350,6 +407,8 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 		if (pmc >= 5 && event != 0x500fa && event != 0x600f4)
 			return -1;
 =======
+=======
+>>>>>>> v3.18
 	pmc   = (event >> EVENT_PMC_SHIFT)        & EVENT_PMC_MASK;
 	unit  = (event >> EVENT_UNIT_SHIFT)       & EVENT_UNIT_MASK;
 	cache = (event >> EVENT_CACHE_SEL_SHIFT)  & EVENT_CACHE_SEL_MASK;
@@ -369,6 +428,9 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 
 		mask  |= CNST_PMC_MASK(pmc);
 		value |= CNST_PMC_VAL(pmc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -391,14 +453,20 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 		 * it. The solution is for the hypervisor to initialise the
 		 * field to zeroes, and for us to only ever allow events that
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * have a cache selector of zero.
 		 */
 		if (cache)
 =======
+=======
+>>>>>>> v3.18
 		 * have a cache selector of zero. The bank selector (bit 3) is
 		 * irrelevant, as long as the rest of the value is 0.
 		 */
 		if (cache & 0x7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -1;
 
@@ -437,7 +505,10 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!pmc && ebb)
 		/* EBB events must specify the PMC */
 		return -1;
@@ -459,6 +530,9 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 	mask  |= CNST_EBB_VAL(ebb);
 	value |= CNST_EBB_MASK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*maskp = mask;
 	*valp = value;
@@ -468,14 +542,20 @@ static int power8_get_constraint(u64 event, unsigned long *maskp, unsigned long 
 
 static int power8_compute_mmcr(u64 event[], int n_ev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       unsigned int hwc[], unsigned long mmcr[])
 {
 	unsigned long mmcra, mmcr1, unit, combine, psel, cache, val;
 =======
+=======
+>>>>>>> v3.18
 			       unsigned int hwc[], unsigned long mmcr[],
 			       struct perf_event *pevents[])
 {
 	unsigned long mmcra, mmcr1, mmcr2, unit, combine, psel, cache, val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int pmc, pmc_inuse;
 	int i;
@@ -492,7 +572,11 @@ static int power8_compute_mmcr(u64 event[], int n_ev,
 	/* In continous sampling mode, update SDAR on TLB miss */
 	mmcra = MMCRA_SDAR_MODE_TLB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmcr1 = 0;
+=======
+	mmcr1 = mmcr2 = 0;
+>>>>>>> v3.18
 =======
 	mmcr1 = mmcr2 = 0;
 >>>>>>> v3.18
@@ -553,7 +637,10 @@ static int power8_compute_mmcr(u64 event[], int n_ev,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (event[i] & EVENT_WANTS_BHRB) {
 			val = (event[i] >> EVENT_IFM_SHIFT) & EVENT_IFM_MASK;
 			mmcra |= val << MMCRA_IFM_SHIFT;
@@ -572,6 +659,9 @@ static int power8_compute_mmcr(u64 event[], int n_ev,
 				mmcr2 |= MMCR2_FCS(pmc);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hwc[i] = pmc - 1;
 	}
@@ -593,6 +683,10 @@ static int power8_compute_mmcr(u64 event[], int n_ev,
 	mmcr[1] = mmcr1;
 	mmcr[2] = mmcra;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mmcr[3] = mmcr2;
+>>>>>>> v3.18
 =======
 	mmcr[3] = mmcr2;
 >>>>>>> v3.18
@@ -735,6 +829,11 @@ static int power8_generic_events[] = {
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS] =		PM_BRU_FIN,
 	[PERF_COUNT_HW_BRANCH_MISSES] =			PM_BR_MPRED_CMPL,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[PERF_COUNT_HW_CACHE_REFERENCES] =		PM_LD_REF_L1,
+	[PERF_COUNT_HW_CACHE_MISSES] =			PM_LD_MISS_L1,
+>>>>>>> v3.18
 =======
 	[PERF_COUNT_HW_CACHE_REFERENCES] =		PM_LD_REF_L1,
 	[PERF_COUNT_HW_CACHE_MISSES] =			PM_LD_MISS_L1,
@@ -744,6 +843,7 @@ static int power8_generic_events[] = {
 static u64 power8_bhrb_filter_map(u64 branch_sample_type)
 {
 	u64 pmu_bhrb_filter = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u64 br_privilege = branch_sample_type & ONLY_PLM;
 
@@ -758,6 +858,8 @@ static u64 power8_bhrb_filter_map(u64 branch_sample_type)
 	if ((br_privilege != 7) && (br_privilege != 0))
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 
 	/* BHRB and regular PMU events share the same privilege state
 	 * filter configuration. BHRB is always recorded along with a
@@ -765,6 +867,9 @@ static u64 power8_bhrb_filter_map(u64 branch_sample_type)
 	 * in the basic PMC configuration of the accompanying regular
 	 * PMU event, we ignore any separate BHRB specific request.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* No branch filter requested */
@@ -794,7 +899,10 @@ static void power8_config_bhrb(u64 pmu_bhrb_filter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define C(x)	PERF_COUNT_HW_CACHE_##x
 
 /*
@@ -905,6 +1013,9 @@ static int power8_cache_events[C(MAX)][C(OP_MAX)][C(RESULT_MAX)] = {
 
 #undef C
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct power_pmu power8_pmu = {
 	.name			= "POWER8",
@@ -922,6 +1033,10 @@ static struct power_pmu power8_pmu = {
 	.n_generic		= ARRAY_SIZE(power8_generic_events),
 	.generic_events		= power8_generic_events,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cache_events		= &power8_cache_events,
+>>>>>>> v3.18
 =======
 	.cache_events		= &power8_cache_events,
 >>>>>>> v3.18
@@ -932,6 +1047,11 @@ static struct power_pmu power8_pmu = {
 static int __init init_power8_pmu(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rc;
+
+>>>>>>> v3.18
 =======
 	int rc;
 
@@ -941,8 +1061,11 @@ static int __init init_power8_pmu(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return register_power_pmu(&power8_pmu);
 =======
+=======
+>>>>>>> v3.18
 	rc = register_power_pmu(&power8_pmu);
 	if (rc)
 		return rc;
@@ -954,6 +1077,9 @@ static int __init init_power8_pmu(void)
 		pr_info("PMAO restore workaround active.\n");
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 early_initcall(init_power8_pmu);

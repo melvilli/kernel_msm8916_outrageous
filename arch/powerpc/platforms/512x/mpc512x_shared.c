@@ -13,6 +13,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -40,13 +44,19 @@ static void __init mpc512x_restart_init(void)
 {
 	struct device_node *np;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,mpc5121-reset");
 =======
+=======
+>>>>>>> v3.18
 	const char *reset_compat;
 
 	reset_compat = mpc512x_select_reset_compat();
 	np = of_find_compatible_node(NULL, NULL, reset_compat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!np)
 		return;
@@ -70,8 +80,11 @@ void mpc512x_restart(char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_FB_FSL_DIU) || defined(CONFIG_FB_FSL_DIU_MODULE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct fsl_diu_shared_fb {
@@ -82,6 +95,7 @@ struct fsl_diu_shared_fb {
 	bool		in_use;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DIU_DIV_MASK	0x000000ff
 void mpc512x_set_pixel_clock(unsigned int pixclock)
@@ -179,6 +193,8 @@ void mpc512x_set_pixel_clock(unsigned int pixclock)
 
 enum fsl_diu_monitor_port
 =======
+=======
+>>>>>>> v3.18
 /* receives a pixel clock spec in pico seconds, adjusts the DIU clock rate */
 static void mpc512x_set_pixel_clock(unsigned int pixclock)
 {
@@ -288,6 +304,9 @@ static void mpc512x_set_pixel_clock(unsigned int pixclock)
 }
 
 static enum fsl_diu_monitor_port
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 mpc512x_valid_monitor_port(enum fsl_diu_monitor_port port)
 {
@@ -304,7 +323,11 @@ static inline void mpc512x_free_bootmem(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mpc512x_release_bootmem(void)
+=======
+static void mpc512x_release_bootmem(void)
+>>>>>>> v3.18
 =======
 static void mpc512x_release_bootmem(void)
 >>>>>>> v3.18
@@ -334,7 +357,11 @@ static void mpc512x_release_bootmem(void)
  * allocator is up.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mpc512x_init_diu(void)
+=======
+static void __init mpc512x_init_diu(void)
+>>>>>>> v3.18
 =======
 static void __init mpc512x_init_diu(void)
 >>>>>>> v3.18
@@ -407,7 +434,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mpc512x_setup_diu(void)
+=======
+static void __init mpc512x_setup_diu(void)
+>>>>>>> v3.18
 =======
 static void __init mpc512x_setup_diu(void)
 >>>>>>> v3.18
@@ -440,8 +471,11 @@ static void __init mpc512x_setup_diu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init mpc512x_init_IRQ(void)
@@ -466,7 +500,11 @@ void __init mpc512x_init_IRQ(void)
  * Nodes to do bus probe on, soc and localbus
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18
@@ -481,7 +519,11 @@ static const struct of_device_id of_bus_ids[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mpc512x_declare_of_platform_devices(void)
+=======
+static void __init mpc512x_declare_of_platform_devices(void)
+>>>>>>> v3.18
 =======
 static void __init mpc512x_declare_of_platform_devices(void)
 >>>>>>> v3.18
@@ -505,7 +547,10 @@ const char *mpc512x_select_psc_compat(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 const char *mpc512x_select_reset_compat(void)
 {
 	if (of_machine_is_compatible("fsl,mpc5121"))
@@ -517,6 +562,9 @@ const char *mpc512x_select_reset_compat(void)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int __init get_fifo_size(struct device_node *np,
 					 char *prop_name)
@@ -538,7 +586,11 @@ static unsigned int __init get_fifo_size(struct device_node *np,
 
 /* Init PSC FIFO space for TX and RX slices */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mpc512x_psc_fifo_init(void)
+=======
+static void __init mpc512x_psc_fifo_init(void)
+>>>>>>> v3.18
 =======
 static void __init mpc512x_psc_fifo_init(void)
 >>>>>>> v3.18
@@ -604,7 +656,10 @@ static void __init mpc512x_psc_fifo_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __init mpc512x_init_early(void)
 {
 	mpc512x_restart_init();
@@ -612,17 +667,23 @@ void __init mpc512x_init_early(void)
 		mpc512x_init_diu();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init mpc512x_init(void)
 {
 	mpc5121_clk_init();
 	mpc512x_declare_of_platform_devices();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpc512x_restart_init();
 	mpc512x_psc_fifo_init();
 }
 
 =======
+=======
+>>>>>>> v3.18
 	mpc512x_psc_fifo_init();
 }
 
@@ -632,6 +693,9 @@ void __init mpc512x_setup_arch(void)
 		mpc512x_setup_diu();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * mpc512x_cs_config - Setup chip select configuration

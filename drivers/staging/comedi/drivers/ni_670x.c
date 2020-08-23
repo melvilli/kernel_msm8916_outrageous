@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -45,6 +48,10 @@ Commands are not supported.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -55,8 +62,11 @@ Commands are not supported.
 #include "../comedidev.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mite.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AO_VALUE_OFFSET			0x00
@@ -97,6 +107,7 @@ static const struct ni_670x_board ni_670x_boards[] = {
 };
 
 struct ni_670x_private {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	struct mite_struct *mite;
@@ -169,6 +180,8 @@ static int ni_670x_dio_insn_bits(struct comedi_device *dev,
 
 	data[1] = readl(io_addr);
 =======
+=======
+>>>>>>> v3.18
 	int boardtype;
 	int dio;
 };
@@ -230,11 +243,15 @@ static int ni_670x_dio_insn_config(struct comedi_device *dev,
 		return ret;
 
 	writel(s->io_bits, dev->mmio + DIO_PORT0_DIR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ni_670x_dio_insn_config(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
@@ -263,6 +280,8 @@ static int ni_670x_dio_insn_config(struct comedi_device *dev,
 
 	return insn->n;
 =======
+=======
+>>>>>>> v3.18
 /* ripped from mite.h and mite_setup2() to avoid mite dependancy */
 #define MITE_IODWBSR	0xc0	 /* IO Device Window Base Size Register */
 #define WENAB		(1 << 7) /* window enable */
@@ -284,6 +303,9 @@ static int ni_670x_mite_init(struct pci_dev *pcidev)
 	/* finished with MITE registers */
 	iounmap(mite_base);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -309,6 +331,7 @@ static int ni_670x_auto_attach(struct comedi_device *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
@@ -324,6 +347,8 @@ static int ni_670x_auto_attach(struct comedi_device *dev,
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
@@ -335,6 +360,9 @@ static int ni_670x_auto_attach(struct comedi_device *dev,
 	dev->mmio = pci_ioremap_bar(pcidev, 1);
 	if (!dev->mmio)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 2);
@@ -363,15 +391,21 @@ static int ni_670x_auto_attach(struct comedi_device *dev,
 		s->range_table = &range_bipolar10;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_write = &ni_670x_ao_winsn;
 	s->insn_read = &ni_670x_ao_rinsn;
 =======
+=======
+>>>>>>> v3.18
 	s->insn_write = ni_670x_ao_insn_write;
 	s->insn_read = comedi_readback_insn_read;
 
 	ret = comedi_alloc_subdev_readback(s);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[1];
@@ -386,12 +420,18 @@ static int ni_670x_auto_attach(struct comedi_device *dev,
 
 	/* Config of misc registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(0x10, devpriv->mite->daq_io_addr + MISC_CONTROL_OFFSET);
 	/* Config of ao registers */
 	writel(0x00, devpriv->mite->daq_io_addr + AO_CONTROL_OFFSET);
 
 	dev_info(dev->class_dev, "%s: %s attached\n",
 		dev->driver->driver_name, dev->board_name);
+=======
+	writel(0x10, dev->mmio + MISC_CONTROL_OFFSET);
+	/* Config of ao registers */
+	writel(0x00, dev->mmio + AO_CONTROL_OFFSET);
+>>>>>>> v3.18
 =======
 	writel(0x10, dev->mmio + MISC_CONTROL_OFFSET);
 	/* Config of ao registers */
@@ -404,9 +444,15 @@ static int ni_670x_auto_attach(struct comedi_device *dev,
 static void ni_670x_detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ni_670x_private *devpriv = dev->private;
 	struct comedi_subdevice *s;
 
+=======
+	struct comedi_subdevice *s;
+
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	struct comedi_subdevice *s;
 
@@ -418,11 +464,14 @@ static void ni_670x_detach(struct comedi_device *dev)
 			kfree(s->range_table_list);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (devpriv && devpriv->mite) {
 		mite_unsetup(devpriv->mite);
 		mite_free(devpriv->mite);
 	}
 	comedi_pci_disable(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -441,7 +490,11 @@ static int ni_670x_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ni_670x_pci_table) = {
+=======
+static const struct pci_device_id ni_670x_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ni_670x_pci_table[] = {
 >>>>>>> v3.18

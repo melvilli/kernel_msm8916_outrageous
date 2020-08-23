@@ -53,6 +53,7 @@ static void authenc_request_complete(struct aead_request *req, int err)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int crypto_authenc_setkey(struct crypto_aead *authenc, const u8 *key,
 				 unsigned int keylen)
 {
@@ -75,6 +76,8 @@ static int crypto_authenc_setkey(struct crypto_aead *authenc, const u8 *key,
 	param = RTA_DATA(rta);
 	enckeylen = be32_to_cpu(param->enckeylen);
 =======
+=======
+>>>>>>> v3.18
 int crypto_authenc_extractkeys(struct crypto_authenc_keys *keys, const u8 *key,
 			       unsigned int keylen)
 {
@@ -90,17 +93,23 @@ int crypto_authenc_extractkeys(struct crypto_authenc_keys *keys, const u8 *key,
 
 	param = RTA_DATA(rta);
 	keys->enckeylen = be32_to_cpu(param->enckeylen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	key += RTA_ALIGN(rta->rta_len);
 	keylen -= RTA_ALIGN(rta->rta_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (keylen < enckeylen)
 		goto badkey;
 
 	authkeylen = keylen - enckeylen;
 =======
+=======
+>>>>>>> v3.18
 	if (keylen < keys->enckeylen)
 		return -EINVAL;
 
@@ -123,13 +132,20 @@ static int crypto_authenc_setkey(struct crypto_aead *authenc, const u8 *key,
 
 	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
 		goto badkey;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	crypto_ahash_clear_flags(auth, CRYPTO_TFM_REQ_MASK);
 	crypto_ahash_set_flags(auth, crypto_aead_get_flags(authenc) &
 				    CRYPTO_TFM_REQ_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = crypto_ahash_setkey(auth, key, authkeylen);
+=======
+	err = crypto_ahash_setkey(auth, keys.authkey, keys.authkeylen);
+>>>>>>> v3.18
 =======
 	err = crypto_ahash_setkey(auth, keys.authkey, keys.authkeylen);
 >>>>>>> v3.18
@@ -143,7 +159,11 @@ static int crypto_authenc_setkey(struct crypto_aead *authenc, const u8 *key,
 	crypto_ablkcipher_set_flags(enc, crypto_aead_get_flags(authenc) &
 					 CRYPTO_TFM_REQ_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = crypto_ablkcipher_setkey(enc, key + authkeylen, enckeylen);
+=======
+	err = crypto_ablkcipher_setkey(enc, keys.enckey, keys.enckeylen);
+>>>>>>> v3.18
 =======
 	err = crypto_ablkcipher_setkey(enc, keys.enckey, keys.enckeylen);
 >>>>>>> v3.18
@@ -761,6 +781,9 @@ module_exit(crypto_authenc_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Simple AEAD wrapper for IPsec");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("authenc");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

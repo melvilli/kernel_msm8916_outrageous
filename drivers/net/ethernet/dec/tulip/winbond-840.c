@@ -220,7 +220,11 @@ enum chip_capability_flags {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(w840_pci_tbl) = {
+=======
+static const struct pci_device_id w840_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id w840_pci_tbl[] = {
 >>>>>>> v3.18
@@ -473,7 +477,10 @@ static int w840_probe1(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 err_out_cleardev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pdev, ioaddr);
@@ -1550,8 +1557,11 @@ static void w840_remove1(struct pci_dev *pdev)
 		free_netdev(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

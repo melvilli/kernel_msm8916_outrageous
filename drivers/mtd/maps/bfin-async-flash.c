@@ -15,7 +15,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -132,7 +135,11 @@ static int bfin_flash_probe(struct platform_device *pdev)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct physmap_flash_data *pdata = pdev->dev.platform_data;
+=======
+	struct physmap_flash_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct physmap_flash_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

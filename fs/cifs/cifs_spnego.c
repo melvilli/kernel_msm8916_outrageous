@@ -63,7 +63,10 @@ struct key_type cifs_spnego_key_type = {
 	.name		= "cifs.spnego",
 	.instantiate	= cifs_spnego_key_instantiate,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.match		= user_match,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.destroy	= cifs_spnego_key_destroy,

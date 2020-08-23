@@ -10,6 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -321,15 +325,21 @@ static ssize_t pcie_gadget_store_no_of_msi(
 		const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &config->requested_msi))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &config->requested_msi);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (config->requested_msi > 32)
 		config->requested_msi = 32;
@@ -344,15 +354,21 @@ static ssize_t pcie_gadget_store_inta(
 	struct pcie_app_reg __iomem *app_reg = config->va_app_base;
 	ulong en;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &en))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &en);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (en)
@@ -373,15 +389,21 @@ static ssize_t pcie_gadget_store_send_msi(
 	ulong vector;
 	u32 ven_msi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &vector))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &vector);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!config->configured_msi)
@@ -425,15 +447,21 @@ static ssize_t pcie_gadget_store_vendor_id(
 {
 	ulong id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &id))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &id);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spear_dbi_write_reg(config, PCI_VENDOR_ID, 2, id);
@@ -458,15 +486,21 @@ static ssize_t pcie_gadget_store_device_id(
 {
 	ulong id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &id))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &id);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spear_dbi_write_reg(config, PCI_DEVICE_ID, 2, id);
@@ -489,16 +523,22 @@ static ssize_t pcie_gadget_store_bar0_size(
 	u32 pos, pos1;
 	u32 no_of_bit = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &size))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &size);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* min bar size is 256 */
 	if (size <= 0x100)
@@ -545,15 +585,21 @@ static ssize_t pcie_gadget_store_bar0_address(
 	struct pcie_app_reg __iomem *app_reg = config->va_app_base;
 	ulong address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &address))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &address);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	address &= ~(config->bar0_size - 1);
@@ -581,15 +627,21 @@ static ssize_t pcie_gadget_store_bar0_rw_offset(
 {
 	ulong offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &offset))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &offset);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (offset % 4)
@@ -620,15 +672,21 @@ static ssize_t pcie_gadget_store_bar0_data(
 {
 	ulong data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &data))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &data);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!config->va_bar0_address)
@@ -801,6 +859,7 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 	struct configfs_subsystem *subsys;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* get resource for application registers*/
 
 	res0 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -832,10 +891,15 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 		status = -ENOMEM;
 		goto err_rel_res;
 =======
+=======
+>>>>>>> v3.18
 	target = devm_kzalloc(&pdev->dev, sizeof(*target), GFP_KERNEL);
 	if (!target) {
 		dev_err(&pdev->dev, "out of memory\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -843,6 +907,7 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 	sprintf(cg_item->ci_namebuf, "pcie_gadget.%d", pdev->id);
 	cg_item->ci_type	= &pcie_gadget_target_type;
 	config = &target->config;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	config->va_app_base = (void __iomem *)ioremap(res0->start,
 			resource_size(res0));
@@ -864,6 +929,8 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 
 	dev_set_drvdata(&pdev->dev, target);
 =======
+=======
+>>>>>>> v3.18
 
 	/* get resource for application registers*/
 	res0 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -884,11 +951,15 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 	}
 
 	platform_set_drvdata(pdev, target);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
 		dev_err(&pdev->dev, "no update irq?\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status = irq;
 		goto err_iounmap;
@@ -900,6 +971,8 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 			"pcie gadget interrupt IRQ%d already claimed\n", irq);
 		goto err_iounmap;
 =======
+=======
+>>>>>>> v3.18
 		return irq;
 	}
 
@@ -909,6 +982,9 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev,
 			"pcie gadget interrupt IRQ%d already claimed\n", irq);
 		return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -919,7 +995,11 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 	status = configfs_register_subsystem(subsys);
 	if (status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_irq;
+=======
+		return status;
+>>>>>>> v3.18
 =======
 		return status;
 >>>>>>> v3.18
@@ -939,18 +1019,24 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 		if (IS_ERR(clk)) {
 			pr_err("%s:couldn't get clk for pcie1\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_irq;
 		}
 		if (clk_enable(clk)) {
 			pr_err("%s:couldn't enable clk for pcie1\n", __func__);
 			goto err_irq;
 =======
+=======
+>>>>>>> v3.18
 			return PTR_ERR(clk);
 		}
 		status = clk_enable(clk);
 		if (status) {
 			pr_err("%s:couldn't enable clk for pcie1\n", __func__);
 			return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else if (pdev->id == 2) {
@@ -962,24 +1048,31 @@ static int spear_pcie_gadget_probe(struct platform_device *pdev)
 		if (IS_ERR(clk)) {
 			pr_err("%s:couldn't get clk for pcie2\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_irq;
 		}
 		if (clk_enable(clk)) {
 			pr_err("%s:couldn't enable clk for pcie2\n", __func__);
 			goto err_irq;
 =======
+=======
+>>>>>>> v3.18
 			return PTR_ERR(clk);
 		}
 		status = clk_enable(clk);
 		if (status) {
 			pr_err("%s:couldn't enable clk for pcie2\n", __func__);
 			return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 	spear13xx_pcie_device_init(config);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_irq:
 	free_irq(irq, NULL);
@@ -996,10 +1089,13 @@ err_rel_res0:
 	return status;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int spear_pcie_gadget_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resource *res0, *res1;
 	static struct pcie_gadget_target *target;
@@ -1020,11 +1116,16 @@ static int spear_pcie_gadget_remove(struct platform_device *pdev)
 	configfs_unregister_subsystem(&target->subsys);
 	kfree(target);
 =======
+=======
+>>>>>>> v3.18
 	static struct pcie_gadget_target *target;
 
 	target = platform_get_drvdata(pdev);
 
 	configfs_unregister_subsystem(&target->subsys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

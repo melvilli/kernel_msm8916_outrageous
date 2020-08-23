@@ -30,7 +30,11 @@ typedef void (*CALL_BK_FN) (struct sccb *);
 
 struct sccb_mgr_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long si_baseaddr;
+=======
+	u32 si_baseaddr;
+>>>>>>> v3.18
 =======
 	u32 si_baseaddr;
 >>>>>>> v3.18
@@ -38,6 +42,7 @@ struct sccb_mgr_info {
 	unsigned char si_intvect;
 	unsigned char si_id;
 	unsigned char si_lun;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned short si_fw_revision;
 	unsigned short si_per_targ_init_sync;
@@ -47,6 +52,8 @@ struct sccb_mgr_info {
 	unsigned short si_per_targ_wide_nego;
 	unsigned short si_flags;
 =======
+=======
+>>>>>>> v3.18
 	u16 si_fw_revision;
 	u16 si_per_targ_init_sync;
 	u16 si_per_targ_fast_nego;
@@ -54,6 +61,9 @@ struct sccb_mgr_info {
 	u16 si_per_targ_no_disc;
 	u16 si_per_targ_wide_nego;
 	u16 si_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char si_card_family;
 	unsigned char si_bustype;
@@ -61,15 +71,21 @@ struct sccb_mgr_info {
 	unsigned char si_relative_cardnum;
 	unsigned char si_reserved[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long si_OS_reserved;
 	unsigned char si_XlatInfo[4];
 	unsigned long si_reserved2[5];
 	unsigned long si_secondary_range;
 =======
+=======
+>>>>>>> v3.18
 	u32 si_OS_reserved;
 	unsigned char si_XlatInfo[4];
 	u32 si_reserved2[5];
 	u32 si_secondary_range;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -92,7 +108,11 @@ struct sccb_mgr_info {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma pack(1)
+=======
+/*#pragma pack(1)*/
+>>>>>>> v3.18
 =======
 /*#pragma pack(1)*/
 >>>>>>> v3.18
@@ -102,8 +122,13 @@ struct sccb {
 	unsigned char CdbLength;
 	unsigned char RequestSenseLength;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long DataLength;
 	unsigned long DataPointer;
+=======
+	u32 DataLength;
+	void *DataPointer;
+>>>>>>> v3.18
 =======
 	u32 DataLength;
 	void *DataPointer;
@@ -116,6 +141,7 @@ struct sccb {
 	unsigned char Cdb[12];
 	unsigned char CcbRes1;
 	unsigned char Reserved1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long Reserved2;
 	unsigned long SensePointer;
@@ -133,6 +159,8 @@ struct sccb {
 	unsigned short Sccb_MGRFlags;
 	unsigned short Sccb_sgseg;
 =======
+=======
+>>>>>>> v3.18
 	u32 Reserved2;
 	u32 SensePointer;
 
@@ -148,6 +176,9 @@ struct sccb {
 	u32 Sccb_res1;
 	u16 Sccb_MGRFlags;
 	u16 Sccb_sgseg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char Sccb_scsimsg;	/* identify msg for selection */
 	unsigned char Sccb_tag;
@@ -156,17 +187,23 @@ struct sccb {
 	struct sccb *Sccb_forwardlink;
 	struct sccb *Sccb_backlink;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long Sccb_savedATC;
 	unsigned char Save_Cdb[6];
 	unsigned char Save_CdbLen;
 	unsigned char Sccb_XferState;
 	unsigned long Sccb_SGoffset;
 =======
+=======
+>>>>>>> v3.18
 	u32 Sccb_savedATC;
 	unsigned char Save_Cdb[6];
 	unsigned char Save_CdbLen;
 	unsigned char Sccb_XferState;
 	u32 Sccb_SGoffset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -280,6 +317,7 @@ struct sccb_mgr_tar_info {
 
 struct nvram_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char niModel;	/* Model No. of card */
 	unsigned char niCardNo;	/* Card no. */
 	unsigned long niBaseAddr;	/* Port Address of card */
@@ -290,6 +328,8 @@ struct nvram_info {
 	unsigned char niSyncTbl[MAX_SCSI_TAR / 2];	/* Sync/Wide byte of targets */
 	unsigned char niScamTbl[MAX_SCSI_TAR][4];	/* Compressed Scam name string of Targets */
 =======
+=======
+>>>>>>> v3.18
 	unsigned char niModel;		/* Model No. of card */
 	unsigned char niCardNo;		/* Card no. */
 	u32 niBaseAddr;			/* Port Address of card */
@@ -305,6 +345,9 @@ struct nvram_info {
 							   of targets */
 	unsigned char niScamTbl[MAX_SCSI_TAR][4];	/* Compressed Scam name
 							   string of Targets */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -318,7 +361,11 @@ struct sccb_card {
 	struct sccb_mgr_info *cardInfo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ioPort;
+=======
+	u32 ioPort;
+>>>>>>> v3.18
 =======
 	u32 ioPort;
 >>>>>>> v3.18
@@ -859,6 +906,7 @@ typedef struct SCCBscam_info {
                              (RD_HARPOON(p_port+hp_page_ctrl) & ~G_INT_DISABLE)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_sisyncn(unsigned long port, unsigned char p_card,
 				 unsigned char syncFlag);
 static void FPT_ssel(unsigned long port, unsigned char p_card);
@@ -882,6 +930,8 @@ static unsigned char FPT_ChkIfChipInitialized(unsigned long ioPort);
 
 static void FPT_SendMsg(unsigned long port, unsigned char message);
 =======
+=======
+>>>>>>> v3.18
 static unsigned char FPT_sisyncn(u32 port, unsigned char p_card,
 				 unsigned char syncFlag);
 static void FPT_ssel(u32 port, unsigned char p_card);
@@ -904,6 +954,9 @@ static void FPT_WrStack(u32 portBase, unsigned char index,
 static unsigned char FPT_ChkIfChipInitialized(u32 ioPort);
 
 static void FPT_SendMsg(u32 port, unsigned char message);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void FPT_queueFlushTargSccb(unsigned char p_card, unsigned char thisTarg,
 				   unsigned char error_code);
@@ -912,9 +965,15 @@ static void FPT_sinits(struct sccb *p_sccb, unsigned char p_card);
 static void FPT_RNVRamData(struct nvram_info *pNvRamInfo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_siwidn(unsigned long port, unsigned char p_card);
 static void FPT_stwidn(unsigned long port, unsigned char p_card);
 static void FPT_siwidr(unsigned long port, unsigned char width);
+=======
+static unsigned char FPT_siwidn(u32 port, unsigned char p_card);
+static void FPT_stwidn(u32 port, unsigned char p_card);
+static void FPT_siwidr(u32 port, unsigned char width);
+>>>>>>> v3.18
 =======
 static unsigned char FPT_siwidn(u32 port, unsigned char p_card);
 static void FPT_stwidn(u32 port, unsigned char p_card);
@@ -936,6 +995,7 @@ static void FPT_utilUpdateResidual(struct sccb *p_SCCB);
 static unsigned short FPT_CalcCrc16(unsigned char buffer[]);
 static unsigned char FPT_CalcLrc(unsigned char buffer[]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void FPT_Wait1Second(unsigned long p_port);
 static void FPT_Wait(unsigned long p_port, unsigned char p_delay);
@@ -977,6 +1037,8 @@ static void FPT_hostDataXferRestart(struct sccb *currSCCB);
 
 static unsigned char FPT_SccbMgr_bad_isr(unsigned long p_port,
 =======
+=======
+>>>>>>> v3.18
 static void FPT_Wait1Second(u32 p_port);
 static void FPT_Wait(u32 p_port, unsigned char p_delay);
 static void FPT_utilEEWriteOnOff(u32 p_port, unsigned char p_mode);
@@ -1016,6 +1078,9 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 static void FPT_hostDataXferRestart(struct sccb *currSCCB);
 
 static unsigned char FPT_SccbMgr_bad_isr(u32 p_port,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 unsigned char p_card,
 					 struct sccb_card *pCurrCard,
@@ -1030,6 +1095,7 @@ static void FPT_SccbMgrTableInitTarget(unsigned char p_card,
 static void FPT_scini(unsigned char p_card, unsigned char p_our_id,
 		      unsigned char p_power_up);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int FPT_scarb(unsigned long p_port, unsigned char p_sel_type);
 static void FPT_scbusf(unsigned long p_port);
@@ -1054,6 +1120,8 @@ static unsigned char FPT_scmachid(unsigned char p_card,
 static void FPT_autoCmdCmplt(unsigned long p_port, unsigned char p_card);
 static void FPT_autoLoadDefaultMap(unsigned long p_port);
 =======
+=======
+>>>>>>> v3.18
 static int FPT_scarb(u32 p_port, unsigned char p_sel_type);
 static void FPT_scbusf(u32 p_port);
 static void FPT_scsel(u32 p_port);
@@ -1076,6 +1144,9 @@ static unsigned char FPT_scmachid(unsigned char p_card,
 
 static void FPT_autoCmdCmplt(u32 p_port, unsigned char p_card);
 static void FPT_autoLoadDefaultMap(u32 p_port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct sccb_mgr_tar_info FPT_sccbMgrTbl[MAX_CARDS][MAX_SCSI_TAR] =
@@ -1095,7 +1166,11 @@ static unsigned char FPT_scamHAString[] =
 static unsigned short FPT_default_intena = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void (*FPT_s_PhaseTbl[8]) (unsigned long, unsigned char) = {
+=======
+static void (*FPT_s_PhaseTbl[8]) (u32, unsigned char) = {
+>>>>>>> v3.18
 =======
 static void (*FPT_s_PhaseTbl[8]) (u32, unsigned char) = {
 >>>>>>> v3.18
@@ -1116,7 +1191,11 @@ static int FlashPoint_ProbeHostAdapter(struct sccb_mgr_info *pCardInfo)
 	unsigned char i, j, id, ScamFlg;
 	unsigned short temp, temp2, temp3, temp4, temp5, temp6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ioport;
+=======
+	u32 ioport;
+>>>>>>> v3.18
 =======
 	u32 ioport;
 >>>>>>> v3.18
@@ -1386,7 +1465,11 @@ static int FlashPoint_ProbeHostAdapter(struct sccb_mgr_info *pCardInfo)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long FlashPoint_HardwareResetHostAdapter(struct sccb_mgr_info
+=======
+static void *FlashPoint_HardwareResetHostAdapter(struct sccb_mgr_info
+>>>>>>> v3.18
 =======
 static void *FlashPoint_HardwareResetHostAdapter(struct sccb_mgr_info
 >>>>>>> v3.18
@@ -1397,7 +1480,11 @@ static void *FlashPoint_HardwareResetHostAdapter(struct sccb_mgr_info
 	unsigned char i, j, thisCard, ScamFlg;
 	unsigned short temp, sync_bit_map, id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ioport;
+=======
+	u32 ioport;
+>>>>>>> v3.18
 =======
 	u32 ioport;
 >>>>>>> v3.18
@@ -1407,10 +1494,15 @@ static void *FlashPoint_HardwareResetHostAdapter(struct sccb_mgr_info
 	for (thisCard = 0; thisCard <= MAX_CARDS; thisCard++) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (thisCard == MAX_CARDS) {
 
 			return FAILURE;
 		}
+=======
+		if (thisCard == MAX_CARDS)
+			return (void *)FAILURE;
+>>>>>>> v3.18
 =======
 		if (thisCard == MAX_CARDS)
 			return (void *)FAILURE;
@@ -1582,6 +1674,7 @@ static void *FlashPoint_HardwareResetHostAdapter(struct sccb_mgr_info
 				   SCCB_MGR_PRESENT));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (unsigned long)CurrCard;
 }
 
@@ -1593,6 +1686,8 @@ static void FlashPoint_ReleaseHostAdapter(unsigned long pCurrCard)
 	unsigned long scamData;
 	unsigned long *pScamTbl;
 =======
+=======
+>>>>>>> v3.18
 	return (void *)CurrCard;
 }
 
@@ -1603,6 +1698,9 @@ static void FlashPoint_ReleaseHostAdapter(void *pCurrCard)
 	u32 regOffset;
 	u32 scamData;
 	u32 *pScamTbl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nvram_info *pCurrNvRam;
 
@@ -1625,7 +1723,11 @@ static void FlashPoint_ReleaseHostAdapter(void *pCurrCard)
 		for (i = 0; i < MAX_SCSI_TAR; i++) {
 			regOffset = hp_aramBase + 64 + i * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pScamTbl = (unsigned long *)&pCurrNvRam->niScamTbl[i];
+=======
+			pScamTbl = (u32 *)&pCurrNvRam->niScamTbl[i];
+>>>>>>> v3.18
 =======
 			pScamTbl = (u32 *)&pCurrNvRam->niScamTbl[i];
 >>>>>>> v3.18
@@ -1642,15 +1744,21 @@ static void FPT_RNVRamData(struct nvram_info *pNvRamInfo)
 {
 	unsigned char i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long portBase;
 	unsigned long regOffset;
 	unsigned long scamData;
 	unsigned long *pScamTbl;
 =======
+=======
+>>>>>>> v3.18
 	u32 portBase;
 	u32 regOffset;
 	u32 scamData;
 	u32 *pScamTbl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pNvRamInfo->niModel = FPT_RdStack(pNvRamInfo->niBaseAddr, 0);
@@ -1669,7 +1777,11 @@ static void FPT_RNVRamData(struct nvram_info *pNvRamInfo)
 		regOffset = hp_aramBase + 64 + i * 4;
 		RD_HARP32(portBase, regOffset, scamData);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pScamTbl = (unsigned long *)&pNvRamInfo->niScamTbl[i];
+=======
+		pScamTbl = (u32 *)&pNvRamInfo->niScamTbl[i];
+>>>>>>> v3.18
 =======
 		pScamTbl = (u32 *)&pNvRamInfo->niScamTbl[i];
 >>>>>>> v3.18
@@ -1679,7 +1791,11 @@ static void FPT_RNVRamData(struct nvram_info *pNvRamInfo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_RdStack(unsigned long portBase, unsigned char index)
+=======
+static unsigned char FPT_RdStack(u32 portBase, unsigned char index)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_RdStack(u32 portBase, unsigned char index)
 >>>>>>> v3.18
@@ -1689,8 +1805,12 @@ static unsigned char FPT_RdStack(u32 portBase, unsigned char index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_WrStack(unsigned long portBase, unsigned char index,
 			unsigned char data)
+=======
+static void FPT_WrStack(u32 portBase, unsigned char index, unsigned char data)
+>>>>>>> v3.18
 =======
 static void FPT_WrStack(u32 portBase, unsigned char index, unsigned char data)
 >>>>>>> v3.18
@@ -1700,7 +1820,11 @@ static void FPT_WrStack(u32 portBase, unsigned char index, unsigned char data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_ChkIfChipInitialized(unsigned long ioPort)
+=======
+static unsigned char FPT_ChkIfChipInitialized(u32 ioPort)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_ChkIfChipInitialized(u32 ioPort)
 >>>>>>> v3.18
@@ -1727,6 +1851,7 @@ static unsigned char FPT_ChkIfChipInitialized(u32 ioPort)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FlashPoint_StartCCB(unsigned long pCurrCard, struct sccb *p_Sccb)
 {
 	unsigned long ioport;
@@ -1737,6 +1862,8 @@ static void FlashPoint_StartCCB(unsigned long pCurrCard, struct sccb *p_Sccb)
 	thisCard = ((struct sccb_card *)pCurrCard)->cardIndex;
 	ioport = ((struct sccb_card *)pCurrCard)->ioPort;
 =======
+=======
+>>>>>>> v3.18
 static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 {
 	u32 ioport;
@@ -1747,6 +1874,9 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 
 	thisCard = pCurrCard->cardIndex;
 	ioport = pCurrCard->ioPort;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((p_Sccb->TargID >= MAX_SCSI_TAR) || (p_Sccb->Lun >= MAX_LUN)) {
@@ -1763,7 +1893,11 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 	FPT_sinits(p_Sccb, thisCard);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!((struct sccb_card *)pCurrCard)->cmdCounter) {
+=======
+	if (!pCurrCard->cmdCounter) {
+>>>>>>> v3.18
 =======
 	if (!pCurrCard->cmdCounter) {
 >>>>>>> v3.18
@@ -1772,7 +1906,11 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 			    | SCCB_MGR_ACTIVE));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (((struct sccb_card *)pCurrCard)->globalFlags & F_GREEN_PC) {
+=======
+		if (pCurrCard->globalFlags & F_GREEN_PC) {
+>>>>>>> v3.18
 =======
 		if (pCurrCard->globalFlags & F_GREEN_PC) {
 >>>>>>> v3.18
@@ -1782,7 +1920,11 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	((struct sccb_card *)pCurrCard)->cmdCounter++;
+=======
+	pCurrCard->cmdCounter++;
+>>>>>>> v3.18
 =======
 	pCurrCard->cmdCounter++;
 >>>>>>> v3.18
@@ -1795,15 +1937,21 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 		if (p_Sccb->OperationCode == RESET_COMMAND) {
 			pSaveSccb =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ((struct sccb_card *)pCurrCard)->currentSCCB;
 			((struct sccb_card *)pCurrCard)->currentSCCB = p_Sccb;
 			FPT_queueSelectFail(&FPT_BL_Card[thisCard], thisCard);
 			((struct sccb_card *)pCurrCard)->currentSCCB =
 =======
+=======
+>>>>>>> v3.18
 			    pCurrCard->currentSCCB;
 			pCurrCard->currentSCCB = p_Sccb;
 			FPT_queueSelectFail(&FPT_BL_Card[thisCard], thisCard);
 			pCurrCard->currentSCCB =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    pSaveSccb;
 		} else {
@@ -1816,15 +1964,21 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 		if (p_Sccb->OperationCode == RESET_COMMAND) {
 			pSaveSccb =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ((struct sccb_card *)pCurrCard)->currentSCCB;
 			((struct sccb_card *)pCurrCard)->currentSCCB = p_Sccb;
 			FPT_queueSelectFail(&FPT_BL_Card[thisCard], thisCard);
 			((struct sccb_card *)pCurrCard)->currentSCCB =
 =======
+=======
+>>>>>>> v3.18
 			    pCurrCard->currentSCCB;
 			pCurrCard->currentSCCB = p_Sccb;
 			FPT_queueSelectFail(&FPT_BL_Card[thisCard], thisCard);
 			pCurrCard->currentSCCB =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    pSaveSccb;
 		} else {
@@ -1837,8 +1991,12 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 		MDISABLE_INT(ioport);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((((struct sccb_card *)pCurrCard)->globalFlags & F_CONLUN_IO)
 		    &&
+=======
+		if ((pCurrCard->globalFlags & F_CONLUN_IO) &&
+>>>>>>> v3.18
 =======
 		if ((pCurrCard->globalFlags & F_CONLUN_IO) &&
 >>>>>>> v3.18
@@ -1848,7 +2006,11 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 		else
 			lun = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((((struct sccb_card *)pCurrCard)->currentSCCB == NULL) &&
+=======
+		if ((pCurrCard->currentSCCB == NULL) &&
+>>>>>>> v3.18
 =======
 		if ((pCurrCard->currentSCCB == NULL) &&
 >>>>>>> v3.18
@@ -1857,7 +2019,11 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 			== 0)) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((struct sccb_card *)pCurrCard)->currentSCCB = p_Sccb;
+=======
+			pCurrCard->currentSCCB = p_Sccb;
+>>>>>>> v3.18
 =======
 			pCurrCard->currentSCCB = p_Sccb;
 >>>>>>> v3.18
@@ -1867,6 +2033,7 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 		else {
 
 			if (p_Sccb->OperationCode == RESET_COMMAND) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pSaveSccb =
 				    ((struct sccb_card *)pCurrCard)->
@@ -1878,11 +2045,16 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
 				((struct sccb_card *)pCurrCard)->currentSCCB =
 				    pSaveSccb;
 =======
+=======
+>>>>>>> v3.18
 				pSaveSccb = pCurrCard->currentSCCB;
 				pCurrCard->currentSCCB = p_Sccb;
 				FPT_queueSelectFail(&FPT_BL_Card[thisCard],
 						    thisCard);
 				pCurrCard->currentSCCB = pSaveSccb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				FPT_queueAddSccb(p_Sccb, thisCard);
@@ -1904,9 +2076,15 @@ static void FlashPoint_StartCCB(void *curr_card, struct sccb *p_Sccb)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int FlashPoint_AbortCCB(unsigned long pCurrCard, struct sccb *p_Sccb)
 {
 	unsigned long ioport;
+=======
+static int FlashPoint_AbortCCB(void *pCurrCard, struct sccb *p_Sccb)
+{
+	u32 ioport;
+>>>>>>> v3.18
 =======
 static int FlashPoint_AbortCCB(void *pCurrCard, struct sccb *p_Sccb)
 {
@@ -2018,9 +2196,15 @@ static int FlashPoint_AbortCCB(void *pCurrCard, struct sccb *p_Sccb)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FlashPoint_InterruptPending(unsigned long pCurrCard)
 {
 	unsigned long ioport;
+=======
+static unsigned char FlashPoint_InterruptPending(void *pCurrCard)
+{
+	u32 ioport;
+>>>>>>> v3.18
 =======
 static unsigned char FlashPoint_InterruptPending(void *pCurrCard)
 {
@@ -2048,7 +2232,11 @@ static unsigned char FlashPoint_InterruptPending(void *pCurrCard)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int FlashPoint_HandleInterrupt(unsigned long pCurrCard)
+=======
+static int FlashPoint_HandleInterrupt(void *pcard)
+>>>>>>> v3.18
 =======
 static int FlashPoint_HandleInterrupt(void *pcard)
 >>>>>>> v3.18
@@ -2058,25 +2246,36 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 	unsigned short hp_int;
 	unsigned char i, target;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ioport;
 
 	thisCard = ((struct sccb_card *)pCurrCard)->cardIndex;
 	ioport = ((struct sccb_card *)pCurrCard)->ioPort;
 =======
+=======
+>>>>>>> v3.18
 	struct sccb_card *pCurrCard = pcard;
 	u32 ioport;
 
 	thisCard = pCurrCard->cardIndex;
 	ioport = pCurrCard->ioPort;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	MDISABLE_INT(ioport);
 
 	if ((bm_int_st = RD_HARPOON(ioport + hp_int_status)) & EXT_STATUS_ON)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bm_status =
 		    RD_HARPOON(ioport +
 			       hp_ext_status) & (unsigned char)BAD_EXT_STATUS;
+=======
+		bm_status = RD_HARPOON(ioport + hp_ext_status) &
+					(unsigned char)BAD_EXT_STATUS;
+>>>>>>> v3.18
 =======
 		bm_status = RD_HARPOON(ioport + hp_ext_status) &
 					(unsigned char)BAD_EXT_STATUS;
@@ -2086,6 +2285,7 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 
 	WR_HARPOON(ioport + hp_int_mask, (INT_CMD_COMPL | SCSI_INTERRUPT));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while ((hp_int =
 		RDW_HARPOON((ioport +
@@ -2098,6 +2298,8 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 			    FPT_SccbMgr_bad_isr(ioport, thisCard,
 						((struct sccb_card *)pCurrCard),
 =======
+=======
+>>>>>>> v3.18
 	while ((hp_int = RDW_HARPOON((ioport + hp_intstat)) &
 				FPT_default_intena) | bm_status) {
 
@@ -2106,6 +2308,9 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 		if (hp_int & (FIFO | TIMEOUT | RESET | SCAM_SEL) || bm_status) {
 			result =
 			    FPT_SccbMgr_bad_isr(ioport, thisCard, pCurrCard,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						hp_int);
 			WRW_HARPOON((ioport + hp_intstat),
@@ -2133,8 +2338,12 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (((struct sccb_card *)pCurrCard)->
 			    globalFlags & F_HOST_XFER_ACT)
+=======
+			if (pCurrCard->globalFlags & F_HOST_XFER_ACT)
+>>>>>>> v3.18
 =======
 			if (pCurrCard->globalFlags & F_HOST_XFER_ACT)
 >>>>>>> v3.18
@@ -2154,6 +2363,7 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 		else if (hp_int & ITAR_DISC) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (((struct sccb_card *)pCurrCard)->
 			    globalFlags & F_HOST_XFER_ACT) {
 
@@ -2163,11 +2373,16 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 
 			if (RD_HARPOON(ioport + hp_gp_reg_1) == SMSAVE_DATA_PTR) {
 =======
+=======
+>>>>>>> v3.18
 			if (pCurrCard->globalFlags & F_HOST_XFER_ACT)
 				FPT_phaseChkFifo(ioport, thisCard);
 
 			if (RD_HARPOON(ioport + hp_gp_reg_1) ==
 					SMSAVE_DATA_PTR) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				WR_HARPOON(ioport + hp_gp_reg_1, 0x00);
@@ -2208,8 +2423,12 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 				    (BUS_FREE | ITAR_DISC));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((struct sccb_card *)pCurrCard)->globalFlags |=
 			    F_NEW_SCCB_CMD;
+=======
+			pCurrCard->globalFlags |= F_NEW_SCCB_CMD;
+>>>>>>> v3.18
 =======
 			pCurrCard->globalFlags |= F_NEW_SCCB_CMD;
 >>>>>>> v3.18
@@ -2223,10 +2442,15 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 
 			if (RDW_HARPOON((ioport + hp_intstat)) & ITAR_DISC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (((struct sccb_card *)pCurrCard)->
 				    globalFlags & F_HOST_XFER_ACT) {
 					FPT_phaseChkFifo(ioport, thisCard);
 				}
+=======
+				if (pCurrCard->globalFlags & F_HOST_XFER_ACT)
+					FPT_phaseChkFifo(ioport, thisCard);
+>>>>>>> v3.18
 =======
 				if (pCurrCard->globalFlags & F_HOST_XFER_ACT)
 					FPT_phaseChkFifo(ioport, thisCard);
@@ -2248,8 +2472,12 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			FPT_sres(ioport, thisCard,
 				 ((struct sccb_card *)pCurrCard));
+=======
+			FPT_sres(ioport, thisCard, pCurrCard);
+>>>>>>> v3.18
 =======
 			FPT_sres(ioport, thisCard, pCurrCard);
 >>>>>>> v3.18
@@ -2310,8 +2538,12 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 			WRW_HARPOON((ioport + hp_intstat), BUS_FREE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (((struct sccb_card *)pCurrCard)->
 			    globalFlags & F_HOST_XFER_ACT) {
+=======
+			if (pCurrCard->globalFlags & F_HOST_XFER_ACT) {
+>>>>>>> v3.18
 =======
 			if (pCurrCard->globalFlags & F_HOST_XFER_ACT) {
 >>>>>>> v3.18
@@ -2327,8 +2559,12 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 
 			WRW_HARPOON((ioport + hp_intstat), ITICKLE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((struct sccb_card *)pCurrCard)->globalFlags |=
 			    F_NEW_SCCB_CMD;
+=======
+			pCurrCard->globalFlags |= F_NEW_SCCB_CMD;
+>>>>>>> v3.18
 =======
 			pCurrCard->globalFlags |= F_NEW_SCCB_CMD;
 >>>>>>> v3.18
@@ -2337,6 +2573,7 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 		if (((struct sccb_card *)pCurrCard)->
 		    globalFlags & F_NEW_SCCB_CMD) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			((struct sccb_card *)pCurrCard)->globalFlags &=
 			    ~F_NEW_SCCB_CMD;
@@ -2353,6 +2590,8 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 				((struct sccb_card *)pCurrCard)->globalFlags &=
 				    ~F_NEW_SCCB_CMD;
 =======
+=======
+>>>>>>> v3.18
 			pCurrCard->globalFlags &= ~F_NEW_SCCB_CMD;
 
 			if (pCurrCard->currentSCCB == NULL)
@@ -2360,6 +2599,9 @@ static int FlashPoint_HandleInterrupt(void *pcard)
 
 			if (pCurrCard->currentSCCB != NULL) {
 				pCurrCard->globalFlags &= ~F_NEW_SCCB_CMD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				FPT_ssel(ioport, thisCard);
 			}
@@ -2386,8 +2628,12 @@ static int FlashPoint_HandleInterrupt(void *pcard)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_SccbMgr_bad_isr(unsigned long p_port,
 					 unsigned char p_card,
+=======
+static unsigned char FPT_SccbMgr_bad_isr(u32 p_port, unsigned char p_card,
+>>>>>>> v3.18
 =======
 static unsigned char FPT_SccbMgr_bad_isr(u32 p_port, unsigned char p_card,
 >>>>>>> v3.18
@@ -2638,7 +2884,11 @@ static void FPT_SccbMgrTableInitTarget(unsigned char p_card,
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_sfm(unsigned long port, struct sccb *pCurrSCCB)
+=======
+static unsigned char FPT_sfm(u32 port, struct sccb *pCurrSCCB)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_sfm(u32 port, struct sccb *pCurrSCCB)
 >>>>>>> v3.18
@@ -2710,7 +2960,11 @@ static unsigned char FPT_sfm(u32 port, struct sccb *pCurrSCCB)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_ssel(unsigned long port, unsigned char p_card)
+=======
+static void FPT_ssel(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_ssel(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -2719,7 +2973,11 @@ static void FPT_ssel(u32 port, unsigned char p_card)
 	unsigned char auto_loaded, i, target, *theCCB;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long cdb_reg;
+=======
+	u32 cdb_reg;
+>>>>>>> v3.18
 =======
 	u32 cdb_reg;
 >>>>>>> v3.18
@@ -3017,7 +3275,11 @@ static void FPT_ssel(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_sres(unsigned long port, unsigned char p_card,
+=======
+static void FPT_sres(u32 port, unsigned char p_card,
+>>>>>>> v3.18
 =======
 static void FPT_sres(u32 port, unsigned char p_card,
 >>>>>>> v3.18
@@ -3257,7 +3519,11 @@ static void FPT_sres(u32 port, unsigned char p_card,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_SendMsg(unsigned long port, unsigned char message)
+=======
+static void FPT_SendMsg(u32 port, unsigned char message)
+>>>>>>> v3.18
 =======
 static void FPT_SendMsg(u32 port, unsigned char message)
 >>>>>>> v3.18
@@ -3308,8 +3574,12 @@ static void FPT_SendMsg(u32 port, unsigned char message)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_sdecm(unsigned char message, unsigned long port,
 		      unsigned char p_card)
+=======
+static void FPT_sdecm(unsigned char message, u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_sdecm(unsigned char message, u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -3493,8 +3763,12 @@ static void FPT_sdecm(unsigned char message, u32 port, unsigned char p_card)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_shandem(unsigned long port, unsigned char p_card,
 			struct sccb *pCurrSCCB)
+=======
+static void FPT_shandem(u32 port, unsigned char p_card, struct sccb *pCurrSCCB)
+>>>>>>> v3.18
 =======
 static void FPT_shandem(u32 port, unsigned char p_card, struct sccb *pCurrSCCB)
 >>>>>>> v3.18
@@ -3565,7 +3839,11 @@ static void FPT_shandem(u32 port, unsigned char p_card, struct sccb *pCurrSCCB)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_sisyncn(unsigned long port, unsigned char p_card,
+=======
+static unsigned char FPT_sisyncn(u32 port, unsigned char p_card,
+>>>>>>> v3.18
 =======
 static unsigned char FPT_sisyncn(u32 port, unsigned char p_card,
 >>>>>>> v3.18
@@ -3650,7 +3928,11 @@ static unsigned char FPT_sisyncn(u32 port, unsigned char p_card,
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_stsyncn(unsigned long port, unsigned char p_card)
+=======
+static void FPT_stsyncn(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_stsyncn(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -3783,7 +4065,11 @@ static void FPT_stsyncn(u32 port, unsigned char p_card)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_sisyncr(unsigned long port, unsigned char sync_pulse,
+=======
+static void FPT_sisyncr(u32 port, unsigned char sync_pulse,
+>>>>>>> v3.18
 =======
 static void FPT_sisyncr(u32 port, unsigned char sync_pulse,
 >>>>>>> v3.18
@@ -3818,7 +4104,11 @@ static void FPT_sisyncr(u32 port, unsigned char sync_pulse,
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_siwidn(unsigned long port, unsigned char p_card)
+=======
+static unsigned char FPT_siwidn(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_siwidn(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -3877,7 +4167,11 @@ static unsigned char FPT_siwidn(u32 port, unsigned char p_card)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_stwidn(unsigned long port, unsigned char p_card)
+=======
+static void FPT_stwidn(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_stwidn(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -3952,7 +4246,11 @@ static void FPT_stwidn(u32 port, unsigned char p_card)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_siwidr(unsigned long port, unsigned char width)
+=======
+static void FPT_siwidr(u32 port, unsigned char width)
+>>>>>>> v3.18
 =======
 static void FPT_siwidr(u32 port, unsigned char width)
 >>>>>>> v3.18
@@ -3984,7 +4282,11 @@ static void FPT_siwidr(u32 port, unsigned char width)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_sssyncv(unsigned long p_port, unsigned char p_id,
+=======
+static void FPT_sssyncv(u32 p_port, unsigned char p_id,
+>>>>>>> v3.18
 =======
 static void FPT_sssyncv(u32 p_port, unsigned char p_id,
 >>>>>>> v3.18
@@ -4060,7 +4362,11 @@ static void FPT_sssyncv(u32 p_port, unsigned char p_id,
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_sresb(unsigned long port, unsigned char p_card)
+=======
+static void FPT_sresb(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_sresb(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4157,7 +4463,11 @@ static void FPT_ssenss(struct sccb_card *pCurrCard)
 	currSCCB->Cdb[5] = 0x00;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	currSCCB->Sccb_XferCnt = (unsigned long)currSCCB->RequestSenseLength;
+=======
+	currSCCB->Sccb_XferCnt = (u32)currSCCB->RequestSenseLength;
+>>>>>>> v3.18
 =======
 	currSCCB->Sccb_XferCnt = (u32)currSCCB->RequestSenseLength;
 >>>>>>> v3.18
@@ -4185,7 +4495,11 @@ static void FPT_ssenss(struct sccb_card *pCurrCard)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_sxfrp(unsigned long p_port, unsigned char p_card)
+=======
+static void FPT_sxfrp(u32 p_port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_sxfrp(u32 p_port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4271,7 +4585,11 @@ static void FPT_sxfrp(u32 p_port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_schkdd(unsigned long port, unsigned char p_card)
+=======
+static void FPT_schkdd(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_schkdd(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4454,15 +4772,21 @@ static void FPT_sinits(struct sccb *p_sccb, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseDecode(unsigned long p_port, unsigned char p_card)
 {
 	unsigned char phase_ref;
 	void (*phase) (unsigned long, unsigned char);
 =======
+=======
+>>>>>>> v3.18
 static void FPT_phaseDecode(u32 p_port, unsigned char p_card)
 {
 	unsigned char phase_ref;
 	void (*phase) (u32, unsigned char);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DISABLE_AUTO(p_port);
@@ -4484,7 +4808,11 @@ static void FPT_phaseDecode(u32 p_port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseDataOut(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseDataOut(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseDataOut(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4529,7 +4857,11 @@ static void FPT_phaseDataOut(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseDataIn(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseDataIn(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseDataIn(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4577,15 +4909,21 @@ static void FPT_phaseDataIn(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseCommand(unsigned long p_port, unsigned char p_card)
 {
 	struct sccb *currSCCB;
 	unsigned long cdb_reg;
 =======
+=======
+>>>>>>> v3.18
 static void FPT_phaseCommand(u32 p_port, unsigned char p_card)
 {
 	struct sccb *currSCCB;
 	u32 cdb_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char i;
 
@@ -4635,7 +4973,11 @@ static void FPT_phaseCommand(u32 p_port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseStatus(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseStatus(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseStatus(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4660,7 +5002,11 @@ static void FPT_phaseStatus(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseMsgOut(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseMsgOut(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseMsgOut(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4803,7 +5149,11 @@ static void FPT_phaseMsgOut(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseMsgIn(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseMsgIn(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseMsgIn(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4854,7 +5204,11 @@ static void FPT_phaseMsgIn(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseIllegal(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseIllegal(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseIllegal(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -4884,9 +5238,15 @@ static void FPT_phaseIllegal(u32 port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseChkFifo(unsigned long port, unsigned char p_card)
 {
 	unsigned long xfercnt;
+=======
+static void FPT_phaseChkFifo(u32 port, unsigned char p_card)
+{
+	u32 xfercnt;
+>>>>>>> v3.18
 =======
 static void FPT_phaseChkFifo(u32 port, unsigned char p_card)
 {
@@ -4961,7 +5321,11 @@ static void FPT_phaseChkFifo(u32 port, unsigned char p_card)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_phaseBusFree(unsigned long port, unsigned char p_card)
+=======
+static void FPT_phaseBusFree(u32 port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_phaseBusFree(u32 port, unsigned char p_card)
 >>>>>>> v3.18
@@ -5061,9 +5425,15 @@ static void FPT_phaseBusFree(u32 port, unsigned char p_card)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_autoLoadDefaultMap(unsigned long p_port)
 {
 	unsigned long map_addr;
+=======
+static void FPT_autoLoadDefaultMap(u32 p_port)
+{
+	u32 map_addr;
+>>>>>>> v3.18
 =======
 static void FPT_autoLoadDefaultMap(u32 p_port)
 {
@@ -5173,7 +5543,11 @@ static void FPT_autoLoadDefaultMap(u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_autoCmdCmplt(unsigned long p_port, unsigned char p_card)
+=======
+static void FPT_autoCmdCmplt(u32 p_port, unsigned char p_card)
+>>>>>>> v3.18
 =======
 static void FPT_autoCmdCmplt(u32 p_port, unsigned char p_card)
 >>>>>>> v3.18
@@ -5450,8 +5824,12 @@ static void FPT_autoCmdCmplt(u32 p_port, unsigned char p_card)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_dataXferProcessor(unsigned long port,
 				  struct sccb_card *pCurrCard)
+=======
+static void FPT_dataXferProcessor(u32 port, struct sccb_card *pCurrCard)
+>>>>>>> v3.18
 =======
 static void FPT_dataXferProcessor(u32 port, struct sccb_card *pCurrCard)
 >>>>>>> v3.18
@@ -5488,6 +5866,7 @@ static void FPT_dataXferProcessor(u32 port, struct sccb_card *pCurrCard)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_busMstrSGDataXferStart(unsigned long p_port,
 				       struct sccb *pcurrSCCB)
 {
@@ -5505,6 +5884,8 @@ static void FPT_busMstrSGDataXferStart(unsigned long p_port,
 		count = ((unsigned long)HOST_WRT_CMD) << 24;
 	}
 =======
+=======
+>>>>>>> v3.18
 static void FPT_busMstrSGDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 {
 	u32 count, addr, tmpSGCnt;
@@ -5517,6 +5898,9 @@ static void FPT_busMstrSGDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 		count = ((u32)HOST_RD_CMD) << 24;
 	else
 		count = ((u32)HOST_WRT_CMD) << 24;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sg_count = 0;
@@ -5530,6 +5914,7 @@ static void FPT_busMstrSGDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 	WR_HARPOON(p_port + hp_page_ctrl, i);
 
 	while ((sg_count < (unsigned char)SG_BUF_CNT) &&
+<<<<<<< HEAD
 <<<<<<< HEAD
 	       ((unsigned long)(sg_index * (unsigned int)SG_ELEMENT_SIZE) <
 		pcurrSCCB->DataLength)) {
@@ -5546,6 +5931,8 @@ static void FPT_busMstrSGDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 		if ((!sg_count) && (pcurrSCCB->Sccb_SGoffset)) {
 
 =======
+=======
+>>>>>>> v3.18
 			((sg_index * (unsigned int)SG_ELEMENT_SIZE) <
 			pcurrSCCB->DataLength)) {
 
@@ -5556,13 +5943,19 @@ static void FPT_busMstrSGDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 		addr = segp->segdata;
 
 		if ((!sg_count) && (pcurrSCCB->Sccb_SGoffset)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			addr +=
 			    ((count & 0x00FFFFFFL) - pcurrSCCB->Sccb_SGoffset);
 			count =
 			    (count & 0xFF000000L) | pcurrSCCB->Sccb_SGoffset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			tmpSGCnt = count & 0x00FFFFFFL;
@@ -5621,10 +6014,16 @@ static void FPT_busMstrSGDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_busMstrDataXferStart(unsigned long p_port,
 				     struct sccb *pcurrSCCB)
 {
 	unsigned long addr, count;
+=======
+static void FPT_busMstrDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
+{
+	u32 addr, count;
+>>>>>>> v3.18
 =======
 static void FPT_busMstrDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 {
@@ -5636,8 +6035,12 @@ static void FPT_busMstrDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
 		count = pcurrSCCB->Sccb_XferCnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr =
 		    (unsigned long)pcurrSCCB->DataPointer + pcurrSCCB->Sccb_ATC;
+=======
+		addr = (u32)(unsigned long)pcurrSCCB->DataPointer + pcurrSCCB->Sccb_ATC;
+>>>>>>> v3.18
 =======
 		addr = (u32)(unsigned long)pcurrSCCB->DataPointer + pcurrSCCB->Sccb_ATC;
 >>>>>>> v3.18
@@ -5686,7 +6089,11 @@ static void FPT_busMstrDataXferStart(u32 p_port, struct sccb *pcurrSCCB)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_busMstrTimeOut(unsigned long p_port)
+=======
+static unsigned char FPT_busMstrTimeOut(u32 p_port)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_busMstrTimeOut(u32 p_port)
 >>>>>>> v3.18
@@ -5729,7 +6136,11 @@ static unsigned char FPT_busMstrTimeOut(u32 p_port)
  *
  *---------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_hostDataXferAbort(unsigned long port, unsigned char p_card,
+=======
+static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
+>>>>>>> v3.18
 =======
 static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 >>>>>>> v3.18
@@ -5739,7 +6150,12 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 	unsigned long timeout;
 	unsigned long remain_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int sg_ptr;
+=======
+	u32 sg_ptr;
+	struct blogic_sg_seg *segp;
+>>>>>>> v3.18
 =======
 	u32 sg_ptr;
 	struct blogic_sg_seg *segp;
@@ -5808,9 +6224,14 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 					   SG_ELEMENT_SIZE)) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sg_ptr =
 				    (unsigned int)(pCurrSCCB->DataLength /
 						   SG_ELEMENT_SIZE);
+=======
+				sg_ptr = (u32)(pCurrSCCB->DataLength /
+							SG_ELEMENT_SIZE);
+>>>>>>> v3.18
 =======
 				sg_ptr = (u32)(pCurrSCCB->DataLength /
 							SG_ELEMENT_SIZE);
@@ -5822,6 +6243,7 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 			while (remain_cnt < 0x01000000L) {
 
 				sg_ptr--;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 				if (remain_cnt >
@@ -5841,6 +6263,8 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 					break;
 				}
 =======
+=======
+>>>>>>> v3.18
 				segp = (struct blogic_sg_seg *)(pCurrSCCB->
 						DataPointer) + (sg_ptr * 2);
 				if (remain_cnt > (unsigned long)segp->segbytes)
@@ -5848,6 +6272,9 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 						(unsigned long)segp->segbytes;
 				else
 					break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
@@ -6005,6 +6432,7 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 			pCurrSCCB->Sccb_SGoffset = 0x00;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((unsigned long)(pCurrSCCB->Sccb_sgseg *
 					    SG_ELEMENT_SIZE) >=
 			    pCurrSCCB->DataLength) {
@@ -6016,6 +6444,8 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 						     SG_ELEMENT_SIZE);
 
 =======
+=======
+>>>>>>> v3.18
 			if ((u32)(pCurrSCCB->Sccb_sgseg * SG_ELEMENT_SIZE) >=
 					pCurrSCCB->DataLength) {
 
@@ -6023,15 +6453,22 @@ static void FPT_hostDataXferAbort(u32 port, unsigned char p_card,
 				pCurrSCCB->Sccb_sgseg =
 				    (unsigned short)(pCurrSCCB->DataLength /
 						     SG_ELEMENT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			if (!(pCurrSCCB->Sccb_XferState & F_AUTO_SENSE))
 
+=======
+			if (!(pCurrSCCB->Sccb_XferState & F_AUTO_SENSE))
+>>>>>>> v3.18
 =======
 			if (!(pCurrSCCB->Sccb_XferState & F_AUTO_SENSE))
 >>>>>>> v3.18
@@ -6055,7 +6492,11 @@ static void FPT_hostDataXferRestart(struct sccb *currSCCB)
 	unsigned long data_count;
 	unsigned int sg_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *sg_ptr;
+=======
+	struct blogic_sg_seg *segp;
+>>>>>>> v3.18
 =======
 	struct blogic_sg_seg *segp;
 >>>>>>> v3.18
@@ -6066,9 +6507,14 @@ static void FPT_hostDataXferRestart(struct sccb *currSCCB)
 
 		sg_index = 0xffff;	/*Index by long words into sg list. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data_count = 0;	/*Running count of SG xfer counts. */
 
 		sg_ptr = (unsigned long *)currSCCB->DataPointer;
+=======
+		data_count = 0;		/*Running count of SG xfer counts. */
+
+>>>>>>> v3.18
 =======
 		data_count = 0;		/*Running count of SG xfer counts. */
 
@@ -6078,7 +6524,13 @@ static void FPT_hostDataXferRestart(struct sccb *currSCCB)
 
 			sg_index++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data_count += *(sg_ptr + (sg_index * 2));
+=======
+			segp = (struct blogic_sg_seg *)(currSCCB->DataPointer) +
+						(sg_index * 2);
+			data_count += segp->segbytes;
+>>>>>>> v3.18
 =======
 			segp = (struct blogic_sg_seg *)(currSCCB->DataPointer) +
 						(sg_index * 2);
@@ -6120,7 +6572,11 @@ static void FPT_scini(unsigned char p_card, unsigned char p_our_id,
 
 	unsigned char loser, assigned_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long p_port;
+=======
+	u32 p_port;
+>>>>>>> v3.18
 =======
 	u32 p_port;
 >>>>>>> v3.18
@@ -6329,7 +6785,11 @@ static void FPT_scini(unsigned char p_card, unsigned char p_our_id,
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int FPT_scarb(unsigned long p_port, unsigned char p_sel_type)
+=======
+static int FPT_scarb(u32 p_port, unsigned char p_sel_type)
+>>>>>>> v3.18
 =======
 static int FPT_scarb(u32 p_port, unsigned char p_sel_type)
 >>>>>>> v3.18
@@ -6395,7 +6855,11 @@ static int FPT_scarb(u32 p_port, unsigned char p_sel_type)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scbusf(unsigned long p_port)
+=======
+static void FPT_scbusf(u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_scbusf(u32 p_port)
 >>>>>>> v3.18
@@ -6431,7 +6895,11 @@ static void FPT_scbusf(u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scasid(unsigned char p_card, unsigned long p_port)
+=======
+static void FPT_scasid(unsigned char p_card, u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_scasid(unsigned char p_card, u32 p_port)
 >>>>>>> v3.18
@@ -6512,7 +6980,11 @@ static void FPT_scasid(unsigned char p_card, u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scsel(unsigned long p_port)
+=======
+static void FPT_scsel(u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_scsel(u32 p_port)
 >>>>>>> v3.18
@@ -6550,7 +7022,11 @@ static void FPT_scsel(u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_scxferc(unsigned long p_port, unsigned char p_data)
+=======
+static unsigned char FPT_scxferc(u32 p_port, unsigned char p_data)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_scxferc(u32 p_port, unsigned char p_data)
 >>>>>>> v3.18
@@ -6604,8 +7080,12 @@ static unsigned char FPT_scxferc(u32 p_port, unsigned char p_data)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_scsendi(unsigned long p_port,
 				 unsigned char p_id_string[])
+=======
+static unsigned char FPT_scsendi(u32 p_port, unsigned char p_id_string[])
+>>>>>>> v3.18
 =======
 static unsigned char FPT_scsendi(u32 p_port, unsigned char p_id_string[])
 >>>>>>> v3.18
@@ -6660,8 +7140,12 @@ static unsigned char FPT_scsendi(u32 p_port, unsigned char p_id_string[])
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_sciso(unsigned long p_port,
 			       unsigned char p_id_string[])
+=======
+static unsigned char FPT_sciso(u32 p_port, unsigned char p_id_string[])
+>>>>>>> v3.18
 =======
 static unsigned char FPT_sciso(u32 p_port, unsigned char p_id_string[])
 >>>>>>> v3.18
@@ -6723,7 +7207,11 @@ static unsigned char FPT_sciso(u32 p_port, unsigned char p_id_string[])
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scwirod(unsigned long p_port, unsigned char p_data_bit)
+=======
+static void FPT_scwirod(u32 p_port, unsigned char p_data_bit)
+>>>>>>> v3.18
 =======
 static void FPT_scwirod(u32 p_port, unsigned char p_data_bit)
 >>>>>>> v3.18
@@ -6754,7 +7242,11 @@ static void FPT_scwirod(u32 p_port, unsigned char p_data_bit)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scwiros(unsigned long p_port, unsigned char p_data_bit)
+=======
+static void FPT_scwiros(u32 p_port, unsigned char p_data_bit)
+>>>>>>> v3.18
 =======
 static void FPT_scwiros(u32 p_port, unsigned char p_data_bit)
 >>>>>>> v3.18
@@ -6810,7 +7302,11 @@ static unsigned char FPT_scvalq(unsigned char p_quintet)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned char FPT_scsell(unsigned long p_port, unsigned char targ_id)
+=======
+static unsigned char FPT_scsell(u32 p_port, unsigned char targ_id)
+>>>>>>> v3.18
 =======
 static unsigned char FPT_scsell(u32 p_port, unsigned char targ_id)
 >>>>>>> v3.18
@@ -6896,7 +7392,11 @@ static unsigned char FPT_scsell(u32 p_port, unsigned char targ_id)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scwtsel(unsigned long p_port)
+=======
+static void FPT_scwtsel(u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_scwtsel(u32 p_port)
 >>>>>>> v3.18
@@ -6914,8 +7414,12 @@ static void FPT_scwtsel(u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_inisci(unsigned char p_card, unsigned long p_port,
 		       unsigned char p_our_id)
+=======
+static void FPT_inisci(unsigned char p_card, u32 p_port, unsigned char p_our_id)
+>>>>>>> v3.18
 =======
 static void FPT_inisci(unsigned char p_card, u32 p_port, unsigned char p_our_id)
 >>>>>>> v3.18
@@ -7105,7 +7609,11 @@ static unsigned char FPT_scmachid(unsigned char p_card,
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_scsavdi(unsigned char p_card, unsigned long p_port)
+=======
+static void FPT_scsavdi(unsigned char p_card, u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_scsavdi(unsigned char p_card, u32 p_port)
 >>>>>>> v3.18
@@ -7154,7 +7662,11 @@ static void FPT_scsavdi(unsigned char p_card, u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_XbowInit(unsigned long port, unsigned char ScamFlg)
+=======
+static void FPT_XbowInit(u32 port, unsigned char ScamFlg)
+>>>>>>> v3.18
 =======
 static void FPT_XbowInit(u32 port, unsigned char ScamFlg)
 >>>>>>> v3.18
@@ -7207,7 +7719,11 @@ static void FPT_XbowInit(u32 port, unsigned char ScamFlg)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_BusMasterInit(unsigned long p_port)
+=======
+static void FPT_BusMasterInit(u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_BusMasterInit(u32 p_port)
 >>>>>>> v3.18
@@ -7238,7 +7754,11 @@ static void FPT_BusMasterInit(u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_DiagEEPROM(unsigned long p_port)
+=======
+static void FPT_DiagEEPROM(u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_DiagEEPROM(u32 p_port)
 >>>>>>> v3.18
@@ -7890,7 +8410,11 @@ static void FPT_utilUpdateResidual(struct sccb *p_SCCB)
 	unsigned long partial_cnt;
 	unsigned int sg_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *sg_ptr;
+=======
+	struct blogic_sg_seg *segp;
+>>>>>>> v3.18
 =======
 	struct blogic_sg_seg *segp;
 >>>>>>> v3.18
@@ -7907,7 +8431,10 @@ static void FPT_utilUpdateResidual(struct sccb *p_SCCB)
 		sg_index = p_SCCB->Sccb_sgseg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sg_ptr = (unsigned long *)p_SCCB->DataPointer;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -7920,8 +8447,14 @@ static void FPT_utilUpdateResidual(struct sccb *p_SCCB)
 		while (((unsigned long)sg_index *
 			(unsigned long)SG_ELEMENT_SIZE) < p_SCCB->DataLength) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			partial_cnt += *(sg_ptr + (sg_index * 2));
+=======
+			segp = (struct blogic_sg_seg *)(p_SCCB->DataPointer) +
+					(sg_index * 2);
+			partial_cnt += segp->segbytes;
+>>>>>>> v3.18
 =======
 			segp = (struct blogic_sg_seg *)(p_SCCB->DataPointer) +
 					(sg_index * 2);
@@ -7948,7 +8481,11 @@ static void FPT_utilUpdateResidual(struct sccb *p_SCCB)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_Wait1Second(unsigned long p_port)
+=======
+static void FPT_Wait1Second(u32 p_port)
+>>>>>>> v3.18
 =======
 static void FPT_Wait1Second(u32 p_port)
 >>>>>>> v3.18
@@ -7976,7 +8513,11 @@ static void FPT_Wait1Second(u32 p_port)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_Wait(unsigned long p_port, unsigned char p_delay)
+=======
+static void FPT_Wait(u32 p_port, unsigned char p_delay)
+>>>>>>> v3.18
 =======
 static void FPT_Wait(u32 p_port, unsigned char p_delay)
 >>>>>>> v3.18
@@ -8026,7 +8567,11 @@ static void FPT_Wait(u32 p_port, unsigned char p_delay)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_utilEEWriteOnOff(unsigned long p_port, unsigned char p_mode)
+=======
+static void FPT_utilEEWriteOnOff(u32 p_port, unsigned char p_mode)
+>>>>>>> v3.18
 =======
 static void FPT_utilEEWriteOnOff(u32 p_port, unsigned char p_mode)
 >>>>>>> v3.18
@@ -8059,7 +8604,11 @@ static void FPT_utilEEWriteOnOff(u32 p_port, unsigned char p_mode)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_utilEEWrite(unsigned long p_port, unsigned short ee_data,
+=======
+static void FPT_utilEEWrite(u32 p_port, unsigned short ee_data,
+>>>>>>> v3.18
 =======
 static void FPT_utilEEWrite(u32 p_port, unsigned short ee_data,
 >>>>>>> v3.18
@@ -8114,7 +8663,11 @@ static void FPT_utilEEWrite(u32 p_port, unsigned short ee_data,
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned short FPT_utilEERead(unsigned long p_port,
+=======
+static unsigned short FPT_utilEERead(u32 p_port,
+>>>>>>> v3.18
 =======
 static unsigned short FPT_utilEERead(u32 p_port,
 >>>>>>> v3.18
@@ -8148,8 +8701,12 @@ static unsigned short FPT_utilEERead(u32 p_port,
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned short FPT_utilEEReadOrg(unsigned long p_port,
 					unsigned short ee_addr)
+=======
+static unsigned short FPT_utilEEReadOrg(u32 p_port, unsigned short ee_addr)
+>>>>>>> v3.18
 =======
 static unsigned short FPT_utilEEReadOrg(u32 p_port, unsigned short ee_addr)
 >>>>>>> v3.18
@@ -8200,7 +8757,11 @@ static unsigned short FPT_utilEEReadOrg(u32 p_port, unsigned short ee_addr)
  *---------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void FPT_utilEESendCmdAddr(unsigned long p_port, unsigned char ee_cmd,
+=======
+static void FPT_utilEESendCmdAddr(u32 p_port, unsigned char ee_cmd,
+>>>>>>> v3.18
 =======
 static void FPT_utilEESendCmdAddr(u32 p_port, unsigned char ee_cmd,
 >>>>>>> v3.18
@@ -8298,7 +8859,11 @@ static unsigned char FPT_CalcLrc(unsigned char buffer[])
 
 static inline unsigned char
 <<<<<<< HEAD
+<<<<<<< HEAD
 FlashPoint__ProbeHostAdapter(struct FlashPoint_Info *FlashPointInfo)
+=======
+FlashPoint__ProbeHostAdapter(struct fpoint_info *FlashPointInfo)
+>>>>>>> v3.18
 =======
 FlashPoint__ProbeHostAdapter(struct fpoint_info *FlashPointInfo)
 >>>>>>> v3.18
@@ -8308,8 +8873,13 @@ FlashPoint__ProbeHostAdapter(struct fpoint_info *FlashPointInfo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline FlashPoint_CardHandle_T
 FlashPoint__HardwareResetHostAdapter(struct FlashPoint_Info *FlashPointInfo)
+=======
+static inline void *
+FlashPoint__HardwareResetHostAdapter(struct fpoint_info *FlashPointInfo)
+>>>>>>> v3.18
 =======
 static inline void *
 FlashPoint__HardwareResetHostAdapter(struct fpoint_info *FlashPointInfo)
@@ -8321,7 +8891,11 @@ FlashPoint__HardwareResetHostAdapter(struct fpoint_info *FlashPointInfo)
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 FlashPoint__ReleaseHostAdapter(FlashPoint_CardHandle_T CardHandle)
+=======
+FlashPoint__ReleaseHostAdapter(void *CardHandle)
+>>>>>>> v3.18
 =======
 FlashPoint__ReleaseHostAdapter(void *CardHandle)
 >>>>>>> v3.18
@@ -8331,8 +8905,12 @@ FlashPoint__ReleaseHostAdapter(void *CardHandle)
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 FlashPoint__StartCCB(FlashPoint_CardHandle_T CardHandle,
 		     struct BusLogic_CCB *CCB)
+=======
+FlashPoint__StartCCB(void *CardHandle, struct blogic_ccb *CCB)
+>>>>>>> v3.18
 =======
 FlashPoint__StartCCB(void *CardHandle, struct blogic_ccb *CCB)
 >>>>>>> v3.18
@@ -8342,8 +8920,12 @@ FlashPoint__StartCCB(void *CardHandle, struct blogic_ccb *CCB)
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 FlashPoint__AbortCCB(FlashPoint_CardHandle_T CardHandle,
 		     struct BusLogic_CCB *CCB)
+=======
+FlashPoint__AbortCCB(void *CardHandle, struct blogic_ccb *CCB)
+>>>>>>> v3.18
 =======
 FlashPoint__AbortCCB(void *CardHandle, struct blogic_ccb *CCB)
 >>>>>>> v3.18
@@ -8353,7 +8935,11 @@ FlashPoint__AbortCCB(void *CardHandle, struct blogic_ccb *CCB)
 
 static inline bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 FlashPoint__InterruptPending(FlashPoint_CardHandle_T CardHandle)
+=======
+FlashPoint__InterruptPending(void *CardHandle)
+>>>>>>> v3.18
 =======
 FlashPoint__InterruptPending(void *CardHandle)
 >>>>>>> v3.18
@@ -8363,7 +8949,11 @@ FlashPoint__InterruptPending(void *CardHandle)
 
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 FlashPoint__HandleInterrupt(FlashPoint_CardHandle_T CardHandle)
+=======
+FlashPoint__HandleInterrupt(void *CardHandle)
+>>>>>>> v3.18
 =======
 FlashPoint__HandleInterrupt(void *CardHandle)
 >>>>>>> v3.18
@@ -8386,6 +8976,7 @@ FlashPoint__HandleInterrupt(void *CardHandle)
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned char FlashPoint_ProbeHostAdapter(struct FlashPoint_Info *);
 extern FlashPoint_CardHandle_T
 FlashPoint_HardwareResetHostAdapter(struct FlashPoint_Info *);
@@ -8395,6 +8986,8 @@ extern bool FlashPoint_InterruptPending(FlashPoint_CardHandle_T);
 extern int FlashPoint_HandleInterrupt(FlashPoint_CardHandle_T);
 extern void FlashPoint_ReleaseHostAdapter(FlashPoint_CardHandle_T);
 =======
+=======
+>>>>>>> v3.18
 extern unsigned char FlashPoint_ProbeHostAdapter(struct fpoint_info *);
 extern void *FlashPoint_HardwareResetHostAdapter(struct fpoint_info *);
 extern void FlashPoint_StartCCB(void *, struct blogic_ccb *);
@@ -8402,6 +8995,9 @@ extern int FlashPoint_AbortCCB(void *, struct blogic_ccb *);
 extern bool FlashPoint_InterruptPending(void *);
 extern int FlashPoint_HandleInterrupt(void *);
 extern void FlashPoint_ReleaseHostAdapter(void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* CONFIG_SCSI_FLASHPOINT */

@@ -109,7 +109,10 @@ static int ad714x_spi_remove(struct spi_device *spi)
 
 	ad714x_remove(chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

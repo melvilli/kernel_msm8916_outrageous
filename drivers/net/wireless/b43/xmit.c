@@ -81,14 +81,20 @@ static int b43_plcp_get_bitrate_idx_cck(struct b43_plcp_hdr6 *plcp)
 
 /* Extract the bitrate index out of an OFDM PLCP header. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int b43_plcp_get_bitrate_idx_ofdm(struct b43_plcp_hdr6 *plcp, bool aphy)
 {
 	int base = aphy ? 0 : 4;
 =======
+=======
+>>>>>>> v3.18
 static int b43_plcp_get_bitrate_idx_ofdm(struct b43_plcp_hdr6 *plcp, bool ghz5)
 {
 	/* For 2 GHz band first OFDM rate is at index 4, see main.c */
 	int base = ghz5 ? 0 : 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (plcp->raw[0] & 0xF) {
@@ -286,7 +292,11 @@ int b43_generate_txhdr(struct b43_wldev *dev,
 		txhdr->phy_rate = b43_plcp_get_ratecode_cck(rate);
 	txhdr->mac_frame_ctl = wlhdr->frame_control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(txhdr->tx_receiver, wlhdr->addr1, 6);
+=======
+	memcpy(txhdr->tx_receiver, wlhdr->addr1, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(txhdr->tx_receiver, wlhdr->addr1, ETH_ALEN);
 >>>>>>> v3.18
@@ -349,7 +359,11 @@ int b43_generate_txhdr(struct b43_wldev *dev,
 			memcpy(txhdr->iv + 10, ((u8 *) wlhdr) + wlhdr_len, 3);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iv_len = min((size_t) info->control.hw_key->iv_len,
+=======
+			iv_len = min_t(size_t, info->control.hw_key->iv_len,
+>>>>>>> v3.18
 =======
 			iv_len = min_t(size_t, info->control.hw_key->iv_len,
 >>>>>>> v3.18
@@ -424,7 +438,11 @@ int b43_generate_txhdr(struct b43_wldev *dev,
 	if (info->flags & IEEE80211_TX_CTL_FIRST_FRAGMENT)
 		mac_ctl |= B43_TXH_MAC_STMSDU;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phy->type == B43_PHYTYPE_A)
+=======
+	if (!phy->gmode)
+>>>>>>> v3.18
 =======
 	if (!phy->gmode)
 >>>>>>> v3.18
@@ -787,7 +805,11 @@ void b43_rx(struct b43_wldev *dev, struct sk_buff *skb, const void *_rxhdr)
 	if (phystat0 & B43_RX_PHYST0_OFDM)
 		rate_idx = b43_plcp_get_bitrate_idx_ofdm(plcp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						phytype == B43_PHYTYPE_A);
+=======
+					!!(chanstat & B43_RX_CHAN_5GHZ));
+>>>>>>> v3.18
 =======
 					!!(chanstat & B43_RX_CHAN_5GHZ));
 >>>>>>> v3.18
@@ -830,7 +852,12 @@ void b43_rx(struct b43_wldev *dev, struct sk_buff *skb, const void *_rxhdr)
 		/* FIXME: We don't really know which value the "chanid" contains.
 		 *        So the following assignment might be wrong. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status.freq = b43_channel_to_freq_5ghz(chanid);
+=======
+		status.freq =
+			ieee80211_channel_to_frequency(chanid, status.band);
+>>>>>>> v3.18
 =======
 		status.freq =
 			ieee80211_channel_to_frequency(chanid, status.band);
@@ -852,6 +879,7 @@ void b43_rx(struct b43_wldev *dev, struct sk_buff *skb, const void *_rxhdr)
 		/* chanid is the SHM channel cookie. Which is the plain
 		 * channel number in b43. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chanstat & B43_RX_CHAN_5GHZ) {
 			status.band = IEEE80211_BAND_5GHZ;
 			status.freq = b43_channel_to_freq_5ghz(chanid);
@@ -860,12 +888,17 @@ void b43_rx(struct b43_wldev *dev, struct sk_buff *skb, const void *_rxhdr)
 			status.freq = b43_channel_to_freq_2ghz(chanid);
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (chanstat & B43_RX_CHAN_5GHZ)
 			status.band = IEEE80211_BAND_5GHZ;
 		else
 			status.band = IEEE80211_BAND_2GHZ;
 		status.freq =
 			ieee80211_channel_to_frequency(chanid, status.band);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:

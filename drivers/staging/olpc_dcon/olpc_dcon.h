@@ -23,6 +23,7 @@
 #define MODE_SELFTEST	(1<<15)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DCON_REG_HRES		2
 #define DCON_REG_HTOTAL		3
 #define DCON_REG_HSYNC_WIDTH	4
@@ -33,6 +34,8 @@
 #define DCON_REG_SCAN_INT	9
 #define DCON_REG_BRIGHT		10
 =======
+=======
+>>>>>>> v3.18
 #define DCON_REG_HRES		0x2
 #define DCON_REG_HTOTAL		0x3
 #define DCON_REG_HSYNC_WIDTH	0x4
@@ -51,6 +54,9 @@
 #define MEM_POWER_DOWN		(1<<8)
 /* Memory controller software reset */
 #define MEM_SOFT_RESET		(1<<0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Status values */

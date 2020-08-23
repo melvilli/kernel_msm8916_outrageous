@@ -11,6 +11,7 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Table for CRC-7 (polynomial x^7 + x^3 + 1) */
 const u8 crc7_syndrome_table[256] = {
 	0x00, 0x09, 0x12, 0x1b, 0x24, 0x2d, 0x36, 0x3f,
@@ -48,6 +49,8 @@ const u8 crc7_syndrome_table[256] = {
 };
 EXPORT_SYMBOL(crc7_syndrome_table);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Table for CRC-7 (polynomial x^7 + x^3 + 1).
  * This is a big-endian CRC (msbit is highest power of x),
@@ -89,6 +92,9 @@ const u8 crc7_be_syndrome_table[256] = {
 	0x8c, 0x9e, 0xa8, 0xba, 0xc4, 0xd6, 0xe0, 0xf2
 };
 EXPORT_SYMBOL(crc7_be_syndrome_table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -100,6 +106,7 @@ EXPORT_SYMBOL(crc7_be_syndrome_table);
  *
  * Returns the updated CRC7 value.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 u8 crc7(u8 crc, const u8 *buffer, size_t len)
 {
@@ -109,6 +116,8 @@ u8 crc7(u8 crc, const u8 *buffer, size_t len)
 }
 EXPORT_SYMBOL(crc7);
 =======
+=======
+>>>>>>> v3.18
  * The CRC7 is left-aligned in the byte (the lsbit is always 0), as that
  * makes the computation easier, and all callers want it in that form.
  *
@@ -120,6 +129,9 @@ u8 crc7_be(u8 crc, const u8 *buffer, size_t len)
 	return crc;
 }
 EXPORT_SYMBOL(crc7_be);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("CRC7 calculations");

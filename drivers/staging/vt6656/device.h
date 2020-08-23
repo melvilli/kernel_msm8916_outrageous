@@ -33,6 +33,7 @@
 #include <linux/kernel.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/delay.h>
 #include <linux/device.h>
@@ -46,6 +47,8 @@
 #include <linux/timer.h>
 #include <linux/usb.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/device.h>
 #include <linux/firmware.h>
@@ -56,6 +59,9 @@
 #include <linux/usb.h>
 #include <linux/crc32.h>
 #include <net/mac80211.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef SIOCETHTOOL
@@ -66,6 +72,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* please copy below macro to driver_event.c for API */
 #define RT_INSMOD_EVENT_FLAG                             0x0101
 #define RT_UPDEV_EVENT_FLAG                               0x0102
@@ -74,6 +81,8 @@
 #define RT_DOWNDEV_EVENT_FLAG                        0x0105
 #define RT_RMMOD_EVENT_FLAG                              0x0106
 =======
+=======
+>>>>>>> v3.18
 #define RATE_1M		0
 #define RATE_2M		1
 #define RATE_5M		2
@@ -89,12 +98,16 @@
 #define RATE_AUTO	12
 
 #define MAX_RATE			12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * device specific
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "device_cfg.h"
 #include "80211hdr.h"
@@ -107,6 +120,9 @@
 =======
 #include "wcmd.h"
 >>>>>>> v3.18
+=======
+#include "wcmd.h"
+>>>>>>> v3.18
 #include "desc.h"
 #include "key.h"
 #include "card.h"
@@ -114,6 +130,7 @@
 #define VNT_USB_VENDOR_ID                     0x160a
 #define VNT_USB_PRODUCT_ID                    0x3184
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MAC_MAX_CONTEXT_REG     (256+128)
 
@@ -136,6 +153,8 @@
 #define KEYSEL_TKIP                     2
 #define KEYSEL_CCMP                     3
 =======
+=======
+>>>>>>> v3.18
 #define DEVICE_NAME			"vt6656"
 #define DEVICE_FULL_DRV_NAM		"VIA Networking Wireless LAN USB Driver"
 
@@ -147,6 +166,9 @@
 #define OPTION_DEFAULT			{ [0 ... MAX_UINTS-1] = -1}
 
 #define DUPLICATE_RX_CACHE_LENGTH       5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AUTO_FB_NONE            0
@@ -168,6 +190,7 @@
 #define ANT_RXA                 2
 #define ANT_RXB                 3
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MAXCHECKHANGCNT         4
 
@@ -205,6 +228,8 @@ typedef enum __device_init_type {
 	DEVICE_INIT_DXPL            /* Dx to D0 power lost init */
 } DEVICE_INIT_TYPE, *PDEVICE_INIT_TYPE;
 =======
+=======
+>>>>>>> v3.18
 #define BB_VGA_LEVEL            4
 #define BB_VGA_CHANGE_THRESHOLD 3
 
@@ -301,6 +326,9 @@ struct vnt_rsp_card_init {
 	u8 min_channel;
 	u8 max_channel;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* USB */
@@ -308,6 +336,7 @@ struct vnt_rsp_card_init {
 /*
  * Enum of context types for SendPacket
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef enum _CONTEXT_TYPE {
     CONTEXT_DATA_PACKET = 1,
@@ -350,6 +379,8 @@ typedef struct _DEFAULT_CONFIG {
 	signed int    eEncryptionStatus;
 } DEFAULT_CONFIG, *PDEFAULT_CONFIG;
 =======
+=======
+>>>>>>> v3.18
 enum {
 	CONTEXT_DATA_PACKET = 1,
 	CONTEXT_MGMT_PACKET,
@@ -382,11 +413,15 @@ struct vnt_usb_send_context {
 	bool in_use;
 	unsigned char data[MAX_TOTAL_SIZE_WITH_ALL_HEADERS];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Structure to keep track of USB interrupt packets
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef struct {
     unsigned int            uDataLen;
@@ -1001,6 +1036,8 @@ struct vnt_private {
 
 int device_alloc_frag_buf(struct vnt_private *, PSDeFragControlBlock pDeF);
 =======
+=======
+>>>>>>> v3.18
 struct vnt_interrupt_buffer {
 	u8 *data_buf;
 	bool in_use;
@@ -1157,6 +1194,9 @@ struct vnt_private {
 }
 
 int vnt_init(struct vnt_private *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

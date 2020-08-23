@@ -24,16 +24,22 @@
 #define MAX_MAG_DELTA	11
 #define MAX_PHS_DELTA	10
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct coeff {
 	int mag_coeff[AR9300_MAX_CHAINS][MAX_MEASUREMENT];
 	int phs_coeff[AR9300_MAX_CHAINS][MAX_MEASUREMENT];
 =======
+=======
+>>>>>>> v3.18
 #define MAXIQCAL        3
 
 struct coeff {
 	int mag_coeff[AR9300_MAX_CHAINS][MAX_MEASUREMENT][MAXIQCAL];
 	int phs_coeff[AR9300_MAX_CHAINS][MAX_MEASUREMENT][MAXIQCAL];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int iqc_coeff[2];
 };
@@ -335,7 +341,10 @@ static void ar9003_hw_init_cal_settings(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define OFF_UPPER_LT 24
 #define OFF_LOWER_LT 7
 
@@ -554,6 +563,9 @@ static bool ar9003_hw_dynamic_osdac_selection(struct ath_hw *ah,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * solve 4x4 linear equation used in loopback iq cal.
@@ -577,7 +589,11 @@ static bool ar9003_hw_solve_iq_cal(struct ath_hw *ah,
 	struct ath_common *common = ath9k_hw_common(ah);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f2 = (f1 * f1 + f3 * f3) / result_shift;
+=======
+	f2 = ((f1 >> 3) * (f1 >> 3) + (f3 >> 3) * (f3 >> 3)) >> 9;
+>>>>>>> v3.18
 =======
 	f2 = ((f1 >> 3) * (f1 >> 3) + (f3 >> 3) * (f3 >> 3)) >> 9;
 >>>>>>> v3.18
@@ -671,9 +687,12 @@ static bool ar9003_hw_calc_iq_corr(struct ath_hw *ah,
 		i2_m_q2_a0_d1 = -((0xfff - i2_m_q2_a0_d1) + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i2_p_q2_a0_d1 > 0x800)
 		i2_p_q2_a0_d1 = -((0xfff - i2_p_q2_a0_d1) + 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (iq_corr_a0_d1 > 0x800)
@@ -719,7 +738,10 @@ static bool ar9003_hw_calc_iq_corr(struct ath_hw *ah,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((i2_p_q2_a0_d0 < 1024) || (i2_p_q2_a0_d0 > 2047) ||
             (i2_p_q2_a1_d0 < 0) || (i2_p_q2_a1_d1 < 0) ||
             (i2_p_q2_a0_d0 <= i2_m_q2_a0_d0) ||
@@ -733,6 +755,9 @@ static bool ar9003_hw_calc_iq_corr(struct ath_hw *ah,
 		return false;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mag_a0_d0 = (i2_m_q2_a0_d0 * res_scale) / i2_p_q2_a0_d0;
 	phs_a0_d0 = (iq_corr_a0_d0 * res_scale) / i2_p_q2_a0_d0;
@@ -822,7 +847,11 @@ static bool ar9003_hw_calc_iq_corr(struct ath_hw *ah,
 		q_q_coff = 63;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iqc_coeff[0] = (q_q_coff * 128) + q_i_coff;
+=======
+	iqc_coeff[0] = (q_q_coff * 128) + (0x7f & q_i_coff);
+>>>>>>> v3.18
 =======
 	iqc_coeff[0] = (q_q_coff * 128) + (0x7f & q_i_coff);
 >>>>>>> v3.18
@@ -857,7 +886,11 @@ static bool ar9003_hw_calc_iq_corr(struct ath_hw *ah,
 		q_q_coff = 63;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iqc_coeff[1] = (q_q_coff * 128) + q_i_coff;
+=======
+	iqc_coeff[1] = (q_q_coff * 128) + (0x7f & q_i_coff);
+>>>>>>> v3.18
 =======
 	iqc_coeff[1] = (q_q_coff * 128) + (0x7f & q_i_coff);
 >>>>>>> v3.18
@@ -869,7 +902,12 @@ static bool ar9003_hw_calc_iq_corr(struct ath_hw *ah,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ar9003_hw_detect_outlier(int *mp_coeff, int nmeasurement,
+=======
+static void ar9003_hw_detect_outlier(int mp_coeff[][MAXIQCAL],
+				     int nmeasurement,
+>>>>>>> v3.18
 =======
 static void ar9003_hw_detect_outlier(int mp_coeff[][MAXIQCAL],
 				     int nmeasurement,
@@ -883,17 +921,23 @@ static void ar9003_hw_detect_outlier(int mp_coeff[][MAXIQCAL],
 	/* find min/max mismatch across all calibrated gains */
 	for (i = 0; i < nmeasurement; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mp_coeff[i] > mp_max) {
 			mp_max = mp_coeff[i];
 			max_idx = i;
 		} else if (mp_coeff[i] < mp_min) {
 			mp_min = mp_coeff[i];
 =======
+=======
+>>>>>>> v3.18
 		if (mp_coeff[i][0] > mp_max) {
 			mp_max = mp_coeff[i][0];
 			max_idx = i;
 		} else if (mp_coeff[i][0] < mp_min) {
 			mp_min = mp_coeff[i][0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			min_idx = i;
 		}
@@ -902,9 +946,15 @@ static void ar9003_hw_detect_outlier(int mp_coeff[][MAXIQCAL],
 	/* find average (exclude max abs value) */
 	for (i = 0; i < nmeasurement; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((abs(mp_coeff[i]) < abs(mp_max)) ||
 		    (abs(mp_coeff[i]) < abs(mp_min))) {
 			mp_avg += mp_coeff[i];
+=======
+		if ((abs(mp_coeff[i][0]) < abs(mp_max)) ||
+		    (abs(mp_coeff[i][0]) < abs(mp_min))) {
+			mp_avg += mp_coeff[i][0];
+>>>>>>> v3.18
 =======
 		if ((abs(mp_coeff[i][0]) < abs(mp_max)) ||
 		    (abs(mp_coeff[i][0]) < abs(mp_min))) {
@@ -922,7 +972,11 @@ static void ar9003_hw_detect_outlier(int mp_coeff[][MAXIQCAL],
 		mp_avg /= mp_count;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mp_avg = mp_coeff[nmeasurement - 1];
+=======
+		mp_avg = mp_coeff[nmeasurement - 1][0];
+>>>>>>> v3.18
 =======
 		mp_avg = mp_coeff[nmeasurement - 1][0];
 >>>>>>> v3.18
@@ -935,6 +989,7 @@ static void ar9003_hw_detect_outlier(int mp_coeff[][MAXIQCAL],
 			outlier_idx = min_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mp_coeff[outlier_idx] = mp_avg;
 	}
 }
@@ -945,6 +1000,8 @@ static void ar9003_hw_tx_iqcal_load_avg_2_passes(struct ath_hw *ah,
 {
 	int i, im, nmeasurement;
 =======
+=======
+>>>>>>> v3.18
 		mp_coeff[outlier_idx][0] = mp_avg;
 	}
 }
@@ -955,6 +1012,9 @@ static void ar9003_hw_tx_iq_cal_outlier_detection(struct ath_hw *ah,
 {
 	int i, im, nmeasurement;
 	int magnitude, phase;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 tx_corr_coeff[MAX_MEASUREMENT][AR9300_MAX_CHAINS];
 	struct ath9k_hw_cal_data *caldata = ah->caldata;
@@ -986,6 +1046,7 @@ static void ar9003_hw_tx_iq_cal_outlier_detection(struct ath_hw *ah,
 			nmeasurement = MAX_MEASUREMENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* detect outlier only if nmeasurement > 1 */
 		if (nmeasurement > 1) {
 			/* Detect magnitude outlier */
@@ -1002,6 +1063,8 @@ static void ar9003_hw_tx_iq_cal_outlier_detection(struct ath_hw *ah,
 			coeff->iqc_coeff[0] = (coeff->mag_coeff[i][im] & 0x7f) |
 				((coeff->phs_coeff[i][im] & 0x7f) << 7);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Skip normal outlier detection for AR9550.
 		 */
@@ -1026,6 +1089,9 @@ static void ar9003_hw_tx_iq_cal_outlier_detection(struct ath_hw *ah,
 
 			coeff->iqc_coeff[0] =
 				(phase & 0x7f) | ((magnitude & 0x7f) << 7);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if ((im % 2) == 0)
@@ -1051,15 +1117,21 @@ static void ar9003_hw_tx_iq_cal_outlier_detection(struct ath_hw *ah,
 		      AR_PHY_RX_IQCAL_CORR_B0_LOOPBACK_IQCORR_EN, 0x1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (caldata)
 		caldata->done_txiqcal_once = is_reusable;
 =======
+=======
+>>>>>>> v3.18
 	if (caldata) {
 		if (is_reusable)
 			set_bit(TXIQCAL_DONE, &caldata->cal_flags);
 		else
 			clear_bit(TXIQCAL_DONE, &caldata->cal_flags);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
@@ -1089,8 +1161,11 @@ static bool ar9003_hw_tx_iq_cal_run(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ar9003_hw_tx_iq_cal_post_proc(struct ath_hw *ah, bool is_reusable)
 =======
+=======
+>>>>>>> v3.18
 static void __ar955x_tx_iq_cal_sort(struct ath_hw *ah,
 				    struct coeff *coeff,
 				    int i, int nmeasurement)
@@ -1148,6 +1223,9 @@ static bool ar955x_tx_iq_cal_median(struct ath_hw *ah,
 static void ar9003_hw_tx_iq_cal_post_proc(struct ath_hw *ah,
 					  int iqcal_idx,
 					  bool is_reusable)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ath_common *common = ath9k_hw_common(ah);
@@ -1162,16 +1240,22 @@ static void ar9003_hw_tx_iq_cal_post_proc(struct ath_hw *ah,
 		AR_PHY_CHAN_INFO_TAB_2,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct coeff coeff;
 	s32 iq_res[6];
 	int i, im, j;
 	int nmeasurement;
 =======
+=======
+>>>>>>> v3.18
 	static struct coeff coeff;
 	s32 iq_res[6];
 	int i, im, j;
 	int nmeasurement = 0;
 	bool outlier_detect = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < AR9300_MAX_CHAINS; i++) {
@@ -1231,6 +1315,7 @@ static void ar9003_hw_tx_iq_cal_post_proc(struct ath_hw *ah,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			coeff.mag_coeff[i][im] = coeff.iqc_coeff[0] & 0x7f;
 			coeff.phs_coeff[i][im] =
 				(coeff.iqc_coeff[0] >> 7) & 0x7f;
@@ -1243,6 +1328,8 @@ static void ar9003_hw_tx_iq_cal_post_proc(struct ath_hw *ah,
 	}
 	ar9003_hw_tx_iqcal_load_avg_2_passes(ah, &coeff, is_reusable);
 =======
+=======
+>>>>>>> v3.18
 			coeff.phs_coeff[i][im][iqcal_idx] =
 				coeff.iqc_coeff[0] & 0x7f;
 			coeff.mag_coeff[i][im][iqcal_idx] =
@@ -1260,6 +1347,9 @@ static void ar9003_hw_tx_iq_cal_post_proc(struct ath_hw *ah,
 							 iqcal_idx, nmeasurement);
 	if (outlier_detect)
 		ar9003_hw_tx_iq_cal_outlier_detection(ah, &coeff, is_reusable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
@@ -1315,7 +1405,11 @@ static void ar9003_hw_tx_iq_cal_reload(struct ath_hw *ah)
 static void ar9003_hw_manual_peak_cal(struct ath_hw *ah, u8 chain, bool is_2g)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int offset[8], total = 0, test;
+=======
+	int offset[8] = {0}, total = 0, test;
+>>>>>>> v3.18
 =======
 	int offset[8] = {0}, total = 0, test;
 >>>>>>> v3.18
@@ -1344,6 +1438,7 @@ static void ar9003_hw_manual_peak_cal(struct ath_hw *ah, u8 chain, bool is_2g)
 	REG_RMW_FIELD(ah, AR_PHY_65NM_RXRF_AGC(chain),
 		      AR_PHY_65NM_RXRF_AGC_AGC_CAL_OVR, 0x1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_2g)
 		REG_RMW_FIELD(ah, AR_PHY_65NM_RXRF_AGC(chain),
 			      AR_PHY_65NM_RXRF_AGC_AGC2G_DBDAC_OVR, 0x0);
@@ -1351,6 +1446,8 @@ static void ar9003_hw_manual_peak_cal(struct ath_hw *ah, u8 chain, bool is_2g)
 		REG_RMW_FIELD(ah, AR_PHY_65NM_RXRF_AGC(chain),
 			      AR_PHY_65NM_RXRF_AGC_AGC5G_DBDAC_OVR, 0x0);
 =======
+=======
+>>>>>>> v3.18
 
 	if (AR_SREV_9330_11(ah)) {
 		REG_RMW_FIELD(ah, AR_PHY_65NM_RXRF_AGC(chain),
@@ -1363,6 +1460,9 @@ static void ar9003_hw_manual_peak_cal(struct ath_hw *ah, u8 chain, bool is_2g)
 			REG_RMW_FIELD(ah, AR_PHY_65NM_RXRF_AGC(chain),
 				      AR_PHY_65NM_RXRF_AGC_AGC5G_DBDAC_OVR, 0x0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 6; i > 0; i--) {
@@ -1400,15 +1500,21 @@ static void ar9003_hw_manual_peak_cal(struct ath_hw *ah, u8 chain, bool is_2g)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ar9003_hw_do_manual_peak_cal(struct ath_hw *ah,
 					 struct ath9k_channel *chan)
 {
 =======
+=======
+>>>>>>> v3.18
 static void ar9003_hw_do_pcoem_manual_peak_cal(struct ath_hw *ah,
 					       struct ath9k_channel *chan,
 					       bool run_rtt_cal)
 {
 	struct ath9k_hw_cal_data *caldata = ah->caldata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 
@@ -1416,6 +1522,12 @@ static void ar9003_hw_do_pcoem_manual_peak_cal(struct ath_hw *ah,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if ((ah->caps.hw_caps & ATH9K_HW_CAP_RTT) && !run_rtt_cal)
+		return;
+
+>>>>>>> v3.18
 =======
 	if ((ah->caps.hw_caps & ATH9K_HW_CAP_RTT) && !run_rtt_cal)
 		return;
@@ -1427,7 +1539,10 @@ static void ar9003_hw_do_pcoem_manual_peak_cal(struct ath_hw *ah,
 		ar9003_hw_manual_peak_cal(ah, i, IS_CHAN_2GHZ(chan));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (caldata)
 		set_bit(SW_PKDET_DONE, &caldata->cal_flags);
@@ -1449,6 +1564,9 @@ static void ar9003_hw_do_pcoem_manual_peak_cal(struct ath_hw *ah,
 						    AR_PHY_65NM_RXRF_AGC_AGC5G_CALDAC_OVR);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1468,7 +1586,11 @@ static void ar9003_hw_cl_cal_post_proc(struct ath_hw *ah, bool is_reusable)
 			  AR_PHY_AGC_CONTROL_CLC_SUCCESS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (caldata->done_txclcal_once) {
+=======
+	if (test_bit(TXCLCAL_DONE, &caldata->cal_flags)) {
+>>>>>>> v3.18
 =======
 	if (test_bit(TXCLCAL_DONE, &caldata->cal_flags)) {
 >>>>>>> v3.18
@@ -1488,6 +1610,7 @@ static void ar9003_hw_cl_cal_post_proc(struct ath_hw *ah, bool is_reusable)
 					REG_READ(ah, CL_TAB_ENTRY(cl_idx[i]));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		caldata->done_txclcal_once = true;
 	}
 }
@@ -1495,12 +1618,17 @@ static void ar9003_hw_cl_cal_post_proc(struct ath_hw *ah, bool is_reusable)
 static bool ar9003_hw_init_cal(struct ath_hw *ah,
 			       struct ath9k_channel *chan)
 =======
+=======
+>>>>>>> v3.18
 		set_bit(TXCLCAL_DONE, &caldata->cal_flags);
 	}
 }
 
 static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 				     struct ath9k_channel *chan)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ath_common *common = ath9k_hw_common(ah);
@@ -1508,8 +1636,14 @@ static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 	bool txiqcal_done = false;
 	bool is_reusable = true, status = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool run_rtt_cal = false, run_agc_cal, sep_iq_cal = false;
 	bool rtt = !!(ah->caps.hw_caps & ATH9K_HW_CAP_RTT);
+=======
+	bool run_rtt_cal = false, run_agc_cal;
+	bool rtt = !!(ah->caps.hw_caps & ATH9K_HW_CAP_RTT);
+	u32 rx_delay = 0;
+>>>>>>> v3.18
 =======
 	bool run_rtt_cal = false, run_agc_cal;
 	bool rtt = !!(ah->caps.hw_caps & ATH9K_HW_CAP_RTT);
@@ -1539,6 +1673,7 @@ static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtt && !run_rtt_cal) {
 		agc_ctrl = REG_READ(ah, AR_PHY_AGC_CONTROL);
 		agc_supp_cals &= agc_ctrl;
@@ -1551,6 +1686,8 @@ static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 	if (ah->enabled_cals & TX_CL_CAL) {
 		if (caldata && caldata->done_txclcal_once)
 =======
+=======
+>>>>>>> v3.18
 	if (rtt) {
 		if (!run_rtt_cal) {
 			agc_ctrl = REG_READ(ah, AR_PHY_AGC_CONTROL);
@@ -1567,6 +1704,9 @@ static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 
 	if (ah->enabled_cals & TX_CL_CAL) {
 		if (caldata && test_bit(TXCLCAL_DONE, &caldata->cal_flags))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			REG_CLR_BIT(ah, AR_PHY_CL_CAL_CTL,
 				    AR_PHY_CL_CAL_ENABLE);
@@ -1592,7 +1732,11 @@ static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 	 */
 	if (ah->enabled_cals & TX_IQ_ON_AGC_CAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (caldata && !caldata->done_txiqcal_once)
+=======
+		if (caldata && !test_bit(TXIQCAL_DONE, &caldata->cal_flags))
+>>>>>>> v3.18
 =======
 		if (caldata && !test_bit(TXIQCAL_DONE, &caldata->cal_flags))
 >>>>>>> v3.18
@@ -1603,9 +1747,12 @@ static bool ar9003_hw_init_cal_pcoem(struct ath_hw *ah,
 				    AR_PHY_TX_IQCAL_CONTROL_0_ENABLE_TXIQ_CAL);
 		txiqcal_done = run_agc_cal = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (caldata && !caldata->done_txiqcal_once) {
 		run_agc_cal = true;
 		sep_iq_cal = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1615,17 +1762,23 @@ skip_tx_iqcal:
 		ar9003_mci_init_cal_req(ah, &is_reusable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sep_iq_cal) {
 		txiqcal_done = ar9003_hw_tx_iq_cal_run(ah);
 		REG_WRITE(ah, AR_PHY_ACTIVE, AR_PHY_ACTIVE_DIS);
 		udelay(5);
 =======
+=======
+>>>>>>> v3.18
 	if (REG_READ(ah, AR_PHY_CL_CAL_CTL) & AR_PHY_CL_CAL_ENABLE) {
 		rx_delay = REG_READ(ah, AR_PHY_RX_DELAY);
 		/* Disable BB_active */
 		REG_WRITE(ah, AR_PHY_ACTIVE, AR_PHY_ACTIVE_DIS);
 		udelay(5);
 		REG_WRITE(ah, AR_PHY_RX_DELAY, AR_PHY_RX_DELAY_DELAY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		REG_WRITE(ah, AR_PHY_ACTIVE, AR_PHY_ACTIVE_EN);
 	}
@@ -1642,14 +1795,20 @@ skip_tx_iqcal:
 				       0, AH_WAIT_TIMEOUT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ar9003_hw_do_manual_peak_cal(ah, chan);
 =======
+=======
+>>>>>>> v3.18
 		ar9003_hw_do_pcoem_manual_peak_cal(ah, chan, run_rtt_cal);
 	}
 
 	if (REG_READ(ah, AR_PHY_CL_CAL_CTL) & AR_PHY_CL_CAL_ENABLE) {
 		REG_WRITE(ah, AR_PHY_RX_DELAY, rx_delay);
 		udelay(5);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1673,8 +1832,13 @@ skip_tx_iqcal:
 
 	if (txiqcal_done)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ar9003_hw_tx_iq_cal_post_proc(ah, is_reusable);
 	else if (caldata && caldata->done_txiqcal_once)
+=======
+		ar9003_hw_tx_iq_cal_post_proc(ah, 0, is_reusable);
+	else if (caldata && test_bit(TXIQCAL_DONE, &caldata->cal_flags))
+>>>>>>> v3.18
 =======
 		ar9003_hw_tx_iq_cal_post_proc(ah, 0, is_reusable);
 	else if (caldata && test_bit(TXIQCAL_DONE, &caldata->cal_flags))
@@ -1686,6 +1850,7 @@ skip_tx_iqcal:
 	if (run_rtt_cal && caldata) {
 		if (is_reusable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!ath9k_hw_rfbus_req(ah))
 				ath_err(ath9k_hw_common(ah),
 					"Could not stop baseband\n");
@@ -1693,6 +1858,8 @@ skip_tx_iqcal:
 				ar9003_hw_rtt_fill_hist(ah);
 
 =======
+=======
+>>>>>>> v3.18
 			if (!ath9k_hw_rfbus_req(ah)) {
 				ath_err(ath9k_hw_common(ah),
 					"Could not stop baseband\n");
@@ -1703,6 +1870,9 @@ skip_tx_iqcal:
 					ar9003_hw_rtt_load_hist(ah);
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ath9k_hw_rfbus_done(ah);
 		}
@@ -1733,7 +1903,10 @@ skip_tx_iqcal:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool do_ar9003_agc_cal(struct ath_hw *ah)
 {
 	struct ath_common *common = ath9k_hw_common(ah);
@@ -1873,6 +2046,9 @@ skip_tx_iqcal:
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ar9003_hw_attach_calib_ops(struct ath_hw *ah)
 {
@@ -1880,15 +2056,21 @@ void ar9003_hw_attach_calib_ops(struct ath_hw *ah)
 	struct ath_hw_ops *ops = ath9k_hw_ops(ah);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv_ops->init_cal_settings = ar9003_hw_init_cal_settings;
 	priv_ops->init_cal = ar9003_hw_init_cal;
 =======
+=======
+>>>>>>> v3.18
 	if (AR_SREV_9485(ah) || AR_SREV_9462(ah) || AR_SREV_9565(ah))
 		priv_ops->init_cal = ar9003_hw_init_cal_pcoem;
 	else
 		priv_ops->init_cal = ar9003_hw_init_cal_soc;
 
 	priv_ops->init_cal_settings = ar9003_hw_init_cal_settings;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	priv_ops->setup_calibration = ar9003_hw_setup_calibration;
 

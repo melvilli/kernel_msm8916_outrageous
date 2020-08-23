@@ -33,12 +33,15 @@
 #define OMAP2_SRAM_PUB_PA	(OMAP2_SRAM_PA + 0xf800)
 #define OMAP3_SRAM_PUB_PA       (OMAP3_SRAM_PA + 0x8000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP4_ERRATA_I688
 #define OMAP4_SRAM_PUB_PA	OMAP4_SRAM_PA
 #else
 #define OMAP4_SRAM_PUB_PA	(OMAP4_SRAM_PA + 0x4000)
 #endif
 #define OMAP5_SRAM_PA		0x40300000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -74,6 +77,7 @@ static int is_sram_locked(void)
 		/* RAMFW: R/W access to all initiators for all qualifier sets */
 		if (cpu_is_omap242x()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__raw_writel(0xFF, OMAP24XX_VA_REQINFOPERM0); /* all q-vects */
 			__raw_writel(0xCFDE, OMAP24XX_VA_READPERM0);  /* all i-read */
 			__raw_writel(0xCFDE, OMAP24XX_VA_WRITEPERM0); /* all i-write */
@@ -85,6 +89,8 @@ static int is_sram_locked(void)
 			__raw_writel(0x0, OMAP34XX_VA_ADDR_MATCH2);
 			__raw_writel(0xFFFFFFFF, OMAP34XX_VA_SMS_RG_ATT0);
 =======
+=======
+>>>>>>> v3.18
 			writel_relaxed(0xFF, OMAP24XX_VA_REQINFOPERM0); /* all q-vects */
 			writel_relaxed(0xCFDE, OMAP24XX_VA_READPERM0);  /* all i-read */
 			writel_relaxed(0xCFDE, OMAP24XX_VA_WRITEPERM0); /* all i-write */
@@ -95,6 +101,9 @@ static int is_sram_locked(void)
 			writel_relaxed(0xFFFF, OMAP34XX_VA_WRITEPERM0); /* all i-write */
 			writel_relaxed(0x0, OMAP34XX_VA_ADDR_MATCH2);
 			writel_relaxed(0xFFFFFFFF, OMAP34XX_VA_SMS_RG_ATT0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return 0;
@@ -122,6 +131,7 @@ static void __init omap_detect_sram(void)
 				omap_sram_size = 0x8000; /* 32K */
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (cpu_is_omap44xx()) {
 			omap_sram_start = OMAP4_SRAM_PUB_PA;
 			omap_sram_size = 0xa000; /* 40K */
@@ -130,11 +140,14 @@ static void __init omap_detect_sram(void)
 			omap_sram_size = SZ_128K; /* 128KB */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		} else {
 			omap_sram_start = OMAP2_SRAM_PUB_PA;
 			omap_sram_size = 0x800; /* 2K */
 		}
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (soc_is_am33xx()) {
 			omap_sram_start = AM33XX_SRAM_PA;
@@ -148,6 +161,11 @@ static void __init omap_detect_sram(void)
 		} else if (soc_is_omap54xx()) {
 			omap_sram_start = OMAP5_SRAM_PA;
 			omap_sram_size = SZ_128K; /* 128KB */
+=======
+		if (cpu_is_omap34xx()) {
+			omap_sram_start = OMAP3_SRAM_PA;
+			omap_sram_size = 0x10000; /* 64K */
+>>>>>>> v3.18
 =======
 		if (cpu_is_omap34xx()) {
 			omap_sram_start = OMAP3_SRAM_PA;
@@ -171,12 +189,15 @@ static void __init omap2_map_sram(void)
 	int cached = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP4_ERRATA_I688
 	if (cpu_is_omap44xx()) {
 		omap_sram_start += PAGE_SIZE;
 		omap_sram_size -= SZ_16K;
 	}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (cpu_is_omap34xx()) {
@@ -311,11 +332,14 @@ static inline int omap34xx_sram_init(void)
 #endif /* CONFIG_ARCH_OMAP3 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int am33xx_sram_init(void)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int __init omap_sram_init(void)
@@ -328,8 +352,11 @@ int __init omap_sram_init(void)
 	else if (cpu_is_omap2430())
 		omap243x_sram_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (soc_is_am33xx())
 		am33xx_sram_init();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	else if (cpu_is_omap34xx())

@@ -9,8 +9,13 @@ struct tcf_defact {
 	void    		*tcfd_defdata;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_defact(pc) \
 	container_of(pc, struct tcf_defact, common)
+=======
+#define to_defact(a) \
+	container_of(a->priv, struct tcf_defact, common)
+>>>>>>> v3.18
 =======
 #define to_defact(a) \
 	container_of(a->priv, struct tcf_defact, common)

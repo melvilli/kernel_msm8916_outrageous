@@ -19,6 +19,10 @@
 #include <linux/slab.h>
 #include <linux/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 >>>>>>> v3.18
@@ -27,6 +31,10 @@
 #include <asm/lowcore.h>
 #include <asm/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hw_irq.h>
+>>>>>>> v3.18
 =======
 #include <asm/hw_irq.h>
 >>>>>>> v3.18
@@ -37,6 +45,10 @@ EXPORT_PER_CPU_SYMBOL_GPL(irq_stat);
 
 struct irq_class {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int irq;
+>>>>>>> v3.18
 =======
 	int irq;
 >>>>>>> v3.18
@@ -55,14 +67,20 @@ struct irq_class {
  * up with having a sum which accounts each interrupt twice.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct irq_class irqclass_main_desc[NR_IRQS] = {
 	[EXTERNAL_INTERRUPT] = {.name = "EXT"},
 	[IO_INTERRUPT]	     = {.name = "I/O"}
 =======
+=======
+>>>>>>> v3.18
 static const struct irq_class irqclass_main_desc[NR_IRQS_BASE] = {
 	{.irq = EXT_INTERRUPT,	.name = "EXT"},
 	{.irq = IO_INTERRUPT,	.name = "I/O"},
 	{.irq = THIN_INTERRUPT, .name = "AIO"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -72,6 +90,7 @@ static const struct irq_class irqclass_main_desc[NR_IRQS_BASE] = {
  * In addition this list contains non external / I/O events like NMIs.
  */
 static const struct irq_class irqclass_sub_desc[NR_ARCH_IRQS] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	[IRQEXT_CLK] = {.name = "CLK", .desc = "[EXT] Clock Comparator"},
 	[IRQEXT_EXC] = {.name = "EXC", .desc = "[EXT] External Call"},
@@ -107,6 +126,8 @@ static const struct irq_class irqclass_sub_desc[NR_ARCH_IRQS] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	{.irq = IRQEXT_CLK, .name = "CLK", .desc = "[EXT] Clock Comparator"},
 	{.irq = IRQEXT_EXC, .name = "EXC", .desc = "[EXT] External Call"},
 	{.irq = IRQEXT_EMS, .name = "EMS", .desc = "[EXT] Emergency Signal"},
@@ -163,6 +184,9 @@ void do_IRQ(struct pt_regs *regs, int irq)
 	set_irq_regs(old_regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * show_interrupts is needed by /proc/interrupts.
@@ -170,22 +194,29 @@ void do_IRQ(struct pt_regs *regs, int irq)
 int show_interrupts(struct seq_file *p, void *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq = *(loff_t *) v;
 	int cpu;
 
 	get_online_cpus();
 	if (irq == 0) {
 =======
+=======
+>>>>>>> v3.18
 	int index = *(loff_t *) v;
 	int cpu, irq;
 
 	get_online_cpus();
 	if (index == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seq_puts(p, "           ");
 		for_each_online_cpu(cpu)
 			seq_printf(p, "CPU%d       ", cpu);
 		seq_putc(p, '\n');
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 	if (irq < NR_IRQS) {
@@ -205,6 +236,8 @@ int show_interrupts(struct seq_file *p, void *v)
 	}
 skip_arch_irqs:
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	}
 	if (index < NR_IRQS) {
@@ -230,11 +263,15 @@ skip_arch_irqs:
 		seq_putc(p, '\n');
 	}
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	put_online_cpus();
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Switch to the asynchronous interrupt stack for softirq execution.
@@ -283,6 +320,8 @@ void init_irq_proc(void)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 unsigned int arch_dynirq_lower_bound(unsigned int from)
 {
 	return from < THIN_INTERRUPT ? THIN_INTERRUPT : from;
@@ -316,11 +355,15 @@ void do_softirq_own_stack(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * ext_int_hash[index] is the list head for all external interrupts that hash
  * to this index.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct list_head ext_int_hash[256];
 
@@ -349,6 +392,8 @@ static inline int ext_hash(u16 code)
 
 int register_external_interrupt(u16 code, ext_int_handler_t handler)
 =======
+=======
+>>>>>>> v3.18
 static struct hlist_head ext_int_hash[32] ____cacheline_aligned;
 
 struct ext_int_info {
@@ -369,6 +414,9 @@ static inline int ext_hash(u16 code)
 }
 
 int register_external_irq(u16 code, ext_int_handler_t handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ext_int_info *p;
@@ -384,6 +432,7 @@ int register_external_irq(u16 code, ext_int_handler_t handler)
 
 	spin_lock_irqsave(&ext_int_hash_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_rcu(&p->entry, &ext_int_hash[index]);
 	spin_unlock_irqrestore(&ext_int_hash_lock, flags);
 	return 0;
@@ -392,6 +441,8 @@ EXPORT_SYMBOL(register_external_interrupt);
 
 int unregister_external_interrupt(u16 code, ext_int_handler_t handler)
 =======
+=======
+>>>>>>> v3.18
 	hlist_add_head_rcu(&p->entry, &ext_int_hash[index]);
 	spin_unlock_irqrestore(&ext_int_hash_lock, flags);
 	return 0;
@@ -399,6 +450,9 @@ int unregister_external_interrupt(u16 code, ext_int_handler_t handler)
 EXPORT_SYMBOL(register_external_irq);
 
 int unregister_external_irq(u16 code, ext_int_handler_t handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ext_int_info *p;
@@ -407,9 +461,15 @@ int unregister_external_irq(u16 code, ext_int_handler_t handler)
 
 	spin_lock_irqsave(&ext_int_hash_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_rcu(p, &ext_int_hash[index], entry) {
 		if (p->code == code && p->handler == handler) {
 			list_del_rcu(&p->entry);
+=======
+	hlist_for_each_entry_rcu(p, &ext_int_hash[index], entry) {
+		if (p->code == code && p->handler == handler) {
+			hlist_del_rcu(&p->entry);
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry_rcu(p, &ext_int_hash[index], entry) {
 		if (p->code == code && p->handler == handler) {
@@ -421,6 +481,7 @@ int unregister_external_irq(u16 code, ext_int_handler_t handler)
 	spin_unlock_irqrestore(&ext_int_hash_lock, flags);
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(unregister_external_interrupt);
 
@@ -568,6 +629,8 @@ unsigned int probe_irq_mask(unsigned long val)
 }
 EXPORT_SYMBOL_GPL(probe_irq_mask);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(unregister_external_irq);
 
 static irqreturn_t do_ext_interrupt(int irq, void *dummy)
@@ -631,4 +694,7 @@ void irq_subclass_unregister(enum irq_subclass subclass)
 	spin_unlock(&irq_subclass_lock);
 }
 EXPORT_SYMBOL(irq_subclass_unregister);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

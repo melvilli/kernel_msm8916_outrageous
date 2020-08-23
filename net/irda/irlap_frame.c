@@ -623,7 +623,11 @@ void irlap_send_rd_frame(struct irlap_cb *self)
 
 	frame->caddr = self->caddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame->caddr = RD_RSP | PF_BIT;
+=======
+	frame->control = RD_RSP | PF_BIT;
+>>>>>>> v3.18
 =======
 	frame->control = RD_RSP | PF_BIT;
 >>>>>>> v3.18

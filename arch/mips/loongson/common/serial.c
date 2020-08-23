@@ -20,15 +20,21 @@
 #include <machine.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PORT(int)			\
 {								\
 	.irq		= int,					\
 	.uartclk	= 1843200,				\
 =======
+=======
+>>>>>>> v3.18
 #define PORT(int, clk)			\
 {								\
 	.irq		= int,					\
 	.uartclk	= clk,					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.iotype		= UPIO_PORT,				\
 	.flags		= UPF_BOOT_AUTOCONF | UPF_SKIP_TEST,	\
@@ -36,15 +42,21 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PORT_M(int)				\
 {								\
 	.irq		= MIPS_CPU_IRQ_BASE + (int),		\
 	.uartclk	= 3686400,				\
 =======
+=======
+>>>>>>> v3.18
 #define PORT_M(int, clk)				\
 {								\
 	.irq		= MIPS_CPU_IRQ_BASE + (int),		\
 	.uartclk	= clk,					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.iotype		= UPIO_MEM,				\
 	.membase	= (void __iomem *)NULL,			\
@@ -55,6 +67,7 @@
 static struct plat_serial8250_port uart8250_data[][2] = {
 	[MACH_LOONGSON_UNKNOWN]		{},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[MACH_LEMOTE_FL2E]		{PORT(4), {} },
 	[MACH_LEMOTE_FL2F]		{PORT(3), {} },
 	[MACH_LEMOTE_ML2F7]		{PORT_M(3), {} },
@@ -63,6 +76,8 @@ static struct plat_serial8250_port uart8250_data[][2] = {
 	[MACH_LEMOTE_NAS]		{PORT_M(3), {} },
 	[MACH_LEMOTE_LL2F]		{PORT(3), {} },
 =======
+=======
+>>>>>>> v3.18
 	[MACH_LEMOTE_FL2E]              {PORT(4, 1843200), {} },
 	[MACH_LEMOTE_FL2F]              {PORT(3, 1843200), {} },
 	[MACH_LEMOTE_ML2F7]             {PORT_M(3, 3686400), {} },
@@ -74,6 +89,9 @@ static struct plat_serial8250_port uart8250_data[][2] = {
 	[MACH_LEMOTE_A1101]             {PORT_M(2, 25000000), {} },
 	[MACH_LEMOTE_A1201]             {PORT_M(2, 25000000), {} },
 	[MACH_LEMOTE_A1205]             {PORT_M(2, 25000000), {} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[MACH_LOONGSON_END]		{},
 };

@@ -4,7 +4,11 @@
 
 menu "PCMCIA character devices"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HOTPLUG && PCMCIA!=n
+=======
+	depends on PCMCIA!=n
+>>>>>>> v3.18
 =======
 	depends on PCMCIA!=n
 >>>>>>> v3.18
@@ -20,7 +24,11 @@ config SYNCLINK_CS
 	  This driver may be built as a module ( = code which can be
 	  inserted in and removed from the running kernel whenever you want).
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  The module will be called synclinkmp.  If you want to do that, say M
+=======
+	  The module will be called synclink_cs.  If you want to do that, say M
+>>>>>>> v3.18
 =======
 	  The module will be called synclink_cs.  If you want to do that, say M
 >>>>>>> v3.18

@@ -82,8 +82,11 @@ static time_t year_seconds[MAX_YEAR_SECONDS] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct timezone sys_tz;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SECS_PER_HOUR	(60 * 60)

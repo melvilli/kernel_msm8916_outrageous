@@ -22,7 +22,10 @@
 #include <drm/drmP.h>
 #include <drm/drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/gma_drm.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "psb_drv.h"
@@ -40,6 +43,7 @@
 #include <acpi/video.h>
 #include <linux/module.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int drm_psb_trap_pagefaults;
 
@@ -92,6 +96,8 @@ static DEFINE_PCI_DEVICE_TABLE(pciidlist) = {
 	{ 0x8086, 0x0bee, PCI_ANY_ID, PCI_ANY_ID, 0, 0, (long) &cdv_chip_ops},
 	{ 0x8086, 0x0bef, PCI_ANY_ID, PCI_ANY_ID, 0, 0, (long) &cdv_chip_ops},
 =======
+=======
+>>>>>>> v3.18
 static struct drm_driver driver;
 static int psb_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent);
 
@@ -151,6 +157,9 @@ static const struct pci_device_id pciidlist[] = {
 	{ 0x8086, 0x0bed, PCI_ANY_ID, PCI_ANY_ID, 0, 0, (long) &cdv_chip_ops },
 	{ 0x8086, 0x0bee, PCI_ANY_ID, PCI_ANY_ID, 0, 0, (long) &cdv_chip_ops },
 	{ 0x8086, 0x0bef, PCI_ANY_ID, PCI_ANY_ID, 0, 0, (long) &cdv_chip_ops },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	{ 0, }
@@ -160,6 +169,7 @@ MODULE_DEVICE_TABLE(pci, pciidlist);
 /*
  * Standard IOCTLs.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define DRM_IOCTL_GMA_ADB	\
@@ -215,10 +225,15 @@ static struct drm_ioctl_desc psb_ioctls[] = {
 
 static void psb_lastclose(struct drm_device *dev)
 =======
+=======
+>>>>>>> v3.18
 static const struct drm_ioctl_desc psb_ioctls[] = {
 };
 
 static void psb_driver_lastclose(struct drm_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
@@ -226,11 +241,17 @@ static void psb_driver_lastclose(struct drm_device *dev)
 	struct psb_fbdev *fbdev = dev_priv->fbdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_modeset_lock_all(dev);
 	ret = drm_fb_helper_restore_fbdev_mode(&fbdev->psb_fb_helper);
 	if (ret)
 		DRM_DEBUG("failed to restore crtc mode\n");
 	drm_modeset_unlock_all(dev);
+=======
+	ret = drm_fb_helper_restore_fbdev_mode_unlocked(&fbdev->psb_fb_helper);
+	if (ret)
+		DRM_DEBUG("failed to restore crtc mode\n");
+>>>>>>> v3.18
 =======
 	ret = drm_fb_helper_restore_fbdev_mode_unlocked(&fbdev->psb_fb_helper);
 	if (ret)
@@ -248,6 +269,7 @@ static int psb_do_init(struct drm_device *dev)
 	uint32_t stolen_gtt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -ENOMEM;
 
 	if (pg->mmu_gatt_start & 0x0FFFFFFF) {
@@ -262,6 +284,8 @@ static int psb_do_init(struct drm_device *dev)
 	stolen_gtt =
 	    (stolen_gtt < pg->gtt_pages) ? stolen_gtt : pg->gtt_pages;
 =======
+=======
+>>>>>>> v3.18
 	if (pg->mmu_gatt_start & 0x0FFFFFFF) {
 		dev_err(dev->dev, "Gatt must be 256M aligned. This is a bug.\n");
 		return -EINVAL;
@@ -270,6 +294,9 @@ static int psb_do_init(struct drm_device *dev)
 	stolen_gtt = (pg->stolen_size >> PAGE_SHIFT) * 4;
 	stolen_gtt = (stolen_gtt + PAGE_SIZE - 1) >> PAGE_SHIFT;
 	stolen_gtt = (stolen_gtt < pg->gtt_pages) ? stolen_gtt : pg->gtt_pages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_priv->gatt_free_offset = pg->mmu_gatt_start +
@@ -282,24 +309,36 @@ static int psb_do_init(struct drm_device *dev)
 	PSB_WSGX32(0x00000000, PSB_CR_BIF_BANK1);
 	PSB_RSGX32(PSB_CR_BIF_BANK1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSB_WSGX32(PSB_RSGX32(PSB_CR_BIF_CTRL) | _PSB_MMU_ER_MASK,
 							PSB_CR_BIF_CTRL);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Do not bypass any MMU access, let them pagefault instead */
 	PSB_WSGX32((PSB_RSGX32(PSB_CR_BIF_CTRL) & ~_PSB_MMU_ER_MASK),
 		   PSB_CR_BIF_CTRL);
 	PSB_RSGX32(PSB_CR_BIF_CTRL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	psb_spank(dev_priv);
 
 	/* mmu_gatt ?? */
 	PSB_WSGX32(pg->gatt_start, PSB_CR_BIF_TWOD_REQ_BASE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 out_err:
 	return ret;
+=======
+	PSB_RSGX32(PSB_CR_BIF_TWOD_REQ_BASE); /* Post */
+
+	return 0;
+>>>>>>> v3.18
 =======
 	PSB_RSGX32(PSB_CR_BIF_TWOD_REQ_BASE); /* Post */
 
@@ -312,8 +351,12 @@ static int psb_driver_unload(struct drm_device *dev)
 	struct drm_psb_private *dev_priv = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Kill vblank etc here */
 
+=======
+	/* TODO: Kill vblank etc here */
+>>>>>>> v3.18
 =======
 	/* TODO: Kill vblank etc here */
 >>>>>>> v3.18
@@ -360,13 +403,19 @@ static int psb_driver_unload(struct drm_device *dev)
 			dev_priv->sgx_reg = NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (dev_priv->aux_reg) {
 			iounmap(dev_priv->aux_reg);
 			dev_priv->aux_reg = NULL;
 		}
 		if (dev_priv->aux_pdev)
 			pci_dev_put(dev_priv->aux_pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Destroy VBT data */
@@ -380,6 +429,7 @@ static int psb_driver_unload(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int psb_driver_load(struct drm_device *dev, unsigned long chipset)
 {
@@ -391,6 +441,8 @@ static int psb_driver_load(struct drm_device *dev, unsigned long chipset)
 	struct psb_intel_encoder *psb_intel_encoder;
 
 =======
+=======
+>>>>>>> v3.18
 static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 {
 	struct drm_psb_private *dev_priv;
@@ -402,23 +454,32 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	struct psb_gtt *pg;
 
 	/* allocating and initializing driver private data */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_priv = kzalloc(sizeof(*dev_priv), GFP_KERNEL);
 	if (dev_priv == NULL)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->ops = (struct psb_ops *)chipset;
 	dev_priv->dev = dev;
 	dev->dev_private = (void *) dev_priv;
 
 =======
+=======
+>>>>>>> v3.18
 	dev_priv->ops = (struct psb_ops *)flags;
 	dev_priv->dev = dev;
 	dev->dev_private = (void *) dev_priv;
 
 	pg = &dev_priv->gtt;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pci_set_master(dev->pdev);
 
@@ -437,7 +498,10 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 		goto out_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_MRST(dev)) {
 		dev_priv->aux_pdev = pci_get_bus_and_slot(0, PCI_DEVFN(3, 0));
 
@@ -462,6 +526,9 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 		dev_priv->gmbus_reg = dev_priv->vdc_reg;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	psb_intel_opregion_setup(dev);
 
@@ -485,9 +552,13 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 		goto out_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->mmu = psb_mmu_driver_init((void *)0,
 					drm_psb_trap_pagefaults, 0,
 					dev_priv);
+=======
+	dev_priv->mmu = psb_mmu_driver_init(dev, 1, 0, 0);
+>>>>>>> v3.18
 =======
 	dev_priv->mmu = psb_mmu_driver_init(dev, 1, 0, 0);
 >>>>>>> v3.18
@@ -499,9 +570,12 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 		goto out_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_mmu_set_pd_context(psb_mmu_get_default_pd(dev_priv->mmu), 0);
 	psb_mmu_set_pd_context(dev_priv->pf_pd, 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = psb_do_init(dev);
@@ -509,7 +583,10 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Add stolen memory to SGX MMU */
 	down_read(&pg->sem);
 	ret = psb_mmu_insert_pfn_sequence(psb_mmu_get_default_pd(dev_priv->mmu),
@@ -521,6 +598,9 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	psb_mmu_set_pd_context(psb_mmu_get_default_pd(dev_priv->mmu), 0);
 	psb_mmu_set_pd_context(dev_priv->pf_pd, 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PSB_WSGX32(0x20000000, PSB_CR_PDS_EXEC_BASE);
 	PSB_WSGX32(0x30000000, PSB_CR_BIF_3D_REQ_BASE);
@@ -528,6 +608,10 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	acpi_video_register();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Setup vertical blanking handling */
+>>>>>>> v3.18
 =======
 	/* Setup vertical blanking handling */
 >>>>>>> v3.18
@@ -550,6 +634,7 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	spin_unlock_irqrestore(&dev_priv->irqmask_lock, irqflags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_irq_install(dev);
 
 	dev->vblank_disable_allowed = 1;
@@ -557,10 +642,15 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	dev->max_vblank_count = 0xffffff; /* only 24 bits of frame count */
 
 =======
+=======
+>>>>>>> v3.18
 	drm_irq_install(dev, dev->pdev->irq);
 
 	dev->vblank_disable_allowed = true;
 	dev->max_vblank_count = 0xffffff; /* only 24 bits of frame count */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->driver->get_vblank_counter = psb_get_vblank_counter;
 
@@ -572,9 +662,15 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	list_for_each_entry(connector, &dev->mode_config.connector_list,
 			    head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_intel_encoder = psb_intel_attached_encoder(connector);
 
 		switch (psb_intel_encoder->type) {
+=======
+		gma_encoder = gma_attached_encoder(connector);
+
+		switch (gma_encoder->type) {
+>>>>>>> v3.18
 =======
 		gma_encoder = gma_attached_encoder(connector);
 
@@ -592,17 +688,23 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
 	psb_intel_opregion_enable_asle(dev);
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*enable runtime pm at last*/
 	pm_runtime_enable(&dev->pdev->dev);
 	pm_runtime_set_active(&dev->pdev->dev);
 #endif
 	/*Intel drm driver load is done, continue doing pvr load*/
 =======
+=======
+>>>>>>> v3.18
 	/* Enable runtime pm at last */
 	pm_runtime_enable(&dev->pdev->dev);
 	pm_runtime_set_active(&dev->pdev->dev);
 #endif
 	/* Intel drm driver load is done, continue doing pvr load */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 out_err:
@@ -625,6 +727,7 @@ static inline void get_brightness(struct backlight_device *bd)
 #endif
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int psb_dpst_bl_ioctl(struct drm_device *dev, void *data,
 		       struct drm_file *file_priv)
@@ -783,6 +886,8 @@ static void psb_driver_close(struct drm_device *dev, struct drm_file *priv)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static long psb_unlocked_ioctl(struct file *filp, unsigned int cmd,
 			       unsigned long arg)
 {
@@ -801,8 +906,13 @@ static long psb_unlocked_ioctl(struct file *filp, unsigned int cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* When a client dies:
+=======
+/*
+ * When a client dies:
+>>>>>>> v3.18
 =======
 /*
  * When a client dies:
@@ -814,8 +924,11 @@ static void psb_driver_preclose(struct drm_device *dev, struct drm_file *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void psb_remove(struct pci_dev *pdev)
 =======
+=======
+>>>>>>> v3.18
 static int psb_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
 	return drm_get_pci_dev(pdev, ent, &driver);
@@ -823,6 +936,9 @@ static int psb_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 
 static void psb_pci_remove(struct pci_dev *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_device *dev = pci_get_drvdata(pdev);
@@ -854,7 +970,10 @@ static const struct file_operations psb_gem_fops = {
 	.mmap = drm_gem_mmap,
 	.poll = drm_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.read = drm_read,
@@ -863,6 +982,7 @@ static const struct file_operations psb_gem_fops = {
 static struct drm_driver driver = {
 	.driver_features = DRIVER_HAVE_IRQ | DRIVER_IRQ_SHARED | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   DRIVER_IRQ_VBL | DRIVER_MODESET | DRIVER_GEM ,
 	.load = psb_driver_load,
 	.unload = psb_driver_unload,
@@ -870,6 +990,8 @@ static struct drm_driver driver = {
 	.ioctls = psb_ioctls,
 	.num_ioctls = DRM_ARRAY_SIZE(psb_ioctls),
 =======
+=======
+>>>>>>> v3.18
 			   DRIVER_MODESET | DRIVER_GEM,
 	.load = psb_driver_load,
 	.unload = psb_driver_unload,
@@ -878,6 +1000,9 @@ static struct drm_driver driver = {
 	.set_busid = drm_pci_set_busid,
 
 	.num_ioctls = ARRAY_SIZE(psb_ioctls),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.device_is_agp = psb_driver_device_is_agp,
 	.irq_preinstall = psb_irq_preinstall,
@@ -887,6 +1012,7 @@ static struct drm_driver driver = {
 	.enable_vblank = psb_enable_vblank,
 	.disable_vblank = psb_disable_vblank,
 	.get_vblank_counter = psb_get_vblank_counter,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.lastclose = psb_lastclose,
 	.open = psb_driver_open,
@@ -907,6 +1033,8 @@ static struct drm_driver driver = {
 	.minor = PSB_DRM_DRIVER_MINOR,
 	.patchlevel = PSB_DRM_DRIVER_PATCHLEVEL
 =======
+=======
+>>>>>>> v3.18
 
 	.gem_free_object = psb_gem_free_object,
 	.gem_vm_ops = &psb_gem_vm_ops,
@@ -922,12 +1050,16 @@ static struct drm_driver driver = {
 	.major = DRIVER_MAJOR,
 	.minor = DRIVER_MINOR,
 	.patchlevel = DRIVER_PATCHLEVEL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct pci_driver psb_pci_driver = {
 	.name = DRIVER_NAME,
 	.id_table = pciidlist,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.probe = psb_probe,
 	.remove = psb_remove,
@@ -942,11 +1074,16 @@ static int psb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	.probe = psb_pci_probe,
 	.remove = psb_pci_remove,
 	.driver.pm = &psb_pm_ops,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init psb_init(void)
 {
@@ -962,9 +1099,15 @@ late_initcall(psb_init);
 module_exit(psb_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Alan Cox <alan@linux.intel.com> and others");
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
+=======
+MODULE_AUTHOR(DRIVER_AUTHOR);
+MODULE_DESCRIPTION(DRIVER_DESC);
+MODULE_LICENSE(DRIVER_LICENSE);
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_DESCRIPTION(DRIVER_DESC);

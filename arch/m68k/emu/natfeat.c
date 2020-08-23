@@ -10,6 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 >>>>>>> v3.18
@@ -23,17 +27,23 @@
 #include <asm/natfeat.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern long nf_get_id2(const char *feature_name);
 
 asm("\n"
 "	.global nf_get_id2,nf_call\n"
 "nf_get_id2:\n"
 =======
+=======
+>>>>>>> v3.18
 extern long nf_get_id_phys(unsigned long feature_name);
 
 asm("\n"
 "	.global nf_get_id_phys,nf_call\n"
 "nf_get_id_phys:\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 "	.short	0x7300\n"
 "	rts\n"
@@ -44,7 +54,11 @@ asm("\n"
 "	rts\n"
 "	.section __ex_table,\"a\"\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "	.long	nf_get_id2,1b\n"
+=======
+"	.long	nf_get_id_phys,1b\n"
+>>>>>>> v3.18
 =======
 "	.long	nf_get_id_phys,1b\n"
 >>>>>>> v3.18
@@ -63,7 +77,11 @@ long nf_get_id(const char *feature_name)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nf_get_id2(name_copy);
+=======
+	return nf_get_id_phys(virt_to_phys(name_copy));
+>>>>>>> v3.18
 =======
 	return nf_get_id_phys(virt_to_phys(name_copy));
 >>>>>>> v3.18
@@ -79,7 +97,11 @@ void nfprint(const char *fmt, ...)
 	va_start(ap, fmt);
 	n = vsnprintf(buf, 256, fmt, ap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_call(nf_get_id("NF_STDERR"), buf);
+=======
+	nf_call(nf_get_id("NF_STDERR"), virt_to_phys(buf));
+>>>>>>> v3.18
 =======
 	nf_call(nf_get_id("NF_STDERR"), virt_to_phys(buf));
 >>>>>>> v3.18
@@ -95,7 +117,11 @@ static void nf_poweroff(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nf_init(void)
+=======
+void __init nf_init(void)
+>>>>>>> v3.18
 =======
 void __init nf_init(void)
 >>>>>>> v3.18
@@ -112,7 +138,11 @@ void __init nf_init(void)
 	if (!id)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_call(id, buf, 256);
+=======
+	nf_call(id, virt_to_phys(buf), 256);
+>>>>>>> v3.18
 =======
 	nf_call(id, virt_to_phys(buf), 256);
 >>>>>>> v3.18

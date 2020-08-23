@@ -311,8 +311,11 @@ struct sliccard {
 	uint              config_set;
 	struct slic_config  config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry      *debugfs_dir;
 	struct dentry      *debugfs_cardinfo;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct adapter  *master;
@@ -368,12 +371,15 @@ struct slic_shmem {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct slic_reg_params {
 	u32       linkspeed;
 	u32       linkduplex;
 	u32       fail_on_bad_eeprom;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct slic_upr {
@@ -416,7 +422,10 @@ struct adapter {
 	uint                chipid;
 	struct net_device  *netdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device  *next_netdevice;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct slic_spinlock     adapter_lock;
@@ -430,8 +439,11 @@ struct adapter {
 	ushort              subsysid;
 	u32             irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *memorybase;
 	u32             memorylength;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32             drambase;
@@ -465,7 +477,10 @@ struct adapter {
 	struct timer_list   loadtimer;
 	u32             loadtimerset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry      *debugfs_entry;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct slic_spinlock     upr_lock;
@@ -480,16 +495,22 @@ struct adapter {
 	*  SLIC Handles
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct slic_handle slic_handles[SLIC_CMDQ_MAXCMDS+1]; /* Object handles*/
 	struct slic_handle *pfree_slic_handles;          /* Free object handles*/
 	struct slic_spinlock     handle_lock;           /* Object handle list lock*/
 =======
+=======
+>>>>>>> v3.18
 	/* Object handles*/
 	struct slic_handle slic_handles[SLIC_CMDQ_MAXCMDS+1];
 	/* Free object handles*/
 	struct slic_handle *pfree_slic_handles;
 	/* Object handle list lock*/
 	struct slic_spinlock     handle_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ushort              slic_handle_ix;
 
@@ -520,7 +541,10 @@ struct adapter {
 	struct inicpm_state    *inicpm_info;
 	void *pinicpm_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct slic_reg_params   reg_params;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct slic_ifevents  if_events;

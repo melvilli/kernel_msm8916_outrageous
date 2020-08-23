@@ -24,7 +24,10 @@
 #include "ext4_jbd2.h"
 #include "truncate.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ext4_extents.h"	/* Needed for EXT_MAX_BLOCKS */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -323,6 +326,7 @@ static int ext4_blks_to_allocate(Indirect *branch, int k, unsigned int blks,
  *	as described above and return 0.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ext4_alloc_branch(handle_t *handle, struct inode *inode,
 			     ext4_lblk_t iblock, int indirect_blks,
 			     int *blks, ext4_fsblk_t goal,
@@ -330,17 +334,23 @@ static int ext4_alloc_branch(handle_t *handle, struct inode *inode,
 {
 	struct ext4_allocation_request	ar;
 =======
+=======
+>>>>>>> v3.18
 static int ext4_alloc_branch(handle_t *handle,
 			     struct ext4_allocation_request *ar,
 			     int indirect_blks, ext4_lblk_t *offsets,
 			     Indirect *branch)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct buffer_head *		bh;
 	ext4_fsblk_t			b, new_blocks[4];
 	__le32				*p;
 	int				i, j, err, len = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Set up for the direct block allocation
@@ -360,6 +370,8 @@ static int ext4_alloc_branch(handle_t *handle,
 			goal = new_blocks[i] = ext4_new_meta_blocks(handle, inode,
 							goal, 0, NULL, &err);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i <= indirect_blks; i++) {
 		if (i == indirect_blks) {
 			new_blocks[i] = ext4_mb_new_blocks(handle, ar, &err);
@@ -368,6 +380,9 @@ static int ext4_alloc_branch(handle_t *handle,
 					ar->inode, ar->goal,
 					ar->flags & EXT4_MB_DELALLOC_RESERVED,
 					NULL, &err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err) {
 			i--;
@@ -378,7 +393,11 @@ static int ext4_alloc_branch(handle_t *handle,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bh = branch[i].bh = sb_getblk(inode->i_sb, new_blocks[i-1]);
+=======
+		bh = branch[i].bh = sb_getblk(ar->inode->i_sb, new_blocks[i-1]);
+>>>>>>> v3.18
 =======
 		bh = branch[i].bh = sb_getblk(ar->inode->i_sb, new_blocks[i-1]);
 >>>>>>> v3.18
@@ -400,7 +419,11 @@ static int ext4_alloc_branch(handle_t *handle,
 
 		if (i == indirect_blks)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			len = ar.len;
+=======
+			len = ar->len;
+>>>>>>> v3.18
 =======
 			len = ar->len;
 >>>>>>> v3.18
@@ -413,16 +436,22 @@ static int ext4_alloc_branch(handle_t *handle,
 
 		BUFFER_TRACE(bh, "call ext4_handle_dirty_metadata");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ext4_handle_dirty_metadata(handle, inode, bh);
 		if (err)
 			goto failed;
 	}
 	*blks = ar.len;
 =======
+=======
+>>>>>>> v3.18
 		err = ext4_handle_dirty_metadata(handle, ar->inode, bh);
 		if (err)
 			goto failed;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 failed:
@@ -435,15 +464,21 @@ failed:
 		 */
 		if (i > 0 && i != indirect_blks && branch[i].bh)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ext4_forget(handle, 1, inode, branch[i].bh,
 				    branch[i].bh->b_blocknr);
 		ext4_free_blocks(handle, inode, NULL, new_blocks[i],
 				 (i == indirect_blks) ? ar.len : 1, 0);
 =======
+=======
+>>>>>>> v3.18
 			ext4_forget(handle, 1, ar->inode, branch[i].bh,
 				    branch[i].bh->b_blocknr);
 		ext4_free_blocks(handle, ar->inode, NULL, new_blocks[i],
 				 (i == indirect_blks) ? ar->len : 1, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return err;
@@ -465,9 +500,15 @@ failed:
  * chain to new block and return 0.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ext4_splice_branch(handle_t *handle, struct inode *inode,
 			      ext4_lblk_t block, Indirect *where, int num,
 			      int blks)
+=======
+static int ext4_splice_branch(handle_t *handle,
+			      struct ext4_allocation_request *ar,
+			      Indirect *where, int num)
+>>>>>>> v3.18
 =======
 static int ext4_splice_branch(handle_t *handle,
 			      struct ext4_allocation_request *ar,
@@ -498,9 +539,15 @@ static int ext4_splice_branch(handle_t *handle,
 	 * direct blocks blocks
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num == 0 && blks > 1) {
 		current_block = le32_to_cpu(where->key) + 1;
 		for (i = 1; i < blks; i++)
+=======
+	if (num == 0 && ar->len > 1) {
+		current_block = le32_to_cpu(where->key) + 1;
+		for (i = 1; i < ar->len; i++)
+>>>>>>> v3.18
 =======
 	if (num == 0 && ar->len > 1) {
 		current_block = le32_to_cpu(where->key) + 1;
@@ -523,7 +570,11 @@ static int ext4_splice_branch(handle_t *handle,
 		jbd_debug(5, "splicing indirect only\n");
 		BUFFER_TRACE(where->bh, "call ext4_handle_dirty_metadata");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ext4_handle_dirty_metadata(handle, inode, where->bh);
+=======
+		err = ext4_handle_dirty_metadata(handle, ar->inode, where->bh);
+>>>>>>> v3.18
 =======
 		err = ext4_handle_dirty_metadata(handle, ar->inode, where->bh);
 >>>>>>> v3.18
@@ -534,7 +585,11 @@ static int ext4_splice_branch(handle_t *handle,
 		 * OK, we spliced it into the inode itself on a direct block.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ext4_mark_inode_dirty(handle, inode);
+=======
+		ext4_mark_inode_dirty(handle, ar->inode);
+>>>>>>> v3.18
 =======
 		ext4_mark_inode_dirty(handle, ar->inode);
 >>>>>>> v3.18
@@ -550,17 +605,23 @@ err_out:
 		 * need to set EXT4_FREE_BLOCKS_METADATA.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ext4_free_blocks(handle, inode, where[i].bh, 0, 1,
 				 EXT4_FREE_BLOCKS_FORGET);
 	}
 	ext4_free_blocks(handle, inode, NULL, le32_to_cpu(where[num].key),
 			 blks, 0);
 =======
+=======
+>>>>>>> v3.18
 		ext4_free_blocks(handle, ar->inode, where[i].bh, 0, 1,
 				 EXT4_FREE_BLOCKS_FORGET);
 	}
 	ext4_free_blocks(handle, ar->inode, NULL, le32_to_cpu(where[num].key),
 			 ar->len, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -599,6 +660,10 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 			int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ext4_allocation_request ar;
+>>>>>>> v3.18
 =======
 	struct ext4_allocation_request ar;
 >>>>>>> v3.18
@@ -607,7 +672,10 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 	Indirect chain[4];
 	Indirect *partial;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ext4_fsblk_t goal;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int indirect_blks;
@@ -657,11 +725,14 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 		EXT4_ERROR_INODE(inode, "Can't allocate blocks for "
 				 "non-extent mapped inodes with bigalloc");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EUCLEAN;
 	}
 
 	goal = ext4_find_goal(inode, map->m_lblk, partial);
 =======
+=======
+>>>>>>> v3.18
 		return -ENOSPC;
 	}
 
@@ -675,6 +746,9 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 		ar.flags |= EXT4_MB_DELALLOC_RESERVED;
 
 	ar.goal = ext4_find_goal(inode, map->m_lblk, partial);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* the number of blocks need to allocate for [d,t]indirect blocks */
@@ -685,6 +759,7 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 	 * direct blocks to allocate for this branch.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = ext4_blks_to_allocate(partial, indirect_blks,
 				      map->m_len, blocks_to_boundary);
 	/*
@@ -693,6 +768,8 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 	err = ext4_alloc_branch(handle, inode, map->m_lblk, indirect_blks,
 				&count, goal,
 =======
+=======
+>>>>>>> v3.18
 	ar.len = ext4_blks_to_allocate(partial, indirect_blks,
 				       map->m_len, blocks_to_boundary);
 
@@ -700,6 +777,9 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 	 * Block out ext4_truncate while we alter the tree
 	 */
 	err = ext4_alloc_branch(handle, &ar, indirect_blks,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				offsets + (partial - chain), partial);
 
@@ -712,8 +792,12 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 	 */
 	if (!err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ext4_splice_branch(handle, inode, map->m_lblk,
 					 partial, indirect_blks, count);
+=======
+		err = ext4_splice_branch(handle, &ar, partial, indirect_blks);
+>>>>>>> v3.18
 =======
 		err = ext4_splice_branch(handle, &ar, partial, indirect_blks);
 >>>>>>> v3.18
@@ -724,6 +808,10 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 
 	ext4_update_inode_fsync_trans(handle, inode, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	count = ar.len;
+>>>>>>> v3.18
 =======
 	count = ar.len;
 >>>>>>> v3.18
@@ -744,7 +832,11 @@ cleanup:
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_ext4_ind_map_blocks_exit(inode, map, err);
+=======
+	trace_ext4_ind_map_blocks_exit(inode, flags, map, err);
+>>>>>>> v3.18
 =======
 	trace_ext4_ind_map_blocks_exit(inode, flags, map, err);
 >>>>>>> v3.18
@@ -764,8 +856,12 @@ out:
  */
 ssize_t ext4_ind_direct_IO(int rw, struct kiocb *iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   const struct iovec *iov, loff_t offset,
 			   unsigned long nr_segs)
+=======
+			   struct iov_iter *iter, loff_t offset)
+>>>>>>> v3.18
 =======
 			   struct iov_iter *iter, loff_t offset)
 >>>>>>> v3.18
@@ -777,7 +873,11 @@ ssize_t ext4_ind_direct_IO(int rw, struct kiocb *iocb,
 	ssize_t ret;
 	int orphan = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t count = iov_length(iov, nr_segs);
+=======
+	size_t count = iov_iter_count(iter);
+>>>>>>> v3.18
 =======
 	size_t count = iov_iter_count(iter);
 >>>>>>> v3.18
@@ -807,11 +907,14 @@ ssize_t ext4_ind_direct_IO(int rw, struct kiocb *iocb,
 retry:
 	if (rw == READ && ext4_should_dioread_nolock(inode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unlikely(atomic_read(&EXT4_I(inode)->i_unwritten))) {
 			mutex_lock(&inode->i_mutex);
 			ext4_flush_unwritten_io(inode);
 			mutex_unlock(&inode->i_mutex);
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -828,8 +931,12 @@ retry:
 		}
 		ret = __blockdev_direct_IO(rw, iocb, inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 inode->i_sb->s_bdev, iov,
 				 offset, nr_segs,
+=======
+				 inode->i_sb->s_bdev, iter, offset,
+>>>>>>> v3.18
 =======
 				 inode->i_sb->s_bdev, iter, offset,
 >>>>>>> v3.18
@@ -838,6 +945,7 @@ retry:
 	} else {
 locked:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = blockdev_direct_IO(rw, iocb, inode, iov,
 				 offset, nr_segs, ext4_get_block);
 
@@ -845,12 +953,17 @@ locked:
 			loff_t isize = i_size_read(inode);
 			loff_t end = offset + iov_length(iov, nr_segs);
 =======
+=======
+>>>>>>> v3.18
 		ret = blockdev_direct_IO(rw, iocb, inode, iter,
 				 offset, ext4_get_block);
 
 		if (unlikely((rw & WRITE) && ret < 0)) {
 			loff_t isize = i_size_read(inode);
 			loff_t end = offset + count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (end > isize)
@@ -927,6 +1040,7 @@ int ext4_ind_calc_metadata_amount(struct inode *inode, sector_t lblock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext4_ind_trans_blocks(struct inode *inode, int nrblocks, int chunk)
 {
 	int indirects;
@@ -949,6 +1063,8 @@ int ext4_ind_trans_blocks(struct inode *inode, int nrblocks, int chunk)
 	indirects = nrblocks * 2 + 1;
 	return indirects;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Calculate number of indirect blocks touched by mapping @nrblocks logically
  * contiguous blocks
@@ -961,6 +1077,9 @@ int ext4_ind_trans_blocks(struct inode *inode, int nrblocks)
 	 * 2 dindirect blocks, and 1 tindirect block
 	 */
 	return DIV_ROUND_UP(nrblocks, EXT4_ADDR_PER_BLOCK(inode->i_sb)) + 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1103,12 +1222,15 @@ static int ext4_clear_blocks(handle_t *handle, struct inode *inode,
 {
 	__le32 *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	flags = EXT4_FREE_BLOCKS_FORGET | EXT4_FREE_BLOCKS_VALIDATED;
 	int	err;
 
 	if (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode))
 		flags |= EXT4_FREE_BLOCKS_METADATA;
 =======
+=======
+>>>>>>> v3.18
 	int	flags = EXT4_FREE_BLOCKS_VALIDATED;
 	int	err;
 
@@ -1116,6 +1238,9 @@ static int ext4_clear_blocks(handle_t *handle, struct inode *inode,
 		flags |= EXT4_FREE_BLOCKS_FORGET | EXT4_FREE_BLOCKS_METADATA;
 	else if (ext4_should_journal_data(inode))
 		flags |= EXT4_FREE_BLOCKS_FORGET;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ext4_data_block_valid(EXT4_SB(inode->i_sb), block_to_free,
@@ -1477,6 +1602,7 @@ do_indirects:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int free_hole_blocks(handle_t *handle, struct inode *inode,
 			    struct buffer_head *parent_bh, __le32 *i_data,
 			    int level, ext4_lblk_t first,
@@ -1572,6 +1698,8 @@ err:
 }
 
 =======
+=======
+>>>>>>> v3.18
 /**
  *	ext4_ind_remove_space - remove space from the range
  *	@handle: JBD handle for this transaction
@@ -1789,4 +1917,7 @@ do_indirects:
 	}
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -3,6 +3,10 @@
 
 extern struct nouveau_oclass nv84_bsp_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct nouveau_oclass nv98_bsp_oclass;
+>>>>>>> v3.18
 =======
 extern struct nouveau_oclass nv98_bsp_oclass;
 >>>>>>> v3.18

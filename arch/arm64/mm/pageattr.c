@@ -13,6 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 #include <asm/pgtable.h>
 #include <asm/tlbflush.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static pte_t clear_pte_bit(pte_t pte, pgprot_t prot)
 {
@@ -44,6 +49,8 @@ static int __change_memory(pte_t *ptep, pgtable_t token, unsigned long addr,
 	else
 		pte = clear_pte_bit(*ptep, prot);
 =======
+=======
+>>>>>>> v3.18
 struct page_change_data {
 	pgprot_t set_mask;
 	pgprot_t clear_mask;
@@ -58,11 +65,15 @@ static int change_page_range(pte_t *ptep, pgtable_t token, unsigned long addr,
 	pte = clear_pte_bit(pte, cdata->clear_mask);
 	pte = set_pte_bit(pte, cdata->set_mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_pte(ptep, pte);
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int set_page_range(pte_t *ptep, pgtable_t token, unsigned long addr,
 			void *data)
@@ -86,11 +97,16 @@ static int change_memory_common(unsigned long addr, int numpages,
 static int change_memory_common(unsigned long addr, int numpages,
 				pgprot_t set_mask, pgprot_t clear_mask)
 >>>>>>> v3.18
+=======
+static int change_memory_common(unsigned long addr, int numpages,
+				pgprot_t set_mask, pgprot_t clear_mask)
+>>>>>>> v3.18
 {
 	unsigned long start = addr;
 	unsigned long size = PAGE_SIZE*numpages;
 	unsigned long end = start + size;
 	int ret;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (!IS_ENABLED(CONFIG_FORCE_PAGES)) {
@@ -124,6 +140,8 @@ static int change_memory_clear_bit(unsigned long addr, int numpages,
 {
 	return change_memory_common(addr, numpages, prot, false);
 =======
+=======
+>>>>>>> v3.18
 	struct page_change_data data;
 
 	if (!IS_ALIGNED(addr, PAGE_SIZE)) {
@@ -143,11 +161,15 @@ static int change_memory_clear_bit(unsigned long addr, int numpages,
 
 	flush_tlb_kernel_range(start, end);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int set_memory_ro(unsigned long addr, int numpages)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return change_memory_set_bit(addr, numpages, __pgprot(PTE_RDONLY));
 }
@@ -171,6 +193,8 @@ int set_memory_x(unsigned long addr, int numpages)
 }
 EXPORT_SYMBOL(set_memory_x);
 =======
+=======
+>>>>>>> v3.18
 	return change_memory_common(addr, numpages,
 					__pgprot(PTE_RDONLY),
 					__pgprot(PTE_WRITE));
@@ -200,4 +224,7 @@ int set_memory_x(unsigned long addr, int numpages)
 					__pgprot(PTE_PXN));
 }
 EXPORT_SYMBOL_GPL(set_memory_x);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

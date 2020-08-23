@@ -25,11 +25,17 @@
 #include <linux/hyperv.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VSS_MAJOR  5
 #define VSS_MINOR  0
 #define VSS_VERSION    (VSS_MAJOR << 16 | VSS_MINOR)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -102,7 +108,11 @@ static void vss_send_op(struct work_struct *dummy)
 	msg->len = sizeof(struct hv_vss_msg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, 0, GFP_ATOMIC);
+=======
+	cn_netlink_send(msg, 0, 0, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, 0, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -198,6 +208,7 @@ void hv_vss_onchannelcallback(void *context)
 		if (icmsghdrp->icmsgtype == ICMSGTYPE_NEGOTIATE) {
 			vmbus_prep_negotiate_resp(icmsghdrp, negop,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 recv_buffer, MAX_SRV_VER, MAX_SRV_VER);
 			/*
 			 * We currently negotiate the highest number the
@@ -210,6 +221,10 @@ void hv_vss_onchannelcallback(void *context)
 
 			if (negop->icversion_data[1].major < 5)
 				negop->icframe_vercnt = 0;
+=======
+				 recv_buffer, UTIL_FW_VERSION,
+				 VSS_VERSION);
+>>>>>>> v3.18
 =======
 				 recv_buffer, UTIL_FW_VERSION,
 				 VSS_VERSION);

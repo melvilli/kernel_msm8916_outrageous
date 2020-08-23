@@ -15,11 +15,14 @@
  *  GNU General Public License for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *  MA 02110-1301 USA.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * With some changes from Kyösti Mälkki <kmalkki@cc.hut.fi> and
@@ -34,7 +37,10 @@
 #include <linux/module.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>

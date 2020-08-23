@@ -173,6 +173,10 @@ struct ipack_bus_ops {
  */
 struct ipack_bus_device {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct module *owner;
+>>>>>>> v3.18
 =======
 	struct module *owner;
 >>>>>>> v3.18
@@ -194,7 +198,12 @@ struct ipack_bus_device {
  */
 struct ipack_bus_device *ipack_bus_register(struct device *parent, int slots,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    const struct ipack_bus_ops *ops);
+=======
+					    const struct ipack_bus_ops *ops,
+					    struct module *owner);
+>>>>>>> v3.18
 =======
 					    const struct ipack_bus_ops *ops,
 					    struct module *owner);
@@ -275,7 +284,10 @@ void ipack_put_device(struct ipack_device *dev);
 	 .vendor = (vend), \
 	 .device = (dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * ipack_get_carrier - it increase the carrier ref. counter of
@@ -296,4 +308,7 @@ static inline void ipack_put_carrier(struct ipack_device *dev)
 {
 	module_put(dev->bus->owner);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

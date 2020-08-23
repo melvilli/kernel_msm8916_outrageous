@@ -9464,7 +9464,10 @@ static struct nls_table table = {
 	.charset2lower	= charset2lower,
 	.charset2upper	= charset2upper,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.owner		= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

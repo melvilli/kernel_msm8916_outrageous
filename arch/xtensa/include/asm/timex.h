@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/asm-xtensa/timex.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
@@ -9,7 +12,11 @@
  * for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2001 - 2008 Tensilica Inc.
+=======
+ * Copyright (C) 2001 - 2013 Tensilica Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2001 - 2013 Tensilica Inc.
 >>>>>>> v3.18
@@ -19,8 +26,11 @@
 #define _XTENSA_TIMEX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/processor.h>
@@ -45,6 +55,7 @@
 # error "Bad timer number for Linux configurations!"
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LINUX_TIMER_MASK        (1L << LINUX_TIMER_INT)
 
@@ -73,6 +84,8 @@ extern cycles_t cacheflush_time;
 #define get_cycles()	(0)
 
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long ccount_freq;
 
 typedef unsigned long long cycles_t;
@@ -80,6 +93,9 @@ typedef unsigned long long cycles_t;
 #define get_cycles()	(0)
 
 void local_timer_setup(unsigned cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -116,7 +132,10 @@ static inline void set_linux_timer (unsigned long ccompare)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* _XTENSA_TIMEX_H */

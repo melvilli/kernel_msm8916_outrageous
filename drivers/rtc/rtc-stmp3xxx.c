@@ -24,6 +24,10 @@
 #include <linux/platform_device.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -124,6 +128,7 @@ static void stmp3xxx_wdt_register(struct platform_device *rtc_pdev)
 #endif /* CONFIG_STMP3XXX_RTC_WATCHDOG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 {
 	/*
@@ -135,6 +140,8 @@ static void stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 			(0x80 << STMP3XXX_RTC_STAT_STALE_SHIFT))
 		cpu_relax();
 =======
+=======
+>>>>>>> v3.18
 static int stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 {
 	int timeout = 5000; /* 3ms according to i.MX28 Ref Manual */
@@ -156,6 +163,9 @@ static int stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 	} while (--timeout > 0);
 	return (readl(rtc_data->io + STMP3XXX_RTC_STAT) &
 		(0x80 << STMP3XXX_RTC_STAT_STALE_SHIFT)) ? -ETIME : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -163,10 +173,13 @@ static int stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 static int stmp3xxx_rtc_gettime(struct device *dev, struct rtc_time *rtc_tm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct stmp3xxx_rtc_data *rtc_data = dev_get_drvdata(dev);
 
 	stmp3xxx_wait_time(rtc_data);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct stmp3xxx_rtc_data *rtc_data = dev_get_drvdata(dev);
 
@@ -174,6 +187,9 @@ static int stmp3xxx_rtc_gettime(struct device *dev, struct rtc_time *rtc_tm)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtc_time_to_tm(readl(rtc_data->io + STMP3XXX_RTC_SECONDS), rtc_tm);
 	return 0;
@@ -185,8 +201,12 @@ static int stmp3xxx_rtc_set_mmss(struct device *dev, unsigned long t)
 
 	writel(t, rtc_data->io + STMP3XXX_RTC_SECONDS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stmp3xxx_wait_time(rtc_data);
 	return 0;
+=======
+	return stmp3xxx_wait_time(rtc_data);
+>>>>>>> v3.18
 =======
 	return stmp3xxx_wait_time(rtc_data);
 >>>>>>> v3.18
@@ -268,7 +288,10 @@ static int stmp3xxx_rtc_remove(struct platform_device *pdev)
 	writel(STMP3XXX_RTC_CTRL_ALARM_IRQ_EN,
 			rtc_data->io + STMP3XXX_RTC_CTRL_CLR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -308,14 +331,20 @@ static int stmp3xxx_rtc_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, rtc_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stmp_reset_block(rtc_data->io);
 =======
+=======
+>>>>>>> v3.18
 	err = stmp_reset_block(rtc_data->io);
 	if (err) {
 		dev_err(&pdev->dev, "stmp_reset_block failed: %d\n", err);
 		return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(STMP3XXX_RTC_PERSISTENT0_ALARM_EN |
 			STMP3XXX_RTC_PERSISTENT0_ALARM_WAKE_EN |
@@ -329,10 +358,15 @@ static int stmp3xxx_rtc_probe(struct platform_device *pdev)
 	rtc_data->rtc = devm_rtc_device_register(&pdev->dev, pdev->name,
 				&stmp3xxx_rtc_ops, THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(rtc_data->rtc)) {
 		err = PTR_ERR(rtc_data->rtc);
 		goto out;
 	}
+=======
+	if (IS_ERR(rtc_data->rtc))
+		return PTR_ERR(rtc_data->rtc);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rtc_data->rtc))
 		return PTR_ERR(rtc_data->rtc);
@@ -344,7 +378,11 @@ static int stmp3xxx_rtc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Cannot claim IRQ%d\n",
 			rtc_data->irq_alarm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -353,10 +391,13 @@ static int stmp3xxx_rtc_probe(struct platform_device *pdev)
 	stmp3xxx_wdt_register(pdev);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out:
 	platform_set_drvdata(pdev, NULL);
 	return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -397,7 +438,11 @@ static struct platform_driver stmp3xxx_rtcdrv = {
 		.owner	= THIS_MODULE,
 		.pm	= &stmp3xxx_rtc_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(rtc_dt_ids),
+=======
+		.of_match_table = rtc_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = rtc_dt_ids,
 >>>>>>> v3.18

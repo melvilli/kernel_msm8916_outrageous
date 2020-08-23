@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi_fc.h
 
     This is a place for code driver writers wish to share between
@@ -25,6 +26,8 @@
 
 ************************************************************************/
 =======
+=======
+>>>>>>> v3.18
  * comedi_fc.h
  * This is a place for code driver writers wish to share between
  * two or more drivers. These functions are meant to be used only
@@ -43,6 +46,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _COMEDI_FC_H
@@ -50,6 +56,7 @@
 
 #include "../comedidev.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Writes an array of data points to comedi's buffer */
 extern unsigned int cfc_write_array_to_buffer(struct comedi_subdevice *subd,
@@ -94,6 +101,8 @@ static inline unsigned int cfc_bytes_per_scan(struct comedi_subdevice *subd)
 	}
 	return num_samples * bytes_per_sample(subd);
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int cfc_bytes_per_scan(struct comedi_subdevice *s)
 {
 	return comedi_bytes_per_scan(s);
@@ -135,6 +144,9 @@ static inline unsigned int cfc_handle_events(struct comedi_device *dev,
 					     struct comedi_subdevice *s)
 {
 	return comedi_handle_events(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

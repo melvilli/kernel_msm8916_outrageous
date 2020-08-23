@@ -73,6 +73,7 @@ fail:
  **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bcma_sprom_read(struct bcma_bus *bus, u16 offset, u16 *sprom)
 {
 	int i;
@@ -80,12 +81,17 @@ static void bcma_sprom_read(struct bcma_bus *bus, u16 offset, u16 *sprom)
 		sprom[i] = bcma_read16(bus->drv_cc.core,
 				       offset + (i * 2));
 =======
+=======
+>>>>>>> v3.18
 static void bcma_sprom_read(struct bcma_bus *bus, u16 offset, u16 *sprom,
 			    size_t words)
 {
 	int i;
 	for (i = 0; i < words; i++)
 		sprom[i] = bcma_read16(bus->drv_cc.core, offset + (i * 2));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -134,7 +140,11 @@ static inline u8 bcma_crc8(u8 crc, u8 data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 bcma_sprom_crc(const u16 *sprom)
+=======
+static u8 bcma_sprom_crc(const u16 *sprom, size_t words)
+>>>>>>> v3.18
 =======
 static u8 bcma_sprom_crc(const u16 *sprom, size_t words)
 >>>>>>> v3.18
@@ -143,17 +153,23 @@ static u8 bcma_sprom_crc(const u16 *sprom, size_t words)
 	u8 crc = 0xFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (word = 0; word < SSB_SPROMSIZE_WORDS_R4 - 1; word++) {
 		crc = bcma_crc8(crc, sprom[word] & 0x00FF);
 		crc = bcma_crc8(crc, (sprom[word] & 0xFF00) >> 8);
 	}
 	crc = bcma_crc8(crc, sprom[SSB_SPROMSIZE_WORDS_R4 - 1] & 0x00FF);
 =======
+=======
+>>>>>>> v3.18
 	for (word = 0; word < words - 1; word++) {
 		crc = bcma_crc8(crc, sprom[word] & 0x00FF);
 		crc = bcma_crc8(crc, (sprom[word] & 0xFF00) >> 8);
 	}
 	crc = bcma_crc8(crc, sprom[words - 1] & 0x00FF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	crc ^= 0xFF;
 
@@ -161,7 +177,11 @@ static u8 bcma_sprom_crc(const u16 *sprom, size_t words)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcma_sprom_check_crc(const u16 *sprom)
+=======
+static int bcma_sprom_check_crc(const u16 *sprom, size_t words)
+>>>>>>> v3.18
 =======
 static int bcma_sprom_check_crc(const u16 *sprom, size_t words)
 >>>>>>> v3.18
@@ -171,8 +191,13 @@ static int bcma_sprom_check_crc(const u16 *sprom, size_t words)
 	u16 tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crc = bcma_sprom_crc(sprom);
 	tmp = sprom[SSB_SPROMSIZE_WORDS_R4 - 1] & SSB_SPROM_REVISION_CRC;
+=======
+	crc = bcma_sprom_crc(sprom, words);
+	tmp = sprom[words - 1] & SSB_SPROM_REVISION_CRC;
+>>>>>>> v3.18
 =======
 	crc = bcma_sprom_crc(sprom, words);
 	tmp = sprom[words - 1] & SSB_SPROM_REVISION_CRC;
@@ -185,7 +210,12 @@ static int bcma_sprom_check_crc(const u16 *sprom, size_t words)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcma_sprom_valid(const u16 *sprom)
+=======
+static int bcma_sprom_valid(struct bcma_bus *bus, const u16 *sprom,
+			    size_t words)
+>>>>>>> v3.18
 =======
 static int bcma_sprom_valid(struct bcma_bus *bus, const u16 *sprom,
 			    size_t words)
@@ -195,6 +225,7 @@ static int bcma_sprom_valid(struct bcma_bus *bus, const u16 *sprom,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = bcma_sprom_check_crc(sprom);
 	if (err)
 		return err;
@@ -202,18 +233,29 @@ static int bcma_sprom_valid(struct bcma_bus *bus, const u16 *sprom,
 	revision = sprom[SSB_SPROMSIZE_WORDS_R4 - 1] & SSB_SPROM_REVISION_REV;
 	if (revision != 8 && revision != 9) {
 =======
+=======
+>>>>>>> v3.18
 	err = bcma_sprom_check_crc(sprom, words);
 	if (err)
 		return err;
 
 	revision = sprom[words - 1] & SSB_SPROM_REVISION_REV;
 	if (revision != 8 && revision != 9 && revision != 10) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("Unsupported SPROM revision: %d\n", revision);
 		return -ENOENT;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bus->sprom.revision = revision;
+	bcma_debug(bus, "Found SPROM revision %d\n", revision);
+
+>>>>>>> v3.18
 =======
 	bus->sprom.revision = revision;
 	bcma_debug(bus, "Found SPROM revision %d\n", revision);
@@ -248,7 +290,10 @@ static int bcma_sprom_valid(struct bcma_bus *bus, const u16 *sprom,
 	} while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static s8 sprom_extract_antgain(const u16 *in, u16 offset, u16 mask, u16 shift)
 {
 	u16 v;
@@ -266,6 +311,9 @@ static s8 sprom_extract_antgain(const u16 *in, u16 offset, u16 mask, u16 shift)
 	return (s8)gain;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void bcma_sprom_extract_r8(struct bcma_bus *bus, const u16 *sprom)
 {
@@ -279,9 +327,12 @@ static void bcma_sprom_extract_r8(struct bcma_bus *bus, const u16 *sprom)
 			ARRAY_SIZE(bus->sprom.core_pwr_info));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus->sprom.revision = sprom[SSB_SPROMSIZE_WORDS_R4 - 1] &
 		SSB_SPROM_REVISION_REV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < 3; i++) {
@@ -454,6 +505,7 @@ static void bcma_sprom_extract_r8(struct bcma_bus *bus, const u16 *sprom)
 
 	/* Extract the antenna gain values. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SPEX(antenna_gain.a0, SSB_SPROM8_AGAIN01,
 	     SSB_SPROM8_AGAIN0, SSB_SPROM8_AGAIN0_SHIFT);
 	SPEX(antenna_gain.a1, SSB_SPROM8_AGAIN01,
@@ -463,6 +515,8 @@ static void bcma_sprom_extract_r8(struct bcma_bus *bus, const u16 *sprom)
 	SPEX(antenna_gain.a3, SSB_SPROM8_AGAIN23,
 	     SSB_SPROM8_AGAIN3, SSB_SPROM8_AGAIN3_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	bus->sprom.antenna_gain.a0 = sprom_extract_antgain(sprom,
 							   SSB_SPROM8_AGAIN01,
 							   SSB_SPROM8_AGAIN0,
@@ -479,6 +533,9 @@ static void bcma_sprom_extract_r8(struct bcma_bus *bus, const u16 *sprom)
 							   SSB_SPROM8_AGAIN23,
 							   SSB_SPROM8_AGAIN3,
 							   SSB_SPROM8_AGAIN3_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SPEX(leddc_on_time, SSB_SPROM8_LEDDC, SSB_SPROM8_LEDDC_ON,
@@ -595,7 +652,11 @@ static bool bcma_sprom_onchip_available(struct bcma_bus *bus)
 		present = chip_status & BCMA_CC_CHIPST_4331_OTP_PRESENT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	case BCMA_CHIP_ID_BCM43142:
+>>>>>>> v3.18
 =======
 	case BCMA_CHIP_ID_BCM43142:
 >>>>>>> v3.18
@@ -605,6 +666,11 @@ static bool bcma_sprom_onchip_available(struct bcma_bus *bus)
 		present = true;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BCMA_CHIP_ID_BCM43131:
+	case BCMA_CHIP_ID_BCM43217:
+>>>>>>> v3.18
 =======
 	case BCMA_CHIP_ID_BCM43131:
 	case BCMA_CHIP_ID_BCM43217:
@@ -652,7 +718,13 @@ int bcma_sprom_get(struct bcma_bus *bus)
 	u16 offset = BCMA_CC_SPROM;
 	u16 *sprom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
+=======
+	size_t sprom_sizes[] = { SSB_SPROMSIZE_WORDS_R4,
+				 SSB_SPROMSIZE_WORDS_R10, };
+	int i, err = 0;
+>>>>>>> v3.18
 =======
 	size_t sprom_sizes[] = { SSB_SPROMSIZE_WORDS_R4,
 				 SSB_SPROMSIZE_WORDS_R10, };
@@ -687,11 +759,14 @@ int bcma_sprom_get(struct bcma_bus *bus)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprom = kcalloc(SSB_SPROMSIZE_WORDS_R4, sizeof(u16),
 			GFP_KERNEL);
 	if (!sprom)
 		return -ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (bus->chipinfo.id == BCMA_CHIP_ID_BCM4331 ||
@@ -700,8 +775,11 @@ int bcma_sprom_get(struct bcma_bus *bus)
 
 	bcma_debug(bus, "SPROM offset 0x%x\n", offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcma_sprom_read(bus, offset, sprom);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(sprom_sizes); i++) {
 		size_t words = sprom_sizes[i];
 
@@ -716,12 +794,16 @@ int bcma_sprom_get(struct bcma_bus *bus)
 
 		kfree(sprom);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bus->chipinfo.id == BCMA_CHIP_ID_BCM4331 ||
 	    bus->chipinfo.id == BCMA_CHIP_ID_BCM43431)
 		bcma_chipco_bcm4331_ext_pa_lines_ctl(&bus->drv_cc, true);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = bcma_sprom_valid(sprom);
 	if (err) {
@@ -735,6 +817,8 @@ int bcma_sprom_get(struct bcma_bus *bus)
 out:
 	kfree(sprom);
 =======
+=======
+>>>>>>> v3.18
 	if (err) {
 		bcma_warn(bus, "Invalid SPROM read from the PCIe card, trying to use fallback SPROM\n");
 		err = bcma_fill_sprom_with_fallback(bus, &bus->sprom);
@@ -743,6 +827,9 @@ out:
 		kfree(sprom);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

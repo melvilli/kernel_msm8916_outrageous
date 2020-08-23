@@ -2,7 +2,11 @@
 
   Intel 82599 Virtual Function driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2012 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -75,6 +79,7 @@
 #define IXGBE_VFMPRC           0x01034
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_WRITE_REG(a, reg, value) writel((value), ((a)->hw_addr + (reg)))
 
 #define IXGBE_READ_REG(a, reg) readl((a)->hw_addr + (reg))
@@ -85,6 +90,8 @@
 #define IXGBE_READ_REG_ARRAY(a, reg, offset) ( \
     readl((a)->hw_addr + (reg) + ((offset) << 2)))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IXGBE_WRITE_FLUSH(a) (IXGBE_READ_REG(a, IXGBE_VFSTATUS))

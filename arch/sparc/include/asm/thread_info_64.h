@@ -64,7 +64,12 @@ struct thread_info {
 	unsigned int		kern_una_insn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		fpregs[0] __attribute__ ((aligned(64)));
+=======
+	unsigned long		fpregs[(7 * 256) / sizeof(unsigned long)]
+		__attribute__ ((aligned(64)));
+>>>>>>> v3.18
 =======
 	unsigned long		fpregs[(7 * 256) / sizeof(unsigned long)]
 		__attribute__ ((aligned(64)));
@@ -108,6 +113,10 @@ struct thread_info {
 #define FAULT_CODE_WINFIXUP	0x08	/* Miss happened during spill/fill */
 #define FAULT_CODE_BLKCOMMIT	0x10	/* Use blk-commit ASI in copy_page */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	FAULT_CODE_BAD_RA	0x20	/* Bad RA for sun4v		   */
+>>>>>>> v3.18
 =======
 #define	FAULT_CODE_BAD_RA	0x20	/* Bad RA for sun4v		   */
 >>>>>>> v3.18
@@ -121,8 +130,11 @@ struct thread_info {
 #endif /* PAGE_SHIFT == 13 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -205,7 +217,11 @@ register struct thread_info *current_thread_info_reg asm("g6");
 /* flag bit 6 is available */
 #define TIF_32BIT		7	/* 32-bit binary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* flag bit 8 is available */
+=======
+#define TIF_NOHZ		8	/* in adaptive nohz mode */
+>>>>>>> v3.18
 =======
 #define TIF_NOHZ		8	/* in adaptive nohz mode */
 >>>>>>> v3.18
@@ -227,6 +243,10 @@ register struct thread_info *current_thread_info_reg asm("g6");
 #define _TIF_UNALIGNED		(1<<TIF_UNALIGNED)
 #define _TIF_32BIT		(1<<TIF_32BIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _TIF_NOHZ		(1<<TIF_NOHZ)
+>>>>>>> v3.18
 =======
 #define _TIF_NOHZ		(1<<TIF_NOHZ)
 >>>>>>> v3.18
@@ -241,6 +261,11 @@ register struct thread_info *current_thread_info_reg asm("g6");
 #define _TIF_DO_NOTIFY_RESUME_MASK	(_TIF_NOTIFY_RESUME | _TIF_SIGPENDING)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define is_32bit_task()	(test_thread_flag(TIF_32BIT))
+
+>>>>>>> v3.18
 =======
 #define is_32bit_task()	(test_thread_flag(TIF_32BIT))
 

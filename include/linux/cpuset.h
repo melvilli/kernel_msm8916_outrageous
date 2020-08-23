@@ -13,11 +13,14 @@
 #include <linux/nodemask.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_CPUSETS
 
 extern int number_of_cpusets;	/* How many cpusets are defined in system? */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/jump_label.h>
 
 #ifdef CONFIG_CPUSETS
@@ -43,6 +46,9 @@ static inline void cpuset_dec(void)
 {
 	static_key_slow_dec(&cpusets_enabled_key);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int cpuset_init(void);
@@ -61,7 +67,11 @@ extern int __cpuset_node_allowed_hardwall(int node, gfp_t gfp_mask);
 static inline int cpuset_node_allowed_softwall(int node, gfp_t gfp_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return number_of_cpusets <= 1 ||
+=======
+	return nr_cpusets() <= 1 ||
+>>>>>>> v3.18
 =======
 	return nr_cpusets() <= 1 ||
 >>>>>>> v3.18
@@ -71,7 +81,11 @@ static inline int cpuset_node_allowed_softwall(int node, gfp_t gfp_mask)
 static inline int cpuset_node_allowed_hardwall(int node, gfp_t gfp_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return number_of_cpusets <= 1 ||
+=======
+	return nr_cpusets() <= 1 ||
+>>>>>>> v3.18
 =======
 	return nr_cpusets() <= 1 ||
 >>>>>>> v3.18
@@ -102,7 +116,12 @@ extern void __cpuset_memory_pressure_bump(void);
 extern void cpuset_task_status_allowed(struct seq_file *m,
 					struct task_struct *task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int proc_cpuset_show(struct seq_file *, void *);
+=======
+extern int proc_cpuset_show(struct seq_file *m, struct pid_namespace *ns,
+			    struct pid *pid, struct task_struct *tsk);
+>>>>>>> v3.18
 =======
 extern int proc_cpuset_show(struct seq_file *m, struct pid_namespace *ns,
 			    struct pid *pid, struct task_struct *tsk);
@@ -114,7 +133,11 @@ extern int cpuset_slab_spread_node(void);
 static inline int cpuset_do_page_mem_spread(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return current->flags & PF_SPREAD_PAGE;
+=======
+	return task_spread_page(current);
+>>>>>>> v3.18
 =======
 	return task_spread_page(current);
 >>>>>>> v3.18
@@ -123,7 +146,11 @@ static inline int cpuset_do_page_mem_spread(void)
 static inline int cpuset_do_slab_mem_spread(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return current->flags & PF_SPREAD_SLAB;
+=======
+	return task_spread_slab(current);
+>>>>>>> v3.18
 =======
 	return task_spread_slab(current);
 >>>>>>> v3.18
@@ -137,6 +164,7 @@ extern void cpuset_print_task_mems_allowed(struct task_struct *p);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * get_mems_allowed is required when making decisions involving mems_allowed
  * such as during page allocation. mems_allowed can be updated in parallel
  * and depending on the new value an operation can fail potentially causing
@@ -145,6 +173,8 @@ extern void cpuset_print_task_mems_allowed(struct task_struct *p);
  */
 static inline unsigned int get_mems_allowed(void)
 =======
+=======
+>>>>>>> v3.18
  * read_mems_allowed_begin is required when making decisions involving
  * mems_allowed such as during page allocation. mems_allowed can be updated in
  * parallel and depending on the new value an operation can fail potentially
@@ -152,12 +182,16 @@ static inline unsigned int get_mems_allowed(void)
  * read_mems_allowed_retry prevents these artificial failures.
  */
 static inline unsigned int read_mems_allowed_begin(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return read_seqcount_begin(&current->mems_allowed_seq);
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * If this returns false, the operation that took place after get_mems_allowed
  * may have failed. It is up to the caller to retry the operation if
@@ -167,6 +201,8 @@ static inline bool put_mems_allowed(unsigned int seq)
 {
 	return !read_seqcount_retry(&current->mems_allowed_seq, seq);
 =======
+=======
+>>>>>>> v3.18
  * If this returns true, the operation that took place after
  * read_mems_allowed_begin may have failed artificially due to a concurrent
  * update of mems_allowed. It is up to the caller to retry the operation if
@@ -175,17 +211,23 @@ static inline bool put_mems_allowed(unsigned int seq)
 static inline bool read_mems_allowed_retry(unsigned int seq)
 {
 	return read_seqcount_retry(&current->mems_allowed_seq, seq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void set_mems_allowed(nodemask_t nodemask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task_lock(current);
 	write_seqcount_begin(&current->mems_allowed_seq);
 	current->mems_allowed = nodemask;
 	write_seqcount_end(&current->mems_allowed_seq);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	task_lock(current);
@@ -194,6 +236,9 @@ static inline void set_mems_allowed(nodemask_t nodemask)
 	current->mems_allowed = nodemask;
 	write_seqcount_end(&current->mems_allowed_seq);
 	local_irq_restore(flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	task_unlock(current);
 }
@@ -201,6 +246,11 @@ static inline void set_mems_allowed(nodemask_t nodemask)
 #else /* !CONFIG_CPUSETS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline bool cpusets_enabled(void) { return false; }
+
+>>>>>>> v3.18
 =======
 static inline bool cpusets_enabled(void) { return false; }
 
@@ -308,7 +358,11 @@ static inline void set_mems_allowed(nodemask_t nodemask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int get_mems_allowed(void)
+=======
+static inline unsigned int read_mems_allowed_begin(void)
+>>>>>>> v3.18
 =======
 static inline unsigned int read_mems_allowed_begin(void)
 >>>>>>> v3.18
@@ -317,9 +371,15 @@ static inline unsigned int read_mems_allowed_begin(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool put_mems_allowed(unsigned int seq)
 {
 	return true;
+=======
+static inline bool read_mems_allowed_retry(unsigned int seq)
+{
+	return false;
+>>>>>>> v3.18
 =======
 static inline bool read_mems_allowed_retry(unsigned int seq)
 {

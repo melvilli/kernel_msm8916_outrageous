@@ -5,7 +5,11 @@
  * specific functions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2003-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2003-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2003-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -32,7 +36,10 @@
 #include <linux/parser.h>
 #include <linux/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/blkdev.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -167,7 +174,11 @@ static int rd_allocate_sgl_table(struct rd_dev *rd_dev, struct rd_dev_sg_table *
 
 		for (j = 0; j < sg_per_table; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pg = alloc_pages(GFP_KERNEL | __GFP_ZERO, 0);
+=======
+			pg = alloc_pages(GFP_KERNEL, 0);
+>>>>>>> v3.18
 =======
 			pg = alloc_pages(GFP_KERNEL, 0);
 >>>>>>> v3.18
@@ -236,7 +247,10 @@ static int rd_build_device_space(struct rd_dev *rd_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rd_release_prot_space(struct rd_dev *rd_dev)
 {
 	u32 page_count;
@@ -297,6 +311,9 @@ static int rd_build_prot_space(struct rd_dev *rd_dev, int prot_length, int block
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct se_device *rd_alloc_device(struct se_hba *hba, const char *name)
 {
@@ -377,6 +394,7 @@ static struct rd_dev_sg_table *rd_get_sg_table(struct rd_dev *rd_dev, u32 page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static sense_reason_t
 rd_execute_rw(struct se_cmd *cmd)
 {
@@ -384,6 +402,8 @@ rd_execute_rw(struct se_cmd *cmd)
 	u32 sgl_nents = cmd->t_data_nents;
 	enum dma_data_direction data_direction = cmd->data_direction;
 =======
+=======
+>>>>>>> v3.18
 static struct rd_dev_sg_table *rd_get_prot_table(struct rd_dev *rd_dev, u32 page)
 {
 	struct rd_dev_sg_table *sg_table;
@@ -408,6 +428,9 @@ static sense_reason_t
 rd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	      enum dma_data_direction data_direction)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct se_device *se_dev = cmd->se_dev;
 	struct rd_dev *dev = RD_DEV(se_dev);
@@ -420,6 +443,10 @@ rd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	u32 src_len;
 	u64 tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sense_reason_t rc;
+>>>>>>> v3.18
 =======
 	sense_reason_t rc;
 >>>>>>> v3.18
@@ -446,7 +473,10 @@ rd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 			cmd->t_task_lba, rd_size, rd_page, rd_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->prot_type && data_direction == DMA_TO_DEVICE) {
 		struct rd_dev_sg_table *prot_table;
 		struct scatterlist *prot_sg;
@@ -469,6 +499,9 @@ rd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 			return rc;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	src_len = PAGE_SIZE - rd_offset;
 	sg_miter_start(&m, sgl, sgl_nents,
@@ -532,7 +565,10 @@ rd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	sg_miter_stop(&m);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->prot_type && data_direction == DMA_FROM_DEVICE) {
 		struct rd_dev_sg_table *prot_table;
 		struct scatterlist *prot_sg;
@@ -555,6 +591,9 @@ rd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 			return rc;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	target_complete_cmd(cmd, SAM_STAT_GOOD);
 	return 0;
@@ -638,7 +677,10 @@ static sector_t rd_get_blocks(struct se_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rd_init_prot(struct se_device *dev)
 {
 	struct rd_dev *rd_dev = RD_DEV(dev);
@@ -657,6 +699,9 @@ static void rd_free_prot(struct se_device *dev)
 	rd_release_prot_space(rd_dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct sbc_ops rd_sbc_ops = {
 	.execute_rw		= rd_execute_rw,
@@ -684,6 +729,11 @@ static struct se_subsystem_api rd_mcp_template = {
 	.get_device_type	= sbc_get_device_type,
 	.get_blocks		= rd_get_blocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.init_prot		= rd_init_prot,
+	.free_prot		= rd_free_prot,
+>>>>>>> v3.18
 =======
 	.init_prot		= rd_init_prot,
 	.free_prot		= rd_free_prot,

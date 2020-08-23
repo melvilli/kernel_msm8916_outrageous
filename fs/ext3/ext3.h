@@ -238,6 +238,11 @@ struct ext3_new_group_data {
 #define EXT3_IOC32_SETVERSION_OLD	FS_IOC32_SETVERSION
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Number of supported quota types */
+#define EXT3_MAXQUOTAS 2
+>>>>>>> v3.18
 =======
 /* Number of supported quota types */
 #define EXT3_MAXQUOTAS 2
@@ -254,7 +259,11 @@ struct ext3_mount_options {
 #ifdef CONFIG_QUOTA
 	int s_jquota_fmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *s_qf_names[MAXQUOTAS];
+=======
+	char *s_qf_names[EXT3_MAXQUOTAS];
+>>>>>>> v3.18
 =======
 	char *s_qf_names[EXT3_MAXQUOTAS];
 >>>>>>> v3.18
@@ -679,7 +688,11 @@ struct ext3_sb_info {
 	struct block_device *journal_bdev;
 #ifdef CONFIG_QUOTA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *s_qf_names[MAXQUOTAS];		/* Names of quota files with journalled quota */
+=======
+	char *s_qf_names[EXT3_MAXQUOTAS];	/* Names of quota files with journalled quota */
+>>>>>>> v3.18
 =======
 	char *s_qf_names[EXT3_MAXQUOTAS];	/* Names of quota files with journalled quota */
 >>>>>>> v3.18
@@ -1197,9 +1210,15 @@ extern const struct inode_operations ext3_fast_symlink_inode_operations;
 #define EXT3_QUOTA_DEL_BLOCKS(sb) 0
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXT3_MAXQUOTAS_TRANS_BLOCKS(sb) (MAXQUOTAS*EXT3_QUOTA_TRANS_BLOCKS(sb))
 #define EXT3_MAXQUOTAS_INIT_BLOCKS(sb) (MAXQUOTAS*EXT3_QUOTA_INIT_BLOCKS(sb))
 #define EXT3_MAXQUOTAS_DEL_BLOCKS(sb) (MAXQUOTAS*EXT3_QUOTA_DEL_BLOCKS(sb))
+=======
+#define EXT3_MAXQUOTAS_TRANS_BLOCKS(sb) (EXT3_MAXQUOTAS*EXT3_QUOTA_TRANS_BLOCKS(sb))
+#define EXT3_MAXQUOTAS_INIT_BLOCKS(sb) (EXT3_MAXQUOTAS*EXT3_QUOTA_INIT_BLOCKS(sb))
+#define EXT3_MAXQUOTAS_DEL_BLOCKS(sb) (EXT3_MAXQUOTAS*EXT3_QUOTA_DEL_BLOCKS(sb))
+>>>>>>> v3.18
 =======
 #define EXT3_MAXQUOTAS_TRANS_BLOCKS(sb) (EXT3_MAXQUOTAS*EXT3_QUOTA_TRANS_BLOCKS(sb))
 #define EXT3_MAXQUOTAS_INIT_BLOCKS(sb) (EXT3_MAXQUOTAS*EXT3_QUOTA_INIT_BLOCKS(sb))

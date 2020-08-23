@@ -24,6 +24,7 @@
 #include "psb_intel_drv.h"
 #include "psb_intel_reg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "psb_intel_display.h"
 #include "power.h"
 
@@ -46,6 +47,8 @@ struct oaktrail_clock_t {
 #define MRST_LIMIT_LVDS_83	    1
 #define MRST_LIMIT_LVDS_100	    2
 =======
+=======
+>>>>>>> v3.18
 #include "gma_display.h"
 #include "power.h"
 
@@ -53,6 +56,9 @@ struct oaktrail_clock_t {
 #define MRST_LIMIT_LVDS_83	1
 #define MRST_LIMIT_LVDS_100	2
 #define MRST_LIMIT_SDVO		3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MRST_DOT_MIN		  19750
@@ -68,8 +74,11 @@ struct oaktrail_clock_t {
 #define MRST_P1_MAX_1		    8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct oaktrail_limit_t oaktrail_limits[] = {
 =======
+=======
+>>>>>>> v3.18
 static bool mrst_lvds_find_best_pll(const struct gma_limit_t *limit,
 				    struct drm_crtc *crtc, int target,
 				    int refclk, struct gma_clock_t *best_clock);
@@ -79,12 +88,19 @@ static bool mrst_sdvo_find_best_pll(const struct gma_limit_t *limit,
 				    int refclk, struct gma_clock_t *best_clock);
 
 static const struct gma_limit_t mrst_limits[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{			/* MRST_LIMIT_LVDS_100L */
 	 .dot = {.min = MRST_DOT_MIN, .max = MRST_DOT_MAX},
 	 .m = {.min = MRST_M_MIN_100L, .max = MRST_M_MAX_100L},
 	 .p1 = {.min = MRST_P1_MIN, .max = MRST_P1_MAX_1},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 .find_pll = mrst_lvds_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .find_pll = mrst_lvds_find_best_pll,
 >>>>>>> v3.18
@@ -94,6 +110,10 @@ static const struct gma_limit_t mrst_limits[] = {
 	 .m = {.min = MRST_M_MIN_83, .max = MRST_M_MAX_83},
 	 .p1 = {.min = MRST_P1_MIN, .max = MRST_P1_MAX_0},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 .find_pll = mrst_lvds_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .find_pll = mrst_lvds_find_best_pll,
 >>>>>>> v3.18
@@ -103,7 +123,10 @@ static const struct gma_limit_t mrst_limits[] = {
 	 .m = {.min = MRST_M_MIN_100, .max = MRST_M_MAX_100},
 	 .p1 = {.min = MRST_P1_MIN, .max = MRST_P1_MAX_1},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 .find_pll = mrst_lvds_find_best_pll,
 	 },
 	{			/* MRST_LIMIT_SDVO */
@@ -113,6 +136,9 @@ static const struct gma_limit_t mrst_limits[] = {
 	 .p1 = {.min = 1, .max = 2},
 	 .p2 = {.dot_limit = 200000, .p2_slow = 10, .p2_fast = 10},
 	 .find_pll = mrst_sdvo_find_best_pll,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 },
 };
@@ -124,6 +150,7 @@ static const u32 oaktrail_m_converts[] = {
 	0x12, 0x09, 0x24, 0x32, 0x39, 0x1c,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct oaktrail_limit_t *oaktrail_limit(struct drm_crtc *crtc)
 {
@@ -148,6 +175,8 @@ static const struct oaktrail_limit_t *oaktrail_limit(struct drm_crtc *crtc)
 		limit = NULL;
 		dev_err(dev->dev, "oaktrail_limit Wrong display type.\n");
 =======
+=======
+>>>>>>> v3.18
 static const struct gma_limit_t *mrst_limit(struct drm_crtc *crtc,
 					    int refclk)
 {
@@ -173,6 +202,9 @@ static const struct gma_limit_t *mrst_limit(struct drm_crtc *crtc,
 	} else {
 		limit = NULL;
 		dev_err(dev->dev, "mrst_limit Wrong display type.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -181,7 +213,11 @@ static const struct gma_limit_t *mrst_limit(struct drm_crtc *crtc,
 
 /** Derive the pixel clock for the given refclk and divisors for 8xx chips. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void oaktrail_clock(int refclk, struct oaktrail_clock_t *clock)
+=======
+static void mrst_lvds_clock(int refclk, struct gma_clock_t *clock)
+>>>>>>> v3.18
 =======
 static void mrst_lvds_clock(int refclk, struct gma_clock_t *clock)
 >>>>>>> v3.18
@@ -190,11 +226,14 @@ static void mrst_lvds_clock(int refclk, struct gma_clock_t *clock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mrstPrintPll(char *prefix, struct oaktrail_clock_t *clock)
 {
 	pr_debug("%s: dotclock = %d,  m = %d, p1 = %d.\n",
 	     prefix, clock->dot, clock->m, clock->p1);
 =======
+=======
+>>>>>>> v3.18
 static void mrst_print_pll(struct gma_clock_t *clock)
 {
 	DRM_DEBUG_DRIVER("dotclock=%d,  m=%d, m1=%d, m2=%d, n=%d, p1=%d, p2=%d\n",
@@ -253,6 +292,9 @@ static bool mrst_sdvo_find_best_pll(const struct gma_limit_t *limit,
 	}
 
 	return min_error == 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -261,6 +303,7 @@ static bool mrst_sdvo_find_best_pll(const struct gma_limit_t *limit,
  * or FALSE.  Divisor values are the actual divisors for
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool
 mrstFindBestPLL(struct drm_crtc *crtc, int target, int refclk,
 		struct oaktrail_clock_t *best_clock)
@@ -268,11 +311,16 @@ mrstFindBestPLL(struct drm_crtc *crtc, int target, int refclk,
 	struct oaktrail_clock_t clock;
 	const struct oaktrail_limit_t *limit = oaktrail_limit(crtc);
 =======
+=======
+>>>>>>> v3.18
 static bool mrst_lvds_find_best_pll(const struct gma_limit_t *limit,
 				    struct drm_crtc *crtc, int target,
 				    int refclk, struct gma_clock_t *best_clock)
 {
 	struct gma_clock_t clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err = target;
 
@@ -284,7 +332,11 @@ static bool mrst_lvds_find_best_pll(const struct gma_limit_t *limit,
 			int this_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			oaktrail_clock(refclk, &clock);
+=======
+			mrst_lvds_clock(refclk, &clock);
+>>>>>>> v3.18
 =======
 			mrst_lvds_clock(refclk, &clock);
 >>>>>>> v3.18
@@ -297,7 +349,10 @@ static bool mrst_lvds_find_best_pll(const struct gma_limit_t *limit,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(crtc->dev->dev, "mrstFindBestPLL err = %d.\n", err);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err != target;
@@ -314,6 +369,7 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 	struct drm_device *dev = crtc->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_intel_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
@@ -321,6 +377,8 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 
 	if (pipe == 1) {
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
@@ -329,6 +387,9 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 	int need_aux = gma_pipe_has_type(crtc, INTEL_OUTPUT_SDVO) ? 1 : 0;
 
 	if (gma_pipe_has_type(crtc, INTEL_OUTPUT_HDMI)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		oaktrail_crtc_hdmi_dpms(crtc, mode);
 		return;
@@ -344,6 +405,7 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 	case DRM_MODE_DPMS_ON:
 	case DRM_MODE_DPMS_STANDBY:
 	case DRM_MODE_DPMS_SUSPEND:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Enable the DPLL */
 		temp = REG_READ(map->dpll);
@@ -376,6 +438,8 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 
 		psb_intel_crtc_load_lut(crtc);
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i <= need_aux; i++) {
 			/* Enable the DPLL */
 			temp = REG_READ_WITH_AUX(map->dpll, i);
@@ -416,6 +480,9 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 
 		}
 		gma_crtc_load_lut(crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Give the overlay scaler a chance to enable
@@ -427,6 +494,7 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 		 * if it's on this pipe */
 		/* psb_intel_crtc_dpms_video(crtc, FALSE); TODO */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Disable the VGA plane that we never use */
 		REG_WRITE(VGACNTRL, VGA_DISP_DISABLE);
@@ -471,6 +539,8 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 	REG_WRITE(0x70400, REG_READ(0x70400) | 0x4000);
 	/* Must write Bit 14 of the Chicken Bit Register */
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i <= need_aux; i++) {
 			/* Disable the VGA plane that we never use */
 			REG_WRITE_WITH_AUX(VGACNTRL, VGA_DISP_DISABLE, i);
@@ -517,6 +587,9 @@ static void oaktrail_crtc_dpms(struct drm_crtc *crtc, int mode)
 	REG_WRITE(DSPFW5, 0x04040404);
 	REG_WRITE(DSPFW6, 0x78);
 	REG_WRITE(DSPCHICKENBIT, REG_READ(DSPCHICKENBIT) | 0xc040);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gma_power_end(dev);
@@ -546,6 +619,7 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 {
 	struct drm_device *dev = crtc->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	int pipe = psb_intel_crtc->pipe;
@@ -553,6 +627,8 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 	int refclk = 0;
 	struct oaktrail_clock_t clock;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	int pipe = gma_crtc->pipe;
@@ -560,6 +636,9 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 	int refclk = 0;
 	struct gma_clock_t clock;
 	const struct gma_limit_t *limit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 dpll = 0, fp = 0, dspcntr, pipeconf;
 	bool ok, is_sdvo = false;
@@ -567,12 +646,15 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 	bool is_mipi = false;
 	struct drm_mode_config *mode_config = &dev->mode_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder = NULL;
 	uint64_t scalingType = DRM_MODE_SCALE_FULLSCREEN;
 	struct drm_connector *connector;
 
 	if (pipe == 1)
 =======
+=======
+>>>>>>> v3.18
 	struct gma_encoder *gma_encoder = NULL;
 	uint64_t scalingType = DRM_MODE_SCALE_FULLSCREEN;
 	struct drm_connector *connector;
@@ -580,6 +662,9 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 	int need_aux = gma_pipe_has_type(crtc, INTEL_OUTPUT_SDVO) ? 1 : 0;
 
 	if (gma_pipe_has_type(crtc, INTEL_OUTPUT_HDMI))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return oaktrail_crtc_hdmi_mode_set(crtc, mode, adjusted_mode, x, y, old_fb);
 
@@ -587,15 +672,21 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&psb_intel_crtc->saved_mode,
 		mode,
 		sizeof(struct drm_display_mode));
 	memcpy(&psb_intel_crtc->saved_adjusted_mode,
 =======
+=======
+>>>>>>> v3.18
 	memcpy(&gma_crtc->saved_mode,
 		mode,
 		sizeof(struct drm_display_mode));
 	memcpy(&gma_crtc->saved_adjusted_mode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		adjusted_mode,
 		sizeof(struct drm_display_mode));
@@ -605,9 +696,15 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_intel_encoder = psb_intel_attached_encoder(connector);
 
 		switch (psb_intel_encoder->type) {
+=======
+		gma_encoder = gma_attached_encoder(connector);
+
+		switch (gma_encoder->type) {
+>>>>>>> v3.18
 =======
 		gma_encoder = gma_attached_encoder(connector);
 
@@ -627,7 +724,12 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 
 	/* Disable the VGA plane that we never use */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_WRITE(VGACNTRL, VGA_DISP_DISABLE);
+=======
+	for (i = 0; i <= need_aux; i++)
+		REG_WRITE_WITH_AUX(VGACNTRL, VGA_DISP_DISABLE, i);
+>>>>>>> v3.18
 =======
 	for (i = 0; i <= need_aux; i++)
 		REG_WRITE_WITH_AUX(VGACNTRL, VGA_DISP_DISABLE, i);
@@ -638,18 +740,24 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		REG_WRITE(PFIT_CONTROL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_WRITE(map->src,
 		  ((mode->crtc_hdisplay - 1) << 16) |
 		  (mode->crtc_vdisplay - 1));
 
 	if (psb_intel_encoder)
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i <= need_aux; i++) {
 		REG_WRITE_WITH_AUX(map->src, ((mode->crtc_hdisplay - 1) << 16) |
 					     (mode->crtc_vdisplay - 1), i);
 	}
 
 	if (gma_encoder)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		drm_object_property_get_value(&connector->base,
 			dev->mode_config.scaling_mode_property, &scalingType);
@@ -665,6 +773,7 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		offsetY = (adjusted_mode->crtc_vdisplay -
 			   mode->crtc_vdisplay) / 2;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		REG_WRITE(map->htotal, (mode->crtc_hdisplay - 1) |
 			((adjusted_mode->crtc_htotal - 1) << 16));
@@ -696,6 +805,8 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		REG_WRITE(map->vsync, (adjusted_mode->crtc_vsync_start - 1) |
 			((adjusted_mode->crtc_vsync_end - 1) << 16));
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i <= need_aux; i++) {
 			REG_WRITE_WITH_AUX(map->htotal, (mode->crtc_hdisplay - 1) |
 				((adjusted_mode->crtc_htotal - 1) << 16), i);
@@ -729,6 +840,9 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 			REG_WRITE_WITH_AUX(map->vsync, (adjusted_mode->crtc_vsync_start - 1) |
 				((adjusted_mode->crtc_vsync_end - 1) << 16), i);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -755,6 +869,7 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		goto oaktrail_crtc_mode_set_exit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	refclk = dev_priv->core_freq * 1000;
 
 	dpll = 0;		/*BIT16 = 0 for 100MHz reference */
@@ -771,6 +886,8 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 
 	fp = oaktrail_m_converts[(clock.m - MRST_M_MIN)] << 8;
 =======
+=======
+>>>>>>> v3.18
 
 	dpll = 0;		/*BIT16 = 0 for 100MHz reference */
 
@@ -795,6 +912,9 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		fp = clock.n << 16 | clock.m;
 	else
 		fp = oaktrail_m_converts[(clock.m - MRST_M_MIN)] << 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dpll |= DPLL_VGA_MODE_DIS;
@@ -819,6 +939,7 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 
 
 	/* compute bitmask from p1 value */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dpll |= (1 << (clock.p1 - 2)) << 17;
 
@@ -853,6 +974,8 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 	REG_WRITE(map->cntr, dspcntr);
 	psb_intel_wait_for_vblank(dev);
 =======
+=======
+>>>>>>> v3.18
 	if (is_sdvo)
 		dpll |= clock.p1 << 16; // dpll |= (1 << (clock.p1 - 1)) << 16;
 	else
@@ -890,6 +1013,9 @@ static int oaktrail_crtc_mode_set(struct drm_crtc *crtc,
 		REG_WRITE_WITH_AUX(map->cntr, dspcntr, i);
 		gma_wait_for_vblank(dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 oaktrail_crtc_mode_set_exit:
@@ -897,6 +1023,7 @@ oaktrail_crtc_mode_set_exit:
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool oaktrail_crtc_mode_fixup(struct drm_crtc *crtc,
 				  const struct drm_display_mode *mode,
@@ -907,15 +1034,23 @@ static bool oaktrail_crtc_mode_fixup(struct drm_crtc *crtc,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int oaktrail_pipe_set_base(struct drm_crtc *crtc,
 			    int x, int y, struct drm_framebuffer *old_fb)
 {
 	struct drm_device *dev = crtc->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	struct psb_framebuffer *psbfb = to_psb_fb(crtc->fb);
 	int pipe = psb_intel_crtc->pipe;
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+	struct psb_framebuffer *psbfb = to_psb_fb(crtc->primary->fb);
+	int pipe = gma_crtc->pipe;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	struct psb_framebuffer *psbfb = to_psb_fb(crtc->primary->fb);
@@ -929,7 +1064,11 @@ static int oaktrail_pipe_set_base(struct drm_crtc *crtc,
 
 	/* no fb bound */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!crtc->fb) {
+=======
+	if (!crtc->primary->fb) {
+>>>>>>> v3.18
 =======
 	if (!crtc->primary->fb) {
 >>>>>>> v3.18
@@ -942,9 +1081,15 @@ static int oaktrail_pipe_set_base(struct drm_crtc *crtc,
 
 	start = psbfb->gtt->offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	offset = y * crtc->fb->pitches[0] + x * (crtc->fb->bits_per_pixel / 8);
 
 	REG_WRITE(map->stride, crtc->fb->pitches[0]);
+=======
+	offset = y * crtc->primary->fb->pitches[0] + x * (crtc->primary->fb->bits_per_pixel / 8);
+
+	REG_WRITE(map->stride, crtc->primary->fb->pitches[0]);
+>>>>>>> v3.18
 =======
 	offset = y * crtc->primary->fb->pitches[0] + x * (crtc->primary->fb->bits_per_pixel / 8);
 
@@ -955,7 +1100,11 @@ static int oaktrail_pipe_set_base(struct drm_crtc *crtc,
 	dspcntr &= ~DISPPLANE_PIXFORMAT_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (crtc->fb->bits_per_pixel) {
+=======
+	switch (crtc->primary->fb->bits_per_pixel) {
+>>>>>>> v3.18
 =======
 	switch (crtc->primary->fb->bits_per_pixel) {
 >>>>>>> v3.18
@@ -964,7 +1113,11 @@ static int oaktrail_pipe_set_base(struct drm_crtc *crtc,
 		break;
 	case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb->depth == 15)
+=======
+		if (crtc->primary->fb->depth == 15)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb->depth == 15)
 >>>>>>> v3.18
@@ -994,6 +1147,7 @@ pipe_set_base_exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void oaktrail_crtc_prepare(struct drm_crtc *crtc)
 {
 	struct drm_crtc_helper_funcs *crtc_funcs = crtc->helper_private;
@@ -1016,6 +1170,8 @@ const struct drm_crtc_helper_funcs oaktrail_helper_funcs = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 const struct drm_crtc_helper_funcs oaktrail_helper_funcs = {
 	.dpms = oaktrail_crtc_dpms,
 	.mode_fixup = gma_crtc_mode_fixup,
@@ -1031,4 +1187,7 @@ const struct gma_clock_funcs mrst_clock_funcs = {
 	.limit = mrst_limit,
 	.pll_is_valid = gma_pll_is_valid,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -75,6 +75,7 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (range->flags & NF_NAT_RANGE_PROTO_RANDOM)
 		off = l3proto->secure_port(tuple, maniptype == NF_NAT_MANIP_SRC
 						  ? tuple->dst.u.all
@@ -82,6 +83,8 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
 	else
 		off = *rover;
 =======
+=======
+>>>>>>> v3.18
 	if (range->flags & NF_NAT_RANGE_PROTO_RANDOM) {
 		off = l3proto->secure_port(tuple, maniptype == NF_NAT_MANIP_SRC
 						  ? tuple->dst.u.all
@@ -91,12 +94,16 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
 	} else {
 		off = *rover;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; ; ++off) {
 		*portptr = htons(min + off % range_size);
 		if (++i != range_size && nf_nat_used_tuple(tuple, ct))
 			continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(range->flags & NF_NAT_RANGE_PROTO_RANDOM))
 			*rover = off;
@@ -108,6 +115,8 @@ EXPORT_SYMBOL_GPL(nf_nat_l4proto_unique_tuple);
 
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
 =======
+=======
+>>>>>>> v3.18
 		if (!(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL))
 			*rover = off;
 		return;
@@ -116,6 +125,9 @@ EXPORT_SYMBOL_GPL(nf_nat_l4proto_unique_tuple);
 EXPORT_SYMBOL_GPL(nf_nat_l4proto_unique_tuple);
 
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nf_nat_l4proto_nlattr_to_range(struct nlattr *tb[],
 				   struct nf_nat_range *range)

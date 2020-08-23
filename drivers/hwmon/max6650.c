@@ -106,6 +106,7 @@ module_param(clock, int, S_IRUGO);
 #define DIV_FROM_REG(reg) (1 << (reg & 7))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max6650_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id);
 static int max6650_init_client(struct i2c_client *client);
@@ -134,13 +135,20 @@ static struct i2c_driver max6650_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Client data (each client gets its own)
  */
 
 struct max6650_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -160,7 +168,10 @@ struct max6650_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const u8 tach_reg[] = {
 	MAX6650_REG_TACH0,
 	MAX6650_REG_TACH1,
@@ -206,6 +217,9 @@ static struct max6650_data *max6650_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t get_fan(struct device *dev, struct device_attribute *devattr,
 		       char *buf)
@@ -292,8 +306,13 @@ static ssize_t set_target(struct device *dev, struct device_attribute *devattr,
 			 const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6650_data *data = i2c_get_clientdata(client);
+=======
+	struct max6650_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6650_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -366,8 +385,13 @@ static ssize_t set_pwm(struct device *dev, struct device_attribute *devattr,
 			const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6650_data *data = i2c_get_clientdata(client);
+=======
+	struct max6650_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6650_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -417,8 +441,13 @@ static ssize_t set_enable(struct device *dev, struct device_attribute *devattr,
 			  const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6650_data *data = i2c_get_clientdata(client);
+=======
+	struct max6650_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6650_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -472,8 +501,13 @@ static ssize_t set_div(struct device *dev, struct device_attribute *devattr,
 		       const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6650_data *data = i2c_get_clientdata(client);
+=======
+	struct max6650_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6650_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -523,7 +557,11 @@ static ssize_t get_alarm(struct device *dev, struct device_attribute *devattr,
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 	struct max6650_data *data = max6650_update_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client = data->client;
 >>>>>>> v3.18
@@ -565,7 +603,12 @@ static umode_t max6650_attrs_visible(struct kobject *kobj, struct attribute *a,
 {
 	struct device *dev = container_of(kobj, struct device, kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct max6650_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6650_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -605,7 +648,11 @@ static struct attribute *max6650_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute_group max6650_attr_grp = {
+=======
+static const struct attribute_group max6650_group = {
+>>>>>>> v3.18
 =======
 static const struct attribute_group max6650_group = {
 >>>>>>> v3.18
@@ -621,7 +668,11 @@ static struct attribute *max6651_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group max6651_attr_grp = {
+=======
+static const struct attribute_group max6651_group = {
+>>>>>>> v3.18
 =======
 static const struct attribute_group max6651_group = {
 >>>>>>> v3.18
@@ -632,6 +683,7 @@ static const struct attribute_group max6651_group = {
  * Real code
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int max6650_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
@@ -695,10 +747,15 @@ static int max6650_init_client(struct i2c_client *client)
 {
 	struct max6650_data *data = i2c_get_clientdata(client);
 =======
+=======
+>>>>>>> v3.18
 static int max6650_init_client(struct max6650_data *data,
 			       struct i2c_client *client)
 {
 	struct device *dev = &client->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int config;
 	int err = -EIO;
@@ -707,7 +764,11 @@ static int max6650_init_client(struct max6650_data *data,
 
 	if (config < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "Error reading config, aborting.\n");
+=======
+		dev_err(dev, "Error reading config, aborting.\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "Error reading config, aborting.\n");
 >>>>>>> v3.18
@@ -725,17 +786,23 @@ static int max6650_init_client(struct max6650_data *data,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "illegal value for fan_voltage (%d)\n",
 			fan_voltage);
 	}
 
 	dev_info(&client->dev, "Fan voltage is set to %dV.\n",
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "illegal value for fan_voltage (%d)\n",
 			fan_voltage);
 	}
 
 	dev_info(dev, "Fan voltage is set to %dV.\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 (config & MAX6650_CFG_V12) ? 12 : 5);
 
@@ -763,22 +830,29 @@ static int max6650_init_client(struct max6650_data *data,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "illegal value for prescaler (%d)\n",
 			prescaler);
 	}
 
 	dev_info(&client->dev, "Prescaler is set to %d.\n",
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "illegal value for prescaler (%d)\n", prescaler);
 	}
 
 	dev_info(dev, "Prescaler is set to %d.\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 1 << (config & MAX6650_CFG_PRESCALER_MASK));
 
 	/*
 	 * If mode is set to "full off", we change it to "open loop" and
 	 * set DAC to 255, which has the same effect. We do this because
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * there's no "full off" mode defined in hwmon specifcations.
 	 */
@@ -790,6 +864,8 @@ static int max6650_init_client(struct max6650_data *data,
 		if (i2c_smbus_write_byte_data(client, MAX6650_REG_DAC, 255)) {
 			dev_err(&client->dev, "DAC write error, aborting.\n");
 =======
+=======
+>>>>>>> v3.18
 	 * there's no "full off" mode defined in hwmon specifications.
 	 */
 
@@ -799,6 +875,9 @@ static int max6650_init_client(struct max6650_data *data,
 			 | MAX6650_CFG_MODE_OPEN_LOOP;
 		if (i2c_smbus_write_byte_data(client, MAX6650_REG_DAC, 255)) {
 			dev_err(dev, "DAC write error, aborting.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return err;
 		}
@@ -806,7 +885,11 @@ static int max6650_init_client(struct max6650_data *data,
 
 	if (i2c_smbus_write_byte_data(client, MAX6650_REG_CONFIG, config)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "Config write error, aborting.\n");
+=======
+		dev_err(dev, "Config write error, aborting.\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "Config write error, aborting.\n");
 >>>>>>> v3.18
@@ -819,6 +902,7 @@ static int max6650_init_client(struct max6650_data *data,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const u8 tach_reg[] = {
 	MAX6650_REG_TACH0,
@@ -866,6 +950,8 @@ static struct max6650_data *max6650_update_device(struct device *dev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int max6650_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -915,6 +1001,9 @@ static struct i2c_driver max6650_driver = {
 	.id_table	= max6650_id,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_i2c_driver(max6650_driver);
 

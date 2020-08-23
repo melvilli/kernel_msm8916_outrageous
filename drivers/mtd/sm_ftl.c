@@ -23,7 +23,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct workqueue_struct *cache_flush_workqueue;
+=======
+static struct workqueue_struct *cache_flush_workqueue;
+>>>>>>> v3.18
 =======
 static struct workqueue_struct *cache_flush_workqueue;
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ struct sm_sysfs_attribute {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
+=======
+static ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
+>>>>>>> v3.18
 =======
 static ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
 >>>>>>> v3.18
@@ -63,7 +71,11 @@ static ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
 #define NUM_ATTRIBUTES 1
 #define SM_CIS_VENDOR_OFFSET 0x59
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct attribute_group *sm_create_sysfs_attributes(struct sm_ftl *ftl)
+=======
+static struct attribute_group *sm_create_sysfs_attributes(struct sm_ftl *ftl)
+>>>>>>> v3.18
 =======
 static struct attribute_group *sm_create_sysfs_attributes(struct sm_ftl *ftl)
 >>>>>>> v3.18
@@ -117,7 +129,11 @@ error1:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sm_delete_sysfs_attributes(struct sm_ftl *ftl)
+=======
+static void sm_delete_sysfs_attributes(struct sm_ftl *ftl)
+>>>>>>> v3.18
 =======
 static void sm_delete_sysfs_attributes(struct sm_ftl *ftl)
 >>>>>>> v3.18
@@ -585,7 +601,11 @@ static const uint8_t cis_signature[] = {
 /* Find out media parameters.
  * This ideally has to be based on nand id, but for now device size is enough */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sm_get_media_info(struct sm_ftl *ftl, struct mtd_info *mtd)
+=======
+static int sm_get_media_info(struct sm_ftl *ftl, struct mtd_info *mtd)
+>>>>>>> v3.18
 =======
 static int sm_get_media_info(struct sm_ftl *ftl, struct mtd_info *mtd)
 >>>>>>> v3.18
@@ -896,7 +916,11 @@ static int sm_init_zone(struct sm_ftl *ftl, int zone_num)
 
 /* Get and automatically initialize an FTL mapping for one zone */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
+=======
+static struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
+>>>>>>> v3.18
 =======
 static struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
 >>>>>>> v3.18
@@ -921,7 +945,11 @@ static struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
 
 /* Initialize the one block cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sm_cache_init(struct sm_ftl *ftl)
+=======
+static void sm_cache_init(struct sm_ftl *ftl)
+>>>>>>> v3.18
 =======
 static void sm_cache_init(struct sm_ftl *ftl)
 >>>>>>> v3.18
@@ -935,7 +963,11 @@ static void sm_cache_init(struct sm_ftl *ftl)
 
 /* Put sector in one block cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
+=======
+static void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
+>>>>>>> v3.18
 =======
 static void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
 >>>>>>> v3.18
@@ -947,7 +979,11 @@ static void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
 
 /* Read a sector from the cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
+=======
+static int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
+>>>>>>> v3.18
 =======
 static int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
 >>>>>>> v3.18
@@ -962,7 +998,11 @@ static int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
 
 /* Write the cache to hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sm_cache_flush(struct sm_ftl *ftl)
+=======
+static int sm_cache_flush(struct sm_ftl *ftl)
+>>>>>>> v3.18
 =======
 static int sm_cache_flush(struct sm_ftl *ftl)
 >>>>>>> v3.18
@@ -1099,7 +1139,11 @@ static int sm_write(struct mtd_blktrans_dev *dev,
 	struct sm_ftl *ftl = dev->priv;
 	struct ftl_zone *zone;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error, zone_num, block, boffset;
+=======
+	int error = 0, zone_num, block, boffset;
+>>>>>>> v3.18
 =======
 	int error = 0, zone_num, block, boffset;
 >>>>>>> v3.18
@@ -1316,15 +1360,21 @@ static __init int sm_module_init(void)
 {
 	int error = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache_flush_workqueue = create_freezable_workqueue("smflush");
 
 	if (IS_ERR(cache_flush_workqueue))
 		return PTR_ERR(cache_flush_workqueue);
 =======
+=======
+>>>>>>> v3.18
 
 	cache_flush_workqueue = create_freezable_workqueue("smflush");
 	if (!cache_flush_workqueue)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	error = register_mtd_blktrans(&sm_ftl_ops);

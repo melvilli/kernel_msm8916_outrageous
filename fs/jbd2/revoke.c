@@ -92,8 +92,14 @@
 #include <linux/init.h>
 #include <linux/bio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 #include <linux/log2.h>
+=======
+#include <linux/log2.h>
+#include <linux/hash.h>
+#endif
+>>>>>>> v3.18
 =======
 #include <linux/log2.h>
 #include <linux/hash.h>
@@ -129,19 +135,26 @@ struct jbd2_revoke_table_s
 #ifdef __KERNEL__
 static void write_one_revoke_record(journal_t *, transaction_t *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    struct journal_head **, int *,
 				    struct jbd2_revoke_record_s *, int);
 static void flush_descriptor(journal_t *, struct journal_head *, int, int);
 =======
+=======
+>>>>>>> v3.18
 				    struct list_head *,
 				    struct buffer_head **, int *,
 				    struct jbd2_revoke_record_s *, int);
 static void flush_descriptor(journal_t *, struct buffer_head *, int, int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 /* Utility functions to maintain the revoke table */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Borrowed from buffer.c: this is a tried and tested block hash function */
 static inline int hash(journal_t *journal, unsigned long long block)
@@ -153,6 +166,11 @@ static inline int hash(journal_t *journal, unsigned long long block)
 	return ((hash << (hash_shift - 6)) ^
 		(hash >> 13) ^
 		(hash << (hash_shift - 12))) & (table->hash_size - 1);
+=======
+static inline int hash(journal_t *journal, unsigned long long block)
+{
+	return hash_64(block, journal->j_revoke->hash_shift);
+>>>>>>> v3.18
 =======
 static inline int hash(journal_t *journal, unsigned long long block)
 {
@@ -551,14 +569,20 @@ void jbd2_journal_switch_revoke_table(journal_t *journal)
 void jbd2_journal_write_revoke_records(journal_t *journal,
 				       transaction_t *transaction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       int write_op)
 {
 	struct journal_head *descriptor;
 =======
+=======
+>>>>>>> v3.18
 				       struct list_head *log_bufs,
 				       int write_op)
 {
 	struct buffer_head *descriptor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct jbd2_revoke_record_s *record;
 	struct jbd2_revoke_table_s *revoke;
@@ -580,7 +604,11 @@ void jbd2_journal_write_revoke_records(journal_t *journal,
 			record = (struct jbd2_revoke_record_s *)
 				hash_list->next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			write_one_revoke_record(journal, transaction,
+=======
+			write_one_revoke_record(journal, transaction, log_bufs,
+>>>>>>> v3.18
 =======
 			write_one_revoke_record(journal, transaction, log_bufs,
 >>>>>>> v3.18
@@ -604,7 +632,12 @@ void jbd2_journal_write_revoke_records(journal_t *journal,
 static void write_one_revoke_record(journal_t *journal,
 				    transaction_t *transaction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    struct journal_head **descriptorp,
+=======
+				    struct list_head *log_bufs,
+				    struct buffer_head **descriptorp,
+>>>>>>> v3.18
 =======
 				    struct list_head *log_bufs,
 				    struct buffer_head **descriptorp,
@@ -615,7 +648,11 @@ static void write_one_revoke_record(journal_t *journal,
 {
 	int csum_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct journal_head *descriptor;
+=======
+	struct buffer_head *descriptor;
+>>>>>>> v3.18
 =======
 	struct buffer_head *descriptor;
 >>>>>>> v3.18
@@ -634,7 +671,11 @@ static void write_one_revoke_record(journal_t *journal,
 
 	/* Do we need to leave space at the end for a checksum? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (JBD2_HAS_INCOMPAT_FEATURE(journal, JBD2_FEATURE_INCOMPAT_CSUM_V2))
+=======
+	if (jbd2_journal_has_csum_v2or3(journal))
+>>>>>>> v3.18
 =======
 	if (jbd2_journal_has_csum_v2or3(journal))
 >>>>>>> v3.18
@@ -653,7 +694,11 @@ static void write_one_revoke_record(journal_t *journal,
 		if (!descriptor)
 			return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		header = (journal_header_t *) &jh2bh(descriptor)->b_data[0];
+=======
+		header = (journal_header_t *)descriptor->b_data;
+>>>>>>> v3.18
 =======
 		header = (journal_header_t *)descriptor->b_data;
 >>>>>>> v3.18
@@ -663,8 +708,13 @@ static void write_one_revoke_record(journal_t *journal,
 
 		/* Record it so that we can wait for IO completion later */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		JBUFFER_TRACE(descriptor, "file as BJ_LogCtl");
 		jbd2_journal_file_buffer(descriptor, transaction, BJ_LogCtl);
+=======
+		BUFFER_TRACE(descriptor, "file in log_bufs");
+		jbd2_file_log_bh(log_bufs, descriptor);
+>>>>>>> v3.18
 =======
 		BUFFER_TRACE(descriptor, "file in log_bufs");
 		jbd2_file_log_bh(log_bufs, descriptor);
@@ -676,7 +726,11 @@ static void write_one_revoke_record(journal_t *journal,
 
 	if (JBD2_HAS_INCOMPAT_FEATURE(journal, JBD2_FEATURE_INCOMPAT_64BIT)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		* ((__be64 *)(&jh2bh(descriptor)->b_data[offset])) =
+=======
+		* ((__be64 *)(&descriptor->b_data[offset])) =
+>>>>>>> v3.18
 =======
 		* ((__be64 *)(&descriptor->b_data[offset])) =
 >>>>>>> v3.18
@@ -685,7 +739,11 @@ static void write_one_revoke_record(journal_t *journal,
 
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		* ((__be32 *)(&jh2bh(descriptor)->b_data[offset])) =
+=======
+		* ((__be32 *)(&descriptor->b_data[offset])) =
+>>>>>>> v3.18
 =======
 		* ((__be32 *)(&descriptor->b_data[offset])) =
 >>>>>>> v3.18
@@ -697,8 +755,12 @@ static void write_one_revoke_record(journal_t *journal,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void jbd2_revoke_csum_set(journal_t *j,
 				 struct journal_head *descriptor)
+=======
+static void jbd2_revoke_csum_set(journal_t *j, struct buffer_head *bh)
+>>>>>>> v3.18
 =======
 static void jbd2_revoke_csum_set(journal_t *j, struct buffer_head *bh)
 >>>>>>> v3.18
@@ -706,6 +768,7 @@ static void jbd2_revoke_csum_set(journal_t *j, struct buffer_head *bh)
 	struct jbd2_journal_revoke_tail *tail;
 	__u32 csum;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!JBD2_HAS_INCOMPAT_FEATURE(j, JBD2_FEATURE_INCOMPAT_CSUM_V2))
 		return;
@@ -717,6 +780,8 @@ static void jbd2_revoke_csum_set(journal_t *j, struct buffer_head *bh)
 	csum = jbd2_chksum(j, j->j_csum_seed, jh2bh(descriptor)->b_data,
 			   j->j_blocksize);
 =======
+=======
+>>>>>>> v3.18
 	if (!jbd2_journal_has_csum_v2or3(j))
 		return;
 
@@ -724,6 +789,9 @@ static void jbd2_revoke_csum_set(journal_t *j, struct buffer_head *bh)
 			sizeof(struct jbd2_journal_revoke_tail));
 	tail->r_checksum = 0;
 	csum = jbd2_chksum(j, j->j_csum_seed, bh->b_data, j->j_blocksize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tail->r_checksum = cpu_to_be32(csum);
 }
@@ -736,6 +804,7 @@ static void jbd2_revoke_csum_set(journal_t *j, struct buffer_head *bh)
  */
 
 static void flush_descriptor(journal_t *journal,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			     struct journal_head *descriptor,
 			     int offset, int write_op)
@@ -757,6 +826,8 @@ static void flush_descriptor(journal_t *journal,
 	set_buffer_dirty(bh);
 	write_dirty_buffer(bh, write_op);
 =======
+=======
+>>>>>>> v3.18
 			     struct buffer_head *descriptor,
 			     int offset, int write_op)
 {
@@ -775,6 +846,9 @@ static void flush_descriptor(journal_t *journal,
 	BUFFER_TRACE(descriptor, "write");
 	set_buffer_dirty(descriptor);
 	write_dirty_buffer(descriptor, write_op);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

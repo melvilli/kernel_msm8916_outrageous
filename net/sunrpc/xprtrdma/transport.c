@@ -87,7 +87,11 @@ static unsigned int max_memreg = RPCRDMA_LAST - 1;
 static struct ctl_table_header *sunrpc_table_header;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table xr_tunables_table[] = {
+=======
+static struct ctl_table xr_tunables_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table xr_tunables_table[] = {
 >>>>>>> v3.18
@@ -143,7 +147,11 @@ static struct ctl_table xr_tunables_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table sunrpc_table[] = {
+=======
+static struct ctl_table sunrpc_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table sunrpc_table[] = {
 >>>>>>> v3.18
@@ -158,12 +166,18 @@ static struct ctl_table sunrpc_table[] = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RPCRDMA_BIND_TO		(60U * HZ)
 #define RPCRDMA_INIT_REEST_TO	(5U * HZ)
 #define RPCRDMA_MAX_REEST_TO	(30U * HZ)
 #define RPCRDMA_IDLE_DISC_TO	(5U * 60 * HZ)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct rpc_xprt_ops xprt_rdma_procs;	/* forward reference */
 
@@ -217,7 +231,10 @@ xprt_rdma_connect_worker(struct work_struct *work)
 	int rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->flags |= PF_FSTRANS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xprt_clear_connected(xprt);
@@ -231,7 +248,10 @@ xprt_rdma_connect_worker(struct work_struct *work)
 	dprintk("RPC:       %s: exit\n", __func__);
 	xprt_clear_connecting(xprt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->flags &= ~PF_FSTRANS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -252,7 +272,10 @@ xprt_rdma_destroy(struct rpc_xprt *xprt)
 {
 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -264,10 +287,14 @@ xprt_rdma_destroy(struct rpc_xprt *xprt)
 
 	rpcrdma_buffer_destroy(&r_xprt->rx_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = rpcrdma_ep_destroy(&r_xprt->rx_ep, &r_xprt->rx_ia);
 	if (rc)
 		dprintk("RPC:       %s: rpcrdma_ep_destroy returned %i\n",
 			__func__, rc);
+=======
+	rpcrdma_ep_destroy(&r_xprt->rx_ep, &r_xprt->rx_ia);
+>>>>>>> v3.18
 =======
 	rpcrdma_ep_destroy(&r_xprt->rx_ep, &r_xprt->rx_ia);
 >>>>>>> v3.18
@@ -319,6 +346,7 @@ xprt_setup_rdma(struct xprt_create *args)
 	/* 60 second timeout, no retries */
 	xprt->timeout = &xprt_rdma_default_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xprt->bind_timeout = (60U * HZ);
 	xprt->reestablish_timeout = (5U * HZ);
 	xprt->idle_timeout = (5U * 60 * HZ);
@@ -327,12 +355,17 @@ xprt_setup_rdma(struct xprt_create *args)
 	xprt->tsh_size = 0;		/* RPC-RDMA handles framing */
 	xprt->max_payload = RPCRDMA_MAX_DATA_SEGS * PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	xprt->bind_timeout = RPCRDMA_BIND_TO;
 	xprt->reestablish_timeout = RPCRDMA_INIT_REEST_TO;
 	xprt->idle_timeout = RPCRDMA_IDLE_DISC_TO;
 
 	xprt->resvport = 0;		/* privileged port not needed */
 	xprt->tsh_size = 0;		/* RPC-RDMA handles framing */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xprt->ops = &xprt_rdma_procs;
 
@@ -420,6 +453,12 @@ xprt_setup_rdma(struct xprt_create *args)
 
 	xprt_rdma_format_addresses(xprt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xprt->max_payload = rpcrdma_max_payload(new_xprt);
+	dprintk("RPC:       %s: transport data payload maximum: %zu bytes\n",
+		__func__, xprt->max_payload);
+>>>>>>> v3.18
 =======
 	xprt->max_payload = rpcrdma_max_payload(new_xprt);
 	dprintk("RPC:       %s: transport data payload maximum: %zu bytes\n",
@@ -436,7 +475,11 @@ out4:
 	rc = -EINVAL;
 out3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) rpcrdma_ep_destroy(new_ep, &new_xprt->rx_ia);
+=======
+	rpcrdma_ep_destroy(new_ep, &new_xprt->rx_ia);
+>>>>>>> v3.18
 =======
 	rpcrdma_ep_destroy(new_ep, &new_xprt->rx_ia);
 >>>>>>> v3.18
@@ -460,7 +503,11 @@ xprt_rdma_close(struct rpc_xprt *xprt)
 		xprt->reestablish_timeout = 0;
 	xprt_disconnect_done(xprt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) rpcrdma_ep_disconnect(&r_xprt->rx_ep, &r_xprt->rx_ia);
+=======
+	rpcrdma_ep_disconnect(&r_xprt->rx_ep, &r_xprt->rx_ia);
+>>>>>>> v3.18
 =======
 	rpcrdma_ep_disconnect(&r_xprt->rx_ep, &r_xprt->rx_ia);
 >>>>>>> v3.18
@@ -489,15 +536,21 @@ xprt_rdma_connect(struct rpc_xprt *xprt, struct rpc_task *task)
 			xprt->reestablish_timeout);
 		xprt->reestablish_timeout <<= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (xprt->reestablish_timeout > (30 * HZ))
 			xprt->reestablish_timeout = (30 * HZ);
 		else if (xprt->reestablish_timeout < (5 * HZ))
 			xprt->reestablish_timeout = (5 * HZ);
 =======
+=======
+>>>>>>> v3.18
 		if (xprt->reestablish_timeout > RPCRDMA_MAX_REEST_TO)
 			xprt->reestablish_timeout = RPCRDMA_MAX_REEST_TO;
 		else if (xprt->reestablish_timeout < RPCRDMA_INIT_REEST_TO)
 			xprt->reestablish_timeout = RPCRDMA_INIT_REEST_TO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		schedule_delayed_work(&r_xprt->rdma_connect, 0);
@@ -506,6 +559,7 @@ xprt_rdma_connect(struct rpc_xprt *xprt, struct rpc_task *task)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 xprt_rdma_reserve_xprt(struct rpc_xprt *xprt, struct rpc_task *task)
@@ -526,6 +580,8 @@ xprt_rdma_reserve_xprt(struct rpc_xprt *xprt, struct rpc_task *task)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * The RDMA allocate/free functions need the task structure as a place
  * to hide the struct rpcrdma_req, which is necessary for the actual send/recv
@@ -542,7 +598,12 @@ xprt_rdma_allocate(struct rpc_task *task, size_t size)
 
 	req = rpcrdma_buffer_get(&rpcx_to_rdmax(xprt)->rx_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(NULL == req);
+=======
+	if (req == NULL)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (req == NULL)
 		return NULL;
@@ -571,6 +632,7 @@ xprt_rdma_allocate(struct rpc_task *task, size_t size)
 		 * will (doggedly) retry.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rpcx_to_rdmax(xprt)->rx_ia.ri_memreg_strategy ==
 				RPCRDMA_BOUNCEBUFFERS) {
 			/* forced to "pure inline" */
@@ -583,6 +645,8 @@ xprt_rdma_allocate(struct rpc_task *task, size_t size)
 			rpcx_to_rdmax(xprt)->rx_stats.failed_marshal_count++;
 			goto out;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (task->tk_flags & RPC_TASK_SWAPPER)
@@ -614,7 +678,10 @@ xprt_rdma_allocate(struct rpc_task *task, size_t size)
 	}
 	dprintk("RPC:       %s: size %zd, request 0x%p\n", __func__, size, req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	req->rl_connect_cookie = 0;	/* our reserved value */
@@ -653,9 +720,13 @@ xprt_rdma_free(void *buffer)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Finish the deregistration. When using mw bind, this was
 	 * begun in rpcrdma_reply_handler(). In all other modes, we
 	 * do it here, in thread context. The process is considered
+=======
+	 * Finish the deregistration.  The process is considered
+>>>>>>> v3.18
 =======
 	 * Finish the deregistration.  The process is considered
 >>>>>>> v3.18
@@ -668,12 +739,16 @@ xprt_rdma_free(void *buffer)
 		--req->rl_nchunks;
 		i += rpcrdma_deregister_external(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&req->rl_segments[i], r_xprt, NULL);
 	}
 
 	if (rep && wait_event_interruptible(rep->rr_unbind, !rep->rr_func)) {
 		rep->rr_func = NULL;	/* abandon the callback */
 		req->rl_reply = NULL;
+=======
+			&req->rl_segments[i], r_xprt);
+>>>>>>> v3.18
 =======
 			&req->rl_segments[i], r_xprt);
 >>>>>>> v3.18
@@ -712,6 +787,7 @@ xprt_rdma_send_request(struct rpc_task *task)
 	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* marshal the send itself */
 	if (req->rl_niovs == 0 && rpcrdma_marshal_req(rqst) != 0) {
@@ -721,6 +797,8 @@ xprt_rdma_send_request(struct rpc_task *task)
 		return -EIO;
 	}
 =======
+=======
+>>>>>>> v3.18
 	int rc = 0;
 
 	if (req->rl_niovs == 0)
@@ -729,6 +807,9 @@ xprt_rdma_send_request(struct rpc_task *task)
 		rc = rpcrdma_marshal_chunks(rqst, 0);
 	if (rc < 0)
 		goto failed_marshal;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (req->rl_reply == NULL) 		/* e.g. reconnection */
@@ -753,13 +834,19 @@ xprt_rdma_send_request(struct rpc_task *task)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 failed_marshal:
 	r_xprt->rx_stats.failed_marshal_count++;
 	dprintk("RPC:       %s: rpcrdma_marshal_req failed, status %i\n",
 		__func__, rc);
 	if (rc == -EIO)
 		return -EIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 drop_connection:
 	xprt_disconnect_done(xprt);
@@ -807,7 +894,11 @@ static void xprt_rdma_print_stats(struct rpc_xprt *xprt, struct seq_file *seq)
 
 static struct rpc_xprt_ops xprt_rdma_procs = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reserve_xprt		= xprt_rdma_reserve_xprt,
+=======
+	.reserve_xprt		= xprt_reserve_xprt_cong,
+>>>>>>> v3.18
 =======
 	.reserve_xprt		= xprt_reserve_xprt_cong,
 >>>>>>> v3.18
@@ -839,7 +930,11 @@ static void __exit xprt_rdma_cleanup(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk(KERN_INFO "RPCRDMA Module Removed, deregister RPC RDMA transport\n");
+=======
+	dprintk("RPCRDMA Module Removed, deregister RPC RDMA transport\n");
+>>>>>>> v3.18
 =======
 	dprintk("RPCRDMA Module Removed, deregister RPC RDMA transport\n");
 >>>>>>> v3.18
@@ -865,6 +960,7 @@ static int __init xprt_rdma_init(void)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk(KERN_INFO "RPCRDMA Module Init, register RPC RDMA transport\n");
 
 	dprintk(KERN_INFO "Defaults:\n");
@@ -874,6 +970,8 @@ static int __init xprt_rdma_init(void)
 		xprt_rdma_max_inline_read, xprt_rdma_max_inline_write);
 	dprintk(KERN_INFO "\tPadding %d\n\tMemreg %d\n",
 =======
+=======
+>>>>>>> v3.18
 	dprintk("RPCRDMA Module Init, register RPC RDMA transport\n");
 
 	dprintk("Defaults:\n");
@@ -882,6 +980,9 @@ static int __init xprt_rdma_init(void)
 		xprt_rdma_slot_table_entries,
 		xprt_rdma_max_inline_read, xprt_rdma_max_inline_write);
 	dprintk("\tPadding %d\n\tMemreg %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		xprt_rdma_inline_write_padding, xprt_rdma_memreg_strategy);
 

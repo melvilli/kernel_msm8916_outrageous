@@ -3,8 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-$(CONFIG_USB_DEBUG) := -DDEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 usbcore-y := usb.o hub.o hcd.o urb.o message.o driver.o

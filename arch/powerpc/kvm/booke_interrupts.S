@@ -22,7 +22,10 @@
 #include <asm/kvm_asm.h>
 #include <asm/reg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mmu-44x.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/page.h>
@@ -428,10 +431,13 @@ lightweight_exit:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_44x
 	iccci	0, 0 /* XXX hack */
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Load some guest volatiles. */

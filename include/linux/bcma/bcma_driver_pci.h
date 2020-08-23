@@ -182,7 +182,10 @@ struct pci_dev;
 #define BCMA_CORE_PCI_CFG_DEVCTRL		0xd8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BCMA_CORE_PCI_
 
 /* MDIO devices (SERDES modules) */
@@ -203,12 +206,19 @@ struct pci_dev;
 #define BCMA_CORE_PCI_MDIO_SERDESID		0x831
 #define BCMA_CORE_PCI_MDIO_RXCTRL0		0x840
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PCIE Root Capability Register bits (Host mode only) */
 #define BCMA_CORE_PCI_RC_CRS_VISIBILITY		0x0001
 
 struct bcma_drv_pci;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct bcma_bus;
+>>>>>>> v3.18
 =======
 struct bcma_bus;
 >>>>>>> v3.18
@@ -247,7 +257,13 @@ extern void bcma_core_pci_init(struct bcma_drv_pci *pc);
 extern int bcma_core_pci_irq_ctl(struct bcma_drv_pci *pc,
 				 struct bcma_device *core, bool enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void bcma_core_pci_extend_L1timer(struct bcma_drv_pci *pc, bool extend);
+=======
+extern void bcma_core_pci_up(struct bcma_bus *bus);
+extern void bcma_core_pci_down(struct bcma_bus *bus);
+extern void bcma_core_pci_power_save(struct bcma_bus *bus, bool up);
+>>>>>>> v3.18
 =======
 extern void bcma_core_pci_up(struct bcma_bus *bus);
 extern void bcma_core_pci_down(struct bcma_bus *bus);

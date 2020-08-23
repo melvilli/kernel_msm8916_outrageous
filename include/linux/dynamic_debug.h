@@ -43,7 +43,11 @@ int ddebug_add_module(struct _ddebug *tab, unsigned int n,
 extern int ddebug_remove_module(const char *mod_name);
 extern __printf(2, 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...);
+=======
+void __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...);
+>>>>>>> v3.18
 =======
 void __dynamic_pr_debug(struct _ddebug *descriptor, const char *fmt, ...);
 >>>>>>> v3.18
@@ -55,8 +59,13 @@ struct device;
 
 extern __printf(3, 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __dynamic_dev_dbg(struct _ddebug *descriptor, const struct device *dev,
 		      const char *fmt, ...);
+=======
+void __dynamic_dev_dbg(struct _ddebug *descriptor, const struct device *dev,
+		       const char *fmt, ...);
+>>>>>>> v3.18
 =======
 void __dynamic_dev_dbg(struct _ddebug *descriptor, const struct device *dev,
 		       const char *fmt, ...);
@@ -66,9 +75,15 @@ struct net_device;
 
 extern __printf(3, 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __dynamic_netdev_dbg(struct _ddebug *descriptor,
 			 const struct net_device *dev,
 			 const char *fmt, ...);
+=======
+void __dynamic_netdev_dbg(struct _ddebug *descriptor,
+			  const struct net_device *dev,
+			  const char *fmt, ...);
+>>>>>>> v3.18
 =======
 void __dynamic_netdev_dbg(struct _ddebug *descriptor,
 			  const struct net_device *dev,

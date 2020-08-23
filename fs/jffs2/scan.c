@@ -511,10 +511,13 @@ static int jffs2_scan_eraseblock (struct jffs2_sb_info *c, struct jffs2_eraseblo
 				sumptr = buf + buf_size - sumlen;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* sm->offset maybe wrong but MAGIC maybe right */
 				if (sumlen > c->sector_size)
 					goto full_scan;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				/* Now, make sure the summary itself is available */
@@ -552,7 +555,10 @@ static int jffs2_scan_eraseblock (struct jffs2_sb_info *c, struct jffs2_eraseblo
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 full_scan:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	buf_ofs = jeb->offset;

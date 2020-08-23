@@ -1,5 +1,6 @@
 uint32_t nvc0_grgpc_data[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 0x0000: gpc_id */
 	0x00000000,
 /* 0x0004: gpc_mmio_list_head */
@@ -14,6 +15,8 @@ uint32_t nvc0_grgpc_data[] = {
 	0x00000000,
 /* 0x0018: tpc_mmio_list_tail */
 =======
+=======
+>>>>>>> v3.18
 /* 0x0000: gpc_mmio_list_head */
 	0x00000064,
 /* 0x0004: gpc_mmio_list_tail */
@@ -29,6 +32,9 @@ uint32_t nvc0_grgpc_data[] = {
 /* 0x0014: tpc_count */
 	0x00000000,
 /* 0x0018: tpc_mask */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x00000000,
 /* 0x001c: cmd_queue */
@@ -50,6 +56,7 @@ uint32_t nvc0_grgpc_data[] = {
 	0x00000000,
 	0x00000000,
 	0x00000000,
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* 0x0064: chipsets */
 	0x000000c0,
@@ -192,10 +199,15 @@ uint32_t nvc0_grgpc_data[] = {
 uint32_t nvc0_grgpc_code[] = {
 	0x03060ef5,
 =======
+=======
+>>>>>>> v3.18
 };
 
 uint32_t nvc0_grgpc_code[] = {
 	0x03a10ef5,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 0x0004: queue_put */
 	0x9800d898,
@@ -204,7 +216,11 @@ uint32_t nvc0_grgpc_code[] = {
 	0xf00c1bf4,
 	0x21f502f7,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	0x00f802ec,
+=======
+	0x00f8037e,
+>>>>>>> v3.18
 =======
 	0x00f8037e,
 >>>>>>> v3.18
@@ -231,6 +247,7 @@ uint32_t nvc0_grgpc_code[] = {
 /* 0x0066: queue_get_done */
 	0x00f80132,
 /* 0x0068: nv_rd32 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0x0728b7f1,
 	0xb906b4b6,
@@ -407,6 +424,8 @@ uint32_t nvc0_grgpc_code[] = {
 	0x95220080,
 /* 0x02ba: ctx_init_strand_loop */
 =======
+=======
+>>>>>>> v3.18
 	0xf002ecb9,
 	0x07f11fc9,
 	0x03f0ca00,
@@ -615,6 +634,9 @@ uint32_t nvc0_grgpc_code[] = {
 	0x0293f020,
 	0x950099cf,
 /* 0x034a: ctx_init_strand_loop */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x8ed008fe,
 	0x408ed000,
@@ -624,6 +646,7 @@ uint32_t nvc0_grgpc_code[] = {
 	0xb60480b6,
 	0x1bf40192,
 	0x08e4b6e8,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0xf1f2efbc,
 	0xb6085c87,
@@ -706,6 +729,8 @@ uint32_t nvc0_grgpc_code[] = {
 /* 0x0401: main */
 	0x0031f400,
 =======
+=======
+>>>>>>> v3.18
 	0xbdf2efbc,
 	0x0399f094,
 	0x170007f1,
@@ -790,6 +815,9 @@ uint32_t nvc0_grgpc_code[] = {
 	0xbd0002d0,
 /* 0x04a9: main */
 	0x0031f404,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0xf00028f4,
 	0x21f41cd7,
@@ -802,6 +830,7 @@ uint32_t nvc0_grgpc_code[] = {
 	0xfe051efd,
 	0x21f50018,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	0x0ef404c3,
 /* 0x0431: main_not_ctx_xfer */
 	0x10ef94d3,
@@ -809,18 +838,24 @@ uint32_t nvc0_grgpc_code[] = {
 	0xf402ec21,
 /* 0x043e: ih */
 =======
+=======
+>>>>>>> v3.18
 	0x0ef4059e,
 /* 0x04d9: main_not_ctx_xfer */
 	0x10ef94d3,
 	0xf501f5f0,
 	0xf4037e21,
 /* 0x04e6: ih */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x80f9c60e,
 	0xf90188fe,
 	0xf990f980,
 	0xf9b0f9a0,
 	0xf9e0f9d0,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0x800acff0,
 	0xf404abc4,
@@ -900,6 +935,8 @@ uint32_t nvc0_grgpc_code[] = {
 	0x048f21f5,
 	0x000000f8,
 =======
+=======
+>>>>>>> v3.18
 	0xf104bdf0,
 	0xf00200a7,
 	0xaacf00a3,
@@ -999,6 +1036,9 @@ uint32_t nvc0_grgpc_code[] = {
 	0x00000000,
 	0x00000000,
 	0x00000000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x00000000,
 	0x00000000,

@@ -17,10 +17,15 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_bit.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_buf_item.h"
+=======
+#include "xfs_log_format.h"
+#include "xfs_bit.h"
+>>>>>>> v3.18
 =======
 #include "xfs_log_format.h"
 #include "xfs_bit.h"

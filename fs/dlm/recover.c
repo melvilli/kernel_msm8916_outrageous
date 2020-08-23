@@ -527,7 +527,11 @@ int dlm_recover_masters(struct dlm_ls *ls)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover_masters");
+=======
+	log_rinfo(ls, "dlm_recover_masters");
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover_masters");
 >>>>>>> v3.18
@@ -557,7 +561,11 @@ int dlm_recover_masters(struct dlm_ls *ls)
 	up_read(&ls->ls_root_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover_masters %u of %u", count, total);
+=======
+	log_rinfo(ls, "dlm_recover_masters %u of %u", count, total);
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover_masters %u of %u", count, total);
 >>>>>>> v3.18
@@ -694,7 +702,11 @@ int dlm_recover_locks(struct dlm_ls *ls)
 	up_read(&ls->ls_root_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover_locks %d out", count);
+=======
+	log_rinfo(ls, "dlm_recover_locks %d out", count);
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover_locks %d out", count);
 >>>>>>> v3.18
@@ -896,7 +908,11 @@ void dlm_recover_rsbs(struct dlm_ls *ls)
 
 	if (count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_rsbs %d done", count);
+=======
+		log_rinfo(ls, "dlm_recover_rsbs %d done", count);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_rsbs %d done", count);
 >>>>>>> v3.18
@@ -967,7 +983,11 @@ void dlm_clear_toss(struct dlm_ls *ls)
 
 	if (count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_clear_toss %u done", count);
+=======
+		log_rinfo(ls, "dlm_clear_toss %u done", count);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_clear_toss %u done", count);
 >>>>>>> v3.18

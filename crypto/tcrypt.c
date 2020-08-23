@@ -49,12 +49,18 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * return a string with the driver name
  */
 #define get_driver_name(tfm_type, tfm) crypto_tfm_alg_driver_name(tfm_type ## _tfm(tfm))
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Used by test_cipher_speed()
  */
@@ -77,7 +83,11 @@ static char *check[] = {
 
 static int test_cipher_jiffies(struct blkcipher_desc *desc, int enc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct scatterlist *sg, int blen, int sec)
+=======
+			       struct scatterlist *sg, int blen, int secs)
+>>>>>>> v3.18
 =======
 			       struct scatterlist *sg, int blen, int secs)
 >>>>>>> v3.18
@@ -87,7 +97,11 @@ static int test_cipher_jiffies(struct blkcipher_desc *desc, int enc,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (start = jiffies, end = start + sec * HZ, bcount = 0;
+=======
+	for (start = jiffies, end = start + secs * HZ, bcount = 0;
+>>>>>>> v3.18
 =======
 	for (start = jiffies, end = start + secs * HZ, bcount = 0;
 >>>>>>> v3.18
@@ -103,7 +117,11 @@ static int test_cipher_jiffies(struct blkcipher_desc *desc, int enc,
 
 	printk("%d operations in %d seconds (%ld bytes)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       bcount, sec, (long)bcount * blen);
+=======
+	       bcount, secs, (long)bcount * blen);
+>>>>>>> v3.18
 =======
 	       bcount, secs, (long)bcount * blen);
 >>>>>>> v3.18
@@ -158,10 +176,13 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 block_sizes[] = { 16, 64, 256, 1024, 8192, 0 };
 
 static void test_cipher_speed(const char *algo, int enc, unsigned int sec,
 =======
+=======
+>>>>>>> v3.18
 static int test_aead_jiffies(struct aead_request *req, int enc,
 				int blen, int secs)
 {
@@ -432,6 +453,9 @@ out_noxbuf:
 }
 
 static void test_cipher_speed(const char *algo, int enc, unsigned int secs,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      struct cipher_speed_template *template,
 			      unsigned int tcount, u8 *keysize)
@@ -450,8 +474,11 @@ static void test_cipher_speed(const char *algo, int enc, unsigned int secs,
 		e = "decryption";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("\ntesting speed of %s %s\n", algo, e);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tfm = crypto_alloc_blkcipher(algo, 0, CRYPTO_ALG_ASYNC);
@@ -465,6 +492,12 @@ static void test_cipher_speed(const char *algo, int enc, unsigned int secs,
 	desc.flags = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	printk(KERN_INFO "\ntesting speed of %s (%s) %s\n", algo,
+			get_driver_name(crypto_blkcipher, tfm), e);
+
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "\ntesting speed of %s (%s) %s\n", algo,
 			get_driver_name(crypto_blkcipher, tfm), e);
@@ -520,9 +553,15 @@ static void test_cipher_speed(const char *algo, int enc, unsigned int secs,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sec)
 				ret = test_cipher_jiffies(&desc, enc, sg,
 							  *b_size, sec);
+=======
+			if (secs)
+				ret = test_cipher_jiffies(&desc, enc, sg,
+							  *b_size, secs);
+>>>>>>> v3.18
 =======
 			if (secs)
 				ret = test_cipher_jiffies(&desc, enc, sg,
@@ -549,7 +588,11 @@ out:
 static int test_hash_jiffies_digest(struct hash_desc *desc,
 				    struct scatterlist *sg, int blen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    char *out, int sec)
+=======
+				    char *out, int secs)
+>>>>>>> v3.18
 =======
 				    char *out, int secs)
 >>>>>>> v3.18
@@ -559,7 +602,11 @@ static int test_hash_jiffies_digest(struct hash_desc *desc,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (start = jiffies, end = start + sec * HZ, bcount = 0;
+=======
+	for (start = jiffies, end = start + secs * HZ, bcount = 0;
+>>>>>>> v3.18
 =======
 	for (start = jiffies, end = start + secs * HZ, bcount = 0;
 >>>>>>> v3.18
@@ -571,7 +618,11 @@ static int test_hash_jiffies_digest(struct hash_desc *desc,
 
 	printk("%6u opers/sec, %9lu bytes/sec\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       bcount / sec, ((long)bcount * blen) / sec);
+=======
+	       bcount / secs, ((long)bcount * blen) / secs);
+>>>>>>> v3.18
 =======
 	       bcount / secs, ((long)bcount * blen) / secs);
 >>>>>>> v3.18
@@ -581,7 +632,11 @@ static int test_hash_jiffies_digest(struct hash_desc *desc,
 
 static int test_hash_jiffies(struct hash_desc *desc, struct scatterlist *sg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     int blen, int plen, char *out, int sec)
+=======
+			     int blen, int plen, char *out, int secs)
+>>>>>>> v3.18
 =======
 			     int blen, int plen, char *out, int secs)
 >>>>>>> v3.18
@@ -592,9 +647,15 @@ static int test_hash_jiffies(struct hash_desc *desc, struct scatterlist *sg,
 
 	if (plen == blen)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return test_hash_jiffies_digest(desc, sg, blen, out, sec);
 
 	for (start = jiffies, end = start + sec * HZ, bcount = 0;
+=======
+		return test_hash_jiffies_digest(desc, sg, blen, out, secs);
+
+	for (start = jiffies, end = start + secs * HZ, bcount = 0;
+>>>>>>> v3.18
 =======
 		return test_hash_jiffies_digest(desc, sg, blen, out, secs);
 
@@ -617,7 +678,11 @@ static int test_hash_jiffies(struct hash_desc *desc, struct scatterlist *sg,
 
 	printk("%6u opers/sec, %9lu bytes/sec\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       bcount / sec, ((long)bcount * blen) / sec);
+=======
+	       bcount / secs, ((long)bcount * blen) / secs);
+>>>>>>> v3.18
 =======
 	       bcount / secs, ((long)bcount * blen) / secs);
 >>>>>>> v3.18
@@ -742,7 +807,11 @@ static void test_hash_sg_init(struct scatterlist *sg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void test_hash_speed(const char *algo, unsigned int sec,
+=======
+static void test_hash_speed(const char *algo, unsigned int secs,
+>>>>>>> v3.18
 =======
 static void test_hash_speed(const char *algo, unsigned int secs,
 >>>>>>> v3.18
@@ -756,8 +825,11 @@ static void test_hash_speed(const char *algo, unsigned int secs,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "\ntesting speed of %s\n", algo);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tfm = crypto_alloc_hash(algo, 0, CRYPTO_ALG_ASYNC);
@@ -769,6 +841,12 @@ static void test_hash_speed(const char *algo, unsigned int secs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	printk(KERN_INFO "\ntesting speed of %s (%s)\n", algo,
+			get_driver_name(crypto_hash, tfm));
+
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "\ntesting speed of %s (%s)\n", algo,
 			get_driver_name(crypto_hash, tfm));
@@ -800,9 +878,15 @@ static void test_hash_speed(const char *algo, unsigned int secs,
 		       i, speed[i].blen, speed[i].plen, speed[i].blen / speed[i].plen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sec)
 			ret = test_hash_jiffies(&desc, sg, speed[i].blen,
 						speed[i].plen, output, sec);
+=======
+		if (secs)
+			ret = test_hash_jiffies(&desc, sg, speed[i].blen,
+						speed[i].plen, output, secs);
+>>>>>>> v3.18
 =======
 		if (secs)
 			ret = test_hash_jiffies(&desc, sg, speed[i].blen,
@@ -847,7 +931,11 @@ static inline int do_one_ahash_op(struct ahash_request *req, int ret)
 		if (!ret)
 			ret = tr->err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(tr->completion);
+=======
+		reinit_completion(&tr->completion);
+>>>>>>> v3.18
 =======
 		reinit_completion(&tr->completion);
 >>>>>>> v3.18
@@ -857,7 +945,11 @@ static inline int do_one_ahash_op(struct ahash_request *req, int ret)
 
 static int test_ahash_jiffies_digest(struct ahash_request *req, int blen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     char *out, int sec)
+=======
+				     char *out, int secs)
+>>>>>>> v3.18
 =======
 				     char *out, int secs)
 >>>>>>> v3.18
@@ -867,7 +959,11 @@ static int test_ahash_jiffies_digest(struct ahash_request *req, int blen,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (start = jiffies, end = start + sec * HZ, bcount = 0;
+=======
+	for (start = jiffies, end = start + secs * HZ, bcount = 0;
+>>>>>>> v3.18
 =======
 	for (start = jiffies, end = start + secs * HZ, bcount = 0;
 >>>>>>> v3.18
@@ -879,7 +975,11 @@ static int test_ahash_jiffies_digest(struct ahash_request *req, int blen,
 
 	printk("%6u opers/sec, %9lu bytes/sec\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       bcount / sec, ((long)bcount * blen) / sec);
+=======
+	       bcount / secs, ((long)bcount * blen) / secs);
+>>>>>>> v3.18
 =======
 	       bcount / secs, ((long)bcount * blen) / secs);
 >>>>>>> v3.18
@@ -889,7 +989,11 @@ static int test_ahash_jiffies_digest(struct ahash_request *req, int blen,
 
 static int test_ahash_jiffies(struct ahash_request *req, int blen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      int plen, char *out, int sec)
+=======
+			      int plen, char *out, int secs)
+>>>>>>> v3.18
 =======
 			      int plen, char *out, int secs)
 >>>>>>> v3.18
@@ -900,9 +1004,15 @@ static int test_ahash_jiffies(struct ahash_request *req, int blen,
 
 	if (plen == blen)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return test_ahash_jiffies_digest(req, blen, out, sec);
 
 	for (start = jiffies, end = start + sec * HZ, bcount = 0;
+=======
+		return test_ahash_jiffies_digest(req, blen, out, secs);
+
+	for (start = jiffies, end = start + secs * HZ, bcount = 0;
+>>>>>>> v3.18
 =======
 		return test_ahash_jiffies_digest(req, blen, out, secs);
 
@@ -925,7 +1035,11 @@ static int test_ahash_jiffies(struct ahash_request *req, int blen,
 
 	pr_cont("%6u opers/sec, %9lu bytes/sec\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcount / sec, ((long)bcount * blen) / sec);
+=======
+		bcount / secs, ((long)bcount * blen) / secs);
+>>>>>>> v3.18
 =======
 		bcount / secs, ((long)bcount * blen) / secs);
 >>>>>>> v3.18
@@ -1029,7 +1143,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void test_ahash_speed(const char *algo, unsigned int sec,
+=======
+static void test_ahash_speed(const char *algo, unsigned int secs,
+>>>>>>> v3.18
 =======
 static void test_ahash_speed(const char *algo, unsigned int secs,
 >>>>>>> v3.18
@@ -1043,8 +1161,11 @@ static void test_ahash_speed(const char *algo, unsigned int secs,
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "\ntesting speed of async %s\n", algo);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tfm = crypto_alloc_ahash(algo, 0, 0);
@@ -1055,6 +1176,12 @@ static void test_ahash_speed(const char *algo, unsigned int secs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	printk(KERN_INFO "\ntesting speed of async %s (%s)\n", algo,
+			get_driver_name(crypto_ahash, tfm));
+
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "\ntesting speed of async %s (%s)\n", algo,
 			get_driver_name(crypto_ahash, tfm));
@@ -1091,9 +1218,15 @@ static void test_ahash_speed(const char *algo, unsigned int secs,
 		ahash_request_set_crypt(req, sg, output, speed[i].plen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sec)
 			ret = test_ahash_jiffies(req, speed[i].blen,
 						 speed[i].plen, output, sec);
+=======
+		if (secs)
+			ret = test_ahash_jiffies(req, speed[i].blen,
+						 speed[i].plen, output, secs);
+>>>>>>> v3.18
 =======
 		if (secs)
 			ret = test_ahash_jiffies(req, speed[i].blen,
@@ -1124,7 +1257,11 @@ static inline int do_one_acipher_op(struct ablkcipher_request *req, int ret)
 		if (!ret)
 			ret = tr->err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(tr->completion);
+=======
+		reinit_completion(&tr->completion);
+>>>>>>> v3.18
 =======
 		reinit_completion(&tr->completion);
 >>>>>>> v3.18
@@ -1135,7 +1272,11 @@ static inline int do_one_acipher_op(struct ablkcipher_request *req, int ret)
 
 static int test_acipher_jiffies(struct ablkcipher_request *req, int enc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int blen, int sec)
+=======
+				int blen, int secs)
+>>>>>>> v3.18
 =======
 				int blen, int secs)
 >>>>>>> v3.18
@@ -1145,7 +1286,11 @@ static int test_acipher_jiffies(struct ablkcipher_request *req, int enc,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (start = jiffies, end = start + sec * HZ, bcount = 0;
+=======
+	for (start = jiffies, end = start + secs * HZ, bcount = 0;
+>>>>>>> v3.18
 =======
 	for (start = jiffies, end = start + secs * HZ, bcount = 0;
 >>>>>>> v3.18
@@ -1163,7 +1308,11 @@ static int test_acipher_jiffies(struct ablkcipher_request *req, int enc,
 
 	pr_cont("%d operations in %d seconds (%ld bytes)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcount, sec, (long)bcount * blen);
+=======
+		bcount, secs, (long)bcount * blen);
+>>>>>>> v3.18
 =======
 		bcount, secs, (long)bcount * blen);
 >>>>>>> v3.18
@@ -1218,7 +1367,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void test_acipher_speed(const char *algo, int enc, unsigned int sec,
+=======
+static void test_acipher_speed(const char *algo, int enc, unsigned int secs,
+>>>>>>> v3.18
 =======
 static void test_acipher_speed(const char *algo, int enc, unsigned int secs,
 >>>>>>> v3.18
@@ -1240,8 +1393,11 @@ static void test_acipher_speed(const char *algo, int enc, unsigned int secs,
 		e = "decryption";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("\ntesting speed of async %s %s\n", algo, e);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	init_completion(&tresult.completion);
@@ -1255,6 +1411,12 @@ static void test_acipher_speed(const char *algo, int enc, unsigned int secs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_info("\ntesting speed of async %s (%s) %s\n", algo,
+			get_driver_name(crypto_ablkcipher, tfm), e);
+
+>>>>>>> v3.18
 =======
 	pr_info("\ntesting speed of async %s (%s) %s\n", algo,
 			get_driver_name(crypto_ablkcipher, tfm), e);
@@ -1334,9 +1496,15 @@ static void test_acipher_speed(const char *algo, int enc, unsigned int secs,
 			ablkcipher_request_set_crypt(req, sg, sg, *b_size, iv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sec)
 				ret = test_acipher_jiffies(req, enc,
 							   *b_size, sec);
+=======
+			if (secs)
+				ret = test_acipher_jiffies(req, enc,
+							   *b_size, secs);
+>>>>>>> v3.18
 =======
 			if (secs)
 				ret = test_acipher_jiffies(req, enc,
@@ -1612,11 +1780,17 @@ static int do_test(int m)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 47:
 		ret += tcrypt_test("crct10dif");
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 100:
 		ret += tcrypt_test("hmac(md5)");
@@ -1683,7 +1857,10 @@ static int do_test(int m)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 155:
 		ret += tcrypt_test("authenc(hmac(sha1),cbc(aes))");
 		break;
@@ -1725,6 +1902,9 @@ static int do_test(int m)
 	case 190:
 		ret += tcrypt_test("authenc(hmac(sha512),cbc(des3_ede))");
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 200:
 		test_cipher_speed("ecb(aes)", ENCRYPT, sec, NULL, 0,
@@ -1763,13 +1943,19 @@ static int do_test(int m)
 				des3_speed_template, DES3_SPEED_VECTORS,
 				speed_template_24);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		test_cipher_speed("ctr(des3_ede)", ENCRYPT, sec,
 				des3_speed_template, DES3_SPEED_VECTORS,
 				speed_template_24);
 		test_cipher_speed("ctr(des3_ede)", DECRYPT, sec,
 				des3_speed_template, DES3_SPEED_VECTORS,
 				speed_template_24);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -1917,12 +2103,18 @@ static int do_test(int m)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 211:
 		test_aead_speed("rfc4106(gcm(aes))", ENCRYPT, sec,
 				NULL, 0, 16, 8, aead_speed_template_20);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 300:
 		/* fall through */
@@ -2004,11 +2196,17 @@ static int do_test(int m)
 		if (mode > 300 && mode < 400) break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 320:
 		test_hash_speed("crct10dif", sec, generic_hash_speed_template);
 		if (mode > 300 && mode < 400) break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 399:
 		break;

@@ -10,6 +10,7 @@
 #include <linux/wait.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool should_merge(struct fsnotify_event *old, struct fsnotify_event *new)
 {
 	pr_debug("%s: old=%p new=%p\n", __func__, old, new);
@@ -36,6 +37,8 @@ static bool should_merge(struct fsnotify_event *old, struct fsnotify_event *new)
 		};
 	}
 =======
+=======
+>>>>>>> v3.18
 #include "fanotify.h"
 
 static bool should_merge(struct fsnotify_event *old_fsn,
@@ -51,11 +54,15 @@ static bool should_merge(struct fsnotify_event *old_fsn,
 	    old->path.mnt == new->path.mnt &&
 	    old->path.dentry == new->path.dentry)
 		return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return false;
 }
 
 /* and the list better be locked by something too! */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct fsnotify_event *fanotify_merge(struct list_head *list,
 					     struct fsnotify_event *event)
@@ -71,6 +78,8 @@ static struct fsnotify_event *fanotify_merge(struct list_head *list,
 		if (should_merge(test_holder->event, event)) {
 			test_event = test_holder->event;
 =======
+=======
+>>>>>>> v3.18
 static int fanotify_merge(struct list_head *list, struct fsnotify_event *event)
 {
 	struct fsnotify_event *test_event;
@@ -91,11 +100,15 @@ static int fanotify_merge(struct list_head *list, struct fsnotify_event *event)
 	list_for_each_entry_reverse(test_event, list, list) {
 		if (should_merge(test_event, event)) {
 			do_merge = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!test_event)
 		return NULL;
@@ -137,6 +150,8 @@ static int fanotify_merge(struct list_head *list, struct fsnotify_event *event)
 static int fanotify_get_response_from_access(struct fsnotify_group *group,
 					     struct fsnotify_event *event)
 =======
+=======
+>>>>>>> v3.18
 	if (!do_merge)
 		return 0;
 
@@ -147,6 +162,9 @@ static int fanotify_get_response_from_access(struct fsnotify_group *group,
 #ifdef CONFIG_FANOTIFY_ACCESS_PERMISSIONS
 static int fanotify_get_response(struct fsnotify_group *group,
 				 struct fanotify_perm_event_info *event)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
@@ -157,12 +175,15 @@ static int fanotify_get_response(struct fsnotify_group *group,
 				atomic_read(&group->fanotify_data.bypass_perm));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!event->response) /* bypass_perm set */
 		return 0;
 
 	/* userspace responded, convert to something usable */
 	spin_lock(&event->lock);
 =======
+=======
+>>>>>>> v3.18
 	if (!event->response) {	/* bypass_perm set */
 		/*
 		 * Event was canceled because group is being destroyed. Remove
@@ -174,6 +195,9 @@ static int fanotify_get_response(struct fsnotify_group *group,
 	}
 
 	/* userspace responded, convert to something usable */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (event->response) {
 	case FAN_ALLOW:
@@ -185,7 +209,10 @@ static int fanotify_get_response(struct fsnotify_group *group,
 	}
 	event->response = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&event->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -196,6 +223,7 @@ static int fanotify_get_response(struct fsnotify_group *group,
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fanotify_handle_event(struct fsnotify_group *group,
 				 struct fsnotify_mark *inode_mark,
@@ -243,19 +271,30 @@ static bool fanotify_should_send_event(struct fsnotify_group *group,
 				       struct fsnotify_mark *vfsmnt_mark,
 				       __u32 event_mask, void *data, int data_type)
 =======
+=======
+>>>>>>> v3.18
 static bool fanotify_should_send_event(struct fsnotify_mark *inode_mark,
 				       struct fsnotify_mark *vfsmnt_mark,
 				       u32 event_mask,
 				       void *data, int data_type)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	__u32 marks_mask, marks_ignored_mask;
 	struct path *path = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: group=%p to_tell=%p inode_mark=%p vfsmnt_mark=%p "
 		 "mask=%x data=%p data_type=%d\n", __func__, group, to_tell,
 		 inode_mark, vfsmnt_mark, event_mask, data, data_type);
+=======
+	pr_debug("%s: inode_mark=%p vfsmnt_mark=%p mask=%x data=%p"
+		 " data_type=%d\n", __func__, inode_mark, vfsmnt_mark,
+		 event_mask, data, data_type);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: inode_mark=%p vfsmnt_mark=%p mask=%x data=%p"
 		 " data_type=%d\n", __func__, inode_mark, vfsmnt_mark,
@@ -302,7 +341,10 @@ static bool fanotify_should_send_event(struct fsnotify_mark *inode_mark,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct fanotify_event_info *fanotify_alloc_event(struct inode *inode, u32 mask,
 						 struct path *path)
 {
@@ -390,6 +432,9 @@ static int fanotify_handle_event(struct fsnotify_group *group,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void fanotify_free_group_priv(struct fsnotify_group *group)
 {
@@ -401,6 +446,7 @@ static void fanotify_free_group_priv(struct fsnotify_group *group)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct fsnotify_ops fanotify_fsnotify_ops = {
 	.handle_event = fanotify_handle_event,
 	.should_send_event = fanotify_should_send_event,
@@ -408,6 +454,8 @@ const struct fsnotify_ops fanotify_fsnotify_ops = {
 	.free_event_priv = NULL,
 	.freeing_mark = NULL,
 =======
+=======
+>>>>>>> v3.18
 static void fanotify_free_event(struct fsnotify_event *fsn_event)
 {
 	struct fanotify_event_info *event;
@@ -429,5 +477,8 @@ const struct fsnotify_ops fanotify_fsnotify_ops = {
 	.handle_event = fanotify_handle_event,
 	.free_group_priv = fanotify_free_group_priv,
 	.free_event = fanotify_free_event,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

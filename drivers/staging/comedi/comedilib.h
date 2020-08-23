@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -30,11 +33,14 @@
 struct comedi_device *comedi_open(const char *path);
 int comedi_close(struct comedi_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int comedi_dio_config(struct comedi_device *dev, unsigned int subdev,
 		      unsigned int chan, unsigned int io);
 int comedi_dio_bitfield(struct comedi_device *dev, unsigned int subdev,
 			unsigned int mask, unsigned int *bits);
 =======
+=======
+>>>>>>> v3.18
 int comedi_dio_get_config(struct comedi_device *dev, unsigned int subdev,
 			  unsigned int chan, unsigned int *io);
 int comedi_dio_config(struct comedi_device *dev, unsigned int subdev,
@@ -42,6 +48,9 @@ int comedi_dio_config(struct comedi_device *dev, unsigned int subdev,
 int comedi_dio_bitfield2(struct comedi_device *dev, unsigned int subdev,
 			 unsigned int mask, unsigned int *bits,
 			 unsigned int base_channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int comedi_find_subdevice_by_type(struct comedi_device *dev, int type,
 				  unsigned int subd);

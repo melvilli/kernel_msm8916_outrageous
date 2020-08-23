@@ -215,11 +215,14 @@ static irqreturn_t fsl_lbc_ctrl_irq(int irqno, void *data)
 	struct fsl_lbc_regs __iomem *lbc = ctrl->regs;
 	u32 status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	status = in_be32(&lbc->ltesr);
 	if (!status)
 		return IRQ_NONE;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&fsl_lbc_lock, flags);
@@ -228,6 +231,9 @@ static irqreturn_t fsl_lbc_ctrl_irq(int irqno, void *data)
 		spin_unlock_irqrestore(&fsl_lbc_lock, flags);
 		return IRQ_NONE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	out_be32(&lbc->ltesr, LTESR_CLEAR);
@@ -272,6 +278,10 @@ static irqreturn_t fsl_lbc_ctrl_irq(int irqno, void *data)
 		dev_err(ctrl->dev, "Unknown error: "
 			"LTESR 0x%08X\n", status);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&fsl_lbc_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&fsl_lbc_lock, flags);
 >>>>>>> v3.18
@@ -314,8 +324,13 @@ static int fsl_lbc_ctrl_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fsl_lbc_ctrl_dev->irq = irq_of_parse_and_map(dev->dev.of_node, 0);
 	if (fsl_lbc_ctrl_dev->irq == NO_IRQ) {
+=======
+	fsl_lbc_ctrl_dev->irq[0] = irq_of_parse_and_map(dev->dev.of_node, 0);
+	if (!fsl_lbc_ctrl_dev->irq[0]) {
+>>>>>>> v3.18
 =======
 	fsl_lbc_ctrl_dev->irq[0] = irq_of_parse_and_map(dev->dev.of_node, 0);
 	if (!fsl_lbc_ctrl_dev->irq[0]) {
@@ -332,6 +347,7 @@ static int fsl_lbc_ctrl_probe(struct platform_device *dev)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(fsl_lbc_ctrl_dev->irq, fsl_lbc_ctrl_irq, 0,
 				"fsl-lbc", fsl_lbc_ctrl_dev);
 	if (ret != 0) {
@@ -342,6 +358,8 @@ static int fsl_lbc_ctrl_probe(struct platform_device *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	ret = request_irq(fsl_lbc_ctrl_dev->irq[0], fsl_lbc_ctrl_irq, 0,
 				"fsl-lbc", fsl_lbc_ctrl_dev);
 	if (ret != 0) {
@@ -363,6 +381,9 @@ static int fsl_lbc_ctrl_probe(struct platform_device *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Enable interrupts for any detected events */
 	out_be32(&fsl_lbc_ctrl_dev->regs->lteir, LTEIR_ENABLE);
@@ -370,6 +391,11 @@ static int fsl_lbc_ctrl_probe(struct platform_device *dev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err1:
+	free_irq(fsl_lbc_ctrl_dev->irq[0], fsl_lbc_ctrl_dev);
+>>>>>>> v3.18
 =======
 err1:
 	free_irq(fsl_lbc_ctrl_dev->irq[0], fsl_lbc_ctrl_dev);

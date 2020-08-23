@@ -15,6 +15,10 @@
 #include <linux/cpufreq.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -65,7 +69,12 @@ void s3c2410_cpufreq_setrefresh(struct s3c_cpufreq_config *cfg)
 void s3c2410_set_fvco(struct s3c_cpufreq_config *cfg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(cfg->pll.driver_data, S3C2410_MPLLCON);
+=======
+	if (!IS_ERR(cfg->mpll))
+		clk_set_rate(cfg->mpll, cfg->pll.frequency);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(cfg->mpll))
 		clk_set_rate(cfg->mpll, cfg->pll.frequency);

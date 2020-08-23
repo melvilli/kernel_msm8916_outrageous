@@ -81,7 +81,11 @@ static int ast_ttm_global_init(struct ast_private *ast)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ static void ast_bo_ttm_destroy(struct ttm_buffer_object *tbo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool ast_ttm_bo_is_ast_bo(struct ttm_buffer_object *bo)
+=======
+static bool ast_ttm_bo_is_ast_bo(struct ttm_buffer_object *bo)
+>>>>>>> v3.18
 =======
 static bool ast_ttm_bo_is_ast_bo(struct ttm_buffer_object *bo)
 >>>>>>> v3.18
@@ -157,7 +165,13 @@ ast_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
 static int ast_bo_verify_access(struct ttm_buffer_object *bo, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	struct ast_bo *astbo = ast_bo(bo);
+
+	return drm_vma_node_verify_access(&astbo->gem.vma_node, filp);
+>>>>>>> v3.18
 =======
 	struct ast_bo *astbo = ast_bo(bo);
 
@@ -221,7 +235,11 @@ static struct ttm_backend_func ast_tt_backend_func = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ttm_tt *ast_ttm_tt_create(struct ttm_bo_device *bdev,
+=======
+static struct ttm_tt *ast_ttm_tt_create(struct ttm_bo_device *bdev,
+>>>>>>> v3.18
 =======
 static struct ttm_tt *ast_ttm_tt_create(struct ttm_bo_device *bdev,
 >>>>>>> v3.18
@@ -276,7 +294,13 @@ int ast_mm_init(struct ast_private *ast)
 	ret = ttm_bo_device_init(&ast->ttm.bdev,
 				 ast->ttm.bo_global_ref.ref.object,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 &ast_bo_driver, DRM_FILE_PAGE_OFFSET,
+=======
+				 &ast_bo_driver,
+				 dev->anon_inode->i_mapping,
+				 DRM_FILE_PAGE_OFFSET,
+>>>>>>> v3.18
 =======
 				 &ast_bo_driver,
 				 dev->anon_inode->i_mapping,
@@ -296,9 +320,14 @@ int ast_mm_init(struct ast_private *ast)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ast->fb_mtrr = drm_mtrr_add(pci_resource_start(dev->pdev, 0),
 				    pci_resource_len(dev->pdev, 0),
 				    DRM_MTRR_WC);
+=======
+	ast->fb_mtrr = arch_phys_wc_add(pci_resource_start(dev->pdev, 0),
+					pci_resource_len(dev->pdev, 0));
+>>>>>>> v3.18
 =======
 	ast->fb_mtrr = arch_phys_wc_add(pci_resource_start(dev->pdev, 0),
 					pci_resource_len(dev->pdev, 0));
@@ -310,13 +339,17 @@ int ast_mm_init(struct ast_private *ast)
 void ast_mm_fini(struct ast_private *ast)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *dev = ast->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ttm_bo_device_release(&ast->ttm.bdev);
 
 	ast_ttm_global_release(ast);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ast->fb_mtrr >= 0) {
 		drm_mtrr_del(ast->fb_mtrr,
@@ -327,11 +360,15 @@ void ast_mm_fini(struct ast_private *ast)
 =======
 	arch_phys_wc_del(ast->fb_mtrr);
 >>>>>>> v3.18
+=======
+	arch_phys_wc_del(ast->fb_mtrr);
+>>>>>>> v3.18
 }
 
 void ast_ttm_placement(struct ast_bo *bo, int domain)
 {
 	u32 c = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bo->placement.fpfn = 0;
 	bo->placement.lpfn = 0;
@@ -364,6 +401,8 @@ void ast_bo_unreserve(struct ast_bo *bo)
 {
 	ttm_bo_unreserve(&bo->bo);
 =======
+=======
+>>>>>>> v3.18
 	unsigned i;
 
 	bo->placement.placement = bo->placements;
@@ -380,6 +419,9 @@ void ast_bo_unreserve(struct ast_bo *bo)
 		bo->placements[i].fpfn = 0;
 		bo->placements[i].lpfn = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -402,9 +444,13 @@ int ast_bo_create(struct drm_device *dev, int size, int align,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	astbo->gem.driver_private = NULL;
 	astbo->bo.bdev = &ast->ttm.bdev;
 	astbo->bo.bdev->dev_mapping = dev->dev_mapping;
+=======
+	astbo->bo.bdev = &ast->ttm.bdev;
+>>>>>>> v3.18
 =======
 	astbo->bo.bdev = &ast->ttm.bdev;
 >>>>>>> v3.18
@@ -418,7 +464,11 @@ int ast_bo_create(struct drm_device *dev, int size, int align,
 			  ttm_bo_type_device, &astbo->placement,
 			  align >> PAGE_SHIFT, false, NULL, acc_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  NULL, ast_bo_ttm_destroy);
+=======
+			  NULL, NULL, ast_bo_ttm_destroy);
+>>>>>>> v3.18
 =======
 			  NULL, NULL, ast_bo_ttm_destroy);
 >>>>>>> v3.18
@@ -447,7 +497,11 @@ int ast_bo_pin(struct ast_bo *bo, u32 pl_flag, u64 *gpu_addr)
 	ast_ttm_placement(bo, pl_flag);
 	for (i = 0; i < bo->placement.num_placement; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -474,7 +528,11 @@ int ast_bo_unpin(struct ast_bo *bo)
 
 	for (i = 0; i < bo->placement.num_placement ; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] &= ~TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -502,7 +560,11 @@ int ast_bo_push_sysram(struct ast_bo *bo)
 	ast_ttm_placement(bo, TTM_PL_FLAG_SYSTEM);
 	for (i = 0; i < bo->placement.num_placement ; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -522,7 +584,11 @@ int ast_mmap(struct file *filp, struct vm_area_struct *vma)
 
 	if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return drm_mmap(filp, vma);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18

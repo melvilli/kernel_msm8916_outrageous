@@ -36,6 +36,7 @@
 #define DoubleScanMode          0x00000004
 #define LineCompareOff          0x00000008
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SyncPP                  0x00000000
 #define SyncPN                  0x00000040
 #define SyncNP                  0x00000080
@@ -45,6 +46,8 @@
 #define WideScreenMode		0x00000100
 
 =======
+=======
+>>>>>>> v3.18
 #define HBorder                 0x00000020
 #define VBorder                 0x00000010
 #define WideScreenMode		0x00000100
@@ -57,6 +60,9 @@
 #define SyncPN			(PVSync | NHSync)
 #define SyncNP			(NVSync | PHSync)
 #define SyncNN			(NVSync | NHSync)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DCLK Index */
@@ -83,13 +89,19 @@
 #define VCLK146_25  		0x13
 #define VCLK148_5   		0x14
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VCLK71      		0x15
 #define VCLK88_75   		0x16
 #define VCLK119     		0x17
 #define VCLK85_5     		0x18
 #define VCLK97_75     		0x19
 #define VCLK118_25			0x1A
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct ast_vbios_dclk_info dclk_table[] = {
@@ -115,13 +127,19 @@ static struct ast_vbios_dclk_info dclk_table[] = {
 	{0x37, 0x49, 0x80},					/* 13: VCLK146.25       */
 	{0x1f, 0x45, 0x80},					/* 14: VCLK148.5        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x47, 0x6c, 0x80},					/* 15: VCLK71       */
 	{0x25, 0x65, 0x80},					/* 16: VCLK88.75    */
 	{0x77, 0x58, 0x80},					/* 17: VCLK119      */
 	{0x32, 0x67, 0x80},				    /* 18: VCLK85_5     */
 	{0x6a, 0x6d, 0x80},					/* 19: VCLK97_75	*/
 	{0x3b, 0x2c, 0x81},					/* 1A: VCLK118_25	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -259,6 +277,7 @@ static struct ast_vbios_enhtable res_1600x1200[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ast_vbios_enhtable res_1920x1200[] = {
 	{2080, 1920, 48, 32, 1235, 1200, 3, 6, VCLK154,	/* 60Hz */
 	 (SyncNP | Charx8Dot), 60, 1, 0x34 },
@@ -273,6 +292,8 @@ static struct ast_vbios_enhtable res_1280x800[] = {
 	{1680, 1280, 72,128,  831,  800, 3, 6, VCLK83_5,	/* 60Hz */
 	 (SyncPN | Charx8Dot | LineCompareOff | WideScreenMode), 0xFF, 1, 0x35 },
 =======
+=======
+>>>>>>> v3.18
 /* 16:9 */
 static struct ast_vbios_enhtable res_1360x768[] = {
 	{1792, 1360, 64,112, 795,  768, 3, 6, VCLK85_5,	         /* 60Hz */
@@ -306,11 +327,15 @@ static struct ast_vbios_enhtable res_1280x800[] = {
 	 (SyncPN | Charx8Dot | LineCompareOff | WideScreenMode | NewModeInfo), 60, 2, 0x35 },
 	{1680, 1280, 72,128,  831,  800, 3, 6, VCLK83_5,	/* 60Hz */
 	 (SyncPN | Charx8Dot | LineCompareOff | WideScreenMode | NewModeInfo), 0xFF, 2, 0x35 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 };
 
 static struct ast_vbios_enhtable res_1440x900[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{1904, 1440, 80,152,  934,  900, 3, 6, VCLK106_5,	/* 60Hz */
 	 (SyncPN | Charx8Dot | LineCompareOff | WideScreenMode), 60, 1, 0x36 },
@@ -333,6 +358,8 @@ static struct ast_vbios_enhtable res_1920x1080[] = {
 	 (SyncNP | Charx8Dot | LineCompareOff | WideScreenMode), 0xFF, 1, 0x38 },
 };
 =======
+=======
+>>>>>>> v3.18
 	{1600, 1440, 48, 32,  926,  900, 3, 6, VCLK88_75,	/* 60Hz RB */
 	 (SyncNP | Charx8Dot | LineCompareOff | WideScreenMode | NewModeInfo), 60, 1, 0x36 },
 	{1904, 1440, 80,152,  934,  900, 3, 6, VCLK106_5,	/* 60Hz */
@@ -357,5 +384,8 @@ static struct ast_vbios_enhtable res_1920x1200[] = {
 	 (SyncNP | Charx8Dot | LineCompareOff | WideScreenMode | NewModeInfo), 0xFF, 1, 0x34 },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

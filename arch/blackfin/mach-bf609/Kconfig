@@ -10,6 +10,7 @@ source "arch/blackfin/mach-bf609/boards/Kconfig"
 menu "BF609 Specific Configuration"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 comment "Pin Interrupt to Port Assignment"
 menu "Assignment"
 
@@ -54,6 +55,8 @@ endmenu
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config SEC_IRQ_PRIORITY_LEVELS
 	int "SEC interrupt priority levels"
 	default 7
@@ -63,7 +66,10 @@ config SEC_IRQ_PRIORITY_LEVELS
 	  There is 2 ^ (SEC_IRQ_PRIORITY_LEVELS + 1) different levels.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config L1_PARITY_CHECK
 	bool "Enable L1 parity check"
 	default n
@@ -1725,6 +1731,9 @@ config SCB9_MI0_SLOT9
 
 endif # SCB9_MI0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 

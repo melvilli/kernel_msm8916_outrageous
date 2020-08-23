@@ -8,6 +8,10 @@
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmaengine.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 >>>>>>> v3.18
@@ -17,6 +21,10 @@
 #include <sound/pcm_params.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -52,7 +60,10 @@ int __pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 	pxa_dma_desc *dma_desc;
 	dma_addr_t dma_buff_phys, next_desc_phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 dcmd = DCMD_INCSRCADDR | DCMD_FLOWTRG;
 
 	/* temporary transition hack */
@@ -82,6 +93,9 @@ int __pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 		dcmd |= DCMD_BURST32;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	snd_pcm_set_runtime_buffer(substream, &substream->dma_buffer);
@@ -96,9 +110,15 @@ int __pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 		if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 			dma_desc->dsadr = dma_buff_phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_desc->dtadr = rtd->params->dev_addr;
 		} else {
 			dma_desc->dsadr = rtd->params->dev_addr;
+=======
+			dma_desc->dtadr = rtd->params->addr;
+		} else {
+			dma_desc->dsadr = rtd->params->addr;
+>>>>>>> v3.18
 =======
 			dma_desc->dtadr = rtd->params->addr;
 		} else {
@@ -109,7 +129,11 @@ int __pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 		if (period > totsize)
 			period = totsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_desc->dcmd = rtd->params->dcmd | period | DCMD_ENDIRQEN;
+=======
+		dma_desc->dcmd = dcmd | period | DCMD_ENDIRQEN;
+>>>>>>> v3.18
 =======
 		dma_desc->dcmd = dcmd | period | DCMD_ENDIRQEN;
 >>>>>>> v3.18
@@ -127,13 +151,19 @@ int __pxa2xx_pcm_hw_free(struct snd_pcm_substream *substream)
 	struct pxa2xx_runtime_data *rtd = substream->runtime->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtd && rtd->params && rtd->params->drcmr)
 		*rtd->params->drcmr = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (rtd && rtd->params && rtd->params->filter_data) {
 		unsigned long req = *(unsigned long *) rtd->params->filter_data;
 		DRCMR(req) = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	snd_pcm_set_runtime_buffer(substream, NULL);
@@ -194,6 +224,10 @@ int __pxa2xx_pcm_prepare(struct snd_pcm_substream *substream)
 {
 	struct pxa2xx_runtime_data *prtd = substream->runtime->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long req;
+>>>>>>> v3.18
 =======
 	unsigned long req;
 >>>>>>> v3.18
@@ -208,7 +242,12 @@ int __pxa2xx_pcm_prepare(struct snd_pcm_substream *substream)
 	DCSR(prtd->dma_ch) = 0;
 	DCMD(prtd->dma_ch) = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*prtd->params->drcmr = prtd->dma_ch | DRCMR_MAPVLD;
+=======
+	req = *(unsigned long *) prtd->params->filter_data;
+	DRCMR(req) = prtd->dma_ch | DRCMR_MAPVLD;
+>>>>>>> v3.18
 =======
 	req = *(unsigned long *) prtd->params->filter_data;
 	DRCMR(req) = prtd->dma_ch | DRCMR_MAPVLD;
@@ -222,7 +261,10 @@ void pxa2xx_pcm_dma_irq(int dma_ch, void *dev_id)
 {
 	struct snd_pcm_substream *substream = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_runtime_data *rtd = substream->runtime->private_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int dcsr;
@@ -234,8 +276,13 @@ void pxa2xx_pcm_dma_irq(int dma_ch, void *dev_id)
 		snd_pcm_period_elapsed(substream);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: DMA error on channel %d (DCSR=%#x)\n",
 			rtd->params->name, dma_ch, dcsr);
+=======
+		printk(KERN_ERR "DMA error on channel %d (DCSR=%#x)\n",
+			dma_ch, dcsr);
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR "DMA error on channel %d (DCSR=%#x)\n",
 			dma_ch, dcsr);

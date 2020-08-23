@@ -23,7 +23,10 @@
  */
 #include <linux/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -37,7 +40,10 @@
 #include "ni_reg.h"
 #include "cayman_blit_shaders.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "radeon_ucode.h"
 #include "clearstate_cayman.h"
 
@@ -166,6 +172,9 @@ static const u32 tn_rlc_save_restore_register_list[] =
 	0x9830,
 	0x802c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern bool evergreen_is_display_hung(struct radeon_device *rdev);
@@ -178,6 +187,7 @@ extern void evergreen_irq_suspend(struct radeon_device *rdev);
 extern int evergreen_mc_init(struct radeon_device *rdev);
 extern void evergreen_fix_pci_max_read_req_size(struct radeon_device *rdev);
 extern void evergreen_pcie_gen2_enable(struct radeon_device *rdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void si_rlc_fini(struct radeon_device *rdev);
 extern int si_rlc_init(struct radeon_device *rdev);
@@ -194,10 +204,15 @@ extern int si_rlc_init(struct radeon_device *rdev);
 
 #define ARUBA_RLC_UCODE_SIZE 1536
 =======
+=======
+>>>>>>> v3.18
 extern void evergreen_program_aspm(struct radeon_device *rdev);
 extern void sumo_rlc_fini(struct radeon_device *rdev);
 extern int sumo_rlc_init(struct radeon_device *rdev);
 extern void evergreen_gpu_pci_config_reset(struct radeon_device *rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Firmware Names */
@@ -205,6 +220,10 @@ MODULE_FIRMWARE("radeon/BARTS_pfp.bin");
 MODULE_FIRMWARE("radeon/BARTS_me.bin");
 MODULE_FIRMWARE("radeon/BARTS_mc.bin");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE("radeon/BARTS_smc.bin");
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE("radeon/BARTS_smc.bin");
 >>>>>>> v3.18
@@ -213,21 +232,31 @@ MODULE_FIRMWARE("radeon/TURKS_pfp.bin");
 MODULE_FIRMWARE("radeon/TURKS_me.bin");
 MODULE_FIRMWARE("radeon/TURKS_mc.bin");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_FIRMWARE("radeon/CAICOS_pfp.bin");
 MODULE_FIRMWARE("radeon/CAICOS_me.bin");
 MODULE_FIRMWARE("radeon/CAICOS_mc.bin");
 =======
+=======
+>>>>>>> v3.18
 MODULE_FIRMWARE("radeon/TURKS_smc.bin");
 MODULE_FIRMWARE("radeon/CAICOS_pfp.bin");
 MODULE_FIRMWARE("radeon/CAICOS_me.bin");
 MODULE_FIRMWARE("radeon/CAICOS_mc.bin");
 MODULE_FIRMWARE("radeon/CAICOS_smc.bin");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_FIRMWARE("radeon/CAYMAN_pfp.bin");
 MODULE_FIRMWARE("radeon/CAYMAN_me.bin");
 MODULE_FIRMWARE("radeon/CAYMAN_mc.bin");
 MODULE_FIRMWARE("radeon/CAYMAN_rlc.bin");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE("radeon/CAYMAN_smc.bin");
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE("radeon/CAYMAN_smc.bin");
 >>>>>>> v3.18
@@ -720,21 +749,28 @@ int ni_mc_load_microcode(struct radeon_device *rdev)
 int ni_init_microcode(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device *pdev;
 	const char *chip_name;
 	const char *rlc_chip_name;
 	size_t pfp_req_size, me_req_size, rlc_req_size, mc_req_size;
 =======
+=======
+>>>>>>> v3.18
 	const char *chip_name;
 	const char *rlc_chip_name;
 	size_t pfp_req_size, me_req_size, rlc_req_size, mc_req_size;
 	size_t smc_req_size = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char fw_name[30];
 	int err;
 
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pdev = platform_device_register_simple("radeon_cp", 0, NULL, 0);
 	err = IS_ERR(pdev);
@@ -743,6 +779,8 @@ int ni_init_microcode(struct radeon_device *rdev)
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (rdev->family) {
@@ -754,6 +792,10 @@ int ni_init_microcode(struct radeon_device *rdev)
 		rlc_req_size = EVERGREEN_RLC_UCODE_SIZE * 4;
 		mc_req_size = BTC_MC_UCODE_SIZE * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		smc_req_size = ALIGN(BARTS_SMC_UCODE_SIZE, 4);
+>>>>>>> v3.18
 =======
 		smc_req_size = ALIGN(BARTS_SMC_UCODE_SIZE, 4);
 >>>>>>> v3.18
@@ -766,6 +808,10 @@ int ni_init_microcode(struct radeon_device *rdev)
 		rlc_req_size = EVERGREEN_RLC_UCODE_SIZE * 4;
 		mc_req_size = BTC_MC_UCODE_SIZE * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		smc_req_size = ALIGN(TURKS_SMC_UCODE_SIZE, 4);
+>>>>>>> v3.18
 =======
 		smc_req_size = ALIGN(TURKS_SMC_UCODE_SIZE, 4);
 >>>>>>> v3.18
@@ -778,6 +824,10 @@ int ni_init_microcode(struct radeon_device *rdev)
 		rlc_req_size = EVERGREEN_RLC_UCODE_SIZE * 4;
 		mc_req_size = BTC_MC_UCODE_SIZE * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		smc_req_size = ALIGN(CAICOS_SMC_UCODE_SIZE, 4);
+>>>>>>> v3.18
 =======
 		smc_req_size = ALIGN(CAICOS_SMC_UCODE_SIZE, 4);
 >>>>>>> v3.18
@@ -790,6 +840,10 @@ int ni_init_microcode(struct radeon_device *rdev)
 		rlc_req_size = CAYMAN_RLC_UCODE_SIZE * 4;
 		mc_req_size = CAYMAN_MC_UCODE_SIZE * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		smc_req_size = ALIGN(CAYMAN_SMC_UCODE_SIZE, 4);
+>>>>>>> v3.18
 =======
 		smc_req_size = ALIGN(CAYMAN_SMC_UCODE_SIZE, 4);
 >>>>>>> v3.18
@@ -810,7 +864,11 @@ int ni_init_microcode(struct radeon_device *rdev)
 
 	snprintf(fw_name, sizeof(fw_name), "radeon/%s_pfp.bin", chip_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_firmware(&rdev->pfp_fw, fw_name, &pdev->dev);
+=======
+	err = request_firmware(&rdev->pfp_fw, fw_name, rdev->dev);
+>>>>>>> v3.18
 =======
 	err = request_firmware(&rdev->pfp_fw, fw_name, rdev->dev);
 >>>>>>> v3.18
@@ -826,7 +884,11 @@ int ni_init_microcode(struct radeon_device *rdev)
 
 	snprintf(fw_name, sizeof(fw_name), "radeon/%s_me.bin", chip_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_firmware(&rdev->me_fw, fw_name, &pdev->dev);
+=======
+	err = request_firmware(&rdev->me_fw, fw_name, rdev->dev);
+>>>>>>> v3.18
 =======
 	err = request_firmware(&rdev->me_fw, fw_name, rdev->dev);
 >>>>>>> v3.18
@@ -841,7 +903,11 @@ int ni_init_microcode(struct radeon_device *rdev)
 
 	snprintf(fw_name, sizeof(fw_name), "radeon/%s_rlc.bin", rlc_chip_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_firmware(&rdev->rlc_fw, fw_name, &pdev->dev);
+=======
+	err = request_firmware(&rdev->rlc_fw, fw_name, rdev->dev);
+>>>>>>> v3.18
 =======
 	err = request_firmware(&rdev->rlc_fw, fw_name, rdev->dev);
 >>>>>>> v3.18
@@ -858,7 +924,11 @@ int ni_init_microcode(struct radeon_device *rdev)
 	if (!(rdev->flags & RADEON_IS_IGP)) {
 		snprintf(fw_name, sizeof(fw_name), "radeon/%s_mc.bin", chip_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = request_firmware(&rdev->mc_fw, fw_name, &pdev->dev);
+=======
+		err = request_firmware(&rdev->mc_fw, fw_name, rdev->dev);
+>>>>>>> v3.18
 =======
 		err = request_firmware(&rdev->mc_fw, fw_name, rdev->dev);
 >>>>>>> v3.18
@@ -872,10 +942,13 @@ int ni_init_microcode(struct radeon_device *rdev)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	platform_device_unregister(pdev);
 
 =======
+=======
+>>>>>>> v3.18
 
 	if ((rdev->family >= CHIP_BARTS) && (rdev->family <= CHIP_CAYMAN)) {
 		snprintf(fw_name, sizeof(fw_name), "radeon/%s_smc.bin", chip_name);
@@ -896,6 +969,9 @@ out:
 	}
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		if (err != -EINVAL)
@@ -915,7 +991,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int tn_get_temp(struct radeon_device *rdev)
 {
 	u32 temp = RREG32_SMC(TN_CURRENT_GNB_TEMP) & 0x7ff;
@@ -924,6 +1003,9 @@ int tn_get_temp(struct radeon_device *rdev)
 	return actual_temp * 1000;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Core functions
@@ -1148,7 +1230,10 @@ static void cayman_gpu_init(struct radeon_device *rdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < rdev->config.cayman.max_shader_engines; i++) {
 		u32 simd_disable_bitmap;
 
@@ -1161,6 +1246,9 @@ static void cayman_gpu_init(struct radeon_device *rdev)
 	}
 	rdev->config.cayman.active_simds = hweight32(~tmp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WREG32(GRBM_GFX_INDEX, INSTANCE_BROADCAST_WRITES | SE_BROADCAST_WRITES);
 	WREG32(RLC_GFX_INDEX, INSTANCE_BROADCAST_WRITES | SE_BROADCAST_WRITES);
@@ -1179,6 +1267,7 @@ static void cayman_gpu_init(struct radeon_device *rdev)
 	if ((rdev->config.cayman.max_backends_per_se == 1) &&
 	    (rdev->flags & RADEON_IS_IGP)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((disabled_rb_mask & 3) == 2) {
 			/* RB1 disabled, RB0 enabled */
 			tmp = 0x00000000;
@@ -1186,12 +1275,17 @@ static void cayman_gpu_init(struct radeon_device *rdev)
 			/* RB0 disabled, RB1 enabled */
 			tmp = 0x11111111;
 =======
+=======
+>>>>>>> v3.18
 		if ((disabled_rb_mask & 3) == 1) {
 			/* RB0 disabled, RB1 enabled */
 			tmp = 0x11111111;
 		} else {
 			/* RB1 disabled, RB0 enabled */
 			tmp = 0x00000000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -1297,7 +1391,10 @@ static void cayman_gpu_init(struct radeon_device *rdev)
 
 	udelay(50);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* set clockgating golden values on TN */
 	if (rdev->family == CHIP_ARUBA) {
@@ -1308,6 +1405,9 @@ static void cayman_gpu_init(struct radeon_device *rdev)
 		tmp &= ~0x0e000000;
 		WREG32_CG(CG_CGTT_LOCAL_1, tmp);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1335,7 +1435,10 @@ static int cayman_pcie_gart_enable(struct radeon_device *rdev)
 	if (r)
 		return r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_gart_restore(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Setup TLB control */
@@ -1349,6 +1452,10 @@ static int cayman_pcie_gart_enable(struct radeon_device *rdev)
 	/* Setup L2 cache */
 	WREG32(VM_L2_CNTL, ENABLE_L2_CACHE |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	       ENABLE_L2_FRAGMENT_PROCESSING |
+>>>>>>> v3.18
 =======
 	       ENABLE_L2_FRAGMENT_PROCESSING |
 >>>>>>> v3.18
@@ -1359,6 +1466,10 @@ static int cayman_pcie_gart_enable(struct radeon_device *rdev)
 	WREG32(VM_L2_CNTL2, INVALIDATE_ALL_L1_TLBS | INVALIDATE_L2_CACHE);
 	WREG32(VM_L2_CNTL3, L2_CACHE_BIGK_ASSOCIATIVITY |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	       BANK_SELECT(6) |
+>>>>>>> v3.18
 =======
 	       BANK_SELECT(6) |
 >>>>>>> v3.18
@@ -1387,7 +1498,11 @@ static int cayman_pcie_gart_enable(struct radeon_device *rdev)
 		WREG32(VM_CONTEXT0_PAGE_TABLE_END_ADDR + (i << 2), rdev->vm_manager.max_pfn);
 		WREG32(VM_CONTEXT0_PAGE_TABLE_BASE_ADDR + (i << 2),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rdev->gart.table_addr >> 12);
+=======
+		       rdev->vm_manager.saved_table_addr[i]);
+>>>>>>> v3.18
 =======
 		       rdev->vm_manager.saved_table_addr[i]);
 >>>>>>> v3.18
@@ -1399,6 +1514,10 @@ static int cayman_pcie_gart_enable(struct radeon_device *rdev)
 	WREG32(VM_CONTEXT1_CNTL2, 4);
 	WREG32(VM_CONTEXT1_CNTL, ENABLE_CONTEXT | PAGE_TABLE_DEPTH(1) |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				PAGE_TABLE_BLOCK_SIZE(radeon_vm_block_size - 9) |
+>>>>>>> v3.18
 =======
 				PAGE_TABLE_BLOCK_SIZE(radeon_vm_block_size - 9) |
 >>>>>>> v3.18
@@ -1426,7 +1545,10 @@ static int cayman_pcie_gart_enable(struct radeon_device *rdev)
 static void cayman_pcie_gart_disable(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned i;
 
 	for (i = 1; i < 8; ++i) {
@@ -1434,6 +1556,9 @@ static void cayman_pcie_gart_disable(struct radeon_device *rdev)
 			VM_CONTEXT0_PAGE_TABLE_BASE_ADDR + (i << 2));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Disable all tables */
 	WREG32(VM_CONTEXT0_CNTL, 0);
@@ -1490,7 +1615,11 @@ void cayman_fence_ring_emit(struct radeon_device *rdev,
 	radeon_ring_write(ring, PACKET3(PACKET3_EVENT_WRITE_EOP, 4));
 	radeon_ring_write(ring, EVENT_TYPE(CACHE_FLUSH_AND_INV_EVENT_TS) | EVENT_INDEX(5));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_write(ring, addr & 0xffffffff);
+=======
+	radeon_ring_write(ring, lower_32_bits(addr));
+>>>>>>> v3.18
 =======
 	radeon_ring_write(ring, lower_32_bits(addr));
 >>>>>>> v3.18
@@ -1536,6 +1665,7 @@ void cayman_ring_ib_execute(struct radeon_device *rdev, struct radeon_ib *ib)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cayman_uvd_semaphore_emit(struct radeon_device *rdev,
 			       struct radeon_ring *ring,
 			       struct radeon_semaphore *semaphore,
@@ -1555,13 +1685,20 @@ void cayman_uvd_semaphore_emit(struct radeon_device *rdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void cayman_cp_enable(struct radeon_device *rdev, bool enable)
 {
 	if (enable)
 		WREG32(CP_ME_CNTL, 0);
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		radeon_ttm_set_active_vram_size(rdev, rdev->mc.visible_vram_size);
+=======
+		if (rdev->asic->copy.copy_ring_index == RADEON_RING_TYPE_GFX_INDEX)
+			radeon_ttm_set_active_vram_size(rdev, rdev->mc.visible_vram_size);
+>>>>>>> v3.18
 =======
 		if (rdev->asic->copy.copy_ring_index == RADEON_RING_TYPE_GFX_INDEX)
 			radeon_ttm_set_active_vram_size(rdev, rdev->mc.visible_vram_size);
@@ -1573,7 +1710,10 @@ static void cayman_cp_enable(struct radeon_device *rdev, bool enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u32 cayman_gfx_get_rptr(struct radeon_device *rdev,
 			struct radeon_ring *ring)
 {
@@ -1623,6 +1763,9 @@ void cayman_gfx_set_wptr(struct radeon_device *rdev,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cayman_cp_load_microcode(struct radeon_device *rdev)
 {
@@ -1669,7 +1812,11 @@ static int cayman_cp_start(struct radeon_device *rdev)
 	radeon_ring_write(ring, 0);
 	radeon_ring_write(ring, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_unlock_commit(rdev, ring);
+=======
+	radeon_ring_unlock_commit(rdev, ring, false);
+>>>>>>> v3.18
 =======
 	radeon_ring_unlock_commit(rdev, ring, false);
 >>>>>>> v3.18
@@ -1715,7 +1862,11 @@ static int cayman_cp_start(struct radeon_device *rdev)
 	radeon_ring_write(ring, 0x00000010); /*  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_unlock_commit(rdev, ring);
+=======
+	radeon_ring_unlock_commit(rdev, ring, false);
+>>>>>>> v3.18
 =======
 	radeon_ring_unlock_commit(rdev, ring, false);
 >>>>>>> v3.18
@@ -1761,7 +1912,10 @@ static int cayman_cp_resume(struct radeon_device *rdev)
 		CP_RB2_BASE
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	static const unsigned cp_rb_rptr[] = {
 		CP_RB0_RPTR,
 		CP_RB1_RPTR,
@@ -1772,6 +1926,9 @@ static int cayman_cp_resume(struct radeon_device *rdev)
 		CP_RB1_WPTR,
 		CP_RB2_WPTR
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct radeon_ring *ring;
 	int i, r;
@@ -1807,8 +1964,13 @@ static int cayman_cp_resume(struct radeon_device *rdev)
 		/* Set ring buffer size */
 		ring = &rdev->ring[ridx[i]];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rb_cntl = drm_order(ring->ring_size / 8);
 		rb_cntl |= drm_order(RADEON_GPU_PAGE_SIZE/8) << 8;
+=======
+		rb_cntl = order_base_2(ring->ring_size / 8);
+		rb_cntl |= order_base_2(RADEON_GPU_PAGE_SIZE/8) << 8;
+>>>>>>> v3.18
 =======
 		rb_cntl = order_base_2(ring->ring_size / 8);
 		rb_cntl |= order_base_2(RADEON_GPU_PAGE_SIZE/8) << 8;
@@ -1836,9 +1998,15 @@ static int cayman_cp_resume(struct radeon_device *rdev)
 		WREG32_P(cp_rb_cntl[i], RB_RPTR_WR_ENA, ~RB_RPTR_WR_ENA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ring->rptr = ring->wptr = 0;
 		WREG32(ring->rptr_reg, ring->rptr);
 		WREG32(ring->wptr_reg, ring->wptr);
+=======
+		ring->wptr = 0;
+		WREG32(cp_rb_rptr[i], 0);
+		WREG32(cp_rb_wptr[i], ring->wptr);
+>>>>>>> v3.18
 =======
 		ring->wptr = 0;
 		WREG32(cp_rb_rptr[i], 0);
@@ -1863,6 +2031,7 @@ static int cayman_cp_resume(struct radeon_device *rdev)
 		return r;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -2032,10 +2201,15 @@ int cayman_dma_resume(struct radeon_device *rdev)
 	if (rdev->asic->copy.copy_ring_index == RADEON_RING_TYPE_GFX_INDEX)
 		radeon_ttm_set_active_vram_size(rdev, rdev->mc.real_vram_size);
 >>>>>>> v3.18
+=======
+	if (rdev->asic->copy.copy_ring_index == RADEON_RING_TYPE_GFX_INDEX)
+		radeon_ttm_set_active_vram_size(rdev, rdev->mc.real_vram_size);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * cayman_dma_fini - tear down the async dma engines
@@ -2052,6 +2226,9 @@ void cayman_dma_fini(struct radeon_device *rdev)
 }
 
 static u32 cayman_gpu_check_soft_reset(struct radeon_device *rdev)
+=======
+u32 cayman_gpu_check_soft_reset(struct radeon_device *rdev)
+>>>>>>> v3.18
 =======
 u32 cayman_gpu_check_soft_reset(struct radeon_device *rdev)
 >>>>>>> v3.18
@@ -2278,13 +2455,19 @@ int cayman_asic_reset(struct radeon_device *rdev)
 	reset_mask = cayman_gpu_check_soft_reset(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!reset_mask)
 		r600_set_bios_scratch_engine_hung(rdev, false);
 =======
+=======
+>>>>>>> v3.18
 	if (reset_mask)
 		evergreen_gpu_pci_config_reset(rdev);
 
 	r600_set_bios_scratch_engine_hung(rdev, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2306,6 +2489,7 @@ bool cayman_gfx_is_lockup(struct radeon_device *rdev, struct radeon_ring *ring)
 	if (!(reset_mask & (RADEON_RESET_GFX |
 			    RADEON_RESET_COMPUTE |
 			    RADEON_RESET_CP))) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		radeon_ring_lockup_update(ring);
 		return false;
@@ -2345,6 +2529,11 @@ bool cayman_dma_is_lockup(struct radeon_device *rdev, struct radeon_ring *ring)
 		return false;
 	}
 >>>>>>> v3.18
+=======
+		radeon_ring_lockup_update(rdev, ring);
+		return false;
+	}
+>>>>>>> v3.18
 	return radeon_ring_test_lockup(rdev, ring);
 }
 
@@ -2355,6 +2544,7 @@ static int cayman_startup(struct radeon_device *rdev)
 
 	/* enable pcie gen2 link */
 	evergreen_pcie_gen2_enable(rdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	evergreen_mc_program(rdev);
@@ -2377,6 +2567,8 @@ static int cayman_startup(struct radeon_device *rdev)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 	/* enable aspm */
 	evergreen_program_aspm(rdev);
 
@@ -2388,6 +2580,9 @@ static int cayman_startup(struct radeon_device *rdev)
 	evergreen_mc_program(rdev);
 
 	if (!(rdev->flags & RADEON_IS_IGP) && !rdev->pm.dpm_enabled) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r = ni_mc_load_microcode(rdev);
 		if (r) {
@@ -2397,10 +2592,13 @@ static int cayman_startup(struct radeon_device *rdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = r600_vram_scratch_init(rdev);
 	if (r)
 		return r;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	r = cayman_pcie_gart_enable(rdev);
@@ -2408,6 +2606,7 @@ static int cayman_startup(struct radeon_device *rdev)
 		return r;
 	cayman_gpu_init(rdev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = evergreen_blit_init(rdev);
 	if (r) {
@@ -2420,6 +2619,8 @@ static int cayman_startup(struct radeon_device *rdev)
 	if (rdev->flags & RADEON_IS_IGP) {
 		r = si_rlc_init(rdev);
 =======
+=======
+>>>>>>> v3.18
 	/* allocate rlc buffers */
 	if (rdev->flags & RADEON_IS_IGP) {
 		rdev->rlc.reg_list = tn_rlc_save_restore_register_list;
@@ -2427,6 +2628,9 @@ static int cayman_startup(struct radeon_device *rdev)
 			(u32)ARRAY_SIZE(tn_rlc_save_restore_register_list);
 		rdev->rlc.cs_data = cayman_cs_data;
 		r = sumo_rlc_init(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (r) {
 			DRM_ERROR("Failed to init rlc BOs!\n");
@@ -2446,7 +2650,11 @@ static int cayman_startup(struct radeon_device *rdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = rv770_uvd_resume(rdev);
+=======
+	r = uvd_v2_2_resume(rdev);
+>>>>>>> v3.18
 =======
 	r = uvd_v2_2_resume(rdev);
 >>>>>>> v3.18
@@ -2500,8 +2708,12 @@ static int cayman_startup(struct radeon_device *rdev)
 
 	r = radeon_ring_init(rdev, ring, ring->ring_size, RADEON_WB_CP_RPTR_OFFSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     CP_RB0_RPTR, CP_RB0_WPTR,
 			     0, 0xfffff, RADEON_CP_PACKET2);
+=======
+			     RADEON_CP_PACKET2);
+>>>>>>> v3.18
 =======
 			     RADEON_CP_PACKET2);
 >>>>>>> v3.18
@@ -2511,9 +2723,13 @@ static int cayman_startup(struct radeon_device *rdev)
 	ring = &rdev->ring[R600_RING_TYPE_DMA_INDEX];
 	r = radeon_ring_init(rdev, ring, ring->ring_size, R600_WB_DMA_RPTR_OFFSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     DMA_RB_RPTR + DMA0_REGISTER_OFFSET,
 			     DMA_RB_WPTR + DMA0_REGISTER_OFFSET,
 			     2, 0x3fffc, DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0));
+=======
+			     DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0));
+>>>>>>> v3.18
 =======
 			     DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0));
 >>>>>>> v3.18
@@ -2523,9 +2739,13 @@ static int cayman_startup(struct radeon_device *rdev)
 	ring = &rdev->ring[CAYMAN_RING_TYPE_DMA1_INDEX];
 	r = radeon_ring_init(rdev, ring, ring->ring_size, CAYMAN_WB_DMA1_RPTR_OFFSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     DMA_RB_RPTR + DMA1_REGISTER_OFFSET,
 			     DMA_RB_WPTR + DMA1_REGISTER_OFFSET,
 			     2, 0x3fffc, DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0));
+=======
+			     DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0));
+>>>>>>> v3.18
 =======
 			     DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0));
 >>>>>>> v3.18
@@ -2546,6 +2766,7 @@ static int cayman_startup(struct radeon_device *rdev)
 	ring = &rdev->ring[R600_RING_TYPE_UVD_INDEX];
 	if (ring->ring_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = radeon_ring_init(rdev, ring, ring->ring_size,
 				     R600_WB_UVD_RPTR_OFFSET,
 				     UVD_RBC_RB_RPTR, UVD_RBC_RB_WPTR,
@@ -2553,10 +2774,15 @@ static int cayman_startup(struct radeon_device *rdev)
 		if (!r)
 			r = r600_uvd_init(rdev);
 =======
+=======
+>>>>>>> v3.18
 		r = radeon_ring_init(rdev, ring, ring->ring_size, 0,
 				     RADEON_CP_PACKET2);
 		if (!r)
 			r = uvd_v1_0_init(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (r)
 			DRM_ERROR("radeon: failed initializing UVD (%d).\n", r);
@@ -2575,10 +2801,13 @@ static int cayman_startup(struct radeon_device *rdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = r600_audio_init(rdev);
 	if (r)
 		return r;
 =======
+=======
+>>>>>>> v3.18
 	if (ASIC_IS_DCE6(rdev)) {
 		r = dce6_audio_init(rdev);
 		if (r)
@@ -2588,6 +2817,9 @@ static int cayman_startup(struct radeon_device *rdev)
 		if (r)
 			return r;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2608,6 +2840,12 @@ int cayman_resume(struct radeon_device *rdev)
 	ni_init_golden_registers(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (rdev->pm.pm_method == PM_METHOD_DPM)
+		radeon_pm_resume(rdev);
+
+>>>>>>> v3.18
 =======
 	if (rdev->pm.pm_method == PM_METHOD_DPM)
 		radeon_pm_resume(rdev);
@@ -2626,12 +2864,15 @@ int cayman_resume(struct radeon_device *rdev)
 int cayman_suspend(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r600_audio_fini(rdev);
 	radeon_vm_manager_fini(rdev);
 	cayman_cp_enable(rdev, false);
 	cayman_dma_stop(rdev);
 	r600_uvd_stop(rdev);
 =======
+=======
+>>>>>>> v3.18
 	radeon_pm_suspend(rdev);
 	if (ASIC_IS_DCE6(rdev))
 		dce6_audio_fini(rdev);
@@ -2641,6 +2882,9 @@ int cayman_suspend(struct radeon_device *rdev)
 	cayman_cp_enable(rdev, false);
 	cayman_dma_stop(rdev);
 	uvd_v1_0_fini(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	radeon_uvd_suspend(rdev);
 	evergreen_irq_suspend(rdev);
@@ -2705,7 +2949,10 @@ int cayman_init(struct radeon_device *rdev)
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (rdev->flags & RADEON_IS_IGP) {
 		if (!rdev->me_fw || !rdev->pfp_fw || !rdev->rlc_fw) {
 			r = ni_init_microcode(rdev);
@@ -2727,6 +2974,9 @@ int cayman_init(struct radeon_device *rdev)
 	/* Initialize power management */
 	radeon_pm_init(rdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ring->ring_obj = NULL;
 	r600_ring_init(rdev, ring, 1024 * 1024);
@@ -2762,7 +3012,11 @@ int cayman_init(struct radeon_device *rdev)
 		r600_irq_fini(rdev);
 		if (rdev->flags & RADEON_IS_IGP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			si_rlc_fini(rdev);
+=======
+			sumo_rlc_fini(rdev);
+>>>>>>> v3.18
 =======
 			sumo_rlc_fini(rdev);
 >>>>>>> v3.18
@@ -2792,7 +3046,11 @@ int cayman_init(struct radeon_device *rdev)
 void cayman_fini(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r600_blit_fini(rdev);
+=======
+	radeon_pm_fini(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_fini(rdev);
 >>>>>>> v3.18
@@ -2801,7 +3059,11 @@ void cayman_fini(struct radeon_device *rdev)
 	r600_irq_fini(rdev);
 	if (rdev->flags & RADEON_IS_IGP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		si_rlc_fini(rdev);
+=======
+		sumo_rlc_fini(rdev);
+>>>>>>> v3.18
 =======
 		sumo_rlc_fini(rdev);
 >>>>>>> v3.18
@@ -2810,7 +3072,11 @@ void cayman_fini(struct radeon_device *rdev)
 	radeon_ib_pool_fini(rdev);
 	radeon_irq_kms_fini(rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r600_uvd_stop(rdev);
+=======
+	uvd_v1_0_fini(rdev);
+>>>>>>> v3.18
 =======
 	uvd_v1_0_fini(rdev);
 >>>>>>> v3.18
@@ -2846,6 +3112,7 @@ void cayman_vm_fini(struct radeon_device *rdev)
 {
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define R600_ENTRY_VALID   (1 << 0)
 #define R600_PTE_SYSTEM    (1 << 1)
@@ -2971,6 +3238,8 @@ void cayman_vm_set_page(struct radeon_device *rdev,
 			ib->ptr[ib->length_dw++] = DMA_PACKET(DMA_PACKET_NOP, 0, 0, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 /**
  * cayman_vm_decode_fault - print human readable fault info
  *
@@ -3130,6 +3399,9 @@ void cayman_vm_decode_fault(struct radeon_device *rdev,
 	       protections, vmid, addr,
 	       (status & MEMORY_CLIENT_RW_MASK) ? "write" : "read",
 	       block, mc_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3164,6 +3436,7 @@ void cayman_vm_flush(struct radeon_device *rdev, int ridx, struct radeon_vm *vm)
 	radeon_ring_write(ring, 0x0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void cayman_dma_vm_flush(struct radeon_device *rdev, int ridx, struct radeon_vm *vm)
 {
@@ -3187,5 +3460,7 @@ void cayman_dma_vm_flush(struct radeon_device *rdev, int ridx, struct radeon_vm 
 	radeon_ring_write(ring, 1 << vm->id);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

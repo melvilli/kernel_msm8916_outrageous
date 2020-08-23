@@ -12,8 +12,12 @@ Elf32_Half elf_core_extra_phdrs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int elf_core_write_extra_phdrs(struct file *file, loff_t offset, size_t *size,
 			       unsigned long limit)
+=======
+int elf_core_write_extra_phdrs(struct coredump_params *cprm, loff_t offset)
+>>>>>>> v3.18
 =======
 int elf_core_write_extra_phdrs(struct coredump_params *cprm, loff_t offset)
 >>>>>>> v3.18
@@ -37,9 +41,13 @@ int elf_core_write_extra_phdrs(struct coredump_params *cprm, loff_t offset)
 			}
 			phdr.p_paddr = 0; /* match other core phdrs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*size += sizeof(phdr);
 			if (*size > limit
 			    || !dump_write(file, &phdr, sizeof(phdr)))
+=======
+			if (!dump_emit(cprm, &phdr, sizeof(phdr)))
+>>>>>>> v3.18
 =======
 			if (!dump_emit(cprm, &phdr, sizeof(phdr)))
 >>>>>>> v3.18
@@ -50,8 +58,12 @@ int elf_core_write_extra_phdrs(struct coredump_params *cprm, loff_t offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int elf_core_write_extra_data(struct file *file, size_t *size,
 			      unsigned long limit)
+=======
+int elf_core_write_extra_data(struct coredump_params *cprm)
+>>>>>>> v3.18
 =======
 int elf_core_write_extra_data(struct coredump_params *cprm)
 >>>>>>> v3.18
@@ -68,10 +80,14 @@ int elf_core_write_extra_data(struct coredump_params *cprm)
 				void *addr = (void *) phdrp[i].p_vaddr;
 				size_t filesz = phdrp[i].p_filesz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				*size += filesz;
 				if (*size > limit
 				    || !dump_write(file, addr, filesz))
+=======
+				if (!dump_emit(cprm, addr, filesz))
+>>>>>>> v3.18
 =======
 				if (!dump_emit(cprm, addr, filesz))
 >>>>>>> v3.18

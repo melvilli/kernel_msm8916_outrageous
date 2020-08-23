@@ -11,6 +11,11 @@ ide-tape.txt
 ide.txt
 	- important info for users of ATA devices (IDE/EIDE disks and CD-ROMS).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+warm-plug-howto.txt
+	- using sysfs to remove and add IDE devices.
+>>>>>>> v3.18
 =======
 warm-plug-howto.txt
 	- using sysfs to remove and add IDE devices.

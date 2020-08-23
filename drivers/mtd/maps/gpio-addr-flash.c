@@ -15,7 +15,10 @@
 
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -104,10 +107,15 @@ static map_word gf_read(struct map_info *map, unsigned long ofs)
  *	@len:  how much to copy
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * We rely on the MTD layer to chunk up copies such that a single request here
  * will not cross a window size.  This allows us to only wiggle the GPIOs once
  * before falling back to a normal memcpy.  Reading the higher layer code shows
  * that this is indeed the case, but add a BUG_ON() to future proof.
+=======
+ * The "from" region may straddle more than one window, so toggle the GPIOs for
+ * each window region before reading its data.
+>>>>>>> v3.18
 =======
  * The "from" region may straddle more than one window, so toggle the GPIOs for
  * each window region before reading its data.
@@ -118,6 +126,7 @@ static void gf_copy_from(struct map_info *map, void *to, unsigned long from, ssi
 	struct async_state *state = gf_map_info_to_state(map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gf_set_gpios(state, from);
 
 	/* BUG if operation crosses the win_size */
@@ -126,6 +135,8 @@ static void gf_copy_from(struct map_info *map, void *to, unsigned long from, ssi
 	/* operation does not cross the win_size, so one shot it */
 	memcpy_fromio(to, map->virt + (from % state->win_size), len);
 =======
+=======
+>>>>>>> v3.18
 	int this_len;
 
 	while (len) {
@@ -141,6 +152,9 @@ static void gf_copy_from(struct map_info *map, void *to, unsigned long from, ssi
 		from += this_len;
 		to += this_len;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -175,6 +189,7 @@ static void gf_copy_to(struct map_info *map, unsigned long to,
 	struct async_state *state = gf_map_info_to_state(map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gf_set_gpios(state, to);
 
 	/* BUG if operation crosses the win_size */
@@ -183,6 +198,8 @@ static void gf_copy_to(struct map_info *map, unsigned long to,
 	/* operation does not cross the win_size, so one shot it */
 	memcpy_toio(map->virt + (to % state->win_size), from, len);
 =======
+=======
+>>>>>>> v3.18
 	int this_len;
 
 	while (len) {
@@ -198,6 +215,9 @@ static void gf_copy_to(struct map_info *map, unsigned long to,
 		to += this_len;
 		from += this_len;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -241,7 +261,11 @@ static int gpio_flash_probe(struct platform_device *pdev)
 	struct async_state *state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

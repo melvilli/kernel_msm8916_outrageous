@@ -35,6 +35,10 @@ optional properties:
  - interlaced (bool): boolean to enable interlaced mode
  - doublescan (bool): boolean to enable doublescan mode
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ - doubleclk (bool): boolean to enable doubleclock mode
+>>>>>>> v3.18
 =======
  - doubleclk (bool): boolean to enable doubleclock mode
 >>>>>>> v3.18

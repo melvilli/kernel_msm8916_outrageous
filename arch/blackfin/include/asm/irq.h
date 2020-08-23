@@ -21,6 +21,7 @@
 #include <mach/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * pm save bfin pint registers
  */
@@ -31,6 +32,8 @@ struct bfin_pm_pint_save {
 	u32 invert_set;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if ANOMALY_05000244 && defined(CONFIG_BFIN_ICACHE)

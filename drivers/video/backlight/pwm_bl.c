@@ -11,6 +11,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio/consumer.h>
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/consumer.h>
 #include <linux/gpio.h>
@@ -25,6 +30,10 @@
 #include <linux/pwm.h>
 #include <linux/pwm_backlight.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/consumer.h>
 >>>>>>> v3.18
@@ -37,11 +46,17 @@ struct pwm_bl_data {
 	unsigned int		lth_brightness;
 	unsigned int		*levels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool			enabled;
 	struct regulator	*power_supply;
 	struct gpio_desc	*enable_gpio;
 	unsigned int		scale;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			(*notify)(struct device *,
 					  int brightness);
@@ -52,7 +67,10 @@ struct pwm_bl_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void pwm_backlight_power_on(struct pwm_bl_data *pb, int brightness)
 {
 	int err;
@@ -99,13 +117,20 @@ static int compute_duty_cycle(struct pwm_bl_data *pb, int brightness)
 	return (duty_cycle * (pb->period - lth) / pb->scale) + lth;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pwm_backlight_update_status(struct backlight_device *bl)
 {
 	struct pwm_bl_data *pb = bl_get_data(bl);
 	int brightness = bl->props.brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int max = bl->props.max_brightness;
+=======
+	int duty_cycle;
+>>>>>>> v3.18
 =======
 	int duty_cycle;
 >>>>>>> v3.18
@@ -118,6 +143,7 @@ static int pwm_backlight_update_status(struct backlight_device *bl)
 	if (pb->notify)
 		brightness = pb->notify(pb->dev, brightness);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (brightness == 0) {
 		pwm_config(pb->pwm, 0, pb->period);
@@ -138,12 +164,17 @@ static int pwm_backlight_update_status(struct backlight_device *bl)
 		pwm_enable(pb->pwm);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (brightness > 0) {
 		duty_cycle = compute_duty_cycle(pb, brightness);
 		pwm_config(pb->pwm, duty_cycle, pb->period);
 		pwm_backlight_power_on(pb, brightness);
 	} else
 		pwm_backlight_power_off(pb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pb->notify_after)
@@ -153,11 +184,14 @@ static int pwm_backlight_update_status(struct backlight_device *bl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pwm_backlight_get_brightness(struct backlight_device *bl)
 {
 	return bl->props.brightness;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int pwm_backlight_check_fb(struct backlight_device *bl,
@@ -171,7 +205,10 @@ static int pwm_backlight_check_fb(struct backlight_device *bl,
 static const struct backlight_ops pwm_backlight_ops = {
 	.update_status	= pwm_backlight_update_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_brightness	= pwm_backlight_get_brightness,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.check_fb	= pwm_backlight_check_fb,
@@ -223,12 +260,16 @@ static int pwm_backlight_parse_dt(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * TODO: Most users of this driver use a number of GPIOs to control
 	 *       backlight power. Support for specifying these needs to be
 	 *       added.
 	 */
 
+=======
+	data->enable_gpio = -EINVAL;
+>>>>>>> v3.18
 =======
 	data->enable_gpio = -EINVAL;
 >>>>>>> v3.18
@@ -252,7 +293,11 @@ static int pwm_backlight_parse_dt(struct device *dev,
 static int pwm_backlight_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_pwm_backlight_data *data = pdev->dev.platform_data;
+=======
+	struct platform_pwm_backlight_data *data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct platform_pwm_backlight_data *data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -261,7 +306,10 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	struct backlight_device *bl;
 	struct pwm_bl_data *pb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int max;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -285,7 +333,10 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	pb = devm_kzalloc(&pdev->dev, sizeof(*pb), GFP_KERNEL);
 	if (!pb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "no memory for state\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;
@@ -294,11 +345,14 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 
 	if (data->levels) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max = data->levels[data->max_brightness];
 		pb->levels = data->levels;
 	} else
 		max = data->max_brightness;
 =======
+=======
+>>>>>>> v3.18
 		unsigned int i;
 
 		for (i = 0; i <= data->max_brightness; i++)
@@ -308,6 +362,9 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 		pb->levels = data->levels;
 	} else
 		pb->scale = data->max_brightness;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pb->notify = data->notify;
@@ -316,7 +373,10 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	pb->exit = data->exit;
 	pb->dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pb->enabled = false;
 
 	pb->enable_gpio = devm_gpiod_get_optional(&pdev->dev, "enable");
@@ -349,6 +409,9 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 		ret = PTR_ERR(pb->power_supply);
 		goto err_alloc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pb->pwm = devm_pwm_get(&pdev->dev, NULL);
@@ -369,6 +432,7 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	 * The DT case will set the pwm_period_ns field to 0 and store the
 	 * period, parsed from the DT, in the PWM device. For the non-DT case,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * set the period from platform data.
 	 */
 	if (data->pwm_period_ns > 0)
@@ -377,6 +441,8 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	pb->period = pwm_get_period(pb->pwm);
 	pb->lth_brightness = data->lth_brightness * (pb->period / max);
 =======
+=======
+>>>>>>> v3.18
 	 * set the period from platform data if it has not already been set
 	 * via the PWM lookup table.
 	 */
@@ -387,6 +453,9 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	}
 
 	pb->lth_brightness = data->lth_brightness * (pb->period / pb->scale);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&props, 0, sizeof(struct backlight_properties));
@@ -426,6 +495,7 @@ static int pwm_backlight_remove(struct platform_device *pdev)
 
 	backlight_device_unregister(bl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwm_config(pb->pwm, 0, pb->period);
 	pwm_disable(pb->pwm);
 	if (pb->exit)
@@ -434,6 +504,8 @@ static int pwm_backlight_remove(struct platform_device *pdev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	pwm_backlight_power_off(pb);
 
 	if (pb->exit)
@@ -450,6 +522,9 @@ static void pwm_backlight_shutdown(struct platform_device *pdev)
 	pwm_backlight_power_off(pb);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int pwm_backlight_suspend(struct device *dev)
@@ -460,17 +535,23 @@ static int pwm_backlight_suspend(struct device *dev)
 	if (pb->notify)
 		pb->notify(pb->dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwm_config(pb->pwm, 0, pb->period);
 	pwm_disable(pb->pwm);
 	if (pb->notify_after)
 		pb->notify_after(pb->dev, 0);
 =======
+=======
+>>>>>>> v3.18
 
 	pwm_backlight_power_off(pb);
 
 	if (pb->notify_after)
 		pb->notify_after(pb->dev, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -481,6 +562,10 @@ static int pwm_backlight_resume(struct device *dev)
 
 	backlight_update_status(bl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -489,9 +574,12 @@ static int pwm_backlight_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(pwm_backlight_pm_ops, pwm_backlight_suspend,
 			 pwm_backlight_resume);
 =======
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops pwm_backlight_pm_ops = {
 #ifdef CONFIG_PM_SLEEP
 	.suspend = pwm_backlight_suspend,
@@ -500,13 +588,19 @@ static const struct dev_pm_ops pwm_backlight_pm_ops = {
 	.restore = pwm_backlight_resume,
 #endif
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver pwm_backlight_driver = {
 	.driver		= {
 		.name		= "pwm-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner		= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm		= &pwm_backlight_pm_ops,
@@ -515,6 +609,10 @@ static struct platform_driver pwm_backlight_driver = {
 	.probe		= pwm_backlight_probe,
 	.remove		= pwm_backlight_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown	= pwm_backlight_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= pwm_backlight_shutdown,
 >>>>>>> v3.18
@@ -526,6 +624,9 @@ MODULE_DESCRIPTION("PWM based Backlight Driver");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:pwm-backlight");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

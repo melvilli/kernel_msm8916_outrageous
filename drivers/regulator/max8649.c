@@ -50,7 +50,10 @@
 
 struct max8649_regulator_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev	*regulator;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device		*dev;
@@ -156,8 +159,14 @@ static int max8649_regulator_probe(struct i2c_client *client,
 					     const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max8649_platform_data *pdata = client->dev.platform_data;
 	struct max8649_regulator_info *info = NULL;
+=======
+	struct max8649_platform_data *pdata = dev_get_platdata(&client->dev);
+	struct max8649_regulator_info *info = NULL;
+	struct regulator_dev *regulator;
+>>>>>>> v3.18
 =======
 	struct max8649_platform_data *pdata = dev_get_platdata(&client->dev);
 	struct max8649_regulator_info *info = NULL;
@@ -171,10 +180,15 @@ static int max8649_regulator_probe(struct i2c_client *client,
 	info = devm_kzalloc(&client->dev, sizeof(struct max8649_regulator_info),
 			    GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!info) {
 		dev_err(&client->dev, "No enough memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!info)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!info)
 		return -ENOMEM;
@@ -249,24 +263,31 @@ static int max8649_regulator_probe(struct i2c_client *client,
 	config.regmap = info->regmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->regulator = regulator_register(&dcdc_desc, &config);
 	if (IS_ERR(info->regulator)) {
 		dev_err(info->dev, "failed to register regulator %s\n",
 			dcdc_desc.name);
 		return PTR_ERR(info->regulator);
 =======
+=======
+>>>>>>> v3.18
 	regulator = devm_regulator_register(&client->dev, &dcdc_desc,
 						  &config);
 	if (IS_ERR(regulator)) {
 		dev_err(info->dev, "failed to register regulator %s\n",
 			dcdc_desc.name);
 		return PTR_ERR(regulator);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int max8649_regulator_remove(struct i2c_client *client)
 {
@@ -280,6 +301,8 @@ static int max8649_regulator_remove(struct i2c_client *client)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct i2c_device_id max8649_id[] = {
 	{ "max8649", 0 },
 	{ }
@@ -289,7 +312,10 @@ MODULE_DEVICE_TABLE(i2c, max8649_id);
 static struct i2c_driver max8649_driver = {
 	.probe		= max8649_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max8649_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

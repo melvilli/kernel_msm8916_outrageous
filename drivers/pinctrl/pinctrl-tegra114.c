@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Pinctrl data and driver for the NVIDIA Tegra114 pinmux
  *
  * Copyright (c) 2012-2013, NVIDIA CORPORATION.  All rights reserved.
@@ -7,10 +8,15 @@
  * Arthur:  Pritesh Raithatha <praithatha@nvidia.com>
  *
 =======
+=======
+>>>>>>> v3.18
  * Pinctrl data for the NVIDIA Tegra114 pinmux
  *
  * Copyright (c) 2012-2013, NVIDIA CORPORATION.  All rights reserved.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -21,9 +27,12 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -214,8 +223,13 @@
 
 /* All non-GPIO pins follow */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NUM_GPIOS	(TEGRA_PIN_SDMMC3_CLK_LB_IN_PEE5 + 1)
 #define _PIN(offset)	(NUM_GPIOS + (offset))
+=======
+#define NUM_GPIOS				(TEGRA_PIN_SDMMC3_CLK_LB_IN_PEE5 + 1)
+#define _PIN(offset)				(NUM_GPIOS + (offset))
+>>>>>>> v3.18
 =======
 #define NUM_GPIOS				(TEGRA_PIN_SDMMC3_CLK_LB_IN_PEE5 + 1)
 #define _PIN(offset)				(NUM_GPIOS + (offset))
@@ -228,14 +242,20 @@
 #define TEGRA_PIN_RESET_OUT_N			_PIN(3)
 #define TEGRA_PIN_OWR				_PIN(4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct pinctrl_pin_desc  tegra114_pins[] = {
 =======
+=======
+>>>>>>> v3.18
 #define TEGRA_PIN_JTAG_RTCK			_PIN(5)
 #define TEGRA_PIN_CLK_32K_IN			_PIN(6)
 #define TEGRA_PIN_GMI_CLK_LB			_PIN(7)
 
 static const struct pinctrl_pin_desc tegra114_pins[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PINCTRL_PIN(TEGRA_PIN_CLK_32K_OUT_PA0, "CLK_32K_OUT PA0"),
 	PINCTRL_PIN(TEGRA_PIN_UART3_CTS_N_PA1, "UART3_CTS_N PA1"),
@@ -409,16 +429,22 @@ static const struct pinctrl_pin_desc tegra114_pins[] = {
 	PINCTRL_PIN(TEGRA_PIN_CORE_PWR_REQ, "CORE_PWR_REQ"),
 	PINCTRL_PIN(TEGRA_PIN_CPU_PWR_REQ, "CPU_PWR_REQ"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINCTRL_PIN(TEGRA_PIN_OWR, "OWR"),
 	PINCTRL_PIN(TEGRA_PIN_PWR_INT_N, "PWR_INT_N"),
 	PINCTRL_PIN(TEGRA_PIN_RESET_OUT_N, "RESET_OUT_N"),
 =======
+=======
+>>>>>>> v3.18
 	PINCTRL_PIN(TEGRA_PIN_PWR_INT_N, "PWR_INT_N"),
 	PINCTRL_PIN(TEGRA_PIN_RESET_OUT_N, "RESET_OUT_N"),
 	PINCTRL_PIN(TEGRA_PIN_OWR, "OWR"),
 	PINCTRL_PIN(TEGRA_PIN_JTAG_RTCK, "JTAG_RTCK"),
 	PINCTRL_PIN(TEGRA_PIN_CLK_32K_IN, "CLK_32K_IN"),
 	PINCTRL_PIN(TEGRA_PIN_GMI_CLK_LB, "GMI_CLK_LB"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1107,10 +1133,13 @@ static const unsigned cpu_pwr_req_pins[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned owr_pins[] = {
 	TEGRA_PIN_OWR,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const unsigned pwr_int_n_pins[] = {
@@ -1122,7 +1151,10 @@ static const unsigned reset_out_n_pins[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const unsigned owr_pins[] = {
 	TEGRA_PIN_OWR,
 };
@@ -1139,6 +1171,9 @@ static const unsigned gmi_clk_lb_pins[] = {
 	TEGRA_PIN_GMI_CLK_LB,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const unsigned drive_ao1_pins[] = {
 	TEGRA_PIN_KB_ROW0_PR0,
@@ -1182,7 +1217,10 @@ static const unsigned drive_at1_pins[] = {
 	TEGRA_PIN_GMI_AD14_PH6,
 	TEGRA_PIN_GMI_AD15_PH7,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TEGRA_PIN_GMI_IORDY_PI5,
@@ -1199,7 +1237,10 @@ static const unsigned drive_at2_pins[] = {
 	TEGRA_PIN_GMI_AD6_PG6,
 	TEGRA_PIN_GMI_AD7_PG7,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TEGRA_PIN_GMI_WR_N_PI0,
@@ -1208,9 +1249,13 @@ static const unsigned drive_at2_pins[] = {
 	TEGRA_PIN_GMI_RST_N_PI4,
 	TEGRA_PIN_GMI_WAIT_PI7,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	TEGRA_PIN_GMI_DQS_P_PJ3,
 
+=======
+	TEGRA_PIN_GMI_DQS_P_PJ3,
+>>>>>>> v3.18
 =======
 	TEGRA_PIN_GMI_DQS_P_PJ3,
 >>>>>>> v3.18
@@ -1407,9 +1452,12 @@ static const unsigned drive_uda_pins[] = {
 
 static const unsigned drive_dev3_pins[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEGRA_PIN_CLK3_OUT_PEE0,
 	TEGRA_PIN_CLK3_REQ_PEE1,
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const unsigned drive_cec_pins[] = {
@@ -1434,6 +1482,9 @@ static const unsigned drive_sdio4_pins[] = {
 };
 
 static const unsigned drive_ao0_pins[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1442,6 +1493,10 @@ enum tegra_mux {
 	TEGRA_MUX_CEC,
 	TEGRA_MUX_CLDVFS,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TEGRA_MUX_CLK,
+>>>>>>> v3.18
 =======
 	TEGRA_MUX_CLK,
 >>>>>>> v3.18
@@ -1490,6 +1545,10 @@ enum tegra_mux {
 	TEGRA_MUX_RSVD3,
 	TEGRA_MUX_RSVD4,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TEGRA_MUX_RTCK,
+>>>>>>> v3.18
 =======
 	TEGRA_MUX_RTCK,
 >>>>>>> v3.18
@@ -1524,6 +1583,7 @@ enum tegra_mux {
 	TEGRA_MUX_VI_ALT3,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char * const blink_groups[] = {
 	"clk_32k_out_pa0",
@@ -2464,6 +2524,8 @@ static const struct tegra_function  tegra114_functions[] = {
 	FUNCTION(cec),
 	FUNCTION(cldvfs),
 =======
+=======
+>>>>>>> v3.18
 #define FUNCTION(fname)					\
 	{						\
 		.name = #fname,				\
@@ -2474,6 +2536,9 @@ static struct tegra_function tegra114_functions[] = {
 	FUNCTION(cec),
 	FUNCTION(cldvfs),
 	FUNCTION(clk),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FUNCTION(clk12),
 	FUNCTION(cpu),
@@ -2520,6 +2585,10 @@ static struct tegra_function tegra114_functions[] = {
 	FUNCTION(rsvd3),
 	FUNCTION(rsvd4),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FUNCTION(rtck),
+>>>>>>> v3.18
 =======
 	FUNCTION(rtck),
 >>>>>>> v3.18
@@ -2555,6 +2624,7 @@ static struct tegra_function tegra114_functions[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_PINGROUP_REG_START			0x868	/* bank 0 */
 #define PINGROUP_REG_START			0x3000	/* bank 1 */
 
@@ -2563,6 +2633,8 @@ static struct tegra_function tegra114_functions[] = {
 
 #define PINGROUP(pg_name, f0, f1, f2, f3, f_safe, r, od, ior, rcv_sel)	\
 =======
+=======
+>>>>>>> v3.18
 #define DRV_PINGROUP_REG_A		0x868	/* bank 0 */
 #define PINGROUP_REG_A			0x3000	/* bank 1 */
 
@@ -2572,6 +2644,9 @@ static struct tegra_function tegra114_functions[] = {
 #define PINGROUP_BIT_N(b)		(-1)
 
 #define PINGROUP(pg_name, f0, f1, f2, f3, r, od, ior, rcv_sel)		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{								\
 		.name = #pg_name,					\
@@ -2583,6 +2658,7 @@ static struct tegra_function tegra114_functions[] = {
 			TEGRA_MUX_##f2,					\
 			TEGRA_MUX_##f3,					\
 		},							\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.func_safe = TEGRA_MUX_##f_safe,			\
 		.mux_reg = PINGROUP_REG_Y(r),				\
@@ -2621,6 +2697,8 @@ static struct tegra_function tegra114_functions[] = {
 			slwr_b, slwr_w, slwf_b, slwf_w,			\
 			drvtype)					\
 =======
+=======
+>>>>>>> v3.18
 		.mux_reg = PINGROUP_REG(r),				\
 		.mux_bank = 1,						\
 		.mux_bit = 0,						\
@@ -2644,6 +2722,9 @@ static struct tegra_function tegra114_functions[] = {
 		     drvdn_b, drvdn_w, drvup_b, drvup_w,		\
 		     slwr_b, slwr_w, slwf_b, slwf_w,			\
 		     drvtype)						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{								\
 		.name = "drive_" #pg_name,				\
@@ -2653,6 +2734,7 @@ static struct tegra_function tegra114_functions[] = {
 		.pupd_reg = -1,						\
 		.tri_reg = -1,						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.einput_reg = -1,					\
 		.odrain_reg = -1,					\
 		.lock_reg = -1,						\
@@ -2660,12 +2742,17 @@ static struct tegra_function tegra114_functions[] = {
 		.rcv_sel_reg = -1,					\
 		.drv_reg = DRV_PINGROUP_DVRTYPE_Y(r),			\
 =======
+=======
+>>>>>>> v3.18
 		.einput_bit = -1,					\
 		.odrain_bit = -1,					\
 		.lock_bit = -1,						\
 		.ioreset_bit = -1,					\
 		.rcv_sel_bit = -1,					\
 		.drv_reg = DRV_PINGROUP_REG(r),				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.drv_bank = 0,						\
 		.hsm_bit = hsm_b,					\
@@ -2679,6 +2766,7 @@ static struct tegra_function tegra114_functions[] = {
 		.slwr_width = slwr_w,					\
 		.slwf_bit = slwf_b,					\
 		.slwf_width = slwf_w,					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.drvtype_reg = DRV_PINGROUP_DVRTYPE_##drvtype(r),	\
 		.drvtype_bank = 0,					\
@@ -2894,6 +2982,8 @@ static const struct tegra_pingroup tegra114_groups[] = {
 	DRV_PINGROUP(owr,   0x920,  2,  3,  4,  12,  5,  20,  5,  28,  2,  30,  2,  N),
 	DRV_PINGROUP(uda,   0x924,  2,  3,  4,  12,  5,  20,  5,  28,  2,  30,  2,  N),
 =======
+=======
+>>>>>>> v3.18
 		.drvtype_bit = PINGROUP_BIT_##drvtype(6),		\
 	}
 
@@ -3116,6 +3206,9 @@ static const struct tegra_pingroup tegra114_groups[] = {
 	DRV_PINGROUP(hv0,         0x9a4,  2,  3,  4,  12,  5,  -1, -1,  28,  2,  -1, -1,  N),
 	DRV_PINGROUP(sdio4,       0x9a8,  2,  3,  4,  12,  5,  20,  5,  28,  2,  30,  2,  N),
 	DRV_PINGROUP(ao0,         0x9ac,  2,  3,  4,  12,  5,  20,  5,  28,  2,  30,  2,  N),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3135,7 +3228,11 @@ static int tegra114_pinctrl_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id tegra114_pinctrl_of_match[] = {
+=======
+static const struct of_device_id tegra114_pinctrl_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id tegra114_pinctrl_of_match[] = {
 >>>>>>> v3.18
@@ -3156,9 +3253,14 @@ static struct platform_driver tegra114_pinctrl_driver = {
 module_platform_driver(tegra114_pinctrl_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:tegra114-pinctrl");
 MODULE_AUTHOR("Pritesh Raithatha <praithatha@nvidia.com>");
 MODULE_DESCRIPTION("NVIDIA Tegra114 pincontrol driver");
+=======
+MODULE_AUTHOR("Pritesh Raithatha <praithatha@nvidia.com>");
+MODULE_DESCRIPTION("NVIDIA Tegra114 pinctrl driver");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Pritesh Raithatha <praithatha@nvidia.com>");
 MODULE_DESCRIPTION("NVIDIA Tegra114 pinctrl driver");

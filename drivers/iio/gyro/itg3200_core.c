@@ -91,6 +91,10 @@ static int itg3200_read_raw(struct iio_dev *indio_dev,
 	int ret = 0;
 	u8 reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 regval;
+>>>>>>> v3.18
 =======
 	u8 regval;
 >>>>>>> v3.18
@@ -111,6 +115,7 @@ static int itg3200_read_raw(struct iio_dev *indio_dev,
 		/* Only the temperature channel has an offset */
 		*val = 23000;
 		return IIO_VAL_INT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	default:
 		return -EINVAL;
@@ -174,6 +179,8 @@ err_ret:
 
 	return ret ? ret : len;
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		ret = itg3200_read_reg_8(indio_dev, ITG3200_REG_DLPF, &regval);
 		if (ret)
@@ -228,6 +235,9 @@ static int itg3200_write_raw(struct iio_dev *indio_dev,
 	default:
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -319,6 +329,10 @@ err_ret:
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW), \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 =======
 	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
 >>>>>>> v3.18
@@ -335,6 +349,10 @@ static const struct iio_chan_spec itg3200_channels[] = {
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_OFFSET) |
 		BIT(IIO_CHAN_INFO_SCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+>>>>>>> v3.18
 =======
 		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
 >>>>>>> v3.18
@@ -348,6 +366,7 @@ static const struct iio_chan_spec itg3200_channels[] = {
 	IIO_CHAN_SOFT_TIMESTAMP(ITG3200_SCAN_ELEMENTS),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* IIO device attributes */
 static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO, itg3200_read_frequency,
@@ -370,6 +389,11 @@ static const struct iio_info itg3200_info = {
 	.read_raw = &itg3200_read_raw,
 	.write_raw = &itg3200_write_raw,
 >>>>>>> v3.18
+=======
+static const struct iio_info itg3200_info = {
+	.read_raw = &itg3200_read_raw,
+	.write_raw = &itg3200_write_raw,
+>>>>>>> v3.18
 	.driver_module = THIS_MODULE,
 };
 
@@ -385,11 +409,17 @@ static int itg3200_probe(struct i2c_client *client,
 	dev_dbg(&client->dev, "probe I2C dev with IRQ %i", client->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret =  -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*st));
 	if (!indio_dev)
@@ -412,7 +442,11 @@ static int itg3200_probe(struct i2c_client *client,
 	ret = itg3200_buffer_configure(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -439,9 +473,12 @@ error_remove_trigger:
 error_unconfigure_buffer:
 	itg3200_buffer_unconfigure(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -459,8 +496,11 @@ static int itg3200_remove(struct i2c_client *client)
 	itg3200_buffer_unconfigure(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

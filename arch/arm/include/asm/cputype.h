@@ -9,9 +9,12 @@
 #define CPUID_TCM	2
 #define CPUID_TLBTYPE	3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPUID_MPIDR	5
 
 =======
+=======
+>>>>>>> v3.18
 #define CPUID_MPUIR	4
 #define CPUID_MPIDR	5
 #define CPUID_REVIDR	6
@@ -32,6 +35,9 @@
 #define CPUID_EXT_ISAR4	0x70
 #define CPUID_EXT_ISAR5	0x74
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CPUID_EXT_PFR0	"c1, 0"
 #define CPUID_EXT_PFR1	"c1, 1"
@@ -48,6 +54,10 @@
 #define CPUID_EXT_ISAR4	"c2, 4"
 #define CPUID_EXT_ISAR5	"c2, 5"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -70,6 +80,7 @@
 #define ARM_CPU_IMP_ARM			0x41
 #define ARM_CPU_IMP_INTEL		0x69
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARM_CPU_IMP_QUALCOMM		0x51
 
 #define ARM_CPU_PART_ARM1136		0xB360
@@ -82,6 +93,8 @@
 #define ARM_CPU_PART_CORTEX_A15		0xC0F0
 #define ARM_CPU_PART_CORTEX_A7		0xC070
 =======
+=======
+>>>>>>> v3.18
 
 /* ARM implemented processors */
 #define ARM_CPU_PART_ARM1136		0x4100b360
@@ -96,6 +109,9 @@
 #define ARM_CPU_PART_CORTEX_A17		0x4100c0e0
 #define ARM_CPU_PART_CORTEX_A15		0x4100c0f0
 #define ARM_CPU_PART_MASK		0xff00fff0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ARM_CPU_XSCALE_ARCH_MASK	0xe000
@@ -104,9 +120,12 @@
 #define ARM_CPU_XSCALE_ARCH_V3		0x6000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Qualcomm implemented cores */
 #define ARM_CPU_PART_SCORPION		0x510002d0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern unsigned int processor_id;
@@ -123,12 +142,18 @@ extern unsigned int processor_id;
 	})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The memory clobber prevents gcc 4.5 from reordering the mrc before
  * any is_smp() tests, which can cause undefined instruction aborts on
  * ARM1136 r0 due to the missing extended CP15 registers.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define read_cpuid_ext(ext_reg)						\
 	({								\
@@ -137,12 +162,15 @@ extern unsigned int processor_id;
 		    : "=r" (__val)					\
 		    :							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    : "cc");						\
 		__val;							\
 	})
 
 #else /* ifdef CONFIG_CPU_CP15 */
 =======
+=======
+>>>>>>> v3.18
 		    : "memory");					\
 		__val;							\
 	})
@@ -164,6 +192,9 @@ static inline unsigned int __attribute_const__ read_cpuid_ext(unsigned offset)
 }
 
 #else /* ifdef CONFIG_CPU_CP15 / elif defined (CONFIG_CPU_V7M) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -192,8 +223,11 @@ static inline unsigned int __attribute_const__ read_cpuid_id(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* ifdef CONFIG_CPU_CP15 */
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_CPU_V7M)
 
 static inline unsigned int __attribute_const__ read_cpuid_id(void)
@@ -202,6 +236,9 @@ static inline unsigned int __attribute_const__ read_cpuid_id(void)
 }
 
 #else /* ifdef CONFIG_CPU_CP15 / elif defined(CONFIG_CPU_V7M) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline unsigned int __attribute_const__ read_cpuid_id(void)
@@ -217,8 +254,11 @@ static inline unsigned int __attribute_const__ read_cpuid_implementor(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int __attribute_const__ read_cpuid_part_number(void)
 =======
+=======
+>>>>>>> v3.18
 /*
  * The CPU part number is meaningless without referring to the CPU
  * implementer: implementers are free to define their own part numbers
@@ -230,6 +270,9 @@ static inline unsigned int __attribute_const__ read_cpuid_part(void)
 }
 
 static inline unsigned int __attribute_const__ __deprecated read_cpuid_part_number(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return read_cpuid_id() & 0xFFF0;
@@ -238,7 +281,11 @@ static inline unsigned int __attribute_const__ __deprecated read_cpuid_part_numb
 static inline unsigned int __attribute_const__ xscale_cpu_arch_version(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return read_cpuid_part_number() & ARM_CPU_XSCALE_ARCH_MASK;
+=======
+	return read_cpuid_id() & ARM_CPU_XSCALE_ARCH_MASK;
+>>>>>>> v3.18
 =======
 	return read_cpuid_id() & ARM_CPU_XSCALE_ARCH_MASK;
 >>>>>>> v3.18
@@ -286,7 +333,10 @@ static inline int cpu_is_xsc3(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Marvell's PJ4 and PJ4B cores are based on V7 version,
  * but require a specical sequence for enabling coprocessors.
@@ -306,5 +356,8 @@ static inline int cpu_is_pj4(void)
 #else
 #define cpu_is_pj4()	0
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

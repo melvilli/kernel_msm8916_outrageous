@@ -6,7 +6,11 @@ function for SoC control or status. Details vary considerably among from SoC
 to SoC with no two being alike.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 In general, the Device State Configuraion Registers (DSCR) will provide one or
+=======
+In general, the Device State Configuration Registers (DSCR) will provide one or
+>>>>>>> v3.18
 =======
 In general, the Device State Configuration Registers (DSCR) will provide one or
 >>>>>>> v3.18

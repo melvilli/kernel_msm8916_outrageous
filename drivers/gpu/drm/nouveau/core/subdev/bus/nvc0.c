@@ -24,11 +24,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/bus.h>
 
 struct nvc0_bus_priv {
 	struct nouveau_bus base;
 };
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ static int
 nvc0_bus_init(struct nouveau_object *object)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvc0_bus_priv *priv = (void *)object;
+=======
+	struct nv04_bus_priv *priv = (void *)object;
+>>>>>>> v3.18
 =======
 	struct nv04_bus_priv *priv = (void *)object;
 >>>>>>> v3.18
@@ -80,6 +88,7 @@ nvc0_bus_init(struct nouveau_object *object)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvc0_bus_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -104,18 +113,28 @@ nvc0_bus_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nvc0_bus_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nvc0_bus_oclass = &(struct nv04_bus_impl) {
 	.base.handle = NV_SUBDEV(BUS, 0xc0),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_bus_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_bus_dtor,
 		.init = nvc0_bus_init,
 		.fini = _nouveau_bus_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.intr = nvc0_bus_intr,
+}.base;
+>>>>>>> v3.18
 =======
 	.intr = nvc0_bus_intr,
 }.base;

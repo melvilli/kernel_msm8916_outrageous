@@ -63,6 +63,7 @@ struct musb_hw_ep;
 #define	DMA_ADDR_INVALID	(~(dma_addr_t)0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_MUSB_PIO_ONLY
 #define	is_dma_capable()	(1)
 #else
@@ -71,6 +72,8 @@ struct musb_hw_ep;
 
 #ifdef CONFIG_USB_TI_CPPI_DMA
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MUSB_PIO_ONLY
 #define	is_dma_capable()	(0)
 #else
@@ -78,6 +81,9 @@ struct musb_hw_ep;
 #endif
 
 #if defined(CONFIG_USB_TI_CPPI_DMA) || defined(CONFIG_USB_TI_CPPI41_DMA)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	is_cppi_enabled()	1
 #else
@@ -140,6 +146,10 @@ struct dma_channel {
 	enum dma_channel_status	status;
 	bool			desired_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			rx_packet_done;
+>>>>>>> v3.18
 =======
 	bool			rx_packet_done;
 >>>>>>> v3.18
@@ -174,8 +184,11 @@ dma_channel_status(struct dma_channel *c)
  */
 struct dma_controller {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			(*start)(struct dma_controller *);
 	int			(*stop)(struct dma_controller *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dma_channel	*(*channel_alloc)(struct dma_controller *,
@@ -195,7 +208,10 @@ struct dma_controller {
 extern void musb_dma_completion(struct musb *musb, u8 epnum, u8 transmit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MUSB_PIO_ONLY
 static inline struct dma_controller *dma_controller_create(struct musb *m,
 		void __iomem *io)
@@ -206,12 +222,19 @@ static inline struct dma_controller *dma_controller_create(struct musb *m,
 static inline void dma_controller_destroy(struct dma_controller *d) { }
 
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct dma_controller *dma_controller_create(struct musb *, void __iomem *);
 
 extern void dma_controller_destroy(struct dma_controller *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

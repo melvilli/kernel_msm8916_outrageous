@@ -32,7 +32,10 @@
 #include <mach/hardware.h>
 #include <mach/irqs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/reset.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -46,6 +49,7 @@ EXPORT_SYMBOL(reset_status);
 /*
  * This table is setup for a 3.6864MHz Crystal.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const unsigned short cclk_frequency_100khz[NR_FREQS] = {
 	 590,	/*  59.0 MHz */
@@ -111,6 +115,8 @@ int sa11x0_verify_speed(struct cpufreq_policy *policy)
 }
 
 =======
+=======
+>>>>>>> v3.18
 struct cpufreq_frequency_table sa11x0_freq_table[NR_FREQS+1] = {
 	{ .frequency = 59000,	/*  59.0 MHz */},
 	{ .frequency = 73700,	/*  73.7 MHz */},
@@ -131,13 +137,20 @@ struct cpufreq_frequency_table sa11x0_freq_table[NR_FREQS+1] = {
 	{ .frequency = CPUFREQ_TABLE_END, },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int sa11x0_getspeed(unsigned int cpu)
 {
 	if (cpu)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cclk_frequency_100khz[PPCR & 0xf] * 100;
+=======
+	return sa11x0_freq_table[PPCR & 0xf].frequency;
+>>>>>>> v3.18
 =======
 	return sa11x0_freq_table[PPCR & 0xf].frequency;
 >>>>>>> v3.18
@@ -166,7 +179,10 @@ static void sa1100_power_off(void)
 void sa11x0_restart(enum reboot_mode mode, const char *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_reset_status(RESET_STATUS_ALL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mode == REBOOT_SOFT) {

@@ -19,13 +19,19 @@
 #include <mach/dma.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PL330_DMA)
 #define dma_filter pl330_filter
 #elif defined(CONFIG_S3C64XX_PL080)
 #define dma_filter pl08x_filter_id
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned samsung_dmadev_request(enum dma_ch dma_ch,
 				struct samsung_dma_req *param,
@@ -40,7 +46,11 @@ static unsigned samsung_dmadev_request(enum dma_ch dma_ch,
 		return (unsigned)dma_request_slave_channel(dev, ch_name);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (unsigned)dma_request_channel(mask, pl330_filter,
+=======
+		return (unsigned)dma_request_channel(mask, dma_filter,
+>>>>>>> v3.18
 =======
 		return (unsigned)dma_request_channel(mask, dma_filter,
 >>>>>>> v3.18

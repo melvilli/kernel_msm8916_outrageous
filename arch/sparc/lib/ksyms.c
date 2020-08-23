@@ -100,6 +100,7 @@ EXPORT_SYMBOL(__clear_user);
 
 /* Atomic counter implementation. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(atomic_add);
 EXPORT_SYMBOL(atomic_add_ret);
 EXPORT_SYMBOL(atomic_sub);
@@ -109,6 +110,8 @@ EXPORT_SYMBOL(atomic64_add_ret);
 EXPORT_SYMBOL(atomic64_sub);
 EXPORT_SYMBOL(atomic64_sub_ret);
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op)							\
 EXPORT_SYMBOL(atomic_##op);						\
 EXPORT_SYMBOL(atomic64_##op);
@@ -126,6 +129,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(atomic64_dec_if_positive);
 
@@ -147,11 +153,17 @@ void VISenter(void);
 EXPORT_SYMBOL(VISenter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* CRYPTO code needs this */
 void VISenterhalf(void);
 EXPORT_SYMBOL(VISenterhalf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void xor_vis_2(unsigned long, unsigned long *, unsigned long *);
 extern void xor_vis_3(unsigned long, unsigned long *, unsigned long *,

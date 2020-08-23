@@ -19,6 +19,7 @@
 #define	__XFS_TYPES_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 /*
@@ -58,6 +59,9 @@ typedef __uint64_t __psunsigned_t;
 =======
 typedef __uint32_t	prid_t;		/* project ID */
 >>>>>>> v3.18
+=======
+typedef __uint32_t	prid_t;		/* project ID */
+>>>>>>> v3.18
 
 typedef __uint32_t	xfs_agblock_t;	/* blockno in alloc. group */
 typedef	__uint32_t	xfs_agino_t;	/* inode # within allocation grp */
@@ -77,6 +81,7 @@ typedef	__int32_t	xfs_tid_t;	/* transaction identifier */
 typedef	__uint32_t	xfs_dablk_t;	/* dir/attr block number (in file) */
 typedef	__uint32_t	xfs_dahash_t;	/* dir/attr hash value */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * These types are 64 bits on disk but are either 32 or 64 bits in memory.
@@ -107,6 +112,8 @@ typedef __int64_t	xfs_sfiloff_t;	/* signed block number in a file */
 typedef __uint64_t	xfs_filblks_t;	/* number of blocks in a file */
 
 =======
+=======
+>>>>>>> v3.18
 typedef	__uint64_t	xfs_fsblock_t;	/* blockno in filesystem (agno|agbno) */
 typedef __uint64_t	xfs_rfsblock_t;	/* blockno in filesystem (raw) */
 typedef __uint64_t	xfs_rtblock_t;	/* extent (block) in realtime area */
@@ -115,17 +122,23 @@ typedef __uint64_t	xfs_filblks_t;	/* number of blocks in a file */
 
 typedef	__int64_t	xfs_srtblock_t;	/* signed version of xfs_rtblock_t */
 typedef __int64_t	xfs_sfiloff_t;	/* signed block number in a file */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Null values for the types.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	NULLDFSBNO	((xfs_dfsbno_t)-1)
 #define	NULLDRFSBNO	((xfs_drfsbno_t)-1)
 #define	NULLDRTBNO	((xfs_drtbno_t)-1)
 #define	NULLDFILOFF	((xfs_dfiloff_t)-1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define	NULLFSBLOCK	((xfs_fsblock_t)-1)
@@ -165,13 +178,19 @@ typedef __int64_t	xfs_sfiloff_t;	/* signed block number in a file */
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Inode fork identifiers.
  */
 #define	XFS_DATA_FORK	0
 #define	XFS_ATTR_FORK	1
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Min numbers of data/attr fork btree root pointers.
  */
@@ -191,7 +210,11 @@ typedef enum {
 typedef enum {
 	XFS_BTNUM_BNOi, XFS_BTNUM_CNTi, XFS_BTNUM_BMAPi, XFS_BTNUM_INOi,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	XFS_BTNUM_MAX
+=======
+	XFS_BTNUM_FINOi, XFS_BTNUM_MAX
+>>>>>>> v3.18
 =======
 	XFS_BTNUM_FINOi, XFS_BTNUM_MAX
 >>>>>>> v3.18
@@ -201,9 +224,12 @@ struct xfs_name {
 	const unsigned char	*name;
 	int			len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int			type;
 };
 
@@ -223,5 +249,8 @@ typedef __uint32_t	xfs_dqid_t;
 #define	XFS_WORDMASK	((1 << XFS_WORDLOG) - 1)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __XFS_TYPES_H__ */

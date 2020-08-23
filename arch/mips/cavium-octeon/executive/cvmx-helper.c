@@ -68,7 +68,11 @@ void (*cvmx_override_ipd_port_setup) (int ipd_port);
 
 /* Port count per interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int interface_port_count[4] = { 0, 0, 0, 0 };
+=======
+static int interface_port_count[5];
+>>>>>>> v3.18
 =======
 static int interface_port_count[5];
 >>>>>>> v3.18
@@ -93,6 +97,10 @@ int cvmx_helper_get_number_of_interfaces(void)
 		return 3;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_get_number_of_interfaces);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_get_number_of_interfaces);
 >>>>>>> v3.18
@@ -111,7 +119,10 @@ int cvmx_helper_ports_on_interface(int interface)
 	return interface_port_count[interface];
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(cvmx_helper_ports_on_interface);
 
 /**
@@ -265,6 +276,9 @@ static cvmx_helper_interface_mode_t __cvmx_get_mode_octeon2(int interface)
 			return CVMX_HELPER_INTERFACE_MODE_RGMII;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -281,7 +295,10 @@ cvmx_helper_interface_mode_t cvmx_helper_interface_get_mode(int interface)
 {
 	union cvmx_gmxx_inf_mode mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (interface < 0 ||
 	    interface >= cvmx_helper_get_number_of_interfaces())
@@ -296,6 +313,9 @@ cvmx_helper_interface_mode_t cvmx_helper_interface_get_mode(int interface)
 	/*
 	 * Octeon and Octeon Plus models
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (interface == 2)
 		return CVMX_HELPER_INTERFACE_MODE_NPI;
@@ -361,6 +381,10 @@ cvmx_helper_interface_mode_t cvmx_helper_interface_get_mode(int interface)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_interface_get_mode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_interface_get_mode);
 >>>>>>> v3.18
@@ -1011,6 +1035,10 @@ int cvmx_helper_ipd_and_packet_input_enable(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_ipd_and_packet_input_enable);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_ipd_and_packet_input_enable);
 >>>>>>> v3.18
@@ -1093,6 +1121,10 @@ int cvmx_helper_initialize_packet_io_global(void)
 	return result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_initialize_packet_io_global);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_initialize_packet_io_global);
 >>>>>>> v3.18
@@ -1141,6 +1173,10 @@ cvmx_helper_link_info_t cvmx_helper_link_autoconf(int ipd_port)
 	return port_link_info[ipd_port];
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_link_autoconf);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_link_autoconf);
 >>>>>>> v3.18
@@ -1203,6 +1239,10 @@ cvmx_helper_link_info_t cvmx_helper_link_get(int ipd_port)
 	return result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_link_get);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_link_get);
 >>>>>>> v3.18
@@ -1262,6 +1302,10 @@ int cvmx_helper_link_set(int ipd_port, cvmx_helper_link_info_t link_info)
 	return result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_link_set);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_link_set);
 >>>>>>> v3.18

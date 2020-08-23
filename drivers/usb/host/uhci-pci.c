@@ -130,10 +130,13 @@ static int uhci_pci_init(struct usb_hcd *hcd)
 		uhci->wait_for_hp = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Intel controllers use non-PME wakeup signalling */
 	if (to_pci_dev(uhci_dev(uhci))->vendor == PCI_VENDOR_ID_INTEL)
 		device_set_run_wake(uhci_dev(uhci), 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set up pointers to PCI-specific functions */
@@ -170,6 +173,11 @@ static void uhci_shutdown(struct pci_dev *pdev)
 #ifdef CONFIG_PM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int uhci_pci_resume(struct usb_hcd *hcd, bool hibernated);
+
+>>>>>>> v3.18
 =======
 static int uhci_pci_resume(struct usb_hcd *hcd, bool hibernated);
 
@@ -187,12 +195,15 @@ static int uhci_pci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 		goto done_okay;		/* Already suspended or dead */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (uhci->rh_state > UHCI_RH_SUSPENDED) {
 		dev_warn(uhci_dev(uhci), "Root hub isn't suspended!\n");
 		rc = -EBUSY;
 		goto done;
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* All PCI host controllers are required to disable IRQ generation
@@ -211,9 +222,12 @@ static int uhci_pci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 done_okay:
 	clear_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 done:
 	spin_unlock_irq(&uhci->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irq(&uhci->lock);
 
 	synchronize_irq(hcd->irq);
@@ -223,6 +237,9 @@ done:
 		uhci_pci_resume(hcd, false);
 		rc = -EBUSY;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -304,7 +321,11 @@ static const struct hc_driver uhci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(uhci_pci_ids) = { {
+=======
+static const struct pci_device_id uhci_pci_ids[] = { {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id uhci_pci_ids[] = { {
 >>>>>>> v3.18
@@ -331,6 +352,11 @@ static struct pci_driver uhci_pci_driver = {
 #endif
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+MODULE_SOFTDEP("pre: ehci_pci");
+>>>>>>> v3.18
 =======
 
 MODULE_SOFTDEP("pre: ehci_pci");

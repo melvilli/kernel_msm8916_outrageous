@@ -525,7 +525,11 @@ static const struct file_operations fs3270_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fs3270_create_cb(int minor)
+=======
+static void fs3270_create_cb(int minor)
+>>>>>>> v3.18
 =======
 static void fs3270_create_cb(int minor)
 >>>>>>> v3.18
@@ -536,7 +540,11 @@ static void fs3270_create_cb(int minor)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fs3270_destroy_cb(int minor)
+=======
+static void fs3270_destroy_cb(int minor)
+>>>>>>> v3.18
 =======
 static void fs3270_destroy_cb(int minor)
 >>>>>>> v3.18
@@ -546,7 +554,11 @@ static void fs3270_destroy_cb(int minor)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct raw3270_notifier fs3270_notifier =
+=======
+static struct raw3270_notifier fs3270_notifier =
+>>>>>>> v3.18
 =======
 static struct raw3270_notifier fs3270_notifier =
 >>>>>>> v3.18
@@ -577,6 +589,10 @@ fs3270_exit(void)
 {
 	raw3270_unregister_notifier(&fs3270_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_destroy(class3270, MKDEV(IBM_FS3270_MAJOR, 0));
+>>>>>>> v3.18
 =======
 	device_destroy(class3270, MKDEV(IBM_FS3270_MAJOR, 0));
 >>>>>>> v3.18

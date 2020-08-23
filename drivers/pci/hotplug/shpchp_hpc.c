@@ -117,7 +117,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * SHPC Command Code definitnions
+=======
+ * SHPC Command Code definitions
+>>>>>>> v3.18
 =======
  * SHPC Command Code definitions
 >>>>>>> v3.18
@@ -346,8 +350,12 @@ static int shpc_write_cmd(struct slot *slot, u8 t_slot, u8 cmd)
 	cmd_status = hpc_check_cmd_status(slot->ctrl);
 	if (cmd_status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctrl_err(ctrl,
 			 "Failed to issued command 0x%x (error code = %d)\n",
+=======
+		ctrl_err(ctrl, "Failed to issued command 0x%x (error code = %d)\n",
+>>>>>>> v3.18
 =======
 		ctrl_err(ctrl, "Failed to issued command 0x%x (error code = %d)\n",
 >>>>>>> v3.18
@@ -413,7 +421,11 @@ static int hpc_get_attention_status(struct slot *slot, u8 *status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpc_get_power_status(struct slot * slot, u8 *status)
+=======
+static int hpc_get_power_status(struct slot *slot, u8 *status)
+>>>>>>> v3.18
 =======
 static int hpc_get_power_status(struct slot *slot, u8 *status)
 >>>>>>> v3.18
@@ -480,7 +492,12 @@ static int hpc_get_adapter_speed(struct slot *slot, enum pci_bus_speed *value)
 	u8 pi, pcix_cap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((retval = hpc_get_prog_int(slot, &pi)))
+=======
+	retval = hpc_get_prog_int(slot, &pi);
+	if (retval)
+>>>>>>> v3.18
 =======
 	retval = hpc_get_prog_int(slot, &pi);
 	if (retval)
@@ -546,7 +563,11 @@ static int hpc_get_mode1_ECC_cap(struct slot *slot, u8 *mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpc_query_power_fault(struct slot * slot)
+=======
+static int hpc_query_power_fault(struct slot *slot)
+>>>>>>> v3.18
 =======
 static int hpc_query_power_fault(struct slot *slot)
 >>>>>>> v3.18
@@ -636,7 +657,11 @@ static void hpc_release_ctlr(struct controller *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpc_power_on_slot(struct slot * slot)
+=======
+static int hpc_power_on_slot(struct slot *slot)
+>>>>>>> v3.18
 =======
 static int hpc_power_on_slot(struct slot *slot)
 >>>>>>> v3.18
@@ -651,7 +676,11 @@ static int hpc_power_on_slot(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpc_slot_enable(struct slot * slot)
+=======
+static int hpc_slot_enable(struct slot *slot)
+>>>>>>> v3.18
 =======
 static int hpc_slot_enable(struct slot *slot)
 >>>>>>> v3.18
@@ -668,7 +697,11 @@ static int hpc_slot_enable(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpc_slot_disable(struct slot * slot)
+=======
+static int hpc_slot_disable(struct slot *slot)
+>>>>>>> v3.18
 =======
 static int hpc_slot_disable(struct slot *slot)
 >>>>>>> v3.18
@@ -754,7 +787,11 @@ static int shpc_get_cur_bus_speed(struct controller *ctrl)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpc_set_bus_speed_mode(struct slot * slot, enum pci_bus_speed value)
+=======
+static int hpc_set_bus_speed_mode(struct slot *slot, enum pci_bus_speed value)
+>>>>>>> v3.18
 =======
 static int hpc_set_bus_speed_mode(struct slot *slot, enum pci_bus_speed value)
 >>>>>>> v3.18
@@ -837,7 +874,11 @@ static irqreturn_t shpc_isr(int irq, void *dev_id)
 	ctrl_dbg(ctrl, "%s: intr_loc = %x\n", __func__, intr_loc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!shpchp_poll_mode) {
+=======
+	if (!shpchp_poll_mode) {
+>>>>>>> v3.18
 =======
 	if (!shpchp_poll_mode) {
 >>>>>>> v3.18
@@ -1016,8 +1057,13 @@ int shpc_init(struct controller *ctrl, struct pci_dev *pdev)
 			rc = shpc_indirect_read(ctrl, i, &tempdword);
 			if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ctrl_err(ctrl,
 					 "Cannot read creg (index = %d)\n", i);
+=======
+				ctrl_err(ctrl, "Cannot read creg (index = %d)\n",
+					 i);
+>>>>>>> v3.18
 =======
 				ctrl_err(ctrl, "Cannot read creg (index = %d)\n",
 					 i);
@@ -1107,10 +1153,15 @@ int shpc_init(struct controller *ctrl, struct pci_dev *pdev)
 		rc = pci_enable_msi(pdev);
 		if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ctrl_info(ctrl,
 				  "Can't get msi for the hotplug controller\n");
 			ctrl_info(ctrl,
 				  "Use INTx for the hotplug controller\n");
+=======
+			ctrl_info(ctrl, "Can't get msi for the hotplug controller\n");
+			ctrl_info(ctrl, "Use INTx for the hotplug controller\n");
+>>>>>>> v3.18
 =======
 			ctrl_info(ctrl, "Can't get msi for the hotplug controller\n");
 			ctrl_info(ctrl, "Use INTx for the hotplug controller\n");
@@ -1123,8 +1174,13 @@ int shpc_init(struct controller *ctrl, struct pci_dev *pdev)
 			 ctrl->pci_dev->irq, rc);
 		if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ctrl_err(ctrl, "Can't get irq %d for the hotplug "
 				 "controller\n", ctrl->pci_dev->irq);
+=======
+			ctrl_err(ctrl, "Can't get irq %d for the hotplug controller\n",
+				 ctrl->pci_dev->irq);
+>>>>>>> v3.18
 =======
 			ctrl_err(ctrl, "Can't get irq %d for the hotplug controller\n",
 				 ctrl->pci_dev->irq);

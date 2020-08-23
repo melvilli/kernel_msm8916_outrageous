@@ -25,7 +25,11 @@
 #include <linux/mutex.h>
 #include <linux/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -64,6 +68,7 @@
 
 static struct cpufreq_frequency_table maple_cpu_freqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{CPUFREQ_HIGH,		0},
 	{CPUFREQ_LOW,		0},
 	{0,			CPUFREQ_TABLE_END},
@@ -77,6 +82,11 @@ static struct freq_attr *maple_cpu_freqs_attr[] = {
 	{0, CPUFREQ_LOW,		0},
 	{0, 0,				CPUFREQ_TABLE_END},
 >>>>>>> v3.18
+=======
+	{0, CPUFREQ_HIGH,		0},
+	{0, CPUFREQ_LOW,		0},
+	{0, 0,				CPUFREQ_TABLE_END},
+>>>>>>> v3.18
 };
 
 /* Power mode data is an array of the 32 bits PCR values to use for
@@ -85,8 +95,11 @@ static struct freq_attr *maple_cpu_freqs_attr[] = {
 static int maple_pmode_cur;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_MUTEX(maple_switch_mutex);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 *maple_pmode_data;
@@ -149,6 +162,7 @@ static int maple_scom_query_freq(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int maple_cpufreq_verify(struct cpufreq_policy *policy)
 {
 	return cpufreq_frequency_table_verify(policy, maple_cpu_freqs);
@@ -181,10 +195,15 @@ static int maple_cpufreq_target(struct cpufreq_policy *policy,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 static int maple_cpufreq_target(struct cpufreq_policy *policy,
 	unsigned int index)
 {
 	return maple_scom_switch_freq(index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -195,6 +214,7 @@ static unsigned int maple_cpufreq_get_speed(unsigned int cpu)
 
 static int maple_cpufreq_cpu_init(struct cpufreq_policy *policy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cpuinfo.transition_latency = 12000;
 	policy->cur = maple_cpu_freqs[maple_scom_query_freq()].frequency;
@@ -214,27 +234,41 @@ static int maple_cpufreq_cpu_init(struct cpufreq_policy *policy)
 }
 
 >>>>>>> v3.18
+=======
+	return cpufreq_generic_init(policy, maple_cpu_freqs, 12000);
+}
+
+>>>>>>> v3.18
 static struct cpufreq_driver maple_cpufreq_driver = {
 	.name		= "maple",
 	.flags		= CPUFREQ_CONST_LOOPS,
 	.init		= maple_cpufreq_cpu_init,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.verify		= maple_cpufreq_verify,
 	.target		= maple_cpufreq_target,
 	.get		= maple_cpufreq_get_speed,
 	.attr		= maple_cpu_freqs_attr,
 =======
+=======
+>>>>>>> v3.18
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= maple_cpufreq_target,
 	.get		= maple_cpufreq_get_speed,
 	.attr		= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int __init maple_cpufreq_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *cpus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device_node *cpunode;
@@ -252,6 +286,7 @@ static int __init maple_cpufreq_init(void)
 	    !of_machine_is_compatible("Momentum,Apache"))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpus = of_find_node_by_path("/cpus");
 	if (cpus == NULL) {
@@ -272,11 +307,16 @@ static int __init maple_cpufreq_init(void)
 		printk(KERN_ERR "cpufreq: Can't find any CPU 0 node\n");
 		goto bail_cpus;
 =======
+=======
+>>>>>>> v3.18
 	/* Get first CPU node */
 	cpunode = of_cpu_device_node_get(0);
 	if (cpunode == NULL) {
 		printk(KERN_ERR "cpufreq: Can't find any CPU 0 node\n");
 		goto bail_noprops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -334,7 +374,10 @@ static int __init maple_cpufreq_init(void)
 
 	of_node_put(cpunode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_node_put(cpus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -343,8 +386,11 @@ static int __init maple_cpufreq_init(void)
 bail_noprops:
 	of_node_put(cpunode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 bail_cpus:
 	of_node_put(cpus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

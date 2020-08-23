@@ -21,6 +21,10 @@
 #include <linux/platform_device.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -40,6 +44,7 @@ static void ixp4xx_spkr_control(unsigned int pin, unsigned int count)
 	spin_lock_irqsave(&beep_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 if (count) {
 		gpio_line_config(pin, IXP4XX_GPIO_OUT);
 		gpio_line_set(pin, IXP4XX_GPIO_LOW);
@@ -50,12 +55,17 @@ static void ixp4xx_spkr_control(unsigned int pin, unsigned int count)
 		gpio_line_set(pin, IXP4XX_GPIO_HIGH);
 
 =======
+=======
+>>>>>>> v3.18
 	if (count) {
 		gpio_direction_output(pin, 0);
 		*IXP4XX_OSRT2 = (count & ~IXP4XX_OST_RELOAD_MASK) | IXP4XX_OST_ENABLE;
 	} else {
 		gpio_direction_output(pin, 1);
 		gpio_direction_input(pin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*IXP4XX_OSRT2 = 0;
 	}
@@ -83,7 +93,11 @@ static int ixp4xx_spkr_event(struct input_dev *dev, unsigned int type, unsigned 
 
 	if (value > 20 && value < 32767)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		count = (IXP4XX_TIMER_FREQ / (value * 4)) - 1;
+=======
+		count = (ixp4xx_timer_freq / (value * 4)) - 1;
+>>>>>>> v3.18
 =======
 		count = (ixp4xx_timer_freq / (value * 4)) - 1;
 >>>>>>> v3.18
@@ -96,6 +110,11 @@ static int ixp4xx_spkr_event(struct input_dev *dev, unsigned int type, unsigned 
 static irqreturn_t ixp4xx_spkr_interrupt(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int pin = (unsigned int) dev_id;
+
+>>>>>>> v3.18
 =======
 	unsigned int pin = (unsigned int) dev_id;
 
@@ -105,7 +124,11 @@ static irqreturn_t ixp4xx_spkr_interrupt(int irq, void *dev_id)
 
 	/* flip the beeper output */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*IXP4XX_GPIO_GPOUTR ^= (1 << (unsigned int) dev_id);
+=======
+	gpio_set_value(pin, !gpio_get_value(pin));
+>>>>>>> v3.18
 =======
 	gpio_set_value(pin, !gpio_get_value(pin));
 >>>>>>> v3.18
@@ -137,18 +160,28 @@ static int ixp4xx_spkr_probe(struct platform_device *dev)
 	input_dev->event = ixp4xx_spkr_event;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = gpio_request(dev->id, "ixp4-beeper");
 	if (err)
 		goto err_free_device;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = request_irq(IRQ_IXP4XX_TIMER2, &ixp4xx_spkr_interrupt,
 			  IRQF_NO_SUSPEND, "ixp4xx-beeper",
 			  (void *) dev->id);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_device;
+=======
+		goto err_free_gpio;
+>>>>>>> v3.18
 =======
 		goto err_free_gpio;
 >>>>>>> v3.18
@@ -163,7 +196,13 @@ static int ixp4xx_spkr_probe(struct platform_device *dev)
 
  err_free_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(IRQ_IXP4XX_TIMER2, dev);
+=======
+	free_irq(IRQ_IXP4XX_TIMER2, (void *)dev->id);
+ err_free_gpio:
+	gpio_free(dev->id);
+>>>>>>> v3.18
 =======
 	free_irq(IRQ_IXP4XX_TIMER2, (void *)dev->id);
  err_free_gpio:
@@ -182,7 +221,10 @@ static int ixp4xx_spkr_remove(struct platform_device *dev)
 
 	input_unregister_device(input_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -191,7 +233,12 @@ static int ixp4xx_spkr_remove(struct platform_device *dev)
 	ixp4xx_spkr_control(pin, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(IRQ_IXP4XX_TIMER2, dev);
+=======
+	free_irq(IRQ_IXP4XX_TIMER2, (void *)dev->id);
+	gpio_free(dev->id);
+>>>>>>> v3.18
 =======
 	free_irq(IRQ_IXP4XX_TIMER2, (void *)dev->id);
 	gpio_free(dev->id);

@@ -1616,7 +1616,11 @@ struct ncb {
 
 	/*----------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 	**	Chip and controller indentification.
+=======
+	**	Chip and controller identification.
+>>>>>>> v3.18
 =======
 	**	Chip and controller identification.
 >>>>>>> v3.18
@@ -6638,7 +6642,11 @@ static void ncr_sir_to_redo(struct ncb *np, int num, struct ccb *cp)
 		*/
 		cp->sensecmd[0]		= 0x03;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cp->sensecmd[1]		= cmd->device->lun << 5;
+=======
+		cp->sensecmd[1]		= (cmd->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 =======
 		cp->sensecmd[1]		= (cmd->device->lun & 0x7) << 5;
 >>>>>>> v3.18

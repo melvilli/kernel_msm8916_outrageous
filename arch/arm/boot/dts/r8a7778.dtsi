@@ -17,6 +17,7 @@
 /include/ "skeleton.dtsi"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 / {
 	compatible = "renesas,r8a7778";
 
@@ -27,6 +28,8 @@
 	};
 
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/interrupt-controller/irq.h>
 
 / {
@@ -51,6 +54,9 @@
 		spi2 = &hspi2;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gic: interrupt-controller@fe438000 {
 		compatible = "arm,cortex-a9-gic";
@@ -60,7 +66,10 @@
 		      <0xfe430000 0x100>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* irqpin: IRQ0 - IRQ3 */
 	irqpin: irqpin@fe78001c {
@@ -278,5 +287,8 @@
 		#size-cells = <0>;
 		status = "disabled";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

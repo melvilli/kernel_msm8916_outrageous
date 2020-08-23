@@ -30,7 +30,11 @@
 #include <sound/pcm_params.h>
 #include <sound/pcm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -45,7 +49,10 @@ enum master_slave_mode {
 
 struct cs42l51_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum snd_soc_control_type control_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int mclk;
@@ -59,6 +66,7 @@ struct cs42l51_private {
 		SNDRV_PCM_FMTBIT_S20_3LE | SNDRV_PCM_FMTBIT_S20_3BE | \
 		SNDRV_PCM_FMTBIT_S24_LE  | SNDRV_PCM_FMTBIT_S24_BE)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cs42l51_fill_cache(struct snd_soc_codec *codec)
 {
@@ -83,10 +91,15 @@ static int cs42l51_get_chan_mix(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 =======
+=======
+>>>>>>> v3.18
 static int cs42l51_get_chan_mix(struct snd_kcontrol *kcontrol,
 			struct snd_ctl_elem_value *ucontrol)
 {
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long value = snd_soc_read(codec, CS42L51_PCM_MIXER)&3;
 
@@ -116,7 +129,11 @@ static int cs42l51_set_chan_mix(struct snd_kcontrol *kcontrol,
 			struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -153,8 +170,12 @@ static const char *chan_mix[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum cs42l51_chan_mix =
 	SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(chan_mix), chan_mix);
+=======
+static SOC_ENUM_SINGLE_EXT_DECL(cs42l51_chan_mix, chan_mix);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_EXT_DECL(cs42l51_chan_mix, chan_mix);
 >>>>>>> v3.18
@@ -214,8 +235,13 @@ static int cs42l51_pdn_event(struct snd_soc_dapm_widget *w,
 static const char *cs42l51_dac_names[] = {"Direct PCM",
 	"DSP PCM", "ADC"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum cs42l51_dac_mux_enum =
 	SOC_ENUM_SINGLE(CS42L51_DAC_CTL, 6, 3, cs42l51_dac_names);
+=======
+static SOC_ENUM_SINGLE_DECL(cs42l51_dac_mux_enum,
+			    CS42L51_DAC_CTL, 6, cs42l51_dac_names);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(cs42l51_dac_mux_enum,
 			    CS42L51_DAC_CTL, 6, cs42l51_dac_names);
@@ -226,8 +252,13 @@ static const struct snd_kcontrol_new cs42l51_dac_mux_controls =
 static const char *cs42l51_adcl_names[] = {"AIN1 Left", "AIN2 Left",
 	"MIC Left", "MIC+preamp Left"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum cs42l51_adcl_mux_enum =
 	SOC_ENUM_SINGLE(CS42L51_ADC_INPUT, 4, 4, cs42l51_adcl_names);
+=======
+static SOC_ENUM_SINGLE_DECL(cs42l51_adcl_mux_enum,
+			    CS42L51_ADC_INPUT, 4, cs42l51_adcl_names);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(cs42l51_adcl_mux_enum,
 			    CS42L51_ADC_INPUT, 4, cs42l51_adcl_names);
@@ -238,8 +269,13 @@ static const struct snd_kcontrol_new cs42l51_adcl_mux_controls =
 static const char *cs42l51_adcr_names[] = {"AIN1 Right", "AIN2 Right",
 	"MIC Right", "MIC+preamp Right"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum cs42l51_adcr_mux_enum =
 	SOC_ENUM_SINGLE(CS42L51_ADC_INPUT, 6, 4, cs42l51_adcr_names);
+=======
+static SOC_ENUM_SINGLE_DECL(cs42l51_adcr_mux_enum,
+			    CS42L51_ADC_INPUT, 6, cs42l51_adcr_names);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(cs42l51_adcr_mux_enum,
 			    CS42L51_ADC_INPUT, 6, cs42l51_adcr_names);
@@ -460,6 +496,7 @@ static int cs42l51_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SND_SOC_DAIFMT_RIGHT_J:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (params_format(params)) {
 		case SNDRV_PCM_FORMAT_S16_LE:
 		case SNDRV_PCM_FORMAT_S16_BE:
@@ -476,6 +513,8 @@ static int cs42l51_hw_params(struct snd_pcm_substream *substream,
 		case SNDRV_PCM_FORMAT_S24_LE:
 		case SNDRV_PCM_FORMAT_S24_BE:
 =======
+=======
+>>>>>>> v3.18
 		switch (params_width(params)) {
 		case 16:
 			fmt = CS42L51_DAC_DIF_RJ16;
@@ -487,6 +526,9 @@ static int cs42l51_hw_params(struct snd_pcm_substream *substream,
 			fmt = CS42L51_DAC_DIF_RJ20;
 			break;
 		case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fmt = CS42L51_DAC_DIF_RJ24;
 			break;
@@ -558,6 +600,7 @@ static struct snd_soc_dai_driver cs42l51_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cs42l51_probe(struct snd_soc_codec *codec)
 {
 	struct cs42l51_private *cs42l51 = snd_soc_codec_get_drvdata(codec);
@@ -576,10 +619,15 @@ static int cs42l51_probe(struct snd_soc_codec *codec)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static int cs42l51_codec_probe(struct snd_soc_codec *codec)
 {
 	int ret, reg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * DAC configuration
@@ -599,9 +647,13 @@ static int cs42l51_codec_probe(struct snd_soc_codec *codec)
 
 static struct snd_soc_codec_driver soc_codec_device_cs42l51 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe = cs42l51_probe,
 	.reg_cache_size = CS42L51_NUMREGS + 1,
 	.reg_word_size = sizeof(u8),
+=======
+	.probe = cs42l51_codec_probe,
+>>>>>>> v3.18
 =======
 	.probe = cs42l51_codec_probe,
 >>>>>>> v3.18
@@ -614,6 +666,7 @@ static struct snd_soc_codec_driver soc_codec_device_cs42l51 = {
 	.num_dapm_routes = ARRAY_SIZE(cs42l51_routes),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cs42l51_i2c_probe(struct i2c_client *i2c_client,
 	const struct i2c_device_id *id)
@@ -650,6 +703,8 @@ static int cs42l51_i2c_probe(struct i2c_client *i2c_client,
 
 	ret =  snd_soc_register_codec(&i2c_client->dev,
 =======
+=======
+>>>>>>> v3.18
 const struct regmap_config cs42l51_regmap = {
 	.max_register = CS42L51_CHARGE_FREQ,
 	.cache_type = REGCACHE_RBTREE,
@@ -689,11 +744,15 @@ int cs42l51_probe(struct device *dev, struct regmap *regmap)
 		 val & CS42L51_CHIP_REV_MASK);
 
 	ret =  snd_soc_register_codec(dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			&soc_codec_device_cs42l51, &cs42l51_dai, 1);
 error:
 	return ret;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int cs42l51_i2c_remove(struct i2c_client *client)
@@ -720,6 +779,8 @@ static struct i2c_driver cs42l51_i2c_driver = {
 
 module_i2c_driver(cs42l51_i2c_driver);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(cs42l51_probe);
 
 const struct of_device_id cs42l51_of_match[] = {
@@ -728,6 +789,9 @@ const struct of_device_id cs42l51_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cs42l51_of_match);
 EXPORT_SYMBOL_GPL(cs42l51_of_match);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Arnaud Patard <arnaud.patard@rtp-net.org>");

@@ -20,8 +20,11 @@
 static struct option set_opts[] = {
 	{ .name = "perf-bias",	.has_arg = required_argument,	.flag = NULL,	.val = 'b'},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "sched-mc",	.has_arg = required_argument,	.flag = NULL,	.val = 'm'},
 	{ .name = "sched-smt",	.has_arg = required_argument,	.flag = NULL,	.val = 's'},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ },
@@ -42,8 +45,11 @@ int cmd_set(int argc, char **argv)
 	union {
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int sched_mc:1;
 			int sched_smt:1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			int perf_bias:1;
@@ -51,7 +57,11 @@ int cmd_set(int argc, char **argv)
 		int params;
 	} params;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sched_mc = 0, sched_smt = 0, perf_bias = 0;
+=======
+	int perf_bias = 0;
+>>>>>>> v3.18
 =======
 	int perf_bias = 0;
 >>>>>>> v3.18
@@ -63,7 +73,11 @@ int cmd_set(int argc, char **argv)
 	params.params = 0;
 	/* parameter parsing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((ret = getopt_long(argc, argv, "m:s:b:",
+=======
+	while ((ret = getopt_long(argc, argv, "b:",
+>>>>>>> v3.18
 =======
 	while ((ret = getopt_long(argc, argv, "b:",
 >>>>>>> v3.18
@@ -80,6 +94,7 @@ int cmd_set(int argc, char **argv)
 			}
 			params.perf_bias = 1;
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case 'm':
 			if (params.sched_mc)
@@ -105,6 +120,8 @@ int cmd_set(int argc, char **argv)
 			break;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		default:
 			print_wrong_arg_exit();
 		}
@@ -113,6 +130,7 @@ int cmd_set(int argc, char **argv)
 	if (!params.params)
 		print_wrong_arg_exit();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (params.sched_mc) {
 		ret = sysfs_set_sched("mc", sched_mc);
@@ -127,6 +145,8 @@ int cmd_set(int argc, char **argv)
 				(ret == -ENODEV) ? "not supported" : "");
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Default is: set all CPUs */

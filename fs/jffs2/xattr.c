@@ -23,6 +23,10 @@
 #include <linux/jffs2.h>
 #include <linux/xattr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/posix_acl_xattr.h>
+>>>>>>> v3.18
 =======
 #include <linux/posix_acl_xattr.h>
 >>>>>>> v3.18
@@ -760,8 +764,12 @@ void jffs2_clear_xattr_subsystem(struct jffs2_sb_info *c)
 		list_for_each_entry_safe(xd, _xd, &c->xattrindex[i], xindex) {
 			list_del(&xd->xindex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (xd->xname)
 				kfree(xd->xname);
+=======
+			kfree(xd->xname);
+>>>>>>> v3.18
 =======
 			kfree(xd->xname);
 >>>>>>> v3.18
@@ -930,8 +938,13 @@ const struct xattr_handler *jffs2_xattr_handlers[] = {
 #endif
 #ifdef CONFIG_JFFS2_FS_POSIX_ACL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&jffs2_acl_access_xattr_handler,
 	&jffs2_acl_default_xattr_handler,
+=======
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+>>>>>>> v3.18
 =======
 	&posix_acl_access_xattr_handler,
 	&posix_acl_default_xattr_handler,
@@ -956,15 +969,21 @@ static const struct xattr_handler *xprefix_to_handler(int xprefix) {
 #ifdef CONFIG_JFFS2_FS_POSIX_ACL
 	case JFFS2_XPREFIX_ACL_ACCESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = &jffs2_acl_access_xattr_handler;
 		break;
 	case JFFS2_XPREFIX_ACL_DEFAULT:
 		ret = &jffs2_acl_default_xattr_handler;
 =======
+=======
+>>>>>>> v3.18
 		ret = &posix_acl_access_xattr_handler;
 		break;
 	case JFFS2_XPREFIX_ACL_DEFAULT:
 		ret = &posix_acl_default_xattr_handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 #endif

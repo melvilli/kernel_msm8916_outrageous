@@ -49,9 +49,12 @@ extern unsigned int HPAGE_SHIFT;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We do define AT_SYSINFO_EHDR but don't use the gate mechanism */
 #define __HAVE_ARCH_GATE_AREA		1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -82,7 +85,11 @@ extern unsigned int HPAGE_SHIFT;
  * Also, KERNELBASE >= PAGE_OFFSET and PHYSICAL_START >= MEMORY_START
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * There are two was to determine a physical address from a virtual one:
+=======
+ * There are two ways to determine a physical address from a virtual one:
+>>>>>>> v3.18
 =======
  * There are two ways to determine a physical address from a virtual one:
 >>>>>>> v3.18
@@ -411,7 +418,11 @@ void arch_free_page(struct page *page, int order);
 struct vm_area_struct;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_64K_PAGES
+=======
+#if defined(CONFIG_PPC_64K_PAGES) && defined(CONFIG_PPC64)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_PPC_64K_PAGES) && defined(CONFIG_PPC64)
 >>>>>>> v3.18

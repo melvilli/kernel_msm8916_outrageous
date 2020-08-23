@@ -38,7 +38,11 @@ __visible struct {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void pnp_bios_callfunc(void);
+=======
+asmlinkage __visible void pnp_bios_callfunc(void);
+>>>>>>> v3.18
 =======
 asmlinkage __visible void pnp_bios_callfunc(void);
 >>>>>>> v3.18

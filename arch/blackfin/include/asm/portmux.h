@@ -18,8 +18,11 @@
 #define P_DONTCARE	0x1000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PINCTRL
 int bfin_internal_set_wake(unsigned int irq, unsigned int state);
 
@@ -31,22 +34,31 @@ int bfin_internal_set_wake(unsigned int irq, unsigned int state);
 #define peripheral_request_list(per, label) (0)
 #define peripheral_free_list(per)
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int peripheral_request(unsigned short per, const char *label);
 void peripheral_free(unsigned short per);
 int peripheral_request_list(const unsigned short per[], const char *label);
 void peripheral_free_list(const unsigned short per[]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/gpio.h>
 #include <mach/portmux.h>
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #include <linux/err.h>
 #include <linux/pinctrl/pinctrl.h>
 #include <mach/portmux.h>
 #include <mach/gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef P_SPORT2_TFS

@@ -1,18 +1,25 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/clock/tegra20-car.h>
 #include <dt-bindings/gpio/tegra-gpio.h>
 #include <dt-bindings/pinctrl/pinctrl-tegra.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 
 #include "skeleton.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
 	compatible = "nvidia,tegra20";
 	interrupt-parent = <&intc>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	aliases {
 		serial0 = &uarta;
@@ -29,6 +36,8 @@
 			      0 67 0x04>; /* mpcore general */
 		clocks = <&tegra_car 28>;
 =======
+=======
+>>>>>>> v3.18
 	host1x@50000000 {
 		compatible = "nvidia,tegra20-host1x", "simple-bus";
 		reg = <0x50000000 0x00024000>;
@@ -37,6 +46,9 @@
 		clocks = <&tegra_car TEGRA20_CLK_HOST1X>;
 		resets = <&tegra_car 28>;
 		reset-names = "host1x";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		#address-cells = <1>;
@@ -44,6 +56,7 @@
 
 		ranges = <0x54000000 0x54000000 0x04000000>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mpe {
 			compatible = "nvidia,tegra20-mpe";
@@ -85,6 +98,8 @@
 			reg = <0x54180000 0x00040000>;
 			clocks = <&tegra_car 24>;
 =======
+=======
+>>>>>>> v3.18
 		mpe@54040000 {
 			compatible = "nvidia,tegra20-mpe";
 			reg = <0x54040000 0x00040000>;
@@ -136,6 +151,9 @@
 			clocks = <&tegra_car TEGRA20_CLK_GR3D>;
 			resets = <&tegra_car 24>;
 			reset-names = "3d";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -143,10 +161,13 @@
 			compatible = "nvidia,tegra20-dc";
 			reg = <0x54200000 0x00040000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 73 0x04>;
 			clocks = <&tegra_car 27>, <&tegra_car 121>;
 			clock-names = "disp1", "parent";
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&tegra_car TEGRA20_CLK_DISP1>,
 				 <&tegra_car TEGRA20_CLK_PLL_P>;
@@ -155,6 +176,9 @@
 			reset-names = "dc";
 
 			nvidia,head = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			rgb {
@@ -166,10 +190,13 @@
 			compatible = "nvidia,tegra20-dc";
 			reg = <0x54240000 0x00040000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 74 0x04>;
 			clocks = <&tegra_car 26>, <&tegra_car 121>;
 			clock-names = "disp2", "parent";
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&tegra_car TEGRA20_CLK_DISP2>,
 				 <&tegra_car TEGRA20_CLK_PLL_P>;
@@ -178,6 +205,9 @@
 			reset-names = "dc";
 
 			nvidia,head = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			rgb {
@@ -185,6 +215,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hdmi {
 			compatible = "nvidia,tegra20-hdmi";
@@ -208,6 +239,8 @@
 			reg = <0x54300000 0x00040000>;
 			clocks = <&tegra_car 48>;
 =======
+=======
+>>>>>>> v3.18
 		hdmi@54280000 {
 			compatible = "nvidia,tegra20-hdmi";
 			reg = <0x54280000 0x00040000>;
@@ -234,6 +267,9 @@
 			clocks = <&tegra_car TEGRA20_CLK_DSI>;
 			resets = <&tegra_car 48>;
 			reset-names = "dsi";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "disabled";
 		};
@@ -243,18 +279,24 @@
 		compatible = "arm,cortex-a9-twd-timer";
 		reg = <0x50040600 0x20>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <1 13 0x304>;
 		clocks = <&tegra_car 132>;
 	};
 
 	intc: interrupt-controller {
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_PPI 13
 			(GIC_CPU_MASK_SIMPLE(2) | IRQ_TYPE_LEVEL_HIGH)>;
 		clocks = <&tegra_car TEGRA20_CLK_TWD>;
 	};
 
 	intc: interrupt-controller@50041000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "arm,cortex-a9-gic";
 		reg = <0x50041000 0x1000
@@ -264,7 +306,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache-controller {
+=======
+	cache-controller@50043000 {
+>>>>>>> v3.18
 =======
 	cache-controller@50043000 {
 >>>>>>> v3.18
@@ -279,6 +325,7 @@
 	timer@60005000 {
 		compatible = "nvidia,tegra20-timer";
 		reg = <0x60005000 0x60>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		interrupts = <0 0 0x04
 			      0 1 0x04
@@ -317,6 +364,8 @@
 
 	ahb {
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>,
@@ -362,11 +411,15 @@
 	};
 
 	ahb@6000c004 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "nvidia,tegra20-ahb";
 		reg = <0x6000c004 0x10c>; /* AHB Arbitration + Gizmo Controller */
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gpio: gpio {
 		compatible = "nvidia,tegra20-gpio";
@@ -379,6 +432,8 @@
 			      0 87 0x04
 			      0 89 0x04>;
 =======
+=======
+>>>>>>> v3.18
 	gpio: gpio@6000d000 {
 		compatible = "nvidia,tegra20-gpio";
 		reg = <0x6000d000 0x1000>;
@@ -389,6 +444,9 @@
 			     <GIC_SPI 55 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 89 IRQ_TYPE_LEVEL_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		#gpio-cells = <2>;
 		gpio-controller;
@@ -397,8 +455,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinmux: pinmux {
 =======
+=======
+>>>>>>> v3.18
 	apbmisc@70000800 {
 		compatible = "nvidia,tegra20-apbmisc";
 		reg = <0x70000800 0x64   /* Chip revision */
@@ -406,6 +467,9 @@
 	};
 
 	pinmux: pinmux@70000014 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "nvidia,tegra20-pinmux";
 		reg = <0x70000014 0x10   /* Tri-state registers */
@@ -415,7 +479,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	das {
+=======
+	das@70000c00 {
+>>>>>>> v3.18
 =======
 	das@70000c00 {
 >>>>>>> v3.18
@@ -424,6 +492,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_ac97: ac97 {
 		compatible = "nvidia,tegra20-ac97";
 		reg = <0x70002000 0x200>;
@@ -431,6 +500,8 @@
 		nvidia,dma-request-selector = <&apbdma 12>;
 		clocks = <&tegra_car 3>;
 =======
+=======
+>>>>>>> v3.18
 	tegra_ac97: ac97@70002000 {
 		compatible = "nvidia,tegra20-ac97";
 		reg = <0x70002000 0x200>;
@@ -440,6 +511,9 @@
 		reset-names = "ac97";
 		dmas = <&apbdma 12>, <&apbdma 12>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -448,16 +522,22 @@
 		compatible = "nvidia,tegra20-i2s";
 		reg = <0x70002800 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 13 0x04>;
 		nvidia,dma-request-selector = <&apbdma 2>;
 		clocks = <&tegra_car 11>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_I2S1>;
 		resets = <&tegra_car 11>;
 		reset-names = "i2s";
 		dmas = <&apbdma 2>, <&apbdma 2>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -466,16 +546,22 @@
 		compatible = "nvidia,tegra20-i2s";
 		reg = <0x70002a00 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 3 0x04>;
 		nvidia,dma-request-selector = <&apbdma 1>;
 		clocks = <&tegra_car 18>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_I2S2>;
 		resets = <&tegra_car 18>;
 		reset-names = "i2s";
 		dmas = <&apbdma 1>, <&apbdma 1>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -492,16 +578,22 @@
 		reg = <0x70006000 0x40>;
 		reg-shift = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 36 0x04>;
 		nvidia,dma-request-selector = <&apbdma 8>;
 		clocks = <&tegra_car 6>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_UARTA>;
 		resets = <&tegra_car 6>;
 		reset-names = "serial";
 		dmas = <&apbdma 8>, <&apbdma 8>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -511,16 +603,22 @@
 		reg = <0x70006040 0x40>;
 		reg-shift = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 37 0x04>;
 		nvidia,dma-request-selector = <&apbdma 9>;
 		clocks = <&tegra_car 96>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_UARTB>;
 		resets = <&tegra_car 7>;
 		reset-names = "serial";
 		dmas = <&apbdma 9>, <&apbdma 9>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -530,16 +628,22 @@
 		reg = <0x70006200 0x100>;
 		reg-shift = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 46 0x04>;
 		nvidia,dma-request-selector = <&apbdma 10>;
 		clocks = <&tegra_car 55>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_UARTC>;
 		resets = <&tegra_car 55>;
 		reset-names = "serial";
 		dmas = <&apbdma 10>, <&apbdma 10>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -549,16 +653,22 @@
 		reg = <0x70006300 0x100>;
 		reg-shift = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 90 0x04>;
 		nvidia,dma-request-selector = <&apbdma 19>;
 		clocks = <&tegra_car 65>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 90 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_UARTD>;
 		resets = <&tegra_car 65>;
 		reset-names = "serial";
 		dmas = <&apbdma 19>, <&apbdma 19>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -567,6 +677,7 @@
 		compatible = "nvidia,tegra20-uart";
 		reg = <0x70006400 0x100>;
 		reg-shift = <2>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		interrupts = <0 91 0x04>;
 		nvidia,dma-request-selector = <&apbdma 20>;
@@ -588,6 +699,8 @@
 		interrupts = <0 2 0x04>;
 		clocks = <&tegra_car 4>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_UARTE>;
 		resets = <&tegra_car 66>;
@@ -612,6 +725,9 @@
 		reg = <0x7000e000 0x100>;
 		interrupts = <GIC_SPI 2 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_RTC>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -619,12 +735,15 @@
 		compatible = "nvidia,tegra20-i2c";
 		reg = <0x7000c000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 38 0x04>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 12>, <&tegra_car 124>;
 		clock-names = "div-clk", "fast-clk";
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -635,6 +754,9 @@
 		reset-names = "i2c";
 		dmas = <&apbdma 21>, <&apbdma 21>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -643,12 +765,15 @@
 		compatible = "nvidia,tegra20-sflash";
 		reg = <0x7000c380 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 39 0x04>;
 		nvidia,dma-request-selector = <&apbdma 11>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 43>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -657,6 +782,9 @@
 		reset-names = "spi";
 		dmas = <&apbdma 11>, <&apbdma 11>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -665,12 +793,15 @@
 		compatible = "nvidia,tegra20-i2c";
 		reg = <0x7000c400 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 84 0x04>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 54>, <&tegra_car 124>;
 		clock-names = "div-clk", "fast-clk";
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -681,6 +812,9 @@
 		reset-names = "i2c";
 		dmas = <&apbdma 22>, <&apbdma 22>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -689,12 +823,15 @@
 		compatible = "nvidia,tegra20-i2c";
 		reg = <0x7000c500 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 92 0x04>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 67>, <&tegra_car 124>;
 		clock-names = "div-clk", "fast-clk";
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -705,6 +842,9 @@
 		reset-names = "i2c";
 		dmas = <&apbdma 23>, <&apbdma 23>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -713,12 +853,15 @@
 		compatible = "nvidia,tegra20-i2c-dvc";
 		reg = <0x7000d000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 53 0x04>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 47>, <&tegra_car 124>;
 		clock-names = "div-clk", "fast-clk";
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -729,6 +872,9 @@
 		reset-names = "i2c";
 		dmas = <&apbdma 24>, <&apbdma 24>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -737,12 +883,15 @@
 		compatible = "nvidia,tegra20-slink";
 		reg = <0x7000d400 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 59 0x04>;
 		nvidia,dma-request-selector = <&apbdma 15>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 41>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -751,6 +900,9 @@
 		reset-names = "spi";
 		dmas = <&apbdma 15>, <&apbdma 15>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -759,12 +911,15 @@
 		compatible = "nvidia,tegra20-slink";
 		reg = <0x7000d600 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 82 0x04>;
 		nvidia,dma-request-selector = <&apbdma 16>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 44>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 82 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -773,6 +928,9 @@
 		reset-names = "spi";
 		dmas = <&apbdma 16>, <&apbdma 16>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -781,12 +939,15 @@
 		compatible = "nvidia,tegra20-slink";
 		reg = <0x7000d800 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 83 0x04>;
 		nvidia,dma-request-selector = <&apbdma 17>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&tegra_car 46>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 83 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -795,6 +956,9 @@
 		reset-names = "spi";
 		dmas = <&apbdma 17>, <&apbdma 17>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -802,6 +966,7 @@
 	spi@7000da00 {
 		compatible = "nvidia,tegra20-slink";
 		reg = <0x7000da00 0x200>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		interrupts = <0 93 0x04>;
 		nvidia,dma-request-selector = <&apbdma 18>;
@@ -824,6 +989,8 @@
 		reg = <0x7000e400 0x400>;
 		clocks = <&tegra_car 110>, <&clk32k_in>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 93 IRQ_TYPE_LEVEL_HIGH>;
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -849,6 +1016,9 @@
 		compatible = "nvidia,tegra20-pmc";
 		reg = <0x7000e400 0x400>;
 		clocks = <&tegra_car TEGRA20_CLK_PCLK>, <&clk32k_in>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clock-names = "pclk", "clk32k_in";
 	};
@@ -858,15 +1028,21 @@
 		reg = <0x7000f000 0x024
 		       0x7000f03c 0x3c4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 77 0x04>;
 	};
 
 	iommu {
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 77 IRQ_TYPE_LEVEL_HIGH>;
 	};
 
 	iommu@7000f024 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "nvidia,tegra20-gart";
 		reg = <0x7000f024 0x00000018	/* controller registers */
@@ -881,6 +1057,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb@c5000000 {
 		compatible = "nvidia,tegra20-ehci", "usb-ehci";
 		reg = <0xc5000000 0x4000>;
@@ -889,6 +1066,8 @@
 		nvidia,has-legacy-mode;
 		clocks = <&tegra_car 22>;
 =======
+=======
+>>>>>>> v3.18
 	fuse@7000f800 {
 		compatible = "nvidia,tegra20-efuse";
 		reg = <0x7000F800 0x400>;
@@ -969,12 +1148,16 @@
 		clocks = <&tegra_car TEGRA20_CLK_USBD>;
 		resets = <&tegra_car 22>;
 		reset-names = "usb";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nvidia,needs-double-reset;
 		nvidia,phy = <&phy1>;
 		status = "disabled";
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	phy1: usb-phy@c5000400 {
 		compatible = "nvidia,tegra20-usb-phy";
@@ -984,6 +1167,8 @@
 		clocks = <&tegra_car 22>, <&tegra_car 127>;
 		clock-names = "phy", "pll_u";
 =======
+=======
+>>>>>>> v3.18
 	phy1: usb-phy@c5000000 {
 		compatible = "nvidia,tegra20-usb-phy";
 		reg = <0xc5000000 0x4000 0xc5000000 0x4000>;
@@ -1005,6 +1190,9 @@
 		nvidia,xcvr-lsrslew = <1>;
 		nvidia,has-utmi-pad-registers;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -1012,20 +1200,27 @@
 		compatible = "nvidia,tegra20-ehci", "usb-ehci";
 		reg = <0xc5004000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 21 0x04>;
 		phy_type = "ulpi";
 		clocks = <&tegra_car 58>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 21 IRQ_TYPE_LEVEL_HIGH>;
 		phy_type = "ulpi";
 		clocks = <&tegra_car TEGRA20_CLK_USB2>;
 		resets = <&tegra_car 58>;
 		reset-names = "usb";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nvidia,phy = <&phy2>;
 		status = "disabled";
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	phy2: usb-phy@c5004400 {
 		compatible = "nvidia,tegra20-usb-phy";
@@ -1034,6 +1229,8 @@
 		clocks = <&tegra_car 93>, <&tegra_car 127>;
 		clock-names = "phy", "pll_u";
 =======
+=======
+>>>>>>> v3.18
 	phy2: usb-phy@c5004000 {
 		compatible = "nvidia,tegra20-usb-phy";
 		reg = <0xc5004000 0x4000>;
@@ -1045,6 +1242,9 @@
 		resets = <&tegra_car 58>, <&tegra_car 22>;
 		reset-names = "usb", "utmi-pads";
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -1052,20 +1252,27 @@
 		compatible = "nvidia,tegra20-ehci", "usb-ehci";
 		reg = <0xc5008000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 97 0x04>;
 		phy_type = "utmi";
 		clocks = <&tegra_car 59>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
 		phy_type = "utmi";
 		clocks = <&tegra_car TEGRA20_CLK_USB3>;
 		resets = <&tegra_car 59>;
 		reset-names = "usb";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nvidia,phy = <&phy3>;
 		status = "disabled";
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	phy3: usb-phy@c5008400 {
 		compatible = "nvidia,tegra20-usb-phy";
@@ -1074,6 +1281,8 @@
 		clocks = <&tegra_car 22>, <&tegra_car 127>;
 		clock-names = "phy", "pll_u";
 =======
+=======
+>>>>>>> v3.18
 	phy3: usb-phy@c5008000 {
 		compatible = "nvidia,tegra20-usb-phy";
 		reg = <0xc5008000 0x4000 0xc5000000 0x4000>;
@@ -1093,6 +1302,9 @@
 		nvidia,xcvr-lsfslew = <2>;
 		nvidia,xcvr-lsrslew = <2>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -1100,13 +1312,19 @@
 		compatible = "nvidia,tegra20-sdhci";
 		reg = <0xc8000000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 14 0x04>;
 		clocks = <&tegra_car 14>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_SDMMC1>;
 		resets = <&tegra_car 14>;
 		reset-names = "sdhci";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -1115,13 +1333,19 @@
 		compatible = "nvidia,tegra20-sdhci";
 		reg = <0xc8000200 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 15 0x04>;
 		clocks = <&tegra_car 9>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_SDMMC2>;
 		resets = <&tegra_car 9>;
 		reset-names = "sdhci";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -1130,13 +1354,19 @@
 		compatible = "nvidia,tegra20-sdhci";
 		reg = <0xc8000400 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 19 0x04>;
 		clocks = <&tegra_car 69>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_SDMMC3>;
 		resets = <&tegra_car 69>;
 		reset-names = "sdhci";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -1145,13 +1375,19 @@
 		compatible = "nvidia,tegra20-sdhci";
 		reg = <0xc8000600 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 31 0x04>;
 		clocks = <&tegra_car 15>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA20_CLK_SDMMC4>;
 		resets = <&tegra_car 15>;
 		reset-names = "sdhci";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};
@@ -1176,8 +1412,13 @@
 	pmu {
 		compatible = "arm,cortex-a9-pmu";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 56 0x04
 			      0 57 0x04>;
+=======
+		interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>,
+			     <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 		interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;

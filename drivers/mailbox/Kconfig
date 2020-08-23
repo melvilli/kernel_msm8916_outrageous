@@ -17,7 +17,10 @@ config PL320_MBOX
 	  to use the PL320 IPCM support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config OMAP2PLUS_MBOX
 	tristate "OMAP2+ Mailbox framework support"
 	depends on ARCH_OMAP2PLUS
@@ -35,5 +38,8 @@ config OMAP_MBOX_KFIFO_SIZE
 	  Specify the default size of mailbox's kfifo buffers (bytes).
 	  This can also be changed at runtime (via the mbox_kfifo_size
 	  module parameter).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

@@ -15,7 +15,10 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -25,6 +28,11 @@
 #include <linux/dma-mapping.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/usb/musb.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/usb/musb.h>
 
@@ -65,6 +73,7 @@ struct platform_device jz4740_usb_ohci_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* UDC (USB gadget controller) */
 static struct resource jz4740_usb_gdt_resources[] = {
 	{
@@ -77,6 +86,8 @@ static struct resource jz4740_usb_gdt_resources[] = {
 		.end	= JZ4740_IRQ_UDC,
 		.flags	= IORESOURCE_IRQ,
 =======
+=======
+>>>>>>> v3.18
 /* USB Device Controller */
 struct platform_device jz4740_udc_xceiv_device = {
 	.name = "usb_phy_generic",
@@ -94,11 +105,15 @@ static struct resource jz4740_udc_resources[] = {
 		.end   = JZ4740_IRQ_UDC,
 		.flags = IORESOURCE_IRQ,
 		.name  = "mc",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
 
 struct platform_device jz4740_udc_device = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.name		= "jz-udc",
 	.id		= -1,
@@ -109,6 +124,8 @@ struct platform_device jz4740_udc_device = {
 	.num_resources	= ARRAY_SIZE(jz4740_usb_gdt_resources),
 	.resource	= jz4740_usb_gdt_resources,
 =======
+=======
+>>>>>>> v3.18
 	.name = "musb-jz4740",
 	.id   = -1,
 	.dev  = {
@@ -117,6 +134,9 @@ struct platform_device jz4740_udc_device = {
 	},
 	.num_resources = ARRAY_SIZE(jz4740_udc_resources),
 	.resource      = jz4740_udc_resources,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -369,7 +389,10 @@ struct platform_device jz4740_pwm_device = {
 	.id   = -1,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* DMA */
 static struct resource jz4740_dma_resources[] = {
@@ -391,4 +414,7 @@ struct platform_device jz4740_dma_device = {
 	.num_resources	= ARRAY_SIZE(jz4740_dma_resources),
 	.resource	= jz4740_dma_resources,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -6,7 +6,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* tbl has the following structure equivalent, but is C99 compliant:
  * struct {
  *	struct type##_replace repl;
@@ -15,6 +18,9 @@
  * } *tbl;
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define xt_alloc_initial_table(type, typ2) ({ \
 	unsigned int hook_mask = info->valid_hooks; \
@@ -22,6 +28,7 @@
 	unsigned int bytes = 0, hooknum = 0, i = 0; \
 	struct { \
 		struct type##_replace repl; \
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct type##_standard entries[nhooks]; \
 		struct type##_error term; \
@@ -35,6 +42,8 @@
 	tbl->repl.size = nhooks * sizeof(struct type##_standard) + \
 	                 sizeof(struct type##_error); \
 =======
+=======
+>>>>>>> v3.18
 		struct type##_standard entries[]; \
 	} *tbl; \
 	struct type##_error *term; \
@@ -50,6 +59,9 @@
 	tbl->repl.num_entries = nhooks + 1; \
 	tbl->repl.size = nhooks * sizeof(struct type##_standard) + \
 			 sizeof(struct type##_error); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (; hook_mask != 0; hook_mask >>= 1, ++hooknum) { \
 		if (!(hook_mask & 1)) \

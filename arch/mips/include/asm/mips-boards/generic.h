@@ -25,12 +25,15 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Reset register.
  */
 #define SOFTRES_REG	  0x1f000500
 #define GORESET		  0x42
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Revision register.
@@ -77,10 +80,13 @@
 extern int mips_revision_sconid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 extern struct boot_param_header __dtb_start;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PCI

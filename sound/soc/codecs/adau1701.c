@@ -14,11 +14,17 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/of_device.h>
 #include <linux/regmap.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sound/core.h>
 #include <sound/pcm.h>
@@ -28,6 +34,7 @@
 #include "sigmadsp.h"
 #include "adau1701.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ADAU1701_DSPCTRL	0x1c
 #define ADAU1701_SEROCTL	0x1e
@@ -40,6 +47,8 @@
 
 #define ADAU1701_NUM_REGS	0x28
 =======
+=======
+>>>>>>> v3.18
 #define ADAU1701_DSPCTRL	0x081c
 #define ADAU1701_SEROCTL	0x081e
 #define ADAU1701_SERICTL	0x081f
@@ -53,6 +62,9 @@
 #define ADAU1701_DACSET		0x0827
 
 #define ADAU1701_MAX_REGISTER	0x0828
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ADAU1701_DSPCTRL_CR		(1 << 2)
@@ -108,11 +120,14 @@
 #define ADAU1701_DACSET_DACINIT		1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADAU1701_FIRMWARE "adau1701.bin"
 
 struct adau1701 {
 	unsigned int dai_fmt;
 =======
+=======
+>>>>>>> v3.18
 #define ADAU1707_CLKDIV_UNSET		(-1U)
 
 #define ADAU1701_FIRMWARE "adau1701.bin"
@@ -125,6 +140,9 @@ struct adau1701 {
 	unsigned int sysclk;
 	struct regmap *regmap;
 	u8 pin_config[12];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -158,11 +176,14 @@ static const struct snd_soc_dapm_route adau1701_dapm_routes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int adau1701_register_size(struct snd_soc_codec *codec,
 		unsigned int reg)
 {
 	switch (reg) {
 =======
+=======
+>>>>>>> v3.18
 static unsigned int adau1701_register_size(struct device *dev,
 		unsigned int reg)
 {
@@ -170,6 +191,9 @@ static unsigned int adau1701_register_size(struct device *dev,
 	case ADAU1701_PINCONF_0:
 	case ADAU1701_PINCONF_1:
 		return 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ADAU1701_DSPCTRL:
 	case ADAU1701_SEROCTL:
@@ -181,6 +205,7 @@ static unsigned int adau1701_register_size(struct device *dev,
 		return 1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_err(codec->dev, "Unsupported register address: %d\n", reg);
 	return 0;
@@ -203,6 +228,8 @@ static int adau1701_write(struct snd_soc_codec *codec, unsigned int reg,
 	buf[0] = 0x08;
 	buf[1] = reg;
 =======
+=======
+>>>>>>> v3.18
 	dev_err(dev, "Unsupported register address: %d\n", reg);
 	return 0;
 }
@@ -232,6 +259,9 @@ static int adau1701_reg_write(void *context, unsigned int reg,
 
 	buf[0] = reg >> 8;
 	buf[1] = reg & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = size + 1; i >= 2; --i) {
@@ -240,7 +270,11 @@ static int adau1701_reg_write(void *context, unsigned int reg,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = i2c_master_send(to_i2c_client(codec->dev), buf, size + 2);
+=======
+	ret = i2c_master_send(client, buf, size + 2);
+>>>>>>> v3.18
 =======
 	ret = i2c_master_send(client, buf, size + 2);
 >>>>>>> v3.18
@@ -252,6 +286,7 @@ static int adau1701_reg_write(void *context, unsigned int reg,
 		return -EIO;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int adau1701_read(struct snd_soc_codec *codec, unsigned int reg)
 {
@@ -273,6 +308,8 @@ static int adau1701_load_firmware(struct snd_soc_codec *codec)
 static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 		snd_pcm_format_t format)
 =======
+=======
+>>>>>>> v3.18
 static int adau1701_reg_read(void *context, unsigned int reg,
 			     unsigned int *value)
 {
@@ -380,12 +417,16 @@ static int adau1701_reset(struct snd_soc_codec *codec, unsigned int clkdiv)
 
 static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 					   struct snd_pcm_hw_params *params)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
 	unsigned int mask = ADAU1701_SEROCTL_WORD_LEN_MASK;
 	unsigned int val;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (format) {
 	case SNDRV_PCM_FORMAT_S16_LE:
@@ -396,6 +437,8 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		val = ADAU1701_SEROCTL_WORD_LEN_16;
@@ -404,6 +447,9 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 		val = ADAU1701_SEROCTL_WORD_LEN_20;
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = ADAU1701_SEROCTL_WORD_LEN_24;
 		break;
@@ -412,6 +458,7 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 	}
 
 	if (adau1701->dai_fmt == SND_SOC_DAIFMT_RIGHT_J) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (format) {
 		case SNDRV_PCM_FORMAT_S16_LE:
@@ -422,6 +469,8 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 			break;
 		case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 		switch (params_width(params)) {
 		case 16:
 			val |= ADAU1701_SEROCTL_MSB_DEALY16;
@@ -430,6 +479,9 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 			val |= ADAU1701_SEROCTL_MSB_DEALY12;
 			break;
 		case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			val |= ADAU1701_SEROCTL_MSB_DEALY8;
 			break;
@@ -438,7 +490,11 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAU1701_SEROCTL, mask, val);
+=======
+	regmap_update_bits(adau1701->regmap, ADAU1701_SEROCTL, mask, val);
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adau1701->regmap, ADAU1701_SEROCTL, mask, val);
 >>>>>>> v3.18
@@ -448,7 +504,11 @@ static int adau1701_set_capture_pcm_format(struct snd_soc_codec *codec,
 
 static int adau1701_set_playback_pcm_format(struct snd_soc_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_pcm_format_t format)
+=======
+					    struct snd_pcm_hw_params *params)
+>>>>>>> v3.18
 =======
 					    struct snd_pcm_hw_params *params)
 >>>>>>> v3.18
@@ -460,6 +520,7 @@ static int adau1701_set_playback_pcm_format(struct snd_soc_codec *codec,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (format) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		val = ADAU1701_SERICTL_RIGHTJ_16;
@@ -469,6 +530,8 @@ static int adau1701_set_playback_pcm_format(struct snd_soc_codec *codec,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		val = ADAU1701_SERICTL_RIGHTJ_16;
@@ -477,6 +540,9 @@ static int adau1701_set_playback_pcm_format(struct snd_soc_codec *codec,
 		val = ADAU1701_SERICTL_RIGHTJ_20;
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = ADAU1701_SERICTL_RIGHTJ_24;
 		break;
@@ -485,7 +551,11 @@ static int adau1701_set_playback_pcm_format(struct snd_soc_codec *codec,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAU1701_SERICTL,
+=======
+	regmap_update_bits(adau1701->regmap, ADAU1701_SERICTL,
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adau1701->regmap, ADAU1701_SERICTL,
 >>>>>>> v3.18
@@ -499,9 +569,12 @@ static int adau1701_hw_params(struct snd_pcm_substream *substream,
 {
 	struct snd_soc_codec *codec = dai->codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_pcm_format_t format;
 	unsigned int val;
 =======
+=======
+>>>>>>> v3.18
 	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
 	unsigned int clkdiv = adau1701->sysclk / params_rate(params);
 	unsigned int val;
@@ -517,6 +590,9 @@ static int adau1701_hw_params(struct snd_pcm_substream *substream,
 		if (ret < 0)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (params_rate(params)) {
@@ -534,6 +610,7 @@ static int adau1701_hw_params(struct snd_pcm_substream *substream,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAU1701_DSPCTRL,
 		ADAU1701_DSPCTRL_SR_MASK, val);
 
@@ -543,6 +620,8 @@ static int adau1701_hw_params(struct snd_pcm_substream *substream,
 	else
 		return adau1701_set_capture_pcm_format(codec, format);
 =======
+=======
+>>>>>>> v3.18
 	regmap_update_bits(adau1701->regmap, ADAU1701_DSPCTRL,
 		ADAU1701_DSPCTRL_SR_MASK, val);
 
@@ -550,6 +629,9 @@ static int adau1701_hw_params(struct snd_pcm_substream *substream,
 		return adau1701_set_playback_pcm_format(codec, params);
 	else
 		return adau1701_set_capture_pcm_format(codec, params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -620,8 +702,13 @@ static int adau1701_set_dai_fmt(struct snd_soc_dai *codec_dai,
 	adau1701->dai_fmt = fmt & SND_SOC_DAIFMT_FORMAT_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_write(codec, ADAU1701_SERICTL, serictl);
 	snd_soc_update_bits(codec, ADAU1701_SEROCTL,
+=======
+	regmap_write(adau1701->regmap, ADAU1701_SERICTL, serictl);
+	regmap_update_bits(adau1701->regmap, ADAU1701_SEROCTL,
+>>>>>>> v3.18
 =======
 	regmap_write(adau1701->regmap, ADAU1701_SERICTL, serictl);
 	regmap_update_bits(adau1701->regmap, ADAU1701_SEROCTL,
@@ -636,6 +723,10 @@ static int adau1701_set_bias_level(struct snd_soc_codec *codec,
 {
 	unsigned int mask = ADAU1701_AUXNPOW_VBPD | ADAU1701_AUXNPOW_VRPD;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -648,12 +739,15 @@ static int adau1701_set_bias_level(struct snd_soc_codec *codec,
 	case SND_SOC_BIAS_STANDBY:
 		/* Enable VREF and VREF buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_update_bits(codec, ADAU1701_AUXNPOW, mask, 0x00);
 		break;
 	case SND_SOC_BIAS_OFF:
 		/* Disable VREF and VREF buffer */
 		snd_soc_update_bits(codec, ADAU1701_AUXNPOW, mask, mask);
 =======
+=======
+>>>>>>> v3.18
 		regmap_update_bits(adau1701->regmap,
 				   ADAU1701_AUXNPOW, mask, 0x00);
 		break;
@@ -661,6 +755,9 @@ static int adau1701_set_bias_level(struct snd_soc_codec *codec,
 		/* Disable VREF and VREF buffer */
 		regmap_update_bits(adau1701->regmap,
 				   ADAU1701_AUXNPOW, mask, mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -674,6 +771,10 @@ static int adau1701_digital_mute(struct snd_soc_dai *dai, int mute)
 	struct snd_soc_codec *codec = dai->codec;
 	unsigned int mask = ADAU1701_DSPCTRL_DAM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -685,7 +786,11 @@ static int adau1701_digital_mute(struct snd_soc_dai *dai, int mute)
 		val = mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAU1701_DSPCTRL, mask, val);
+=======
+	regmap_update_bits(adau1701->regmap, ADAU1701_DSPCTRL, mask, val);
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adau1701->regmap, ADAU1701_DSPCTRL, mask, val);
 >>>>>>> v3.18
@@ -698,6 +803,10 @@ static int adau1701_set_sysclk(struct snd_soc_codec *codec, int clk_id,
 {
 	unsigned int val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct adau1701 *adau1701 = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -714,7 +823,13 @@ static int adau1701_set_sysclk(struct snd_soc_codec *codec, int clk_id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAU1701_OSCIPOW, ADAU1701_OSCIPOW_OPD, val);
+=======
+	regmap_update_bits(adau1701->regmap, ADAU1701_OSCIPOW,
+			   ADAU1701_OSCIPOW_OPD, val);
+	adau1701->sysclk = freq;
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adau1701->regmap, ADAU1701_OSCIPOW,
 			   ADAU1701_OSCIPOW_OPD, val);
@@ -757,6 +872,7 @@ static struct snd_soc_dai_driver adau1701_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adau1701_probe(struct snd_soc_codec *codec)
 {
 	int ret;
@@ -770,6 +886,8 @@ static int adau1701_probe(struct snd_soc_codec *codec)
 	snd_soc_write(codec, ADAU1701_DACSET, ADAU1701_DACSET_DACINIT);
 	snd_soc_write(codec, ADAU1701_DSPCTRL, ADAU1701_DSPCTRL_CR);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id adau1701_dt_ids[] = {
 	{ .compatible = "adi,adau1701", },
@@ -809,6 +927,9 @@ static int adau1701_probe(struct snd_soc_codec *codec)
 		val |= adau1701->pin_config[i + 6] << (i * 4);
 
 	regmap_write(adau1701->regmap, ADAU1701_PINCONF_1, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -820,9 +941,12 @@ static struct snd_soc_codec_driver adau1701_codec_drv = {
 	.idle_bias_off		= true,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size		= ADAU1701_NUM_REGS,
 	.reg_word_size		= sizeof(u16),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.controls		= adau1701_controls,
@@ -833,6 +957,7 @@ static struct snd_soc_codec_driver adau1701_codec_drv = {
 	.num_dapm_routes	= ARRAY_SIZE(adau1701_dapm_routes),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write			= adau1701_write,
 	.read			= adau1701_read,
 
@@ -840,6 +965,8 @@ static struct snd_soc_codec_driver adau1701_codec_drv = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.set_sysclk		= adau1701_set_sysclk,
 };
 
@@ -853,11 +980,15 @@ static const struct regmap_config adau1701_regmap = {
 	.reg_read		= adau1701_reg_read,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int adau1701_i2c_probe(struct i2c_client *client,
 			      const struct i2c_device_id *id)
 {
 	struct adau1701 *adau1701;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -866,6 +997,8 @@ static int adau1701_i2c_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	int gpio_nreset = -EINVAL;
 	int gpio_pll_mode[2] = { -EINVAL, -EINVAL };
@@ -929,6 +1062,9 @@ static int adau1701_i2c_probe(struct i2c_client *client,
 	adau1701->gpio_pll_mode[0] = gpio_pll_mode[0];
 	adau1701->gpio_pll_mode[1] = gpio_pll_mode[1];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_clientdata(client, adau1701);
 	ret = snd_soc_register_codec(&client->dev, &adau1701_codec_drv,
@@ -944,12 +1080,18 @@ static int adau1701_i2c_remove(struct i2c_client *client)
 
 static const struct i2c_device_id adau1701_i2c_id[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "adau1701", 0 },
 =======
+=======
+>>>>>>> v3.18
 	{ "adau1401", 0 },
 	{ "adau1401a", 0 },
 	{ "adau1701", 0 },
 	{ "adau1702", 0 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -960,6 +1102,10 @@ static struct i2c_driver adau1701_i2c_driver = {
 		.name	= "adau1701",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table	= of_match_ptr(adau1701_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table	= of_match_ptr(adau1701_dt_ids),
 >>>>>>> v3.18

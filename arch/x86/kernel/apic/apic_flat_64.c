@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/ctype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/hardirq.h>
@@ -25,9 +28,13 @@
 #include <asm/ipi.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI
 #include <acpi/acpi_bus.h>
 #endif
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -179,7 +186,10 @@ static struct apic apic_flat =  {
 	.dest_logical			= APIC_DEST_LOGICAL,
 	.check_apicid_used		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.check_apicid_present		= NULL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -188,6 +198,7 @@ static struct apic apic_flat =  {
 
 	.ioapic_phys_id_map		= NULL,
 	.setup_apic_routing		= NULL,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
@@ -198,10 +209,15 @@ static struct apic apic_flat =  {
 	.phys_pkg_id			= flat_phys_pkg_id,
 	.mps_oem_check			= NULL,
 =======
+=======
+>>>>>>> v3.18
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
 	.check_phys_apicid_present	= default_check_phys_apicid_present,
 	.phys_pkg_id			= flat_phys_pkg_id,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.get_apic_id			= flat_get_apic_id,
@@ -217,10 +233,14 @@ static struct apic apic_flat =  {
 	.send_IPI_self			= apic_send_IPI_self,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 	.wait_for_init_deassert		= NULL,
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 =======
 	.wait_for_init_deassert		= false,
 >>>>>>> v3.18
@@ -308,7 +328,10 @@ static struct apic apic_physflat =  {
 	.dest_logical			= 0,
 	.check_apicid_used		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.check_apicid_present		= NULL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -319,6 +342,7 @@ static struct apic apic_physflat =  {
 	.ioapic_phys_id_map		= NULL,
 	.setup_apic_routing		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
@@ -328,10 +352,15 @@ static struct apic apic_physflat =  {
 	.phys_pkg_id			= flat_phys_pkg_id,
 	.mps_oem_check			= NULL,
 =======
+=======
+>>>>>>> v3.18
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
 	.check_phys_apicid_present	= default_check_phys_apicid_present,
 	.phys_pkg_id			= flat_phys_pkg_id,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.get_apic_id			= flat_get_apic_id,
@@ -347,10 +376,14 @@ static struct apic apic_physflat =  {
 	.send_IPI_self			= apic_send_IPI_self,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 	.wait_for_init_deassert		= NULL,
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 =======
 	.wait_for_init_deassert		= false,
 >>>>>>> v3.18

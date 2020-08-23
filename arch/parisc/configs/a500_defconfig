@@ -32,6 +32,10 @@ CONFIG_I82092=m
 # CONFIG_SUPERIO is not set
 # CONFIG_CHASSIS_LCD_LED is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NET=y
+>>>>>>> v3.18
 =======
 CONFIG_NET=y
 >>>>>>> v3.18
@@ -84,6 +88,11 @@ CONFIG_LLC2=m
 CONFIG_NET_PKTGEN=m
 CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_DEVTMPFS=y
+CONFIG_DEVTMPFS_MOUNT=y
+>>>>>>> v3.18
 =======
 CONFIG_DEVTMPFS=y
 CONFIG_DEVTMPFS_MOUNT=y

@@ -28,6 +28,7 @@
 #define IEEE802154_NETDEVICE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/af_ieee802154.h>
 
 /*
@@ -74,6 +75,8 @@ static inline int mac_cb_type(struct sk_buff *skb)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #include <net/ieee802154.h>
 #include <net/af_ieee802154.h>
 #include <linux/netdevice.h>
@@ -375,6 +378,9 @@ struct ieee802154_llsec_table {
 	struct list_head security_levels;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IEEE802154_MAC_SCAN_ED		0
 #define IEEE802154_MAC_SCAN_ACTIVE	1
@@ -382,8 +388,11 @@ struct ieee802154_llsec_table {
 #define IEEE802154_MAC_SCAN_ORPHAN	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct wpan_phy;
 =======
+=======
+>>>>>>> v3.18
 struct ieee802154_mac_params {
 	s8 transmit_power;
 	u8 min_be;
@@ -444,6 +453,9 @@ struct ieee802154_llsec_ops {
 			  struct ieee802154_llsec_table **t);
 	void (*unlock_table)(struct net_device *dev);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This should be located at net_device->ml_priv
@@ -460,7 +472,11 @@ struct ieee802154_mlme_ops {
 	int (*assoc_resp)(struct net_device *dev,
 			struct ieee802154_addr *addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u16 short_addr, u8 status);
+=======
+			__le16 short_addr, u8 status);
+>>>>>>> v3.18
 =======
 			__le16 short_addr, u8 status);
 >>>>>>> v3.18
@@ -475,7 +491,10 @@ struct ieee802154_mlme_ops {
 			u8 type, u32 channels, u8 page, u8 duration);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int (*set_mac_params)(struct net_device *dev,
 			      const struct ieee802154_mac_params *params);
 	void (*get_mac_params)(struct net_device *dev,
@@ -483,6 +502,9 @@ struct ieee802154_mlme_ops {
 
 	struct ieee802154_llsec_ops *llsec;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* The fields below are required. */
 
@@ -493,8 +515,13 @@ struct ieee802154_mlme_ops {
 	 * However we still don't have IB interface of any kind
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 (*get_pan_id)(const struct net_device *dev);
 	u16 (*get_short_addr)(const struct net_device *dev);
+=======
+	__le16 (*get_pan_id)(const struct net_device *dev);
+	__le16 (*get_short_addr)(const struct net_device *dev);
+>>>>>>> v3.18
 =======
 	__le16 (*get_pan_id)(const struct net_device *dev);
 	__le16 (*get_short_addr)(const struct net_device *dev);

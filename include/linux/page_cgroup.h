@@ -4,6 +4,7 @@
 enum {
 	/* flags for mem_cgroup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PCG_LOCK,  /* Lock for pc->mem_cgroup and following bits. */
 	PCG_USED, /* this object is in use. */
 	PCG_MIGRATION, /* under page migration */
@@ -16,6 +17,8 @@ enum {
 #ifdef CONFIG_MEMCG
 #include <linux/bit_spinlock.h>
 =======
+=======
+>>>>>>> v3.18
 	PCG_USED = 0x01,	/* This page is charged to a memcg */
 	PCG_MEM = 0x02,		/* This page holds a memory charge */
 	PCG_MEMSW = 0x04,	/* This page holds a memory+swap charge */
@@ -25,6 +28,9 @@ struct pglist_data;
 
 #ifdef CONFIG_MEMCG
 struct mem_cgroup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -40,6 +46,7 @@ struct page_cgroup {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __meminit pgdat_page_cgroup_init(struct pglist_data *pgdat);
 
 #ifdef CONFIG_SPARSEMEM
@@ -51,6 +58,8 @@ extern void __init page_cgroup_init(void);
 void __init page_cgroup_init_flatmem(void);
 static inline void __init page_cgroup_init(void)
 =======
+=======
+>>>>>>> v3.18
 extern void pgdat_page_cgroup_init(struct pglist_data *pgdat);
 
 #ifdef CONFIG_SPARSEMEM
@@ -61,12 +70,16 @@ extern void page_cgroup_init(void);
 #else
 extern void page_cgroup_init_flatmem(void);
 static inline void page_cgroup_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
 #endif
 
 struct page_cgroup *lookup_page_cgroup(struct page *page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct page *lookup_cgroup_page(struct page_cgroup *pc);
 
@@ -113,6 +126,8 @@ struct page_cgroup;
 
 static inline void __meminit pgdat_page_cgroup_init(struct pglist_data *pgdat)
 =======
+=======
+>>>>>>> v3.18
 
 static inline int PageCgroupUsed(struct page_cgroup *pc)
 {
@@ -122,6 +137,9 @@ static inline int PageCgroupUsed(struct page_cgroup *pc)
 struct page_cgroup;
 
 static inline void pgdat_page_cgroup_init(struct pglist_data *pgdat)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
@@ -136,10 +154,16 @@ static inline void page_cgroup_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __init page_cgroup_init_flatmem(void)
 {
 }
 
+=======
+static inline void page_cgroup_init_flatmem(void)
+{
+}
+>>>>>>> v3.18
 =======
 static inline void page_cgroup_init_flatmem(void)
 {
@@ -184,8 +208,11 @@ static inline void swap_cgroup_swapoff(int type)
 #endif /* CONFIG_MEMCG_SWAP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* !__GENERATING_BOUNDS_H */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __LINUX_PAGE_CGROUP_H */

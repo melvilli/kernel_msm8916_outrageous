@@ -39,7 +39,11 @@ struct rsc {
 	u32 msr:4;	/* The Master Sample Rate a resource working on */
 	void *ctrl_blk;	/* Chip specific control info block for a resource */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *hw;	/* Chip specific object for hardware access means */
+=======
+	struct hw *hw;	/* Chip specific object for hardware access means */
+>>>>>>> v3.18
 =======
 	struct hw *hw;	/* Chip specific object for hardware access means */
 >>>>>>> v3.18
@@ -55,7 +59,12 @@ struct rsc_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, void *hw);
+=======
+int
+rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw);
+>>>>>>> v3.18
 =======
 int
 rsc_init(struct rsc *rsc, u32 idx, enum RSCTYP type, u32 msr, struct hw *hw);
@@ -69,7 +78,11 @@ struct rsc_mgr {
 	unsigned char *rscs; /* The bit-map for resource allocation */
 	void *ctrl_blk; /* Chip specific control info block */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *hw; /* Chip specific object for hardware access */
+=======
+	struct hw *hw; /* Chip specific object for hardware access */
+>>>>>>> v3.18
 =======
 	struct hw *hw; /* Chip specific object for hardware access */
 >>>>>>> v3.18
@@ -78,7 +91,11 @@ struct rsc_mgr {
 /* Resource management is based on bit-map mechanism */
 int rsc_mgr_init(struct rsc_mgr *mgr, enum RSCTYP type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 unsigned int amount, void *hw);
+=======
+		 unsigned int amount, struct hw *hw);
+>>>>>>> v3.18
 =======
 		 unsigned int amount, struct hw *hw);
 >>>>>>> v3.18

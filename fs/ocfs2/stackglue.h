@@ -46,6 +46,12 @@ struct file_lock;
 #define GROUP_NAME_MAX		64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* This shadows  OCFS2_CLUSTER_NAME_LEN */
+#define CLUSTER_NAME_MAX	16
+
+>>>>>>> v3.18
 =======
 /* This shadows  OCFS2_CLUSTER_NAME_LEN */
 #define CLUSTER_NAME_MAX	16
@@ -104,13 +110,19 @@ struct ocfs2_locking_protocol {
  */
 struct ocfs2_cluster_connection {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char cc_name[GROUP_NAME_MAX];
 	int cc_namelen;
 =======
+=======
+>>>>>>> v3.18
 	char cc_name[GROUP_NAME_MAX + 1];
 	int cc_namelen;
 	char cc_cluster_name[CLUSTER_NAME_MAX + 1];
 	int cc_cluster_name_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ocfs2_protocol_version cc_version;
 	struct ocfs2_locking_protocol *cc_proto;
@@ -166,7 +178,12 @@ struct ocfs2_stack_operations {
 	 * local node.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*this_node)(unsigned int *node);
+=======
+	int (*this_node)(struct ocfs2_cluster_connection *conn,
+			 unsigned int *node);
+>>>>>>> v3.18
 =======
 	int (*this_node)(struct ocfs2_cluster_connection *conn,
 			 unsigned int *node);
@@ -258,6 +275,11 @@ struct ocfs2_stack_plugin {
 /* Used by the filesystem */
 int ocfs2_cluster_connect(const char *stack_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			  const char *cluster_name,
+			  int cluster_name_len,
+>>>>>>> v3.18
 =======
 			  const char *cluster_name,
 			  int cluster_name_len,
@@ -284,7 +306,12 @@ int ocfs2_cluster_disconnect(struct ocfs2_cluster_connection *conn,
 			     int hangup_pending);
 void ocfs2_cluster_hangup(const char *group, int grouplen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_cluster_this_node(unsigned int *node);
+=======
+int ocfs2_cluster_this_node(struct ocfs2_cluster_connection *conn,
+			    unsigned int *node);
+>>>>>>> v3.18
 =======
 int ocfs2_cluster_this_node(struct ocfs2_cluster_connection *conn,
 			    unsigned int *node);
@@ -318,9 +345,12 @@ int ocfs2_stack_glue_register(struct ocfs2_stack_plugin *plugin);
 void ocfs2_stack_glue_unregister(struct ocfs2_stack_plugin *plugin);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* In ocfs2_downconvert_lock(), we need to know which stack we are using */
 int ocfs2_is_o2cb_active(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif  /* STACKGLUE_H */

@@ -18,7 +18,10 @@
 #include <linux/vmalloc.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/relay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/unaligned.h>
@@ -31,7 +34,10 @@
 	ath9k_hw_common(_ah)->ops->read((_ah), (_reg))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ath9k_debug_sync_cause(struct ath_softc *sc, u32 sync_cause)
 {
 	if (sync_cause)
@@ -73,6 +79,9 @@ void ath9k_debug_sync_cause(struct ath_softc *sc, u32 sync_cause)
 	if (sync_cause & AR_INTR_SYNC_MAC_SLEEP_ACCESS)
 		sc->debug.stats.istats.mac_sleep_access++;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t ath9k_debugfs_read_buf(struct file *file, char __user *user_buf,
@@ -117,7 +126,11 @@ static ssize_t write_file_debug(struct file *file, const char __user *user_buf,
 
 	buf[len] = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &mask))
+=======
+	if (kstrtoul(buf, 0, &mask))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &mask))
 >>>>>>> v3.18
@@ -139,6 +152,7 @@ static const struct file_operations fops_debug = {
 
 #define DMA_BUF_LEN 1024
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_file_tx_chainmask(struct file *file, char __user *user_buf,
 			     size_t count, loff_t *ppos)
@@ -202,6 +216,8 @@ static ssize_t write_file_rx_chainmask(struct file *file, const char __user *use
 	struct ath_hw *ah = sc->sc_ah;
 	unsigned long mask;
 =======
+=======
+>>>>>>> v3.18
 
 static ssize_t read_file_ani(struct file *file, char __user *user_buf,
 			     size_t count, loff_t *ppos)
@@ -265,6 +281,9 @@ static ssize_t write_file_ani(struct file *file,
 	struct ath_softc *sc = file->private_data;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	unsigned long ani;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char buf[32];
 	ssize_t len;
@@ -274,6 +293,7 @@ static ssize_t write_file_ani(struct file *file,
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &mask))
 		return -EINVAL;
@@ -287,6 +307,8 @@ static const struct file_operations fops_rx_chainmask = {
 	.read = read_file_rx_chainmask,
 	.write = write_file_rx_chainmask,
 =======
+=======
+>>>>>>> v3.18
 	if (kstrtoul(buf, 0, &ani))
 		return -EINVAL;
 
@@ -308,6 +330,9 @@ static const struct file_operations fops_rx_chainmask = {
 static const struct file_operations fops_ani = {
 	.read = read_file_ani,
 	.write = write_file_ani,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
@@ -315,14 +340,20 @@ static const struct file_operations fops_ani = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t read_file_disable_ani(struct file *file, char __user *user_buf,
 			     size_t count, loff_t *ppos)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 
 static ssize_t read_file_bt_ant_diversity(struct file *file,
 					  char __user *user_buf,
 					  size_t count, loff_t *ppos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ath_softc *sc = file->private_data;
@@ -330,6 +361,7 @@ static ssize_t read_file_bt_ant_diversity(struct file *file,
 	char buf[32];
 	unsigned int len;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len = sprintf(buf, "%d\n", common->disable_ani);
 	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
@@ -343,6 +375,8 @@ static ssize_t write_file_disable_ani(struct file *file,
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	unsigned long disable_ani;
 =======
+=======
+>>>>>>> v3.18
 	len = sprintf(buf, "%d\n", common->bt_ant_diversity);
 	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
 }
@@ -355,6 +389,9 @@ static ssize_t write_file_bt_ant_diversity(struct file *file,
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	struct ath9k_hw_capabilities *pCap = &sc->sc_ah->caps;
 	unsigned long bt_ant_diversity;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char buf[32];
 	ssize_t len;
@@ -363,6 +400,7 @@ static ssize_t write_file_bt_ant_diversity(struct file *file,
 	if (copy_from_user(buf, user_buf, len))
 		return -EFAULT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buf[len] = '\0';
 	if (strict_strtoul(buf, 0, &disable_ani))
@@ -384,6 +422,8 @@ static const struct file_operations fops_disable_ani = {
 	.read = read_file_disable_ani,
 	.write = write_file_disable_ani,
 =======
+=======
+>>>>>>> v3.18
 	if (!(pCap->hw_caps & ATH9K_HW_CAP_BT_ANT_DIV))
 		goto exit;
 
@@ -404,12 +444,16 @@ exit:
 static const struct file_operations fops_bt_ant_diversity = {
 	.read = read_file_bt_ant_diversity,
 	.write = write_file_bt_ant_diversity,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_file_ant_diversity(struct file *file, char __user *user_buf,
 				       size_t count, loff_t *ppos)
@@ -458,6 +502,8 @@ static const struct file_operations fops_ant_diversity = {
 	.read = read_file_ant_diversity,
 	.write = write_file_ant_diversity,
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 void ath9k_debug_stat_ant(struct ath_softc *sc,
@@ -574,6 +620,9 @@ exit:
 
 static const struct file_operations fops_antenna_diversity = {
 	.read = read_file_antenna_diversity,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
@@ -604,6 +653,7 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 		    AR_MACMISC_MISC_OBS_BUS_MSB_S)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"Raw DMA Debug values:\n");
 
@@ -620,6 +670,8 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 	len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"Num QCU: chain_st fsp_ok fsp_st DCU: chain_st\n");
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, DMA_BUF_LEN - len,
 			 "Raw DMA Debug values:\n");
 
@@ -635,6 +687,9 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, DMA_BUF_LEN - len, "\n\n");
 	len += scnprintf(buf + len, DMA_BUF_LEN - len,
 			 "Num QCU: chain_st fsp_ok fsp_st DCU: chain_st\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ATH9K_NUM_QUEUES; i++, qcuOffset += 4, dcuOffset += 5) {
@@ -648,6 +703,7 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 			dcuBase++;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"%2d          %2x      %1x     %2x           %2x\n",
@@ -683,6 +739,8 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 	len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"AR_CR: 0x%x\n", REG_READ_D(ah, AR_CR));
 =======
+=======
+>>>>>>> v3.18
 		len += scnprintf(buf + len, DMA_BUF_LEN - len,
 			 "%2d          %2x      %1x     %2x           %2x\n",
 			 i, (*qcuBase & (0x7 << qcuOffset)) >> qcuOffset,
@@ -716,6 +774,9 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 			 REG_READ_D(ah, AR_OBS_BUS_1));
 	len += scnprintf(buf + len, DMA_BUF_LEN - len,
 			 "AR_CR: 0x%x\n", REG_READ_D(ah, AR_CR));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ath9k_ps_restore(sc);
@@ -803,9 +864,15 @@ static ssize_t read_file_interrupt(struct file *file, char __user *user_buf,
 #define PR_IS(a, s)						\
 	do {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len += snprintf(buf + len, mxlen - len,		\
 				"%21s: %10u\n", a,		\
 				sc->debug.stats.istats.s);	\
+=======
+		len += scnprintf(buf + len, mxlen - len,	\
+				 "%21s: %10u\n", a,		\
+				 sc->debug.stats.istats.s);	\
+>>>>>>> v3.18
 =======
 		len += scnprintf(buf + len, mxlen - len,	\
 				 "%21s: %10u\n", a,		\
@@ -842,8 +909,13 @@ static ssize_t read_file_interrupt(struct file *file, char __user *user_buf,
 	PR_IS("TOTAL", total);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, mxlen - len,
 			"SYNC_CAUSE stats:\n");
+=======
+	len += scnprintf(buf + len, mxlen - len,
+			 "SYNC_CAUSE stats:\n");
+>>>>>>> v3.18
 =======
 	len += scnprintf(buf + len, mxlen - len,
 			 "SYNC_CAUSE stats:\n");
@@ -932,7 +1004,10 @@ static ssize_t read_file_xmit(struct file *file, char __user *user_buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t print_queue(struct ath_softc *sc, struct ath_txq *txq,
 			   char *buf, ssize_t size)
 {
@@ -955,6 +1030,9 @@ static ssize_t print_queue(struct ath_softc *sc, struct ath_txq *txq,
 	return len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 				size_t count, loff_t *ppos)
@@ -963,11 +1041,14 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 	struct ath_txq *txq;
 	char *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int len = 0, size = 1024;
 	ssize_t retval = 0;
 	int i;
 	char *qname[4] = {"VO", "VI", "BE", "BK"};
 =======
+=======
+>>>>>>> v3.18
 	unsigned int len = 0;
 	const unsigned int size = 1024;
 	ssize_t retval = 0;
@@ -975,6 +1056,9 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 	static const char *qname[4] = {
 		"VO", "VI", "BE", "BK"
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	buf = kzalloc(size, GFP_KERNEL);
@@ -983,6 +1067,7 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 
 	for (i = 0; i < IEEE80211_NUM_ACS; i++) {
 		txq = sc->tx.txq_map[i];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		len += snprintf(buf + len, size - len, "(%s): ", qname[i]);
 
@@ -1003,6 +1088,8 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		len += scnprintf(buf + len, size - len, "(%s):  ", qname[i]);
 		len += print_queue(sc, txq, buf + len, size - len);
 	}
@@ -1010,6 +1097,9 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, size - len, "(CAB): ");
 	len += print_queue(sc, sc->beacon.cabq, buf + len, size - len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (len > size)
 		len = size;
@@ -1026,8 +1116,13 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 	struct ath_softc *sc = file->private_data;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_hw *hw = sc->hw;
 	struct ath9k_vif_iter_data iter_data;
+=======
+	struct ath9k_vif_iter_data iter_data;
+	struct ath_chanctx *ctx;
+>>>>>>> v3.18
 =======
 	struct ath9k_vif_iter_data iter_data;
 	struct ath_chanctx *ctx;
@@ -1036,6 +1131,7 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 	unsigned int len = 0;
 	ssize_t retval = 0;
 	unsigned int reg;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 rxfilter;
 
@@ -1046,6 +1142,8 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"OPMODE: %s\n", ath_opmode_to_string(sc->sc_ah->opmode));
 =======
+=======
+>>>>>>> v3.18
 	u32 rxfilter, i;
 
 	len += scnprintf(buf + len, sizeof(buf) - len,
@@ -1055,12 +1153,16 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "OPMODE: %s\n",
 			 ath_opmode_to_string(sc->sc_ah->opmode));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ath9k_ps_wakeup(sc);
 	rxfilter = ath9k_hw_getrxfilter(sc->sc_ah);
 	ath9k_ps_restore(sc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"RXFILTER: 0x%x", rxfilter);
@@ -1126,6 +1228,8 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 			iter_data.nwds, iter_data.nadhocs,
 			sc->nvifs, sc->nbcnvifs);
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "RXFILTER: 0x%x", rxfilter);
 
@@ -1196,6 +1300,9 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 			" ADHOC: %i TOTAL: %hi BEACON-VIF: %hi\n",
 			iter_data.nadhocs, sc->cur_chan->nvifs, sc->nbcnvifs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > sizeof(buf))
@@ -1212,6 +1319,7 @@ static ssize_t read_file_reset(struct file *file, char __user *user_buf,
 	char buf[512];
 	unsigned int len = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%17s: %2d\n", "Baseband Hang",
@@ -1235,6 +1343,8 @@ static ssize_t read_file_reset(struct file *file, char __user *user_buf,
 			"%17s: %2d\n", "MCI Reset",
 			sc->debug.stats.reset[RESET_TYPE_MCI]);
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%17s: %2d\n", "Baseband Hang",
 			 sc->debug.stats.reset[RESET_TYPE_BB_HANG]);
@@ -1262,6 +1372,9 @@ static ssize_t read_file_reset(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%17s: %2d\n", "MCI Reset",
 			 sc->debug.stats.reset[RESET_TYPE_MCI]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > sizeof(buf))
@@ -1275,8 +1388,11 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 		       unsigned int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TX_SAMP_DBG(c) (sc->debug.bb_mac_samp[sc->debug.sampidx].ts\
 			[sc->debug.tsidx].c)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int qnum = txq->axq_qnum;
@@ -1311,6 +1427,7 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 	if (ts->ts_flags & ATH9K_TX_DELIM_UNDERRUN)
 		TX_STAT_INC(qnum, delim_underrun);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_ATH9K_MAC_DEBUG
 	spin_lock(&sc->debug.samp_lock);
@@ -1344,6 +1461,8 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 #undef TX_SAMP_DBG
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct file_operations fops_xmit = {
@@ -1374,6 +1493,7 @@ static const struct file_operations fops_reset = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_file_recv(struct file *file, char __user *user_buf,
 			      size_t count, loff_t *ppos)
@@ -1544,6 +1664,29 @@ static ssize_t write_file_spec_scan_ctl(struct file *file,
 {
 	struct ath_softc *sc = file->private_data;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+=======
+void ath_debug_stat_rx(struct ath_softc *sc, struct ath_rx_status *rs)
+{
+	ath9k_cmn_debug_stat_rx(&sc->debug.stats.rxstats, rs);
+}
+
+static ssize_t read_file_regidx(struct file *file, char __user *user_buf,
+                                size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	char buf[32];
+	unsigned int len;
+
+	len = sprintf(buf, "0x%08x\n", sc->debug.regidx);
+	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
+}
+
+static ssize_t write_file_regidx(struct file *file, const char __user *user_buf,
+			     size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	unsigned long regidx;
+>>>>>>> v3.18
 	char buf[32];
 	ssize_t len;
 
@@ -1552,6 +1695,7 @@ static ssize_t write_file_spec_scan_ctl(struct file *file,
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 
 	if (strncmp("trigger", buf, 7) == 0) {
 		ath9k_spectral_scan_trigger(sc->hw);
@@ -1577,11 +1721,24 @@ static ssize_t write_file_spec_scan_ctl(struct file *file,
 static const struct file_operations fops_spec_scan_ctl = {
 	.read = read_file_spec_scan_ctl,
 	.write = write_file_spec_scan_ctl,
+=======
+	if (kstrtoul(buf, 0, &regidx))
+		return -EINVAL;
+
+	sc->debug.regidx = regidx;
+	return count;
+}
+
+static const struct file_operations fops_regidx = {
+	.read = read_file_regidx,
+	.write = write_file_regidx,
+>>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 static ssize_t read_file_spectral_short_repeat(struct file *file,
 					       char __user *user_buf,
 					       size_t count, loff_t *ppos)
@@ -1600,6 +1757,30 @@ static ssize_t write_file_spectral_short_repeat(struct file *file,
 {
 	struct ath_softc *sc = file->private_data;
 	unsigned long val;
+=======
+static ssize_t read_file_regval(struct file *file, char __user *user_buf,
+			     size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_hw *ah = sc->sc_ah;
+	char buf[32];
+	unsigned int len;
+	u32 regval;
+
+	ath9k_ps_wakeup(sc);
+	regval = REG_READ_D(ah, sc->debug.regidx);
+	ath9k_ps_restore(sc);
+	len = sprintf(buf, "0x%08x\n", regval);
+	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
+}
+
+static ssize_t write_file_regval(struct file *file, const char __user *user_buf,
+			     size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_hw *ah = sc->sc_ah;
+	unsigned long regval;
+>>>>>>> v3.18
 	char buf[32];
 	ssize_t len;
 
@@ -1608,6 +1789,7 @@ static ssize_t write_file_spectral_short_repeat(struct file *file,
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 	if (kstrtoul(buf, 0, &val))
 		return -EINVAL;
 
@@ -1621,11 +1803,26 @@ static ssize_t write_file_spectral_short_repeat(struct file *file,
 static const struct file_operations fops_spectral_short_repeat = {
 	.read = read_file_spectral_short_repeat,
 	.write = write_file_spectral_short_repeat,
+=======
+	if (kstrtoul(buf, 0, &regval))
+		return -EINVAL;
+
+	ath9k_ps_wakeup(sc);
+	REG_WRITE_D(ah, sc->debug.regidx, regval);
+	ath9k_ps_restore(sc);
+	return count;
+}
+
+static const struct file_operations fops_regval = {
+	.read = read_file_regval,
+	.write = write_file_regval,
+>>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 static ssize_t read_file_spectral_count(struct file *file,
 					char __user *user_buf,
 					size_t count, loff_t *ppos)
@@ -1901,6 +2098,11 @@ static const struct file_operations fops_regval = {
 #define REGDUMP_LINE_SIZE	20
 
 static int open_file_regdump(struct inode *inode, struct file *file)
+=======
+#define REGDUMP_LINE_SIZE	20
+
+static int open_file_regdump(struct inode *inode, struct file *file)
+>>>>>>> v3.18
 {
 	struct ath_softc *sc = inode->i_private;
 	unsigned int len = 0;
@@ -1940,7 +2142,11 @@ static ssize_t read_file_dump_nfcal(struct file *file, char __user *user_buf,
 	struct ath_softc *sc = file->private_data;
 	struct ath_hw *ah = sc->sc_ah;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath9k_nfcal_hist *h = sc->caldata.nfCalHist;
+=======
+	struct ath9k_nfcal_hist *h = sc->cur_chan->caldata.nfCalHist;
+>>>>>>> v3.18
 =======
 	struct ath9k_nfcal_hist *h = sc->cur_chan->caldata.nfCalHist;
 >>>>>>> v3.18
@@ -1958,15 +2164,21 @@ static ssize_t read_file_dump_nfcal(struct file *file, char __user *user_buf,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len,
 			"Channel Noise Floor : %d\n", ah->noise);
 	len += snprintf(buf + len, size - len,
 			"Chain | privNF | # Readings | NF Readings\n");
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, size - len,
 			 "Channel Noise Floor : %d\n", ah->noise);
 	len += scnprintf(buf + len, size - len,
 			 "Chain | privNF | # Readings | NF Readings\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < NUM_NF_READINGS; i++) {
 		if (!(chainmask & (1 << i)) ||
@@ -1975,6 +2187,7 @@ static ssize_t read_file_dump_nfcal(struct file *file, char __user *user_buf,
 
 		nread = AR_PHY_CCA_FILTERWINDOW_LENGTH - h[i].invalidNFcount;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len, " %d\t %d\t %d\t\t",
 				i, h[i].privNF, nread);
 		for (j = 0; j < nread; j++)
@@ -1982,12 +2195,17 @@ static ssize_t read_file_dump_nfcal(struct file *file, char __user *user_buf,
 					" %d", h[i].nfCalBuffer[j]);
 		len += snprintf(buf + len, size - len, "\n");
 =======
+=======
+>>>>>>> v3.18
 		len += scnprintf(buf + len, size - len, " %d\t %d\t %d\t\t",
 				 i, h[i].privNF, nread);
 		for (j = 0; j < nread; j++)
 			len += scnprintf(buf + len, size - len,
 					 " %d", h[i].nfCalBuffer[j]);
 		len += scnprintf(buf + len, size - len, "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2007,6 +2225,7 @@ static const struct file_operations fops_dump_nfcal = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_file_base_eeprom(struct file *file, char __user *user_buf,
 				     size_t count, loff_t *ppos)
@@ -2343,6 +2562,8 @@ static const struct file_operations fops_samps = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 static ssize_t read_file_btcoex(struct file *file, char __user *user_buf,
 				size_t count, loff_t *ppos)
@@ -2358,8 +2579,13 @@ static ssize_t read_file_btcoex(struct file *file, char __user *user_buf,
 
 	if (!sc->sc_ah->common.btcoex_enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = snprintf(buf, size, "%s\n",
 			       "BTCOEX is disabled");
+=======
+		len = scnprintf(buf, size, "%s\n",
+				"BTCOEX is disabled");
+>>>>>>> v3.18
 =======
 		len = scnprintf(buf, size, "%s\n",
 				"BTCOEX is disabled");
@@ -2383,6 +2609,7 @@ static const struct file_operations fops_btcoex = {
 };
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_file_node_stat(struct file *file, char __user *user_buf,
 				   size_t count, loff_t *ppos)
@@ -2451,6 +2678,8 @@ exit:
 static const struct file_operations fops_node_stat = {
 	.read = read_file_node_stat,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_DYNACK
 static ssize_t read_file_ackto(struct file *file, char __user *user_buf,
 			       size_t count, loff_t *ppos)
@@ -2468,11 +2697,15 @@ static ssize_t read_file_ackto(struct file *file, char __user *user_buf,
 
 static const struct file_operations fops_ackto = {
 	.read = read_file_ackto,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void ath9k_sta_add_debugfs(struct ieee80211_hw *hw,
@@ -2493,6 +2726,9 @@ void ath9k_sta_remove_debugfs(struct ieee80211_hw *hw,
 	struct ath_node *an = (struct ath_node *)sta->drv_priv;
 	debugfs_remove(an->node_stat);
 }
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -2621,10 +2857,14 @@ void ath9k_get_et_stats(struct ieee80211_hw *hw,
 void ath9k_deinit_debug(struct ath_softc *sc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (config_enabled(CONFIG_ATH9K_DEBUGFS) && sc->rfs_chan_spec_scan) {
 		relay_close(sc->rfs_chan_spec_scan);
 		sc->rfs_chan_spec_scan = NULL;
 	}
+=======
+	ath9k_spectral_deinit_debug(sc);
+>>>>>>> v3.18
 =======
 	ath9k_spectral_deinit_debug(sc);
 >>>>>>> v3.18
@@ -2647,6 +2887,11 @@ int ath9k_init_debug(struct ath_hw *ah)
 
 	ath9k_dfs_init_debug(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ath9k_tx99_init_debug(sc);
+	ath9k_spectral_init_debug(sc);
+>>>>>>> v3.18
 =======
 	ath9k_tx99_init_debug(sc);
 	ath9k_spectral_init_debug(sc);
@@ -2673,6 +2918,7 @@ int ath9k_init_debug(struct ath_hw *ah)
 	debugfs_create_file("reset", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_reset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debugfs_create_file("recv", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_recv);
 	debugfs_create_file("rx_chainmask", S_IRUSR | S_IWUSR,
@@ -2682,6 +2928,8 @@ int ath9k_init_debug(struct ath_hw *ah)
 	debugfs_create_file("disable_ani", S_IRUSR | S_IWUSR,
 			    sc->debug.debugfs_phy, sc, &fops_disable_ani);
 =======
+=======
+>>>>>>> v3.18
 
 	ath9k_cmn_debug_recv(sc->debug.debugfs_phy, &sc->debug.stats.rxstats);
 	ath9k_cmn_debug_phy_err(sc->debug.debugfs_phy, &sc->debug.stats.rxstats);
@@ -2692,6 +2940,9 @@ int ath9k_init_debug(struct ath_hw *ah)
 			  &ah->txchainmask);
 	debugfs_create_file("ani", S_IRUSR | S_IWUSR,
 			    sc->debug.debugfs_phy, sc, &fops_ani);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	debugfs_create_bool("paprd", S_IRUSR | S_IWUSR, sc->debug.debugfs_phy,
 			    &sc->sc_ah->config.enable_paprd);
@@ -2706,6 +2957,7 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    &fops_regdump);
 	debugfs_create_file("dump_nfcal", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_dump_nfcal);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	debugfs_create_file("base_eeprom", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_base_eeprom);
@@ -2734,15 +2986,21 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    &fops_samps);
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 	ath9k_cmn_debug_base_eeprom(sc->debug.debugfs_phy, sc->sc_ah);
 	ath9k_cmn_debug_modal_eeprom(sc->debug.debugfs_phy, sc->sc_ah);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	debugfs_create_u32("gpio_mask", S_IRUSR | S_IWUSR,
 			   sc->debug.debugfs_phy, &sc->sc_ah->gpio_mask);
 	debugfs_create_u32("gpio_val", S_IRUSR | S_IWUSR,
 			   sc->debug.debugfs_phy, &sc->sc_ah->gpio_val);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	debugfs_create_file("diversity", S_IRUSR | S_IWUSR,
 			    sc->debug.debugfs_phy, sc, &fops_ant_diversity);
@@ -2751,6 +3009,8 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    &fops_btcoex);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	debugfs_create_file("antenna_diversity", S_IRUSR,
 			    sc->debug.debugfs_phy, sc, &fops_antenna_diversity);
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
@@ -2765,6 +3025,9 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    sc, &fops_ackto);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

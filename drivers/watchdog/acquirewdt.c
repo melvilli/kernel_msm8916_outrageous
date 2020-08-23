@@ -61,8 +61,12 @@
 #include <linux/errno.h>		/* For the -ENODEV/... values */
 #include <linux/kernel.h>		/* For printk/panic/... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>		/* For MODULE_ALIAS_MISCDEV
 							(WATCHDOG_MINOR) */
+=======
+#include <linux/miscdevice.h>		/* For struct miscdevice */
+>>>>>>> v3.18
 =======
 #include <linux/miscdevice.h>		/* For struct miscdevice */
 >>>>>>> v3.18
@@ -245,7 +249,11 @@ static struct miscdevice acq_miscdev = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acq_probe(struct platform_device *dev)
+=======
+static int __init acq_probe(struct platform_device *dev)
+>>>>>>> v3.18
 =======
 static int __init acq_probe(struct platform_device *dev)
 >>>>>>> v3.18
@@ -301,7 +309,10 @@ static void acq_shutdown(struct platform_device *dev)
 
 static struct platform_driver acquirewdt_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe		= acq_probe,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.remove		= acq_remove,
@@ -319,6 +330,7 @@ static int __init acq_init(void)
 	pr_info("WDT driver for Acquire single board computer initialising\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = platform_driver_register(&acquirewdt_driver);
 	if (err)
 		return err;
@@ -334,6 +346,8 @@ static int __init acq_init(void)
 unreg_platform_driver:
 	platform_driver_unregister(&acquirewdt_driver);
 =======
+=======
+>>>>>>> v3.18
 	acq_platform_device = platform_device_register_simple(DRV_NAME,
 								-1, NULL, 0);
 	if (IS_ERR(acq_platform_device))
@@ -346,6 +360,9 @@ unreg_platform_driver:
 
 unreg_platform_device:
 	platform_device_unregister(acq_platform_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -364,6 +381,9 @@ MODULE_AUTHOR("David Woodhouse");
 MODULE_DESCRIPTION("Acquire Inc. Single Board Computer Watchdog Timer driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

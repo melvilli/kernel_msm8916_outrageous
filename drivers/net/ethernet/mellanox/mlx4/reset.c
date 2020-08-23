@@ -73,8 +73,12 @@ int mlx4_reset(struct mlx4_dev *dev)
 	if (!hca_header) {
 		err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't allocate memory to save HCA "
 			  "PCI header, aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't allocate memory to save HCA PCI header, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't allocate memory to save HCA PCI header, aborting\n");
 >>>>>>> v3.18
@@ -89,8 +93,12 @@ int mlx4_reset(struct mlx4_dev *dev)
 		if (pci_read_config_dword(dev->pdev, i * 4, hca_header + i)) {
 			err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Couldn't save HCA "
 				  "PCI header, aborting.\n");
+=======
+			mlx4_err(dev, "Couldn't save HCA PCI header, aborting\n");
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Couldn't save HCA PCI header, aborting\n");
 >>>>>>> v3.18
@@ -103,7 +111,11 @@ int mlx4_reset(struct mlx4_dev *dev)
 	if (!reset) {
 		err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't map HCA reset register, aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't map HCA reset register, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't map HCA reset register, aborting\n");
 >>>>>>> v3.18
@@ -146,8 +158,12 @@ int mlx4_reset(struct mlx4_dev *dev)
 	if (vendor == 0xffff) {
 		err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "PCI device did not come back after reset, "
 			  "aborting.\n");
+=======
+		mlx4_err(dev, "PCI device did not come back after reset, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "PCI device did not come back after reset, aborting\n");
 >>>>>>> v3.18
@@ -161,8 +177,12 @@ int mlx4_reset(struct mlx4_dev *dev)
 					       devctl)) {
 			err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Couldn't restore HCA PCI Express "
 				 "Device Control register, aborting.\n");
+=======
+			mlx4_err(dev, "Couldn't restore HCA PCI Express Device Control register, aborting\n");
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Couldn't restore HCA PCI Express Device Control register, aborting\n");
 >>>>>>> v3.18
@@ -173,8 +193,12 @@ int mlx4_reset(struct mlx4_dev *dev)
 					       linkctl)) {
 			err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Couldn't restore HCA PCI Express "
 				 "Link control register, aborting.\n");
+=======
+			mlx4_err(dev, "Couldn't restore HCA PCI Express Link control register, aborting\n");
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Couldn't restore HCA PCI Express Link control register, aborting\n");
 >>>>>>> v3.18
@@ -189,8 +213,13 @@ int mlx4_reset(struct mlx4_dev *dev)
 		if (pci_write_config_dword(dev->pdev, i * 4, hca_header[i])) {
 			err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Couldn't restore HCA reg %x, "
 				  "aborting.\n", i);
+=======
+			mlx4_err(dev, "Couldn't restore HCA reg %x, aborting\n",
+				 i);
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Couldn't restore HCA reg %x, aborting\n",
 				 i);
@@ -203,8 +232,12 @@ int mlx4_reset(struct mlx4_dev *dev)
 				   hca_header[PCI_COMMAND / 4])) {
 		err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't restore HCA COMMAND, "
 			  "aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't restore HCA COMMAND, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't restore HCA COMMAND, aborting\n");
 >>>>>>> v3.18

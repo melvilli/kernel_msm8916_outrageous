@@ -71,7 +71,11 @@ xattr_permission(struct inode *inode, const char *name, int mask)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return inode_permission2(ERR_PTR(-EOPNOTSUPP), inode, mask);
+=======
+	return inode_permission(inode, mask);
+>>>>>>> v3.18
 =======
 	return inode_permission(inode, mask);
 >>>>>>> v3.18
@@ -369,6 +373,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSCALL_DEFINE5(setxattr, const char __user *, pathname,
 		const char __user *, name, const void __user *, value,
 		size_t, size, int, flags)
@@ -377,12 +382,17 @@ SYSCALL_DEFINE5(setxattr, const char __user *, pathname,
 	int error;
 	unsigned int lookup_flags = LOOKUP_FOLLOW;
 =======
+=======
+>>>>>>> v3.18
 static int path_setxattr(const char __user *pathname,
 			 const char __user *name, const void __user *value,
 			 size_t size, int flags, unsigned int lookup_flags)
 {
 	struct path path;
 	int error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 retry:
 	error = user_path_at(AT_FDCWD, pathname, lookup_flags, &path);
@@ -402,7 +412,10 @@ retry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 SYSCALL_DEFINE5(setxattr, const char __user *, pathname,
 		const char __user *, name, const void __user *, value,
 		size_t, size, int, flags)
@@ -410,11 +423,15 @@ SYSCALL_DEFINE5(setxattr, const char __user *, pathname,
 	return path_setxattr(pathname, name, value, size, flags, LOOKUP_FOLLOW);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SYSCALL_DEFINE5(lsetxattr, const char __user *, pathname,
 		const char __user *, name, const void __user *, value,
 		size_t, size, int, flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct path path;
 	int error;
@@ -434,6 +451,9 @@ retry:
 		goto retry;
 	}
 	return error;
+=======
+	return path_setxattr(pathname, name, value, size, flags, 0);
+>>>>>>> v3.18
 =======
 	return path_setxattr(pathname, name, value, size, flags, 0);
 >>>>>>> v3.18
@@ -509,6 +529,7 @@ getxattr(struct dentry *d, const char __user *name, void __user *value,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSCALL_DEFINE4(getxattr, const char __user *, pathname,
 		const char __user *, name, void __user *, value, size_t, size)
 {
@@ -516,12 +537,17 @@ SYSCALL_DEFINE4(getxattr, const char __user *, pathname,
 	ssize_t error;
 	unsigned int lookup_flags = LOOKUP_FOLLOW;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t path_getxattr(const char __user *pathname,
 			     const char __user *name, void __user *value,
 			     size_t size, unsigned int lookup_flags)
 {
 	struct path path;
 	ssize_t error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 retry:
 	error = user_path_at(AT_FDCWD, pathname, lookup_flags, &path);
@@ -536,6 +562,7 @@ retry:
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL_DEFINE4(lgetxattr, const char __user *, pathname,
 		const char __user *, name, void __user *, value, size_t, size)
@@ -555,6 +582,8 @@ retry:
 	}
 	return error;
 =======
+=======
+>>>>>>> v3.18
 SYSCALL_DEFINE4(getxattr, const char __user *, pathname,
 		const char __user *, name, void __user *, value, size_t, size)
 {
@@ -565,6 +594,9 @@ SYSCALL_DEFINE4(lgetxattr, const char __user *, pathname,
 		const char __user *, name, void __user *, value, size_t, size)
 {
 	return path_getxattr(pathname, name, value, size, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -621,6 +653,7 @@ listxattr(struct dentry *d, char __user *list, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSCALL_DEFINE3(listxattr, const char __user *, pathname, char __user *, list,
 		size_t, size)
 {
@@ -628,11 +661,16 @@ SYSCALL_DEFINE3(listxattr, const char __user *, pathname, char __user *, list,
 	ssize_t error;
 	unsigned int lookup_flags = LOOKUP_FOLLOW;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t path_listxattr(const char __user *pathname, char __user *list,
 			      size_t size, unsigned int lookup_flags)
 {
 	struct path path;
 	ssize_t error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 retry:
 	error = user_path_at(AT_FDCWD, pathname, lookup_flags, &path);
@@ -647,6 +685,7 @@ retry:
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL_DEFINE3(llistxattr, const char __user *, pathname, char __user *, list,
 		size_t, size)
@@ -666,6 +705,8 @@ retry:
 	}
 	return error;
 =======
+=======
+>>>>>>> v3.18
 SYSCALL_DEFINE3(listxattr, const char __user *, pathname, char __user *, list,
 		size_t, size)
 {
@@ -676,6 +717,9 @@ SYSCALL_DEFINE3(llistxattr, const char __user *, pathname, char __user *, list,
 		size_t, size)
 {
 	return path_listxattr(pathname, list, size, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -711,6 +755,7 @@ removexattr(struct dentry *d, const char __user *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SYSCALL_DEFINE2(removexattr, const char __user *, pathname,
 		const char __user *, name)
 {
@@ -718,11 +763,16 @@ SYSCALL_DEFINE2(removexattr, const char __user *, pathname,
 	int error;
 	unsigned int lookup_flags = LOOKUP_FOLLOW;
 =======
+=======
+>>>>>>> v3.18
 static int path_removexattr(const char __user *pathname,
 			    const char __user *name, unsigned int lookup_flags)
 {
 	struct path path;
 	int error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 retry:
 	error = user_path_at(AT_FDCWD, pathname, lookup_flags, &path);
@@ -741,6 +791,7 @@ retry:
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 SYSCALL_DEFINE2(lremovexattr, const char __user *, pathname,
 		const char __user *, name)
@@ -764,6 +815,8 @@ retry:
 	}
 	return error;
 =======
+=======
+>>>>>>> v3.18
 SYSCALL_DEFINE2(removexattr, const char __user *, pathname,
 		const char __user *, name)
 {
@@ -774,6 +827,9 @@ SYSCALL_DEFINE2(lremovexattr, const char __user *, pathname,
 		const char __user *, name)
 {
 	return path_removexattr(pathname, name, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -935,7 +991,11 @@ struct simple_xattr *simple_xattr_alloc(const void *value, size_t size)
 	/* wrap around? */
 	len = sizeof(*new_xattr) + size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len <= sizeof(*new_xattr))
+=======
+	if (len < sizeof(*new_xattr))
+>>>>>>> v3.18
 =======
 	if (len < sizeof(*new_xattr))
 >>>>>>> v3.18

@@ -12,8 +12,12 @@
  *
  * You should have received a copy of the GNU General Public License along with
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place - Suite 330, Boston, MA 02111-1307 USA.
+=======
+ * this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -477,13 +481,19 @@ static int dcbnl_getapp(struct net_device *netdev, struct nlmsghdr *nlh,
 
 	if (netdev->dcbnl_ops->getapp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		up = netdev->dcbnl_ops->getapp(netdev, idtype, id);
 =======
+=======
+>>>>>>> v3.18
 		ret = netdev->dcbnl_ops->getapp(netdev, idtype, id);
 		if (ret < 0)
 			return ret;
 		else
 			up = ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		struct dcb_app app = {
@@ -552,6 +562,11 @@ static int dcbnl_setapp(struct net_device *netdev, struct nlmsghdr *nlh,
 	if (netdev->dcbnl_ops->setapp) {
 		ret = netdev->dcbnl_ops->setapp(netdev, idtype, id, up);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (ret < 0)
+			return ret;
+>>>>>>> v3.18
 =======
 		if (ret < 0)
 			return ret;
@@ -1093,7 +1108,11 @@ static int dcbnl_ieee_fill(struct sk_buff *skb, struct net_device *netdev)
 		return -EMSGSIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
+=======
+	spin_lock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1103,7 +1122,11 @@ static int dcbnl_ieee_fill(struct sk_buff *skb, struct net_device *netdev)
 					 &itr->app);
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				spin_unlock(&dcb_lock);
+=======
+				spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 				spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1118,7 +1141,11 @@ static int dcbnl_ieee_fill(struct sk_buff *skb, struct net_device *netdev)
 		dcbx = -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1259,7 +1286,11 @@ static int dcbnl_cee_fill(struct sk_buff *skb, struct net_device *netdev)
 
 	/* local app */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
+=======
+	spin_lock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1300,7 +1331,11 @@ static int dcbnl_cee_fill(struct sk_buff *skb, struct net_device *netdev)
 		dcbx = -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1359,7 +1394,11 @@ static int dcbnl_cee_fill(struct sk_buff *skb, struct net_device *netdev)
 
 dcb_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1731,6 +1770,7 @@ static int dcb_doit(struct sk_buff *skb, struct nlmsghdr *nlh)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev = dev_get_by_name(net, nla_data(tb[DCB_ATTR_IFNAME]));
 	if (!netdev)
 		return -ENODEV;
@@ -1747,6 +1787,8 @@ static int dcb_doit(struct sk_buff *skb, struct nlmsghdr *nlh)
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	netdev = __dev_get_by_name(net, nla_data(tb[DCB_ATTR_IFNAME]));
 	if (!netdev)
 		return -ENODEV;
@@ -1758,6 +1800,9 @@ static int dcb_doit(struct sk_buff *skb, struct nlmsghdr *nlh)
 				 nlh->nlmsg_flags, &reply_nlh);
 	if (!reply_skb)
 		return -ENOBUFS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = fn->cb(netdev, nlh, nlh->nlmsg_seq, tb, reply_skb);
@@ -1771,7 +1816,10 @@ static int dcb_doit(struct sk_buff *skb, struct nlmsghdr *nlh)
 	ret = rtnl_unicast(reply_skb, net, portid);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_put(netdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1821,15 +1869,21 @@ u8 dcb_getapp(struct net_device *dev, struct dcb_app *app)
 	u8 prio = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
 	if ((itr = dcb_app_lookup(app, dev->ifindex, 0)))
 		prio = itr->app.priority;
 	spin_unlock(&dcb_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&dcb_lock);
 	if ((itr = dcb_app_lookup(app, dev->ifindex, 0)))
 		prio = itr->app.priority;
 	spin_unlock_bh(&dcb_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return prio;
@@ -1842,7 +1896,11 @@ EXPORT_SYMBOL(dcb_getapp);
  * Priority 0 is an invalid priority in CEE spec. This routine
  * removes applications from the app list if the priority is
 <<<<<<< HEAD
+<<<<<<< HEAD
  * set to zero.
+=======
+ * set to zero. Priority is expected to be 8-bit 802.1p user priority bitmap
+>>>>>>> v3.18
 =======
  * set to zero. Priority is expected to be 8-bit 802.1p user priority bitmap
 >>>>>>> v3.18
@@ -1859,7 +1917,11 @@ int dcb_setapp(struct net_device *dev, struct dcb_app *new)
 		event.dcbx = dev->dcbnl_ops->getdcbx(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
+=======
+	spin_lock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1878,7 +1940,11 @@ int dcb_setapp(struct net_device *dev, struct dcb_app *new)
 		err = dcb_app_add(new, dev->ifindex);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1901,15 +1967,21 @@ u8 dcb_ieee_getapp_mask(struct net_device *dev, struct dcb_app *app)
 	u8 prio = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
 	if ((itr = dcb_app_lookup(app, dev->ifindex, 0)))
 		prio |= 1 << itr->app.priority;
 	spin_unlock(&dcb_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&dcb_lock);
 	if ((itr = dcb_app_lookup(app, dev->ifindex, 0)))
 		prio |= 1 << itr->app.priority;
 	spin_unlock_bh(&dcb_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return prio;
@@ -1922,7 +1994,12 @@ EXPORT_SYMBOL(dcb_ieee_getapp_mask);
  * This adds Application data to the list. Multiple application
  * entries may exists for the same selector and protocol as long
 <<<<<<< HEAD
+<<<<<<< HEAD
  * as the priorities are different.
+=======
+ * as the priorities are different. Priority is expected to be a
+ * 3-bit unsigned integer
+>>>>>>> v3.18
 =======
  * as the priorities are different. Priority is expected to be a
  * 3-bit unsigned integer
@@ -1939,7 +2016,11 @@ int dcb_ieee_setapp(struct net_device *dev, struct dcb_app *new)
 		event.dcbx = dev->dcbnl_ops->getdcbx(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
+=======
+	spin_lock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1952,7 +2033,11 @@ int dcb_ieee_setapp(struct net_device *dev, struct dcb_app *new)
 	err = dcb_app_add(new, dev->ifindex);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1979,7 +2064,11 @@ int dcb_ieee_delapp(struct net_device *dev, struct dcb_app *del)
 		event.dcbx = dev->dcbnl_ops->getdcbx(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
+=======
+	spin_lock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -1991,7 +2080,11 @@ int dcb_ieee_delapp(struct net_device *dev, struct dcb_app *del)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -2007,7 +2100,11 @@ static void dcb_flushapp(void)
 	struct dcb_app_type *tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&dcb_lock);
+=======
+	spin_lock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&dcb_lock);
 >>>>>>> v3.18
@@ -2016,7 +2113,11 @@ static void dcb_flushapp(void)
 		kfree(app);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&dcb_lock);
+=======
+	spin_unlock_bh(&dcb_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&dcb_lock);
 >>>>>>> v3.18

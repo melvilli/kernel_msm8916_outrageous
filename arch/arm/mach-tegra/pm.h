@@ -22,6 +22,7 @@
 #define _MACH_TEGRA_PM_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "pmc.h"
 
 extern unsigned long l2x0_saved_regs_addr;
@@ -32,6 +33,8 @@ void restore_cpu_arch_register(void);
 void tegra_clear_cpu_in_lp2(int phy_cpu_id);
 bool tegra_set_cpu_in_lp2(int phy_cpu_id);
 =======
+=======
+>>>>>>> v3.18
 struct tegra_lp1_iram {
 	void	*start_addr;
 	void	*end_addr;
@@ -47,12 +50,16 @@ void tegra30_sleep_core_init(void);
 
 void tegra_clear_cpu_in_lp2(void);
 bool tegra_set_cpu_in_lp2(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void tegra_idle_lp2_last(void);
 extern void (*tegra_tear_down_cpu)(void);
 
 #ifdef CONFIG_PM_SLEEP
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum tegra_suspend_mode tegra_pm_validate_suspend_mode(
 				enum tegra_suspend_mode mode);
@@ -63,6 +70,10 @@ static inline enum tegra_suspend_mode tegra_pm_validate_suspend_mode(
 {
 	return TEGRA_SUSPEND_NONE;
 }
+=======
+void tegra_init_suspend(void);
+#else
+>>>>>>> v3.18
 =======
 void tegra_init_suspend(void);
 #else

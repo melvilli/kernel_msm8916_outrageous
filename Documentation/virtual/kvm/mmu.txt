@@ -192,6 +192,7 @@ Shadow pages contain the following information:
     pdptrs) are now pointing at the page.  While this counter is nonzero, the
     page cannot be destroyed.  See role.invalid.
 <<<<<<< HEAD
+<<<<<<< HEAD
   multimapped:
     Whether there exist multiple sptes pointing at this page.
   parent_pte/parent_ptes:
@@ -199,12 +200,17 @@ Shadow pages contain the following information:
     this page's spt.  Otherwise, parent_ptes points at a data structure
     with a list of parent_ptes.
 =======
+=======
+>>>>>>> v3.18
   parent_ptes:
     The reverse mapping for the pte/ptes pointing at this page's spt. If
     parent_ptes bit 0 is zero, only one spte points at this pages and
     parent_ptes points at this single spte, otherwise, there exists multiple
     sptes pointing at this page and (parent_ptes & ~0x1) points at a data
     structure with a list of parent_ptes.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   unsync:
     If true, then the translations in this page may not match the guest's
@@ -220,7 +226,10 @@ Shadow pages contain the following information:
     pages that may be unsynchronized.  Used to quickly locate all unsychronized
     pages reachable from a given page.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   mmu_valid_gen:
     Generation number of the page.  It is compared with kvm->arch.mmu_valid_gen
     during hash table lookup, and used to skip invalidated shadow pages (see
@@ -239,6 +248,9 @@ Shadow pages contain the following information:
     since the last time the page table was actually used; if emulation
     is triggered too frequently on this page, KVM will unmap the page
     to avoid emulation in the future.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Reverse map
@@ -289,7 +301,10 @@ This is the most complicated event.  The cause of a page fault can be:
 Handling a page fault is performed as follows:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  - if the RSV bit of the error code is set, the page fault is caused by guest
    accessing MMIO and cached MMIO information is available.
    - walk shadow page table
@@ -300,23 +315,32 @@ Handling a page fault is performed as follows:
  - If both P bit and R/W bit of error code are set, this could possibly
    be handled as a "fast page fault" (fixed without taking the MMU lock).  See
    the description in Documentation/virtual/kvm/locking.txt.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  - if needed, walk the guest page tables to determine the guest translation
    (gva->gpa or ngpa->gpa)
    - if permissions are insufficient, reflect the fault back to the guest
  - determine the host page
 <<<<<<< HEAD
+<<<<<<< HEAD
    - if this is an mmio request, there is no host page; call the emulator
      to emulate the instruction instead
  - walk the shadow page table to find the spte for the translation,
    instantiating missing intermediate page tables as necessary
 =======
+=======
+>>>>>>> v3.18
    - if this is an mmio request, there is no host page; cache the info to
      vcpu->arch.mmio_gva, vcpu->arch.access and vcpu->arch.mmio_gfn
  - walk the shadow page table to find the spte for the translation,
    instantiating missing intermediate page tables as necessary
    - If this is an mmio request, cache the mmio info to the spte and set some
      reserved bit on the spte (see callers of kvm_mmu_set_mmio_spte_mask)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  - try to unsynchronize the page
    - if successful, we can let the guest continue and modify the gpte
@@ -404,7 +428,10 @@ a large spte.  The frames at the end of an unaligned memory slot have
 artificially inflated ->write_counts so they can never be instantiated.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Zapping all pages (page generation count)
 =========================================
 
@@ -464,6 +491,9 @@ spte.  If KVM is unlucky and creates an MMIO spte while the low bit is 1,
 the next access to the spte will always be a cache miss.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Further reading
 ===============

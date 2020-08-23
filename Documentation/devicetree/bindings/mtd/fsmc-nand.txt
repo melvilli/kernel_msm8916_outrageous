@@ -1,5 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 * FSMC NAND
+=======
+ST Microelectronics Flexible Static Memory Controller (FSMC)
+NAND Interface
+>>>>>>> v3.18
 =======
 ST Microelectronics Flexible Static Memory Controller (FSMC)
 NAND Interface
@@ -15,7 +20,10 @@ Optional properties:
   defaults to 1 byte
 - nand-skip-bbtscan: Indicates the the BBT scanning should be skipped
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - timings: array of 6 bytes for NAND timings. The meanings of these bytes
   are:
   byte 0 TCLR  : CLE to RE delay in number of AHB clock cycles, only 4 bits
@@ -36,6 +44,9 @@ Optional properties:
                  command is asserted. Zero means one cycle, 255 means 256
                  cycles.
 - bank: default NAND bank to use (0-3 are valid, 0 is the default).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -53,6 +64,11 @@ Example:
 		bank-width = <1>;
 		nand-skip-bbtscan;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		timings = /bits/ 8 <0 0 0 2 3 0>;
+		bank = <1>;
+>>>>>>> v3.18
 =======
 		timings = /bits/ 8 <0 0 0 2 3 0>;
 		bank = <1>;

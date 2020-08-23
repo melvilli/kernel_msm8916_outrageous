@@ -2,7 +2,11 @@
  *  pc87427.c - hardware monitoring driver for the
  *              National Semiconductor PC87427 Super-I/O chip
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2006, 2008, 2010  Jean Delvare <khali@linux-fr.org>
+=======
+ *  Copyright (C) 2006, 2008, 2010  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2006, 2008, 2010  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -988,7 +992,11 @@ static int pc87427_request_regions(struct platform_device *pdev,
 static void pc87427_init_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pc87427_sio_data *sio_data = dev->platform_data;
+=======
+	struct pc87427_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct pc87427_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -1084,7 +1092,11 @@ static void pc87427_remove_files(struct device *dev)
 static int pc87427_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pc87427_sio_data *sio_data = pdev->dev.platform_data;
+=======
+	struct pc87427_sio_data *sio_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pc87427_sio_data *sio_data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1094,10 +1106,15 @@ static int pc87427_probe(struct platform_device *pdev)
 	data = devm_kzalloc(&pdev->dev, sizeof(struct pc87427_data),
 			    GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		pr_err("Out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!data)
 		return -ENOMEM;
@@ -1365,7 +1382,11 @@ static void __exit pc87427_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

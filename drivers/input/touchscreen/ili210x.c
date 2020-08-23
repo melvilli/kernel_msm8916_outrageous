@@ -170,7 +170,11 @@ static ssize_t ili210x_calibrate(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(calibrate, S_IWUSR, NULL, ili210x_calibrate);
+=======
+static DEVICE_ATTR(calibrate, 0644, NULL, ili210x_calibrate);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(calibrate, 0644, NULL, ili210x_calibrate);
 >>>>>>> v3.18
@@ -189,7 +193,11 @@ static int ili210x_i2c_probe(struct i2c_client *client,
 {
 	struct device *dev = &client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct ili210x_platform_data *pdata = dev->platform_data;
+=======
+	const struct ili210x_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct ili210x_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18

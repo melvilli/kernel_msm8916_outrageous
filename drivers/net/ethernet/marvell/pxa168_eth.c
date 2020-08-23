@@ -20,6 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
@@ -47,6 +48,8 @@
 #include <asm/cacheflush.h>
 #include <linux/pxa168_eth.h>
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
@@ -74,6 +77,9 @@
 
 #include <asm/pgtable.h>
 #include <asm/cacheflush.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DRIVER_NAME	"pxa168-eth"
@@ -91,6 +97,11 @@
 #define PORT_STATUS		0x0418
 #define HTPR			0x0428
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAC_ADDR_LOW		0x0430
+#define MAC_ADDR_HIGH		0x0438
+>>>>>>> v3.18
 =======
 #define MAC_ADDR_LOW		0x0430
 #define MAC_ADDR_HIGH		0x0438
@@ -199,7 +210,11 @@
 #define PORT_SPEED_100		(1 << 0)
 #define FULL_DUPLEX		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FLOW_CONTROL_ENABLED	(1 << 2)
+=======
+#define FLOW_CONTROL_DISABLED	(1 << 2)
+>>>>>>> v3.18
 =======
 #define FLOW_CONTROL_DISABLED	(1 << 2)
 >>>>>>> v3.18
@@ -233,6 +248,10 @@ struct tx_desc {
 struct pxa168_eth_private {
 	int port_num;		/* User Ethernet port number    */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int phy_addr;
+>>>>>>> v3.18
 =======
 	int phy_addr;
 >>>>>>> v3.18
@@ -342,7 +361,11 @@ static void abort_dma(struct pxa168_eth_private *pep)
 
 	if (max_retries <= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s : DMA Stuck\n", __func__);
+=======
+		netdev_err(pep->dev, "%s : DMA Stuck\n", __func__);
+>>>>>>> v3.18
 =======
 		netdev_err(pep->dev, "%s : DMA Stuck\n", __func__);
 >>>>>>> v3.18
@@ -369,6 +392,7 @@ static void ethernet_phy_set_addr(struct pxa168_eth_private *pep, int phy_addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ethernet_phy_reset(struct pxa168_eth_private *pep)
 {
 	int data;
@@ -386,6 +410,8 @@ static void ethernet_phy_reset(struct pxa168_eth_private *pep)
 	} while (data >= 0 && data & BMCR_RESET);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void rxq_refill(struct net_device *dev)
@@ -408,7 +434,11 @@ static void rxq_refill(struct net_device *dev)
 		used_rx_desc = pep->rx_used_desc_q;
 		p_used_rx_desc = &pep->p_rx_desc_area[used_rx_desc];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size = skb->end - skb->data;
+=======
+		size = skb_end_pointer(skb) - skb->data;
+>>>>>>> v3.18
 =======
 		size = skb_end_pointer(skb) - skb->data;
 >>>>>>> v3.18
@@ -581,14 +611,20 @@ static int add_del_hash_entry(struct pxa168_eth_private *pep,
 	if (i == HOP_NUMBER) {
 		if (!del) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "%s: table section is full, need to "
 					"move to 16kB implementation?\n",
 					 __FILE__);
 =======
+=======
+>>>>>>> v3.18
 			netdev_info(pep->dev,
 				    "%s: table section is full, need to "
 				    "move to 16kB implementation?\n",
 				    __FILE__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENOSPC;
 		} else
@@ -645,10 +681,16 @@ static int init_hash_table(struct pxa168_eth_private *pep)
 	 */
 	if (pep->htpr == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pep->htpr = dma_alloc_coherent(pep->dev->dev.parent,
 					       HASH_ADDR_TABLE_SIZE,
 					       &pep->htpr_dma,
 					       GFP_KERNEL | __GFP_ZERO);
+=======
+		pep->htpr = dma_zalloc_coherent(pep->dev->dev.parent,
+						HASH_ADDR_TABLE_SIZE,
+						&pep->htpr_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		pep->htpr = dma_zalloc_coherent(pep->dev->dev.parent,
 						HASH_ADDR_TABLE_SIZE,
@@ -688,7 +730,10 @@ static void pxa168_eth_set_rx_mode(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void pxa168_eth_get_mac_address(struct net_device *dev,
 				       unsigned char *addr)
 {
@@ -704,6 +749,9 @@ static void pxa168_eth_get_mac_address(struct net_device *dev,
 	addr[5] = mac_l & 0xff;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pxa168_eth_set_mac_address(struct net_device *dev, void *addr)
 {
@@ -711,6 +759,10 @@ static int pxa168_eth_set_mac_address(struct net_device *dev, void *addr)
 	struct pxa168_eth_private *pep = netdev_priv(dev);
 	unsigned char oldMac[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 mac_h, mac_l;
+>>>>>>> v3.18
 =======
 	u32 mac_h, mac_l;
 >>>>>>> v3.18
@@ -720,7 +772,10 @@ static int pxa168_eth_set_mac_address(struct net_device *dev, void *addr)
 	memcpy(oldMac, dev->dev_addr, ETH_ALEN);
 	memcpy(dev->dev_addr, sa->sa_data, ETH_ALEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	mac_h = dev->dev_addr[0] << 24;
 	mac_h |= dev->dev_addr[1] << 16;
@@ -731,6 +786,9 @@ static int pxa168_eth_set_mac_address(struct net_device *dev, void *addr)
 	wrl(pep, MAC_ADDR_HIGH, mac_h);
 	wrl(pep, MAC_ADDR_LOW, mac_l);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	netif_addr_lock_bh(dev);
 	update_hash_table_mac_address(pep, oldMac, dev->dev_addr);
@@ -750,7 +808,11 @@ static void eth_port_start(struct net_device *dev)
 
 		pxa168_get_settings(pep->dev, &cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethernet_phy_reset(pep);
+=======
+		phy_init_hw(pep->phy);
+>>>>>>> v3.18
 =======
 		phy_init_hw(pep->phy);
 >>>>>>> v3.18
@@ -853,7 +915,11 @@ static int txq_reclaim(struct net_device *dev, int force)
 		if (cmd_sts & TX_ERROR) {
 			if (net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "%s: Error in TX\n", dev->name);
+=======
+				netdev_err(dev, "Error in TX\n");
+>>>>>>> v3.18
 =======
 				netdev_err(dev, "Error in TX\n");
 >>>>>>> v3.18
@@ -874,8 +940,12 @@ static void pxa168_eth_tx_timeout(struct net_device *dev)
 	struct pxa168_eth_private *pep = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "%s: TX timeout  desc_count %d\n",
 	       dev->name, pep->tx_desc_count);
+=======
+	netdev_info(dev, "TX timeout  desc_count %d\n", pep->tx_desc_count);
+>>>>>>> v3.18
 =======
 	netdev_info(dev, "TX timeout  desc_count %d\n", pep->tx_desc_count);
 >>>>>>> v3.18
@@ -949,9 +1019,14 @@ static int rxq_process(struct net_device *dev, int budget)
 			    (RX_FIRST_DESC | RX_LAST_DESC)) {
 				if (net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(KERN_ERR
 					       "%s: Rx pkt on multiple desc\n",
 					       dev->name);
+=======
+					netdev_err(dev,
+						   "Rx pkt on multiple desc\n");
+>>>>>>> v3.18
 =======
 					netdev_err(dev,
 						   "Rx pkt on multiple desc\n");
@@ -1011,7 +1086,11 @@ static void handle_link_event(struct pxa168_eth_private *pep)
 	if (!(port_status & LINK_UP)) {
 		if (netif_carrier_ok(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "%s: link down\n", dev->name);
+=======
+			netdev_info(dev, "link down\n");
+>>>>>>> v3.18
 =======
 			netdev_info(dev, "link down\n");
 >>>>>>> v3.18
@@ -1027,10 +1106,16 @@ static void handle_link_event(struct pxa168_eth_private *pep)
 
 	duplex = (port_status & FULL_DUPLEX) ? 1 : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fc = (port_status & FLOW_CONTROL_ENABLED) ? 1 : 0;
 	printk(KERN_INFO "%s: link up, %d Mb/s, %s duplex, "
 	       "flow control %sabled\n", dev->name,
 	       speed, duplex ? "full" : "half", fc ? "en" : "dis");
+=======
+	fc = (port_status & FLOW_CONTROL_DISABLED) ? 0 : 1;
+	netdev_info(dev, "link up, %d Mb/s, %s duplex, flow control %sabled\n",
+		    speed, duplex ? "full" : "half", fc ? "en" : "dis");
+>>>>>>> v3.18
 =======
 	fc = (port_status & FLOW_CONTROL_DISABLED) ? 0 : 1;
 	netdev_info(dev, "link up, %d Mb/s, %s duplex, flow control %sabled\n",
@@ -1154,9 +1239,15 @@ static int rxq_init(struct net_device *dev)
 	size = pep->rx_ring_size * sizeof(struct rx_desc);
 	pep->rx_desc_area_size = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pep->p_rx_desc_area = dma_alloc_coherent(pep->dev->dev.parent, size,
 						 &pep->rx_desc_dma,
 						 GFP_KERNEL | __GFP_ZERO);
+=======
+	pep->p_rx_desc_area = dma_zalloc_coherent(pep->dev->dev.parent, size,
+						  &pep->rx_desc_dma,
+						  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pep->p_rx_desc_area = dma_zalloc_coherent(pep->dev->dev.parent, size,
 						  &pep->rx_desc_dma,
@@ -1195,9 +1286,14 @@ static void rxq_deinit(struct net_device *dev)
 	}
 	if (pep->rx_desc_count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "Error in freeing Rx Ring. %d skb's still\n",
 		       pep->rx_desc_count);
+=======
+		netdev_err(dev, "Error in freeing Rx Ring. %d skb's still\n",
+			   pep->rx_desc_count);
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "Error in freeing Rx Ring. %d skb's still\n",
 			   pep->rx_desc_count);
@@ -1226,9 +1322,15 @@ static int txq_init(struct net_device *dev)
 	size = pep->tx_ring_size * sizeof(struct tx_desc);
 	pep->tx_desc_area_size = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pep->p_tx_desc_area = dma_alloc_coherent(pep->dev->dev.parent, size,
 						 &pep->tx_desc_dma,
 						 GFP_KERNEL | __GFP_ZERO);
+=======
+	pep->p_tx_desc_area = dma_zalloc_coherent(pep->dev->dev.parent, size,
+						  &pep->tx_desc_dma,
+						  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pep->p_tx_desc_area = dma_zalloc_coherent(pep->dev->dev.parent, size,
 						  &pep->tx_desc_dma,
@@ -1271,8 +1373,12 @@ static int pxa168_eth_open(struct net_device *dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_irq(dev->irq, pxa168_eth_int_handler,
 			  IRQF_DISABLED, dev->name, dev);
+=======
+	err = request_irq(dev->irq, pxa168_eth_int_handler, 0, dev->name, dev);
+>>>>>>> v3.18
 =======
 	err = request_irq(dev->irq, pxa168_eth_int_handler, 0, dev->name, dev);
 >>>>>>> v3.18
@@ -1452,7 +1558,11 @@ static int pxa168_smi_read(struct mii_bus *bus, int phy_addr, int regnum)
 
 	if (smi_wait_ready(pep)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "pxa168_eth: SMI bus busy timeout\n");
+=======
+		netdev_warn(pep->dev, "pxa168_eth: SMI bus busy timeout\n");
+>>>>>>> v3.18
 =======
 		netdev_warn(pep->dev, "pxa168_eth: SMI bus busy timeout\n");
 >>>>>>> v3.18
@@ -1463,8 +1573,13 @@ static int pxa168_smi_read(struct mii_bus *bus, int phy_addr, int regnum)
 	for (i = 0; !((val = rdl(pep, SMI)) & SMI_R_VALID); i++) {
 		if (i == PHY_WAIT_ITERATIONS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 				"pxa168_eth: SMI bus read not valid\n");
+=======
+			netdev_warn(pep->dev,
+				    "pxa168_eth: SMI bus read not valid\n");
+>>>>>>> v3.18
 =======
 			netdev_warn(pep->dev,
 				    "pxa168_eth: SMI bus read not valid\n");
@@ -1484,7 +1599,11 @@ static int pxa168_smi_write(struct mii_bus *bus, int phy_addr, int regnum,
 
 	if (smi_wait_ready(pep)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "pxa168_eth: SMI bus busy timeout\n");
+=======
+		netdev_warn(pep->dev, "pxa168_eth: SMI bus busy timeout\n");
+>>>>>>> v3.18
 =======
 		netdev_warn(pep->dev, "pxa168_eth: SMI bus busy timeout\n");
 >>>>>>> v3.18
@@ -1496,7 +1615,11 @@ static int pxa168_smi_write(struct mii_bus *bus, int phy_addr, int regnum,
 
 	if (smi_wait_ready(pep)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "pxa168_eth: SMI bus busy timeout\n");
+=======
+		netdev_err(pep->dev, "pxa168_eth: SMI bus busy timeout\n");
+>>>>>>> v3.18
 =======
 		netdev_err(pep->dev, "pxa168_eth: SMI bus busy timeout\n");
 >>>>>>> v3.18
@@ -1550,6 +1673,7 @@ static struct phy_device *phy_scan(struct pxa168_eth_private *pep, int phy_addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void phy_init(struct pxa168_eth_private *pep, int speed, int duplex)
 {
 	struct phy_device *phy = pep->phy;
@@ -1559,6 +1683,8 @@ static void phy_init(struct pxa168_eth_private *pep, int speed, int duplex)
 
 	if (speed == 0) {
 =======
+=======
+>>>>>>> v3.18
 static void phy_init(struct pxa168_eth_private *pep)
 {
 	struct phy_device *phy = pep->phy;
@@ -1571,6 +1697,9 @@ static void phy_init(struct pxa168_eth_private *pep)
 		phy->speed = pep->pd->speed;
 		phy->duplex = pep->pd->duplex;
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		phy->autoneg = AUTONEG_ENABLE;
 		phy->speed = 0;
@@ -1578,12 +1707,17 @@ static void phy_init(struct pxa168_eth_private *pep)
 		phy->supported &= PHY_BASIC_FEATURES;
 		phy->advertising = phy->supported | ADVERTISED_Autoneg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		phy->autoneg = AUTONEG_DISABLE;
 		phy->advertising = 0;
 		phy->speed = speed;
 		phy->duplex = duplex;
 	}
+=======
+	}
+
+>>>>>>> v3.18
 =======
 	}
 
@@ -1596,12 +1730,15 @@ static int ethernet_phy_setup(struct net_device *dev)
 	struct pxa168_eth_private *pep = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pep->pd->init)
 		pep->pd->init();
 	pep->phy = phy_scan(pep, pep->pd->phy_addr & 0x1f);
 	if (pep->phy != NULL)
 		phy_init(pep, pep->pd->speed, pep->pd->duplex);
 =======
+=======
+>>>>>>> v3.18
 	if (pep->pd && pep->pd->init)
 		pep->pd->init();
 
@@ -1609,6 +1746,9 @@ static int ethernet_phy_setup(struct net_device *dev)
 	if (pep->phy != NULL)
 		phy_init(pep);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	update_hash_table_mac_address(pep, NULL, dev->dev_addr);
 
@@ -1645,6 +1785,7 @@ static void pxa168_get_drvinfo(struct net_device *dev,
 
 static const struct ethtool_ops pxa168_ethtool_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_settings = pxa168_get_settings,
 	.set_settings = pxa168_set_settings,
 	.get_drvinfo = pxa168_get_drvinfo,
@@ -1663,6 +1804,8 @@ static const struct net_device_ops pxa168_eth_netdev_ops = {
 	.ndo_change_mtu = pxa168_eth_change_mtu,
 	.ndo_tx_timeout = pxa168_eth_tx_timeout,
 =======
+=======
+>>>>>>> v3.18
 	.get_settings	= pxa168_get_settings,
 	.set_settings	= pxa168_set_settings,
 	.get_drvinfo	= pxa168_get_drvinfo,
@@ -1680,6 +1823,9 @@ static const struct net_device_ops pxa168_eth_netdev_ops = {
 	.ndo_do_ioctl		= pxa168_eth_do_ioctl,
 	.ndo_change_mtu		= pxa168_eth_change_mtu,
 	.ndo_tx_timeout		= pxa168_eth_tx_timeout,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1690,6 +1836,11 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct clk *clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *np;
+	const unsigned char *mac_addr = NULL;
+>>>>>>> v3.18
 =======
 	struct device_node *np;
 	const unsigned char *mac_addr = NULL;
@@ -1699,6 +1850,7 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 	printk(KERN_NOTICE "PXA168 10/100 Ethernet Driver\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = clk_get(&pdev->dev, "MFUCLK");
 	if (IS_ERR(clk)) {
 		printk(KERN_ERR "%s: Fast Ethernet failed to get clock\n",
@@ -1707,12 +1859,17 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 	}
 	clk_enable(clk);
 =======
+=======
+>>>>>>> v3.18
 	clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(clk)) {
 		dev_err(&pdev->dev, "Fast Ethernet failed to get clock\n");
 		return -ENODEV;
 	}
 	clk_prepare_enable(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev = alloc_etherdev(sizeof(struct pxa168_eth_private));
@@ -1731,8 +1888,13 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 		goto err_netdev;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pep->base = ioremap(res->start, resource_size(res));
 	if (pep->base == NULL) {
+=======
+	pep->base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(pep->base)) {
+>>>>>>> v3.18
 =======
 	pep->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(pep->base)) {
@@ -1746,6 +1908,7 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 	dev->netdev_ops = &pxa168_eth_netdev_ops;
 	dev->watchdog_timeo = 2 * HZ;
 	dev->base_addr = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &pxa168_ethtool_ops);
 
@@ -1765,6 +1928,8 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 
 	pep->port_num = pep->pd->port_number;
 =======
+=======
+>>>>>>> v3.18
 	dev->ethtool_ops = &pxa168_ethtool_ops;
 
 	INIT_WORK(&pep->tx_timeout_task, pxa168_eth_tx_timeout_task);
@@ -1805,6 +1970,9 @@ static int pxa168_eth_probe(struct platform_device *pdev)
 			of_property_read_u32(np, "reg", &pep->phy_addr);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Hardware supports only 3 ports */
 	BUG_ON(pep->port_num > 2);
@@ -1882,7 +2050,10 @@ static int pxa168_eth_remove(struct platform_device *pdev)
 	cancel_work_sync(&pep->tx_timeout_task);
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1911,13 +2082,19 @@ static int pxa168_eth_suspend(struct platform_device *pdev, pm_message_t state)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id pxa168_eth_of_match[] = {
 	{ .compatible = "marvell,pxa168-eth" },
 	{ },
 };
 MODULE_DEVICE_TABLE(of, pxa168_eth_of_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver pxa168_eth_driver = {
 	.probe = pxa168_eth_probe,
@@ -1927,8 +2104,14 @@ static struct platform_driver pxa168_eth_driver = {
 	.suspend = pxa168_eth_suspend,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   .name = DRIVER_NAME,
 		   },
+=======
+		.name		= DRIVER_NAME,
+		.of_match_table	= of_match_ptr(pxa168_eth_of_match),
+	},
+>>>>>>> v3.18
 =======
 		.name		= DRIVER_NAME,
 		.of_match_table	= of_match_ptr(pxa168_eth_of_match),

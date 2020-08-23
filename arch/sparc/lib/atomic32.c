@@ -28,6 +28,7 @@ static DEFINE_SPINLOCK(dummy);
 #endif /* SMP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __atomic_add_return(int i, atomic_t *v)
 {
 	int ret;
@@ -41,6 +42,8 @@ int __atomic_add_return(int i, atomic_t *v)
 }
 EXPORT_SYMBOL(__atomic_add_return);
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op, cop)						\
 int atomic_##op##_return(int i, atomic_t *v)				\
 {									\
@@ -58,6 +61,9 @@ EXPORT_SYMBOL(atomic_##op##_return);
 ATOMIC_OP(add, +=)
 
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int atomic_xchg(atomic_t *v, int new)

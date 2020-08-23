@@ -376,7 +376,11 @@ static struct vortex_chip_info {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vortex_pci_tbl) = {
+=======
+static const struct pci_device_id vortex_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id vortex_pci_tbl[] = {
 >>>>>>> v3.18
@@ -698,7 +702,11 @@ DEFINE_WINDOW_IO(32)
 
 #ifdef CONFIG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEVICE_PCI(dev) (((dev)->bus == &pci_bus_type) ? to_pci_dev((dev)) : NULL)
+=======
+#define DEVICE_PCI(dev) ((dev_is_pci(dev)) ? to_pci_dev((dev)) : NULL)
+>>>>>>> v3.18
 =======
 #define DEVICE_PCI(dev) ((dev_is_pci(dev)) ? to_pci_dev((dev)) : NULL)
 >>>>>>> v3.18
@@ -1021,10 +1029,15 @@ static int vortex_init_one(struct pci_dev *pdev,
 
 	rc = pci_request_regions(pdev, DRV_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc < 0) {
 		pci_disable_device(pdev);
 		goto out;
 	}
+=======
+	if (rc < 0)
+		goto out_disable;
+>>>>>>> v3.18
 =======
 	if (rc < 0)
 		goto out_disable;
@@ -1046,6 +1059,7 @@ static int vortex_init_one(struct pci_dev *pdev,
 		ioaddr = pci_iomap(pdev, 0, 0);
 	if (!ioaddr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 		rc = -ENOMEM;
@@ -1054,10 +1068,15 @@ static int vortex_init_one(struct pci_dev *pdev,
 		rc = -ENOMEM;
 		goto out_release;
 >>>>>>> v3.18
+=======
+		rc = -ENOMEM;
+		goto out_release;
+>>>>>>> v3.18
 	}
 
 	rc = vortex_probe1(&pdev->dev, ioaddr, pdev->irq,
 			   ent->driver_data, unit);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc < 0) {
 		pci_iounmap(pdev, ioaddr);
@@ -1069,6 +1088,8 @@ static int vortex_init_one(struct pci_dev *pdev,
 	vortex_cards_found++;
 
 =======
+=======
+>>>>>>> v3.18
 	if (rc < 0)
 		goto out_iounmap;
 
@@ -1081,6 +1102,9 @@ out_release:
 	pci_release_regions(pdev);
 out_disable:
 	pci_disable_device(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return rc;
@@ -1345,8 +1369,13 @@ static int vortex_probe1(struct device *gendev, void __iomem *ioaddr, int irq,
 	/* Tell them about an invalid IRQ. */
 	if (dev->irq <= 0 || dev->irq >= nr_irqs)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(" *** Warning: IRQ %d is unlikely to work! ***\n",
 			   dev->irq);
+=======
+		pr_warn(" *** Warning: IRQ %d is unlikely to work! ***\n",
+			dev->irq);
+>>>>>>> v3.18
 =======
 		pr_warn(" *** Warning: IRQ %d is unlikely to work! ***\n",
 			dev->irq);
@@ -1465,7 +1494,11 @@ static int vortex_probe1(struct device *gendev, void __iomem *ioaddr, int irq,
 		mii_preamble_required--;
 		if (phy_idx == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("  ***WARNING*** No MII transceivers found!\n");
+=======
+			pr_warn("  ***WARNING*** No MII transceivers found!\n");
+>>>>>>> v3.18
 =======
 			pr_warn("  ***WARNING*** No MII transceivers found!\n");
 >>>>>>> v3.18
@@ -1516,7 +1549,11 @@ static int vortex_probe1(struct device *gendev, void __iomem *ioaddr, int irq,
 	if (pdev) {
 		vp->pm_state_valid = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
  		pci_save_state(VORTEX_PCI(vp));
+=======
+		pci_save_state(pdev);
+>>>>>>> v3.18
 =======
 		pci_save_state(pdev);
 >>>>>>> v3.18
@@ -1614,8 +1651,12 @@ vortex_up(struct net_device *dev)
 		err = pci_enable_device(VORTEX_PCI(vp));
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Could not enable device\n",
 				dev->name);
+=======
+			pr_warn("%s: Could not enable device\n", dev->name);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Could not enable device\n", dev->name);
 >>>>>>> v3.18
@@ -2059,8 +2100,13 @@ vortex_error(struct net_device *dev, int status)
 		if (DoneDidThat == 0  &&
 			ioread16(ioaddr + EL3_STATUS) & StatsFull) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Updating statistics failed, disabling "
 				   "stats as an interrupt source.\n", dev->name);
+=======
+			pr_warn("%s: Updating statistics failed, disabling stats as an interrupt source\n",
+				dev->name);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Updating statistics failed, disabling stats as an interrupt source\n",
 				dev->name);
@@ -2136,6 +2182,10 @@ vortex_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		spin_unlock_irq(&vp->window_lock);
 		vp->tx_skb = skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		skb_tx_timestamp(skb);
+>>>>>>> v3.18
 =======
 		skb_tx_timestamp(skb);
 >>>>>>> v3.18
@@ -2144,8 +2194,14 @@ vortex_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	} else {
 		/* ... and the packet rounded to a doubleword. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iowrite32_rep(ioaddr + TX_FIFO, skb->data, (skb->len + 3) >> 2);
 		dev_kfree_skb (skb);
+=======
+		skb_tx_timestamp(skb);
+		iowrite32_rep(ioaddr + TX_FIFO, skb->data, (skb->len + 3) >> 2);
+		dev_consume_skb_any (skb);
+>>>>>>> v3.18
 =======
 		skb_tx_timestamp(skb);
 		iowrite32_rep(ioaddr + TX_FIFO, skb->data, (skb->len + 3) >> 2);
@@ -2194,6 +2250,10 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	struct boom_tx_desc *prev_entry = &vp->tx_ring[(vp->cur_tx-1) % TX_RING_SIZE];
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma_addr_t dma_addr;
+>>>>>>> v3.18
 =======
 	dma_addr_t dma_addr;
 >>>>>>> v3.18
@@ -2216,8 +2276,13 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (vp->cur_tx - vp->dirty_tx >= TX_RING_SIZE) {
 		if (vortex_debug > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: BUG! Tx Ring full, refusing to send buffer.\n",
 				   dev->name);
+=======
+			pr_warn("%s: BUG! Tx Ring full, refusing to send buffer\n",
+				dev->name);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: BUG! Tx Ring full, refusing to send buffer\n",
 				dev->name);
@@ -2237,30 +2302,42 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	if (!skb_shinfo(skb)->nr_frags) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vp->tx_ring[entry].frag[0].addr = cpu_to_le32(pci_map_single(VORTEX_PCI(vp), skb->data,
 										skb->len, PCI_DMA_TODEVICE));
 =======
+=======
+>>>>>>> v3.18
 		dma_addr = pci_map_single(VORTEX_PCI(vp), skb->data, skb->len,
 					  PCI_DMA_TODEVICE);
 		if (dma_mapping_error(&VORTEX_PCI(vp)->dev, dma_addr))
 			goto out_dma_err;
 
 		vp->tx_ring[entry].frag[0].addr = cpu_to_le32(dma_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vp->tx_ring[entry].frag[0].length = cpu_to_le32(skb->len | LAST_FRAG);
 	} else {
 		int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vp->tx_ring[entry].frag[0].addr = cpu_to_le32(pci_map_single(VORTEX_PCI(vp), skb->data,
 										skb_headlen(skb), PCI_DMA_TODEVICE));
 =======
+=======
+>>>>>>> v3.18
 		dma_addr = pci_map_single(VORTEX_PCI(vp), skb->data,
 					  skb_headlen(skb), PCI_DMA_TODEVICE);
 		if (dma_mapping_error(&VORTEX_PCI(vp)->dev, dma_addr))
 			goto out_dma_err;
 
 		vp->tx_ring[entry].frag[0].addr = cpu_to_le32(dma_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vp->tx_ring[entry].frag[0].length = cpu_to_le32(skb_headlen(skb));
 
@@ -2268,12 +2345,15 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 			skb_frag_t *frag = &skb_shinfo(skb)->frags[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vp->tx_ring[entry].frag[i+1].addr =
 					cpu_to_le32(pci_map_single(
 						VORTEX_PCI(vp),
 						(void *)skb_frag_address(frag),
 						skb_frag_size(frag), PCI_DMA_TODEVICE));
 =======
+=======
+>>>>>>> v3.18
 			dma_addr = skb_frag_dma_map(&VORTEX_PCI(vp)->dev, frag,
 						    0,
 						    frag->size,
@@ -2295,6 +2375,9 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 			vp->tx_ring[entry].frag[i+1].addr =
 						cpu_to_le32(dma_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (i == skb_shinfo(skb)->nr_frags-1)
@@ -2305,12 +2388,18 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	}
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vp->tx_ring[entry].addr = cpu_to_le32(pci_map_single(VORTEX_PCI(vp), skb->data, skb->len, PCI_DMA_TODEVICE));
 =======
+=======
+>>>>>>> v3.18
 	dma_addr = pci_map_single(VORTEX_PCI(vp), skb->data, skb->len, PCI_DMA_TODEVICE);
 	if (dma_mapping_error(&VORTEX_PCI(vp)->dev, dma_addr))
 		goto out_dma_err;
 	vp->tx_ring[entry].addr = cpu_to_le32(dma_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vp->tx_ring[entry].length = cpu_to_le32(skb->len | LAST_FRAG);
 	vp->tx_ring[entry].status = cpu_to_le32(skb->len | TxIntrUploaded);
@@ -2337,10 +2426,13 @@ boomerang_start_xmit(struct sk_buff *skb, struct net_device *dev)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iowrite16(DownUnstall, ioaddr + EL3_CMD);
 	spin_unlock_irqrestore(&vp->lock, flags);
 	return NETDEV_TX_OK;
 =======
+=======
+>>>>>>> v3.18
 	skb_tx_timestamp(skb);
 	iowrite16(DownUnstall, ioaddr + EL3_CMD);
 	spin_unlock_irqrestore(&vp->lock, flags);
@@ -2349,6 +2441,9 @@ out:
 out_dma_err:
 	dev_err(&VORTEX_PCI(vp)->dev, "Error mapping dma buffer\n");
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2444,7 +2539,11 @@ vortex_interrupt(int irq, void *dev_id)
 
 		if (--work_done < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Too much work in interrupt, status %4.4x.\n",
+=======
+			pr_warn("%s: Too much work in interrupt, status %4.4x\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Too much work in interrupt, status %4.4x\n",
 >>>>>>> v3.18
@@ -2581,7 +2680,11 @@ boomerang_interrupt(int irq, void *dev_id)
 
 		if (--work_done < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Too much work in interrupt, status %4.4x.\n",
+=======
+			pr_warn("%s: Too much work in interrupt, status %4.4x\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Too much work in interrupt, status %4.4x\n",
 >>>>>>> v3.18
@@ -2761,7 +2864,12 @@ boomerang_rx(struct net_device *dev)
 				static unsigned long last_jif;
 				if (time_after(jiffies, last_jif + 10 * HZ)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					pr_warning("%s: memory shortage\n", dev->name);
+=======
+					pr_warn("%s: memory shortage\n",
+						dev->name);
+>>>>>>> v3.18
 =======
 					pr_warn("%s: memory shortage\n",
 						dev->name);
@@ -2865,7 +2973,12 @@ vortex_close(struct net_device *dev)
 	    (vp->drv_flags & HAS_HWCKSM) == 0 &&
 	    (vp->card_idx >= MAX_UNITS || hw_checksums[vp->card_idx] == -1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s supports hardware checksums, and we're not using them!\n", dev->name);
+=======
+		pr_warn("%s supports hardware checksums, and we're not using them!\n",
+			dev->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s supports hardware checksums, and we're not using them!\n",
 			dev->name);
@@ -3140,6 +3253,10 @@ static const struct ethtool_ops vortex_ethtool_ops = {
 	.get_wol                = vortex_get_wol,
 	.set_wol                = vortex_set_wol,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_ts_info		= ethtool_op_get_ts_info,
+>>>>>>> v3.18
 =======
 	.get_ts_info		= ethtool_op_get_ts_info,
 >>>>>>> v3.18
@@ -3390,6 +3507,7 @@ static void vortex_remove_one(struct pci_dev *pdev)
 
 	if (vp->cb_fn_base)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_iounmap(VORTEX_PCI(vp), vp->cb_fn_base);
 
 	unregister_netdev(dev);
@@ -3401,6 +3519,8 @@ static void vortex_remove_one(struct pci_dev *pdev)
 		pci_disable_device(VORTEX_PCI(vp));
 	}
 =======
+=======
+>>>>>>> v3.18
 		pci_iounmap(pdev, vp->cb_fn_base);
 
 	unregister_netdev(dev);
@@ -3410,13 +3530,20 @@ static void vortex_remove_one(struct pci_dev *pdev)
 		pci_restore_state(pdev);
 	pci_disable_device(pdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Should really use issue_and_wait() here */
 	iowrite16(TotalReset | ((vp->drv_flags & EEPROM_RESET) ? 0x04 : 0x14),
 	     vp->ioaddr + EL3_CMD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_iounmap(VORTEX_PCI(vp), vp->ioaddr);
+=======
+	pci_iounmap(pdev, vp->ioaddr);
+>>>>>>> v3.18
 =======
 	pci_iounmap(pdev, vp->ioaddr);
 >>>>>>> v3.18
@@ -3465,7 +3592,10 @@ static int __init vortex_init(void)
 static void __exit vortex_eisa_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vortex_private *vp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem *ioaddr;
@@ -3477,7 +3607,10 @@ static void __exit vortex_eisa_cleanup(void)
 
 	if (compaq_net_device) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vp = netdev_priv(compaq_net_device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ioaddr = ioport_map(compaq_net_device->base_addr,

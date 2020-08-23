@@ -74,7 +74,11 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char SROMbyReadEmbedded(unsigned long dwIoBase, unsigned char byContntOffset)
+=======
+unsigned char SROMbyReadEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset)
+>>>>>>> v3.18
 =======
 unsigned char SROMbyReadEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset)
 >>>>>>> v3.18
@@ -126,7 +130,11 @@ unsigned char SROMbyReadEmbedded(void __iomem *dwIoBase, unsigned char byContntO
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool SROMbWriteEmbedded(unsigned long dwIoBase, unsigned char byContntOffset, unsigned char byData)
+=======
+bool SROMbWriteEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byData)
+>>>>>>> v3.18
 =======
 bool SROMbWriteEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byData)
 >>>>>>> v3.18
@@ -182,7 +190,11 @@ bool SROMbWriteEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset, un
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvRegBitsOn(unsigned long dwIoBase, unsigned char byContntOffset, unsigned char byBits)
+=======
+void SROMvRegBitsOn(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byBits)
+>>>>>>> v3.18
 =======
 void SROMvRegBitsOn(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byBits)
 >>>>>>> v3.18
@@ -206,7 +218,11 @@ void SROMvRegBitsOn(void __iomem *dwIoBase, unsigned char byContntOffset, unsign
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvRegBitsOff(unsigned long dwIoBase, unsigned char byContntOffset, unsigned char byBits)
+=======
+void SROMvRegBitsOff(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byBits)
+>>>>>>> v3.18
 =======
 void SROMvRegBitsOff(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byBits)
 >>>>>>> v3.18
@@ -232,7 +248,11 @@ void SROMvRegBitsOff(void __iomem *dwIoBase, unsigned char byContntOffset, unsig
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool SROMbIsRegBitsOn(unsigned long dwIoBase, unsigned char byContntOffset, unsigned char byTestBits)
+=======
+bool SROMbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byTestBits)
+>>>>>>> v3.18
 =======
 bool SROMbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byTestBits)
 >>>>>>> v3.18
@@ -258,7 +278,11 @@ bool SROMbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byContntOffset, unsi
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool SROMbIsRegBitsOff(unsigned long dwIoBase, unsigned char byContntOffset, unsigned char byTestBits)
+=======
+bool SROMbIsRegBitsOff(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byTestBits)
+>>>>>>> v3.18
 =======
 bool SROMbIsRegBitsOff(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byTestBits)
 >>>>>>> v3.18
@@ -282,7 +306,11 @@ bool SROMbIsRegBitsOff(void __iomem *dwIoBase, unsigned char byContntOffset, uns
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvReadAllContents(unsigned long dwIoBase, unsigned char *pbyEepromRegs)
+=======
+void SROMvReadAllContents(void __iomem *dwIoBase, unsigned char *pbyEepromRegs)
+>>>>>>> v3.18
 =======
 void SROMvReadAllContents(void __iomem *dwIoBase, unsigned char *pbyEepromRegs)
 >>>>>>> v3.18
@@ -310,7 +338,11 @@ void SROMvReadAllContents(void __iomem *dwIoBase, unsigned char *pbyEepromRegs)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvWriteAllContents(unsigned long dwIoBase, unsigned char *pbyEepromRegs)
+=======
+void SROMvWriteAllContents(void __iomem *dwIoBase, unsigned char *pbyEepromRegs)
+>>>>>>> v3.18
 =======
 void SROMvWriteAllContents(void __iomem *dwIoBase, unsigned char *pbyEepromRegs)
 >>>>>>> v3.18
@@ -337,7 +369,11 @@ void SROMvWriteAllContents(void __iomem *dwIoBase, unsigned char *pbyEepromRegs)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvReadEtherAddress(unsigned long dwIoBase, unsigned char *pbyEtherAddress)
+=======
+void SROMvReadEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddress)
+>>>>>>> v3.18
 =======
 void SROMvReadEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddress)
 >>>>>>> v3.18
@@ -365,7 +401,11 @@ void SROMvReadEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddres
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvWriteEtherAddress(unsigned long dwIoBase, unsigned char *pbyEtherAddress)
+=======
+void SROMvWriteEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddress)
+>>>>>>> v3.18
 =======
 void SROMvWriteEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddress)
 >>>>>>> v3.18
@@ -392,7 +432,11 @@ void SROMvWriteEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddre
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SROMvReadSubSysVenId(unsigned long dwIoBase, unsigned long *pdwSubSysVenId)
+=======
+void SROMvReadSubSysVenId(void __iomem *dwIoBase, unsigned long *pdwSubSysVenId)
+>>>>>>> v3.18
 =======
 void SROMvReadSubSysVenId(void __iomem *dwIoBase, unsigned long *pdwSubSysVenId)
 >>>>>>> v3.18
@@ -421,7 +465,11 @@ void SROMvReadSubSysVenId(void __iomem *dwIoBase, unsigned long *pdwSubSysVenId)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool SROMbAutoLoad(unsigned long dwIoBase)
+=======
+bool SROMbAutoLoad(void __iomem *dwIoBase)
+>>>>>>> v3.18
 =======
 bool SROMbAutoLoad(void __iomem *dwIoBase)
 >>>>>>> v3.18

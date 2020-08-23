@@ -6,6 +6,7 @@
 #include <linux/list.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  *	struct vlan_priority_tci_mapping - vlan egress priority mappings
@@ -85,6 +86,8 @@ static inline struct vlan_dev_priv *vlan_dev_priv(const struct net_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* if this changes, algorithm will have to be reworked because this
  * depends on completely exhausting the VLAN identifier space.  Thus
  * it gives constant time look-up, but in many cases it wastes memory.
@@ -119,9 +122,15 @@ static inline unsigned int vlan_proto_idx(__be16 proto)
 {
 	switch (proto) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case __constant_htons(ETH_P_8021Q):
 		return VLAN_PROTO_8021Q;
 	case __constant_htons(ETH_P_8021AD):
+=======
+	case htons(ETH_P_8021Q):
+		return VLAN_PROTO_8021Q;
+	case htons(ETH_P_8021AD):
+>>>>>>> v3.18
 =======
 	case htons(ETH_P_8021Q):
 		return VLAN_PROTO_8021Q;
@@ -206,6 +215,7 @@ static inline u32 vlan_get_ingress_priority(struct net_device *dev,
 
 #ifdef CONFIG_VLAN_8021Q_GVRP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int vlan_gvrp_request_join(const struct net_device *dev);
 extern void vlan_gvrp_request_leave(const struct net_device *dev);
 extern int vlan_gvrp_init_applicant(struct net_device *dev);
@@ -213,12 +223,17 @@ extern void vlan_gvrp_uninit_applicant(struct net_device *dev);
 extern int vlan_gvrp_init(void);
 extern void vlan_gvrp_uninit(void);
 =======
+=======
+>>>>>>> v3.18
 int vlan_gvrp_request_join(const struct net_device *dev);
 void vlan_gvrp_request_leave(const struct net_device *dev);
 int vlan_gvrp_init_applicant(struct net_device *dev);
 void vlan_gvrp_uninit_applicant(struct net_device *dev);
 int vlan_gvrp_init(void);
 void vlan_gvrp_uninit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int vlan_gvrp_request_join(const struct net_device *dev) { return 0; }
@@ -231,6 +246,7 @@ static inline void vlan_gvrp_uninit(void) {}
 
 #ifdef CONFIG_VLAN_8021Q_MVRP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int vlan_mvrp_request_join(const struct net_device *dev);
 extern void vlan_mvrp_request_leave(const struct net_device *dev);
 extern int vlan_mvrp_init_applicant(struct net_device *dev);
@@ -238,12 +254,17 @@ extern void vlan_mvrp_uninit_applicant(struct net_device *dev);
 extern int vlan_mvrp_init(void);
 extern void vlan_mvrp_uninit(void);
 =======
+=======
+>>>>>>> v3.18
 int vlan_mvrp_request_join(const struct net_device *dev);
 void vlan_mvrp_request_leave(const struct net_device *dev);
 int vlan_mvrp_init_applicant(struct net_device *dev);
 void vlan_mvrp_uninit_applicant(struct net_device *dev);
 int vlan_mvrp_init(void);
 void vlan_mvrp_uninit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int vlan_mvrp_request_join(const struct net_device *dev) { return 0; }
@@ -257,8 +278,13 @@ static inline void vlan_mvrp_uninit(void) {}
 extern const char vlan_fullname[];
 extern const char vlan_version[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int vlan_netlink_init(void);
 extern void vlan_netlink_fini(void);
+=======
+int vlan_netlink_init(void);
+void vlan_netlink_fini(void);
+>>>>>>> v3.18
 =======
 int vlan_netlink_init(void);
 void vlan_netlink_fini(void);

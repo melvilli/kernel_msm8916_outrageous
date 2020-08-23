@@ -234,8 +234,12 @@ static struct fileIdentDesc *udf_find_entry(struct inode *dir,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flen = udf_get_filename(dir->i_sb, nameptr, lfi, fname,
 					UDF_NAME_LEN);
+=======
+		flen = udf_get_filename(dir->i_sb, nameptr, fname, lfi);
+>>>>>>> v3.18
 =======
 		flen = udf_get_filename(dir->i_sb, nameptr, fname, lfi);
 >>>>>>> v3.18
@@ -276,9 +280,14 @@ static struct dentry *udf_lookup(struct inode *dir, struct dentry *dentry,
 		};
 		inode = udf_iget(dir->i_sb, lb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!inode) {
 			return ERR_PTR(-EACCES);
 		}
+=======
+		if (IS_ERR(inode))
+			return inode;
+>>>>>>> v3.18
 =======
 		if (IS_ERR(inode))
 			return inode;
@@ -296,9 +305,14 @@ static struct dentry *udf_lookup(struct inode *dir, struct dentry *dentry,
 		loc = lelb_to_cpu(cfi.icb.extLocation);
 		inode = udf_iget(dir->i_sb, &loc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!inode) {
 			return ERR_PTR(-EACCES);
 		}
+=======
+		if (IS_ERR(inode))
+			return ERR_CAST(inode);
+>>>>>>> v3.18
 =======
 		if (IS_ERR(inode))
 			return ERR_CAST(inode);
@@ -566,6 +580,7 @@ static int udf_delete_entry(struct inode *inode, struct fileIdentDesc *fi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int udf_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 		      bool excl)
 {
@@ -593,6 +608,8 @@ static int udf_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 	if (!fi) {
 		inode_dec_link_count(inode);
 =======
+=======
+>>>>>>> v3.18
 static int udf_add_nondir(struct dentry *dentry, struct inode *inode)
 {
 	struct udf_inode_info *iinfo = UDF_I(inode);
@@ -605,6 +622,9 @@ static int udf_add_nondir(struct dentry *dentry, struct inode *inode)
 	if (unlikely(!fi)) {
 		inode_dec_link_count(inode);
 		unlock_new_inode(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iput(inode);
 		return err;
@@ -620,6 +640,10 @@ static int udf_add_nondir(struct dentry *dentry, struct inode *inode)
 		brelse(fibh.ebh);
 	brelse(fibh.sbh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -629,7 +653,10 @@ static int udf_add_nondir(struct dentry *dentry, struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int udf_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 		      bool excl)
 {
@@ -668,11 +695,15 @@ static int udf_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int udf_mknod(struct inode *dir, struct dentry *dentry, umode_t mode,
 		     dev_t rdev)
 {
 	struct inode *inode;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct udf_fileident_bh fibh;
 	struct fileIdentDesc cfi, *fi;
@@ -680,10 +711,13 @@ static int udf_mknod(struct inode *dir, struct dentry *dentry, umode_t mode,
 	struct udf_inode_info *iinfo;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	if (!old_valid_dev(rdev))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = -EIO;
 	inode = udf_new_inode(dir, mode, &err);
@@ -716,12 +750,17 @@ static int udf_mknod(struct inode *dir, struct dentry *dentry, umode_t mode,
 out:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	inode = udf_new_inode(dir, mode);
 	if (IS_ERR(inode))
 		return PTR_ERR(inode);
 
 	init_special_inode(inode, mode, rdev);
 	return udf_add_nondir(dentry, inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -735,10 +774,16 @@ static int udf_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	struct udf_inode_info *iinfo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -EIO;
 	inode = udf_new_inode(dir, S_IFDIR | mode, &err);
 	if (!inode)
 		goto out;
+=======
+	inode = udf_new_inode(dir, S_IFDIR | mode);
+	if (IS_ERR(inode))
+		return PTR_ERR(inode);
+>>>>>>> v3.18
 =======
 	inode = udf_new_inode(dir, S_IFDIR | mode);
 	if (IS_ERR(inode))
@@ -752,6 +797,10 @@ static int udf_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	if (!fi) {
 		inode_dec_link_count(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 		unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -774,6 +823,10 @@ static int udf_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 		clear_nlink(inode);
 		mark_inode_dirty(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 		unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -789,6 +842,10 @@ static int udf_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	inc_nlink(dir);
 	mark_inode_dirty(dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -959,6 +1016,7 @@ static int udf_symlink(struct inode *dir, struct dentry *dentry,
 		       const char *symname)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode;
 	struct pathComponent *pc;
 	const char *compstart;
@@ -968,11 +1026,16 @@ static int udf_symlink(struct inode *dir, struct dentry *dentry,
 	struct fileIdentDesc *fi;
 	struct fileIdentDesc cfi;
 =======
+=======
+>>>>>>> v3.18
 	struct inode *inode = udf_new_inode(dir, S_IFLNK | S_IRWXUGO);
 	struct pathComponent *pc;
 	const char *compstart;
 	struct extent_position epos = {};
 	int eoffset, elen = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint8_t *ea;
 	int err;
@@ -983,9 +1046,14 @@ static int udf_symlink(struct inode *dir, struct dentry *dentry,
 	struct super_block *sb = dir->i_sb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = udf_new_inode(dir, S_IFLNK | S_IRWXUGO, &err);
 	if (!inode)
 		goto out;
+=======
+	if (IS_ERR(inode))
+		return PTR_ERR(inode);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(inode))
 		return PTR_ERR(inode);
@@ -1106,6 +1174,7 @@ static int udf_symlink(struct inode *dir, struct dentry *dentry,
 		udf_truncate_tail_extent(inode);
 	mark_inode_dirty(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	fi = udf_add_entry(dir, dentry, &fibh, &cfi, &err);
 	if (!fi)
@@ -1131,6 +1200,11 @@ static int udf_symlink(struct inode *dir, struct dentry *dentry,
 
 	err = udf_add_nondir(dentry, inode);
 >>>>>>> v3.18
+=======
+	up_write(&iinfo->i_data_sem);
+
+	err = udf_add_nondir(dentry, inode);
+>>>>>>> v3.18
 out:
 	kfree(name);
 	return err;
@@ -1139,6 +1213,10 @@ out_no_entry:
 	up_write(&iinfo->i_data_sem);
 	inode_dec_link_count(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -1327,7 +1405,11 @@ static struct dentry *udf_get_parent(struct dentry *child)
 
 	if (!udf_find_entry(child->d_inode, &dotdot, &fibh, &cfi))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_unlock;
+=======
+		return ERR_PTR(-EACCES);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EACCES);
 >>>>>>> v3.18
@@ -1339,6 +1421,7 @@ static struct dentry *udf_get_parent(struct dentry *child)
 	tloc = lelb_to_cpu(cfi.icb.extLocation);
 	inode = udf_iget(child->d_inode->i_sb, &tloc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!inode)
 		goto out_unlock;
 
@@ -1346,10 +1429,15 @@ static struct dentry *udf_get_parent(struct dentry *child)
 out_unlock:
 	return ERR_PTR(-EACCES);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(inode))
 		return ERR_CAST(inode);
 
 	return d_obtain_alias(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1368,8 +1456,13 @@ static struct dentry *udf_nfs_get_inode(struct super_block *sb, u32 block,
 	inode = udf_iget(sb, &loc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode == NULL)
 		return ERR_PTR(-ENOMEM);
+=======
+	if (IS_ERR(inode))
+		return ERR_CAST(inode);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(inode))
 		return ERR_CAST(inode);
@@ -1456,6 +1549,10 @@ const struct inode_operations udf_dir_inode_operations = {
 	.mknod				= udf_mknod,
 	.rename				= udf_rename,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.tmpfile			= udf_tmpfile,
+>>>>>>> v3.18
 =======
 	.tmpfile			= udf_tmpfile,
 >>>>>>> v3.18

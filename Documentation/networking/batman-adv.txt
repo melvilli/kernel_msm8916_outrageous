@@ -67,6 +67,7 @@ folder:
 
 # ls /sys/class/net/bat0/mesh/
 <<<<<<< HEAD
+<<<<<<< HEAD
 # aggregated_ogms        gw_bandwidth           log_level
 # ap_isolation           gw_mode                orig_interval
 # bonding                gw_sel_class           routing_algo
@@ -74,10 +75,15 @@ folder:
 # fragmentation
 
 =======
+=======
+>>>>>>> v3.18
 #aggregated_ogms        distributed_arp_table  gw_sel_class    orig_interval
 #ap_isolation           fragmentation          hop_penalty     routing_algo
 #bonding                gw_bandwidth           isolation_mark  vlan0
 #bridge_loop_avoidance  gw_mode                log_level
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 There is a special folder for debugging information:
@@ -86,7 +92,11 @@ There is a special folder for debugging information:
 # bla_backbone_table  log                 transtable_global
 # bla_claim_table     originators         transtable_local
 <<<<<<< HEAD
+<<<<<<< HEAD
 # gateways            socket              vis_data
+=======
+# gateways            socket
+>>>>>>> v3.18
 =======
 # gateways            socket
 >>>>>>> v3.18
@@ -139,6 +149,7 @@ ously assigned to interfaces now used by batman advanced, e.g.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 VISUALIZATION
 -------------
 
@@ -184,6 +195,8 @@ via bat0 or being bridged into the mesh network.  The PRIMARY/SEC
 values are only applied on primary interfaces
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 LOGGING/DEBUGGING
@@ -260,8 +273,13 @@ Mailing-list:   b.a.t.m.a.n@open-mesh.org (optional  subscription
 You can also contact the Authors:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Marek  Lindner  <lindner_marek@yahoo.de>
 Simon  Wunderlich  <siwu@hrz.tu-chemnitz.de>
+=======
+Marek  Lindner  <mareklindner@neomailbox.ch>
+Simon  Wunderlich  <sw@simonwunderlich.de>
+>>>>>>> v3.18
 =======
 Marek  Lindner  <mareklindner@neomailbox.ch>
 Simon  Wunderlich  <sw@simonwunderlich.de>

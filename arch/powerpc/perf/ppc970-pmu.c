@@ -258,7 +258,11 @@ static int p970_get_alternatives(u64 event, unsigned int flags, u64 alt[])
 
 static int p970_compute_mmcr(u64 event[], int n_ev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     unsigned int hwc[], unsigned long mmcr[])
+=======
+			     unsigned int hwc[], unsigned long mmcr[], struct perf_event *pevents[])
+>>>>>>> v3.18
 =======
 			     unsigned int hwc[], unsigned long mmcr[], struct perf_event *pevents[])
 >>>>>>> v3.18

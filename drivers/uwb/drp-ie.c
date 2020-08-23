@@ -28,7 +28,11 @@
  * Return the reason code for a reservations's DRP IE.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int uwb_rsv_reason_code(struct uwb_rsv *rsv)
+=======
+static int uwb_rsv_reason_code(struct uwb_rsv *rsv)
+>>>>>>> v3.18
 =======
 static int uwb_rsv_reason_code(struct uwb_rsv *rsv)
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static int uwb_rsv_reason_code(struct uwb_rsv *rsv)
  * Return the reason code for a reservations's companion DRP IE .
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int uwb_rsv_companion_reason_code(struct uwb_rsv *rsv)
+=======
+static int uwb_rsv_companion_reason_code(struct uwb_rsv *rsv)
+>>>>>>> v3.18
 =======
 static int uwb_rsv_companion_reason_code(struct uwb_rsv *rsv)
 >>>>>>> v3.18

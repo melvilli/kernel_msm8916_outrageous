@@ -50,7 +50,10 @@ static inline void snd_cx18_unlock(struct snd_cx18_card *cxsc)
 
 #define CX18_ALSA_DBGFLG_WARN  (1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CX18_ALSA_DBGFLG_WARN  (1 << 0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CX18_ALSA_DBGFLG_INFO  (1 << 1)

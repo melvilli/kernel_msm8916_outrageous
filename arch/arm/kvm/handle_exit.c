@@ -27,8 +27,11 @@
 #include "trace.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "trace.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef int (*exit_handle_fn)(struct kvm_vcpu *, struct kvm_run *);
@@ -60,9 +63,12 @@ static int handle_hvc(struct kvm_vcpu *vcpu, struct kvm_run *run)
 static int handle_smc(struct kvm_vcpu *vcpu, struct kvm_run *run)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kvm_psci_call(vcpu))
 		return 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kvm_inject_undefined(vcpu);
@@ -87,6 +93,7 @@ static int handle_dabt_hyp(struct kvm_vcpu *vcpu, struct kvm_run *run)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * kvm_handle_wfi - handle a wait-for-interrupts instruction executed by a guest
  * @vcpu:	the vcpu pointer
  * @run:	the kvm_run structure pointer
@@ -100,6 +107,8 @@ static int kvm_handle_wfi(struct kvm_vcpu *vcpu, struct kvm_run *run)
 	trace_kvm_wfi(*vcpu_pc(vcpu));
 	kvm_vcpu_block(vcpu);
 =======
+=======
+>>>>>>> v3.18
  * kvm_handle_wfx - handle a WFI or WFE instructions trapped in guests
  * @vcpu:	the vcpu pointer
  * @run:	the kvm_run structure pointer
@@ -120,13 +129,20 @@ static int kvm_handle_wfx(struct kvm_vcpu *vcpu, struct kvm_run *run)
 
 	kvm_skip_instr(vcpu, kvm_vcpu_trap_il_is32bit(vcpu));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
 
 static exit_handle_fn arm_exit_handlers[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HSR_EC_WFI]		= kvm_handle_wfi,
+=======
+	[HSR_EC_WFI]		= kvm_handle_wfx,
+>>>>>>> v3.18
 =======
 	[HSR_EC_WFI]		= kvm_handle_wfx,
 >>>>>>> v3.18

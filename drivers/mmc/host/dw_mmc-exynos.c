@@ -15,13 +15,19 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/dw_mmc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mmc/mmc.h>
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "dw_mmc.h"
@@ -38,8 +44,12 @@
 					SDMMC_CLKSEL_CCLK_DRIVE(y) |	\
 					SDMMC_CLKSEL_CCLK_DIVIDER(z))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define SDMMC_CMD_USE_HOLD_REG		BIT(29)
+=======
+#define SDMMC_CLKSEL_WAKEUP_INT		BIT(11)
+>>>>>>> v3.18
 =======
 #define SDMMC_CLKSEL_WAKEUP_INT		BIT(11)
 >>>>>>> v3.18
@@ -48,7 +58,10 @@
 #define EXYNOS4412_FIXED_CIU_CLK_DIV	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Block number in eMMC */
 #define DWMCI_BLOCK_NUM		0xFFFFFFFF
 
@@ -70,6 +83,9 @@
 
 #define EXYNOS_CCLKIN_MIN	50000000	/* unit: HZ */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Variations in Exynos specific dw-mshc controller */
 enum dw_mci_exynos_type {
@@ -77,6 +93,11 @@ enum dw_mci_exynos_type {
 	DW_MCI_TYPE_EXYNOS4412,
 	DW_MCI_TYPE_EXYNOS5250,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DW_MCI_TYPE_EXYNOS5420,
+	DW_MCI_TYPE_EXYNOS5420_SMU,
+>>>>>>> v3.18
 =======
 	DW_MCI_TYPE_EXYNOS5420,
 	DW_MCI_TYPE_EXYNOS5420_SMU,
@@ -90,6 +111,10 @@ struct dw_mci_exynos_priv_data {
 	u32				sdr_timing;
 	u32				ddr_timing;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32				cur_speed;
+>>>>>>> v3.18
 =======
 	u32				cur_speed;
 >>>>>>> v3.18
@@ -109,19 +134,26 @@ static struct dw_mci_exynos_compatible {
 		.compatible	= "samsung,exynos5250-dw-mshc",
 		.ctrl_type	= DW_MCI_TYPE_EXYNOS5250,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.compatible	= "samsung,exynos5420-dw-mshc",
 		.ctrl_type	= DW_MCI_TYPE_EXYNOS5420,
 	}, {
 		.compatible	= "samsung,exynos5420-dw-mshc-smu",
 		.ctrl_type	= DW_MCI_TYPE_EXYNOS5420_SMU,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
 
 static int dw_mci_exynos_priv_init(struct dw_mci *host)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dw_mci_exynos_priv_data *priv;
 	int idx;
@@ -140,6 +172,8 @@ static int dw_mci_exynos_priv_init(struct dw_mci *host)
 
 	host->priv = priv;
 =======
+=======
+>>>>>>> v3.18
 	struct dw_mci_exynos_priv_data *priv = host->priv;
 
 	if (priv->ctrl_type == DW_MCI_TYPE_EXYNOS5420_SMU) {
@@ -151,6 +185,9 @@ static int dw_mci_exynos_priv_init(struct dw_mci *host)
 			   DWMCI_MPSCTRL_NON_SECURE_WRITE_BIT);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -158,6 +195,7 @@ static int dw_mci_exynos_priv_init(struct dw_mci *host)
 static int dw_mci_exynos_setup_clock(struct dw_mci *host)
 {
 	struct dw_mci_exynos_priv_data *priv = host->priv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (priv->ctrl_type == DW_MCI_TYPE_EXYNOS5250)
@@ -170,6 +208,8 @@ static int dw_mci_exynos_setup_clock(struct dw_mci *host)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rate = clk_get_rate(host->ciu_clk);
 
 	host->bus_hz = rate / (priv->ciu_div + 1);
@@ -219,6 +259,9 @@ static int dw_mci_exynos_resume_noirq(struct device *dev)
 #define dw_mci_exynos_resume		NULL
 #define dw_mci_exynos_resume_noirq	NULL
 #endif /* CONFIG_PM_SLEEP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void dw_mci_exynos_prepare_command(struct dw_mci *host, u32 *cmdr)
@@ -238,12 +281,15 @@ static void dw_mci_exynos_set_ios(struct dw_mci *host, struct mmc_ios *ios)
 {
 	struct dw_mci_exynos_priv_data *priv = host->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ios->timing == MMC_TIMING_UHS_DDR50)
 		mci_writel(host, CLKSEL, priv->ddr_timing);
 	else
 		mci_writel(host, CLKSEL, priv->sdr_timing);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int wanted = ios->clock;
 	unsigned long actual;
 	u8 div = priv->ciu_div + 1;
@@ -276,11 +322,15 @@ static void dw_mci_exynos_set_ios(struct dw_mci *host, struct mmc_ios *ios)
 		priv->cur_speed = wanted;
 		host->current_speed = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int dw_mci_exynos_parse_dt(struct dw_mci *host)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dw_mci_exynos_priv_data *priv = host->priv;
 	struct device_node *np = host->dev->of_node;
@@ -291,6 +341,8 @@ static int dw_mci_exynos_parse_dt(struct dw_mci *host)
 	of_property_read_u32(np, "samsung,dw-mshc-ciu-div", &div);
 	priv->ciu_div = div;
 =======
+=======
+>>>>>>> v3.18
 	struct dw_mci_exynos_priv_data *priv;
 	struct device_node *np = host->dev->of_node;
 	u32 timing[2];
@@ -317,6 +369,9 @@ static int dw_mci_exynos_parse_dt(struct dw_mci *host)
 		of_property_read_u32(np, "samsung,dw-mshc-ciu-div", &div);
 		priv->ciu_div = div;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = of_property_read_u32_array(np,
@@ -333,6 +388,7 @@ static int dw_mci_exynos_parse_dt(struct dw_mci *host)
 
 	priv->ddr_timing = SDMMC_CLKSEL_TIMING(timing[0], timing[1], div);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -341,6 +397,8 @@ static unsigned long exynos_dwmmc_caps[4] = {
 	MMC_CAP_UHS_DDR50 | MMC_CAP_1_8V_DDR |
 		MMC_CAP_8_BIT_DATA | MMC_CAP_CMD23,
 =======
+=======
+>>>>>>> v3.18
 	host->priv = priv;
 	return 0;
 }
@@ -469,6 +527,9 @@ static int dw_mci_exynos_execute_tuning(struct dw_mci_slot *slot, u32 opcode,
 /* Common capabilities of Exynos4/Exynos5 SoC */
 static unsigned long exynos_dwmmc_caps[4] = {
 	MMC_CAP_1_8V_DDR | MMC_CAP_8_BIT_DATA | MMC_CAP_CMD23,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MMC_CAP_CMD23,
 	MMC_CAP_CMD23,
@@ -483,6 +544,10 @@ static const struct dw_mci_drv_data exynos_drv_data = {
 	.set_ios		= dw_mci_exynos_set_ios,
 	.parse_dt		= dw_mci_exynos_parse_dt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.execute_tuning		= dw_mci_exynos_execute_tuning,
+>>>>>>> v3.18
 =======
 	.execute_tuning		= dw_mci_exynos_execute_tuning,
 >>>>>>> v3.18
@@ -494,11 +559,17 @@ static const struct of_device_id dw_mci_exynos_match[] = {
 	{ .compatible = "samsung,exynos5250-dw-mshc",
 			.data = &exynos_drv_data, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ .compatible = "samsung,exynos5420-dw-mshc",
 			.data = &exynos_drv_data, },
 	{ .compatible = "samsung,exynos5420-dw-mshc-smu",
 			.data = &exynos_drv_data, },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -515,7 +586,10 @@ static int dw_mci_exynos_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops dw_mci_exynos_pmops = {
 	SET_SYSTEM_SLEEP_PM_OPS(dw_mci_exynos_suspend, dw_mci_exynos_resume)
 	.resume_noirq = dw_mci_exynos_resume_noirq,
@@ -523,6 +597,9 @@ static const struct dev_pm_ops dw_mci_exynos_pmops = {
 	.restore_noirq = dw_mci_exynos_resume_noirq,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver dw_mci_exynos_pltfm_driver = {
 	.probe		= dw_mci_exynos_probe,
@@ -531,7 +608,11 @@ static struct platform_driver dw_mci_exynos_pltfm_driver = {
 		.name		= "dwmmc_exynos",
 		.of_match_table	= dw_mci_exynos_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm		= &dw_mci_pltfm_pmops,
+=======
+		.pm		= &dw_mci_exynos_pmops,
+>>>>>>> v3.18
 =======
 		.pm		= &dw_mci_exynos_pmops,
 >>>>>>> v3.18

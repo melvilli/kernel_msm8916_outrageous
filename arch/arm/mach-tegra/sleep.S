@@ -57,7 +57,13 @@ ENTRY(tegra_disable_clean_inv_dcache)
 
 	/* Flush the D-cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	v7_flush_dcache_louis
+=======
+	cmp	r0, #TEGRA_FLUSH_CACHE_ALL
+	blne	v7_flush_dcache_louis
+	bleq	v7_flush_dcache_all
+>>>>>>> v3.18
 =======
 	cmp	r0, #TEGRA_FLUSH_CACHE_ALL
 	blne	v7_flush_dcache_louis
@@ -74,7 +80,10 @@ ENDPROC(tegra_disable_clean_inv_dcache)
 #ifdef CONFIG_PM_SLEEP
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * tegra_init_l2_for_a15
  *
  * set up the correct L2 cache data RAM latency
@@ -97,6 +106,9 @@ _exit_init_l2_a15:
 ENDPROC(tegra_init_l2_for_a15)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * tegra_sleep_cpu_finish(unsigned long v2p)
  *
@@ -105,16 +117,22 @@ ENDPROC(tegra_init_l2_for_a15)
  */
 ENTRY(tegra_sleep_cpu_finish)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Flush and disable the L1 data cache */
 	bl	tegra_disable_clean_inv_dcache
 
 =======
+=======
+>>>>>>> v3.18
 	mov	r4, r0
 	/* Flush and disable the L1 data cache */
 	mov	r0, #TEGRA_FLUSH_CACHE_ALL
 	bl	tegra_disable_clean_inv_dcache
 
 	mov	r0, r4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov32	r6, tegra_tear_down_cpu
 	ldr	r1, [r6]
@@ -125,7 +143,11 @@ ENTRY(tegra_sleep_cpu_finish)
 	mov	r0, r1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r3
+=======
+	ret	r3
+>>>>>>> v3.18
 =======
 	ret	r3
 >>>>>>> v3.18
@@ -151,12 +173,15 @@ ENTRY(tegra_shut_off_mmu)
 #ifdef CONFIG_CACHE_L2X0
 	/* Disable L2 cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov32	r4, TEGRA_ARM_PERIF_BASE + 0x3000
 	mov	r5, #0
 	str	r5, [r4, #L2X0_CTRL]
 #endif
 	mov	pc, r0
 =======
+=======
+>>>>>>> v3.18
 	check_cpu_part_num 0xc09, r9, r10
 	movweq	r2, #:lower16:(TEGRA_ARM_PERIF_BASE + 0x3000)
 	movteq	r2, #:upper16:(TEGRA_ARM_PERIF_BASE + 0x3000)
@@ -164,6 +189,9 @@ ENTRY(tegra_shut_off_mmu)
 	streq	r3, [r2, #L2X0_CTRL]
 #endif
 	ret	r0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(tegra_shut_off_mmu)
 	.popsection
@@ -182,7 +210,11 @@ ENTRY(tegra_switch_cpu_to_pllp)
 	mov	r0, #0
 	str	r0, [r5, #CLK_RESET_CCLK_DIVIDER]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

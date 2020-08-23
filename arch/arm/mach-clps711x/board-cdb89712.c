@@ -40,6 +40,10 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "devices.h"
+>>>>>>> v3.18
 =======
 #include "devices.h"
 >>>>>>> v3.18
@@ -132,6 +136,10 @@ static struct platform_device cdb89712_sram_pdev __initdata = {
 static void __init cdb89712_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clps711x_devices_init();
+>>>>>>> v3.18
 =======
 	clps711x_devices_init();
 >>>>>>> v3.18
@@ -146,7 +154,10 @@ MACHINE_START(CDB89712, "Cirrus-CDB89712")
 	/* Maintainer: Ray Lehtiniemi */
 	.atag_offset	= 0x100,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nr_irqs	= CLPS711X_NR_IRQS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.map_io		= clps711x_map_io,
@@ -154,7 +165,10 @@ MACHINE_START(CDB89712, "Cirrus-CDB89712")
 	.init_time	= clps711x_timer_init,
 	.init_machine	= cdb89712_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= clps711x_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.restart	= clps711x_restart,

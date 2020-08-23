@@ -37,6 +37,7 @@
 static struct cpufreq_frequency_table *freq_table;
 static atomic_t freq_table_users = ATOMIC_INIT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk *mpu_clk;
 static struct device *mpu_dev;
 static struct regulator *mpu_reg;
@@ -100,6 +101,8 @@ static int omap_target(struct cpufreq_policy *policy,
 	freq = freqs.new * 1000;
 	ret = clk_round_rate(mpu_clk, freq);
 =======
+=======
+>>>>>>> v3.18
 static struct device *mpu_dev;
 static struct regulator *mpu_reg;
 
@@ -115,6 +118,9 @@ static int omap_target(struct cpufreq_policy *policy, unsigned int index)
 
 	freq = new_freq * 1000;
 	ret = clk_round_rate(policy->clk, freq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR_VALUE(ret)) {
 		dev_warn(mpu_dev,
@@ -131,7 +137,11 @@ static int omap_target(struct cpufreq_policy *policy, unsigned int index)
 			rcu_read_unlock();
 			dev_err(mpu_dev, "%s: unable to find MPU OPP for %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__func__, freqs.new);
+=======
+				__func__, new_freq);
+>>>>>>> v3.18
 =======
 				__func__, new_freq);
 >>>>>>> v3.18
@@ -145,22 +155,29 @@ static int omap_target(struct cpufreq_policy *policy, unsigned int index)
 
 	dev_dbg(mpu_dev, "cpufreq-omap: %u MHz, %ld mV --> %u MHz, %ld mV\n", 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		freqs.old / 1000, volt_old ? volt_old / 1000 : -1,
 		freqs.new / 1000, volt ? volt / 1000 : -1);
 
 	/* scaling up?  scale voltage before frequency */
 	if (mpu_reg && (freqs.new > freqs.old)) {
 =======
+=======
+>>>>>>> v3.18
 		old_freq / 1000, volt_old ? volt_old / 1000 : -1,
 		new_freq / 1000, volt ? volt / 1000 : -1);
 
 	/* scaling up?  scale voltage before frequency */
 	if (mpu_reg && (new_freq > old_freq)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r = regulator_set_voltage(mpu_reg, volt - tol, volt + tol);
 		if (r < 0) {
 			dev_warn(mpu_dev, "%s: unable to scale voltage up.\n",
 				 __func__);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			freqs.new = freqs.old;
 			goto done;
@@ -172,6 +189,8 @@ static int omap_target(struct cpufreq_policy *policy, unsigned int index)
 	/* scaling down?  scale voltage after frequency */
 	if (mpu_reg && (freqs.new < freqs.old)) {
 =======
+=======
+>>>>>>> v3.18
 			return r;
 		}
 	}
@@ -180,11 +199,15 @@ static int omap_target(struct cpufreq_policy *policy, unsigned int index)
 
 	/* scaling down?  scale voltage after frequency */
 	if (mpu_reg && (new_freq < old_freq)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r = regulator_set_voltage(mpu_reg, volt - tol, volt + tol);
 		if (r < 0) {
 			dev_warn(mpu_dev, "%s: unable to scale voltage down.\n",
 				 __func__);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ret = clk_set_rate(mpu_clk, freqs.old * 1000);
 			freqs.new = freqs.old;
@@ -199,11 +222,16 @@ done:
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
 =======
+=======
+>>>>>>> v3.18
 			clk_set_rate(policy->clk, old_freq * 1000);
 			return r;
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -216,6 +244,7 @@ static inline void freq_table_free(void)
 
 static int omap_cpu_init(struct cpufreq_policy *policy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int result = 0;
 
@@ -238,6 +267,8 @@ static int omap_cpu_init(struct cpufreq_policy *policy)
 				__func__, policy->cpu, result);
 		goto fail_ck;
 =======
+=======
+>>>>>>> v3.18
 	int result;
 
 	policy->clk = clk_get(NULL, "cpufreq_ck");
@@ -252,11 +283,15 @@ static int omap_cpu_init(struct cpufreq_policy *policy)
 				__func__, policy->cpu, result);
 			goto fail;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	atomic_inc_return(&freq_table_users);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	result = cpufreq_frequency_table_cpuinfo(policy, freq_table);
 	if (result)
@@ -286,6 +321,8 @@ fail_table:
 fail_ck:
 	clk_put(mpu_clk);
 =======
+=======
+>>>>>>> v3.18
 	/* FIXME: what's the actual transition time? */
 	result = cpufreq_generic_init(policy, freq_table, 300 * 1000);
 	if (!result)
@@ -294,6 +331,9 @@ fail_ck:
 	freq_table_free();
 fail:
 	clk_put(policy->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return result;
 }
@@ -301,6 +341,7 @@ fail:
 static int omap_cpu_exit(struct cpufreq_policy *policy)
 {
 	freq_table_free();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_put(mpu_clk);
 	return 0;
@@ -321,6 +362,8 @@ static struct cpufreq_driver omap_driver = {
 	.name		= "omap",
 	.attr		= omap_cpufreq_attr,
 =======
+=======
+>>>>>>> v3.18
 	clk_put(policy->clk);
 	return 0;
 }
@@ -334,6 +377,9 @@ static struct cpufreq_driver omap_driver = {
 	.exit		= omap_cpu_exit,
 	.name		= "omap",
 	.attr		= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

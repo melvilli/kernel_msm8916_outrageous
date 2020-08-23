@@ -373,7 +373,11 @@ static unsigned int get_stagger(void)
 #ifdef CONFIG_SMP
 	int cpu = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cpu != cpumask_first(__get_cpu_var(cpu_sibling_map));
+=======
+	return cpu != cpumask_first(this_cpu_cpumask_var_ptr(cpu_sibling_map));
+>>>>>>> v3.18
 =======
 	return cpu != cpumask_first(this_cpu_cpumask_var_ptr(cpu_sibling_map));
 >>>>>>> v3.18

@@ -8,7 +8,10 @@ struct dentry;
 struct iattr;
 struct super_block;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nameidata;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -65,7 +68,12 @@ static inline loff_t reiserfs_xattr_nblocks(struct inode *inode, loff_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We may have to create up to 3 objects: xattr root, xattr dir, xattr file.
+=======
+/*
+ * We may have to create up to 3 objects: xattr root, xattr dir, xattr file.
+>>>>>>> v3.18
 =======
 /*
  * We may have to create up to 3 objects: xattr root, xattr dir, xattr file.

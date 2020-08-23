@@ -78,6 +78,7 @@ config MTD_UBI_FASTMAP
 	   If in doubt, say "N".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MTD_UBI_ENABLE_RD_AT_ATTACH
 	bool "UBI handle read disturb at attach. (Experimental feature)"
 	help
@@ -93,6 +94,8 @@ config MTD_UBI_ENABLE_RD_AT_ATTACH
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config MTD_UBI_GLUEBI
 	tristate "MTD devices emulation driver (gluebi)"
 	help
@@ -104,7 +107,10 @@ config MTD_UBI_GLUEBI
 	   software.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MTD_UBI_BLOCK
 	bool "Read-only block devices on top of UBI volumes"
 	default n
@@ -121,5 +127,8 @@ config MTD_UBI_BLOCK
 
 	   If in doubt, say "N".
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # MTD_UBI

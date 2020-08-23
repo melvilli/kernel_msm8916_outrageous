@@ -23,7 +23,11 @@
  * Determine which stack to use..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __user *get_sigframe(struct k_sigaction *ka, struct pt_regs *regs,
+=======
+extern void __user *get_sigframe(struct ksignal *ksig, struct pt_regs *regs,
+>>>>>>> v3.18
 =======
 extern void __user *get_sigframe(struct ksignal *ksig, struct pt_regs *regs,
 >>>>>>> v3.18

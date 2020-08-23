@@ -12,7 +12,11 @@
 // URL: http://coccinelle.lip6.fr/
 // Comments:
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 =======
 // Options: --no-includes --include-headers
 >>>>>>> v3.18
@@ -128,7 +132,11 @@ list_remove_head(x,c,...)
 sizeof(<+...c...+>)
 |
 <<<<<<< HEAD
+<<<<<<< HEAD
  &c->member
+=======
+&c->member
+>>>>>>> v3.18
 =======
 &c->member
 >>>>>>> v3.18

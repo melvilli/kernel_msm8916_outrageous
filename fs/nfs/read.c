@@ -25,6 +25,7 @@
 #include "iostat.h"
 #include "fscache.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define NFSDBG_FACILITY		NFSDBG_PAGECACHE
 
@@ -105,6 +106,8 @@ void nfs_readdata_release(struct nfs_read_data *rdata)
 }
 EXPORT_SYMBOL_GPL(nfs_readdata_release);
 =======
+=======
+>>>>>>> v3.18
 #include "pnfs.h"
 
 #define NFSDBG_FACILITY		NFSDBG_PAGECACHE
@@ -123,6 +126,9 @@ static void nfs_readhdr_free(struct nfs_pgio_header *rhdr)
 {
 	kmem_cache_free(nfs_rdata_cachep, rhdr);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static
@@ -136,12 +142,15 @@ int nfs_return_empty_page(struct page *page)
 
 void nfs_pageio_init_read(struct nfs_pageio_descriptor *pgio,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct inode *inode,
 			      const struct nfs_pgio_completion_ops *compl_ops)
 {
 	nfs_pageio_init(pgio, inode, &nfs_pageio_read_ops, compl_ops,
 			NFS_SERVER(inode)->rsize, 0);
 =======
+=======
+>>>>>>> v3.18
 			      struct inode *inode, bool force_mds,
 			      const struct nfs_pgio_completion_ops *compl_ops)
 {
@@ -154,6 +163,9 @@ void nfs_pageio_init_read(struct nfs_pageio_descriptor *pgio,
 #endif
 	nfs_pageio_init(pgio, inode, pg_ops, compl_ops, &nfs_rw_read_ops,
 			server->rsize, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nfs_pageio_init_read);
@@ -161,7 +173,11 @@ EXPORT_SYMBOL_GPL(nfs_pageio_init_read);
 void nfs_pageio_reset_read_mds(struct nfs_pageio_descriptor *pgio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgio->pg_ops = &nfs_pageio_read_ops;
+=======
+	pgio->pg_ops = &nfs_pgio_rw_ops;
+>>>>>>> v3.18
 =======
 	pgio->pg_ops = &nfs_pgio_rw_ops;
 >>>>>>> v3.18
@@ -180,7 +196,11 @@ int nfs_readpage_async(struct nfs_open_context *ctx, struct inode *inode,
 	if (len == 0)
 		return nfs_return_empty_page(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new = nfs_create_request(ctx, inode, page, 0, len);
+=======
+	new = nfs_create_request(ctx, page, NULL, 0, len);
+>>>>>>> v3.18
 =======
 	new = nfs_create_request(ctx, page, NULL, 0, len);
 >>>>>>> v3.18
@@ -192,7 +212,12 @@ int nfs_readpage_async(struct nfs_open_context *ctx, struct inode *inode,
 		zero_user_segment(page, len, PAGE_CACHE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NFS_PROTO(inode)->read_pageio_init(&pgio, inode, &nfs_async_read_completion_ops);
+=======
+	nfs_pageio_init_read(&pgio, inode, false,
+			     &nfs_async_read_completion_ops);
+>>>>>>> v3.18
 =======
 	nfs_pageio_init_read(&pgio, inode, false,
 			     &nfs_async_read_completion_ops);
@@ -207,6 +232,7 @@ static void nfs_readpage_release(struct nfs_page *req)
 {
 	struct inode *d_inode = req->wb_context->dentry->d_inode;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (PageUptodate(req->wb_page))
 		nfs_readpage_to_fscache(d_inode, req->wb_page, 0);
@@ -223,6 +249,8 @@ static void nfs_readpage_release(struct nfs_page *req)
 
 /* Note io was page aligned */
 =======
+=======
+>>>>>>> v3.18
 	dprintk("NFS: read done (%s/%llu %d@%lld)\n", d_inode->i_sb->s_id,
 		(unsigned long long)NFS_FILEID(d_inode), req->wb_bytes,
 		(long long)req_offset(req));
@@ -242,6 +270,9 @@ static void nfs_page_group_set_uptodate(struct nfs_page *req)
 		SetPageUptodate(req->wb_page);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void nfs_read_completion(struct nfs_pgio_header *hdr)
 {
@@ -253,6 +284,7 @@ static void nfs_read_completion(struct nfs_pgio_header *hdr)
 		struct nfs_page *req = nfs_list_entry(hdr->pages.next);
 		struct page *page = req->wb_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (test_bit(NFS_IOHDR_EOF, &hdr->flags)) {
 			if (bytes > hdr->good_bytes)
@@ -262,6 +294,8 @@ static void nfs_read_completion(struct nfs_pgio_header *hdr)
 					hdr->good_bytes & ~PAGE_MASK,
 					PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 		unsigned long start = req->wb_pgbase;
 		unsigned long end = req->wb_pgbase + req->wb_bytes;
 
@@ -281,15 +315,24 @@ static void nfs_read_completion(struct nfs_pgio_header *hdr)
 				WARN_ON(start < req->wb_pgbase);
 				zero_user_segment(page, start, end);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		bytes += req->wb_bytes;
 		if (test_bit(NFS_IOHDR_ERROR, &hdr->flags)) {
 			if (bytes <= hdr->good_bytes)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SetPageUptodate(page);
 		} else
 			SetPageUptodate(page);
+=======
+				nfs_page_group_set_uptodate(req);
+		} else
+			nfs_page_group_set_uptodate(req);
+>>>>>>> v3.18
 =======
 				nfs_page_group_set_uptodate(req);
 		} else
@@ -302,6 +345,7 @@ out:
 	hdr->release(hdr);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int nfs_initiate_read(struct rpc_clnt *clnt,
 		      struct nfs_read_data *data,
@@ -393,6 +437,8 @@ nfs_do_multiple_reads(struct list_head *head,
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static void nfs_initiate_read(struct nfs_pgio_header *hdr,
 			      struct rpc_message *msg,
 			      struct rpc_task_setup *task_setup_data, int how)
@@ -402,6 +448,9 @@ static void nfs_initiate_read(struct nfs_pgio_header *hdr,
 
 	task_setup_data->flags |= swap_flags;
 	NFS_PROTO(inode)->read_setup(hdr, msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -422,6 +471,7 @@ static const struct nfs_pgio_completion_ops nfs_async_read_completion_ops = {
 	.completion = nfs_read_completion,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void nfs_pagein_error(struct nfs_pageio_descriptor *desc,
 		struct nfs_pgio_header *hdr)
@@ -549,10 +599,13 @@ static const struct nfs_pageio_ops nfs_pageio_read_ops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * This is the callback from RPC telling us whether a reply was
  * received or some error occurred (timeout or socket shutdown).
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int nfs_readpage_result(struct rpc_task *task, struct nfs_read_data *data)
 {
@@ -568,6 +621,8 @@ int nfs_readpage_result(struct rpc_task *task, struct nfs_read_data *data)
 
 	nfs_add_stats(inode, NFSIOS_SERVERREADBYTES, data->res.count);
 =======
+=======
+>>>>>>> v3.18
 static int nfs_readpage_done(struct rpc_task *task,
 			     struct nfs_pgio_header *hdr,
 			     struct inode *inode)
@@ -577,6 +632,9 @@ static int nfs_readpage_done(struct rpc_task *task,
 		return status;
 
 	nfs_add_stats(inode, NFSIOS_SERVERREADBYTES, hdr->res.count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (task->tk_status == -ESTALE) {
@@ -586,6 +644,7 @@ static int nfs_readpage_done(struct rpc_task *task,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void nfs_readpage_retry(struct rpc_task *task, struct nfs_read_data *data)
 {
@@ -602,6 +661,8 @@ static void nfs_readpage_retry(struct rpc_task *task, struct nfs_read_data *data
 	/* Yes, so retry the read at the end of the data */
 	data->mds_offset += resp->count;
 =======
+=======
+>>>>>>> v3.18
 static void nfs_readpage_retry(struct rpc_task *task,
 			       struct nfs_pgio_header *hdr)
 {
@@ -617,6 +678,9 @@ static void nfs_readpage_retry(struct rpc_task *task,
 	}
 	/* Yes, so retry the read at the end of the hdr */
 	hdr->mds_offset += resp->count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	argp->offset += resp->count;
 	argp->pgbase += resp->count;
@@ -624,6 +688,7 @@ static void nfs_readpage_retry(struct rpc_task *task,
 	rpc_restart_call_prepare(task);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void nfs_readpage_result_common(struct rpc_task *task, void *calldata)
 {
@@ -640,6 +705,8 @@ static void nfs_readpage_result_common(struct rpc_task *task, void *calldata)
 
 		bound = data->args.offset + data->res.count;
 =======
+=======
+>>>>>>> v3.18
 static void nfs_readpage_result(struct rpc_task *task,
 				struct nfs_pgio_header *hdr)
 {
@@ -647,6 +714,9 @@ static void nfs_readpage_result(struct rpc_task *task,
 		loff_t bound;
 
 		bound = hdr->args.offset + hdr->res.count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&hdr->lock);
 		if (bound < hdr->io_start + hdr->good_bytes) {
@@ -655,6 +725,7 @@ static void nfs_readpage_result(struct rpc_task *task,
 			hdr->good_bytes = bound - hdr->io_start;
 		}
 		spin_unlock(&hdr->lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else if (data->res.count != data->args.count)
 		nfs_readpage_retry(task, data);
@@ -680,10 +751,15 @@ static const struct rpc_call_ops nfs_read_common_ops = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	} else if (hdr->res.count != hdr->args.count)
 		nfs_readpage_retry(task, hdr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Read a page over NFS.
@@ -753,7 +829,10 @@ readpage_async_filler(void *data, struct page *page)
 {
 	struct nfs_readdesc *desc = (struct nfs_readdesc *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = page_file_mapping(page)->host;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct nfs_page *new;
@@ -765,7 +844,11 @@ readpage_async_filler(void *data, struct page *page)
 		return nfs_return_empty_page(page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new = nfs_create_request(desc->ctx, inode, page, 0, len);
+=======
+	new = nfs_create_request(desc->ctx, page, NULL, 0, len);
+>>>>>>> v3.18
 =======
 	new = nfs_create_request(desc->ctx, page, NULL, 0, len);
 >>>>>>> v3.18
@@ -798,9 +881,15 @@ int nfs_readpages(struct file *filp, struct address_space *mapping,
 	int ret = -ESTALE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("NFS: nfs_readpages (%s/%Ld %d)\n",
 			inode->i_sb->s_id,
 			(long long)NFS_FILEID(inode),
+=======
+	dprintk("NFS: nfs_readpages (%s/%Lu %d)\n",
+			inode->i_sb->s_id,
+			(unsigned long long)NFS_FILEID(inode),
+>>>>>>> v3.18
 =======
 	dprintk("NFS: nfs_readpages (%s/%Lu %d)\n",
 			inode->i_sb->s_id,
@@ -828,7 +917,12 @@ int nfs_readpages(struct file *filp, struct address_space *mapping,
 		goto read_complete; /* all pages were read */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NFS_PROTO(inode)->read_pageio_init(&pgio, inode, &nfs_async_read_completion_ops);
+=======
+	nfs_pageio_init_read(&pgio, inode, false,
+			     &nfs_async_read_completion_ops);
+>>>>>>> v3.18
 =======
 	nfs_pageio_init_read(&pgio, inode, false,
 			     &nfs_async_read_completion_ops);
@@ -850,7 +944,11 @@ int __init nfs_init_readpagecache(void)
 {
 	nfs_rdata_cachep = kmem_cache_create("nfs_read_data",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     sizeof(struct nfs_read_header),
+=======
+					     sizeof(struct nfs_pgio_header),
+>>>>>>> v3.18
 =======
 					     sizeof(struct nfs_pgio_header),
 >>>>>>> v3.18
@@ -867,7 +965,10 @@ void nfs_destroy_readpagecache(void)
 	kmem_cache_destroy(nfs_rdata_cachep);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static const struct nfs_rw_ops nfs_rw_read_ops = {
 	.rw_mode		= FMODE_READ,
@@ -877,4 +978,7 @@ static const struct nfs_rw_ops nfs_rw_read_ops = {
 	.rw_result		= nfs_readpage_result,
 	.rw_initiate		= nfs_initiate_read,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

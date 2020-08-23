@@ -2,7 +2,11 @@
  * Copyright (C) 2007 Google, Inc.
  * Author: Robert Love <rlove@google.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -43,6 +47,7 @@
 #define UART_MR2_PARITY_MODE		0x3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART_CSR	0x0008
 #define UART_CSR_115200	0xFF
 #define UART_CSR_57600	0xEE
@@ -59,6 +64,9 @@
 #define UART_CSR_300	0x22
 #define UART_CSR_150	0x11
 #define UART_CSR_75	0x00
+=======
+#define UART_CSR			0x0008
+>>>>>>> v3.18
 =======
 #define UART_CSR			0x0008
 >>>>>>> v3.18
@@ -83,6 +91,11 @@
 #define UART_CR_CMD_PROTECTION_EN	(16 << 4)
 #define UART_CR_CMD_STALE_EVENT_ENABLE	(80 << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UART_CR_CMD_FORCE_STALE		(4 << 8)
+#define UART_CR_CMD_RESET_TX_READY	(3 << 8)
+>>>>>>> v3.18
 =======
 #define UART_CR_CMD_FORCE_STALE		(4 << 8)
 #define UART_CR_CMD_RESET_TX_READY	(3 << 8)
@@ -114,6 +127,7 @@
 #define UART_MNDREG		0x0034
 #define UART_IRDA		0x0038
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define UART_SIM_CFG			0x003c
 #define UART_SIM_CFG_UIM_TX_MODE	(1 << 17)
@@ -125,6 +139,8 @@
 #define UART_SIM_CFG_MASK_RX		(1 << 3)
 #define UART_SIM_CFG_SIM_SEL		(1 << 0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define UART_MISR_MODE		0x0040
@@ -150,11 +166,14 @@
 #define UART_ISR_TX_READY	(1 << 7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GSBI_CONTROL		0x0
 #define GSBI_PROTOCOL_CODE	0x30
 #define GSBI_PROTOCOL_UART	0x40
 #define GSBI_PROTOCOL_IDLE	0x0
 =======
+=======
+>>>>>>> v3.18
 #define UARTDM_RXFS		0x50
 #define UARTDM_RXFS_BUF_SHIFT	0x7
 #define UARTDM_RXFS_BUF_MASK	0x7
@@ -162,6 +181,9 @@
 #define UARTDM_DMEN		0x3C
 #define UARTDM_DMEN_RX_SC_ENABLE BIT(5)
 #define UARTDM_DMEN_TX_SC_ENABLE BIT(4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define UARTDM_DMRX		0x34
@@ -169,7 +191,10 @@
 #define UARTDM_RX_TOTAL_SNAP	0x38
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define UART_TO_MSM(uart_port)	((struct msm_port *) uart_port)
 
 static inline
@@ -228,5 +253,8 @@ void msm_serial_set_mnd_regs_from_uartclk(struct uart_port *port)
 #define msm_serial_set_mnd_regs msm_serial_set_mnd_regs_from_uartclk
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __DRIVERS_SERIAL_MSM_SERIAL_H */

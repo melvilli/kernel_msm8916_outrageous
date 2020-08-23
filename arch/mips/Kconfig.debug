@@ -21,7 +21,10 @@ config EARLY_PRINTK
 	  unless you want to debug such a crash.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config EARLY_PRINTK_8250
 	bool
 	depends on EARLY_PRINTK && USE_GENERIC_EARLY_PRINTK_8250
@@ -34,6 +37,9 @@ config EARLY_PRINTK_8250
 config USE_GENERIC_EARLY_PRINTK_8250
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CMDLINE_BOOL
 	bool "Built-in kernel command line"
@@ -83,6 +89,7 @@ config CMDLINE_OVERRIDE
 	  Normally, you will choose 'N' here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
 	depends on DEBUG_KERNEL
@@ -101,6 +108,8 @@ config SMTC_IDLE_HOOK_DEBUG
 	  arch/mips/kernel/smtc.c.  This debugging option result in significant
 	  overhead so should be disabled in production kernels.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SB1XXX_CORELIS

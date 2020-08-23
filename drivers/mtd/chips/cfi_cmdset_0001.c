@@ -22,7 +22,10 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/io.h>
@@ -57,12 +60,18 @@
 #define AT49BV640D	0x02de
 #define AT49BV640DT	0x02db
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Sharp chips */
 #define LH28F640BFHE_PTTL90	0x00b0
 #define LH28F640BFHE_PBTL90	0x00b1
 #define LH28F640BFHE_PTTL70A	0x00b2
 #define LH28F640BFHE_PBTL70A	0x00b3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int cfi_intelext_read (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
@@ -81,15 +90,21 @@ static int cfi_intelext_read_user_prot_reg (struct mtd_info *, loff_t, size_t, s
 static int cfi_intelext_write_user_prot_reg (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
 static int cfi_intelext_lock_user_prot_reg (struct mtd_info *, loff_t, size_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cfi_intelext_get_fact_prot_info (struct mtd_info *,
 					    struct otp_info *, size_t);
 static int cfi_intelext_get_user_prot_info (struct mtd_info *,
 					    struct otp_info *, size_t);
 =======
+=======
+>>>>>>> v3.18
 static int cfi_intelext_get_fact_prot_info(struct mtd_info *, size_t,
 					   size_t *, struct otp_info *);
 static int cfi_intelext_get_user_prot_info(struct mtd_info *, size_t,
 					   size_t *, struct otp_info *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 static int cfi_intelext_suspend (struct mtd_info *);
@@ -278,7 +293,10 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int is_LH28F640BF(struct cfi_private *cfi)
 {
 	/* Sharp LH28F640BF Family */
@@ -309,6 +327,9 @@ static void fixup_LH28F640BF(struct mtd_info *mtd)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void fixup_use_point(struct mtd_info *mtd)
 {
@@ -362,6 +383,11 @@ static struct cfi_fixup cfi_fixup_table[] = {
 	{ CFI_MFR_ST, 0x00bb, /* M28W320CB */ fixup_st_m28w320cb },
 	{ CFI_MFR_INTEL, CFI_ID_ANY, fixup_unlock_powerup_lock },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ CFI_MFR_SHARP, CFI_ID_ANY, fixup_unlock_powerup_lock },
+	{ CFI_MFR_SHARP, CFI_ID_ANY, fixup_LH28F640BF },
+>>>>>>> v3.18
 =======
 	{ CFI_MFR_SHARP, CFI_ID_ANY, fixup_unlock_powerup_lock },
 	{ CFI_MFR_SHARP, CFI_ID_ANY, fixup_LH28F640BF },
@@ -492,10 +518,15 @@ struct mtd_info *cfi_cmdset_0001(struct map_info *map, int primary)
 
 	mtd = kzalloc(sizeof(*mtd), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd) {
 		printk(KERN_ERR "Failed to allocate memory for MTD device\n");
 		return NULL;
 	}
+=======
+	if (!mtd)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!mtd)
 		return NULL;
@@ -626,10 +657,15 @@ static struct mtd_info *cfi_intelext_setup(struct mtd_info *mtd)
 	mtd->eraseregions = kmalloc(sizeof(struct mtd_erase_region_info)
 			* mtd->numeraseregions, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd->eraseregions) {
 		printk(KERN_ERR "Failed to allocate memory for MTD erase region info\n");
 		goto setup_err;
 	}
+=======
+	if (!mtd->eraseregions)
+		goto setup_err;
+>>>>>>> v3.18
 =======
 	if (!mtd->eraseregions)
 		goto setup_err;
@@ -1721,13 +1757,19 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
 	cmd_adr = adr & ~(wbufsize-1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Sharp LH28F640BF chips need the first address for the
 	 * Page Buffer Program command. See Table 5 of
 	 * LH28F320BF, LH28F640BF, LH28F128BF Series (Appendix FUM00701) */
 	if (is_LH28F640BF(cfi))
 		cmd_adr = adr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Let's determine this according to the interleave only once */
 	write_cmd = (cfi->cfiq->P_ID != P_ID_INTEL_PERFORMANCE) ? CMD(0xe8) : CMD(0xe9);
@@ -2475,6 +2517,7 @@ static int cfi_intelext_lock_user_prot_reg(struct mtd_info *mtd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cfi_intelext_get_fact_prot_info(struct mtd_info *mtd,
 					   struct otp_info *buf, size_t len)
 {
@@ -2494,6 +2537,8 @@ static int cfi_intelext_get_user_prot_info(struct mtd_info *mtd,
 	ret = cfi_intelext_otp_walk(mtd, 0, len, &retlen, (u_char *)buf, NULL, 1);
 	return ret ? : retlen;
 =======
+=======
+>>>>>>> v3.18
 static int cfi_intelext_get_fact_prot_info(struct mtd_info *mtd, size_t len,
 					   size_t *retlen, struct otp_info *buf)
 
@@ -2507,6 +2552,9 @@ static int cfi_intelext_get_user_prot_info(struct mtd_info *mtd, size_t len,
 {
 	return cfi_intelext_otp_walk(mtd, 0, len, retlen, (u_char *)buf,
 				     NULL, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2649,6 +2697,11 @@ static void cfi_intelext_resume(struct mtd_info *mtd)
 		/* Go to known state. Chip may have been power cycled */
 		if (chip->state == FL_PM_SUSPENDED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			/* Refresh LH28F640BF Partition Config. Register */
+			fixup_LH28F640BF(mtd);
+>>>>>>> v3.18
 =======
 			/* Refresh LH28F640BF Partition Config. Register */
 			fixup_LH28F640BF(mtd);

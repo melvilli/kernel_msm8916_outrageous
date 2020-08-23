@@ -4,7 +4,10 @@
  * (C) Copyright 2004 Linus Torvalds
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -28,7 +31,11 @@ unsigned int ioread16(void __iomem *addr)
 unsigned int ioread16be(void __iomem *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return in_be16(addr);
+=======
+	return readw_be(addr);
+>>>>>>> v3.18
 =======
 	return readw_be(addr);
 >>>>>>> v3.18
@@ -40,7 +47,11 @@ unsigned int ioread32(void __iomem *addr)
 unsigned int ioread32be(void __iomem *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return in_be32(addr);
+=======
+	return readl_be(addr);
+>>>>>>> v3.18
 =======
 	return readl_be(addr);
 >>>>>>> v3.18
@@ -62,7 +73,11 @@ void iowrite16(u16 val, void __iomem *addr)
 void iowrite16be(u16 val, void __iomem *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be16(addr, val);
+=======
+	writew_be(val, addr);
+>>>>>>> v3.18
 =======
 	writew_be(val, addr);
 >>>>>>> v3.18
@@ -74,7 +89,11 @@ void iowrite32(u32 val, void __iomem *addr)
 void iowrite32be(u32 val, void __iomem *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be32(addr, val);
+=======
+	writel_be(val, addr);
+>>>>>>> v3.18
 =======
 	writel_be(val, addr);
 >>>>>>> v3.18
@@ -96,6 +115,7 @@ EXPORT_SYMBOL(iowrite32be);
 void ioread8_rep(void __iomem *addr, void *dst, unsigned long count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_insb((u8 __iomem *) addr, dst, count);
 }
 void ioread16_rep(void __iomem *addr, void *dst, unsigned long count)
@@ -106,6 +126,8 @@ void ioread32_rep(void __iomem *addr, void *dst, unsigned long count)
 {
 	_insl_ns((u32 __iomem *) addr, dst, count);
 =======
+=======
+>>>>>>> v3.18
 	readsb(addr, dst, count);
 }
 void ioread16_rep(void __iomem *addr, void *dst, unsigned long count)
@@ -115,6 +137,9 @@ void ioread16_rep(void __iomem *addr, void *dst, unsigned long count)
 void ioread32_rep(void __iomem *addr, void *dst, unsigned long count)
 {
 	readsl(addr, dst, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ioread8_rep);
@@ -123,6 +148,7 @@ EXPORT_SYMBOL(ioread32_rep);
 
 void iowrite8_rep(void __iomem *addr, const void *src, unsigned long count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_outsb((u8 __iomem *) addr, src, count);
 }
@@ -134,6 +160,8 @@ void iowrite32_rep(void __iomem *addr, const void *src, unsigned long count)
 {
 	_outsl_ns((u32 __iomem *) addr, src, count);
 =======
+=======
+>>>>>>> v3.18
 	writesb(addr, src, count);
 }
 void iowrite16_rep(void __iomem *addr, const void *src, unsigned long count)
@@ -143,6 +171,9 @@ void iowrite16_rep(void __iomem *addr, const void *src, unsigned long count)
 void iowrite32_rep(void __iomem *addr, const void *src, unsigned long count)
 {
 	writesl(addr, src, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(iowrite8_rep);

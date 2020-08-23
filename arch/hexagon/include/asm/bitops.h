@@ -26,6 +26,7 @@
 #include <asm/byteorder.h>
 #include <asm/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef __KERNEL__
 
@@ -33,10 +34,15 @@
 #define smp_mb__after_clear_bit()	barrier()
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/barrier.h>
 
 #ifdef __KERNEL__
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The offset calculations for these are based on BITS_PER_LONG == 32

@@ -97,8 +97,11 @@ struct ext4_xattr_ibody_find {
 extern const struct xattr_handler ext4_xattr_user_handler;
 extern const struct xattr_handler ext4_xattr_trusted_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct xattr_handler ext4_xattr_acl_access_handler;
 extern const struct xattr_handler ext4_xattr_acl_default_handler;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern const struct xattr_handler ext4_xattr_security_handler;
@@ -116,9 +119,12 @@ extern int ext4_expand_extra_isize_ea(struct inode *inode, int new_extra_isize,
 			    struct ext4_inode *raw_inode, handle_t *handle);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __init ext4_init_xattr(void);
 extern void ext4_exit_xattr(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern const struct xattr_handler *ext4_xattr_handlers[];
@@ -133,6 +139,12 @@ extern int ext4_xattr_ibody_inline_set(handle_t *handle, struct inode *inode,
 				       struct ext4_xattr_ibody_find *is);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct mb_cache *ext4_xattr_create_cache(char *name);
+extern void ext4_xattr_destroy_cache(struct mb_cache *);
+
+>>>>>>> v3.18
 =======
 extern struct mb_cache *ext4_xattr_create_cache(char *name);
 extern void ext4_xattr_destroy_cache(struct mb_cache *);

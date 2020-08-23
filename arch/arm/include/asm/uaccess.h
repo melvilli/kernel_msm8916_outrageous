@@ -20,7 +20,10 @@
 #include <asm/compiler.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
 #include <asm-generic/uaccess-unaligned.h>
 #else
@@ -28,6 +31,9 @@
 #define __put_user_unaligned __put_user
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VERIFY_READ 0
 #define VERIFY_WRITE 1
@@ -111,14 +117,20 @@ extern int __get_user_1(void *);
 extern int __get_user_2(void *);
 extern int __get_user_4(void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __get_user_lo8(void *);
 extern int __get_user_8(void *);
 =======
+=======
+>>>>>>> v3.18
 extern int __get_user_32t_8(void *);
 extern int __get_user_8(void *);
 extern int __get_user_64t_1(void *);
 extern int __get_user_64t_2(void *);
 extern int __get_user_64t_4(void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __GUP_CLOBBER_1	"lr", "cc"
@@ -129,7 +141,11 @@ extern int __get_user_64t_4(void *);
 #endif
 #define __GUP_CLOBBER_4	"lr", "cc"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __GUP_CLOBBER_lo8 "lr", "cc"
+=======
+#define __GUP_CLOBBER_32t_8 "lr", "cc"
+>>>>>>> v3.18
 =======
 #define __GUP_CLOBBER_32t_8 "lr", "cc"
 >>>>>>> v3.18
@@ -147,6 +163,7 @@ extern int __get_user_64t_4(void *);
 /* narrowing a double-word get into a single 32bit word register: */
 #ifdef __ARMEB__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __get_user_xb(__r2, __p, __e, __l, __s)				\
 	__get_user_x(__r2, __p, __e, __l, lo8)
 #else
@@ -154,6 +171,8 @@ extern int __get_user_64t_4(void *);
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #define __get_user_x_32t(__r2, __p, __e, __l, __s)				\
 	__get_user_x(__r2, __p, __e, __l, 32t_8)
 #else
@@ -178,6 +197,9 @@ extern int __get_user_64t_4(void *);
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __get_user_check(x,p)							\
 	({								\
@@ -188,6 +210,7 @@ extern int __get_user_64t_4(void *);
 		register int __e asm("r0");				\
 		switch (sizeof(*(__p))) {				\
 		case 1:							\
+<<<<<<< HEAD
 <<<<<<< HEAD
 			__get_user_x(__r2, __p, __e, __l, 1);		\
 			break;						\
@@ -201,6 +224,8 @@ extern int __get_user_64t_4(void *);
 			if (sizeof((x)) < 8)				\
 				__get_user_xb(__r2, __p, __e, __l, 4);	\
 =======
+=======
+>>>>>>> v3.18
 			if (sizeof((x)) >= 8)				\
 				__get_user_x_64t(__r2, __p, __e, __l, 1); \
 			else						\
@@ -221,6 +246,9 @@ extern int __get_user_64t_4(void *);
 		case 8:							\
 			if (sizeof((x)) < 8)				\
 				__get_user_x_32t(__r2, __p, __e, __l, 4); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			else						\
 				__get_user_x(__r2, __p, __e, __l, 8);	\
@@ -308,7 +336,11 @@ static inline void set_fs(mm_segment_t fs)
 
 #define user_addr_max() \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(segment_eq(get_fs(), USER_DS) ? TASK_SIZE : ~0UL)
+=======
+	(segment_eq(get_fs(), KERNEL_DS) ? ~0UL : get_fs())
+>>>>>>> v3.18
 =======
 	(segment_eq(get_fs(), KERNEL_DS) ? ~0UL : get_fs())
 >>>>>>> v3.18

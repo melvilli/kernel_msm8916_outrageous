@@ -131,9 +131,15 @@ static void ccdc_enable_vport(int flag)
  * to be capture in CCDC reg
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ccdc_setwin(struct v4l2_rect *image_win,
 		enum ccdc_frmfmt frm_fmt,
 		int ppc)
+=======
+static void ccdc_setwin(struct v4l2_rect *image_win,
+			enum ccdc_frmfmt frm_fmt,
+			int ppc)
+>>>>>>> v3.18
 =======
 static void ccdc_setwin(struct v4l2_rect *image_win,
 			enum ccdc_frmfmt frm_fmt,
@@ -298,7 +304,11 @@ static int ccdc_update_raw_params(struct ccdc_config_params_raw *raw_params)
 		return -EFAULT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config_params->fault_pxl.fpc_table_addr = (unsigned int)fpc_physaddr;
+=======
+	config_params->fault_pxl.fpc_table_addr = (unsigned long)fpc_physaddr;
+>>>>>>> v3.18
 =======
 	config_params->fault_pxl.fpc_table_addr = (unsigned long)fpc_physaddr;
 >>>>>>> v3.18
@@ -381,7 +391,11 @@ static int ccdc_set_params(void __user *params)
  * This function will configure CCDC for YCbCr video capture
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ccdc_config_ycbcr(void)
+=======
+static void ccdc_config_ycbcr(void)
+>>>>>>> v3.18
 =======
 static void ccdc_config_ycbcr(void)
 >>>>>>> v3.18
@@ -521,7 +535,11 @@ static void ccdc_config_fpc(struct ccdc_fault_pixel *fpc)
 	/* Configure Fault pixel if needed */
 	regw(fpc->fpc_table_addr, CCDC_FPC_ADDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(ccdc_cfg.dev, "\nWriting 0x%x to FPC_ADDR...\n",
+=======
+	dev_dbg(ccdc_cfg.dev, "\nWriting 0x%lx to FPC_ADDR...\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(ccdc_cfg.dev, "\nWriting 0x%lx to FPC_ADDR...\n",
 >>>>>>> v3.18
@@ -542,7 +560,11 @@ static void ccdc_config_fpc(struct ccdc_fault_pixel *fpc)
  * This function will configure CCDC for Raw capture mode
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ccdc_config_raw(void)
+=======
+static void ccdc_config_raw(void)
+>>>>>>> v3.18
 =======
 static void ccdc_config_raw(void)
 >>>>>>> v3.18
@@ -604,6 +626,7 @@ static void ccdc_config_raw(void)
 		syn_mode |= CCDC_DATA_PACK_ENABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DM644X_VIDEO_PORT_ENABLE
 	/* enable video port */
 	val = CCDC_ENABLE_VIDEO_PORT;
@@ -611,6 +634,10 @@ static void ccdc_config_raw(void)
 	/* disable video port */
 	val = CCDC_DISABLE_VIDEO_PORT;
 #endif
+=======
+	/* disable video port */
+	val = CCDC_DISABLE_VIDEO_PORT;
+>>>>>>> v3.18
 =======
 	/* disable video port */
 	val = CCDC_DISABLE_VIDEO_PORT;

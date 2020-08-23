@@ -917,7 +917,10 @@ static __init int probe_chip_type(struct legacy_probe *probe)
 			return BIOS;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_irq_restore(flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

@@ -21,6 +21,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -31,6 +35,11 @@
 #include <linux/i2c.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_irq.h>
@@ -44,7 +53,11 @@
 #define RTC_I2C_ADDR		(0x0c >> 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell max8998_devs[] = {
+=======
+static const struct mfd_cell max8998_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell max8998_devs[] = {
 >>>>>>> v3.18
@@ -58,7 +71,11 @@ static const struct mfd_cell max8998_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell lp3974_devs[] = {
+=======
+static const struct mfd_cell lp3974_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell lp3974_devs[] = {
 >>>>>>> v3.18
@@ -146,6 +163,7 @@ int max8998_update_reg(struct i2c_client *i2c, u8 reg, u8 val, u8 mask)
 EXPORT_SYMBOL(max8998_update_reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max8998_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
@@ -158,6 +176,8 @@ static int max8998_i2c_probe(struct i2c_client *i2c,
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id max8998_dt_match[] = {
 	{ .compatible = "maxim,max8998", .data = (void *)TYPE_MAX8998 },
@@ -228,13 +248,21 @@ static int max8998_i2c_probe(struct i2c_client *i2c,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_clientdata(i2c, max8998);
 	max8998->dev = &i2c->dev;
 	max8998->i2c = i2c;
 	max8998->irq = i2c->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max8998->type = id->driver_data;
+=======
+	max8998->type = max8998_i2c_get_driver_data(i2c, id);
+	max8998->pdata = pdata;
+>>>>>>> v3.18
 =======
 	max8998->type = max8998_i2c_get_driver_data(i2c, id);
 	max8998->pdata = pdata;
@@ -258,7 +286,11 @@ static int max8998_i2c_probe(struct i2c_client *i2c,
 	pm_runtime_set_active(max8998->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (id->driver_data) {
+=======
+	switch (max8998->type) {
+>>>>>>> v3.18
 =======
 	switch (max8998->type) {
 >>>>>>> v3.18
@@ -288,7 +320,10 @@ err:
 	max8998_irq_exit(max8998);
 	i2c_unregister_device(max8998->rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(max8998);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -302,7 +337,10 @@ static int max8998_i2c_remove(struct i2c_client *i2c)
 	max8998_irq_exit(max8998);
 	i2c_unregister_device(max8998->rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(max8998);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -424,6 +462,10 @@ static struct i2c_driver max8998_i2c_driver = {
 		   .owner = THIS_MODULE,
 		   .pm = &max8998_pm,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		   .of_match_table = of_match_ptr(max8998_dt_match),
+>>>>>>> v3.18
 =======
 		   .of_match_table = of_match_ptr(max8998_dt_match),
 >>>>>>> v3.18

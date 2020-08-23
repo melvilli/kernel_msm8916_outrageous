@@ -4,6 +4,7 @@
  * -----------------------------------------------------------------------------
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/netdevice.h>
@@ -21,6 +22,8 @@
  */
 int oz_elt_buf_init(struct oz_elt_buf *buf)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/netdevice.h>
 #include "ozdbg.h"
@@ -32,6 +35,9 @@ int oz_elt_buf_init(struct oz_elt_buf *buf)
  * Context: softirq-serialized
  */
 void oz_elt_buf_init(struct oz_elt_buf *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	memset(buf, 0, sizeof(struct oz_elt_buf));
@@ -39,21 +45,28 @@ void oz_elt_buf_init(struct oz_elt_buf *buf)
 	INIT_LIST_HEAD(&buf->order_list);
 	INIT_LIST_HEAD(&buf->isoc_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->max_free_elts = 32;
 	spin_lock_init(&buf->lock);
 	return 0;
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&buf->lock);
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq or process
  */
 void oz_elt_buf_term(struct oz_elt_buf *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head *e;
 	int i;
@@ -83,6 +96,8 @@ void oz_elt_buf_term(struct oz_elt_buf *buf)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	struct oz_elt_info *ei, *n;
 
 	list_for_each_entry_safe(ei, n, &buf->isoc_list, link_order)
@@ -92,11 +107,15 @@ void oz_elt_buf_term(struct oz_elt_buf *buf)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Context: softirq or process
  */
 struct oz_elt_info *oz_elt_info_alloc(struct oz_elt_buf *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct oz_elt_info *ei = NULL;
 	spin_lock_bh(&buf->lock);
@@ -121,10 +140,15 @@ struct oz_elt_info *oz_elt_info_alloc(struct oz_elt_buf *buf)
 		ei->stream = NULL;
 		ei->magic = OZ_ELT_INFO_MAGIC_USED;
 =======
+=======
+>>>>>>> v3.18
 	struct oz_elt_info *ei;
 
 	ei = kmem_cache_zalloc(oz_elt_info_cache, GFP_ATOMIC);
 	if (ei) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		INIT_LIST_HEAD(&ei->link);
 		INIT_LIST_HEAD(&ei->link_order);
@@ -132,7 +156,12 @@ struct oz_elt_info *oz_elt_info_alloc(struct oz_elt_buf *buf)
 	return ei;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
+=======
+
+/*
+>>>>>>> v3.18
 =======
 
 /*
@@ -142,6 +171,7 @@ struct oz_elt_info *oz_elt_info_alloc(struct oz_elt_buf *buf)
  */
 void oz_elt_info_free(struct oz_elt_buf *buf, struct oz_elt_info *ei)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ei) {
 		if (ei->magic == OZ_ELT_INFO_MAGIC_USED) {
@@ -157,16 +187,22 @@ void oz_elt_info_free(struct oz_elt_buf *buf, struct oz_elt_info *ei)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 	if (ei)
 		kmem_cache_free(oz_elt_info_cache, ei);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*------------------------------------------------------------------------------
  * Context: softirq
  */
 void oz_elt_info_free_chain(struct oz_elt_buf *buf, struct list_head *list)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head *e;
 	e = list->next;
@@ -182,6 +218,8 @@ void oz_elt_info_free_chain(struct oz_elt_buf *buf, struct list_head *list)
 /*------------------------------------------------------------------------------
  */
 =======
+=======
+>>>>>>> v3.18
 	struct oz_elt_info *ei, *n;
 
 	spin_lock_bh(&buf->lock);
@@ -190,15 +228,24 @@ void oz_elt_info_free_chain(struct oz_elt_buf *buf, struct list_head *list)
 	spin_unlock_bh(&buf->lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int oz_elt_stream_create(struct oz_elt_buf *buf, u8 id, int max_buf_count)
 {
 	struct oz_elt_stream *st;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oz_trace("oz_elt_stream_create(0x%x)\n", id);
 
 	st = kzalloc(sizeof(struct oz_elt_stream), GFP_ATOMIC | __GFP_ZERO);
+=======
+	oz_dbg(ON, "%s: (0x%x)\n", __func__, id);
+
+	st = kzalloc(sizeof(struct oz_elt_stream), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	oz_dbg(ON, "%s: (0x%x)\n", __func__, id);
 
@@ -216,6 +263,7 @@ int oz_elt_stream_create(struct oz_elt_buf *buf, u8 id, int max_buf_count)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
  */
 int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
@@ -228,6 +276,8 @@ int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 	while (e != &buf->stream_list) {
 		st = container_of(e, struct oz_elt_stream, link);
 =======
+=======
+>>>>>>> v3.18
 
 int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 {
@@ -238,6 +288,9 @@ int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 	spin_lock_bh(&buf->lock);
 	list_for_each(e, &buf->stream_list) {
 		st = list_entry(e, struct oz_elt_stream, link);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (st->id == id) {
 			list_del(e);
@@ -249,6 +302,7 @@ int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 		spin_unlock_bh(&buf->lock);
 		return -1;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	e = st->elt_list.next;
 	while (e != &st->elt_list) {
@@ -262,6 +316,8 @@ int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 			st->buf_count,
 			ei->length, atomic_read(&st->ref_count));
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_safe(e, n, &st->elt_list) {
 		struct oz_elt_info *ei =
 			list_entry(e, struct oz_elt_info, link);
@@ -270,6 +326,9 @@ int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 		st->buf_count -= ei->length;
 		oz_dbg(STREAM, "Stream down: %d %d %d\n",
 		       st->buf_count, ei->length, atomic_read(&st->ref_count));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		oz_elt_stream_put(st);
 		oz_elt_info_free(buf, ei);
@@ -279,8 +338,12 @@ int oz_elt_stream_delete(struct oz_elt_buf *buf, u8 id)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
  */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -288,6 +351,7 @@ void oz_elt_stream_get(struct oz_elt_stream *st)
 {
 	atomic_inc(&st->ref_count);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*------------------------------------------------------------------------------
  */
@@ -300,6 +364,8 @@ void oz_elt_stream_put(struct oz_elt_stream *st)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 void oz_elt_stream_put(struct oz_elt_stream *st)
 {
@@ -310,6 +376,9 @@ void oz_elt_stream_put(struct oz_elt_stream *st)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Precondition: Element buffer lock must be held.
  * If this function fails the caller is responsible for deallocating the elt
@@ -321,14 +390,20 @@ int oz_queue_elt_info(struct oz_elt_buf *buf, u8 isoc, u8 id,
 	struct oz_elt_stream *st = NULL;
 	struct list_head *e;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id) {
 		list_for_each(e, &buf->stream_list) {
 			st = container_of(e, struct oz_elt_stream, link);
 =======
+=======
+>>>>>>> v3.18
 
 	if (id) {
 		list_for_each(e, &buf->stream_list) {
 			st = list_entry(e, struct oz_elt_stream, link);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (st->id == id)
 				break;
@@ -351,6 +426,10 @@ int oz_queue_elt_info(struct oz_elt_buf *buf, u8 isoc, u8 id,
 			(body->format == OZ_DATA_F_ISOC_FIXED)) {
 			u8 unit_count = body->frame_number;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -364,8 +443,12 @@ int oz_queue_elt_info(struct oz_elt_buf *buf, u8 isoc, u8 id,
 		/* Add to list in stream. */
 		list_add_tail(&ei->link, &st->elt_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oz_trace2(OZ_TRACE_STREAM, "Stream up: %d  %d\n",
 			st->buf_count, ei->length);
+=======
+		oz_dbg(STREAM, "Stream up: %d %d\n", st->buf_count, ei->length);
+>>>>>>> v3.18
 =======
 		oz_dbg(STREAM, "Stream up: %d %d\n", st->buf_count, ei->length);
 >>>>>>> v3.18
@@ -389,8 +472,12 @@ int oz_queue_elt_info(struct oz_elt_buf *buf, u8 isoc, u8 id,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
  */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -399,9 +486,15 @@ int oz_select_elts_for_tx(struct oz_elt_buf *buf, u8 isoc, unsigned *len,
 {
 	int count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *e;
 	struct list_head *el;
 	struct oz_elt_info *ei;
+=======
+	struct list_head *el;
+	struct oz_elt_info *ei, *n;
+
+>>>>>>> v3.18
 =======
 	struct list_head *el;
 	struct oz_elt_info *ei, *n;
@@ -413,6 +506,7 @@ int oz_select_elts_for_tx(struct oz_elt_buf *buf, u8 isoc, unsigned *len,
 	else
 		el = &buf->order_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e = el->next;
 	while (e != el) {
 		struct oz_app_hdr *app_hdr;
@@ -421,10 +515,15 @@ int oz_select_elts_for_tx(struct oz_elt_buf *buf, u8 isoc, unsigned *len,
 		if ((*len + ei->length) <= max_len) {
 			app_hdr = (struct oz_app_hdr *)
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry_safe(ei, n, el, link_order) {
 		if ((*len + ei->length) <= max_len) {
 			struct oz_app_hdr *app_hdr = (struct oz_app_hdr *)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				&ei->data[sizeof(struct oz_elt)];
 			app_hdr->elt_seq_num = buf->tx_seq_num[ei->app_id]++;
@@ -436,9 +535,14 @@ int oz_select_elts_for_tx(struct oz_elt_buf *buf, u8 isoc, unsigned *len,
 			if (ei->stream) {
 				ei->stream->buf_count -= ei->length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				oz_trace2(OZ_TRACE_STREAM,
 					"Stream down: %d  %d\n",
 					ei->stream->buf_count, ei->length);
+=======
+				oz_dbg(STREAM, "Stream down: %d %d\n",
+				       ei->stream->buf_count, ei->length);
+>>>>>>> v3.18
 =======
 				oz_dbg(STREAM, "Stream down: %d %d\n",
 				       ei->stream->buf_count, ei->length);
@@ -456,6 +560,7 @@ int oz_select_elts_for_tx(struct oz_elt_buf *buf, u8 isoc, unsigned *len,
 	spin_unlock_bh(&buf->lock);
 	return count;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*------------------------------------------------------------------------------
  */
@@ -485,9 +590,14 @@ void oz_trim_elt_pool(struct oz_elt_buf *buf)
 		kfree(ei);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 int oz_are_elts_available(struct oz_elt_buf *buf)
 {
 	return !list_empty(&buf->order_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

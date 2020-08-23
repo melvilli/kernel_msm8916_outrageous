@@ -56,9 +56,15 @@ struct usbhs_pipe_info {
  */
 #define __usbhs_for_each_pipe(start, pos, info, i)	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = start, pos = (info)->pipe + i;		\
 	     i < (info)->size;				\
 	     i++, pos = (info)->pipe + i)
+=======
+	for ((i) = start;						\
+	     ((i) < (info)->size) && ((pos) = (info)->pipe + (i));	\
+	     (i)++)
+>>>>>>> v3.18
 =======
 	for ((i) = start;						\
 	     ((i) < (info)->size) && ((pos) = (info)->pipe + (i));	\
@@ -83,6 +89,10 @@ char *usbhs_pipe_name(struct usbhs_pipe *pipe);
 struct usbhs_pipe
 *usbhs_pipe_malloc(struct usbhs_priv *priv, int endpoint_type, int dir_in);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void usbhs_pipe_free(struct usbhs_pipe *pipe);
+>>>>>>> v3.18
 =======
 void usbhs_pipe_free(struct usbhs_pipe *pipe);
 >>>>>>> v3.18

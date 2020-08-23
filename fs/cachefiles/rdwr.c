@@ -13,6 +13,10 @@
 #include <linux/slab.h>
 #include <linux/file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/swap.h>
+>>>>>>> v3.18
 =======
 #include <linux/swap.h>
 >>>>>>> v3.18
@@ -155,7 +159,10 @@ static void cachefiles_read_copier(struct fscache_operation *_op)
 	struct cachefiles_object *object;
 	struct fscache_retrieval *op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pagevec pagevec;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int error, max;
@@ -167,8 +174,11 @@ static void cachefiles_read_copier(struct fscache_operation *_op)
 	_enter("{ino=%lu}", object->backer->d_inode->i_ino);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pagevec_init(&pagevec, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	max = 8;
@@ -238,8 +248,12 @@ static void cachefiles_read_copier(struct fscache_operation *_op)
 static int cachefiles_read_backing_file_one(struct cachefiles_object *object,
 					    struct fscache_retrieval *op,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    struct page *netpage,
 					    struct pagevec *pagevec)
+=======
+					    struct page *netpage)
+>>>>>>> v3.18
 =======
 					    struct page *netpage)
 >>>>>>> v3.18
@@ -252,8 +266,11 @@ static int cachefiles_read_backing_file_one(struct cachefiles_object *object,
 	_enter("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pagevec_reinit(pagevec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	_debug("read back %p{%lu,%d}",
@@ -285,8 +302,13 @@ static int cachefiles_read_backing_file_one(struct cachefiles_object *object,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = add_to_page_cache(newpage, bmapping,
 					netpage->index, cachefiles_gfp);
+=======
+		ret = add_to_page_cache_lru(newpage, bmapping,
+					    netpage->index, cachefiles_gfp);
+>>>>>>> v3.18
 =======
 		ret = add_to_page_cache_lru(newpage, bmapping,
 					    netpage->index, cachefiles_gfp);
@@ -298,8 +320,13 @@ static int cachefiles_read_backing_file_one(struct cachefiles_object *object,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we've installed a new backing page, so now we need to add it
 	 * to the LRU list and start it reading */
+=======
+	/* we've installed a new backing page, so now we need to start
+	 * it reading */
+>>>>>>> v3.18
 =======
 	/* we've installed a new backing page, so now we need to start
 	 * it reading */
@@ -311,10 +338,13 @@ installed_new_backing_page:
 	newpage = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page_cache_get(backpage);
 	pagevec_add(pagevec, backpage);
 	__pagevec_lru_add_file(pagevec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 read_backing_page:
@@ -433,7 +463,10 @@ int cachefiles_read_or_alloc_page(struct fscache_retrieval *op,
 	struct cachefiles_object *object;
 	struct cachefiles_cache *cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pagevec pagevec;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct inode *inode;
@@ -467,8 +500,11 @@ int cachefiles_read_or_alloc_page(struct fscache_retrieval *op,
 	op->op.processor = cachefiles_read_copier;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pagevec_init(&pagevec, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* we assume the absence or presence of the first block is a good
@@ -489,8 +525,12 @@ int cachefiles_read_or_alloc_page(struct fscache_retrieval *op,
 		/* submit the apparently valid page to the backing fs to be
 		 * read from disk */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cachefiles_read_backing_file_one(object, op, page,
 						       &pagevec);
+=======
+		ret = cachefiles_read_backing_file_one(object, op, page);
+>>>>>>> v3.18
 =======
 		ret = cachefiles_read_backing_file_one(object, op, page);
 >>>>>>> v3.18
@@ -523,7 +563,10 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 	struct cachefiles_one_read *monitor = NULL;
 	struct address_space *bmapping = object->backer->d_inode->i_mapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pagevec lru_pvec;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct page *newpage = NULL, *netpage, *_n, *backpage = NULL;
@@ -532,8 +575,11 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 	_enter("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pagevec_init(&lru_pvec, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	list_for_each_entry_safe(netpage, _n, list, lru) {
@@ -565,8 +611,14 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = add_to_page_cache(newpage, bmapping,
 						netpage->index, cachefiles_gfp);
+=======
+			ret = add_to_page_cache_lru(newpage, bmapping,
+						    netpage->index,
+						    cachefiles_gfp);
+>>>>>>> v3.18
 =======
 			ret = add_to_page_cache_lru(newpage, bmapping,
 						    netpage->index,
@@ -579,8 +631,13 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* we've installed a new backing page, so now we need to add it
 		 * to the LRU list and start it reading */
+=======
+		/* we've installed a new backing page, so now we need
+		 * to start it reading */
+>>>>>>> v3.18
 =======
 		/* we've installed a new backing page, so now we need
 		 * to start it reading */
@@ -592,10 +649,13 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 		newpage = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page_cache_get(backpage);
 		if (!pagevec_add(&lru_pvec, backpage))
 			__pagevec_lru_add_file(&lru_pvec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reread_backing_page:
@@ -609,8 +669,13 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 		_debug("- monitor add");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = add_to_page_cache(netpage, op->mapping, netpage->index,
 					cachefiles_gfp);
+=======
+		ret = add_to_page_cache_lru(netpage, op->mapping,
+					    netpage->index, cachefiles_gfp);
+>>>>>>> v3.18
 =======
 		ret = add_to_page_cache_lru(netpage, op->mapping,
 					    netpage->index, cachefiles_gfp);
@@ -625,10 +690,13 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page_cache_get(netpage);
 		if (!pagevec_add(&lru_pvec, netpage))
 			__pagevec_lru_add_file(&lru_pvec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* install a monitor */
@@ -694,8 +762,13 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 		_debug("- uptodate");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = add_to_page_cache(netpage, op->mapping, netpage->index,
 					cachefiles_gfp);
+=======
+		ret = add_to_page_cache_lru(netpage, op->mapping,
+					    netpage->index, cachefiles_gfp);
+>>>>>>> v3.18
 =======
 		ret = add_to_page_cache_lru(netpage, op->mapping,
 					    netpage->index, cachefiles_gfp);
@@ -717,10 +790,13 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 		fscache_mark_page_cached(op, netpage);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page_cache_get(netpage);
 		if (!pagevec_add(&lru_pvec, netpage))
 			__pagevec_lru_add_file(&lru_pvec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* the netpage is unlocked and marked up to date here */
@@ -738,8 +814,11 @@ static int cachefiles_read_backing_file(struct cachefiles_object *object,
 out:
 	/* tidy up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pagevec_lru_add_file(&lru_pvec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (newpage)
@@ -989,7 +1068,10 @@ int cachefiles_write_page(struct fscache_storage *op, struct page *page)
 	struct cachefiles_object *object;
 	struct cachefiles_cache *cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mm_segment_t old_fs;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct file *file;
@@ -1026,6 +1108,7 @@ int cachefiles_write_page(struct fscache_storage *op, struct page *page)
 		ret = PTR_ERR(file);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EIO;
 		if (file->f_op->write) {
 			pos = (loff_t) page->index << PAGE_SHIFT;
@@ -1057,6 +1140,8 @@ int cachefiles_write_page(struct fscache_storage *op, struct page *page)
 				ret = -EIO;
 		}
 =======
+=======
+>>>>>>> v3.18
 		pos = (loff_t) page->index << PAGE_SHIFT;
 
 		/* we mustn't write more data than we have, so we have
@@ -1078,6 +1163,9 @@ int cachefiles_write_page(struct fscache_storage *op, struct page *page)
 		kunmap(page);
 		if (ret != len)
 			ret = -EIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fput(file);
 	}

@@ -13,7 +13,10 @@
 #include <linux/errno.h>
 #include <linux/filter.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/moduleloader.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -21,13 +24,19 @@
 #include <linux/slab.h>
 #include <linux/if_vlan.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cacheflush.h>
 #include <asm/hwcap.h>
 =======
+=======
+>>>>>>> v3.18
 
 #include <asm/cacheflush.h>
 #include <asm/hwcap.h>
 #include <asm/opcodes.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "bpf_jit_32.h"
@@ -66,7 +75,11 @@
 
 struct jit_ctx {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct sk_filter *skf;
+=======
+	const struct bpf_prog *skf;
+>>>>>>> v3.18
 =======
 	const struct bpf_prog *skf;
 >>>>>>> v3.18
@@ -128,14 +141,20 @@ static u32 jit_udiv(u32 dividend, u32 divisor)
 static inline void _emit(int cond, u32 inst, struct jit_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctx->target != NULL)
 		ctx->target[ctx->idx] = inst | (cond << 28);
 =======
+=======
+>>>>>>> v3.18
 	inst |= (cond << 28);
 	inst = __opcode_to_mem_arm(inst);
 
 	if (ctx->target != NULL)
 		ctx->target[ctx->idx] = inst;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ctx->idx++;
@@ -155,7 +174,11 @@ static u16 saved_regs(struct jit_ctx *ctx)
 
 	if ((ctx->skf->len > 1) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (ctx->skf->insns[0].code == BPF_S_RET_A))
+=======
+	    (ctx->skf->insns[0].code == (BPF_RET | BPF_A)))
+>>>>>>> v3.18
 =======
 	    (ctx->skf->insns[0].code == (BPF_RET | BPF_A)))
 >>>>>>> v3.18
@@ -187,6 +210,7 @@ static inline bool is_load_to_a(u16 inst)
 {
 	switch (inst) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BPF_S_LD_W_LEN:
 	case BPF_S_LD_W_ABS:
 	case BPF_S_LD_H_ABS:
@@ -200,10 +224,15 @@ static inline bool is_load_to_a(u16 inst)
 	case BPF_S_ANC_VLAN_TAG_PRESENT:
 	case BPF_S_ANC_QUEUE:
 =======
+=======
+>>>>>>> v3.18
 	case BPF_LD | BPF_W | BPF_LEN:
 	case BPF_LD | BPF_W | BPF_ABS:
 	case BPF_LD | BPF_H | BPF_ABS:
 	case BPF_LD | BPF_B | BPF_ABS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	default:
@@ -212,7 +241,10 @@ static inline bool is_load_to_a(u16 inst)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void jit_fill_hole(void *area, unsigned int size)
 {
 	u32 *ptr;
@@ -221,6 +253,9 @@ static void jit_fill_hole(void *area, unsigned int size)
 		*ptr++ = __opcode_to_mem_arm(ARM_INST_UDF);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void build_prologue(struct jit_ctx *ctx)
 {
@@ -256,7 +291,11 @@ static void build_prologue(struct jit_ctx *ctx)
 
 	/* do not leak kernel data to userspace */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((first_inst != BPF_S_RET_K) && !(is_load_to_a(first_inst)))
+=======
+	if ((first_inst != (BPF_RET | BPF_K)) && !(is_load_to_a(first_inst)))
+>>>>>>> v3.18
 =======
 	if ((first_inst != (BPF_RET | BPF_K)) && !(is_load_to_a(first_inst)))
 >>>>>>> v3.18
@@ -518,7 +557,11 @@ static int build_body(struct jit_ctx *ctx)
 {
 	void *load_func[] = {jit_get_skb_b, jit_get_skb_h, jit_get_skb_w};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct sk_filter *prog = ctx->skf;
+=======
+	const struct bpf_prog *prog = ctx->skf;
+>>>>>>> v3.18
 =======
 	const struct bpf_prog *prog = ctx->skf;
 >>>>>>> v3.18
@@ -529,16 +572,22 @@ static int build_body(struct jit_ctx *ctx)
 
 	for (i = 0; i < prog->len; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inst = &(prog->insns[i]);
 		/* K as an immediate value operand */
 		k = inst->k;
 =======
+=======
+>>>>>>> v3.18
 		u16 code;
 
 		inst = &(prog->insns[i]);
 		/* K as an immediate value operand */
 		k = inst->k;
 		code = bpf_anc_helper(inst);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* compute offsets only in the fake pass */
@@ -546,17 +595,23 @@ static int build_body(struct jit_ctx *ctx)
 			ctx->offsets[i] = ctx->idx * 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (inst->code) {
 		case BPF_S_LD_IMM:
 			emit_mov_i(r_A, k, ctx);
 			break;
 		case BPF_S_LD_W_LEN:
 =======
+=======
+>>>>>>> v3.18
 		switch (code) {
 		case BPF_LD | BPF_IMM:
 			emit_mov_i(r_A, k, ctx);
 			break;
 		case BPF_LD | BPF_W | BPF_LEN:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->seen |= SEEN_SKB;
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, len) != 4);
@@ -564,7 +619,11 @@ static int build_body(struct jit_ctx *ctx)
 				       offsetof(struct sk_buff, len)), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_LD_MEM:
+=======
+		case BPF_LD | BPF_MEM:
+>>>>>>> v3.18
 =======
 		case BPF_LD | BPF_MEM:
 >>>>>>> v3.18
@@ -572,6 +631,7 @@ static int build_body(struct jit_ctx *ctx)
 			ctx->seen |= SEEN_MEM_WORD(k);
 			emit(ARM_LDR_I(r_A, ARM_SP, SCRATCH_OFF(k)), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_LD_W_ABS:
 			load_order = 2;
@@ -581,6 +641,8 @@ static int build_body(struct jit_ctx *ctx)
 			goto load;
 		case BPF_S_LD_B_ABS:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LD | BPF_W | BPF_ABS:
 			load_order = 2;
 			goto load;
@@ -588,6 +650,9 @@ static int build_body(struct jit_ctx *ctx)
 			load_order = 1;
 			goto load;
 		case BPF_LD | BPF_B | BPF_ABS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			load_order = 0;
 load:
@@ -632,6 +697,7 @@ load_common:
 			emit(ARM_MOV_R(r_A, ARM_R0), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_LD_W_IND:
 			load_order = 2;
 			goto load_ind;
@@ -640,6 +706,8 @@ load_common:
 			goto load_ind;
 		case BPF_S_LD_B_IND:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LD | BPF_W | BPF_IND:
 			load_order = 2;
 			goto load_ind;
@@ -647,11 +715,15 @@ load_common:
 			load_order = 1;
 			goto load_ind;
 		case BPF_LD | BPF_B | BPF_IND:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			load_order = 0;
 load_ind:
 			OP_IMM3(ARM_ADD, r_off, r_X, k, ctx);
 			goto load_common;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_LDX_IMM:
 			ctx->seen |= SEEN_X;
@@ -659,16 +731,22 @@ load_ind:
 			break;
 		case BPF_S_LDX_W_LEN:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LDX | BPF_IMM:
 			ctx->seen |= SEEN_X;
 			emit_mov_i(r_X, k, ctx);
 			break;
 		case BPF_LDX | BPF_W | BPF_LEN:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->seen |= SEEN_X | SEEN_SKB;
 			emit(ARM_LDR_I(r_X, r_skb,
 				       offsetof(struct sk_buff, len)), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_LDX_MEM:
 			ctx->seen |= SEEN_X | SEEN_MEM_WORD(k);
@@ -676,11 +754,16 @@ load_ind:
 			break;
 		case BPF_S_LDX_B_MSH:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_LDX | BPF_MEM:
 			ctx->seen |= SEEN_X | SEEN_MEM_WORD(k);
 			emit(ARM_LDR_I(r_X, ARM_SP, SCRATCH_OFF(k)), ctx);
 			break;
 		case BPF_LDX | BPF_B | BPF_MSH:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* x = ((*(frame + k)) & 0xf) << 2; */
 			ctx->seen |= SEEN_X | SEEN_DATA | SEEN_CALL;
@@ -712,22 +795,29 @@ load_ind:
 			emit(ARM_LSL_I(r_X, r_X, 2), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ST:
 			ctx->seen |= SEEN_MEM_WORD(k);
 			emit(ARM_STR_I(r_A, ARM_SP, SCRATCH_OFF(k)), ctx);
 			break;
 		case BPF_S_STX:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ST:
 			ctx->seen |= SEEN_MEM_WORD(k);
 			emit(ARM_STR_I(r_A, ARM_SP, SCRATCH_OFF(k)), ctx);
 			break;
 		case BPF_STX:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			update_on_xread(ctx);
 			ctx->seen |= SEEN_MEM_WORD(k);
 			emit(ARM_STR_I(r_X, ARM_SP, SCRATCH_OFF(k)), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ALU_ADD_K:
 			/* A += K */
@@ -747,6 +837,8 @@ load_ind:
 			break;
 		case BPF_S_ALU_MUL_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_ADD | BPF_K:
 			/* A += K */
 			OP_IMM3(ARM_ADD, r_A, r_A, k, ctx);
@@ -764,11 +856,15 @@ load_ind:
 			emit(ARM_SUB_R(r_A, r_A, r_X), ctx);
 			break;
 		case BPF_ALU | BPF_MUL | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* A *= K */
 			emit_mov_i(r_scratch, k, ctx);
 			emit(ARM_MUL(r_A, r_A, r_scratch), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ALU_MUL_X:
 			update_on_xread(ctx);
@@ -776,11 +872,16 @@ load_ind:
 			break;
 		case BPF_S_ALU_DIV_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_MUL | BPF_X:
 			update_on_xread(ctx);
 			emit(ARM_MUL(r_A, r_A, r_X), ctx);
 			break;
 		case BPF_ALU | BPF_DIV | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (k == 1)
 				break;
@@ -788,7 +889,11 @@ load_ind:
 			emit_udiv(r_A, r_A, r_scratch, ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ALU_DIV_X:
+=======
+		case BPF_ALU | BPF_DIV | BPF_X:
+>>>>>>> v3.18
 =======
 		case BPF_ALU | BPF_DIV | BPF_X:
 >>>>>>> v3.18
@@ -797,6 +902,7 @@ load_ind:
 			emit_err_ret(ARM_COND_EQ, ctx);
 			emit_udiv(r_A, r_A, r_X, ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ALU_OR_K:
 			/* A |= K */
@@ -813,6 +919,8 @@ load_ind:
 		case BPF_S_ANC_ALU_XOR_X:
 		case BPF_S_ALU_XOR_X:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_OR | BPF_K:
 			/* A |= K */
 			OP_IMM3(ARM_ORR, r_A, r_A, k, ctx);
@@ -827,11 +935,15 @@ load_ind:
 			break;
 		case BPF_ANC | SKF_AD_ALU_XOR_X:
 		case BPF_ALU | BPF_XOR | BPF_X:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* A ^= X */
 			update_on_xread(ctx);
 			emit(ARM_EOR_R(r_A, r_A, r_X), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ALU_AND_K:
 			/* A &= K */
@@ -843,6 +955,8 @@ load_ind:
 			break;
 		case BPF_S_ALU_LSH_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_AND | BPF_K:
 			/* A &= K */
 			OP_IMM3(ARM_AND, r_A, r_A, k, ctx);
@@ -852,11 +966,15 @@ load_ind:
 			emit(ARM_AND_R(r_A, r_A, r_X), ctx);
 			break;
 		case BPF_ALU | BPF_LSH | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (unlikely(k > 31))
 				return -1;
 			emit(ARM_LSL_I(r_A, r_A, k), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ALU_LSH_X:
 			update_on_xread(ctx);
@@ -864,16 +982,22 @@ load_ind:
 			break;
 		case BPF_S_ALU_RSH_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_LSH | BPF_X:
 			update_on_xread(ctx);
 			emit(ARM_LSL_R(r_A, r_A, r_X), ctx);
 			break;
 		case BPF_ALU | BPF_RSH | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (unlikely(k > 31))
 				return -1;
 			emit(ARM_LSR_I(r_A, r_A, k), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ALU_RSH_X:
 			update_on_xread(ctx);
@@ -897,6 +1021,8 @@ load_ind:
 			goto cmp_imm;
 		case BPF_S_JMP_JGE_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ALU | BPF_RSH | BPF_X:
 			update_on_xread(ctx);
 			emit(ARM_LSR_R(r_A, r_A, r_X), ctx);
@@ -918,6 +1044,9 @@ load_ind:
 			condt  = ARM_COND_HI;
 			goto cmp_imm;
 		case BPF_JMP | BPF_JGE | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* pc += (A >= K) ? pc->jt : pc->jf */
 			condt  = ARM_COND_HS;
@@ -938,6 +1067,7 @@ cond_jump:
 							     ctx)), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_JMP_JEQ_X:
 			/* pc += (A == X) ? pc->jt : pc->jf */
 			condt   = ARM_COND_EQ;
@@ -948,6 +1078,8 @@ cond_jump:
 			goto cmp_x;
 		case BPF_S_JMP_JGE_X:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_JMP | BPF_JEQ | BPF_X:
 			/* pc += (A == X) ? pc->jt : pc->jf */
 			condt   = ARM_COND_EQ;
@@ -957,6 +1089,9 @@ cond_jump:
 			condt   = ARM_COND_HI;
 			goto cmp_x;
 		case BPF_JMP | BPF_JGE | BPF_X:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* pc += (A >= X) ? pc->jt : pc->jf */
 			condt   = ARM_COND_CS;
@@ -965,7 +1100,11 @@ cmp_x:
 			emit(ARM_CMP_R(r_A, r_X), ctx);
 			goto cond_jump;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_JMP_JSET_K:
+=======
+		case BPF_JMP | BPF_JSET | BPF_K:
+>>>>>>> v3.18
 =======
 		case BPF_JMP | BPF_JSET | BPF_K:
 >>>>>>> v3.18
@@ -982,7 +1121,11 @@ cmp_x:
 			}
 			goto cond_jump;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_JMP_JSET_X:
+=======
+		case BPF_JMP | BPF_JSET | BPF_X:
+>>>>>>> v3.18
 =======
 		case BPF_JMP | BPF_JSET | BPF_X:
 >>>>>>> v3.18
@@ -992,15 +1135,21 @@ cmp_x:
 			emit(ARM_TST_R(r_A, r_X), ctx);
 			goto cond_jump;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_RET_A:
 			emit(ARM_MOV_R(ARM_R0, r_A), ctx);
 			goto b_epilogue;
 		case BPF_S_RET_K:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_RET | BPF_A:
 			emit(ARM_MOV_R(ARM_R0, r_A), ctx);
 			goto b_epilogue;
 		case BPF_RET | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((k == 0) && (ctx->ret0_fp_idx < 0))
 				ctx->ret0_fp_idx = i;
@@ -1010,7 +1159,11 @@ b_epilogue:
 				emit(ARM_B(b_imm(prog->len, ctx)), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_MISC_TAX:
+=======
+		case BPF_MISC | BPF_TAX:
+>>>>>>> v3.18
 =======
 		case BPF_MISC | BPF_TAX:
 >>>>>>> v3.18
@@ -1019,7 +1172,11 @@ b_epilogue:
 			emit(ARM_MOV_R(r_X, r_A), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_MISC_TXA:
+=======
+		case BPF_MISC | BPF_TXA:
+>>>>>>> v3.18
 =======
 		case BPF_MISC | BPF_TXA:
 >>>>>>> v3.18
@@ -1028,7 +1185,11 @@ b_epilogue:
 			emit(ARM_MOV_R(r_A, r_X), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_PROTOCOL:
+=======
+		case BPF_ANC | SKF_AD_PROTOCOL:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_PROTOCOL:
 >>>>>>> v3.18
@@ -1041,7 +1202,11 @@ b_epilogue:
 			emit_swap16(r_A, r_scratch, ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_CPU:
+=======
+		case BPF_ANC | SKF_AD_CPU:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_CPU:
 >>>>>>> v3.18
@@ -1053,7 +1218,11 @@ b_epilogue:
 			emit(ARM_LDR_I(r_A, r_scratch, off), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_IFINDEX:
+=======
+		case BPF_ANC | SKF_AD_IFINDEX:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_IFINDEX:
 >>>>>>> v3.18
@@ -1071,7 +1240,11 @@ b_epilogue:
 			emit(ARM_LDR_I(r_A, r_scratch, off), ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_MARK:
+=======
+		case BPF_ANC | SKF_AD_MARK:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_MARK:
 >>>>>>> v3.18
@@ -1080,6 +1253,7 @@ b_epilogue:
 			off = offsetof(struct sk_buff, mark);
 			emit(ARM_LDR_I(r_A, r_skb, off), ctx);
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case BPF_S_ANC_RXHASH:
 			ctx->seen |= SEEN_SKB;
@@ -1090,6 +1264,8 @@ b_epilogue:
 		case BPF_S_ANC_VLAN_TAG:
 		case BPF_S_ANC_VLAN_TAG_PRESENT:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_ANC | SKF_AD_RXHASH:
 			ctx->seen |= SEEN_SKB;
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, hash) != 4);
@@ -1098,13 +1274,20 @@ b_epilogue:
 			break;
 		case BPF_ANC | SKF_AD_VLAN_TAG:
 		case BPF_ANC | SKF_AD_VLAN_TAG_PRESENT:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ctx->seen |= SEEN_SKB;
 			BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, vlan_tci) != 2);
 			off = offsetof(struct sk_buff, vlan_tci);
 			emit(ARM_LDRH_I(r_A, r_skb, off), ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (inst->code == BPF_S_ANC_VLAN_TAG)
+=======
+			if (code == (BPF_ANC | SKF_AD_VLAN_TAG))
+>>>>>>> v3.18
 =======
 			if (code == (BPF_ANC | SKF_AD_VLAN_TAG))
 >>>>>>> v3.18
@@ -1113,7 +1296,11 @@ b_epilogue:
 				OP_IMM3(ARM_AND, r_A, r_A, VLAN_TAG_PRESENT, ctx);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_ANC_QUEUE:
+=======
+		case BPF_ANC | SKF_AD_QUEUE:
+>>>>>>> v3.18
 =======
 		case BPF_ANC | SKF_AD_QUEUE:
 >>>>>>> v3.18
@@ -1139,12 +1326,15 @@ b_epilogue:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bpf_jit_compile(struct sk_filter *fp)
 {
 	struct jit_ctx ctx;
 	unsigned tmp_idx;
 	unsigned alloc_size;
 =======
+=======
+>>>>>>> v3.18
 void bpf_jit_compile(struct bpf_prog *fp)
 {
 	struct bpf_binary_header *header;
@@ -1152,6 +1342,9 @@ void bpf_jit_compile(struct bpf_prog *fp)
 	unsigned tmp_idx;
 	unsigned alloc_size;
 	u8 *target_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!bpf_jit_enable)
@@ -1189,6 +1382,7 @@ void bpf_jit_compile(struct bpf_prog *fp)
 	build_epilogue(&ctx);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	alloc_size = 4 * ctx.idx;
 	ctx.target = module_alloc(max(sizeof(struct work_struct),
@@ -1198,6 +1392,8 @@ void bpf_jit_compile(struct bpf_prog *fp)
 
 	ctx.idx = 0;
 =======
+=======
+>>>>>>> v3.18
 	alloc_size = 4 * ctx.idx;
 	header = bpf_jit_binary_alloc(alloc_size, &target_ptr,
 				      4, jit_fill_hole);
@@ -1207,6 +1403,9 @@ void bpf_jit_compile(struct bpf_prog *fp)
 	ctx.target = (u32 *) target_ptr;
 	ctx.idx = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	build_prologue(&ctx);
 	build_body(&ctx);
@@ -1224,7 +1423,13 @@ void bpf_jit_compile(struct bpf_prog *fp)
 		bpf_jit_dump(fp->len, alloc_size, 2, ctx.target);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fp->bpf_func = (void *)ctx.target;
+=======
+	set_memory_ro((unsigned long)header, header->pages);
+	fp->bpf_func = (void *)ctx.target;
+	fp->jited = true;
+>>>>>>> v3.18
 =======
 	set_memory_ro((unsigned long)header, header->pages);
 	fp->bpf_func = (void *)ctx.target;
@@ -1235,6 +1440,7 @@ out:
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void bpf_jit_free_worker(struct work_struct *work)
 {
@@ -1252,6 +1458,8 @@ void bpf_jit_free(struct sk_filter *fp)
 		schedule_work(work);
 	}
 =======
+=======
+>>>>>>> v3.18
 void bpf_jit_free(struct bpf_prog *fp)
 {
 	unsigned long addr = (unsigned long)fp->bpf_func & PAGE_MASK;
@@ -1265,5 +1473,8 @@ void bpf_jit_free(struct bpf_prog *fp)
 
 free_filter:
 	bpf_prog_unlock_free(fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

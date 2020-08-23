@@ -27,6 +27,11 @@
 #include "hid-ids.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_SENSOR_HUB_ENUM_QUIRK	0x01
+
+>>>>>>> v3.18
 =======
 #define HID_SENSOR_HUB_ENUM_QUIRK	0x01
 
@@ -60,9 +65,15 @@ struct sensor_hub_pending {
  * @hid_sensor_hub_client_devs:	Stores all MFD cells for a hub instance.
  * @hid_sensor_client_cnt: Number of MFD cells, (no of sensors attached).
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct sensor_hub_data {
 	struct hid_sensor_hub_device *hsdev;
+=======
+ * @ref_cnt:		Number of MFD clients have opened this device
+ */
+struct sensor_hub_data {
+>>>>>>> v3.18
 =======
  * @ref_cnt:		Number of MFD clients have opened this device
  */
@@ -76,6 +87,11 @@ struct sensor_hub_data {
 	struct mfd_cell *hid_sensor_hub_client_devs;
 	int hid_sensor_client_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long quirks;
+	int ref_cnt;
+>>>>>>> v3.18
 =======
 	unsigned long quirks;
 	int ref_cnt;
@@ -93,6 +109,10 @@ struct hid_sensor_hub_callbacks_list {
 	struct list_head list;
 	u32 usage_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hid_sensor_hub_device *hsdev;
+>>>>>>> v3.18
 =======
 	struct hid_sensor_hub_device *hsdev;
 >>>>>>> v3.18
@@ -115,6 +135,7 @@ static struct hid_report *sensor_hub_report(int id, struct hid_device *hdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sensor_hub_get_physical_device_count(
 				struct hid_report_enum *report_enum)
 {
@@ -131,6 +152,8 @@ static int sensor_hub_get_physical_device_count(
 
 	return cnt;
 =======
+=======
+>>>>>>> v3.18
 static int sensor_hub_get_physical_device_count(struct hid_device *hdev)
 {
 	int i;
@@ -143,11 +166,15 @@ static int sensor_hub_get_physical_device_count(struct hid_device *hdev)
 	}
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sensor_hub_fill_attr_info(
 		struct hid_sensor_hub_attribute_info *info,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		s32 index, s32 report_id, s32 units, s32 unit_expo, s32 size)
 {
@@ -157,6 +184,8 @@ static void sensor_hub_fill_attr_info(
 	info->unit_expo = unit_expo;
 	info->size = size/8;
 =======
+=======
+>>>>>>> v3.18
 		s32 index, s32 report_id, struct hid_field *field)
 {
 	info->index = index;
@@ -166,18 +195,27 @@ static void sensor_hub_fill_attr_info(
 	info->size = (field->report_size * field->report_count)/8;
 	info->logical_minimum = field->logical_minimum;
 	info->logical_maximum = field->logical_maximum;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct hid_sensor_hub_callbacks *sensor_hub_get_callback(
 					struct hid_device *hdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					u32 usage_id, void **priv)
 =======
+=======
+>>>>>>> v3.18
 					u32 usage_id,
 					int collection_index,
 					struct hid_sensor_hub_device **hsdev,
 					void **priv)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hid_sensor_hub_callbacks_list *callback;
@@ -186,9 +224,12 @@ static struct hid_sensor_hub_callbacks *sensor_hub_get_callback(
 	spin_lock(&pdata->dyn_callback_lock);
 	list_for_each_entry(callback, &pdata->dyn_callback_list, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (callback->usage_id == usage_id) {
 			*priv = callback->priv;
 =======
+=======
+>>>>>>> v3.18
 		if (callback->usage_id == usage_id &&
 			(collection_index >=
 				callback->hsdev->start_collection_index) &&
@@ -196,6 +237,9 @@ static struct hid_sensor_hub_callbacks *sensor_hub_get_callback(
 				callback->hsdev->end_collection_index)) {
 			*priv = callback->priv;
 			*hsdev = callback->hsdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			spin_unlock(&pdata->dyn_callback_lock);
 			return callback->usage_callback;
@@ -212,12 +256,15 @@ int sensor_hub_register_callback(struct hid_sensor_hub_device *hsdev,
 	struct hid_sensor_hub_callbacks_list *callback;
 	struct sensor_hub_data *pdata = hid_get_drvdata(hsdev->hdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock(&pdata->dyn_callback_lock);
 	list_for_each_entry(callback, &pdata->dyn_callback_list, list)
 		if (callback->usage_id == usage_id) {
 			spin_unlock(&pdata->dyn_callback_lock);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&pdata->dyn_callback_lock, flags);
@@ -225,27 +272,40 @@ int sensor_hub_register_callback(struct hid_sensor_hub_device *hsdev,
 		if (callback->usage_id == usage_id &&
 						callback->hsdev == hsdev) {
 			spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		}
 	callback = kzalloc(sizeof(*callback), GFP_ATOMIC);
 	if (!callback) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&pdata->dyn_callback_lock);
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
 		return -ENOMEM;
 	}
 	callback->hsdev = hsdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	callback->usage_callback = usage_callback;
 	callback->usage_id = usage_id;
 	callback->priv = NULL;
 	list_add_tail(&callback->list, &pdata->dyn_callback_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&pdata->dyn_callback_lock);
+=======
+	spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
 >>>>>>> v3.18
@@ -260,24 +320,34 @@ int sensor_hub_remove_callback(struct hid_sensor_hub_device *hsdev,
 	struct hid_sensor_hub_callbacks_list *callback;
 	struct sensor_hub_data *pdata = hid_get_drvdata(hsdev->hdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock(&pdata->dyn_callback_lock);
 	list_for_each_entry(callback, &pdata->dyn_callback_list, list)
 		if (callback->usage_id == usage_id) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&pdata->dyn_callback_lock, flags);
 	list_for_each_entry(callback, &pdata->dyn_callback_list, list)
 		if (callback->usage_id == usage_id &&
 						callback->hsdev == hsdev) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			list_del(&callback->list);
 			kfree(callback);
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&pdata->dyn_callback_lock);
+=======
+	spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
 >>>>>>> v3.18
@@ -291,7 +361,11 @@ int sensor_hub_set_feature(struct hid_sensor_hub_device *hsdev, u32 report_id,
 {
 	struct hid_report *report;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sensor_hub_data *data =  hid_get_drvdata(hsdev->hdev);
+=======
+	struct sensor_hub_data *data = hid_get_drvdata(hsdev->hdev);
+>>>>>>> v3.18
 =======
 	struct sensor_hub_data *data = hid_get_drvdata(hsdev->hdev);
 >>>>>>> v3.18
@@ -300,7 +374,11 @@ int sensor_hub_set_feature(struct hid_sensor_hub_device *hsdev, u32 report_id,
 	mutex_lock(&data->mutex);
 	report = sensor_hub_report(report_id, hsdev->hdev, HID_FEATURE_REPORT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!report || (field_index >=  report->maxfield)) {
+=======
+	if (!report || (field_index >= report->maxfield)) {
+>>>>>>> v3.18
 =======
 	if (!report || (field_index >= report->maxfield)) {
 >>>>>>> v3.18
@@ -323,7 +401,11 @@ int sensor_hub_get_feature(struct hid_sensor_hub_device *hsdev, u32 report_id,
 {
 	struct hid_report *report;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sensor_hub_data *data =  hid_get_drvdata(hsdev->hdev);
+=======
+	struct sensor_hub_data *data = hid_get_drvdata(hsdev->hdev);
+>>>>>>> v3.18
 =======
 	struct sensor_hub_data *data = hid_get_drvdata(hsdev->hdev);
 >>>>>>> v3.18
@@ -332,7 +414,11 @@ int sensor_hub_get_feature(struct hid_sensor_hub_device *hsdev, u32 report_id,
 	mutex_lock(&data->mutex);
 	report = sensor_hub_report(report_id, hsdev->hdev, HID_FEATURE_REPORT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!report || (field_index >=  report->maxfield) ||
+=======
+	if (!report || (field_index >= report->maxfield) ||
+>>>>>>> v3.18
 =======
 	if (!report || (field_index >= report->maxfield) ||
 >>>>>>> v3.18
@@ -357,7 +443,11 @@ int sensor_hub_input_attr_get_raw_value(struct hid_sensor_hub_device *hsdev,
 					u32 attr_usage_id, u32 report_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sensor_hub_data *data =  hid_get_drvdata(hsdev->hdev);
+=======
+	struct sensor_hub_data *data = hid_get_drvdata(hsdev->hdev);
+>>>>>>> v3.18
 =======
 	struct sensor_hub_data *data = hid_get_drvdata(hsdev->hdev);
 >>>>>>> v3.18
@@ -375,6 +465,7 @@ int sensor_hub_input_attr_get_raw_value(struct hid_sensor_hub_device *hsdev,
 	spin_lock_irqsave(&data->lock, flags);
 	data->pending.status = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	report = sensor_hub_report(report_id, hsdev->hdev, HID_INPUT_REPORT);
 	if (!report) {
 		spin_unlock_irqrestore(&data->lock, flags);
@@ -383,12 +474,17 @@ int sensor_hub_input_attr_get_raw_value(struct hid_sensor_hub_device *hsdev,
 	hid_hw_request(hsdev->hdev, report, HID_REQ_GET_REPORT);
 	spin_unlock_irqrestore(&data->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&data->lock, flags);
 	report = sensor_hub_report(report_id, hsdev->hdev, HID_INPUT_REPORT);
 	if (!report)
 		goto err_free;
 
 	hid_hw_request(hsdev->hdev, report, HID_REQ_GET_REPORT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wait_for_completion_interruptible_timeout(&data->pending.ready, HZ*5);
 	switch (data->pending.raw_size) {
@@ -415,7 +511,10 @@ err_free:
 EXPORT_SYMBOL_GPL(sensor_hub_input_attr_get_raw_value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int hid_sensor_get_usage_index(struct hid_sensor_hub_device *hsdev,
 				u32 report_id, int field_index, u32 usage_id)
 {
@@ -438,6 +537,9 @@ done_proc:
 }
 EXPORT_SYMBOL_GPL(hid_sensor_get_usage_index);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int sensor_hub_input_get_attribute_info(struct hid_sensor_hub_device *hsdev,
 				u8 type,
@@ -447,8 +549,12 @@ int sensor_hub_input_get_attribute_info(struct hid_sensor_hub_device *hsdev,
 {
 	int ret = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j;
 	int collection_index = -1;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -460,7 +566,11 @@ int sensor_hub_input_get_attribute_info(struct hid_sensor_hub_device *hsdev,
 	/* Initialize with defaults */
 	info->usage_id = usage_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->attrib_id =  attr_usage_id;
+=======
+	info->attrib_id = attr_usage_id;
+>>>>>>> v3.18
 =======
 	info->attrib_id = attr_usage_id;
 >>>>>>> v3.18
@@ -469,6 +579,7 @@ int sensor_hub_input_get_attribute_info(struct hid_sensor_hub_device *hsdev,
 	info->units = -1;
 	info->unit_expo = -1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < hdev->maxcollection; ++i) {
 		struct hid_collection *collection = &hdev->collection[i];
@@ -482,10 +593,13 @@ int sensor_hub_input_get_attribute_info(struct hid_sensor_hub_device *hsdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	report_enum = &hdev->report_enum[type];
 	list_for_each_entry(report, &report_enum->report_list, list) {
 		for (i = 0; i < report->maxfield; ++i) {
 			field = report->field[i];
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (field->physical == usage_id &&
 				field->logical == attr_usage_id) {
@@ -518,6 +632,8 @@ int sensor_hub_input_get_attribute_info(struct hid_sensor_hub_device *hsdev,
 
 err_ret:
 =======
+=======
+>>>>>>> v3.18
 			if (field->maxusage) {
 				if (field->physical == usage_id &&
 					(field->logical == attr_usage_id ||
@@ -539,6 +655,9 @@ err_ret:
 
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -548,6 +667,7 @@ EXPORT_SYMBOL_GPL(sensor_hub_input_get_attribute_info);
 static int sensor_hub_suspend(struct hid_device *hdev, pm_message_t message)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sensor_hub_data *pdata =  hid_get_drvdata(hdev);
 	struct hid_sensor_hub_callbacks_list *callback;
 
@@ -560,6 +680,8 @@ static int sensor_hub_suspend(struct hid_device *hdev, pm_message_t message)
 	}
 	spin_unlock(&pdata->dyn_callback_lock);
 =======
+=======
+>>>>>>> v3.18
 	struct sensor_hub_data *pdata = hid_get_drvdata(hdev);
 	struct hid_sensor_hub_callbacks_list *callback;
 	unsigned long flags;
@@ -572,6 +694,9 @@ static int sensor_hub_suspend(struct hid_device *hdev, pm_message_t message)
 					callback->hsdev, callback->priv);
 	}
 	spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -579,6 +704,7 @@ static int sensor_hub_suspend(struct hid_device *hdev, pm_message_t message)
 
 static int sensor_hub_resume(struct hid_device *hdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sensor_hub_data *pdata =  hid_get_drvdata(hdev);
 	struct hid_sensor_hub_callbacks_list *callback;
@@ -592,6 +718,8 @@ static int sensor_hub_resume(struct hid_device *hdev)
 	}
 	spin_unlock(&pdata->dyn_callback_lock);
 =======
+=======
+>>>>>>> v3.18
 	struct sensor_hub_data *pdata = hid_get_drvdata(hdev);
 	struct hid_sensor_hub_callbacks_list *callback;
 	unsigned long flags;
@@ -604,6 +732,9 @@ static int sensor_hub_resume(struct hid_device *hdev)
 					callback->hsdev, callback->priv);
 	}
 	spin_unlock_irqrestore(&pdata->dyn_callback_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -615,6 +746,10 @@ static int sensor_hub_reset_resume(struct hid_device *hdev)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -633,6 +768,10 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 	struct hid_collection *collection = NULL;
 	void *priv = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hid_sensor_hub_device *hsdev = NULL;
+>>>>>>> v3.18
 =======
 	struct hid_sensor_hub_device *hsdev = NULL;
 >>>>>>> v3.18
@@ -645,7 +784,11 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 
 	ptr = raw_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr++; /*Skip report id*/
+=======
+	ptr++; /* Skip report id */
+>>>>>>> v3.18
 =======
 	ptr++; /* Skip report id */
 >>>>>>> v3.18
@@ -654,7 +797,10 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 
 	for (i = 0; i < report->maxfield; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		hid_dbg(hdev, "%d collection_index:%x hid:%x sz:%x\n",
@@ -668,16 +814,22 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 				report->field[i]->usage->hid) {
 			hid_dbg(hdev, "data was pending ...\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pdata->pending.raw_data = kmalloc(sz, GFP_ATOMIC);
 			if (pdata->pending.raw_data) {
 				memcpy(pdata->pending.raw_data, ptr, sz);
 				pdata->pending.raw_size  = sz;
 			} else
 =======
+=======
+>>>>>>> v3.18
 			pdata->pending.raw_data = kmemdup(ptr, sz, GFP_ATOMIC);
 			if (pdata->pending.raw_data)
 				pdata->pending.raw_size = sz;
 			else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pdata->pending.raw_size = 0;
 			complete(&pdata->pending.ready);
@@ -686,6 +838,7 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 				report->field[i]->usage->collection_index];
 		hid_dbg(hdev, "collection->usage %x\n",
 					collection->usage);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		callback = sensor_hub_get_callback(pdata->hsdev->hdev,
 						report->field[i]->physical,
@@ -698,6 +851,8 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 			else
 				callback->capture_sample(pdata->hsdev,
 =======
+=======
+>>>>>>> v3.18
 
 		callback = sensor_hub_get_callback(hdev,
 				report->field[i]->physical,
@@ -711,6 +866,9 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 					callback->pdev);
 			else
 				callback->capture_sample(hsdev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					report->field[i]->usage->hid, sz, ptr,
 					callback->pdev);
@@ -719,7 +877,11 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 	}
 	if (callback && collection && callback->send_event)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		callback->send_event(pdata->hsdev, collection->usage,
+=======
+		callback->send_event(hsdev, collection->usage,
+>>>>>>> v3.18
 =======
 		callback->send_event(hsdev, collection->usage,
 >>>>>>> v3.18
@@ -730,7 +892,10 @@ static int sensor_hub_raw_event(struct hid_device *hdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int sensor_hub_device_open(struct hid_sensor_hub_device *hsdev)
 {
 	int ret = 0;
@@ -798,6 +963,9 @@ static __u8 *sensor_hub_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 	return rdesc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sensor_hub_probe(struct hid_device *hdev,
 				const struct hid_device_id *id)
@@ -807,6 +975,7 @@ static int sensor_hub_probe(struct hid_device *hdev,
 	int i;
 	char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hid_report *report;
 	struct hid_report_enum *report_enum;
 	struct hid_field *field;
@@ -814,16 +983,22 @@ static int sensor_hub_probe(struct hid_device *hdev,
 
 	sd = kzalloc(sizeof(struct sensor_hub_data), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	int dev_cnt;
 	struct hid_sensor_hub_device *hsdev;
 	struct hid_sensor_hub_device *last_hsdev = NULL;
 
 	sd = devm_kzalloc(&hdev->dev, sizeof(*sd), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sd) {
 		hid_err(hdev, "cannot allocate Sensor data\n");
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sd->hsdev = kzalloc(sizeof(struct hid_sensor_hub_device), GFP_KERNEL);
 	if (!sd->hsdev) {
@@ -836,10 +1011,15 @@ static int sensor_hub_probe(struct hid_device *hdev,
 	sd->hsdev->vendor_id = hdev->vendor;
 	sd->hsdev->product_id = hdev->product;
 =======
+=======
+>>>>>>> v3.18
 
 	hid_set_drvdata(hdev, sd);
 	sd->quirks = id->driver_data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&sd->lock);
 	spin_lock_init(&sd->dyn_callback_lock);
@@ -848,7 +1028,11 @@ static int sensor_hub_probe(struct hid_device *hdev,
 	if (ret) {
 		hid_err(hdev, "parse failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -858,6 +1042,7 @@ static int sensor_hub_probe(struct hid_device *hdev,
 	ret = hid_hw_start(hdev, 0);
 	if (ret) {
 		hid_err(hdev, "hw start failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free;
 	}
@@ -929,6 +1114,8 @@ err_free:
 err_free_hub:
 	kfree(sd);
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 	INIT_LIST_HEAD(&sd->dyn_callback_list);
@@ -1004,6 +1191,9 @@ err_free_hub:
 
 err_stop_hw:
 	hid_hw_stop(hdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1014,7 +1204,10 @@ static void sensor_hub_remove(struct hid_device *hdev)
 	struct sensor_hub_data *data = hid_get_drvdata(hdev);
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1027,6 +1220,7 @@ static void sensor_hub_remove(struct hid_device *hdev)
 	spin_unlock_irqrestore(&data->lock, flags);
 	mfd_remove_devices(&hdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < data->hid_sensor_client_cnt ; ++i)
 		kfree(data->hid_sensor_hub_client_devs[i].name);
 	kfree(data->hid_sensor_hub_client_devs);
@@ -1038,6 +1232,8 @@ static void sensor_hub_remove(struct hid_device *hdev)
 
 static const struct hid_device_id sensor_hub_devices[] = {
 =======
+=======
+>>>>>>> v3.18
 	hid_set_drvdata(hdev, NULL);
 	mutex_destroy(&data->mutex);
 }
@@ -1070,6 +1266,9 @@ static const struct hid_device_id sensor_hub_devices[] = {
 	{ HID_DEVICE(HID_BUS_ANY, HID_GROUP_SENSOR_HUB, USB_VENDOR_ID_TEXAS_INSTRUMENTS,
 			USB_DEVICE_ID_TEXAS_INSTRUMENTS_LENOVO_YOGA),
 			.driver_data = HID_SENSOR_HUB_ENUM_QUIRK},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ HID_DEVICE(HID_BUS_ANY, HID_GROUP_SENSOR_HUB, HID_ANY_ID,
 		     HID_ANY_ID) },
@@ -1084,16 +1283,22 @@ static struct hid_driver sensor_hub_driver = {
 	.remove = sensor_hub_remove,
 	.raw_event = sensor_hub_raw_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 	.suspend = sensor_hub_suspend,
 	.resume =  sensor_hub_resume,
 	.reset_resume =  sensor_hub_reset_resume,
 =======
+=======
+>>>>>>> v3.18
 	.report_fixup = sensor_hub_report_fixup,
 #ifdef CONFIG_PM
 	.suspend = sensor_hub_suspend,
 	.resume = sensor_hub_resume,
 	.reset_resume = sensor_hub_reset_resume,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };

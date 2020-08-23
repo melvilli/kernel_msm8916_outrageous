@@ -3,8 +3,13 @@
 
 struct task_struct; /* one of the stranger aspects of C forward declarations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct task_struct *__switch_to(struct task_struct *prev,
 				struct task_struct *next);
+=======
+__visible struct task_struct *__switch_to(struct task_struct *prev,
+					   struct task_struct *next);
+>>>>>>> v3.18
 =======
 __visible struct task_struct *__switch_to(struct task_struct *prev,
 					   struct task_struct *next);

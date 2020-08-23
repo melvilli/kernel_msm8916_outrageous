@@ -28,7 +28,11 @@ static const struct xt_table packet_filter = {
 /* The work comes in here from netfilter.c */
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 arptable_filter_hook(unsigned int hook, struct sk_buff *skb,
+=======
+arptable_filter_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 arptable_filter_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -38,7 +42,12 @@ arptable_filter_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 	const struct net *net = dev_net((in != NULL) ? in : out);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return arpt_do_table(skb, hook, in, out, net->ipv4.arptable_filter);
+=======
+	return arpt_do_table(skb, ops->hooknum, in, out,
+			     net->ipv4.arptable_filter);
+>>>>>>> v3.18
 =======
 	return arpt_do_table(skb, ops->hooknum, in, out,
 			     net->ipv4.arptable_filter);
@@ -58,7 +67,11 @@ static int __net_init arptable_filter_net_init(struct net *net)
 		arpt_register_table(net, &packet_filter, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv4.arptable_filter);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv4.arptable_filter);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv4.arptable_filter);
 >>>>>>> v3.18

@@ -37,6 +37,10 @@
 #include <linux/sched.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
 #include <xen/interface/xen.h>
 #include <xen/page.h>
 #include <xen/grant_table.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include <asm/pgtable.h>
@@ -131,6 +136,8 @@ void arch_gnttab_unmap(void *shared, unsigned long nr_gframes)
 			    PAGE_SIZE * nr_gframes, unmap_pte_fn, NULL);
 }
 =======
+=======
+>>>>>>> v3.18
 #include <xen/xen.h>
 
 #include <asm/pgtable.h>
@@ -262,4 +269,7 @@ static int __init xen_pvh_gnttab_setup(void)
  * xen_auto_xlat_grant_frames first. */
 core_initcall(xen_pvh_gnttab_setup);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

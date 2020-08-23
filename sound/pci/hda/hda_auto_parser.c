@@ -18,8 +18,11 @@
 #include "hda_auto_parser.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SFX	"hda_codec: "
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -63,8 +66,13 @@ static void sort_pins_by_sequence(hda_nid_t *pins, struct auto_out_pin *list,
 
 /* add the found input-pin to the cfg->inputs[] table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void add_auto_cfg_input_pin(struct auto_pin_cfg *cfg, hda_nid_t nid,
 				   int type)
+=======
+static void add_auto_cfg_input_pin(struct hda_codec *codec, struct auto_pin_cfg *cfg,
+				   hda_nid_t nid, int type)
+>>>>>>> v3.18
 =======
 static void add_auto_cfg_input_pin(struct hda_codec *codec, struct auto_pin_cfg *cfg,
 				   hda_nid_t nid, int type)
@@ -74,6 +82,11 @@ static void add_auto_cfg_input_pin(struct hda_codec *codec, struct auto_pin_cfg 
 		cfg->inputs[cfg->num_inputs].pin = nid;
 		cfg->inputs[cfg->num_inputs].type = type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cfg->inputs[cfg->num_inputs].has_boost_on_pin =
+			nid_has_volume(codec, nid, HDA_INPUT);
+>>>>>>> v3.18
 =======
 		cfg->inputs[cfg->num_inputs].has_boost_on_pin =
 			nid_has_volume(codec, nid, HDA_INPUT);
@@ -87,14 +100,20 @@ static int compare_input_type(const void *ap, const void *bp)
 	const struct auto_pin_cfg_item *a = ap;
 	const struct auto_pin_cfg_item *b = bp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (int)(a->type - b->type);
 =======
+=======
+>>>>>>> v3.18
 	if (a->type != b->type)
 		return (int)(a->type - b->type);
 
 	/* In case one has boost and the other one has not,
 	   pick the one with boost first. */
 	return (int)(b->has_boost_on_pin - a->has_boost_on_pin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -250,11 +269,14 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 			if (!assoc_line_out)
 				assoc_line_out = assoc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else if (assoc_line_out != assoc)
 				continue;
 			if (cfg->line_outs >= ARRAY_SIZE(cfg->line_out_pins))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 			else if (assoc_line_out != assoc) {
 				codec_info(codec,
 					   "ignore pin 0x%x with mismatching assoc# 0x%x vs 0x%x\n",
@@ -267,6 +289,9 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 					   nid);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			line_out[cfg->line_outs].pin = nid;
 			line_out[cfg->line_outs].seq = seq;
@@ -276,15 +301,21 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 			seq = get_defcfg_sequence(def_conf);
 			assoc = get_defcfg_association(def_conf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cfg->speaker_outs >= ARRAY_SIZE(cfg->speaker_pins))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 			if (cfg->speaker_outs >= ARRAY_SIZE(cfg->speaker_pins)) {
 				codec_info(codec,
 					   "ignore pin 0x%x, too many assigned pins\n",
 					   nid);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			speaker_out[cfg->speaker_outs].pin = nid;
 			speaker_out[cfg->speaker_outs].seq = (assoc << 4) | seq;
@@ -294,21 +325,28 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 			seq = get_defcfg_sequence(def_conf);
 			assoc = get_defcfg_association(def_conf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cfg->hp_outs >= ARRAY_SIZE(cfg->hp_pins))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 			if (cfg->hp_outs >= ARRAY_SIZE(cfg->hp_pins)) {
 				codec_info(codec,
 					   "ignore pin 0x%x, too many assigned pins\n",
 					   nid);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			hp_out[cfg->hp_outs].pin = nid;
 			hp_out[cfg->hp_outs].seq = (assoc << 4) | seq;
 			cfg->hp_outs++;
 			break;
 		case AC_JACK_MIC_IN:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			add_auto_cfg_input_pin(cfg, nid, AUTO_PIN_MIC);
 			break;
@@ -326,6 +364,8 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 			if (cfg->dig_outs >= ARRAY_SIZE(cfg->dig_out_pins))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 			add_auto_cfg_input_pin(codec, cfg, nid, AUTO_PIN_MIC);
 			break;
 		case AC_JACK_LINE_IN:
@@ -345,6 +385,9 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 					   nid);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cfg->dig_out_pins[cfg->dig_outs] = nid;
 			cfg->dig_out_type[cfg->dig_outs] =
@@ -391,9 +434,15 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 
 		if (hsmic)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("Told to look for a headset mic, but didn't find any.\n");
 		if (hpmic)
 			snd_printdd("Told to look for a headphone mic, but didn't find any.\n");
+=======
+			codec_dbg(codec, "Told to look for a headset mic, but didn't find any.\n");
+		if (hpmic)
+			codec_dbg(codec, "Told to look for a headphone mic, but didn't find any.\n");
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "Told to look for a headset mic, but didn't find any.\n");
 		if (hpmic)
@@ -468,7 +517,11 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 	 * debug prints of the parsed results
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printd("autoconfig: line_outs=%d (0x%x/0x%x/0x%x/0x%x/0x%x) type:%s\n",
+=======
+	codec_info(codec, "autoconfig: line_outs=%d (0x%x/0x%x/0x%x/0x%x/0x%x) type:%s\n",
+>>>>>>> v3.18
 =======
 	codec_info(codec, "autoconfig: line_outs=%d (0x%x/0x%x/0x%x/0x%x/0x%x) type:%s\n",
 >>>>>>> v3.18
@@ -478,6 +531,7 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 		   cfg->line_out_type == AUTO_PIN_HP_OUT ? "hp" :
 		   (cfg->line_out_type == AUTO_PIN_SPEAKER_OUT ?
 		    "speaker" : "line"));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snd_printd("   speaker_outs=%d (0x%x/0x%x/0x%x/0x%x/0x%x)\n",
 		   cfg->speaker_outs, cfg->speaker_pins[0],
@@ -495,6 +549,8 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 	for (i = 0; i < cfg->num_inputs; i++) {
 		snd_printd("     %s=0x%x\n",
 =======
+=======
+>>>>>>> v3.18
 	codec_info(codec, "   speaker_outs=%d (0x%x/0x%x/0x%x/0x%x/0x%x)\n",
 		   cfg->speaker_outs, cfg->speaker_pins[0],
 		   cfg->speaker_pins[1], cfg->speaker_pins[2],
@@ -510,11 +566,15 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 	codec_info(codec, "   inputs:\n");
 	for (i = 0; i < cfg->num_inputs; i++) {
 		codec_info(codec, "     %s=0x%x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    hda_get_autocfg_input_label(codec, cfg, i),
 			    cfg->inputs[i].pin);
 	}
 	if (cfg->dig_in_pin)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		snd_printd("   dig-in=0x%x\n", cfg->dig_in_pin);
 
@@ -522,11 +582,16 @@ int snd_hda_parse_pin_defcfg(struct hda_codec *codec,
 }
 EXPORT_SYMBOL_HDA(snd_hda_parse_pin_defcfg);
 =======
+=======
+>>>>>>> v3.18
 		codec_info(codec, "   dig-in=0x%x\n", cfg->dig_in_pin);
 
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_hda_parse_pin_defcfg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int snd_hda_get_input_pin_attr(unsigned int def_conf)
@@ -549,7 +614,11 @@ int snd_hda_get_input_pin_attr(unsigned int def_conf)
 	return INPUT_PIN_ATTR_NORMAL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_get_input_pin_attr);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_get_input_pin_attr);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_get_input_pin_attr);
 >>>>>>> v3.18
@@ -665,7 +734,11 @@ const char *hda_get_autocfg_input_label(struct hda_codec *codec,
 				       has_multiple_pins);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(hda_get_autocfg_input_label);
+=======
+EXPORT_SYMBOL_GPL(hda_get_autocfg_input_label);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(hda_get_autocfg_input_label);
 >>>>>>> v3.18
@@ -760,7 +833,11 @@ static int fill_audio_out_name(struct hda_codec *codec, hda_nid_t nid,
 			int idx = get_hp_label_index(codec, nid, cfg->hp_pins,
 						     cfg->hp_outs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (idx >= 0)
+=======
+			if (idx >= 0 && indexp)
+>>>>>>> v3.18
 =======
 			if (idx >= 0 && indexp)
 >>>>>>> v3.18
@@ -847,7 +924,11 @@ int snd_hda_get_pin_label(struct hda_codec *codec, hda_nid_t nid,
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_get_pin_label);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_get_pin_label);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_get_pin_label);
 >>>>>>> v3.18
@@ -863,7 +944,11 @@ int snd_hda_add_verbs(struct hda_codec *codec,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_add_verbs);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_add_verbs);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_add_verbs);
 >>>>>>> v3.18
@@ -877,7 +962,11 @@ void snd_hda_apply_verbs(struct hda_codec *codec)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_apply_verbs);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_apply_verbs);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_apply_verbs);
 >>>>>>> v3.18
@@ -889,7 +978,11 @@ void snd_hda_apply_pincfgs(struct hda_codec *codec,
 		snd_hda_codec_set_pincfg(codec, cfg->nid, cfg->val);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_apply_pincfgs);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_apply_pincfgs);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_apply_pincfgs);
 >>>>>>> v3.18
@@ -916,8 +1009,12 @@ static void apply_fixup(struct hda_codec *codec, int id, int action, int depth)
 			if (action != HDA_FIXUP_ACT_PRE_PROBE || !fix->v.pins)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_INFO SFX
 				    "%s: Apply pincfg for %s\n",
+=======
+			codec_dbg(codec, "%s: Apply pincfg for %s\n",
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "%s: Apply pincfg for %s\n",
 >>>>>>> v3.18
@@ -928,8 +1025,12 @@ static void apply_fixup(struct hda_codec *codec, int id, int action, int depth)
 			if (action != HDA_FIXUP_ACT_PROBE || !fix->v.verbs)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_INFO SFX
 				    "%s: Apply fix-verbs for %s\n",
+=======
+			codec_dbg(codec, "%s: Apply fix-verbs for %s\n",
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "%s: Apply fix-verbs for %s\n",
 >>>>>>> v3.18
@@ -940,8 +1041,12 @@ static void apply_fixup(struct hda_codec *codec, int id, int action, int depth)
 			if (!fix->v.func)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_INFO SFX
 				    "%s: Apply fix-func for %s\n",
+=======
+			codec_dbg(codec, "%s: Apply fix-func for %s\n",
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "%s: Apply fix-func for %s\n",
 >>>>>>> v3.18
@@ -952,8 +1057,12 @@ static void apply_fixup(struct hda_codec *codec, int id, int action, int depth)
 			if (action != HDA_FIXUP_ACT_PROBE || !fix->v.pins)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_INFO SFX
 				    "%s: Apply pinctl for %s\n",
+=======
+			codec_dbg(codec, "%s: Apply pinctl for %s\n",
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "%s: Apply pinctl for %s\n",
 >>>>>>> v3.18
@@ -962,8 +1071,12 @@ static void apply_fixup(struct hda_codec *codec, int id, int action, int depth)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR SFX
 				   "%s: Invalid fixup type %d\n",
+=======
+			codec_err(codec, "%s: Invalid fixup type %d\n",
+>>>>>>> v3.18
 =======
 			codec_err(codec, "%s: Invalid fixup type %d\n",
 >>>>>>> v3.18
@@ -984,8 +1097,11 @@ void snd_hda_apply_fixup(struct hda_codec *codec, int action)
 		apply_fixup(codec, codec->fixup_id, action, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_apply_fixup);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(snd_hda_apply_fixup);
 
 static bool pin_config_match(struct hda_codec *codec,
@@ -1024,6 +1140,9 @@ void snd_hda_pick_pin_fixup(struct hda_codec *codec,
 	}
 }
 EXPORT_SYMBOL_GPL(snd_hda_pick_pin_fixup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void snd_hda_pick_fixup(struct hda_codec *codec,
@@ -1033,6 +1152,7 @@ void snd_hda_pick_fixup(struct hda_codec *codec,
 {
 	const struct snd_pci_quirk *q;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int id = -1;
 	const char *name = NULL;
 
@@ -1041,6 +1161,8 @@ void snd_hda_pick_fixup(struct hda_codec *codec,
 		codec->fixup_list = NULL;
 		codec->fixup_id = -1;
 =======
+=======
+>>>>>>> v3.18
 	int id = HDA_FIXUP_ID_NOT_SET;
 	const char *name = NULL;
 
@@ -1052,6 +1174,9 @@ void snd_hda_pick_fixup(struct hda_codec *codec,
 		codec->fixup_list = NULL;
 		codec->fixup_name = NULL;
 		codec->fixup_id = HDA_FIXUP_ID_NO_FIXUP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -1060,21 +1185,31 @@ void snd_hda_pick_fixup(struct hda_codec *codec,
 		while (models->name) {
 			if (!strcmp(codec->modelname, models->name)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				id = models->id;
 				name = models->name;
 				break;
 =======
+=======
+>>>>>>> v3.18
 				codec->fixup_id = models->id;
 				codec->fixup_name = models->name;
 				codec->fixup_list = fixlist;
 				return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			models++;
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id < 0 && quirk) {
+=======
+	if (quirk) {
+>>>>>>> v3.18
 =======
 	if (quirk) {
 >>>>>>> v3.18
@@ -1108,7 +1243,11 @@ void snd_hda_pick_fixup(struct hda_codec *codec,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_pick_fixup);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_pick_fixup);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_pick_fixup);
 >>>>>>> v3.18

@@ -122,15 +122,21 @@ pte_alloc_one(struct mm_struct *mm, unsigned long address)
 {
 	struct page *page = alloc_page(GFP_KERNEL|__GFP_REPEAT|__GFP_ZERO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (page)
 		pgtable_page_ctor(page);
 =======
+=======
+>>>>>>> v3.18
 	if (!page)
 		return NULL;
 	if (!pgtable_page_ctor(page)) {
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }

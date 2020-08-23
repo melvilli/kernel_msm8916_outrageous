@@ -33,7 +33,12 @@ enum sca3000_variant {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Note where option modes are not defined, the chip simply does not
+=======
+/*
+ * Note where option modes are not defined, the chip simply does not
+>>>>>>> v3.18
 =======
 /*
  * Note where option modes are not defined, the chip simply does not
@@ -197,7 +202,10 @@ error_ret:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Crucial that lock is called before calling this */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -259,9 +267,14 @@ error_ret:
 #endif /* SCA3000_DEBUG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * sca3000_show_reg() - sysfs interface to read the chip revision number
+=======
+/**
+ * sca3000_show_rev() - sysfs interface to read the chip revision number
+>>>>>>> v3.18
 =======
 /**
  * sca3000_show_rev() - sysfs interface to read the chip revision number
@@ -326,7 +339,11 @@ sca3000_show_available_measurement_modes(struct device *dev,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sca3000_show_measurmenet_mode() sysfs read of current mode
+=======
+ * sca3000_show_measurement_mode() sysfs read of current mode
+>>>>>>> v3.18
 =======
  * sca3000_show_measurement_mode() sysfs read of current mode
 >>>>>>> v3.18
@@ -421,7 +438,12 @@ error_ret:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Not even vaguely standard attributes so defined here rather than
+=======
+/*
+ * Not even vaguely standard attributes so defined here rather than
+>>>>>>> v3.18
 =======
 /*
  * Not even vaguely standard attributes so defined here rather than
@@ -442,14 +464,20 @@ static IIO_DEVICE_ATTR(measurement_mode, S_IRUGO | S_IWUSR,
 static IIO_DEVICE_ATTR(revision, S_IRUGO, sca3000_show_rev, NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCA3000_EVENT_MASK					\
 	(IIO_EV_BIT(IIO_EV_TYPE_MAG, IIO_EV_DIR_RISING))
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_event_spec sca3000_event = {
 	.type = IIO_EV_TYPE_MAG,
 	.dir = IIO_EV_DIR_RISING,
 	.mask_separate = BIT(IIO_EV_INFO_VALUE) | BIT(IIO_EV_INFO_ENABLE),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SCA3000_CHAN(index, mod)				\
@@ -468,7 +496,12 @@ static const struct iio_event_spec sca3000_event = {
 			.shift = 5,				\
 		},						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.event_mask = SCA3000_EVENT_MASK,		\
+=======
+		.event_spec = &sca3000_event,			\
+		.num_event_specs = 1,				\
+>>>>>>> v3.18
 =======
 		.event_spec = &sca3000_event,			\
 		.num_event_specs = 1,				\
@@ -482,7 +515,10 @@ static const struct iio_chan_spec sca3000_channels[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_chan_spec sca3000_channels_with_temp[] = {
 	SCA3000_CHAN(0, IIO_MOD_X),
 	SCA3000_CHAN(1, IIO_MOD_Y),
@@ -495,6 +531,9 @@ static const struct iio_chan_spec sca3000_channels_with_temp[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u8 sca3000_addresses[3][3] = {
 	[0] = {SCA3000_REG_ADDR_X_MSB, SCA3000_REG_CTRL_SEL_MD_X_TH,
@@ -519,6 +558,7 @@ static int sca3000_read_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_RAW:
 		mutex_lock(&st->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (st->mo_det_use_count) {
 			mutex_unlock(&st->lock);
 			return -EBUSY;
@@ -533,6 +573,8 @@ static int sca3000_read_raw(struct iio_dev *indio_dev,
 		*val = ((*val) << (sizeof(*val)*8 - 13)) >>
 			(sizeof(*val)*8 - 13);
 =======
+=======
+>>>>>>> v3.18
 		if (chan->type == IIO_ACCEL) {
 			if (st->mo_det_use_count) {
 				mutex_unlock(&st->lock);
@@ -558,6 +600,9 @@ static int sca3000_read_raw(struct iio_dev *indio_dev,
 			*val = ((st->rx[0] & 0x3F) << 3) |
 			       ((st->rx[1] & 0xE0) >> 5);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&st->lock);
 		return IIO_VAL_INT;
@@ -569,11 +614,17 @@ static int sca3000_read_raw(struct iio_dev *indio_dev,
 			*val2 = 555556;
 		return IIO_VAL_INT_PLUS_MICRO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_OFFSET:
 		*val = -214;
 		*val2 = 600000;
 		return IIO_VAL_INT_PLUS_MICRO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -629,7 +680,11 @@ error_ret:
 }
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __sca3000_get_base_frequency() obtain mode specific base frequency
+=======
+ * __sca3000_get_base_freq() obtain mode specific base frequency
+>>>>>>> v3.18
 =======
  * __sca3000_get_base_freq() obtain mode specific base frequency
 >>>>>>> v3.18
@@ -678,7 +733,11 @@ static ssize_t sca3000_read_frequency(struct device *dev,
 	ret = sca3000_read_ctrl_reg(st, SCA3000_REG_CTRL_SEL_OUT_CTRL);
 	mutex_unlock(&st->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0)
+=======
+	if (ret)
+>>>>>>> v3.18
 =======
 	if (ret)
 >>>>>>> v3.18
@@ -718,9 +777,15 @@ static ssize_t sca3000_set_frequency(struct device *dev,
 	int ret, base_freq = 0;
 	int ctrlval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	int val;
+
+	ret = kstrtoint(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	int val;
 
@@ -759,7 +824,12 @@ error_free_lock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Should only really be registered if ring buffer support is compiled in.
+=======
+/*
+ * Should only really be registered if ring buffer support is compiled in.
+>>>>>>> v3.18
 =======
 /*
  * Should only really be registered if ring buffer support is compiled in.
@@ -772,6 +842,7 @@ static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO,
 			      sca3000_read_frequency,
 			      sca3000_set_frequency);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -806,10 +877,13 @@ static IIO_CONST_ATTR_TEMP_OFFSET("-214.6");
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * sca3000_read_thresh() - query of a threshold
  **/
 static int sca3000_read_thresh(struct iio_dev *indio_dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       u64 e,
 			       int *val)
@@ -818,6 +892,8 @@ static int sca3000_read_thresh(struct iio_dev *indio_dev,
 	struct sca3000_state *st = iio_priv(indio_dev);
 	int num = IIO_EVENT_CODE_EXTRACT_MODIFIER(e);
 =======
+=======
+>>>>>>> v3.18
 			       const struct iio_chan_spec *chan,
 			       enum iio_event_type type,
 			       enum iio_event_direction dir,
@@ -828,6 +904,9 @@ static int sca3000_read_thresh(struct iio_dev *indio_dev,
 	struct sca3000_state *st = iio_priv(indio_dev);
 	int num = chan->channel2;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&st->lock);
 	ret = sca3000_read_ctrl_reg(st, sca3000_addresses[num][1]);
@@ -845,7 +924,11 @@ static int sca3000_read_thresh(struct iio_dev *indio_dev,
 			*val += st->info->mot_det_mult_xz[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return IIO_VAL_INT;
+>>>>>>> v3.18
 =======
 	return IIO_VAL_INT;
 >>>>>>> v3.18
@@ -856,12 +939,15 @@ static int sca3000_read_thresh(struct iio_dev *indio_dev,
  **/
 static int sca3000_write_thresh(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u64 e,
 				int val)
 {
 	struct sca3000_state *st = iio_priv(indio_dev);
 	int num = IIO_EVENT_CODE_EXTRACT_MODIFIER(e);
 =======
+=======
+>>>>>>> v3.18
 				const struct iio_chan_spec *chan,
 				enum iio_event_type type,
 				enum iio_event_direction dir,
@@ -870,6 +956,9 @@ static int sca3000_write_thresh(struct iio_dev *indio_dev,
 {
 	struct sca3000_state *st = iio_priv(indio_dev);
 	int num = chan->channel2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 	int i;
@@ -908,6 +997,7 @@ static struct attribute *sca3000_attributes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *sca3000_attributes_with_temp[] = {
 	&iio_dev_attr_revision.dev_attr.attr,
 	&iio_dev_attr_measurement_mode_available.dev_attr.attr,
@@ -923,10 +1013,13 @@ static struct attribute *sca3000_attributes_with_temp[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct attribute_group sca3000_attribute_group = {
 	.attrs = sca3000_attributes,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct attribute_group sca3000_attribute_group_with_temp = {
 	.attrs = sca3000_attributes_with_temp,
@@ -939,12 +1032,17 @@ static const struct attribute_group sca3000_attribute_group_with_temp = {
  * sca3000_event_handler() - handling ring and non ring events
  *
 =======
+=======
+>>>>>>> v3.18
 /**
  * sca3000_event_handler() - handling ring and non ring events
  *
  * Ring related interrupt handler. Depending on event, push to
  * the ring buffer event chrdev or the event one.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This function is complicated by the fact that the devices can signify ring
  * and non ring events via the same interrupt line and they can only
@@ -958,7 +1056,12 @@ static irqreturn_t sca3000_event_handler(int irq, void *private)
 	s64 last_timestamp = iio_get_time_ns();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Could lead if badly timed to an extra read of status reg,
+=======
+	/*
+	 * Could lead if badly timed to an extra read of status reg,
+>>>>>>> v3.18
 =======
 	/*
 	 * Could lead if badly timed to an extra read of status reg,
@@ -1019,7 +1122,13 @@ done:
  **/
 static int sca3000_read_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     u64 e)
+=======
+				     const struct iio_chan_spec *chan,
+				     enum iio_event_type type,
+				     enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 				     const struct iio_chan_spec *chan,
 				     enum iio_event_type type,
@@ -1030,7 +1139,11 @@ static int sca3000_read_event_config(struct iio_dev *indio_dev,
 	int ret;
 	u8 protect_mask = 0x03;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num = IIO_EVENT_CODE_EXTRACT_MODIFIER(e);
+=======
+	int num = chan->channel2;
+>>>>>>> v3.18
 =======
 	int num = chan->channel2;
 >>>>>>> v3.18
@@ -1086,7 +1199,10 @@ static ssize_t sca3000_query_free_fall_mode(struct device *dev,
  * to fragile wiring.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t sca3000_set_free_fall_mode(struct device *dev,
@@ -1097,7 +1213,11 @@ static ssize_t sca3000_set_free_fall_mode(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct sca3000_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
+=======
+	u8 val;
+>>>>>>> v3.18
 =======
 	u8 val;
 >>>>>>> v3.18
@@ -1106,7 +1226,11 @@ static ssize_t sca3000_set_free_fall_mode(struct device *dev,
 
 	mutex_lock(&st->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &val);
+=======
+	ret = kstrtou8(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	ret = kstrtou8(buf, 10, &val);
 >>>>>>> v3.18
@@ -1119,7 +1243,11 @@ static ssize_t sca3000_set_free_fall_mode(struct device *dev,
 		goto error_ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*if off and should be on*/
+=======
+	/* if off and should be on */
+>>>>>>> v3.18
 =======
 	/* if off and should be on */
 >>>>>>> v3.18
@@ -1138,7 +1266,11 @@ error_ret:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sca3000_set_mo_det() simple on off control for motion detector
+=======
+ * sca3000_write_event_config() simple on off control for motion detector
+>>>>>>> v3.18
 =======
  * sca3000_write_event_config() simple on off control for motion detector
 >>>>>>> v3.18
@@ -1151,7 +1283,13 @@ error_ret:
  **/
 static int sca3000_write_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      u64 e,
+=======
+				      const struct iio_chan_spec *chan,
+				      enum iio_event_type type,
+				      enum iio_event_direction dir,
+>>>>>>> v3.18
 =======
 				      const struct iio_chan_spec *chan,
 				      enum iio_event_type type,
@@ -1163,12 +1301,15 @@ static int sca3000_write_event_config(struct iio_dev *indio_dev,
 	int ret, ctrlval;
 	u8 protect_mask = 0x03;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num = IIO_EVENT_CODE_EXTRACT_MODIFIER(e);
 
 	mutex_lock(&st->lock);
 	/* First read the motion detector config to find out if
 	 * this axis is on*/
 =======
+=======
+>>>>>>> v3.18
 	int num = chan->channel2;
 
 	mutex_lock(&st->lock);
@@ -1176,13 +1317,20 @@ static int sca3000_write_event_config(struct iio_dev *indio_dev,
 	 * First read the motion detector config to find out if
 	 * this axis is on
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = sca3000_read_ctrl_reg(st, SCA3000_REG_CTRL_SEL_MD_CTRL);
 	if (ret < 0)
 		goto exit_point;
 	ctrlval = ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Off and should be on */
+=======
+	/* if off and should be on */
+>>>>>>> v3.18
 =======
 	/* if off and should be on */
 >>>>>>> v3.18
@@ -1209,7 +1357,11 @@ static int sca3000_write_event_config(struct iio_dev *indio_dev,
 	if (ret)
 		goto exit_point;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*if off and should be on*/
+=======
+	/* if off and should be on */
+>>>>>>> v3.18
 =======
 	/* if off and should be on */
 >>>>>>> v3.18
@@ -1259,7 +1411,11 @@ static struct attribute_group sca3000_event_attribute_group = {
  * and hence can come up in somewhat unpredictable states.
  * Hence reset everything on driver load.
 <<<<<<< HEAD
+<<<<<<< HEAD
   **/
+=======
+ **/
+>>>>>>> v3.18
 =======
  **/
 >>>>>>> v3.18
@@ -1303,15 +1459,21 @@ static int sca3000_clean_setup(struct sca3000_state *st)
 	if (ret)
 		goto error_ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Select normal measurement mode, free fall off, ring off */
 	/* Ring in 12 bit mode - it is fine to overwrite reserved bits 3,5
 	 * as that occurs in one of the example on the datasheet */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Select normal measurement mode, free fall off, ring off
 	 * Ring in 12 bit mode - it is fine to overwrite reserved bits 3,5
 	 * as that occurs in one of the example on the datasheet
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = sca3000_read_data_short(st, SCA3000_REG_ADDR_MODE, 1);
 	if (ret)
@@ -1337,6 +1499,7 @@ static const struct iio_info sca3000_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct iio_info sca3000_info_with_temp = {
 	.attrs = &sca3000_attribute_group_with_temp,
 	.read_raw = &sca3000_read_raw,
@@ -1349,6 +1512,8 @@ static const struct iio_info sca3000_info_with_temp = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int sca3000_probe(struct spi_device *spi)
 {
 	int ret;
@@ -1356,11 +1521,17 @@ static int sca3000_probe(struct spi_device *spi)
 	struct iio_dev *indio_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -1377,17 +1548,23 @@ static int sca3000_probe(struct spi_device *spi)
 	indio_dev->dev.parent = &spi->dev;
 	indio_dev->name = spi_get_device_id(spi)->name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (st->info->temp_output)
 		indio_dev->info = &sca3000_info_with_temp;
 	else {
 		indio_dev->info = &sca3000_info;
 =======
+=======
+>>>>>>> v3.18
 	indio_dev->info = &sca3000_info;
 	if (st->info->temp_output) {
 		indio_dev->channels = sca3000_channels_with_temp;
 		indio_dev->num_channels =
 			ARRAY_SIZE(sca3000_channels_with_temp);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		indio_dev->channels = sca3000_channels;
 		indio_dev->num_channels = ARRAY_SIZE(sca3000_channels);
@@ -1398,7 +1575,11 @@ static int sca3000_probe(struct spi_device *spi)
 	ret = iio_device_register(indio_dev);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -1438,10 +1619,13 @@ error_unregister_ring:
 error_unregister_dev:
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1471,7 +1655,11 @@ static int sca3000_remove(struct spi_device *spi)
 	struct sca3000_state *st = iio_priv(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Must ensure no interrupts can be generated after this!*/
+=======
+	/* Must ensure no interrupts can be generated after this! */
+>>>>>>> v3.18
 =======
 	/* Must ensure no interrupts can be generated after this! */
 >>>>>>> v3.18
@@ -1482,7 +1670,10 @@ static int sca3000_remove(struct spi_device *spi)
 	iio_buffer_unregister(indio_dev);
 	sca3000_unconfigure_ring(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

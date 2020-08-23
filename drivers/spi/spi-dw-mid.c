@@ -2,7 +2,11 @@
  * Special handling for DW core on Intel MID platform
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009, Intel Corporation.
+=======
+ * Copyright (c) 2009, 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009, 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -16,10 +20,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -47,7 +54,11 @@ static bool mid_spi_dma_chan_filter(struct dma_chan *chan, void *param)
 	struct dw_spi *dws = param;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dws->dmac && (&dws->dmac->dev == chan->device->dev);
+=======
+	return dws->dma_dev == chan->device->dev;
+>>>>>>> v3.18
 =======
 	return dws->dma_dev == chan->device->dev;
 >>>>>>> v3.18
@@ -57,6 +68,10 @@ static int mid_spi_dma_init(struct dw_spi *dws)
 {
 	struct mid_dma *dw_dma = dws->dma_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pci_dev *dma_dev;
+>>>>>>> v3.18
 =======
 	struct pci_dev *dma_dev;
 >>>>>>> v3.18
@@ -66,12 +81,15 @@ static int mid_spi_dma_init(struct dw_spi *dws)
 	/*
 	 * Get pci device for DMA controller, currently it could only
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * be the DMA controller of either Moorestown or Medfield
 	 */
 	dws->dmac = pci_get_device(PCI_VENDOR_ID_INTEL, 0x0813, NULL);
 	if (!dws->dmac)
 		dws->dmac = pci_get_device(PCI_VENDOR_ID_INTEL, 0x0827, NULL);
 =======
+=======
+>>>>>>> v3.18
 	 * be the DMA controller of Medfield
 	 */
 	dma_dev = pci_get_device(PCI_VENDOR_ID_INTEL, 0x0827, NULL);
@@ -79,6 +97,9 @@ static int mid_spi_dma_init(struct dw_spi *dws)
 		return -ENODEV;
 
 	dws->dma_dev = &dma_dev->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dma_cap_zero(mask);
@@ -109,8 +130,12 @@ free_rxchan:
 	dma_release_channel(dws->rxchan);
 err_exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
 
+=======
+	return -EBUSY;
+>>>>>>> v3.18
 =======
 	return -EBUSY;
 >>>>>>> v3.18
@@ -145,8 +170,12 @@ static void dw_spi_dma_done(void *arg)
 static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_async_tx_descriptor *txdesc = NULL, *rxdesc = NULL;
 	struct dma_chan *txchan, *rxchan;
+=======
+	struct dma_async_tx_descriptor *txdesc, *rxdesc;
+>>>>>>> v3.18
 =======
 	struct dma_async_tx_descriptor *txdesc, *rxdesc;
 >>>>>>> v3.18
@@ -160,9 +189,15 @@ static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 		dw_writew(dws, DW_SPI_DMATDLR, 0x10);
 		if (dws->tx_dma)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_ctrl |= 0x2;
 		if (dws->rx_dma)
 			dma_ctrl |= 0x1;
+=======
+			dma_ctrl |= SPI_DMA_TDMAE;
+		if (dws->rx_dma)
+			dma_ctrl |= SPI_DMA_RDMAE;
+>>>>>>> v3.18
 =======
 			dma_ctrl |= SPI_DMA_TDMAE;
 		if (dws->rx_dma)
@@ -174,8 +209,11 @@ static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 
 	dws->dma_chan_done = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txchan = dws->txchan;
 	rxchan = dws->rxchan;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -188,8 +226,12 @@ static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 	txconf.device_fc = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txchan->device->device_control(txchan, DMA_SLAVE_CONFIG,
 				       (unsigned long) &txconf);
+=======
+	dmaengine_slave_config(dws->txchan, &txconf);
+>>>>>>> v3.18
 =======
 	dmaengine_slave_config(dws->txchan, &txconf);
 >>>>>>> v3.18
@@ -199,17 +241,23 @@ static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 	dws->tx_sgl.length = dws->len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txdesc = dmaengine_prep_slave_sg(txchan,
 				&dws->tx_sgl,
 				1,
 				DMA_MEM_TO_DEV,
 				DMA_PREP_INTERRUPT | DMA_COMPL_SKIP_DEST_UNMAP);
 =======
+=======
+>>>>>>> v3.18
 	txdesc = dmaengine_prep_slave_sg(dws->txchan,
 				&dws->tx_sgl,
 				1,
 				DMA_MEM_TO_DEV,
 				DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	txdesc->callback = dw_spi_dma_done;
 	txdesc->callback_param = dws;
@@ -223,8 +271,12 @@ static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 	rxconf.device_fc = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxchan->device->device_control(rxchan, DMA_SLAVE_CONFIG,
 				       (unsigned long) &rxconf);
+=======
+	dmaengine_slave_config(dws->rxchan, &rxconf);
+>>>>>>> v3.18
 =======
 	dmaengine_slave_config(dws->rxchan, &rxconf);
 >>>>>>> v3.18
@@ -234,32 +286,44 @@ static int mid_spi_dma_transfer(struct dw_spi *dws, int cs_change)
 	dws->rx_sgl.length = dws->len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxdesc = dmaengine_prep_slave_sg(rxchan,
 				&dws->rx_sgl,
 				1,
 				DMA_DEV_TO_MEM,
 				DMA_PREP_INTERRUPT | DMA_COMPL_SKIP_DEST_UNMAP);
 =======
+=======
+>>>>>>> v3.18
 	rxdesc = dmaengine_prep_slave_sg(dws->rxchan,
 				&dws->rx_sgl,
 				1,
 				DMA_DEV_TO_MEM,
 				DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rxdesc->callback = dw_spi_dma_done;
 	rxdesc->callback_param = dws;
 
 	/* rx must be started before tx due to spi instinct */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxdesc->tx_submit(rxdesc);
 	txdesc->tx_submit(txdesc);
 =======
+=======
+>>>>>>> v3.18
 	dmaengine_submit(rxdesc);
 	dma_async_issue_pending(dws->rxchan);
 
 	dmaengine_submit(txdesc);
 	dma_async_issue_pending(dws->txchan);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -272,7 +336,11 @@ static struct dw_spi_dma_ops mid_dma_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Some specific info for SPI0 controller on Moorestown */
+=======
+/* Some specific info for SPI0 controller on Intel MID */
+>>>>>>> v3.18
 =======
 /* Some specific info for SPI0 controller on Intel MID */
 >>>>>>> v3.18
@@ -302,6 +370,10 @@ int dw_spi_mid_init(struct dw_spi *dws)
 
 	dws->num_cs = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dws->fifo_len = 40;	/* FIFO has 40 words buffer */
+>>>>>>> v3.18
 =======
 	dws->fifo_len = 40;	/* FIFO has 40 words buffer */
 >>>>>>> v3.18

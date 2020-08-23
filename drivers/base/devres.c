@@ -298,15 +298,21 @@ void * devres_get(struct device *dev, void *new_res,
 		add_dr(dev, &new_dr->node);
 		dr = new_dr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new_res = NULL;
 	}
 	spin_unlock_irqrestore(&dev->devres_lock, flags);
 	devres_free(new_res);
 =======
+=======
+>>>>>>> v3.18
 		new_dr = NULL;
 	}
 	spin_unlock_irqrestore(&dev->devres_lock, flags);
 	devres_free(new_dr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return dr->data;
@@ -825,7 +831,10 @@ EXPORT_SYMBOL_GPL(devm_kstrdup);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * devm_kvasprintf - Allocate resource managed space and format a string
  *		     into that.
  * @dev: Device to allocate memory for
@@ -882,6 +891,9 @@ char *devm_kasprintf(struct device *dev, gfp_t gfp, const char *fmt, ...)
 EXPORT_SYMBOL_GPL(devm_kasprintf);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * devm_kfree - Resource-managed kfree
  * @dev: Device this memory belongs to

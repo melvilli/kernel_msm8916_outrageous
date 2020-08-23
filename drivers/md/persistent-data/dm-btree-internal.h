@@ -139,12 +139,15 @@ int lower_bound(struct btree_node *n, uint64_t key);
 extern struct dm_block_validator btree_node_validator;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Value type for upper levels of multi-level btrees.
  */
 extern void init_le64_type(struct dm_transaction_manager *tm,
 			   struct dm_btree_value_type *vt);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* DM_BTREE_INTERNAL_H */

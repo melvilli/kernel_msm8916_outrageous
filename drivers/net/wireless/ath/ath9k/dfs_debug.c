@@ -21,6 +21,7 @@
 #include "ath9k.h"
 #include "dfs_debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 struct ath_dfs_pool_stats global_dfs_pool_stats = { 0 };
@@ -32,6 +33,8 @@ struct ath_dfs_pool_stats global_dfs_pool_stats = { 0 };
 	len += snprintf(buf + len, size - len, "%28s : %10u\n", s, \
 			global_dfs_pool_stats.p);
 =======
+=======
+>>>>>>> v3.18
 #include "../dfs_pattern_detector.h"
 
 static struct ath_dfs_pool_stats dfs_pool_stats = { 0 };
@@ -42,6 +45,9 @@ static struct ath_dfs_pool_stats dfs_pool_stats = { 0 };
 #define ATH9K_DFS_POOL_STAT(s, p) \
 	len += scnprintf(buf + len, size - len, "%28s : %10u\n", s, \
 			 dfs_pool_stats.p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t read_file_dfs(struct file *file, char __user *user_buf,
@@ -58,6 +64,7 @@ static ssize_t read_file_dfs(struct file *file, char __user *user_buf,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len, "DFS support for "
 			"macVersion = 0x%x, macRev = 0x%x: %s\n",
 			hw_ver->macVersion, hw_ver->macRev,
@@ -65,6 +72,8 @@ static ssize_t read_file_dfs(struct file *file, char __user *user_buf,
 					"enabled" : "disabled");
 	len += snprintf(buf + len, size - len, "Pulse detector statistics:\n");
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, size - len, "DFS support for "
 			 "macVersion = 0x%x, macRev = 0x%x: %s\n",
 			 hw_ver->macVersion, hw_ver->macRev,
@@ -80,6 +89,9 @@ static ssize_t read_file_dfs(struct file *file, char __user *user_buf,
 	dfs_pool_stats = sc->dfs_detector->get_stats(sc->dfs_detector);
 
 	len += scnprintf(buf + len, size - len, "Pulse detector statistics:\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ATH9K_DFS_STAT("pulse events reported   ", pulses_total);
 	ATH9K_DFS_STAT("invalid pulse events    ", pulses_no_dfs);
@@ -91,18 +103,24 @@ static ssize_t read_file_dfs(struct file *file, char __user *user_buf,
 	ATH9K_DFS_STAT("Secondary channel pulses", ext_phy_errors);
 	ATH9K_DFS_STAT("Dual channel pulses     ", dc_phy_errors);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len, "Radar detector statistics "
 			"(current DFS region: %d)\n", sc->dfs_detector->region);
 	ATH9K_DFS_STAT("Pulse events processed  ", pulses_processed);
 	ATH9K_DFS_STAT("Radars detected         ", radar_detected);
 	len += snprintf(buf + len, size - len, "Global Pool statistics:\n");
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, size - len, "Radar detector statistics "
 			 "(current DFS region: %d)\n",
 			 sc->dfs_detector->region);
 	ATH9K_DFS_STAT("Pulse events processed  ", pulses_processed);
 	ATH9K_DFS_STAT("Radars detected         ", radar_detected);
 	len += scnprintf(buf + len, size - len, "Global Pool statistics:\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ATH9K_DFS_POOL_STAT("Pool references         ", pool_reference);
 	ATH9K_DFS_POOL_STAT("Pulses allocated        ", pulse_allocated);
@@ -113,6 +131,10 @@ static ssize_t read_file_dfs(struct file *file, char __user *user_buf,
 	ATH9K_DFS_POOL_STAT("Seqs. in use            ", pseq_used);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -141,7 +163,11 @@ static ssize_t write_file_dfs(struct file *file, const char __user *user_buf,
 
 	buf[len] = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
+=======
+	if (kstrtoul(buf, 0, &val))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val))
 >>>>>>> v3.18

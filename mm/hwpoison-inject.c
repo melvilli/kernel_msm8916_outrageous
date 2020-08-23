@@ -21,8 +21,11 @@ static int hwpoison_inject(void *data, u64 val)
 		return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hwpoison_filter_enable)
 		goto inject;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!pfn_valid(pfn))
@@ -37,6 +40,12 @@ static int hwpoison_inject(void *data, u64 val)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hwpoison_filter_enable)
+		goto inject;
+
+>>>>>>> v3.18
 =======
 	if (!hwpoison_filter_enable)
 		goto inject;
@@ -64,7 +73,11 @@ static int hwpoison_inject(void *data, u64 val)
 
 inject:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Injecting memory failure at pfn %lx\n", pfn);
+=======
+	pr_info("Injecting memory failure at pfn %#lx\n", pfn);
+>>>>>>> v3.18
 =======
 	pr_info("Injecting memory failure at pfn %#lx\n", pfn);
 >>>>>>> v3.18
@@ -85,8 +98,12 @@ DEFINE_SIMPLE_ATTRIBUTE(unpoison_fops, NULL, hwpoison_unpoison, "%lli\n");
 static void pfn_inject_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hwpoison_dir)
 		debugfs_remove_recursive(hwpoison_dir);
+=======
+	debugfs_remove_recursive(hwpoison_dir);
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(hwpoison_dir);
 >>>>>>> v3.18
@@ -106,7 +123,11 @@ static int pfn_inject_init(void)
 	 * They are mainly for testing hwpoison in software level.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dentry = debugfs_create_file("corrupt-pfn", 0600, hwpoison_dir,
+=======
+	dentry = debugfs_create_file("corrupt-pfn", 0200, hwpoison_dir,
+>>>>>>> v3.18
 =======
 	dentry = debugfs_create_file("corrupt-pfn", 0200, hwpoison_dir,
 >>>>>>> v3.18
@@ -115,7 +136,11 @@ static int pfn_inject_init(void)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dentry = debugfs_create_file("unpoison-pfn", 0600, hwpoison_dir,
+=======
+	dentry = debugfs_create_file("unpoison-pfn", 0200, hwpoison_dir,
+>>>>>>> v3.18
 =======
 	dentry = debugfs_create_file("unpoison-pfn", 0200, hwpoison_dir,
 >>>>>>> v3.18

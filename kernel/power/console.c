@@ -10,6 +10,10 @@
 #include <linux/vt.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -86,6 +90,10 @@ void pm_vt_switch_unregister(struct device *dev)
 		if (tmp->dev == dev) {
 			list_del(&tmp->head);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			kfree(tmp);
+>>>>>>> v3.18
 =======
 			kfree(tmp);
 >>>>>>> v3.18

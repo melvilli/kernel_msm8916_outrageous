@@ -6,13 +6,19 @@
 
 #include <linux/ktime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/tracepoint.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_qos.h>
 #include <linux/tracepoint.h>
 #include <linux/ftrace_event.h>
 
 #define TPS(x)  tracepoint_string(x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DECLARE_EVENT_CLASS(cpu,
@@ -43,7 +49,10 @@ DEFINE_EVENT(cpu, cpu_idle,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(pstate_sample,
 
 	TP_PROTO(u32 core_busy,
@@ -92,6 +101,9 @@ TRACE_EVENT(pstate_sample,
 
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This file can get included multiple times, TRACE_HEADER_MULTI_READ at top */
 #ifndef _PWR_EVENT_AVOID_DOUBLE_DEFINING
@@ -101,7 +113,10 @@ TRACE_EVENT(pstate_sample,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define pm_verb_symbolic(event) \
 	__print_symbolic(event, \
 		{ PM_EVENT_SUSPEND, "suspend" }, \
@@ -113,6 +128,9 @@ TRACE_EVENT(pstate_sample,
 		{ PM_EVENT_RESTORE, "restore" }, \
 		{ PM_EVENT_RECOVER, "recover" })
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DEFINE_EVENT(cpu, cpu_frequency,
 
@@ -121,6 +139,7 @@ DEFINE_EVENT(cpu, cpu_frequency,
 	TP_ARGS(frequency, cpu_id)
 );
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 TRACE_EVENT(cpu_frequency_switch_start,
 
@@ -214,6 +233,8 @@ TRACE_EVENT(machine_suspend,
 
 	TP_printk("state=%lu", (unsigned long)__entry->state)
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(device_pm_callback_start,
 
 	TP_PROTO(struct device *dev, const char *pm_ops, int event),
@@ -284,6 +305,9 @@ TRACE_EVENT(suspend_resume,
 
 	TP_printk("%s[%u] %s", __entry->action, (unsigned int)__entry->val,
 		(__entry->start)?"begin":"end")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -369,6 +393,7 @@ DEFINE_EVENT(clock, clock_set_rate,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(clock_set_parent,
 
 	TP_PROTO(const char *name, const char *parent_name),
@@ -388,6 +413,8 @@ TRACE_EVENT(clock_set_parent,
 	TP_printk("%s parent=%s", __get_str(name), __get_str(parent_name))
 );
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -422,6 +449,7 @@ DEFINE_EVENT(power_domain, power_domain_target,
 	TP_ARGS(name, state, cpu_id)
 );
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 DECLARE_EVENT_CLASS(kpm_module,
 
@@ -497,6 +525,8 @@ TRACE_EVENT(core_ctl_set_busy,
 );
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * The pm qos events are used for pm qos update
  */
@@ -668,6 +698,9 @@ DEFINE_EVENT(dev_pm_qos_request, dev_pm_qos_remove_request,
 
 	TP_ARGS(name, type, new_value)
 );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_POWER_H */
 

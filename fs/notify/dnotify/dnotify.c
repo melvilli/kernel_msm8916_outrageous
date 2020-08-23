@@ -32,7 +32,10 @@ static struct kmem_cache *dnotify_struct_cache __read_mostly;
 static struct kmem_cache *dnotify_mark_cache __read_mostly;
 static struct fsnotify_group *dnotify_group __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_MUTEX(dnotify_mark_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -87,6 +90,7 @@ static void dnotify_recalc_inode_mask(struct fsnotify_mark *fsn_mark)
  */
 static int dnotify_handle_event(struct fsnotify_group *group,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct fsnotify_mark *inode_mark,
 				struct fsnotify_mark *vfsmount_mark,
 				struct fsnotify_event *event)
@@ -102,6 +106,8 @@ static int dnotify_handle_event(struct fsnotify_group *group,
 
 	to_tell = event->to_tell;
 =======
+=======
+>>>>>>> v3.18
 				struct inode *inode,
 				struct fsnotify_mark *inode_mark,
 				struct fsnotify_mark *vfsmount_mark,
@@ -119,6 +125,9 @@ static int dnotify_handle_event(struct fsnotify_group *group,
 		return 0;
 
 	BUG_ON(vfsmount_mark);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dn_mark = container_of(inode_mark, struct dnotify_mark, fsn_mark);
@@ -147,6 +156,7 @@ static int dnotify_handle_event(struct fsnotify_group *group,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Given an inode and mask determine if dnotify would be interested in sending
  * userspace notification for that pair.
@@ -166,6 +176,8 @@ static bool dnotify_should_send_event(struct fsnotify_group *group,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void dnotify_free_mark(struct fsnotify_mark *fsn_mark)
 {
 	struct dnotify_mark *dn_mark = container_of(fsn_mark,
@@ -180,10 +192,13 @@ static void dnotify_free_mark(struct fsnotify_mark *fsn_mark)
 static struct fsnotify_ops dnotify_fsnotify_ops = {
 	.handle_event = dnotify_handle_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.should_send_event = dnotify_should_send_event,
 	.free_group_priv = NULL,
 	.freeing_mark = NULL,
 	.free_event_priv = NULL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -213,7 +228,11 @@ void dnotify_flush(struct file *filp, fl_owner_t id)
 	dn_mark = container_of(fsn_mark, struct dnotify_mark, fsn_mark);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&dnotify_mark_mutex);
+=======
+	mutex_lock(&dnotify_group->mark_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&dnotify_group->mark_mutex);
 >>>>>>> v3.18
@@ -233,18 +252,24 @@ void dnotify_flush(struct file *filp, fl_owner_t id)
 	spin_unlock(&fsn_mark->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* nothing else could have found us thanks to the dnotify_mark_mutex */
 	if (dn_mark->dn == NULL)
 		fsnotify_destroy_mark(fsn_mark, dnotify_group);
 
 	mutex_unlock(&dnotify_mark_mutex);
 =======
+=======
+>>>>>>> v3.18
 	/* nothing else could have found us thanks to the dnotify_groups
 	   mark_mutex */
 	if (dn_mark->dn == NULL)
 		fsnotify_destroy_mark_locked(fsn_mark, dnotify_group);
 
 	mutex_unlock(&dnotify_group->mark_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fsnotify_put_mark(fsn_mark);
@@ -369,7 +394,11 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned long arg)
 
 	/* this is needed to prevent the fcntl/close race described below */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&dnotify_mark_mutex);
+=======
+	mutex_lock(&dnotify_group->mark_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&dnotify_group->mark_mutex);
 >>>>>>> v3.18
@@ -381,7 +410,12 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned long arg)
 		spin_lock(&fsn_mark->lock);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsnotify_add_mark(new_fsn_mark, dnotify_group, inode, NULL, 0);
+=======
+		fsnotify_add_mark_locked(new_fsn_mark, dnotify_group, inode,
+					 NULL, 0);
+>>>>>>> v3.18
 =======
 		fsnotify_add_mark_locked(new_fsn_mark, dnotify_group, inode,
 					 NULL, 0);
@@ -400,9 +434,15 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned long arg)
 	/* if (f != filp) means that we lost a race and another task/thread
 	 * actually closed the fd we are still playing with before we grabbed
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * the dnotify_mark_mutex and fsn_mark->lock.  Since closing the fd is the
 	 * only time we clean up the marks we need to get our mark off
 	 * the list. */
+=======
+	 * the dnotify_groups mark_mutex and fsn_mark->lock.  Since closing the
+	 * fd is the only time we clean up the marks we need to get our mark
+	 * off the list. */
+>>>>>>> v3.18
 =======
 	 * the dnotify_groups mark_mutex and fsn_mark->lock.  Since closing the
 	 * fd is the only time we clean up the marks we need to get our mark
@@ -421,6 +461,7 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned long arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = __f_setown(filp, task_pid(current), PIDTYPE_PID, 0);
 	if (error) {
 		/* if we added, we must shoot */
@@ -428,6 +469,9 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned long arg)
 			destroy = 1;
 		goto out;
 	}
+=======
+	__f_setown(filp, task_pid(current), PIDTYPE_PID, 0);
+>>>>>>> v3.18
 =======
 	__f_setown(filp, task_pid(current), PIDTYPE_PID, 0);
 >>>>>>> v3.18
@@ -447,9 +491,15 @@ out:
 
 	if (destroy)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsnotify_destroy_mark(fsn_mark, dnotify_group);
 
 	mutex_unlock(&dnotify_mark_mutex);
+=======
+		fsnotify_destroy_mark_locked(fsn_mark, dnotify_group);
+
+	mutex_unlock(&dnotify_group->mark_mutex);
+>>>>>>> v3.18
 =======
 		fsnotify_destroy_mark_locked(fsn_mark, dnotify_group);
 

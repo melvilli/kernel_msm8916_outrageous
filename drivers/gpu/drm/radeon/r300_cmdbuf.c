@@ -35,15 +35,21 @@
 
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_buffer.h>
 #include <drm/radeon_drm.h>
 #include "radeon_drv.h"
 #include "r300_reg.h"
 =======
+=======
+>>>>>>> v3.18
 #include <drm/radeon_drm.h>
 #include "radeon_drv.h"
 #include "r300_reg.h"
 #include "drm_buffer.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/unaligned.h>
@@ -83,7 +89,11 @@ static int r300_emit_cliprects(drm_radeon_private_t *dev_priv,
 
 		for (i = 0; i < nr; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (DRM_COPY_FROM_USER
+=======
+			if (copy_from_user
+>>>>>>> v3.18
 =======
 			if (copy_from_user
 >>>>>>> v3.18
@@ -940,7 +950,11 @@ static int r300_scratch(drm_radeon_private_t *dev_priv,
 		*buf_idx *= 2; /* 8 bytes per buf */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_TO_USER(ref_age_base + *buf_idx,
+=======
+		if (copy_to_user(ref_age_base + *buf_idx,
+>>>>>>> v3.18
 =======
 		if (copy_to_user(ref_age_base + *buf_idx,
 >>>>>>> v3.18
@@ -949,7 +963,11 @@ static int r300_scratch(drm_radeon_private_t *dev_priv,
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(&h_pending,
+=======
+		if (copy_from_user(&h_pending,
+>>>>>>> v3.18
 =======
 		if (copy_from_user(&h_pending,
 >>>>>>> v3.18
@@ -963,7 +981,11 @@ static int r300_scratch(drm_radeon_private_t *dev_priv,
 		h_pending--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_TO_USER(ref_age_base + *buf_idx + 1,
+=======
+		if (copy_to_user(ref_age_base + *buf_idx + 1,
+>>>>>>> v3.18
 =======
 		if (copy_to_user(ref_age_base + *buf_idx + 1,
 >>>>>>> v3.18

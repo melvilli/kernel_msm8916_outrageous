@@ -24,6 +24,10 @@
 #include <linux/spinlock.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/core.h>
+>>>>>>> v3.18
 =======
 #include <sound/core.h>
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ struct dao {
 	struct imapper **imappers;
 	struct daio_mgr *mgr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *hw;
+=======
+	struct hw *hw;
+>>>>>>> v3.18
 =======
 	struct hw *hw;
 >>>>>>> v3.18
@@ -69,7 +77,11 @@ struct dai {
 	struct daio daio;
 	struct dai_rsc_ops *ops;	/* DAI specific operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *hw;
+=======
+	struct hw *hw;
+>>>>>>> v3.18
 =======
 	struct hw *hw;
 >>>>>>> v3.18
@@ -111,6 +123,10 @@ struct daio_desc {
 struct daio_mgr {
 	struct rsc_mgr mgr;	/* Basic resource manager info */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_card *card;	/* pointer to this card */
+>>>>>>> v3.18
 =======
 	struct snd_card *card;	/* pointer to this card */
 >>>>>>> v3.18
@@ -134,7 +150,11 @@ struct daio_mgr {
 
 /* Constructor and destructor of daio resource manager */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int daio_mgr_create(void *hw, struct daio_mgr **rdaio_mgr);
+=======
+int daio_mgr_create(struct hw *hw, struct daio_mgr **rdaio_mgr);
+>>>>>>> v3.18
 =======
 int daio_mgr_create(struct hw *hw, struct daio_mgr **rdaio_mgr);
 >>>>>>> v3.18

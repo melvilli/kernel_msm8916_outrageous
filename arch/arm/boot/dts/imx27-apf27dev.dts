@@ -17,6 +17,7 @@
 	compatible = "armadeus,imx27-apf27dev", "armadeus,imx27-apf27", "fsl,imx27";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio-keys {
 		compatible = "gpio-keys";
 
@@ -24,6 +25,8 @@
 			label = "user";
 			gpios = <&gpio6 13 0>;
 =======
+=======
+>>>>>>> v3.18
 	display: display {
 		model = "Chimei-LW700AT9003";
 		native-mode = <&timing0>;
@@ -52,6 +55,9 @@
 		user-key {
 			label = "user";
 			gpios = <&gpio6 13 GPIO_ACTIVE_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			linux,code = <276>; /* BTN_EXTRA */
 		};
@@ -60,17 +66,23 @@
 	leds {
 		compatible = "gpio-leds";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		user {
 			label = "Heartbeat";
 			gpios = <&gpio6 14 0>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio_leds>;
 
 		user {
 			label = "Heartbeat";
 			gpios = <&gpio6 14 GPIO_ACTIVE_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			linux,default-trigger = "heartbeat";
 		};
@@ -80,9 +92,12 @@
 &cspi1 {
 	fsl,spi-num-chipselects = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cs-gpios = <&gpio4 28 1>;
 	status = "okay";
 =======
+=======
+>>>>>>> v3.18
 	cs-gpios = <&gpio4 28 GPIO_ACTIVE_LOW>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_cspi1 &pinctrl_cspi1_cs>;
@@ -97,15 +112,21 @@
 		pinctrl-0 = <&pinctrl_max1027>;
 		spi-max-frequency = <10000000>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &cspi2 {
 	fsl,spi-num-chipselects = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cs-gpios = <&gpio4 21 1>, <&gpio4 27 1>,
 			<&gpio2 17 1>;
 =======
+=======
+>>>>>>> v3.18
 	cs-gpios = <&gpio4 21 GPIO_ACTIVE_LOW>,
 		   <&gpio4 27 GPIO_ACTIVE_LOW>,
 		   <&gpio2 17 GPIO_ACTIVE_LOW>;
@@ -119,12 +140,16 @@
 	fsl,dmacr = <0x00020010>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_imxfb1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
 
 &i2c1 {
 	clock-frequency = <400000>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = "okay";
 };
@@ -133,6 +158,8 @@
 	status = "okay";
 };
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
@@ -275,4 +302,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

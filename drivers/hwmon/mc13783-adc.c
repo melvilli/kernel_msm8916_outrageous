@@ -38,7 +38,11 @@ struct mc13783_adc_priv {
 	struct mc13xxx *mc13xxx;
 	struct device *hwmon_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[10];
+=======
+	char name[PLATFORM_NAME_SIZE];
+>>>>>>> v3.18
 =======
 	char name[PLATFORM_NAME_SIZE];
 >>>>>>> v3.18

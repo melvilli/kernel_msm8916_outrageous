@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -514,6 +518,10 @@ acpi_status acpi_ds_load2_end_op(struct acpi_walk_state *walk_state)
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -557,6 +565,10 @@ acpi_status acpi_ds_load2_end_op(struct acpi_walk_state *walk_state)
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -687,6 +699,10 @@ acpi_status acpi_ds_load2_end_op(struct acpi_walk_state *walk_state)
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -738,16 +754,22 @@ acpi_status acpi_ds_load2_end_op(struct acpi_walk_state *walk_state)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	}
 
       cleanup:
 =======
+=======
+>>>>>>> v3.18
 
 		break;
 	}
 
 cleanup:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Remove the Node pushed at the very beginning */

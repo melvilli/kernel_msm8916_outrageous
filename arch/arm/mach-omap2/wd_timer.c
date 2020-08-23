@@ -50,6 +50,7 @@ int omap2_wd_timer_disable(struct omap_hwmod *oh)
 
 	/* sequence required to disable watchdog */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(0xAAAA, base + OMAP_WDT_SPR);
 	while (__raw_readl(base + OMAP_WDT_WPS) & 0x10)
 		cpu_relax();
@@ -57,12 +58,17 @@ int omap2_wd_timer_disable(struct omap_hwmod *oh)
 	__raw_writel(0x5555, base + OMAP_WDT_SPR);
 	while (__raw_readl(base + OMAP_WDT_WPS) & 0x10)
 =======
+=======
+>>>>>>> v3.18
 	writel_relaxed(0xAAAA, base + OMAP_WDT_SPR);
 	while (readl_relaxed(base + OMAP_WDT_WPS) & 0x10)
 		cpu_relax();
 
 	writel_relaxed(0x5555, base + OMAP_WDT_SPR);
 	while (readl_relaxed(base + OMAP_WDT_WPS) & 0x10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cpu_relax();
 
@@ -103,8 +109,13 @@ int omap2_wd_timer_reset(struct omap_hwmod *oh)
 
 	if (c == MAX_MODULE_SOFTRESET_WAIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: %s: softreset failed (waited %d usec)\n",
 			   __func__, oh->name, MAX_MODULE_SOFTRESET_WAIT);
+=======
+		pr_warn("%s: %s: softreset failed (waited %d usec)\n",
+			__func__, oh->name, MAX_MODULE_SOFTRESET_WAIT);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: %s: softreset failed (waited %d usec)\n",
 			__func__, oh->name, MAX_MODULE_SOFTRESET_WAIT);

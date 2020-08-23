@@ -736,7 +736,11 @@ iosapic_register_intr (unsigned int gsi,
 		if(iosapic_intr_info[irq].count == 0) {
 			assign_irq_vector(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dynamic_irq_init(irq);
+=======
+			irq_init_desc(irq);
+>>>>>>> v3.18
 =======
 			irq_init_desc(irq);
 >>>>>>> v3.18

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Kernel driver exynos4_tmu
 =================
 
@@ -14,6 +15,8 @@ Description
 
 This driver allows to read temperature inside SAMSUNG EXYNOS4 series of SoC.
 =======
+=======
+>>>>>>> v3.18
 Kernel driver exynos_tmu
 =================
 
@@ -28,6 +31,9 @@ TMU controller Description:
 ---------------------------
 
 This driver allows to read temperature inside SAMSUNG EXYNOS4/5 series of SoC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The chip only exposes the measured 8-bit temperature code value
@@ -52,9 +58,15 @@ The three equations are:
        Temperature code measured at 85 degree Celsius which is unchanged
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TMU(Thermal Management Unit) in EXYNOS4 generates interrupt
 when temperature exceeds pre-defined levels.
 The maximum number of configurable threshold is four.
+=======
+TMU(Thermal Management Unit) in EXYNOS4/5 generates interrupt
+when temperature exceeds pre-defined levels.
+The maximum number of configurable threshold is five.
+>>>>>>> v3.18
 =======
 TMU(Thermal Management Unit) in EXYNOS4/5 generates interrupt
 when temperature exceeds pre-defined levels.
@@ -71,10 +83,13 @@ The threshold levels are defined as follows:
 
 When an interrupt occurs, this driver notify kernel thermal framework
 <<<<<<< HEAD
+<<<<<<< HEAD
 with the function exynos4_report_trigger.
 Although an interrupt condition for level_0 can be set,
 it can be used to synchronize the cooling action.
 =======
+=======
+>>>>>>> v3.18
 with the function exynos_report_trigger.
 Although an interrupt condition for level_0 can be set,
 it can be used to synchronize the cooling action.
@@ -103,4 +118,7 @@ b) TMU driver: This component initialises the TMU controller and sets different
 c) Exynos Core thermal wrapper: This provides 3 wrapper function to use the
 		Kernel core thermal framework. They are exynos_unregister_thermal,
 		exynos_register_thermal and exynos_report_trigger.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

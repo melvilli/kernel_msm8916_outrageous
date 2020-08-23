@@ -19,7 +19,10 @@
 #include <linux/err.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 88pm80x chips have same definition for chip id register. */
 #define PM80X_CHIP_ID			(0x00)
 #define PM80X_CHIP_ID_NUM(x)		(((x) >> 5) & 0x7)
@@ -37,6 +40,9 @@ static struct pm80x_chip_mapping chip_mapping[] = {
 	{0x0,	CHIP_PM805},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * workaround: some registers needed by pm805 are defined in pm800, so
@@ -52,6 +58,7 @@ const struct regmap_config pm80x_regmap_config = {
 EXPORT_SYMBOL_GPL(pm80x_regmap_config);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pm80x_init(struct i2c_client *client,
 				 const struct i2c_device_id *id)
 {
@@ -59,6 +66,8 @@ int pm80x_init(struct i2c_client *client,
 	struct regmap *map;
 	int ret = 0;
 =======
+=======
+>>>>>>> v3.18
 
 int pm80x_init(struct i2c_client *client)
 {
@@ -66,6 +75,9 @@ int pm80x_init(struct i2c_client *client)
 	struct regmap *map;
 	unsigned int val;
 	int i, ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chip =
@@ -82,10 +94,13 @@ int pm80x_init(struct i2c_client *client)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->id = id->driver_data;
 	if (chip->id < CHIP_PM800 || chip->id > CHIP_PM805)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	chip->client = client;
@@ -98,7 +113,10 @@ int pm80x_init(struct i2c_client *client)
 	i2c_set_clientdata(chip->client, chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = regmap_read(chip->regmap, PM80X_CHIP_ID, &val);
 	if (ret < 0) {
 		dev_err(chip->dev, "Failed to read CHIP ID: %d\n", ret);
@@ -118,6 +136,9 @@ int pm80x_init(struct i2c_client *client)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	device_init_wakeup(&client->dev, 1);
 

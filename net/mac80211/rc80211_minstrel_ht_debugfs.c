@@ -47,13 +47,19 @@ minstrel_ht_stats_dump(struct minstrel_ht_sta *mi, int i, char *p)
 			p += sprintf(p, "HT%c0/%cGI ", htmode, gimode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*(p++) = (idx == mi->max_tp_rate) ? 'T' : ' ';
 		*(p++) = (idx == mi->max_tp_rate2) ? 't' : ' ';
 =======
+=======
+>>>>>>> v3.18
 		*(p++) = (idx == mi->max_tp_rate[0]) ? 'A' : ' ';
 		*(p++) = (idx == mi->max_tp_rate[1]) ? 'B' : ' ';
 		*(p++) = (idx == mi->max_tp_rate[2]) ? 'C' : ' ';
 		*(p++) = (idx == mi->max_tp_rate[3]) ? 'D' : ' ';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*(p++) = (idx == mi->max_prob_rate) ? 'P' : ' ';
 
@@ -62,8 +68,12 @@ minstrel_ht_stats_dump(struct minstrel_ht_sta *mi, int i, char *p)
 			p += sprintf(p, " %2u.%1uM", r / 10, r % 10);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p += sprintf(p, " MCS%-2u", (mg->streams - 1) *
 					 MCS_GROUP_RATES + j);
+=======
+			p += sprintf(p, " MCS%-2u", (mg->streams - 1) * 8 + j);
+>>>>>>> v3.18
 =======
 			p += sprintf(p, " MCS%-2u", (mg->streams - 1) * 8 + j);
 >>>>>>> v3.18
@@ -74,8 +84,13 @@ minstrel_ht_stats_dump(struct minstrel_ht_sta *mi, int i, char *p)
 		eprob = MINSTREL_TRUNC(mr->probability * 1000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p += sprintf(p, "      %6u.%1u   %6u.%1u    %6u.%1u    "
 				"%3u            %3u(%3u)  %8llu    %8llu\n",
+=======
+		p += sprintf(p, " %4u.%1u %3u.%1u %3u.%1u "
+				"%3u %4u(%4u) %9llu(%9llu)\n",
+>>>>>>> v3.18
 =======
 		p += sprintf(p, " %4u.%1u %3u.%1u %3u.%1u "
 				"%3u %4u(%4u) %9llu(%9llu)\n",
@@ -112,7 +127,11 @@ minstrel_ht_stats_open(struct inode *inode, struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ms = kmalloc(sizeof(*ms) + 8192, GFP_KERNEL);
+=======
+	ms = kmalloc(8192, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ms = kmalloc(8192, GFP_KERNEL);
 >>>>>>> v3.18
@@ -122,8 +141,14 @@ minstrel_ht_stats_open(struct inode *inode, struct file *file)
 	file->private_data = ms;
 	p = ms->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p += sprintf(p, "type         rate     throughput  ewma prob   this prob  "
 			"retry   this succ/attempt   success    attempts\n");
+=======
+	p += sprintf(p, "type           rate     tpt eprob *prob "
+			"ret  *ok(*cum)        ok(      cum)\n");
+
+>>>>>>> v3.18
 =======
 	p += sprintf(p, "type           rate     tpt eprob *prob "
 			"ret  *ok(*cum)        ok(      cum)\n");
@@ -144,6 +169,11 @@ minstrel_ht_stats_open(struct inode *inode, struct file *file)
 	ms->len = p - ms->buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_ON(ms->len + sizeof(*ms) > 8192);
+
+>>>>>>> v3.18
 =======
 	WARN_ON(ms->len + sizeof(*ms) > 8192);
 

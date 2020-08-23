@@ -697,7 +697,11 @@ static struct ngene_info ngene_info_m780 = {
 
 	/* Ensure these are NULL else the frame will call them (as funcs) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tuner_attach   = { 0, 0, 0, 0 },
+=======
+	.tuner_attach   = { NULL, NULL, NULL, NULL },
+>>>>>>> v3.18
 =======
 	.tuner_attach   = { NULL, NULL, NULL, NULL },
 >>>>>>> v3.18

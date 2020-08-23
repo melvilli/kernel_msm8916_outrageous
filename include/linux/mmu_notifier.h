@@ -58,11 +58,14 @@ struct mmu_notifier_ops {
 	 * accesses to the page through the secondary MMUs and not
 	 * only to the ones through the Linux pte.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	int (*clear_flush_young)(struct mmu_notifier *mn,
 				 struct mm_struct *mm,
 				 unsigned long address);
 =======
+=======
+>>>>>>> v3.18
 	 * Start-end is necessary in case the secondary MMU is mapping the page
 	 * at a smaller granularity than the primary MMU.
 	 */
@@ -70,6 +73,9 @@ struct mmu_notifier_ops {
 				 struct mm_struct *mm,
 				 unsigned long start,
 				 unsigned long end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -181,11 +187,14 @@ extern int __mmu_notifier_register(struct mmu_notifier *mn,
 extern void mmu_notifier_unregister(struct mmu_notifier *mn,
 				    struct mm_struct *mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __mmu_notifier_mm_destroy(struct mm_struct *mm);
 extern void __mmu_notifier_release(struct mm_struct *mm);
 extern int __mmu_notifier_clear_flush_young(struct mm_struct *mm,
 					  unsigned long address);
 =======
+=======
+>>>>>>> v3.18
 extern void mmu_notifier_unregister_no_release(struct mmu_notifier *mn,
 					       struct mm_struct *mm);
 extern void __mmu_notifier_mm_destroy(struct mm_struct *mm);
@@ -193,6 +202,9 @@ extern void __mmu_notifier_release(struct mm_struct *mm);
 extern int __mmu_notifier_clear_flush_young(struct mm_struct *mm,
 					  unsigned long start,
 					  unsigned long end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int __mmu_notifier_test_young(struct mm_struct *mm,
 				     unsigned long address);
@@ -213,16 +225,22 @@ static inline void mmu_notifier_release(struct mm_struct *mm)
 
 static inline int mmu_notifier_clear_flush_young(struct mm_struct *mm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  unsigned long address)
 {
 	if (mm_has_notifiers(mm))
 		return __mmu_notifier_clear_flush_young(mm, address);
 =======
+=======
+>>>>>>> v3.18
 					  unsigned long start,
 					  unsigned long end)
 {
 	if (mm_has_notifiers(mm))
 		return __mmu_notifier_clear_flush_young(mm, start, end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -282,7 +300,13 @@ static inline void mmu_notifier_mm_destroy(struct mm_struct *mm)
 	__young = ptep_clear_flush_young(___vma, ___address, __ptep);	\
 	__young |= mmu_notifier_clear_flush_young(___vma->vm_mm,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  ___address);		\
+=======
+						  ___address,		\
+						  ___address +		\
+							PAGE_SIZE);	\
+>>>>>>> v3.18
 =======
 						  ___address,		\
 						  ___address +		\
@@ -299,7 +323,13 @@ static inline void mmu_notifier_mm_destroy(struct mm_struct *mm)
 	__young = pmdp_clear_flush_young(___vma, ___address, __pmdp);	\
 	__young |= mmu_notifier_clear_flush_young(___vma->vm_mm,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  ___address);		\
+=======
+						  ___address,		\
+						  ___address +		\
+							PMD_SIZE);	\
+>>>>>>> v3.18
 =======
 						  ___address,		\
 						  ___address +		\
@@ -329,11 +359,17 @@ static inline void mmu_notifier_mm_destroy(struct mm_struct *mm)
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void mmu_notifier_call_srcu(struct rcu_head *rcu,
 				   void (*func)(struct rcu_head *rcu));
 extern void mmu_notifier_synchronize(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_MMU_NOTIFIER */
 
@@ -343,7 +379,12 @@ static inline void mmu_notifier_release(struct mm_struct *mm)
 
 static inline int mmu_notifier_clear_flush_young(struct mm_struct *mm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  unsigned long address)
+=======
+					  unsigned long start,
+					  unsigned long end)
+>>>>>>> v3.18
 =======
 					  unsigned long start,
 					  unsigned long end)

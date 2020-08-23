@@ -72,7 +72,10 @@ CONFIG_I2C_IBM_IIC=y
 CONFIG_THERMAL=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEBUG=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_EHCI_HCD=y

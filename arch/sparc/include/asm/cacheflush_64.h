@@ -11,7 +11,11 @@
 #define flushw_all()	__asm__ __volatile__("flushw")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __flushw_user(void);
+=======
+void __flushw_user(void);
+>>>>>>> v3.18
 =======
 void __flushw_user(void);
 >>>>>>> v3.18
@@ -35,6 +39,7 @@ void __flushw_user(void);
  * module load, so we need this.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_icache_range(unsigned long start, unsigned long end);
 extern void __flush_icache_page(unsigned long);
 
@@ -44,6 +49,8 @@ extern void flush_dcache_page_impl(struct page *page);
 extern void smp_flush_dcache_page_impl(struct page *page, int cpu);
 extern void flush_dcache_page_all(struct mm_struct *mm, struct page *page);
 =======
+=======
+>>>>>>> v3.18
 void flush_icache_range(unsigned long start, unsigned long end);
 void __flush_icache_page(unsigned long);
 
@@ -52,6 +59,9 @@ void flush_dcache_page_impl(struct page *page);
 #ifdef CONFIG_SMP
 void smp_flush_dcache_page_impl(struct page *page, int cpu);
 void flush_dcache_page_all(struct mm_struct *mm, struct page *page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define smp_flush_dcache_page_impl(page,cpu) flush_dcache_page_impl(page)
@@ -59,9 +69,15 @@ void flush_dcache_page_all(struct mm_struct *mm, struct page *page);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __flush_dcache_range(unsigned long start, unsigned long end);
 #define ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE 1
 extern void flush_dcache_page(struct page *page);
+=======
+void __flush_dcache_range(unsigned long start, unsigned long end);
+#define ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE 1
+void flush_dcache_page(struct page *page);
+>>>>>>> v3.18
 =======
 void __flush_dcache_range(unsigned long start, unsigned long end);
 #define ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE 1
@@ -72,9 +88,15 @@ void flush_dcache_page(struct page *page);
 #define flush_icache_user_range(vma,pg,adr,len)	do { } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_ptrace_access(struct vm_area_struct *, struct page *,
 				unsigned long uaddr, void *kaddr,
 				unsigned long len, int write);
+=======
+void flush_ptrace_access(struct vm_area_struct *, struct page *,
+			 unsigned long uaddr, void *kaddr,
+			 unsigned long len, int write);
+>>>>>>> v3.18
 =======
 void flush_ptrace_access(struct vm_area_struct *, struct page *,
 			 unsigned long uaddr, void *kaddr,

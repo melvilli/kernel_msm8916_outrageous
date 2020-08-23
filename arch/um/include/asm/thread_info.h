@@ -61,8 +61,11 @@ static inline struct thread_info *current_thread_info(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TIF_SYSCALL_TRACE	0	/* syscall trace active */
@@ -74,7 +77,10 @@ static inline struct thread_info *current_thread_info(void)
 #define TIF_RESTORE_SIGMASK	7
 #define TIF_NOTIFY_RESUME	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIF_MM_RELEASED		9
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -390,13 +390,19 @@ struct mlx4_port {
 	struct attribute_group pkey_group;
 	struct attribute_group gid_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8                     port_num;
 	int		       slave;
 =======
+=======
+>>>>>>> v3.18
 	struct device_attribute	enable_smi_admin;
 	struct device_attribute	smi_enabled;
 	int		       slave;
 	u8                     port_num;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -566,7 +572,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t sysfs_show_smi_enabled(struct device *dev,
 				      struct device_attribute *attr, char *buf)
 {
@@ -662,6 +671,9 @@ static void remove_vf_smi_entries(struct mlx4_port *p)
 	sysfs_remove_file(&p->kobj, &p->enable_smi_admin.attr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int add_port(struct mlx4_ib_dev *dev, int port_num, int slave)
 {
@@ -669,8 +681,11 @@ static int add_port(struct mlx4_ib_dev *dev, int port_num, int slave)
 	int i;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int is_eth = rdma_port_get_link_layer(&dev->ib_dev, port_num) ==
 			IB_LINK_LAYER_ETHERNET;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -691,18 +706,24 @@ static int add_port(struct mlx4_ib_dev *dev, int port_num, int slave)
 	p->pkey_group.name  = "pkey_idx";
 	p->pkey_group.attrs =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		alloc_group_attrs(show_port_pkey,
 				  is_eth ? NULL : store_port_pkey,
 				  dev->dev->caps.pkey_table_len[port_num]);
 	if (!p->pkey_group.attrs)
 		goto err_alloc;
 =======
+=======
+>>>>>>> v3.18
 		alloc_group_attrs(show_port_pkey, store_port_pkey,
 				  dev->dev->caps.pkey_table_len[port_num]);
 	if (!p->pkey_group.attrs) {
 		ret = -ENOMEM;
 		goto err_alloc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sysfs_create_group(&p->kobj, &p->pkey_group);
@@ -712,13 +733,19 @@ static int add_port(struct mlx4_ib_dev *dev, int port_num, int slave)
 	p->gid_group.name  = "gid_idx";
 	p->gid_group.attrs = alloc_group_attrs(show_port_gid_idx, NULL, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!p->gid_group.attrs)
 		goto err_free_pkey;
 =======
+=======
+>>>>>>> v3.18
 	if (!p->gid_group.attrs) {
 		ret = -ENOMEM;
 		goto err_free_pkey;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sysfs_create_group(&p->kobj, &p->gid_group);
@@ -726,11 +753,17 @@ static int add_port(struct mlx4_ib_dev *dev, int port_num, int slave)
 		goto err_free_gid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = add_vf_smi_entries(p);
 	if (ret)
 		goto err_free_gid;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_add_tail(&p->kobj.entry, &dev->pkeys.pkey_port_list[slave]);
 	return 0;
@@ -758,6 +791,10 @@ static int register_one_pkey_tree(struct mlx4_ib_dev *dev, int slave)
 	struct kobject *p, *t;
 	struct mlx4_port *mport;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mlx4_active_ports actv_ports;
+>>>>>>> v3.18
 =======
 	struct mlx4_active_ports actv_ports;
 >>>>>>> v3.18
@@ -784,13 +821,19 @@ static int register_one_pkey_tree(struct mlx4_ib_dev *dev, int slave)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (port = 1; port <= dev->dev->caps.num_ports; ++port) {
 =======
+=======
+>>>>>>> v3.18
 	actv_ports = mlx4_get_active_ports(dev->dev, slave);
 
 	for (port = 1; port <= dev->dev->caps.num_ports; ++port) {
 		if (!test_bit(port - 1, actv_ports.ports))
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = add_port(dev, port, slave);
 		if (err)
@@ -807,6 +850,10 @@ err_add:
 		sysfs_remove_group(p, &mport->pkey_group);
 		sysfs_remove_group(p, &mport->gid_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		remove_vf_smi_entries(mport);
+>>>>>>> v3.18
 =======
 		remove_vf_smi_entries(mport);
 >>>>>>> v3.18
@@ -855,6 +902,10 @@ static void unregister_pkey_tree(struct mlx4_ib_dev *device)
 			sysfs_remove_group(p, &port->pkey_group);
 			sysfs_remove_group(p, &port->gid_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			remove_vf_smi_entries(port);
+>>>>>>> v3.18
 =======
 			remove_vf_smi_entries(port);
 >>>>>>> v3.18

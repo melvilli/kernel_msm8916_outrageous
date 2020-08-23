@@ -19,7 +19,10 @@
 #define INITVALS_9330_1P2_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ar9331_modes_high_power_tx_gain_1p2 ar9331_modes_high_ob_db_tx_gain_1p2
 
 #define ar9331_modes_low_ob_db_tx_gain_1p2 ar9331_modes_high_ob_db_tx_gain_1p2
@@ -42,6 +45,9 @@
 
 #define ar9331_common_wo_xlna_rx_gain_1p2 ar9331_common_wo_xlna_rx_gain_1p1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u32 ar9331_modes_high_ob_db_tx_gain_1p2[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
@@ -129,6 +135,7 @@ static const u32 ar9331_modes_high_ob_db_tx_gain_1p2[][5] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9331_modes_high_power_tx_gain_1p2 ar9331_modes_high_ob_db_tx_gain_1p2
 
 #define ar9331_modes_low_ob_db_tx_gain_1p2 ar9331_modes_high_power_tx_gain_1p2
@@ -180,6 +187,8 @@ static const u32 ar9331_1p2_baseband_postamble[][5] = {
 	{0x0000ae18, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9331_1p2_radio_core[][2] = {
@@ -248,6 +257,7 @@ static const u32 ar9331_1p2_radio_core[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9331_1p2_baseband_core_txfir_coeff_japan_2484 ar9331_1p1_baseband_core_txfir_coeff_japan_2484
 
 #define ar9331_1p2_xtal_25M ar9331_1p1_xtal_25M
@@ -268,6 +278,8 @@ static const u32 ar9331_1p2_radio_core[][2] = {
 
 #define ar9331_common_rx_gain_1p2 ar9485_common_rx_gain_1_1
 =======
+=======
+>>>>>>> v3.18
 static const u32 ar9331_1p2_baseband_core[][2] = {
 	/* Addr      allmodes  */
 	{0x00009800, 0xafe68e30},
@@ -581,6 +593,9 @@ static const u32 ar9331_common_rx_gain_1p2[][2] = {
 	{0x0000a1f8, 0x00000396},
 	{0x0000a1fc, 0x00000296},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* INITVALS_9330_1P2_H */

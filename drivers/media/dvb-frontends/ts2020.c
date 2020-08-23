@@ -32,6 +32,10 @@ struct ts2020_priv {
 	u8 clk_out_div;
 	u32 frequency;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 frequency_div;
+>>>>>>> v3.18
 =======
 	u32 frequency_div;
 >>>>>>> v3.18
@@ -198,7 +202,11 @@ static int ts2020_set_params(struct dvb_frontend *fe)
 
 	/* Calculate frequency divider */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (frequency < 1060000) {
+=======
+	if (frequency < priv->frequency_div) {
+>>>>>>> v3.18
 =======
 	if (frequency < priv->frequency_div) {
 >>>>>>> v3.18
@@ -349,15 +357,21 @@ struct dvb_frontend *ts2020_attach(struct dvb_frontend *fe,
 	priv->i2c = i2c;
 	priv->clk_out_div = config->clk_out_div;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fe->tuner_priv = priv;
 
 =======
+=======
+>>>>>>> v3.18
 	priv->frequency_div = config->frequency_div;
 	fe->tuner_priv = priv;
 
 	if (!priv->frequency_div)
 		priv->frequency_div = 1060000;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Wake Up the tuner */
 	if ((0x03 & ts2020_readreg(fe, 0x00)) == 0x00) {

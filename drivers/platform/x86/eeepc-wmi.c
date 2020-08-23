@@ -34,7 +34,11 @@
 #include <linux/dmi.h>
 #include <linux/fb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -150,7 +154,11 @@ static int dmi_matched(const struct dmi_system_id *dmi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id asus_quirks[] = {
+=======
+static const struct dmi_system_id asus_quirks[] = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id asus_quirks[] = {
 >>>>>>> v3.18

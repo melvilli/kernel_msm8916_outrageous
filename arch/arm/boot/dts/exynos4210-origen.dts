@@ -16,18 +16,24 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos4210.dtsi"
 
 / {
 	model = "Insignal Origen evaluation board based on Exynos4210";
 	compatible = "insignal,origen", "samsung,exynos4210";
 =======
+=======
+>>>>>>> v3.18
 #include "exynos4210.dtsi"
 #include <dt-bindings/input/input.h>
 
 / {
 	model = "Insignal Origen evaluation board based on Exynos4210";
 	compatible = "insignal,origen", "samsung,exynos4210", "samsung,exynos4";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memory {
@@ -42,6 +48,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_reg: voltage-regulator {
 	        compatible = "regulator-fixed";
 		regulator-name = "VMEM_VDD_2.8V";
@@ -50,6 +57,8 @@
 		gpio = <&gpx1 1 0>;
 		enable-active-high;
 =======
+=======
+>>>>>>> v3.18
 	regulators {
 		compatible = "simple-bus";
 		#address-cells = <1>;
@@ -76,6 +85,9 @@
 
 	tmu@100C0000 {
 		status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -122,7 +134,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	i2c@13860000 {
 		status = "okay";
 		samsung,i2c-sda-delay = <100>;
@@ -272,6 +287,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpio_keys {
 		compatible = "gpio-keys";
@@ -282,7 +300,11 @@
 			label = "Up";
 			gpios = <&gpx2 0 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <103>;
+=======
+			linux,code = <KEY_UP>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_UP>;
 >>>>>>> v3.18
@@ -293,7 +315,11 @@
 			label = "Down";
 			gpios = <&gpx2 1 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <108>;
+=======
+			linux,code = <KEY_DOWN>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_DOWN>;
 >>>>>>> v3.18
@@ -304,7 +330,11 @@
 			label = "Back";
 			gpios = <&gpx1 7 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <158>;
+=======
+			linux,code = <KEY_BACK>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_BACK>;
 >>>>>>> v3.18
@@ -315,7 +345,11 @@
 			label = "Home";
 			gpios = <&gpx1 6 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <102>;
+=======
+			linux,code = <KEY_HOME>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_HOME>;
 >>>>>>> v3.18
@@ -326,7 +360,11 @@
 			label = "Menu";
 			gpios = <&gpx1 5 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <139>;
+=======
+			linux,code = <KEY_MENU>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_MENU>;
 >>>>>>> v3.18
@@ -354,7 +392,10 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	fimd@11c00000 {
 		pinctrl-0 = <&lcd_en &lcd_clk &lcd_data24 &pwm0_out>;
@@ -376,5 +417,8 @@
 			vsync-len = <3>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -36,6 +36,7 @@
 #include <asm/xen/hypervisor.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xen_acpi_notify_hypervisor_state(u8 sleep_state,
 				     u32 pm1a_cnt, u32 pm1b_cnt)
 {
@@ -58,6 +59,8 @@ int xen_acpi_notify_hypervisor_state(u8 sleep_state,
 		return -1;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int xen_acpi_notify_hypervisor_state(u8 sleep_state,
 					    u32 val_a, u32 val_b,
 					    bool extended)
@@ -80,13 +83,19 @@ static int xen_acpi_notify_hypervisor_state(u8 sleep_state,
 		 "Email xen-devel@lists.xen.org - Thank you.\n", \
 		 bits, val_a, val_b))
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	HYPERVISOR_dom0_op(&op);
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int xen_acpi_notify_hypervisor_sleep(u8 sleep_state,
 				     u32 pm1a_cnt, u32 pm1b_cnt)
@@ -101,4 +110,7 @@ int xen_acpi_notify_hypervisor_extended_sleep(u8 sleep_state,
 	return xen_acpi_notify_hypervisor_state(sleep_state, val_a,
 						val_b, true);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

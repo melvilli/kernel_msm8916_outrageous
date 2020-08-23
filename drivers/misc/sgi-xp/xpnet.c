@@ -545,7 +545,12 @@ xpnet_init(void)
 	 * structure and then override the necessary pieces.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xpnet_device = alloc_netdev(0, XPNET_DEVICE_NAME, ether_setup);
+=======
+	xpnet_device = alloc_netdev(0, XPNET_DEVICE_NAME, NET_NAME_UNKNOWN,
+				    ether_setup);
+>>>>>>> v3.18
 =======
 	xpnet_device = alloc_netdev(0, XPNET_DEVICE_NAME, NET_NAME_UNKNOWN,
 				    ether_setup);

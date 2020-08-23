@@ -37,7 +37,12 @@ static ssize_t name ## _show(struct device *dev,			\
 	mutex_unlock(&phy->pib_lock);					\
 	return ret;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}									\
+static DEVICE_ATTR_RO(name);
+>>>>>>> v3.18
 =======
 }									\
 static DEVICE_ATTR_RO(name);
@@ -49,6 +54,7 @@ static DEVICE_ATTR_RO(name);
 MASTER_SHOW(current_channel, "%d");
 MASTER_SHOW(current_page, "%d");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MASTER_SHOW_COMPLEX(transmit_power, "%d +- %d dB",
 	((signed char) (phy->transmit_power << 2)) >> 2,
 	(phy->transmit_power >> 6) ? (phy->transmit_power >> 6) * 3 : 1 );
@@ -57,12 +63,17 @@ MASTER_SHOW(cca_mode, "%d");
 static ssize_t channels_supported_show(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 MASTER_SHOW(transmit_power, "%d +- 1 dB");
 MASTER_SHOW(cca_mode, "%d");
 
 static ssize_t channels_supported_show(struct device *dev,
 				       struct device_attribute *attr,
 				       char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct wpan_phy *phy = container_of(dev, struct wpan_phy, dev);
@@ -73,7 +84,11 @@ static ssize_t channels_supported_show(struct device *dev,
 	for (i = 0; i < 32; i++) {
 		ret = snprintf(buf + len, PAGE_SIZE - len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"%#09x\n", phy->channels_supported[i]);
+=======
+			       "%#09x\n", phy->channels_supported[i]);
+>>>>>>> v3.18
 =======
 			       "%#09x\n", phy->channels_supported[i]);
 >>>>>>> v3.18
@@ -85,6 +100,7 @@ static ssize_t channels_supported_show(struct device *dev,
 	return len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute pmib_attrs[] = {
 	__ATTR_RO(current_channel),
@@ -95,6 +111,8 @@ static struct device_attribute pmib_attrs[] = {
 	{},
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(channels_supported);
 
 static struct attribute *pmib_attrs[] = {
@@ -106,12 +124,19 @@ static struct attribute *pmib_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(pmib);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void wpan_phy_release(struct device *d)
 {
 	struct wpan_phy *phy = container_of(d, struct wpan_phy, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -122,7 +147,11 @@ static struct class wpan_phy_class = {
 	.name = "ieee802154",
 	.dev_release = wpan_phy_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = pmib_attrs,
+=======
+	.dev_groups = pmib_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = pmib_groups,
 >>>>>>> v3.18
@@ -161,6 +190,10 @@ static int wpan_phy_iter(struct device *dev, void *_data)
 	struct wpan_phy_iter_data *wpid = _data;
 	struct wpan_phy *phy = container_of(dev, struct wpan_phy, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -169,7 +202,11 @@ static int wpan_phy_iter(struct device *dev, void *_data)
 
 int wpan_phy_for_each(int (*fn)(struct wpan_phy *phy, void *data),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void *data)
+=======
+		      void *data)
+>>>>>>> v3.18
 =======
 		      void *data)
 >>>>>>> v3.18
@@ -245,6 +282,10 @@ static int __init wpan_phy_class_init(void)
 {
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

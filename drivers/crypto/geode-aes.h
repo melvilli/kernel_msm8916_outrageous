@@ -11,10 +11,13 @@
 
 /* driver logic flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AES_IV_LENGTH  16
 #define AES_KEY_LENGTH 16
 #define AES_MIN_BLOCK_SIZE 16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AES_MODE_ECB 0
@@ -68,7 +71,11 @@ struct geode_aes_op {
 	int len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 key[AES_KEY_LENGTH];
+=======
+	u8 key[AES_KEYSIZE_128];
+>>>>>>> v3.18
 =======
 	u8 key[AES_KEYSIZE_128];
 >>>>>>> v3.18

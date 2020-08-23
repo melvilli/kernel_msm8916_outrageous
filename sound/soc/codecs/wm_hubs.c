@@ -51,8 +51,13 @@ static const char *speaker_ref_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum speaker_ref =
 	SOC_ENUM_SINGLE(WM8993_SPEAKER_MIXER, 8, 2, speaker_ref_text);
+=======
+static SOC_ENUM_SINGLE_DECL(speaker_ref,
+			    WM8993_SPEAKER_MIXER, 8, speaker_ref_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(speaker_ref,
 			    WM8993_SPEAKER_MIXER, 8, speaker_ref_text);
@@ -64,8 +69,13 @@ static const char *speaker_mode_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum speaker_mode =
 	SOC_ENUM_SINGLE(WM8993_SPKMIXR_ATTENUATION, 8, 2, speaker_mode_text);
+=======
+static SOC_ENUM_SINGLE_DECL(speaker_mode,
+			    WM8993_SPKMIXR_ATTENUATION, 8, speaker_mode_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(speaker_mode,
 			    WM8993_SPKMIXR_ATTENUATION, 8, speaker_mode_text);
@@ -194,10 +204,15 @@ static void wm_hubs_dcs_cache_set(struct snd_soc_codec *codec, u16 dcs_cfg)
 
 	cache = devm_kzalloc(codec->dev, sizeof(*cache), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cache) {
 		dev_err(codec->dev, "Failed to allocate DCS cache entry\n");
 		return;
 	}
+=======
+	if (!cache)
+		return;
+>>>>>>> v3.18
 =======
 	if (!cache)
 		return;
@@ -353,7 +368,11 @@ static int wm8993_put_dc_servo(struct snd_kcontrol *kcontrol,
 			       struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -631,7 +650,11 @@ static int earpiece_event(struct snd_soc_dapm_widget *w,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Invalid event %d\n", event);
+>>>>>>> v3.18
 =======
 		WARN(1, "Invalid event %d\n", event);
 >>>>>>> v3.18
@@ -718,10 +741,15 @@ EXPORT_SYMBOL_GPL(wm_hubs_update_class_w);
 
 #define WM_HUBS_SINGLE_W(xname, reg, shift, max, invert) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, \
 	.info = snd_soc_info_volsw, \
 	.get = snd_soc_dapm_get_volsw, .put = class_w_put_volsw, \
 	.private_value =  SOC_SINGLE_VALUE(reg, shift, max, invert) }
+=======
+	SOC_SINGLE_EXT(xname, reg, shift, max, invert, \
+		snd_soc_dapm_get_volsw, class_w_put_volsw)
+>>>>>>> v3.18
 =======
 	SOC_SINGLE_EXT(xname, reg, shift, max, invert, \
 		snd_soc_dapm_get_volsw, class_w_put_volsw)
@@ -731,9 +759,13 @@ static int class_w_put_volsw(struct snd_kcontrol *kcontrol,
 			      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
 	struct snd_soc_codec *codec = widget->codec;
+=======
+	struct snd_soc_codec *codec = snd_soc_dapm_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_dapm_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -757,9 +789,13 @@ static int class_w_put_double(struct snd_kcontrol *kcontrol,
 			      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
 	struct snd_soc_codec *codec = widget->codec;
+=======
+	struct snd_soc_codec *codec = snd_soc_dapm_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_dapm_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -778,8 +814,13 @@ static const char *hp_mux_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum hpl_enum =
 	SOC_ENUM_SINGLE(WM8993_OUTPUT_MIXER1, 8, 2, hp_mux_text);
+=======
+static SOC_ENUM_SINGLE_DECL(hpl_enum,
+			    WM8993_OUTPUT_MIXER1, 8, hp_mux_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(hpl_enum,
 			    WM8993_OUTPUT_MIXER1, 8, hp_mux_text);
@@ -790,8 +831,13 @@ const struct snd_kcontrol_new wm_hubs_hpl_mux =
 EXPORT_SYMBOL_GPL(wm_hubs_hpl_mux);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum hpr_enum =
 	SOC_ENUM_SINGLE(WM8993_OUTPUT_MIXER2, 8, 2, hp_mux_text);
+=======
+static SOC_ENUM_SINGLE_DECL(hpr_enum,
+			    WM8993_OUTPUT_MIXER2, 8, hp_mux_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(hpr_enum,
 			    WM8993_OUTPUT_MIXER2, 8, hp_mux_text);
@@ -917,8 +963,11 @@ SND_SOC_DAPM_SUPPLY("MICBIAS1", WM8993_POWER_MANAGEMENT_1, 4, 0,
 		    micbias_event, SND_SOC_DAPM_POST_PMU),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SND_SOC_DAPM_SUPPLY("LINEOUT_VMID_BUF", WM8993_ANTIPOP1, 7, 0, NULL, 0),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 SND_SOC_DAPM_MIXER("IN1L PGA", WM8993_POWER_MANAGEMENT_2, 6, 0,
@@ -1146,11 +1195,17 @@ static const struct snd_soc_dapm_route lineout1_diff_routes[] = {
 
 static const struct snd_soc_dapm_route lineout1_se_routes[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "LINEOUT1N Mixer", NULL, "LINEOUT_VMID_BUF" },
 	{ "LINEOUT1N Mixer", "Left Output Switch", "Left Output PGA" },
 	{ "LINEOUT1N Mixer", "Right Output Switch", "Right Output PGA" },
 
 	{ "LINEOUT1P Mixer", NULL, "LINEOUT_VMID_BUF" },
+=======
+	{ "LINEOUT1N Mixer", "Left Output Switch", "Left Output PGA" },
+	{ "LINEOUT1N Mixer", "Right Output Switch", "Right Output PGA" },
+
+>>>>>>> v3.18
 =======
 	{ "LINEOUT1N Mixer", "Left Output Switch", "Left Output PGA" },
 	{ "LINEOUT1N Mixer", "Right Output Switch", "Right Output PGA" },
@@ -1173,11 +1228,17 @@ static const struct snd_soc_dapm_route lineout2_diff_routes[] = {
 
 static const struct snd_soc_dapm_route lineout2_se_routes[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "LINEOUT2N Mixer", NULL, "LINEOUT_VMID_BUF" },
 	{ "LINEOUT2N Mixer", "Left Output Switch", "Left Output PGA" },
 	{ "LINEOUT2N Mixer", "Right Output Switch", "Right Output PGA" },
 
 	{ "LINEOUT2P Mixer", NULL, "LINEOUT_VMID_BUF" },
+=======
+	{ "LINEOUT2N Mixer", "Left Output Switch", "Left Output PGA" },
+	{ "LINEOUT2N Mixer", "Right Output Switch", "Right Output PGA" },
+
+>>>>>>> v3.18
 =======
 	{ "LINEOUT2N Mixer", "Left Output Switch", "Left Output PGA" },
 	{ "LINEOUT2N Mixer", "Right Output Switch", "Right Output PGA" },

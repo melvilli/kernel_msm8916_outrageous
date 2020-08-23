@@ -20,7 +20,12 @@
  *
  * Note that it is the responsibility of the platform driver (or the acpi 5.0
 <<<<<<< HEAD
+<<<<<<< HEAD
  * driver) to setup the irq related to the gpio in the struct i2c_board_info.
+=======
+ * driver, or the flattened device tree) to setup the irq related to the gpio in
+ * the struct i2c_board_info.
+>>>>>>> v3.18
 =======
  * driver, or the flattened device tree) to setup the irq related to the gpio in
  * the struct i2c_board_info.

@@ -16,6 +16,10 @@
 #include <linux/stop_machine.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -138,8 +142,12 @@ static void cell_edac_init_csrows(struct mem_ctl_info *mci)
 	u32				nr_pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (np = NULL;
 	     (np = of_find_node_by_name(np, "memory")) != NULL;) {
+=======
+	for_each_node_by_name(np, "memory") {
+>>>>>>> v3.18
 =======
 	for_each_node_by_name(np, "memory") {
 >>>>>>> v3.18
@@ -171,6 +179,10 @@ static void cell_edac_init_csrows(struct mem_ctl_info *mci)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(np);
+>>>>>>> v3.18
 =======
 	of_node_put(np);
 >>>>>>> v3.18

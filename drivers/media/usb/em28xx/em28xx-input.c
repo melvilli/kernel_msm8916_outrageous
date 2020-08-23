@@ -28,6 +28,7 @@
 #include <linux/usb.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "em28xx.h"
 
@@ -35,6 +36,8 @@
 #define EM28XX_SBUTTON_QUERY_INTERVAL 500
 #define EM28XX_R0C_USBSUSP_SNAPSHOT 0x20
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitrev.h>
 
 #include "em28xx.h"
@@ -42,6 +45,9 @@
 #define EM28XX_SNAPSHOT_KEY				KEY_CAMERA
 #define EM28XX_BUTTONS_DEBOUNCED_QUERY_INTERVAL		500 /* [ms] */
 #define EM28XX_BUTTONS_VOLATILE_QUERY_INTERVAL		100 /* [ms] */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned int ir_debug;
@@ -64,6 +70,10 @@ struct em28xx_ir_poll_result {
 	unsigned int read_count:7;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum rc_type protocol;
+>>>>>>> v3.18
 =======
 	enum rc_type protocol;
 >>>>>>> v3.18
@@ -84,10 +94,16 @@ struct em28xx_IR {
 	u64 rc_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* i2c slave address of external device (if used) */
 	u16 i2c_dev_addr;
 
 	int  (*get_key_i2c)(struct i2c_client *, u32 *);
+=======
+	struct i2c_client *i2c_client;
+
+	int  (*get_key_i2c)(struct i2c_client *ir, enum rc_type *protocol, u32 *scancode);
+>>>>>>> v3.18
 =======
 	struct i2c_client *i2c_client;
 
@@ -101,7 +117,12 @@ struct em28xx_IR {
  **********************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int em28xx_get_key_terratec(struct i2c_client *i2c_dev, u32 *ir_key)
+=======
+static int em28xx_get_key_terratec(struct i2c_client *i2c_dev,
+				   enum rc_type *protocol, u32 *scancode)
+>>>>>>> v3.18
 =======
 static int em28xx_get_key_terratec(struct i2c_client *i2c_dev,
 				   enum rc_type *protocol, u32 *scancode)
@@ -124,6 +145,7 @@ static int em28xx_get_key_terratec(struct i2c_client *i2c_dev,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = b;
 	return 1;
 }
@@ -133,6 +155,8 @@ static int em28xx_get_key_em_haup(struct i2c_client *i2c_dev, u32 *ir_key)
 	unsigned char buf[2];
 	u16 code;
 =======
+=======
+>>>>>>> v3.18
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = b;
 	return 1;
@@ -142,6 +166,9 @@ static int em28xx_get_key_em_haup(struct i2c_client *i2c_dev,
 				  enum rc_type *protocol, u32 *scancode)
 {
 	unsigned char buf[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int size;
 
@@ -165,6 +192,7 @@ static int em28xx_get_key_em_haup(struct i2c_client *i2c_dev,
 	 * work with the provided RC5 IR.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	code =
 		 ((buf[0] & 0x01) ? 0x0020 : 0) | /* 		0010 0000 */
 		 ((buf[0] & 0x02) ? 0x0010 : 0) | /* 		0001 0000 */
@@ -184,12 +212,20 @@ static int em28xx_get_key_em_haup(struct i2c_client *i2c_dev,
 	*protocol = RC_TYPE_RC5;
 	*scancode = (bitrev8(buf[1]) & 0x1f) << 8 | bitrev8(buf[0]) >> 2;
 >>>>>>> v3.18
+=======
+	*protocol = RC_TYPE_RC5;
+	*scancode = (bitrev8(buf[1]) & 0x1f) << 8 | bitrev8(buf[0]) >> 2;
+>>>>>>> v3.18
 	return 1;
 }
 
 static int em28xx_get_key_pinnacle_usb_grey(struct i2c_client *i2c_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    u32 *ir_key)
+=======
+					    enum rc_type *protocol, u32 *scancode)
+>>>>>>> v3.18
 =======
 					    enum rc_type *protocol, u32 *scancode)
 >>>>>>> v3.18
@@ -205,8 +241,13 @@ static int em28xx_get_key_pinnacle_usb_grey(struct i2c_client *i2c_dev,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = buf[2]&0x3f;
 
+=======
+	*protocol = RC_TYPE_UNKNOWN;
+	*scancode = buf[2] & 0x3f;
+>>>>>>> v3.18
 =======
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = buf[2] & 0x3f;
@@ -216,7 +257,11 @@ static int em28xx_get_key_pinnacle_usb_grey(struct i2c_client *i2c_dev,
 
 static int em28xx_get_key_winfast_usbii_deluxe(struct i2c_client *i2c_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       u32 *ir_key)
+=======
+					       enum rc_type *protocol, u32 *scancode)
+>>>>>>> v3.18
 =======
 					       enum rc_type *protocol, u32 *scancode)
 >>>>>>> v3.18
@@ -240,7 +285,12 @@ static int em28xx_get_key_winfast_usbii_deluxe(struct i2c_client *i2c_dev,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = key;
+=======
+	*protocol = RC_TYPE_UNKNOWN;
+	*scancode = key;
+>>>>>>> v3.18
 =======
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = key;
@@ -276,8 +326,11 @@ static int default_polling_getkey(struct em28xx_IR *ir,
 
 	/* Remote Control Address/Data (Regs 0x46/0x47) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	poll_result->scancode = msg[1] << 8 | msg[2];
 =======
+=======
+>>>>>>> v3.18
 	switch (ir->rc_type) {
 	case RC_BIT_RC5:
 		poll_result->protocol = RC_TYPE_RC5;
@@ -294,6 +347,9 @@ static int default_polling_getkey(struct em28xx_IR *ir,
 		poll_result->scancode = msg[1] << 8 | msg[2];
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -327,6 +383,7 @@ static int em2874_polling_getkey(struct em28xx_IR *ir,
 	switch (ir->rc_type) {
 	case RC_BIT_RC5:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		poll_result->scancode = msg[1] << 8 | msg[2];
 		break;
 	case RC_BIT_NEC:
@@ -347,6 +404,8 @@ static int em2874_polling_getkey(struct em28xx_IR *ir,
 		break;
 	default:
 =======
+=======
+>>>>>>> v3.18
 		poll_result->protocol = RC_TYPE_RC5;
 		poll_result->scancode = RC_SCANCODE_RC5(msg[1], msg[2]);
 		break;
@@ -373,6 +432,9 @@ static int em2874_polling_getkey(struct em28xx_IR *ir,
 
 	default:
 		poll_result->protocol = RC_TYPE_UNKNOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		poll_result->scancode = (msg[1] << 24) | (msg[2] << 16) |
 					(msg[3] << 8)  | msg[4];
@@ -389,6 +451,7 @@ static int em2874_polling_getkey(struct em28xx_IR *ir,
 static int em28xx_i2c_ir_handle_key(struct em28xx_IR *ir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct em28xx *dev = ir->dev;
 	static u32 ir_key;
 	int rc;
@@ -399,11 +462,16 @@ static int em28xx_i2c_ir_handle_key(struct em28xx_IR *ir)
 
 	rc = ir->get_key_i2c(&client, &ir_key);
 =======
+=======
+>>>>>>> v3.18
 	static u32 scancode;
 	enum rc_type protocol;
 	int rc;
 
 	rc = ir->get_key_i2c(ir->i2c_client, &protocol, &scancode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0) {
 		dprintk("ir->get_key_i2c() failed: %d\n", rc);
@@ -412,8 +480,14 @@ static int em28xx_i2c_ir_handle_key(struct em28xx_IR *ir)
 
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("%s: keycode = 0x%04x\n", __func__, ir_key);
 		rc_keydown(ir->rc, ir_key, 0);
+=======
+		dprintk("%s: proto = 0x%04x, scancode = 0x%04x\n",
+			__func__, protocol, scancode);
+		rc_keydown(ir->rc, protocol, scancode, 0);
+>>>>>>> v3.18
 =======
 		dprintk("%s: proto = 0x%04x, scancode = 0x%04x\n",
 			__func__, protocol, scancode);
@@ -442,6 +516,10 @@ static void em28xx_ir_handle_key(struct em28xx_IR *ir)
 		if (ir->full_code)
 			rc_keydown(ir->rc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				   poll_result.protocol,
+>>>>>>> v3.18
 =======
 				   poll_result.protocol,
 >>>>>>> v3.18
@@ -450,6 +528,10 @@ static void em28xx_ir_handle_key(struct em28xx_IR *ir)
 		else
 			rc_keydown(ir->rc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				   RC_TYPE_UNKNOWN,
+>>>>>>> v3.18
 =======
 				   RC_TYPE_UNKNOWN,
 >>>>>>> v3.18
@@ -474,7 +556,11 @@ static void em28xx_ir_work(struct work_struct *work)
 	struct em28xx_IR *ir = container_of(work, struct em28xx_IR, work.work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ir->i2c_dev_addr) /* external i2c device */
+=======
+	if (ir->i2c_client) /* external i2c device */
+>>>>>>> v3.18
 =======
 	if (ir->i2c_client) /* external i2c device */
 >>>>>>> v3.18
@@ -578,6 +664,10 @@ static int em28xx_ir_change_protocol(struct rc_dev *rc_dev, u64 *rc_type)
 	case CHIP_ID_EM2874:
 	case CHIP_ID_EM28174:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CHIP_ID_EM28178:
+>>>>>>> v3.18
 =======
 	case CHIP_ID_EM28178:
 >>>>>>> v3.18
@@ -609,6 +699,7 @@ static int em28xx_probe_i2c_ir(struct em28xx *dev)
 }
 
 /**********************************************************
+<<<<<<< HEAD
 <<<<<<< HEAD
  Handle Webcam snapshot button
  **********************************************************/
@@ -643,6 +734,8 @@ static void em28xx_query_sbutton(struct work_struct *work)
 
 static void em28xx_register_snapshot_button(struct em28xx *dev)
 =======
+=======
+>>>>>>> v3.18
  Handle buttons
  **********************************************************/
 
@@ -722,6 +815,9 @@ static void em28xx_query_buttons(struct work_struct *work)
 }
 
 static int em28xx_register_snapshot_button(struct em28xx *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct input_dev *input_dev;
@@ -730,10 +826,15 @@ static int em28xx_register_snapshot_button(struct em28xx *dev)
 	em28xx_info("Registering snapshot button...\n");
 	input_dev = input_allocate_device();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!input_dev) {
 		em28xx_errdev("input_allocate_device failed\n");
 		return;
 	}
+=======
+	if (!input_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!input_dev)
 		return -ENOMEM;
@@ -744,7 +845,10 @@ static int em28xx_register_snapshot_button(struct em28xx *dev)
 	strlcat(dev->snapshot_button_path, "/sbutton",
 		sizeof(dev->snapshot_button_path));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_DELAYED_WORK(&dev->sbutton_query_work, em28xx_query_sbutton);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -764,6 +868,7 @@ static int em28xx_register_snapshot_button(struct em28xx *dev)
 	if (err) {
 		em28xx_errdev("input_register_device failed\n");
 		input_free_device(input_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 	}
@@ -785,6 +890,8 @@ static void em28xx_deregister_snapshot_button(struct em28xx *dev)
 	}
 	return;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -865,6 +972,9 @@ static void em28xx_shutdown_buttons(struct em28xx *dev)
 		input_unregister_device(dev->sbutton_input_dev);
 		dev->sbutton_input_dev = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -877,9 +987,12 @@ static int em28xx_ir_init(struct em28xx *dev)
 	u16 i2c_rc_dev_addr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->board.has_snapshot_button)
 		em28xx_register_snapshot_button(dev);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->is_audio_only) {
 		/* Shouldn't initialize IR for this interface */
 		return 0;
@@ -889,6 +1002,9 @@ static int em28xx_ir_init(struct em28xx *dev)
 
 	if (dev->board.buttons)
 		em28xx_init_buttons(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dev->board.has_ir_i2c) {
@@ -908,10 +1024,13 @@ static int em28xx_ir_init(struct em28xx *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir = kzalloc(sizeof(*ir), GFP_KERNEL);
 	rc = rc_allocate_device();
 	if (!ir || !rc)
 =======
+=======
+>>>>>>> v3.18
 	em28xx_info("Registering input extension\n");
 
 	ir = kzalloc(sizeof(*ir), GFP_KERNEL);
@@ -919,6 +1038,9 @@ static int em28xx_ir_init(struct em28xx *dev)
 		return -ENOMEM;
 	rc = rc_allocate_device();
 	if (!rc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto error;
 
@@ -946,7 +1068,11 @@ static int em28xx_ir_init(struct em28xx *dev)
 			rc->map_name = RC_MAP_HAUPPAUGE;
 			ir->get_key_i2c = em28xx_get_key_em_haup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc->allowed_protos = RC_BIT_RC5;
+=======
+			rc->allowed_protocols = RC_BIT_RC5;
+>>>>>>> v3.18
 =======
 			rc->allowed_protocols = RC_BIT_RC5;
 >>>>>>> v3.18
@@ -961,8 +1087,11 @@ static int em28xx_ir_init(struct em28xx *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ir->i2c_dev_addr = i2c_rc_dev_addr;
 =======
+=======
+>>>>>>> v3.18
 		ir->i2c_client = kzalloc(sizeof(struct i2c_client), GFP_KERNEL);
 		if (!ir->i2c_client)
 			goto error;
@@ -970,13 +1099,20 @@ static int em28xx_ir_init(struct em28xx *dev)
 		ir->i2c_client->addr = i2c_rc_dev_addr;
 		ir->i2c_client->flags = 0;
 		/* NOTE: all other fields of i2c_client are unused */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {	/* internal device */
 		switch (dev->chip_id) {
 		case CHIP_ID_EM2860:
 		case CHIP_ID_EM2883:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc->allowed_protos = RC_BIT_RC5 | RC_BIT_NEC;
+=======
+			rc->allowed_protocols = RC_BIT_RC5 | RC_BIT_NEC;
+>>>>>>> v3.18
 =======
 			rc->allowed_protocols = RC_BIT_RC5 | RC_BIT_NEC;
 >>>>>>> v3.18
@@ -986,8 +1122,14 @@ static int em28xx_ir_init(struct em28xx *dev)
 		case CHIP_ID_EM2874:
 		case CHIP_ID_EM28174:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ir->get_key = em2874_polling_getkey;
 			rc->allowed_protos = RC_BIT_RC5 | RC_BIT_NEC |
+=======
+		case CHIP_ID_EM28178:
+			ir->get_key = em2874_polling_getkey;
+			rc->allowed_protocols = RC_BIT_RC5 | RC_BIT_NEC |
+>>>>>>> v3.18
 =======
 		case CHIP_ID_EM28178:
 			ir->get_key = em2874_polling_getkey;
@@ -1034,16 +1176,22 @@ static int em28xx_ir_init(struct em28xx *dev)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 error:
 =======
+=======
+>>>>>>> v3.18
 	em28xx_info("Input extension successfully initalized\n");
 
 	return 0;
 
 error:
 	kfree(ir->i2c_client);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->ir = NULL;
 	rc_free_device(rc);
@@ -1056,12 +1204,15 @@ static int em28xx_ir_fini(struct em28xx *dev)
 	struct em28xx_IR *ir = dev->ir;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	em28xx_deregister_snapshot_button(dev);
 
 	/* skip detach on non attached boards */
 	if (!ir)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (dev->is_audio_only) {
 		/* Shouldn't initialize IR for this interface */
 		return 0;
@@ -1074,16 +1225,22 @@ static int em28xx_ir_fini(struct em28xx *dev)
 	/* skip detach on non attached boards */
 	if (!ir)
 		goto ref_put;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ir->rc)
 		rc_unregister_device(ir->rc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* done */
 	kfree(ir);
 	dev->ir = NULL;
 =======
+=======
+>>>>>>> v3.18
 	kfree(ir->i2c_client);
 
 	/* done */
@@ -1128,6 +1285,9 @@ static int em28xx_ir_resume(struct em28xx *dev)
 	if (dev->num_button_polling_addresses)
 		schedule_delayed_work(&dev->buttons_query_work,
 			       msecs_to_jiffies(dev->button_polling_interval));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1138,6 +1298,11 @@ static struct em28xx_ops rc_ops = {
 	.init = em28xx_ir_init,
 	.fini = em28xx_ir_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend = em28xx_ir_suspend,
+	.resume = em28xx_ir_resume,
+>>>>>>> v3.18
 =======
 	.suspend = em28xx_ir_suspend,
 	.resume = em28xx_ir_resume,
@@ -1156,8 +1321,14 @@ static void __exit em28xx_rc_unregister(void)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
 MODULE_DESCRIPTION("Em28xx Input driver");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+MODULE_DESCRIPTION(DRIVER_DESC " - input interface");
+MODULE_VERSION(EM28XX_VERSION);
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 MODULE_DESCRIPTION(DRIVER_DESC " - input interface");

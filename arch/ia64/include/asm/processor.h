@@ -20,7 +20,10 @@
 #include <asm/ustack.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __ARCH_WANT_UNLOCKED_CTXSW
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ARCH_HAS_PREFETCH_SWITCH_STACK
@@ -75,6 +78,10 @@
 #include <linux/threads.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitops.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitops.h>
 >>>>>>> v3.18
@@ -555,6 +562,10 @@ ia64_eoi (void)
 
 #define cpu_relax()	ia64_hint(ia64_hint_pause)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18

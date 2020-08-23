@@ -8,6 +8,10 @@
 
 #include "hpfs_fn.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mpage.h>
+>>>>>>> v3.18
 =======
 #include <linux/mpage.h>
 >>>>>>> v3.18
@@ -39,7 +43,11 @@ int hpfs_file_fsync(struct file *file, loff_t start, loff_t end, int datasync)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static secno hpfs_bmap(struct inode *inode, unsigned file_secno)
+=======
+static secno hpfs_bmap(struct inode *inode, unsigned file_secno, unsigned *n_secs)
+>>>>>>> v3.18
 =======
 static secno hpfs_bmap(struct inode *inode, unsigned file_secno, unsigned *n_secs)
 >>>>>>> v3.18
@@ -51,25 +59,37 @@ static secno hpfs_bmap(struct inode *inode, unsigned file_secno, unsigned *n_sec
 	if (BLOCKS(hpfs_i(inode)->mmu_private) <= file_secno) return 0;
 	n = file_secno - hpfs_inode->i_file_sec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (n < hpfs_inode->i_n_secs) return hpfs_inode->i_disk_sec + n;
 =======
+=======
+>>>>>>> v3.18
 	if (n < hpfs_inode->i_n_secs) {
 		*n_secs = hpfs_inode->i_n_secs - n;
 		return hpfs_inode->i_disk_sec + n;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(fnode = hpfs_map_fnode(inode->i_sb, inode->i_ino, &bh))) return 0;
 	disk_secno = hpfs_bplus_lookup(inode->i_sb, inode, &fnode->btree, file_secno, bh);
 	if (disk_secno == -1) return 0;
 	if (hpfs_chk_sectors(inode->i_sb, disk_secno, 1, "bmap")) return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	n = file_secno - hpfs_inode->i_file_sec;
 	if (n < hpfs_inode->i_n_secs) {
 		*n_secs = hpfs_inode->i_n_secs - n;
 		return hpfs_inode->i_disk_sec + n;
 	}
 	*n_secs = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return disk_secno;
 }
@@ -92,11 +112,14 @@ static int hpfs_get_block(struct inode *inode, sector_t iblock, struct buffer_he
 	int r;
 	secno s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hpfs_lock(inode->i_sb);
 	s = hpfs_bmap(inode, iblock);
 	if (s) {
 		map_bh(bh_result, inode->i_sb, s);
 =======
+=======
+>>>>>>> v3.18
 	unsigned n_secs;
 	hpfs_lock(inode->i_sb);
 	s = hpfs_bmap(inode, iblock, &n_secs);
@@ -105,6 +128,9 @@ static int hpfs_get_block(struct inode *inode, sector_t iblock, struct buffer_he
 			n_secs = bh_result->b_size >> 9;
 		map_bh(bh_result, inode->i_sb, s);
 		bh_result->b_size = n_secs << 9;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto ret_0;
 	}
@@ -131,6 +157,7 @@ static int hpfs_get_block(struct inode *inode, sector_t iblock, struct buffer_he
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpfs_writepage(struct page *page, struct writeback_control *wbc)
 {
 	return block_write_full_page(page,hpfs_get_block, wbc);
@@ -140,6 +167,8 @@ static int hpfs_readpage(struct file *file, struct page *page)
 {
 	return block_read_full_page(page,hpfs_get_block);
 =======
+=======
+>>>>>>> v3.18
 static int hpfs_readpage(struct file *file, struct page *page)
 {
 	return mpage_readpage(page, hpfs_get_block);
@@ -160,6 +189,9 @@ static int hpfs_writepages(struct address_space *mapping,
 			   struct writeback_control *wbc)
 {
 	return mpage_writepages(mapping, wbc, hpfs_get_block);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,7 +203,11 @@ static void hpfs_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -224,6 +260,11 @@ const struct address_space_operations hpfs_aops = {
 	.readpage = hpfs_readpage,
 	.writepage = hpfs_writepage,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.readpages = hpfs_readpages,
+	.writepages = hpfs_writepages,
+>>>>>>> v3.18
 =======
 	.readpages = hpfs_readpages,
 	.writepages = hpfs_writepages,
@@ -237,15 +278,21 @@ const struct file_operations hpfs_file_ops =
 {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
 	.write		= do_sync_write,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.read_iter	= generic_file_read_iter,
 	.write		= new_sync_write,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.release	= hpfs_file_release,

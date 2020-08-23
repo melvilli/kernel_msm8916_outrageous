@@ -30,6 +30,7 @@ struct emac_instance;
 struct mal_instance;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void emac_dbg_register(struct emac_instance *dev);
 extern void emac_dbg_unregister(struct emac_instance *dev);
 extern void mal_dbg_register(struct mal_instance *mal);
@@ -38,6 +39,8 @@ extern int emac_init_debug(void) __init;
 extern void emac_fini_debug(void) __exit;
 extern void emac_dbg_dump_all(void);
 =======
+=======
+>>>>>>> v3.18
 void emac_dbg_register(struct emac_instance *dev);
 void emac_dbg_unregister(struct emac_instance *dev);
 void mal_dbg_register(struct mal_instance *mal);
@@ -45,6 +48,9 @@ void mal_dbg_unregister(struct mal_instance *mal);
 int emac_init_debug(void) __init;
 void emac_fini_debug(void) __exit;
 void emac_dbg_dump_all(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # define DBG_LEVEL		1

@@ -23,6 +23,10 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqchip/arm-gic-v3.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip/arm-gic-v3.h>
 >>>>>>> v3.18
@@ -39,6 +43,7 @@
 #include <asm/page.h>
 #include <asm/virt.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * swapper_pg_dir is the virtual address of the initial page table. We place
@@ -64,6 +69,8 @@
 	add	\ttb1, \phys, #TEXT_OFFSET - SWAPPER_DIR_SIZE
 	sub	\ttb0, \ttb1, #IDMAP_DIR_SIZE
 =======
+=======
+>>>>>>> v3.18
 #define KERNEL_RAM_VADDR	(PAGE_OFFSET + TEXT_OFFSET)
 
 #if (TEXT_OFFSET & 0xfff) != 0
@@ -79,6 +86,9 @@
 	ldr	\ttb0, =idmap_pg_dir
 	add	\ttb1, \ttb1, \virt_to_phys
 	add	\ttb0, \ttb0, \virt_to_phys
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 
@@ -86,15 +96,21 @@
 #define BLOCK_SHIFT	PAGE_SHIFT
 #define BLOCK_SIZE	PAGE_SIZE
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define BLOCK_SHIFT	SECTION_SHIFT
 #define BLOCK_SIZE	SECTION_SIZE
 =======
+=======
+>>>>>>> v3.18
 #define TABLE_SHIFT	PMD_SHIFT
 #else
 #define BLOCK_SHIFT	SECTION_SHIFT
 #define BLOCK_SIZE	SECTION_SIZE
 #define TABLE_SHIFT	PUD_SHIFT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -148,6 +164,7 @@ efi_head:
 	b	stext
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 arm64_head:
 	b	stext				// branch to kernel start, magic
 	.long	0				// reserved
@@ -163,6 +180,8 @@ arm64_head:
 	.quad	0				// reserved
 #endif
 =======
+=======
+>>>>>>> v3.18
 	b	stext				// branch to kernel start, magic
 	.long	0				// reserved
 #endif
@@ -171,6 +190,9 @@ arm64_head:
 	.quad	_kernel_flags_le		// Informative flags, little-endian
 	.quad	0				// reserved
 	.quad	0				// reserved
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.quad	0				// reserved
 	.byte	0x41				// Magic number, "ARM\x64"
@@ -204,7 +226,11 @@ optional_header:
 	.byte	0x02				// MajorLinkerVersion
 	.byte	0x14				// MinorLinkerVersion
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long	_edata - stext			// SizeOfCode
+=======
+	.long	_end - stext			// SizeOfCode
+>>>>>>> v3.18
 =======
 	.long	_end - stext			// SizeOfCode
 >>>>>>> v3.18
@@ -226,7 +252,11 @@ extra_header_fields:
 	.long	0				// Win32VersionValue
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long	_edata - efi_head		// SizeOfImage
+=======
+	.long	_end - efi_head			// SizeOfImage
+>>>>>>> v3.18
 =======
 	.long	_end - efi_head			// SizeOfImage
 >>>>>>> v3.18
@@ -277,7 +307,11 @@ section_table:
 	.byte	0
 	.byte	0        		// end of 0 padding of section name
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long	_edata - stext		// VirtualSize
+=======
+	.long	_end - stext		// VirtualSize
+>>>>>>> v3.18
 =======
 	.long	_end - stext		// VirtualSize
 >>>>>>> v3.18
@@ -303,11 +337,17 @@ ENTRY(stext)
 	bl	lookup_processor_type
 	mov	x23, x0				// x23=current cpu_table
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cbz	x23, __h_error_p		// invalid processor (x23=0)?
 	bl	__vet_fdt
 	bl	__create_page_tables		// x25=TTBR0, x26=TTBR1
 
 
+=======
+	cbz	x23, __error_p			// invalid processor (x23=0)?
+	bl	__vet_fdt
+	bl	__create_page_tables		// x25=TTBR0, x26=TTBR1
+>>>>>>> v3.18
 =======
 	cbz	x23, __error_p			// invalid processor (x23=0)?
 	bl	__vet_fdt
@@ -323,7 +363,11 @@ ENTRY(stext)
 	ldr	x27, __switch_data		// address to jump to after
 						// MMU has been enabled
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adr	lr, __h_enable_mmu		// return (PIC) address
+=======
+	adr	lr, __enable_mmu		// return (PIC) address
+>>>>>>> v3.18
 =======
 	adr	lr, __enable_mmu		// return (PIC) address
 >>>>>>> v3.18
@@ -332,6 +376,7 @@ ENTRY(stext)
 	br	x12				// initialise processor
 ENDPROC(stext)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 __h_error_p:
 ENDPROC(__h_error_p)
@@ -557,6 +602,8 @@ ENDPROC(__create_page_tables)
 	.section ".latehead.text","ax"
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * If we're fortunate enough to boot at EL2, ensure that the world is
  * sane before dropping to EL1.
@@ -592,7 +639,10 @@ CPU_LE(	bic	x0, x0, #(3 << 24)	)	// Clear the EE and E0E bits for EL1
 	msr	cntvoff_el2, xzr		// Clear virtual offset
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_GIC_V3
 	/* GICv3 system register access */
 	mrs	x0, id_aa64pfr0_el1
@@ -610,6 +660,9 @@ CPU_LE(	bic	x0, x0, #(3 << 24)	)	// Clear the EE and E0E bits for EL1
 3:
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Populate ID registers. */
 	mrs	x0, midr_el1
@@ -632,6 +685,7 @@ CPU_LE(	movk	x0, #0x30d0, lsl #16	)	// Clear EE and E0E on LE systems
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* EL2 debug */
 	mrs	x0, pmcr_el0			// Disable debug access traps
 	ubfx	x0, x0, #11, #5			// to EL2 and allow access to
@@ -639,16 +693,22 @@ CPU_LE(	movk	x0, #0x30d0, lsl #16	)	// Clear EE and E0E on LE systems
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Stage-2 translation */
 	msr	vttbr_el2, xzr
 
 	/* Hypervisor stub */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_STRICT_MEMORY_RWX
 	adr	x0, __hyp_stub_vectors
 #else
 	ldr	x0, =__hyp_stub_vectors
 #endif
+=======
+	adr	x0, __hyp_stub_vectors
+>>>>>>> v3.18
 =======
 	adr	x0, __hyp_stub_vectors
 >>>>>>> v3.18
@@ -694,10 +754,13 @@ ENTRY(__boot_cpu_mode)
 	.popsection
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.align	3
 2:	.quad	.
 	.quad	PAGE_OFFSET
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
@@ -724,6 +787,10 @@ pen:	ldr	x4, [x3]
 	cmp	x4, x0
 	b.eq	secondary_startup
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wfe
+>>>>>>> v3.18
 =======
 	wfe
 >>>>>>> v3.18
@@ -752,7 +819,11 @@ ENTRY(secondary_startup)
 	cbz	x23, __error_p			// invalid processor (x23=0)?
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtbl	x25, x26, x24			// x25=TTBR0, x26=TTBR1
+=======
+	pgtbl	x25, x26, x28			// x25=TTBR0, x26=TTBR1
+>>>>>>> v3.18
 =======
 	pgtbl	x25, x26, x28			// x25=TTBR0, x26=TTBR1
 >>>>>>> v3.18
@@ -773,6 +844,7 @@ ENTRY(__secondary_switched)
 ENDPROC(__secondary_switched)
 #endif	/* CONFIG_SMP */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.align 3
 ENTRY(cpu_resume_mmu)
@@ -797,6 +869,8 @@ cpu_resume_after_mmu:
 ENDPROC(cpu_resume_after_mmu)
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -824,9 +898,12 @@ ENDPROC(__enable_mmu)
  *
  * other registers depend on the function called upon completion
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 	.align	6
 =======
+=======
+>>>>>>> v3.18
  *
  * We align the entire function to the smallest power of two larger than it to
  * ensure it fits within a single block map entry. Otherwise were PHYS_OFFSET
@@ -834,6 +911,9 @@ ENDPROC(__enable_mmu)
  * table to map the entire function.
  */
 	.align	4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __turn_mmu_on:
 	msr	sctlr_el1, x0
@@ -857,7 +937,10 @@ ENDPROC(__calc_phys_offset)
 	.quad	PAGE_OFFSET
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Macro to create a table entry to the next page.
  *
@@ -1034,6 +1117,9 @@ __mmap_switched:
 	mov	x29, #0
 	b	start_kernel
 ENDPROC(__mmap_switched)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1085,7 +1171,10 @@ __lookup_processor_type_data:
 	.size	__lookup_processor_type_data, . - __lookup_processor_type_data
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Determine validity of the x21 FDT pointer.
  * The dtb must be 8-byte aligned and live in the first 512M of memory.
@@ -1104,4 +1193,7 @@ __vet_fdt:
 	mov	x21, #0
 	ret
 ENDPROC(__vet_fdt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

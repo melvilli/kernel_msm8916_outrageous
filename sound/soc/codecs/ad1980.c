@@ -58,8 +58,13 @@ static const char *ad1980_rec_sel[] = {"Mic", "CD", "NC", "AUX", "Line",
 		"Stereo Mix", "Mono Mix", "Phone"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ad1980_cap_src =
 	SOC_ENUM_DOUBLE(AC97_REC_SEL, 8, 0, 7, ad1980_rec_sel);
+=======
+static SOC_ENUM_DOUBLE_DECL(ad1980_cap_src,
+			    AC97_REC_SEL, 8, 0, ad1980_rec_sel);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_DOUBLE_DECL(ad1980_cap_src,
 			    AC97_REC_SEL, 8, 0, ad1980_rec_sel);
@@ -102,7 +107,10 @@ SOC_SINGLE("Mic Boost Switch", AC97_MIC, 6, 1, 0),
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget ad1980_dapm_widgets[] = {
 SND_SOC_DAPM_INPUT("MIC1"),
 SND_SOC_DAPM_INPUT("MIC2"),
@@ -141,6 +149,9 @@ static const struct snd_soc_dapm_route ad1980_dapm_routes[] = {
 	{ "HP_OUT_R", NULL, "Playback" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int ac97_read(struct snd_soc_codec *codec,
 	unsigned int reg)
@@ -155,7 +166,11 @@ static unsigned int ac97_read(struct snd_soc_codec *codec,
 	case AC97_VENDOR_ID1:
 	case AC97_VENDOR_ID2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return soc_ac97_ops.read(codec->ac97, reg);
+=======
+		return soc_ac97_ops->read(codec->ac97, reg);
+>>>>>>> v3.18
 =======
 		return soc_ac97_ops->read(codec->ac97, reg);
 >>>>>>> v3.18
@@ -175,7 +190,11 @@ static int ac97_write(struct snd_soc_codec *codec, unsigned int reg,
 	u16 *cache = codec->reg_cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_ac97_ops.write(codec->ac97, reg, val);
+=======
+	soc_ac97_ops->write(codec->ac97, reg, val);
+>>>>>>> v3.18
 =======
 	soc_ac97_ops->write(codec->ac97, reg, val);
 >>>>>>> v3.18
@@ -206,6 +225,7 @@ static struct snd_soc_dai_driver ad1980_dai = {
 static int ad1980_reset(struct snd_soc_codec *codec, int try_warm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 retry_cnt = 0;
 
 retry:
@@ -229,6 +249,8 @@ err:
 	while (retry_cnt++ < 10)
 		goto retry;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int retry_cnt = 0;
 
 	do {
@@ -250,6 +272,9 @@ err:
 		if (ac97_read(codec, AC97_RESET)  == 0x0090)
 			return 0;
 	} while (retry_cnt++ < 10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printk(KERN_ERR "AD1980 AC97 reset failed\n");
@@ -265,7 +290,11 @@ static int ad1980_soc_probe(struct snd_soc_codec *codec)
 	printk(KERN_INFO "AD1980 SoC Audio Codec\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_new_ac97_codec(codec, &soc_ac97_ops, 0);
+=======
+	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
+>>>>>>> v3.18
 =======
 	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
 >>>>>>> v3.18
@@ -336,12 +365,18 @@ static struct snd_soc_codec_driver soc_codec_dev_ad1980 = {
 	.write = ac97_write,
 	.read = ac97_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	.dapm_widgets = ad1980_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(ad1980_dapm_widgets),
 	.dapm_routes = ad1980_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(ad1980_dapm_routes),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

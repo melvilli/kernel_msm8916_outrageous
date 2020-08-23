@@ -125,7 +125,10 @@ static int caif_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int skb_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long flags;
@@ -157,7 +160,10 @@ static int caif_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 	 * from the queue.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_len = skb->len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&list->lock, flags);
@@ -167,7 +173,11 @@ static int caif_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 
 	if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb_len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -294,7 +304,11 @@ static int caif_seqpkt_recvmsg(struct kiocb *iocb, struct socket *sock,
 
 	ret = -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flags & MSG_OOB)
+=======
+	if (m->msg_flags&MSG_OOB)
+>>>>>>> v3.18
 =======
 	if (m->msg_flags&MSG_OOB)
 >>>>>>> v3.18
@@ -347,10 +361,13 @@ static long caif_stream_data_wait(struct sock *sk, long timeo)
 		timeo = schedule_timeout(timeo);
 		lock_sock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (sock_flag(sk, SOCK_DEAD))
 			break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		clear_bit(SOCK_ASYNC_WAITDATA, &sk->sk_socket->flags);
@@ -398,10 +415,13 @@ static int caif_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 
 		lock_sock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sock_flag(sk, SOCK_DEAD)) {
 			err = -ECONNRESET;
 			goto unlock;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		skb = skb_dequeue(&sk->sk_receive_queue);
@@ -939,8 +959,12 @@ static int caif_release(struct socket *sock)
 
 	WARN_ON(IS_ERR(cf_sk->debugfs_socket_dir));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cf_sk->debugfs_socket_dir != NULL)
 		debugfs_remove_recursive(cf_sk->debugfs_socket_dir);
+=======
+	debugfs_remove_recursive(cf_sk->debugfs_socket_dir);
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(cf_sk->debugfs_socket_dir);
 >>>>>>> v3.18
@@ -1045,7 +1069,11 @@ static void caif_sock_destructor(struct sock *sk)
 	caif_assert(!sk->sk_socket);
 	if (!sock_flag(sk, SOCK_DEAD)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "Attempt to release alive CAIF socket: %p\n", sk);
+=======
+		pr_debug("Attempt to release alive CAIF socket: %p\n", sk);
+>>>>>>> v3.18
 =======
 		pr_debug("Attempt to release alive CAIF socket: %p\n", sk);
 >>>>>>> v3.18

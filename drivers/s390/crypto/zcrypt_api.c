@@ -45,6 +45,11 @@
 #include "zcrypt_api.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "zcrypt_msgtype6.h"
+
+>>>>>>> v3.18
 =======
 #include "zcrypt_msgtype6.h"
 
@@ -347,16 +352,22 @@ struct zcrypt_ops *__ops_lookup(unsigned char *name, int variant)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&zcrypt_ops_list_lock);
 
 	if (!found)
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (!found || !try_module_get(zops->owner))
 		zops = NULL;
 
 	spin_unlock_bh(&zcrypt_ops_list_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return zops;
 }
@@ -368,11 +379,17 @@ struct zcrypt_ops *zcrypt_msgtype_request(unsigned char *name, int variant)
 	zops = __ops_lookup(name, variant);
 	if (!zops) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		request_module(name);
 		zops = __ops_lookup(name, variant);
 	}
 	if ((!zops) || (!try_module_get(zops->owner)))
 		return NULL;
+=======
+		request_module("%s", name);
+		zops = __ops_lookup(name, variant);
+	}
+>>>>>>> v3.18
 =======
 		request_module("%s", name);
 		zops = __ops_lookup(name, variant);
@@ -574,9 +591,15 @@ static long zcrypt_send_cprb(struct ica_xcRB *xcRB)
 	list_for_each_entry(zdev, &zcrypt_device_list, list) {
 		if (!zdev->online || !zdev->ops->send_cprb ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (xcRB->user_defined != AUTOSELECT &&
 			AP_QID_DEVICE(zdev->ap_dev->qid) != xcRB->user_defined)
 		    )
+=======
+		   (zdev->ops->variant == MSGTYPE06_VARIANT_EP11) ||
+		   (xcRB->user_defined != AUTOSELECT &&
+		    AP_QID_DEVICE(zdev->ap_dev->qid) != xcRB->user_defined))
+>>>>>>> v3.18
 =======
 		   (zdev->ops->variant == MSGTYPE06_VARIANT_EP11) ||
 		   (xcRB->user_defined != AUTOSELECT &&
@@ -607,7 +630,10 @@ static long zcrypt_send_cprb(struct ica_xcRB *xcRB)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ep11_target_dev_list {
 	unsigned short		targets_num;
 	struct ep11_target_dev	*targets;
@@ -692,6 +718,9 @@ static long zcrypt_send_ep11_cprb(struct ep11_urb *xcrb)
 	return -ENODEV;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long zcrypt_rng(char *buffer)
 {
@@ -897,7 +926,10 @@ static long zcrypt_unlocked_ioctl(struct file *filp, unsigned int cmd,
 		return rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ZSENDEP11CPRB: {
 		struct ep11_urb __user *uxcrb = (void __user *)arg;
 		struct ep11_urb xcrb;
@@ -915,6 +947,9 @@ static long zcrypt_unlocked_ioctl(struct file *filp, unsigned int cmd,
 			return -EFAULT;
 		return rc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case Z90STAT_STATUS_MASK: {
 		char status[AP_DEVICES];

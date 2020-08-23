@@ -253,13 +253,19 @@ struct ieee1394_device_id;
 struct fw_driver {
 	struct device_driver driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Called when the parent device sits through a bus reset. */
 	void (*update)(struct fw_unit *unit);
 =======
+=======
+>>>>>>> v3.18
 	int (*probe)(struct fw_unit *unit, const struct ieee1394_device_id *id);
 	/* Called when the parent device sits through a bus reset. */
 	void (*update)(struct fw_unit *unit);
 	void (*remove)(struct fw_unit *unit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct ieee1394_device_id *id_table;
 };
@@ -373,6 +379,12 @@ static inline int fw_stream_packet_destination_id(int tag, int channel, int sy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void fw_schedule_bus_reset(struct fw_card *card, bool delayed,
+			   bool short_reset);
+
+>>>>>>> v3.18
 =======
 void fw_schedule_bus_reset(struct fw_card *card, bool delayed,
 			   bool short_reset);

@@ -45,6 +45,7 @@
 #include <asm/fixmap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomicity and interruptability */
 #ifdef CONFIG_MIPS_MT_SMTC
 
@@ -68,6 +69,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * We have up to 8 empty zeroed pages so we can map one of the right colour
  * when needed.	 This is necessary only on R4000 / R4400 SC and MC versions
@@ -78,6 +81,10 @@
 unsigned long empty_zero_page, zero_page_mask;
 EXPORT_SYMBOL_GPL(empty_zero_page);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(zero_page_mask);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(zero_page_mask);
 >>>>>>> v3.18
@@ -108,6 +115,7 @@ void setup_zero_pages(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 static pte_t *kmap_coherent_pte;
 static void __init kmap_coherent_init(void)
@@ -126,6 +134,9 @@ void *kmap_coherent(struct page *page, unsigned long addr)
 =======
 static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 >>>>>>> v3.18
+=======
+static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
+>>>>>>> v3.18
 {
 	enum fixed_addresses idx;
 	unsigned long vaddr, flags, entrylo;
@@ -135,6 +146,7 @@ static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 
 	BUG_ON(Page_dcache_dirty(page));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	inc_preempt_count();
 	idx = (addr >> PAGE_SHIFT) & (FIX_N_COLOURS - 1);
@@ -147,11 +159,16 @@ static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 	vaddr = __fix_to_virt(FIX_CMAP_END - idx);
 	pte = mk_pte(page, PAGE_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	pagefault_disable();
 	idx = (addr >> PAGE_SHIFT) & (FIX_N_COLOURS - 1);
 	idx += in_interrupt() ? FIX_N_COLOURS : 0;
 	vaddr = __fix_to_virt(FIX_CMAP_END - idx);
 	pte = mk_pte(page, prot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_64BIT_PHYS_ADDR) && defined(CONFIG_CPU_MIPS32)
 	entrylo = pte.pte_high;
@@ -160,7 +177,11 @@ static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ENTER_CRITICAL(flags);
+=======
+	local_irq_save(flags);
+>>>>>>> v3.18
 =======
 	local_irq_save(flags);
 >>>>>>> v3.18
@@ -168,6 +189,7 @@ static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 	write_c0_entryhi(vaddr & (PAGE_MASK << 1));
 	write_c0_entrylo0(entrylo);
 	write_c0_entrylo1(entrylo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	set_pte(kmap_coherent_pte - (FIX_CMAP_END - idx), pte);
@@ -184,11 +206,14 @@ static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	tlbidx = read_c0_wired();
 	write_c0_wired(tlbidx + 1);
 	write_c0_index(tlbidx);
 	mtc0_tlbw_hazard();
 	tlb_write_indexed();
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 	tlbw_use_hazard();
@@ -199,10 +224,16 @@ static void *__kmap_pgprot(struct page *page, unsigned long addr, pgprot_t prot)
 	write_c0_entryhi(old_ctx);
 	local_irq_restore(flags);
 >>>>>>> v3.18
+=======
+	tlbw_use_hazard();
+	write_c0_entryhi(old_ctx);
+	local_irq_restore(flags);
+>>>>>>> v3.18
 
 	return (void*) vaddr;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define UNIQUE_ENTRYHI(idx) (CKSEG0 + ((idx) << (PAGE_SHIFT + 1)))
 
@@ -214,6 +245,8 @@ void kunmap_coherent(void)
 
 	ENTER_CRITICAL(flags);
 =======
+=======
+>>>>>>> v3.18
 void *kmap_coherent(struct page *page, unsigned long addr)
 {
 	return __kmap_pgprot(page, addr, PAGE_KERNEL);
@@ -230,6 +263,9 @@ void kunmap_coherent(void)
 	unsigned long flags, old_ctx;
 
 	local_irq_save(flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	old_ctx = read_c0_entryhi();
 	wired = read_c0_wired() - 1;
@@ -243,10 +279,15 @@ void kunmap_coherent(void)
 	tlbw_use_hazard();
 	write_c0_entryhi(old_ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXIT_CRITICAL(flags);
 #endif
 	dec_preempt_count();
 	preempt_check_resched();
+=======
+	local_irq_restore(flags);
+	pagefault_enable();
+>>>>>>> v3.18
 =======
 	local_irq_restore(flags);
 	pagefault_enable();
@@ -311,6 +352,10 @@ void copy_from_user_page(struct vm_area_struct *vma,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(copy_from_user_page);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(copy_from_user_page);
 >>>>>>> v3.18
@@ -319,7 +364,11 @@ void __init fixrange_init(unsigned long start, unsigned long end,
 	pgd_t *pgd_base)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_HIGHMEM) || defined(CONFIG_MIPS_MT_SMTC)
+=======
+#ifdef CONFIG_HIGHMEM
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_HIGHMEM
 >>>>>>> v3.18
@@ -394,8 +443,11 @@ void __init paging_init(void)
 	kmap_init();
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmap_coherent_init();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ZONE_DMA
@@ -427,12 +479,15 @@ static struct kcore_list kcore_kseg0;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mem_init(void)
 {
 	unsigned long codesize, reservedpages, datasize, initsize;
 	unsigned long tmp, ram;
 
 =======
+=======
+>>>>>>> v3.18
 static inline void mem_init_free_highmem(void)
 {
 #ifdef CONFIG_HIGHMEM
@@ -483,6 +538,9 @@ static void maar_init(void)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HIGHMEM
 #ifdef CONFIG_DISCONTIGMEM
@@ -494,6 +552,7 @@ void __init mem_init(void)
 #endif
 	high_memory = (void *) __va(max_low_pfn << PAGE_SHIFT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	free_all_bootmem();
 	setup_zero_pages();	/* Setup zeroed pages.  */
@@ -524,11 +583,16 @@ void __init mem_init(void)
 	datasize =  (unsigned long) &_edata - (unsigned long) &_etext;
 	initsize =  (unsigned long) &__init_end - (unsigned long) &__init_begin;
 =======
+=======
+>>>>>>> v3.18
 	maar_init();
 	free_all_bootmem();
 	setup_zero_pages();	/* Setup zeroed pages.  */
 	mem_init_free_highmem();
 	mem_init_print_info(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_64BIT
@@ -538,6 +602,7 @@ void __init mem_init(void)
 		kclist_add(&kcore_kseg0, (void *) CKSEG0,
 				0x80000000 - 4, KCORE_TEXT);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	printk(KERN_INFO "Memory: %luk/%luk available (%ldk kernel code, "
@@ -549,6 +614,8 @@ void __init mem_init(void)
 	       datasize >> 10,
 	       initsize >> 10,
 	       totalhigh_pages << (PAGE_SHIFT-10));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -572,6 +639,7 @@ void free_init_pages(const char *what, unsigned long begin, unsigned long end)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, POISON_FREE_INITMEM, "initrd");
 }
 #endif
@@ -581,6 +649,8 @@ void __init_refok free_initmem(void)
 	prom_free_prom_memory();
 	free_initmem_default(POISON_FREE_INITMEM);
 =======
+=======
+>>>>>>> v3.18
 	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
 			   "initrd");
 }
@@ -600,6 +670,9 @@ void __init_refok free_initmem(void)
 		free_init_pages_eva((void *)&__init_begin, (void *)&__init_end);
 	else
 		free_initmem_default(POISON_FREE_INITMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

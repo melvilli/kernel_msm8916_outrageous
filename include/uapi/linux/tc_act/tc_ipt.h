@@ -5,6 +5,10 @@
 
 #define TCA_ACT_IPT 6
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TCA_ACT_XT 10
+>>>>>>> v3.18
 =======
 #define TCA_ACT_XT 10
 >>>>>>> v3.18

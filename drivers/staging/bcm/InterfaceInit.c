@@ -1,6 +1,10 @@
 #include "headers.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/usb/ch9.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/ch9.h>
 >>>>>>> v3.18
@@ -33,6 +37,7 @@ static void InterfaceAdapterFree(struct bcm_interface_adapter *psIntfAdapter)
 {
 	int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Wake up the wait_queue... */
 	if (psIntfAdapter->psAdapter->LEDInfo.led_thread_running & BCM_LED_THREAD_RUNNING_ACTIVELY) {
@@ -53,6 +58,8 @@ static void InterfaceAdapterFree(struct bcm_interface_adapter *psIntfAdapter)
 	/* Free interrupt URB */
 	/* psIntfAdapter->psAdapter->device_removed = TRUE; */
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_mini_adapter *ps_ad = psIntfAdapter->psAdapter;
 
 	/* Wake up the wait_queue... */
@@ -75,6 +82,9 @@ static void InterfaceAdapterFree(struct bcm_interface_adapter *psIntfAdapter)
 	}
 	/* Free interrupt URB */
 	/* ps_ad->device_removed = TRUE; */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb_free_urb(psIntfAdapter->psInterruptUrb);
 
@@ -94,6 +104,7 @@ static void InterfaceAdapterFree(struct bcm_interface_adapter *psIntfAdapter)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	AdapterFree(psIntfAdapter->psAdapter);
 }
 
@@ -102,6 +113,8 @@ static void ConfigureEndPointTypesThroughEEPROM(struct bcm_mini_adapter *Adapter
 	unsigned long ulReg = 0;
 	int bytes;
 =======
+=======
+>>>>>>> v3.18
 	AdapterFree(ps_ad);
 }
 
@@ -111,6 +124,9 @@ static void ConfigureEndPointTypesThroughEEPROM(
 	u32 ulReg;
 	int bytes;
 	struct bcm_interface_adapter *interfaceAdapter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Program EP2 MAX_PKT_SIZE */
@@ -122,7 +138,13 @@ static void ConfigureEndPointTypesThroughEEPROM(
 	ulReg = ntohl(EP2_CFG_REG);
 	BeceemEEPROMBulkWrite(Adapter, (PUCHAR)&ulReg, 0x132, 4, TRUE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((struct bcm_interface_adapter *)(Adapter->pvInterfaceAdapter))->bHighSpeedDevice == TRUE) {
+=======
+	interfaceAdapter =
+		(struct bcm_interface_adapter *)(Adapter->pvInterfaceAdapter);
+	if (interfaceAdapter->bHighSpeedDevice) {
+>>>>>>> v3.18
 =======
 	interfaceAdapter =
 		(struct bcm_interface_adapter *)(Adapter->pvInterfaceAdapter);
@@ -144,15 +166,21 @@ static void ConfigureEndPointTypesThroughEEPROM(
 
 	/* Program TX EP as interrupt(Alternate Setting) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bytes = rdmalt(Adapter, 0x0F0110F8, (u32 *)&ulReg, sizeof(u32));
 	if (bytes < 0) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 			"reading of Tx EP failed\n");
 =======
+=======
+>>>>>>> v3.18
 	bytes = rdmalt(Adapter, 0x0F0110F8, &ulReg, sizeof(u32));
 	if (bytes < 0) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, DRV_ENTRY,
 				DBG_LVL_ALL, "reading of Tx EP failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -174,6 +202,7 @@ static void ConfigureEndPointTypesThroughEEPROM(
 	 * Read 4 bytes from 508 and modify 511 and 510.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ReadBeceemEEPROM(Adapter, 0x1FC, (PUINT)&ulReg);
 	ulReg &= 0x0101FFFF;
 	BeceemEEPROMBulkWrite(Adapter, (PUCHAR)&ulReg, 0x1FC, 4, TRUE);
@@ -182,6 +211,8 @@ static void ConfigureEndPointTypesThroughEEPROM(
 
 	ReadBeceemEEPROM(Adapter, 0xA8, (PUINT)&ulReg);
 =======
+=======
+>>>>>>> v3.18
 	ReadBeceemEEPROM(Adapter, 0x1FC, &ulReg);
 	ulReg &= 0x0101FFFF;
 	BeceemEEPROMBulkWrite(Adapter, (PUCHAR)&ulReg, 0x1FC, 4, TRUE);
@@ -192,13 +223,20 @@ static void ConfigureEndPointTypesThroughEEPROM(
 	 */
 
 	ReadBeceemEEPROM(Adapter, 0xA8, &ulReg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((ulReg&0x00FF0000)>>16 > 0x30) {
 		ulReg = (ulReg&0xFF00FFFF)|(0x30<<16);
 		BeceemEEPROMBulkWrite(Adapter, (PUCHAR)&ulReg, 0xA8, 4, TRUE);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ReadBeceemEEPROM(Adapter, 0x148, (PUINT)&ulReg);
+=======
+	ReadBeceemEEPROM(Adapter, 0x148, &ulReg);
+>>>>>>> v3.18
 =======
 	ReadBeceemEEPROM(Adapter, 0x148, &ulReg);
 >>>>>>> v3.18
@@ -213,7 +251,12 @@ static void ConfigureEndPointTypesThroughEEPROM(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usbbcm_device_probe(struct usb_interface *intf, const struct usb_device_id *id)
+=======
+static int usbbcm_device_probe(struct usb_interface *intf,
+			       const struct usb_device_id *id)
+>>>>>>> v3.18
 =======
 static int usbbcm_device_probe(struct usb_interface *intf,
 			       const struct usb_device_id *id)
@@ -227,7 +270,12 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 
 	/* Reserve one extra queue for the bit-bucket */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ndev = alloc_etherdev_mq(sizeof(struct bcm_mini_adapter), NO_OF_QUEUES+1);
+=======
+	ndev = alloc_etherdev_mq(sizeof(struct bcm_mini_adapter),
+			NO_OF_QUEUES + 1);
+>>>>>>> v3.18
 =======
 	ndev = alloc_etherdev_mq(sizeof(struct bcm_mini_adapter),
 			NO_OF_QUEUES + 1);
@@ -251,6 +299,7 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 	/*
 	 * Technically, one can start using BCM_DEBUG_PRINT after this point.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * However, realize that by default the Type/Subtype bitmaps are all zero now;
 	 * so no prints will actually appear until the TestApp turns on debug paths via
 	 * the ioctl(); so practically speaking, in early init, no logging happens.
@@ -259,6 +308,8 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 	 * and ALL subtype's of the same. Now all bcm debug statements get logged, enabling debug
 	 * during early init.
 =======
+=======
+>>>>>>> v3.18
 	 * However, realize that by default the Type/Subtype bitmaps are all
 	 * zero now; so no prints will actually appear until the TestApp turns
 	 * on debug paths via the ioctl(); so practically speaking, in early
@@ -267,6 +318,9 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 	 * A solution (used below): we explicitly set the bitmaps to 1 for
 	 * Type=DBG_TYPE_INITEXIT and ALL subtype's of the same. Now all bcm
 	 * debug statements get logged, enabling debug during early init.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Further, we turn this OFF once init_module() completes.
 	 */
@@ -284,7 +338,11 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 	/* Allocate interface adapter structure */
 	psIntfAdapter = kzalloc(sizeof(struct bcm_interface_adapter),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				GFP_KERNEL);
+=======
+			GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			GFP_KERNEL);
 >>>>>>> v3.18
@@ -302,7 +360,11 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 
 	BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"psIntfAdapter 0x%p\n", psIntfAdapter);
+=======
+			"psIntfAdapter 0x%p\n", psIntfAdapter);
+>>>>>>> v3.18
 =======
 			"psIntfAdapter 0x%p\n", psIntfAdapter);
 >>>>>>> v3.18
@@ -314,6 +376,7 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 		 */
 		if (-ENOENT == retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 				"File Not Found.  Use app to download.\n");
 			return STATUS_SUCCESS;
@@ -321,6 +384,8 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 		BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 			"InterfaceAdapterInit failed.\n");
 =======
+=======
+>>>>>>> v3.18
 			BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY,
 					DBG_LVL_ALL,
 					"File Not Found.  Use app to download.\n");
@@ -328,6 +393,9 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 		}
 		BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY,
 				DBG_LVL_ALL, "InterfaceAdapterInit failed.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		usb_set_intfdata(intf, NULL);
 		udev = interface_to_usbdev(intf);
@@ -339,12 +407,18 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 		uint32_t uiNackZeroLengthInt = 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = wrmalt(psAdapter, DISABLE_USB_ZERO_LEN_INT, &uiNackZeroLengthInt, sizeof(uiNackZeroLengthInt));
 =======
+=======
+>>>>>>> v3.18
 		retval =
 			wrmalt(psAdapter, DISABLE_USB_ZERO_LEN_INT,
 					&uiNackZeroLengthInt,
 					sizeof(uiNackZeroLengthInt));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (retval)
 			return retval;
@@ -360,15 +434,21 @@ static int usbbcm_device_probe(struct usb_interface *intf,
 			usb_enable_autosuspend(udev);
 			device_init_wakeup(&intf->dev, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			INIT_WORK(&psIntfAdapter->usbSuspendWork, putUsbSuspend);
 			BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 				"Enabling USB Auto-Suspend\n");
 =======
+=======
+>>>>>>> v3.18
 			INIT_WORK(&psIntfAdapter->usbSuspendWork,
 					putUsbSuspend);
 			BCM_DEBUG_PRINT(psAdapter, DBG_TYPE_INITEXIT, DRV_ENTRY,
 					DBG_LVL_ALL,
 					"Enabling USB Auto-Suspend\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		} else {
@@ -397,7 +477,11 @@ static void usbbcm_disconnect(struct usb_interface *intf)
 		intf->needs_remote_wakeup = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psAdapter->device_removed = TRUE ;
+=======
+	psAdapter->device_removed = TRUE;
+>>>>>>> v3.18
 =======
 	psAdapter->device_removed = TRUE;
 >>>>>>> v3.18
@@ -415,13 +499,19 @@ static int AllocUsbCb(struct bcm_interface_adapter *psIntfAdapter)
 
 		if (psIntfAdapter->asUsbTcb[i].urb == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_PRINTK, 0, 0,
 				"Can't allocate Tx urb for index %d\n", i);
 =======
+=======
+>>>>>>> v3.18
 			BCM_DEBUG_PRINT(psIntfAdapter->psAdapter,
 					DBG_TYPE_PRINTK, 0, 0,
 					"Can't allocate Tx urb for index %d\n",
 					i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENOMEM;
 		}
@@ -431,6 +521,7 @@ static int AllocUsbCb(struct bcm_interface_adapter *psIntfAdapter)
 		psIntfAdapter->asUsbRcb[i].urb = usb_alloc_urb(0, GFP_KERNEL);
 
 		if (psIntfAdapter->asUsbRcb[i].urb == NULL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_PRINTK, 0, 0,
 				"Can't allocate Rx urb for index %d\n", i);
@@ -446,6 +537,8 @@ static int AllocUsbCb(struct bcm_interface_adapter *psIntfAdapter)
 		}
 		psIntfAdapter->asUsbRcb[i].urb->transfer_buffer_length = MAX_DATA_BUFFER_SIZE;
 =======
+=======
+>>>>>>> v3.18
 			BCM_DEBUG_PRINT(psIntfAdapter->psAdapter,
 					DBG_TYPE_PRINTK, 0, 0,
 					"Can't allocate Rx urb for index %d\n",
@@ -465,6 +558,9 @@ static int AllocUsbCb(struct bcm_interface_adapter *psIntfAdapter)
 		}
 		psIntfAdapter->asUsbRcb[i].urb->transfer_buffer_length =
 			MAX_DATA_BUFFER_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -475,8 +571,14 @@ static int device_run(struct bcm_interface_adapter *psIntfAdapter)
 	int value = 0;
 	UINT status = STATUS_SUCCESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	status = InitCardAndDownloadFirmware(psIntfAdapter->psAdapter);
+=======
+	struct bcm_mini_adapter *psAd = psIntfAdapter->psAdapter;
+
+	status = InitCardAndDownloadFirmware(psAd);
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *psAd = psIntfAdapter->psAdapter;
 
@@ -486,6 +588,7 @@ static int device_run(struct bcm_interface_adapter *psIntfAdapter)
 		pr_err(DRV_NAME "InitCardAndDownloadFirmware failed.\n");
 		return status;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (TRUE == psIntfAdapter->psAdapter->fw_download_done) {
 		if (StartInterruptUrb(psIntfAdapter)) {
@@ -501,6 +604,8 @@ static int device_run(struct bcm_interface_adapter *psIntfAdapter)
 		value = wait_event_timeout(psIntfAdapter->psAdapter->ioctl_fw_dnld_wait_queue,
 					psIntfAdapter->psAdapter->waiting_to_fw_download_done, 5*HZ);
 =======
+=======
+>>>>>>> v3.18
 	if (psAd->fw_download_done) {
 		if (StartInterruptUrb(psIntfAdapter)) {
 			BCM_DEBUG_PRINT(psAd, DBG_TYPE_INITEXIT, DRV_ENTRY,
@@ -516,13 +621,20 @@ static int device_run(struct bcm_interface_adapter *psIntfAdapter)
 		value = wait_event_timeout(psAd->ioctl_fw_dnld_wait_queue,
 					   psAd->waiting_to_fw_download_done,
 					   5 * HZ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (value == 0)
 			pr_err(DRV_NAME ": Timeout waiting for mailbox interrupt.\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (register_control_device_interface(psIntfAdapter->psAdapter) < 0) {
+=======
+		if (register_control_device_interface(psAd) < 0) {
+>>>>>>> v3.18
 =======
 		if (register_control_device_interface(psAd) < 0) {
 >>>>>>> v3.18
@@ -533,6 +645,7 @@ static int device_run(struct bcm_interface_adapter *psIntfAdapter)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static inline int bcm_usb_endpoint_num(const struct usb_endpoint_descriptor *epd)
@@ -608,6 +721,8 @@ static inline int bcm_usb_endpoint_is_isoc_out(const struct usb_endpoint_descrip
 {
 	return bcm_usb_endpoint_xfer_isoc(epd) && bcm_usb_endpoint_dir_out(epd);
 =======
+=======
+>>>>>>> v3.18
 static int select_alternate_setting_for_highspeed_modem(
 		struct bcm_interface_adapter *psIntfAdapter,
 		struct usb_endpoint_descriptor **endpoint,
@@ -710,6 +825,9 @@ static int select_alternate_setting_for_highspeed_modem(
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -720,6 +838,7 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 	size_t buffer_size;
 	unsigned long value;
 	int retval = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int usedIntOutForBulkTransfer = 0 ;
 	BOOLEAN bBcm16 = FALSE;
@@ -826,6 +945,8 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 				}
 			}
 =======
+=======
+>>>>>>> v3.18
 	int usedIntOutForBulkTransfer = 0;
 	bool bBcm16 = false;
 	UINT uiData = 0;
@@ -875,6 +996,9 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 					&usedIntOutForBulkTransfer);
 			if (retval)
 				return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -884,6 +1008,7 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 	for (value = 0; value < iface_desc->desc.bNumEndpoints; ++value) {
 		endpoint = &iface_desc->endpoint[value].desc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!psIntfAdapter->sBulkIn.bulk_in_endpointAddr && bcm_usb_endpoint_is_bulk_in(endpoint)) {
 			buffer_size = le16_to_cpu(endpoint->wMaxPacketSize);
@@ -909,6 +1034,8 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 			psIntfAdapter->sIntrIn.int_in_buffer =
 						kmalloc(buffer_size, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 		if (!psIntfAdapter->sBulkIn.bulk_in_endpointAddr &&
 				usb_endpoint_is_bulk_in(endpoint)) {
 			buffer_size = le16_to_cpu(endpoint->wMaxPacketSize);
@@ -939,11 +1066,15 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 				endpoint->bInterval;
 			psIntfAdapter->sIntrIn.int_in_buffer =
 				kmalloc(buffer_size, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!psIntfAdapter->sIntrIn.int_in_buffer)
 				return -EINVAL;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!psIntfAdapter->sIntrOut.int_out_endpointAddr && bcm_usb_endpoint_is_int_out(endpoint)) {
 			if (!psIntfAdapter->sBulkOut.bulk_out_endpointAddr &&
@@ -962,6 +1093,8 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 				psIntfAdapter->sIntrOut.int_out_interval = endpoint->bInterval;
 				psIntfAdapter->sIntrOut.int_out_buffer = kmalloc(buffer_size, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 		if (!psIntfAdapter->sIntrOut.int_out_endpointAddr &&
 				usb_endpoint_is_int_out(endpoint)) {
 			if (!psIntfAdapter->sBulkOut.bulk_out_endpointAddr &&
@@ -994,6 +1127,9 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 					endpoint->bInterval;
 				psIntfAdapter->sIntrOut.int_out_buffer =
 					kmalloc(buffer_size, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (!psIntfAdapter->sIntrOut.int_out_buffer)
 					return -EINVAL;
@@ -1004,10 +1140,16 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 	usb_set_intfdata(psIntfAdapter->interface, psIntfAdapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psIntfAdapter->psAdapter->bcm_file_download = InterfaceFileDownload;
 	psIntfAdapter->psAdapter->bcm_file_readback_from_chip =
 				InterfaceFileReadbackFromChip;
 	psIntfAdapter->psAdapter->interface_transmit = InterfaceTransmitPacket;
+=======
+	psAd->bcm_file_download = InterfaceFileDownload;
+	psAd->bcm_file_readback_from_chip = InterfaceFileReadbackFromChip;
+	psAd->interface_transmit = InterfaceTransmitPacket;
+>>>>>>> v3.18
 =======
 	psAd->bcm_file_download = InterfaceFileDownload;
 	psAd->bcm_file_readback_from_chip = InterfaceFileReadbackFromChip;
@@ -1018,8 +1160,13 @@ static int InterfaceAdapterInit(struct bcm_interface_adapter *psIntfAdapter)
 
 	if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_PRINTK, 0, 0,
 			"Cannot create interrupt urb\n");
+=======
+		BCM_DEBUG_PRINT(psAd, DBG_TYPE_PRINTK, 0, 0,
+				"Cannot create interrupt urb\n");
+>>>>>>> v3.18
 =======
 		BCM_DEBUG_PRINT(psAd, DBG_TYPE_PRINTK, 0, 0,
 				"Cannot create interrupt urb\n");
@@ -1041,6 +1188,7 @@ static int InterfaceSuspend(struct usb_interface *intf, pm_message_t message)
 	psIntfAdapter->bSuspended = TRUE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (TRUE == psIntfAdapter->bPreparingForBusSuspend) {
 		psIntfAdapter->bPreparingForBusSuspend = FALSE;
 
@@ -1056,6 +1204,8 @@ static int InterfaceSuspend(struct usb_interface *intf, pm_message_t message)
 	}
 	psIntfAdapter->psAdapter->bPreparingForLowPowerMode = FALSE;
 =======
+=======
+>>>>>>> v3.18
 	if (psIntfAdapter->bPreparingForBusSuspend) {
 		psIntfAdapter->bPreparingForBusSuspend = false;
 
@@ -1074,6 +1224,9 @@ static int InterfaceSuspend(struct usb_interface *intf, pm_message_t message)
 		}
 	}
 	psIntfAdapter->psAdapter->bPreparingForLowPowerMode = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Signaling the control pkt path */
@@ -1088,7 +1241,11 @@ static int InterfaceResume(struct usb_interface *intf)
 
 	mdelay(100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psIntfAdapter->bSuspended = FALSE;
+=======
+	psIntfAdapter->bSuspended = false;
+>>>>>>> v3.18
 =======
 	psIntfAdapter->bSuspended = false;
 >>>>>>> v3.18

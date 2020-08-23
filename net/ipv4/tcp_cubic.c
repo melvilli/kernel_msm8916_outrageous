@@ -83,7 +83,11 @@ MODULE_PARM_DESC(hystart_ack_delta, "spacing between ack's indicating train (mse
 struct bictcp {
 	u32	cnt;		/* increase cwnd by 1 after ACKs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 	last_max_cwnd;	/* last maximum snd_cwnd */
+=======
+	u32	last_max_cwnd;	/* last maximum snd_cwnd */
+>>>>>>> v3.18
 =======
 	u32	last_max_cwnd;	/* last maximum snd_cwnd */
 >>>>>>> v3.18
@@ -92,7 +96,12 @@ struct bictcp {
 	u32	last_time;	/* time when updated last_cwnd */
 	u32	bic_origin_point;/* origin point of bic function */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	bic_K;		/* time to origin point from the beginning of the current epoch */
+=======
+	u32	bic_K;		/* time to origin point
+				   from the beginning of the current epoch */
+>>>>>>> v3.18
 =======
 	u32	bic_K;		/* time to origin point
 				   from the beginning of the current epoch */
@@ -163,6 +172,7 @@ static void bictcp_init(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bictcp_cwnd_event(struct sock *sk, enum tcp_ca_event event)
 {
 	if (event == CA_EVENT_TX_START) {
@@ -184,6 +194,8 @@ static void bictcp_cwnd_event(struct sock *sk, enum tcp_ca_event event)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* calculate the cubic root of x using a table lookup followed by one
@@ -249,6 +261,7 @@ static inline void bictcp_update(struct bictcp *ca, u32 cwnd)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The CUBIC function can update ca->cnt at most once per jiffy.
 	 * On all cwnd reduction events, ca->epoch_start is set to 0,
 	 * which will force a recalculation of ca->cnt.
@@ -258,12 +271,18 @@ static inline void bictcp_update(struct bictcp *ca, u32 cwnd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ca->last_cwnd = cwnd;
 	ca->last_time = tcp_time_stamp;
 
 	if (ca->epoch_start == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ca->epoch_start = tcp_time_stamp;	/* record the beginning of an epoch */
+=======
+		ca->epoch_start = tcp_time_stamp;	/* record beginning */
+>>>>>>> v3.18
 =======
 		ca->epoch_start = tcp_time_stamp;	/* record beginning */
 >>>>>>> v3.18
@@ -311,9 +330,15 @@ static inline void bictcp_update(struct bictcp *ca, u32 cwnd)
 	/* c/rtt * (t-K)^3 */
 	delta = (cube_rtt_scale * offs * offs * offs) >> (10+3*BICTCP_HZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (t < ca->bic_K)                                	/* below origin*/
 		bic_target = ca->bic_origin_point - delta;
 	else                                                	/* above origin*/
+=======
+	if (t < ca->bic_K)                            /* below origin*/
+		bic_target = ca->bic_origin_point - delta;
+	else                                          /* above origin*/
+>>>>>>> v3.18
 =======
 	if (t < ca->bic_K)                            /* below origin*/
 		bic_target = ca->bic_origin_point - delta;
@@ -336,15 +361,21 @@ static inline void bictcp_update(struct bictcp *ca, u32 cwnd)
 		ca->cnt = 20;	/* increase cwnd 5% per RTT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 tcp_friendliness:
 	/* TCP Friendly */
 	if (tcp_friendliness) {
 		u32 scale = beta_scale;
 =======
+=======
+>>>>>>> v3.18
 	/* TCP Friendly */
 	if (tcp_friendliness) {
 		u32 scale = beta_scale;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		delta = (cwnd * scale) >> 3;
 		while (ca->ack_cnt > delta) {		/* update tcp cwnd */
@@ -353,7 +384,11 @@ tcp_friendliness:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ca->tcp_cwnd > cwnd){	/* if bic is slower than tcp */
+=======
+		if (ca->tcp_cwnd > cwnd) {	/* if bic is slower than tcp */
+>>>>>>> v3.18
 =======
 		if (ca->tcp_cwnd > cwnd) {	/* if bic is slower than tcp */
 >>>>>>> v3.18
@@ -370,7 +405,11 @@ tcp_friendliness:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -379,7 +418,11 @@ static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 	struct bictcp *ca = inet_csk_ca(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tcp_is_cwnd_limited(sk, in_flight))
+=======
+	if (!tcp_is_cwnd_limited(sk))
+>>>>>>> v3.18
 =======
 	if (!tcp_is_cwnd_limited(sk))
 >>>>>>> v3.18
@@ -389,7 +432,11 @@ static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 		if (hystart && after(ack, ca->end_seq))
 			bictcp_hystart_reset(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_slow_start(tp);
+=======
+		tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 =======
 		tcp_slow_start(tp, acked);
 >>>>>>> v3.18
@@ -398,7 +445,10 @@ static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 		tcp_cong_avoid_ai(tp, ca->cnt);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -520,7 +570,10 @@ static struct tcp_congestion_ops cubictcp __read_mostly = {
 	.set_state	= bictcp_state,
 	.undo_cwnd	= bictcp_undo_cwnd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cwnd_event	= bictcp_cwnd_event,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.pkts_acked     = bictcp_acked,
@@ -537,7 +590,12 @@ static int __init cubictcp_register(void)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beta_scale = 8*(BICTCP_BETA_SCALE+beta)/ 3 / (BICTCP_BETA_SCALE - beta);
+=======
+	beta_scale = 8*(BICTCP_BETA_SCALE+beta) / 3
+		/ (BICTCP_BETA_SCALE - beta);
+>>>>>>> v3.18
 =======
 	beta_scale = 8*(BICTCP_BETA_SCALE+beta) / 3
 		/ (BICTCP_BETA_SCALE - beta);
@@ -565,10 +623,13 @@ static int __init cubictcp_register(void)
 	do_div(cube_factor, bic_scale * 10);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* hystart needs ms clock resolution */
 	if (hystart && HZ < 1000)
 		cubictcp.flags |= TCP_CONG_RTT_STAMP;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return tcp_register_congestion_control(&cubictcp);

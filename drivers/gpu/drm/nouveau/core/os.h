@@ -6,6 +6,10 @@
 #include <linux/mutex.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 #include <linux/i2c-algo-bit.h>
 #include <linux/delay.h>
 #include <linux/io-mapping.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/vmalloc.h>
 #include <linux/acpi.h>
@@ -38,6 +43,8 @@ ffsll(u64 mask)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/vmalloc.h>
 #include <linux/dmi.h>
@@ -50,6 +57,9 @@ ffsll(u64 mask)
 
 #include <asm/unaligned.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef ioread32_native
 #ifdef __BIG_ENDIAN

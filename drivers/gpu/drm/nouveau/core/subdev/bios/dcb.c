@@ -144,10 +144,13 @@ dcb_outp_parse(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *len,
 			u32 conf = nv_ro32(bios, dcb + 0x04);
 			switch (outp->type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case DCB_OUTPUT_TMDS:
 			case DCB_OUTPUT_LVDS:
 			case DCB_OUTPUT_DP:
 =======
+=======
+>>>>>>> v3.18
 			case DCB_OUTPUT_DP:
 				switch (conf & 0x00e00000) {
 				case 0x00000000:
@@ -178,6 +181,9 @@ dcb_outp_parse(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *len,
 				/* fall-through... */
 			case DCB_OUTPUT_TMDS:
 			case DCB_OUTPUT_LVDS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				outp->link = (conf & 0x00000030) >> 4;
 				outp->sorconf.link = outp->link; /*XXX*/

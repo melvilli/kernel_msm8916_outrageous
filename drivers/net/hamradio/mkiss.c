@@ -10,8 +10,12 @@
  *
  *  You should have received a copy of the GNU General Public License along
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
+=======
+ *  with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *  with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -740,7 +744,12 @@ static int mkiss_open(struct tty_struct *tty)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct mkiss), "ax%d", ax_setup);
+=======
+	dev = alloc_netdev(sizeof(struct mkiss), "ax%d", NET_NAME_UNKNOWN,
+			   ax_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(struct mkiss), "ax%d", NET_NAME_UNKNOWN,
 			   ax_setup);

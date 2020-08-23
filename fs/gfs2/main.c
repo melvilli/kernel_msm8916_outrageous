@@ -8,6 +8,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -37,11 +42,14 @@
 struct workqueue_struct *gfs2_control_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct shrinker qd_shrinker = {
 	.shrink = gfs2_shrink_qd_memory,
 	.seeks = DEFAULT_SEEKS,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void gfs2_init_inode_once(void *foo)
@@ -90,6 +98,10 @@ static int __init init_gfs2_fs(void)
 	gfs2_str2qstr(&gfs2_qdot, ".");
 	gfs2_str2qstr(&gfs2_qdotdot, "..");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gfs2_quota_hash_init();
+>>>>>>> v3.18
 =======
 	gfs2_quota_hash_init();
 >>>>>>> v3.18
@@ -99,11 +111,17 @@ static int __init init_gfs2_fs(void)
 		return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	error = list_lru_init(&gfs2_qd_lru);
 	if (error)
 		goto fail_lru;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = gfs2_glock_init();
 	if (error)
@@ -158,7 +176,11 @@ static int __init init_gfs2_fs(void)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_shrinker(&qd_shrinker);
+=======
+	register_shrinker(&gfs2_qd_shrinker);
+>>>>>>> v3.18
 =======
 	register_shrinker(&gfs2_qd_shrinker);
 >>>>>>> v3.18
@@ -179,7 +201,11 @@ static int __init init_gfs2_fs(void)
 
 	gfs2_control_wq = alloc_workqueue("gfs2_control",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       WQ_NON_REENTRANT | WQ_UNBOUND | WQ_FREEZABLE, 0);
+=======
+					  WQ_UNBOUND | WQ_FREEZABLE, 0);
+>>>>>>> v3.18
 =======
 					  WQ_UNBOUND | WQ_FREEZABLE, 0);
 >>>>>>> v3.18
@@ -193,7 +219,11 @@ static int __init init_gfs2_fs(void)
 	gfs2_register_debugfs();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("GFS2 installed\n");
+=======
+	pr_info("GFS2 installed\n");
+>>>>>>> v3.18
 =======
 	pr_info("GFS2 installed\n");
 >>>>>>> v3.18
@@ -210,7 +240,13 @@ fail_unregister:
 	unregister_filesystem(&gfs2_fs_type);
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_shrinker(&qd_shrinker);
+=======
+	list_lru_destroy(&gfs2_qd_lru);
+fail_lru:
+	unregister_shrinker(&gfs2_qd_shrinker);
+>>>>>>> v3.18
 =======
 	list_lru_destroy(&gfs2_qd_lru);
 fail_lru:
@@ -251,7 +287,11 @@ fail_lru:
 static void __exit exit_gfs2_fs(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_shrinker(&qd_shrinker);
+=======
+	unregister_shrinker(&gfs2_qd_shrinker);
+>>>>>>> v3.18
 =======
 	unregister_shrinker(&gfs2_qd_shrinker);
 >>>>>>> v3.18
@@ -262,6 +302,10 @@ static void __exit exit_gfs2_fs(void)
 	destroy_workqueue(gfs_recovery_wq);
 	destroy_workqueue(gfs2_control_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	list_lru_destroy(&gfs2_qd_lru);
+>>>>>>> v3.18
 =======
 	list_lru_destroy(&gfs2_qd_lru);
 >>>>>>> v3.18

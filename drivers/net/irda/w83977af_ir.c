@@ -63,10 +63,13 @@
 #include "w83977af_ir.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef  CONFIG_ARCH_NETWINDER            /* Adjust to NetWinder differences */
 #undef  CONFIG_NETWINDER_TX_DMA_PROBLEMS /* Not needed */
 #define CONFIG_NETWINDER_RX_DMA_PROBLEMS /* Must have this one! */
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CONFIG_USE_W977_PNP        /* Currently needed */
@@ -219,8 +222,13 @@ static int w83977af_open(int i, unsigned int iobase, unsigned int irq,
 	/* Allocate memory if needed */
 	self->rx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(NULL, self->rx_buff.truesize,
 				   &self->rx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(NULL, self->rx_buff.truesize,
+				    &self->rx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(NULL, self->rx_buff.truesize,
 				    &self->rx_buff_dma, GFP_KERNEL);
@@ -232,8 +240,13 @@ static int w83977af_open(int i, unsigned int iobase, unsigned int irq,
 
 	self->tx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(NULL, self->tx_buff.truesize,
 				   &self->tx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(NULL, self->tx_buff.truesize,
+				    &self->tx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(NULL, self->tx_buff.truesize,
 				    &self->tx_buff_dma, GFP_KERNEL);
@@ -346,7 +359,11 @@ static int w83977af_probe(int iobase, int irq, int dma)
 #else
  		w977_write_reg(0x74, dma, efbase[i]);   
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /*CONFIG_ARCH_NETWINDER */
+=======
+#endif /* CONFIG_ARCH_NETWINDER */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_ARCH_NETWINDER */
 >>>>>>> v3.18
@@ -581,10 +598,13 @@ static void w83977af_dma_write(struct w83977af_ir *self, int iobase)
 {
 	__u8 set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NETWINDER_TX_DMA_PROBLEMS
 	unsigned long flags;
 	__u8 hcr;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         IRDA_DEBUG(4, "%s(), len=%d\n", __func__ , self->tx_buff.len);
@@ -599,6 +619,7 @@ static void w83977af_dma_write(struct w83977af_ir *self, int iobase)
 	/* Choose transmit DMA channel  */ 
 	switch_bank(iobase, SET2);
 	outb(ADCR1_D_CHSW|/*ADCR1_DMA_F|*/ADCR1_ADV_SL, iobase+ADCR1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_NETWINDER_TX_DMA_PROBLEMS
 	spin_lock_irqsave(&self->lock, flags);
@@ -616,10 +637,15 @@ static void w83977af_dma_write(struct w83977af_ir *self, int iobase)
 	irda_setup_dma(self->io.dma, self->tx_buff_dma, self->tx_buff.len,
 		       DMA_MODE_WRITE);	
 >>>>>>> v3.18
+=======
+	irda_setup_dma(self->io.dma, self->tx_buff_dma, self->tx_buff.len,
+		       DMA_MODE_WRITE);	
+>>>>>>> v3.18
 	self->io.direction = IO_XMIT;
 	
 	/* Enable DMA */
  	switch_bank(iobase, SET0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_NETWINDER_TX_DMA_PROBLEMS
 	hcr = inb(iobase+HCR);
@@ -629,6 +655,9 @@ static void w83977af_dma_write(struct w83977af_ir *self, int iobase)
 #else	
 	outb(inb(iobase+HCR) | HCR_EN_DMA | HCR_TX_WT, iobase+HCR);
 #endif
+=======
+	outb(inb(iobase+HCR) | HCR_EN_DMA | HCR_TX_WT, iobase+HCR);
+>>>>>>> v3.18
 =======
 	outb(inb(iobase+HCR) | HCR_EN_DMA | HCR_TX_WT, iobase+HCR);
 >>>>>>> v3.18
@@ -741,7 +770,11 @@ static int w83977af_dma_receive(struct w83977af_ir *self)
 	int iobase;
 	__u8 set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NETWINDER_RX_DMA_PROBLEMS
+=======
+#ifdef CONFIG_ARCH_NETWINDER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_NETWINDER
 >>>>>>> v3.18
@@ -770,7 +803,11 @@ static int w83977af_dma_receive(struct w83977af_ir *self)
 	self->rx_buff.data = self->rx_buff.head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NETWINDER_RX_DMA_PROBLEMS
+=======
+#ifdef CONFIG_ARCH_NETWINDER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_NETWINDER
 >>>>>>> v3.18
@@ -797,7 +834,11 @@ static int w83977af_dma_receive(struct w83977af_ir *self)
 	/* Enable DMA */
 	switch_bank(iobase, SET0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NETWINDER_RX_DMA_PROBLEMS
+=======
+#ifdef CONFIG_ARCH_NETWINDER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_NETWINDER
 >>>>>>> v3.18

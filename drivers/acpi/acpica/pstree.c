@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -313,7 +317,13 @@ union acpi_parse_object *acpi_ps_get_child(union acpi_parse_object *op)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* All others have no children */
+=======
+
+		/* All others have no children */
+
+>>>>>>> v3.18
 =======
 
 		/* All others have no children */

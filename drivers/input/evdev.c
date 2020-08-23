@@ -27,7 +27,10 @@
 #include <linux/device.h>
 #include <linux/cdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/wakelock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "input-compat.h"
@@ -51,9 +54,12 @@ struct evdev_client {
 	unsigned int packet_head; /* [future] position of the first element of next packet */
 	spinlock_t buffer_lock; /* protects access to buffer, head and tail */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wake_lock wake_lock;
 	bool use_wake_lock;
 	char name[28];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct fasync_struct *fasync;
@@ -61,6 +67,10 @@ struct evdev_client {
 	struct list_head node;
 	int clkid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool revoked;
+>>>>>>> v3.18
 =======
 	bool revoked;
 >>>>>>> v3.18
@@ -69,7 +79,10 @@ struct evdev_client {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* flush queued events of type @type, caller must hold client->buffer_lock */
 static void __evdev_flush_queue(struct evdev_client *client, unsigned int type)
 {
@@ -145,6 +158,9 @@ static void evdev_queue_syn_dropped(struct evdev_client *client)
 	spin_unlock_irqrestore(&client->buffer_lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __pass_event(struct evdev_client *client,
 			 const struct input_event *event)
@@ -166,8 +182,11 @@ static void __pass_event(struct evdev_client *client,
 
 		client->packet_head = client->tail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (client->use_wake_lock)
 			wake_unlock(&client->wake_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -175,8 +194,11 @@ static void __pass_event(struct evdev_client *client,
 	if (event->type == EV_SYN && event->code == SYN_REPORT) {
 		client->packet_head = client->head;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (client->use_wake_lock)
 			wake_lock(&client->wake_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kill_fasync(&client->fasync, SIGIO, POLL_IN);
@@ -193,6 +215,12 @@ static void evdev_pass_values(struct evdev_client *client,
 	bool wakeup = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (client->revoked)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (client->revoked)
 		return;
@@ -231,7 +259,11 @@ static void evdev_events(struct input_handle *handle,
 
 	time_mono = ktime_get();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	time_real = ktime_sub(time_mono, ktime_get_monotonic_offset());
+=======
+	time_real = ktime_mono_to_real(time_mono);
+>>>>>>> v3.18
 =======
 	time_real = ktime_mono_to_real(time_mono);
 >>>>>>> v3.18
@@ -279,7 +311,11 @@ static int evdev_flush(struct file *file, fl_owner_t id)
 		return retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!evdev->exist)
+=======
+	if (!evdev->exist || client->revoked)
+>>>>>>> v3.18
 =======
 	if (!evdev->exist || client->revoked)
 >>>>>>> v3.18
@@ -408,8 +444,11 @@ static int evdev_release(struct inode *inode, struct file *file)
 
 	evdev_detach_client(evdev, client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (client->use_wake_lock)
 		wake_lock_destroy(&client->wake_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -448,11 +487,16 @@ static int evdev_open(struct inode *inode, struct file *file)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	client->clkid = CLOCK_MONOTONIC;
 	client->bufsize = bufsize;
 	spin_lock_init(&client->buffer_lock);
 	snprintf(client->name, sizeof(client->name), "%s-%d",
 			dev_name(&evdev->dev), task_tgid_vnr(current));
+=======
+	client->bufsize = bufsize;
+	spin_lock_init(&client->buffer_lock);
+>>>>>>> v3.18
 =======
 	client->bufsize = bufsize;
 	spin_lock_init(&client->buffer_lock);
@@ -472,7 +516,11 @@ static int evdev_open(struct inode *inode, struct file *file)
  err_free_client:
 	evdev_detach_client(evdev, client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(client);
+=======
+	kvfree(client);
+>>>>>>> v3.18
 =======
 	kvfree(client);
 >>>>>>> v3.18
@@ -495,7 +543,11 @@ static ssize_t evdev_write(struct file *file, const char __user *buffer,
 		return retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!evdev->exist) {
+=======
+	if (!evdev->exist || client->revoked) {
+>>>>>>> v3.18
 =======
 	if (!evdev->exist || client->revoked) {
 >>>>>>> v3.18
@@ -532,9 +584,12 @@ static int evdev_fetch_next_event(struct evdev_client *client,
 		*event = client->buffer[client->tail++];
 		client->tail &= client->bufsize - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (client->use_wake_lock &&
 		    client->packet_head == client->tail)
 			wake_unlock(&client->wake_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -558,7 +613,11 @@ static ssize_t evdev_read(struct file *file, char __user *buffer,
 
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!evdev->exist)
+=======
+		if (!evdev->exist || client->revoked)
+>>>>>>> v3.18
 =======
 		if (!evdev->exist || client->revoked)
 >>>>>>> v3.18
@@ -591,7 +650,11 @@ static ssize_t evdev_read(struct file *file, char __user *buffer,
 			error = wait_event_interruptible(evdev->wait,
 					client->packet_head != client->tail ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 					!evdev->exist);
+=======
+					!evdev->exist || client->revoked);
+>>>>>>> v3.18
 =======
 					!evdev->exist || client->revoked);
 >>>>>>> v3.18
@@ -613,13 +676,19 @@ static unsigned int evdev_poll(struct file *file, poll_table *wait)
 	poll_wait(file, &evdev->wait, wait);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mask = evdev->exist ? POLLOUT | POLLWRNORM : POLLHUP | POLLERR;
 =======
+=======
+>>>>>>> v3.18
 	if (evdev->exist && !client->revoked)
 		mask = POLLOUT | POLLWRNORM;
 	else
 		mask = POLLHUP | POLLERR;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (client->packet_head != client->tail)
 		mask |= POLLIN | POLLRDNORM;
@@ -705,7 +774,10 @@ static int str_to_user(const char *str, unsigned int maxlen, void __user *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OLD_KEY_MAX	0x1ff
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int handle_eviocgbit(struct input_dev *dev,
@@ -713,7 +785,10 @@ static int handle_eviocgbit(struct input_dev *dev,
 			    void __user *p, int compat_mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static unsigned long keymax_warn_time;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long *bits;
@@ -734,6 +809,7 @@ static int handle_eviocgbit(struct input_dev *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Work around bugs in userspace programs that like to do
 	 * EVIOCGBIT(EV_KEY, KEY_MAX) and not realize that 'len'
@@ -752,6 +828,10 @@ static int handle_eviocgbit(struct input_dev *dev,
 	return bits_to_user(bits, len, size, p, compat_mode);
 }
 #undef OLD_KEY_MAX
+=======
+	return bits_to_user(bits, len, size, p, compat_mode);
+}
+>>>>>>> v3.18
 =======
 	return bits_to_user(bits, len, size, p, compat_mode);
 }
@@ -829,7 +909,10 @@ static int evdev_handle_set_keycode_v2(struct input_dev *dev, void __user *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * If we transfer state to the user, we should flush all pending events
  * of the same type from the client's queue. Otherwise, they might end up
@@ -878,6 +961,9 @@ static int evdev_handle_get_val(struct evdev_client *client,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int evdev_handle_mt_request(struct input_dev *dev,
 				   unsigned int size,
@@ -903,6 +989,7 @@ static int evdev_handle_mt_request(struct input_dev *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int evdev_enable_suspend_block(struct evdev *evdev,
 				      struct evdev_client *client)
@@ -930,6 +1017,8 @@ static int evdev_disable_suspend_block(struct evdev *evdev,
 	spin_unlock_irq(&client->buffer_lock);
 	wake_lock_destroy(&client->wake_lock);
 =======
+=======
+>>>>>>> v3.18
 static int evdev_revoke(struct evdev *evdev, struct evdev_client *client,
 			struct file *file)
 {
@@ -937,6 +1026,9 @@ static int evdev_revoke(struct evdev *evdev, struct evdev_client *client,
 	evdev_ungrab(evdev, client);
 	input_flush_device(&evdev->handle, file);
 	wake_up_interruptible(&evdev->wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1005,13 +1097,19 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 			return evdev_ungrab(evdev, client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case EVIOCREVOKE:
 		if (p)
 			return -EINVAL;
 		else
 			return evdev_revoke(evdev, client, file);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case EVIOCSCLOCKID:
 		if (copy_from_user(&i, p, sizeof(unsigned int)))
@@ -1033,6 +1131,7 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 	case EVIOCSKEYCODE_V2:
 		return evdev_handle_set_keycode_v2(dev, p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	case EVIOCGSUSPENDBLOCK:
 		return put_user(client->use_wake_lock, ip);
@@ -1042,6 +1141,8 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 			return evdev_enable_suspend_block(evdev, client);
 		else
 			return evdev_disable_suspend_block(evdev, client);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1061,6 +1162,7 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 
 	case EVIOCGKEY(0):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return bits_to_user(dev->key, KEY_MAX, size, p, compat_mode);
 
 	case EVIOCGLED(0):
@@ -1072,6 +1174,8 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 	case EVIOCGSW(0):
 		return bits_to_user(dev->sw, SW_MAX, size, p, compat_mode);
 =======
+=======
+>>>>>>> v3.18
 		return evdev_handle_get_val(client, dev, EV_KEY, dev->key,
 					    KEY_MAX, size, p, compat_mode);
 
@@ -1086,6 +1190,9 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 	case EVIOCGSW(0):
 		return evdev_handle_get_val(client, dev, EV_SW, dev->sw,
 					    SW_MAX, size, p, compat_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case EVIOCGNAME(0):
@@ -1103,6 +1210,11 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 
 		error = input_ff_upload(dev, &effect, file);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (error)
+			return error;
+>>>>>>> v3.18
 =======
 		if (error)
 			return error;
@@ -1112,7 +1224,11 @@ static long evdev_do_ioctl(struct file *file, unsigned int cmd,
 			return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return error;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -1193,7 +1309,11 @@ static long evdev_ioctl_handler(struct file *file, unsigned int cmd,
 		return retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!evdev->exist) {
+=======
+	if (!evdev->exist || client->revoked) {
+>>>>>>> v3.18
 =======
 	if (!evdev->exist || client->revoked) {
 >>>>>>> v3.18

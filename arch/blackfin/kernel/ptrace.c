@@ -118,6 +118,10 @@ int
 is_user_addr_valid(struct task_struct *child, unsigned long start, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool valid;
+>>>>>>> v3.18
 =======
 	bool valid;
 >>>>>>> v3.18
@@ -129,16 +133,22 @@ is_user_addr_valid(struct task_struct *child, unsigned long start, unsigned long
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma = find_vma(child->mm, start);
 	if (vma && start >= vma->vm_start && start + len <= vma->vm_end)
 			return 0;
 =======
+=======
+>>>>>>> v3.18
 	down_read(&child->mm->mmap_sem);
 	vma = find_vma(child->mm, start);
 	valid = vma && start >= vma->vm_start && start + len <= vma->vm_end;
 	up_read(&child->mm->mmap_sem);
 	if (valid)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (sraml = child->mm->context.sram_list; sraml; sraml = sraml->next)

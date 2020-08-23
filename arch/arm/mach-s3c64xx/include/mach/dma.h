@@ -12,6 +12,7 @@
 #define __ASM_ARCH_DMA_H __FILE__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S3C_DMA_CHANNELS	(16)
 
 /* see mach-s3c2410/dma.h for notes on dma channel numbers */
@@ -58,6 +59,8 @@ enum dma_ch {
 	DMACH_SECURITY_TX,	/* SDMA1 only */
 	DMACH_MAX		/* the end */
 =======
+=======
+>>>>>>> v3.18
 #define S3C64XX_DMA_CHAN(name)		((unsigned long)(name))
 
 /* DMA0/SDMA0 */
@@ -100,6 +103,9 @@ enum dma_ch {
 
 struct s3c2410_dma_client {
 	char	*name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -110,6 +116,7 @@ static inline bool samsung_dma_has_circular(void)
 
 static inline bool samsung_dma_is_dmadev(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return false;
 }
@@ -174,11 +181,16 @@ struct s3c2410_dma_chan {
 
 #include <plat/dma-core.h>
 =======
+=======
+>>>>>>> v3.18
 	return true;
 }
 
 #include <linux/amba/pl08x.h>
 #include <plat/dma-ops.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_ARCH_IRQ_H */

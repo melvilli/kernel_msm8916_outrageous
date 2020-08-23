@@ -30,8 +30,14 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 		struct nfsd3_getaclargs *argp, struct nfsd3_getaclres *resp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	svc_fh *fh;
 	struct posix_acl *acl;
+=======
+	struct posix_acl *acl;
+	struct inode *inode;
+	svc_fh *fh;
+>>>>>>> v3.18
 =======
 	struct posix_acl *acl;
 	struct inode *inode;
@@ -45,6 +51,11 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 		RETURN_STATUS(nfserr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	inode = fh->fh_dentry->d_inode;
+
+>>>>>>> v3.18
 =======
 	inode = fh->fh_dentry->d_inode;
 
@@ -54,6 +65,7 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 	resp->mask = argp->mask;
 
 	if (resp->mask & (NFS_ACL|NFS_ACLCNT)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		acl = nfsd_get_posix_acl(fh, ACL_TYPE_ACCESS);
 		if (IS_ERR(acl)) {
@@ -73,6 +85,8 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 			acl = posix_acl_from_mode(inode->i_mode, GFP_KERNEL);
 		}
 =======
+=======
+>>>>>>> v3.18
 		acl = get_acl(inode, ACL_TYPE_ACCESS);
 		if (acl == NULL) {
 			/* Solaris returns the inode's minimum ACL. */
@@ -82,12 +96,16 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 			nfserr = nfserrno(PTR_ERR(acl));
 			goto fail;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		resp->acl_access = acl;
 	}
 	if (resp->mask & (NFS_DFACL|NFS_DFACLCNT)) {
 		/* Check how Solaris handles requests for the Default ACL
 		   of a non-directory! */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		acl = nfsd_get_posix_acl(fh, ACL_TYPE_DEFAULT);
@@ -101,10 +119,15 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 				goto fail;
 			}
 =======
+=======
+>>>>>>> v3.18
 		acl = get_acl(inode, ACL_TYPE_DEFAULT);
 		if (IS_ERR(acl)) {
 			nfserr = nfserrno(PTR_ERR(acl));
 			goto fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		resp->acl_default = acl;
@@ -127,6 +150,7 @@ static __be32 nfsd3_proc_setacl(struct svc_rqst * rqstp,
 		struct nfsd3_attrstat *resp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	svc_fh *fh;
 	__be32 nfserr = 0;
 
@@ -143,6 +167,8 @@ static __be32 nfsd3_proc_setacl(struct svc_rqst * rqstp,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct inode *inode;
 	svc_fh *fh;
 	__be32 nfserr = 0;
@@ -174,6 +200,9 @@ out_drop_write:
 out_errno:
 	nfserr = nfserrno(error);
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* argp->acl_{access,default} may have been allocated in
 	   nfs3svc_decode_setaclargs. */
@@ -189,7 +218,12 @@ static int nfs3svc_decode_getaclargs(struct svc_rqst *rqstp, __be32 *p,
 		struct nfsd3_getaclargs *args)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(p = nfs3svc_decode_fh(p, &args->fh)))
+=======
+	p = nfs3svc_decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 =======
 	p = nfs3svc_decode_fh(p, &args->fh);
 	if (!p)
@@ -209,7 +243,12 @@ static int nfs3svc_decode_setaclargs(struct svc_rqst *rqstp, __be32 *p,
 	int n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(p = nfs3svc_decode_fh(p, &args->fh)))
+=======
+	p = nfs3svc_decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 =======
 	p = nfs3svc_decode_fh(p, &args->fh);
 	if (!p)

@@ -20,7 +20,10 @@
 
 #define FNIC_ENTRY_SIZE_BYTES 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FC_TRC_SIZE_BYTES 256
 #define FC_TRC_HEADER_SIZE sizeof(struct fc_trace_hdr)
 
@@ -32,6 +35,9 @@
 #define FNIC_FC_RECV 0x52 /* Character R */
 #define FNIC_FC_SEND 0x54 /* Character T */
 #define FNIC_FC_LE 0x4C /* Character L */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern ssize_t simple_read_from_buffer(void __user *to,
@@ -45,11 +51,17 @@ extern int fnic_tracing_enabled;
 extern unsigned int trace_max_pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern unsigned int fnic_fc_trace_max_pages;
 extern int fnic_fc_tracing_enabled;
 extern int fnic_fc_trace_cleared;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct fnic_trace_dbg {
 	int wr_idx;
@@ -78,7 +90,10 @@ struct fnic_trace_data {
 typedef struct fnic_trace_data fnic_trace_data_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct fc_trace_hdr {
 	struct timespec time_stamp;
 	u32 host_no;
@@ -89,6 +104,9 @@ struct fc_trace_hdr {
 #define FC_TRACE_ADDRESS(a) \
 	((unsigned long)(a) + sizeof(struct fc_trace_hdr))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FNIC_TRACE_ENTRY_SIZE \
 		  (FNIC_ENTRY_SIZE_BYTES - sizeof(fnic_trace_data_t))
@@ -119,10 +137,13 @@ int fnic_get_trace_data(fnic_dbgfs_t *);
 int fnic_trace_buf_init(void);
 void fnic_trace_free(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fnic_trace_debugfs_init(void);
 void fnic_trace_debugfs_terminate(void);
 
 =======
+=======
+>>>>>>> v3.18
 int fnic_debugfs_init(void);
 void fnic_debugfs_terminate(void);
 int fnic_trace_debugfs_init(void);
@@ -140,5 +161,8 @@ void copy_and_format_trace_data(struct fc_trace_hdr *tdata,
 int fnic_fc_trace_debugfs_init(void);
 void fnic_fc_trace_debugfs_terminate(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

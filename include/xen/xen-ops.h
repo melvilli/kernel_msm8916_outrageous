@@ -3,6 +3,11 @@
 
 #include <linux/percpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/notifier.h>
+#include <linux/efi.h>
+>>>>>>> v3.18
 =======
 #include <linux/notifier.h>
 #include <linux/efi.h>
@@ -14,16 +19,20 @@ DECLARE_PER_CPU(struct vcpu_info *, xen_vcpu);
 void xen_arch_pre_suspend(void);
 void xen_arch_post_suspend(int suspend_cancelled);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_arch_hvm_post_suspend(int suspend_cancelled);
 
 void xen_mm_pin_all(void);
 void xen_mm_unpin_all(void);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 void xen_timer_resume(void);
 void xen_arch_resume(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int xen_setup_shutdown_event(void);
 
@@ -33,6 +42,8 @@ int xen_create_contiguous_region(unsigned long vstart, unsigned int order,
 
 void xen_destroy_contiguous_region(unsigned long vstart, unsigned int order);
 =======
+=======
+>>>>>>> v3.18
 void xen_resume_notifier_register(struct notifier_block *nb);
 void xen_resume_notifier_unregister(struct notifier_block *nb);
 
@@ -44,6 +55,9 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 				dma_addr_t *dma_handle);
 
 void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct vm_area_struct;
@@ -57,7 +71,10 @@ int xen_unmap_domain_mfn_range(struct vm_area_struct *vma,
 
 bool xen_running_on_version_or_later(unsigned int major, unsigned int minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_XEN_EFI
 extern efi_system_table_t *xen_efi_probe(void);
@@ -68,5 +85,8 @@ static inline efi_system_table_t __init *xen_efi_probe(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* INCLUDE_XEN_OPS_H */

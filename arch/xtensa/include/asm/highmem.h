@@ -7,6 +7,10 @@
  *
  * Copyright (C) 2003 - 2005 Tensilica Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Cadence Design Systems Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Cadence Design Systems Inc.
 >>>>>>> v3.18
@@ -16,8 +20,11 @@
 #define _XTENSA_HIGHMEM_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_cache_kmaps(void);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/wait.h>
 #include <asm/cacheflush.h>
 #include <asm/fixmap.h>
@@ -97,6 +104,9 @@ void *kmap_atomic(struct page *page);
 void __kunmap_atomic(void *kvaddr);
 
 void kmap_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

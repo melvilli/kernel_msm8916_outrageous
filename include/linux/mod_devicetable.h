@@ -283,7 +283,11 @@ struct pcmcia_device_id {
 #define INPUT_DEVICE_ID_SND_MAX		0x07
 #define INPUT_DEVICE_ID_FF_MAX		0x7f
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INPUT_DEVICE_ID_SW_MAX		0x20
+=======
+#define INPUT_DEVICE_ID_SW_MAX		0x0f
+>>>>>>> v3.18
 =======
 #define INPUT_DEVICE_ID_SW_MAX		0x0f
 >>>>>>> v3.18
@@ -366,7 +370,12 @@ struct ssb_device_id {
 	__u16	coreid;
 	__u8	revision;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	__u8	__pad;
+} __attribute__((packed, aligned(2)));
+>>>>>>> v3.18
 =======
 	__u8	__pad;
 } __attribute__((packed, aligned(2)));
@@ -387,7 +396,11 @@ struct bcma_device_id {
 	__u8	rev;
 	__u8	class;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((packed,aligned(2)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed,aligned(2)));
 >>>>>>> v3.18
@@ -411,7 +424,10 @@ struct virtio_device_id {
  * For Hyper-V devices we use the device guid as the id.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define vmbus_device_id hv_vmbus_device_id
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct hv_vmbus_device_id {
@@ -449,6 +465,7 @@ struct spi_device_id {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SLIMBUS_NAME_SIZE	32
 #define SLIMBUS_MODULE_PREFIX "slim:"
 
@@ -460,11 +477,14 @@ struct slim_device_id {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define SPMI_NAME_SIZE	32
 #define SPMI_MODULE_PREFIX "spmi:"
 
 struct spmi_device_id {
 	char name[SPMI_NAME_SIZE];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kernel_ulong_t driver_data	/* Data private to the driver */
 			__attribute__((aligned(sizeof(kernel_ulong_t))));
@@ -477,6 +497,8 @@ struct spmi_device_id {
 
 struct swr_device_id {
 	char name[SOUNDWIRE_NAME_SIZE];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kernel_ulong_t driver_data;	/* Data private to the driver */
@@ -640,7 +662,10 @@ struct ipack_device_id {
 #define MEI_CL_NAME_SIZE 32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mei_device_id mei_cl_device_id
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mei_cl_device_id {
@@ -649,7 +674,10 @@ struct mei_cl_device_id {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* RapidIO */
 
 #define RIO_ANY_ID	0xffff
@@ -674,5 +702,8 @@ struct mcb_device_id {
 	kernel_ulong_t driver_data;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LINUX_MOD_DEVICETABLE_H */

@@ -215,8 +215,11 @@
 #define DRBD_ALWAYS_ASBP_DEF	0
 #define DRBD_USE_RLE_DEF	1
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define DRBD_CSUMS_AFTER_CRASH_ONLY_DEF 0
 
 #define DRBD_AL_STRIPES_MIN     1
@@ -233,5 +236,8 @@
 #define DRBD_SOCKET_CHECK_TIMEO_MAX DRBD_PING_TIMEO_MAX
 #define DRBD_SOCKET_CHECK_TIMEO_DEF 0
 #define DRBD_SOCKET_CHECK_TIMEO_SCALE '1'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

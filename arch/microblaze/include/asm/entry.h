@@ -16,6 +16,10 @@
 #include <asm/percpu.h>
 #include <asm/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/linkage.h>
+>>>>>>> v3.18
 =======
 #include <linux/linkage.h>
 >>>>>>> v3.18

@@ -256,7 +256,10 @@ void ath9k_deinit_leds(struct ath9k_htc_priv *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void ath9k_configure_leds(struct ath9k_htc_priv *priv)
 {
@@ -268,6 +271,9 @@ void ath9k_configure_leds(struct ath9k_htc_priv *priv)
 
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ath9k_init_leds(struct ath9k_htc_priv *priv)
 {
@@ -283,11 +289,15 @@ void ath9k_init_leds(struct ath9k_htc_priv *priv)
 		priv->ah->led_pin = ATH_LED_PIN_DEF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Configure gpio 1 for output */
 	ath9k_hw_cfg_output(priv->ah, priv->ah->led_pin,
 			    AR_GPIO_OUTPUT_MUX_AS_OUTPUT);
 	/* LED off, active low */
 	ath9k_hw_set_gpio(priv->ah, priv->ah->led_pin, 1);
+=======
+	ath9k_configure_leds(priv);
+>>>>>>> v3.18
 =======
 	ath9k_configure_leds(priv);
 >>>>>>> v3.18

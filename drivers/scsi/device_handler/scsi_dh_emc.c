@@ -276,7 +276,11 @@ static struct request *get_req(struct scsi_device *sdev, int cmd,
 	rq = blk_get_request(sdev->request_queue,
 			(cmd != INQUIRY) ? WRITE : READ, GFP_NOIO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rq) {
+=======
+	if (IS_ERR(rq)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq)) {
 >>>>>>> v3.18
@@ -469,7 +473,11 @@ static int clariion_std_inquiry(struct scsi_device *sdev,
 				struct clariion_dh_data *csdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = SCSI_DH_OK;
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18

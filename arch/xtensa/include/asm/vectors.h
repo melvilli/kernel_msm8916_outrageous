@@ -21,7 +21,10 @@
 #include <variant/core.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define XCHAL_KIO_CACHED_VADDR		0xe0000000
 #define XCHAL_KIO_BYPASS_VADDR		0xf0000000
 #define XCHAL_KIO_DEFAULT_PADDR		0xf0000000
@@ -33,6 +36,9 @@
 #define XCHAL_KIO_PADDR			XCHAL_KIO_DEFAULT_PADDR
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_MMU)
 
@@ -45,11 +51,17 @@
 #if defined(XCHAL_HAVE_PTP_MMU) && XCHAL_HAVE_PTP_MMU && XCHAL_HAVE_SPANNING_WAY
   /* MMU v3  - XCHAL_HAVE_PTP_MMU  == 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
   #define PHYSICAL_MEMORY_ADDRESS	0x00000000
   #define LOAD_MEMORY_ADDRESS		0x00003000
 #else
   /* MMU V2 -  XCHAL_HAVE_PTP_MMU  == 0 */
   #define PHYSICAL_MEMORY_ADDRESS	0xD0000000
+=======
+  #define LOAD_MEMORY_ADDRESS		0x00003000
+#else
+  /* MMU V2 -  XCHAL_HAVE_PTP_MMU  == 0 */
+>>>>>>> v3.18
 =======
   #define LOAD_MEMORY_ADDRESS		0x00003000
 #else
@@ -67,7 +79,10 @@
   /* Location of the start of the kernel text, _start */
   #define KERNELOFFSET			0x00003000
 <<<<<<< HEAD
+<<<<<<< HEAD
   #define PHYSICAL_MEMORY_ADDRESS	0x00000000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -78,7 +93,10 @@
 
 #define XC_VADDR(offset)		(VIRTUAL_MEMORY_ADDRESS  + offset)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XC_PADDR(offset)		(PHYSICAL_MEMORY_ADDRESS + offset)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -94,7 +112,11 @@
 #define RESET_VECTOR1_VADDR		XC_VADDR(RESET_VECTOR1_VECOFS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if XCHAL_HAVE_VECBASE
+=======
+#if defined(XCHAL_HAVE_VECBASE) && XCHAL_HAVE_VECBASE
+>>>>>>> v3.18
 =======
 #if defined(XCHAL_HAVE_VECBASE) && XCHAL_HAVE_VECBASE
 >>>>>>> v3.18
@@ -112,11 +134,17 @@
 #define DEBUG_VECTOR_VADDR		XC_VADDR(XCHAL_DEBUG_VECOFS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef  XCHAL_NMI_VECTOR_VADDR
 #define XCHAL_NMI_VECTOR_VADDR		XC_VADDR(XCHAL_NMI_VECOFS)
 
 #undef  XCHAL_INTLEVEL7_VECTOR_VADDR
 #define XCHAL_INTLEVEL7_VECTOR_VADDR	XC_VADDR(XCHAL_INTLEVEL7_VECOFS)
+=======
+#define NMI_VECTOR_VADDR		XC_VADDR(XCHAL_NMI_VECOFS)
+
+#define INTLEVEL7_VECTOR_VADDR		XC_VADDR(XCHAL_INTLEVEL7_VECOFS)
+>>>>>>> v3.18
 =======
 #define NMI_VECTOR_VADDR		XC_VADDR(XCHAL_NMI_VECOFS)
 

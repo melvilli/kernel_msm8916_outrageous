@@ -4,6 +4,10 @@ menuconfig TARGET_CORE
 	depends on SCSI && BLOCK
 	select CONFIGFS_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRC_T10DIF
+>>>>>>> v3.18
 =======
 	select CRC_T10DIF
 >>>>>>> v3.18
@@ -18,6 +22,10 @@ if TARGET_CORE
 config TCM_IBLOCK
 	tristate "TCM/IBLOCK Subsystem Plugin for Linux/BLOCK"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select BLK_DEV_INTEGRITY
+>>>>>>> v3.18
 =======
 	select BLK_DEV_INTEGRITY
 >>>>>>> v3.18
@@ -38,7 +46,10 @@ config TCM_PSCSI
 	passthrough access to Linux/SCSI device
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TCM_USER
 	tristate "TCM/USER Subsystem Plugin for Linux"
 	depends on UIO && NET
@@ -46,6 +57,9 @@ config TCM_USER
 	Say Y here to enable the TCM/USER subsystem plugin for a userspace
 	process to handle requests
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/target/loopback/Kconfig"
 source "drivers/target/tcm_fc/Kconfig"

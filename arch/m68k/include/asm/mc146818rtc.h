@@ -11,6 +11,7 @@
 #include <asm/atarihw.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTC_PORT(x)	(TT_RTC_BAS + 2*(x))
 #define RTC_ALWAYS_BCD	0
 
@@ -22,6 +23,8 @@ atari_inb_p(RTC_PORT(1)); \
 atari_outb_p((addr),RTC_PORT(0)); \
 atari_outb_p((val),RTC_PORT(1)); \
 =======
+=======
+>>>>>>> v3.18
 #define ATARI_RTC_PORT(x)	(TT_RTC_BAS + 2*(x))
 #define RTC_ALWAYS_BCD	0
 
@@ -32,6 +35,9 @@ atari_inb_p(ATARI_RTC_PORT(1)); \
 #define CMOS_WRITE(val, addr) ({ \
 atari_outb_p((addr), ATARI_RTC_PORT(0)); \
 atari_outb_p((val), ATARI_RTC_PORT(1)); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 })
 #endif /* CONFIG_ATARI */

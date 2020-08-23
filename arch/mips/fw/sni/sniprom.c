@@ -41,7 +41,12 @@
 #ifdef CONFIG_64BIT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 o32_stk[16384];
+=======
+/* O32 stack has to be 8-byte aligned. */
+static u64 o32_stk[4096];
+>>>>>>> v3.18
 =======
 /* O32 stack has to be 8-byte aligned. */
 static u64 o32_stk[4096];

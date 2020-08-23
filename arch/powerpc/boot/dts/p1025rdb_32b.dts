@@ -106,7 +106,10 @@
 				interrupts = <4 1 0 0>;
 				reg = <0x6>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			};
@@ -115,7 +118,10 @@
 				interrupts = <5 1 0 0>;
 				reg = <0x3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			};

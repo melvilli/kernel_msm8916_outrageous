@@ -103,7 +103,10 @@
 #define U9540_DMC1_BASE		(U8500_PER4_BASE + 0x0A000)
 #define U8500_PRCMU_TCDM_BASE	(U8500_PER4_BASE + 0x68000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define U9540_PRCMU_TCDM_BASE	(U8500_PER4_BASE + 0x6A000)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define U8500_PRCMU_TCPM_BASE   (U8500_PER4_BASE + 0x60000)
@@ -188,7 +191,11 @@
 #define U8500_IO_PHYSICAL	0xa0000000
 /* This is where we map in the ROM to check ASIC IDs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UX500_VIRT_ROM		0xf0000000
+=======
+#define UX500_VIRT_ROM		IOMEM(0xf0000000)
+>>>>>>> v3.18
 =======
 #define UX500_VIRT_ROM		IOMEM(0xf0000000)
 >>>>>>> v3.18

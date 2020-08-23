@@ -4,17 +4,23 @@
  * Authors:
  *	Mitsuru KANDA @USAGI
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Kazunori MIYAZAWA @USAGI
  * 	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  * 		IPv6 support
  * 	YOSHIFUJI Hideaki
  * 		Split up af-specific portion
 =======
+=======
+>>>>>>> v3.18
  *	Kazunori MIYAZAWA @USAGI
  *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  *		IPv6 support
  *	YOSHIFUJI Hideaki
  *		Split up af-specific portion
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  */
@@ -93,7 +99,11 @@ static int xfrm6_init_path(struct xfrm_dst *path, struct dst_entry *dst,
 {
 	if (dst->ops->family == AF_INET6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct rt6_info *rt = (struct rt6_info*)dst;
+=======
+		struct rt6_info *rt = (struct rt6_info *)dst;
+>>>>>>> v3.18
 =======
 		struct rt6_info *rt = (struct rt6_info *)dst;
 >>>>>>> v3.18
@@ -110,7 +120,11 @@ static int xfrm6_fill_dst(struct xfrm_dst *xdst, struct net_device *dev,
 			  const struct flowi *fl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rt6_info *rt = (struct rt6_info*)xdst->route;
+=======
+	struct rt6_info *rt = (struct rt6_info *)xdst->route;
+>>>>>>> v3.18
 =======
 	struct rt6_info *rt = (struct rt6_info *)xdst->route;
 >>>>>>> v3.18
@@ -152,10 +166,13 @@ _decode_session6(struct sk_buff *skb, struct flowi *fl, int reverse)
 	const unsigned char *nh = skb_network_header(skb);
 	u8 nexthdr = nh[IP6CB(skb)->nhoff];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	memset(fl6, 0, sizeof(struct flowi6));
 	fl6->flowi6_mark = skb->mark;
 =======
+=======
+>>>>>>> v3.18
 	int oif = 0;
 
 	if (skb_dst(skb))
@@ -164,6 +181,9 @@ _decode_session6(struct sk_buff *skb, struct flowi *fl, int reverse)
 	memset(fl6, 0, sizeof(struct flowi6));
 	fl6->flowi6_mark = skb->mark;
 	fl6->flowi6_oif = reverse ? skb->skb_iif : oif;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fl6->daddr = reverse ? hdr->saddr : hdr->daddr;
@@ -193,13 +213,19 @@ _decode_session6(struct sk_buff *skb, struct flowi *fl, int reverse)
 			if (!onlyproto && (nh + offset + 4 < skb->data ||
 			     pskb_may_pull(skb, nh + offset + 4 - skb->data))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__be16 *ports = (__be16 *)exthdr;
 
 =======
+=======
+>>>>>>> v3.18
 				__be16 *ports;
 
 				nh = skb_network_header(skb);
 				ports = (__be16 *)(nh + offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				fl6->fl6_sport = ports[!!reverse];
 				fl6->fl6_dport = ports[!reverse];
@@ -210,13 +236,19 @@ _decode_session6(struct sk_buff *skb, struct flowi *fl, int reverse)
 		case IPPROTO_ICMPV6:
 			if (!onlyproto && pskb_may_pull(skb, nh + offset + 2 - skb->data)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u8 *icmp = (u8 *)exthdr;
 
 =======
+=======
+>>>>>>> v3.18
 				u8 *icmp;
 
 				nh = skb_network_header(skb);
 				icmp = (u8 *)(nh + offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				fl6->fl6_icmp_type = icmp[0];
 				fl6->fl6_icmp_code = icmp[1];
@@ -229,8 +261,14 @@ _decode_session6(struct sk_buff *skb, struct flowi *fl, int reverse)
 			if (!onlyproto && pskb_may_pull(skb, nh + offset + 3 - skb->data)) {
 				struct ip6_mh *mh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mh = (struct ip6_mh *)exthdr;
 
+=======
+
+				nh = skb_network_header(skb);
+				mh = (struct ip6_mh *)(nh + offset);
+>>>>>>> v3.18
 =======
 
 				nh = skb_network_header(skb);
@@ -339,7 +377,11 @@ static struct xfrm_policy_afinfo xfrm6_policy_afinfo = {
 	.dst_ops =		&xfrm6_dst_ops,
 	.dst_lookup =		xfrm6_dst_lookup,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_saddr = 		xfrm6_get_saddr,
+=======
+	.get_saddr =		xfrm6_get_saddr,
+>>>>>>> v3.18
 =======
 	.get_saddr =		xfrm6_get_saddr,
 >>>>>>> v3.18
@@ -366,9 +408,15 @@ static struct ctl_table xfrm6_policy_table[] = {
 	{
 		.procname       = "xfrm6_gc_thresh",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data	   	= &init_net.xfrm.xfrm6_dst_ops.gc_thresh,
 		.maxlen	 	= sizeof(int),
 		.mode	   	= 0644,
+=======
+		.data		= &init_net.xfrm.xfrm6_dst_ops.gc_thresh,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+>>>>>>> v3.18
 =======
 		.data		= &init_net.xfrm.xfrm6_dst_ops.gc_thresh,
 		.maxlen		= sizeof(int),
@@ -442,11 +490,17 @@ int __init xfrm6_init(void)
 		goto out_policy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = xfrm6_protocol_init();
 	if (ret)
 		goto out_state;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SYSCTL
 	register_pernet_subsys(&xfrm6_net_ops);
@@ -454,6 +508,11 @@ int __init xfrm6_init(void)
 out:
 	return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_state:
+	xfrm6_state_fini();
+>>>>>>> v3.18
 =======
 out_state:
 	xfrm6_state_fini();
@@ -469,6 +528,10 @@ void xfrm6_fini(void)
 	unregister_pernet_subsys(&xfrm6_net_ops);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xfrm6_protocol_fini();
+>>>>>>> v3.18
 =======
 	xfrm6_protocol_fini();
 >>>>>>> v3.18

@@ -218,20 +218,27 @@ static u32 sh_sir_find_sclk(struct clk *irda_clk)
 {
 	struct cpufreq_frequency_table *freq_table = irda_clk->freq_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk *pclk = clk_get(NULL, "peripheral_clk");
 	u32 limit, min = 0xffffffff, tmp;
 	int i, index = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_frequency_table *pos;
 	struct clk *pclk = clk_get(NULL, "peripheral_clk");
 	u32 limit, min = 0xffffffff, tmp;
 	int index = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	limit = clk_get_rate(pclk);
 	clk_put(pclk);
 
 	/* IrDA can not set over peripheral_clk */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0;
 	     freq_table[i].frequency != CPUFREQ_TABLE_END;
@@ -240,6 +247,10 @@ static u32 sh_sir_find_sclk(struct clk *irda_clk)
 
 		if (freq == CPUFREQ_ENTRY_INVALID)
 			continue;
+=======
+	cpufreq_for_each_valid_entry(pos, freq_table) {
+		u32 freq = pos->frequency;
+>>>>>>> v3.18
 =======
 	cpufreq_for_each_valid_entry(pos, freq_table) {
 		u32 freq = pos->frequency;
@@ -253,7 +264,11 @@ static u32 sh_sir_find_sclk(struct clk *irda_clk)
 		if (tmp < min) {
 			min = tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			index = i;
+=======
+			index = pos - freq_table;
+>>>>>>> v3.18
 =======
 			index = pos - freq_table;
 >>>>>>> v3.18
@@ -778,7 +793,11 @@ static int sh_sir_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_irq(irq, sh_sir_irq, IRQF_DISABLED, "sh_sir", self);
+=======
+	err = devm_request_irq(&pdev->dev, irq, sh_sir_irq, 0, "sh_sir", self);
+>>>>>>> v3.18
 =======
 	err = devm_request_irq(&pdev->dev, irq, sh_sir_irq, 0, "sh_sir", self);
 >>>>>>> v3.18
@@ -817,7 +836,10 @@ static int sh_sir_remove(struct platform_device *pdev)
 	iounmap(self->membase);
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

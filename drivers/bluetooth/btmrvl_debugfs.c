@@ -44,7 +44,11 @@ static ssize_t btmrvl_hscfgcmd_write(struct file *file,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &result);
+=======
+	ret = kstrtol(buf, 10, &result);
+>>>>>>> v3.18
 =======
 	ret = kstrtol(buf, 10, &result);
 >>>>>>> v3.18
@@ -94,7 +98,11 @@ static ssize_t btmrvl_pscmd_write(struct file *file, const char __user *ubuf,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &result);
+=======
+	ret = kstrtol(buf, 10, &result);
+>>>>>>> v3.18
 =======
 	ret = kstrtol(buf, 10, &result);
 >>>>>>> v3.18
@@ -144,7 +152,11 @@ static ssize_t btmrvl_hscmd_write(struct file *file, const char __user *ubuf,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &result);
+=======
+	ret = kstrtol(buf, 10, &result);
+>>>>>>> v3.18
 =======
 	ret = kstrtol(buf, 10, &result);
 >>>>>>> v3.18

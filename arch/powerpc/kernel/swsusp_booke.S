@@ -75,6 +75,7 @@ _GLOBAL(swsusp_arch_suspend)
 
 	/* Save SPRGs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfsprg	r4,0
 	stw	r4,SL_SPRG0(r11)
 	mfsprg	r4,1
@@ -91,6 +92,8 @@ _GLOBAL(swsusp_arch_suspend)
 	stw	r4,SL_SPRG6(r11)
 	mfsprg	r4,7
 =======
+=======
+>>>>>>> v3.18
 	mfspr	r4,SPRN_SPRG0
 	stw	r4,SL_SPRG0(r11)
 	mfspr	r4,SPRN_SPRG1
@@ -106,6 +109,9 @@ _GLOBAL(swsusp_arch_suspend)
 	mfspr	r4,SPRN_SPRG6
 	stw	r4,SL_SPRG6(r11)
 	mfspr	r4,SPRN_SPRG7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stw	r4,SL_SPRG7(r11)
 
@@ -160,6 +166,7 @@ _GLOBAL(swsusp_arch_resume)
 	ori	r11,r11,swsusp_save_area@l
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lwz	r4,SL_SPRG0(r11)
 	mtsprg	0,r4
 	lwz	r4,SL_SPRG1(r11)
@@ -177,6 +184,8 @@ _GLOBAL(swsusp_arch_resume)
 	lwz	r4,SL_SPRG7(r11)
 	mtsprg	7,r4
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Mappings from virtual addresses to physical addresses may be
 	 * different than they were prior to restoring hibernation state. 
@@ -201,6 +210,9 @@ _GLOBAL(swsusp_arch_resume)
 	mtspr	SPRN_SPRG6,r4
 	lwz	r4,SL_SPRG7(r11)
 	mtspr	SPRN_SPRG7,r4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* restore the MSR */

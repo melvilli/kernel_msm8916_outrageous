@@ -4,7 +4,10 @@
  * Copyright (C) 1999-2002 Russell King.
  * Copyright (C) 2012 ARM Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -75,7 +78,10 @@
  */
 extern void flush_cache_all(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_cache_louis(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void flush_cache_range(struct vm_area_struct *vma, unsigned long start, unsigned long end);
@@ -99,12 +105,15 @@ extern void __dma_map_area(const void *, size_t, int);
 extern void __dma_unmap_area(const void *, size_t, int);
 extern void __dma_flush_range(const void *, const void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __dma_inv_range(const void *, const void *);
 extern void __dma_clean_range(const void *, const void *);
 
 #define dmac_flush_range __dma_flush_range
 #define dmac_inv_range __dma_inv_range
 #define dmac_clean_range __dma_clean_range
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -170,6 +179,7 @@ int set_memory_rw(unsigned long addr, int numpages);
 int set_memory_x(unsigned long addr, int numpages);
 int set_memory_nx(unsigned long addr, int numpages);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_FREE_PAGES_RDONLY
 #define mark_addr_rdonly(a)	set_memory_ro((unsigned long)a, 1);
@@ -178,6 +188,8 @@ int set_memory_nx(unsigned long addr, int numpages);
 #define mark_addr_rdonly(a)
 #define mark_addr_rdwrite(a)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

@@ -61,7 +61,11 @@
 #define HTC_CONN_FLGS_DISABLE_CRED_FLOW_CTRL          (1 << 3)
 #define HTC_CONN_FLGS_SET_RECV_ALLOC_SHIFT    8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HTC_CONN_FLGS_SET_RECV_ALLOC_MASK     0xFF00
+=======
+#define HTC_CONN_FLGS_SET_RECV_ALLOC_MASK     0xFF00U
+>>>>>>> v3.18
 =======
 #define HTC_CONN_FLGS_SET_RECV_ALLOC_MASK     0xFF00U
 >>>>>>> v3.18

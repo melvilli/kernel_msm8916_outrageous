@@ -12,16 +12,22 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drmP.h>
 #include <drm/drm_crtc_helper.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <drm/drmP.h>
 #include <drm/drm_crtc_helper.h>
 
 #include <linux/component.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <drm/exynos_drm.h>
 
@@ -45,12 +51,15 @@
 #define DRIVER_MINOR	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VBLANK_OFF_DELAY	50000
 
 /* platform device pointer for eynos drm device. */
 static struct platform_device *exynos_drm_pdev;
 
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device *exynos_drm_pdev;
 
 static DEFINE_MUTEX(drm_component_lock);
@@ -64,6 +73,9 @@ struct component_dev {
 	unsigned int dev_type_flag;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int exynos_drm_load(struct drm_device *dev, unsigned long flags)
 {
@@ -71,6 +83,7 @@ static int exynos_drm_load(struct drm_device *dev, unsigned long flags)
 	int ret;
 	int nr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_DRIVER("%s\n", __FILE__);
 
@@ -82,12 +95,17 @@ static int exynos_drm_load(struct drm_device *dev, unsigned long flags)
 
 	INIT_LIST_HEAD(&private->pageflip_event_list);
 =======
+=======
+>>>>>>> v3.18
 	private = kzalloc(sizeof(struct exynos_drm_private), GFP_KERNEL);
 	if (!private)
 		return -ENOMEM;
 
 	INIT_LIST_HEAD(&private->pageflip_event_list);
 	dev_set_drvdata(dev->dev, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->dev_private = (void *)private;
 
@@ -101,7 +119,11 @@ static int exynos_drm_load(struct drm_device *dev, unsigned long flags)
 	if (ret < 0) {
 		DRM_ERROR("failed to create iommu mapping.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_crtc;
+=======
+		goto err_free_private;
+>>>>>>> v3.18
 =======
 		goto err_free_private;
 >>>>>>> v3.18
@@ -109,6 +131,7 @@ static int exynos_drm_load(struct drm_device *dev, unsigned long flags)
 
 	drm_mode_config_init(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* init kms poll for handling hpd */
 	drm_kms_helper_poll_init(dev);
@@ -173,6 +196,8 @@ err_release_iommu_mapping:
 err_crtc:
 	drm_mode_config_cleanup(dev);
 =======
+=======
+>>>>>>> v3.18
 	exynos_drm_mode_config_init(dev);
 
 	for (nr = 0; nr < MAX_PLANE; nr++) {
@@ -240,6 +265,9 @@ err_mode_config_cleanup:
 	drm_mode_config_cleanup(dev);
 	drm_release_iommu_mapping(dev);
 err_free_private:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(private);
 
@@ -248,6 +276,7 @@ err_free_private:
 
 static int exynos_drm_unload(struct drm_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_DRIVER("%s\n", __FILE__);
 
@@ -261,6 +290,8 @@ static int exynos_drm_unload(struct drm_device *dev)
 	kfree(dev->dev_private);
 
 =======
+=======
+>>>>>>> v3.18
 	exynos_drm_device_subdrv_remove(dev);
 
 	exynos_drm_fbdev_fini(dev);
@@ -272,6 +303,9 @@ static int exynos_drm_unload(struct drm_device *dev)
 	drm_release_iommu_mapping(dev);
 
 	kfree(dev->dev_private);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->dev_private = NULL;
 
@@ -279,12 +313,15 @@ static int exynos_drm_unload(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int exynos_drm_open(struct drm_device *dev, struct drm_file *file)
 {
 	struct drm_exynos_file_private *file_priv;
 
 	DRM_DEBUG_DRIVER("%s\n", __FILE__);
 =======
+=======
+>>>>>>> v3.18
 static int exynos_drm_suspend(struct drm_device *dev, pm_message_t state)
 {
 	struct drm_connector *connector;
@@ -328,6 +365,9 @@ static int exynos_drm_open(struct drm_device *dev, struct drm_file *file)
 {
 	struct drm_exynos_file_private *file_priv;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	file_priv = kzalloc(sizeof(*file_priv), GFP_KERNEL);
@@ -337,8 +377,11 @@ static int exynos_drm_open(struct drm_device *dev, struct drm_file *file)
 	file->driver_priv = file_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return exynos_drm_subdrv_open(dev, file);
 =======
+=======
+>>>>>>> v3.18
 	ret = exynos_drm_subdrv_open(dev, file);
 	if (ret)
 		goto err_file_priv_free;
@@ -349,12 +392,16 @@ err_file_priv_free:
 	kfree(file_priv);
 	file->driver_priv = NULL;
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void exynos_drm_preclose(struct drm_device *dev,
 					struct drm_file *file)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct exynos_drm_private *private = dev->dev_private;
 	struct drm_pending_vblank_event *e, *t;
@@ -383,6 +430,8 @@ static void exynos_drm_postclose(struct drm_device *dev, struct drm_file *file)
 	if (!file->driver_priv)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	exynos_drm_subdrv_close(dev, file);
 }
 
@@ -413,6 +462,9 @@ static void exynos_drm_postclose(struct drm_device *dev, struct drm_file *file)
 		e->destroy(e);
 	}
 	spin_unlock_irqrestore(&dev->event_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(file->driver_priv);
@@ -422,8 +474,11 @@ static void exynos_drm_postclose(struct drm_device *dev, struct drm_file *file)
 static void exynos_drm_lastclose(struct drm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_DRIVER("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	exynos_drm_fbdev_restore_mode(dev);
@@ -436,6 +491,7 @@ static const struct vm_operations_struct exynos_drm_gem_vm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_ioctl_desc exynos_ioctls[] = {
 	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_CREATE, exynos_drm_gem_create_ioctl,
 			DRM_UNLOCKED | DRM_AUTH),
@@ -444,6 +500,11 @@ static struct drm_ioctl_desc exynos_ioctls[] = {
 			DRM_AUTH),
 	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_MMAP,
 			exynos_drm_gem_mmap_ioctl, DRM_UNLOCKED | DRM_AUTH),
+=======
+static const struct drm_ioctl_desc exynos_ioctls[] = {
+	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_CREATE, exynos_drm_gem_create_ioctl,
+			DRM_UNLOCKED | DRM_AUTH),
+>>>>>>> v3.18
 =======
 static const struct drm_ioctl_desc exynos_ioctls[] = {
 	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_CREATE, exynos_drm_gem_create_ioctl,
@@ -484,38 +545,54 @@ static const struct file_operations exynos_drm_driver_fops = {
 
 static struct drm_driver exynos_drm_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_features	= DRIVER_HAVE_IRQ | DRIVER_MODESET |
 					DRIVER_GEM | DRIVER_PRIME,
 	.load			= exynos_drm_load,
 	.unload			= exynos_drm_unload,
 =======
+=======
+>>>>>>> v3.18
 	.driver_features	= DRIVER_MODESET | DRIVER_GEM | DRIVER_PRIME,
 	.load			= exynos_drm_load,
 	.unload			= exynos_drm_unload,
 	.suspend		= exynos_drm_suspend,
 	.resume			= exynos_drm_resume,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open			= exynos_drm_open,
 	.preclose		= exynos_drm_preclose,
 	.lastclose		= exynos_drm_lastclose,
 	.postclose		= exynos_drm_postclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_vblank_counter	= drm_vblank_count,
 	.enable_vblank		= exynos_drm_crtc_enable_vblank,
 	.disable_vblank		= exynos_drm_crtc_disable_vblank,
 	.gem_init_object	= exynos_drm_gem_init_object,
 =======
+=======
+>>>>>>> v3.18
 	.set_busid		= drm_platform_set_busid,
 	.get_vblank_counter	= drm_vblank_count,
 	.enable_vblank		= exynos_drm_crtc_enable_vblank,
 	.disable_vblank		= exynos_drm_crtc_disable_vblank,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.gem_free_object	= exynos_drm_gem_free_object,
 	.gem_vm_ops		= &exynos_drm_gem_vm_ops,
 	.dumb_create		= exynos_drm_gem_dumb_create,
 	.dumb_map_offset	= exynos_drm_gem_dumb_map_offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dumb_destroy		= exynos_drm_gem_dumb_destroy,
+=======
+	.dumb_destroy		= drm_gem_dumb_destroy,
+>>>>>>> v3.18
 =======
 	.dumb_destroy		= drm_gem_dumb_destroy,
 >>>>>>> v3.18
@@ -525,6 +602,10 @@ static struct drm_driver exynos_drm_driver = {
 	.gem_prime_import	= exynos_dmabuf_prime_import,
 	.ioctls			= exynos_ioctls,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.num_ioctls		= ARRAY_SIZE(exynos_ioctls),
+>>>>>>> v3.18
 =======
 	.num_ioctls		= ARRAY_SIZE(exynos_ioctls),
 >>>>>>> v3.18
@@ -536,6 +617,7 @@ static struct drm_driver exynos_drm_driver = {
 	.minor	= DRIVER_MINOR,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int exynos_drm_platform_probe(struct platform_device *pdev)
 {
@@ -553,6 +635,8 @@ static int exynos_drm_platform_remove(struct platform_device *pdev)
 
 	drm_platform_exit(&exynos_drm_driver, pdev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int exynos_drm_sys_suspend(struct device *dev)
 {
@@ -645,11 +729,15 @@ int exynos_drm_component_add(struct device *dev,
 	mutex_lock(&drm_component_lock);
 	list_add_tail(&cdev->list, &drm_component_list);
 	mutex_unlock(&drm_component_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct platform_driver exynos_drm_platform_driver = {
 	.probe		= exynos_drm_platform_probe,
@@ -666,6 +754,8 @@ static int __init exynos_drm_init(void)
 
 	DRM_DEBUG_DRIVER("%s\n", __FILE__);
 =======
+=======
+>>>>>>> v3.18
 void exynos_drm_component_del(struct device *dev,
 				enum exynos_drm_device_type dev_type)
 {
@@ -784,11 +874,15 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 
 	pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
 	exynos_drm_driver.num_ioctls = ARRAY_SIZE(exynos_ioctls);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_DRM_EXYNOS_FIMD
 	ret = platform_driver_register(&fimd_driver);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_fimd;
 #endif
@@ -820,6 +914,8 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto out_g2d;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 #endif
 
@@ -859,6 +955,9 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 	ret = platform_driver_register(&g2d_driver);
 	if (ret < 0)
 		goto err_del_component_master;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -866,7 +965,11 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 	ret = platform_driver_register(&fimc_driver);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_fimc;
+=======
+		goto err_unregister_g2d_drv;
+>>>>>>> v3.18
 =======
 		goto err_unregister_g2d_drv;
 >>>>>>> v3.18
@@ -876,7 +979,11 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 	ret = platform_driver_register(&rotator_driver);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_rotator;
+=======
+		goto err_unregister_fimc_drv;
+>>>>>>> v3.18
 =======
 		goto err_unregister_fimc_drv;
 >>>>>>> v3.18
@@ -886,7 +993,11 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 	ret = platform_driver_register(&gsc_driver);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_gsc;
+=======
+		goto err_unregister_rotator_drv;
+>>>>>>> v3.18
 =======
 		goto err_unregister_rotator_drv;
 >>>>>>> v3.18
@@ -895,6 +1006,7 @@ static int exynos_drm_platform_probe(struct platform_device *pdev)
 #ifdef CONFIG_DRM_EXYNOS_IPP
 	ret = platform_driver_register(&ipp_driver);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_ipp;
 
@@ -926,6 +1038,8 @@ out_ipp_dev:
 	platform_driver_unregister(&ipp_driver);
 out_ipp:
 =======
+=======
+>>>>>>> v3.18
 		goto err_unregister_gsc_drv;
 
 	ret = exynos_platform_device_ipp_register();
@@ -939,13 +1053,20 @@ out_ipp:
 err_unregister_ipp_drv:
 	platform_driver_unregister(&ipp_driver);
 err_unregister_gsc_drv:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_DRM_EXYNOS_GSC
 	platform_driver_unregister(&gsc_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_gsc:
+=======
+err_unregister_rotator_drv:
+>>>>>>> v3.18
 =======
 err_unregister_rotator_drv:
 >>>>>>> v3.18
@@ -954,7 +1075,11 @@ err_unregister_rotator_drv:
 #ifdef CONFIG_DRM_EXYNOS_ROTATOR
 	platform_driver_unregister(&rotator_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_rotator:
+=======
+err_unregister_fimc_drv:
+>>>>>>> v3.18
 =======
 err_unregister_fimc_drv:
 >>>>>>> v3.18
@@ -963,7 +1088,11 @@ err_unregister_fimc_drv:
 #ifdef CONFIG_DRM_EXYNOS_FIMC
 	platform_driver_unregister(&fimc_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_fimc:
+=======
+err_unregister_g2d_drv:
+>>>>>>> v3.18
 =======
 err_unregister_g2d_drv:
 >>>>>>> v3.18
@@ -971,6 +1100,7 @@ err_unregister_g2d_drv:
 
 #ifdef CONFIG_DRM_EXYNOS_G2D
 	platform_driver_unregister(&g2d_driver);
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_g2d:
 #endif
@@ -990,6 +1120,8 @@ out_mixer:
 	platform_driver_unregister(&hdmi_driver);
 out_hdmi:
 =======
+=======
+>>>>>>> v3.18
 err_del_component_master:
 #endif
 	component_master_del(&pdev->dev, &exynos_drm_ops);
@@ -1010,19 +1142,26 @@ err_unregister_dp_drv:
 #ifdef CONFIG_DRM_EXYNOS_DP
 	platform_driver_unregister(&dp_driver);
 err_unregister_fimd_drv:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_DRM_EXYNOS_FIMD
 	platform_driver_unregister(&fimd_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_fimd:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __exit exynos_drm_exit(void)
 {
@@ -1032,6 +1171,10 @@ static void __exit exynos_drm_exit(void)
 
 	platform_driver_unregister(&exynos_drm_platform_driver);
 
+=======
+static int exynos_drm_platform_remove(struct platform_device *pdev)
+{
+>>>>>>> v3.18
 =======
 static int exynos_drm_platform_remove(struct platform_device *pdev)
 {
@@ -1059,14 +1202,18 @@ static int exynos_drm_platform_remove(struct platform_device *pdev)
 
 #ifdef CONFIG_DRM_EXYNOS_HDMI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exynos_platform_device_hdmi_unregister();
 	platform_driver_unregister(&exynos_drm_common_hdmi_driver);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	platform_driver_unregister(&mixer_driver);
 	platform_driver_unregister(&hdmi_driver);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_DRM_EXYNOS_VIDI
 	platform_driver_unregister(&vidi_driver);
@@ -1076,6 +1223,8 @@ static int exynos_drm_platform_remove(struct platform_device *pdev)
 	platform_driver_unregister(&fimd_driver);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DRM_EXYNOS_FIMD
 	platform_driver_unregister(&fimd_driver);
 #endif
@@ -1152,6 +1301,9 @@ static void exynos_drm_exit(void)
 	exynos_drm_remove_vidi();
 #endif
 	platform_device_unregister(exynos_drm_pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

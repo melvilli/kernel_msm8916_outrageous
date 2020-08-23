@@ -27,7 +27,11 @@
 #include "psb_reg.h"
 #include "psb_intel_reg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 =======
 #include <asm/intel-mid.h>
 >>>>>>> v3.18
@@ -45,6 +49,12 @@ static int oaktrail_output_init(struct drm_device *dev)
 	if (dev_priv->hdmi_priv)
 		oaktrail_hdmi_init(dev, &dev_priv->mode_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	psb_intel_sdvo_init(dev, SDVOB);
+
+>>>>>>> v3.18
 =======
 
 	psb_intel_sdvo_init(dev, SDVOB);
@@ -537,6 +547,10 @@ static int oaktrail_chip_setup(struct drm_device *dev)
 		psb_intel_init_bios(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gma_intel_setup_gmbus(dev);
+>>>>>>> v3.18
 =======
 	gma_intel_setup_gmbus(dev);
 >>>>>>> v3.18
@@ -549,6 +563,10 @@ static void oaktrail_teardown(struct drm_device *dev)
 	struct drm_psb_private *dev_priv = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gma_intel_teardown_gmbus(dev);
+>>>>>>> v3.18
 =======
 	gma_intel_teardown_gmbus(dev);
 >>>>>>> v3.18
@@ -565,6 +583,10 @@ const struct psb_ops oaktrail_chip_ops = {
 	.hdmi_mask = (1 << 1),
 	.lvds_mask = (1 << 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.sdvo_mask = (1 << 1),
+>>>>>>> v3.18
 =======
 	.sdvo_mask = (1 << 1),
 >>>>>>> v3.18

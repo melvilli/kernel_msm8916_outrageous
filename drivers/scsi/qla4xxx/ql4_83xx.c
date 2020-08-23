@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)   2003-2012 QLogic Corporation
+=======
+ * Copyright (c)   2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)   2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -254,6 +258,7 @@ void qla4_83xx_rom_lock_recovery(struct scsi_qla_host *ha)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * qla4_83xx_ms_mem_write_128b - Writes data to MS/off-chip memory
  * @ha: Pointer to adapter structure
@@ -358,6 +363,8 @@ exit_ms_mem_write:
 	return ret_val;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define INTENT_TO_RECOVER	0x01
@@ -473,7 +480,11 @@ int qla4_83xx_drv_lock(struct scsi_qla_host *ha)
 				/* Recovery Failed, some other function
 				 * has the lock, wait for 2secs and retry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ql4_printk(KERN_INFO, ha, "%s: IDC lock Recovery by %d failed, Retrying timout\n",
+=======
+				ql4_printk(KERN_INFO, ha, "%s: IDC lock Recovery by %d failed, Retrying timeout\n",
+>>>>>>> v3.18
 =======
 				ql4_printk(KERN_INFO, ha, "%s: IDC lock Recovery by %d failed, Retrying timeout\n",
 >>>>>>> v3.18
@@ -772,7 +783,11 @@ static int qla4_83xx_copy_bootloader(struct scsi_qla_host *ha)
 
 	/* 128 bit/16 byte write to MS memory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret_val = qla4_83xx_ms_mem_write_128b(ha, dest, (uint32_t *)p_cache,
+=======
+	ret_val = qla4_8xxx_ms_mem_write_128b(ha, dest, (uint32_t *)p_cache,
+>>>>>>> v3.18
 =======
 	ret_val = qla4_8xxx_ms_mem_write_128b(ha, dest, (uint32_t *)p_cache,
 >>>>>>> v3.18
@@ -1320,6 +1335,7 @@ static int qla4_83xx_restart(struct scsi_qla_host *ha)
 {
 	int ret_val = QLA_SUCCESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	qla4_83xx_process_stop_seq(ha);
 
@@ -1327,6 +1343,8 @@ static int qla4_83xx_restart(struct scsi_qla_host *ha)
 	if (!test_and_clear_bit(AF_83XX_NO_FW_DUMP, &ha->flags))
 		qla4_8xxx_get_minidump(ha);
 =======
+=======
+>>>>>>> v3.18
 	uint32_t idc_ctrl;
 
 	qla4_83xx_process_stop_seq(ha);
@@ -1345,6 +1363,9 @@ static int qla4_83xx_restart(struct scsi_qla_host *ha)
 	} else {
 		qla4_8xxx_get_minidump(ha);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	qla4_83xx_process_init_seq(ha);
@@ -1510,9 +1531,15 @@ int qla4_83xx_isp_reset(struct scsi_qla_host *ha)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For ISP8324, Reset owner is NIC, iSCSI or FCOE based on priority
 	 * and which drivers are present. Unlike ISP8022, the function setting
 	 * NEED_RESET, may not be the Reset owner. */
+=======
+	/* For ISP8324 and ISP8042, Reset owner is NIC, iSCSI or FCOE based on
+	 * priority and which drivers are present. Unlike ISP8022, the function
+	 * setting NEED_RESET, may not be the Reset owner. */
+>>>>>>> v3.18
 =======
 	/* For ISP8324 and ISP8042, Reset owner is NIC, iSCSI or FCOE based on
 	 * priority and which drivers are present. Unlike ISP8022, the function
@@ -1707,7 +1734,10 @@ void qla4_83xx_disable_pause(struct scsi_qla_host *ha)
 	ha->isp_ops->idc_unlock(ha);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * qla4_83xx_is_detached - Check if we are marked invisible.
@@ -1728,4 +1758,7 @@ int qla4_83xx_is_detached(struct scsi_qla_host *ha)
 
 	return QLA_ERROR;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

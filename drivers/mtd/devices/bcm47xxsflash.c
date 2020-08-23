@@ -2,6 +2,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -17,7 +21,10 @@ MODULE_DESCRIPTION("Serial flash driver for BCMA bus");
 static const char * const probes[] = { "bcm47xxpart", NULL };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**************************************************
  * Various helpers
  **************************************************/
@@ -105,6 +112,9 @@ static int bcm47xxsflash_erase(struct mtd_info *mtd, struct erase_info *erase)
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bcm47xxsflash_read(struct mtd_info *mtd, loff_t from, size_t len,
 			      size_t *retlen, u_char *buf)
@@ -123,7 +133,10 @@ static int bcm47xxsflash_read(struct mtd_info *mtd, loff_t from, size_t len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bcm47xxsflash_write_st(struct mtd_info *mtd, u32 offset, size_t len,
 				  const u_char *buf)
 {
@@ -245,6 +258,9 @@ static int bcm47xxsflash_write(struct mtd_info *mtd, loff_t to, size_t len,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void bcm47xxsflash_fill_mtd(struct bcm47xxsflash *b47s)
 {
@@ -254,6 +270,7 @@ static void bcm47xxsflash_fill_mtd(struct bcm47xxsflash *b47s)
 	mtd->name = "bcm47xxsflash";
 	mtd->owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtd->type = MTD_ROM;
 	mtd->size = b47s->size;
 	mtd->_read = bcm47xxsflash_read;
@@ -262,6 +279,8 @@ static void bcm47xxsflash_fill_mtd(struct bcm47xxsflash *b47s)
 	mtd->flags = MTD_CAP_ROM;
 	mtd->writebufsize = mtd->writesize = 1;
 =======
+=======
+>>>>>>> v3.18
 
 	mtd->type = MTD_NORFLASH;
 	mtd->flags = MTD_CAP_NORFLASH;
@@ -273,6 +292,9 @@ static void bcm47xxsflash_fill_mtd(struct bcm47xxsflash *b47s)
 	mtd->_erase = bcm47xxsflash_erase;
 	mtd->_read = bcm47xxsflash_read;
 	mtd->_write = bcm47xxsflash_write;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -281,7 +303,10 @@ static void bcm47xxsflash_fill_mtd(struct bcm47xxsflash *b47s)
  **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bcm47xxsflash_bcma_cc_read(struct bcm47xxsflash *b47s, u16 offset)
 {
 	return bcma_cc_read32(b47s->bcma_cc, offset);
@@ -293,6 +318,9 @@ static void bcm47xxsflash_bcma_cc_write(struct bcm47xxsflash *b47s, u16 offset,
 	bcma_cc_write32(b47s->bcma_cc, offset, value);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bcm47xxsflash_bcma_probe(struct platform_device *pdev)
 {
@@ -300,6 +328,7 @@ static int bcm47xxsflash_bcma_probe(struct platform_device *pdev)
 	struct bcm47xxsflash *b47s;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	b47s = kzalloc(sizeof(*b47s), GFP_KERNEL);
 	if (!b47s) {
@@ -310,6 +339,8 @@ static int bcm47xxsflash_bcma_probe(struct platform_device *pdev)
 
 	b47s->bcma_cc = container_of(sflash, struct bcma_drv_cc, sflash);
 =======
+=======
+>>>>>>> v3.18
 	b47s = devm_kzalloc(&pdev->dev, sizeof(*b47s), GFP_KERNEL);
 	if (!b47s)
 		return -ENOMEM;
@@ -318,6 +349,9 @@ static int bcm47xxsflash_bcma_probe(struct platform_device *pdev)
 	b47s->bcma_cc = container_of(sflash, struct bcma_drv_cc, sflash);
 	b47s->cc_read = bcm47xxsflash_bcma_cc_read;
 	b47s->cc_write = bcm47xxsflash_bcma_cc_write;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (b47s->bcma_cc->capabilities & BCMA_CC_CAP_FLASHT) {
@@ -339,6 +373,7 @@ static int bcm47xxsflash_bcma_probe(struct platform_device *pdev)
 	if (err) {
 		pr_err("Failed to register MTD device: %d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_dev_reg;
 	}
 
@@ -349,6 +384,8 @@ err_dev_reg:
 out:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -356,6 +393,9 @@ out:
 		pr_warn("Serial flash busy\n");
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -366,7 +406,10 @@ static int bcm47xxsflash_bcma_remove(struct platform_device *pdev)
 
 	mtd_device_unregister(&b47s->mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(b47s);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -387,6 +430,7 @@ static struct platform_driver bcma_sflash_driver = {
  **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init bcm47xxsflash_init(void)
 {
 	int err;
@@ -406,6 +450,9 @@ static void __exit bcm47xxsflash_exit(void)
 
 module_init(bcm47xxsflash_init);
 module_exit(bcm47xxsflash_exit);
+=======
+module_platform_driver(bcma_sflash_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(bcma_sflash_driver);
 >>>>>>> v3.18

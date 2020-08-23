@@ -10,6 +10,7 @@
 #include "persistent-data/dm-block-manager.h"
 #include "persistent-data/dm-space-map.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define THIN_METADATA_BLOCK_SIZE 4096
 
@@ -21,6 +22,8 @@
  */
 #define THIN_METADATA_MAX_SECTORS (255 * (1 << 14) * (THIN_METADATA_BLOCK_SIZE / (1 << SECTOR_SHIFT)))
 =======
+=======
+>>>>>>> v3.18
 #include "persistent-data/dm-space-map-metadata.h"
 
 #define THIN_METADATA_BLOCK_SIZE DM_SM_METADATA_BLOCK_SIZE
@@ -29,6 +32,9 @@
  * The metadata device is currently limited in size.
  */
 #define THIN_METADATA_MAX_SECTORS DM_SM_METADATA_MAX_SECTORS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -39,12 +45,18 @@
 /*----------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Thin metadata superblock flags.
  */
 #define THIN_METADATA_NEEDS_CHECK_FLAG (1 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dm_pool_metadata;
 struct dm_thin_device;
@@ -151,7 +163,11 @@ dm_thin_id dm_thin_dev_id(struct dm_thin_device *td);
 struct dm_thin_lookup_result {
 	dm_block_t block;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned shared:1;
+=======
+	bool shared:1;
+>>>>>>> v3.18
 =======
 	bool shared:1;
 >>>>>>> v3.18
@@ -221,6 +237,10 @@ int dm_pool_resize_metadata_dev(struct dm_pool_metadata *pmd, dm_block_t new_siz
  */
 void dm_pool_metadata_read_only(struct dm_pool_metadata *pmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void dm_pool_metadata_read_write(struct dm_pool_metadata *pmd);
+>>>>>>> v3.18
 =======
 void dm_pool_metadata_read_write(struct dm_pool_metadata *pmd);
 >>>>>>> v3.18
@@ -231,13 +251,19 @@ int dm_pool_register_metadata_threshold(struct dm_pool_metadata *pmd,
 					void *context);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Updates the superblock immediately.
  */
 int dm_pool_metadata_set_needs_check(struct dm_pool_metadata *pmd);
 bool dm_pool_metadata_needs_check(struct dm_pool_metadata *pmd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*----------------------------------------------------------------*/
 

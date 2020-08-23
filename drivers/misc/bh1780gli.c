@@ -24,6 +24,10 @@
 #include <linux/delay.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -112,7 +116,11 @@ static ssize_t bh1780_store_power_state(struct device *dev,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = strict_strtoul(buf, 0, &val);
+=======
+	error = kstrtoul(buf, 0, &val);
+>>>>>>> v3.18
 =======
 	error = kstrtoul(buf, 0, &val);
 >>>>>>> v3.18
@@ -157,6 +165,7 @@ static int bh1780_probe(struct i2c_client *client,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bh1780_data *ddata = NULL;
 	struct i2c_adapter *adapter = to_i2c_adapter(client->dev.parent);
 
@@ -171,6 +180,8 @@ static int bh1780_probe(struct i2c_client *client,
 		goto err_op_failed;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct bh1780_data *ddata;
 	struct i2c_adapter *adapter = to_i2c_adapter(client->dev.parent);
 
@@ -181,6 +192,9 @@ static int bh1780_probe(struct i2c_client *client,
 			     GFP_KERNEL);
 	if (ddata == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ddata->client = client;
@@ -189,7 +203,11 @@ static int bh1780_probe(struct i2c_client *client,
 	ret = bh1780_read(ddata, BH1780_REG_PARTID, "PART ID");
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_op_failed;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -199,6 +217,7 @@ static int bh1780_probe(struct i2c_client *client,
 
 	mutex_init(&ddata->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = sysfs_create_group(&client->dev.kobj, &bh1780_attr_group);
 	if (ret)
@@ -212,16 +231,23 @@ err_op_failed:
 =======
 	return sysfs_create_group(&client->dev.kobj, &bh1780_attr_group);
 >>>>>>> v3.18
+=======
+	return sysfs_create_group(&client->dev.kobj, &bh1780_attr_group);
+>>>>>>> v3.18
 }
 
 static int bh1780_remove(struct i2c_client *client)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bh1780_data *ddata;
 
 	ddata = i2c_get_clientdata(client);
 	sysfs_remove_group(&client->dev.kobj, &bh1780_attr_group);
 	kfree(ddata);
+=======
+	sysfs_remove_group(&client->dev.kobj, &bh1780_attr_group);
+>>>>>>> v3.18
 =======
 	sysfs_remove_group(&client->dev.kobj, &bh1780_attr_group);
 >>>>>>> v3.18
@@ -278,7 +304,10 @@ static const struct i2c_device_id bh1780_id[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id of_bh1780_match[] = {
 	{ .compatible = "rohm,bh1780gli", },
@@ -288,6 +317,9 @@ static const struct of_device_id of_bh1780_match[] = {
 MODULE_DEVICE_TABLE(of, of_bh1780_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver bh1780_driver = {
 	.probe		= bh1780_probe,
@@ -297,6 +329,10 @@ static struct i2c_driver bh1780_driver = {
 		.name = "bh1780",
 		.pm	= &bh1780_pm,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(of_bh1780_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(of_bh1780_match),
 >>>>>>> v3.18

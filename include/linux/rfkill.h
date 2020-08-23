@@ -116,11 +116,16 @@ void rfkill_pause_polling(struct rfkill *rfkill);
  * core stops polling anyway
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_RFKILL_PM
 void rfkill_resume_polling(struct rfkill *rfkill);
 #else
 static inline void rfkill_resume_polling(struct rfkill *rfkill) { }
 #endif
+=======
+void rfkill_resume_polling(struct rfkill *rfkill);
+
+>>>>>>> v3.18
 =======
 void rfkill_resume_polling(struct rfkill *rfkill);
 

@@ -9,6 +9,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * SHMMAX, SHMMNI and SHMALL are upper limits are defaults which can
  * be increased by sysctl
  */
@@ -23,6 +24,8 @@
 
 
 =======
+=======
+>>>>>>> v3.18
  * SHMMNI, SHMMAX and SHMALL are default upper limits which can be
  * modified by sysctl. The SHMMAX and SHMALL values have been chosen to
  * be as large possible without facilitating scenarios where userspace
@@ -37,6 +40,9 @@
 #define SHMALL (ULONG_MAX - (1UL << 24)) /* max shm system wide (pages) */
 #define SHMSEG SHMMNI			 /* max shared segs per process */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Obsolete, used only for backwards compatibility and libc5 compiles */
 struct shmid_ds {
@@ -86,17 +92,23 @@ struct	shminfo {
 struct shm_info {
 	int used_ids;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long shm_tot;	/* total allocated shm */
 	unsigned long shm_rss;	/* total resident shm */
 	unsigned long shm_swp;	/* total swapped shm */
 	unsigned long swap_attempts;
 	unsigned long swap_successes;
 =======
+=======
+>>>>>>> v3.18
 	__kernel_ulong_t shm_tot;	/* total allocated shm */
 	__kernel_ulong_t shm_rss;	/* total resident shm */
 	__kernel_ulong_t shm_swp;	/* total swapped shm */
 	__kernel_ulong_t swap_attempts;
 	__kernel_ulong_t swap_successes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

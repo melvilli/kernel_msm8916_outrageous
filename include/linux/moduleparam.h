@@ -37,8 +37,11 @@ static const char __UNIQUE_ID(name)[]					  \
 struct kernel_param;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kernel_param_ops {
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flags available for kernel_param_ops
  *
@@ -51,6 +54,9 @@ enum {
 struct kernel_param_ops {
 	/* How the ops should behave */
 	unsigned int flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Returns 0, or -errno.  arg is in kp->arg. */
 	int (*set)(const char *val, const struct kernel_param *kp);
@@ -61,7 +67,10 @@ struct kernel_param_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flags available for kernel_param
  *
@@ -71,13 +80,21 @@ enum {
 	KERNEL_PARAM_FL_UNSAFE = (1 << 0)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kernel_param {
 	const char *name;
 	const struct kernel_param_ops *ops;
 	u16 perm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s16 level;
+=======
+	s8 level;
+	u8 flags;
+>>>>>>> v3.18
 =======
 	s8 level;
 	u8 flags;
@@ -90,6 +107,11 @@ struct kernel_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct kernel_param __start___param[], __stop___param[];
+
+>>>>>>> v3.18
 =======
 extern const struct kernel_param __start___param[], __stop___param[];
 
@@ -140,13 +162,19 @@ struct kparam_array
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * module_param_unsafe - same as module_param but taints kernel
  */
 #define module_param_unsafe(name, type, perm)			\
 	module_param_named_unsafe(name, name, type, perm)
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * module_param_named - typesafe helper for a renamed module/cmdline parameter
  * @name: a valid C identifier which is the parameter name.
@@ -165,7 +193,10 @@ struct kparam_array
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * module_param_named_unsafe - same as module_param_named but taints kernel
  */
 #define module_param_named_unsafe(name, value, type, perm)		\
@@ -174,6 +205,9 @@ struct kparam_array
 	__MODULE_PARM_TYPE(name, #type)
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * module_param_cb - general callback for a module/cmdline parameter
  * @name: a valid C identifier which is the parameter name.
@@ -184,13 +218,19 @@ struct kparam_array
  */
 #define module_param_cb(name, ops, arg, perm)				      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__module_param_call(MODULE_PARAM_PREFIX, name, ops, arg, perm, -1)
 =======
+=======
+>>>>>>> v3.18
 	__module_param_call(MODULE_PARAM_PREFIX, name, ops, arg, perm, -1, 0)
 
 #define module_param_cb_unsafe(name, ops, arg, perm)			      \
 	__module_param_call(MODULE_PARAM_PREFIX, name, ops, arg, perm, -1,    \
 			    KERNEL_PARAM_FL_UNSAFE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -204,7 +244,11 @@ struct kparam_array
  */
 #define __level_param_cb(name, ops, arg, perm, level)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__module_param_call(MODULE_PARAM_PREFIX, name, ops, arg, perm, level)
+=======
+	__module_param_call(MODULE_PARAM_PREFIX, name, ops, arg, perm, level, 0)
+>>>>>>> v3.18
 =======
 	__module_param_call(MODULE_PARAM_PREFIX, name, ops, arg, perm, level, 0)
 >>>>>>> v3.18
@@ -243,6 +287,7 @@ struct kparam_array
 /* This is the fundamental function for registering boot/module
    parameters. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __module_param_call(prefix, name, ops, arg, perm, level)	\
 	/* Default value instead of permissions? */			\
 	static int __param_perm_check_##name __attribute__((unused)) =	\
@@ -254,6 +299,8 @@ struct kparam_array
     __attribute__ ((unused,__section__ ("__param"),aligned(sizeof(void *)))) \
 	= { __param_str_##name, ops, perm, level, { arg } }
 =======
+=======
+>>>>>>> v3.18
 #define __module_param_call(prefix, name, ops, arg, perm, level, flags)	\
 	/* Default value instead of permissions? */			\
 	static const char __param_str_##name[] = prefix #name; \
@@ -262,21 +309,30 @@ struct kparam_array
     __attribute__ ((unused,__section__ ("__param"),aligned(sizeof(void *)))) \
 	= { __param_str_##name, ops, VERIFY_OCTAL_PERMISSIONS(perm),	\
 	    level, flags, { arg } }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Obsolete - use module_param_cb() */
 #define module_param_call(name, set, get, arg, perm)			\
 	static struct kernel_param_ops __param_ops_##name =		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 { (void *)set, (void *)get };				\
 	__module_param_call(MODULE_PARAM_PREFIX,			\
 			    name, &__param_ops_##name, arg,		\
 			    (perm) + sizeof(__check_old_set_param(set))*0, -1)
 =======
+=======
+>>>>>>> v3.18
 		{ .flags = 0, (void *)set, (void *)get };		\
 	__module_param_call(MODULE_PARAM_PREFIX,			\
 			    name, &__param_ops_##name, arg,		\
 			    (perm) + sizeof(__check_old_set_param(set))*0, -1, 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* We don't get oldget: it's often a new-style param_get_uint, etc. */
@@ -358,7 +414,11 @@ static inline void __kernel_param_unlock(void)
 #define core_param(name, var, type, perm)				\
 	param_check_##type(name, &(var));				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__module_param_call("", name, &param_ops_##type, &var, perm, -1)
+=======
+	__module_param_call("", name, &param_ops_##type, &var, perm, -1, 0)
+>>>>>>> v3.18
 =======
 	__module_param_call("", name, &param_ops_##type, &var, perm, -1, 0)
 >>>>>>> v3.18
@@ -380,7 +440,11 @@ static inline void __kernel_param_unlock(void)
 	__module_param_call(MODULE_PARAM_PREFIX, name,			\
 			    &param_ops_string,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    .str = &__param_string_##name, perm, -1);	\
+=======
+			    .str = &__param_string_##name, perm, -1, 0);\
+>>>>>>> v3.18
 =======
 			    .str = &__param_string_##name, perm, -1, 0);\
 >>>>>>> v3.18
@@ -408,7 +472,11 @@ extern bool parameqn(const char *name1, const char *name2, size_t n);
 
 /* Called on module insert or kernel boot */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int parse_args(const char *name,
+=======
+extern char *parse_args(const char *name,
+>>>>>>> v3.18
 =======
 extern char *parse_args(const char *name,
 >>>>>>> v3.18
@@ -435,7 +503,11 @@ static inline void destroy_params(const struct kernel_param *params,
    Jelinek, who IIRC came up with this idea for the 2.4 module init code. */
 #define __param_check(name, p, type) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static inline type *__check_##name(void) { return(p); }
+=======
+	static inline type __always_unused *__check_##name(void) { return(p); }
+>>>>>>> v3.18
 =======
 	static inline type __always_unused *__check_##name(void) { return(p); }
 >>>>>>> v3.18
@@ -476,12 +548,18 @@ extern int param_get_ulong(char *buffer, const struct kernel_param *kp);
 #define param_check_ulong(name, p) __param_check(name, p, unsigned long)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern struct kernel_param_ops param_ops_ullong;
 extern int param_set_ullong(const char *val, const struct kernel_param *kp);
 extern int param_get_ullong(char *buffer, const struct kernel_param *kp);
 #define param_check_ullong(name, p) __param_check(name, p, unsigned long long)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct kernel_param_ops param_ops_charp;
 extern int param_set_charp(const char *val, const struct kernel_param *kp);
@@ -542,7 +620,11 @@ extern int param_set_bint(const char *val, const struct kernel_param *kp);
 			    &param_array_ops,				\
 			    .arr = &__param_arr_##name,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    perm, -1);					\
+=======
+			    perm, -1, 0);				\
+>>>>>>> v3.18
 =======
 			    perm, -1, 0);				\
 >>>>>>> v3.18
@@ -555,7 +637,11 @@ extern int param_set_copystring(const char *val, const struct kernel_param *);
 extern int param_get_string(char *buffer, const struct kernel_param *kp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* for exporting parameters in /sys/parameters */
+=======
+/* for exporting parameters in /sys/module/.../parameters */
+>>>>>>> v3.18
 =======
 /* for exporting parameters in /sys/module/.../parameters */
 >>>>>>> v3.18

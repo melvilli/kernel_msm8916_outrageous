@@ -59,7 +59,10 @@ D_h	.req	x14
 
 ENTRY(memmove)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prfm    pldl1strm, [src, #L1_CACHE_BYTES]
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmp	dstin, src
@@ -189,7 +192,10 @@ ENTRY(memmove)
 	stp	D_l, D_h, [dst, #-64]!
 	ldp	D_l, D_h, [src, #-64]!
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prfm    pldl1strm, [src, #(4*L1_CACHE_BYTES)]
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	subs	count, count, #64

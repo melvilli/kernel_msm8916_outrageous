@@ -150,6 +150,7 @@ config PPPOL2TP
 if TTY
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PPPOLAC
 	tristate "PPP on L2TP Access Concentrator"
 	depends on PPP && INET
@@ -167,6 +168,8 @@ config PPPOPNS
 	  networks. This driver handles PPTP data packets between a RAW socket
 	  and a PPP channel. It is fairly simple and easy to use.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PPP_ASYNC

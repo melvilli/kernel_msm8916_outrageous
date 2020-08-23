@@ -25,8 +25,12 @@ int ext4_inode_bitmap_csum_verify(struct super_block *sb, ext4_group_t group,
 	struct ext4_sb_info *sbi = EXT4_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 					EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 	if (!ext4_has_metadata_csum(sb))
 >>>>>>> v3.18
@@ -51,8 +55,12 @@ void ext4_inode_bitmap_csum_set(struct super_block *sb, ext4_group_t group,
 	struct ext4_sb_info *sbi = EXT4_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 					EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 	if (!ext4_has_metadata_csum(sb))
 >>>>>>> v3.18
@@ -74,8 +82,12 @@ int ext4_block_bitmap_csum_verify(struct super_block *sb, ext4_group_t group,
 	int sz = EXT4_CLUSTERS_PER_GROUP(sb) / 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 					EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 	if (!ext4_has_metadata_csum(sb))
 >>>>>>> v3.18
@@ -104,8 +116,12 @@ void ext4_block_bitmap_csum_set(struct super_block *sb, ext4_group_t group,
 	struct ext4_sb_info *sbi = EXT4_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 			EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 	if (!ext4_has_metadata_csum(sb))
 >>>>>>> v3.18

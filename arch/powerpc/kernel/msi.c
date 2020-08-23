@@ -14,7 +14,11 @@
 #include <asm/machdep.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int arch_msi_check_device(struct pci_dev* dev, int nvec, int type)
+=======
+int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+>>>>>>> v3.18
 =======
 int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 >>>>>>> v3.18
@@ -29,6 +33,7 @@ int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ppc_md.msi_check_device) {
 		pr_debug("msi: Using platform check routine.\n");
 		return ppc_md.msi_check_device(dev, nvec, type);
@@ -39,6 +44,8 @@ int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 
 int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ppc_md.setup_msi_irqs(dev, nvec, type);

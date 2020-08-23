@@ -28,6 +28,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -268,7 +272,13 @@ static inline void mal_schedule_poll(struct mal_instance *mal)
 	if (likely(napi_schedule_prep(&mal->napi))) {
 		MAL_DBG2(mal, "schedule_poll" NL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mal_disable_eob_irq(mal);
+=======
+		spin_lock(&mal->lock);
+		mal_disable_eob_irq(mal);
+		spin_unlock(&mal->lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&mal->lock);
 		mal_disable_eob_irq(mal);
@@ -453,6 +463,7 @@ static int mal_poll(struct napi_struct *napi, int budget)
 			     test_bit(MAL_COMMAC_RX_STOPPED, &mc->flags))) {
 			MAL_DBG2(mal, "rotting packet" NL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (napi_reschedule(napi))
 				mal_disable_eob_irq(mal);
 			else
@@ -463,6 +474,8 @@ static int mal_poll(struct napi_struct *napi, int budget)
 			else
 				goto more_work;
 =======
+=======
+>>>>>>> v3.18
 			if (!napi_reschedule(napi))
 				goto more_work;
 
@@ -470,6 +483,9 @@ static int mal_poll(struct napi_struct *napi, int budget)
 			mal_disable_eob_irq(mal);
 			spin_unlock_irqrestore(&mal->lock, flags);
 			goto again;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		mc->ops->poll_tx(mc->dev);
@@ -658,8 +674,13 @@ static int mal_probe(struct platform_device *ofdev)
 		(NUM_TX_BUFF * mal->num_tx_chans +
 		 NUM_RX_BUFF * mal->num_rx_chans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mal->bd_virt = dma_alloc_coherent(&ofdev->dev, bd_size, &mal->bd_dma,
 					  GFP_KERNEL | __GFP_ZERO);
+=======
+	mal->bd_virt = dma_zalloc_coherent(&ofdev->dev, bd_size, &mal->bd_dma,
+					   GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	mal->bd_virt = dma_zalloc_coherent(&ofdev->dev, bd_size, &mal->bd_dma,
 					   GFP_KERNEL);
@@ -707,10 +728,14 @@ static int mal_probe(struct platform_device *ofdev)
 
 	/* Enable all MAL SERR interrupt sources */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mal->version == 2)
 		set_mal_dcrn(mal, MAL_IER, MAL2_IER_EVENTS);
 	else
 		set_mal_dcrn(mal, MAL_IER, MAL1_IER_EVENTS);
+=======
+	set_mal_dcrn(mal, MAL_IER, MAL_IER_EVENTS);
+>>>>>>> v3.18
 =======
 	set_mal_dcrn(mal, MAL_IER, MAL_IER_EVENTS);
 >>>>>>> v3.18
@@ -726,7 +751,11 @@ static int mal_probe(struct platform_device *ofdev)
 	/* Advertise this instance to the rest of the world */
 	wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, mal);
+=======
+	platform_set_drvdata(ofdev, mal);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, mal);
 >>>>>>> v3.18
@@ -756,7 +785,11 @@ static int mal_probe(struct platform_device *ofdev)
 static int mal_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mal_instance *mal = dev_get_drvdata(&ofdev->dev);
+=======
+	struct mal_instance *mal = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct mal_instance *mal = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -773,8 +806,11 @@ static int mal_remove(struct platform_device *ofdev)
 		       mal->index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_irq(mal->serr_irq, mal);

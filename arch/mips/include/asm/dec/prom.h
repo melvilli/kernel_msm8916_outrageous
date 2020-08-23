@@ -50,7 +50,11 @@
 #ifdef CONFIG_64BIT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define prom_is_rex(magic)	1	/* KN04 and KN05 are REX PROMs.	 */
+=======
+#define prom_is_rex(magic)	1	/* KN04 and KN05 are REX PROMs.  */
+>>>>>>> v3.18
 =======
 #define prom_is_rex(magic)	1	/* KN04 and KN05 are REX PROMs.  */
 >>>>>>> v3.18
@@ -118,6 +122,7 @@ extern int (*__pmax_close)(int);
 				 __asm__(#fun " = call_o32")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __DEC_PROM_O32(_rex_bootinit, (int (*)(void)));
 int __DEC_PROM_O32(_rex_bootread, (int (*)(void)));
 int __DEC_PROM_O32(_rex_getbitmap, (int (*)(memmap *), memmap *));
@@ -144,6 +149,8 @@ int __DEC_PROM_O32(_prom_printf, (int (*)(char *, ...), char *, ...));
 #define prom_getenv(x)		_prom_getenv(__prom_getenv, x)
 #define prom_printf(x...)	_prom_printf(__prom_printf, x)
 =======
+=======
+>>>>>>> v3.18
 int __DEC_PROM_O32(_rex_bootinit, (int (*)(void), void *));
 int __DEC_PROM_O32(_rex_bootread, (int (*)(void), void *));
 int __DEC_PROM_O32(_rex_getbitmap, (int (*)(memmap *), void *, memmap *));
@@ -169,6 +176,9 @@ int __DEC_PROM_O32(_prom_printf, (int (*)(char *, ...), void *, char *, ...));
 #define prom_getchar()		_prom_getchar(__prom_getchar, NULL)
 #define prom_getenv(x)		_prom_getenv(__prom_getenv, NULL, x)
 #define prom_printf(x...)	_prom_printf(__prom_printf, NULL, x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else /* !CONFIG_64BIT */

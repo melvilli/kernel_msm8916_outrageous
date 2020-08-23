@@ -35,7 +35,11 @@ config KVM_BOOK3S_64_HANDLER
 	select KVM_BOOK3S_HANDLER
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config KVM_BOOK3S_PR
+=======
+config KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 =======
 config KVM_BOOK3S_PR_POSSIBLE
 >>>>>>> v3.18
@@ -44,6 +48,12 @@ config KVM_BOOK3S_PR_POSSIBLE
 	select MMU_NOTIFIER
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config KVM_BOOK3S_HV_POSSIBLE
+	bool
+
+>>>>>>> v3.18
 =======
 config KVM_BOOK3S_HV_POSSIBLE
 	bool
@@ -55,7 +65,11 @@ config KVM_BOOK3S_32
 	select KVM
 	select KVM_BOOK3S_32_HANDLER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select KVM_BOOK3S_PR
+=======
+	select KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 =======
 	select KVM_BOOK3S_PR_POSSIBLE
 >>>>>>> v3.18
@@ -74,6 +88,10 @@ config KVM_BOOK3S_64
 	select KVM_BOOK3S_64_HANDLER
 	select KVM
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select KVM_BOOK3S_PR_POSSIBLE if !KVM_BOOK3S_HV_POSSIBLE
+>>>>>>> v3.18
 =======
 	select KVM_BOOK3S_PR_POSSIBLE if !KVM_BOOK3S_HV_POSSIBLE
 >>>>>>> v3.18
@@ -88,15 +106,21 @@ config KVM_BOOK3S_64
 
 config KVM_BOOK3S_64_HV
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "KVM support for POWER7 and PPC970 using hypervisor mode in host"
 	depends on KVM_BOOK3S_64
 	select MMU_NOTIFIER
 =======
+=======
+>>>>>>> v3.18
 	tristate "KVM support for POWER7 and PPC970 using hypervisor mode in host"
 	depends on KVM_BOOK3S_64
 	select KVM_BOOK3S_HV_POSSIBLE
 	select MMU_NOTIFIER
 	select CMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  Support running unmodified book3s_64 guest kernels in
@@ -114,6 +138,7 @@ config KVM_BOOK3S_64_HV
 	  If unsure, say N.
 
 config KVM_BOOK3S_64_PR
+<<<<<<< HEAD
 <<<<<<< HEAD
 	def_bool y
 	depends on KVM_BOOK3S_64 && !KVM_BOOK3S_64_HV
@@ -140,6 +165,8 @@ config KVM_EXIT_TIMING
 	bool "Detailed exit timing"
 	depends on KVM_440 || KVM_E500V2 || KVM_E500MC
 =======
+=======
+>>>>>>> v3.18
 	tristate "KVM support without using hypervisor mode in host"
 	depends on KVM_BOOK3S_64
 	select KVM_BOOK3S_PR_POSSIBLE
@@ -161,6 +188,9 @@ config KVM_BOOKE_HV
 config KVM_EXIT_TIMING
 	bool "Detailed exit timing"
 	depends on KVM_E500V2 || KVM_E500MC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  Calculate elapsed time for every exit/enter cycle. A per-vcpu
@@ -206,6 +236,10 @@ config KVM_MPIC
 	depends on KVM && E500
 	select HAVE_KVM_IRQCHIP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_IRQFD
+>>>>>>> v3.18
 =======
 	select HAVE_KVM_IRQFD
 >>>>>>> v3.18
@@ -221,6 +255,11 @@ config KVM_XICS
 	bool "KVM in-kernel XICS emulation"
 	depends on KVM_BOOK3S_64 && !KVM_MPIC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_IRQCHIP
+	select HAVE_KVM_IRQFD
+>>>>>>> v3.18
 =======
 	select HAVE_KVM_IRQCHIP
 	select HAVE_KVM_IRQFD

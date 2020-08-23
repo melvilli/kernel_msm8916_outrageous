@@ -3,7 +3,11 @@ README for MIPS AU1XXX IDE driver - Released 2005-07-15
 ABOUT
 -----
 <<<<<<< HEAD
+<<<<<<< HEAD
 This file describes the 'drivers/ide/mips/au1xxx-ide.c', related files and the
+=======
+This file describes the 'drivers/ide/au1xxx-ide.c', related files and the
+>>>>>>> v3.18
 =======
 This file describes the 'drivers/ide/au1xxx-ide.c', related files and the
 >>>>>>> v3.18

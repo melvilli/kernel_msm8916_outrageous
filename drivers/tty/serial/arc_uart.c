@@ -38,8 +38,13 @@
 #include <linux/serial_core.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/of_platform.h>
+=======
+#include <linux/of_irq.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
@@ -78,7 +83,11 @@
 
 /* Uart bit fiddling helpers: lowest level */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RBASE(uart, reg)      (uart->port.membase + reg)
+=======
+#define RBASE(port, reg)      (port->membase + reg)
+>>>>>>> v3.18
 =======
 #define RBASE(port, reg)      (port->membase + reg)
 >>>>>>> v3.18
@@ -112,7 +121,10 @@ struct arc_uart_port {
 	struct uart_port port;
 	unsigned long baud;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int is_emulated;	/* H/w vs. Instruction Set Simulator */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -142,9 +154,13 @@ static struct uart_driver arc_uart_driver = {
 static void arc_serial_stop_rx(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 
 	UART_RX_IRQ_DISABLE(uart);
+=======
+	UART_RX_IRQ_DISABLE(port);
+>>>>>>> v3.18
 =======
 	UART_RX_IRQ_DISABLE(port);
 >>>>>>> v3.18
@@ -153,6 +169,7 @@ static void arc_serial_stop_rx(struct uart_port *port)
 static void arc_serial_stop_tx(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 
 	while (!(UART_GET_STATUS(uart) & TXEMPTY))
@@ -160,10 +177,15 @@ static void arc_serial_stop_tx(struct uart_port *port)
 
 	UART_TX_IRQ_DISABLE(uart);
 =======
+=======
+>>>>>>> v3.18
 	while (!(UART_GET_STATUS(port) & TXEMPTY))
 		cpu_relax();
 
 	UART_TX_IRQ_DISABLE(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -173,10 +195,16 @@ static void arc_serial_stop_tx(struct uart_port *port)
 static unsigned int arc_serial_tx_empty(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 	unsigned int stat;
 
 	stat = UART_GET_STATUS(uart);
+=======
+	unsigned int stat;
+
+	stat = UART_GET_STATUS(port);
+>>>>>>> v3.18
 =======
 	unsigned int stat;
 
@@ -195,6 +223,7 @@ static unsigned int arc_serial_tx_empty(struct uart_port *port)
  *     = by uart_start( ) before calling us
  *     = tx_ist checks that too before calling
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void arc_serial_tx_chars(struct arc_uart_port *uart)
 {
@@ -215,6 +244,8 @@ static void arc_serial_tx_chars(struct arc_uart_port *uart)
 			cpu_relax();
 		UART_SET_DATA(uart, ch);
 =======
+=======
+>>>>>>> v3.18
 static void arc_serial_tx_chars(struct uart_port *port)
 {
 	struct circ_buf *xmit = &port->state->xmit;
@@ -233,6 +264,9 @@ static void arc_serial_tx_chars(struct uart_port *port)
 		while (!(UART_GET_STATUS(port) & TXEMPTY))
 			cpu_relax();
 		UART_SET_DATA(port, ch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sent = 1;
 	}
@@ -243,15 +277,21 @@ static void arc_serial_tx_chars(struct uart_port *port)
 	 */
 	if (uart_circ_chars_pending(xmit) < WAKEUP_CHARS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart_write_wakeup(&uart->port);
 
 	if (sent)
 		UART_TX_IRQ_ENABLE(uart);
 =======
+=======
+>>>>>>> v3.18
 		uart_write_wakeup(port);
 
 	if (sent)
 		UART_TX_IRQ_ENABLE(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -262,6 +302,7 @@ static void arc_serial_tx_chars(struct uart_port *port)
 static void arc_serial_start_tx(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 
 	arc_serial_tx_chars(uart);
@@ -271,12 +312,17 @@ static void arc_serial_rx_chars(struct arc_uart_port *uart)
 {
 	unsigned int status, ch, flg = 0;
 =======
+=======
+>>>>>>> v3.18
 	arc_serial_tx_chars(port);
 }
 
 static void arc_serial_rx_chars(struct uart_port *port, unsigned int status)
 {
 	unsigned int ch, flg = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -288,6 +334,7 @@ static void arc_serial_rx_chars(struct uart_port *port, unsigned int status)
 	 * before RX-EMPTY=0, implies some sort of buffering going on in the
 	 * controller, which is indeed the Rx-FIFO.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (!((status = UART_GET_STATUS(uart)) & RXEMPTY)) {
 
@@ -306,6 +353,8 @@ static void arc_serial_rx_chars(struct uart_port *port, unsigned int status)
 				flg = TTY_FRAME;
 				UART_CLR_STATUS(uart, RXFERR);
 =======
+=======
+>>>>>>> v3.18
 	do {
 		/*
 		 * This could be an Rx Intr for err (no data),
@@ -322,11 +371,15 @@ static void arc_serial_rx_chars(struct uart_port *port, unsigned int status)
 				port->icount.frame++;
 				flg = TTY_FRAME;
 				UART_CLR_STATUS(port, RXFERR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		} else
 			flg = TTY_NORMAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (unlikely(uart_handle_sysrq_char(&uart->port, ch)))
 			goto done;
@@ -337,6 +390,8 @@ done:
 		tty_flip_buffer_push(&uart->port.state->port);
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (status & RXEMPTY)
 			continue;
 
@@ -350,6 +405,9 @@ done:
 		tty_flip_buffer_push(&port->state->port);
 		spin_lock(&port->lock);
 	} while (!((status = UART_GET_STATUS(port)) & RXEMPTY));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -384,15 +442,21 @@ done:
 static irqreturn_t arc_serial_isr(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = dev_id;
 	unsigned int status;
 
 	status = UART_GET_STATUS(uart);
 =======
+=======
+>>>>>>> v3.18
 	struct uart_port *port = dev_id;
 	unsigned int status;
 
 	status = UART_GET_STATUS(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -401,6 +465,7 @@ static irqreturn_t arc_serial_isr(int irq, void *dev_id)
 	 * To demultiplex between the two, we check the relevant bits
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((status & RXIENB) && !(status & RXEMPTY)) {
 
 		/* already in ISR, no need of xx_irqsave */
@@ -408,12 +473,17 @@ static irqreturn_t arc_serial_isr(int irq, void *dev_id)
 		arc_serial_rx_chars(uart);
 		spin_unlock(&uart->port.lock);
 =======
+=======
+>>>>>>> v3.18
 	if (status & RXIENB) {
 
 		/* already in ISR, no need of xx_irqsave */
 		spin_lock(&port->lock);
 		arc_serial_rx_chars(port, status);
 		spin_unlock(&port->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -422,6 +492,7 @@ static irqreturn_t arc_serial_isr(int irq, void *dev_id)
 		/* Unconditionally disable further Tx-Interrupts.
 		 * will be enabled by tx_chars() if needed.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		UART_TX_IRQ_DISABLE(uart);
 
@@ -432,6 +503,8 @@ static irqreturn_t arc_serial_isr(int irq, void *dev_id)
 
 		spin_unlock(&uart->port.lock);
 =======
+=======
+>>>>>>> v3.18
 		UART_TX_IRQ_DISABLE(port);
 
 		spin_lock(&port->lock);
@@ -440,6 +513,9 @@ static irqreturn_t arc_serial_isr(int irq, void *dev_id)
 			arc_serial_tx_chars(port);
 
 		spin_unlock(&port->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -464,6 +540,7 @@ static void arc_serial_set_mctrl(struct uart_port *port, unsigned int mctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Enable Modem Status Interrupts */
 
 static void arc_serial_enable_ms(struct uart_port *port)
@@ -473,6 +550,8 @@ static void arc_serial_enable_ms(struct uart_port *port)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void arc_serial_break_ctl(struct uart_port *port, int break_state)
 {
 	/* ARC UART doesn't support sending Break signal */
@@ -480,6 +559,7 @@ static void arc_serial_break_ctl(struct uart_port *port, int break_state)
 
 static int arc_serial_startup(struct uart_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 
@@ -494,6 +574,8 @@ static int arc_serial_startup(struct uart_port *port)
 
 	UART_RX_IRQ_ENABLE(uart); /* Only Rx IRQ enabled to begin with */
 =======
+=======
+>>>>>>> v3.18
 	/* Before we hook up the ISR, Disable all UART Interrupts */
 	UART_ALL_IRQ_DISABLE(port);
 
@@ -503,6 +585,9 @@ static int arc_serial_startup(struct uart_port *port)
 	}
 
 	UART_RX_IRQ_ENABLE(port); /* Only Rx IRQ enabled to begin with */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -512,8 +597,12 @@ static int arc_serial_startup(struct uart_port *port)
 static void arc_serial_shutdown(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 	free_irq(uart->port.irq, uart);
+=======
+	free_irq(port->irq, port);
+>>>>>>> v3.18
 =======
 	free_irq(port->irq, port);
 >>>>>>> v3.18
@@ -541,6 +630,7 @@ arc_serial_set_termios(struct uart_port *port, struct ktermios *new,
 	uarth = (hw_val >> 8) & 0xFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * UART ISS(Instruction Set simulator) emulation has a subtle bug:
 	 * A existing value of Baudh = 0 is used as a indication to startup
@@ -561,6 +651,8 @@ arc_serial_set_termios(struct uart_port *port, struct ktermios *new,
 
 	UART_RX_IRQ_ENABLE(uart);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&port->lock, flags);
 
 	UART_ALL_IRQ_DISABLE(port);
@@ -569,6 +661,9 @@ arc_serial_set_termios(struct uart_port *port, struct ktermios *new,
 	UART_SET_BAUDH(port, uarth);
 
 	UART_RX_IRQ_ENABLE(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -593,9 +688,13 @@ arc_serial_set_termios(struct uart_port *port, struct ktermios *new,
 static const char *arc_serial_type(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 
 	return uart->port.type == PORT_ARC ? DRIVER_NAME : NULL;
+=======
+	return port->type == PORT_ARC ? DRIVER_NAME : NULL;
+>>>>>>> v3.18
 =======
 	return port->type == PORT_ARC ? DRIVER_NAME : NULL;
 >>>>>>> v3.18
@@ -628,6 +727,7 @@ arc_serial_verify_port(struct uart_port *port, struct serial_struct *ser)
 static void arc_serial_config_port(struct uart_port *port, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arc_uart_port *uart = to_arc_port(port);
 
 	if (flags & UART_CONFIG_TYPE)
@@ -658,6 +758,8 @@ static int arc_serial_poll_getchar(struct uart_port *port)
 
 	chr = UART_GET_DATA(uart);
 =======
+=======
+>>>>>>> v3.18
 	if (flags & UART_CONFIG_TYPE)
 		port->type = PORT_ARC;
 }
@@ -680,6 +782,9 @@ static int arc_serial_poll_getchar(struct uart_port *port)
 		cpu_relax();
 
 	chr = UART_GET_DATA(port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return chr;
 }
@@ -693,7 +798,10 @@ static struct uart_ops arc_serial_pops = {
 	.start_tx	= arc_serial_start_tx,
 	.stop_rx	= arc_serial_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= arc_serial_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= arc_serial_break_ctl,
@@ -711,6 +819,7 @@ static struct uart_ops arc_serial_pops = {
 #endif
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 arc_uart_init_one(struct platform_device *pdev, int dev_id)
@@ -779,6 +888,8 @@ arc_uart_init_one(struct platform_device *pdev, int dev_id)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SERIAL_ARC_CONSOLE
 
 static int arc_serial_console_setup(struct console *co, char *options)
@@ -813,12 +924,18 @@ static int arc_serial_console_setup(struct console *co, char *options)
 static void arc_serial_console_putchar(struct uart_port *port, int ch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arc_serial_poll_putchar(port, (unsigned char)ch);
 =======
+=======
+>>>>>>> v3.18
 	while (!(UART_GET_STATUS(port) & TXEMPTY))
 		cpu_relax();
 
 	UART_SET_DATA(port, (unsigned char)ch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -846,6 +963,7 @@ static struct console arc_console = {
 	.data	= &arc_uart_driver
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __init void early_serial_write(struct console *con, const char *s,
 					unsigned int n)
@@ -884,6 +1002,8 @@ static int __init arc_serial_probe_earlyprintk(struct platform_device *pdev)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 static __init void arc_early_serial_write(struct console *con, const char *s,
 					  unsigned int n)
 {
@@ -914,20 +1034,29 @@ static int __init arc_early_console_setup(struct earlycon_device *dev,
 EARLYCON_DECLARE(arc_uart, arc_early_console_setup);
 OF_EARLYCON_DECLARE(arc_uart, "snps,arc-uart", arc_early_console_setup);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* CONFIG_SERIAL_ARC_CONSOLE */
 
 static int arc_serial_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc, dev_id;
 	struct device_node *np = pdev->dev.of_node;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = pdev->dev.of_node;
 	struct arc_uart_port *uart;
 	struct uart_port *port;
 	int dev_id;
 	u32 val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* no device tree device */
@@ -939,6 +1068,7 @@ static int arc_serial_probe(struct platform_device *pdev)
 		dev_id = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = arc_uart_init_one(pdev, dev_id);
 	if (rc)
 		return rc;
@@ -946,6 +1076,8 @@ static int arc_serial_probe(struct platform_device *pdev)
 	rc = uart_add_one_port(&arc_uart_driver, &arc_uart_ports[dev_id].port);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	uart = &arc_uart_ports[dev_id];
 	port = &uart->port;
 
@@ -983,6 +1115,9 @@ static int arc_serial_probe(struct platform_device *pdev)
 	port->ignore_status_mask = 0;
 
 	return uart_add_one_port(&arc_uart_driver, &arc_uart_ports[dev_id].port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1009,6 +1144,7 @@ static struct platform_driver arc_platform_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SERIAL_ARC_CONSOLE
 
 static struct platform_driver early_arc_platform_driver __initdata = {
@@ -1030,6 +1166,8 @@ early_platform_init("earlyprintk", &early_arc_platform_driver);
 
 #endif  /* CONFIG_SERIAL_ARC_CONSOLE */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init arc_serial_init(void)

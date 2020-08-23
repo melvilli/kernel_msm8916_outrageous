@@ -19,6 +19,7 @@
 #define DAVINCI_MCASP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/platform_data/davinci_asp.h>
 
@@ -46,6 +47,8 @@ struct davinci_audio_dev {
 	u8	rxnumevt;
 };
 =======
+=======
+>>>>>>> v3.18
 /*
  * McASP register definitions
  */
@@ -313,6 +316,9 @@ struct davinci_audio_dev {
 #define NUMEVT_MASK	(0xFF << 8)
 #define NUMEVT(x)	(((x) & 0xFF) << 8)
 #define NUMDMA_MASK	(0xFF)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* DAVINCI_MCASP_H */

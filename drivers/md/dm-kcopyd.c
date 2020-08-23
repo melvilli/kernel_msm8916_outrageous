@@ -834,8 +834,12 @@ struct dm_kcopyd_client *dm_kcopyd_client_create(struct dm_kcopyd_throttle *thro
 
 	INIT_WORK(&kc->kcopyd_work, do_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kc->kcopyd_wq = alloc_workqueue("kcopyd",
 					WQ_NON_REENTRANT | WQ_MEM_RECLAIM, 0);
+=======
+	kc->kcopyd_wq = alloc_workqueue("kcopyd", WQ_MEM_RECLAIM, 0);
+>>>>>>> v3.18
 =======
 	kc->kcopyd_wq = alloc_workqueue("kcopyd", WQ_MEM_RECLAIM, 0);
 >>>>>>> v3.18

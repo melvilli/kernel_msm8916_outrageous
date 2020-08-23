@@ -4,7 +4,11 @@
  *
  * This code is based on drivers/scsi/mpt2sas/mpt2_ctl.h
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2012  LSI Corporation
+=======
+ * Copyright (C) 2007-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2014  LSI Corporation
 >>>>>>> v3.18

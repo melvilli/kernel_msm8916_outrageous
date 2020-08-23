@@ -27,6 +27,7 @@ __setup("spin_retry=", spin_retry_setup);
 void arch_spin_lock_wait(arch_spinlock_t *lp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int count = spin_retry;
 	unsigned int cpu = ~smp_processor_id();
 	unsigned int owner;
@@ -50,6 +51,8 @@ void arch_spin_lock_wait(arch_spinlock_t *lp)
 		if (_raw_compare_and_swap(&lp->owner_cpu, 0, cpu) == 0)
 			return;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int cpu = SPINLOCK_LOCKVAL;
 	unsigned int owner;
 	int count;
@@ -80,6 +83,9 @@ void arch_spin_lock_wait(arch_spinlock_t *lp)
 		 */
 		if (!MACHINE_IS_LPAR)
 			smp_yield_cpu(~owner);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -87,6 +93,7 @@ EXPORT_SYMBOL(arch_spin_lock_wait);
 
 void arch_spin_lock_wait_flags(arch_spinlock_t *lp, unsigned long flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int count = spin_retry;
 	unsigned int cpu = ~smp_processor_id();
@@ -116,6 +123,8 @@ void arch_spin_lock_wait_flags(arch_spinlock_t *lp, unsigned long flags)
 			return;
 		local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int cpu = SPINLOCK_LOCKVAL;
 	unsigned int owner;
 	int count;
@@ -148,6 +157,9 @@ void arch_spin_lock_wait_flags(arch_spinlock_t *lp, unsigned long flags)
 		 */
 		if (!MACHINE_IS_LPAR)
 			smp_yield_cpu(~owner);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -155,6 +167,7 @@ EXPORT_SYMBOL(arch_spin_lock_wait_flags);
 
 int arch_spin_trylock_retry(arch_spinlock_t *lp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int cpu = ~smp_processor_id();
 	int count;
@@ -166,16 +179,22 @@ int arch_spin_trylock_retry(arch_spinlock_t *lp)
 			return 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	int count;
 
 	for (count = spin_retry; count > 0; count--)
 		if (arch_spin_trylock_once(lp))
 			return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(arch_spin_trylock_retry);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void arch_spin_relax(arch_spinlock_t *lock)
 {
@@ -203,6 +222,8 @@ void _raw_read_lock_wait(arch_rwlock_t *rw)
 		old = rw->lock & 0x7fffffffU;
 		if (_raw_compare_and_swap(&rw->lock, old, old + 1) == old)
 =======
+=======
+>>>>>>> v3.18
 void _raw_read_lock_wait(arch_rwlock_t *rw)
 {
 	unsigned int owner, old;
@@ -223,12 +244,16 @@ void _raw_read_lock_wait(arch_rwlock_t *rw)
 		if ((int) old < 0)
 			continue;
 		if (_raw_compare_and_swap(&rw->lock, old, old + 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 	}
 }
 EXPORT_SYMBOL(_raw_read_lock_wait);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void _raw_read_lock_wait_flags(arch_rwlock_t *rw, unsigned long flags)
 {
@@ -253,6 +278,8 @@ EXPORT_SYMBOL(_raw_read_lock_wait_flags);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int _raw_read_trylock_retry(arch_rwlock_t *rw)
 {
 	unsigned int old;
@@ -260,15 +287,21 @@ int _raw_read_trylock_retry(arch_rwlock_t *rw)
 
 	while (count-- > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!arch_read_can_lock(rw))
 			continue;
 		old = rw->lock & 0x7fffffffU;
 		if (_raw_compare_and_swap(&rw->lock, old, old + 1) == old)
 =======
+=======
+>>>>>>> v3.18
 		old = ACCESS_ONCE(rw->lock);
 		if ((int) old < 0)
 			continue;
 		if (_raw_compare_and_swap(&rw->lock, old, old + 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 1;
 	}
@@ -276,6 +309,7 @@ int _raw_read_trylock_retry(arch_rwlock_t *rw)
 }
 EXPORT_SYMBOL(_raw_read_trylock_retry);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void _raw_write_lock_wait(arch_rwlock_t *rw)
 {
@@ -291,6 +325,8 @@ void _raw_write_lock_wait(arch_rwlock_t *rw)
 		if (_raw_compare_and_swap(&rw->lock, 0, 0x80000000) == 0)
 			return;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_MARCH_Z196_FEATURES
 
 void _raw_write_lock_wait(arch_rwlock_t *rw, unsigned int prev)
@@ -314,11 +350,15 @@ void _raw_write_lock_wait(arch_rwlock_t *rw, unsigned int prev)
 		}
 		if ((old & 0x7fffffff) == 0 && (int) prev >= 0)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 EXPORT_SYMBOL(_raw_write_lock_wait);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void _raw_write_lock_wait_flags(arch_rwlock_t *rw, unsigned long flags)
 {
@@ -348,6 +388,8 @@ int _raw_write_trylock_retry(arch_rwlock_t *rw)
 			continue;
 		if (_raw_compare_and_swap(&rw->lock, 0, 0x80000000) == 0)
 =======
+=======
+>>>>>>> v3.18
 #else /* CONFIG_HAVE_MARCH_Z196_FEATURES */
 
 void _raw_write_lock_wait(arch_rwlock_t *rw)
@@ -388,6 +430,9 @@ int _raw_write_trylock_retry(arch_rwlock_t *rw)
 		if (old)
 			continue;
 		if (_raw_compare_and_swap(&rw->lock, 0, 0x80000000))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 1;
 	}
@@ -395,7 +440,10 @@ int _raw_write_trylock_retry(arch_rwlock_t *rw)
 }
 EXPORT_SYMBOL(_raw_write_trylock_retry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void arch_lock_relax(unsigned int cpu)
 {
@@ -406,4 +454,7 @@ void arch_lock_relax(unsigned int cpu)
 	smp_yield_cpu(~cpu);
 }
 EXPORT_SYMBOL(arch_lock_relax);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

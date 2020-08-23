@@ -500,7 +500,11 @@ static int
 csio_enable_msix(struct csio_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rv, i, j, k, n, min, cnt;
+=======
+	int i, j, k, n, min, cnt;
+>>>>>>> v3.18
 =======
 	int i, j, k, n, min, cnt;
 >>>>>>> v3.18
@@ -526,6 +530,7 @@ csio_enable_msix(struct csio_hw *hw)
 	csio_dbg(hw, "FW supp #niq:%d, trying %d msix's\n", hw->cfg_niq, cnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((rv = pci_enable_msix(hw->pdev, entries, cnt)) >= min)
 		cnt = rv;
 	if (!rv) {
@@ -542,6 +547,8 @@ csio_enable_msix(struct csio_hw *hw)
 		kfree(entries);
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	cnt = pci_enable_msix_range(hw->pdev, entries, min, cnt);
 	if (cnt < 0) {
 		kfree(entries);
@@ -551,6 +558,9 @@ csio_enable_msix(struct csio_hw *hw)
 	if (cnt < (hw->num_sqsets + extra)) {
 		csio_dbg(hw, "Reducing sqsets to %d\n", cnt - extra);
 		csio_reduce_sqsets(hw, cnt - extra);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

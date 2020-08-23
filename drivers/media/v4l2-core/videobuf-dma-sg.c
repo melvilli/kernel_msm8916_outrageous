@@ -212,6 +212,7 @@ int videobuf_dma_init_kernel(struct videobuf_dmabuf *dma, int direction,
 			     int nr_pages)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk(1, "init kernel [%d pages]\n", nr_pages);
 
 	dma->direction = direction;
@@ -220,6 +221,8 @@ int videobuf_dma_init_kernel(struct videobuf_dmabuf *dma, int direction,
 		dprintk(1, "vmalloc_32(%d pages) failed\n", nr_pages);
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	dprintk(1, "init kernel [%d pages]\n", nr_pages);
@@ -250,6 +253,9 @@ int videobuf_dma_init_kernel(struct videobuf_dmabuf *dma, int direction,
 	if (NULL == dma->vaddr) {
 		dprintk(1, "vmalloc_32(%d pages) failed\n", nr_pages);
 		goto out_free_pages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -262,7 +268,10 @@ int videobuf_dma_init_kernel(struct videobuf_dmabuf *dma, int direction,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 out_free_pages:
 	while (i > 0) {
 		void *addr;
@@ -278,6 +287,9 @@ out_free_pages:
 
 	return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(videobuf_dma_init_kernel);
@@ -374,9 +386,12 @@ int videobuf_dma_free(struct videobuf_dmabuf *dma)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfree(dma->vaddr);
 	dma->vaddr = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (dma->dma_addr) {
 		for (i = 0; i < dma->nr_pages; i++) {
 			void *addr;
@@ -392,6 +407,9 @@ int videobuf_dma_free(struct videobuf_dmabuf *dma)
 		vunmap(dma->vaddr);
 		dma->vaddr = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dma->bus_addr)
@@ -531,12 +549,18 @@ static int __videobuf_iolock(struct videobuf_queue *q,
 	MAGIC_CHECK(mem->magic, MAGIC_SG_MEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!mem->dma.dev)
 		mem->dma.dev = q->dev;
 	else
 		WARN_ON(mem->dma.dev != q->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (vb->memory) {
 	case V4L2_MEMORY_MMAP:

@@ -281,8 +281,13 @@ MODULE_DESCRIPTION("CRC32c (Castagnoli) optimization using Intel Hardware.");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("crc32c");
 MODULE_ALIAS_CRYPTO("crc32c-intel");
+=======
+MODULE_ALIAS("crc32c");
+MODULE_ALIAS("crc32c-intel");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("crc32c");
 MODULE_ALIAS("crc32c-intel");

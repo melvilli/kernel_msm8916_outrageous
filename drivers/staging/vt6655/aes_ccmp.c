@@ -36,6 +36,10 @@
 #include "device.h"
 #include "80211hdr.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "aes_ccmp.h"
+>>>>>>> v3.18
 =======
 #include "aes_ccmp.h"
 >>>>>>> v3.18
@@ -51,8 +55,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char sbox_table[256] =
 {
+=======
+static unsigned char sbox_table[256] = {
+>>>>>>> v3.18
 =======
 static unsigned char sbox_table[256] = {
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ static unsigned char sbox_table[256] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char dot2_table[256] = {
+=======
+static unsigned char dot2_table[256] = {
+>>>>>>> v3.18
 =======
 static unsigned char dot2_table[256] = {
 >>>>>>> v3.18
@@ -98,7 +110,11 @@ static unsigned char dot2_table[256] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char dot3_table[256] = {
+=======
+static unsigned char dot3_table[256] = {
+>>>>>>> v3.18
 =======
 static unsigned char dot3_table[256] = {
 >>>>>>> v3.18
@@ -127,7 +143,11 @@ static unsigned char dot3_table[256] = {
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xor_128(unsigned char *a, unsigned char *b, unsigned char *out)
+=======
+static void xor_128(unsigned char *a, unsigned char *b, unsigned char *out)
+>>>>>>> v3.18
 =======
 static void xor_128(unsigned char *a, unsigned char *b, unsigned char *out)
 >>>>>>> v3.18
@@ -143,7 +163,11 @@ static void xor_128(unsigned char *a, unsigned char *b, unsigned char *out)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xor_32(unsigned char *a, unsigned char *b, unsigned char *out)
+=======
+static void xor_32(unsigned char *a, unsigned char *b, unsigned char *out)
+>>>>>>> v3.18
 =======
 static void xor_32(unsigned char *a, unsigned char *b, unsigned char *out)
 >>>>>>> v3.18
@@ -156,7 +180,11 @@ static void xor_32(unsigned char *a, unsigned char *b, unsigned char *out)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void AddRoundKey(unsigned char *key, int round)
+=======
+static void AddRoundKey(unsigned char *key, int round)
+>>>>>>> v3.18
 =======
 static void AddRoundKey(unsigned char *key, int round)
 >>>>>>> v3.18
@@ -178,6 +206,7 @@ static void AddRoundKey(unsigned char *key, int round)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SubBytes(unsigned char *in, unsigned char *out)
 {
 	int i;
@@ -189,6 +218,8 @@ void SubBytes(unsigned char *in, unsigned char *out)
 
 void ShiftRows(unsigned char *in, unsigned char *out)
 =======
+=======
+>>>>>>> v3.18
 static void SubBytes(unsigned char *in, unsigned char *out)
 {
 	int i;
@@ -198,6 +229,9 @@ static void SubBytes(unsigned char *in, unsigned char *out)
 }
 
 static void ShiftRows(unsigned char *in, unsigned char *out)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	out[0]  = in[0];
@@ -219,7 +253,11 @@ static void ShiftRows(unsigned char *in, unsigned char *out)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void MixColumns(unsigned char *in, unsigned char *out)
+=======
+static void MixColumns(unsigned char *in, unsigned char *out)
+>>>>>>> v3.18
 =======
 static void MixColumns(unsigned char *in, unsigned char *out)
 >>>>>>> v3.18
@@ -231,7 +269,11 @@ static void MixColumns(unsigned char *in, unsigned char *out)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void AESv128(unsigned char *key, unsigned char *data, unsigned char *ciphertext)
+=======
+static void AESv128(unsigned char *key, unsigned char *data, unsigned char *ciphertext)
+>>>>>>> v3.18
 =======
 static void AESv128(unsigned char *key, unsigned char *data, unsigned char *ciphertext)
 >>>>>>> v3.18
@@ -254,8 +296,12 @@ static void AESv128(unsigned char *key, unsigned char *data, unsigned char *ciph
 			ShiftRows(TmpdataA, TmpdataB);
 			xor_128(TmpdataB, abyRoundKey, ciphertext);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else // round 1 ~ 9
 		{
+=======
+		} else /* round 1 ~ 9 */{
+>>>>>>> v3.18
 =======
 		} else /* round 1 ~ 9 */{
 >>>>>>> v3.18
@@ -302,7 +348,11 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	unsigned char *pbyPayload;
 	unsigned short wHLen = 22;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short wPayloadSize = wFrameSize - 8 - 8 - 4 - WLAN_HDR_ADDR3_LEN;//8 is IV, 8 is MIC, 4 is CRC
+=======
+	unsigned short wPayloadSize = wFrameSize - 8 - 8 - 4 - WLAN_HDR_ADDR3_LEN;/* 8 is IV, 8 is MIC, 4 is CRC */
+>>>>>>> v3.18
 =======
 	unsigned short wPayloadSize = wFrameSize - 8 - 8 - 4 - WLAN_HDR_ADDR3_LEN;/* 8 is IV, 8 is MIC, 4 is CRC */
 >>>>>>> v3.18
@@ -316,6 +366,7 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	    WLAN_GET_FC_FROMDS(*(unsigned short *)pbyFrame)) {
 		bA4 = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pbyIV += 6;             // 6 is 802.11 address4
 		wHLen += 6;
 		wPayloadSize -= 6;
@@ -324,6 +375,8 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 
 	abyNonce[0]  = 0x00; //now is 0, if Qos here will be priority
 =======
+=======
+>>>>>>> v3.18
 		pbyIV += 6;             /* 6 is 802.11 address4 */
 		wHLen += 6;
 		wPayloadSize -= 6;
@@ -331,6 +384,9 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	pbyPayload = pbyIV + 8; /* IV-length */
 
 	abyNonce[0]  = 0x00; /* now is 0, if Qos here will be priority */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(&(abyNonce[1]), pMACHeader->abyAddr2, ETH_ALEN);
 	abyNonce[7]  = pbyIV[7];
@@ -341,7 +397,11 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	abyNonce[12] = pbyIV[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//MIC_IV
+=======
+	/* MIC_IV */
+>>>>>>> v3.18
 =======
 	/* MIC_IV */
 >>>>>>> v3.18
@@ -351,7 +411,11 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	MIC_IV[15] = (unsigned char)(wPayloadSize & 0xff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//MIC_HDR1
+=======
+	/* MIC_HDR1 */
+>>>>>>> v3.18
 =======
 	/* MIC_HDR1 */
 >>>>>>> v3.18
@@ -366,7 +430,11 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	memcpy(&(MIC_HDR1[10]), pMACHeader->abyAddr2, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//MIC_HDR2
+=======
+	/* MIC_HDR2 */
+>>>>>>> v3.18
 =======
 	/* MIC_HDR2 */
 >>>>>>> v3.18
@@ -388,6 +456,7 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	MIC_HDR2[15] = 0x00;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//CCMP
 	AESv128(pbyRxKey, MIC_IV, abyMIC);
 	for (kk = 0; kk < 16; kk++) {
@@ -398,6 +467,8 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 		abyTmp[kk] = MIC_HDR2[kk] ^ abyMIC[kk];
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* CCMP */
 	AESv128(pbyRxKey, MIC_IV, abyMIC);
 	for (kk = 0; kk < 16; kk++)
@@ -405,6 +476,9 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	AESv128(pbyRxKey, abyTmp, abyMIC);
 	for (kk = 0; kk < 16; kk++)
 		abyTmp[kk] = MIC_HDR2[kk] ^ abyMIC[kk];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	AESv128(pbyRxKey, abyTmp, abyMIC);
 
@@ -419,6 +493,7 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 		AESv128(pbyRxKey, abyCTRPLD, abyTmp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (kk = 0; kk < 16; kk++) {
 			abyPlainText[kk] = abyTmp[kk] ^ pbyPayload[kk];
 		}
@@ -426,16 +501,22 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 			abyTmp[kk] = abyMIC[kk] ^ abyPlainText[kk];
 		}
 =======
+=======
+>>>>>>> v3.18
 		for (kk = 0; kk < 16; kk++)
 			abyPlainText[kk] = abyTmp[kk] ^ pbyPayload[kk];
 		for (kk = 0; kk < 16; kk++)
 			abyTmp[kk] = abyMIC[kk] ^ abyPlainText[kk];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		AESv128(pbyRxKey, abyTmp, abyMIC);
 
 		memcpy(pbyPayload, abyPlainText, 16);
 		wCnt++;
 		pbyPayload += 16;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} //for wPayloadSize
 
@@ -445,18 +526,24 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 		abyLastCipher[ii] = 0x00;
 	}
 =======
+=======
+>>>>>>> v3.18
 	} /* for wPayloadSize */
 
 	/* last payload */
 	memcpy(&(abyLastCipher[0]), pbyPayload, jj);
 	for (ii = jj; ii < 16; ii++)
 		abyLastCipher[ii] = 0x00;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	abyCTRPLD[14] = (unsigned char)(wCnt >> 8);
 	abyCTRPLD[15] = (unsigned char)(wCnt & 0xff);
 
 	AESv128(pbyRxKey, abyCTRPLD, abyTmp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (kk = 0; kk < 16; kk++) {
 		abyPlainText[kk] = abyTmp[kk] ^ abyLastCipher[kk];
@@ -476,6 +563,8 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 	//=>above is the calculate MIC
 	//--------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	for (kk = 0; kk < 16; kk++)
 		abyPlainText[kk] = abyTmp[kk] ^ abyLastCipher[kk];
 	memcpy(pbyPayload, abyPlainText, jj);
@@ -490,12 +579,16 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 
 	/* =>above is the calculate MIC */
 	/* -------------------------------------------- */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wCnt = 0;
 	abyCTRPLD[14] = (unsigned char)(wCnt >> 8);
 	abyCTRPLD[15] = (unsigned char)(wCnt & 0xff);
 	AESv128(pbyRxKey, abyCTRPLD, abyTmp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (kk = 0; kk < 8; kk++) {
 		abyTmp[kk] = abyTmp[kk] ^ pbyPayload[kk];
@@ -509,11 +602,16 @@ bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned shor
 		return false;
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (kk = 0; kk < 8; kk++)
 		abyTmp[kk] = abyTmp[kk] ^ pbyPayload[kk];
 	/* =>above is the dec-MIC from packet */
 	/* -------------------------------------------- */
 
 	return !memcmp(abyMIC, abyTmp, 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

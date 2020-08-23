@@ -130,8 +130,11 @@ setup_memory_node(int nid, void *kernel_end)
 		max_pfn = max_low_pfn = node_max_pfn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages += node_max_pfn - node_min_pfn;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if 0 /* we'll try this one again in a little while */
@@ -325,6 +328,7 @@ void __init paging_init(void)
 	memset((void *)ZERO_PGE, 0, PAGE_SIZE);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __init mem_init(void)
 {
@@ -363,5 +367,7 @@ void __init mem_init(void)
 	mem_stress();
 #endif
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -2,6 +2,10 @@
  *
  * Copyright (C) 2011-2013 Eric Dumazet (eric.dumazet@gmail.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Internal BPF Copyright (c) 2011-2014 PLUMgrid, http://plumgrid.com
+>>>>>>> v3.18
 =======
  * Internal BPF Copyright (c) 2011-2014 PLUMgrid, http://plumgrid.com
 >>>>>>> v3.18
@@ -11,6 +15,7 @@
  * as published by the Free Software Foundation; version 2
  * of the License.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/moduleloader.h>
 #include <asm/cacheflush.h>
@@ -31,11 +36,16 @@
  * -16(RBP)..-80(RBP) : BPF_MEMWORDS values
  */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/netdevice.h>
 #include <linux/filter.h>
 #include <linux/if_vlan.h>
 #include <asm/cacheflush.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int bpf_jit_enable __read_mostly;
 
@@ -43,17 +53,23 @@ int bpf_jit_enable __read_mostly;
  * assembly code in arch/x86/net/bpf_jit.S
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u8 sk_load_word[], sk_load_half[], sk_load_byte[], sk_load_byte_msh[];
 extern u8 sk_load_word_positive_offset[], sk_load_half_positive_offset[];
 extern u8 sk_load_byte_positive_offset[], sk_load_byte_msh_positive_offset[];
 extern u8 sk_load_word_negative_offset[], sk_load_half_negative_offset[];
 extern u8 sk_load_byte_negative_offset[], sk_load_byte_msh_negative_offset[];
 =======
+=======
+>>>>>>> v3.18
 extern u8 sk_load_word[], sk_load_half[], sk_load_byte[];
 extern u8 sk_load_word_positive_offset[], sk_load_half_positive_offset[];
 extern u8 sk_load_byte_positive_offset[];
 extern u8 sk_load_word_negative_offset[], sk_load_half_negative_offset[];
 extern u8 sk_load_byte_negative_offset[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline u8 *emit_code(u8 *ptr, u32 bytes, unsigned int len)
@@ -76,11 +92,14 @@ static inline u8 *emit_code(u8 *ptr, u32 bytes, unsigned int len)
 #define EMIT3(b1, b2, b3)	EMIT((b1) + ((b2) << 8) + ((b3) << 16), 3)
 #define EMIT4(b1, b2, b3, b4)   EMIT((b1) + ((b2) << 8) + ((b3) << 16) + ((b4) << 24), 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EMIT1_off32(b1, off)	do { EMIT1(b1); EMIT(off, 4);} while (0)
 
 #define CLEAR_A() EMIT2(0x31, 0xc0) /* xor %eax,%eax */
 #define CLEAR_X() EMIT2(0x31, 0xdb) /* xor %ebx,%ebx */
 =======
+=======
+>>>>>>> v3.18
 #define EMIT1_off32(b1, off) \
 	do {EMIT1(b1); EMIT(off, 4); } while (0)
 #define EMIT2_off32(b1, b2, off) \
@@ -89,6 +108,9 @@ static inline u8 *emit_code(u8 *ptr, u32 bytes, unsigned int len)
 	do {EMIT3(b1, b2, b3); EMIT(off, 4); } while (0)
 #define EMIT4_off32(b1, b2, b3, b4, off) \
 	do {EMIT4(b1, b2, b3, b4); EMIT(off, 4); } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool is_imm8(int value)
@@ -96,6 +118,7 @@ static inline bool is_imm8(int value)
 	return value <= 127 && value >= -128;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline bool is_near(int offset)
 {
@@ -112,6 +135,8 @@ do {									\
 	}								\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 static inline bool is_simm32(s64 value)
 {
 	return value == (s64) (s32) value;
@@ -136,6 +161,9 @@ static int bpf_size_to_x86_bytes(int bpf_size)
 	else
 		return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* list of x86 cond jumps opcodes (. + s8)
@@ -147,6 +175,7 @@ static int bpf_size_to_x86_bytes(int bpf_size)
 #define X86_JNE 0x75
 #define X86_JBE 0x76
 #define X86_JA  0x77
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define EMIT_COND_JMP(op, offset)				\
@@ -173,6 +202,10 @@ do {								\
 #define X86_JGE 0x7D
 #define X86_JG  0x7F
 >>>>>>> v3.18
+=======
+#define X86_JGE 0x7D
+#define X86_JG  0x7F
+>>>>>>> v3.18
 
 static inline void bpf_flush_icache(void *start, void *end)
 {
@@ -187,6 +220,7 @@ static inline void bpf_flush_icache(void *start, void *end)
 #define CHOOSE_LOAD_FUNC(K, func) \
 	((int)K < 0 ? ((int)K >= SKF_LL_OFF ? func##_negative_offset : func) : func##_positive_offset)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Helper to find the offset of pkt_type in sk_buff
  * We want to make sure its still a 3bit field starting at a byte boundary.
@@ -797,6 +831,8 @@ cond_branch:			f_offset = addrs[i + filter[i].jf] - addrs[i];
 						   sizeof(struct work_struct)));
 			if (!image)
 =======
+=======
+>>>>>>> v3.18
 /* pick a register outside of BPF range for JIT internal work */
 #define AUX_REG (MAX_BPF_REG + 1)
 
@@ -1646,6 +1682,9 @@ void bpf_int_jit_compile(struct bpf_prog *prog)
 			header = bpf_jit_binary_alloc(proglen, &image,
 						      1, jit_fill_hole);
 			if (!header)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto out;
 		}
@@ -1653,6 +1692,7 @@ void bpf_int_jit_compile(struct bpf_prog *prog)
 	}
 
 	if (bpf_jit_enable > 1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bpf_jit_dump(flen, proglen, pass, image);
 
@@ -1682,6 +1722,8 @@ void bpf_jit_free(struct sk_filter *fp)
 		schedule_work(work);
 	}
 =======
+=======
+>>>>>>> v3.18
 		bpf_jit_dump(prog->len, proglen, 0, image);
 
 	if (image) {
@@ -1707,5 +1749,8 @@ void bpf_jit_free(struct bpf_prog *fp)
 
 free_filter:
 	bpf_prog_unlock_free(fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

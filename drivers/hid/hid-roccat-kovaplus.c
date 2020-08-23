@@ -198,7 +198,12 @@ KOVAPLUS_SYSFS_R(thingy, THINGY)
 
 #define KOVAPLUS_BIN_ATTRIBUTE_RW(thingy, THINGY) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 { \
+=======
+KOVAPLUS_SYSFS_RW(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 =======
 KOVAPLUS_SYSFS_RW(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
@@ -209,6 +214,7 @@ static struct bin_attribute bin_attr_##thingy = { \
 	.write = kovaplus_sysfs_write_ ## thingy \
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KOVAPLUS_BIN_ATTRIBUTE_R(thingy, THINGY) \
 { \
@@ -224,10 +230,16 @@ static struct bin_attribute bin_attr_##thingy = { \
 KOVAPLUS_SYSFS_W(thingy, THINGY); \
 static struct bin_attribute bin_attr_##thingy = { \
 >>>>>>> v3.18
+=======
+#define KOVAPLUS_BIN_ATTRIBUTE_W(thingy, THINGY) \
+KOVAPLUS_SYSFS_W(thingy, THINGY); \
+static struct bin_attribute bin_attr_##thingy = { \
+>>>>>>> v3.18
 	.attr = { .name = #thingy, .mode = 0220 }, \
 	.size = KOVAPLUS_SIZE_ ## THINGY, \
 	.write = kovaplus_sysfs_write_ ## thingy \
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 KOVAPLUS_SYSFS_W(control, CONTROL)
@@ -235,10 +247,15 @@ KOVAPLUS_SYSFS_RW(info, INFO)
 KOVAPLUS_SYSFS_RW(profile_settings, PROFILE_SETTINGS)
 KOVAPLUS_SYSFS_RW(profile_buttons, PROFILE_BUTTONS)
 =======
+=======
+>>>>>>> v3.18
 KOVAPLUS_BIN_ATTRIBUTE_W(control, CONTROL);
 KOVAPLUS_BIN_ATTRIBUTE_RW(info, INFO);
 KOVAPLUS_BIN_ATTRIBUTE_RW(profile_settings, PROFILE_SETTINGS);
 KOVAPLUS_BIN_ATTRIBUTE_RW(profile_buttons, PROFILE_BUTTONS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t kovaplus_sysfs_read_profilex_settings(struct file *fp,
@@ -280,7 +297,10 @@ static ssize_t kovaplus_sysfs_read_profilex_buttons(struct file *fp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PROFILE_ATTR(number)						\
 static struct bin_attribute bin_attr_profile##number##_settings = {	\
 	.attr = { .name = "profile" #number "_settings", .mode = 0440 },	\
@@ -300,6 +320,9 @@ PROFILE_ATTR(3);
 PROFILE_ATTR(4);
 PROFILE_ATTR(5);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t kovaplus_sysfs_show_actual_profile(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -323,7 +346,11 @@ static ssize_t kovaplus_sysfs_set_actual_profile(struct device *dev,
 	usb_dev = interface_to_usbdev(to_usb_interface(dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &profile);
+=======
+	retval = kstrtoul(buf, 10, &profile);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &profile);
 >>>>>>> v3.18
@@ -355,6 +382,12 @@ static ssize_t kovaplus_sysfs_set_actual_profile(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_profile, 0660,
+		   kovaplus_sysfs_show_actual_profile,
+		   kovaplus_sysfs_set_actual_profile);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_profile, 0660,
 		   kovaplus_sysfs_show_actual_profile,
@@ -369,6 +402,10 @@ static ssize_t kovaplus_sysfs_show_actual_cpi(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", kovaplus->actual_cpi);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_cpi, 0440, kovaplus_sysfs_show_actual_cpi, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_cpi, 0440, kovaplus_sysfs_show_actual_cpi, NULL);
 >>>>>>> v3.18
@@ -381,6 +418,11 @@ static ssize_t kovaplus_sysfs_show_actual_sensitivity_x(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", kovaplus->actual_x_sensitivity);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_sensitivity_x, 0440,
+		   kovaplus_sysfs_show_actual_sensitivity_x, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_sensitivity_x, 0440,
 		   kovaplus_sysfs_show_actual_sensitivity_x, NULL);
@@ -394,6 +436,11 @@ static ssize_t kovaplus_sysfs_show_actual_sensitivity_y(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", kovaplus->actual_y_sensitivity);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_sensitivity_y, 0440,
+		   kovaplus_sysfs_show_actual_sensitivity_y, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_sensitivity_y, 0440,
 		   kovaplus_sysfs_show_actual_sensitivity_y, NULL);
@@ -417,6 +464,7 @@ static ssize_t kovaplus_sysfs_show_firmware_version(struct device *dev,
 
 	return snprintf(buf, PAGE_SIZE, "%d\n", info.firmware_version);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute kovaplus_attributes[] = {
@@ -501,6 +549,8 @@ static struct bin_attribute kovaplus_bin_attributes[] = {
 	},
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(firmware_version, 0440,
 		   kovaplus_sysfs_show_firmware_version, NULL);
 
@@ -539,6 +589,9 @@ static const struct attribute_group kovaplus_group = {
 static const struct attribute_group *kovaplus_groups[] = {
 	&kovaplus_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -772,8 +825,12 @@ static int __init kovaplus_init(void)
 	if (IS_ERR(kovaplus_class))
 		return PTR_ERR(kovaplus_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kovaplus_class->dev_attrs = kovaplus_attributes;
 	kovaplus_class->dev_bin_attrs = kovaplus_bin_attributes;
+=======
+	kovaplus_class->dev_groups = kovaplus_groups;
+>>>>>>> v3.18
 =======
 	kovaplus_class->dev_groups = kovaplus_groups;
 >>>>>>> v3.18

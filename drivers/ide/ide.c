@@ -159,7 +159,11 @@ struct bus_type ide_bus_type = {
 	.remove		= generic_ide_remove,
 	.shutdown	= generic_ide_shutdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= ide_dev_attrs,
+=======
+	.dev_groups	= ide_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= ide_dev_groups,
 >>>>>>> v3.18

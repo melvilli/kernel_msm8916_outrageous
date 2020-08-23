@@ -10,6 +10,10 @@
 #include <linux/dmaengine.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_runtime.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_runtime.h>
 >>>>>>> v3.18
@@ -22,6 +26,10 @@
 #include <linux/of_platform.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_dma.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_dma.h>
 >>>>>>> v3.18
@@ -82,12 +90,18 @@ struct sirfsoc_dma_chan {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sirfsoc_dma_regs {
 	u32				ctrl[SIRFSOC_DMA_CHANNELS];
 	u32				interrupt_en;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sirfsoc_dma {
 	struct dma_device		dma;
@@ -98,6 +112,10 @@ struct sirfsoc_dma {
 	struct clk			*clk;
 	bool				is_marco;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sirfsoc_dma_regs		regs_save;
+>>>>>>> v3.18
 =======
 	struct sirfsoc_dma_regs		regs_save;
 >>>>>>> v3.18
@@ -106,6 +124,11 @@ struct sirfsoc_dma {
 #define DRV_NAME	"sirfsoc_dma"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int sirfsoc_dma_runtime_suspend(struct device *dev);
+
+>>>>>>> v3.18
 =======
 static int sirfsoc_dma_runtime_suspend(struct device *dev);
 
@@ -419,6 +442,11 @@ static int sirfsoc_dma_alloc_chan_resources(struct dma_chan *chan)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_runtime_get_sync(sdma->dma.dev);
+
+>>>>>>> v3.18
 =======
 	pm_runtime_get_sync(sdma->dma.dev);
 
@@ -456,6 +484,10 @@ static void sirfsoc_dma_free_chan_resources(struct dma_chan *chan)
 {
 	struct sirfsoc_dma_chan *schan = dma_chan_to_sirfsoc_dma_chan(chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sirfsoc_dma *sdma = dma_chan_to_sirfsoc_dma(chan);
+>>>>>>> v3.18
 =======
 	struct sirfsoc_dma *sdma = dma_chan_to_sirfsoc_dma(chan);
 >>>>>>> v3.18
@@ -480,6 +512,11 @@ static void sirfsoc_dma_free_chan_resources(struct dma_chan *chan)
 	list_for_each_entry_safe(sdesc, tmp, &descs, node)
 		kfree(sdesc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	pm_runtime_put(sdma->dma.dev);
+>>>>>>> v3.18
 =======
 
 	pm_runtime_put(sdma->dma.dev);
@@ -506,6 +543,7 @@ sirfsoc_dma_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	struct dma_tx_state *txstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sirfsoc_dma_chan *schan = dma_chan_to_sirfsoc_dma_chan(chan);
 	unsigned long flags;
 	enum dma_status ret;
@@ -513,6 +551,8 @@ sirfsoc_dma_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	spin_lock_irqsave(&schan->lock, flags);
 	ret = dma_cookie_status(chan, cookie, txstate);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_dma *sdma = dma_chan_to_sirfsoc_dma(chan);
 	struct sirfsoc_dma_chan *schan = dma_chan_to_sirfsoc_dma_chan(chan);
 	unsigned long flags;
@@ -536,6 +576,9 @@ sirfsoc_dma_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	residue = dma_request_bytes - (dma_pos - sdesc->addr);
 	dma_set_residue(txstate, residue);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&schan->lock, flags);
 
@@ -614,7 +657,11 @@ static struct dma_async_tx_descriptor *
 sirfsoc_dma_prep_cyclic(struct dma_chan *chan, dma_addr_t addr,
 	size_t buf_len, size_t period_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum dma_transfer_direction direction, unsigned long flags, void *context)
+=======
+	enum dma_transfer_direction direction, unsigned long flags)
+>>>>>>> v3.18
 =======
 	enum dma_transfer_direction direction, unsigned long flags)
 >>>>>>> v3.18
@@ -648,7 +695,11 @@ sirfsoc_dma_prep_cyclic(struct dma_chan *chan, dma_addr_t addr,
 
 	if (!sdesc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -683,7 +734,10 @@ bool sirfsoc_dma_filter_id(struct dma_chan *chan, void *chan_id)
 EXPORT_SYMBOL(sirfsoc_dma_filter_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SIRFSOC_DMA_BUSWIDTHS \
 	(BIT(DMA_SLAVE_BUSWIDTH_UNDEFINED) | \
 	BIT(DMA_SLAVE_BUSWIDTH_1_BYTE) | \
@@ -715,6 +769,9 @@ static struct dma_chan *of_dma_sirfsoc_xlate(struct of_phandle_args *dma_spec,
 	return dma_get_slave_channel(&sdma->channels[request].chan);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sirfsoc_dma_probe(struct platform_device *op)
 {
@@ -789,6 +846,10 @@ static int sirfsoc_dma_probe(struct platform_device *op)
 	dma->device_prep_interleaved_dma = sirfsoc_dma_prep_interleaved;
 	dma->device_prep_dma_cyclic = sirfsoc_dma_prep_cyclic;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma->device_slave_caps = sirfsoc_dma_device_slave_caps;
+>>>>>>> v3.18
 =======
 	dma->device_slave_caps = sirfsoc_dma_device_slave_caps;
 >>>>>>> v3.18
@@ -818,10 +879,16 @@ static int sirfsoc_dma_probe(struct platform_device *op)
 	tasklet_init(&sdma->tasklet, sirfsoc_dma_tasklet, (unsigned long)sdma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(sdma->clk);
 
 	/* Register DMA engine */
 	dev_set_drvdata(dev, sdma);
+=======
+	/* Register DMA engine */
+	dev_set_drvdata(dev, sdma);
+
+>>>>>>> v3.18
 =======
 	/* Register DMA engine */
 	dev_set_drvdata(dev, sdma);
@@ -832,7 +899,10 @@ static int sirfsoc_dma_probe(struct platform_device *op)
 		goto free_irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Device-tree DMA controller registration */
 	ret = of_dma_controller_register(dn, of_dma_sirfsoc_xlate, sdma);
 	if (ret) {
@@ -841,12 +911,20 @@ static int sirfsoc_dma_probe(struct platform_device *op)
 	}
 
 	pm_runtime_enable(&op->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(dev, "initialized SIRFSOC DMAC driver\n");
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unreg_dma_dev:
+	dma_async_device_unregister(dma);
+>>>>>>> v3.18
 =======
 unreg_dma_dev:
 	dma_async_device_unregister(dma);
@@ -864,6 +942,7 @@ static int sirfsoc_dma_remove(struct platform_device *op)
 	struct sirfsoc_dma *sdma = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(sdma->clk);
 	dma_async_device_unregister(&sdma->dma);
 	free_irq(sdma->irq, sdma);
@@ -872,6 +951,8 @@ static int sirfsoc_dma_remove(struct platform_device *op)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	of_dma_controller_free(op->dev.of_node);
 	dma_async_device_unregister(&sdma->dma);
 	free_irq(sdma->irq, sdma);
@@ -991,6 +1072,9 @@ static const struct dev_pm_ops sirfsoc_dma_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(sirfsoc_dma_pm_suspend, sirfsoc_dma_pm_resume)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct of_device_id sirfsoc_dma_match[] = {
 	{ .compatible = "sirf,prima2-dmac", },
@@ -1005,6 +1089,10 @@ static struct platform_driver sirfsoc_dma_driver = {
 		.name = DRV_NAME,
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm = &sirfsoc_dma_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm = &sirfsoc_dma_pm_ops,
 >>>>>>> v3.18

@@ -39,7 +39,11 @@ static void __hw_param_copy(void *dst, void *src)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __fimc_is_hw_update_param_global_shotmode(struct fimc_is *is)
+=======
+static void __fimc_is_hw_update_param_global_shotmode(struct fimc_is *is)
+>>>>>>> v3.18
 =======
 static void __fimc_is_hw_update_param_global_shotmode(struct fimc_is *is)
 >>>>>>> v3.18
@@ -52,7 +56,11 @@ static void __fimc_is_hw_update_param_global_shotmode(struct fimc_is *is)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __fimc_is_hw_update_param_sensor_framerate(struct fimc_is *is)
+=======
+static void __fimc_is_hw_update_param_sensor_framerate(struct fimc_is *is)
+>>>>>>> v3.18
 =======
 static void __fimc_is_hw_update_param_sensor_framerate(struct fimc_is *is)
 >>>>>>> v3.18
@@ -177,8 +185,13 @@ unsigned int __get_pending_param_count(struct fimc_is *is)
 
 	spin_lock_irqsave(&is->slock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = hweight32(config->p_region_index1);
 	count += hweight32(config->p_region_index2);
+=======
+	count = hweight32(config->p_region_index[0]);
+	count += hweight32(config->p_region_index[1]);
+>>>>>>> v3.18
 =======
 	count = hweight32(config->p_region_index[0]);
 	count += hweight32(config->p_region_index[1]);
@@ -190,6 +203,7 @@ unsigned int __get_pending_param_count(struct fimc_is *is)
 
 int __is_hw_update_params(struct fimc_is *is)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long *p_index1, *p_index2;
 	int i, id, ret = 0;
@@ -207,6 +221,8 @@ int __is_hw_update_params(struct fimc_is *is)
 	for (i = PARAM_ISP_CONTROL; i < PARAM_DRC_CONTROL; i++) {
 		if (test_bit(i, p_index1))
 =======
+=======
+>>>>>>> v3.18
 	unsigned long *p_index;
 	int i, id, ret = 0;
 
@@ -221,13 +237,20 @@ int __is_hw_update_params(struct fimc_is *is)
 
 	for (i = PARAM_ISP_CONTROL; i < PARAM_DRC_CONTROL; i++) {
 		if (test_bit(i, p_index))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = __fimc_is_hw_update_param(is, i);
 	}
 
 	for (i = PARAM_DRC_CONTROL; i < PARAM_SCALERC_CONTROL; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(i, p_index1))
+=======
+		if (test_bit(i, p_index))
+>>>>>>> v3.18
 =======
 		if (test_bit(i, p_index))
 >>>>>>> v3.18
@@ -236,7 +259,11 @@ int __is_hw_update_params(struct fimc_is *is)
 
 	for (i = PARAM_FD_CONTROL; i <= PARAM_FD_CONFIG; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit((i - 32), p_index2))
+=======
+		if (test_bit(i, p_index))
+>>>>>>> v3.18
 =======
 		if (test_bit(i, p_index))
 >>>>>>> v3.18
@@ -282,7 +309,11 @@ void __is_set_frame_size(struct fimc_is *is, struct v4l2_mbus_framefmt *mf)
 
 	if (test_bit(PARAM_ISP_OTF_INPUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      &is->config[index].p_region_index1))
+=======
+		      &is->config[index].p_region_index[0]))
+>>>>>>> v3.18
 =======
 		      &is->config[index].p_region_index[0]))
 >>>>>>> v3.18
@@ -331,7 +362,11 @@ void __is_set_sensor(struct fimc_is *is, int fps)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __is_set_init_isp_aa(struct fimc_is *is)
+=======
+static void __maybe_unused __is_set_init_isp_aa(struct fimc_is *is)
+>>>>>>> v3.18
 =======
 static void __maybe_unused __is_set_init_isp_aa(struct fimc_is *is)
 >>>>>>> v3.18
@@ -415,7 +450,11 @@ void __is_set_isp_adjust(struct fimc_is *is, u32 cmd, u32 val)
 	struct isp_param *isp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index1;
+=======
+	p_index = &is->config[index].p_region_index[0];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[0];
 >>>>>>> v3.18
@@ -466,7 +505,11 @@ void __is_set_isp_metering(struct fimc_is *is, u32 id, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index1;
+=======
+	p_index = &is->config[index].p_region_index[0];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[0];
 >>>>>>> v3.18
@@ -531,7 +574,11 @@ void __is_set_fd_control(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -550,7 +597,11 @@ void __is_set_fd_config_maxface(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -574,7 +625,11 @@ void __is_set_fd_config_rollangle(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -598,7 +653,11 @@ void __is_set_fd_config_yawangle(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -622,7 +681,11 @@ void __is_set_fd_config_smilemode(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -646,7 +709,11 @@ void __is_set_fd_config_blinkmode(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -670,7 +737,11 @@ void __is_set_fd_config_eyedetect(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -694,7 +765,11 @@ void __is_set_fd_config_mouthdetect(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -718,7 +793,11 @@ void __is_set_fd_config_orientation(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -742,7 +821,11 @@ void __is_set_fd_config_orientation_val(struct fimc_is *is, u32 val)
 	unsigned long *p_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_index = &is->config[index].p_region_index2;
+=======
+	p_index = &is->config[index].p_region_index[1];
+>>>>>>> v3.18
 =======
 	p_index = &is->config[index].p_region_index[1];
 >>>>>>> v3.18
@@ -763,21 +846,28 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 {
 	struct global_param *global;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sensor_param *sensor;
 	struct isp_param *isp;
 	struct drc_param *drc;
 	struct fd_param *fd;
 	unsigned long *p_index1, *p_index2;
 =======
+=======
+>>>>>>> v3.18
 	struct isp_param *isp;
 	struct drc_param *drc;
 	struct fd_param *fd;
 	unsigned long *p_index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int index;
 
 	index = is->config_index;
 	global = &is->config[index].global;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sensor = &is->config[index].sensor;
 	isp = &is->config[index].isp;
@@ -786,10 +876,15 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 	p_index1 = &is->config[index].p_region_index1;
 	p_index2 = &is->config[index].p_region_index2;
 =======
+=======
+>>>>>>> v3.18
 	isp = &is->config[index].isp;
 	drc = &is->config[index].drc;
 	fd = &is->config[index].fd;
 	p_index = &is->config[index].p_region_index[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Global */
@@ -804,7 +899,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 
 	isp->otf_input.cmd = OTF_INPUT_COMMAND_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_ISP_OTF_INPUT, p_index1)) {
+=======
+	if (!test_bit(PARAM_ISP_OTF_INPUT, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_ISP_OTF_INPUT, p_index)) {
 >>>>>>> v3.18
@@ -851,6 +950,7 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 	fimc_is_set_param_bit(is, PARAM_ISP_AA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_ISP_FLASH, p_index1))
 		__is_set_isp_flash(is, ISP_FLASH_COMMAND_DISABLE,
 						ISP_FLASH_REDEYE_DISABLE);
@@ -866,6 +966,8 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 
 	if (!test_bit(PARAM_ISP_ADJUST, p_index1)) {
 =======
+=======
+>>>>>>> v3.18
 	if (!test_bit(PARAM_ISP_FLASH, p_index))
 		__is_set_isp_flash(is, ISP_FLASH_COMMAND_DISABLE,
 						ISP_FLASH_REDEYE_DISABLE);
@@ -880,6 +982,9 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 		__is_set_isp_iso(is, ISP_ISO_COMMAND_AUTO, 0);
 
 	if (!test_bit(PARAM_ISP_ADJUST, p_index)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__is_set_isp_adjust(is, ISP_ADJUST_COMMAND_MANUAL_CONTRAST, 0);
 		__is_set_isp_adjust(is,
@@ -892,7 +997,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_ISP_METERING, p_index1)) {
+=======
+	if (!test_bit(PARAM_ISP_METERING, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_ISP_METERING, p_index)) {
 >>>>>>> v3.18
@@ -904,17 +1013,23 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_ISP_AFC, p_index1))
 		__is_set_isp_afc(is, ISP_AFC_COMMAND_AUTO, 0);
 
 	isp->otf_output.cmd = OTF_OUTPUT_COMMAND_ENABLE;
 	if (!test_bit(PARAM_ISP_OTF_OUTPUT, p_index1)) {
 =======
+=======
+>>>>>>> v3.18
 	if (!test_bit(PARAM_ISP_AFC, p_index))
 		__is_set_isp_afc(is, ISP_AFC_COMMAND_AUTO, 0);
 
 	isp->otf_output.cmd = OTF_OUTPUT_COMMAND_ENABLE;
 	if (!test_bit(PARAM_ISP_OTF_OUTPUT, p_index)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		isp->otf_output.width = DEFAULT_PREVIEW_STILL_WIDTH;
 		isp->otf_output.height = DEFAULT_PREVIEW_STILL_HEIGHT;
@@ -926,7 +1041,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 	isp->otf_output.err = OTF_OUTPUT_ERROR_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_ISP_DMA1_OUTPUT, p_index1)) {
+=======
+	if (!test_bit(PARAM_ISP_DMA1_OUTPUT, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_ISP_DMA1_OUTPUT, p_index)) {
 >>>>>>> v3.18
@@ -946,7 +1065,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_ISP_DMA2_OUTPUT, p_index1)) {
+=======
+	if (!test_bit(PARAM_ISP_DMA2_OUTPUT, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_ISP_DMA2_OUTPUT, p_index)) {
 >>>>>>> v3.18
@@ -967,7 +1090,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 
 	/* Sensor */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_SENSOR_FRAME_RATE, p_index1)) {
+=======
+	if (!test_bit(PARAM_SENSOR_FRAME_RATE, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_SENSOR_FRAME_RATE, p_index)) {
 >>>>>>> v3.18
@@ -981,7 +1108,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 
 	drc->otf_input.cmd = OTF_INPUT_COMMAND_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_DRC_OTF_INPUT, p_index1)) {
+=======
+	if (!test_bit(PARAM_DRC_OTF_INPUT, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_DRC_OTF_INPUT, p_index)) {
 >>>>>>> v3.18
@@ -1008,7 +1139,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 
 	drc->otf_output.cmd = OTF_OUTPUT_COMMAND_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(PARAM_DRC_OTF_OUTPUT, p_index1)) {
+=======
+	if (!test_bit(PARAM_DRC_OTF_OUTPUT, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_DRC_OTF_OUTPUT, p_index)) {
 >>>>>>> v3.18
@@ -1027,7 +1162,11 @@ void fimc_is_set_initial_params(struct fimc_is *is)
 
 	fd->otf_input.cmd = OTF_INPUT_COMMAND_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit((PARAM_FD_OTF_INPUT - 32), p_index2)) {
+=======
+	if (!test_bit(PARAM_FD_OTF_INPUT, p_index)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(PARAM_FD_OTF_INPUT, p_index)) {
 >>>>>>> v3.18

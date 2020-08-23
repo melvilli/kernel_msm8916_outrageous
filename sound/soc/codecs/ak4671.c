@@ -16,6 +16,10 @@
 #include <linux/i2c.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 #include "ak4671.h"
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* codec private data */
 struct ak4671_priv {
@@ -127,6 +132,8 @@ static const u8 ak4671_reg[AK4671_CACHEREGNUM] = {
 	0x00,	/* AK4671_DIGITAL_MIXING_CONTROL2	(0x59)	*/
 	0x00,	/* AK4671_SAR_ADC_CONTROL		(0x5a)	*/
 =======
+=======
+>>>>>>> v3.18
 /* ak4671 register cache & default register settings */
 static const struct reg_default ak4671_reg_defaults[] = {
 	{ 0x00, 0x00 },	/* AK4671_AD_DA_POWER_MANAGEMENT	(0x00)	*/
@@ -220,6 +227,9 @@ static const struct reg_default ak4671_reg_defaults[] = {
 	{ 0x58, 0x00 },	/* AK4671_SIDETONE_VOLUME_CONTROL	(0x58)	*/
 	{ 0x59, 0x00 },	/* AK4671_DIGITAL_MIXING_CONTROL2	(0x59)	*/
 	{ 0x5a, 0x00 },	/* AK4671_SAR_ADC_CONTROL		(0x5a)	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -342,10 +352,16 @@ static const struct snd_kcontrol_new ak4671_rout3_mixer_controls[] = {
 static const char *ak4671_lin_mux_texts[] =
 		{"LIN1", "LIN2", "LIN3", "LIN4"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ak4671_lin_mux_enum =
 	SOC_ENUM_SINGLE(AK4671_MIC_SIGNAL_SELECT, 0,
 			ARRAY_SIZE(ak4671_lin_mux_texts),
 			ak4671_lin_mux_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(ak4671_lin_mux_enum,
+			    AK4671_MIC_SIGNAL_SELECT, 0,
+			    ak4671_lin_mux_texts);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ak4671_lin_mux_enum,
 			    AK4671_MIC_SIGNAL_SELECT, 0,
@@ -357,10 +373,16 @@ static const struct snd_kcontrol_new ak4671_lin_mux_control =
 static const char *ak4671_rin_mux_texts[] =
 		{"RIN1", "RIN2", "RIN3", "RIN4"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ak4671_rin_mux_enum =
 	SOC_ENUM_SINGLE(AK4671_MIC_SIGNAL_SELECT, 2,
 			ARRAY_SIZE(ak4671_rin_mux_texts),
 			ak4671_rin_mux_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(ak4671_rin_mux_enum,
+			    AK4671_MIC_SIGNAL_SELECT, 2,
+			    ak4671_rin_mux_texts);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ak4671_rin_mux_enum,
 			    AK4671_MIC_SIGNAL_SELECT, 2,
@@ -732,6 +754,7 @@ static struct snd_soc_dai_driver ak4671_dai = {
 static int ak4671_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ak4671_priv *ak4671 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
@@ -750,6 +773,9 @@ static int ak4671_probe(struct snd_soc_codec *codec)
 =======
 	return ak4671_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 >>>>>>> v3.18
+=======
+	return ak4671_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
+>>>>>>> v3.18
 }
 
 static int ak4671_remove(struct snd_soc_codec *codec)
@@ -763,9 +789,14 @@ static struct snd_soc_codec_driver soc_codec_dev_ak4671 = {
 	.remove = ak4671_remove,
 	.set_bias_level = ak4671_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size = AK4671_CACHEREGNUM,
 	.reg_word_size = sizeof(u8),
 	.reg_cache_default = ak4671_reg,
+=======
+	.controls = ak4671_snd_controls,
+	.num_controls = ARRAY_SIZE(ak4671_snd_controls),
+>>>>>>> v3.18
 =======
 	.controls = ak4671_snd_controls,
 	.num_controls = ARRAY_SIZE(ak4671_snd_controls),
@@ -776,6 +807,7 @@ static struct snd_soc_codec_driver soc_codec_dev_ak4671 = {
 	.num_dapm_routes = ARRAY_SIZE(ak4671_intercon),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ak4671_i2c_probe(struct i2c_client *client,
 			    const struct i2c_device_id *id)
@@ -791,6 +823,8 @@ static int ak4671_i2c_probe(struct i2c_client *client,
 	i2c_set_clientdata(client, ak4671);
 	ak4671->control_type = SND_SOC_I2C;
 =======
+=======
+>>>>>>> v3.18
 static const struct regmap_config ak4671_regmap = {
 	.reg_bits = 8,
 	.val_bits = 8,
@@ -813,6 +847,9 @@ static int ak4671_i2c_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Failed to create regmap: %d\n", ret);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = snd_soc_register_codec(&client->dev,

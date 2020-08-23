@@ -2,7 +2,11 @@ Marvell Orion SPI device
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : should be "marvell,orion-spi".
+=======
+- compatible : should be "marvell,orion-spi" or "marvell,armada-370-spi".
+>>>>>>> v3.18
 =======
 - compatible : should be "marvell,orion-spi" or "marvell,armada-370-spi".
 >>>>>>> v3.18

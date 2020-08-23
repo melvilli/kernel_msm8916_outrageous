@@ -15,7 +15,11 @@
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct ad7606_platform_data - platform/board specifc information
+=======
+ * struct ad7606_platform_data - platform/board specific information
+>>>>>>> v3.18
 =======
  * struct ad7606_platform_data - platform/board specific information
 >>>>>>> v3.18
@@ -46,8 +50,13 @@ struct ad7606_platform_data {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct ad7606_chip_info - chip specifc information
  * @name:		indentification string for chip
+=======
+ * struct ad7606_chip_info - chip specific information
+ * @name:		identification string for chip
+>>>>>>> v3.18
 =======
  * struct ad7606_chip_info - chip specific information
  * @name:		identification string for chip

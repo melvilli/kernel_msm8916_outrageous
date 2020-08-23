@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm-generic/xor.h>
 =======
+=======
+>>>>>>> v3.18
 /*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -69,4 +72,7 @@ do {							\
 } while (0)
 
 #endif /* _ASM_POWERPC_XOR_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

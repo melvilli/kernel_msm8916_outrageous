@@ -1,8 +1,14 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * OMAP4XXX L3 Interconnect  error handling driver header
  *
  * Copyright (C) 2011 Texas Corporation
+=======
+ * OMAP L3 Interconnect  error handling driver header
+ *
+ * Copyright (C) 2011-2014 Texas Instruments Incorporated - http://www.ti.com/
+>>>>>>> v3.18
 =======
  * OMAP L3 Interconnect  error handling driver header
  *
@@ -12,6 +18,7 @@
  *	sricharan <r.sricharan@ti.com>
  *
  * This program is free software; you can redistribute it and/or modify
+<<<<<<< HEAD
 <<<<<<< HEAD
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -32,6 +39,8 @@
 
 #define L3_MODULES			3
 =======
+=======
+>>>>>>> v3.18
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
@@ -46,6 +55,9 @@
 #define MAX_L3_MODULES			3
 #define MAX_CLKDM_TARGETS		31
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CLEAR_STDERR_LOG		(1 << 31)
 #define CUSTOM_ERROR			0x2
@@ -56,6 +68,7 @@
 
 /* L3 TARG register offsets */
 #define L3_TARG_STDERRLOG_MAIN		0x48
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define L3_TARG_STDERRLOG_SLVOFSLSB	0x5c
 #define L3_TARG_STDERRLOG_MSTADDR	0x68
@@ -194,6 +207,8 @@ struct omap4_l3 {
 	/* memory base */
 	void __iomem *l3_base[L3_MODULES];
 =======
+=======
+>>>>>>> v3.18
 #define L3_TARG_STDERRLOG_HDR		0x4c
 #define L3_TARG_STDERRLOG_MSTADDR	0x50
 #define L3_TARG_STDERRLOG_INFO		0x58
@@ -287,14 +302,20 @@ struct omap_l3 {
 	struct l3_masters_data *l3_masters;
 	int num_masters;
 	u32 mst_addr_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int debug_irq;
 	int app_irq;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 static struct l3_target_data omap_l3_target_data_clk1[] = {
 	{0x100,	"DMM1",},
@@ -642,4 +663,7 @@ static const struct omap_l3 am4372_l3_data = {
 };
 
 #endif	/* __OMAP_L3_NOC_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

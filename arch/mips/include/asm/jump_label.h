@@ -21,10 +21,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __always_inline bool arch_static_branch(struct static_key *key)
 {
 	asm_volatile_goto("1:\tnop\n\t"
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_MICROMIPS
 #define NOP_INSN "nop32"
 #else
@@ -34,6 +37,9 @@ static __always_inline bool arch_static_branch(struct static_key *key)
 static __always_inline bool arch_static_branch(struct static_key *key)
 {
 	asm_volatile_goto("1:\t" NOP_INSN "\n\t"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"nop\n\t"
 		".pushsection __jump_table,  \"aw\"\n\t"

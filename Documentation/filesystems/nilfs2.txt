@@ -26,9 +26,14 @@ cleaner or garbage collector) are required.  Details on the tools are
 described in the man pages included in the package.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Project web page:    http://www.nilfs.org/en/
 Download page:       http://www.nilfs.org/en/download.html
 Git tree web page:   http://www.nilfs.org/git/
+=======
+Project web page:    http://nilfs.sourceforge.net/
+Download page:       http://nilfs.sourceforge.net/en/download.html
+>>>>>>> v3.18
 =======
 Project web page:    http://nilfs.sourceforge.net/
 Download page:       http://nilfs.sourceforge.net/en/download.html
@@ -87,7 +92,10 @@ nodiscard(*)		The discard/TRIM commands are sent to the underlying
 			for SSD devices and sparse/thinly-provisioned LUNs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Ioctls
 ======
 
@@ -151,6 +159,9 @@ Table of NILFS2 specific ioctls
 			        upper limit of segments in bytes. This ioctl
 			        is used by nilfs_resize utility.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 NILFS2 usage
 ============

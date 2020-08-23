@@ -61,6 +61,10 @@ static int sysv_remount(struct super_block *sb, int *flags, char *data)
 	struct sysv_sb_info *sbi = SYSV_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -166,9 +170,12 @@ void sysv_set_inode(struct inode *inode, dev_t rdev)
 		inode->i_mapping->a_ops = &sysv_aops;
 	} else if (S_ISLNK(inode->i_mode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inode->i_op = &sysv_symlink_inode_operations;
 		inode->i_mapping->a_ops = &sysv_aops;
 =======
+=======
+>>>>>>> v3.18
 		if (inode->i_blocks) {
 			inode->i_op = &sysv_symlink_inode_operations;
 			inode->i_mapping->a_ops = &sysv_aops;
@@ -177,6 +184,9 @@ void sysv_set_inode(struct inode *inode, dev_t rdev)
 			nd_terminate_link(SYSV_I(inode)->i_data, inode->i_size,
 				sizeof(SYSV_I(inode)->i_data) - 1);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else
 		init_special_inode(inode, inode->i_mode, rdev);
@@ -305,7 +315,11 @@ int sysv_sync_inode(struct inode *inode)
 static void sysv_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18

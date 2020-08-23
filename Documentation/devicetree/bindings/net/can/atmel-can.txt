@@ -9,7 +9,11 @@ Example:
 
 	can0: can@f000c000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatbile = "atmel,at91sam9x5-can";
+=======
+		compatible = "atmel,at91sam9x5-can";
+>>>>>>> v3.18
 =======
 		compatible = "atmel,at91sam9x5-can";
 >>>>>>> v3.18

@@ -16,7 +16,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -669,6 +672,7 @@ int cypress_init(struct psmouse *psmouse)
 	struct cytp_data *cytp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cytp = (struct cytp_data *)kzalloc(sizeof(struct cytp_data), GFP_KERNEL);
 	psmouse->private = (void *)cytp;
 	if (cytp == NULL)
@@ -679,6 +683,8 @@ int cypress_init(struct psmouse *psmouse)
 	psmouse->pktsize = 8;
 
 =======
+=======
+>>>>>>> v3.18
 	cytp = kzalloc(sizeof(struct cytp_data), GFP_KERNEL);
 	if (!cytp)
 		return -ENOMEM;
@@ -688,6 +694,9 @@ int cypress_init(struct psmouse *psmouse)
 
 	cypress_reset(psmouse);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cypress_query_hardware(psmouse)) {
 		psmouse_err(psmouse, "Unable to query Trackpad hardware.\n");

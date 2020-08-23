@@ -8,7 +8,11 @@
  * kind, whether express or implied.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap4.dtsi"
+=======
+#include "omap4.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap4.dtsi"
 >>>>>>> v3.18
@@ -17,7 +21,11 @@
 	cpus {
 		/* OMAP446x 'standard device' variants OPP50 to OPPTurbo */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu@0 {
+=======
+		cpu0: cpu@0 {
+>>>>>>> v3.18
 =======
 		cpu0: cpu@0 {
 >>>>>>> v3.18
@@ -29,12 +37,18 @@
 			>;
 			clock-latency = <300000>; /* From legacy driver */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			/* cooling options */
 			cooling-min-level = <0>;
 			cooling-max-level = <2>;
 			#cooling-cells = <2>; /* min followed by max */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -42,12 +56,15 @@
 	pmu {
 		compatible = "arm,cortex-a9-pmu";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 54 0x4>,
 			     <0 55 0x4>;
 		ti,hwmods = "debugss";
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 54 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 55 IRQ_TYPE_LEVEL_HIGH>;
 		ti,hwmods = "debugss";
@@ -109,4 +126,7 @@
 };
 
 /include/ "omap446x-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

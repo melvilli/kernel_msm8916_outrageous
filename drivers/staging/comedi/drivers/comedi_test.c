@@ -22,12 +22,16 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************/
+=======
+*/
+>>>>>>> v3.18
 =======
 */
 >>>>>>> v3.18
@@ -55,6 +59,10 @@ zero volts).
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -87,16 +95,22 @@ static const int nano_per_micro = 1000;
 /* fake analog input ranges */
 static const struct comedi_lrange waveform_ai_ranges = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	2,
 	{
 	 BIP_RANGE(10),
 	 BIP_RANGE(5),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	2, {
 		BIP_RANGE(10),
 		BIP_RANGE(5)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -167,10 +181,15 @@ static unsigned short fake_waveform(struct comedi_device *dev,
 	case SAWTOOTH_CHAN:
 		return fake_sawtooth(dev, range, current_time);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case SQUARE_CHAN:
 		return fake_squarewave(dev, range, current_time);
 		break;
+=======
+	case SQUARE_CHAN:
+		return fake_squarewave(dev, range, current_time);
+>>>>>>> v3.18
 =======
 	case SQUARE_CHAN:
 		return fake_squarewave(dev, range, current_time);
@@ -211,10 +230,17 @@ static void waveform_ai_interrupt(unsigned long arg)
 	devpriv->usec_remainder =
 	    (devpriv->usec_remainder + elapsed_time) % devpriv->scan_period;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	async->events = 0;
 
 	if (cmd->stop_src == TRIG_COUNT) {
 		unsigned int remaining = cmd->stop_arg - devpriv->ai_count;
+=======
+
+	if (cmd->stop_src == TRIG_COUNT) {
+		unsigned int remaining = cmd->stop_arg - devpriv->ai_count;
+
+>>>>>>> v3.18
 =======
 
 	if (cmd->stop_src == TRIG_COUNT) {
@@ -232,6 +258,10 @@ static void waveform_ai_interrupt(unsigned long arg)
 		for (j = 0; j < cmd->chanlist_len; j++) {
 			unsigned short sample;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -262,7 +292,11 @@ static int waveform_ai_cmdtest(struct comedi_device *dev,
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tmp;
+=======
+	unsigned int arg;
+>>>>>>> v3.18
 =======
 	unsigned int arg;
 >>>>>>> v3.18
@@ -318,6 +352,7 @@ static int waveform_ai_cmdtest(struct comedi_device *dev,
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = cmd->scan_begin_arg;
 		/* round to nearest microsec */
 		cmd->scan_begin_arg =
@@ -335,6 +370,8 @@ static int waveform_ai_cmdtest(struct comedi_device *dev,
 		if (tmp != cmd->convert_arg)
 			err++;
 =======
+=======
+>>>>>>> v3.18
 		arg = cmd->scan_begin_arg;
 		/* round to nearest microsec */
 		arg = nano_per_micro *
@@ -347,6 +384,9 @@ static int waveform_ai_cmdtest(struct comedi_device *dev,
 		arg = nano_per_micro *
 		      ((arg + (nano_per_micro / 2)) / nano_per_micro);
 		err |= cfc_check_trigger_arg_is(&cmd->convert_arg, arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -363,9 +403,15 @@ static int waveform_ai_cmd(struct comedi_device *dev,
 	struct comedi_cmd *cmd = &s->async->cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->flags & TRIG_RT) {
 		comedi_error(dev,
 			     "commands at RT priority not supported in this driver");
+=======
+	if (cmd->flags & CMDF_PRIORITY) {
+		dev_err(dev->class_dev,
+			"commands at RT priority not supported in this driver\n");
+>>>>>>> v3.18
 =======
 	if (cmd->flags & CMDF_PRIORITY) {
 		dev_err(dev->class_dev,
@@ -380,12 +426,17 @@ static int waveform_ai_cmd(struct comedi_device *dev,
 	if (cmd->convert_src == TRIG_NOW)
 		devpriv->convert_period = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (cmd->convert_src == TRIG_TIMER)
 		devpriv->convert_period = cmd->convert_arg / nano_per_micro;
 	else {
 		comedi_error(dev, "bug setting conversion period");
 		return -1;
 	}
+=======
+	else	/* TRIG_TIMER */
+		devpriv->convert_period = cmd->convert_arg / nano_per_micro;
+>>>>>>> v3.18
 =======
 	else	/* TRIG_TIMER */
 		devpriv->convert_period = cmd->convert_arg / nano_per_micro;
@@ -446,10 +497,16 @@ static int waveform_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -492,11 +549,15 @@ static int waveform_attach(struct comedi_device *dev,
 	s->maxdata = 0xffff;
 	s->range_table = &waveform_ai_ranges;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->len_chanlist = s->n_chan * 2;
 	s->insn_write = waveform_ao_insn_write;
 	s->do_cmd = NULL;
 	s->do_cmdtest = NULL;
 	s->cancel = NULL;
+=======
+	s->insn_write = waveform_ao_insn_write;
+>>>>>>> v3.18
 =======
 	s->insn_write = waveform_ao_insn_write;
 >>>>>>> v3.18
@@ -506,7 +567,11 @@ static int waveform_attach(struct comedi_device *dev,
 		devpriv->ao_loopbacks[i] = s->maxdata / 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_timer(&(devpriv->timer));
+=======
+	init_timer(&devpriv->timer);
+>>>>>>> v3.18
 =======
 	init_timer(&devpriv->timer);
 >>>>>>> v3.18
@@ -515,9 +580,15 @@ static int waveform_attach(struct comedi_device *dev,
 
 	dev_info(dev->class_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s: %i microvolt, %li microsecond waveform attached\n",
 		dev->board_name,
 		devpriv->uvolt_amplitude, devpriv->usec_period);
+=======
+		 "%s: %i microvolt, %li microsecond waveform attached\n",
+		 dev->board_name,
+		 devpriv->uvolt_amplitude, devpriv->usec_period);
+>>>>>>> v3.18
 =======
 		 "%s: %i microvolt, %li microsecond waveform attached\n",
 		 dev->board_name,

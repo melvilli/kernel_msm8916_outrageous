@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012 Coraid, Inc.  See COPYING for GPL terms. */
+=======
+/* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
 >>>>>>> v3.18
@@ -40,6 +44,7 @@ MODULE_PARM_DESC(aoe_maxout,
 	"Only aoe_maxout outstanding packets for every MAC on eX.Y.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static wait_queue_head_t ktiowq;
 static struct ktstate kts;
 
@@ -49,6 +54,8 @@ static struct {
 	spinlock_t lock;
 } iocq;
 =======
+=======
+>>>>>>> v3.18
 /* The number of online cpus during module initialization gives us a
  * convenient heuristic cap on the parallelism used for ktio threads
  * doing I/O completion.  It is not important that the cap equal the
@@ -70,6 +77,9 @@ struct iocq_ktio {
 	spinlock_t lock;
 };
 static struct iocq_ktio *iocq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct page *empty_page;
@@ -212,8 +222,12 @@ aoe_freetframe(struct frame *f)
 	t = f->t;
 	f->buf = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->lba = 0;
 	f->bv = NULL;
+=======
+	memset(&f->iter, 0, sizeof(f->iter));
+>>>>>>> v3.18
 =======
 	memset(&f->iter, 0, sizeof(f->iter));
 >>>>>>> v3.18
@@ -315,6 +329,7 @@ newframe(struct aoedev *d)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 skb_fillup(struct sk_buff *skb, struct bio_vec *bv, ulong off, ulong cnt)
 {
 	int frag = 0;
@@ -331,6 +346,8 @@ loop:
 	off = bv->bv_offset;
 	goto loop;
 =======
+=======
+>>>>>>> v3.18
 skb_fillup(struct sk_buff *skb, struct bio *bio, struct bvec_iter iter)
 {
 	int frag = 0;
@@ -339,6 +356,9 @@ skb_fillup(struct sk_buff *skb, struct bio *bio, struct bvec_iter iter)
 	__bio_for_each_segment(bv, bio, iter, iter)
 		skb_fill_page_desc(skb, frag++, bv.bv_page,
 				   bv.bv_offset, bv.bv_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -377,6 +397,7 @@ ata_rw_frameinit(struct frame *f)
 	f->waited = 0;
 	f->waited_total = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (f->buf)
 		f->lba = f->buf->sector;
 
@@ -384,10 +405,15 @@ ata_rw_frameinit(struct frame *f)
 	ah->scnt = f->bcnt >> 9;
 	put_lba(ah, f->lba);
 =======
+=======
+>>>>>>> v3.18
 
 	/* set up ata header */
 	ah->scnt = f->iter.bi_size >> 9;
 	put_lba(ah, f->iter.bi_sector);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (t->d->flags & DEVFL_EXT) {
 		ah->aflags |= AOEAFL_EXT;
@@ -398,17 +424,23 @@ ata_rw_frameinit(struct frame *f)
 	}
 	if (f->buf && bio_data_dir(f->buf->bio) == WRITE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb_fillup(skb, f->bv, f->bv_off, f->bcnt);
 		ah->aflags |= AOEAFL_WRITE;
 		skb->len += f->bcnt;
 		skb->data_len = f->bcnt;
 		skb->truesize += f->bcnt;
 =======
+=======
+>>>>>>> v3.18
 		skb_fillup(skb, f->buf->bio, f->iter);
 		ah->aflags |= AOEAFL_WRITE;
 		skb->len += f->iter.bi_size;
 		skb->data_len = f->iter.bi_size;
 		skb->truesize += f->iter.bi_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		t->wpkts++;
 	} else {
@@ -426,10 +458,15 @@ aoecmd_ata_rw(struct aoedev *d)
 	struct frame *f;
 	struct buf *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aoetgt *t;
 	struct sk_buff *skb;
 	struct sk_buff_head queue;
 	ulong bcnt, fbcnt;
+=======
+	struct sk_buff *skb;
+	struct sk_buff_head queue;
+>>>>>>> v3.18
 =======
 	struct sk_buff *skb;
 	struct sk_buff_head queue;
@@ -441,6 +478,7 @@ aoecmd_ata_rw(struct aoedev *d)
 	f = newframe(d);
 	if (f == NULL)
 		return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	t = *d->tgt;
 	bcnt = d->maxbcnt;
@@ -477,6 +515,8 @@ aoecmd_ata_rw(struct aoedev *d)
 	buf->nframesout += 1;
 	buf->sector += bcnt >> 9;
 =======
+=======
+>>>>>>> v3.18
 
 	/* initialize the headers & frame */
 	f->buf = buf;
@@ -493,6 +533,9 @@ aoecmd_ata_rw(struct aoedev *d)
 	buf->nframesout += 1;
 
 	ata_rw_frameinit(f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb = skb_clone(f->skb, GFP_ATOMIC);
@@ -555,7 +598,10 @@ resend(struct aoedev *d, struct frame *f)
 	struct sk_buff_head queue;
 	struct aoe_hdr *h;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aoe_atahdr *ah;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct aoetgt *t;
@@ -573,7 +619,10 @@ resend(struct aoedev *d, struct frame *f)
 	}
 	h = (struct aoe_hdr *) skb_mac_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah = (struct aoe_atahdr *) (h+1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -693,10 +742,14 @@ reassign_frame(struct frame *f)
 	nf->skb = f->skb;
 	nf->buf = f->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf->bcnt = f->bcnt;
 	nf->lba = f->lba;
 	nf->bv = f->bv;
 	nf->bv_off = f->bv_off;
+=======
+	nf->iter = f->iter;
+>>>>>>> v3.18
 =======
 	nf->iter = f->iter;
 >>>>>>> v3.18
@@ -732,15 +785,21 @@ probe(struct aoetgt *t)
 	f->flags |= FFL_PROBE;
 	ifrotate(t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->bcnt = t->d->maxbcnt ? t->d->maxbcnt : DEFAULTBCNT;
 	ata_rw_frameinit(f);
 	skb = f->skb;
 	for (frag = 0, n = f->bcnt; n > 0; ++frag, n -= m) {
 =======
+=======
+>>>>>>> v3.18
 	f->iter.bi_size = t->d->maxbcnt ? t->d->maxbcnt : DEFAULTBCNT;
 	ata_rw_frameinit(f);
 	skb = f->skb;
 	for (frag = 0, n = f->iter.bi_size; n > 0; ++frag, n -= m) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (n < PAGE_SIZE)
 			m = n;
@@ -749,9 +808,15 @@ probe(struct aoetgt *t)
 		skb_fill_page_desc(skb, frag, empty_page, 0, m);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->len += f->bcnt;
 	skb->data_len = f->bcnt;
 	skb->truesize += f->bcnt;
+=======
+	skb->len += f->iter.bi_size;
+	skb->data_len = f->iter.bi_size;
+	skb->truesize += f->iter.bi_size;
+>>>>>>> v3.18
 =======
 	skb->len += f->iter.bi_size;
 	skb->data_len = f->iter.bi_size;
@@ -994,6 +1059,7 @@ static void
 bio_pageinc(struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
 	struct page *page;
 	int i;
@@ -1010,6 +1076,8 @@ bio_pageinc(struct bio *bio)
 				BUG();
 			}
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec bv;
 	struct page *page;
 	struct bvec_iter iter;
@@ -1019,6 +1087,9 @@ bio_pageinc(struct bio *bio)
 		 * compound pages is no longer allowed by the kernel.
 		 */
 		page = compound_head(bv.bv_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		atomic_inc(&page->_count);
 	}
@@ -1028,12 +1099,15 @@ static void
 bio_pagedec(struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
 	int i;
 
 	bio_for_each_segment(bv, bio, i)
 		atomic_dec(&bv->bv_page->_count);
 =======
+=======
+>>>>>>> v3.18
 	struct page *page;
 	struct bio_vec bv;
 	struct bvec_iter iter;
@@ -1042,6 +1116,9 @@ bio_pagedec(struct bio *bio)
 		page = compound_head(bv.bv_page);
 		atomic_dec(&page->_count);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1052,12 +1129,17 @@ bufinit(struct buf *buf, struct request *rq, struct bio *bio)
 	buf->rq = rq;
 	buf->bio = bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->resid = bio->bi_size;
 	buf->sector = bio->bi_sector;
 	bio_pageinc(bio);
 	buf->bv = bio_iovec(bio);
 	buf->bv_resid = buf->bv->bv_len;
 	WARN_ON(buf->bv_resid == 0);
+=======
+	buf->iter = bio->bi_iter;
+	bio_pageinc(bio);
+>>>>>>> v3.18
 =======
 	buf->iter = bio->bi_iter;
 	bio_pageinc(bio);
@@ -1247,6 +1329,7 @@ gettgt(struct aoedev *d, char *addr)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 bvcpy(struct bio_vec *bv, ulong off, struct sk_buff *skb, long cnt)
 {
 	ulong fcnt;
@@ -1266,6 +1349,8 @@ loop:
 	off = bv->bv_offset;
 	goto loop;
 =======
+=======
+>>>>>>> v3.18
 bvcpy(struct sk_buff *skb, struct bio *bio, struct bvec_iter iter, long cnt)
 {
 	int soff = 0;
@@ -1278,6 +1363,9 @@ bvcpy(struct sk_buff *skb, struct bio *bio, struct bvec_iter iter, long cnt)
 		skb_copy_bits(skb, soff, p, bv.bv_len);
 		soff += bv.bv_len;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1295,7 +1383,11 @@ aoe_end_request(struct aoedev *d, struct request *rq, int fastfail)
 		bio = rq->bio;
 		bok = !fastfail && test_bit(BIO_UPTODATE, &bio->bi_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (__blk_end_request(rq, bok ? 0 : -EIO, bio->bi_size));
+=======
+	} while (__blk_end_request(rq, bok ? 0 : -EIO, bio->bi_iter.bi_size));
+>>>>>>> v3.18
 =======
 	} while (__blk_end_request(rq, bok ? 0 : -EIO, bio->bi_iter.bi_size));
 >>>>>>> v3.18
@@ -1376,8 +1468,11 @@ noskb:		if (buf)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bvcpy(f->bv, f->bv_off, skb, n);
 =======
+=======
+>>>>>>> v3.18
 		if (n > f->iter.bi_size) {
 			pr_err_ratelimited("%s e%ld.%d.  bytes=%ld need=%u\n",
 				"aoe: too-large data size in read from",
@@ -1387,6 +1482,9 @@ noskb:		if (buf)
 			break;
 		}
 		bvcpy(skb, f->buf->bio, f->iter, n);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ATA_CMD_PIO_WRITE:
 	case ATA_CMD_PIO_WRITE_EXT:
@@ -1431,7 +1529,11 @@ out:
 	aoe_freetframe(f);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (buf && --buf->nframesout == 0 && buf->resid == 0)
+=======
+	if (buf && --buf->nframesout == 0 && buf->iter.bi_size == 0)
+>>>>>>> v3.18
 =======
 	if (buf && --buf->nframesout == 0 && buf->iter.bi_size == 0)
 >>>>>>> v3.18
@@ -1447,7 +1549,11 @@ out:
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ktio(void)
+=======
+ktio(int id)
+>>>>>>> v3.18
 =======
 ktio(int id)
 >>>>>>> v3.18
@@ -1456,6 +1562,10 @@ ktio(int id)
 	struct list_head *pos;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int actual_id;
+>>>>>>> v3.18
 =======
 	int actual_id;
 >>>>>>> v3.18
@@ -1463,6 +1573,7 @@ ktio(int id)
 	for (i = 0; ; ++i) {
 		if (i == MAXIOC)
 			return 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (list_empty(&iocq.head))
 			return 0;
@@ -1473,6 +1584,8 @@ ktio(int id)
 		ktiocomplete(f);
 		spin_lock_irq(&iocq.lock);
 =======
+=======
+>>>>>>> v3.18
 		if (list_empty(&iocq[id].head))
 			return 0;
 		pos = iocq[id].head.next;
@@ -1493,6 +1606,9 @@ ktio(int id)
 			mutex_unlock(&ktio_spawn_lock);
 		}
 		spin_lock_irq(&iocq[id].lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1511,7 +1627,11 @@ kthread(void *vp)
 	do {
 		spin_lock_irq(k->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		more = k->fn();
+=======
+		more = k->fn(k->id);
+>>>>>>> v3.18
 =======
 		more = k->fn(k->id);
 >>>>>>> v3.18
@@ -1544,7 +1664,11 @@ aoe_ktstart(struct ktstate *k)
 
 	init_completion(&k->rendez);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task = kthread_run(kthread, k, k->name);
+=======
+	task = kthread_run(kthread, k, "%s", k->name);
+>>>>>>> v3.18
 =======
 	task = kthread_run(kthread, k, "%s", k->name);
 >>>>>>> v3.18
@@ -1561,6 +1685,7 @@ static void
 ktcomplete(struct frame *f, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ulong flags;
 
 	f->r_skb = skb;
@@ -1569,6 +1694,8 @@ ktcomplete(struct frame *f, struct sk_buff *skb)
 	spin_unlock_irqrestore(&iocq.lock, flags);
 	wake_up(&ktiowq);
 =======
+=======
+>>>>>>> v3.18
 	int id;
 	ulong flags;
 
@@ -1587,6 +1714,9 @@ ktcomplete(struct frame *f, struct sk_buff *skb)
 	list_add_tail(&f->head, &iocq[id].head);
 	spin_unlock_irqrestore(&iocq[id].lock, flags);
 	wake_up(&ktiowq[id]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1926,7 +2056,11 @@ aoe_failbuf(struct aoedev *d, struct buf *buf)
 	if (buf == NULL)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->resid = 0;
+=======
+	buf->iter.bi_size = 0;
+>>>>>>> v3.18
 =======
 	buf->iter.bi_size = 0;
 >>>>>>> v3.18
@@ -1939,7 +2073,10 @@ void
 aoe_flush_iocq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < ncpus; i++) {
@@ -1951,6 +2088,9 @@ aoe_flush_iocq(void)
 void
 aoe_flush_iocq_by_index(int id)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct frame *f;
 	struct aoedev *d;
@@ -1960,9 +2100,15 @@ aoe_flush_iocq_by_index(int id)
 	ulong flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&iocq.lock, flags);
 	list_splice_init(&iocq.head, &flist);
 	spin_unlock_irqrestore(&iocq.lock, flags);
+=======
+	spin_lock_irqsave(&iocq[id].lock, flags);
+	list_splice_init(&iocq[id].head, &flist);
+	spin_unlock_irqrestore(&iocq[id].lock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&iocq[id].lock, flags);
 	list_splice_init(&iocq[id].head, &flist);
@@ -1991,6 +2137,11 @@ aoecmd_init(void)
 {
 	void *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+	int ret;
+>>>>>>> v3.18
 =======
 	int i;
 	int ret;
@@ -2003,6 +2154,7 @@ aoecmd_init(void)
 	empty_page = virt_to_page(p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&iocq.head);
 	spin_lock_init(&iocq.lock);
 	init_waitqueue_head(&ktiowq);
@@ -2012,6 +2164,8 @@ aoecmd_init(void)
 	kts.lock = &iocq.lock;
 	return aoe_ktstart(&kts);
 =======
+=======
+>>>>>>> v3.18
 	ncpus = num_online_cpus();
 
 	iocq = kcalloc(ncpus, sizeof(struct iocq_ktio), GFP_KERNEL);
@@ -2058,6 +2212,9 @@ kts_fail:
 	kfree(iocq);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2065,10 +2222,13 @@ void
 aoecmd_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aoe_ktstop(&kts);
 	aoe_flush_iocq();
 
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < ncpus; i++)
@@ -2084,6 +2244,9 @@ aoecmd_exit(void)
 	kfree(kts);
 	kfree(ktiowq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_page((unsigned long) page_address(empty_page));
 	empty_page = NULL;

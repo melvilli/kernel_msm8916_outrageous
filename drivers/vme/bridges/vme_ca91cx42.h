@@ -361,7 +361,10 @@ static const int CA91CX42_VSI_TO[] = { VSI0_TO, VSI1_TO, VSI2_TO, VSI3_TO,
 #define CA91CX42_DCTL_L2V		(1<<31)
 #define CA91CX42_DCTL_VDW_M		(3<<22)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CA91CX42_DCTL_VDW_M		(3<<22)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CA91CX42_DCTL_VDW_D8		0

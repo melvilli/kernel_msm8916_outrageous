@@ -12,7 +12,10 @@ config HFSPLUS_FS
 	  data forks and creator codes, but it also has several UNIX
 	  style features such as file ownership and permissions.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config HFSPLUS_FS_POSIX_ACL
 	bool "HFS+ POSIX Access Control Lists"
@@ -31,4 +34,7 @@ config HFSPLUS_FS_POSIX_ACL
 	  which are part of the NFSv4 standard.
 
 	  If you don't know what Access Control Lists are, say N
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

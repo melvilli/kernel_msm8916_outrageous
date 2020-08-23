@@ -23,7 +23,10 @@ config ATL2
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -38,7 +41,10 @@ config ATL1
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -54,7 +60,10 @@ config ATL1E
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -69,7 +78,10 @@ config ATL1C
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -84,7 +96,10 @@ config ALX
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MDIO

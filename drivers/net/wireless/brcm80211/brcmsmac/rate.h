@@ -217,6 +217,7 @@ static inline u8 cck_phy2mac_rate(u8 signal)
 /* sanitize, and sort a rateset with the basic bit(s) preserved, validate
  * rateset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool
 brcms_c_rate_hwrs_filter_sort_validate(struct brcms_c_rateset *rs,
 				       const struct brcms_c_rateset *hw_rs,
@@ -247,6 +248,8 @@ extern void brcms_c_rateset_mcs_build(struct brcms_c_rateset *rateset,
 extern void brcms_c_rateset_bw_mcs_filter(struct brcms_c_rateset *rateset,
 					  u8 bw);
 =======
+=======
+>>>>>>> v3.18
 bool brcms_c_rate_hwrs_filter_sort_validate(struct brcms_c_rateset *rs,
 					    const struct brcms_c_rateset *hw_rs,
 					    bool check_brate, u8 txstreams);
@@ -272,6 +275,9 @@ void brcms_c_rateset_mcs_upd(struct brcms_c_rateset *rs, u8 txstreams);
 void brcms_c_rateset_mcs_clear(struct brcms_c_rateset *rateset);
 void brcms_c_rateset_mcs_build(struct brcms_c_rateset *rateset, u8 txstreams);
 void brcms_c_rateset_bw_mcs_filter(struct brcms_c_rateset *rateset, u8 bw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_RATE_H_ */

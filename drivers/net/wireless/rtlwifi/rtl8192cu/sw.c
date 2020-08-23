@@ -32,6 +32,10 @@
 #include "../usb.h"
 #include "../efuse.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../base.h"
+>>>>>>> v3.18
 =======
 #include "../base.h"
 >>>>>>> v3.18
@@ -46,6 +50,10 @@
 #include "led.h"
 #include "hw.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../rtl8192c/fw_common.h"
+>>>>>>> v3.18
 =======
 #include "../rtl8192c/fw_common.h"
 >>>>>>> v3.18
@@ -83,7 +91,11 @@ static int rtl92cu_init_sw_vars(struct ieee80211_hw *hw)
 	    !IS_92C_SERIAL(rtlpriv->rtlhal.version)) {
 		rtlpriv->cfg->fw_name = "rtlwifi/rtl8192cufw_A.bin";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (IS_81xxC_VENDOR_UMC_B_CUT(rtlpriv->rtlhal.version)) {
+=======
+	} else if (IS_81XXC_VENDOR_UMC_B_CUT(rtlpriv->rtlhal.version)) {
+>>>>>>> v3.18
 =======
 	} else if (IS_81XXC_VENDOR_UMC_B_CUT(rtlpriv->rtlhal.version)) {
 >>>>>>> v3.18
@@ -112,13 +124,19 @@ static void rtl92cu_deinit_sw_vars(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* get bt coexist status */
 static bool rtl92cu_get_btc_status(void)
 {
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct rtl_hal_ops rtl8192cu_hal_ops = {
 	.init_sw_vars = rtl92cu_init_sw_vars,
@@ -142,7 +160,10 @@ static struct rtl_hal_ops rtl8192cu_hal_ops = {
 	.fill_fake_txdesc = rtl92cu_fill_fake_txdesc,
 	.fill_tx_cmddesc = rtl92cu_tx_fill_cmddesc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cmd_send_packet = rtl92cu_cmd_send_packet,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.query_rx_desc = rtl92cu_rx_query_desc,
@@ -152,7 +173,11 @@ static struct rtl_hal_ops rtl8192cu_hal_ops = {
 	.switch_channel = rtl92c_phy_sw_chnl,
 	.dm_watchdog = rtl92c_dm_watchdog,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_operation_backup = rtl92c_phy_scan_operation_backup,
+=======
+	.scan_operation_backup = rtl_phy_scan_operation_backup,
+>>>>>>> v3.18
 =======
 	.scan_operation_backup = rtl_phy_scan_operation_backup,
 >>>>>>> v3.18
@@ -176,6 +201,10 @@ static struct rtl_hal_ops rtl8192cu_hal_ops = {
 	.dm_dynamic_txpower = rtl92cu_dm_dynamic_txpower,
 	.fill_h2c_cmd = rtl92c_fill_h2c_cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_btc_status = rtl92cu_get_btc_status,
+>>>>>>> v3.18
 =======
 	.get_btc_status = rtl92cu_get_btc_status,
 >>>>>>> v3.18
@@ -346,8 +375,11 @@ static struct usb_device_id rtl8192c_usb_ids[] = {
 	{RTL_USB_DEVICE(0x07b8, 0x8189, rtl92cu_hal_cfg)}, /*Funai - Abocom*/
 	{RTL_USB_DEVICE(0x0846, 0x9041, rtl92cu_hal_cfg)}, /*NetGear WNA1000M*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{RTL_USB_DEVICE(0x0846, 0x9043, rtl92cu_hal_cfg)}, /*NG WNA1000Mv2*/
 	{RTL_USB_DEVICE(0x0b05, 0x17ba, rtl92cu_hal_cfg)}, /*ASUS-Edimax*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{RTL_USB_DEVICE(0x0bda, 0x5088, rtl92cu_hal_cfg)}, /*Thinkware-CC&C*/
@@ -407,7 +439,10 @@ static struct usb_device_id rtl8192c_usb_ids[] = {
 	{RTL_USB_DEVICE(0x2001, 0x3309, rtl92cu_hal_cfg)}, /*D-Link-Alpha*/
 	{RTL_USB_DEVICE(0x2001, 0x330a, rtl92cu_hal_cfg)}, /*D-Link-Alpha*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{RTL_USB_DEVICE(0x2001, 0x330d, rtl92cu_hal_cfg)}, /*D-Link DWA-131 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{RTL_USB_DEVICE(0x2019, 0xab2b, rtl92cu_hal_cfg)}, /*Planex -Abocom*/
@@ -437,9 +472,12 @@ static struct usb_driver rtl8192cu_driver = {
 	/* .reset_resume = rtl8192c_resume, */
 #endif /* CONFIG_PM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_AUTOSUSPEND
 	.supports_autosuspend = 1,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.disable_hub_initiated_lpm = 1,

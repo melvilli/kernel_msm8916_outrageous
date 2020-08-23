@@ -41,6 +41,10 @@ int __fscache_register_netfs(struct fscache_netfs *netfs)
 	atomic_set(&netfs->primary_index->usage, 1);
 	atomic_set(&netfs->primary_index->n_children, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_set(&netfs->primary_index->n_active, 1);
+>>>>>>> v3.18
 =======
 	atomic_set(&netfs->primary_index->n_active, 1);
 >>>>>>> v3.18
@@ -49,11 +53,17 @@ int __fscache_register_netfs(struct fscache_netfs *netfs)
 	netfs->primary_index->parent		= &fscache_fsdef_index;
 	netfs->primary_index->netfs_data	= netfs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	netfs->primary_index->flags		= 1 << FSCACHE_COOKIE_ENABLED;
 
 	atomic_inc(&netfs->primary_index->parent->usage);
 	atomic_inc(&netfs->primary_index->parent->n_children);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&netfs->primary_index->lock);
@@ -69,6 +79,7 @@ int __fscache_register_netfs(struct fscache_netfs *netfs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&netfs->primary_index->parent->usage);
 	atomic_inc(&netfs->primary_index->parent->n_children);
 
@@ -78,10 +89,15 @@ int __fscache_register_netfs(struct fscache_netfs *netfs)
 	printk(KERN_NOTICE "FS-Cache: Netfs '%s' registered for caching\n",
 	       netfs->name);
 =======
+=======
+>>>>>>> v3.18
 	list_add(&netfs->link, &fscache_netfs_list);
 	ret = 0;
 
 	pr_notice("Netfs '%s' registered for caching\n", netfs->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 already_registered:
@@ -89,7 +105,12 @@ already_registered:
 
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kmem_cache_free(fscache_cookie_jar, netfs->primary_index);
+=======
+		netfs->primary_index->parent = NULL;
+		__fscache_cookie_put(netfs->primary_index);
+>>>>>>> v3.18
 =======
 		netfs->primary_index->parent = NULL;
 		__fscache_cookie_put(netfs->primary_index);
@@ -118,8 +139,13 @@ void __fscache_unregister_netfs(struct fscache_netfs *netfs)
 	up_write(&fscache_addremove_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_NOTICE "FS-Cache: Netfs '%s' unregistered from caching\n",
 	       netfs->name);
+=======
+	pr_notice("Netfs '%s' unregistered from caching\n",
+		  netfs->name);
+>>>>>>> v3.18
 =======
 	pr_notice("Netfs '%s' unregistered from caching\n",
 		  netfs->name);

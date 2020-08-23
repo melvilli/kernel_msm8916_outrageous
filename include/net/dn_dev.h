@@ -10,7 +10,11 @@ struct dn_ifaddr {
 	__le16            ifa_local;
 	__le16            ifa_address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8              ifa_flags;
+=======
+	__u32             ifa_flags;
+>>>>>>> v3.18
 =======
 	__u32             ifa_flags;
 >>>>>>> v3.18
@@ -153,6 +157,7 @@ struct rtnode_hello_message {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dn_dev_init(void);
 extern void dn_dev_cleanup(void);
 
@@ -175,6 +180,8 @@ extern int dn_dev_bind_default(__le16 *addr);
 extern int register_dnaddr_notifier(struct notifier_block *nb);
 extern int unregister_dnaddr_notifier(struct notifier_block *nb);
 =======
+=======
+>>>>>>> v3.18
 void dn_dev_init(void);
 void dn_dev_cleanup(void);
 
@@ -196,6 +203,9 @@ int dn_dev_bind_default(__le16 *addr);
 
 int register_dnaddr_notifier(struct notifier_block *nb);
 int unregister_dnaddr_notifier(struct notifier_block *nb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int dn_dev_islocal(struct net_device *dev, __le16 addr)

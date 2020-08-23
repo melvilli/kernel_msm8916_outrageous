@@ -127,7 +127,10 @@ static struct pci_controller *alloc_pci_controller(int seg)
 
 	controller->segment = seg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	controller->node = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return controller;
@@ -138,11 +141,17 @@ struct pci_root_info {
 	struct pci_controller *controller;
 	struct list_head resources;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;
 	resource_size_t *res_offset;
 	unsigned int res_num;
 	struct list_head io_resources;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *name;
 };
@@ -164,7 +173,11 @@ new_space (u64 phys_base, int sparse)
 
 	if (num_io_spaces == MAX_IO_SPACES) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "PCI: Too many IO port spaces "
+=======
+		pr_err("PCI: Too many IO port spaces "
+>>>>>>> v3.18
 =======
 		pr_err("PCI: Too many IO port spaces "
 >>>>>>> v3.18
@@ -183,6 +196,10 @@ static u64 add_io_space(struct pci_root_info *info,
 			struct acpi_resource_address64 *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iospace_resource *iospace;
+>>>>>>> v3.18
 =======
 	struct iospace_resource *iospace;
 >>>>>>> v3.18
@@ -191,6 +208,7 @@ static u64 add_io_space(struct pci_root_info *info,
 	unsigned long base, min, max, base_port;
 	unsigned int sparse = 0, space_nr, len;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	resource = kzalloc(sizeof(*resource), GFP_KERNEL);
 	if (!resource) {
@@ -207,6 +225,8 @@ static u64 add_io_space(struct pci_root_info *info,
 		goto free_resource;
 	}
 =======
+=======
+>>>>>>> v3.18
 	len = strlen(info->name) + 32;
 	iospace = kzalloc(sizeof(*iospace) + len, GFP_KERNEL);
 	if (!iospace) {
@@ -217,6 +237,9 @@ static u64 add_io_space(struct pci_root_info *info,
 	}
 
 	name = (char *)(iospace + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	min = addr->minimum;
@@ -227,7 +250,11 @@ static u64 add_io_space(struct pci_root_info *info,
 	space_nr = new_space(addr->translation_offset, sparse);
 	if (space_nr == ~0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto free_name;
+=======
+		goto free_resource;
+>>>>>>> v3.18
 =======
 		goto free_resource;
 >>>>>>> v3.18
@@ -246,6 +273,10 @@ static u64 add_io_space(struct pci_root_info *info,
 		sparse = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	resource = &iospace->res;
+>>>>>>> v3.18
 =======
 	resource = &iospace->res;
 >>>>>>> v3.18
@@ -253,6 +284,7 @@ static u64 add_io_space(struct pci_root_info *info,
 	resource->flags = IORESOURCE_MEM;
 	resource->start = base + (sparse ? IO_SPACE_SPARSE_ENCODING(min) : min);
 	resource->end   = base + (sparse ? IO_SPACE_SPARSE_ENCODING(max) : max);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	insert_resource(&iomem_resource, resource);
 
@@ -263,6 +295,8 @@ free_name:
 free_resource:
 	kfree(resource);
 =======
+=======
+>>>>>>> v3.18
 	if (insert_resource(&iomem_resource, resource)) {
 		dev_err(&info->bridge->dev,
 				"can't allocate host bridge io space resource  %pR\n",
@@ -275,6 +309,9 @@ free_resource:
 
 free_resource:
 	kfree(iospace);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return ~0;
@@ -320,7 +357,11 @@ static acpi_status add_window(struct acpi_resource *res, void *data)
 {
 	struct pci_root_info *info = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_window *window;
+=======
+	struct resource *resource;
+>>>>>>> v3.18
 =======
 	struct resource *resource;
 >>>>>>> v3.18
@@ -348,6 +389,7 @@ static acpi_status add_window(struct acpi_resource *res, void *data)
 		return AE_OK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	window = &info->controller->window[info->controller->windows++];
 	window->resource.name = info->name;
 	window->resource.flags = flags;
@@ -360,6 +402,8 @@ static acpi_status add_window(struct acpi_resource *res, void *data)
 			"can't allocate host bridge window %pR\n",
 			&window->resource);
 =======
+=======
+>>>>>>> v3.18
 	resource = &info->res[info->res_num];
 	resource->name = info->name;
 	resource->flags = flags;
@@ -371,11 +415,15 @@ static acpi_status add_window(struct acpi_resource *res, void *data)
 		dev_err(&info->bridge->dev,
 			"can't allocate host bridge window %pR\n",
 			resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (offset)
 			dev_info(&info->bridge->dev, "host bridge window %pR "
 				 "(PCI address [%#llx-%#llx])\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 &window->resource,
 				 window->resource.start - offset,
@@ -397,6 +445,8 @@ static acpi_status add_window(struct acpi_resource *res, void *data)
 }
 
 =======
+=======
+>>>>>>> v3.18
 				 resource,
 				 resource->start - offset,
 				 resource->end - offset);
@@ -508,6 +558,9 @@ probe_pci_root_info(struct pci_root_info *info, struct acpi_device *device,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 {
@@ -515,6 +568,7 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 	int domain = root->segment;
 	int bus = root->secondary.start;
 	struct pci_controller *controller;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int windows = 0;
 	struct pci_root_info info;
@@ -558,6 +612,8 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 			add_window, &info);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct pci_root_info *info = NULL;
 	int busnum = root->secondary.start;
 	struct pci_bus *pbus;
@@ -591,6 +647,9 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 	}
 	/* insert busn resource at first */
 	pci_add_resource(&info->resources, &root->secondary);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * See arch/x86/pci/acpi.c.
@@ -599,6 +658,7 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 	 * such quirk. So we just ignore the case now.
 	 */
 	pbus = pci_create_root_bus(NULL, bus, &pci_root_ops, controller,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   &info.resources);
 	if (!pbus) {
@@ -616,6 +676,8 @@ out2:
 out1:
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 				   &info->resources);
 	if (!pbus) {
 		pci_free_resource_list(&info->resources);
@@ -627,6 +689,9 @@ out1:
 			release_pci_root_info, info);
 	pci_scan_child_bus(pbus);
 	return pbus;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -635,7 +700,11 @@ int pcibios_root_bridge_prepare(struct pci_host_bridge *bridge)
 	struct pci_controller *controller = bridge->bus->sysdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_HANDLE_SET(&bridge->dev, controller->acpi_handle);
+=======
+	ACPI_COMPANION_SET(&bridge->dev, controller->companion);
+>>>>>>> v3.18
 =======
 	ACPI_COMPANION_SET(&bridge->dev, controller->companion);
 >>>>>>> v3.18
@@ -932,7 +1001,11 @@ static void __init set_pci_dfl_cacheline_size(void)
 	status = ia64_pal_cache_summary(&levels, &unique_caches);
 	if (status != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: ia64_pal_cache_summary() failed "
+=======
+		pr_err("%s: ia64_pal_cache_summary() failed "
+>>>>>>> v3.18
 =======
 		pr_err("%s: ia64_pal_cache_summary() failed "
 >>>>>>> v3.18
@@ -944,7 +1017,11 @@ static void __init set_pci_dfl_cacheline_size(void)
 				/* cache_type (data_or_unified)= */ 2, &cci);
 	if (status != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: ia64_pal_cache_config_info() failed "
+=======
+		pr_err("%s: ia64_pal_cache_config_info() failed "
+>>>>>>> v3.18
 =======
 		pr_err("%s: ia64_pal_cache_config_info() failed "
 >>>>>>> v3.18

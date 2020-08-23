@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ qla24xx_proc_fcp_prio_cfg_cmd(struct fc_bsg_job *bsg_job)
 	uint32_t oper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(IS_QLA24XX_TYPE(ha) || IS_QLA25XX(ha) || IS_QLA82XX(ha))) {
+=======
+	if (!(IS_QLA24XX_TYPE(ha) || IS_QLA25XX(ha) || IS_P3P_TYPE(ha))) {
+>>>>>>> v3.18
 =======
 	if (!(IS_QLA24XX_TYPE(ha) || IS_QLA25XX(ha) || IS_P3P_TYPE(ha))) {
 >>>>>>> v3.18
@@ -278,13 +286,19 @@ qla2x00_process_els(struct fc_bsg_job *bsg_job)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!vha->flags.online) {
 		ql_log(ql_log_warn, vha, 0x7005, "Host not online.\n");
 		rval = -EIO;
 		goto done;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* pass through is supported only for ISP 4Gb or higher */
 	if (!IS_FWI2_CAPABLE(ha)) {
@@ -344,12 +358,15 @@ qla2x00_process_els(struct fc_bsg_job *bsg_job)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vha->flags.online) {
 		ql_log(ql_log_warn, vha, 0x7005, "Host not online.\n");
 		rval = -EIO;
 		goto done;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	req_sg_cnt =
@@ -420,7 +437,11 @@ done_unmap_sg:
 
 done_free_fcport:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bsg_job->request->msgcode == FC_BSG_HST_ELS_NOLOGIN)
+=======
+	if (bsg_job->request->msgcode == FC_BSG_RPT_ELS)
+>>>>>>> v3.18
 =======
 	if (bsg_job->request->msgcode == FC_BSG_RPT_ELS)
 >>>>>>> v3.18
@@ -584,7 +605,11 @@ qla81xx_reset_loopback_mode(scsi_qla_host_t *vha, uint16_t *config,
 	struct qla_hw_data *ha = vha->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_QLA81XX(ha) && !IS_QLA8031(ha))
+=======
+	if (!IS_QLA81XX(ha) && !IS_QLA8031(ha) && !IS_QLA8044(ha))
+>>>>>>> v3.18
 =======
 	if (!IS_QLA81XX(ha) && !IS_QLA8031(ha) && !IS_QLA8044(ha))
 >>>>>>> v3.18
@@ -656,14 +681,20 @@ qla81xx_set_loopback_mode(scsi_qla_host_t *vha, uint16_t *config,
 	int ret = 0;
 	int rval = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_hw_data *ha = vha->hw;
 
 	if (!IS_QLA81XX(ha) && !IS_QLA8031(ha))
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rem_tmo = 0, current_tmo = 0;
 	struct qla_hw_data *ha = vha->hw;
 
 	if (!IS_QLA81XX(ha) && !IS_QLA8031(ha) && !IS_QLA8044(ha))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto done_set_internal;
 
@@ -688,9 +719,12 @@ qla81xx_set_loopback_mode(scsi_qla_host_t *vha, uint16_t *config,
 
 	/* Wait for DCBX complete event */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!wait_for_completion_timeout(&ha->dcbx_comp,
 	    (DCBX_COMP_TIMEOUT * HZ))) {
 =======
+=======
+>>>>>>> v3.18
 	current_tmo = DCBX_COMP_TIMEOUT * HZ;
 	while (1) {
 		rem_tmo = wait_for_completion_timeout(&ha->dcbx_comp,
@@ -704,6 +738,9 @@ qla81xx_set_loopback_mode(scsi_qla_host_t *vha, uint16_t *config,
 	}
 
 	if (!rem_tmo) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ql_dbg(ql_dbg_user, vha, 0x7022,
 		    "DCBX completion not received.\n");
@@ -730,6 +767,10 @@ qla81xx_set_loopback_mode(scsi_qla_host_t *vha, uint16_t *config,
 
 	ha->notify_dcbx_comp = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ha->idc_extend_tmo = 0;
+>>>>>>> v3.18
 =======
 	ha->idc_extend_tmo = 0;
 >>>>>>> v3.18
@@ -829,7 +870,11 @@ qla2x00_process_loopback(struct fc_bsg_job *bsg_job)
 	if (atomic_read(&vha->loop_state) == LOOP_READY &&
 	    (ha->current_topology == ISP_CFG_F ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ((IS_QLA81XX(ha) || IS_QLA8031(ha)) &&
+=======
+	    ((IS_QLA81XX(ha) || IS_QLA8031(ha) || IS_QLA8044(ha)) &&
+>>>>>>> v3.18
 =======
 	    ((IS_QLA81XX(ha) || IS_QLA8031(ha) || IS_QLA8044(ha)) &&
 >>>>>>> v3.18
@@ -843,7 +888,11 @@ qla2x00_process_loopback(struct fc_bsg_job *bsg_job)
 		rval = qla2x00_echo_test(vha, &elreq, response);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_QLA81XX(ha) || IS_QLA8031(ha)) {
+=======
+		if (IS_QLA81XX(ha) || IS_QLA8031(ha) || IS_QLA8044(ha)) {
+>>>>>>> v3.18
 =======
 		if (IS_QLA81XX(ha) || IS_QLA8031(ha) || IS_QLA8044(ha)) {
 >>>>>>> v3.18
@@ -870,7 +919,11 @@ qla2x00_process_loopback(struct fc_bsg_job *bsg_job)
 
 			if (elreq.options == EXTERNAL_LOOPBACK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (IS_QLA8031(ha))
+=======
+				if (IS_QLA8031(ha) || IS_QLA8044(ha))
+>>>>>>> v3.18
 =======
 				if (IS_QLA8031(ha) || IS_QLA8044(ha))
 >>>>>>> v3.18
@@ -1152,6 +1205,7 @@ qla84xx_mgmt_cmd(struct fc_bsg_job *bsg_job)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ql84_mgmt = (struct qla_bsg_a84_mgmt *)((char *)bsg_job->request +
 		sizeof(struct fc_bsg_request));
 	if (!ql84_mgmt) {
@@ -1160,6 +1214,8 @@ qla84xx_mgmt_cmd(struct fc_bsg_job *bsg_job)
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mn = dma_pool_alloc(ha->s_dma_pool, GFP_KERNEL, &mn_dma);
@@ -1173,7 +1229,11 @@ qla84xx_mgmt_cmd(struct fc_bsg_job *bsg_job)
 	mn->entry_type = ACCESS_CHIP_IOCB_TYPE;
 	mn->entry_count = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	ql84_mgmt = (void *)bsg_job->request + sizeof(struct fc_bsg_request);
+>>>>>>> v3.18
 =======
 	ql84_mgmt = (void *)bsg_job->request + sizeof(struct fc_bsg_request);
 >>>>>>> v3.18
@@ -1349,6 +1409,10 @@ qla24xx_iidma(struct fc_bsg_job *bsg_job)
 	struct qla_port_param *port_param = NULL;
 	fc_port_t *fcport = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int found = 0;
+>>>>>>> v3.18
 =======
 	int found = 0;
 >>>>>>> v3.18
@@ -1361,6 +1425,7 @@ qla24xx_iidma(struct fc_bsg_job *bsg_job)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_param = (struct qla_port_param *)((char *)bsg_job->request +
 		sizeof(struct fc_bsg_request));
 	if (!port_param) {
@@ -1369,6 +1434,9 @@ qla24xx_iidma(struct fc_bsg_job *bsg_job)
 		return -EINVAL;
 	}
 
+=======
+	port_param = (void *)bsg_job->request + sizeof(struct fc_bsg_request);
+>>>>>>> v3.18
 =======
 	port_param = (void *)bsg_job->request + sizeof(struct fc_bsg_request);
 >>>>>>> v3.18
@@ -1386,17 +1454,23 @@ qla24xx_iidma(struct fc_bsg_job *bsg_job)
 			fcport->port_name, sizeof(fcport->port_name)))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	}
 
 	if (!fcport) {
 =======
+=======
+>>>>>>> v3.18
 
 		found = 1;
 		break;
 	}
 
 	if (!found) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ql_log(ql_log_warn, vha, 0x7049,
 		    "Failed to find port.\n");
@@ -1425,12 +1499,18 @@ qla24xx_iidma(struct fc_bsg_job *bsg_job)
 	if (rval) {
 		ql_log(ql_log_warn, vha, 0x704c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    "iIDMA cmd failed for %02x%02x%02x%02x%02x%02x%02x%02x -- "
 		    "%04x %x %04x %04x.\n", fcport->port_name[0],
 		    fcport->port_name[1], fcport->port_name[2],
 		    fcport->port_name[3], fcport->port_name[4],
 		    fcport->port_name[5], fcport->port_name[6],
 		    fcport->port_name[7], rval, fcport->fp_speed, mb[0], mb[1]);
+=======
+		    "iIDMA cmd failed for %8phN -- "
+		    "%04x %x %04x %04x.\n", fcport->port_name,
+		    rval, fcport->fp_speed, mb[0], mb[1]);
+>>>>>>> v3.18
 =======
 		    "iIDMA cmd failed for %8phN -- "
 		    "%04x %x %04x %04x.\n", fcport->port_name,
@@ -1490,7 +1570,11 @@ qla2x00_optrom_setup(struct fc_bsg_job *bsg_job, scsi_qla_host_t *vha,
 			valid = 1;
 		else if (IS_QLA24XX_TYPE(ha) || IS_QLA25XX(ha) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    IS_CNA_CAPABLE(ha) || IS_QLA2031(ha))
+=======
+		    IS_CNA_CAPABLE(ha) || IS_QLA2031(ha) || IS_QLA27XX(ha))
+>>>>>>> v3.18
 =======
 		    IS_CNA_CAPABLE(ha) || IS_QLA2031(ha) || IS_QLA27XX(ha))
 >>>>>>> v3.18
@@ -1541,16 +1625,22 @@ qla2x00_read_optrom(struct fc_bsg_job *bsg_job)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rval = qla2x00_optrom_setup(bsg_job, vha, 0);
 	if (rval)
 		return rval;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&ha->optrom_mutex);
 	rval = qla2x00_optrom_setup(bsg_job, vha, 0);
 	if (rval) {
 		mutex_unlock(&ha->optrom_mutex);
 		return rval;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ha->isp_ops->read_optrom(vha, ha->optrom_buffer,
@@ -1566,6 +1656,10 @@ qla2x00_read_optrom(struct fc_bsg_job *bsg_job)
 	ha->optrom_buffer = NULL;
 	ha->optrom_state = QLA_SWAITING;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&ha->optrom_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&ha->optrom_mutex);
 >>>>>>> v3.18
@@ -1582,16 +1676,22 @@ qla2x00_update_optrom(struct fc_bsg_job *bsg_job)
 	int rval = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rval = qla2x00_optrom_setup(bsg_job, vha, 1);
 	if (rval)
 		return rval;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&ha->optrom_mutex);
 	rval = qla2x00_optrom_setup(bsg_job, vha, 1);
 	if (rval) {
 		mutex_unlock(&ha->optrom_mutex);
 		return rval;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set the isp82xx_no_md_cap not to capture minidump */
@@ -1609,6 +1709,10 @@ qla2x00_update_optrom(struct fc_bsg_job *bsg_job)
 	ha->optrom_buffer = NULL;
 	ha->optrom_state = QLA_SWAITING;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&ha->optrom_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&ha->optrom_mutex);
 >>>>>>> v3.18
@@ -2025,7 +2129,11 @@ done:
 	bsg_job->reply->result = (DID_OK) << 16;
 	bsg_job->job_done(bsg_job);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Always retrun success, vendor rsp carries correct status */
+=======
+	/* Always return success, vendor rsp carries correct status */
+>>>>>>> v3.18
 =======
 	/* Always return success, vendor rsp carries correct status */
 >>>>>>> v3.18
@@ -2156,7 +2264,10 @@ done:
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 qla26xx_serdes_op(struct fc_bsg_job *bsg_job)
 {
 	struct Scsi_Host *host = bsg_job->shost;
@@ -2237,6 +2348,9 @@ qla8044_serdes_op(struct fc_bsg_job *bsg_job)
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 qla2x00_process_vendor_specific(struct fc_bsg_job *bsg_job)
 {
@@ -2286,7 +2400,10 @@ qla2x00_process_vendor_specific(struct fc_bsg_job *bsg_job)
 	case QL_VND_FX00_MGMT_CMD:
 		return qlafx00_mgmt_cmd(bsg_job);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	case QL_VND_SERDES_OP:
 		return qla26xx_serdes_op(bsg_job);
@@ -2294,6 +2411,9 @@ qla2x00_process_vendor_specific(struct fc_bsg_job *bsg_job)
 	case QL_VND_SERDES_OP_EX:
 		return qla8044_serdes_op(bsg_job);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENOSYS;
@@ -2378,6 +2498,10 @@ qla24xx_bsg_timeout(struct fc_bsg_job *bsg_job)
 					(sp->type == SRB_FXIOCB_BCMD))
 					&& (sp->u.bsg_job == bsg_job)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					req->outstanding_cmds[cnt] = NULL;
+>>>>>>> v3.18
 =======
 					req->outstanding_cmds[cnt] = NULL;
 >>>>>>> v3.18
@@ -2409,9 +2533,13 @@ qla24xx_bsg_timeout(struct fc_bsg_job *bsg_job)
 done:
 	spin_unlock_irqrestore(&ha->hardware_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bsg_job->request->msgcode == FC_BSG_HST_CT)
 		kfree(sp->fcport);
 	qla2x00_rel_sp(vha, sp);
+=======
+	sp->free(vha, sp);
+>>>>>>> v3.18
 =======
 	sp->free(vha, sp);
 >>>>>>> v3.18

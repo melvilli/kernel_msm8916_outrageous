@@ -796,7 +796,11 @@ repeat:
 
 	pf_cmd = rq_data_dir(pf_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pf_buf = pf_req->buffer;
+=======
+	pf_buf = bio_data(pf_req->bio);
+>>>>>>> v3.18
 =======
 	pf_buf = bio_data(pf_req->bio);
 >>>>>>> v3.18
@@ -832,7 +836,11 @@ static int pf_next_buf(void)
 			return 1;
 		pf_count = blk_rq_cur_sectors(pf_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pf_buf = pf_req->buffer;
+=======
+		pf_buf = bio_data(pf_req->bio);
+>>>>>>> v3.18
 =======
 		pf_buf = bio_data(pf_req->bio);
 >>>>>>> v3.18

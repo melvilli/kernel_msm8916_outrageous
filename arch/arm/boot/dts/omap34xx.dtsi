@@ -9,7 +9,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap3.dtsi"
+=======
+#include "omap3.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap3.dtsi"
 >>>>>>> v3.18
@@ -30,8 +34,11 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 
 	ocp {
 		omap3_pmx_core2: pinmux@480025d8 {
@@ -61,4 +68,7 @@
 /include/ "omap34xx-omap36xx-clocks.dtsi"
 /include/ "omap36xx-omap3430es2plus-clocks.dtsi"
 /include/ "omap36xx-am35xx-omap3430es2plus-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

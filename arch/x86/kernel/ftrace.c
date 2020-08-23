@@ -298,6 +298,7 @@ int ftrace_int3_handler(struct pt_regs *regs)
 static int ftrace_write(unsigned long ip, const char *val, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * On x86_64, kernel text mappings are mapped read-only with
 	 * CONFIG_DEBUG_RODATA. So we use the kernel identity mapping instead
@@ -311,12 +312,17 @@ static int ftrace_write(unsigned long ip, const char *val, int size)
 
 	return probe_kernel_write((void *)ip, val, size);
 =======
+=======
+>>>>>>> v3.18
 	ip = text_ip_addr(ip);
 
 	if (probe_kernel_write((void *)ip, val, size))
 		return -EPERM;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -333,10 +339,14 @@ static int add_break(unsigned long ip, const char *old)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ftrace_write(ip, &brk, 1))
 		return -EPERM;
 
 	return 0;
+=======
+	return ftrace_write(ip, &brk, 1);
+>>>>>>> v3.18
 =======
 	return ftrace_write(ip, &brk, 1);
 >>>>>>> v3.18
@@ -362,6 +372,7 @@ static int add_brk_on_nop(struct dyn_ftrace *rec)
 	return add_break(rec->ip, old);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * If the record has the FTRACE_FL_REGS set, that means that it
@@ -391,15 +402,23 @@ static unsigned long get_ftrace_old_addr(struct dyn_ftrace *rec)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int add_breakpoints(struct dyn_ftrace *rec, int enable)
 {
 	unsigned long ftrace_addr;
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ftrace_test_record(rec, enable);
 
 	ftrace_addr = get_ftrace_addr(rec);
+=======
+	ftrace_addr = ftrace_get_addr_curr(rec);
+
+	ret = ftrace_test_record(rec, enable);
+>>>>>>> v3.18
 =======
 	ftrace_addr = ftrace_get_addr_curr(rec);
 
@@ -415,10 +434,14 @@ static int add_breakpoints(struct dyn_ftrace *rec, int enable)
 		return add_brk_on_nop(rec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FTRACE_UPDATE_MODIFY_CALL_REGS:
 	case FTRACE_UPDATE_MODIFY_CALL:
 		ftrace_addr = get_ftrace_old_addr(rec);
 		/* fall through */
+=======
+	case FTRACE_UPDATE_MODIFY_CALL:
+>>>>>>> v3.18
 =======
 	case FTRACE_UPDATE_MODIFY_CALL:
 >>>>>>> v3.18
@@ -452,7 +475,11 @@ static int remove_breakpoint(struct dyn_ftrace *rec)
 	/* If this does not have a breakpoint, we are done */
 	if (ins[0] != brk)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -471,7 +498,11 @@ static int remove_breakpoint(struct dyn_ftrace *rec)
 		 * a disaster.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ftrace_addr = get_ftrace_addr(rec);
+=======
+		ftrace_addr = ftrace_get_addr_new(rec);
+>>>>>>> v3.18
 =======
 		ftrace_addr = ftrace_get_addr_new(rec);
 >>>>>>> v3.18
@@ -482,7 +513,11 @@ static int remove_breakpoint(struct dyn_ftrace *rec)
 
 		/* Check both ftrace_addr and ftrace_old_addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ftrace_addr = get_ftrace_old_addr(rec);
+=======
+		ftrace_addr = ftrace_get_addr_curr(rec);
+>>>>>>> v3.18
 =======
 		ftrace_addr = ftrace_get_addr_curr(rec);
 >>>>>>> v3.18
@@ -494,7 +529,11 @@ static int remove_breakpoint(struct dyn_ftrace *rec)
 
  update:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return probe_kernel_write((void *)ip, &nop[0], 1);
+=======
+	return ftrace_write(ip, nop, 1);
+>>>>>>> v3.18
 =======
 	return ftrace_write(ip, nop, 1);
 >>>>>>> v3.18
@@ -506,9 +545,13 @@ static int add_update_code(unsigned long ip, unsigned const char *new)
 	ip++;
 	new++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ftrace_write(ip, new, MCOUNT_INSN_SIZE - 1))
 		return -EPERM;
 	return 0;
+=======
+	return ftrace_write(ip, new, MCOUNT_INSN_SIZE - 1);
+>>>>>>> v3.18
 =======
 	return ftrace_write(ip, new, MCOUNT_INSN_SIZE - 1);
 >>>>>>> v3.18
@@ -540,7 +583,11 @@ static int add_update(struct dyn_ftrace *rec, int enable)
 	ret = ftrace_test_record(rec, enable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_addr  = get_ftrace_addr(rec);
+=======
+	ftrace_addr  = ftrace_get_addr_new(rec);
+>>>>>>> v3.18
 =======
 	ftrace_addr  = ftrace_get_addr_new(rec);
 >>>>>>> v3.18
@@ -550,7 +597,10 @@ static int add_update(struct dyn_ftrace *rec, int enable)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FTRACE_UPDATE_MODIFY_CALL_REGS:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FTRACE_UPDATE_MODIFY_CALL:
@@ -574,10 +624,14 @@ static int finish_update_call(struct dyn_ftrace *rec, unsigned long addr)
 	new = ftrace_call_replace(ip, addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ftrace_write(ip, new, 1))
 		return -EPERM;
 
 	return 0;
+=======
+	return ftrace_write(ip, new, 1);
+>>>>>>> v3.18
 =======
 	return ftrace_write(ip, new, 1);
 >>>>>>> v3.18
@@ -591,9 +645,13 @@ static int finish_update_nop(struct dyn_ftrace *rec)
 	new = ftrace_nop_replace();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ftrace_write(ip, new, 1))
 		return -EPERM;
 	return 0;
+=======
+	return ftrace_write(ip, new, 1);
+>>>>>>> v3.18
 =======
 	return ftrace_write(ip, new, 1);
 >>>>>>> v3.18
@@ -607,7 +665,11 @@ static int finish_update(struct dyn_ftrace *rec, int enable)
 	ret = ftrace_update_record(rec, enable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_addr = get_ftrace_addr(rec);
+=======
+	ftrace_addr = ftrace_get_addr_new(rec);
+>>>>>>> v3.18
 =======
 	ftrace_addr = ftrace_get_addr_new(rec);
 >>>>>>> v3.18
@@ -617,7 +679,10 @@ static int finish_update(struct dyn_ftrace *rec, int enable)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FTRACE_UPDATE_MODIFY_CALL_REGS:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case FTRACE_UPDATE_MODIFY_CALL:
@@ -697,6 +762,7 @@ void ftrace_replace_code(int enable)
 
  remove_breakpoints:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_bug(ret, rec ? rec->ip : 0);
 	printk(KERN_WARNING "Failed on %s (%d):\n", report, count);
 	for_ftrace_rec_iter(iter) {
@@ -704,6 +770,8 @@ void ftrace_replace_code(int enable)
 		remove_breakpoint(rec);
 	}
 =======
+=======
+>>>>>>> v3.18
 	pr_warn("Failed on %s (%d):\n", report, count);
 	ftrace_bug(ret, rec ? rec->ip : 0);
 	for_ftrace_rec_iter(iter) {
@@ -716,6 +784,9 @@ void ftrace_replace_code(int enable)
 			BUG();
 	}
 	run_sync();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -739,16 +810,22 @@ ftrace_modify_code(unsigned long ip, unsigned const char *old_code,
 
 	ret = ftrace_write(ip, new_code, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		ret = -EPERM;
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The breakpoint is handled only when this function is in progress.
 	 * The system could not work if we could not remove it.
 	 */
 	BUG_ON(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	run_sync();
@@ -756,7 +833,13 @@ ftrace_modify_code(unsigned long ip, unsigned const char *old_code,
 
  fail_update:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	probe_kernel_write((void *)ip, &old_code[0], 1);
+=======
+	/* Also here the system could not work with the breakpoint */
+	if (ftrace_write(ip, old_code, 1))
+		BUG();
+>>>>>>> v3.18
 =======
 	/* Also here the system could not work with the breakpoint */
 	if (ftrace_write(ip, old_code, 1))
@@ -776,11 +859,16 @@ void arch_ftrace_update_code(int command)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	/* The return code is retured via data */
 	*(unsigned long *)data = 0;
 
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 {
@@ -847,6 +935,7 @@ void prepare_ftrace_return(unsigned long *parent, unsigned long self_addr,
 				&return_to_handler;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * When resuming from suspend-to-ram, this function can be indirectly
 	 * called from early CPU startup code while the CPU is in real mode,
@@ -857,6 +946,9 @@ void prepare_ftrace_return(unsigned long *parent, unsigned long self_addr,
 	 * good enough for this purpose, and it's fast.
 	 */
 	if (unlikely((long)__builtin_frame_address(0) >= 0))
+=======
+	if (unlikely(ftrace_graph_is_dead()))
+>>>>>>> v3.18
 =======
 	if (unlikely(ftrace_graph_is_dead()))
 >>>>>>> v3.18

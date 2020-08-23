@@ -8,7 +8,10 @@ menuconfig MEMORY
 if MEMORY
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ATMEL_SDRAMC
 	bool "Atmel (Multi-port DDR-)SDRAM Controller"
 	default y
@@ -30,6 +33,9 @@ config TI_AEMIF
 	  of 256M bytes of any of these memories can be accessed at a given
 	  time via four chip selects with 64M byte access per chip select.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TI_EMIF
 	tristate "Texas Instruments EMIF driver"
@@ -45,7 +51,10 @@ config TI_EMIF
 	  temperature changes
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MVEBU_DEVBUS
 	bool "Marvell EBU Device Bus Controller"
 	default y
@@ -56,6 +65,9 @@ config MVEBU_DEVBUS
 	  Armada 370 and Armada XP. This controller allows to handle flash
 	  devices such as NOR, NAND, SRAM, and FPGA.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TEGRA20_MC
 	bool "Tegra20 Memory Controller(MC) driver"
@@ -78,7 +90,10 @@ config TEGRA30_MC
 	  Unit) module.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config FSL_CORENET_CF
 	tristate "Freescale CoreNet Error Reporting"
 	depends on FSL_SOC_BOOKE
@@ -93,5 +108,8 @@ config FSL_IFC
 	bool
 	depends on FSL_SOC
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

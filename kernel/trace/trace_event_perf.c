@@ -25,11 +25,14 @@ static int perf_trace_event_perm(struct ftrace_event_call *tp_event,
 				 struct perf_event *p_event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The ftrace function trace is allowed only for root. */
 	if (ftrace_event_is_function(tp_event) &&
 	    perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))
 		return -EPERM;
 =======
+=======
+>>>>>>> v3.18
 	if (tp_event->perf_perm) {
 		int ret = tp_event->perf_perm(tp_event, p_event);
 		if (ret)
@@ -68,6 +71,9 @@ static int perf_trace_event_perm(struct ftrace_event_call *tp_event,
 		if (p_event->attr.sample_type & PERF_SAMPLE_STACK_USER)
 			return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* No tracing, just counting, so no obvious leak */
@@ -215,7 +221,11 @@ int perf_trace_init(struct perf_event *p_event)
 {
 	struct ftrace_event_call *tp_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int event_id = p_event->attr.config;
+=======
+	u64 event_id = p_event->attr.config;
+>>>>>>> v3.18
 =======
 	u64 event_id = p_event->attr.config;
 >>>>>>> v3.18
@@ -268,6 +278,7 @@ void perf_trace_del(struct perf_event *p_event, int flags)
 {
 	struct ftrace_event_call *tp_event = p_event->tp_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hlist_unhashed(&p_event->hlist_entry))
 		hlist_del_rcu(&p_event->hlist_entry);
 	tp_event->class->reg(tp_event, TRACE_REG_PERF_DEL, p_event);
@@ -276,12 +287,17 @@ void perf_trace_del(struct perf_event *p_event, int flags)
 __kprobes void *perf_trace_buf_prepare(int size, unsigned short type,
 				       struct pt_regs *regs, int *rctxp)
 =======
+=======
+>>>>>>> v3.18
 	hlist_del_rcu(&p_event->hlist_entry);
 	tp_event->class->reg(tp_event, TRACE_REG_PERF_DEL, p_event);
 }
 
 void *perf_trace_buf_prepare(int size, unsigned short type,
 			     struct pt_regs *regs, int *rctxp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct trace_entry *entry;
@@ -292,11 +308,17 @@ void *perf_trace_buf_prepare(int size, unsigned short type,
 	BUILD_BUG_ON(PERF_MAX_TRACE_SIZE % sizeof(unsigned long));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ONCE(size > PERF_MAX_TRACE_SIZE,
 			"perf buffer not large enough"))
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pc = preempt_count();
 
@@ -318,6 +340,10 @@ void *perf_trace_buf_prepare(int size, unsigned short type,
 }
 EXPORT_SYMBOL_GPL(perf_trace_buf_prepare);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(perf_trace_buf_prepare);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(perf_trace_buf_prepare);
 >>>>>>> v3.18
@@ -333,11 +359,17 @@ perf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,
 	int rctx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	head = this_cpu_ptr(event_function.perf_events);
 	if (hlist_empty(head))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ENTRY_SIZE (ALIGN(sizeof(struct ftrace_entry) + sizeof(u32), \
 		    sizeof(u64)) - sizeof(u32))
@@ -353,8 +385,11 @@ perf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,
 	entry->ip = ip;
 	entry->parent_ip = parent_ip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	head = this_cpu_ptr(event_function.perf_events);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	perf_trace_buf_submit(entry, ENTRY_SIZE, rctx, 0,

@@ -117,6 +117,11 @@ static inline void swiotlb_free(void) { }
 
 extern void swiotlb_print_info(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int is_swiotlb_buffer(phys_addr_t paddr);
+
+>>>>>>> v3.18
 =======
 extern int is_swiotlb_buffer(phys_addr_t paddr);
 

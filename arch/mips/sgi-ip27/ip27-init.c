@@ -55,7 +55,11 @@ extern void pcibr_setup(cnodeid_t);
 extern void xtalk_probe_node(cnodeid_t nid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit per_hub_init(cnodeid_t cnode)
+=======
+static void per_hub_init(cnodeid_t cnode)
+>>>>>>> v3.18
 =======
 static void per_hub_init(cnodeid_t cnode)
 >>>>>>> v3.18
@@ -115,7 +119,11 @@ static void per_hub_init(cnodeid_t cnode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit per_cpu_init(void)
+=======
+void per_cpu_init(void)
+>>>>>>> v3.18
 =======
 void per_cpu_init(void)
 >>>>>>> v3.18

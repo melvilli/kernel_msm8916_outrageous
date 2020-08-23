@@ -60,6 +60,10 @@ static void ip_vs_read_cpu_stats(struct ip_vs_stats_user *sum,
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool add = false;
+>>>>>>> v3.18
 =======
 	bool add = false;
 >>>>>>> v3.18
@@ -69,7 +73,11 @@ static void ip_vs_read_cpu_stats(struct ip_vs_stats_user *sum,
 		unsigned int start;
 		__u64 inbytes, outbytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i) {
+=======
+		if (add) {
+>>>>>>> v3.18
 =======
 		if (add) {
 >>>>>>> v3.18
@@ -85,6 +93,10 @@ static void ip_vs_read_cpu_stats(struct ip_vs_stats_user *sum,
 			sum->outbytes += outbytes;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			add = true;
+>>>>>>> v3.18
 =======
 			add = true;
 >>>>>>> v3.18

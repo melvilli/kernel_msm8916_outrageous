@@ -16,7 +16,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -25,7 +28,11 @@
 #include <linux/mfd/tps65912.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell tps65912s[] = {
+=======
+static const struct mfd_cell tps65912s[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell tps65912s[] = {
 >>>>>>> v3.18
@@ -131,7 +138,11 @@ EXPORT_SYMBOL_GPL(tps65912_reg_write);
 int tps65912_device_init(struct tps65912 *tps65912)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps65912_board *pmic_plat_data = tps65912->dev->platform_data;
+=======
+	struct tps65912_board *pmic_plat_data = dev_get_platdata(tps65912->dev);
+>>>>>>> v3.18
 =======
 	struct tps65912_board *pmic_plat_data = dev_get_platdata(tps65912->dev);
 >>>>>>> v3.18
@@ -174,7 +185,10 @@ err:
 	kfree(init_data);
 	mfd_remove_devices(tps65912->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(tps65912);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -185,7 +199,10 @@ void tps65912_device_exit(struct tps65912 *tps65912)
 	mfd_remove_devices(tps65912->dev);
 	tps65912_irq_exit(tps65912);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(tps65912);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

@@ -189,7 +189,10 @@ static void sercos3_pci_remove(struct pci_dev *dev)
 	pci_release_regions(dev);
 	pci_disable_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < 5; i++) {
@@ -230,6 +233,7 @@ static struct pci_driver sercos3_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init sercos3_init_module(void)
 {
 	return pci_register_driver(&sercos3_pci_driver);
@@ -243,6 +247,9 @@ static void __exit sercos3_exit_module(void)
 module_init(sercos3_init_module);
 module_exit(sercos3_exit_module);
 
+=======
+module_pci_driver(sercos3_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(sercos3_pci_driver);
 >>>>>>> v3.18

@@ -298,7 +298,11 @@ static void newport_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Can't be __init, take_over_console may call it later */
+=======
+/* Can't be __init, do_take_over_console may call it later */
+>>>>>>> v3.18
 =======
 /* Can't be __init, do_take_over_console may call it later */
 >>>>>>> v3.18
@@ -751,6 +755,10 @@ static int newport_probe(struct gio_device *dev,
 {
 	unsigned long newport_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -768,13 +776,19 @@ static int newport_probe(struct gio_device *dev,
 	npregs = (struct newport_regs *)/* ioremap cannot fail */
 		ioremap(newport_addr, sizeof(struct newport_regs));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return take_over_console(&newport_con, 0, MAX_NR_CONSOLES - 1, 1);
 =======
+=======
+>>>>>>> v3.18
 	console_lock();
 	err = do_take_over_console(&newport_con, 0, MAX_NR_CONSOLES - 1, 1);
 	console_unlock();
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

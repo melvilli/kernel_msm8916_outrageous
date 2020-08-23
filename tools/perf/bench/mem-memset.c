@@ -11,6 +11,10 @@
 #include "../util/parse-options.h"
 #include "../util/header.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../util/cloexec.h"
+>>>>>>> v3.18
 =======
 #include "../util/cloexec.h"
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ static const struct routine routines[] = {
 	  "Default memset() provided by glibc",
 	  memset },
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ARCH_X86_64
+=======
+#ifdef HAVE_ARCH_X86_64_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_ARCH_X86_64_SUPPORT
 >>>>>>> v3.18
@@ -92,7 +100,12 @@ static struct perf_event_attr cycle_attr = {
 static void init_cycle(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1, 0);
+=======
+	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1,
+				       perf_event_open_cloexec_flag());
+>>>>>>> v3.18
 =======
 	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1,
 				       perf_event_open_cloexec_flag());
@@ -125,7 +138,11 @@ static void alloc_mem(void **dst, size_t length)
 {
 	*dst = zalloc(length);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dst)
+=======
+	if (!*dst)
+>>>>>>> v3.18
 =======
 	if (!*dst)
 >>>>>>> v3.18
@@ -199,12 +216,18 @@ int bench_mem_memset(int argc, const char **argv,
 			     bench_mem_memset_usage, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (no_prefault && only_prefault) {
 		fprintf(stderr, "Invalid options: -o and -n are mutually exclusive\n");
 		return 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (use_cycle)
 		init_cycle();

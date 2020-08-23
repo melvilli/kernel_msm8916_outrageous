@@ -143,7 +143,10 @@ struct uart_txx9_port {
 #define TXX9_SIFCR_RDIL_MAX	0x00000180
 #define TXX9_SIFCR_TDIL_MASK	0x00000018
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TXX9_SIFCR_TDIL_MASK	0x00000018
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TXX9_SIFCR_TDIL_1	0x00000000
@@ -248,11 +251,14 @@ static void serial_txx9_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void serial_txx9_enable_ms(struct uart_port *port)
 {
 	/* TXX9-SIO can not control DTR... */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void serial_txx9_initialize(struct uart_port *port)
@@ -542,6 +548,7 @@ static void serial_txx9_put_poll_char(struct uart_port *port, unsigned char c)
 	/*
 	 *	Send the character out.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *	If a LF, also do CR...
 	 */
 	sio_out(up, TXX9_SITFIFO, c);
@@ -549,6 +556,10 @@ static void serial_txx9_put_poll_char(struct uart_port *port, unsigned char c)
 		wait_for_xmitr(up);
 		sio_out(up, TXX9_SITFIFO, 13);
 	}
+=======
+	 */
+	sio_out(up, TXX9_SITFIFO, c);
+>>>>>>> v3.18
 =======
 	 */
 	sio_out(up, TXX9_SITFIFO, c);
@@ -714,7 +725,11 @@ serial_txx9_set_termios(struct uart_port *port, struct ktermios *termios,
 	if (termios->c_iflag & INPCK)
 		up->port.read_status_mask |= TXX9_SIDISR_UFER | TXX9_SIDISR_UPER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -879,7 +894,10 @@ static struct uart_ops serial_txx9_pops = {
 	.start_tx	= serial_txx9_start_tx,
 	.stop_rx	= serial_txx9_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= serial_txx9_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= serial_txx9_break_ctl,
@@ -1116,7 +1134,11 @@ static void serial_txx9_unregister_port(int line)
 static int serial_txx9_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_port *p = dev->dev.platform_data;
+=======
+	struct uart_port *p = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct uart_port *p = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -1243,8 +1265,11 @@ static void pciserial_txx9_remove_one(struct pci_dev *dev)
 	struct uart_txx9_port *up = pci_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (up) {

@@ -14,7 +14,11 @@
 #define CLONE_PARENT	0x00008000	/* set if we want to have the same parent as the cloner */
 #define CLONE_THREAD	0x00010000	/* Same thread group? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CLONE_NEWNS	0x00020000	/* New namespace group? */
+=======
+#define CLONE_NEWNS	0x00020000	/* New mount namespace group */
+>>>>>>> v3.18
 =======
 #define CLONE_NEWNS	0x00020000	/* New mount namespace group */
 >>>>>>> v3.18
@@ -44,10 +48,13 @@
 /* SCHED_ISO: reserved but not implemented yet */
 #define SCHED_IDLE		5
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Can be ORed in to make sure the process is reverted back to SCHED_NORMAL on fork */
 #define SCHED_RESET_ON_FORK     0x40000000
 
 =======
+=======
+>>>>>>> v3.18
 #define SCHED_DEADLINE		6
 
 /* Can be ORed in to make sure the process is reverted back to SCHED_NORMAL on fork */
@@ -57,6 +64,9 @@
  * For the sched_{set,get}attr() calls
  */
 #define SCHED_FLAG_RESET_ON_FORK	0x01
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_LINUX_SCHED_H */

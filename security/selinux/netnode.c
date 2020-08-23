@@ -43,7 +43,10 @@
 #include "netnode.h"
 #include "objsec.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "avc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -171,6 +174,10 @@ static void sel_netnode_insert(struct sel_netnode *node)
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -234,6 +241,10 @@ static int sel_netnode_sid_slow(void *addr, u16 family, u32 *sid)
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = -EINVAL;
+>>>>>>> v3.18
 =======
 		ret = -EINVAL;
 >>>>>>> v3.18
@@ -314,7 +325,10 @@ static __init int sel_netnode_init(void)
 {
 	int iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -327,7 +341,11 @@ static __init int sel_netnode_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

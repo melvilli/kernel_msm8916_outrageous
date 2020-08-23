@@ -3,11 +3,15 @@
 
 struct sh_timer_config {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
 	long channel_offset;
 	int timer_bit;
 	unsigned long clockevent_rating;
 	unsigned long clocksource_rating;
+=======
+	unsigned int channels_mask;
+>>>>>>> v3.18
 =======
 	unsigned int channels_mask;
 >>>>>>> v3.18

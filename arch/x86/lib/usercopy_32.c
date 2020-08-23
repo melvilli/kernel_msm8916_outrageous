@@ -655,8 +655,12 @@ EXPORT_SYMBOL(__copy_from_user_ll_nocache_nozero);
  * On success, this will be zero.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long
 copy_to_user(void __user *to, const void *from, unsigned long n)
+=======
+unsigned long _copy_to_user(void __user *to, const void *from, unsigned n)
+>>>>>>> v3.18
 =======
 unsigned long _copy_to_user(void __user *to, const void *from, unsigned n)
 >>>>>>> v3.18
@@ -666,7 +670,11 @@ unsigned long _copy_to_user(void __user *to, const void *from, unsigned n)
 	return n;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(copy_to_user);
+=======
+EXPORT_SYMBOL(_copy_to_user);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(_copy_to_user);
 >>>>>>> v3.18
@@ -688,8 +696,12 @@ EXPORT_SYMBOL(_copy_to_user);
  * data to the requested size using zero bytes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long
 _copy_from_user(void *to, const void __user *from, unsigned long n)
+=======
+unsigned long _copy_from_user(void *to, const void __user *from, unsigned n)
+>>>>>>> v3.18
 =======
 unsigned long _copy_from_user(void *to, const void __user *from, unsigned n)
 >>>>>>> v3.18

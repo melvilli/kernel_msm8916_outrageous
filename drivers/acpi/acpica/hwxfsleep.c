@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -176,7 +185,11 @@ ACPI_EXPORT_SYMBOL(acpi_set_firmware_waking_vector64)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status asmlinkage acpi_enter_sleep_state_s4bios(void)
+=======
+acpi_status acpi_enter_sleep_state_s4bios(void)
+>>>>>>> v3.18
 =======
 acpi_status acpi_enter_sleep_state_s4bios(void)
 >>>>>>> v3.18
@@ -330,6 +343,10 @@ acpi_status acpi_enter_sleep_state_prep(u8 sleep_state)
 	switch (sleep_state) {
 	case ACPI_STATE_S0:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -340,6 +357,10 @@ acpi_status acpi_enter_sleep_state_prep(u8 sleep_state)
 	case ACPI_STATE_S2:
 	case ACPI_STATE_S3:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -348,6 +369,10 @@ acpi_status acpi_enter_sleep_state_prep(u8 sleep_state)
 
 	case ACPI_STATE_S4:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -356,6 +381,10 @@ acpi_status acpi_enter_sleep_state_prep(u8 sleep_state)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -386,7 +415,11 @@ ACPI_EXPORT_SYMBOL(acpi_enter_sleep_state_prep)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status asmlinkage acpi_enter_sleep_state(u8 sleep_state)
+=======
+acpi_status acpi_enter_sleep_state(u8 sleep_state)
+>>>>>>> v3.18
 =======
 acpi_status acpi_enter_sleep_state(u8 sleep_state)
 >>>>>>> v3.18

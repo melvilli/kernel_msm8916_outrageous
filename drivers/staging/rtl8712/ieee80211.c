@@ -79,9 +79,15 @@ uint r8712_is_cckrates_included(u8 *rate)
 		    (((rate[i]) & 0x7f) == 11) || (((rate[i]) & 0x7f) == 22))
 			return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			i++;
 		}
 		return false;
+=======
+		i++;
+	}
+	return false;
+>>>>>>> v3.18
 =======
 		i++;
 	}
@@ -296,7 +302,11 @@ int r8712_parse_wpa_ie(u8 *wpa_ie, int wpa_ie_len, int *group_cipher,
 		 int *pairwise_cipher)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret = _SUCCESS;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -335,7 +345,11 @@ int r8712_parse_wpa_ie(u8 *wpa_ie, int wpa_ie_len, int *group_cipher,
 	} else if (left == 1)
 		return _FAIL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return _SUCCESS;
+>>>>>>> v3.18
 =======
 	return _SUCCESS;
 >>>>>>> v3.18
@@ -345,7 +359,11 @@ int r8712_parse_wpa2_ie(u8 *rsn_ie, int rsn_ie_len, int *group_cipher,
 		  int *pairwise_cipher)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret = _SUCCESS;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -383,7 +401,11 @@ int r8712_parse_wpa2_ie(u8 *rsn_ie, int rsn_ie_len, int *group_cipher,
 	} else if (left == 1)
 		return _FAIL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return _SUCCESS;
+>>>>>>> v3.18
 =======
 	return _SUCCESS;
 >>>>>>> v3.18

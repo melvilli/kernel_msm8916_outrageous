@@ -6,7 +6,11 @@
  * SGI UV APIC functions (note: not an Intel compatible APIC)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2013 Silicon Graphics, Inc. All rights reserved.
+=======
+ * Copyright (C) 2007-2014 Silicon Graphics, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2014 Silicon Graphics, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -30,6 +34,10 @@
 #include <linux/delay.h>
 #include <linux/crash_dump.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reboot.h>
+>>>>>>> v3.18
 =======
 #include <linux/reboot.h>
 >>>>>>> v3.18
@@ -45,6 +53,7 @@
 #include <asm/smp.h>
 #include <asm/x86_init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/emergency-restart.h>
 #include <asm/nmi.h>
 
@@ -58,6 +67,10 @@ DEFINE_PER_CPU(unsigned long, cpu_last_nmi_count);
 #include <asm/nmi.h>
 
 >>>>>>> v3.18
+=======
+#include <asm/nmi.h>
+
+>>>>>>> v3.18
 DEFINE_PER_CPU(int, x2apic_extra_bits);
 
 #define PR_DEVEL(fmt, args...)	pr_devel("%s: " fmt, __func__, args)
@@ -65,6 +78,11 @@ DEFINE_PER_CPU(int, x2apic_extra_bits);
 static enum uv_system_type uv_system_type;
 static u64 gru_start_paddr, gru_end_paddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u64 gru_dist_base, gru_first_node_paddr = -1LL, gru_last_node_paddr;
+static u64 gru_dist_lmask, gru_dist_umask;
+>>>>>>> v3.18
 =======
 static u64 gru_dist_base, gru_first_node_paddr = -1LL, gru_last_node_paddr;
 static u64 gru_dist_lmask, gru_dist_umask;
@@ -75,7 +93,10 @@ EXPORT_SYMBOL_GPL(uv_min_hub_revision_id);
 unsigned int uv_apicid_hibits;
 EXPORT_SYMBOL_GPL(uv_apicid_hibits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_SPINLOCK(uv_nmi_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -94,8 +115,11 @@ static unsigned long __init uv_early_read_mmr(unsigned long addr)
 static inline bool is_GRU_range(u64 start, u64 end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return start >= gru_start_paddr && end <= gru_end_paddr;
 =======
+=======
+>>>>>>> v3.18
 	if (gru_dist_base) {
 		u64 su = start & gru_dist_umask; /* upper (incl pnode) bits */
 		u64 sl = start & gru_dist_lmask; /* base offset bits */
@@ -110,6 +134,9 @@ static inline bool is_GRU_range(u64 start, u64 end)
 	} else {
 		return start >= gru_start_paddr && end <= gru_end_paddr;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -233,9 +260,14 @@ unsigned long sn_rtc_cycles_per_second;
 EXPORT_SYMBOL(sn_rtc_cycles_per_second);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit uv_wakeup_secondary(int phys_apicid, unsigned long start_rip)
 {
 #ifdef CONFIG_SMP
+=======
+static int uv_wakeup_secondary(int phys_apicid, unsigned long start_rip)
+{
+>>>>>>> v3.18
 =======
 static int uv_wakeup_secondary(int phys_apicid, unsigned long start_rip)
 {
@@ -259,7 +291,10 @@ static int uv_wakeup_secondary(int phys_apicid, unsigned long start_rip)
 
 	atomic_set(&init_deasserted, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -404,7 +439,10 @@ static struct apic __refdata apic_x2apic_uv_x = {
 	.dest_logical			= APIC_DEST_LOGICAL,
 	.check_apicid_used		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.check_apicid_present		= NULL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -413,6 +451,7 @@ static struct apic __refdata apic_x2apic_uv_x = {
 
 	.ioapic_phys_id_map		= NULL,
 	.setup_apic_routing		= NULL,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
@@ -423,10 +462,15 @@ static struct apic __refdata apic_x2apic_uv_x = {
 	.phys_pkg_id			= uv_phys_pkg_id,
 	.mps_oem_check			= NULL,
 =======
+=======
+>>>>>>> v3.18
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
 	.check_phys_apicid_present	= default_check_phys_apicid_present,
 	.phys_pkg_id			= uv_phys_pkg_id,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.get_apic_id			= x2apic_get_apic_id,
@@ -443,10 +487,14 @@ static struct apic __refdata apic_x2apic_uv_x = {
 
 	.wakeup_secondary_cpu		= uv_wakeup_secondary,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 	.wait_for_init_deassert		= NULL,
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 =======
 	.wait_for_init_deassert		= false,
 >>>>>>> v3.18
@@ -462,7 +510,11 @@ static struct apic __refdata apic_x2apic_uv_x = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void set_x2apic_extra_bits(int pnode)
+=======
+static void set_x2apic_extra_bits(int pnode)
+>>>>>>> v3.18
 =======
 static void set_x2apic_extra_bits(int pnode)
 >>>>>>> v3.18
@@ -497,7 +549,10 @@ static __initdata struct redir_addr redir_addrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned char get_n_lshift(int m_val)
 {
 	union uv3h_gr0_gam_gr_config_u m_gr_config;
@@ -512,6 +567,9 @@ static unsigned char get_n_lshift(int m_val)
 	return m_gr_config.s3.m_skt;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __init void get_lowmem_redirect(unsigned long *base, unsigned long *size)
 {
@@ -545,7 +603,11 @@ static __init void map_high(char *id, unsigned long base, int pshift,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("UV: Map %s_HI 0x%lx - 0x%lx\n", id, paddr, paddr + bytes);
+=======
+	pr_debug("UV: Map %s_HI 0x%lx - 0x%lx\n", id, paddr, paddr + bytes);
+>>>>>>> v3.18
 =======
 	pr_debug("UV: Map %s_HI 0x%lx - 0x%lx\n", id, paddr, paddr + bytes);
 >>>>>>> v3.18
@@ -556,7 +618,10 @@ static __init void map_high(char *id, unsigned long base, int pshift,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __init void map_gru_distributed(unsigned long c)
 {
 	union uvh_rh_gam_gru_overlay_config_mmr_u gru;
@@ -589,6 +654,9 @@ static __init void map_gru_distributed(unsigned long c)
 		gru_dist_base, gru_first_node_paddr, gru_last_node_paddr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __init void map_gru_high(int max_pnode)
 {
@@ -596,6 +664,7 @@ static __init void map_gru_high(int max_pnode)
 	int shift = UVH_RH_GAM_GRU_OVERLAY_CONFIG_MMR_BASE_SHFT;
 
 	gru.v = uv_read_local_mmr(UVH_RH_GAM_GRU_OVERLAY_CONFIG_MMR);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gru.s.enable) {
 		map_high("GRU", gru.s.base, shift, shift, max_pnode, map_wb);
@@ -605,6 +674,8 @@ static __init void map_gru_high(int max_pnode)
 		pr_info("UV: GRU disabled\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!gru.s.enable) {
 		pr_info("UV: GRU disabled\n");
 		return;
@@ -617,6 +688,9 @@ static __init void map_gru_high(int max_pnode)
 	map_high("GRU", gru.s.base, shift, shift, max_pnode, map_wb);
 	gru_start_paddr = ((u64)gru.s.base << shift);
 	gru_end_paddr = gru_start_paddr + (1UL << shift) * (max_pnode + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -819,7 +893,11 @@ static void uv_heartbeat(unsigned long ignored)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit uv_heartbeat_enable(int cpu)
+=======
+static void uv_heartbeat_enable(int cpu)
+>>>>>>> v3.18
 =======
 static void uv_heartbeat_enable(int cpu)
 >>>>>>> v3.18
@@ -840,7 +918,11 @@ static void uv_heartbeat_enable(int cpu)
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit uv_heartbeat_disable(int cpu)
+=======
+static void uv_heartbeat_disable(int cpu)
+>>>>>>> v3.18
 =======
 static void uv_heartbeat_disable(int cpu)
 >>>>>>> v3.18
@@ -856,8 +938,13 @@ static void uv_heartbeat_disable(int cpu)
  * cpu hotplug notifier
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int uv_scir_cpu_notify(struct notifier_block *self,
 				       unsigned long action, void *hcpu)
+=======
+static int uv_scir_cpu_notify(struct notifier_block *self, unsigned long action,
+			      void *hcpu)
+>>>>>>> v3.18
 =======
 static int uv_scir_cpu_notify(struct notifier_block *self, unsigned long action,
 			      void *hcpu)
@@ -932,7 +1019,11 @@ int uv_set_vga_state(struct pci_dev *pdev, bool decode,
  * FIXME: hotplug not supported yet
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit uv_cpu_init(void)
+=======
+void uv_cpu_init(void)
+>>>>>>> v3.18
 =======
 void uv_cpu_init(void)
 >>>>>>> v3.18
@@ -947,6 +1038,7 @@ void uv_cpu_init(void)
 		set_x2apic_extra_bits(uv_hub_info->pnode);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * When NMI is received, print a stack trace.
@@ -1012,6 +1104,8 @@ void uv_nmi_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __init uv_system_init(void)
 {
 	union uvh_rh_gam_config_mmr_u  m_n_config;
@@ -1022,6 +1116,10 @@ void __init uv_system_init(void)
 	unsigned long mmr_base, present, paddr;
 	unsigned short pnode_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char n_lshift;
+>>>>>>> v3.18
 =======
 	unsigned char n_lshift;
 >>>>>>> v3.18
@@ -1037,6 +1135,10 @@ void __init uv_system_init(void)
 	n_val = m_n_config.s.n_skt;
 	pnode_mask = (1 << n_val) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	n_lshift = get_n_lshift(m_val);
+>>>>>>> v3.18
 =======
 	n_lshift = get_n_lshift(m_val);
 >>>>>>> v3.18
@@ -1048,8 +1150,14 @@ void __init uv_system_init(void)
 	gnode_extra = (node_id.s.node_id & ~((1 << n_val) - 1)) >> 1;
 	gnode_upper = ((unsigned long)gnode_extra  << m_val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("UV: N:%d M:%d pnode_mask:0x%x gnode_upper/extra:0x%lx/0x%x\n",
 			n_val, m_val, pnode_mask, gnode_upper, gnode_extra);
+=======
+	pr_info("UV: N:%d M:%d pnode_mask:0x%x gnode_upper/extra:0x%lx/0x%x n_lshift 0x%x\n",
+			n_val, m_val, pnode_mask, gnode_upper, gnode_extra,
+			n_lshift);
+>>>>>>> v3.18
 =======
 	pr_info("UV: N:%d M:%d pnode_mask:0x%x gnode_upper/extra:0x%lx/0x%x n_lshift 0x%x\n",
 			n_val, m_val, pnode_mask, gnode_upper, gnode_extra,
@@ -1122,8 +1230,12 @@ void __init uv_system_init(void)
 
 		uv_cpu_hub_info(cpu)->m_shift = 64 - m_val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uv_cpu_hub_info(cpu)->n_lshift = is_uv2_1_hub() ?
 				(m_val == 40 ? 40 : 39) : m_val;
+=======
+		uv_cpu_hub_info(cpu)->n_lshift = n_lshift;
+>>>>>>> v3.18
 =======
 		uv_cpu_hub_info(cpu)->n_lshift = n_lshift;
 >>>>>>> v3.18
@@ -1168,9 +1280,15 @@ void __init uv_system_init(void)
 	map_mmioh_high(min_pnode, max_pnode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uv_cpu_init();
 	uv_scir_register_cpu_notifier();
 	uv_register_nmi_notifier();
+=======
+	uv_nmi_setup();
+	uv_cpu_init();
+	uv_scir_register_cpu_notifier();
+>>>>>>> v3.18
 =======
 	uv_nmi_setup();
 	uv_cpu_init();

@@ -33,6 +33,11 @@ extern void cpu_do_idle(void);
 extern void cpu_do_switch_mm(unsigned long pgd_phys, struct mm_struct *mm);
 extern void cpu_reset(unsigned long addr) __attribute__((noreturn));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void cpu_soft_restart(phys_addr_t cpu_reset,
+		unsigned long addr) __attribute__((noreturn));
+>>>>>>> v3.18
 =======
 void cpu_soft_restart(phys_addr_t cpu_reset,
 		unsigned long addr) __attribute__((noreturn));

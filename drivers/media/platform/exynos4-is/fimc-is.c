@@ -22,14 +22,20 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/i2c.h>
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 #include <linux/of_graph.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/platform_device.h>
@@ -38,7 +44,10 @@
 #include <linux/types.h>
 #include <linux/videodev2.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-of.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/videobuf2-dma-contig.h>
@@ -140,7 +149,11 @@ static int fimc_is_setup_clocks(struct fimc_is *is)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fimc_is_enable_clocks(struct fimc_is *is)
+=======
+static int fimc_is_enable_clocks(struct fimc_is *is)
+>>>>>>> v3.18
 =======
 static int fimc_is_enable_clocks(struct fimc_is *is)
 >>>>>>> v3.18
@@ -164,7 +177,11 @@ static int fimc_is_enable_clocks(struct fimc_is *is)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fimc_is_disable_clocks(struct fimc_is *is)
+=======
+static void fimc_is_disable_clocks(struct fimc_is *is)
+>>>>>>> v3.18
 =======
 static void fimc_is_disable_clocks(struct fimc_is *is)
 >>>>>>> v3.18
@@ -179,6 +196,7 @@ static void fimc_is_disable_clocks(struct fimc_is *is)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fimc_is_parse_sensor_config(struct fimc_is_sensor *sensor,
 				       struct device_node *np)
@@ -199,6 +217,8 @@ static int fimc_is_parse_sensor_config(struct fimc_is_sensor *sensor,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int fimc_is_parse_sensor_config(struct fimc_is *is, unsigned int index,
 						struct device_node *node)
 {
@@ -231,14 +251,22 @@ static int fimc_is_parse_sensor_config(struct fimc_is *is, unsigned int index,
 
 	sensor->i2c_bus = tmp - FIMC_INPUT_MIPI_CSI2_0;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int fimc_is_register_subdevs(struct fimc_is *is)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *adapter, *child;
 	int ret;
+=======
+	struct device_node *i2c_bus, *child;
+	int ret, index = 0;
+>>>>>>> v3.18
 =======
 	struct device_node *i2c_bus, *child;
 	int ret, index = 0;
@@ -248,6 +276,7 @@ static int fimc_is_register_subdevs(struct fimc_is *is)
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_compatible_node(adapter, NULL, FIMC_IS_I2C_COMPATIBLE) {
 		if (!of_find_device_by_node(adapter)) {
@@ -287,6 +316,8 @@ e_retry:
 	of_node_put(child);
 	return -EPROBE_DEFER;
 =======
+=======
+>>>>>>> v3.18
 	/* Initialize memory allocator context for the ISP DMA. */
 	is->isp.alloc_ctx = is->alloc_ctx;
 
@@ -302,6 +333,9 @@ e_retry:
 		}
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -309,7 +343,10 @@ static int fimc_is_unregister_subdevs(struct fimc_is *is)
 {
 	fimc_isp_subdev_destroy(&is->isp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is->sensor = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -456,6 +493,12 @@ static void fimc_is_free_cpu_memory(struct fimc_is *is)
 	struct device *dev = &is->pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (is->memory.vaddr == NULL)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (is->memory.vaddr == NULL)
 		return;
@@ -480,7 +523,11 @@ static void fimc_is_load_firmware(const struct firmware *fw, void *context)
 
 	if (fw->size < FIMC_IS_FW_SIZE_MIN || fw->size > FIMC_IS_FW_SIZE_MAX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "wrong firmware size: %d\n", fw->size);
+=======
+		dev_err(dev, "wrong firmware size: %zu\n", fw->size);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "wrong firmware size: %zu\n", fw->size);
 >>>>>>> v3.18
@@ -512,7 +559,11 @@ static void fimc_is_load_firmware(const struct firmware *fw, void *context)
 	dev_info(dev, "loaded firmware: %s, rev. %s\n",
 		 is->fw.info, is->fw.version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "FW size: %d, paddr: %#x\n", fw->size, is->memory.paddr);
+=======
+	dev_dbg(dev, "FW size: %zu, paddr: %pad\n", fw->size, &is->memory.paddr);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "FW size: %zu, paddr: %pad\n", fw->size, &is->memory.paddr);
 >>>>>>> v3.18
@@ -621,8 +672,13 @@ static void fimc_is_general_irq_handler(struct fimc_is *is)
 
 		case HIC_SET_PARAMETER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			is->config[is->config_index].p_region_index1 = 0;
 			is->config[is->config_index].p_region_index2 = 0;
+=======
+			is->config[is->config_index].p_region_index[0] = 0;
+			is->config[is->config_index].p_region_index[1] = 0;
+>>>>>>> v3.18
 =======
 			is->config[is->config_index].p_region_index[0] = 0;
 			is->config[is->config_index].p_region_index[1] = 0;
@@ -686,8 +742,13 @@ static void fimc_is_general_irq_handler(struct fimc_is *is)
 		switch (is->i2h_cmd.args[0]) {
 		case HIC_SET_PARAMETER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			is->config[is->config_index].p_region_index1 = 0;
 			is->config[is->config_index].p_region_index2 = 0;
+=======
+			is->config[is->config_index].p_region_index[0] = 0;
+			is->config[is->config_index].p_region_index[1] = 0;
+>>>>>>> v3.18
 =======
 			is->config[is->config_index].p_region_index[0] = 0;
 			is->config[is->config_index].p_region_index[1] = 0;
@@ -751,7 +812,11 @@ static int fimc_is_hw_open_sensor(struct fimc_is *is,
 
 	return fimc_is_wait_event(is, IS_ST_OPEN_SENSOR, 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  FIMC_IS_SENSOR_OPEN_TIMEOUT);
+=======
+				  sensor->drvdata->open_timeout);
+>>>>>>> v3.18
 =======
 				  sensor->drvdata->open_timeout);
 >>>>>>> v3.18
@@ -769,8 +834,13 @@ int fimc_is_hw_initialize(struct fimc_is *is)
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sensor initialization. */
 	ret = fimc_is_hw_open_sensor(is, is->sensor);
+=======
+	/* Sensor initialization. Only one sensor is currently supported. */
+	ret = fimc_is_hw_open_sensor(is, &is->sensor[0]);
+>>>>>>> v3.18
 =======
 	/* Sensor initialization. Only one sensor is currently supported. */
 	ret = fimc_is_hw_open_sensor(is, &is->sensor[0]);
@@ -812,9 +882,15 @@ int fimc_is_hw_initialize(struct fimc_is *is)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("shared region: %#x, parameter region: %#x\n",
 		 is->memory.paddr + FIMC_IS_SHARED_REGION_OFFSET,
 		 is->is_dma_p_region);
+=======
+	pr_debug("shared region: %pad, parameter region: %pad\n",
+		 &is->memory.paddr + FIMC_IS_SHARED_REGION_OFFSET,
+		 &is->is_dma_p_region);
+>>>>>>> v3.18
 =======
 	pr_debug("shared region: %pad, parameter region: %pad\n",
 		 &is->memory.paddr + FIMC_IS_SHARED_REGION_OFFSET,
@@ -900,6 +976,12 @@ static int fimc_is_debugfs_create(struct fimc_is *is)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int fimc_is_runtime_resume(struct device *dev);
+static int fimc_is_runtime_suspend(struct device *dev);
+
+>>>>>>> v3.18
 =======
 static int fimc_is_runtime_resume(struct device *dev);
 static int fimc_is_runtime_suspend(struct device *dev);
@@ -960,10 +1042,13 @@ static int fimc_is_probe(struct platform_device *pdev)
 	pm_runtime_enable(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pm_runtime_get_sync(dev);
 	if (ret < 0)
 		goto err_irq;
 =======
+=======
+>>>>>>> v3.18
 	if (!pm_runtime_enabled(dev)) {
 		ret = fimc_is_runtime_resume(dev);
 		if (ret < 0)
@@ -973,13 +1058,20 @@ static int fimc_is_probe(struct platform_device *pdev)
 	ret = pm_runtime_get_sync(dev);
 	if (ret < 0)
 		goto err_pm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	is->alloc_ctx = vb2_dma_contig_init_ctx(dev);
 	if (IS_ERR(is->alloc_ctx)) {
 		ret = PTR_ERR(is->alloc_ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_irq;
+=======
+		goto err_pm;
+>>>>>>> v3.18
 =======
 		goto err_pm;
 >>>>>>> v3.18
@@ -1008,11 +1100,14 @@ static int fimc_is_probe(struct platform_device *pdev)
 err_dfs:
 	fimc_is_debugfs_remove(is);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_vb:
 	vb2_dma_contig_cleanup_ctx(is->alloc_ctx);
 err_sd:
 	fimc_is_unregister_subdevs(is);
 =======
+=======
+>>>>>>> v3.18
 err_sd:
 	fimc_is_unregister_subdevs(is);
 err_vb:
@@ -1020,6 +1115,9 @@ err_vb:
 err_pm:
 	if (!pm_runtime_enabled(dev))
 		fimc_is_runtime_suspend(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_irq:
 	free_irq(is->irq, is);
@@ -1070,11 +1168,14 @@ static int fimc_is_suspend(struct device *dev)
 static int fimc_is_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fimc_is *is = platform_get_drvdata(pdev);
 
 	pm_runtime_disable(&pdev->dev);
 	pm_runtime_set_suspended(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	struct fimc_is *is = dev_get_drvdata(dev);
 
@@ -1082,6 +1183,9 @@ static int fimc_is_remove(struct platform_device *pdev)
 	pm_runtime_set_suspended(dev);
 	if (!pm_runtime_status_suspended(dev))
 		fimc_is_runtime_suspend(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_irq(is->irq, is);
 	fimc_is_unregister_subdevs(is);
@@ -1123,6 +1227,7 @@ static int fimc_is_module_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = fimc_is_register_sensor_driver();
 	if (ret < 0)
 		return ret;
@@ -1139,6 +1244,8 @@ static int fimc_is_module_init(void)
 err_sens:
 	fimc_is_unregister_sensor_driver();
 =======
+=======
+>>>>>>> v3.18
 	ret = fimc_is_register_i2c_driver();
 	if (ret < 0)
 		return ret;
@@ -1148,6 +1255,9 @@ err_sens:
 	if (ret < 0)
 		fimc_is_unregister_i2c_driver();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1155,7 +1265,10 @@ err_sens:
 static void fimc_is_module_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fimc_is_unregister_sensor_driver();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fimc_is_unregister_i2c_driver();
@@ -1169,6 +1282,10 @@ MODULE_ALIAS("platform:" FIMC_IS_DRV_NAME);
 MODULE_AUTHOR("Younghwan Joo <yhwan.joo@samsung.com>");
 MODULE_AUTHOR("Sylwester Nawrocki <s.nawrocki@samsung.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

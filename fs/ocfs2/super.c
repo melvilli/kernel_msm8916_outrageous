@@ -69,7 +69,10 @@
 #include "sysfile.h"
 #include "uptodate.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ver.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "xattr.h"
@@ -80,7 +83,11 @@
 #include "buffer_head_io.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache *ocfs2_inode_cachep = NULL;
+=======
+static struct kmem_cache *ocfs2_inode_cachep;
+>>>>>>> v3.18
 =======
 static struct kmem_cache *ocfs2_inode_cachep;
 >>>>>>> v3.18
@@ -94,16 +101,22 @@ struct kmem_cache *ocfs2_qf_chunk_cachep;
 struct workqueue_struct *ocfs2_wq = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *ocfs2_debugfs_root = NULL;
 
 MODULE_AUTHOR("Oracle");
 MODULE_LICENSE("GPL");
 =======
+=======
+>>>>>>> v3.18
 static struct dentry *ocfs2_debugfs_root;
 
 MODULE_AUTHOR("Oracle");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("OCFS2 cluster file system");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mount_options
@@ -302,10 +315,16 @@ static int ocfs2_osb_dump(struct ocfs2_super *osb, char *buf, int len)
 
 	out += snprintf(buf + out, len - out,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%10s => Pid: %d  Interval: %lu  Needs: %d\n", "Commit",
 			(osb->commit_task ? task_pid_nr(osb->commit_task) : -1),
 			osb->osb_commit_interval,
 			atomic_read(&osb->needs_checkpoint));
+=======
+			"%10s => Pid: %d  Interval: %lu\n", "Commit",
+			(osb->commit_task ? task_pid_nr(osb->commit_task) : -1),
+			osb->osb_commit_interval);
+>>>>>>> v3.18
 =======
 			"%10s => Pid: %d  Interval: %lu\n", "Commit",
 			(osb->commit_task ? task_pid_nr(osb->commit_task) : -1),
@@ -584,6 +603,12 @@ static struct inode *ocfs2_alloc_inode(struct super_block *sb)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	oi->i_sync_tid = 0;
+	oi->i_datasync_tid = 0;
+
+>>>>>>> v3.18
 =======
 	oi->i_sync_tid = 0;
 	oi->i_datasync_tid = 0;
@@ -660,6 +685,11 @@ static int ocfs2_remount(struct super_block *sb, int *flags, char *data)
 	u32 tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 
@@ -928,18 +958,24 @@ static int ocfs2_susp_quotas(struct ocfs2_super *osb, int unsuspend)
 	int type;
 	struct super_block *sb = osb->sb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int feature[MAXQUOTAS] = { OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
 					     OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
 	int status = 0;
 
 	for (type = 0; type < MAXQUOTAS; type++) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int feature[OCFS2_MAXQUOTAS] = {
 					OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
 					OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
 	int status = 0;
 
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!OCFS2_HAS_RO_COMPAT_FEATURE(sb, feature[type]))
 			continue;
@@ -965,12 +1001,15 @@ static int ocfs2_susp_quotas(struct ocfs2_super *osb, int unsuspend)
 static int ocfs2_enable_quotas(struct ocfs2_super *osb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode[MAXQUOTAS] = { NULL, NULL };
 	struct super_block *sb = osb->sb;
 	unsigned int feature[MAXQUOTAS] = { OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
 					     OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
 	unsigned int ino[MAXQUOTAS] = { LOCAL_USER_QUOTA_SYSTEM_INODE,
 =======
+=======
+>>>>>>> v3.18
 	struct inode *inode[OCFS2_MAXQUOTAS] = { NULL, NULL };
 	struct super_block *sb = osb->sb;
 	unsigned int feature[OCFS2_MAXQUOTAS] = {
@@ -978,6 +1017,9 @@ static int ocfs2_enable_quotas(struct ocfs2_super *osb)
 					OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
 	unsigned int ino[OCFS2_MAXQUOTAS] = {
 					LOCAL_USER_QUOTA_SYSTEM_INODE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					LOCAL_GROUP_QUOTA_SYSTEM_INODE };
 	int status;
@@ -985,7 +1027,11 @@ static int ocfs2_enable_quotas(struct ocfs2_super *osb)
 
 	sb_dqopt(sb)->flags |= DQUOT_QUOTA_SYS_FILE | DQUOT_NEGATIVE_USAGE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++) {
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
 >>>>>>> v3.18
@@ -1004,7 +1050,11 @@ static int ocfs2_enable_quotas(struct ocfs2_super *osb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++)
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
 >>>>>>> v3.18
@@ -1013,7 +1063,11 @@ static int ocfs2_enable_quotas(struct ocfs2_super *osb)
 out_quota_off:
 	ocfs2_disable_quotas(osb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++)
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
 >>>>>>> v3.18
@@ -1032,7 +1086,11 @@ static void ocfs2_disable_quotas(struct ocfs2_super *osb)
 	/* We mostly ignore errors in this function because there's not much
 	 * we can do when we see them */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++) {
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
 >>>>>>> v3.18
@@ -1057,8 +1115,14 @@ static void ocfs2_disable_quotas(struct ocfs2_super *osb)
 static int ocfs2_quota_on(struct super_block *sb, int type, int format_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int feature[MAXQUOTAS] = { OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
 					     OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
+=======
+	unsigned int feature[OCFS2_MAXQUOTAS] = {
+					OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
+					OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
+>>>>>>> v3.18
 =======
 	unsigned int feature[OCFS2_MAXQUOTAS] = {
 					OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
@@ -1097,7 +1161,11 @@ static int ocfs2_fill_super(struct super_block *sb, void *data, int silent)
 	struct ocfs2_super *osb = NULL;
 	struct buffer_head *bh = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char nodestr[8];
+=======
+	char nodestr[12];
+>>>>>>> v3.18
 =======
 	char nodestr[12];
 >>>>>>> v3.18
@@ -1317,6 +1385,7 @@ static struct dentry *ocfs2_mount(struct file_system_type *fs_type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ocfs2_kill_sb(struct super_block *sb)
 {
 	struct ocfs2_super *osb = OCFS2_SB(sb);
@@ -1337,13 +1406,19 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct file_system_type ocfs2_fs_type = {
 	.owner          = THIS_MODULE,
 	.name           = "ocfs2",
 	.mount          = ocfs2_mount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.kill_sb        = ocfs2_kill_sb,
 
+=======
+	.kill_sb        = kill_block_super,
+>>>>>>> v3.18
 =======
 	.kill_sb        = kill_block_super,
 >>>>>>> v3.18
@@ -1698,6 +1773,7 @@ static int ocfs2_show_options(struct seq_file *s, struct dentry *root)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 wait_queue_head_t ocfs2__ioend_wq[OCFS2_IOEND_WQ_HASH_SZ];
 
 static int __init ocfs2_init(void)
@@ -1708,6 +1784,11 @@ static int __init ocfs2_init(void)
 
 	for (i = 0; i < OCFS2_IOEND_WQ_HASH_SZ; i++)
 		init_waitqueue_head(&ocfs2__ioend_wq[i]);
+=======
+static int __init ocfs2_init(void)
+{
+	int status;
+>>>>>>> v3.18
 =======
 static int __init ocfs2_init(void)
 {
@@ -1855,7 +1936,11 @@ static void ocfs2_inode_init_once(void *data)
 	INIT_LIST_HEAD(&oi->ip_io_markers);
 	oi->ip_dir_start_lookup = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&oi->ip_unaligned_aio, 0);
+=======
+	mutex_init(&oi->ip_unaligned_aio);
+>>>>>>> v3.18
 =======
 	mutex_init(&oi->ip_unaligned_aio);
 >>>>>>> v3.18
@@ -1944,8 +2029,13 @@ static int ocfs2_get_sector(struct super_block *sb,
 	*bh = sb_getblk(sb, block);
 	if (!*bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlog_errno(-EIO);
 		return -EIO;
+=======
+		mlog_errno(-ENOMEM);
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		mlog_errno(-ENOMEM);
 		return -ENOMEM;
@@ -2025,7 +2115,11 @@ static void ocfs2_dismount_volume(struct super_block *sb, int mnt_err)
 	int tmp, hangup_needed = 0;
 	struct ocfs2_super *osb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char nodestr[8];
+=======
+	char nodestr[12];
+>>>>>>> v3.18
 =======
 	char nodestr[12];
 >>>>>>> v3.18
@@ -2039,6 +2133,7 @@ static void ocfs2_dismount_volume(struct super_block *sb, int mnt_err)
 	debugfs_remove(osb->osb_ctxt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Flush inode dropping work queue so that deletes are
 	 * performed while the filesystem is still working
@@ -2047,18 +2142,26 @@ static void ocfs2_dismount_volume(struct super_block *sb, int mnt_err)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Orphan scan should be stopped as early as possible */
 	ocfs2_orphan_scan_stop(osb);
 
 	ocfs2_disable_quotas(osb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* All dquots should be freed by now */
 	WARN_ON(!llist_empty(&osb->dquot_drop_list));
 	/* Wait for worker to be done with the work structure in osb */
 	cancel_work_sync(&osb->dquot_drop_work);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ocfs2_shutdown_local_alloc(osb);
 
@@ -2191,7 +2294,10 @@ static int ocfs2_initialize_super(struct super_block *sb,
 	struct inode *inode = NULL;
 	struct ocfs2_journal *journal;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 uuid_net_key;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ocfs2_super *osb;
@@ -2240,6 +2346,11 @@ static int ocfs2_initialize_super(struct super_block *sb,
 	ocfs2_init_steal_slots(osb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&osb->system_file_mutex);
+
+>>>>>>> v3.18
 =======
 	mutex_init(&osb->system_file_mutex);
 
@@ -2277,7 +2388,10 @@ static int ocfs2_initialize_super(struct super_block *sb,
 
 	init_waitqueue_head(&osb->checkpoint_event);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&osb->needs_checkpoint, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2353,10 +2467,16 @@ static int ocfs2_initialize_super(struct super_block *sb,
 		osb->osb_stackflags =
 			OCFS2_RAW_SB(di)->s_cluster_info.ci_stackflags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(osb->osb_cluster_stack,
 		       OCFS2_RAW_SB(di)->s_cluster_info.ci_stack,
 		       OCFS2_STACK_LABEL_LEN);
 		osb->osb_cluster_stack[OCFS2_STACK_LABEL_LEN] = '\0';
+=======
+		strlcpy(osb->osb_cluster_stack,
+		       OCFS2_RAW_SB(di)->s_cluster_info.ci_stack,
+		       OCFS2_STACK_LABEL_LEN + 1);
+>>>>>>> v3.18
 =======
 		strlcpy(osb->osb_cluster_stack,
 		       OCFS2_RAW_SB(di)->s_cluster_info.ci_stack,
@@ -2371,6 +2491,12 @@ static int ocfs2_initialize_super(struct super_block *sb,
 			goto bail;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		strlcpy(osb->osb_cluster_name,
+			OCFS2_RAW_SB(di)->s_cluster_info.ci_cluster,
+			OCFS2_CLUSTER_NAME_LEN + 1);
+>>>>>>> v3.18
 =======
 		strlcpy(osb->osb_cluster_name,
 			OCFS2_RAW_SB(di)->s_cluster_info.ci_cluster,
@@ -2412,8 +2538,13 @@ static int ocfs2_initialize_super(struct super_block *sb,
 	journal->j_state = OCFS2_JOURNAL_FREE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&osb->dentry_lock_work, ocfs2_drop_dl_inodes);
 	osb->dentry_lock_list = NULL;
+=======
+	INIT_WORK(&osb->dquot_drop_work, ocfs2_drop_dquot_refs);
+	init_llist_head(&osb->dquot_drop_list);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&osb->dquot_drop_work, ocfs2_drop_dquot_refs);
 	init_llist_head(&osb->dquot_drop_list);
@@ -2452,10 +2583,15 @@ static int ocfs2_initialize_super(struct super_block *sb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&uuid_net_key, di->id2.i_super.s_uuid, sizeof(uuid_net_key));
 
 	strncpy(osb->vol_label, di->id2.i_super.s_label, 63);
 	osb->vol_label[63] = '\0';
+=======
+	strlcpy(osb->vol_label, di->id2.i_super.s_label,
+		OCFS2_MAX_VOL_LABEL_LEN);
+>>>>>>> v3.18
 =======
 	strlcpy(osb->vol_label, di->id2.i_super.s_label,
 		OCFS2_MAX_VOL_LABEL_LEN);
@@ -2703,6 +2839,10 @@ static void ocfs2_delete_osb(struct ocfs2_super *osb)
 	kfree(osb->local_alloc_copy);
 	kfree(osb->uuid_str);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(osb->vol_label);
+>>>>>>> v3.18
 =======
 	kfree(osb->vol_label);
 >>>>>>> v3.18

@@ -38,6 +38,10 @@ struct x86_instruction_info {
 	u8  modrm_rm;		/* rm part of modrm			*/
 	u64 src_val;            /* value of source operand              */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 dst_val;            /* value of destination operand         */
+>>>>>>> v3.18
 =======
 	u64 dst_val;            /* value of destination operand         */
 >>>>>>> v3.18
@@ -194,7 +198,10 @@ struct x86_emulate_ops {
 	ulong (*get_cr)(struct x86_emulate_ctxt *ctxt, int cr);
 	int (*set_cr)(struct x86_emulate_ctxt *ctxt, int cr, ulong val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_rflags)(struct x86_emulate_ctxt *ctxt, ulong val);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*cpl)(struct x86_emulate_ctxt *ctxt);
@@ -203,6 +210,10 @@ struct x86_emulate_ops {
 	int (*set_msr)(struct x86_emulate_ctxt *ctxt, u32 msr_index, u64 data);
 	int (*get_msr)(struct x86_emulate_ctxt *ctxt, u32 msr_index, u64 *pdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*check_pmc)(struct x86_emulate_ctxt *ctxt, u32 pmc);
+>>>>>>> v3.18
 =======
 	int (*check_pmc)(struct x86_emulate_ctxt *ctxt, u32 pmc);
 >>>>>>> v3.18
@@ -244,7 +255,11 @@ struct operand {
 		unsigned long val;
 		u64 val64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char valptr[sizeof(unsigned long) + 2];
+=======
+		char valptr[sizeof(sse128_t)];
+>>>>>>> v3.18
 =======
 		char valptr[sizeof(sse128_t)];
 >>>>>>> v3.18
@@ -257,8 +272,13 @@ struct operand {
 struct fetch_cache {
 	u8 data[15];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long start;
 	unsigned long end;
+=======
+	u8 *ptr;
+	u8 *end;
+>>>>>>> v3.18
 =======
 	u8 *ptr;
 	u8 *end;
@@ -295,7 +315,11 @@ struct x86_emulate_ctxt {
 	bool guest_mode; /* guest running a nested guest */
 	bool perm_ok; /* do not check permissions if true */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool only_vendor_specific_insn;
+=======
+	bool ud;	/* inject an #UD if host doesn't support insn */
+>>>>>>> v3.18
 =======
 	bool ud;	/* inject an #UD if host doesn't support insn */
 >>>>>>> v3.18
@@ -303,6 +327,7 @@ struct x86_emulate_ctxt {
 	bool have_exception;
 	struct x86_exception exception;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* decode cache */
 	u8 twobyte;
@@ -322,6 +347,8 @@ struct x86_emulate_ctxt {
 	int (*execute)(struct x86_emulate_ctxt *ctxt);
 	int (*check_perm)(struct x86_emulate_ctxt *ctxt);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * decode cache
 	 */
@@ -350,6 +377,9 @@ struct x86_emulate_ctxt {
 	u32 regs_valid;
 	/* bitmaps of registers in _regs[] that have been written */
 	u32 regs_dirty;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* modrm */
 	u8 modrm;
@@ -358,16 +388,22 @@ struct x86_emulate_ctxt {
 	u8 modrm_rm;
 	u8 modrm_seg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool rip_relative;
 	unsigned long _eip;
 	struct operand memop;
 	u32 regs_valid;  /* bitmaps of registers in _regs[] that can be read */
 	u32 regs_dirty;  /* bitmaps of registers in _regs[] that have been written */
 =======
+=======
+>>>>>>> v3.18
 	u8 seg_override;
 	u64 d;
 	unsigned long _eip;
 	struct operand memop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Fields above regs are cleared together. */
 	unsigned long _regs[NR_VCPU_REGS];
@@ -467,6 +503,10 @@ bool x86_page_table_writing_insn(struct x86_emulate_ctxt *ctxt);
 #define EMULATION_RESTART 1
 #define EMULATION_INTERCEPTED 2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void init_decode_cache(struct x86_emulate_ctxt *ctxt);
+>>>>>>> v3.18
 =======
 void init_decode_cache(struct x86_emulate_ctxt *ctxt);
 >>>>>>> v3.18

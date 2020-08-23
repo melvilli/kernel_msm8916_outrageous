@@ -266,6 +266,10 @@
 #define PG_ELPA		(_ULCAST_(1) <<	 29)
 #define PG_ESP		(_ULCAST_(1) <<	 28)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PG_IEC		(_ULCAST_(1) <<  27)
+>>>>>>> v3.18
 =======
 #define PG_IEC		(_ULCAST_(1) <<  27)
 >>>>>>> v3.18
@@ -573,6 +577,7 @@
 #define MIPS_CONF1_MD		(_ULCAST_(1) <<	 5)
 #define MIPS_CONF1_C2		(_ULCAST_(1) <<	 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIPS_CONF1_DA		(_ULCAST_(7) <<	 7)
 #define MIPS_CONF1_DL		(_ULCAST_(7) << 10)
 #define MIPS_CONF1_DS		(_ULCAST_(7) << 13)
@@ -581,6 +586,8 @@
 #define MIPS_CONF1_IS		(_ULCAST_(7) << 22)
 #define MIPS_CONF1_TLBS		(_ULCAST_(63)<< 25)
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CONF1_DA_SHF	7
 #define MIPS_CONF1_DA_SZ	3
 #define MIPS_CONF1_DA		(_ULCAST_(7) <<	 7)
@@ -602,6 +609,9 @@
 #define MIPS_CONF1_TLBS_SHIFT   (25)
 #define MIPS_CONF1_TLBS_SIZE    (6)
 #define MIPS_CONF1_TLBS         (_ULCAST_(63) << MIPS_CONF1_TLBS_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MIPS_CONF2_SA		(_ULCAST_(15)<<	 0)
@@ -617,6 +627,10 @@
 #define MIPS_CONF3_SM		(_ULCAST_(1) <<	 1)
 #define MIPS_CONF3_MT		(_ULCAST_(1) <<	 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MIPS_CONF3_CDMM		(_ULCAST_(1) <<	 3)
+>>>>>>> v3.18
 =======
 #define MIPS_CONF3_CDMM		(_ULCAST_(1) <<	 3)
 >>>>>>> v3.18
@@ -625,6 +639,11 @@
 #define MIPS_CONF3_VEIC		(_ULCAST_(1) <<	 6)
 #define MIPS_CONF3_LPA		(_ULCAST_(1) <<	 7)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MIPS_CONF3_ITL		(_ULCAST_(1) <<	 8)
+#define MIPS_CONF3_CTXTC	(_ULCAST_(1) <<	 9)
+>>>>>>> v3.18
 =======
 #define MIPS_CONF3_ITL		(_ULCAST_(1) <<	 8)
 #define MIPS_CONF3_CTXTC	(_ULCAST_(1) <<	 9)
@@ -635,6 +654,7 @@
 #define MIPS_CONF3_ULRI		(_ULCAST_(1) << 13)
 #define MIPS_CONF3_ISA		(_ULCAST_(3) << 14)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIPS_CONF3_ISA_OE	(_ULCAST_(3) << 16)
 #define MIPS_CONF3_VZ		(_ULCAST_(1) << 23)
 
@@ -644,6 +664,8 @@
 
 #define MIPS_CONF6_SYND		(_ULCAST_(1) << 13)
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CONF3_ISA_OE	(_ULCAST_(1) << 16)
 #define MIPS_CONF3_MCU		(_ULCAST_(1) << 17)
 #define MIPS_CONF3_MMAR		(_ULCAST_(7) << 18)
@@ -692,6 +714,9 @@
 #define MIPS_CONF6_FTLBEN	(_ULCAST_(1) << 15)
 /* FTLB probability bits */
 #define MIPS_CONF6_FTLBP_SHIFT	(16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MIPS_CONF7_WII		(_ULCAST_(1) << 31)
@@ -699,7 +724,10 @@
 #define MIPS_CONF7_RPS		(_ULCAST_(1) << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CONF7_IAR		(_ULCAST_(1) << 10)
 #define MIPS_CONF7_AR		(_ULCAST_(1) << 16)
 
@@ -715,6 +743,9 @@
 /* CMGCRBase bit definitions */
 #define MIPS_CMGCRB_BASE	11
 #define MIPS_CMGCRF_BASE	(~_ULCAST_((1 << MIPS_CMGCRB_BASE) - 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -729,6 +760,7 @@
 #define MIPS_FPIR_F64		(_ULCAST_(1) << 22)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASSEMBLY__
 
 /*
@@ -738,6 +770,8 @@
 #define msk_isa16_mode(x)		((x) & ~0x1)
 #define set_isa16_mode(x)		do { (x) |= 0x1; } while(0)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Bits in the MIPS32 Memory Segmentation registers.
  */
@@ -804,6 +838,9 @@
 #define msk_isa16_mode(x)		(x)
 #define set_isa16_mode(x)		do { } while(0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -819,7 +856,10 @@ static inline int mm_insn_16bit(u16 insn)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * TLB Invalidate Flush
  */
 static inline void tlbinvf(void)
@@ -833,6 +873,9 @@ static inline void tlbinvf(void)
 
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Functions to access the R10000 performance counters.	 These are basically
  * mfc0 and mtc0 instructions from and to coprocessor register with a 5-bit
@@ -1102,6 +1145,7 @@ do {									\
 
 #define read_c0_status()	__read_32bit_c0_register($12, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #define write_c0_status(val)						\
 do {									\
@@ -1119,6 +1163,10 @@ do {									\
 
 #define write_c0_status(val)	__write_32bit_c0_register($12, 0, val)
 >>>>>>> v3.18
+=======
+
+#define write_c0_status(val)	__write_32bit_c0_register($12, 0, val)
+>>>>>>> v3.18
 
 #define read_c0_cause()		__read_32bit_c0_register($13, 0)
 #define write_c0_cause(val)	__write_32bit_c0_register($13, 0, val)
@@ -1129,6 +1177,11 @@ do {									\
 #define read_c0_prid()		__read_32bit_c0_register($15, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define read_c0_cmgcrbase()	__read_ulong_c0_register($15, 3)
+
+>>>>>>> v3.18
 =======
 #define read_c0_cmgcrbase()	__read_ulong_c0_register($15, 3)
 
@@ -1151,12 +1204,18 @@ do {									\
 #define write_c0_config7(val)	__write_32bit_c0_register($16, 7, val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define read_c0_maar()		__read_ulong_c0_register($17, 1)
 #define write_c0_maar(val)	__write_ulong_c0_register($17, 1, val)
 #define read_c0_maari()		__read_32bit_c0_register($17, 2)
 #define write_c0_maari(val)	__write_32bit_c0_register($17, 2, val)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The WatchLo register.  There may be up to 8 of them.
@@ -1306,7 +1365,10 @@ do {									\
 #define write_c0_ebase(val)	__write_32bit_c0_register($15, 1, val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MIPSR3 */
 #define read_c0_segctl0()	__read_32bit_c0_register($5, 2)
 #define write_c0_segctl0(val)	__write_32bit_c0_register($5, 2, val)
@@ -1329,6 +1391,9 @@ do {									\
 
 #define read_c0_pwctl()		__read_32bit_c0_register($6, 6)
 #define write_c0_pwctl(val)	__write_32bit_c0_register($6, 6, val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Cavium OCTEON (cnMIPS) */
@@ -1399,7 +1464,11 @@ do {									\
  * Macros to access the floating point coprocessor control registers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define read_32bit_cp1_register(source)					\
+=======
+#define _read_32bit_cp1_register(source, gas_hardfloat)			\
+>>>>>>> v3.18
 =======
 #define _read_32bit_cp1_register(source, gas_hardfloat)			\
 >>>>>>> v3.18
@@ -1413,6 +1482,10 @@ do {									\
 	"	# like Octeon.					\n"	\
 	"	.set	mips1					\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"	"STR(gas_hardfloat)"				\n"	\
+>>>>>>> v3.18
 =======
 	"	"STR(gas_hardfloat)"				\n"	\
 >>>>>>> v3.18
@@ -1423,7 +1496,10 @@ do {									\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef GAS_HAS_SET_HARDFLOAT
 #define read_32bit_cp1_register(source)					\
 	_read_32bit_cp1_register(source, .set hardfloat)
@@ -1432,6 +1508,9 @@ do {									\
 	_read_32bit_cp1_register(source, )
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef HAVE_AS_DSP
 #define rddsp(mask)							\
@@ -1889,11 +1968,14 @@ static inline void tlb_write_random(void)
  * Manipulate bits in a c0 register.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_MIPS_MT_SMTC
 /*
  * SMTC Linux requires shutting-down microthread scheduling
  * during CP0 register read-modify-write sequences.
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __BUILD_SET_C0(name)					\
@@ -1934,6 +2016,7 @@ change_c0_##name(unsigned int change, unsigned int val)		\
 	return res;						\
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else /* SMTC versions that manage MT scheduling */
 
@@ -2054,10 +2137,15 @@ __BUILD_SET_C0(status)
 __BUILD_SET_C0(cause)
 __BUILD_SET_C0(config)
 =======
+=======
+>>>>>>> v3.18
 __BUILD_SET_C0(status)
 __BUILD_SET_C0(cause)
 __BUILD_SET_C0(config)
 __BUILD_SET_C0(config5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __BUILD_SET_C0(intcontrol)
 __BUILD_SET_C0(intctl)
@@ -2071,7 +2159,10 @@ __BUILD_SET_C0(brcm_config)
 __BUILD_SET_C0(brcm_mode)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return low 10 bits of ebase.
  * Note that under KVM (MIPSVZ) this returns vcpu id.
@@ -2081,6 +2172,9 @@ static inline unsigned int get_ebase_cpunum(void)
 	return read_c0_ebase() & 0x3ff;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !__ASSEMBLY__ */
 

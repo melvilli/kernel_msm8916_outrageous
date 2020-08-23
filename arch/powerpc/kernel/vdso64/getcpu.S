@@ -30,7 +30,11 @@
 V_FUNCTION_BEGIN(__kernel_getcpu)
   .cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfspr	r5,SPRN_USPRG3
+=======
+	mfspr	r5,SPRN_SPRG_VDSO_READ
+>>>>>>> v3.18
 =======
 	mfspr	r5,SPRN_SPRG_VDSO_READ
 >>>>>>> v3.18

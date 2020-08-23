@@ -132,7 +132,11 @@ static const struct nla_policy irda_nl_policy[IRDA_NL_ATTR_MAX + 1] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops irda_nl_ops[] = {
+=======
+static const struct genl_ops irda_nl_ops[] = {
+>>>>>>> v3.18
 =======
 static const struct genl_ops irda_nl_ops[] = {
 >>>>>>> v3.18
@@ -154,8 +158,12 @@ static const struct genl_ops irda_nl_ops[] = {
 int irda_nl_register(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return genl_register_family_with_ops(&irda_nl_family,
 		irda_nl_ops, ARRAY_SIZE(irda_nl_ops));
+=======
+	return genl_register_family_with_ops(&irda_nl_family, irda_nl_ops);
+>>>>>>> v3.18
 =======
 	return genl_register_family_with_ops(&irda_nl_family, irda_nl_ops);
 >>>>>>> v3.18

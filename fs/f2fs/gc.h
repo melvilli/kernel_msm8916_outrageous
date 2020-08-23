@@ -36,9 +36,15 @@ struct f2fs_gc_kthread {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gc_inode_list {
 	struct list_head ilist;
 	struct radix_tree_root iroot;
+=======
+struct inode_entry {
+	struct list_head list;
+	struct inode *inode;
+>>>>>>> v3.18
 =======
 struct inode_entry {
 	struct list_head list;
@@ -71,6 +77,7 @@ static inline block_t limit_free_user_blocks(struct f2fs_sb_info *sbi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void increase_sleep_time(struct f2fs_gc_kthread *gc_th,
 								long *wait)
 {
@@ -92,6 +99,8 @@ static inline void decrease_sleep_time(struct f2fs_gc_kthread *gc_th,
 	if (*wait <= gc_th->min_sleep_time)
 		*wait = gc_th->min_sleep_time;
 =======
+=======
+>>>>>>> v3.18
 static inline long increase_sleep_time(struct f2fs_gc_kthread *gc_th, long wait)
 {
 	if (wait == gc_th->no_gc_sleep_time)
@@ -112,6 +121,9 @@ static inline long decrease_sleep_time(struct f2fs_gc_kthread *gc_th, long wait)
 	if (wait <= gc_th->min_sleep_time)
 		wait = gc_th->min_sleep_time;
 	return wait;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -130,7 +142,10 @@ static inline bool has_enough_invalid_blocks(struct f2fs_sb_info *sbi)
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int is_idle(struct f2fs_sb_info *sbi)
 {
@@ -139,4 +154,7 @@ static inline int is_idle(struct f2fs_sb_info *sbi)
 	struct request_list *rl = &q->root_rl;
 	return !(rl->count[BLK_RW_SYNC]) && !(rl->count[BLK_RW_ASYNC]);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

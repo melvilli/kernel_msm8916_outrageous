@@ -1,9 +1,14 @@
 /**
  * aops.c - NTFS kernel address space operations and page cache handling.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	    Part of the Linux-NTFS project.
  *
  * Copyright (c) 2001-2007 Anton Altaparmakov
+=======
+ *
+ * Copyright (c) 2001-2014 Anton Altaparmakov and Tuxera Inc.
+>>>>>>> v3.18
 =======
  *
  * Copyright (c) 2001-2014 Anton Altaparmakov and Tuxera Inc.
@@ -1378,7 +1383,11 @@ retry_writepage:
 		 * freeable here, so the page does not leak.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		block_invalidatepage(page, 0);
+=======
+		block_invalidatepage(page, 0, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 =======
 		block_invalidatepage(page, 0, PAGE_CACHE_SIZE);
 >>>>>>> v3.18
@@ -1549,6 +1558,7 @@ err_out:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ntfs_aops - general address space operations for inodes and attributes
  */
 const struct address_space_operations ntfs_aops = {
@@ -1560,6 +1570,8 @@ const struct address_space_operations ntfs_aops = {
 						   one physical page to an
 						   other. */
 =======
+=======
+>>>>>>> v3.18
  * ntfs_bmap - map logical file block to physical device block
  * @mapping:	address space mapping to which the block to be mapped belongs
  * @block:	logical block to map to its physical device block
@@ -1711,6 +1723,9 @@ const struct address_space_operations ntfs_compressed_aops = {
 #endif /* NTFS_RW */
 	.migratepage	= buffer_migrate_page,
 	.is_partially_uptodate = block_is_partially_uptodate,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.error_remove_page = generic_error_remove_page,
 };
@@ -1728,9 +1743,14 @@ const struct address_space_operations ntfs_mst_aops = {
 						   belonging to the page. */
 #endif /* NTFS_RW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.migratepage	= buffer_migrate_page,	/* Move a page cache page from
 						   one physical page to an
 						   other. */
+=======
+	.migratepage	= buffer_migrate_page,
+	.is_partially_uptodate	= block_is_partially_uptodate,
+>>>>>>> v3.18
 =======
 	.migratepage	= buffer_migrate_page,
 	.is_partially_uptodate	= block_is_partially_uptodate,

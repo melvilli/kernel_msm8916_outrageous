@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Routines to indentify caches on Intel CPU.
+=======
+ *	Routines to identify caches on Intel CPU.
+>>>>>>> v3.18
 =======
  *	Routines to identify caches on Intel CPU.
 >>>>>>> v3.18
@@ -42,7 +46,11 @@ struct _cache_table {
    trace cache entries) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct _cache_table __cpuinitconst cache_table[] =
+=======
+static const struct _cache_table cache_table[] =
+>>>>>>> v3.18
 =======
 static const struct _cache_table cache_table[] =
 >>>>>>> v3.18
@@ -212,7 +220,11 @@ union l3_cache {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned short __cpuinitconst assocs[] = {
+=======
+static const unsigned short assocs[] = {
+>>>>>>> v3.18
 =======
 static const unsigned short assocs[] = {
 >>>>>>> v3.18
@@ -230,15 +242,21 @@ static const unsigned short assocs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned char __cpuinitconst levels[] = { 1, 1, 2, 3 };
 static const unsigned char __cpuinitconst types[] = { 1, 2, 3, 3 };
 
 static void __cpuinit
 =======
+=======
+>>>>>>> v3.18
 static const unsigned char levels[] = { 1, 1, 2, 3 };
 static const unsigned char types[] = { 1, 2, 3, 3 };
 
 static void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 amd_cpuid4(int leaf, union _cpuid4_leaf_eax *eax,
 		     union _cpuid4_leaf_ebx *ebx,
@@ -322,7 +340,11 @@ struct _cache_attr {
  * L3 cache descriptors
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit amd_calc_l3_indices(struct amd_northbridge *nb)
+=======
+static void amd_calc_l3_indices(struct amd_northbridge *nb)
+>>>>>>> v3.18
 =======
 static void amd_calc_l3_indices(struct amd_northbridge *nb)
 >>>>>>> v3.18
@@ -349,7 +371,11 @@ static void amd_calc_l3_indices(struct amd_northbridge *nb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit amd_init_l3_cache(struct _cpuid4_info_regs *this_leaf, int index)
+=======
+static void amd_init_l3_cache(struct _cpuid4_info_regs *this_leaf, int index)
+>>>>>>> v3.18
 =======
 static void amd_init_l3_cache(struct _cpuid4_info_regs *this_leaf, int index)
 >>>>>>> v3.18
@@ -489,7 +515,11 @@ static ssize_t store_cache_disable(struct _cpuid4_info *this_leaf,
 	cpu = cpumask_first(to_cpumask(this_leaf->shared_cpu_map));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 10, &val) < 0)
+=======
+	if (kstrtoul(buf, 10, &val) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 10, &val) < 0)
 >>>>>>> v3.18
@@ -543,7 +573,11 @@ store_subcaches(struct _cpuid4_info *this_leaf, const char *buf, size_t count,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 16, &val) < 0)
+=======
+	if (kstrtoul(buf, 16, &val) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 16, &val) < 0)
 >>>>>>> v3.18
@@ -564,8 +598,12 @@ static struct _cache_attr subcaches =
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 __cpuinit cpuid4_cache_lookup_regs(int index,
 				   struct _cpuid4_info_regs *this_leaf)
+=======
+cpuid4_cache_lookup_regs(int index, struct _cpuid4_info_regs *this_leaf)
+>>>>>>> v3.18
 =======
 cpuid4_cache_lookup_regs(int index, struct _cpuid4_info_regs *this_leaf)
 >>>>>>> v3.18
@@ -600,7 +638,11 @@ cpuid4_cache_lookup_regs(int index, struct _cpuid4_info_regs *this_leaf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit find_num_cache_leaves(struct cpuinfo_x86 *c)
+=======
+static int find_num_cache_leaves(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static int find_num_cache_leaves(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -624,7 +666,11 @@ static int find_num_cache_leaves(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit init_amd_cacheinfo(struct cpuinfo_x86 *c)
+=======
+void init_amd_cacheinfo(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void init_amd_cacheinfo(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -641,7 +687,11 @@ void init_amd_cacheinfo(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit init_intel_cacheinfo(struct cpuinfo_x86 *c)
+=======
+unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -669,6 +719,7 @@ unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
 		 * parameters cpuid leaf to find the cache details
 		 */
 		for (i = 0; i < num_cache_leaves; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			struct _cpuid4_info_regs this_leaf;
 			int retval;
@@ -701,6 +752,8 @@ unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
 					break;
 				}
 =======
+=======
+>>>>>>> v3.18
 			struct _cpuid4_info_regs this_leaf = {};
 			int retval;
 
@@ -729,6 +782,9 @@ unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
 				break;
 			default:
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -816,7 +872,10 @@ unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_HT
 	/*
 	 * If cpu_llc_id is not yet set, this means cpuid_level < 4 which in
@@ -829,6 +888,9 @@ unsigned int init_intel_cacheinfo(struct cpuinfo_x86 *c)
 		per_cpu(cpu_llc_id, cpu) = c->phys_proc_id;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	c->x86_cache_size = l3 ? l3 : (l2 ? l2 : (l1i+l1d));
 
@@ -844,7 +906,11 @@ static DEFINE_PER_CPU(struct _cpuid4_info *, ici_cpuid4_info);
 #ifdef CONFIG_SMP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_shared_amd_cpu_map_setup(unsigned int cpu, int index)
+=======
+static int cache_shared_amd_cpu_map_setup(unsigned int cpu, int index)
+>>>>>>> v3.18
 =======
 static int cache_shared_amd_cpu_map_setup(unsigned int cpu, int index)
 >>>>>>> v3.18
@@ -897,7 +963,11 @@ static int cache_shared_amd_cpu_map_setup(unsigned int cpu, int index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_shared_cpu_map_setup(unsigned int cpu, int index)
+=======
+static void cache_shared_cpu_map_setup(unsigned int cpu, int index)
+>>>>>>> v3.18
 =======
 static void cache_shared_cpu_map_setup(unsigned int cpu, int index)
 >>>>>>> v3.18
@@ -936,7 +1006,11 @@ static void cache_shared_cpu_map_setup(unsigned int cpu, int index)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_remove_shared_cpu_map(unsigned int cpu, int index)
+=======
+static void cache_remove_shared_cpu_map(unsigned int cpu, int index)
+>>>>>>> v3.18
 =======
 static void cache_remove_shared_cpu_map(unsigned int cpu, int index)
 >>>>>>> v3.18
@@ -953,24 +1027,34 @@ static void cache_remove_shared_cpu_map(unsigned int cpu, int index)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_shared_cpu_map_setup(unsigned int cpu, int index)
 {
 }
 
 static void __cpuinit cache_remove_shared_cpu_map(unsigned int cpu, int index)
 =======
+=======
+>>>>>>> v3.18
 static void cache_shared_cpu_map_setup(unsigned int cpu, int index)
 {
 }
 
 static void cache_remove_shared_cpu_map(unsigned int cpu, int index)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit free_cache_attributes(unsigned int cpu)
+=======
+static void free_cache_attributes(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void free_cache_attributes(unsigned int cpu)
 >>>>>>> v3.18
@@ -985,7 +1069,11 @@ static void free_cache_attributes(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit get_cpu_leaves(void *_retval)
+=======
+static void get_cpu_leaves(void *_retval)
+>>>>>>> v3.18
 =======
 static void get_cpu_leaves(void *_retval)
 >>>>>>> v3.18
@@ -1009,7 +1097,11 @@ static void get_cpu_leaves(void *_retval)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit detect_cache_attributes(unsigned int cpu)
+=======
+static int detect_cache_attributes(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int detect_cache_attributes(unsigned int cpu)
 >>>>>>> v3.18
@@ -1147,7 +1239,11 @@ static struct attribute *default_attrs[] = {
 
 #ifdef CONFIG_AMD_NB
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute ** __cpuinit amd_l3_attrs(void)
+=======
+static struct attribute **amd_l3_attrs(void)
+>>>>>>> v3.18
 =======
 static struct attribute **amd_l3_attrs(void)
 >>>>>>> v3.18
@@ -1227,7 +1323,11 @@ static struct kobj_type ktype_percpu_entry = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cpuid4_cache_sysfs_exit(unsigned int cpu)
+=======
+static void cpuid4_cache_sysfs_exit(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void cpuid4_cache_sysfs_exit(unsigned int cpu)
 >>>>>>> v3.18
@@ -1240,7 +1340,11 @@ static void cpuid4_cache_sysfs_exit(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cpuid4_cache_sysfs_init(unsigned int cpu)
+=======
+static int cpuid4_cache_sysfs_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int cpuid4_cache_sysfs_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -1276,7 +1380,11 @@ static DECLARE_BITMAP(cache_dev_map, NR_CPUS);
 
 /* Add/Remove cache interface for CPU device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_add_dev(struct device *dev)
+=======
+static int cache_add_dev(struct device *dev)
+>>>>>>> v3.18
 =======
 static int cache_add_dev(struct device *dev)
 >>>>>>> v3.18
@@ -1331,7 +1439,11 @@ static int cache_add_dev(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_remove_dev(struct device *dev)
+=======
+static void cache_remove_dev(struct device *dev)
+>>>>>>> v3.18
 =======
 static void cache_remove_dev(struct device *dev)
 >>>>>>> v3.18
@@ -1352,8 +1464,13 @@ static void cache_remove_dev(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cacheinfo_cpu_callback(struct notifier_block *nfb,
 					unsigned long action, void *hcpu)
+=======
+static int cacheinfo_cpu_callback(struct notifier_block *nfb,
+				  unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int cacheinfo_cpu_callback(struct notifier_block *nfb,
 				  unsigned long action, void *hcpu)
@@ -1377,7 +1494,11 @@ static int cacheinfo_cpu_callback(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata cacheinfo_cpu_notifier = {
+=======
+static struct notifier_block cacheinfo_cpu_notifier = {
+>>>>>>> v3.18
 =======
 static struct notifier_block cacheinfo_cpu_notifier = {
 >>>>>>> v3.18
@@ -1387,7 +1508,11 @@ static struct notifier_block cacheinfo_cpu_notifier = {
 static int __init cache_sysfs_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	int i, err = 0;
+>>>>>>> v3.18
 =======
 	int i, err = 0;
 >>>>>>> v3.18
@@ -1396,8 +1521,13 @@ static int __init cache_sysfs_init(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_online_cpu(i) {
 		int err;
+=======
+	cpu_notifier_register_begin();
+	for_each_online_cpu(i) {
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 	for_each_online_cpu(i) {
@@ -1407,11 +1537,14 @@ static int __init cache_sysfs_init(void)
 		err = cache_add_dev(dev);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return err;
 	}
 	register_hotcpu_notifier(&cacheinfo_cpu_notifier);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 			goto out;
 	}
 	__register_hotcpu_notifier(&cacheinfo_cpu_notifier);
@@ -1419,6 +1552,9 @@ static int __init cache_sysfs_init(void)
 out:
 	cpu_notifier_register_done();
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

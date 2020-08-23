@@ -35,8 +35,13 @@
  * understand the hardware you are querying!
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void set_auxio(unsigned char bits_on, unsigned char bits_off);
 extern unsigned char get_auxio(void); /* .../asm/floppy.h */
+=======
+void set_auxio(unsigned char bits_on, unsigned char bits_off);
+unsigned char get_auxio(void); /* .../asm/floppy.h */
+>>>>>>> v3.18
 =======
 void set_auxio(unsigned char bits_on, unsigned char bits_off);
 unsigned char get_auxio(void); /* .../asm/floppy.h */
@@ -84,7 +89,11 @@ do { \
 
 /* AUXIO2 (Power Off Control) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __volatile__ unsigned char * auxio_power_register;
+=======
+extern volatile u8 __iomem *auxio_power_register;
+>>>>>>> v3.18
 =======
 extern volatile u8 __iomem *auxio_power_register;
 >>>>>>> v3.18

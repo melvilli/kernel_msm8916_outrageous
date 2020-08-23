@@ -1,17 +1,23 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bnx2i_iscsi.c: Broadcom NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2012 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
 =======
+=======
+>>>>>>> v3.18
  * bnx2i_iscsi.c: QLogic NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2006 - 2013 Broadcom Corporation
  * Copyright (c) 2007, 2008 Red Hat, Inc.  All rights reserved.
  * Copyright (c) 2007, 2008 Mike Christie
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +26,12 @@
  *
  * Written by: Anil Veerabhadrappa (anilgv@broadcom.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+=======
+ * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+ * Maintained by: QLogic-Storage-Upstream@qlogic.com
+>>>>>>> v3.18
 =======
  * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
  * Maintained by: QLogic-Storage-Upstream@qlogic.com
@@ -540,7 +551,11 @@ static int bnx2i_setup_mp_bdt(struct bnx2i_hba *hba)
 	u64 addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hba->mp_bd_tbl = dma_alloc_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+	hba->mp_bd_tbl = dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 	hba->mp_bd_tbl = dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -552,18 +567,24 @@ static int bnx2i_setup_mp_bdt(struct bnx2i_hba *hba)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hba->dummy_buffer = dma_alloc_coherent(&hba->pcidev->dev, PAGE_SIZE,
 					       &hba->dummy_buf_dma, GFP_KERNEL);
 	if (!hba->dummy_buffer) {
 		printk(KERN_ERR "unable to alloc Middle Path Dummy Buffer\n");
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
 =======
+=======
+>>>>>>> v3.18
 	hba->dummy_buffer = dma_alloc_coherent(&hba->pcidev->dev,
 					       CNIC_PAGE_SIZE,
 					       &hba->dummy_buf_dma, GFP_KERNEL);
 	if (!hba->dummy_buffer) {
 		printk(KERN_ERR "unable to alloc Middle Path Dummy Buffer\n");
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  hba->mp_bd_tbl, hba->mp_bd_dma);
 		hba->mp_bd_tbl = NULL;
@@ -576,7 +597,11 @@ static int bnx2i_setup_mp_bdt(struct bnx2i_hba *hba)
 	mp_bdt->buffer_addr_lo = addr & 0xffffffff;
 	mp_bdt->buffer_addr_hi = addr >> 32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_bdt->buffer_length = PAGE_SIZE;
+=======
+	mp_bdt->buffer_length = CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	mp_bdt->buffer_length = CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -597,7 +622,11 @@ static void bnx2i_free_mp_bdt(struct bnx2i_hba *hba)
 {
 	if (hba->mp_bd_tbl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -606,7 +635,11 @@ static void bnx2i_free_mp_bdt(struct bnx2i_hba *hba)
 	}
 	if (hba->dummy_buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -636,7 +669,11 @@ void bnx2i_drop_session(struct iscsi_cls_session *cls_session)
  * bnx2i_ep_destroy_list_add - add an entry to EP destroy list
  * @hba:	pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		pointer to endpoint (transport indentifier) structure
+=======
+ * @ep:		pointer to endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		pointer to endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -657,7 +694,11 @@ static int bnx2i_ep_destroy_list_add(struct bnx2i_hba *hba,
  *
  * @hba: 		pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep: 		pointer to endpoint (transport indentifier) structure
+=======
+ * @ep: 		pointer to endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep: 		pointer to endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -678,7 +719,11 @@ static int bnx2i_ep_destroy_list_del(struct bnx2i_hba *hba,
  * bnx2i_ep_ofld_list_add - add an entry to ep offload pending list
  * @hba:	pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		pointer to endpoint (transport indentifier) structure
+=======
+ * @ep:		pointer to endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		pointer to endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -698,7 +743,11 @@ static int bnx2i_ep_ofld_list_add(struct bnx2i_hba *hba,
  * bnx2i_ep_ofld_list_del - add an entry to ep offload pending list
  * @hba: 		pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep: 		pointer to endpoint (transport indentifier) structure
+=======
+ * @ep: 		pointer to endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep: 		pointer to endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -777,7 +826,11 @@ bnx2i_find_ep_in_destroy_list(struct bnx2i_hba *hba, u32 iscsi_cid)
  * bnx2i_ep_active_list_add - add an entry to ep active list
  * @hba:	pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		pointer to endpoint (transport indentifier) structure
+=======
+ * @ep:		pointer to endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		pointer to endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -797,7 +850,11 @@ static void bnx2i_ep_active_list_add(struct bnx2i_hba *hba,
  * bnx2i_ep_active_list_del - deletes an entry to ep active list
  * @hba:	pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		pointer to endpoint (transport indentifier) structure
+=======
+ * @ep:		pointer to endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		pointer to endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -998,7 +1055,11 @@ static void bnx2i_conn_free_login_resources(struct bnx2i_hba *hba,
 {
 	if (bnx2i_conn->gen_pdu.resp_bd_tbl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -1009,7 +1070,11 @@ static void bnx2i_conn_free_login_resources(struct bnx2i_hba *hba,
 
 	if (bnx2i_conn->gen_pdu.req_bd_tbl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -1070,7 +1135,11 @@ static int bnx2i_conn_alloc_login_resources(struct bnx2i_hba *hba,
 
 	bnx2i_conn->gen_pdu.req_bd_tbl =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -1080,7 +1149,11 @@ static int bnx2i_conn_alloc_login_resources(struct bnx2i_hba *hba,
 
 	bnx2i_conn->gen_pdu.resp_bd_tbl =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -1093,7 +1166,11 @@ static int bnx2i_conn_alloc_login_resources(struct bnx2i_hba *hba,
 
 login_resp_bd_tbl_failure:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+	dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 	dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -1253,15 +1330,21 @@ static void bnx2i_cleanup_task(struct iscsi_task *task)
 		bnx2i_send_cmd_cleanup_req(hba, task->dd_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&conn->session->lock);
 		wait_for_completion_timeout(&bnx2i_conn->cmd_cleanup_cmpl,
 				msecs_to_jiffies(ISCSI_CMD_CLEANUP_TIMEOUT));
 		spin_lock_bh(&conn->session->lock);
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_bh(&conn->session->back_lock);
 		wait_for_completion_timeout(&bnx2i_conn->cmd_cleanup_cmpl,
 				msecs_to_jiffies(ISCSI_CMD_CLEANUP_TIMEOUT));
 		spin_lock_bh(&conn->session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	bnx2i_iscsi_unmap_sg_list(task->dd_data);
@@ -1733,6 +1816,7 @@ static void bnx2i_conn_get_stats(struct iscsi_cls_conn *cls_conn,
 	stats->tmfcmd_pdus = conn->tmfcmd_pdus_cnt;
 	stats->tmfrsp_pdus = conn->tmfrsp_pdus_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats->custom_length = 3;
 	strcpy(stats->custom[2].desc, "eh_abort_cnt");
 	stats->custom[2].value = conn->eh_abort_cnt;
@@ -1740,11 +1824,16 @@ static void bnx2i_conn_get_stats(struct iscsi_cls_conn *cls_conn,
 	stats->timeout_err = 0;
 	stats->custom_length = 0;
 =======
+=======
+>>>>>>> v3.18
 	stats->digest_err = 0;
 	stats->timeout_err = 0;
 	strcpy(stats->custom[0].desc, "eh_abort_cnt");
 	stats->custom[0].value = conn->eh_abort_cnt;
 	stats->custom_length = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1794,7 +1883,11 @@ no_nx2_route:
  * bnx2i_tear_down_conn - tear down iscsi/tcp connection and free resources
  * @hba:	pointer to adapter instance
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ep:		endpoint (transport indentifier) structure
+=======
+ * @ep:		endpoint (transport identifier) structure
+>>>>>>> v3.18
 =======
  * @ep:		endpoint (transport identifier) structure
 >>>>>>> v3.18
@@ -2162,7 +2255,11 @@ int bnx2i_hw_ep_disconnect(struct bnx2i_endpoint *bnx2i_ep)
 
 	if (session) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&session->lock);
+=======
+		spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2182,7 +2279,11 @@ int bnx2i_hw_ep_disconnect(struct bnx2i_endpoint *bnx2i_ep)
 			close = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2344,6 +2445,12 @@ static umode_t bnx2i_attr_is_visible(int param_type, int param)
 		case ISCSI_PARAM_IFACE_NAME:
 		case ISCSI_PARAM_INITIATOR_NAME:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case ISCSI_PARAM_BOOT_ROOT:
+		case ISCSI_PARAM_BOOT_NIC:
+		case ISCSI_PARAM_BOOT_TARGET:
+>>>>>>> v3.18
 =======
 		case ISCSI_PARAM_BOOT_ROOT:
 		case ISCSI_PARAM_BOOT_NIC:
@@ -2365,7 +2472,11 @@ static umode_t bnx2i_attr_is_visible(int param_type, int param)
 static struct scsi_host_template bnx2i_host_template = {
 	.module			= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name			= "Broadcom Offload iSCSI Initiator",
+=======
+	.name			= "QLogic Offload iSCSI Initiator",
+>>>>>>> v3.18
 =======
 	.name			= "QLogic Offload iSCSI Initiator",
 >>>>>>> v3.18

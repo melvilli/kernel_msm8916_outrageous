@@ -156,7 +156,10 @@
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry><constant>V4L2_EVENT_SOURCE_CHANGE</constant></entry>
 	    <entry>5</entry>
 	    <entry>
@@ -185,6 +188,9 @@
 	    </entry>
 	  </row>
 	  <row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry><constant>V4L2_EVENT_PRIVATE_START</constant></entry>
 	    <entry>0x08000000</entry>

@@ -23,9 +23,12 @@ typedef unsigned short		__kernel_mode_t;
 #define __kernel_mode_t __kernel_mode_t
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef unsigned short          __kernel_nlink_t;
 #define __kernel_nlink_t __kernel_nlink_t
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef unsigned short		__kernel_ipc_pid_t;

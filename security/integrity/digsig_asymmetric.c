@@ -14,6 +14,10 @@
 
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ratelimit.h>
+>>>>>>> v3.18
 =======
 #include <linux/ratelimit.h>
 >>>>>>> v3.18
@@ -24,6 +28,7 @@
 #include "integrity.h"
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * signature format v2 - for using with asymmetric keys
  */
@@ -38,6 +43,8 @@ struct signature_v2_hdr {
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Request an asymmetric key.
  */
 static struct key *request_asymmetric_key(struct key *keyring, uint32_t keyid)
@@ -46,7 +53,11 @@ static struct key *request_asymmetric_key(struct key *keyring, uint32_t keyid)
 	char name[12];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(name, "id:%x", keyid);
+=======
+	sprintf(name, "id:%08x", keyid);
+>>>>>>> v3.18
 =======
 	sprintf(name, "id:%08x", keyid);
 >>>>>>> v3.18
@@ -68,8 +79,13 @@ static struct key *request_asymmetric_key(struct key *keyring, uint32_t keyid)
 
 	if (IS_ERR(key)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warn("Request for unknown key '%s' err %ld\n",
 			name, PTR_ERR(key));
+=======
+		pr_err_ratelimited("Request for unknown key '%s' err %ld\n",
+				   name, PTR_ERR(key));
+>>>>>>> v3.18
 =======
 		pr_err_ratelimited("Request for unknown key '%s' err %ld\n",
 				   name, PTR_ERR(key));

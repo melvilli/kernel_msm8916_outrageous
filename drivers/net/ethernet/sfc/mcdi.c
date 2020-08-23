@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2008-2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2008-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2008-2013 Solarflare Communications Inc.
@@ -14,16 +19,22 @@
 
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "net_driver.h"
 #include "nic.h"
 #include "io.h"
 #include "regs.h"
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cmpxchg.h>
 #include "net_driver.h"
 #include "nic.h"
 #include "io.h"
 #include "farch_regs.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "mcdi_pcol.h"
 #include "phy.h"
@@ -38,6 +49,7 @@
 #define MCDI_RPC_TIMEOUT       (10 * HZ)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCDI_PDU(efx)							\
 	(efx_port_num(efx) ? MC_SMEM_P1_PDU_OFST : MC_SMEM_P0_PDU_OFST)
 #define MCDI_DOORBELL(efx)						\
@@ -51,12 +63,17 @@
 #define MCDI_STATUS_DELAY_US		100
 #define MCDI_STATUS_DELAY_COUNT		100
 =======
+=======
+>>>>>>> v3.18
 /* A reboot/assertion causes the MCDI status word to be set after the
  * command word is set or a REBOOT event is sent. If we notice a reboot
  * via these mechanisms then wait 250ms for the status word to be set.
  */
 #define MCDI_STATUS_DELAY_US		100
 #define MCDI_STATUS_DELAY_COUNT		2500
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MCDI_STATUS_SLEEP_MS						\
 	(MCDI_STATUS_DELAY_US * MCDI_STATUS_DELAY_COUNT / 1000)
@@ -64,6 +81,7 @@
 #define SEQ_MASK							\
 	EFX_MASK32(EFX_WIDTH(MCDI_HEADER_SEQ))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct efx_mcdi_iface *efx_mcdi(struct efx_nic *efx)
 {
@@ -102,6 +120,8 @@ static void efx_mcdi_copyin(struct efx_nic *efx, unsigned cmd,
 	BUG_ON(atomic_read(&mcdi->state) == MCDI_STATE_QUIESCENT);
 	BUG_ON(inlen & 3 || inlen >= MC_SMEM_PDU_LEN);
 =======
+=======
+>>>>>>> v3.18
 struct efx_mcdi_async_param {
 	struct list_head list;
 	unsigned int cmd;
@@ -196,6 +216,9 @@ static void efx_mcdi_send_request(struct efx_nic *efx, unsigned cmd,
 	spin_lock_bh(&mcdi->iface_lock);
 	++mcdi->seqno;
 	spin_unlock_bh(&mcdi->iface_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	seqno = mcdi->seqno & SEQ_MASK;
@@ -203,6 +226,7 @@ static void efx_mcdi_send_request(struct efx_nic *efx, unsigned cmd,
 	if (mcdi->mode == MCDI_MODE_EVENTS)
 		xflags |= MCDI_HEADER_XFLAGS_EVREQ;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	EFX_POPULATE_DWORD_6(hdr,
 			     MCDI_HEADER_RESPONSE, 0,
@@ -236,6 +260,8 @@ static void efx_mcdi_copyout(struct efx_nic *efx, u8 *outbuf, size_t outlen)
 	for (i = 0; i < outlen; i += 4)
 		*((__le32 *)(outbuf + i)) = _efx_readd(efx, pdu + 4 + i);
 =======
+=======
+>>>>>>> v3.18
 	if (efx->type->mcdi_max_ver == 1) {
 		/* MCDI v1 */
 		EFX_POPULATE_DWORD_7(hdr[0],
@@ -352,6 +378,9 @@ static bool efx_mcdi_poll_once(struct efx_nic *efx)
 	spin_unlock_bh(&mcdi->iface_lock);
 
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -359,6 +388,7 @@ static int efx_mcdi_poll(struct efx_nic *efx)
 {
 	struct efx_mcdi_iface *mcdi = efx_mcdi(efx);
 	unsigned long time, finish;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int respseq, respcmd, error;
 	unsigned int pdu = FR_CZ_MC_TREG_SMEM + MCDI_PDU(efx);
@@ -370,6 +400,8 @@ static int efx_mcdi_poll(struct efx_nic *efx)
 	if (rc)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int spins;
 	int rc;
 
@@ -383,6 +415,9 @@ static int efx_mcdi_poll(struct efx_nic *efx)
 		spin_unlock_bh(&mcdi->iface_lock);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Poll for completion. Poll quickly (once a us) for the 1st jiffy,
@@ -403,6 +438,7 @@ static int efx_mcdi_poll(struct efx_nic *efx)
 		time = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rmb();
 		efx_readd(efx, &reg, pdu);
 
@@ -414,12 +450,16 @@ static int efx_mcdi_poll(struct efx_nic *efx)
 =======
 		if (efx_mcdi_poll_once(efx))
 >>>>>>> v3.18
+=======
+		if (efx_mcdi_poll_once(efx))
+>>>>>>> v3.18
 			break;
 
 		if (time_after(time, finish))
 			return -ETIMEDOUT;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mcdi->resplen = EFX_DWORD_FIELD(reg, MCDI_HEADER_DATALEN);
 	respseq = EFX_DWORD_FIELD(reg, MCDI_HEADER_SEQ);
@@ -464,6 +504,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Return rc=0 like wait_event_timeout() */
 	return 0;
 }
@@ -473,6 +515,7 @@ out:
  */
 int efx_mcdi_poll_reboot(struct efx_nic *efx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int addr = FR_CZ_MC_TREG_SMEM + MCDI_STATUS(efx);
 	efx_dword_t reg;
@@ -511,6 +554,8 @@ static void efx_mcdi_acquire(struct efx_mcdi_iface *mcdi)
 				  MCDI_STATE_RUNNING)
 		   == MCDI_STATE_QUIESCENT);
 =======
+=======
+>>>>>>> v3.18
 	if (!efx->mcdi)
 		return 0;
 
@@ -533,6 +578,9 @@ static void efx_mcdi_acquire_sync(struct efx_mcdi_iface *mcdi)
 		   cmpxchg(&mcdi->state,
 			   MCDI_STATE_QUIESCENT, MCDI_STATE_RUNNING_SYNC) ==
 		   MCDI_STATE_QUIESCENT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -541,10 +589,15 @@ static int efx_mcdi_await_completion(struct efx_nic *efx)
 	struct efx_mcdi_iface *mcdi = efx_mcdi(efx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wait_event_timeout(
 		    mcdi->wq,
 		    atomic_read(&mcdi->state) == MCDI_STATE_COMPLETED,
 		    MCDI_RPC_TIMEOUT) == 0)
+=======
+	if (wait_event_timeout(mcdi->wq, mcdi->state == MCDI_STATE_COMPLETED,
+			       MCDI_RPC_TIMEOUT) == 0)
+>>>>>>> v3.18
 =======
 	if (wait_event_timeout(mcdi->wq, mcdi->state == MCDI_STATE_COMPLETED,
 			       MCDI_RPC_TIMEOUT) == 0)
@@ -566,6 +619,7 @@ static int efx_mcdi_await_completion(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool efx_mcdi_complete(struct efx_mcdi_iface *mcdi)
 {
 	/* If the interface is RUNNING, then move to COMPLETED and wake any
@@ -578,6 +632,8 @@ static bool efx_mcdi_complete(struct efx_mcdi_iface *mcdi)
 			   MCDI_STATE_RUNNING,
 			   MCDI_STATE_COMPLETED) == MCDI_STATE_RUNNING) {
 =======
+=======
+>>>>>>> v3.18
 /* If the interface is RUNNING_SYNC, switch to COMPLETED and wake the
  * requester.  Return whether this was done.  Does not take any locks.
  */
@@ -586,6 +642,9 @@ static bool efx_mcdi_complete_sync(struct efx_mcdi_iface *mcdi)
 	if (cmpxchg(&mcdi->state,
 		    MCDI_STATE_RUNNING_SYNC, MCDI_STATE_COMPLETED) ==
 	    MCDI_STATE_RUNNING_SYNC) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wake_up(&mcdi->wq);
 		return true;
@@ -597,6 +656,7 @@ static bool efx_mcdi_complete_sync(struct efx_mcdi_iface *mcdi)
 static void efx_mcdi_release(struct efx_mcdi_iface *mcdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&mcdi->state, MCDI_STATE_QUIESCENT);
 	wake_up(&mcdi->wq);
 }
@@ -604,6 +664,8 @@ static void efx_mcdi_release(struct efx_mcdi_iface *mcdi)
 static void efx_mcdi_ev_cpl(struct efx_nic *efx, unsigned int seqno,
 			    unsigned int datalen, unsigned int errno)
 =======
+=======
+>>>>>>> v3.18
 	if (mcdi->mode == MCDI_MODE_EVENTS) {
 		struct efx_mcdi_async_param *async;
 		struct efx_nic *efx = mcdi->efx;
@@ -699,6 +761,9 @@ static bool efx_mcdi_complete_async(struct efx_mcdi_iface *mcdi, bool timeout)
 
 static void efx_mcdi_ev_cpl(struct efx_nic *efx, unsigned int seqno,
 			    unsigned int datalen, unsigned int mcdi_err)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct efx_mcdi_iface *mcdi = efx_mcdi(efx);
@@ -716,9 +781,12 @@ static void efx_mcdi_ev_cpl(struct efx_nic *efx, unsigned int seqno,
 				  "seq 0x%x\n", seqno, mcdi->seqno);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcdi->resprc = errno;
 		mcdi->resplen = datalen;
 =======
+=======
+>>>>>>> v3.18
 		if (efx->type->mcdi_max_ver >= 2) {
 			/* MCDI v2 responses don't fit in an event */
 			efx_mcdi_read_response_header(efx);
@@ -727,6 +795,9 @@ static void efx_mcdi_ev_cpl(struct efx_nic *efx, unsigned int seqno,
 			mcdi->resp_hdr_len = 4;
 			mcdi->resp_data_len = datalen;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		wake = true;
@@ -734,6 +805,7 @@ static void efx_mcdi_ev_cpl(struct efx_nic *efx, unsigned int seqno,
 
 	spin_unlock(&mcdi->iface_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (wake)
 		efx_mcdi_complete(mcdi);
@@ -774,6 +846,8 @@ int efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 	BUG_ON(efx_nic_rev(efx) < EFX_REV_SIENA_A0);
 
 =======
+=======
+>>>>>>> v3.18
 	if (wake) {
 		if (!efx_mcdi_complete_async(mcdi, false))
 			(void) efx_mcdi_complete_sync(mcdi);
@@ -818,6 +892,9 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 	MCDI_DECLARE_BUF_OUT_OR_ERR(errbuf, 0);
 	int rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mcdi->mode == MCDI_MODE_POLL)
 		rc = efx_mcdi_poll(efx);
@@ -826,7 +903,10 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 
 	if (rc != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		netif_err(efx, hw, efx->net_dev,
 			  "MC command 0x%x inlen %d mode %d timed out\n",
 			  cmd, (int)inlen, mcdi->mode);
@@ -839,6 +919,9 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 
 		efx_mcdi_abandon(efx);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Close the race with efx_mcdi_ev_cpl() executing just too late
 		 * and completing a request we've just cancelled, by ensuring
@@ -849,6 +932,7 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 		++mcdi->credits;
 		spin_unlock_bh(&mcdi->iface_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		netif_err(efx, hw, efx->net_dev,
 			  "MC command 0x%x inlen %d mode %d timed out\n",
@@ -856,6 +940,8 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 	} else {
 		size_t resplen;
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	if (rc != 0) {
@@ -863,6 +949,9 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 			*outlen_actual = 0;
 	} else {
 		size_t hdr_len, data_len, err_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* At the very least we need a memory barrier here to ensure
@@ -870,6 +959,7 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 		 * a spurious efx_mcdi_ev_cpl() running concurrently by
 		 * acquiring the iface_lock. */
 		spin_lock_bh(&mcdi->iface_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc = -mcdi->resprc;
 		resplen = mcdi->resplen;
@@ -891,6 +981,8 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 				  "MC command 0x%x inlen %d failed rc=%d\n",
 				  cmd, (int)inlen, -rc);
 =======
+=======
+>>>>>>> v3.18
 		rc = mcdi->resprc;
 		hdr_len = mcdi->resp_hdr_len;
 		data_len = mcdi->resp_data_len;
@@ -916,12 +1008,19 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 			efx_mcdi_display_error(efx, cmd, inlen, errbuf, err_len,
 					       rc);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (rc == -EIO || rc == -EINTR) {
 			msleep(MCDI_STATUS_SLEEP_MS);
 			efx_mcdi_poll_reboot(efx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			mcdi->new_epoch = true;
+>>>>>>> v3.18
 =======
 			mcdi->new_epoch = true;
 >>>>>>> v3.18
@@ -933,7 +1032,10 @@ static int _efx_mcdi_rpc_finish(struct efx_nic *efx, unsigned cmd, size_t inlen,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int _efx_mcdi_rpc(struct efx_nic *efx, unsigned cmd,
 			 const efx_dword_t *inbuf, size_t inlen,
 			 efx_dword_t *outbuf, size_t outlen,
@@ -1125,11 +1227,15 @@ void efx_mcdi_display_error(struct efx_nic *efx, unsigned cmd,
  * error conditions with various locks held, so it must be lockless.
  * Caller is responsible for flushing asynchronous requests later.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void efx_mcdi_mode_poll(struct efx_nic *efx)
 {
 	struct efx_mcdi_iface *mcdi;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (efx_nic_rev(efx) < EFX_REV_SIENA_A0)
 		return;
@@ -1137,6 +1243,8 @@ void efx_mcdi_mode_poll(struct efx_nic *efx)
 	mcdi = efx_mcdi(efx);
 	if (mcdi->mode == MCDI_MODE_POLL)
 =======
+=======
+>>>>>>> v3.18
 	if (!efx->mcdi)
 		return;
 
@@ -1146,6 +1254,9 @@ void efx_mcdi_mode_poll(struct efx_nic *efx)
 	 * FLR recovery will do that later.
 	 */
 	if (mcdi->mode == MCDI_MODE_POLL || mcdi->mode == MCDI_MODE_FAIL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -1155,6 +1266,7 @@ void efx_mcdi_mode_poll(struct efx_nic *efx)
 	 * efx_mcdi_await_completion() will then call efx_mcdi_poll().
 	 *
 	 * We need an smp_wmb() to synchronise with efx_mcdi_await_completion(),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * which efx_mcdi_complete() provides for us.
 	 */
@@ -1169,6 +1281,8 @@ void efx_mcdi_mode_event(struct efx_nic *efx)
 
 	if (efx_nic_rev(efx) < EFX_REV_SIENA_A0)
 =======
+=======
+>>>>>>> v3.18
 	 * which efx_mcdi_complete_sync() provides for us.
 	 */
 	mcdi->mode = MCDI_MODE_POLL;
@@ -1185,14 +1299,20 @@ void efx_mcdi_flush_async(struct efx_nic *efx)
 	struct efx_mcdi_iface *mcdi;
 
 	if (!efx->mcdi)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
 	mcdi = efx_mcdi(efx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mcdi->mode == MCDI_MODE_EVENTS)
 =======
+=======
+>>>>>>> v3.18
 	/* We must be in poll or fail mode so no more requests can be queued */
 	BUG_ON(mcdi->mode == MCDI_MODE_EVENTS);
 
@@ -1232,6 +1352,9 @@ void efx_mcdi_mode_event(struct efx_nic *efx)
 	 * recovery will do that later.
 	 */
 	if (mcdi->mode == MCDI_MODE_EVENTS || mcdi->mode == MCDI_MODE_FAIL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -1243,7 +1366,11 @@ void efx_mcdi_mode_event(struct efx_nic *efx)
 	 * efx_mcdi_acquire() provides.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_mcdi_acquire(mcdi);
+=======
+	efx_mcdi_acquire_sync(mcdi);
+>>>>>>> v3.18
 =======
 	efx_mcdi_acquire_sync(mcdi);
 >>>>>>> v3.18
@@ -1264,6 +1391,7 @@ static void efx_mcdi_ev_death(struct efx_nic *efx, int rc)
 	 * efx_mcdi_ev_cpl()]
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * There's a race here with efx_mcdi_rpc(), because we might receive
 	 * a REBOOT event *before* the request has been copied out. In polled
 	 * mode (during startup) this is irrelevant, because efx_mcdi_complete()
@@ -1278,6 +1406,8 @@ static void efx_mcdi_ev_death(struct efx_nic *efx, int rc)
 			mcdi->resprc = rc;
 			mcdi->resplen = 0;
 =======
+=======
+>>>>>>> v3.18
 	 * If there is an outstanding asynchronous request, we can't
 	 * complete it now (efx_mcdi_complete() would deadlock).  The
 	 * reset process will take care of this.
@@ -1297,6 +1427,9 @@ static void efx_mcdi_ev_death(struct efx_nic *efx, int rc)
 			mcdi->resprc = rc;
 			mcdi->resp_hdr_len = 0;
 			mcdi->resp_data_len = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			++mcdi->credits;
 		}
@@ -1304,9 +1437,12 @@ static void efx_mcdi_ev_death(struct efx_nic *efx, int rc)
 		int count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Nobody was waiting for an MCDI request, so trigger a reset */
 		efx_schedule_reset(efx, RESET_TYPE_MC_FAILURE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Consume the status word since efx_mcdi_rpc_finish() won't */
@@ -1316,17 +1452,24 @@ static void efx_mcdi_ev_death(struct efx_nic *efx, int rc)
 			udelay(MCDI_STATUS_DELAY_US);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mcdi->new_epoch = true;
 
 		/* Nobody was waiting for an MCDI request, so trigger a reset */
 		efx_schedule_reset(efx, RESET_TYPE_MC_FAILURE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	spin_unlock(&mcdi->iface_lock);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int efx_mcdi_event_link_speed[] = {
 	[MCDI_EVENT_LINKCHANGE_SPEED_100M] = 100,
@@ -1357,6 +1500,8 @@ static void efx_mcdi_process_link_change(struct efx_nic *efx, efx_qword_t *ev)
 
 	efx_link_status_changed(efx);
 =======
+=======
+>>>>>>> v3.18
 /* The MC is going down in to BIST mode. set the BIST flag to block
  * new MCDI, cancel any outstanding MCDI and and schedule a BIST-type reset
  * (which doesn't actually execute a reset, it waits for the controlling
@@ -1392,6 +1537,9 @@ static void efx_mcdi_abandon(struct efx_nic *efx)
 		return; /* it had already been done */
 	netif_dbg(efx, hw, efx->net_dev, "MCDI is timing out; trying to recover\n");
 	efx_schedule_reset(efx, RESET_TYPE_MCDI_TIMEOUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1408,7 +1556,11 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 		netif_err(efx, hw, efx->net_dev,
 			  "MC watchdog or assertion failure at 0x%x\n", data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		efx_mcdi_ev_death(efx, EINTR);
+=======
+		efx_mcdi_ev_death(efx, -EINTR);
+>>>>>>> v3.18
 =======
 		efx_mcdi_ev_death(efx, -EINTR);
 >>>>>>> v3.18
@@ -1433,6 +1585,7 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 		break;
 	case MCDI_EVENT_CODE_SCHEDERR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netif_info(efx, hw, efx->net_dev,
 			   "MC Scheduler error address=0x%x\n", data);
 		break;
@@ -1440,6 +1593,8 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 		netif_info(efx, hw, efx->net_dev, "MC Reboot\n");
 		efx_mcdi_ev_death(efx, EIO);
 =======
+=======
+>>>>>>> v3.18
 		netif_dbg(efx, hw, efx->net_dev,
 			  "MC Scheduler alert (0x%x)\n", data);
 		break;
@@ -1451,6 +1606,9 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 	case MCDI_EVENT_CODE_MC_BIST:
 		netif_info(efx, hw, efx->net_dev, "MC entered BIST mode\n");
 		efx_mcdi_ev_bist(efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case MCDI_EVENT_CODE_MAC_STATS_DMA:
@@ -1465,8 +1623,11 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 		efx_ptp_event(efx, event);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	case MCDI_EVENT_CODE_PTP_TIME:
 		efx_time_sync_event(channel, event);
 		break;
@@ -1491,6 +1652,9 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 			  EFX_QWORD_VAL(*event));
 		efx_schedule_reset(efx, RESET_TYPE_DMA_ERROR);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		netif_err(efx, hw, efx->net_dev, "Unknown MCDI event 0x%x\n",
@@ -1508,6 +1672,7 @@ void efx_mcdi_process_event(struct efx_channel *channel,
 void efx_mcdi_print_fwver(struct efx_nic *efx, char *buf, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 outbuf[ALIGN(MC_CMD_GET_VERSION_OUT_LEN, 4)];
 	size_t outlength;
 	const __le16 *ver_words;
@@ -1516,6 +1681,8 @@ void efx_mcdi_print_fwver(struct efx_nic *efx, char *buf, size_t len)
 	BUILD_BUG_ON(MC_CMD_GET_VERSION_IN_LEN != 0);
 
 =======
+=======
+>>>>>>> v3.18
 	MCDI_DECLARE_BUF(outbuf,
 			 max(MC_CMD_GET_VERSION_OUT_LEN,
 			     MC_CMD_GET_CAPABILITIES_OUT_LEN));
@@ -1525,13 +1692,19 @@ void efx_mcdi_print_fwver(struct efx_nic *efx, char *buf, size_t len)
 	int rc;
 
 	BUILD_BUG_ON(MC_CMD_GET_VERSION_IN_LEN != 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = efx_mcdi_rpc(efx, MC_CMD_GET_VERSION, NULL, 0,
 			  outbuf, sizeof(outbuf), &outlength);
 	if (rc)
 		goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (outlength < MC_CMD_GET_VERSION_OUT_LEN) {
@@ -1541,10 +1714,13 @@ void efx_mcdi_print_fwver(struct efx_nic *efx, char *buf, size_t len)
 
 	ver_words = (__le16 *)MCDI_PTR(outbuf, GET_VERSION_OUT_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(buf, len, "%u.%u.%u.%u",
 		 le16_to_cpu(ver_words[0]), le16_to_cpu(ver_words[1]),
 		 le16_to_cpu(ver_words[2]), le16_to_cpu(ver_words[3]));
 =======
+=======
+>>>>>>> v3.18
 	offset = snprintf(buf, len, "%u.%u.%u.%u",
 			  le16_to_cpu(ver_words[0]), le16_to_cpu(ver_words[1]),
 			  le16_to_cpu(ver_words[2]), le16_to_cpu(ver_words[3]));
@@ -1575,6 +1751,9 @@ void efx_mcdi_print_fwver(struct efx_nic *efx, char *buf, size_t len)
 			buf[0] = 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 
@@ -1584,17 +1763,23 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int efx_mcdi_drv_attach(struct efx_nic *efx, bool driver_operating,
 			bool *was_attached)
 {
 	u8 inbuf[MC_CMD_DRV_ATTACH_IN_LEN];
 	u8 outbuf[MC_CMD_DRV_ATTACH_OUT_LEN];
 =======
+=======
+>>>>>>> v3.18
 static int efx_mcdi_drv_attach(struct efx_nic *efx, bool driver_operating,
 			       bool *was_attached)
 {
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_DRV_ATTACH_IN_LEN);
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_DRV_ATTACH_EXT_OUT_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t outlen;
 	int rc;
@@ -1603,6 +1788,10 @@ static int efx_mcdi_drv_attach(struct efx_nic *efx, bool driver_operating,
 		       driver_operating ? 1 : 0);
 	MCDI_SET_DWORD(inbuf, DRV_ATTACH_IN_UPDATE, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MCDI_SET_DWORD(inbuf, DRV_ATTACH_IN_FIRMWARE_ID, MC_CMD_FW_LOW_LATENCY);
+>>>>>>> v3.18
 =======
 	MCDI_SET_DWORD(inbuf, DRV_ATTACH_IN_FIRMWARE_ID, MC_CMD_FW_LOW_LATENCY);
 >>>>>>> v3.18
@@ -1617,7 +1806,10 @@ static int efx_mcdi_drv_attach(struct efx_nic *efx, bool driver_operating,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (driver_operating) {
 		if (outlen >= MC_CMD_DRV_ATTACH_EXT_OUT_LEN) {
 			efx->mcdi->fn_flags =
@@ -1648,6 +1840,9 @@ static int efx_mcdi_drv_attach(struct efx_nic *efx, bool driver_operating,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (was_attached != NULL)
 		*was_attached = MCDI_DWORD(outbuf, DRV_ATTACH_OUT_OLD_STATE);
@@ -1662,8 +1857,13 @@ int efx_mcdi_get_board_cfg(struct efx_nic *efx, u8 *mac_address,
 			   u16 *fw_subtype_list, u32 *capabilities)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t outbuf[MC_CMD_GET_BOARD_CFG_OUT_LENMAX];
 	size_t outlen, offset, i;
+=======
+	MCDI_DECLARE_BUF(outbuf, MC_CMD_GET_BOARD_CFG_OUT_LENMAX);
+	size_t outlen, i;
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_GET_BOARD_CFG_OUT_LENMAX);
 	size_t outlen, i;
@@ -1673,6 +1873,12 @@ int efx_mcdi_get_board_cfg(struct efx_nic *efx, u8 *mac_address,
 
 	BUILD_BUG_ON(MC_CMD_GET_BOARD_CFG_IN_LEN != 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* we need __aligned(2) for ether_addr_copy */
+	BUILD_BUG_ON(MC_CMD_GET_BOARD_CFG_OUT_MAC_ADDR_BASE_PORT0_OFST & 1);
+	BUILD_BUG_ON(MC_CMD_GET_BOARD_CFG_OUT_MAC_ADDR_BASE_PORT1_OFST & 1);
+>>>>>>> v3.18
 =======
 	/* we need __aligned(2) for ether_addr_copy */
 	BUILD_BUG_ON(MC_CMD_GET_BOARD_CFG_OUT_MAC_ADDR_BASE_PORT0_OFST & 1);
@@ -1689,6 +1895,7 @@ int efx_mcdi_get_board_cfg(struct efx_nic *efx, u8 *mac_address,
 		goto fail;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	offset = (port_num)
 		? MC_CMD_GET_BOARD_CFG_OUT_MAC_ADDR_BASE_PORT1_OFST
@@ -1707,6 +1914,8 @@ int efx_mcdi_get_board_cfg(struct efx_nic *efx, u8 *mac_address,
 			offset += 2;
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (mac_address)
 		ether_addr_copy(mac_address,
 				port_num ?
@@ -1721,6 +1930,9 @@ int efx_mcdi_get_board_cfg(struct efx_nic *efx, u8 *mac_address,
 				outbuf, GET_BOARD_CFG_OUT_FW_SUBTYPE_LIST, i);
 		for (; i < MC_CMD_GET_BOARD_CFG_OUT_FW_SUBTYPE_LIST_MAXNUM; i++)
 			fw_subtype_list[i] = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (capabilities) {
@@ -1744,7 +1956,11 @@ fail:
 int efx_mcdi_log_ctrl(struct efx_nic *efx, bool evq, bool uart, u32 dest_evq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_LOG_CTRL_IN_LEN];
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_LOG_CTRL_IN_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_LOG_CTRL_IN_LEN);
 >>>>>>> v3.18
@@ -1764,6 +1980,7 @@ int efx_mcdi_log_ctrl(struct efx_nic *efx, bool evq, bool uart, u32 dest_evq)
 	rc = efx_mcdi_rpc(efx, MC_CMD_LOG_CTRL, inbuf, sizeof(inbuf),
 			  NULL, 0, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		goto fail;
 
@@ -1773,13 +1990,19 @@ fail:
 	netif_err(efx, hw, efx->net_dev, "%s: failed rc=%d\n", __func__, rc);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return rc;
 }
 
 int efx_mcdi_nvram_types(struct efx_nic *efx, u32 *nvram_types_out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 outbuf[MC_CMD_NVRAM_TYPES_OUT_LEN];
+=======
+	MCDI_DECLARE_BUF(outbuf, MC_CMD_NVRAM_TYPES_OUT_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_NVRAM_TYPES_OUT_LEN);
 >>>>>>> v3.18
@@ -1811,8 +2034,13 @@ int efx_mcdi_nvram_info(struct efx_nic *efx, unsigned int type,
 			bool *protected_out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_NVRAM_INFO_IN_LEN];
 	u8 outbuf[MC_CMD_NVRAM_INFO_OUT_LEN];
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_NVRAM_INFO_IN_LEN);
+	MCDI_DECLARE_BUF(outbuf, MC_CMD_NVRAM_INFO_OUT_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_NVRAM_INFO_IN_LEN);
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_NVRAM_INFO_OUT_LEN);
@@ -1842,6 +2070,7 @@ fail:
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int efx_mcdi_nvram_update_start(struct efx_nic *efx, unsigned int type)
 {
@@ -1965,10 +2194,15 @@ static int efx_mcdi_nvram_test(struct efx_nic *efx, unsigned int type)
 	u8 inbuf[MC_CMD_NVRAM_TEST_IN_LEN];
 	u8 outbuf[MC_CMD_NVRAM_TEST_OUT_LEN];
 =======
+=======
+>>>>>>> v3.18
 static int efx_mcdi_nvram_test(struct efx_nic *efx, unsigned int type)
 {
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_NVRAM_TEST_IN_LEN);
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_NVRAM_TEST_OUT_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 
@@ -2022,9 +2256,15 @@ fail1:
 static int efx_mcdi_read_assertion(struct efx_nic *efx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_GET_ASSERTS_IN_LEN];
 	u8 outbuf[MC_CMD_GET_ASSERTS_OUT_LEN];
 	unsigned int flags, index, ofst;
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_GET_ASSERTS_IN_LEN);
+	MCDI_DECLARE_BUF_OUT_OR_ERR(outbuf, MC_CMD_GET_ASSERTS_OUT_LEN);
+	unsigned int flags, index;
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_GET_ASSERTS_IN_LEN);
 	MCDI_DECLARE_BUF_OUT_OR_ERR(outbuf, MC_CMD_GET_ASSERTS_OUT_LEN);
@@ -2044,6 +2284,7 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 	do {
 		MCDI_SET_DWORD(inbuf, GET_ASSERTS_IN_CLEAR, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = efx_mcdi_rpc(efx, MC_CMD_GET_ASSERTS,
 				  inbuf, MC_CMD_GET_ASSERTS_IN_LEN,
 				  outbuf, sizeof(outbuf), &outlen);
@@ -2052,6 +2293,8 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 	if (rc)
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 		rc = efx_mcdi_rpc_quiet(efx, MC_CMD_GET_ASSERTS,
 					inbuf, MC_CMD_GET_ASSERTS_IN_LEN,
 					outbuf, sizeof(outbuf), &outlen);
@@ -2063,6 +2306,9 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 				       outlen, rc);
 		return rc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (outlen < MC_CMD_GET_ASSERTS_OUT_LEN)
 		return -EIO;
@@ -2086,6 +2332,7 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 
 	/* Print out the registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ofst = MC_CMD_GET_ASSERTS_OUT_GP_REGS_OFFS_OFST;
 	for (index = 1; index < 32; index++) {
 		netif_err(efx, hw, efx->net_dev, "R%.2d (?): 0x%.8x\n", index,
@@ -2093,6 +2340,8 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 		ofst += sizeof(efx_dword_t);
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (index = 0;
 	     index < MC_CMD_GET_ASSERTS_OUT_GP_REGS_OFFS_NUM;
 	     index++)
@@ -2100,6 +2349,9 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 			  1 + index,
 			  MCDI_ARRAY_DWORD(outbuf, GET_ASSERTS_OUT_GP_REGS_OFFS,
 					   index));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2108,7 +2360,11 @@ static int efx_mcdi_read_assertion(struct efx_nic *efx)
 static void efx_mcdi_exit_assertion(struct efx_nic *efx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_REBOOT_IN_LEN];
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_REBOOT_IN_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_REBOOT_IN_LEN);
 >>>>>>> v3.18
@@ -2142,7 +2398,11 @@ int efx_mcdi_handle_assertion(struct efx_nic *efx)
 void efx_mcdi_set_id_led(struct efx_nic *efx, enum efx_led_mode mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_SET_ID_LED_IN_LEN];
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_SET_ID_LED_IN_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_SET_ID_LED_IN_LEN);
 >>>>>>> v3.18
@@ -2158,6 +2418,7 @@ void efx_mcdi_set_id_led(struct efx_nic *efx, enum efx_led_mode mode)
 
 	rc = efx_mcdi_rpc(efx, MC_CMD_SET_ID_LED, inbuf, sizeof(inbuf),
 			  NULL, 0, NULL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc)
 		netif_err(efx, hw, efx->net_dev, "%s: failed rc=%d\n",
@@ -2177,6 +2438,8 @@ int efx_mcdi_reset_mc(struct efx_nic *efx)
 {
 	u8 inbuf[MC_CMD_REBOOT_IN_LEN];
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int efx_mcdi_reset_func(struct efx_nic *efx)
@@ -2195,6 +2458,9 @@ static int efx_mcdi_reset_func(struct efx_nic *efx)
 static int efx_mcdi_reset_mc(struct efx_nic *efx)
 {
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_REBOOT_IN_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 
@@ -2208,6 +2474,7 @@ static int efx_mcdi_reset_mc(struct efx_nic *efx)
 	if (rc == 0)
 		rc = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_err(efx, hw, efx->net_dev, "%s: failed rc=%d\n", __func__, rc);
 	return rc;
 }
@@ -2218,6 +2485,8 @@ static int efx_mcdi_wol_filter_set(struct efx_nic *efx, u32 type,
 	u8 inbuf[MC_CMD_WOL_FILTER_SET_IN_LEN];
 	u8 outbuf[MC_CMD_WOL_FILTER_SET_OUT_LEN];
 =======
+=======
+>>>>>>> v3.18
 	return rc;
 }
 
@@ -2259,6 +2528,9 @@ static int efx_mcdi_wol_filter_set(struct efx_nic *efx, u32 type,
 {
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_WOL_FILTER_SET_IN_LEN);
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_WOL_FILTER_SET_OUT_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t outlen;
 	int rc;
@@ -2267,7 +2539,11 @@ static int efx_mcdi_wol_filter_set(struct efx_nic *efx, u32 type,
 	MCDI_SET_DWORD(inbuf, WOL_FILTER_SET_IN_FILTER_MODE,
 		       MC_CMD_FILTER_MODE_SIMPLE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(MCDI_PTR(inbuf, WOL_FILTER_SET_IN_MAGIC_MAC), mac, ETH_ALEN);
+=======
+	ether_addr_copy(MCDI_PTR(inbuf, WOL_FILTER_SET_IN_MAGIC_MAC), mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(MCDI_PTR(inbuf, WOL_FILTER_SET_IN_MAGIC_MAC), mac);
 >>>>>>> v3.18
@@ -2304,7 +2580,11 @@ efx_mcdi_wol_filter_set_magic(struct efx_nic *efx,  const u8 *mac, int *id_out)
 int efx_mcdi_wol_filter_get_magic(struct efx_nic *efx, int *id_out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 outbuf[MC_CMD_WOL_FILTER_GET_OUT_LEN];
+=======
+	MCDI_DECLARE_BUF(outbuf, MC_CMD_WOL_FILTER_GET_OUT_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_WOL_FILTER_GET_OUT_LEN);
 >>>>>>> v3.18
@@ -2335,7 +2615,11 @@ fail:
 int efx_mcdi_wol_filter_remove(struct efx_nic *efx, int id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_WOL_FILTER_REMOVE_IN_LEN];
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_WOL_FILTER_REMOVE_IN_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_WOL_FILTER_REMOVE_IN_LEN);
 >>>>>>> v3.18
@@ -2346,6 +2630,7 @@ int efx_mcdi_wol_filter_remove(struct efx_nic *efx, int id)
 	rc = efx_mcdi_rpc(efx, MC_CMD_WOL_FILTER_REMOVE, inbuf, sizeof(inbuf),
 			  NULL, 0, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		goto fail;
 
@@ -2353,6 +2638,8 @@ int efx_mcdi_wol_filter_remove(struct efx_nic *efx, int id)
 
 fail:
 	netif_err(efx, hw, efx->net_dev, "%s: failed rc=%d\n", __func__, rc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return rc;
@@ -2363,7 +2650,12 @@ int efx_mcdi_flush_rxqs(struct efx_nic *efx)
 	struct efx_channel *channel;
 	struct efx_rx_queue *rx_queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 *qid;
+=======
+	MCDI_DECLARE_BUF(inbuf,
+			 MC_CMD_FLUSH_RX_QUEUES_IN_LEN(EFX_MAX_CHANNELS));
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf,
 			 MC_CMD_FLUSH_RX_QUEUES_IN_LEN(EFX_MAX_CHANNELS));
@@ -2374,10 +2666,13 @@ int efx_mcdi_flush_rxqs(struct efx_nic *efx)
 		     MC_CMD_FLUSH_RX_QUEUES_IN_QID_OFST_MAXNUM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qid = kmalloc(EFX_MAX_CHANNELS * sizeof(*qid), GFP_KERNEL);
 	if (qid == NULL)
 		return -ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	count = 0;
@@ -2387,18 +2682,25 @@ int efx_mcdi_flush_rxqs(struct efx_nic *efx)
 				rx_queue->flush_pending = false;
 				atomic_dec(&efx->rxq_flush_pending);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				qid[count++] = cpu_to_le32(
 					efx_rx_queue_index(rx_queue));
 =======
+=======
+>>>>>>> v3.18
 				MCDI_SET_ARRAY_DWORD(
 					inbuf, FLUSH_RX_QUEUES_IN_QID_OFST,
 					count, efx_rx_queue_index(rx_queue));
 				count++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = efx_mcdi_rpc(efx, MC_CMD_FLUSH_RX_QUEUES, (u8 *)qid,
 			  count * sizeof(*qid), NULL, 0, NULL);
@@ -2407,10 +2709,15 @@ int efx_mcdi_flush_rxqs(struct efx_nic *efx)
 	kfree(qid);
 
 =======
+=======
+>>>>>>> v3.18
 	rc = efx_mcdi_rpc(efx, MC_CMD_FLUSH_RX_QUEUES, inbuf,
 			  MC_CMD_FLUSH_RX_QUEUES_IN_LEN(count), NULL, 0, NULL);
 	WARN_ON(rc < 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -2420,6 +2727,7 @@ int efx_mcdi_wol_filter_reset(struct efx_nic *efx)
 	int rc;
 
 	rc = efx_mcdi_rpc(efx, MC_CMD_WOL_FILTER_RESET, NULL, 0, NULL, 0, NULL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc)
 		goto fail;
@@ -2432,6 +2740,8 @@ fail:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return rc;
 }
 
@@ -2647,4 +2957,7 @@ void efx_mcdi_mtd_rename(struct efx_mtd_partition *part)
 }
 
 #endif /* CONFIG_SFC_MTD */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

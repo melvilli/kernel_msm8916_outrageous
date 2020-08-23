@@ -1044,11 +1044,14 @@ isdn_tty_change_speed(modem_info *info)
 		cval |= UART_LCR_EPAR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* CTS flow control flag and modem status interrupts */
 	if (cflag & CRTSCTS) {
 		port->flags |= ASYNC_CTS_FLOW;
 	} else
 		port->flags &= ~ASYNC_CTS_FLOW;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (cflag & CLOCAL)

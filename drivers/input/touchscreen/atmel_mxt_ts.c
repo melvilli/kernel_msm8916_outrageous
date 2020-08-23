@@ -3,13 +3,19 @@
  *
  * Copyright (C) 2010 Samsung Electronics Co.Ltd
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Joonyoung Shim <jy0922.shim@samsung.com>
  * Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) 2011-2014 Atmel Corporation
  * Copyright (C) 2012 Google, Inc.
  *
  * Author: Joonyoung Shim <jy0922.shim@samsung.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute  it and/or modify it
@@ -22,6 +28,10 @@
 #include <linux/module.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/completion.h>
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 >>>>>>> v3.18
@@ -31,6 +41,7 @@
 #include <linux/i2c/atmel_mxt_ts.h>
 #include <linux/input/mt.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/slab.h>
 #include <linux/gpio.h>
@@ -68,12 +79,17 @@
 #include <linux/of.h>
 #include <linux/slab.h>
 >>>>>>> v3.18
+=======
+#include <linux/of.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 
 /* Version */
 #define MXT_VER_20		20
 #define MXT_VER_21		21
 #define MXT_VER_22		22
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* I2C slave address pairs */
 struct mxt_address_pair {
@@ -103,6 +119,8 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 
 /* Registers */
 =======
+=======
+>>>>>>> v3.18
 /* Firmware files */
 #define MXT_FW_NAME		"maxtouch.fw"
 #define MXT_CFG_NAME		"maxtouch.cfg"
@@ -110,6 +128,9 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 
 /* Registers */
 #define MXT_INFO		0x00
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MXT_FAMILY_ID		0x00
 #define MXT_VARIANT_ID		0x01
@@ -120,14 +141,20 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_OBJECT_NUM		0x06
 #define MXT_OBJECT_START	0x07
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	MXT_MAX_OBJECT_VALUE	0xFF
 
 #define MXT_OBJECT_SIZE		6
 =======
+=======
+>>>>>>> v3.18
 
 #define MXT_OBJECT_SIZE		6
 #define MXT_INFO_CHECKSUM_SIZE	3
 #define MXT_MAX_BLOCK_WRITE	256
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Object types */
@@ -150,6 +177,7 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_PROCI_TOUCHSUPPRESSION_T42	42
 #define MXT_PROCI_STYLUS_T47		47
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MXT_PROCI_ADAPTIVETHRESHOLD_T55 55
 #define MXT_PROCI_SHIELDLESS_T56	56
 #define MXT_PROCI_EXTRATSDATA_T57	57
@@ -158,6 +186,9 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_PROCI_ACTIVESTYLUS_T63	63
 #define MXT_PROCI_LENSBENDING_T65	65
 #define MXT_PROCI_ZONEINDICATION_T73	73
+=======
+#define MXT_PROCG_NOISESUPPRESSION_T48	48
+>>>>>>> v3.18
 =======
 #define MXT_PROCG_NOISESUPPRESSION_T48	48
 >>>>>>> v3.18
@@ -170,6 +201,7 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_SPT_MESSAGECOUNT_T44	44
 #define MXT_SPT_CTECONFIG_T46		46
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MXT_SPT_EXTRANOISESUPCTRLS_T58	58
 #define MXT_SPT_TIMER_T61		61
 #define MXT_SPT_GOLDENREFERENCES_T66	66
@@ -177,6 +209,11 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_SPT_DYNAMICCONFIGURATIONCONTAINER_T71	71
 #define MXT_SPT_CTESCANCONFIG_T77	77
 #define MXT_SPT_TOUCHEVENTTRIGGER_T79	79
+=======
+
+/* MXT_GEN_MESSAGE_T5 object */
+#define MXT_RPTID_NOMSG		0xff
+>>>>>>> v3.18
 =======
 
 /* MXT_GEN_MESSAGE_T5 object */
@@ -191,11 +228,14 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_COMMAND_DIAGNOSTIC	5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MXT_GEN_POWER_T7 field */
 #define MXT_POWER_IDLEACQINT	0
 #define MXT_POWER_ACTVACQINT	1
 #define MXT_POWER_ACTV2IDLETO	2
 =======
+=======
+>>>>>>> v3.18
 /* Define for T6 status byte */
 #define MXT_T6_STATUS_RESET	(1 << 7)
 #define MXT_T6_STATUS_OFL	(1 << 6)
@@ -212,6 +252,9 @@ struct t7_config {
 
 #define MXT_POWER_CFG_RUN		0
 #define MXT_POWER_CFG_DEEPSLEEP		1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MXT_GEN_ACQUIRE_T8 field */
@@ -223,6 +266,7 @@ struct t7_config {
 #define MXT_ACQUIRE_ATCHCALST	6
 #define MXT_ACQUIRE_ATCHCALSTHR	7
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* MXT_TOUCH_MULT_T9 field */
 #define MXT_TOUCH_CTRL		0
@@ -254,6 +298,8 @@ struct t7_config {
 #define MXT_TOUCH_YEDGEDIST	29
 #define MXT_TOUCH_JUMPLIMIT	30
 =======
+=======
+>>>>>>> v3.18
 /* MXT_TOUCH_MULTI_T9 field */
 #define MXT_T9_ORIENT		9
 #define MXT_T9_RANGE		18
@@ -275,6 +321,9 @@ struct t9_range {
 
 /* MXT_TOUCH_MULTI_T9 orient */
 #define MXT_T9_ORIENT_SWITCH	(1 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MXT_PROCI_GRIPFACE_T20 field */
@@ -323,6 +372,7 @@ struct t9_range {
 #define MXT_VOLTAGE_STEP	10000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Analog voltage @2.7 V */
 #define MXT_VTG_MIN_UV		2700000
 #define MXT_VTG_MAX_UV		3300000
@@ -367,6 +417,8 @@ struct t9_range {
 
 #define MXT_WAKE_TIME		25
 =======
+=======
+>>>>>>> v3.18
 /* Define for MXT_GEN_COMMAND_T6 */
 #define MXT_BOOT_VALUE		0xa5
 #define MXT_RESET_VALUE		0x01
@@ -379,6 +431,9 @@ struct t9_range {
 #define MXT_CRC_TIMEOUT		1000	/* msec */
 #define MXT_FW_RESET_TIME	3000	/* msec */
 #define MXT_FW_CHG_TIMEOUT	300	/* msec */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Command to unlock bootloader */
@@ -396,6 +451,7 @@ struct t9_range {
 #define MXT_BOOT_EXTENDED_ID	(1 << 5)
 #define MXT_BOOT_ID_MASK	0x1f
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Touch status */
 #define MXT_SUPPRESS		(1 << 1)
@@ -445,10 +501,15 @@ struct t9_range {
 #define BORDER_ADJUST_NUM 3
 #define BORDER_ADJUST_DENOM 4
 =======
+=======
+>>>>>>> v3.18
 /* Touchscreen absolute values */
 #define MXT_MAX_AREA		0xff
 
 #define MXT_PIXELS_PER_MM	20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mxt_info {
@@ -464,6 +525,7 @@ struct mxt_info {
 struct mxt_object {
 	u8 type;
 	u16 start_address;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 size;
 	u8 instances;
@@ -487,16 +549,22 @@ struct mxt_finger {
 	int pressure;
 };
 =======
+=======
+>>>>>>> v3.18
 	u8 size_minus_one;
 	u8 instances_minus_one;
 	u8 num_report_ids;
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Each client has this additional data */
 struct mxt_data {
 	struct i2c_client *client;
 	struct input_dev *input_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct mxt_platform_data *pdata;
 	const struct mxt_config_info *config_info;
@@ -623,6 +691,8 @@ static int mxt_virtual_keys_init(struct device *dev,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	char phys[64];		/* device physical location */
 	const struct mxt_platform_data *pdata;
 	struct mxt_object *object_table;
@@ -672,6 +742,9 @@ static size_t mxt_obj_size(const struct mxt_object *obj)
 static size_t mxt_obj_instances(const struct mxt_object *obj)
 {
 	return obj->instances_minus_one + 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -679,7 +752,10 @@ static bool mxt_object_readable(unsigned int type)
 {
 	switch (type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case MXT_GEN_MESSAGE_T5:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case MXT_GEN_COMMAND_T6:
@@ -699,6 +775,7 @@ static bool mxt_object_readable(unsigned int type)
 	case MXT_PROCI_TOUCHSUPPRESSION_T42:
 	case MXT_PROCI_STYLUS_T47:
 	case MXT_PROCG_NOISESUPPRESSION_T48:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case MXT_PROCI_ADAPTIVETHRESHOLD_T55:
 	case MXT_PROCI_SHIELDLESS_T56:
@@ -759,6 +836,8 @@ static bool mxt_object_writable(unsigned int type)
 	case MXT_PROCI_ACTIVESTYLUS_T63:
 	case MXT_PROCI_LENSBENDING_T65:
 	case MXT_PROCI_ZONEINDICATION_T73:
+=======
+>>>>>>> v3.18
 	case MXT_SPT_COMMSCONFIG_T18:
 	case MXT_SPT_GPIOPWM_T19:
 	case MXT_SPT_SELFTEST_T25:
@@ -766,6 +845,7 @@ static bool mxt_object_writable(unsigned int type)
 	case MXT_SPT_USERDATA_T38:
 	case MXT_SPT_DIGITIZER_T43:
 	case MXT_SPT_CTECONFIG_T46:
+<<<<<<< HEAD
 	case MXT_SPT_EXTRANOISESUPCTRLS_T58:
 	case MXT_SPT_TIMER_T61:
 	case MXT_SPT_GOLDENREFERENCES_T66:
@@ -773,12 +853,15 @@ static bool mxt_object_writable(unsigned int type)
 	case MXT_SPT_DYNAMICCONFIGURATIONCONTAINER_T71:
 	case MXT_SPT_CTESCANCONFIG_T77:
 	case MXT_SPT_TOUCHEVENTTRIGGER_T79:
+=======
+>>>>>>> v3.18
 		return true;
 	default:
 		return false;
 	}
 }
 
+<<<<<<< HEAD
 static void mxt_dump_message(struct device *dev,
 				  struct mxt_message *message)
 {
@@ -915,6 +998,8 @@ recheck:
 		val &= ~MXT_BOOT_STATUS_MASK;
 		break;
 =======
+=======
+>>>>>>> v3.18
 static void mxt_dump_message(struct mxt_data *data, u8 *message)
 {
 	dev_dbg(&data->client->dev, "message: %*ph\n",
@@ -1101,6 +1186,9 @@ recheck:
 
 	switch (state) {
 	case MXT_WAITING_BOOTLOAD_CMD:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case MXT_WAITING_FRAME_DATA:
 	case MXT_APP_CRC_FAIL:
@@ -1108,15 +1196,21 @@ recheck:
 		break;
 	case MXT_FRAME_CRC_PASS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (val == MXT_FRAME_CRC_CHECK)
 			goto recheck;
 		if (val == MXT_FRAME_CRC_FAIL) {
 			dev_err(&client->dev, "Bootloader CRC fail\n");
 =======
+=======
+>>>>>>> v3.18
 		if (val == MXT_FRAME_CRC_CHECK) {
 			goto recheck;
 		} else if (val == MXT_FRAME_CRC_FAIL) {
 			dev_err(dev, "Bootloader CRC fail\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		}
@@ -1127,8 +1221,13 @@ recheck:
 
 	if (val != state) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "Invalid bootloader mode state %X\n",
 			val);
+=======
+		dev_err(dev, "Invalid bootloader state %02X != %02X\n",
+			val, state);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "Invalid bootloader state %02X != %02X\n",
 			val, state);
@@ -1139,6 +1238,7 @@ recheck:
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mxt_unlock_bootloader(struct i2c_client *client)
 {
@@ -1163,6 +1263,8 @@ static int mxt_fw_write(struct i2c_client *client,
 		return -EIO;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int mxt_send_bootloader_cmd(struct mxt_data *data, bool unlock)
 {
 	int ret;
@@ -1179,6 +1281,9 @@ static int mxt_send_bootloader_cmd(struct mxt_data *data, bool unlock)
 	ret = mxt_bootloader_write(data, buf, 2);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1190,7 +1295,11 @@ static int __mxt_read_reg(struct i2c_client *client,
 	struct i2c_msg xfer[2];
 	u8 buf[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1210,6 +1319,7 @@ static int __mxt_read_reg(struct i2c_client *client,
 	xfer[1].len = len;
 	xfer[1].buf = val;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do {
 		if (i2c_transfer(client->adapter, xfer, 2) == 2)
@@ -1249,6 +1359,8 @@ static int __mxt_write_reg(struct i2c_client *client,
 	dev_err(&client->dev, "%s: i2c send failed\n", __func__);
 	return -EIO;
 =======
+=======
+>>>>>>> v3.18
 	ret = i2c_transfer(client->adapter, xfer, 2);
 	if (ret == 2) {
 		ret = 0;
@@ -1290,6 +1402,9 @@ static int __mxt_write_reg(struct i2c_client *client, u16 reg, u16 len,
 
 	kfree(buf);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1299,6 +1414,7 @@ static int mxt_write_reg(struct i2c_client *client, u16 reg, u8 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxt_read_object_table(struct i2c_client *client,
 				      u16 reg, u8 *object_buf)
 {
@@ -1306,6 +1422,8 @@ static int mxt_read_object_table(struct i2c_client *client,
 				   object_buf);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct mxt_object *
@@ -1320,6 +1438,7 @@ mxt_get_object(struct mxt_data *data, u8 type)
 			return object;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_err(&data->client->dev, "Invalid object type\n");
 	return NULL;
@@ -1733,6 +1852,46 @@ static void mxt_proc_t6_messages(struct mxt_data *data, u8 *msg)
 }
 
 static void mxt_input_button(struct mxt_data *data, u8 *message)
+=======
+	dev_warn(&data->client->dev, "Invalid object type T%u\n", type);
+	return NULL;
+}
+
+static void mxt_proc_t6_messages(struct mxt_data *data, u8 *msg)
+{
+	struct device *dev = &data->client->dev;
+	u8 status = msg[1];
+	u32 crc = msg[2] | (msg[3] << 8) | (msg[4] << 16);
+
+	complete(&data->crc_completion);
+
+	if (crc != data->config_crc) {
+		data->config_crc = crc;
+		dev_dbg(dev, "T6 Config Checksum: 0x%06X\n", crc);
+	}
+
+	/* Detect reset */
+	if (status & MXT_T6_STATUS_RESET)
+		complete(&data->reset_completion);
+
+	/* Output debug if status has changed */
+	if (status != data->t6_status)
+		dev_dbg(dev, "T6 Status 0x%02X%s%s%s%s%s%s%s\n",
+			status,
+			status == 0 ? " OK" : "",
+			status & MXT_T6_STATUS_RESET ? " RESET" : "",
+			status & MXT_T6_STATUS_OFL ? " OFL" : "",
+			status & MXT_T6_STATUS_SIGERR ? " SIGERR" : "",
+			status & MXT_T6_STATUS_CAL ? " CAL" : "",
+			status & MXT_T6_STATUS_CFGERR ? " CFGERR" : "",
+			status & MXT_T6_STATUS_COMSERR ? " COMSERR" : "");
+
+	/* Save current status */
+	data->t6_status = status;
+}
+
+static void mxt_input_button(struct mxt_data *data, u8 *message)
+>>>>>>> v3.18
 {
 	struct input_dev *input = data->input_dev;
 	const struct mxt_platform_data *pdata = data->pdata;
@@ -2046,12 +2205,16 @@ static int mxt_t6_command(struct mxt_data *data, u16 cmd_offset,
 	if (timeout_counter > 100) {
 		dev_err(&data->client->dev, "Command failed!\n");
 		return -EIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mxt_get_info(struct mxt_data *data)
 {
@@ -2085,6 +2248,8 @@ static int mxt_get_info(struct mxt_data *data)
 		return error;
 	info->object_num = val;
 =======
+=======
+>>>>>>> v3.18
 static int mxt_soft_reset(struct mxt_data *data)
 {
 	struct device *dev = &data->client->dev;
@@ -2102,11 +2267,15 @@ static int mxt_soft_reset(struct mxt_data *data)
 				      MXT_RESET_TIMEOUT);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mxt_get_object_table(struct mxt_data *data)
 {
@@ -2437,6 +2606,48 @@ static u32 mxt_calculate_crc(u8 *base, off_t start_off, off_t end_off)
 	u8 *last_val = base + end_off - 1;
 
 	if (end_off < start_off)
+=======
+static void mxt_update_crc(struct mxt_data *data, u8 cmd, u8 value)
+{
+	/*
+	 * On failure, CRC is set to 0 and config will always be
+	 * downloaded.
+	 */
+	data->config_crc = 0;
+	reinit_completion(&data->crc_completion);
+
+	mxt_t6_command(data, cmd, value, true);
+
+	/*
+	 * Wait for crc message. On failure, CRC is set to 0 and config will
+	 * always be downloaded.
+	 */
+	mxt_wait_for_completion(data, &data->crc_completion, MXT_CRC_TIMEOUT);
+}
+
+static void mxt_calc_crc24(u32 *crc, u8 firstbyte, u8 secondbyte)
+{
+	static const unsigned int crcpoly = 0x80001B;
+	u32 result;
+	u32 data_word;
+
+	data_word = (secondbyte << 8) | firstbyte;
+	result = ((*crc << 1) ^ data_word);
+
+	if (result & 0x1000000)
+		result ^= crcpoly;
+
+	*crc = result;
+}
+
+static u32 mxt_calculate_crc(u8 *base, off_t start_off, off_t end_off)
+{
+	u32 crc = 0;
+	u8 *ptr = base + start_off;
+	u8 *last_val = base + end_off - 1;
+
+	if (end_off < start_off)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	while (ptr < last_val) {
@@ -2574,6 +2785,7 @@ static int mxt_upload_cfg_mem(struct mxt_data *data, unsigned int cfg_start,
 					cfg_start + byte_offset,
 					size, config_mem + byte_offset);
 		if (error) {
+<<<<<<< HEAD
 			dev_err(&data->client->dev,
 				"Config write error, ret=%d\n", error);
 			return error;
@@ -4639,10 +4851,20 @@ static int mxt_check_child_node_and_create_vkeys(struct mxt_data *data,
 			return -EINVAL;
 	} else
 		return -EINVAL;
+=======
+			dev_err(&data->client->dev,
+				"Config write error, ret=%d\n", error);
+			return error;
+		}
+
+		byte_offset += size;
+	}
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int mxt_probe(struct i2c_client *client,
 		const struct i2c_device_id *id)
 {
@@ -4813,6 +5035,173 @@ static int mxt_probe(struct i2c_client *client,
 
 	error = input_register_device(input_dev);
 =======
+=======
+/*
+ * mxt_update_cfg - download configuration to chip
+ *
+ * Atmel Raw Config File Format
+ *
+ * The first four lines of the raw config file contain:
+ *  1) Version
+ *  2) Chip ID Information (first 7 bytes of device memory)
+ *  3) Chip Information Block 24-bit CRC Checksum
+ *  4) Chip Configuration 24-bit CRC Checksum
+ *
+ * The rest of the file consists of one line per object instance:
+ *   <TYPE> <INSTANCE> <SIZE> <CONTENTS>
+ *
+ *   <TYPE> - 2-byte object type as hex
+ *   <INSTANCE> - 2-byte object instance number as hex
+ *   <SIZE> - 2-byte object size as hex
+ *   <CONTENTS> - array of <SIZE> 1-byte hex values
+ */
+static int mxt_update_cfg(struct mxt_data *data, const struct firmware *cfg)
+{
+	struct device *dev = &data->client->dev;
+	struct mxt_info cfg_info;
+	int ret;
+	int offset;
+	int data_pos;
+	int i;
+	int cfg_start_ofs;
+	u32 info_crc, config_crc, calculated_crc;
+	u8 *config_mem;
+	size_t config_mem_size;
+
+	mxt_update_crc(data, MXT_COMMAND_REPORTALL, 1);
+
+	if (strncmp(cfg->data, MXT_CFG_MAGIC, strlen(MXT_CFG_MAGIC))) {
+		dev_err(dev, "Unrecognised config file\n");
+		return -EINVAL;
+	}
+
+	data_pos = strlen(MXT_CFG_MAGIC);
+
+	/* Load information block and check */
+	for (i = 0; i < sizeof(struct mxt_info); i++) {
+		ret = sscanf(cfg->data + data_pos, "%hhx%n",
+			     (unsigned char *)&cfg_info + i,
+			     &offset);
+		if (ret != 1) {
+			dev_err(dev, "Bad format\n");
+			return -EINVAL;
+		}
+
+		data_pos += offset;
+	}
+
+	if (cfg_info.family_id != data->info.family_id) {
+		dev_err(dev, "Family ID mismatch!\n");
+		return -EINVAL;
+	}
+
+	if (cfg_info.variant_id != data->info.variant_id) {
+		dev_err(dev, "Variant ID mismatch!\n");
+		return -EINVAL;
+	}
+
+	/* Read CRCs */
+	ret = sscanf(cfg->data + data_pos, "%x%n", &info_crc, &offset);
+	if (ret != 1) {
+		dev_err(dev, "Bad format: failed to parse Info CRC\n");
+		return -EINVAL;
+	}
+	data_pos += offset;
+
+	ret = sscanf(cfg->data + data_pos, "%x%n", &config_crc, &offset);
+	if (ret != 1) {
+		dev_err(dev, "Bad format: failed to parse Config CRC\n");
+		return -EINVAL;
+	}
+	data_pos += offset;
+
+	/*
+	 * The Info Block CRC is calculated over mxt_info and the object
+	 * table. If it does not match then we are trying to load the
+	 * configuration from a different chip or firmware version, so
+	 * the configuration CRC is invalid anyway.
+	 */
+	if (info_crc == data->info_crc) {
+		if (config_crc == 0 || data->config_crc == 0) {
+			dev_info(dev, "CRC zero, attempting to apply config\n");
+		} else if (config_crc == data->config_crc) {
+			dev_dbg(dev, "Config CRC 0x%06X: OK\n",
+				 data->config_crc);
+			return 0;
+		} else {
+			dev_info(dev, "Config CRC 0x%06X: does not match file 0x%06X\n",
+				 data->config_crc, config_crc);
+		}
+	} else {
+		dev_warn(dev,
+			 "Warning: Info CRC error - device=0x%06X file=0x%06X\n",
+			 data->info_crc, info_crc);
+	}
+
+	/* Malloc memory to store configuration */
+	cfg_start_ofs = MXT_OBJECT_START +
+			data->info.object_num * sizeof(struct mxt_object) +
+			MXT_INFO_CHECKSUM_SIZE;
+	config_mem_size = data->mem_size - cfg_start_ofs;
+	config_mem = kzalloc(config_mem_size, GFP_KERNEL);
+	if (!config_mem) {
+		dev_err(dev, "Failed to allocate memory\n");
+		return -ENOMEM;
+	}
+
+	ret = mxt_prepare_cfg_mem(data, cfg, data_pos, cfg_start_ofs,
+				  config_mem, config_mem_size);
+	if (ret)
+		goto release_mem;
+
+	/* Calculate crc of the received configs (not the raw config file) */
+	if (data->T7_address < cfg_start_ofs) {
+		dev_err(dev, "Bad T7 address, T7addr = %x, config offset %x\n",
+			data->T7_address, cfg_start_ofs);
+		ret = 0;
+		goto release_mem;
+	}
+
+	calculated_crc = mxt_calculate_crc(config_mem,
+					   data->T7_address - cfg_start_ofs,
+					   config_mem_size);
+
+	if (config_crc > 0 && config_crc != calculated_crc)
+		dev_warn(dev, "Config CRC error, calculated=%06X, file=%06X\n",
+			 calculated_crc, config_crc);
+
+	ret = mxt_upload_cfg_mem(data, cfg_start_ofs,
+				 config_mem, config_mem_size);
+	if (ret)
+		goto release_mem;
+
+	mxt_update_crc(data, MXT_COMMAND_BACKUPNV, MXT_BACKUP_VALUE);
+
+	ret = mxt_soft_reset(data);
+	if (ret)
+		goto release_mem;
+
+	dev_info(dev, "Config successfully updated\n");
+
+release_mem:
+	kfree(config_mem);
+	return ret;
+}
+
+static int mxt_acquire_irq(struct mxt_data *data)
+{
+	int error;
+
+	enable_irq(data->irq);
+
+	error = mxt_process_messages_until_invalid(data);
+	if (error)
+		return error;
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static int mxt_get_info(struct mxt_data *data)
 {
 	struct i2c_client *client = data->client;
@@ -5657,11 +6046,15 @@ static int mxt_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	disable_irq(client->irq);
 
 	error = mxt_initialize(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (error)
 		goto err_free_irq;
 
 	error = sysfs_create_group(&client->dev.kobj, &mxt_attr_group);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (error)
 		goto err_unregister_device;
@@ -5729,6 +6122,8 @@ err_regulator_on:
 err_free_mem:
 	input_free_device(input_dev);
 =======
+=======
+>>>>>>> v3.18
 	if (error) {
 		dev_err(&client->dev, "Failure %d creating sysfs group\n",
 			error);
@@ -5743,6 +6138,9 @@ err_free_object:
 err_free_irq:
 	free_irq(client->irq, data);
 err_free_mem:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(data);
 	return error;
@@ -5750,6 +6148,7 @@ err_free_mem:
 
 static int mxt_remove(struct i2c_client *client)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int retval;
 	struct mxt_data *data = i2c_get_clientdata(client);
@@ -5806,6 +6205,8 @@ static int mxt_remove(struct i2c_client *client)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	struct mxt_data *data = i2c_get_clientdata(client);
 
 	sysfs_remove_group(&client->dev.kobj, &mxt_attr_group);
@@ -5858,12 +6259,19 @@ static const struct of_device_id mxt_of_match[] = {
 	{},
 };
 MODULE_DEVICE_TABLE(of, mxt_of_match);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct i2c_device_id mxt_id[] = {
 	{ "qt602240_ts", 0 },
 	{ "atmel_mxt_ts", 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "atmel_mxt_tp", 0 },
+>>>>>>> v3.18
 =======
 	{ "atmel_mxt_tp", 0 },
 >>>>>>> v3.18
@@ -5871,6 +6279,7 @@ static const struct i2c_device_id mxt_id[] = {
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, mxt_id);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_OF
 static struct of_device_id mxt_match_table[] = {
@@ -5882,16 +6291,23 @@ static struct of_device_id mxt_match_table[] = {
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static struct i2c_driver mxt_driver = {
 	.driver = {
 		.name	= "atmel_mxt_ts",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = mxt_match_table,
 #ifdef CONFIG_PM
 		.pm	= &mxt_pm_ops,
 #endif
+=======
+		.of_match_table = of_match_ptr(mxt_of_match),
+		.pm	= &mxt_pm_ops,
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(mxt_of_match),
 		.pm	= &mxt_pm_ops,

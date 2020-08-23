@@ -59,7 +59,11 @@ static int af9035_ctrl_msg(struct dvb_usb_device *d, struct usb_req *req)
 			req->rlen > (BUF_LEN - ACK_HDR_LEN - CHECKSUM_LEN)) {
 		dev_err(&d->udev->dev, "%s: too much data wlen=%d rlen=%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__func__, req->wlen, req->rlen);
+=======
+				KBUILD_MODNAME, req->wlen, req->rlen);
+>>>>>>> v3.18
 =======
 				KBUILD_MODNAME, req->wlen, req->rlen);
 >>>>>>> v3.18
@@ -99,14 +103,20 @@ static int af9035_ctrl_msg(struct dvb_usb_device *d, struct usb_req *req)
 	tmp_checksum = (state->buf[rlen - 2] << 8) | state->buf[rlen - 1];
 	if (tmp_checksum != checksum) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&d->udev->dev, "%s: command=%02x checksum mismatch " \
 				"(%04x != %04x)\n", KBUILD_MODNAME, req->cmd,
 				tmp_checksum, checksum);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&d->udev->dev,
 				"%s: command=%02x checksum mismatch (%04x != %04x)\n",
 				KBUILD_MODNAME, req->cmd, tmp_checksum,
 				checksum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -EIO;
 		goto exit;
@@ -204,7 +214,10 @@ static int af9035_wr_reg_mask(struct dvb_usb_device *d, u32 reg, u8 val,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int af9035_add_i2c_dev(struct dvb_usb_device *d, const char *type,
 		u8 addr, void *platform_data, struct i2c_adapter *adapter)
 {
@@ -291,6 +304,9 @@ err:
 	dev_dbg(&d->udev->dev, "%s: failed\n", __func__);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 		struct i2c_msg msg[], int num)
@@ -304,7 +320,11 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * I2C sub header is 5 bytes long. Meaning of those bytes are:
+=======
+	 * AF9035 I2C sub header is 5 bytes long. Meaning of those bytes are:
+>>>>>>> v3.18
 =======
 	 * AF9035 I2C sub header is 5 bytes long. Meaning of those bytes are:
 >>>>>>> v3.18
@@ -322,6 +342,7 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 	 * there could be some tuner I2C hacks done by firmware and this may
 	 * lead problems if firmware expects those bytes are used.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	if (num == 2 && !(msg[0].flags & I2C_M_RD) &&
 			(msg[1].flags & I2C_M_RD)) {
@@ -331,6 +352,8 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 		} else if ((msg[0].addr == state->af9033_config[0].i2c_addr) ||
 			   (msg[0].addr == state->af9033_config[1].i2c_addr)) {
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * TODO: Here is few hacks. AF9035 chip integrates AF9033 demodulator.
 	 * IT9135 chip integrates AF9033 demodulator and RF tuner. For dual
@@ -365,13 +388,21 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 		} else if ((msg[0].addr == state->af9033_i2c_addr[0]) ||
 			   (msg[0].addr == state->af9033_i2c_addr[1]) ||
 			   (state->chip_type == 0x9135)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* demod access via firmware interface */
 			u32 reg = msg[0].buf[0] << 16 | msg[0].buf[1] << 8 |
 					msg[0].buf[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (msg[0].addr == state->af9033_config[1].i2c_addr)
+=======
+			if (msg[0].addr == state->af9033_i2c_addr[1] ||
+			    msg[0].addr == (state->af9033_i2c_addr[1] >> 1))
+>>>>>>> v3.18
 =======
 			if (msg[0].addr == state->af9033_i2c_addr[1] ||
 			    msg[0].addr == (state->af9033_i2c_addr[1] >> 1))
@@ -382,7 +413,11 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 					msg[1].len);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* I2C */
+=======
+			/* I2C write + read */
+>>>>>>> v3.18
 =======
 			/* I2C write + read */
 >>>>>>> v3.18
@@ -390,6 +425,7 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 			struct usb_req req = { CMD_I2C_RD, 0, 5 + msg[0].len,
 					buf, msg[1].len, msg[1].buf };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (5 + msg[0].len > sizeof(buf)) {
 				dev_warn(&d->udev->dev,
@@ -414,6 +450,8 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 		} else if ((msg[0].addr == state->af9033_config[0].i2c_addr) ||
 			   (msg[0].addr == state->af9033_config[1].i2c_addr)) {
 =======
+=======
+>>>>>>> v3.18
 			if (state->chip_type == 0x9306) {
 				req.cmd = CMD_GENERIC_I2C_RD;
 				req.wlen = 3 + msg[0].len;
@@ -441,13 +479,21 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 		} else if ((msg[0].addr == state->af9033_i2c_addr[0]) ||
 			   (msg[0].addr == state->af9033_i2c_addr[1]) ||
 			   (state->chip_type == 0x9135)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* demod access via firmware interface */
 			u32 reg = msg[0].buf[0] << 16 | msg[0].buf[1] << 8 |
 					msg[0].buf[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (msg[0].addr == state->af9033_config[1].i2c_addr)
+=======
+			if (msg[0].addr == state->af9033_i2c_addr[1] ||
+			    msg[0].addr == (state->af9033_i2c_addr[1] >> 1))
+>>>>>>> v3.18
 =======
 			if (msg[0].addr == state->af9033_i2c_addr[1] ||
 			    msg[0].addr == (state->af9033_i2c_addr[1] >> 1))
@@ -458,7 +504,11 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 					msg[0].len - 3);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* I2C */
+=======
+			/* I2C write */
+>>>>>>> v3.18
 =======
 			/* I2C write */
 >>>>>>> v3.18
@@ -466,6 +516,7 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 			struct usb_req req = { CMD_I2C_WR, 0, 5 + msg[0].len,
 					buf, 0, NULL };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (5 + msg[0].len > sizeof(buf)) {
 				dev_warn(&d->udev->dev,
@@ -482,6 +533,8 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 			buf[4] = 0x00; /* reg addr LSB */
 			memcpy(&buf[5], msg[0].buf, msg[0].len);
 =======
+=======
+>>>>>>> v3.18
 			if (state->chip_type == 0x9306) {
 				req.cmd = CMD_GENERIC_I2C_WR;
 				req.wlen = 3 + msg[0].len;
@@ -527,27 +580,39 @@ static int af9035_i2c_master_xfer(struct i2c_adapter *adap,
 				buf[3] = 0x00; /* reg addr MSB */
 				buf[4] = 0x00; /* reg addr LSB */
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = af9035_ctrl_msg(d, &req);
 		}
 	} else {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * We support only two kind of I2C transactions:
 		 * 1) 1 x read + 1 x write
 		 * 2) 1 x write
 =======
+=======
+>>>>>>> v3.18
 		 * We support only three kind of I2C transactions:
 		 * 1) 1 x write + 1 x read (repeated start)
 		 * 2) 1 x write
 		 * 3) 1 x read
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		ret = -EOPNOTSUPP;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unlock:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&d->i2c_mutex);
@@ -591,8 +656,13 @@ static int af9035_identify_state(struct dvb_usb_device *d, const char **name)
 	dev_info(&d->udev->dev,
 			"%s: prechip_version=%02x chip_version=%02x chip_type=%04x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__func__, state->prechip_version, state->chip_version,
 			state->chip_type);
+=======
+			KBUILD_MODNAME, state->prechip_version,
+			state->chip_version, state->chip_type);
+>>>>>>> v3.18
 =======
 			KBUILD_MODNAME, state->prechip_version,
 			state->chip_version, state->chip_type);
@@ -605,6 +675,12 @@ static int af9035_identify_state(struct dvb_usb_device *d, const char **name)
 			*name = AF9035_FIRMWARE_IT9135_V1;
 		state->eeprom_addr = EEPROM_BASE_IT9135;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if (state->chip_type == 0x9306) {
+		*name = AF9035_FIRMWARE_IT9303;
+		state->eeprom_addr = EEPROM_BASE_IT9135;
+>>>>>>> v3.18
 =======
 	} else if (state->chip_type == 0x9306) {
 		*name = AF9035_FIRMWARE_IT9303;
@@ -667,14 +743,20 @@ static int af9035_download_firmware_old(struct dvb_usb_device *d,
 		hdr_checksum |= fw->data[fw->size - i + 6] << 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&d->udev->dev, "%s: core=%d addr=%04x data_len=%d " \
 				"checksum=%04x\n", __func__, hdr_core, hdr_addr,
 				hdr_data_len, hdr_checksum);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&d->udev->dev,
 				"%s: core=%d addr=%04x data_len=%d checksum=%04x\n",
 				__func__, hdr_core, hdr_addr, hdr_data_len,
 				hdr_checksum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (((hdr_core != 1) && (hdr_core != 2)) ||
@@ -781,7 +863,12 @@ static int af9035_download_firmware(struct dvb_usb_device *d,
 	u8 tmp;
 	struct usb_req req = { 0, 0, 0, NULL, 0, NULL };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_req req_fw_ver = { CMD_FW_QUERYINFO, 0, 1, wbuf, 4, rbuf } ;
+=======
+	struct usb_req req_fw_ver = { CMD_FW_QUERYINFO, 0, 1, wbuf, 4, rbuf };
+
+>>>>>>> v3.18
 =======
 	struct usb_req req_fw_ver = { CMD_FW_QUERYINFO, 0, 1, wbuf, 4, rbuf };
 
@@ -795,17 +882,23 @@ static int af9035_download_firmware(struct dvb_usb_device *d,
 	 * Master feeds also clock and controls power via GPIO.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = af9035_rd_reg(d, state->eeprom_addr + EEPROM_DUAL_MODE, &tmp);
 	if (ret < 0)
 		goto err;
 
 	if (tmp) {
 =======
+=======
+>>>>>>> v3.18
 	ret = af9035_rd_reg(d, state->eeprom_addr + EEPROM_TS_MODE, &tmp);
 	if (ret < 0)
 		goto err;
 
 	if (tmp == 1 || tmp == 3) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* configure gpioh1, reset & power slave demod */
 		ret = af9035_wr_reg_mask(d, 0x00d8b0, 0x01, 0x01);
@@ -834,14 +927,20 @@ static int af9035_download_firmware(struct dvb_usb_device *d,
 			goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (state->chip_type == 0x9135) {
 =======
+=======
+>>>>>>> v3.18
 		/* use default I2C address if eeprom has no address set */
 		if (!tmp)
 			tmp = 0x3a;
 
 		if ((state->chip_type == 0x9135) ||
 				(state->chip_type == 0x9306)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = af9035_wr_reg(d, 0x004bfb, tmp);
 			if (ret < 0)
@@ -904,7 +1003,12 @@ static int af9035_read_config(struct dvb_usb_device *d)
 
 	/* demod I2C "address" */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->af9033_config[0].i2c_addr = 0x38;
+=======
+	state->af9033_i2c_addr[0] = 0x38;
+	state->af9033_i2c_addr[1] = 0x3a;
+>>>>>>> v3.18
 =======
 	state->af9033_i2c_addr[0] = 0x38;
 	state->af9033_i2c_addr[1] = 0x3a;
@@ -914,6 +1018,7 @@ static int af9035_read_config(struct dvb_usb_device *d)
 	state->af9033_config[0].ts_mode = AF9033_TS_MODE_USB;
 	state->af9033_config[1].ts_mode = AF9033_TS_MODE_SERIAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* eeprom memory mapped location */
 	if (state->chip_type == 0x9135) {
@@ -926,6 +1031,8 @@ static int af9035_read_config(struct dvb_usb_device *d)
 			state->af9033_config[1].tuner = AF9033_TUNER_IT9135_38;
 			tmp16 = 0x00461b;
 =======
+=======
+>>>>>>> v3.18
 	if (state->chip_type == 0x9135) {
 		/* feed clock for integrated RF tuner */
 		state->af9033_config[0].dyn0_clk = true;
@@ -939,6 +1046,9 @@ static int af9035_read_config(struct dvb_usb_device *d)
 			state->af9033_config[0].tuner = AF9033_TUNER_IT9135_38;
 			state->af9033_config[1].tuner = AF9033_TUNER_IT9135_38;
 			tmp16 = 0x00461b; /* eeprom memory mapped location */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -952,6 +1062,7 @@ static int af9035_read_config(struct dvb_usb_device *d)
 			goto skip_eeprom;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	/* check if there is dual tuners */
@@ -963,6 +1074,8 @@ static int af9035_read_config(struct dvb_usb_device *d)
 	dev_dbg(&d->udev->dev, "%s: dual mode=%d\n", __func__,
 			state->dual_mode);
 =======
+=======
+>>>>>>> v3.18
 	} else if (state->chip_type == 0x9306) {
 		/*
 		 * IT930x is an USB bridge, only single demod-single tuner
@@ -983,6 +1096,9 @@ static int af9035_read_config(struct dvb_usb_device *d)
 
 	dev_dbg(&d->udev->dev, "%s: ts mode=%d dual mode=%d\n", __func__,
 			tmp, state->dual_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (state->dual_mode) {
@@ -994,7 +1110,13 @@ static int af9035_read_config(struct dvb_usb_device *d)
 			goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		state->af9033_config[1].i2c_addr = tmp;
+=======
+		if (tmp)
+			state->af9033_i2c_addr[1] = tmp;
+
+>>>>>>> v3.18
 =======
 		if (tmp)
 			state->af9033_i2c_addr[1] = tmp;
@@ -1013,6 +1135,7 @@ static int af9035_read_config(struct dvb_usb_device *d)
 			goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tmp == 0x00)
 			dev_dbg(&d->udev->dev,
 					"%s: [%d]tuner not set, using default\n",
@@ -1023,6 +1146,8 @@ static int af9035_read_config(struct dvb_usb_device *d)
 		dev_dbg(&d->udev->dev, "%s: [%d]tuner=%02x\n",
 				__func__, i, state->af9033_config[i].tuner);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&d->udev->dev, "%s: [%d]tuner=%02x\n",
 				__func__, i, tmp);
 
@@ -1058,6 +1183,9 @@ static int af9035_read_config(struct dvb_usb_device *d)
 					KBUILD_MODNAME, i, tmp,
 					state->af9033_config[i].tuner);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		switch (state->af9033_config[i].tuner) {
@@ -1293,11 +1421,15 @@ static int af9035_get_adapter_count(struct dvb_usb_device *d)
 	struct state *state = d_to_priv(d);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* disable 2nd adapter as we don't have PID filters implemented */
 	if (d->udev->speed == USB_SPEED_FULL)
 		return 1;
 	else
 		return state->dual_mode + 1;
+=======
+	return state->dual_mode + 1;
+>>>>>>> v3.18
 =======
 	return state->dual_mode + 1;
 >>>>>>> v3.18
@@ -1309,7 +1441,12 @@ static int af9035_frontend_attach(struct dvb_usb_adapter *adap)
 	struct dvb_usb_device *d = adap_to_d(adap);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&d->udev->dev, "%s:\n", __func__);
+=======
+
+	dev_dbg(&d->udev->dev, "%s: adap->id=%d\n", __func__, adap->id);
+>>>>>>> v3.18
 =======
 
 	dev_dbg(&d->udev->dev, "%s: adap->id=%d\n", __func__, adap->id);
@@ -1322,10 +1459,13 @@ static int af9035_frontend_attach(struct dvb_usb_adapter *adap)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* attach demodulator */
 	adap->fe[0] = dvb_attach(af9033_attach, &state->af9033_config[adap->id],
 			&d->i2c_adap);
 =======
+=======
+>>>>>>> v3.18
 	state->af9033_config[adap->id].fe = &adap->fe[0];
 	state->af9033_config[adap->id].ops = &state->ops;
 	ret = af9035_add_i2c_dev(d, "af9033", state->af9033_i2c_addr[adap->id],
@@ -1333,6 +1473,9 @@ static int af9035_frontend_attach(struct dvb_usb_adapter *adap)
 	if (ret)
 		goto err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (adap->fe[0] == NULL) {
 		ret = -ENODEV;
@@ -1352,7 +1495,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int it930x_frontend_attach(struct dvb_usb_adapter *adap)
 {
 	struct state *state = adap_to_priv(adap);
@@ -1425,6 +1571,9 @@ static int af9035_frontend_detach(struct dvb_usb_adapter *adap)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct tua9001_config af9035_tua9001_config = {
 	.i2c_addr = 0x60,
@@ -1485,7 +1634,12 @@ static int af9035_tuner_attach(struct dvb_usb_adapter *adap)
 	struct i2c_msg msg[1];
 	u8 tuner_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&d->udev->dev, "%s:\n", __func__);
+=======
+
+	dev_dbg(&d->udev->dev, "%s: adap->id=%d\n", __func__, adap->id);
+>>>>>>> v3.18
 =======
 
 	dev_dbg(&d->udev->dev, "%s: adap->id=%d\n", __func__, adap->id);
@@ -1649,6 +1803,7 @@ static int af9035_tuner_attach(struct dvb_usb_adapter *adap)
 	case AF9033_TUNER_IT9135_51:
 	case AF9033_TUNER_IT9135_52:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case AF9033_TUNER_IT9135_60:
 	case AF9033_TUNER_IT9135_61:
 	case AF9033_TUNER_IT9135_62:
@@ -1658,6 +1813,8 @@ static int af9035_tuner_attach(struct dvb_usb_adapter *adap)
 				state->af9033_config[0].tuner);
 		break;
 =======
+=======
+>>>>>>> v3.18
 	{
 		struct it913x_config it913x_config = {
 			.fe = adap->fe[0],
@@ -1705,6 +1862,9 @@ static int af9035_tuner_attach(struct dvb_usb_adapter *adap)
 		fe = adap->fe[0];
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		fe = NULL;
@@ -1724,7 +1884,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int it930x_tuner_attach(struct dvb_usb_adapter *adap)
 {
 	struct state *state = adap_to_priv(adap);
@@ -1838,6 +2001,9 @@ static int af9035_tuner_detach(struct dvb_usb_adapter *adap)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int af9035_init(struct dvb_usb_device *d)
 {
@@ -1867,9 +2033,15 @@ static int af9035_init(struct dvb_usb_device *d)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&d->udev->dev, "%s: USB speed=%d frame_size=%04x " \
 			"packet_size=%02x\n", __func__,
 			d->udev->speed, frame_size, packet_size);
+=======
+	dev_dbg(&d->udev->dev,
+			"%s: USB speed=%d frame_size=%04x packet_size=%02x\n",
+			__func__, d->udev->speed, frame_size, packet_size);
+>>>>>>> v3.18
 =======
 	dev_dbg(&d->udev->dev,
 			"%s: USB speed=%d frame_size=%04x packet_size=%02x\n",
@@ -1893,7 +2065,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int it930x_init(struct dvb_usb_device *d)
 {
 	struct state *state = d_to_priv(d);
@@ -1977,6 +2152,9 @@ err:
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if IS_ENABLED(CONFIG_RC_CORE)
 static int af9035_rc_query(struct dvb_usb_device *d)
@@ -1996,6 +2174,7 @@ static int af9035_rc_query(struct dvb_usb_device *d)
 		if ((buf[0] + buf[1]) == 0xff) {
 			/* NEC standard 16bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			key = buf[0] << 8 | buf[2];
 		} else {
 			/* NEC extended 24bit */
@@ -2005,6 +2184,8 @@ static int af9035_rc_query(struct dvb_usb_device *d)
 		/* NEC full code 32bit */
 		key = buf[0] << 24 | buf[1] << 16 | buf[2] << 8 | buf[3];
 =======
+=======
+>>>>>>> v3.18
 			key = RC_SCANCODE_NEC(buf[0], buf[2]);
 		} else {
 			/* NEC extended 24bit */
@@ -2014,13 +2195,20 @@ static int af9035_rc_query(struct dvb_usb_device *d)
 		/* NEC full code 32bit */
 		key = RC_SCANCODE_NEC32(buf[0] << 24 | buf[1] << 16 |
 					buf[2] << 8  | buf[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	dev_dbg(&d->udev->dev, "%s: %*ph\n", __func__, 4, buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc_keydown(d->rc_dev, key, 0);
+=======
+	rc_keydown(d->rc_dev, RC_TYPE_NEC, key, 0);
+>>>>>>> v3.18
 =======
 	rc_keydown(d->rc_dev, RC_TYPE_NEC, key, 0);
 >>>>>>> v3.18
@@ -2088,6 +2276,10 @@ static int af9035_get_stream_config(struct dvb_frontend *fe, u8 *ts_type,
 {
 	struct dvb_usb_device *d = fe_to_d(fe);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2099,6 +2291,7 @@ static int af9035_get_stream_config(struct dvb_frontend *fe, u8 *ts_type,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * FIXME: PID filter is property of demodulator and should be moved to the
@@ -2123,17 +2316,23 @@ err:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int af9035_pid_filter_ctrl(struct dvb_usb_adapter *adap, int onoff)
 {
 	struct state *state = adap_to_priv(adap);
 
 	return state->ops.pid_filter_ctrl(adap->fe[0], onoff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int af9035_pid_filter(struct dvb_usb_adapter *adap, int index, u16 pid,
 		int onoff)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dvb_usb_device *d = adap_to_d(adap);
 	int ret;
@@ -2160,6 +2359,11 @@ err:
 	dev_dbg(&d->udev->dev, "%s: failed=%d\n", __func__, ret);
 
 	return ret;
+=======
+	struct state *state = adap_to_priv(adap);
+
+	return state->ops.pid_filter(adap->fe[0], index, pid, onoff);
+>>>>>>> v3.18
 =======
 	struct state *state = adap_to_priv(adap);
 
@@ -2222,7 +2426,13 @@ static const struct dvb_usb_device_properties af9035_props = {
 	.read_config = af9035_read_config,
 	.frontend_attach = af9035_frontend_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tuner_attach = af9035_tuner_attach,
+=======
+	.frontend_detach = af9035_frontend_detach,
+	.tuner_attach = af9035_tuner_attach,
+	.tuner_detach = af9035_tuner_detach,
+>>>>>>> v3.18
 =======
 	.frontend_detach = af9035_frontend_detach,
 	.tuner_attach = af9035_tuner_attach,
@@ -2245,7 +2455,10 @@ static const struct dvb_usb_device_properties af9035_props = {
 			.stream = DVB_USB_STREAM_BULK(0x84, 6, 87 * 188),
 		}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			.caps = DVB_USB_ADAP_HAS_PID_FILTER |
 				DVB_USB_ADAP_PID_FILTER_CAN_BE_TURNED_OFF,
 
@@ -2253,6 +2466,9 @@ static const struct dvb_usb_device_properties af9035_props = {
 			.pid_filter_ctrl = af9035_pid_filter_ctrl,
 			.pid_filter = af9035_pid_filter,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.stream = DVB_USB_STREAM_BULK(0x85, 6, 87 * 188),
 		},
@@ -2260,7 +2476,10 @@ static const struct dvb_usb_device_properties af9035_props = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct dvb_usb_device_properties it930x_props = {
 	.driver_name = KBUILD_MODNAME,
 	.owner = THIS_MODULE,
@@ -2292,6 +2511,9 @@ static const struct dvb_usb_device_properties it930x_props = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct usb_device_id af9035_id_table[] = {
 	/* AF9035 devices */
@@ -2320,6 +2542,7 @@ static const struct usb_device_id af9035_id_table[] = {
 	{ DVB_USB_DEVICE(USB_VID_ASUS, USB_PID_ASUS_U3100MINI_PLUS,
 		&af9035_props, "Asus U3100Mini Plus", NULL) },
 <<<<<<< HEAD
+<<<<<<< HEAD
         { DVB_USB_DEVICE(USB_VID_TERRATEC, 0x00aa,
 		&af9035_props, "TerraTec Cinergy T Stick (rev. 2)", NULL) },
 	/* IT9135 devices */
@@ -2333,6 +2556,8 @@ static const struct usb_device_id af9035_id_table[] = {
 	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x0099,
 		&af9035_props, "TerraTec Cinergy T Stick Dual RC (rev. 2)", NULL) },
 =======
+=======
+>>>>>>> v3.18
 	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x00aa,
 		&af9035_props, "TerraTec Cinergy T Stick (rev. 2)", NULL) },
 	/* IT9135 devices */
@@ -2367,17 +2592,26 @@ static const struct usb_device_id af9035_id_table[] = {
 	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x0099,
 		&af9035_props, "TerraTec Cinergy T Stick Dual RC (rev. 2)",
 		NULL) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ DVB_USB_DEVICE(USB_VID_LEADTEK, 0x6a05,
 		&af9035_props, "Leadtek WinFast DTV Dongle Dual", NULL) },
 	{ DVB_USB_DEVICE(USB_VID_HAUPPAUGE, 0xf900,
 		&af9035_props, "Hauppauge WinTV-MiniStick 2", NULL) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ DVB_USB_DEVICE(USB_VID_PCTV, USB_PID_PCTV_78E,
 		&af9035_props, "PCTV AndroiDTV (78e)", RC_MAP_IT913X_V1) },
 	{ DVB_USB_DEVICE(USB_VID_PCTV, USB_PID_PCTV_79E,
 		&af9035_props, "PCTV microStick (79e)", RC_MAP_IT913X_V2) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -2404,6 +2638,10 @@ MODULE_FIRMWARE(AF9035_FIRMWARE_AF9035);
 MODULE_FIRMWARE(AF9035_FIRMWARE_IT9135_V1);
 MODULE_FIRMWARE(AF9035_FIRMWARE_IT9135_V2);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE(AF9035_FIRMWARE_IT9303);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(AF9035_FIRMWARE_IT9303);
 >>>>>>> v3.18

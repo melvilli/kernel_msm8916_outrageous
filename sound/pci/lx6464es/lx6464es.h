@@ -72,6 +72,7 @@ struct lx6464es {
 	u8			mac_address[6];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t		lock;        /* interrupt spinlock */
 	struct mutex            setup_mutex; /* mutex used in hw_params, open
 					      * and close */
@@ -81,10 +82,15 @@ struct lx6464es {
 	struct tasklet_struct   tasklet_playback;
 
 =======
+=======
+>>>>>>> v3.18
 	struct mutex		lock;        /* interrupt lock */
 	struct mutex            setup_mutex; /* mutex used in hw_params, open
 					      * and close */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* ports */
 	unsigned long		port_plx;	   /* io port (size=256) */
@@ -95,8 +101,14 @@ struct lx6464es {
 
 	/* messaging */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t		msg_lock;          /* message spinlock */
 	struct lx_rmh           rmh;
+=======
+	struct mutex		msg_lock;          /* message lock */
+	struct lx_rmh           rmh;
+	u32			irqsrc;
+>>>>>>> v3.18
 =======
 	struct mutex		msg_lock;          /* message lock */
 	struct lx_rmh           rmh;

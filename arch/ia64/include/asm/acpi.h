@@ -35,6 +35,7 @@
 #include <asm/numa.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPILER_DEPENDENT_INT64	long
 #define COMPILER_DEPENDENT_UINT64	unsigned long
 
@@ -90,16 +91,23 @@ ia64_acpi_release_global_lock (unsigned int *lock)
 #ifdef	CONFIG_ACPI
 extern int acpi_lapic;
 >>>>>>> v3.18
+=======
+#ifdef	CONFIG_ACPI
+extern int acpi_lapic;
+>>>>>>> v3.18
 #define acpi_disabled 0	/* ACPI always enabled on IA64 */
 #define acpi_noirq 0	/* ACPI always enabled on IA64 */
 #define acpi_pci_disabled 0 /* ACPI PCI always enabled on IA64 */
 #define acpi_strict 1	/* no ACPI spec workarounds on IA64 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 #define acpi_processor_cstate_check(x) (x) /* no idle limits on IA64 :) */
 static inline void disable_acpi(void) { }
 static inline void pci_acpi_crs_quirks(void) { }
 =======
+=======
+>>>>>>> v3.18
 
 static inline bool acpi_has_cpu_in_madt(void)
 {
@@ -108,6 +116,9 @@ static inline bool acpi_has_cpu_in_madt(void)
 #endif
 #define acpi_processor_cstate_check(x) (x) /* no idle limits on IA64 :) */
 static inline void disable_acpi(void) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_IA64_GENERIC
@@ -128,8 +139,11 @@ static inline const char *acpi_get_sysname (void)
 # elif defined (CONFIG_IA64_DIG)
 	return "dig";
 <<<<<<< HEAD
+<<<<<<< HEAD
 # elif defined (CONFIG_IA64_XEN_GUEST)
 	return "xen";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # elif defined(CONFIG_IA64_DIG_VTD)

@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
@@ -37,6 +38,8 @@
 #define TPS65090_REG_CG_STATUS1	0x0a
 #define TPS65090_REG_CG_STATUS2	0x0b
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/err.h>
 #include <linux/freezer.h>
@@ -51,6 +54,9 @@
 #include <linux/slab.h>
 
 #include <linux/mfd/tps65090.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define TPS65090_CHARGER_ENABLE	BIT(0)
@@ -58,6 +64,11 @@
 #define TPS65090_NOITERM	BIT(5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define POLL_INTERVAL		(HZ * 2)	/* Used when no irq */
+
+>>>>>>> v3.18
 =======
 #define POLL_INTERVAL		(HZ * 2)	/* Used when no irq */
 
@@ -68,6 +79,11 @@ struct tps65090_charger {
 	int	prev_ac_online;
 	int	irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct task_struct	*poll_task;
+	bool			passive_mode;
+>>>>>>> v3.18
 =======
 	struct task_struct	*poll_task;
 	bool			passive_mode;
@@ -85,6 +101,12 @@ static int tps65090_low_chrg_current(struct tps65090_charger *charger)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (charger->passive_mode)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (charger->passive_mode)
 		return 0;
@@ -101,8 +123,12 @@ static int tps65090_low_chrg_current(struct tps65090_charger *charger)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tps65090_enable_charging(struct tps65090_charger *charger,
 	uint8_t enable)
+=======
+static int tps65090_enable_charging(struct tps65090_charger *charger)
+>>>>>>> v3.18
 =======
 static int tps65090_enable_charging(struct tps65090_charger *charger)
 >>>>>>> v3.18
@@ -111,6 +137,12 @@ static int tps65090_enable_charging(struct tps65090_charger *charger)
 	uint8_t ctrl0 = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (charger->passive_mode)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (charger->passive_mode)
 		return 0;
@@ -128,7 +160,11 @@ static int tps65090_enable_charging(struct tps65090_charger *charger)
 				(ctrl0 | TPS65090_CHARGER_ENABLE));
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(charger->dev, "%s(): error reading in register 0x%x\n",
+=======
+		dev_err(charger->dev, "%s(): error writing in register 0x%x\n",
+>>>>>>> v3.18
 =======
 		dev_err(charger->dev, "%s(): error writing in register 0x%x\n",
 >>>>>>> v3.18
@@ -141,15 +177,21 @@ static int tps65090_enable_charging(struct tps65090_charger *charger)
 static int tps65090_config_charger(struct tps65090_charger *charger)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 	uint8_t intrmask = 0;
 	int ret;
 
 	if (charger->passive_mode)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (charger->pdata->enable_low_current_chrg) {
 		ret = tps65090_low_chrg_current(charger);
@@ -161,7 +203,10 @@ static int tps65090_config_charger(struct tps65090_charger *charger)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Enable the VACG interrupt for AC power detect */
 	ret = tps65090_read(charger->dev->parent, TPS65090_REG_INTR_MASK,
 			    &intrmask);
@@ -179,6 +224,9 @@ static int tps65090_config_charger(struct tps65090_charger *charger)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -223,7 +271,11 @@ static irqreturn_t tps65090_charger_isr(int irq, void *dev_id)
 
 	if (intrsts & TPS65090_VACG) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = tps65090_enable_charging(charger, 1);
+=======
+		ret = tps65090_enable_charging(charger);
+>>>>>>> v3.18
 =======
 		ret = tps65090_enable_charging(charger);
 >>>>>>> v3.18
@@ -235,7 +287,10 @@ static irqreturn_t tps65090_charger_isr(int irq, void *dev_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Clear interrupts. */
 	if (!charger->passive_mode) {
 		ret = tps65090_write(charger->dev->parent,
@@ -247,6 +302,9 @@ static irqreturn_t tps65090_charger_isr(int irq, void *dev_id)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (charger->prev_ac_online != charger->ac_online)
 		power_supply_changed(&charger->ac);
@@ -255,10 +313,13 @@ static irqreturn_t tps65090_charger_isr(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_OF)
 
 #include <linux/of_device.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct tps65090_platform_data *
@@ -283,6 +344,7 @@ static struct tps65090_platform_data *
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static struct tps65090_platform_data *
 		tps65090_parse_dt_charger_data(struct platform_device *pdev)
@@ -291,6 +353,8 @@ static struct tps65090_platform_data *
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 static int tps65090_charger_poll_task(void *data)
 {
@@ -303,6 +367,9 @@ static int tps65090_charger_poll_task(void *data)
 	}
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int tps65090_charger_probe(struct platform_device *pdev)
@@ -316,7 +383,11 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 	pdata = dev_get_platdata(pdev->dev.parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata && pdev->dev.of_node)
+=======
+	if (IS_ENABLED(CONFIG_OF) && !pdata && pdev->dev.of_node)
+>>>>>>> v3.18
 =======
 	if (IS_ENABLED(CONFIG_OF) && !pdata && pdev->dev.of_node)
 >>>>>>> v3.18
@@ -335,7 +406,11 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, cdata);
+=======
+	platform_set_drvdata(pdev, cdata);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, cdata);
 >>>>>>> v3.18
@@ -351,6 +426,10 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 	cdata->ac.supplied_to		= pdata->supplied_to;
 	cdata->ac.num_supplicants	= pdata->num_supplicants;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cdata->ac.of_node		= pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	cdata->ac.of_node		= pdev->dev.of_node;
 >>>>>>> v3.18
@@ -362,6 +441,7 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 	}
 
 	irq = platform_get_irq(pdev, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (irq <= 0) {
 		dev_warn(&pdev->dev, "Unable to get charger irq = %d\n", irq);
@@ -384,6 +464,8 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "charger config failed, err %d\n", ret);
 		goto fail_free_irq;
 =======
+=======
+>>>>>>> v3.18
 	if (irq < 0)
 		irq = -ENXIO;
 	cdata->irq = irq;
@@ -392,6 +474,9 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(&pdev->dev, "charger config failed, err %d\n", ret);
 		goto fail_unregister_supply;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -402,6 +487,7 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 		dev_err(cdata->dev, "%s(): Error in reading reg 0x%x", __func__,
 			TPS65090_REG_CG_STATUS1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_free_irq;
 	}
 
@@ -411,6 +497,8 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 			dev_err(cdata->dev, "error enabling charger\n");
 			goto fail_free_irq;
 =======
+=======
+>>>>>>> v3.18
 		goto fail_unregister_supply;
 	}
 
@@ -419,6 +507,9 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 		if (ret < 0) {
 			dev_err(cdata->dev, "error enabling charger\n");
 			goto fail_unregister_supply;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		cdata->ac_online = 1;
@@ -426,11 +517,14 @@ static int tps65090_charger_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 fail_free_irq:
 	devm_free_irq(cdata->dev, irq, cdata);
 =======
+=======
+>>>>>>> v3.18
 	if (irq != -ENXIO) {
 		ret = devm_request_threaded_irq(&pdev->dev, irq, NULL,
 			tps65090_charger_isr, 0, "tps65090-charger", cdata);
@@ -454,6 +548,9 @@ fail_free_irq:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fail_unregister_supply:
 	power_supply_unregister(&cdata->ac);
@@ -464,14 +561,20 @@ fail_unregister_supply:
 static int tps65090_charger_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps65090_charger *cdata = dev_get_drvdata(&pdev->dev);
 
 	devm_free_irq(cdata->dev, cdata->irq, cdata);
 =======
+=======
+>>>>>>> v3.18
 	struct tps65090_charger *cdata = platform_get_drvdata(pdev);
 
 	if (cdata->irq == -ENXIO)
 		kthread_stop(cdata->poll_task);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	power_supply_unregister(&cdata->ac);
 

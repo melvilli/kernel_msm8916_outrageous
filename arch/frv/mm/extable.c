@@ -7,8 +7,11 @@
 #include <asm/uaccess.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct exception_table_entry __attribute__((aligned(8))) __start___ex_table[];
 extern const struct exception_table_entry __attribute__((aligned(8))) __stop___ex_table[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern const void __memset_end, __memset_user_error_lr, __memset_user_error_handler;

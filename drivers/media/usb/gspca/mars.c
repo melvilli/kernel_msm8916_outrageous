@@ -255,7 +255,12 @@ static int sd_start(struct gspca_dev *gspca_dev)
 
 	/* create the JPEG header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jpeg_define(sd->jpeg_hdr, gspca_dev->height, gspca_dev->width,
+=======
+	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
+			gspca_dev->pixfmt.width,
+>>>>>>> v3.18
 =======
 	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
 			gspca_dev->pixfmt.width,
@@ -276,8 +281,13 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	data[1] = 0x0c | 0x01;	/* reg 0 */
 	data[2] = 0x01;		/* reg 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data[3] = gspca_dev->width / 8;		/* h_size , reg 2 */
 	data[4] = gspca_dev->height / 8;	/* v_size , reg 3 */
+=======
+	data[3] = gspca_dev->pixfmt.width / 8;	/* h_size , reg 2 */
+	data[4] = gspca_dev->pixfmt.height / 8;	/* v_size , reg 3 */
+>>>>>>> v3.18
 =======
 	data[3] = gspca_dev->pixfmt.width / 8;	/* h_size , reg 2 */
 	data[4] = gspca_dev->pixfmt.height / 8;	/* v_size , reg 3 */

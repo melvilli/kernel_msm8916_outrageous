@@ -24,7 +24,10 @@
 #include <pcmcia/k_compat.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -61,6 +64,7 @@ static void airo_release(struct pcmcia_device *link);
 static void airo_detach(struct pcmcia_device *p_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct local_info_t {
 	struct net_device *eth_dev;
 } local_info_t;
@@ -69,6 +73,8 @@ static int airo_probe(struct pcmcia_device *p_dev)
 {
 	local_info_t *local;
 =======
+=======
+>>>>>>> v3.18
 struct local_info {
 	struct net_device *eth_dev;
 };
@@ -76,13 +82,20 @@ struct local_info {
 static int airo_probe(struct pcmcia_device *p_dev)
 {
 	struct local_info *local;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&p_dev->dev, "airo_attach()\n");
 
 	/* Allocate space for private device-specific data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = kzalloc(sizeof(local_info_t), GFP_KERNEL);
+=======
+	local = kzalloc(sizeof(*local), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	local = kzalloc(sizeof(*local), GFP_KERNEL);
 >>>>>>> v3.18
@@ -101,16 +114,22 @@ static void airo_detach(struct pcmcia_device *link)
 	airo_release(link);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((local_info_t *)link->priv)->eth_dev) {
 		stop_airo_card(((local_info_t *)link->priv)->eth_dev, 0);
 	}
 	((local_info_t *)link->priv)->eth_dev = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (((struct local_info *)link->priv)->eth_dev) {
 		stop_airo_card(((struct local_info *)link->priv)->eth_dev,
 			       0);
 	}
 	((struct local_info *)link->priv)->eth_dev = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(link->priv);
@@ -128,7 +147,11 @@ static int airo_cs_config_check(struct pcmcia_device *p_dev, void *priv_data)
 static int airo_config(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_info_t *dev;
+=======
+	struct local_info *dev;
+>>>>>>> v3.18
 =======
 	struct local_info *dev;
 >>>>>>> v3.18
@@ -152,15 +175,21 @@ static int airo_config(struct pcmcia_device *link)
 	if (ret)
 		goto failed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	((local_info_t *)link->priv)->eth_dev =
 		init_airo_card(link->irq,
 			       link->resource[0]->start, 1, &link->dev);
 	if (!((local_info_t *)link->priv)->eth_dev)
 =======
+=======
+>>>>>>> v3.18
 	((struct local_info *)link->priv)->eth_dev =
 		init_airo_card(link->irq,
 			       link->resource[0]->start, 1, &link->dev);
 	if (!((struct local_info *)link->priv)->eth_dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto failed;
 
@@ -180,7 +209,11 @@ static void airo_release(struct pcmcia_device *link)
 static int airo_suspend(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_info_t *local = link->priv;
+=======
+	struct local_info *local = link->priv;
+>>>>>>> v3.18
 =======
 	struct local_info *local = link->priv;
 >>>>>>> v3.18
@@ -193,7 +226,11 @@ static int airo_suspend(struct pcmcia_device *link)
 static int airo_resume(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_info_t *local = link->priv;
+=======
+	struct local_info *local = link->priv;
+>>>>>>> v3.18
 =======
 	struct local_info *local = link->priv;
 >>>>>>> v3.18

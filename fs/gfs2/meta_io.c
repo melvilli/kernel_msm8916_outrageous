@@ -98,6 +98,7 @@ const struct address_space_operations gfs2_meta_aops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * gfs2_meta_sync - Sync all buffers associated with a glock
  * @gl: The glock
@@ -116,10 +117,15 @@ void gfs2_meta_sync(struct gfs2_glock *gl)
 		gfs2_io_error(gl->gl_sbd);
 }
 =======
+=======
+>>>>>>> v3.18
 const struct address_space_operations gfs2_rgrp_aops = {
 	.writepage = gfs2_aspace_writepage,
 	.releasepage = gfs2_releasepage,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -142,6 +148,12 @@ struct buffer_head *gfs2_getbuf(struct gfs2_glock *gl, u64 blkno, int create)
 	unsigned int bufnum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mapping == NULL)
+		mapping = &sdp->sd_aspace;
+
+>>>>>>> v3.18
 =======
 	if (mapping == NULL)
 		mapping = &sdp->sd_aspace;
@@ -160,7 +172,12 @@ struct buffer_head *gfs2_getbuf(struct gfs2_glock *gl, u64 blkno, int create)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		page = find_lock_page(mapping, index);
+=======
+		page = find_get_page_flags(mapping, index,
+						FGP_LOCK|FGP_ACCESSED);
+>>>>>>> v3.18
 =======
 		page = find_get_page_flags(mapping, index,
 						FGP_LOCK|FGP_ACCESSED);
@@ -182,7 +199,10 @@ struct buffer_head *gfs2_getbuf(struct gfs2_glock *gl, u64 blkno, int create)
 
 	unlock_page(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mark_page_accessed(page);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	page_cache_release(page);
@@ -298,6 +318,10 @@ void gfs2_remove_from_journal(struct buffer_head *bh, struct gfs2_trans *tr, int
 	struct gfs2_sbd *sdp = gfs2_mapping2sbd(mapping);
 	struct gfs2_bufdata *bd = bh->b_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int was_pinned = 0;
+>>>>>>> v3.18
 =======
 	int was_pinned = 0;
 >>>>>>> v3.18
@@ -306,6 +330,7 @@ void gfs2_remove_from_journal(struct buffer_head *bh, struct gfs2_trans *tr, int
 		trace_gfs2_pin(bd, 0);
 		atomic_dec(&sdp->sd_log_pinned);
 		list_del_init(&bd->bd_list);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (meta) {
 			gfs2_assert_warn(sdp, sdp->sd_log_num_buf);
@@ -318,12 +343,17 @@ void gfs2_remove_from_journal(struct buffer_head *bh, struct gfs2_trans *tr, int
 		}
 		tr->tr_touched = 1;
 =======
+=======
+>>>>>>> v3.18
 		if (meta)
 			tr->tr_num_buf_rm++;
 		else
 			tr->tr_num_databuf_rm++;
 		tr->tr_touched = 1;
 		was_pinned = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		brelse(bh);
 	}
@@ -331,16 +361,22 @@ void gfs2_remove_from_journal(struct buffer_head *bh, struct gfs2_trans *tr, int
 		spin_lock(&sdp->sd_ail_lock);
 		if (bd->bd_tr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gfs2_remove_from_ail(bd);
 			bh->b_private = NULL;
 			bd->bd_bh = NULL;
 			bd->bd_blkno = bh->b_blocknr;
 			gfs2_trans_add_revoke(sdp, bd);
 =======
+=======
+>>>>>>> v3.18
 			gfs2_trans_add_revoke(sdp, bd);
 		} else if (was_pinned) {
 			bh->b_private = NULL;
 			kmem_cache_free(gfs2_bufdata_cachep, bd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		spin_unlock(&sdp->sd_ail_lock);

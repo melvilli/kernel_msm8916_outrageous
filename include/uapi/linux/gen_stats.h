@@ -10,6 +10,10 @@ enum {
 	TCA_STATS_QUEUE,
 	TCA_STATS_APP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TCA_STATS_RATE_EST64,
+>>>>>>> v3.18
 =======
 	TCA_STATS_RATE_EST64,
 >>>>>>> v3.18
@@ -43,7 +47,10 @@ struct gnet_stats_rate_est {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct gnet_stats_rate_est64 - rate estimator
  * @bps: current byte rate
  * @pps: current packet rate
@@ -54,6 +61,9 @@ struct gnet_stats_rate_est64 {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct gnet_stats_queue - queuing statistics
  * @qlen: queue length

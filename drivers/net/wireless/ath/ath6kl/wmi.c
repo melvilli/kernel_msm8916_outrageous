@@ -60,7 +60,10 @@ static const s32 wmi_rate_tbl[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const s32 wmi_rate_tbl_mcs15[][2] = {
 	/* {W/O SGI, with SGI} */
 	{1000, 1000},
@@ -110,6 +113,9 @@ static const s32 wmi_rate_tbl_mcs15[][2] = {
 	{0, 0}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 802.1d to AC mapping. Refer pg 57 of WMM-test-plan-v1.2 */
 static const u8 up_to_ac[] = {
@@ -342,8 +348,14 @@ int ath6kl_wmi_implicit_create_pstream(struct wmi *wmi, u8 if_idx,
 					sizeof(struct ath6kl_llc_snap_hdr),
 					layer2_priority);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			usr_pri = layer2_priority & 0x7;
+=======
+		} else {
+			usr_pri = layer2_priority & 0x7;
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			usr_pri = layer2_priority & 0x7;
@@ -418,8 +430,14 @@ int ath6kl_wmi_dot11_hdr_remove(struct wmi *wmi, struct sk_buff *skb)
 				   sizeof(u32));
 		skb_pull(skb, hdr_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (sub_type == cpu_to_le16(IEEE80211_STYPE_DATA))
 		skb_pull(skb, sizeof(struct ieee80211_hdr_3addr));
+=======
+	} else if (sub_type == cpu_to_le16(IEEE80211_STYPE_DATA)) {
+		skb_pull(skb, sizeof(struct ieee80211_hdr_3addr));
+	}
+>>>>>>> v3.18
 =======
 	} else if (sub_type == cpu_to_le16(IEEE80211_STYPE_DATA)) {
 		skb_pull(skb, sizeof(struct ieee80211_hdr_3addr));
@@ -633,8 +651,12 @@ static int ath6kl_wmi_rx_probe_req_event_rx(struct wmi *wmi, u8 *datap, int len,
 
 	if (vif->probe_req_report || vif->nw_type == AP_NETWORK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg80211_rx_mgmt(&vif->wdev, freq, 0,
 				 ev->data, dlen, GFP_ATOMIC);
+=======
+		cfg80211_rx_mgmt(&vif->wdev, freq, 0, ev->data, dlen, 0);
+>>>>>>> v3.18
 =======
 		cfg80211_rx_mgmt(&vif->wdev, freq, 0, ev->data, dlen, 0);
 >>>>>>> v3.18
@@ -677,8 +699,12 @@ static int ath6kl_wmi_rx_action_event_rx(struct wmi *wmi, u8 *datap, int len,
 	}
 	ath6kl_dbg(ATH6KL_DBG_WMI, "rx_action: len=%u freq=%u\n", dlen, freq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg80211_rx_mgmt(&vif->wdev, freq, 0,
 			 ev->data, dlen, GFP_ATOMIC);
+=======
+	cfg80211_rx_mgmt(&vif->wdev, freq, 0, ev->data, dlen, 0);
+>>>>>>> v3.18
 =======
 	cfg80211_rx_mgmt(&vif->wdev, freq, 0, ev->data, dlen, 0);
 >>>>>>> v3.18
@@ -988,7 +1014,11 @@ ath6kl_get_regpair(u16 regdmn)
 
 	for (i = 0; i < ARRAY_SIZE(regDomainPairs); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (regDomainPairs[i].regDmnEnum == regdmn)
+=======
+		if (regDomainPairs[i].reg_domain == regdmn)
+>>>>>>> v3.18
 =======
 		if (regDomainPairs[i].reg_domain == regdmn)
 >>>>>>> v3.18
@@ -1014,7 +1044,10 @@ ath6kl_regd_find_country_by_rd(u16 regdmn)
 static void ath6kl_wmi_regdomain_event(struct wmi *wmi, u8 *datap, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath6kl_wmi_regdomain *ev;
@@ -1027,10 +1060,16 @@ static void ath6kl_wmi_regdomain_event(struct wmi *wmi, u8 *datap, int len)
 	reg_code = le32_to_cpu(ev->reg_code);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((reg_code >> ATH6KL_COUNTRY_RD_SHIFT) & COUNTRY_ERD_FLAG)
 		country = ath6kl_regd_find_country((u16) reg_code);
 	else if (!(((u16) reg_code & WORLD_SKU_MASK) == WORLD_SKU_PREFIX)) {
 
+=======
+	if ((reg_code >> ATH6KL_COUNTRY_RD_SHIFT) & COUNTRY_ERD_FLAG) {
+		country = ath6kl_regd_find_country((u16) reg_code);
+	} else if (!(((u16) reg_code & WORLD_SKU_MASK) == WORLD_SKU_PREFIX)) {
+>>>>>>> v3.18
 =======
 	if ((reg_code >> ATH6KL_COUNTRY_RD_SHIFT) & COUNTRY_ERD_FLAG) {
 		country = ath6kl_regd_find_country((u16) reg_code);
@@ -1041,7 +1080,11 @@ static void ath6kl_wmi_regdomain_event(struct wmi *wmi, u8 *datap, int len)
 		if (regpair)
 			ath6kl_dbg(ATH6KL_DBG_WMI, "Regpair used: 0x%0x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   regpair->regDmnEnum);
+=======
+				   regpair->reg_domain);
+>>>>>>> v3.18
 =======
 				   regpair->reg_domain);
 >>>>>>> v3.18
@@ -1135,7 +1178,10 @@ static int ath6kl_wmi_bssinfo_event_rx(struct wmi *wmi, u8 *datap, int len,
 	struct ieee80211_channel *channel;
 	struct ath6kl *ar = wmi->parent_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_mgmt *mgmt;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cfg80211_bss *bss;
@@ -1184,6 +1230,7 @@ static int ath6kl_wmi_bssinfo_event_rx(struct wmi *wmi, u8 *datap, int len,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * In theory, use of cfg80211_inform_bss() would be more natural here
 	 * since we do not have the full frame. However, at least for now,
@@ -1218,6 +1265,8 @@ static int ath6kl_wmi_bssinfo_event_rx(struct wmi *wmi, u8 *datap, int len,
 					GFP_ATOMIC);
 	kfree(mgmt);
 =======
+=======
+>>>>>>> v3.18
 	bss = cfg80211_inform_bss(ar->wiphy, channel,
 				  bih->frame_type == BEACON_FTYPE ?
 					CFG80211_BSS_FTYPE_BEACON :
@@ -1227,6 +1276,9 @@ static int ath6kl_wmi_bssinfo_event_rx(struct wmi *wmi, u8 *datap, int len,
 				  get_unaligned_le16(((__le16 *)buf) + 4),
 				  buf + 8 + 2 + 2, len - 8 - 2 - 2,
 				  (bih->snr - 95) * 100, GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (bss == NULL)
 		return -ENOMEM;
@@ -1605,7 +1657,10 @@ static int ath6kl_wmi_cac_event_rx(struct wmi *wmi, u8 *datap, int len,
 	if ((reply->cac_indication == CAC_INDICATION_ADMISSION_RESP) &&
 	    (reply->status_code != IEEE80211_TSPEC_STATUS_ADMISS_ACCEPTED)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ts = (struct ieee80211_tspec_ie *) &(reply->tspec_suggestion);
@@ -1639,7 +1694,10 @@ static int ath6kl_wmi_cac_event_rx(struct wmi *wmi, u8 *datap, int len,
 	 */
 	else if (reply->cac_indication == CAC_INDICATION_DELETE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ts = (struct ieee80211_tspec_ie *) &(reply->tspec_suggestion);
@@ -2434,7 +2492,11 @@ int ath6kl_wmi_addkey_cmd(struct wmi *wmi, u8 if_idx, u8 key_index,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ath6kl_wmi_add_krk_cmd(struct wmi *wmi, u8 if_idx, u8 *krk)
+=======
+int ath6kl_wmi_add_krk_cmd(struct wmi *wmi, u8 if_idx, const u8 *krk)
+>>>>>>> v3.18
 =======
 int ath6kl_wmi_add_krk_cmd(struct wmi *wmi, u8 if_idx, const u8 *krk)
 >>>>>>> v3.18
@@ -2595,7 +2657,10 @@ static int ath6kl_wmi_sync_point(struct wmi *wmi, u8 if_idx)
 
 	for (index = 0; index < num_pri_streams; index++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (WARN_ON(!data_sync_bufs[index].skb))
@@ -2823,7 +2888,10 @@ static void ath6kl_wmi_relinquish_implicit_pstream_credits(struct wmi *wmi)
 	for (i = 0; i < WMM_NUM_AC; i++) {
 		if (stream_exist & (1 << i)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -2876,9 +2944,15 @@ static int ath6kl_set_bitrate_mask64(struct wmi *wmi, u8 if_idx,
 
 		/* copy mcs rate mask */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcsrate = mask->control[band].mcs[1];
 		mcsrate <<= 8;
 		mcsrate |= mask->control[band].mcs[0];
+=======
+		mcsrate = mask->control[band].ht_mcs[1];
+		mcsrate <<= 8;
+		mcsrate |= mask->control[band].ht_mcs[0];
+>>>>>>> v3.18
 =======
 		mcsrate = mask->control[band].ht_mcs[1];
 		mcsrate <<= 8;
@@ -2934,7 +3008,11 @@ static int ath6kl_set_bitrate_mask32(struct wmi *wmi, u8 if_idx,
 
 		/* copy mcs rate mask */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcsrate = mask->control[band].mcs[0];
+=======
+		mcsrate = mask->control[band].ht_mcs[0];
+>>>>>>> v3.18
 =======
 		mcsrate = mask->control[band].ht_mcs[0];
 >>>>>>> v3.18
@@ -2974,7 +3052,12 @@ int ath6kl_wmi_set_bitrate_mask(struct wmi *wmi, u8 if_idx,
 	struct ath6kl *ar = wmi->parent_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ar->hw.flags & ATH6KL_HW_64BIT_RATES)
+=======
+	if (test_bit(ATH6KL_FW_CAPABILITY_64BIT_RATES,
+		     ar->fw_capabilities))
+>>>>>>> v3.18
 =======
 	if (test_bit(ATH6KL_FW_CAPABILITY_64BIT_RATES,
 		     ar->fw_capabilities))
@@ -3007,8 +3090,14 @@ int ath6kl_wmi_set_host_sleep_mode_cmd(struct wmi *wmi, u8 if_idx,
 		ath6kl_wmi_relinquish_implicit_pstream_credits(wmi);
 		cmd->asleep = cpu_to_le32(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		cmd->awake = cpu_to_le32(1);
+=======
+	} else {
+		cmd->awake = cpu_to_le32(1);
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		cmd->awake = cpu_to_le32(1);
@@ -3425,15 +3514,21 @@ int ath6kl_wmi_set_regdomain_cmd(struct wmi *wmi, const char *alpha2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 ath6kl_wmi_get_rate(s8 rate_index)
 {
 	u8 sgi = 0;
 =======
+=======
+>>>>>>> v3.18
 s32 ath6kl_wmi_get_rate(struct wmi *wmi, s8 rate_index)
 {
 	struct ath6kl *ar = wmi->parent_dev;
 	u8 sgi = 0;
 	s32 ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rate_index == RATE_AUTO)
@@ -3446,11 +3541,14 @@ s32 ath6kl_wmi_get_rate(struct wmi *wmi, s8 rate_index)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(rate_index > RATE_MCS_7_40))
 		rate_index = RATE_MCS_7_40;
 
 	return wmi_rate_tbl[(u32) rate_index][sgi];
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(ATH6KL_FW_CAPABILITY_RATETABLE_MCS15,
 		     ar->fw_capabilities)) {
 		if (WARN_ON(rate_index >= ARRAY_SIZE(wmi_rate_tbl_mcs15)))
@@ -3465,6 +3563,9 @@ s32 ath6kl_wmi_get_rate(struct wmi *wmi, s8 rate_index)
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

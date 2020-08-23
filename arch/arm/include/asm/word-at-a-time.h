@@ -49,11 +49,14 @@ static inline unsigned long find_zero(unsigned long mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DCACHE_WORD_ACCESS
 
 #define zero_bytemask(mask) (mask)
 
 =======
+=======
+>>>>>>> v3.18
 #define zero_bytemask(mask) (mask)
 
 #else	/* __ARMEB__ */
@@ -62,6 +65,9 @@ static inline unsigned long find_zero(unsigned long mask)
 
 #ifdef CONFIG_DCACHE_WORD_ACCESS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Load an unaligned word from kernel space.
@@ -85,13 +91,19 @@ static inline unsigned long load_unaligned_zeropad(const void *addr)
 	"	ldr	%0, [%2]\n"
 	"	lsl	%1, %1, #0x3\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	lsr	%0, %0, %1\n"
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ARMEB__
 	"	lsr	%0, %0, %1\n"
 #else
 	"	lsl	%0, %0, %1\n"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"	b	2b\n"
 	"	.popsection\n"
@@ -106,6 +118,7 @@ static inline unsigned long load_unaligned_zeropad(const void *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif	/* DCACHE_WORD_ACCESS */
 
@@ -113,6 +126,9 @@ static inline unsigned long load_unaligned_zeropad(const void *addr)
 #include <asm-generic/word-at-a-time.h>
 #endif
 
+=======
+#endif	/* DCACHE_WORD_ACCESS */
+>>>>>>> v3.18
 =======
 #endif	/* DCACHE_WORD_ACCESS */
 >>>>>>> v3.18

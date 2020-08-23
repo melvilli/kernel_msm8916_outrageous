@@ -2,6 +2,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 Function:				InterfaceIdleModeWakeup
 
 Description:			This is the hardware specific Function for waking up HW device from Idle mode.
@@ -29,6 +30,8 @@ Input parameters:		IN struct bcm_mini_adapter * Adapter   - Miniport Adapter Con
 Return:				BCM_STATUS_SUCCESS - If Idle mode response related HW configuration was successful.
 						Other           - If an error occurred.
 =======
+=======
+>>>>>>> v3.18
 Function:	InterfaceIdleModeWakeup
 
 Description:	This is the hardware specific Function for
@@ -60,6 +63,9 @@ Input parameters: IN struct bcm_mini_adapter * Adapter
 Return:		BCM_STATUS_SUCCESS - If Idle mode response related
 				     HW configuration was successful.
 		Other              - If an error occurred.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 
@@ -71,7 +77,12 @@ Set time value by writing at bfc02f98 7d0
 
 checking the Ack timer expire on kannon by running command
 <<<<<<< HEAD
+<<<<<<< HEAD
 d qcslog .. if it shows e means host has not send response to f/w with in 200 ms. Response should be
+=======
+d qcslog .. if it shows e means host has not send response
+to f/w with in 200 ms. Response should be
+>>>>>>> v3.18
 =======
 d qcslog .. if it shows e means host has not send response
 to f/w with in 200 ms. Response should be
@@ -82,7 +93,12 @@ send to f/w with in 200 ms after the Idle/Shutdown req issued
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter, unsigned int* puiBuffer)
+=======
+int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
+			unsigned int *puiBuffer)
+>>>>>>> v3.18
 =======
 int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 			unsigned int *puiBuffer)
@@ -92,6 +108,7 @@ int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 	unsigned int	uiRegRead = 0;
 	int bytes;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, IDLE_MODE, DBG_LVL_ALL,"SubType of Message :0x%X", ntohl(*puiBuffer));
 
@@ -168,6 +185,8 @@ int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 					status = bytes;
 					BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, IDLE_MODE, DBG_LVL_ALL, "rdm failed while Reading HPM_CONFIG_LDO145 Reg 0\n");
 =======
+=======
+>>>>>>> v3.18
 	if (ntohl(*puiBuffer) == GO_TO_IDLE_MODE_PAYLOAD) {
 		if (ntohl(*(puiBuffer+1)) == 0) {
 
@@ -227,6 +246,9 @@ int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 					&uiRegRead, sizeof(uiRegRead));
 				if (bytes < 0) {
 					status = bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					return status;
 				}
@@ -234,6 +256,7 @@ int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 
 				uiRegRead |= (1<<17);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				status = wrmalt (Adapter,HPM_CONFIG_MSW, &uiRegRead, sizeof(uiRegRead));
 				if(status)
@@ -251,6 +274,8 @@ int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 		BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, IDLE_MODE, DBG_LVL_ALL, "OverRiding Service Flow Params");
 		OverrideServiceFlowParams(Adapter,puiBuffer);
 =======
+=======
+>>>>>>> v3.18
 				status = wrmalt(Adapter, HPM_CONFIG_MSW,
 					&uiRegRead, sizeof(uiRegRead));
 				if (status)
@@ -260,11 +285,15 @@ int InterfaceIdleModeRespond(struct bcm_mini_adapter *Adapter,
 		}
 	} else if (ntohl(*puiBuffer) == IDLE_MODE_SF_UPDATE_MSG) {
 		OverrideServiceFlowParams(Adapter, puiBuffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return status;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter, unsigned int Pattern)
 {
@@ -312,6 +341,8 @@ static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter, unsigned int
 	else if(Adapter->ulPowerSaveMode != DEVICE_POWERSAVE_MODE_AS_PROTOCOL_IDLE_MODE)
 	{
 =======
+=======
+>>>>>>> v3.18
 static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter,
 				unsigned int Pattern)
 {
@@ -353,6 +384,9 @@ static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter,
 			return status;
 	} else if (Adapter->ulPowerSaveMode !=
 			DEVICE_POWERSAVE_MODE_AS_PROTOCOL_IDLE_MODE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Get a Interrupt Out URB and send 8 Bytes Down
@@ -360,7 +394,11 @@ static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter,
 		 * Not using Asynchronous Mechanism.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = usb_interrupt_msg (psInterfaceAdapter->udev,
+=======
+		status = usb_interrupt_msg(psInterfaceAdapter->udev,
+>>>>>>> v3.18
 =======
 		status = usb_interrupt_msg(psInterfaceAdapter->udev,
 >>>>>>> v3.18
@@ -370,6 +408,7 @@ static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter,
 			8,
 			&lenwritten,
 			5000);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if(status)
 		{
@@ -411,6 +450,8 @@ static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter,
 			return status;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (status)
 			return status;
 
@@ -442,12 +483,16 @@ static int InterfaceAbortIdlemode(struct bcm_mini_adapter *Adapter,
 				&Pattern, sizeof(status));
 		if (status)
 			return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return status;
 }
 int InterfaceIdleModeWakeup(struct bcm_mini_adapter *Adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ULONG	Status = 0;
 	if(Adapter->bTriedToWakeUpFromlowPowerMode)
@@ -458,18 +503,27 @@ int InterfaceIdleModeWakeup(struct bcm_mini_adapter *Adapter)
 	{
 		BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, IDLE_MODE, DBG_LVL_ALL,"Writing Low Power Mode Abort pattern to the Device\n");
 =======
+=======
+>>>>>>> v3.18
 	if (Adapter->bTriedToWakeUpFromlowPowerMode) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS,
 		IDLE_MODE, DBG_LVL_ALL,
 		"Wake up already attempted.. ignoring\n");
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		Adapter->bTriedToWakeUpFromlowPowerMode = TRUE;
 		InterfaceAbortIdlemode(Adapter, Adapter->usIdleModePattern);
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return Status;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -481,6 +535,7 @@ void InterfaceHandleShutdownModeWakeup(struct bcm_mini_adapter *Adapter)
 	INT Status = 0;
 	int bytes;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if(Adapter->ulPowerSaveMode == DEVICE_POWERSAVE_MODE_AS_MANUAL_CLOCK_GATING)
 	{
@@ -510,6 +565,8 @@ void InterfaceHandleShutdownModeWakeup(struct bcm_mini_adapter *Adapter)
 			Status = bytes;
 			BCM_DEBUG_PRINT(Adapter,DBG_TYPE_PRINTK, 0, 0,"RDM of DEVICE_INT_OUT_EP_REG1 failed with Err :%d", Status);
 =======
+=======
+>>>>>>> v3.18
 	if (Adapter->ulPowerSaveMode ==
 		DEVICE_POWERSAVE_MODE_AS_MANUAL_CLOCK_GATING) {
 		/* clear idlemode interrupt. */
@@ -537,6 +594,9 @@ void InterfaceHandleShutdownModeWakeup(struct bcm_mini_adapter *Adapter)
 			&uiRegVal, sizeof(uiRegVal));
 		if (bytes < 0) {
 			Status = bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 		}

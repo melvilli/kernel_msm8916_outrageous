@@ -2,7 +2,11 @@
    md.h : kernel internal structure of the Linux MD driver
           Copyright (C) 1996-98 Ingo Molnar, Gadi Oxman
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -11,15 +15,21 @@
    the Free Software Foundation; either version 2, or (at your option)
    any later version.
 <<<<<<< HEAD
+<<<<<<< HEAD
    
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
 =======
+=======
+>>>>>>> v3.18
 
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 
@@ -68,7 +78,11 @@ struct md_rdev {
 	sector_t	data_offset;	/* start of data in array */
 	sector_t	new_data_offset;/* only relevant while reshaping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t 	sb_start;	/* offset of the super block (in 512byte sectors) */
+=======
+	sector_t	sb_start;	/* offset of the super block (in 512byte sectors) */
+>>>>>>> v3.18
 =======
 	sector_t	sb_start;	/* offset of the super block (in 512byte sectors) */
 >>>>>>> v3.18
@@ -122,7 +136,11 @@ struct md_rdev {
 	struct work_struct del_work;	/* used for delayed sysfs removal */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *sysfs_state; /* handle for 'state'
+=======
+	struct kernfs_node *sysfs_state; /* handle for 'state'
+>>>>>>> v3.18
 =======
 	struct kernfs_node *sysfs_state; /* handle for 'state'
 >>>>>>> v3.18
@@ -227,7 +245,11 @@ struct mddev {
 	dev_t				unit;
 	int				md_minor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head 		disks;
+=======
+	struct list_head		disks;
+>>>>>>> v3.18
 =======
 	struct list_head		disks;
 >>>>>>> v3.18
@@ -236,13 +258,19 @@ struct mddev {
 #define MD_CHANGE_CLEAN 1	/* transition to or from 'clean' */
 #define MD_CHANGE_PENDING 2	/* switch from 'clean' to 'active' in progress */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MD_ARRAY_FIRST_USE 3    /* First use of array, needs initialization */
 =======
+=======
+>>>>>>> v3.18
 #define MD_UPDATE_SB_FLAGS (1 | 2 | 4)	/* If these are set, md_update_sb needed */
 #define MD_ARRAY_FIRST_USE 3    /* First use of array, needs initialization */
 #define MD_STILL_CLOSED	4	/* If set, then array has not been opened since
 				 * md_ioctl checked on it.
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int				suspended;
@@ -253,7 +281,11 @@ struct mddev {
 						       * takeover/stop are not safe
 						       */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				ready; /* See when safe to pass 
+=======
+	int				ready; /* See when safe to pass
+>>>>>>> v3.18
 =======
 	int				ready; /* See when safe to pass
 >>>>>>> v3.18
@@ -271,7 +303,11 @@ struct mddev {
 					patch_version;
 	int				persistent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int 				external;	/* metadata is
+=======
+	int				external;	/* metadata is
+>>>>>>> v3.18
 =======
 	int				external;	/* metadata is
 >>>>>>> v3.18
@@ -284,7 +320,11 @@ struct mddev {
 	int				raid_disks;
 	int				max_disks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t			dev_sectors; 	/* used size of
+=======
+	sector_t			dev_sectors;	/* used size of
+>>>>>>> v3.18
 =======
 	sector_t			dev_sectors;	/* used size of
 >>>>>>> v3.18
@@ -315,7 +355,10 @@ struct mddev {
 	struct md_thread		*thread;	/* management thread */
 	struct md_thread		*sync_thread;	/* doing resync or reconstruct */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* 'last_sync_action' is initialized to "none".  It is set when a
 	 * sync operation (i.e "data-check", "requested-resync", "resync",
@@ -324,6 +367,9 @@ struct mddev {
 	 * or finished).  It is overwritten when a new sync operation is begun.
 	 */
 	char				*last_sync_action;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sector_t			curr_resync;	/* last block scheduled */
 	/* As resync requests can complete out of order, we cannot easily track
@@ -355,7 +401,11 @@ struct mddev {
 
 	int				ok_start_degraded;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* recovery/resync flags 
+=======
+	/* recovery/resync flags
+>>>>>>> v3.18
 =======
 	/* recovery/resync flags
 >>>>>>> v3.18
@@ -426,15 +476,21 @@ struct mddev {
 							 * when it gets here */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent		*sysfs_state;	/* handle for 'array_state'
 							 * file in sysfs.
 							 */
 	struct sysfs_dirent		*sysfs_action;  /* handle for 'sync_action' */
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node		*sysfs_state;	/* handle for 'array_state'
 							 * file in sysfs.
 							 */
 	struct kernfs_node		*sysfs_action;  /* handle for 'sync_action' */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct work_struct del_work;	/* used for delayed sysfs removal */
@@ -446,6 +502,7 @@ struct mddev {
 	unsigned int			safemode;	/* if set, update "clean" superblock
 							 * when no writes pending.
 <<<<<<< HEAD
+<<<<<<< HEAD
 							 */ 
 	unsigned int			safemode_delay;
 	struct timer_list		safemode_timer;
@@ -454,6 +511,8 @@ struct mddev {
 
 	struct bitmap                   *bitmap; /* the bitmap for the device */
 =======
+=======
+>>>>>>> v3.18
 							 */
 	unsigned int			safemode_delay;
 	struct timer_list		safemode_timer;
@@ -461,6 +520,9 @@ struct mddev {
 	struct request_queue		*queue;	/* for plugging ... */
 
 	struct bitmap			*bitmap; /* the bitmap for the device */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct {
 		struct file		*file; /* the bitmap file */
@@ -469,7 +531,11 @@ struct mddev {
 						 * negative, but not '0'
 						 * For external metadata, offset
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 * from start of device. 
+=======
+						 * from start of device.
+>>>>>>> v3.18
 =======
 						 * from start of device.
 >>>>>>> v3.18
@@ -489,7 +555,11 @@ struct mddev {
 	} bitmap_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t 			max_corr_read_errors; /* max read retries */
+=======
+	atomic_t			max_corr_read_errors; /* max read retries */
+>>>>>>> v3.18
 =======
 	atomic_t			max_corr_read_errors; /* max read retries */
 >>>>>>> v3.18
@@ -511,7 +581,10 @@ struct mddev {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void rdev_dec_pending(struct md_rdev *rdev, struct mddev *mddev)
@@ -524,7 +597,11 @@ static inline void rdev_dec_pending(struct md_rdev *rdev, struct mddev *mddev)
 static inline void md_sync_acct(struct block_device *bdev, unsigned long nr_sectors)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         atomic_add(nr_sectors, &bdev->bd_contains->bd_disk->sync_io);
+=======
+	atomic_add(nr_sectors, &bdev->bd_contains->bd_disk->sync_io);
+>>>>>>> v3.18
 =======
 	atomic_add(nr_sectors, &bdev->bd_contains->bd_disk->sync_io);
 >>>>>>> v3.18
@@ -542,7 +619,11 @@ struct md_personality
 	void (*status)(struct seq_file *seq, struct mddev *mddev);
 	/* error_handler must set ->faulty and clear ->in_sync
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * if appropriate, and should abort recovery if needed 
+=======
+	 * if appropriate, and should abort recovery if needed
+>>>>>>> v3.18
 =======
 	 * if appropriate, and should abort recovery if needed
 >>>>>>> v3.18
@@ -576,7 +657,10 @@ struct md_personality
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct md_sysfs_entry {
@@ -587,6 +671,7 @@ struct md_sysfs_entry {
 extern struct attribute_group md_bitmap_group;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct sysfs_dirent *sysfs_get_dirent_safe(struct sysfs_dirent *sd, char *name)
 {
 	if (sd)
@@ -595,6 +680,8 @@ static inline struct sysfs_dirent *sysfs_get_dirent_safe(struct sysfs_dirent *sd
 }
 static inline void sysfs_notify_dirent_safe(struct sysfs_dirent *sd)
 =======
+=======
+>>>>>>> v3.18
 static inline struct kernfs_node *sysfs_get_dirent_safe(struct kernfs_node *sd, char *name)
 {
 	if (sd)
@@ -602,6 +689,9 @@ static inline struct kernfs_node *sysfs_get_dirent_safe(struct kernfs_node *sd, 
 	return sd;
 }
 static inline void sysfs_notify_dirent_safe(struct kernfs_node *sd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (sd)
@@ -656,7 +746,11 @@ struct md_thread {
 	struct mddev		*mddev;
 	wait_queue_head_t	wqueue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long           flags;
+=======
+	unsigned long		flags;
+>>>>>>> v3.18
 =======
 	unsigned long		flags;
 >>>>>>> v3.18
@@ -694,7 +788,11 @@ extern void md_super_write(struct mddev *mddev, struct md_rdev *rdev,
 			   sector_t sector, int size, struct page *page);
 extern void md_super_wait(struct mddev *mddev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int sync_page_io(struct md_rdev *rdev, sector_t sector, int size, 
+=======
+extern int sync_page_io(struct md_rdev *rdev, sector_t sector, int size,
+>>>>>>> v3.18
 =======
 extern int sync_page_io(struct md_rdev *rdev, sector_t sector, int size,
 >>>>>>> v3.18
@@ -709,7 +807,10 @@ extern int md_integrity_register(struct mddev *mddev);
 extern void md_integrity_add_rdev(struct md_rdev *rdev, struct mddev *mddev);
 extern int strict_strtoul_scaled(const char *cp, unsigned long *res, int scale);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void restore_bitmap_write_access(struct file *file);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -727,7 +828,10 @@ extern struct bio *bio_clone_mddev(struct bio *bio, gfp_t gfp_mask,
 extern struct bio *bio_alloc_mddev(gfp_t gfp_mask, int nr_iovecs,
 				   struct mddev *mddev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void md_trim_bio(struct bio *bio, int offset, int size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -16,6 +16,12 @@
 #include <linux/err.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+
+#include <linux/irqchip/chained_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 
@@ -26,6 +32,10 @@
 #include <linux/of_device.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -35,6 +45,11 @@
 #include <linux/pinctrl/pinconf-generic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/pinctrl-single.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pinctrl-single.h>
 
@@ -46,7 +61,11 @@
 #define PCS_MUX_PINS_NAME		"pinctrl-single,pins"
 #define PCS_MUX_BITS_NAME		"pinctrl-single,bits"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCS_REG_NAME_LEN		((sizeof(unsigned long) * 2) + 1)
+=======
+#define PCS_REG_NAME_LEN		((sizeof(unsigned long) * 2) + 3)
+>>>>>>> v3.18
 =======
 #define PCS_REG_NAME_LEN		((sizeof(unsigned long) * 2) + 3)
 >>>>>>> v3.18
@@ -170,7 +189,10 @@ struct pcs_name {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct pcs_soc_data - SoC specific settings
  * @flags:	initial SoC specific PCS_FEAT_xxx values
  * @irq:	optional interrupt for the controller
@@ -187,6 +209,9 @@ struct pcs_soc_data {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct pcs_device - pinctrl device instance
  * @res:	resources
@@ -195,6 +220,11 @@ struct pcs_soc_data {
  * @dev:	device entry
  * @pctl:	pin controller device
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @flags:	mask of PCS_FEAT_xxx values
+ * @lock:	spinlock for register access
+>>>>>>> v3.18
 =======
  * @flags:	mask of PCS_FEAT_xxx values
  * @lock:	spinlock for register access
@@ -206,7 +236,11 @@ struct pcs_soc_data {
  * @foff:	value to turn mux off
  * @fmax:	max number of functions in fmask
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @is_pinconf:	whether supports pinconf
+=======
+ * @bits_per_pin:number of bits per pin
+>>>>>>> v3.18
 =======
  * @bits_per_pin:number of bits per pin
 >>>>>>> v3.18
@@ -218,6 +252,12 @@ struct pcs_soc_data {
  * @functions:	list of functions
  * @gpiofuncs:	list of gpio functions
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @irqs:	list of interrupt registers
+ * @chip:	chip container for this instance
+ * @domain:	IRQ domain for this instance
+>>>>>>> v3.18
 =======
  * @irqs:	list of interrupt registers
  * @chip:	chip container for this instance
@@ -236,13 +276,19 @@ struct pcs_device {
 	struct device *dev;
 	struct pinctrl_dev *pctl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned flags;
 #define PCS_QUIRK_SHARED_IRQ	(1 << 2)
 #define PCS_FEAT_IRQ		(1 << 1)
 #define PCS_FEAT_PINCONF	(1 << 0)
 	struct pcs_soc_data socdata;
 	raw_spinlock_t lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex mutex;
 	unsigned width;
@@ -252,7 +298,11 @@ struct pcs_device {
 	unsigned fmax;
 	bool bits_per_mux;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool is_pinconf;
+=======
+	unsigned bits_per_pin;
+>>>>>>> v3.18
 =======
 	unsigned bits_per_pin;
 >>>>>>> v3.18
@@ -264,6 +314,12 @@ struct pcs_device {
 	struct list_head functions;
 	struct list_head gpiofuncs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head irqs;
+	struct irq_chip chip;
+	struct irq_domain *domain;
+>>>>>>> v3.18
 =======
 	struct list_head irqs;
 	struct irq_chip chip;
@@ -277,11 +333,14 @@ struct pcs_device {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcs_pinconf_get(struct pinctrl_dev *pctldev, unsigned pin,
 			   unsigned long *config);
 static int pcs_pinconf_set(struct pinctrl_dev *pctldev, unsigned pin,
 			   unsigned long config);
 =======
+=======
+>>>>>>> v3.18
 #define PCS_QUIRK_HAS_SHARED_IRQ	(pcs->flags & PCS_QUIRK_SHARED_IRQ)
 #define PCS_HAS_IRQ		(pcs->flags & PCS_FEAT_IRQ)
 #define PCS_HAS_PINCONF		(pcs->flags & PCS_FEAT_PINCONF)
@@ -290,6 +349,9 @@ static int pcs_pinconf_get(struct pinctrl_dev *pctldev, unsigned pin,
 			   unsigned long *config);
 static int pcs_pinconf_set(struct pinctrl_dev *pctldev, unsigned pin,
 			   unsigned long *configs, unsigned num_configs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static enum pin_config_param pcs_bias[] = {
@@ -491,7 +553,11 @@ static int pcs_get_function(struct pinctrl_dev *pctldev, unsigned pin,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcs_enable(struct pinctrl_dev *pctldev, unsigned fselector,
+=======
+static int pcs_set_mux(struct pinctrl_dev *pctldev, unsigned fselector,
+>>>>>>> v3.18
 =======
 static int pcs_set_mux(struct pinctrl_dev *pctldev, unsigned fselector,
 >>>>>>> v3.18
@@ -515,6 +581,7 @@ static int pcs_set_mux(struct pinctrl_dev *pctldev, unsigned fselector,
 	for (i = 0; i < func->nvals; i++) {
 		struct pcs_func_vals *vals;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned val, mask;
 
 		vals = &func->vals[i];
@@ -524,6 +591,8 @@ static int pcs_set_mux(struct pinctrl_dev *pctldev, unsigned fselector,
 		else
 			mask = pcs->fmask & vals->mask;
 =======
+=======
+>>>>>>> v3.18
 		unsigned long flags;
 		unsigned val, mask;
 
@@ -535,12 +604,19 @@ static int pcs_set_mux(struct pinctrl_dev *pctldev, unsigned fselector,
 			mask = vals->mask;
 		else
 			mask = pcs->fmask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		val &= ~mask;
 		val |= (vals->val & mask);
 		pcs->write(val, vals->reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		raw_spin_unlock_irqrestore(&pcs->lock, flags);
+>>>>>>> v3.18
 =======
 		raw_spin_unlock_irqrestore(&pcs->lock, flags);
 >>>>>>> v3.18
@@ -549,6 +625,7 @@ static int pcs_set_mux(struct pinctrl_dev *pctldev, unsigned fselector,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pcs_disable(struct pinctrl_dev *pctldev, unsigned fselector,
 					unsigned group)
@@ -598,6 +675,8 @@ static void pcs_disable(struct pinctrl_dev *pctldev, unsigned fselector,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int pcs_request_gpio(struct pinctrl_dev *pctldev,
 			    struct pinctrl_gpio_range *range, unsigned pin)
 {
@@ -630,8 +709,12 @@ static const struct pinmux_ops pcs_pinmux_ops = {
 	.get_function_name = pcs_get_function_name,
 	.get_function_groups = pcs_get_function_groups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable = pcs_enable,
 	.disable = pcs_disable,
+=======
+	.set_mux = pcs_set_mux,
+>>>>>>> v3.18
 =======
 	.set_mux = pcs_set_mux,
 >>>>>>> v3.18
@@ -646,7 +729,11 @@ static void pcs_pinconf_clear_bias(struct pinctrl_dev *pctldev, unsigned pin)
 	for (i = 0; i < ARRAY_SIZE(pcs_bias); i++) {
 		config = pinconf_to_config_packed(pcs_bias[i], 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcs_pinconf_set(pctldev, pin, config);
+=======
+		pcs_pinconf_set(pctldev, pin, &config, 1);
+>>>>>>> v3.18
 =======
 		pcs_pinconf_set(pctldev, pin, &config, 1);
 >>>>>>> v3.18
@@ -726,6 +813,10 @@ static int pcs_pinconf_get(struct pinctrl_dev *pctldev,
 		case PIN_CONFIG_DRIVE_STRENGTH:
 		case PIN_CONFIG_SLEW_RATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case PIN_CONFIG_LOW_POWER_MODE:
+>>>>>>> v3.18
 =======
 		case PIN_CONFIG_LOW_POWER_MODE:
 >>>>>>> v3.18
@@ -740,7 +831,12 @@ static int pcs_pinconf_get(struct pinctrl_dev *pctldev,
 
 static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned pin, unsigned long config)
+=======
+				unsigned pin, unsigned long *configs,
+				unsigned num_configs)
+>>>>>>> v3.18
 =======
 				unsigned pin, unsigned long *configs,
 				unsigned num_configs)
@@ -751,6 +847,10 @@ static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 	unsigned offset = 0, shift = 0, i, data, ret;
 	u16 arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int j;
+>>>>>>> v3.18
 =======
 	int j;
 >>>>>>> v3.18
@@ -760,12 +860,15 @@ static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < func->nconfs; i++) {
 		if (pinconf_to_config_param(config) == func->conf[i].param) {
 			offset = pin * (pcs->width / BITS_PER_BYTE);
 			data = pcs->read(pcs->base + offset);
 			arg = pinconf_to_config_argument(config);
 =======
+=======
+>>>>>>> v3.18
 	for (j = 0; j < num_configs; j++) {
 		for (i = 0; i < func->nconfs; i++) {
 			if (pinconf_to_config_param(configs[j])
@@ -775,6 +878,9 @@ static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 			offset = pin * (pcs->width / BITS_PER_BYTE);
 			data = pcs->read(pcs->base + offset);
 			arg = pinconf_to_config_argument(configs[j]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			switch (func->conf[i].param) {
 			/* 2 parameters */
@@ -782,6 +888,10 @@ static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 			case PIN_CONFIG_DRIVE_STRENGTH:
 			case PIN_CONFIG_SLEW_RATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			case PIN_CONFIG_LOW_POWER_MODE:
+>>>>>>> v3.18
 =======
 			case PIN_CONFIG_LOW_POWER_MODE:
 >>>>>>> v3.18
@@ -810,11 +920,14 @@ static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 			}
 			pcs->write(data, pcs->base + offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
 		}
 	}
 	return -ENOTSUPP;
 =======
+=======
+>>>>>>> v3.18
 
 			break;
 		}
@@ -823,6 +936,9 @@ static int pcs_pinconf_set(struct pinctrl_dev *pctldev,
 	} /* for each config */
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -849,7 +965,12 @@ static int pcs_pinconf_group_get(struct pinctrl_dev *pctldev,
 
 static int pcs_pinconf_group_set(struct pinctrl_dev *pctldev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned group, unsigned long config)
+=======
+				unsigned group, unsigned long *configs,
+				unsigned num_configs)
+>>>>>>> v3.18
 =======
 				unsigned group, unsigned long *configs,
 				unsigned num_configs)
@@ -864,7 +985,11 @@ static int pcs_pinconf_group_set(struct pinctrl_dev *pctldev,
 		return ret;
 	for (i = 0; i < npins; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pcs_pinconf_set(pctldev, pins[i], config))
+=======
+		if (pcs_pinconf_set(pctldev, pins[i], configs, num_configs))
+>>>>>>> v3.18
 =======
 		if (pcs_pinconf_set(pctldev, pins[i], configs, num_configs))
 >>>>>>> v3.18
@@ -907,13 +1032,19 @@ static const struct pinconf_ops pcs_pinconf_ops = {
  * @offset: register offset from base
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcs_add_pin(struct pcs_device *pcs, unsigned offset)
 {
 =======
+=======
+>>>>>>> v3.18
 static int pcs_add_pin(struct pcs_device *pcs, unsigned offset,
 		unsigned pin_pos)
 {
 	struct pcs_soc_data *pcs_soc = &pcs->socdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pinctrl_pin_desc *pin;
 	struct pcs_name *pn;
@@ -927,11 +1058,14 @@ static int pcs_add_pin(struct pcs_device *pcs, unsigned offset,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pin = &pcs->pins.pa[i];
 	pn = &pcs->names[i];
 	sprintf(pn->name, "%lx",
 		(unsigned long)pcs->res->start + offset);
 =======
+=======
+>>>>>>> v3.18
 	if (pcs_soc->irq_enable_mask) {
 		unsigned val;
 
@@ -948,6 +1082,9 @@ static int pcs_add_pin(struct pcs_device *pcs, unsigned offset,
 	pn = &pcs->names[i];
 	sprintf(pn->name, "%lx.%u",
 		(unsigned long)pcs->res->start + offset, pin_pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pin->name = pn->name;
 	pin->number = i;
@@ -969,10 +1106,13 @@ static int pcs_allocate_pin_table(struct pcs_device *pcs)
 {
 	int mux_bytes, nr_pins, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mux_bytes = pcs->width / BITS_PER_BYTE;
 	nr_pins = pcs->size / mux_bytes;
 =======
+=======
+>>>>>>> v3.18
 	int num_pins_in_register = 0;
 
 	mux_bytes = pcs->width / BITS_PER_BYTE;
@@ -984,6 +1124,9 @@ static int pcs_allocate_pin_table(struct pcs_device *pcs)
 	} else {
 		nr_pins = pcs->size / mux_bytes;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(pcs->dev, "allocating %i pins\n", nr_pins);
@@ -1006,10 +1149,13 @@ static int pcs_allocate_pin_table(struct pcs_device *pcs)
 		unsigned offset;
 		int res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		offset = i * mux_bytes;
 		res = pcs_add_pin(pcs, offset);
 =======
+=======
+>>>>>>> v3.18
 		int byte_num;
 		int pin_pos = 0;
 
@@ -1021,6 +1167,9 @@ static int pcs_allocate_pin_table(struct pcs_device *pcs)
 			offset = i * mux_bytes;
 		}
 		res = pcs_add_pin(pcs, offset, pin_pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (res < 0) {
 			dev_err(pcs->dev, "error adding pins: %i\n", res);
@@ -1139,12 +1288,18 @@ static int pcs_get_pin_by_offset(struct pcs_device *pcs, unsigned offset)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = offset / (pcs->width / BITS_PER_BYTE);
 =======
+=======
+>>>>>>> v3.18
 	if (pcs->bits_per_mux)
 		index = (offset * BITS_PER_BYTE) / pcs->bits_per_pin;
 	else
 		index = offset / (pcs->width / BITS_PER_BYTE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return index;
@@ -1244,6 +1399,10 @@ static int pcs_parse_pinconf(struct pcs_device *pcs, struct device_node *np,
 		{ "pinctrl-single,slew-rate", PIN_CONFIG_SLEW_RATE, },
 		{ "pinctrl-single,input-schmitt", PIN_CONFIG_INPUT_SCHMITT, },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ "pinctrl-single,low-power-mode", PIN_CONFIG_LOW_POWER_MODE, },
+>>>>>>> v3.18
 =======
 		{ "pinctrl-single,low-power-mode", PIN_CONFIG_LOW_POWER_MODE, },
 >>>>>>> v3.18
@@ -1257,7 +1416,11 @@ static int pcs_parse_pinconf(struct pcs_device *pcs, struct device_node *np,
 
 	/* If pinconf isn't supported, don't parse properties in below. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pcs->is_pinconf)
+=======
+	if (!PCS_HAS_PINCONF)
+>>>>>>> v3.18
 =======
 	if (!PCS_HAS_PINCONF)
 >>>>>>> v3.18
@@ -1332,6 +1495,7 @@ static int pcs_parse_one_pinctrl_entry(struct pcs_device *pcs,
 	struct pcs_func_vals *vals;
 	const __be32 *mux;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int size, params, rows, *pins, index = 0, found = 0, res = -ENOMEM;
 	struct pcs_function *function;
 
@@ -1351,6 +1515,8 @@ static int pcs_parse_one_pinctrl_entry(struct pcs_device *pcs,
 	if (size < (sizeof(*mux) * params)) {
 		dev_err(pcs->dev, "bad data for %s\n", np->name);
 =======
+=======
+>>>>>>> v3.18
 	int size, rows, *pins, index = 0, found = 0, res = -ENOMEM;
 	struct pcs_function *function;
 
@@ -1358,13 +1524,20 @@ static int pcs_parse_one_pinctrl_entry(struct pcs_device *pcs,
 	if ((!mux) || (size < sizeof(*mux) * 2)) {
 		dev_err(pcs->dev, "bad data for mux %s\n",
 			np->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	size /= sizeof(*mux);	/* Number of elements in array */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rows = size / params;
+=======
+	rows = size / 2;
+>>>>>>> v3.18
 =======
 	rows = size / 2;
 >>>>>>> v3.18
@@ -1386,10 +1559,13 @@ static int pcs_parse_one_pinctrl_entry(struct pcs_device *pcs,
 		vals[found].reg = pcs->base + offset;
 		vals[found].val = val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (params == 3) {
 			val = be32_to_cpup(mux + index++);
 			vals[found].mask = val;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1417,7 +1593,11 @@ static int pcs_parse_one_pinctrl_entry(struct pcs_device *pcs,
 	(*map)->data.mux.function = np->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pcs->is_pinconf) {
+=======
+	if (PCS_HAS_PINCONF) {
+>>>>>>> v3.18
 =======
 	if (PCS_HAS_PINCONF) {
 >>>>>>> v3.18
@@ -1445,7 +1625,10 @@ free_vals:
 	return res;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define PARAMS_FOR_BITS_PER_MUX 3
 
@@ -1573,6 +1756,9 @@ free_vals:
 
 	return res;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * pcs_dt_node_to_map() - allocates and parses pinctrl maps
@@ -1605,6 +1791,7 @@ static int pcs_dt_node_to_map(struct pinctrl_dev *pctldev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pcs_parse_one_pinctrl_entry(pcs, np_config, map, num_maps,
 					  pgnames);
 	if (ret < 0) {
@@ -1612,6 +1799,8 @@ static int pcs_dt_node_to_map(struct pinctrl_dev *pctldev,
 			np_config->name);
 		goto free_pgnames;
 =======
+=======
+>>>>>>> v3.18
 	if (pcs->bits_per_mux) {
 		ret = pcs_parse_bits_in_pinctrl_entry(pcs, np_config, map,
 				num_maps, pgnames);
@@ -1628,6 +1817,9 @@ static int pcs_dt_node_to_map(struct pinctrl_dev *pctldev,
 				np_config->name);
 			goto free_pgnames;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1697,7 +1889,10 @@ static void pcs_free_pingroups(struct pcs_device *pcs)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pcs_irq_free() - free interrupt
  * @pcs: pcs driver instance
  */
@@ -1718,6 +1913,9 @@ static void pcs_irq_free(struct pcs_device *pcs)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pcs_free_resources() - free memory used by this driver
  * @pcs: pcs driver instance
@@ -1725,6 +1923,11 @@ static void pcs_irq_free(struct pcs_device *pcs)
 static void pcs_free_resources(struct pcs_device *pcs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pcs_irq_free(pcs);
+
+>>>>>>> v3.18
 =======
 	pcs_irq_free(pcs);
 
@@ -1778,7 +1981,10 @@ static int pcs_add_gpio_func(struct device_node *node, struct pcs_device *pcs)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * @reg:	virtual address of interrupt register
  * @hwirq:	hardware irq number
@@ -2061,6 +2267,9 @@ static int pinctrl_single_resume(struct platform_device *pdev)
 	return pinctrl_force_default(pcs->pctl);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int pcs_probe(struct platform_device *pdev)
@@ -2068,13 +2277,19 @@ static int pcs_probe(struct platform_device *pdev)
 	struct device_node *np = pdev->dev.of_node;
 	const struct of_device_id *match;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res;
 	struct pcs_device *pcs;
 =======
+=======
+>>>>>>> v3.18
 	struct pcs_pdata *pdata;
 	struct resource *res;
 	struct pcs_device *pcs;
 	const struct pcs_soc_data *soc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -2089,6 +2304,10 @@ static int pcs_probe(struct platform_device *pdev)
 	}
 	pcs->dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	raw_spin_lock_init(&pcs->lock);
+>>>>>>> v3.18
 =======
 	raw_spin_lock_init(&pcs->lock);
 >>>>>>> v3.18
@@ -2097,7 +2316,13 @@ static int pcs_probe(struct platform_device *pdev)
 	INIT_LIST_HEAD(&pcs->functions);
 	INIT_LIST_HEAD(&pcs->gpiofuncs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcs->is_pinconf = match->data;
+=======
+	soc = match->data;
+	pcs->flags = soc->flags;
+	memcpy(&pcs->socdata, soc, sizeof(*soc));
+>>>>>>> v3.18
 =======
 	soc = match->data;
 	pcs->flags = soc->flags;
@@ -2172,7 +2397,11 @@ static int pcs_probe(struct platform_device *pdev)
 	pcs->desc.pctlops = &pcs_pinctrl_ops;
 	pcs->desc.pmxops = &pcs_pinmux_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pcs->is_pinconf)
+=======
+	if (PCS_HAS_PINCONF)
+>>>>>>> v3.18
 =======
 	if (PCS_HAS_PINCONF)
 >>>>>>> v3.18
@@ -2195,7 +2424,10 @@ static int pcs_probe(struct platform_device *pdev)
 		goto free;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pcs->socdata.irq = irq_of_parse_and_map(np, 0);
 	if (pcs->socdata.irq)
 		pcs->flags |= PCS_FEAT_IRQ;
@@ -2217,6 +2449,9 @@ static int pcs_probe(struct platform_device *pdev)
 			dev_warn(pcs->dev, "initialized with no interrupts\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(pcs->dev, "%i pins at pa %p size %u\n",
 		 pcs->desc.npins, pcs->base, pcs->size);
@@ -2242,10 +2477,13 @@ static int pcs_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id pcs_of_match[] = {
 	{ .compatible = "pinctrl-single", .data = (void *)false },
 	{ .compatible = "pinconf-single", .data = (void *)true },
 =======
+=======
+>>>>>>> v3.18
 static const struct pcs_soc_data pinctrl_single_omap_wkup = {
 	.flags = PCS_QUIRK_SHARED_IRQ,
 	.irq_enable_mask = (1 << 14),	/* OMAP_WAKEUP_EN */
@@ -2279,6 +2517,9 @@ static struct of_device_id pcs_of_match[] = {
 	{ .compatible = "ti,am437-padconf", .data = &pinctrl_single_am437x },
 	{ .compatible = "pinctrl-single", .data = &pinctrl_single },
 	{ .compatible = "pinconf-single", .data = &pinconf_single },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -2293,11 +2534,17 @@ static struct platform_driver pcs_driver = {
 		.of_match_table	= pcs_of_match,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 	.suspend = pinctrl_single_suspend,
 	.resume = pinctrl_single_resume,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

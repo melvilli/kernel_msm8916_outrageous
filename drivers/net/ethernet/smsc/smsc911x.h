@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -57,7 +61,11 @@
 #ifdef CONFIG_DEBUG_SPINLOCK
 #define SMSC_ASSERT_MAC_LOCK(pdata) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ON(!spin_is_locked(&pdata->mac_lock))
+=======
+		WARN_ON_SMP(!spin_is_locked(&pdata->mac_lock))
+>>>>>>> v3.18
 =======
 		WARN_ON_SMP(!spin_is_locked(&pdata->mac_lock))
 >>>>>>> v3.18
@@ -245,7 +253,11 @@
 #define PMT_CTRL_READY_			0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMSC_GPIO_CFG			0x88
+=======
+#define GPIO_CFG			0x88
+>>>>>>> v3.18
 =======
 #define GPIO_CFG			0x88
 >>>>>>> v3.18

@@ -343,6 +343,7 @@ static const int compat_event_type_size[] = {
 /* IW event code */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void wireless_nlevent_flush(void)
 {
 	struct sk_buff *skb;
@@ -378,6 +379,8 @@ static struct notifier_block wext_netdev_notifier = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __net_init wext_pernet_init(struct net *net)
 {
 	skb_queue_head_init(&net->wext_nlevents);
@@ -397,12 +400,16 @@ static struct pernet_operations wext_pernet_ops = {
 static int __init wireless_nlevent_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = register_pernet_subsys(&wext_pernet_ops);
 
 	if (err)
 		return err;
 
 	return register_netdevice_notifier(&wext_netdev_notifier);
+=======
+	return register_pernet_subsys(&wext_pernet_ops);
+>>>>>>> v3.18
 =======
 	return register_pernet_subsys(&wext_pernet_ops);
 >>>>>>> v3.18
@@ -414,9 +421,12 @@ subsys_initcall(wireless_nlevent_init);
 static void wireless_nlevent_process(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtnl_lock();
 	wireless_nlevent_flush();
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *skb;
 	struct net *net;
 
@@ -428,6 +438,9 @@ static void wireless_nlevent_process(struct work_struct *work)
 				    GFP_KERNEL);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtnl_unlock();
 }

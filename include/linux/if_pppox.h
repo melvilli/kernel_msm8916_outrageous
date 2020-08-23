@@ -42,6 +42,7 @@ struct pptp_opt {
 	int ppp_flags;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct pppolac_opt {
 	__u32		local;
@@ -63,6 +64,8 @@ struct pppopns_opt {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #include <net/sock.h>
 
 struct pppox_sock {
@@ -74,8 +77,11 @@ struct pppox_sock {
 		struct pppoe_opt pppoe;
 		struct pptp_opt  pptp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct pppolac_opt lac;
 		struct pppopns_opt pns;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} proto;

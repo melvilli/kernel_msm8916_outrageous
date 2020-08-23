@@ -1554,9 +1554,15 @@ static int sd_start(struct gspca_dev *gspca_dev)
 
 	sd->params.roi.colEnd = sd->params.roi.colStart +
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(gspca_dev->width >> 3);
 	sd->params.roi.rowEnd = sd->params.roi.rowStart +
 				(gspca_dev->height >> 2);
+=======
+				(gspca_dev->pixfmt.width >> 3);
+	sd->params.roi.rowEnd = sd->params.roi.rowStart +
+				(gspca_dev->pixfmt.height >> 2);
+>>>>>>> v3.18
 =======
 				(gspca_dev->pixfmt.width >> 3);
 	sd->params.roi.rowEnd = sd->params.roi.rowStart +

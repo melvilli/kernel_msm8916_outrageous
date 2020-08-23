@@ -66,8 +66,13 @@ no_payload:
  * directly.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_keyctl(u32 option,
 				  u32 arg2, u32 arg3, u32 arg4, u32 arg5)
+=======
+COMPAT_SYSCALL_DEFINE5(keyctl, u32, option,
+		       u32, arg2, u32, arg3, u32, arg4, u32, arg5)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE5(keyctl, u32, option,
 		       u32, arg2, u32, arg3, u32, arg4, u32, arg5)
@@ -144,6 +149,12 @@ COMPAT_SYSCALL_DEFINE5(keyctl, u32, option,
 		return keyctl_invalidate_key(arg2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KEYCTL_GET_PERSISTENT:
+		return keyctl_get_persistent(arg2, arg3);
+
+>>>>>>> v3.18
 =======
 	case KEYCTL_GET_PERSISTENT:
 		return keyctl_get_persistent(arg2, arg3);

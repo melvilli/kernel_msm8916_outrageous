@@ -26,7 +26,10 @@ struct pt_regs;
 /* Emulate instructions that cause a transfer of control. */
 extern int emulate_step(struct pt_regs *regs, unsigned int instr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 enum instruction_type {
 	COMPUTE,		/* arith/logical/CR op, etc. */
@@ -89,4 +92,7 @@ struct instruction_op {
 
 extern int analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			 unsigned int instr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

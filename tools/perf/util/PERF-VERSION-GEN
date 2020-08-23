@@ -14,6 +14,7 @@ LF='
 # otherwise try to get the version from the kernel Makefile
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 if test -d ../../.git -o -f ../../.git &&
 	VN=$(git tag 2>/dev/null | tail -1 | grep -E "v[0-9].[0-9]*")
 then
@@ -22,6 +23,8 @@ then
 else
 	VN=$(MAKEFLAGS= make -sC ../.. kernelversion)
 =======
+=======
+>>>>>>> v3.18
 CID=
 TAG=
 if test -d ../../.git -o -f ../../.git
@@ -41,6 +44,9 @@ if test -n "$CID"
 then
 	# format version string, strip trailing zero of sublevel:
 	VN=$(echo "$VN" | sed -e 's/-/./g;s/\([0-9]*[.][0-9]*\)[.]0/\1/')
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fi
 
@@ -54,7 +60,11 @@ else
 fi
 test "$VN" = "$VC" || {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	echo >&2 "PERF_VERSION = $VN"
+=======
+	echo >&2 "  PERF_VERSION = $VN"
+>>>>>>> v3.18
 =======
 	echo >&2 "  PERF_VERSION = $VN"
 >>>>>>> v3.18

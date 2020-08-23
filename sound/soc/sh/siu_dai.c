@@ -544,7 +544,12 @@ static void siu_dai_shutdown(struct snd_pcm_substream *substream,
 	if (!port_info->play_cap) {
 		/* during stmread or stmwrite ? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(port_info->playback.rw_flg || port_info->capture.rw_flg);
+=======
+		if (WARN_ON(port_info->playback.rw_flg || port_info->capture.rw_flg))
+			return;
+>>>>>>> v3.18
 =======
 		if (WARN_ON(port_info->playback.rw_flg || port_info->capture.rw_flg))
 			return;

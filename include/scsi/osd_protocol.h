@@ -5,7 +5,11 @@
  *
  * Authors:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *   Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *   Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -268,6 +272,7 @@ static inline struct osd_cdb_head *osd_cdb_head(struct osd_cdb *ocdb)
  */
 #define OSD_ACT___(Name, Num) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OSD_ACT_##Name = __constant_cpu_to_be16(0x8880 + Num), \
 	OSDv1_ACT_##Name = __constant_cpu_to_be16(0x8800 + Num),
 
@@ -279,6 +284,8 @@ static inline struct osd_cdb_head *osd_cdb_head(struct osd_cdb *ocdb)
 	OSD_ACT_##Name = __constant_cpu_to_be16(Num2), \
 	OSDv1_ACT_##Name = __constant_cpu_to_be16(Num1),
 =======
+=======
+>>>>>>> v3.18
 	OSD_ACT_##Name = cpu_to_be16(0x8880 + Num), \
 	OSDv1_ACT_##Name = cpu_to_be16(0x8800 + Num),
 
@@ -289,6 +296,9 @@ static inline struct osd_cdb_head *osd_cdb_head(struct osd_cdb *ocdb)
 #define OSD_ACT_V1_V2(Name, Num1, Num2) \
 	OSD_ACT_##Name = cpu_to_be16(Num2), \
 	OSDv1_ACT_##Name = cpu_to_be16(Num1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum osd_service_actions {
@@ -514,7 +524,11 @@ struct osd_timestamp {
 
 struct osd_key_identifier {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 id[7]; /* if you know why 7 please email bharrosh@panasas.com */
+=======
+	u8 id[7]; /* if you know why 7 please email ooo@electrozaur.com */
+>>>>>>> v3.18
 =======
 	u8 id[7]; /* if you know why 7 please email ooo@electrozaur.com */
 >>>>>>> v3.18

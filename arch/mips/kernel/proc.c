@@ -18,9 +18,12 @@
 unsigned int vced_count, vcei_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int show_cpuinfo(struct seq_file *m, void *v)
 {
 =======
+=======
+>>>>>>> v3.18
 /*
  *  * No lock; only written during early bootup by CPU 0.
  *   */
@@ -39,6 +42,9 @@ int proc_cpuinfo_notifier_call_chain(unsigned long val, void *v)
 static int show_cpuinfo(struct seq_file *m, void *v)
 {
 	struct proc_cpuinfo_notifier_args proc_cpuinfo_notifier_args;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long n = (unsigned long) v - 1;
 	unsigned int version = cpu_data[n].processor_id;
@@ -87,6 +93,7 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 		seq_printf(m, "]\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_mips_r) {
 		seq_printf(m, "isa\t\t\t:");
 		if (cpu_has_mips_1)
@@ -110,6 +117,8 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 		seq_printf(m, "\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	seq_printf(m, "isa\t\t\t: mips1");
 	if (cpu_has_mips_2)
@@ -129,6 +138,9 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	if (cpu_has_mips64r2)
 		seq_printf(m, "%s", " mips64r2");
 	seq_printf(m, "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	seq_printf(m, "ASEs implemented\t:");
@@ -142,6 +154,12 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	if (cpu_has_mmips)	seq_printf(m, "%s", " micromips");
 	if (cpu_has_vz)		seq_printf(m, "%s", " vz");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpu_has_msa)	seq_printf(m, "%s", " msa");
+	if (cpu_has_eva)	seq_printf(m, "%s", " eva");
+	if (cpu_has_htw)	seq_printf(m, "%s", " htw");
+>>>>>>> v3.18
 =======
 	if (cpu_has_msa)	seq_printf(m, "%s", " msa");
 	if (cpu_has_eva)	seq_printf(m, "%s", " eva");
@@ -158,6 +176,10 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	seq_printf(m, "kscratch registers\t: %d\n",
 		      hweight8(cpu_data[n].kscratch_mask));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	seq_printf(m, "package\t\t\t: %d\n", cpu_data[n].package);
+>>>>>>> v3.18
 =======
 	seq_printf(m, "package\t\t\t: %d\n", cpu_data[n].package);
 >>>>>>> v3.18
@@ -168,7 +190,10 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	seq_printf(m, fmt, 'D', vced_count);
 	seq_printf(m, fmt, 'I', vcei_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	proc_cpuinfo_notifier_args.m = m;
 	proc_cpuinfo_notifier_args.n = n;
@@ -176,6 +201,9 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	raw_notifier_call_chain(&proc_cpuinfo_chain, 0,
 				&proc_cpuinfo_notifier_args);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_printf(m, "\n");
 

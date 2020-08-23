@@ -65,7 +65,11 @@ static int send_ipi(int vector, int wait, cpumask_t cpu_mask);
 static struct irqaction irq_ipi  = {
 	.handler = crisv32_ipi_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED,
+=======
+	.flags = 0,
+>>>>>>> v3.18
 =======
 	.flags = 0,
 >>>>>>> v3.18
@@ -202,7 +206,11 @@ int setup_profiling_timer(unsigned int multiplier)
 unsigned long cache_decay_ticks = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 >>>>>>> v3.18

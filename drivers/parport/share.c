@@ -283,7 +283,11 @@ struct parport *parport_register_port(unsigned long base, int irq, int dma,
 	char *name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = kmalloc(sizeof(struct parport), GFP_KERNEL);
+=======
+	tmp = kzalloc(sizeof(struct parport), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tmp = kzalloc(sizeof(struct parport), GFP_KERNEL);
 >>>>>>> v3.18
@@ -294,7 +298,10 @@ struct parport *parport_register_port(unsigned long base, int irq, int dma,
 
 	/* Init our structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
  	memset(tmp, 0, sizeof(struct parport));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tmp->base = base;
@@ -914,7 +921,12 @@ int parport_claim_or_block(struct pardevice *dev)
 		   gave us the port and we would deadlock if we slept.  */
 		if (dev->waiting) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on (&dev->wait_q);
+=======
+			wait_event_interruptible(dev->wait_q,
+						 !dev->waiting);
+>>>>>>> v3.18
 =======
 			wait_event_interruptible(dev->wait_q,
 						 !dev->waiting);

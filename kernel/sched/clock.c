@@ -27,14 +27,20 @@
  *
  * cpu_clock(i)       -- can be used from any context, including NMI.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sched_clock_cpu(i) -- must be used with local IRQs disabled (implied by NMI)
  * local_clock()      -- is cpu_clock() on the current cpu.
  *
 =======
+=======
+>>>>>>> v3.18
  * local_clock()      -- is cpu_clock() on the current cpu.
  *
  * sched_clock_cpu(i)
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * How:
  *
@@ -58,6 +64,7 @@
  * that is otherwise invisible (TSC gets stopped).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Notes:
  *
@@ -69,6 +76,8 @@
  * sched_clock().
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 #include <linux/spinlock.h>
 #include <linux/hardirq.h>
@@ -77,6 +86,12 @@
 #include <linux/ktime.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/static_key.h>
+#include <linux/workqueue.h>
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/static_key.h>
 #include <linux/workqueue.h>
@@ -89,7 +104,11 @@
  * Architectures and sub-architectures can override this.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long long __attribute__((weak)) sched_clock(void)
+=======
+unsigned long long __weak sched_clock(void)
+>>>>>>> v3.18
 =======
 unsigned long long __weak sched_clock(void)
 >>>>>>> v3.18
@@ -103,8 +122,11 @@ __read_mostly int sched_clock_running;
 
 #ifdef CONFIG_HAVE_UNSTABLE_SCHED_CLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
 __read_mostly int sched_clock_stable;
 =======
+=======
+>>>>>>> v3.18
 static struct static_key __sched_clock_stable = STATIC_KEY_INIT;
 static int __sched_clock_stable_early;
 
@@ -151,6 +173,9 @@ void clear_sched_clock_stable(void)
 
 	schedule_work(&sched_clock_work);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sched_clock_data {
@@ -164,7 +189,11 @@ static DEFINE_PER_CPU_SHARED_ALIGNED(struct sched_clock_data, sched_clock_data);
 static inline struct sched_clock_data *this_scd(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return &__get_cpu_var(sched_clock_data);
+=======
+	return this_cpu_ptr(&sched_clock_data);
+>>>>>>> v3.18
 =======
 	return this_cpu_ptr(&sched_clock_data);
 >>>>>>> v3.18
@@ -190,7 +219,10 @@ void sched_clock_init(void)
 
 	sched_clock_running = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Ensure that it is impossible to not do a static_key update.
@@ -205,6 +237,9 @@ void sched_clock_init(void)
 		__set_sched_clock_stable();
 	else
 		__clear_sched_clock_stable(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -333,9 +368,13 @@ u64 sched_clock_cpu(int cpu)
 	u64 clock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON_ONCE(!irqs_disabled());
 
 	if (sched_clock_stable)
+=======
+	if (sched_clock_stable())
+>>>>>>> v3.18
 =======
 	if (sched_clock_stable())
 >>>>>>> v3.18
@@ -345,6 +384,10 @@ u64 sched_clock_cpu(int cpu)
 		return 0ull;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	preempt_disable_notrace();
+>>>>>>> v3.18
 =======
 	preempt_disable_notrace();
 >>>>>>> v3.18
@@ -355,6 +398,10 @@ u64 sched_clock_cpu(int cpu)
 	else
 		clock = sched_clock_local(scd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	preempt_enable_notrace();
+>>>>>>> v3.18
 =======
 	preempt_enable_notrace();
 >>>>>>> v3.18
@@ -368,7 +415,11 @@ void sched_clock_tick(void)
 	u64 now, now_gtod;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sched_clock_stable)
+=======
+	if (sched_clock_stable())
+>>>>>>> v3.18
 =======
 	if (sched_clock_stable())
 >>>>>>> v3.18
@@ -423,6 +474,7 @@ EXPORT_SYMBOL_GPL(sched_clock_idle_wakeup_event);
 u64 cpu_clock(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 clock;
 	unsigned long flags;
 
@@ -432,10 +484,15 @@ u64 cpu_clock(int cpu)
 
 	return clock;
 =======
+=======
+>>>>>>> v3.18
 	if (!sched_clock_stable())
 		return sched_clock_cpu(cpu);
 
 	return sched_clock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -449,6 +506,7 @@ u64 cpu_clock(int cpu)
 u64 local_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 clock;
 	unsigned long flags;
 
@@ -458,10 +516,15 @@ u64 local_clock(void)
 
 	return clock;
 =======
+=======
+>>>>>>> v3.18
 	if (!sched_clock_stable())
 		return sched_clock_cpu(raw_smp_processor_id());
 
 	return sched_clock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -483,7 +546,11 @@ u64 sched_clock_cpu(int cpu)
 u64 cpu_clock(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sched_clock_cpu(cpu);
+=======
+	return sched_clock();
+>>>>>>> v3.18
 =======
 	return sched_clock();
 >>>>>>> v3.18
@@ -492,7 +559,11 @@ u64 cpu_clock(int cpu)
 u64 local_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sched_clock_cpu(0);
+=======
+	return sched_clock();
+>>>>>>> v3.18
 =======
 	return sched_clock();
 >>>>>>> v3.18

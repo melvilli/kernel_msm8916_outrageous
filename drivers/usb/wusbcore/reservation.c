@@ -52,6 +52,10 @@ static void wusbhc_rsv_complete_cb(struct uwb_rsv *rsv)
 	char buf[72];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_dbg(dev, "%s: state = %d\n", __func__, rsv->state);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "%s: state = %d\n", __func__, rsv->state);
 >>>>>>> v3.18
@@ -85,6 +89,12 @@ int wusbhc_rsv_establish(struct wusbhc *wusbhc)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (rc == NULL)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (rc == NULL)
 		return -ENODEV;

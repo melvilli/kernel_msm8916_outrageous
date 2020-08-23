@@ -19,7 +19,10 @@
 #include <linux/usb/otg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * utmi_pll_config_in_car_module: true if the UTMI PLL configuration registers
  *     should be set up by clk-tegra, false if by the PHY code
@@ -38,12 +41,16 @@ struct tegra_phy_soc_config {
 	bool requires_extra_tuning_parameters;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tegra_utmip_config {
 	u8 hssync_start_delay;
 	u8 elastic_limit;
 	u8 idle_wait_delay;
 	u8 term_range_adj;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 xcvr_setup;
 	u8 xcvr_lsfslew;
@@ -54,6 +61,8 @@ struct tegra_ulpi_config {
 	int reset_gpio;
 	const char *clk;
 =======
+=======
+>>>>>>> v3.18
 	bool xcvr_setup_use_fuses;
 	u8 xcvr_setup;
 	u8 xcvr_lsfslew;
@@ -61,6 +70,9 @@ struct tegra_ulpi_config {
 	u8 xcvr_hsslew;
 	u8 hssquelch_level;
 	u8 hsdiscon_level;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -71,11 +83,14 @@ enum tegra_usb_phy_port_speed {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum tegra_usb_phy_mode {
 	TEGRA_USB_PHY_MODE_DEVICE,
 	TEGRA_USB_PHY_MODE_HOST,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct tegra_xtal_freq;
@@ -88,6 +103,7 @@ struct tegra_usb_phy {
 	struct clk *clk;
 	struct clk *pll_u;
 	struct clk *pad_clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enum tegra_usb_phy_mode mode;
 	void *config;
@@ -106,6 +122,8 @@ struct tegra_usb_phy *tegra_usb_phy_open(struct device *dev, int instance,
 	void (*set_phcd)(struct usb_phy *x, bool enable));
 
 =======
+=======
+>>>>>>> v3.18
 	struct regulator *vbus;
 	enum usb_dr_mode mode;
 	void *config;
@@ -117,6 +135,9 @@ struct tegra_usb_phy *tegra_usb_phy_open(struct device *dev, int instance,
 	int reset_gpio;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void tegra_usb_phy_preresume(struct usb_phy *phy);
 

@@ -1,6 +1,7 @@
 TODO:
 - get DRM Maintainer review for this code
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Wait for common display framework to hit mainline and update the IPU
   driver to use it. This will most probably make changes to the devicetree
   bindings necessary.
@@ -14,6 +15,13 @@ Missing features (not necessarily for moving out of staging):
 - Add KMS plane support for CRTC driver
 - Add LDB (LVDS Display Bridge) support
 - Add i.MX6 HDMI support
+=======
+- decide where to put the base driver. It is not specific to a subsystem
+  and would be used by DRM/KMS and media/V4L2
+
+Missing features (not necessarily for moving out of staging):
+
+>>>>>>> v3.18
 =======
 - decide where to put the base driver. It is not specific to a subsystem
   and would be used by DRM/KMS and media/V4L2

@@ -22,6 +22,7 @@
 #define _BRCMF_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BRCMF_VERSION_STR		"4.218.248.5"
 
 #include "fweh.h"
@@ -205,6 +206,8 @@
 #define BRCMF_E_LINK_BSSCFG_DIS			4
 
 =======
+=======
+>>>>>>> v3.18
 #include "fweh.h"
 
 #define TOE_TX_CSUM_OL		0x00000001
@@ -215,6 +218,9 @@
 
 #define DOT11_MAX_DEFAULT_KEYS	4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Small, medium and maximum buffer size for dcmd
  */
@@ -222,6 +228,7 @@
 #define BRCMF_DCMD_MEDLEN	1536
 #define BRCMF_DCMD_MAXLEN	8192
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Pattern matching filter. Specifies an offset within received packets to
  * start matching, the pattern to match, the size of the pattern, and a bitmask
@@ -518,6 +525,8 @@ struct brcmf_dcmd {
 	uint used;		/* bytes read or written (optional) */
 	uint needed;		/* bytes needed (optional) */
 =======
+=======
+>>>>>>> v3.18
 /* IOCTL from host to device are limited in lenght. A device can only handle
  * ethernet frame size. This limitation is to be applied by protocol layer.
  */
@@ -547,6 +556,9 @@ struct brcmf_ampdu_rx_reorder {
 	u8 exp_idx;
 	u8 max_idx;
 	u8 pend_pkts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -560,7 +572,11 @@ struct brcmf_pub {
 	/* Linkage ponters */
 	struct brcmf_bus *bus_if;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcmf_proto *prot;
+=======
+	struct brcmf_proto *proto;
+>>>>>>> v3.18
 =======
 	struct brcmf_proto *proto;
 >>>>>>> v3.18
@@ -573,7 +589,11 @@ struct brcmf_pub {
 
 	/* Dongle media info */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long drv_version;	/* Version of dongle-resident driver */
+=======
+	char fwver[BRCMF_DRIVER_FIRMWARE_VERSION_LEN];
+>>>>>>> v3.18
 =======
 	char fwver[BRCMF_DRIVER_FIRMWARE_VERSION_LEN];
 >>>>>>> v3.18
@@ -590,10 +610,13 @@ struct brcmf_pub {
 	struct brcmf_fweh_info fweh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool fw_signals;
 	struct brcmf_fws_info *fws;
 	spinlock_t fws_spinlock;
 =======
+=======
+>>>>>>> v3.18
 	struct brcmf_fws_info *fws;
 
 	struct brcmf_ampdu_rx_reorder
@@ -602,12 +625,16 @@ struct brcmf_pub {
 	u32 feat_flags;
 	u32 chip_quirks;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef DEBUG
 	struct dentry *dbgfs_dir;
 #endif
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct brcmf_if_event {
 	u8 ifidx;
@@ -617,6 +644,8 @@ struct brcmf_if_event {
 	u8 role;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* forward declarations */
@@ -629,6 +658,7 @@ struct brcmf_fws_mac_descriptor;
  * @BRCMF_NETIF_STOP_REASON_FWS_FC:
  *	netif stopped due to firmware signalling flow control.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @BRCMF_NETIF_STOP_REASON_BLOCK_BUS:
  *	netif stopped due to bus blocking.
  */
@@ -636,12 +666,17 @@ enum brcmf_netif_stop_reason {
 	BRCMF_NETIF_STOP_REASON_FWS_FC = 1,
 	BRCMF_NETIF_STOP_REASON_BLOCK_BUS = 2
 =======
+=======
+>>>>>>> v3.18
  * @BRCMF_NETIF_STOP_REASON_FLOW:
  *	netif stopped due to flowring full.
  */
 enum brcmf_netif_stop_reason {
 	BRCMF_NETIF_STOP_REASON_FWS_FC = 1,
 	BRCMF_NETIF_STOP_REASON_FLOW = 2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -660,6 +695,10 @@ enum brcmf_netif_stop_reason {
  * @mac_addr: assigned mac address.
  * @netif_stop: bitmap indicates reason why netif queues are stopped.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @netif_stop_lock: spinlock for update netif_stop from multiple sources.
+>>>>>>> v3.18
 =======
  * @netif_stop_lock: spinlock for update netif_stop from multiple sources.
 >>>>>>> v3.18
@@ -679,6 +718,10 @@ struct brcmf_if {
 	u8 mac_addr[ETH_ALEN];
 	u8 netif_stop;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t netif_stop_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t netif_stop_lock;
 >>>>>>> v3.18
@@ -686,6 +729,7 @@ struct brcmf_if {
 	wait_queue_head_t pend_8021x_wait;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 extern int brcmf_netdev_wait_pend8021x(struct net_device *ndev);
@@ -713,6 +757,8 @@ extern u32 brcmf_get_chip_info(struct brcmf_if *ifp);
 extern void brcmf_txfinalize(struct brcmf_pub *drvr, struct sk_buff *txp,
 			     bool success);
 =======
+=======
+>>>>>>> v3.18
 struct brcmf_skb_reorder_data {
 	u8 *reorder;
 };
@@ -734,6 +780,9 @@ void brcmf_netif_rx(struct brcmf_if *ifp, struct sk_buff *skb);
 
 /* Sets dongle media info (drv_version, mac address). */
 int brcmf_c_preinit_dcmds(struct brcmf_if *ifp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCMF_H_ */

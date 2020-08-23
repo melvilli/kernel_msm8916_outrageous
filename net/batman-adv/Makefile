@@ -1,6 +1,10 @@
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+# Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 # Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -18,9 +22,13 @@
 #
 # You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 # 02110-1301, USA
+=======
+# along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -33,6 +41,10 @@ batman-adv-$(CONFIG_BATMAN_ADV_BLA) += bridge_loop_avoidance.o
 batman-adv-y += debugfs.o
 batman-adv-$(CONFIG_BATMAN_ADV_DAT) += distributed-arp-table.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+batman-adv-y += fragmentation.o
+>>>>>>> v3.18
 =======
 batman-adv-y += fragmentation.o
 >>>>>>> v3.18
@@ -45,7 +57,10 @@ batman-adv-y += main.o
 batman-adv-$(CONFIG_BATMAN_ADV_NC) += network-coding.o
 batman-adv-y += originator.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 batman-adv-y += ring_buffer.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 batman-adv-y += routing.o
@@ -54,8 +69,12 @@ batman-adv-y += soft-interface.o
 batman-adv-y += sysfs.o
 batman-adv-y += translation-table.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 batman-adv-y += unicast.o
 batman-adv-y += vis.o
+=======
+batman-adv-$(CONFIG_BATMAN_ADV_MCAST) += multicast.o
+>>>>>>> v3.18
 =======
 batman-adv-$(CONFIG_BATMAN_ADV_MCAST) += multicast.o
 >>>>>>> v3.18

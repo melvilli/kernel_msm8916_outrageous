@@ -2,8 +2,12 @@
 #define _ASM_GENERIC_TYPES_H
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * int-ll64 is used practically everywhere now,
  * so use it as a reasonable default.
+=======
+ * int-ll64 is used everywhere now.
+>>>>>>> v3.18
 =======
  * int-ll64 is used everywhere now.
 >>>>>>> v3.18

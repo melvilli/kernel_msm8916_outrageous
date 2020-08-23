@@ -3,12 +3,18 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_AK8975)	+= ak8975.o
 =======
+=======
+>>>>>>> v3.18
 # When adding new entries keep the list in alphabetical order
 obj-$(CONFIG_AK09911)	+= ak09911.o
 obj-$(CONFIG_AK8975)	+= ak8975.o
 obj-$(CONFIG_MAG3110)	+= mag3110.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_HID_SENSOR_MAGNETOMETER_3D) += hid-sensor-magn-3d.o
 

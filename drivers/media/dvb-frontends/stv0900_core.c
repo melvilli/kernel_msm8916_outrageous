@@ -1271,7 +1271,10 @@ enum fe_stv0900_error stv0900_st_dvbs2_single(struct stv0900_internal *intp,
 					enum fe_stv0900_demod_num demod)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum fe_stv0900_error error = STV0900_NO_ERROR;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s32 reg_ind;
@@ -1341,7 +1344,11 @@ enum fe_stv0900_error stv0900_st_dvbs2_single(struct stv0900_internal *intp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error;
+=======
+	return STV0900_NO_ERROR;
+>>>>>>> v3.18
 =======
 	return STV0900_NO_ERROR;
 >>>>>>> v3.18
@@ -1563,8 +1570,11 @@ static int stv0900_set_mis(struct stv0900_internal *intp,
 				enum fe_stv0900_demod_num demod, int mis)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum fe_stv0900_error error = STV0900_NO_ERROR;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dprintk("%s\n", __func__);
@@ -1580,7 +1590,11 @@ static int stv0900_set_mis(struct stv0900_internal *intp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error;
+=======
+	return STV0900_NO_ERROR;
+>>>>>>> v3.18
 =======
 	return STV0900_NO_ERROR;
 >>>>>>> v3.18

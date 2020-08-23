@@ -266,6 +266,12 @@ static int crypto_update_alg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	LIST_HEAD(list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!netlink_capable(skb, CAP_NET_ADMIN))
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (!netlink_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
@@ -302,6 +308,12 @@ static int crypto_del_alg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	struct crypto_user_alg *p = nlmsg_data(nlh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!netlink_capable(skb, CAP_NET_ADMIN))
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (!netlink_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
@@ -374,7 +386,11 @@ static struct crypto_alg *crypto_user_aead_alg(const char *name, u32 type,
 		if (err != -EAGAIN)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 =======
 		if (signal_pending(current)) {
 >>>>>>> v3.18
@@ -396,6 +412,12 @@ static int crypto_add_alg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	struct nlattr *priority = attrs[CRYPTOCFGA_PRIORITY_VAL];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!netlink_capable(skb, CAP_NET_ADMIN))
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (!netlink_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
@@ -489,9 +511,12 @@ static int crypto_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 	link = &crypto_dispatch[type];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netlink_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((type == (CRYPTO_MSG_GETALG - CRYPTO_MSG_BASE) &&
@@ -503,7 +528,10 @@ static int crypto_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		down_read(&crypto_alg_sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		list_for_each_entry(alg, &crypto_alg_list, cra_list)
@@ -516,11 +544,16 @@ static int crypto_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 				.min_dump_alloc = dump_alloc,
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = netlink_dump_start(crypto_nlsk, skb, nlh, &c);
 		}
 		up_read(&crypto_alg_sem);
 
 		return err;
+=======
+			return netlink_dump_start(crypto_nlsk, skb, nlh, &c);
+		}
+>>>>>>> v3.18
 =======
 			return netlink_dump_start(crypto_nlsk, skb, nlh, &c);
 		}

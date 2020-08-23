@@ -1021,7 +1021,11 @@ static int mga_getparam(struct drm_device *dev, void *data, struct drm_file *fil
 	switch (param->param) {
 	case MGA_PARAM_IRQ_NR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = drm_dev_to_irq(dev);
+=======
+		value = dev->pdev->irq;
+>>>>>>> v3.18
 =======
 		value = dev->pdev->irq;
 >>>>>>> v3.18
@@ -1034,7 +1038,11 @@ static int mga_getparam(struct drm_device *dev, void *data, struct drm_file *fil
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_TO_USER(param->value, &value, sizeof(int))) {
+=======
+	if (copy_to_user(param->value, &value, sizeof(int))) {
+>>>>>>> v3.18
 =======
 	if (copy_to_user(param->value, &value, sizeof(int))) {
 >>>>>>> v3.18
@@ -1092,7 +1100,11 @@ file_priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc mga_ioctls[] = {
+=======
+const struct drm_ioctl_desc mga_ioctls[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc mga_ioctls[] = {
 >>>>>>> v3.18
@@ -1112,7 +1124,11 @@ const struct drm_ioctl_desc mga_ioctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mga_max_ioctl = DRM_ARRAY_SIZE(mga_ioctls);
+=======
+int mga_max_ioctl = ARRAY_SIZE(mga_ioctls);
+>>>>>>> v3.18
 =======
 int mga_max_ioctl = ARRAY_SIZE(mga_ioctls);
 >>>>>>> v3.18

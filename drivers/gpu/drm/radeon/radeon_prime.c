@@ -28,6 +28,10 @@
 #include "radeon.h"
 #include <drm/radeon_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dma-buf.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-buf.h>
 >>>>>>> v3.18
@@ -62,19 +66,26 @@ void radeon_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
 
 struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							size_t size,
 							struct sg_table *sg)
 {
 =======
+=======
+>>>>>>> v3.18
 							struct dma_buf_attachment *attach,
 							struct sg_table *sg)
 {
 	struct reservation_object *resv = attach->dmabuf->resv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct radeon_device *rdev = dev->dev_private;
 	struct radeon_bo *bo;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = radeon_bo_create(rdev, size, PAGE_SIZE, false,
 			       RADEON_GEM_DOMAIN_GTT, sg, &bo);
@@ -82,12 +93,17 @@ struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
 		return ERR_PTR(ret);
 	bo->gem_base.driver_private = bo;
 =======
+=======
+>>>>>>> v3.18
 	ww_mutex_lock(&resv->lock, NULL);
 	ret = radeon_bo_create(rdev, attach->dmabuf->size, PAGE_SIZE, false,
 			       RADEON_GEM_DOMAIN_GTT, 0, sg, resv, &bo);
 	ww_mutex_unlock(&resv->lock);
 	if (ret)
 		return ERR_PTR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&rdev->gem.mutex);
@@ -109,6 +125,7 @@ int radeon_gem_prime_pin(struct drm_gem_object *obj)
 	/* pin buffer into GTT */
 	ret = radeon_bo_pin(bo, RADEON_GEM_DOMAIN_GTT, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		radeon_bo_unreserve(bo);
 		return ret;
@@ -117,6 +134,8 @@ int radeon_gem_prime_pin(struct drm_gem_object *obj)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	radeon_bo_unreserve(bo);
 	return ret;
 }
@@ -150,5 +169,8 @@ struct dma_buf *radeon_gem_prime_export(struct drm_device *dev,
 	if (radeon_ttm_tt_has_userptr(bo->tbo.ttm))
 		return ERR_PTR(-EPERM);
 	return drm_gem_prime_export(dev, gobj, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

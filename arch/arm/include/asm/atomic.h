@@ -13,6 +13,10 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/prefetch.h>
+>>>>>>> v3.18
 =======
 #include <linux/prefetch.h>
 >>>>>>> v3.18
@@ -31,7 +35,11 @@
  * atomic_set() is the clrex or dummy strex done on every exception return.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)	(*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)	ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -44,6 +52,7 @@
  * store exclusive to ensure that these are atomic.  We may loop
  * to ensure that the update happens.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
@@ -120,6 +129,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 
 	return result;
 =======
+=======
+>>>>>>> v3.18
 
 #define ATOMIC_OP(op, c_op, asm_op)					\
 static inline void atomic_##op(int i, atomic_t *v)			\
@@ -161,6 +172,9 @@ static inline int atomic_##op##_return(int i, atomic_t *v)		\
 	smp_mb();							\
 									\
 	return result;							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,6 +185,10 @@ static inline int atomic_cmpxchg(atomic_t *ptr, int old, int new)
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&ptr->counter);
+>>>>>>> v3.18
 =======
 	prefetchw(&ptr->counter);
 >>>>>>> v3.18
@@ -191,6 +209,7 @@ static inline int atomic_cmpxchg(atomic_t *ptr, int old, int new)
 	return oldval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else /* ARM_ARCH_6 */
 
@@ -226,6 +245,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 }
 #define atomic_sub(i, v)	(void) atomic_sub_return(i, v)
 =======
+=======
+>>>>>>> v3.18
 static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int oldval, newval;
@@ -282,6 +303,9 @@ static inline int atomic_##op##_return(int i, atomic_t *v)		\
 									\
 	return val;							\
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
@@ -299,10 +323,13 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __LINUX_ARM_ARCH__ */
 
 #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int __atomic_add_unless(atomic_t *v, int a, int u)
@@ -316,7 +343,10 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif /* __LINUX_ARM_ARCH__ */
 
 #define ATOMIC_OPS(op, c_op, asm_op)					\
@@ -332,6 +362,9 @@ ATOMIC_OPS(sub, -=, sub)
 
 #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define atomic_inc(v)		atomic_add(1, v)
 #define atomic_dec(v)		atomic_sub(1, v)
@@ -392,6 +425,10 @@ static inline void atomic64_set(atomic64_t *v, long long i)
 	long long tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&v->counter);
+>>>>>>> v3.18
 =======
 	prefetchw(&v->counter);
 >>>>>>> v3.18
@@ -406,6 +443,7 @@ static inline void atomic64_set(atomic64_t *v, long long i)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void atomic64_add(long long i, atomic64_t *v)
 {
@@ -487,6 +525,8 @@ static inline long long atomic64_sub_return(long long i, atomic64_t *v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC64_OP(op, op1, op2)					\
 static inline void atomic64_##op(long long i, atomic64_t *v)		\
 {									\
@@ -541,6 +581,9 @@ ATOMIC64_OPS(sub, subs, sbc)
 #undef ATOMIC64_OPS
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline long long atomic64_cmpxchg(atomic64_t *ptr, long long old,
@@ -551,6 +594,10 @@ static inline long long atomic64_cmpxchg(atomic64_t *ptr, long long old,
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&ptr->counter);
+>>>>>>> v3.18
 =======
 	prefetchw(&ptr->counter);
 >>>>>>> v3.18
@@ -579,6 +626,10 @@ static inline long long atomic64_xchg(atomic64_t *ptr, long long new)
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&ptr->counter);
+>>>>>>> v3.18
 =======
 	prefetchw(&ptr->counter);
 >>>>>>> v3.18
@@ -604,6 +655,7 @@ static inline long long atomic64_dec_if_positive(atomic64_t *v)
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	__asm__ __volatile__("@ atomic64_dec_if_positive\n"
 "1:	ldrexd	%0, %H0, [%3]\n"
@@ -611,6 +663,8 @@ static inline long long atomic64_dec_if_positive(atomic64_t *v)
 "	sbc	%H0, %H0, #0\n"
 "	teq	%H0, #0\n"
 =======
+=======
+>>>>>>> v3.18
 	prefetchw(&v->counter);
 
 	__asm__ __volatile__("@ atomic64_dec_if_positive\n"
@@ -618,6 +672,9 @@ static inline long long atomic64_dec_if_positive(atomic64_t *v)
 "	subs	%Q0, %Q0, #1\n"
 "	sbc	%R0, %R0, #0\n"
 "	teq	%R0, #0\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 "	bmi	2f\n"
 "	strexd	%1, %0, %H0, [%3]\n"
@@ -641,6 +698,10 @@ static inline int atomic64_add_unless(atomic64_t *v, long long a, long long u)
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw(&v->counter);
+>>>>>>> v3.18
 =======
 	prefetchw(&v->counter);
 >>>>>>> v3.18
@@ -652,8 +713,13 @@ static inline int atomic64_add_unless(atomic64_t *v, long long a, long long u)
 "	moveq	%1, #0\n"
 "	beq	2f\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "	adds	%0, %0, %6\n"
 "	adc	%H0, %H0, %H6\n"
+=======
+"	adds	%Q0, %Q0, %Q6\n"
+"	adc	%R0, %R0, %R6\n"
+>>>>>>> v3.18
 =======
 "	adds	%Q0, %Q0, %Q6\n"
 "	adc	%R0, %R0, %R6\n"

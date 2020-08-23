@@ -63,7 +63,10 @@
 .endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* loop until a given value has been read (with mask) */
 .macro WAIT_MASK, addr, data, cmp
 	LDR	r0, 2f
@@ -107,5 +110,8 @@
 3:
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ZBOOT_MACRO_H */

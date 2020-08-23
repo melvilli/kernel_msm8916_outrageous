@@ -7,7 +7,10 @@
  */
 #include <linux/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -89,10 +92,13 @@ static void octeon_smp_hotplug_setup(void)
 	struct linux_app_boot_info *labi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	labi = (struct linux_app_boot_info *)PHYS_TO_XKSEG_CACHED(LABI_ADDR_IN_BOOTLOADER);
 	if (labi->labi_signature != LABI_SIGNATURE)
 		panic("The bootloader version on this board is incorrect.");
 =======
+=======
+>>>>>>> v3.18
 	if (!setup_max_cpus)
 		return;
 
@@ -101,6 +107,9 @@ static void octeon_smp_hotplug_setup(void)
 		pr_info("The bootloader on this board does not support HOTPLUG_CPU.");
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	octeon_bootloader_entry_addr = labi->InitTLBStart_addr;
@@ -145,7 +154,12 @@ static void octeon_smp_setup(void)
 	 * are always consecutively numberd from 0.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (id = 0; id < num_cores && id < NR_CPUS; id++) {
+=======
+	for (id = 0; setup_max_cpus && octeon_bootloader_entry_addr &&
+		     id < num_cores && id < NR_CPUS; id++) {
+>>>>>>> v3.18
 =======
 	for (id = 0; setup_max_cpus && octeon_bootloader_entry_addr &&
 		     id < num_cores && id < NR_CPUS; id++) {
@@ -193,7 +207,11 @@ static void octeon_boot_secondary(int cpu, struct task_struct *idle)
  * board code to clean up state, if needed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit octeon_init_secondary(void)
+=======
+static void octeon_init_secondary(void)
+>>>>>>> v3.18
 =======
 static void octeon_init_secondary(void)
 >>>>>>> v3.18
@@ -217,6 +235,7 @@ static void octeon_init_secondary(void)
 void octeon_prepare_cpus(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG_CPU
 	struct linux_app_boot_info *labi;
 
@@ -225,6 +244,8 @@ void octeon_prepare_cpus(unsigned int max_cpus)
 	if (labi->labi_signature != LABI_SIGNATURE)
 		panic("The bootloader version on this board is incorrect.");
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -246,6 +267,7 @@ void octeon_prepare_cpus(unsigned int max_cpus)
 static void octeon_smp_finish(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CAVIUM_GDB
 	unsigned long tmp;
 	/* Pulse MCD0 signal on Ctrl-C to stop all the cores. Also set the MCD0
@@ -257,6 +279,8 @@ static void octeon_smp_finish(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	octeon_user_io_init();
 
 	/* to generate the first CPU timer interrupt */
@@ -264,6 +288,7 @@ static void octeon_smp_finish(void)
 	local_irq_enable();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Hook for after all CPUs are online
@@ -282,14 +307,19 @@ static void octeon_cpus_done(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
 
 /* State of each CPU. */
 DEFINE_PER_CPU(int, cpu_state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void fixup_irqs(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int octeon_cpu_disable(void)
@@ -300,11 +330,14 @@ static int octeon_cpu_disable(void)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpu_online(cpu, false);
 	cpu_clear(cpu, cpu_callin_map);
 	local_irq_disable();
 	fixup_irqs();
 =======
+=======
+>>>>>>> v3.18
 	if (!octeon_bootloader_entry_addr)
 		return -ENOTSUPP;
 
@@ -312,6 +345,9 @@ static int octeon_cpu_disable(void)
 	cpu_clear(cpu, cpu_callin_map);
 	local_irq_disable();
 	octeon_fixup_irqs();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_enable();
 
@@ -421,7 +457,11 @@ static int octeon_update_boot_vector(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit octeon_cpu_callback(struct notifier_block *nfb,
+=======
+static int octeon_cpu_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 =======
 static int octeon_cpu_callback(struct notifier_block *nfb,
 >>>>>>> v3.18
@@ -444,7 +484,11 @@ static int octeon_cpu_callback(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit register_cavium_notifier(void)
+=======
+static int register_cavium_notifier(void)
+>>>>>>> v3.18
 =======
 static int register_cavium_notifier(void)
 >>>>>>> v3.18
@@ -462,7 +506,10 @@ struct plat_smp_ops octeon_smp_ops = {
 	.init_secondary		= octeon_init_secondary,
 	.smp_finish		= octeon_smp_finish,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpus_done		= octeon_cpus_done,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.boot_secondary		= octeon_boot_secondary,

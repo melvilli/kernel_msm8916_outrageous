@@ -90,7 +90,11 @@ static DEFINE_MUTEX(vmur_mutex);
  * - ur_probe gets a urd reference, ur_remove drops the reference
  *   dev_get_drvdata(&cdev->dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * - ur_open gets a urd reference, ur_relase drops the reference
+=======
+ * - ur_open gets a urd reference, ur_release drops the reference
+>>>>>>> v3.18
 =======
  * - ur_open gets a urd reference, ur_release drops the reference
 >>>>>>> v3.18
@@ -927,8 +931,13 @@ static int ur_set_online(struct ccw_device *cdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	urd->device = device_create(vmur_class, NULL, urd->char_device->dev,
 				    NULL, "%s", node_id);
+=======
+	urd->device = device_create(vmur_class, &cdev->dev,
+				    urd->char_device->dev, NULL, "%s", node_id);
+>>>>>>> v3.18
 =======
 	urd->device = device_create(vmur_class, &cdev->dev,
 				    urd->char_device->dev, NULL, "%s", node_id);

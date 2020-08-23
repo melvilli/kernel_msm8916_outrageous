@@ -259,7 +259,10 @@ int uwb_est_register(u8 type, u8 event_high, u16 vendor, u16 product,
 	unsigned long flags;
 	unsigned itr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 type_event_high;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int result = 0;
@@ -272,7 +275,10 @@ int uwb_est_register(u8 type, u8 event_high, u16 vendor, u16 product,
 	}
 	/* Find the right spot to insert it in */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	type_event_high = type << 8 | event_high;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (itr = 0; itr < uwb_est_used; itr++)
@@ -443,7 +449,10 @@ ssize_t uwb_est_find_size(struct uwb_rc *rc, const struct uwb_rceb *rceb,
 	unsigned itr;
 	u16 type_event_high, event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *ptr = (u8 *) rceb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -463,6 +472,7 @@ ssize_t uwb_est_find_size(struct uwb_rc *rc, const struct uwb_rceb *rceb,
 			goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "event 0x%02x/%04x/%02x: no handlers available; "
 		"RCEB %02x %02x %02x %02x\n",
 		(unsigned) rceb->bEventType,
@@ -470,12 +480,17 @@ ssize_t uwb_est_find_size(struct uwb_rc *rc, const struct uwb_rceb *rceb,
 		(unsigned) rceb->bEventContext,
 		ptr[0], ptr[1], ptr[2], ptr[3]);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev,
 		"event 0x%02x/%04x/%02x: no handlers available; RCEB %4ph\n",
 		(unsigned) rceb->bEventType,
 		(unsigned) le16_to_cpu(rceb->wEvent),
 		(unsigned) rceb->bEventContext,
 		rceb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size = -ENOENT;
 out:

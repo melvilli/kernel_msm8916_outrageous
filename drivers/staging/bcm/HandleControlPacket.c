@@ -12,6 +12,7 @@
  * @return None
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk_buff *skb)
 {
 	struct bcm_tarang_data *pTarang = NULL;
@@ -20,6 +21,8 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk
 	CHAR cntrl_msg_mask_bit = 0;
 	BOOLEAN drop_pkt_flag = TRUE;
 =======
+=======
+>>>>>>> v3.18
 static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 				     struct sk_buff *skb)
 {
@@ -28,13 +31,20 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 	struct sk_buff *newPacket = NULL;
 	CHAR cntrl_msg_mask_bit = 0;
 	bool drop_pkt_flag = TRUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	USHORT usStatus = *(PUSHORT)(skb->data);
 
 	if (netif_msg_pktdata(Adapter))
 		print_hex_dump(KERN_DEBUG, PFX "rx control: ", DUMP_PREFIX_NONE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				16, 1, skb->data, skb->len, 0);
+=======
+			       16, 1, skb->data, skb->len, 0);
+>>>>>>> v3.18
 =======
 			       16, 1, skb->data, skb->len, 0);
 >>>>>>> v3.18
@@ -107,7 +117,11 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 		 */
 		if (pTarang->RxCntrlMsgBitMask & (1 << cntrl_msg_mask_bit))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drop_pkt_flag = FALSE;
+=======
+			drop_pkt_flag = false;
+>>>>>>> v3.18
 =======
 			drop_pkt_flag = false;
 >>>>>>> v3.18
@@ -117,7 +131,11 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 				|| ((pTarang->AppCtrlQueueLen >
 					MAX_APP_QUEUE_LEN / 2) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    (HighPriorityMessage == FALSE))) {
+=======
+				    (HighPriorityMessage == false))) {
+>>>>>>> v3.18
 =======
 				    (HighPriorityMessage == false))) {
 >>>>>>> v3.18
@@ -129,6 +147,7 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 			 *    the sum of all types of dropped pkt by that
 			 *    tarang only.
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			switch (*(PUSHORT)skb->data) {
 			case CM_RESPONSES:
@@ -155,6 +174,8 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 			default:
 				pTarang->stDroppedAppCntrlMsgs.low_priority_message++;
 =======
+=======
+>>>>>>> v3.18
 			struct bcm_mibs_dropped_cntrl_msg *msg =
 				&pTarang->stDroppedAppCntrlMsgs;
 			switch (*(PUSHORT)skb->data) {
@@ -181,6 +202,9 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
 				break;
 			default:
 				msg->low_priority_message++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -207,7 +231,13 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
  * Thread to handle control pkt reception
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int control_packet_handler(struct bcm_mini_adapter *Adapter /* pointer to adapter object*/)
+=======
+
+/* pointer to adapter object*/
+int control_packet_handler(struct bcm_mini_adapter *Adapter)
+>>>>>>> v3.18
 =======
 
 /* pointer to adapter object*/
@@ -234,8 +264,13 @@ int control_packet_handler(struct bcm_mini_adapter *Adapter)
 		}
 		if (TRUE == Adapter->bWakeUpDevice) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			Adapter->bWakeUpDevice = FALSE;
 			if ((FALSE == Adapter->bTriedToWakeUpFromlowPowerMode)
+=======
+			Adapter->bWakeUpDevice = false;
+			if ((false == Adapter->bTriedToWakeUpFromlowPowerMode)
+>>>>>>> v3.18
 =======
 			Adapter->bWakeUpDevice = false;
 			if ((false == Adapter->bTriedToWakeUpFromlowPowerMode)
@@ -280,6 +315,10 @@ INT flushAllAppQ(void)
 	struct bcm_tarang_data *pTarang = NULL;
 	struct sk_buff *PacketToDrop = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

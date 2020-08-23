@@ -18,6 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/kthread.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/moduleparam.h>
+>>>>>>> v3.18
 =======
 #include <linux/moduleparam.h>
 >>>>>>> v3.18
@@ -75,7 +79,10 @@ static struct timer_list put_timer;
 static struct task_struct *dashtty_thread;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The console_poll parameter determines whether the console channel should be
  * polled for input.
@@ -85,6 +92,9 @@ static struct task_struct *dashtty_thread;
 static bool console_poll;
 module_param(console_poll, bool, S_IRUGO);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RX_BUF_SIZE 1024
 
@@ -370,7 +380,11 @@ static int dashtty_port_activate(struct tty_port *port, struct tty_struct *tty)
 	 *
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dport != &dashtty_ports[CONSOLE_CHANNEL])
+=======
+	if (console_poll || dport != &dashtty_ports[CONSOLE_CHANNEL])
+>>>>>>> v3.18
 =======
 	if (console_poll || dport != &dashtty_ports[CONSOLE_CHANNEL])
 >>>>>>> v3.18
@@ -393,7 +407,11 @@ static void dashtty_port_shutdown(struct tty_port *port)
 
 	/* stop reading */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dport != &dashtty_ports[CONSOLE_CHANNEL])
+=======
+	if (console_poll || dport != &dashtty_ports[CONSOLE_CHANNEL])
+>>>>>>> v3.18
 =======
 	if (console_poll || dport != &dashtty_ports[CONSOLE_CHANNEL])
 >>>>>>> v3.18
@@ -520,7 +538,11 @@ static int dashtty_write(struct tty_struct *tty, const unsigned char *buf,
 	/* xmit buffer no longer empty? */
 	if (count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(dport->xmit_empty);
+=======
+		reinit_completion(&dport->xmit_empty);
+>>>>>>> v3.18
 =======
 		reinit_completion(&dport->xmit_empty);
 >>>>>>> v3.18

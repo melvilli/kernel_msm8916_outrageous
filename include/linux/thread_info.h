@@ -62,8 +62,11 @@ extern long do_no_restart_syscall(struct restart_block *parm);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define THREADINFO_GFP_ACCOUNTED (THREADINFO_GFP | __GFP_KMEMCG)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -108,9 +111,12 @@ static inline int test_ti_thread_flag(struct thread_info *ti, int flag)
 	test_ti_thread_flag(current_thread_info(), flag)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define set_need_resched()	set_thread_flag(TIF_NEED_RESCHED)
 #define clear_need_resched()	clear_thread_flag(TIF_NEED_RESCHED)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define tif_need_resched() test_thread_flag(TIF_NEED_RESCHED)

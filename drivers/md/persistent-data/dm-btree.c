@@ -162,6 +162,10 @@ struct frame {
 
 struct del_stack {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dm_btree_info *info;
+>>>>>>> v3.18
 =======
 	struct dm_btree_info *info;
 >>>>>>> v3.18
@@ -188,7 +192,10 @@ static int unprocessed_frames(struct del_stack *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void prefetch_children(struct del_stack *s, struct frame *f)
 {
 	unsigned i;
@@ -203,6 +210,9 @@ static bool is_internal_level(struct dm_btree_info *info, struct frame *f)
 	return f->level < (info->levels - 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int push_frame(struct del_stack *s, dm_block_t b, unsigned level)
 {
@@ -227,6 +237,10 @@ static int push_frame(struct del_stack *s, dm_block_t b, unsigned level)
 
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		uint32_t flags;
+>>>>>>> v3.18
 =======
 		uint32_t flags;
 >>>>>>> v3.18
@@ -243,11 +257,17 @@ static int push_frame(struct del_stack *s, dm_block_t b, unsigned level)
 		f->nr_children = le32_to_cpu(f->n->header.nr_entries);
 		f->current_child = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		flags = le32_to_cpu(f->n->header.flags);
 		if (flags & INTERNAL_NODE || is_internal_level(s->info, f))
 			prefetch_children(s, f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -262,6 +282,7 @@ static void pop_frame(struct del_stack *s)
 	dm_tm_unlock(s->tm, f->b);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool is_internal_level(struct dm_btree_info *info, struct frame *f)
 {
@@ -280,20 +301,28 @@ static void unlock_all_frames(struct del_stack *s)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int dm_btree_del(struct dm_btree_info *info, dm_block_t root)
 {
 	int r;
 	struct del_stack *s;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s = kmalloc(sizeof(*s), GFP_NOIO);
 	if (!s)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	s = kmalloc(sizeof(*s), GFP_KERNEL);
 	if (!s)
 		return -ENOMEM;
 	s->info = info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s->tm = info->tm;
 	s->top = -1;
@@ -340,6 +369,7 @@ int dm_btree_del(struct dm_btree_info *info, dm_block_t root)
 							     value_ptr(f->n, i));
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			f->current_child = f->nr_children;
 		}
 	}
@@ -351,12 +381,17 @@ out:
 	kfree(s);
 
 =======
+=======
+>>>>>>> v3.18
 			pop_frame(s);
 		}
 	}
 
 out:
 	kfree(s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -521,10 +556,15 @@ static int btree_split_sibling(struct shadow_spine *s, dm_block_t root,
 	r = insert_at(sizeof(__le64), pn, parent_index + 1,
 		      le64_to_cpu(rn->keys[0]), &location);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (r) {
 		unlock_block(s->info, right);
 		return r;
 	}
+=======
+	if (r)
+		return r;
+>>>>>>> v3.18
 =======
 	if (r)
 		return r;
@@ -580,7 +620,11 @@ static int btree_split_beneath(struct shadow_spine *s, uint64_t key)
 	r = new_block(s->info, &right);
 	if (r < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unlock_block(s->info, left);
+=======
+		/* FIXME: put left */
+>>>>>>> v3.18
 =======
 		/* FIXME: put left */
 >>>>>>> v3.18
@@ -728,14 +772,20 @@ static int insert(struct dm_btree_info *info, dm_block_t root,
 	struct dm_btree_value_type le64_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_le64_type(info->tm, &le64_type);
 =======
+=======
+>>>>>>> v3.18
 	le64_type.context = NULL;
 	le64_type.size = sizeof(__le64);
 	le64_type.inc = NULL;
 	le64_type.dec = NULL;
 	le64_type.equal = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	init_shadow_spine(&spine, info);
 
@@ -835,8 +885,13 @@ EXPORT_SYMBOL_GPL(dm_btree_insert_notify);
 /*----------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int find_highest_key(struct ro_spine *s, dm_block_t block,
 			    uint64_t *result_key, dm_block_t *next_block)
+=======
+static int find_key(struct ro_spine *s, dm_block_t block, bool find_highest,
+		    uint64_t *result_key, dm_block_t *next_block)
+>>>>>>> v3.18
 =======
 static int find_key(struct ro_spine *s, dm_block_t block, bool find_highest,
 		    uint64_t *result_key, dm_block_t *next_block)
@@ -858,13 +913,19 @@ static int find_key(struct ro_spine *s, dm_block_t block, bool find_highest,
 			i--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*result_key = le64_to_cpu(ro_node(s)->keys[i]);
 =======
+=======
+>>>>>>> v3.18
 		if (find_highest)
 			*result_key = le64_to_cpu(ro_node(s)->keys[i]);
 		else
 			*result_key = le64_to_cpu(ro_node(s)->keys[0]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (next_block || flags & INTERNAL_NODE)
 			block = value64(ro_node(s), i);
@@ -877,8 +938,13 @@ static int find_key(struct ro_spine *s, dm_block_t block, bool find_highest,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dm_btree_find_highest_key(struct dm_btree_info *info, dm_block_t root,
 			      uint64_t *result_keys)
+=======
+static int dm_btree_find_key(struct dm_btree_info *info, dm_block_t root,
+			     bool find_highest, uint64_t *result_keys)
+>>>>>>> v3.18
 =======
 static int dm_btree_find_key(struct dm_btree_info *info, dm_block_t root,
 			     bool find_highest, uint64_t *result_keys)
@@ -890,8 +956,13 @@ static int dm_btree_find_key(struct dm_btree_info *info, dm_block_t root,
 	init_ro_spine(&spine, info);
 	for (level = 0; level < info->levels; level++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = find_highest_key(&spine, root, result_keys + level,
 				     level == info->levels - 1 ? NULL : &root);
+=======
+		r = find_key(&spine, root, find_highest, result_keys + level,
+			     level == info->levels - 1 ? NULL : &root);
+>>>>>>> v3.18
 =======
 		r = find_key(&spine, root, find_highest, result_keys + level,
 			     level == info->levels - 1 ? NULL : &root);
@@ -910,9 +981,12 @@ static int dm_btree_find_key(struct dm_btree_info *info, dm_block_t root,
 	return r ? r : count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(dm_btree_find_highest_key);
 
 =======
+=======
+>>>>>>> v3.18
 
 int dm_btree_find_highest_key(struct dm_btree_info *info, dm_block_t root,
 			      uint64_t *result_keys)
@@ -930,6 +1004,9 @@ EXPORT_SYMBOL_GPL(dm_btree_find_lowest_key);
 
 /*----------------------------------------------------------------*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * FIXME: We shouldn't use a recursive algorithm when we have limited stack

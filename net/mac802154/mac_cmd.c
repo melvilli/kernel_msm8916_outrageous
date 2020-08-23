@@ -41,12 +41,18 @@ static int mac802154_mlme_start_req(struct net_device *dev,
 				    u8 coord_realign)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(addr->addr_type != IEEE802154_ADDR_SHORT);
 =======
+=======
+>>>>>>> v3.18
 	struct ieee802154_mlme_ops *ops = ieee802154_mlme_ops(dev);
 	int rc = 0;
 
 	BUG_ON(addr->mode != IEEE802154_ADDR_SHORT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mac802154_dev_set_pan_id(dev, addr->pan_id);
@@ -55,7 +61,10 @@ static int mac802154_mlme_start_req(struct net_device *dev,
 	mac802154_dev_set_page_channel(dev, page, channel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ops->llsec) {
 		struct ieee802154_llsec_params params;
 		int changed = 0;
@@ -75,6 +84,9 @@ static int mac802154_mlme_start_req(struct net_device *dev,
 		rc = ops->llsec->set_params(dev, &params, changed);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* FIXME: add validation for unused parameters to be sane
 	 * for SoftMAC
@@ -82,7 +94,11 @@ static int mac802154_mlme_start_req(struct net_device *dev,
 	ieee802154_nl_start_confirm(dev, IEEE802154_SUCCESS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return rc;
+>>>>>>> v3.18
 =======
 	return rc;
 >>>>>>> v3.18
@@ -98,7 +114,10 @@ static struct wpan_phy *mac802154_get_phy(const struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ieee802154_llsec_ops mac802154_llsec_ops = {
 	.get_params = mac802154_get_params,
 	.set_params = mac802154_set_params,
@@ -115,6 +134,9 @@ static struct ieee802154_llsec_ops mac802154_llsec_ops = {
 	.unlock_table = mac802154_unlock_table,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ieee802154_reduced_mlme_ops mac802154_mlme_reduced = {
 	.get_phy = mac802154_get_phy,
@@ -127,11 +149,17 @@ struct ieee802154_mlme_ops mac802154_mlme_wpan = {
 	.get_short_addr = mac802154_dev_get_short_addr,
 	.get_dsn = mac802154_dev_get_dsn,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	.llsec = &mac802154_llsec_ops,
 
 	.set_mac_params = mac802154_set_mac_params,
 	.get_mac_params = mac802154_get_mac_params,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

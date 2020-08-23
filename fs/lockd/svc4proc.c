@@ -422,7 +422,11 @@ nlm4svc_proc_sm_notify(struct svc_rqst *rqstp, struct nlm_reboot *argp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nlm_host_rebooted(SVC_NET(rqstp), argp);
+=======
+	nlm_host_rebooted(argp);
+>>>>>>> v3.18
 =======
 	nlm_host_rebooted(argp);
 >>>>>>> v3.18

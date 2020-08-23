@@ -7,9 +7,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/linkage.h>
 
 ARC_ENTRY memcpy
+=======
+#include <linux/linkage.h>
+
+ENTRY(memcpy)
+>>>>>>> v3.18
 =======
 #include <linux/linkage.h>
 
@@ -70,7 +76,11 @@ ENTRY(memcpy)
 	j_s.d	[blink]
 	stb	r12,[r5,0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT memcpy
+=======
+END(memcpy)
+>>>>>>> v3.18
 =======
 END(memcpy)
 >>>>>>> v3.18

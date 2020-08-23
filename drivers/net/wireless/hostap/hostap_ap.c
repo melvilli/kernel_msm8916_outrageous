@@ -25,6 +25,10 @@
 #include <linux/export.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ static void ap_sta_hash_del(struct ap_data *ap, struct sta_info *sta)
 	s = ap->sta_hash[STA_HASH(sta->addr)];
 	if (s == NULL) return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(s->addr, sta->addr, ETH_ALEN) == 0) {
+=======
+	if (ether_addr_equal(s->addr, sta->addr)) {
+>>>>>>> v3.18
 =======
 	if (ether_addr_equal(s->addr, sta->addr)) {
 >>>>>>> v3.18
@@ -120,8 +128,12 @@ static void ap_sta_hash_del(struct ap_data *ap, struct sta_info *sta)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (s->hnext != NULL && memcmp(s->hnext->addr, sta->addr, ETH_ALEN)
 	       != 0)
+=======
+	while (s->hnext != NULL && !ether_addr_equal(s->hnext->addr, sta->addr))
+>>>>>>> v3.18
 =======
 	while (s->hnext != NULL && !ether_addr_equal(s->hnext->addr, sta->addr))
 >>>>>>> v3.18
@@ -160,7 +172,11 @@ static void ap_free_sta(struct ap_data *ap, struct sta_info *sta)
 	if (!sta->ap && sta->u.sta.challenge)
 		kfree(sta->u.sta.challenge);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&sta->timer);
+=======
+	del_timer_sync(&sta->timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&sta->timer);
 >>>>>>> v3.18
@@ -452,7 +468,11 @@ int ap_control_del_mac(struct mac_restrictions *mac_restrictions, u8 *mac)
 		entry = list_entry(ptr, struct mac_entry, list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(entry->addr, mac, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(entry->addr, mac)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(entry->addr, mac)) {
 >>>>>>> v3.18
@@ -480,7 +500,11 @@ static int ap_control_mac_deny(struct mac_restrictions *mac_restrictions,
 	spin_lock_bh(&mac_restrictions->lock);
 	list_for_each_entry(entry, &mac_restrictions->mac_list, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(entry->addr, mac, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(entry->addr, mac)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(entry->addr, mac)) {
 >>>>>>> v3.18
@@ -982,7 +1006,11 @@ static struct sta_info* ap_get_sta(struct ap_data *ap, u8 *sta)
 
 	s = ap->sta_hash[STA_HASH(sta)];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (s != NULL && memcmp(s->addr, sta, ETH_ALEN) != 0)
+=======
+	while (s != NULL && !ether_addr_equal(s->addr, sta))
+>>>>>>> v3.18
 =======
 	while (s != NULL && !ether_addr_equal(s->addr, sta))
 >>>>>>> v3.18
@@ -1420,7 +1448,11 @@ static void handle_authen(local_info_t *local, struct sk_buff *skb,
 	pos++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(dev->dev_addr, hdr->addr2, ETH_ALEN) == 0 ||
+=======
+	if (ether_addr_equal(dev->dev_addr, hdr->addr2) ||
+>>>>>>> v3.18
 =======
 	if (ether_addr_equal(dev->dev_addr, hdr->addr2) ||
 >>>>>>> v3.18
@@ -1968,7 +2000,11 @@ static void handle_pspoll(local_info_t *local,
 	       hdr->addr1, hdr->addr2, !!ieee80211_has_pm(hdr->frame_control));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
 >>>>>>> v3.18
@@ -2267,7 +2303,11 @@ static void handle_ap_item(local_info_t *local, struct sk_buff *skb,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN)) {
+=======
+		if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 		if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
 >>>>>>> v3.18
@@ -2308,7 +2348,11 @@ static void handle_ap_item(local_info_t *local, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
 >>>>>>> v3.18
@@ -2318,7 +2362,11 @@ static void handle_ap_item(local_info_t *local, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(hdr->addr3, dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(hdr->addr3, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(hdr->addr3, dev->dev_addr)) {
 >>>>>>> v3.18
@@ -3084,7 +3132,11 @@ ap_rx_ret hostap_handle_sta_rx(local_info_t *local, struct net_device *dev,
 			/* FromDS frame - not for us; probably
 			 * broadcast/multicast in another BSS - drop */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN) == 0) {
+=======
+			if (ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 			if (ether_addr_equal(hdr->addr1, dev->dev_addr)) {
 >>>>>>> v3.18
@@ -3097,7 +3149,11 @@ ap_rx_ret hostap_handle_sta_rx(local_info_t *local, struct net_device *dev,
 		}
 	} else if (stype == IEEE80211_STYPE_NULLFUNC && sta == NULL &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN) == 0) {
+=======
+		   ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 		   ether_addr_equal(hdr->addr1, dev->dev_addr)) {
 >>>>>>> v3.18
@@ -3130,7 +3186,11 @@ ap_rx_ret hostap_handle_sta_rx(local_info_t *local, struct net_device *dev,
 		 * broadcast frame from an IBSS network. Drop it silently.
 		 * If BSSID is own, report the dropping of this frame. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(hdr->addr3, dev->dev_addr, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(hdr->addr3, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(hdr->addr3, dev->dev_addr)) {
 >>>>>>> v3.18

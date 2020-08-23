@@ -21,8 +21,11 @@
 #define CACHE_SUPERBLOCK_MAGIC 06142003
 #define CACHE_SUPERBLOCK_LOCATION 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CACHE_VERSION 1
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * defines a range of metadata versions that this module can handle.
@@ -30,6 +33,9 @@
 #define MIN_CACHE_VERSION 1
 #define MAX_CACHE_VERSION 1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CACHE_METADATA_CACHE_SIZE 64
 
@@ -99,9 +105,12 @@ struct cache_disk_superblock {
 
 struct dm_cache_metadata {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t ref_count;
 	struct list_head list;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct block_device *bdev;
@@ -120,7 +129,11 @@ struct dm_cache_metadata {
 
 	sector_t discard_block_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dm_dblock_t discard_nr_blocks;
+=======
+	dm_oblock_t discard_nr_blocks;
+>>>>>>> v3.18
 =======
 	dm_oblock_t discard_nr_blocks;
 >>>>>>> v3.18
@@ -135,13 +148,19 @@ struct dm_cache_metadata {
 	size_t policy_hint_size;
 	struct dm_cache_statistics stats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Reading the space map root can fail, so we read it into this
 	 * buffer before the superblock is locked and updated.
 	 */
 	__u8 metadata_space_map_root[SPACE_MAP_ROOT_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -164,7 +183,10 @@ static void sb_prepare_for_write(struct dm_block_validator *v,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int check_metadata_version(struct cache_disk_superblock *disk_super)
 {
 	uint32_t metadata_version = le32_to_cpu(disk_super->version);
@@ -177,6 +199,9 @@ static int check_metadata_version(struct cache_disk_superblock *disk_super)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sb_check(struct dm_block_validator *v,
 		    struct dm_block *b,
@@ -209,7 +234,11 @@ static int sb_check(struct dm_block_validator *v,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return check_metadata_version(disk_super);
+>>>>>>> v3.18
 =======
 	return check_metadata_version(disk_super);
 >>>>>>> v3.18
@@ -247,7 +276,11 @@ static int superblock_lock(struct dm_cache_metadata *cmd,
 /*----------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __superblock_all_zeroes(struct dm_block_manager *bm, int *result)
+=======
+static int __superblock_all_zeroes(struct dm_block_manager *bm, bool *result)
+>>>>>>> v3.18
 =======
 static int __superblock_all_zeroes(struct dm_block_manager *bm, bool *result)
 >>>>>>> v3.18
@@ -267,15 +300,21 @@ static int __superblock_all_zeroes(struct dm_block_manager *bm, bool *result)
 
 	data_le = dm_block_data(b);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*result = 1;
 	for (i = 0; i < sb_block_size; i++) {
 		if (data_le[i] != zero) {
 			*result = 0;
 =======
+=======
+>>>>>>> v3.18
 	*result = true;
 	for (i = 0; i < sb_block_size; i++) {
 		if (data_le[i] != zero) {
 			*result = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -302,7 +341,10 @@ static void __setup_mapping_info(struct dm_cache_metadata *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __save_sm_root(struct dm_cache_metadata *cmd)
 {
 	int r;
@@ -324,13 +366,19 @@ static void __copy_sm_root(struct dm_cache_metadata *cmd,
 	       sizeof(cmd->metadata_space_map_root));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 {
 	int r;
 	struct dm_block *sblock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t metadata_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cache_disk_superblock *disk_super;
@@ -341,6 +389,7 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 		bdev_size = DM_CACHE_METADATA_MAX_SECTORS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = dm_sm_root_size(cmd->metadata_sm, &metadata_len);
 	if (r < 0)
 		return r;
@@ -348,6 +397,8 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 	r = dm_tm_pre_commit(cmd->tm);
 	if (r < 0)
 =======
+=======
+>>>>>>> v3.18
 	r = dm_tm_pre_commit(cmd->tm);
 	if (r < 0)
 		return r;
@@ -358,6 +409,9 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 	 */
 	r = __save_sm_root(cmd);
 	if (r)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return r;
 
@@ -370,7 +424,11 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 	memset(disk_super->uuid, 0, sizeof(disk_super->uuid));
 	disk_super->magic = cpu_to_le64(CACHE_SUPERBLOCK_MAGIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk_super->version = cpu_to_le32(CACHE_VERSION);
+=======
+	disk_super->version = cpu_to_le32(MAX_CACHE_VERSION);
+>>>>>>> v3.18
 =======
 	disk_super->version = cpu_to_le32(MAX_CACHE_VERSION);
 >>>>>>> v3.18
@@ -379,10 +437,14 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 	disk_super->policy_hint_size = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = dm_sm_copy_root(cmd->metadata_sm, &disk_super->metadata_space_map_root,
 			    metadata_len);
 	if (r < 0)
 		goto bad_locked;
+=======
+	__copy_sm_root(cmd, disk_super);
+>>>>>>> v3.18
 =======
 	__copy_sm_root(cmd, disk_super);
 >>>>>>> v3.18
@@ -392,8 +454,13 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 	disk_super->discard_root = cpu_to_le64(cmd->discard_root);
 	disk_super->discard_block_size = cpu_to_le64(cmd->discard_block_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk_super->discard_nr_blocks = cpu_to_le64(from_dblock(cmd->discard_nr_blocks));
 	disk_super->metadata_block_size = cpu_to_le32(DM_CACHE_METADATA_BLOCK_SIZE >> SECTOR_SHIFT);
+=======
+	disk_super->discard_nr_blocks = cpu_to_le64(from_oblock(cmd->discard_nr_blocks));
+	disk_super->metadata_block_size = cpu_to_le32(DM_CACHE_METADATA_BLOCK_SIZE);
+>>>>>>> v3.18
 =======
 	disk_super->discard_nr_blocks = cpu_to_le64(from_oblock(cmd->discard_nr_blocks));
 	disk_super->metadata_block_size = cpu_to_le32(DM_CACHE_METADATA_BLOCK_SIZE);
@@ -408,10 +475,13 @@ static int __write_initial_superblock(struct dm_cache_metadata *cmd)
 
 	return dm_tm_commit(cmd->tm, sblock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 bad_locked:
 	dm_bm_unlock(sblock);
 	return r;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -536,7 +606,12 @@ static int __open_or_format_metadata(struct dm_cache_metadata *cmd,
 				     bool format_device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int r, unformatted;
+=======
+	int r;
+	bool unformatted = false;
+>>>>>>> v3.18
 =======
 	int r;
 	bool unformatted = false;
@@ -557,7 +632,11 @@ static int __create_persistent_data_objects(struct dm_cache_metadata *cmd,
 {
 	int r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->bm = dm_block_manager_create(cmd->bdev, DM_CACHE_METADATA_BLOCK_SIZE,
+=======
+	cmd->bm = dm_block_manager_create(cmd->bdev, DM_CACHE_METADATA_BLOCK_SIZE << SECTOR_SHIFT,
+>>>>>>> v3.18
 =======
 	cmd->bm = dm_block_manager_create(cmd->bdev, DM_CACHE_METADATA_BLOCK_SIZE << SECTOR_SHIFT,
 >>>>>>> v3.18
@@ -611,7 +690,11 @@ static void read_superblock_fields(struct dm_cache_metadata *cmd,
 	cmd->discard_root = le64_to_cpu(disk_super->discard_root);
 	cmd->discard_block_size = le64_to_cpu(disk_super->discard_block_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->discard_nr_blocks = to_dblock(le64_to_cpu(disk_super->discard_nr_blocks));
+=======
+	cmd->discard_nr_blocks = to_oblock(le64_to_cpu(disk_super->discard_nr_blocks));
+>>>>>>> v3.18
 =======
 	cmd->discard_nr_blocks = to_oblock(le64_to_cpu(disk_super->discard_nr_blocks));
 >>>>>>> v3.18
@@ -679,7 +762,10 @@ static int __commit_transaction(struct dm_cache_metadata *cmd,
 {
 	int r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t metadata_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cache_disk_superblock *disk_super;
@@ -700,8 +786,13 @@ static int __commit_transaction(struct dm_cache_metadata *cmd,
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = dm_sm_root_size(cmd->metadata_sm, &metadata_len);
 	if (r < 0)
+=======
+	r = __save_sm_root(cmd);
+	if (r)
+>>>>>>> v3.18
 =======
 	r = __save_sm_root(cmd);
 	if (r)
@@ -722,7 +813,11 @@ static int __commit_transaction(struct dm_cache_metadata *cmd,
 	disk_super->discard_root = cpu_to_le64(cmd->discard_root);
 	disk_super->discard_block_size = cpu_to_le64(cmd->discard_block_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk_super->discard_nr_blocks = cpu_to_le64(from_dblock(cmd->discard_nr_blocks));
+=======
+	disk_super->discard_nr_blocks = cpu_to_le64(from_oblock(cmd->discard_nr_blocks));
+>>>>>>> v3.18
 =======
 	disk_super->discard_nr_blocks = cpu_to_le64(from_oblock(cmd->discard_nr_blocks));
 >>>>>>> v3.18
@@ -737,6 +832,7 @@ static int __commit_transaction(struct dm_cache_metadata *cmd,
 	disk_super->write_hits = cpu_to_le32(cmd->stats.write_hits);
 	disk_super->write_misses = cpu_to_le32(cmd->stats.write_misses);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	r = dm_sm_copy_root(cmd->metadata_sm, &disk_super->metadata_space_map_root,
 			    metadata_len);
@@ -744,6 +840,9 @@ static int __commit_transaction(struct dm_cache_metadata *cmd,
 		dm_bm_unlock(sblock);
 		return r;
 	}
+=======
+	__copy_sm_root(cmd, disk_super);
+>>>>>>> v3.18
 =======
 	__copy_sm_root(cmd, disk_super);
 >>>>>>> v3.18
@@ -779,15 +878,21 @@ static void unpack_value(__le64 value_le, dm_oblock_t *block, unsigned *flags)
 /*----------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dm_cache_metadata *metadata_open(struct block_device *bdev,
 					       sector_t data_block_size,
 					       bool may_format_device,
 					       size_t policy_hint_size)
 =======
+=======
+>>>>>>> v3.18
 struct dm_cache_metadata *dm_cache_metadata_open(struct block_device *bdev,
 						 sector_t data_block_size,
 						 bool may_format_device,
 						 size_t policy_hint_size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r;
@@ -797,10 +902,16 @@ struct dm_cache_metadata *dm_cache_metadata_open(struct block_device *bdev,
 	if (!cmd) {
 		DMERR("could not allocate metadata struct");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-ENOMEM);
 	}
 
 	atomic_set(&cmd->ref_count, 1);
+=======
+		return NULL;
+	}
+
+>>>>>>> v3.18
 =======
 		return NULL;
 	}
@@ -828,6 +939,7 @@ struct dm_cache_metadata *dm_cache_metadata_open(struct block_device *bdev,
 	return cmd;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * We keep a little list of ref counted metadata objects to prevent two
@@ -920,6 +1032,8 @@ void dm_cache_metadata_close(struct dm_cache_metadata *cmd)
 		kfree(cmd);
 	}
 =======
+=======
+>>>>>>> v3.18
 void dm_cache_metadata_close(struct dm_cache_metadata *cmd)
 {
 	__destroy_persistent_data_objects(cmd);
@@ -971,6 +1085,9 @@ static int blocks_are_unmapped_or_clean(struct dm_cache_metadata *cmd,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -978,6 +1095,10 @@ int dm_cache_resize(struct dm_cache_metadata *cmd, dm_cblock_t new_cache_size)
 {
 	int r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool clean;
+>>>>>>> v3.18
 =======
 	bool clean;
 >>>>>>> v3.18
@@ -986,7 +1107,10 @@ int dm_cache_resize(struct dm_cache_metadata *cmd, dm_cblock_t new_cache_size)
 	down_write(&cmd->root_lock);
 	__dm_bless_for_disk(&null_mapping);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (from_cblock(new_cache_size) < from_cblock(cmd->cache_blocks)) {
 		r = blocks_are_unmapped_or_clean(cmd, new_cache_size, cmd->cache_blocks, &clean);
@@ -1003,6 +1127,9 @@ int dm_cache_resize(struct dm_cache_metadata *cmd, dm_cblock_t new_cache_size)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r = dm_array_resize(&cmd->info, cmd->root, from_cblock(cmd->cache_blocks),
 			    from_cblock(new_cache_size),
@@ -1011,6 +1138,11 @@ int dm_cache_resize(struct dm_cache_metadata *cmd, dm_cblock_t new_cache_size)
 		cmd->cache_blocks = new_cache_size;
 	cmd->changed = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+out:
+>>>>>>> v3.18
 =======
 
 out:
@@ -1023,7 +1155,11 @@ out:
 int dm_cache_discard_bitset_resize(struct dm_cache_metadata *cmd,
 				   sector_t discard_block_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   dm_dblock_t new_nr_entries)
+=======
+				   dm_oblock_t new_nr_entries)
+>>>>>>> v3.18
 =======
 				   dm_oblock_t new_nr_entries)
 >>>>>>> v3.18
@@ -1034,8 +1170,13 @@ int dm_cache_discard_bitset_resize(struct dm_cache_metadata *cmd,
 	r = dm_bitset_resize(&cmd->discard_info,
 			     cmd->discard_root,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     from_dblock(cmd->discard_nr_blocks),
 			     from_dblock(new_nr_entries),
+=======
+			     from_oblock(cmd->discard_nr_blocks),
+			     from_oblock(new_nr_entries),
+>>>>>>> v3.18
 =======
 			     from_oblock(cmd->discard_nr_blocks),
 			     from_oblock(new_nr_entries),
@@ -1052,6 +1193,7 @@ int dm_cache_discard_bitset_resize(struct dm_cache_metadata *cmd,
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __set_discard(struct dm_cache_metadata *cmd, dm_dblock_t b)
 {
@@ -1071,6 +1213,8 @@ static int __is_discarded(struct dm_cache_metadata *cmd, dm_dblock_t b,
 	return dm_bitset_test_bit(&cmd->discard_info, cmd->discard_root,
 				  from_dblock(b), &cmd->discard_root,
 =======
+=======
+>>>>>>> v3.18
 static int __set_discard(struct dm_cache_metadata *cmd, dm_oblock_t b)
 {
 	return dm_bitset_set_bit(&cmd->discard_info, cmd->discard_root,
@@ -1088,13 +1232,20 @@ static int __is_discarded(struct dm_cache_metadata *cmd, dm_oblock_t b,
 {
 	return dm_bitset_test_bit(&cmd->discard_info, cmd->discard_root,
 				  from_oblock(b), &cmd->discard_root,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  is_discarded);
 }
 
 static int __discard(struct dm_cache_metadata *cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     dm_dblock_t dblock, bool discard)
+=======
+		     dm_oblock_t dblock, bool discard)
+>>>>>>> v3.18
 =======
 		     dm_oblock_t dblock, bool discard)
 >>>>>>> v3.18
@@ -1111,7 +1262,11 @@ static int __discard(struct dm_cache_metadata *cmd,
 
 int dm_cache_set_discard(struct dm_cache_metadata *cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 dm_dblock_t dblock, bool discard)
+=======
+			 dm_oblock_t dblock, bool discard)
+>>>>>>> v3.18
 =======
 			 dm_oblock_t dblock, bool discard)
 >>>>>>> v3.18
@@ -1133,8 +1288,13 @@ static int __load_discards(struct dm_cache_metadata *cmd,
 	bool discard;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (b = 0; b < from_dblock(cmd->discard_nr_blocks); b++) {
 		dm_dblock_t dblock = to_dblock(b);
+=======
+	for (b = 0; b < from_oblock(cmd->discard_nr_blocks); b++) {
+		dm_oblock_t dblock = to_oblock(b);
+>>>>>>> v3.18
 =======
 	for (b = 0; b < from_oblock(cmd->discard_nr_blocks); b++) {
 		dm_oblock_t dblock = to_oblock(b);
@@ -1522,6 +1682,7 @@ static int begin_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *po
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dm_cache_begin_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *policy)
 {
 	int r;
@@ -1539,12 +1700,17 @@ static int save_hint(struct dm_cache_metadata *cmd, dm_cblock_t cblock,
 	int r;
 	__le32 value = cpu_to_le32(hint);
 =======
+=======
+>>>>>>> v3.18
 static int save_hint(void *context, dm_cblock_t cblock, dm_oblock_t oblock, uint32_t hint)
 {
 	struct dm_cache_metadata *cmd = context;
 	__le32 value = cpu_to_le32(hint);
 	int r;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__dm_bless_for_disk(&value);
 
@@ -1555,6 +1721,7 @@ static int save_hint(void *context, dm_cblock_t cblock, dm_oblock_t oblock, uint
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int dm_cache_save_hint(struct dm_cache_metadata *cmd, dm_cblock_t cblock,
 		       uint32_t hint)
@@ -1567,6 +1734,8 @@ int dm_cache_save_hint(struct dm_cache_metadata *cmd, dm_cblock_t cblock,
 	down_write(&cmd->root_lock);
 	r = save_hint(cmd, cblock, hint);
 =======
+=======
+>>>>>>> v3.18
 static int write_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *policy)
 {
 	int r;
@@ -1586,16 +1755,25 @@ int dm_cache_write_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *
 
 	down_write(&cmd->root_lock);
 	r = write_hints(cmd, policy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	up_write(&cmd->root_lock);
 
 	return r;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int dm_cache_metadata_all_clean(struct dm_cache_metadata *cmd, bool *result)
 {
 	return blocks_are_unmapped_or_clean(cmd, 0, cmd->cache_blocks, result);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

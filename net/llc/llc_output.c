@@ -44,7 +44,11 @@ int llc_mac_hdr_init(struct sk_buff *skb,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "device type not supported: %d\n", skb->dev->type);
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18

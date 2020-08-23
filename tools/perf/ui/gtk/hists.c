@@ -9,11 +9,14 @@
 #define MAX_COLUMNS			32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __percent_color_snprintf(char *buf, size_t size, double percent)
 {
 	int ret = 0;
 	const char *markup;
 =======
+=======
+>>>>>>> v3.18
 static int __percent_color_snprintf(struct perf_hpp *hpp, const char *fmt, ...)
 {
 	int ret = 0;
@@ -28,6 +31,9 @@ static int __percent_color_snprintf(struct perf_hpp *hpp, const char *fmt, ...)
 	len = va_arg(args, int);
 	percent = va_arg(args, double);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	markup = perf_gtk__get_percent_color(percent);
@@ -35,7 +41,11 @@ static int __percent_color_snprintf(struct perf_hpp *hpp, const char *fmt, ...)
 		ret += scnprintf(buf, size, markup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret += scnprintf(buf + ret, size - ret, " %6.2f%%", percent);
+=======
+	ret += scnprintf(buf + ret, size - ret, fmt, len, percent);
+>>>>>>> v3.18
 =======
 	ret += scnprintf(buf + ret, size - ret, fmt, len, percent);
 >>>>>>> v3.18
@@ -46,6 +56,7 @@ static int __percent_color_snprintf(struct perf_hpp *hpp, const char *fmt, ...)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __hpp__color_fmt(struct perf_hpp *hpp, struct hist_entry *he,
@@ -109,6 +120,8 @@ static int __hpp__color_fmt(struct perf_hpp *hpp, struct hist_entry *he,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define __HPP_COLOR_PERCENT_FN(_type, _field)					\
 static u64 he_get_##_field(struct hist_entry *he)				\
 {										\
@@ -116,11 +129,14 @@ static u64 he_get_##_field(struct hist_entry *he)				\
 }										\
 										\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int perf_gtk__hpp_color_##_type(struct perf_hpp *hpp,			\
 				       struct hist_entry *he)			\
 {										\
 	return __hpp__color_fmt(hpp, he, he_get_##_field);			\
 =======
+=======
+>>>>>>> v3.18
 static int perf_gtk__hpp_color_##_type(struct perf_hpp_fmt *fmt,		\
 				       struct perf_hpp *hpp,			\
 				       struct hist_entry *he)			\
@@ -141,6 +157,9 @@ static int perf_gtk__hpp_color_##_type(struct perf_hpp_fmt *fmt __maybe_unused,	
 {										\
 	return hpp__fmt_acc(fmt, hpp, he, he_get_acc_##_field, " %*.2f%%", 	\
 			    __percent_color_snprintf, true);			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -150,6 +169,10 @@ __HPP_COLOR_PERCENT_FN(overhead_us, period_us)
 __HPP_COLOR_PERCENT_FN(overhead_guest_sys, period_guest_sys)
 __HPP_COLOR_PERCENT_FN(overhead_guest_us, period_guest_us)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__HPP_COLOR_ACC_PERCENT_FN(overhead_acc, period)
+>>>>>>> v3.18
 =======
 __HPP_COLOR_ACC_PERCENT_FN(overhead_acc, period)
 >>>>>>> v3.18
@@ -160,10 +183,13 @@ __HPP_COLOR_ACC_PERCENT_FN(overhead_acc, period)
 void perf_gtk__init_hpp(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_hpp__column_enable(PERF_HPP__OVERHEAD);
 
 	perf_hpp__init();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	perf_hpp__format[PERF_HPP__OVERHEAD].color =
@@ -177,10 +203,13 @@ void perf_gtk__init_hpp(void)
 	perf_hpp__format[PERF_HPP__OVERHEAD_GUEST_US].color =
 				perf_gtk__hpp_color_overhead_guest_us;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists)
 =======
+=======
+>>>>>>> v3.18
 	perf_hpp__format[PERF_HPP__OVERHEAD_ACC].color =
 				perf_gtk__hpp_color_overhead_acc;
 }
@@ -262,11 +291,15 @@ static void on_row_activated(GtkTreeView *view, GtkTreePath *path,
 
 static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 				 float min_pcnt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct perf_hpp_fmt *fmt;
 	GType col_types[MAX_COLUMNS];
 	GtkCellRenderer *renderer;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sort_entry *se;
 	GtkListStore *store;
@@ -274,11 +307,16 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 	GtkWidget *view;
 	int col_idx;
 =======
+=======
+>>>>>>> v3.18
 	GtkTreeStore *store;
 	struct rb_node *nd;
 	GtkWidget *view;
 	int col_idx;
 	int sym_col = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int nr_cols;
 	char s[512];
@@ -287,7 +325,10 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 		.buf		= s,
 		.size		= sizeof(s),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ptr		= hists_to_evsel(hists),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -297,6 +338,7 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 	perf_hpp__for_each_format(fmt)
 		col_types[nr_cols++] = G_TYPE_STRING;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(se, &hist_entry__sort_list, list) {
 		if (se->elide)
@@ -309,6 +351,9 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 =======
 	store = gtk_tree_store_newv(nr_cols, col_types);
 >>>>>>> v3.18
+=======
+	store = gtk_tree_store_newv(nr_cols, col_types);
+>>>>>>> v3.18
 
 	view = gtk_tree_view_new();
 
@@ -318,11 +363,14 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 
 	perf_hpp__for_each_format(fmt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fmt->header(&hpp);
 
 		gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(view),
 							    -1, ltrim(s),
 =======
+=======
+>>>>>>> v3.18
 		if (perf_hpp__should_skip(fmt))
 			continue;
 
@@ -335,11 +383,15 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 
 		gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(view),
 							    -1, fmt->name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							    renderer, "markup",
 							    col_idx++, NULL);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(se, &hist_entry__sort_list, list) {
 		if (se->elide)
@@ -350,6 +402,8 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 							    renderer, "text",
 							    col_idx++, NULL);
 =======
+=======
+>>>>>>> v3.18
 	for (col_idx = 0; col_idx < nr_cols; col_idx++) {
 		GtkTreeViewColumn *column;
 
@@ -360,6 +414,9 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 			gtk_tree_view_set_expander_column(GTK_TREE_VIEW(view),
 							  column);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -371,6 +428,11 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
 		GtkTreeIter iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u64 total = hists__total_period(h->hists);
+		float percent;
+>>>>>>> v3.18
 =======
 		u64 total = hists__total_period(h->hists);
 		float percent;
@@ -380,18 +442,25 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gtk_list_store_append(store, &iter);
 =======
+=======
+>>>>>>> v3.18
 		percent = hist_entry__get_percent_limit(h);
 		if (percent < min_pcnt)
 			continue;
 
 		gtk_tree_store_append(store, &iter, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		col_idx = 0;
 
 		perf_hpp__for_each_format(fmt) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (fmt->color)
 				fmt->color(&hpp, h);
@@ -413,6 +482,8 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			if (perf_hpp__should_skip(fmt))
 				continue;
 
@@ -438,6 +509,9 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 
 	g_signal_connect(view, "row-activated",
 			 G_CALLBACK(on_row_activated), NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gtk_container_add(GTK_CONTAINER(window), view);
 }
@@ -445,7 +519,12 @@ static void perf_gtk__show_hists(GtkWidget *window, struct hists *hists,
 int perf_evlist__gtk_browse_hists(struct perf_evlist *evlist,
 				  const char *help,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct hist_browser_timer *hbt __maybe_unused)
+=======
+				  struct hist_browser_timer *hbt __maybe_unused,
+				  float min_pcnt)
+>>>>>>> v3.18
 =======
 				  struct hist_browser_timer *hbt __maybe_unused,
 				  float min_pcnt)
@@ -490,8 +569,13 @@ int perf_evlist__gtk_browse_hists(struct perf_evlist *evlist,
 	gtk_container_add(GTK_CONTAINER(window), vbox);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(pos, &evlist->entries, node) {
 		struct hists *hists = &pos->hists;
+=======
+	evlist__for_each(evlist, pos) {
+		struct hists *hists = evsel__hists(pos);
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, pos) {
 		struct hists *hists = evsel__hists(pos);
@@ -519,7 +603,11 @@ int perf_evlist__gtk_browse_hists(struct perf_evlist *evlist,
 							GTK_POLICY_AUTOMATIC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perf_gtk__show_hists(scrolled_window, hists);
+=======
+		perf_gtk__show_hists(scrolled_window, hists, min_pcnt);
+>>>>>>> v3.18
 =======
 		perf_gtk__show_hists(scrolled_window, hists, min_pcnt);
 >>>>>>> v3.18

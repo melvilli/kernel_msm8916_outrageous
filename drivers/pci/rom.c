@@ -32,7 +32,11 @@ int pci_enable_rom(struct pci_dev *pdev)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_resource_to_bus(pdev, &region, res);
+=======
+	pcibios_resource_to_bus(pdev->bus, &region, res);
+>>>>>>> v3.18
 =======
 	pcibios_resource_to_bus(pdev->bus, &region, res);
 >>>>>>> v3.18
@@ -43,6 +47,10 @@ int pci_enable_rom(struct pci_dev *pdev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(pci_enable_rom);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(pci_enable_rom);
 >>>>>>> v3.18
@@ -62,6 +70,10 @@ void pci_disable_rom(struct pci_dev *pdev)
 	pci_write_config_dword(pdev, pdev->rom_base_reg, rom_addr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(pci_disable_rom);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(pci_disable_rom);
 >>>>>>> v3.18
@@ -82,7 +94,10 @@ size_t pci_get_rom_size(struct pci_dev *pdev, void __iomem *rom, size_t size)
 	void __iomem *image;
 	int last_image;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned length;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -108,9 +123,15 @@ size_t pci_get_rom_size(struct pci_dev *pdev, void __iomem *rom, size_t size)
 			break;
 		last_image = readb(pds + 21) & 0x80;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		length = readw(pds + 16);
 		image += length * 512;
 	} while (length && !last_image);
+=======
+		/* this length is reliable */
+		image += readw(pds + 16) * 512;
+	} while (!last_image);
+>>>>>>> v3.18
 =======
 		/* this length is reliable */
 		image += readw(pds + 16) * 512;
@@ -158,7 +179,11 @@ void __iomem *pci_map_rom(struct pci_dev *pdev, size_t *size)
 			/* assign the ROM an address if it doesn't have one */
 			if (res->parent == NULL &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    pci_assign_resource(pdev,PCI_ROM_RESOURCE))
+=======
+			    pci_assign_resource(pdev, PCI_ROM_RESOURCE))
+>>>>>>> v3.18
 =======
 			    pci_assign_resource(pdev, PCI_ROM_RESOURCE))
 >>>>>>> v3.18
@@ -193,6 +218,10 @@ void __iomem *pci_map_rom(struct pci_dev *pdev, size_t *size)
 	return rom;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_map_rom);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_map_rom);
 >>>>>>> v3.18
@@ -218,6 +247,10 @@ void pci_unmap_rom(struct pci_dev *pdev, void __iomem *rom)
 		pci_disable_rom(pdev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_unmap_rom);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_unmap_rom);
 >>>>>>> v3.18
@@ -232,13 +265,19 @@ void pci_cleanup_rom(struct pci_dev *pdev)
 {
 	struct resource *res = &pdev->resource[PCI_ROM_RESOURCE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res->flags & IORESOURCE_ROM_COPY) {
 		kfree((void*)(unsigned long)res->start);
 =======
+=======
+>>>>>>> v3.18
 
 	if (res->flags & IORESOURCE_ROM_COPY) {
 		kfree((void *)(unsigned long)res->start);
 		res->flags |= IORESOURCE_UNSET;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		res->flags &= ~IORESOURCE_ROM_COPY;
 		res->start = 0;
@@ -262,11 +301,14 @@ void __iomem *pci_platform_rom(struct pci_dev *pdev, size_t *size)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(pci_map_rom);
 EXPORT_SYMBOL(pci_unmap_rom);
 EXPORT_SYMBOL_GPL(pci_enable_rom);
 EXPORT_SYMBOL_GPL(pci_disable_rom);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(pci_platform_rom);

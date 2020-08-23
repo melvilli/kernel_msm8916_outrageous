@@ -174,7 +174,11 @@ static int validate_ctr_auth(const struct hw_perf_event *hwc)
 static void cpumf_pmu_enable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -201,7 +205,11 @@ static void cpumf_pmu_enable(struct pmu *pmu)
 static void cpumf_pmu_disable(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -239,7 +247,11 @@ static void cpumf_measurement_alert(struct ext_code ext_code,
 
 	inc_irq_stat(IRQEXT_CMC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -263,7 +275,11 @@ static void cpumf_measurement_alert(struct ext_code ext_code,
 static void setup_pmc_cpu(void *flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -291,7 +307,11 @@ static int reserve_pmc_hardware(void)
 
 	on_each_cpu(setup_pmc_cpu, &flags, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	measurement_alert_subclass_register();
+=======
+	irq_subclass_register(IRQ_SUBCLASS_MEASUREMENT_ALERT);
+>>>>>>> v3.18
 =======
 	irq_subclass_register(IRQ_SUBCLASS_MEASUREMENT_ALERT);
 >>>>>>> v3.18
@@ -306,7 +326,11 @@ static void release_pmc_hardware(void)
 
 	on_each_cpu(setup_pmc_cpu, &flags, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	measurement_alert_subclass_unregister();
+=======
+	irq_subclass_unregister(IRQ_SUBCLASS_MEASUREMENT_ALERT);
+>>>>>>> v3.18
 =======
 	irq_subclass_unregister(IRQ_SUBCLASS_MEASUREMENT_ALERT);
 >>>>>>> v3.18
@@ -436,12 +460,15 @@ static int cpumf_pmu_event_init(struct perf_event *event)
 	case PERF_TYPE_HW_CACHE:
 	case PERF_TYPE_RAW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The CPU measurement counter facility does not have overflow
 		 * interrupts to do sampling.  Sampling must be provided by
 		 * external means, for example, by timers.
 		 */
 		if (is_sampling_event(event))
 			return -ENOENT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = __hw_perf_event_init(event);
@@ -509,7 +536,11 @@ static void cpumf_pmu_read(struct perf_event *event)
 static void cpumf_pmu_start(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -544,7 +575,11 @@ static void cpumf_pmu_start(struct perf_event *event, int flags)
 static void cpumf_pmu_stop(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -569,7 +604,11 @@ static void cpumf_pmu_stop(struct perf_event *event, int flags)
 static int cpumf_pmu_add(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -597,7 +636,11 @@ static int cpumf_pmu_add(struct perf_event *event, int flags)
 static void cpumf_pmu_del(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -625,7 +668,11 @@ static void cpumf_pmu_del(struct perf_event *event, int flags)
 static void cpumf_pmu_start_txn(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -643,7 +690,11 @@ static void cpumf_pmu_start_txn(struct pmu *pmu)
 static void cpumf_pmu_cancel_txn(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -662,7 +713,11 @@ static void cpumf_pmu_cancel_txn(struct pmu *pmu)
 static int cpumf_pmu_commit_txn(struct pmu *pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -695,8 +750,13 @@ static struct pmu cpumf_pmu = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cpumf_pmu_notifier(struct notifier_block *self,
 					unsigned long action, void *hcpu)
+=======
+static int cpumf_pmu_notifier(struct notifier_block *self, unsigned long action,
+			      void *hcpu)
+>>>>>>> v3.18
 =======
 static int cpumf_pmu_notifier(struct notifier_block *self, unsigned long action,
 			      void *hcpu)
@@ -734,7 +794,12 @@ static int __init cpumf_pmu_init(void)
 
 	/* register handler for measurement-alert interruptions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = register_external_interrupt(0x1407, cpumf_measurement_alert);
+=======
+	rc = register_external_irq(EXT_IRQ_MEASURE_ALERT,
+				   cpumf_measurement_alert);
+>>>>>>> v3.18
 =======
 	rc = register_external_irq(EXT_IRQ_MEASURE_ALERT,
 				   cpumf_measurement_alert);
@@ -746,11 +811,14 @@ static int __init cpumf_pmu_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = perf_pmu_register(&cpumf_pmu, "cpum_cf", PERF_TYPE_RAW);
 	if (rc) {
 		pr_err("Registering the cpum_cf PMU failed with rc=%i\n", rc);
 		unregister_external_interrupt(0x1407, cpumf_measurement_alert);
 =======
+=======
+>>>>>>> v3.18
 	/* The CPU measurement counter facility does not have overflow
 	 * interrupts to do sampling.  Sampling must be provided by
 	 * external means, for example, by timers.
@@ -763,6 +831,9 @@ static int __init cpumf_pmu_init(void)
 		pr_err("Registering the cpum_cf PMU failed with rc=%i\n", rc);
 		unregister_external_irq(EXT_IRQ_MEASURE_ALERT,
 					cpumf_measurement_alert);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}

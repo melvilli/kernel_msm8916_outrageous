@@ -34,7 +34,11 @@
 
 /include/ "fsl/b4860si-pre.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "b4qds.dts"
+=======
+/include/ "b4qds.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "b4qds.dtsi"
 >>>>>>> v3.18

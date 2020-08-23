@@ -15,7 +15,13 @@
 #include <linux/init.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+#include <linux/of.h>
+#include <linux/pinctrl/consumer.h>
+#include <linux/pinctrl/machine.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/pinctrl/consumer.h>
@@ -79,7 +85,10 @@ static void sh_pfc_pin_dbg_show(struct pinctrl_dev *pctldev, struct seq_file *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static int sh_pfc_map_add_config(struct pinctrl_map *map,
 				 const char *group_or_pin,
@@ -279,6 +288,9 @@ done:
 }
 #endif /* CONFIG_OF */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct pinctrl_ops sh_pfc_pinctrl_ops = {
 	.get_groups_count	= sh_pfc_get_groups_count,
@@ -286,11 +298,17 @@ static const struct pinctrl_ops sh_pfc_pinctrl_ops = {
 	.get_group_pins		= sh_pfc_get_group_pins,
 	.pin_dbg_show		= sh_pfc_pin_dbg_show,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 	.dt_node_to_map		= sh_pfc_dt_node_to_map,
 	.dt_free_map		= sh_pfc_dt_free_map,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -323,8 +341,13 @@ static int sh_pfc_get_function_groups(struct pinctrl_dev *pctldev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_pfc_func_enable(struct pinctrl_dev *pctldev, unsigned selector,
 			      unsigned group)
+=======
+static int sh_pfc_func_set_mux(struct pinctrl_dev *pctldev, unsigned selector,
+			       unsigned group)
+>>>>>>> v3.18
 =======
 static int sh_pfc_func_set_mux(struct pinctrl_dev *pctldev, unsigned selector,
 			       unsigned group)
@@ -361,6 +384,7 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sh_pfc_func_disable(struct pinctrl_dev *pctldev, unsigned selector,
 				unsigned group)
 {
@@ -382,6 +406,8 @@ static void sh_pfc_func_disable(struct pinctrl_dev *pctldev, unsigned selector,
 	spin_unlock_irqrestore(&pfc->lock, flags);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int sh_pfc_gpio_request_enable(struct pinctrl_dev *pctldev,
@@ -482,8 +508,12 @@ static const struct pinmux_ops sh_pfc_pinmux_ops = {
 	.get_function_name	= sh_pfc_get_function_name,
 	.get_function_groups	= sh_pfc_get_function_groups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable			= sh_pfc_func_enable,
 	.disable		= sh_pfc_func_disable,
+=======
+	.set_mux		= sh_pfc_func_set_mux,
+>>>>>>> v3.18
 =======
 	.set_mux		= sh_pfc_func_set_mux,
 >>>>>>> v3.18
@@ -502,8 +532,12 @@ static bool sh_pfc_pinconf_validate(struct sh_pfc *pfc, unsigned int _pin,
 	switch (param) {
 	case PIN_CONFIG_BIAS_DISABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return pin->configs &
 			(SH_PFC_PIN_CFG_PULL_UP | SH_PFC_PIN_CFG_PULL_DOWN);
+=======
+		return true;
+>>>>>>> v3.18
 =======
 		return true;
 >>>>>>> v3.18
@@ -557,6 +591,7 @@ static int sh_pfc_pinconf_get(struct pinctrl_dev *pctldev, unsigned _pin,
 
 static int sh_pfc_pinconf_set(struct pinctrl_dev *pctldev, unsigned _pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      unsigned long config)
 {
 	struct sh_pfc_pinctrl *pmx = pinctrl_dev_get_drvdata(pctldev);
@@ -584,6 +619,8 @@ static int sh_pfc_pinconf_set(struct pinctrl_dev *pctldev, unsigned _pin,
 		return -ENOTSUPP;
 	}
 =======
+=======
+>>>>>>> v3.18
 			      unsigned long *configs, unsigned num_configs)
 {
 	struct sh_pfc_pinctrl *pmx = pinctrl_dev_get_drvdata(pctldev);
@@ -615,6 +652,9 @@ static int sh_pfc_pinconf_set(struct pinctrl_dev *pctldev, unsigned _pin,
 			return -ENOTSUPP;
 		}
 	} /* for each config */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -622,7 +662,12 @@ static int sh_pfc_pinconf_set(struct pinctrl_dev *pctldev, unsigned _pin,
 
 static int sh_pfc_pinconf_group_set(struct pinctrl_dev *pctldev, unsigned group,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    unsigned long config)
+=======
+				    unsigned long *configs,
+				    unsigned num_configs)
+>>>>>>> v3.18
 =======
 				    unsigned long *configs,
 				    unsigned num_configs)
@@ -638,7 +683,11 @@ static int sh_pfc_pinconf_group_set(struct pinctrl_dev *pctldev, unsigned group,
 
 	for (i = 0; i < num_pins; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sh_pfc_pinconf_set(pctldev, pins[i], config);
+=======
+		sh_pfc_pinconf_set(pctldev, pins[i], configs, num_configs);
+>>>>>>> v3.18
 =======
 		sh_pfc_pinconf_set(pctldev, pins[i], configs, num_configs);
 >>>>>>> v3.18
@@ -657,6 +706,7 @@ static const struct pinconf_ops sh_pfc_pinconf_ops = {
 /* PFC ranges -> pinctrl pin descs */
 static int sh_pfc_map_pins(struct sh_pfc *pfc, struct sh_pfc_pinctrl *pmx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct pinmux_range *ranges;
 	struct pinmux_range def_range;
@@ -679,6 +729,11 @@ static int sh_pfc_map_pins(struct sh_pfc *pfc, struct sh_pfc_pinctrl *pmx)
 
 	/* Allocate and initialize the pins and configs arrays. */
 >>>>>>> v3.18
+=======
+	unsigned int i;
+
+	/* Allocate and initialize the pins and configs arrays. */
+>>>>>>> v3.18
 	pmx->pins = devm_kzalloc(pfc->dev,
 				 sizeof(*pmx->pins) * pfc->info->nr_pins,
 				 GFP_KERNEL);
@@ -691,6 +746,7 @@ static int sh_pfc_map_pins(struct sh_pfc *pfc, struct sh_pfc_pinctrl *pmx)
 	if (unlikely(!pmx->configs))
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0, nr_pins = 0; i < nr_ranges; ++i) {
 		const struct pinmux_range *range = &ranges[i];
@@ -713,6 +769,8 @@ static int sh_pfc_map_pins(struct sh_pfc *pfc, struct sh_pfc_pinctrl *pmx)
 
 	return nr_ranges;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < pfc->info->nr_pins; ++i) {
 		const struct sh_pfc_pin *info = &pfc->info->pins[i];
 		struct sh_pfc_pin_config *cfg = &pmx->configs[i];
@@ -725,6 +783,9 @@ static int sh_pfc_map_pins(struct sh_pfc *pfc, struct sh_pfc_pinctrl *pmx)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -732,7 +793,11 @@ int sh_pfc_register_pinctrl(struct sh_pfc *pfc)
 {
 	struct sh_pfc_pinctrl *pmx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nr_ranges;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -745,9 +810,15 @@ int sh_pfc_register_pinctrl(struct sh_pfc *pfc)
 	pfc->pinctrl = pmx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_ranges = sh_pfc_map_pins(pfc, pmx);
 	if (unlikely(nr_ranges < 0))
 		return nr_ranges;
+=======
+	ret = sh_pfc_map_pins(pfc, pmx);
+	if (ret < 0)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = sh_pfc_map_pins(pfc, pmx);
 	if (ret < 0)

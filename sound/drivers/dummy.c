@@ -110,9 +110,12 @@ struct dummy_timer_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define get_dummy_ops(substream) \
 	(*(const struct dummy_timer_ops **)(substream)->runtime->private_data)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dummy_model {
@@ -144,6 +147,10 @@ struct snd_dummy {
 	struct snd_kcontrol *cd_volume_ctl;
 	struct snd_kcontrol *cd_switch_ctl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct dummy_timer_ops *timer_ops;
+>>>>>>> v3.18
 =======
 	const struct dummy_timer_ops *timer_ops;
 >>>>>>> v3.18
@@ -241,8 +248,11 @@ struct dummy_model *dummy_models[] = {
 
 struct dummy_systimer_pcm {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ops must be the first item */
 	const struct dummy_timer_ops *timer_ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t lock;
@@ -383,8 +393,11 @@ static struct dummy_timer_ops dummy_systimer_ops = {
 
 struct dummy_hrtimer_pcm {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ops must be the first item */
 	const struct dummy_timer_ops *timer_ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ktime_t base_time;
@@ -436,7 +449,10 @@ static int dummy_hrtimer_stop(struct snd_pcm_substream *substream)
 static inline void dummy_hrtimer_sync(struct dummy_hrtimer_pcm *dpcm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hrtimer_cancel(&dpcm->timer);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tasklet_kill(&dpcm->tasklet);
@@ -518,6 +534,7 @@ static struct dummy_timer_ops dummy_hrtimer_ops = {
 static int dummy_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_START:
 	case SNDRV_PCM_TRIGGER_RESUME:
@@ -526,6 +543,8 @@ static int dummy_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 		return get_dummy_ops(substream)->stop(substream);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
 
 	switch (cmd) {
@@ -535,6 +554,9 @@ static int dummy_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 		return dummy->timer_ops->stop(substream);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -543,7 +565,13 @@ static int dummy_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 static int dummy_pcm_prepare(struct snd_pcm_substream *substream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return get_dummy_ops(substream)->prepare(substream);
+=======
+	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
+
+	return dummy->timer_ops->prepare(substream);
+>>>>>>> v3.18
 =======
 	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
 
@@ -554,7 +582,13 @@ static int dummy_pcm_prepare(struct snd_pcm_substream *substream)
 static snd_pcm_uframes_t dummy_pcm_pointer(struct snd_pcm_substream *substream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return get_dummy_ops(substream)->pointer(substream);
+=======
+	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
+
+	return dummy->timer_ops->pointer(substream);
+>>>>>>> v3.18
 =======
 	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
 
@@ -606,6 +640,7 @@ static int dummy_pcm_open(struct snd_pcm_substream *substream)
 	struct dummy_model *model = dummy->model;
 	struct snd_pcm_runtime *runtime = substream->runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dummy_timer_ops *ops;
 	int err;
 
@@ -620,6 +655,8 @@ static int dummy_pcm_open(struct snd_pcm_substream *substream)
 		return err;
 	get_dummy_ops(substream) = ops;
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	dummy->timer_ops = &dummy_systimer_ops;
@@ -631,6 +668,9 @@ static int dummy_pcm_open(struct snd_pcm_substream *substream)
 	err = dummy->timer_ops->create(substream);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	runtime->hw = dummy->pcm_hw;
@@ -654,7 +694,11 @@ static int dummy_pcm_open(struct snd_pcm_substream *substream)
 	}
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get_dummy_ops(substream)->free(substream);
+=======
+		dummy->timer_ops->free(substream);
+>>>>>>> v3.18
 =======
 		dummy->timer_ops->free(substream);
 >>>>>>> v3.18
@@ -666,7 +710,12 @@ static int dummy_pcm_open(struct snd_pcm_substream *substream)
 static int dummy_pcm_close(struct snd_pcm_substream *substream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_dummy_ops(substream)->free(substream);
+=======
+	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
+	dummy->timer_ops->free(substream);
+>>>>>>> v3.18
 =======
 	struct snd_dummy *dummy = snd_pcm_substream_chip(substream);
 	dummy->timer_ops->free(substream);
@@ -1088,7 +1137,11 @@ static void dummy_proc_write(struct snd_info_entry *entry,
 			continue;
 		snd_info_get_str(item, ptr, sizeof(item));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strict_strtoull(item, 0, &val))
+=======
+		if (kstrtoull(item, 0, &val))
+>>>>>>> v3.18
 =======
 		if (kstrtoull(item, 0, &val))
 >>>>>>> v3.18
@@ -1124,8 +1177,13 @@ static int snd_dummy_probe(struct platform_device *devptr)
 	int dev = devptr->id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_dummy), &card);
+=======
+	err = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_dummy), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_dummy), &card);
@@ -1189,8 +1247,11 @@ static int snd_dummy_probe(struct platform_device *devptr)
 	dummy_proc_init(dummy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &devptr->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_card_register(card);
@@ -1207,7 +1268,10 @@ static int snd_dummy_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

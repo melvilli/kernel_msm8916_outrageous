@@ -7,7 +7,11 @@ subdir-ccflags-$(CONFIG_PPC_WERROR) := -Werror
 ccflags-$(CONFIG_PPC64)	:= $(NO_MINIMAL_TOC)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				:= fault.o mem.o pgtable.o gup.o \
+=======
+obj-y				:= fault.o mem.o pgtable.o gup.o mmap.o \
+>>>>>>> v3.18
 =======
 obj-y				:= fault.o mem.o pgtable.o gup.o mmap.o \
 >>>>>>> v3.18
@@ -17,11 +21,16 @@ obj-$(CONFIG_PPC_MMU_NOHASH)	+= mmu_context_nohash.o tlb_nohash.o \
 				   tlb_nohash_low.o
 obj-$(CONFIG_PPC_BOOK3E)	+= tlb_low_$(CONFIG_WORD_SIZE)e.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PPC64)		+= mmap_64.o
 hash64-$(CONFIG_PPC_NATIVE)	:= hash_native_64.o
 obj-$(CONFIG_PPC_STD_MMU_64)	+= hash_utils_64.o \
 				   slb_low.o slb.o stab.o \
 				   mmap_64.o $(hash64-y)
+=======
+hash64-$(CONFIG_PPC_NATIVE)	:= hash_native_64.o
+obj-$(CONFIG_PPC_STD_MMU_64)	+= hash_utils_64.o slb_low.o slb.o $(hash64-y)
+>>>>>>> v3.18
 =======
 hash64-$(CONFIG_PPC_NATIVE)	:= hash_native_64.o
 obj-$(CONFIG_PPC_STD_MMU_64)	+= hash_utils_64.o slb_low.o slb.o $(hash64-y)
@@ -38,6 +47,7 @@ obj-$(CONFIG_PPC_FSL_BOOK3E)	+= fsl_booke_mmu.o
 obj-$(CONFIG_NEED_MULTIPLE_NODES) += numa.o
 obj-$(CONFIG_PPC_MM_SLICES)	+= slice.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(CONFIG_HUGETLB_PAGE),y)
 obj-y				+= hugetlbpage.o
 obj-$(CONFIG_PPC_STD_MMU_64)	+= hugetlbpage-hash64.o
@@ -47,6 +57,8 @@ obj-$(CONFIG_PPC_SUBPAGE_PROT)	+= subpage-prot.o
 obj-$(CONFIG_NOT_COHERENT_CACHE) += dma-noncoherent.o
 obj-$(CONFIG_HIGHMEM)		+= highmem.o
 =======
+=======
+>>>>>>> v3.18
 obj-y				+= hugetlbpage.o
 ifeq ($(CONFIG_HUGETLB_PAGE),y)
 obj-$(CONFIG_PPC_STD_MMU_64)	+= hugetlbpage-hash64.o
@@ -57,4 +69,7 @@ obj-$(CONFIG_PPC_SUBPAGE_PROT)	+= subpage-prot.o
 obj-$(CONFIG_NOT_COHERENT_CACHE) += dma-noncoherent.o
 obj-$(CONFIG_HIGHMEM)		+= highmem.o
 obj-$(CONFIG_PPC_COPRO_BASE)	+= copro_fault.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -39,6 +39,10 @@
 #include <linux/arcdevice.h>
 #include <linux/com20020.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/list.h>
 >>>>>>> v3.18
@@ -65,6 +69,7 @@ module_param(clockp, int, 0);
 module_param(clockm, int, 0);
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int com20020pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 {
@@ -131,6 +136,8 @@ static int com20020pci_probe(struct pci_dev *pdev, const struct pci_device_id *i
 	if ((err = com20020_found(dev, IRQF_SHARED)) != 0)
 	        goto out_port;
 =======
+=======
+>>>>>>> v3.18
 static void com20020pci_remove(struct pci_dev *pdev);
 
 static int com20020pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
@@ -228,11 +235,15 @@ static int com20020pci_probe(struct pci_dev *pdev, const struct pci_device_id *i
 	}
 
 	pci_set_drvdata(pdev, priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 
 out_port:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	release_region(ioaddr, ARCNET_TOTAL_SIZE);
 out_dev:
@@ -242,10 +253,15 @@ out_dev:
 	com20020pci_remove(pdev);
 	return ret;
 >>>>>>> v3.18
+=======
+	com20020pci_remove(pdev);
+	return ret;
+>>>>>>> v3.18
 }
 
 static void com20020pci_remove(struct pci_dev *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct net_device *dev = pci_get_drvdata(pdev);
 	unregister_netdev(dev);
@@ -281,6 +297,8 @@ static DEFINE_PCI_DEVICE_TABLE(com20020pci_id_table) = {
 	{ 0x10B5, 0x2200, PCI_ANY_ID, PCI_ANY_ID, 0, 0, ARC_CAN_10MBIT },
 	{0,}
 =======
+=======
+>>>>>>> v3.18
 	struct com20020_dev *card, *tmpcard;
 	struct com20020_priv *priv;
 
@@ -485,6 +503,9 @@ static const struct pci_device_id com20020pci_id_table[] = {
 		(kernel_ulong_t)&card_info_10mbit
 	},
 	{ 0, }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

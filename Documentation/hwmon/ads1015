@@ -7,11 +7,17 @@ Supported chips:
     Datasheet: Publicly available at the Texas Instruments website :
                http://focus.ti.com/lit/ds/symlink/ads1015.pdf
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   * Texas Instruments ADS1115
     Prefix: 'ads1115'
     Datasheet: Publicly available at the Texas Instruments website :
                http://focus.ti.com/lit/ds/symlink/ads1115.pdf
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Authors:
@@ -21,9 +27,15 @@ Description
 -----------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This driver implements support for the Texas Instruments ADS1015.
 
 This device is a 12-bit A-D converter with 4 inputs.
+=======
+This driver implements support for the Texas Instruments ADS1015/ADS1115.
+
+This device is a 12/16-bit A-D converter with 4 inputs.
+>>>>>>> v3.18
 =======
 This driver implements support for the Texas Instruments ADS1015/ADS1115.
 

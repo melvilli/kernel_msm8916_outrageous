@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_HW_H_
@@ -92,6 +98,11 @@ struct e1000_hw;
 #define E1000_DEV_ID_I210_SERDES		0x1537
 #define E1000_DEV_ID_I210_SGMII			0x1538
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_DEV_ID_I210_COPPER_FLASHLESS	0x157B
+#define E1000_DEV_ID_I210_SERDES_FLASHLESS	0x157C
+>>>>>>> v3.18
 =======
 #define E1000_DEV_ID_I210_COPPER_FLASHLESS	0x157B
 #define E1000_DEV_ID_I210_SERDES_FLASHLESS	0x157C
@@ -140,6 +151,10 @@ enum e1000_nvm_type {
 	e1000_nvm_eeprom_spi,
 	e1000_nvm_flash_hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	e1000_nvm_invm,
+>>>>>>> v3.18
 =======
 	e1000_nvm_invm,
 >>>>>>> v3.18
@@ -301,11 +316,14 @@ struct e1000_hw_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct e1000_phy_stats {
 	u32 idle_errors;
 	u32 receive_errors;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct e1000_host_mng_dhcp_cookie {
@@ -355,6 +373,7 @@ struct e1000_host_mng_command_info {
 
 struct e1000_mac_operations {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32  (*check_for_link)(struct e1000_hw *);
 	s32  (*reset_hw)(struct e1000_hw *);
 	s32  (*init_hw)(struct e1000_hw *);
@@ -365,6 +384,8 @@ struct e1000_mac_operations {
 	s32  (*get_speed_and_duplex)(struct e1000_hw *, u16 *, u16 *);
 	s32  (*acquire_swfw_sync)(struct e1000_hw *, u16);
 =======
+=======
+>>>>>>> v3.18
 	s32 (*check_for_link)(struct e1000_hw *);
 	s32 (*reset_hw)(struct e1000_hw *);
 	s32 (*init_hw)(struct e1000_hw *);
@@ -374,6 +395,9 @@ struct e1000_mac_operations {
 	s32 (*read_mac_addr)(struct e1000_hw *);
 	s32 (*get_speed_and_duplex)(struct e1000_hw *, u16 *, u16 *);
 	s32 (*acquire_swfw_sync)(struct e1000_hw *, u16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*release_swfw_sync)(struct e1000_hw *, u16);
 #ifdef CONFIG_IGB_HWMON
@@ -384,6 +408,7 @@ struct e1000_mac_operations {
 };
 
 struct e1000_phy_operations {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s32  (*acquire)(struct e1000_hw *);
 	s32  (*check_polarity)(struct e1000_hw *);
@@ -399,6 +424,8 @@ struct e1000_phy_operations {
 	s32  (*set_d3_lplu_state)(struct e1000_hw *, bool);
 	s32  (*write_reg)(struct e1000_hw *, u32, u16);
 =======
+=======
+>>>>>>> v3.18
 	s32 (*acquire)(struct e1000_hw *);
 	s32 (*check_polarity)(struct e1000_hw *);
 	s32 (*check_reset_block)(struct e1000_hw *);
@@ -412,12 +439,16 @@ struct e1000_phy_operations {
 	s32 (*set_d0_lplu_state)(struct e1000_hw *, bool);
 	s32 (*set_d3_lplu_state)(struct e1000_hw *, bool);
 	s32 (*write_reg)(struct e1000_hw *, u32, u16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s32 (*read_i2c_byte)(struct e1000_hw *, u8, u8, u8 *);
 	s32 (*write_i2c_byte)(struct e1000_hw *, u8, u8, u8);
 };
 
 struct e1000_nvm_operations {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s32  (*acquire)(struct e1000_hw *);
 	s32  (*read)(struct e1000_hw *, u16, u16, u16 *);
@@ -427,6 +458,8 @@ struct e1000_nvm_operations {
 	s32  (*validate)(struct e1000_hw *);
 	s32  (*valid_led_default)(struct e1000_hw *, u16 *);
 =======
+=======
+>>>>>>> v3.18
 	s32 (*acquire)(struct e1000_hw *);
 	s32 (*read)(struct e1000_hw *, u16, u16, u16 *);
 	void (*release)(struct e1000_hw *);
@@ -434,6 +467,9 @@ struct e1000_nvm_operations {
 	s32 (*update)(struct e1000_hw *);
 	s32 (*validate)(struct e1000_hw *);
 	s32 (*valid_led_default)(struct e1000_hw *, u16 *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -603,12 +639,18 @@ struct e1000_dev_spec_82575 {
 	bool eee_disable;
 	bool clear_semaphore_once;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct e1000_sfp_flags eth_flags;
 	bool module_plugged;
 	u8 media_port;
 	bool media_changed;
 	bool mas_capable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -640,7 +682,11 @@ struct e1000_hw {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct net_device *igb_get_hw_dev(struct e1000_hw *hw);
+=======
+struct net_device *igb_get_hw_dev(struct e1000_hw *hw);
+>>>>>>> v3.18
 =======
 struct net_device *igb_get_hw_dev(struct e1000_hw *hw);
 >>>>>>> v3.18
@@ -649,13 +695,19 @@ struct net_device *igb_get_hw_dev(struct e1000_hw *hw);
 
 /* These functions must be implemented by drivers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32  igb_read_pcie_cap_reg(struct e1000_hw *hw, u32 reg, u16 *value);
 s32  igb_write_pcie_cap_reg(struct e1000_hw *hw, u32 reg, u16 *value);
 =======
+=======
+>>>>>>> v3.18
 s32 igb_read_pcie_cap_reg(struct e1000_hw *hw, u32 reg, u16 *value);
 s32 igb_write_pcie_cap_reg(struct e1000_hw *hw, u32 reg, u16 *value);
 
 void igb_read_pci_cfg(struct e1000_hw *hw, u32 reg, u16 *value);
 void igb_write_pci_cfg(struct e1000_hw *hw, u32 reg, u16 *value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _E1000_HW_H_ */

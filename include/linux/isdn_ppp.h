@@ -181,9 +181,14 @@ struct ippp_struct {
 #endif
 #ifdef CONFIG_IPPP_FILTER
 <<<<<<< HEAD
+<<<<<<< HEAD
   struct sock_filter *pass_filter;	/* filter for packets to pass */
   struct sock_filter *active_filter;	/* filter for pkts to reset idle */
   unsigned pass_len, active_len;
+=======
+  struct bpf_prog *pass_filter;   /* filter for packets to pass */
+  struct bpf_prog *active_filter; /* filter for pkts to reset idle */
+>>>>>>> v3.18
 =======
   struct bpf_prog *pass_filter;   /* filter for packets to pass */
   struct bpf_prog *active_filter; /* filter for pkts to reset idle */

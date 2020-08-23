@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
    Some comments on the code..
 
    - it shouldn't be necessary to use outb_p().
@@ -194,6 +195,8 @@ static void das6402_ai_fifo_read(struct comedi_device *dev, short *data, int n)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
  * das6402.c
  * Comedi driver for DAS6402 compatible boards
  * Copyright(c) 2014 H Hartley Sweeten <hsweeten@visionengravers.com>
@@ -408,11 +411,15 @@ static int das6402_ai_cmdtest(struct comedi_device *dev,
 {
 	return -EINVAL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int das6402_ai_cancel(struct comedi_device *dev,
 			     struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct das6402_private *devpriv = dev->private;
 
@@ -496,6 +503,8 @@ static int board_init(struct comedi_device *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	outb(DAS6402_CTRL_SOFT_TRIG, dev->iobase + DAS6402_CTRL_REG);
 
 	return 0;
@@ -708,12 +717,16 @@ static void das6402_reset(struct comedi_device *dev)
 	outb(0, dev->iobase + DAS6402_DI_DO_REG);
 
 	das6402_clear_all_interrupts(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int das6402_attach(struct comedi_device *dev,
 			  struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct das6402_private *devpriv;
 	unsigned int irq;
@@ -754,6 +767,8 @@ static int das6402_attach(struct comedi_device *dev,
 
 	board_init(dev);
 =======
+=======
+>>>>>>> v3.18
 	const struct das6402_boardinfo *board = dev->board_ptr;
 	struct das6402_private *devpriv;
 	struct comedi_subdevice *s;
@@ -845,6 +860,9 @@ static int das6402_attach(struct comedi_device *dev,
 	s->maxdata	= 1;
 	s->range_table	= &range_digital;
 	s->insn_bits	= das6402_do_insn_bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -856,12 +874,15 @@ static struct comedi_driver das6402_driver = {
 	.attach		= das6402_attach,
 	.detach		= comedi_legacy_detach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 module_comedi_driver(das6402_driver)
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 MODULE_DESCRIPTION("Comedi low-level driver");
 =======
+=======
+>>>>>>> v3.18
 	.board_name	= &das6402_boards[0].name,
 	.num_names	= ARRAY_SIZE(das6402_boards),
 	.offset		= sizeof(struct das6402_boardinfo),
@@ -870,5 +891,8 @@ module_comedi_driver(das6402_driver)
 
 MODULE_AUTHOR("H Hartley Sweeten <hsweeten@visionengravers.com>");
 MODULE_DESCRIPTION("Comedi driver for DAS6402 compatible boards");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

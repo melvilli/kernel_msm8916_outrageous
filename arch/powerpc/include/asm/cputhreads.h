@@ -19,6 +19,10 @@
 #ifdef CONFIG_SMP
 extern int threads_per_core;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int threads_per_subcore;
+>>>>>>> v3.18
 =======
 extern int threads_per_subcore;
 >>>>>>> v3.18
@@ -27,6 +31,10 @@ extern cpumask_t threads_core_mask;
 #else
 #define threads_per_core	1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define threads_per_subcore	1
+>>>>>>> v3.18
 =======
 #define threads_per_subcore	1
 >>>>>>> v3.18
@@ -83,12 +91,18 @@ static inline int cpu_thread_in_core(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int cpu_thread_in_subcore(int cpu)
 {
 	return cpu & (threads_per_subcore - 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int cpu_first_thread_sibling(int cpu)
 {

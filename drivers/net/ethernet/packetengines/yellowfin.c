@@ -237,7 +237,11 @@ static const struct pci_id_info pci_id_tbl[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(yellowfin_pci_tbl) = {
+=======
+static const struct pci_device_id yellowfin_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id yellowfin_pci_tbl[] = {
 >>>>>>> v3.18
@@ -477,7 +481,11 @@ static int yellowfin_init_one(struct pci_dev *pdev,
 	/* The Yellowfin-specific entries in the device structure. */
 	dev->netdev_ops = &netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+	dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ethtool_ops;
 >>>>>>> v3.18
@@ -522,7 +530,10 @@ err_out_unmap_tx:
         pci_free_consistent(pdev, TX_TOTAL_SIZE, np->tx_ring, np->tx_ring_dma);
 err_out_cleardev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pdev, ioaddr);
@@ -706,17 +717,23 @@ static void yellowfin_tx_timeout(struct net_device *dev)
 	if (yellowfin_debug) {
 		int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("  Rx ring %p: ", yp->rx_ring);
 		for (i = 0; i < RX_RING_SIZE; i++)
 			pr_cont(" %08x", yp->rx_ring[i].result_status);
 		pr_cont("\n");
 		pr_warning("  Tx ring %p: ", yp->tx_ring);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("  Rx ring %p: ", yp->rx_ring);
 		for (i = 0; i < RX_RING_SIZE; i++)
 			pr_cont(" %08x", yp->rx_ring[i].result_status);
 		pr_cont("\n");
 		pr_warn("  Tx ring %p: ", yp->tx_ring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = 0; i < TX_RING_SIZE; i++)
 			pr_cont(" %04x /%08x",
@@ -1074,7 +1091,11 @@ static int yellowfin_rx(struct net_device *dev)
 		s16 frame_status;
 		u16 desc_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int data_size;
+=======
+		int data_size, yf_size;
+>>>>>>> v3.18
 =======
 		int data_size, yf_size;
 >>>>>>> v3.18
@@ -1095,6 +1116,12 @@ static int yellowfin_rx(struct net_device *dev)
 		if (--boguscnt < 0)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		yf_size = sizeof(struct yellowfin_desc);
+
+>>>>>>> v3.18
 =======
 
 		yf_size = sizeof(struct yellowfin_desc);
@@ -1127,6 +1154,7 @@ static int yellowfin_rx(struct net_device *dev)
 #ifdef YF_PROTOTYPE		/* Support for prototype hardware errata. */
 		} else if ((yp->flags & HasMACAddrBug)  &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcmp(le32_to_cpu(yp->rx_ring_dma +
 				entry*sizeof(struct yellowfin_desc)),
 				dev->dev_addr, 6) != 0 &&
@@ -1134,12 +1162,17 @@ static int yellowfin_rx(struct net_device *dev)
 				entry*sizeof(struct yellowfin_desc)),
 				"\377\377\377\377\377\377", 6) != 0) {
 =======
+=======
+>>>>>>> v3.18
 			!ether_addr_equal(le32_to_cpu(yp->rx_ring_dma +
 						      entry * yf_size),
 					  dev->dev_addr) &&
 			!ether_addr_equal(le32_to_cpu(yp->rx_ring_dma +
 						      entry * yf_size),
 					  "\377\377\377\377\377\377")) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (bogus_rx++ == 0)
 				netdev_warn(dev, "Bad frame to %pM\n",
@@ -1431,7 +1464,10 @@ static void yellowfin_remove_one(struct pci_dev *pdev)
 
 	free_netdev (dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

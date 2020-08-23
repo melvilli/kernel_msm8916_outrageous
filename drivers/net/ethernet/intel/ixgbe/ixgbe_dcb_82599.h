@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -35,25 +39,36 @@
 /* DCB register definitions */
 #define IXGBE_RTTDCS_TDPAC      0x00000001 /* 0 Round Robin,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             * 1 WSP - Weighted Strict Priority
                                             */
 #define IXGBE_RTTDCS_VMPAC      0x00000002 /* 0 Round Robin,
                                             * 1 WRR - Weighted Round Robin
                                             */
 =======
+=======
+>>>>>>> v3.18
 					    * 1 WSP - Weighted Strict Priority
 					    */
 #define IXGBE_RTTDCS_VMPAC      0x00000002 /* 0 Round Robin,
 					    * 1 WRR - Weighted Round Robin
 					    */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IXGBE_RTTDCS_TDRM       0x00000010 /* Transmit Recycle Mode */
 #define IXGBE_RTTDCS_ARBDIS     0x00000040 /* DCB arbiter disable */
 #define IXGBE_RTTDCS_BDPM       0x00400000 /* Bypass Data Pipe - must clear! */
 #define IXGBE_RTTDCS_BPBFSM     0x00800000 /* Bypass PB Free Space - must
 <<<<<<< HEAD
+<<<<<<< HEAD
                                              * clear!
                                              */
+=======
+					     * clear!
+					     */
+>>>>>>> v3.18
 =======
 					     * clear!
 					     */
@@ -63,6 +78,10 @@
 /* Receive UP2TC mapping */
 #define IXGBE_RTRUP2TC_UP_SHIFT 3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IXGBE_RTRUP2TC_UP_MASK	7
+>>>>>>> v3.18
 =======
 #define IXGBE_RTRUP2TC_UP_MASK	7
 >>>>>>> v3.18
@@ -76,17 +95,23 @@
 
 #define IXGBE_RDRXCTL_MPBEN     0x00000010 /* DMA config for multiple packet
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             * buffers enable
                                             */
 #define IXGBE_RDRXCTL_MCEN      0x00000040 /* DMA config for multiple cores
                                             * (RSS) enable
                                             */
 =======
+=======
+>>>>>>> v3.18
 					    * buffers enable
 					    */
 #define IXGBE_RDRXCTL_MCEN      0x00000040 /* DMA config for multiple cores
 					    * (RSS) enable
 					    */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* RTRPCS Bit Masks */
@@ -109,8 +134,13 @@
 /* RTTPCS Bit Masks */
 #define IXGBE_RTTPCS_TPPAC      0x00000020 /* 0 Round Robin,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             * 1 SP - Strict Priority
                                             */
+=======
+					    * 1 SP - Strict Priority
+					    */
+>>>>>>> v3.18
 =======
 					    * 1 SP - Strict Priority
 					    */

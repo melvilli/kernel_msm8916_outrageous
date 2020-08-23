@@ -86,7 +86,10 @@ nouveau_timer_alarm(void *obj, u32 nsec, struct nouveau_alarm *alarm)
 	ptimer->alarm(ptimer, nsec, alarm);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void
 nouveau_timer_alarm_cancel(void *obj, struct nouveau_alarm *alarm)
@@ -94,4 +97,7 @@ nouveau_timer_alarm_cancel(void *obj, struct nouveau_alarm *alarm)
 	struct nouveau_timer *ptimer = nouveau_timer(obj);
 	ptimer->alarm_cancel(ptimer, alarm);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

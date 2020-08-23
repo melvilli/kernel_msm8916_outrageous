@@ -38,7 +38,11 @@ TRACE_EVENT(kvm_userspace_exit,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_KVM_IRQCHIP)
+=======
+#if defined(CONFIG_HAVE_KVM_IRQFD)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_HAVE_KVM_IRQFD)
 >>>>>>> v3.18
@@ -62,7 +66,11 @@ TRACE_EVENT(kvm_set_irq,
 		  __entry->gsi, __entry->level, __entry->irq_source_id)
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* defined(CONFIG_HAVE_KVM_IRQFD) */
+>>>>>>> v3.18
 =======
 #endif /* defined(CONFIG_HAVE_KVM_IRQFD) */
 >>>>>>> v3.18
@@ -104,7 +112,10 @@ TRACE_EVENT(kvm_ioapic_set_irq,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_ioapic_delayed_eoi_inj,
 	    TP_PROTO(__u64 e),
 	    TP_ARGS(e),
@@ -125,6 +136,9 @@ TRACE_EVENT(kvm_ioapic_delayed_eoi_inj,
 		  (__entry->e & (1<<16)) ? "|masked" : "")
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TRACE_EVENT(kvm_msi_set_irq,
 	    TP_PROTO(__u64 address, __u64 data),
@@ -156,7 +170,11 @@ TRACE_EVENT(kvm_msi_set_irq,
 #endif /* defined(__KVM_HAVE_IOAPIC) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_KVM_IRQCHIP)
+=======
+#if defined(CONFIG_HAVE_KVM_IRQFD)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_HAVE_KVM_IRQFD)
 >>>>>>> v3.18
@@ -185,7 +203,11 @@ TRACE_EVENT(kvm_ack_irq,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* defined(CONFIG_HAVE_KVM_IRQCHIP) */
+=======
+#endif /* defined(CONFIG_HAVE_KVM_IRQFD) */
+>>>>>>> v3.18
 =======
 #endif /* defined(CONFIG_HAVE_KVM_IRQFD) */
 >>>>>>> v3.18
@@ -245,8 +267,13 @@ TRACE_EVENT(kvm_fpu,
 
 TRACE_EVENT(kvm_age_page,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(ulong hva, struct kvm_memory_slot *slot, int ref),
 	TP_ARGS(hva, slot, ref),
+=======
+	TP_PROTO(ulong gfn, int level, struct kvm_memory_slot *slot, int ref),
+	TP_ARGS(gfn, level, slot, ref),
+>>>>>>> v3.18
 =======
 	TP_PROTO(ulong gfn, int level, struct kvm_memory_slot *slot, int ref),
 	TP_ARGS(gfn, level, slot, ref),
@@ -256,6 +283,10 @@ TRACE_EVENT(kvm_age_page,
 		__field(	u64,	hva		)
 		__field(	u64,	gfn		)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(	u8,	level		)
+>>>>>>> v3.18
 =======
 		__field(	u8,	level		)
 >>>>>>> v3.18
@@ -263,6 +294,7 @@ TRACE_EVENT(kvm_age_page,
 	),
 
 	TP_fast_assign(
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->hva		= hva;
 		__entry->gfn		=
@@ -273,6 +305,8 @@ TRACE_EVENT(kvm_age_page,
 	TP_printk("hva %llx gfn %llx %s",
 		  __entry->hva, __entry->gfn,
 =======
+=======
+>>>>>>> v3.18
 		__entry->gfn		= gfn;
 		__entry->level		= level;
 		__entry->hva		= ((gfn - slot->base_gfn) <<
@@ -282,6 +316,9 @@ TRACE_EVENT(kvm_age_page,
 
 	TP_printk("hva %llx gfn %llx level %u %s",
 		  __entry->hva, __entry->gfn, __entry->level,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  __entry->referenced ? "YOUNG" : "OLD")
 );
@@ -357,6 +394,7 @@ DEFINE_EVENT(kvm_async_pf_nopresent_ready, kvm_async_pf_ready,
 TRACE_EVENT(
 	kvm_async_pf_completed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(unsigned long address, struct page *page, u64 gva),
 	TP_ARGS(address, page, gva),
 
@@ -364,17 +402,23 @@ TRACE_EVENT(
 		__field(unsigned long, address)
 		__field(pfn_t, pfn)
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(unsigned long address, u64 gva),
 	TP_ARGS(address, gva),
 
 	TP_STRUCT__entry(
 		__field(unsigned long, address)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__field(u64, gva)
 		),
 
 	TP_fast_assign(
 		__entry->address = address;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->pfn = page ? page_to_pfn(page) : 0;
 		__entry->gva = gva;
@@ -383,11 +427,16 @@ TRACE_EVENT(
 	TP_printk("gva %#llx address %#lx pfn %#llx",  __entry->gva,
 		  __entry->address, __entry->pfn)
 =======
+=======
+>>>>>>> v3.18
 		__entry->gva = gva;
 		),
 
 	TP_printk("gva %#llx address %#lx",  __entry->gva,
 		  __entry->address)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 

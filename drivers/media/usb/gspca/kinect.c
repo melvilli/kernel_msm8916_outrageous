@@ -37,6 +37,11 @@ MODULE_DESCRIPTION("GSPCA/Kinect Sensor Device USB Camera Driver");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool depth_mode;
+
+>>>>>>> v3.18
 =======
 static bool depth_mode;
 
@@ -55,9 +60,15 @@ struct pkt_hdr {
 struct cam_hdr {
 	uint8_t magic[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t len;
 	uint16_t cmd;
 	uint16_t tag;
+=======
+	__le16 len;
+	__le16 cmd;
+	__le16 tag;
+>>>>>>> v3.18
 =======
 	__le16 len;
 	__le16 cmd;
@@ -85,7 +96,10 @@ struct sd {
 #define FPS_HIGH       0x0100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_pix_format depth_camera_mode[] = {
 	{640, 480, V4L2_PIX_FMT_Y10BPACK, V4L2_FIELD_NONE,
 	 .bytesperline = 640 * 10 / 8,
@@ -94,6 +108,9 @@ static const struct v4l2_pix_format depth_camera_mode[] = {
 	 .priv = MODE_640x488 | FORMAT_Y10B},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct v4l2_pix_format video_camera_mode[] = {
 	{640, 480, V4L2_PIX_FMT_SGRBG8, V4L2_FIELD_NONE,
@@ -178,16 +195,22 @@ static int send_cmd(struct gspca_dev *gspca_dev, uint16_t cmd, void *cmdbuf,
 		actual_len = kinect_read(udev, ibuf, 0x200);
 	} while (actual_len == 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDEBUG(D_USBO, "Control reply: %d", res);
 	if (actual_len < sizeof(*rhdr)) {
 		pr_err("send_cmd: Input control transfer failed (%d)\n", res);
 		return res;
 =======
+=======
+>>>>>>> v3.18
 	PDEBUG(D_USBO, "Control reply: %d", actual_len);
 	if (actual_len < sizeof(*rhdr)) {
 		pr_err("send_cmd: Input control transfer failed (%d)\n",
 		       actual_len);
 		return actual_len < 0 ? actual_len : -EREMOTEIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	actual_len -= sizeof(*rhdr);
@@ -208,9 +231,15 @@ static int send_cmd(struct gspca_dev *gspca_dev, uint16_t cmd, void *cmdbuf,
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_to_le16(rhdr->len) != (actual_len/2)) {
 		pr_err("send_cmd: Bad len %04x != %04x\n",
 		       cpu_to_le16(rhdr->len), (int)(actual_len/2));
+=======
+	if (le16_to_cpu(rhdr->len) != (actual_len/2)) {
+		pr_err("send_cmd: Bad len %04x != %04x\n",
+		       le16_to_cpu(rhdr->len), (int)(actual_len/2));
+>>>>>>> v3.18
 =======
 	if (le16_to_cpu(rhdr->len) != (actual_len/2)) {
 		pr_err("send_cmd: Bad len %04x != %04x\n",
@@ -237,7 +266,11 @@ static int write_register(struct gspca_dev *gspca_dev, uint16_t reg,
 {
 	uint16_t reply[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t cmd[2];
+=======
+	__le16 cmd[2];
+>>>>>>> v3.18
 =======
 	__le16 cmd[2];
 >>>>>>> v3.18
@@ -259,7 +292,11 @@ static int write_register(struct gspca_dev *gspca_dev, uint16_t reg,
 
 /* this function is called at probe time */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sd_config(struct gspca_dev *gspca_dev,
+=======
+static int sd_config_video(struct gspca_dev *gspca_dev,
+>>>>>>> v3.18
 =======
 static int sd_config_video(struct gspca_dev *gspca_dev,
 >>>>>>> v3.18
@@ -271,8 +308,11 @@ static int sd_config_video(struct gspca_dev *gspca_dev,
 	sd->cam_tag = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Only video stream is supported for now,
 	 * which has stream flag = 0x80 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sd->stream_flag = 0x80;
@@ -283,6 +323,11 @@ static int sd_config_video(struct gspca_dev *gspca_dev,
 	cam->nmodes = ARRAY_SIZE(video_camera_mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gspca_dev->xfer_ep = 0x81;
+
+>>>>>>> v3.18
 =======
 	gspca_dev->xfer_ep = 0x81;
 
@@ -297,7 +342,10 @@ static int sd_config_video(struct gspca_dev *gspca_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int sd_config_depth(struct gspca_dev *gspca_dev,
 		     const struct usb_device_id *id)
 {
@@ -318,6 +366,9 @@ static int sd_config_depth(struct gspca_dev *gspca_dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* this function is called at probe and resume time */
 static int sd_init(struct gspca_dev *gspca_dev)
@@ -328,7 +379,11 @@ static int sd_init(struct gspca_dev *gspca_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sd_start(struct gspca_dev *gspca_dev)
+=======
+static int sd_start_video(struct gspca_dev *gspca_dev)
+>>>>>>> v3.18
 =======
 static int sd_start_video(struct gspca_dev *gspca_dev)
 >>>>>>> v3.18
@@ -404,8 +459,11 @@ static int sd_start_video(struct gspca_dev *gspca_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sd_stopN(struct gspca_dev *gspca_dev)
 =======
+=======
+>>>>>>> v3.18
 static int sd_start_depth(struct gspca_dev *gspca_dev)
 {
 	/* turn off IR-reset function */
@@ -428,6 +486,9 @@ static int sd_start_depth(struct gspca_dev *gspca_dev)
 }
 
 static void sd_stopN_video(struct gspca_dev *gspca_dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* reset video stream */
@@ -435,13 +496,19 @@ static void sd_stopN_video(struct gspca_dev *gspca_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void sd_stopN_depth(struct gspca_dev *gspca_dev)
 {
 	/* reset depth stream */
 	write_register(gspca_dev, 0x06, 0x00);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void sd_pkt_scan(struct gspca_dev *gspca_dev, u8 *__data, int len)
 {
@@ -479,6 +546,7 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev, u8 *__data, int len)
 
 /* sub-driver description */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sd_desc sd_desc = {
 	.name      = MODULE_NAME,
 	.config    = sd_config,
@@ -486,6 +554,8 @@ static const struct sd_desc sd_desc = {
 	.start     = sd_start,
 	.stopN     = sd_stopN,
 =======
+=======
+>>>>>>> v3.18
 static const struct sd_desc sd_desc_video = {
 	.name      = MODULE_NAME,
 	.config    = sd_config_video,
@@ -504,6 +574,9 @@ static const struct sd_desc sd_desc_depth = {
 	.init      = sd_init,
 	.start     = sd_start_depth,
 	.stopN     = sd_stopN_depth,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.pkt_scan  = sd_pkt_scan,
 	/*
@@ -525,15 +598,21 @@ MODULE_DEVICE_TABLE(usb, device_table);
 static int sd_probe(struct usb_interface *intf, const struct usb_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gspca_dev_probe(intf, id, &sd_desc, sizeof(struct sd),
 				THIS_MODULE);
 =======
+=======
+>>>>>>> v3.18
 	if (depth_mode)
 		return gspca_dev_probe(intf, id, &sd_desc_depth,
 				       sizeof(struct sd), THIS_MODULE);
 	else
 		return gspca_dev_probe(intf, id, &sd_desc_video,
 				       sizeof(struct sd), THIS_MODULE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -551,6 +630,12 @@ static struct usb_driver sd_driver = {
 
 module_usb_driver(sd_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+module_param(depth_mode, bool, 0644);
+MODULE_PARM_DESC(depth_mode, "0=video 1=depth");
+>>>>>>> v3.18
 =======
 
 module_param(depth_mode, bool, 0644);

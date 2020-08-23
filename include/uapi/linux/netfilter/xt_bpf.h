@@ -7,7 +7,11 @@
 #define XT_BPF_MAX_NUM_INSTR	64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sk_filter;
+=======
+struct bpf_prog;
+>>>>>>> v3.18
 =======
 struct bpf_prog;
 >>>>>>> v3.18
@@ -18,7 +22,11 @@ struct xt_bpf_info {
 
 	/* only used in the kernel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_filter *filter __attribute__((aligned(8)));
+=======
+	struct bpf_prog *filter __attribute__((aligned(8)));
+>>>>>>> v3.18
 =======
 	struct bpf_prog *filter __attribute__((aligned(8)));
 >>>>>>> v3.18

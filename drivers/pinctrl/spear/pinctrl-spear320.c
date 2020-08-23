@@ -3411,7 +3411,11 @@ static struct spear_function *spear320_functions[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id spear320_pinctrl_of_match[] = {
+=======
+static const struct of_device_id spear320_pinctrl_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id spear320_pinctrl_of_match[] = {
 >>>>>>> v3.18

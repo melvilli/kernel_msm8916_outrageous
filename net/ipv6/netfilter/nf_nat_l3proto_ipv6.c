@@ -159,6 +159,10 @@ static void nf_nat_ipv6_csum_recalc(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 >>>>>>> v3.18
@@ -180,6 +184,10 @@ static int nf_nat_ipv6_nlattr_to_range(struct nlattr *tb[],
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -192,7 +200,13 @@ static const struct nf_nat_l3proto nf_nat_l3proto_ipv6 = {
 	.csum_update		= nf_nat_ipv6_csum_update,
 	.csum_recalc		= nf_nat_ipv6_csum_recalc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nlattr_to_range	= nf_nat_ipv6_nlattr_to_range,
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+	.nlattr_to_range	= nf_nat_ipv6_nlattr_to_range,
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 	.nlattr_to_range	= nf_nat_ipv6_nlattr_to_range,
@@ -272,7 +286,10 @@ int nf_nat_icmpv6_reply_translation(struct sk_buff *skb,
 EXPORT_SYMBOL_GPL(nf_nat_icmpv6_reply_translation);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned int
 nf_nat_ipv6_fn(const struct nf_hook_ops *ops, struct sk_buff *skb,
 	       const struct net_device *in, const struct net_device *out,
@@ -472,6 +489,9 @@ nf_nat_ipv6_local_fn(const struct nf_hook_ops *ops, struct sk_buff *skb,
 }
 EXPORT_SYMBOL_GPL(nf_nat_ipv6_local_fn);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init nf_nat_l3proto_ipv6_init(void)
 {

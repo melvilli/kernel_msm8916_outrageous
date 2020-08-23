@@ -47,7 +47,11 @@ static void release_pcie_device(struct device *dev)
  * @entries: Array of MSI-X entries
  * @new_entry: Index of the entry to add to the array
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @nr_entries: Number of entries aleady in the array
+=======
+ * @nr_entries: Number of entries already in the array
+>>>>>>> v3.18
 =======
  * @nr_entries: Number of entries already in the array
 >>>>>>> v3.18
@@ -84,14 +88,20 @@ static int pcie_port_enable_msix(struct pci_dev *dev, int *vectors, int mask)
 	u32 reg32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_entries = pci_msix_table_size(dev);
 	if (!nr_entries)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	nr_entries = pci_msix_vec_count(dev);
 	if (nr_entries < 0)
 		return nr_entries;
 	BUG_ON(!nr_entries);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (nr_entries > PCIE_PORT_MAX_MSIX_ENTRIES)
 		nr_entries = PCIE_PORT_MAX_MSIX_ENTRIES;
@@ -110,7 +120,11 @@ static int pcie_port_enable_msix(struct pci_dev *dev, int *vectors, int mask)
 		msix_entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = pci_enable_msix(dev, msix_entries, nr_entries);
+=======
+	status = pci_enable_msix_exact(dev, msix_entries, nr_entries);
+>>>>>>> v3.18
 =======
 	status = pci_enable_msix_exact(dev, msix_entries, nr_entries);
 >>>>>>> v3.18
@@ -186,7 +200,11 @@ static int pcie_port_enable_msix(struct pci_dev *dev, int *vectors, int mask)
 
 		/* Now allocate the MSI-X vectors for real */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = pci_enable_msix(dev, msix_entries, nvec);
+=======
+		status = pci_enable_msix_exact(dev, msix_entries, nvec);
+>>>>>>> v3.18
 =======
 		status = pci_enable_msix_exact(dev, msix_entries, nvec);
 >>>>>>> v3.18
@@ -280,6 +298,7 @@ static int get_port_device_capability(struct pci_dev *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pcie_port_platform_notify(dev, &cap_mask);
 	if (!pcie_ports_auto) {
 		cap_mask = PCIE_PORT_SERVICE_PME | PCIE_PORT_SERVICE_HP
@@ -288,6 +307,8 @@ static int get_port_device_capability(struct pci_dev *dev)
 			cap_mask |= PCIE_PORT_SERVICE_AER;
 	} else if (err) {
 =======
+=======
+>>>>>>> v3.18
 	cap_mask = PCIE_PORT_SERVICE_PME | PCIE_PORT_SERVICE_HP
 			| PCIE_PORT_SERVICE_VC;
 	if (pci_aer_available())
@@ -296,6 +317,9 @@ static int get_port_device_capability(struct pci_dev *dev)
 	if (pcie_ports_auto) {
 		err = pcie_port_platform_notify(dev, &cap_mask);
 		if (err)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 	}
@@ -374,18 +398,24 @@ static int pcie_device_init(struct pci_dev *pdev, int service, int irq)
 
 	retval = device_register(device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval)
 		kfree(pcie);
 	else
 		get_device(device);
 	return retval;
 =======
+=======
+>>>>>>> v3.18
 	if (retval) {
 		put_device(device);
 		return retval;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -416,11 +446,14 @@ int pcie_port_device_register(struct pci_dev *dev)
 	 * Initialize service irqs. Don't use service devices that
 	 * require interrupts if there is no way to generate them.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	status = init_service_irqs(dev, irqs, capabilities);
 	if (status) {
 		capabilities &= PCIE_PORT_SERVICE_VC;
 =======
+=======
+>>>>>>> v3.18
 	 * However, some drivers may have a polling mode (e.g. pciehp_poll_mode)
 	 * that can be used in the absence of irqs.  Allow them to determine
 	 * if that is to be used.
@@ -428,6 +461,9 @@ int pcie_port_device_register(struct pci_dev *dev)
 	status = init_service_irqs(dev, irqs, capabilities);
 	if (status) {
 		capabilities &= PCIE_PORT_SERVICE_VC | PCIE_PORT_SERVICE_HP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!capabilities)
 			goto error_disable;
@@ -503,10 +539,15 @@ int pcie_port_device_resume(struct device *dev)
 static int remove_iter(struct device *dev, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus == &pcie_port_bus_type) {
 		put_device(dev);
 		device_unregister(dev);
 	}
+=======
+	if (dev->bus == &pcie_port_bus_type)
+		device_unregister(dev);
+>>>>>>> v3.18
 =======
 	if (dev->bus == &pcie_port_bus_type)
 		device_unregister(dev);
@@ -552,6 +593,7 @@ static int pcie_port_probe_service(struct device *dev)
 	pciedev = to_pcie_device(dev);
 	status = driver->probe(pciedev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!status) {
 		dev_printk(KERN_DEBUG, dev, "service driver %s loaded\n",
 			driver->name);
@@ -559,12 +601,17 @@ static int pcie_port_probe_service(struct device *dev)
 	}
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	if (status)
 		return status;
 
 	dev_printk(KERN_DEBUG, dev, "service driver %s loaded\n", driver->name);
 	get_device(dev);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -617,7 +664,11 @@ int pcie_port_service_register(struct pcie_port_service_driver *new)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new->driver.name = (char *)new->name;
+=======
+	new->driver.name = new->name;
+>>>>>>> v3.18
 =======
 	new->driver.name = new->name;
 >>>>>>> v3.18

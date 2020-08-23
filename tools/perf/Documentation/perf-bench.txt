@@ -17,11 +17,17 @@ This 'perf bench' command is a general framework for benchmark suites.
 COMMON OPTIONS
 --------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -r::
 --repeat=::
 Specify amount of times to repeat the run (default 10).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 -f::
 --format=::
@@ -56,13 +62,19 @@ SUBSYSTEM
 	Memory access performance.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 'numa'::
 	NUMA scheduling and MM benchmarks.
 
 'futex'::
 	Futex stressing benchmarks.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 'all'::
 	All benchmark subsystems.
@@ -204,7 +216,10 @@ Show only the result with page faults before memset.
 Show only the result without page faults before memset.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 SUITES FOR 'numa'
 ~~~~~~~~~~~~~~~~~
 *mem*::
@@ -221,6 +236,9 @@ Suite for evaluating wake calls.
 *requeue*::
 Suite for evaluating requeue calls.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SEE ALSO
 --------

@@ -233,13 +233,19 @@ static int __init eisa_register_device(struct eisa_device *edev)
 {
 	int rc = device_register(&edev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 	if (rc) {
 		put_device(&edev->dev);
 		return rc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = device_create_file(&edev->dev, &dev_attr_signature);
@@ -296,7 +302,10 @@ static int __init eisa_request_resources(struct eisa_root_device *root,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_printk(KERN_DEBUG, &edev->dev, "%pR\n", &edev->res[i]);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (request_resource(root->res, &edev->res[i]))

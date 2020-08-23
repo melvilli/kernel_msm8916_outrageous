@@ -45,7 +45,11 @@ SYSCALL_DEFINE5(pciconfig_read, unsigned long, bus, unsigned long, dfn,
 		err = -EINVAL;
 		goto error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -104,7 +108,11 @@ SYSCALL_DEFINE5(pciconfig_write, unsigned long, bus, unsigned long, dfn,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(len) {
+=======
+	switch (len) {
+>>>>>>> v3.18
 =======
 	switch (len) {
 >>>>>>> v3.18

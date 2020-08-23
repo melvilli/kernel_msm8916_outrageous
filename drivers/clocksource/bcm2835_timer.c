@@ -50,7 +50,11 @@ struct bcm2835_timer {
 static void __iomem *system_clock __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace bcm2835_sched_read(void)
+=======
+static u64 notrace bcm2835_sched_read(void)
+>>>>>>> v3.18
 =======
 static u64 notrace bcm2835_sched_read(void)
 >>>>>>> v3.18
@@ -115,7 +119,11 @@ static void __init bcm2835_timer_init(struct device_node *node)
 
 	system_clock = base + REG_COUNTER_LO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(bcm2835_sched_read, 32, freq);
+=======
+	sched_clock_register(bcm2835_sched_read, 32, freq);
+>>>>>>> v3.18
 =======
 	sched_clock_register(bcm2835_sched_read, 32, freq);
 >>>>>>> v3.18

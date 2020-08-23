@@ -46,7 +46,11 @@ unsigned long oprofile_get_cpu_buffer_size(void)
 void oprofile_cpu_buffer_inc_smpl_lost(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct oprofile_cpu_buffer *cpu_buf = &__get_cpu_var(op_cpu_buffer);
+=======
+	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
+>>>>>>> v3.18
 =======
 	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
 >>>>>>> v3.18
@@ -302,7 +306,11 @@ __oprofile_add_ext_sample(unsigned long pc, struct pt_regs * const regs,
 			  struct task_struct *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct oprofile_cpu_buffer *cpu_buf = &__get_cpu_var(op_cpu_buffer);
+=======
+	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
+>>>>>>> v3.18
 =======
 	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
 >>>>>>> v3.18
@@ -366,7 +374,11 @@ oprofile_write_reserve(struct op_entry *entry, struct pt_regs * const regs,
 	struct op_sample *sample;
 	int is_kernel = !user_mode(regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct oprofile_cpu_buffer *cpu_buf = &__get_cpu_var(op_cpu_buffer);
+=======
+	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
+>>>>>>> v3.18
 =======
 	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
 >>>>>>> v3.18
@@ -425,7 +437,11 @@ int oprofile_write_commit(struct op_entry *entry)
 void oprofile_add_pc(unsigned long pc, int is_kernel, unsigned long event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct oprofile_cpu_buffer *cpu_buf = &__get_cpu_var(op_cpu_buffer);
+=======
+	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
+>>>>>>> v3.18
 =======
 	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
 >>>>>>> v3.18
@@ -435,7 +451,11 @@ void oprofile_add_pc(unsigned long pc, int is_kernel, unsigned long event)
 void oprofile_add_trace(unsigned long pc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct oprofile_cpu_buffer *cpu_buf = &__get_cpu_var(op_cpu_buffer);
+=======
+	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
+>>>>>>> v3.18
 =======
 	struct oprofile_cpu_buffer *cpu_buf = this_cpu_ptr(&op_cpu_buffer);
 >>>>>>> v3.18

@@ -24,6 +24,7 @@
 
 #include <core/object.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/parent.h>
 #include <core/handle.h>
 #include <core/class.h>
@@ -35,6 +36,8 @@
 #include <subdev/clock.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <core/client.h>
 #include <core/parent.h>
 #include <core/handle.h>
@@ -43,6 +46,9 @@
 
 #include <engine/disp.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/dcb.h>
@@ -50,6 +56,12 @@
 #include <subdev/bios/init.h>
 #include <subdev/bios/pll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/devinit.h>
+#include <subdev/fb.h>
+#include <subdev/timer.h>
+>>>>>>> v3.18
 =======
 #include <subdev/devinit.h>
 #include <subdev/fb.h>
@@ -60,7 +72,10 @@
 
 /*******************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * EVO channel base class
  ******************************************************************************/
 
@@ -86,6 +101,9 @@ nvd0_disp_chan_uevent = {
 };
 
 /*******************************************************************************
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * EVO DMA channel base class
  ******************************************************************************/
@@ -122,7 +140,10 @@ nvd0_disp_dmac_init(struct nouveau_object *object)
 
 	/* enable error reporting */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_mask(priv, 0x610090, 0x00000001 << chid, 0x00000001 << chid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nv_mask(priv, 0x6100a0, 0x00000001 << chid, 0x00000001 << chid);
@@ -163,7 +184,11 @@ nvd0_disp_dmac_fini(struct nouveau_object *object, bool suspend)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* disable error reporting */
+=======
+	/* disable error reporting and completion notification */
+>>>>>>> v3.18
 =======
 	/* disable error reporting and completion notification */
 >>>>>>> v3.18
@@ -177,6 +202,7 @@ nvd0_disp_dmac_fini(struct nouveau_object *object, bool suspend)
  * EVO master channel object
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvd0_disp_mast_ctor(struct nouveau_object *parent,
@@ -202,6 +228,8 @@ nvd0_disp_mast_ctor(struct nouveau_object *parent,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 const struct nv50_disp_mthd_list
 nvd0_disp_mast_mthd_base = {
 	.mthd = 0x0000,
@@ -341,6 +369,9 @@ nvd0_disp_mast_mthd_chan = {
 		{}
 	}
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int
@@ -356,7 +387,10 @@ nvd0_disp_mast_init(struct nouveau_object *object)
 
 	/* enable error reporting */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_mask(priv, 0x610090, 0x00000001, 0x00000001);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nv_mask(priv, 0x6100a0, 0x00000001, 0x00000001);
@@ -394,7 +428,11 @@ nvd0_disp_mast_fini(struct nouveau_object *object, bool suspend)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* disable error reporting */
+=======
+	/* disable error reporting and completion notification */
+>>>>>>> v3.18
 =======
 	/* disable error reporting and completion notification */
 >>>>>>> v3.18
@@ -405,6 +443,7 @@ nvd0_disp_mast_fini(struct nouveau_object *object, bool suspend)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_ofuncs
 nvd0_disp_mast_ofuncs = {
 	.ctor = nvd0_disp_mast_ctor,
@@ -414,6 +453,8 @@ nvd0_disp_mast_ofuncs = {
 	.rd32 = nv50_disp_chan_rd32,
 	.wr32 = nv50_disp_chan_wr32,
 =======
+=======
+>>>>>>> v3.18
 struct nv50_disp_chan_impl
 nvd0_disp_mast_ofuncs = {
 	.base.ctor = nv50_disp_mast_ctor,
@@ -427,6 +468,9 @@ nvd0_disp_mast_ofuncs = {
 	.chid = 0,
 	.attach = nvd0_disp_dmac_object_attach,
 	.detach = nvd0_disp_dmac_object_detach,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -434,6 +478,7 @@ nvd0_disp_mast_ofuncs = {
  * EVO sync channel objects
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvd0_disp_sync_ctor(struct nouveau_object *parent,
@@ -470,6 +515,8 @@ nvd0_disp_sync_ofuncs = {
 	.rd32 = nv50_disp_chan_rd32,
 	.wr32 = nv50_disp_chan_wr32,
 =======
+=======
+>>>>>>> v3.18
 static const struct nv50_disp_mthd_list
 nvd0_disp_sync_mthd_base = {
 	.mthd = 0x0000,
@@ -558,6 +605,9 @@ nvd0_disp_sync_ofuncs = {
 	.chid = 1,
 	.attach = nvd0_disp_dmac_object_attach,
 	.detach = nvd0_disp_dmac_object_detach,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -565,6 +615,7 @@ nvd0_disp_sync_ofuncs = {
  * EVO overlay channel objects
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvd0_disp_ovly_ctor(struct nouveau_object *parent,
@@ -601,6 +652,8 @@ nvd0_disp_ovly_ofuncs = {
 	.rd32 = nv50_disp_chan_rd32,
 	.wr32 = nv50_disp_chan_wr32,
 =======
+=======
+>>>>>>> v3.18
 static const struct nv50_disp_mthd_list
 nvd0_disp_ovly_mthd_base = {
 	.mthd = 0x0000,
@@ -676,6 +729,9 @@ nvd0_disp_ovly_ofuncs = {
 	.chid = 5,
 	.attach = nvd0_disp_dmac_object_attach,
 	.detach = nvd0_disp_dmac_object_detach,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -684,6 +740,7 @@ nvd0_disp_ovly_ofuncs = {
  ******************************************************************************/
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nvd0_disp_pioc_create_(struct nouveau_object *parent,
 		       struct nouveau_object *engine,
@@ -704,6 +761,8 @@ nvd0_disp_pioc_dtor(struct nouveau_object *object)
 static int
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 nvd0_disp_pioc_init(struct nouveau_object *object)
 {
 	struct nv50_disp_priv *priv = (void *)object->engine;
@@ -717,7 +776,10 @@ nvd0_disp_pioc_init(struct nouveau_object *object)
 
 	/* enable error reporting */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_mask(priv, 0x610090, 0x00000001 << chid, 0x00000001 << chid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nv_mask(priv, 0x6100a0, 0x00000001 << chid, 0x00000001 << chid);
@@ -749,7 +811,11 @@ nvd0_disp_pioc_fini(struct nouveau_object *object, bool suspend)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* disable error reporting */
+=======
+	/* disable error reporting and completion notification */
+>>>>>>> v3.18
 =======
 	/* disable error reporting and completion notification */
 >>>>>>> v3.18
@@ -763,6 +829,7 @@ nvd0_disp_pioc_fini(struct nouveau_object *object, bool suspend)
  * EVO immediate overlay channel objects
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvd0_disp_oimm_ctor(struct nouveau_object *parent,
@@ -796,6 +863,8 @@ nvd0_disp_oimm_ofuncs = {
 	.rd32 = nv50_disp_chan_rd32,
 	.wr32 = nv50_disp_chan_wr32,
 =======
+=======
+>>>>>>> v3.18
 struct nv50_disp_chan_impl
 nvd0_disp_oimm_ofuncs = {
 	.base.ctor = nv50_disp_oimm_ctor,
@@ -807,6 +876,9 @@ nvd0_disp_oimm_ofuncs = {
 	.base.rd32 = nv50_disp_chan_rd32,
 	.base.wr32 = nv50_disp_chan_wr32,
 	.chid = 9,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -814,6 +886,7 @@ nvd0_disp_oimm_ofuncs = {
  * EVO cursor channel objects
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvd0_disp_curs_ctor(struct nouveau_object *parent,
@@ -847,6 +920,8 @@ nvd0_disp_curs_ofuncs = {
 	.rd32 = nv50_disp_chan_rd32,
 	.wr32 = nv50_disp_chan_wr32,
 =======
+=======
+>>>>>>> v3.18
 struct nv50_disp_chan_impl
 nvd0_disp_curs_ofuncs = {
 	.base.ctor = nv50_disp_curs_ctor,
@@ -858,6 +933,9 @@ nvd0_disp_curs_ofuncs = {
 	.base.rd32 = nv50_disp_chan_rd32,
 	.base.wr32 = nv50_disp_chan_wr32,
 	.chid = 13,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -865,6 +943,7 @@ nvd0_disp_curs_ofuncs = {
  * Base display object
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 nvd0_disp_base_vblank_enable(struct nouveau_event *event, int head)
@@ -909,6 +988,8 @@ nvd0_disp_base_dtor(struct nouveau_object *object)
 	nouveau_ramht_ref(NULL, &base->ramht);
 	nouveau_parent_destroy(&base->base);
 =======
+=======
+>>>>>>> v3.18
 int
 nvd0_disp_base_scanoutpos(NV50_DISP_MTHD_V0)
 {
@@ -939,6 +1020,9 @@ nvd0_disp_base_scanoutpos(NV50_DISP_MTHD_V0)
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1000,7 +1084,10 @@ nvd0_disp_base_init(struct nouveau_object *object)
 	nv_wr32(priv, 0x6100b0, 0x00000307);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* disable underflow reporting, preventing an intermittent issue
 	 * on some nve4 boards where the production vbios left this
 	 * setting enabled by default.
@@ -1010,6 +1097,9 @@ nvd0_disp_base_init(struct nouveau_object *object)
 	for (i = 0; i < priv->head.nr; i++)
 		nv_mask(priv, 0x616308 + (i * 0x800), 0x00000111, 0x00000010);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1029,24 +1119,34 @@ nvd0_disp_base_fini(struct nouveau_object *object, bool suspend)
 struct nouveau_ofuncs
 nvd0_disp_base_ofuncs = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ctor = nvd0_disp_base_ctor,
 	.dtor = nvd0_disp_base_dtor,
 	.init = nvd0_disp_base_init,
 	.fini = nvd0_disp_base_fini,
 =======
+=======
+>>>>>>> v3.18
 	.ctor = nv50_disp_base_ctor,
 	.dtor = nv50_disp_base_dtor,
 	.init = nvd0_disp_base_init,
 	.fini = nvd0_disp_base_fini,
 	.mthd = nv50_disp_base_mthd,
 	.ntfy = nouveau_disp_ntfy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct nouveau_oclass
 nvd0_disp_base_oclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ NVD0_DISP_CLASS, &nvd0_disp_base_ofuncs, nva3_disp_base_omthds },
+=======
+	{ GF110_DISP, &nvd0_disp_base_ofuncs },
+>>>>>>> v3.18
 =======
 	{ GF110_DISP, &nvd0_disp_base_ofuncs },
 >>>>>>> v3.18
@@ -1056,17 +1156,23 @@ nvd0_disp_base_oclass[] = {
 static struct nouveau_oclass
 nvd0_disp_sclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ NVD0_DISP_MAST_CLASS, &nvd0_disp_mast_ofuncs },
 	{ NVD0_DISP_SYNC_CLASS, &nvd0_disp_sync_ofuncs },
 	{ NVD0_DISP_OVLY_CLASS, &nvd0_disp_ovly_ofuncs },
 	{ NVD0_DISP_OIMM_CLASS, &nvd0_disp_oimm_ofuncs },
 	{ NVD0_DISP_CURS_CLASS, &nvd0_disp_curs_ofuncs },
 =======
+=======
+>>>>>>> v3.18
 	{ GF110_DISP_CORE_CHANNEL_DMA, &nvd0_disp_mast_ofuncs.base },
 	{ GF110_DISP_BASE_CHANNEL_DMA, &nvd0_disp_sync_ofuncs.base },
 	{ GF110_DISP_OVERLAY_CONTROL_DMA, &nvd0_disp_ovly_ofuncs.base },
 	{ GF110_DISP_OVERLAY, &nvd0_disp_oimm_ofuncs.base },
 	{ GF110_DISP_CURSOR, &nvd0_disp_curs_ofuncs.base },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -1075,6 +1181,7 @@ nvd0_disp_sclass[] = {
  * Display engine implementation
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u16
 exec_lookup(struct nv50_disp_priv *priv, int head, int outp, u32 ctrl,
@@ -1090,6 +1197,8 @@ exec_lookup(struct nv50_disp_priv *priv, int head, int outp, u32 ctrl,
 	} else {
 		outp -= 4;
 =======
+=======
+>>>>>>> v3.18
 static void
 nvd0_disp_vblank_init(struct nvkm_event *event, int type, int head)
 {
@@ -1125,6 +1234,9 @@ exec_lookup(struct nv50_disp_priv *priv, int head, int or, u32 ctrl,
 		mask = 0;
 	} else {
 		or -= 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch (ctrl & 0x00000f00) {
 		case 0x00000000: type = DCB_OUTPUT_LVDS; mask = 1; break;
@@ -1137,6 +1249,7 @@ exec_lookup(struct nv50_disp_priv *priv, int head, int or, u32 ctrl,
 			nv_error(priv, "unknown SOR mc 0x%08x\n", ctrl);
 			return 0x0000;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dcb->sorconf.link = mask;
 	}
@@ -1166,6 +1279,8 @@ exec_script(struct nv50_disp_priv *priv, int head, int id)
 	for (outp = 0; !(ctrl & (1 << head)) && outp < 8; outp++) {
 		ctrl = nv_rd32(priv, 0x640180 + (outp * 0x20));
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	mask  = 0x00c0 & (mask << 6);
@@ -1199,11 +1314,15 @@ exec_script(struct nv50_disp_priv *priv, int head, int id)
 
 	for (or = 0; !(ctrl & (1 << head)) && or < 8; or++) {
 		ctrl = nv_rd32(priv, 0x640180 + (or * 0x20));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ctrl & (1 << head))
 			break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (outp == 8)
 		return false;
@@ -1211,18 +1330,27 @@ exec_script(struct nv50_disp_priv *priv, int head, int id)
 	data = exec_lookup(priv, head, outp, ctrl, &dcb, &ver, &hdr, &cnt, &len, &info);
 	if (data) {
 =======
+=======
+>>>>>>> v3.18
 	if (or == 8)
 		return NULL;
 
 	outp = exec_lookup(priv, head, or, ctrl, &data, &ver, &hdr, &cnt, &len, &info);
 	if (outp) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct nvbios_init init = {
 			.subdev = nv_subdev(priv),
 			.bios = bios,
 			.offset = info.script[id],
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.outp = &dcb,
+=======
+			.outp = &outp->info,
+>>>>>>> v3.18
 =======
 			.outp = &outp->info,
 >>>>>>> v3.18
@@ -1230,6 +1358,7 @@ exec_script(struct nv50_disp_priv *priv, int head, int id)
 			.execute = 1,
 		};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return nvbios_exec(&init) == 0;
 	}
@@ -1252,6 +1381,8 @@ exec_clkcmp(struct nv50_disp_priv *priv, int head, int id,
 	for (outp = 0; !(ctrl & (1 << head)) && outp < 8; outp++) {
 		ctrl = nv_rd32(priv, 0x660180 + (outp * 0x20));
 =======
+=======
+>>>>>>> v3.18
 		nvbios_exec(&init);
 	}
 
@@ -1271,11 +1402,15 @@ exec_clkcmp(struct nv50_disp_priv *priv, int head, int id, u32 pclk, u32 *conf)
 
 	for (or = 0; !(ctrl & (1 << head)) && or < 8; or++) {
 		ctrl = nv_rd32(priv, 0x660180 + (or * 0x20));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ctrl & (1 << head))
 			break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (outp == 8)
 		return conf;
@@ -1304,6 +1439,8 @@ exec_clkcmp(struct nv50_disp_priv *priv, int head, int id, u32 pclk, u32 *conf)
 
 	data = nvbios_ocfg_match(bios, data, conf, &ver, &hdr, &cnt, &len, &info2);
 =======
+=======
+>>>>>>> v3.18
 	if (or == 8)
 		return NULL;
 
@@ -1330,6 +1467,9 @@ exec_clkcmp(struct nv50_disp_priv *priv, int head, int id, u32 pclk, u32 *conf)
 	}
 
 	data = nvbios_ocfg_match(bios, data, *conf, &ver, &hdr, &cnt, &len, &info2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (data && id < 0xff) {
 		data = nvbios_oclk_match(bios, info2.clkcmp[id], pclk);
@@ -1339,7 +1479,11 @@ exec_clkcmp(struct nv50_disp_priv *priv, int head, int id, u32 pclk, u32 *conf)
 				.bios = bios,
 				.offset = data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.outp = dcb,
+=======
+				.outp = &outp->info,
+>>>>>>> v3.18
 =======
 				.outp = &outp->info,
 >>>>>>> v3.18
@@ -1352,7 +1496,11 @@ exec_clkcmp(struct nv50_disp_priv *priv, int head, int id, u32 pclk, u32 *conf)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return conf;
+=======
+	return outp;
+>>>>>>> v3.18
 =======
 	return outp;
 >>>>>>> v3.18
@@ -1368,8 +1516,11 @@ static void
 nvd0_disp_intr_unk2_0(struct nv50_disp_priv *priv, int head)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exec_script(priv, head, 2);
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output *outp = exec_script(priv, head, 2);
 
 	/* see note in nv50_disp_intr_unk20_0() */
@@ -1387,6 +1538,9 @@ nvd0_disp_intr_unk2_0(struct nv50_disp_priv *priv, int head)
 		nvbios_exec(&init);
 		atomic_set(&outpdp->lt.done, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1394,15 +1548,21 @@ static void
 nvd0_disp_intr_unk2_1(struct nv50_disp_priv *priv, int head)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_clock *clk = nouveau_clock(priv);
 	u32 pclk = nv_rd32(priv, 0x660450 + (head * 0x300)) / 1000;
 	if (pclk)
 		clk->pll_set(clk, PLL_VPLL0 + head, pclk);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_devinit *devinit = nouveau_devinit(priv);
 	u32 pclk = nv_rd32(priv, 0x660450 + (head * 0x300)) / 1000;
 	if (pclk)
 		devinit->pll_set(devinit, PLL_VPLL0 + head, pclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wr32(priv, 0x612200 + (head * 0x800), 0x00000000);
 }
@@ -1415,6 +1575,12 @@ nvd0_disp_intr_unk2_2_tu(struct nv50_disp_priv *priv, int head,
 	const u32 ctrl = nv_rd32(priv, 0x660200 + (or   * 0x020));
 	const u32 conf = nv_rd32(priv, 0x660404 + (head * 0x300));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const s32 vactive = nv_rd32(priv, 0x660414 + (head * 0x300)) & 0xffff;
+	const s32 vblanke = nv_rd32(priv, 0x66041c + (head * 0x300)) & 0xffff;
+	const s32 vblanks = nv_rd32(priv, 0x660420 + (head * 0x300)) & 0xffff;
+>>>>>>> v3.18
 =======
 	const s32 vactive = nv_rd32(priv, 0x660414 + (head * 0x300)) & 0xffff;
 	const s32 vblanke = nv_rd32(priv, 0x66041c + (head * 0x300)) & 0xffff;
@@ -1428,7 +1594,11 @@ nvd0_disp_intr_unk2_2_tu(struct nv50_disp_priv *priv, int head,
 	const u32 symbol = 100000;
 	const u32 TU = 64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 dpctrl = nv_rd32(priv, 0x61c10c + loff) & 0x000f0000;
+=======
+	u32 dpctrl = nv_rd32(priv, 0x61c10c + loff);
+>>>>>>> v3.18
 =======
 	u32 dpctrl = nv_rd32(priv, 0x61c10c + loff);
 >>>>>>> v3.18
@@ -1437,7 +1607,10 @@ nvd0_disp_intr_unk2_2_tu(struct nv50_disp_priv *priv, int head,
 	u64 ratio, value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	link_nr  = hweight32(dpctrl & 0x000f0000);
 	link_bw  = (clksor & 0x007c0000) >> 18;
 	link_bw *= 27000;
@@ -1457,12 +1630,16 @@ nvd0_disp_intr_unk2_2_tu(struct nv50_disp_priv *priv, int head,
 	nv_mask(priv, 0x616624 + hoff, 0x00ffffff, value);
 
 	/* watermark */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if      ((conf & 0x3c0) == 0x180) bits = 30;
 	else if ((conf & 0x3c0) == 0x140) bits = 24;
 	else                              bits = 18;
 	datarate = (pclk * bits) / 8;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if      (dpctrl > 0x00030000) link_nr = 4;
 	else if (dpctrl > 0x00010000) link_nr = 2;
@@ -1471,6 +1648,8 @@ nvd0_disp_intr_unk2_2_tu(struct nv50_disp_priv *priv, int head,
 	link_bw  = (clksor & 0x007c0000) >> 18;
 	link_bw *= 27000;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ratio  = datarate;
@@ -1491,6 +1670,7 @@ nvd0_disp_intr_unk2_2_tu(struct nv50_disp_priv *priv, int head,
 static void
 nvd0_disp_intr_unk2_2(struct nv50_disp_priv *priv, int head)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dcb_output outp;
 	u32 pclk = nv_rd32(priv, 0x660450 + (head * 0x300)) / 1000;
@@ -1528,6 +1708,8 @@ nvd0_disp_intr_unk2_2(struct nv50_disp_priv *priv, int head)
 		nv_mask(priv, addr, 0x00000707, data);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output *outp;
 	u32 pclk = nv_rd32(priv, 0x660450 + (head * 0x300)) / 1000;
 	u32 conf, addr, data;
@@ -1565,6 +1747,9 @@ nvd0_disp_intr_unk2_2(struct nv50_disp_priv *priv, int head)
 	}
 
 	nv_mask(priv, addr, 0x00000707, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1572,14 +1757,20 @@ static void
 nvd0_disp_intr_unk4_0(struct nv50_disp_priv *priv, int head)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dcb_output outp;
 	u32 pclk = nv_rd32(priv, 0x660450 + (head * 0x300)) / 1000;
 	exec_clkcmp(priv, head, 1, pclk, &outp);
 =======
+=======
+>>>>>>> v3.18
 	u32 pclk = nv_rd32(priv, 0x660450 + (head * 0x300)) / 1000;
 	u32 conf;
 
 	exec_clkcmp(priv, head, 1, pclk, &conf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1589,16 +1780,22 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 	struct nv50_disp_priv *priv =
 		container_of(work, struct nv50_disp_priv, supervisor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask[4];
 	int head;
 
 	nv_debug(priv, "supervisor %08x\n", priv->super);
 =======
+=======
+>>>>>>> v3.18
 	struct nv50_disp_impl *impl = (void *)nv_object(priv)->oclass;
 	u32 mask[4];
 	int head;
 
 	nv_debug(priv, "supervisor %d\n", ffs(priv->super));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (head = 0; head < priv->head.nr; head++) {
 		mask[head] = nv_rd32(priv, 0x6101d4 + (head * 0x800));
@@ -1607,15 +1804,21 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 
 	if (priv->super & 0x00000001) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (head = 0; head < priv->head.nr; head++) {
 			if (!(mask[head] & 0x00001000))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 		nv50_disp_mthd_chan(priv, NV_DBG_DEBUG, 0, impl->mthd.core);
 		for (head = 0; head < priv->head.nr; head++) {
 			if (!(mask[head] & 0x00001000))
 				continue;
 			nv_debug(priv, "supervisor 1.0 - head %d\n", head);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nvd0_disp_intr_unk1_0(priv, head);
 		}
@@ -1625,6 +1828,10 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 			if (!(mask[head] & 0x00001000))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			nv_debug(priv, "supervisor 2.0 - head %d\n", head);
+>>>>>>> v3.18
 =======
 			nv_debug(priv, "supervisor 2.0 - head %d\n", head);
 >>>>>>> v3.18
@@ -1634,6 +1841,10 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 			if (!(mask[head] & 0x00010000))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			nv_debug(priv, "supervisor 2.1 - head %d\n", head);
+>>>>>>> v3.18
 =======
 			nv_debug(priv, "supervisor 2.1 - head %d\n", head);
 >>>>>>> v3.18
@@ -1643,6 +1854,10 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 			if (!(mask[head] & 0x00001000))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			nv_debug(priv, "supervisor 2.2 - head %d\n", head);
+>>>>>>> v3.18
 =======
 			nv_debug(priv, "supervisor 2.2 - head %d\n", head);
 >>>>>>> v3.18
@@ -1654,6 +1869,10 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 			if (!(mask[head] & 0x00001000))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			nv_debug(priv, "supervisor 3.0 - head %d\n", head);
+>>>>>>> v3.18
 =======
 			nv_debug(priv, "supervisor 3.0 - head %d\n", head);
 >>>>>>> v3.18
@@ -1667,7 +1886,10 @@ nvd0_disp_intr_supervisor(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 nvd0_disp_intr_error(struct nv50_disp_priv *priv, int chid)
 {
@@ -1715,6 +1937,9 @@ nvd0_disp_intr_error(struct nv50_disp_priv *priv, int chid)
 	nv_wr32(priv, 0x6101f0 + (chid * 12), 0x90000000);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void
 nvd0_disp_intr(struct nouveau_subdev *subdev)
@@ -1726,13 +1951,19 @@ nvd0_disp_intr(struct nouveau_subdev *subdev)
 	if (intr & 0x00000001) {
 		u32 stat = nv_rd32(priv, 0x61008c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, 0x61008c, stat);
 =======
+=======
+>>>>>>> v3.18
 		while (stat) {
 			int chid = __ffs(stat); stat &= ~(1 << chid);
 			nv50_disp_chan_uevent_send(priv, chid);
 			nv_wr32(priv, 0x61008c, 1 << chid);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		intr &= ~0x00000001;
 	}
@@ -1740,6 +1971,7 @@ nvd0_disp_intr(struct nouveau_subdev *subdev)
 	if (intr & 0x00000002) {
 		u32 stat = nv_rd32(priv, 0x61009c);
 		int chid = ffs(stat) - 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (chid >= 0) {
 			u32 mthd = nv_rd32(priv, 0x6101f0 + (chid * 12));
@@ -1753,6 +1985,10 @@ nvd0_disp_intr(struct nouveau_subdev *subdev)
 			nv_wr32(priv, 0x6101f0 + (chid * 12), 0x90000000);
 		}
 
+=======
+		if (chid >= 0)
+			nvd0_disp_intr_error(priv, chid);
+>>>>>>> v3.18
 =======
 		if (chid >= 0)
 			nvd0_disp_intr_error(priv, chid);
@@ -1783,7 +2019,11 @@ nvd0_disp_intr(struct nouveau_subdev *subdev)
 			u32 stat = nv_rd32(priv, 0x6100bc + (i * 0x800));
 			if (stat & 0x00000001)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nouveau_event_trigger(priv->base.vblank, i);
+=======
+				nouveau_disp_vblank(&priv->base, i);
+>>>>>>> v3.18
 =======
 				nouveau_disp_vblank(&priv->base, i);
 >>>>>>> v3.18
@@ -1809,11 +2049,17 @@ nvd0_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = nvkm_event_init(&nvd0_disp_chan_uevent, 1, 17, &priv->uevent);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_engine(priv)->sclass = nvd0_disp_base_oclass;
 	nv_engine(priv)->cclass = &nv50_disp_cclass;
@@ -1829,6 +2075,7 @@ nvd0_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->sor.hda_eld = nvd0_hda_eld;
 	priv->sor.hdmi = nvd0_hdmi_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->sor.dp = &nvd0_sor_dp_func;
 	return 0;
 }
@@ -1838,6 +2085,8 @@ nvd0_disp_oclass = {
 	.handle = NV_ENGINE(DISP, 0x90),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1851,6 +2100,9 @@ struct nouveau_oclass *
 nvd0_disp_oclass = &(struct nv50_disp_impl) {
 	.base.base.handle = NV_ENGINE(DISP, 0x90),
 	.base.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nvd0_disp_ctor,
 		.dtor = _nouveau_disp_dtor,
@@ -1858,8 +2110,11 @@ nvd0_disp_oclass = &(struct nv50_disp_impl) {
 		.fini = _nouveau_disp_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.base.vblank = &nvd0_disp_vblank_func,
 	.base.outp =  nvd0_disp_outp_sclass,
 	.mthd.core = &nvd0_disp_mast_mthd_chan,
@@ -1868,4 +2123,7 @@ nvd0_disp_oclass = &(struct nv50_disp_impl) {
 	.mthd.prev = -0x020000,
 	.head.scanoutpos = nvd0_disp_base_scanoutpos,
 }.base.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -183,6 +183,10 @@ extern unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()  barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18
@@ -196,7 +200,10 @@ extern unsigned long get_wchan(struct task_struct *p);
 #define get_sr(sr) ({unsigned int v; RSR(v,sr); v; })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef XCHAL_HAVE_EXTERN_REGS
 #define XCHAL_HAVE_EXTERN_REGS 0
 #endif
@@ -217,6 +224,9 @@ static inline unsigned long get_er(unsigned long addr)
 
 #endif /* XCHAL_HAVE_EXTERN_REGS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __ASSEMBLY__ */
 #endif	/* _XTENSA_PROCESSOR_H */

@@ -820,6 +820,7 @@ mpc52xx_ata_remove(struct platform_device *op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PM
 
@@ -828,11 +829,16 @@ mpc52xx_ata_suspend(struct platform_device *op, pm_message_t state)
 {
 	struct ata_host *host = dev_get_drvdata(&op->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int
 mpc52xx_ata_suspend(struct platform_device *op, pm_message_t state)
 {
 	struct ata_host *host = platform_get_drvdata(op);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ata_host_suspend(host, state);
@@ -842,7 +848,11 @@ static int
 mpc52xx_ata_resume(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&op->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -860,10 +870,15 @@ mpc52xx_ata_resume(struct platform_device *op)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif
 
 
+=======
+#endif
+
+>>>>>>> v3.18
 =======
 #endif
 
@@ -879,7 +894,11 @@ static struct platform_driver mpc52xx_ata_of_platform_driver = {
 	.probe		= mpc52xx_ata_probe,
 	.remove		= mpc52xx_ata_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

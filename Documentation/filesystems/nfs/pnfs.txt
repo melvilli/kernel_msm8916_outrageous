@@ -13,7 +13,11 @@ struct pnfs_layout_hdr
 The on-the-wire command LAYOUTGET corresponds to struct
 pnfs_layout_segment, usually referred to by the variable name lseg.
 <<<<<<< HEAD
+<<<<<<< HEAD
 Each nfs_inode may hold a pointer to a cache of of these layout
+=======
+Each nfs_inode may hold a pointer to a cache of these layout
+>>>>>>> v3.18
 =======
 Each nfs_inode may hold a pointer to a cache of these layout
 >>>>>>> v3.18

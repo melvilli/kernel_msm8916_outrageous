@@ -8,13 +8,19 @@
  * 2 of the License, or (at your option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/byteorder/big_endian.h>
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 #include <linux/byteorder/little_endian.h>
 #else
 #include <linux/byteorder/big_endian.h>
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_POWERPC_BYTEORDER_H */

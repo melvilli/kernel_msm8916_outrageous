@@ -8,6 +8,7 @@
  *	Adapted from linux/net/ipv4/af_inet.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Fixes:
  *	piggy, Karl Knutson	:	Socket protocol table
  * 	Hideaki YOSHIFUJI	:	sin6_scope_id support
@@ -18,6 +19,8 @@
  *      as published by the Free Software Foundation; either version
  *      2 of the License, or (at your option) any later version.
 =======
+=======
+>>>>>>> v3.18
  *	Fixes:
  *	piggy, Karl Knutson	:	Socket protocol table
  *	Hideaki YOSHIFUJI	:	sin6_scope_id support
@@ -27,6 +30,9 @@
  *	modify it under the terms of the GNU General Public License
  *	as published by the Free Software Foundation; either version
  *	2 of the License, or (at your option) any later version.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -69,6 +75,10 @@
 #include <net/ip6_route.h>
 #include <net/addrconf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ndisc.h>
+>>>>>>> v3.18
 =======
 #include <net/ndisc.h>
 >>>>>>> v3.18
@@ -79,6 +89,7 @@
 #include <asm/uaccess.h>
 #include <linux/mroute6.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ANDROID_PARANOID_NETWORK
 #include <linux/android_aid.h>
@@ -94,6 +105,8 @@ static inline int current_has_network(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_AUTHOR("Cast of dozens");
@@ -139,6 +152,7 @@ static int inet6_create(struct net *net, struct socket *sock, int protocol,
 	struct proto *answer_prot;
 	unsigned char answer_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char answer_no_check;
 	int try_loading_module = 0;
 	int err;
@@ -154,6 +168,11 @@ static int inet6_create(struct net *net, struct socket *sock, int protocol,
 	if (protocol < 0 || protocol >= IPPROTO_MAX)
 		return -EINVAL;
 
+=======
+	int try_loading_module = 0;
+	int err;
+
+>>>>>>> v3.18
 =======
 	int try_loading_module = 0;
 	int err;
@@ -206,7 +225,12 @@ lookup_protocol:
 
 	err = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sock->type == SOCK_RAW && !kern && !capable(CAP_NET_RAW))
+=======
+	if (sock->type == SOCK_RAW && !kern &&
+	    !ns_capable(net->user_ns, CAP_NET_RAW))
+>>>>>>> v3.18
 =======
 	if (sock->type == SOCK_RAW && !kern &&
 	    !ns_capable(net->user_ns, CAP_NET_RAW))
@@ -216,7 +240,10 @@ lookup_protocol:
 	sock->ops = answer->ops;
 	answer_prot = answer->prot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	answer_no_check = answer->no_check;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	answer_flags = answer->flags;
@@ -233,7 +260,10 @@ lookup_protocol:
 
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_no_check = answer_no_check;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (INET_PROTOSW_REUSE & answer_flags)
@@ -260,7 +290,11 @@ lookup_protocol:
 	np->mc_loop	= 1;
 	np->pmtudisc	= IPV6_PMTUDISC_WANT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->ipv6only	= net->ipv6.sysctl.bindv6only;
+=======
+	sk->sk_ipv6only	= net->ipv6.sysctl.bindv6only;
+>>>>>>> v3.18
 =======
 	sk->sk_ipv6only	= net->ipv6.sysctl.bindv6only;
 >>>>>>> v3.18
@@ -277,7 +311,11 @@ lookup_protocol:
 	inet->rcv_tos	= 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipv4_config.no_pmtu_disc)
+=======
+	if (net->ipv4.sysctl_ip_no_pmtu_disc)
+>>>>>>> v3.18
 =======
 	if (net->ipv4.sysctl_ip_no_pmtu_disc)
 >>>>>>> v3.18
@@ -365,7 +403,11 @@ int inet6_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 		 * makes no sense
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (np->ipv6only) {
+=======
+		if (sk->sk_ipv6only) {
+>>>>>>> v3.18
 =======
 		if (sk->sk_ipv6only) {
 >>>>>>> v3.18
@@ -377,7 +419,11 @@ int inet6_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 		v4addr = addr->sin6_addr.s6_addr32[3];
 		chk_addr_ret = inet_addr_type(net, v4addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!sysctl_ip_nonlocal_bind &&
+=======
+		if (!net->ipv4.sysctl_ip_nonlocal_bind &&
+>>>>>>> v3.18
 =======
 		if (!net->ipv4.sysctl_ip_nonlocal_bind &&
 >>>>>>> v3.18
@@ -435,7 +481,11 @@ int inet6_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	inet->inet_saddr = v4addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->rcv_saddr = addr->sin6_addr;
+=======
+	sk->sk_v6_rcv_saddr = addr->sin6_addr;
+>>>>>>> v3.18
 =======
 	sk->sk_v6_rcv_saddr = addr->sin6_addr;
 >>>>>>> v3.18
@@ -454,7 +504,11 @@ int inet6_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 		sk->sk_userlocks |= SOCK_BINDADDR_LOCK;
 		if (addr_type != IPV6_ADDR_MAPPED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			np->ipv6only = 1;
+=======
+			sk->sk_ipv6only = 1;
+>>>>>>> v3.18
 =======
 			sk->sk_ipv6only = 1;
 >>>>>>> v3.18
@@ -512,11 +566,17 @@ void inet6_destroy_sock(struct sock *sk)
 	/* Free tx options */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	opt = xchg((__force struct ipv6_txoptions **)&np->opt, NULL);
 	if (opt) {
 		atomic_sub(opt->tot_len, &sk->sk_omem_alloc);
 		txopt_put(opt);
 	}
+=======
+	opt = xchg(&np->opt, NULL);
+	if (opt != NULL)
+		sock_kfree_s(sk, opt, opt->tot_len);
+>>>>>>> v3.18
 =======
 	opt = xchg(&np->opt, NULL);
 	if (opt != NULL)
@@ -548,6 +608,7 @@ int inet6_getname(struct socket *sock, struct sockaddr *uaddr,
 			return -ENOTCONN;
 		sin->sin6_port = inet->inet_dport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sin->sin6_addr = np->daddr;
 		if (np->sndflow)
 			sin->sin6_flowinfo = np->flow_label;
@@ -557,6 +618,8 @@ int inet6_getname(struct socket *sock, struct sockaddr *uaddr,
 		else
 			sin->sin6_addr = np->rcv_saddr;
 =======
+=======
+>>>>>>> v3.18
 		sin->sin6_addr = sk->sk_v6_daddr;
 		if (np->sndflow)
 			sin->sin6_flowinfo = np->flow_label;
@@ -565,6 +628,9 @@ int inet6_getname(struct socket *sock, struct sockaddr *uaddr,
 			sin->sin6_addr = np->saddr;
 		else
 			sin->sin6_addr = sk->sk_v6_rcv_saddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		sin->sin6_port = inet->inet_sport;
@@ -576,6 +642,7 @@ int inet6_getname(struct socket *sock, struct sockaddr *uaddr,
 }
 EXPORT_SYMBOL(inet6_getname);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int inet6_killaddr_ioctl(struct net *net, void __user *arg) {
 	struct in6_ifreq ireq;
@@ -592,6 +659,8 @@ int inet6_killaddr_ioctl(struct net *net, void __user *arg) {
 	return tcp_nuke_addr(net, (struct sockaddr *) &sin6);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int inet6_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
@@ -618,8 +687,11 @@ int inet6_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 	case SIOCSIFDSTADDR:
 		return addrconf_set_dstaddr(net, (void __user *) arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SIOCKILLADDR:
 		return inet6_killaddr_ioctl(net, (void __user *) arg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -776,7 +848,11 @@ int inet6_sk_rebuild_header(struct sock *sk)
 		memset(&fl6, 0, sizeof(fl6));
 		fl6.flowi6_proto = sk->sk_protocol;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fl6.daddr = np->daddr;
+=======
+		fl6.daddr = sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 		fl6.daddr = sk->sk_v6_daddr;
 >>>>>>> v3.18
@@ -786,6 +862,7 @@ int inet6_sk_rebuild_header(struct sock *sk)
 		fl6.flowi6_mark = sk->sk_mark;
 		fl6.fl6_dport = inet->inet_dport;
 		fl6.fl6_sport = inet->inet_sport;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		fl6.flowi6_uid = sock_i_uid(sk);
 		security_sk_classify_flow(sk, flowi6_to_flowi(&fl6));
@@ -797,11 +874,16 @@ int inet6_sk_rebuild_header(struct sock *sk)
 
 		dst = ip6_dst_lookup_flow(sk, &fl6, final_p, false);
 =======
+=======
+>>>>>>> v3.18
 		security_sk_classify_flow(sk, flowi6_to_flowi(&fl6));
 
 		final_p = fl6_update_dst(&fl6, np->opt, &final);
 
 		dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_ERR(dst)) {
 			sk->sk_route_caps = 0;
@@ -817,23 +899,33 @@ int inet6_sk_rebuild_header(struct sock *sk)
 EXPORT_SYMBOL_GPL(inet6_sk_rebuild_header);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool ipv6_opt_accepted(const struct sock *sk, const struct sk_buff *skb)
 {
 	const struct ipv6_pinfo *np = inet6_sk(sk);
 	const struct inet6_skb_parm *opt = IP6CB(skb);
 =======
+=======
+>>>>>>> v3.18
 bool ipv6_opt_accepted(const struct sock *sk, const struct sk_buff *skb,
 		       const struct inet6_skb_parm *opt)
 {
 	const struct ipv6_pinfo *np = inet6_sk(sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (np->rxopt.all) {
 		if ((opt->hop && (np->rxopt.bits.hopopts ||
 				  np->rxopt.bits.ohopopts)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ((IPV6_FLOWINFO_MASK &
 		      *(__be32 *)skb_network_header(skb)) &&
+=======
+		    (ip6_flowinfo((struct ipv6hdr *) skb_network_header(skb)) &&
+>>>>>>> v3.18
 =======
 		    (ip6_flowinfo((struct ipv6hdr *) skb_network_header(skb)) &&
 >>>>>>> v3.18
@@ -867,6 +959,7 @@ static void ipv6_packet_cleanup(void)
 static int __net_init ipv6_init_mibs(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (snmp_mib_init((void __percpu **)net->mib.udp_stats_in6,
 			  sizeof(struct udp_mib),
 			  __alignof__(struct udp_mib)) < 0)
@@ -883,6 +976,8 @@ static int __net_init ipv6_init_mibs(struct net *net)
 			  sizeof(struct icmpv6_mib),
 			  __alignof__(struct icmpv6_mib)) < 0)
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	net->mib.udp_stats_in6 = alloc_percpu(struct udp_mib);
@@ -904,6 +999,9 @@ static int __net_init ipv6_init_mibs(struct net *net)
 
 	net->mib.icmpv6_statistics = alloc_percpu(struct icmpv6_mib);
 	if (!net->mib.icmpv6_statistics)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_icmp_mib;
 	net->mib.icmpv6msg_statistics = kzalloc(sizeof(struct icmpv6msg_mib),
@@ -914,6 +1012,7 @@ static int __net_init ipv6_init_mibs(struct net *net)
 
 err_icmpmsg_mib:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp_mib_free((void __percpu **)net->mib.icmpv6_statistics);
 err_icmp_mib:
 	snmp_mib_free((void __percpu **)net->mib.ipv6_statistics);
@@ -922,6 +1021,8 @@ err_ip_mib:
 err_udplite_mib:
 	snmp_mib_free((void __percpu **)net->mib.udp_stats_in6);
 =======
+=======
+>>>>>>> v3.18
 	free_percpu(net->mib.icmpv6_statistics);
 err_icmp_mib:
 	free_percpu(net->mib.ipv6_statistics);
@@ -929,6 +1030,9 @@ err_ip_mib:
 	free_percpu(net->mib.udplite_stats_in6);
 err_udplite_mib:
 	free_percpu(net->mib.udp_stats_in6);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -ENOMEM;
 }
@@ -936,15 +1040,21 @@ err_udplite_mib:
 static void ipv6_cleanup_mibs(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp_mib_free((void __percpu **)net->mib.udp_stats_in6);
 	snmp_mib_free((void __percpu **)net->mib.udplite_stats_in6);
 	snmp_mib_free((void __percpu **)net->mib.ipv6_statistics);
 	snmp_mib_free((void __percpu **)net->mib.icmpv6_statistics);
 =======
+=======
+>>>>>>> v3.18
 	free_percpu(net->mib.udp_stats_in6);
 	free_percpu(net->mib.udplite_stats_in6);
 	free_percpu(net->mib.ipv6_statistics);
 	free_percpu(net->mib.icmpv6_statistics);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(net->mib.icmpv6msg_statistics);
 }
@@ -956,6 +1066,12 @@ static int __net_init inet6_net_init(struct net *net)
 	net->ipv6.sysctl.bindv6only = 0;
 	net->ipv6.sysctl.icmpv6_time = 1*HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	net->ipv6.sysctl.flowlabel_consistency = 1;
+	net->ipv6.sysctl.auto_flowlabels = 0;
+	atomic_set(&net->ipv6.fib6_sernum, 1);
+>>>>>>> v3.18
 =======
 	net->ipv6.sysctl.flowlabel_consistency = 1;
 	net->ipv6.sysctl.auto_flowlabels = 0;
@@ -1005,7 +1121,10 @@ static struct pernet_operations inet6_net_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct ipv6_stub ipv6_stub_impl = {
 	.ipv6_sock_mc_join = ipv6_sock_mc_join,
 	.ipv6_sock_mc_drop = ipv6_sock_mc_drop,
@@ -1015,6 +1134,9 @@ static const struct ipv6_stub ipv6_stub_impl = {
 	.nd_tbl	= &nd_tbl,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init inet6_init(void)
 {
@@ -1067,8 +1189,11 @@ static int __init inet6_init(void)
 		goto out_sock_register_fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcpv6_prot.sysctl_mem = init_net.ipv4.sysctl_tcp_mem;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1094,6 +1219,12 @@ static int __init inet6_init(void)
 	if (err)
 		goto igmp_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ipv6_stub = &ipv6_stub_impl;
+
+>>>>>>> v3.18
 =======
 
 	ipv6_stub = &ipv6_stub_impl;
@@ -1168,15 +1299,21 @@ out:
 #ifdef CONFIG_SYSCTL
 sysctl_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipv6_packet_cleanup();
 #endif
 pingv6_fail:
 	pingv6_exit();
 =======
+=======
+>>>>>>> v3.18
 	pingv6_exit();
 #endif
 pingv6_fail:
 	ipv6_packet_cleanup();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ipv6_packet_fail:
 	tcpv6_exit();
@@ -1238,6 +1375,7 @@ out_unregister_tcp_proto:
 module_init(inet6_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __exit inet6_exit(void)
 {
 	if (disable_ipv6_mod)
@@ -1285,6 +1423,8 @@ static void __exit inet6_exit(void)
 }
 module_exit(inet6_exit);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS_NETPROTO(PF_INET6);

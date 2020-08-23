@@ -31,9 +31,12 @@ struct alg_sock {
 	struct sock *parent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int refcnt;
 	unsigned int nokey_refcnt;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const struct af_alg_type *type;
@@ -56,10 +59,15 @@ struct af_alg_type {
 	int (*setkey)(void *private, const u8 *key, unsigned int keylen);
 	int (*accept)(void *private, struct sock *sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*accept_nokey)(void *private, struct sock *sk);
 
 	struct proto_ops *ops;
 	struct proto_ops *ops_nokey;
+=======
+
+	struct proto_ops *ops;
+>>>>>>> v3.18
 =======
 
 	struct proto_ops *ops;
@@ -78,7 +86,10 @@ int af_alg_unregister_type(const struct af_alg_type *type);
 
 int af_alg_release(struct socket *sock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void af_alg_release_parent(struct sock *sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int af_alg_accept(struct sock *sk, struct socket *newsock);
@@ -98,12 +109,18 @@ static inline struct alg_sock *alg_sk(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void af_alg_release_parent(struct sock *sk)
 {
 	sock_put(alg_sk(sk)->parent);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void af_alg_init_completion(struct af_alg_completion *completion)
 {

@@ -56,7 +56,11 @@ static int write_sigio_thread(void *unused)
 	char c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signal(SIGWINCH, SIG_IGN);
+=======
+	os_fix_helper_signals();
+>>>>>>> v3.18
 =======
 	os_fix_helper_signals();
 >>>>>>> v3.18

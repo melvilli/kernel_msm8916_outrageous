@@ -62,7 +62,11 @@ static int vlan_dev_rebuild_header(struct sk_buff *skb)
 			 dev->name, ntohs(veth->h_vlan_encapsulated_proto));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(veth->h_source, dev->dev_addr, ETH_ALEN);
+=======
+		ether_addr_copy(veth->h_source, dev->dev_addr);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(veth->h_source, dev->dev_addr);
 >>>>>>> v3.18
@@ -72,6 +76,7 @@ static int vlan_dev_rebuild_header(struct sk_buff *skb)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u16
 vlan_dev_get_egress_qos_mask(struct net_device *dev, struct sk_buff *skb)
@@ -92,6 +97,8 @@ vlan_dev_get_egress_qos_mask(struct net_device *dev, struct sk_buff *skb)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -115,17 +122,23 @@ static int vlan_dev_hard_header(struct sk_buff *skb, struct net_device *dev,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(vlan_dev_priv(dev)->flags & VLAN_FLAG_REORDER_HDR)) {
 		vhdr = (struct vlan_hdr *) skb_push(skb, VLAN_HLEN);
 
 		vlan_tci = vlan_dev_priv(dev)->vlan_id;
 		vlan_tci |= vlan_dev_get_egress_qos_mask(dev, skb);
 =======
+=======
+>>>>>>> v3.18
 	if (!(vlan->flags & VLAN_FLAG_REORDER_HDR)) {
 		vhdr = (struct vlan_hdr *) skb_push(skb, VLAN_HLEN);
 
 		vlan_tci = vlan->vlan_id;
 		vlan_tci |= vlan_dev_get_egress_qos_mask(dev, skb->priority);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vhdr->h_vlan_TCI = htons(vlan_tci);
 
@@ -149,7 +162,11 @@ static int vlan_dev_hard_header(struct sk_buff *skb, struct net_device *dev,
 
 	/* Now make the underlying real hard header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = vlan_dev_priv(dev)->real_dev;
+=======
+	dev = vlan->real_dev;
+>>>>>>> v3.18
 =======
 	dev = vlan->real_dev;
 >>>>>>> v3.18
@@ -188,7 +205,11 @@ static netdev_tx_t vlan_dev_hard_start_xmit(struct sk_buff *skb,
 		u16 vlan_tci;
 		vlan_tci = vlan->vlan_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vlan_tci |= vlan_dev_get_egress_qos_mask(dev, skb);
+=======
+		vlan_tci |= vlan_dev_get_egress_qos_mask(dev, skb->priority);
+>>>>>>> v3.18
 =======
 		vlan_tci |= vlan_dev_get_egress_qos_mask(dev, skb->priority);
 >>>>>>> v3.18
@@ -346,7 +367,11 @@ static int vlan_dev_open(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(vlan->real_dev_addr, real_dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(vlan->real_dev_addr, real_dev->dev_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(vlan->real_dev_addr, real_dev->dev_addr);
 >>>>>>> v3.18
@@ -414,7 +439,11 @@ static int vlan_dev_set_mac_address(struct net_device *dev, void *p)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, addr->sa_data, ETH_ALEN);
+=======
+	ether_addr_copy(dev->dev_addr, addr->sa_data);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(dev->dev_addr, addr->sa_data);
 >>>>>>> v3.18
@@ -436,6 +465,11 @@ static int vlan_dev_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 	case SIOCGMIIREG:
 	case SIOCSMIIREG:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case SIOCSHWTSTAMP:
+	case SIOCGHWTSTAMP:
+>>>>>>> v3.18
 =======
 	case SIOCSHWTSTAMP:
 	case SIOCGHWTSTAMP:
@@ -549,6 +583,7 @@ static void vlan_dev_change_rx_flags(struct net_device *dev, int change)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vlan_calculate_locking_subclass(struct net_device *real_dev)
 {
 	int subclass = 0;
@@ -592,10 +627,15 @@ static void vlan_dev_set_rx_mode(struct net_device *vlan_dev)
 	vlan_dev_mc_sync(vlan_dev_priv(vlan_dev)->real_dev, vlan_dev);
 	vlan_dev_uc_sync(vlan_dev_priv(vlan_dev)->real_dev, vlan_dev);
 =======
+=======
+>>>>>>> v3.18
 static void vlan_dev_set_rx_mode(struct net_device *vlan_dev)
 {
 	dev_mc_sync(vlan_dev_priv(vlan_dev)->real_dev, vlan_dev);
 	dev_uc_sync(vlan_dev_priv(vlan_dev)->real_dev, vlan_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -625,12 +665,18 @@ static void vlan_dev_set_lockdep_class(struct net_device *dev, int subclass)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vlan_dev_get_lock_subclass(struct net_device *dev)
 {
 	return vlan_dev_priv(dev)->nest_level;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct header_ops vlan_header_ops = {
 	.create	 = vlan_dev_hard_header,
@@ -668,7 +714,10 @@ static int vlan_dev_init(struct net_device *dev)
 {
 	struct net_device *real_dev = vlan_dev_priv(dev)->real_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int subclass = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -690,6 +739,12 @@ static int vlan_dev_init(struct net_device *dev)
 	dev->features |= real_dev->vlan_features | NETIF_F_LLTX;
 	dev->gso_max_size = real_dev->gso_max_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev->features & NETIF_F_VLAN_FEATURES)
+		netdev_warn(real_dev, "VLAN features are set incorrectly.  Q-in-Q configurations may not work correctly.\n");
+
+>>>>>>> v3.18
 =======
 	if (dev->features & NETIF_F_VLAN_FEATURES)
 		netdev_warn(real_dev, "VLAN features are set incorrectly.  Q-in-Q configurations may not work correctly.\n");
@@ -701,7 +756,11 @@ static int vlan_dev_init(struct net_device *dev)
 
 	if (is_zero_ether_addr(dev->dev_addr))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(dev->dev_addr, real_dev->dev_addr, dev->addr_len);
+=======
+		eth_hw_addr_inherit(dev, real_dev);
+>>>>>>> v3.18
 =======
 		eth_hw_addr_inherit(dev, real_dev);
 >>>>>>> v3.18
@@ -727,10 +786,16 @@ static int vlan_dev_init(struct net_device *dev)
 	SET_NETDEV_DEVTYPE(dev, &vlan_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	subclass = vlan_calculate_locking_subclass(dev);
 	vlan_dev_set_lockdep_class(dev, subclass);
 
 	vlan_dev_priv(dev)->vlan_pcpu_stats = alloc_percpu(struct vlan_pcpu_stats);
+=======
+	vlan_dev_set_lockdep_class(dev, vlan_dev_get_lock_subclass(dev));
+
+	vlan_dev_priv(dev)->vlan_pcpu_stats = netdev_alloc_pcpu_stats(struct vlan_pcpu_stats);
+>>>>>>> v3.18
 =======
 	vlan_dev_set_lockdep_class(dev, vlan_dev_get_lock_subclass(dev));
 
@@ -749,8 +814,11 @@ static void vlan_dev_uninit(struct net_device *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_percpu(vlan->vlan_pcpu_stats);
 	vlan->vlan_pcpu_stats = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(vlan->egress_priority_map); i++) {
@@ -768,9 +836,15 @@ static netdev_features_t vlan_dev_fix_features(struct net_device *dev,
 	netdev_features_t old_features = features;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	features &= real_dev->vlan_features;
 	features |= NETIF_F_RXCSUM;
 	features &= real_dev->features;
+=======
+	features = netdev_intersect_features(features, real_dev->vlan_features);
+	features |= NETIF_F_RXCSUM;
+	features = netdev_intersect_features(features, real_dev->features);
+>>>>>>> v3.18
 =======
 	features = netdev_intersect_features(features, real_dev->vlan_features);
 	features |= NETIF_F_RXCSUM;
@@ -801,6 +875,7 @@ static void vlan_ethtool_get_drvinfo(struct net_device *dev,
 
 static struct rtnl_link_stats64 *vlan_dev_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (vlan_dev_priv(dev)->vlan_pcpu_stats) {
@@ -835,6 +910,8 @@ static struct rtnl_link_stats64 *vlan_dev_get_stats64(struct net_device *dev, st
 		stats->tx_dropped = tx_dropped;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct vlan_pcpu_stats *p;
 	u32 rx_errors = 0, tx_dropped = 0;
 	int i;
@@ -865,6 +942,9 @@ static struct rtnl_link_stats64 *vlan_dev_get_stats64(struct net_device *dev, st
 	stats->rx_errors  = rx_errors;
 	stats->tx_dropped = tx_dropped;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return stats;
 }
@@ -876,8 +956,12 @@ static void vlan_dev_poll_controller(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vlan_dev_netpoll_setup(struct net_device *dev, struct netpoll_info *npinfo,
 				  gfp_t gfp)
+=======
+static int vlan_dev_netpoll_setup(struct net_device *dev, struct netpoll_info *npinfo)
+>>>>>>> v3.18
 =======
 static int vlan_dev_netpoll_setup(struct net_device *dev, struct netpoll_info *npinfo)
 >>>>>>> v3.18
@@ -888,7 +972,11 @@ static int vlan_dev_netpoll_setup(struct net_device *dev, struct netpoll_info *n
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netpoll = kzalloc(sizeof(*netpoll), gfp);
+=======
+	netpoll = kzalloc(sizeof(*netpoll), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	netpoll = kzalloc(sizeof(*netpoll), GFP_KERNEL);
 >>>>>>> v3.18
@@ -897,7 +985,11 @@ static int vlan_dev_netpoll_setup(struct net_device *dev, struct netpoll_info *n
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __netpoll_setup(netpoll, real_dev, gfp);
+=======
+	err = __netpoll_setup(netpoll, real_dev);
+>>>>>>> v3.18
 =======
 	err = __netpoll_setup(netpoll, real_dev);
 >>>>>>> v3.18
@@ -961,9 +1053,12 @@ static const struct net_device_ops vlan_netdev_ops = {
 #endif
 	.ndo_fix_features	= vlan_dev_fix_features,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.ndo_get_lock_subclass  = vlan_dev_get_lock_subclass,
 };
 
@@ -976,6 +1071,9 @@ static void vlan_dev_free(struct net_device *dev)
 	free_netdev(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void vlan_setup(struct net_device *dev)
 {
@@ -983,18 +1081,24 @@ void vlan_setup(struct net_device *dev)
 
 	dev->priv_flags		|= IFF_802_1Q_VLAN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->priv_flags		&= ~(IFF_XMIT_DST_RELEASE | IFF_TX_SKB_SHARING);
 	dev->tx_queue_len	= 0;
 
 	dev->netdev_ops		= &vlan_netdev_ops;
 	dev->destructor		= free_netdev;
 =======
+=======
+>>>>>>> v3.18
 	dev->priv_flags		&= ~IFF_TX_SKB_SHARING;
 	netif_keep_dst(dev);
 	dev->tx_queue_len	= 0;
 
 	dev->netdev_ops		= &vlan_netdev_ops;
 	dev->destructor		= vlan_dev_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->ethtool_ops	= &vlan_ethtool_ops;
 

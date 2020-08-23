@@ -20,6 +20,11 @@ EXPORT_SYMBOL(cpu_dcache_clean_area);
 EXPORT_SYMBOL(cpu_set_pte);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__cpuc_coherent_kern_range);
+
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__cpuc_coherent_kern_range);
 

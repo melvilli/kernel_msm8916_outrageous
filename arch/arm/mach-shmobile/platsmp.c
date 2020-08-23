@@ -12,6 +12,7 @@
  */
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/smp.h>
 
 void __init shmobile_smp_init_cpus(unsigned int ncores)
@@ -28,6 +29,8 @@ void __init shmobile_smp_init_cpus(unsigned int ncores)
 		set_cpu_possible(i, true);
 }
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cacheflush.h>
 #include <asm/smp_plat.h>
 #include "common.h"
@@ -53,4 +56,7 @@ int shmobile_smp_cpu_disable(unsigned int cpu)
 	return 0; /* Hotplug of any CPU is supported */
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -180,7 +180,11 @@ static __be16 dvb_net_eth_type_trans(struct sk_buff *skb,
 
 	if (*eth->h_dest & 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(memcmp(eth->h_dest,dev->broadcast, ETH_ALEN)==0)
+=======
+		if(ether_addr_equal(eth->h_dest,dev->broadcast))
+>>>>>>> v3.18
 =======
 		if(ether_addr_equal(eth->h_dest,dev->broadcast))
 >>>>>>> v3.18
@@ -679,12 +683,15 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 						if (priv->ule_skb->data[0] & 0x01) {
 							/* multicast or broadcast */
 <<<<<<< HEAD
+<<<<<<< HEAD
 							if (memcmp(priv->ule_skb->data, bc_addr, ETH_ALEN)) {
 								/* multicast */
 								if (priv->rx_mode == RX_MODE_MULTI) {
 									int i;
 									for(i = 0; i < priv->multi_num && memcmp(priv->ule_skb->data, priv->multi_macs[i], ETH_ALEN); i++)
 =======
+=======
+>>>>>>> v3.18
 							if (!ether_addr_equal(priv->ule_skb->data, bc_addr)) {
 								/* multicast */
 								if (priv->rx_mode == RX_MODE_MULTI) {
@@ -692,6 +699,9 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 									for(i = 0; i < priv->multi_num &&
 									    !ether_addr_equal(priv->ule_skb->data,
 											      priv->multi_macs[i]); i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 										;
 									if (i == priv->multi_num)
@@ -703,7 +713,11 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 							/* else: broadcast */
 						}
 <<<<<<< HEAD
+<<<<<<< HEAD
 						else if (memcmp(priv->ule_skb->data, dev->dev_addr, ETH_ALEN))
+=======
+						else if (!ether_addr_equal(priv->ule_skb->data, dev->dev_addr))
+>>>>>>> v3.18
 =======
 						else if (!ether_addr_equal(priv->ule_skb->data, dev->dev_addr))
 >>>>>>> v3.18
@@ -1293,7 +1307,12 @@ static int dvb_net_add_if(struct dvb_net *dvbnet, u16 pid, u8 feedtype)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net = alloc_netdev(sizeof(struct dvb_net_priv), "dvb", dvb_net_setup);
+=======
+	net = alloc_netdev(sizeof(struct dvb_net_priv), "dvb",
+			   NET_NAME_UNKNOWN, dvb_net_setup);
+>>>>>>> v3.18
 =======
 	net = alloc_netdev(sizeof(struct dvb_net_priv), "dvb",
 			   NET_NAME_UNKNOWN, dvb_net_setup);

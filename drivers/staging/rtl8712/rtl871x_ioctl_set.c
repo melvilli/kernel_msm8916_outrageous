@@ -63,8 +63,13 @@ static u8 do_join(struct _adapter *padapter)
 	struct  __queue	*queue	= &(pmlmepriv->scanned_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(queue);
 	plist = get_next(phead);
+=======
+	phead = &queue->queue;
+	plist = phead->next;
+>>>>>>> v3.18
 =======
 	phead = &queue->queue;
 	plist = phead->next;
@@ -77,7 +82,11 @@ static u8 do_join(struct _adapter *padapter)
 	/* adhoc mode will start with an empty queue, but skip checking */
 	if (!check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    _queue_empty(queue)) {
+=======
+	    list_empty(&queue->queue)) {
+>>>>>>> v3.18
 =======
 	    list_empty(&queue->queue)) {
 >>>>>>> v3.18

@@ -25,7 +25,10 @@
 #include <linux/input.h>
 #include <linux/input/sparse-keymap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/acpi.h>

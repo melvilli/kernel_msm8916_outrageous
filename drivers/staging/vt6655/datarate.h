@@ -30,6 +30,7 @@
 #define __DATARATE_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 #define FALLBACK_PKT_COLLECT_TR_H  50   // pkts
@@ -50,6 +51,8 @@
 
 /*---------------------  Export Functions  --------------------------*/
 =======
+=======
+>>>>>>> v3.18
 #define FALLBACK_PKT_COLLECT_TR_H  50
 #define FALLBACK_PKT_COLLECT_TR_L  10
 #define FALLBACK_POLL_SECOND       5
@@ -59,6 +62,9 @@
 #define UPGRADE_CNT_THRD           3
 #define RETRY_TIMES_THRD_H         2
 #define RETRY_TIMES_THRD_L         1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void

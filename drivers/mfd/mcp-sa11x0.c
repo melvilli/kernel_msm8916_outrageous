@@ -13,7 +13,10 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -160,7 +163,11 @@ static struct mcp_ops mcp_sa11x0 = {
 static int mcp_sa11x0_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mcp_plat_data *data = dev->dev.platform_data;
+=======
+	struct mcp_plat_data *data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct mcp_plat_data *data = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -233,8 +240,11 @@ static int mcp_sa11x0_probe(struct platform_device *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  err_ioremap:
@@ -263,7 +273,10 @@ static int mcp_sa11x0_remove(struct platform_device *dev)
 	mem1 = platform_get_resource(dev, IORESOURCE_MEM, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mcp_host_del(mcp);

@@ -13,15 +13,21 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
 #include <linux/module.h>
 #include <linux/log2.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/i2c.h>
 #include <linux/log2.h>
 #include <linux/module.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/videodev2.h>
@@ -64,6 +70,10 @@
 #define		MT9T001_OUTPUT_CONTROL_CHIP_ENABLE	(1 << 1)
 #define		MT9T001_OUTPUT_CONTROL_TEST_DATA	(1 << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define		MT9T001_OUTPUT_CONTROL_DEF		0x0002
+>>>>>>> v3.18
 =======
 #define		MT9T001_OUTPUT_CONTROL_DEF		0x0002
 >>>>>>> v3.18
@@ -129,13 +139,19 @@ struct mt9t001 {
 	struct media_pad pad;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct clk *clk;
 	struct regulator_bulk_data regulators[2];
 
 	struct mutex power_lock; /* lock to protect power_count */
 	int power_count;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct v4l2_mbus_framefmt format;
 	struct v4l2_rect crop;
@@ -181,7 +197,10 @@ static int mt9t001_set_output_control(struct mt9t001 *mt9t001, u16 clear,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mt9t001_reset(struct mt9t001 *mt9t001)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(&mt9t001->subdev);
@@ -253,6 +272,9 @@ static int __mt9t001_set_power(struct mt9t001 *mt9t001, bool on)
 	return v4l2_ctrl_handler_setup(&mt9t001->ctrls);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* -----------------------------------------------------------------------------
  * V4L2 subdev video operations
@@ -291,6 +313,10 @@ static int mt9t001_s_stream(struct v4l2_subdev *subdev, int enable)
 	const u16 mode = MT9T001_OUTPUT_CONTROL_CHIP_ENABLE;
 	struct i2c_client *client = v4l2_get_subdevdata(subdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mt9t001_platform_data *pdata = client->dev.platform_data;
+>>>>>>> v3.18
 =======
 	struct mt9t001_platform_data *pdata = client->dev.platform_data;
 >>>>>>> v3.18
@@ -305,7 +331,10 @@ static int mt9t001_s_stream(struct v4l2_subdev *subdev, int enable)
 		return mt9t001_set_output_control(mt9t001, mode, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Configure the pixel clock polarity */
 	if (pdata->clk_pol) {
 		ret  = mt9t001_write(client, MT9T001_PIXEL_CLOCK,
@@ -314,6 +343,9 @@ static int mt9t001_s_stream(struct v4l2_subdev *subdev, int enable)
 			return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Configure the window size and row/column bin */
 	hratio = DIV_ROUND_CLOSEST(crop->width, format->width);
@@ -402,17 +434,23 @@ static int mt9t001_set_format(struct v4l2_subdev *subdev,
 	/* Clamp the width and height to avoid dividing by zero. */
 	width = clamp_t(unsigned int, ALIGN(format->format.width, 2),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			max(__crop->width / 8, MT9T001_WINDOW_HEIGHT_MIN + 1),
 			__crop->width);
 	height = clamp_t(unsigned int, ALIGN(format->format.height, 2),
 			 max(__crop->height / 8, MT9T001_WINDOW_HEIGHT_MIN + 1),
 =======
+=======
+>>>>>>> v3.18
 			max_t(unsigned int, __crop->width / 8,
 			      MT9T001_WINDOW_HEIGHT_MIN + 1),
 			__crop->width);
 	height = clamp_t(unsigned int, ALIGN(format->format.height, 2),
 			 max_t(unsigned int, __crop->height / 8,
 			       MT9T001_WINDOW_HEIGHT_MIN + 1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 __crop->height);
 
@@ -459,6 +497,7 @@ static int mt9t001_set_crop(struct v4l2_subdev *subdev,
 			 MT9T001_ROW_START_MIN,
 			 MT9T001_ROW_START_MAX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rect.width = clamp(ALIGN(crop->rect.width, 2),
 			   MT9T001_WINDOW_WIDTH_MIN + 1,
 			   MT9T001_WINDOW_WIDTH_MAX + 1);
@@ -469,6 +508,8 @@ static int mt9t001_set_crop(struct v4l2_subdev *subdev,
 	rect.width = min(rect.width, MT9T001_PIXEL_ARRAY_WIDTH - rect.left);
 	rect.height = min(rect.height, MT9T001_PIXEL_ARRAY_HEIGHT - rect.top);
 =======
+=======
+>>>>>>> v3.18
 	rect.width = clamp_t(unsigned int, ALIGN(crop->rect.width, 2),
 			     MT9T001_WINDOW_WIDTH_MIN + 1,
 			     MT9T001_WINDOW_WIDTH_MAX + 1);
@@ -480,6 +521,9 @@ static int mt9t001_set_crop(struct v4l2_subdev *subdev,
 			   MT9T001_PIXEL_ARRAY_WIDTH - rect.left);
 	rect.height = min_t(unsigned int, rect.height,
 			    MT9T001_PIXEL_ARRAY_HEIGHT - rect.top);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__crop = __mt9t001_get_pad_crop(mt9t001, fh, crop->pad, crop->which);
@@ -760,10 +804,13 @@ static const struct v4l2_ctrl_config mt9t001_gains[] = {
 
 /* -----------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
  * V4L2 subdev internal operations
  */
 
 =======
+=======
+>>>>>>> v3.18
  * V4L2 subdev core operations
  */
 
@@ -825,6 +872,9 @@ static int mt9t001_registered(struct v4l2_subdev *subdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mt9t001_open(struct v4l2_subdev *subdev, struct v4l2_subdev_fh *fh)
 {
@@ -845,10 +895,13 @@ static int mt9t001_open(struct v4l2_subdev *subdev, struct v4l2_subdev_fh *fh)
 	format->colorspace = V4L2_COLORSPACE_SRGB;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return mt9t001_set_power(subdev, 1);
 }
 
@@ -861,6 +914,9 @@ static struct v4l2_subdev_core_ops mt9t001_subdev_core_ops = {
 	.s_power = mt9t001_set_power,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct v4l2_subdev_video_ops mt9t001_subdev_video_ops = {
 	.s_stream = mt9t001_s_stream,
@@ -877,6 +933,10 @@ static struct v4l2_subdev_pad_ops mt9t001_subdev_pad_ops = {
 
 static struct v4l2_subdev_ops mt9t001_subdev_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.core = &mt9t001_subdev_core_ops,
+>>>>>>> v3.18
 =======
 	.core = &mt9t001_subdev_core_ops,
 >>>>>>> v3.18
@@ -885,6 +945,7 @@ static struct v4l2_subdev_ops mt9t001_subdev_ops = {
 };
 
 static struct v4l2_subdev_internal_ops mt9t001_subdev_internal_ops = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.open = mt9t001_open,
 };
@@ -934,11 +995,16 @@ static int mt9t001_video_probe(struct i2c_client *client)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	.registered = mt9t001_registered,
 	.open = mt9t001_open,
 	.close = mt9t001_close,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mt9t001_probe(struct i2c_client *client,
 			 const struct i2c_device_id *did)
@@ -961,6 +1027,7 @@ static int mt9t001_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mt9t001_video_probe(client);
 	if (ret < 0)
 		return ret;
@@ -970,6 +1037,8 @@ static int mt9t001_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	mt9t001 = devm_kzalloc(&client->dev, sizeof(*mt9t001), GFP_KERNEL);
 	if (!mt9t001)
 		return -ENOMEM;
@@ -992,6 +1061,9 @@ static int mt9t001_probe(struct i2c_client *client,
 		return PTR_ERR(mt9t001->clk);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v4l2_ctrl_handler_init(&mt9t001->ctrls, ARRAY_SIZE(mt9t001_ctrls) +
 						ARRAY_SIZE(mt9t001_gains) + 4);
@@ -1051,7 +1123,10 @@ done:
 		v4l2_ctrl_handler_free(&mt9t001->ctrls);
 		media_entity_cleanup(&mt9t001->subdev.entity);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(mt9t001);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1068,7 +1143,10 @@ static int mt9t001_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(subdev);
 	media_entity_cleanup(&subdev->entity);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(mt9t001);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

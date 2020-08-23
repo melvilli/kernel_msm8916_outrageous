@@ -521,7 +521,11 @@ static int snd_es18xx_playback1_trigger(struct snd_es18xx *chip,
 #ifdef AVOID_POPS
 		/* Avoid pops */
 <<<<<<< HEAD
+<<<<<<< HEAD
                 udelay(100000);
+=======
+		mdelay(100);
+>>>>>>> v3.18
 =======
 		mdelay(100);
 >>>>>>> v3.18
@@ -542,7 +546,11 @@ static int snd_es18xx_playback1_trigger(struct snd_es18xx *chip,
                 snd_es18xx_mixer_write(chip, 0x78, 0x00);
 #ifdef AVOID_POPS
 <<<<<<< HEAD
+<<<<<<< HEAD
                 udelay(25000);
+=======
+		mdelay(25);
+>>>>>>> v3.18
 =======
 		mdelay(25);
 >>>>>>> v3.18
@@ -605,7 +613,11 @@ static int snd_es18xx_capture_prepare(struct snd_pcm_substream *substream)
 
 #ifdef AVOID_POPS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	udelay(100000);
+=======
+	mdelay(100);
+>>>>>>> v3.18
 =======
 	mdelay(100);
 >>>>>>> v3.18
@@ -704,7 +716,11 @@ static int snd_es18xx_playback2_trigger(struct snd_es18xx *chip,
 #ifdef AVOID_POPS
 		/* Avoid pops */
 <<<<<<< HEAD
+<<<<<<< HEAD
                 udelay(100000);
+=======
+		mdelay(100);
+>>>>>>> v3.18
 =======
 		mdelay(100);
 >>>>>>> v3.18
@@ -722,7 +738,11 @@ static int snd_es18xx_playback2_trigger(struct snd_es18xx *chip,
 #ifdef AVOID_POPS
 		/* Avoid pops */
 <<<<<<< HEAD
+<<<<<<< HEAD
                 udelay(25000);
+=======
+		mdelay(25);
+>>>>>>> v3.18
 =======
 		mdelay(25);
 >>>>>>> v3.18
@@ -2126,16 +2146,22 @@ static int snd_audiodrive_pnpc(int dev, struct snd_es18xx *chip,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_es18xx_card_new(int dev, struct snd_card **cardp)
 {
 	return snd_card_create(index[dev], id[dev], THIS_MODULE,
 			       sizeof(struct snd_es18xx), cardp);
 =======
+=======
+>>>>>>> v3.18
 static int snd_es18xx_card_new(struct device *pdev, int dev,
 			       struct snd_card **cardp)
 {
 	return snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
 			    sizeof(struct snd_es18xx), cardp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2208,10 +2234,16 @@ static int snd_es18xx_isa_probe1(int dev, struct device *devptr)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_es18xx_card_new(dev, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, devptr);
+=======
+	err = snd_es18xx_card_new(devptr, dev, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 =======
 	err = snd_es18xx_card_new(devptr, dev, &card);
 	if (err < 0)
@@ -2270,7 +2302,10 @@ static int snd_es18xx_isa_remove(struct device *devptr,
 {
 	snd_card_free(dev_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2323,7 +2358,11 @@ static int snd_audiodrive_pnp_detect(struct pnp_dev *pdev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_es18xx_card_new(dev, &card);
+=======
+	err = snd_es18xx_card_new(&pdev->dev, dev, &card);
+>>>>>>> v3.18
 =======
 	err = snd_es18xx_card_new(&pdev->dev, dev, &card);
 >>>>>>> v3.18
@@ -2334,7 +2373,10 @@ static int snd_audiodrive_pnp_detect(struct pnp_dev *pdev,
 		return err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_audiodrive_probe(card, dev)) < 0) {
@@ -2350,7 +2392,10 @@ static void snd_audiodrive_pnp_remove(struct pnp_dev *pdev)
 {
 	snd_card_free(pnp_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pnp_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2392,7 +2437,11 @@ static int snd_audiodrive_pnpc_detect(struct pnp_card_link *pcard,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = snd_es18xx_card_new(dev, &card);
+=======
+	res = snd_es18xx_card_new(&pcard->card->dev, dev, &card);
+>>>>>>> v3.18
 =======
 	res = snd_es18xx_card_new(&pcard->card->dev, dev, &card);
 >>>>>>> v3.18
@@ -2404,7 +2453,10 @@ static int snd_audiodrive_pnpc_detect(struct pnp_card_link *pcard,
 		return res;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((res = snd_audiodrive_probe(card, dev)) < 0) {

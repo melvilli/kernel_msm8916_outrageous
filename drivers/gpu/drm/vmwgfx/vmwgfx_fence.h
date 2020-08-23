@@ -28,6 +28,11 @@
 #ifndef _VMWGFX_FENCE_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/fence.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/fence.h>
 
@@ -56,6 +61,7 @@ struct vmw_fence_action {
 
 struct vmw_fence_obj {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kref kref;
 	u32 seqno;
 
@@ -67,11 +73,16 @@ struct vmw_fence_obj {
 	void (*destroy)(struct vmw_fence_obj *fence);
 	wait_queue_head_t queue;
 =======
+=======
+>>>>>>> v3.18
 	struct fence base;
 
 	struct list_head head;
 	struct list_head seq_passed_actions;
 	void (*destroy)(struct vmw_fence_obj *fence);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -80,6 +91,7 @@ vmw_fence_manager_init(struct vmw_private *dev_priv);
 
 extern void vmw_fence_manager_takedown(struct vmw_fence_manager *fman);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void vmw_fence_obj_unreference(struct vmw_fence_obj **fence_p);
 
@@ -93,6 +105,8 @@ extern bool vmw_fence_obj_signaled(struct vmw_fence_obj *fence,
 
 extern int vmw_fence_obj_wait(struct vmw_fence_obj *fence, uint32_t flags,
 =======
+=======
+>>>>>>> v3.18
 static inline void
 vmw_fence_obj_unreference(struct vmw_fence_obj **fence_p)
 {
@@ -116,6 +130,9 @@ extern void vmw_fences_update(struct vmw_fence_manager *fman);
 extern bool vmw_fence_obj_signaled(struct vmw_fence_obj *fence);
 
 extern int vmw_fence_obj_wait(struct vmw_fence_obj *fence,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      bool lazy,
 			      bool interruptible, unsigned long timeout);
@@ -125,7 +142,10 @@ extern void vmw_fence_obj_flush(struct vmw_fence_obj *fence);
 extern int vmw_fence_create(struct vmw_fence_manager *fman,
 			    uint32_t seqno,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    uint32_t mask,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			    struct vmw_fence_obj **p_fence);
@@ -134,7 +154,10 @@ extern int vmw_user_fence_create(struct drm_file *file_priv,
 				 struct vmw_fence_manager *fman,
 				 uint32_t sequence,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 uint32_t mask,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				 struct vmw_fence_obj **p_fence,

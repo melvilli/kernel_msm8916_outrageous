@@ -20,6 +20,7 @@
 static int stb6100_get_freq(struct dvb_frontend *fe, u32 *frequency)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
 	struct tuner_state	state;
@@ -30,11 +31,16 @@ static int stb6100_get_freq(struct dvb_frontend *fe, u32 *frequency)
 	if (&frontend_ops->tuner_ops)
 		tuner_ops = &frontend_ops->tuner_ops;
 =======
+=======
+>>>>>>> v3.18
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
 	struct tuner_state	state;
 	int err = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (tuner_ops->get_state) {
 		if (frontend_ops->i2c_gate_ctrl)
@@ -58,8 +64,13 @@ static int stb6100_get_freq(struct dvb_frontend *fe, u32 *frequency)
 static int stb6100_set_freq(struct dvb_frontend *fe, u32 frequency)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
+=======
+	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
+	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
+>>>>>>> v3.18
 =======
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
@@ -69,10 +80,14 @@ static int stb6100_set_freq(struct dvb_frontend *fe, u32 frequency)
 
 	state.frequency = frequency;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (&fe->ops)
 		frontend_ops = &fe->ops;
 	if (&frontend_ops->tuner_ops)
 		tuner_ops = &frontend_ops->tuner_ops;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -97,6 +112,7 @@ static int stb6100_set_freq(struct dvb_frontend *fe, u32 frequency)
 static int stb6100_get_bandw(struct dvb_frontend *fe, u32 *bandwidth)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
 	struct tuner_state	state;
@@ -107,11 +123,16 @@ static int stb6100_get_bandw(struct dvb_frontend *fe, u32 *bandwidth)
 	if (&frontend_ops->tuner_ops)
 		tuner_ops = &frontend_ops->tuner_ops;
 =======
+=======
+>>>>>>> v3.18
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
 	struct tuner_state	state;
 	int err = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (tuner_ops->get_state) {
 		if (frontend_ops->i2c_gate_ctrl)
@@ -135,8 +156,13 @@ static int stb6100_get_bandw(struct dvb_frontend *fe, u32 *bandwidth)
 static int stb6100_set_bandw(struct dvb_frontend *fe, u32 bandwidth)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
+=======
+	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
+	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
+>>>>>>> v3.18
 =======
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
@@ -146,10 +172,14 @@ static int stb6100_set_bandw(struct dvb_frontend *fe, u32 bandwidth)
 
 	state.bandwidth = bandwidth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (&fe->ops)
 		frontend_ops = &fe->ops;
 	if (&frontend_ops->tuner_ops)
 		tuner_ops = &frontend_ops->tuner_ops;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

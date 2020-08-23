@@ -2,7 +2,10 @@
 #include <net/cfg80211.h>
 #include "core.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ethtool.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "rdev-ops.h"
@@ -26,6 +29,7 @@ void cfg80211_get_drvinfo(struct net_device *dev, struct ethtool_drvinfo *info)
 		sizeof(info->bus_info));
 }
 EXPORT_SYMBOL(cfg80211_get_drvinfo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int cfg80211_get_regs_len(struct net_device *dev)
@@ -108,5 +112,7 @@ const struct ethtool_ops cfg80211_ethtool_ops = {
 	.get_ethtool_stats = cfg80211_get_stats,
 	.get_sset_count = cfg80211_get_sset_count,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

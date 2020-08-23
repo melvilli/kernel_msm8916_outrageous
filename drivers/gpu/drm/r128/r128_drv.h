@@ -36,6 +36,12 @@
 #define __R128_DRV_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/ati_pcigart.h>
+#include <drm/drm_legacy.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/ati_pcigart.h>
 #include <drm/drm_legacy.h>
@@ -138,7 +144,11 @@ typedef struct drm_r128_buf_priv {
 } drm_r128_buf_priv_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct drm_ioctl_desc r128_ioctls[];
+=======
+extern const struct drm_ioctl_desc r128_ioctls[];
+>>>>>>> v3.18
 =======
 extern const struct drm_ioctl_desc r128_ioctls[];
 >>>>>>> v3.18
@@ -165,7 +175,11 @@ extern int r128_enable_vblank(struct drm_device *dev, int crtc);
 extern void r128_disable_vblank(struct drm_device *dev, int crtc);
 extern u32 r128_get_vblank_counter(struct drm_device *dev, int crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t r128_driver_irq_handler(DRM_IRQ_ARGS);
+=======
+extern irqreturn_t r128_driver_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 extern irqreturn_t r128_driver_irq_handler(int irq, void *arg);
 >>>>>>> v3.18
@@ -529,7 +543,11 @@ do {									\
 		DRM_INFO("COMMIT_RING() tail=0x%06x\n",			\
 			 dev_priv->ring.tail);				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();						\
+=======
+	mb();						\
+>>>>>>> v3.18
 =======
 	mb();						\
 >>>>>>> v3.18

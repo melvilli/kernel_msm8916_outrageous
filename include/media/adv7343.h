@@ -29,12 +29,16 @@
  *		 PLL 1 circuit to be powered down and the oversampling to be
  *		 switched off.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dac_1: power on/off DAC 1.
  * @dac_2: power on/off DAC 2.
  * @dac_3: power on/off DAC 3.
  * @dac_4: power on/off DAC 4.
  * @dac_5: power on/off DAC 5.
  * @dac_6: power on/off DAC 6.
+=======
+ * @dac: array to configure power on/off DAC's 1..6
+>>>>>>> v3.18
 =======
  * @dac: array to configure power on/off DAC's 1..6
 >>>>>>> v3.18
@@ -48,6 +52,7 @@ struct adv7343_power_mode {
 	bool sleep_mode;
 	bool pll_control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool dac_1;
 	bool dac_2;
 	bool dac_3;
@@ -57,10 +62,14 @@ struct adv7343_power_mode {
 =======
 	u32 dac[6];
 >>>>>>> v3.18
+=======
+	u32 dac[6];
+>>>>>>> v3.18
 };
 
 /**
  * struct adv7343_sd_config - SD Only Output Configuration.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @sd_dac_out1: Configure SD DAC Output 1.
  * @sd_dac_out2: Configure SD DAC Output 2.
@@ -70,11 +79,16 @@ struct adv7343_sd_config {
 	bool sd_dac_out1;
 	bool sd_dac_out2;
 =======
+=======
+>>>>>>> v3.18
  * @sd_dac_out: array configuring SD DAC Outputs 1 and 2
  */
 struct adv7343_sd_config {
 	/* SD only Output Configuration */
 	u32 sd_dac_out[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

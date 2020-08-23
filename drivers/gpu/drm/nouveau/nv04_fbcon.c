@@ -23,8 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/object.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -145,8 +148,12 @@ nv04_fbcon_accel_init(struct fb_info *info)
 	struct nouveau_drm *drm = nouveau_drm(dev);
 	struct nouveau_channel *chan = drm->channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
 	struct nouveau_object *object;
+=======
+	struct nvif_device *device = &drm->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 >>>>>>> v3.18
@@ -182,6 +189,7 @@ nv04_fbcon_accel_init(struct fb_info *info)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_object_new(nv_object(chan->cli), NVDRM_CHAN, NvCtxSurf2D,
 				 device->card_type >= NV_10 ? 0x0062 : 0x0042,
 				 NULL, 0, &object);
@@ -212,6 +220,8 @@ nv04_fbcon_accel_init(struct fb_info *info)
 				 device->chipset >= 0x11 ? 0x009f : 0x005f,
 				 NULL, 0, &object);
 =======
+=======
+>>>>>>> v3.18
 	ret = nvif_object_init(chan->object, NULL, 0x0062,
 			       device->info.family >= NV_DEVICE_INFO_V0_CELSIUS ?
 			       0x0062 : 0x0042, NULL, 0, &nfbdev->surf2d);
@@ -241,6 +251,9 @@ nv04_fbcon_accel_init(struct fb_info *info)
 	ret = nvif_object_init(chan->object, NULL, 0x005f,
 			       device->info.chipset >= 0x11 ? 0x009f : 0x005f,
 			       NULL, 0, &nfbdev->blit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -252,15 +265,21 @@ nv04_fbcon_accel_init(struct fb_info *info)
 
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0000, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OUT_RING(chan, NvCtxSurf2D);
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0184, 2);
 	OUT_RING(chan, NvDmaFB);
 	OUT_RING(chan, NvDmaFB);
 =======
+=======
+>>>>>>> v3.18
 	OUT_RING(chan, nfbdev->surf2d.handle);
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0184, 2);
 	OUT_RING(chan, chan->vram.handle);
 	OUT_RING(chan, chan->vram.handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0300, 4);
 	OUT_RING(chan, surface_fmt);
@@ -270,7 +289,11 @@ nv04_fbcon_accel_init(struct fb_info *info)
 
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0000, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OUT_RING(chan, NvRop);
+=======
+	OUT_RING(chan, nfbdev->rop.handle);
+>>>>>>> v3.18
 =======
 	OUT_RING(chan, nfbdev->rop.handle);
 >>>>>>> v3.18
@@ -279,7 +302,11 @@ nv04_fbcon_accel_init(struct fb_info *info)
 
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0000, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OUT_RING(chan, NvImagePatt);
+=======
+	OUT_RING(chan, nfbdev->patt.handle);
+>>>>>>> v3.18
 =======
 	OUT_RING(chan, nfbdev->patt.handle);
 >>>>>>> v3.18
@@ -299,7 +326,11 @@ nv04_fbcon_accel_init(struct fb_info *info)
 
 	BEGIN_NV04(chan, NvSubCtxSurf2D, 0x0000, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OUT_RING(chan, NvClipRect);
+=======
+	OUT_RING(chan, nfbdev->clip.handle);
+>>>>>>> v3.18
 =======
 	OUT_RING(chan, nfbdev->clip.handle);
 >>>>>>> v3.18
@@ -308,6 +339,7 @@ nv04_fbcon_accel_init(struct fb_info *info)
 	OUT_RING(chan, (info->var.yres_virtual << 16) | info->var.xres_virtual);
 
 	BEGIN_NV04(chan, NvSubImageBlit, 0x0000, 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	OUT_RING(chan, NvImageBlit);
 	BEGIN_NV04(chan, NvSubImageBlit, 0x019c, 1);
@@ -323,6 +355,8 @@ nv04_fbcon_accel_init(struct fb_info *info)
 	OUT_RING(chan, NvImagePatt);
 	OUT_RING(chan, NvRop);
 =======
+=======
+>>>>>>> v3.18
 	OUT_RING(chan, nfbdev->blit.handle);
 	BEGIN_NV04(chan, NvSubImageBlit, 0x019c, 1);
 	OUT_RING(chan, nfbdev->surf2d.handle);
@@ -342,6 +376,9 @@ nv04_fbcon_accel_init(struct fb_info *info)
 	BEGIN_NV04(chan, NvSubGdiRect, 0x0188, 2);
 	OUT_RING(chan, nfbdev->patt.handle);
 	OUT_RING(chan, nfbdev->rop.handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BEGIN_NV04(chan, NvSubGdiRect, 0x0304, 1);
 	OUT_RING(chan, 1);

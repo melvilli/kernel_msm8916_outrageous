@@ -313,11 +313,15 @@ bool rtl92se_rx_query_desc(struct ieee80211_hw *hw, struct rtl_stats *stats,
 		       stats->rx_drvinfo_size + stats->rx_bufshift);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!hdr) {
 			/* during testing, hdr was NULL here */
 			return false;
 		}
 		if ((ieee80211_is_robust_mgmt_frame(hdr)) &&
+=======
+		if ((_ieee80211_is_robust_mgmt_frame(hdr)) &&
+>>>>>>> v3.18
 =======
 		if ((_ieee80211_is_robust_mgmt_frame(hdr)) &&
 >>>>>>> v3.18
@@ -341,7 +345,10 @@ bool rtl92se_rx_query_desc(struct ieee80211_hw *hw, struct rtl_stats *stats,
 	/*rx_status->qual = stats->signal; */
 	rx_status->signal = stats->recvsignalpower + 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*rx_status->noise = -stats->noise; */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -351,7 +358,11 @@ bool rtl92se_rx_query_desc(struct ieee80211_hw *hw, struct rtl_stats *stats,
 void rtl92se_tx_fill_desc(struct ieee80211_hw *hw,
 		struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ieee80211_tx_info *info,
+=======
+		u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
+>>>>>>> v3.18
 =======
 		u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
 >>>>>>> v3.18
@@ -592,7 +603,12 @@ void rtl92se_tx_fill_cmddesc(struct ieee80211_hw *hw, u8 *pdesc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92se_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val)
+=======
+void rtl92se_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
+		      u8 desc_name, u8 *val)
+>>>>>>> v3.18
 =======
 void rtl92se_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
 		      u8 desc_name, u8 *val)
@@ -661,6 +677,12 @@ u32 rtl92se_get_desc(u8 *desc, bool istx, u8 desc_name)
 			ret = GET_RX_STATUS_DESC_PKT_LEN(desc);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case HW_DESC_RXBUFF_ADDR:
+			ret = GET_RX_STATUS_DESC_BUFF_ADDR(desc);
+			break;
+>>>>>>> v3.18
 =======
 		case HW_DESC_RXBUFF_ADDR:
 			ret = GET_RX_STATUS_DESC_BUFF_ADDR(desc);

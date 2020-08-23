@@ -35,6 +35,10 @@
 #include <linux/usb.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ratelimit.h>
+>>>>>>> v3.18
 =======
 #include <linux/ratelimit.h>
 >>>>>>> v3.18
@@ -43,6 +47,7 @@
 #define VERBOSE_DEBUG
 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef DEBUG
 #define UDSL_ASSERT(instance, x)	BUG_ON(!(x))
@@ -58,12 +63,15 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define usb_err(instance, format, arg...)	\
 	dev_err(&(instance)->usb_intf->dev , format , ## arg)
 #define usb_info(instance, format, arg...)	\
 	dev_info(&(instance)->usb_intf->dev , format , ## arg)
 #define usb_warn(instance, format, arg...)	\
 	dev_warn(&(instance)->usb_intf->dev , format , ## arg)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef DEBUG
 #define usb_dbg(instance, format, arg...)	\
@@ -72,6 +80,10 @@
 #define usb_dbg(instance, format, arg...)	\
 	do {} while (0)
 #endif
+=======
+#define usb_dbg(instance, format, arg...)	\
+	dev_dbg(&(instance)->usb_intf->dev , format , ## arg)
+>>>>>>> v3.18
 =======
 #define usb_dbg(instance, format, arg...)	\
 	dev_dbg(&(instance)->usb_intf->dev , format , ## arg)
@@ -89,6 +101,7 @@
 #define atm_warn(instance, format, arg...)	\
 	atm_printk(KERN_WARNING, instance , format , ## arg)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 #define atm_dbg(instance, format, arg...)	\
 	atm_printk(KERN_DEBUG, instance , format , ## arg)
@@ -103,12 +116,17 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #define atm_dbg(instance, format, ...)					\
 	pr_debug("ATM dev %d: " format,					\
 		 (instance)->atm_dev->number, ##__VA_ARGS__)
 #define atm_rldbg(instance, format, ...)				\
 	pr_debug_ratelimited("ATM dev %d: " format,			\
 			     (instance)->atm_dev->number, ##__VA_ARGS__)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* flags, set by mini-driver in bind() */

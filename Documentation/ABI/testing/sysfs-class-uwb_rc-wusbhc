@@ -37,7 +37,10 @@ Description:
                 Refer to [ECMA-368] section 10.3.1.1 for the value to
                 use.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:           /sys/class/uwb_rc/uwbN/wusbhc/wusb_dnts
 Date:           June 2013
@@ -57,4 +60,7 @@ Description:
                 The number of retries that the WUSB host should attempt
                 before reporting an error for a bus transaction.  The range of
                 valid values is [0..15], where 0 indicates infinite retries.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

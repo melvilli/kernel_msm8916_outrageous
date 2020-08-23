@@ -6,7 +6,10 @@
  *
  *  Copyright (c) 2009-2010 Atheros Communications Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -40,10 +43,13 @@
 #include <linux/ioctl.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 #include <linux/proc_fs.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -51,6 +57,7 @@
 #include <net/bluetooth/hci_core.h>
 
 #include "hci_uart.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SERIAL_MSM_HS
 #include <linux/platform_data/msm_serial_hs.h>
@@ -113,6 +120,8 @@ struct work_struct ws_sleep;
 static struct bluesleep_info *bsi;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 struct ath_struct {
 	struct hci_uart *hu;
@@ -122,6 +131,7 @@ struct ath_struct {
 	struct work_struct ctxtsw;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void hsuart_serial_clock_on(struct uart_port *port)
 {
@@ -176,6 +186,8 @@ static void wakeup_host_work(struct work_struct *work)
 	if (!is_lpm_enabled)
 		modify_timer_task();
 =======
+=======
+>>>>>>> v3.18
 static int ath_wakeup_ar3k(struct tty_struct *tty)
 {
 	struct ktermios ktermios;
@@ -206,6 +218,9 @@ static int ath_wakeup_ar3k(struct tty_struct *tty)
 	status = tty_set_termios(tty, &ktermios);
 
 	return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -215,6 +230,10 @@ static void ath_hci_uart_work(struct work_struct *work)
 	struct ath_struct *ath;
 	struct hci_uart *hu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tty_struct *tty;
+>>>>>>> v3.18
 =======
 	struct tty_struct *tty;
 >>>>>>> v3.18
@@ -223,11 +242,14 @@ static void ath_hci_uart_work(struct work_struct *work)
 
 	hu = ath->hu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* verify and wake up controller */
 	if (test_bit(BT_SLEEPENABLE, &flags))
 		status = ath_wakeup_ar3k();
 =======
+=======
+>>>>>>> v3.18
 	tty = hu->tty;
 
 	/* verify and wake up controller */
@@ -237,12 +259,16 @@ static void ath_hci_uart_work(struct work_struct *work)
 			return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Ready to send Data */
 	clear_bit(HCI_UART_SENDING, &hu->tx_state);
 	hci_uart_tx_wakeup(hu);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static irqreturn_t bluesleep_hostwake_isr(int irq, void *dev_id)
 {
@@ -378,10 +404,13 @@ static int ath_lpm_stop(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Initialize protocol */
 static int ath_open(struct hci_uart *hu)
 {
 	struct ath_struct *ath;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct uart_state *state;
 
@@ -398,18 +427,24 @@ static int ath_open(struct hci_uart *hu)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	BT_DBG("hu %p", hu);
 
 	ath = kzalloc(sizeof(*ath), GFP_KERNEL);
 	if (!ath)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb_queue_head_init(&ath->txq);
 
 	hu->priv = ath;
 	ath->hu = hu;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	state = hu->tty->driver_data;
 
@@ -433,6 +468,11 @@ static int ath_open(struct hci_uart *hu)
 	}
 	INIT_WORK(&ath->ctxtsw, ath_hci_uart_work);
 	INIT_WORK(&ws_sleep, wakeup_host_work);
+=======
+
+	INIT_WORK(&ath->ctxtsw, ath_hci_uart_work);
+
+>>>>>>> v3.18
 =======
 
 	INIT_WORK(&ath->ctxtsw, ath_hci_uart_work);
@@ -465,6 +505,7 @@ static int ath_close(struct hci_uart *hu)
 	cancel_work_sync(&ath->ctxtsw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cancel_work_sync(&ws_sleep);
 
 	if (bsi)
@@ -472,6 +513,9 @@ static int ath_close(struct hci_uart *hu)
 
 	hu->priv = NULL;
 	bsi->uport = NULL;
+=======
+	hu->priv = NULL;
+>>>>>>> v3.18
 =======
 	hu->priv = NULL;
 >>>>>>> v3.18
@@ -488,8 +532,11 @@ static int ath_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 	struct ath_struct *ath = hu->priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (bt_cb(skb)->pkt_type == HCI_SCODATA_PKT) {
@@ -504,10 +551,16 @@ static int ath_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 	if (bt_cb(skb)->pkt_type == HCI_COMMAND_PKT) {
 		struct hci_command_hdr *hdr = (void *)skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (__le16_to_cpu(hdr->opcode) == HCI_OP_ATH_SLEEP) {
 			set_bit(BT_SLEEPCMD, &flags);
 			ath->cur_sleep = skb->data[HCI_COMMAND_HDR_SIZE];
 		}
+=======
+
+		if (__le16_to_cpu(hdr->opcode) == HCI_OP_ATH_SLEEP)
+			ath->cur_sleep = skb->data[HCI_COMMAND_HDR_SIZE];
+>>>>>>> v3.18
 =======
 
 		if (__le16_to_cpu(hdr->opcode) == HCI_OP_ATH_SLEEP)
@@ -538,6 +591,7 @@ static struct sk_buff *ath_dequeue(struct hci_uart *hu)
 /* Recv data */
 static int ath_recv(struct hci_uart *hu, void *data, int count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ath_struct *ath = hu->priv;
 	unsigned int type;
@@ -583,6 +637,8 @@ static void bluesleep_tx_timer_expire(unsigned long data)
 	set_bit(BT_TXEXPIRED, &flags);
 	hsuart_serial_clock_off(bsi->uport);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = hci_recv_stream_fragment(hu->hdev, data, count);
@@ -592,6 +648,9 @@ static void bluesleep_tx_timer_expire(unsigned long data)
 	}
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -605,6 +664,7 @@ static struct hci_uart_proto athp = {
 	.flush = ath_flush,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int lpm_enabled;
 
@@ -822,6 +882,8 @@ int __init ath_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 int __init ath_init(void)
 {
 	int err = hci_uart_register_proto(&athp);
@@ -832,14 +894,20 @@ int __init ath_init(void)
 		BT_ERR("HCIATH3K protocol registration failed");
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int __exit ath_deinit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_driver_unregister(&bluesleep_driver);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return hci_uart_unregister_proto(&athp);

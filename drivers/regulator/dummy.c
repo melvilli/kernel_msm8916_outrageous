@@ -26,13 +26,19 @@
 struct regulator_dev *dummy_regulator_rdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regulator_init_data dummy_initdata;
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_init_data dummy_initdata = {
 	.constraints = {
 		.always_on = 1,
 	},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct regulator_ops dummy_ops;

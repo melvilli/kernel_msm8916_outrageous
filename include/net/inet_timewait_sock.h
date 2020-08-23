@@ -59,12 +59,18 @@ struct inet_hashinfo;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u32 inet_tw_time_stamp(void)
 {
 	return jiffies;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* TIME_WAIT reaping mechanism. */
 #define INET_TWDR_TWKILL_SLOTS	8 /* Please keep this a power of 2. */
@@ -92,9 +98,15 @@ struct inet_timewait_death_row {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet_twdr_hangman(unsigned long data);
 extern void inet_twdr_twkill_work(struct work_struct *work);
 extern void inet_twdr_twcal_tick(unsigned long data);
+=======
+void inet_twdr_hangman(unsigned long data);
+void inet_twdr_twkill_work(struct work_struct *work);
+void inet_twdr_twcal_tick(unsigned long data);
+>>>>>>> v3.18
 =======
 void inet_twdr_hangman(unsigned long data);
 void inet_twdr_twkill_work(struct work_struct *work);
@@ -118,6 +130,10 @@ struct inet_timewait_sock {
 #define tw_state		__tw_common.skc_state
 #define tw_reuse		__tw_common.skc_reuse
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define tw_ipv6only		__tw_common.skc_ipv6only
+>>>>>>> v3.18
 =======
 #define tw_ipv6only		__tw_common.skc_ipv6only
 >>>>>>> v3.18
@@ -130,17 +146,23 @@ struct inet_timewait_sock {
 #define tw_net			__tw_common.skc_net
 #define tw_daddr        	__tw_common.skc_daddr
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define tw_rcv_saddr    	__tw_common.skc_rcv_saddr
 #define tw_addrpair		__tw_common.skc_addrpair
 #define tw_dport		__tw_common.skc_dport
 #define tw_num			__tw_common.skc_num
 #define tw_portpair		__tw_common.skc_portpair
 =======
+=======
+>>>>>>> v3.18
 #define tw_v6_daddr		__tw_common.skc_v6_daddr
 #define tw_rcv_saddr    	__tw_common.skc_rcv_saddr
 #define tw_v6_rcv_saddr    	__tw_common.skc_v6_rcv_saddr
 #define tw_dport		__tw_common.skc_dport
 #define tw_num			__tw_common.skc_num
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int			tw_timeout;
@@ -153,6 +175,7 @@ struct inet_timewait_sock {
 	kmemcheck_bitfield_begin(flags);
 	/* And these are ours. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		tw_ipv6only     : 1,
 				tw_transparent  : 1,
 				tw_pad		: 6,	/* 6 bits hole */
@@ -161,6 +184,8 @@ struct inet_timewait_sock {
 	kmemcheck_bitfield_end(flags);
 	unsigned long		tw_ttd;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		tw_pad0		: 1,	/* 1 bit hole */
 				tw_transparent  : 1,
 				tw_flowlabel	: 20,
@@ -168,12 +193,16 @@ struct inet_timewait_sock {
 				tw_tos		: 8;
 	kmemcheck_bitfield_end(flags);
 	u32			tw_ttd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct inet_bind_bucket	*tw_tb;
 	struct hlist_node	tw_death_node;
 };
 #define tw_tclass tw_tos
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void inet_twsk_add_node_rcu(struct inet_timewait_sock *tw,
 				      struct hlist_nulls_head *list)
@@ -187,6 +216,8 @@ static inline void inet_twsk_add_bind_node(struct inet_timewait_sock *tw,
 	hlist_add_head(&tw->tw_bind_node, list);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int inet_twsk_dead_hashed(const struct inet_timewait_sock *tw)
@@ -229,6 +260,7 @@ static inline struct inet_timewait_sock *inet_twsk(const struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __be32 sk_rcv_saddr(const struct sock *sk)
 {
 /* both inet_sk() and inet_twsk() store rcv_saddr in skc_rcv_saddr */
@@ -258,6 +290,8 @@ extern void inet_twsk_deschedule(struct inet_timewait_sock *tw,
 extern void inet_twsk_purge(struct inet_hashinfo *hashinfo,
 			    struct inet_timewait_death_row *twdr, int family);
 =======
+=======
+>>>>>>> v3.18
 void inet_twsk_free(struct inet_timewait_sock *tw);
 void inet_twsk_put(struct inet_timewait_sock *tw);
 
@@ -280,6 +314,9 @@ void inet_twsk_deschedule(struct inet_timewait_sock *tw,
 
 void inet_twsk_purge(struct inet_hashinfo *hashinfo,
 		     struct inet_timewait_death_row *twdr, int family);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline

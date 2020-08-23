@@ -214,7 +214,11 @@ static long __init mpc86xx_time_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct of_device_id of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

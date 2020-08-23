@@ -7,7 +7,11 @@
  * the Free Software Foundation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -142,7 +146,11 @@ static void bnx2x_storm_stats_post(struct bnx2x *bp)
 
 		DP(BNX2X_MSG_STATS, "Sending statistics ramrod %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bp->fw_stats_req->hdr.drv_stats_counter);
+=======
+		   le16_to_cpu(bp->fw_stats_req->hdr.drv_stats_counter));
+>>>>>>> v3.18
 =======
 		   le16_to_cpu(bp->fw_stats_req->hdr.drv_stats_counter));
 >>>>>>> v3.18
@@ -205,17 +213,23 @@ static void bnx2x_hw_stats_post(struct bnx2x *bp)
 	} else if (bp->func_stx) {
 		*stats_comp = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bnx2x_post_dmae(bp, dmae, INIT_DMAE_C(bp));
 	}
 }
 
 static int bnx2x_stats_comp(struct bnx2x *bp)
 =======
+=======
+>>>>>>> v3.18
 		bnx2x_issue_dmae_with_comp(bp, dmae, stats_comp);
 	}
 }
 
 static void bnx2x_stats_comp(struct bnx2x *bp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 *stats_comp = bnx2x_sp(bp, stats_comp);
@@ -231,7 +245,10 @@ static void bnx2x_stats_comp(struct bnx2x *bp)
 		usleep_range(1000, 2000);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -241,7 +258,12 @@ static void bnx2x_stats_comp(struct bnx2x *bp)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bnx2x_stats_pmf_update(struct bnx2x *bp)
+=======
+/* should be called under stats_sema */
+static void __bnx2x_stats_pmf_update(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 /* should be called under stats_sema */
 static void __bnx2x_stats_pmf_update(struct bnx2x *bp)
@@ -543,6 +565,7 @@ static void bnx2x_func_stats_init(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bnx2x_stats_start(struct bnx2x *bp)
 {
 	/* vfs travel through here as part of the statistics FSM, but no action
@@ -560,6 +583,8 @@ static void bnx2x_stats_start(struct bnx2x *bp)
 	bnx2x_hw_stats_post(bp);
 	bnx2x_storm_stats_post(bp);
 =======
+=======
+>>>>>>> v3.18
 /* should be called under stats_sema */
 static void __bnx2x_stats_start(struct bnx2x *bp)
 {
@@ -583,16 +608,22 @@ static void bnx2x_stats_start(struct bnx2x *bp)
 		BNX2X_ERR("Unable to acquire stats lock\n");
 	__bnx2x_stats_start(bp);
 	up(&bp->stats_sema);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void bnx2x_stats_pmf_start(struct bnx2x *bp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2x_stats_comp(bp);
 	bnx2x_stats_pmf_update(bp);
 	bnx2x_stats_start(bp);
 =======
+=======
+>>>>>>> v3.18
 	if (down_timeout(&bp->stats_sema, HZ/10))
 		BNX2X_ERR("Unable to acquire stats lock\n");
 	bnx2x_stats_comp(bp);
@@ -607,6 +638,9 @@ static void bnx2x_stats_pmf_update(struct bnx2x *bp)
 		BNX2X_ERR("Unable to acquire stats lock\n");
 	__bnx2x_stats_pmf_update(bp);
 	up(&bp->stats_sema);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -618,14 +652,20 @@ static void bnx2x_stats_restart(struct bnx2x *bp)
 	if (IS_VF(bp))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2x_stats_comp(bp);
 	bnx2x_stats_start(bp);
 =======
+=======
+>>>>>>> v3.18
 	if (down_timeout(&bp->stats_sema, HZ/10))
 		BNX2X_ERR("Unable to acquire stats lock\n");
 	bnx2x_stats_comp(bp);
 	__bnx2x_stats_start(bp);
 	up(&bp->stats_sema);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -964,9 +1004,13 @@ static int bnx2x_storm_stats_validate_counters(struct bnx2x *bp)
 	 * used for sending the last stats ramrod.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bp->stats_lock);
 	cur_stats_counter = bp->stats_counter - 1;
 	spin_unlock_bh(&bp->stats_lock);
+=======
+	cur_stats_counter = bp->stats_counter - 1;
+>>>>>>> v3.18
 =======
 	cur_stats_counter = bp->stats_counter - 1;
 >>>>>>> v3.18
@@ -1082,7 +1126,10 @@ static int bnx2x_storm_stats_update(struct bnx2x *bp)
 					qstats->total_bytes_received_lo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		UPDATE_EXTEND_TSTAT(rcv_ucast_pkts,
@@ -1311,6 +1358,7 @@ static void bnx2x_stats_update(struct bnx2x *bp)
 	u32 *stats_comp = bnx2x_sp(bp, stats_comp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bnx2x_edebug_stats_stopped(bp))
 		return;
 
@@ -1318,6 +1366,8 @@ static void bnx2x_stats_update(struct bnx2x *bp)
 		if (*stats_comp != DMAE_COMP_VAL)
 			return;
 =======
+=======
+>>>>>>> v3.18
 	/* we run update from timer context, so give up
 	 * if somebody is in the middle of transition
 	 */
@@ -1330,6 +1380,9 @@ static void bnx2x_stats_update(struct bnx2x *bp)
 	if (IS_PF(bp)) {
 		if (*stats_comp != DMAE_COMP_VAL)
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (bp->port.pmf)
@@ -1341,7 +1394,11 @@ static void bnx2x_stats_update(struct bnx2x *bp)
 				bnx2x_panic();
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -1359,7 +1416,11 @@ static void bnx2x_stats_update(struct bnx2x *bp)
 	/* vf is done */
 	if (IS_VF(bp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -1374,6 +1435,12 @@ static void bnx2x_stats_update(struct bnx2x *bp)
 	bnx2x_hw_stats_post(bp);
 	bnx2x_storm_stats_post(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+out:
+	up(&bp->stats_sema);
+>>>>>>> v3.18
 =======
 
 out:
@@ -1445,12 +1512,18 @@ static void bnx2x_stats_stop(struct bnx2x *bp)
 	int update = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (down_timeout(&bp->stats_sema, HZ/10))
 		BNX2X_ERR("Unable to acquire stats lock\n");
 
 	bp->stats_started = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bnx2x_stats_comp(bp);
 
@@ -1469,6 +1542,11 @@ static void bnx2x_stats_stop(struct bnx2x *bp)
 		bnx2x_stats_comp(bp);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	up(&bp->stats_sema);
+>>>>>>> v3.18
 =======
 
 	up(&bp->stats_sema);
@@ -1502,6 +1580,10 @@ void bnx2x_stats_handle(struct bnx2x *bp, enum bnx2x_stats_event event)
 {
 	enum bnx2x_stats_state state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*action)(struct bnx2x *bp);
+>>>>>>> v3.18
 =======
 	void (*action)(struct bnx2x *bp);
 >>>>>>> v3.18
@@ -1512,14 +1594,20 @@ void bnx2x_stats_handle(struct bnx2x *bp, enum bnx2x_stats_event event)
 	state = bp->stats_state;
 	bp->stats_state = bnx2x_stats_stm[state][event].next_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&bp->stats_lock);
 
 	bnx2x_stats_stm[state][event].action(bp);
 =======
+=======
+>>>>>>> v3.18
 	action = bnx2x_stats_stm[state][event].action;
 	spin_unlock_bh(&bp->stats_lock);
 
 	action(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((event != STATS_EVENT_UPDATE) || netif_msg_timer(bp))
@@ -1729,12 +1817,18 @@ void bnx2x_stats_init(struct bnx2x *bp)
 	int mb_idx = BP_FW_MB_IDX(bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_VF(bp)) {
 		bnx2x_memset_stats(bp);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bp->stats_pending = 0;
 	bp->executer_idx = 0;
@@ -2100,7 +2194,10 @@ void bnx2x_afex_collect_stats(struct bnx2x *bp, void *void_afex_stats,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void bnx2x_stats_safe_exec(struct bnx2x *bp,
 			   void (func_to_exec)(void *cookie),
@@ -2112,4 +2209,7 @@ void bnx2x_stats_safe_exec(struct bnx2x *bp,
 	__bnx2x_stats_start(bp);
 	up(&bp->stats_sema);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

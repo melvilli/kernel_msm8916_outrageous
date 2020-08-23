@@ -20,6 +20,12 @@
 #include <linux/module.h>
 #include <linux/platform_data/leds-lp55xx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+#include <linux/gpio.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/gpio.h>
@@ -131,7 +137,11 @@ static DEVICE_ATTR(led_current, S_IRUGO | S_IWUSR, lp55xx_show_current,
 static DEVICE_ATTR(max_current, S_IRUGO , lp55xx_show_max_current, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *lp55xx_led_attributes[] = {
+=======
+static struct attribute *lp55xx_led_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *lp55xx_led_attrs[] = {
 >>>>>>> v3.18
@@ -140,10 +150,14 @@ static struct attribute *lp55xx_led_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct attribute_group lp55xx_led_attr_group = {
 	.attrs = lp55xx_led_attributes
 };
+=======
+ATTRIBUTE_GROUPS(lp55xx_led);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lp55xx_led);
 >>>>>>> v3.18
@@ -179,6 +193,10 @@ static int lp55xx_init_led(struct lp55xx_led *led,
 	led->max_current = pdata->led_config[chan].max_current;
 	led->chan_nr = pdata->led_config[chan].chan_nr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led->cdev.default_trigger = pdata->led_config[chan].default_trigger;
+>>>>>>> v3.18
 =======
 	led->cdev.default_trigger = pdata->led_config[chan].default_trigger;
 >>>>>>> v3.18
@@ -191,6 +209,10 @@ static int lp55xx_init_led(struct lp55xx_led *led,
 
 	led->cdev.brightness_set = lp55xx_set_brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led->cdev.groups = lp55xx_led_groups;
+>>>>>>> v3.18
 =======
 	led->cdev.groups = lp55xx_led_groups;
 >>>>>>> v3.18
@@ -204,11 +226,14 @@ static int lp55xx_init_led(struct lp55xx_led *led,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * register led class device for each channel and
 	 * add device attributes
 	 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = led_classdev_register(dev, &led->cdev);
@@ -217,6 +242,7 @@ static int lp55xx_init_led(struct lp55xx_led *led,
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = sysfs_create_group(&led->cdev.dev->kobj, &lp55xx_led_attr_group);
 	if (ret) {
@@ -227,6 +253,8 @@ static int lp55xx_init_led(struct lp55xx_led *led,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -235,6 +263,10 @@ static void lp55xx_firmware_loaded(const struct firmware *fw, void *context)
 	struct lp55xx_chip *chip = context;
 	struct device *dev = &chip->cl->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum lp55xx_engine_index idx = chip->engine_idx;
+>>>>>>> v3.18
 =======
 	enum lp55xx_engine_index idx = chip->engine_idx;
 >>>>>>> v3.18
@@ -248,6 +280,10 @@ static void lp55xx_firmware_loaded(const struct firmware *fw, void *context)
 	mutex_lock(&chip->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chip->engines[idx - 1].mode = LP55XX_ENGINE_LOAD;
+>>>>>>> v3.18
 =======
 	chip->engines[idx - 1].mode = LP55XX_ENGINE_LOAD;
 >>>>>>> v3.18
@@ -442,6 +478,7 @@ int lp55xx_init_device(struct lp55xx_chip *chip)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->setup_resources) {
 		ret = pdata->setup_resources();
 		if (ret < 0) {
@@ -455,6 +492,8 @@ int lp55xx_init_device(struct lp55xx_chip *chip)
 		usleep_range(1000, 2000); /* Keep enable down at least 1ms */
 		pdata->enable(1);
 =======
+=======
+>>>>>>> v3.18
 	if (gpio_is_valid(pdata->enable_gpio)) {
 		ret = devm_gpio_request_one(dev, pdata->enable_gpio,
 					    GPIOF_DIR_OUT, "lp5523_enable");
@@ -467,6 +506,9 @@ int lp55xx_init_device(struct lp55xx_chip *chip)
 		gpio_set_value(pdata->enable_gpio, 0);
 		usleep_range(1000, 2000); /* Keep enable down at least 1ms */
 		gpio_set_value(pdata->enable_gpio, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		usleep_range(1000, 2000); /* 500us abs min. */
 	}
@@ -509,11 +551,16 @@ void lp55xx_deinit_device(struct lp55xx_chip *chip)
 		clk_disable_unprepare(chip->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->enable)
 		pdata->enable(0);
 
 	if (pdata->release_resources)
 		pdata->release_resources();
+=======
+	if (gpio_is_valid(pdata->enable_gpio))
+		gpio_set_value(pdata->enable_gpio, 0);
+>>>>>>> v3.18
 =======
 	if (gpio_is_valid(pdata->enable_gpio))
 		gpio_set_value(pdata->enable_gpio, 0);
@@ -611,7 +658,10 @@ void lp55xx_unregister_sysfs(struct lp55xx_chip *chip)
 EXPORT_SYMBOL_GPL(lp55xx_unregister_sysfs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int lp55xx_of_populate_pdata(struct device *dev, struct device_node *np)
 {
 	struct device_node *child;
@@ -663,6 +713,9 @@ int lp55xx_of_populate_pdata(struct device *dev, struct device_node *np)
 }
 EXPORT_SYMBOL_GPL(lp55xx_of_populate_pdata);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Milo Kim <milo.kim@ti.com>");
 MODULE_DESCRIPTION("LP55xx Common Driver");

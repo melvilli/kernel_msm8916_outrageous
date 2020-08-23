@@ -21,6 +21,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -30,6 +31,11 @@
  * this source code.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -103,6 +109,7 @@ static int apci1516_do_insn_bits(struct comedi_device *dev,
 				 unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -114,10 +121,15 @@ static int apci1516_do_insn_bits(struct comedi_device *dev,
 		outw(s->state, dev->iobase + APCI1516_DO_REG);
 	}
 =======
+=======
+>>>>>>> v3.18
 	s->state = inw(dev->iobase + APCI1516_DO_REG);
 
 	if (comedi_dio_update_state(s, data))
 		outw(s->state, dev->iobase + APCI1516_DO_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -128,7 +140,11 @@ static int apci1516_do_insn_bits(struct comedi_device *dev,
 static int apci1516_reset(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct apci1516_boardinfo *this_board = comedi_board(dev);
+=======
+	const struct apci1516_boardinfo *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct apci1516_boardinfo *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -161,10 +177,16 @@ static int apci1516_auto_attach(struct comedi_device *dev,
 	dev->board_name = this_board->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -227,8 +249,12 @@ static void apci1516_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci1516_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comedi_spriv_free(dev, 2);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 >>>>>>> v3.18
@@ -248,7 +274,11 @@ static int apci1516_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci1516_pci_table) = {
+=======
+static const struct pci_device_id apci1516_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci1516_pci_table[] = {
 >>>>>>> v3.18

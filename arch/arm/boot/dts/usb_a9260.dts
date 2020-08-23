@@ -7,8 +7,13 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9260.dtsi"
 /include/ "usb_a9260_common.dtsi"
+=======
+#include "at91sam9260.dtsi"
+#include "usb_a9260_common.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9260.dtsi"
 #include "usb_a9260_common.dtsi"
@@ -26,7 +31,10 @@
 		reg = <0x20000000 0x4000000>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	ahb {
 		apb {
@@ -36,5 +44,8 @@
 			};
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

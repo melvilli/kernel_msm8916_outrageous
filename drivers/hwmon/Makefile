@@ -26,6 +26,10 @@ obj-$(CONFIG_SENSORS_AD7314)	+= ad7314.o
 obj-$(CONFIG_SENSORS_AD7414)	+= ad7414.o
 obj-$(CONFIG_SENSORS_AD7418)	+= ad7418.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_ADC128D818) += adc128d818.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_ADC128D818) += adc128d818.o
 >>>>>>> v3.18
@@ -65,6 +69,10 @@ obj-$(CONFIG_SENSORS_FAM15H_POWER) += fam15h_power.o
 obj-$(CONFIG_SENSORS_FSCHMD)	+= fschmd.o
 obj-$(CONFIG_SENSORS_G760A)	+= g760a.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_G762)	+= g762.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_G762)	+= g762.o
 >>>>>>> v3.18
@@ -73,6 +81,10 @@ obj-$(CONFIG_SENSORS_GL520SM)	+= gl520sm.o
 obj-$(CONFIG_SENSORS_GPIO_FAN)	+= gpio-fan.o
 obj-$(CONFIG_SENSORS_HIH6130)	+= hih6130.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_HTU21)	+= htu21.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_HTU21)	+= htu21.o
 >>>>>>> v3.18
@@ -81,6 +93,10 @@ obj-$(CONFIG_SENSORS_I5K_AMB)	+= i5k_amb.o
 obj-$(CONFIG_SENSORS_IBMAEM)	+= ibmaem.o
 obj-$(CONFIG_SENSORS_IBMPEX)	+= ibmpex.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_IBMPOWERNV)+= ibmpowernv.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_IBMPOWERNV)+= ibmpowernv.o
 >>>>>>> v3.18
@@ -110,16 +126,22 @@ obj-$(CONFIG_SENSORS_LM95234)	+= lm95234.o
 obj-$(CONFIG_SENSORS_LM95241)	+= lm95241.o
 obj-$(CONFIG_SENSORS_LM95245)	+= lm95245.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SENSORS_LTC4151)	+= ltc4151.o
 obj-$(CONFIG_SENSORS_LTC4215)	+= ltc4215.o
 obj-$(CONFIG_SENSORS_LTC4245)	+= ltc4245.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_SENSORS_LTC2945)	+= ltc2945.o
 obj-$(CONFIG_SENSORS_LTC4151)	+= ltc4151.o
 obj-$(CONFIG_SENSORS_LTC4215)	+= ltc4215.o
 obj-$(CONFIG_SENSORS_LTC4222)	+= ltc4222.o
 obj-$(CONFIG_SENSORS_LTC4245)	+= ltc4245.o
 obj-$(CONFIG_SENSORS_LTC4260)	+= ltc4260.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_SENSORS_LTC4261)	+= ltc4261.o
 obj-$(CONFIG_SENSORS_MAX1111)	+= max1111.o
@@ -134,6 +156,11 @@ obj-$(CONFIG_SENSORS_MAX6697)	+= max6697.o
 obj-$(CONFIG_SENSORS_MC13783_ADC)+= mc13783-adc.o
 obj-$(CONFIG_SENSORS_MCP3021)	+= mcp3021.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_MENF21BMC_HWMON) += menf21bmc_hwmon.o
+obj-$(CONFIG_SENSORS_NCT6683)	+= nct6683.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_MENF21BMC_HWMON) += menf21bmc_hwmon.o
 obj-$(CONFIG_SENSORS_NCT6683)	+= nct6683.o
@@ -144,7 +171,12 @@ obj-$(CONFIG_SENSORS_PC87360)	+= pc87360.o
 obj-$(CONFIG_SENSORS_PC87427)	+= pc87427.o
 obj-$(CONFIG_SENSORS_PCF8591)	+= pcf8591.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SENSORS_QPNP_CURRENT_MONITOR)	+= qpnp-buck-current-monitor.o
+=======
+obj-$(CONFIG_SENSORS_POWR1220)  += powr1220.o
+obj-$(CONFIG_SENSORS_PWM_FAN)	+= pwm-fan.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_POWR1220)  += powr1220.o
 obj-$(CONFIG_SENSORS_PWM_FAN)	+= pwm-fan.o
@@ -156,6 +188,10 @@ obj-$(CONFIG_SENSORS_SCH5636)	+= sch5636.o
 obj-$(CONFIG_SENSORS_SHT15)	+= sht15.o
 obj-$(CONFIG_SENSORS_SHT21)	+= sht21.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_SHTC1)	+= shtc1.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_SHTC1)	+= shtc1.o
 >>>>>>> v3.18
@@ -168,6 +204,10 @@ obj-$(CONFIG_SENSORS_AMC6821)	+= amc6821.o
 obj-$(CONFIG_SENSORS_THMC50)	+= thmc50.o
 obj-$(CONFIG_SENSORS_TMP102)	+= tmp102.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_TMP103)	+= tmp103.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_TMP103)	+= tmp103.o
 >>>>>>> v3.18
@@ -185,10 +225,13 @@ obj-$(CONFIG_SENSORS_W83L786NG)	+= w83l786ng.o
 obj-$(CONFIG_SENSORS_WM831X)	+= wm831x-hwmon.o
 obj-$(CONFIG_SENSORS_WM8350)	+= wm8350-hwmon.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SENSORS_EPM_ADC)	+= epm_adc.o
 obj-$(CONFIG_SENSORS_QPNP_ADC_VOLTAGE)	+= qpnp-adc-voltage.o qpnp-adc-common.o
 obj-$(CONFIG_SENSORS_QPNP_ADC_CURRENT)	+= qpnp-adc-current.o qpnp-adc-common.o
 obj-$(CONFIG_SENSORS_BOOST_DYNAMIC_CONTROLLER)	+= boost-dynamic-controller.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

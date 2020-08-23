@@ -44,7 +44,10 @@ extern void __show_regs(struct pt_regs *);
 void soft_restart(unsigned long);
 extern void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char* (*arch_read_hardware_id)(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -8,7 +8,10 @@
 #include "symbol.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum perf_call_graph_mode {
 	CALLCHAIN_NONE,
 	CALLCHAIN_FP,
@@ -16,6 +19,9 @@ enum perf_call_graph_mode {
 	CALLCHAIN_MAX
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum chain_mode {
 	CHAIN_NONE,
@@ -32,17 +38,23 @@ enum chain_order {
 struct callchain_node {
 	struct callchain_node	*parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	siblings;
 	struct list_head	children;
 	struct list_head	val;
 	struct rb_node		rb_node; /* to sort nodes in an rbtree */
 	struct rb_root		rb_root; /* sorted tree of children */
 =======
+=======
+>>>>>>> v3.18
 	struct list_head	val;
 	struct rb_node		rb_node_in; /* to insert nodes in an rbtree */
 	struct rb_node		rb_node;    /* to sort nodes in an output tree */
 	struct rb_root		rb_root_in; /* input tree of children */
 	struct rb_root		rb_root;    /* sorted output tree of children */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int		val_nr;
 	u64			hit;
@@ -60,8 +72,11 @@ typedef void (*sort_chain_func_t)(struct rb_root *, struct callchain_root *,
 				 u64, struct callchain_param *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct callchain_param {
 =======
+=======
+>>>>>>> v3.18
 enum chain_key {
 	CCKEY_FUNCTION,
 	CCKEY_ADDRESS
@@ -71,6 +86,9 @@ struct callchain_param {
 	bool			enabled;
 	enum perf_call_graph_mode record_mode;
 	u32			dump_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enum chain_mode 	mode;
 	u32			print_limit;
@@ -78,14 +96,20 @@ struct callchain_param {
 	sort_chain_func_t	sort;
 	enum chain_order	order;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	enum chain_key		key;
 };
 
 extern struct callchain_param callchain_param;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct callchain_list {
 	u64			ip;
@@ -119,8 +143,11 @@ extern __thread struct callchain_cursor callchain_cursor;
 static inline void callchain_init(struct callchain_root *root)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&root->node.siblings);
 	INIT_LIST_HEAD(&root->node.children);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&root->node.val);
@@ -129,6 +156,10 @@ static inline void callchain_init(struct callchain_root *root)
 	root->node.hit = 0;
 	root->node.children_hit = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	root->node.rb_root_in = RB_ROOT;
+>>>>>>> v3.18
 =======
 	root->node.rb_root_in = RB_ROOT;
 >>>>>>> v3.18
@@ -149,11 +180,14 @@ int callchain_merge(struct callchain_cursor *cursor,
 		    struct callchain_root *dst, struct callchain_root *src);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ip_callchain;
 union perf_event;
 
 bool ip_callchain__valid(struct ip_callchain *chain,
 			 const union perf_event *event);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -194,10 +228,13 @@ static inline void callchain_cursor_advance(struct callchain_cursor *cursor)
 
 struct option;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int record_parse_callchain_opt(const struct option *opt, const char *arg, int unset);
 extern const char record_callchain_help[];
 =======
+=======
+>>>>>>> v3.18
 struct hist_entry;
 
 int record_parse_callchain_opt(const struct option *opt, const char *arg, int unset);
@@ -236,5 +273,8 @@ static inline int arch_skip_callchain_idx(struct machine *machine __maybe_unused
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __PERF_CALLCHAIN_H */

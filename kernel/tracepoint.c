@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2008 Mathieu Desnoyers
+=======
+ * Copyright (C) 2008-2014 Mathieu Desnoyers
+>>>>>>> v3.18
 =======
  * Copyright (C) 2008-2014 Mathieu Desnoyers
 >>>>>>> v3.18
@@ -38,6 +42,7 @@ extern struct tracepoint * const __stop___tracepoints_ptrs[];
 static const int tracepoint_debug;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Tracepoints mutex protects the builtin and module tracepoints and the hash
  * table, as well as the local module list.
@@ -47,6 +52,8 @@ static DEFINE_MUTEX(tracepoints_mutex);
 #ifdef CONFIG_MODULES
 /* Local list of struct module */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MODULES
 /*
  * Tracepoint module list mutex protects the local module list.
@@ -54,11 +61,15 @@ static DEFINE_MUTEX(tracepoints_mutex);
 static DEFINE_MUTEX(tracepoint_module_list_mutex);
 
 /* Local list of struct tp_module */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static LIST_HEAD(tracepoint_module_list);
 #endif /* CONFIG_MODULES */
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Tracepoint hash table, containing the active tracepoints.
  * Protected by tracepoints_mutex.
@@ -67,16 +78,22 @@ static LIST_HEAD(tracepoint_module_list);
 #define TRACEPOINT_TABLE_SIZE (1 << TRACEPOINT_HASH_BITS)
 static struct hlist_head tracepoint_table[TRACEPOINT_TABLE_SIZE];
 =======
+=======
+>>>>>>> v3.18
  * tracepoints_mutex protects the builtin and module tracepoints.
  * tracepoints_mutex nests inside tracepoint_module_list_mutex.
  */
 static DEFINE_MUTEX(tracepoints_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Note about RCU :
  * It is used to delay the free of multiple probes array until a quiescent
  * state is reached.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Tracepoint entries modifications are protected by the tracepoints_mutex.
  */
@@ -97,6 +114,11 @@ struct tp_probes {
 struct tp_probes {
 	struct rcu_head rcu;
 >>>>>>> v3.18
+=======
+ */
+struct tp_probes {
+	struct rcu_head rcu;
+>>>>>>> v3.18
 	struct tracepoint_func probes[0];
 };
 
@@ -110,7 +132,11 @@ static inline void *allocate_probes(int count)
 static void rcu_free_old_probes(struct rcu_head *head)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(container_of(head, struct tp_probes, u.rcu));
+=======
+	kfree(container_of(head, struct tp_probes, rcu));
+>>>>>>> v3.18
 =======
 	kfree(container_of(head, struct tp_probes, rcu));
 >>>>>>> v3.18
@@ -121,6 +147,7 @@ static inline void release_probes(struct tracepoint_func *old)
 	if (old) {
 		struct tp_probes *tp_probes = container_of(old,
 			struct tp_probes, probes[0]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		call_rcu_sched(&tp_probes->u.rcu, rcu_free_old_probes);
 	}
@@ -141,6 +168,8 @@ static struct tracepoint_func *
 tracepoint_entry_add_probe(struct tracepoint_entry *entry,
 			   void *probe, void *data)
 =======
+=======
+>>>>>>> v3.18
 		call_rcu_sched(&tp_probes->rcu, rcu_free_old_probes);
 	}
 }
@@ -158,11 +187,15 @@ static void debug_print_probes(struct tracepoint_func *funcs)
 
 static struct tracepoint_func *func_add(struct tracepoint_func **funcs,
 		struct tracepoint_func *tp_func)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int nr_probes = 0;
 	struct tracepoint_func *old, *new;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (WARN_ON(!probe))
 		return ERR_PTR(-EINVAL);
@@ -175,6 +208,8 @@ static struct tracepoint_func *func_add(struct tracepoint_func **funcs,
 			if (old[nr_probes].func == probe &&
 			    old[nr_probes].data == data)
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON(!tp_func->func))
 		return ERR_PTR(-EINVAL);
 
@@ -185,6 +220,9 @@ static struct tracepoint_func *func_add(struct tracepoint_func **funcs,
 		for (nr_probes = 0; old[nr_probes].func; nr_probes++)
 			if (old[nr_probes].func == tp_func->func &&
 			    old[nr_probes].data == tp_func->data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return ERR_PTR(-EEXIST);
 	}
@@ -194,6 +232,7 @@ static struct tracepoint_func *func_add(struct tracepoint_func **funcs,
 		return ERR_PTR(-ENOMEM);
 	if (old)
 		memcpy(new, old, nr_probes * sizeof(struct tracepoint_func));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	new[nr_probes].func = probe;
 	new[nr_probes].data = data;
@@ -208,6 +247,8 @@ static void *
 tracepoint_entry_remove_probe(struct tracepoint_entry *entry,
 			      void *probe, void *data)
 =======
+=======
+>>>>>>> v3.18
 	new[nr_probes] = *tp_func;
 	new[nr_probes + 1].func = NULL;
 	*funcs = new;
@@ -217,13 +258,20 @@ tracepoint_entry_remove_probe(struct tracepoint_entry *entry,
 
 static void *func_remove(struct tracepoint_func **funcs,
 		struct tracepoint_func *tp_func)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int nr_probes = 0, nr_del = 0, i;
 	struct tracepoint_func *old, *new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	old = entry->funcs;
+=======
+	old = *funcs;
+>>>>>>> v3.18
 =======
 	old = *funcs;
 >>>>>>> v3.18
@@ -232,6 +280,7 @@ static void *func_remove(struct tracepoint_func **funcs,
 		return ERR_PTR(-ENOENT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_print_probes(entry);
 	/* (N -> M), (N > 1, M >= 0) probes */
 	if (probe) {
@@ -239,12 +288,17 @@ static void *func_remove(struct tracepoint_func **funcs,
 			if (old[nr_probes].func == probe &&
 			     old[nr_probes].data == data)
 =======
+=======
+>>>>>>> v3.18
 	debug_print_probes(*funcs);
 	/* (N -> M), (N > 1, M >= 0) probes */
 	if (tp_func->func) {
 		for (nr_probes = 0; old[nr_probes].func; nr_probes++) {
 			if (old[nr_probes].func == tp_func->func &&
 			     old[nr_probes].data == tp_func->data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				nr_del++;
 		}
@@ -257,9 +311,14 @@ static void *func_remove(struct tracepoint_func **funcs,
 	if (nr_probes - nr_del == 0) {
 		/* N -> 0, (N > 1) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->funcs = NULL;
 		entry->refcount = 0;
 		debug_print_probes(entry);
+=======
+		*funcs = NULL;
+		debug_print_probes(*funcs);
+>>>>>>> v3.18
 =======
 		*funcs = NULL;
 		debug_print_probes(*funcs);
@@ -274,6 +333,7 @@ static void *func_remove(struct tracepoint_func **funcs,
 			return ERR_PTR(-ENOMEM);
 		for (i = 0; old[i].func; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (old[i].func != probe || old[i].data != data)
 				new[j++] = old[i];
 		new[nr_probes - nr_del].func = NULL;
@@ -282,6 +342,8 @@ static void *func_remove(struct tracepoint_func **funcs,
 	}
 	debug_print_probes(entry);
 =======
+=======
+>>>>>>> v3.18
 			if (old[i].func != tp_func->func
 					|| old[i].data != tp_func->data)
 				new[j++] = old[i];
@@ -289,11 +351,15 @@ static void *func_remove(struct tracepoint_func **funcs,
 		*funcs = new;
 	}
 	debug_print_probes(*funcs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return old;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Get tracepoint if the tracepoint is present in the tracepoint hash table.
  * Must be called with tracepoints_mutex held.
@@ -369,6 +435,8 @@ static void set_tracepoint(struct tracepoint_entry **entry,
 	else if (elem->unregfunc && static_key_enabled(&elem->key) && !active)
 		elem->unregfunc();
 =======
+=======
+>>>>>>> v3.18
  * Add the probe function to a tracepoint.
  */
 static int tracepoint_add_func(struct tracepoint *tp,
@@ -386,6 +454,9 @@ static int tracepoint_add_func(struct tracepoint *tp,
 		WARN_ON_ONCE(1);
 		return PTR_ERR(old);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -395,6 +466,7 @@ static int tracepoint_add_func(struct tracepoint *tp,
 	 * include/linux/tracepoints.h. A matching smp_read_barrier_depends()
 	 * is used.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rcu_assign_pointer(elem->funcs, (*entry)->funcs);
 	if (active && !static_key_enabled(&elem->key))
@@ -406,6 +478,8 @@ static int tracepoint_add_func(struct tracepoint *tp,
 /*
  * Disable a tracepoint and its probe callback.
 =======
+=======
+>>>>>>> v3.18
 	rcu_assign_pointer(tp->funcs, tp_funcs);
 	if (!static_key_enabled(&tp->key))
 		static_key_slow_inc(&tp->key);
@@ -415,11 +489,15 @@ static int tracepoint_add_func(struct tracepoint *tp,
 
 /*
  * Remove a probe function from a tracepoint.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Note: only waiting an RCU period after setting elem->call to the empty
  * function insures that the original callback is not used anymore. This insured
  * by preempt_disable around the call site.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void disable_tracepoint(struct tracepoint *elem)
 {
@@ -505,6 +583,8 @@ tracepoint_add_probe(const char *name, void *probe, void *data)
 		remove_tracepoint(entry);
 	return old;
 =======
+=======
+>>>>>>> v3.18
 static int tracepoint_remove_func(struct tracepoint *tp,
 		struct tracepoint_func *func)
 {
@@ -529,11 +609,15 @@ static int tracepoint_remove_func(struct tracepoint *tp,
 	rcu_assign_pointer(tp->funcs, tp_funcs);
 	release_probes(old);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * tracepoint_probe_register -  Connect a probe to a tracepoint
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @name: tracepoint name
  * @probe: probe handler
@@ -799,6 +883,8 @@ bool trace_module_has_bad_taint(struct module *mod)
 {
 	return mod->taints & ~((1 << TAINT_OOT_MODULE) | (1 << TAINT_CRAP));
 =======
+=======
+>>>>>>> v3.18
  * @tp: tracepoint
  * @probe: probe handler
  * @data: tracepoint data
@@ -918,13 +1004,20 @@ static void tp_module_going_check_quiescent(struct tracepoint * const *begin,
 		return;
 	for (iter = begin; iter < end; iter++)
 		WARN_ON_ONCE((*iter)->funcs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int tracepoint_module_coming(struct module *mod)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tp_module *tp_mod, *iter;
+=======
+	struct tp_module *tp_mod;
+>>>>>>> v3.18
 =======
 	struct tp_module *tp_mod;
 >>>>>>> v3.18
@@ -937,23 +1030,30 @@ static int tracepoint_module_coming(struct module *mod)
 	 * We skip modules that taint the kernel, especially those with different
 	 * module headers (for forced load), to make sure we don't cause a crash.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Staging and out-of-tree GPL modules are fine.
 	 */
 	if (trace_module_has_bad_taint(mod))
 		return 0;
 	mutex_lock(&tracepoints_mutex);
 =======
+=======
+>>>>>>> v3.18
 	 * Staging, out-of-tree, and unsigned GPL modules are fine.
 	 */
 	if (trace_module_has_bad_taint(mod))
 		return 0;
 	mutex_lock(&tracepoint_module_list_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tp_mod = kmalloc(sizeof(struct tp_module), GFP_KERNEL);
 	if (!tp_mod) {
 		ret = -ENOMEM;
 		goto end;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tp_mod->num_tracepoints = mod->num_tracepoints;
 	tp_mod->tracepoints_ptrs = mod->tracepoints_ptrs;
@@ -996,6 +1096,8 @@ static int tracepoint_module_going(struct module *mod)
 			list_del(&pos->list);
 			kfree(pos);
 =======
+=======
+>>>>>>> v3.18
 	tp_mod->mod = mod;
 	list_add_tail(&tp_mod->list, &tracepoint_module_list);
 	blocking_notifier_call_chain(&tracepoint_notify_list,
@@ -1025,6 +1127,9 @@ static void tracepoint_module_going(struct module *mod)
 			 */
 			tp_module_going_check_quiescent(mod->tracepoints_ptrs,
 				mod->tracepoints_ptrs + mod->num_tracepoints);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1036,6 +1141,7 @@ static void tracepoint_module_going(struct module *mod)
 	 * loaded.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&tracepoints_mutex);
 	return 0;
 }
@@ -1043,11 +1149,16 @@ static void tracepoint_module_going(struct module *mod)
 int tracepoint_module_notify(struct notifier_block *self,
 			     unsigned long val, void *data)
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&tracepoint_module_list_mutex);
 }
 
 static int tracepoint_module_notify(struct notifier_block *self,
 		unsigned long val, void *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct module *mod = data;
@@ -1061,7 +1172,13 @@ static int tracepoint_module_notify(struct notifier_block *self,
 		break;
 	case MODULE_STATE_GOING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = tracepoint_module_going(mod);
+=======
+		tracepoint_module_going(mod);
+		break;
+	case MODULE_STATE_UNFORMED:
+>>>>>>> v3.18
 =======
 		tracepoint_module_going(mod);
 		break;
@@ -1073,7 +1190,11 @@ static int tracepoint_module_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct notifier_block tracepoint_module_nb = {
+=======
+static struct notifier_block tracepoint_module_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block tracepoint_module_nb = {
 >>>>>>> v3.18
@@ -1082,10 +1203,13 @@ static struct notifier_block tracepoint_module_nb = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_tracepoints(void)
 {
 	return register_module_notifier(&tracepoint_module_nb);
 =======
+=======
+>>>>>>> v3.18
 static __init int init_tracepoints(void)
 {
 	int ret;
@@ -1095,13 +1219,19 @@ static __init int init_tracepoints(void)
 		pr_warning("Failed to register tracepoint module enter notifier\n");
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 __initcall(init_tracepoints);
 #endif /* CONFIG_MODULES */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void for_each_tracepoint_range(struct tracepoint * const *begin,
 		struct tracepoint * const *end,
 		void (*fct)(struct tracepoint *tp, void *priv),
@@ -1128,6 +1258,9 @@ void for_each_kernel_tracepoint(void (*fct)(struct tracepoint *tp, void *priv),
 }
 EXPORT_SYMBOL_GPL(for_each_kernel_tracepoint);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HAVE_SYSCALL_TRACEPOINTS
 
@@ -1136,6 +1269,7 @@ static int sys_tracepoint_refcount;
 
 void syscall_regfunc(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	struct task_struct *g, *t;
@@ -1149,6 +1283,8 @@ void syscall_regfunc(void)
 		} while_each_thread(g, t);
 		read_unlock_irqrestore(&tasklist_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct task_struct *p, *t;
 
 	if (!sys_tracepoint_refcount) {
@@ -1157,6 +1293,9 @@ void syscall_regfunc(void)
 			set_tsk_thread_flag(t, TIF_SYSCALL_TRACEPOINT);
 		}
 		read_unlock(&tasklist_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	sys_tracepoint_refcount++;
@@ -1164,6 +1303,7 @@ void syscall_regfunc(void)
 
 void syscall_unregfunc(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	struct task_struct *g, *t;
@@ -1176,6 +1316,8 @@ void syscall_unregfunc(void)
 		} while_each_thread(g, t);
 		read_unlock_irqrestore(&tasklist_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct task_struct *p, *t;
 
 	sys_tracepoint_refcount--;
@@ -1185,6 +1327,9 @@ void syscall_unregfunc(void)
 			clear_tsk_thread_flag(t, TIF_SYSCALL_TRACEPOINT);
 		}
 		read_unlock(&tasklist_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

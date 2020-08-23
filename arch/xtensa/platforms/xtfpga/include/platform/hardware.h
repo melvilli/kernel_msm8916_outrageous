@@ -16,10 +16,13 @@
 #define __XTENSA_XTAVNET_HARDWARE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* By default NO_IRQ is defined to 0 in Linux, but we use the
    interrupt 0 for UART... */
 #define NO_IRQ                 -1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Memory configuration. */
@@ -34,7 +37,11 @@
 /* Default assignment of LX60 devices to external interrupts. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_HAS_SMP
+=======
+#ifdef CONFIG_XTENSA_MX
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_XTENSA_MX
 >>>>>>> v3.18
@@ -52,6 +59,12 @@
 /* UART */
 #define DUART16552_PADDR	(XCHAL_KIO_PADDR + 0x0D050020)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* LCD instruction and data addresses. */
+#define LCD_INSTR_ADDR		((char *)IOADDR(0x0D040000))
+#define LCD_DATA_ADDR		((char *)IOADDR(0x0D040004))
+>>>>>>> v3.18
 =======
 /* LCD instruction and data addresses. */
 #define LCD_INSTR_ADDR		((char *)IOADDR(0x0D040000))

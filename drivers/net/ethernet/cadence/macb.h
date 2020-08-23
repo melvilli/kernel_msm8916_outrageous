@@ -165,6 +165,11 @@
 #define GEM_DBW_OFFSET				21
 #define GEM_DBW_SIZE				2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GEM_RXCOEN_OFFSET			24
+#define GEM_RXCOEN_SIZE				1
+>>>>>>> v3.18
 =======
 #define GEM_RXCOEN_OFFSET			24
 #define GEM_RXCOEN_SIZE				1
@@ -311,13 +316,19 @@
 #define GEM_DBWDEF_SIZE				3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bitfields in DCFG2. */
 #define GEM_RX_PKT_BUFF_OFFSET			20
 #define GEM_RX_PKT_BUFF_SIZE			1
 #define GEM_TX_PKT_BUFF_OFFSET			21
 #define GEM_TX_PKT_BUFF_SIZE			1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Constants for CLK */
 #define MACB_CLK_DIV8				0
@@ -341,13 +352,19 @@
 
 /* Capability mask bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACB_CAPS_ISR_CLEAR_ON_WRITE		0x1
 =======
+=======
+>>>>>>> v3.18
 #define MACB_CAPS_ISR_CLEAR_ON_WRITE		0x00000001
 #define MACB_CAPS_FIFO_MODE			0x10000000
 #define MACB_CAPS_GIGABIT_MODE_AVAILABLE	0x20000000
 #define MACB_CAPS_SG_DISABLED			0x40000000
 #define MACB_CAPS_MACB_IS_GEM			0x80000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bit manipulation macros */
@@ -465,7 +482,10 @@ struct macb_dma_desc {
 #define MACB_RX_BROADCAST_SIZE			1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* RX checksum offload disabled: bit 24 clear in NCFGR */
 #define GEM_RX_TYPEID_MATCH_OFFSET		22
 #define GEM_RX_TYPEID_MATCH_SIZE		2
@@ -474,6 +494,9 @@ struct macb_dma_desc {
 #define GEM_RX_CSUM_OFFSET			22
 #define GEM_RX_CSUM_SIZE			2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MACB_TX_FRMLEN_OFFSET			0
 #define MACB_TX_FRMLEN_SIZE			11
@@ -493,11 +516,14 @@ struct macb_dma_desc {
 #define MACB_TX_USED_SIZE			1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct macb_tx_skb - data about an skb which is being transmitted
  * @skb: skb currently being transmitted
  * @mapping: DMA address of the skb's data buffer
 =======
+=======
+>>>>>>> v3.18
 #define GEM_TX_FRMLEN_OFFSET			0
 #define GEM_TX_FRMLEN_SIZE			14
 
@@ -518,12 +544,20 @@ struct macb_dma_desc {
  * @size: size of the DMA mapped buffer
  * @mapped_as_page: true when buffer was mapped with skb_frag_dma_map(),
  *                  false when buffer was mapped with dma_map_single()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct macb_tx_skb {
 	struct sk_buff		*skb;
 	dma_addr_t		mapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t			size;
+	bool			mapped_as_page;
+>>>>>>> v3.18
 =======
 	size_t			size;
 	bool			mapped_as_page;
@@ -607,7 +641,10 @@ struct gem_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct macb;
 
 struct macb_or_gem_ops {
@@ -622,20 +659,29 @@ struct macb_config {
 	unsigned int		dma_burst_length;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct macb {
 	void __iomem		*regs;
 
 	unsigned int		rx_tail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct macb_dma_desc	*rx_ring;
 	void			*rx_buffers;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		rx_prepared_head;
 	struct macb_dma_desc	*rx_ring;
 	struct sk_buff		**rx_skbuff;
 	void			*rx_buffers;
 	size_t			rx_buffer_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned int		tx_head, tx_tail;
@@ -647,6 +693,10 @@ struct macb {
 	struct clk		*pclk;
 	struct clk		*hclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk		*tx_clk;
+>>>>>>> v3.18
 =======
 	struct clk		*tx_clk;
 >>>>>>> v3.18
@@ -664,6 +714,11 @@ struct macb {
 	dma_addr_t		rx_buffers_dma;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct macb_or_gem_ops	macbgem_ops;
+
+>>>>>>> v3.18
 =======
 	struct macb_or_gem_ops	macbgem_ops;
 
@@ -676,6 +731,10 @@ struct macb {
 
 	u32			caps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		dma_burst_length;
+>>>>>>> v3.18
 =======
 	unsigned int		dma_burst_length;
 >>>>>>> v3.18
@@ -687,6 +746,10 @@ struct macb {
 	dma_addr_t skb_physaddr;		/* phys addr from pci_map_single */
 	int skb_length;				/* saved skb length for pci_unmap_single */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		max_tx_length;
+>>>>>>> v3.18
 =======
 	unsigned int		max_tx_length;
 >>>>>>> v3.18
@@ -704,7 +767,11 @@ void macb_get_hwaddr(struct macb *bp);
 static inline bool macb_is_gem(struct macb *bp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return MACB_BFEXT(IDNUM, macb_readl(bp, MID)) == 0x2;
+=======
+	return !!(bp->caps & MACB_CAPS_MACB_IS_GEM);
+>>>>>>> v3.18
 =======
 	return !!(bp->caps & MACB_CAPS_MACB_IS_GEM);
 >>>>>>> v3.18

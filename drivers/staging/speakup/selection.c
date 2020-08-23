@@ -7,6 +7,10 @@
 #include <linux/workqueue.h>
 #include <linux/tty.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/tty_flip.h>
+>>>>>>> v3.18
 =======
 #include <linux/tty_flip.h>
 >>>>>>> v3.18
@@ -70,6 +74,10 @@ int speakup_set_selection(struct tty_struct *tty)
 		/* make sel_start <= sel_end */
 		int tmp = ps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -148,11 +156,17 @@ static void __speakup_paste_selection(struct work_struct *work)
 	DECLARE_WAITQUEUE(wait, current);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld = tty_ldisc_ref(tty);
 	if (!ld)
 		goto tty_unref;
 
 	/* FIXME: this is completely unsafe */
+=======
+	ld = tty_ldisc_ref_wait(tty);
+	tty_buffer_lock_exclusive(&vc->port);
+
+>>>>>>> v3.18
 =======
 	ld = tty_ldisc_ref_wait(tty);
 	tty_buffer_lock_exclusive(&vc->port);
@@ -167,8 +181,13 @@ static void __speakup_paste_selection(struct work_struct *work)
 		}
 		count = sel_buffer_lth - pasted;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		count = min_t(int, count, tty->receive_room);
 		ld->ops->receive_buf(tty, sel_buffer + pasted, NULL, count);
+=======
+		count = tty_ldisc_receive_buf(ld, sel_buffer + pasted, NULL,
+					      count);
+>>>>>>> v3.18
 =======
 		count = tty_ldisc_receive_buf(ld, sel_buffer + pasted, NULL,
 					      count);
@@ -179,8 +198,13 @@ static void __speakup_paste_selection(struct work_struct *work)
 	current->state = TASK_RUNNING;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_ldisc_deref(ld);
 tty_unref:
+=======
+	tty_buffer_unlock_exclusive(&vc->port);
+	tty_ldisc_deref(ld);
+>>>>>>> v3.18
 =======
 	tty_buffer_unlock_exclusive(&vc->port);
 	tty_ldisc_deref(ld);

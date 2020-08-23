@@ -290,7 +290,11 @@ static struct miscdevice nv_tco_miscdev = {
  * want to register another driver on the same PCI id.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tco_pci_tbl) = {
+=======
+static const struct pci_device_id tco_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id tco_pci_tbl[] = {
 >>>>>>> v3.18
@@ -518,6 +522,9 @@ MODULE_AUTHOR("Mike Waychison");
 MODULE_DESCRIPTION("TCO timer driver for NV chipsets");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

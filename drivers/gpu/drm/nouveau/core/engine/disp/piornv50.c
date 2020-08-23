@@ -23,8 +23,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/os.h>
 #include <core/class.h>
+=======
+#include <core/client.h>
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <core/client.h>
 #include <nvif/unpack.h>
@@ -39,6 +45,7 @@
 #include "nv50.h"
 
 /******************************************************************************
+<<<<<<< HEAD
 <<<<<<< HEAD
  * DisplayPort
  *****************************************************************************/
@@ -103,6 +110,8 @@ const struct nouveau_dp_func
 nv50_pior_dp_func = {
 	.pattern = nv50_pior_dp_pattern,
 =======
+=======
+>>>>>>> v3.18
  * TMDS
  *****************************************************************************/
 
@@ -204,6 +213,9 @@ nv50_pior_dp_impl = {
 	},
 	.pattern = nv50_pior_dp_pattern,
 	.lnk_pwr = nv50_pior_dp_lnk_pwr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.lnk_ctl = nv50_pior_dp_lnk_ctl,
 	.drv_ctl = nv50_pior_dp_drv_ctl,
@@ -212,6 +224,7 @@ nv50_pior_dp_impl = {
 /******************************************************************************
  * General PIOR handling
  *****************************************************************************/
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 nv50_pior_power(struct nv50_disp_priv *priv, int or, u32 data)
@@ -249,6 +262,8 @@ nv50_pior_mthd(struct nouveau_object *object, u32 mthd, void *args, u32 size)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 int
 nv50_pior_power(NV50_DISP_MTHD_V1)
@@ -276,5 +291,8 @@ nv50_pior_power(NV50_DISP_MTHD_V1)
 	nv_wait(priv, 0x61e004 + soff, 0x80000000, 0x00000000);
 	priv->pior.type[outp->or] = type;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

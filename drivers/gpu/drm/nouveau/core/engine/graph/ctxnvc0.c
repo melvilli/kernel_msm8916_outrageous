@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "nvc0.h"
 
 void
@@ -1907,6 +1908,8 @@ nvc0_grctx_generate_tp(struct nvc0_graph_priv *priv)
 	if (chipset != 0xc0 && chipset != 0xc8)
 		nv_wr32(priv, 0x419f58, 0x00000000);
 =======
+=======
+>>>>>>> v3.18
 #include "ctxnvc0.h"
 
 /*******************************************************************************
@@ -3139,12 +3142,16 @@ nvc0_grctx_generate_main(struct nvc0_graph_priv *priv, struct nvc0_grctx *info)
 	nv_wr32(priv, 0x404154, 0x00000400);
 	nvc0_graph_mthd(priv, oclass->mthd);
 	nouveau_mc(priv)->unk260(nouveau_mc(priv), 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int
 nvc0_grctx_generate(struct nvc0_graph_priv *priv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nvc0_grctx info;
 	int ret, i, gpc, tpc, id;
@@ -4273,6 +4280,8 @@ nvc0_grctx_generate(struct nvc0_graph_priv *priv)
 	return nvc0_grctx_fini(&info);
 }
 =======
+=======
+>>>>>>> v3.18
 	struct nvc0_grctx_oclass *oclass = (void *)nv_engine(priv)->cclass;
 	struct nouveau_bar *bar = nouveau_bar(priv);
 	struct nouveau_gpuobj *chan;
@@ -4398,4 +4407,7 @@ nvc0_grctx_oclass = &(struct nvc0_grctx_oclass) {
 	.attrib_nr_max = 0x324,
 	.attrib_nr = 0x218,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

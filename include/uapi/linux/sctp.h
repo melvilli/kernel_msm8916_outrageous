@@ -23,6 +23,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -31,12 +32,17 @@
  * email address(es):
  *    lksctp developers <lksctp-developers@lists.sourceforge.net>
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Or submit a bug report through the following website:
@@ -106,6 +112,12 @@ typedef __s32 sctp_assoc_t;
 #define SCTP_AUTO_ASCONF       30
 #define SCTP_PEER_ADDR_THLDS	31
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SCTP_RECVRCVINFO	32
+#define SCTP_RECVNXTINFO	33
+#define SCTP_DEFAULT_SNDINFO	34
+>>>>>>> v3.18
 =======
 #define SCTP_RECVRCVINFO	32
 #define SCTP_RECVNXTINFO	33
@@ -127,9 +139,12 @@ typedef __s32 sctp_assoc_t;
 #define SCTP_GET_ASSOC_STATS	112	/* Read only */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * 5.2.1 SCTP Initiation Structure (SCTP_INIT)
 =======
+=======
+>>>>>>> v3.18
 /* These are bit fields for msghdr->msg_flags.  See section 5.1.  */
 /* On user space Linux, these live in <bits/socket.h> as an enum.  */
 enum sctp_msg_flags {
@@ -138,6 +153,9 @@ enum sctp_msg_flags {
 };
 
 /* 5.3.1 SCTP Initiation Structure (SCTP_INIT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *   This cmsghdr structure provides information for initializing new
@@ -149,7 +167,10 @@ enum sctp_msg_flags {
  *   ------------  ------------   ----------------------
  *   IPPROTO_SCTP  SCTP_INIT      struct sctp_initmsg
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -161,8 +182,12 @@ struct sctp_initmsg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * 5.2.2 SCTP Header Information Structure (SCTP_SNDRCV)
+=======
+/* 5.3.2 SCTP Header Information Structure (SCTP_SNDRCV)
+>>>>>>> v3.18
 =======
 /* 5.3.2 SCTP Header Information Structure (SCTP_SNDRCV)
 >>>>>>> v3.18
@@ -175,7 +200,10 @@ struct sctp_initmsg {
  *   ------------  ------------   ----------------------
  *   IPPROTO_SCTP  SCTP_SNDRCV    struct sctp_sndrcvinfo
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -192,7 +220,10 @@ struct sctp_sndrcvinfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 5.3.4 SCTP Send Information Structure (SCTP_SNDINFO)
  *
  *   This cmsghdr structure specifies SCTP options for sendmsg().
@@ -248,6 +279,9 @@ struct sctp_nxtinfo {
 	sctp_assoc_t nxt_assoc_id;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *  sinfo_flags: 16 bits (unsigned integer)
@@ -255,6 +289,7 @@ struct sctp_nxtinfo {
  *   This field may contain any of the following flags and is composed of
  *   a bitwise OR of these values.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 enum sctp_sinfo_flags {
@@ -264,6 +299,8 @@ enum sctp_sinfo_flags {
 	SCTP_SACK_IMMEDIATELY = 8,	/* SACK should be sent without delay */
 	SCTP_EOF=MSG_FIN,    /* Initiate graceful shutdown process. */
 =======
+=======
+>>>>>>> v3.18
 enum sctp_sinfo_flags {
 	SCTP_UNORDERED		= (1 << 0), /* Send/receive message unordered. */
 	SCTP_ADDR_OVER		= (1 << 1), /* Override the primary destination. */
@@ -271,6 +308,9 @@ enum sctp_sinfo_flags {
 	SCTP_SACK_IMMEDIATELY	= (1 << 3), /* SACK should be sent without delay. */
 	SCTP_NOTIFICATION	= MSG_NOTIFICATION, /* Next message is not user msg but notification. */
 	SCTP_EOF		= MSG_FIN,  /* Initiate graceful shutdown process. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -283,11 +323,14 @@ typedef union {
 /* These are cmsg_types.  */
 typedef enum sctp_cmsg_type {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_INIT,              /* 5.2.1 SCTP Initiation Structure */
 #define SCTP_INIT	SCTP_INIT
 	SCTP_SNDRCV,            /* 5.2.2 SCTP Header Information Structure */
 #define SCTP_SNDRCV	SCTP_SNDRCV
 =======
+=======
+>>>>>>> v3.18
 	SCTP_INIT,		/* 5.2.1 SCTP Initiation Structure */
 #define SCTP_INIT	SCTP_INIT
 	SCTP_SNDRCV,		/* 5.2.2 SCTP Header Information Structure */
@@ -298,6 +341,9 @@ typedef enum sctp_cmsg_type {
 #define SCTP_RCVINFO	SCTP_RCVINFO
 	SCTP_NXTINFO,		/* 5.3.6 SCTP Next Receive Information Structure */
 #define SCTP_NXTINFO	SCTP_NXTINFO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } sctp_cmsg_t;
 
@@ -927,6 +973,7 @@ struct sctp_assoc_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These are bit fields for msghdr->msg_flags.  See section 5.1.  */
 /* On user space Linux, these live in <bits/socket.h> as an enum.  */
 enum sctp_msg_flags {
@@ -934,6 +981,8 @@ enum sctp_msg_flags {
 #define MSG_NOTIFICATION MSG_NOTIFICATION
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

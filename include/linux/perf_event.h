@@ -49,6 +49,10 @@ struct perf_guest_info_callbacks {
 #include <linux/irq_work.h>
 #include <linux/static_key.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jump_label_ratelimit.h>
+>>>>>>> v3.18
 =======
 #include <linux/jump_label_ratelimit.h>
 >>>>>>> v3.18
@@ -70,6 +74,7 @@ struct perf_raw_record {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * single taken branch record layout:
  *
  *      from: source instruction (may not always be a branch insn)
@@ -89,6 +94,8 @@ struct perf_branch_entry {
 };
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * branch stack layout:
@@ -122,6 +129,11 @@ struct hw_perf_event_extra {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct event_constraint;
+
+>>>>>>> v3.18
 =======
 struct event_constraint;
 
@@ -145,6 +157,11 @@ struct hw_perf_event {
 			struct hw_perf_event_extra extra_reg;
 			struct hw_perf_event_extra branch_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+			struct event_constraint *constraint;
+>>>>>>> v3.18
 =======
 
 			struct event_constraint *constraint;
@@ -200,18 +217,25 @@ struct perf_event;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pmu::capabilities flags
  */
 #define PERF_PMU_CAP_NO_INTERRUPT		0x01
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct pmu - generic performance monitoring unit
  */
 struct pmu {
 	struct list_head		entry;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device			*dev;
 	const struct attribute_group	**attr_groups;
@@ -224,6 +248,8 @@ struct pmu {
 	u32                             events_across_hotplug:1,
 					reserved:31;
 =======
+=======
+>>>>>>> v3.18
 	struct module			*module;
 	struct device			*dev;
 	const struct attribute_group	**attr_groups;
@@ -239,6 +265,9 @@ struct pmu {
 	struct perf_cpu_context * __percpu pmu_cpu_context;
 	int				task_ctx_nr;
 	int				hrtimer_interval_ms;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -317,6 +346,10 @@ struct pmu {
  */
 enum perf_event_active_state {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PERF_EVENT_STATE_EXIT		= -3,
+>>>>>>> v3.18
 =======
 	PERF_EVENT_STATE_EXIT		= -3,
 >>>>>>> v3.18
@@ -358,6 +391,7 @@ struct ring_buffer;
 struct perf_event {
 #ifdef CONFIG_PERF_EVENTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head		group_entry;
 	struct list_head		event_entry;
 	struct list_head		sibling_list;
@@ -376,6 +410,8 @@ struct perf_event {
 	enum perf_event_active_state	state;
 	enum perf_event_active_state	hotplug_save_state;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * entry onto perf_event_context::event_list;
 	 *   modifications require ctx->lock
@@ -409,6 +445,9 @@ struct perf_event {
 	struct pmu			*pmu;
 
 	enum perf_event_active_state	state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int			attach_state;
 	local64_t			count;
@@ -486,6 +525,11 @@ struct perf_event {
 	struct ring_buffer		*rb;
 	struct list_head		rb_entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long			rcu_batches;
+	int				rcu_pending;
+>>>>>>> v3.18
 =======
 	unsigned long			rcu_batches;
 	int				rcu_pending;
@@ -529,12 +573,18 @@ struct perf_event {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum perf_event_context_type {
 	task_context,
 	cpu_context,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct perf_event_context - event context structure
@@ -544,6 +594,10 @@ enum perf_event_context_type {
 struct perf_event_context {
 	struct pmu			*pmu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum perf_event_context_type	type;
+>>>>>>> v3.18
 =======
 	enum perf_event_context_type	type;
 >>>>>>> v3.18
@@ -626,7 +680,11 @@ struct perf_output_handle {
 #ifdef CONFIG_PERF_EVENTS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int perf_pmu_register(struct pmu *pmu, char *name, int type);
+=======
+extern int perf_pmu_register(struct pmu *pmu, const char *name, int type);
+>>>>>>> v3.18
 =======
 extern int perf_pmu_register(struct pmu *pmu, const char *name, int type);
 >>>>>>> v3.18
@@ -687,9 +745,12 @@ struct perf_sample_data {
 	u64				stack_user_size;
 	u64				weight;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Transaction flags for abort events:
 	 */
@@ -703,6 +764,9 @@ struct perf_sample_data {
 		    PERF_MEM_S(LOCK, NA)  |\
 		    PERF_MEM_S(TLB, NA))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void perf_sample_data_init(struct perf_sample_data *data,
 					 u64 addr, u64 period)
@@ -717,7 +781,12 @@ static inline void perf_sample_data_init(struct perf_sample_data *data,
 	data->stack_user_size = 0;
 	data->weight = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->data_src.val = 0;
+=======
+	data->data_src.val = PERF_MEM_NA;
+	data->txn = 0;
+>>>>>>> v3.18
 =======
 	data->data_src.val = PERF_MEM_NA;
 	data->txn = 0;
@@ -811,7 +880,12 @@ extern int perf_register_guest_info_callbacks(struct perf_guest_info_callbacks *
 extern int perf_unregister_guest_info_callbacks(struct perf_guest_info_callbacks *callbacks);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void perf_event_comm(struct task_struct *tsk);
+=======
+extern void perf_event_exec(void);
+extern void perf_event_comm(struct task_struct *tsk, bool exec);
+>>>>>>> v3.18
 =======
 extern void perf_event_exec(void);
 extern void perf_event_comm(struct task_struct *tsk, bool exec);
@@ -846,11 +920,14 @@ extern int perf_cpu_time_max_percent_handler(struct ctl_table *table, int write,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool perf_paranoid_any(void)
 {
 	return sysctl_perf_event_paranoid > 2;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline bool perf_paranoid_tracepoint_raw(void)
@@ -896,6 +973,10 @@ extern unsigned int perf_output_skip(struct perf_output_handle *handle,
 extern int perf_swevent_get_recursion_context(void);
 extern void perf_swevent_put_recursion_context(int rctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern u64 perf_swevent_set_period(struct perf_event *event);
+>>>>>>> v3.18
 =======
 extern u64 perf_swevent_set_period(struct perf_event *event);
 >>>>>>> v3.18
@@ -904,7 +985,11 @@ extern void perf_event_disable(struct perf_event *event);
 extern int __perf_event_disable(void *info);
 extern void perf_event_task_tick(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
+=======
+#else /* !CONFIG_PERF_EVENTS: */
+>>>>>>> v3.18
 =======
 #else /* !CONFIG_PERF_EVENTS: */
 >>>>>>> v3.18
@@ -938,7 +1023,12 @@ static inline int perf_unregister_guest_info_callbacks
 
 static inline void perf_event_mmap(struct vm_area_struct *vma)		{ }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void perf_event_comm(struct task_struct *tsk)		{ }
+=======
+static inline void perf_event_exec(void)				{ }
+static inline void perf_event_comm(struct task_struct *tsk, bool exec)	{ }
+>>>>>>> v3.18
 =======
 static inline void perf_event_exec(void)				{ }
 static inline void perf_event_comm(struct task_struct *tsk, bool exec)	{ }
@@ -948,6 +1038,10 @@ static inline void perf_event_init(void)				{ }
 static inline int  perf_swevent_get_recursion_context(void)		{ return -1; }
 static inline void perf_swevent_put_recursion_context(int rctx)		{ }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline u64 perf_swevent_set_period(struct perf_event *event)	{ return 0; }
+>>>>>>> v3.18
 =======
 static inline u64 perf_swevent_set_period(struct perf_event *event)	{ return 0; }
 >>>>>>> v3.18
@@ -973,17 +1067,23 @@ static inline void perf_restore_debug_store(void)			{ }
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This has to have a higher priority than migration_notifier in sched.c.
  */
 #define perf_cpu_notifier(fn)						\
 do {									\
 	static struct notifier_block fn##_nb __cpuinitdata =		\
 =======
+=======
+>>>>>>> v3.18
  * This has to have a higher priority than migration_notifier in sched/core.c.
  */
 #define perf_cpu_notifier(fn)						\
 do {									\
 	static struct notifier_block fn##_nb =				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		{ .notifier_call = fn, .priority = CPU_PRI_PERF };	\
 	unsigned long cpu = smp_processor_id();				\

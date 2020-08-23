@@ -13,16 +13,22 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/list.h>
 #include <linux/module.h>
 #include <linux/rwsem.h>
 #include <linux/leds.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/list.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/rwsem.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "leds.h"
 
@@ -48,15 +54,21 @@ static void led_set_software_blink(struct led_classdev *led_cdev,
 	led_cdev->blink_delay_off = delay_off;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* never on - don't blink */
 	if (!delay_on)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	/* never on - just set to off */
 	if (!delay_on) {
 		__led_set_brightness(led_cdev, LED_OFF);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* never off - just set to brightness */
@@ -141,7 +153,10 @@ void led_set_brightness(struct led_classdev *led_cdev,
 }
 EXPORT_SYMBOL(led_set_brightness);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int led_update_brightness(struct led_classdev *led_cdev)
 {
@@ -158,4 +173,7 @@ int led_update_brightness(struct led_classdev *led_cdev)
 	return ret;
 }
 EXPORT_SYMBOL(led_update_brightness);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

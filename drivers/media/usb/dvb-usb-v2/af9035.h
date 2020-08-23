@@ -31,7 +31,13 @@
 #include "tda18218.h"
 #include "fc2580.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tuner_it913x.h"
+=======
+#include "it913x.h"
+#include "si2168.h"
+#include "si2157.h"
+>>>>>>> v3.18
 =======
 #include "it913x.h"
 #include "si2168.h"
@@ -68,14 +74,20 @@ struct state {
 	u8 dual_mode:1;
 	u16 eeprom_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct af9033_config af9033_config[2];
 =======
+=======
+>>>>>>> v3.18
 	u8 af9033_i2c_addr[2];
 	struct af9033_config af9033_config[2];
 	struct af9033_ops ops;
 	#define AF9035_I2C_CLIENT_MAX 4
 	struct i2c_client *i2c_client[AF9035_I2C_CLIENT_MAX];
 	struct i2c_adapter *i2c_adapter_demod;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -111,6 +123,10 @@ static const u32 clock_lut_it9135[] = {
 #define AF9035_FIRMWARE_IT9135_V1 "dvb-usb-it9135-01.fw"
 #define AF9035_FIRMWARE_IT9135_V2 "dvb-usb-it9135-02.fw"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AF9035_FIRMWARE_IT9303 "dvb-usb-it9303-01.fw"
+>>>>>>> v3.18
 =======
 #define AF9035_FIRMWARE_IT9303 "dvb-usb-it9303-01.fw"
 >>>>>>> v3.18
@@ -120,9 +136,12 @@ static const u32 clock_lut_it9135[] = {
  * will not corrupt eeprom.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * eeprom has value 0x00 single mode and 0x03 for dual mode as far as I have
  * seen to this day.
 =======
+=======
+>>>>>>> v3.18
  * TS mode:
  * 0  TS
  * 1  DCA + PIP
@@ -130,6 +149,9 @@ static const u32 clock_lut_it9135[] = {
  * n  DCA
  *
  * Values 0 and 3 are seen to this day. 0 for single TS and 3 for dual TS.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -139,7 +161,11 @@ static const u32 clock_lut_it9135[] = {
 
 #define EEPROM_IR_MODE              0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_DUAL_MODE            0x29
+=======
+#define EEPROM_TS_MODE              0x29
+>>>>>>> v3.18
 =======
 #define EEPROM_TS_MODE              0x29
 >>>>>>> v3.18
@@ -165,6 +191,11 @@ static const u32 clock_lut_it9135[] = {
 #define CMD_FW_DL_END               0x25
 #define CMD_FW_SCATTER_WR           0x29
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CMD_GENERIC_I2C_RD          0x2a
+#define CMD_GENERIC_I2C_WR          0x2b
+>>>>>>> v3.18
 =======
 #define CMD_GENERIC_I2C_RD          0x2a
 #define CMD_GENERIC_I2C_WR          0x2b

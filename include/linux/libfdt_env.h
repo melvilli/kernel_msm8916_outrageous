@@ -2,7 +2,10 @@
 #define _LIBFDT_ENV_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/string.h>

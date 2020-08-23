@@ -42,6 +42,12 @@ OPTIONS
 	sched_stat contains a timeslice how long a task slept.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+--kallsyms=<file>::
+	kallsyms pathname
+
+>>>>>>> v3.18
 =======
 --kallsyms=<file>::
 	kallsyms pathname

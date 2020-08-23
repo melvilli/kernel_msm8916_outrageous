@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* linux/arch/arm/plat-samsung/include/plat/s3c64xx-spi.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -13,8 +17,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __S3C64XX_PLAT_SPI_H
 #define __S3C64XX_PLAT_SPI_H
+=======
+#ifndef __SPI_S3C64XX_H
+#define __SPI_S3C64XX_H
+>>>>>>> v3.18
 =======
 #ifndef __SPI_S3C64XX_H
 #define __SPI_S3C64XX_H
@@ -78,7 +87,11 @@ extern struct s3c64xx_spi_info s3c64xx_spi0_pdata;
 extern struct s3c64xx_spi_info s3c64xx_spi1_pdata;
 extern struct s3c64xx_spi_info s3c64xx_spi2_pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __S3C64XX_PLAT_SPI_H */
+=======
+#endif /*__SPI_S3C64XX_H */
+>>>>>>> v3.18
 =======
 #endif /*__SPI_S3C64XX_H */
 >>>>>>> v3.18

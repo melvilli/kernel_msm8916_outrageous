@@ -27,6 +27,10 @@ static struct irq_routing_table *pirq_table;
 
 static int pirq_enable_irq(struct pci_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void pirq_disable_irq(struct pci_dev *dev);
+>>>>>>> v3.18
 =======
 static void pirq_disable_irq(struct pci_dev *dev);
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ struct irq_router_handler {
 
 int (*pcibios_enable_irq)(struct pci_dev *dev) = pirq_enable_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 void (*pcibios_disable_irq)(struct pci_dev *dev) = NULL;
+=======
+void (*pcibios_disable_irq)(struct pci_dev *dev) = pirq_disable_irq;
+>>>>>>> v3.18
 =======
 void (*pcibios_disable_irq)(struct pci_dev *dev) = pirq_disable_irq;
 >>>>>>> v3.18
@@ -145,6 +153,7 @@ static void __init pirq_peer_trick(void)
 	}
 	for (i = 1; i < 256; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int node;
 		if (!busmap[i] || pci_find_bus(0, i))
 			continue;
@@ -152,6 +161,11 @@ static void __init pirq_peer_trick(void)
 		if (pci_scan_bus_on_node(i, &pci_root_ops, node))
 			printk(KERN_INFO "PCI: Discovered primary peer "
 			       "bus %02x [IRQ]\n", i);
+=======
+		if (!busmap[i] || pci_find_bus(0, i))
+			continue;
+		pcibios_scan_root(i);
+>>>>>>> v3.18
 =======
 		if (!busmap[i] || pci_find_bus(0, i))
 			continue;
@@ -1205,7 +1219,11 @@ void pcibios_penalize_isa_irq(int irq, int active)
 static int pirq_enable_irq(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 pin;
+=======
+	u8 pin = 0;
+>>>>>>> v3.18
 =======
 	u8 pin = 0;
 >>>>>>> v3.18
@@ -1250,8 +1268,11 @@ static int pirq_enable_irq(struct pci_dev *dev)
 			dev = temp_dev;
 			if (irq >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				io_apic_set_pci_routing(&dev->dev, irq,
 							 &irq_attr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				dev->irq = irq;
@@ -1280,7 +1301,10 @@ static int pirq_enable_irq(struct pci_dev *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void pirq_disable_irq(struct pci_dev *dev)
 {
@@ -1290,4 +1314,7 @@ static void pirq_disable_irq(struct pci_dev *dev)
 		dev->irq = 0;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -26,8 +26,12 @@
  * Larry Finger <Larry.Finger@lwfinger.net>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  ****************************************************************************
  */
+=======
+ *****************************************************************************/
+>>>>>>> v3.18
 =======
  *****************************************************************************/
 >>>>>>> v3.18
@@ -36,12 +40,15 @@
 #define __RTL8723E_DM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HAL_DM_HIPWR_DISABLE			BIT(1)
 
 #define OFDM_TABLE_SIZE				37
 #define CCK_TABLE_SIZE				33
 
 =======
+=======
+>>>>>>> v3.18
 #define HAL_DM_DIG_DISABLE			BIT(0)
 #define HAL_DM_HIPWR_DISABLE			BIT(1)
 
@@ -54,6 +61,9 @@
 #define BW_AUTO_SWITCH_HIGH_LOW			25
 #define BW_AUTO_SWITCH_LOW_HIGH			30
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DM_DIG_THRESH_HIGH			40
 #define DM_DIG_THRESH_LOW			35
@@ -83,12 +93,18 @@
 #define DM_RATR_STA_LOW				3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CTS2SELF_THVAL				30
 #define REGC38_TH				20
 
 #define WAIOTTHVAL				25
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TXHIGHPWRLEVEL_NORMAL			0
 #define TXHIGHPWRLEVEL_LEVEL1			1
@@ -97,6 +113,10 @@
 #define TXHIGHPWRLEVEL_BT2			4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DM_TYPE_BYFW				0
+>>>>>>> v3.18
 =======
 #define DM_TYPE_BYFW				0
 >>>>>>> v3.18
@@ -114,6 +134,10 @@ struct swat_t {
 	u8 cur_antenna;
 	u8 pre_antenna;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -134,7 +158,11 @@ enum tag_cck_packet_detection_threshold_type_definition {
 	CCK_PD_STAGE_LowRssi = 0,
 	CCK_PD_STAGE_HighRssi = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CCK_FA_STAGE_Low = 2,
+=======
+	CCK_FA_STAGE_LOW = 2,
+>>>>>>> v3.18
 =======
 	CCK_FA_STAGE_LOW = 2,
 >>>>>>> v3.18
@@ -178,6 +206,7 @@ enum dm_dig_connect_e {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GET_UNDECORATED_AVERAGE_RSSI(_priv)     \
 	((((struct rtl_priv *)(_priv))->mac80211.opmode ==	\
 	NL80211_IFTYPE_ADHOC) ?  \
@@ -193,6 +222,8 @@ void rtl8723ae_dm_rf_saving(struct ieee80211_hw *hw, u8 bforce_in_normal);
 void rtl8723ae_dm_bt_coexist(struct ieee80211_hw *hw);
 
 =======
+=======
+>>>>>>> v3.18
 #define BT_RSSI_STATE_NORMAL_POWER      BIT_OFFSET_LEN_MASK_32(0, 1)
 #define BT_RSSI_STATE_AMDPU_OFF         BIT_OFFSET_LEN_MASK_32(1, 1)
 #define BT_RSSI_STATE_SPECIAL_LOW       BIT_OFFSET_LEN_MASK_32(2, 1)
@@ -213,5 +244,8 @@ void rtl8723e_dm_check_txpower_tracking(struct ieee80211_hw *hw);
 void rtl8723e_dm_init_rate_adaptive_mask(struct ieee80211_hw *hw);
 void rtl8723e_dm_rf_saving(struct ieee80211_hw *hw, u8 bforce_in_normal);
 void rtl8723e_dm_bt_coexist(struct ieee80211_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

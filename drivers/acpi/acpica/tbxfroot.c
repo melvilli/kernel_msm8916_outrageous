@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -53,11 +57,14 @@
 ACPI_MODULE_NAME("tbxfroot")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Local prototypes */
 static u8 *acpi_tb_scan_memory_for_rsdp(u8 * start_address, u32 length);
 
 static acpi_status acpi_tb_validate_rsdp(struct acpi_table_rsdp *rsdp);
 =======
+=======
+>>>>>>> v3.18
 /*******************************************************************************
  *
  * FUNCTION:    acpi_tb_get_rsdp_length
@@ -87,6 +94,9 @@ u32 acpi_tb_get_rsdp_length(struct acpi_table_rsdp *rsdp)
 		return (ACPI_RSDP_CHECKSUM_LENGTH);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
@@ -102,7 +112,11 @@ u32 acpi_tb_get_rsdp_length(struct acpi_table_rsdp *rsdp)
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static acpi_status acpi_tb_validate_rsdp(struct acpi_table_rsdp *rsdp)
+=======
+acpi_status acpi_tb_validate_rsdp(struct acpi_table_rsdp * rsdp)
+>>>>>>> v3.18
 =======
 acpi_status acpi_tb_validate_rsdp(struct acpi_table_rsdp * rsdp)
 >>>>>>> v3.18
@@ -115,8 +129,12 @@ acpi_status acpi_tb_validate_rsdp(struct acpi_table_rsdp * rsdp)
 	 * RSDP has a valid checksum, all others have an invalid checksum.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_STRNCMP((char *)rsdp, ACPI_SIG_RSDP,
 			 sizeof(ACPI_SIG_RSDP) - 1) != 0) {
+=======
+	if (!ACPI_VALIDATE_RSDP_SIG(rsdp->signature)) {
+>>>>>>> v3.18
 =======
 	if (!ACPI_VALIDATE_RSDP_SIG(rsdp->signature)) {
 >>>>>>> v3.18
@@ -163,7 +181,11 @@ acpi_status acpi_tb_validate_rsdp(struct acpi_table_rsdp * rsdp)
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_find_root_pointer(acpi_physical_address * table_address)
+=======
+acpi_status __init acpi_find_root_pointer(acpi_size *table_address)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_find_root_pointer(acpi_size *table_address)
 >>>>>>> v3.18
@@ -225,8 +247,12 @@ acpi_status __init acpi_find_root_pointer(acpi_size *table_address)
 			    (u32) ACPI_PTR_DIFF(mem_rover, table_ptr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*table_address =
 			    (acpi_physical_address) physical_address;
+=======
+			*table_address = physical_address;
+>>>>>>> v3.18
 =======
 			*table_address = physical_address;
 >>>>>>> v3.18
@@ -263,7 +289,11 @@ acpi_status __init acpi_find_root_pointer(acpi_size *table_address)
 		     ACPI_PTR_DIFF(mem_rover, table_ptr));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*table_address = (acpi_physical_address) physical_address;
+=======
+		*table_address = physical_address;
+>>>>>>> v3.18
 =======
 		*table_address = physical_address;
 >>>>>>> v3.18
@@ -289,7 +319,11 @@ acpi_status __init acpi_find_root_pointer(acpi_size *table_address)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 *acpi_tb_scan_memory_for_rsdp(u8 * start_address, u32 length)
+=======
+u8 *acpi_tb_scan_memory_for_rsdp(u8 *start_address, u32 length)
+>>>>>>> v3.18
 =======
 u8 *acpi_tb_scan_memory_for_rsdp(u8 *start_address, u32 length)
 >>>>>>> v3.18

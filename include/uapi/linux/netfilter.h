@@ -54,6 +54,10 @@ enum nf_inet_hooks {
 enum {
 	NFPROTO_UNSPEC =  0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NFPROTO_INET   =  1,
+>>>>>>> v3.18
 =======
 	NFPROTO_INET   =  1,
 >>>>>>> v3.18

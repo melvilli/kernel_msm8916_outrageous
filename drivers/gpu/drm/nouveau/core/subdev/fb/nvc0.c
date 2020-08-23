@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 #include <subdev/ltcg.h>
 #include <subdev/bios.h>
@@ -38,11 +39,16 @@ extern const u8 nvc0_pte_storage_type_map[256];
 
 static bool
 =======
+=======
+>>>>>>> v3.18
 #include "nvc0.h"
 
 extern const u8 nvc0_pte_storage_type_map[256];
 
 bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nvc0_fb_memtype_valid(struct nouveau_fb *pfb, u32 tile_flags)
 {
@@ -50,6 +56,7 @@ nvc0_fb_memtype_valid(struct nouveau_fb *pfb, u32 tile_flags)
 	return likely((nvc0_pte_storage_type_map[memtype] != 0xff));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nvc0_fb_vram_init(struct nouveau_fb *pfb)
@@ -184,6 +191,8 @@ nvc0_fb_vram_del(struct nouveau_fb *pfb, struct nouveau_mem **pmem)
 
 static int
 =======
+=======
+>>>>>>> v3.18
 static void
 nvc0_fb_intr(struct nouveau_subdev *subdev)
 {
@@ -200,6 +209,9 @@ nvc0_fb_intr(struct nouveau_subdev *subdev)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nvc0_fb_init(struct nouveau_object *object)
 {
@@ -213,16 +225,22 @@ nvc0_fb_init(struct nouveau_object *object)
 	if (priv->r100c10_page)
 		nv_wr32(priv, 0x100c10, priv->r100c10 >> 8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 static void
 =======
+=======
+>>>>>>> v3.18
 	nv_mask(priv, 0x100c80, 0x00000001, 0x00000000); /* 128KiB lpg */
 	return 0;
 }
 
 void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nvc0_fb_dtor(struct nouveau_object *object)
 {
@@ -231,8 +249,13 @@ nvc0_fb_dtor(struct nouveau_object *object)
 
 	if (priv->r100c10_page) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_unmap_page(device->pdev, priv->r100c10, PAGE_SIZE,
 			       PCI_DMA_BIDIRECTIONAL);
+=======
+		dma_unmap_page(nv_device_base(device), priv->r100c10, PAGE_SIZE,
+			       DMA_BIDIRECTIONAL);
+>>>>>>> v3.18
 =======
 		dma_unmap_page(nv_device_base(device), priv->r100c10, PAGE_SIZE,
 			       DMA_BIDIRECTIONAL);
@@ -244,7 +267,11 @@ nvc0_fb_dtor(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -261,6 +288,7 @@ nvc0_fb_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->base.memtype_valid = nvc0_fb_memtype_valid;
 	priv->base.ram.init = nvc0_fb_vram_init;
@@ -285,6 +313,8 @@ nvc0_fb_oclass = {
 	.handle = NV_SUBDEV(FB, 0xc0),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	priv->r100c10_page = alloc_page(GFP_KERNEL | __GFP_ZERO);
 	if (priv->r100c10_page) {
 		priv->r100c10 = dma_map_page(nv_device_base(device),
@@ -302,6 +332,9 @@ struct nouveau_oclass *
 nvc0_fb_oclass = &(struct nouveau_fb_impl) {
 	.base.handle = NV_SUBDEV(FB, 0xc0),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nvc0_fb_ctor,
 		.dtor = nvc0_fb_dtor,
@@ -309,7 +342,13 @@ nvc0_fb_oclass = &(struct nouveau_fb_impl) {
 		.fini = _nouveau_fb_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.memtype = nvc0_fb_memtype_valid,
+	.ram = &nvc0_ram_oclass,
+}.base;
+>>>>>>> v3.18
 =======
 	.memtype = nvc0_fb_memtype_valid,
 	.ram = &nvc0_ram_oclass,

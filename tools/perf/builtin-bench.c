@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * builtin-bench.c
  *
@@ -18,6 +19,8 @@
  */
 
 =======
+=======
+>>>>>>> v3.18
  * builtin-bench.c
  *
  * General benchmarking collections provided by perf
@@ -33,6 +36,9 @@
  *  numa  ... NUMA scheduling and MM performance
  *  futex ... Futex performance
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "perf.h"
 #include "util/util.h"
@@ -43,6 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct bench_suite {
@@ -141,6 +148,8 @@ static const struct option bench_options[] = {
 	OPT_STRING('f', "format", &bench_format_str, "default",
 		    "Specify format style"),
 =======
+=======
+>>>>>>> v3.18
 #include <sys/prctl.h>
 
 typedef int (*bench_fn_t)(int argc, const char **argv, const char *prefix);
@@ -227,13 +236,20 @@ unsigned int bench_repeat = 10; /* default number of times to repeat the run */
 static const struct option bench_options[] = {
 	OPT_STRING('f', "format", &bench_format_str, "default", "Specify format style"),
 	OPT_UINTEGER('r', "repeat",  &bench_repeat,   "Specify amount of times to repeat the run"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPT_END()
 };
 
 static const char * const bench_usage[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"perf bench [<common options>] <subsystem> <suite> [<options>]",
+=======
+	"perf bench [<common options>] <collection> <benchmark> [<options>]",
+>>>>>>> v3.18
 =======
 	"perf bench [<common options>] <collection> <benchmark> [<options>]",
 >>>>>>> v3.18
@@ -243,6 +259,10 @@ static const char * const bench_usage[] = {
 static void print_usage(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct collection *coll;
+>>>>>>> v3.18
 =======
 	struct collection *coll;
 >>>>>>> v3.18
@@ -254,16 +274,22 @@ static void print_usage(void)
 	printf("\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("# List of available subsystems...\n\n");
 
 	for (i = 0; subsystems[i].name; i++)
 		printf("%14s: %s\n",
 		       subsystems[i].name, subsystems[i].summary);
 =======
+=======
+>>>>>>> v3.18
 	printf("        # List of all available benchmark collections:\n\n");
 
 	for_each_collection(coll)
 		printf("%14s: %s\n", coll->name, coll->summary);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printf("\n");
 }
@@ -282,12 +308,15 @@ static int bench_str2int(const char *str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void all_suite(struct bench_subsys *subsys)	  /* FROM HERE */
 {
 	int i;
 	const char *argv[2];
 	struct bench_suite *suites = subsys->suites;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Run a specific benchmark but first rename the running task's ->comm[]
  * to something meaningful:
@@ -320,11 +349,15 @@ static void run_collection(struct collection *coll)
 {
 	struct bench *bench;
 	const char *argv[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	argv[1] = NULL;
 	/*
 	 * TODO:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * preparing preset parameters for
 	 * embedded, ordinary PC, HPC, etc...
@@ -339,6 +372,8 @@ static void run_collection(struct collection *coll)
 		argv[1] = suites[i].name;
 		suites[i].fn(1, argv, NULL);
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * Preparing preset parameters for
 	 * embedded, ordinary PC, HPC, etc...
@@ -352,11 +387,15 @@ static void run_collection(struct collection *coll)
 
 		argv[1] = bench->name;
 		run_bench(coll->name, bench->name, bench->fn, 1, argv, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printf("\n");
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void all_subsystem(void)
 {
@@ -364,28 +403,39 @@ static void all_subsystem(void)
 	for (i = 0; subsystems[i].suites; i++)
 		all_suite(&subsystems[i]);
 =======
+=======
+>>>>>>> v3.18
 static void run_all_collections(void)
 {
 	struct collection *coll;
 
 	for_each_collection(coll)
 		run_collection(coll);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, status = 0;
 
 	if (argc < 2) {
 		/* No subsystem specified. */
 =======
+=======
+>>>>>>> v3.18
 	struct collection *coll;
 	int ret = 0;
 
 	if (argc < 2) {
 		/* No collection specified. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		print_usage();
 		goto end;
@@ -397,14 +447,20 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 	bench_format = bench_str2int(bench_format_str);
 	if (bench_format == BENCH_FORMAT_UNKNOWN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("Unknown format descriptor:%s\n", bench_format_str);
 =======
+=======
+>>>>>>> v3.18
 		printf("Unknown format descriptor: '%s'\n", bench_format_str);
 		goto end;
 	}
 
 	if (bench_repeat == 0) {
 		printf("Invalid repeat option: Must specify a positive value\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end;
 	}
@@ -415,6 +471,7 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 	}
 
 	if (!strcmp(argv[0], "all")) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		all_subsystem();
 		goto end;
@@ -428,6 +485,8 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 			/* No suite specified. */
 			dump_suites(i);
 =======
+=======
+>>>>>>> v3.18
 		run_all_collections();
 		goto end;
 	}
@@ -441,11 +500,15 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 		if (argc < 2) {
 			/* No bench specified. */
 			dump_benchmarks(coll);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto end;
 		}
 
 		if (!strcmp(argv[1], "all")) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			all_suite(&subsystems[i]);
 			goto end;
@@ -463,6 +526,8 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 			status = subsystems[i].suites[j].fn(argc - 1,
 							    argv + 1, prefix);
 =======
+=======
+>>>>>>> v3.18
 			run_collection(coll);
 			goto end;
 		}
@@ -475,11 +540,15 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 				printf("# Running '%s/%s' benchmark:\n", coll->name, bench->name);
 			fflush(stdout);
 			ret = run_bench(coll->name, bench->name, bench->fn, argc-1, argv+1, prefix);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto end;
 		}
 
 		if (!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help")) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dump_suites(i);
 			goto end;
@@ -496,6 +565,8 @@ int cmd_bench(int argc, const char **argv, const char *prefix __maybe_unused)
 end:
 	return status;
 =======
+=======
+>>>>>>> v3.18
 			dump_benchmarks(coll);
 			goto end;
 		}
@@ -510,5 +581,8 @@ end:
 
 end:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

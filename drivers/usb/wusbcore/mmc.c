@@ -196,6 +196,10 @@ int wusbhc_start(struct wusbhc *wusbhc)
 
 	WARN_ON(wusbhc->wuie_host_info != NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(wusbhc->uwb_rc == NULL);
+>>>>>>> v3.18
 =======
 	BUG_ON(wusbhc->uwb_rc == NULL);
 >>>>>>> v3.18
@@ -210,7 +214,12 @@ int wusbhc_start(struct wusbhc *wusbhc)
 	result = wusbhc_devconnect_start(wusbhc);
 	if (result < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "error enabling device connections: %d\n", result);
+=======
+		dev_err(dev, "error enabling device connections: %d\n",
+			result);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "error enabling device connections: %d\n",
 			result);
@@ -221,6 +230,7 @@ int wusbhc_start(struct wusbhc *wusbhc)
 	result = wusbhc_sec_start(wusbhc);
 	if (result < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "error starting security in the HC: %d\n", result);
 		goto error_sec_start;
 	}
@@ -228,6 +238,8 @@ int wusbhc_start(struct wusbhc *wusbhc)
 	 * arbitrary */
 	result = wusbhc->set_num_dnts(wusbhc, 0, 15);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "error starting security in the HC: %d\n",
 			result);
 		goto error_sec_start;
@@ -235,6 +247,9 @@ int wusbhc_start(struct wusbhc *wusbhc)
 
 	result = wusbhc->set_num_dnts(wusbhc, wusbhc->dnts_interval,
 		wusbhc->dnts_num_slots);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (result < 0) {
 		dev_err(dev, "Cannot set DNTS parameters: %d\n", result);
@@ -296,7 +311,10 @@ int wusbhc_chid_set(struct wusbhc *wusbhc, const struct wusb_ckhdid *chid)
 		wusbhc->chid = *chid;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* register with UWB if we haven't already since we are about to start
 	    the radio. */
@@ -315,15 +333,21 @@ int wusbhc_chid_set(struct wusbhc *wusbhc, const struct wusb_ckhdid *chid)
 			goto error_pal_register;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&wusbhc->mutex);
 
 	if (chid)
 		result = uwb_radio_start(&wusbhc->pal);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		uwb_radio_stop(&wusbhc->pal);
 =======
+=======
+>>>>>>> v3.18
 	else if (wusbhc->uwb_rc)
 		uwb_radio_stop(&wusbhc->pal);
 
@@ -335,6 +359,9 @@ error_pal_register:
 error_rc_get:
 	mutex_unlock(&wusbhc->mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return result;
 }

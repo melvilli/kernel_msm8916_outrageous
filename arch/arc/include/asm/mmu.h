@@ -10,6 +10,7 @@
 #define _ASM_ARC_MMU_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASSEMBLY__
 
 typedef struct {
@@ -22,6 +23,8 @@ typedef struct {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ARC_MMU_V1)
 #define CONFIG_ARC_MMU_VER 1
 #elif defined(CONFIG_ARC_MMU_V2)
@@ -76,5 +79,8 @@ void read_decode_mmu_bcr(void);
 
 #endif	/* !__ASSEMBLY__ */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

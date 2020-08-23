@@ -26,6 +26,10 @@ struct dentry *mce_get_debugfs_dir(void);
 
 extern struct mce_bank *mce_banks;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern mce_banks_t mce_banks_ce_disabled;
+>>>>>>> v3.18
 =======
 extern mce_banks_t mce_banks_ce_disabled;
 >>>>>>> v3.18
@@ -35,6 +39,10 @@ unsigned long mce_intel_adjust_timer(unsigned long interval);
 void mce_intel_cmci_poll(void);
 void mce_intel_hcpu_update(unsigned long cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void cmci_disable_bank(int bank);
+>>>>>>> v3.18
 =======
 void cmci_disable_bank(int bank);
 >>>>>>> v3.18
@@ -43,6 +51,10 @@ void cmci_disable_bank(int bank);
 static inline void mce_intel_cmci_poll(void) { }
 static inline void mce_intel_hcpu_update(unsigned long cpu) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void cmci_disable_bank(int bank) { }
+>>>>>>> v3.18
 =======
 static inline void cmci_disable_bank(int bank) { }
 >>>>>>> v3.18

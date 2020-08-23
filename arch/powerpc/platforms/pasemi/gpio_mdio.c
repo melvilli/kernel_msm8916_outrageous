@@ -31,6 +31,10 @@
 #include <linux/interrupt.h>
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -294,7 +298,11 @@ static int gpio_mdio_remove(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id gpio_mdio_match[] =
+=======
+static const struct of_device_id gpio_mdio_match[] =
+>>>>>>> v3.18
 =======
 static const struct of_device_id gpio_mdio_match[] =
 >>>>>>> v3.18

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # kbuild trick to avoid linker error. Can be omitted if a module is built.
 obj- := dummy.o
 
@@ -11,6 +12,9 @@ HOSTCFLAGS_ifenslave.o += -I$(objtree)/usr/include
 always := $(hostprogs-y)
 
 obj-m := timestamping/
+=======
+subdir-y := timestamping
+>>>>>>> v3.18
 =======
 subdir-y := timestamping
 >>>>>>> v3.18

@@ -14,6 +14,10 @@
 #include <linux/i2c.h>
 #include <linux/iio/common/st_sensors.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -22,7 +26,10 @@ void st_sensors_i2c_configure(struct iio_dev *indio_dev,
 		struct i2c_client *client, struct st_sensor_data *sdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 void st_sensors_of_i2c_probe(struct i2c_client *client,
 			     const struct of_device_id *match);
@@ -33,5 +40,8 @@ static inline void st_sensors_of_i2c_probe(struct i2c_client *client,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* ST_SENSORS_I2C_H */

@@ -9,7 +9,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -461,7 +464,11 @@ static int mms114_probe(struct i2c_client *client,
 	data->pdata = pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_dev->name = "MELPAS MMS114 Touchscreen";
+=======
+	input_dev->name = "MELFAS MMS114 Touchscreen";
+>>>>>>> v3.18
 =======
 	input_dev->name = "MELFAS MMS114 Touchscreen";
 >>>>>>> v3.18
@@ -579,7 +586,11 @@ MODULE_DEVICE_TABLE(i2c, mms114_id);
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mms114_dt_match[] = {
+=======
+static const struct of_device_id mms114_dt_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mms114_dt_match[] = {
 >>>>>>> v3.18

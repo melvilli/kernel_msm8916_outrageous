@@ -85,7 +85,11 @@ static void enetx_set(struct clk *clk, int enable)
 		clk_disable_unlocked(&clk_enet_misc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BCMCPU_IS_6358()) {
+=======
+	if (BCMCPU_IS_3368() || BCMCPU_IS_6358()) {
+>>>>>>> v3.18
 =======
 	if (BCMCPU_IS_3368() || BCMCPU_IS_6358()) {
 >>>>>>> v3.18
@@ -115,9 +119,14 @@ static struct clk clk_enet1 = {
 static void ephy_set(struct clk *clk, int enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!BCMCPU_IS_6358())
 		return;
 	bcm_hwclock_set(CKCTL_6358_EPHY_EN, enable);
+=======
+	if (BCMCPU_IS_3368() || BCMCPU_IS_6358())
+		bcm_hwclock_set(CKCTL_6358_EPHY_EN, enable);
+>>>>>>> v3.18
 =======
 	if (BCMCPU_IS_3368() || BCMCPU_IS_6358())
 		bcm_hwclock_set(CKCTL_6358_EPHY_EN, enable);
@@ -165,14 +174,20 @@ static struct clk clk_enetsw = {
 static void pcm_set(struct clk *clk, int enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!BCMCPU_IS_6358())
 		return;
 	bcm_hwclock_set(CKCTL_6358_PCM_EN, enable);
 =======
+=======
+>>>>>>> v3.18
 	if (BCMCPU_IS_3368())
 		bcm_hwclock_set(CKCTL_3368_PCM_EN, enable);
 	if (BCMCPU_IS_6358())
 		bcm_hwclock_set(CKCTL_6358_PCM_EN, enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -228,7 +243,11 @@ static void spi_set(struct clk *clk, int enable)
 	else if (BCMCPU_IS_6348())
 		mask = CKCTL_6348_SPI_EN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (BCMCPU_IS_6358())
+=======
+	else if (BCMCPU_IS_3368() || BCMCPU_IS_6358())
+>>>>>>> v3.18
 =======
 	else if (BCMCPU_IS_3368() || BCMCPU_IS_6358())
 >>>>>>> v3.18
@@ -247,7 +266,10 @@ static struct clk clk_spi = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * HSSPI clock
  */
 static void hsspi_set(struct clk *clk, int enable)
@@ -270,6 +292,9 @@ static struct clk clk_hsspi = {
 
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * XTM clock
  */
@@ -364,7 +389,10 @@ unsigned long clk_get_rate(struct clk *clk)
 EXPORT_SYMBOL(clk_get_rate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int clk_set_rate(struct clk *clk, unsigned long rate)
 {
 	return 0;
@@ -377,6 +405,9 @@ long clk_round_rate(struct clk *clk, unsigned long rate)
 }
 EXPORT_SYMBOL_GPL(clk_round_rate);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct clk *clk_get(struct device *dev, const char *id)
 {
@@ -395,6 +426,11 @@ struct clk *clk_get(struct device *dev, const char *id)
 	if (!strcmp(id, "spi"))
 		return &clk_spi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!strcmp(id, "hsspi"))
+		return &clk_hsspi;
+>>>>>>> v3.18
 =======
 	if (!strcmp(id, "hsspi"))
 		return &clk_hsspi;
@@ -404,7 +440,11 @@ struct clk *clk_get(struct device *dev, const char *id)
 	if (!strcmp(id, "periph"))
 		return &clk_periph;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BCMCPU_IS_6358() && !strcmp(id, "pcm"))
+=======
+	if ((BCMCPU_IS_3368() || BCMCPU_IS_6358()) && !strcmp(id, "pcm"))
+>>>>>>> v3.18
 =======
 	if ((BCMCPU_IS_3368() || BCMCPU_IS_6358()) && !strcmp(id, "pcm"))
 >>>>>>> v3.18
@@ -424,7 +464,10 @@ void clk_put(struct clk *clk)
 
 EXPORT_SYMBOL(clk_put);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define HSSPI_PLL_HZ_6328	133333333
 #define HSSPI_PLL_HZ_6362	400000000
@@ -443,4 +486,7 @@ static int __init bcm63xx_clk_init(void)
 	return 0;
 }
 arch_initcall(bcm63xx_clk_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

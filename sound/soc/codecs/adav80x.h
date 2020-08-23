@@ -10,7 +10,10 @@
 #define _ADAV80X_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/regmap.h>
 
 struct device;
@@ -18,6 +21,9 @@ struct device;
 extern const struct regmap_config adav80x_regmap_config;
 int adav80x_bus_probe(struct device *dev, struct regmap *regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum adav80x_pll_src {
 	ADAV80X_PLL_SRC_XIN,

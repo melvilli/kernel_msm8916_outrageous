@@ -14,6 +14,10 @@ extern void btext_setup_display(int width, int height, int depth, int pitch,
 				unsigned long address);
 extern void btext_prepare_BAT(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void btext_map(void);
+>>>>>>> v3.18
 =======
 extern void btext_map(void);
 >>>>>>> v3.18

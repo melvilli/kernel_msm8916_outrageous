@@ -7,6 +7,10 @@ dtb-$(CONFIG_ARCH_AT91) += mpa1600.dtb
 # sam9260
 dtb-$(CONFIG_ARCH_AT91) += animeo_ip.dtb
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dtb-$(CONFIG_ARCH_AT91) += at91-qil_a9260.dtb
+>>>>>>> v3.18
 =======
 dtb-$(CONFIG_ARCH_AT91) += at91-qil_a9260.dtb
 >>>>>>> v3.18
@@ -16,6 +20,11 @@ dtb-$(CONFIG_ARCH_AT91) += evk-pro3.dtb
 dtb-$(CONFIG_ARCH_AT91) += tny_a9260.dtb
 dtb-$(CONFIG_ARCH_AT91) += usb_a9260.dtb
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# sam9261
+dtb-$(CONFIG_ARCH_AT91) += at91sam9261ek.dtb
+>>>>>>> v3.18
 =======
 # sam9261
 dtb-$(CONFIG_ARCH_AT91) += at91sam9261ek.dtb
@@ -26,6 +35,10 @@ dtb-$(CONFIG_ARCH_AT91) += tny_a9263.dtb
 dtb-$(CONFIG_ARCH_AT91) += usb_a9263.dtb
 # sam9g20
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dtb-$(CONFIG_ARCH_AT91) += at91-foxg20.dtb
+>>>>>>> v3.18
 =======
 dtb-$(CONFIG_ARCH_AT91) += at91-foxg20.dtb
 >>>>>>> v3.18
@@ -35,6 +48,10 @@ dtb-$(CONFIG_ARCH_AT91) += kizbox.dtb
 dtb-$(CONFIG_ARCH_AT91) += tny_a9g20.dtb
 dtb-$(CONFIG_ARCH_AT91) += usb_a9g20.dtb
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dtb-$(CONFIG_ARCH_AT91) += usb_a9g20_lpw.dtb
+>>>>>>> v3.18
 =======
 dtb-$(CONFIG_ARCH_AT91) += usb_a9g20_lpw.dtb
 >>>>>>> v3.18
@@ -44,14 +61,20 @@ dtb-$(CONFIG_ARCH_AT91) += pm9g45.dtb
 # sam9n12
 dtb-$(CONFIG_ARCH_AT91) += at91sam9n12ek.dtb
 <<<<<<< HEAD
+<<<<<<< HEAD
 # sam9x5
 dtb-$(CONFIG_ARCH_AT91) += at91-ariag25.dtb
 =======
+=======
+>>>>>>> v3.18
 # sam9rl
 dtb-$(CONFIG_ARCH_AT91) += at91sam9rlek.dtb
 # sam9x5
 dtb-$(CONFIG_ARCH_AT91) += at91-ariag25.dtb
 dtb-$(CONFIG_ARCH_AT91) += at91-cosino_mega2560.dtb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dtb-$(CONFIG_ARCH_AT91) += at91sam9g15ek.dtb
 dtb-$(CONFIG_ARCH_AT91) += at91sam9g25ek.dtb
@@ -60,6 +83,10 @@ dtb-$(CONFIG_ARCH_AT91) += at91sam9x25ek.dtb
 dtb-$(CONFIG_ARCH_AT91) += at91sam9x35ek.dtb
 # sama5d3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dtb-$(CONFIG_ARCH_AT91)	+= at91-sama5d3_xplained.dtb
+>>>>>>> v3.18
 =======
 dtb-$(CONFIG_ARCH_AT91)	+= at91-sama5d3_xplained.dtb
 >>>>>>> v3.18
@@ -67,6 +94,7 @@ dtb-$(CONFIG_ARCH_AT91)	+= sama5d31ek.dtb
 dtb-$(CONFIG_ARCH_AT91)	+= sama5d33ek.dtb
 dtb-$(CONFIG_ARCH_AT91)	+= sama5d34ek.dtb
 dtb-$(CONFIG_ARCH_AT91)	+= sama5d35ek.dtb
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 dtb-$(CONFIG_ARCH_BCM2835) += bcm2835-rpi-b.dtb
@@ -77,6 +105,8 @@ dtb-$(CONFIG_ARCH_DOVE) += dove-cm-a510.dtb \
 	dove-cubox.dtb \
 	dove-dove-db.dtb
 =======
+=======
+>>>>>>> v3.18
 dtb-$(CONFIG_ARCH_AT91)	+= sama5d36ek.dtb
 # sama5d4
 dtb-$(CONFIG_ARCH_AT91)	+= at91-sama5d4ek.dtb
@@ -97,11 +127,15 @@ dtb-$(CONFIG_ARCH_BRCMSTB) += \
 dtb-$(CONFIG_ARCH_DAVINCI) += da850-enbw-cmc.dtb \
 	da850-evm.dtb
 dtb-$(CONFIG_ARCH_EFM32) += efm32gg-dk3750.dtb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dtb-$(CONFIG_ARCH_EXYNOS) += exynos4210-origen.dtb \
 	exynos4210-smdkv310.dtb \
 	exynos4210-trats.dtb \
 	exynos4210-universal_c210.dtb \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	exynos4412-odroidx.dtb \
 	exynos4412-smdk4412.dtb \
@@ -118,6 +152,8 @@ dtb-$(CONFIG_ARCH_INTEGRATOR) += integratorap.dtb \
 dtb-$(CONFIG_ARCH_LPC32XX) += ea3250.dtb phy3250.dtb
 dtb-$(CONFIG_ARCH_KIRKWOOD) += kirkwood-cloudbox.dtb \
 =======
+=======
+>>>>>>> v3.18
 	exynos4412-odroidu3.dtb \
 	exynos4412-odroidx.dtb \
 	exynos4412-odroidx2.dtb \
@@ -151,13 +187,19 @@ dtb-$(CONFIG_MACH_KIRKWOOD) += kirkwood-b3.dtb \
 	kirkwood-d2net.dtb \
 	kirkwood-db-88f6281.dtb \
 	kirkwood-db-88f6282.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kirkwood-dns320.dtb \
 	kirkwood-dns325.dtb \
 	kirkwood-dockstar.dtb \
 	kirkwood-dreamplug.dtb \
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	kirkwood-ds109.dtb \
 	kirkwood-ds110jv10.dtb \
 	kirkwood-ds111.dtb \
@@ -170,6 +212,9 @@ dtb-$(CONFIG_MACH_KIRKWOOD) += kirkwood-b3.dtb \
 	kirkwood-ds411.dtb \
 	kirkwood-ds411j.dtb \
 	kirkwood-ds411slim.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kirkwood-goflexnet.dtb \
 	kirkwood-guruplug-server-plus.dtb \
@@ -179,11 +224,14 @@ dtb-$(CONFIG_MACH_KIRKWOOD) += kirkwood-b3.dtb \
 	kirkwood-is2.dtb \
 	kirkwood-km_kirkwood.dtb \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kirkwood-lschlv2.dtb \
 	kirkwood-lsxhl.dtb \
 	kirkwood-mplcec4.dtb \
 	kirkwood-netgear_readynas_duo_v2.dtb \
 =======
+=======
+>>>>>>> v3.18
 	kirkwood-laplug.dtb \
 	kirkwood-lschlv2.dtb \
 	kirkwood-lsxhl.dtb \
@@ -193,12 +241,16 @@ dtb-$(CONFIG_MACH_KIRKWOOD) += kirkwood-b3.dtb \
 	kirkwood-net5big.dtb \
 	kirkwood-netgear_readynas_duo_v2.dtb \
 	kirkwood-netgear_readynas_nv+_v2.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kirkwood-ns2.dtb \
 	kirkwood-ns2lite.dtb \
 	kirkwood-ns2max.dtb \
 	kirkwood-ns2mini.dtb \
 	kirkwood-nsa310.dtb \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kirkwood-topkick.dtb \
 	kirkwood-ts219-6281.dtb \
@@ -213,6 +265,8 @@ dtb-$(CONFIG_ARCH_MVEBU) += armada-370-db.dtb \
 	armada-xp-openblocks-ax3-4.dtb
 dtb-$(CONFIG_ARCH_MXC) += \
 =======
+=======
+>>>>>>> v3.18
 	kirkwood-nsa310a.dtb \
 	kirkwood-openblocks_a6.dtb \
 	kirkwood-openblocks_a7.dtb \
@@ -244,11 +298,15 @@ dtb-$(CONFIG_ARCH_MXC) += \
 	imx25-eukrea-mbimxsd25-baseboard-cmo-qvga.dtb \
 	imx25-eukrea-mbimxsd25-baseboard-dvi-svga.dtb \
 	imx25-eukrea-mbimxsd25-baseboard-dvi-vga.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	imx25-karo-tx25.dtb \
 	imx25-pdk.dtb \
 	imx27-apf27.dtb \
 	imx27-apf27dev.dtb \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	imx27-pdk.dtb \
 	imx27-phytec-phycore.dtb \
@@ -270,6 +328,8 @@ dtb-$(CONFIG_ARCH_MXC) += \
 	imx6q-sabresd.dtb \
 	imx6q-sbc6x.dtb
 =======
+=======
+>>>>>>> v3.18
 	imx27-eukrea-mbimxsd27-baseboard.dtb \
 	imx27-pdk.dtb \
 	imx27-phytec-phycore-rdk.dtb \
@@ -347,6 +407,9 @@ dtb-$(CONFIG_ARCH_MXC) += \
 	vf610-colibri-eval-v3.dtb \
 	vf610-cosmic.dtb \
 	vf610-twr.dtb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
 	imx23-olinuxino.dtb \
@@ -358,8 +421,11 @@ dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
 	imx28-cfa10037.dtb \
 	imx28-cfa10049.dtb \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx28-evk.dtb \
 =======
+=======
+>>>>>>> v3.18
 	imx28-cfa10055.dtb \
 	imx28-cfa10056.dtb \
 	imx28-cfa10057.dtb \
@@ -369,11 +435,15 @@ dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
 	imx28-eukrea-mbmx287lc.dtb \
 	imx28-evk.dtb \
 	imx28-m28cu3.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	imx28-m28evk.dtb \
 	imx28-sps1.dtb \
 	imx28-tx28.dtb
 dtb-$(CONFIG_ARCH_NOMADIK) += ste-nomadik-s8815.dtb
+<<<<<<< HEAD
 <<<<<<< HEAD
 dtb-$(CONFIG_ARCH_OMAP2PLUS) += omap2420-h4.dtb \
 	omap3430-sdp.dtb \
@@ -404,6 +474,8 @@ dtb-$(CONFIG_ARCH_SHMOBILE) += emev2-kzm9d.dtb \
 	r8a7778-bockw.dtb \
 	r8a7779-marzen-reference.dtb \
 =======
+=======
+>>>>>>> v3.18
 dtb-$(CONFIG_ARCH_NSPIRE) += nspire-cx.dtb \
 	nspire-tp.dtb \
 	nspire-clp.dtb
@@ -511,15 +583,21 @@ dtb-$(CONFIG_ARCH_SHMOBILE_LEGACY) += r7s72100-genmai.dtb \
 	r8a7778-bockw-reference.dtb \
 	r8a7779-marzen.dtb \
 	r8a7791-koelsch.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r8a7790-lager.dtb \
 	sh73a0-kzm9g.dtb \
 	sh73a0-kzm9g-reference.dtb \
 	r8a73a4-ape6evm.dtb \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sh7372-mackerel.dtb
 dtb-$(CONFIG_ARCH_SOCFPGA) += socfpga_cyclone5.dtb \
 =======
+=======
+>>>>>>> v3.18
 	r8a73a4-ape6evm-reference.dtb \
 	sh7372-mackerel.dtb
 dtb-$(CONFIG_ARCH_SHMOBILE_MULTI) += emev2-kzm9d.dtb \
@@ -534,6 +612,9 @@ dtb-$(CONFIG_ARCH_SOCFPGA) += socfpga_arria5_socdk.dtb \
 	socfpga_cyclone5_socdk.dtb \
 	socfpga_cyclone5_sockit.dtb \
 	socfpga_cyclone5_socrates.dtb \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	socfpga_vt.dtb
 dtb-$(CONFIG_ARCH_SPEAR13XX) += spear1310-evb.dtb \
@@ -544,12 +625,15 @@ dtb-$(CONFIG_ARCH_SPEAR3XX)+= spear300-evb.dtb \
 	spear320-hmi.dtb
 dtb-$(CONFIG_ARCH_SPEAR6XX)+= spear600-evb.dtb
 <<<<<<< HEAD
+<<<<<<< HEAD
 dtb-$(CONFIG_ARCH_SUNXI) += \
 	sun4i-a10-cubieboard.dtb \
 	sun4i-a10-mini-xplus.dtb \
 	sun4i-a10-hackberry.dtb \
 	sun5i-a13-olinuxino.dtb
 =======
+=======
+>>>>>>> v3.18
 dtb-$(CONFIG_ARCH_STI)+= stih407-b2120.dtb \
 	stih415-b2000.dtb \
 	stih415-b2020.dtb \
@@ -586,6 +670,9 @@ dtb-$(CONFIG_MACH_SUN7I) += \
 	sun7i-a20-pcduino3.dtb
 dtb-$(CONFIG_MACH_SUN8I) += \
 	sun8i-a23-ippo-q8h-v5.dtb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dtb-$(CONFIG_ARCH_TEGRA) += tegra20-harmony.dtb \
 	tegra20-iris-512.dtb \
@@ -598,12 +685,15 @@ dtb-$(CONFIG_ARCH_TEGRA) += tegra20-harmony.dtb \
 	tegra20-ventana.dtb \
 	tegra20-whistler.dtb \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra30-beaver.dtb \
 	tegra30-cardhu-a02.dtb \
 	tegra30-cardhu-a04.dtb \
 	tegra114-dalmore.dtb \
 	tegra114-pluto.dtb
 =======
+=======
+>>>>>>> v3.18
 	tegra30-apalis-eval.dtb \
 	tegra30-beaver.dtb \
 	tegra30-cardhu-a02.dtb \
@@ -623,6 +713,9 @@ dtb-$(CONFIG_ARCH_U8500) += ste-snowball.dtb \
 	ste-hrefv60plus-tvk.dtb \
 	ste-ccu8540.dtb \
 	ste-ccu9540.dtb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dtb-$(CONFIG_ARCH_VERSATILE) += versatile-ab.dtb \
 	versatile-pb.dtb
@@ -635,6 +728,7 @@ dtb-$(CONFIG_ARCH_VT8500) += vt8500-bv07.dtb \
 	wm8505-ref.dtb \
 	wm8650-mid.dtb \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wm8850-w70v2.dtb
 dtb-$(CONFIG_ARCH_ZYNQ) += zynq-zc702.dtb
 
@@ -645,6 +739,8 @@ targets += $(DTB_LIST)
 #used for cleaning - not building
 subdir- := qcom
 =======
+=======
+>>>>>>> v3.18
 	wm8750-apc8750.dtb \
 	wm8850-w70v2.dtb
 dtb-$(CONFIG_ARCH_ZYNQ) += \
@@ -681,21 +777,30 @@ dtb-$(CONFIG_ARCH_MEDIATEK) += mt6589-aquaris5.dtb
 
 targets += dtbs dtbs_install
 targets += $(dtb-y)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 
 # *.dtb used to be generated in the directory above. Clean out the
 # old build results so people don't accidentally use them.
 <<<<<<< HEAD
+<<<<<<< HEAD
 dtbs: $(addprefix $(obj)/, $(DTB_LIST))
 	$(Q)rm -f $(obj)/../*.dtb
 
 clean-files := *.dtb
 =======
+=======
+>>>>>>> v3.18
 dtbs: $(addprefix $(obj)/, $(dtb-y))
 	$(Q)rm -f $(obj)/../*.dtb
 
 clean-files := *.dtb
 
 dtbs_install: $(addsuffix _dtbinst_, $(dtb-y))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -14,6 +14,10 @@
 #include <linux/crash_dump.h>
 #include <linux/bootmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -74,6 +78,7 @@ void __init setup_kdump_trampoline(void)
 #endif /* CONFIG_NONSTATIC_KERNEL */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init parse_savemaxmem(char *p)
 {
 	if (p)
@@ -84,6 +89,8 @@ static int __init parse_savemaxmem(char *p)
 __setup("savemaxmem=", parse_savemaxmem);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static size_t copy_oldmem_vaddr(void *vaddr, char *buf, size_t csize,
@@ -144,7 +151,11 @@ void crash_free_reserved_phys_range(unsigned long begin, unsigned long end)
 {
 	unsigned long addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *basep, *sizep;
+=======
+	const __be32 *basep, *sizep;
+>>>>>>> v3.18
 =======
 	const __be32 *basep, *sizep;
 >>>>>>> v3.18
@@ -155,8 +166,13 @@ void crash_free_reserved_phys_range(unsigned long begin, unsigned long end)
 
 	if (basep && sizep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtas_start = *basep;
 		rtas_end = *basep + *sizep;
+=======
+		rtas_start = be32_to_cpup(basep);
+		rtas_end = rtas_start + be32_to_cpup(sizep);
+>>>>>>> v3.18
 =======
 		rtas_start = be32_to_cpup(basep);
 		rtas_end = rtas_start + be32_to_cpup(sizep);

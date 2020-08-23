@@ -29,8 +29,13 @@ use IO::Handle;
 		"af9015", "ngene", "az6027", "lme2510_lg", "lme2510c_s7395",
 		"lme2510c_s7395_old", "drxk", "drxk_terratec_h5",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"drxk_hauppauge_hvr930c", "tda10071", "it9135", "it9137",
 		"drxk_pctv", "drxk_terratec_htc_stick", "sms1xxx_hcw");
+=======
+		"drxk_hauppauge_hvr930c", "tda10071", "it9135", "drxk_pctv",
+		"drxk_terratec_htc_stick", "sms1xxx_hcw", "si2165");
+>>>>>>> v3.18
 =======
 		"drxk_hauppauge_hvr930c", "tda10071", "it9135", "drxk_pctv",
 		"drxk_terratec_htc_stick", "sms1xxx_hcw", "si2165");
@@ -714,6 +719,7 @@ sub drxk_terratec_htc_stick {
 
 sub it9135 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	my $sourcefile = "dvb-usb-it9135.zip";
 	my $url = "http://www.ite.com.tw/uploads/firmware/v3.6.0.0/$sourcefile";
 	my $hash = "1e55f6c8833f1d0ae067c2bb2953e6a9";
@@ -750,6 +756,8 @@ sub it9137 {
 
     "$fwfile"
 =======
+=======
+>>>>>>> v3.18
 	my $url = "http://www.ite.com.tw/uploads/firmware/v3.25.0.0/";
 	my $file1 = "dvb-usb-it9135-01.zip";
 	my $fwfile1 = "dvb-usb-it9135-01.fw";
@@ -769,6 +777,9 @@ sub it9137 {
 	verify("$fwfile2", $hash2);
 
 	"$file1 $file2"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -829,7 +840,10 @@ sub sms1xxx_hcw {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 sub si2165 {
     my $sourcefile = "model_111xxx_122xxx_driver_6_0_119_31191_WHQL.zip";
     my $url = "http://www.hauppauge.de/files/drivers/";
@@ -861,6 +875,9 @@ sub si2165 {
     "$fwfile";
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # ---------------------------------------------------------------
 # Utilities

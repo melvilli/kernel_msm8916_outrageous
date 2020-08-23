@@ -74,6 +74,10 @@ struct btsdio_data {
 #define REG_EN_INTRD 0x14	/* Interrupt Enable */
 #define REG_MD_STAT  0x20	/* Bluetooth Mode Status */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define REG_MD_SET   0x20	/* Bluetooth Mode Set */
+>>>>>>> v3.18
 =======
 #define REG_MD_SET   0x20	/* Bluetooth Mode Set */
 >>>>>>> v3.18
@@ -162,10 +166,16 @@ static int btsdio_rx_packet(struct btsdio_data *data)
 	data->hdev->stat.byte_rx += len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = (void *) data->hdev;
 	bt_cb(skb)->pkt_type = hdr[3];
 
 	err = hci_recv_frame(skb);
+=======
+	bt_cb(skb)->pkt_type = hdr[3];
+
+	err = hci_recv_frame(data->hdev, skb);
+>>>>>>> v3.18
 =======
 	bt_cb(skb)->pkt_type = hdr[3];
 
@@ -224,7 +234,11 @@ static int btsdio_open(struct hci_dev *hdev)
 
 	if (data->func->class == SDIO_CLASS_BT_B)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sdio_writeb(data->func, 0x00, REG_MD_STAT, NULL);
+=======
+		sdio_writeb(data->func, 0x00, REG_MD_SET, NULL);
+>>>>>>> v3.18
 =======
 		sdio_writeb(data->func, 0x00, REG_MD_SET, NULL);
 >>>>>>> v3.18
@@ -270,9 +284,14 @@ static int btsdio_flush(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btsdio_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev *hdev = (struct hci_dev *) skb->dev;
+=======
+static int btsdio_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+>>>>>>> v3.18
 =======
 static int btsdio_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
@@ -355,6 +374,12 @@ static int btsdio_probe(struct sdio_func *func,
 	hdev->send     = btsdio_send_frame;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (func->vendor == 0x0104 && func->device == 0x00c5)
+		set_bit(HCI_QUIRK_RESET_ON_CLOSE, &hdev->quirks);
+
+>>>>>>> v3.18
 =======
 	if (func->vendor == 0x0104 && func->device == 0x00c5)
 		set_bit(HCI_QUIRK_RESET_ON_CLOSE, &hdev->quirks);

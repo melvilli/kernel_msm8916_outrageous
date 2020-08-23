@@ -21,6 +21,10 @@ CONFIG_PCI=y
 CONFIG_BINFMT_MISC=m
 CONFIG_PM=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NET=y
+>>>>>>> v3.18
 =======
 CONFIG_NET=y
 >>>>>>> v3.18
@@ -226,7 +230,10 @@ CONFIG_SGI_IOC4=m
 CONFIG_RAID_ATTRS=m
 CONFIG_SCSI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=m
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y
@@ -309,7 +316,10 @@ CONFIG_USB_KBD=m
 CONFIG_USB_MOUSE=m
 CONFIG_USB=m
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_MON=m

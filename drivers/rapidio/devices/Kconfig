@@ -4,7 +4,11 @@
 
 config RAPIDIO_TSI721
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "IDT Tsi721 PCI Express SRIO Controller support"
+=======
+	tristate "IDT Tsi721 PCI Express SRIO Controller support"
+>>>>>>> v3.18
 =======
 	tristate "IDT Tsi721 PCI Express SRIO Controller support"
 >>>>>>> v3.18

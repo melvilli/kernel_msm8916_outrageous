@@ -123,7 +123,11 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 >>>>>>> v3.18
@@ -492,7 +496,11 @@ struct i2400m_tlv_detailed_device_info {
 	struct i2400m_tlv_hdr hdr;
 	__u8 reserved1[400];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 mac_address[6];
+=======
+	__u8 mac_address[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	__u8 mac_address[ETH_ALEN];
 >>>>>>> v3.18

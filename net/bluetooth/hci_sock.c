@@ -36,7 +36,10 @@ static atomic_t monitor_promisc = ATOMIC_INIT(0);
 /* ----- HCI socket interface ----- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Socket info */
 #define hci_pi(sk) ((struct hci_pinfo *) sk)
 
@@ -48,6 +51,9 @@ struct hci_pinfo {
 	unsigned short    channel;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int hci_test_bit(int nr, void *addr)
 {
@@ -56,8 +62,11 @@ static inline int hci_test_bit(int nr, void *addr)
 
 /* Security filter */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct hci_sec_filter hci_sec_filter = {
 =======
+=======
+>>>>>>> v3.18
 #define HCI_SFLT_MAX_OGF  5
 
 struct hci_sec_filter {
@@ -67,6 +76,9 @@ struct hci_sec_filter {
 };
 
 static const struct hci_sec_filter hci_sec_filter = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Packet types */
 	0x10,
@@ -93,7 +105,10 @@ static struct bt_sock_list hci_sk_list = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool is_filtered_packet(struct sock *sk, struct sk_buff *skb)
 {
 	struct hci_filter *flt;
@@ -134,6 +149,9 @@ static bool is_filtered_packet(struct sock *sk, struct sk_buff *skb)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Send frame to RAW socket */
 void hci_send_to_sock(struct hci_dev *hdev, struct sk_buff *skb)
@@ -142,7 +160,11 @@ void hci_send_to_sock(struct hci_dev *hdev, struct sk_buff *skb)
 	struct sk_buff *skb_copy = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hdev %pK len %d", hdev, skb->len);
+=======
+	BT_DBG("hdev %p len %d", hdev, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("hdev %p len %d", hdev, skb->len);
 >>>>>>> v3.18
@@ -151,7 +173,10 @@ void hci_send_to_sock(struct hci_dev *hdev, struct sk_buff *skb)
 
 	sk_for_each(sk, &hci_sk_list.head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct hci_filter *flt;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		struct sk_buff *nskb;
@@ -163,6 +188,7 @@ void hci_send_to_sock(struct hci_dev *hdev, struct sk_buff *skb)
 		if (skb->sk == sk)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (hci_pi(sk)->channel != HCI_CHANNEL_RAW)
 			continue;
@@ -190,6 +216,8 @@ void hci_send_to_sock(struct hci_dev *hdev, struct sk_buff *skb)
 			      get_unaligned((__le16 *)(skb->data + 4)))))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 		if (hci_pi(sk)->channel == HCI_CHANNEL_RAW) {
 			if (is_filtered_packet(sk, skb))
 				continue;
@@ -203,13 +231,20 @@ void hci_send_to_sock(struct hci_dev *hdev, struct sk_buff *skb)
 		} else {
 			/* Don't send frame to other channel types */
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		if (!skb_copy) {
 			/* Create a private copy with headroom */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_copy = __pskb_copy(skb, 1, GFP_ATOMIC);
+=======
+			skb_copy = __pskb_copy_fclone(skb, 1, GFP_ATOMIC, true);
+>>>>>>> v3.18
 =======
 			skb_copy = __pskb_copy_fclone(skb, 1, GFP_ATOMIC, true);
 >>>>>>> v3.18
@@ -277,6 +312,7 @@ void hci_send_to_monitor(struct hci_dev *hdev, struct sk_buff *skb)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hdev %pK len %d", hdev, skb->len);
 
 	switch (bt_cb(skb)->pkt_type) {
@@ -298,6 +334,8 @@ void hci_send_to_monitor(struct hci_dev *hdev, struct sk_buff *skb)
 		else
 			opcode = __constant_cpu_to_le16(HCI_MON_SCO_TX_PKT);
 =======
+=======
+>>>>>>> v3.18
 	BT_DBG("hdev %p len %d", hdev, skb->len);
 
 	switch (bt_cb(skb)->pkt_type) {
@@ -318,6 +356,9 @@ void hci_send_to_monitor(struct hci_dev *hdev, struct sk_buff *skb)
 			opcode = cpu_to_le16(HCI_MON_SCO_RX_PKT);
 		else
 			opcode = cpu_to_le16(HCI_MON_SCO_TX_PKT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -340,8 +381,13 @@ void hci_send_to_monitor(struct hci_dev *hdev, struct sk_buff *skb)
 
 			/* Create a private copy with headroom */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_copy = __pskb_copy(skb, HCI_MON_HDR_SIZE,
 					       GFP_ATOMIC);
+=======
+			skb_copy = __pskb_copy_fclone(skb, HCI_MON_HDR_SIZE,
+						      GFP_ATOMIC, true);
+>>>>>>> v3.18
 =======
 			skb_copy = __pskb_copy_fclone(skb, HCI_MON_HDR_SIZE,
 						      GFP_ATOMIC, true);
@@ -417,7 +463,11 @@ static struct sk_buff *create_monitor_event(struct hci_dev *hdev, int event)
 		memcpy(ni->name, hdev->name, 8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		opcode = __constant_cpu_to_le16(HCI_MON_NEW_INDEX);
+=======
+		opcode = cpu_to_le16(HCI_MON_NEW_INDEX);
+>>>>>>> v3.18
 =======
 		opcode = cpu_to_le16(HCI_MON_NEW_INDEX);
 >>>>>>> v3.18
@@ -429,7 +479,11 @@ static struct sk_buff *create_monitor_event(struct hci_dev *hdev, int event)
 			return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		opcode = __constant_cpu_to_le16(HCI_MON_DEL_INDEX);
+=======
+		opcode = cpu_to_le16(HCI_MON_DEL_INDEX);
+>>>>>>> v3.18
 =======
 		opcode = cpu_to_le16(HCI_MON_DEL_INDEX);
 >>>>>>> v3.18
@@ -493,7 +547,10 @@ static void hci_si_event(struct hci_dev *hdev, int type, int dlen, void *data)
 
 	bt_cb(skb)->pkt_type = HCI_EVENT_PKT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = (void *) hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hci_send_to_sock(hdev, skb);
@@ -549,7 +606,11 @@ static int hci_sock_release(struct socket *sock)
 	struct hci_dev *hdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p sk %p", sock, sk);
 >>>>>>> v3.18
@@ -566,13 +627,19 @@ static int hci_sock_release(struct socket *sock)
 
 	if (hdev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (hci_pi(sk)->channel == HCI_CHANNEL_USER) {
 			mgmt_index_added(hdev);
 			clear_bit(HCI_USER_CHANNEL, &hdev->dev_flags);
 			hci_dev_close(hdev->id);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		atomic_dec(&hdev->promisc);
 		hci_dev_put(hdev);
@@ -598,7 +665,11 @@ static int hci_sock_blacklist_add(struct hci_dev *hdev, void __user *arg)
 	hci_dev_lock(hdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = hci_blacklist_add(hdev, &bdaddr, 0);
+=======
+	err = hci_bdaddr_list_add(&hdev->blacklist, &bdaddr, BDADDR_BREDR);
+>>>>>>> v3.18
 =======
 	err = hci_bdaddr_list_add(&hdev->blacklist, &bdaddr, BDADDR_BREDR);
 >>>>>>> v3.18
@@ -619,7 +690,11 @@ static int hci_sock_blacklist_del(struct hci_dev *hdev, void __user *arg)
 	hci_dev_lock(hdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = hci_blacklist_del(hdev, &bdaddr, 0);
+=======
+	err = hci_bdaddr_list_del(&hdev->blacklist, &bdaddr, BDADDR_BREDR);
+>>>>>>> v3.18
 =======
 	err = hci_bdaddr_list_del(&hdev->blacklist, &bdaddr, BDADDR_BREDR);
 >>>>>>> v3.18
@@ -639,7 +714,10 @@ static int hci_sock_bound_ioctl(struct sock *sk, unsigned int cmd,
 		return -EBADFD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(HCI_USER_CHANNEL, &hdev->dev_flags))
 		return -EBUSY;
 
@@ -649,11 +727,15 @@ static int hci_sock_bound_ioctl(struct sock *sk, unsigned int cmd,
 	if (hdev->dev_type != HCI_BREDR)
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (cmd) {
 	case HCISETRAW:
 		if (!capable(CAP_NET_ADMIN))
 			return -EPERM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (test_bit(HCI_QUIRK_RAW_DEVICE, &hdev->quirks))
@@ -665,6 +747,9 @@ static int hci_sock_bound_ioctl(struct sock *sk, unsigned int cmd,
 			clear_bit(HCI_RAW, &hdev->flags);
 
 		return 0;
+=======
+		return -EOPNOTSUPP;
+>>>>>>> v3.18
 =======
 		return -EOPNOTSUPP;
 >>>>>>> v3.18
@@ -685,6 +770,7 @@ static int hci_sock_bound_ioctl(struct sock *sk, unsigned int cmd,
 			return -EPERM;
 		return hci_sock_blacklist_del(hdev, (void __user *) arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	default:
 		if (hdev->ioctl)
@@ -696,14 +782,24 @@ static int hci_sock_bound_ioctl(struct sock *sk, unsigned int cmd,
 
 	return -ENOIOCTLCMD;
 >>>>>>> v3.18
+=======
+	}
+
+	return -ENOIOCTLCMD;
+>>>>>>> v3.18
 }
 
 static int hci_sock_ioctl(struct socket *sock, unsigned int cmd,
 			  unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sock *sk = sock->sk;
 	void __user *argp = (void __user *) arg;
+=======
+	void __user *argp = (void __user *) arg;
+	struct sock *sk = sock->sk;
+>>>>>>> v3.18
 =======
 	void __user *argp = (void __user *) arg;
 	struct sock *sk = sock->sk;
@@ -713,7 +809,10 @@ static int hci_sock_ioctl(struct socket *sock, unsigned int cmd,
 	BT_DBG("cmd %x arg %lx", cmd, arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	lock_sock(sk);
 
 	if (hci_pi(sk)->channel != HCI_CHANNEL_RAW) {
@@ -723,6 +822,9 @@ static int hci_sock_ioctl(struct socket *sock, unsigned int cmd,
 
 	release_sock(sk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (cmd) {
 	case HCIGETDEVLIST:
@@ -769,6 +871,7 @@ static int hci_sock_ioctl(struct socket *sock, unsigned int cmd,
 	case HCIINQUIRY:
 		return hci_inquiry(argp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	default:
 		lock_sock(sk);
@@ -777,6 +880,8 @@ static int hci_sock_ioctl(struct socket *sock, unsigned int cmd,
 		return err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	lock_sock(sk);
@@ -786,6 +891,9 @@ static int hci_sock_ioctl(struct socket *sock, unsigned int cmd,
 done:
 	release_sock(sk);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -798,7 +906,11 @@ static int hci_sock_bind(struct socket *sock, struct sockaddr *addr,
 	int len, err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p sk %p", sock, sk);
 >>>>>>> v3.18
@@ -841,7 +953,10 @@ static int hci_sock_bind(struct socket *sock, struct sockaddr *addr,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case HCI_CHANNEL_USER:
 		if (hci_pi(sk)->hdev) {
 			err = -EALREADY;
@@ -894,6 +1009,9 @@ static int hci_sock_bind(struct socket *sock, struct sockaddr *addr,
 		hci_pi(sk)->hdev = hdev;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case HCI_CHANNEL_CONTROL:
 		if (haddr.hci_dev != HCI_DEV_NONE) {
@@ -944,6 +1062,7 @@ static int hci_sock_getname(struct socket *sock, struct sockaddr *addr,
 	struct sockaddr_hci *haddr = (struct sockaddr_hci *) addr;
 	struct sock *sk = sock->sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hci_dev *hdev = hci_pi(sk)->hdev;
 
 	BT_DBG("sock %pK sk %pK", sock, sk);
@@ -961,6 +1080,8 @@ static int hci_sock_getname(struct socket *sock, struct sockaddr *addr,
 	release_sock(sk);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct hci_dev *hdev;
 	int err = 0;
 
@@ -985,6 +1106,9 @@ static int hci_sock_getname(struct socket *sock, struct sockaddr *addr,
 done:
 	release_sock(sk);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1034,7 +1158,11 @@ static int hci_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 	int copied, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1063,6 +1191,10 @@ static int hci_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 		hci_sock_cmsg(sk, msg, skb);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case HCI_CHANNEL_USER:
+>>>>>>> v3.18
 =======
 	case HCI_CHANNEL_USER:
 >>>>>>> v3.18
@@ -1086,7 +1218,11 @@ static int hci_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1105,6 +1241,10 @@ static int hci_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	switch (hci_pi(sk)->channel) {
 	case HCI_CHANNEL_RAW:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case HCI_CHANNEL_USER:
+>>>>>>> v3.18
 =======
 	case HCI_CHANNEL_USER:
 >>>>>>> v3.18
@@ -1143,10 +1283,13 @@ static int hci_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	bt_cb(skb)->pkt_type = *((unsigned char *) skb->data);
 	skb_pull(skb, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = (void *) hdev;
 
 	if (bt_cb(skb)->pkt_type == HCI_COMMAND_PKT) {
 =======
+=======
+>>>>>>> v3.18
 
 	if (hci_pi(sk)->channel == HCI_CHANNEL_USER) {
 		/* No permission check is needed for user channel
@@ -1164,6 +1307,9 @@ static int hci_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 		skb_queue_tail(&hdev->raw_q, skb);
 		queue_work(hdev->workqueue, &hdev->tx_work);
 	} else if (bt_cb(skb)->pkt_type == HCI_COMMAND_PKT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u16 opcode = get_unaligned_le16(skb->data);
 		u16 ogf = hci_opcode_ogf(opcode);
@@ -1178,7 +1324,11 @@ static int hci_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(HCI_RAW, &hdev->flags) || (ogf == 0x3f)) {
+=======
+		if (ogf == 0x3f) {
+>>>>>>> v3.18
 =======
 		if (ogf == 0x3f) {
 >>>>>>> v3.18
@@ -1222,7 +1372,11 @@ static int hci_sock_setsockopt(struct socket *sock, int level, int optname,
 	int err = 0, opt = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK, opt %d", sk, optname);
+=======
+	BT_DBG("sk %p, opt %d", sk, optname);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p, opt %d", sk, optname);
 >>>>>>> v3.18
@@ -1231,7 +1385,11 @@ static int hci_sock_setsockopt(struct socket *sock, int level, int optname,
 
 	if (hci_pi(sk)->channel != HCI_CHANNEL_RAW) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+		err = -EBADFD;
+>>>>>>> v3.18
 =======
 		err = -EBADFD;
 >>>>>>> v3.18
@@ -1313,7 +1471,11 @@ static int hci_sock_getsockopt(struct socket *sock, int level, int optname,
 	int len, opt, err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK, opt %d", sk, optname);
+=======
+	BT_DBG("sk %p, opt %d", sk, optname);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p, opt %d", sk, optname);
 >>>>>>> v3.18
@@ -1325,7 +1487,11 @@ static int hci_sock_getsockopt(struct socket *sock, int level, int optname,
 
 	if (hci_pi(sk)->channel != HCI_CHANNEL_RAW) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+		err = -EBADFD;
+>>>>>>> v3.18
 =======
 		err = -EBADFD;
 >>>>>>> v3.18
@@ -1411,7 +1577,11 @@ static int hci_sock_create(struct net *net, struct socket *sock, int protocol,
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK", sock);
+=======
+	BT_DBG("sock %p", sock);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p", sock);
 >>>>>>> v3.18

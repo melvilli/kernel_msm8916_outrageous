@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Florian Vaussard, EPFL Mobots group
+=======
+ * Copyright (C) 2014 Florian Vaussard, EPFL Mobots group
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Florian Vaussard, EPFL Mobots group
 >>>>>>> v3.18
@@ -10,6 +14,7 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * The Gumstix Overo must be combined with an expansion board.
@@ -82,6 +87,8 @@
 	mode = <3>;
 	power = <50>;
 =======
+=======
+>>>>>>> v3.18
 #include "omap34xx.dtsi"
 #include "omap3-overo-base.dtsi"
 
@@ -111,5 +118,8 @@
 
 &mcbsp2 {
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -144,8 +144,13 @@ module_init(sha256_s390_init);
 module_exit(sha256_s390_fini);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha256");
 MODULE_ALIAS_CRYPTO("sha224");
+=======
+MODULE_ALIAS("sha256");
+MODULE_ALIAS("sha224");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha256");
 MODULE_ALIAS("sha224");

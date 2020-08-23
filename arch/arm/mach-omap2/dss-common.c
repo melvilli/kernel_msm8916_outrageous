@@ -26,6 +26,10 @@
 #include <linux/kernel.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 >>>>>>> v3.18
@@ -36,6 +40,7 @@
 #include "soc.h"
 #include "dss-common.h"
 #include "mux.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define HDMI_GPIO_CT_CP_HPD 60 /* HPD mode enable/disable */
@@ -254,6 +259,10 @@ void __init omap_4430sdp_display_init_of(void)
 
 	omap_display_init(&sdp4430_dss_data);
 }
+=======
+#include "display.h"
+
+>>>>>>> v3.18
 =======
 #include "display.h"
 

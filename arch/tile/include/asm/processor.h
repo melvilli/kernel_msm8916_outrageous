@@ -16,6 +16,11 @@
 #define _ASM_TILE_PROCESSOR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <arch/chip.h>
+
+>>>>>>> v3.18
 =======
 #include <arch/chip.h>
 
@@ -31,7 +36,10 @@
 #include <asm/percpu.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <arch/chip.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <arch/spr_def.h>
@@ -119,25 +127,36 @@ struct thread_struct {
 	/* User interrupt-control 0 state */
 	unsigned long intctrl_0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_PROC_STATUS_SPR()
 	/* Any other miscellaneous processor state bits */
 	unsigned long proc_status;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/* Is this task currently doing a backtrace? */
 	bool in_backtrace;
 	/* Any other miscellaneous processor state bits */
 	unsigned long proc_status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if !CHIP_HAS_FIXED_INTVEC_BASE()
 	/* Interrupt base for PL0 interrupts */
 	unsigned long interrupt_vector_base;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_TILE_RTF_HWM()
 	/* Tile cache retry fifo high-water mark */
 	unsigned long tile_rtf_hwm;
 #endif
+=======
+	/* Tile cache retry fifo high-water mark */
+	unsigned long tile_rtf_hwm;
+>>>>>>> v3.18
 =======
 	/* Tile cache retry fifo high-water mark */
 	unsigned long tile_rtf_hwm;
@@ -155,12 +174,15 @@ struct thread_struct {
 	struct async_tlb dma_async_tlb;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/* Was static network processor when we were switched out? */
 	int sn_proc_running;
 	/* Async SNI TLB fault information */
 	struct async_tlb sn_async_tlb;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -170,14 +192,20 @@ struct thread_struct {
 /*
  * Start with "sp" this many bytes below the top of the kernel stack.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This preserves the invariant that a called function may write to *sp.
  */
 #define STACK_TOP_DELTA 8
 =======
+=======
+>>>>>>> v3.18
  * This allows us to be cache-aware when handling the initial save
  * of the pt_regs value to the stack.
  */
 #define STACK_TOP_DELTA 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -195,7 +223,11 @@ struct thread_struct {
 
 #ifdef __tilegx__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TASK_SIZE_MAX		(MEM_LOW_END + 1)
+=======
+#define TASK_SIZE_MAX		(_AC(1, UL) << (MAX_VA_WIDTH - 1))
+>>>>>>> v3.18
 =======
 #define TASK_SIZE_MAX		(_AC(1, UL) << (MAX_VA_WIDTH - 1))
 >>>>>>> v3.18
@@ -213,15 +245,21 @@ struct thread_struct {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We provide a minimal "vdso" a la x86; just the sigreturn code for now. */
 #define VDSO_BASE		(TASK_SIZE - PAGE_SIZE)
 
 #define STACK_TOP		VDSO_BASE
 =======
+=======
+>>>>>>> v3.18
 #define VDSO_BASE	((unsigned long)current->active_mm->context.vdso_base)
 #define VDSO_SYM(x)	(VDSO_BASE + (unsigned long)(x))
 
 #define STACK_TOP		TASK_SIZE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* STACK_TOP_MAX is used temporarily in execve and should not check COMPAT. */
@@ -267,7 +305,11 @@ extern int do_work_pending(struct pt_regs *regs, u32 flags);
 /*
  * Return saved (kernel) PC of a blocked thread.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Only used in a printk() in kernel/sched.c, so don't work too hard.
+=======
+ * Only used in a printk() in kernel/sched/core.c, so don't work too hard.
+>>>>>>> v3.18
 =======
  * Only used in a printk() in kernel/sched/core.c, so don't work too hard.
 >>>>>>> v3.18
@@ -277,6 +319,7 @@ extern int do_work_pending(struct pt_regs *regs, u32 flags);
 unsigned long get_wchan(struct task_struct *p);
 
 /* Return initial ksp value for given task. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define task_ksp0(task) ((unsigned long)(task)->stack + THREAD_SIZE)
 
@@ -288,6 +331,8 @@ unsigned long get_wchan(struct task_struct *p);
   ((struct pt_regs *)((stack_pointer | (THREAD_SIZE - 1)) - \
                       (KSTK_PTREGS_GAP - 1)) - 1)
 =======
+=======
+>>>>>>> v3.18
 #define task_ksp0(task) \
 	((unsigned long)(task)->stack + THREAD_SIZE - STACK_TOP_DELTA)
 
@@ -297,6 +342,9 @@ unsigned long get_wchan(struct task_struct *p);
 #define current_pt_regs()                                   \
 	((struct pt_regs *)((stack_pointer | (THREAD_SIZE - 1)) - \
 			    STACK_TOP_DELTA - (KSTK_PTREGS_GAP - 1)) - 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define task_sp(task)	(task_pt_regs(task)->sp)
 #define task_pc(task)	(task_pt_regs(task)->pc)
@@ -305,7 +353,10 @@ unsigned long get_wchan(struct task_struct *p);
 #define KSTK_ESP(task)	task_sp(task)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Fine-grained unaligned JIT support */
 #define GET_UNALIGN_CTL(tsk, adr)	get_unalign_ctl((tsk), (adr))
 #define SET_UNALIGN_CTL(tsk, val)	set_unalign_ctl((tsk), (val))
@@ -313,6 +364,9 @@ unsigned long get_wchan(struct task_struct *p);
 extern int get_unalign_ctl(struct task_struct *tsk, unsigned long adr);
 extern int set_unalign_ctl(struct task_struct *tsk, unsigned int val);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Standard format for printing registers and other word-size data. */
 #ifdef __tilegx__
@@ -333,6 +387,11 @@ static inline void cpu_relax(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 
@@ -348,7 +407,10 @@ extern char chip_model[64];
 extern int node_controller[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Does the heap allocator return hash-for-home pages by default? */
@@ -361,11 +423,14 @@ extern int kstack_hash;
 #define uheap_hash hash_default
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define hash_default 0
 #define kstack_hash 0
 #define uheap_hash 0
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -416,7 +481,10 @@ extern int kdata_huge;
 /*
  * Provide symbolic constants for PLs.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note that assembly code assumes that USER_PL is zero.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -427,6 +495,7 @@ extern int kdata_huge;
 #define KERNEL_PL CONFIG_KERNEL_PL
 
 /* SYSTEM_SAVE_K_0 holds the current cpu number ORed with ksp0. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CPU_LOG_MASK_VALUE 12
 #define CPU_MASK_VALUE ((1 << CPU_LOG_MASK_VALUE) - 1)
@@ -444,6 +513,8 @@ extern int kdata_huge;
 	__ksp0 | __cpu; \
 })
 =======
+=======
+>>>>>>> v3.18
 #ifdef __tilegx__
 #define CPU_SHIFT 48
 #if CHIP_VA_WIDTH() > CPU_SHIFT
@@ -477,6 +548,9 @@ extern int kdata_huge;
 #if CONFIG_NR_CPUS > (MAX_CPU_ID + 1)
 # error Too many cpus!
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_TILE_PROCESSOR_H */

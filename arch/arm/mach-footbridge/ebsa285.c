@@ -5,6 +5,10 @@
  */
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -22,12 +26,18 @@
 /* LEDs */
 #if defined(CONFIG_NEW_LEDS) && defined(CONFIG_LEDS_CLASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define XBUS_AMBER_L	BIT(0)
 #define XBUS_GREEN_L	BIT(1)
 #define XBUS_RED_L	BIT(2)
 #define XBUS_TOGGLE	BIT(7)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ebsa285_led {
 	struct led_classdev     cdev;
@@ -49,6 +59,10 @@ static const struct {
 
 static unsigned char hw_led_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void __iomem *xbus;
+>>>>>>> v3.18
 =======
 static void __iomem *xbus;
 >>>>>>> v3.18
@@ -64,7 +78,11 @@ static void ebsa285_led_set(struct led_classdev *cdev,
 	else
 		hw_led_state &= ~led->mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*XBUS_LEDS = hw_led_state;
+=======
+	writeb(hw_led_state, xbus);
+>>>>>>> v3.18
 =======
 	writeb(hw_led_state, xbus);
 >>>>>>> v3.18
@@ -86,10 +104,13 @@ static int __init ebsa285_leds_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 3 LEDS all off */
 	hw_led_state = XBUS_LED_AMBER | XBUS_LED_GREEN | XBUS_LED_RED;
 	*XBUS_LEDS = hw_led_state;
 =======
+=======
+>>>>>>> v3.18
 	xbus = ioremap(XBUS_CS2, SZ_4K);
 	if (!xbus)
 		return -ENOMEM;
@@ -97,6 +118,9 @@ static int __init ebsa285_leds_init(void)
 	/* 3 LEDS all off */
 	hw_led_state = XBUS_AMBER_L | XBUS_GREEN_L | XBUS_RED_L;
 	writeb(hw_led_state, xbus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(ebsa285_leds); i++) {
@@ -135,6 +159,10 @@ MACHINE_START(EBSA285, "EBSA285")
 	.video_end	= 0x000bffff,
 	.map_io		= footbridge_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.init_early	= footbridge_sched_clock,
+>>>>>>> v3.18
 =======
 	.init_early	= footbridge_sched_clock,
 >>>>>>> v3.18

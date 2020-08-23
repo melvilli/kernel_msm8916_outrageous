@@ -190,7 +190,11 @@ const void *wimax_msg_data_len(struct sk_buff *msg, size_t *size)
 			      WIMAX_GNL_MSG_DATA);
 	if (nla == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Cannot find attribute WIMAX_GNL_MSG_DATA\n");
+=======
+		pr_err("Cannot find attribute WIMAX_GNL_MSG_DATA\n");
+>>>>>>> v3.18
 =======
 		pr_err("Cannot find attribute WIMAX_GNL_MSG_DATA\n");
 >>>>>>> v3.18
@@ -216,7 +220,11 @@ const void *wimax_msg_data(struct sk_buff *msg)
 			      WIMAX_GNL_MSG_DATA);
 	if (nla == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Cannot find attribute WIMAX_GNL_MSG_DATA\n");
+=======
+		pr_err("Cannot find attribute WIMAX_GNL_MSG_DATA\n");
+>>>>>>> v3.18
 =======
 		pr_err("Cannot find attribute WIMAX_GNL_MSG_DATA\n");
 >>>>>>> v3.18
@@ -241,7 +249,11 @@ ssize_t wimax_msg_len(struct sk_buff *msg)
 			      WIMAX_GNL_MSG_DATA);
 	if (nla == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Cannot find attribute WIMAX_GNL_MSG_DATA\n");
+=======
+		pr_err("Cannot find attribute WIMAX_GNL_MSG_DATA\n");
+>>>>>>> v3.18
 =======
 		pr_err("Cannot find attribute WIMAX_GNL_MSG_DATA\n");
 >>>>>>> v3.18
@@ -292,7 +304,11 @@ int wimax_msg_send(struct wimax_dev *wimax_dev, struct sk_buff *skb)
 	d_printf(1, dev, "CTX: wimax msg, %zu bytes\n", size);
 	d_dump(2, dev, msg, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	genlmsg_multicast(skb, 0, wimax_gnl_mcg.id, GFP_KERNEL);
+=======
+	genlmsg_multicast(&wimax_gnl_family, skb, 0, 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	genlmsg_multicast(&wimax_gnl_family, skb, 0, 0, GFP_KERNEL);
 >>>>>>> v3.18
@@ -338,6 +354,7 @@ int wimax_msg(struct wimax_dev *wimax_dev, const char *pipe_name,
 EXPORT_SYMBOL_GPL(wimax_msg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct nla_policy wimax_gnl_msg_policy[WIMAX_GNL_ATTR_MAX + 1] = {
 	[WIMAX_GNL_MSG_IFIDX] = {
@@ -351,6 +368,8 @@ static const struct nla_policy wimax_gnl_msg_policy[WIMAX_GNL_ATTR_MAX + 1] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Relays a message from user space to the driver
  *
@@ -360,7 +379,10 @@ static const struct nla_policy wimax_gnl_msg_policy[WIMAX_GNL_ATTR_MAX + 1] = {
  * This call will block while handling/relaying the message.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int wimax_gnl_doit_msg_from_user(struct sk_buff *skb, struct genl_info *info)
@@ -378,8 +400,12 @@ int wimax_gnl_doit_msg_from_user(struct sk_buff *skb, struct genl_info *info)
 	result = -ENODEV;
 	if (info->attrs[WIMAX_GNL_MSG_IFIDX] == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "WIMAX_GNL_MSG_FROM_USER: can't find IFIDX "
 		       "attribute\n");
+=======
+		pr_err("WIMAX_GNL_MSG_FROM_USER: can't find IFIDX attribute\n");
+>>>>>>> v3.18
 =======
 		pr_err("WIMAX_GNL_MSG_FROM_USER: can't find IFIDX attribute\n");
 >>>>>>> v3.18
@@ -445,6 +471,7 @@ error_no_wimax_dev:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Generic Netlink glue
@@ -458,5 +485,7 @@ struct genl_ops wimax_gnl_msg_from_user = {
 	.dumpit = NULL,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

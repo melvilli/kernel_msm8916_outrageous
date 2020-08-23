@@ -74,21 +74,28 @@
 #include <asm/uv/uv.h>
 #include <linux/mc146818rtc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/smpboot_hooks.h>
 #include <asm/i8259.h>
 
 #include <asm/realmode.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/smpboot_hooks.h>
 #include <asm/i8259.h>
 #include <asm/realmode.h>
 #include <asm/misc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* State of each CPU */
 DEFINE_PER_CPU(int, cpu_state) = { 0 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG_CPU
 /*
@@ -111,6 +118,8 @@ ssize_t arch_cpu_probe(const char *buf, size_t count) { return -1; }
 ssize_t arch_cpu_release(const char *buf, size_t count) { return -1; }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Number of siblings per CPU package */
@@ -141,10 +150,16 @@ atomic_t init_deasserted;
  * during CPU online.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit smp_callin(void)
 {
 	int cpuid, phys_id;
 	unsigned long timeout;
+=======
+static void smp_callin(void)
+{
+	int cpuid, phys_id;
+>>>>>>> v3.18
 =======
 static void smp_callin(void)
 {
@@ -161,8 +176,14 @@ static void smp_callin(void)
 	 */
 	cpuid = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (apic->wait_for_init_deassert && cpuid != 0)
 		apic->wait_for_init_deassert(&init_deasserted);
+=======
+	if (apic->wait_for_init_deassert && cpuid)
+		while (!atomic_read(&init_deasserted))
+			cpu_relax();
+>>>>>>> v3.18
 =======
 	if (apic->wait_for_init_deassert && cpuid)
 		while (!atomic_read(&init_deasserted))
@@ -173,6 +194,7 @@ static void smp_callin(void)
 	 * (This works even if the APIC is not enabled.)
 	 */
 	phys_id = read_apic_id();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpumask_test_cpu(cpuid, cpu_callin_mask)) {
 		panic("%s: phys CPU#%d, CPU#%d already present??\n", __func__,
@@ -207,6 +229,8 @@ static void smp_callin(void)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	/*
 	 * the boot CPU has finished the init stage and is spinning
@@ -215,10 +239,13 @@ static void smp_callin(void)
 	 * boards)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_debug("CALLIN, before setup_local_APIC()\n");
 	if (apic->smp_callin_clear_local_apic)
 		apic->smp_callin_clear_local_apic();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	setup_local_APIC();
@@ -266,7 +293,11 @@ static int enable_start_cpu0;
  * Activate a secondary processor.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 notrace static void __cpuinit start_secondary(void *unused)
+=======
+static void notrace start_secondary(void *unused)
+>>>>>>> v3.18
 =======
 static void notrace start_secondary(void *unused)
 >>>>>>> v3.18
@@ -340,7 +371,11 @@ void __init smp_store_boot_cpu_info(void)
  * a given CPU
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit smp_store_cpu_info(int id)
+=======
+void smp_store_cpu_info(int id)
+>>>>>>> v3.18
 =======
 void smp_store_cpu_info(int id)
 >>>>>>> v3.18
@@ -357,8 +392,11 @@ void smp_store_cpu_info(int id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __cpuinit
 =======
+=======
+>>>>>>> v3.18
 static bool
 topology_same_node(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 {
@@ -368,13 +406,20 @@ topology_same_node(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 }
 
 static bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 topology_sane(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o, const char *name)
 {
 	int cpu1 = c->cpu_index, cpu2 = o->cpu_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return !WARN_ONCE(cpu_to_node(cpu1) != cpu_to_node(cpu2),
+=======
+	return !WARN_ONCE(!topology_same_node(c, o),
+>>>>>>> v3.18
 =======
 	return !WARN_ONCE(!topology_same_node(c, o),
 >>>>>>> v3.18
@@ -390,7 +435,11 @@ do {									\
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __cpuinit match_smt(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
+=======
+static bool match_smt(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
+>>>>>>> v3.18
 =======
 static bool match_smt(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 >>>>>>> v3.18
@@ -412,7 +461,11 @@ static bool match_smt(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __cpuinit match_llc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
+=======
+static bool match_llc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
+>>>>>>> v3.18
 =======
 static bool match_llc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 >>>>>>> v3.18
@@ -427,6 +480,7 @@ static bool match_llc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __cpuinit match_mc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 {
 	if (c->phys_proc_id == o->phys_proc_id) {
@@ -440,6 +494,8 @@ static bool __cpuinit match_mc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 
 void __cpuinit set_cpu_sibling_map(int cpu)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Unlike the other levels, we do not enforce keeping a
  * multicore group inside a NUMA node.  If this happens, we will
@@ -479,6 +535,9 @@ static void primarily_use_numa_for_topology(void)
 }
 
 void set_cpu_sibling_map(int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	bool has_smt = smp_num_siblings > 1;
@@ -516,7 +575,11 @@ void set_cpu_sibling_map(int cpu)
 		o = &cpu_data(i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((i == cpu) || (has_mp && match_mc(c, o))) {
+=======
+		if ((i == cpu) || (has_mp && match_die(c, o))) {
+>>>>>>> v3.18
 =======
 		if ((i == cpu) || (has_mp && match_die(c, o))) {
 >>>>>>> v3.18
@@ -542,6 +605,11 @@ void set_cpu_sibling_map(int cpu)
 				c->booted_cores = cpu_data(i).booted_cores;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (match_die(c, o) && !topology_same_node(c, o))
+			primarily_use_numa_for_topology();
+>>>>>>> v3.18
 =======
 		if (match_die(c, o) && !topology_same_node(c, o))
 			primarily_use_numa_for_topology();
@@ -618,7 +686,11 @@ void __inquire_remote_apic(int apicid)
  * won't ... remember to clear down the APIC, etc later.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -656,7 +728,11 @@ wakeup_secondary_cpu_via_nmi(int apicid, unsigned long start_eip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -775,12 +851,15 @@ wakeup_secondary_cpu_via_init(int phys_apicid, unsigned long start_eip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* reduce the number of lines printed when booting a large cpu count system */
 static void __cpuinit announce_cpu(int cpu, int apicid)
 {
 	static int current_node = -1;
 	int node = early_cpu_to_node(cpu);
 =======
+=======
+>>>>>>> v3.18
 void smp_announce(void)
 {
 	int num_nodes = num_online_nodes();
@@ -804,11 +883,15 @@ static void announce_cpu(int cpu, int apicid)
 
 	if (cpu == 1)
 		printk(KERN_INFO "x86: Booting SMP configuration:\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (system_state == SYSTEM_BOOTING) {
 		if (node != current_node) {
 			if (current_node > (-1))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pr_cont(" OK\n");
 			current_node = node;
@@ -817,6 +900,8 @@ static void announce_cpu(int cpu, int apicid)
 		pr_cont(" #%d%s", cpu, cpu == (nr_cpu_ids - 1) ? " OK\n" : "");
 		return;
 =======
+=======
+>>>>>>> v3.18
 				pr_cont("\n");
 			current_node = node;
 
@@ -830,6 +915,9 @@ static void announce_cpu(int cpu, int apicid)
 
 		pr_cont("%*s#%d", width - num_digits(cpu), " ", cpu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else
 		pr_info("Booting Node %d Processor %d APIC 0x%x\n",
@@ -860,7 +948,11 @@ static int wakeup_cpu0_nmi(unsigned int cmd, struct pt_regs *regs)
  * real platform and request are available.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -871,12 +963,15 @@ wakeup_cpu_via_init_nmi(int cpu, unsigned long start_ip, int apicid,
 	int boot_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Wake up AP by INIT, INIT, STARTUP sequence.
 	 */
 	if (cpu)
 		return wakeup_secondary_cpu_via_init(apicid, start_ip);
 =======
+=======
+>>>>>>> v3.18
 	preempt_disable();
 
 	/*
@@ -886,6 +981,9 @@ wakeup_cpu_via_init_nmi(int cpu, unsigned long start_ip, int apicid,
 		boot_error = wakeup_secondary_cpu_via_init(apicid, start_ip);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -907,6 +1005,12 @@ wakeup_cpu_via_init_nmi(int cpu, unsigned long start_ip, int apicid,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	preempt_enable();
+
+>>>>>>> v3.18
 =======
 out:
 	preempt_enable();
@@ -922,7 +1026,11 @@ out:
  * ->wakeup_secondary_cpu.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
+=======
+static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -934,8 +1042,13 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 
 	unsigned long boot_error = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int timeout;
 	int cpu0_nmi_registered = 0;
+=======
+	int cpu0_nmi_registered = 0;
+	unsigned long timeout;
+>>>>>>> v3.18
 =======
 	int cpu0_nmi_registered = 0;
 	unsigned long timeout;
@@ -955,15 +1068,21 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 	clear_tsk_thread_flag(idle, TIF_FORK);
 	initial_gs = per_cpu_offset(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	per_cpu(kernel_stack, cpu) =
 		(unsigned long)task_stack_page(idle) -
 		KERNEL_STACK_OFFSET + THREAD_SIZE;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #endif
 	per_cpu(kernel_stack, cpu) =
 		(unsigned long)task_stack_page(idle) -
 		KERNEL_STACK_OFFSET + THREAD_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	early_gdt_descr.address = (unsigned long)get_cpu_gdt_table(cpu);
 	initial_code = (unsigned long)start_secondary;
@@ -995,7 +1114,10 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * AP might wait on cpu_callout_mask in cpu_init() with
 	 * cpu_initialized_mask set if previous attempt to online
 	 * it timed-out. Clear cpu_initialized_mask so that after
@@ -1005,6 +1127,9 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 	smp_mb();
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Wake up a CPU in difference cases:
 	 * - Use the method in the APIC driver if it's defined
@@ -1020,6 +1145,7 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 	if (!boot_error) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * allow APs to start initializing.
 		 */
 		pr_debug("Before Callout %d\n", cpu);
@@ -1034,6 +1160,8 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 				break;	/* It has booted */
 			udelay(100);
 =======
+=======
+>>>>>>> v3.18
 		 * Wait 10s total for a response from AP
 		 */
 		boot_error = -1;
@@ -1057,6 +1185,9 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 		 * Wait till AP completes initial initialization
 		 */
 		while (!cpumask_test_cpu(cpu, cpu_callin_mask)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * Allow other tasks to run while we wait for the
@@ -1064,6 +1195,7 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 			 * for the MTRR work(triggered by the AP coming online)
 			 * to be completed in the stop machine context.
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			schedule();
 		}
@@ -1101,6 +1233,11 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 			schedule();
 		}
 >>>>>>> v3.18
+=======
+			udelay(100);
+			schedule();
+		}
+>>>>>>> v3.18
 	}
 
 	/* mark "stuck" area as not stuck */
@@ -1123,7 +1260,11 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit native_cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
 >>>>>>> v3.18
@@ -1165,7 +1306,11 @@ int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
 	err = do_boot_cpu(apicid, cpu, tidle);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("do_boot_cpu failed %d\n", err);
+=======
+		pr_err("do_boot_cpu failed(%d) to wakeup CPU#%u\n", err, cpu);
+>>>>>>> v3.18
 =======
 		pr_err("do_boot_cpu failed(%d) to wakeup CPU#%u\n", err, cpu);
 >>>>>>> v3.18
@@ -1387,10 +1532,13 @@ void __init native_smp_prepare_cpus(unsigned int max_cpus)
 
 	bsp_end_local_APIC_setup();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (apic->setup_portio_remap)
 		apic->setup_portio_remap();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	smpboot_setup_io_apic();
@@ -1559,6 +1707,11 @@ static void __ref remove_cpu_from_maps(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEFINE_PER_CPU(struct completion, die_complete);
+
+>>>>>>> v3.18
 =======
 static DEFINE_PER_CPU(struct completion, die_complete);
 
@@ -1568,6 +1721,11 @@ void cpu_disable_common(void)
 	int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_completion(&per_cpu(die_complete, smp_processor_id()));
+
+>>>>>>> v3.18
 =======
 	init_completion(&per_cpu(die_complete, smp_processor_id()));
 
@@ -1583,6 +1741,7 @@ void cpu_disable_common(void)
 
 int native_cpu_disable(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clear_local_APIC();
 
@@ -1606,6 +1765,8 @@ void native_cpu_die(unsigned int cpu)
 	}
 	pr_err("CPU %u didn't die...\n", cpu);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = check_irq_vectors_for_cpu_disable();
@@ -1636,6 +1797,9 @@ void native_cpu_die(unsigned int cpu)
 	} else {
 		pr_err("CPU %u didn't die...\n", cpu);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1649,6 +1813,10 @@ void play_dead_common(void)
 	/* Ack it */
 	__this_cpu_write(cpu_state, CPU_DEAD);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	complete(&per_cpu(die_complete, smp_processor_id()));
+>>>>>>> v3.18
 =======
 	complete(&per_cpu(die_complete, smp_processor_id()));
 >>>>>>> v3.18
@@ -1682,7 +1850,11 @@ static inline void mwait_play_dead(void)
 	if (!this_cpu_has(X86_FEATURE_MWAIT))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!this_cpu_has(X86_FEATURE_CLFLSH))
+=======
+	if (!this_cpu_has(X86_FEATURE_CLFLUSH))
+>>>>>>> v3.18
 =======
 	if (!this_cpu_has(X86_FEATURE_CLFLUSH))
 >>>>>>> v3.18
@@ -1730,7 +1902,13 @@ static inline void mwait_play_dead(void)
 		 * case where we return around the loop.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clflush(mwait_ptr);
+=======
+		mb();
+		clflush(mwait_ptr);
+		mb();
+>>>>>>> v3.18
 =======
 		mb();
 		clflush(mwait_ptr);

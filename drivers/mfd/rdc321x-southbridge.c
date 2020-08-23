@@ -20,7 +20,10 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -43,7 +46,11 @@ static struct resource rdc321x_wdt_resource[] = {
 
 static struct rdc321x_gpio_pdata rdc321x_gpio_pdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.max_gpios	= RDC321X_MAX_GPIO,
+=======
+	.max_gpios	= RDC321X_NUM_GPIO,
+>>>>>>> v3.18
 =======
 	.max_gpios	= RDC321X_NUM_GPIO,
 >>>>>>> v3.18
@@ -64,7 +71,11 @@ static struct resource rdc321x_gpio_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell rdc321x_sb_cells[] = {
+=======
+static const struct mfd_cell rdc321x_sb_cells[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell rdc321x_sb_cells[] = {
 >>>>>>> v3.18
@@ -108,7 +119,11 @@ static void rdc321x_sb_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rdc321x_sb_table) = {
+=======
+static const struct pci_device_id rdc321x_sb_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rdc321x_sb_table[] = {
 >>>>>>> v3.18

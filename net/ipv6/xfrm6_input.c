@@ -4,8 +4,13 @@
  * Authors:
  *	Mitsuru KANDA @USAGI
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Kazunori MIYAZAWA @USAGI
  * 	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
+=======
+ *	Kazunori MIYAZAWA @USAGI
+ *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
+>>>>>>> v3.18
 =======
  *	Kazunori MIYAZAWA @USAGI
  *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
@@ -58,7 +63,10 @@ int xfrm6_rcv(struct sk_buff *skb)
 			     0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(xfrm6_rcv);
@@ -151,7 +159,10 @@ drop:
 	return -1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(xfrm6_input_addr);

@@ -185,6 +185,10 @@ struct nes_qp {
 	u8                    pau_pending;
 	u8                    pau_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u64                 nesuqp_addr;
+>>>>>>> v3.18
 =======
 	__u64                 nesuqp_addr;
 >>>>>>> v3.18

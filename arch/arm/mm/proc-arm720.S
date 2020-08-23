@@ -52,7 +52,11 @@
 ENTRY(cpu_arm720_dcache_clean_area)
 ENTRY(cpu_arm720_proc_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ ENTRY(cpu_arm720_proc_fin)
 		bic	r0, r0, #0x000e			@ ............wca.
 		mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ ENTRY(cpu_arm720_proc_fin)
  */
 ENTRY(cpu_arm720_do_idle)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -94,7 +106,11 @@ ENTRY(cpu_arm720_switch_mm)
 		mcr	p15, 0, r1, c8, c7, 0		@ flush TLB (v4)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -111,7 +127,11 @@ ENTRY(cpu_arm720_set_pte_ext)
 	armv3_set_pte_ext wc_disable=0
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -133,6 +153,7 @@ ENTRY(cpu_arm720_reset)
 		bic	ip, ip, #0x2100			@ ..v....s........
 		mcr	p15, 0, ip, c1, c0, 0		@ ctrl register
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, r0
 ENDPROC(cpu_arm720_reset)
 		.popsection
@@ -140,10 +161,15 @@ ENDPROC(cpu_arm720_reset)
 	__CPUINIT
 
 =======
+=======
+>>>>>>> v3.18
 		ret	r0
 ENDPROC(cpu_arm720_reset)
 		.popsection
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.type	__arm710_setup, #function
 __arm710_setup:
@@ -158,7 +184,11 @@ __arm710_setup:
 	ldr	r5, arm710_cr1_set
 	orr	r0, r0, r5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr				@ __ret (head.S)
+=======
+	ret	lr				@ __ret (head.S)
+>>>>>>> v3.18
 =======
 	ret	lr				@ __ret (head.S)
 >>>>>>> v3.18
@@ -190,7 +220,11 @@ __arm720_setup:
 	bic	r0, r0, r5
 	orr	r0, r0, r6
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr				@ __ret (head.S)
+=======
+	ret	lr				@ __ret (head.S)
+>>>>>>> v3.18
 =======
 	ret	lr				@ __ret (head.S)
 >>>>>>> v3.18

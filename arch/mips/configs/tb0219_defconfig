@@ -73,7 +73,10 @@ CONFIG_GPIO_TB0219=y
 # CONFIG_HID_SUPPORT is not set
 CONFIG_USB=m
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_MON=m

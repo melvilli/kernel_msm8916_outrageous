@@ -57,6 +57,10 @@ static u32 rtl8192_CalculateBitShift(u32 dwBitMask)
 {
 	u32 i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -72,6 +76,10 @@ u8 rtl8192_phy_CheckIsLegalRFPath(struct net_device *dev, u32 eRFPath)
 	u8 ret = 1;
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -121,6 +129,10 @@ static u32 rtl8192_phy_RFSerialRead(struct net_device *dev,
 	u32 NewOffset = 0;
 	struct bb_reg_definition *pPhyReg = &priv->PHYRegDef[eRFPath];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -274,6 +286,10 @@ u32 rtl8192_phy_QueryRFReg(struct net_device *dev, enum rf90_radio_path eRFPath,
 	u32 Original_Value, Readback_Value, BitShift;
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -299,9 +315,15 @@ static u32 phy_FwRFSerialRead(struct net_device *dev,
 			      enum rf90_radio_path eRFPath, u32 Offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32		retValue = 0;
 	u32		Data = 0;
 	u8		time = 0;
+=======
+	u32		Data = 0;
+	u8		time = 0;
+
+>>>>>>> v3.18
 =======
 	u32		Data = 0;
 	u8		time = 0;
@@ -324,9 +346,13 @@ static u32 phy_FwRFSerialRead(struct net_device *dev,
 			return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retValue = read_nic_dword(dev, RF_DATA);
 
 	return	retValue;
+=======
+	return read_nic_dword(dev, RF_DATA);
+>>>>>>> v3.18
 =======
 	return read_nic_dword(dev, RF_DATA);
 >>>>>>> v3.18
@@ -594,7 +620,11 @@ static bool rtl8192_BB_Config_ParaFile(struct net_device *dev)
 					 (enum hw90_block)eCheckItem,
 					 (enum rf90_radio_path)0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rtStatus != true) {
+=======
+		if (!rtStatus) {
+>>>>>>> v3.18
 =======
 		if (!rtStatus) {
 >>>>>>> v3.18
@@ -632,11 +662,16 @@ static bool rtl8192_BB_Config_ParaFile(struct net_device *dev)
 bool rtl8192_BBConfig(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool rtStatus = true;
 
 	rtl8192_InitBBRFRegDef(dev);
 	rtStatus = rtl8192_BB_Config_ParaFile(dev);
 	return rtStatus;
+=======
+	rtl8192_InitBBRFRegDef(dev);
+	return rtl8192_BB_Config_ParaFile(dev);
+>>>>>>> v3.18
 =======
 	rtl8192_InitBBRFRegDef(dev);
 	return rtl8192_BB_Config_ParaFile(dev);
@@ -736,6 +771,10 @@ bool rtl8192_phy_RFConfig(struct net_device *dev)
 	struct r8192_priv *priv = rtllib_priv(dev);
 	bool rtStatus = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -769,7 +808,10 @@ u8 rtl8192_phy_ConfigRFWithHeaderFile(struct net_device *dev,
 
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -830,7 +872,11 @@ u8 rtl8192_phy_ConfigRFWithHeaderFile(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1066,6 +1112,10 @@ u8 rtl8192_phy_SwChnl(struct net_device *dev, u8 channel)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1230,7 +1280,11 @@ void rtl8192_SetBWModeWorkItem(struct net_device *dev)
 	RT_TRACE(COMP_SWBW, "==>rtl8192_SetBWModeWorkItem()  Switch to %s "
 		 "bandwidth\n", priv->CurrentChannelBW == HT_CHANNEL_WIDTH_20 ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "20MHz" : "40MHz")
+=======
+		 "20MHz" : "40MHz");
+>>>>>>> v3.18
 =======
 		 "20MHz" : "40MHz");
 >>>>>>> v3.18
@@ -1480,7 +1534,11 @@ static bool SetRFPowerState8190(struct net_device *dev,
 	struct rtl8192_tx_ring  *ring = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->SetRFPowerStateInProgress == true)
+=======
+	if (priv->SetRFPowerStateInProgress)
+>>>>>>> v3.18
 =======
 	if (priv->SetRFPowerStateInProgress)
 >>>>>>> v3.18
@@ -1498,6 +1556,10 @@ static bool SetRFPowerState8190(struct net_device *dev,
 				bool rtstatus = true;
 				u32 InitilizeCount = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1506,10 +1568,16 @@ static bool SetRFPowerState8190(struct net_device *dev,
 					priv->RegRfOff = false;
 					rtstatus = NicIFEnableNIC(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				} while ((rtstatus != true) &&
 					 (InitilizeCount > 0));
 
 				if (rtstatus != true) {
+=======
+				} while (!rtstatus && (InitilizeCount > 0));
+
+				if (!rtstatus) {
+>>>>>>> v3.18
 =======
 				} while (!rtstatus && (InitilizeCount > 0));
 
@@ -1625,7 +1693,11 @@ static bool SetRFPowerState8190(struct net_device *dev,
 		default:
 			bResult = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(COMP_ERR, "SetRFPowerState8190(): unknow state"
+=======
+			RT_TRACE(COMP_ERR, "SetRFPowerState8190(): unknown state"
+>>>>>>> v3.18
 =======
 			RT_TRACE(COMP_ERR, "SetRFPowerState8190(): unknown state"
 >>>>>>> v3.18

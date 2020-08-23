@@ -13,7 +13,10 @@ Required properties:
  - clocks: from common clock binding: handle to usb clock.
  - clock-names: from common clock binding: Shall be "usbhost".
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  - port: if in the SoC there are EHCI phys, they should be listed here.
    One phy per port. Each port should have following entries:
 	- reg: port number on EHCI controller, e.g
@@ -21,6 +24,9 @@ Required properties:
 			      port 1 is HSIC phy0
 			      port 2 is HSIC phy1
 	- phys: from the *Generic PHY* bindings; specifying phy used by port.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Optional properties:
@@ -38,7 +44,10 @@ Example:
 		clocks = <&clock 285>;
 		clock-names = "usbhost";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -47,6 +56,9 @@ Example:
 		    phys = <&usb2phy 1>;
 		    status = "disabled";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -60,7 +72,10 @@ Required properties:
  - clocks: from common clock binding: handle to usb clock.
  - clock-names: from common clock binding: Shall be "usbhost".
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  - port: if in the SoC there are OHCI phys, they should be listed here.
    One phy per port. Each port should have following entries:
 	- reg: port number on OHCI controller, e.g
@@ -68,6 +83,9 @@ Required properties:
 			      port 1 is HSIC phy0
 			      port 2 is HSIC phy1
 	- phys: from the *Generic PHY* bindings, specifying phy used by port.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -79,7 +97,10 @@ Example:
 		clocks = <&clock 285>;
 		clock-names = "usbhost";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -123,5 +144,8 @@ Example:
 			interrupts = <0 72 0>;
 			usb-phy = <&usb2_phy &usb3_phy>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

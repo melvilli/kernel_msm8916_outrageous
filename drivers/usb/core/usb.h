@@ -3,7 +3,11 @@
 
 struct usb_hub_descriptor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dev_state;
+=======
+struct usb_dev_state;
+>>>>>>> v3.18
 =======
 struct usb_dev_state;
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ static inline unsigned usb_get_max_power(struct usb_device *udev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void usb_kick_khubd(struct usb_device *dev);
+=======
+extern void usb_kick_hub_wq(struct usb_device *dev);
+>>>>>>> v3.18
 =======
 extern void usb_kick_hub_wq(struct usb_device *dev);
 >>>>>>> v3.18
@@ -66,12 +74,17 @@ extern void usb_forced_unbind_intf(struct usb_interface *intf);
 extern void usb_unbind_and_rebind_marked_interfaces(struct usb_device *udev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int usb_hub_claim_port(struct usb_device *hdev, unsigned port,
 		struct dev_state *owner);
 extern int usb_hub_release_port(struct usb_device *hdev, unsigned port,
 		struct dev_state *owner);
 extern void usb_hub_release_all_ports(struct usb_device *hdev,
 		struct dev_state *owner);
+=======
+extern void usb_hub_release_all_ports(struct usb_device *hdev,
+		struct usb_dev_state *owner);
+>>>>>>> v3.18
 =======
 extern void usb_hub_release_all_ports(struct usb_device *hdev,
 		struct usb_dev_state *owner);
@@ -125,11 +138,14 @@ static inline int usb_autoresume_device(struct usb_device *udev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int usb_remote_wakeup(struct usb_device *udev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int usb_set_usb2_hardware_lpm(struct usb_device *udev, int enable)
@@ -139,11 +155,16 @@ static inline int usb_set_usb2_hardware_lpm(struct usb_device *udev, int enable)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_OTG
 extern void usb_hnp_polling_work(struct work_struct *work);
 #endif
 
 extern struct bus_type usb_bus_type;
+=======
+extern struct bus_type usb_bus_type;
+extern struct mutex usb_port_peer_mutex;
+>>>>>>> v3.18
 =======
 extern struct bus_type usb_bus_type;
 extern struct mutex usb_port_peer_mutex;
@@ -200,6 +221,7 @@ extern int usb_devio_init(void);
 extern void usb_devio_cleanup(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* internal notify stuff */
 extern void usb_notify_add_device(struct usb_device *udev);
 extern void usb_notify_remove_device(struct usb_device *udev);
@@ -211,6 +233,8 @@ extern enum usb_port_connect_type
 extern void usb_set_hub_port_connect_type(struct usb_device *hdev, int port1,
 	enum usb_port_connect_type type);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Firmware specific cookie identifying a port's location. '0' == no location
  * data available
@@ -222,6 +246,9 @@ extern void usb_notify_add_device(struct usb_device *udev);
 extern void usb_notify_remove_device(struct usb_device *udev);
 extern void usb_notify_add_bus(struct usb_bus *ubus);
 extern void usb_notify_remove_bus(struct usb_bus *ubus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void usb_hub_adjust_deviceremovable(struct usb_device *hdev,
 		struct usb_hub_descriptor *desc);

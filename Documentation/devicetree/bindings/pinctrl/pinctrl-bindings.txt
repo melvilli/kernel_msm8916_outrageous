@@ -128,6 +128,7 @@ nodes, is again defined entirely by the binding for the individual pin
 controller device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 == Using generic pinconfig options ==
 
 Generic pinconfig parameters can be used by defining a separate node containing
@@ -144,6 +145,8 @@ and parsed in the driver using the pinconf_generic_parse_dt_config function.
 Supported configuration parameters are:
 
 =======
+=======
+>>>>>>> v3.18
 == Generic pin multiplexing node content ==
 
 pin multiplexing nodes:
@@ -180,6 +183,9 @@ group			- the group to apply the properties to, if the driver
 			  supports configuration of whole groups rather than
 			  individual pins (either this or "pins" has to be
 			  specified)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bias-disable		- disable any pin bias
 bias-high-impedance	- high impedance mode ("third-state", "floating")
@@ -197,6 +203,10 @@ input-schmitt-enable	- enable schmitt-trigger mode
 input-schmitt-disable	- disable schmitt-trigger mode
 input-debounce		- debounce mode with debound time X
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+power-source		- select between different power supplies
+>>>>>>> v3.18
 =======
 power-source		- select between different power supplies
 >>>>>>> v3.18
@@ -207,12 +217,15 @@ output-high		- set the pin to output mode with high level
 slew-rate		- set the slew rate
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Arguments for parameters:
 
 - bias-pull-up, -down and -pin-default take as optional argument 0 to disable
   the pull, on hardware supporting it the pull strength in Ohm. bias-disable
   will also disable any active pull.
 =======
+=======
+>>>>>>> v3.18
 For example:
 
 state_0_node_a {
@@ -237,6 +250,9 @@ arguments are described below.
 
 - bias-pull-up, -down and -pin-default take as optional argument on hardware
   supporting it the pull strength in Ohm. bias-disable will disable the pull.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - drive-strength takes as argument the target strength in mA.
@@ -245,8 +261,11 @@ arguments are described below.
   or 0 to disable debouncing
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 All parameters not listed here, do not take an argument.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 More in-depth documentation on these parameters can be found in

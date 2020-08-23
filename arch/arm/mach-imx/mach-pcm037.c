@@ -24,7 +24,11 @@
 #include <linux/interrupt.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -50,6 +54,10 @@
 #include "common.h"
 #include "devices-imx31.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -66,7 +74,11 @@ static int __init pcm037_variant_setup(char *str)
 		pcm037_instance = PCM037_EET;
 	else if (strcmp("pcm970", str))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Unknown pcm037 baseboard variant %s\n", str);
+=======
+		pr_warn("Unknown pcm037 baseboard variant %s\n", str);
+>>>>>>> v3.18
 =======
 		pr_warn("Unknown pcm037 baseboard variant %s\n", str);
 >>>>>>> v3.18
@@ -384,8 +396,12 @@ static int pcm970_sdhc1_init(struct device *dev, irq_handler_t detect_irq,
 
 	ret = request_irq(gpio_to_irq(IOMUX_TO_GPIO(MX31_PIN_SCK6)), detect_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_TRIGGER_FALLING,
 				"sdhc-detect", data);
+=======
+			IRQF_TRIGGER_FALLING, "sdhc-detect", data);
+>>>>>>> v3.18
 =======
 			IRQF_TRIGGER_FALLING, "sdhc-detect", data);
 >>>>>>> v3.18
@@ -641,7 +657,11 @@ static void __init pcm037_init(void)
 	ret = gpio_request(IOMUX_TO_GPIO(MX31_PIN_GPIO3_1), "lan9217-irq");
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("could not get LAN irq gpio\n");
+=======
+		pr_warn("could not get LAN irq gpio\n");
+>>>>>>> v3.18
 =======
 		pr_warn("could not get LAN irq gpio\n");
 >>>>>>> v3.18
@@ -725,7 +745,10 @@ MACHINE_START(PCM037, "Phytec Phycore pcm037")
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= pcm037_timer_init,

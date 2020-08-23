@@ -23,6 +23,10 @@ extern const struct seq_operations cpuinfo_op;
 
 # define cpu_relax()		barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# define cpu_relax_lowlatency()	cpu_relax()
+>>>>>>> v3.18
 =======
 # define cpu_relax_lowlatency()	cpu_relax()
 >>>>>>> v3.18
@@ -127,7 +131,11 @@ struct thread_struct {
 
 /* Free all resources held by a thread. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern inline void release_thread(struct task_struct *dead_task)
+=======
+static inline void release_thread(struct task_struct *dead_task)
+>>>>>>> v3.18
 =======
 static inline void release_thread(struct task_struct *dead_task)
 >>>>>>> v3.18

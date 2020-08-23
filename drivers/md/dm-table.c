@@ -27,6 +27,7 @@
 #define CHILDREN_PER_NODE (KEYS_PER_NODE + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The table has always exactly one reference from either mapped_device->map
  * or hash_cell->new_map. This reference is not counted in table->holders.
@@ -43,6 +44,10 @@
 struct dm_table {
 	struct mapped_device *md;
 	atomic_t holders;
+=======
+struct dm_table {
+	struct mapped_device *md;
+>>>>>>> v3.18
 =======
 struct dm_table {
 	struct mapped_device *md;
@@ -175,7 +180,10 @@ static int alloc_targets(struct dm_table *t, unsigned int num)
 	sector_t *n_highs;
 	struct dm_target *n_targets;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n = t->num_targets;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -192,12 +200,16 @@ static int alloc_targets(struct dm_table *t, unsigned int num)
 	n_targets = (struct dm_target *) (n_highs + num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (n) {
 		memcpy(n_highs, t->highs, sizeof(*n_highs) * n);
 		memcpy(n_targets, t->targets, sizeof(*n_targets) * n);
 	}
 
 	memset(n_highs + n, -1, sizeof(*n_highs) * (num - n));
+=======
+	memset(n_highs, -1, sizeof(*n_highs) * num);
+>>>>>>> v3.18
 =======
 	memset(n_highs, -1, sizeof(*n_highs) * num);
 >>>>>>> v3.18
@@ -221,7 +233,10 @@ int dm_table_create(struct dm_table **result, fmode_t mode,
 	INIT_LIST_HEAD(&t->devices);
 	INIT_LIST_HEAD(&t->target_callbacks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&t->holders, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -247,7 +262,11 @@ int dm_table_create(struct dm_table **result, fmode_t mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void free_devices(struct list_head *devices)
+=======
+static void free_devices(struct list_head *devices, struct mapped_device *md)
+>>>>>>> v3.18
 =======
 static void free_devices(struct list_head *devices, struct mapped_device *md)
 >>>>>>> v3.18
@@ -258,8 +277,14 @@ static void free_devices(struct list_head *devices, struct mapped_device *md)
 		struct dm_dev_internal *dd =
 		    list_entry(tmp, struct dm_dev_internal, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMWARN("dm_table_destroy: dm_put_device call missing for %s",
 		       dd->dm_dev.name);
+=======
+		DMWARN("%s: dm_table_destroy: dm_put_device call missing for %s",
+		       dm_device_name(md), dd->dm_dev->name);
+		dm_put_table_device(md, dd->dm_dev);
+>>>>>>> v3.18
 =======
 		DMWARN("%s: dm_table_destroy: dm_put_device call missing for %s",
 		       dm_device_name(md), dd->dm_dev->name);
@@ -277,10 +302,13 @@ void dm_table_destroy(struct dm_table *t)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (atomic_read(&t->holders))
 		msleep(1);
 	smp_mb();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* free the indexes */
@@ -301,7 +329,11 @@ void dm_table_destroy(struct dm_table *t)
 
 	/* free the device list */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_devices(&t->devices);
+=======
+	free_devices(&t->devices, t->md);
+>>>>>>> v3.18
 =======
 	free_devices(&t->devices, t->md);
 >>>>>>> v3.18
@@ -311,6 +343,7 @@ void dm_table_destroy(struct dm_table *t)
 	kfree(t);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void dm_table_get(struct dm_table *t)
 {
@@ -341,6 +374,8 @@ static inline int check_space(struct dm_table *t)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * See if we've already got a device in the list.
  */
@@ -350,7 +385,11 @@ static struct dm_dev_internal *find_device(struct list_head *l, dev_t dev)
 
 	list_for_each_entry (dd, l, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dd->dm_dev.bdev->bd_dev == dev)
+=======
+		if (dd->dm_dev->bdev->bd_dev == dev)
+>>>>>>> v3.18
 =======
 		if (dd->dm_dev->bdev->bd_dev == dev)
 >>>>>>> v3.18
@@ -360,6 +399,7 @@ static struct dm_dev_internal *find_device(struct list_head *l, dev_t dev)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Open a device so we can use it as a map destination.
  */
@@ -401,6 +441,8 @@ static void close_dev(struct dm_dev_internal *d, struct mapped_device *md)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * If possible, this checks an area of a destination device is invalid.
@@ -481,6 +523,7 @@ static int upgrade_mode(struct dm_dev_internal *dd, fmode_t new_mode,
 {
 	int r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev_internal dd_new, dd_old;
 
 	dd_new = dd_old = *dd;
@@ -495,6 +538,8 @@ static int upgrade_mode(struct dm_dev_internal *dd, fmode_t new_mode,
 	dd->dm_dev.mode |= new_mode;
 	close_dev(&dd_old, md);
 =======
+=======
+>>>>>>> v3.18
 	struct dm_dev *old_dev, *new_dev;
 
 	old_dev = dd->dm_dev;
@@ -506,6 +551,9 @@ static int upgrade_mode(struct dm_dev_internal *dd, fmode_t new_mode,
 
 	dd->dm_dev = new_dev;
 	dm_put_table_device(md, old_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -549,10 +597,14 @@ int dm_get_device(struct dm_target *ti, const char *path, fmode_t mode,
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dd->dm_dev.mode = mode;
 		dd->dm_dev.bdev = NULL;
 
 		if ((r = open_dev(dd, dev, t->md))) {
+=======
+		if ((r = dm_get_table_device(t->md, dev, mode, &dd->dm_dev))) {
+>>>>>>> v3.18
 =======
 		if ((r = dm_get_table_device(t->md, dev, mode, &dd->dm_dev))) {
 >>>>>>> v3.18
@@ -561,6 +613,7 @@ int dm_get_device(struct dm_target *ti, const char *path, fmode_t mode,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		format_dev_t(dd->dm_dev.name, dev);
 
 		atomic_set(&dd->count, 0);
@@ -568,10 +621,15 @@ int dm_get_device(struct dm_target *ti, const char *path, fmode_t mode,
 
 	} else if (dd->dm_dev.mode != (mode | dd->dm_dev.mode)) {
 =======
+=======
+>>>>>>> v3.18
 		atomic_set(&dd->count, 0);
 		list_add(&dd->list, &t->devices);
 
 	} else if (dd->dm_dev->mode != (mode | dd->dm_dev->mode)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r = upgrade_mode(dd, mode, t->md);
 		if (r)
@@ -580,7 +638,11 @@ int dm_get_device(struct dm_target *ti, const char *path, fmode_t mode,
 	atomic_inc(&dd->count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*result = &dd->dm_dev;
+=======
+	*result = dd->dm_dev;
+>>>>>>> v3.18
 =======
 	*result = dd->dm_dev;
 >>>>>>> v3.18
@@ -589,8 +651,13 @@ int dm_get_device(struct dm_target *ti, const char *path, fmode_t mode,
 EXPORT_SYMBOL(dm_get_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dm_set_device_limits(struct dm_target *ti, struct dm_dev *dev,
 			 sector_t start, sector_t len, void *data)
+=======
+static int dm_set_device_limits(struct dm_target *ti, struct dm_dev *dev,
+				sector_t start, sector_t len, void *data)
+>>>>>>> v3.18
 =======
 static int dm_set_device_limits(struct dm_target *ti, struct dm_dev *dev,
 				sector_t start, sector_t len, void *data)
@@ -628,7 +695,10 @@ static int dm_set_device_limits(struct dm_target *ti, struct dm_dev *dev,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(dm_set_device_limits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -637,6 +707,7 @@ EXPORT_SYMBOL_GPL(dm_set_device_limits);
  */
 void dm_put_device(struct dm_target *ti, struct dm_dev *d)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dm_dev_internal *dd;
 
@@ -655,6 +726,8 @@ void dm_put_device(struct dm_target *ti, struct dm_dev *d)
 	if (atomic_dec_and_test(&dd->count)) {
 		close_dev(dd, ti->table->md);
 =======
+=======
+>>>>>>> v3.18
 	int found = 0;
 	struct list_head *devices = &ti->table->devices;
 	struct dm_dev_internal *dd;
@@ -672,6 +745,9 @@ void dm_put_device(struct dm_target *ti, struct dm_dev *d)
 	}
 	if (atomic_dec_and_test(&dd->count)) {
 		dm_put_table_device(ti->table->md, d);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_del(&dd->list);
 		kfree(dd);
@@ -877,8 +953,12 @@ int dm_table_add_target(struct dm_table *t, const char *type,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((r = check_space(t)))
 		return r;
+=======
+	BUG_ON(t->num_targets >= t->num_allocated);
+>>>>>>> v3.18
 =======
 	BUG_ON(t->num_targets >= t->num_allocated);
 >>>>>>> v3.18
@@ -1029,6 +1109,7 @@ static int dm_table_set_type(struct dm_table *t)
 {
 	unsigned i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned bio_based = 0, request_based = 0;
 	struct dm_target *tgt;
 	struct dm_dev_internal *dd;
@@ -1038,6 +1119,8 @@ static int dm_table_set_type(struct dm_table *t)
 		tgt = t->targets + i;
 		if (dm_target_request_based(tgt))
 =======
+=======
+>>>>>>> v3.18
 	unsigned bio_based = 0, request_based = 0, hybrid = 0;
 	struct dm_target *tgt;
 	struct dm_dev_internal *dd;
@@ -1049,6 +1132,9 @@ static int dm_table_set_type(struct dm_table *t)
 		if (dm_target_hybrid(tgt))
 			hybrid = 1;
 		else if (dm_target_request_based(tgt))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			request_based = 1;
 		else
@@ -1062,7 +1148,10 @@ static int dm_table_set_type(struct dm_table *t)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (hybrid && !bio_based && !request_based) {
 		/*
 		 * The targets can work either way.
@@ -1076,6 +1165,9 @@ static int dm_table_set_type(struct dm_table *t)
 			bio_based = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (bio_based) {
 		/* We must use this table as bio-based */
@@ -1089,7 +1181,11 @@ static int dm_table_set_type(struct dm_table *t)
 	devices = dm_table_get_devices(t);
 	list_for_each_entry(dd, devices, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!blk_queue_stackable(bdev_get_queue(dd->dm_dev.bdev))) {
+=======
+		if (!blk_queue_stackable(bdev_get_queue(dd->dm_dev->bdev))) {
+>>>>>>> v3.18
 =======
 		if (!blk_queue_stackable(bdev_get_queue(dd->dm_dev->bdev))) {
 >>>>>>> v3.18
@@ -1131,7 +1227,11 @@ bool dm_table_request_based(struct dm_table *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dm_table_alloc_md_mempools(struct dm_table *t)
+=======
+static int dm_table_alloc_md_mempools(struct dm_table *t)
+>>>>>>> v3.18
 =======
 static int dm_table_alloc_md_mempools(struct dm_table *t)
 >>>>>>> v3.18
@@ -1234,7 +1334,11 @@ static struct gendisk * dm_table_get_integrity_disk(struct dm_table *t,
 
 	list_for_each_entry(dd, devices, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		template_disk = dd->dm_dev.bdev->bd_disk;
+=======
+		template_disk = dd->dm_dev->bdev->bd_disk;
+>>>>>>> v3.18
 =======
 		template_disk = dd->dm_dev->bdev->bd_disk;
 >>>>>>> v3.18
@@ -1581,7 +1685,10 @@ static int device_is_not_random(struct dm_target *ti, struct dm_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int queue_supports_sg_merge(struct dm_target *ti, struct dm_dev *dev,
 				   sector_t start, sector_t len, void *data)
 {
@@ -1590,6 +1697,9 @@ static int queue_supports_sg_merge(struct dm_target *ti, struct dm_dev *dev,
 	return q && !test_bit(QUEUE_FLAG_NO_SG_MERGE, &q->queue_flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool dm_table_all_devices_attribute(struct dm_table *t,
 					   iterate_devices_callout_fn func)
@@ -1636,7 +1746,10 @@ static bool dm_table_supports_write_same(struct dm_table *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int device_discard_capable(struct dm_target *ti, struct dm_dev *dev,
 				  sector_t start, sector_t len, void *data)
 {
@@ -1674,6 +1787,9 @@ static bool dm_table_supports_discards(struct dm_table *t)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void dm_table_set_restrictions(struct dm_table *t, struct request_queue *q,
 			       struct queue_limits *limits)
@@ -1710,12 +1826,18 @@ void dm_table_set_restrictions(struct dm_table *t, struct request_queue *q,
 		q->limits.max_write_same_sectors = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dm_table_all_devices_attribute(t, queue_supports_sg_merge))
 		queue_flag_clear_unlocked(QUEUE_FLAG_NO_SG_MERGE, q);
 	else
 		queue_flag_set_unlocked(QUEUE_FLAG_NO_SG_MERGE, q);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dm_table_set_integrity(t);
 
@@ -1802,14 +1924,20 @@ int dm_table_resume_targets(struct dm_table *t)
 
 		r = ti->type->preresume(ti);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (r)
 			return r;
 =======
+=======
+>>>>>>> v3.18
 		if (r) {
 			DMERR("%s: %s: preresume failed, error = %d",
 			      dm_device_name(t->md), ti->type->name, r);
 			return r;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1838,7 +1966,11 @@ int dm_table_any_congested(struct dm_table *t, int bdi_bits)
 
 	list_for_each_entry(dd, devices, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct request_queue *q = bdev_get_queue(dd->dm_dev.bdev);
+=======
+		struct request_queue *q = bdev_get_queue(dd->dm_dev->bdev);
+>>>>>>> v3.18
 =======
 		struct request_queue *q = bdev_get_queue(dd->dm_dev->bdev);
 >>>>>>> v3.18
@@ -1850,7 +1982,11 @@ int dm_table_any_congested(struct dm_table *t, int bdi_bits)
 			DMWARN_LIMIT("%s: any_congested: nonexistent device %s",
 				     dm_device_name(t->md),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     bdevname(dd->dm_dev.bdev, b));
+=======
+				     bdevname(dd->dm_dev->bdev, b));
+>>>>>>> v3.18
 =======
 				     bdevname(dd->dm_dev->bdev, b));
 >>>>>>> v3.18
@@ -1883,6 +2019,7 @@ struct mapped_device *dm_table_get_md(struct dm_table *t)
 }
 EXPORT_SYMBOL(dm_table_get_md);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int device_discard_capable(struct dm_target *ti, struct dm_dev *dev,
 				  sector_t start, sector_t len, void *data)
@@ -1921,6 +2058,8 @@ bool dm_table_supports_discards(struct dm_table *t)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 void dm_table_run_md_queue_async(struct dm_table *t)
 {
 	struct mapped_device *md;
@@ -1940,4 +2079,7 @@ void dm_table_run_md_queue_async(struct dm_table *t)
 }
 EXPORT_SYMBOL(dm_table_run_md_queue_async);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

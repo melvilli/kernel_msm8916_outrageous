@@ -55,11 +55,17 @@ syshdr-$(CONFIG_X86_64)		+= syscalls_64.h
 targets	+= $(uapisyshdr-y) $(syshdr-y)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 all: $(addprefix $(uapi)/,$(uapisyshdr-y))
 all: $(addprefix $(out)/,$(syshdr-y))
 =======
+=======
+>>>>>>> v3.18
 PHONY += all
 all: $(addprefix $(uapi)/,$(uapisyshdr-y))
 all: $(addprefix $(out)/,$(syshdr-y))
 	@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

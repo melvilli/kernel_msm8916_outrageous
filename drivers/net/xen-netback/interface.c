@@ -31,6 +31,7 @@
 #include "common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ethtool.h>
 #include <linux/rtnetlink.h>
 #include <linux/if_vlan.h>
@@ -84,6 +85,8 @@ static irqreturn_t xenvif_interrupt(int irq, void *dev_id)
 	if (xenvif_rx_schedulable(vif))
 		netif_wake_queue(vif->dev);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kthread.h>
 #include <linux/ethtool.h>
 #include <linux/rtnetlink.h>
@@ -172,11 +175,15 @@ irqreturn_t xenvif_interrupt(int irq, void *dev_id)
 {
 	xenvif_tx_interrupt(irq, dev_id);
 	xenvif_rx_interrupt(irq, dev_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int xenvif_start_xmit(struct sk_buff *skb, struct net_device *dev)
 {
@@ -201,6 +208,8 @@ static int xenvif_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	xen_netbk_queue_tx_skb(vif, skb);
 =======
+=======
+>>>>>>> v3.18
 int xenvif_queue_stopped(struct xenvif_queue *queue)
 {
 	struct net_device *dev = queue->vif->dev;
@@ -249,6 +258,9 @@ static int xenvif_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	xenvif_rx_queue_tail(queue, skb);
 	xenvif_kick_thread(queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return NETDEV_TX_OK;
@@ -259,6 +271,7 @@ static int xenvif_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	return NETDEV_TX_OK;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void xenvif_receive_skb(struct xenvif *vif, struct sk_buff *skb)
 {
@@ -275,6 +288,8 @@ static struct net_device_stats *xenvif_get_stats(struct net_device *dev)
 {
 	struct xenvif *vif = netdev_priv(dev);
 =======
+=======
+>>>>>>> v3.18
 static struct net_device_stats *xenvif_get_stats(struct net_device *dev)
 {
 	struct xenvif *vif = netdev_priv(dev);
@@ -304,6 +319,9 @@ out:
 	vif->dev->stats.tx_bytes = tx_bytes;
 	vif->dev->stats.tx_packets = tx_packets;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return &vif->dev->stats;
 }
@@ -311,10 +329,13 @@ out:
 static void xenvif_up(struct xenvif *vif)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_netbk_add_xenvif(vif);
 	enable_irq(vif->irq);
 	xen_netbk_check_rx_xenvif(vif);
 =======
+=======
+>>>>>>> v3.18
 	struct xenvif_queue *queue = NULL;
 	unsigned int num_queues = vif->num_queues;
 	unsigned int queue_index;
@@ -327,17 +348,23 @@ static void xenvif_up(struct xenvif *vif)
 			enable_irq(queue->rx_irq);
 		xenvif_napi_schedule_or_enable_events(queue);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void xenvif_down(struct xenvif *vif)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disable_irq(vif->irq);
 	del_timer_sync(&vif->credit_timeout);
 	xen_netbk_deschedule_xenvif(vif);
 	xen_netbk_remove_xenvif(vif);
 =======
+=======
+>>>>>>> v3.18
 	struct xenvif_queue *queue = NULL;
 	unsigned int num_queues = vif->num_queues;
 	unsigned int queue_index;
@@ -350,6 +377,9 @@ static void xenvif_down(struct xenvif *vif)
 			disable_irq(queue->rx_irq);
 		del_timer_sync(&queue->credit_timeout);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -357,9 +387,15 @@ static int xenvif_open(struct net_device *dev)
 {
 	struct xenvif *vif = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netif_carrier_ok(dev))
 		xenvif_up(vif);
 	netif_start_queue(dev);
+=======
+	if (test_bit(VIF_STATUS_CONNECTED, &vif->status))
+		xenvif_up(vif);
+	netif_tx_start_all_queues(dev);
+>>>>>>> v3.18
 =======
 	if (test_bit(VIF_STATUS_CONNECTED, &vif->status))
 		xenvif_up(vif);
@@ -372,9 +408,15 @@ static int xenvif_close(struct net_device *dev)
 {
 	struct xenvif *vif = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netif_carrier_ok(dev))
 		xenvif_down(vif);
 	netif_stop_queue(dev);
+=======
+	if (test_bit(VIF_STATUS_CONNECTED, &vif->status))
+		xenvif_down(vif);
+	netif_tx_stop_all_queues(dev);
+>>>>>>> v3.18
 =======
 	if (test_bit(VIF_STATUS_CONNECTED, &vif->status))
 		xenvif_down(vif);
@@ -402,11 +444,14 @@ static netdev_features_t xenvif_fix_features(struct net_device *dev,
 	if (!vif->can_sg)
 		features &= ~NETIF_F_SG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vif->gso && !vif->gso_prefix)
 		features &= ~NETIF_F_TSO;
 	if (!vif->csum)
 		features &= ~NETIF_F_IP_CSUM;
 =======
+=======
+>>>>>>> v3.18
 	if (~(vif->gso_mask | vif->gso_prefix_mask) & GSO_BIT(TCPV4))
 		features &= ~NETIF_F_TSO;
 	if (~(vif->gso_mask | vif->gso_prefix_mask) & GSO_BIT(TCPV6))
@@ -415,6 +460,9 @@ static netdev_features_t xenvif_fix_features(struct net_device *dev,
 		features &= ~NETIF_F_IP_CSUM;
 	if (!vif->ipv6_csum)
 		features &= ~NETIF_F_IPV6_CSUM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return features;
@@ -427,8 +475,11 @@ static const struct xenvif_stat {
 	{
 		"rx_gso_checksum_fixup",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offsetof(struct xenvif, rx_gso_checksum_fixup)
 =======
+=======
+>>>>>>> v3.18
 		offsetof(struct xenvif_stats, rx_gso_checksum_fixup)
 	},
 	/* If (sent != success + fail), there are probably packets never
@@ -452,6 +503,9 @@ static const struct xenvif_stat {
 	{
 		"tx_frag_overflow",
 		offsetof(struct xenvif_stats, tx_frag_overflow)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -470,12 +524,15 @@ static void xenvif_get_ethtool_stats(struct net_device *dev,
 				     struct ethtool_stats *stats, u64 * data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *vif = netdev_priv(dev);
 	int i;
 
 	for (i = 0; i < ARRAY_SIZE(xenvif_stats); i++)
 		data[i] = *(unsigned long *)(vif + xenvif_stats[i].offset);
 =======
+=======
+>>>>>>> v3.18
 	struct xenvif *vif = netdev_priv(dev);
 	unsigned int num_queues = vif->num_queues;
 	int i;
@@ -490,6 +547,9 @@ static void xenvif_get_ethtool_stats(struct net_device *dev,
 		}
 		data[i] = accum;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -535,10 +595,13 @@ struct xenvif *xenvif_alloc(struct device *parent, domid_t domid,
 
 	snprintf(name, IFNAMSIZ - 1, "vif%u.%u", domid, handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct xenvif), name, ether_setup);
 	if (dev == NULL) {
 		pr_warn("Could not allocate netdev\n");
 =======
+=======
+>>>>>>> v3.18
 	/* Allocate a netdev with the max. supported number of queues.
 	 * When the guest selects the desired number, it will be updated
 	 * via netif_set_real_num_*_queues().
@@ -547,6 +610,9 @@ struct xenvif *xenvif_alloc(struct device *parent, domid_t domid,
 			      ether_setup, xenvif_max_queues);
 	if (dev == NULL) {
 		pr_warn("Could not allocate netdev for %s\n", name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ERR_PTR(-ENOMEM);
 	}
@@ -554,6 +620,7 @@ struct xenvif *xenvif_alloc(struct device *parent, domid_t domid,
 	SET_NETDEV_DEV(dev, parent);
 
 	vif = netdev_priv(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vif->domid  = domid;
 	vif->handle = handle;
@@ -577,6 +644,8 @@ struct xenvif *xenvif_alloc(struct device *parent, domid_t domid,
 	dev->features = dev->hw_features;
 	SET_ETHTOOL_OPS(dev, &xenvif_ethtool_ops);
 =======
+=======
+>>>>>>> v3.18
 
 	vif->domid  = domid;
 	vif->handle = handle;
@@ -597,6 +666,9 @@ struct xenvif *xenvif_alloc(struct device *parent, domid_t domid,
 		NETIF_F_TSO | NETIF_F_TSO6;
 	dev->features = dev->hw_features | NETIF_F_RXCSUM;
 	dev->ethtool_ops = &xenvif_ethtool_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->tx_queue_len = XENVIF_QUEUE_LENGTH;
@@ -627,6 +699,7 @@ struct xenvif *xenvif_alloc(struct device *parent, domid_t domid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xenvif_connect(struct xenvif *vif, unsigned long tx_ring_ref,
 		   unsigned long rx_ring_ref, unsigned int evtchn)
 {
@@ -651,6 +724,8 @@ int xenvif_connect(struct xenvif *vif, unsigned long tx_ring_ref,
 	xenvif_get(vif);
 
 =======
+=======
+>>>>>>> v3.18
 int xenvif_init_queue(struct xenvif_queue *queue)
 {
 	int err, i;
@@ -698,11 +773,15 @@ int xenvif_init_queue(struct xenvif_queue *queue)
 
 void xenvif_carrier_on(struct xenvif *vif)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtnl_lock();
 	if (!vif->can_sg && vif->dev->mtu > ETH_DATA_LEN)
 		dev_set_mtu(vif->dev, ETH_DATA_LEN);
 	netdev_update_features(vif->dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	netif_carrier_on(vif->dev);
 	if (netif_running(vif->dev))
@@ -714,6 +793,8 @@ err_unmap:
 	xen_netbk_unmap_frontend_rings(vif);
 err:
 =======
+=======
+>>>>>>> v3.18
 	set_bit(VIF_STATUS_CONNECTED, &vif->status);
 	if (netif_running(vif->dev))
 		xenvif_up(vif);
@@ -809,6 +890,9 @@ err_unmap:
 	xenvif_unmap_frontend_rings(queue);
 err:
 	module_put(THIS_MODULE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -819,23 +903,30 @@ void xenvif_carrier_off(struct xenvif *vif)
 
 	rtnl_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_carrier_off(dev); /* discard queued packets */
 	if (netif_running(dev))
 		xenvif_down(vif);
 	rtnl_unlock();
 	xenvif_put(vif);
 =======
+=======
+>>>>>>> v3.18
 	if (test_and_clear_bit(VIF_STATUS_CONNECTED, &vif->status)) {
 		netif_carrier_off(dev); /* discard queued packets */
 		if (netif_running(dev))
 			xenvif_down(vif);
 	}
 	rtnl_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void xenvif_disconnect(struct xenvif *vif)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (netif_carrier_ok(vif->dev))
 		xenvif_carrier_off(vif);
@@ -856,6 +947,8 @@ void xenvif_free(struct xenvif *vif)
 	unregister_netdev(vif->dev);
 
 =======
+=======
+>>>>>>> v3.18
 	struct xenvif_queue *queue = NULL;
 	unsigned int num_queues = vif->num_queues;
 	unsigned int queue_index;
@@ -917,6 +1010,9 @@ void xenvif_free(struct xenvif *vif)
 	vif->queues = NULL;
 	vif->num_queues = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_netdev(vif->dev);
 

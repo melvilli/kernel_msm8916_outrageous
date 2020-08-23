@@ -81,7 +81,11 @@ static bool spr_allowed(struct kvm_vcpu *vcpu, enum priv_level level)
 
 	/* Limit user space to its own small SPR set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((vcpu->arch.shared->msr & MSR_PR) && level > PRIV_PROBLEM)
+=======
+	if ((kvmppc_get_msr(vcpu) & MSR_PR) && level > PRIV_PROBLEM)
+>>>>>>> v3.18
 =======
 	if ((kvmppc_get_msr(vcpu) & MSR_PR) && level > PRIV_PROBLEM)
 >>>>>>> v3.18
@@ -91,8 +95,13 @@ static bool spr_allowed(struct kvm_vcpu *vcpu, enum priv_level level)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_core_emulate_op(struct kvm_run *run, struct kvm_vcpu *vcpu,
                            unsigned int inst, int *advance)
+=======
+int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
+			      unsigned int inst, int *advance)
+>>>>>>> v3.18
 =======
 int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			      unsigned int inst, int *advance)
@@ -104,9 +113,12 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 	int ra = get_ra(inst);
 	int rb = get_rb(inst);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	switch (get_op(inst)) {
 =======
+=======
+>>>>>>> v3.18
 	u32 inst_sc = 0x44000002;
 
 	switch (get_op(inst)) {
@@ -126,14 +138,22 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			emulated = EMULATE_DONE;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 19:
 		switch (get_xop(inst)) {
 		case OP_19_XOP_RFID:
 		case OP_19_XOP_RFI:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kvmppc_set_pc(vcpu, vcpu->arch.shared->srr0);
 			kvmppc_set_msr(vcpu, vcpu->arch.shared->srr1);
+=======
+			kvmppc_set_pc(vcpu, kvmppc_get_srr0(vcpu));
+			kvmppc_set_msr(vcpu, kvmppc_get_srr1(vcpu));
+>>>>>>> v3.18
 =======
 			kvmppc_set_pc(vcpu, kvmppc_get_srr0(vcpu));
 			kvmppc_set_msr(vcpu, kvmppc_get_srr1(vcpu));
@@ -150,7 +170,11 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 		switch (get_xop(inst)) {
 		case OP_31_XOP_MFMSR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kvmppc_set_gpr(vcpu, rt, vcpu->arch.shared->msr);
+=======
+			kvmppc_set_gpr(vcpu, rt, kvmppc_get_msr(vcpu));
+>>>>>>> v3.18
 =======
 			kvmppc_set_gpr(vcpu, rt, kvmppc_get_msr(vcpu));
 >>>>>>> v3.18
@@ -160,15 +184,21 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			ulong rs_val = kvmppc_get_gpr(vcpu, rs);
 			if (inst & 0x10000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ulong new_msr = vcpu->arch.shared->msr;
 				new_msr &= ~(MSR_RI | MSR_EE);
 				new_msr |= rs_val & (MSR_RI | MSR_EE);
 				vcpu->arch.shared->msr = new_msr;
 =======
+=======
+>>>>>>> v3.18
 				ulong new_msr = kvmppc_get_msr(vcpu);
 				new_msr &= ~(MSR_RI | MSR_EE);
 				new_msr |= rs_val & (MSR_RI | MSR_EE);
 				kvmppc_set_msr_fast(vcpu, new_msr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else
 				kvmppc_set_msr(vcpu, rs_val);
@@ -220,7 +250,11 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_PR
+=======
+#ifdef CONFIG_PPC_BOOK3S_64
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S_64
 >>>>>>> v3.18
@@ -231,7 +265,11 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		        if ((vcpu->arch.shared->msr & MSR_PR) ||
+=======
+		        if ((kvmppc_get_msr(vcpu) & MSR_PR) ||
+>>>>>>> v3.18
 =======
 		        if ((kvmppc_get_msr(vcpu) & MSR_PR) ||
 >>>>>>> v3.18
@@ -317,7 +355,11 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 
 			addr = (ra_val + rb_val) & ~31ULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(vcpu->arch.shared->msr & MSR_SF))
+=======
+			if (!(kvmppc_get_msr(vcpu) & MSR_SF))
+>>>>>>> v3.18
 =======
 			if (!(kvmppc_get_msr(vcpu) & MSR_SF))
 >>>>>>> v3.18
@@ -327,12 +369,18 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 			r = kvmppc_st(vcpu, &addr, 32, zeros, true);
 			if ((r == -ENOENT) || (r == -EPERM)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct kvmppc_book3s_shadow_vcpu *svcpu;
 
 				svcpu = svcpu_get(vcpu);
 				*advance = 0;
 				vcpu->arch.shared->dar = vaddr;
 				svcpu->fault_dar = vaddr;
+=======
+				*advance = 0;
+				kvmppc_set_dar(vcpu, vaddr);
+				vcpu->arch.fault_dar = vaddr;
+>>>>>>> v3.18
 =======
 				*advance = 0;
 				kvmppc_set_dar(vcpu, vaddr);
@@ -346,9 +394,14 @@ int kvmppc_core_emulate_op_pr(struct kvm_run *run, struct kvm_vcpu *vcpu,
 					dsisr |= DSISR_PROTFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				vcpu->arch.shared->dsisr = dsisr;
 				svcpu->fault_dsisr = dsisr;
 				svcpu_put(svcpu);
+=======
+				kvmppc_set_dsisr(vcpu, dsisr);
+				vcpu->arch.fault_dsisr = dsisr;
+>>>>>>> v3.18
 =======
 				kvmppc_set_dsisr(vcpu, dsisr);
 				vcpu->arch.fault_dsisr = dsisr;
@@ -420,7 +473,11 @@ static struct kvmppc_bat *kvmppc_find_bat(struct kvm_vcpu *vcpu, int sprn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_core_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
+=======
+int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
+>>>>>>> v3.18
 =======
 int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 >>>>>>> v3.18
@@ -435,15 +492,21 @@ int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 		break;
 	case SPRN_DSISR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vcpu->arch.shared->dsisr = spr_val;
 		break;
 	case SPRN_DAR:
 		vcpu->arch.shared->dar = spr_val;
 =======
+=======
+>>>>>>> v3.18
 		kvmppc_set_dsisr(vcpu, spr_val);
 		break;
 	case SPRN_DAR:
 		kvmppc_set_dar(vcpu, spr_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SPRN_HIOR:
@@ -508,12 +571,15 @@ int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 			vcpu->arch.hflags |= BOOK3S_HFLAG_DCBZ32;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SPRN_PURR:
 		to_book3s(vcpu)->purr_offset = spr_val - get_tb();
 		break;
 	case SPRN_SPURR:
 		to_book3s(vcpu)->spurr_offset = spr_val - get_tb();
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case SPRN_GQR0:
@@ -527,7 +593,10 @@ int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 		to_book3s(vcpu)->gqr[sprn - SPRN_GQR0] = spr_val;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	case SPRN_FSCR:
 		kvmppc_set_fscr(vcpu, spr_val);
@@ -553,6 +622,9 @@ int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 		break;
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SPRN_ICTC:
 	case SPRN_THRM1:
@@ -571,7 +643,10 @@ int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 	case SPRN_WPAR_GEKKO:
 	case SPRN_MSSSR0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SPRN_DABR:
 #ifdef CONFIG_PPC_BOOK3S_64
 	case SPRN_MMCRS:
@@ -580,6 +655,9 @@ int kvmppc_core_emulate_mtspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong spr_val)
 	case SPRN_MMCR1:
 	case SPRN_MMCR2:
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 unprivileged:
@@ -595,7 +673,11 @@ unprivileged:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_core_emulate_mfspr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val)
+=======
+int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val)
+>>>>>>> v3.18
 =======
 int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val)
 >>>>>>> v3.18
@@ -624,15 +706,21 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 		break;
 	case SPRN_DSISR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*spr_val = vcpu->arch.shared->dsisr;
 		break;
 	case SPRN_DAR:
 		*spr_val = vcpu->arch.shared->dar;
 =======
+=======
+>>>>>>> v3.18
 		*spr_val = kvmppc_get_dsisr(vcpu);
 		break;
 	case SPRN_DAR:
 		*spr_val = kvmppc_get_dar(vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SPRN_HIOR:
@@ -661,11 +749,14 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 		break;
 	case SPRN_PURR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*spr_val = get_tb() + to_book3s(vcpu)->purr_offset;
 		break;
 	case SPRN_SPURR:
 		*spr_val = get_tb() + to_book3s(vcpu)->purr_offset;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * On exit we would have updated purr
 		 */
@@ -682,6 +773,9 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 		break;
 	case SPRN_IC:
 		*spr_val = vcpu->arch.ic;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SPRN_GQR0:
@@ -695,7 +789,10 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 		*spr_val = to_book3s(vcpu)->gqr[sprn - SPRN_GQR0];
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	case SPRN_FSCR:
 		*spr_val = vcpu->arch.fscr;
@@ -721,6 +818,9 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 		break;
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SPRN_THRM1:
 	case SPRN_THRM2:
@@ -737,7 +837,10 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 	case SPRN_WPAR_GEKKO:
 	case SPRN_MSSSR0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SPRN_DABR:
 #ifdef CONFIG_PPC_BOOK3S_64
 	case SPRN_MMCRS:
@@ -747,6 +850,9 @@ int kvmppc_core_emulate_mfspr_pr(struct kvm_vcpu *vcpu, int sprn, ulong *spr_val
 	case SPRN_MMCR2:
 	case SPRN_TIR:
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*spr_val = 0;
 		break;
@@ -764,6 +870,7 @@ unprivileged:
 
 u32 kvmppc_alignment_dsisr(struct kvm_vcpu *vcpu, unsigned int inst)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 dsisr = 0;
 
@@ -806,18 +913,27 @@ u32 kvmppc_alignment_dsisr(struct kvm_vcpu *vcpu, unsigned int inst)
 =======
 	return make_dsisr(inst);
 >>>>>>> v3.18
+=======
+	return make_dsisr(inst);
+>>>>>>> v3.18
 }
 
 ulong kvmppc_alignment_dar(struct kvm_vcpu *vcpu, unsigned int inst)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	/*
 	 * Linux's fix_alignment() assumes that DAR is valid, so can we
 	 */
 	return vcpu->arch.fault_dar;
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ulong dar = 0;
 	ulong ra = get_ra(inst);
@@ -844,6 +960,10 @@ ulong kvmppc_alignment_dar(struct kvm_vcpu *vcpu, unsigned int inst)
 
 	return dar;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

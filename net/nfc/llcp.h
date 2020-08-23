@@ -13,9 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@ enum llcp_state {
 	LLCP_CONNECTED = 1, /* wait_for_packet() wants that */
 	LLCP_CONNECTING,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LLCP_DISCONNECTING,
+>>>>>>> v3.18
 =======
 	LLCP_DISCONNECTING,
 >>>>>>> v3.18
@@ -256,7 +264,10 @@ void nfc_llcp_free_sdp_tlv(struct nfc_llcp_sdp_tlv *sdp);
 void nfc_llcp_free_sdp_tlv_list(struct hlist_head *sdp_head);
 void nfc_llcp_recv(void *data, struct sk_buff *skb, int err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nfc_llcp_disconnect(struct nfc_llcp_sock *sock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int nfc_llcp_send_symm(struct nfc_dev *dev);

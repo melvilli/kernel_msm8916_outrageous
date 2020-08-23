@@ -44,14 +44,20 @@ sk_load_word_positive_offset:
 	blt	bpf_slow_path_word
 	/* Nope, just hitting the header.  cr0 here is eq or gt! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lwzx	r_A, r_D, r_addr
 	/* When big endian we don't need to byteswap. */
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 	lwbrx	r_A, r_D, r_addr
 #else
 	lwzx	r_A, r_D, r_addr
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	blr	/* Return success, cr0 != LT */
 
@@ -65,13 +71,19 @@ sk_load_half_positive_offset:
 	cmpd	r_scratch1, r_addr
 	blt	bpf_slow_path_half
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lhzx	r_A, r_D, r_addr
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 	lhbrx	r_A, r_D, r_addr
 #else
 	lhzx	r_A, r_D, r_addr
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	blr
 
@@ -88,7 +100,11 @@ sk_load_byte_positive_offset:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * BPF_S_LDX_B_MSH: ldxb  4*([offset]&0xf)
+=======
+ * BPF_LDX | BPF_B | BPF_MSH: ldxb  4*([offset]&0xf)
+>>>>>>> v3.18
 =======
  * BPF_LDX | BPF_B | BPF_MSH: ldxb  4*([offset]&0xf)
 >>>>>>> v3.18

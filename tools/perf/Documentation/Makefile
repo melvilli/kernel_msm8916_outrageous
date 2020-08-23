@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 include ../config/utilities.mak
 
 OUTPUT := ./
@@ -8,6 +9,11 @@ ifeq ("$(origin O)", "command line")
   endif
 endif
 
+=======
+include ../../scripts/Makefile.include
+include ../config/utilities.mak
+
+>>>>>>> v3.18
 =======
 include ../../scripts/Makefile.include
 include ../config/utilities.mak
@@ -157,6 +163,7 @@ endif
 
 ifneq ($(findstring $(MAKEFLAGS),s),s)
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifndef V
 	QUIET_ASCIIDOC	= @echo '   ' ASCIIDOC $@;
 	QUIET_XMLTO	= @echo '   ' XMLTO $@;
@@ -169,6 +176,8 @@ ifndef V
 	QUIET_SUBDIR0	= +@subdir=
 	QUIET_SUBDIR1	= ;$(NO_SUBDIR) echo '   ' SUBDIR $$subdir; \
 =======
+=======
+>>>>>>> v3.18
 ifneq ($(V),1)
 	QUIET_ASCIIDOC	= @echo '  ASCIIDOC '$@;
 	QUIET_XMLTO	= @echo '  XMLTO    '$@;
@@ -181,6 +190,9 @@ ifneq ($(V),1)
 	QUIET_SUBDIR0	= +@subdir=
 	QUIET_SUBDIR1	= ;$(NO_SUBDIR) \
 			   echo '  SUBDIR   ' $$subdir; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  $(MAKE) $(PRINT_DIR) -C $$subdir
 	export V
@@ -211,6 +223,7 @@ endif
 
 do-install-man: man
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(INSTALL) -d -m 755 $(DESTDIR)$(man1dir)
 #	$(INSTALL) -d -m 755 $(DESTDIR)$(man5dir)
 #	$(INSTALL) -d -m 755 $(DESTDIR)$(man7dir)
@@ -234,6 +247,8 @@ install-info: info
 	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) perf.info ;\
 	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) perfman.info ;\
 =======
+=======
+>>>>>>> v3.18
 	$(call QUIET_INSTALL, Documentation-man) \
 		$(INSTALL) -d -m 755 $(DESTDIR)$(man1dir); \
 #		$(INSTALL) -d -m 755 $(DESTDIR)$(man5dir); \
@@ -259,6 +274,9 @@ install-info: info
 	if test -r $(DESTDIR)$(infodir)/dir; then \
 		$(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) perf.info ;\
 		$(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) perfman.info ;\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else \
 	  echo "No directory found in $(DESTDIR)$(infodir)" >&2 ; \
@@ -266,8 +284,14 @@ install-info: info
 
 install-pdf: pdf
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(INSTALL) -d -m 755 $(DESTDIR)$(pdfdir)
 	$(INSTALL) -m 644 $(OUTPUT)user-manual.pdf $(DESTDIR)$(pdfdir)
+=======
+	$(call QUIET_INSTALL, Documentation-pdf) \
+		$(INSTALL) -d -m 755 $(DESTDIR)$(pdfdir); \
+		$(INSTALL) -m 644 $(OUTPUT)user-manual.pdf $(DESTDIR)$(pdfdir)
+>>>>>>> v3.18
 =======
 	$(call QUIET_INSTALL, Documentation-pdf) \
 		$(INSTALL) -d -m 755 $(DESTDIR)$(pdfdir); \
@@ -278,6 +302,7 @@ install-pdf: pdf
 #	'$(SHELL_PATH_SQ)' ./install-webdoc.sh $(DESTDIR)$(htmldir)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),tags)
 $(OUTPUT)PERF-VERSION-FILE: .FORCE-PERF-VERSION-FILE
@@ -286,6 +311,8 @@ $(OUTPUT)PERF-VERSION-FILE: .FORCE-PERF-VERSION-FILE
 -include $(OUTPUT)PERF-VERSION-FILE
 endif
 endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -318,6 +345,7 @@ $(OUTPUT)cmd-list.made: cmd-list.perl ../command-list.txt $(MAN1_TXT)
 	date >$@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 clean:
 	$(RM) $(MAN_XML) $(addsuffix +,$(MAN_XML))
 	$(RM) $(MAN_HTML) $(addsuffix +,$(MAN_HTML))
@@ -328,6 +356,8 @@ clean:
 	$(RM) $(OUTPUT)technical/api-*.html $(OUTPUT)technical/api-index.txt
 	$(RM) $(cmds_txt) $(OUTPUT)*.made
 =======
+=======
+>>>>>>> v3.18
 CLEAN_FILES =									\
 	$(MAN_XML) $(addsuffix +,$(MAN_XML))					\
 	$(MAN_HTML) $(addsuffix +,$(MAN_HTML))					\
@@ -339,6 +369,9 @@ CLEAN_FILES =									\
 	$(cmds_txt) $(OUTPUT)*.made
 clean:
 	$(call QUIET_CLEAN, Documentation) $(RM) $(CLEAN_FILES)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 $(MAN_HTML): $(OUTPUT)%.html : %.txt
@@ -350,7 +383,11 @@ $(MAN_HTML): $(OUTPUT)%.html : %.txt
 $(OUTPUT)%.1 $(OUTPUT)%.5 $(OUTPUT)%.7 : $(OUTPUT)%.xml
 	$(QUIET_XMLTO)$(RM) $@ && \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(XMLTO) -o $(OUTPUT) -m $(MANPAGE_XSL) $(XMLTO_EXTRA) man $<
+=======
+	$(XMLTO) -o $(OUTPUT). -m $(MANPAGE_XSL) $(XMLTO_EXTRA) man $<
+>>>>>>> v3.18
 =======
 	$(XMLTO) -o $(OUTPUT). -m $(MANPAGE_XSL) $(XMLTO_EXTRA) man $<
 >>>>>>> v3.18
@@ -425,7 +462,10 @@ $(patsubst %.txt,%.html,$(wildcard howto/*.txt)): %.html : %.txt
 #quick-install-html:
 #	'$(SHELL_PATH_SQ)' ./install-doc-quick.sh $(HTML_REF) $(DESTDIR)$(htmldir)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 .PHONY: .FORCE-PERF-VERSION-FILE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

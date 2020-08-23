@@ -42,9 +42,13 @@ END(boot_args)
 	.import	$global$		/* forward declaration */
 #endif /*!CONFIG_64BIT*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.export _stext,data		/* Kernel want it this way! */
 _stext:
 ENTRY(stext)
+=======
+ENTRY(parisc_kernel_start)
+>>>>>>> v3.18
 =======
 ENTRY(parisc_kernel_start)
 >>>>>>> v3.18
@@ -352,7 +356,11 @@ smp_slave_stext:
 #endif /* CONFIG_SMP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(stext)
+=======
+ENDPROC(parisc_kernel_start)
+>>>>>>> v3.18
 =======
 ENDPROC(parisc_kernel_start)
 >>>>>>> v3.18

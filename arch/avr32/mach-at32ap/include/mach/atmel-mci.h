@@ -2,7 +2,11 @@
 #define __MACH_ATMEL_MCI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
+=======
+#include <linux/platform_data/dma-dw.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/dma-dw.h>
 >>>>>>> v3.18

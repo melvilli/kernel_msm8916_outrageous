@@ -27,8 +27,12 @@
 #include <linux/init.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -42,6 +46,11 @@
 #include <linux/seq_file.h>
 #include <linux/i8042.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmi.h>
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmi.h>
 #include <linux/device.h>
@@ -82,9 +91,12 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ideapad_private {
 	struct rfkill *rfk[IDEAPAD_RFKILL_DEV_NUM];
 =======
+=======
+>>>>>>> v3.18
 struct ideapad_rfk_priv {
 	int dev;
 	struct ideapad_private *priv;
@@ -94,6 +106,9 @@ struct ideapad_private {
 	struct acpi_device *adev;
 	struct rfkill *rfk[IDEAPAD_RFKILL_DEV_NUM];
 	struct ideapad_rfk_priv rfk_priv[IDEAPAD_RFKILL_DEV_NUM];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct platform_device *platform_device;
 	struct input_dev *inputdev;
@@ -101,10 +116,16 @@ struct ideapad_private {
 	struct dentry *debug;
 	unsigned long cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static acpi_handle ideapad_handle;
 static struct ideapad_private *ideapad_priv;
+=======
+	bool has_hw_rfkill_switch;
+};
+
+>>>>>>> v3.18
 =======
 	bool has_hw_rfkill_switch;
 };
@@ -228,6 +249,7 @@ static int write_ec_cmd(acpi_handle handle, int cmd, unsigned long data)
 static int debugfs_status_show(struct seq_file *s, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long value;
 
 	if (!read_ec_data(ideapad_handle, VPCCMD_R_BL_MAX, &value))
@@ -249,6 +271,8 @@ static int debugfs_status_show(struct seq_file *s, void *data)
 			   value ? "On" : "Off", value);
 	if (!read_ec_data(ideapad_handle, VPCCMD_R_3G, &value))
 =======
+=======
+>>>>>>> v3.18
 	struct ideapad_private *priv = s->private;
 	unsigned long value;
 
@@ -273,21 +297,30 @@ static int debugfs_status_show(struct seq_file *s, void *data)
 		seq_printf(s, "BT status:\t%s(%lu)\n",
 			   value ? "On" : "Off", value);
 	if (!read_ec_data(priv->adev->handle, VPCCMD_R_3G, &value))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seq_printf(s, "3G status:\t%s(%lu)\n",
 			   value ? "On" : "Off", value);
 	seq_printf(s, "=====================\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!read_ec_data(ideapad_handle, VPCCMD_R_TOUCHPAD, &value))
 		seq_printf(s, "Touchpad status:%s(%lu)\n",
 			   value ? "On" : "Off", value);
 	if (!read_ec_data(ideapad_handle, VPCCMD_R_CAMERA, &value))
 =======
+=======
+>>>>>>> v3.18
 	if (!read_ec_data(priv->adev->handle, VPCCMD_R_TOUCHPAD, &value))
 		seq_printf(s, "Touchpad status:%s(%lu)\n",
 			   value ? "On" : "Off", value);
 	if (!read_ec_data(priv->adev->handle, VPCCMD_R_CAMERA, &value))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seq_printf(s, "Camera status:\t%s(%lu)\n",
 			   value ? "On" : "Off", value);
@@ -298,7 +331,11 @@ static int debugfs_status_show(struct seq_file *s, void *data)
 static int debugfs_status_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, debugfs_status_show, NULL);
+=======
+	return single_open(file, debugfs_status_show, inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, debugfs_status_show, inode->i_private);
 >>>>>>> v3.18
@@ -314,6 +351,7 @@ static const struct file_operations debugfs_status_fops = {
 
 static int debugfs_cfg_show(struct seq_file *s, void *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ideapad_priv) {
 		seq_printf(s, "cfg: N/A\n");
@@ -331,6 +369,8 @@ static int debugfs_cfg_show(struct seq_file *s, void *data)
 		seq_printf(s, "\nGraphic: ");
 		switch ((ideapad_priv->cfg)&0x700) {
 =======
+=======
+>>>>>>> v3.18
 	struct ideapad_private *priv = s->private;
 
 	if (!priv) {
@@ -348,6 +388,9 @@ static int debugfs_cfg_show(struct seq_file *s, void *data)
 			seq_printf(s, "Camera ");
 		seq_printf(s, "\nGraphic: ");
 		switch ((priv->cfg)&0x700) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 0x100:
 			seq_printf(s, "Intel");
@@ -373,7 +416,11 @@ static int debugfs_cfg_show(struct seq_file *s, void *data)
 static int debugfs_cfg_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return single_open(file, debugfs_cfg_show, NULL);
+=======
+	return single_open(file, debugfs_cfg_show, inode->i_private);
+>>>>>>> v3.18
 =======
 	return single_open(file, debugfs_cfg_show, inode->i_private);
 >>>>>>> v3.18
@@ -398,7 +445,11 @@ static int ideapad_debugfs_init(struct ideapad_private *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = debugfs_create_file("cfg", S_IRUGO, priv->debug, NULL,
+=======
+	node = debugfs_create_file("cfg", S_IRUGO, priv->debug, priv,
+>>>>>>> v3.18
 =======
 	node = debugfs_create_file("cfg", S_IRUGO, priv->debug, priv,
 >>>>>>> v3.18
@@ -409,7 +460,11 @@ static int ideapad_debugfs_init(struct ideapad_private *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = debugfs_create_file("status", S_IRUGO, priv->debug, NULL,
+=======
+	node = debugfs_create_file("status", S_IRUGO, priv->debug, priv,
+>>>>>>> v3.18
 =======
 	node = debugfs_create_file("status", S_IRUGO, priv->debug, priv,
 >>>>>>> v3.18
@@ -440,8 +495,14 @@ static ssize_t show_ideapad_cam(struct device *dev,
 {
 	unsigned long result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (read_ec_data(ideapad_handle, VPCCMD_R_CAMERA, &result))
+=======
+	struct ideapad_private *priv = dev_get_drvdata(dev);
+
+	if (read_ec_data(priv->adev->handle, VPCCMD_R_CAMERA, &result))
+>>>>>>> v3.18
 =======
 	struct ideapad_private *priv = dev_get_drvdata(dev);
 
@@ -457,6 +518,10 @@ static ssize_t store_ideapad_cam(struct device *dev,
 {
 	int ret, state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ideapad_private *priv = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct ideapad_private *priv = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -466,7 +531,11 @@ static ssize_t store_ideapad_cam(struct device *dev,
 	if (sscanf(buf, "%i", &state) != 1)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = write_ec_cmd(ideapad_handle, VPCCMD_W_CAMERA, state);
+=======
+	ret = write_ec_cmd(priv->adev->handle, VPCCMD_W_CAMERA, state);
+>>>>>>> v3.18
 =======
 	ret = write_ec_cmd(priv->adev->handle, VPCCMD_W_CAMERA, state);
 >>>>>>> v3.18
@@ -483,8 +552,14 @@ static ssize_t show_ideapad_fan(struct device *dev,
 {
 	unsigned long result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (read_ec_data(ideapad_handle, VPCCMD_R_FAN, &result))
+=======
+	struct ideapad_private *priv = dev_get_drvdata(dev);
+
+	if (read_ec_data(priv->adev->handle, VPCCMD_R_FAN, &result))
+>>>>>>> v3.18
 =======
 	struct ideapad_private *priv = dev_get_drvdata(dev);
 
@@ -500,6 +575,10 @@ static ssize_t store_ideapad_fan(struct device *dev,
 {
 	int ret, state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ideapad_private *priv = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct ideapad_private *priv = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -511,7 +590,11 @@ static ssize_t store_ideapad_fan(struct device *dev,
 	if (state < 0 || state > 4 || state == 3)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = write_ec_cmd(ideapad_handle, VPCCMD_W_FAN, state);
+=======
+	ret = write_ec_cmd(priv->adev->handle, VPCCMD_W_FAN, state);
+>>>>>>> v3.18
 =======
 	ret = write_ec_cmd(priv->adev->handle, VPCCMD_W_FAN, state);
 >>>>>>> v3.18
@@ -541,7 +624,12 @@ static umode_t ideapad_is_visible(struct kobject *kobj,
 	else if (attr == &dev_attr_fan_mode.attr) {
 		unsigned long value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		supported = !read_ec_data(ideapad_handle, VPCCMD_R_FAN, &value);
+=======
+		supported = !read_ec_data(priv->adev->handle, VPCCMD_R_FAN,
+					  &value);
+>>>>>>> v3.18
 =======
 		supported = !read_ec_data(priv->adev->handle, VPCCMD_R_FAN,
 					  &value);
@@ -553,7 +641,11 @@ static umode_t ideapad_is_visible(struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute_group ideapad_attribute_group = {
+=======
+static const struct attribute_group ideapad_attribute_group = {
+>>>>>>> v3.18
 =======
 static const struct attribute_group ideapad_attribute_group = {
 >>>>>>> v3.18
@@ -572,7 +664,11 @@ struct ideapad_rfk_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct ideapad_rfk_data ideapad_rfk_data[] = {
+=======
+static const struct ideapad_rfk_data ideapad_rfk_data[] = {
+>>>>>>> v3.18
 =======
 static const struct ideapad_rfk_data ideapad_rfk_data[] = {
 >>>>>>> v3.18
@@ -584,9 +680,15 @@ static const struct ideapad_rfk_data ideapad_rfk_data[] = {
 static int ideapad_rfk_set(void *data, bool blocked)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long opcode = (unsigned long)data;
 
 	return write_ec_cmd(ideapad_handle, opcode, !blocked);
+=======
+	struct ideapad_rfk_priv *priv = data;
+
+	return write_ec_cmd(priv->priv->adev->handle, priv->dev, !blocked);
+>>>>>>> v3.18
 =======
 	struct ideapad_rfk_priv *priv = data;
 
@@ -601,6 +703,7 @@ static struct rfkill_ops ideapad_rfk_ops = {
 static void ideapad_sync_rfk_state(struct ideapad_private *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long hw_blocked;
 	int i;
 
@@ -608,6 +711,8 @@ static void ideapad_sync_rfk_state(struct ideapad_private *priv)
 		return;
 	hw_blocked = !hw_blocked;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long hw_blocked = 0;
 	int i;
 
@@ -616,6 +721,9 @@ static void ideapad_sync_rfk_state(struct ideapad_private *priv)
 			return;
 		hw_blocked = !hw_blocked;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < IDEAPAD_RFKILL_DEV_NUM; i++)
@@ -624,9 +732,14 @@ static void ideapad_sync_rfk_state(struct ideapad_private *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ideapad_register_rfkill(struct acpi_device *adevice, int dev)
 {
 	struct ideapad_private *priv = dev_get_drvdata(&adevice->dev);
+=======
+static int ideapad_register_rfkill(struct ideapad_private *priv, int dev)
+{
+>>>>>>> v3.18
 =======
 static int ideapad_register_rfkill(struct ideapad_private *priv, int dev)
 {
@@ -637,6 +750,7 @@ static int ideapad_register_rfkill(struct ideapad_private *priv, int dev)
 	if (no_bt_rfkill &&
 	    (ideapad_rfk_data[dev].type == RFKILL_TYPE_BLUETOOTH)) {
 		/* Force to enable bluetooth when no_bt_rfkill=1 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		write_ec_cmd(ideapad_handle,
 			     ideapad_rfk_data[dev].opcode, 1);
@@ -651,6 +765,8 @@ static int ideapad_register_rfkill(struct ideapad_private *priv, int dev)
 
 	if (read_ec_data(ideapad_handle, ideapad_rfk_data[dev].opcode-1,
 =======
+=======
+>>>>>>> v3.18
 		write_ec_cmd(priv->adev->handle,
 			     ideapad_rfk_data[dev].opcode, 1);
 		return 0;
@@ -667,6 +783,9 @@ static int ideapad_register_rfkill(struct ideapad_private *priv, int dev)
 		return -ENOMEM;
 
 	if (read_ec_data(priv->adev->handle, ideapad_rfk_data[dev].opcode-1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 &sw_blocked)) {
 		rfkill_init_sw_state(priv->rfk[dev], 0);
@@ -684,10 +803,15 @@ static int ideapad_register_rfkill(struct ideapad_private *priv, int dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ideapad_unregister_rfkill(struct acpi_device *adevice, int dev)
 {
 	struct ideapad_private *priv = dev_get_drvdata(&adevice->dev);
 
+=======
+static void ideapad_unregister_rfkill(struct ideapad_private *priv, int dev)
+{
+>>>>>>> v3.18
 =======
 static void ideapad_unregister_rfkill(struct ideapad_private *priv, int dev)
 {
@@ -702,6 +826,7 @@ static void ideapad_unregister_rfkill(struct ideapad_private *priv, int dev)
 /*
  * Platform device
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ideapad_platform_init(struct ideapad_private *priv)
 {
@@ -735,6 +860,8 @@ static void ideapad_platform_exit(struct ideapad_private *priv)
 			   &ideapad_attribute_group);
 	platform_device_unregister(priv->platform_device);
 =======
+=======
+>>>>>>> v3.18
 static int ideapad_sysfs_init(struct ideapad_private *priv)
 {
 	return sysfs_create_group(&priv->platform_device->dev.kobj,
@@ -745,6 +872,9 @@ static void ideapad_sysfs_exit(struct ideapad_private *priv)
 {
 	sysfs_remove_group(&priv->platform_device->dev.kobj,
 			   &ideapad_attribute_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -772,10 +902,15 @@ static int ideapad_input_init(struct ideapad_private *priv)
 
 	inputdev = input_allocate_device();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!inputdev) {
 		pr_info("Unable to allocate input device\n");
 		return -ENOMEM;
 	}
+=======
+	if (!inputdev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!inputdev)
 		return -ENOMEM;
@@ -826,7 +961,11 @@ static void ideapad_input_novokey(struct ideapad_private *priv)
 	unsigned long long_pressed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (read_ec_data(ideapad_handle, VPCCMD_R_NOVO, &long_pressed))
+=======
+	if (read_ec_data(priv->adev->handle, VPCCMD_R_NOVO, &long_pressed))
+>>>>>>> v3.18
 =======
 	if (read_ec_data(priv->adev->handle, VPCCMD_R_NOVO, &long_pressed))
 >>>>>>> v3.18
@@ -842,7 +981,11 @@ static void ideapad_check_special_buttons(struct ideapad_private *priv)
 	unsigned long bit, value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_ec_data(ideapad_handle, VPCCMD_R_SPECIAL_BUTTONS, &value);
+=======
+	read_ec_data(priv->adev->handle, VPCCMD_R_SPECIAL_BUTTONS, &value);
+>>>>>>> v3.18
 =======
 	read_ec_data(priv->adev->handle, VPCCMD_R_SPECIAL_BUTTONS, &value);
 >>>>>>> v3.18
@@ -873,10 +1016,13 @@ static void ideapad_check_special_buttons(struct ideapad_private *priv)
 static int ideapad_backlight_get_brightness(struct backlight_device *blightdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long now;
 
 	if (read_ec_data(ideapad_handle, VPCCMD_R_BL, &now))
 =======
+=======
+>>>>>>> v3.18
 	struct ideapad_private *priv = bl_get_data(blightdev);
 	unsigned long now;
 
@@ -884,6 +1030,9 @@ static int ideapad_backlight_get_brightness(struct backlight_device *blightdev)
 		return -EINVAL;
 
 	if (read_ec_data(priv->adev->handle, VPCCMD_R_BL, &now))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	return now;
@@ -892,11 +1041,14 @@ static int ideapad_backlight_get_brightness(struct backlight_device *blightdev)
 static int ideapad_backlight_update_status(struct backlight_device *blightdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (write_ec_cmd(ideapad_handle, VPCCMD_W_BL,
 			 blightdev->props.brightness))
 		return -EIO;
 	if (write_ec_cmd(ideapad_handle, VPCCMD_W_BL_POWER,
 =======
+=======
+>>>>>>> v3.18
 	struct ideapad_private *priv = bl_get_data(blightdev);
 
 	if (!priv)
@@ -906,6 +1058,9 @@ static int ideapad_backlight_update_status(struct backlight_device *blightdev)
 			 blightdev->props.brightness))
 		return -EIO;
 	if (write_ec_cmd(priv->adev->handle, VPCCMD_W_BL_POWER,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 blightdev->props.power == FB_BLANK_POWERDOWN ? 0 : 1))
 		return -EIO;
@@ -925,17 +1080,23 @@ static int ideapad_backlight_init(struct ideapad_private *priv)
 	unsigned long max, now, power;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (read_ec_data(ideapad_handle, VPCCMD_R_BL_MAX, &max))
 		return -EIO;
 	if (read_ec_data(ideapad_handle, VPCCMD_R_BL, &now))
 		return -EIO;
 	if (read_ec_data(ideapad_handle, VPCCMD_R_BL_POWER, &power))
 =======
+=======
+>>>>>>> v3.18
 	if (read_ec_data(priv->adev->handle, VPCCMD_R_BL_MAX, &max))
 		return -EIO;
 	if (read_ec_data(priv->adev->handle, VPCCMD_R_BL, &now))
 		return -EIO;
 	if (read_ec_data(priv->adev->handle, VPCCMD_R_BL_POWER, &power))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 
@@ -975,7 +1136,11 @@ static void ideapad_backlight_notify_power(struct ideapad_private *priv)
 	if (!blightdev)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (read_ec_data(ideapad_handle, VPCCMD_R_BL_POWER, &power))
+=======
+	if (read_ec_data(priv->adev->handle, VPCCMD_R_BL_POWER, &power))
+>>>>>>> v3.18
 =======
 	if (read_ec_data(priv->adev->handle, VPCCMD_R_BL_POWER, &power))
 >>>>>>> v3.18
@@ -990,7 +1155,11 @@ static void ideapad_backlight_notify_brightness(struct ideapad_private *priv)
 	/* if we control brightness via acpi video driver */
 	if (priv->blightdev == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		read_ec_data(ideapad_handle, VPCCMD_R_BL, &now);
+=======
+		read_ec_data(priv->adev->handle, VPCCMD_R_BL, &now);
+>>>>>>> v3.18
 =======
 		read_ec_data(priv->adev->handle, VPCCMD_R_BL, &now);
 >>>>>>> v3.18
@@ -1003,6 +1172,7 @@ static void ideapad_backlight_notify_brightness(struct ideapad_private *priv)
 /*
  * module init/exit
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct acpi_device_id ideapad_device_ids[] = {
 	{ "VPC2004", 0},
@@ -1018,12 +1188,17 @@ static void ideapad_sync_touchpad_state(struct acpi_device *adevice)
 	/* Without reading from EC touchpad LED doesn't switch state */
 	if (!read_ec_data(adevice->handle, VPCCMD_R_TOUCHPAD, &value)) {
 =======
+=======
+>>>>>>> v3.18
 static void ideapad_sync_touchpad_state(struct ideapad_private *priv)
 {
 	unsigned long value;
 
 	/* Without reading from EC touchpad LED doesn't switch state */
 	if (!read_ec_data(priv->adev->handle, VPCCMD_R_TOUCHPAD, &value)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Some IdeaPads don't really turn off touchpad - they only
 		 * switch the LED state. We (de)activate KBC AUX port to turn
@@ -1037,8 +1212,11 @@ static void ideapad_sync_touchpad_state(struct ideapad_private *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ideapad_acpi_add(struct acpi_device *adevice)
 =======
+=======
+>>>>>>> v3.18
 static void ideapad_acpi_notify(acpi_handle handle, u32 event, void *data)
 {
 	struct ideapad_private *priv = data;
@@ -1108,11 +1286,15 @@ static const struct dmi_system_id no_hw_rfkill_list[] = {
 };
 
 static int ideapad_acpi_add(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret, i;
 	int cfg;
 	struct ideapad_private *priv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (read_method_int(adevice->handle, "_CFG", &cfg))
@@ -1130,6 +1312,8 @@ static int ideapad_acpi_add(struct platform_device *pdev)
 	if (ret)
 		goto platform_failed;
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *adev;
 
 	ret = acpi_bus_get_device(ACPI_HANDLE(&pdev->dev), &adev);
@@ -1152,6 +1336,9 @@ static int ideapad_acpi_add(struct platform_device *pdev)
 	ret = ideapad_sysfs_init(priv);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ideapad_debugfs_init(priv);
@@ -1163,6 +1350,7 @@ static int ideapad_acpi_add(struct platform_device *pdev)
 		goto input_failed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < IDEAPAD_RFKILL_DEV_NUM; i++) {
 		if (test_bit(ideapad_rfk_data[i].cfgbit, &priv->cfg))
 			ideapad_register_rfkill(adevice, i);
@@ -1172,6 +1360,8 @@ static int ideapad_acpi_add(struct platform_device *pdev)
 	ideapad_sync_rfk_state(priv);
 	ideapad_sync_touchpad_state(adevice);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * On some models without a hw-switch (the yoga 2 13 at least)
 	 * VPCCMD_W_RF must be explicitly set to 1 for the wifi to work.
@@ -1185,6 +1375,9 @@ static int ideapad_acpi_add(struct platform_device *pdev)
 
 	ideapad_sync_rfk_state(priv);
 	ideapad_sync_touchpad_state(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!acpi_video_backlight_support()) {
@@ -1193,6 +1386,7 @@ static int ideapad_acpi_add(struct platform_device *pdev)
 			goto backlight_failed;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 
@@ -1200,6 +1394,8 @@ backlight_failed:
 	for (i = 0; i < IDEAPAD_RFKILL_DEV_NUM; i++)
 		ideapad_unregister_rfkill(adevice, i);
 =======
+=======
+>>>>>>> v3.18
 	ret = acpi_install_notify_handler(adev->handle,
 		ACPI_DEVICE_NOTIFY, ideapad_acpi_notify, priv);
 	if (ret)
@@ -1211,11 +1407,15 @@ notification_failed:
 backlight_failed:
 	for (i = 0; i < IDEAPAD_RFKILL_DEV_NUM; i++)
 		ideapad_unregister_rfkill(priv, i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ideapad_input_exit(priv);
 input_failed:
 	ideapad_debugfs_exit(priv);
 debugfs_failed:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ideapad_platform_exit(priv);
 platform_failed:
@@ -1237,6 +1437,8 @@ static int ideapad_acpi_remove(struct acpi_device *adevice)
 	dev_set_drvdata(&adevice->dev, NULL);
 	kfree(priv);
 =======
+=======
+>>>>>>> v3.18
 	ideapad_sysfs_exit(priv);
 	return ret;
 }
@@ -1255,11 +1457,15 @@ static int ideapad_acpi_remove(struct platform_device *pdev)
 	ideapad_debugfs_exit(priv);
 	ideapad_sysfs_exit(priv);
 	dev_set_drvdata(&pdev->dev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ideapad_acpi_notify(struct acpi_device *adevice, u32 event)
 {
@@ -1328,6 +1534,8 @@ static struct acpi_driver ideapad_acpi_driver = {
 };
 module_acpi_driver(ideapad_acpi_driver);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int ideapad_acpi_resume(struct device *device)
 {
@@ -1362,6 +1570,9 @@ static struct platform_driver ideapad_acpi_driver = {
 };
 
 module_platform_driver(ideapad_acpi_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("David Woodhouse <dwmw2@infradead.org>");

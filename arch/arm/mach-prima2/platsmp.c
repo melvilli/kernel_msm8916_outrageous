@@ -45,7 +45,11 @@ void __init sirfsoc_map_scu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit sirfsoc_secondary_init(unsigned int cpu)
+=======
+static void sirfsoc_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void sirfsoc_secondary_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ static struct of_device_id rsc_ids[]  = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit sirfsoc_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+static int sirfsoc_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static int sirfsoc_boot_secondary(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -115,8 +123,12 @@ static int sirfsoc_boot_secondary(unsigned int cpu, struct task_struct *idle)
 	 */
 	pen_release = cpu_logical_map(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__cpuc_flush_dcache_area((void *)&pen_release, sizeof(pen_release));
 	outer_clean_range(__pa(&pen_release), __pa(&pen_release + 1));
+=======
+	sync_cache_w(&pen_release);
+>>>>>>> v3.18
 =======
 	sync_cache_w(&pen_release);
 >>>>>>> v3.18
@@ -152,9 +164,15 @@ static void __init sirfsoc_smp_prepare_cpus(unsigned int max_cpus)
 
 struct smp_operations sirfsoc_smp_ops __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
         .smp_prepare_cpus       = sirfsoc_smp_prepare_cpus,
         .smp_secondary_init     = sirfsoc_secondary_init,
         .smp_boot_secondary     = sirfsoc_boot_secondary,
+=======
+	.smp_prepare_cpus       = sirfsoc_smp_prepare_cpus,
+	.smp_secondary_init     = sirfsoc_secondary_init,
+	.smp_boot_secondary     = sirfsoc_boot_secondary,
+>>>>>>> v3.18
 =======
 	.smp_prepare_cpus       = sirfsoc_smp_prepare_cpus,
 	.smp_secondary_init     = sirfsoc_secondary_init,

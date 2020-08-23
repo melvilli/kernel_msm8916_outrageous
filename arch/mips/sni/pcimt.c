@@ -186,6 +186,10 @@ static void __init sni_pcimt_resource_init(void)
 extern struct pci_ops sni_pcimt_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PCI
 >>>>>>> v3.18
@@ -198,6 +202,10 @@ static struct pci_controller sni_controller = {
 	.io_map_base	= SNI_PORT_BASE
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

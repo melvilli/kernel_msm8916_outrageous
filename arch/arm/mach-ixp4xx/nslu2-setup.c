@@ -198,11 +198,16 @@ static void nslu2_power_off(void)
 	/* This causes the box to drop the power and go dead. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable the pwr cntl gpio */
 	gpio_line_config(NSLU2_PO_GPIO, IXP4XX_GPIO_OUT);
 
 	/* do the deed */
 	gpio_line_set(NSLU2_PO_GPIO, IXP4XX_GPIO_HIGH);
+=======
+	/* enable the pwr cntl gpio and assert power off */
+	gpio_direction_output(NSLU2_PO_GPIO, 1);
+>>>>>>> v3.18
 =======
 	/* enable the pwr cntl gpio and assert power off */
 	gpio_direction_output(NSLU2_PO_GPIO, 1);
@@ -229,7 +234,10 @@ static irqreturn_t nslu2_reset_handler(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init nslu2_gpio_init(void)
 {
 	if (!machine_is_nslu2())
@@ -240,6 +248,9 @@ static int __init nslu2_gpio_init(void)
 }
 device_initcall(nslu2_gpio_init);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init nslu2_timer_init(void)
 {
@@ -277,8 +288,12 @@ static void __init nslu2_init(void)
 
 	if (request_irq(gpio_to_irq(NSLU2_RB_GPIO), &nslu2_reset_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_DISABLED | IRQF_TRIGGER_LOW,
 		"NSLU2 reset button", NULL) < 0) {
+=======
+		IRQF_TRIGGER_LOW, "NSLU2 reset button", NULL) < 0) {
+>>>>>>> v3.18
 =======
 		IRQF_TRIGGER_LOW, "NSLU2 reset button", NULL) < 0) {
 >>>>>>> v3.18
@@ -289,8 +304,12 @@ static void __init nslu2_init(void)
 
 	if (request_irq(gpio_to_irq(NSLU2_PB_GPIO), &nslu2_power_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_DISABLED | IRQF_TRIGGER_HIGH,
 		"NSLU2 power button", NULL) < 0) {
+=======
+		IRQF_TRIGGER_HIGH, "NSLU2 power button", NULL) < 0) {
+>>>>>>> v3.18
 =======
 		IRQF_TRIGGER_HIGH, "NSLU2 power button", NULL) < 0) {
 >>>>>>> v3.18

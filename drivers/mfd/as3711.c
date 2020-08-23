@@ -18,6 +18,10 @@
 #include <linux/mfd/core.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -118,7 +122,11 @@ static const struct regmap_config as3711_regmap_config = {
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id as3711_of_match[] = {
+=======
+static const struct of_device_id as3711_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id as3711_of_match[] = {
 >>>>>>> v3.18
@@ -138,7 +146,11 @@ static int as3711_i2c_probe(struct i2c_client *client,
 
 	if (!client->dev.of_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdata = client->dev.platform_data;
+=======
+		pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 		pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

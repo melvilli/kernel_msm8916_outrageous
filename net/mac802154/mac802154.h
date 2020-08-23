@@ -24,13 +24,19 @@
 #define MAC802154_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mutex.h>
 #include <net/mac802154.h>
 #include <net/ieee802154_netdev.h>
 
 #include "llsec.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* mac802154 device private data */
 struct mac802154_priv {
@@ -81,6 +87,10 @@ struct mac802154_sub_if_data {
 
 	int type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool running;
+>>>>>>> v3.18
 =======
 	bool running;
 >>>>>>> v3.18
@@ -90,6 +100,10 @@ struct mac802154_sub_if_data {
 	__le16 pan_id;
 	__le16 short_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__le64 extended_addr;
+>>>>>>> v3.18
 =======
 	__le64 extended_addr;
 >>>>>>> v3.18
@@ -98,6 +112,11 @@ struct mac802154_sub_if_data {
 	u8 page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee802154_mac_params mac_params;
+
+>>>>>>> v3.18
 =======
 	struct ieee802154_mac_params mac_params;
 
@@ -107,7 +126,10 @@ struct mac802154_sub_if_data {
 	/* MAC DSN field */
 	u8 dsn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* protects sec from concurrent access by netlink. access by
 	 * encrypt/decrypt/header_create safe without additional protection.
@@ -115,6 +137,9 @@ struct mac802154_sub_if_data {
 	struct mutex sec_mtx;
 
 	struct mac802154_llsec sec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -139,6 +164,7 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 
 /* MIB callbacks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mac802154_dev_set_short_addr(struct net_device *dev, u16 val);
 u16 mac802154_dev_get_short_addr(const struct net_device *dev);
 void mac802154_dev_set_ieee_addr(struct net_device *dev);
@@ -148,6 +174,8 @@ void mac802154_dev_set_page_channel(struct net_device *dev, u8 page, u8 chan);
 u8 mac802154_dev_get_dsn(const struct net_device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 void mac802154_dev_set_short_addr(struct net_device *dev, __le16 val);
 __le16 mac802154_dev_get_short_addr(const struct net_device *dev);
 void mac802154_dev_set_ieee_addr(struct net_device *dev);
@@ -194,5 +222,8 @@ void mac802154_get_table(struct net_device *dev,
 			 struct ieee802154_llsec_table **t);
 void mac802154_unlock_table(struct net_device *dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* MAC802154_H */

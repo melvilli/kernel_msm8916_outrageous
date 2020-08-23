@@ -3,6 +3,7 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y		:= irq.o gpio.o setup.o sysirq_mask.o
 obj-m		:=
 obj-n		:=
@@ -13,10 +14,15 @@ obj-$(CONFIG_AT91_SAM9_ALT_RESET) += at91sam9_alt_reset.o
 obj-$(CONFIG_AT91_SAM9G45_RESET) += at91sam9g45_reset.o
 obj-$(CONFIG_AT91_SAM9_TIME)	+= at91sam926x_time.o
 =======
+=======
+>>>>>>> v3.18
 obj-y		:= gpio.o setup.o sysirq_mask.o
 
 obj-$(CONFIG_OLD_IRQ_AT91)	+= irq.o
 obj-$(CONFIG_OLD_CLK_AT91)	+= clock.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_SOC_AT91SAM9)	+= sam9_smc.o
 
@@ -31,6 +37,10 @@ obj-$(CONFIG_SOC_AT91SAM9X5)	+= at91sam9x5.o
 obj-$(CONFIG_SOC_AT91SAM9RL)	+= at91sam9rl.o
 obj-$(CONFIG_SOC_SAMA5D3)	+= sama5d3.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SOC_SAMA5D4)	+= sama5d4.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SOC_SAMA5D4)	+= sama5d4.o
 >>>>>>> v3.18
@@ -39,10 +49,15 @@ obj-$(CONFIG_ARCH_AT91RM9200)	+= at91rm9200_devices.o
 obj-$(CONFIG_ARCH_AT91SAM9260)	+= at91sam9260_devices.o
 obj-$(CONFIG_ARCH_AT91SAM9261)	+= at91sam9261_devices.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ARCH_AT91SAM9G10)	+= at91sam9261_devices.o
 obj-$(CONFIG_ARCH_AT91SAM9263)	+= at91sam9263_devices.o
 obj-$(CONFIG_ARCH_AT91SAM9RL)	+= at91sam9rl_devices.o
 obj-$(CONFIG_ARCH_AT91SAM9G20)	+= at91sam9260_devices.o
+=======
+obj-$(CONFIG_ARCH_AT91SAM9263)	+= at91sam9263_devices.o
+obj-$(CONFIG_ARCH_AT91SAM9RL)	+= at91sam9rl_devices.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_ARCH_AT91SAM9263)	+= at91sam9263_devices.o
 obj-$(CONFIG_ARCH_AT91SAM9RL)	+= at91sam9rl_devices.o
@@ -53,7 +68,10 @@ obj-$(CONFIG_ARCH_AT91X40)	+= at91x40.o at91x40_time.o
 # AT91RM9200 board-specific support
 obj-$(CONFIG_MACH_ONEARM)	+= board-1arm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ARCH_AT91RM9200DK)	+= board-rm9200dk.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MACH_AT91RM9200EK)	+= board-rm9200ek.o
@@ -69,7 +87,10 @@ obj-$(CONFIG_MACH_YL9200)	+= board-yl-9200.o
 obj-$(CONFIG_MACH_CPUAT91)	+= board-cpuat91.o
 obj-$(CONFIG_MACH_ECO920)	+= board-eco920.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_RSI_EWS)	+= board-rsi-ews.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -78,8 +99,11 @@ obj-$(CONFIG_MACH_AT91SAM9260EK) += board-sam9260ek.o
 obj-$(CONFIG_MACH_CAM60)	+= board-cam60.o
 obj-$(CONFIG_MACH_SAM9_L9260)	+= board-sam9-l9260.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_USB_A9260)	+= board-usb-a926x.o
 obj-$(CONFIG_MACH_QIL_A9260)	+= board-qil-a9260.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MACH_AFEB9260)	+= board-afeb-9260v1.o
@@ -93,7 +117,10 @@ obj-$(CONFIG_MACH_AT91SAM9G10EK) += board-sam9261ek.o
 # AT91SAM9263 board-specific support
 obj-$(CONFIG_MACH_AT91SAM9263EK) += board-sam9263ek.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_USB_A9263)	+= board-usb-a926x.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -104,7 +131,10 @@ obj-$(CONFIG_MACH_AT91SAM9RLEK)	+= board-sam9rlek.o
 obj-$(CONFIG_MACH_AT91SAM9G20EK) += board-sam9g20ek.o
 obj-$(CONFIG_MACH_CPU9G20)	+= board-cpu9krea.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_ACMENETUSFOXG20) += board-foxg20.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MACH_STAMP9G20)	+= board-stamp9g20.o
@@ -112,7 +142,10 @@ obj-$(CONFIG_MACH_PORTUXG20)	+= board-stamp9g20.o
 obj-$(CONFIG_MACH_PCONTROL_G20)	+= board-pcontrol-g20.o board-stamp9g20.o
 obj-$(CONFIG_MACH_GSIA18S)	+= board-gsia18s.o board-stamp9g20.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_USB_A9G20)	+= board-usb-a926x.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -139,7 +172,10 @@ obj-y				+= leds.o
 obj-$(CONFIG_PM)		+= pm.o
 obj-$(CONFIG_AT91_SLOW_CLOCK)	+= pm_slowclock.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CPU_IDLE)	+= cpuidle.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

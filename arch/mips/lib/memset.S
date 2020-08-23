@@ -35,9 +35,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EX(insn,reg,addr,handler)			\
 9:	insn	reg, addr;				\
 =======
+=======
+>>>>>>> v3.18
 #define LEGACY_MODE 1
 #define EVA_MODE    2
 
@@ -54,13 +57,20 @@
 	.else;						\
 9:		___BUILD_EVA_INSN(insn, reg, addr);	\
 	.endif;						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.section __ex_table,"a";			\
 	PTR	9b, handler;				\
 	.previous
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	f_fill64 dst, offset, val, fixup
+=======
+	.macro	f_fill64 dst, offset, val, fixup, mode
+>>>>>>> v3.18
 =======
 	.macro	f_fill64 dst, offset, val, fixup, mode
 >>>>>>> v3.18
@@ -86,6 +96,7 @@
 #endif
 	.endm
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * memset(void *s, int c, size_t n)
@@ -116,6 +127,8 @@ FEXPORT(__bzero)
 	bnez		t0, .Lsmall_memset
 	 andi		t0, a0, STORMASK	/* aligned? */
 =======
+=======
+>>>>>>> v3.18
 	.set	noreorder
 	.align	5
 
@@ -134,6 +147,9 @@ FEXPORT(__bzero)
 	sltiu		t0, a2, STORSIZE	/* very small region? */
 	bnez		t0, .Lsmall_memset\@
 	andi		t0, a0, STORMASK	/* aligned? */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_CPU_MICROMIPS
@@ -143,7 +159,11 @@ FEXPORT(__bzero)
 #ifndef CONFIG_CPU_DADDI_WORKAROUNDS
 	beqz		t0, 1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 PTR_SUBU	t0, STORSIZE		/* alignment in bytes */
+=======
+	PTR_SUBU	t0, STORSIZE		/* alignment in bytes */
+>>>>>>> v3.18
 =======
 	PTR_SUBU	t0, STORSIZE		/* alignment in bytes */
 >>>>>>> v3.18
@@ -152,7 +172,11 @@ FEXPORT(__bzero)
 	li		AT, STORSIZE
 	beqz		t0, 1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 PTR_SUBU	t0, AT			/* alignment in bytes */
+=======
+	PTR_SUBU	t0, AT			/* alignment in bytes */
+>>>>>>> v3.18
 =======
 	PTR_SUBU	t0, AT			/* alignment in bytes */
 >>>>>>> v3.18
@@ -162,15 +186,21 @@ FEXPORT(__bzero)
 	R10KCBARRIER(0(ra))
 #ifdef __MIPSEB__
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EX(LONG_S_L, a1, (a0), .Lfirst_fixup)	/* make word/dword aligned */
 #endif
 #ifdef __MIPSEL__
 	EX(LONG_S_R, a1, (a0), .Lfirst_fixup)	/* make word/dword aligned */
 =======
+=======
+>>>>>>> v3.18
 	EX(LONG_S_L, a1, (a0), .Lfirst_fixup\@)	/* make word/dword aligned */
 #endif
 #ifdef __MIPSEL__
 	EX(LONG_S_R, a1, (a0), .Lfirst_fixup\@)	/* make word/dword aligned */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	PTR_SUBU	a0, t0			/* long align ptr */
@@ -179,8 +209,13 @@ FEXPORT(__bzero)
 1:	ori		t1, a2, 0x3f		/* # of full blocks */
 	xori		t1, 0x3f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beqz		t1, .Lmemset_partial	/* no block to fill */
 	 andi		t0, a2, 0x40-STORSIZE
+=======
+	beqz		t1, .Lmemset_partial\@	/* no block to fill */
+	andi		t0, a2, 0x40-STORSIZE
+>>>>>>> v3.18
 =======
 	beqz		t1, .Lmemset_partial\@	/* no block to fill */
 	andi		t0, a2, 0x40-STORSIZE
@@ -191,17 +226,23 @@ FEXPORT(__bzero)
 1:	PTR_ADDIU	a0, 64
 	R10KCBARRIER(0(ra))
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f_fill64 a0, -64, FILL64RG, .Lfwd_fixup
 	bne		t1, a0, 1b
 	.set		noreorder
 
 .Lmemset_partial:
 =======
+=======
+>>>>>>> v3.18
 	f_fill64 a0, -64, FILL64RG, .Lfwd_fixup\@, \mode
 	bne		t1, a0, 1b
 	.set		noreorder
 
 .Lmemset_partial\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	R10KCBARRIER(0(ra))
 	PTR_LA		t1, 2f			/* where to start */
@@ -218,7 +259,11 @@ FEXPORT(__bzero)
 #endif
 	jr		t1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 PTR_ADDU	a0, t0			/* dest ptr */
+=======
+	PTR_ADDU	a0, t0			/* dest ptr */
+>>>>>>> v3.18
 =======
 	PTR_ADDU	a0, t0			/* dest ptr */
 >>>>>>> v3.18
@@ -227,7 +272,12 @@ FEXPORT(__bzero)
 	.set		noreorder
 	.set		nomacro
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f_fill64 a0, -64, FILL64RG, .Lpartial_fixup	/* ... but first do longs ... */
+=======
+	/* ... but first do longs ... */
+	f_fill64 a0, -64, FILL64RG, .Lpartial_fixup\@, \mode
+>>>>>>> v3.18
 =======
 	/* ... but first do longs ... */
 	f_fill64 a0, -64, FILL64RG, .Lpartial_fixup\@, \mode
@@ -236,6 +286,7 @@ FEXPORT(__bzero)
 	andi		a2, STORMASK		/* At most one long to go */
 
 	beqz		a2, 1f
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 PTR_ADDU	a0, a2			/* What's left */
 	R10KCBARRIER(0(ra))
@@ -252,6 +303,8 @@ FEXPORT(__bzero)
 	beqz		a2, 2f
 	 PTR_ADDU	t1, a0, a2
 =======
+=======
+>>>>>>> v3.18
 	PTR_ADDU	a0, a2			/* What's left */
 	R10KCBARRIER(0(ra))
 #ifdef __MIPSEB__
@@ -266,11 +319,15 @@ FEXPORT(__bzero)
 .Lsmall_memset\@:
 	beqz		a2, 2f
 	PTR_ADDU	t1, a0, a2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 1:	PTR_ADDIU	a0, 1			/* fill bytewise */
 	R10KCBARRIER(0(ra))
 	bne		t1, a0, 1b
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 sb		a1, -1(a0)
 
@@ -284,6 +341,8 @@ FEXPORT(__bzero)
 
 .Lfwd_fixup:
 =======
+=======
+>>>>>>> v3.18
 	sb		a1, -1(a0)
 
 2:	jr		ra			/* done */
@@ -299,6 +358,9 @@ FEXPORT(__bzero)
 	nop
 
 .Lfwd_fixup\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PTR_L		t0, TI_TASK($28)
 	andi		a2, 0x3f
@@ -306,9 +368,15 @@ FEXPORT(__bzero)
 	LONG_ADDU	a2, t1
 	jr		ra
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 LONG_SUBU	a2, t0
 
 .Lpartial_fixup:
+=======
+	LONG_SUBU	a2, t0
+
+.Lpartial_fixup\@:
+>>>>>>> v3.18
 =======
 	LONG_SUBU	a2, t0
 
@@ -320,12 +388,15 @@ FEXPORT(__bzero)
 	LONG_ADDU	a2, t1
 	jr		ra
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 LONG_SUBU	a2, t0
 
 .Llast_fixup:
 	jr		ra
 	 andi		v1, a2, STORMASK
 =======
+=======
+>>>>>>> v3.18
 	LONG_SUBU	a2, t0
 
 .Llast_fixup\@:
@@ -366,4 +437,7 @@ LEAF(__bzero)
 	__BUILD_BZERO EVA_MODE
 END(__bzero)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

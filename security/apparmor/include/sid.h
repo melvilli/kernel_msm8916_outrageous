@@ -17,7 +17,13 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aa_profile;
+=======
+/* sid value that will not be allocated */
+#define AA_SID_INVALID 0
+#define AA_SID_ALLOC AA_SID_INVALID
+>>>>>>> v3.18
 =======
 /* sid value that will not be allocated */
 #define AA_SID_INVALID 0

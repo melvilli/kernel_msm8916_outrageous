@@ -350,6 +350,7 @@ EXPORT_SYMBOL_GPL(eventfd_fget);
 struct eventfd_ctx *eventfd_ctx_fdget(int fd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *file;
 	struct eventfd_ctx *ctx;
 
@@ -360,12 +361,17 @@ struct eventfd_ctx *eventfd_ctx_fdget(int fd)
 	fput(file);
 
 =======
+=======
+>>>>>>> v3.18
 	struct eventfd_ctx *ctx;
 	struct fd f = fdget(fd);
 	if (!f.file)
 		return ERR_PTR(-EBADF);
 	ctx = eventfd_ctx_fileget(f.file);
 	fdput(f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ctx;
 }

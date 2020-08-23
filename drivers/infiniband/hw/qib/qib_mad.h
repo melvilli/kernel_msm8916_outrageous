@@ -55,7 +55,11 @@ struct ib_node_info {
 	u8 local_port_num;
 	u8 vendor_id[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ struct ib_mad_notice_attr {
 			__be16	lid;		/* where violation happened */
 			u8	port_num;	/* where violation happened */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_129_131;
+=======
+		} __packed ntc_129_131;
+>>>>>>> v3.18
 =======
 		} __packed ntc_129_131;
 >>>>>>> v3.18
@@ -92,7 +100,11 @@ struct ib_mad_notice_attr {
 			u8	reserved3;
 			u8	change_flags;	/* low 3 bits only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_144;
+=======
+		} __packed ntc_144;
+>>>>>>> v3.18
 =======
 		} __packed ntc_144;
 >>>>>>> v3.18
@@ -103,7 +115,11 @@ struct ib_mad_notice_attr {
 			__be16	reserved2;
 			__be64	new_sys_guid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_145;
+=======
+		} __packed ntc_145;
+>>>>>>> v3.18
 =======
 		} __packed ntc_145;
 >>>>>>> v3.18
@@ -121,7 +137,11 @@ struct ib_mad_notice_attr {
 			u8	dr_trunc_hop;
 			u8	dr_rtn_path[30];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_256;
+=======
+		} __packed ntc_256;
+>>>>>>> v3.18
 =======
 		} __packed ntc_256;
 >>>>>>> v3.18
@@ -136,7 +156,11 @@ struct ib_mad_notice_attr {
 			union ib_gid	gid1;
 			union ib_gid	gid2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_257_258;
+=======
+		} __packed ntc_257_258;
+>>>>>>> v3.18
 =======
 		} __packed ntc_257_258;
 >>>>>>> v3.18
@@ -234,7 +258,11 @@ struct ib_pma_portcounters_cong {
 	__be64 port_xmit_wait;
 	__be64 port_adr_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -444,7 +472,10 @@ struct cc_table_shadow {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* _QIB_MAD_H */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -460,6 +491,11 @@ struct cc_table_shadow {
 		    COUNTER_MASK(1, 3) | \
 		    COUNTER_MASK(1, 4))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif				/* _QIB_MAD_H */
+>>>>>>> v3.18
 =======
 
 #endif				/* _QIB_MAD_H */

@@ -11,7 +11,11 @@
 
 /* APF28Dev is a docking board for the APF28 SOM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx28-apf28.dts"
+=======
+#include "imx28-apf28.dts"
+>>>>>>> v3.18
 =======
 #include "imx28-apf28.dts"
 >>>>>>> v3.18
@@ -46,6 +50,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x1103 /* MX28_PAD_LCD_D16__GPIO_1_16 */
 						0x1113 /* MX28_PAD_LCD_D17__GPIO_1_17 */
 						0x1123 /* MX28_PAD_LCD_D18__GPIO_1_18 */
@@ -58,6 +63,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_LCD_D16__GPIO_1_16
 						MX28_PAD_LCD_D17__GPIO_1_17
 						MX28_PAD_LCD_D18__GPIO_1_18
@@ -70,12 +77,16 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				lcdif_pins_apf28dev: lcdif-apf28dev@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x1181 /* MX28_PAD_LCD_RD_E__LCD_VSYNC */
 						0x1191 /* MX28_PAD_LCD_WR_RWN__LCD_HSYNC */
@@ -86,6 +97,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_LCD_RD_E__LCD_VSYNC
 						MX28_PAD_LCD_WR_RWN__LCD_HSYNC
 						MX28_PAD_LCD_RS__LCD_DOTCLK
@@ -104,6 +117,9 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -113,15 +129,21 @@
 				pinctrl-0 = <&lcdif_16bit_pins_a
 						&lcdif_pins_apf28dev>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				display = <&display>;
 				status = "okay";
 
 				display: display {
 =======
+=======
+>>>>>>> v3.18
 				display = <&display0>;
 				status = "okay";
 
 				display0: display0 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					bits-per-pixel = <16>;
 					bus-width = <16>;
@@ -151,6 +173,10 @@
 		apbx@80040000 {
 			lradc@80050000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				fsl,lradc-touchscreen-wires = <4>;
+>>>>>>> v3.18
 =======
 				fsl,lradc-touchscreen-wires = <4>;
 >>>>>>> v3.18
@@ -182,6 +208,11 @@
 	ahb@80080000 {
 		usb0: usb@80080000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pinctrl-names = "default";
+			pinctrl-0 = <&usb0_otg_apf28dev>;
+>>>>>>> v3.18
 =======
 			pinctrl-names = "default";
 			pinctrl-0 = <&usb0_otg_apf28dev>;
@@ -206,22 +237,32 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_usb0_vbus: usb0_vbus {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_usb0_vbus: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "usb0_vbus";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
 			gpio = <&gpio1 23 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			enable-active-high;
+>>>>>>> v3.18
 =======
 			enable-active-high;
 >>>>>>> v3.18
@@ -246,7 +287,10 @@
 		default-brightness-level = <6>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	gpio-keys {
 		compatible = "gpio-keys";
@@ -257,5 +301,8 @@
 			linux,code = <0x100>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

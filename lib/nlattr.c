@@ -137,6 +137,10 @@ errout:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_validate);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_validate);
 >>>>>>> v3.18
@@ -167,6 +171,10 @@ nla_policy_len(const struct nla_policy *p, int n)
 	return len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_policy_len);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_policy_len);
 >>>>>>> v3.18
@@ -217,6 +225,10 @@ errout:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_parse);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_parse);
 >>>>>>> v3.18
@@ -241,6 +253,10 @@ struct nlattr *nla_find(const struct nlattr *head, int len, int attrtype)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_find);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_find);
 >>>>>>> v3.18
@@ -275,6 +291,10 @@ size_t nla_strlcpy(char *dst, const struct nlattr *nla, size_t dstsize)
 	return srclen;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_strlcpy);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_strlcpy);
 >>>>>>> v3.18
@@ -299,6 +319,10 @@ int nla_memcpy(void *dest, const struct nlattr *src, int count)
 	return minlen;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_memcpy);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_memcpy);
 >>>>>>> v3.18
@@ -320,6 +344,10 @@ int nla_memcmp(const struct nlattr *nla, const void *data,
 	return d;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_memcmp);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_memcmp);
 >>>>>>> v3.18
@@ -346,6 +374,10 @@ int nla_strcmp(const struct nlattr *nla, const char *str)
 	return d;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_strcmp);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(nla_strcmp);
 >>>>>>> v3.18
@@ -535,6 +567,7 @@ int nla_append(struct sk_buff *skb, int attrlen, const void *data)
 EXPORT_SYMBOL(nla_append);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(nla_validate);
 EXPORT_SYMBOL(nla_policy_len);
@@ -544,5 +577,7 @@ EXPORT_SYMBOL(nla_strlcpy);
 EXPORT_SYMBOL(nla_memcpy);
 EXPORT_SYMBOL(nla_memcmp);
 EXPORT_SYMBOL(nla_strcmp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -25,7 +25,10 @@ For monitoring and control pktgen creates:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Tuning NIC for max performance
 ==============================
 
@@ -54,6 +57,9 @@ For ixgbe use e.g "30" resulting in approx 33K interrupts/sec (1/30*10^6):
  # ethtool -C ethX rx-usecs 30
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Viewing threads
 ===============
@@ -103,6 +109,12 @@ Examples:
  pgset "clone_skb 1"     sets the number of copies of the same packet
  pgset "clone_skb 0"     use single SKB for all transmits
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ pgset "burst 8"         uses xmit_more API to queue 8 copies of the same
+                         packet and update HW tx queue tail pointer once.
+                         "burst 1" is the default
+>>>>>>> v3.18
 =======
  pgset "burst 8"         uses xmit_more API to queue 8 copies of the same
                          packet and update HW tx queue tail pointer once.
@@ -140,6 +152,7 @@ Examples:
 
  pgset "flag [name]"     Set a flag to determine behaviour.  Current flags
 <<<<<<< HEAD
+<<<<<<< HEAD
                          are: IPSRC_RND #IP Source is random (between min/max),
                               IPDST_RND, UDPSRC_RND,
                               UDPDST_RND, MACSRC_RND, MACDST_RND 
@@ -148,6 +161,8 @@ Examples:
                               QUEUE_MAP_CPU # queue map mirrors smp_processor_id()
 
 =======
+=======
+>>>>>>> v3.18
                          are: IPSRC_RND # IP source is random (between min/max)
                               IPDST_RND # IP destination is random
                               UDPSRC_RND, UDPDST_RND,
@@ -162,6 +177,9 @@ Examples:
                               NODE_ALLOC # node specific memory allocation
 
  pgset spi SPI_VALUE     Set specific SA used to transform packet.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  pgset "udp_src_min 9"   set UDP source port min, If < udp_src_max, then
@@ -232,7 +250,10 @@ Note when adding devices to a specific CPU there good idea to also assign
 as this reduces cache bouncing when freeing skb's.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Enable IPsec
 ============
 Default IPsec transformation with ESP encapsulation plus Transport mode
@@ -245,6 +266,9 @@ To avoid breaking existing testbed scripts for using AH type and tunnel mode,
 user could use "pgset spi SPI_VALUE" to specify which formal of transformation
 to employ.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Current commands and configuration options
@@ -289,7 +313,10 @@ udp_dst_max
 flag
   IPSRC_RND
 <<<<<<< HEAD
+<<<<<<< HEAD
   TXSIZE_RND
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   IPDST_RND
@@ -298,7 +325,10 @@ flag
   MACSRC_RND
   MACDST_RND
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   TXSIZE_RND
   IPV6
   MPLS_RND
@@ -310,6 +340,9 @@ flag
   UDPCSUM
   IPSEC
   NODE_ALLOC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 dst_min

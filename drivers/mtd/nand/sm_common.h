@@ -19,7 +19,11 @@ struct sm_oob {
 	uint8_t lba_copy2[2];
 	uint8_t ecc1[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18

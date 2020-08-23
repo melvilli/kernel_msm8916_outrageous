@@ -19,9 +19,15 @@ platforms += mti-malta
 platforms += mti-sead3
 platforms += netlogic
 <<<<<<< HEAD
+<<<<<<< HEAD
 platforms += pmcs-msp71xx
 platforms += pnx833x
 platforms += powertv
+=======
+platforms += paravirt
+platforms += pmcs-msp71xx
+platforms += pnx833x
+>>>>>>> v3.18
 =======
 platforms += paravirt
 platforms += pmcs-msp71xx
@@ -37,7 +43,10 @@ platforms += sni
 platforms += txx9
 platforms += vr41xx
 <<<<<<< HEAD
+<<<<<<< HEAD
 platforms += wrppmc
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -200,6 +200,7 @@ out_error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int axon_msi_check_device(struct pci_dev *dev, int nvec, int type)
 {
 	if (!find_msi_translator(dev))
@@ -208,6 +209,8 @@ static int axon_msi_check_device(struct pci_dev *dev, int nvec, int type)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int setup_msi_msg_address(struct pci_dev *dev, struct msi_msg *msg)
@@ -420,7 +423,10 @@ static int axon_msi_probe(struct platform_device *device)
 	ppc_md.setup_msi_irqs = axon_msi_setup_msi_irqs;
 	ppc_md.teardown_msi_irqs = axon_msi_teardown_msi_irqs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ppc_md.msi_check_device = axon_msi_check_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

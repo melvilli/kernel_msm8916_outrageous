@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -122,13 +126,19 @@ struct asl_resource_node {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct asl_resource_info {
 	union acpi_parse_object *descriptor_type_op;	/* Resource descriptor parse node */
 	union acpi_parse_object *mapping_op;	/* Used for mapfile support */
 	u32 current_byte_offset;	/* Offset in resource template */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Macros used to generate AML resource length fields */
 
@@ -463,7 +473,10 @@ union aml_resource {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Interfaces used by both the disassembler and compiler */
 
 void
@@ -492,5 +505,8 @@ char *mp_get_ddn_value(char *device_name);
 
 char *mp_get_hid_value(struct acpi_namespace_node *device_node);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

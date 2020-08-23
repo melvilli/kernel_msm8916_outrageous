@@ -40,7 +40,10 @@
 #include <linux/types.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -487,7 +490,10 @@ static void korina_multicast_list(struct net_device *dev)
 	struct netdev_hw_addr *ha;
 	u32 recognise = ETH_ARC_AB;	/* always accept broadcasts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -502,12 +508,18 @@ static void korina_multicast_list(struct net_device *dev)
 	/* Build the hash table */
 	if (netdev_mc_count(dev) > 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u16 hash_table[4];
 		u32 crc;
 
 		for (i = 0; i < 4; i++)
 			hash_table[i] = 0;
 
+=======
+		u16 hash_table[4] = { 0 };
+		u32 crc;
+
+>>>>>>> v3.18
 =======
 		u16 hash_table[4] = { 0 };
 		u32 crc;
@@ -918,15 +930,21 @@ static void korina_restart_task(struct work_struct *work)
 				&lp->rx_dma_regs->dmasm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	napi_disable(&lp->napi);
 
 	korina_free_ring(dev);
 
 =======
+=======
+>>>>>>> v3.18
 	korina_free_ring(dev);
 
 	napi_disable(&lp->napi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (korina_init(dev) < 0) {
 		printk(KERN_ERR "%s: cannot restart device\n", dev->name);
@@ -1020,7 +1038,11 @@ static int korina_open(struct net_device *dev)
 	 * Ovr and Und Events */
 	ret = request_irq(lp->rx_irq, korina_rx_dma_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, "Korina ethernet Rx", dev);
+=======
+			0, "Korina ethernet Rx", dev);
+>>>>>>> v3.18
 =======
 			0, "Korina ethernet Rx", dev);
 >>>>>>> v3.18
@@ -1031,7 +1053,11 @@ static int korina_open(struct net_device *dev)
 	}
 	ret = request_irq(lp->tx_irq, korina_tx_dma_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, "Korina ethernet Tx", dev);
+=======
+			0, "Korina ethernet Tx", dev);
+>>>>>>> v3.18
 =======
 			0, "Korina ethernet Tx", dev);
 >>>>>>> v3.18
@@ -1044,7 +1070,11 @@ static int korina_open(struct net_device *dev)
 	/* Install handler for overrun error. */
 	ret = request_irq(lp->ovr_irq, korina_ovr_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, "Ethernet Overflow", dev);
+=======
+			0, "Ethernet Overflow", dev);
+>>>>>>> v3.18
 =======
 			0, "Ethernet Overflow", dev);
 >>>>>>> v3.18
@@ -1057,7 +1087,11 @@ static int korina_open(struct net_device *dev)
 	/* Install handler for underflow error. */
 	ret = request_irq(lp->und_irq, korina_und_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, "Ethernet Underflow", dev);
+=======
+			0, "Ethernet Underflow", dev);
+>>>>>>> v3.18
 =======
 			0, "Ethernet Underflow", dev);
 >>>>>>> v3.18
@@ -1105,6 +1139,11 @@ static int korina_close(struct net_device *dev)
 	writel(tmp, &lp->rx_dma_regs->dmasm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	korina_free_ring(dev);
+
+>>>>>>> v3.18
 =======
 	korina_free_ring(dev);
 
@@ -1114,8 +1153,11 @@ static int korina_close(struct net_device *dev)
 	cancel_work_sync(&lp->restart_task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	korina_free_ring(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_irq(lp->rx_irq, dev);
@@ -1158,7 +1200,11 @@ static int korina_probe(struct platform_device *pdev)
 
 	bif->dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, bif->mac, 6);
+=======
+	memcpy(dev->dev_addr, bif->mac, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, bif->mac, ETH_ALEN);
 >>>>>>> v3.18
@@ -1262,7 +1308,10 @@ static int korina_remove(struct platform_device *pdev)
 	iounmap(lp->tx_dma_regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unregister_netdev(bif->dev);

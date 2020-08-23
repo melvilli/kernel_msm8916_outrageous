@@ -26,8 +26,11 @@ struct sh_mobile_sdhi_info {
 	u32 tmio_ocr_mask;	/* available MMC voltages */
 	unsigned int cd_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_pwr)(struct platform_device *pdev, int state);
 	int (*get_cd)(struct platform_device *pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

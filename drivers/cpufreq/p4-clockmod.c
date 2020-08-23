@@ -93,6 +93,7 @@ static int cpufreq_p4_setdc(unsigned int cpu, unsigned int newstate)
 
 static struct cpufreq_frequency_table p4clockmod_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{DC_RESV, CPUFREQ_ENTRY_INVALID},
 	{DC_DFLT, 0},
 	{DC_25PT, 0},
@@ -128,6 +129,8 @@ static int cpufreq_p4_target(struct cpufreq_policy *policy,
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
 =======
+=======
+>>>>>>> v3.18
 	{0, DC_RESV, CPUFREQ_ENTRY_INVALID},
 	{0, DC_DFLT, 0},
 	{0, DC_25PT, 0},
@@ -145,6 +148,9 @@ static int cpufreq_p4_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	int i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* run on each logical CPU,
 	 * see section 13.15.3 of IA32 Intel Architecture Software
@@ -152,10 +158,14 @@ static int cpufreq_p4_target(struct cpufreq_policy *policy, unsigned int index)
 	 */
 	for_each_cpu(i, policy->cpus)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpufreq_p4_setdc(i, p4clockmod_table[newstate].driver_data);
 
 	/* notifiers */
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+		cpufreq_p4_setdc(i, p4clockmod_table[index].driver_data);
+>>>>>>> v3.18
 =======
 		cpufreq_p4_setdc(i, p4clockmod_table[index].driver_data);
 >>>>>>> v3.18
@@ -165,12 +175,15 @@ static int cpufreq_p4_target(struct cpufreq_policy *policy, unsigned int index)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cpufreq_p4_verify(struct cpufreq_policy *policy)
 {
 	return cpufreq_frequency_table_verify(policy, &p4clockmod_table[0]);
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int cpufreq_p4_get_frequency(struct cpuinfo_x86 *c)
@@ -258,7 +271,10 @@ static int cpufreq_p4_cpu_init(struct cpufreq_policy *policy)
 			p4clockmod_table[i].frequency = (stock_freq * i)/8;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_get_attr(p4clockmod_table, policy->cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -267,6 +283,7 @@ static int cpufreq_p4_cpu_init(struct cpufreq_policy *policy)
 	/* the transition latency is set to be 1 higher than the maximum
 	 * transition latency of the ondemand governor */
 	policy->cpuinfo.transition_latency = 10000001;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cur = stock_freq;
 
@@ -281,11 +298,16 @@ static int cpufreq_p4_cpu_exit(struct cpufreq_policy *policy)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	return cpufreq_table_validate_and_show(policy, &p4clockmod_table[0]);
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int cpufreq_p4_get(unsigned int cpu)
 {
@@ -306,6 +328,7 @@ static unsigned int cpufreq_p4_get(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct freq_attr *p4clockmod_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
 	NULL,
@@ -320,6 +343,8 @@ static struct cpufreq_driver p4clockmod_driver = {
 	.name		= "p4-clockmod",
 	.attr		= p4clockmod_attr,
 =======
+=======
+>>>>>>> v3.18
 static struct cpufreq_driver p4clockmod_driver = {
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= cpufreq_p4_target,
@@ -327,6 +352,9 @@ static struct cpufreq_driver p4clockmod_driver = {
 	.get		= cpufreq_p4_get,
 	.name		= "p4-clockmod",
 	.attr		= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

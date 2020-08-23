@@ -3,12 +3,18 @@
  * for QLogic target mode HBAs
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ?? Copyright 2010-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL)
  * version 2.
  *
  * Author: Nicholas A. Bellinger <nab@risingtidesystems.com>
+=======
+ * (c) Copyright 2010-2013 Datera, Inc.
+ *
+ * Author: Nicholas A. Bellinger <nab@daterainc.com>
+>>>>>>> v3.18
 =======
  * (c) Copyright 2010-2013 Datera, Inc.
  *
@@ -60,6 +66,7 @@
 #include "tcm_qla2xxx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct workqueue_struct *tcm_qla2xxx_free_wq;
 struct workqueue_struct *tcm_qla2xxx_cmd_wq;
 
@@ -73,12 +80,17 @@ static int tcm_qla2xxx_check_false(struct se_portal_group *se_tpg)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 static struct workqueue_struct *tcm_qla2xxx_free_wq;
 static struct workqueue_struct *tcm_qla2xxx_cmd_wq;
 
 /* Local pointer to allocated TCM configfs fabric module */
 static struct target_fabric_configfs *tcm_qla2xxx_fabric_configfs;
 static struct target_fabric_configfs *tcm_qla2xxx_npiv_fabric_configfs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -193,7 +205,11 @@ static int tcm_qla2xxx_npiv_parse_wwn(
 
 	/* count may include a LF at end of string */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (name[cnt-1] == '\n')
+=======
+	if (name[cnt-1] == '\n' || name[cnt-1] == 0)
+>>>>>>> v3.18
 =======
 	if (name[cnt-1] == '\n' || name[cnt-1] == 0)
 >>>>>>> v3.18
@@ -215,6 +231,7 @@ static int tcm_qla2xxx_npiv_parse_wwn(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t tcm_qla2xxx_npiv_format_wwn(char *buf, size_t len,
 					u64 wwpn, u64 wwnn)
 {
@@ -229,6 +246,8 @@ static ssize_t tcm_qla2xxx_npiv_format_wwn(char *buf, size_t len,
 		b2[0], b2[1], b2[2], b2[3], b2[4], b2[5], b2[6], b2[7]);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char *tcm_qla2xxx_npiv_get_fabric_name(void)
@@ -263,6 +282,7 @@ static char *tcm_qla2xxx_get_fabric_wwn(struct se_portal_group *se_tpg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char *tcm_qla2xxx_npiv_get_fabric_wwn(struct se_portal_group *se_tpg)
 {
 	struct tcm_qla2xxx_tpg *tpg = container_of(se_tpg,
@@ -272,6 +292,8 @@ static char *tcm_qla2xxx_npiv_get_fabric_wwn(struct se_portal_group *se_tpg)
 	return &lport->lport_npiv_name[0];
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u16 tcm_qla2xxx_get_tag(struct se_portal_group *se_tpg)
@@ -359,7 +381,11 @@ static int tcm_qla2xxx_check_demo_mode(struct se_portal_group *se_tpg)
 				struct tcm_qla2xxx_tpg, se_tpg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return QLA_TPG_ATTRIB(tpg)->generate_node_acls;
+=======
+	return tpg->tpg_attrib.generate_node_acls;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.generate_node_acls;
 >>>>>>> v3.18
@@ -371,7 +397,11 @@ static int tcm_qla2xxx_check_demo_mode_cache(struct se_portal_group *se_tpg)
 				struct tcm_qla2xxx_tpg, se_tpg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return QLA_TPG_ATTRIB(tpg)->cache_dynamic_acls;
+=======
+	return tpg->tpg_attrib.cache_dynamic_acls;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.cache_dynamic_acls;
 >>>>>>> v3.18
@@ -383,7 +413,11 @@ static int tcm_qla2xxx_check_demo_write_protect(struct se_portal_group *se_tpg)
 				struct tcm_qla2xxx_tpg, se_tpg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return QLA_TPG_ATTRIB(tpg)->demo_mode_write_protect;
+=======
+	return tpg->tpg_attrib.demo_mode_write_protect;
+>>>>>>> v3.18
 =======
 	return tpg->tpg_attrib.demo_mode_write_protect;
 >>>>>>> v3.18
@@ -395,8 +429,11 @@ static int tcm_qla2xxx_check_prod_write_protect(struct se_portal_group *se_tpg)
 				struct tcm_qla2xxx_tpg, se_tpg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return QLA_TPG_ATTRIB(tpg)->prod_mode_write_protect;
 =======
+=======
+>>>>>>> v3.18
 	return tpg->tpg_attrib.prod_mode_write_protect;
 }
 
@@ -406,6 +443,9 @@ static int tcm_qla2xxx_check_demo_mode_login_only(struct se_portal_group *se_tpg
 				struct tcm_qla2xxx_tpg, se_tpg);
 
 	return tpg->tpg_attrib.demo_mode_login_only;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -464,12 +504,18 @@ static void tcm_qla2xxx_complete_free(struct work_struct *work)
 	struct qla_tgt_cmd *cmd = container_of(work, struct qla_tgt_cmd, work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cmd->cmd_in_wq = 0;
 
 	WARN_ON(cmd->cmd_flags &  BIT_16);
 
 	cmd->cmd_flags |= BIT_16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	transport_generic_free_cmd(&cmd->se_cmd, 0);
 }
@@ -482,6 +528,10 @@ static void tcm_qla2xxx_complete_free(struct work_struct *work)
 static void tcm_qla2xxx_free_cmd(struct qla_tgt_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmd->cmd_in_wq = 1;
+>>>>>>> v3.18
 =======
 	cmd->cmd_in_wq = 1;
 >>>>>>> v3.18
@@ -495,7 +545,10 @@ static void tcm_qla2xxx_free_cmd(struct qla_tgt_cmd *cmd)
 static int tcm_qla2xxx_check_stop_free(struct se_cmd *se_cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct qla_tgt_cmd *cmd;
 
 	if ((se_cmd->se_cmd_flags & SCF_SCSI_TMR_CDB) == 0) {
@@ -503,6 +556,9 @@ static int tcm_qla2xxx_check_stop_free(struct se_cmd *se_cmd)
 		cmd->cmd_flags |= BIT_14;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return target_put_sess_cmd(se_cmd->se_sess, se_cmd);
 }
@@ -561,6 +617,7 @@ static u32 tcm_qla2xxx_sess_get_index(struct se_session *se_sess)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The LIO target core uses DMA_TO_DEVICE to mean that data is going
  * to the target (eg handling a WRITE) and DMA_FROM_DEVICE to mean
@@ -588,6 +645,8 @@ static enum dma_data_direction tcm_qla2xxx_mapping_dir(struct se_cmd *se_cmd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int tcm_qla2xxx_write_pending(struct se_cmd *se_cmd)
 {
 	struct qla_tgt_cmd *cmd = container_of(se_cmd,
@@ -595,7 +654,11 @@ static int tcm_qla2xxx_write_pending(struct se_cmd *se_cmd)
 
 	cmd->bufflen = se_cmd->data_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->dma_data_direction = tcm_qla2xxx_mapping_dir(se_cmd);
+=======
+	cmd->dma_data_direction = target_reverse_dma_direction(se_cmd);
+>>>>>>> v3.18
 =======
 	cmd->dma_data_direction = target_reverse_dma_direction(se_cmd);
 >>>>>>> v3.18
@@ -604,12 +667,18 @@ static int tcm_qla2xxx_write_pending(struct se_cmd *se_cmd)
 	cmd->sg = se_cmd->t_data_sg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cmd->prot_sg_cnt = se_cmd->t_prot_nents;
 	cmd->prot_sg = se_cmd->t_prot_sg;
 	cmd->blk_sz  = se_cmd->se_dev->dev_attrib.block_size;
 	se_cmd->pi_err = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * qla_target.c:qlt_rdy_to_xfer() will call pci_map_sg() to setup
@@ -646,9 +715,12 @@ static void tcm_qla2xxx_set_default_node_attrs(struct se_node_acl *nacl)
 static u32 tcm_qla2xxx_get_task_tag(struct se_cmd *se_cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_tgt_cmd *cmd = container_of(se_cmd,
 				struct qla_tgt_cmd, se_cmd);
 =======
+=======
+>>>>>>> v3.18
 	struct qla_tgt_cmd *cmd;
 
 	/* check for task mgmt cmd */
@@ -656,6 +728,9 @@ static u32 tcm_qla2xxx_get_task_tag(struct se_cmd *se_cmd)
 		return 0xffffffff;
 
 	cmd = container_of(se_cmd, struct qla_tgt_cmd, se_cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return cmd->tag;
@@ -707,6 +782,11 @@ static void tcm_qla2xxx_handle_data_work(struct work_struct *work)
 	 * Otherwise return an exception via CHECK_CONDITION status.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmd->cmd_in_wq = 0;
+	cmd->cmd_flags |= BIT_11;
+>>>>>>> v3.18
 =======
 	cmd->cmd_in_wq = 0;
 	cmd->cmd_flags |= BIT_11;
@@ -722,9 +802,12 @@ static void tcm_qla2xxx_handle_data_work(struct work_struct *work)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		transport_generic_request_failure(&cmd->se_cmd,
 						  TCM_CHECK_CONDITION_ABORT_CMD);
 =======
+=======
+>>>>>>> v3.18
 		if (cmd->se_cmd.pi_err)
 			transport_generic_request_failure(&cmd->se_cmd,
 				cmd->se_cmd.pi_err);
@@ -732,6 +815,9 @@ static void tcm_qla2xxx_handle_data_work(struct work_struct *work)
 			transport_generic_request_failure(&cmd->se_cmd,
 				TCM_CHECK_CONDITION_ABORT_CMD);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -745,6 +831,11 @@ static void tcm_qla2xxx_handle_data_work(struct work_struct *work)
 static void tcm_qla2xxx_handle_data(struct qla_tgt_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmd->cmd_flags |= BIT_10;
+	cmd->cmd_in_wq = 1;
+>>>>>>> v3.18
 =======
 	cmd->cmd_flags |= BIT_10;
 	cmd->cmd_in_wq = 1;
@@ -754,7 +845,10 @@ static void tcm_qla2xxx_handle_data(struct qla_tgt_cmd *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tcm_qla2xxx_handle_dif_work(struct work_struct *work)
 {
 	struct qla_tgt_cmd *cmd = container_of(work, struct qla_tgt_cmd, work);
@@ -776,6 +870,9 @@ static void tcm_qla2xxx_handle_dif_err(struct qla_tgt_cmd *cmd)
 	queue_work(tcm_qla2xxx_free_wq, &cmd->work);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Called from qla_target.c:qlt_issue_task_mgmt()
@@ -796,8 +893,14 @@ static int tcm_qla2xxx_queue_data_in(struct se_cmd *se_cmd)
 				struct qla_tgt_cmd, se_cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->bufflen = se_cmd->data_length;
 	cmd->dma_data_direction = tcm_qla2xxx_mapping_dir(se_cmd);
+=======
+	cmd->cmd_flags |= BIT_4;
+	cmd->bufflen = se_cmd->data_length;
+	cmd->dma_data_direction = target_reverse_dma_direction(se_cmd);
+>>>>>>> v3.18
 =======
 	cmd->cmd_flags |= BIT_4;
 	cmd->bufflen = se_cmd->data_length;
@@ -809,13 +912,19 @@ static int tcm_qla2xxx_queue_data_in(struct se_cmd *se_cmd)
 	cmd->sg = se_cmd->t_data_sg;
 	cmd->offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cmd->cmd_flags |= BIT_3;
 
 	cmd->prot_sg_cnt = se_cmd->t_prot_nents;
 	cmd->prot_sg = se_cmd->t_prot_sg;
 	cmd->blk_sz  = se_cmd->se_dev->dev_attrib.block_size;
 	se_cmd->pi_err = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -836,9 +945,12 @@ static int tcm_qla2xxx_queue_status(struct se_cmd *se_cmd)
 	cmd->sg_cnt = 0;
 	cmd->offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->dma_data_direction = tcm_qla2xxx_mapping_dir(se_cmd);
 	cmd->aborted = (se_cmd->transport_state & CMD_T_ABORTED);
 =======
+=======
+>>>>>>> v3.18
 	cmd->dma_data_direction = target_reverse_dma_direction(se_cmd);
 	cmd->aborted = (se_cmd->transport_state & CMD_T_ABORTED);
 	if (cmd->cmd_flags &  BIT_5) {
@@ -846,6 +958,9 @@ static int tcm_qla2xxx_queue_status(struct se_cmd *se_cmd)
 		dump_stack();
 	}
 	cmd->cmd_flags |= BIT_5;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (se_cmd->data_direction == DMA_FROM_DEVICE) {
@@ -869,7 +984,11 @@ static int tcm_qla2xxx_queue_status(struct se_cmd *se_cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcm_qla2xxx_queue_tm_rsp(struct se_cmd *se_cmd)
+=======
+static void tcm_qla2xxx_queue_tm_rsp(struct se_cmd *se_cmd)
+>>>>>>> v3.18
 =======
 static void tcm_qla2xxx_queue_tm_rsp(struct se_cmd *se_cmd)
 >>>>>>> v3.18
@@ -905,6 +1024,7 @@ static void tcm_qla2xxx_queue_tm_rsp(struct se_cmd *se_cmd)
 	 */
 	qlt_xmit_tm_rsp(mcmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
@@ -913,6 +1033,8 @@ static void tcm_qla2xxx_queue_tm_rsp(struct se_cmd *se_cmd)
 struct target_fabric_configfs *tcm_qla2xxx_fabric_configfs;
 struct target_fabric_configfs *tcm_qla2xxx_npiv_fabric_configfs;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void tcm_qla2xxx_aborted_task(struct se_cmd *se_cmd)
@@ -928,6 +1050,9 @@ static void tcm_qla2xxx_aborted_task(struct se_cmd *se_cmd)
 	pci_unmap_sg(ha->pdev, cmd->sg, cmd->sg_cnt, cmd->dma_data_direction);
 	cmd->sg_mapped = 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void tcm_qla2xxx_clear_sess_lookup(struct tcm_qla2xxx_lport *,
@@ -996,20 +1121,31 @@ static void tcm_qla2xxx_put_session(struct se_session *se_sess)
 static void tcm_qla2xxx_put_sess(struct qla_tgt_sess *sess)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcm_qla2xxx_put_session(sess->se_sess);
 =======
+=======
+>>>>>>> v3.18
 	if (!sess)
 		return;
 
 	assert_spin_locked(&sess->vha->hw->hardware_lock);
 	kref_put(&sess->se_sess->sess_kref, tcm_qla2xxx_release_session);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void tcm_qla2xxx_shutdown_sess(struct qla_tgt_sess *sess)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcm_qla2xxx_shutdown_session(sess->se_sess);
+=======
+	assert_spin_locked(&sess->vha->hw->hardware_lock);
+	target_sess_cmd_list_set_waiting(sess->se_sess);
+>>>>>>> v3.18
 =======
 	assert_spin_locked(&sess->vha->hw->hardware_lock);
 	target_sess_cmd_list_set_waiting(sess->se_sess);
@@ -1077,7 +1213,11 @@ static ssize_t tcm_qla2xxx_tpg_attrib_show_##name(			\
 			struct tcm_qla2xxx_tpg, se_tpg);		\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(page, "%u\n", QLA_TPG_ATTRIB(tpg)->name);	\
+=======
+	return sprintf(page, "%u\n", tpg->tpg_attrib.name);	\
+>>>>>>> v3.18
 =======
 	return sprintf(page, "%u\n", tpg->tpg_attrib.name);	\
 >>>>>>> v3.18
@@ -1153,7 +1293,10 @@ DEF_QLA_TPG_ATTRIB(prod_mode_write_protect);
 QLA_TPG_ATTR(prod_mode_write_protect, S_IRUGO | S_IWUSR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Define tcm_qla2xxx_tpg_attrib_s_demo_mode_login_only
  */
@@ -1161,6 +1304,9 @@ DEF_QLA_TPG_ATTR_BOOL(demo_mode_login_only);
 DEF_QLA_TPG_ATTRIB(demo_mode_login_only);
 QLA_TPG_ATTR(demo_mode_login_only, S_IRUGO | S_IWUSR);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct configfs_attribute *tcm_qla2xxx_tpg_attrib_attrs[] = {
 	&tcm_qla2xxx_tpg_attrib_generate_node_acls.attr,
@@ -1168,6 +1314,10 @@ static struct configfs_attribute *tcm_qla2xxx_tpg_attrib_attrs[] = {
 	&tcm_qla2xxx_tpg_attrib_demo_mode_write_protect.attr,
 	&tcm_qla2xxx_tpg_attrib_prod_mode_write_protect.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&tcm_qla2xxx_tpg_attrib_demo_mode_login_only.attr,
+>>>>>>> v3.18
 =======
 	&tcm_qla2xxx_tpg_attrib_demo_mode_login_only.attr,
 >>>>>>> v3.18
@@ -1188,7 +1338,10 @@ static ssize_t tcm_qla2xxx_tpg_show_enable(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tcm_qla2xxx_depend_tpg(struct work_struct *work)
 {
 	struct tcm_qla2xxx_tpg *base_tpg = container_of(work,
@@ -1219,6 +1372,9 @@ static void tcm_qla2xxx_undepend_tpg(struct work_struct *work)
 	complete(&base_tpg->tpg_base_comp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t tcm_qla2xxx_tpg_store_enable(
 	struct se_portal_group *se_tpg,
@@ -1226,11 +1382,14 @@ static ssize_t tcm_qla2xxx_tpg_store_enable(
 	size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct se_wwn *se_wwn = se_tpg->se_tpg_wwn;
 	struct tcm_qla2xxx_lport *lport = container_of(se_wwn,
 			struct tcm_qla2xxx_lport, lport_wwn);
 	struct scsi_qla_host *vha = lport->qla_vha;
 	struct qla_hw_data *ha = vha->hw;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tcm_qla2xxx_tpg *tpg = container_of(se_tpg,
@@ -1248,6 +1407,7 @@ static ssize_t tcm_qla2xxx_tpg_store_enable(
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (op) {
 		atomic_set(&tpg->lport_tpg_enabled, 1);
@@ -1262,6 +1422,8 @@ static ssize_t tcm_qla2xxx_tpg_store_enable(
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (op) {
 		if (atomic_read(&tpg->lport_tpg_enabled))
 			return -EEXIST;
@@ -1284,6 +1446,9 @@ static ssize_t tcm_qla2xxx_tpg_store_enable(
 		if (atomic_read(&tpg->lport_tpg_enabled))
 			return -EPERM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -1312,7 +1477,11 @@ static struct se_portal_group *tcm_qla2xxx_make_tpg(
 		return ERR_PTR(-EINVAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!lport->qla_npiv_vp && (tpgt != 1)) {
+=======
+	if ((tpgt != 1)) {
+>>>>>>> v3.18
 =======
 	if ((tpgt != 1)) {
 >>>>>>> v3.18
@@ -1332,14 +1501,20 @@ static struct se_portal_group *tcm_qla2xxx_make_tpg(
 	 * NodeACLs
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QLA_TPG_ATTRIB(tpg)->generate_node_acls = 1;
 	QLA_TPG_ATTRIB(tpg)->demo_mode_write_protect = 1;
 	QLA_TPG_ATTRIB(tpg)->cache_dynamic_acls = 1;
 =======
+=======
+>>>>>>> v3.18
 	tpg->tpg_attrib.generate_node_acls = 1;
 	tpg->tpg_attrib.demo_mode_write_protect = 1;
 	tpg->tpg_attrib.cache_dynamic_acls = 1;
 	tpg->tpg_attrib.demo_mode_login_only = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = core_tpg_register(&tcm_qla2xxx_fabric_configfs->tf_ops, wwn,
@@ -1349,11 +1524,16 @@ static struct se_portal_group *tcm_qla2xxx_make_tpg(
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Setup local TPG=1 pointer for non NPIV mode.
 	 */
 	if (lport->qla_npiv_vp == NULL)
 		lport->tpg_1 = tpg;
+=======
+
+	lport->tpg_1 = tpg;
+>>>>>>> v3.18
 =======
 
 	lport->tpg_1 = tpg;
@@ -1369,7 +1549,10 @@ static void tcm_qla2xxx_drop_tpg(struct se_portal_group *se_tpg)
 	struct tcm_qla2xxx_lport *lport = tpg->lport;
 	struct scsi_qla_host *vha = lport->qla_vha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_hw_data *ha = vha->hw;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1377,8 +1560,13 @@ static void tcm_qla2xxx_drop_tpg(struct se_portal_group *se_tpg)
 	 * FC Nexuses and disable target mode operation for this qla_hw_data
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ha->tgt.qla_tgt && !ha->tgt.qla_tgt->tgt_stop)
 		qlt_stop_phase1(ha->tgt.qla_tgt);
+=======
+	if (vha->vha_tgt.qla_tgt && !vha->vha_tgt.qla_tgt->tgt_stop)
+		qlt_stop_phase1(vha->vha_tgt.qla_tgt);
+>>>>>>> v3.18
 =======
 	if (vha->vha_tgt.qla_tgt && !vha->vha_tgt.qla_tgt->tgt_stop)
 		qlt_stop_phase1(vha->vha_tgt.qla_tgt);
@@ -1389,6 +1577,7 @@ static void tcm_qla2xxx_drop_tpg(struct se_portal_group *se_tpg)
 	 * Clear local TPG=1 pointer for non NPIV mode.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lport->qla_npiv_vp == NULL)
 		lport->tpg_1 = NULL;
 
@@ -1396,6 +1585,8 @@ static void tcm_qla2xxx_drop_tpg(struct se_portal_group *se_tpg)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	lport->tpg_1 = NULL;
 	kfree(tpg);
 }
@@ -1454,6 +1645,9 @@ static struct configfs_attribute *tcm_qla2xxx_npiv_tpg_attrs[] = {
         NULL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct se_portal_group *tcm_qla2xxx_npiv_make_tpg(
 	struct se_wwn *wwn,
@@ -1480,7 +1674,10 @@ static struct se_portal_group *tcm_qla2xxx_npiv_make_tpg(
 	tpg->lport_tpgt = tpgt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * By default allow READ-ONLY TPG demo-mode access w/ cached dynamic
 	 * NodeACLs
@@ -1490,6 +1687,9 @@ static struct se_portal_group *tcm_qla2xxx_npiv_make_tpg(
 	tpg->tpg_attrib.cache_dynamic_acls = 1;
 	tpg->tpg_attrib.demo_mode_login_only = 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = core_tpg_register(&tcm_qla2xxx_npiv_fabric_configfs->tf_ops, wwn,
 				&tpg->se_tpg, tpg, TRANSPORT_TPG_TYPE_NORMAL);
@@ -1498,6 +1698,10 @@ static struct se_portal_group *tcm_qla2xxx_npiv_make_tpg(
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lport->tpg_1 = tpg;
+>>>>>>> v3.18
 =======
 	lport->tpg_1 = tpg;
 >>>>>>> v3.18
@@ -1512,7 +1716,10 @@ static struct qla_tgt_sess *tcm_qla2xxx_find_sess_by_s_id(
 	const uint8_t *s_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_hw_data *ha = vha->hw;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tcm_qla2xxx_lport *lport;
@@ -1521,7 +1728,11 @@ static struct qla_tgt_sess *tcm_qla2xxx_find_sess_by_s_id(
 	u32 key;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lport = ha->tgt.target_lport_ptr;
+=======
+	lport = vha->vha_tgt.target_lport_ptr;
+>>>>>>> v3.18
 =======
 	lport = vha->vha_tgt.target_lport_ptr;
 >>>>>>> v3.18
@@ -1629,7 +1840,10 @@ static struct qla_tgt_sess *tcm_qla2xxx_find_sess_by_loop_id(
 	const uint16_t loop_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_hw_data *ha = vha->hw;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tcm_qla2xxx_lport *lport;
@@ -1638,7 +1852,11 @@ static struct qla_tgt_sess *tcm_qla2xxx_find_sess_by_loop_id(
 	struct tcm_qla2xxx_fc_loopid *fc_loopid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lport = ha->tgt.target_lport_ptr;
+=======
+	lport = vha->vha_tgt.target_lport_ptr;
+>>>>>>> v3.18
 =======
 	lport = vha->vha_tgt.target_lport_ptr;
 >>>>>>> v3.18
@@ -1756,6 +1974,10 @@ static void tcm_qla2xxx_free_session(struct qla_tgt_sess *sess)
 	struct qla_tgt *tgt = sess->tgt;
 	struct qla_hw_data *ha = tgt->ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	scsi_qla_host_t *vha = pci_get_drvdata(ha->pdev);
+>>>>>>> v3.18
 =======
 	scsi_qla_host_t *vha = pci_get_drvdata(ha->pdev);
 >>>>>>> v3.18
@@ -1776,7 +1998,11 @@ static void tcm_qla2xxx_free_session(struct qla_tgt_sess *sess)
 	nacl = container_of(se_nacl, struct tcm_qla2xxx_nacl, se_node_acl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lport = ha->tgt.target_lport_ptr;
+=======
+	lport = vha->vha_tgt.target_lport_ptr;
+>>>>>>> v3.18
 =======
 	lport = vha->vha_tgt.target_lport_ptr;
 >>>>>>> v3.18
@@ -1813,13 +2039,19 @@ static int tcm_qla2xxx_check_initiator_node_acl(
 	unsigned char port_name[36];
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	lport = ha->tgt.target_lport_ptr;
 =======
+=======
+>>>>>>> v3.18
 	int num_tags = (ha->fw_xcb_count) ? ha->fw_xcb_count :
 		       TCM_QLA2XXX_DEFAULT_TAGS;
 
 	lport = vha->vha_tgt.target_lport_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!lport) {
 		pr_err("Unable to locate struct tcm_qla2xxx_lport\n");
@@ -1837,7 +2069,13 @@ static int tcm_qla2xxx_check_initiator_node_acl(
 	se_tpg = &tpg->se_tpg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	se_sess = transport_init_session();
+=======
+	se_sess = transport_init_session_tags(num_tags,
+					      sizeof(struct qla_tgt_cmd),
+					      TARGET_PROT_NORMAL);
+>>>>>>> v3.18
 =======
 	se_sess = transport_init_session_tags(num_tags,
 					      sizeof(struct qla_tgt_cmd),
@@ -1881,7 +2119,11 @@ static int tcm_qla2xxx_check_initiator_node_acl(
 	 * Finally register the new FC Nexus with TCM
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	transport_register_session(se_nacl->se_tpg, se_nacl, se_sess, sess);
+=======
+	__transport_register_session(se_nacl->se_tpg, se_nacl, se_sess, sess);
+>>>>>>> v3.18
 =======
 	__transport_register_session(se_nacl->se_tpg, se_nacl, se_sess, sess);
 >>>>>>> v3.18
@@ -1895,7 +2137,12 @@ static void tcm_qla2xxx_update_sess(struct qla_tgt_sess *sess, port_id_t s_id,
 	struct qla_tgt *tgt = sess->tgt;
 	struct qla_hw_data *ha = tgt->ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcm_qla2xxx_lport *lport = ha->tgt.target_lport_ptr;
+=======
+	scsi_qla_host_t *vha = pci_get_drvdata(ha->pdev);
+	struct tcm_qla2xxx_lport *lport = vha->vha_tgt.target_lport_ptr;
+>>>>>>> v3.18
 =======
 	scsi_qla_host_t *vha = pci_get_drvdata(ha->pdev);
 	struct tcm_qla2xxx_lport *lport = vha->vha_tgt.target_lport_ptr;
@@ -1908,6 +2155,7 @@ static void tcm_qla2xxx_update_sess(struct qla_tgt_sess *sess, port_id_t s_id,
 
 	if (sess->loop_id != loop_id || sess->s_id.b24 != s_id.b24)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("Updating session %p from port %02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x loop_id %d -> %d s_id %x:%x:%x -> %x:%x:%x\n",
 			sess,
 			sess->port_name[0], sess->port_name[1],
@@ -1918,11 +2166,16 @@ static void tcm_qla2xxx_update_sess(struct qla_tgt_sess *sess, port_id_t s_id,
 			sess->s_id.b.domain, sess->s_id.b.area, sess->s_id.b.al_pa,
 			s_id.b.domain, s_id.b.area, s_id.b.al_pa);
 =======
+=======
+>>>>>>> v3.18
 		pr_info("Updating session %p from port %8phC loop_id %d -> %d s_id %x:%x:%x -> %x:%x:%x\n",
 		    sess, sess->port_name,
 		    sess->loop_id, loop_id, sess->s_id.b.domain,
 		    sess->s_id.b.area, sess->s_id.b.al_pa, s_id.b.domain,
 		    s_id.b.area, s_id.b.al_pa);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sess->loop_id != loop_id) {
@@ -1981,6 +2234,10 @@ static struct qla_tgt_func_tmpl tcm_qla2xxx_template = {
 	.handle_cmd		= tcm_qla2xxx_handle_cmd,
 	.handle_data		= tcm_qla2xxx_handle_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.handle_dif_err		= tcm_qla2xxx_handle_dif_err,
+>>>>>>> v3.18
 =======
 	.handle_dif_err		= tcm_qla2xxx_handle_dif_err,
 >>>>>>> v3.18
@@ -2023,6 +2280,7 @@ static int tcm_qla2xxx_init_lport(struct tcm_qla2xxx_lport *lport)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcm_qla2xxx_lport_register_cb(struct scsi_qla_host *vha)
 {
 	struct qla_hw_data *ha = vha->hw;
@@ -2033,6 +2291,8 @@ static int tcm_qla2xxx_lport_register_cb(struct scsi_qla_host *vha)
 	 */
 	lport = (struct tcm_qla2xxx_lport *)ha->tgt.target_lport_ptr;
 =======
+=======
+>>>>>>> v3.18
 static int tcm_qla2xxx_lport_register_cb(struct scsi_qla_host *vha,
 					 void *target_lport_ptr,
 					 u64 npiv_wwpn, u64 npiv_wwnn)
@@ -2045,6 +2305,9 @@ static int tcm_qla2xxx_lport_register_cb(struct scsi_qla_host *vha,
 	 */
 	ha->tgt.tgt_ops = &tcm_qla2xxx_template;
 	vha->vha_tgt.target_lport_ptr = target_lport_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lport->qla_vha = vha;
 
@@ -2078,8 +2341,13 @@ static struct se_wwn *tcm_qla2xxx_make_lport(
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = qlt_lport_register(&tcm_qla2xxx_template, wwpn,
 				tcm_qla2xxx_lport_register_cb, lport);
+=======
+	ret = qlt_lport_register(lport, wwpn, 0, 0,
+				 tcm_qla2xxx_lport_register_cb);
+>>>>>>> v3.18
 =======
 	ret = qlt_lport_register(lport, wwpn, 0, 0,
 				 tcm_qla2xxx_lport_register_cb);
@@ -2102,7 +2370,10 @@ static void tcm_qla2xxx_drop_lport(struct se_wwn *wwn)
 			struct tcm_qla2xxx_lport, lport_wwn);
 	struct scsi_qla_host *vha = lport->qla_vha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_hw_data *ha = vha->hw;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct se_node_acl *node;
@@ -2114,8 +2385,13 @@ static void tcm_qla2xxx_drop_lport(struct se_wwn *wwn)
 	 * qlt_stop_phase1() from tcm_qla2xxx_drop_tpg() above..
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ha->tgt.qla_tgt && !ha->tgt.qla_tgt->tgt_stopped)
 		qlt_stop_phase2(ha->tgt.qla_tgt);
+=======
+	if (vha->vha_tgt.qla_tgt && !vha->vha_tgt.qla_tgt->tgt_stopped)
+		qlt_stop_phase2(vha->vha_tgt.qla_tgt);
+>>>>>>> v3.18
 =======
 	if (vha->vha_tgt.qla_tgt && !vha->vha_tgt.qla_tgt->tgt_stopped)
 		qlt_stop_phase2(vha->vha_tgt.qla_tgt);
@@ -2131,7 +2407,10 @@ static void tcm_qla2xxx_drop_lport(struct se_wwn *wwn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int tcm_qla2xxx_lport_register_npiv_cb(struct scsi_qla_host *base_vha,
 					      void *target_lport_ptr,
 					      u64 npiv_wwpn, u64 npiv_wwnn)
@@ -2181,6 +2460,9 @@ static int tcm_qla2xxx_lport_register_npiv_cb(struct scsi_qla_host *base_vha,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct se_wwn *tcm_qla2xxx_npiv_make_lport(
 	struct target_fabric_configfs *tf,
@@ -2189,12 +2471,15 @@ static struct se_wwn *tcm_qla2xxx_npiv_make_lport(
 {
 	struct tcm_qla2xxx_lport *lport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 npiv_wwpn, npiv_wwnn;
 	int ret;
 
 	if (tcm_qla2xxx_npiv_parse_wwn(name, strlen(name)+1,
 				&npiv_wwpn, &npiv_wwnn) < 0)
 =======
+=======
+>>>>>>> v3.18
 	u64 phys_wwpn, npiv_wwpn, npiv_wwnn;
 	char *p, tmp[128];
 	int ret;
@@ -2213,6 +2498,9 @@ static struct se_wwn *tcm_qla2xxx_npiv_make_lport(
 
 	if (tcm_qla2xxx_npiv_parse_wwn(p, strlen(p)+1,
 				       &npiv_wwpn, &npiv_wwnn) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ERR_PTR(-EINVAL);
 
@@ -2223,6 +2511,7 @@ static struct se_wwn *tcm_qla2xxx_npiv_make_lport(
 	}
 	lport->lport_npiv_wwpn = npiv_wwpn;
 	lport->lport_npiv_wwnn = npiv_wwnn;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tcm_qla2xxx_npiv_format_wwn(&lport->lport_npiv_name[0],
 			TCM_QLA2XXX_NAMELEN, npiv_wwpn, npiv_wwnn);
@@ -2235,6 +2524,8 @@ static struct se_wwn *tcm_qla2xxx_npiv_make_lport(
 
 	return &lport->lport_wwn;
 =======
+=======
+>>>>>>> v3.18
 	sprintf(lport->lport_naa_name, "naa.%016llx", (unsigned long long) npiv_wwpn);
 
 	ret = tcm_qla2xxx_init_lport(lport);
@@ -2250,6 +2541,9 @@ static struct se_wwn *tcm_qla2xxx_npiv_make_lport(
 out_lport:
 	vfree(lport->lport_loopid_map);
 	btree_destroy32(&lport->lport_fcport_map);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	kfree(lport);
@@ -2261,6 +2555,7 @@ static void tcm_qla2xxx_npiv_drop_lport(struct se_wwn *wwn)
 	struct tcm_qla2xxx_lport *lport = container_of(wwn,
 			struct tcm_qla2xxx_lport, lport_wwn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct scsi_qla_host *vha = lport->qla_vha;
 	struct Scsi_Host *sh = vha->host;
 	/*
@@ -2270,6 +2565,8 @@ static void tcm_qla2xxx_npiv_drop_lport(struct se_wwn *wwn)
 
 	scsi_host_put(sh);
 =======
+=======
+>>>>>>> v3.18
 	struct scsi_qla_host *npiv_vha = lport->qla_vha;
 	struct qla_hw_data *ha = npiv_vha->hw;
 	scsi_qla_host_t *base_vha = pci_get_drvdata(ha->pdev);
@@ -2280,6 +2577,9 @@ static void tcm_qla2xxx_npiv_drop_lport(struct se_wwn *wwn)
 	 */
 	fc_vport_terminate(npiv_vha->fc_vport);
 	scsi_host_put(base_vha->host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(lport);
 }
@@ -2318,7 +2618,11 @@ static struct target_core_fabric_ops tcm_qla2xxx_ops = {
 	.tpg_check_prod_mode_write_protect =
 					tcm_qla2xxx_check_prod_write_protect,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tpg_check_demo_mode_login_only = tcm_qla2xxx_check_true,
+=======
+	.tpg_check_demo_mode_login_only = tcm_qla2xxx_check_demo_mode_login_only,
+>>>>>>> v3.18
 =======
 	.tpg_check_demo_mode_login_only = tcm_qla2xxx_check_demo_mode_login_only,
 >>>>>>> v3.18
@@ -2341,6 +2645,10 @@ static struct target_core_fabric_ops tcm_qla2xxx_ops = {
 	.queue_status			= tcm_qla2xxx_queue_status,
 	.queue_tm_rsp			= tcm_qla2xxx_queue_tm_rsp,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.aborted_task			= tcm_qla2xxx_aborted_task,
+>>>>>>> v3.18
 =======
 	.aborted_task			= tcm_qla2xxx_aborted_task,
 >>>>>>> v3.18
@@ -2364,7 +2672,11 @@ static struct target_core_fabric_ops tcm_qla2xxx_npiv_ops = {
 	.get_fabric_name		= tcm_qla2xxx_npiv_get_fabric_name,
 	.get_fabric_proto_ident		= tcm_qla2xxx_get_fabric_proto_ident,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tpg_get_wwn			= tcm_qla2xxx_npiv_get_fabric_wwn,
+=======
+	.tpg_get_wwn			= tcm_qla2xxx_get_fabric_wwn,
+>>>>>>> v3.18
 =======
 	.tpg_get_wwn			= tcm_qla2xxx_get_fabric_wwn,
 >>>>>>> v3.18
@@ -2373,6 +2685,7 @@ static struct target_core_fabric_ops tcm_qla2xxx_npiv_ops = {
 	.tpg_get_pr_transport_id	= tcm_qla2xxx_get_pr_transport_id,
 	.tpg_get_pr_transport_id_len	= tcm_qla2xxx_get_pr_transport_id_len,
 	.tpg_parse_pr_out_transport_id	= tcm_qla2xxx_parse_pr_out_transport_id,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.tpg_check_demo_mode		= tcm_qla2xxx_check_false,
 	.tpg_check_demo_mode_cache	= tcm_qla2xxx_check_true,
@@ -2383,6 +2696,8 @@ static struct target_core_fabric_ops tcm_qla2xxx_npiv_ops = {
 	.tpg_release_fabric_acl		= tcm_qla2xxx_release_fabric_acl,
 	.tpg_get_inst_index		= tcm_qla2xxx_tpg_get_inst_index,
 =======
+=======
+>>>>>>> v3.18
 	.tpg_check_demo_mode		= tcm_qla2xxx_check_demo_mode,
 	.tpg_check_demo_mode_cache	= tcm_qla2xxx_check_demo_mode_cache,
 	.tpg_check_demo_mode_write_protect = tcm_qla2xxx_check_demo_mode,
@@ -2393,6 +2708,9 @@ static struct target_core_fabric_ops tcm_qla2xxx_npiv_ops = {
 	.tpg_release_fabric_acl		= tcm_qla2xxx_release_fabric_acl,
 	.tpg_get_inst_index		= tcm_qla2xxx_tpg_get_inst_index,
 	.check_stop_free                = tcm_qla2xxx_check_stop_free,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.release_cmd			= tcm_qla2xxx_release_cmd,
 	.put_session			= tcm_qla2xxx_put_session,
@@ -2409,6 +2727,10 @@ static struct target_core_fabric_ops tcm_qla2xxx_npiv_ops = {
 	.queue_status			= tcm_qla2xxx_queue_status,
 	.queue_tm_rsp			= tcm_qla2xxx_queue_tm_rsp,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.aborted_task			= tcm_qla2xxx_aborted_task,
+>>>>>>> v3.18
 =======
 	.aborted_task			= tcm_qla2xxx_aborted_task,
 >>>>>>> v3.18
@@ -2452,6 +2774,7 @@ static int tcm_qla2xxx_register_configfs(void)
 	 * Setup default attribute lists for various fabric->tf_cit_tmpl
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TF_CIT_TMPL(fabric)->tfc_wwn_cit.ct_attrs = tcm_qla2xxx_wwn_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_base_cit.ct_attrs = tcm_qla2xxx_tpg_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_attrib_cit.ct_attrs =
@@ -2463,6 +2786,8 @@ static int tcm_qla2xxx_register_configfs(void)
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_param_cit.ct_attrs = NULL;
 =======
+=======
+>>>>>>> v3.18
 	fabric->tf_cit_tmpl.tfc_wwn_cit.ct_attrs = tcm_qla2xxx_wwn_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_base_cit.ct_attrs = tcm_qla2xxx_tpg_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_attrib_cit.ct_attrs =
@@ -2473,6 +2798,9 @@ static int tcm_qla2xxx_register_configfs(void)
 	fabric->tf_cit_tmpl.tfc_tpg_nacl_attrib_cit.ct_attrs = NULL;
 	fabric->tf_cit_tmpl.tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
 	fabric->tf_cit_tmpl.tfc_tpg_nacl_param_cit.ct_attrs = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Register the fabric for use within TCM
@@ -2505,6 +2833,7 @@ static int tcm_qla2xxx_register_configfs(void)
 	 * Setup default attribute lists for various npiv_fabric->tf_cit_tmpl
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TF_CIT_TMPL(npiv_fabric)->tfc_wwn_cit.ct_attrs = tcm_qla2xxx_wwn_attrs;
 	TF_CIT_TMPL(npiv_fabric)->tfc_tpg_base_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(npiv_fabric)->tfc_tpg_attrib_cit.ct_attrs = NULL;
@@ -2515,6 +2844,8 @@ static int tcm_qla2xxx_register_configfs(void)
 	TF_CIT_TMPL(npiv_fabric)->tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(npiv_fabric)->tfc_tpg_nacl_param_cit.ct_attrs = NULL;
 =======
+=======
+>>>>>>> v3.18
 	npiv_fabric->tf_cit_tmpl.tfc_wwn_cit.ct_attrs = tcm_qla2xxx_wwn_attrs;
 	npiv_fabric->tf_cit_tmpl.tfc_tpg_base_cit.ct_attrs =
 	    tcm_qla2xxx_npiv_tpg_attrs;
@@ -2525,6 +2856,9 @@ static int tcm_qla2xxx_register_configfs(void)
 	npiv_fabric->tf_cit_tmpl.tfc_tpg_nacl_attrib_cit.ct_attrs = NULL;
 	npiv_fabric->tf_cit_tmpl.tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
 	npiv_fabric->tf_cit_tmpl.tfc_tpg_nacl_param_cit.ct_attrs = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Register the npiv_fabric for use within TCM

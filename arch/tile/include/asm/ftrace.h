@@ -16,8 +16,11 @@
 #define _ASM_TILE_FTRACE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* empty */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FUNCTION_TRACER
 
 #define MCOUNT_ADDR ((unsigned long)(__mcount))
@@ -39,6 +42,9 @@ struct dyn_arch_ftrace {
 #endif /* __ASSEMBLY__ */
 
 #endif /* CONFIG_FUNCTION_TRACER */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_TILE_FTRACE_H */

@@ -70,6 +70,7 @@
 
 #define BRIDGE_DRAM_BAR(i)		(0x14 + (i))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BRIDGE_DRAM_BAR0		0x14
 #define BRIDGE_DRAM_BAR1		0x15
 #define BRIDGE_DRAM_BAR2		0x16
@@ -106,10 +107,15 @@
 #define BRIDGE_DRAM_CHNL_TRANSLN6	0x32
 #define BRIDGE_DRAM_CHNL_TRANSLN7	0x33
 =======
+=======
+>>>>>>> v3.18
 #define BRIDGE_DRAM_LIMIT(i)		(0x1c + (i))
 #define BRIDGE_DRAM_NODE_TRANSLN(i)	(0x24 + (i))
 #define BRIDGE_DRAM_CHNL_TRANSLN(i)	(0x2c + (i))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BRIDGE_PCIEMEM_BASE0		0x34
 #define BRIDGE_PCIEMEM_BASE1		0x35
@@ -182,7 +188,10 @@
 #define BRIDGE_FLASH_WEIGHT		0x2cc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* FIXME verify */
 #define BRIDGE_9XX_FLASH_BAR(i)		(0x11 + (i))
 #define BRIDGE_9XX_FLASH_BAR_LIMIT(i)	(0x15 + (i))
@@ -213,14 +222,22 @@
 #define BRIDGE_9XX_PCIEIO_LIMIT2	0x67
 #define BRIDGE_9XX_PCIEIO_LIMIT3	0x68
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #define nlm_read_bridge_reg(b, r)	nlm_read_reg(b, r)
 #define nlm_write_bridge_reg(b, r, v)	nlm_write_reg(b, r, v)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nlm_get_bridge_pcibase(node)	\
 			nlm_pcicfg_base(XLP_IO_BRIDGE_OFFSET(node))
+=======
+#define nlm_get_bridge_pcibase(node)	nlm_pcicfg_base(cpu_is_xlp9xx() ? \
+		XLP9XX_IO_BRIDGE_OFFSET(node) : XLP_IO_BRIDGE_OFFSET(node))
+>>>>>>> v3.18
 =======
 #define nlm_get_bridge_pcibase(node)	nlm_pcicfg_base(cpu_is_xlp9xx() ? \
 		XLP9XX_IO_BRIDGE_OFFSET(node) : XLP_IO_BRIDGE_OFFSET(node))

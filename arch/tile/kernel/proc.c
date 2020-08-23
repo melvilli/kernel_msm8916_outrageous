@@ -114,8 +114,12 @@ arch_initcall(proc_tile_init);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __tilegx__  /* FIXME: GX: no support for unaligned access yet */
 static ctl_table unaligned_subtable[] = {
+=======
+static struct ctl_table unaligned_subtable[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table unaligned_subtable[] = {
 >>>>>>> v3.18
@@ -144,7 +148,11 @@ static struct ctl_table unaligned_subtable[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table unaligned_table[] = {
+=======
+static struct ctl_table unaligned_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table unaligned_table[] = {
 >>>>>>> v3.18
@@ -169,6 +177,9 @@ static int __init proc_sys_tile_init(void)
 
 arch_initcall(proc_sys_tile_init);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

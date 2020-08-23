@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_VEXPRESS
 	bool "ARM Ltd. Versatile Express family" if ARCH_MULTI_V7
 	select ARCH_REQUIRE_GPIOLIB
@@ -21,6 +22,8 @@ config ARCH_VEXPRESS
 	select PLAT_VERSATILE
 	select PLAT_VERSATILE_CLCD
 =======
+=======
+>>>>>>> v3.18
 menuconfig ARCH_VEXPRESS
 	bool "ARM Ltd. Versatile Express family" if ARCH_MULTI_V7
 	select ARCH_REQUIRE_GPIOLIB
@@ -36,6 +39,9 @@ menuconfig ARCH_VEXPRESS
 	select ICST
 	select NO_IOPORT_MAP
 	select PLAT_VERSATILE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select POWER_RESET
 	select POWER_RESET_VEXPRESS
@@ -43,6 +49,11 @@ menuconfig ARCH_VEXPRESS
 	select REGULATOR_FIXED_VOLTAGE if REGULATOR
 	select VEXPRESS_CONFIG
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select VEXPRESS_SYSCFG
+	select MFD_VEXPRESS_SYSREG
+>>>>>>> v3.18
 =======
 	select VEXPRESS_SYSCFG
 	select MFD_VEXPRESS_SYSREG
@@ -64,8 +75,12 @@ menuconfig ARCH_VEXPRESS
 	  these boards with this option.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "Versatile Express platform type"
 	depends on ARCH_VEXPRESS
+=======
+if ARCH_VEXPRESS
+>>>>>>> v3.18
 =======
 if ARCH_VEXPRESS
 >>>>>>> v3.18
@@ -75,7 +90,11 @@ config ARCH_VEXPRESS_CORTEX_A5_A9_ERRATA
 	default y
 	select ARM_ERRATA_720789
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PL310_ERRATA_753970 if CACHE_PL310
+=======
+	select PL310_ERRATA_753970 if CACHE_L2X0
+>>>>>>> v3.18
 =======
 	select PL310_ERRATA_753970 if CACHE_L2X0
 >>>>>>> v3.18
@@ -89,8 +108,11 @@ config ARCH_VEXPRESS_CA9X4
 	bool "Versatile Express Cortex-A9x4 tile"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
 =======
+=======
+>>>>>>> v3.18
 config ARCH_VEXPRESS_DCSCB
 	bool "Dual Cluster System Control Block (DCSCB) support"
 	depends on MCPM
@@ -119,4 +141,7 @@ config ARCH_VEXPRESS_TC2_PM
 	  with a TC2 (A15x2 A7x3) big.LITTLE core tile.
 
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

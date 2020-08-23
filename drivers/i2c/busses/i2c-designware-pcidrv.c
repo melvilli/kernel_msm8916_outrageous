@@ -20,10 +20,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ----------------------------------------------------------------------------
@@ -58,7 +61,10 @@ enum dw_pci_ctl_id_t {
 	medfield_4,
 	medfield_5,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	baytrail,
 	haswell,
@@ -70,6 +76,9 @@ struct dw_scl_sda_cfg {
 	u32 ss_lcnt;
 	u32 fs_lcnt;
 	u32 sda_hold;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -80,6 +89,11 @@ struct dw_pci_controller {
 	u32 rx_fifo_depth;
 	u32 clk_khz;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 functionality;
+	struct dw_scl_sda_cfg *scl_sda_cfg;
+>>>>>>> v3.18
 =======
 	u32 functionality;
 	struct dw_scl_sda_cfg *scl_sda_cfg;
@@ -91,7 +105,10 @@ struct dw_pci_controller {
 				DW_IC_CON_RESTART_EN)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DW_DEFAULT_FUNCTIONALITY (I2C_FUNC_I2C |			\
 					I2C_FUNC_SMBUS_BYTE |		\
 					I2C_FUNC_SMBUS_BYTE_DATA |	\
@@ -116,6 +133,9 @@ static struct dw_scl_sda_cfg hsw_config = {
 	.sda_hold = 0x9,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct  dw_pci_controller  dw_pci_controllers[] = {
 	[moorestown_0] = {
@@ -182,8 +202,11 @@ static struct  dw_pci_controller  dw_pci_controllers[] = {
 		.clk_khz      = 25000,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	[baytrail] = {
 		.bus_num = -1,
 		.bus_cfg = INTEL_MID_STD_CFG | DW_IC_CON_SPEED_FAST,
@@ -204,12 +227,16 @@ static struct  dw_pci_controller  dw_pci_controllers[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_algorithm i2c_dw_algo = {
 	.master_xfer	= i2c_dw_xfer,
 	.functionality	= i2c_dw_func,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int i2c_dw_pci_suspend(struct device *dev)
 {
@@ -233,12 +260,17 @@ static int i2c_dw_pci_suspend(struct device *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static int i2c_dw_pci_suspend(struct device *dev)
 {
 	struct pci_dev *pdev = container_of(dev, struct pci_dev, dev);
 
 	i2c_dw_disable(pci_get_drvdata(pdev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -246,6 +278,7 @@ static int i2c_dw_pci_suspend(struct device *dev)
 static int i2c_dw_pci_resume(struct device *dev)
 {
 	struct pci_dev *pdev = container_of(dev, struct pci_dev, dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dw_i2c_dev *i2c = pci_get_drvdata(pdev);
 	int err;
@@ -284,6 +317,8 @@ static const struct dev_pm_ops i2c_dw_pm_ops = {
 			   i2c_dw_pci_runtime_idle)
 };
 =======
+=======
+>>>>>>> v3.18
 
 	return i2c_dw_init(pci_get_drvdata(pdev));
 }
@@ -291,6 +326,9 @@ static const struct dev_pm_ops i2c_dw_pm_ops = {
 
 static UNIVERSAL_DEV_PM_OPS(i2c_dw_pm_ops, i2c_dw_pci_suspend,
 			    i2c_dw_pci_resume, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u32 i2c_dw_get_clk_rate_khz(struct dw_i2c_dev *dev)
@@ -306,6 +344,10 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	int r;
 	struct  dw_pci_controller *controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dw_scl_sda_cfg *cfg;
+>>>>>>> v3.18
 =======
 	struct dw_scl_sda_cfg *cfg;
 >>>>>>> v3.18
@@ -343,6 +385,7 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	dev->base = pcim_iomap_table(pdev)[0];
 	dev->dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->functionality =
 		I2C_FUNC_I2C |
 		I2C_FUNC_SMBUS_BYTE |
@@ -351,6 +394,8 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 		I2C_FUNC_SMBUS_I2C_BLOCK;
 	dev->master_cfg =  controller->bus_cfg;
 =======
+=======
+>>>>>>> v3.18
 	dev->functionality = controller->functionality |
 				DW_DEFAULT_FUNCTIONALITY;
 
@@ -363,6 +408,9 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 		dev->fs_lcnt = cfg->fs_lcnt;
 		dev->sda_hold_time = cfg->sda_hold;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_set_drvdata(pdev, dev);
@@ -381,8 +429,13 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	adap->dev.parent = &pdev->dev;
 	adap->nr = controller->bus_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(adap->name, sizeof(adap->name), "i2c-designware-pci-%d",
 		adap->nr);
+=======
+
+	snprintf(adap->name, sizeof(adap->name), "i2c-designware-pci");
+>>>>>>> v3.18
 =======
 
 	snprintf(adap->name, sizeof(adap->name), "i2c-designware-pci");
@@ -406,6 +459,10 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	pm_runtime_set_autosuspend_delay(&pdev->dev, 1000);
 	pm_runtime_use_autosuspend(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_runtime_put_autosuspend(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_put_autosuspend(&pdev->dev);
 >>>>>>> v3.18
@@ -429,7 +486,11 @@ static void i2c_dw_pci_remove(struct pci_dev *pdev)
 MODULE_ALIAS("i2c_designware-pci");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i2_designware_pci_ids) = {
+=======
+static const struct pci_device_id i2_designware_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i2_designware_pci_ids[] = {
 >>>>>>> v3.18
@@ -445,7 +506,10 @@ static const struct pci_device_id i2_designware_pci_ids[] = {
 	{ PCI_VDEVICE(INTEL, 0x082D), medfield_1 },
 	{ PCI_VDEVICE(INTEL, 0x082E), medfield_2 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Baytrail */
 	{ PCI_VDEVICE(INTEL, 0x0F41), baytrail },
 	{ PCI_VDEVICE(INTEL, 0x0F42), baytrail },
@@ -465,6 +529,9 @@ static const struct pci_device_id i2_designware_pci_ids[] = {
 	{ PCI_VDEVICE(INTEL, 0x22C5), baytrail },
 	{ PCI_VDEVICE(INTEL, 0x22C6), baytrail },
 	{ PCI_VDEVICE(INTEL, 0x22C7), baytrail },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0,}
 };

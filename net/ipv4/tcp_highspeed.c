@@ -10,7 +10,10 @@
 #include <net/tcp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* From AIMD tables from RFC 3649 appendix B,
@@ -20,6 +23,7 @@ static const struct hstcp_aimd_val {
 	unsigned int cwnd;
 	unsigned int md;
 } hstcp_aimd_vals[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
  {     38,  128, /*  0.50 */ },
  {    118,  112, /*  0.44 */ },
@@ -94,6 +98,8 @@ static const struct hstcp_aimd_val {
  {  84035,   25, /*  0.10 */ },
  {  89053,   24, /*  0.10 */ },
 =======
+=======
+>>>>>>> v3.18
 	{     38,  128, /*  0.50 */ },
 	{    118,  112, /*  0.44 */ },
 	{    221,  104, /*  0.41 */ },
@@ -166,6 +172,9 @@ static const struct hstcp_aimd_val {
 	{  79517,   26, /*  0.10 */ },
 	{  84035,   25, /*  0.10 */ },
 	{  89053,   24, /*  0.10 */ },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -188,7 +197,11 @@ static void hstcp_init(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hstcp_cong_avoid(struct sock *sk, u32 adk, u32 in_flight)
+=======
+static void hstcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void hstcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -197,17 +210,23 @@ static void hstcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 	struct hstcp *ca = inet_csk_ca(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tcp_is_cwnd_limited(sk, in_flight))
 		return;
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp);
 =======
+=======
+>>>>>>> v3.18
 	if (!tcp_is_cwnd_limited(sk))
 		return;
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp, acked);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		/* Update AIMD parameters.
@@ -253,7 +272,10 @@ static struct tcp_congestion_ops tcp_highspeed __read_mostly = {
 	.ssthresh	= hstcp_ssthresh,
 	.cong_avoid	= hstcp_cong_avoid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.min_cwnd	= tcp_reno_min_cwnd,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -57,7 +57,10 @@ void bcma_chipco_regctl_maskset(struct bcma_drv_cc *cc, u32 offset, u32 mask,
 EXPORT_SYMBOL_GPL(bcma_chipco_regctl_maskset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 bcma_pmu_xtalfreq(struct bcma_drv_cc *cc)
 {
 	u32 ilp_ctl, alp_hz;
@@ -161,6 +164,9 @@ static void bcma_pmu_pll_init(struct bcma_drv_cc *cc)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void bcma_pmu_resources_init(struct bcma_drv_cc *cc)
 {
@@ -173,7 +179,10 @@ static void bcma_pmu_resources_init(struct bcma_drv_cc *cc)
 		max_msk = 0xFFFF;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BCMA_CHIP_ID_BCM43142:
 		min_msk = BCMA_RES_4314_LPLDO_PU |
 			  BCMA_RES_4314_PMU_SLEEP_DIS |
@@ -193,6 +202,9 @@ static void bcma_pmu_resources_init(struct bcma_drv_cc *cc)
 			  BCMA_RES_4314_WL_CORE_READY;
 		max_msk = 0x3FFFFFFF;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		bcma_debug(bus, "PMU resource config unknown or not needed for device 0x%04X\n",
@@ -294,6 +306,10 @@ void bcma_pmu_init(struct bcma_drv_cc *cc)
 			     BCMA_CC_PMU_CTL_NOILPONW);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bcma_pmu_pll_init(cc);
+>>>>>>> v3.18
 =======
 	bcma_pmu_pll_init(cc);
 >>>>>>> v3.18
@@ -613,6 +629,11 @@ void bcma_pmu_spuravoid_pllupdate(struct bcma_drv_cc *cc, int spuravoid)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BCMA_CHIP_ID_BCM43131:
+	case BCMA_CHIP_ID_BCM43217:
+>>>>>>> v3.18
 =======
 	case BCMA_CHIP_ID_BCM43131:
 	case BCMA_CHIP_ID_BCM43217:

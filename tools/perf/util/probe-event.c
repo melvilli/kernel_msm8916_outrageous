@@ -41,7 +41,11 @@
 #include "symbol.h"
 #include "thread.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <lk/debugfs.h>
+=======
+#include <api/fs/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <api/fs/debugfs.h>
 >>>>>>> v3.18
@@ -52,7 +56,10 @@
 
 #define MAX_CMDLEN 256
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PROBE_ARGS 128
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PERFPROBE_GROUP "probe"
@@ -79,6 +86,7 @@ static int e_snprintf(char *str, size_t size, const char *format, ...)
 
 static char *synthesize_perf_probe_point(struct perf_probe_point *pp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int convert_name_to_addr(struct perf_probe_event *pev,
 				const char *exec);
 static struct machine machine;
@@ -86,16 +94,22 @@ static struct machine machine;
 /* Initialize symbol maps and path of vmlinux/modules */
 static int init_vmlinux(void)
 =======
+=======
+>>>>>>> v3.18
 static void clear_probe_trace_event(struct probe_trace_event *tev);
 static struct machine *host_machine;
 
 /* Initialize symbol maps and path of vmlinux/modules */
 static int init_symbol_maps(bool user_only)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
 
 	symbol_conf.sort_by_name = true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (symbol_conf.vmlinux_name == NULL)
 		symbol_conf.try_vmlinux_path = true;
@@ -105,11 +119,15 @@ static int init_symbol_maps(bool user_only)
 =======
 	ret = symbol__init(NULL);
 >>>>>>> v3.18
+=======
+	ret = symbol__init(NULL);
+>>>>>>> v3.18
 	if (ret < 0) {
 		pr_debug("Failed to init symbol map.\n");
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = machine__init(&machine, "", HOST_KERNEL_ID);
 	if (ret < 0)
@@ -119,6 +137,8 @@ static int init_symbol_maps(bool user_only)
 		pr_debug("machine__create_kernel_maps() failed.\n");
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (host_machine || user_only)	/* already initialized */
 		return 0;
 
@@ -130,6 +150,9 @@ static int init_symbol_maps(bool user_only)
 		pr_debug("machine__new_host() failed.\n");
 		symbol__exit();
 		ret = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -138,6 +161,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct symbol *__find_kernel_function_by_name(const char *name,
 						     struct map **mapp)
@@ -155,6 +179,8 @@ static struct map *kernel_get_module_map(const char *module)
 	if (module && strchr(module, '/'))
 		return machine__new_module(&machine, 0, module);
 =======
+=======
+>>>>>>> v3.18
 static void exit_symbol_maps(void)
 {
 	if (host_machine) {
@@ -215,6 +241,9 @@ static struct map *kernel_get_module_map(const char *module)
 	/* A file path -- this is an offline module */
 	if (module && strchr(module, '/'))
 		return machine__new_module(host_machine, 0, module);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!module)
@@ -238,7 +267,12 @@ static struct dso *kernel_get_module_dso(const char *module)
 
 	if (module) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_for_each_entry(dso, &machine.kernel_dsos, node) {
+=======
+		list_for_each_entry(dso, &host_machine->kernel_dsos.head,
+				    node) {
+>>>>>>> v3.18
 =======
 		list_for_each_entry(dso, &host_machine->kernel_dsos.head,
 				    node) {
@@ -252,7 +286,11 @@ static struct dso *kernel_get_module_dso(const char *module)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map = machine.vmlinux_maps[MAP__FUNCTION];
+=======
+	map = host_machine->vmlinux_maps[MAP__FUNCTION];
+>>>>>>> v3.18
 =======
 	map = host_machine->vmlinux_maps[MAP__FUNCTION];
 >>>>>>> v3.18
@@ -261,7 +299,11 @@ static struct dso *kernel_get_module_dso(const char *module)
 	vmlinux_name = symbol_conf.vmlinux_name;
 	if (vmlinux_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dso__load_vmlinux(dso, map, vmlinux_name, NULL) <= 0)
+=======
+		if (dso__load_vmlinux(dso, map, vmlinux_name, false, NULL) <= 0)
+>>>>>>> v3.18
 =======
 		if (dso__load_vmlinux(dso, map, vmlinux_name, false, NULL) <= 0)
 >>>>>>> v3.18
@@ -282,6 +324,7 @@ const char *kernel_get_module_path(const char *module)
 	return (dso) ? dso->long_name : NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int init_user_exec(void)
 {
@@ -331,6 +374,8 @@ static struct debuginfo *open_debuginfo(const char *module)
 	}
 	return debuginfo__new(path);
 =======
+=======
+>>>>>>> v3.18
 static int convert_exec_to_group(const char *exec, char **result)
 {
 	char *ptr1, *ptr2, *exec_copy;
@@ -426,11 +471,15 @@ static int get_text_start_address(const char *exec, unsigned long *address)
 out:
 	elf_end(elf);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Convert trace point to probe point with debuginfo
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Currently only handles kprobes.
  */
@@ -469,6 +518,8 @@ static int kprobe_convert_to_perf_probe(struct probe_trace_point *tp,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
  */
 static int find_perf_probe_point_from_dwarf(struct probe_trace_point *tp,
 					    struct perf_probe_point *pp,
@@ -541,6 +592,9 @@ static int add_exec_to_probe_trace_events(struct probe_trace_event *tevs,
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -574,6 +628,7 @@ static int add_module_to_probe_trace_events(struct probe_trace_event *tevs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp)
 		free(tmp);
 
@@ -581,6 +636,8 @@ static int add_module_to_probe_trace_events(struct probe_trace_event *tevs,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	free(tmp);
 	return ret;
 }
@@ -621,6 +678,9 @@ static int post_process_probe_trace_events(struct probe_trace_event *tevs,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Try to find perf_probe_event with debuginfo */
 static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
@@ -631,6 +691,7 @@ static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 	struct debuginfo *dinfo;
 	int ntevs, ret = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pev->uprobes) {
 		if (need_dwarf) {
@@ -649,17 +710,26 @@ static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 			return -ENOENT;
 		}
 =======
+=======
+>>>>>>> v3.18
 	dinfo = open_debuginfo(target, !need_dwarf);
 
 	if (!dinfo) {
 		if (need_dwarf)
 			return -ENOENT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_debug("Could not open debuginfo. Try to use symbols.\n");
 		return 0;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_debug("Try to find probe point from debuginfo.\n");
+>>>>>>> v3.18
 =======
 	pr_debug("Try to find probe point from debuginfo.\n");
 >>>>>>> v3.18
@@ -670,11 +740,14 @@ static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 
 	if (ntevs > 0) {	/* Succeeded to find trace events */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("find %d probe_trace_events.\n", ntevs);
 		if (target)
 			ret = add_module_to_probe_trace_events(*tevs, ntevs,
 							       target);
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("Found %d probe_trace_events.\n", ntevs);
 		ret = post_process_probe_trace_events(*tevs, ntevs,
 							target, pev->uprobes);
@@ -682,6 +755,9 @@ static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 			clear_probe_trace_events(*tevs, ntevs);
 			zfree(tevs);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret < 0 ? ret : ntevs;
 	}
@@ -750,8 +826,12 @@ static int get_real_path(const char *raw_path, const char *comp_dir,
 			raw_path = strchr(++raw_path, '/');
 			if (!raw_path) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				free(*new_path);
 				*new_path = NULL;
+=======
+				zfree(new_path);
+>>>>>>> v3.18
 =======
 				zfree(new_path);
 >>>>>>> v3.18
@@ -761,8 +841,12 @@ static int get_real_path(const char *raw_path, const char *comp_dir,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			free(*new_path);
 			*new_path = NULL;
+=======
+			zfree(new_path);
+>>>>>>> v3.18
 =======
 			zfree(new_path);
 >>>>>>> v3.18
@@ -777,7 +861,11 @@ static int get_real_path(const char *raw_path, const char *comp_dir,
 static int __show_one_line(FILE *fp, int l, bool skip, bool show_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char buf[LINEBUF_SIZE];
+=======
+	char buf[LINEBUF_SIZE], sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char buf[LINEBUF_SIZE], sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -801,7 +889,12 @@ static int __show_one_line(FILE *fp, int l, bool skip, bool show_num)
 error:
 	if (ferror(fp)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("File read error: %s\n", strerror(errno));
+=======
+		pr_warning("File read error: %s\n",
+			   strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		pr_warning("File read error: %s\n",
 			   strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -831,20 +924,27 @@ static int _show_one_line(FILE *fp, int l, bool skip, bool show_num)
  * line number.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int show_line_range(struct line_range *lr, const char *module)
 {
 	int l = 1;
 	struct line_node *ln;
 =======
+=======
+>>>>>>> v3.18
 static int __show_line_range(struct line_range *lr, const char *module)
 {
 	int l = 1;
 	struct int_node *ln;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct debuginfo *dinfo;
 	FILE *fp;
 	int ret;
 	char *tmp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Search a line range */
@@ -866,6 +966,8 @@ static int __show_line_range(struct line_range *lr, const char *module)
 	} else if (ret < 0) {
 		pr_warning("Debuginfo analysis failed. (%d)\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	char sbuf[STRERR_BUFSIZE];
 
 	/* Search a line range */
@@ -880,6 +982,9 @@ static int __show_line_range(struct line_range *lr, const char *module)
 		return -ENOENT;
 	} else if (ret < 0) {
 		pr_warning("Debuginfo analysis failed.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -890,7 +995,11 @@ static int __show_line_range(struct line_range *lr, const char *module)
 	free(tmp);	/* Free old path */
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Failed to find source file. (%d)\n", ret);
+=======
+		pr_warning("Failed to find source file path.\n");
+>>>>>>> v3.18
 =======
 		pr_warning("Failed to find source file path.\n");
 >>>>>>> v3.18
@@ -909,7 +1018,11 @@ static int __show_line_range(struct line_range *lr, const char *module)
 	if (fp == NULL) {
 		pr_warning("Failed to open %s: %s\n", lr->path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   strerror(errno));
+=======
+			   strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 			   strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18
@@ -923,8 +1036,13 @@ static int __show_line_range(struct line_range *lr, const char *module)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(ln, &lr->line_list, list) {
 		for (; ln->line > l; l++) {
+=======
+	intlist__for_each(ln, lr->line_list) {
+		for (; ln->i > l; l++) {
+>>>>>>> v3.18
 =======
 	intlist__for_each(ln, lr->line_list) {
 		for (; ln->i > l; l++) {
@@ -951,7 +1069,10 @@ end:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int show_line_range(struct line_range *lr, const char *module, bool user)
 {
 	int ret;
@@ -965,6 +1086,9 @@ int show_line_range(struct line_range *lr, const char *module, bool user)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int show_available_vars_at(struct debuginfo *dinfo,
 				  struct perf_probe_event *pev,
@@ -986,10 +1110,13 @@ static int show_available_vars_at(struct debuginfo *dinfo,
 						max_vls, externs);
 	if (ret <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Failed to find variables at %s (%d)\n", buf, ret);
 		goto end;
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (ret == 0 || ret == -ENOENT) {
 			pr_err("Failed to find the address of %s\n", buf);
 			ret = -ENOENT;
@@ -998,6 +1125,9 @@ static int show_available_vars_at(struct debuginfo *dinfo,
 		goto end;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Some variables are found */
 	fprintf(stdout, "Available variables at %s\n", buf);
@@ -1010,7 +1140,11 @@ static int show_available_vars_at(struct debuginfo *dinfo,
 		fprintf(stdout, "\t@<%s+%lu>\n", vl->point.symbol,
 			vl->point.offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(vl->point.symbol);
+=======
+		zfree(&vl->point.symbol);
+>>>>>>> v3.18
 =======
 		zfree(&vl->point.symbol);
 >>>>>>> v3.18
@@ -1043,6 +1177,7 @@ int show_available_vars(struct perf_probe_event *pevs, int npevs,
 	struct debuginfo *dinfo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = init_vmlinux();
 	if (ret < 0)
 		return ret;
@@ -1052,6 +1187,8 @@ int show_available_vars(struct perf_probe_event *pevs, int npevs,
 		pr_warning("Failed to open debuginfo file.\n");
 		return -ENOENT;
 =======
+=======
+>>>>>>> v3.18
 	ret = init_symbol_maps(pevs->uprobes);
 	if (ret < 0)
 		return ret;
@@ -1060,6 +1197,9 @@ int show_available_vars(struct perf_probe_event *pevs, int npevs,
 	if (!dinfo) {
 		ret = -ENOENT;
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1070,6 +1210,7 @@ int show_available_vars(struct perf_probe_event *pevs, int npevs,
 					     externs);
 
 	debuginfo__delete(dinfo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ret;
 }
@@ -1089,6 +1230,8 @@ static int kprobe_convert_to_perf_probe(struct probe_trace_point *tp,
 
 	return convert_to_perf_probe_point(tp, pp);
 =======
+=======
+>>>>>>> v3.18
 out:
 	exit_symbol_maps();
 	return ret;
@@ -1102,13 +1245,21 @@ find_perf_probe_point_from_dwarf(struct probe_trace_point *tp __maybe_unused,
 				 bool is_kprobe __maybe_unused)
 {
 	return -ENOSYS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 				struct probe_trace_event **tevs __maybe_unused,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int max_tevs __maybe_unused, const char *target)
+=======
+				int max_tevs __maybe_unused,
+				const char *target __maybe_unused)
+>>>>>>> v3.18
 =======
 				int max_tevs __maybe_unused,
 				const char *target __maybe_unused)
@@ -1120,9 +1271,12 @@ static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pev->uprobes)
 		return convert_name_to_addr(pev, target);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1130,7 +1284,12 @@ static int try_to_find_probe_trace_events(struct perf_probe_event *pev,
 
 int show_line_range(struct line_range *lr __maybe_unused,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    const char *module __maybe_unused)
+=======
+		    const char *module __maybe_unused,
+		    bool user __maybe_unused)
+>>>>>>> v3.18
 =======
 		    const char *module __maybe_unused,
 		    bool user __maybe_unused)
@@ -1152,7 +1311,10 @@ int show_available_vars(struct perf_probe_event *pevs __maybe_unused,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void line_range__clear(struct line_range *lr)
 {
 	free(lr->function);
@@ -1173,6 +1335,9 @@ int line_range__init(struct line_range *lr)
 		return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int parse_line_num(char **ptr, int *val, const char *what)
 {
@@ -1646,6 +1811,7 @@ static int parse_probe_trace_command(const char *cmd,
 		p = argv[1];
 	fmt1_str = strtok_r(p, "+", &fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tp->symbol = strdup(fmt1_str);
 	if (tp->symbol == NULL) {
 		ret = -ENOMEM;
@@ -1657,6 +1823,8 @@ static int parse_probe_trace_command(const char *cmd,
 	else
 		tp->offset = strtoul(fmt2_str, NULL, 10);
 =======
+=======
+>>>>>>> v3.18
 	if (fmt1_str[0] == '0')	/* only the address started with 0x */
 		tp->address = strtoul(fmt1_str, NULL, 0);
 	else {
@@ -1672,6 +1840,9 @@ static int parse_probe_trace_command(const char *cmd,
 		else
 			tp->offset = strtoul(fmt2_str, NULL, 10);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tev->nargs = argc - 2;
@@ -1741,8 +1912,12 @@ int synthesize_perf_probe_arg(struct perf_probe_arg *pa, char *buf, size_t len)
 	return tmp - buf;
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("Failed to synthesize perf probe argument: %s\n",
 		 strerror(-ret));
+=======
+	pr_debug("Failed to synthesize perf probe argument: %d\n", ret);
+>>>>>>> v3.18
 =======
 	pr_debug("Failed to synthesize perf probe argument: %d\n", ret);
 >>>>>>> v3.18
@@ -1795,10 +1970,15 @@ static char *synthesize_perf_probe_point(struct perf_probe_point *pp)
 	return buf;
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("Failed to synthesize perf probe point: %s\n",
 		 strerror(-ret));
 	if (buf)
 		free(buf);
+=======
+	pr_debug("Failed to synthesize perf probe point: %d\n", ret);
+	free(buf);
+>>>>>>> v3.18
 =======
 	pr_debug("Failed to synthesize perf probe point: %d\n", ret);
 	free(buf);
@@ -1925,6 +2105,7 @@ char *synthesize_probe_trace_command(struct probe_trace_event *tev)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tev->uprobes)
 		len = e_snprintf(buf, MAX_CMDLEN, "%c:%s/%s %s:%s",
 				 tp->retprobe ? 'r' : 'p',
@@ -1940,6 +2121,8 @@ char *synthesize_probe_trace_command(struct probe_trace_event *tev)
 	if (len <= 0)
 		goto error;
 =======
+=======
+>>>>>>> v3.18
 	len = e_snprintf(buf, MAX_CMDLEN, "%c:%s/%s ", tp->retprobe ? 'r' : 'p',
 			 tev->group, tev->event);
 	if (len <= 0)
@@ -1961,6 +2144,9 @@ char *synthesize_probe_trace_command(struct probe_trace_event *tev)
 	if (ret <= 0)
 		goto error;
 	len += ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < tev->nargs; i++) {
@@ -1978,7 +2164,10 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int find_perf_probe_point_from_map(struct probe_trace_point *tp,
 					  struct perf_probe_point *pp,
 					  bool is_kprobe)
@@ -2052,6 +2241,9 @@ static int convert_to_perf_probe_point(struct probe_trace_point *tp,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int convert_to_perf_probe_event(struct probe_trace_event *tev,
 			       struct perf_probe_event *pev, bool is_kprobe)
@@ -2067,11 +2259,15 @@ static int convert_to_perf_probe_event(struct probe_trace_event *tev,
 
 	/* Convert trace_point to probe_point */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_kprobe)
 		ret = kprobe_convert_to_perf_probe(&tev->point, &pev->point);
 	else
 		ret = convert_to_perf_probe_point(&tev->point, &pev->point);
 
+=======
+	ret = convert_to_perf_probe_point(&tev->point, &pev->point, is_kprobe);
+>>>>>>> v3.18
 =======
 	ret = convert_to_perf_probe_point(&tev->point, &pev->point, is_kprobe);
 >>>>>>> v3.18
@@ -2108,6 +2304,7 @@ void clear_perf_probe_event(struct perf_probe_event *pev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pev->event)
 		free(pev->event);
 	if (pev->group)
@@ -2131,6 +2328,8 @@ void clear_perf_probe_event(struct perf_probe_event *pev)
 			if (field->name)
 				free(field->name);
 =======
+=======
+>>>>>>> v3.18
 	free(pev->event);
 	free(pev->group);
 	free(pp->file);
@@ -2145,14 +2344,21 @@ void clear_perf_probe_event(struct perf_probe_event *pev)
 		while (field) {
 			next = field->next;
 			zfree(&field->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			free(field);
 			field = next;
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pev->args)
 		free(pev->args);
+=======
+	free(pev->args);
+>>>>>>> v3.18
 =======
 	free(pev->args);
 >>>>>>> v3.18
@@ -2164,6 +2370,7 @@ static void clear_probe_trace_event(struct probe_trace_event *tev)
 	struct probe_trace_arg_ref *ref, *next;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tev->event)
 		free(tev->event);
@@ -2181,6 +2388,8 @@ static void clear_probe_trace_event(struct probe_trace_event *tev)
 		if (tev->args[i].type)
 			free(tev->args[i].type);
 =======
+=======
+>>>>>>> v3.18
 	free(tev->event);
 	free(tev->group);
 	free(tev->point.symbol);
@@ -2189,6 +2398,9 @@ static void clear_probe_trace_event(struct probe_trace_event *tev)
 		free(tev->args[i].name);
 		free(tev->args[i].value);
 		free(tev->args[i].type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ref = tev->args[i].ref;
 		while (ref) {
@@ -2197,6 +2409,7 @@ static void clear_probe_trace_event(struct probe_trace_event *tev)
 			ref = next;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tev->args)
 		free(tev->args);
@@ -2208,6 +2421,8 @@ static void print_warn_msg(const char *file, bool is_kprobe)
 
 	if (errno == ENOENT) {
 =======
+=======
+>>>>>>> v3.18
 	free(tev->args);
 	memset(tev, 0, sizeof(*tev));
 }
@@ -2217,6 +2432,9 @@ static void print_open_warning(int err, bool is_kprobe)
 	char sbuf[STRERR_BUFSIZE];
 
 	if (err == -ENOENT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		const char *config;
 
@@ -2225,6 +2443,7 @@ static void print_open_warning(int err, bool is_kprobe)
 		else
 			config = "CONFIG_KPROBE_EVENTS";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_warning("%s file does not exist - please rebuild kernel"
 				" with %s.\n", file, config);
@@ -2236,6 +2455,8 @@ static void print_open_warning(int err, bool is_kprobe)
 static int open_probe_events(const char *trace_file, bool readwrite,
 				bool is_kprobe)
 =======
+=======
+>>>>>>> v3.18
 		pr_warning("%cprobe_events file does not exist"
 			   " - please rebuild kernel with %s.\n",
 			   is_kprobe ? 'k' : 'u', config);
@@ -2265,6 +2486,9 @@ static void print_both_open_warning(int kerr, int uerr)
 }
 
 static int open_probe_events(const char *trace_file, bool readwrite)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char buf[PATH_MAX];
@@ -2273,10 +2497,15 @@ static int open_probe_events(const char *trace_file, bool readwrite)
 
 	__debugfs = debugfs_find_mountpoint();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__debugfs == NULL) {
 		pr_warning("Debugfs is not mounted.\n");
 		return -ENOENT;
 	}
+=======
+	if (__debugfs == NULL)
+		return -ENOTSUP;
+>>>>>>> v3.18
 =======
 	if (__debugfs == NULL)
 		return -ENOTSUP;
@@ -2292,7 +2521,11 @@ static int open_probe_events(const char *trace_file, bool readwrite)
 
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			print_warn_msg(buf, is_kprobe);
+=======
+			ret = -errno;
+>>>>>>> v3.18
 =======
 			ret = -errno;
 >>>>>>> v3.18
@@ -2303,7 +2536,11 @@ static int open_probe_events(const char *trace_file, bool readwrite)
 static int open_kprobe_events(bool readwrite)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return open_probe_events("tracing/kprobe_events", readwrite, true);
+=======
+	return open_probe_events("tracing/kprobe_events", readwrite);
+>>>>>>> v3.18
 =======
 	return open_probe_events("tracing/kprobe_events", readwrite);
 >>>>>>> v3.18
@@ -2312,7 +2549,11 @@ static int open_kprobe_events(bool readwrite)
 static int open_uprobe_events(bool readwrite)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return open_probe_events("tracing/uprobe_events", readwrite, false);
+=======
+	return open_probe_events("tracing/uprobe_events", readwrite);
+>>>>>>> v3.18
 =======
 	return open_probe_events("tracing/uprobe_events", readwrite);
 >>>>>>> v3.18
@@ -2341,7 +2582,11 @@ static struct strlist *get_probe_trace_command_rawlist(int fd)
 		ret = strlist__add(sl, buf);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("strlist__add failed: %s\n", strerror(-ret));
+=======
+			pr_debug("strlist__add failed (%d)\n", ret);
+>>>>>>> v3.18
 =======
 			pr_debug("strlist__add failed (%d)\n", ret);
 >>>>>>> v3.18
@@ -2356,7 +2601,12 @@ static struct strlist *get_probe_trace_command_rawlist(int fd)
 
 /* Show an event */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int show_perf_probe_event(struct perf_probe_event *pev)
+=======
+static int show_perf_probe_event(struct perf_probe_event *pev,
+				 const char *module)
+>>>>>>> v3.18
 =======
 static int show_perf_probe_event(struct perf_probe_event *pev,
 				 const char *module)
@@ -2377,6 +2627,11 @@ static int show_perf_probe_event(struct perf_probe_event *pev,
 
 	printf("  %-20s (on %s", buf, place);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (module)
+		printf(" in %s", module);
+>>>>>>> v3.18
 =======
 	if (module)
 		printf(" in %s", module);
@@ -2411,7 +2666,11 @@ static int __show_perf_probe_events(int fd, bool is_kprobe)
 	rawlist = get_probe_trace_command_rawlist(fd);
 	if (!rawlist)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOENT;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -2423,7 +2682,12 @@ static int __show_perf_probe_events(int fd, bool is_kprobe)
 								is_kprobe);
 			if (ret >= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ret = show_perf_probe_event(&pev);
+=======
+				ret = show_perf_probe_event(&pev,
+							    tev.point.module);
+>>>>>>> v3.18
 =======
 				ret = show_perf_probe_event(&pev,
 							    tev.point.module);
@@ -2442,6 +2706,7 @@ static int __show_perf_probe_events(int fd, bool is_kprobe)
 /* List up current perf-probe events */
 int show_perf_probe_events(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int fd, ret;
 
@@ -2465,6 +2730,8 @@ int show_perf_probe_events(void)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	int kp_fd, up_fd, ret;
 
 	setup_pager();
@@ -2494,6 +2761,9 @@ int show_perf_probe_events(void)
 	}
 out:
 	exit_symbol_maps();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2510,6 +2780,11 @@ static struct strlist *get_probe_trace_event_names(int fd, bool include_group)
 	memset(&tev, 0, sizeof(tev));
 	rawlist = get_probe_trace_command_rawlist(fd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!rawlist)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!rawlist)
 		return NULL;
@@ -2544,6 +2819,10 @@ static int write_probe_trace_event(int fd, struct probe_trace_event *tev)
 	int ret = 0;
 	char *buf = synthesize_probe_trace_command(tev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -2559,7 +2838,11 @@ static int write_probe_trace_event(int fd, struct probe_trace_event *tev)
 		if (ret <= 0)
 			pr_warning("Failed to write event: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   strerror(errno));
+=======
+				   strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 				   strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18
@@ -2577,7 +2860,11 @@ static int get_new_event_name(char *buf, size_t len, const char *base,
 	ret = e_snprintf(buf, len, "%s", base);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("snprintf() failed: %s\n", strerror(-ret));
+=======
+		pr_debug("snprintf() failed: %d\n", ret);
+>>>>>>> v3.18
 =======
 		pr_debug("snprintf() failed: %d\n", ret);
 >>>>>>> v3.18
@@ -2597,7 +2884,11 @@ static int get_new_event_name(char *buf, size_t len, const char *base,
 		ret = e_snprintf(buf, len, "%s_%d", base, i);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("snprintf() failed: %s\n", strerror(-ret));
+=======
+			pr_debug("snprintf() failed: %d\n", ret);
+>>>>>>> v3.18
 =======
 			pr_debug("snprintf() failed: %d\n", ret);
 >>>>>>> v3.18
@@ -2630,14 +2921,20 @@ static int __add_probe_trace_events(struct perf_probe_event *pev,
 		fd = open_kprobe_events(true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fd < 0)
 		return fd;
 =======
+=======
+>>>>>>> v3.18
 	if (fd < 0) {
 		print_open_warning(fd, !pev->uprobes);
 		return fd;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Get current event names */
 	namelist = get_probe_trace_event_names(fd, false);
@@ -2687,7 +2984,11 @@ static int __add_probe_trace_events(struct perf_probe_event *pev,
 		pev->event = tev->event;
 		pev->group = tev->group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		show_perf_probe_event(pev);
+=======
+		show_perf_probe_event(pev, tev->point.module);
+>>>>>>> v3.18
 =======
 		show_perf_probe_event(pev, tev->point.module);
 >>>>>>> v3.18
@@ -2716,6 +3017,7 @@ static int __add_probe_trace_events(struct perf_probe_event *pev,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int convert_to_probe_trace_events(struct perf_probe_event *pev,
 					  struct probe_trace_event **tevs,
@@ -2810,6 +3112,8 @@ error:
 	*tevs = NULL;
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static char *looking_function_name;
 static int num_matched_functions;
 
@@ -2979,6 +3283,9 @@ static int convert_to_probe_trace_events(struct perf_probe_event *pev,
 		return ret;	/* Found in debuginfo or got an error */
 
 	return find_probe_trace_events_from_map(pev, tevs, max_tevs, target);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3001,12 +3308,16 @@ int add_perf_probe_events(struct perf_probe_event *pevs, int npevs,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pevs->uprobes)
 		/* Init vmlinux path */
 		ret = init_vmlinux();
 	else
 		ret = init_user_exec();
 
+=======
+	ret = init_symbol_maps(pevs->uprobes);
+>>>>>>> v3.18
 =======
 	ret = init_symbol_maps(pevs->uprobes);
 >>>>>>> v3.18
@@ -3041,14 +3352,20 @@ end:
 		for (j = 0; j < pkgs[i].ntevs; j++)
 			clear_probe_trace_event(&pkgs[i].tevs[j]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(pkgs[i].tevs);
 	}
 	free(pkgs);
 =======
+=======
+>>>>>>> v3.18
 		zfree(&pkgs[i].tevs);
 	}
 	free(pkgs);
 	exit_symbol_maps();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -3085,7 +3402,12 @@ static int __del_trace_probe_event(int fd, struct str_node *ent)
 	return 0;
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("Failed to delete event: %s\n", strerror(-ret));
+=======
+	pr_warning("Failed to delete event: %s\n",
+		   strerror_r(-ret, buf, sizeof(buf)));
+>>>>>>> v3.18
 =======
 	pr_warning("Failed to delete event: %s\n",
 		   strerror_r(-ret, buf, sizeof(buf)));
@@ -3131,6 +3453,7 @@ int del_perf_probe_events(struct strlist *dellist)
 	/* Get current event names */
 	kfd = open_kprobe_events(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kfd < 0)
 		return kfd;
 
@@ -3141,6 +3464,8 @@ int del_perf_probe_events(struct strlist *dellist)
 		unamelist = get_probe_trace_event_names(ufd, true);
 
 =======
+=======
+>>>>>>> v3.18
 	if (kfd >= 0)
 		namelist = get_probe_trace_event_names(kfd, true);
 
@@ -3153,6 +3478,9 @@ int del_perf_probe_events(struct strlist *dellist)
 		goto error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (namelist == NULL && unamelist == NULL)
 		goto error;
@@ -3220,7 +3548,11 @@ static int filter_available_functions(struct map *map __maybe_unused,
 				      struct symbol *sym)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sym->binding == STB_GLOBAL &&
+=======
+	if ((sym->binding == STB_GLOBAL || sym->binding == STB_LOCAL) &&
+>>>>>>> v3.18
 =======
 	if ((sym->binding == STB_GLOBAL || sym->binding == STB_LOCAL) &&
 >>>>>>> v3.18
@@ -3229,6 +3561,7 @@ static int filter_available_functions(struct map *map __maybe_unused,
 	return 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __show_available_funcs(struct map *map)
 {
@@ -3266,10 +3599,15 @@ int show_available_funcs(const char *target, struct strfilter *_filter,
 }
 
 static int available_user_funcs(const char *target)
+=======
+int show_available_funcs(const char *target, struct strfilter *_filter,
+					bool user)
+>>>>>>> v3.18
 {
 	struct map *map;
 	int ret;
 
+<<<<<<< HEAD
 	ret = init_user_exec();
 	if (ret < 0)
 		return ret;
@@ -3393,6 +3731,8 @@ out:
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	ret = init_symbol_maps(user);
 	if (ret < 0)
 		return ret;
@@ -3429,4 +3769,7 @@ end:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

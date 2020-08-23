@@ -1,7 +1,11 @@
 /* Driver for Realtek PCI-Express card reader
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,11 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+ *   Roger Tseng <rogerable@realtek.com>
+>>>>>>> v3.18
 =======
  *   Roger Tseng <rogerable@realtek.com>
 >>>>>>> v3.18
@@ -44,11 +52,14 @@ static u8 rtl8411_get_ic_version(struct rtsx_pcr *pcr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rtl8411_extra_init_hw(struct rtsx_pcr *pcr)
 {
 	return rtsx_pci_write_register(pcr, CD_PAD_CTL,
 			CD_DISABLE_MASK | CD_AUTO_DISABLE, CD_ENABLE);
 =======
+=======
+>>>>>>> v3.18
 static int rtl8411b_is_qfn48(struct rtsx_pcr *pcr)
 {
 	u8 val = 0;
@@ -132,6 +143,9 @@ static int rtl8411b_extra_init_hw(struct rtsx_pcr *pcr)
 			0x06, 0x00);
 
 	return rtsx_pci_send_cmd(pcr, 100);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -207,7 +221,12 @@ static int rtl8411_card_power_off(struct rtsx_pcr *pcr, int card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rtl8411_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
+=======
+static int rtl8411_do_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage,
+		int bpp_tuned18_shift, int bpp_asic_1v8)
+>>>>>>> v3.18
 =======
 static int rtl8411_do_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage,
 		int bpp_tuned18_shift, int bpp_asic_1v8)
@@ -216,6 +235,7 @@ static int rtl8411_do_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage,
 	u8 mask, val;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mask = (BPP_REG_TUNED18 << BPP_TUNED18_SHIFT_8411) | BPP_PAD_MASK;
 	if (voltage == OUTPUT_3V3) {
@@ -231,6 +251,8 @@ static int rtl8411_do_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage,
 			return err;
 		val = (BPP_ASIC_1V8 << BPP_TUNED18_SHIFT_8411) | BPP_PAD_1V8;
 =======
+=======
+>>>>>>> v3.18
 	mask = (BPP_REG_TUNED18 << bpp_tuned18_shift) | BPP_PAD_MASK;
 	if (voltage == OUTPUT_3V3) {
 		err = rtsx_pci_write_register(pcr,
@@ -244,6 +266,9 @@ static int rtl8411_do_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage,
 		if (err < 0)
 			return err;
 		val = (bpp_asic_1v8 << bpp_tuned18_shift) | BPP_PAD_1V8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		return -EINVAL;
@@ -253,7 +278,10 @@ static int rtl8411_do_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rtl8411_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 {
 	return rtl8411_do_switch_output_voltage(pcr, voltage,
@@ -266,6 +294,9 @@ static int rtl8402_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 			BPP_TUNED18_SHIFT_8402, BPP_ASIC_2V0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int rtl8411_cd_deglitch(struct rtsx_pcr *pcr)
 {
@@ -332,7 +363,10 @@ static int rtl8411_conv_clk_and_div_n(int input, int dir)
 
 static const struct pcr_ops rtl8411_pcr_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.fetch_vendor_settings = rtl8411_fetch_vendor_settings,
 	.extra_init_hw = rtl8411_extra_init_hw,
 	.optimize_phy = NULL,
@@ -350,6 +384,9 @@ static const struct pcr_ops rtl8411_pcr_ops = {
 
 static const struct pcr_ops rtl8402_pcr_ops = {
 	.fetch_vendor_settings = rtl8411_fetch_vendor_settings,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.extra_init_hw = rtl8411_extra_init_hw,
 	.optimize_phy = NULL,
@@ -360,10 +397,13 @@ static const struct pcr_ops rtl8402_pcr_ops = {
 	.card_power_on = rtl8411_card_power_on,
 	.card_power_off = rtl8411_card_power_off,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.switch_output_voltage = rtl8411_switch_output_voltage,
 	.cd_deglitch = rtl8411_cd_deglitch,
 	.conv_clk_and_div_n = rtl8411_conv_clk_and_div_n,
 =======
+=======
+>>>>>>> v3.18
 	.switch_output_voltage = rtl8402_switch_output_voltage,
 	.cd_deglitch = rtl8411_cd_deglitch,
 	.conv_clk_and_div_n = rtl8411_conv_clk_and_div_n,
@@ -384,6 +424,9 @@ static const struct pcr_ops rtl8411b_pcr_ops = {
 	.cd_deglitch = rtl8411_cd_deglitch,
 	.conv_clk_and_div_n = rtl8411_conv_clk_and_div_n,
 	.force_power_down = rtl8411_force_power_down,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -450,6 +493,7 @@ static const u32 rtl8411_ms_pull_ctl_disable_tbl[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8411_init_params(struct rtsx_pcr *pcr)
 {
 	pcr->extra_caps = EXTRA_CAPS_SD_SDR50 | EXTRA_CAPS_SD_SDR104;
@@ -462,6 +506,8 @@ void rtl8411_init_params(struct rtsx_pcr *pcr)
 	pcr->ms_pull_ctl_enable_tbl = rtl8411_ms_pull_ctl_enable_tbl;
 	pcr->ms_pull_ctl_disable_tbl = rtl8411_ms_pull_ctl_disable_tbl;
 =======
+=======
+>>>>>>> v3.18
 static const u32 rtl8411b_qfn64_sd_pull_ctl_enable_tbl[] = {
 	RTSX_REG_PAIR(CARD_PULL_CTL1, 0xAA),
 	RTSX_REG_PAIR(CARD_PULL_CTL2, 0xAA),
@@ -566,5 +612,8 @@ void rtl8402_init_params(struct rtsx_pcr *pcr)
 	rtl8411_init_common_params(pcr);
 	pcr->ops = &rtl8402_pcr_ops;
 	set_pull_ctrl_tables(pcr, rtl8411);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

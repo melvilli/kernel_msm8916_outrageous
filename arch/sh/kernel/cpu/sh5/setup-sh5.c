@@ -18,6 +18,7 @@
 
 static struct plat_sci_port scif0_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= PHYS_PERIPHERAL_BLOCK + 0x01030000,
 	.flags		= UPF_BOOT_AUTOCONF | UPF_IOREMAP,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -25,6 +26,8 @@ static struct plat_sci_port scif0_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= { 39, 40, 42, 0 },
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF | UPF_IOREMAP,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -35,6 +38,9 @@ static struct resource scif0_resources[] = {
 	DEFINE_RES_IRQ(39),
 	DEFINE_RES_IRQ(40),
 	DEFINE_RES_IRQ(42),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -42,6 +48,11 @@ static struct platform_device scif0_device = {
 	.name		= "sh-sci",
 	.id		= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif0_resources,
+	.num_resources	= ARRAY_SIZE(scif0_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif0_resources,
 	.num_resources	= ARRAY_SIZE(scif0_resources),
@@ -84,6 +95,7 @@ static struct platform_device rtc_device = {
 #define	TMU_BLOCK_OFF	0x01020000
 #define TMU_BASE	PHYS_PERIPHERAL_BLOCK + TMU_BLOCK_OFF
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TMU0_BASE	(TMU_BASE + 0x8 + (0xc * 0x0))
 #define TMU1_BASE	(TMU_BASE + 0x8 + (0xc * 0x1))
 #define TMU2_BASE	(TMU_BASE + 0x8 + (0xc * 0x2))
@@ -109,6 +121,8 @@ static struct resource tmu0_resources[] = {
 static struct platform_device tmu0_device = {
 	.name		= "sh_tmu",
 =======
+=======
+>>>>>>> v3.18
 
 static struct sh_timer_config tmu0_platform_data = {
 	.channels_mask = 7,
@@ -123,6 +137,9 @@ static struct resource tmu0_resources[] = {
 
 static struct platform_device tmu0_device = {
 	.name		= "sh-tmu",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id		= 0,
 	.dev = {
@@ -132,6 +149,7 @@ static struct platform_device tmu0_device = {
 	.num_resources	= ARRAY_SIZE(tmu0_resources),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sh_timer_config tmu1_platform_data = {
 	.channel_offset = 0x10,
@@ -193,6 +211,11 @@ static struct platform_device *sh5_early_devices[] __initdata = {
 	&tmu0_device,
 	&tmu1_device,
 	&tmu2_device,
+=======
+static struct platform_device *sh5_early_devices[] __initdata = {
+	&scif0_device,
+	&tmu0_device,
+>>>>>>> v3.18
 =======
 static struct platform_device *sh5_early_devices[] __initdata = {
 	&scif0_device,

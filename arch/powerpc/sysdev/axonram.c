@@ -110,6 +110,7 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 	unsigned long phys_mem, phys_end;
 	void *user_mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *vec;
 	unsigned int transfered;
 	unsigned short idx;
@@ -120,6 +121,8 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 	bio_for_each_segment(vec, bio, idx) {
 		if (unlikely(phys_mem + vec->bv_len > phys_end)) {
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec vec;
 	unsigned int transfered;
 	struct bvec_iter iter;
@@ -130,11 +133,15 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 	transfered = 0;
 	bio_for_each_segment(vec, bio, iter) {
 		if (unlikely(phys_mem + vec.bv_len > phys_end)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bio_io_error(bio);
 			return;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		user_mem = page_address(vec->bv_page) + vec->bv_offset;
 		if (bio_data_dir(bio) == READ)
@@ -145,6 +152,8 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 		phys_mem += vec->bv_len;
 		transfered += vec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 		user_mem = page_address(vec.bv_page) + vec.bv_offset;
 		if (bio_data_dir(bio) == READ)
 			memcpy(user_mem, (void *) phys_mem, vec.bv_len);
@@ -153,6 +162,9 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 
 		phys_mem += vec.bv_len;
 		transfered += vec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	bio_endio(bio, 0);
@@ -180,7 +192,11 @@ axon_ram_direct_access(struct block_device *device, sector_t sector,
 
 	*kaddr = (void *)(bank->ph_addr + offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*pfn = virt_to_phys(*kaddr) >> PAGE_SHIFT;
+=======
+	*pfn = virt_to_phys(kaddr) >> PAGE_SHIFT;
+>>>>>>> v3.18
 =======
 	*pfn = virt_to_phys(kaddr) >> PAGE_SHIFT;
 >>>>>>> v3.18
@@ -342,7 +358,11 @@ axon_ram_remove(struct platform_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id axon_ram_device_id[] = {
+=======
+static const struct of_device_id axon_ram_device_id[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id axon_ram_device_id[] = {
 >>>>>>> v3.18

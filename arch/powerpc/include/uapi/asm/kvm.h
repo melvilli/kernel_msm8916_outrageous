@@ -28,6 +28,10 @@
 #define __KVM_HAVE_IRQCHIP
 #define __KVM_HAVE_IRQ_LINE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __KVM_HAVE_GUEST_DEBUG
+>>>>>>> v3.18
 =======
 #define __KVM_HAVE_GUEST_DEBUG
 >>>>>>> v3.18
@@ -274,8 +278,11 @@ struct kvm_fpu {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_debug_exit_arch {
 =======
+=======
+>>>>>>> v3.18
 /*
  * Defines for h/w breakpoint, watchpoint (read, write or both) and
  * software breakpoint.
@@ -294,6 +301,9 @@ struct kvm_debug_exit_arch {
 	 */
 	__u32 status;
 	__u32 reserved;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -307,10 +317,13 @@ struct kvm_guest_debug_arch {
 		 * watchpoint or watchpoint (both read and write).
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KVMPPC_DEBUG_NONE		0x0
 #define KVMPPC_DEBUG_BREAKPOINT		(1UL << 1)
 #define KVMPPC_DEBUG_WATCH_WRITE	(1UL << 2)
 #define KVMPPC_DEBUG_WATCH_READ		(1UL << 3)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		__u32 type;
@@ -458,12 +471,18 @@ struct kvm_get_htab_header {
 #define KVM_REG_PPC_MMCR1	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x11)
 #define KVM_REG_PPC_MMCRA	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x12)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define KVM_REG_PPC_MMCR2	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x13)
 #define KVM_REG_PPC_MMCRS	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x14)
 #define KVM_REG_PPC_SIAR	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x15)
 #define KVM_REG_PPC_SDAR	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x16)
 #define KVM_REG_PPC_SIER	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x17)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KVM_REG_PPC_PMC1	(KVM_REG_PPC | KVM_REG_SIZE_U32 | 0x18)
@@ -494,12 +513,18 @@ struct kvm_get_htab_header {
 /* FP and vector status/control registers */
 #define KVM_REG_PPC_FPSCR	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x80)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * VSCR register is documented as a 32-bit register in the ISA, but it can
  * only be accesses via a vector register. Expose VSCR as a 32-bit register
  * even though the kernel represents it as a 128-bit vector.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define KVM_REG_PPC_VSCR	(KVM_REG_PPC | KVM_REG_SIZE_U32 | 0x81)
 
@@ -544,7 +569,10 @@ struct kvm_get_htab_header {
 #define KVM_REG_PPC_EPTCFG	(KVM_REG_PPC | KVM_REG_SIZE_U32 | 0x9b)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Timebase offset */
 #define KVM_REG_PPC_TB_OFFSET	(KVM_REG_PPC | KVM_REG_SIZE_U64 | 0x9c)
 
@@ -610,6 +638,9 @@ struct kvm_get_htab_header {
 #define KVM_REG_PPC_TM_DSCR	(KVM_REG_PPC_TM | KVM_REG_SIZE_U64 | 0x68)
 #define KVM_REG_PPC_TM_TAR	(KVM_REG_PPC_TM | KVM_REG_SIZE_U64 | 0x69)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PPC64 eXternal Interrupt Controller Specification */
 #define KVM_DEV_XICS_GRP_SOURCES	1	/* 64-bit source attributes */

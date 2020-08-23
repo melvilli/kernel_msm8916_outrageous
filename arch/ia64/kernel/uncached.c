@@ -99,7 +99,11 @@ static int uncached_add_chunk(struct uncached_pool *uc_pool, int nid)
 
 	page = alloc_pages_exact_node(nid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				GFP_KERNEL | __GFP_ZERO | GFP_THISNODE,
+=======
+				GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
+>>>>>>> v3.18
 =======
 				GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
 >>>>>>> v3.18

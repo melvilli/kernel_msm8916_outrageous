@@ -21,6 +21,10 @@
 #include <linux/device.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/host1x.h>
+>>>>>>> v3.18
 =======
 #include <linux/host1x.h>
 >>>>>>> v3.18
@@ -35,7 +39,10 @@
 #include "dev.h"
 #include "debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "host1x_bo.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "job.h"

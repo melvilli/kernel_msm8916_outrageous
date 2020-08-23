@@ -14,28 +14,37 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/crc-ccitt.h>
 #include <linux/module.h>
 #include <linux/i2c.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_gpio.h>
 #include <linux/of_irq.h>
 #include <linux/miscdevice.h>
@@ -44,12 +53,19 @@
 #include <linux/nfc.h>
 #include <linux/firmware.h>
 #include <linux/unaligned/access_ok.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_data/pn544.h>
 
 #include <net/nfc/hci.h>
 #include <net/nfc/llc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/nfc/nfc.h>
+>>>>>>> v3.18
 =======
 #include <net/nfc/nfc.h>
 >>>>>>> v3.18
@@ -79,7 +95,10 @@ MODULE_DEVICE_TABLE(i2c, pn544_hci_i2c_id_table);
 #define PN544_HCI_I2C_DRIVER_NAME "pn544_hci_i2c"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Exposed through the 4 most significant bytes
  * from the HCI SW_VERSION first byte, a.k.a.
@@ -167,6 +186,9 @@ struct pn544_i2c_fw_secure_blob {
 #define FW_WORK_STATE_WAIT_CHECK_ANSWER 4
 #define FW_WORK_STATE_WAIT_SECURE_WRITE_ANSWER 5
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pn544_i2c_phy {
 	struct i2c_client *i2c_dev;
@@ -178,8 +200,11 @@ struct pn544_i2c_phy {
 	unsigned int en_polarity;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int powered;
 =======
+=======
+>>>>>>> v3.18
 	u8 hw_variant;
 
 	struct work_struct fw_work;
@@ -196,6 +221,9 @@ struct pn544_i2c_phy {
 
 	int powered;
 	int run_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int hard_fault;		/*
@@ -218,8 +246,12 @@ static void pn544_hci_i2c_platform_init(struct pn544_i2c_phy *phy)
 	int count = sizeof(rset_cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info(DRIVER_DESC ": %s\n", __func__);
 	dev_info(&phy->i2c_dev->dev, "Detecting nfc_en polarity\n");
+=======
+	nfc_info(&phy->i2c_dev->dev, "Detecting nfc_en polarity\n");
+>>>>>>> v3.18
 =======
 	nfc_info(&phy->i2c_dev->dev, "Detecting nfc_en polarity\n");
 >>>>>>> v3.18
@@ -244,7 +276,11 @@ static void pn544_hci_i2c_platform_init(struct pn544_i2c_phy *phy)
 			ret = i2c_master_send(phy->i2c_dev, rset_cmd, count);
 			if (ret == count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_info(&phy->i2c_dev->dev,
+=======
+				nfc_info(&phy->i2c_dev->dev,
+>>>>>>> v3.18
 =======
 				nfc_info(&phy->i2c_dev->dev,
 >>>>>>> v3.18
@@ -256,7 +292,11 @@ static void pn544_hci_i2c_platform_init(struct pn544_i2c_phy *phy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(&phy->i2c_dev->dev,
+=======
+	nfc_err(&phy->i2c_dev->dev,
+>>>>>>> v3.18
 =======
 	nfc_err(&phy->i2c_dev->dev,
 >>>>>>> v3.18
@@ -267,7 +307,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void pn544_hci_i2c_enable_mode(struct pn544_i2c_phy *phy, int run_mode)
 {
 	gpio_set_value(phy->gpio_fw, run_mode == PN544_FW_MODE ? 1 : 0);
@@ -277,17 +320,26 @@ static void pn544_hci_i2c_enable_mode(struct pn544_i2c_phy *phy, int run_mode)
 	phy->run_mode = run_mode;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pn544_hci_i2c_enable(void *phy_id)
 {
 	struct pn544_i2c_phy *phy = phy_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info(DRIVER_DESC ": %s\n", __func__);
 
 	gpio_set_value(phy->gpio_fw, 0);
 	gpio_set_value(phy->gpio_en, phy->en_polarity);
 	usleep_range(10000, 15000);
+=======
+	pr_info("%s\n", __func__);
+
+	pn544_hci_i2c_enable_mode(phy, PN544_HCI_MODE);
+>>>>>>> v3.18
 =======
 	pr_info("%s\n", __func__);
 
@@ -304,8 +356,11 @@ static void pn544_hci_i2c_disable(void *phy_id)
 	struct pn544_i2c_phy *phy = phy_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info(DRIVER_DESC ": %s\n", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gpio_set_value(phy->gpio_fw, 0);
@@ -391,11 +446,17 @@ static int check_crc(u8 *buf, int buflen)
 
 	if (buf[len - 2] != (crc & 0xff) || buf[len - 1] != (crc >> 8)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(PN544_HCI_I2C_DRIVER_NAME
 		       ": CRC error 0x%x != 0x%x 0x%x\n",
 		       crc, buf[len - 1], buf[len - 2]);
 
 		pr_info(DRIVER_DESC ": %s : BAD CRC\n", __func__);
+=======
+		pr_err("CRC error 0x%x != 0x%x 0x%x\n",
+		       crc, buf[len - 1], buf[len - 2]);
+		pr_info("%s: BAD CRC\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_err("CRC error 0x%x != 0x%x 0x%x\n",
 		       crc, buf[len - 1], buf[len - 2]);
@@ -427,7 +488,11 @@ static int pn544_hci_i2c_read(struct pn544_i2c_phy *phy, struct sk_buff **skb)
 	r = i2c_master_recv(client, &len, 1);
 	if (r != 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "cannot read len byte\n");
+=======
+		nfc_err(&client->dev, "cannot read len byte\n");
+>>>>>>> v3.18
 =======
 		nfc_err(&client->dev, "cannot read len byte\n");
 >>>>>>> v3.18
@@ -437,7 +502,11 @@ static int pn544_hci_i2c_read(struct pn544_i2c_phy *phy, struct sk_buff **skb)
 	if ((len < (PN544_HCI_I2C_LLC_MIN_SIZE - 1)) ||
 	    (len > (PN544_HCI_I2C_LLC_MAX_SIZE - 1))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "invalid len byte\n");
+=======
+		nfc_err(&client->dev, "invalid len byte\n");
+>>>>>>> v3.18
 =======
 		nfc_err(&client->dev, "invalid len byte\n");
 >>>>>>> v3.18
@@ -485,7 +554,10 @@ flush:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pn544_hci_i2c_fw_read_status(struct pn544_i2c_phy *phy)
 {
 	int r;
@@ -535,6 +607,9 @@ static int pn544_hci_i2c_fw_read_status(struct pn544_i2c_phy *phy)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Reads an shdlc frame from the chip. This is not as straightforward as it
@@ -571,6 +646,7 @@ static irqreturn_t pn544_hci_i2c_irq_thread_fn(int irq, void *phy_id)
 		return IRQ_HANDLED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = pn544_hci_i2c_read(phy, &skb);
 	if (r == -EREMOTEIO) {
 		phy->hard_fault = r;
@@ -585,6 +661,8 @@ static irqreturn_t pn544_hci_i2c_irq_thread_fn(int irq, void *phy_id)
 	nfc_hci_recv_frame(phy->hdev, skb);
 
 =======
+=======
+>>>>>>> v3.18
 	if (phy->run_mode == PN544_FW_MODE) {
 		phy->fw_cmd_result = pn544_hci_i2c_fw_read_status(phy);
 		schedule_work(&phy->fw_work);
@@ -602,6 +680,9 @@ static irqreturn_t pn544_hci_i2c_irq_thread_fn(int irq, void *phy_id)
 
 		nfc_hci_recv_frame(phy->hdev, skb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
@@ -613,7 +694,10 @@ static struct nfc_phy_ops i2c_phy_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pn544_hci_i2c_fw_download(void *phy_id, const char *firmware_name,
 					u8 hw_variant)
 {
@@ -1036,6 +1120,9 @@ static int pn544_hci_i2c_of_request_resources(struct i2c_client *client)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pn544_hci_i2c_probe(struct i2c_client *client,
 			       const struct i2c_device_id *id)
@@ -1049,7 +1136,11 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "Need I2C_FUNC_I2C\n");
+=======
+		nfc_err(&client->dev, "Need I2C_FUNC_I2C\n");
+>>>>>>> v3.18
 =======
 		nfc_err(&client->dev, "Need I2C_FUNC_I2C\n");
 >>>>>>> v3.18
@@ -1060,7 +1151,11 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 			   GFP_KERNEL);
 	if (!phy) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev,
+=======
+		nfc_err(&client->dev,
+>>>>>>> v3.18
 =======
 		nfc_err(&client->dev,
 >>>>>>> v3.18
@@ -1069,6 +1164,12 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_WORK(&phy->fw_work, pn544_hci_i2c_fw_work);
+	phy->fw_work_state = FW_WORK_STATE_IDLE;
+
+>>>>>>> v3.18
 =======
 	INIT_WORK(&phy->fw_work, pn544_hci_i2c_fw_work);
 	phy->fw_work_state = FW_WORK_STATE_IDLE;
@@ -1078,6 +1179,7 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 	i2c_set_clientdata(client, phy);
 
 	pdata = client->dev.platform_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pdata == NULL) {
 		dev_err(&client->dev, "No platform data\n");
@@ -1099,6 +1201,8 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 	phy->gpio_fw = pdata->get_gpio(NFC_GPIO_FW_RESET);
 	phy->gpio_irq = pdata->get_gpio(NFC_GPIO_IRQ);
 =======
+=======
+>>>>>>> v3.18
 
 	/* No platform data, using device tree. */
 	if (!pdata && client->dev.of_node) {
@@ -1129,6 +1233,9 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 		nfc_err(&client->dev, "No platform data\n");
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pn544_hci_i2c_platform_init(phy);
@@ -1138,7 +1245,11 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 				 PN544_HCI_I2C_DRIVER_NAME, phy);
 	if (r < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "Unable to register IRQ handler\n");
+=======
+		nfc_err(&client->dev, "Unable to register IRQ handler\n");
+>>>>>>> v3.18
 =======
 		nfc_err(&client->dev, "Unable to register IRQ handler\n");
 >>>>>>> v3.18
@@ -1148,7 +1259,12 @@ static int pn544_hci_i2c_probe(struct i2c_client *client,
 	r = pn544_hci_probe(phy, &i2c_phy_ops, LLC_SHDLC_NAME,
 			    PN544_I2C_FRAME_HEADROOM, PN544_I2C_FRAME_TAILROOM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    PN544_HCI_I2C_LLC_MAX_PAYLOAD, &phy->hdev);
+=======
+			    PN544_HCI_I2C_LLC_MAX_PAYLOAD,
+			    pn544_hci_i2c_fw_download, &phy->hdev);
+>>>>>>> v3.18
 =======
 			    PN544_HCI_I2C_LLC_MAX_PAYLOAD,
 			    pn544_hci_i2c_fw_download, &phy->hdev);
@@ -1163,15 +1279,21 @@ err_hci:
 
 err_rti:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->free_resources != NULL)
 		pdata->free_resources();
 =======
+=======
+>>>>>>> v3.18
 	if (!pdata) {
 		gpio_free(phy->gpio_en);
 		gpio_free(phy->gpio_fw);
 	} else if (pdata->free_resources) {
 		pdata->free_resources();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r;
@@ -1185,11 +1307,17 @@ static int pn544_hci_i2c_remove(struct i2c_client *client)
 	dev_dbg(&client->dev, "%s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cancel_work_sync(&phy->fw_work);
 	if (phy->fw_work_state != FW_WORK_STATE_IDLE)
 		pn544_hci_i2c_fw_work_complete(phy, -ENODEV);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pn544_hci_remove(phy->hdev);
 
@@ -1198,9 +1326,12 @@ static int pn544_hci_i2c_remove(struct i2c_client *client)
 
 	free_irq(client->irq, phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->free_resources)
 		pdata->free_resources();
 =======
+=======
+>>>>>>> v3.18
 
 	/* No platform data, GPIOs have been requested by this driver */
 	if (!pdata) {
@@ -1210,16 +1341,22 @@ static int pn544_hci_i2c_remove(struct i2c_client *client)
 	} else if (pdata->free_resources) {
 		pdata->free_resources();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_driver pn544_hci_i2c_driver = {
 	.driver = {
 		   .name = PN544_HCI_I2C_DRIVER_NAME,
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id of_pn544_i2c_match[] = {
 	{ .compatible = "nxp,pn544-i2c", },
 	{},
@@ -1231,6 +1368,9 @@ static struct i2c_driver pn544_hci_i2c_driver = {
 		   .name = PN544_HCI_I2C_DRIVER_NAME,
 		   .owner  = THIS_MODULE,
 		   .of_match_table = of_match_ptr(of_pn544_i2c_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  },
 	.probe = pn544_hci_i2c_probe,

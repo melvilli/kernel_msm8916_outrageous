@@ -20,6 +20,7 @@
 __kernel_clock_getres:
 	.cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chi	%r2,__CLOCK_REALTIME
 	je	0f
 	chi	%r2,__CLOCK_MONOTONIC
@@ -29,6 +30,8 @@ __kernel_clock_getres:
 	basr	%r1,0
 1:	l	%r0,4f-1b(%r1)
 =======
+=======
+>>>>>>> v3.18
 	basr	%r1,0
 	la	%r1,4f-.(%r1)
 	chi	%r2,__CLOCK_REALTIME
@@ -43,6 +46,9 @@ __kernel_clock_getres:
 0:	ltr	%r3,%r3
 	jz	2f				/* res == NULL */
 1:	l	%r0,0(%r1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xc	0(4,%r3),0(%r3)			/* set tp->tv_sec to zero */
 	st	%r0,4(%r3)			/* store tp->tv_usec */
@@ -53,6 +59,10 @@ __kernel_clock_getres:
 	br	%r14
 4:	.long	__CLOCK_REALTIME_RES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+5:	.long	__CLOCK_COARSE_RES
+>>>>>>> v3.18
 =======
 5:	.long	__CLOCK_COARSE_RES
 >>>>>>> v3.18

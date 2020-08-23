@@ -18,7 +18,10 @@
 #include <linux/stat.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/random.h>
 
 /**
@@ -38,6 +41,9 @@ const void *kobject_namespace(struct kobject *kobj)
 
 	return kobj->ktype->namespace(kobj);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -69,6 +75,7 @@ static int populate_dir(struct kobject *kobj)
 static int create_dir(struct kobject *kobj)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error = 0;
 	error = sysfs_create_dir(kobj);
 	if (!error) {
@@ -78,6 +85,8 @@ static int create_dir(struct kobject *kobj)
 	}
 	return error;
 =======
+=======
+>>>>>>> v3.18
 	const struct kobj_ns_type_operations *ops;
 	int error;
 
@@ -111,6 +120,9 @@ static int create_dir(struct kobject *kobj)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -279,13 +291,19 @@ int kobject_set_name_vargs(struct kobject *kobj, const char *fmt,
 
 	kobj->name = kvasprintf(GFP_KERNEL, fmt, vargs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!kobj->name)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!kobj->name) {
 		kobj->name = old_name;
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ewww... some of these buggers have '/' in the name ... */
@@ -385,7 +403,11 @@ static int kobject_add_varg(struct kobject *kobj, struct kobject *parent,
  * If @parent is set, then the parent of the @kobj will be set to it.
  * If @parent is NULL, then the parent of the @kobj will be set to the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * kobject associted with the kset assigned to this kobject.  If no kset
+=======
+ * kobject associated with the kset assigned to this kobject.  If no kset
+>>>>>>> v3.18
 =======
  * kobject associated with the kset assigned to this kobject.  If no kset
 >>>>>>> v3.18
@@ -498,7 +520,11 @@ int kobject_rename(struct kobject *kobj, const char *new_name)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = sysfs_rename_dir(kobj, new_name);
+=======
+	error = sysfs_rename_dir_ns(kobj, new_name, kobject_namespace(kobj));
+>>>>>>> v3.18
 =======
 	error = sysfs_rename_dir_ns(kobj, new_name, kobject_namespace(kobj));
 >>>>>>> v3.18
@@ -546,6 +572,10 @@ int kobject_move(struct kobject *kobj, struct kobject *new_parent)
 			new_parent = kobject_get(&kobj->kset->kobj);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -564,7 +594,11 @@ int kobject_move(struct kobject *kobj, struct kobject *new_parent)
 	envp[0] = devpath_string;
 	envp[1] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = sysfs_move_dir(kobj, new_parent);
+=======
+	error = sysfs_move_dir_ns(kobj, new_parent, kobject_namespace(kobj));
+>>>>>>> v3.18
 =======
 	error = sysfs_move_dir_ns(kobj, new_parent, kobject_namespace(kobj));
 >>>>>>> v3.18
@@ -590,11 +624,14 @@ out:
 void kobject_del(struct kobject *kobj)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!kobj)
 		return;
 
 	sysfs_remove_dir(kobj);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *sd;
 
 	if (!kobj)
@@ -604,6 +641,9 @@ void kobject_del(struct kobject *kobj)
 	sysfs_remove_dir(kobj);
 	sysfs_put(sd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kobj->state_in_sysfs = 0;
 	kobj_kset_leave(kobj);
@@ -639,8 +679,13 @@ static void kobject_cleanup(struct kobject *kobj)
 	const char *name = kobj->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("kobject: '%s' (%p): %s\n",
 		 kobject_name(kobj), kobj, __func__);
+=======
+	pr_debug("kobject: '%s' (%p): %s, parent %p\n",
+		 kobject_name(kobj), kobj, __func__, kobj->parent);
+>>>>>>> v3.18
 =======
 	pr_debug("kobject: '%s' (%p): %s, parent %p\n",
 		 kobject_name(kobj), kobj, __func__, kobj->parent);
@@ -679,10 +724,13 @@ static void kobject_cleanup(struct kobject *kobj)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void kobject_release(struct kref *kref)
 {
 	kobject_cleanup(container_of(kref, struct kobject, kref));
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_KOBJECT_RELEASE
 static void kobject_delayed_cleanup(struct work_struct *work)
 {
@@ -704,6 +752,9 @@ static void kobject_release(struct kref *kref)
 #else
 	kobject_cleanup(kobj);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -832,6 +883,10 @@ const struct sysfs_ops kobj_sysfs_ops = {
 	.store	= kobj_attr_store,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kobj_sysfs_ops);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kobj_sysfs_ops);
 >>>>>>> v3.18
@@ -864,6 +919,10 @@ void kset_unregister(struct kset *k)
 	if (!k)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kobject_del(&k->kobj);
+>>>>>>> v3.18
 =======
 	kobject_del(&k->kobj);
 >>>>>>> v3.18
@@ -936,7 +995,11 @@ static struct kset *kset_create(const char *name,
 	if (!kset)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = kobject_set_name(&kset->kobj, name);
+=======
+	retval = kobject_set_name(&kset->kobj, "%s", name);
+>>>>>>> v3.18
 =======
 	retval = kobject_set_name(&kset->kobj, "%s", name);
 >>>>>>> v3.18
@@ -1050,7 +1113,10 @@ const struct kobj_ns_type_operations *kobj_ns_ops(struct kobject *kobj)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool kobj_ns_current_may_mount(enum kobj_ns_type type)
 {
 	bool may_mount = true;
@@ -1063,6 +1129,9 @@ bool kobj_ns_current_may_mount(enum kobj_ns_type type)
 
 	return may_mount;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void *kobj_ns_grab_current(enum kobj_ns_type type)

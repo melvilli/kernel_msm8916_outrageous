@@ -64,6 +64,7 @@ struct p9_fd_opts {
 	int wfd;
 	u16 port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /**
@@ -81,6 +82,9 @@ struct p9_trans_fd {
 =======
 	int privport;
 >>>>>>> v3.18
+=======
+	int privport;
+>>>>>>> v3.18
 };
 
 /*
@@ -92,6 +96,11 @@ enum {
 	/* Options that take integer arguments */
 	Opt_port, Opt_rfdno, Opt_wfdno, Opt_err,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Options that take no arguments */
+	Opt_privport,
+>>>>>>> v3.18
 =======
 	/* Options that take no arguments */
 	Opt_privport,
@@ -103,6 +112,10 @@ static const match_table_t tokens = {
 	{Opt_rfdno, "rfdno=%u"},
 	{Opt_wfdno, "wfdno=%u"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{Opt_privport, "privport"},
+>>>>>>> v3.18
 =======
 	{Opt_privport, "privport"},
 >>>>>>> v3.18
@@ -169,7 +182,10 @@ struct p9_conn {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct p9_trans_fd - transport state
  * @rd: reference to file to read from
@@ -184,6 +200,9 @@ struct p9_trans_fd {
 	struct p9_conn conn;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void p9_poll_workfn(struct work_struct *work);
 
@@ -192,6 +211,12 @@ static LIST_HEAD(p9_poll_pending_list);
 static DECLARE_WORK(p9_poll_work, p9_poll_workfn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static unsigned int p9_ipport_resv_min = P9_DEF_MIN_RESVPORT;
+static unsigned int p9_ipport_resv_max = P9_DEF_MAX_RESVPORT;
+
+>>>>>>> v3.18
 =======
 static unsigned int p9_ipport_resv_min = P9_DEF_MIN_RESVPORT;
 static unsigned int p9_ipport_resv_max = P9_DEF_MAX_RESVPORT;
@@ -242,6 +267,7 @@ static void p9_conn_cancel(struct p9_conn *m, int err)
 
 	list_for_each_entry_safe(req, rtmp, &m->req_list, req_list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		req->status = REQ_STATUS_ERROR;
 		if (!req->t_err)
 			req->t_err = err;
@@ -256,6 +282,11 @@ static void p9_conn_cancel(struct p9_conn *m, int err)
 	}
 	list_for_each_entry_safe(req, rtmp, &m->unsent_req_list, req_list) {
 >>>>>>> v3.18
+=======
+		list_move(&req->req_list, &cancel_list);
+	}
+	list_for_each_entry_safe(req, rtmp, &m->unsent_req_list, req_list) {
+>>>>>>> v3.18
 		list_move(&req->req_list, &cancel_list);
 	}
 	spin_unlock_irqrestore(&m->client->lock, flags);
@@ -264,7 +295,13 @@ static void p9_conn_cancel(struct p9_conn *m, int err)
 		p9_debug(P9_DEBUG_ERROR, "call back req %p\n", req);
 		list_del(&req->req_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p9_client_cb(m->client, req);
+=======
+		if (!req->t_err)
+			req->t_err = err;
+		p9_client_cb(m->client, req, REQ_STATUS_ERROR);
+>>>>>>> v3.18
 =======
 		if (!req->t_err)
 			req->t_err = err;
@@ -286,15 +323,21 @@ p9_fd_poll(struct p9_client *client, struct poll_table_struct *pt)
 		return -EREMOTEIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ts->rd->f_op || !ts->rd->f_op->poll)
 		return -EIO;
 
 	if (!ts->wr->f_op || !ts->wr->f_op->poll)
 =======
+=======
+>>>>>>> v3.18
 	if (!ts->rd->f_op->poll)
 		return -EIO;
 
 	if (!ts->wr->f_op->poll)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 
@@ -351,6 +394,10 @@ static void p9_read_work(struct work_struct *work)
 	int n, err;
 	struct p9_conn *m;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int status = REQ_STATUS_ERROR;
+>>>>>>> v3.18
 =======
 	int status = REQ_STATUS_ERROR;
 >>>>>>> v3.18
@@ -401,8 +448,12 @@ static void p9_read_work(struct work_struct *work)
 
 		m->req = p9_tag_lookup(m->client, tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!m->req || (m->req->status != REQ_STATUS_SENT &&
 					m->req->status != REQ_STATUS_FLSH)) {
+=======
+		if (!m->req || (m->req->status != REQ_STATUS_SENT)) {
+>>>>>>> v3.18
 =======
 		if (!m->req || (m->req->status != REQ_STATUS_SENT)) {
 >>>>>>> v3.18
@@ -432,15 +483,21 @@ static void p9_read_work(struct work_struct *work)
 		spin_lock(&m->client->lock);
 		if (m->req->status != REQ_STATUS_ERROR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			m->req->status = REQ_STATUS_RCVD;
 		list_del(&m->req->req_list);
 		spin_unlock(&m->client->lock);
 		p9_client_cb(m->client, m->req);
 =======
+=======
+>>>>>>> v3.18
 			status = REQ_STATUS_RCVD;
 		list_del(&m->req->req_list);
 		spin_unlock(&m->client->lock);
 		p9_client_cb(m->client, m->req, status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		m->rbuf = NULL;
 		m->rpos = 0;
@@ -637,7 +694,11 @@ p9_pollwait(struct file *filp, wait_queue_head_t *wait_address, poll_table *p)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * p9_conn_create - allocate and initialize the per-session mux data
+=======
+ * p9_conn_create - initialize the per-session mux data
+>>>>>>> v3.18
 =======
  * p9_conn_create - initialize the per-session mux data
 >>>>>>> v3.18
@@ -646,6 +707,7 @@ p9_pollwait(struct file *filp, wait_queue_head_t *wait_address, poll_table *p)
  * Note: Creates the polling task if this is the first session.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct p9_conn *p9_conn_create(struct p9_client *client)
 {
@@ -657,6 +719,8 @@ static struct p9_conn *p9_conn_create(struct p9_client *client)
 	if (!m)
 		return ERR_PTR(-ENOMEM);
 =======
+=======
+>>>>>>> v3.18
 static void p9_conn_create(struct p9_client *client)
 {
 	int n;
@@ -664,6 +728,9 @@ static void p9_conn_create(struct p9_client *client)
 	struct p9_conn *m = &ts->conn;
 
 	p9_debug(P9_DEBUG_TRANS, "client %p msize %d\n", client, client->msize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_LIST_HEAD(&m->mux_list);
@@ -687,8 +754,11 @@ static void p9_conn_create(struct p9_client *client)
 		set_bit(Wpending, &m->wsched);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return m;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -750,7 +820,11 @@ static int p9_fd_request(struct p9_client *client, struct p9_req_t *req)
 	int n;
 	struct p9_trans_fd *ts = client->trans;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct p9_conn *m = ts->conn;
+=======
+	struct p9_conn *m = &ts->conn;
+>>>>>>> v3.18
 =======
 	struct p9_conn *m = &ts->conn;
 >>>>>>> v3.18
@@ -789,9 +863,13 @@ static int p9_fd_cancel(struct p9_client *client, struct p9_req_t *req)
 		req->status = REQ_STATUS_FLSHD;
 		ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (req->status == REQ_STATUS_SENT)
 		req->status = REQ_STATUS_FLSH;
 
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -801,7 +879,10 @@ static int p9_fd_cancel(struct p9_client *client, struct p9_req_t *req)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int p9_fd_cancelled(struct p9_client *client, struct p9_req_t *req)
 {
 	p9_debug(P9_DEBUG_TRANS, "client %p req %p\n", client, req);
@@ -816,6 +897,9 @@ static int p9_fd_cancelled(struct p9_client *client, struct p9_req_t *req)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * parse_opts - parse mount options into p9_fd_opts structure
@@ -854,7 +938,11 @@ static int parse_opts(char *params, struct p9_fd_opts *opts)
 			continue;
 		token = match_token(p, tokens, args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (token != Opt_err) {
+=======
+		if ((token != Opt_err) && (token != Opt_privport)) {
+>>>>>>> v3.18
 =======
 		if ((token != Opt_err) && (token != Opt_privport)) {
 >>>>>>> v3.18
@@ -876,6 +964,12 @@ static int parse_opts(char *params, struct p9_fd_opts *opts)
 			opts->wfd = option;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case Opt_privport:
+			opts->privport = 1;
+			break;
+>>>>>>> v3.18
 =======
 		case Opt_privport:
 			opts->privport = 1;
@@ -893,7 +987,11 @@ static int parse_opts(char *params, struct p9_fd_opts *opts)
 static int p9_fd_open(struct p9_client *client, int rfd, int wfd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct p9_trans_fd *ts = kmalloc(sizeof(struct p9_trans_fd),
+=======
+	struct p9_trans_fd *ts = kzalloc(sizeof(struct p9_trans_fd),
+>>>>>>> v3.18
 =======
 	struct p9_trans_fd *ts = kzalloc(sizeof(struct p9_trans_fd),
 >>>>>>> v3.18
@@ -923,9 +1021,14 @@ static int p9_socket_open(struct p9_client *client, struct socket *csocket)
 	struct p9_trans_fd *p;
 	struct file *file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	p = kmalloc(sizeof(struct p9_trans_fd), GFP_KERNEL);
+=======
+
+	p = kzalloc(sizeof(struct p9_trans_fd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 
 	p = kzalloc(sizeof(struct p9_trans_fd), GFP_KERNEL);
@@ -951,6 +1054,7 @@ static int p9_socket_open(struct p9_client *client, struct socket *csocket)
 	p->rd->f_flags |= O_NONBLOCK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->conn = p9_conn_create(client);
 	if (IS_ERR(p->conn)) {
 		ret = PTR_ERR(p->conn);
@@ -963,12 +1067,19 @@ static int p9_socket_open(struct p9_client *client, struct socket *csocket)
 =======
 	p9_conn_create(client);
 >>>>>>> v3.18
+=======
+	p9_conn_create(client);
+>>>>>>> v3.18
 	return 0;
 }
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * p9_mux_destroy - cancels all pending requests and frees mux resources
+=======
+ * p9_mux_destroy - cancels all pending requests of mux
+>>>>>>> v3.18
 =======
  * p9_mux_destroy - cancels all pending requests of mux
 >>>>>>> v3.18
@@ -989,7 +1100,10 @@ static void p9_conn_destroy(struct p9_conn *m)
 
 	m->client = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(m);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1014,7 +1128,11 @@ static void p9_fd_close(struct p9_client *client)
 	client->status = Disconnected;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_conn_destroy(ts->conn);
+=======
+	p9_conn_destroy(&ts->conn);
+>>>>>>> v3.18
 =======
 	p9_conn_destroy(&ts->conn);
 >>>>>>> v3.18
@@ -1045,7 +1163,10 @@ static inline int valid_ipaddr4(const char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int p9_bind_privport(struct socket *sock)
 {
 	struct sockaddr_in cl;
@@ -1064,6 +1185,9 @@ static int p9_bind_privport(struct socket *sock)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 p9_fd_create_tcp(struct p9_client *client, const char *addr, char *args)
@@ -1094,7 +1218,10 @@ p9_fd_create_tcp(struct p9_client *client, const char *addr, char *args)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (opts.privport) {
 		err = p9_bind_privport(csocket);
 		if (err < 0) {
@@ -1105,6 +1232,9 @@ p9_fd_create_tcp(struct p9_client *client, const char *addr, char *args)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = csocket->ops->connect(csocket,
 				    (struct sockaddr *)&sin_server,
@@ -1176,6 +1306,7 @@ p9_fd_create(struct p9_client *client, const char *addr, char *args)
 
 	p = (struct p9_trans_fd *) client->trans;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->conn = p9_conn_create(client);
 	if (IS_ERR(p->conn)) {
 		err = PTR_ERR(p->conn);
@@ -1187,6 +1318,9 @@ p9_fd_create(struct p9_client *client, const char *addr, char *args)
 =======
 	p9_conn_create(client);
 >>>>>>> v3.18
+=======
+	p9_conn_create(client);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1195,7 +1329,11 @@ static struct p9_trans_module p9_tcp_trans = {
 	.name = "tcp",
 	.maxsize = MAX_SOCK_BUF,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.def = 1,
+=======
+	.def = 0,
+>>>>>>> v3.18
 =======
 	.def = 0,
 >>>>>>> v3.18
@@ -1204,6 +1342,10 @@ static struct p9_trans_module p9_tcp_trans = {
 	.request = p9_fd_request,
 	.cancel = p9_fd_cancel,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cancelled = p9_fd_cancelled,
+>>>>>>> v3.18
 =======
 	.cancelled = p9_fd_cancelled,
 >>>>>>> v3.18
@@ -1219,6 +1361,10 @@ static struct p9_trans_module p9_unix_trans = {
 	.request = p9_fd_request,
 	.cancel = p9_fd_cancel,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cancelled = p9_fd_cancelled,
+>>>>>>> v3.18
 =======
 	.cancelled = p9_fd_cancelled,
 >>>>>>> v3.18
@@ -1234,6 +1380,10 @@ static struct p9_trans_module p9_fd_trans = {
 	.request = p9_fd_request,
 	.cancel = p9_fd_cancel,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cancelled = p9_fd_cancelled,
+>>>>>>> v3.18
 =======
 	.cancelled = p9_fd_cancelled,
 >>>>>>> v3.18

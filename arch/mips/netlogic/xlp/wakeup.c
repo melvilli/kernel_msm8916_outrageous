@@ -33,7 +33,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -51,8 +54,13 @@
 
 #include <asm/netlogic/xlp-hal/iomap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/netlogic/xlp-hal/pic.h>
 #include <asm/netlogic/xlp-hal/xlp.h>
+=======
+#include <asm/netlogic/xlp-hal/xlp.h>
+#include <asm/netlogic/xlp-hal/pic.h>
+>>>>>>> v3.18
 =======
 #include <asm/netlogic/xlp-hal/xlp.h>
 #include <asm/netlogic/xlp-hal/pic.h>
@@ -62,6 +70,7 @@
 static int xlp_wakeup_core(uint64_t sysbase, int node, int core)
 {
 	uint32_t coremask, value;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int count;
 
@@ -79,6 +88,8 @@ static int xlp_wakeup_core(uint64_t sysbase, int node, int core)
 
 	/* Poll for CPU to mark itself coherent */
 =======
+=======
+>>>>>>> v3.18
 	int count, resetreg;
 
 	coremask = (1 << core);
@@ -108,6 +119,9 @@ static int xlp_wakeup_core(uint64_t sysbase, int node, int core)
 		return 1;
 
 	/* Poll for CPU to mark itself coherent on other type of XLP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	count = 100000;
 	do {
@@ -117,6 +131,7 @@ static int xlp_wakeup_core(uint64_t sysbase, int node, int core)
 	return count != 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void xlp_enable_secondary_cores(const cpumask_t *wakeup_mask)
 {
@@ -143,6 +158,8 @@ static void xlp_enable_secondary_cores(const cpumask_t *wakeup_mask)
 
 		for (core = 0; core < NLM_CORES_PER_NODE; core++) {
 =======
+=======
+>>>>>>> v3.18
 static int wait_for_cpus(int cpu, int bootcpu)
 {
 	volatile uint32_t *cpu_ready = nlm_get_boot_data(BOOT_CPU_READY);
@@ -222,6 +239,9 @@ static void xlp_enable_secondary_cores(const cpumask_t *wakeup_mask)
 
 		pr_info("Node %d - SYS/FUSE coremask %x\n", n, syscoremask);
 		for (core = 0; core < nlm_cores_per_node(); core++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* we will be on node 0 core 0 */
 			if (n == 0 && core == 0)
@@ -233,7 +253,11 @@ static void xlp_enable_secondary_cores(const cpumask_t *wakeup_mask)
 
 			/* see if at least the first hw thread is enabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cpu = (n * NLM_CORES_PER_NODE + core)
+=======
+			cpu = (n * nlm_cores_per_node() + core)
+>>>>>>> v3.18
 =======
 			cpu = (n * nlm_cores_per_node() + core)
 >>>>>>> v3.18
@@ -249,11 +273,17 @@ static void xlp_enable_secondary_cores(const cpumask_t *wakeup_mask)
 			nodep->coremask |= 1u << core;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* spin until the first hw thread sets its ready */
 			count = 0x20000000;
 			do {
 				val = *(volatile int *)&nlm_cpu_ready[cpu];
 			} while (val == 0 && --count > 0);
+=======
+			/* spin until the hw threads sets their ready */
+			if (!wait_for_cpus(cpu, 0))
+				pr_err("Node %d : timeout core %d\n", n, core);
+>>>>>>> v3.18
 =======
 			/* spin until the hw threads sets their ready */
 			if (!wait_for_cpus(cpu, 0))
@@ -271,6 +301,11 @@ void xlp_wakeup_secondary_cpus()
 	 */
 	xlp_boot_core0_siblings();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!wait_for_cpus(0, 0))
+		pr_err("Node 0 : timeout core 0\n");
+>>>>>>> v3.18
 =======
 	if (!wait_for_cpus(0, 0))
 		pr_err("Node 0 : timeout core 0\n");

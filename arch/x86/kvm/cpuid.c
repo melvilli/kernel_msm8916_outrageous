@@ -24,8 +24,11 @@
 #include "trace.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_update_cpuid(struct kvm_vcpu *vcpu)
 =======
+=======
+>>>>>>> v3.18
 static u32 xstate_required_size(u64 xstate_bv)
 {
 	int feature_bit = 0;
@@ -57,6 +60,9 @@ u64 kvm_supported_xcr0(void)
 }
 
 int kvm_update_cpuid(struct kvm_vcpu *vcpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvm_cpuid_entry2 *best;
@@ -65,7 +71,11 @@ int kvm_update_cpuid(struct kvm_vcpu *vcpu)
 	best = kvm_find_cpuid_entry(vcpu, 1, 0);
 	if (!best)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -85,8 +95,11 @@ int kvm_update_cpuid(struct kvm_vcpu *vcpu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvm_pmu_cpuid_update(vcpu);
 =======
+=======
+>>>>>>> v3.18
 	best = kvm_find_cpuid_entry(vcpu, 0xD, 0);
 	if (!best) {
 		vcpu->arch.guest_supported_xcr0 = 0;
@@ -110,6 +123,9 @@ int kvm_update_cpuid(struct kvm_vcpu *vcpu)
 
 	kvm_pmu_cpuid_update(vcpu);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -135,8 +151,13 @@ static void cpuid_fix_nx_cap(struct kvm_vcpu *vcpu)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (entry && (entry->edx & (1 << 20)) && !is_efer_nx()) {
 		entry->edx &= ~(1 << 20);
+=======
+	if (entry && (entry->edx & bit(X86_FEATURE_NX)) && !is_efer_nx()) {
+		entry->edx &= ~bit(X86_FEATURE_NX);
+>>>>>>> v3.18
 =======
 	if (entry && (entry->edx & bit(X86_FEATURE_NX)) && !is_efer_nx()) {
 		entry->edx &= ~bit(X86_FEATURE_NX);
@@ -179,10 +200,16 @@ int kvm_vcpu_ioctl_set_cpuid(struct kvm_vcpu *vcpu,
 	vcpu->arch.cpuid_nent = cpuid->nent;
 	cpuid_fix_nx_cap(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = 0;
 	kvm_apic_set_version(vcpu);
 	kvm_x86_ops->cpuid_update(vcpu);
 	kvm_update_cpuid(vcpu);
+=======
+	kvm_apic_set_version(vcpu);
+	kvm_x86_ops->cpuid_update(vcpu);
+	r = kvm_update_cpuid(vcpu);
+>>>>>>> v3.18
 =======
 	kvm_apic_set_version(vcpu);
 	kvm_x86_ops->cpuid_update(vcpu);
@@ -212,9 +239,13 @@ int kvm_vcpu_ioctl_set_cpuid2(struct kvm_vcpu *vcpu,
 	kvm_apic_set_version(vcpu);
 	kvm_x86_ops->cpuid_update(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvm_update_cpuid(vcpu);
 	return 0;
 
+=======
+	r = kvm_update_cpuid(vcpu);
+>>>>>>> v3.18
 =======
 	r = kvm_update_cpuid(vcpu);
 >>>>>>> v3.18
@@ -258,6 +289,7 @@ static void do_cpuid_1_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool supported_xcr0_bit(unsigned bit)
 {
 	u64 mask = ((u64)1 << bit);
@@ -270,6 +302,8 @@ static bool supported_xcr0_bit(unsigned bit)
 static int do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 			 u32 index, int *nent, int maxnent)
 =======
+=======
+>>>>>>> v3.18
 #define F(x) bit(X86_FEATURE_##x)
 
 static int __do_cpuid_ent_emulated(struct kvm_cpuid_entry2 *entry,
@@ -296,6 +330,9 @@ static int __do_cpuid_ent_emulated(struct kvm_cpuid_entry2 *entry,
 
 static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 				 u32 index, int *nent, int maxnent)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r;
@@ -311,6 +348,10 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 	unsigned f_rdtscp = kvm_x86_ops->rdtscp_supported() ? F(RDTSCP) : 0;
 	unsigned f_invpcid = kvm_x86_ops->invpcid_supported() ? F(INVPCID) : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned f_mpx = kvm_x86_ops->mpx_supported() ? F(MPX) : 0;
+>>>>>>> v3.18
 =======
 	unsigned f_mpx = kvm_x86_ops->mpx_supported() ? F(MPX) : 0;
 >>>>>>> v3.18
@@ -322,7 +363,11 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 		F(CX8) | F(APIC) | 0 /* Reserved */ | F(SEP) |
 		F(MTRR) | F(PGE) | F(MCA) | F(CMOV) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		F(PAT) | F(PSE36) | 0 /* PSN */ | F(CLFLSH) |
+=======
+		F(PAT) | F(PSE36) | 0 /* PSN */ | F(CLFLUSH) |
+>>>>>>> v3.18
 =======
 		F(PAT) | F(PSE36) | 0 /* PSN */ | F(CLFLUSH) |
 >>>>>>> v3.18
@@ -342,6 +387,11 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 	/* cpuid 1.ecx */
 	const u32 kvm_supported_word4_x86_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* NOTE: MONITOR (and MWAIT) are emulated as NOP,
+		 * but *not* advertised to guests via CPUID ! */
+>>>>>>> v3.18
 =======
 		/* NOTE: MONITOR (and MWAIT) are emulated as NOP,
 		 * but *not* advertised to guests via CPUID ! */
@@ -371,7 +421,12 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 	const u32 kvm_supported_word9_x86_features =
 		F(FSGSBASE) | F(BMI1) | F(HLE) | F(AVX2) | F(SMEP) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		F(BMI2) | F(ERMS) | f_invpcid | F(RTM);
+=======
+		F(BMI2) | F(ERMS) | f_invpcid | F(RTM) | f_mpx | F(RDSEED) |
+		F(ADX) | F(SMAP);
+>>>>>>> v3.18
 =======
 		F(BMI2) | F(ERMS) | f_invpcid | F(RTM) | f_mpx | F(RDSEED) |
 		F(ADX) | F(SMAP);
@@ -509,10 +564,13 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 	case 0xd: {
 		int idx, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		entry->flags |= KVM_CPUID_FLAG_SIGNIFCANT_INDEX;
 		for (idx = 1, i = 1; idx < 64; ++idx) {
 =======
+=======
+>>>>>>> v3.18
 		u64 supported = kvm_supported_xcr0();
 
 		entry->eax &= supported;
@@ -520,13 +578,20 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 		entry->flags |= KVM_CPUID_FLAG_SIGNIFCANT_INDEX;
 		for (idx = 1, i = 1; idx < 64; ++idx) {
 			u64 mask = ((u64)1 << idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (*nent >= maxnent)
 				goto out;
 
 			do_cpuid_1_ent(&entry[i], function, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (entry[i].eax == 0 || !supported_xcr0_bit(idx))
+=======
+			if (entry[i].eax == 0 || !(supported & mask))
+>>>>>>> v3.18
 =======
 			if (entry[i].eax == 0 || !(supported & mask))
 >>>>>>> v3.18
@@ -554,7 +619,12 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 			     (1 << KVM_FEATURE_ASYNC_PF) |
 			     (1 << KVM_FEATURE_PV_EOI) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     (1 << KVM_FEATURE_CLOCKSOURCE_STABLE_BIT);
+=======
+			     (1 << KVM_FEATURE_CLOCKSOURCE_STABLE_BIT) |
+			     (1 << KVM_FEATURE_PV_UNHALT);
+>>>>>>> v3.18
 =======
 			     (1 << KVM_FEATURE_CLOCKSOURCE_STABLE_BIT) |
 			     (1 << KVM_FEATURE_PV_UNHALT);
@@ -577,7 +647,10 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 		cpuid_mask(&entry->ecx, 6);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 0x80000007: /* Advanced power management */
 		/* invariant TSC is CPUID.80000007H:EDX[8] */
 		entry->edx &= (1 << 8);
@@ -585,6 +658,9 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 		entry->edx &= boot_cpu_data.x86_power;
 		entry->eax = entry->ebx = entry->ecx = 0;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0x80000008: {
 		unsigned g_phys_as = (entry->eax >> 16) & 0xff;
@@ -617,7 +693,10 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 	case 5: /* MONITOR/MWAIT */
 	case 6: /* Thermal management */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x80000007: /* Advanced power management */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case 0xC0000002:
@@ -639,7 +718,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 func,
 			u32 idx, int *nent, int maxnent, unsigned int type)
 {
@@ -649,6 +731,9 @@ static int do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 func,
 	return __do_cpuid_ent(entry, func, idx, nent, maxnent);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef F
 
@@ -665,9 +750,12 @@ static bool is_centaur_cpu(const struct kvm_cpuid_param *param)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_dev_ioctl_get_supported_cpuid(struct kvm_cpuid2 *cpuid,
 				      struct kvm_cpuid_entry2 __user *entries)
 =======
+=======
+>>>>>>> v3.18
 static bool sanity_check_entries(struct kvm_cpuid_entry2 __user *entries,
 				 __u32 num_entries, unsigned int ioctl_type)
 {
@@ -698,6 +786,9 @@ static bool sanity_check_entries(struct kvm_cpuid_entry2 __user *entries,
 int kvm_dev_ioctl_get_cpuid(struct kvm_cpuid2 *cpuid,
 			    struct kvm_cpuid_entry2 __user *entries,
 			    unsigned int type)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvm_cpuid_entry2 *cpuid_entries;
@@ -716,15 +807,21 @@ int kvm_dev_ioctl_get_cpuid(struct kvm_cpuid2 *cpuid,
 	if (cpuid->nent > KVM_MAX_CPUID_ENTRIES)
 		cpuid->nent = KVM_MAX_CPUID_ENTRIES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = -ENOMEM;
 	cpuid_entries = vmalloc(sizeof(struct kvm_cpuid_entry2) * cpuid->nent);
 =======
+=======
+>>>>>>> v3.18
 
 	if (sanity_check_entries(entries, cpuid->nent, type))
 		return -EINVAL;
 
 	r = -ENOMEM;
 	cpuid_entries = vzalloc(sizeof(struct kvm_cpuid_entry2) * cpuid->nent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!cpuid_entries)
 		goto out;
@@ -738,7 +835,11 @@ int kvm_dev_ioctl_get_cpuid(struct kvm_cpuid2 *cpuid,
 
 		r = do_cpuid_ent(&cpuid_entries[nent], ent->func, ent->idx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&nent, cpuid->nent);
+=======
+				&nent, cpuid->nent, type);
+>>>>>>> v3.18
 =======
 				&nent, cpuid->nent, type);
 >>>>>>> v3.18
@@ -753,7 +854,11 @@ int kvm_dev_ioctl_get_cpuid(struct kvm_cpuid2 *cpuid,
 		for (func = ent->func + 1; func <= limit && nent < cpuid->nent && r == 0; ++func)
 			r = do_cpuid_ent(&cpuid_entries[nent], func, ent->idx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     &nent, cpuid->nent);
+=======
+				     &nent, cpuid->nent, type);
+>>>>>>> v3.18
 =======
 				     &nent, cpuid->nent, type);
 >>>>>>> v3.18
@@ -842,6 +947,10 @@ not_found:
 	return 36;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpuid_maxphyaddr);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpuid_maxphyaddr);
 >>>>>>> v3.18
@@ -878,13 +987,19 @@ void kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx, u32 *ecx, u32 *edx)
 		best = check_cpuid_limit(vcpu, function, index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Perfmon not yet supported for L2 guest.
 	 */
 	if (is_guest_mode(vcpu) && function == 0xa)
 		best = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (best) {
 		*eax = best->eax;
@@ -894,6 +1009,10 @@ void kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx, u32 *ecx, u32 *edx)
 	} else
 		*eax = *ebx = *ecx = *edx = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_kvm_cpuid(function, *eax, *ebx, *ecx, *edx);
+>>>>>>> v3.18
 =======
 	trace_kvm_cpuid(function, *eax, *ebx, *ecx, *edx);
 >>>>>>> v3.18
@@ -913,7 +1032,10 @@ void kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 	kvm_register_write(vcpu, VCPU_REGS_RDX, edx);
 	kvm_x86_ops->skip_emulated_instruction(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_kvm_cpuid(function, eax, ebx, ecx, edx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

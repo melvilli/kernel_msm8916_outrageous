@@ -656,13 +656,19 @@ explains which is which.
 		  be printed here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   need-resched: 'N' task need_resched is set, '.' otherwise.
 =======
+=======
+>>>>>>> v3.18
   need-resched:
 	'N' both TIF_NEED_RESCHED and PREEMPT_NEED_RESCHED is set,
 	'n' only TIF_NEED_RESCHED is set,
 	'p' only PREEMPT_NEED_RESCHED is set,
 	'.' otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   hardirq/softirq:
@@ -744,7 +750,11 @@ Here are the available options:
 
   print-parent:
 <<<<<<< HEAD
+<<<<<<< HEAD
    bash-4000  [01]  1477.606694: simple_strtoul <-strict_strtoul
+=======
+   bash-4000  [01]  1477.606694: simple_strtoul <-kstrtoul
+>>>>>>> v3.18
 =======
    bash-4000  [01]  1477.606694: simple_strtoul <-kstrtoul
 >>>>>>> v3.18
@@ -772,7 +782,11 @@ Here are the available options:
 
     bash  4000 1 0 00000000 00010a95 [58127d26] 1720.415ms \
 <<<<<<< HEAD
+<<<<<<< HEAD
     (+0.000ms): simple_strtoul (strict_strtoul)
+=======
+    (+0.000ms): simple_strtoul (kstrtoul)
+>>>>>>> v3.18
 =======
     (+0.000ms): simple_strtoul (kstrtoul)
 >>>>>>> v3.18
@@ -1528,7 +1542,11 @@ Doing the same with chrt -r 5 and function-trace set.
   <idle>-0       3d.h4    2us : ttwu_do_activate.constprop.87 <-try_to_wake_up
   <idle>-0       3d.h3    3us : check_preempt_curr <-ttwu_do_wakeup
 <<<<<<< HEAD
+<<<<<<< HEAD
   <idle>-0       3d.h3    3us : resched_task <-check_preempt_curr
+=======
+  <idle>-0       3d.h3    3us : resched_curr <-check_preempt_curr
+>>>>>>> v3.18
 =======
   <idle>-0       3d.h3    3us : resched_curr <-check_preempt_curr
 >>>>>>> v3.18
@@ -2020,7 +2038,10 @@ want, depending on your needs.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 The function name is always displayed after the closing bracket
 for a function if the start of that function is not in the
 trace buffer.
@@ -2047,6 +2068,9 @@ It is default disabled.
   0)   1.757 us    |        } /* kmem_cache_free() */
   0)   2.861 us    |      } /* putname() */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 You can put some comments on specific functions by using
 trace_printk() For example, if you want to put a comment inside
@@ -2062,6 +2086,7 @@ will produce:
  1)   1.449 us    |             }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 You can disable the hierarchical function call formatting and instead print a
 flat list of function entry and return events.  This uses the format described
@@ -2092,6 +2117,8 @@ control that formatting.  Hierarchical formatting is the default.
                 sh-1806  [001] d...   198.843453: graph_ret: func=_raw_spin_unlock_irqrestore
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 You might find other useful features for this tracer in the
@@ -2512,7 +2539,10 @@ The following commands are supported:
    	 set_ftrace_filter
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - dump
   When the function is hit, it will dump the contents of the ftrace
   ring buffer to the console. This is useful if you need to debug
@@ -2526,6 +2556,9 @@ The following commands are supported:
   command, it only prints out the contents of the ring buffer for the
   CPU that executed the function that triggered the dump.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 trace_pipe
 ----------

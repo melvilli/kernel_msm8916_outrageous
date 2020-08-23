@@ -84,17 +84,23 @@ struct internal_state;
 typedef struct z_stream_s {
     const Byte *next_in;   /* next input byte */
 <<<<<<< HEAD
+<<<<<<< HEAD
     uInt     avail_in;  /* number of bytes available at next_in */
     uLong    total_in;  /* total nb of input bytes read so far */
 
     Byte    *next_out;  /* next output byte should be put there */
     uInt     avail_out; /* remaining free space at next_out */
 =======
+=======
+>>>>>>> v3.18
 	uLong avail_in;  /* number of bytes available at next_in */
     uLong    total_in;  /* total nb of input bytes read so far */
 
     Byte    *next_out;  /* next output byte should be put there */
 	uLong avail_out; /* remaining free space at next_out */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     uLong    total_out; /* total nb of bytes output so far */
 
@@ -502,6 +508,7 @@ extern int deflateInit2 (z_streamp strm,
    not perform any compression: this will be done by deflate().
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
                             
 #if 0
 extern int zlib_deflateSetDictionary (z_streamp strm,
@@ -562,6 +569,8 @@ extern int zlib_deflateCopy (z_streamp dest, z_streamp source);
 */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 extern int zlib_deflateReset (z_streamp strm);
 /*
@@ -579,6 +588,7 @@ static inline unsigned long deflateBound(unsigned long s)
 	return s + ((s + 7) >> 3) + ((s + 63) >> 6) + 11;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if 0
 extern int zlib_deflateParams (z_streamp strm, int level, int strategy);
@@ -601,6 +611,8 @@ extern int zlib_deflateParams (z_streamp strm, int level, int strategy);
    if strm->avail_out was zero.
 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*   
@@ -646,6 +658,7 @@ extern int inflateInit2 (z_streamp strm, int  windowBits);
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int zlib_inflateSetDictionary (z_streamp strm,
 						     const Byte *dictionary,
 						     uInt  dictLength);
@@ -685,6 +698,8 @@ extern int zlib_inflateSync (z_streamp strm);
   until success or end of the input data.
 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int zlib_inflateReset (z_streamp strm);

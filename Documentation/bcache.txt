@@ -47,7 +47,12 @@ have to manually attach:
   make-bcache -B /dev/sda /dev/sdb -C /dev/sdc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 To make bcache devices known to the kernel, echo them to /sys/fs/bcache/register:
+=======
+bcache-tools now ships udev rules, and bcache devices are known to the kernel
+immediately.  Without udev, you can manually register devices like this:
+>>>>>>> v3.18
 =======
 bcache-tools now ships udev rules, and bcache devices are known to the kernel
 immediately.  Without udev, you can manually register devices like this:
@@ -56,6 +61,7 @@ immediately.  Without udev, you can manually register devices like this:
   echo /dev/sdb > /sys/fs/bcache/register
   echo /dev/sdc > /sys/fs/bcache/register
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 To register your bcache devices automatically, you could add something like
 this to an init script:
@@ -72,6 +78,8 @@ section on attaching.
 The devices show up at /dev/bcacheN, and can be controlled via sysfs from
 /sys/block/bcacheN/bcache:
 =======
+=======
+>>>>>>> v3.18
 Registering the backing device makes the bcache device show up in /dev; you can
 now format it and use it as normal. But the first time using a new bcache
 device, it'll be running in passthrough mode until you attach it to a cache.
@@ -87,12 +95,20 @@ As well as (with udev):
   /dev/bcache/by-label/<label>
 
 To get started:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   mkfs.ext4 /dev/bcache0
   mount /dev/bcache0 /mnt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+You can control bcache devices through sysfs at /sys/block/bcache<N>/bcache .
+
+>>>>>>> v3.18
 =======
 You can control bcache devices through sysfs at /sys/block/bcache<N>/bcache .
 
@@ -109,17 +125,23 @@ device to a cache set is done thusly, with the UUID of the cache set in
 /sys/fs/bcache:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   echo <UUID> > /sys/block/bcache0/bcache/attach
 
 This only has to be done once. The next time you reboot, just reregister all
 your bcache devices. If a backing device has data in a cache somewhere, the
 /dev/bcache# device won't be created until the cache shows up - particularly
 =======
+=======
+>>>>>>> v3.18
   echo <CSET-UUID> > /sys/block/bcache0/bcache/attach
 
 This only has to be done once. The next time you reboot, just reregister all
 your bcache devices. If a backing device has data in a cache somewhere, the
 /dev/bcache<N> device won't be created until the cache shows up - particularly
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 important if you have writeback caching turned on.
 
@@ -218,7 +240,11 @@ want for getting the best possible numbers when benchmarking.
    In practice this isn't an issue because as soon as a write comes along it'll
    cause the btree node to be split, and you need almost no write traffic for
 <<<<<<< HEAD
+<<<<<<< HEAD
    this to not show up enough to be noticable (especially since bcache's btree
+=======
+   this to not show up enough to be noticeable (especially since bcache's btree
+>>>>>>> v3.18
 =======
    this to not show up enough to be noticeable (especially since bcache's btree
 >>>>>>> v3.18
@@ -232,6 +258,12 @@ want for getting the best possible numbers when benchmarking.
 SYSFS - BACKING DEVICE:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+Available at /sys/block/<bdev>/bcache, /sys/block/bcache*/bcache and
+(if attached) /sys/fs/bcache/<cset-uuid>/bdev*
+
+>>>>>>> v3.18
 =======
 Available at /sys/block/<bdev>/bcache, /sys/block/bcache*/bcache and
 (if attached) /sys/fs/bcache/<cset-uuid>/bdev*
@@ -269,7 +301,11 @@ running
 
 sequential_cutoff
 <<<<<<< HEAD
+<<<<<<< HEAD
   A sequential IO will bypass the cache once it passes this threshhold; the
+=======
+  A sequential IO will bypass the cache once it passes this threshold; the
+>>>>>>> v3.18
 =======
   A sequential IO will bypass the cache once it passes this threshold; the
 >>>>>>> v3.18
@@ -347,17 +383,23 @@ cache_miss_collisions
 
 cache_readaheads
 <<<<<<< HEAD
+<<<<<<< HEAD
   Count of times readahead occured.
 
 SYSFS - CACHE SET:
 
 =======
+=======
+>>>>>>> v3.18
   Count of times readahead occurred.
 
 SYSFS - CACHE SET:
 
 Available at /sys/fs/bcache/<cset-uuid>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 average_key_size
   Average data per key in the btree.
@@ -422,7 +464,11 @@ SYSFS - CACHE SET INTERNAL:
 
 This directory also exposes timings for a number of internal operations, with
 <<<<<<< HEAD
+<<<<<<< HEAD
 separate files for average duration, average frequency, last occurence and max
+=======
+separate files for average duration, average frequency, last occurrence and max
+>>>>>>> v3.18
 =======
 separate files for average duration, average frequency, last occurrence and max
 >>>>>>> v3.18
@@ -454,6 +500,11 @@ trigger_gc
 SYSFS - CACHE DEVICE:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+Available at /sys/block/<cdev>/bcache
+
+>>>>>>> v3.18
 =======
 Available at /sys/block/<cdev>/bcache
 
@@ -486,7 +537,11 @@ freelist_percent
 
 io_errors
 <<<<<<< HEAD
+<<<<<<< HEAD
   Number of errors that have occured, decayed by io_error_halflife.
+=======
+  Number of errors that have occurred, decayed by io_error_halflife.
+>>>>>>> v3.18
 =======
   Number of errors that have occurred, decayed by io_error_halflife.
 >>>>>>> v3.18

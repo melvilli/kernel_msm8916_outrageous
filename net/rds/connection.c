@@ -52,11 +52,14 @@ static struct kmem_cache *rds_conn_slab;
 static struct hlist_head *rds_conn_bucket(__be32 laddr, __be32 faddr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Pass NULL, don't need struct net for hash */
 	unsigned long hash = inet_ehashfn(NULL,
 					  be32_to_cpu(laddr), 0,
 					  be32_to_cpu(faddr), 0);
 =======
+=======
+>>>>>>> v3.18
 	static u32 rds_hash_secret __read_mostly;
 
 	unsigned long hash;
@@ -67,6 +70,9 @@ static struct hlist_head *rds_conn_bucket(__be32 laddr, __be32 faddr)
 	hash = __inet_ehashfn(be32_to_cpu(laddr), 0,
 			      be32_to_cpu(faddr), 0,
 			      rds_hash_secret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return &rds_conn_hash[hash & RDS_CONNECTION_HASH_MASK];
 }

@@ -47,7 +47,11 @@ struct smiapp_pll {
 		} parallel;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t flags;
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18

@@ -241,7 +241,12 @@ static int as3711_bl_register(struct platform_device *pdev,
 	props.max_brightness = max_brightness;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(su->type == AS3711_BL_SU1 ?
+=======
+	bl = devm_backlight_device_register(&pdev->dev,
+				       su->type == AS3711_BL_SU1 ?
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev,
 				       su->type == AS3711_BL_SU1 ?
@@ -438,8 +443,12 @@ static int as3711_backlight_probe(struct platform_device *pdev)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EINVAL;
 			goto esu2;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -457,8 +466,12 @@ static int as3711_backlight_probe(struct platform_device *pdev)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EINVAL;
 			goto esu2;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -471,7 +484,11 @@ static int as3711_backlight_probe(struct platform_device *pdev)
 		ret = as3711_bl_register(pdev, max_brightness, su);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto esu2;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -480,6 +497,7 @@ static int as3711_backlight_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, supply);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 esu2:
@@ -497,16 +515,23 @@ static int as3711_backlight_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver as3711_backlight_driver = {
 	.driver		= {
 		.name	= "as3711-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 	},
 	.probe		= as3711_backlight_probe,
 	.remove		= as3711_backlight_remove,
+=======
+	},
+	.probe		= as3711_backlight_probe,
+>>>>>>> v3.18
 =======
 	},
 	.probe		= as3711_backlight_probe,

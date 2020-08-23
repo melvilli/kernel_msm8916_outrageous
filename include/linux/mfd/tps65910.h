@@ -359,8 +359,11 @@
 #define BBCH_BBSEL_MASK					0x06
 #define BBCH_BBSEL_SHIFT				1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BBCH_BBCHEN_MASK				0x01
 #define BBCH_BBCHEN_SHIFT				0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -837,6 +840,10 @@
 #define TPS65910_REG_VAUX33				11
 #define TPS65910_REG_VMMC				12
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TPS65910_REG_VBB				13
+>>>>>>> v3.18
 =======
 #define TPS65910_REG_VBB				13
 >>>>>>> v3.18
@@ -853,7 +860,11 @@
 
 /* Max number of TPS65910/11 regulators */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TPS65910_NUM_REGS				13
+=======
+#define TPS65910_NUM_REGS				14
+>>>>>>> v3.18
 =======
 #define TPS65910_NUM_REGS				14
 >>>>>>> v3.18
@@ -905,7 +916,11 @@ struct tps65910 {
 	struct i2c_client *i2c_client;
 	struct regmap *regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int id;
+=======
+	unsigned long id;
+>>>>>>> v3.18
 =======
 	unsigned long id;
 >>>>>>> v3.18

@@ -255,14 +255,20 @@ void attr_clear(WINDOW * win, int height, int width, chtype attr)
 void dialog_clear(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	attr_clear(stdscr, LINES, COLS, dlg.screen.atr);
 =======
+=======
+>>>>>>> v3.18
 	int lines, columns;
 
 	lines = getmaxy(stdscr);
 	columns = getmaxx(stdscr);
 
 	attr_clear(stdscr, lines, columns, dlg.screen.atr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Display background title if it exists ... - SLH */
 	if (dlg.backtitle != NULL) {
@@ -279,15 +285,21 @@ void dialog_clear(void)
 
 		wmove(stdscr, 1, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (len > COLS - 2) {
 			const char *ellipsis = "[...] ";
 			waddstr(stdscr, ellipsis);
 			skip = len - (COLS - 2 - strlen(ellipsis));
 =======
+=======
+>>>>>>> v3.18
 		if (len > columns - 2) {
 			const char *ellipsis = "[...] ";
 			waddstr(stdscr, ellipsis);
 			skip = len - (columns - 2 - strlen(ellipsis));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -315,7 +327,11 @@ void dialog_clear(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = len + 1; i < COLS - 1; i++)
+=======
+		for (i = len + 1; i < columns - 1; i++)
+>>>>>>> v3.18
 =======
 		for (i = len + 1; i < columns - 1; i++)
 >>>>>>> v3.18
@@ -338,7 +354,11 @@ int init_dialog(const char *backtitle)
 
 	getmaxyx(stdscr, height, width);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (height < 19 || width < 80) {
+=======
+	if (height < WINDOW_HEIGTH_MIN || width < WINDOW_WIDTH_MIN) {
+>>>>>>> v3.18
 =======
 	if (height < WINDOW_HEIGTH_MIN || width < WINDOW_WIDTH_MIN) {
 >>>>>>> v3.18
@@ -396,7 +416,11 @@ void print_title(WINDOW *dialog, const char *title, int width)
  * Print a string of text in a window, automatically wrap around to the
  * next line if the string is too long to fit on one line. Newline
 <<<<<<< HEAD
+<<<<<<< HEAD
  * characters '\n' are replaced by spaces.  We start on a new line
+=======
+ * characters '\n' are propperly processed.  We start on a new line
+>>>>>>> v3.18
 =======
  * characters '\n' are propperly processed.  We start on a new line
 >>>>>>> v3.18
@@ -406,8 +430,13 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 {
 	int newl, cur_x, cur_y;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, prompt_len, room, wlen;
 	char tempstr[MAX_LEN + 1], *word, *sp, *sp2;
+=======
+	int prompt_len, room, wlen;
+	char tempstr[MAX_LEN + 1], *word, *sp, *sp2, *newline_separator = 0;
+>>>>>>> v3.18
 =======
 	int prompt_len, room, wlen;
 	char tempstr[MAX_LEN + 1], *word, *sp, *sp2, *newline_separator = 0;
@@ -418,6 +447,7 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 	prompt_len = strlen(tempstr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Remove newlines
 	 */
@@ -426,6 +456,8 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 			tempstr[i] = ' ';
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (prompt_len <= width - x * 2) {	/* If prompt is short */
@@ -438,12 +470,18 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 		word = tempstr;
 		while (word && *word) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sp = strchr(word, ' ');
 =======
+=======
+>>>>>>> v3.18
 			sp = strpbrk(word, "\n ");
 			if (sp && *sp == '\n')
 				newline_separator = sp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sp)
 				*sp++ = 0;
@@ -457,7 +495,11 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 			    (newl && wlen < 4 && sp
 			     && wlen + 1 + strlen(sp) > room
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     && (!(sp2 = strchr(sp, ' '))
+=======
+			     && (!(sp2 = strpbrk(sp, "\n "))
+>>>>>>> v3.18
 =======
 			     && (!(sp2 = strpbrk(sp, "\n "))
 >>>>>>> v3.18
@@ -469,8 +511,11 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 			waddstr(win, word);
 			getyx(win, cur_y, cur_x);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cur_x++;
 =======
+=======
+>>>>>>> v3.18
 
 			/* Move to the next line if the word separator was a newline */
 			if (newline_separator) {
@@ -480,6 +525,9 @@ void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
 			} else
 				cur_x++;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sp && *sp == ' ') {
 				cur_x++;	/* double space */
@@ -675,7 +723,11 @@ void item_add_str(const char *fmt, ...)
 {
 	va_list ap;
 <<<<<<< HEAD
+<<<<<<< HEAD
         size_t avail;
+=======
+	size_t avail;
+>>>>>>> v3.18
 =======
 	size_t avail;
 >>>>>>> v3.18

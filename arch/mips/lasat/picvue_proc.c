@@ -176,7 +176,11 @@ static void pvc_proc_cleanup(void)
 	remove_proc_entry(DISPLAY_DIR_NAME, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&timer);
+=======
+	del_timer_sync(&timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&timer);
 >>>>>>> v3.18

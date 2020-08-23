@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //-----------------------------------------------------------------------------
 //	File:
 //		Dot11d.c
@@ -13,11 +14,16 @@
 void
 Dot11d_Init(struct ieee80211_device *ieee)
 =======
+=======
+>>>>>>> v3.18
 /* Implement 802.11d. */
 
 #include "dot11d.h"
 
 void Dot11d_Init(struct ieee80211_device *ieee)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	PRT_DOT11D_INFO pDot11dInfo = GET_DOT11D_INFO(ieee);
@@ -30,6 +36,7 @@ void Dot11d_Init(struct ieee80211_device *ieee)
 	memset(pDot11dInfo->MaxTxPwrDbmList, 0xFF, MAX_CHANNEL_NUMBER+1);
 	RESET_CIE_WATCHDOG(ieee);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk("Dot11d_Init()\n");
 }
@@ -54,6 +61,8 @@ Dot11d_Reset(struct ieee80211_device *ieee)
 		(pDot11dInfo->channel_map)[i] = 2;
 	}
 =======
+=======
+>>>>>>> v3.18
 	netdev_info(ieee->dev, "Dot11d_Init()\n");
 }
 EXPORT_SYMBOL(Dot11d_Init);
@@ -72,11 +81,15 @@ void Dot11d_Reset(struct ieee80211_device *ieee)
 
 	for (i = 12; i <= 14; i++)
 		(pDot11dInfo->channel_map)[i] = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pDot11dInfo->State = DOT11D_STATE_NONE;
 	pDot11dInfo->CountryIeLen = 0;
 	RESET_CIE_WATCHDOG(ieee);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	//printk("Dot11d_Reset()\n");
@@ -102,6 +115,8 @@ Dot11d_UpdateCountryIe(
 	u8 * pCoutryIe
 	)
 =======
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(Dot11d_Reset);
 
@@ -116,6 +131,9 @@ EXPORT_SYMBOL(Dot11d_Reset);
  */
 void Dot11d_UpdateCountryIe(struct ieee80211_device *dev, u8 *pTaddr,
 			    u16 CoutryIeLen, u8 *pCoutryIe)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	PRT_DOT11D_INFO pDot11dInfo = GET_DOT11D_INFO(dev);
@@ -125,6 +143,7 @@ void Dot11d_UpdateCountryIe(struct ieee80211_device *dev, u8 *pTaddr,
 	memset(pDot11dInfo->channel_map, 0, MAX_CHANNEL_NUMBER+1);
 	memset(pDot11dInfo->MaxTxPwrDbmList, 0xFF, MAX_CHANNEL_NUMBER+1);
 	MaxChnlNum = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	NumTriples = (CoutryIeLen - 3) / 3; // skip 3-byte country string.
 	pTriple = (PCHNL_TXPOWER_TRIPLE)(pCoutryIe + 3);
@@ -144,6 +163,8 @@ void Dot11d_UpdateCountryIe(struct ieee80211_device *dev, u8 *pTaddr,
 		for(j = 0 ; j < pTriple->NumChnls; j++)
 		{
 =======
+=======
+>>>>>>> v3.18
 	NumTriples = (CoutryIeLen - 3) / 3; /* skip 3-byte country string. */
 	pTriple = (PCHNL_TXPOWER_TRIPLE)(pCoutryIe + 3);
 	for (i = 0; i < NumTriples; i++) {
@@ -163,12 +184,16 @@ void Dot11d_UpdateCountryIe(struct ieee80211_device *dev, u8 *pTaddr,
 		}
 
 		for (j = 0; j < pTriple->NumChnls; j++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pDot11dInfo->channel_map[pTriple->FirstChnl + j] = 1;
 			pDot11dInfo->MaxTxPwrDbmList[pTriple->FirstChnl + j] = pTriple->MaxTxPowerInDbm;
 			MaxChnlNum = pTriple->FirstChnl + j;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pTriple = (PCHNL_TXPOWER_TRIPLE)((u8*)pTriple + 3);
 	}
@@ -179,6 +204,8 @@ void Dot11d_UpdateCountryIe(struct ieee80211_device *dev, u8 *pTaddr,
 			printk(" %d", i);
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 		pTriple = (PCHNL_TXPOWER_TRIPLE)((u8 *)pTriple + 3);
 	}
 	netdev_info(dev->dev, "Channel List:");
@@ -186,11 +213,15 @@ void Dot11d_UpdateCountryIe(struct ieee80211_device *dev, u8 *pTaddr,
 		if (pDot11dInfo->channel_map[i] > 0)
 			netdev_info(dev->dev, " %d", i);
 	netdev_info(dev->dev, "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	UPDATE_CIE_SRC(dev, pTaddr);
 
 	pDot11dInfo->CountryIeLen = CoutryIeLen;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memcpy(pDot11dInfo->CountryIeBuf, pCoutryIe,CoutryIeLen);
 	pDot11dInfo->State = DOT11D_STATE_LEARNED;
@@ -203,17 +234,23 @@ DOT11D_GetMaxTxPwrInDbm(
 	u8 Channel
 	)
 =======
+=======
+>>>>>>> v3.18
 	memcpy(pDot11dInfo->CountryIeBuf, pCoutryIe, CoutryIeLen);
 	pDot11dInfo->State = DOT11D_STATE_LEARNED;
 }
 EXPORT_SYMBOL(Dot11d_UpdateCountryIe);
 
 u8 DOT11D_GetMaxTxPwrInDbm(struct ieee80211_device *dev, u8 Channel)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	PRT_DOT11D_INFO pDot11dInfo = GET_DOT11D_INFO(dev);
 	u8 MaxTxPwrInDbm = 255;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if(MAX_CHANNEL_NUMBER < Channel)
 	{
@@ -239,6 +276,8 @@ DOT11D_ScanComplete(
 	switch(pDot11dInfo->State)
 	{
 =======
+=======
+>>>>>>> v3.18
 	if (MAX_CHANNEL_NUMBER < Channel) {
 		netdev_err(dev->dev, "DOT11D_GetMaxTxPwrInDbm(): Invalid Channel\n");
 		return MaxTxPwrInDbm;
@@ -255,6 +294,9 @@ void DOT11D_ScanComplete(struct ieee80211_device *dev)
 	PRT_DOT11D_INFO pDot11dInfo = GET_DOT11D_INFO(dev);
 
 	switch (pDot11dInfo->State) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case DOT11D_STATE_LEARNED:
 		pDot11dInfo->State = DOT11D_STATE_DONE;
@@ -262,8 +304,13 @@ void DOT11D_ScanComplete(struct ieee80211_device *dev)
 
 	case DOT11D_STATE_DONE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if( GET_CIE_WATCHDOG(dev) == 0 )
 		{ // Reset country IE if previous one is gone.
+=======
+		if (GET_CIE_WATCHDOG(dev) == 0) {
+			/* Reset country IE if previous one is gone. */
+>>>>>>> v3.18
 =======
 		if (GET_CIE_WATCHDOG(dev) == 0) {
 			/* Reset country IE if previous one is gone. */
@@ -275,6 +322,7 @@ void DOT11D_ScanComplete(struct ieee80211_device *dev)
 		break;
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int IsLegalChannel(
@@ -299,6 +347,8 @@ int ToLegalChannel(
 	u8 channel
 )
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(DOT11D_ScanComplete);
 
 int IsLegalChannel(struct ieee80211_device *dev, u8 channel)
@@ -316,6 +366,9 @@ int IsLegalChannel(struct ieee80211_device *dev, u8 channel)
 EXPORT_SYMBOL(IsLegalChannel);
 
 int ToLegalChannel(struct ieee80211_device *dev, u8 channel)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	PRT_DOT11D_INFO pDot11dInfo = GET_DOT11D_INFO(dev);
@@ -323,10 +376,15 @@ int ToLegalChannel(struct ieee80211_device *dev, u8 channel)
 	u32 i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=1; i<= MAX_CHANNEL_NUMBER; i++)
 	{
 		if(pDot11dInfo->channel_map[i] > 0)
 		{
+=======
+	for (i = 1; i <= MAX_CHANNEL_NUMBER; i++) {
+		if (pDot11dInfo->channel_map[i] > 0) {
+>>>>>>> v3.18
 =======
 	for (i = 1; i <= MAX_CHANNEL_NUMBER; i++) {
 		if (pDot11dInfo->channel_map[i] > 0) {
@@ -337,6 +395,7 @@ int ToLegalChannel(struct ieee80211_device *dev, u8 channel)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(MAX_CHANNEL_NUMBER < channel)
 	{
 		printk("IsLegalChannel(): Invalid Channel\n");
@@ -345,17 +404,23 @@ int ToLegalChannel(struct ieee80211_device *dev, u8 channel)
 
 	if(pDot11dInfo->channel_map[channel] > 0)
 =======
+=======
+>>>>>>> v3.18
 	if (MAX_CHANNEL_NUMBER < channel) {
 		netdev_err(dev->dev, "IsLegalChannel(): Invalid Channel\n");
 		return default_chn;
 	}
 
 	if (pDot11dInfo->channel_map[channel] > 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return channel;
 
 	return default_chn;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(Dot11d_Init);
 EXPORT_SYMBOL(Dot11d_Reset);
@@ -363,6 +428,8 @@ EXPORT_SYMBOL(Dot11d_UpdateCountryIe);
 EXPORT_SYMBOL(DOT11D_GetMaxTxPwrInDbm);
 EXPORT_SYMBOL(DOT11D_ScanComplete);
 EXPORT_SYMBOL(IsLegalChannel);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(ToLegalChannel);

@@ -1,7 +1,11 @@
 /*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/gpu/ion/compat_ion.h
+=======
+ * drivers/staging/android/ion/compat_ion.h
+>>>>>>> v3.18
 =======
  * drivers/staging/android/ion/compat_ion.h
 >>>>>>> v3.18
@@ -27,8 +31,11 @@
 long compat_ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define compat_ion_user_handle_t compat_int_t
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else

@@ -25,7 +25,10 @@
 static struct vfsmount *anon_inode_mnt __read_mostly;
 static struct inode *anon_inode_inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct file_operations anon_inode_fops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -42,6 +45,7 @@ static const struct dentry_operations anon_inodefs_dentry_operations = {
 	.d_dname	= anon_inodefs_dname,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * nop .set_page_dirty method so that people can use .page_mkwrite on
@@ -105,11 +109,16 @@ static struct dentry *anon_inodefs_mount(struct file_system_type *fs_type,
 	}
 	return root;
 =======
+=======
+>>>>>>> v3.18
 static struct dentry *anon_inodefs_mount(struct file_system_type *fs_type,
 				int flags, const char *dev_name, void *data)
 {
 	return mount_pseudo(fs_type, "anon_inode:", NULL,
 			&anon_inodefs_dentry_operations, ANON_INODE_FS_MAGIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -233,6 +242,7 @@ EXPORT_SYMBOL_GPL(anon_inode_getfd);
 static int __init anon_inode_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error;
 
 	error = register_filesystem(&anon_inode_fs_type);
@@ -250,6 +260,8 @@ err_unregister_filesystem:
 err_exit:
 	panic(KERN_ERR "anon_inode_init() failed (%d)\n", error);
 =======
+=======
+>>>>>>> v3.18
 	anon_inode_mnt = kern_mount(&anon_inode_fs_type);
 	if (IS_ERR(anon_inode_mnt))
 		panic("anon_inode_init() kernel mount failed (%ld)\n", PTR_ERR(anon_inode_mnt));
@@ -259,6 +271,9 @@ err_exit:
 		panic("anon_inode_init() inode allocation failed (%ld)\n", PTR_ERR(anon_inode_inode));
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -47,17 +47,23 @@ static int spitz_mic_gpio;
 static void spitz_ext_control(struct snd_soc_dapm_context *dapm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spitz_spk_func == SPITZ_SPK_ON)
 		snd_soc_dapm_enable_pin(dapm, "Ext Spk");
 	else
 		snd_soc_dapm_disable_pin(dapm, "Ext Spk");
 =======
+=======
+>>>>>>> v3.18
 	snd_soc_dapm_mutex_lock(dapm);
 
 	if (spitz_spk_func == SPITZ_SPK_ON)
 		snd_soc_dapm_enable_pin_unlocked(dapm, "Ext Spk");
 	else
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Ext Spk");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set up jack connection */
@@ -65,15 +71,21 @@ static void spitz_ext_control(struct snd_soc_dapm_context *dapm)
 	case SPITZ_HP:
 		/* enable and unmute hp jack, disable mic bias */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin(dapm, "Headphone Jack");
 =======
+=======
+>>>>>>> v3.18
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin_unlocked(dapm, "Headphone Jack");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_set_value(SPITZ_GPIO_MUTE_L, 1);
 		gpio_set_value(SPITZ_GPIO_MUTE_R, 1);
@@ -81,15 +93,21 @@ static void spitz_ext_control(struct snd_soc_dapm_context *dapm)
 	case SPITZ_MIC:
 		/* enable mic jack and bias, mute hp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin(dapm, "Mic Jack");
 =======
+=======
+>>>>>>> v3.18
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin_unlocked(dapm, "Mic Jack");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_set_value(SPITZ_GPIO_MUTE_L, 0);
 		gpio_set_value(SPITZ_GPIO_MUTE_R, 0);
@@ -97,15 +115,21 @@ static void spitz_ext_control(struct snd_soc_dapm_context *dapm)
 	case SPITZ_LINE:
 		/* enable line jack, disable mic bias and mute hp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_enable_pin(dapm, "Line Jack");
 =======
+=======
+>>>>>>> v3.18
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic Jack");
 		snd_soc_dapm_enable_pin_unlocked(dapm, "Line Jack");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_set_value(SPITZ_GPIO_MUTE_L, 0);
 		gpio_set_value(SPITZ_GPIO_MUTE_R, 0);
@@ -113,15 +137,21 @@ static void spitz_ext_control(struct snd_soc_dapm_context *dapm)
 	case SPITZ_HEADSET:
 		/* enable and unmute headset jack enable mic bias, mute L hp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_enable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin(dapm, "Headset Jack");
 =======
+=======
+>>>>>>> v3.18
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
 		snd_soc_dapm_enable_pin_unlocked(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin_unlocked(dapm, "Headset Jack");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_set_value(SPITZ_GPIO_MUTE_L, 0);
 		gpio_set_value(SPITZ_GPIO_MUTE_R, 1);
@@ -130,33 +160,46 @@ static void spitz_ext_control(struct snd_soc_dapm_context *dapm)
 
 		/* jack removed, everything off */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 =======
+=======
+>>>>>>> v3.18
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_set_value(SPITZ_GPIO_MUTE_L, 0);
 		gpio_set_value(SPITZ_GPIO_MUTE_R, 0);
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_sync(dapm);
 =======
+=======
+>>>>>>> v3.18
 
 	snd_soc_dapm_sync_unlocked(dapm);
 
 	snd_soc_dapm_mutex_unlock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int spitz_startup(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 
@@ -166,6 +209,11 @@ static int spitz_startup(struct snd_pcm_substream *substream)
 	spitz_ext_control(&codec->dapm);
 
 	mutex_unlock(&codec->mutex);
+=======
+
+	/* check the jack status at stream startup */
+	spitz_ext_control(&rtd->card->dapm);
+>>>>>>> v3.18
 =======
 
 	/* check the jack status at stream startup */

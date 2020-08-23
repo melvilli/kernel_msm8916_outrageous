@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_HW_H_
@@ -114,11 +120,17 @@ struct e1000_hw;
 #define E1000_DEV_ID_PCH_LPTLP_I218_LM		0x155A
 #define E1000_DEV_ID_PCH_LPTLP_I218_V		0x1559
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_DEV_ID_PCH_I218_LM2		0x15A0
 #define E1000_DEV_ID_PCH_I218_V2		0x15A1
 #define E1000_DEV_ID_PCH_I218_LM3		0x15A2	/* Wildcat Point PCH */
 #define E1000_DEV_ID_PCH_I218_V3		0x15A3	/* Wildcat Point PCH */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define E1000_REVISION_4	4
@@ -258,11 +270,17 @@ union e1000_rx_desc_extended {
 
 #define MAX_PS_BUFFERS 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Number of packet split data buffers (not including the header buffer) */
 #define PS_PAGE_BUFFERS	(MAX_PS_BUFFERS - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Receive Descriptor - Packet Split */
 union e1000_rx_desc_packet_split {
@@ -289,7 +307,12 @@ union e1000_rx_desc_packet_split {
 		struct {
 			__le16 header_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__le16 length[3];	/* length of buffers 1-3 */
+=======
+			/* length of buffers 1-3 */
+			__le16 length[PS_PAGE_BUFFERS];
+>>>>>>> v3.18
 =======
 			/* length of buffers 1-3 */
 			__le16 length[PS_PAGE_BUFFERS];
@@ -445,6 +468,7 @@ struct e1000_phy_stats {
 struct e1000_host_mng_dhcp_cookie {
 	u32 signature;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  status;
 	u8  reserved0;
 	u16 vlan_id;
@@ -453,6 +477,8 @@ struct e1000_host_mng_dhcp_cookie {
 	u8  reserved3;
 	u8  checksum;
 =======
+=======
+>>>>>>> v3.18
 	u8 status;
 	u8 reserved0;
 	u16 vlan_id;
@@ -460,6 +486,9 @@ struct e1000_host_mng_dhcp_cookie {
 	u16 reserved2;
 	u8 reserved3;
 	u8 checksum;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -480,8 +509,13 @@ struct e1000_host_command_info {
 /* Host Interface "Rev 2" */
 struct e1000_host_mng_command_header {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  command_id;
 	u8  checksum;
+=======
+	u8 command_id;
+	u8 checksum;
+>>>>>>> v3.18
 =======
 	u8 command_id;
 	u8 checksum;
@@ -525,8 +559,14 @@ struct e1000_mac_operations {
 	void (*write_vfta)(struct e1000_hw *, u32, u32);
 	void (*config_collision_dist)(struct e1000_hw *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*rar_set)(struct e1000_hw *, u8 *, u32);
 	s32  (*read_mac_addr)(struct e1000_hw *);
+=======
+	int  (*rar_set)(struct e1000_hw *, u8 *, u32);
+	s32  (*read_mac_addr)(struct e1000_hw *);
+	u32  (*rar_get_count)(struct e1000_hw *);
+>>>>>>> v3.18
 =======
 	int  (*rar_set)(struct e1000_hw *, u8 *, u32);
 	s32  (*read_mac_addr)(struct e1000_hw *);
@@ -613,7 +653,11 @@ struct e1000_mac_info {
 	u16 rar_entry_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  forced_speed_duplex;
+=======
+	u8 forced_speed_duplex;
+>>>>>>> v3.18
 =======
 	u8 forced_speed_duplex;
 >>>>>>> v3.18
@@ -645,7 +689,11 @@ struct e1000_phy_info {
 	u32 addr;
 	u32 id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reset_delay_us; /* in usec */
+=======
+	u32 reset_delay_us;	/* in usec */
+>>>>>>> v3.18
 =======
 	u32 reset_delay_us;	/* in usec */
 >>>>>>> v3.18
@@ -708,17 +756,23 @@ struct e1000_dev_spec_82571 {
 
 struct e1000_dev_spec_80003es2lan {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool  mdic_wa_enable;
 };
 
 struct e1000_shadow_ram {
 	u16  value;
 =======
+=======
+>>>>>>> v3.18
 	bool mdic_wa_enable;
 };
 
 struct e1000_shadow_ram {
 	u16 value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool modified;
 };
@@ -726,7 +780,10 @@ struct e1000_shadow_ram {
 #define E1000_ICH8_SHADOW_RAM_WORDS		2048
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* I218 PHY Ultra Low Power (ULP) states */
 enum e1000_ulp_state {
 	e1000_ulp_state_unknown,
@@ -734,6 +791,9 @@ enum e1000_ulp_state {
 	e1000_ulp_state_on,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct e1000_dev_spec_ich8lan {
 	bool kmrn_lock_loss_workaround_enabled;
@@ -742,6 +802,10 @@ struct e1000_dev_spec_ich8lan {
 	bool eee_disable;
 	u16 eee_lp_ability;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum e1000_ulp_state ulp_state;
+>>>>>>> v3.18
 =======
 	enum e1000_ulp_state ulp_state;
 >>>>>>> v3.18
@@ -753,6 +817,7 @@ struct e1000_hw {
 	void __iomem *hw_addr;
 	void __iomem *flash_address;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct e1000_mac_info  mac;
 	struct e1000_fc_info   fc;
@@ -766,6 +831,8 @@ struct e1000_hw {
 		struct e1000_dev_spec_80003es2lan e80003es2lan;
 		struct e1000_dev_spec_ich8lan	ich8lan;
 =======
+=======
+>>>>>>> v3.18
 	struct e1000_mac_info mac;
 	struct e1000_fc_info fc;
 	struct e1000_phy_info phy;
@@ -777,6 +844,9 @@ struct e1000_hw {
 		struct e1000_dev_spec_82571 e82571;
 		struct e1000_dev_spec_80003es2lan e80003es2lan;
 		struct e1000_dev_spec_ich8lan ich8lan;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} dev_spec;
 };

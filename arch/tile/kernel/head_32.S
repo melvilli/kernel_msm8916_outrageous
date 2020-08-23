@@ -40,7 +40,11 @@ ENTRY(_start)
 	{
 	  moveli r0, _HV_VERSION_OLD_HV_INIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  jal hv_init
+=======
+	  jal _hv_init
+>>>>>>> v3.18
 =======
 	  jal _hv_init
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ ENTRY(_start)
 	{
 	  move r0, zero
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  jal hv_inquire_asid
+=======
+	  jal _hv_inquire_asid
+>>>>>>> v3.18
 =======
 	  jal _hv_inquire_asid
 >>>>>>> v3.18
@@ -73,7 +81,11 @@ ENTRY(_start)
 	}
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  inv r6
+=======
+	  finv r6
+>>>>>>> v3.18
 =======
 	  finv r6
 >>>>>>> v3.18
@@ -86,7 +98,11 @@ ENTRY(_start)
 	{
 	  auli lr, lr, ha16(1f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  j hv_install_context
+=======
+	  j _hv_install_context
+>>>>>>> v3.18
 =======
 	  j _hv_install_context
 >>>>>>> v3.18
@@ -95,7 +111,11 @@ ENTRY(_start)
 
 	/* Get our processor number and save it away in SAVE_K_0. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal hv_inquire_topology
+=======
+	jal _hv_inquire_topology
+>>>>>>> v3.18
 =======
 	jal _hv_inquire_topology
 >>>>>>> v3.18
@@ -107,7 +127,11 @@ ENTRY(_start)
 	 * Load up our per-cpu offset.  When the first (master) tile
 	 * boots, this value is still zero, so we will load boot_pc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * with start_kernel, and boot_sp with init_stack + THREAD_SIZE.
+=======
+	 * with start_kernel, and boot_sp at the top of init_stack.
+>>>>>>> v3.18
 =======
 	 * with start_kernel, and boot_sp at the top of init_stack.
 >>>>>>> v3.18
@@ -151,7 +175,10 @@ ENTRY(_start)
 	or r4, sp, r4
 	mtspr SPR_SYSTEM_SAVE_K_0, r4  /* save ksp0 + cpu */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addi sp, sp, -STACK_TOP_DELTA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{
@@ -191,8 +218,13 @@ ENTRY(swapper_pg_dir)
 	.endr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The true text VAs are mapped as VA = PA + MEM_SV_INTRPT */
 	PTE MEM_SV_INTRPT, 0, (1 << (HV_PTE_INDEX_READABLE - 32)) | \
+=======
+	/* The true text VAs are mapped as VA = PA + MEM_SV_START */
+	PTE MEM_SV_START, 0, (1 << (HV_PTE_INDEX_READABLE - 32)) | \
+>>>>>>> v3.18
 =======
 	/* The true text VAs are mapped as VA = PA + MEM_SV_START */
 	PTE MEM_SV_START, 0, (1 << (HV_PTE_INDEX_READABLE - 32)) | \

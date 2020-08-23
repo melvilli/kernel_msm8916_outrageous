@@ -121,15 +121,21 @@ static int au1xpsc_i2s_hw_params(struct snd_pcm_substream *substream,
 
 	/* check if the PSC is already streaming data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stat = au_readl(I2S_STAT(pscdata));
 	if (stat & (PSC_I2SSTAT_TB | PSC_I2SSTAT_RB)) {
 		/* reject parameters not currently set up in hardware */
 		cfgbits = au_readl(I2S_CFG(pscdata));
 =======
+=======
+>>>>>>> v3.18
 	stat = __raw_readl(I2S_STAT(pscdata));
 	if (stat & (PSC_I2SSTAT_TB | PSC_I2SSTAT_RB)) {
 		/* reject parameters not currently set up in hardware */
 		cfgbits = __raw_readl(I2S_CFG(pscdata));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((PSC_I2SCFG_GET_LEN(cfgbits) != params->msbits) ||
 		    (params_rate(params) != pscdata->rate))
@@ -157,23 +163,30 @@ static int au1xpsc_i2s_configure(struct au1xpsc_audio_data *pscdata)
 
 	/* bring PSC out of sleep, and configure I2S unit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(PSC_CTRL_ENABLE, PSC_CTRL(pscdata));
 	au_sync();
 
 	tmo = 1000000;
 	while (!(au_readl(I2S_STAT(pscdata)) & PSC_I2SSTAT_SR) && tmo)
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(PSC_CTRL_ENABLE, PSC_CTRL(pscdata));
 	wmb(); /* drain writebuffer */
 
 	tmo = 1000000;
 	while (!(__raw_readl(I2S_STAT(pscdata)) & PSC_I2SSTAT_SR) && tmo)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tmo--;
 
 	if (!tmo)
 		goto psc_err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	au_writel(0, I2S_CFG(pscdata));
 	au_sync();
@@ -184,6 +197,8 @@ static int au1xpsc_i2s_configure(struct au1xpsc_audio_data *pscdata)
 	tmo = 1000000;
 	while (!(au_readl(I2S_STAT(pscdata)) & PSC_I2SSTAT_DR) && tmo)
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(0, I2S_CFG(pscdata));
 	wmb(); /* drain writebuffer */
 	__raw_writel(pscdata->cfg | PSC_I2SCFG_DE_ENABLE, I2S_CFG(pscdata));
@@ -192,6 +207,9 @@ static int au1xpsc_i2s_configure(struct au1xpsc_audio_data *pscdata)
 	/* wait for I2S controller to become ready */
 	tmo = 1000000;
 	while (!(__raw_readl(I2S_STAT(pscdata)) & PSC_I2SSTAT_DR) && tmo)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tmo--;
 
@@ -200,9 +218,15 @@ static int au1xpsc_i2s_configure(struct au1xpsc_audio_data *pscdata)
 
 psc_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(0, I2S_CFG(pscdata));
 	au_writel(PSC_CTRL_SUSPEND, PSC_CTRL(pscdata));
 	au_sync();
+=======
+	__raw_writel(0, I2S_CFG(pscdata));
+	__raw_writel(PSC_CTRL_SUSPEND, PSC_CTRL(pscdata));
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	__raw_writel(0, I2S_CFG(pscdata));
 	__raw_writel(PSC_CTRL_SUSPEND, PSC_CTRL(pscdata));
@@ -220,7 +244,11 @@ static int au1xpsc_i2s_start(struct au1xpsc_audio_data *pscdata, int stype)
 
 	/* if both TX and RX are idle, configure the PSC  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stat = au_readl(I2S_STAT(pscdata));
+=======
+	stat = __raw_readl(I2S_STAT(pscdata));
+>>>>>>> v3.18
 =======
 	stat = __raw_readl(I2S_STAT(pscdata));
 >>>>>>> v3.18
@@ -230,6 +258,7 @@ static int au1xpsc_i2s_start(struct au1xpsc_audio_data *pscdata, int stype)
 			goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	au_writel(I2SPCR_CLRFIFO(stype), I2S_PCR(pscdata));
 	au_sync();
@@ -245,6 +274,8 @@ static int au1xpsc_i2s_start(struct au1xpsc_audio_data *pscdata, int stype)
 		au_writel(I2SPCR_STOP(stype), I2S_PCR(pscdata));
 		au_sync();
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(I2SPCR_CLRFIFO(stype), I2S_PCR(pscdata));
 	wmb(); /* drain writebuffer */
 	__raw_writel(I2SPCR_START(stype), I2S_PCR(pscdata));
@@ -258,6 +289,9 @@ static int au1xpsc_i2s_start(struct au1xpsc_audio_data *pscdata, int stype)
 	if (!tmo) {
 		__raw_writel(I2SPCR_STOP(stype), I2S_PCR(pscdata));
 		wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ETIMEDOUT;
 	}
@@ -269,6 +303,7 @@ static int au1xpsc_i2s_stop(struct au1xpsc_audio_data *pscdata, int stype)
 {
 	unsigned long tmo, stat;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	au_writel(I2SPCR_STOP(stype), I2S_PCR(pscdata));
 	au_sync();
@@ -286,6 +321,8 @@ static int au1xpsc_i2s_stop(struct au1xpsc_audio_data *pscdata, int stype)
 		au_writel(PSC_CTRL_SUSPEND, PSC_CTRL(pscdata));
 		au_sync();
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(I2SPCR_STOP(stype), I2S_PCR(pscdata));
 	wmb(); /* drain writebuffer */
 
@@ -301,6 +338,9 @@ static int au1xpsc_i2s_stop(struct au1xpsc_audio_data *pscdata, int stype)
 		wmb(); /* drain writebuffer */
 		__raw_writel(PSC_CTRL_SUSPEND, PSC_CTRL(pscdata));
 		wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -403,6 +443,7 @@ static int au1xpsc_i2s_drvprobe(struct platform_device *pdev)
 	 * is already occupied by soc layer)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sel = au_readl(PSC_SEL(wd)) & PSC_SEL_CLK_MASK;
 	au_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	au_sync();
@@ -410,12 +451,17 @@ static int au1xpsc_i2s_drvprobe(struct platform_device *pdev)
 	au_writel(0, I2S_CFG(wd));
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	sel = __raw_readl(PSC_SEL(wd)) & PSC_SEL_CLK_MASK;
 	__raw_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	wmb(); /* drain writebuffer */
 	__raw_writel(PSC_SEL_PS_I2SMODE | sel, PSC_SEL(wd));
 	__raw_writel(0, I2S_CFG(wd));
 	wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* preconfigure: set max rx/tx fifo depths */
@@ -444,15 +490,21 @@ static int au1xpsc_i2s_drvremove(struct platform_device *pdev)
 	snd_soc_unregister_component(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(0, I2S_CFG(wd));
 	au_sync();
 	au_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(0, I2S_CFG(wd));
 	wmb(); /* drain writebuffer */
 	__raw_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -465,6 +517,7 @@ static int au1xpsc_i2s_drvsuspend(struct device *dev)
 
 	/* save interesting register and disable PSC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wd->pm[0] = au_readl(PSC_SEL(wd));
 
 	au_writel(0, I2S_CFG(wd));
@@ -472,12 +525,17 @@ static int au1xpsc_i2s_drvsuspend(struct device *dev)
 	au_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	wd->pm[0] = __raw_readl(PSC_SEL(wd));
 
 	__raw_writel(0, I2S_CFG(wd));
 	wmb(); /* drain writebuffer */
 	__raw_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -489,6 +547,7 @@ static int au1xpsc_i2s_drvresume(struct device *dev)
 
 	/* select I2S mode and PSC clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	au_sync();
 	au_writel(0, PSC_SEL(wd));
@@ -496,12 +555,17 @@ static int au1xpsc_i2s_drvresume(struct device *dev)
 	au_writel(wd->pm[0], PSC_SEL(wd));
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(PSC_CTRL_DISABLE, PSC_CTRL(wd));
 	wmb(); /* drain writebuffer */
 	__raw_writel(0, PSC_SEL(wd));
 	wmb(); /* drain writebuffer */
 	__raw_writel(wd->pm[0], PSC_SEL(wd));
 	wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

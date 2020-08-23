@@ -24,7 +24,10 @@
 
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -32,6 +35,7 @@
 #include <core/handle.h>
 #include <core/gpuobj.h>
 #include <core/event.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include <subdev/bar.h>
@@ -47,6 +51,8 @@ struct nv50_software_chan {
 	struct nouveau_software_chan base;
 };
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/event.h>
 
 #include <subdev/bar.h>
@@ -54,6 +60,9 @@ struct nv50_software_chan {
 #include <engine/disp.h>
 
 #include "nv50.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
@@ -76,7 +85,11 @@ nv50_software_mthd_dma_vblsem(struct nouveau_object *object, u32 mthd,
 	if (nv_iclass(handle->object, NV_GPUOBJ_CLASS)) {
 		struct nouveau_gpuobj *gpuobj = nv_gpuobj(handle->object);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan->base.vblank.ctxdma = gpuobj->node->offset >> 4;
+=======
+		chan->vblank.ctxdma = gpuobj->node->offset >> 4;
+>>>>>>> v3.18
 =======
 		chan->vblank.ctxdma = gpuobj->node->offset >> 4;
 >>>>>>> v3.18
@@ -92,22 +105,29 @@ nv50_software_mthd_vblsem_offset(struct nouveau_object *object, u32 mthd,
 {
 	struct nv50_software_chan *chan = (void *)nv_engctx(object->parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->base.vblank.offset = *(u32 *)args;
 	return 0;
 }
 
 static int
 =======
+=======
+>>>>>>> v3.18
 	chan->vblank.offset = *(u32 *)args;
 	return 0;
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_software_mthd_vblsem_value(struct nouveau_object *object, u32 mthd,
 				void *args, u32 size)
 {
 	struct nv50_software_chan *chan = (void *)nv_engctx(object->parent);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	chan->base.vblank.value = *(u32 *)args;
 	return 0;
@@ -115,16 +135,22 @@ nv50_software_mthd_vblsem_value(struct nouveau_object *object, u32 mthd,
 
 static int
 =======
+=======
+>>>>>>> v3.18
 	chan->vblank.value = *(u32 *)args;
 	return 0;
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_software_mthd_vblsem_release(struct nouveau_object *object, u32 mthd,
 				  void *args, u32 size)
 {
 	struct nv50_software_chan *chan = (void *)nv_engctx(object->parent);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nouveau_disp *disp = nouveau_disp(object);
 	u32 crtc = *(u32 *)args;
@@ -137,6 +163,8 @@ nv50_software_mthd_vblsem_release(struct nouveau_object *object, u32 mthd,
 
 static int
 =======
+=======
+>>>>>>> v3.18
 	u32 head = *(u32 *)args;
 	if (head >= nouveau_disp(chan)->vblank.index_nr)
 		return -EINVAL;
@@ -146,6 +174,9 @@ static int
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_software_mthd_flip(struct nouveau_object *object, u32 mthd,
 			void *args, u32 size)
@@ -178,15 +209,21 @@ nv50_software_sclass[] = {
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv50_software_vblsem_release(struct nouveau_eventh *event, int head)
 {
 	struct nouveau_software_chan *chan =
 		container_of(event, struct nouveau_software_chan, vblank.event);
 =======
+=======
+>>>>>>> v3.18
 nv50_software_vblsem_release(struct nvkm_notify *notify)
 {
 	struct nv50_software_chan *chan =
 		container_of(notify, typeof(*chan), vblank.notify[notify->index]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nv50_software_priv *priv = (void *)nv_object(chan)->engine;
 	struct nouveau_bar *bar = nouveau_bar(priv);
@@ -204,11 +241,14 @@ nv50_software_vblsem_release(struct nvkm_notify *notify)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NVKM_EVENT_DROP;
 }
 
 static int
 =======
+=======
+>>>>>>> v3.18
 	return NVKM_NOTIFY_DROP;
 }
 
@@ -225,6 +265,9 @@ nv50_software_context_dtor(struct nouveau_object *object)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_software_context_ctor(struct nouveau_object *parent,
 			   struct nouveau_object *engine,
@@ -232,13 +275,19 @@ nv50_software_context_ctor(struct nouveau_object *parent,
 			   struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv50_software_chan *chan;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_disp *pdisp = nouveau_disp(parent);
 	struct nv50_software_cclass *pclass = (void *)oclass;
 	struct nv50_software_chan *chan;
 	int ret, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = nouveau_software_context_create(parent, engine, oclass, &chan);
@@ -246,6 +295,7 @@ nv50_software_context_ctor(struct nouveau_object *parent,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	chan->base.vblank.channel = nv_gpuobj(parent->parent)->addr >> 12;
 	chan->base.vblank.event.func = nv50_software_vblsem_release;
@@ -262,6 +312,8 @@ nv50_software_cclass = {
 		.fini = _nouveau_software_context_fini,
 	},
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; pdisp && i < pdisp->vblank.index_nr; i++) {
 		ret = nvkm_notify_init(NULL, &pdisp->vblank, pclass->vblank,
 				       false,
@@ -289,6 +341,9 @@ nv50_software_cclass = {
 		.fini = _nouveau_software_context_fini,
 	},
 	.vblank = nv50_software_vblsem_release,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -297,7 +352,11 @@ nv50_software_cclass = {
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -306,6 +365,10 @@ nv50_software_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		   struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nv50_software_oclass *pclass = (void *)oclass;
+>>>>>>> v3.18
 =======
 	struct nv50_software_oclass *pclass = (void *)oclass;
 >>>>>>> v3.18
@@ -318,8 +381,13 @@ nv50_software_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_engine(priv)->cclass = &nv50_software_cclass;
 	nv_engine(priv)->sclass = nv50_software_sclass;
+=======
+	nv_engine(priv)->cclass = pclass->cclass;
+	nv_engine(priv)->sclass = pclass->sclass;
+>>>>>>> v3.18
 =======
 	nv_engine(priv)->cclass = pclass->cclass;
 	nv_engine(priv)->sclass = pclass->sclass;
@@ -329,15 +397,21 @@ nv50_software_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_oclass
 nv50_software_oclass = {
 	.handle = NV_ENGINE(SW, 0x50),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv50_software_oclass = &(struct nv50_software_oclass) {
 	.base.handle = NV_ENGINE(SW, 0x50),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv50_software_ctor,
 		.dtor = _nouveau_software_dtor,
@@ -345,7 +419,13 @@ nv50_software_oclass = &(struct nv50_software_oclass) {
 		.fini = _nouveau_software_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.cclass = &nv50_software_cclass.base,
+	.sclass =  nv50_software_sclass,
+}.base;
+>>>>>>> v3.18
 =======
 	.cclass = &nv50_software_cclass.base,
 	.sclass =  nv50_software_sclass,

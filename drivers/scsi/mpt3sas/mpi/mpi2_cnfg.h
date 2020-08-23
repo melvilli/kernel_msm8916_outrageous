@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2011 LSI Corporation.
+=======
+ * Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2014 LSI Corporation.
 >>>>>>> v3.18
@@ -11,7 +15,11 @@
  * Creation Date:  November 10, 2006
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   mpi2_cnfg.h Version:  02.00.22
+=======
+ *   mpi2_cnfg.h Version:  02.00.26
+>>>>>>> v3.18
 =======
  *   mpi2_cnfg.h Version:  02.00.26
 >>>>>>> v3.18
@@ -164,7 +172,10 @@
  *                     BiosOptions bits.
  *                     Incorporating additions for MPI v2.5.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * 11-27-12  02.00.23  Added MPI2_MANPAGE7_FLAG_EVENTREPLAY_SLOT_ORDER.
  *                     Added MPI2_BIOSPAGE1_OPTIONS_MASK_OEM_ID.
  * 12-20-12  02.00.24  Marked MPI2_SASIOUNIT1_CONTROL_CLEAR_AFFILIATION as
@@ -175,6 +186,9 @@
  *                     match the specification.
  * 08-19-13  02.00.26  Added reserved words to MPI2_CONFIG_PAGE_IO_UNIT_7 for
  *			future use.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * --------------------------------------------------------------------------
  */
@@ -736,6 +750,10 @@ typedef struct _MPI2_CONFIG_PAGE_MAN_7 {
 
 /*defines for the Flags field */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_MANPAGE7_FLAG_EVENTREPLAY_SLOT_ORDER       (0x00000002)
+>>>>>>> v3.18
 =======
 #define MPI2_MANPAGE7_FLAG_EVENTREPLAY_SLOT_ORDER       (0x00000002)
 >>>>>>> v3.18
@@ -812,6 +830,10 @@ typedef struct _MPI2_CONFIG_PAGE_IO_UNIT_1 {
 
 /*IO Unit Page 1 Flags defines */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_IOUNITPAGE1_ATA_SECURITY_FREEZE_LOCK       (0x00004000)
+>>>>>>> v3.18
 =======
 #define MPI2_IOUNITPAGE1_ATA_SECURITY_FREEZE_LOCK       (0x00004000)
 >>>>>>> v3.18
@@ -894,7 +916,11 @@ typedef struct _MPI2_CONFIG_PAGE_IO_UNIT_5 {
 
 /*defines for IO Unit Page 5 DmaEngineCapabilities field */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPI2_IOUNITPAGE5_DMA_CAP_MASK_MAX_REQUESTS      (0xFF00)
+=======
+#define MPI2_IOUNITPAGE5_DMA_CAP_MASK_MAX_REQUESTS      (0xFFFF0000)
+>>>>>>> v3.18
 =======
 #define MPI2_IOUNITPAGE5_DMA_CAP_MASK_MAX_REQUESTS      (0xFFFF0000)
 >>>>>>> v3.18
@@ -948,18 +974,28 @@ typedef struct _MPI2_CONFIG_PAGE_IO_UNIT_7 {
 		BoardTemperatureUnits;                  /*0x16 */
 	U8                      Reserved3;              /*0x17 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	U32			Reserved4;		/* 0x18 */
 	U32			Reserved5;		/* 0x1C */
 	U32			Reserved6;		/* 0x20 */
 	U32			Reserved7;		/* 0x24 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } MPI2_CONFIG_PAGE_IO_UNIT_7,
 	*PTR_MPI2_CONFIG_PAGE_IO_UNIT_7,
 	Mpi2IOUnitPage7_t, *pMpi2IOUnitPage7_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPI2_IOUNITPAGE7_PAGEVERSION                    (0x02)
+=======
+#define MPI2_IOUNITPAGE7_PAGEVERSION			(0x04)
+>>>>>>> v3.18
 =======
 #define MPI2_IOUNITPAGE7_PAGEVERSION			(0x04)
 >>>>>>> v3.18
@@ -1355,6 +1391,12 @@ typedef struct _MPI2_CONFIG_PAGE_BIOS_1 {
 
 /*values for BIOS Page 1 BiosOptions field */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_BIOSPAGE1_OPTIONS_MASK_OEM_ID                  (0x000000F0)
+#define MPI2_BIOSPAGE1_OPTIONS_LSI_OEM_ID                   (0x00000000)
+
+>>>>>>> v3.18
 =======
 #define MPI2_BIOSPAGE1_OPTIONS_MASK_OEM_ID                  (0x000000F0)
 #define MPI2_BIOSPAGE1_OPTIONS_LSI_OEM_ID                   (0x00000000)
@@ -1935,6 +1977,10 @@ typedef struct _MPI2_CONFIG_PAGE_RD_PDISK_1 {
 #define MPI2_SAS_PRATE_MAX_RATE_3_0                     (0x90)
 #define MPI2_SAS_PRATE_MAX_RATE_6_0                     (0xA0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI25_SAS_PRATE_MAX_RATE_12_0                   (0xB0)
+>>>>>>> v3.18
 =======
 #define MPI25_SAS_PRATE_MAX_RATE_12_0                   (0xB0)
 >>>>>>> v3.18
@@ -1952,6 +1998,10 @@ typedef struct _MPI2_CONFIG_PAGE_RD_PDISK_1 {
 #define MPI2_SAS_HWRATE_MAX_RATE_3_0                    (0x90)
 #define MPI2_SAS_HWRATE_MAX_RATE_6_0                    (0xA0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI25_SAS_HWRATE_MAX_RATE_12_0                  (0xB0)
+>>>>>>> v3.18
 =======
 #define MPI25_SAS_HWRATE_MAX_RATE_12_0                  (0xB0)
 >>>>>>> v3.18

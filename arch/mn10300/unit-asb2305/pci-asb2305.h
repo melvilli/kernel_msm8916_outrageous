@@ -36,7 +36,10 @@ extern void pcibios_resource_survey(void);
 /* pci.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pcibios_last_bus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct pci_ops *pci_root_ops;

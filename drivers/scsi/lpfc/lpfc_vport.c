@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2008 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -392,6 +396,12 @@ lpfc_vport_create(struct fc_vport *fc_vport, bool disable)
 	lpfc_alloc_sysfs_attr(vport);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Set the DFT_LUN_Q_DEPTH accordingly */
+	vport->cfg_lun_queue_depth  = phba->pport->cfg_lun_queue_depth;
+
+>>>>>>> v3.18
 =======
 	/* Set the DFT_LUN_Q_DEPTH accordingly */
 	vport->cfg_lun_queue_depth  = phba->pport->cfg_lun_queue_depth;

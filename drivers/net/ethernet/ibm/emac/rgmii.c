@@ -25,6 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/ethtool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -49,6 +53,10 @@
 /* RGMIIx_SSR */
 #define RGMII_SSR_MASK(idx)	(0x7 << ((idx) * 8))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RGMII_SSR_10(idx)	(0x1 << ((idx) * 8))
+>>>>>>> v3.18
 =======
 #define RGMII_SSR_10(idx)	(0x1 << ((idx) * 8))
 >>>>>>> v3.18
@@ -104,7 +112,11 @@ static inline u32 rgmii_mode_mask(int mode, int input)
 int rgmii_attach(struct platform_device *ofdev, int input, int mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -137,7 +149,11 @@ int rgmii_attach(struct platform_device *ofdev, int input, int mode)
 void rgmii_set_speed(struct platform_device *ofdev, int input, int speed)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -155,6 +171,11 @@ void rgmii_set_speed(struct platform_device *ofdev, int input, int speed)
 	else if (speed == SPEED_100)
 		ssr |= RGMII_SSR_100(input);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (speed == SPEED_10)
+		ssr |= RGMII_SSR_10(input);
+>>>>>>> v3.18
 =======
 	else if (speed == SPEED_10)
 		ssr |= RGMII_SSR_10(input);
@@ -168,7 +189,11 @@ void rgmii_set_speed(struct platform_device *ofdev, int input, int speed)
 void rgmii_get_mdio(struct platform_device *ofdev, int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -193,7 +218,11 @@ void rgmii_get_mdio(struct platform_device *ofdev, int input)
 void rgmii_put_mdio(struct platform_device *ofdev, int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -218,7 +247,11 @@ void rgmii_put_mdio(struct platform_device *ofdev, int input)
 void rgmii_detach(struct platform_device *ofdev, int input)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -248,7 +281,11 @@ int rgmii_get_regs_len(struct platform_device *ofdev)
 void *rgmii_dump_regs(struct platform_device *ofdev, void *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -317,7 +354,11 @@ static int rgmii_probe(struct platform_device *ofdev)
 
 	wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 >>>>>>> v3.18
@@ -333,9 +374,13 @@ static int rgmii_probe(struct platform_device *ofdev)
 static int rgmii_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rgmii_instance *dev = dev_get_drvdata(&ofdev->dev);
 
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct rgmii_instance *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18

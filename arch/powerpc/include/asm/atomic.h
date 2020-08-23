@@ -9,6 +9,10 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -29,6 +33,7 @@ static __inline__ void atomic_set(atomic_t *v, int i)
 	__asm__ __volatile__("stw%U0%X0 %1,%0" : "=m"(v->counter) : "r"(i));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __inline__ void atomic_add(int a, atomic_t *v)
 {
@@ -101,6 +106,8 @@ static __inline__ int atomic_sub_return(int a, atomic_t *v)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op, asm_op)						\
 static __inline__ void atomic_##op(int a, atomic_t *v)			\
 {									\
@@ -148,6 +155,9 @@ ATOMIC_OPS(sub, subf)
 
 #define atomic_add_negative(a, v)	(atomic_add_return((a), (v)) < 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __inline__ void atomic_inc(atomic_t *v)
 {
@@ -325,11 +335,14 @@ static __inline__ int atomic_dec_if_positive(atomic_t *v)
 #define atomic_dec_if_positive atomic_dec_if_positive
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()     smp_mb()
 #define smp_mb__after_atomic_dec()      smp_mb()
 #define smp_mb__before_atomic_inc()     smp_mb()
 #define smp_mb__after_atomic_inc()      smp_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef __powerpc64__
@@ -350,6 +363,7 @@ static __inline__ void atomic64_set(atomic64_t *v, long i)
 	__asm__ __volatile__("std%U0%X0 %1,%0" : "=m"(v->counter) : "r"(i));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __inline__ void atomic64_add(long a, atomic64_t *v)
 {
@@ -417,6 +431,8 @@ static __inline__ long atomic64_sub_return(long a, atomic64_t *v)
 	return t;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC64_OP(op, asm_op)						\
 static __inline__ void atomic64_##op(long a, atomic64_t *v)		\
 {									\
@@ -461,6 +477,9 @@ ATOMIC64_OPS(sub, subf)
 #undef ATOMIC64_OP
 
 #define atomic64_add_negative(a, v)	(atomic64_add_return((a), (v)) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __inline__ void atomic64_inc(atomic64_t *v)
@@ -606,7 +625,11 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
  * Returns non-zero if @v was non-zero, and zero otherwise.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __inline__ int atomic64_inc_not_zero(atomic64_t *v)
+=======
+static __inline__ long atomic64_inc_not_zero(atomic64_t *v)
+>>>>>>> v3.18
 =======
 static __inline__ long atomic64_inc_not_zero(atomic64_t *v)
 >>>>>>> v3.18
@@ -629,7 +652,11 @@ static __inline__ long atomic64_inc_not_zero(atomic64_t *v)
 	: "cc", "xer", "memory");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return t1 != 0;
+=======
+	return t1;
+>>>>>>> v3.18
 =======
 	return t1;
 >>>>>>> v3.18

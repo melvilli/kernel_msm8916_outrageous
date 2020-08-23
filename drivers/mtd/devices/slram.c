@@ -281,7 +281,10 @@ static int __init init_slram(void)
 {
 	char *devname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -290,8 +293,11 @@ static int __init init_slram(void)
 	char *devlength;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!map) {
@@ -321,6 +327,10 @@ static int __init init_slram(void)
 #else
 	int count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18

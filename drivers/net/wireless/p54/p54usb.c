@@ -13,7 +13,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/usb.h>
@@ -518,7 +521,11 @@ static int p54u_upload_firmware_3887(struct ieee80211_hw *dev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	left = block_size = min((size_t)P54U_FW_BLOCK, priv->fw->size);
+=======
+	left = block_size = min_t(size_t, P54U_FW_BLOCK, priv->fw->size);
+>>>>>>> v3.18
 =======
 	left = block_size = min_t(size_t, P54U_FW_BLOCK, priv->fw->size);
 >>>>>>> v3.18
@@ -988,6 +995,10 @@ static int p54u_load_firmware(struct ieee80211_hw *dev,
 		dev_err(&priv->udev->dev, "(p54usb) cannot load firmware %s "
 					  "(%d)!\n", p54u_fwlist[i].fw, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		usb_put_dev(udev);
+>>>>>>> v3.18
 =======
 		usb_put_dev(udev);
 >>>>>>> v3.18
@@ -1065,11 +1076,17 @@ static int p54u_probe(struct usb_interface *intf,
 	}
 	err = p54u_load_firmware(dev, intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (err) {
 		usb_put_dev(udev);
 		p54_free_common(dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

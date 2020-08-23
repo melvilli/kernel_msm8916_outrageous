@@ -22,7 +22,11 @@
 
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/crc-t10dif.h>
+=======
+#include <linux/t10-pi.h>
+>>>>>>> v3.18
 =======
 #include <linux/t10-pi.h>
 >>>>>>> v3.18
@@ -37,6 +41,7 @@
 #include <scsi/scsi_ioctl.h>
 #include <scsi/scsicam.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <net/checksum.h>
 
@@ -304,6 +309,10 @@ static struct blk_integrity dif_type3_integrity_ip = {
 #include "sd.h"
 
 >>>>>>> v3.18
+=======
+#include "sd.h"
+
+>>>>>>> v3.18
 /*
  * Configure exchange of protection information between OS and HBA.
  */
@@ -326,6 +335,7 @@ void sd_dif_config_host(struct scsi_disk *sdkp)
 
 	/* Enable DMA of protection information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (scsi_host_get_guard(sdkp->device->host) & SHOST_DIX_GUARD_IP)
 		if (type == SD_DIF_TYPE3_PROTECTION)
 			blk_integrity_register(disk, &dif_type3_integrity_ip);
@@ -337,6 +347,8 @@ void sd_dif_config_host(struct scsi_disk *sdkp)
 		else
 			blk_integrity_register(disk, &dif_type1_integrity_crc);
 =======
+=======
+>>>>>>> v3.18
 	if (scsi_host_get_guard(sdkp->device->host) & SHOST_DIX_GUARD_IP) {
 		if (type == SD_DIF_TYPE3_PROTECTION)
 			blk_integrity_register(disk, &t10_pi_type3_ip);
@@ -349,6 +361,9 @@ void sd_dif_config_host(struct scsi_disk *sdkp)
 			blk_integrity_register(disk, &t10_pi_type3_crc);
 		else
 			blk_integrity_register(disk, &t10_pi_type1_crc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sd_printk(KERN_NOTICE, sdkp,
@@ -356,8 +371,11 @@ void sd_dif_config_host(struct scsi_disk *sdkp)
 
 	/* Signal to block layer that we support sector tagging */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dif && type && sdkp->ATO) {
 =======
+=======
+>>>>>>> v3.18
 	if (dif && type) {
 
 		disk->integrity->flags |= BLK_INTEGRITY_DEVICE_CAPABLE;
@@ -365,6 +383,9 @@ void sd_dif_config_host(struct scsi_disk *sdkp)
 		if (!sdkp)
 			return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (type == SD_DIF_TYPE3_PROTECTION)
 			disk->integrity->tag_size = sizeof(u16) + sizeof(u32);
@@ -393,6 +414,7 @@ void sd_dif_config_host(struct scsi_disk *sdkp)
  * Type 3 does not have a reference tag so no remapping is required.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sd_dif_prepare(struct request *rq, sector_t hw_sector,
 		    unsigned int sector_sz)
 {
@@ -405,6 +427,8 @@ void sd_dif_prepare(struct request *rq, sector_t hw_sector,
 
 	sdkp = rq->bio->bi_bdev->bd_disk->private_data;
 =======
+=======
+>>>>>>> v3.18
 void sd_dif_prepare(struct scsi_cmnd *scmd)
 {
 	const int tuple_sz = sizeof(struct t10_pi_tuple);
@@ -414,11 +438,15 @@ void sd_dif_prepare(struct scsi_cmnd *scmd)
 	u32 phys, virt;
 
 	sdkp = scsi_disk(scmd->request->rq_disk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sdkp->protection_type == SD_DIF_TYPE3_PROTECTION)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	phys = hw_sector & 0xffffffff;
 
@@ -440,6 +468,8 @@ void sd_dif_prepare(struct scsi_cmnd *scmd)
 				if (be32_to_cpu(sdt->ref_tag) == virt)
 					sdt->ref_tag = cpu_to_be32(phys);
 =======
+=======
+>>>>>>> v3.18
 	phys = scsi_prot_ref_tag(scmd);
 
 	__rq_for_each_bio(bio, scmd->request) {
@@ -461,6 +491,9 @@ void sd_dif_prepare(struct scsi_cmnd *scmd)
 
 				if (be32_to_cpu(pi->ref_tag) == virt)
 					pi->ref_tag = cpu_to_be32(phys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				virt++;
@@ -468,15 +501,21 @@ void sd_dif_prepare(struct scsi_cmnd *scmd)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kunmap_atomic(sdt);
 		}
 
 		bio->bi_flags |= (1 << BIO_MAPPED_INTEGRITY);
 =======
+=======
+>>>>>>> v3.18
 			kunmap_atomic(pi);
 		}
 
 		bip->bip_flags |= BIP_MAPPED_INTEGRITY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -488,17 +527,23 @@ void sd_dif_prepare(struct scsi_cmnd *scmd)
 void sd_dif_complete(struct scsi_cmnd *scmd, unsigned int good_bytes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int tuple_sz = sizeof(struct sd_dif_tuple);
 	struct scsi_disk *sdkp;
 	struct bio *bio;
 	struct sd_dif_tuple *sdt;
 	unsigned int i, j, sectors, sector_sz;
 =======
+=======
+>>>>>>> v3.18
 	const int tuple_sz = sizeof(struct t10_pi_tuple);
 	struct scsi_disk *sdkp;
 	struct bio *bio;
 	struct t10_pi_tuple *pi;
 	unsigned int j, intervals;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 phys, virt;
 
@@ -507,6 +552,7 @@ void sd_dif_complete(struct scsi_cmnd *scmd, unsigned int good_bytes)
 	if (sdkp->protection_type == SD_DIF_TYPE3_PROTECTION || good_bytes == 0)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sector_sz = scmd->device->sector_size;
 	sectors = good_bytes / sector_sz;
@@ -541,6 +587,8 @@ void sd_dif_complete(struct scsi_cmnd *scmd, unsigned int good_bytes)
 
 			kunmap_atomic(sdt);
 =======
+=======
+>>>>>>> v3.18
 	intervals = good_bytes / scsi_prot_interval(scmd);
 	phys = scsi_prot_ref_tag(scmd);
 
@@ -570,6 +618,9 @@ void sd_dif_complete(struct scsi_cmnd *scmd, unsigned int good_bytes)
 			}
 
 			kunmap_atomic(pi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

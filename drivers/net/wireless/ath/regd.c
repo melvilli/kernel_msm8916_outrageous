@@ -38,6 +38,7 @@ static int __ath_regd_init(struct ath_regulatory *reg);
 /* We enable active scan on these a case by case basis by regulatory domain */
 #define ATH9K_2GHZ_CH12_13	REG_RULE(2467-10, 2472+10, 40, 0, 20,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 					NL80211_RRF_PASSIVE_SCAN)
 #define ATH9K_2GHZ_CH14		REG_RULE(2484-10, 2484+10, 40, 0, 20,\
 				NL80211_RRF_PASSIVE_SCAN | NL80211_RRF_NO_OFDM)
@@ -50,6 +51,8 @@ static int __ath_regd_init(struct ath_regulatory *reg);
 #define ATH9K_5GHZ_5725_5850	REG_RULE(5725-10, 5850+10, 40, 0, 30,\
 				NL80211_RRF_PASSIVE_SCAN | NL80211_RRF_NO_IBSS)
 =======
+=======
+>>>>>>> v3.18
 					 NL80211_RRF_NO_IR)
 #define ATH9K_2GHZ_CH14		REG_RULE(2484-10, 2484+10, 40, 0, 20,\
 					 NL80211_RRF_NO_IR | \
@@ -62,6 +65,9 @@ static int __ath_regd_init(struct ath_regulatory *reg);
 					 NL80211_RRF_NO_IR)
 #define ATH9K_5GHZ_5725_5850	REG_RULE(5725-10, 5850+10, 80, 0, 30,\
 					 NL80211_RRF_NO_IR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ATH9K_2GHZ_ALL		ATH9K_2GHZ_CH01_11, \
@@ -129,7 +135,10 @@ static const struct ieee80211_regdomain ath_world_regdom_67_68_6A_6C = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool dynamic_country_user_possible(struct ath_regulatory *reg)
 {
 	if (config_enabled(CONFIG_ATH_REG_DYNAMIC_USER_CERT_TESTING))
@@ -211,6 +220,9 @@ static bool ath_reg_dyn_country_user_allow(struct ath_regulatory *reg)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool is_wwr_sku(u16 regd)
 {
@@ -240,7 +252,11 @@ static const struct
 ieee80211_regdomain *ath_world_regdomain(struct ath_regulatory *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (reg->regpair->regDmnEnum) {
+=======
+	switch (reg->regpair->reg_domain) {
+>>>>>>> v3.18
 =======
 	switch (reg->regpair->reg_domain) {
 >>>>>>> v3.18
@@ -281,6 +297,7 @@ static bool ath_is_radar_freq(u16 center_freq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * N.B: These exception rules do not apply radar freqs.
  *
@@ -293,6 +310,8 @@ static bool ath_is_radar_freq(u16 center_freq)
 static void
 ath_reg_apply_beaconing_flags(struct wiphy *wiphy,
 =======
+=======
+>>>>>>> v3.18
 static void ath_force_clear_no_ir_chan(struct wiphy *wiphy,
 				       struct ieee80211_channel *ch)
 {
@@ -368,19 +387,26 @@ __ath_reg_apply_beaconing_flags(struct wiphy *wiphy,
 static void
 ath_reg_apply_beaconing_flags(struct wiphy *wiphy,
 			      struct ath_regulatory *reg,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      enum nl80211_reg_initiator initiator)
 {
 	enum ieee80211_band band;
 	struct ieee80211_supported_band *sband;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct ieee80211_reg_rule *reg_rule;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ieee80211_channel *ch;
 	unsigned int i;
 
 	for (band = 0; band < IEEE80211_NUM_BANDS; band++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (!wiphy->bands[band])
@@ -435,6 +461,8 @@ ath_reg_apply_active_scan_flags(struct wiphy *wiphy,
 	struct ieee80211_channel *ch;
 	const struct ieee80211_reg_rule *reg_rule;
 =======
+=======
+>>>>>>> v3.18
 		if (!wiphy->bands[band])
 			continue;
 		sband = wiphy->bands[band];
@@ -466,12 +494,16 @@ ath_reg_apply_ir_flags(struct wiphy *wiphy,
 		       enum nl80211_reg_initiator initiator)
 {
 	struct ieee80211_supported_band *sband;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sband = wiphy->bands[IEEE80211_BAND_2GHZ];
 	if (!sband)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * If no country IE has been received always enable active scan
@@ -509,6 +541,8 @@ ath_reg_apply_ir_flags(struct wiphy *wiphy,
 			if (ch->flags & IEEE80211_CHAN_PASSIVE_SCAN)
 				ch->flags &= ~IEEE80211_CHAN_PASSIVE_SCAN;
 =======
+=======
+>>>>>>> v3.18
 	switch(initiator) {
 	case NL80211_REGDOM_SET_BY_COUNTRY_IE:
 		ath_force_clear_no_ir_freq(wiphy, 2467);
@@ -523,6 +557,9 @@ ath_reg_apply_ir_flags(struct wiphy *wiphy,
 	default:
 		ath_force_no_ir_freq(wiphy, 2467);
 		ath_force_no_ir_freq(wiphy, 2472);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -556,8 +593,12 @@ static void ath_reg_apply_radar_flags(struct wiphy *wiphy)
 		if (!(ch->flags & IEEE80211_CHAN_DISABLED))
 			ch->flags |= IEEE80211_CHAN_RADAR |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     IEEE80211_CHAN_NO_IBSS |
 				     IEEE80211_CHAN_PASSIVE_SCAN;
+=======
+				     IEEE80211_CHAN_NO_IR;
+>>>>>>> v3.18
 =======
 				     IEEE80211_CHAN_NO_IR;
 >>>>>>> v3.18
@@ -569,7 +610,11 @@ static void ath_reg_apply_world_flags(struct wiphy *wiphy,
 				      struct ath_regulatory *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (reg->regpair->regDmnEnum) {
+=======
+	switch (reg->regpair->reg_domain) {
+>>>>>>> v3.18
 =======
 	switch (reg->regpair->reg_domain) {
 >>>>>>> v3.18
@@ -579,6 +624,7 @@ static void ath_reg_apply_world_flags(struct wiphy *wiphy,
 	case 0x67:
 	case 0x6C:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath_reg_apply_beaconing_flags(wiphy, initiator);
 		break;
 	case 0x68:
@@ -586,6 +632,8 @@ static void ath_reg_apply_world_flags(struct wiphy *wiphy,
 		ath_reg_apply_active_scan_flags(wiphy, initiator);
 		break;
 =======
+=======
+>>>>>>> v3.18
 		ath_reg_apply_beaconing_flags(wiphy, reg, initiator);
 		break;
 	case 0x68:
@@ -595,6 +643,9 @@ static void ath_reg_apply_world_flags(struct wiphy *wiphy,
 	default:
 		if (ath_reg_dyn_country_user_allow(reg))
 			ath_reg_apply_beaconing_flags(wiphy, reg, initiator);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -612,7 +663,10 @@ static u16 ath_regd_find_country_by_name(char *alpha2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __ath_reg_dyn_country(struct wiphy *wiphy,
 				 struct ath_regulatory *reg,
 				 struct regulatory_request *request)
@@ -650,6 +704,9 @@ static void ath_reg_dyn_country(struct wiphy *wiphy,
 	       reg_initiator_name(request->initiator));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ath_reg_notifier_apply(struct wiphy *wiphy,
 			    struct regulatory_request *request,
@@ -658,8 +715,11 @@ void ath_reg_notifier_apply(struct wiphy *wiphy,
 	struct ath_common *common = container_of(reg, struct ath_common,
 						 regulatory);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 country_code;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* We always apply this */
@@ -674,6 +734,10 @@ void ath_reg_notifier_apply(struct wiphy *wiphy,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	reg->region = request->dfs_region;
+>>>>>>> v3.18
 =======
 	reg->region = request->dfs_region;
 >>>>>>> v3.18
@@ -690,6 +754,7 @@ void ath_reg_notifier_apply(struct wiphy *wiphy,
 		       sizeof(struct ath_regulatory));
 		break;
 	case NL80211_REGDOM_SET_BY_DRIVER:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case NL80211_REGDOM_SET_BY_USER:
 		break;
@@ -711,6 +776,8 @@ void ath_reg_notifier_apply(struct wiphy *wiphy,
 		ath_reg_apply_world_flags(wiphy, request->initiator, reg);
 
 =======
+=======
+>>>>>>> v3.18
 		break;
 	case NL80211_REGDOM_SET_BY_USER:
 		if (ath_reg_dyn_country_user_allow(reg))
@@ -718,6 +785,9 @@ void ath_reg_notifier_apply(struct wiphy *wiphy,
 		break;
 	case NL80211_REGDOM_SET_BY_COUNTRY_IE:
 		ath_reg_dyn_country(wiphy, reg, request);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -745,7 +815,11 @@ static bool ath_regd_is_eeprom_valid(struct ath_regulatory *reg)
 			       "should expect a direct regpair map\n");
 		for (i = 0; i < ARRAY_SIZE(regDomainPairs); i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (regDomainPairs[i].regDmnEnum == rd)
+=======
+			if (regDomainPairs[i].reg_domain == rd)
+>>>>>>> v3.18
 =======
 			if (regDomainPairs[i].reg_domain == rd)
 >>>>>>> v3.18
@@ -806,7 +880,11 @@ ath_get_regpair(int regdmn)
 		return NULL;
 	for (i = 0; i < ARRAY_SIZE(regDomainPairs); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (regDomainPairs[i].regDmnEnum == regdmn)
+=======
+		if (regDomainPairs[i].reg_domain == regdmn)
+>>>>>>> v3.18
 =======
 		if (regDomainPairs[i].reg_domain == regdmn)
 >>>>>>> v3.18
@@ -825,7 +903,12 @@ ath_regd_init_wiphy(struct ath_regulatory *reg,
 
 	wiphy->reg_notifier = reg_notifier;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wiphy->flags |= WIPHY_FLAG_STRICT_REGULATORY;
+=======
+	wiphy->regulatory_flags |= REGULATORY_STRICT_REG |
+				   REGULATORY_CUSTOM_REG;
+>>>>>>> v3.18
 =======
 	wiphy->regulatory_flags |= REGULATORY_STRICT_REG |
 				   REGULATORY_CUSTOM_REG;
@@ -838,8 +921,12 @@ ath_regd_init_wiphy(struct ath_regulatory *reg,
 		 */
 		regd = ath_world_regdomain(reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wiphy->flags |= WIPHY_FLAG_CUSTOM_REGULATORY;
 		wiphy->country_ie_pref = NL80211_COUNTRY_IE_FOLLOW_POWER;
+=======
+		wiphy->regulatory_flags |= REGULATORY_COUNTRY_IE_FOLLOW_POWER;
+>>>>>>> v3.18
 =======
 		wiphy->regulatory_flags |= REGULATORY_COUNTRY_IE_FOLLOW_POWER;
 >>>>>>> v3.18
@@ -852,6 +939,10 @@ ath_regd_init_wiphy(struct ath_regulatory *reg,
 		regd = ath_default_world_regdomain();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -946,7 +1037,11 @@ static int __ath_regd_init(struct ath_regulatory *reg)
 		reg->alpha2[0], reg->alpha2[1]);
 	printk(KERN_DEBUG "ath: Regpair used: 0x%0x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg->regpair->regDmnEnum);
+=======
+		reg->regpair->reg_domain);
+>>>>>>> v3.18
 =======
 		reg->regpair->reg_domain);
 >>>>>>> v3.18
@@ -988,7 +1083,10 @@ u32 ath_regd_get_band_ctl(struct ath_regulatory *reg,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ath_regd_get_eepromRD(reg) == CTRY_DEFAULT) {
 		switch (reg->region) {
 		case NL80211_DFS_FCC:
@@ -1002,6 +1100,9 @@ u32 ath_regd_get_band_ctl(struct ath_regulatory *reg,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (band) {
 	case IEEE80211_BAND_2GHZ:

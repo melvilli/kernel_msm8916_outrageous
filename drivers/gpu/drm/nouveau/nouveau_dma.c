@@ -25,8 +25,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/client.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -58,9 +61,15 @@ READ_GET(struct nouveau_channel *chan, uint64_t *prev_get, int *timeout)
 	uint64_t val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = nv_ro32(chan->object, chan->user_get);
         if (chan->user_get_hi)
                 val |= (uint64_t)nv_ro32(chan->object, chan->user_get_hi) << 32;
+=======
+	val = nvif_rd32(chan, chan->user_get);
+        if (chan->user_get_hi)
+                val |= (uint64_t)nvif_rd32(chan, chan->user_get_hi) << 32;
+>>>>>>> v3.18
 =======
 	val = nvif_rd32(chan, chan->user_get);
         if (chan->user_get_hi)
@@ -94,6 +103,10 @@ nv50_dma_push(struct nouveau_channel *chan, struct nouveau_bo *bo,
 	      int delta, int length)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nouveau_cli *cli = (void *)nvif_client(&chan->device->base);
+>>>>>>> v3.18
 =======
 	struct nouveau_cli *cli = (void *)nvif_client(&chan->device->base);
 >>>>>>> v3.18
@@ -103,7 +116,11 @@ nv50_dma_push(struct nouveau_channel *chan, struct nouveau_bo *bo,
 	u64 offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma = nouveau_bo_vma_find(bo, nv_client(chan->cli)->vm);
+=======
+	vma = nouveau_bo_vma_find(bo, cli->vm);
+>>>>>>> v3.18
 =======
 	vma = nouveau_bo_vma_find(bo, cli->vm);
 >>>>>>> v3.18
@@ -118,17 +135,23 @@ nv50_dma_push(struct nouveau_channel *chan, struct nouveau_bo *bo,
 	chan->dma.ib_put = (chan->dma.ib_put + 1) & chan->dma.ib_max;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();
 	/* Flush writes. */
 	nouveau_bo_rd32(pb, 0);
 
 	nv_wo32(chan->object, 0x8c, chan->dma.ib_put);
 =======
+=======
+>>>>>>> v3.18
 	mb();
 	/* Flush writes. */
 	nouveau_bo_rd32(pb, 0);
 
 	nvif_wr32(chan, 0x8c, chan->dma.ib_put);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chan->dma.ib_free--;
 }
@@ -140,7 +163,11 @@ nv50_dma_push_wait(struct nouveau_channel *chan, int count)
 
 	while (chan->dma.ib_free < count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uint32_t get = nv_ro32(chan->object, 0x88);
+=======
+		uint32_t get = nvif_rd32(chan, 0x88);
+>>>>>>> v3.18
 =======
 		uint32_t get = nvif_rd32(chan, 0x88);
 >>>>>>> v3.18

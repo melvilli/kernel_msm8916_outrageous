@@ -20,6 +20,10 @@ extern pmd_t level2_kernel_pgt[512];
 extern pmd_t level2_fixmap_pgt[512];
 extern pmd_t level2_ident_pgt[512];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern pte_t level1_fixmap_pgt[512];
+>>>>>>> v3.18
 =======
 extern pte_t level1_fixmap_pgt[512];
 >>>>>>> v3.18
@@ -120,7 +124,12 @@ static inline void native_pgd_clear(pgd_t *pgd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sync_global_pgds(unsigned long start, unsigned long end);
+=======
+extern void sync_global_pgds(unsigned long start, unsigned long end,
+			     int removed);
+>>>>>>> v3.18
 =======
 extern void sync_global_pgds(unsigned long start, unsigned long end,
 			     int removed);
@@ -153,6 +162,7 @@ static inline int pgd_large(pgd_t pgd) { return 0; }
 
 /* Encode and de-code a swap entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if _PAGE_BIT_FILE < _PAGE_BIT_PROTNONE
 #define SWP_TYPE_BITS (_PAGE_BIT_FILE - _PAGE_BIT_PRESENT - 1)
 #define SWP_OFFSET_SHIFT (_PAGE_BIT_PROTNONE + 1)
@@ -160,12 +170,17 @@ static inline int pgd_large(pgd_t pgd) { return 0; }
 #define SWP_TYPE_BITS (_PAGE_BIT_PROTNONE - _PAGE_BIT_PRESENT - 1)
 #define SWP_OFFSET_SHIFT (_PAGE_BIT_FILE + 1)
 =======
+=======
+>>>>>>> v3.18
 #define SWP_TYPE_BITS (_PAGE_BIT_FILE - _PAGE_BIT_PRESENT - 1)
 #ifdef CONFIG_NUMA_BALANCING
 /* Automatic NUMA balancing needs to be distinguishable from swap entries */
 #define SWP_OFFSET_SHIFT (_PAGE_BIT_PROTNONE + 2)
 #else
 #define SWP_OFFSET_SHIFT (_PAGE_BIT_PROTNONE + 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

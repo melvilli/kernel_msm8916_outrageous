@@ -2,6 +2,10 @@
 #define _ASM_X86_NMI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq_work.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq_work.h>
 >>>>>>> v3.18
@@ -43,6 +47,11 @@ struct nmiaction {
 	struct list_head	list;
 	nmi_handler_t		handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64			max_duration;
+	struct irq_work		irq_work;
+>>>>>>> v3.18
 =======
 	u64			max_duration;
 	struct irq_work		irq_work;

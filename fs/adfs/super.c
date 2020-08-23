@@ -124,8 +124,12 @@ static void adfs_put_super(struct super_block *sb)
 		brelse(asb->s_map[i].dm_bh);
 	kfree(asb->s_map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(asb);
 	sb->s_fs_info = NULL;
+=======
+	kfree_rcu(asb, rcu);
+>>>>>>> v3.18
 =======
 	kfree_rcu(asb, rcu);
 >>>>>>> v3.18
@@ -218,6 +222,10 @@ static int parse_options(struct super_block *sb, char *options)
 static int adfs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -275,7 +283,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18

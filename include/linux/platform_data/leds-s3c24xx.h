@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/mach-s3c2410/include/mach/leds-gpio.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -16,8 +20,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_LEDSGPIO_H
 #define __ASM_ARCH_LEDSGPIO_H "leds-gpio.h"
+=======
+#ifndef __LEDS_S3C24XX_H
+#define __LEDS_S3C24XX_H
+>>>>>>> v3.18
 =======
 #ifndef __LEDS_S3C24XX_H
 #define __LEDS_S3C24XX_H
@@ -35,7 +44,11 @@ struct s3c24xx_led_platdata {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_LEDSGPIO_H */
+=======
+#endif /* __LEDS_S3C24XX_H */
+>>>>>>> v3.18
 =======
 #endif /* __LEDS_S3C24XX_H */
 >>>>>>> v3.18

@@ -179,7 +179,11 @@ static int cy8ctmg110_probe(struct i2c_client *client,
 					const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cy8ctmg110_pdata *pdata = client->dev.platform_data;
+=======
+	const struct cy8ctmg110_pdata *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct cy8ctmg110_pdata *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -296,7 +300,11 @@ err_free_mem:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -328,9 +336,15 @@ static int cy8ctmg110_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static SIMPLE_DEV_PM_OPS(cy8ctmg110_pm, cy8ctmg110_suspend, cy8ctmg110_resume);
 #endif
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(cy8ctmg110_pm, cy8ctmg110_suspend, cy8ctmg110_resume);
+>>>>>>> v3.18
 =======
 #endif
 
@@ -366,9 +380,13 @@ static struct i2c_driver cy8ctmg110_driver = {
 		.owner	= THIS_MODULE,
 		.name	= CY8CTMG110_DRIVER_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm	= &cy8ctmg110_pm,
 #endif
+=======
+		.pm	= &cy8ctmg110_pm,
+>>>>>>> v3.18
 =======
 		.pm	= &cy8ctmg110_pm,
 >>>>>>> v3.18

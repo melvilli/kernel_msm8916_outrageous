@@ -86,7 +86,11 @@ int powersave_nap;
  * Register the sysctl to set/clear powersave_nap.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table powersave_nap_ctl_table[]={
+=======
+static struct ctl_table powersave_nap_ctl_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table powersave_nap_ctl_table[] = {
 >>>>>>> v3.18
@@ -100,7 +104,11 @@ static struct ctl_table powersave_nap_ctl_table[] = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table powersave_nap_sysctl_root[] = {
+=======
+static struct ctl_table powersave_nap_sysctl_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table powersave_nap_sysctl_root[] = {
 >>>>>>> v3.18

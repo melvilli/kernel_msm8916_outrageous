@@ -81,12 +81,15 @@ static void __init intc_register_irq(struct intc_desc *desc,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Register the IRQ position with the global IRQ map, then insert
 	 * it in to the radix tree.
 	 */
 	irq_reserve_irq(irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	raw_spin_lock_irqsave(&intc_big_lock, flags);

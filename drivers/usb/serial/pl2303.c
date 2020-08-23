@@ -13,7 +13,10 @@
  * See Documentation/usb/usb-serial.txt for more information on using this
  * driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -21,7 +24,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -36,6 +42,7 @@
 #include <linux/usb.h>
 #include <linux/usb/serial.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "pl2303.h"
 
 /*
@@ -43,12 +50,17 @@
  */
 #define DRIVER_DESC "Prolific PL2303 USB to serial adaptor driver"
 =======
+=======
+>>>>>>> v3.18
 #include <asm/unaligned.h>
 #include "pl2303.h"
 
 
 #define PL2303_QUIRK_UART_STATE_IDX0		BIT(0)
 #define PL2303_QUIRK_LEGACY			BIT(1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct usb_device_id id_table[] = {
@@ -79,10 +91,13 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(SITECOM_VENDOR_ID, SITECOM_PRODUCT_ID) },
 	{ USB_DEVICE(ALCATEL_VENDOR_ID, ALCATEL_PRODUCT_ID) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(SIEMENS_VENDOR_ID, SIEMENS_PRODUCT_ID_SX1) },
 	{ USB_DEVICE(SIEMENS_VENDOR_ID, SIEMENS_PRODUCT_ID_X65) },
 	{ USB_DEVICE(SIEMENS_VENDOR_ID, SIEMENS_PRODUCT_ID_X75) },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(SAMSUNG_VENDOR_ID, SAMSUNG_PRODUCT_ID) },
 	{ USB_DEVICE(SIEMENS_VENDOR_ID, SIEMENS_PRODUCT_ID_SX1),
 		.driver_info = PL2303_QUIRK_UART_STATE_IDX0 },
@@ -90,6 +105,9 @@ static const struct usb_device_id id_table[] = {
 		.driver_info = PL2303_QUIRK_UART_STATE_IDX0 },
 	{ USB_DEVICE(SIEMENS_VENDOR_ID, SIEMENS_PRODUCT_ID_X75),
 		.driver_info = PL2303_QUIRK_UART_STATE_IDX0 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(SIEMENS_VENDOR_ID, SIEMENS_PRODUCT_ID_EF81) },
 	{ USB_DEVICE(BENQ_VENDOR_ID, BENQ_PRODUCT_ID_S81) }, /* Benq/Siemens S81 */
@@ -144,7 +162,12 @@ MODULE_DEVICE_TABLE(usb, id_table);
 #define VENDOR_READ_REQUEST		0x01
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART_STATE			0x08
+=======
+#define UART_STATE_INDEX		8
+#define UART_STATE_MSR_MASK		0x8b
+>>>>>>> v3.18
 =======
 #define UART_STATE_INDEX		8
 #define UART_STATE_MSR_MASK		0x8b
@@ -162,6 +185,7 @@ MODULE_DEVICE_TABLE(usb, id_table);
 
 enum pl2303_type {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	type_0,		/* don't know the difference between type 0 and */
 	type_1,		/* type 1, until someone from prolific tells us... */
 	HX,		/* HX version of the pl2303 chip */
@@ -170,6 +194,8 @@ enum pl2303_type {
 struct pl2303_serial_private {
 	enum pl2303_type type;
 =======
+=======
+>>>>>>> v3.18
 	TYPE_01,	/* Type 0 and 1 (difference unknown) */
 	TYPE_HX,	/* HX version of the pl2303 chip */
 	TYPE_COUNT
@@ -183,6 +209,9 @@ struct pl2303_type_data {
 struct pl2303_serial_private {
 	const struct pl2303_type_data *type;
 	unsigned long quirks;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -194,6 +223,7 @@ struct pl2303_private {
 	u8 line_settings[7];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pl2303_vendor_read(__u16 value, __u16 index,
 		struct usb_serial *serial, unsigned char *buf)
@@ -218,6 +248,8 @@ static int pl2303_vendor_write(__u16 value, __u16 index,
 		res);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 static const struct pl2303_type_data pl2303_type_data[TYPE_COUNT] = {
 	[TYPE_01] = {
 		.max_baud_rate =	1228800,
@@ -276,12 +308,16 @@ static int pl2303_probe(struct usb_serial *serial,
 	usb_set_serial_data(serial, (void *)id->driver_info);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pl2303_startup(struct usb_serial *serial)
 {
 	struct pl2303_serial_private *spriv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned char num_ports = serial->num_ports;
 	enum pl2303_type type = type_0;
@@ -299,12 +335,21 @@ static int pl2303_startup(struct usb_serial *serial)
 	unsigned char *buf;
 
 >>>>>>> v3.18
+=======
+	enum pl2303_type type = TYPE_01;
+	unsigned char *buf;
+
+>>>>>>> v3.18
 	spriv = kzalloc(sizeof(*spriv), GFP_KERNEL);
 	if (!spriv)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = kmalloc(10, GFP_KERNEL);
+=======
+	buf = kmalloc(1, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	buf = kmalloc(1, GFP_KERNEL);
 >>>>>>> v3.18
@@ -314,6 +359,7 @@ static int pl2303_startup(struct usb_serial *serial)
 	}
 
 	if (serial->dev->descriptor.bDeviceClass == 0x02)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		type = type_0;
 	else if (serial->dev->descriptor.bMaxPacketSize0 == 0x40)
@@ -344,6 +390,8 @@ static int pl2303_startup(struct usb_serial *serial)
 
 	kfree(buf);
 =======
+=======
+>>>>>>> v3.18
 		type = TYPE_01;		/* type 0 */
 	else if (serial->dev->descriptor.bMaxPacketSize0 == 0x40)
 		type = TYPE_HX;
@@ -376,6 +424,9 @@ static int pl2303_startup(struct usb_serial *serial)
 
 	kfree(buf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -383,9 +434,14 @@ static int pl2303_startup(struct usb_serial *serial)
 static void pl2303_release(struct usb_serial *serial)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pl2303_serial_private *spriv;
 
 	spriv = usb_get_serial_data(serial);
+=======
+	struct pl2303_serial_private *spriv = usb_get_serial_data(serial);
+
+>>>>>>> v3.18
 =======
 	struct pl2303_serial_private *spriv = usb_get_serial_data(serial);
 
@@ -406,6 +462,11 @@ static int pl2303_port_probe(struct usb_serial_port *port)
 	usb_set_serial_port_data(port, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->port.drain_delay = 256;
+
+>>>>>>> v3.18
 =======
 	port->port.drain_delay = 256;
 
@@ -416,9 +477,14 @@ static int pl2303_port_probe(struct usb_serial_port *port)
 static int pl2303_port_remove(struct usb_serial_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pl2303_private *priv;
 
 	priv = usb_get_serial_port_data(port);
+=======
+	struct pl2303_private *priv = usb_get_serial_port_data(port);
+
+>>>>>>> v3.18
 =======
 	struct pl2303_private *priv = usb_get_serial_port_data(port);
 
@@ -434,6 +500,7 @@ static int pl2303_set_control_lines(struct usb_serial_port *port, u8 value)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = usb_control_msg(dev, usb_sndctrlpipe(dev, 0),
 				 SET_CONTROL_REQUEST, SET_CONTROL_REQUEST_TYPE,
 				 value, 0, NULL, 0, 100);
@@ -443,6 +510,8 @@ static int pl2303_set_control_lines(struct usb_serial_port *port, u8 value)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&port->dev, "%s - %02x\n", __func__, value);
 
 	retval = usb_control_msg(dev, usb_sndctrlpipe(dev, 0),
@@ -594,6 +663,9 @@ static int pl2303_set_line_request(struct usb_serial_port *port,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void pl2303_set_termios(struct tty_struct *tty,
 		struct usb_serial_port *port, struct ktermios *old_termios)
@@ -602,6 +674,7 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	struct pl2303_serial_private *spriv = usb_get_serial_data(serial);
 	struct pl2303_private *priv = usb_get_serial_port_data(port);
 	unsigned long flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int cflag;
 	unsigned char *buf;
@@ -619,16 +692,26 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	int ret;
 	u8 control;
 >>>>>>> v3.18
+=======
+	unsigned char *buf;
+	int ret;
+	u8 control;
+>>>>>>> v3.18
 
 	if (old_termios && !tty_termios_hw_change(&tty->termios, old_termios))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cflag = tty->termios.c_cflag;
 
 	buf = kzalloc(7, GFP_KERNEL);
 	if (!buf) {
 		dev_err(&port->dev, "%s - out of memory.\n", __func__);
+=======
+	buf = kzalloc(7, GFP_KERNEL);
+	if (!buf) {
+>>>>>>> v3.18
 =======
 	buf = kzalloc(7, GFP_KERNEL);
 	if (!buf) {
@@ -640,6 +723,7 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i = usb_control_msg(serial->dev, usb_rcvctrlpipe(serial->dev, 0),
 			    GET_LINE_REQUEST, GET_LINE_REQUEST_TYPE,
 			    0, 0, buf, 7, 100);
@@ -647,6 +731,11 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	    buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
 
 	switch (cflag & CSIZE) {
+=======
+	pl2303_get_line_request(port, buf);
+
+	switch (C_CSIZE(tty)) {
+>>>>>>> v3.18
 =======
 	pl2303_get_line_request(port, buf);
 
@@ -665,13 +754,17 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	case CS8:
 		buf[6] = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
 	dev_dbg(&port->dev, "data bits = %d\n", buf[6]);
 
 	/* For reference buf[0]:buf[3] baud rate value */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* NOTE: Only the values defined in baud_sup are supported !
 	 *       => if unsupported values are set, the PL2303 seems to use
@@ -728,10 +821,14 @@ static void pl2303_set_termios(struct tty_struct *tty,
 =======
 	pl2303_encode_baud_rate(tty, port, &buf[0]);
 >>>>>>> v3.18
+=======
+	pl2303_encode_baud_rate(tty, port, &buf[0]);
+>>>>>>> v3.18
 
 	/* For reference buf[4]=0 is 1 stop bits */
 	/* For reference buf[4]=1 is 1.5 stop bits */
 	/* For reference buf[4]=2 is 2 stop bits */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cflag & CSTOPB) {
 		/* NOTE: Comply with "real" UARTs / RS232:
@@ -739,12 +836,17 @@ static void pl2303_set_termios(struct tty_struct *tty,
 		 */
 		if ((cflag & CSIZE) == CS5) {
 =======
+=======
+>>>>>>> v3.18
 	if (C_CSTOPB(tty)) {
 		/*
 		 * NOTE: Comply with "real" UARTs / RS232:
 		 *       use 1.5 instead of 2 stop bits with 5 data bits
 		 */
 		if (C_CSIZE(tty) == CS5) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			buf[4] = 1;
 			dev_dbg(&port->dev, "stop bits = 1.5\n");
@@ -758,7 +860,11 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cflag & PARENB) {
+=======
+	if (C_PARENB(tty)) {
+>>>>>>> v3.18
 =======
 	if (C_PARENB(tty)) {
 >>>>>>> v3.18
@@ -768,8 +874,13 @@ static void pl2303_set_termios(struct tty_struct *tty,
 		/* For reference buf[5]=3 is mark parity */
 		/* For reference buf[5]=4 is space parity */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cflag & PARODD) {
 			if (cflag & CMSPAR) {
+=======
+		if (C_PARODD(tty)) {
+			if (C_CMSPAR(tty)) {
+>>>>>>> v3.18
 =======
 		if (C_PARODD(tty)) {
 			if (C_CMSPAR(tty)) {
@@ -782,7 +893,11 @@ static void pl2303_set_termios(struct tty_struct *tty,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cflag & CMSPAR) {
+=======
+			if (C_CMSPAR(tty)) {
+>>>>>>> v3.18
 =======
 			if (C_CMSPAR(tty)) {
 >>>>>>> v3.18
@@ -812,6 +927,7 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	 */
 	if (!old_termios || memcmp(buf, priv->line_settings, 7)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		i = usb_control_msg(serial->dev,
 				    usb_sndctrlpipe(serial->dev, 0),
 				    SET_LINE_REQUEST, SET_LINE_REQUEST_TYPE,
@@ -824,6 +940,10 @@ static void pl2303_set_termios(struct tty_struct *tty,
 		ret = pl2303_set_line_request(port, buf);
 		if (!ret)
 >>>>>>> v3.18
+=======
+		ret = pl2303_set_line_request(port, buf);
+		if (!ret)
+>>>>>>> v3.18
 			memcpy(priv->line_settings, buf, 7);
 	}
 
@@ -831,7 +951,11 @@ static void pl2303_set_termios(struct tty_struct *tty,
 	spin_lock_irqsave(&priv->lock, flags);
 	control = priv->line_control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((cflag & CBAUD) == B0)
+=======
+	if (C_BAUD(tty) == B0)
+>>>>>>> v3.18
 =======
 	if (C_BAUD(tty) == B0)
 >>>>>>> v3.18
@@ -846,6 +970,7 @@ static void pl2303_set_termios(struct tty_struct *tty,
 		spin_unlock_irqrestore(&priv->lock, flags);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buf[0] = buf[1] = buf[2] = buf[3] = buf[4] = buf[5] = buf[6] = 0;
 
@@ -869,6 +994,8 @@ static void pl2303_set_termios(struct tty_struct *tty,
 		tty_encode_baud_rate(tty, baud, baud);
 
 =======
+=======
+>>>>>>> v3.18
 	if (C_CRTSCTS(tty)) {
 		if (spriv->quirks & PL2303_QUIRK_LEGACY)
 			pl2303_vendor_write(serial, 0x0, 0x41);
@@ -878,6 +1005,9 @@ static void pl2303_set_termios(struct tty_struct *tty,
 		pl2303_vendor_write(serial, 0x0, 0x0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(buf);
 }
@@ -890,7 +1020,10 @@ static void pl2303_dtr_rts(struct usb_serial_port *port, int on)
 
 	spin_lock_irqsave(&priv->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Change DTR and RTS */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (on)
@@ -900,6 +1033,10 @@ static void pl2303_dtr_rts(struct usb_serial_port *port, int on)
 	control = priv->line_control;
 	spin_unlock_irqrestore(&priv->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -919,7 +1056,11 @@ static int pl2303_open(struct tty_struct *tty, struct usb_serial_port *port)
 	int result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spriv->type != HX) {
+=======
+	if (spriv->quirks & PL2303_QUIRK_LEGACY) {
+>>>>>>> v3.18
 =======
 	if (spriv->quirks & PL2303_QUIRK_LEGACY) {
 >>>>>>> v3.18
@@ -928,8 +1069,13 @@ static int pl2303_open(struct tty_struct *tty, struct usb_serial_port *port)
 	} else {
 		/* reset upstream data pipes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pl2303_vendor_write(8, 0, serial);
 		pl2303_vendor_write(9, 0, serial);
+=======
+		pl2303_vendor_write(serial, 8, 0);
+		pl2303_vendor_write(serial, 9, 0);
+>>>>>>> v3.18
 =======
 		pl2303_vendor_write(serial, 8, 0);
 		pl2303_vendor_write(serial, 9, 0);
@@ -943,8 +1089,13 @@ static int pl2303_open(struct tty_struct *tty, struct usb_serial_port *port)
 	result = usb_submit_urb(port->interrupt_in_urb, GFP_KERNEL);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&port->dev, "%s - failed submitting interrupt urb,"
 			" error %d\n", __func__, result);
+=======
+		dev_err(&port->dev, "failed to submit interrupt urb: %d\n",
+			result);
+>>>>>>> v3.18
 =======
 		dev_err(&port->dev, "failed to submit interrupt urb: %d\n",
 			result);
@@ -959,7 +1110,10 @@ static int pl2303_open(struct tty_struct *tty, struct usb_serial_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->port.drain_delay = 256;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1023,6 +1177,7 @@ static int pl2303_carrier_raised(struct usb_serial_port *port)
 {
 	struct pl2303_private *priv = usb_get_serial_port_data(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->line_status & UART_DCD)
 		return 1;
 	return 0;
@@ -1066,10 +1221,15 @@ static int pl2303_tiocmiwait(struct tty_struct *tty, unsigned long arg)
 	}
 	/* NOTREACHED */
 =======
+=======
+>>>>>>> v3.18
 
 	if (priv->line_status & UART_DCD)
 		return 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1081,8 +1241,11 @@ static int pl2303_ioctl(struct tty_struct *tty,
 	struct usb_serial_port *port = tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s cmd = 0x%04x\n", __func__, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {
@@ -1090,8 +1253,13 @@ static int pl2303_ioctl(struct tty_struct *tty,
 		memset(&ser, 0, sizeof ser);
 		ser.type = PORT_16654;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ser.line = port->serial->minor;
 		ser.port = port->number;
+=======
+		ser.line = port->minor;
+		ser.port = port->port_number;
+>>>>>>> v3.18
 =======
 		ser.line = port->minor;
 		ser.port = port->port_number;
@@ -1104,9 +1272,15 @@ static int pl2303_ioctl(struct tty_struct *tty,
 		return 0;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&port->dev, "%s not supported = 0x%04x\n", __func__, cmd);
 		break;
 	}
+=======
+		break;
+	}
+
+>>>>>>> v3.18
 =======
 		break;
 	}
@@ -1127,6 +1301,10 @@ static void pl2303_break_ctl(struct tty_struct *tty, int break_state)
 	else
 		state = BREAK_ON;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1144,6 +1322,7 @@ static void pl2303_update_line_status(struct usb_serial_port *port,
 				      unsigned char *data,
 				      unsigned int actual_length)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	struct pl2303_private *priv = usb_get_serial_port_data(port);
@@ -1188,6 +1367,8 @@ static void pl2303_update_line_status(struct usb_serial_port *port,
 				priv->line_status & UART_DCD);
 	tty_kref_put(tty);
 =======
+=======
+>>>>>>> v3.18
 	struct usb_serial *serial = port->serial;
 	struct pl2303_serial_private *spriv = usb_get_serial_data(serial);
 	struct pl2303_private *priv = usb_get_serial_port_data(port);
@@ -1233,6 +1414,9 @@ static void pl2303_update_line_status(struct usb_serial_port *port,
 
 		wake_up_interruptible(&port->port.delta_msr_wait);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1269,16 +1453,22 @@ static void pl2303_read_int_callback(struct urb *urb)
 exit:
 	retval = usb_submit_urb(urb, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval)
 		dev_err(&port->dev,
 			"%s - usb_submit_urb failed with result %d\n",
 			__func__, retval);
 =======
+=======
+>>>>>>> v3.18
 	if (retval) {
 		dev_err(&port->dev,
 			"%s - usb_submit_urb failed with result %d\n",
 			__func__, retval);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1298,7 +1488,10 @@ static void pl2303_process_read_urb(struct urb *urb)
 	priv->line_status &= ~UART_STATE_TRANSIENT_MASK;
 	spin_unlock_irqrestore(&priv->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_interruptible(&port->port.delta_msr_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1306,13 +1499,19 @@ static void pl2303_process_read_urb(struct urb *urb)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* break takes precedence over parity, */
 	/* which takes precedence over framing errors */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Break takes precedence over parity, which takes precedence over
 	 * framing errors.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (line_status & UART_BREAK_ERROR)
 		tty_flag = TTY_BREAK;
@@ -1321,13 +1520,19 @@ static void pl2303_process_read_urb(struct urb *urb)
 	else if (line_status & UART_FRAME_ERROR)
 		tty_flag = TTY_FRAME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - tty_flag = %d\n", __func__, tty_flag);
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (tty_flag != TTY_NORMAL)
 		dev_dbg(&port->dev, "%s - tty_flag = %d\n", __func__,
 								tty_flag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* overrun is special, not associated with a char */
 	if (line_status & UART_OVERRUN_ERROR)
@@ -1347,7 +1552,10 @@ static void pl2303_process_read_urb(struct urb *urb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* All of the device info needed for the PL2303 SIO serial converter */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct usb_serial_driver pl2303_device = {
@@ -1362,7 +1570,11 @@ static struct usb_serial_driver pl2303_device = {
 	.open =			pl2303_open,
 	.close =		pl2303_close,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dtr_rts = 		pl2303_dtr_rts,
+=======
+	.dtr_rts =		pl2303_dtr_rts,
+>>>>>>> v3.18
 =======
 	.dtr_rts =		pl2303_dtr_rts,
 >>>>>>> v3.18
@@ -1373,14 +1585,20 @@ static struct usb_serial_driver pl2303_device = {
 	.tiocmget =		pl2303_tiocmget,
 	.tiocmset =		pl2303_tiocmset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tiocmiwait =		pl2303_tiocmiwait,
 	.process_read_urb =	pl2303_process_read_urb,
 	.read_int_callback =	pl2303_read_int_callback,
 =======
+=======
+>>>>>>> v3.18
 	.tiocmiwait =		usb_serial_generic_tiocmiwait,
 	.process_read_urb =	pl2303_process_read_urb,
 	.read_int_callback =	pl2303_read_int_callback,
 	.probe =		pl2303_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.attach =		pl2303_startup,
 	.release =		pl2303_release,
@@ -1395,7 +1613,11 @@ static struct usb_serial_driver * const serial_drivers[] = {
 module_usb_serial_driver(serial_drivers, id_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION(DRIVER_DESC);
+=======
+MODULE_DESCRIPTION("Prolific PL2303 USB to serial adaptor driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Prolific PL2303 USB to serial adaptor driver");
 >>>>>>> v3.18

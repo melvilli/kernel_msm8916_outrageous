@@ -13,8 +13,12 @@ void show_mem(unsigned int filter)
 {
 	pg_data_t *pgdat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long total = 0, reserved = 0, shared = 0,
 		nonshared = 0, highmem = 0;
+=======
+	unsigned long total = 0, reserved = 0, highmem = 0;
+>>>>>>> v3.18
 =======
 	unsigned long total = 0, reserved = 0, highmem = 0;
 >>>>>>> v3.18
@@ -22,6 +26,7 @@ void show_mem(unsigned int filter)
 	printk("Mem-Info:\n");
 	show_free_areas(filter);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (filter & SHOW_MEM_FILTER_PAGE_COUNT)
 		return;
@@ -54,6 +59,8 @@ void show_mem(unsigned int filter)
 
 			total++;
 =======
+=======
+>>>>>>> v3.18
 	for_each_online_pgdat(pgdat) {
 		unsigned long flags;
 		int zoneid;
@@ -69,12 +76,16 @@ void show_mem(unsigned int filter)
 
 			if (is_highmem_idx(zoneid))
 				highmem += zone->present_pages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		pgdat_resize_unlock(pgdat, &flags);
 	}
 
 	printk("%lu pages RAM\n", total);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_HIGHMEM
 	printk("%lu pages HighMem\n", highmem);
@@ -86,11 +97,21 @@ void show_mem(unsigned int filter)
 	printk("%lu pages HighMem/MovableOnly\n", highmem);
 	printk("%lu pages reserved\n", reserved);
 >>>>>>> v3.18
+=======
+	printk("%lu pages HighMem/MovableOnly\n", highmem);
+	printk("%lu pages reserved\n", reserved);
+>>>>>>> v3.18
 #ifdef CONFIG_QUICKLIST
 	printk("%lu pages in pagetable cache\n",
 		quicklist_total_size());
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MEMORY_FAILURE
+	printk("%lu pages hwpoisoned\n", atomic_long_read(&num_poisoned_pages));
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MEMORY_FAILURE
 	printk("%lu pages hwpoisoned\n", atomic_long_read(&num_poisoned_pages));

@@ -25,6 +25,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/vga.h>
 
@@ -35,10 +36,15 @@ struct nv04_devinit_priv {
 	int owner;
 };
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/vga.h>
 
 #include "fbmem.h"
 #include "nv04.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void
@@ -51,7 +57,11 @@ nv04_devinit_meminit(struct nouveau_devinit *devinit)
 
 	/* Map the framebuffer aperture */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fb = fbmem_init(nv_device(priv)->pdev);
+=======
+	fb = fbmem_init(nv_device(priv));
+>>>>>>> v3.18
 =======
 	fb = fbmem_init(nv_device(priv));
 >>>>>>> v3.18
@@ -123,6 +133,7 @@ nv04_devinit_meminit(struct nouveau_devinit *devinit)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv04_devinit_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_oclass *oclass, void *data, u32 size,
 		  struct nouveau_object **pobject)
@@ -151,6 +162,8 @@ nv04_devinit_dtor(struct nouveau_object *object)
 
 	nouveau_devinit_destroy(&priv->base);
 =======
+=======
+>>>>>>> v3.18
 powerctrl_1_shift(int chip_version, int reg)
 {
 	int shift = -4;
@@ -448,6 +461,9 @@ nv04_devinit_fini(struct nouveau_object *object, bool suspend)
 	nv_wrvgaowner(priv, 0);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -472,6 +488,7 @@ nv04_devinit_init(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 nv04_devinit_fini(struct nouveau_object *object, bool suspend)
 {
@@ -494,6 +511,8 @@ nv04_devinit_oclass = {
 	.handle = NV_SUBDEV(DEVINIT, 0x04),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 void
 nv04_devinit_dtor(struct nouveau_object *object)
 {
@@ -526,6 +545,9 @@ struct nouveau_oclass *
 nv04_devinit_oclass = &(struct nouveau_devinit_impl) {
 	.base.handle = NV_SUBDEV(DEVINIT, 0x04),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv04_devinit_ctor,
 		.dtor = nv04_devinit_dtor,
@@ -533,7 +555,13 @@ nv04_devinit_oclass = &(struct nouveau_devinit_impl) {
 		.fini = nv04_devinit_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.meminit = nv04_devinit_meminit,
+	.pll_set = nv04_devinit_pll_set,
+}.base;
+>>>>>>> v3.18
 =======
 	.meminit = nv04_devinit_meminit,
 	.pll_set = nv04_devinit_pll_set,

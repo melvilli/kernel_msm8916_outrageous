@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/gpu/ion/ion_mem_pool.c
+=======
+ * drivers/staging/android/ion/ion_mem_pool.c
+>>>>>>> v3.18
 =======
  * drivers/staging/android/ion/ion_mem_pool.c
 >>>>>>> v3.18
@@ -27,13 +31,17 @@
 #include <linux/slab.h>
 #include <linux/swap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ion_priv.h"
 
 static void *ion_page_pool_alloc_pages(struct ion_page_pool *pool)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct page *page;
 
@@ -51,6 +59,8 @@ error_free_pages:
 	__free_pages(page, pool->order);
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct page *page = alloc_pages(pool->gfp_mask, pool->order);
 
 	if (!page)
@@ -58,6 +68,9 @@ error_free_pages:
 	ion_pages_sync_for_device(NULL, page, PAGE_SIZE << pool->order,
 						DMA_BIDIRECTIONAL);
 	return page;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -100,7 +113,11 @@ static struct page *ion_page_pool_remove(struct ion_page_pool *pool, bool high)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *ion_page_pool_alloc(struct ion_page_pool *pool, bool *from_pool)
+=======
+struct page *ion_page_pool_alloc(struct ion_page_pool *pool)
+>>>>>>> v3.18
 =======
 struct page *ion_page_pool_alloc(struct ion_page_pool *pool)
 >>>>>>> v3.18
@@ -109,6 +126,7 @@ struct page *ion_page_pool_alloc(struct ion_page_pool *pool)
 
 	BUG_ON(!pool);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	*from_pool = true;
 
@@ -124,6 +142,8 @@ struct page *ion_page_pool_alloc(struct ion_page_pool *pool)
 		*from_pool = false;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&pool->mutex);
 	if (pool->high_count)
 		page = ion_page_pool_remove(pool, true);
@@ -134,6 +154,9 @@ struct page *ion_page_pool_alloc(struct ion_page_pool *pool)
 	if (!page)
 		page = ion_page_pool_alloc_pages(pool);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }
@@ -143,6 +166,11 @@ void ion_page_pool_free(struct ion_page_pool *pool, struct page *page)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(pool->order != compound_order(page));
+
+>>>>>>> v3.18
 =======
 	BUG_ON(pool->order != compound_order(page));
 
@@ -155,6 +183,7 @@ void ion_page_pool_free(struct ion_page_pool *pool, struct page *page)
 static int ion_page_pool_total(struct ion_page_pool *pool, bool high)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int total = 0;
 
 	total += high ? (pool->high_count + pool->low_count) *
@@ -162,12 +191,17 @@ static int ion_page_pool_total(struct ion_page_pool *pool, bool high)
 			pool->low_count * (1 << pool->order);
 	return total;
 =======
+=======
+>>>>>>> v3.18
 	int count = pool->low_count;
 
 	if (high)
 		count += pool->high_count;
 
 	return count << pool->order;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -175,7 +209,11 @@ int ion_page_pool_shrink(struct ion_page_pool *pool, gfp_t gfp_mask,
 				int nr_to_scan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	int freed;
+>>>>>>> v3.18
 =======
 	int freed;
 >>>>>>> v3.18
@@ -187,12 +225,18 @@ int ion_page_pool_shrink(struct ion_page_pool *pool, gfp_t gfp_mask,
 		high = !!(gfp_mask & __GFP_HIGHMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < nr_to_scan; i++) {
 =======
+=======
+>>>>>>> v3.18
 	if (nr_to_scan == 0)
 		return ion_page_pool_total(pool, high);
 
 	for (freed = 0; freed < nr_to_scan; freed++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct page *page;
 
@@ -210,7 +254,11 @@ int ion_page_pool_shrink(struct ion_page_pool *pool, gfp_t gfp_mask,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ion_page_pool_total(pool, high);
+=======
+	return freed;
+>>>>>>> v3.18
 =======
 	return freed;
 >>>>>>> v3.18
@@ -227,7 +275,11 @@ struct ion_page_pool *ion_page_pool_create(gfp_t gfp_mask, unsigned int order)
 	INIT_LIST_HEAD(&pool->low_items);
 	INIT_LIST_HEAD(&pool->high_items);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pool->gfp_mask = gfp_mask;
+=======
+	pool->gfp_mask = gfp_mask | __GFP_COMP;
+>>>>>>> v3.18
 =======
 	pool->gfp_mask = gfp_mask | __GFP_COMP;
 >>>>>>> v3.18

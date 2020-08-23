@@ -23,7 +23,10 @@
 #include <linux/errno.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -49,10 +52,13 @@
 #include "gianfar.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void gfar_start(struct net_device *dev);
 extern int gfar_clean_rx_ring(struct gfar_priv_rx_q *rx_queue,
 			      int rx_work_limit);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define GFAR_MAX_COAL_USECS 0xffff
@@ -372,7 +378,11 @@ static int gfar_scoalesce(struct net_device *dev,
 {
 	struct gfar_private *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
+=======
+	int i, err = 0;
+>>>>>>> v3.18
 =======
 	int i, err = 0;
 >>>>>>> v3.18
@@ -380,6 +390,7 @@ static int gfar_scoalesce(struct net_device *dev,
 	if (!(priv->device_flags & FSL_GIANFAR_DEV_HAS_COALESCE))
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set up rx coalescing */
 	/* As of now, we will enable/disable coalescing for all
@@ -395,6 +406,8 @@ static int gfar_scoalesce(struct net_device *dev,
 			priv->rx_queue[i]->rxcoalescing = 1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (NULL == priv->phydev)
@@ -414,7 +427,10 @@ static int gfar_scoalesce(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Check the bounds of the values */
 	if (cvals->tx_coalesce_usecs > GFAR_MAX_COAL_USECS) {
 		netdev_info(dev, "Coalescing is limited to %d microseconds\n",
@@ -441,6 +457,9 @@ static int gfar_scoalesce(struct net_device *dev,
 			priv->rx_queue[i]->rxcoalescing = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < priv->num_rx_queues; i++) {
 		priv->rx_queue[i]->rxic = mk_ic_value(
@@ -459,6 +478,7 @@ static int gfar_scoalesce(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check the bounds of the values */
 	if (cvals->tx_coalesce_usecs > GFAR_MAX_COAL_USECS) {
 		netdev_info(dev, "Coalescing is limited to %d microseconds\n",
@@ -474,6 +494,8 @@ static int gfar_scoalesce(struct net_device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	for (i = 0; i < priv->num_tx_queues; i++) {
 		priv->tx_queue[i]->txic = mk_ic_value(
 			cvals->tx_max_coalesced_frames,
@@ -481,10 +503,13 @@ static int gfar_scoalesce(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfar_configure_coalescing_all(priv);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (dev->flags & IFF_UP) {
 		stop_gfar(dev);
 		err = startup_gfar(dev);
@@ -495,6 +520,9 @@ static int gfar_scoalesce(struct net_device *dev,
 	clear_bit_unlock(GFAR_RESETTING, &priv->state);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -527,9 +555,13 @@ static void gfar_gringparam(struct net_device *dev,
 
 /* Change the current ring parameters, stopping the controller if
 <<<<<<< HEAD
+<<<<<<< HEAD
  * necessary so that we don't mess things up while we're in
  * motion.  We wait for the ring to be clean before reallocating
  * the rings.
+=======
+ * necessary so that we don't mess things up while we're in motion.
+>>>>>>> v3.18
 =======
  * necessary so that we don't mess things up while we're in motion.
 >>>>>>> v3.18
@@ -539,7 +571,11 @@ static int gfar_sringparam(struct net_device *dev,
 {
 	struct gfar_private *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0, i = 0;
+=======
+	int err = 0, i;
+>>>>>>> v3.18
 =======
 	int err = 0, i;
 >>>>>>> v3.18
@@ -560,6 +596,7 @@ static int gfar_sringparam(struct net_device *dev,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (dev->flags & IFF_UP) {
@@ -642,6 +679,8 @@ int gfar_set_features(struct net_device *dev, netdev_features_t features)
 		netif_tx_wake_all_queues(dev);
 	}
 =======
+=======
+>>>>>>> v3.18
 	while (test_and_set_bit_lock(GFAR_RESETTING, &priv->state))
 		cpu_relax();
 
@@ -764,6 +803,9 @@ int gfar_set_features(struct net_device *dev, netdev_features_t features)
 
 	clear_bit_unlock(GFAR_RESETTING, &priv->state);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1009,11 +1051,17 @@ static int gfar_set_hash_opts(struct gfar_private *priv,
 static int gfar_check_filer_hardware(struct gfar_private *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gfar __iomem *regs = NULL;
 	u32 i;
 
 	regs = priv->gfargrp[0].regs;
 
+=======
+	struct gfar __iomem *regs = priv->gfargrp[0].regs;
+	u32 i;
+
+>>>>>>> v3.18
 =======
 	struct gfar __iomem *regs = priv->gfargrp[0].regs;
 	u32 i;
@@ -1053,7 +1101,11 @@ static int gfar_check_filer_hardware(struct gfar_private *priv)
 	 * to the first 4 Layer 4 Bytes
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->rbifx = 0xC0C1C2C3;
+=======
+	gfar_write(&regs->rbifx, 0xC0C1C2C3);
+>>>>>>> v3.18
 =======
 	gfar_write(&regs->rbifx, 0xC0C1C2C3);
 >>>>>>> v3.18
@@ -1185,11 +1237,14 @@ static void gfar_set_basic_ip(struct ethtool_tcpip4_spec *value,
 			      struct filer_table *tab)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfar_set_attribute(value->ip4src, mask->ip4src, RQFCR_PID_SIA, tab);
 	gfar_set_attribute(value->ip4dst, mask->ip4dst, RQFCR_PID_DIA, tab);
 	gfar_set_attribute(value->pdst, mask->pdst, RQFCR_PID_DPT, tab);
 	gfar_set_attribute(value->psrc, mask->psrc, RQFCR_PID_SPT, tab);
 =======
+=======
+>>>>>>> v3.18
 	gfar_set_attribute(be32_to_cpu(value->ip4src),
 			   be32_to_cpu(mask->ip4src),
 			   RQFCR_PID_SIA, tab);
@@ -1202,6 +1257,9 @@ static void gfar_set_basic_ip(struct ethtool_tcpip4_spec *value,
 	gfar_set_attribute(be16_to_cpu(value->psrc),
 			   be16_to_cpu(mask->psrc),
 			   RQFCR_PID_SPT, tab);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gfar_set_attribute(value->tos, mask->tos, RQFCR_PID_TOS, tab);
 }
@@ -1212,6 +1270,7 @@ static void gfar_set_user_ip(struct ethtool_usrip4_spec *value,
 			     struct filer_table *tab)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfar_set_attribute(value->ip4src, mask->ip4src, RQFCR_PID_SIA, tab);
 	gfar_set_attribute(value->ip4dst, mask->ip4dst, RQFCR_PID_DIA, tab);
 	gfar_set_attribute(value->tos, mask->tos, RQFCR_PID_TOS, tab);
@@ -1219,6 +1278,8 @@ static void gfar_set_user_ip(struct ethtool_usrip4_spec *value,
 	gfar_set_attribute(value->l4_4_bytes, mask->l4_4_bytes, RQFCR_PID_ARB,
 			   tab);
 =======
+=======
+>>>>>>> v3.18
 	gfar_set_attribute(be32_to_cpu(value->ip4src),
 			   be32_to_cpu(mask->ip4src),
 			   RQFCR_PID_SIA, tab);
@@ -1230,6 +1291,9 @@ static void gfar_set_user_ip(struct ethtool_usrip4_spec *value,
 	gfar_set_attribute(be32_to_cpu(value->l4_4_bytes),
 			   be32_to_cpu(mask->l4_4_bytes),
 			   RQFCR_PID_ARB, tab);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -1298,8 +1362,11 @@ static void gfar_set_ether(struct ethhdr *value, struct ethhdr *mask,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfar_set_attribute(value->h_proto, mask->h_proto, RQFCR_PID_ETY, tab);
 =======
+=======
+>>>>>>> v3.18
 	gfar_set_attribute(be16_to_cpu(value->h_proto),
 			   be16_to_cpu(mask->h_proto),
 			   RQFCR_PID_ETY, tab);
@@ -1335,6 +1402,9 @@ static inline u32 vlan_tci_priom(struct ethtool_rx_flow_spec *rule)
 {
 	return (be16_to_cpu(rule->m_ext.vlan_tci) & VLAN_PRIO_MASK) >>
 		VLAN_PRIO_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1350,20 +1420,27 @@ static int gfar_convert_to_filer(struct ethtool_rx_flow_spec *rule,
 
 	/* Check if vlan is wanted */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rule->flow_type & FLOW_EXT) && (rule->m_ext.vlan_tci != 0xFFFF)) {
 		if (!rule->m_ext.vlan_tci)
 			rule->m_ext.vlan_tci = 0xFFFF;
 =======
+=======
+>>>>>>> v3.18
 	if ((rule->flow_type & FLOW_EXT) &&
 	    (rule->m_ext.vlan_tci != cpu_to_be16(0xFFFF))) {
 		if (!rule->m_ext.vlan_tci)
 			rule->m_ext.vlan_tci = cpu_to_be16(0xFFFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		vlan = RQFPR_VLN;
 		vlan_mask = RQFPR_VLN;
 
 		/* Separate the fields */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		id = rule->h_ext.vlan_tci & VLAN_VID_MASK;
 		id_mask = rule->m_ext.vlan_tci & VLAN_VID_MASK;
@@ -1374,12 +1451,17 @@ static int gfar_convert_to_filer(struct ethtool_rx_flow_spec *rule,
 		prio_mask = (rule->m_ext.vlan_tci & VLAN_PRIO_MASK) >>
 			    VLAN_PRIO_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 		id = vlan_tci_vid(rule);
 		id_mask = vlan_tci_vidm(rule);
 		cfi = vlan_tci_cfi(rule);
 		cfi_mask = vlan_tci_cfim(rule);
 		prio = vlan_tci_prio(rule);
 		prio_mask = vlan_tci_priom(rule);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (cfi == VLAN_TAG_PRESENT && cfi_mask == VLAN_TAG_PRESENT) {
@@ -1780,9 +1862,12 @@ static int gfar_write_filer_table(struct gfar_private *priv,
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Avoid inconsistent filer table to be processed */
 	lock_rx_qs(priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Fill regular entries */
@@ -1798,8 +1883,11 @@ static int gfar_write_filer_table(struct gfar_private *priv,
 	gfar_write_filer(priv, i, 0x20, 0x0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unlock_rx_qs(priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1885,15 +1973,21 @@ static void gfar_invert_masks(struct ethtool_rx_flow_spec *flow)
 		flow->m_u.hdata[i] ^= 0xFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flow->m_ext.vlan_etype ^= 0xFFFF;
 	flow->m_ext.vlan_tci ^= 0xFFFF;
 	flow->m_ext.data[0] ^= ~0;
 	flow->m_ext.data[1] ^= ~0;
 =======
+=======
+>>>>>>> v3.18
 	flow->m_ext.vlan_etype ^= cpu_to_be16(0xFFFF);
 	flow->m_ext.vlan_tci ^= cpu_to_be16(0xFFFF);
 	flow->m_ext.data[0] ^= cpu_to_be32(~0);
 	flow->m_ext.data[1] ^= cpu_to_be32(~0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2014,6 +2108,12 @@ static int gfar_set_nfc(struct net_device *dev, struct ethtool_rxnfc *cmd)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (test_bit(GFAR_RESETTING, &priv->state))
+		return -EBUSY;
+
+>>>>>>> v3.18
 =======
 	if (test_bit(GFAR_RESETTING, &priv->state))
 		return -EBUSY;
@@ -2110,6 +2210,11 @@ const struct ethtool_ops gfar_ethtool_ops = {
 	.get_ringparam = gfar_gringparam,
 	.set_ringparam = gfar_sringparam,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_pauseparam = gfar_gpauseparam,
+	.set_pauseparam = gfar_spauseparam,
+>>>>>>> v3.18
 =======
 	.get_pauseparam = gfar_gpauseparam,
 	.set_pauseparam = gfar_spauseparam,

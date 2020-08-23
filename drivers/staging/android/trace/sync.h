@@ -6,7 +6,11 @@
 #define _TRACE_SYNC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sync.h>
+=======
+#include "../sync.h"
+>>>>>>> v3.18
 =======
 #include "../sync.h"
 >>>>>>> v3.18
@@ -50,7 +54,11 @@ TRACE_EVENT(sync_wait,
 	TP_fast_assign(
 			__assign_str(name, fence->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__entry->status = fence->status;
+=======
+			__entry->status = atomic_read(&fence->status);
+>>>>>>> v3.18
 =======
 			__entry->status = atomic_read(&fence->status);
 >>>>>>> v3.18
@@ -63,7 +71,11 @@ TRACE_EVENT(sync_wait,
 
 TRACE_EVENT(sync_pt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct sync_pt *pt),
+=======
+	TP_PROTO(struct fence *pt),
+>>>>>>> v3.18
 =======
 	TP_PROTO(struct fence *pt),
 >>>>>>> v3.18
@@ -72,7 +84,11 @@ TRACE_EVENT(sync_pt,
 
 	TP_STRUCT__entry(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__string(timeline, pt->parent->name)
+=======
+		__string(timeline, pt->ops->get_timeline_name(pt))
+>>>>>>> v3.18
 =======
 		__string(timeline, pt->ops->get_timeline_name(pt))
 >>>>>>> v3.18
@@ -81,9 +97,15 @@ TRACE_EVENT(sync_pt,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__assign_str(timeline, pt->parent->name);
 		if (pt->parent->ops->pt_value_str) {
 			pt->parent->ops->pt_value_str(pt, __entry->value,
+=======
+		__assign_str(timeline, pt->ops->get_timeline_name(pt));
+		if (pt->ops->fence_value_str) {
+			pt->ops->fence_value_str(pt, __entry->value,
+>>>>>>> v3.18
 =======
 		__assign_str(timeline, pt->ops->get_timeline_name(pt));
 		if (pt->ops->fence_value_str) {

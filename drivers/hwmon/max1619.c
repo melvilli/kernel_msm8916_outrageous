@@ -3,7 +3,11 @@
  *             monitoring
  * Copyright (C) 2003-2004 Oleksij Rempel <bug-track@fisher-privat.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *                         Jean Delvare <khali@linux-fr.org>
+=======
+ *                         Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *                         Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -24,6 +28,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -31,6 +36,10 @@
  */
 
 
+=======
+ */
+
+>>>>>>> v3.18
 =======
  */
 
@@ -86,6 +95,7 @@ static int temp_to_reg(int val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Functions declaration
  */
@@ -119,6 +129,8 @@ static struct i2c_driver max1619_driver = {
 	.detect		= max1619_detect,
 	.address_list	= normal_i2c,
 =======
+=======
+>>>>>>> v3.18
 enum temp_index {
 	t_input1 = 0,
 	t_input2,
@@ -127,6 +139,9 @@ enum temp_index {
 	t_crit2,
 	t_hyst2,
 	t_num_regs
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -136,7 +151,11 @@ enum temp_index {
 
 struct max1619_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -146,6 +165,7 @@ struct max1619_data {
 
 	/* registers values */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 temp_input1; /* local */
 	u8 temp_input2, temp_low2, temp_high2; /* remote */
 	u8 temp_crit2;
@@ -154,6 +174,8 @@ struct max1619_data {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u8 temp[t_num_regs];	/* index with enum temp_index */
 	u8 alarms;
 };
@@ -203,11 +225,15 @@ static struct max1619_data *max1619_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Sysfs stuff
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define show_temp(value) \
 static ssize_t show_##value(struct device *dev, struct device_attribute *attr, \
@@ -247,6 +273,8 @@ set_temp2(temp_high2, MAX1619_REG_W_REMOTE_HIGH);
 set_temp2(temp_crit2, MAX1619_REG_W_REMOTE_CRIT);
 set_temp2(temp_hyst2, MAX1619_REG_W_TCRIT_HYST);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_temp(struct device *dev, struct device_attribute *devattr,
 			 char *buf)
 {
@@ -274,6 +302,9 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *devattr,
 	mutex_unlock(&data->update_lock);
 	return count;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t show_alarms(struct device *dev, struct device_attribute *attr,
@@ -292,6 +323,7 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(temp1_input, S_IRUGO, show_temp_input1, NULL);
 static DEVICE_ATTR(temp2_input, S_IRUGO, show_temp_input2, NULL);
 static DEVICE_ATTR(temp2_min, S_IWUSR | S_IRUGO, show_temp_low2,
@@ -303,6 +335,8 @@ static DEVICE_ATTR(temp2_crit, S_IWUSR | S_IRUGO, show_temp_crit2,
 static DEVICE_ATTR(temp2_crit_hyst, S_IWUSR | S_IRUGO, show_temp_hyst2,
 	set_temp_hyst2);
 =======
+=======
+>>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, show_temp, NULL, t_input1);
 static SENSOR_DEVICE_ATTR(temp2_input, S_IRUGO, show_temp, NULL, t_input2);
 static SENSOR_DEVICE_ATTR(temp2_min, S_IWUSR | S_IRUGO, show_temp, set_temp,
@@ -314,6 +348,9 @@ static SENSOR_DEVICE_ATTR(temp2_crit, S_IWUSR | S_IRUGO, show_temp, set_temp,
 static SENSOR_DEVICE_ATTR(temp2_crit_hyst, S_IWUSR | S_IRUGO, show_temp,
 			  set_temp, t_hyst2);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(alarms, S_IRUGO, show_alarms, NULL);
 static SENSOR_DEVICE_ATTR(temp2_crit_alarm, S_IRUGO, show_alarm, NULL, 1);
@@ -321,6 +358,7 @@ static SENSOR_DEVICE_ATTR(temp2_fault, S_IRUGO, show_alarm, NULL, 2);
 static SENSOR_DEVICE_ATTR(temp2_min_alarm, S_IRUGO, show_alarm, NULL, 3);
 static SENSOR_DEVICE_ATTR(temp2_max_alarm, S_IRUGO, show_alarm, NULL, 4);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct attribute *max1619_attributes[] = {
 	&dev_attr_temp1_input.attr,
@@ -330,6 +368,8 @@ static struct attribute *max1619_attributes[] = {
 	&dev_attr_temp2_crit.attr,
 	&dev_attr_temp2_crit_hyst.attr,
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *max1619_attrs[] = {
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 	&sensor_dev_attr_temp2_input.dev_attr.attr,
@@ -337,6 +377,9 @@ static struct attribute *max1619_attrs[] = {
 	&sensor_dev_attr_temp2_max.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit_hyst.dev_attr.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	&dev_attr_alarms.attr,
@@ -347,6 +390,7 @@ static struct attribute *max1619_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group max1619_group = {
 	.attrs = max1619_attributes,
@@ -355,6 +399,9 @@ static const struct attribute_group max1619_group = {
 /*
  * Real code
  */
+=======
+ATTRIBUTE_GROUPS(max1619);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(max1619);
 >>>>>>> v3.18
@@ -396,6 +443,7 @@ static int max1619_detect(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max1619_probe(struct i2c_client *new_client,
 			 const struct i2c_device_id *id)
 {
@@ -434,6 +482,8 @@ exit_remove_files:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void max1619_init_client(struct i2c_client *client)
 {
 	u8 config;
@@ -449,6 +499,7 @@ static void max1619_init_client(struct i2c_client *client)
 					  config & 0xBF); /* run */
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int max1619_remove(struct i2c_client *client)
 {
@@ -498,6 +549,8 @@ module_i2c_driver(max1619_driver);
 MODULE_AUTHOR("Oleksij Rempel <bug-track@fisher-privat.net> and "
 	"Jean Delvare <khali@linux-fr.org>");
 =======
+=======
+>>>>>>> v3.18
 static int max1619_probe(struct i2c_client *new_client,
 			 const struct i2c_device_id *id)
 {
@@ -542,6 +595,9 @@ static struct i2c_driver max1619_driver = {
 module_i2c_driver(max1619_driver);
 
 MODULE_AUTHOR("Oleksij Rempel <bug-track@fisher-privat.net>, Jean Delvare <jdelvare@suse.de>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("MAX1619 sensor driver");
 MODULE_LICENSE("GPL");

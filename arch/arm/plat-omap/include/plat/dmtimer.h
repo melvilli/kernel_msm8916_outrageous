@@ -281,15 +281,21 @@ static inline u32 __omap_dm_timer_read(struct omap_dm_timer *timer, u32 reg,
 {
 	if (posted)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (__raw_readl(timer->pend) & (reg >> WPSHIFT))
 			cpu_relax();
 
 	return __raw_readl(timer->func_base + (reg & 0xff));
 =======
+=======
+>>>>>>> v3.18
 		while (readl_relaxed(timer->pend) & (reg >> WPSHIFT))
 			cpu_relax();
 
 	return readl_relaxed(timer->func_base + (reg & 0xff));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -298,15 +304,21 @@ static inline void __omap_dm_timer_write(struct omap_dm_timer *timer,
 {
 	if (posted)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (__raw_readl(timer->pend) & (reg >> WPSHIFT))
 			cpu_relax();
 
 	__raw_writel(val, timer->func_base + (reg & 0xff));
 =======
+=======
+>>>>>>> v3.18
 		while (readl_relaxed(timer->pend) & (reg >> WPSHIFT))
 			cpu_relax();
 
 	writel_relaxed(val, timer->func_base + (reg & 0xff));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -316,7 +328,11 @@ static inline void __omap_dm_timer_init_regs(struct omap_dm_timer *timer)
 
 	/* Assume v1 ip if bits [31:16] are zero */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tidr = __raw_readl(timer->io_base);
+=======
+	tidr = readl_relaxed(timer->io_base);
+>>>>>>> v3.18
 =======
 	tidr = readl_relaxed(timer->io_base);
 >>>>>>> v3.18
@@ -355,14 +371,20 @@ static inline void __omap_dm_timer_enable_posted(struct omap_dm_timer *timer)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (timer->errata & OMAP_TIMER_ERRATA_I103_I767)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	if (timer->errata & OMAP_TIMER_ERRATA_I103_I767) {
 		timer->posted = OMAP_TIMER_NONPOSTED;
 		__omap_dm_timer_write(timer, OMAP_TIMER_IF_CTRL_REG, 0, 0);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__omap_dm_timer_write(timer, OMAP_TIMER_IF_CTRL_REG,
@@ -409,7 +431,11 @@ static inline void __omap_dm_timer_stop(struct omap_dm_timer *timer,
 
 	/* Ack possibly pending interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(OMAP_TIMER_INT_OVERFLOW, timer->irq_stat);
+=======
+	writel_relaxed(OMAP_TIMER_INT_OVERFLOW, timer->irq_stat);
+>>>>>>> v3.18
 =======
 	writel_relaxed(OMAP_TIMER_INT_OVERFLOW, timer->irq_stat);
 >>>>>>> v3.18
@@ -427,7 +453,11 @@ static inline void __omap_dm_timer_int_enable(struct omap_dm_timer *timer,
 						unsigned int value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(value, timer->irq_ena);
+=======
+	writel_relaxed(value, timer->irq_ena);
+>>>>>>> v3.18
 =======
 	writel_relaxed(value, timer->irq_ena);
 >>>>>>> v3.18
@@ -444,7 +474,11 @@ static inline void __omap_dm_timer_write_status(struct omap_dm_timer *timer,
 						unsigned int value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(value, timer->irq_stat);
+=======
+	writel_relaxed(value, timer->irq_stat);
+>>>>>>> v3.18
 =======
 	writel_relaxed(value, timer->irq_stat);
 >>>>>>> v3.18

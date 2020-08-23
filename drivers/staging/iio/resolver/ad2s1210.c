@@ -193,6 +193,7 @@ static inline int ad2s1210_soft_reset(struct ad2s1210_state *st)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ad2s1210_store_softreset(struct device *dev,
 					struct device_attribute *attr,
 					const char *buf,
@@ -210,12 +211,18 @@ static ssize_t ad2s1210_store_softreset(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static ssize_t ad2s1210_show_fclkin(struct device *dev,
 				    struct device_attribute *attr,
 				    char *buf)
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -229,15 +236,21 @@ static ssize_t ad2s1210_store_fclkin(struct device *dev,
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long fclkin;
 	int ret;
 
 	ret = strict_strtoul(buf, 10, &fclkin);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int fclkin;
 	int ret;
 
 	ret = kstrtouint(buf, 10, &fclkin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -265,6 +278,10 @@ static ssize_t ad2s1210_show_fexcit(struct device *dev,
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -277,15 +294,21 @@ static ssize_t ad2s1210_store_fexcit(struct device *dev,
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long fexcit;
 	int ret;
 
 	ret = strict_strtoul(buf, 10, &fexcit);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int fexcit;
 	int ret;
 
 	ret = kstrtouint(buf, 10, &fexcit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -312,6 +335,10 @@ static ssize_t ad2s1210_show_control(struct device *dev,
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -327,17 +354,23 @@ static ssize_t ad2s1210_store_control(struct device *dev,
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long udata;
 	unsigned char data;
 	int ret;
 
 	ret = strict_strtoul(buf, 16, &udata);
 =======
+=======
+>>>>>>> v3.18
 	unsigned char udata;
 	unsigned char data;
 	int ret;
 
 	ret = kstrtou8(buf, 16, &udata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return -EINVAL;
@@ -365,7 +398,11 @@ static ssize_t ad2s1210_store_control(struct device *dev,
 		data = ad2s1210_read_resolution_pin(st);
 		if (data != st->resolution)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("ad2s1210: resolution settings not match\n");
+=======
+			pr_warn("ad2s1210: resolution settings not match\n");
+>>>>>>> v3.18
 =======
 			pr_warn("ad2s1210: resolution settings not match\n");
 >>>>>>> v3.18
@@ -385,6 +422,10 @@ static ssize_t ad2s1210_show_resolution(struct device *dev,
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -398,15 +439,21 @@ static ssize_t ad2s1210_store_resolution(struct device *dev,
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 	unsigned char data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long udata;
 	int ret;
 
 	ret = strict_strtoul(buf, 10, &udata);
 =======
+=======
+>>>>>>> v3.18
 	unsigned char udata;
 	int ret;
 
 	ret = kstrtou8(buf, 10, &udata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret || udata < 10 || udata > 16) {
 		pr_err("ad2s1210: resolution out of range\n");
@@ -440,7 +487,11 @@ static ssize_t ad2s1210_store_resolution(struct device *dev,
 		data = ad2s1210_read_resolution_pin(st);
 		if (data != st->resolution)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("ad2s1210: resolution settings not match\n");
+=======
+			pr_warn("ad2s1210: resolution settings not match\n");
+>>>>>>> v3.18
 =======
 			pr_warn("ad2s1210: resolution settings not match\n");
 >>>>>>> v3.18
@@ -510,17 +561,23 @@ static ssize_t ad2s1210_store_reg(struct device *dev,
 {
 	struct ad2s1210_state *st = iio_priv(dev_to_iio_dev(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long data;
 	int ret;
 	struct iio_dev_attr *iattr = to_iio_dev_attr(attr);
 
 	ret = strict_strtoul(buf, 10, &data);
 =======
+=======
+>>>>>>> v3.18
 	unsigned char data;
 	int ret;
 	struct iio_dev_attr *iattr = to_iio_dev_attr(attr);
 
 	ret = kstrtou8(buf, 10, &data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return -EINVAL;
@@ -542,7 +599,11 @@ static int ad2s1210_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad2s1210_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 negative;
+=======
+	bool negative;
+>>>>>>> v3.18
 =======
 	bool negative;
 >>>>>>> v3.18
@@ -575,7 +636,11 @@ static int ad2s1210_read_raw(struct iio_dev *indio_dev,
 	switch (chan->type) {
 	case IIO_ANGL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos = be16_to_cpup((u16 *)st->rx);
+=======
+		pos = be16_to_cpup((__be16 *) st->rx);
+>>>>>>> v3.18
 =======
 		pos = be16_to_cpup((__be16 *) st->rx);
 >>>>>>> v3.18
@@ -587,7 +652,11 @@ static int ad2s1210_read_raw(struct iio_dev *indio_dev,
 	case IIO_ANGL_VEL:
 		negative = st->rx[0] & 0x80;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vel = be16_to_cpup((s16 *)st->rx);
+=======
+		vel = be16_to_cpup((__be16 *) st->rx);
+>>>>>>> v3.18
 =======
 		vel = be16_to_cpup((__be16 *) st->rx);
 >>>>>>> v3.18
@@ -613,8 +682,11 @@ error_ret:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static IIO_DEVICE_ATTR(reset, S_IWUSR,
 		       NULL, ad2s1210_store_softreset, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static IIO_DEVICE_ATTR(fclkin, S_IRUGO | S_IWUSR,
@@ -667,7 +739,10 @@ static const struct iio_chan_spec ad2s1210_channels[] = {
 
 static struct attribute *ad2s1210_attributes[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&iio_dev_attr_reset.dev_attr.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&iio_dev_attr_fclkin.dev_attr.attr,
@@ -770,6 +845,7 @@ static int ad2s1210_probe(struct spi_device *spi)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
@@ -780,12 +856,21 @@ static int ad2s1210_probe(struct spi_device *spi)
 	if (!indio_dev)
 		return -ENOMEM;
 >>>>>>> v3.18
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 	st = iio_priv(indio_dev);
 	st->pdata = spi->dev.platform_data;
 	ret = ad2s1210_setup_gpios(st);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -820,9 +905,12 @@ static int ad2s1210_probe(struct spi_device *spi)
 error_free_gpios:
 	ad2s1210_free_gpios(st);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -835,7 +923,10 @@ static int ad2s1210_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 	ad2s1210_free_gpios(iio_priv(indio_dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

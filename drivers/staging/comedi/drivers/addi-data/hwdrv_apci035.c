@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
 @verbatim
 
@@ -47,6 +48,8 @@ You should also find the complete GPL in the COPYING file accompanying this sour
   +----------+-----------+------------------------------------------------+
 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Copyright (C) 2004,2005  ADDI-DATA GmbH for the source code of this module.
  *
@@ -68,6 +71,9 @@ You should also find the complete GPL in the COPYING file accompanying this sour
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Card Specific information */
@@ -134,6 +140,7 @@ static struct comedi_lrange range_apci035_ai = {
 	}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int i_WatchdogNbr = 0;
 static int i_Temp = 0;
@@ -202,6 +209,8 @@ static int i_APCI035_ConfigTimerWatchdog(struct comedi_device *dev,
 	unsigned int ui_Command = 0;
 	unsigned int ui_Mode = 0;
 =======
+=======
+>>>>>>> v3.18
 static int i_WatchdogNbr;
 static int i_Temp;
 static int i_Flag = 1;
@@ -240,12 +249,16 @@ static int apci035_timer_config(struct comedi_device *dev,
 	unsigned int ui_Status;
 	unsigned int ui_Command;
 	unsigned int ui_Mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i_Temp = 0;
 	devpriv->tsk_Current = current;
 	devpriv->b_TimerSelectMode = data[0];
 	i_WatchdogNbr = data[1];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (data[0] == 0) {
 		ui_Mode = 2;
@@ -270,6 +283,8 @@ static int apci035_timer_config(struct comedi_device *dev,
 
 		 /******************************/
 =======
+=======
+>>>>>>> v3.18
 	if (data[0] == 0)
 		ui_Mode = 2;
 	else
@@ -287,6 +302,9 @@ static int apci035_timer_config(struct comedi_device *dev,
 	outl(data[2], devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 8);
 	if (data[0] == ADDIDATA_TIMER) {
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Set the mode :             */
 		/* - Disable the hardware     */
@@ -296,13 +314,17 @@ static int apci035_timer_config(struct comedi_device *dev,
 		/* - Enable the timer mode    */
 		/* - Set the timer mode       */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 /******************************/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 		ui_Command =
 			(ui_Command & 0xFFF719E2UL) | ui_Mode << 13UL | 0x10UL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}			/* if (data[0] == ADDIDATA_TIMER) */
 	else {
@@ -372,6 +394,8 @@ static int apci035_timer_config(struct comedi_device *dev,
 		/* Set the time unite */
    /**********************/
 =======
+=======
+>>>>>>> v3.18
 	} else if (data[0] == ADDIDATA_WATCHDOG) {
 
 		/* Set the mode :             */
@@ -424,11 +448,15 @@ static int apci035_timer_config(struct comedi_device *dev,
 			devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 24);
 
 		/* Set the time unite */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		outl(data[10],
 			devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 28);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ui_Command = 0;
 	ui_Command = inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 12);
@@ -450,6 +478,8 @@ static int apci035_timer_config(struct comedi_device *dev,
 /* Set the interrupt selection */
 /*******************************/
 =======
+=======
+>>>>>>> v3.18
 	ui_Command = inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 12);
 
 	/* Disable the hardware output */
@@ -463,6 +493,9 @@ static int apci035_timer_config(struct comedi_device *dev,
 	ui_Command = inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 12);
 
 	/* Set the interrupt selection */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ui_Status = inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 16);
 
@@ -473,6 +506,7 @@ static int apci035_timer_config(struct comedi_device *dev,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 +----------------------------------------------------------------------------+
 | Function   Name   : int i_APCI035_StartStopWriteTimerWatchdog              |
@@ -509,6 +543,8 @@ static int i_APCI035_StartStopWriteTimerWatchdog(struct comedi_device *dev,
 	unsigned int ui_Command = 0;
 	int i_Count = 0;
 =======
+=======
+>>>>>>> v3.18
  * Start / Stop The Selected Timer , or Watchdog
  *
  * data[0]
@@ -527,11 +563,15 @@ static int apci035_timer_write(struct comedi_device *dev,
 	struct addi_private *devpriv = dev->private;
 	unsigned int ui_Command;
 	int i_Count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (data[0] == 1) {
 		ui_Command =
 			inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 12);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 /**********************/
 		/* Start the hardware */
@@ -547,6 +587,8 @@ static int apci035_timer_write(struct comedi_device *dev,
 		/* Set the trigger command */
 	 /***************************/
 =======
+=======
+>>>>>>> v3.18
 
 		/* Start the hardware */
 		ui_Command = (ui_Command & 0xFFFFF9FFUL) | 0x1UL;
@@ -558,12 +600,16 @@ static int apci035_timer_write(struct comedi_device *dev,
 			inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 12);
 
 		/* Set the trigger command */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ui_Command = (ui_Command & 0xFFFFF9FFUL) | 0x200UL;
 		outl(ui_Command,
 			devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 12);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (data[0] == 0)	/* Stop The Watchdog */
 	{
@@ -586,6 +632,8 @@ static int apci035_timer_write(struct comedi_device *dev,
 				ui_Command = 0x10UL;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (data[0] == 0) {
 		/* Stop The Watchdog */
 		ui_Command = 0;
@@ -605,6 +653,9 @@ static int apci035_timer_write(struct comedi_device *dev,
 			else
 				ui_Command = 0x10UL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			i_WatchdogNbr = i_Count;
 			outl(ui_Command,
@@ -613,6 +664,7 @@ static int apci035_timer_write(struct comedi_device *dev,
 		}
 
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (data[0] == 4)	/* start all Watchdogs */
 	{
@@ -624,6 +676,8 @@ static int apci035_timer_write(struct comedi_device *dev,
 				ui_Command = 0x8UL;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (data[0] == 4) {
 		/* start all Watchdogs */
 		ui_Command = 0;
@@ -633,6 +687,9 @@ static int apci035_timer_write(struct comedi_device *dev,
 			else
 				ui_Command = 0x8UL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			i_WatchdogNbr = i_Count;
 			outl(ui_Command,
@@ -640,6 +697,7 @@ static int apci035_timer_write(struct comedi_device *dev,
 				0);
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (data[0] == 5)	/* trigger all Watchdogs */
 	{
@@ -651,6 +709,8 @@ static int apci035_timer_write(struct comedi_device *dev,
 				ui_Command = 0x20UL;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (data[0] == 5) {
 		/* trigger all Watchdogs */
 		ui_Command = 0;
@@ -659,6 +719,9 @@ static int apci035_timer_write(struct comedi_device *dev,
 				ui_Command = 0x4UL;
 			else
 				ui_Command = 0x20UL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			i_WatchdogNbr = i_Count;
@@ -672,6 +735,7 @@ static int apci035_timer_write(struct comedi_device *dev,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 +----------------------------------------------------------------------------+
 | Function   Name   : int i_APCI035_ReadTimerWatchdog                        |
@@ -738,6 +802,8 @@ static int i_APCI035_ReadTimerWatchdog(struct comedi_device *dev,
 	}			/*   if  (devpriv->b_TimerSelectMode==ADDIDATA_TIMER) */
 
 =======
+=======
+>>>>>>> v3.18
  * Read The Selected Timer , Counter or Watchdog
  *
  * data[0] software trigger status
@@ -773,11 +839,15 @@ static int apci035_timer_read(struct comedi_device *dev,
 	if (devpriv->b_TimerSelectMode == ADDIDATA_TIMER)
 		data[4] = inl(devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return insn->n;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 +----------------------------------------------------------------------------+
 | Function   Name   : int i_APCI035_ConfigAnalogInput                        |
@@ -806,6 +876,8 @@ static int i_APCI035_ConfigAnalogInput(struct comedi_device *dev,
 				       struct comedi_insn *insn,
 				       unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
  * Configures The Analog Input Subdevice
  *
  * data[0] Warning delay value
@@ -814,6 +886,9 @@ static int apci035_ai_config(struct comedi_device *dev,
 			     struct comedi_subdevice *s,
 			     struct comedi_insn *insn,
 			     unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct addi_private *devpriv = dev->private;
@@ -822,9 +897,14 @@ static int apci035_ai_config(struct comedi_device *dev,
 	outl(0x200 | 0, devpriv->iobase + 128 + 0x4);
 	outl(0, devpriv->iobase + 128 + 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 /********************************/
 /* Initialise the warning value */
 /********************************/
+=======
+
+	/* Initialise the warning value */
+>>>>>>> v3.18
 =======
 
 	/* Initialise the warning value */
@@ -837,6 +917,7 @@ static int apci035_ai_config(struct comedi_device *dev,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 +----------------------------------------------------------------------------+
 | Function   Name   : int i_APCI035_ReadAnalogInput                          |
@@ -879,6 +960,8 @@ static int i_APCI035_ReadAnalogInput(struct comedi_device *dev,
 /* Read the digital value of the input */
 /***************************************/
 =======
+=======
+>>>>>>> v3.18
  * Read value of the selected channel
  *
  * data[0] Digital Value Of Input
@@ -898,11 +981,15 @@ static int apci035_ai_read(struct comedi_device *dev,
 	outl(ui_CommandRegister, devpriv->iobase + 128 + 8);
 
 	/* Read the digital value of the input */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data[0] = inl(devpriv->iobase + 128 + 28);
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
 +----------------------------------------------------------------------------+
@@ -928,6 +1015,8 @@ static int i_APCI035_Reset(struct comedi_device *dev)
 		i_WatchdogNbr = i_Count;
 		outl(0x0, devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 0);	/* stop all timers */
 =======
+=======
+>>>>>>> v3.18
 static int apci035_reset(struct comedi_device *dev)
 {
 	struct addi_private *devpriv = dev->private;
@@ -938,6 +1027,9 @@ static int apci035_reset(struct comedi_device *dev)
 
 		/* stop all timers */
 		outl(0x0, devpriv->iobase + ((i_WatchdogNbr - 1) * 32) + 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	outl(0x0, devpriv->iobase + 128 + 12);	/* Disable the warning delay */
@@ -945,6 +1037,7 @@ static int apci035_reset(struct comedi_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
 +----------------------------------------------------------------------------+
@@ -973,6 +1066,8 @@ static void v_APCI035_Interrupt(int irq, void *d)
 	unsigned int ui_ChannelNumber = 0;
 	unsigned int ui_DigitalTemperature = 0;
 =======
+=======
+>>>>>>> v3.18
 static void apci035_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
@@ -982,12 +1077,16 @@ static void apci035_interrupt(int irq, void *d)
 	unsigned int ui_ReadCommand;
 	unsigned int ui_ChannelNumber;
 	unsigned int ui_DigitalTemperature;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i_Temp == 1) {
 		i_WatchdogNbr = i_Flag;
 		i_Flag = i_Flag + 1;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
   /**************************************/
 	/* Read the interrupt status register of temperature Warning */
@@ -1027,6 +1126,8 @@ static void apci035_interrupt(int irq, void *d)
 
 	return;
 =======
+=======
+>>>>>>> v3.18
 
 	/* Read the interrupt status register of temperature Warning */
 	ui_StatusRegister1 = inl(devpriv->iobase + 128 + 16);
@@ -1056,5 +1157,8 @@ static void apci035_interrupt(int irq, void *d)
 		/*  send signal to the sample */
 		send_sig(SIGIO, devpriv->tsk_Current, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

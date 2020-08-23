@@ -1062,7 +1062,11 @@ int i2400m_firmware_check(struct i2400m *i2400m)
 	}
 	result = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (minor < I2400M_HDIv_MINOR_2 && minor > I2400M_HDIv_MINOR)
+=======
+	if (minor > I2400M_HDIv_MINOR_2 || minor < I2400M_HDIv_MINOR)
+>>>>>>> v3.18
 =======
 	if (minor > I2400M_HDIv_MINOR_2 || minor < I2400M_HDIv_MINOR)
 >>>>>>> v3.18

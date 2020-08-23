@@ -282,11 +282,16 @@ restore_registers:
 	brasl	%r14,arch_set_page_states
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Log potential guest relocation */
 	brasl	%r14,lgr_info_log
 
 	/* Reinitialize the channel subsystem */
 	brasl	%r14,channel_subsystem_reinit
+=======
+	/* Call arch specific early resume code */
+	brasl	%r14,s390_early_resume
+>>>>>>> v3.18
 =======
 	/* Call arch specific early resume code */
 	brasl	%r14,s390_early_resume

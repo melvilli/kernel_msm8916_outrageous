@@ -239,7 +239,11 @@ static struct miscdevice advwdt_miscdev = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int advwdt_probe(struct platform_device *dev)
+=======
+static int __init advwdt_probe(struct platform_device *dev)
+>>>>>>> v3.18
 =======
 static int __init advwdt_probe(struct platform_device *dev)
 >>>>>>> v3.18
@@ -304,7 +308,10 @@ static void advwdt_shutdown(struct platform_device *dev)
 
 static struct platform_driver advwdt_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe		= advwdt_probe,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.remove		= advwdt_remove,
@@ -322,6 +329,7 @@ static int __init advwdt_init(void)
 	pr_info("WDT driver for Advantech single board computer initialising\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = platform_driver_register(&advwdt_driver);
 	if (err)
 		return err;
@@ -338,6 +346,8 @@ static int __init advwdt_init(void)
 unreg_platform_driver:
 	platform_driver_unregister(&advwdt_driver);
 =======
+=======
+>>>>>>> v3.18
 	advwdt_platform_device = platform_device_register_simple(DRV_NAME,
 								-1, NULL, 0);
 	if (IS_ERR(advwdt_platform_device))
@@ -351,6 +361,9 @@ unreg_platform_driver:
 
 unreg_platform_device:
 	platform_device_unregister(advwdt_platform_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -369,6 +382,9 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Marek Michalkiewicz <marekm@linux.org.pl>");
 MODULE_DESCRIPTION("Advantech Single Board Computer WDT driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -27,6 +27,10 @@
 #include <linux/kvm_host.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/srcu.h>
+>>>>>>> v3.18
 =======
 #include <linux/srcu.h>
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 #include <trace/events/kvm.h>
 #include "irq.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool kvm_irq_has_notifier(struct kvm *kvm, unsigned irqchip, unsigned pin)
 {
@@ -95,6 +100,8 @@ void kvm_unregister_irq_ack_notifier(struct kvm *kvm,
 	kvm_vcpu_request_scan_ioapic(kvm);
 #endif
 =======
+=======
+>>>>>>> v3.18
 struct kvm_irq_routing_table {
 	int chip[KVM_NR_IRQCHIPS][KVM_IRQCHIP_NUM_PINS];
 	struct kvm_kernel_irq_routing_entry *rt_entries;
@@ -131,6 +138,9 @@ int kvm_irq_map_chip_pin(struct kvm *kvm, unsigned irqchip, unsigned pin)
 
 	irq_rt = srcu_dereference(kvm->irq_routing, &kvm->irq_srcu);
 	return irq_rt->chip[irqchip][pin];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -158,9 +168,14 @@ int kvm_set_irq(struct kvm *kvm, int irq_source_id, u32 irq, int level,
 		bool line_status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_kernel_irq_routing_entry *e, irq_set[KVM_NR_IRQCHIPS];
 	int ret = -1, i = 0;
 	struct kvm_irq_routing_table *irq_rt;
+=======
+	struct kvm_kernel_irq_routing_entry irq_set[KVM_NR_IRQCHIPS];
+	int ret = -1, i, idx;
+>>>>>>> v3.18
 =======
 	struct kvm_kernel_irq_routing_entry irq_set[KVM_NR_IRQCHIPS];
 	int ret = -1, i, idx;
@@ -173,12 +188,18 @@ int kvm_set_irq(struct kvm *kvm, int irq_source_id, u32 irq, int level,
 	 * writes to the unused one.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	irq_rt = rcu_dereference(kvm->irq_routing);
 	if (irq < irq_rt->nr_rt_entries)
 		hlist_for_each_entry(e, &irq_rt->map[irq], link)
 			irq_set[i++] = *e;
 	rcu_read_unlock();
+=======
+	idx = srcu_read_lock(&kvm->irq_srcu);
+	i = kvm_irq_map_gsi(kvm, irq_set, irq);
+	srcu_read_unlock(&kvm->irq_srcu, idx);
+>>>>>>> v3.18
 =======
 	idx = srcu_read_lock(&kvm->irq_srcu);
 	i = kvm_irq_map_gsi(kvm, irq_set, irq);
@@ -225,15 +246,21 @@ static int setup_routing_entry(struct kvm_irq_routing_table *rt,
 	e->gsi = ue->gsi;
 	e->type = ue->type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = kvm_set_routing_entry(rt, e, ue);
 	if (r)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	r = kvm_set_routing_entry(e, ue);
 	if (r)
 		goto out;
 	if (e->type == KVM_IRQ_ROUTING_IRQCHIP)
 		rt->chip[e->irqchip.irqchip][e->irqchip.pin] = e->gsi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hlist_add_head(&e->link, &rt->map[e->gsi]);
@@ -286,16 +313,22 @@ int kvm_set_irq_routing(struct kvm *kvm,
 	mutex_lock(&kvm->irq_lock);
 	old = kvm->irq_routing;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvm_irq_routing_update(kvm, new);
 	mutex_unlock(&kvm->irq_lock);
 
 	synchronize_rcu();
 =======
+=======
+>>>>>>> v3.18
 	rcu_assign_pointer(kvm->irq_routing, new);
 	kvm_irq_routing_update(kvm);
 	mutex_unlock(&kvm->irq_lock);
 
 	synchronize_srcu_expedited(&kvm->irq_srcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	new = old;

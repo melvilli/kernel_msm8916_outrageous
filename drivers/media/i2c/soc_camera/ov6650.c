@@ -33,7 +33,11 @@
 
 #include <media/soc_camera.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 >>>>>>> v3.18
@@ -201,6 +205,10 @@ struct ov6650 {
 		struct v4l2_ctrl *red;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_clk		*clk;
+>>>>>>> v3.18
 =======
 	struct v4l2_clk		*clk;
 >>>>>>> v3.18
@@ -399,6 +407,7 @@ static int ov6550_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Get chip identification */
 static int ov6650_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *id)
@@ -409,6 +418,8 @@ static int ov6650_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -448,8 +459,14 @@ static int ov6650_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct ov6650 *priv = to_ov6650(client);
+
+	return soc_camera_set_power(&client->dev, ssdd, priv->clk, on);
+>>>>>>> v3.18
 =======
 	struct ov6650 *priv = to_ov6650(client);
 
@@ -897,7 +914,10 @@ static const struct v4l2_ctrl_ops ov6550_ctrl_ops = {
 
 static struct v4l2_subdev_core_ops ov6650_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident		= ov6650_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1046,10 +1066,13 @@ static int ov6650_probe(struct i2c_client *client,
 	priv->colorspace  = V4L2_COLORSPACE_JPEG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ov6650_video_probe(client);
 	if (ret)
 		v4l2_ctrl_handler_free(&priv->hdl);
 =======
+=======
+>>>>>>> v3.18
 	priv->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(priv->clk)) {
 		ret = PTR_ERR(priv->clk);
@@ -1062,6 +1085,9 @@ static int ov6650_probe(struct i2c_client *client,
 eclkget:
 		v4l2_ctrl_handler_free(&priv->hdl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1072,6 +1098,10 @@ static int ov6650_remove(struct i2c_client *client)
 	struct ov6650 *priv = to_ov6650(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 =======
 	v4l2_clk_put(priv->clk);
 >>>>>>> v3.18

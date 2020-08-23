@@ -18,6 +18,7 @@
 struct nfsd_fault_inject_op {
 	char *file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 (*forget)(struct nfs4_client *, u64);
 	u64 (*print)(struct nfs4_client *, u64);
 };
@@ -94,6 +95,8 @@ static void nfsd_inject_get(struct nfsd_fault_inject_op *op, u64 *val)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	u64 (*get)(void);
 	u64 (*set_val)(u64);
 	u64 (*set_clnt)(struct sockaddr_storage *, size_t);
@@ -101,12 +104,16 @@ static void nfsd_inject_get(struct nfsd_fault_inject_op *op, u64 *val)
 
 static struct dentry *debug_dir;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t fault_inject_read(struct file *file, char __user *buf,
 				 size_t len, loff_t *ppos)
 {
 	static u64 val;
 	char read_buf[25];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	size_t size, ret;
 	loff_t pos = *ppos;
@@ -128,6 +135,8 @@ static ssize_t fault_inject_read(struct file *file, char __user *buf,
 	*ppos = pos + len;
 	return len;
 =======
+=======
+>>>>>>> v3.18
 	size_t size;
 	loff_t pos = *ppos;
 	struct nfsd_fault_inject_op *op = file_inode(file)->i_private;
@@ -137,6 +146,9 @@ static ssize_t fault_inject_read(struct file *file, char __user *buf,
 	size = scnprintf(read_buf, sizeof(read_buf), "%llu\n", val);
 
 	return simple_read_from_buffer(buf, len, ppos, read_buf, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -148,7 +160,13 @@ static ssize_t fault_inject_write(struct file *file, const char __user *buf,
 	struct net *net = current->nsproxy->net_ns;
 	struct sockaddr_storage sa;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 val;
+=======
+	struct nfsd_fault_inject_op *op = file_inode(file)->i_private;
+	u64 val;
+	char *nl;
+>>>>>>> v3.18
 =======
 	struct nfsd_fault_inject_op *op = file_inode(file)->i_private;
 	u64 val;
@@ -160,6 +178,7 @@ static ssize_t fault_inject_write(struct file *file, const char __user *buf,
 	write_buf[size] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = rpc_pton(net, write_buf, size, (struct sockaddr *)&sa, sizeof(sa));
 	if (size > 0)
 		nfsd_inject_set_client(file_inode(file)->i_private, &sa, size);
@@ -167,6 +186,8 @@ static ssize_t fault_inject_write(struct file *file, const char __user *buf,
 		val = simple_strtoll(write_buf, NULL, 0);
 		nfsd_inject_set(file_inode(file)->i_private, val);
 =======
+=======
+>>>>>>> v3.18
 	/* Deal with any embedded newlines in the string */
 	nl = strchr(write_buf, '\n');
 	if (nl) {
@@ -189,6 +210,9 @@ static ssize_t fault_inject_write(struct file *file, const char __user *buf,
 				op->file, val);
 		val = op->set_val(val);
 		pr_info("NFSD: %s: found %llu", op->file, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return len; /* on success, claim we got the whole input */
@@ -206,7 +230,10 @@ void nfsd_fault_inject_cleanup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct nfsd_fault_inject_op inject_ops[] = {
 	{
 		.file     = "forget_clients",
@@ -242,6 +269,9 @@ static struct nfsd_fault_inject_op inject_ops[] = {
 
 #define NUM_INJECT_OPS (sizeof(inject_ops)/sizeof(struct nfsd_fault_inject_op))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nfsd_fault_inject_init(void)
 {

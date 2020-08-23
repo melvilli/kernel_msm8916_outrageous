@@ -652,8 +652,14 @@ static ssize_t bh1770_power_state_store(struct device *dev,
 	ssize_t ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 0, &value);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
@@ -733,15 +739,21 @@ static ssize_t bh1770_prox_enable_store(struct device *dev,
 	struct bh1770_chip *chip =  dev_get_drvdata(dev);
 	unsigned long value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&chip->mutex);
@@ -839,15 +851,21 @@ static ssize_t bh1770_set_prox_rate_above(struct device *dev,
 	struct bh1770_chip *chip =  dev_get_drvdata(dev);
 	unsigned long value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&chip->mutex);
@@ -863,15 +881,21 @@ static ssize_t bh1770_set_prox_rate_below(struct device *dev,
 	struct bh1770_chip *chip =  dev_get_drvdata(dev);
 	unsigned long value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&chip->mutex);
@@ -896,13 +920,19 @@ static ssize_t bh1770_set_prox_thres(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (value > BH1770_PROX_RANGE)
 		return -EINVAL;
@@ -931,15 +961,21 @@ static ssize_t bh1770_prox_persistence_store(struct device *dev,
 	struct bh1770_chip *chip = dev_get_drvdata(dev);
 	unsigned long value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (value > BH1770_PROX_MAX_PERSISTENCE)
@@ -964,15 +1000,21 @@ static ssize_t bh1770_prox_abs_thres_store(struct device *dev,
 	struct bh1770_chip *chip = dev_get_drvdata(dev);
 	unsigned long value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (value > BH1770_PROX_RANGE)
@@ -1017,15 +1059,21 @@ static ssize_t bh1770_lux_calib_store(struct device *dev,
 	u32 old_calib;
 	u32 new_corr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &value))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &value);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&chip->mutex);
@@ -1074,8 +1122,14 @@ static ssize_t bh1770_set_lux_rate(struct device *dev,
 	int ret, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &rate_hz))
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 0, &rate_hz);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 0, &rate_hz);
 	if (ret)
@@ -1115,18 +1169,24 @@ static ssize_t bh1770_set_lux_thresh(struct bh1770_chip *chip, u16 *target,
 				const char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	unsigned long thresh;
 
 	if (strict_strtoul(buf, 0, &thresh))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long thresh;
 	int ret;
 
 	ret = kstrtoul(buf, 0, &thresh);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (thresh > BH1770_LUX_RANGE)
@@ -1245,7 +1305,11 @@ static int bh1770_probe(struct i2c_client *client,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip = kzalloc(sizeof *chip, GFP_KERNEL);
+=======
+	chip = devm_kzalloc(&client->dev, sizeof *chip, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	chip = devm_kzalloc(&client->dev, sizeof *chip, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1262,8 +1326,12 @@ static int bh1770_probe(struct i2c_client *client,
 	if (client->dev.platform_data == NULL) {
 		dev_err(&client->dev, "platform data is mandatory\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
 		goto fail1;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -1292,17 +1360,23 @@ static int bh1770_probe(struct i2c_client *client,
 	chip->regs[1].supply = reg_vleds;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = regulator_bulk_get(&client->dev,
 				 ARRAY_SIZE(chip->regs), chip->regs);
 	if (err < 0) {
 		dev_err(&client->dev, "Cannot get regulators\n");
 		goto fail1;
 =======
+=======
+>>>>>>> v3.18
 	err = devm_regulator_bulk_get(&client->dev,
 				      ARRAY_SIZE(chip->regs), chip->regs);
 	if (err < 0) {
 		dev_err(&client->dev, "Cannot get regulators\n");
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1311,7 +1385,11 @@ static int bh1770_probe(struct i2c_client *client,
 	if (err < 0) {
 		dev_err(&client->dev, "Cannot enable regulators\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail2;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -1321,7 +1399,11 @@ static int bh1770_probe(struct i2c_client *client,
 	err = bh1770_detect(chip);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail3;
+=======
+		goto fail0;
+>>>>>>> v3.18
 =======
 		goto fail0;
 >>>>>>> v3.18
@@ -1336,7 +1418,11 @@ static int bh1770_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Improper correction values\n");
 		err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail3;
+=======
+		goto fail0;
+>>>>>>> v3.18
 =======
 		goto fail0;
 >>>>>>> v3.18
@@ -1347,7 +1433,11 @@ static int bh1770_probe(struct i2c_client *client,
 		if (err) {
 			err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail3;
+=======
+			goto fail0;
+>>>>>>> v3.18
 =======
 			goto fail0;
 >>>>>>> v3.18
@@ -1359,7 +1449,11 @@ static int bh1770_probe(struct i2c_client *client,
 	if (err < 0) {
 		dev_err(&chip->client->dev, "Sysfs registration failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail1;
+>>>>>>> v3.18
 =======
 		goto fail1;
 >>>>>>> v3.18
@@ -1379,6 +1473,7 @@ static int bh1770_probe(struct i2c_client *client,
 		dev_err(&client->dev, "could not get IRQ %d\n",
 			client->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail5;
 	}
 	regulator_bulk_disable(ARRAY_SIZE(chip->regs), chip->regs);
@@ -1396,6 +1491,8 @@ fail2:
 fail1:
 	kfree(chip);
 =======
+=======
+>>>>>>> v3.18
 		goto fail2;
 	}
 	regulator_bulk_disable(ARRAY_SIZE(chip->regs), chip->regs);
@@ -1408,6 +1505,9 @@ fail1:
 		chip->pdata->release_resources();
 fail0:
 	regulator_bulk_disable(ARRAY_SIZE(chip->regs), chip->regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1433,8 +1533,11 @@ static int bh1770_remove(struct i2c_client *client)
 	pm_runtime_set_suspended(&client->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_bulk_free(ARRAY_SIZE(chip->regs), chip->regs);
 	kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

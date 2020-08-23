@@ -143,7 +143,11 @@ loop:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dst_discard(struct sk_buff *skb)
+=======
+int dst_discard_sk(struct sock *sk, struct sk_buff *skb)
+>>>>>>> v3.18
 =======
 int dst_discard_sk(struct sock *sk, struct sk_buff *skb)
 >>>>>>> v3.18
@@ -152,7 +156,11 @@ int dst_discard_sk(struct sock *sk, struct sk_buff *skb)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dst_discard);
+=======
+EXPORT_SYMBOL(dst_discard_sk);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(dst_discard_sk);
 >>>>>>> v3.18
@@ -193,7 +201,11 @@ void *dst_alloc(struct dst_ops *ops, struct net_device *dev,
 #endif
 	dst->input = dst_discard;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst->output = dst_discard;
+=======
+	dst->output = dst_discard_sk;
+>>>>>>> v3.18
 =======
 	dst->output = dst_discard_sk;
 >>>>>>> v3.18
@@ -222,13 +234,19 @@ static void ___dst_free(struct dst_entry *dst)
 	   protocol module is unloaded.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dst->dev == NULL || !(dst->dev->flags&IFF_UP))
 		dst->input = dst->output = dst_discard;
 =======
+=======
+>>>>>>> v3.18
 	if (dst->dev == NULL || !(dst->dev->flags&IFF_UP)) {
 		dst->input = dst_discard;
 		dst->output = dst_discard_sk;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dst->obsolete = DST_OBSOLETE_DEAD;
 }
@@ -300,6 +318,7 @@ void dst_release(struct dst_entry *dst)
 	if (dst) {
 		int newrefcnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned short nocache = dst->flags & DST_NOCACHE;
 
 		newrefcnt = atomic_dec_return(&dst->__refcnt);
@@ -308,10 +327,15 @@ void dst_release(struct dst_entry *dst)
 					     __func__, dst, newrefcnt);
 		if (!newrefcnt && unlikely(nocache))
 =======
+=======
+>>>>>>> v3.18
 
 		newrefcnt = atomic_dec_return(&dst->__refcnt);
 		WARN_ON(newrefcnt < 0);
 		if (unlikely(dst->flags & DST_NOCACHE) && !newrefcnt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			call_rcu(&dst->rcu_head, dst_destroy_rcu);
 	}
@@ -397,7 +421,12 @@ static void dst_ifdown(struct dst_entry *dst, struct net_device *dev,
 
 	if (!unregister) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst->input = dst->output = dst_discard;
+=======
+		dst->input = dst_discard;
+		dst->output = dst_discard_sk;
+>>>>>>> v3.18
 =======
 		dst->input = dst_discard;
 		dst->output = dst_discard_sk;
@@ -413,7 +442,11 @@ static int dst_dev_event(struct notifier_block *this, unsigned long event,
 			 void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18

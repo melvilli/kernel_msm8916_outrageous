@@ -228,7 +228,11 @@ static void relay_destroy_buf(struct rchan_buf *buf)
  *	@kref: target kernel reference that contains the relay buffer
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Removes the file from the fileystem, which also frees the
+=======
+ *	Removes the file from the filesystem, which also frees the
+>>>>>>> v3.18
 =======
  *	Removes the file from the filesystem, which also frees the
 >>>>>>> v3.18
@@ -521,7 +525,11 @@ static void setup_callbacks(struct rchan *chan,
  * 	Returns the success/failure of the operation. (%NOTIFY_OK, %NOTIFY_BAD)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit relay_hotcpu_callback(struct notifier_block *nb,
+=======
+static int relay_hotcpu_callback(struct notifier_block *nb,
+>>>>>>> v3.18
 =======
 static int relay_hotcpu_callback(struct notifier_block *nb,
 >>>>>>> v3.18
@@ -1204,8 +1212,11 @@ static void relay_pipe_buf_release(struct pipe_inode_info *pipe,
 static const struct pipe_buf_operations relay_pipe_buf_ops = {
 	.can_merge = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map = generic_pipe_buf_map,
 	.unmap = generic_pipe_buf_unmap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.confirm = generic_pipe_buf_confirm,
@@ -1265,7 +1276,11 @@ static ssize_t subbuf_splice_actor(struct file *in,
 	pidx = (read_start / PAGE_SIZE) % subbuf_pages;
 	poff = read_start & ~PAGE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_pages = min_t(unsigned int, subbuf_pages, pipe->buffers);
+=======
+	nr_pages = min_t(unsigned int, subbuf_pages, spd.nr_pages_max);
+>>>>>>> v3.18
 =======
 	nr_pages = min_t(unsigned int, subbuf_pages, spd.nr_pages_max);
 >>>>>>> v3.18

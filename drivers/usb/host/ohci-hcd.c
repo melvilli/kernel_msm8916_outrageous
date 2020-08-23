@@ -52,8 +52,11 @@
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef OHCI_VERBOSE_DEBUG	/* not always helpful */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* For initializing controller (mask in an HCFS mode too) */
@@ -78,6 +81,10 @@ static const char	hcd_name [] = "ohci_hcd";
 
 #define	STATECHANGE_DELAY	msecs_to_jiffies(300)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	IO_WATCHDOG_DELAY	msecs_to_jiffies(250)
+>>>>>>> v3.18
 =======
 #define	IO_WATCHDOG_DELAY	msecs_to_jiffies(250)
 >>>>>>> v3.18
@@ -85,6 +92,7 @@ static const char	hcd_name [] = "ohci_hcd";
 #include "ohci.h"
 #include "pci-quirks.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ohci_dump (struct ohci_hcd *ohci, int verbose);
 static int ohci_init (struct ohci_hcd *ohci);
@@ -103,6 +111,11 @@ static inline void sb800_prefetch(struct ohci_hcd *ohci, int on)
 }
 #endif
 
+=======
+static void ohci_dump(struct ohci_hcd *ohci);
+static void ohci_stop(struct usb_hcd *hcd);
+static void io_watchdog_func(unsigned long _ohci);
+>>>>>>> v3.18
 =======
 static void ohci_dump(struct ohci_hcd *ohci);
 static void ohci_stop(struct usb_hcd *hcd);
@@ -140,7 +153,10 @@ MODULE_PARM_DESC (no_handshake, "true (not default) disables BIOS handshake");
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int number_of_tds(struct urb *urb)
 {
 	int			len, i, num, this_sg_len;
@@ -168,6 +184,9 @@ static int number_of_tds(struct urb *urb)
 	return num;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * queue up an urb for anything except the root hub
@@ -186,10 +205,13 @@ static int ohci_urb_enqueue (
 	int		retval = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OHCI_VERBOSE_DEBUG
 	urb_print(urb, "SUB", usb_pipein(pipe), -EINPROGRESS);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* every endpoint has a ed, locate and maybe (re)initialize it */
@@ -210,12 +232,17 @@ static int ohci_urb_enqueue (
 		// case PIPE_BULK:
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* one TD for every 4096 Bytes (can be up to 8K) */
 			size += urb->transfer_buffer_length / 4096;
 			/* ... and for any remaining bytes ... */
 			if ((urb->transfer_buffer_length % 4096) != 0)
 				size++;
 			/* ... and maybe a zero length packet to wrap it up */
+=======
+			size += number_of_tds(urb);
+			/* maybe a zero-length packet to wrap it up */
+>>>>>>> v3.18
 =======
 			size += number_of_tds(urb);
 			/* maybe a zero-length packet to wrap it up */
@@ -275,7 +302,10 @@ static int ohci_urb_enqueue (
 			goto fail;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Start up the I/O watchdog timer, if it's not running */
 		if (!timer_pending(&ohci->io_watchdog) &&
@@ -286,6 +316,9 @@ static int ohci_urb_enqueue (
 		}
 		list_add(&ed->in_use_list, &ohci->eds_in_use);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ed->type == PIPE_ISOCHRONOUS) {
 			u16	frame = ohci_frame_no(ohci);
@@ -363,6 +396,7 @@ static int ohci_urb_dequeue(struct usb_hcd *hcd, struct urb *urb, int status)
 	unsigned long		flags;
 	int			rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef OHCI_VERBOSE_DEBUG
 	urb_print(urb, "UNLINK", 1, status);
@@ -375,11 +409,16 @@ static int ohci_urb_dequeue(struct usb_hcd *hcd, struct urb *urb, int status)
 	} else if (ohci->rh_state == OHCI_RH_RUNNING) {
 		urb_priv_t  *urb_priv;
 =======
+=======
+>>>>>>> v3.18
 	urb_priv_t		*urb_priv;
 
 	spin_lock_irqsave (&ohci->lock, flags);
 	rc = usb_hcd_check_unlink_urb(hcd, urb, status);
 	if (rc == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Unless an IRQ completed the unlink while it was being
@@ -387,6 +426,7 @@ static int ohci_urb_dequeue(struct usb_hcd *hcd, struct urb *urb, int status)
 		 * some upcoming INTR_SF to call finish_unlinks()
 		 */
 		urb_priv = urb->hcpriv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (urb_priv) {
 			if (urb_priv->ed->state == ED_OPER)
@@ -400,6 +440,8 @@ static int ohci_urb_dequeue(struct usb_hcd *hcd, struct urb *urb, int status)
 		if (urb->hcpriv)
 			finish_urb(ohci, urb, status);
 =======
+=======
+>>>>>>> v3.18
 		if (urb_priv->ed->state == ED_OPER)
 			start_ed_unlink(ohci, urb_priv->ed);
 
@@ -407,6 +449,9 @@ static int ohci_urb_dequeue(struct usb_hcd *hcd, struct urb *urb, int status)
 			/* With HC dead, we can clean up right away */
 			ohci_work(ohci);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock_irqrestore (&ohci->lock, flags);
@@ -440,9 +485,13 @@ rescan:
 sanitize:
 		ed->state = ED_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (quirk_zfmicro(ohci) && ed->type == PIPE_INTERRUPT)
 			ohci->eds_scheduled--;
 		finish_unlinks (ohci, 0);
+=======
+		ohci_work(ohci);
+>>>>>>> v3.18
 =======
 		ohci_work(ohci);
 >>>>>>> v3.18
@@ -454,11 +503,14 @@ sanitize:
 		if (limit-- == 0) {
 			ohci_warn(ohci, "ED unlink timeout\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (quirk_zfmicro(ohci)) {
 				ohci_warn(ohci, "Attempting ZF TD recovery\n");
 				ohci->ed_to_check = ed;
 				ohci->zf_delay = 2;
 			}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto sanitize;
@@ -520,6 +572,7 @@ ohci_shutdown (struct usb_hcd *hcd)
 	udelay(10);
 
 	ohci_writel(ohci, ohci->fminterval, &ohci->regs->fminterval);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -611,6 +664,9 @@ done:
 =======
 	ohci->rh_state = OHCI_RH_HALTED;
 >>>>>>> v3.18
+=======
+	ohci->rh_state = OHCI_RH_HALTED;
+>>>>>>> v3.18
 }
 
 /*-------------------------------------------------------------------------*
@@ -625,6 +681,12 @@ static int ohci_init (struct ohci_hcd *ohci)
 	struct usb_hcd *hcd = ohci_to_hcd(ohci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Accept arbitrarily long scatter-gather lists */
+	hcd->self.sg_tablesize = ~0;
+
+>>>>>>> v3.18
 =======
 	/* Accept arbitrarily long scatter-gather lists */
 	hcd->self.sg_tablesize = ~0;
@@ -683,15 +745,21 @@ static int ohci_init (struct ohci_hcd *ohci)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ohci->hcca = dma_alloc_coherent (hcd->self.controller,
 			sizeof *ohci->hcca, &ohci->hcca_dma, 0);
 =======
+=======
+>>>>>>> v3.18
 	setup_timer(&ohci->io_watchdog, io_watchdog_func,
 			(unsigned long) ohci);
 	set_timer_slack(&ohci->io_watchdog, msecs_to_jiffies(20));
 
 	ohci->hcca = dma_alloc_coherent (hcd->self.controller,
 			sizeof(*ohci->hcca), &ohci->hcca_dma, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ohci->hcca)
 		return -ENOMEM;
@@ -823,7 +891,11 @@ retry:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* use rhsc irqs after khubd is fully initialized */
+=======
+	/* use rhsc irqs after hub_wq is allocated */
+>>>>>>> v3.18
 =======
 	/* use rhsc irqs after hub_wq is allocated */
 >>>>>>> v3.18
@@ -873,6 +945,7 @@ retry:
 	mdelay ((val >> 23) & 0x1fe);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (quirk_zfmicro(ohci)) {
 		/* Create timer to watch for bad queue state on ZF Micro */
 		setup_timer(&ohci->unlink_watchdog, unlink_watchdog_func,
@@ -886,6 +959,8 @@ retry:
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ohci_dump(ohci);
 
 	return 0;
@@ -915,13 +990,19 @@ static int ohci_start(struct usb_hcd *hcd)
 		ohci_stop(hcd);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Some OHCI controllers are known to lose track of completed TDs.  They
  * don't add the TDs to the hardware done queue, which means we never see
@@ -1058,6 +1139,9 @@ static void io_watchdog_func(unsigned long _ohci)
 	spin_unlock_irqrestore(&ohci->lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* an interrupt happens */
 
@@ -1108,7 +1192,11 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ohci_dump (ohci, 1);
+=======
+		ohci_dump(ohci);
+>>>>>>> v3.18
 =======
 		ohci_dump(ohci);
 >>>>>>> v3.18
@@ -1117,7 +1205,11 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 
 	if (ints & OHCI_INTR_RHSC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ohci_vdbg(ohci, "rhsc\n");
+=======
+		ohci_dbg(ohci, "rhsc\n");
+>>>>>>> v3.18
 =======
 		ohci_dbg(ohci, "rhsc\n");
 >>>>>>> v3.18
@@ -1130,8 +1222,13 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 		 * on an edge, like setting and maybe clearing a port status
 		 * change bit.  With others it's level-triggered, active
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * until khubd clears all the port status change bits.  We'll
 		 * always disable it here and rely on polling until khubd
+=======
+		 * until hub_wq clears all the port status change bits.  We'll
+		 * always disable it here and rely on polling until hub_wq
+>>>>>>> v3.18
 =======
 		 * until hub_wq clears all the port status change bits.  We'll
 		 * always disable it here and rely on polling until hub_wq
@@ -1148,7 +1245,11 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 	 */
 	else if (ints & OHCI_INTR_RD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ohci_vdbg(ohci, "resume detect\n");
+=======
+		ohci_dbg(ohci, "resume detect\n");
+>>>>>>> v3.18
 =======
 		ohci_dbg(ohci, "resume detect\n");
 >>>>>>> v3.18
@@ -1162,6 +1263,7 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 			usb_hcd_resume_root_hub(hcd);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ints & OHCI_INTR_WDH) {
 		spin_lock (&ohci->lock);
@@ -1198,12 +1300,18 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 	if (ints & OHCI_INTR_WDH)
 		update_done_list(ohci);
 >>>>>>> v3.18
+=======
+	spin_lock(&ohci->lock);
+	if (ints & OHCI_INTR_WDH)
+		update_done_list(ohci);
+>>>>>>> v3.18
 
 	/* could track INTR_SO to reduce available PCI/... bandwidth */
 
 	/* handle any pending URB/ED unlinks, leaving INTR_SF enabled
 	 * when there's still unlinking to be done (next frame).
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock (&ohci->lock);
 	if (ohci->ed_rm_list)
@@ -1218,6 +1326,8 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 	if (ohci->rh_state == OHCI_RH_RUNNING) {
 		ohci_writel (ohci, ints, &regs->intrstatus);
 =======
+=======
+>>>>>>> v3.18
 	ohci_work(ohci);
 	if ((ints & OHCI_INTR_SF) != 0 && !ohci->ed_rm_list
 			&& ohci->rh_state == OHCI_RH_RUNNING)
@@ -1228,12 +1338,19 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 		if (ints & OHCI_INTR_WDH)
 			++ohci->wdh_cnt;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ohci_writel (ohci, OHCI_INTR_MIE, &regs->intrenable);
 		// flush those writes
 		(void) ohci_readl (ohci, &ohci->regs->control);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock(&ohci->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&ohci->lock);
 >>>>>>> v3.18
@@ -1248,6 +1365,7 @@ static void ohci_stop (struct usb_hcd *hcd)
 	struct ohci_hcd		*ohci = hcd_to_ohci (hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ohci_dump (ohci, 1);
 
 	if (quirk_nec(ohci))
@@ -1261,6 +1379,8 @@ static void ohci_stop (struct usb_hcd *hcd)
 	if (quirk_zfmicro(ohci))
 		del_timer(&ohci->unlink_watchdog);
 =======
+=======
+>>>>>>> v3.18
 	ohci_dump(ohci);
 
 	if (quirk_nec(ohci))
@@ -1272,6 +1392,9 @@ static void ohci_stop (struct usb_hcd *hcd)
 	free_irq(hcd->irq, hcd);
 	hcd->irq = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (quirk_amdiso(ohci))
 		usb_amd_dev_put();
@@ -1293,7 +1416,11 @@ static void ohci_stop (struct usb_hcd *hcd)
 
 /* must not be called from interrupt context */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ohci_restart (struct ohci_hcd *ohci)
+=======
+int ohci_restart(struct ohci_hcd *ohci)
+>>>>>>> v3.18
 =======
 int ohci_restart(struct ohci_hcd *ohci)
 >>>>>>> v3.18
@@ -1303,6 +1430,10 @@ int ohci_restart(struct ohci_hcd *ohci)
 	struct urb_priv *priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ohci_init(ohci);
+>>>>>>> v3.18
 =======
 	ohci_init(ohci);
 >>>>>>> v3.18
@@ -1337,7 +1468,11 @@ int ohci_restart(struct ohci_hcd *ohci)
 			urb->unlinked = -ESHUTDOWN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	finish_unlinks (ohci, 0);
+=======
+	ohci_work(ohci);
+>>>>>>> v3.18
 =======
 	ohci_work(ohci);
 >>>>>>> v3.18
@@ -1364,6 +1499,10 @@ int ohci_restart(struct ohci_hcd *ohci)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ohci_restart);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ohci_restart);
 >>>>>>> v3.18
@@ -1373,16 +1512,22 @@ EXPORT_SYMBOL_GPL(ohci_restart);
 #ifdef CONFIG_PM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __maybe_unused ohci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 {
 	struct ohci_hcd	*ohci = hcd_to_ohci (hcd);
 	unsigned long	flags;
 =======
+=======
+>>>>>>> v3.18
 int ohci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 {
 	struct ohci_hcd	*ohci = hcd_to_ohci (hcd);
 	unsigned long	flags;
 	int		rc = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Disable irq emission and mark HW unaccessible. Use
@@ -1397,12 +1542,15 @@ int ohci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 	spin_unlock_irqrestore (&ohci->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 
 static int __maybe_unused ohci_resume(struct usb_hcd *hcd, bool hibernated)
 =======
+=======
+>>>>>>> v3.18
 	synchronize_irq(hcd->irq);
 
 	if (do_wakeup && HCD_WAKEUP_PENDING(hcd)) {
@@ -1415,6 +1563,9 @@ EXPORT_SYMBOL_GPL(ohci_suspend);
 
 
 int ohci_resume(struct usb_hcd *hcd, bool hibernated)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ohci_hcd		*ohci = hcd_to_ohci(hcd);
@@ -1464,9 +1615,12 @@ int ohci_resume(struct usb_hcd *hcd, bool hibernated)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(ohci_resume);
 
 #endif
@@ -1535,6 +1689,9 @@ void ohci_init_driver(struct hc_driver *drv,
 	}
 }
 EXPORT_SYMBOL_GPL(ohci_init_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*-------------------------------------------------------------------------*/
@@ -1544,6 +1701,7 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE ("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 #include "ohci-pci.c"
 #define PCI_DRIVER		ohci_pci_driver
@@ -1551,11 +1709,14 @@ MODULE_LICENSE ("GPL");
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ARCH_SA1100) && defined(CONFIG_SA1111)
 #include "ohci-sa1111.c"
 #define SA1111_DRIVER		ohci_hcd_sa1111_driver
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_ARCH_S3C24XX) || defined(CONFIG_ARCH_S3C64XX)
 #include "ohci-s3c2410.c"
@@ -1601,6 +1762,9 @@ MODULE_LICENSE ("GPL");
 =======
 #ifdef CONFIG_USB_OHCI_HCD_DAVINCI
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_USB_OHCI_HCD_DAVINCI
+>>>>>>> v3.18
 #include "ohci-da8xx.c"
 #define DAVINCI_PLATFORM_DRIVER	ohci_hcd_da8xx_driver
 #endif
@@ -1611,11 +1775,14 @@ MODULE_LICENSE ("GPL");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PLAT_SPEAR
 #include "ohci-spear.c"
 #define SPEAR_PLATFORM_DRIVER	spear_ohci_hcd_driver
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_PS3
@@ -1649,6 +1816,7 @@ MODULE_LICENSE ("GPL");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_OHCI_HCD_PLATFORM
 #include "ohci-platform.c"
 #define PLATFORM_DRIVER		ohci_platform_driver
@@ -1675,6 +1843,8 @@ MODULE_LICENSE ("GPL");
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __init ohci_hcd_mod_init(void)
 {
 	int retval = 0;
@@ -1688,7 +1858,10 @@ static int __init ohci_hcd_mod_init(void)
 	set_bit(USB_OHCI_LOADED, &usb_hcds_loaded);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ohci_debug_root = debugfs_create_dir("ohci", usb_debug_root);
@@ -1697,7 +1870,10 @@ static int __init ohci_hcd_mod_init(void)
 		goto error_debug;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1714,6 +1890,7 @@ static int __init ohci_hcd_mod_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OMAP1_PLATFORM_DRIVER
 	retval = platform_driver_register(&OMAP1_PLATFORM_DRIVER);
 	if (retval < 0)
@@ -1726,6 +1903,8 @@ static int __init ohci_hcd_mod_init(void)
 		goto error_omap3_platform;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef OF_PLATFORM_DRIVER
@@ -1741,12 +1920,15 @@ static int __init ohci_hcd_mod_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PCI_DRIVER
 	retval = pci_register_driver(&PCI_DRIVER);
 	if (retval < 0)
 		goto error_pci;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef SM501_OHCI_DRIVER
@@ -1761,6 +1943,7 @@ static int __init ohci_hcd_mod_init(void)
 		goto error_tmio;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef S3C2410_PLATFORM_DRIVER
 	retval = platform_driver_register(&S3C2410_PLATFORM_DRIVER);
@@ -1794,12 +1977,15 @@ static int __init ohci_hcd_mod_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef DAVINCI_PLATFORM_DRIVER
 	retval = platform_driver_register(&DAVINCI_PLATFORM_DRIVER);
 	if (retval < 0)
 		goto error_davinci;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef SPEAR_PLATFORM_DRIVER
 	retval = platform_driver_register(&SPEAR_PLATFORM_DRIVER);
@@ -1819,10 +2005,16 @@ static int __init ohci_hcd_mod_init(void)
 
 	/* Error path */
 >>>>>>> v3.18
+=======
+	return retval;
+
+	/* Error path */
+>>>>>>> v3.18
 #ifdef DAVINCI_PLATFORM_DRIVER
 	platform_driver_unregister(&DAVINCI_PLATFORM_DRIVER);
  error_davinci:
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef NXP_PLATFORM_DRIVER
 	platform_driver_unregister(&NXP_PLATFORM_DRIVER);
@@ -1846,6 +2038,8 @@ static int __init ohci_hcd_mod_init(void)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef TMIO_OHCI_DRIVER
 	platform_driver_unregister(&TMIO_OHCI_DRIVER);
  error_tmio:
@@ -1855,10 +2049,13 @@ static int __init ohci_hcd_mod_init(void)
  error_sm501:
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PCI_DRIVER
 	pci_unregister_driver(&PCI_DRIVER);
  error_pci:
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef SA1111_DRIVER
@@ -1870,6 +2067,7 @@ static int __init ohci_hcd_mod_init(void)
  error_of_platform:
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OMAP3_PLATFORM_DRIVER
 	platform_driver_unregister(&OMAP3_PLATFORM_DRIVER);
  error_omap3_platform:
@@ -1878,6 +2076,8 @@ static int __init ohci_hcd_mod_init(void)
 	platform_driver_unregister(&OMAP1_PLATFORM_DRIVER);
  error_omap1_platform:
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef PLATFORM_DRIVER
@@ -1889,11 +2089,17 @@ static int __init ohci_hcd_mod_init(void)
  error_ps3:
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	debugfs_remove(ohci_debug_root);
 	ohci_debug_root = NULL;
  error_debug:
 #endif
+=======
+	debugfs_remove(ohci_debug_root);
+	ohci_debug_root = NULL;
+ error_debug:
+>>>>>>> v3.18
 =======
 	debugfs_remove(ohci_debug_root);
 	ohci_debug_root = NULL;
@@ -1907,6 +2113,7 @@ module_init(ohci_hcd_mod_init);
 
 static void __exit ohci_hcd_mod_exit(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef SPEAR_PLATFORM_DRIVER
 	platform_driver_unregister(&SPEAR_PLATFORM_DRIVER);
@@ -1934,6 +2141,11 @@ static void __exit ohci_hcd_mod_exit(void)
 	platform_driver_unregister(&DAVINCI_PLATFORM_DRIVER);
 #endif
 >>>>>>> v3.18
+=======
+#ifdef DAVINCI_PLATFORM_DRIVER
+	platform_driver_unregister(&DAVINCI_PLATFORM_DRIVER);
+#endif
+>>>>>>> v3.18
 #ifdef TMIO_OHCI_DRIVER
 	platform_driver_unregister(&TMIO_OHCI_DRIVER);
 #endif
@@ -1941,9 +2153,12 @@ static void __exit ohci_hcd_mod_exit(void)
 	platform_driver_unregister(&SM501_OHCI_DRIVER);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PCI_DRIVER
 	pci_unregister_driver(&PCI_DRIVER);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef SA1111_DRIVER
@@ -1953,12 +2168,15 @@ static void __exit ohci_hcd_mod_exit(void)
 	platform_driver_unregister(&OF_PLATFORM_DRIVER);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OMAP3_PLATFORM_DRIVER
 	platform_driver_unregister(&OMAP3_PLATFORM_DRIVER);
 #endif
 #ifdef OMAP1_PLATFORM_DRIVER
 	platform_driver_unregister(&OMAP1_PLATFORM_DRIVER);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef PLATFORM_DRIVER
@@ -1968,9 +2186,13 @@ static void __exit ohci_hcd_mod_exit(void)
 	ps3_ohci_driver_unregister(&PS3_SYSTEM_BUS_DRIVER);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	debugfs_remove(ohci_debug_root);
 #endif
+=======
+	debugfs_remove(ohci_debug_root);
+>>>>>>> v3.18
 =======
 	debugfs_remove(ohci_debug_root);
 >>>>>>> v3.18

@@ -9,6 +9,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -37,9 +41,13 @@ ret_fast_syscall:
  UNWIND(.cantunwind	)
 	disable_irq				@ disable interrupts
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldr	r1, [tsk, #TI_FLAGS]		@ re-check for syscall tracing
 	tst	r1, #_TIF_SYSCALL_WORK
 	bne	__sys_trace_return
+=======
+	ldr	r1, [tsk, #TI_FLAGS]
+>>>>>>> v3.18
 =======
 	ldr	r1, [tsk, #TI_FLAGS]
 >>>>>>> v3.18
@@ -99,7 +107,11 @@ ENTRY(ret_from_fork)
 	movne	r0, r4
 	adrne	lr, BSYM(1f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movne	pc, r5
+=======
+	retne	r5
+>>>>>>> v3.18
 =======
 	retne	r5
 >>>>>>> v3.18
@@ -305,7 +317,11 @@ ENDPROC(ftrace_graph_caller_old)
 .macro mcount_exit
 	ldmia	sp!, {r0-r3, ip, lr}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, ip
+=======
+	ret	ip
+>>>>>>> v3.18
 =======
 	ret	ip
 >>>>>>> v3.18
@@ -317,7 +333,11 @@ UNWIND(.fnstart)
 	mov	ip, lr
 	ldmia	sp!, {lr}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, ip
+=======
+	ret	ip
+>>>>>>> v3.18
 =======
 	ret	ip
 >>>>>>> v3.18
@@ -356,7 +376,11 @@ return_to_handler:
 	mov	lr, r0			@ r0 has real ret addr
 	ldmia	sp!, {r0-r3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -365,7 +389,11 @@ return_to_handler:
 ENTRY(ftrace_stub)
 .Lftrace_stub:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -381,6 +409,12 @@ ENDPROC(ftrace_stub)
 	.align	5
 ENTRY(vector_swi)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CPU_V7M
+	v7m_exception_entry
+#else
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CPU_V7M
 	v7m_exception_entry
@@ -397,6 +431,7 @@ ENTRY(vector_swi)
 	str	r8, [sp, #S_PSR]		@ Save CPSR
 	str	r0, [sp, #S_OLD_R0]		@ Save OLD_R0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zero_fp
 
 #ifdef CONFIG_ALIGNMENT_TRAP
@@ -405,6 +440,11 @@ ENTRY(vector_swi)
 	mcr	p15, 0, ip, c1, c0		@ update control register
 #endif
 
+=======
+#endif
+	zero_fp
+	alignment_trap r10, ip, __cr_alignment
+>>>>>>> v3.18
 =======
 #endif
 	zero_fp
@@ -432,9 +472,13 @@ ENTRY(vector_swi)
  USER(	ldr	r10, [lr, #-4]		)	@ get SWI instruction
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 	rev	r10, r10			@ little endian instruction
 #endif
+=======
+ ARM_BE8(rev	r10, r10)			@ little endian instruction
+>>>>>>> v3.18
 =======
  ARM_BE8(rev	r10, r10)			@ little endian instruction
 >>>>>>> v3.18
@@ -485,15 +529,21 @@ local_restart:
 
 	add	r1, sp, #S_OFF
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:	mov	why, #0				@ no longer a real syscall
 	cmp	scno, #(__ARM_NR_BASE - __NR_SYSCALL_BASE)
 	eor	r0, scno, #__NR_SYSCALL_BASE	@ put OS number back
 	bcs	arm_syscall	
 =======
+=======
+>>>>>>> v3.18
 2:	cmp	scno, #(__ARM_NR_BASE - __NR_SYSCALL_BASE)
 	eor	r0, scno, #__NR_SYSCALL_BASE	@ put OS number back
 	bcs	arm_syscall
 	mov	why, #0				@ no longer a real syscall
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	sys_ni_syscall			@ not private func
 
@@ -619,7 +669,11 @@ sys_mmap2:
 		beq	sys_mmap_pgoff
 		mov	r0, #-EINVAL
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

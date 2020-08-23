@@ -121,7 +121,11 @@ void xonar_hdmi_uart_input(struct oxygen *chip)
 	    chip->uart_input[chip->uart_input_count - 2] == 'O' &&
 	    chip->uart_input[chip->uart_input_count - 1] == 'K') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "message from HDMI chip received:\n");
+=======
+		dev_dbg(chip->card->dev, "message from HDMI chip received:\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "message from HDMI chip received:\n");
 >>>>>>> v3.18

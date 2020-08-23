@@ -19,6 +19,7 @@
 #define	__XFS_ERROR_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 #define	XFS_ERROR_NTRAP	10
 extern int	xfs_etrap[XFS_ERROR_NTRAP];
@@ -30,6 +31,8 @@ extern int	xfs_error_trap(int);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct xfs_mount;
 
 extern void xfs_error_report(const char *tag, int level, struct xfs_mount *mp,
@@ -38,6 +41,10 @@ extern void xfs_corruption_error(const char *tag, int level,
 			struct xfs_mount *mp, void *p, const char *filename,
 			int linenum, inst_t *ra);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void xfs_verifier_error(struct xfs_buf *bp);
+>>>>>>> v3.18
 =======
 extern void xfs_verifier_error(struct xfs_buf *bp);
 >>>>>>> v3.18
@@ -63,7 +70,11 @@ extern void xfs_verifier_error(struct xfs_buf *bp);
 			XFS_ERROR_REPORT("XFS_WANT_CORRUPTED_GOTO", \
 					 XFS_ERRLEVEL_LOW, NULL); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = XFS_ERROR(EFSCORRUPTED); \
+=======
+			error = -EFSCORRUPTED; \
+>>>>>>> v3.18
 =======
 			error = -EFSCORRUPTED; \
 >>>>>>> v3.18
@@ -79,7 +90,11 @@ extern void xfs_verifier_error(struct xfs_buf *bp);
 			XFS_ERROR_REPORT("XFS_WANT_CORRUPTED_RETURN", \
 					 XFS_ERRLEVEL_LOW, NULL); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EFSCORRUPTED); \
+=======
+			return -EFSCORRUPTED; \
+>>>>>>> v3.18
 =======
 			return -EFSCORRUPTED; \
 >>>>>>> v3.18

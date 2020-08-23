@@ -169,7 +169,11 @@ static int rds_rdma_listen_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sin.sin_family = AF_INET,
+=======
+	sin.sin_family = AF_INET;
+>>>>>>> v3.18
 =======
 	sin.sin_family = AF_INET;
 >>>>>>> v3.18

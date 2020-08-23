@@ -17,6 +17,10 @@
 #include <asm/io.h>
 #include "pcsp.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "pcsp_input.h"
+>>>>>>> v3.18
 =======
 #include "pcsp_input.h"
 >>>>>>> v3.18

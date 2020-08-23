@@ -20,7 +20,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * INIT_LIST_HEAD_RCU - Initialize a list_head visible to RCU readers
  * @list: list to be initialized
  *
@@ -36,6 +39,9 @@ static inline void INIT_LIST_HEAD_RCU(struct list_head *list)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * return the ->next pointer of a list_head in an rcu safe
  * way, we must not access it directly
@@ -59,8 +65,13 @@ static inline void __list_add_rcu(struct list_head *new,
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __list_add_rcu(struct list_head *new,
 		struct list_head *prev, struct list_head *next);
+=======
+void __list_add_rcu(struct list_head *new,
+		    struct list_head *prev, struct list_head *next);
+>>>>>>> v3.18
 =======
 void __list_add_rcu(struct list_head *new,
 		    struct list_head *prev, struct list_head *next);
@@ -215,10 +226,13 @@ static inline void list_splice_init_rcu(struct list_head *list,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* "first" and "last" tracking list, so initialize it. */
 
 	INIT_LIST_HEAD(list);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * "first" and "last" tracking list, so initialize it.  RCU readers
 	 * have access to this list, so we must use INIT_LIST_HEAD_RCU()
@@ -226,6 +240,9 @@ static inline void list_splice_init_rcu(struct list_head *list,
 	 */
 
 	INIT_LIST_HEAD_RCU(list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -262,14 +279,20 @@ static inline void list_splice_init_rcu(struct list_head *list,
  */
 #define list_entry_rcu(ptr, type, member) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	({typeof (*ptr) __rcu *__ptr = (typeof (*ptr) __rcu __force *)ptr; \
 	 container_of((typeof(ptr))rcu_dereference_raw(__ptr), type, member); \
 	})
 =======
+=======
+>>>>>>> v3.18
 ({ \
 	typeof(*ptr) __rcu *__ptr = (typeof(*ptr) __rcu __force *)ptr; \
 	container_of((typeof(ptr))rcu_dereference_raw(__ptr), type, member); \
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -307,17 +330,23 @@ static inline void list_splice_init_rcu(struct list_head *list,
  */
 #define list_first_or_null_rcu(ptr, type, member) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	({struct list_head *__ptr = (ptr); \
 	  struct list_head *__next = ACCESS_ONCE(__ptr->next); \
 	  likely(__ptr != __next) ? \
 		list_entry_rcu(__next, type, member) : NULL; \
 	})
 =======
+=======
+>>>>>>> v3.18
 ({ \
 	struct list_head *__ptr = (ptr); \
 	struct list_head *__next = ACCESS_ONCE(__ptr->next); \
 	likely(__ptr != __next) ? list_entry_rcu(__next, type, member) : NULL; \
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -461,9 +490,15 @@ static inline void hlist_add_before_rcu(struct hlist_node *n,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * hlist_add_after_rcu
  * @prev: the existing element to add the new element after.
  * @n: the new element to add to the hash list.
+=======
+ * hlist_add_behind_rcu
+ * @n: the new element to add to the hash list.
+ * @prev: the existing element to add the new element after.
+>>>>>>> v3.18
 =======
  * hlist_add_behind_rcu
  * @n: the new element to add to the hash list.
@@ -484,8 +519,13 @@ static inline void hlist_add_before_rcu(struct hlist_node *n,
  * problems on Alpha CPUs.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void hlist_add_after_rcu(struct hlist_node *prev,
 				       struct hlist_node *n)
+=======
+static inline void hlist_add_behind_rcu(struct hlist_node *n,
+					struct hlist_node *prev)
+>>>>>>> v3.18
 =======
 static inline void hlist_add_behind_rcu(struct hlist_node *n,
 					struct hlist_node *prev)

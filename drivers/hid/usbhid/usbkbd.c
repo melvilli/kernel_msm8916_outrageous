@@ -147,7 +147,11 @@ static void usb_kbd_irq(struct urb *urb)
 			else
 				hid_info(urb->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 "Unknown key (scancode %#x) released.\n",
+=======
+					 "Unknown key (scancode %#x) pressed.\n",
+>>>>>>> v3.18
 =======
 					 "Unknown key (scancode %#x) pressed.\n",
 >>>>>>> v3.18

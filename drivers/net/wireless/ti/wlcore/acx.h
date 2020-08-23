@@ -825,7 +825,12 @@ struct wl1271_acx_inconnection_sta {
 
 	u8 addr[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 padding1[2];
+=======
+	u8 role_id;
+	u8 padding;
+>>>>>>> v3.18
 =======
 	u8 role_id;
 	u8 padding;
@@ -1124,7 +1129,12 @@ int wl1271_acx_ps_rx_streaming(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 int wl1271_acx_ap_max_tx_retry(struct wl1271 *wl, struct wl12xx_vif *wlvif);
 int wl12xx_acx_config_ps(struct wl1271 *wl, struct wl12xx_vif *wlvif);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl1271_acx_set_inconnection_sta(struct wl1271 *wl, u8 *addr);
+=======
+int wl1271_acx_set_inconnection_sta(struct wl1271 *wl,
+				    struct wl12xx_vif *wlvif, u8 *addr);
+>>>>>>> v3.18
 =======
 int wl1271_acx_set_inconnection_sta(struct wl1271 *wl,
 				    struct wl12xx_vif *wlvif, u8 *addr);

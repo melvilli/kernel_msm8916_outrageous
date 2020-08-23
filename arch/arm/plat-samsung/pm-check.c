@@ -20,7 +20,11 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/pm.h>
+=======
+#include <plat/pm-common.h>
+>>>>>>> v3.18
 =======
 #include <plat/pm-common.h>
 >>>>>>> v3.18

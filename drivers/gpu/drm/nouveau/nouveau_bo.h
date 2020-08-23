@@ -2,6 +2,11 @@
 #define __NOUVEAU_BO_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_gem.h>
 
@@ -15,8 +20,13 @@ struct nouveau_bo {
 	struct ttm_placement placement;
 	u32 valid_domains;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 placements[3];
 	u32 busy_placements[3];
+=======
+	struct ttm_place placements[3];
+	struct ttm_place busy_placements[3];
+>>>>>>> v3.18
 =======
 	struct ttm_place placements[3];
 	struct ttm_place busy_placements[3];
@@ -38,12 +48,18 @@ struct nouveau_bo {
 	struct nouveau_drm_tile *tile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_gem_object *gem;
 =======
+=======
+>>>>>>> v3.18
 	/* Only valid if allocated via nouveau_gem_new() and iff you hold a
 	 * gem reference to it! For debugging, use gem.filp != NULL to test
 	 * whether it is valid. */
 	struct drm_gem_object gem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* protect by the ttm reservation lock */
@@ -83,6 +99,10 @@ void nouveau_bo_move_init(struct nouveau_drm *);
 int  nouveau_bo_new(struct drm_device *, int size, int align, u32 flags,
 		    u32 tile_mode, u32 tile_flags, struct sg_table *sg,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		    struct reservation_object *robj,
+>>>>>>> v3.18
 =======
 		    struct reservation_object *robj,
 >>>>>>> v3.18
@@ -97,7 +117,11 @@ void nouveau_bo_wr16(struct nouveau_bo *, unsigned index, u16 val);
 u32  nouveau_bo_rd32(struct nouveau_bo *, unsigned index);
 void nouveau_bo_wr32(struct nouveau_bo *, unsigned index, u32 val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nouveau_bo_fence(struct nouveau_bo *, struct nouveau_fence *);
+=======
+void nouveau_bo_fence(struct nouveau_bo *, struct nouveau_fence *, bool exclusive);
+>>>>>>> v3.18
 =======
 void nouveau_bo_fence(struct nouveau_bo *, struct nouveau_fence *, bool exclusive);
 >>>>>>> v3.18

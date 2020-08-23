@@ -15,11 +15,17 @@ struct fs_struct;
  * namespaces - fs (mount), uts, network, sysvipc, etc.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * The pid namespace is an exception -- it's accessed using
  * task_active_pid_ns.  The pid namespace here is the
  * namespace that children will use.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * 'count' is the number of tasks holding a reference.
  * The count for each namespace, then, will be the number
@@ -35,7 +41,11 @@ struct nsproxy {
 	struct ipc_namespace *ipc_ns;
 	struct mnt_namespace *mnt_ns;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pid_namespace *pid_ns;
+=======
+	struct pid_namespace *pid_ns_for_children;
+>>>>>>> v3.18
 =======
 	struct pid_namespace *pid_ns_for_children;
 >>>>>>> v3.18
@@ -48,7 +58,12 @@ extern struct nsproxy init_nsproxy;
  *
  *  1. only current task is allowed to change tsk->nsproxy pointer or
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     any pointer on the nsproxy itself
+=======
+ *     any pointer on the nsproxy itself.  Current must hold the task_lock
+ *     when changing tsk->nsproxy.
+>>>>>>> v3.18
 =======
  *     any pointer on the nsproxy itself.  Current must hold the task_lock
  *     when changing tsk->nsproxy.
@@ -59,8 +74,13 @@ extern struct nsproxy init_nsproxy;
  *
  *  3. the access to other task namespaces is performed like this
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     rcu_read_lock();
  *     nsproxy = task_nsproxy(tsk);
+=======
+ *     task_lock(task);
+ *     nsproxy = task->nsproxy;
+>>>>>>> v3.18
 =======
  *     task_lock(task);
  *     nsproxy = task->nsproxy;
@@ -71,6 +91,7 @@ extern struct nsproxy init_nsproxy;
  *               * e.g. get the reference on one of them
  *               * /
  *     } / *
+<<<<<<< HEAD
 <<<<<<< HEAD
  *         * NULL task_nsproxy() means that this task is
  *         * almost dead (zombie)
@@ -85,6 +106,8 @@ static inline struct nsproxy *task_nsproxy(struct task_struct *tsk)
 }
 
 =======
+=======
+>>>>>>> v3.18
  *         * NULL task->nsproxy means that this task is
  *         * almost dead (zombie)
  *         * /
@@ -92,6 +115,9 @@ static inline struct nsproxy *task_nsproxy(struct task_struct *tsk)
  *
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int copy_namespaces(unsigned long flags, struct task_struct *tsk);
 void exit_task_namespaces(struct task_struct *tsk);

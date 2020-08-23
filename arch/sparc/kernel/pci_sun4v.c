@@ -49,7 +49,11 @@ static int iommu_batch_initialized;
 static inline void iommu_batch_start(struct device *dev, unsigned long prot, unsigned long entry)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iommu_batch *p = &__get_cpu_var(iommu_batch);
+=======
+	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
+>>>>>>> v3.18
 =======
 	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
 >>>>>>> v3.18
@@ -99,7 +103,11 @@ static long iommu_batch_flush(struct iommu_batch *p)
 static inline void iommu_batch_new_entry(unsigned long entry)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iommu_batch *p = &__get_cpu_var(iommu_batch);
+=======
+	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
+>>>>>>> v3.18
 =======
 	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
 >>>>>>> v3.18
@@ -115,7 +123,11 @@ static inline void iommu_batch_new_entry(unsigned long entry)
 static inline long iommu_batch_add(u64 phys_page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iommu_batch *p = &__get_cpu_var(iommu_batch);
+=======
+	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
+>>>>>>> v3.18
 =======
 	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
 >>>>>>> v3.18
@@ -133,7 +145,11 @@ static inline long iommu_batch_add(u64 phys_page)
 static inline long iommu_batch_end(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iommu_batch *p = &__get_cpu_var(iommu_batch);
+=======
+	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
+>>>>>>> v3.18
 =======
 	struct iommu_batch *p = this_cpu_ptr(&iommu_batch);
 >>>>>>> v3.18

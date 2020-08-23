@@ -154,7 +154,11 @@ bool atl1c_read_eeprom(struct atl1c_hw *hw, u32 offset, u32 *p_value)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = false;
+=======
+	bool ret = false;
+>>>>>>> v3.18
 =======
 	bool ret = false;
 >>>>>>> v3.18
@@ -644,7 +648,10 @@ int atl1c_phy_init(struct atl1c_hw *hw)
 				hw->media_type);
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -690,7 +697,10 @@ int atl1c_get_speed_and_duplex(struct atl1c_hw *hw, u16 *speed, u16 *duplex)
 	default:
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

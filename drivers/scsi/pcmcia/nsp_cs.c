@@ -196,7 +196,11 @@ static int nsp_queuecommand_lck(struct scsi_cmnd *SCpnt,
 
 	nsp_dbg(NSP_DEBUG_QUEUECOMMAND,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"SCpnt=0x%p target=%d lun=%d sglist=0x%p bufflen=%d sg_count=%d",
+=======
+		"SCpnt=0x%p target=%d lun=%llu sglist=0x%p bufflen=%d sg_count=%d",
+>>>>>>> v3.18
 =======
 		"SCpnt=0x%p target=%d lun=%llu sglist=0x%p bufflen=%d sg_count=%d",
 >>>>>>> v3.18
@@ -538,7 +542,11 @@ static int nsp_negate_signal(struct scsi_cmnd *SCpnt, unsigned char mask,
 
 	if (time_out == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nsp_msg(KERN_DEBUG, " %s signal off timeut", str);
+=======
+		nsp_msg(KERN_DEBUG, " %s signal off timeout", str);
+>>>>>>> v3.18
 =======
 		nsp_msg(KERN_DEBUG, " %s signal off timeout", str);
 >>>>>>> v3.18

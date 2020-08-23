@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -27,6 +31,7 @@ struct cmd_type_7_fx00 {
 
 	uint32_t handle;		/* System handle. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t handle_hi;
 
 	uint16_t tgt_idx;		/* Target Idx. */
@@ -35,6 +40,8 @@ struct cmd_type_7_fx00 {
 	uint16_t dseg_count;		/* Data segment count. */
 	uint16_t scsi_rsp_dsd_len;
 =======
+=======
+>>>>>>> v3.18
 	uint8_t reserved_0;
 	uint8_t port_path_ctrl;
 	uint16_t reserved_1;
@@ -45,6 +52,9 @@ struct cmd_type_7_fx00 {
 	__le16 dseg_count;		/* Data segment count. */
 	uint8_t	scsi_rsp_dsd_len;
 	uint8_t reserved_2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct scsi_lun lun;		/* LUN (LE). */
@@ -59,7 +69,11 @@ struct cmd_type_7_fx00 {
 
 	uint8_t fcp_cdb[MAX_CMDSZ];	/* SCSI command words. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t byte_count;		/* Total byte count. */
+=======
+	__le32 byte_count;		/* Total byte count. */
+>>>>>>> v3.18
 =======
 	__le32 byte_count;		/* Total byte count. */
 >>>>>>> v3.18
@@ -68,6 +82,7 @@ struct cmd_type_7_fx00 {
 	uint32_t dseg_0_len;		/* Data segment 0 length. */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * ISP queue - marker entry structure definition.
@@ -95,6 +110,8 @@ struct mrk_entry_fx00 {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define	STATUS_TYPE_FX00	0x01		/* Status entry. */
 struct sts_entry_fx00 {
 	uint8_t entry_type;		/* Entry type. */
@@ -104,6 +121,7 @@ struct sts_entry_fx00 {
 
 	uint32_t handle;		/* System handle. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t handle_hi;		/* System handle. */
 
 	uint16_t comp_status;		/* Completion status. */
@@ -111,12 +129,17 @@ struct sts_entry_fx00 {
 
 	uint32_t residual_len;		/* FW calc residual transfer length. */
 =======
+=======
+>>>>>>> v3.18
 	uint32_t reserved_3;		/* System handle. */
 
 	__le16 comp_status;		/* Completion status. */
 	uint16_t reserved_0;		/* OX_ID used by the firmware. */
 
 	__le32 residual_len;		/* FW calc residual transfer length. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uint16_t reserved_1;
@@ -124,7 +147,11 @@ struct sts_entry_fx00 {
 
 	uint16_t reserved_2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t scsi_status;		/* SCSI status. */
+=======
+	__le16 scsi_status;		/* SCSI status. */
+>>>>>>> v3.18
 =======
 	__le16 scsi_status;		/* SCSI status. */
 >>>>>>> v3.18
@@ -140,17 +167,23 @@ struct sts_entry_fx00 {
 struct multi_sts_entry_fx00 {
 	uint8_t entry_type;		/* Entry type. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t sys_define;		/* System defined. */
 	uint8_t handle_count;
 	uint8_t entry_status;
 
 	uint32_t handles[MAX_HANDLE_COUNT];
 =======
+=======
+>>>>>>> v3.18
 	uint8_t entry_count;		/* Entry count. */
 	uint8_t handle_count;
 	uint8_t entry_status;
 
 	__le32 handles[MAX_HANDLE_COUNT];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -161,6 +194,7 @@ struct tsk_mgmt_entry_fx00 {
 	uint8_t sys_define;
 	uint8_t entry_status;		/* Entry Status. */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint32_t handle;		/* System handle. */
 
@@ -178,6 +212,8 @@ struct tsk_mgmt_entry_fx00 {
 
 	uint32_t control_flags;		/* Control Flags. */
 =======
+=======
+>>>>>>> v3.18
 	__le32 handle;		/* System handle. */
 
 	uint32_t reserved_0;
@@ -191,6 +227,9 @@ struct tsk_mgmt_entry_fx00 {
 	struct scsi_lun lun;		/* LUN (LE). */
 
 	__le32 control_flags;		/* Control Flags. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uint8_t reserved_2[32];
@@ -205,6 +244,7 @@ struct abort_iocb_entry_fx00 {
 	uint8_t entry_status;		/* Entry Status. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t handle;		/* System handle. */
 	uint32_t handle_hi;		/* System handle. */
 
@@ -216,6 +256,8 @@ struct abort_iocb_entry_fx00 {
 
 	uint16_t req_que_no;
 =======
+=======
+>>>>>>> v3.18
 	__le32 handle;		/* System handle. */
 	__le32 reserved_0;
 
@@ -226,6 +268,9 @@ struct abort_iocb_entry_fx00 {
 	__le32 reserved_2;
 
 	__le16 req_que_no;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint8_t reserved_1[38];
 };
@@ -242,6 +287,7 @@ struct ioctl_iocb_entry_fx00 {
 
 	uint16_t comp_func_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t fw_iotcl_flags;
 
 	uint32_t dataword_r;		/* Data word returned */
@@ -254,6 +300,8 @@ struct ioctl_iocb_entry_fx00 {
 	uint32_t residuallen;
 	uint32_t status;
 =======
+=======
+>>>>>>> v3.18
 	__le16 fw_iotcl_flags;
 
 	__le32 dataword_r;		/* Data word returned */
@@ -264,6 +312,9 @@ struct ioctl_iocb_entry_fx00 {
 	uint8_t reserved_2[20];
 	uint32_t residuallen;
 	__le32 status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -276,6 +327,7 @@ struct fxdisc_entry_fx00 {
 	uint8_t sys_define;		/* System Defined. */
 	uint8_t entry_status;		/* Entry Status. */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint32_t handle;		/* System handle. */
 	uint32_t reserved_0;		/* System handle. */
@@ -298,6 +350,8 @@ struct fxdisc_entry_fx00 {
 	uint32_t adapid_hi;
 	uint32_t dataword_extra;
 =======
+=======
+>>>>>>> v3.18
 	__le32 handle;		/* System handle. */
 	__le32 reserved_0;		/* System handle. */
 
@@ -318,6 +372,9 @@ struct fxdisc_entry_fx00 {
 	__le32 adapid;
 	__le32 adapid_hi;
 	__le32 dataword_extra;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -415,7 +472,13 @@ struct register_host_info {
 
 struct config_info_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t		product_name[256];
+=======
+	uint8_t		model_num[16];
+	uint8_t		model_description[80];
+	uint8_t		reserved0[160];
+>>>>>>> v3.18
 =======
 	uint8_t		model_num[16];
 	uint8_t		model_description[80];
@@ -446,7 +509,11 @@ struct config_info_data {
 
 	uint32_t	cluster_key_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t		cluster_key[10];
+=======
+	uint8_t		cluster_key[16];
+>>>>>>> v3.18
 =======
 	uint8_t		cluster_key[16];
 >>>>>>> v3.18
@@ -455,6 +522,11 @@ struct config_info_data {
 	uint64_t	cluster_slave_id;
 	uint8_t		cluster_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t	enabled_capabilities;
+	uint32_t	nominal_temp_value;
+>>>>>>> v3.18
 =======
 	uint32_t	enabled_capabilities;
 	uint32_t	nominal_temp_value;
@@ -467,12 +539,15 @@ struct config_info_data {
 #define FXDISC_GET_TGT_NODE_LIST	0x81
 #define FXDISC_REG_HOST_INFO		0x99
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define QLAFX00_HBA_ICNTRL_REG		0x21B08
 #define QLAFX00_ICR_ENB_MASK            0x80000000
 #define QLAFX00_ICR_DIS_MASK            0x7fffffff
 #define QLAFX00_HST_RST_REG		0x18264
 =======
+=======
+>>>>>>> v3.18
 #define FXDISC_ABORT_IOCTL		0xff
 
 #define QLAFX00_HBA_ICNTRL_REG		0x20B08
@@ -480,6 +555,9 @@ struct config_info_data {
 #define QLAFX00_ICR_DIS_MASK            0x7fffffff
 #define QLAFX00_HST_RST_REG		0x18264
 #define QLAFX00_SOC_TEMP_REG		0x184C4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLAFX00_HST_TO_HBA_REG		0x20A04
 #define QLAFX00_HBA_TO_HOST_REG		0x21B70
@@ -490,6 +568,7 @@ struct config_info_data {
 #define QLAFX00_INTR_MB_CMPLT		0x1
 #define QLAFX00_INTR_RSP_CMPLT		0x2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLAFX00_INTR_MB_RSP_CMPLT	0x3
 #define QLAFX00_INTR_ASYNC_CMPLT	0x4
 #define QLAFX00_INTR_MB_ASYNC_CMPLT	0x5
@@ -498,12 +577,17 @@ struct config_info_data {
 
 #define QLAFX00_MBA_SYSTEM_ERR		0x8002
 =======
+=======
+>>>>>>> v3.18
 #define QLAFX00_INTR_ASYNC_CMPLT	0x4
 
 #define QLAFX00_MBA_SYSTEM_ERR		0x8002
 #define QLAFX00_MBA_TEMP_OVER		0x8005
 #define QLAFX00_MBA_TEMP_NORM		0x8006
 #define	QLAFX00_MBA_TEMP_CRIT		0x8007
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLAFX00_MBA_LINK_UP		0x8011
 #define QLAFX00_MBA_LINK_DOWN		0x8012
@@ -515,6 +599,10 @@ struct config_info_data {
 #define SOC_FABRIC_CONTROL_REG           0x0020200
 #define SOC_FABRIC_CONFIG_REG            0x0020204
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SOC_PWR_MANAGEMENT_PWR_DOWN_REG  0x001820C
+>>>>>>> v3.18
 =======
 #define SOC_PWR_MANAGEMENT_PWR_DOWN_REG  0x001820C
 >>>>>>> v3.18
@@ -570,6 +658,7 @@ struct config_info_data {
 
 struct qla_mt_iocb_rqst_fx00 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t reserved_0;
 
 	uint16_t func_type;
@@ -587,6 +676,8 @@ struct qla_mt_iocb_rqst_fx00 {
 
 	uint32_t rsp_len;
 =======
+=======
+>>>>>>> v3.18
 	__le32 reserved_0;
 
 	__le16 func_type;
@@ -605,6 +696,9 @@ struct qla_mt_iocb_rqst_fx00 {
 
 	__le16 rsp_len;
 	__le16 reserved_3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -613,9 +707,15 @@ struct qla_mt_iocb_rsp_fx00 {
 
 	uint16_t func_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t ioctl_flags;
 
 	uint32_t ioctl_data;
+=======
+	__le16 ioctl_flags;
+
+	__le32 ioctl_data;
+>>>>>>> v3.18
 =======
 	__le16 ioctl_flags;
 
@@ -627,7 +727,11 @@ struct qla_mt_iocb_rsp_fx00 {
 
 	uint32_t reserved_2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t seq_number;
+=======
+	__le32 seq_number;
+>>>>>>> v3.18
 =======
 	__le32 seq_number;
 >>>>>>> v3.18
@@ -637,7 +741,11 @@ struct qla_mt_iocb_rsp_fx00 {
 	int32_t res_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t status;
+=======
+	__le32 status;
+>>>>>>> v3.18
 =======
 	__le32 status;
 >>>>>>> v3.18
@@ -666,7 +774,10 @@ struct qla_mt_iocb_rsp_fx00 {
 
 struct mr_data_fx00 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t	product_name[256];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uint8_t	symbolic_name[64];
@@ -686,10 +797,13 @@ struct mr_data_fx00 {
 	uint16_t fw_reset_timer_tick;
 	uint8_t fw_reset_timer_exp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t old_aenmbx0_state;
 };
 
 =======
+=======
+>>>>>>> v3.18
 	uint16_t fw_critemp_timer_tick;
 	uint32_t old_aenmbx0_state;
 	uint32_t critical_temperature;
@@ -716,6 +830,9 @@ struct mr_data_fx00 {
 	((QLAFX00_RD_REG(ha, QLAFX00_SOC_TEMP_REG) & 0x3FE) >> 1))) / 13825)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLAFX00_LOOP_DOWN_TIME		615     /* 600 */
 #define QLAFX00_HEARTBEAT_INTERVAL	6	/* number of seconds */
@@ -723,7 +840,10 @@ struct mr_data_fx00 {
 #define QLAFX00_RESET_INTERVAL		120	/* number of seconds */
 #define QLAFX00_MAX_RESET_INTERVAL	600	/* number of seconds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define QLAFX00_CRITEMP_INTERVAL	60	/* number of seconds */
 #define QLAFX00_HINFO_RESEND_INTERVAL	60	/* number of seconds */
 
@@ -735,5 +855,8 @@ struct mr_data_fx00 {
 /* IOCTL IOCB abort success */
 #define QLAFX00_IOCTL_ICOB_ABORT_SUCCESS	0x68
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

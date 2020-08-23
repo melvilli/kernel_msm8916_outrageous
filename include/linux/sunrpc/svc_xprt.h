@@ -25,6 +25,11 @@ struct svc_xprt_ops {
 	void		(*xpo_detach)(struct svc_xprt *);
 	void		(*xpo_free)(struct svc_xprt *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		(*xpo_secure_port)(struct svc_rqst *);
+	void		(*xpo_adjust_wspace)(struct svc_xprt *);
+>>>>>>> v3.18
 =======
 	int		(*xpo_secure_port)(struct svc_rqst *);
 	void		(*xpo_adjust_wspace)(struct svc_xprt *);
@@ -70,6 +75,10 @@ struct svc_xprt {
 #define XPT_LISTENER	11		/* listening endpoint */
 #define XPT_CACHE_AUTH	12		/* cache auth info */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XPT_LOCAL	13		/* connection from loopback interface */
+>>>>>>> v3.18
 =======
 #define XPT_LOCAL	13		/* connection from loopback interface */
 >>>>>>> v3.18

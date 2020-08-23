@@ -15,6 +15,11 @@
 #include <linux/lockd/lockd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/nfs3.h>
+
+>>>>>>> v3.18
 =======
 #include <uapi/linux/nfs3.h>
 

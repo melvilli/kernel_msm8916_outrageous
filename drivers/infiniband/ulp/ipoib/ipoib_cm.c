@@ -141,7 +141,12 @@ static struct sk_buff *ipoib_cm_alloc_rx_skb(struct net_device *dev,
 					     struct ipoib_cm_rx_buf *rx_ring,
 					     int id, int frags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     u64 mapping[IPOIB_CM_RX_SG])
+=======
+					     u64 mapping[IPOIB_CM_RX_SG],
+					     gfp_t gfp)
+>>>>>>> v3.18
 =======
 					     u64 mapping[IPOIB_CM_RX_SG],
 					     gfp_t gfp)
@@ -170,7 +175,11 @@ static struct sk_buff *ipoib_cm_alloc_rx_skb(struct net_device *dev,
 
 	for (i = 0; i < frags; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct page *page = alloc_page(GFP_ATOMIC);
+=======
+		struct page *page = alloc_page(gfp);
+>>>>>>> v3.18
 =======
 		struct page *page = alloc_page(gfp);
 >>>>>>> v3.18
@@ -392,7 +401,12 @@ static int ipoib_cm_nonsrq_init_rx(struct net_device *dev, struct ib_cm_id *cm_i
 	for (i = 0; i < ipoib_recvq_size; ++i) {
 		if (!ipoib_cm_alloc_rx_skb(dev, rx->rx_ring, i, IPOIB_CM_RX_SG - 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   rx->rx_ring[i].mapping)) {
+=======
+					   rx->rx_ring[i].mapping,
+					   GFP_KERNEL)) {
+>>>>>>> v3.18
 =======
 					   rx->rx_ring[i].mapping,
 					   GFP_KERNEL)) {
@@ -654,7 +668,12 @@ void ipoib_cm_handle_rx_wc(struct net_device *dev, struct ib_wc *wc)
 					      (unsigned)IPOIB_CM_HEAD_SIZE)) / PAGE_SIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	newskb = ipoib_cm_alloc_rx_skb(dev, rx_ring, wr_id, frags, mapping);
+=======
+	newskb = ipoib_cm_alloc_rx_skb(dev, rx_ring, wr_id, frags,
+				       mapping, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	newskb = ipoib_cm_alloc_rx_skb(dev, rx_ring, wr_id, frags,
 				       mapping, GFP_ATOMIC);
@@ -837,7 +856,10 @@ void ipoib_cm_handle_tx_wc(struct net_device *dev, struct ib_wc *wc)
 		if (neigh) {
 			neigh->cm = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_del(&neigh->list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ipoib_neigh_free(neigh);
@@ -1051,11 +1073,14 @@ static struct ib_qp *ipoib_cm_create_tx_qp(struct net_device *dev, struct ipoib_
 		.sq_sig_type		= IB_SIGNAL_ALL_WR,
 		.qp_type		= IB_QPT_RC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.qp_context		= tx
 	};
 
 	return ib_create_qp(priv->pd, &attr);
 =======
+=======
+>>>>>>> v3.18
 		.qp_context		= tx,
 		.create_flags		= IB_QP_CREATE_USE_GFP_NOIO
 	};
@@ -1070,6 +1095,9 @@ static struct ib_qp *ipoib_cm_create_tx_qp(struct net_device *dev, struct ipoib_
 		tx_qp = ib_create_qp(priv->pd, &attr);
 	}
 	return tx_qp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1142,7 +1170,12 @@ static int ipoib_cm_tx_init(struct ipoib_cm_tx *p, u32 qpn,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->tx_ring = vzalloc(ipoib_sendq_size * sizeof *p->tx_ring);
+=======
+	p->tx_ring = __vmalloc(ipoib_sendq_size * sizeof *p->tx_ring,
+			       GFP_NOIO, PAGE_KERNEL);
+>>>>>>> v3.18
 =======
 	p->tx_ring = __vmalloc(ipoib_sendq_size * sizeof *p->tx_ring,
 			       GFP_NOIO, PAGE_KERNEL);
@@ -1153,6 +1186,10 @@ static int ipoib_cm_tx_init(struct ipoib_cm_tx *p, u32 qpn,
 		goto err_tx;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(p->tx_ring, 0, ipoib_sendq_size * sizeof *p->tx_ring);
+>>>>>>> v3.18
 =======
 	memset(p->tx_ring, 0, ipoib_sendq_size * sizeof *p->tx_ring);
 >>>>>>> v3.18
@@ -1283,7 +1320,10 @@ static int ipoib_cm_tx_handler(struct ib_cm_id *cm_id,
 		if (neigh) {
 			neigh->cm = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_del(&neigh->list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ipoib_neigh_free(neigh);
@@ -1342,8 +1382,11 @@ void ipoib_cm_destroy_tx(struct ipoib_cm_tx *tx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QPN_AND_OPTIONS_OFFSET	4
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ipoib_cm_tx_start(struct work_struct *work)
@@ -1355,7 +1398,10 @@ static void ipoib_cm_tx_start(struct work_struct *work)
 	struct ipoib_cm_tx *p;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipoib_path *path;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -1370,6 +1416,7 @@ static void ipoib_cm_tx_start(struct work_struct *work)
 		p = list_entry(priv->cm.start_list.next, typeof(*p), list);
 		list_del_init(&p->list);
 		neigh = p->neigh;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		qpn = IPOIB_QPN(neigh->daddr);
@@ -1387,6 +1434,9 @@ static void ipoib_cm_tx_start(struct work_struct *work)
 =======
 		qpn = IPOIB_QPN(neigh->daddr);
 >>>>>>> v3.18
+=======
+		qpn = IPOIB_QPN(neigh->daddr);
+>>>>>>> v3.18
 		memcpy(&pathrec, &p->path->pathrec, sizeof pathrec);
 
 		spin_unlock_irqrestore(&priv->lock, flags);
@@ -1399,11 +1449,17 @@ static void ipoib_cm_tx_start(struct work_struct *work)
 
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 free_neigh:
 			neigh = p->neigh;
 			if (neigh) {
 				neigh->cm = NULL;
 				list_del(&neigh->list);
+=======
+			neigh = p->neigh;
+			if (neigh) {
+				neigh->cm = NULL;
+>>>>>>> v3.18
 =======
 			neigh = p->neigh;
 			if (neigh) {
@@ -1550,6 +1606,7 @@ static ssize_t set_mode(struct device *d, struct device_attribute *attr,
 	ret = ipoib_set_mode(dev, buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The assumption is that the function ipoib_set_mode returned
 	 * with the rtnl held by it, if not the value -EBUSY returned,
 	 * then no need to rtnl_unlock
@@ -1559,12 +1616,17 @@ static ssize_t set_mode(struct device *d, struct device_attribute *attr,
 
 	return (!ret || ret == -EBUSY) ? count : ret;
 =======
+=======
+>>>>>>> v3.18
 	rtnl_unlock();
 
 	if (!ret)
 		return count;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1654,7 +1716,12 @@ int ipoib_cm_dev_init(struct net_device *dev)
 			if (!ipoib_cm_alloc_rx_skb(dev, priv->cm.srq_ring, i,
 						   priv->cm.num_frags - 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   priv->cm.srq_ring[i].mapping)) {
+=======
+						   priv->cm.srq_ring[i].mapping,
+						   GFP_KERNEL)) {
+>>>>>>> v3.18
 =======
 						   priv->cm.srq_ring[i].mapping,
 						   GFP_KERNEL)) {

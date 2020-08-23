@@ -18,6 +18,10 @@
 
 ccflags-y += -I$(src)			# needed for trace events
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-y += -I$(src)/libxfs
+>>>>>>> v3.18
 =======
 ccflags-y += -I$(src)/libxfs
 >>>>>>> v3.18
@@ -30,12 +34,15 @@ obj-$(CONFIG_XFS_FS)		+= xfs.o
 xfs-y				+= xfs_trace.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # highlevel code
 xfs-y				+= xfs_aops.o \
 				   xfs_bit.o \
 				   xfs_buf.o \
 				   xfs_dfrag.o \
 =======
+=======
+>>>>>>> v3.18
 # build the libxfs code first
 xfs-y				+= $(addprefix libxfs/, \
 				   xfs_alloc.o \
@@ -77,6 +84,9 @@ xfs-y				+= xfs_aops.o \
 				   xfs_bmap_util.o \
 				   xfs_buf.o \
 				   xfs_dir2_readdir.o \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   xfs_discard.o \
 				   xfs_error.o \
@@ -91,6 +101,7 @@ xfs-y				+= xfs_aops.o \
 				   xfs_iomap.o \
 				   xfs_iops.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   xfs_itable.o \
 				   xfs_message.o \
 				   xfs_mru_cache.o \
@@ -99,6 +110,8 @@ xfs-y				+= xfs_aops.o \
 				   xfs_utils.o \
 				   xfs_vnodeops.o \
 =======
+=======
+>>>>>>> v3.18
 				   xfs_inode.o \
 				   xfs_itable.o \
 				   xfs_message.o \
@@ -108,11 +121,15 @@ xfs-y				+= xfs_aops.o \
 				   xfs_symlink.o \
 				   xfs_sysfs.o \
 				   xfs_trans.o \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   xfs_xattr.o \
 				   kmem.o \
 				   uuid.o
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # code shared with libxfs
 xfs-y				+= xfs_alloc.o \
@@ -140,13 +157,21 @@ xfs-y				+= xfs_alloc.o \
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 # low-level transaction/log code
 xfs-y				+= xfs_log.o \
 				   xfs_log_cil.o \
 				   xfs_buf_item.o \
 				   xfs_extfree_item.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   xfs_inode_item.o \
+=======
+				   xfs_icreate_item.o \
+				   xfs_inode_item.o \
+				   xfs_log_recover.o \
+>>>>>>> v3.18
 =======
 				   xfs_icreate_item.o \
 				   xfs_inode_item.o \
@@ -166,12 +191,18 @@ xfs-$(CONFIG_XFS_QUOTA)		+= xfs_dquot.o \
 				   xfs_qm.o \
 				   xfs_quotaops.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs-$(CONFIG_XFS_RT)		+= xfs_rtalloc.o
 =======
+=======
+>>>>>>> v3.18
 
 # xfs_rtbitmap is shared with libxfs
 xfs-$(CONFIG_XFS_RT)		+= xfs_rtalloc.o
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 xfs-$(CONFIG_XFS_POSIX_ACL)	+= xfs_acl.o
 xfs-$(CONFIG_PROC_FS)		+= xfs_stats.o

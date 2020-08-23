@@ -14,7 +14,10 @@ Required properties:
     second cell is used to specify optional parameters (currently unused).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Pins on the device (for linking into audio routes):
 
   * SPK_OUTP
@@ -34,6 +37,9 @@ Pins on the device (for linking into audio routes):
   * MICBIAS1
   * DMICDAT
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

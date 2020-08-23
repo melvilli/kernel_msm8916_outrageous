@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -112,15 +116,21 @@ acpi_ut_add_address_range(acpi_adr_space_type space_id,
 
 	ACPI_DEBUG_PRINT((ACPI_DB_NAMES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "\nAdded [%4.4s] address range: 0x%8.8X%8.8X-0x%8.8X%8.8X\n",
 			  acpi_ut_get_node_name(range_info->region_node),
 			  ACPI_FORMAT_UINT64(address),
 			  ACPI_FORMAT_UINT64(range_info->end_address)));
 =======
+=======
+>>>>>>> v3.18
 			  "\nAdded [%4.4s] address range: 0x%p-0x%p\n",
 			  acpi_ut_get_node_name(range_info->region_node),
 			  ACPI_CAST_PTR(void, address),
 			  ACPI_CAST_PTR(void, range_info->end_address)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
@@ -172,6 +182,7 @@ acpi_ut_remove_address_range(acpi_adr_space_type space_id,
 
 			ACPI_DEBUG_PRINT((ACPI_DB_NAMES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "\nRemoved [%4.4s] address range: 0x%8.8X%8.8X-0x%8.8X%8.8X\n",
 					  acpi_ut_get_node_name(range_info->
 								region_node),
@@ -180,6 +191,8 @@ acpi_ut_remove_address_range(acpi_adr_space_type space_id,
 					  ACPI_FORMAT_UINT64(range_info->
 							     end_address)));
 =======
+=======
+>>>>>>> v3.18
 					  "\nRemoved [%4.4s] address range: 0x%p-0x%p\n",
 					  acpi_ut_get_node_name(range_info->
 								region_node),
@@ -189,6 +202,9 @@ acpi_ut_remove_address_range(acpi_adr_space_type space_id,
 					  ACPI_CAST_PTR(void,
 							range_info->
 							end_address)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			ACPI_FREE(range_info);
@@ -246,16 +262,22 @@ acpi_ut_check_address_range(acpi_adr_space_type space_id,
 	while (range_info) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Check if the requested Address/Length overlaps this address_range.
 		 * Four cases to consider:
 		 *
 		 * 1) Input address/length is contained completely in the address range
 =======
+=======
+>>>>>>> v3.18
 		 * Check if the requested address/length overlaps this
 		 * address range. There are four cases to consider:
 		 *
 		 * 1) Input address/length is contained completely in the
 		 *    address range
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * 2) Input address/length overlaps range at the range start
 		 * 3) Input address/length overlaps range at the range end
@@ -274,12 +296,15 @@ acpi_ut_check_address_range(acpi_adr_space_type space_id,
 
 				ACPI_WARNING((AE_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      "0x%8.8X%8.8X-0x%8.8X%8.8X %s conflicts with Region %s %d",
 					      ACPI_FORMAT_UINT64(address),
 					      ACPI_FORMAT_UINT64(end_address),
 					      acpi_ut_get_region_name(space_id),
 					      pathname, overlap_count));
 =======
+=======
+>>>>>>> v3.18
 					      "%s range 0x%p-0x%p conflicts with OpRegion 0x%p-0x%p (%s)",
 					      acpi_ut_get_region_name(space_id),
 					      ACPI_CAST_PTR(void, address),
@@ -291,6 +316,9 @@ acpi_ut_check_address_range(acpi_adr_space_type space_id,
 							    range_info->
 							    end_address),
 					      pathname));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ACPI_FREE(pathname);
 			}

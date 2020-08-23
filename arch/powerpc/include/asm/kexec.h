@@ -82,7 +82,10 @@ extern int crash_shutdown_register(crash_shutdown_t handler);
 extern int crash_shutdown_unregister(crash_shutdown_t handler);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void machine_kexec_simple(struct kimage *image);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void crash_kexec_secondary(struct pt_regs *regs);

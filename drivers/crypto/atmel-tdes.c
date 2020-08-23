@@ -31,6 +31,10 @@
 #include <linux/scatterlist.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -721,6 +725,7 @@ static int atmel_tdes_dma_init(struct atmel_tdes_dev *dd,
 {
 	int err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_cap_mask_t mask_in, mask_out;
 
 	if (pdata && pdata->dma_slave->txdata.dma_dev &&
@@ -771,6 +776,8 @@ static int atmel_tdes_dma_init(struct atmel_tdes_dev *dd,
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 	dma_cap_mask_t mask;
 
 	dma_cap_zero(mask);
@@ -810,12 +817,19 @@ static int atmel_tdes_dma_init(struct atmel_tdes_dev *dd,
 	dd->dma_lch_out.dma_conf.device_fc = false;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err_dma_out:
 	dma_release_channel(dd->dma_lch_in.chan);
 err_dma_in:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_warn(dd->dev, "no DMA channel available\n");
+>>>>>>> v3.18
 =======
 	dev_warn(dd->dev, "no DMA channel available\n");
 >>>>>>> v3.18
@@ -1368,7 +1382,10 @@ static void atmel_tdes_get_cap(struct atmel_tdes_dev *dd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 static const struct of_device_id atmel_tdes_dt_ids[] = {
 	{ .compatible = "atmel,at91sam9g46-tdes" },
@@ -1409,6 +1426,9 @@ static inline struct crypto_platform_data *atmel_tdes_of_init(struct platform_de
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int atmel_tdes_probe(struct platform_device *pdev)
 {
@@ -1420,7 +1440,11 @@ static int atmel_tdes_probe(struct platform_device *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tdes_dd = kzalloc(sizeof(struct atmel_tdes_dev), GFP_KERNEL);
+=======
+	tdes_dd = devm_kmalloc(&pdev->dev, sizeof(*tdes_dd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tdes_dd = devm_kmalloc(&pdev->dev, sizeof(*tdes_dd), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1497,8 +1521,11 @@ static int atmel_tdes_probe(struct platform_device *pdev)
 		pdata = pdev->dev.platform_data;
 		if (!pdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&pdev->dev, "platform data not available\n");
 =======
+=======
+>>>>>>> v3.18
 			pdata = atmel_tdes_of_init(pdev);
 			if (IS_ERR(pdata)) {
 				dev_err(&pdev->dev, "platform data not available\n");
@@ -1507,6 +1534,9 @@ static int atmel_tdes_probe(struct platform_device *pdev)
 			}
 		}
 		if (!pdata->dma_slave) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = -ENXIO;
 			goto err_pdata;
@@ -1515,11 +1545,17 @@ static int atmel_tdes_probe(struct platform_device *pdev)
 		if (err)
 			goto err_tdes_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		dev_info(dev, "using %s, %s for DMA transfers\n",
 				dma_chan_name(tdes_dd->dma_lch_in.chan),
 				dma_chan_name(tdes_dd->dma_lch_out.chan));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1555,8 +1591,11 @@ res_err:
 	tasklet_kill(&tdes_dd->done_task);
 	tasklet_kill(&tdes_dd->queue_task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(tdes_dd);
 	tdes_dd = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 tdes_dd_err:
@@ -1594,9 +1633,12 @@ static int atmel_tdes_remove(struct platform_device *pdev)
 		free_irq(tdes_dd->irq, tdes_dd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(tdes_dd);
 	tdes_dd = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1609,6 +1651,10 @@ static struct platform_driver atmel_tdes_driver = {
 		.name	= "atmel_tdes",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(atmel_tdes_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(atmel_tdes_dt_ids),
 >>>>>>> v3.18

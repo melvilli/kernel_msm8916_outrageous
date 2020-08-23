@@ -19,6 +19,10 @@
 #include <linux/radix-tree.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/atomic.h>
+>>>>>>> v3.18
 =======
 #include <linux/atomic.h>
 >>>>>>> v3.18
@@ -54,9 +58,12 @@ struct blkcg {
 	struct hlist_head		blkg_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* for policies to test whether associated blkcg has changed */
 	uint64_t			id;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* TODO: per-policy storage in blkcg */
@@ -112,7 +119,11 @@ struct blkcg_gq {
 
 	/* reference count */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				refcnt;
+=======
+	atomic_t			refcnt;
+>>>>>>> v3.18
 =======
 	atomic_t			refcnt;
 >>>>>>> v3.18
@@ -191,10 +202,16 @@ void blkg_conf_finish(struct blkg_conf_ctx *ctx);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct blkcg *cgroup_to_blkcg(struct cgroup *cgroup)
 {
 	return container_of(cgroup_subsys_state(cgroup, blkio_subsys_id),
 			    struct blkcg, css);
+=======
+static inline struct blkcg *css_to_blkcg(struct cgroup_subsys_state *css)
+{
+	return css ? container_of(css, struct blkcg, css) : NULL;
+>>>>>>> v3.18
 =======
 static inline struct blkcg *css_to_blkcg(struct cgroup_subsys_state *css)
 {
@@ -205,8 +222,12 @@ static inline struct blkcg *css_to_blkcg(struct cgroup_subsys_state *css)
 static inline struct blkcg *task_blkcg(struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return container_of(task_subsys_state(tsk, blkio_subsys_id),
 			    struct blkcg, css);
+=======
+	return css_to_blkcg(task_css(tsk, blkio_cgrp_id));
+>>>>>>> v3.18
 =======
 	return css_to_blkcg(task_css(tsk, blkio_cgrp_id));
 >>>>>>> v3.18
@@ -216,7 +237,11 @@ static inline struct blkcg *bio_blkcg(struct bio *bio)
 {
 	if (bio && bio->bi_css)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return container_of(bio->bi_css, struct blkcg, css);
+=======
+		return css_to_blkcg(bio->bi_css);
+>>>>>>> v3.18
 =======
 		return css_to_blkcg(bio->bi_css);
 >>>>>>> v3.18
@@ -232,9 +257,13 @@ static inline struct blkcg *bio_blkcg(struct bio *bio)
 static inline struct blkcg *blkcg_parent(struct blkcg *blkcg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cgroup *pcg = blkcg->css.cgroup->parent;
 
 	return pcg ? cgroup_to_blkcg(pcg) : NULL;
+=======
+	return css_to_blkcg(blkcg->css.parent);
+>>>>>>> v3.18
 =======
 	return css_to_blkcg(blkcg->css.parent);
 >>>>>>> v3.18
@@ -275,6 +304,7 @@ static inline struct blkcg_gq *pd_to_blkg(struct blkg_policy_data *pd)
 static inline int blkg_path(struct blkcg_gq *blkg, char *buf, int buflen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = cgroup_path(blkg->blkcg->css.cgroup, buf, buflen);
@@ -282,6 +312,8 @@ static inline int blkg_path(struct blkcg_gq *blkg, char *buf, int buflen)
 		strncpy(buf, "<unavailable>", buflen);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	char *p;
 
 	p = cgroup_path(blkg->blkcg->css.cgroup, buf, buflen);
@@ -292,6 +324,9 @@ static inline int blkg_path(struct blkcg_gq *blkg, char *buf, int buflen)
 
 	memmove(buf, p, buf + buflen - p);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -299,6 +334,7 @@ static inline int blkg_path(struct blkcg_gq *blkg, char *buf, int buflen)
  * blkg_get - get a blkg reference
  * @blkg: blkg to get
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * The caller should be holding queue_lock and an existing reference.
  */
@@ -311,6 +347,8 @@ static inline void blkg_get(struct blkcg_gq *blkg)
 
 void __blkg_release(struct blkcg_gq *blkg);
 =======
+=======
+>>>>>>> v3.18
  * The caller should be holding an existing reference.
  */
 static inline void blkg_get(struct blkcg_gq *blkg)
@@ -320,11 +358,15 @@ static inline void blkg_get(struct blkcg_gq *blkg)
 }
 
 void __blkg_release_rcu(struct rcu_head *rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * blkg_put - put a blkg reference
  * @blkg: blkg to put
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * The caller should be holding queue_lock.
@@ -338,6 +380,8 @@ static inline void blkg_put(struct blkcg_gq *blkg)
 }
 
 =======
+=======
+>>>>>>> v3.18
  */
 static inline void blkg_put(struct blkcg_gq *blkg)
 {
@@ -381,6 +425,9 @@ struct blkcg_gq *__blkg_lookup(struct blkcg *blkcg, struct request_queue *q,
 		if (((d_blkg) = __blkg_lookup(css_to_blkcg(pos_css),	\
 					      (p_blkg)->q, false)))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * blk_get_rl - get request_list to use
@@ -472,12 +519,18 @@ struct request_list *__blk_queue_next_rl(struct request_list *rl,
 	for ((rl) = &(q)->root_rl; (rl); (rl) = __blk_queue_next_rl((rl), (q)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void blkg_stat_init(struct blkg_stat *stat)
 {
 	u64_stats_init(&stat->syncp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * blkg_stat_add - add a value to a blkg_stat
@@ -508,9 +561,15 @@ static inline uint64_t blkg_stat_read(struct blkg_stat *stat)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&stat->syncp);
 		v = stat->cnt;
 	} while (u64_stats_fetch_retry_bh(&stat->syncp, start));
+=======
+		start = u64_stats_fetch_begin_irq(&stat->syncp);
+		v = stat->cnt;
+	} while (u64_stats_fetch_retry_irq(&stat->syncp, start));
+>>>>>>> v3.18
 =======
 		start = u64_stats_fetch_begin_irq(&stat->syncp);
 		v = stat->cnt;
@@ -542,12 +601,18 @@ static inline void blkg_stat_merge(struct blkg_stat *to, struct blkg_stat *from)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void blkg_rwstat_init(struct blkg_rwstat *rwstat)
 {
 	u64_stats_init(&rwstat->syncp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * blkg_rwstat_add - add a value to a blkg_rwstat
@@ -590,9 +655,15 @@ static inline struct blkg_rwstat blkg_rwstat_read(struct blkg_rwstat *rwstat)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&rwstat->syncp);
 		tmp = *rwstat;
 	} while (u64_stats_fetch_retry_bh(&rwstat->syncp, start));
+=======
+		start = u64_stats_fetch_begin_irq(&rwstat->syncp);
+		tmp = *rwstat;
+	} while (u64_stats_fetch_retry_irq(&rwstat->syncp, start));
+>>>>>>> v3.18
 =======
 		start = u64_stats_fetch_begin_irq(&rwstat->syncp);
 		tmp = *rwstat;
@@ -671,7 +742,10 @@ static inline void blkcg_deactivate_policy(struct request_queue *q,
 					   const struct blkcg_policy *pol) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct blkcg *cgroup_to_blkcg(struct cgroup *cgroup) { return NULL; }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline struct blkcg *bio_blkcg(struct bio *bio) { return NULL; }

@@ -28,7 +28,10 @@
 /* Partition Reference Counter (HV_X64_MSR_TIME_REF_COUNT) available*/
 #define HV_X64_MSR_TIME_REF_COUNT_AVAILABLE	(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* A partition's reference time stamp counter (TSC) page */
 #define HV_X64_MSR_REFERENCE_TSC		0x40000021
@@ -45,6 +48,9 @@
 /* TSC frequency MSR (HV_X64_MSR_TSC_FREQUENCY) is available */
 #define HV_X64_MSR_TSC_FREQUENCY_AVAILABLE (1 << 11)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Basic SynIC MSRs (HV_X64_MSR_SCONTROL through HV_X64_MSR_EOM
@@ -156,13 +162,19 @@
 #define HV_X64_MSR_TIME_REF_COUNT		0x40000020
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MSR used to retrieve the TSC frequency */
 #define HV_X64_MSR_TSC_FREQUENCY		0x40000022
 
 /* MSR used to retrieve the local APIC timer frequency */
 #define HV_X64_MSR_APIC_FREQUENCY		0x40000023
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Define the virtual APIC registers */
 #define HV_X64_MSR_EOI				0x40000070
@@ -208,6 +220,12 @@
 		(~((1ull << HV_X64_MSR_APIC_ASSIST_PAGE_ADDRESS_SHIFT) - 1))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HV_X64_MSR_TSC_REFERENCE_ENABLE		0x00000001
+#define HV_X64_MSR_TSC_REFERENCE_ADDRESS_SHIFT	12
+
+>>>>>>> v3.18
 =======
 #define HV_X64_MSR_TSC_REFERENCE_ENABLE		0x00000001
 #define HV_X64_MSR_TSC_REFERENCE_ADDRESS_SHIFT	12
@@ -226,7 +244,10 @@
 #define HV_STATUS_INSUFFICIENT_BUFFERS		19
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct _HV_REFERENCE_TSC_PAGE {
 	__u32 tsc_sequence;
 	__u32 res1;
@@ -234,5 +255,8 @@ typedef struct _HV_REFERENCE_TSC_PAGE {
 	__s64 tsc_offset;
 } HV_REFERENCE_TSC_PAGE, *PHV_REFERENCE_TSC_PAGE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

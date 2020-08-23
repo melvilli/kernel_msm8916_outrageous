@@ -4,6 +4,10 @@
 #include <linux/netdevice.h>
 #include <linux/packet_diag.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/percpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/percpu.h>
 >>>>>>> v3.18

@@ -300,6 +300,10 @@ static int atmtcp_c_send(struct atm_vcc *vcc,struct sk_buff *skb)
 	read_unlock(&vcc_sklist_lock);
 	if (!out_vcc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		result = -EUNATCH;
+>>>>>>> v3.18
 =======
 		result = -EUNATCH;
 >>>>>>> v3.18

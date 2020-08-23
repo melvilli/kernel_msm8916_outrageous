@@ -23,23 +23,34 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/eeprom.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/gpio-davinci.h>
 #include <linux/platform_data/i2c-davinci.h>
 #include <linux/platform_data/mtd-davinci.h>
 #include <linux/platform_data/mmc-davinci.h>
 #include <linux/platform_data/usb-davinci.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/i2c-davinci.h>
 #include <mach/serial.h>
 #include <linux/platform_data/mtd-davinci.h>
 #include <linux/platform_data/mmc-davinci.h>
 #include <linux/platform_data/usb-davinci.h>
+=======
+#include <mach/serial.h>
+#include <mach/common.h>
+>>>>>>> v3.18
 =======
 #include <mach/serial.h>
 #include <mach/common.h>
@@ -328,10 +339,13 @@ static struct platform_device *davinci_evm_devices[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __init dm355_evm_map_io(void)
@@ -369,11 +383,15 @@ static struct davinci_mmc_config dm355evm_mmc_config = {
  * the ID pin won't need any help.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_MUSB_PERIPHERAL
 #define USB_ID_VALUE	0	/* ID pulled high; *should* float */
 #else
 #define USB_ID_VALUE	1	/* ID pulled low */
 #endif
+=======
+#define USB_ID_VALUE	1	/* ID pulled low */
+>>>>>>> v3.18
 =======
 #define USB_ID_VALUE	1	/* ID pulled low */
 >>>>>>> v3.18
@@ -400,12 +418,18 @@ static __init void dm355_evm_init(void)
 {
 	struct clk *aemif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = dm355_gpio_register();
 	if (ret)
 		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gpio_request(1, "dm9000");
@@ -422,7 +446,11 @@ static __init void dm355_evm_init(void)
 			     ARRAY_SIZE(davinci_evm_devices));
 	evm_init_i2c();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_serial_init(&uart_config);
+=======
+	davinci_serial_init(dm355_serial_device);
+>>>>>>> v3.18
 =======
 	davinci_serial_init(dm355_serial_device);
 >>>>>>> v3.18

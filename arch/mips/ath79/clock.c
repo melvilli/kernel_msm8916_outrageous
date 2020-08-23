@@ -17,6 +17,10 @@
 #include <linux/err.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clkdev.h>
+>>>>>>> v3.18
 =======
 #include <linux/clkdev.h>
 >>>>>>> v3.18
@@ -36,6 +40,7 @@ struct clk {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk ath79_ref_clk;
 static struct clk ath79_cpu_clk;
 static struct clk ath79_ddr_clk;
@@ -46,6 +51,8 @@ static struct clk ath79_uart_clk;
 static void __init ar71xx_clocks_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static void __init ath79_add_sys_clkdev(const char *id, unsigned long rate)
 {
 	struct clk *clk;
@@ -68,13 +75,20 @@ static void __init ar71xx_clocks_init(void)
 	unsigned long cpu_rate;
 	unsigned long ddr_rate;
 	unsigned long ahb_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 pll;
 	u32 freq;
 	u32 div;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath79_ref_clk.rate = AR71XX_BASE_FREQ;
+=======
+	ref_rate = AR71XX_BASE_FREQ;
+>>>>>>> v3.18
 =======
 	ref_rate = AR71XX_BASE_FREQ;
 >>>>>>> v3.18
@@ -82,6 +96,7 @@ static void __init ar71xx_clocks_init(void)
 	pll = ath79_pll_rr(AR71XX_PLL_REG_CPU_CONFIG);
 
 	div = ((pll >> AR71XX_PLL_DIV_SHIFT) & AR71XX_PLL_DIV_MASK) + 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	freq = div * ath79_ref_clk.rate;
 
@@ -97,6 +112,8 @@ static void __init ar71xx_clocks_init(void)
 	ath79_wdt_clk.rate = ath79_ahb_clk.rate;
 	ath79_uart_clk.rate = ath79_ahb_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 	freq = div * ref_rate;
 
 	div = ((pll >> AR71XX_CPU_DIV_SHIFT) & AR71XX_CPU_DIV_MASK) + 1;
@@ -115,22 +132,32 @@ static void __init ar71xx_clocks_init(void)
 
 	clk_add_alias("wdt", NULL, "ahb", NULL);
 	clk_add_alias("uart", NULL, "ahb", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init ar724x_clocks_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ref_rate;
 	unsigned long cpu_rate;
 	unsigned long ddr_rate;
 	unsigned long ahb_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 pll;
 	u32 freq;
 	u32 div;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ath79_ref_clk.rate = AR724X_BASE_FREQ;
 	pll = ath79_pll_rr(AR724X_PLL_REG_CPU_CONFIG);
@@ -138,16 +165,22 @@ static void __init ar724x_clocks_init(void)
 	div = ((pll >> AR724X_PLL_DIV_SHIFT) & AR724X_PLL_DIV_MASK);
 	freq = div * ath79_ref_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 	ref_rate = AR724X_BASE_FREQ;
 	pll = ath79_pll_rr(AR724X_PLL_REG_CPU_CONFIG);
 
 	div = ((pll >> AR724X_PLL_DIV_SHIFT) & AR724X_PLL_DIV_MASK);
 	freq = div * ref_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	div = ((pll >> AR724X_PLL_REF_DIV_SHIFT) & AR724X_PLL_REF_DIV_MASK);
 	freq *= div;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ath79_cpu_clk.rate = freq;
 
@@ -160,6 +193,8 @@ static void __init ar724x_clocks_init(void)
 	ath79_wdt_clk.rate = ath79_ahb_clk.rate;
 	ath79_uart_clk.rate = ath79_ahb_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 	cpu_rate = freq;
 
 	div = ((pll >> AR724X_DDR_DIV_SHIFT) & AR724X_DDR_DIV_MASK) + 1;
@@ -175,22 +210,32 @@ static void __init ar724x_clocks_init(void)
 
 	clk_add_alias("wdt", NULL, "ahb", NULL);
 	clk_add_alias("uart", NULL, "ahb", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init ar913x_clocks_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ref_rate;
 	unsigned long cpu_rate;
 	unsigned long ddr_rate;
 	unsigned long ahb_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 pll;
 	u32 freq;
 	u32 div;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ath79_ref_clk.rate = AR913X_BASE_FREQ;
 	pll = ath79_pll_rr(AR913X_PLL_REG_CPU_CONFIG);
@@ -209,6 +254,8 @@ static void __init ar913x_clocks_init(void)
 	ath79_wdt_clk.rate = ath79_ahb_clk.rate;
 	ath79_uart_clk.rate = ath79_ahb_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 	ref_rate = AR913X_BASE_FREQ;
 	pll = ath79_pll_rr(AR913X_PLL_REG_CPU_CONFIG);
 
@@ -230,17 +277,26 @@ static void __init ar913x_clocks_init(void)
 
 	clk_add_alias("wdt", NULL, "ahb", NULL);
 	clk_add_alias("uart", NULL, "ahb", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init ar933x_clocks_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ref_rate;
 	unsigned long cpu_rate;
 	unsigned long ddr_rate;
 	unsigned long ahb_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 clock_ctrl;
 	u32 cpu_config;
@@ -249,6 +305,7 @@ static void __init ar933x_clocks_init(void)
 
 	t = ath79_reset_rr(AR933X_RESET_REG_BOOTSTRAP);
 	if (t & AR933X_BOOTSTRAP_REF_CLK_40)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ath79_ref_clk.rate = (40 * 1000 * 1000);
 	else
@@ -260,6 +317,8 @@ static void __init ar933x_clocks_init(void)
 		ath79_ahb_clk.rate = ath79_ref_clk.rate;
 		ath79_ddr_clk.rate = ath79_ref_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 		ref_rate = (40 * 1000 * 1000);
 	else
 		ref_rate = (25 * 1000 * 1000);
@@ -269,6 +328,9 @@ static void __init ar933x_clocks_init(void)
 		cpu_rate = ref_rate;
 		ahb_rate = ref_rate;
 		ddr_rate = ref_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		cpu_config = ath79_pll_rr(AR933X_PLL_CPU_CONFIG_REG);
@@ -276,7 +338,11 @@ static void __init ar933x_clocks_init(void)
 		t = (cpu_config >> AR933X_PLL_CPU_CONFIG_REFDIV_SHIFT) &
 		    AR933X_PLL_CPU_CONFIG_REFDIV_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		freq = ath79_ref_clk.rate / t;
+=======
+		freq = ref_rate / t;
+>>>>>>> v3.18
 =======
 		freq = ref_rate / t;
 >>>>>>> v3.18
@@ -295,6 +361,7 @@ static void __init ar933x_clocks_init(void)
 		t = ((clock_ctrl >> AR933X_PLL_CLOCK_CTRL_CPU_DIV_SHIFT) &
 		     AR933X_PLL_CLOCK_CTRL_CPU_DIV_MASK) + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_cpu_clk.rate = freq / t;
 
 		t = ((clock_ctrl >> AR933X_PLL_CLOCK_CTRL_DDR_DIV_SHIFT) &
@@ -309,6 +376,8 @@ static void __init ar933x_clocks_init(void)
 	ath79_wdt_clk.rate = ath79_ahb_clk.rate;
 	ath79_uart_clk.rate = ath79_ref_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 		cpu_rate = freq / t;
 
 		t = ((clock_ctrl >> AR933X_PLL_CLOCK_CTRL_DDR_DIV_SHIFT) &
@@ -327,6 +396,9 @@ static void __init ar933x_clocks_init(void)
 
 	clk_add_alias("wdt", NULL, "ahb", NULL);
 	clk_add_alias("uart", NULL, "ref", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -337,7 +409,11 @@ static u32 __init ar934x_get_pll_freq(u32 ref, u32 ref_div, u32 nint, u32 nfrac,
 	u32 ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = ath79_ref_clk.rate;
+=======
+	t = ref;
+>>>>>>> v3.18
 =======
 	t = ref;
 >>>>>>> v3.18
@@ -346,7 +422,11 @@ static u32 __init ar934x_get_pll_freq(u32 ref, u32 ref_div, u32 nint, u32 nfrac,
 	ret = t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = ath79_ref_clk.rate;
+=======
+	t = ref;
+>>>>>>> v3.18
 =======
 	t = ref;
 >>>>>>> v3.18
@@ -361,11 +441,17 @@ static u32 __init ar934x_get_pll_freq(u32 ref, u32 ref_div, u32 nint, u32 nfrac,
 static void __init ar934x_clocks_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ref_rate;
 	unsigned long cpu_rate;
 	unsigned long ddr_rate;
 	unsigned long ahb_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 pll, out_div, ref_div, nint, nfrac, frac, clk_ctrl, postdiv;
 	u32 cpu_pll, ddr_pll;
@@ -377,9 +463,15 @@ static void __init ar934x_clocks_init(void)
 	bootstrap = ath79_reset_rr(AR934X_RESET_REG_BOOTSTRAP);
 	if (bootstrap & AR934X_BOOTSTRAP_REF_CLK_40)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_ref_clk.rate = 40 * 1000 * 1000;
 	else
 		ath79_ref_clk.rate = 25 * 1000 * 1000;
+=======
+		ref_rate = 40 * 1000 * 1000;
+	else
+		ref_rate = 25 * 1000 * 1000;
+>>>>>>> v3.18
 =======
 		ref_rate = 40 * 1000 * 1000;
 	else
@@ -411,7 +503,11 @@ static void __init ar934x_clocks_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pll = ar934x_get_pll_freq(ath79_ref_clk.rate, ref_div, nint,
+=======
+	cpu_pll = ar934x_get_pll_freq(ref_rate, ref_div, nint,
+>>>>>>> v3.18
 =======
 	cpu_pll = ar934x_get_pll_freq(ref_rate, ref_div, nint,
 >>>>>>> v3.18
@@ -442,7 +538,11 @@ static void __init ar934x_clocks_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ddr_pll = ar934x_get_pll_freq(ath79_ref_clk.rate, ref_div, nint,
+=======
+	ddr_pll = ar934x_get_pll_freq(ref_rate, ref_div, nint,
+>>>>>>> v3.18
 =======
 	ddr_pll = ar934x_get_pll_freq(ref_rate, ref_div, nint,
 >>>>>>> v3.18
@@ -455,17 +555,23 @@ static void __init ar934x_clocks_init(void)
 
 	if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_CPU_PLL_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_cpu_clk.rate = ath79_ref_clk.rate;
 	else if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_CPUCLK_FROM_CPUPLL)
 		ath79_cpu_clk.rate = cpu_pll / (postdiv + 1);
 	else
 		ath79_cpu_clk.rate = ddr_pll / (postdiv + 1);
 =======
+=======
+>>>>>>> v3.18
 		cpu_rate = ref_rate;
 	else if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_CPUCLK_FROM_CPUPLL)
 		cpu_rate = cpu_pll / (postdiv + 1);
 	else
 		cpu_rate = ddr_pll / (postdiv + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	postdiv = (clk_ctrl >> AR934X_PLL_CPU_DDR_CLK_CTRL_DDR_POST_DIV_SHIFT) &
@@ -473,23 +579,30 @@ static void __init ar934x_clocks_init(void)
 
 	if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_DDR_PLL_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_ddr_clk.rate = ath79_ref_clk.rate;
 	else if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_DDRCLK_FROM_DDRPLL)
 		ath79_ddr_clk.rate = ddr_pll / (postdiv + 1);
 	else
 		ath79_ddr_clk.rate = cpu_pll / (postdiv + 1);
 =======
+=======
+>>>>>>> v3.18
 		ddr_rate = ref_rate;
 	else if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_DDRCLK_FROM_DDRPLL)
 		ddr_rate = ddr_pll / (postdiv + 1);
 	else
 		ddr_rate = cpu_pll / (postdiv + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	postdiv = (clk_ctrl >> AR934X_PLL_CPU_DDR_CLK_CTRL_AHB_POST_DIV_SHIFT) &
 		  AR934X_PLL_CPU_DDR_CLK_CTRL_AHB_POST_DIV_MASK;
 
 	if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_AHB_PLL_BYPASS)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ath79_ahb_clk.rate = ath79_ref_clk.rate;
 	else if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_AHBCLK_FROM_DDRPLL)
@@ -500,6 +613,8 @@ static void __init ar934x_clocks_init(void)
 	ath79_wdt_clk.rate = ath79_ref_clk.rate;
 	ath79_uart_clk.rate = ath79_ref_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 		ahb_rate = ref_rate;
 	else if (clk_ctrl & AR934X_PLL_CPU_DDR_CLK_CTRL_AHBCLK_FROM_DDRPLL)
 		ahb_rate = ddr_pll / (postdiv + 1);
@@ -513,6 +628,9 @@ static void __init ar934x_clocks_init(void)
 
 	clk_add_alias("wdt", NULL, "ref", NULL);
 	clk_add_alias("uart", NULL, "ref", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iounmap(dpll_base);
@@ -521,11 +639,17 @@ static void __init ar934x_clocks_init(void)
 static void __init qca955x_clocks_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ref_rate;
 	unsigned long cpu_rate;
 	unsigned long ddr_rate;
 	unsigned long ahb_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 pll, out_div, ref_div, nint, frac, clk_ctrl, postdiv;
 	u32 cpu_pll, ddr_pll;
@@ -534,9 +658,15 @@ static void __init qca955x_clocks_init(void)
 	bootstrap = ath79_reset_rr(QCA955X_RESET_REG_BOOTSTRAP);
 	if (bootstrap &	QCA955X_BOOTSTRAP_REF_CLK_40)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_ref_clk.rate = 40 * 1000 * 1000;
 	else
 		ath79_ref_clk.rate = 25 * 1000 * 1000;
+=======
+		ref_rate = 40 * 1000 * 1000;
+	else
+		ref_rate = 25 * 1000 * 1000;
+>>>>>>> v3.18
 =======
 		ref_rate = 40 * 1000 * 1000;
 	else
@@ -554,8 +684,13 @@ static void __init qca955x_clocks_init(void)
 	       QCA955X_PLL_CPU_CONFIG_NFRAC_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pll = nint * ath79_ref_clk.rate / ref_div;
 	cpu_pll += frac * ath79_ref_clk.rate / (ref_div * (1 << 6));
+=======
+	cpu_pll = nint * ref_rate / ref_div;
+	cpu_pll += frac * ref_rate / (ref_div * (1 << 6));
+>>>>>>> v3.18
 =======
 	cpu_pll = nint * ref_rate / ref_div;
 	cpu_pll += frac * ref_rate / (ref_div * (1 << 6));
@@ -573,8 +708,13 @@ static void __init qca955x_clocks_init(void)
 	       QCA955X_PLL_DDR_CONFIG_NFRAC_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ddr_pll = nint * ath79_ref_clk.rate / ref_div;
 	ddr_pll += frac * ath79_ref_clk.rate / (ref_div * (1 << 10));
+=======
+	ddr_pll = nint * ref_rate / ref_div;
+	ddr_pll += frac * ref_rate / (ref_div * (1 << 10));
+>>>>>>> v3.18
 =======
 	ddr_pll = nint * ref_rate / ref_div;
 	ddr_pll += frac * ref_rate / (ref_div * (1 << 10));
@@ -588,17 +728,23 @@ static void __init qca955x_clocks_init(void)
 
 	if (clk_ctrl & QCA955X_PLL_CLK_CTRL_CPU_PLL_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_cpu_clk.rate = ath79_ref_clk.rate;
 	else if (clk_ctrl & QCA955X_PLL_CLK_CTRL_CPUCLK_FROM_CPUPLL)
 		ath79_cpu_clk.rate = ddr_pll / (postdiv + 1);
 	else
 		ath79_cpu_clk.rate = cpu_pll / (postdiv + 1);
 =======
+=======
+>>>>>>> v3.18
 		cpu_rate = ref_rate;
 	else if (clk_ctrl & QCA955X_PLL_CLK_CTRL_CPUCLK_FROM_CPUPLL)
 		cpu_rate = ddr_pll / (postdiv + 1);
 	else
 		cpu_rate = cpu_pll / (postdiv + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	postdiv = (clk_ctrl >> QCA955X_PLL_CLK_CTRL_DDR_POST_DIV_SHIFT) &
@@ -606,23 +752,30 @@ static void __init qca955x_clocks_init(void)
 
 	if (clk_ctrl & QCA955X_PLL_CLK_CTRL_DDR_PLL_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath79_ddr_clk.rate = ath79_ref_clk.rate;
 	else if (clk_ctrl & QCA955X_PLL_CLK_CTRL_DDRCLK_FROM_DDRPLL)
 		ath79_ddr_clk.rate = cpu_pll / (postdiv + 1);
 	else
 		ath79_ddr_clk.rate = ddr_pll / (postdiv + 1);
 =======
+=======
+>>>>>>> v3.18
 		ddr_rate = ref_rate;
 	else if (clk_ctrl & QCA955X_PLL_CLK_CTRL_DDRCLK_FROM_DDRPLL)
 		ddr_rate = cpu_pll / (postdiv + 1);
 	else
 		ddr_rate = ddr_pll / (postdiv + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	postdiv = (clk_ctrl >> QCA955X_PLL_CLK_CTRL_AHB_POST_DIV_SHIFT) &
 		  QCA955X_PLL_CLK_CTRL_AHB_POST_DIV_MASK;
 
 	if (clk_ctrl & QCA955X_PLL_CLK_CTRL_AHB_PLL_BYPASS)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ath79_ahb_clk.rate = ath79_ref_clk.rate;
 	else if (clk_ctrl & QCA955X_PLL_CLK_CTRL_AHBCLK_FROM_DDRPLL)
@@ -633,6 +786,8 @@ static void __init qca955x_clocks_init(void)
 	ath79_wdt_clk.rate = ath79_ref_clk.rate;
 	ath79_uart_clk.rate = ath79_ref_clk.rate;
 =======
+=======
+>>>>>>> v3.18
 		ahb_rate = ref_rate;
 	else if (clk_ctrl & QCA955X_PLL_CLK_CTRL_AHBCLK_FROM_DDRPLL)
 		ahb_rate = ddr_pll / (postdiv + 1);
@@ -646,6 +801,9 @@ static void __init qca955x_clocks_init(void)
 
 	clk_add_alias("wdt", NULL, "ref", NULL);
 	clk_add_alias("uart", NULL, "ref", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -665,6 +823,7 @@ void __init ath79_clocks_init(void)
 		qca955x_clocks_init();
 	else
 		BUG();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	pr_info("Clocks: CPU:%lu.%03luMHz, DDR:%lu.%03luMHz, AHB:%lu.%03luMHz, "
@@ -707,6 +866,8 @@ struct clk *clk_get(struct device *dev, const char *id)
 EXPORT_SYMBOL(clk_get);
 
 =======
+=======
+>>>>>>> v3.18
 }
 
 unsigned long __init
@@ -728,6 +889,9 @@ ath79_get_sys_clk_rate(const char *id)
 /*
  * Linux clock API
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int clk_enable(struct clk *clk)
 {
@@ -746,10 +910,13 @@ unsigned long clk_get_rate(struct clk *clk)
 }
 EXPORT_SYMBOL(clk_get_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void clk_put(struct clk *clk)
 {
 }
 EXPORT_SYMBOL(clk_put);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

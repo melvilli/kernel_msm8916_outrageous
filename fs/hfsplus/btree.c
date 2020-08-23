@@ -16,7 +16,10 @@
 #include "hfsplus_raw.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Initial source code of clump size calculation is gotten
  * from http://opensource.apple.com/tarballs/diskdev_cmds/
@@ -129,6 +132,9 @@ u32 hfsplus_calc_btree_clump_size(u32 block_size, u32 node_size,
 
 	return clump_size;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Get a reference to a B*Tree and do some initial checks */
@@ -362,7 +368,11 @@ struct hfs_bnode *hfs_bmap_alloc(struct hfs_btree *tree)
 		int res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		res = hfsplus_file_extend(inode);
+=======
+		res = hfsplus_file_extend(inode, hfs_bnode_need_zeroout(tree));
+>>>>>>> v3.18
 =======
 		res = hfsplus_file_extend(inode, hfs_bnode_need_zeroout(tree));
 >>>>>>> v3.18

@@ -559,17 +559,23 @@ ssize_t spk_msg_set(enum msg_index_t index, char *text, size_t length)
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spk_lock(flags);
 			if (speakup_msgs[index] != speakup_default_msgs[index])
 				kfree(speakup_msgs[index]);
 			speakup_msgs[index] = newstr;
 			spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 			spin_lock_irqsave(&speakup_info.spinlock, flags);
 			if (speakup_msgs[index] != speakup_default_msgs[index])
 				kfree(speakup_msgs[index]);
 			speakup_msgs[index] = newstr;
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			rc = -ENOMEM;
@@ -604,7 +610,11 @@ void spk_reset_msg_group(struct msg_group_t *group)
 	enum msg_index_t i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -615,7 +625,11 @@ void spk_reset_msg_group(struct msg_group_t *group)
 		speakup_msgs[i] = speakup_default_msgs[i];
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -635,7 +649,11 @@ void spk_free_user_msgs(void)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -646,7 +664,11 @@ void spk_free_user_msgs(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18

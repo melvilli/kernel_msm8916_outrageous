@@ -384,7 +384,11 @@ static struct platform_driver lpc32xx_kscan_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &lpc32xx_kscan_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(lpc32xx_kscan_match),
+=======
+		.of_match_table = lpc32xx_kscan_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = lpc32xx_kscan_match,
 >>>>>>> v3.18

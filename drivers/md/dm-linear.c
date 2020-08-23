@@ -86,7 +86,12 @@ static void linear_map_bio(struct dm_target *ti, struct bio *bio)
 	bio->bi_bdev = lc->dev->bdev;
 	if (bio_sectors(bio))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = linear_map_sector(ti, bio->bi_sector);
+=======
+		bio->bi_iter.bi_sector =
+			linear_map_sector(ti, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector =
 			linear_map_sector(ti, bio->bi_iter.bi_sector);

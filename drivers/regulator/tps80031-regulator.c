@@ -116,7 +116,11 @@ static int tps80031_reg_is_enabled(struct regulator_dev *rdev)
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((reg_val & TPS80031_STATE_MASK) == TPS80031_STATE_ON);
+=======
+	return (reg_val & TPS80031_STATE_MASK) == TPS80031_STATE_ON;
+>>>>>>> v3.18
 =======
 	return (reg_val & TPS80031_STATE_MASK) == TPS80031_STATE_ON;
 >>>>>>> v3.18
@@ -698,10 +702,15 @@ static int tps80031_regulator_probe(struct platform_device *pdev)
 	pmic = devm_kzalloc(&pdev->dev,
 			TPS80031_REGULATOR_MAX * sizeof(*pmic), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pmic) {
 		dev_err(&pdev->dev, "mem alloc for pmic failed\n");
 		return -ENOMEM;
 	}
+=======
+	if (!pmic)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!pmic)
 		return -ENOMEM;
@@ -729,7 +738,11 @@ static int tps80031_regulator_probe(struct platform_device *pdev)
 				dev_err(&pdev->dev,
 					"regulator config failed, e %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto fail;
+=======
+				return ret;
+>>>>>>> v3.18
 =======
 				return ret;
 >>>>>>> v3.18
@@ -741,24 +754,34 @@ static int tps80031_regulator_probe(struct platform_device *pdev)
 				dev_err(&pdev->dev,
 					"pwr_req config failed, err %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto fail;
 			}
 		}
 		rdev = regulator_register(&ri->rinfo->desc, &config);
 =======
+=======
+>>>>>>> v3.18
 				return ret;
 			}
 		}
 		rdev = devm_regulator_register(&pdev->dev, &ri->rinfo->desc,
 					       &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_ERR(rdev)) {
 			dev_err(&pdev->dev,
 				"register regulator failed %s\n",
 					ri->rinfo->desc.name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = PTR_ERR(rdev);
 			goto fail;
+=======
+			return PTR_ERR(rdev);
+>>>>>>> v3.18
 =======
 			return PTR_ERR(rdev);
 >>>>>>> v3.18
@@ -768,6 +791,7 @@ static int tps80031_regulator_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, pmic);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 fail:
 	while (--num >= 0) {
@@ -790,6 +814,8 @@ static int tps80031_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver tps80031_regulator_driver = {
@@ -799,7 +825,10 @@ static struct platform_driver tps80031_regulator_driver = {
 	},
 	.probe		= tps80031_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= tps80031_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

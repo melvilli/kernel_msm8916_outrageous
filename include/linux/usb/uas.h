@@ -10,7 +10,11 @@ struct iu {
 	__u8 rsvd1;
 	__be16 tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((__packed__));
+>>>>>>> v3.18
 =======
 } __attribute__((__packed__));
 >>>>>>> v3.18
@@ -57,7 +61,11 @@ struct command_iu {
 	struct scsi_lun lun;
 	__u8 cdb[16];	/* XXX: Overflow-checking tools may misunderstand */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((__packed__));
+>>>>>>> v3.18
 =======
 } __attribute__((__packed__));
 >>>>>>> v3.18
@@ -71,7 +79,11 @@ struct task_mgmt_iu {
 	__be16 task_tag;
 	struct scsi_lun lun;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((__packed__));
+>>>>>>> v3.18
 =======
 } __attribute__((__packed__));
 >>>>>>> v3.18
@@ -90,6 +102,7 @@ struct sense_iu {
 	__be16 len;
 	__u8 sense[SCSI_SENSE_BUFFERSIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct response_ui {
@@ -100,6 +113,8 @@ struct response_ui {
 	__u8 response_code;
 };
 =======
+=======
+>>>>>>> v3.18
 } __attribute__((__packed__));
 
 struct response_iu {
@@ -109,6 +124,9 @@ struct response_iu {
 	__u8 add_response_info[3];
 	__u8 response_code;
 } __attribute__((__packed__));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct usb_pipe_usage_descriptor {

@@ -43,6 +43,10 @@
 #include <linux/slab.h>
 #include <linux/vt_kern.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 >>>>>>> v3.18
@@ -60,9 +64,13 @@ static int cursor_size_lastto;
 static u32 vgacon_xres;
 static u32 vgacon_yres;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct vgastate state;
 
 struct screen_info screen_info;
+=======
+static struct vgastate vgastate;
+>>>>>>> v3.18
 =======
 static struct vgastate vgastate;
 >>>>>>> v3.18
@@ -97,7 +105,12 @@ static int vgacon_scroll(struct vc_data *c, int t, int b, int dir,
 			 int lines);
 static void vgacon_invert_region(struct vc_data *c, u16 * p, int count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long vgacon_uni_pagedir[2];
+=======
+static struct uni_pagedir *vgacon_uni_pagedir;
+static int vgacon_refcount;
+>>>>>>> v3.18
 =======
 static struct uni_pagedir *vgacon_uni_pagedir;
 static int vgacon_refcount;
@@ -414,7 +427,11 @@ static const char *vgacon_startup(void)
 	vga_video_num_lines = screen_info.orig_video_lines;
 	vga_video_num_columns = screen_info.orig_video_cols;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state.vgabase = NULL;
+=======
+	vgastate.vgabase = NULL;
+>>>>>>> v3.18
 =======
 	vgastate.vgabase = NULL;
 >>>>>>> v3.18
@@ -572,7 +589,11 @@ static const char *vgacon_startup(void)
 static void vgacon_init(struct vc_data *c, int init)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long p;
+=======
+	struct uni_pagedir *p;
+>>>>>>> v3.18
 =======
 	struct uni_pagedir *p;
 >>>>>>> v3.18
@@ -598,6 +619,7 @@ static void vgacon_init(struct vc_data *c, int init)
 		c->vc_hi_font_mask = 0x0800;
 	p = *c->vc_uni_pagedir_loc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->vc_uni_pagedir_loc == &c->vc_uni_pagedir ||
 	    !--c->vc_uni_pagedir_loc[1])
 		con_free_unimap(c);
@@ -605,12 +627,17 @@ static void vgacon_init(struct vc_data *c, int init)
 	vgacon_uni_pagedir[1]++;
 	if (!vgacon_uni_pagedir[0] && p)
 =======
+=======
+>>>>>>> v3.18
 	if (c->vc_uni_pagedir_loc != &vgacon_uni_pagedir) {
 		con_free_unimap(c);
 		c->vc_uni_pagedir_loc = &vgacon_uni_pagedir;
 		vgacon_refcount++;
 	}
 	if (!vgacon_uni_pagedir && p)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		con_set_default_unimap(c);
 
@@ -629,7 +656,11 @@ static void vgacon_deinit(struct vc_data *c)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!--vgacon_uni_pagedir[1])
+=======
+	if (!--vgacon_refcount)
+>>>>>>> v3.18
 =======
 	if (!--vgacon_refcount)
 >>>>>>> v3.18
@@ -886,6 +917,7 @@ static void vga_set_palette(struct vc_data *vc, unsigned char *table)
 	int i, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vga_w(state.vgabase, VGA_PEL_MSK, 0xff);
 	for (i = j = 0; i < 16; i++) {
 		vga_w(state.vgabase, VGA_PEL_IW, table[i]);
@@ -893,12 +925,17 @@ static void vga_set_palette(struct vc_data *vc, unsigned char *table)
 		vga_w(state.vgabase, VGA_PEL_D, vc->vc_palette[j++] >> 2);
 		vga_w(state.vgabase, VGA_PEL_D, vc->vc_palette[j++] >> 2);
 =======
+=======
+>>>>>>> v3.18
 	vga_w(vgastate.vgabase, VGA_PEL_MSK, 0xff);
 	for (i = j = 0; i < 16; i++) {
 		vga_w(vgastate.vgabase, VGA_PEL_IW, table[i]);
 		vga_w(vgastate.vgabase, VGA_PEL_D, vc->vc_palette[j++] >> 2);
 		vga_w(vgastate.vgabase, VGA_PEL_D, vc->vc_palette[j++] >> 2);
 		vga_w(vgastate.vgabase, VGA_PEL_D, vc->vc_palette[j++] >> 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1052,7 +1089,11 @@ static int vgacon_blank(struct vc_data *c, int blank, int mode_switch)
 	case 0:		/* Unblank */
 		if (vga_vesa_blanked) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vga_vesa_unblank(&state);
+=======
+			vga_vesa_unblank(&vgastate);
+>>>>>>> v3.18
 =======
 			vga_vesa_unblank(&vgastate);
 >>>>>>> v3.18
@@ -1070,7 +1111,11 @@ static int vgacon_blank(struct vc_data *c, int blank, int mode_switch)
 	case -1:	/* Obsolete */
 		if (!mode_switch && vga_video_type == VIDEO_TYPE_VGAC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vga_pal_blank(&state);
+=======
+			vga_pal_blank(&vgastate);
+>>>>>>> v3.18
 =======
 			vga_pal_blank(&vgastate);
 >>>>>>> v3.18
@@ -1086,7 +1131,11 @@ static int vgacon_blank(struct vc_data *c, int blank, int mode_switch)
 	default:		/* VESA blanking */
 		if (vga_video_type == VIDEO_TYPE_VGAC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vga_vesa_blank(&state, blank - 1);
+=======
+			vga_vesa_blank(&vgastate, blank - 1);
+>>>>>>> v3.18
 =======
 			vga_vesa_blank(&vgastate, blank - 1);
 >>>>>>> v3.18
@@ -1182,12 +1231,15 @@ static int vgacon_do_font_op(struct vgastate *state,char *arg,int set,int ch512)
 	if (arg) {
 		if (set)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (i = 0; i < cmapsz; i++)
 				vga_writeb(arg[i], charmap + i);
 		else
 			for (i = 0; i < cmapsz; i++)
 				arg[i] = vga_readb(charmap + i);
 =======
+=======
+>>>>>>> v3.18
 			for (i = 0; i < cmapsz; i++) {
 				vga_writeb(arg[i], charmap + i);
 				cond_resched();
@@ -1197,6 +1249,9 @@ static int vgacon_do_font_op(struct vgastate *state,char *arg,int set,int ch512)
 				arg[i] = vga_readb(charmap + i);
 				cond_resched();
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -1209,12 +1264,15 @@ static int vgacon_do_font_op(struct vgastate *state,char *arg,int set,int ch512)
 			arg += cmapsz;
 			if (set)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				for (i = 0; i < cmapsz; i++)
 					vga_writeb(arg[i], charmap + i);
 			else
 				for (i = 0; i < cmapsz; i++)
 					arg[i] = vga_readb(charmap + i);
 =======
+=======
+>>>>>>> v3.18
 				for (i = 0; i < cmapsz; i++) {
 					vga_writeb(arg[i], charmap + i);
 					cond_resched();
@@ -1224,6 +1282,9 @@ static int vgacon_do_font_op(struct vgastate *state,char *arg,int set,int ch512)
 					arg[i] = vga_readb(charmap + i);
 					cond_resched();
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1352,7 +1413,11 @@ static int vgacon_font_set(struct vc_data *c, struct console_font *font, unsigne
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = vgacon_do_font_op(&state, font->data, 1, charcount == 512);
+=======
+	rc = vgacon_do_font_op(&vgastate, font->data, 1, charcount == 512);
+>>>>>>> v3.18
 =======
 	rc = vgacon_do_font_op(&vgastate, font->data, 1, charcount == 512);
 >>>>>>> v3.18
@@ -1375,7 +1440,11 @@ static int vgacon_font_get(struct vc_data *c, struct console_font *font)
 	if (!font->data)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return vgacon_do_font_op(&state, font->data, 0, vga_512_chars);
+=======
+	return vgacon_do_font_op(&vgastate, font->data, 0, vga_512_chars);
+>>>>>>> v3.18
 =======
 	return vgacon_do_font_op(&vgastate, font->data, 0, vga_512_chars);
 >>>>>>> v3.18
@@ -1521,6 +1590,10 @@ const struct consw vga_con = {
 	.con_invert_region = vgacon_invert_region,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(vga_con);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(vga_con);
 >>>>>>> v3.18

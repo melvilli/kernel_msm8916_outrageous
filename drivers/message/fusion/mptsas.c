@@ -991,16 +991,22 @@ mptsas_queue_device_delete(MPT_ADAPTER *ioc,
 {
 	struct fw_event_work *fw_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sz;
 
 	sz = offsetof(struct fw_event_work, event_data) +
 	    sizeof(MpiEventDataSasDeviceStatusChange_t);
 	fw_event = kzalloc(sz, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 
 	fw_event = kzalloc(sizeof(*fw_event) +
 			   sizeof(MpiEventDataSasDeviceStatusChange_t),
 			   GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!fw_event) {
 		printk(MYIOC_s_WARN_FMT "%s: failed at (line=%d)\n",
@@ -1019,10 +1025,15 @@ mptsas_queue_rescan(MPT_ADAPTER *ioc)
 {
 	struct fw_event_work *fw_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sz;
 
 	sz = offsetof(struct fw_event_work, event_data);
 	fw_event = kzalloc(sz, GFP_ATOMIC);
+=======
+
+	fw_event = kzalloc(sizeof(*fw_event), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 
 	fw_event = kzalloc(sizeof(*fw_event), GFP_ATOMIC);
@@ -1219,6 +1230,7 @@ mptsas_taskmgmt_complete(MPT_ADAPTER *ioc, MPT_FRAME_HDR *mf, MPT_FRAME_HDR *mr)
 
 	pScsiTmReply = (SCSITaskMgmtReply_t *)mr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pScsiTmReply) {
 		dtmprintk(ioc, printk(MYIOC_s_DEBUG_FMT
 		    "\tTaskMgmt completed: fw_channel = %d, fw_id = %d,\n"
@@ -1241,6 +1253,8 @@ mptsas_taskmgmt_complete(MPT_ADAPTER *ioc, MPT_FRAME_HDR *mf, MPT_FRAME_HDR *mr)
 	    MPI_SCSITASKMGMT_TASKTYPE_QUERY_TASK || pScsiTmReply->TaskType ==
 	     MPI_SCSITASKMGMT_TASKTYPE_ABRT_TASK_SET)) {
 =======
+=======
+>>>>>>> v3.18
 	if (!pScsiTmReply)
 		return 0;
 
@@ -1263,6 +1277,9 @@ mptsas_taskmgmt_complete(MPT_ADAPTER *ioc, MPT_FRAME_HDR *mf, MPT_FRAME_HDR *mr)
 	if (pScsiTmReply->TaskType ==
 	    MPI_SCSITASKMGMT_TASKTYPE_QUERY_TASK || pScsiTmReply->TaskType ==
 	     MPI_SCSITASKMGMT_TASKTYPE_ABRT_TASK_SET) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ioc->taskmgmt_cmds.status |= MPT_MGMT_STATUS_COMMAND_GOOD;
 		ioc->taskmgmt_cmds.status |= MPT_MGMT_STATUS_RF_VALID;
@@ -1613,7 +1630,11 @@ mptsas_del_end_device(MPT_ADAPTER *ioc, struct mptsas_phyinfo *phy_info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mptsas_phyinfo *
+=======
+static struct mptsas_phyinfo *
+>>>>>>> v3.18
 =======
 static struct mptsas_phyinfo *
 >>>>>>> v3.18
@@ -1938,7 +1959,11 @@ mptsas_slave_alloc(struct scsi_device *sdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 mptsas_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
+=======
+mptsas_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
+>>>>>>> v3.18
 =======
 mptsas_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 >>>>>>> v3.18
@@ -1950,17 +1975,23 @@ mptsas_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 	if (!vdevice || !vdevice->vtarget || vdevice->vtarget->deleted) {
 		SCpnt->result = DID_NO_CONNECT << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done(SCpnt);
 		return 0;
 	}
 
 	hd = shost_priv(SCpnt->device->host);
 =======
+=======
+>>>>>>> v3.18
 		SCpnt->scsi_done(SCpnt);
 		return 0;
 	}
 
 	hd = shost_priv(shost);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ioc = hd->ioc;
 
@@ -1971,11 +2002,17 @@ mptsas_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 		scsi_print_command(SCpnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mptscsih_qcmd(SCpnt,done);
 }
 
 static DEF_SCSI_QCMD(mptsas_qcmd)
 
+=======
+	return mptscsih_qcmd(SCpnt);
+}
+
+>>>>>>> v3.18
 =======
 	return mptscsih_qcmd(SCpnt);
 }
@@ -2295,15 +2332,21 @@ static int mptsas_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 
 	/* do we need to support multiple segments? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio_segments(req->bio) > 1 || bio_segments(rsp->bio) > 1) {
 		printk(MYIOC_s_ERR_FMT "%s: multiple segments req %u %u, rsp %u %u\n",
 		    ioc->name, __func__, bio_segments(req->bio), blk_rq_bytes(req),
 		    bio_segments(rsp->bio), blk_rq_bytes(rsp));
 =======
+=======
+>>>>>>> v3.18
 	if (bio_multiple_segments(req->bio) ||
 	    bio_multiple_segments(rsp->bio)) {
 		printk(MYIOC_s_ERR_FMT "%s: multiple segments req %u, rsp %u\n",
 		    ioc->name, __func__, blk_rq_bytes(req), blk_rq_bytes(rsp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -3717,7 +3760,11 @@ mptsas_send_expander_event(struct fw_event_work *fw_event)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mptsas_portinfo *
+=======
+static struct mptsas_portinfo *
+>>>>>>> v3.18
 =======
 static struct mptsas_portinfo *
 >>>>>>> v3.18
@@ -3836,7 +3883,11 @@ mptsas_send_link_status_event(struct fw_event_work *fw_event)
 						"SDEV OUTSTANDING CMDS"
 						"%d\n", ioc->name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						sdev->device_busy));
+=======
+						atomic_read(&sdev->device_busy)));
+>>>>>>> v3.18
 =======
 						atomic_read(&sdev->device_busy)));
 >>>>>>> v3.18
@@ -3933,10 +3984,15 @@ retry_page:
 					sas_info->sas_address);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (phy_info) {
 				mptsas_del_end_device(ioc, phy_info);
 				goto redo_device_scan;
 			}
+=======
+			mptsas_del_end_device(ioc, phy_info);
+			goto redo_device_scan;
+>>>>>>> v3.18
 =======
 			mptsas_del_end_device(ioc, phy_info);
 			goto redo_device_scan;
@@ -3952,9 +4008,14 @@ retry_page:
 	list_for_each_entry(port_info, &ioc->sas_topology, list) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (port_info->phy_info &&
 		    (!(port_info->phy_info[0].identify.device_info &
 		    MPI_SAS_DEVICE_INFO_SMP_TARGET)))
+=======
+		if (!(port_info->phy_info[0].identify.device_info &
+		    MPI_SAS_DEVICE_INFO_SMP_TARGET))
+>>>>>>> v3.18
 =======
 		if (!(port_info->phy_info[0].identify.device_info &
 		    MPI_SAS_DEVICE_INFO_SMP_TARGET))
@@ -5070,7 +5131,11 @@ mptsas_event_process(MPT_ADAPTER *ioc, EventNotificationReply_t *reply)
 {
 	u32 event = le32_to_cpu(reply->Event);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sz, event_data_sz;
+=======
+	int event_data_sz;
+>>>>>>> v3.18
 =======
 	int event_data_sz;
 >>>>>>> v3.18
@@ -5184,8 +5249,12 @@ mptsas_event_process(MPT_ADAPTER *ioc, EventNotificationReply_t *reply)
 	event_data_sz = ((reply->MsgLength * 4) -
 	    offsetof(EventNotificationReply_t, Data));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sz = offsetof(struct fw_event_work, event_data) + event_data_sz;
 	fw_event = kzalloc(sz, GFP_ATOMIC);
+=======
+	fw_event = kzalloc(sizeof(*fw_event) + event_data_sz, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	fw_event = kzalloc(sizeof(*fw_event) + event_data_sz, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -5416,7 +5485,11 @@ mptsas_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18

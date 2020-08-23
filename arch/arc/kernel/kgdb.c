@@ -159,11 +159,14 @@ int kgdb_arch_handle_exception(int e_vector, int signo, int err_code,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long kgdb_arch_pc(int exception, struct pt_regs *regs)
 {
 	return instruction_pointer(regs);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kgdb_arch_init(void)
@@ -173,7 +176,11 @@ int kgdb_arch_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kgdb_trap(struct pt_regs *regs, int param)
+=======
+void kgdb_trap(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void kgdb_trap(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -189,7 +196,11 @@ void kgdb_trap(struct pt_regs *regs)
 	 * start after the breakpoint.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (param == 3)
+=======
+	if (regs->ecr_param == 3)
+>>>>>>> v3.18
 =======
 	if (regs->ecr_param == 3)
 >>>>>>> v3.18
@@ -208,7 +219,10 @@ void kgdb_arch_set_pc(struct pt_regs *regs, unsigned long ip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void kgdb_call_nmi_hook(void *ignored)
 {
 	kgdb_nmicallback(raw_smp_processor_id(), NULL);
@@ -221,6 +235,9 @@ void kgdb_roundup_cpus(unsigned long flags)
 	local_irq_disable();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kgdb_arch arch_kgdb_ops = {
 	/* breakpoint instruction: TRAP_S 0x3 */

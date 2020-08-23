@@ -1,15 +1,21 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Hardware monitoring driver for LTC2974, LTC2978, LTC3880, and LTC3883
  *
  * Copyright (c) 2011 Ericsson AB.
  * Copyright (c) 2013 Guenter Roeck
 =======
+=======
+>>>>>>> v3.18
  * Hardware monitoring driver for LTC2974, LTC2977, LTC2978, LTC3880,
  * LTC3883, and LTM4676
  *
  * Copyright (c) 2011 Ericsson AB.
  * Copyright (c) 2013, 2014 Guenter Roeck
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,10 +28,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -39,7 +48,11 @@
 #include "pmbus.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum chips { ltc2974, ltc2978, ltc3880, ltc3883 };
+=======
+enum chips { ltc2974, ltc2977, ltc2978, ltc3880, ltc3883, ltm4676 };
+>>>>>>> v3.18
 =======
 enum chips { ltc2974, ltc2977, ltc2978, ltc3880, ltc3883, ltm4676 };
 >>>>>>> v3.18
@@ -51,7 +64,11 @@ enum chips { ltc2974, ltc2977, ltc2978, ltc3880, ltc3883, ltm4676 };
 #define LTC2978_MFR_SPECIAL_ID		0xe7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LTC2974 and LTC2978 */
+=======
+/* LTC2974, LCT2977, and LTC2978 */
+>>>>>>> v3.18
 =======
 /* LTC2974, LCT2977, and LTC2978 */
 >>>>>>> v3.18
@@ -64,7 +81,11 @@ enum chips { ltc2974, ltc2977, ltc2978, ltc3880, ltc3883, ltm4676 };
 #define LTC2974_MFR_IOUT_MIN		0xd8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LTC3880 and LTC3883 */
+=======
+/* LTC3880, LTC3883, and LTM4676 */
+>>>>>>> v3.18
 =======
 /* LTC3880, LTC3883, and LTM4676 */
 >>>>>>> v3.18
@@ -76,22 +97,33 @@ enum chips { ltc2974, ltc2977, ltc2978, ltc3880, ltc3883, ltm4676 };
 #define LTC3883_MFR_IIN_PEAK		0xe1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LTC2974_ID			0x0212
 #define LTC2978_ID_REV1			0x0121
 #define LTC2978_ID_REV2			0x0122
 =======
+=======
+>>>>>>> v3.18
 #define LTC2974_ID_REV1			0x0212
 #define LTC2974_ID_REV2			0x0213
 #define LTC2977_ID			0x0130
 #define LTC2978_ID_REV1			0x0121
 #define LTC2978_ID_REV2			0x0122
 #define LTC2978A_ID			0x0124
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LTC3880_ID			0x4000
 #define LTC3880_ID_MASK			0xff00
 #define LTC3883_ID			0x4300
 #define LTC3883_ID_MASK			0xff00
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LTM4676_ID			0x4480	/* datasheet claims 0x440X */
+#define LTM4676_ID_MASK			0xfff0
+>>>>>>> v3.18
 =======
 #define LTM4676_ID			0x4480	/* datasheet claims 0x440X */
 #define LTM4676_ID_MASK			0xfff0
@@ -401,15 +433,21 @@ static int ltc2978_write_word_data(struct i2c_client *client, int page,
 static const struct i2c_device_id ltc2978_id[] = {
 	{"ltc2974", ltc2974},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"ltc2978", ltc2978},
 	{"ltc3880", ltc3880},
 	{"ltc3883", ltc3883},
 =======
+=======
+>>>>>>> v3.18
 	{"ltc2977", ltc2977},
 	{"ltc2978", ltc2978},
 	{"ltc3880", ltc3880},
 	{"ltc3883", ltc3883},
 	{"ltm4676", ltm4676},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -436,16 +474,22 @@ static int ltc2978_probe(struct i2c_client *client,
 		return chip_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chip_id == LTC2974_ID) {
 		data->id = ltc2974;
 	} else if (chip_id == LTC2978_ID_REV1 || chip_id == LTC2978_ID_REV2) {
 =======
+=======
+>>>>>>> v3.18
 	if (chip_id == LTC2974_ID_REV1 || chip_id == LTC2974_ID_REV2) {
 		data->id = ltc2974;
 	} else if (chip_id == LTC2977_ID) {
 		data->id = ltc2977;
 	} else if (chip_id == LTC2978_ID_REV1 || chip_id == LTC2978_ID_REV2 ||
 		   chip_id == LTC2978A_ID) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data->id = ltc2978;
 	} else if ((chip_id & LTC3880_ID_MASK) == LTC3880_ID) {
@@ -453,6 +497,11 @@ static int ltc2978_probe(struct i2c_client *client,
 	} else if ((chip_id & LTC3883_ID_MASK) == LTC3883_ID) {
 		data->id = ltc3883;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if ((chip_id & LTM4676_ID_MASK) == LTM4676_ID) {
+		data->id = ltm4676;
+>>>>>>> v3.18
 =======
 	} else if ((chip_id & LTM4676_ID_MASK) == LTM4676_ID) {
 		data->id = ltm4676;
@@ -498,6 +547,10 @@ static int ltc2978_probe(struct i2c_client *client,
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ltc2977:
+>>>>>>> v3.18
 =======
 	case ltc2977:
 >>>>>>> v3.18
@@ -514,6 +567,10 @@ static int ltc2978_probe(struct i2c_client *client,
 		break;
 	case ltc3880:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ltm4676:
+>>>>>>> v3.18
 =======
 	case ltm4676:
 >>>>>>> v3.18
@@ -560,7 +617,11 @@ module_i2c_driver(ltc2978_driver);
 
 MODULE_AUTHOR("Guenter Roeck");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("PMBus driver for LTC2974, LTC2978, LTC3880, and LTC3883");
+=======
+MODULE_DESCRIPTION("PMBus driver for LTC2974, LTC2978, LTC3880, LTC3883, and LTM4676");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("PMBus driver for LTC2974, LTC2978, LTC3880, LTC3883, and LTM4676");
 >>>>>>> v3.18

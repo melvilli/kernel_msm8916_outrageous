@@ -11,7 +11,10 @@
 #define _UAPI_IP_SET_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -20,6 +23,12 @@
 #define IPSET_PROTOCOL		6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* The maximum permissible comment length we will accept over netlink */
+#define IPSET_MAX_COMMENT_SIZE	255
+
+>>>>>>> v3.18
 =======
 /* The maximum permissible comment length we will accept over netlink */
 #define IPSET_MAX_COMMENT_SIZE	255
@@ -90,6 +99,11 @@ enum {
 	IPSET_ATTR_CADT_FLAGS,	/* 8 */
 	IPSET_ATTR_CADT_LINENO = IPSET_ATTR_LINENO,	/* 9 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IPSET_ATTR_MARK,	/* 10 */
+	IPSET_ATTR_MARKMASK,	/* 11 */
+>>>>>>> v3.18
 =======
 	IPSET_ATTR_MARK,	/* 10 */
 	IPSET_ATTR_MARKMASK,	/* 11 */
@@ -125,11 +139,17 @@ enum {
 	IPSET_ATTR_BYTES,
 	IPSET_ATTR_PACKETS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IPSET_ATTR_COMMENT,
 	IPSET_ATTR_SKBMARK,
 	IPSET_ATTR_SKBPRIO,
 	IPSET_ATTR_SKBQUEUE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IPSET_ATTR_ADT_MAX,
 };
@@ -162,6 +182,12 @@ enum ipset_errno {
 	IPSET_ERR_IPADDR_IPV6,
 	IPSET_ERR_COUNTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IPSET_ERR_COMMENT,
+	IPSET_ERR_INVALID_MARKMASK,
+	IPSET_ERR_SKBINFO,
+>>>>>>> v3.18
 =======
 	IPSET_ERR_COMMENT,
 	IPSET_ERR_INVALID_MARKMASK,
@@ -191,13 +217,19 @@ enum ipset_cmd_flags {
 	IPSET_FLAG_BIT_RETURN_NOMATCH = 7,
 	IPSET_FLAG_RETURN_NOMATCH = (1 << IPSET_FLAG_BIT_RETURN_NOMATCH),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IPSET_FLAG_BIT_MAP_SKBMARK = 8,
 	IPSET_FLAG_MAP_SKBMARK = (1 << IPSET_FLAG_BIT_MAP_SKBMARK),
 	IPSET_FLAG_BIT_MAP_SKBPRIO = 9,
 	IPSET_FLAG_MAP_SKBPRIO = (1 << IPSET_FLAG_BIT_MAP_SKBPRIO),
 	IPSET_FLAG_BIT_MAP_SKBQUEUE = 10,
 	IPSET_FLAG_MAP_SKBQUEUE = (1 << IPSET_FLAG_BIT_MAP_SKBQUEUE),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IPSET_FLAG_CMD_MAX = 15,
 };
@@ -213,10 +245,13 @@ enum ipset_cadt_flags {
 	IPSET_FLAG_BIT_WITH_COUNTERS = 3,
 	IPSET_FLAG_WITH_COUNTERS = (1 << IPSET_FLAG_BIT_WITH_COUNTERS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IPSET_FLAG_CADT_MAX	= 15,
 };
 
 =======
+=======
+>>>>>>> v3.18
 	IPSET_FLAG_BIT_WITH_COMMENT = 4,
 	IPSET_FLAG_WITH_COMMENT = (1 << IPSET_FLAG_BIT_WITH_COMMENT),
 	IPSET_FLAG_BIT_WITH_FORCEADD = 5,
@@ -233,6 +268,9 @@ enum ipset_create_flags {
 	IPSET_CREATE_FLAG_BIT_MAX = 7,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Commands with settype-specific attributes */
 enum ipset_adt {
@@ -306,7 +344,10 @@ struct ip_set_req_get_set {
 /* Uses ip_set_req_get_set */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IP_SET_OP_GET_FNAME	0x00000008	/* Get set index and family */
 struct ip_set_req_get_set_family {
 	unsigned int op;
@@ -315,6 +356,9 @@ struct ip_set_req_get_set_family {
 	union ip_set_name_index set;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IP_SET_OP_VERSION	0x00000100	/* Ask kernel version */
 struct ip_set_req_version {

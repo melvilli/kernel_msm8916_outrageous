@@ -64,12 +64,16 @@ struct tps6586x_regulator {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct device *to_tps6586x_dev(struct regulator_dev *rdev)
 {
 	return rdev_get_dev(rdev)->parent;
 }
 
 static struct regulator_ops tps6586x_regulator_ops = {
+=======
+static struct regulator_ops tps6586x_rw_regulator_ops = {
+>>>>>>> v3.18
 =======
 static struct regulator_ops tps6586x_rw_regulator_ops = {
 >>>>>>> v3.18
@@ -84,7 +88,10 @@ static struct regulator_ops tps6586x_rw_regulator_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_ops tps6586x_rw_linear_regulator_ops = {
 	.list_voltage = regulator_list_voltage_linear,
 	.get_voltage_sel = regulator_get_voltage_sel_regmap,
@@ -105,6 +112,9 @@ static struct regulator_ops tps6586x_ro_regulator_ops = {
 	.disable = regulator_disable_regmap,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct regulator_ops tps6586x_sys_regulator_ops = {
 };
@@ -113,6 +123,7 @@ static const unsigned int tps6586x_ldo0_voltages[] = {
 	1200000, 1500000, 1800000, 2500000, 2700000, 2850000, 3100000, 3300000,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const unsigned int tps6586x_ldo4_voltages[] = {
 	1700000, 1725000, 1750000, 1775000, 1800000, 1825000, 1850000, 1875000,
@@ -123,10 +134,13 @@ static const unsigned int tps6586x_ldo4_voltages[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const unsigned int tps6586x_ldo_voltages[] = {
 	1250000, 1500000, 1800000, 2500000, 2700000, 2850000, 3100000, 3300000,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const unsigned int tps6586x_sm2_voltages[] = {
 	3000000, 3050000, 3100000, 3150000, 3200000, 3250000, 3300000, 3350000,
@@ -144,16 +158,22 @@ static const unsigned int tps6586x_dvm_voltages[] = {
 
 #define TPS6586X_REGULATOR(_id, _pin_name, vdata, vreg, shift, nbits,	\
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int tps658640_rtc_voltages[] = {
 	2500000, 2850000, 3100000, 3300000,
 };
 
 #define TPS6586X_REGULATOR(_id, _ops, _pin_name, vdata, vreg, shift, nbits, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   ereg0, ebit0, ereg1, ebit1, goreg, gobit)	\
 	.desc	= {							\
 		.supply_name = _pin_name,				\
 		.name	= "REG-" #_id,					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.ops	= &tps6586x_regulator_ops,			\
 		.type	= REGULATOR_VOLTAGE,				\
@@ -161,6 +181,8 @@ static const unsigned int tps658640_rtc_voltages[] = {
 		.n_voltages = ARRAY_SIZE(tps6586x_##vdata##_voltages),	\
 		.volt_table = tps6586x_##vdata##_voltages,		\
 =======
+=======
+>>>>>>> v3.18
 		.ops	= &tps6586x_## _ops ## _regulator_ops,		\
 		.type	= REGULATOR_VOLTAGE,				\
 		.id	= TPS6586X_ID_##_id,				\
@@ -191,6 +213,9 @@ static const unsigned int tps658640_rtc_voltages[] = {
 		.n_voltages = n_volt,					\
 		.min_uV = min_uv,					\
 		.uV_step = uv_step,					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.owner	= THIS_MODULE,					\
 		.enable_reg = TPS6586X_SUPPLY##ereg0,			\
@@ -209,6 +234,7 @@ static const unsigned int tps658640_rtc_voltages[] = {
 		     ereg0, ebit0, ereg1, ebit1)			\
 {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TPS6586X_REGULATOR(_id, _pname, vdata, vreg, shift, nbits,	\
 			   ereg0, ebit0, ereg1, ebit1, 0, 0)		\
 }
@@ -219,6 +245,8 @@ static const unsigned int tps658640_rtc_voltages[] = {
 	TPS6586X_REGULATOR(_id, _pname, vdata, vreg, shift, nbits,	\
 			   ereg0, ebit0, ereg1, ebit1, goreg, gobit)	\
 =======
+=======
+>>>>>>> v3.18
 	TPS6586X_REGULATOR(_id, rw, _pname, vdata, vreg, shift, nbits,	\
 			   ereg0, ebit0, ereg1, ebit1, 0, 0)		\
 }
@@ -245,6 +273,9 @@ static const unsigned int tps658640_rtc_voltages[] = {
 				  min_uv, uv_step, vreg, shift, nbits,	\
 				  ereg0, ebit0, ereg1, ebit1, goreg,	\
 				  gobit)				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -262,6 +293,7 @@ static const unsigned int tps658640_rtc_voltages[] = {
 
 static struct tps6586x_regulator tps6586x_regulator[] = {
 	TPS6586X_SYS_REGULATOR(),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TPS6586X_LDO(LDO_0, "vinldo01", ldo0, SUPPLYV1, 5, 3, ENC, 0, END, 0),
 	TPS6586X_LDO(LDO_3, "vinldo23", ldo, SUPPLYV4, 0, 3, ENC, 2, END, 2),
@@ -283,6 +315,8 @@ static struct tps6586x_regulator tps6586x_regulator[] = {
 	TPS6586X_DVM(SM_1, "vin-sm1", dvm, SM1V1, 0, 5, ENA, 0,
 					ENB, 0, TPS6586X_VCC1, BIT(0)),
 =======
+=======
+>>>>>>> v3.18
 	TPS6586X_LDO(LDO_0, "vinldo01", tps6586x_ldo0, SUPPLYV1, 5, 3, ENC, 0,
 					END, 0),
 	TPS6586X_LDO(LDO_3, "vinldo23", tps6586x_ldo, SUPPLYV4, 0, 3, ENC, 2,
@@ -341,6 +375,9 @@ static struct tps6586x_regulator tps658640_regulator[] = {
 static struct tps6586x_regulator tps658643_regulator[] = {
 	TPS6586X_LDO_LINEAR(SM_2, "vin-sm2", 32, 1025000, 25000, SUPPLYV2,
 			    0, 5, ENC, 7, END, 7),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -416,12 +453,15 @@ static int tps6586x_regulator_set_slew_rate(struct platform_device *pdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct tps6586x_regulator *find_regulator_info(int id)
 {
 	struct tps6586x_regulator *ri;
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 static struct tps6586x_regulator *find_regulator_info(int id, int version)
 {
 	struct tps6586x_regulator *ri;
@@ -454,6 +494,9 @@ static struct tps6586x_regulator *find_regulator_info(int id, int version)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(tps6586x_regulator); i++) {
 		ri = &tps6586x_regulator[i];
@@ -495,7 +538,11 @@ static struct tps6586x_platform_data *tps6586x_parse_regulator_dt(
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs = of_find_node_by_name(np, "regulators");
+=======
+	regs = of_get_child_by_name(np, "regulators");
+>>>>>>> v3.18
 =======
 	regs = of_get_child_by_name(np, "regulators");
 >>>>>>> v3.18
@@ -513,10 +560,15 @@ static struct tps6586x_platform_data *tps6586x_parse_regulator_dt(
 
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata) {
 		dev_err(&pdev->dev, "Memory alloction failed\n");
 		return NULL;
 	}
+=======
+	if (!pdata)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!pdata)
 		return NULL;
@@ -553,16 +605,22 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 	struct tps6586x_regulator *ri = NULL;
 	struct regulator_config config = { };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev **rdev;
 	struct regulator_init_data *reg_data;
 	struct tps6586x_platform_data *pdata;
 	struct of_regulator_match *tps6586x_reg_matches = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct regulator_dev *rdev;
 	struct regulator_init_data *reg_data;
 	struct tps6586x_platform_data *pdata;
 	struct of_regulator_match *tps6586x_reg_matches = NULL;
 	int version;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int id;
 	int err;
@@ -580,6 +638,7 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = devm_kzalloc(&pdev->dev, TPS6586X_ID_MAX_REGULATOR *
 				sizeof(*rdev), GFP_KERNEL);
 	if (!rdev) {
@@ -589,10 +648,14 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 =======
 	version = tps6586x_get_version(pdev->dev.parent);
 >>>>>>> v3.18
+=======
+	version = tps6586x_get_version(pdev->dev.parent);
+>>>>>>> v3.18
 
 	for (id = 0; id < TPS6586X_ID_MAX_REGULATOR; ++id) {
 		reg_data = pdata->reg_init_data[id];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ri = find_regulator_info(id);
 		if (!ri) {
@@ -600,11 +663,16 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 			err = -EINVAL;
 			goto fail;
 =======
+=======
+>>>>>>> v3.18
 		ri = find_regulator_info(id, version);
 
 		if (!ri) {
 			dev_err(&pdev->dev, "invalid regulator ID specified\n");
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -613,7 +681,11 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev,
 				"regulator %d preinit failed, e %d\n", id, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail;
+=======
+			return err;
+>>>>>>> v3.18
 =======
 			return err;
 >>>>>>> v3.18
@@ -627,6 +699,7 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 			config.of_node = tps6586x_reg_matches[id].of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev[id] = regulator_register(&ri->desc, &config);
 		if (IS_ERR(rdev[id])) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
@@ -634,11 +707,16 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 			err = PTR_ERR(rdev[id]);
 			goto fail;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
 					ri->desc.name);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -649,8 +727,12 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 				dev_err(&pdev->dev,
 					"Slew rate config failed, e %d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				regulator_unregister(rdev[id]);
 				goto fail;
+=======
+				return err;
+>>>>>>> v3.18
 =======
 				return err;
 >>>>>>> v3.18
@@ -660,6 +742,7 @@ static int tps6586x_regulator_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, rdev);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 fail:
@@ -679,6 +762,8 @@ static int tps6586x_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver tps6586x_regulator_driver = {
@@ -688,7 +773,10 @@ static struct platform_driver tps6586x_regulator_driver = {
 	},
 	.probe		= tps6586x_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= tps6586x_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -82,10 +82,13 @@ static ssize_t dbfs_read(struct file *file, char __user *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct file_operations dbfs_ops = {
 	.read		= dbfs_read,
 	.llseek		= no_llseek,
 =======
+=======
+>>>>>>> v3.18
 static long dbfs_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct hypfs_dbfs_file *df;
@@ -105,6 +108,9 @@ static const struct file_operations dbfs_ops = {
 	.read		= dbfs_read,
 	.llseek		= no_llseek,
 	.unlocked_ioctl = dbfs_ioctl,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -128,7 +134,11 @@ int hypfs_dbfs_init(void)
 {
 	dbfs_dir = debugfs_create_dir("s390_hypfs", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(dbfs_dir);
+=======
+	return PTR_ERR_OR_ZERO(dbfs_dir);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dbfs_dir);
 >>>>>>> v3.18

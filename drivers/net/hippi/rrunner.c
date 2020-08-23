@@ -38,7 +38,10 @@
 #include <linux/hippidevice.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -217,10 +220,15 @@ static int rr_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	if (rrpriv->regs)
 		pci_iounmap(pdev, rrpriv->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev) {
 		pci_release_regions(pdev);
 		pci_set_drvdata(pdev, NULL);
 	}
+=======
+	if (pdev)
+		pci_release_regions(pdev);
+>>>>>>> v3.18
 =======
 	if (pdev)
 		pci_release_regions(pdev);
@@ -253,7 +261,10 @@ static void rr_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -1684,7 +1695,11 @@ static int rr_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rr_pci_tbl) = {
+=======
+static const struct pci_device_id rr_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rr_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1702,6 +1717,7 @@ static struct pci_driver rr_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init rr_init_module(void)
 {
 	return pci_register_driver(&rr_driver);
@@ -1714,6 +1730,9 @@ static void __exit rr_cleanup_module(void)
 
 module_init(rr_init_module);
 module_exit(rr_cleanup_module);
+=======
+module_pci_driver(rr_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(rr_driver);
 >>>>>>> v3.18

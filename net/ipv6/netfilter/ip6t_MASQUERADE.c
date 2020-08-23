@@ -20,6 +20,10 @@
 #include <net/addrconf.h>
 #include <net/ipv6.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/ipv6/nf_nat_masquerade.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/ipv6/nf_nat_masquerade.h>
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 static unsigned int
 masquerade_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct nf_nat_range *range = par->targinfo;
 	enum ip_conntrack_info ctinfo;
@@ -54,6 +59,9 @@ masquerade_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 =======
 	return nf_nat_masquerade_ipv6(skb, par->targinfo, par->out);
 >>>>>>> v3.18
+=======
+	return nf_nat_masquerade_ipv6(skb, par->targinfo, par->out);
+>>>>>>> v3.18
 }
 
 static int masquerade_tg6_checkentry(const struct xt_tgchk_param *par)
@@ -65,6 +73,7 @@ static int masquerade_tg6_checkentry(const struct xt_tgchk_param *par)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int device_cmp(struct nf_conn *ct, void *ifindex)
 {
@@ -108,6 +117,8 @@ static struct notifier_block masq_inet_notifier = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct xt_target masquerade_tg6_reg __read_mostly = {
 	.name		= "MASQUERADE",
 	.family		= NFPROTO_IPV6,
@@ -125,10 +136,15 @@ static int __init masquerade_tg6_init(void)
 
 	err = xt_register_target(&masquerade_tg6_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err == 0) {
 		register_netdevice_notifier(&masq_dev_notifier);
 		register_inet6addr_notifier(&masq_inet_notifier);
 	}
+=======
+	if (err == 0)
+		nf_nat_masquerade_ipv6_register_notifier();
+>>>>>>> v3.18
 =======
 	if (err == 0)
 		nf_nat_masquerade_ipv6_register_notifier();
@@ -139,8 +155,12 @@ static int __init masquerade_tg6_init(void)
 static void __exit masquerade_tg6_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_inet6addr_notifier(&masq_inet_notifier);
 	unregister_netdevice_notifier(&masq_dev_notifier);
+=======
+	nf_nat_masquerade_ipv6_unregister_notifier();
+>>>>>>> v3.18
 =======
 	nf_nat_masquerade_ipv6_unregister_notifier();
 >>>>>>> v3.18

@@ -47,12 +47,18 @@ enum chip_flavors {
 	chip_8009,
 	chip_8018,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip_8019
 =======
+=======
+>>>>>>> v3.18
 	chip_8019,
 	chip_8074,
 	chip_8076,
 	chip_8077
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -107,7 +113,12 @@ enum memory_region_num {
 	DEV_MEM,    /* memory for devices */
 	CCB_MEM,    /* memory for command control block */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FW_FLASH    /* memory for fw flash update */
+=======
+	FW_FLASH,    /* memory for fw flash update */
+	FORENSIC_MEM  /* memory for fw forensic data */
+>>>>>>> v3.18
 =======
 	FW_FLASH,    /* memory for fw flash update */
 	FORENSIC_MEM  /* memory for fw forensic data */

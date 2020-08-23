@@ -14,7 +14,13 @@
 
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/rbtree.h>
+=======
+#include <linux/sched.h>
+#include <linux/rbtree.h>
+#include <linux/cred.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 #include <linux/rbtree.h>
@@ -31,12 +37,15 @@ static const char *keyring_name[INTEGRITY_KEYRING_MAX] = {
 	"_evm",
 	"_module",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"_ima",
 };
 
 int integrity_digsig_verify(const unsigned int id, const char *sig, int siglen,
 					const char *digest, int digestlen)
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_IMA_TRUSTED_KEYRING
 	"_ima",
 #else
@@ -46,6 +55,9 @@ int integrity_digsig_verify(const unsigned int id, const char *sig, int siglen,
 
 int integrity_digsig_verify(const unsigned int id, const char *sig, int siglen,
 			    const char *digest, int digestlen)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (id >= INTEGRITY_KEYRING_MAX)
@@ -63,14 +75,20 @@ int integrity_digsig_verify(const unsigned int id, const char *sig, int siglen,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (sig[0]) {
 	case 1:
 		return digsig_verify(keyring[id], sig, siglen,
 =======
+=======
+>>>>>>> v3.18
 	switch (sig[1]) {
 	case 1:
 		/* v1 API expect signature without xattr type */
 		return digsig_verify(keyring[id], sig + 1, siglen - 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     digest, digestlen);
 	case 2:
@@ -81,7 +99,10 @@ int integrity_digsig_verify(const unsigned int id, const char *sig, int siglen,
 	return -EOPNOTSUPP;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int integrity_init_keyring(const unsigned int id)
 {
@@ -104,4 +125,7 @@ int integrity_init_keyring(const unsigned int id)
 	}
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

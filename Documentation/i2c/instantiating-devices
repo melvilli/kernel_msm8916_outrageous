@@ -9,8 +9,13 @@ several ways to achieve this, depending on the context and requirements.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Method 1: Declare the I2C devices by bus number
 -----------------------------------------------
+=======
+Method 1a: Declare the I2C devices by bus number
+------------------------------------------------
+>>>>>>> v3.18
 =======
 Method 1a: Declare the I2C devices by bus number
 ------------------------------------------------
@@ -25,7 +30,11 @@ i2c_board_info which is registered by calling i2c_register_board_info().
 Example (from omap2 h4):
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_board_info __initdata h4_i2c_board_info[] = {
+=======
+static struct i2c_board_info h4_i2c_board_info[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct i2c_board_info h4_i2c_board_info[] __initdata = {
 >>>>>>> v3.18
@@ -61,7 +70,10 @@ they sit on goes away (if ever.)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Method 1b: Declare the I2C devices via devicetree
 -------------------------------------------------
 
@@ -99,6 +111,9 @@ ACPI can also describe I2C devices. There is special documentation for this
 which is currently located at Documentation/acpi/enumeration.txt.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Method 2: Instantiate the devices explicitly
 --------------------------------------------

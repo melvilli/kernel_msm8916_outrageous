@@ -28,12 +28,18 @@
 #include "capability_names.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct aa_fs_entry aa_fs_entry_caps[] = {
 	AA_FS_FILE_STRING("mask", AA_FS_CAPS_MASK),
 	{ }
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct audit_cache {
 	struct aa_profile *profile;
@@ -57,8 +63,12 @@ static void audit_cb(struct audit_buffer *ab, void *va)
 /**
  * audit_caps - audit a capability
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @profile: profile confining task (NOT NULL)
  * @task: task capability test was performed against (NOT NULL)
+=======
+ * @profile: profile being tested for confinement (NOT NULL)
+>>>>>>> v3.18
 =======
  * @profile: profile being tested for confinement (NOT NULL)
 >>>>>>> v3.18
@@ -71,8 +81,12 @@ static void audit_cb(struct audit_buffer *ab, void *va)
  * Returns: 0 or sa->error on success,  error code on failure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int audit_caps(struct aa_profile *profile, struct task_struct *task,
 		      int cap, int error)
+=======
+static int audit_caps(struct aa_profile *profile, int cap, int error)
+>>>>>>> v3.18
 =======
 static int audit_caps(struct aa_profile *profile, int cap, int error)
 >>>>>>> v3.18
@@ -85,7 +99,10 @@ static int audit_caps(struct aa_profile *profile, int cap, int error)
 	sa.aad = &aad;
 	sa.u.cap = cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sa.aad->tsk = task;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sa.aad->op = OP_CAPABLE;
@@ -139,8 +156,12 @@ static int profile_capable(struct aa_profile *profile, int cap)
 /**
  * aa_capable - test permission to use capability
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @task: task doing capability test against (NOT NULL)
  * @profile: profile confining @task (NOT NULL)
+=======
+ * @profile: profile being tested against (NOT NULL)
+>>>>>>> v3.18
 =======
  * @profile: profile being tested against (NOT NULL)
 >>>>>>> v3.18
@@ -152,8 +173,12 @@ static int profile_capable(struct aa_profile *profile, int cap)
  * Returns: 0 on success, or else an error code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int aa_capable(struct task_struct *task, struct aa_profile *profile, int cap,
 	       int audit)
+=======
+int aa_capable(struct aa_profile *profile, int cap, int audit)
+>>>>>>> v3.18
 =======
 int aa_capable(struct aa_profile *profile, int cap, int audit)
 >>>>>>> v3.18
@@ -167,7 +192,11 @@ int aa_capable(struct aa_profile *profile, int cap, int audit)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return audit_caps(profile, task, cap, error);
+=======
+	return audit_caps(profile, cap, error);
+>>>>>>> v3.18
 =======
 	return audit_caps(profile, cap, error);
 >>>>>>> v3.18

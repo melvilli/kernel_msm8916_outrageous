@@ -12,6 +12,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ieee80211.h>
+>>>>>>> v3.18
 =======
 #include <linux/ieee80211.h>
 >>>>>>> v3.18

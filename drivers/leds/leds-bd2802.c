@@ -679,6 +679,7 @@ static int bd2802_probe(struct i2c_client *client,
 
 	led = devm_kzalloc(&client->dev, sizeof(struct bd2802_led), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!led) {
 		dev_err(&client->dev, "failed to allocate driver data\n");
 		return -ENOMEM;
@@ -687,11 +688,16 @@ static int bd2802_probe(struct i2c_client *client,
 	led->client = client;
 	pdata = led->pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	if (!led)
 		return -ENOMEM;
 
 	led->client = client;
 	pdata = led->pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_clientdata(client, led);
 

@@ -19,11 +19,17 @@ Required properties:
    timing binding details.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional properties:
 - backlight: phandle of the backlight device attached to the panel
 - enable-gpios: GPIO pin to enable or disable the panel
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Recommended properties:
  - pinctrl-names, pinctrl-0: the pincontrol settings to configure
@@ -37,6 +43,12 @@ Example:
 		pinctrl-names = "default";
 		pinctrl-0 = <&bone_lcd3_cape_lcd_pins>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		backlight = <&backlight>;
+		enable-gpios = <&gpio3 19 0>;
+
+>>>>>>> v3.18
 =======
 		backlight = <&backlight>;
 		enable-gpios = <&gpio3 19 0>;

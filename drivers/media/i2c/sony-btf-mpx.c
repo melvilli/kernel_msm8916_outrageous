@@ -31,7 +31,11 @@ MODULE_LICENSE("GPL v2");
 static int debug;
 module_param(debug, int, 0644);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(debug, "debug level 0=off(default) 1=on\n");
+=======
+MODULE_PARM_DESC(debug, "debug level 0=off(default) 1=on");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(debug, "debug level 0=off(default) 1=on");
 >>>>>>> v3.18
@@ -332,10 +336,13 @@ static int sony_btf_mpx_s_tuner(struct v4l2_subdev *sd, const struct v4l2_tuner 
 /* --------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_core_ops sony_btf_mpx_core_ops = {
 	.s_std = sony_btf_mpx_s_std,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct v4l2_subdev_tuner_ops sony_btf_mpx_tuner_ops = {
@@ -344,10 +351,13 @@ static const struct v4l2_subdev_tuner_ops sony_btf_mpx_tuner_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_ops sony_btf_mpx_ops = {
 	.core = &sony_btf_mpx_core_ops,
 	.tuner = &sony_btf_mpx_tuner_ops,
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_video_ops sony_btf_mpx_video_ops = {
 	.s_std = sony_btf_mpx_s_std,
 };
@@ -355,6 +365,9 @@ static const struct v4l2_subdev_video_ops sony_btf_mpx_video_ops = {
 static const struct v4l2_subdev_ops sony_btf_mpx_ops = {
 	.tuner = &sony_btf_mpx_tuner_ops,
 	.video = &sony_btf_mpx_video_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -373,7 +386,11 @@ static int sony_btf_mpx_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = kzalloc(sizeof(struct sony_btf_mpx), GFP_KERNEL);
+=======
+	t = devm_kzalloc(&client->dev, sizeof(*t), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	t = devm_kzalloc(&client->dev, sizeof(*t), GFP_KERNEL);
 >>>>>>> v3.18
@@ -396,7 +413,10 @@ static int sony_btf_mpx_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

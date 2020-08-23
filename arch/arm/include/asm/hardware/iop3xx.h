@@ -19,6 +19,7 @@
  * IOP3XX GPIO handling
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GPIO_IN			0
 #define GPIO_OUT		1
 #define GPIO_LOW		0
@@ -29,6 +30,11 @@
 extern void gpio_line_config(int line, int direction);
 extern int  gpio_line_get(int line);
 extern void gpio_line_set(int line, int value);
+=======
+#define IOP3XX_GPIO_LINE(x)	(x)
+
+#ifndef __ASSEMBLY__
+>>>>>>> v3.18
 =======
 #define IOP3XX_GPIO_LINE(x)	(x)
 
@@ -175,11 +181,14 @@ extern int iop3xx_get_init_atu(void);
 #define IOP3XX_PERCR0		(volatile u32 *)IOP3XX_REG_ADDR(0x0710)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* General Purpose I/O  */
 #define IOP3XX_GPOE		(volatile u32 *)IOP3XX_GPIO_REG(0x0000)
 #define IOP3XX_GPID		(volatile u32 *)IOP3XX_GPIO_REG(0x0004)
 #define IOP3XX_GPOD		(volatile u32 *)IOP3XX_GPIO_REG(0x0008)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Timers  */

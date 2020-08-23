@@ -60,6 +60,7 @@ struct files_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define rcu_dereference_check_fdtable(files, fdtfd) \
 	(rcu_dereference_check((fdtfd), \
 			       lockdep_is_held(&(files)->file_lock) || \
@@ -71,10 +72,13 @@ struct files_struct {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct file_operations;
 struct vfsmount;
 struct dentry;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void __init files_defer_init(void);
 
@@ -87,6 +91,8 @@ static inline struct file * fcheck_files(struct files_struct *files, unsigned in
 		file = rcu_dereference_check_fdtable(files, fdt->fd[fd]);
 	return file;
 =======
+=======
+>>>>>>> v3.18
 #define rcu_dereference_check_fdtable(files, fdtfd) \
 	rcu_dereference_check((fdtfd), lockdep_is_held(&(files)->file_lock))
 
@@ -111,6 +117,9 @@ static inline struct file *fcheck_files(struct files_struct *files, unsigned int
 			   lockdep_is_held(&files->file_lock),
 			   "suspicious rcu_dereference_check() usage");
 	return __fcheck_files(files, fd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

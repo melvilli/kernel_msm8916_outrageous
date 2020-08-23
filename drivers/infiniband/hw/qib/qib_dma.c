@@ -109,11 +109,17 @@ static int qib_map_sg(struct ib_device *dev, struct scatterlist *sgl,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		sg->dma_address = addr + sg->offset;
 #ifdef CONFIG_NEED_SG_DMA_LENGTH
 		sg->dma_length = sg->length;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return ret;
@@ -126,6 +132,7 @@ static void qib_unmap_sg(struct ib_device *dev,
 	BUG_ON(!valid_dma_direction(direction));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u64 qib_sg_dma_address(struct ib_device *dev, struct scatterlist *sg)
 {
@@ -142,6 +149,8 @@ static unsigned int qib_sg_dma_len(struct ib_device *dev,
 	return sg->length;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void qib_sync_single_for_cpu(struct ib_device *dev, u64 addr,
@@ -184,8 +193,11 @@ struct ib_dma_mapping_ops qib_dma_mapping_ops = {
 	.map_sg = qib_map_sg,
 	.unmap_sg = qib_unmap_sg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dma_address = qib_sg_dma_address,
 	.dma_len = qib_sg_dma_len,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.sync_single_for_cpu = qib_sync_single_for_cpu,

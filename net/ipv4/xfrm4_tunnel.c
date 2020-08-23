@@ -64,7 +64,11 @@ static struct xfrm_tunnel xfrm_tunnel_handler __read_mostly = {
 	.handler	=	xfrm_tunnel_rcv,
 	.err_handler	=	xfrm_tunnel_err,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.priority	=	2,
+=======
+	.priority	=	3,
+>>>>>>> v3.18
 =======
 	.priority	=	3,
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -106,7 +110,11 @@ acpi_ev_walk_gpe_list(acpi_gpe_callback gpe_walk_callback, void *context)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -205,14 +213,20 @@ acpi_ev_get_gpe_device(struct acpi_gpe_xrupt_info *gpe_xrupt_info,
  * FUNCTION:    acpi_ev_get_gpe_xrupt_block
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  interrupt_number     - Interrupt for a GPE block
  *
  * RETURN:      A GPE interrupt block
 =======
+=======
+>>>>>>> v3.18
  * PARAMETERS:  interrupt_number            - Interrupt for a GPE block
  *              gpe_xrupt_block             - Where the block is returned
  *
  * RETURN:      Status
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * DESCRIPTION: Get or Create a GPE interrupt block. There is one interrupt
@@ -223,7 +237,13 @@ acpi_ev_get_gpe_device(struct acpi_gpe_xrupt_info *gpe_xrupt_info,
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct acpi_gpe_xrupt_info *acpi_ev_get_gpe_xrupt_block(u32 interrupt_number)
+=======
+acpi_status
+acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
+			    struct acpi_gpe_xrupt_info ** gpe_xrupt_block)
+>>>>>>> v3.18
 =======
 acpi_status
 acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
@@ -243,7 +263,12 @@ acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
 	while (next_gpe_xrupt) {
 		if (next_gpe_xrupt->interrupt_number == interrupt_number) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return_PTR(next_gpe_xrupt);
+=======
+			*gpe_xrupt_block = next_gpe_xrupt;
+			return_ACPI_STATUS(AE_OK);
+>>>>>>> v3.18
 =======
 			*gpe_xrupt_block = next_gpe_xrupt;
 			return_ACPI_STATUS(AE_OK);
@@ -258,7 +283,11 @@ acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
 	gpe_xrupt = ACPI_ALLOCATE_ZEROED(sizeof(struct acpi_gpe_xrupt_info));
 	if (!gpe_xrupt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return_PTR(NULL);
+=======
+		return_ACPI_STATUS(AE_NO_MEMORY);
+>>>>>>> v3.18
 =======
 		return_ACPI_STATUS(AE_NO_MEMORY);
 >>>>>>> v3.18
@@ -281,6 +310,10 @@ acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
 		acpi_gbl_gpe_xrupt_list_head = gpe_xrupt;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -294,6 +327,7 @@ acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
 							   gpe_xrupt);
 		if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ACPI_ERROR((AE_INFO,
 				    "Could not install GPE interrupt handler at level 0x%X",
 				    interrupt_number));
@@ -303,6 +337,8 @@ acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
 
 	return_PTR(gpe_xrupt);
 =======
+=======
+>>>>>>> v3.18
 			ACPI_EXCEPTION((AE_INFO, status,
 					"Could not install GPE interrupt handler at level 0x%X",
 					interrupt_number));
@@ -312,6 +348,9 @@ acpi_ev_get_gpe_xrupt_block(u32 interrupt_number,
 
 	*gpe_xrupt_block = gpe_xrupt;
 	return_ACPI_STATUS(AE_OK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -398,8 +398,12 @@ static int aer_inject(struct aer_error_inj *einj)
 	    !(einj->cor_status & ~cor_mask)) {
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "The correctable error(s) is masked "
 				"by device\n");
+=======
+		printk(KERN_WARNING "The correctable error(s) is masked by device\n");
+>>>>>>> v3.18
 =======
 		printk(KERN_WARNING "The correctable error(s) is masked by device\n");
 >>>>>>> v3.18
@@ -410,8 +414,12 @@ static int aer_inject(struct aer_error_inj *einj)
 	    !(einj->uncor_status & ~uncor_mask)) {
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "The uncorrectable error(s) is masked "
 				"by device\n");
+=======
+		printk(KERN_WARNING "The uncorrectable error(s) is masked by device\n");
+>>>>>>> v3.18
 =======
 		printk(KERN_WARNING "The uncorrectable error(s) is masked by device\n");
 >>>>>>> v3.18
@@ -473,8 +481,12 @@ static int aer_inject(struct aer_error_inj *einj)
 		}
 		aer_irq(-1, edev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	else
+=======
+	} else
+>>>>>>> v3.18
 =======
 	} else
 >>>>>>> v3.18

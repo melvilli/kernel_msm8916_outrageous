@@ -59,7 +59,11 @@ static void tx4938ide_tune_ebusc(unsigned int ebus_ch,
 static void tx4938ide_set_pio_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tx4938ide_platform_info *pdata = hwif->dev->platform_data;
+=======
+	struct tx4938ide_platform_info *pdata = dev_get_platdata(hwif->dev);
+>>>>>>> v3.18
 =======
 	struct tx4938ide_platform_info *pdata = dev_get_platdata(hwif->dev);
 >>>>>>> v3.18
@@ -137,7 +141,11 @@ static int __init tx4938ide_probe(struct platform_device *pdev)
 	struct ide_host *host;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tx4938ide_platform_info *pdata = pdev->dev.platform_data;
+=======
+	struct tx4938ide_platform_info *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct tx4938ide_platform_info *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -212,6 +220,7 @@ static struct platform_driver tx4938ide_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init tx4938ide_init(void)
 {
 	return platform_driver_probe(&tx4938ide_driver, tx4938ide_probe);
@@ -224,6 +233,9 @@ static void __exit tx4938ide_exit(void)
 
 module_init(tx4938ide_init);
 module_exit(tx4938ide_exit);
+=======
+module_platform_driver_probe(tx4938ide_driver, tx4938ide_probe);
+>>>>>>> v3.18
 =======
 module_platform_driver_probe(tx4938ide_driver, tx4938ide_probe);
 >>>>>>> v3.18

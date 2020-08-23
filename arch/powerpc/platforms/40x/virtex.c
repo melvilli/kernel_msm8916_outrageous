@@ -18,7 +18,11 @@
 #include <asm/ppc4xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id xilinx_of_bus_ids[] __initdata = {
+=======
+static const struct of_device_id xilinx_of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id xilinx_of_bus_ids[] __initconst = {
 >>>>>>> v3.18

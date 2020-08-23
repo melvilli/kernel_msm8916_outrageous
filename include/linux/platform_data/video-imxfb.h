@@ -62,6 +62,7 @@ struct imx_fb_platform_data {
 	int		num_modes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u_int		cmap_greyscale:1,
 			cmap_inverse:1,
 			cmap_static:1,
@@ -69,10 +70,13 @@ struct imx_fb_platform_data {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	u_int		pwmr;
 	u_int		lscr1;
 	u_int		dmacr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u_char * fixed_screen_cpu;
 	dma_addr_t fixed_screen_dma;
@@ -86,9 +90,14 @@ struct imx_fb_platform_data {
 
 void set_imx_fb_info(struct imx_fb_platform_data *);
 =======
+=======
+>>>>>>> v3.18
 	int (*init)(struct platform_device *);
 	void (*exit)(struct platform_device *);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* ifndef __MACH_IMXFB_H__ */

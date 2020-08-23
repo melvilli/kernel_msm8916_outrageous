@@ -199,6 +199,10 @@ static void srpt_event_handler(struct ib_event_handler *handler,
 	case IB_EVENT_SM_CHANGE:
 	case IB_EVENT_CLIENT_REREGISTER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IB_EVENT_GID_CHANGE:
+>>>>>>> v3.18
 =======
 	case IB_EVENT_GID_CHANGE:
 >>>>>>> v3.18
@@ -568,7 +572,11 @@ static int srpt_refresh_port(struct srpt_port *sport)
 							 srpt_mad_send_handler,
 							 srpt_mad_recv_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							 sport);
+=======
+							 sport, 0);
+>>>>>>> v3.18
 =======
 							 sport, 0);
 >>>>>>> v3.18
@@ -1365,11 +1373,16 @@ static int srpt_abort_cmd(struct srpt_send_ioctx *ioctx)
 		/* XXX(hch): this is a horrible layering violation.. */
 		spin_lock_irqsave(&ioctx->cmd.t_state_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ioctx->cmd.transport_state |= CMD_T_LUN_STOP;
 		ioctx->cmd.transport_state &= ~CMD_T_ACTIVE;
 		spin_unlock_irqrestore(&ioctx->cmd.t_state_lock, flags);
 
 		complete(&ioctx->cmd.transport_lun_stop_comp);
+=======
+		ioctx->cmd.transport_state &= ~CMD_T_ACTIVE;
+		spin_unlock_irqrestore(&ioctx->cmd.t_state_lock, flags);
+>>>>>>> v3.18
 =======
 		ioctx->cmd.transport_state &= ~CMD_T_ACTIVE;
 		spin_unlock_irqrestore(&ioctx->cmd.t_state_lock, flags);
@@ -1382,9 +1395,12 @@ static int srpt_abort_cmd(struct srpt_send_ioctx *ioctx)
 		 */
 		srpt_unmap_sg_to_ib_sge(ioctx->ch, ioctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&ioctx->cmd.t_state_lock, flags);
 		ioctx->cmd.transport_state |= CMD_T_LUN_STOP;
 		spin_unlock_irqrestore(&ioctx->cmd.t_state_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		target_put_sess_cmd(ioctx->ch->sess, &ioctx->cmd);
@@ -1497,7 +1513,10 @@ static void srpt_handle_rdma_err_comp(struct srpt_rdma_ch *ch,
 	struct se_cmd *cmd;
 	enum srpt_command_state state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1520,9 +1539,12 @@ static void srpt_handle_rdma_err_comp(struct srpt_rdma_ch *ch,
 		break;
 	case SRPT_RDMA_WRITE_LAST:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&ioctx->cmd.t_state_lock, flags);
 		ioctx->cmd.transport_state |= CMD_T_LUN_STOP;
 		spin_unlock_irqrestore(&ioctx->cmd.t_state_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -2625,7 +2647,11 @@ static int srpt_cm_req_recv(struct ib_cm_id *cm_id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ch->sess = transport_init_session();
+=======
+	ch->sess = transport_init_session(TARGET_PROT_NORMAL);
+>>>>>>> v3.18
 =======
 	ch->sess = transport_init_session(TARGET_PROT_NORMAL);
 >>>>>>> v3.18
@@ -3048,7 +3074,11 @@ static u8 tcm_to_srp_tsk_mgmt_status(const int tcm_mgmt_status)
  * invoked on the context of the IB completion handler.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int srpt_queue_response(struct se_cmd *cmd)
+=======
+static void srpt_queue_response(struct se_cmd *cmd)
+>>>>>>> v3.18
 =======
 static void srpt_queue_response(struct se_cmd *cmd)
 >>>>>>> v3.18
@@ -3063,8 +3093,11 @@ static void srpt_queue_response(struct se_cmd *cmd)
 	u8 srp_tm_status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ioctx = container_of(cmd, struct srpt_send_ioctx, cmd);
@@ -3093,7 +3126,11 @@ static void srpt_queue_response(struct se_cmd *cmd)
 		atomic_inc(&ch->req_lim_delta);
 		srpt_abort_cmd(ioctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -3109,7 +3146,11 @@ static void srpt_queue_response(struct se_cmd *cmd)
 			printk(KERN_ERR "xfer_data failed for tag %llu\n",
 			       ioctx->tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			return;
+>>>>>>> v3.18
 =======
 			return;
 >>>>>>> v3.18
@@ -3134,10 +3175,13 @@ static void srpt_queue_response(struct se_cmd *cmd)
 		target_put_sess_cmd(ioctx->ch->sess, &ioctx->cmd);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int srpt_queue_data_in(struct se_cmd *cmd)
@@ -3157,6 +3201,9 @@ static void srpt_aborted_task(struct se_cmd *cmd)
 				struct srpt_send_ioctx, cmd);
 
 	srpt_unmap_sg_to_ib_sge(ioctx->ch, ioctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3171,7 +3218,12 @@ static int srpt_queue_status(struct se_cmd *cmd)
 		WARN_ON(cmd->scsi_status != SAM_STAT_CHECK_CONDITION);
 	ioctx->queue_status_only = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return srpt_queue_response(cmd);
+=======
+	srpt_queue_response(cmd);
+	return 0;
+>>>>>>> v3.18
 =======
 	srpt_queue_response(cmd);
 	return 0;
@@ -3645,7 +3697,11 @@ static int srpt_parse_i_port_id(u8 i_port_id[16], const char *name)
 
 	p = name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strnicmp(p, "0x", 2) == 0)
+=======
+	if (strncasecmp(p, "0x", 2) == 0)
+>>>>>>> v3.18
 =======
 	if (strncasecmp(p, "0x", 2) == 0)
 >>>>>>> v3.18
@@ -3754,9 +3810,15 @@ static ssize_t srpt_tpg_attrib_store_srp_max_rdma_size(
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(page, 0, &val);
 	if (ret < 0) {
 		pr_err("strict_strtoul() failed with ret: %d\n", ret);
+=======
+	ret = kstrtoul(page, 0, &val);
+	if (ret < 0) {
+		pr_err("kstrtoul() failed with ret: %d\n", ret);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(page, 0, &val);
 	if (ret < 0) {
@@ -3800,9 +3862,15 @@ static ssize_t srpt_tpg_attrib_store_srp_max_rsp_size(
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(page, 0, &val);
 	if (ret < 0) {
 		pr_err("strict_strtoul() failed with ret: %d\n", ret);
+=======
+	ret = kstrtoul(page, 0, &val);
+	if (ret < 0) {
+		pr_err("kstrtoul() failed with ret: %d\n", ret);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(page, 0, &val);
 	if (ret < 0) {
@@ -3846,9 +3914,15 @@ static ssize_t srpt_tpg_attrib_store_srp_sq_size(
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(page, 0, &val);
 	if (ret < 0) {
 		pr_err("strict_strtoul() failed with ret: %d\n", ret);
+=======
+	ret = kstrtoul(page, 0, &val);
+	if (ret < 0) {
+		pr_err("kstrtoul() failed with ret: %d\n", ret);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(page, 0, &val);
 	if (ret < 0) {
@@ -3899,7 +3973,11 @@ static ssize_t srpt_tpg_store_enable(
         int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(page, 0, &tmp);
+=======
+	ret = kstrtoul(page, 0, &tmp);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(page, 0, &tmp);
 >>>>>>> v3.18
@@ -4035,14 +4113,20 @@ static struct target_core_fabric_ops srpt_template = {
 	.get_task_tag			= srpt_get_task_tag,
 	.get_cmd_state			= srpt_get_tcm_cmd_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.queue_data_in			= srpt_queue_response,
 	.queue_status			= srpt_queue_status,
 	.queue_tm_rsp			= srpt_queue_response,
 =======
+=======
+>>>>>>> v3.18
 	.queue_data_in			= srpt_queue_data_in,
 	.queue_status			= srpt_queue_status,
 	.queue_tm_rsp			= srpt_queue_tm_rsp,
 	.aborted_task			= srpt_aborted_task,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Setup function pointers for generic logic in

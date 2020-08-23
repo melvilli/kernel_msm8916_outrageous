@@ -2,7 +2,11 @@
  *   fs/cifs/smb2pdu.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) International Business Machines  Corp., 2009, 2012
+=======
+ *   Copyright (C) International Business Machines  Corp., 2009, 2013
+>>>>>>> v3.18
 =======
  *   Copyright (C) International Business Machines  Corp., 2009, 2013
 >>>>>>> v3.18
@@ -113,7 +117,10 @@ smb2_hdr_assemble(struct smb2_hdr *hdr, __le16 smb2_cmd /* command */ ,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* GLOBAL_CAP_LARGE_MTU will only be set if dialect > SMB2.02 */
 	/* See sections 2.2.4 and 3.2.4.1.5 of MS-SMB2 */
 	if ((tcon->ses) &&
@@ -121,11 +128,15 @@ smb2_hdr_assemble(struct smb2_hdr *hdr, __le16 smb2_cmd /* command */ ,
 		hdr->CreditCharge = cpu_to_le16(1);
 	/* else CreditCharge MBZ */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hdr->TreeId = tcon->tid;
 	/* Uid is not converted */
 	if (tcon->ses)
 		hdr->SessionId = tcon->ses->Suid;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* BB check following DFS flags BB */
 	/* BB do we have to add check for SHI1005_FLAGS_DFS_ROOT too? */
@@ -137,6 +148,8 @@ smb2_hdr_assemble(struct smb2_hdr *hdr, __le16 smb2_cmd /* command */ ,
 	if (tcon->ses && tcon->ses->server &&
 	    (tcon->ses->server->sec_mode & SECMODE_SIGN_REQUIRED))
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If we would set SMB2_FLAGS_DFS_OPERATIONS on open we also would have
@@ -152,6 +165,9 @@ smb2_hdr_assemble(struct smb2_hdr *hdr, __le16 smb2_cmd /* command */ ,
 		hdr->Flags |= SMB2_FLAGS_DFS_OPERATIONS; */
 
 	if (tcon->ses && tcon->ses->server && tcon->ses->server->sign)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hdr->Flags |= SMB2_FLAGS_SIGNED;
 out:
@@ -264,10 +280,13 @@ smb2_reconnect(__le16 smb2_command, struct cifs_tcon *tcon)
 		goto out;
 	atomic_inc(&tconInfoReconnectCount);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * BB FIXME add code to check if wsize needs update due to negotiated
 	 * smb buffer size shrinking.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -290,7 +309,11 @@ out:
 	case SMB2_QUERY_INFO:
 	case SMB2_SET_INFO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -EAGAIN;
+=======
+		return -EAGAIN;
+>>>>>>> v3.18
 =======
 		return -EAGAIN;
 >>>>>>> v3.18
@@ -335,6 +358,7 @@ small_smb2_init(__le16 smb2_command, struct cifs_tcon *tcon,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 free_rsp_buf(int resp_buftype, void *rsp)
 {
@@ -345,6 +369,8 @@ free_rsp_buf(int resp_buftype, void *rsp)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -371,9 +397,13 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 	int rc = 0;
 	int resp_buftype;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct TCP_Server_Info *server;
 	unsigned int sec_flags;
 	u16 temp = 0;
+=======
+	struct TCP_Server_Info *server = ses->server;
+>>>>>>> v3.18
 =======
 	struct TCP_Server_Info *server = ses->server;
 >>>>>>> v3.18
@@ -384,11 +414,17 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 	cifs_dbg(FYI, "Negotiate protocol\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server)
 		server = ses->server;
 	else {
 		rc = -EIO;
 		return rc;
+=======
+	if (!server) {
+		WARN(1, "%s: server is NULL!\n", __func__);
+		return -EIO;
+>>>>>>> v3.18
 =======
 	if (!server) {
 		WARN(1, "%s: server is NULL!\n", __func__);
@@ -401,6 +437,7 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if any of auth flags (ie not sign or seal) are overriden use them */
 	if (ses->overrideSecFlg & (~(CIFSSEC_MUST_SIGN | CIFSSEC_MUST_SEAL)))
 		sec_flags = ses->overrideSecFlg;  /* BB FIXME fix sign flags?*/
@@ -411,6 +448,8 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	req->hdr.SessionId = 0;
 
 	req->Dialects[0] = cpu_to_le16(ses->server->vals->protocol_id);
@@ -419,6 +458,7 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 	inc_rfc1001_len(req, 2);
 
 	/* only one of SMB2 signing flags may be set in SMB2 request */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((sec_flags & CIFSSEC_MUST_SIGN) == CIFSSEC_MUST_SIGN)
 		temp = SMB2_NEGOTIATE_SIGNING_REQUIRED;
@@ -431,6 +471,8 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 
 	memcpy(req->ClientGUID, cifs_client_guid, SMB2_CLIENT_GUID_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	if (ses->sign)
 		req->SecurityMode = cpu_to_le16(SMB2_NEGOTIATE_SIGNING_REQUIRED);
 	else if (global_secflags & CIFSSEC_MAY_SIGN)
@@ -446,6 +488,9 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 	else
 		memcpy(req->ClientGUID, server->client_guid,
 			SMB2_CLIENT_GUID_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iov[0].iov_base = (char *)req;
@@ -473,6 +518,11 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 	else if (rsp->DialectRevision == cpu_to_le16(SMB30_PROT_ID))
 		cifs_dbg(FYI, "negotiated smb3.0 dialect\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (rsp->DialectRevision == cpu_to_le16(SMB302_PROT_ID))
+		cifs_dbg(FYI, "negotiated smb3.02 dialect\n");
+>>>>>>> v3.18
 =======
 	else if (rsp->DialectRevision == cpu_to_le16(SMB302_PROT_ID))
 		cifs_dbg(FYI, "negotiated smb3.02 dialect\n");
@@ -486,7 +536,12 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 	server->dialect = le16_to_cpu(rsp->DialectRevision);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	server->maxBuf = le32_to_cpu(rsp->MaxTransactSize);
+=======
+	/* SMB2 only has an extended negflavor */
+	server->negflavor = CIFS_NEGFLAVOR_EXTENDED;
+>>>>>>> v3.18
 =======
 	/* SMB2 only has an extended negflavor */
 	server->negflavor = CIFS_NEGFLAVOR_EXTENDED;
@@ -504,6 +559,7 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 
 	security_blob = smb2_get_data_area_len(&blob_offset, &blob_length,
 					       &rsp->hdr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (blob_length == 0) {
 		cifs_dbg(VFS, "missing security blob on negprot\n");
@@ -544,6 +600,8 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 #ifdef CONFIG_SMB2_ASN1  /* BB REMOVEME when updated asn1.c ready */
 	rc = decode_neg_token_init(security_blob, blob_length,
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * See MS-SMB2 section 2.2.4: if no blob, client picks default which
 	 * for us will be
@@ -560,6 +618,9 @@ SMB2_negotiate(const unsigned int xid, struct cifs_ses *ses)
 		goto neg_exit;
 	if (blob_length)
 		rc = decode_neg_token_init(security_blob, blob_length,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   &server->sec_type);
 	if (rc == 1)
@@ -576,7 +637,10 @@ neg_exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int smb3_validate_negotiate(const unsigned int xid, struct cifs_tcon *tcon)
 {
 	int rc = 0;
@@ -653,6 +717,9 @@ vneg_out:
 	return -EIO;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
@@ -663,11 +730,17 @@ SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
 	struct kvec iov[2];
 	int rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int resp_buftype;
 	__le32 phase = NtLmNegotiate; /* NTLMSSP, if needed, is multistage */
 	struct TCP_Server_Info *server;
 	unsigned int sec_flags;
 	u8 temp = 0;
+=======
+	int resp_buftype = CIFS_NO_BUFFER;
+	__le32 phase = NtLmNegotiate; /* NTLMSSP, if needed, is multistage */
+	struct TCP_Server_Info *server = ses->server;
+>>>>>>> v3.18
 =======
 	int resp_buftype = CIFS_NO_BUFFER;
 	__le32 phase = NtLmNegotiate; /* NTLMSSP, if needed, is multistage */
@@ -681,6 +754,7 @@ SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
 	cifs_dbg(FYI, "Session Setup\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server)
 		server = ses->server;
 	else {
@@ -690,6 +764,8 @@ SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
 
 	/*
 =======
+=======
+>>>>>>> v3.18
 	if (!server) {
 		WARN(1, "%s: server is NULL!\n", __func__);
 		return -EIO;
@@ -703,6 +779,9 @@ SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
 	ses->auth_key.response = NULL;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * If memory allocation is successful, caller of this function
 	 * frees it.
@@ -711,13 +790,19 @@ SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
 	if (!ses->ntlmssp)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ses->server->secType = RawNTLMSSP;
 =======
+=======
+>>>>>>> v3.18
 	ses->ntlmssp->sesskey_per_smbsess = true;
 
 	/* FIXME: allow for other auth types besides NTLMSSP (e.g. krb5) */
 	ses->sectype = RawNTLMSSP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ssetup_ntlmssp_authenticate:
@@ -729,6 +814,7 @@ ssetup_ntlmssp_authenticate:
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if any of auth flags (ie not sign or seal) are overriden use them */
 	if (ses->overrideSecFlg & (~(CIFSSEC_MUST_SIGN | CIFSSEC_MUST_SEAL)))
 		sec_flags = ses->overrideSecFlg;  /* BB FIXME fix sign flags?*/
@@ -739,12 +825,15 @@ ssetup_ntlmssp_authenticate:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	req->hdr.SessionId = 0; /* First session, not a reauthenticate */
 	req->VcNumber = 0; /* MBZ */
 	/* to enable echos and oplocks */
 	req->hdr.CreditRequest = cpu_to_le16(3);
 
 	/* only one of SMB2 signing flags may be set in SMB2 request */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((sec_flags & CIFSSEC_MUST_SIGN) == CIFSSEC_MUST_SIGN)
 		temp = SMB2_NEGOTIATE_SIGNING_REQUIRED;
@@ -755,6 +844,8 @@ ssetup_ntlmssp_authenticate:
 
 	req->SecurityMode = temp;
 =======
+=======
+>>>>>>> v3.18
 	if (server->sign)
 		req->SecurityMode = SMB2_NEGOTIATE_SIGNING_REQUIRED;
 	else if (global_secflags & CIFSSEC_MAY_SIGN) /* one flag unlike MUST_ */
@@ -762,6 +853,9 @@ ssetup_ntlmssp_authenticate:
 	else
 		req->SecurityMode = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	req->Capabilities = 0;
 	req->Channel = 0; /* MBZ */
@@ -877,6 +971,11 @@ ssetup_ntlmssp_authenticate:
 
 	ses->session_flags = le16_to_cpu(rsp->SessionFlags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ses->session_flags & SMB2_SESSION_FLAG_ENCRYPT_DATA)
+		cifs_dbg(VFS, "SMB3 encryption not supported yet\n");
+>>>>>>> v3.18
 =======
 	if (ses->session_flags & SMB2_SESSION_FLAG_ENCRYPT_DATA)
 		cifs_dbg(VFS, "SMB3 encryption not supported yet\n");
@@ -888,7 +987,10 @@ ssetup_exit:
 	if ((phase == NtLmChallenge) && (rc == 0))
 		goto ssetup_ntlmssp_authenticate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (!rc) {
 		mutex_lock(&server->srv_mutex);
@@ -923,6 +1025,9 @@ keygen_exit:
 	}
 	kfree(ses->ntlmssp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -942,11 +1047,17 @@ SMB2_logoff(const unsigned int xid, struct cifs_ses *ses)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* no need to send SMB logoff if uid already closed due to reconnect */
 	if (ses->need_reconnect)
 		goto smb2_session_already_dead;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = small_smb2_init(SMB2_LOGOFF, NULL, (void **) &req);
 	if (rc)
@@ -955,7 +1066,11 @@ SMB2_logoff(const unsigned int xid, struct cifs_ses *ses)
 	 /* since no tcon, smb2_init can not do this, so do here */
 	req->hdr.SessionId = ses->Suid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (server->sec_mode & SECMODE_SIGN_REQUIRED)
+=======
+	if (server->sign)
+>>>>>>> v3.18
 =======
 	if (server->sign)
 >>>>>>> v3.18
@@ -967,6 +1082,11 @@ SMB2_logoff(const unsigned int xid, struct cifs_ses *ses)
 	 * cifs_stats_inc(&tcon->stats.smb2_stats.smb2_com_fail[SMB2...]);
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+smb2_session_already_dead:
+>>>>>>> v3.18
 =======
 
 smb2_session_already_dead:
@@ -982,7 +1102,10 @@ static inline void cifs_stats_fail_inc(struct cifs_tcon *tcon, uint16_t code)
 #define MAX_SHARENAME_LENGTH (255 /* server */ + 80 /* share */ + 1 /* NULL */)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* These are similar values to what Windows uses */
 static inline void init_copy_chunk_defaults(struct cifs_tcon *tcon)
 {
@@ -991,6 +1114,9 @@ static inline void init_copy_chunk_defaults(struct cifs_tcon *tcon)
 	tcon->max_bytes_copy = 16777216;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
@@ -1013,6 +1139,12 @@ SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (tcon && tcon->bad_network_name)
+		return -ENOENT;
+
+>>>>>>> v3.18
 =======
 	if (tcon && tcon->bad_network_name)
 		return -ENOENT;
@@ -1030,10 +1162,13 @@ SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SMB2 TREE_CONNECT request must be called with TreeId == 0 */
 	if (tcon)
 		tcon->tid = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = small_smb2_init(SMB2_TREE_CONNECT, tcon, (void **) &req);
@@ -1094,6 +1229,10 @@ SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
 
 	tcon->share_flags = le32_to_cpu(rsp->ShareFlags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tcon->capabilities = rsp->Capabilities; /* we keep caps little endian */
+>>>>>>> v3.18
 =======
 	tcon->capabilities = rsp->Capabilities; /* we keep caps little endian */
 >>>>>>> v3.18
@@ -1102,7 +1241,11 @@ SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
 	tcon->need_reconnect = false;
 	tcon->tid = rsp->hdr.TreeId;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(tcon->treeName, tree, MAX_TREE_SIZE);
+=======
+	strlcpy(tcon->treeName, tree, sizeof(tcon->treeName));
+>>>>>>> v3.18
 =======
 	strlcpy(tcon->treeName, tree, sizeof(tcon->treeName));
 >>>>>>> v3.18
@@ -1111,7 +1254,13 @@ SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
 	    ((tcon->share_flags & SHI1005_FLAGS_DFS) == 0))
 		cifs_dbg(VFS, "DFS capability contradicts DFS flag\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	init_copy_chunk_defaults(tcon);
+	if (tcon->ses->server->ops->validate_negotiate)
+		rc = tcon->ses->server->ops->validate_negotiate(xid, tcon);
+>>>>>>> v3.18
 =======
 	init_copy_chunk_defaults(tcon);
 	if (tcon->ses->server->ops->validate_negotiate)
@@ -1126,6 +1275,11 @@ tcon_error_exit:
 	if (rsp->hdr.Status == STATUS_BAD_NETWORK_NAME) {
 		cifs_dbg(VFS, "BAD_NETWORK_NAME: %s\n", tree);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (tcon)
+			tcon->bad_network_name = true;
+>>>>>>> v3.18
 =======
 		if (tcon)
 			tcon->bad_network_name = true;
@@ -1164,6 +1318,7 @@ SMB2_tdis(const unsigned int xid, struct cifs_tcon *tcon)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct create_lease *
 create_lease_buf(u8 *lease_key, u8 oplock)
 {
@@ -1196,6 +1351,8 @@ create_lease_buf(u8 *lease_key, u8 oplock)
 	buf->Name[2] = 'L';
 	buf->Name[3] = 's';
 =======
+=======
+>>>>>>> v3.18
 
 static struct create_durable *
 create_durable_buf(void)
@@ -1242,11 +1399,15 @@ create_reconnect_durable_buf(struct cifs_fid *fid)
 	buf->Name[1] = 'H';
 	buf->Name[2] = 'n';
 	buf->Name[3] = 'C';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return buf;
 }
 
 static __u8
+<<<<<<< HEAD
 <<<<<<< HEAD
 parse_lease_state(struct smb2_create_rsp *rsp)
 {
@@ -1283,6 +1444,8 @@ SMB2_open(const unsigned int xid, struct cifs_tcon *tcon, __le16 *path,
 	  __u32 create_disposition, __u32 file_attributes, __u32 create_options,
 	  __u8 *oplock, struct smb2_file_all_info *buf)
 =======
+=======
+>>>>>>> v3.18
 parse_lease_state(struct TCP_Server_Info *server, struct smb2_create_rsp *rsp,
 		  unsigned int *epoch)
 {
@@ -1360,14 +1523,23 @@ int
 SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 	  __u8 *oplock, struct smb2_file_all_info *buf,
 	  struct smb2_err_rsp **err_buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct smb2_create_req *req;
 	struct smb2_create_rsp *rsp;
 	struct TCP_Server_Info *server;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cifs_ses *ses = tcon->ses;
 	struct kvec iov[3];
+=======
+	struct cifs_tcon *tcon = oparms->tcon;
+	struct cifs_ses *ses = tcon->ses;
+	struct kvec iov[4];
+>>>>>>> v3.18
 =======
 	struct cifs_tcon *tcon = oparms->tcon;
 	struct cifs_ses *ses = tcon->ses;
@@ -1379,7 +1551,13 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 	int copy_size;
 	int rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num_iovecs = 2;
+=======
+	unsigned int num_iovecs = 2;
+	__u32 file_attributes = 0;
+	char *dhc_buf = NULL, *lc_buf = NULL;
+>>>>>>> v3.18
 =======
 	unsigned int num_iovecs = 2;
 	__u32 file_attributes = 0;
@@ -1398,6 +1576,7 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->ImpersonationLevel = IL_IMPERSONATION;
 	req->DesiredAccess = cpu_to_le32(desired_access);
 	/* File attributes ignored on open (used in create though) */
@@ -1409,6 +1588,8 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 	req->NameOffset = cpu_to_le16(sizeof(struct smb2_create_req)
 			- 8 /* pad */ - 4 /* do not count rfc1001 len field */);
 =======
+=======
+>>>>>>> v3.18
 	if (oparms->create_options & CREATE_OPTION_READONLY)
 		file_attributes |= ATTR_READONLY;
 	if (oparms->create_options & CREATE_OPTION_SPECIAL)
@@ -1424,6 +1605,9 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 	uni_path_len = (2 * UniStrnlen((wchar_t *)path, PATH_MAX)) + 2;
 	/* do not count rfc1001 len field */
 	req->NameOffset = cpu_to_le16(sizeof(struct smb2_create_req) - 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iov[0].iov_base = (char *)req;
@@ -1431,6 +1615,7 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 	iov[0].iov_len = get_rfc1002_length(req) + 4;
 
 	/* MUST set path len (NameLength) to 0 opening root of share */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (uni_path_len >= 4) {
 		req->NameLength = cpu_to_le16(uni_path_len - 2);
@@ -1488,6 +1673,8 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 		inc_rfc1001_len(&req->hdr, sizeof(struct create_lease));
 		num_iovecs++;
 =======
+=======
+>>>>>>> v3.18
 	req->NameLength = cpu_to_le16(uni_path_len - 2);
 	/* -1 since last byte is buf[0] which is sent below (path) */
 	iov[0].iov_len--;
@@ -1542,6 +1729,9 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 			return rc;
 		}
 		dhc_buf = iov[num_iovecs-1].iov_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1551,12 +1741,15 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 	if (rc != 0) {
 		cifs_stats_fail_inc(tcon, SMB2_CREATE_HE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto creat_exit;
 	}
 
 	*persistent_fid = rsp->PersistentFileId;
 	*volatile_fid = rsp->VolatileFileId;
 =======
+=======
+>>>>>>> v3.18
 		if (err_buf)
 			*err_buf = kmemdup(rsp, get_rfc1002_length(rsp) + 4,
 					   GFP_KERNEL);
@@ -1565,6 +1758,9 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 
 	oparms->fid->persistent_fid = rsp->PersistentFileId;
 	oparms->fid->volatile_fid = rsp->VolatileFileId;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (buf) {
@@ -1578,7 +1774,11 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 
 	if (rsp->OplockLevel == SMB2_OPLOCK_LEVEL_LEASE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*oplock = parse_lease_state(rsp);
+=======
+		*oplock = parse_lease_state(server, rsp, &oparms->fid->epoch);
+>>>>>>> v3.18
 =======
 		*oplock = parse_lease_state(server, rsp, &oparms->fid->epoch);
 >>>>>>> v3.18
@@ -1587,6 +1787,11 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
 creat_exit:
 	kfree(copy_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(lc_buf);
+	kfree(dhc_buf);
+>>>>>>> v3.18
 =======
 	kfree(lc_buf);
 	kfree(dhc_buf);
@@ -1596,7 +1801,10 @@ creat_exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  *	SMB2 IOCTL is used for both IOCTLs and FSCTLs
  */
@@ -1760,6 +1968,9 @@ SMB2_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 SMB2_close(const unsigned int xid, struct cifs_tcon *tcon,
@@ -1796,8 +2007,12 @@ SMB2_close(const unsigned int xid, struct cifs_tcon *tcon,
 
 	if (rc != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tcon)
 			cifs_stats_fail_inc(tcon, SMB2_CLOSE_HE);
+=======
+		cifs_stats_fail_inc(tcon, SMB2_CLOSE_HE);
+>>>>>>> v3.18
 =======
 		cifs_stats_fail_inc(tcon, SMB2_CLOSE_HE);
 >>>>>>> v3.18
@@ -1965,6 +2180,7 @@ smb2_echo_callback(struct mid_q_entry *mid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void smb2_reconnect_server(struct work_struct *work)
 {
 	struct TCP_Server_Info *server = container_of(work,
@@ -2015,6 +2231,8 @@ void smb2_reconnect_server(struct work_struct *work)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int
 SMB2_echo(struct TCP_Server_Info *server)
 {
@@ -2027,12 +2245,15 @@ SMB2_echo(struct TCP_Server_Info *server)
 	cifs_dbg(FYI, "In echo request\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (server->tcpStatus == CifsNeedNegotiate) {
 		/* No need to send echo on newly established connections */
 		queue_delayed_work(cifsiod_wq, &server->reconnect, 0);
 		return rc;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = small_smb2_init(SMB2_ECHO, NULL, (void **)&req);
@@ -2174,8 +2395,12 @@ smb2_readv_callback(struct mid_q_entry *mid)
 		credits_received = le16_to_cpu(buf->CreditRequest);
 		/* result already set, check signature */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (server->sec_mode &
 		    (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED)) {
+=======
+		if (server->sign) {
+>>>>>>> v3.18
 =======
 		if (server->sign) {
 >>>>>>> v3.18
@@ -2188,8 +2413,13 @@ smb2_readv_callback(struct mid_q_entry *mid)
 		}
 		/* FIXME: should this be counted toward the initiating task? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		task_io_account_read(rdata->bytes);
 		cifs_stats_bytes_read(tcon, rdata->bytes);
+=======
+		task_io_account_read(rdata->got_bytes);
+		cifs_stats_bytes_read(tcon, rdata->got_bytes);
+>>>>>>> v3.18
 =======
 		task_io_account_read(rdata->got_bytes);
 		cifs_stats_bytes_read(tcon, rdata->got_bytes);
@@ -2199,13 +2429,19 @@ smb2_readv_callback(struct mid_q_entry *mid)
 	case MID_RETRY_NEEDED:
 		rdata->result = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (server->sign && rdata->got_bytes)
 			/* reset bytes number since we can not check a sign */
 			rdata->got_bytes = 0;
 		/* FIXME: should this be counted toward the initiating task? */
 		task_io_account_read(rdata->got_bytes);
 		cifs_stats_bytes_read(tcon, rdata->got_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2226,7 +2462,11 @@ int
 smb2_async_readv(struct cifs_readdata *rdata)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+	int rc, flags = 0;
+>>>>>>> v3.18
 =======
 	int rc, flags = 0;
 >>>>>>> v3.18
@@ -2235,6 +2475,10 @@ smb2_async_readv(struct cifs_readdata *rdata)
 	struct smb_rqst rqst = { .rq_iov = &rdata->iov,
 				 .rq_nvec = 1 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct TCP_Server_Info *server;
+>>>>>>> v3.18
 =======
 	struct TCP_Server_Info *server;
 >>>>>>> v3.18
@@ -2249,10 +2493,13 @@ smb2_async_readv(struct cifs_readdata *rdata)
 	io_parms.volatile_fid = rdata->cfile->fid.volatile_fid;
 	io_parms.pid = rdata->pid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = smb2_new_read_req(&rdata->iov, &io_parms, 0, 0);
 	if (rc)
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 
 	server = io_parms.tcon->ses->server;
 
@@ -2268,6 +2515,9 @@ smb2_async_readv(struct cifs_readdata *rdata)
 		}
 		return rc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	buf = (struct smb2_hdr *)rdata->iov.iov_base;
@@ -2275,11 +2525,14 @@ smb2_async_readv(struct cifs_readdata *rdata)
 	rdata->iov.iov_len = get_rfc1002_length(rdata->iov.iov_base) + 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_get(&rdata->refcount);
 	rc = cifs_call_async(io_parms.tcon->ses->server, &rqst,
 			     cifs_readv_receive, smb2_readv_callback,
 			     rdata, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (rdata->credits) {
 		buf->CreditCharge = cpu_to_le16(DIV_ROUND_UP(rdata->bytes,
 						SMB2_MAX_BUFFER_SIZE));
@@ -2295,6 +2548,9 @@ smb2_async_readv(struct cifs_readdata *rdata)
 	rc = cifs_call_async(io_parms.tcon->ses->server, &rqst,
 			     cifs_readv_receive, smb2_readv_callback,
 			     rdata, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc) {
 		kref_put(&rdata->refcount, cifs_readdata_release);
@@ -2411,12 +2667,15 @@ smb2_writev_callback(struct mid_q_entry *mid)
 /* smb2_async_writev - send an async write, and set up mid to handle result */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 smb2_async_writev(struct cifs_writedata *wdata)
 {
 	int rc = -EACCES;
 	struct smb2_write_req *req = NULL;
 	struct cifs_tcon *tcon = tlink_tcon(wdata->cfile->tlink);
 =======
+=======
+>>>>>>> v3.18
 smb2_async_writev(struct cifs_writedata *wdata,
 		  void (*release)(struct kref *kref))
 {
@@ -2424,15 +2683,21 @@ smb2_async_writev(struct cifs_writedata *wdata,
 	struct smb2_write_req *req = NULL;
 	struct cifs_tcon *tcon = tlink_tcon(wdata->cfile->tlink);
 	struct TCP_Server_Info *server = tcon->ses->server;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct kvec iov;
 	struct smb_rqst rqst;
 
 	rc = small_smb2_init(SMB2_WRITE, tcon, (void **) &req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc)
 		goto async_writev_out;
 =======
+=======
+>>>>>>> v3.18
 	if (rc) {
 		if (rc == -EAGAIN && wdata->credits) {
 			/* credits was reset by reconnect */
@@ -2444,6 +2709,9 @@ smb2_async_writev(struct cifs_writedata *wdata,
 		}
 		goto async_writev_out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	req->hdr.ProcessId = cpu_to_le32(wdata->cfile->pid);
@@ -2478,6 +2746,7 @@ smb2_async_writev(struct cifs_writedata *wdata,
 	inc_rfc1001_len(&req->hdr, wdata->bytes - 1 /* Buffer */);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_get(&wdata->refcount);
 	rc = cifs_call_async(tcon->ses->server, &rqst, NULL,
 				smb2_writev_callback, wdata, 0);
@@ -2485,6 +2754,8 @@ smb2_async_writev(struct cifs_writedata *wdata,
 	if (rc) {
 		kref_put(&wdata->refcount, cifs_writedata_release);
 =======
+=======
+>>>>>>> v3.18
 	if (wdata->credits) {
 		req->hdr.CreditCharge = cpu_to_le16(DIV_ROUND_UP(wdata->bytes,
 						    SMB2_MAX_BUFFER_SIZE));
@@ -2502,6 +2773,9 @@ smb2_async_writev(struct cifs_writedata *wdata,
 
 	if (rc) {
 		kref_put(&wdata->refcount, release);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cifs_stats_fail_inc(tcon, SMB2_WRITE_HE);
 	}
@@ -2802,11 +3076,17 @@ send_set_info(const unsigned int xid, struct cifs_tcon *tcon,
 	rsp = (struct smb2_set_info_rsp *)iov[0].iov_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc != 0) {
 		cifs_stats_fail_inc(tcon, SMB2_SET_INFO_HE);
 		goto out;
 	}
 out:
+=======
+	if (rc != 0)
+		cifs_stats_fail_inc(tcon, SMB2_SET_INFO_HE);
+
+>>>>>>> v3.18
 =======
 	if (rc != 0)
 		cifs_stats_fail_inc(tcon, SMB2_SET_INFO_HE);
@@ -2883,7 +3163,11 @@ SMB2_set_hardlink(const unsigned int xid, struct cifs_tcon *tcon,
 int
 SMB2_set_eof(const unsigned int xid, struct cifs_tcon *tcon, u64 persistent_fid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     u64 volatile_fid, u32 pid, __le64 *eof)
+=======
+	     u64 volatile_fid, u32 pid, __le64 *eof, bool is_falloc)
+>>>>>>> v3.18
 =======
 	     u64 volatile_fid, u32 pid, __le64 *eof, bool is_falloc)
 >>>>>>> v3.18
@@ -2898,15 +3182,21 @@ SMB2_set_eof(const unsigned int xid, struct cifs_tcon *tcon, u64 persistent_fid,
 	size = sizeof(struct smb2_file_eof_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return send_set_info(xid, tcon, persistent_fid, volatile_fid, pid,
 			     FILE_END_OF_FILE_INFORMATION, 1, &data, &size);
 =======
+=======
+>>>>>>> v3.18
 	if (is_falloc)
 		return send_set_info(xid, tcon, persistent_fid, volatile_fid,
 			pid, FILE_ALLOCATION_INFORMATION, 1, &data, &size);
 	else
 		return send_set_info(xid, tcon, persistent_fid, volatile_fid,
 			pid, FILE_END_OF_FILE_INFORMATION, 1, &data, &size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3016,7 +3306,11 @@ SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
 	if (rc) {
 		cifs_stats_fail_inc(tcon, SMB2_QUERY_INFO_HE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto qinf_exit;
+=======
+		goto qfsinf_exit;
+>>>>>>> v3.18
 =======
 		goto qfsinf_exit;
 >>>>>>> v3.18
@@ -3032,8 +3326,11 @@ SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
 		copy_fs_info_to_kstatfs(info, fsdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 qinf_exit:
 =======
+=======
+>>>>>>> v3.18
 qfsinf_exit:
 	free_rsp_buf(resp_buftype, iov.iov_base);
 	return rc;
@@ -3098,6 +3395,9 @@ SMB2_QFS_attr(const unsigned int xid, struct cifs_tcon *tcon,
 	}
 
 qfsattr_exit:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_rsp_buf(resp_buftype, iov.iov_base);
 	return rc;

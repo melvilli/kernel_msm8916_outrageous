@@ -7,6 +7,10 @@
 #include <linux/xfrm.h>
 #include <net/dst_ops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/flowcache.h>
+>>>>>>> v3.18
 =======
 #include <net/flowcache.h>
 >>>>>>> v3.18
@@ -17,7 +21,10 @@ struct xfrm_policy_hash {
 	struct hlist_head	*table;
 	unsigned int		hmask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8			dbits4;
 	u8			sbits4;
 	u8			dbits6;
@@ -31,6 +38,9 @@ struct xfrm_policy_hthresh {
 	u8			rbits4;
 	u8			lbits6;
 	u8			rbits6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -54,8 +64,11 @@ struct netns_xfrm {
 	struct work_struct	state_gc_work;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t	km_waitq;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head	policy_all;
@@ -66,6 +79,10 @@ struct netns_xfrm {
 	unsigned int		policy_count[XFRM_POLICY_MAX * 2];
 	struct work_struct	policy_hash_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfrm_policy_hthresh policy_hthresh;
+>>>>>>> v3.18
 =======
 	struct xfrm_policy_hthresh policy_hthresh;
 >>>>>>> v3.18
@@ -87,7 +104,10 @@ struct netns_xfrm {
 	struct dst_ops		xfrm6_dst_ops;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t xfrm_state_lock;
 	rwlock_t xfrm_policy_lock;
 	struct mutex xfrm_cfg_mutex;
@@ -100,6 +120,9 @@ struct netns_xfrm {
 	struct work_struct	flow_cache_gc_work;
 	struct work_struct	flow_cache_flush_work;
 	struct mutex		flow_flush_sem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/comedi_bond.c
     A Comedi driver to 'bond' or merge multiple drivers and devices as one.
 
@@ -52,6 +53,8 @@ Configuration Options:
 */
 
 =======
+=======
+>>>>>>> v3.18
  * comedi_bond.c
  * A Comedi driver to 'bond' or merge multiple drivers and devices as one.
  *
@@ -100,6 +103,9 @@ Configuration Options:
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/string.h>
 #include <linux/slab.h>
@@ -107,6 +113,7 @@ Configuration Options:
 #include "../comedilib.h"
 #include "../comedidev.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* The maxiumum number of channels per subdevice. */
 #define MAX_CHANS 256
@@ -140,6 +147,8 @@ struct comedi_bond_private {
  * This allows packed reading/writing of the DIO channels.  The
  * comedi core can convert between insn_bits and insn_read/write */
 =======
+=======
+>>>>>>> v3.18
 struct bonded_device {
 	struct comedi_device *dev;
 	unsigned minor;
@@ -155,12 +164,16 @@ struct comedi_bond_private {
 	unsigned nchans;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bonding_dio_insn_bits(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
 				 struct comedi_insn *insn, unsigned int *data)
 {
 	struct comedi_bond_private *devpriv = dev->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LSAMPL_BITS (sizeof(unsigned int)*8)
 	unsigned nchans = LSAMPL_BITS, num_done = 0, i;
@@ -201,6 +214,8 @@ static int bonding_dio_insn_bits(struct comedi_device *dev,
 		num_done += bdev->nchans;
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned int n_left, n_done, base_chan;
 	unsigned int write_mask, data_bits;
 	struct bonded_device **devs;
@@ -254,6 +269,9 @@ static int bonding_dio_insn_bits(struct comedi_device *dev,
 			base_chan -= bdev->nchans;
 		}
 	} while (n_left);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -264,6 +282,7 @@ static int bonding_dio_insn_config(struct comedi_device *dev,
 				   struct comedi_insn *insn, unsigned int *data)
 {
 	struct comedi_bond_private *devpriv = dev->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int chan = CR_CHAN(insn->chanspec), ret, io_bits = s->io_bits;
 	unsigned int io;
@@ -333,6 +352,8 @@ static int doDevConfig(struct comedi_device *dev, struct comedi_devconfig *it)
 		int sdev = -1, nchans, tmp;
 		struct BondedDevice *bdev = NULL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	int ret;
 	struct bonded_device *bdev;
@@ -392,13 +413,20 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 		int sdev = -1, nchans;
 		struct bonded_device *bdev;
 		struct bonded_device **devs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (minor < 0 || minor >= COMEDI_NUM_BOARD_MINORS) {
 			dev_err(dev->class_dev,
 				"Minor %d is invalid!\n", minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -406,6 +434,7 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 		if (minor == dev->minor) {
 			dev_err(dev->class_dev,
 				"Cannot bond this driver to itself!\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return 0;
 		}
@@ -420,6 +449,8 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 
 		d = devs_opened[minor] = comedi_open(file);
 =======
+=======
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 		if (test_and_set_bit(minor, devs_opened)) {
@@ -432,13 +463,20 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 		file[sizeof(file) - 1] = 0;
 
 		d = comedi_open(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!d) {
 			dev_err(dev->class_dev,
 				"Minor %u could not be opened\n", minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			return -ENODEV;
+>>>>>>> v3.18
 =======
 			return -ENODEV;
 >>>>>>> v3.18
@@ -453,22 +491,29 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 					"comedi_get_n_channels() returned %d on minor %u subdev %d!\n",
 					nchans, minor, sdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return 0;
 			}
 			bdev = kmalloc(sizeof(*bdev), GFP_KERNEL);
 			if (!bdev)
 				return 0;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			bdev = kmalloc(sizeof(*bdev), GFP_KERNEL);
 			if (!bdev)
 				return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			bdev->dev = d;
 			bdev->minor = minor;
 			bdev->subdev = sdev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			bdev->subdev_type = COMEDI_SUBD_DIO;
 			bdev->nchans = nchans;
@@ -501,6 +546,8 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 				snprintf(buf, sizeof(buf), "%d:%d ", dev->minor,
 					 bdev->subdev);
 =======
+=======
+>>>>>>> v3.18
 			bdev->nchans = nchans;
 			devpriv->nchans += nchans;
 
@@ -528,6 +575,9 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 				    MAX_BOARD_NAME - strlen(devpriv->name) - 1;
 				snprintf(buf, sizeof(buf), "%u:%u ",
 					 bdev->minor, bdev->subdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				buf[sizeof(buf) - 1] = 0;
 				strncat(devpriv->name, buf, left);
@@ -539,15 +589,21 @@ static int do_dev_config(struct comedi_device *dev, struct comedi_devconfig *it)
 	if (!devpriv->nchans) {
 		dev_err(dev->class_dev, "No channels found!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	}
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -559,10 +615,16 @@ static int bonding_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -573,8 +635,14 @@ static int bonding_attach(struct comedi_device *dev,
 	 * Setup our bonding from config params.. sets up our private struct..
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!doDevConfig(dev, it))
 		return -EINVAL;
+=======
+	ret = do_dev_config(dev, it);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = do_dev_config(dev, it);
 	if (ret)
@@ -602,7 +670,11 @@ static int bonding_attach(struct comedi_device *dev,
 		devpriv->nchans, devpriv->ndevs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -612,12 +684,15 @@ static void bonding_detach(struct comedi_device *dev)
 {
 	struct comedi_bond_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long devs_closed = 0;
 
 	if (devpriv) {
 		while (devpriv->ndevs-- && devpriv->devs) {
 			struct BondedDevice *bdev;
 =======
+=======
+>>>>>>> v3.18
 
 	if (devpriv && devpriv->devs) {
 		DECLARE_BITMAP(devs_closed, COMEDI_NUM_BOARD_MINORS);
@@ -625,11 +700,15 @@ static void bonding_detach(struct comedi_device *dev)
 		memset(&devs_closed, 0, sizeof(devs_closed));
 		while (devpriv->ndevs--) {
 			struct bonded_device *bdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			bdev = devpriv->devs[devpriv->ndevs];
 			if (!bdev)
 				continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (!(devs_closed & (0x1 << bdev->minor))) {
 				comedi_close(bdev->dev);
@@ -639,13 +718,20 @@ static void bonding_detach(struct comedi_device *dev)
 			if (!test_and_set_bit(bdev->minor, devs_closed))
 				comedi_close(bdev->dev);
 >>>>>>> v3.18
+=======
+			if (!test_and_set_bit(bdev->minor, devs_closed))
+				comedi_close(bdev->dev);
+>>>>>>> v3.18
 			kfree(bdev);
 		}
 		kfree(devpriv->devs);
 		devpriv->devs = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(devpriv);
 		dev->private = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -661,9 +747,13 @@ module_comedi_driver(bonding_driver);
 
 MODULE_AUTHOR("Calin A. Culianu");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("comedi_bond: A driver for COMEDI to bond multiple COMEDI "
 		   "devices together as one.  In the words of John Lennon: "
 		   "'And the world will live as one...'");
+=======
+MODULE_DESCRIPTION("comedi_bond: A driver for COMEDI to bond multiple COMEDI devices together as one.");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("comedi_bond: A driver for COMEDI to bond multiple COMEDI devices together as one.");
 >>>>>>> v3.18

@@ -269,8 +269,12 @@ static const char *drc_high_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_high =
 	SOC_ENUM_SINGLE(WM9081_DRC_3, 3, 6, drc_high_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_high, WM9081_DRC_3, 3, drc_high_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_high, WM9081_DRC_3, 3, drc_high_text);
 >>>>>>> v3.18
@@ -284,8 +288,12 @@ static const char *drc_low_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_low =
 	SOC_ENUM_SINGLE(WM9081_DRC_3, 0, 5, drc_low_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_low, WM9081_DRC_3, 0, drc_low_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_low, WM9081_DRC_3, 0, drc_low_text);
 >>>>>>> v3.18
@@ -306,8 +314,12 @@ static const char *drc_atk_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_atk =
 	SOC_ENUM_SINGLE(WM9081_DRC_2, 12, 12, drc_atk_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_atk, WM9081_DRC_2, 12, drc_atk_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_atk, WM9081_DRC_2, 12, drc_atk_text);
 >>>>>>> v3.18
@@ -325,8 +337,12 @@ static const char *drc_dcy_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_dcy =
 	SOC_ENUM_SINGLE(WM9081_DRC_2, 8, 9, drc_dcy_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_dcy, WM9081_DRC_2, 8, drc_dcy_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_dcy, WM9081_DRC_2, 8, drc_dcy_text);
 >>>>>>> v3.18
@@ -338,8 +354,12 @@ static const char *drc_qr_dcy_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum drc_qr_dcy =
 	SOC_ENUM_SINGLE(WM9081_DRC_2, 4, 3, drc_qr_dcy_text);
+=======
+static SOC_ENUM_SINGLE_DECL(drc_qr_dcy, WM9081_DRC_2, 4, drc_qr_dcy_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(drc_qr_dcy, WM9081_DRC_2, 4, drc_qr_dcy_text);
 >>>>>>> v3.18
@@ -352,8 +372,13 @@ static const char *dac_deemph_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_deemph =
 	SOC_ENUM_SINGLE(WM9081_DAC_DIGITAL_2, 1, 4, dac_deemph_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_deemph, WM9081_DAC_DIGITAL_2, 1,
+			    dac_deemph_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_deemph, WM9081_DAC_DIGITAL_2, 1,
 			    dac_deemph_text);
@@ -365,8 +390,13 @@ static const char *speaker_mode_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum speaker_mode =
 	SOC_ENUM_SINGLE(WM9081_ANALOGUE_SPEAKER_2, 6, 2, speaker_mode_text);
+=======
+static SOC_ENUM_SINGLE_DECL(speaker_mode, WM9081_ANALOGUE_SPEAKER_2, 6,
+			    speaker_mode_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(speaker_mode, WM9081_ANALOGUE_SPEAKER_2, 6,
 			    speaker_mode_text);
@@ -376,7 +406,11 @@ static int speaker_mode_get(struct snd_kcontrol *kcontrol,
 			    struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -401,7 +435,11 @@ static int speaker_mode_put(struct snd_kcontrol *kcontrol,
 			    struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -1073,6 +1111,7 @@ static int wm9081_hw_params(struct snd_pcm_substream *substream,
 		wm9081->bclk = 2 * wm9081->fs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (params_format(params)) {
 		case SNDRV_PCM_FORMAT_S16_LE:
 			wm9081->bclk *= 16;
@@ -1087,6 +1126,8 @@ static int wm9081_hw_params(struct snd_pcm_substream *substream,
 			break;
 		case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 		switch (params_width(params)) {
 		case 16:
 			wm9081->bclk *= 16;
@@ -1100,6 +1141,9 @@ static int wm9081_hw_params(struct snd_pcm_substream *substream,
 			aif2 |= 0x8;
 			break;
 		case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			wm9081->bclk *= 32;
 			aif2 |= 0xc;
@@ -1320,6 +1364,7 @@ static int wm9081_probe(struct snd_soc_codec *codec)
 {
 	struct wm9081_priv *wm9081 = snd_soc_codec_get_drvdata(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	codec->control_data = wm9081->regmap;
@@ -1329,6 +1374,8 @@ static int wm9081_probe(struct snd_soc_codec *codec)
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1346,7 +1393,11 @@ static int wm9081_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1388,7 +1439,11 @@ static const struct regmap_config wm9081_regmap = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

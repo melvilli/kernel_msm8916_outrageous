@@ -50,8 +50,11 @@ struct nilfs_iget_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nilfs_iget_test(struct inode *inode, void *opaque);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void nilfs_inode_add_blocks(struct inode *inode, int n)
@@ -61,7 +64,11 @@ void nilfs_inode_add_blocks(struct inode *inode, int n)
 	inode_add_bytes(inode, (1 << inode->i_blkbits) * n);
 	if (root)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_add(n, &root->blocks_count);
+=======
+		atomic64_add(n, &root->blocks_count);
+>>>>>>> v3.18
 =======
 		atomic64_add(n, &root->blocks_count);
 >>>>>>> v3.18
@@ -74,7 +81,11 @@ void nilfs_inode_sub_blocks(struct inode *inode, int n)
 	inode_sub_bytes(inode, (1 << inode->i_blkbits) * n);
 	if (root)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_sub(n, &root->blocks_count);
+=======
+		atomic64_sub(n, &root->blocks_count);
+>>>>>>> v3.18
 =======
 		atomic64_sub(n, &root->blocks_count);
 >>>>>>> v3.18
@@ -140,7 +151,11 @@ int nilfs_get_block(struct inode *inode, sector_t blkoff,
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nilfs_mark_inode_dirty(inode);
+=======
+		nilfs_mark_inode_dirty_sync(inode);
+>>>>>>> v3.18
 =======
 		nilfs_mark_inode_dirty_sync(inode);
 >>>>>>> v3.18
@@ -277,7 +292,11 @@ void nilfs_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -325,8 +344,13 @@ static int nilfs_write_end(struct file *file, struct address_space *mapping,
 
 static ssize_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 nilfs_direct_IO(int rw, struct kiocb *iocb, const struct iovec *iov,
 		loff_t offset, unsigned long nr_segs)
+=======
+nilfs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
+		loff_t offset)
+>>>>>>> v3.18
 =======
 nilfs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 		loff_t offset)
@@ -336,6 +360,10 @@ nilfs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = file->f_mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t count = iov_iter_count(iter);
+>>>>>>> v3.18
 =======
 	size_t count = iov_iter_count(iter);
 >>>>>>> v3.18
@@ -346,7 +374,11 @@ nilfs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 
 	/* Needs synchronization with the cleaner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
+=======
+	size = blockdev_direct_IO(rw, iocb, inode, iter, offset,
+>>>>>>> v3.18
 =======
 	size = blockdev_direct_IO(rw, iocb, inode, iter, offset,
 >>>>>>> v3.18
@@ -359,7 +391,11 @@ nilfs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 	if (unlikely((rw & WRITE) && size < 0)) {
 		loff_t isize = i_size_read(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		loff_t end = offset + iov_length(iov, nr_segs);
+=======
+		loff_t end = offset + count;
+>>>>>>> v3.18
 =======
 		loff_t end = offset + count;
 >>>>>>> v3.18
@@ -386,6 +422,7 @@ const struct address_space_operations nilfs_aops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nilfs_insert_inode_locked(struct inode *inode,
 				     struct nilfs_root *root,
 				     unsigned long ino)
@@ -397,6 +434,8 @@ static int nilfs_insert_inode_locked(struct inode *inode,
 	return insert_inode_locked4(inode, ino, nilfs_iget_test, &args);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct inode *nilfs_new_inode(struct inode *dir, umode_t mode)
@@ -427,7 +466,11 @@ struct inode *nilfs_new_inode(struct inode *dir, umode_t mode)
 	/* reference count of i_bh inherits from nilfs_mdt_read_block() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&root->inodes_count);
+=======
+	atomic64_inc(&root->inodes_count);
+>>>>>>> v3.18
 =======
 	atomic64_inc(&root->inodes_count);
 >>>>>>> v3.18
@@ -439,7 +482,11 @@ struct inode *nilfs_new_inode(struct inode *dir, umode_t mode)
 		err = nilfs_bmap_read(ii->i_bmap, NULL);
 		if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto failed_after_creation;
+=======
+			goto failed_bmap;
+>>>>>>> v3.18
 =======
 			goto failed_bmap;
 >>>>>>> v3.18
@@ -459,6 +506,7 @@ struct inode *nilfs_new_inode(struct inode *dir, umode_t mode)
 	inode->i_generation = nilfs->ns_next_generation++;
 	spin_unlock(&nilfs->ns_next_gen_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nilfs_insert_inode_locked(inode, root, ino) < 0) {
 		err = -EIO;
 		goto failed_after_creation;
@@ -468,11 +516,16 @@ struct inode *nilfs_new_inode(struct inode *dir, umode_t mode)
 	if (unlikely(err))
 		goto failed_after_creation; /* never occur. When supporting
 =======
+=======
+>>>>>>> v3.18
 	insert_inode_hash(inode);
 
 	err = nilfs_init_acl(inode, dir);
 	if (unlikely(err))
 		goto failed_acl; /* never occur. When supporting
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    nilfs_init_acl(), proper cancellation of
 				    above jobs should be considered */
@@ -480,17 +533,23 @@ struct inode *nilfs_new_inode(struct inode *dir, umode_t mode)
 	return inode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  failed_after_creation:
 	clear_nlink(inode);
 	unlock_new_inode(inode);
 	iput(inode);  /* raw_inode will be deleted through
 			 nilfs_evict_inode() */
 =======
+=======
+>>>>>>> v3.18
  failed_acl:
  failed_bmap:
 	clear_nlink(inode);
 	iput(inode);  /* raw_inode will be deleted through
 			 generic_delete_inode() */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	goto failed;
 
@@ -540,8 +599,13 @@ int nilfs_read_inode_common(struct inode *inode,
 	inode->i_ctime.tv_nsec = le32_to_cpu(raw_inode->i_ctime_nsec);
 	inode->i_mtime.tv_nsec = le32_to_cpu(raw_inode->i_mtime_nsec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode->i_nlink == 0)
 		return -ESTALE; /* this inode is deleted */
+=======
+	if (inode->i_nlink == 0 && inode->i_mode == 0)
+		return -EINVAL; /* this inode is deleted */
+>>>>>>> v3.18
 =======
 	if (inode->i_nlink == 0 && inode->i_mode == 0)
 		return -EINVAL; /* this inode is deleted */
@@ -756,7 +820,11 @@ void nilfs_write_inode_common(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nilfs_update_inode(struct inode *inode, struct buffer_head *ibh)
+=======
+void nilfs_update_inode(struct inode *inode, struct buffer_head *ibh, int flags)
+>>>>>>> v3.18
 =======
 void nilfs_update_inode(struct inode *inode, struct buffer_head *ibh, int flags)
 >>>>>>> v3.18
@@ -771,7 +839,12 @@ void nilfs_update_inode(struct inode *inode, struct buffer_head *ibh, int flags)
 	if (test_and_clear_bit(NILFS_I_NEW, &ii->i_state))
 		memset(raw_inode, 0, NILFS_MDT(ifile)->mi_entry_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(NILFS_I_INODE_DIRTY, &ii->i_state);
+=======
+	if (flags & I_DIRTY_DATASYNC)
+		set_bit(NILFS_I_INODE_SYNC, &ii->i_state);
+>>>>>>> v3.18
 =======
 	if (flags & I_DIRTY_DATASYNC)
 		set_bit(NILFS_I_INODE_SYNC, &ii->i_state);
@@ -882,8 +955,12 @@ void nilfs_evict_inode(struct inode *inode)
 
 	if (inode->i_nlink || !ii->i_root || unlikely(is_bad_inode(inode))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (inode->i_data.nrpages)
 			truncate_inode_pages(&inode->i_data, 0);
+=======
+		truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 		truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -894,8 +971,12 @@ void nilfs_evict_inode(struct inode *inode)
 	nilfs_transaction_begin(sb, &ti, 0); /* never fails */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode->i_data.nrpages)
 		truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -908,7 +989,11 @@ void nilfs_evict_inode(struct inode *inode)
 	ret = nilfs_ifile_delete_inode(ii->i_root->ifile, inode->i_ino);
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_dec(&ii->i_root->inodes_count);
+=======
+		atomic64_dec(&ii->i_root->inodes_count);
+>>>>>>> v3.18
 =======
 		atomic64_dec(&ii->i_root->inodes_count);
 >>>>>>> v3.18
@@ -1046,7 +1131,11 @@ int nilfs_set_file_dirty(struct inode *inode, unsigned nr_dirty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nilfs_mark_inode_dirty(struct inode *inode)
+=======
+int __nilfs_mark_inode_dirty(struct inode *inode, int flags)
+>>>>>>> v3.18
 =======
 int __nilfs_mark_inode_dirty(struct inode *inode, int flags)
 >>>>>>> v3.18
@@ -1061,7 +1150,11 @@ int __nilfs_mark_inode_dirty(struct inode *inode, int flags)
 		return err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nilfs_update_inode(inode, ibh);
+=======
+	nilfs_update_inode(inode, ibh, flags);
+>>>>>>> v3.18
 =======
 	nilfs_update_inode(inode, ibh, flags);
 >>>>>>> v3.18
@@ -1098,7 +1191,11 @@ void nilfs_dirty_inode(struct inode *inode, int flags)
 	}
 	nilfs_transaction_begin(inode->i_sb, &ti, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nilfs_mark_inode_dirty(inode);
+=======
+	__nilfs_mark_inode_dirty(inode, flags);
+>>>>>>> v3.18
 =======
 	__nilfs_mark_inode_dirty(inode, flags);
 >>>>>>> v3.18

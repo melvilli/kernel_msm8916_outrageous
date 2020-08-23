@@ -25,6 +25,10 @@
 #include "core.h"
 #include "pinconf.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "pinctrl-utils.h"
+>>>>>>> v3.18
 =======
 #include "pinctrl-utils.h"
 >>>>>>> v3.18
@@ -170,6 +174,10 @@ static struct pinconf_generic_dt_params dt_params[] = {
 	{ "input-schmitt-disable", PIN_CONFIG_INPUT_SCHMITT_ENABLE, 0 },
 	{ "input-debounce", PIN_CONFIG_INPUT_DEBOUNCE, 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "power-source", PIN_CONFIG_POWER_SOURCE, 0 },
+>>>>>>> v3.18
 =======
 	{ "power-source", PIN_CONFIG_POWER_SOURCE, 0 },
 >>>>>>> v3.18
@@ -236,7 +244,11 @@ int pinconf_generic_parse_dt_config(struct device_node *np,
 	 * found properties.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*configs = kzalloc(ncfg * sizeof(unsigned long), GFP_KERNEL);
+=======
+	*configs = kmemdup(cfg, ncfg * sizeof(unsigned long), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	*configs = kmemdup(cfg, ncfg * sizeof(unsigned long), GFP_KERNEL);
 >>>>>>> v3.18
@@ -246,7 +258,10 @@ int pinconf_generic_parse_dt_config(struct device_node *np,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(*configs, cfg, ncfg * sizeof(unsigned long));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*nconfigs = ncfg;
@@ -256,7 +271,10 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int pinconf_generic_dt_subnode_to_map(struct pinctrl_dev *pctldev,
 		struct device_node *np, struct pinctrl_map **map,
@@ -352,5 +370,8 @@ int pinconf_generic_dt_node_to_map(struct pinctrl_dev *pctldev,
 }
 EXPORT_SYMBOL_GPL(pinconf_generic_dt_node_to_map);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

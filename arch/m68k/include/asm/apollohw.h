@@ -6,6 +6,7 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
    apollo models
 */
@@ -19,11 +20,16 @@ extern u_long apollo_model;
 #define APOLLO_DN4000 (4)
 #define APOLLO_DN4500 (5)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/bootinfo-apollo.h>
 
 
 extern u_long apollo_model;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

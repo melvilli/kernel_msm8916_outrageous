@@ -7,12 +7,18 @@
  * Copyright (C) 2010, Arnaldo Carvalho de Melo <acme@redhat.com>
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <sys/types.h>
 #include <sys/time.h>
 #include <time.h>
 #include <dirent.h>
 #include <unistd.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "builtin.h"
 #include "perf.h"
@@ -26,7 +32,10 @@
 #include "util/symbol.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int build_id_cache__kcore_buildid(const char *proc_dir, char *sbuildid)
 {
 	char root_dir[PATH_MAX];
@@ -188,6 +197,9 @@ static int build_id_cache__add_kcore(const char *filename, const char *debugdir,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int build_id_cache__add_file(const char *filename, const char *debugdir)
 {
@@ -253,6 +265,7 @@ static bool dso__missing_buildid_cache(struct dso *dso, int parm __maybe_unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int build_id_cache__fprintf_missing(const char *filename, bool force, FILE *fp)
 {
 	struct perf_session *session = perf_session__new(filename, O_RDONLY,
@@ -263,6 +276,11 @@ static int build_id_cache__fprintf_missing(const char *filename, bool force, FIL
 	perf_session__fprintf_dsos_buildid(session, fp, dso__missing_buildid_cache, 0);
 	perf_session__delete(session);
 
+=======
+static int build_id_cache__fprintf_missing(struct perf_session *session, FILE *fp)
+{
+	perf_session__fprintf_dsos_buildid(session, fp, dso__missing_buildid_cache, 0);
+>>>>>>> v3.18
 =======
 static int build_id_cache__fprintf_missing(struct perf_session *session, FILE *fp)
 {
@@ -309,8 +327,11 @@ int cmd_buildid_cache(int argc, const char **argv,
 		   *remove_name_list_str = NULL,
 		   *missing_filename = NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   *update_name_list_str = NULL;
 =======
+=======
+>>>>>>> v3.18
 		   *update_name_list_str = NULL,
 		   *kcore_filename;
 	char sbuf[STRERR_BUFSIZE];
@@ -319,12 +340,20 @@ int cmd_buildid_cache(int argc, const char **argv,
 		.mode  = PERF_DATA_MODE_READ,
 	};
 	struct perf_session *session = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	const struct option buildid_cache_options[] = {
 	OPT_STRING('a', "add", &add_name_list_str,
 		   "file list", "file(s) to add"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OPT_STRING('k', "kcore", &kcore_filename,
+		   "file", "kcore file to add"),
+>>>>>>> v3.18
 =======
 	OPT_STRING('k', "kcore", &kcore_filename,
 		   "file", "kcore file to add"),
@@ -348,9 +377,12 @@ int cmd_buildid_cache(int argc, const char **argv,
 			     buildid_cache_usage, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (symbol__init() < 0)
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	if (missing_filename) {
 		file.path = missing_filename;
 		file.force = force;
@@ -362,6 +394,9 @@ int cmd_buildid_cache(int argc, const char **argv,
 
 	if (symbol__init(session ? &session->header.env : NULL) < 0)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	setup_pager();
@@ -380,7 +415,11 @@ int cmd_buildid_cache(int argc, const char **argv,
 					}
 					pr_warning("Couldn't add %s: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   pos->s, strerror(errno));
+=======
+						   pos->s, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 						   pos->s, strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18
@@ -402,7 +441,11 @@ int cmd_buildid_cache(int argc, const char **argv,
 					}
 					pr_warning("Couldn't remove %s: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   pos->s, strerror(errno));
+=======
+						   pos->s, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 						   pos->s, strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18
@@ -414,7 +457,11 @@ int cmd_buildid_cache(int argc, const char **argv,
 
 	if (missing_filename)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = build_id_cache__fprintf_missing(missing_filename, force, stdout);
+=======
+		ret = build_id_cache__fprintf_missing(session, stdout);
+>>>>>>> v3.18
 =======
 		ret = build_id_cache__fprintf_missing(session, stdout);
 >>>>>>> v3.18
@@ -431,7 +478,11 @@ int cmd_buildid_cache(int argc, const char **argv,
 					}
 					pr_warning("Couldn't update %s: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   pos->s, strerror(errno));
+=======
+						   pos->s, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 						   pos->s, strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18
@@ -442,7 +493,10 @@ int cmd_buildid_cache(int argc, const char **argv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (kcore_filename &&
 	    build_id_cache__add_kcore(kcore_filename, debugdir, force))
 		pr_warning("Couldn't add %s\n", kcore_filename);
@@ -451,6 +505,9 @@ out:
 	if (session)
 		perf_session__delete(session);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

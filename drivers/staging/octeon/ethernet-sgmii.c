@@ -25,6 +25,10 @@
  * Contact Cavium Networks for more information
 **********************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/phy.h>
+>>>>>>> v3.18
 =======
 #include <linux/phy.h>
 >>>>>>> v3.18
@@ -39,6 +43,10 @@
 #include "octeon-ethernet.h"
 #include "ethernet-util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ethernet-mdio.h"
+>>>>>>> v3.18
 =======
 #include "ethernet-mdio.h"
 >>>>>>> v3.18
@@ -47,6 +55,7 @@
 
 #include <asm/octeon/cvmx-gmxx-defs.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int cvm_oct_sgmii_open(struct net_device *dev)
 {
@@ -82,6 +91,8 @@ int cvm_oct_sgmii_stop(struct net_device *dev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void cvm_oct_sgmii_poll(struct net_device *dev)
@@ -121,6 +132,7 @@ static void cvm_oct_sgmii_poll(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cvm_oct_sgmii_init(struct net_device *dev)
 {
 	struct octeon_ethernet *priv = netdev_priv(dev);
@@ -129,6 +141,8 @@ int cvm_oct_sgmii_init(struct net_device *dev)
 	if (!octeon_is_simulation() && priv->phydev == NULL)
 		priv->poll = cvm_oct_sgmii_poll;
 =======
+=======
+>>>>>>> v3.18
 int cvm_oct_sgmii_open(struct net_device *dev)
 {
 	union cvmx_gmxx_prtx_cfg gmx_cfg;
@@ -182,6 +196,9 @@ int cvm_oct_sgmii_init(struct net_device *dev)
 {
 	cvm_oct_common_init(dev);
 	dev->netdev_ops->ndo_stop(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* FIXME: Need autoneg logic */

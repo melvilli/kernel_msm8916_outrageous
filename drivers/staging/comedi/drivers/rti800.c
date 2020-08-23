@@ -15,10 +15,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -57,17 +60,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
 #include <linux/ioport.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Register map
@@ -97,10 +106,13 @@
 #define RTI800_9513A_STATUS	0x0d
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTI800_IOSIZE		0x10
 
 #define RTI800_AI_TIMEOUT	100
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct comedi_lrange range_rti800_ai_10_bipolar = {
@@ -160,6 +172,7 @@ struct rti800_private {
 	bool dac_2comp[2];
 	const struct comedi_lrange *ao_range_type_list[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ao_readback[2];
 	unsigned char muxgain_bits;
 };
@@ -182,6 +195,8 @@ static int rti800_ai_wait_for_conversion(struct comedi_device *dev,
 	}
 	return -ETIME;
 =======
+=======
+>>>>>>> v3.18
 	unsigned char muxgain_bits;
 };
 
@@ -200,6 +215,9 @@ static int rti800_ai_eoc(struct comedi_device *dev,
 	if (status & RTI800_CSR_DONE)
 		return 0;
 	return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -238,7 +256,12 @@ static int rti800_ai_insn_read(struct comedi_device *dev,
 	for (i = 0; i < insn->n; i++) {
 		outb(0, dev->iobase + RTI800_CONVERT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = rti800_ai_wait_for_conversion(dev, RTI800_AI_TIMEOUT);
+=======
+
+		ret = comedi_timeout(dev, s, insn, rti800_ai_eoc, 0);
+>>>>>>> v3.18
 =======
 
 		ret = comedi_timeout(dev, s, insn, rti800_ai_eoc, 0);
@@ -257,6 +280,7 @@ static int rti800_ai_insn_read(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rti800_ao_insn_read(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn,
@@ -274,6 +298,8 @@ static int rti800_ao_insn_read(struct comedi_device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int rti800_ao_insn_write(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 				struct comedi_insn *insn,
@@ -284,12 +310,15 @@ static int rti800_ao_insn_write(struct comedi_device *dev,
 	int reg_lo = chan ? RTI800_DAC1LO : RTI800_DAC0LO;
 	int reg_hi = chan ? RTI800_DAC1HI : RTI800_DAC0HI;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val = devpriv->ao_readback[chan];
 	int i;
 
 	for (i = 0; i < insn->n; i++) {
 		val = data[i];
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < insn->n; i++) {
@@ -297,6 +326,9 @@ static int rti800_ao_insn_write(struct comedi_device *dev,
 
 		s->readback[chan] = val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (devpriv->dac_2comp[chan])
 			val ^= 0x800;
@@ -306,8 +338,11 @@ static int rti800_ao_insn_write(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->ao_readback[chan] = val;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return insn->n;
@@ -328,6 +363,7 @@ static int rti800_do_insn_bits(struct comedi_device *dev,
 			       unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -335,6 +371,9 @@ static int rti800_do_insn_bits(struct comedi_device *dev,
 		s->state &= ~mask;
 		s->state |= (bits & mask);
 
+=======
+	if (comedi_dio_update_state(s, data)) {
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data)) {
 >>>>>>> v3.18
@@ -350,7 +389,11 @@ static int rti800_do_insn_bits(struct comedi_device *dev,
 static int rti800_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct rti800_board *board = comedi_board(dev);
+=======
+	const struct rti800_board *board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct rti800_board *board = dev->board_ptr;
 >>>>>>> v3.18
@@ -359,7 +402,11 @@ static int rti800_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], RTI800_IOSIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x10);
+>>>>>>> v3.18
 =======
 	ret = comedi_request_region(dev, it->options[0], 0x10);
 >>>>>>> v3.18
@@ -371,10 +418,16 @@ static int rti800_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	outb(0, dev->iobase + RTI800_CLRFLAGS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -409,8 +462,11 @@ static int rti800_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		s->subdev_flags	= SDF_WRITABLE;
 		s->n_chan	= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s->insn_read	= rti800_ao_insn_read;
 		s->insn_write	= rti800_ao_insn_write;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		s->maxdata	= 0x0fff;
@@ -424,13 +480,19 @@ static int rti800_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 				? rti800_ao_ranges[it->options[7]]
 				: &range_unknown;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		s->insn_write	= rti800_ao_insn_write;
 		s->insn_read	= comedi_readback_insn_read;
 
 		ret = comedi_alloc_subdev_readback(s);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		s->type		= COMEDI_SUBD_UNUSED;

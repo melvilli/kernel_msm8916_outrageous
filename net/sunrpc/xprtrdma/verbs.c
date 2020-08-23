@@ -49,8 +49,13 @@
 
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>	/* for Tavor hack below */
 #include <linux/slab.h>
+=======
+#include <linux/slab.h>
+#include <asm/bitops.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <asm/bitops.h>
@@ -67,6 +72,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void rpcrdma_reset_frmrs(struct rpcrdma_ia *);
+
+>>>>>>> v3.18
 =======
 static void rpcrdma_reset_frmrs(struct rpcrdma_ia *);
 
@@ -114,6 +124,7 @@ rpcrdma_run_tasklet(unsigned long data)
 static DECLARE_TASKLET(rpcrdma_tasklet_g, rpcrdma_run_tasklet, 0UL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 rpcrdma_schedule_tasklet(struct rpcrdma_rep *rep)
 {
@@ -125,6 +136,8 @@ rpcrdma_schedule_tasklet(struct rpcrdma_rep *rep)
 	tasklet_schedule(&rpcrdma_tasklet_g);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void
@@ -155,6 +168,7 @@ rpcrdma_cq_async_error_upcall(struct ib_event *event, void *context)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline
 void rpcrdma_event_process(struct ib_wc *wc)
@@ -249,6 +263,8 @@ rpcrdma_cq_poll(struct ib_cq *cq)
  *
  * This upcall handles recv, send, bind and unbind events.
 =======
+=======
+>>>>>>> v3.18
 static void
 rpcrdma_sendcq_process_wc(struct ib_wc *wc)
 {
@@ -387,6 +403,9 @@ out_schedule:
 /*
  * Handle receive completions.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * It is reentrant but processes single events in order to maintain
  * ordering of receives to keep server credits.
@@ -396,6 +415,7 @@ out_schedule:
  * connection shutdown. That is, the structures required for
  * the completion of the reply handler must remain intact until
  * all memory has been reclaimed.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * Note that send events are suppressed and do not result in an upcall.
@@ -413,6 +433,8 @@ rpcrdma_cq_event_upcall(struct ib_cq *cq, void *context)
 	if (rc) {
 		dprintk("RPC:       %s: ib_req_notify_cq failed %i\n",
 =======
+=======
+>>>>>>> v3.18
  */
 static void
 rpcrdma_recvcq_upcall(struct ib_cq *cq, void *cq_context)
@@ -433,14 +455,20 @@ rpcrdma_recvcq_upcall(struct ib_cq *cq, void *cq_context)
 		return;
 	if (rc < 0) {
 		dprintk("RPC:       %s: ib_req_notify_cq failed: %i\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__func__, rc);
 		return;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpcrdma_cq_poll(cq);
 =======
+=======
+>>>>>>> v3.18
 	rpcrdma_recvcq_poll(cq, ep);
 }
 
@@ -449,6 +477,9 @@ rpcrdma_flush_cqs(struct rpcrdma_ep *ep)
 {
 	rpcrdma_recvcq_upcall(ep->rep_attr.recv_cq, ep);
 	rpcrdma_sendcq_upcall(ep->rep_attr.send_cq, ep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -466,9 +497,12 @@ static const char * const conn[] = {
 	"established",
 	"disconnected",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"device removal"
 };
 =======
+=======
+>>>>>>> v3.18
 	"device removal",
 	"multicast join",
 	"multicast error",
@@ -479,6 +513,9 @@ static const char * const conn[] = {
 #define CONNECTION_MSG(status)						\
 	((status) < ARRAY_SIZE(conn) ?					\
 		conn[(status)] : "unrecognized connection error")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -538,6 +575,7 @@ rpcrdma_conn_upcall(struct rdma_cm_id *id, struct rdma_cm_event *event)
 		connstate = -ENODEV;
 connected:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("RPC:       %s: %s: %pI4:%u (ep 0x%p event 0x%x)\n",
 			__func__,
 			(event->event <= 11) ? conn[event->event] :
@@ -547,6 +585,8 @@ connected:
 			ep, event->event);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		atomic_set(&rpcx_to_rdmax(ep->rep_xprt)->rx_buf.rb_credits, 1);
 		dprintk("RPC:       %s: %sconnected\n",
 					__func__, connstate > 0 ? "" : "dis");
@@ -554,17 +594,23 @@ connected:
 		ep->rep_func(ep);
 		wake_up_all(&ep->rep_connect_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	default:
 		dprintk("RPC:       %s: unexpected CM event %d\n",
 			__func__, event->event);
 =======
+=======
+>>>>>>> v3.18
 		/*FALLTHROUGH*/
 	default:
 		dprintk("RPC:       %s: %pI4:%u (ep 0x%p): %s\n",
 			__func__, &addr->sin_addr.s_addr,
 			ntohs(addr->sin_port), ep,
 			CONNECTION_MSG(event->event));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -707,6 +753,7 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (memreg) {
 	case RPCRDMA_MEMWINDOWS:
 	case RPCRDMA_MEMWINDOWS_ASYNC:
@@ -739,10 +786,14 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 =======
 	if (memreg == RPCRDMA_FRMR) {
 >>>>>>> v3.18
+=======
+	if (memreg == RPCRDMA_FRMR) {
+>>>>>>> v3.18
 		/* Requires both frmr reg and local dma lkey */
 		if ((devattr.device_cap_flags &
 		     (IB_DEVICE_MEM_MGT_EXTENSIONS|IB_DEVICE_LOCAL_DMA_LKEY)) !=
 		    (IB_DEVICE_MEM_MGT_EXTENSIONS|IB_DEVICE_LOCAL_DMA_LKEY)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if RPCRDMA_PERSISTENT_REGISTRATION
 			dprintk("RPC:       %s: FRMR registration "
@@ -760,6 +811,8 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 		}
 		break;
 =======
+=======
+>>>>>>> v3.18
 			dprintk("RPC:       %s: FRMR registration "
 				"not supported by HCA\n", __func__);
 			memreg = RPCRDMA_MTHCAFMR;
@@ -776,6 +829,9 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 				"not supported by HCA\n", __func__);
 			memreg = RPCRDMA_ALLPHYSICAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -789,11 +845,16 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 	 */
 	switch (memreg) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case RPCRDMA_BOUNCEBUFFERS:
 	case RPCRDMA_REGISTER:
 	case RPCRDMA_FRMR:
 		break;
 #if RPCRDMA_PERSISTENT_REGISTRATION
+=======
+	case RPCRDMA_FRMR:
+		break;
+>>>>>>> v3.18
 =======
 	case RPCRDMA_FRMR:
 		break;
@@ -804,12 +865,15 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 				IB_ACCESS_REMOTE_READ;
 		goto register_setup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	case RPCRDMA_MEMWINDOWS_ASYNC:
 	case RPCRDMA_MEMWINDOWS:
 		mem_priv = IB_ACCESS_LOCAL_WRITE |
 				IB_ACCESS_MW_BIND;
 		goto register_setup;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case RPCRDMA_MTHCAFMR:
@@ -820,6 +884,7 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 		ia->ri_bind_mem = ib_get_dma_mr(ia->ri_pd, mem_priv);
 		if (IS_ERR(ia->ri_bind_mem)) {
 			printk(KERN_ALERT "%s: ib_get_dma_mr for "
+<<<<<<< HEAD
 <<<<<<< HEAD
 				"phys register failed with %lX\n\t"
 				"Will continue with degraded performance\n",
@@ -833,6 +898,8 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 				__func__, memreg);
 		rc = -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				"phys register failed with %lX\n",
 				__func__, PTR_ERR(ia->ri_bind_mem));
 			rc = -ENOMEM;
@@ -843,6 +910,9 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 		printk(KERN_ERR "RPC: Unsupported memory "
 				"registration mode: %d\n", memreg);
 		rc = -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out2;
 	}
@@ -853,6 +923,10 @@ rpcrdma_ia_open(struct rpcrdma_xprt *xprt, struct sockaddr *addr, int memreg)
 	ia->ri_memreg_strategy = memreg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rwlock_init(&ia->ri_qplock);
+>>>>>>> v3.18
 =======
 	rwlock_init(&ia->ri_qplock);
 >>>>>>> v3.18
@@ -902,6 +976,10 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 {
 	struct ib_device_attr devattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ib_cq *sendcq, *recvcq;
+>>>>>>> v3.18
 =======
 	struct ib_cq *sendcq, *recvcq;
 >>>>>>> v3.18
@@ -925,6 +1003,7 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 	ep->rep_attr.cap.max_send_wr = cdata->max_requests;
 	switch (ia->ri_memreg_strategy) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case RPCRDMA_FRMR:
 		/* Add room for frmr register and invalidate WRs.
 		 * 1. FRMR reg WR for head
@@ -932,6 +1011,8 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 		 * 3. FRMR reg WR for pagelist
 		 * 4. FRMR invalidate WR for pagelist
 =======
+=======
+>>>>>>> v3.18
 	case RPCRDMA_FRMR: {
 		int depth = 7;
 
@@ -940,11 +1021,15 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 		 * 2. FRMR invalidate WR for head
 		 * 3. N FRMR reg WRs for pagelist
 		 * 4. N FRMR invalidate WRs for pagelist
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * 5. FRMR reg WR for tail
 		 * 6. FRMR invalidate WR for tail
 		 * 7. The RDMA_SEND WR
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ep->rep_attr.cap.max_send_wr *= 7;
 		if (ep->rep_attr.cap.max_send_wr > devattr.max_qp_wr) {
@@ -963,6 +1048,8 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 			return -EINVAL;
 		break;
 =======
+=======
+>>>>>>> v3.18
 
 		/* Calculate N if the device max FRMR depth is smaller than
 		 * RPCRDMA_MAX_DATA_SEGS.
@@ -987,6 +1074,9 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 		}
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -1009,6 +1099,7 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 
 	/* set trigger for requesting send completion */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep->rep_cqinit = ep->rep_attr.cap.max_send_wr/2 /*  - 1*/;
 	switch (ia->ri_memreg_strategy) {
 	case RPCRDMA_MEMWINDOWS_ASYNC:
@@ -1021,11 +1112,15 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 =======
 	ep->rep_cqinit = ep->rep_attr.cap.max_send_wr/2 - 1;
 >>>>>>> v3.18
+=======
+	ep->rep_cqinit = ep->rep_attr.cap.max_send_wr/2 - 1;
+>>>>>>> v3.18
 	if (ep->rep_cqinit <= 2)
 		ep->rep_cqinit = 0;
 	INIT_CQCOUNT(ep);
 	ep->rep_ia = ia;
 	init_waitqueue_head(&ep->rep_connect_wait);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -1041,6 +1136,8 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 		rc = PTR_ERR(ep->rep_cq);
 		dprintk("RPC:       %s: ib_create_cq failed: %i\n",
 =======
+=======
+>>>>>>> v3.18
 	INIT_DELAYED_WORK(&ep->rep_connect_worker, rpcrdma_connect_worker);
 
 	sendcq = ib_create_cq(ia->ri_id->device, rpcrdma_sendcq_upcall,
@@ -1049,11 +1146,15 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 	if (IS_ERR(sendcq)) {
 		rc = PTR_ERR(sendcq);
 		dprintk("RPC:       %s: failed to create send CQ: %i\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__func__, rc);
 		goto out1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = ib_req_notify_cq(ep->rep_cq, IB_CQ_NEXT_COMP);
 	if (rc) {
@@ -1065,6 +1166,8 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 	ep->rep_attr.send_cq = ep->rep_cq;
 	ep->rep_attr.recv_cq = ep->rep_cq;
 =======
+=======
+>>>>>>> v3.18
 	rc = ib_req_notify_cq(sendcq, IB_CQ_NEXT_COMP);
 	if (rc) {
 		dprintk("RPC:       %s: ib_req_notify_cq failed: %i\n",
@@ -1092,6 +1195,9 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 
 	ep->rep_attr.send_cq = sendcq;
 	ep->rep_attr.recv_cq = recvcq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Initialize cma parameters */
@@ -1103,9 +1209,13 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 	/* Client offers RDMA Read but does not initiate */
 	ep->rep_remote_cma.initiator_depth = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ia->ri_memreg_strategy == RPCRDMA_BOUNCEBUFFERS)
 		ep->rep_remote_cma.responder_resources = 0;
 	else if (devattr.max_qp_rd_atom > 32)	/* arbitrary but <= 255 */
+=======
+	if (devattr.max_qp_rd_atom > 32)	/* arbitrary but <= 255 */
+>>>>>>> v3.18
 =======
 	if (devattr.max_qp_rd_atom > 32)	/* arbitrary but <= 255 */
 >>>>>>> v3.18
@@ -1121,7 +1231,11 @@ rpcrdma_ep_create(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia,
 
 out2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ib_destroy_cq(ep->rep_cq);
+=======
+	err = ib_destroy_cq(sendcq);
+>>>>>>> v3.18
 =======
 	err = ib_destroy_cq(sendcq);
 >>>>>>> v3.18
@@ -1139,11 +1253,16 @@ out1:
  * valid operations on the ep are to free it (if dynamically
  * allocated) or re-create it.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * The caller's error handling must be sure to not leak the endpoint
  * if this function fails.
  */
 int
+=======
+ */
+void
+>>>>>>> v3.18
 =======
  */
 void
@@ -1156,16 +1275,22 @@ rpcrdma_ep_destroy(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 		__func__, ep->rep_connected);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ia->ri_id->qp) {
 		rc = rpcrdma_ep_disconnect(ep, ia);
 		if (rc)
 			dprintk("RPC:       %s: rpcrdma_ep_disconnect"
 				" returned %i\n", __func__, rc);
 =======
+=======
+>>>>>>> v3.18
 	cancel_delayed_work_sync(&ep->rep_connect_worker);
 
 	if (ia->ri_id->qp) {
 		rpcrdma_ep_disconnect(ep, ia);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rdma_destroy_qp(ia->ri_id);
 		ia->ri_id->qp = NULL;
@@ -1178,8 +1303,13 @@ rpcrdma_ep_destroy(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpcrdma_clean_cq(ep->rep_cq);
 	rc = ib_destroy_cq(ep->rep_cq);
+=======
+	rpcrdma_clean_cq(ep->rep_attr.recv_cq);
+	rc = ib_destroy_cq(ep->rep_attr.recv_cq);
+>>>>>>> v3.18
 =======
 	rpcrdma_clean_cq(ep->rep_attr.recv_cq);
 	rc = ib_destroy_cq(ep->rep_attr.recv_cq);
@@ -1189,13 +1319,19 @@ rpcrdma_ep_destroy(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 			__func__, rc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	rpcrdma_clean_cq(ep->rep_attr.send_cq);
 	rc = ib_destroy_cq(ep->rep_attr.send_cq);
 	if (rc)
 		dprintk("RPC:       %s: ib_destroy_cq returned %i\n",
 			__func__, rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1206,7 +1342,11 @@ int
 rpcrdma_ep_connect(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rdma_cm_id *id;
+=======
+	struct rdma_cm_id *id, *old;
+>>>>>>> v3.18
 =======
 	struct rdma_cm_id *id, *old;
 >>>>>>> v3.18
@@ -1217,12 +1357,15 @@ rpcrdma_ep_connect(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 		struct rpcrdma_xprt *xprt;
 retry:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = rpcrdma_ep_disconnect(ep, ia);
 		if (rc && rc != -ENOTCONN)
 			dprintk("RPC:       %s: rpcrdma_ep_disconnect"
 				" status %i\n", __func__, rc);
 		rpcrdma_clean_cq(ep->rep_cq);
 =======
+=======
+>>>>>>> v3.18
 		dprintk("RPC:       %s: reconnecting...\n", __func__);
 
 		rpcrdma_ep_disconnect(ep, ia);
@@ -1230,6 +1373,9 @@ retry:
 
 		if (ia->ri_memreg_strategy == RPCRDMA_FRMR)
 			rpcrdma_reset_frmrs(ia);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		xprt = container_of(ia, struct rpcrdma_xprt, rx_ia);
@@ -1237,7 +1383,11 @@ retry:
 				(struct sockaddr *)&xprt->rx_data.addr);
 		if (IS_ERR(id)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = PTR_ERR(id);
+=======
+			rc = -EHOSTUNREACH;
+>>>>>>> v3.18
 =======
 			rc = -EHOSTUNREACH;
 >>>>>>> v3.18
@@ -1254,6 +1404,7 @@ retry:
 			printk("RPC:       %s: can't reconnect on "
 				"different device!\n", __func__);
 			rdma_destroy_id(id);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			rc = -ENETDOWN;
 			goto out;
@@ -1284,6 +1435,8 @@ if (strnicmp(ia->ri_id->device->dma_device->bus->name, "pci", 3) == 0) {
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 			rc = -ENETUNREACH;
 			goto out;
 		}
@@ -1314,6 +1467,9 @@ if (strnicmp(ia->ri_id->device->dma_device->bus->name, "pci", 3) == 0) {
 			return -ENETUNREACH;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ep->rep_connected = 0;
@@ -1372,7 +1528,11 @@ out:
  * on the same endpoint.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18
@@ -1381,7 +1541,11 @@ rpcrdma_ep_disconnect(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpcrdma_clean_cq(ep->rep_cq);
+=======
+	rpcrdma_flush_cqs(ep);
+>>>>>>> v3.18
 =======
 	rpcrdma_flush_cqs(ep);
 >>>>>>> v3.18
@@ -1397,6 +1561,7 @@ rpcrdma_ep_disconnect(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
 		ep->rep_connected = rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
 }
 
@@ -1404,6 +1569,8 @@ rpcrdma_ep_disconnect(struct rpcrdma_ep *ep, struct rpcrdma_ia *ia)
  * Initialize buffer memory
  */
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int
@@ -1491,6 +1658,9 @@ out_free:
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
@@ -1498,9 +1668,14 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 {
 	char *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t len;
 	int i, rc;
 	struct rpcrdma_mw *r;
+=======
+	size_t len, rlen, wlen;
+	int i, rc;
+>>>>>>> v3.18
 =======
 	size_t len, rlen, wlen;
 	int i, rc;
@@ -1515,6 +1690,7 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 	 *   2.  arrays of struct rpcrdma_req to fill in pointers
 	 *   3.  array of struct rpcrdma_rep for replies
 	 *   4.  padding, if any
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *   5.  mw's, fmr's or frmr's, if any
 	 * Send/recv buffers in req/rep need to be registered
@@ -1544,12 +1720,17 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 
 	/* allocate 1, 4 and 5 in one shot */
 =======
+=======
+>>>>>>> v3.18
 	 * Send/recv buffers in req/rep need to be registered
 	 */
 	len = buf->rb_max_requests *
 		(sizeof(struct rpcrdma_req *) + sizeof(struct rpcrdma_rep *));
 	len += cdata->padding;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p = kzalloc(len, GFP_KERNEL);
 	if (p == NULL) {
@@ -1576,6 +1757,7 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 	}
 	p += cdata->padding;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Allocate the fmr's, or mw's for mw_bind chunk registration.
@@ -1642,6 +1824,8 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 			++r;
 		}
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&buf->rb_mws);
 	INIT_LIST_HEAD(&buf->rb_all);
 	switch (ia->ri_memreg_strategy) {
@@ -1654,6 +1838,9 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 		rc = rpcrdma_init_fmrs(ia, buf);
 		if (rc)
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1665,17 +1852,24 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 	 * using kmalloc for now -- one for each buf.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	wlen = 1 << fls(cdata->inline_wsize + sizeof(struct rpcrdma_req));
 	rlen = 1 << fls(cdata->inline_rsize + sizeof(struct rpcrdma_rep));
 	dprintk("RPC:       %s: wlen = %zu, rlen = %zu\n",
 		__func__, wlen, rlen);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < buf->rb_max_requests; i++) {
 		struct rpcrdma_req *req;
 		struct rpcrdma_rep *rep;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		len = cdata->inline_wsize + sizeof(struct rpcrdma_req);
 		/* RPC layer requests *double* size + 1K RPC_SLACK_SPACE! */
@@ -1683,6 +1877,9 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 		if (len < 4096)
 			len = 4096;
 		req = kmalloc(len, GFP_KERNEL);
+=======
+		req = kmalloc(wlen, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		req = kmalloc(wlen, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1698,7 +1895,11 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 
 		rc = rpcrdma_register_internal(ia, req->rl_base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				len - offsetof(struct rpcrdma_req, rl_base),
+=======
+				wlen - offsetof(struct rpcrdma_req, rl_base),
+>>>>>>> v3.18
 =======
 				wlen - offsetof(struct rpcrdma_req, rl_base),
 >>>>>>> v3.18
@@ -1708,15 +1909,21 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf->rb_send_bufs[i]->rl_size = len-sizeof(struct rpcrdma_req);
 
 		len = cdata->inline_rsize + sizeof(struct rpcrdma_rep);
 		rep = kmalloc(len, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 		buf->rb_send_bufs[i]->rl_size = wlen -
 						sizeof(struct rpcrdma_req);
 
 		rep = kmalloc(rlen, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rep == NULL) {
 			dprintk("RPC:       %s: reply buffer %d alloc failed\n",
@@ -1728,10 +1935,16 @@ rpcrdma_buffer_create(struct rpcrdma_buffer *buf, struct rpcrdma_ep *ep,
 		buf->rb_recv_bufs[i] = rep;
 		buf->rb_recv_bufs[i]->rr_buffer = buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		init_waitqueue_head(&rep->rr_unbind);
 
 		rc = rpcrdma_register_internal(ia, rep->rr_base,
 				len - offsetof(struct rpcrdma_rep, rr_base),
+=======
+
+		rc = rpcrdma_register_internal(ia, rep->rr_base,
+				rlen - offsetof(struct rpcrdma_rep, rr_base),
+>>>>>>> v3.18
 =======
 
 		rc = rpcrdma_register_internal(ia, rep->rr_base,
@@ -1753,6 +1966,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Unregister and destroy buffer memory. Need to deal with
  * partial initialization, so it's callable from failed create.
@@ -1773,6 +1987,8 @@ rpcrdma_buffer_destroy(struct rpcrdma_buffer *buf)
 	 *   3.  padding (if any) [moved to rpcrdma_ep_destroy]
 	 *   4.  arrays
 =======
+=======
+>>>>>>> v3.18
 static void
 rpcrdma_destroy_fmrs(struct rpcrdma_buffer *buf)
 {
@@ -1824,6 +2040,9 @@ rpcrdma_buffer_destroy(struct rpcrdma_buffer *buf)
 	 *   1.  recv mr memory (mr free, then kfree)
 	 *   2.  send mr memory (mr free, then kfree)
 	 *   3.  MWs
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	dprintk("RPC:       %s: entering\n", __func__);
@@ -1836,6 +2055,7 @@ rpcrdma_buffer_destroy(struct rpcrdma_buffer *buf)
 			kfree(buf->rb_recv_bufs[i]);
 		}
 		if (buf->rb_send_bufs && buf->rb_send_bufs[i]) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			while (!list_empty(&buf->rb_mws)) {
 				r = list_entry(buf->rb_mws.next,
@@ -1874,6 +2094,8 @@ rpcrdma_buffer_destroy(struct rpcrdma_buffer *buf)
 			}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 			rpcrdma_deregister_internal(ia,
 					buf->rb_send_bufs[i]->rl_handle,
 					&buf->rb_send_bufs[i]->rl_iov);
@@ -1882,10 +2104,13 @@ rpcrdma_buffer_destroy(struct rpcrdma_buffer *buf)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(buf->rb_pool);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	switch (ia->ri_memreg_strategy) {
 	case RPCRDMA_FRMR:
 		rpcrdma_destroy_frmrs(buf);
@@ -2099,6 +2324,9 @@ rpcrdma_buffer_get_fmrs(struct rpcrdma_req *req, struct rpcrdma_buffer *buf)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Get a set of request/reply buffers.
@@ -2113,15 +2341,21 @@ struct rpcrdma_req *
 rpcrdma_buffer_get(struct rpcrdma_buffer *buffers)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rpcrdma_req *req;
 	unsigned long flags;
 	int i;
 	struct rpcrdma_mw *r;
 =======
+=======
+>>>>>>> v3.18
 	struct rpcrdma_ia *ia = rdmab_to_ia(buffers);
 	struct list_head stale;
 	struct rpcrdma_req *req;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&buffers->rb_lock, flags);
@@ -2143,6 +2377,7 @@ rpcrdma_buffer_get(struct rpcrdma_buffer *buffers)
 	}
 	buffers->rb_send_bufs[buffers->rb_send_index++] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!list_empty(&buffers->rb_mws)) {
 		i = RPCRDMA_MAX_SEGS - 1;
 		do {
@@ -2154,6 +2389,8 @@ rpcrdma_buffer_get(struct rpcrdma_buffer *buffers)
 	}
 	spin_unlock_irqrestore(&buffers->rb_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 
 	INIT_LIST_HEAD(&stale);
 	switch (ia->ri_memreg_strategy) {
@@ -2169,6 +2406,9 @@ rpcrdma_buffer_get(struct rpcrdma_buffer *buffers)
 	spin_unlock_irqrestore(&buffers->rb_lock, flags);
 	if (!list_empty(&stale))
 		rpcrdma_retry_flushed_linv(&stale, buffers);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return req;
 }
@@ -2182,6 +2422,7 @@ rpcrdma_buffer_put(struct rpcrdma_req *req)
 {
 	struct rpcrdma_buffer *buffers = req->rl_buffer;
 	struct rpcrdma_ia *ia = rdmab_to_ia(buffers);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	unsigned long flags;
@@ -2216,6 +2457,8 @@ rpcrdma_buffer_put(struct rpcrdma_req *req)
 					&buffers->rb_mws);
 		req->rl_segments[0].mr_chunk.rl_mw = NULL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&buffers->rb_lock, flags);
@@ -2224,6 +2467,9 @@ rpcrdma_buffer_put(struct rpcrdma_req *req)
 	case RPCRDMA_FRMR:
 	case RPCRDMA_MTHCAFMR:
 		rpcrdma_buffer_put_mrs(req, buffers);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2256,8 +2502,12 @@ rpcrdma_recv_buffer_get(struct rpcrdma_req *req)
 /*
  * Put reply buffers back into pool when not attached to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * request. This happens in error conditions, and when
  * aborting unbinds. Pre-decrement counter/array index.
+=======
+ * request. This happens in error conditions.
+>>>>>>> v3.18
 =======
  * request. This happens in error conditions.
 >>>>>>> v3.18
@@ -2292,6 +2542,12 @@ rpcrdma_register_internal(struct rpcrdma_ia *ia, void *va, int len,
 	iov->addr = ib_dma_map_single(ia->ri_id->device,
 			va, len, DMA_BIDIRECTIONAL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ib_dma_mapping_error(ia->ri_id->device, iov->addr))
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (ib_dma_mapping_error(ia->ri_id->device, iov->addr))
 		return -ENOMEM;
@@ -2393,13 +2649,19 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 {
 	struct rpcrdma_mr_seg *seg1 = seg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_send_wr invalidate_wr, frmr_wr, *bad_wr, *post_wr;
 
 =======
+=======
+>>>>>>> v3.18
 	struct rpcrdma_mw *mw = seg1->mr_chunk.rl_mw;
 	struct rpcrdma_frmr *frmr = &mw->r.frmr;
 	struct ib_mr *mr = frmr->fr_mr;
 	struct ib_send_wr fastreg_wr, *bad_wr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 key;
 	int len, pageoff;
@@ -2413,8 +2675,13 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 	seg1->mr_len += pageoff;
 	len = -pageoff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*nsegs > RPCRDMA_MAX_DATA_SEGS)
 		*nsegs = RPCRDMA_MAX_DATA_SEGS;
+=======
+	if (*nsegs > ia->ri_max_frmr_depth)
+		*nsegs = ia->ri_max_frmr_depth;
+>>>>>>> v3.18
 =======
 	if (*nsegs > ia->ri_max_frmr_depth)
 		*nsegs = ia->ri_max_frmr_depth;
@@ -2424,8 +2691,12 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 		pa = seg->mr_dma;
 		for (seg_len = seg->mr_len; seg_len > 0; seg_len -= PAGE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seg1->mr_chunk.rl_mw->r.frmr.fr_pgl->
 				page_list[page_no++] = pa;
+=======
+			frmr->fr_pgl->page_list[page_no++] = pa;
+>>>>>>> v3.18
 =======
 			frmr->fr_pgl->page_list[page_no++] = pa;
 >>>>>>> v3.18
@@ -2440,6 +2711,7 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 			break;
 	}
 	dprintk("RPC:       %s: Using frmr %p to map %d segments\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__func__, seg1->mr_chunk.rl_mw, i);
 
@@ -2491,6 +2763,8 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 	} else {
 		seg1->mr_rkey = seg1->mr_chunk.rl_mw->r.frmr.fr_mr->rkey;
 =======
+=======
+>>>>>>> v3.18
 		__func__, mw, i);
 
 	frmr->fr_state = FRMR_IS_VALID;
@@ -2526,6 +2800,9 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 		goto out_err;
 	} else {
 		seg1->mr_rkey = mr->rkey;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seg1->mr_base = seg1->mr_dma + pageoff;
 		seg1->mr_nsegs = i;
@@ -2533,12 +2810,18 @@ rpcrdma_register_frmr_external(struct rpcrdma_mr_seg *seg,
 	}
 	*nsegs = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 out_err:
 	frmr->fr_state = FRMR_IS_INVALID;
 	while (i--)
 		rpcrdma_unmap_one(ia, --seg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -2552,8 +2835,12 @@ rpcrdma_deregister_frmr_external(struct rpcrdma_mr_seg *seg,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (seg1->mr_nsegs--)
 		rpcrdma_unmap_one(ia, seg++);
+=======
+	seg1->mr_chunk.rl_mw->r.frmr.fr_state = FRMR_IS_INVALID;
+>>>>>>> v3.18
 =======
 	seg1->mr_chunk.rl_mw->r.frmr.fr_state = FRMR_IS_INVALID;
 >>>>>>> v3.18
@@ -2561,6 +2848,7 @@ rpcrdma_deregister_frmr_external(struct rpcrdma_mr_seg *seg,
 	memset(&invalidate_wr, 0, sizeof invalidate_wr);
 	invalidate_wr.wr_id = (unsigned long)(void *)seg1->mr_chunk.rl_mw;
 	invalidate_wr.opcode = IB_WR_LOCAL_INV;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	invalidate_wr.send_flags = IB_SEND_SIGNALED;
 	invalidate_wr.ex.invalidate_rkey = seg1->mr_chunk.rl_mw->r.frmr.fr_mr->rkey;
@@ -2571,6 +2859,8 @@ rpcrdma_deregister_frmr_external(struct rpcrdma_mr_seg *seg,
 		dprintk("RPC:       %s: failed ib_post_send for invalidate,"
 			" status %i\n", __func__, rc);
 =======
+=======
+>>>>>>> v3.18
 	invalidate_wr.ex.invalidate_rkey = seg1->mr_chunk.rl_mw->r.frmr.fr_mr->rkey;
 	DECR_CQCOUNT(&r_xprt->rx_ep);
 
@@ -2585,6 +2875,9 @@ rpcrdma_deregister_frmr_external(struct rpcrdma_mr_seg *seg,
 		dprintk("RPC:       %s: failed ib_post_send for invalidate,"
 			" status %i\n", __func__, rc);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -2644,13 +2937,19 @@ rpcrdma_deregister_fmr_external(struct rpcrdma_mr_seg *seg,
 	list_add(&seg1->mr_chunk.rl_mw->r.fmr->list, &l);
 	rc = ib_unmap_fmr(&l);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (seg1->mr_nsegs--)
 		rpcrdma_unmap_one(ia, seg++);
 =======
+=======
+>>>>>>> v3.18
 	read_lock(&ia->ri_qplock);
 	while (seg1->mr_nsegs--)
 		rpcrdma_unmap_one(ia, seg++);
 	read_unlock(&ia->ri_qplock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		dprintk("RPC:       %s: failed ib_unmap_fmr,"
@@ -2658,6 +2957,7 @@ rpcrdma_deregister_fmr_external(struct rpcrdma_mr_seg *seg,
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 rpcrdma_register_memwin_external(struct rpcrdma_mr_seg *seg,
@@ -2790,6 +3090,8 @@ rpcrdma_deregister_default_external(struct rpcrdma_mr_seg *seg,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int
 rpcrdma_register_external(struct rpcrdma_mr_seg *seg,
 			int nsegs, int writing, struct rpcrdma_xprt *r_xprt)
@@ -2800,7 +3102,10 @@ rpcrdma_register_external(struct rpcrdma_mr_seg *seg,
 	switch (ia->ri_memreg_strategy) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if RPCRDMA_PERSISTENT_REGISTRATION
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case RPCRDMA_ALLPHYSICAL:
@@ -2811,7 +3116,10 @@ rpcrdma_register_external(struct rpcrdma_mr_seg *seg,
 		nsegs = 1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2825,6 +3133,7 @@ rpcrdma_register_external(struct rpcrdma_mr_seg *seg,
 		rc = rpcrdma_register_fmr_external(seg, &nsegs, writing, ia);
 		break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Registration using memory windows */
 	case RPCRDMA_MEMWINDOWS_ASYNC:
@@ -2840,6 +3149,10 @@ rpcrdma_register_external(struct rpcrdma_mr_seg *seg,
 	default:
 		return -1;
 >>>>>>> v3.18
+=======
+	default:
+		return -1;
+>>>>>>> v3.18
 	}
 	if (rc)
 		return -1;
@@ -2850,7 +3163,11 @@ rpcrdma_register_external(struct rpcrdma_mr_seg *seg,
 int
 rpcrdma_deregister_external(struct rpcrdma_mr_seg *seg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct rpcrdma_xprt *r_xprt, void *r)
+=======
+		struct rpcrdma_xprt *r_xprt)
+>>>>>>> v3.18
 =======
 		struct rpcrdma_xprt *r_xprt)
 >>>>>>> v3.18
@@ -2861,6 +3178,7 @@ rpcrdma_deregister_external(struct rpcrdma_mr_seg *seg,
 	switch (ia->ri_memreg_strategy) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if RPCRDMA_PERSISTENT_REGISTRATION
 	case RPCRDMA_ALLPHYSICAL:
 		BUG_ON(nsegs != 1);
@@ -2869,11 +3187,16 @@ rpcrdma_deregister_external(struct rpcrdma_mr_seg *seg,
 		break;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	case RPCRDMA_ALLPHYSICAL:
 		read_lock(&ia->ri_qplock);
 		rpcrdma_unmap_one(ia, seg);
 		read_unlock(&ia->ri_qplock);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case RPCRDMA_FRMR:
@@ -2884,6 +3207,7 @@ rpcrdma_deregister_external(struct rpcrdma_mr_seg *seg,
 		rc = rpcrdma_deregister_fmr_external(seg, ia);
 		break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case RPCRDMA_MEMWINDOWS_ASYNC:
 	case RPCRDMA_MEMWINDOWS:
@@ -2900,6 +3224,11 @@ rpcrdma_deregister_external(struct rpcrdma_mr_seg *seg,
 		rep->rr_func = NULL;
 		func(rep);	/* dereg done, callback now */
 	}
+=======
+	default:
+		break;
+	}
+>>>>>>> v3.18
 =======
 	default:
 		break;
@@ -2980,7 +3309,10 @@ rpcrdma_ep_post_recv(struct rpcrdma_ia *ia,
 		rep->rr_iov.addr, rep->rr_iov.length, DMA_BIDIRECTIONAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECR_CQCOUNT(ep);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = ib_post_recv(ia->ri_id->qp, &recv_wr, &recv_wr_fail);
@@ -2991,7 +3323,10 @@ rpcrdma_ep_post_recv(struct rpcrdma_ia *ia,
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Physical mapping means one Read/Write list entry per-page.
  * All list entries must fit within an inline buffer
@@ -3033,4 +3368,7 @@ rpcrdma_max_payload(struct rpcrdma_xprt *r_xprt)
 	}
 	return result;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

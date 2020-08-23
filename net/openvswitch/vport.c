@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2007-2012 Nicira, Inc.
+=======
+ * Copyright (c) 2007-2014 Nicira, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2007-2014 Nicira, Inc.
 >>>>>>> v3.18
@@ -38,6 +42,12 @@
 #include "vport-internal_dev.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void ovs_vport_record_error(struct vport *,
+				   enum vport_err_type err_type);
+
+>>>>>>> v3.18
 =======
 static void ovs_vport_record_error(struct vport *,
 				   enum vport_err_type err_type);
@@ -49,7 +59,10 @@ static const struct vport_ops *vport_ops_list[] = {
 	&ovs_netdev_vport_ops,
 	&ovs_internal_vport_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_OPENVSWITCH_GRE
 	&ovs_gre_vport_ops,
@@ -60,6 +73,9 @@ static const struct vport_ops *vport_ops_list[] = {
 #ifdef CONFIG_OPENVSWITCH_GENEVE
 	&ovs_geneve_vport_ops,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -148,12 +164,15 @@ struct vport *ovs_vport_alloc(int priv_size, const struct vport_ops *ops,
 	vport->dp = parms->dp;
 	vport->port_no = parms->port_no;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vport->upcall_portid = parms->upcall_portid;
 	vport->ops = ops;
 	INIT_HLIST_NODE(&vport->dp_hash_node);
 
 	vport->percpu_stats = alloc_percpu(struct pcpu_tstats);
 =======
+=======
+>>>>>>> v3.18
 	vport->ops = ops;
 	INIT_HLIST_NODE(&vport->dp_hash_node);
 
@@ -163,6 +182,9 @@ struct vport *ovs_vport_alloc(int priv_size, const struct vport_ops *ops,
 	}
 
 	vport->percpu_stats = netdev_alloc_pcpu_stats(struct pcpu_sw_netstats);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!vport->percpu_stats) {
 		kfree(vport);
@@ -170,8 +192,11 @@ struct vport *ovs_vport_alloc(int priv_size, const struct vport_ops *ops,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&vport->stats_lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return vport;
@@ -190,11 +215,17 @@ struct vport *ovs_vport_alloc(int priv_size, const struct vport_ops *ops,
 void ovs_vport_free(struct vport *vport)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* vport is freed from RCU callback or error path, Therefore
 	 * it is safe to use raw dereference.
 	 */
 	kfree(rcu_dereference_raw(vport->upcall_portids));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_percpu(vport->percpu_stats);
 	kfree(vport);
@@ -242,7 +273,11 @@ out:
  *
  * @vport: vport to modify.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @port: New configuration.
+=======
+ * @options: New configuration.
+>>>>>>> v3.18
 =======
  * @options: New configuration.
 >>>>>>> v3.18
@@ -300,6 +335,7 @@ void ovs_vport_get_stats(struct vport *vport, struct ovs_vport_stats *stats)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&vport->stats_lock);
 
 	stats->rx_errors	= vport->err_stats.rx_errors;
@@ -313,6 +349,8 @@ void ovs_vport_get_stats(struct vport *vport, struct ovs_vport_stats *stats)
 		const struct pcpu_tstats *percpu_stats;
 		struct pcpu_tstats local_stats;
 =======
+=======
+>>>>>>> v3.18
 	stats->rx_errors  = atomic_long_read(&vport->err_stats.rx_errors);
 	stats->tx_errors  = atomic_long_read(&vport->err_stats.tx_errors);
 	stats->tx_dropped = atomic_long_read(&vport->err_stats.tx_dropped);
@@ -321,6 +359,9 @@ void ovs_vport_get_stats(struct vport *vport, struct ovs_vport_stats *stats)
 	for_each_possible_cpu(i) {
 		const struct pcpu_sw_netstats *percpu_stats;
 		struct pcpu_sw_netstats local_stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int start;
 
@@ -328,9 +369,15 @@ void ovs_vport_get_stats(struct vport *vport, struct ovs_vport_stats *stats)
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&percpu_stats->syncp);
 			local_stats = *percpu_stats;
 		} while (u64_stats_fetch_retry_bh(&percpu_stats->syncp, start));
+=======
+			start = u64_stats_fetch_begin_irq(&percpu_stats->syncp);
+			local_stats = *percpu_stats;
+		} while (u64_stats_fetch_retry_irq(&percpu_stats->syncp, start));
+>>>>>>> v3.18
 =======
 			start = u64_stats_fetch_begin_irq(&percpu_stats->syncp);
 			local_stats = *percpu_stats;
@@ -384,7 +431,10 @@ int ovs_vport_get_options(const struct vport *vport, struct sk_buff *skb)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *	ovs_vport_set_upcall_portids - set upcall portids of @vport.
  *
  * @vport: vport to modify.
@@ -478,12 +528,19 @@ u32 ovs_vport_find_upcall_portid(const struct vport *vport, struct sk_buff *skb)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	ovs_vport_receive - pass up received packet to the datapath for processing
  *
  * @vport: vport that received the packet
  * @skb: skb that was received
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @tun_key: tunnel (if any) that carried packet
+>>>>>>> v3.18
 =======
  * @tun_key: tunnel (if any) that carried packet
 >>>>>>> v3.18
@@ -492,16 +549,22 @@ u32 ovs_vport_find_upcall_portid(const struct vport *vport, struct sk_buff *skb)
  * skb->data should point to the Ethernet header.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ovs_vport_receive(struct vport *vport, struct sk_buff *skb)
 {
 	struct pcpu_tstats *stats;
 =======
+=======
+>>>>>>> v3.18
 void ovs_vport_receive(struct vport *vport, struct sk_buff *skb,
 		       struct ovs_tunnel_info *tun_info)
 {
 	struct pcpu_sw_netstats *stats;
 	struct sw_flow_key key;
 	int error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	stats = this_cpu_ptr(vport->percpu_stats);
@@ -511,8 +574,11 @@ void ovs_vport_receive(struct vport *vport, struct sk_buff *skb,
 	u64_stats_update_end(&stats->syncp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ovs_dp_process_received_packet(vport, skb);
 =======
+=======
+>>>>>>> v3.18
 	OVS_CB(skb)->input_vport = vport;
 	OVS_CB(skb)->egress_tun_info = NULL;
 	/* Extract flow from 'skb' into 'key'. */
@@ -522,6 +588,9 @@ void ovs_vport_receive(struct vport *vport, struct sk_buff *skb,
 		return;
 	}
 	ovs_dp_process_packet(skb, &key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -539,8 +608,13 @@ int ovs_vport_send(struct vport *vport, struct sk_buff *skb)
 	int sent = vport->ops->send(vport, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(sent)) {
 		struct pcpu_tstats *stats;
+=======
+	if (likely(sent > 0)) {
+		struct pcpu_sw_netstats *stats;
+>>>>>>> v3.18
 =======
 	if (likely(sent > 0)) {
 		struct pcpu_sw_netstats *stats;
@@ -553,14 +627,20 @@ int ovs_vport_send(struct vport *vport, struct sk_buff *skb)
 		stats->tx_bytes += sent;
 		u64_stats_update_end(&stats->syncp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 	} else if (sent < 0) {
 		ovs_vport_record_error(vport, VPORT_E_TX_ERROR);
 		kfree_skb(skb);
 	} else
 		ovs_vport_record_error(vport, VPORT_E_TX_DROPPED);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sent;
 }
@@ -572,6 +652,7 @@ int ovs_vport_send(struct vport *vport, struct sk_buff *skb)
  * @err_type: one of enum vport_err_type types to indicate the error type
  *
  * If using the vport generic stats layer indicate that an error of the given
+<<<<<<< HEAD
 <<<<<<< HEAD
  * type has occured.
  */
@@ -599,6 +680,8 @@ void ovs_vport_record_error(struct vport *vport, enum vport_err_type err_type)
 
 	spin_unlock(&vport->stats_lock);
 =======
+=======
+>>>>>>> v3.18
  * type has occurred.
  */
 static void ovs_vport_record_error(struct vport *vport,
@@ -637,5 +720,8 @@ void ovs_vport_deferred_free(struct vport *vport)
 		return;
 
 	call_rcu(&vport->rcu, free_vport_rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

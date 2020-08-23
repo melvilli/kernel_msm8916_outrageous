@@ -127,7 +127,11 @@ hmark_hash(struct hmark_tuple *t, const struct xt_hmark_info *info)
 	hash = hash ^ (t->proto & info->proto_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (((u64)hash * info->hmodulus) >> 32) + info->hoffset;
+=======
+	return reciprocal_scale(hash, info->hmodulus) + info->hoffset;
+>>>>>>> v3.18
 =======
 	return reciprocal_scale(hash, info->hmodulus) + info->hoffset;
 >>>>>>> v3.18

@@ -34,7 +34,13 @@
 #include <linux/firmware.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <drm/drm_legacy.h>
+
+#include <drm/ati_pcigart.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_legacy.h>
 
@@ -115,12 +121,15 @@
  * 1.32- fixes for rv740 setup
  * 1.33- Add r6xx/r7xx const buffer support
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define DRIVER_MAJOR		1
 #define DRIVER_MINOR		33
 #define DRIVER_PATCHLEVEL	0
 
 =======
+=======
+>>>>>>> v3.18
  * 1.34- fix evergreen/cayman GS register
  */
 #define DRIVER_MAJOR		1
@@ -130,6 +139,9 @@
 long radeon_drm_ioctl(struct file *filp,
 		      unsigned int cmd, unsigned long arg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* The rest of the file is DEPRECATED! */
 #ifdef CONFIG_DRM_RADEON_UMS
@@ -420,7 +432,11 @@ extern u32 radeon_get_vblank_counter(struct drm_device *dev, int crtc);
 extern int radeon_enable_vblank(struct drm_device *dev, int crtc);
 extern void radeon_disable_vblank(struct drm_device *dev, int crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t radeon_driver_irq_handler(DRM_IRQ_ARGS);
+=======
+extern irqreturn_t radeon_driver_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 extern irqreturn_t radeon_driver_irq_handler(int irq, void *arg);
 >>>>>>> v3.18

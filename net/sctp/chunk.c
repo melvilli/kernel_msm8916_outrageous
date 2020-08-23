@@ -19,6 +19,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -30,21 +31,29 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
  *    Jon Grimm             <jgrimm@us.ibm.com>
  *    Sridhar Samudrala     <sri@us.ibm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -79,7 +88,11 @@ static void sctp_datamsg_init(struct sctp_datamsg *msg)
 
 /* Allocate and initialize datamsg. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCTP_STATIC struct sctp_datamsg *sctp_datamsg_new(gfp_t gfp)
+=======
+static struct sctp_datamsg *sctp_datamsg_new(gfp_t gfp)
+>>>>>>> v3.18
 =======
 static struct sctp_datamsg *sctp_datamsg_new(gfp_t gfp)
 >>>>>>> v3.18
@@ -210,8 +223,14 @@ struct sctp_datamsg *sctp_datamsg_from_user(struct sctp_association *asoc,
 				    msecs_to_jiffies(sinfo->sinfo_timetolive);
 		msg->can_abandon = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("%s: msg:%p expires_at: %ld jiffies:%ld\n",
 				  __func__, msg, msg->expires_at, jiffies);
+=======
+
+		pr_debug("%s: msg:%p expires_at:%ld jiffies:%ld\n", __func__,
+			 msg, msg->expires_at, jiffies);
+>>>>>>> v3.18
 =======
 
 		pr_debug("%s: msg:%p expires_at:%ld jiffies:%ld\n", __func__,
@@ -223,6 +242,7 @@ struct sctp_datamsg *sctp_datamsg_from_user(struct sctp_association *asoc,
 	 * the packet
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_data = asoc->pathmtu -
 		sctp_sk(asoc->base.sk)->pf->af->net_header_len -
 		sizeof(struct sctphdr) - sizeof(struct sctp_data_chunk);
@@ -231,6 +251,8 @@ struct sctp_datamsg *sctp_datamsg_from_user(struct sctp_association *asoc,
 	/* If the the peer requested that we authenticate DATA chunks
 	 * we need to accound for bundling of the AUTH chunks along with
 =======
+=======
+>>>>>>> v3.18
 	max_data = (asoc->pathmtu -
 		sctp_sk(asoc->base.sk)->pf->af->net_header_len -
 		sizeof(struct sctphdr) - sizeof(struct sctp_data_chunk)) & ~3;
@@ -238,6 +260,9 @@ struct sctp_datamsg *sctp_datamsg_from_user(struct sctp_association *asoc,
 	max = asoc->frag_point;
 	/* If the the peer requested that we authenticate DATA chunks
 	 * we need to account for bundling of the AUTH chunks along with
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * DATA.
 	 */
@@ -293,7 +318,11 @@ struct sctp_datamsg *sctp_datamsg_from_user(struct sctp_association *asoc,
 
 	/* Create chunks for all the full sized DATA chunks. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0, len=first_len; i < whole; i++) {
+=======
+	for (i = 0, len = first_len; i < whole; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0, len = first_len; i < whole; i++) {
 >>>>>>> v3.18
@@ -360,7 +389,11 @@ struct sctp_datamsg *sctp_datamsg_from_user(struct sctp_association *asoc,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = sctp_user_addto_chunk(chunk, offset, over,msgh->msg_iov);
+=======
+		err = sctp_user_addto_chunk(chunk, offset, over, msgh->msg_iov);
+>>>>>>> v3.18
 =======
 		err = sctp_user_addto_chunk(chunk, offset, over, msgh->msg_iov);
 >>>>>>> v3.18

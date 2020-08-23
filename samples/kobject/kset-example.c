@@ -125,8 +125,14 @@ static ssize_t foo_store(struct foo_obj *foo_obj, struct foo_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct foo_attribute foo_attribute =
 	__ATTR(foo, 0666, foo_show, foo_store);
+=======
+/* Sysfs attributes cannot be world-writable. */
+static struct foo_attribute foo_attribute =
+	__ATTR(foo, 0664, foo_show, foo_store);
+>>>>>>> v3.18
 =======
 /* Sysfs attributes cannot be world-writable. */
 static struct foo_attribute foo_attribute =
@@ -164,9 +170,15 @@ static ssize_t b_store(struct foo_obj *foo_obj, struct foo_attribute *attr,
 
 static struct foo_attribute baz_attribute =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(baz, 0666, b_show, b_store);
 static struct foo_attribute bar_attribute =
 	__ATTR(bar, 0666, b_show, b_store);
+=======
+	__ATTR(baz, 0664, b_show, b_store);
+static struct foo_attribute bar_attribute =
+	__ATTR(bar, 0664, b_show, b_store);
+>>>>>>> v3.18
 =======
 	__ATTR(baz, 0664, b_show, b_store);
 static struct foo_attribute bar_attribute =
@@ -275,6 +287,10 @@ bar_error:
 	destroy_foo_obj(foo_obj);
 foo_error:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kset_unregister(example_kset);
+>>>>>>> v3.18
 =======
 	kset_unregister(example_kset);
 >>>>>>> v3.18

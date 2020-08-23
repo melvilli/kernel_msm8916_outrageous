@@ -23,7 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "subdev/i2c.h"
+=======
+#include "priv.h"
+>>>>>>> v3.18
 =======
 #include "priv.h"
 >>>>>>> v3.18
@@ -192,8 +196,14 @@ i2c_bit_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 	int ret = 0, mcnt = num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (port->func->acquire)
 		port->func->acquire(port);
+=======
+	ret = nouveau_i2c(port)->acquire(port, nsecs_to_jiffies(T_TIMEOUT));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = nouveau_i2c(port)->acquire(port, nsecs_to_jiffies(T_TIMEOUT));
 	if (ret)
@@ -221,6 +231,10 @@ i2c_bit_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 
 	i2c_stop(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nouveau_i2c(port)->release(port);
+>>>>>>> v3.18
 =======
 	nouveau_i2c(port)->release(port);
 >>>>>>> v3.18

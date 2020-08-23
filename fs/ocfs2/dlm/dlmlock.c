@@ -53,7 +53,11 @@
 #include "cluster/masklog.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache *dlm_lock_cache = NULL;
+=======
+static struct kmem_cache *dlm_lock_cache;
+>>>>>>> v3.18
 =======
 static struct kmem_cache *dlm_lock_cache;
 >>>>>>> v3.18
@@ -96,6 +100,7 @@ static int dlm_can_grant_new_lock(struct dlm_lock_resource *res,
 				  struct dlm_lock *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct dlm_lock *tmplock;
 
@@ -107,14 +112,23 @@ static int dlm_can_grant_new_lock(struct dlm_lock_resource *res,
 
 	list_for_each_entry(tmplock, &res->granted, list) {
 >>>>>>> v3.18
+=======
+	struct dlm_lock *tmplock;
+
+	list_for_each_entry(tmplock, &res->granted, list) {
+>>>>>>> v3.18
 		if (!dlm_lock_compatible(tmplock->ml.type, lock->ml.type))
 			return 0;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, &res->converting) {
 		tmplock = list_entry(iter, struct dlm_lock, list);
 
+=======
+	list_for_each_entry(tmplock, &res->converting, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(tmplock, &res->converting, list) {
 >>>>>>> v3.18
@@ -193,6 +207,10 @@ static enum dlm_status dlmlock_master(struct dlm_ctxt *dlm,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = DLM_NORMAL;
+>>>>>>> v3.18
 =======
 			status = DLM_NORMAL;
 >>>>>>> v3.18

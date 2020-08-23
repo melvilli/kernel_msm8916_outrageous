@@ -19,7 +19,10 @@
 
 #include <linux/platform_data/asoc-s3c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -98,10 +101,13 @@ struct samsung_spdif_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct s3c2410_dma_client spdif_dma_client_out = {
 	.name		= "S/PDIF Stereo out",
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct s3c_dma_params spdif_stereo_out;
@@ -219,8 +225,13 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 
 	con &= ~CON_PCM_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+>>>>>>> v3.18
 =======
 	switch (params_width(params)) {
 	case 16:
@@ -407,7 +418,11 @@ static int spdif_probe(struct platform_device *pdev)
 	spin_lock_init(&spdif->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spdif->pclk = clk_get(&pdev->dev, "spdif");
+=======
+	spdif->pclk = devm_clk_get(&pdev->dev, "spdif");
+>>>>>>> v3.18
 =======
 	spdif->pclk = devm_clk_get(&pdev->dev, "spdif");
 >>>>>>> v3.18
@@ -419,7 +434,11 @@ static int spdif_probe(struct platform_device *pdev)
 	clk_prepare_enable(spdif->pclk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spdif->sclk = clk_get(&pdev->dev, "sclk_spdif");
+=======
+	spdif->sclk = devm_clk_get(&pdev->dev, "sclk_spdif");
+>>>>>>> v3.18
 =======
 	spdif->sclk = devm_clk_get(&pdev->dev, "sclk_spdif");
 >>>>>>> v3.18
@@ -448,8 +467,13 @@ static int spdif_probe(struct platform_device *pdev)
 	dev_set_drvdata(&pdev->dev, spdif);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&pdev->dev, &samsung_spdif_component,
 					 &samsung_spdif_dai, 1);
+=======
+	ret = devm_snd_soc_register_component(&pdev->dev,
+			&samsung_spdif_component, &samsung_spdif_dai, 1);
+>>>>>>> v3.18
 =======
 	ret = devm_snd_soc_register_component(&pdev->dev,
 			&samsung_spdif_component, &samsung_spdif_dai, 1);
@@ -461,7 +485,10 @@ static int spdif_probe(struct platform_device *pdev)
 
 	spdif_stereo_out.dma_size = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spdif_stereo_out.client = &spdif_dma_client_out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spdif_stereo_out.dma_addr = mem_res->start + DATA_OUTBUF;
@@ -469,6 +496,7 @@ static int spdif_probe(struct platform_device *pdev)
 
 	spdif->dma_playback = &spdif_stereo_out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
@@ -480,6 +508,8 @@ static int spdif_probe(struct platform_device *pdev)
 err5:
 	snd_soc_unregister_component(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	ret = samsung_asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register DMA: %d\n", ret);
@@ -487,6 +517,9 @@ err5:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err4:
 	iounmap(spdif->regs);
@@ -495,10 +528,15 @@ err3:
 err2:
 	clk_disable_unprepare(spdif->sclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(spdif->sclk);
 err1:
 	clk_disable_unprepare(spdif->pclk);
 	clk_put(spdif->pclk);
+=======
+err1:
+	clk_disable_unprepare(spdif->pclk);
+>>>>>>> v3.18
 =======
 err1:
 	clk_disable_unprepare(spdif->pclk);
@@ -513,9 +551,12 @@ static int spdif_remove(struct platform_device *pdev)
 	struct resource *mem_res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc_dma_platform_unregister(&pdev->dev);
 	snd_soc_unregister_component(&pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(spdif->regs);
@@ -526,9 +567,13 @@ static int spdif_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(spdif->sclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(spdif->sclk);
 	clk_disable_unprepare(spdif->pclk);
 	clk_put(spdif->pclk);
+=======
+	clk_disable_unprepare(spdif->pclk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(spdif->pclk);
 >>>>>>> v3.18

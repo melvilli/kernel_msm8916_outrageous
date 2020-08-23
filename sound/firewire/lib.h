@@ -7,9 +7,12 @@
 struct fw_unit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_fw_transaction(struct fw_unit *unit, int tcode,
 		       u64 offset, void *buffer, size_t length);
 =======
+=======
+>>>>>>> v3.18
 #define FW_GENERATION_MASK	0x00ff
 #define FW_FIXED_GENERATION	0x0100
 #define FW_QUIET		0x0200
@@ -17,6 +20,9 @@ int snd_fw_transaction(struct fw_unit *unit, int tcode,
 int snd_fw_transaction(struct fw_unit *unit, int tcode,
 		       u64 offset, void *buffer, size_t length,
 		       unsigned int flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* returns true if retrying the transaction would not make sense */

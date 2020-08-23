@@ -44,7 +44,11 @@ enum s3c_cpu_type {
 	TYPE_ADCV11, /* S3C2443 */
 	TYPE_ADCV12, /* S3C2416, S3C2450 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TYPE_ADCV2, /* S3C64XX, S5P64X0, S5PC100 */
+=======
+	TYPE_ADCV2, /* S3C64XX */
+>>>>>>> v3.18
 =======
 	TYPE_ADCV2, /* S3C64XX */
 >>>>>>> v3.18

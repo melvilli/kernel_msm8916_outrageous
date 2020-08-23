@@ -4,6 +4,7 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 secure_ipv4_port_ephemeral(__be32 saddr, __be32 daddr, __be16 dport);
 extern u32 secure_ipv6_port_ephemeral(const __be32 *saddr, const __be32 *daddr,
 				      __be16 dport);
@@ -16,6 +17,8 @@ extern u64 secure_dccp_sequence_number(__be32 saddr, __be32 daddr,
 extern u64 secure_dccpv6_sequence_number(__be32 *saddr, __be32 *daddr,
 					 __be16 sport, __be16 dport);
 =======
+=======
+>>>>>>> v3.18
 u32 secure_ipv4_port_ephemeral(__be32 saddr, __be32 daddr, __be16 dport);
 u32 secure_ipv6_port_ephemeral(const __be32 *saddr, const __be32 *daddr,
 			       __be16 dport);
@@ -27,6 +30,9 @@ u64 secure_dccp_sequence_number(__be32 saddr, __be32 daddr,
 				__be16 sport, __be16 dport);
 u64 secure_dccpv6_sequence_number(__be32 *saddr, __be32 *daddr,
 				  __be16 sport, __be16 dport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _NET_SECURE_SEQ */

@@ -129,7 +129,11 @@ async_tx_channel_switch(struct dma_async_tx_descriptor *depend_tx,
 		device->device_issue_pending(chan);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dma_wait_for_async_tx(depend_tx) != DMA_SUCCESS)
+=======
+		if (dma_wait_for_async_tx(depend_tx) != DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 		if (dma_wait_for_async_tx(depend_tx) != DMA_COMPLETE)
 >>>>>>> v3.18
@@ -285,7 +289,11 @@ void async_tx_quiesce(struct dma_async_tx_descriptor **tx)
 		 */
 		BUG_ON(async_tx_test_ack(*tx));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dma_wait_for_async_tx(*tx) != DMA_SUCCESS)
+=======
+		if (dma_wait_for_async_tx(*tx) != DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 		if (dma_wait_for_async_tx(*tx) != DMA_COMPLETE)
 >>>>>>> v3.18

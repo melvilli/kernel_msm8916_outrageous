@@ -20,6 +20,7 @@
 /*
  * Early Hardware specific Interrupt setup
 <<<<<<< HEAD
+<<<<<<< HEAD
  * -Called very early (start_kernel -> setup_arch -> setup_processor)
  * -Platform Independent (must for any ARC700)
  * -Needed for each CPU (hence not foldable into init_IRQ)
@@ -51,6 +52,8 @@ void __cpuinit arc_init_IRQ(void)
 		write_aux_reg(AUX_IRQ_LEV, level_mask);
 	}
 =======
+=======
+>>>>>>> v3.18
  * -Platform independent, needed for each CPU (not foldable into init_IRQ)
  * -Called very early (start_kernel -> setup_arch -> setup_processor)
  *
@@ -74,6 +77,9 @@ void arc_init_IRQ(void)
 
 	if (level_mask)
 		pr_info("Level-2 interrupts bitset %x\n", level_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -89,6 +95,7 @@ void arc_init_IRQ(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arc_mask_irq(struct irq_data *data)
 {
 	arch_mask_irq(data->irq);
@@ -98,6 +105,8 @@ static void arc_unmask_irq(struct irq_data *data)
 {
 	arch_unmask_irq(data->irq);
 =======
+=======
+>>>>>>> v3.18
 static void arc_irq_mask(struct irq_data *data)
 {
 	unsigned int ienb;
@@ -114,14 +123,22 @@ static void arc_irq_unmask(struct irq_data *data)
 	ienb = read_aux_reg(AUX_IENABLE);
 	ienb |= (1 << data->irq);
 	write_aux_reg(AUX_IENABLE, ienb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct irq_chip onchip_intc = {
 	.name           = "ARC In-core Intc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.irq_mask	= arc_mask_irq,
 	.irq_unmask	= arc_unmask_irq,
+=======
+	.irq_mask	= arc_irq_mask,
+	.irq_unmask	= arc_irq_unmask,
+>>>>>>> v3.18
 =======
 	.irq_mask	= arc_irq_mask,
 	.irq_unmask	= arc_irq_unmask,
@@ -203,6 +220,7 @@ void arch_do_IRQ(unsigned int irq, struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init get_hw_config_num_irq(void)
 {
 	uint32_t val = read_aux_reg(ARC_REG_VECBASE_BCR);
@@ -220,6 +238,8 @@ int __init get_hw_config_num_irq(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 void arc_request_percpu_irq(int irq, int cpu,
                             irqreturn_t (*isr)(int irq, void *dev),
                             const char *irq_nm,
@@ -244,6 +264,9 @@ void arc_request_percpu_irq(int irq, int cpu,
 	}
 
 	enable_percpu_irq(irq, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

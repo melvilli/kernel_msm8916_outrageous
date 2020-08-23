@@ -47,8 +47,12 @@
 #include <linux/clk.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/io.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -425,7 +429,11 @@ pl010_set_termios(struct uart_port *port, struct ktermios *termios,
 	if (termios->c_iflag & INPCK)
 		uap->port.read_status_mask |= UART01x_RSR_FE | UART01x_RSR_PE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -697,6 +705,7 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i == ARRAY_SIZE(amba_ports)) {
 		ret = -EBUSY;
 		goto out;
@@ -720,6 +729,8 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 		goto unmap;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (i == ARRAY_SIZE(amba_ports))
 		return -EBUSY;
 
@@ -736,6 +747,9 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 	uap->clk = devm_clk_get(&dev->dev, NULL);
 	if (IS_ERR(uap->clk))
 		return PTR_ERR(uap->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uap->port.dev = &dev->dev;
@@ -749,7 +763,11 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 	uap->port.line = i;
 	uap->dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uap->data = dev->dev.platform_data;
+=======
+	uap->data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	uap->data = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -758,6 +776,7 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 
 	amba_set_drvdata(dev, uap);
 	ret = uart_add_one_port(&amba_reg, &uap->port);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret) {
 		amba_set_drvdata(dev, NULL);
@@ -774,6 +793,11 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 		amba_ports[i] = NULL;
 
 >>>>>>> v3.18
+=======
+	if (ret)
+		amba_ports[i] = NULL;
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -783,8 +807,11 @@ static int pl010_remove(struct amba_device *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uart_remove_one_port(&amba_reg, &uap->port);
@@ -793,6 +820,7 @@ static int pl010_remove(struct amba_device *dev)
 		if (amba_ports[i] == uap)
 			amba_ports[i] = NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	iounmap(uap->port.membase);
 	clk_put(uap->clk);
@@ -804,6 +832,8 @@ static int pl010_suspend(struct amba_device *dev, pm_message_t state)
 {
 	struct uart_amba_port *uap = amba_get_drvdata(dev);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -811,6 +841,9 @@ static int pl010_suspend(struct amba_device *dev, pm_message_t state)
 static int pl010_suspend(struct device *dev)
 {
 	struct uart_amba_port *uap = dev_get_drvdata(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (uap)
@@ -820,9 +853,15 @@ static int pl010_suspend(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pl010_resume(struct amba_device *dev)
 {
 	struct uart_amba_port *uap = amba_get_drvdata(dev);
+=======
+static int pl010_resume(struct device *dev)
+{
+	struct uart_amba_port *uap = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 static int pl010_resume(struct device *dev)
 {
@@ -835,6 +874,12 @@ static int pl010_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(pl010_dev_pm_ops, pl010_suspend, pl010_resume);
+>>>>>>> v3.18
 =======
 #endif
 
@@ -855,6 +900,10 @@ static struct amba_driver pl010_driver = {
 	.drv = {
 		.name	= "uart-pl010",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &pl010_dev_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &pl010_dev_pm_ops,
 >>>>>>> v3.18
@@ -863,8 +912,11 @@ static struct amba_driver pl010_driver = {
 	.probe		= pl010_probe,
 	.remove		= pl010_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend	= pl010_suspend,
 	.resume		= pl010_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

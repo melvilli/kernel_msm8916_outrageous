@@ -127,7 +127,11 @@ typedef struct user_fpsimd_state elf_fpregset_t;
  */
 extern unsigned long randomize_et_dyn(unsigned long base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ELF_ET_DYN_BASE	(randomize_et_dyn(2 * TASK_SIZE_64 / 3))
+=======
+#define ELF_ET_DYN_BASE	(2 * TASK_SIZE_64 / 3)
+>>>>>>> v3.18
 =======
 #define ELF_ET_DYN_BASE	(2 * TASK_SIZE_64 / 3)
 >>>>>>> v3.18
@@ -142,7 +146,10 @@ extern unsigned long randomize_et_dyn(unsigned long base);
 #define SET_PERSONALITY(ex)		clear_thread_flag(TIF_32BIT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* update AT_VECTOR_SIZE_ARCH if the number of NEW_AUX_ENT entries changes */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ARCH_DLINFO							\
@@ -178,7 +185,11 @@ extern unsigned long arch_randomize_brk(struct mm_struct *mm);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPAT_ELF_ET_DYN_BASE		(randomize_et_dyn(2 * TASK_SIZE_32 / 3))
+=======
+#define COMPAT_ELF_ET_DYN_BASE		(2 * TASK_SIZE_32 / 3)
+>>>>>>> v3.18
 =======
 #define COMPAT_ELF_ET_DYN_BASE		(2 * TASK_SIZE_32 / 3)
 >>>>>>> v3.18

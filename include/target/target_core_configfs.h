@@ -24,6 +24,10 @@ struct target_fabric_configfs_template {
 	struct config_item_type tfc_tpg_np_base_cit;
 	struct config_item_type tfc_tpg_attrib_cit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct config_item_type tfc_tpg_auth_cit;
+>>>>>>> v3.18
 =======
 	struct config_item_type tfc_tpg_auth_cit;
 >>>>>>> v3.18
@@ -58,6 +62,9 @@ struct target_fabric_configfs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TF_CIT_TMPL(tf) (&(tf)->tf_cit_tmpl)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

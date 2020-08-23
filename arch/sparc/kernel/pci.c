@@ -29,6 +29,10 @@
 
 #include "pci_impl.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -259,7 +263,11 @@ static struct pci_dev *of_create_pci_dev(struct pci_pbm_info *pbm,
 	u32 class;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_pci_dev();
+=======
+	dev = pci_alloc_dev(bus);
+>>>>>>> v3.18
 =======
 	dev = pci_alloc_dev(bus);
 >>>>>>> v3.18
@@ -290,7 +298,10 @@ static struct pci_dev *of_create_pci_dev(struct pci_pbm_info *pbm,
 		       devfn, type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->bus = bus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->sysdata = node;
@@ -339,7 +350,11 @@ static struct pci_dev *of_create_pci_dev(struct pci_pbm_info *pbm,
 		pci_set_master(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->current_state = 4;		/* unknown power state */
+=======
+	dev->current_state = PCI_UNKNOWN;	/* unknown power state */
+>>>>>>> v3.18
 =======
 	dev->current_state = PCI_UNKNOWN;	/* unknown power state */
 >>>>>>> v3.18
@@ -409,7 +424,11 @@ static void apb_fake_ranges(struct pci_dev *dev,
 	region.start = (first << 21);
 	region.end = (last << 21) + ((1 << 21) - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_bus_to_resource(dev, res, &region);
+=======
+	pcibios_bus_to_resource(dev->bus, res, &region);
+>>>>>>> v3.18
 =======
 	pcibios_bus_to_resource(dev->bus, res, &region);
 >>>>>>> v3.18
@@ -421,7 +440,11 @@ static void apb_fake_ranges(struct pci_dev *dev,
 	region.start = (first << 29);
 	region.end = (last << 29) + ((1 << 29) - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_bus_to_resource(dev, res, &region);
+=======
+	pcibios_bus_to_resource(dev->bus, res, &region);
+>>>>>>> v3.18
 =======
 	pcibios_bus_to_resource(dev->bus, res, &region);
 >>>>>>> v3.18
@@ -456,12 +479,18 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ofpci_verbose)
 		printk("    Bridge bus range [%u --> %u]\n",
 		       busrange[0], busrange[1]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ranges = of_get_property(node, "ranges", &len);
 	simba = 0;
@@ -483,11 +512,17 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 	bus->bridge_ctl = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ofpci_verbose)
 		printk("    Bridge ranges[%p] simba[%d]\n",
 		       ranges, simba);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* parse ranges property, or cook one up by hand for Simba */
 	/* PCI #address-cells == 3 and #size-cells == 2 always */
@@ -507,7 +542,10 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 	i = 1;
 	for (; len >= 32; len -= 32, ranges += 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		u64 start;
 
 		if (ofpci_verbose)
@@ -516,13 +554,19 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 			       ranges[0], ranges[1], ranges[2], ranges[3],
 			       ranges[4], ranges[5], ranges[6], ranges[7]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		flags = pci_parse_of_flags(ranges[0]);
 		size = GET_64BIT(ranges, 6);
 		if (flags == 0 || size == 0)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* On PCI-Express systems, PCI bridges that have no devices downstream
 		 * have a bogus size value where the first 32-bit cell is 0xffffffff.
@@ -534,6 +578,9 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 		if (size >> 32 == 0xffffffff)
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (flags & IORESOURCE_IO) {
 			res = bus->resource[0];
@@ -554,10 +601,13 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 
 		res->flags = flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		region.start = GET_64BIT(ranges, 1);
 		region.end = region.start + size - 1;
 		pcibios_bus_to_resource(dev, res, &region);
 =======
+=======
+>>>>>>> v3.18
 		region.start = start = GET_64BIT(ranges, 1);
 		region.end = region.start + size - 1;
 
@@ -566,6 +616,9 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 			       flags, start, size);
 
 		pcibios_bus_to_resource(dev->bus, res, &region);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 after_ranges:
@@ -619,8 +672,12 @@ static void pci_of_scan_bus(struct pci_pbm_info *pbm,
 			       dev->hdr_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->hdr_type == PCI_HEADER_TYPE_BRIDGE ||
 		    dev->hdr_type == PCI_HEADER_TYPE_CARDBUS)
+=======
+		if (pci_is_bridge(dev))
+>>>>>>> v3.18
 =======
 		if (pci_is_bridge(dev))
 >>>>>>> v3.18
@@ -664,7 +721,10 @@ static void pci_bus_register_of_sysfs(struct pci_bus *bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void pci_claim_bus_resources(struct pci_bus *bus)
 {
 	struct pci_bus *child_bus;
@@ -695,6 +755,9 @@ static void pci_claim_bus_resources(struct pci_bus *bus)
 		pci_claim_bus_resources(child_bus);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
 				 struct device *parent)
@@ -727,6 +790,11 @@ struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
 	pci_bus_register_of_sysfs(bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_claim_bus_resources(bus);
+
+>>>>>>> v3.18
 =======
 	pci_claim_bus_resources(bus);
 
@@ -890,6 +958,7 @@ static int __pci_mmap_make_offset(struct pci_dev *pdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Set vm_flags of VMA, as appropriate for this architecture, for a pci device
  * mapping.
  */
@@ -899,6 +968,8 @@ static void __pci_mmap_set_flags(struct pci_dev *dev, struct vm_area_struct *vma
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Set vm_page_prot of VMA, as appropriate for this architecture, for a pci
@@ -929,7 +1000,10 @@ int pci_mmap_page_range(struct pci_dev *dev, struct vm_area_struct *vma,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__pci_mmap_set_flags(dev, vma, mmap_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__pci_mmap_set_pgprot(dev, vma, mmap_state);
@@ -1139,8 +1213,12 @@ static int __init of_pci_slot_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(of_pci_slot_init);
+=======
+device_initcall(of_pci_slot_init);
+>>>>>>> v3.18
 =======
 device_initcall(of_pci_slot_init);
 >>>>>>> v3.18

@@ -25,6 +25,10 @@
 #include <linux/cpumask.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -231,17 +235,23 @@ static inline u32 get_table_count(struct cpufreq_frequency_table *table)
 static inline u32 get_table_min(struct cpufreq_frequency_table *table)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	uint32_t min_freq = ~0;
 	for (i = 0; (table[i].frequency != CPUFREQ_TABLE_END); i++)
 		if (table[i].frequency < min_freq)
 			min_freq = table[i].frequency;
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_frequency_table *pos;
 	uint32_t min_freq = ~0;
 	cpufreq_for_each_entry(pos, table)
 		if (pos->frequency < min_freq)
 			min_freq = pos->frequency;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return min_freq;
 }
@@ -250,17 +260,23 @@ static inline u32 get_table_min(struct cpufreq_frequency_table *table)
 static inline u32 get_table_max(struct cpufreq_frequency_table *table)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	uint32_t max_freq = 0;
 	for (i = 0; (table[i].frequency != CPUFREQ_TABLE_END); i++)
 		if (table[i].frequency > max_freq)
 			max_freq = table[i].frequency;
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_frequency_table *pos;
 	uint32_t max_freq = 0;
 	cpufreq_for_each_entry(pos, table)
 		if (pos->frequency > max_freq)
 			max_freq = pos->frequency;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return max_freq;
 }
@@ -467,16 +483,22 @@ static int bL_cpufreq_init(struct cpufreq_policy *policy)
 
 	if (cur_cluster < MAX_CLUSTERS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpumask_copy(policy->cpus, topology_core_cpumask(policy->cpu));
 
 		per_cpu(physical_cluster, policy->cpu) = cur_cluster;
 =======
+=======
+>>>>>>> v3.18
 		int cpu;
 
 		cpumask_copy(policy->cpus, topology_core_cpumask(policy->cpu));
 
 		for_each_cpu(cpu, policy->cpus)
 			per_cpu(physical_cluster, cpu) = cur_cluster;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* Assumption: during init, we are always running on A15 */
@@ -508,7 +530,10 @@ static int bL_cpufreq_exit(struct cpufreq_policy *policy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_put_attr(policy->cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	put_cluster_clk_and_freq_table(cpu_dev);
@@ -521,7 +546,12 @@ static struct cpufreq_driver bL_cpufreq_driver = {
 	.name			= "arm-big-little",
 	.flags			= CPUFREQ_STICKY |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					CPUFREQ_HAVE_GOVERNOR_PER_POLICY,
+=======
+					CPUFREQ_HAVE_GOVERNOR_PER_POLICY |
+					CPUFREQ_NEED_INITIAL_FREQ_CHECK,
+>>>>>>> v3.18
 =======
 					CPUFREQ_HAVE_GOVERNOR_PER_POLICY |
 					CPUFREQ_NEED_INITIAL_FREQ_CHECK,
@@ -628,9 +658,15 @@ void bL_cpufreq_unregister(struct cpufreq_arm_bL_ops *ops)
 }
 EXPORT_SYMBOL_GPL(bL_cpufreq_unregister);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Viresh Kumar <viresh.kumar@linaro.org>");
 MODULE_DESCRIPTION("Generic ARM big LITTLE cpufreq driver");
 MODULE_LICENSE("GPL v2");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

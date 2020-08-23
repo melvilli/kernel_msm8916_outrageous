@@ -269,7 +269,11 @@ static int txx9_i8259_irq_setup(int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void quirk_slc90e66_bridge(struct pci_dev *dev)
+=======
+static void __init_refok quirk_slc90e66_bridge(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 static void __init_refok quirk_slc90e66_bridge(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -336,7 +340,11 @@ static void quirk_slc90e66_ide(struct pci_dev *dev)
 	 */
 	dat |= 0x01;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_write_config_byte(dev, regs[i], dat);
+=======
+	pci_write_config_byte(dev, 0x5c, dat);
+>>>>>>> v3.18
 =======
 	pci_write_config_byte(dev, 0x5c, dat);
 >>>>>>> v3.18

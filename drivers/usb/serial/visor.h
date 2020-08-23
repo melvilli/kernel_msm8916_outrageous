@@ -137,7 +137,11 @@ struct visor_connection_info {
  *	connections.port contains the endpoint number, which is the same for in
  *	and out.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @port_function_id: contains the creator id of the applicaton that opened
+=======
+ * @port_function_id: contains the creator id of the application that opened
+>>>>>>> v3.18
 =======
  * @port_function_id: contains the creator id of the application that opened
 >>>>>>> v3.18

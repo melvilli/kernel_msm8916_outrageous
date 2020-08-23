@@ -423,9 +423,15 @@ int blk_alloc_devt(struct hd_struct *part, dev_t *devt)
 	idr_preload(GFP_KERNEL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&ext_devt_lock);
 	idx = idr_alloc(&ext_devt_idr, part, 0, NR_EXT_DEVT, GFP_NOWAIT);
 	spin_unlock_bh(&ext_devt_lock);
+=======
+	spin_lock(&ext_devt_lock);
+	idx = idr_alloc(&ext_devt_idr, part, 0, NR_EXT_DEVT, GFP_NOWAIT);
+	spin_unlock(&ext_devt_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&ext_devt_lock);
 	idx = idr_alloc(&ext_devt_idr, part, 0, NR_EXT_DEVT, GFP_NOWAIT);
@@ -456,9 +462,15 @@ void blk_free_devt(dev_t devt)
 
 	if (MAJOR(devt) == BLOCK_EXT_MAJOR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&ext_devt_lock);
 		idr_remove(&ext_devt_idr, blk_mangle_minor(MINOR(devt)));
 		spin_unlock_bh(&ext_devt_lock);
+=======
+		spin_lock(&ext_devt_lock);
+		idr_remove(&ext_devt_idr, blk_mangle_minor(MINOR(devt)));
+		spin_unlock(&ext_devt_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&ext_devt_lock);
 		idr_remove(&ext_devt_idr, blk_mangle_minor(MINOR(devt)));
@@ -675,6 +687,10 @@ void del_gendisk(struct gendisk *disk)
 	kobject_put(disk->part0.holder_dir);
 	kobject_put(disk->slave_dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	disk->driverfs_dev = NULL;
+>>>>>>> v3.18
 =======
 	disk->driverfs_dev = NULL;
 >>>>>>> v3.18
@@ -707,7 +723,11 @@ struct gendisk *get_gendisk(dev_t devt, int *partno)
 		struct hd_struct *part;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&ext_devt_lock);
+=======
+		spin_lock(&ext_devt_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&ext_devt_lock);
 >>>>>>> v3.18
@@ -717,7 +737,11 @@ struct gendisk *get_gendisk(dev_t devt, int *partno)
 			disk = part_to_disk(part);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&ext_devt_lock);
+=======
+		spin_unlock(&ext_devt_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock(&ext_devt_lock);
 >>>>>>> v3.18
@@ -853,7 +877,10 @@ static void disk_seqf_stop(struct seq_file *seqf, void *v)
 		class_dev_iter_exit(iter);
 		kfree(iter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seqf->private = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1098,6 +1125,7 @@ int disk_expand_part_tbl(struct gendisk *disk, int partno)
 	struct disk_part_tbl *new_ptbl;
 	int len = old_ptbl ? old_ptbl->len : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, target;
 	size_t size;
 
@@ -1108,6 +1136,11 @@ int disk_expand_part_tbl(struct gendisk *disk, int partno)
 	target = partno + 1;
 	if (target < 0)
 		return -EINVAL;
+=======
+	int target = partno + 1;
+	size_t size;
+	int i;
+>>>>>>> v3.18
 =======
 	int target = partno + 1;
 	size_t size;
@@ -1150,6 +1183,7 @@ static void disk_release(struct device *dev)
 	kfree(disk);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int disk_uevent(struct device *dev, struct kobj_uevent_env *env)
 {
@@ -1166,6 +1200,8 @@ static int disk_uevent(struct device *dev, struct kobj_uevent_env *env)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct class block_class = {
@@ -1188,7 +1224,10 @@ static struct device_type disk_type = {
 	.release	= disk_release,
 	.devnode	= block_devnode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.uevent		= disk_uevent,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1318,8 +1357,12 @@ struct gendisk *alloc_disk_node(int minors, int node_id)
 	struct gendisk *disk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk = kmalloc_node(sizeof(struct gendisk),
 				GFP_KERNEL | __GFP_ZERO, node_id);
+=======
+	disk = kzalloc_node(sizeof(struct gendisk), GFP_KERNEL, node_id);
+>>>>>>> v3.18
 =======
 	disk = kzalloc_node(sizeof(struct gendisk), GFP_KERNEL, node_id);
 >>>>>>> v3.18
@@ -1559,15 +1602,21 @@ static void __disk_unblock_events(struct gendisk *disk, bool check_now)
 	set_timer_slack(&ev->dwork.timer, intv / 4);
 	if (check_now)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_delayed_work(system_freezable_wq, &ev->dwork, 0);
 	else if (intv)
 		queue_delayed_work(system_freezable_wq, &ev->dwork, intv);
 =======
+=======
+>>>>>>> v3.18
 		queue_delayed_work(system_freezable_power_efficient_wq,
 				&ev->dwork, 0);
 	else if (intv)
 		queue_delayed_work(system_freezable_power_efficient_wq,
 				&ev->dwork, intv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_unlock:
 	spin_unlock_irqrestore(&ev->lock, flags);
@@ -1612,7 +1661,12 @@ void disk_flush_events(struct gendisk *disk, unsigned int mask)
 	ev->clearing |= mask;
 	if (!ev->block)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mod_delayed_work(system_freezable_wq, &ev->dwork, 0);
+=======
+		mod_delayed_work(system_freezable_power_efficient_wq,
+				&ev->dwork, 0);
+>>>>>>> v3.18
 =======
 		mod_delayed_work(system_freezable_power_efficient_wq,
 				&ev->dwork, 0);
@@ -1624,7 +1678,11 @@ void disk_flush_events(struct gendisk *disk, unsigned int mask)
  * disk_clear_events - synchronously check, clear and return pending events
  * @disk: disk to fetch and clear events from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mask: mask of events to be fetched and clearted
+=======
+ * @mask: mask of events to be fetched and cleared
+>>>>>>> v3.18
 =======
  * @mask: mask of events to be fetched and cleared
 >>>>>>> v3.18
@@ -1714,7 +1772,12 @@ static void disk_check_events(struct disk_events *ev,
 	intv = disk_events_poll_jiffies(disk);
 	if (!ev->block && intv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_delayed_work(system_freezable_wq, &ev->dwork, intv);
+=======
+		queue_delayed_work(system_freezable_power_efficient_wq,
+				&ev->dwork, intv);
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_freezable_power_efficient_wq,
 				&ev->dwork, intv);

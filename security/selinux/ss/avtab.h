@@ -24,8 +24,11 @@
 #define _SS_AVTAB_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "security.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct avtab_key {
@@ -41,6 +44,7 @@ struct avtab_key {
 #define AVTAB_CHANGE		0x0040
 #define AVTAB_TYPE		(AVTAB_TRANSITION | AVTAB_MEMBER | AVTAB_CHANGE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* extended permissions */
 #define AVTAB_XPERMS_ALLOWED	0x0100
 #define AVTAB_XPERMS_AUDITALLOW	0x0200
@@ -50,11 +54,14 @@ struct avtab_key {
 				AVTAB_XPERMS_DONTAUDIT)
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define AVTAB_ENABLED_OLD   0x80000000 /* reserved for used in cond_avtab */
 #define AVTAB_ENABLED		0x8000 /* reserved for used in cond_avtab */
 	u16 specified;	/* what field is specified */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * For operations that require more than the 32 permissions provided by the avc
@@ -81,6 +88,10 @@ struct avtab_datum {
 		u32 data; /* access vector or type value */
 		struct avtab_extended_perms *xperms;
 	} u;
+=======
+struct avtab_datum {
+	u32 data; /* access vector or type value */
+>>>>>>> v3.18
 =======
 struct avtab_datum {
 	u32 data; /* access vector or type value */

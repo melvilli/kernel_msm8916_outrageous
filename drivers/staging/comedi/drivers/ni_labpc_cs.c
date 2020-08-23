@@ -19,12 +19,15 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -63,15 +66,21 @@ NI manuals:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #include <linux/delay.h>
 #include <linux/slab.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include "../comedidev.h"
 
 #include <linux/delay.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "8253.h"
@@ -87,12 +96,18 @@ static const struct labpc_boardinfo labpc_cs_boards[] = {
 	{
 		.name			= "daqcard-1200",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.device_id		= 0x103,
 		.ai_speed		= 10000,
 		.register_layout	= labpc_1200_layout,
 		.has_ao			= 1,
 		.ai_range_table		= &range_labpc_1200_ai,
 		.ai_range_code		= labpc_1200_ai_gain_bits,
+=======
+		.ai_speed		= 10000,
+		.has_ao			= 1,
+		.is_labpc1200		= 1,
+>>>>>>> v3.18
 =======
 		.ai_speed		= 10000,
 		.has_ao			= 1,
@@ -122,10 +137,16 @@ static int labpc_auto_attach(struct comedi_device *dev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -136,6 +157,7 @@ static int labpc_auto_attach(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void labpc_detach(struct comedi_device *dev)
 {
 	labpc_common_detach(dev);
@@ -144,12 +166,18 @@ static void labpc_detach(struct comedi_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct comedi_driver driver_labpc_cs = {
 	.driver_name	= "ni_labpc_cs",
 	.module		= THIS_MODULE,
 	.auto_attach	= labpc_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= labpc_detach,
+=======
+	.detach		= comedi_pcmcia_disable,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pcmcia_disable,
 >>>>>>> v3.18

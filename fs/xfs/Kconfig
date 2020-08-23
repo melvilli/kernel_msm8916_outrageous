@@ -2,6 +2,10 @@ config XFS_FS
 	tristate "XFS filesystem support"
 	depends on BLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on (64BIT || LBDAF)
+>>>>>>> v3.18
 =======
 	depends on (64BIT || LBDAF)
 >>>>>>> v3.18

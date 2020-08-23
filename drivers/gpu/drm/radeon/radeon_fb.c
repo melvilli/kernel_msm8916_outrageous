@@ -128,8 +128,12 @@ static int radeonfb_create_pinned_object(struct radeon_fbdev *rfbdev,
 	ret = radeon_gem_object_create(rdev, aligned_size, 0,
 				       RADEON_GEM_DOMAIN_VRAM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       false, true,
 				       &gobj);
+=======
+				       0, true, &gobj);
+>>>>>>> v3.18
 =======
 				       0, true, &gobj);
 >>>>>>> v3.18
@@ -195,7 +199,12 @@ static int radeonfb_create(struct drm_fb_helper *helper,
 			   struct drm_fb_helper_surface_size *sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_fbdev *rfbdev = (struct radeon_fbdev *)helper;
+=======
+	struct radeon_fbdev *rfbdev =
+		container_of(helper, struct radeon_fbdev, helper);
+>>>>>>> v3.18
 =======
 	struct radeon_fbdev *rfbdev =
 		container_of(helper, struct radeon_fbdev, helper);
@@ -240,7 +249,11 @@ static int radeonfb_create(struct drm_fb_helper *helper,
 	ret = radeon_framebuffer_init(rdev->ddev, &rfbdev->rfb, &mode_cmd, gobj);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_ERROR("failed to initalise framebuffer %d\n", ret);
+=======
+		DRM_ERROR("failed to initialize framebuffer %d\n", ret);
+>>>>>>> v3.18
 =======
 		DRM_ERROR("failed to initialize framebuffer %d\n", ret);
 >>>>>>> v3.18
@@ -345,7 +358,11 @@ static int radeon_fbdev_destroy(struct drm_device *dev, struct radeon_fbdev *rfb
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs radeon_fb_helper_funcs = {
+=======
+static const struct drm_fb_helper_funcs radeon_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs radeon_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -371,7 +388,13 @@ int radeon_fbdev_init(struct radeon_device *rdev)
 	rfbdev->rdev = rdev;
 	rdev->mode_info.rfbdev = rfbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rfbdev->helper.funcs = &radeon_fb_helper_funcs;
+=======
+
+	drm_fb_helper_prepare(rdev->ddev, &rfbdev->helper,
+			      &radeon_fb_helper_funcs);
+>>>>>>> v3.18
 =======
 
 	drm_fb_helper_prepare(rdev->ddev, &rfbdev->helper,

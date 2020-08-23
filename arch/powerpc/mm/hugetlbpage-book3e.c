@@ -9,7 +9,10 @@
 #include <linux/hugetlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 #ifdef CONFIG_PPC64
 static inline int tlb1_next(void)
@@ -48,6 +51,9 @@ static inline int tlb1_next(void)
 #endif /* !PPC64 */
 #endif /* FSL */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int mmu_get_tsize(int psize)
 {
@@ -89,7 +95,11 @@ void book3e_hugetlb_preload(struct vm_area_struct *vma, unsigned long ea,
 
 #ifdef CONFIG_PPC_FSL_BOOK3E
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int index, ncams;
+=======
+	int index;
+>>>>>>> v3.18
 =======
 	int index;
 >>>>>>> v3.18
@@ -123,6 +133,7 @@ void book3e_hugetlb_preload(struct vm_area_struct *vma, unsigned long ea,
 
 #ifdef CONFIG_PPC_FSL_BOOK3E
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ncams = mfspr(SPRN_TLB1CFG) & TLBnCFG_N_ENTRY;
 
 	/* We have to use the CAM(TLB1) on FSL parts for hugepages */
@@ -136,11 +147,16 @@ void book3e_hugetlb_preload(struct vm_area_struct *vma, unsigned long ea,
 		__get_cpu_var(next_tlbcam_idx)++;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/* We have to use the CAM(TLB1) on FSL parts for hugepages */
 	index = tlb1_next();
 	mtspr(SPRN_MAS0, MAS0_ESEL(index) | MAS0_TLBSEL(1));
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mas1 = MAS1_VALID | MAS1_TID(mm->context.id) | MAS1_TSIZE(tsize);
 	mas2 = ea & ~((1UL << shift) - 1);
@@ -157,7 +173,12 @@ void book3e_hugetlb_preload(struct vm_area_struct *vma, unsigned long ea,
 		mtspr(SPRN_MAS7_MAS3, mas7_3);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mtspr(SPRN_MAS7, upper_32_bits(mas7_3));
+=======
+		if (mmu_has_feature(MMU_FTR_BIG_PHYS))
+			mtspr(SPRN_MAS7, upper_32_bits(mas7_3));
+>>>>>>> v3.18
 =======
 		if (mmu_has_feature(MMU_FTR_BIG_PHYS))
 			mtspr(SPRN_MAS7, upper_32_bits(mas7_3));
@@ -176,8 +197,12 @@ void flush_hugetlb_page(struct vm_area_struct *vma, unsigned long vmaddr)
 	unsigned long tsize = huge_page_shift(hstate) - 10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__flush_tlb_page(vma ? vma->vm_mm : NULL, vmaddr, tsize, 0);
 
+=======
+	__flush_tlb_page(vma->vm_mm, vmaddr, tsize, 0);
+>>>>>>> v3.18
 =======
 	__flush_tlb_page(vma->vm_mm, vmaddr, tsize, 0);
 >>>>>>> v3.18

@@ -19,7 +19,11 @@ static struct ctl_table llc2_timeout_table[] = {
 		.procname	= "ack",
 		.data		= &sysctl_llc2_ack_timeout,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof(sysctl_llc2_ack_timeout),
+=======
+		.maxlen		= sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(long),
 >>>>>>> v3.18
@@ -30,7 +34,11 @@ static struct ctl_table llc2_timeout_table[] = {
 		.procname	= "busy",
 		.data		= &sysctl_llc2_busy_timeout,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof(sysctl_llc2_busy_timeout),
+=======
+		.maxlen		= sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(long),
 >>>>>>> v3.18
@@ -41,7 +49,11 @@ static struct ctl_table llc2_timeout_table[] = {
 		.procname	= "p",
 		.data		= &sysctl_llc2_p_timeout,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof(sysctl_llc2_p_timeout),
+=======
+		.maxlen		= sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(long),
 >>>>>>> v3.18
@@ -52,7 +64,11 @@ static struct ctl_table llc2_timeout_table[] = {
 		.procname	= "rej",
 		.data		= &sysctl_llc2_rej_timeout,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof(sysctl_llc2_rej_timeout),
+=======
+		.maxlen		= sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(long),
 >>>>>>> v3.18

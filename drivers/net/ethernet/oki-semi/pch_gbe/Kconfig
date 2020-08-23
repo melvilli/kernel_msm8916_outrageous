@@ -5,15 +5,21 @@
 config PCH_GBE
 	tristate "OKI SEMICONDUCTOR IOH(ML7223/ML7831) GbE"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
 	select NET_CORE
 	select MII
 	select PTP_1588_CLOCK_PCH
 =======
+=======
+>>>>>>> v3.18
 	depends on PCI && (X86_32 || COMPILE_TEST)
 	select MII
 	select PTP_1588_CLOCK_PCH
 	select NET_PTP_CLASSIFY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This is a gigabit ethernet driver for EG20T PCH.

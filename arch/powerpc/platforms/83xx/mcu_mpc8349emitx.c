@@ -12,7 +12,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -146,7 +149,12 @@ static int mcu_gpiochip_add(struct mcu *mcu)
 static int mcu_gpiochip_remove(struct mcu *mcu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&mcu->gc);
+=======
+	gpiochip_remove(&mcu->gc);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&mcu->gc);
 	return 0;
@@ -213,7 +221,10 @@ static int mcu_remove(struct i2c_client *client)
 	if (ret)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(client, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(mcu);
@@ -227,7 +238,11 @@ static const struct i2c_device_id mcu_ids[] = {
 MODULE_DEVICE_TABLE(i2c, mcu_ids);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mcu_of_match_table[] = {
+=======
+static const struct of_device_id mcu_of_match_table[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mcu_of_match_table[] = {
 >>>>>>> v3.18
@@ -247,6 +262,7 @@ static struct i2c_driver mcu_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init mcu_init(void)
 {
 	return i2c_add_driver(&mcu_driver);
@@ -258,6 +274,9 @@ static void __exit mcu_exit(void)
 	i2c_del_driver(&mcu_driver);
 }
 module_exit(mcu_exit);
+=======
+module_i2c_driver(mcu_driver);
+>>>>>>> v3.18
 =======
 module_i2c_driver(mcu_driver);
 >>>>>>> v3.18

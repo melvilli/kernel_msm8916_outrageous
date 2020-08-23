@@ -11,6 +11,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/opcodes.h>
+>>>>>>> v3.18
 =======
 #include <asm/opcodes.h>
 >>>>>>> v3.18
@@ -124,7 +128,11 @@ void kprobe_thumb16_test_cases(void)
 	TEST_R(   "add	r",14,VAL1,", pc")
 	TEST_BF_R("add	pc"        ", r",0,2f-1f-8,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0x44ff	@ add pc, pc")
+=======
+	TEST_UNSUPPORTED(__inst_thumb16(0x44ff) "	@ add pc, pc")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb16(0x44ff) "	@ add pc, pc")
 >>>>>>> v3.18
@@ -159,7 +167,11 @@ void kprobe_thumb16_test_cases(void)
 	TEST_BF_R("blx	r",0, 2f+1,"")
 	TEST_BB_R("blx	r",14,2f+1,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0x47f8	@ blx pc")
+=======
+	TEST_UNSUPPORTED(__inst_thumb16(0x47f8) "	@ blx pc")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb16(0x47f8) "	@ blx pc")
 >>>>>>> v3.18
@@ -250,8 +262,13 @@ DONT_TEST_IN_ITBLOCK(
 	TEST_R("rev16	r0, r",7, VAL1,"")
 	TEST_R("rev16	r7, r",0, VAL2,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xba80")
 	TEST_UNSUPPORTED(".short 0xbabf")
+=======
+	TEST_UNSUPPORTED(__inst_thumb16(0xba80) "")
+	TEST_UNSUPPORTED(__inst_thumb16(0xbabf) "")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb16(0xba80) "")
 	TEST_UNSUPPORTED(__inst_thumb16(0xbabf) "")
@@ -290,8 +307,13 @@ DONT_TEST_IN_ITBLOCK(
 	TEST("wfi")
 	TEST_SUPPORTED("wfe")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xbf50") /* Unassigned hints */
 	TEST_UNSUPPORTED(".short 0xbff0") /* Unassigned hints */
+=======
+	TEST_UNSUPPORTED(__inst_thumb16(0xbf50) "") /* Unassigned hints */
+	TEST_UNSUPPORTED(__inst_thumb16(0xbff0) "") /* Unassigned hints */
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb16(0xbf50) "") /* Unassigned hints */
 	TEST_UNSUPPORTED(__inst_thumb16(0xbff0) "") /* Unassigned hints */
@@ -333,8 +355,13 @@ CONDITION_INSTRUCTIONS(8,
 	TEST_BB("blt	2b")
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xde00")
 	TEST_UNSUPPORTED(".short 0xdeff")
+=======
+	TEST_UNSUPPORTED(__inst_thumb16(0xde00) "")
+	TEST_UNSUPPORTED(__inst_thumb16(0xdeff) "")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb16(0xde00) "")
 	TEST_UNSUPPORTED(__inst_thumb16(0xdeff) "")
@@ -408,6 +435,7 @@ void kprobe_thumb32_test_cases(void)
 	TEST_THUMB_TO_ARM_INTERWORK_P("ldmia	r",13,2*4,", {r0-r12,pc}")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xe88f,0x0101	@ stmia	pc, {r0,r8}")
 	TEST_UNSUPPORTED(".short 0xe92f,0x5f00	@ stmdb	pc!, {r8-r12,r14}")
 	TEST_UNSUPPORTED(".short 0xe8bd,0xc000	@ ldmia	r13!, {r14,pc}")
@@ -416,6 +444,8 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xe8a7,0x9f00	@ stmia	r7!, {r8-r12,pc}")
 	TEST_UNSUPPORTED(".short 0xe93e,0x2010	@ ldmdb	r14!, {r4,sp}")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xe88f0101) "	@ stmia	pc, {r0,r8}")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe92f5f00) "	@ stmdb	pc!, {r8-r12,r14}")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8bdc000) "	@ ldmia	r13!, {r14,pc}")
@@ -423,6 +453,9 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8a73f00) "	@ stmia	r7!, {r8-r12,sp}")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8a79f00) "	@ stmia	r7!, {r8-r12,pc}")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe93e2010) "	@ ldmdb	r14!, {r4,sp}")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Load/store double or exclusive, table branch")
@@ -440,6 +473,7 @@ void kprobe_thumb32_test_cases(void)
 		"	.word	"__stringify(VAL2))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xe9ff,0xec04	@ ldrd	r14, r12, [pc, #16]!")
 	TEST_UNSUPPORTED(".short 0xe8ff,0xec04	@ ldrd	r14, r12, [pc], #16")
 	TEST_UNSUPPORTED(".short 0xe9d4,0xd800	@ ldrd	sp, r8, [r4]")
@@ -447,12 +481,17 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xe9d4,0x7d00	@ ldrd	r7, sp, [r4]")
 	TEST_UNSUPPORTED(".short 0xe9d4,0x7f00	@ ldrd	r7, pc, [r4]")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xe9ffec04) "	@ ldrd	r14, r12, [pc, #16]!")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8ffec04) "	@ ldrd	r14, r12, [pc], #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe9d4d800) "	@ ldrd	sp, r8, [r4]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe9d4f800) "	@ ldrd	pc, r8, [r4]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe9d47d00) "	@ ldrd	r7, sp, [r4]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe9d47f00) "	@ ldrd	r7, pc, [r4]")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRP("strd	r",0, VAL1,", r",1, VAL2,", [r",1, 24,", #-16]")
@@ -462,8 +501,13 @@ void kprobe_thumb32_test_cases(void)
 	TEST_RRP("strd	r",1, VAL1,", r",0, VAL2,", [r",7, 24,"], #16")
 	TEST_RR( "strd	r",7, VAL2,", r",8, VAL1,", [sp], #-16")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xe9ef,0xec04	@ strd	r14, r12, [pc, #16]!")
 	TEST_UNSUPPORTED(".short 0xe8ef,0xec04	@ strd	r14, r12, [pc], #16")
+=======
+	TEST_UNSUPPORTED(__inst_thumb32(0xe9efec04) "	@ strd	r14, r12, [pc, #16]!")
+	TEST_UNSUPPORTED(__inst_thumb32(0xe8efec04) "	@ strd	r14, r12, [pc], #16")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb32(0xe9efec04) "	@ strd	r14, r12, [pc, #16]!")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8efec04) "	@ strd	r14, r12, [pc], #16")
@@ -512,9 +556,15 @@ void kprobe_thumb32_test_cases(void)
 		"2:	nop		\n\t")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xe8d1,0xf01f	@ tbh [r1, pc]")
 	TEST_UNSUPPORTED(".short 0xe8d1,0xf01d	@ tbh [r1, sp]")
 	TEST_UNSUPPORTED(".short 0xe8dd,0xf012	@ tbh [sp, r2]")
+=======
+	TEST_UNSUPPORTED(__inst_thumb32(0xe8d1f01f) "	@ tbh [r1, pc]")
+	TEST_UNSUPPORTED(__inst_thumb32(0xe8d1f01d) "	@ tbh [r1, sp]")
+	TEST_UNSUPPORTED(__inst_thumb32(0xe8ddf012) "	@ tbh [sp, r2]")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8d1f01f) "	@ tbh [r1, pc]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xe8d1f01d) "	@ tbh [r1, sp]")
@@ -598,6 +648,7 @@ void kprobe_thumb32_test_cases(void)
 	TEST_RR("pkhtb	r14,r",12, HH1,", r",10,HH2,", asr #2")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xea17,0x0f0d	@ tst.w r7, sp")
 	TEST_UNSUPPORTED(".short 0xea17,0x0f0f	@ tst.w r7, pc")
 	TEST_UNSUPPORTED(".short 0xea1d,0x0f07	@ tst.w sp, r7")
@@ -633,6 +684,8 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xf04f,0x1d08	@ mov sp, #0x00080008")
 	TEST_UNSUPPORTED(".short 0xf04f,0x1f08	@ mov pc, #0x00080008")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xea170f0d) "	@ tst.w r7, sp")
 	TEST_UNSUPPORTED(__inst_thumb32(0xea170f0f) "	@ tst.w r7, pc")
 	TEST_UNSUPPORTED(__inst_thumb32(0xea1d0f07) "	@ tst.w sp, r7")
@@ -667,6 +720,9 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(__inst_thumb32(0xea4f0f07) "	@ mov.w  pc, r7")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf04f1d08) "	@ mov sp, #0x00080008")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf04f1f08) "	@ mov pc, #0x00080008")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R("add.w	r0, sp, r",1, 4,"")
@@ -675,6 +731,7 @@ void kprobe_thumb32_test_cases(void)
 	TEST_R("add	r0, sp, r",1, 16,", ror #1")
 	TEST_R("add.w	sp, sp, r",1, 4,"")
 	TEST_R("add	sp, sp, r",1, 4,", asl #3")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xeb0d,0x1d01	@ add sp, sp, r1, asl #4")
 	TEST_UNSUPPORTED(".short 0xeb0d,0x0d71	@ add sp, sp, r1, ror #1")
@@ -686,6 +743,8 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xeb0d,0x0d0f	@ add sp, sp, pc")
 	TEST_UNSUPPORTED(".short 0xeb0d,0x0d0d	@ add sp, sp, sp")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xeb0d1d01) "	@ add sp, sp, r1, asl #4")
 	TEST_UNSUPPORTED(__inst_thumb32(0xeb0d0d71) "	@ add sp, sp, r1, ror #1")
 	TEST(  "add.w	r0, sp, #24")
@@ -695,6 +754,9 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(__inst_thumb32(0xeb0d000d) "	@ add r0, sp, sp")
 	TEST_UNSUPPORTED(__inst_thumb32(0xeb0d0d0f) "	@ add sp, sp, pc")
 	TEST_UNSUPPORTED(__inst_thumb32(0xeb0d0d0d) "	@ add sp, sp, sp")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R("sub.w	r0, sp, r",1, 4,"")
@@ -703,6 +765,7 @@ void kprobe_thumb32_test_cases(void)
 	TEST_R("sub	r0, sp, r",1, 16,", ror #1")
 	TEST_R("sub.w	sp, sp, r",1, 4,"")
 	TEST_R("sub	sp, sp, r",1, 4,", asl #3")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xebad,0x1d01	@ sub sp, sp, r1, asl #4")
 	TEST_UNSUPPORTED(".short 0xebad,0x0d71	@ sub sp, sp, r1, ror #1")
@@ -753,6 +816,8 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xfc00,0x0000")
 	TEST_UNSUPPORTED(".short 0xfff0,0x0000")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xebad1d01) "	@ sub sp, sp, r1, asl #4")
 	TEST_UNSUPPORTED(__inst_thumb32(0xebad0d71) "	@ sub sp, sp, r1, ror #1")
 	TEST_UNSUPPORTED(__inst_thumb32(0xebad0f01) "	@ sub pc, sp, r1")
@@ -801,6 +866,9 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(__inst_thumb32(0xeff00000) "")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfc000000) "")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfff00000) "")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Data-processing (plain binary immediate)")
@@ -810,15 +878,21 @@ void kprobe_thumb32_test_cases(void)
 	TEST(  "addw	sp, sp, #0x20")
 	TEST(  "addw	r7,  pc, #0x888")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf20f,0x1f20	@ addw pc, pc, #0x120")
 	TEST_UNSUPPORTED(".short 0xf20d,0x1f20	@ addw pc, sp, #0x120")
 	TEST_UNSUPPORTED(".short 0xf20f,0x1d20	@ addw sp, pc, #0x120")
 	TEST_UNSUPPORTED(".short 0xf200,0x1d20	@ addw sp, r0, #0x120")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf20f1f20) "	@ addw pc, pc, #0x120")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf20d1f20) "	@ addw pc, sp, #0x120")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf20f1d20) "	@ addw sp, pc, #0x120")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2001d20) "	@ addw sp, r0, #0x120")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R("subw	r0,  r",1, VAL1,", #0x123")
@@ -826,23 +900,34 @@ void kprobe_thumb32_test_cases(void)
 	TEST(  "subw	sp, sp, #0x20")
 	TEST(  "subw	r7,  pc, #0x888")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf2af,0x1f20	@ subw pc, pc, #0x120")
 	TEST_UNSUPPORTED(".short 0xf2ad,0x1f20	@ subw pc, sp, #0x120")
 	TEST_UNSUPPORTED(".short 0xf2af,0x1d20	@ subw sp, pc, #0x120")
 	TEST_UNSUPPORTED(".short 0xf2a0,0x1d20	@ subw sp, r0, #0x120")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2af1f20) "	@ subw pc, pc, #0x120")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2ad1f20) "	@ subw pc, sp, #0x120")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2af1d20) "	@ subw sp, pc, #0x120")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2a01d20) "	@ subw sp, r0, #0x120")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST("movw	r0, #0")
 	TEST("movw	r0, #0xffff")
 	TEST("movw	lr, #0xffff")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf240,0x0d00	@ movw sp, #0")
 	TEST_UNSUPPORTED(".short 0xf240,0x0f00	@ movw pc, #0")
+=======
+	TEST_UNSUPPORTED(__inst_thumb32(0xf2400d00) "	@ movw sp, #0")
+	TEST_UNSUPPORTED(__inst_thumb32(0xf2400f00) "	@ movw pc, #0")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2400d00) "	@ movw sp, #0")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2400f00) "	@ movw pc, #0")
@@ -852,8 +937,13 @@ void kprobe_thumb32_test_cases(void)
 	TEST_R("movt	r",0, VAL2,", #0xffff")
 	TEST_R("movt	r",14,VAL1,", #0xffff")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf2c0,0x0d00	@ movt sp, #0")
 	TEST_UNSUPPORTED(".short 0xf2c0,0x0f00	@ movt pc, #0")
+=======
+	TEST_UNSUPPORTED(__inst_thumb32(0xf2c00d00) "	@ movt sp, #0")
+	TEST_UNSUPPORTED(__inst_thumb32(0xf2c00f00) "	@ movt pc, #0")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2c00d00) "	@ movt sp, #0")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf2c00f00) "	@ movt pc, #0")
@@ -864,21 +954,28 @@ void kprobe_thumb32_test_cases(void)
 	TEST_R(     "ssat	r0, #24, r",0,   VAL1,", lsl #8")
 	TEST_R(     "ssat	r14, #24, r",12, VAL2,", asr #8")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf30c,0x0d17	@ ssat	sp, #24, r12")
 	TEST_UNSUPPORTED(".short 0xf30c,0x0f17	@ ssat	pc, #24, r12")
 	TEST_UNSUPPORTED(".short 0xf30d,0x0c17	@ ssat	r12, #24, sp")
 	TEST_UNSUPPORTED(".short 0xf30f,0x0c17	@ ssat	r12, #24, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf30c0d17) "	@ ssat	sp, #24, r12")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf30c0f17) "	@ ssat	pc, #24, r12")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf30d0c17) "	@ ssat	r12, #24, sp")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf30f0c17) "	@ ssat	r12, #24, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R(     "usat	r0, #24, r",0,   VAL1,"")
 	TEST_R(     "usat	r14, #24, r",12, VAL2,"")
 	TEST_R(     "usat	r0, #24, r",0,   VAL1,", lsl #8")
 	TEST_R(     "usat	r14, #24, r",12, VAL2,", asr #8")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf38c,0x0d17	@ usat	sp, #24, r12")
 	TEST_UNSUPPORTED(".short 0xf38c,0x0f17	@ usat	pc, #24, r12")
@@ -899,6 +996,8 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xf3ad,0x0c0b	@ usat16	r12, #12, sp")
 	TEST_UNSUPPORTED(".short 0xf3af,0x0c0b	@ usat16	r12, #12, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf38c0d17) "	@ usat	sp, #24, r12")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf38c0f17) "	@ usat	pc, #24, r12")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf38d0c17) "	@ usat	r12, #24, sp")
@@ -917,42 +1016,58 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3ac0f0b) "	@ usat16	pc, #12, r12")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3ad0c0b) "	@ usat16	r12, #12, sp")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3af0c0b) "	@ usat16	r12, #12, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R(     "sbfx	r0, r",0  , VAL1,", #0, #31")
 	TEST_R(     "sbfx	r14, r",12, VAL2,", #8, #16")
 	TEST_R(     "sbfx	r4, r",10,  VAL1,", #16, #15")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf34c,0x2d0f	@ sbfx	sp, r12, #8, #16")
 	TEST_UNSUPPORTED(".short 0xf34c,0x2f0f	@ sbfx	pc, r12, #8, #16")
 	TEST_UNSUPPORTED(".short 0xf34d,0x2c0f	@ sbfx	r12, sp, #8, #16")
 	TEST_UNSUPPORTED(".short 0xf34f,0x2c0f	@ sbfx	r12, pc, #8, #16")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf34c2d0f) "	@ sbfx	sp, r12, #8, #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf34c2f0f) "	@ sbfx	pc, r12, #8, #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf34d2c0f) "	@ sbfx	r12, sp, #8, #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf34f2c0f) "	@ sbfx	r12, pc, #8, #16")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R(     "ubfx	r0, r",0  , VAL1,", #0, #31")
 	TEST_R(     "ubfx	r14, r",12, VAL2,", #8, #16")
 	TEST_R(     "ubfx	r4, r",10,  VAL1,", #16, #15")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf3cc,0x2d0f	@ ubfx	sp, r12, #8, #16")
 	TEST_UNSUPPORTED(".short 0xf3cc,0x2f0f	@ ubfx	pc, r12, #8, #16")
 	TEST_UNSUPPORTED(".short 0xf3cd,0x2c0f	@ ubfx	r12, sp, #8, #16")
 	TEST_UNSUPPORTED(".short 0xf3cf,0x2c0f	@ ubfx	r12, pc, #8, #16")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3cc2d0f) "	@ ubfx	sp, r12, #8, #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3cc2f0f) "	@ ubfx	pc, r12, #8, #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3cd2c0f) "	@ ubfx	r12, sp, #8, #16")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3cf2c0f) "	@ ubfx	r12, pc, #8, #16")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R(     "bfc	r",0, VAL1,", #4, #20")
 	TEST_R(     "bfc	r",14,VAL2,", #4, #20")
 	TEST_R(     "bfc	r",7, VAL1,", #0, #31")
 	TEST_R(     "bfc	r",8, VAL2,", #0, #31")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf36f,0x0d1e	@ bfc	sp, #0, #31")
 	TEST_UNSUPPORTED(".short 0xf36f,0x0f1e	@ bfc	pc, #0, #31")
@@ -963,6 +1078,8 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(".short 0xf36e,0x1f17	@ bfi	pc, r14, #4, #20")
 	TEST_UNSUPPORTED(".short 0xf36d,0x1e17	@ bfi	r14, sp, #4, #20")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf36f0d1e) "	@ bfc	sp, #0, #31")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf36f0f1e) "	@ bfc	pc, #0, #31")
 
@@ -971,6 +1088,9 @@ void kprobe_thumb32_test_cases(void)
 	TEST_UNSUPPORTED(__inst_thumb32(0xf36e1d17) "	@ bfi	sp, r14, #4, #20")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf36e1f17) "	@ bfi	pc, r14, #4, #20")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf36d1e17) "	@ bfi	r14, sp, #4, #20")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Branches and miscellaneous control")
@@ -1010,6 +1130,7 @@ CONDITION_INSTRUCTIONS(22,
 	TEST("mrs	r0, cpsr")
 	TEST("mrs	r14, cpsr")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf3ef,0x8d00	@ mrs	sp, spsr")
 	TEST_UNSUPPORTED(".short 0xf3ef,0x8f00	@ mrs	pc, spsr")
 	TEST_UNSUPPORTED("mrs	r0, spsr")
@@ -1019,6 +1140,8 @@ CONDITION_INSTRUCTIONS(22,
 
 	TEST_UNSUPPORTED(".short 0xf7f0,0xa000 @ undefeined")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3ef8d00) "	@ mrs	sp, spsr")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf3ef8f00) "	@ mrs	pc, spsr")
 	TEST_UNSUPPORTED("mrs	r0, spsr")
@@ -1027,6 +1150,9 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(__inst_thumb32(0xf7f08000) " @ smc #0")
 
 	TEST_UNSUPPORTED(__inst_thumb32(0xf7f0a000) " @ undefeined")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_BF(  "b.w	2f")
@@ -1075,6 +1201,7 @@ CONDITION_INSTRUCTIONS(22,
 
 	TEST("str	sp, [sp]")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf8cf,0xe000	@ str	r14, [pc]")
 	TEST_UNSUPPORTED(".short 0xf8ce,0xf000	@ str	pc, [r14]")
 
@@ -1085,6 +1212,8 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xf980,0x0000")
 	TEST_UNSUPPORTED(".short 0xf9ef,0xffff")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf8cfe000) "	@ str	r14, [pc]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf8cef000) "	@ str	pc, [r14]")
 
@@ -1094,6 +1223,9 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(__inst_thumb32(0xf92fffff) "")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf9800000) "")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf9efffff) "")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Load single data item and memory hints")
@@ -1139,6 +1271,7 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_SUPPORTED("ldr	pc, 99f")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xf854,0x700d	@ ldr	r7, [r4, sp]")
 	TEST_UNSUPPORTED(".short 0xf854,0x700f	@ ldr	r7, [r4, pc]")
 	TEST_UNSUPPORTED(".short 0xf814,0x700d	@ ldrb	r7, [r4, sp]")
@@ -1154,6 +1287,8 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xf800,0x0800") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xf97f,0xfaff") /* Unallocated space */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xf854700d) "	@ ldr	r7, [r4, sp]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf854700f) "	@ ldr	r7, [r4, pc]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf814700d) "	@ ldrb	r7, [r4, sp]")
@@ -1168,6 +1303,9 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(__inst_thumb32(0xf95fffff) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xf8000800) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xf97ffaff) "") /* Unallocated space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST(   "pli	[pc, #4]")
@@ -1177,21 +1315,28 @@ CONDITION_INSTRUCTIONS(22,
 
 	TEST_P( "pld	[r",0,-1024,", #1024]")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST(   ".short 0xf8b0,0xf400	@ pldw	[r0, #1024]")
 	TEST_P( "pli	[r",4, 0b,", #1024]")
 	TEST_P( "pld	[r",7, 120,", #-120]")
 	TEST(   ".short 0xf837,0xfc78	@ pldw	[r7, #-120]")
 =======
+=======
+>>>>>>> v3.18
 	TEST(   __inst_thumb32(0xf8b0f400) "	@ pldw	[r0, #1024]")
 	TEST_P( "pli	[r",4, 0b,", #1024]")
 	TEST_P( "pld	[r",7, 120,", #-120]")
 	TEST(   __inst_thumb32(0xf837fc78) "	@ pldw	[r7, #-120]")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TEST_P( "pli	[r",11,120,", #-120]")
 	TEST(   "pld	[sp, #0]")
 
 	TEST_PR("pld	[r",7, 24, ", r",0, 16,"]")
 	TEST_PR("pld	[r",8, 24, ", r",12,16,", lsl #3]")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_SUPPORTED(".short 0xf837,0xf000	@ pldw	[r7, r0]")
 	TEST_SUPPORTED(".short 0xf838,0xf03c	@ pldw	[r8, r12, lsl #3]");
@@ -1201,6 +1346,8 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xf817,0xf00d  @pld	[r7, sp]")
 	TEST_UNSUPPORTED(".short 0xf817,0xf00f  @pld	[r7, pc]")
 =======
+=======
+>>>>>>> v3.18
 	TEST_SUPPORTED(__inst_thumb32(0xf837f000) "	@ pldw	[r7, r0]")
 	TEST_SUPPORTED(__inst_thumb32(0xf838f03c) "	@ pldw	[r8, r12, lsl #3]");
 	TEST_RR("pli	[r",12,0b,", r",0, 16,"]")
@@ -1208,6 +1355,9 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_R( "pld	[sp, r",1, 16,"]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf817f00d) "  @pld	[r7, sp]")
 	TEST_UNSUPPORTED(__inst_thumb32(0xf817f00f) "  @pld	[r7, pc]")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Data-processing (register)")
@@ -1226,6 +1376,7 @@ CONDITION_INSTRUCTIONS(22,
 	SHIFTS32("rors")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfa01,0xff02	@ lsl	pc, r1, r2")
 	TEST_UNSUPPORTED(".short 0xfa01,0xfd02	@ lsl	sp, r1, r2")
 	TEST_UNSUPPORTED(".short 0xfa0f,0xf002	@ lsl	r0, pc, r2")
@@ -1233,12 +1384,17 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xfa01,0xf00f	@ lsl	r0, r1, pc")
 	TEST_UNSUPPORTED(".short 0xfa01,0xf00d	@ lsl	r0, r1, sp")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa01ff02) "	@ lsl	pc, r1, r2")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa01fd02) "	@ lsl	sp, r1, r2")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa0ff002) "	@ lsl	r0, pc, r2")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa0df002) "	@ lsl	r0, sp, r2")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa01f00f) "	@ lsl	r0, r1, pc")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa01f00d) "	@ lsl	r0, r1, sp")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "sxtah	r0, r",0,  HH1,", r",1, HH2,"")
@@ -1246,15 +1402,21 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_R(     "sxth	r8, r",7,  HH1,"")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfa0f,0xff87	@ sxth	pc, r7");
 	TEST_UNSUPPORTED(".short 0xfa0f,0xfd87	@ sxth	sp, r7");
 	TEST_UNSUPPORTED(".short 0xfa0f,0xf88f	@ sxth	r8, pc");
 	TEST_UNSUPPORTED(".short 0xfa0f,0xf88d	@ sxth	r8, sp");
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa0fff87) "	@ sxth	pc, r7");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa0ffd87) "	@ sxth	sp, r7");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa0ff88f) "	@ sxth	r8, pc");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa0ff88d) "	@ sxth	r8, sp");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "uxtah	r0, r",0,  HH1,", r",1, HH2,"")
@@ -1278,8 +1440,13 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_R(     "uxtb	r8, r",7,  HH1,"")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfa60,0x00f0")
 	TEST_UNSUPPORTED(".short 0xfa7f,0xffff")
+=======
+	TEST_UNSUPPORTED(__inst_thumb32(0xfa6000f0) "")
+	TEST_UNSUPPORTED(__inst_thumb32(0xfa7fffff) "")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa6000f0) "")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa7fffff) "")
@@ -1332,15 +1499,21 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_R("revsh	r14, r",12, VAL2,"")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfa9c,0xff8c	@ rev	pc, r12");
 	TEST_UNSUPPORTED(".short 0xfa9c,0xfd8c	@ rev	sp, r12");
 	TEST_UNSUPPORTED(".short 0xfa9f,0xfe8f	@ rev	r14, pc");
 	TEST_UNSUPPORTED(".short 0xfa9d,0xfe8d	@ rev	r14, sp");
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa9cff8c) "	@ rev	pc, r12");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa9cfd8c) "	@ rev	sp, r12");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa9ffe8f) "	@ rev	r14, pc");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa9dfe8d) "	@ rev	r14, sp");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR("sel	r0, r",0,  VAL1,", r",1, VAL2,"")
@@ -1351,21 +1524,28 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_R("clz	lr, r",7, 0xffffffff,"")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfa80,0xf030") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xfaff,0xff7f") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xfab0,0xf000") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xfaff,0xff7f") /* Unallocated space */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfa80f030) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfaffff7f) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfab0f000) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfaffff7f) "") /* Unallocated space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Multiply, multiply accumulate, and absolute difference operations")
 
 	TEST_RR(    "mul	r0, r",1, VAL1,", r",2, VAL2,"")
 	TEST_RR(    "mul	r7, r",8, VAL2,", r",9, VAL2,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfb08,0xff09	@ mul	pc, r8, r9")
 	TEST_UNSUPPORTED(".short 0xfb08,0xfd09	@ mul	sp, r8, r9")
@@ -1384,6 +1564,8 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xfb08,0xa70d	@ mla	r7, r8, sp, r10");
 	TEST_UNSUPPORTED(".short 0xfb08,0xd709	@ mla	r7, r8, r9, sp");
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb08ff09) "	@ mul	pc, r8, r9")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb08fd09) "	@ mul	sp, r8, r9")
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb0ff709) "	@ mul	r7, pc, r9")
@@ -1400,6 +1582,9 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb08a70f) "	@ mla	r7, r8, pc, r10");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb08a70d) "	@ mla	r7, r8, sp, r10");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb08d709) "	@ mla	r7, r8, r9, sp");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRR(   "mls	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
@@ -1469,6 +1654,7 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_RR(    "usad8	r14, r",12,VAL2,", r",10,VAL1,"")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfb00,0xf010") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xfb0f,0xff1f") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xfb70,0xf010") /* Unallocated space */
@@ -1476,18 +1662,24 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xfb70,0x0010") /* Unallocated space */
 	TEST_UNSUPPORTED(".short 0xfb7f,0xff1f") /* Unallocated space */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb00f010) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb0fff1f) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb70f010) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb7fff1f) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb700010) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb7fff1f) "") /* Unallocated space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Long multiply, long multiply accumulate, and divide")
 
 	TEST_RR(   "smull	r0, r1, r",2, VAL1,", r",3, VAL2,"")
 	TEST_RR(   "smull	r7, r8, r",9, VAL2,", r",10, VAL1,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfb89,0xf80a	@ smull	pc, r8, r9, r10");
 	TEST_UNSUPPORTED(".short 0xfb89,0xd80a	@ smull	sp, r8, r9, r10");
@@ -1498,6 +1690,8 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(".short 0xfb89,0x780f	@ smull	r7, r8, r9, pc");
 	TEST_UNSUPPORTED(".short 0xfb89,0x780d	@ smull	r7, r8, r9, sp");
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb89f80a) "	@ smull	pc, r8, r9, r10");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb89d80a) "	@ smull	sp, r8, r9, r10");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb897f0a) "	@ smull	r7, pc, r9, r10");
@@ -1506,6 +1700,9 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb8d780a) "	@ smull	r7, r8, sp, r10");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb89780f) "	@ smull	r7, r8, r9, pc");
 	TEST_UNSUPPORTED(__inst_thumb32(0xfb89780d) "	@ smull	r7, r8, r9, sp");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(   "umull	r0, r1, r",2, VAL1,", r",3, VAL2,"")
@@ -1541,8 +1738,13 @@ CONDITION_INSTRUCTIONS(22,
 	TEST_GROUP("Coprocessor instructions")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".short 0xfc00,0x0000")
 	TEST_UNSUPPORTED(".short 0xffff,0xffff")
+=======
+	TEST_UNSUPPORTED(__inst_thumb32(0xfc000000) "")
+	TEST_UNSUPPORTED(__inst_thumb32(0xffffffff) "")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_thumb32(0xfc000000) "")
 	TEST_UNSUPPORTED(__inst_thumb32(0xffffffff) "")

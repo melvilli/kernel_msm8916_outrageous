@@ -1,9 +1,12 @@
 #!/bin/bash
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SPATCH="`which ${SPATCH:=spatch}`"
 
 =======
+=======
+>>>>>>> v3.18
 #
 # This script requires at least spatch
 # version 1.0.0-rc11.
@@ -14,13 +17,20 @@ SPATCH="`which ${SPATCH:=spatch}`"
 trap kill_running SIGTERM SIGINT
 declare -a SPATCH_PID
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # The verbosity may be set by the environmental parameter V=
 # as for example with 'make V=1 coccicheck'
 
 if [ -n "$V" -a "$V" != "0" ]; then
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VERBOSE=1
+=======
+	VERBOSE="$V"
+>>>>>>> v3.18
 =======
 	VERBOSE="$V"
 >>>>>>> v3.18
@@ -29,8 +39,11 @@ else
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 FLAGS="$SPFLAGS -very_quiet"
 =======
+=======
+>>>>>>> v3.18
 if [ -z "$J" ]; then
 	NPROC=$(getconf _NPROCESSORS_ONLN)
 else
@@ -38,6 +51,9 @@ else
 fi
 
 FLAGS="$SPFLAGS --very-quiet"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # spatch only allows include directories with the syntax "-I include"
@@ -55,9 +71,15 @@ else
     ONLINE=0
     if [ "$KBUILD_EXTMOD" = "" ] ; then
 <<<<<<< HEAD
+<<<<<<< HEAD
         OPTIONS="-dir $srctree $COCCIINCLUDE"
     else
         OPTIONS="-dir $KBUILD_EXTMOD $COCCIINCLUDE"
+=======
+        OPTIONS="--dir $srctree $COCCIINCLUDE"
+    else
+        OPTIONS="--dir $KBUILD_EXTMOD $COCCIINCLUDE"
+>>>>>>> v3.18
 =======
         OPTIONS="--dir $srctree $COCCIINCLUDE"
     else
@@ -68,7 +90,11 @@ fi
 
 if [ "$KBUILD_EXTMOD" != "" ] ; then
 <<<<<<< HEAD
+<<<<<<< HEAD
     OPTIONS="-patch $srctree $OPTIONS"
+=======
+    OPTIONS="--patch $srctree $OPTIONS"
+>>>>>>> v3.18
 =======
     OPTIONS="--patch $srctree $OPTIONS"
 >>>>>>> v3.18
@@ -82,6 +108,7 @@ fi
 if [ "$MODE" = "" ] ; then
     if [ "$ONLINE" = "0" ] ; then
 <<<<<<< HEAD
+<<<<<<< HEAD
 	echo 'You have not explicitly specified the mode to use. Using default "chain" mode.'
 	echo 'All available modes will be tried (in that order): patch, report, context, org'
 	echo 'You can specify the mode with "make coccicheck MODE=<mode>"'
@@ -90,6 +117,8 @@ if [ "$MODE" = "" ] ; then
 elif [ "$MODE" = "report" -o "$MODE" = "org" ] ; then
     FLAGS="$FLAGS -no_show_diff"
 =======
+=======
+>>>>>>> v3.18
 	echo 'You have not explicitly specified the mode to use. Using default "report" mode.'
 	echo 'Available modes are the following: patch, report, context, org'
 	echo 'You can specify the mode with "make coccicheck MODE=<mode>"'
@@ -105,6 +134,9 @@ if [ "$MODE" = "chain" ] ; then
     fi
 elif [ "$MODE" = "report" -o "$MODE" = "org" ] ; then
     FLAGS="$FLAGS --no-show-diff"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fi
 
@@ -117,6 +149,7 @@ fi
 
 run_cmd() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if [ $VERBOSE -ne 0 ] ; then
 		echo "Running: $@"
 	fi
@@ -124,6 +157,8 @@ run_cmd() {
 }
 
 =======
+=======
+>>>>>>> v3.18
 	local i
 	if [ $VERBOSE -ne 0 ] ; then
 		echo "Running ($NPROC in parallel): $@"
@@ -146,6 +181,9 @@ kill_running() {
 		kill ${SPATCH_PID[$i]} 2>/dev/null
 	done
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 coccinelle () {
@@ -154,7 +192,11 @@ coccinelle () {
     OPT=`grep "Option" $COCCI | cut -d':' -f2`
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #   The option '-parse_cocci' can be used to syntactically check the SmPL files.
+=======
+#   The option '--parse-cocci' can be used to syntactically check the SmPL files.
+>>>>>>> v3.18
 =======
 #   The option '--parse-cocci' can be used to syntactically check the SmPL files.
 >>>>>>> v3.18
@@ -199,6 +241,7 @@ coccinelle () {
     if [ "$MODE" = "chain" ] ; then
 	run_cmd $SPATCH -D patch   \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$FLAGS -sp_file $COCCI $OPT $OPTIONS               || \
 	run_cmd $SPATCH -D report  \
 		$FLAGS -sp_file $COCCI $OPT $OPTIONS -no_show_diff || \
@@ -214,6 +257,8 @@ coccinelle () {
     else
 	run_cmd $SPATCH -D $MODE   $FLAGS -sp_file $COCCI $OPT $OPTIONS || exit 1
 =======
+=======
+>>>>>>> v3.18
 		$FLAGS --cocci-file $COCCI $OPT $OPTIONS               || \
 	run_cmd $SPATCH -D report  \
 		$FLAGS --cocci-file $COCCI $OPT $OPTIONS --no-show-diff || \
@@ -228,6 +273,9 @@ coccinelle () {
 		$FLAGS --cocci-file $COCCI $OPT $OPTIONS || exit 1
     else
 	run_cmd $SPATCH -D $MODE   $FLAGS --cocci-file $COCCI $OPT $OPTIONS || exit 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     fi
 

@@ -22,6 +22,7 @@
 #include <linux/clocksource.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __init shmobile_setup_delay(unsigned int max_cpu_core_mhz,
 				 unsigned int mult, unsigned int div)
@@ -29,6 +30,8 @@ void __init shmobile_setup_delay(unsigned int max_cpu_core_mhz,
 	/* calculate a worst-case loops-per-jiffy value
 	 * based on maximum cpu core mhz setting and the
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 
 static void __init shmobile_setup_delay_hz(unsigned int max_cpu_core_hz,
@@ -36,6 +39,9 @@ static void __init shmobile_setup_delay_hz(unsigned int max_cpu_core_hz,
 {
 	/* calculate a worst-case loops-per-jiffy value
 	 * based on maximum cpu core hz setting and the
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * __delay() implementation in arch/arm/lib/delay.S
 	 *
@@ -44,11 +50,14 @@ static void __init shmobile_setup_delay_hz(unsigned int max_cpu_core_hz,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int value = (1000000 * mult) / (HZ * div);
 
 	if (!preset_lpj)
 		preset_lpj = max_cpu_core_mhz * value;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int value = HZ * div / mult;
 
 	if (!preset_lpj)
@@ -89,6 +98,9 @@ void __init shmobile_init_delay(void)
 		shmobile_setup_delay_hz(max_freq, 1, 3);
 	else if (is_a15 && !IS_ENABLED(CONFIG_ARM_ARCH_TIMER))
 		shmobile_setup_delay_hz(max_freq, 2, 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -113,9 +125,12 @@ void __init shmobile_earlytimer_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init shmobile_timer_init(void)
 {
 	clocksource_of_init();
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

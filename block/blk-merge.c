@@ -7,13 +7,17 @@
 #include <linux/blkdev.h>
 #include <linux/scatterlist.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/security.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 #include "blk.h"
 
 static unsigned int __blk_recalc_rq_segments(struct request_queue *q,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					     struct bio *bio)
 {
@@ -22,6 +26,8 @@ static unsigned int __blk_recalc_rq_segments(struct request_queue *q,
 	unsigned int seg_size, nr_phys_segs;
 	struct bio *fbio, *bbio;
 =======
+=======
+>>>>>>> v3.18
 					     struct bio *bio,
 					     bool no_sg_merge)
 {
@@ -30,13 +36,19 @@ static unsigned int __blk_recalc_rq_segments(struct request_queue *q,
 	unsigned int seg_size, nr_phys_segs;
 	struct bio *fbio, *bbio;
 	struct bvec_iter iter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!bio)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This should probably be returning 0, but blk_add_request_payload()
 	 * (Christoph!!!!)
@@ -47,11 +59,15 @@ static unsigned int __blk_recalc_rq_segments(struct request_queue *q,
 	if (bio->bi_rw & REQ_WRITE_SAME)
 		return 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fbio = bio;
 	cluster = blk_queue_cluster(q);
 	seg_size = 0;
 	nr_phys_segs = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_bio(bio) {
 		bio_for_each_segment(bv, bio, i) {
@@ -74,6 +90,8 @@ static unsigned int __blk_recalc_rq_segments(struct request_queue *q,
 
 				seg_size += bv->bv_len;
 =======
+=======
+>>>>>>> v3.18
 	high = 0;
 	for_each_bio(bio) {
 		bio_for_each_segment(bv, bio, iter) {
@@ -100,6 +118,9 @@ static unsigned int __blk_recalc_rq_segments(struct request_queue *q,
 					goto new_segment;
 
 				seg_size += bv.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				bvprv = bv;
 				continue;
@@ -112,7 +133,11 @@ new_segment:
 			nr_phys_segs++;
 			bvprv = bv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seg_size = bv->bv_len;
+=======
+			seg_size = bv.bv_len;
+>>>>>>> v3.18
 =======
 			seg_size = bv.bv_len;
 >>>>>>> v3.18
@@ -132,18 +157,25 @@ new_segment:
 void blk_recalc_rq_segments(struct request *rq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq->nr_phys_segments = __blk_recalc_rq_segments(rq->q, rq->bio);
 =======
+=======
+>>>>>>> v3.18
 	bool no_sg_merge = !!test_bit(QUEUE_FLAG_NO_SG_MERGE,
 			&rq->q->queue_flags);
 
 	rq->nr_phys_segments = __blk_recalc_rq_segments(rq->q, rq->bio,
 			no_sg_merge);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void blk_recount_segments(struct request_queue *q, struct bio *bio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bio *nxt = bio->bi_next;
 
@@ -151,6 +183,8 @@ void blk_recount_segments(struct request_queue *q, struct bio *bio)
 	bio->bi_phys_segments = __blk_recalc_rq_segments(q, bio);
 	bio->bi_next = nxt;
 =======
+=======
+>>>>>>> v3.18
 	unsigned short seg_cnt;
 
 	/* estimate segment number by bi_vcnt for non-cloned bio */
@@ -170,6 +204,9 @@ void blk_recount_segments(struct request_queue *q, struct bio *bio)
 		bio->bi_next = nxt;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bio->bi_flags |= (1 << BIO_SEG_VALID);
 }
@@ -179,6 +216,12 @@ static int blk_phys_contig_segment(struct request_queue *q, struct bio *bio,
 				   struct bio *nxt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bio_vec end_bv = { NULL }, nxt_bv;
+	struct bvec_iter iter;
+
+>>>>>>> v3.18
 =======
 	struct bio_vec end_bv = { NULL }, nxt_bv;
 	struct bvec_iter iter;
@@ -195,8 +238,11 @@ static int blk_phys_contig_segment(struct request_queue *q, struct bio *bio,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!BIOVEC_PHYS_MERGEABLE(__BVEC_END(bio), __BVEC_START(nxt)))
 =======
+=======
+>>>>>>> v3.18
 	bio_for_each_segment(end_bv, bio, iter)
 		if (end_bv.bv_len == iter.bi_size)
 			break;
@@ -204,6 +250,9 @@ static int blk_phys_contig_segment(struct request_queue *q, struct bio *bio,
 	nxt_bv = bio_iovec(nxt);
 
 	if (!BIOVEC_PHYS_MERGEABLE(&end_bv, &nxt_bv))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -212,7 +261,11 @@ static int blk_phys_contig_segment(struct request_queue *q, struct bio *bio,
 	 * these two to be merged into one
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BIO_SEG_BOUNDARY(q, bio, nxt))
+=======
+	if (BIOVEC_SEG_BOUNDARY(q, &end_bv, &nxt_bv))
+>>>>>>> v3.18
 =======
 	if (BIOVEC_SEG_BOUNDARY(q, &end_bv, &nxt_bv))
 >>>>>>> v3.18
@@ -222,9 +275,15 @@ static int blk_phys_contig_segment(struct request_queue *q, struct bio *bio,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 __blk_segment_map_sg(struct request_queue *q, struct bio_vec *bvec,
 		     struct scatterlist *sglist, struct bio_vec **bvprv,
+=======
+static inline void
+__blk_segment_map_sg(struct request_queue *q, struct bio_vec *bvec,
+		     struct scatterlist *sglist, struct bio_vec *bvprv,
+>>>>>>> v3.18
 =======
 static inline void
 __blk_segment_map_sg(struct request_queue *q, struct bio_vec *bvec,
@@ -236,6 +295,7 @@ __blk_segment_map_sg(struct request_queue *q, struct bio_vec *bvec,
 	int nbytes = bvec->bv_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*bvprv && *cluster) {
 		if ((*sg)->length + nbytes > queue_max_segment_size(q))
 			goto new_segment;
@@ -244,6 +304,8 @@ __blk_segment_map_sg(struct request_queue *q, struct bio_vec *bvec,
 			goto new_segment;
 		if (!BIOVEC_SEG_BOUNDARY(q, *bvprv, bvec))
 =======
+=======
+>>>>>>> v3.18
 	if (*sg && *cluster) {
 		if ((*sg)->length + nbytes > queue_max_segment_size(q))
 			goto new_segment;
@@ -251,6 +313,9 @@ __blk_segment_map_sg(struct request_queue *q, struct bio_vec *bvec,
 		if (!BIOVEC_PHYS_MERGEABLE(bvprv, bvec))
 			goto new_segment;
 		if (!BIOVEC_SEG_BOUNDARY(q, bvprv, bvec))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto new_segment;
 
@@ -278,8 +343,11 @@ new_segment:
 		(*nsegs)++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*bvprv = bvec;
 =======
+=======
+>>>>>>> v3.18
 	*bvprv = *bvec;
 }
 
@@ -323,6 +391,9 @@ single_segment:
 					     &nsegs, &cluster);
 
 	return nsegs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -333,6 +404,7 @@ single_segment:
 int blk_rq_map_sg(struct request_queue *q, struct request *rq,
 		  struct scatterlist *sglist)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bio_vec *bvec, *bvprv;
 	struct req_iterator iter;
@@ -353,11 +425,16 @@ int blk_rq_map_sg(struct request_queue *q, struct request *rq,
 	} /* segments in rq */
 
 =======
+=======
+>>>>>>> v3.18
 	struct scatterlist *sg = NULL;
 	int nsegs = 0;
 
 	if (rq->bio)
 		nsegs = __blk_bios_map_sg(q, rq->bio, sglist, &sg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(rq->cmd_flags & REQ_COPY_USER) &&
@@ -405,6 +482,7 @@ int blk_bio_map_sg(struct request_queue *q, struct bio *bio,
 		   struct scatterlist *sglist)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec, *bvprv;
 	struct scatterlist *sg;
 	int nsegs, cluster;
@@ -421,6 +499,8 @@ int blk_bio_map_sg(struct request_queue *q, struct bio *bio,
 	} /* segments in bio */
 
 =======
+=======
+>>>>>>> v3.18
 	struct scatterlist *sg = NULL;
 	int nsegs;
 	struct bio *next = bio->bi_next;
@@ -428,6 +508,9 @@ int blk_bio_map_sg(struct request_queue *q, struct bio *bio,
 
 	nsegs = __blk_bios_map_sg(q, bio, sglist, &sg);
 	bio->bi_next = next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sg)
 		sg_mark_end(sg);
@@ -447,7 +530,11 @@ static inline int ll_new_hw_segment(struct request_queue *q,
 		goto no_merge;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio_integrity(bio) && blk_integrity_merge_bio(q, req, bio))
+=======
+	if (blk_integrity_merge_bio(q, req, bio) == false)
+>>>>>>> v3.18
 =======
 	if (blk_integrity_merge_bio(q, req, bio) == false)
 >>>>>>> v3.18
@@ -504,7 +591,10 @@ int ll_front_merge_fn(struct request_queue *q, struct request *req,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * blk-mq uses req->special to carry normal driver per-request payload, it
  * does not indicate a prepared command that we cannot merge with.
@@ -516,6 +606,9 @@ static bool req_no_special_merge(struct request *req)
 	return !q->mq_ops && req->special;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ll_merge_requests_fn(struct request_queue *q, struct request *req,
 				struct request *next)
@@ -529,7 +622,11 @@ static int ll_merge_requests_fn(struct request_queue *q, struct request *req,
 	 * requests.  Can't merge them if they are.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->special || next->special)
+=======
+	if (req_no_special_merge(req) || req_no_special_merge(next))
+>>>>>>> v3.18
 =======
 	if (req_no_special_merge(req) || req_no_special_merge(next))
 >>>>>>> v3.18
@@ -555,7 +652,11 @@ static int ll_merge_requests_fn(struct request_queue *q, struct request *req,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (blk_integrity_rq(req) && blk_integrity_merge_rq(q, req, next))
+=======
+	if (blk_integrity_merge_rq(q, req, next) == false)
+>>>>>>> v3.18
 =======
 	if (blk_integrity_merge_rq(q, req, next) == false)
 >>>>>>> v3.18
@@ -634,7 +735,11 @@ static int attempt_merge(struct request_queue *q, struct request *req,
 	if (rq_data_dir(req) != rq_data_dir(next)
 	    || req->rq_disk != next->rq_disk
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    || next->special)
+=======
+	    || req_no_special_merge(next))
+>>>>>>> v3.18
 =======
 	    || req_no_special_merge(next))
 >>>>>>> v3.18
@@ -726,6 +831,11 @@ int blk_attempt_req_merge(struct request_queue *q, struct request *rq,
 bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct request_queue *q = rq->q;
+
+>>>>>>> v3.18
 =======
 	struct request_queue *q = rq->q;
 
@@ -742,17 +852,23 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 
 	/* must be same device and not a special request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rq->rq_disk != bio->bi_bdev->bd_disk || rq->special)
 		return false;
 
 	/* only merge integrity protected bio into ditto rq */
 	if (bio_integrity(bio) != blk_integrity_rq(rq))
 =======
+=======
+>>>>>>> v3.18
 	if (rq->rq_disk != bio->bi_bdev->bd_disk || req_no_special_merge(rq))
 		return false;
 
 	/* only merge integrity protected bio into ditto rq */
 	if (blk_integrity_merge_bio(rq->q, rq, bio) == false)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 
@@ -762,10 +878,13 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Don't merge bios of files with different encryption */
 	if (!security_allow_merge_bio(rq->bio, bio))
 		return false;
 =======
+=======
+>>>>>>> v3.18
 	if (q->queue_flags & (1 << QUEUE_FLAG_SG_GAPS)) {
 		struct bio_vec *bprev;
 
@@ -773,6 +892,9 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 		if (bvec_gap_to_prev(bprev, bio->bi_io_vec[0].bv_offset))
 			return false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
@@ -781,9 +903,15 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 int blk_try_merge(struct request *rq, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (blk_rq_pos(rq) + blk_rq_sectors(rq) == bio->bi_sector)
 		return ELEVATOR_BACK_MERGE;
 	else if (blk_rq_pos(rq) - bio_sectors(bio) == bio->bi_sector)
+=======
+	if (blk_rq_pos(rq) + blk_rq_sectors(rq) == bio->bi_iter.bi_sector)
+		return ELEVATOR_BACK_MERGE;
+	else if (blk_rq_pos(rq) - bio_sectors(bio) == bio->bi_iter.bi_sector)
+>>>>>>> v3.18
 =======
 	if (blk_rq_pos(rq) + blk_rq_sectors(rq) == bio->bi_iter.bi_sector)
 		return ELEVATOR_BACK_MERGE;

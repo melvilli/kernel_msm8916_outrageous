@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -11,6 +15,10 @@
 #include <linux/hardirq.h>
 #include <linux/perf_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/tracepoint.h>
+>>>>>>> v3.18
 =======
 #include <linux/tracepoint.h>
 >>>>>>> v3.18
@@ -45,6 +53,12 @@ const char *ftrace_print_symbols_seq_u64(struct trace_seq *p,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const char *ftrace_print_bitmask_seq(struct trace_seq *p, void *bitmask_ptr,
+				     unsigned int bitmask_size);
+
+>>>>>>> v3.18
 =======
 const char *ftrace_print_bitmask_seq(struct trace_seq *p, void *bitmask_ptr,
 				     unsigned int bitmask_size);
@@ -177,6 +191,11 @@ void trace_current_buffer_discard_commit(struct ring_buffer *buffer,
 void tracing_record_cmdline(struct task_struct *tsk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int ftrace_output_call(struct trace_iterator *iter, char *name, char *fmt, ...);
+
+>>>>>>> v3.18
 =======
 int ftrace_output_call(struct trace_iterator *iter, char *name, char *fmt, ...);
 
@@ -216,7 +235,10 @@ extern int ftrace_event_reg(struct ftrace_event_call *event,
 			    enum trace_reg type, void *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ftrace_output_event(struct trace_iterator *iter, struct ftrace_event_call *event,
 			char *fmt, ...);
 
@@ -243,6 +265,9 @@ int ftrace_event_define_field(struct ftrace_event_call *call,
 			      char *type, int len, char *item, int offset,
 			      int field_size, int sign, int filter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	TRACE_EVENT_FL_FILTERED_BIT,
@@ -251,6 +276,11 @@ enum {
 	TRACE_EVENT_FL_IGNORE_ENABLE_BIT,
 	TRACE_EVENT_FL_WAS_ENABLED_BIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_EVENT_FL_USE_CALL_FILTER_BIT,
+	TRACE_EVENT_FL_TRACEPOINT_BIT,
+>>>>>>> v3.18
 =======
 	TRACE_EVENT_FL_USE_CALL_FILTER_BIT,
 	TRACE_EVENT_FL_TRACEPOINT_BIT,
@@ -267,6 +297,11 @@ enum {
  *                    (used for module unloading, if a module event is enabled,
  *                     it is best to clear the buffers that used it).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  USE_CALL_FILTER - For ftrace internal events, don't use file filter
+ *  TRACEPOINT    - Event is a tracepoint
+>>>>>>> v3.18
 =======
  *  USE_CALL_FILTER - For ftrace internal events, don't use file filter
  *  TRACEPOINT    - Event is a tracepoint
@@ -279,6 +314,11 @@ enum {
 	TRACE_EVENT_FL_IGNORE_ENABLE	= (1 << TRACE_EVENT_FL_IGNORE_ENABLE_BIT),
 	TRACE_EVENT_FL_WAS_ENABLED	= (1 << TRACE_EVENT_FL_WAS_ENABLED_BIT),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_EVENT_FL_USE_CALL_FILTER	= (1 << TRACE_EVENT_FL_USE_CALL_FILTER_BIT),
+	TRACE_EVENT_FL_TRACEPOINT	= (1 << TRACE_EVENT_FL_TRACEPOINT_BIT),
+>>>>>>> v3.18
 =======
 	TRACE_EVENT_FL_USE_CALL_FILTER	= (1 << TRACE_EVENT_FL_USE_CALL_FILTER_BIT),
 	TRACE_EVENT_FL_TRACEPOINT	= (1 << TRACE_EVENT_FL_TRACEPOINT_BIT),
@@ -289,12 +329,15 @@ struct ftrace_event_call {
 	struct list_head	list;
 	struct ftrace_event_class *class;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			*name;
 	struct trace_event	event;
 	const char		*print_fmt;
 	struct event_filter	*filter;
 	struct list_head	*files;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		char			*name;
 		/* Set TRACE_EVENT_FL_TRACEPOINT flag when using "tp" */
@@ -303,6 +346,9 @@ struct ftrace_event_call {
 	struct trace_event	event;
 	const char		*print_fmt;
 	struct event_filter	*filter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void			*mod;
 	void			*data;
@@ -313,6 +359,11 @@ struct ftrace_event_call {
 	 *   bit 3:		ftrace internal event (do not enable)
 	 *   bit 4:		Event was enabled by module
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 *   bit 5:		use call filter rather than file filter
+	 *   bit 6:		Event is a tracepoint
+>>>>>>> v3.18
 =======
 	 *   bit 5:		use call filter rather than file filter
 	 *   bit 6:		Event is a tracepoint
@@ -324,10 +375,13 @@ struct ftrace_event_call {
 	int				perf_refcount;
 	struct hlist_head __percpu	*perf_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	int	(*perf_perm)(struct ftrace_event_call *,
 			     struct perf_event *);
@@ -343,6 +397,9 @@ ftrace_event_name(struct ftrace_event_call *call)
 		return call->name;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct trace_array;
 struct ftrace_subsystem_dir;
@@ -351,15 +408,21 @@ enum {
 	FTRACE_EVENT_FL_ENABLED_BIT,
 	FTRACE_EVENT_FL_RECORDED_CMD_BIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FTRACE_EVENT_FL_SOFT_MODE_BIT,
 	FTRACE_EVENT_FL_SOFT_DISABLED_BIT,
 =======
+=======
+>>>>>>> v3.18
 	FTRACE_EVENT_FL_FILTERED_BIT,
 	FTRACE_EVENT_FL_NO_SET_FILTER_BIT,
 	FTRACE_EVENT_FL_SOFT_MODE_BIT,
 	FTRACE_EVENT_FL_SOFT_DISABLED_BIT,
 	FTRACE_EVENT_FL_TRIGGER_MODE_BIT,
 	FTRACE_EVENT_FL_TRIGGER_COND_BIT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -368,10 +431,13 @@ enum {
  *  ENABLED	  - The event is enabled
  *  RECORDED_CMD  - The comms should be recorded at sched_switch
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  SOFT_MODE     - The event is enabled/disabled by SOFT_DISABLED
  *  SOFT_DISABLED - When set, do not trace the event (even though its
  *                   tracepoint may be enabled)
 =======
+=======
+>>>>>>> v3.18
  *  FILTERED	  - The event has a filter attached
  *  NO_SET_FILTER - Set when filter has error and is to be ignored
  *  SOFT_MODE     - The event is enabled/disabled by SOFT_DISABLED
@@ -379,21 +445,30 @@ enum {
  *                   tracepoint may be enabled)
  *  TRIGGER_MODE  - When set, invoke the triggers associated with the event
  *  TRIGGER_COND  - When set, one or more triggers has an associated filter
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 enum {
 	FTRACE_EVENT_FL_ENABLED		= (1 << FTRACE_EVENT_FL_ENABLED_BIT),
 	FTRACE_EVENT_FL_RECORDED_CMD	= (1 << FTRACE_EVENT_FL_RECORDED_CMD_BIT),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FTRACE_EVENT_FL_SOFT_MODE	= (1 << FTRACE_EVENT_FL_SOFT_MODE_BIT),
 	FTRACE_EVENT_FL_SOFT_DISABLED	= (1 << FTRACE_EVENT_FL_SOFT_DISABLED_BIT),
 =======
+=======
+>>>>>>> v3.18
 	FTRACE_EVENT_FL_FILTERED	= (1 << FTRACE_EVENT_FL_FILTERED_BIT),
 	FTRACE_EVENT_FL_NO_SET_FILTER	= (1 << FTRACE_EVENT_FL_NO_SET_FILTER_BIT),
 	FTRACE_EVENT_FL_SOFT_MODE	= (1 << FTRACE_EVENT_FL_SOFT_MODE_BIT),
 	FTRACE_EVENT_FL_SOFT_DISABLED	= (1 << FTRACE_EVENT_FL_SOFT_DISABLED_BIT),
 	FTRACE_EVENT_FL_TRIGGER_MODE	= (1 << FTRACE_EVENT_FL_TRIGGER_MODE_BIT),
 	FTRACE_EVENT_FL_TRIGGER_COND	= (1 << FTRACE_EVENT_FL_TRIGGER_COND_BIT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -401,15 +476,21 @@ struct ftrace_event_file {
 	struct list_head		list;
 	struct ftrace_event_call	*event_call;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry			*dir;
 	struct trace_array		*tr;
 	struct ftrace_subsystem_dir	*system;
 =======
+=======
+>>>>>>> v3.18
 	struct event_filter		*filter;
 	struct dentry			*dir;
 	struct trace_array		*tr;
 	struct ftrace_subsystem_dir	*system;
 	struct list_head		triggers;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -419,6 +500,10 @@ struct ftrace_event_file {
 	 *   bit 2:		enable/disable with the soft disable bit
 	 *   bit 3:		soft disabled
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 *   bit 4:		trigger enabled
+>>>>>>> v3.18
 =======
 	 *   bit 4:		trigger enabled
 >>>>>>> v3.18
@@ -434,6 +519,10 @@ struct ftrace_event_file {
 	unsigned long		flags;
 	atomic_t		sm_ref;	/* soft-mode reference counter */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t		tm_ref;	/* trigger-mode reference counter */
+>>>>>>> v3.18
 =======
 	atomic_t		tm_ref;	/* trigger-mode reference counter */
 >>>>>>> v3.18
@@ -443,7 +532,11 @@ struct ftrace_event_file {
 	static int __init trace_init_flags_##name(void)			\
 	{								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		event_##name.flags = value;				\
+=======
+		event_##name.flags |= value;				\
+>>>>>>> v3.18
 =======
 		event_##name.flags |= value;				\
 >>>>>>> v3.18
@@ -452,7 +545,10 @@ struct ftrace_event_file {
 	early_initcall(trace_init_flags_##name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __TRACE_EVENT_PERF_PERM(name, expr...)				\
 	static int perf_perm_##name(struct ftrace_event_call *tp_event, \
 				    struct perf_event *p_event)		\
@@ -466,11 +562,15 @@ struct ftrace_event_file {
 	}								\
 	early_initcall(trace_init_perf_perm_##name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PERF_MAX_TRACE_SIZE	2048
 
 #define MAX_FILTER_STR_VAL	256	/* Should handle KSYM_SYMBOL_LEN */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void destroy_preds(struct ftrace_event_call *call);
 extern int filter_match_preds(struct event_filter *filter, void *rec);
@@ -479,6 +579,8 @@ extern int filter_current_check_discard(struct ring_buffer *buffer,
 					void *rec,
 					struct ring_buffer_event *event);
 =======
+=======
+>>>>>>> v3.18
 enum event_trigger_type {
 	ETT_NONE		= (0),
 	ETT_TRACE_ONOFF		= (1 << 0),
@@ -616,6 +718,9 @@ event_trigger_unlock_commit_regs(struct ftrace_event_file *file,
 	if (tt)
 		event_triggers_post_call(file, tt);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -681,9 +786,12 @@ perf_trace_buf_submit(void *raw_data, int size, int rctx, u64 addr,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FTRACE_EVENT_ENABLED(name)					\
 	((event_##name).flags & (1 << (TRACE_EVENT_FL_WAS_ENABLED_BIT)))\
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _LINUX_FTRACE_EVENT_H */

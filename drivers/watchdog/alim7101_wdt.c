@@ -302,7 +302,10 @@ static struct miscdevice wdt_miscdev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int wdt_restart_handle(struct notifier_block *this, unsigned long mode,
 			      void *cmd)
 {
@@ -325,6 +328,9 @@ static struct notifier_block wdt_restart_handler = {
 	.priority = 128,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	Notifier for system down
@@ -337,6 +343,7 @@ static int wdt_notify_sys(struct notifier_block *this,
 		wdt_turnoff();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (code == SYS_RESTART) {
 		/*
 		 * Cobalt devices have no way of rebooting themselves other
@@ -346,6 +353,8 @@ static int wdt_notify_sys(struct notifier_block *this,
 		wdt_change(WDT_ENABLE);
 		pr_info("Watchdog timer is now enabled with no heartbeat - should reboot in ~1 second\n");
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return NOTIFY_DONE;
@@ -367,6 +376,10 @@ static void __exit alim7101_wdt_unload(void)
 	misc_deregister(&wdt_miscdev);
 	unregister_reboot_notifier(&wdt_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unregister_restart_handler(&wdt_restart_handler);
+>>>>>>> v3.18
 =======
 	unregister_restart_handler(&wdt_restart_handler);
 >>>>>>> v3.18
@@ -423,20 +436,30 @@ static int __init alim7101_wdt_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = register_restart_handler(&wdt_restart_handler);
 	if (rc) {
 		pr_err("cannot register restart handler (err=%d)\n", rc);
 		goto err_out_reboot;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = misc_register(&wdt_miscdev);
 	if (rc) {
 		pr_err("cannot register miscdev on minor=%d (err=%d)\n",
 		       wdt_miscdev.minor, rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_out_reboot;
+=======
+		goto err_out_restart;
+>>>>>>> v3.18
 =======
 		goto err_out_restart;
 >>>>>>> v3.18
@@ -450,6 +473,11 @@ static int __init alim7101_wdt_init(void)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_out_restart:
+	unregister_restart_handler(&wdt_restart_handler);
+>>>>>>> v3.18
 =======
 err_out_restart:
 	unregister_restart_handler(&wdt_restart_handler);
@@ -465,7 +493,11 @@ module_init(alim7101_wdt_init);
 module_exit(alim7101_wdt_unload);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(alim7101_pci_tbl) __used = {
+=======
+static const struct pci_device_id alim7101_pci_tbl[] __used = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id alim7101_pci_tbl[] __used = {
 >>>>>>> v3.18
@@ -480,6 +512,9 @@ MODULE_AUTHOR("Steve Hill");
 MODULE_DESCRIPTION("ALi M7101 PMU Computer Watchdog Timer driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

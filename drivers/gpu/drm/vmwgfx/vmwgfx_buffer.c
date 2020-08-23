@@ -31,6 +31,7 @@
 #include <drm/ttm/ttm_page_alloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uint32_t vram_placement_flags = TTM_PL_FLAG_VRAM |
 	TTM_PL_FLAG_CACHED;
 
@@ -52,6 +53,8 @@ struct ttm_placement vmw_vram_placement = {
 	.fpfn = 0,
 	.lpfn = 0,
 =======
+=======
+>>>>>>> v3.18
 static struct ttm_place vram_placement_flags = {
 	.fpfn = 0,
 	.lpfn = 0,
@@ -95,6 +98,9 @@ static struct ttm_place mob_placement_flags = {
 };
 
 struct ttm_placement vmw_vram_placement = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.num_placement = 1,
 	.placement = &vram_placement_flags,
@@ -102,6 +108,7 @@ struct ttm_placement vmw_vram_placement = {
 	.busy_placement = &vram_placement_flags
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static uint32_t vram_gmr_placement_flags[] = {
 	TTM_PL_FLAG_VRAM | TTM_PL_FLAG_CACHED,
@@ -117,6 +124,8 @@ struct ttm_placement vmw_vram_gmr_placement = {
 	.fpfn = 0,
 	.lpfn = 0,
 =======
+=======
+>>>>>>> v3.18
 static struct ttm_place vram_gmr_placement_flags[] = {
 	{
 		.fpfn = 0,
@@ -142,6 +151,9 @@ static struct ttm_place gmr_vram_placement_flags[] = {
 };
 
 struct ttm_placement vmw_vram_gmr_placement = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.num_placement = 2,
 	.placement = vram_gmr_placement_flags,
@@ -149,6 +161,7 @@ struct ttm_placement vmw_vram_gmr_placement = {
 	.busy_placement = &gmr_placement_flags
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static uint32_t vram_gmr_ne_placement_flags[] = {
 	TTM_PL_FLAG_VRAM | TTM_PL_FLAG_CACHED | TTM_PL_FLAG_NO_EVICT,
@@ -159,6 +172,8 @@ struct ttm_placement vmw_vram_gmr_ne_placement = {
 	.fpfn = 0,
 	.lpfn = 0,
 =======
+=======
+>>>>>>> v3.18
 static struct ttm_place vram_gmr_ne_placement_flags[] = {
 	{
 		.fpfn = 0,
@@ -174,6 +189,9 @@ static struct ttm_place vram_gmr_ne_placement_flags[] = {
 };
 
 struct ttm_placement vmw_vram_gmr_ne_placement = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.num_placement = 2,
 	.placement = vram_gmr_ne_placement_flags,
@@ -183,8 +201,11 @@ struct ttm_placement vmw_vram_gmr_ne_placement = {
 
 struct ttm_placement vmw_vram_sys_placement = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fpfn = 0,
 	.lpfn = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.num_placement = 1,
@@ -195,8 +216,11 @@ struct ttm_placement vmw_vram_sys_placement = {
 
 struct ttm_placement vmw_vram_ne_placement = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fpfn = 0,
 	.lpfn = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.num_placement = 1,
@@ -207,8 +231,11 @@ struct ttm_placement vmw_vram_ne_placement = {
 
 struct ttm_placement vmw_sys_placement = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fpfn = 0,
 	.lpfn = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.num_placement = 1,
@@ -217,6 +244,7 @@ struct ttm_placement vmw_sys_placement = {
 	.busy_placement = &sys_placement_flags
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static uint32_t evictable_placement_flags[] = {
 	TTM_PL_FLAG_SYSTEM | TTM_PL_FLAG_CACHED,
@@ -229,6 +257,8 @@ struct ttm_placement vmw_evictable_placement = {
 	.lpfn = 0,
 	.num_placement = 3,
 =======
+=======
+>>>>>>> v3.18
 struct ttm_placement vmw_sys_ne_placement = {
 	.num_placement = 1,
 	.placement = &sys_ne_placement_flags,
@@ -258,6 +288,9 @@ static struct ttm_place evictable_placement_flags[] = {
 
 struct ttm_placement vmw_evictable_placement = {
 	.num_placement = 4,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.placement = evictable_placement_flags,
 	.num_busy_placement = 1,
@@ -266,8 +299,11 @@ struct ttm_placement vmw_evictable_placement = {
 
 struct ttm_placement vmw_srf_placement = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fpfn = 0,
 	.lpfn = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.num_placement = 1,
@@ -276,6 +312,7 @@ struct ttm_placement vmw_srf_placement = {
 	.busy_placement = gmr_vram_placement_flags
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct vmw_ttm_tt {
 	struct ttm_tt ttm;
@@ -292,6 +329,8 @@ static int vmw_ttm_bind(struct ttm_tt *ttm, struct ttm_mem_reg *bo_mem)
 	return vmw_gmr_bind(vmw_be->dev_priv, ttm->pages,
 			    ttm->num_pages, vmw_be->gmr_id);
 =======
+=======
+>>>>>>> v3.18
 struct ttm_placement vmw_mob_placement = {
 	.num_placement = 1,
 	.num_busy_placement = 1,
@@ -675,11 +714,15 @@ static int vmw_ttm_bind(struct ttm_tt *ttm, struct ttm_mem_reg *bo_mem)
 		BUG();
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int vmw_ttm_unbind(struct ttm_tt *ttm)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vmw_ttm_tt *vmw_be = container_of(ttm, struct vmw_ttm_tt, ttm);
 
@@ -696,6 +739,8 @@ static void vmw_ttm_destroy(struct ttm_tt *ttm)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	struct vmw_ttm_tt *vmw_be =
 		container_of(ttm, struct vmw_ttm_tt, dma_ttm.ttm);
 
@@ -786,6 +831,9 @@ static void vmw_ttm_unpopulate(struct ttm_tt *ttm)
 		ttm_pool_unpopulate(ttm);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ttm_backend_func vmw_ttm_func = {
 	.bind = vmw_ttm_bind,
@@ -794,7 +842,11 @@ static struct ttm_backend_func vmw_ttm_func = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ttm_tt *vmw_ttm_tt_create(struct ttm_bo_device *bdev,
+=======
+static struct ttm_tt *vmw_ttm_tt_create(struct ttm_bo_device *bdev,
+>>>>>>> v3.18
 =======
 static struct ttm_tt *vmw_ttm_tt_create(struct ttm_bo_device *bdev,
 >>>>>>> v3.18
@@ -802,6 +854,7 @@ static struct ttm_tt *vmw_ttm_tt_create(struct ttm_bo_device *bdev,
 				 struct page *dummy_read_page)
 {
 	struct vmw_ttm_tt *vmw_be;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	vmw_be = kmalloc(sizeof(*vmw_be), GFP_KERNEL);
@@ -821,6 +874,8 @@ static struct ttm_tt *vmw_ttm_tt_create(struct ttm_bo_device *bdev,
 
 int vmw_invalidate_caches(struct ttm_bo_device *bdev, uint32_t flags)
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	vmw_be = kzalloc(sizeof(*vmw_be), GFP_KERNEL);
@@ -847,13 +902,20 @@ out_no_init:
 }
 
 static int vmw_invalidate_caches(struct ttm_bo_device *bdev, uint32_t flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vmw_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
+=======
+static int vmw_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
+>>>>>>> v3.18
 =======
 static int vmw_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
 >>>>>>> v3.18
@@ -877,6 +939,10 @@ static int vmw_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
 		break;
 	case VMW_PL_GMR:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case VMW_PL_MOB:
+>>>>>>> v3.18
 =======
 	case VMW_PL_MOB:
 >>>>>>> v3.18
@@ -899,7 +965,11 @@ static int vmw_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_evict_flags(struct ttm_buffer_object *bo,
+=======
+static void vmw_evict_flags(struct ttm_buffer_object *bo,
+>>>>>>> v3.18
 =======
 static void vmw_evict_flags(struct ttm_buffer_object *bo,
 >>>>>>> v3.18
@@ -932,6 +1002,10 @@ static int vmw_ttm_io_mem_reserve(struct ttm_bo_device *bdev, struct ttm_mem_reg
 	case TTM_PL_SYSTEM:
 	case VMW_PL_GMR:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case VMW_PL_MOB:
+>>>>>>> v3.18
 =======
 	case VMW_PL_MOB:
 >>>>>>> v3.18
@@ -957,6 +1031,7 @@ static int vmw_ttm_fault_reserve_notify(struct ttm_buffer_object *bo)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FIXME: We're using the old vmware polling method to sync.
  * Do this with fences instead.
@@ -1000,6 +1075,8 @@ struct ttm_bo_driver vmw_bo_driver = {
 	.ttm_tt_populate = &ttm_pool_populate,
 	.ttm_tt_unpopulate = &ttm_pool_unpopulate,
 =======
+=======
+>>>>>>> v3.18
  * vmw_move_notify - TTM move_notify_callback
  *
  * @bo:             The TTM buffer object about to move.
@@ -1031,12 +1108,16 @@ struct ttm_bo_driver vmw_bo_driver = {
 	.ttm_tt_create = &vmw_ttm_tt_create,
 	.ttm_tt_populate = &vmw_ttm_populate,
 	.ttm_tt_unpopulate = &vmw_ttm_unpopulate,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.invalidate_caches = vmw_invalidate_caches,
 	.init_mem_type = vmw_init_mem_type,
 	.evict_flags = vmw_evict_flags,
 	.move = NULL,
 	.verify_access = vmw_verify_access,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.sync_obj_signaled = vmw_sync_obj_signaled,
 	.sync_obj_wait = vmw_sync_obj_wait,
@@ -1045,6 +1126,10 @@ struct ttm_bo_driver vmw_bo_driver = {
 	.sync_obj_ref = vmw_sync_obj_ref,
 	.move_notify = NULL,
 	.swap_notify = NULL,
+=======
+	.move_notify = vmw_move_notify,
+	.swap_notify = vmw_swap_notify,
+>>>>>>> v3.18
 =======
 	.move_notify = vmw_move_notify,
 	.swap_notify = vmw_swap_notify,

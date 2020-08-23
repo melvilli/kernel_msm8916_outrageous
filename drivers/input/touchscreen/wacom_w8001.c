@@ -19,7 +19,10 @@
 #include <linux/input/mt.h>
 #include <linux/serio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ctype.h>
@@ -32,7 +35,11 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define W8001_MAX_LENGTH	13
+=======
+#define W8001_MAX_LENGTH	11
+>>>>>>> v3.18
 =======
 #define W8001_MAX_LENGTH	11
 >>>>>>> v3.18

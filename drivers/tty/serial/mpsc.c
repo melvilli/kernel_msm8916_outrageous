@@ -935,7 +935,11 @@ static int serial_polled;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mpsc_rx_intr(struct mpsc_port_info *pi)
+=======
+static int mpsc_rx_intr(struct mpsc_port_info *pi, unsigned long *flags)
+>>>>>>> v3.18
 =======
 static int mpsc_rx_intr(struct mpsc_port_info *pi, unsigned long *flags)
 >>>>>>> v3.18
@@ -974,14 +978,20 @@ static int mpsc_rx_intr(struct mpsc_port_info *pi, unsigned long *flags)
 		/* Following use of tty struct directly is deprecated */
 		if (tty_buffer_request_room(port, bytes_in) < bytes_in) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (port->low_latency)
 				tty_flip_buffer_push(port);
 =======
+=======
+>>>>>>> v3.18
 			if (port->low_latency) {
 				spin_unlock_irqrestore(&pi->port.lock, *flags);
 				tty_flip_buffer_push(port);
 				spin_lock_irqsave(&pi->port.lock, *flags);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * If this failed then we will throw away the bytes
@@ -1093,7 +1103,13 @@ next_frame:
 		mpsc_start_rx(pi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(port);
+=======
+	spin_unlock_irqrestore(&pi->port.lock, *flags);
+	tty_flip_buffer_push(port);
+	spin_lock_irqsave(&pi->port.lock, *flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&pi->port.lock, *flags);
 	tty_flip_buffer_push(port);
@@ -1241,7 +1257,11 @@ static irqreturn_t mpsc_sdma_intr(int irq, void *dev_id)
 	spin_lock_irqsave(&pi->port.lock, iflags);
 	mpsc_sdma_intr_ack(pi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mpsc_rx_intr(pi))
+=======
+	if (mpsc_rx_intr(pi, &iflags))
+>>>>>>> v3.18
 =======
 	if (mpsc_rx_intr(pi, &iflags))
 >>>>>>> v3.18
@@ -1354,10 +1374,13 @@ static void mpsc_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mpsc_enable_ms(struct uart_port *port)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void mpsc_break_ctl(struct uart_port *port, int ctl)
@@ -1479,7 +1502,11 @@ static void mpsc_set_termios(struct uart_port *port, struct ktermios *termios,
 			| SDMA_DESC_CMDSTAT_FR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -1699,7 +1726,10 @@ static struct uart_ops mpsc_pops = {
 	.start_tx	= mpsc_start_tx,
 	.stop_rx	= mpsc_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= mpsc_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= mpsc_break_ctl,
@@ -1917,7 +1947,11 @@ static int mpsc_shared_drv_probe(struct platform_device *dev)
 		if (!(rc = mpsc_shared_map_regs(dev))) {
 			pdata = (struct mpsc_shared_pdata *)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev->dev.platform_data;
+=======
+				dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 				dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -2062,7 +2096,11 @@ static void mpsc_drv_get_platform_data(struct mpsc_port_info *pi,
 	struct mpsc_pdata	*pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = (struct mpsc_pdata *)pd->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pd->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pd->dev);
 >>>>>>> v3.18

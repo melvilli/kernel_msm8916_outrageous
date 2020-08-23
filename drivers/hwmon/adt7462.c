@@ -3,7 +3,11 @@
  * Copyright (C) 2008 IBM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
 =======
  * Author: Darrick J. Wong <darrick.wong@oracle.com>
 >>>>>>> v3.18
@@ -207,8 +211,12 @@ static const unsigned short normal_i2c[] = { 0x58, 0x5C, I2C_CLIENT_END };
 
 struct adt7462_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device		*hwmon_dev;
 	struct attribute_group	attrs;
+=======
+	struct i2c_client	*client;
+>>>>>>> v3.18
 =======
 	struct i2c_client	*client;
 >>>>>>> v3.18
@@ -241,6 +249,7 @@ struct adt7462_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adt7462_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id);
 static int adt7462_detect(struct i2c_client *client,
@@ -265,6 +274,8 @@ static struct i2c_driver adt7462_driver = {
 	.address_list	= normal_i2c,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -345,7 +356,11 @@ static int ADT7462_REG_VOLT_MAX(struct adt7462_data *data, int which)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -ENODEV;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -408,7 +423,11 @@ static int ADT7462_REG_VOLT_MIN(struct adt7462_data *data, int which)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -ENODEV;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -720,7 +739,11 @@ static int find_trange_value(int trange)
 			return i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -ENODEV;
+=======
+	return -EINVAL;
+>>>>>>> v3.18
 =======
 	return -EINVAL;
 >>>>>>> v3.18
@@ -729,8 +752,13 @@ static int find_trange_value(int trange)
 static struct adt7462_data *adt7462_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -857,8 +885,13 @@ static ssize_t set_temp_min(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -900,8 +933,13 @@ static ssize_t set_temp_max(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -968,8 +1006,13 @@ static ssize_t set_volt_max(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1015,8 +1058,13 @@ static ssize_t set_volt_min(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1110,8 +1158,13 @@ static ssize_t set_fan_min(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1163,8 +1216,13 @@ static ssize_t set_force_pwm_max(struct device *dev,
 				 size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1201,8 +1259,13 @@ static ssize_t set_pwm(struct device *dev, struct device_attribute *devattr,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1236,8 +1299,13 @@ static ssize_t set_pwm_max(struct device *dev,
 			   size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1273,8 +1341,13 @@ static ssize_t set_pwm_min(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1312,8 +1385,13 @@ static ssize_t set_pwm_hyst(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1362,8 +1440,13 @@ static ssize_t set_pwm_tmax(struct device *dev,
 	int temp;
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1378,9 +1461,14 @@ static ssize_t set_pwm_tmax(struct device *dev,
 	tmin = (data->pwm_tmin[attr->index] - 64) * 1000;
 	trange_value = find_trange_value(trange - tmin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (trange_value < 0)
 		return -EINVAL;
+=======
+	if (trange_value < 0)
+		return trange_value;
+>>>>>>> v3.18
 =======
 	if (trange_value < 0)
 		return trange_value;
@@ -1414,8 +1502,13 @@ static ssize_t set_pwm_tmin(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1476,8 +1569,13 @@ static ssize_t set_pwm_auto(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1540,8 +1638,13 @@ static ssize_t set_pwm_auto_temp(struct device *dev,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adt7462_data *data = i2c_get_clientdata(client);
+=======
+	struct adt7462_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adt7462_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1830,7 +1933,11 @@ static SENSOR_DEVICE_ATTR(pwm4_auto_channels_temp, S_IWUSR | S_IRUGO,
 		    show_pwm_auto_temp, set_pwm_auto_temp, 3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *adt7462_attr[] = {
+=======
+static struct attribute *adt7462_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *adt7462_attrs[] = {
 >>>>>>> v3.18
@@ -2005,6 +2112,11 @@ static struct attribute *adt7462_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ATTRIBUTE_GROUPS(adt7462);
+
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(adt7462);
 
@@ -2040,6 +2152,7 @@ static int adt7462_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct adt7462_data *data;
 	int err;
 
@@ -2050,6 +2163,8 @@ static int adt7462_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct adt7462_data *data;
 	struct device *hwmon_dev;
@@ -2059,11 +2174,15 @@ static int adt7462_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->lock);
 
 	dev_info(&client->dev, "%s chip found\n", client->name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	data->attrs.attrs = adt7462_attr;
@@ -2097,6 +2216,8 @@ module_i2c_driver(adt7462_driver);
 
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data,
 							   adt7462_groups);
@@ -2123,6 +2244,9 @@ static struct i2c_driver adt7462_driver = {
 module_i2c_driver(adt7462_driver);
 
 MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("ADT7462 driver");
 MODULE_LICENSE("GPL");

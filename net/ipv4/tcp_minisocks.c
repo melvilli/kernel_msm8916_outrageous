@@ -233,7 +233,11 @@ kill:
 		if (isn == 0)
 			isn++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		TCP_SKB_CB(skb)->when = isn;
+=======
+		TCP_SKB_CB(skb)->tcp_tw_isn = isn;
+>>>>>>> v3.18
 =======
 		TCP_SKB_CB(skb)->tcp_tw_isn = isn;
 >>>>>>> v3.18
@@ -298,6 +302,7 @@ void tcp_time_wait(struct sock *sk, int state, int timeo)
 		if (tw->tw_family == PF_INET6) {
 			struct ipv6_pinfo *np = inet6_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct inet6_timewait_sock *tw6;
 
 			tw->tw_ipv6_offset = inet6_tw_offset(sk->sk_prot);
@@ -307,12 +312,17 @@ void tcp_time_wait(struct sock *sk, int state, int timeo)
 			tw->tw_tclass = np->tclass;
 			tw->tw_ipv6only = np->ipv6only;
 =======
+=======
+>>>>>>> v3.18
 
 			tw->tw_v6_daddr = sk->sk_v6_daddr;
 			tw->tw_v6_rcv_saddr = sk->sk_v6_rcv_saddr;
 			tw->tw_tclass = np->tclass;
 			tw->tw_flowlabel = np->flow_label >> 12;
 			tw->tw_ipv6only = sk->sk_ipv6only;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 #endif
@@ -331,7 +341,11 @@ void tcp_time_wait(struct sock *sk, int state, int timeo)
 			if (key != NULL) {
 				tcptw->tw_md5_key = kmemdup(key, sizeof(*key), GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (tcptw->tw_md5_key && tcp_alloc_md5sig_pool(sk) == NULL)
+=======
+				if (tcptw->tw_md5_key && !tcp_alloc_md5sig_pool())
+>>>>>>> v3.18
 =======
 				if (tcptw->tw_md5_key && !tcp_alloc_md5sig_pool())
 >>>>>>> v3.18
@@ -376,10 +390,15 @@ void tcp_twsk_destructor(struct sock *sk)
 	struct tcp_timewait_sock *twsk = tcp_twsk(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (twsk->tw_md5_key) {
 		tcp_free_md5sig_pool();
 		kfree_rcu(twsk->tw_md5_key, rcu);
 	}
+=======
+	if (twsk->tw_md5_key)
+		kfree_rcu(twsk->tw_md5_key, rcu);
+>>>>>>> v3.18
 =======
 	if (twsk->tw_md5_key)
 		kfree_rcu(twsk->tw_md5_key, rcu);
@@ -389,9 +408,12 @@ void tcp_twsk_destructor(struct sock *sk)
 EXPORT_SYMBOL_GPL(tcp_twsk_destructor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void TCP_ECN_openreq_child(struct tcp_sock *tp,
 					 struct request_sock *req)
 =======
+=======
+>>>>>>> v3.18
 void tcp_openreq_init_rwin(struct request_sock *req,
 			   struct sock *sk, struct dst_entry *dst)
 {
@@ -425,6 +447,9 @@ EXPORT_SYMBOL(tcp_openreq_init_rwin);
 
 static void tcp_ecn_openreq_child(struct tcp_sock *tp,
 				  const struct request_sock *req)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	tp->ecn_flags = inet_rsk(req)->ecn_ok ? TCP_ECN_OK : 0;
@@ -461,10 +486,16 @@ struct sock *tcp_create_openreq_child(struct sock *sk, struct request_sock *req,
 		tcp_init_wl(newtp, treq->rcv_isn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		newtp->srtt = 0;
 		newtp->mdev = TCP_TIMEOUT_INIT;
 		newicsk->icsk_rto = TCP_TIMEOUT_INIT;
 		newicsk->icsk_ack.lrcvtime = tcp_time_stamp;
+=======
+		newtp->srtt_us = 0;
+		newtp->mdev_us = jiffies_to_usecs(TCP_TIMEOUT_INIT);
+		newicsk->icsk_rto = TCP_TIMEOUT_INIT;
+>>>>>>> v3.18
 =======
 		newtp->srtt_us = 0;
 		newtp->mdev_us = jiffies_to_usecs(TCP_TIMEOUT_INIT);
@@ -479,6 +510,11 @@ struct sock *tcp_create_openreq_child(struct sock *sk, struct request_sock *req,
 		tcp_enable_early_retrans(newtp);
 		newtp->tlp_high_seq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		newtp->lsndtime = treq->snt_synack;
+		newtp->total_retrans = req->num_retrans;
+>>>>>>> v3.18
 =======
 		newtp->lsndtime = treq->snt_synack;
 		newtp->total_retrans = req->num_retrans;
@@ -493,6 +529,7 @@ struct sock *tcp_create_openreq_child(struct sock *sk, struct request_sock *req,
 		newtp->snd_cwnd_cnt = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (newicsk->icsk_ca_ops != &tcp_init_congestion_ops &&
 		    !try_module_get(newicsk->icsk_ca_ops->owner))
 			newicsk->icsk_ca_ops = &tcp_init_congestion_ops;
@@ -501,12 +538,17 @@ struct sock *tcp_create_openreq_child(struct sock *sk, struct request_sock *req,
 		tcp_init_xmit_timers(newsk);
 		skb_queue_head_init(&newtp->out_of_order_queue);
 =======
+=======
+>>>>>>> v3.18
 		if (!try_module_get(newicsk->icsk_ca_ops->owner))
 			tcp_assign_congestion_control(newsk);
 
 		tcp_set_ca_state(newsk, TCP_CA_Open);
 		tcp_init_xmit_timers(newsk);
 		__skb_queue_head_init(&newtp->out_of_order_queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		newtp->write_seq = newtp->pushed_seq = treq->snt_isn + 1;
 
@@ -559,7 +601,11 @@ struct sock *tcp_create_openreq_child(struct sock *sk, struct request_sock *req,
 			newicsk->icsk_ack.last_seg_size = skb->len - newtp->tcp_header_len;
 		newtp->rx_opt.mss_clamp = req->mss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		TCP_ECN_openreq_child(newtp, req);
+=======
+		tcp_ecn_openreq_child(newtp, req);
+>>>>>>> v3.18
 =======
 		tcp_ecn_openreq_child(newtp, req);
 >>>>>>> v3.18
@@ -752,12 +798,15 @@ struct sock *tcp_check_req(struct sock *sk, struct sk_buff *skb,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Got ACK for our SYNACK, so update baseline for SYNACK RTT sample. */
 	if (tmp_opt.saw_tstamp && tmp_opt.rcv_tsecr)
 		tcp_rsk(req)->snt_synack = tmp_opt.rcv_tsecr;
 	else if (req->num_retrans) /* don't take RTT sample if retrans && ~TS */
 		tcp_rsk(req)->snt_synack = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* For Fast Open no more processing is needed (sk is the
@@ -840,7 +889,11 @@ int tcp_child_process(struct sock *parent, struct sock *child,
 		/* Wakeup parent, send SIGIO */
 		if (state == TCP_SYN_RECV && child->sk_state != state)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			parent->sk_data_ready(parent, 0);
+=======
+			parent->sk_data_ready(parent);
+>>>>>>> v3.18
 =======
 			parent->sk_data_ready(parent);
 >>>>>>> v3.18

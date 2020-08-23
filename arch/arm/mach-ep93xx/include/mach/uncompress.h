@@ -32,6 +32,7 @@ static void __raw_writel(unsigned int value, unsigned int ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_EP93XX_EARLY_UART1)
 #define UART_BASE		EP93XX_UART1_PHYS_BASE
 #elif defined(CONFIG_EP93XX_EARLY_UART2)
@@ -44,6 +45,10 @@ static void __raw_writel(unsigned int value, unsigned int ptr)
 
 #define PHYS_UART_DATA		(UART_BASE + 0x00)
 #define PHYS_UART_FLAG		(UART_BASE + 0x18)
+=======
+#define PHYS_UART_DATA		(CONFIG_DEBUG_UART_PHYS + 0x00)
+#define PHYS_UART_FLAG		(CONFIG_DEBUG_UART_PHYS + 0x18)
+>>>>>>> v3.18
 =======
 #define PHYS_UART_DATA		(CONFIG_DEBUG_UART_PHYS + 0x00)
 #define PHYS_UART_FLAG		(CONFIG_DEBUG_UART_PHYS + 0x18)

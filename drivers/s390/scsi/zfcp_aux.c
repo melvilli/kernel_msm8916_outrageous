@@ -105,17 +105,23 @@ static void __init zfcp_init_device_setup(char *devstr)
 
 	token = strsep(&str, ",");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!token || strict_strtoull(token, 0, (unsigned long long *) &wwpn))
 		goto err_out;
 
 	token = strsep(&str, ",");
 	if (!token || strict_strtoull(token, 0, (unsigned long long *) &lun))
 =======
+=======
+>>>>>>> v3.18
 	if (!token || kstrtoull(token, 0, (unsigned long long *) &wwpn))
 		goto err_out;
 
 	token = strsep(&str, ",");
 	if (!token || kstrtoull(token, 0, (unsigned long long *) &lun))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_out;
 
@@ -150,6 +156,7 @@ static int __init zfcp_module_init(void)
 				      sizeof(struct zfcp_scsi_dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	retval = misc_register(&zfcp_cfdc_misc);
 	if (retval) {
@@ -157,6 +164,8 @@ static int __init zfcp_module_init(void)
 		goto out_misc;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retval = ccw_driver_register(&zfcp_ccw_driver);
@@ -172,8 +181,11 @@ static int __init zfcp_module_init(void)
 
 out_ccw_register:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	misc_deregister(&zfcp_cfdc_misc);
 out_misc:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fc_release_transport(zfcp_scsi_transport_template);
@@ -191,7 +203,10 @@ static void __exit zfcp_module_exit(void)
 {
 	ccw_driver_unregister(&zfcp_ccw_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	misc_deregister(&zfcp_cfdc_misc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fc_release_transport(zfcp_scsi_transport_template);
@@ -485,6 +500,7 @@ void zfcp_adapter_release(struct kref *ref)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * zfcp_device_unregister - remove port, unit from system
  * @dev: reference to device which is to be removed
@@ -499,6 +515,8 @@ void zfcp_device_unregister(struct device *dev,
 	device_unregister(dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void zfcp_port_release(struct device *dev)
@@ -554,6 +572,10 @@ struct zfcp_port *zfcp_port_enqueue(struct zfcp_adapter *adapter, u64 wwpn,
 	port->rport_task = RPORT_NONE;
 	port->dev.parent = &adapter->ccw_device->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->dev.groups = zfcp_port_attr_groups;
+>>>>>>> v3.18
 =======
 	port->dev.groups = zfcp_port_attr_groups;
 >>>>>>> v3.18
@@ -571,10 +593,13 @@ struct zfcp_port *zfcp_port_enqueue(struct zfcp_adapter *adapter, u64 wwpn,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sysfs_create_group(&port->dev.kobj,
 			       &zfcp_sysfs_port_attrs))
 		goto err_out_put;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	write_lock_irq(&adapter->port_list_lock);
@@ -586,8 +611,11 @@ struct zfcp_port *zfcp_port_enqueue(struct zfcp_adapter *adapter, u64 wwpn,
 	return port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_out_put:
 	device_unregister(&port->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_out:

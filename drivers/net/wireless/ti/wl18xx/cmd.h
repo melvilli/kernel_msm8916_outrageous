@@ -46,11 +46,14 @@ struct wl18xx_cmd_channel_switch {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl18xx_cmd_channel_switch(struct wl1271 *wl,
 			      struct wl12xx_vif *wlvif,
 			      struct ieee80211_channel_switch *ch_switch);
 
 =======
+=======
+>>>>>>> v3.18
 struct wl18xx_cmd_smart_config_start {
 	struct wl1271_cmd_header header;
 
@@ -72,5 +75,8 @@ int wl18xx_cmd_smart_config_start(struct wl1271 *wl, u32 group_bitmap);
 int wl18xx_cmd_smart_config_stop(struct wl1271 *wl);
 int wl18xx_cmd_smart_config_set_group_key(struct wl1271 *wl, u16 group_id,
 					  u8 key_len, u8 *key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

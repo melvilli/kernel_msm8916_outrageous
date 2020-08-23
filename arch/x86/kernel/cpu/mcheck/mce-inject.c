@@ -84,7 +84,11 @@ static int mce_raise_notify(unsigned int cmd, struct pt_regs *regs)
 {
 	int cpu = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mce *m = &__get_cpu_var(injectm);
+=======
+	struct mce *m = this_cpu_ptr(&injectm);
+>>>>>>> v3.18
 =======
 	struct mce *m = this_cpu_ptr(&injectm);
 >>>>>>> v3.18
@@ -102,7 +106,11 @@ static void mce_irq_ipi(void *info)
 {
 	int cpu = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mce *m = &__get_cpu_var(injectm);
+=======
+	struct mce *m = this_cpu_ptr(&injectm);
+>>>>>>> v3.18
 =======
 	struct mce *m = this_cpu_ptr(&injectm);
 >>>>>>> v3.18
@@ -118,7 +126,11 @@ static void mce_irq_ipi(void *info)
 static int raise_local(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mce *m = &__get_cpu_var(injectm);
+=======
+	struct mce *m = this_cpu_ptr(&injectm);
+>>>>>>> v3.18
 =======
 	struct mce *m = this_cpu_ptr(&injectm);
 >>>>>>> v3.18
@@ -166,7 +178,11 @@ static void raise_mce(struct mce *m)
 
 #ifdef CONFIG_X86_LOCAL_APIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (m->inject_flags & (MCJ_IRQ_BRAODCAST | MCJ_NMI_BROADCAST)) {
+=======
+	if (m->inject_flags & (MCJ_IRQ_BROADCAST | MCJ_NMI_BROADCAST)) {
+>>>>>>> v3.18
 =======
 	if (m->inject_flags & (MCJ_IRQ_BROADCAST | MCJ_NMI_BROADCAST)) {
 >>>>>>> v3.18
@@ -184,7 +200,11 @@ static void raise_mce(struct mce *m)
 		}
 		if (!cpumask_empty(mce_inject_cpumask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (m->inject_flags & MCJ_IRQ_BRAODCAST) {
+=======
+			if (m->inject_flags & MCJ_IRQ_BROADCAST) {
+>>>>>>> v3.18
 =======
 			if (m->inject_flags & MCJ_IRQ_BROADCAST) {
 >>>>>>> v3.18

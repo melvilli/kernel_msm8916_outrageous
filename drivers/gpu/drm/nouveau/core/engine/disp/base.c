@@ -23,8 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <engine/disp.h>
 =======
+=======
+>>>>>>> v3.18
 #include <core/os.h>
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -165,6 +168,9 @@ fail_outp:
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void
@@ -172,8 +178,11 @@ _nouveau_disp_dtor(struct nouveau_object *object)
 {
 	struct nouveau_disp *disp = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_event_destroy(&disp->vblank);
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output *outp, *outt;
 
 	nvkm_event_fini(&disp->vblank);
@@ -185,6 +194,9 @@ _nouveau_disp_dtor(struct nouveau_object *object)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nouveau_engine_destroy(&disp->base);
 }
@@ -197,9 +209,12 @@ nouveau_disp_create_(struct nouveau_object *parent,
 		     int length, void **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_disp *disp;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_disp_impl *impl = (void *)oclass;
 	struct nouveau_bios *bios = nouveau_bios(parent);
 	struct nouveau_disp *disp;
@@ -209,6 +224,9 @@ nouveau_disp_create_(struct nouveau_object *parent,
 	u8  hpd = 0, ver, hdr;
 	u32 data;
 	int ret, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = nouveau_engine_create_(parent, engine, oclass, true,
@@ -218,8 +236,11 @@ nouveau_disp_create_(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nouveau_event_create(heads, &disp->vblank);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&disp->outp);
 
 	/* create output objects for each display path in the vbios */
@@ -255,5 +276,8 @@ nouveau_disp_create_(struct nouveau_object *parent,
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -31,7 +31,10 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/fs.h>
@@ -184,7 +187,11 @@ static int bfin_kpad_probe(struct platform_device *pdev)
 {
 	struct bf54x_kpad *bf54x_kpad;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfin_kpad_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct bfin_kpad_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct bfin_kpad_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -297,7 +304,12 @@ static int bfin_kpad_probe(struct platform_device *pdev)
 
 	for (i = 0; i < input->keycodemax; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_bit(bf54x_kpad->keycode[i] & KEY_MAX, input->keybit);
+=======
+		if (bf54x_kpad->keycode[i] <= KEY_MAX)
+			__set_bit(bf54x_kpad->keycode[i], input->keybit);
+>>>>>>> v3.18
 =======
 		if (bf54x_kpad->keycode[i] <= KEY_MAX)
 			__set_bit(bf54x_kpad->keycode[i], input->keybit);
@@ -339,7 +351,10 @@ out0:
 out:
 	kfree(bf54x_kpad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -349,7 +364,11 @@ out:
 static int bfin_kpad_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfin_kpad_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct bfin_kpad_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct bfin_kpad_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -366,7 +385,10 @@ static int bfin_kpad_remove(struct platform_device *pdev)
 	kfree(bf54x_kpad->keycode);
 	kfree(bf54x_kpad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

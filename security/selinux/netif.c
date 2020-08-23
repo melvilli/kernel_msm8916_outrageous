@@ -29,7 +29,10 @@
 #include "objsec.h"
 #include "netif.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "avc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -266,7 +269,11 @@ static int sel_netif_netdev_notifier_handler(struct notifier_block *this,
 					     unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -284,7 +291,11 @@ static struct notifier_block sel_netif_netdev_notifier = {
 static __init int sel_netif_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -298,7 +309,11 @@ static __init int sel_netif_init(void)
 	register_netdevice_notifier(&sel_netif_netdev_notifier);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

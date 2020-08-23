@@ -299,6 +299,11 @@ enum xfrm_attr_type_t {
 	XFRMA_REPLAY_ESN_VAL,	/* struct xfrm_replay_esn */
 	XFRMA_SA_EXTRA_FLAGS,	/* __u32 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XFRMA_PROTO,		/* __u8 */
+	XFRMA_ADDRESS_FILTER,	/* struct xfrm_address_filter */
+>>>>>>> v3.18
 =======
 	XFRMA_PROTO,		/* __u8 */
 	XFRMA_ADDRESS_FILTER,	/* struct xfrm_address_filter */
@@ -332,6 +337,11 @@ enum xfrm_spdattr_type_t {
 	XFRMA_SPD_INFO,
 	XFRMA_SPD_HINFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XFRMA_SPD_IPV4_HTHRESH,
+	XFRMA_SPD_IPV6_HTHRESH,
+>>>>>>> v3.18
 =======
 	XFRMA_SPD_IPV4_HTHRESH,
 	XFRMA_SPD_IPV6_HTHRESH,
@@ -356,12 +366,18 @@ struct xfrmu_spdhinfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct xfrmu_spdhthresh {
 	__u8 lbits;
 	__u8 rbits;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct xfrm_usersa_info {
 	struct xfrm_selector		sel;
@@ -493,7 +509,10 @@ struct xfrm_user_mapping {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct xfrm_address_filter {
 	xfrm_address_t			saddr;
 	xfrm_address_t			daddr;
@@ -502,6 +521,9 @@ struct xfrm_address_filter {
 	__u8				dplen;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __KERNEL__
 /* backwards compatibility for userspace */

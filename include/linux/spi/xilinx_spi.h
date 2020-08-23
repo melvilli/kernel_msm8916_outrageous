@@ -12,7 +12,10 @@
 struct xspi_platform_data {
 	u16 num_chipselect;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool little_endian;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 bits_per_word;

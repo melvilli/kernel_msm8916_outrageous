@@ -15,6 +15,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ int rtc_hctosys_ret = -ENODEV;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PM) && defined(CONFIG_RTC_HCTOSYS_DEVICE)
+=======
+#if defined(CONFIG_PM_SLEEP) && defined(CONFIG_RTC_HCTOSYS_DEVICE)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_PM_SLEEP) && defined(CONFIG_RTC_HCTOSYS_DEVICE)
 >>>>>>> v3.18
@@ -56,7 +64,11 @@ static struct timespec old_rtc, old_system, old_delta;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rtc_suspend(struct device *dev, pm_message_t mesg)
+=======
+static int rtc_suspend(struct device *dev)
+>>>>>>> v3.18
 =======
 static int rtc_suspend(struct device *dev)
 >>>>>>> v3.18
@@ -65,6 +77,10 @@ static int rtc_suspend(struct device *dev)
 	struct rtc_time		tm;
 	struct timespec		delta, delta_delta;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -77,14 +93,20 @@ static int rtc_suspend(struct device *dev)
 
 	/* snapshot the current RTC and system time at suspend*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc_read_time(rtc, &tm);
 =======
+=======
+>>>>>>> v3.18
 	err = rtc_read_time(rtc, &tm);
 	if (err < 0) {
 		pr_debug("%s:  fail to read rtc time\n", dev_name(&rtc->dev));
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	getnstimeofday(&old_system);
 	rtc_tm_to_time(&tm, &old_rtc.tv_sec);
@@ -119,6 +141,10 @@ static int rtc_resume(struct device *dev)
 	struct timespec		new_system, new_rtc;
 	struct timespec		sleep_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -133,14 +159,20 @@ static int rtc_resume(struct device *dev)
 	/* snapshot the current rtc and system time at resume */
 	getnstimeofday(&new_system);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc_read_time(rtc, &tm);
 =======
+=======
+>>>>>>> v3.18
 	err = rtc_read_time(rtc, &tm);
 	if (err < 0) {
 		pr_debug("%s:  fail to read rtc time\n", dev_name(&rtc->dev));
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rtc_valid_tm(&tm) != 0) {
 		pr_debug("%s:  bogus resume time\n", dev_name(&rtc->dev));
@@ -174,14 +206,20 @@ static int rtc_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define rtc_suspend	NULL
 #define rtc_resume	NULL
 =======
+=======
+>>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(rtc_class_dev_pm_ops, rtc_suspend, rtc_resume);
 #define RTC_CLASS_DEV_PM_OPS	(&rtc_class_dev_pm_ops)
 #else
 #define RTC_CLASS_DEV_PM_OPS	NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -202,6 +240,7 @@ struct rtc_device *rtc_device_register(const char *name, struct device *dev,
 	struct rtc_device *rtc;
 	struct rtc_wkalrm alrm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int id, err;
 
 	id = ida_simple_get(&rtc_ida, 0, 0, GFP_KERNEL);
@@ -209,6 +248,8 @@ struct rtc_device *rtc_device_register(const char *name, struct device *dev,
 		err = id;
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 	int of_id = -1, id = -1, err;
 
 	if (dev->of_node)
@@ -230,6 +271,9 @@ struct rtc_device *rtc_device_register(const char *name, struct device *dev,
 			err = id;
 			goto exit;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -406,8 +450,12 @@ static int __init rtc_init(void)
 		return PTR_ERR(rtc_class);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc_class->suspend = rtc_suspend;
 	rtc_class->resume = rtc_resume;
+=======
+	rtc_class->pm = RTC_CLASS_DEV_PM_OPS;
+>>>>>>> v3.18
 =======
 	rtc_class->pm = RTC_CLASS_DEV_PM_OPS;
 >>>>>>> v3.18

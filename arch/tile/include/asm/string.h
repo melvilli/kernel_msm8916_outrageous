@@ -22,13 +22,19 @@
 #define __HAVE_ARCH_STRCHR
 #define __HAVE_ARCH_STRLEN
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern __kernel_size_t strlen(const char *);
 =======
+=======
+>>>>>>> v3.18
 #define __HAVE_ARCH_STRNLEN
 
 extern __kernel_size_t strlen(const char *);
 extern __kernel_size_t strnlen(const char *, __kernel_size_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern char *strchr(const char *s, int c);
 extern void *memchr(const void *s, int c, size_t n);

@@ -29,8 +29,12 @@
 #include <linux/hwmon-sysfs.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -171,7 +175,10 @@ struct eeepc_laptop {
 	struct platform_device *platform_device;
 	struct acpi_device *device;		/* the device we are in */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct backlight_device *backlight_device;
@@ -198,6 +205,7 @@ struct eeepc_laptop {
 static int write_acpi_int(acpi_handle handle, const char *method, int val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_object_list params;
 	union acpi_object in_obj;
 	acpi_status status;
@@ -209,10 +217,15 @@ static int write_acpi_int(acpi_handle handle, const char *method, int val)
 
 	status = acpi_evaluate_object(handle, (char *)method, &params, NULL);
 =======
+=======
+>>>>>>> v3.18
 	acpi_status status;
 
 	status = acpi_execute_simple_method(handle, (char *)method, val);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (status == AE_OK ? 0 : -1);
 }
@@ -286,6 +299,7 @@ static int acpi_setter_handle(struct eeepc_laptop *eeepc, int cm,
  * Sys helpers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int parse_arg(const char *buf, unsigned long count, int *val)
 {
 	if (!count)
@@ -294,11 +308,16 @@ static int parse_arg(const char *buf, unsigned long count, int *val)
 		return -EINVAL;
 	return count;
 =======
+=======
+>>>>>>> v3.18
 static int parse_arg(const char *buf, int *val)
 {
 	if (sscanf(buf, "%i", val) != 1)
 		return -EINVAL;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -309,6 +328,7 @@ static ssize_t store_sys_acpi(struct device *dev, int cm,
 	int rv, value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = parse_arg(buf, count, &value);
 	if (rv > 0)
 		value = set_acpi(eeepc, cm, value);
@@ -316,6 +336,8 @@ static ssize_t store_sys_acpi(struct device *dev, int cm,
 		return -EIO;
 	return rv;
 =======
+=======
+>>>>>>> v3.18
 	rv = parse_arg(buf, &value);
 	if (rv < 0)
 		return rv;
@@ -323,6 +345,9 @@ static ssize_t store_sys_acpi(struct device *dev, int cm,
 	if (rv < 0)
 		return -EIO;
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -337,8 +362,13 @@ static ssize_t show_sys_acpi(struct device *dev, int cm, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEEPC_CREATE_DEVICE_ATTR(_name, _mode, _cm)			\
 	static ssize_t show_##_name(struct device *dev,			\
+=======
+#define EEEPC_ACPI_SHOW_FUNC(_name, _cm)				\
+	static ssize_t _name##_show(struct device *dev,			\
+>>>>>>> v3.18
 =======
 #define EEEPC_ACPI_SHOW_FUNC(_name, _cm)				\
 	static ssize_t _name##_show(struct device *dev,			\
@@ -348,18 +378,25 @@ static ssize_t show_sys_acpi(struct device *dev, int cm, char *buf)
 	{								\
 		return show_sys_acpi(dev, _cm, buf);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}								\
 	static ssize_t store_##_name(struct device *dev,		\
 =======
+=======
+>>>>>>> v3.18
 	}
 
 #define EEEPC_ACPI_STORE_FUNC(_name, _cm)				\
 	static ssize_t _name##_store(struct device *dev,		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     struct device_attribute *attr,	\
 				     const char *buf, size_t count)	\
 	{								\
 		return store_sys_acpi(dev, _cm, buf, count);		\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}								\
 	static struct device_attribute dev_attr_##_name = {		\
@@ -374,6 +411,8 @@ EEEPC_CREATE_DEVICE_ATTR(camera, 0644, CM_ASL_CAMERA);
 EEEPC_CREATE_DEVICE_ATTR(cardr, 0644, CM_ASL_CARDREADER);
 EEEPC_CREATE_DEVICE_ATTR(disp, 0200, CM_ASL_DISPLAYSWITCH);
 =======
+=======
+>>>>>>> v3.18
 	}
 
 #define EEEPC_CREATE_DEVICE_ATTR_RW(_name, _cm)				\
@@ -388,6 +427,9 @@ EEEPC_CREATE_DEVICE_ATTR(disp, 0200, CM_ASL_DISPLAYSWITCH);
 EEEPC_CREATE_DEVICE_ATTR_RW(camera, CM_ASL_CAMERA);
 EEEPC_CREATE_DEVICE_ATTR_RW(cardr, CM_ASL_CARDREADER);
 EEEPC_CREATE_DEVICE_ATTR_WO(disp, CM_ASL_DISPLAYSWITCH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct eeepc_cpufv {
@@ -399,23 +441,33 @@ static int get_cpufv(struct eeepc_laptop *eeepc, struct eeepc_cpufv *c)
 {
 	c->cur = get_acpi(eeepc, CM_ASL_CPUFV);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->num = (c->cur >> 8) & 0xff;
 	c->cur &= 0xff;
 	if (c->cur < 0 || c->num <= 0 || c->num > 12)
 =======
+=======
+>>>>>>> v3.18
 	if (c->cur < 0)
 		return -ENODEV;
 
 	c->num = (c->cur >> 8) & 0xff;
 	c->cur &= 0xff;
 	if (c->num == 0 || c->num > 12)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_available_cpufv(struct device *dev,
+=======
+static ssize_t available_cpufv_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t available_cpufv_show(struct device *dev,
 >>>>>>> v3.18
@@ -436,7 +488,11 @@ static ssize_t available_cpufv_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_cpufv(struct device *dev,
+=======
+static ssize_t cpufv_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t cpufv_show(struct device *dev,
 >>>>>>> v3.18
@@ -452,7 +508,11 @@ static ssize_t cpufv_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_cpufv(struct device *dev,
+=======
+static ssize_t cpufv_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t cpufv_store(struct device *dev,
 >>>>>>> v3.18
@@ -468,6 +528,7 @@ static ssize_t cpufv_store(struct device *dev,
 	if (get_cpufv(eeepc, &c))
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = parse_arg(buf, count, &value);
 	if (rv < 0)
 		return rv;
@@ -479,6 +540,8 @@ static ssize_t cpufv_store(struct device *dev,
 
 static ssize_t show_cpufv_disabled(struct device *dev,
 =======
+=======
+>>>>>>> v3.18
 	rv = parse_arg(buf, &value);
 	if (rv < 0)
 		return rv;
@@ -491,6 +554,9 @@ static ssize_t show_cpufv_disabled(struct device *dev,
 }
 
 static ssize_t cpufv_disabled_show(struct device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  struct device_attribute *attr,
 			  char *buf)
@@ -501,7 +567,11 @@ static ssize_t cpufv_disabled_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_cpufv_disabled(struct device *dev,
+=======
+static ssize_t cpufv_disabled_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t cpufv_disabled_store(struct device *dev,
 >>>>>>> v3.18
@@ -512,7 +582,11 @@ static ssize_t cpufv_disabled_store(struct device *dev,
 	int rv, value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = parse_arg(buf, count, &value);
+=======
+	rv = parse_arg(buf, &value);
+>>>>>>> v3.18
 =======
 	rv = parse_arg(buf, &value);
 >>>>>>> v3.18
@@ -526,7 +600,11 @@ static ssize_t cpufv_disabled_store(struct device *dev,
 				"on this model)\n");
 		eeepc->cpufv_disabled = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rv;
+=======
+		return count;
+>>>>>>> v3.18
 =======
 		return count;
 >>>>>>> v3.18
@@ -538,6 +616,7 @@ static ssize_t cpufv_disabled_store(struct device *dev,
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct device_attribute dev_attr_cpufv = {
 	.attr = {
@@ -562,6 +641,11 @@ static struct device_attribute dev_attr_cpufv_disabled = {
 	.store  = store_cpufv_disabled
 };
 
+=======
+static DEVICE_ATTR_RW(cpufv);
+static DEVICE_ATTR_RO(available_cpufv);
+static DEVICE_ATTR_RW(cpufv_disabled);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(cpufv);
 static DEVICE_ATTR_RO(available_cpufv);
@@ -669,7 +753,11 @@ static int eeepc_led_init(struct eeepc_laptop *eeepc)
 	eeepc->tpd_led.brightness_set = tpd_led_set;
 	if (get_acpi(eeepc, CM_ASL_TPD) >= 0) /* if method is available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  eeepc->tpd_led.brightness_get = tpd_led_get;
+=======
+		eeepc->tpd_led.brightness_get = tpd_led_get;
+>>>>>>> v3.18
 =======
 		eeepc->tpd_led.brightness_get = tpd_led_get;
 >>>>>>> v3.18
@@ -718,6 +806,10 @@ static void eeepc_rfkill_hotplug(struct eeepc_laptop *eeepc, acpi_handle handle)
 
 	mutex_lock(&eeepc->hotplug_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 >>>>>>> v3.18
@@ -764,8 +856,12 @@ static void eeepc_rfkill_hotplug(struct eeepc_laptop *eeepc, acpi_handle handle)
 			if (dev) {
 				pci_bus_assign_resources(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (pci_bus_add_device(dev))
 					pr_err("Unable to hotplug wifi\n");
+=======
+				pci_bus_add_device(dev);
+>>>>>>> v3.18
 =======
 				pci_bus_add_device(dev);
 >>>>>>> v3.18
@@ -783,6 +879,10 @@ out_put_dev:
 
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 >>>>>>> v3.18
@@ -819,6 +919,7 @@ static int eeepc_register_rfkill_notifier(struct eeepc_laptop *eeepc,
 	status = acpi_get_handle(NULL, node, &handle);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_SUCCESS(status)) {
 		status = acpi_install_notify_handler(handle,
 						     ACPI_SYSTEM_NOTIFY,
@@ -836,6 +937,8 @@ static int eeepc_register_rfkill_notifier(struct eeepc_laptop *eeepc,
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status))
 		return -ENODEV;
 
@@ -851,6 +954,9 @@ static int eeepc_register_rfkill_notifier(struct eeepc_laptop *eeepc,
 	 * changed during setup.
 	 */
 	eeepc_rfkill_hotplug(eeepc, handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -863,6 +969,7 @@ static void eeepc_unregister_rfkill_notifier(struct eeepc_laptop *eeepc,
 
 	status = acpi_get_handle(NULL, node, &handle);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ACPI_SUCCESS(status)) {
 		status = acpi_remove_notify_handler(handle,
@@ -879,6 +986,8 @@ static void eeepc_unregister_rfkill_notifier(struct eeepc_laptop *eeepc,
 		eeepc_rfkill_hotplug(eeepc, handle);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status))
 		return;
 
@@ -894,6 +1003,9 @@ static void eeepc_unregister_rfkill_notifier(struct eeepc_laptop *eeepc,
 		 * eeepc_unregister_rfkill_notifier()
 		 */
 	eeepc_rfkill_hotplug(eeepc, handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1217,16 +1329,22 @@ static ssize_t store_sys_hwmon(void (*set)(int), const char *buf, size_t count)
 	int rv, value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = parse_arg(buf, count, &value);
 	if (rv > 0)
 		set(value);
 	return rv;
 =======
+=======
+>>>>>>> v3.18
 	rv = parse_arg(buf, &value);
 	if (rv < 0)
 		return rv;
 	set(value);
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1235,6 +1353,7 @@ static ssize_t show_sys_hwmon(int (*get)(void), char *buf)
 	return sprintf(buf, "%d\n", get());
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EEEPC_CREATE_SENSOR_ATTR(_name, _mode, _set, _get)		\
 	static ssize_t show_##_name(struct device *dev,			\
@@ -1307,6 +1426,8 @@ static int eeepc_hwmon_init(struct eeepc_laptop *eeepc)
 		eeepc_hwmon_exit(eeepc);
 	return result;
 =======
+=======
+>>>>>>> v3.18
 #define EEEPC_SENSOR_SHOW_FUNC(_name, _get)				\
 	static ssize_t _name##_show(struct device *dev,			\
 				    struct device_attribute *attr,	\
@@ -1358,6 +1479,9 @@ static int eeepc_hwmon_init(struct eeepc_laptop *eeepc)
 		return PTR_ERR(hwmon);
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1439,10 +1563,15 @@ static int eeepc_input_init(struct eeepc_laptop *eeepc)
 
 	input = input_allocate_device();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!input) {
 		pr_info("Unable to allocate input device\n");
 		return -ENOMEM;
 	}
+=======
+	if (!input)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!input)
 		return -ENOMEM;
@@ -1504,7 +1633,10 @@ static void eeepc_acpi_notify(struct acpi_device *device, u32 event)
 		return;
 	count = eeepc->event_count[event % 128]++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_bus_generate_proc_event(device, event, count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_bus_generate_netlink_event(device->pnp.device_class,
@@ -1701,8 +1833,14 @@ static int eeepc_acpi_add(struct acpi_device *device)
 		if (result)
 			goto fail_backlight;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		pr_info("Backlight controlled by ACPI video driver\n");
+=======
+	} else {
+		pr_info("Backlight controlled by ACPI video driver\n");
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		pr_info("Backlight controlled by ACPI video driver\n");
@@ -1732,7 +1870,10 @@ fail_rfkill:
 	eeepc_led_exit(eeepc);
 fail_led:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eeepc_hwmon_exit(eeepc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 fail_hwmon:
@@ -1755,7 +1896,10 @@ static int eeepc_acpi_remove(struct acpi_device *device)
 	eeepc_rfkill_exit(eeepc);
 	eeepc_input_exit(eeepc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eeepc_hwmon_exit(eeepc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	eeepc_led_exit(eeepc);

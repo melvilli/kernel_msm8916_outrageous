@@ -8,11 +8,14 @@
  * All rights reserved.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #ifndef CAN_GW_H
 #define CAN_GW_H
 =======
+=======
+>>>>>>> v3.18
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -49,6 +52,9 @@
 
 #ifndef _UAPI_CAN_GW_H
 #define _UAPI_CAN_GW_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/types.h>
@@ -85,6 +91,10 @@ enum {
 	CGW_FILTER,	/* specify struct can_filter on source CAN device */
 	CGW_DELETED,	/* number of deleted CAN frames (see max_hops param) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CGW_LIM_HOPS,	/* limit the number of hops of this specific rule */
+>>>>>>> v3.18
 =======
 	CGW_LIM_HOPS,	/* limit the number of hops of this specific rule */
 >>>>>>> v3.18
@@ -160,7 +170,11 @@ enum {
  * struct can_filter described in include/linux/can.h
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * CGW_MOD_XXX (length 17 bytes):
+=======
+ * CGW_MOD_(AND|OR|XOR|SET) (length 17 bytes):
+>>>>>>> v3.18
 =======
  * CGW_MOD_(AND|OR|XOR|SET) (length 17 bytes):
 >>>>>>> v3.18
@@ -171,13 +185,19 @@ enum {
  * <u8> affected CAN frame elements
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * CGW_LIM_HOPS (length 1 byte):
  * Limit the number of hops of this specific rule. Usually the received CAN
  * frame can be processed as much as 'max_hops' times (which is given at module
  * load time of the can-gw module). This value is used to reduce the number of
  * possible hops for this gateway rule to a value smaller then max_hops.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * CGW_CS_XOR (length 4 bytes):
  * Set a simple XOR checksum starting with an initial value into
@@ -218,7 +238,11 @@ enum {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* !_UAPI_CAN_GW_H */
+>>>>>>> v3.18
 =======
 #endif /* !_UAPI_CAN_GW_H */
 >>>>>>> v3.18

@@ -33,7 +33,11 @@
 
 #include "e500.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "trace.h"
+=======
+#include "trace_booke.h"
+>>>>>>> v3.18
 =======
 #include "trace_booke.h"
 >>>>>>> v3.18
@@ -541,7 +545,11 @@ gpa_t kvmppc_mmu_xlate(struct kvm_vcpu *vcpu, unsigned int index,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_mmu_destroy(struct kvm_vcpu *vcpu)
+=======
+void kvmppc_mmu_destroy_e500(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 void kvmppc_mmu_destroy_e500(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18

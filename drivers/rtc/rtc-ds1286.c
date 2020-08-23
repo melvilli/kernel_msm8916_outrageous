@@ -354,11 +354,14 @@ static int ds1286_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ds1286_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver ds1286_platform_driver = {
@@ -368,7 +371,10 @@ static struct platform_driver ds1286_platform_driver = {
 	},
 	.probe		= ds1286_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= ds1286_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

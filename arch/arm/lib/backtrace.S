@@ -26,7 +26,11 @@ ENTRY(c_backtrace)
 
 #if !defined(CONFIG_FRAME_POINTER) || !defined(CONFIG_PRINTK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -85,7 +89,11 @@ for_each_frame:	tst	frame, mask		@ Check for address exceptions
 		ldr	r1, [sv_pc, #-4]	@ if stmfd sp!, {args} exists,
 		ldr	r3, .Ldsi+4
 <<<<<<< HEAD
+<<<<<<< HEAD
 		teq	r3, r1, lsr #10
+=======
+		teq	r3, r1, lsr #11
+>>>>>>> v3.18
 =======
 		teq	r3, r1, lsr #11
 >>>>>>> v3.18
@@ -96,7 +104,11 @@ for_each_frame:	tst	frame, mask		@ Check for address exceptions
 1004:		ldr	r1, [sv_pc, #0]		@ if stmfd sp!, {..., fp, ip, lr, pc}
 		ldr	r3, .Ldsi		@ instruction exists,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		teq	r3, r1, lsr #10
+=======
+		teq	r3, r1, lsr #11
+>>>>>>> v3.18
 =======
 		teq	r3, r1, lsr #11
 >>>>>>> v3.18
@@ -141,17 +153,23 @@ ENDPROC(c_backtrace)
 		add	r7, r7, #1
 		teq	r7, #6
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	r7, #1
 		moveq	r1, #'\n'
 		movne	r1, #' '
 		ldr	r3, [stack], #-4
 		mov	r2, reg
 =======
+=======
+>>>>>>> v3.18
 		moveq	r7, #0
 		adr	r3, .Lcr
 		addne	r3, r3, #1		@ skip newline
 		ldr	r2, [stack], #-4
 		mov	r1, reg
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		adr	r0, .Lfp
 		bl	printk
@@ -163,6 +181,7 @@ ENDPROC(c_backtrace)
 		ldmfd	sp!, {instr, reg, stack, r7, pc}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lfp:		.asciz	"%cr%d:%08x"
 .Lcr:		.asciz	"\n"
 .Lbad:		.asciz	"Backtrace aborted due to bad frame pointer <%p>\n"
@@ -170,12 +189,17 @@ ENDPROC(c_backtrace)
 .Ldsi:		.word	0xe92dd800 >> 10	@ stmfd sp!, {... fp, ip, lr, pc}
 		.word	0xe92d0000 >> 10	@ stmfd sp!, {}
 =======
+=======
+>>>>>>> v3.18
 .Lfp:		.asciz	" r%d:%08x%s"
 .Lcr:		.asciz	"\n"
 .Lbad:		.asciz	"Backtrace aborted due to bad frame pointer <%p>\n"
 		.align
 .Ldsi:		.word	0xe92dd800 >> 11	@ stmfd sp!, {... fp, ip, lr, pc}
 		.word	0xe92d0000 >> 11	@ stmfd sp!, {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

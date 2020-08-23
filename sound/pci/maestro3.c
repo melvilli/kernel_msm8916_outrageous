@@ -801,7 +801,11 @@ struct snd_m3 {
  * pci ids
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_m3_ids) = {
+=======
+static const struct pci_device_id snd_m3_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_m3_ids[] = {
 >>>>>>> v3.18
@@ -1408,7 +1412,11 @@ static int snd_m3_pcm_hw_params(struct snd_pcm_substream *substream,
 	s->buffer_addr = substream->runtime->dma_addr;
 	if (s->buffer_addr & 0x3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "oh my, not aligned\n");
+=======
+		dev_err(substream->pcm->card->dev, "oh my, not aligned\n");
+>>>>>>> v3.18
 =======
 		dev_err(substream->pcm->card->dev, "oh my, not aligned\n");
 >>>>>>> v3.18
@@ -1909,7 +1917,11 @@ static int snd_m3_ac97_wait(struct snd_m3 *chip)
 	} while (i-- > 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "ac97 serial bus busy\n");
+=======
+	dev_err(chip->card->dev, "ac97 serial bus busy\n");
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "ac97 serial bus busy\n");
 >>>>>>> v3.18
@@ -2028,7 +2040,12 @@ static void snd_m3_ac97_reset(struct snd_m3 *chip)
 		delay2 += 100;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("maestro3: retrying codec reset with delays of %d and %d ms\n",
+=======
+		dev_dbg(chip->card->dev,
+			"retrying codec reset with delays of %d and %d ms\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"retrying codec reset with delays of %d and %d ms\n",
@@ -2212,7 +2229,12 @@ static int snd_m3_assp_client_init(struct snd_m3 *chip, struct m3_dma *s, int in
 
 	if ((address + (data_bytes/2)) >= 0x1c00) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "no memory for %d bytes at ind %d (addr 0x%x)\n",
+=======
+		dev_err(chip->card->dev,
+			"no memory for %d bytes at ind %d (addr 0x%x)\n",
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"no memory for %d bytes at ind %d (addr 0x%x)\n",
@@ -2462,8 +2484,12 @@ static int m3_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "maestor3: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -2580,7 +2606,12 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(28)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(28)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support 28bit PCI busmaster DMA\n");
+=======
+		dev_err(card->dev,
+			"architecture does not support 28bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"architecture does not support 28bit PCI busmaster DMA\n");
@@ -2618,9 +2649,14 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 		quirk = snd_pci_quirk_lookup(pci, m3_amp_quirk_list);
 		if (quirk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_INFO
 				    "maestro3: set amp-gpio for '%s'\n",
 				    snd_pci_quirk_name(quirk));
+=======
+			dev_info(card->dev, "set amp-gpio for '%s'\n",
+				 snd_pci_quirk_name(quirk));
+>>>>>>> v3.18
 =======
 			dev_info(card->dev, "set amp-gpio for '%s'\n",
 				 snd_pci_quirk_name(quirk));
@@ -2635,9 +2671,14 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 	quirk = snd_pci_quirk_lookup(pci, m3_irda_quirk_list);
 	if (quirk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO
 			    "maestro3: enabled irda workaround for '%s'\n",
 			    snd_pci_quirk_name(quirk));
+=======
+		dev_info(card->dev, "enabled irda workaround for '%s'\n",
+			 snd_pci_quirk_name(quirk));
+>>>>>>> v3.18
 =======
 		dev_info(card->dev, "enabled irda workaround for '%s'\n",
 			 snd_pci_quirk_name(quirk));
@@ -2694,7 +2735,11 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 	if (request_irq(pci->irq, snd_m3_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -2707,7 +2752,11 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 	chip->suspend_mem = vmalloc(sizeof(u16) * (REV_B_CODE_MEMORY_LENGTH + REV_B_DATA_MEMORY_LENGTH));
 	if (chip->suspend_mem == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "can't allocate apm buffer\n");
+=======
+		dev_warn(card->dev, "can't allocate apm buffer\n");
+>>>>>>> v3.18
 =======
 		dev_warn(card->dev, "can't allocate apm buffer\n");
 >>>>>>> v3.18
@@ -2735,8 +2784,14 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 		err = snd_m3_input_register(chip);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_WARNING "Input device registration "
 				"failed with error %i", err);
+=======
+			dev_warn(card->dev,
+				 "Input device registration failed with error %i",
+				 err);
+>>>>>>> v3.18
 =======
 			dev_warn(card->dev,
 				 "Input device registration failed with error %i",
@@ -2749,8 +2804,11 @@ snd_m3_create(struct snd_card *card, struct pci_dev *pci,
 	snd_m3_assp_continue(chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*chip_ret = chip;
@@ -2780,7 +2838,12 @@ snd_m3_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -2828,7 +2891,11 @@ snd_m3_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 				  -1, &chip->rmidi);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "maestro3: no MIDI support.\n");
+=======
+		dev_warn(card->dev, "no MIDI support.\n");
+>>>>>>> v3.18
 =======
 		dev_warn(card->dev, "no MIDI support.\n");
 >>>>>>> v3.18
@@ -2843,7 +2910,10 @@ static void snd_m3_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

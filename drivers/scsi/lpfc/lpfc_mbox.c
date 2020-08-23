@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2009 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -183,7 +187,12 @@ lpfc_dump_wakeup_param(struct lpfc_hba *phba, LPFC_MBOXQ_t *pmb)
 	mb->un.varDmp.cv = 1;
 	mb->un.varDmp.type = DMP_NV_PARAMS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mb->un.varDmp.entry_index = 0;
+=======
+	if (phba->sli_rev < LPFC_SLI_REV4)
+		mb->un.varDmp.entry_index = 0;
+>>>>>>> v3.18
 =======
 	if (phba->sli_rev < LPFC_SLI_REV4)
 		mb->un.varDmp.entry_index = 0;
@@ -371,7 +380,11 @@ lpfc_config_link(struct lpfc_hba * phba, LPFC_MBOXQ_t * pmb)
 	 * SLI-2, Coalescing Response Feature.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phba->cfg_cr_delay) {
+=======
+	if (phba->cfg_cr_delay && (phba->sli_rev < LPFC_SLI_REV4)) {
+>>>>>>> v3.18
 =======
 	if (phba->cfg_cr_delay && (phba->sli_rev < LPFC_SLI_REV4)) {
 >>>>>>> v3.18
@@ -391,7 +404,11 @@ lpfc_config_link(struct lpfc_hba * phba, LPFC_MBOXQ_t * pmb)
 	mb->un.varCfgLnk.citov = phba->fc_citov;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phba->cfg_ack0)
+=======
+	if (phba->cfg_ack0 && (phba->sli_rev < LPFC_SLI_REV4))
+>>>>>>> v3.18
 =======
 	if (phba->cfg_ack0 && (phba->sli_rev < LPFC_SLI_REV4))
 >>>>>>> v3.18
@@ -1828,6 +1845,7 @@ lpfc_sli4_config(struct lpfc_hba *phba, struct lpfcMboxq *mbox,
 		 * the later DMA memory free.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		viraddr = dma_alloc_coherent(&phba->pcidev->dev, SLI4_PAGE_SIZE,
 					     &phyaddr, GFP_KERNEL);
 		/* In case of malloc fails, proceed with whatever we have */
@@ -1835,12 +1853,17 @@ lpfc_sli4_config(struct lpfc_hba *phba, struct lpfcMboxq *mbox,
 			break;
 		memset(viraddr, 0, SLI4_PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 		viraddr = dma_zalloc_coherent(&phba->pcidev->dev,
 					      SLI4_PAGE_SIZE, &phyaddr,
 					      GFP_KERNEL);
 		/* In case of malloc fails, proceed with whatever we have */
 		if (!viraddr)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mbox->sge_array->addr[pagen] = viraddr;
 		/* Keep the first page for later sub-header construction */

@@ -19,12 +19,18 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "iomap.h"
 #include "common.h"
 #include "cm.h"
 #include "cm1_44xx.h"
 #include "cm2_44xx.h"
 #include "cm-regbits-44xx.h"
+=======
+#include "cm.h"
+#include "cm1_44xx.h"
+#include "cm2_44xx.h"
+>>>>>>> v3.18
 =======
 #include "cm.h"
 #include "cm1_44xx.h"
@@ -37,7 +43,11 @@
 u32 omap4_cm1_read_inst_reg(s16 inst, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(OMAP44XX_CM1_REGADDR(inst, reg));
+=======
+	return readl_relaxed(cm_base + inst + reg);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(cm_base + inst + reg);
 >>>>>>> v3.18
@@ -47,7 +57,11 @@ u32 omap4_cm1_read_inst_reg(s16 inst, u16 reg)
 void omap4_cm1_write_inst_reg(u32 val, s16 inst, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP44XX_CM1_REGADDR(inst, reg));
+=======
+	writel_relaxed(val, cm_base + inst + reg);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, cm_base + inst + reg);
 >>>>>>> v3.18
@@ -57,7 +71,11 @@ void omap4_cm1_write_inst_reg(u32 val, s16 inst, u16 reg)
 u32 omap4_cm2_read_inst_reg(s16 inst, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(OMAP44XX_CM2_REGADDR(inst, reg));
+=======
+	return readl_relaxed(cm2_base + inst + reg);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(cm2_base + inst + reg);
 >>>>>>> v3.18
@@ -67,7 +85,11 @@ u32 omap4_cm2_read_inst_reg(s16 inst, u16 reg)
 void omap4_cm2_write_inst_reg(u32 val, s16 inst, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP44XX_CM2_REGADDR(inst, reg));
+=======
+	writel_relaxed(val, cm2_base + inst + reg);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, cm2_base + inst + reg);
 >>>>>>> v3.18

@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2007-2009 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2007-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2007-2013 Solarflare Communications Inc.
@@ -149,6 +154,10 @@ enum efx_loopback_mode {
  * @RESET_TYPE_RECOVER_OR_DISABLE: Try to recover. Apply RESET_TYPE_DISABLE if
  * unsuccessful.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @RESET_TYPE_MC_BIST: MC entering BIST mode.
+>>>>>>> v3.18
 =======
  * @RESET_TYPE_MC_BIST: MC entering BIST mode.
 >>>>>>> v3.18
@@ -156,6 +165,7 @@ enum efx_loopback_mode {
  * @RESET_TYPE_TX_WATCHDOG: reset due to TX watchdog
  * @RESET_TYPE_INT_ERROR: reset due to internal error
  * @RESET_TYPE_RX_RECOVERY: reset to recover from RX datapath errors
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @RESET_TYPE_RX_DESC_FETCH: pcie error during rx descriptor fetch
  * @RESET_TYPE_TX_DESC_FETCH: pcie error during tx descriptor fetch
@@ -170,6 +180,8 @@ enum reset_type {
 	RESET_TYPE_RECOVER_OR_DISABLE = 4,
 	RESET_TYPE_DISABLE = 5,
 =======
+=======
+>>>>>>> v3.18
  * @RESET_TYPE_DMA_ERROR: DMA error
  * @RESET_TYPE_TX_SKIP: hardware completed empty tx descriptors
  * @RESET_TYPE_MC_FAILURE: MC reboot/assertion
@@ -183,17 +195,23 @@ enum reset_type {
 	RESET_TYPE_RECOVER_OR_DISABLE,
 	RESET_TYPE_MC_BIST,
 	RESET_TYPE_DISABLE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RESET_TYPE_MAX_METHOD,
 	RESET_TYPE_TX_WATCHDOG,
 	RESET_TYPE_INT_ERROR,
 	RESET_TYPE_RX_RECOVERY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RESET_TYPE_RX_DESC_FETCH,
 	RESET_TYPE_TX_DESC_FETCH,
 	RESET_TYPE_TX_SKIP,
 	RESET_TYPE_MC_FAILURE,
 =======
+=======
+>>>>>>> v3.18
 	RESET_TYPE_DMA_ERROR,
 	RESET_TYPE_TX_SKIP,
 	RESET_TYPE_MC_FAILURE,
@@ -204,6 +222,9 @@ enum reset_type {
 	 * efx_ioctl_reset.
 	 */
 	RESET_TYPE_MCDI_TIMEOUT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RESET_TYPE_MAX,
 };

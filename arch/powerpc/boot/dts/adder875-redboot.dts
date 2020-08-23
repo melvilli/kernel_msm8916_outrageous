@@ -88,7 +88,10 @@
 			PHY0: ethernet-phy@0 {
 				reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			};
@@ -96,7 +99,10 @@
 			PHY1: ethernet-phy@1 {
 				reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			};

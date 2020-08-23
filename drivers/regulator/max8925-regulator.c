@@ -37,9 +37,13 @@
 struct max8925_regulator_info {
 	struct regulator_desc	desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev	*regulator;
 	struct i2c_client	*i2c;
 	struct max8925_chip	*chip;
+=======
+	struct i2c_client	*i2c;
+>>>>>>> v3.18
 =======
 	struct i2c_client	*i2c;
 >>>>>>> v3.18
@@ -256,16 +260,22 @@ static int max8925_regulator_dt_init(struct platform_device *pdev,
 	struct device_node *nproot, *np;
 	int rcount;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nproot = of_node_get(pdev->dev.parent->of_node);
 	if (!nproot)
 		return -ENODEV;
 	np = of_find_node_by_name(nproot, "regulators");
 =======
+=======
+>>>>>>> v3.18
 
 	nproot = pdev->dev.parent->of_node;
 	if (!nproot)
 		return -ENODEV;
 	np = of_get_child_by_name(nproot, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!np) {
 		dev_err(&pdev->dev, "failed to find regulators node\n");
@@ -277,7 +287,11 @@ static int max8925_regulator_dt_init(struct platform_device *pdev,
 	of_node_put(np);
 	if (rcount < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return rcount;
+>>>>>>> v3.18
 =======
 		return rcount;
 >>>>>>> v3.18
@@ -294,7 +308,11 @@ static int max8925_regulator_probe(struct platform_device *pdev)
 {
 	struct max8925_chip *chip = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_init_data *pdata = pdev->dev.platform_data;
+=======
+	struct regulator_init_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct regulator_init_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -324,7 +342,10 @@ static int max8925_regulator_probe(struct platform_device *pdev)
 	}
 	ri->i2c = chip->i2c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ri->chip = chip;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -336,7 +357,11 @@ static int max8925_regulator_probe(struct platform_device *pdev)
 			config.init_data = pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = regulator_register(&ri->desc, &config);
+=======
+	rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
+>>>>>>> v3.18
 =======
 	rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
 >>>>>>> v3.18
@@ -351,6 +376,7 @@ static int max8925_regulator_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max8925_regulator_remove(struct platform_device *pdev)
 {
 	struct regulator_dev *rdev = platform_get_drvdata(pdev);
@@ -363,6 +389,8 @@ static int max8925_regulator_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver max8925_regulator_driver = {
 	.driver		= {
 		.name	= "max8925-regulator",
@@ -370,7 +398,10 @@ static struct platform_driver max8925_regulator_driver = {
 	},
 	.probe		= max8925_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max8925_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -155,7 +155,11 @@ void jfs_evict_inode(struct inode *inode)
 
 		if (JFS_IP(inode)->fileset == FILESYSTEM_I) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			truncate_inode_pages(&inode->i_data, 0);
+=======
+			truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 			truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -173,7 +177,11 @@ void jfs_evict_inode(struct inode *inode)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_inode_pages(&inode->i_data, 0);
+=======
+		truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 		truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -315,7 +323,11 @@ static void jfs_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -344,7 +356,11 @@ static sector_t jfs_bmap(struct address_space *mapping, sector_t block)
 
 static ssize_t jfs_direct_IO(int rw, struct kiocb *iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct iovec *iov, loff_t offset, unsigned long nr_segs)
+=======
+	struct iov_iter *iter, loff_t offset)
+>>>>>>> v3.18
 =======
 	struct iov_iter *iter, loff_t offset)
 >>>>>>> v3.18
@@ -353,15 +369,21 @@ static ssize_t jfs_direct_IO(int rw, struct kiocb *iocb,
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = file->f_mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
 				 jfs_get_block);
 =======
+=======
+>>>>>>> v3.18
 	size_t count = iov_iter_count(iter);
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, jfs_get_block);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -371,7 +393,11 @@ static ssize_t jfs_direct_IO(int rw, struct kiocb *iocb,
 	if (unlikely((rw & WRITE) && ret < 0)) {
 		loff_t isize = i_size_read(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		loff_t end = offset + iov_length(iov, nr_segs);
+=======
+		loff_t end = offset + count;
+>>>>>>> v3.18
 =======
 		loff_t end = offset + count;
 >>>>>>> v3.18

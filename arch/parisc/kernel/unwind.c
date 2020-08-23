@@ -169,7 +169,11 @@ void unwind_table_remove(struct unwind_table *table)
 
 /* Called from setup_arch to import the kernel unwind info */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int unwind_init(void)
+=======
+int __init unwind_init(void)
+>>>>>>> v3.18
 =======
 int __init unwind_init(void)
 >>>>>>> v3.18
@@ -238,7 +242,10 @@ static void unwind_frame_regs(struct unwind_frame_info *info)
 	if (e == NULL) {
 		unsigned long sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		extern char _stext[], _etext[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -289,8 +296,12 @@ static void unwind_frame_regs(struct unwind_frame_info *info)
 			info->prev_ip = tmp;
 			sp = info->prev_sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while (info->prev_ip < (unsigned long)_stext ||
 			 info->prev_ip > (unsigned long)_etext);
+=======
+		} while (!kernel_text_address(info->prev_ip));
+>>>>>>> v3.18
 =======
 		} while (!kernel_text_address(info->prev_ip));
 >>>>>>> v3.18
@@ -447,9 +458,14 @@ unsigned long return_address(unsigned int level)
 		if (unwind_once(&info) < 0 || info.ip == 0)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!__kernel_text_address(info.ip)) {
 			return 0;
 		}
+=======
+		if (!kernel_text_address(info.ip))
+			return 0;
+>>>>>>> v3.18
 =======
 		if (!kernel_text_address(info.ip))
 			return 0;

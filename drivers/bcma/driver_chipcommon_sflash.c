@@ -31,7 +31,11 @@ struct bcma_sflash_tbl_e {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bcma_sflash_tbl_e bcma_sflash_st_tbl[] = {
+=======
+static const struct bcma_sflash_tbl_e bcma_sflash_st_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct bcma_sflash_tbl_e bcma_sflash_st_tbl[] = {
 >>>>>>> v3.18
@@ -43,15 +47,21 @@ static const struct bcma_sflash_tbl_e bcma_sflash_st_tbl[] = {
 	{ "M25P64", 0x16, 0x10000, 128, },
 	{ "M25FL128", 0x17, 0x10000, 256, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0 },
 };
 
 static struct bcma_sflash_tbl_e bcma_sflash_sst_tbl[] = {
 =======
+=======
+>>>>>>> v3.18
 	{ NULL },
 };
 
 static const struct bcma_sflash_tbl_e bcma_sflash_sst_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "SST25WF512", 1, 0x1000, 16, },
 	{ "SST25VF512", 0x48, 0x1000, 16, },
@@ -68,15 +78,21 @@ static const struct bcma_sflash_tbl_e bcma_sflash_sst_tbl[] = {
 	{ "SST25VF032", 0x4a, 0x1000, 1024, },
 	{ "SST25VF064", 0x4b, 0x1000, 2048, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0 },
 };
 
 static struct bcma_sflash_tbl_e bcma_sflash_at_tbl[] = {
 =======
+=======
+>>>>>>> v3.18
 	{ NULL },
 };
 
 static const struct bcma_sflash_tbl_e bcma_sflash_at_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "AT45DB011", 0xc, 256, 512, },
 	{ "AT45DB021", 0x14, 256, 1024, },
@@ -86,7 +102,11 @@ static const struct bcma_sflash_tbl_e bcma_sflash_at_tbl[] = {
 	{ "AT45DB321", 0x34, 512, 8192, },
 	{ "AT45DB642", 0x3c, 1024, 8192, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0 },
+=======
+	{ NULL },
+>>>>>>> v3.18
 =======
 	{ NULL },
 >>>>>>> v3.18
@@ -112,7 +132,11 @@ int bcma_sflash_init(struct bcma_drv_cc *cc)
 	struct bcma_bus *bus = cc->core->bus;
 	struct bcma_sflash *sflash = &cc->sflash;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcma_sflash_tbl_e *e;
+=======
+	const struct bcma_sflash_tbl_e *e;
+>>>>>>> v3.18
 =======
 	const struct bcma_sflash_tbl_e *e;
 >>>>>>> v3.18

@@ -10,7 +10,11 @@
  *
  * Copyright (c) 2009-2010 by:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *	 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *	 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -399,7 +403,11 @@ static const struct pci_id_table pci_dev_table[] = {
  *	pci_device_id	table for which devices we are looking for
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i7core_pci_tbl) = {
+=======
+static const struct pci_device_id i7core_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i7core_pci_tbl[] = {
 >>>>>>> v3.18
@@ -713,7 +721,11 @@ static ssize_t i7core_inject_section_store(struct device *dev,
 		disable_inject(mci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &value);
+=======
+	rc = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 =======
 	rc = kstrtoul(data, 10, &value);
 >>>>>>> v3.18
@@ -754,7 +766,11 @@ struct i7core_pvt *pvt = mci->pvt_info;
 		disable_inject(mci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &value);
+=======
+	rc = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 =======
 	rc = kstrtoul(data, 10, &value);
 >>>>>>> v3.18
@@ -798,7 +814,11 @@ static ssize_t i7core_inject_eccmask_store(struct device *dev,
 		disable_inject(mci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &value);
+=======
+	rc = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 =======
 	rc = kstrtoul(data, 10, &value);
 >>>>>>> v3.18
@@ -851,7 +871,11 @@ static ssize_t i7core_inject_store_##param(			\
 		value = -1;					\
 	else {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = strict_strtoul(data, 10, &value);		\
+=======
+		rc = kstrtoul(data, 10, &value);		\
+>>>>>>> v3.18
 =======
 		rc = kstrtoul(data, 10, &value);		\
 >>>>>>> v3.18
@@ -959,7 +983,11 @@ static ssize_t i7core_inject_enable_store(struct device *dev,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &enable);
+=======
+	rc = kstrtoul(data, 10, &enable);
+>>>>>>> v3.18
 =======
 	rc = kstrtoul(data, 10, &enable);
 >>>>>>> v3.18
@@ -1737,7 +1765,11 @@ static void i7core_mce_output_error(struct mem_ctl_info *mci,
 {
 	struct i7core_pvt *pvt = mci->pvt_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *type, *optype, *err;
+=======
+	char *optype, *err;
+>>>>>>> v3.18
 =======
 	char *optype, *err;
 >>>>>>> v3.18
@@ -1754,6 +1786,7 @@ static void i7core_mce_output_error(struct mem_ctl_info *mci,
 
 	if (uncorrected_error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ripv) {
 			type = "FATAL";
 			tp_event = HW_EVENT_ERR_FATAL;
@@ -1764,11 +1797,16 @@ static void i7core_mce_output_error(struct mem_ctl_info *mci,
 	} else {
 		type = "CORRECTED";
 =======
+=======
+>>>>>>> v3.18
 		if (ripv)
 			tp_event = HW_EVENT_ERR_FATAL;
 		else
 			tp_event = HW_EVENT_ERR_UNCORRECTED;
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tp_event = HW_EVENT_ERR_CORRECTED;
 	}
@@ -1919,7 +1957,11 @@ static int i7core_mce_check_error(struct notifier_block *nb, unsigned long val,
 	i7_dev = get_i7core_dev(mce->socketid);
 	if (!i7_dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NOTIFY_DONE;
+=======
+		return NOTIFY_BAD;
+>>>>>>> v3.18
 =======
 		return NOTIFY_BAD;
 >>>>>>> v3.18
@@ -2506,7 +2548,11 @@ module_exit(i7core_exit);
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

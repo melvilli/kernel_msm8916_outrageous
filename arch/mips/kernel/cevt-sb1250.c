@@ -108,7 +108,11 @@ static DEFINE_PER_CPU(struct irqaction, sibyte_hpt_irqaction);
 static DEFINE_PER_CPU(char [18], sibyte_hpt_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit sb1250_clockevent_init(void)
+=======
+void sb1250_clockevent_init(void)
+>>>>>>> v3.18
 =======
 void sb1250_clockevent_init(void)
 >>>>>>> v3.18

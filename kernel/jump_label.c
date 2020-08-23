@@ -14,6 +14,10 @@
 #include <linux/err.h>
 #include <linux/static_key.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jump_label_ratelimit.h>
+>>>>>>> v3.18
 =======
 #include <linux/jump_label_ratelimit.h>
 >>>>>>> v3.18
@@ -62,6 +66,10 @@ static void jump_label_update(struct static_key *key, int enable);
 void static_key_slow_inc(struct static_key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATIC_KEY_CHECK_USE();
+>>>>>>> v3.18
 =======
 	STATIC_KEY_CHECK_USE();
 >>>>>>> v3.18
@@ -111,6 +119,10 @@ static void jump_label_update_timeout(struct work_struct *work)
 void static_key_slow_dec(struct static_key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATIC_KEY_CHECK_USE();
+>>>>>>> v3.18
 =======
 	STATIC_KEY_CHECK_USE();
 >>>>>>> v3.18
@@ -121,6 +133,10 @@ EXPORT_SYMBOL_GPL(static_key_slow_dec);
 void static_key_slow_dec_deferred(struct static_key_deferred *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATIC_KEY_CHECK_USE();
+>>>>>>> v3.18
 =======
 	STATIC_KEY_CHECK_USE();
 >>>>>>> v3.18
@@ -132,6 +148,10 @@ void jump_label_rate_limit(struct static_key_deferred *key,
 		unsigned long rl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATIC_KEY_CHECK_USE();
+>>>>>>> v3.18
 =======
 	STATIC_KEY_CHECK_USE();
 >>>>>>> v3.18
@@ -232,6 +252,10 @@ void __init jump_label_init(void)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	static_key_initialized = true;
+>>>>>>> v3.18
 =======
 	static_key_initialized = true;
 >>>>>>> v3.18

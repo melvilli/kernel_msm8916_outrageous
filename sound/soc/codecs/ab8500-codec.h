@@ -25,7 +25,10 @@
 #define AB8500_SUPPORTED_FMT			(SNDRV_PCM_FMTBIT_S16_LE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* AB8500 interface slot offset definitions */
 
 #define AB8500_AD_DATA0_OFFSET	0
@@ -33,6 +36,9 @@
 #define AB8500_AD_DATA1_OFFSET	16
 #define AB8500_DA_DATA1_OFFSET	24
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* AB8500 audio bank (0x0d) register definitions */
 
@@ -84,6 +90,10 @@
 #define AB8500_ADSLOTSEL15			0x2D
 #define AB8500_ADSLOTSEL16			0x2E
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AB8500_ADSLOTSEL(slot)			(AB8500_ADSLOTSEL1 + (slot >> 1))
+>>>>>>> v3.18
 =======
 #define AB8500_ADSLOTSEL(slot)			(AB8500_ADSLOTSEL1 + (slot >> 1))
 >>>>>>> v3.18
@@ -159,6 +169,10 @@
 
 #define AB8500_MASK_ALL				0xFF
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AB8500_MASK_SLOT(slot)			((slot & 1) ? 0xF0 : 0x0F)
+>>>>>>> v3.18
 =======
 #define AB8500_MASK_SLOT(slot)			((slot & 1) ? 0xF0 : 0x0F)
 >>>>>>> v3.18
@@ -366,6 +380,7 @@
 
 /* AB8500_ADSLOTSELX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AB8500_ADSLOTSELX_AD_OUT1_TO_SLOT_ODD	0x00
 #define AB8500_ADSLOTSELX_AD_OUT2_TO_SLOT_ODD	0x10
 #define AB8500_ADSLOTSELX_AD_OUT3_TO_SLOT_ODD	0x20
@@ -389,6 +404,8 @@
 #define AB8500_ADSLOTSELX_EVEN_SHIFT		0
 #define AB8500_ADSLOTSELX_ODD_SHIFT		4
 =======
+=======
+>>>>>>> v3.18
 #define AB8500_AD_OUT1	0x0
 #define AB8500_AD_OUT2	0x1
 #define AB8500_AD_OUT3	0x2
@@ -404,6 +421,9 @@
 #define AB8500_ADSLOTSELX_AD_OUT_TO_SLOT(out, slot)	\
 	((out) << (((slot) & 1) ? \
 	 AB8500_ADSLOTSELX_ODD_SHIFT : AB8500_ADSLOTSELX_EVEN_SHIFT))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* AB8500_ADSLOTHIZCTRL1 */

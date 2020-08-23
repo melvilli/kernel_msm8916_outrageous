@@ -16,6 +16,10 @@
 #include <asm/processor.h>
 #include <asm/debug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dis.h>
+>>>>>>> v3.18
 =======
 #include <asm/dis.h>
 >>>>>>> v3.18
@@ -45,6 +49,10 @@ __show_trace(unsigned long sp, unsigned long low, unsigned long high)
 	struct stack_frame *sf;
 	struct pt_regs *regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long addr;
+>>>>>>> v3.18
 =======
 	unsigned long addr;
 >>>>>>> v3.18
@@ -55,8 +63,13 @@ __show_trace(unsigned long sp, unsigned long low, unsigned long high)
 			return sp;
 		sf = (struct stack_frame *) sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("([<%016lx>] ", sf->gprs[8] & PSW_ADDR_INSN);
 		print_symbol("%s)\n", sf->gprs[8] & PSW_ADDR_INSN);
+=======
+		addr = sf->gprs[8] & PSW_ADDR_INSN;
+		printk("([<%016lx>] %pSR)\n", addr, (void *)addr);
+>>>>>>> v3.18
 =======
 		addr = sf->gprs[8] & PSW_ADDR_INSN;
 		printk("([<%016lx>] %pSR)\n", addr, (void *)addr);
@@ -71,8 +84,13 @@ __show_trace(unsigned long sp, unsigned long low, unsigned long high)
 				return sp;
 			sf = (struct stack_frame *) sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(" [<%016lx>] ", sf->gprs[8] & PSW_ADDR_INSN);
 			print_symbol("%s\n", sf->gprs[8] & PSW_ADDR_INSN);
+=======
+			addr = sf->gprs[8] & PSW_ADDR_INSN;
+			printk(" [<%016lx>] %pSR\n", addr, (void *)addr);
+>>>>>>> v3.18
 =======
 			addr = sf->gprs[8] & PSW_ADDR_INSN;
 			printk(" [<%016lx>] %pSR\n", addr, (void *)addr);
@@ -84,8 +102,13 @@ __show_trace(unsigned long sp, unsigned long low, unsigned long high)
 			return sp;
 		regs = (struct pt_regs *) sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(" [<%016lx>] ", regs->psw.addr & PSW_ADDR_INSN);
 		print_symbol("%s\n", regs->psw.addr & PSW_ADDR_INSN);
+=======
+		addr = regs->psw.addr & PSW_ADDR_INSN;
+		printk(" [<%016lx>] %pSR\n", addr, (void *)addr);
+>>>>>>> v3.18
 =======
 		addr = regs->psw.addr & PSW_ADDR_INSN;
 		printk(" [<%016lx>] %pSR\n", addr, (void *)addr);
@@ -152,8 +175,12 @@ static void show_last_breaking_event(struct pt_regs *regs)
 #ifdef CONFIG_64BIT
 	printk("Last Breaking-Event-Address:\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(" [<%016lx>] ", regs->args[0] & PSW_ADDR_INSN);
 	print_symbol("%s\n", regs->args[0] & PSW_ADDR_INSN);
+=======
+	printk(" [<%016lx>] %pSR\n", regs->args[0], (void *)regs->args[0]);
+>>>>>>> v3.18
 =======
 	printk(" [<%016lx>] %pSR\n", regs->args[0], (void *)regs->args[0]);
 >>>>>>> v3.18
@@ -171,15 +198,21 @@ void show_registers(struct pt_regs *regs)
 
 	mode = user_mode(regs) ? "User" : "Krnl";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s PSW : %p %p",
 	       mode, (void *) regs->psw.mask,
 	       (void *) regs->psw.addr);
 	print_symbol(" (%s)\n", regs->psw.addr & PSW_ADDR_INSN);
 =======
+=======
+>>>>>>> v3.18
 	printk("%s PSW : %p %p", mode, (void *)regs->psw.mask, (void *)regs->psw.addr);
 	if (!user_mode(regs))
 		printk(" (%pSR)", (void *)regs->psw.addr);
 	printk("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk("           R:%x T:%x IO:%x EX:%x Key:%x M:%x W:%x "
 	       "P:%x AS:%x CC:%x PM:%x", mask_bits(regs, PSW_MASK_PER),

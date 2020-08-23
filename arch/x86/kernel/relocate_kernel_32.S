@@ -187,7 +187,11 @@ identity_mapped:
 	movl	%eax, %cr3
 	movl	%cr0, %eax
 <<<<<<< HEAD
+<<<<<<< HEAD
 	orl	$(1<<31), %eax
+=======
+	orl	$X86_CR0_PG, %eax
+>>>>>>> v3.18
 =======
 	orl	$X86_CR0_PG, %eax
 >>>>>>> v3.18

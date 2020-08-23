@@ -54,7 +54,11 @@ typedef enum _HT_MCS_RATE{
 	HT_MCS15 = 0x00008000,
 	// Do not define MCS32 here although 8190 support MCS32
 <<<<<<< HEAD
+<<<<<<< HEAD
 }HT_MCS_RATE,*PHT_MCS_RATE;
+=======
+} HT_MCS_RATE, *PHT_MCS_RATE;
+>>>>>>> v3.18
 =======
 } HT_MCS_RATE, *PHT_MCS_RATE;
 >>>>>>> v3.18

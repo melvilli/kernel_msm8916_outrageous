@@ -1,9 +1,12 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * linux/sound/arm/bf5xx-i2s-pcm.h -- ALSA PCM interface for the Blackfin
  *
  * Copyright 2007 Analog Device Inc.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This program is free software; you can redistribute it and/or modify
@@ -11,6 +14,7 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef _BF5XX_I2S_PCM_H
 #define _BF5XX_I2S_PCM_H
@@ -26,6 +30,8 @@ struct bf5xx_gpio {
 	u32 clk;
 	u32 frm;
 =======
+=======
+>>>>>>> v3.18
 #ifndef _BF5XX_TDM_PCM_H
 #define _BF5XX_TDM_PCM_H
 
@@ -34,6 +40,9 @@ struct bf5xx_gpio {
 struct bf5xx_i2s_pcm_data {
 	unsigned int map[BFIN_TDM_DAI_MAX_SLOTS];
 	bool tdm_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

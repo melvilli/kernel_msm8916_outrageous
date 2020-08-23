@@ -14,9 +14,15 @@
    and strcmp might often terminate early.  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/linkage.h>
 
 ARC_ENTRY strcmp
+=======
+#include <linux/linkage.h>
+
+ENTRY(strcmp)
+>>>>>>> v3.18
 =======
 #include <linux/linkage.h>
 
@@ -100,7 +106,11 @@ ENTRY(strcmp)
 	j_s.d	[blink]
 	sub	r0,r2,r3
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT strcmp
+=======
+END(strcmp)
+>>>>>>> v3.18
 =======
 END(strcmp)
 >>>>>>> v3.18

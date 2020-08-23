@@ -35,7 +35,10 @@
 #include <drm/drm_fb_cma_helper.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Defaulting to pixel clock defined on AM335x */
 #define TILCDC_DEFAULT_MAX_PIXELCLOCK  126000
 /* Defaulting to max width as defined on AM335x */
@@ -48,6 +51,9 @@
 #define TILCDC_DEFAULT_MAX_BANDWIDTH  (1280*1024*60)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tilcdc_drm_private {
 	void __iomem *mmio;
@@ -59,7 +65,10 @@ struct tilcdc_drm_private {
 	/* don't attempt resolutions w/ higher W * H * Hz: */
 	uint32_t max_bandwidth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Pixel Clock will be restricted to some value as
 	 * defined in the device datasheet measured in KHz
@@ -70,6 +79,9 @@ struct tilcdc_drm_private {
 	 * measured in pixels
 	 */
 	uint32_t max_width;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* register contents saved across suspend/resume: */
@@ -105,7 +117,10 @@ struct tilcdc_module_ops {
 	/* create appropriate encoders/connectors: */
 	int (*modeset_init)(struct tilcdc_module *mod, struct drm_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*destroy)(struct tilcdc_module *mod);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
@@ -121,6 +136,10 @@ struct tilcdc_module {
 	struct list_head list;
 	const struct tilcdc_module_ops *funcs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int preferred_bpp;
+>>>>>>> v3.18
 =======
 	unsigned int preferred_bpp;
 >>>>>>> v3.18
@@ -130,7 +149,11 @@ void tilcdc_module_init(struct tilcdc_module *mod, const char *name,
 		const struct tilcdc_module_ops *funcs);
 void tilcdc_module_cleanup(struct tilcdc_module *mod);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+void tilcdc_slave_probedefer(bool defered);
+>>>>>>> v3.18
 =======
 void tilcdc_slave_probedefer(bool defered);
 >>>>>>> v3.18

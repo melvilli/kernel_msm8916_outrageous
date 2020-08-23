@@ -38,6 +38,10 @@
 #include <linux/usb/gpio_vbus.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -965,6 +969,7 @@ static void __init tosa_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init fixup_tosa(struct tag *tags, char **cmdline,
 			      struct meminfo *mi)
 {
@@ -977,6 +982,8 @@ static void __init fixup_tosa(struct tag *tags, char **cmdline,
 MACHINE_START(TOSA, "SHARP Tosa")
 	.restart_mode	= 'g',
 =======
+=======
+>>>>>>> v3.18
 static void __init fixup_tosa(struct tag *tags, char **cmdline)
 {
 	sharpsl_save_param();
@@ -984,6 +991,9 @@ static void __init fixup_tosa(struct tag *tags, char **cmdline)
 }
 
 MACHINE_START(TOSA, "SHARP Tosa")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fixup          = fixup_tosa,
 	.map_io         = pxa25x_map_io,

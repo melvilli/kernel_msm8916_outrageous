@@ -70,6 +70,10 @@ enum {
 	/*master notify fw on finish for slave's flr*/
 	MLX4_CMD_INFORM_FLR_DONE = 0x5b,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MLX4_CMD_GET_OP_REQ      = 0x59,
+>>>>>>> v3.18
 =======
 	MLX4_CMD_GET_OP_REQ      = 0x59,
 >>>>>>> v3.18
@@ -116,15 +120,21 @@ enum {
 	MLX4_CMD_SUSPEND_QP	 = 0x32,
 	MLX4_CMD_UNSUSPEND_QP	 = 0x33,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* special QP and management commands */
 	MLX4_CMD_CONF_SPECIAL_QP = 0x23,
 	MLX4_CMD_MAD_IFC	 = 0x24,
 =======
+=======
+>>>>>>> v3.18
 	MLX4_CMD_UPDATE_QP	 = 0x61,
 	/* special QP and management commands */
 	MLX4_CMD_CONF_SPECIAL_QP = 0x23,
 	MLX4_CMD_MAD_IFC	 = 0x24,
 	MLX4_CMD_MAD_DEMUX	 = 0x203,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* multicast commands */
@@ -136,6 +146,10 @@ enum {
 	MLX4_CMD_DIAG_RPRT	 = 0x30,
 	MLX4_CMD_NOP		 = 0x31,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MLX4_CMD_CONFIG_DEV	 = 0x3a,
+>>>>>>> v3.18
 =======
 	MLX4_CMD_CONFIG_DEV	 = 0x3a,
 >>>>>>> v3.18
@@ -169,6 +183,7 @@ enum {
 	MLX4_CMD_SET_IF_STAT	 = 0X55,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set port opcode modifiers */
 	MLX4_SET_PORT_PRIO2TC = 0x8,
 	MLX4_SET_PORT_SCHEDULER  = 0x9,
@@ -177,10 +192,15 @@ enum {
 	MLX4_QP_FLOW_STEERING_ATTACH = 0x65,
 	MLX4_QP_FLOW_STEERING_DETACH = 0x66,
 =======
+=======
+>>>>>>> v3.18
 	/* register/delete flow steering network rules */
 	MLX4_QP_FLOW_STEERING_ATTACH = 0x65,
 	MLX4_QP_FLOW_STEERING_DETACH = 0x66,
 	MLX4_FLOW_STEERING_IB_UC_QP_RANGE = 0x64,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -204,7 +224,10 @@ enum {
 	MLX4_SET_PORT_PRIO_MAP  = 0x4,
 	MLX4_SET_PORT_GID_TABLE = 0x5,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	MLX4_SET_PORT_PRIO2TC	= 0x8,
 	MLX4_SET_PORT_SCHEDULER = 0x9,
 	MLX4_SET_PORT_VXLAN	= 0xB
@@ -214,6 +237,9 @@ enum {
 	MLX4_CMD_MAD_DEMUX_CONFIG	= 0,
 	MLX4_CMD_MAD_DEMUX_QUERY_STATE	= 1,
 	MLX4_CMD_MAD_DEMUX_QUERY_RESTR	= 2, /* Query mad demux restrictions */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -273,8 +299,11 @@ int mlx4_set_vf_vlan(struct mlx4_dev *dev, int port, int vf, u16 vlan, u8 qos);
 int mlx4_set_vf_spoofchk(struct mlx4_dev *dev, int port, int vf, bool setting);
 int mlx4_get_vf_config(struct mlx4_dev *dev, int port, int vf, struct ifla_vf_info *ivf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 int mlx4_set_vf_link_state(struct mlx4_dev *dev, int port, int vf, int link_state);
 /*
  * mlx4_get_slave_default_vlan -
@@ -283,6 +312,9 @@ int mlx4_set_vf_link_state(struct mlx4_dev *dev, int port, int vf, int link_stat
  */
 bool mlx4_get_slave_default_vlan(struct mlx4_dev *dev, int port, int slave,
 				 u16 *vlan, u8 *qos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MLX4_COMM_GET_IF_REV(cmd_chan_ver) (u8)((cmd_chan_ver) >> 8)

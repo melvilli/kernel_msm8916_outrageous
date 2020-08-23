@@ -18,9 +18,12 @@
 #define _BRCMF_BUS_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The level of bus communication with the dongle */
 enum brcmf_bus_state {
 =======
+=======
+>>>>>>> v3.18
 #include "dhd_dbg.h"
 
 /* IDs of the 6 default common rings of msgbuf protocol */
@@ -39,6 +42,9 @@ enum brcmf_bus_state {
 enum brcmf_bus_state {
 	BRCMF_BUS_UNKNOWN,	/* Not determined yet */
 	BRCMF_BUS_NOMEDIUM,	/* No medium access to dongle */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BRCMF_BUS_DOWN,		/* Not ready for frame transfers */
 	BRCMF_BUS_LOAD,		/* Download access only (CPU reset) */
@@ -46,13 +52,19 @@ enum brcmf_bus_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* The level of bus communication with the dongle */
 enum brcmf_bus_protocol_type {
 	BRCMF_PROTO_BCDC,
 	BRCMF_PROTO_MSGBUF
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct brcmf_bus_dcmd {
 	char *name;
@@ -65,6 +77,7 @@ struct brcmf_bus_dcmd {
  * struct brcmf_bus_ops - bus callback operations.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @init: prepare for communication with dongle.
  * @stop: clear pending frames, disable data flow.
  * @txdata: send a data frame to the dongle (callee disposes skb).
@@ -72,6 +85,8 @@ struct brcmf_bus_dcmd {
  * @rxctl: receive a control response message from dongle.
  * @gettxq: obtain a reference of bus transmit queue (optional).
 =======
+=======
+>>>>>>> v3.18
  * @preinit: execute bus/device specific dongle init commands (optional).
  * @init: prepare for communication with dongle.
  * @stop: clear pending frames, disable data flow.
@@ -84,6 +99,9 @@ struct brcmf_bus_dcmd {
  * @rxctl: receive a control response message from dongle.
  * @gettxq: obtain a reference of bus transmit queue (optional).
  * @wowl_config: specify if dongle is configured for wowl when going to suspend
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This structure provides an abstract interface towards the
@@ -93,7 +111,11 @@ struct brcmf_bus_dcmd {
  */
 struct brcmf_bus_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*init)(struct device *dev);
+=======
+	int (*preinit)(struct device *dev);
+>>>>>>> v3.18
 =======
 	int (*preinit)(struct device *dev);
 >>>>>>> v3.18
@@ -103,9 +125,12 @@ struct brcmf_bus_ops {
 	int (*rxctl)(struct device *dev, unsigned char *msg, uint len);
 	struct pktq * (*gettxq)(struct device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	void (*wowl_config)(struct device *dev, bool enabled);
 };
 
@@ -128,12 +153,19 @@ struct brcmf_bus_msgbuf {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct brcmf_bus - interface structure between common and bus layer
  *
  * @bus_priv: pointer to private bus device.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @proto_type: protocol type, bcdc or msgbuf
+>>>>>>> v3.18
 =======
  * @proto_type: protocol type, bcdc or msgbuf
 >>>>>>> v3.18
@@ -144,9 +176,15 @@ struct brcmf_bus_msgbuf {
  * @tx_realloc: number of tx packets realloced for headroom.
  * @dstats: dongle-based statistical data.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @align: alignment requirement for the bus.
  * @dcmd_list: bus/device specific dongle initialization commands.
  * @chip: device identifier of the dongle chip.
+=======
+ * @dcmd_list: bus/device specific dongle initialization commands.
+ * @chip: device identifier of the dongle chip.
+ * @wowl_supported: is wowl supported by bus driver.
+>>>>>>> v3.18
 =======
  * @dcmd_list: bus/device specific dongle initialization commands.
  * @chip: device identifier of the dongle chip.
@@ -159,7 +197,13 @@ struct brcmf_bus {
 		struct brcmf_sdio_dev *sdio;
 		struct brcmf_usbdev *usb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} bus_priv;
+=======
+		struct brcmf_pciedev *pcie;
+	} bus_priv;
+	enum brcmf_bus_protocol_type proto_type;
+>>>>>>> v3.18
 =======
 		struct brcmf_pciedev *pcie;
 	} bus_priv;
@@ -171,6 +215,7 @@ struct brcmf_bus {
 	uint maxctl;
 	unsigned long tx_realloc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 align;
 	u32 chip;
 	u32 chiprev;
@@ -178,6 +223,8 @@ struct brcmf_bus {
 
 	struct brcmf_bus_ops *ops;
 =======
+=======
+>>>>>>> v3.18
 	u32 chip;
 	u32 chiprev;
 	bool always_use_fws_queue;
@@ -185,6 +232,9 @@ struct brcmf_bus {
 
 	struct brcmf_bus_ops *ops;
 	struct brcmf_bus_msgbuf *msgbuf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -192,15 +242,21 @@ struct brcmf_bus {
  * callback wrappers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int brcmf_bus_init(struct brcmf_bus *bus)
 {
 	return bus->ops->init(bus->dev);
 =======
+=======
+>>>>>>> v3.18
 static inline int brcmf_bus_preinit(struct brcmf_bus *bus)
 {
 	if (!bus->ops->preinit)
 		return 0;
 	return bus->ops->preinit(bus->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -235,7 +291,10 @@ struct pktq *brcmf_bus_gettxq(struct brcmf_bus *bus)
 	return bus->ops->gettxq(bus->dev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline
 void brcmf_bus_wowl_config(struct brcmf_bus *bus, bool enabled)
@@ -260,11 +319,15 @@ static inline void brcmf_bus_change_state(struct brcmf_bus *bus,
 	bus->state = new_state;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * interface functions from common layer
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern bool brcmf_c_prec_enq(struct device *dev, struct pktq *q,
 			 struct sk_buff *pkt, int prec);
@@ -296,6 +359,8 @@ extern void brcmf_sdio_register(void);
 extern void brcmf_usb_exit(void);
 extern void brcmf_usb_register(void);
 =======
+=======
+>>>>>>> v3.18
 bool brcmf_c_prec_enq(struct device *dev, struct pktq *q, struct sk_buff *pkt,
 		      int prec);
 
@@ -327,6 +392,9 @@ void brcmf_sdio_register(void);
 #ifdef CONFIG_BRCMFMAC_USB
 void brcmf_usb_exit(void);
 void brcmf_usb_register(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

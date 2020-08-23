@@ -178,8 +178,13 @@
 #define pr_fmt(fmt) "bcache: %s() " fmt "\n", __func__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bio.h>
 #include <linux/blktrace_api.h>
+=======
+#include <linux/bcache.h>
+#include <linux/bio.h>
+>>>>>>> v3.18
 =======
 #include <linux/bcache.h>
 #include <linux/bio.h>
@@ -193,6 +198,10 @@
 #include <linux/workqueue.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "bset.h"
+>>>>>>> v3.18
 =======
 #include "bset.h"
 >>>>>>> v3.18
@@ -204,10 +213,15 @@ struct bucket {
 	uint16_t	prio;
 	uint8_t		gen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t		disk_gen;
 	uint8_t		last_gc; /* Most out of date gen in the btree */
 	uint8_t		gc_gen;
 	uint16_t	gc_mark;
+=======
+	uint8_t		last_gc; /* Most out of date gen in the btree */
+	uint16_t	gc_mark; /* Bitfield used by GC. See below for field */
+>>>>>>> v3.18
 =======
 	uint8_t		last_gc; /* Most out of date gen in the btree */
 	uint16_t	gc_mark; /* Bitfield used by GC. See below for field */
@@ -220,6 +234,7 @@ struct bucket {
  */
 
 BITMASK(GC_MARK,	 struct bucket, gc_mark, 0, 2);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define GC_MARK_RECLAIMABLE	0
 #define GC_MARK_DIRTY		1
@@ -388,6 +403,8 @@ struct uuid_entry {
 
 BITMASK(UUID_FLASH_ONLY,	struct uuid_entry, flags, 0, 1);
 =======
+=======
+>>>>>>> v3.18
 #define GC_MARK_RECLAIMABLE	1
 #define GC_MARK_DIRTY		2
 #define GC_MARK_METADATA	3
@@ -395,6 +412,9 @@ BITMASK(UUID_FLASH_ONLY,	struct uuid_entry, flags, 0, 1);
 #define MAX_GC_SECTORS_USED	(~(~0ULL << GC_SECTORS_USED_SIZE))
 BITMASK(GC_SECTORS_USED, struct bucket, gc_mark, 2, GC_SECTORS_USED_SIZE);
 BITMASK(GC_MOVE, struct bucket, gc_mark, 15, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "journal.h"
@@ -410,11 +430,15 @@ struct keybuf_key {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef bool (keybuf_pred_fn)(struct keybuf *, struct bkey *);
 
 struct keybuf {
 	keybuf_pred_fn		*key_predicate;
 
+=======
+struct keybuf {
+>>>>>>> v3.18
 =======
 struct keybuf {
 >>>>>>> v3.18
@@ -432,7 +456,11 @@ struct keybuf {
 	struct rb_root		keys;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KEYBUF_NR		100
+=======
+#define KEYBUF_NR		500
+>>>>>>> v3.18
 =======
 #define KEYBUF_NR		500
 >>>>>>> v3.18
@@ -465,6 +493,7 @@ struct bcache_device {
 	struct gendisk		*disk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If nonzero, we're closing */
 	atomic_t		closing;
 
@@ -479,6 +508,8 @@ struct bcache_device {
 
 	mempool_t		*unaligned_bvec;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		flags;
 #define BCACHE_DEV_CLOSING	0
 #define BCACHE_DEV_DETACHING	1
@@ -492,6 +523,9 @@ struct bcache_device {
 	unsigned long		sectors_dirty_last;
 	long			sectors_dirty_derivative;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bio_set		*bio_split;
 
@@ -523,7 +557,12 @@ struct cached_dev {
 	struct bio		sb_bio;
 	struct bio_vec		sb_bv[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure_with_waitlist sb_write;
+=======
+	struct closure		sb_write;
+	struct semaphore	sb_write_mutex;
+>>>>>>> v3.18
 =======
 	struct closure		sb_write;
 	struct semaphore	sb_write_mutex;
@@ -564,7 +603,11 @@ struct cached_dev {
 	/* Limit number of writeback bios in flight */
 	struct semaphore	in_flight;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure_with_timer writeback;
+=======
+	struct task_struct	*writeback_thread;
+>>>>>>> v3.18
 =======
 	struct task_struct	*writeback_thread;
 >>>>>>> v3.18
@@ -586,14 +629,20 @@ struct cached_dev {
 	unsigned		readahead;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		sequential_merge:1;
 	unsigned		verify:1;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned		verify:1;
 	unsigned		bypass_torture_test:1;
 
 	unsigned		partial_stripes_expensive:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned		writeback_metadata:1;
 	unsigned		writeback_running:1;
@@ -601,19 +650,26 @@ struct cached_dev {
 	unsigned		writeback_delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			writeback_rate_change;
 	int64_t			writeback_rate_derivative;
 	uint64_t		writeback_rate_target;
 =======
+=======
+>>>>>>> v3.18
 	uint64_t		writeback_rate_target;
 	int64_t			writeback_rate_proportional;
 	int64_t			writeback_rate_derivative;
 	int64_t			writeback_rate_change;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned		writeback_rate_update_seconds;
 	unsigned		writeback_rate_d_term;
 	unsigned		writeback_rate_p_term_inverse;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned		writeback_rate_d_smooth;
 };
@@ -625,6 +681,8 @@ enum alloc_watermarks {
 	WATERMARK_NONE,
 	WATERMARK_MAX
 =======
+=======
+>>>>>>> v3.18
 };
 
 enum alloc_reserve {
@@ -633,6 +691,9 @@ enum alloc_reserve {
 	RESERVE_MOVINGGC,
 	RESERVE_NONE,
 	RESERVE_NR,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -646,10 +707,14 @@ struct cache {
 	struct block_device	*bdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		watermark[WATERMARK_MAX];
 
 	struct closure		alloc;
 	struct workqueue_struct	*alloc_workqueue;
+=======
+	struct task_struct	*alloc_thread;
+>>>>>>> v3.18
 =======
 	struct task_struct	*alloc_thread;
 >>>>>>> v3.18
@@ -676,6 +741,7 @@ struct cache {
 	 * gens/prios, they'll be moved to the free list (and possibly discarded
 	 * in the process)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * unused: GC found nothing pointing into these buckets (possibly
 	 * because all the data they contained was overwritten), so we only
@@ -684,6 +750,11 @@ struct cache {
 	DECLARE_FIFO(long, free);
 	DECLARE_FIFO(long, free_inc);
 	DECLARE_FIFO(long, unused);
+=======
+	 */
+	DECLARE_FIFO(long, free)[RESERVE_NR];
+	DECLARE_FIFO(long, free_inc);
+>>>>>>> v3.18
 =======
 	 */
 	DECLARE_FIFO(long, free)[RESERVE_NR];
@@ -699,6 +770,7 @@ struct cache {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * max(gen - disk_gen) for all buckets. When it gets too big we have to
 	 * call prio_write() to keep gens from wrapping.
 	 */
@@ -706,6 +778,8 @@ struct cache {
 	unsigned		gc_move_threshold;
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * If nonzero, we know we aren't going to find any buckets to invalidate
@@ -717,6 +791,7 @@ struct cache {
 	bool			discard; /* Get rid of? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We preallocate structs for issuing discards to buckets, and keep them
 	 * on this list when they're not in use; do_discard() issues discards
@@ -726,6 +801,8 @@ struct cache {
 	atomic_t		discards_in_flight;
 	struct list_head	discards;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct journal_device	journal;
@@ -749,7 +826,10 @@ struct gc_stat {
 	size_t			nkeys;
 	uint64_t		data;	/* sectors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint64_t		dirty;	/* sectors */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned		in_use; /* percent */
@@ -767,6 +847,7 @@ struct gc_stat {
  * flushing dirty data).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * CACHE_SET_STOPPING_2 gets set at the last phase, when it's time to shut down
  * the allocation thread.
  */
@@ -774,12 +855,17 @@ struct gc_stat {
 #define	CACHE_SET_STOPPING		1
 #define	CACHE_SET_STOPPING_2		2
 =======
+=======
+>>>>>>> v3.18
  * CACHE_SET_RUNNING means all cache devices have been registered and journal
  * replay is complete.
  */
 #define CACHE_SET_UNREGISTERING		0
 #define	CACHE_SET_STOPPING		1
 #define	CACHE_SET_RUNNING		2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct cache_set {
@@ -805,7 +891,12 @@ struct cache_set {
 	struct closure		caching;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure_with_waitlist sb_write;
+=======
+	struct closure		sb_write;
+	struct semaphore	sb_write_mutex;
+>>>>>>> v3.18
 =======
 	struct closure		sb_write;
 	struct semaphore	sb_write_mutex;
@@ -819,9 +910,12 @@ struct cache_set {
 	struct shrinker		shrink;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For the allocator itself */
 	wait_queue_head_t	alloc_wait;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* For the btree cache and anything allocation related */
@@ -861,7 +955,11 @@ struct cache_set {
 
 	/* Number of elements in btree_cache + btree_cache_freeable lists */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		bucket_cache_used;
+=======
+	unsigned		btree_cache_used;
+>>>>>>> v3.18
 =======
 	unsigned		btree_cache_used;
 >>>>>>> v3.18
@@ -869,6 +967,7 @@ struct cache_set {
 	/*
 	 * If we need to allocate memory for a new btree node and that
 	 * allocation fails, we can cannibalize another node in the btree cache
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * to satisfy the allocation. However, only one thread can be doing this
 	 * at a time, for obvious reasons - try_harder and try_wait are
@@ -879,11 +978,16 @@ struct cache_set {
 	struct closure_waitlist	try_wait;
 	uint64_t		try_harder_start;
 =======
+=======
+>>>>>>> v3.18
 	 * to satisfy the allocation - lock to guarantee only one thread does
 	 * this at a time:
 	 */
 	wait_queue_head_t	btree_cache_wait;
 	struct task_struct	*btree_cache_alloc_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -898,7 +1002,11 @@ struct cache_set {
 	 */
 	atomic_t		prio_blocked;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure_waitlist	bucket_wait;
+=======
+	wait_queue_head_t	bucket_wait;
+>>>>>>> v3.18
 =======
 	wait_queue_head_t	bucket_wait;
 >>>>>>> v3.18
@@ -918,7 +1026,11 @@ struct cache_set {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * max(gen - gc_gen) for all buckets. When it gets too big we have to gc
+=======
+	 * max(gen - last_gc) for all buckets. When it gets too big we have to gc
+>>>>>>> v3.18
 =======
 	 * max(gen - last_gc) for all buckets. When it gets too big we have to gc
 >>>>>>> v3.18
@@ -929,7 +1041,11 @@ struct cache_set {
 	size_t			nbuckets;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure_with_waitlist gc;
+=======
+	struct task_struct	*gc_thread;
+>>>>>>> v3.18
 =======
 	struct task_struct	*gc_thread;
 >>>>>>> v3.18
@@ -946,18 +1062,24 @@ struct cache_set {
 	atomic_t		sectors_to_gc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure		moving_gc;
 	struct closure_waitlist	moving_gc_wait;
 	struct keybuf		moving_gc_keys;
 	/* Number of moving GC bios in flight */
 	atomic_t		in_flight;
 =======
+=======
+>>>>>>> v3.18
 	wait_queue_head_t	moving_gc_wait;
 	struct keybuf		moving_gc_keys;
 	/* Number of moving GC bios in flight */
 	struct semaphore	moving_in_flight;
 
 	struct workqueue_struct	*moving_gc_wq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct btree		*root;
@@ -965,6 +1087,10 @@ struct cache_set {
 #ifdef CONFIG_BCACHE_DEBUG
 	struct btree		*verify_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bset		*verify_ondisk;
+>>>>>>> v3.18
 =======
 	struct bset		*verify_ondisk;
 >>>>>>> v3.18
@@ -974,6 +1100,7 @@ struct cache_set {
 	unsigned		nr_uuids;
 	struct uuid_entry	*uuids;
 	BKEY_PADDED(uuid_bucket);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct closure_with_waitlist uuid_write;
 
@@ -991,6 +1118,8 @@ struct cache_set {
 	struct mutex		sort_lock;
 	struct bset		*sort;
 =======
+=======
+>>>>>>> v3.18
 	struct closure		uuid_write;
 	struct semaphore	uuid_write_mutex;
 
@@ -1001,6 +1130,9 @@ struct cache_set {
 	mempool_t		*fill_iter;
 
 	struct bset_sort_state	sort;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* List of buckets we're currently writing data to */
@@ -1018,6 +1150,7 @@ struct cache_set {
 	unsigned		congested_write_threshold_us;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t		sort_time_lock;
 	struct time_stats	sort_time;
 	struct time_stats	btree_gc_time;
@@ -1030,15 +1163,23 @@ struct cache_set {
 	struct time_stats	btree_split_time;
 	struct time_stats	btree_read_time;
 >>>>>>> v3.18
+=======
+	struct time_stats	btree_gc_time;
+	struct time_stats	btree_split_time;
+	struct time_stats	btree_read_time;
+>>>>>>> v3.18
 
 	atomic_long_t		cache_read_races;
 	atomic_long_t		writeback_keys_done;
 	atomic_long_t		writeback_keys_failed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		error_limit;
 	unsigned		error_decay;
 	unsigned short		journal_delay_ms;
 =======
+=======
+>>>>>>> v3.18
 
 	enum			{
 		ON_ERROR_UNREGISTER,
@@ -1049,6 +1190,9 @@ struct cache_set {
 
 	unsigned short		journal_delay_ms;
 	bool			expensive_debug_checks;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned		verify:1;
 	unsigned		key_merging_disabled:1;
@@ -1060,6 +1204,7 @@ struct cache_set {
 	struct hlist_head	bucket_hash[1 << BUCKET_HASH_BITS];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline bool key_merging_disabled(struct cache_set *c)
 {
@@ -1078,6 +1223,8 @@ static inline bool SB_IS_BDEV(const struct cache_sb *sb)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct bbio {
 	unsigned		submit_time_us;
 	union {
@@ -1092,6 +1239,7 @@ struct bbio {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned local_clock_us(void)
 {
 	return local_clock() >> 10;
@@ -1101,6 +1249,10 @@ static inline unsigned local_clock_us(void)
 
 #define BTREE_PRIO		USHRT_MAX
 #define INITIAL_PRIO		32768
+=======
+#define BTREE_PRIO		USHRT_MAX
+#define INITIAL_PRIO		32768U
+>>>>>>> v3.18
 =======
 #define BTREE_PRIO		USHRT_MAX
 #define INITIAL_PRIO		32768U
@@ -1117,6 +1269,7 @@ static inline unsigned local_clock_us(void)
 #define bucket_bytes(c)		((c)->sb.bucket_size << 9)
 #define block_bytes(c)		((c)->sb.block_size << 9)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __set_bytes(i, k)	(sizeof(*(i)) + (k) * sizeof(uint64_t))
 #define set_bytes(i)		__set_bytes(i, i->keys)
@@ -1135,12 +1288,15 @@ static inline unsigned local_clock_us(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define prios_per_bucket(c)				\
 	((bucket_bytes(c) - sizeof(struct prio_set)) /	\
 	 sizeof(struct bucket_disk))
 #define prio_buckets(c)					\
 	DIV_ROUND_UP((size_t) (c)->sb.nbuckets, prios_per_bucket(c))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define JSET_MAGIC		0x245235c1a3625032ULL
 #define PSET_MAGIC		0x6750e15f87337f91ULL
@@ -1197,6 +1353,8 @@ PTR_FIELD(PTR_GEN,		0,  8)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline size_t sector_to_bucket(struct cache_set *c, sector_t s)
 {
 	return s >> c->bucket_bits;
@@ -1234,6 +1392,7 @@ static inline struct bucket *PTR_BUCKET(struct cache_set *c,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Btree key macros */
 
 /*
@@ -1257,6 +1416,8 @@ static inline void bkey_init(struct bkey *k)
 #define MAX_KEY			KEY(~(~0 << 20), ((uint64_t) ~0) >> 1, 0)
 #define ZERO_KEY		KEY(0, 0, 0)
 =======
+=======
+>>>>>>> v3.18
 static inline uint8_t gen_after(uint8_t a, uint8_t b)
 {
 	uint8_t r = a - b;
@@ -1276,6 +1437,9 @@ static inline bool ptr_available(struct cache_set *c, const struct bkey *k,
 }
 
 /* Btree key macros */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1285,7 +1449,12 @@ static inline bool ptr_available(struct cache_set *c, const struct bkey *k,
 #define csum_set(i)							\
 	bch_crc64(((void *) (i)) + sizeof(uint64_t),			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      ((void *) end(i)) - (((void *) (i)) + sizeof(uint64_t)))
+=======
+		  ((void *) bset_bkey_last(i)) -			\
+		  (((void *) (i)) + sizeof(uint64_t)))
+>>>>>>> v3.18
 =======
 		  ((void *) bset_bkey_last(i)) -			\
 		  (((void *) (i)) + sizeof(uint64_t)))
@@ -1333,6 +1502,7 @@ do {									\
 	     b < (ca)->buckets + (ca)->sb.nbuckets; b++)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __bkey_put(struct cache_set *c, struct bkey *k)
 {
 	unsigned i;
@@ -1360,6 +1530,8 @@ do {									\
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline void cached_dev_put(struct cached_dev *dc)
 {
 	if (atomic_dec_and_test(&dc->count))
@@ -1380,9 +1552,12 @@ static inline bool cached_dev_get(struct cached_dev *dc)
  * bucket_gc_gen() returns the difference between the bucket's current gen and
  * the oldest gen of any pointer into that bucket in the btree (last_gc).
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * bucket_disk_gen() returns the difference between the current gen and the gen
  * on disk; they're both used to make sure gens don't wrap around.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -1393,6 +1568,7 @@ static inline uint8_t bucket_gc_gen(struct bucket *b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline uint8_t bucket_disk_gen(struct bucket *b)
 {
 	return b->gen - b->disk_gen;
@@ -1400,6 +1576,9 @@ static inline uint8_t bucket_disk_gen(struct bucket *b)
 
 #define BUCKET_GC_GEN_MAX	96U
 #define BUCKET_DISK_GEN_MAX	64U
+=======
+#define BUCKET_GC_GEN_MAX	96U
+>>>>>>> v3.18
 =======
 #define BUCKET_GC_GEN_MAX	96U
 >>>>>>> v3.18
@@ -1412,11 +1591,14 @@ static inline uint8_t bucket_disk_gen(struct bucket *b)
 		__ATTR(n, S_IWUSR|S_IRUSR, show, store)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Forward declarations */
 
 void bch_writeback_queue(struct cached_dev *);
 void bch_writeback_add(struct cached_dev *, unsigned);
 =======
+=======
+>>>>>>> v3.18
 static inline void wake_up_allocators(struct cache_set *c)
 {
 	struct cache *ca;
@@ -1427,6 +1609,9 @@ static inline void wake_up_allocators(struct cache_set *c)
 }
 
 /* Forward declarations */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void bch_count_io_errors(struct cache *, int, const char *);
@@ -1437,7 +1622,10 @@ void bch_bbio_free(struct bio *, struct cache_set *);
 struct bio *bch_bbio_alloc(struct cache_set *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bio *bch_bio_split(struct bio *, int, gfp_t, struct bio_set *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void bch_generic_make_request(struct bio *, struct bio_split_pool *);
@@ -1446,6 +1634,7 @@ void bch_submit_bbio(struct bio *, struct cache_set *, struct bkey *, unsigned);
 
 uint8_t bch_inc_gen(struct cache *, struct bucket *);
 void bch_rescale_priorities(struct cache_set *, int);
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool bch_bucket_add_unused(struct cache *, struct bucket *);
 void bch_allocator_thread(struct closure *);
@@ -1458,6 +1647,8 @@ int __bch_bucket_alloc_set(struct cache_set *, unsigned,
 int bch_bucket_alloc_set(struct cache_set *, unsigned,
 			 struct bkey *, int, struct closure *);
 =======
+=======
+>>>>>>> v3.18
 
 bool bch_can_invalidate_bucket(struct cache *, struct bucket *);
 void __bch_invalidate_one_bucket(struct cache *, struct bucket *);
@@ -1472,6 +1663,9 @@ int bch_bucket_alloc_set(struct cache_set *, unsigned,
 			 struct bkey *, int, bool);
 bool bch_alloc_sectors(struct cache_set *, struct bkey *, unsigned,
 		       unsigned, unsigned, bool);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 __printf(2, 3)
@@ -1481,7 +1675,11 @@ void bch_prio_write(struct cache *);
 void bch_write_bdev_super(struct cached_dev *, struct closure *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct workqueue_struct *bcache_wq, *bch_gc_wq;
+=======
+extern struct workqueue_struct *bcache_wq;
+>>>>>>> v3.18
 =======
 extern struct workqueue_struct *bcache_wq;
 >>>>>>> v3.18
@@ -1517,6 +1715,7 @@ struct cache_set *bch_cache_set_alloc(struct cache_sb *);
 void bch_btree_cache_free(struct cache_set *);
 int bch_btree_cache_alloc(struct cache_set *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bch_cached_dev_writeback_init(struct cached_dev *);
 void bch_moving_init_cache_set(struct cache_set *);
 
@@ -1532,6 +1731,8 @@ int bch_request_init(void);
 void bch_btree_exit(void);
 int bch_btree_init(void);
 =======
+=======
+>>>>>>> v3.18
 void bch_moving_init_cache_set(struct cache_set *);
 int bch_open_buckets_alloc(struct cache_set *);
 void bch_open_buckets_free(struct cache_set *);
@@ -1542,6 +1743,9 @@ void bch_debug_exit(void);
 int bch_debug_init(struct kobject *);
 void bch_request_exit(void);
 int bch_request_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _BCACHE_H */

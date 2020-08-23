@@ -16,6 +16,7 @@
 #include <linux/of_platform.h>
 #include <linux/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/system_misc.h>
 #include <asm/mach/arch.h>
 #include <mach/orion5x.h>
@@ -24,6 +25,8 @@
 
 struct of_dev_auxdata orion5x_auxdata_lookup[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mbus.h>
 #include <linux/clk-provider.h>
 #include <linux/clocksource.h>
@@ -37,6 +40,9 @@ struct of_dev_auxdata orion5x_auxdata_lookup[] __initdata = {
 #include "common.h"
 
 static struct of_dev_auxdata orion5x_auxdata_lookup[] __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OF_DEV_AUXDATA("marvell,orion-spi", 0xf1010600, "orion_spi.0", NULL),
 	OF_DEV_AUXDATA("marvell,mv64xxx-i2c", 0xf1011000, "mv64xxx_i2c.0",
@@ -56,6 +62,11 @@ static void __init orion5x_dt_init(void)
 	printk(KERN_INFO "Orion ID: %s. TCLK=%d.\n", dev_name, orion5x_tclk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(mvebu_mbus_dt_init(false));
+
+>>>>>>> v3.18
 =======
 	BUG_ON(mvebu_mbus_dt_init(false));
 
@@ -66,9 +77,12 @@ static void __init orion5x_dt_init(void)
 	orion5x_setup_wins();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Setup root of clk tree */
 	clk_init();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -81,8 +95,13 @@ static void __init orion5x_dt_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_machine_is_compatible("lacie,ethernet-disk-mini-v2"))
 		edmini_v2_init();
+=======
+	if (of_machine_is_compatible("maxtor,shared-storage-2"))
+		mss2_init();
+>>>>>>> v3.18
 =======
 	if (of_machine_is_compatible("maxtor,shared-storage-2"))
 		mss2_init();
@@ -101,9 +120,12 @@ DT_MACHINE_START(ORION5X_DT, "Marvell Orion5x (Flattened Device Tree)")
 	/* Maintainer: Thomas Petazzoni <thomas.petazzoni@free-electrons.com> */
 	.map_io		= orion5x_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= orion5x_init_early,
 	.init_irq	= orion_dt_init_irq,
 	.init_time	= orion5x_timer_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= orion5x_dt_init,

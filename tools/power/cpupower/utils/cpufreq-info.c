@@ -83,6 +83,10 @@ static void proc_cpufreq_output(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int no_rounding;
+>>>>>>> v3.18
 =======
 static int no_rounding;
 >>>>>>> v3.18
@@ -90,6 +94,7 @@ static void print_speed(unsigned long speed)
 {
 	unsigned long tmp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (speed > 1000000) {
 		tmp = speed % 10000;
@@ -111,6 +116,8 @@ static void print_speed(unsigned long speed)
 	} else
 		printf("%lu kHz", speed);
 =======
+=======
+>>>>>>> v3.18
 	if (no_rounding) {
 		if (speed > 1000000)
 			printf("%u.%06u GHz", ((unsigned int) speed/1000000),
@@ -142,6 +149,9 @@ static void print_speed(unsigned long speed)
 				((unsigned int) (speed%1000)/100));
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
@@ -151,6 +161,7 @@ static void print_duration(unsigned long duration)
 {
 	unsigned long tmp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (duration > 1000000) {
 		tmp = duration % 10000;
@@ -173,6 +184,8 @@ static void print_duration(unsigned long duration)
 		printf("%lu ns", duration);
 
 =======
+=======
+>>>>>>> v3.18
 	if (no_rounding) {
 		if (duration > 1000000)
 			printf("%u.%06u ms", ((unsigned int) duration/1000000),
@@ -205,6 +218,9 @@ static void print_duration(unsigned long duration)
 		} else
 			printf("%lu ns", duration);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }
@@ -599,6 +615,10 @@ static struct option info_opts[] = {
 	{ .name = "proc",	.has_arg = no_argument,		.flag = NULL,	.val = 'o'},
 	{ .name = "human",	.has_arg = no_argument,		.flag = NULL,	.val = 'm'},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .name = "no-rounding", .has_arg = no_argument,	.flag = NULL,	.val = 'n'},
+>>>>>>> v3.18
 =======
 	{ .name = "no-rounding", .has_arg = no_argument,	.flag = NULL,	.val = 'n'},
 >>>>>>> v3.18
@@ -616,7 +636,12 @@ int cmd_freq_info(int argc, char **argv)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = getopt_long(argc, argv, "oefwldpgrasmyb", info_opts, NULL);
+=======
+		ret = getopt_long(argc, argv, "oefwldpgrasmybn", info_opts,
+				  NULL);
+>>>>>>> v3.18
 =======
 		ret = getopt_long(argc, argv, "oefwldpgrasmybn", info_opts,
 				  NULL);
@@ -658,6 +683,12 @@ int cmd_freq_info(int argc, char **argv)
 			human = 1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case 'n':
+			no_rounding = 1;
+			break;
+>>>>>>> v3.18
 =======
 		case 'n':
 			no_rounding = 1;

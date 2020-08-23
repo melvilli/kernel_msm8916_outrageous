@@ -90,6 +90,7 @@ extern void key_type_put(struct key_type *ktype);
 
 extern int __key_link_begin(struct key *keyring,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    const struct key_type *type,
 			    const char *description,
 			    unsigned long *_prealloc);
@@ -105,6 +106,8 @@ extern key_ref_t __keyring_search_one(key_ref_t keyring_ref,
 				      const char *description,
 				      key_perm_t perm);
 =======
+=======
+>>>>>>> v3.18
 			    const struct keyring_index_key *index_key,
 			    struct assoc_array_edit **_edit);
 extern int __key_link_check_live_key(struct key *keyring, struct key *key);
@@ -115,11 +118,15 @@ extern void __key_link_end(struct key *keyring,
 
 extern key_ref_t find_key_to_update(key_ref_t keyring_ref,
 				    const struct keyring_index_key *index_key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct key *keyring_search_instkey(struct key *keyring,
 					  key_serial_t target_id);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef int (*key_match_func_t)(const struct key *, const void *);
 
@@ -142,6 +149,8 @@ extern key_ref_t search_process_keyrings(struct key_type *type,
 
 extern struct key *find_keyring_by_name(const char *name, bool uid_keyring);
 =======
+=======
+>>>>>>> v3.18
 extern int iterate_over_keyring(const struct key *keyring,
 				int (*func)(const struct key *key, void *data),
 				void *data);
@@ -176,6 +185,9 @@ extern key_ref_t search_my_process_keyrings(struct keyring_search_context *ctx);
 extern key_ref_t search_process_keyrings(struct keyring_search_context *ctx);
 
 extern struct key *find_keyring_by_name(const char *name, bool skip_perm_check);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int install_user_keyrings(void);
@@ -192,7 +204,12 @@ extern struct key *request_key_and_link(struct key_type *type,
 					unsigned long flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int lookup_user_key_possessed(const struct key *key, const void *target);
+=======
+extern bool lookup_user_key_possessed(const struct key *key,
+				      const struct key_match_data *match_data);
+>>>>>>> v3.18
 =======
 extern bool lookup_user_key_possessed(const struct key *key,
 				      const struct key_match_data *match_data);
@@ -221,7 +238,11 @@ extern int key_task_permission(const key_ref_t key_ref,
  * Check to see whether permission is granted to use a key in the desired way.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int key_permission(const key_ref_t key_ref, key_perm_t perm)
+=======
+static inline int key_permission(const key_ref_t key_ref, unsigned perm)
+>>>>>>> v3.18
 =======
 static inline int key_permission(const key_ref_t key_ref, unsigned perm)
 >>>>>>> v3.18
@@ -229,6 +250,7 @@ static inline int key_permission(const key_ref_t key_ref, unsigned perm)
 	return key_task_permission(key_ref, current_cred(), perm);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* required permissions */
 #define	KEY_VIEW	0x01	/* require permission to view attributes */
@@ -239,6 +261,8 @@ static inline int key_permission(const key_ref_t key_ref, unsigned perm)
 #define	KEY_SETATTR	0x20	/* require permission to change attributes */
 #define	KEY_ALL		0x3f	/* all the above permissions */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -265,7 +289,11 @@ extern struct key *key_get_instantiation_authkey(key_serial_t target_id);
  * Determine whether a key is dead.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool key_is_dead(struct key *key, time_t limit)
+=======
+static inline bool key_is_dead(const struct key *key, time_t limit)
+>>>>>>> v3.18
 =======
 static inline bool key_is_dead(const struct key *key, time_t limit)
 >>>>>>> v3.18
@@ -311,7 +339,10 @@ extern long keyctl_instantiate_key_common(key_serial_t,
 					  const struct iovec *,
 					  unsigned, size_t, key_serial_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PERSISTENT_KEYRINGS
 extern long keyctl_get_persistent(uid_t, key_serial_t);
 extern unsigned persistent_keyring_expiry;
@@ -321,6 +352,9 @@ static inline long keyctl_get_persistent(uid_t uid, key_serial_t destring)
 	return -EOPNOTSUPP;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

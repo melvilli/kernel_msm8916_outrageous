@@ -572,9 +572,13 @@ static void __init report_platform_properties(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit fill_in_one_cache(cpuinfo_sparc *c,
 					struct mdesc_handle *hp,
 					u64 mp)
+=======
+static void fill_in_one_cache(cpuinfo_sparc *c, struct mdesc_handle *hp, u64 mp)
+>>>>>>> v3.18
 =======
 static void fill_in_one_cache(cpuinfo_sparc *c, struct mdesc_handle *hp, u64 mp)
 >>>>>>> v3.18
@@ -621,7 +625,11 @@ static void fill_in_one_cache(cpuinfo_sparc *c, struct mdesc_handle *hp, u64 mp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id)
+=======
+static void mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id)
+>>>>>>> v3.18
 =======
 static void mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id)
 >>>>>>> v3.18
@@ -658,7 +666,11 @@ static void mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit set_core_ids(struct mdesc_handle *hp)
+=======
+static void set_core_ids(struct mdesc_handle *hp)
+>>>>>>> v3.18
 =======
 static void set_core_ids(struct mdesc_handle *hp)
 >>>>>>> v3.18
@@ -687,7 +699,11 @@ static void set_core_ids(struct mdesc_handle *hp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id)
+=======
+static void mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id)
+>>>>>>> v3.18
 =======
 static void mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id)
 >>>>>>> v3.18
@@ -710,7 +726,11 @@ static void mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit __set_proc_ids(struct mdesc_handle *hp, const char *exec_unit_name)
+=======
+static void __set_proc_ids(struct mdesc_handle *hp, const char *exec_unit_name)
+>>>>>>> v3.18
 =======
 static void __set_proc_ids(struct mdesc_handle *hp, const char *exec_unit_name)
 >>>>>>> v3.18
@@ -735,7 +755,11 @@ static void __set_proc_ids(struct mdesc_handle *hp, const char *exec_unit_name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit set_proc_ids(struct mdesc_handle *hp)
+=======
+static void set_proc_ids(struct mdesc_handle *hp)
+>>>>>>> v3.18
 =======
 static void set_proc_ids(struct mdesc_handle *hp)
 >>>>>>> v3.18
@@ -745,8 +769,13 @@ static void set_proc_ids(struct mdesc_handle *hp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit get_one_mondo_bits(const u64 *p, unsigned int *mask,
 					 unsigned long def, unsigned long max)
+=======
+static void get_one_mondo_bits(const u64 *p, unsigned int *mask,
+			       unsigned long def, unsigned long max)
+>>>>>>> v3.18
 =======
 static void get_one_mondo_bits(const u64 *p, unsigned int *mask,
 			       unsigned long def, unsigned long max)
@@ -772,8 +801,13 @@ use_default:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit get_mondo_data(struct mdesc_handle *hp, u64 mp,
 				     struct trap_per_cpu *tb)
+=======
+static void get_mondo_data(struct mdesc_handle *hp, u64 mp,
+			   struct trap_per_cpu *tb)
+>>>>>>> v3.18
 =======
 static void get_mondo_data(struct mdesc_handle *hp, u64 mp,
 			   struct trap_per_cpu *tb)
@@ -804,7 +838,11 @@ static void get_mondo_data(struct mdesc_handle *hp, u64 mp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * __cpuinit mdesc_iterate_over_cpus(void *(*func)(struct mdesc_handle *, u64, int, void *), void *arg, cpumask_t *mask)
+=======
+static void *mdesc_iterate_over_cpus(void *(*func)(struct mdesc_handle *, u64, int, void *), void *arg, cpumask_t *mask)
+>>>>>>> v3.18
 =======
 static void *mdesc_iterate_over_cpus(void *(*func)(struct mdesc_handle *, u64, int, void *), void *arg, cpumask_t *mask)
 >>>>>>> v3.18
@@ -838,7 +876,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * __cpuinit record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid, void *arg)
+=======
+static void *record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
+			    void *arg)
+>>>>>>> v3.18
 =======
 static void *record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
 			    void *arg)
@@ -852,7 +895,11 @@ static void *record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit mdesc_populate_present_mask(cpumask_t *mask)
+=======
+void mdesc_populate_present_mask(cpumask_t *mask)
+>>>>>>> v3.18
 =======
 void mdesc_populate_present_mask(cpumask_t *mask)
 >>>>>>> v3.18
@@ -889,7 +936,12 @@ void __init mdesc_get_page_sizes(cpumask_t *mask, unsigned long *pgsz_mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * __cpuinit fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid, void *arg)
+=======
+static void *fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
+			     void *arg)
+>>>>>>> v3.18
 =======
 static void *fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
 			     void *arg)
@@ -943,7 +995,11 @@ static void *fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit mdesc_fill_in_cpu_data(cpumask_t *mask)
+=======
+void mdesc_fill_in_cpu_data(cpumask_t *mask)
+>>>>>>> v3.18
 =======
 void mdesc_fill_in_cpu_data(cpumask_t *mask)
 >>>>>>> v3.18
@@ -953,10 +1009,13 @@ void mdesc_fill_in_cpu_data(cpumask_t *mask)
 	mdesc_iterate_over_cpus(fill_in_one_cpu, NULL, mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 	sparc64_multi_core = 1;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hp = mdesc_grab();
@@ -970,12 +1029,15 @@ void mdesc_fill_in_cpu_data(cpumask_t *mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t mdesc_read(struct file *file, char __user *buf,
 			  size_t len, loff_t *offp)
 {
 	struct mdesc_handle *hp = mdesc_grab();
 	int err;
 =======
+=======
+>>>>>>> v3.18
 /* mdesc_open() - Grab a reference to mdesc_handle when /dev/mdesc is
  * opened. Hold this reference until /dev/mdesc is closed to ensure
  * mdesc data structure is not released underneath us. Store the
@@ -984,11 +1046,15 @@ static ssize_t mdesc_read(struct file *file, char __user *buf,
 static int mdesc_open(struct inode *inode, struct file *file)
 {
 	struct mdesc_handle *hp = mdesc_grab();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!hp)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = hp->handle_size;
 	if (len < hp->handle_size)
@@ -1005,6 +1071,8 @@ static const struct file_operations mdesc_fops = {
 	.owner	= THIS_MODULE,
 	.llseek = noop_llseek,
 =======
+=======
+>>>>>>> v3.18
 	file->private_data = hp;
 
 	return 0;
@@ -1072,6 +1140,9 @@ static const struct file_operations mdesc_fops = {
 	.llseek  = mdesc_llseek,
 	.release = mdesc_close,
 	.owner	 = THIS_MODULE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -50,6 +54,10 @@
 #include "acdispat.h"
 #include "acinterp.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "amlcode.h"
+>>>>>>> v3.18
 =======
 #include "amlcode.h"
 >>>>>>> v3.18
@@ -58,7 +66,10 @@
 ACPI_MODULE_NAME("exfield")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Local prototypes */
 static u32
 acpi_ex_get_serial_access_length(u32 accessor_type, u32 access_length);
@@ -119,6 +130,9 @@ acpi_ex_get_serial_access_length(u32 accessor_type, u32 access_length)
 	return (length);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *
@@ -135,8 +149,14 @@ acpi_ex_get_serial_access_length(u32 accessor_type, u32 access_length)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status
 acpi_ex_read_data_from_field(struct acpi_walk_state *walk_state,
+=======
+
+acpi_status
+acpi_ex_read_data_from_field(struct acpi_walk_state * walk_state,
+>>>>>>> v3.18
 =======
 
 acpi_status
@@ -151,6 +171,10 @@ acpi_ex_read_data_from_field(struct acpi_walk_state * walk_state,
 	void *buffer;
 	u32 function;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 accessor_type;
+>>>>>>> v3.18
 =======
 	u16 accessor_type;
 >>>>>>> v3.18
@@ -198,10 +222,13 @@ acpi_ex_read_data_from_field(struct acpi_walk_state * walk_state,
 		} else if (obj_desc->field.region_obj->region.space_id ==
 			   ACPI_ADR_SPACE_GSBUS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			length = ACPI_GSBUS_BUFFER_SIZE;
 			function =
 			    ACPI_READ | (obj_desc->field.attribute << 16);
 =======
+=======
+>>>>>>> v3.18
 			accessor_type = obj_desc->field.attribute;
 			length = acpi_ex_get_serial_access_length(accessor_type,
 								  obj_desc->
@@ -217,6 +244,9 @@ acpi_ex_read_data_from_field(struct acpi_walk_state * walk_state,
 			 */
 			length += 2;
 			function = ACPI_READ | (accessor_type << 16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {	/* IPMI */
 
@@ -328,7 +358,11 @@ acpi_ex_read_data_from_field(struct acpi_walk_state * walk_state,
 	acpi_ex_release_global_lock(obj_desc->common_field.field_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -366,6 +400,10 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 	union acpi_operand_object *buffer_desc;
 	u32 function;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 accessor_type;
+>>>>>>> v3.18
 =======
 	u16 accessor_type;
 >>>>>>> v3.18
@@ -423,10 +461,13 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 		} else if (obj_desc->field.region_obj->region.space_id ==
 			   ACPI_ADR_SPACE_GSBUS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			length = ACPI_GSBUS_BUFFER_SIZE;
 			function =
 			    ACPI_WRITE | (obj_desc->field.attribute << 16);
 =======
+=======
+>>>>>>> v3.18
 			accessor_type = obj_desc->field.attribute;
 			length = acpi_ex_get_serial_access_length(accessor_type,
 								  obj_desc->
@@ -442,6 +483,9 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 			 */
 			length += 2;
 			function = ACPI_WRITE | (accessor_type << 16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {	/* IPMI */
 
@@ -524,6 +568,10 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 	switch (source_desc->common.type) {
 	case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -533,6 +581,10 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -542,6 +594,10 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -551,6 +607,10 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

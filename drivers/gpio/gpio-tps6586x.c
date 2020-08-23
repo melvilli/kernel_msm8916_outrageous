@@ -98,10 +98,15 @@ static int tps6586x_gpio_probe(struct platform_device *pdev)
 	tps6586x_gpio = devm_kzalloc(&pdev->dev,
 				sizeof(*tps6586x_gpio), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tps6586x_gpio) {
 		dev_err(&pdev->dev, "Could not allocate tps6586x_gpio\n");
 		return -ENOMEM;
 	}
+=======
+	if (!tps6586x_gpio)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!tps6586x_gpio)
 		return -ENOMEM;
@@ -114,7 +119,11 @@ static int tps6586x_gpio_probe(struct platform_device *pdev)
 	tps6586x_gpio->gpio_chip.dev = &pdev->dev;
 	tps6586x_gpio->gpio_chip.ngpio = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tps6586x_gpio->gpio_chip.can_sleep = 1;
+=======
+	tps6586x_gpio->gpio_chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	tps6586x_gpio->gpio_chip.can_sleep = true;
 >>>>>>> v3.18
@@ -149,7 +158,12 @@ static int tps6586x_gpio_remove(struct platform_device *pdev)
 	struct tps6586x_gpio *tps6586x_gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&tps6586x_gpio->gpio_chip);
+=======
+	gpiochip_remove(&tps6586x_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&tps6586x_gpio->gpio_chip);
 	return 0;

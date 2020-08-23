@@ -26,7 +26,12 @@
 #include <linux/uaccess.h>
 #include <linux/anon_inodes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sync.h>
+=======
+
+#include "sync.h"
+>>>>>>> v3.18
 =======
 
 #include "sync.h"
@@ -35,6 +40,7 @@
 #define CREATE_TRACE_POINTS
 #include "trace/sync.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void sync_fence_signal_pt(struct sync_pt *pt);
 static int _sync_pt_has_signaled(struct sync_pt *pt);
@@ -49,13 +55,20 @@ static DEFINE_SPINLOCK(sync_fence_list_lock);
 static const struct fence_ops android_fence_ops;
 static const struct file_operations sync_fence_fops;
 >>>>>>> v3.18
+=======
+static const struct fence_ops android_fence_ops;
+static const struct file_operations sync_fence_fops;
+>>>>>>> v3.18
 
 struct sync_timeline *sync_timeline_create(const struct sync_timeline_ops *ops,
 					   int size, const char *name)
 {
 	struct sync_timeline *obj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -69,6 +82,7 @@ struct sync_timeline *sync_timeline_create(const struct sync_timeline_ops *ops,
 	kref_init(&obj->kref);
 	obj->ops = ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(obj->name, name, sizeof(obj->name));
 
 	INIT_LIST_HEAD(&obj->child_list_head);
@@ -81,6 +95,8 @@ struct sync_timeline *sync_timeline_create(const struct sync_timeline_ops *ops,
 	list_add_tail(&obj->sync_timeline_list, &sync_timeline_list_head);
 	spin_unlock_irqrestore(&sync_timeline_list_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	obj->context = fence_context_alloc(1);
 	strlcpy(obj->name, name, sizeof(obj->name));
 
@@ -89,6 +105,9 @@ struct sync_timeline *sync_timeline_create(const struct sync_timeline_ops *ops,
 	spin_lock_init(&obj->child_list_lock);
 
 	sync_timeline_debug_add(obj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return obj;
@@ -100,11 +119,16 @@ static void sync_timeline_free(struct kref *kref)
 	struct sync_timeline *obj =
 		container_of(kref, struct sync_timeline, kref);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&sync_timeline_list_lock, flags);
 	list_del(&obj->sync_timeline_list);
 	spin_unlock_irqrestore(&sync_timeline_list_lock, flags);
+=======
+
+	sync_timeline_debug_remove(obj);
+>>>>>>> v3.18
 =======
 
 	sync_timeline_debug_remove(obj);
@@ -117,10 +141,13 @@ static void sync_timeline_free(struct kref *kref)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sync_timeline_destroy(struct sync_timeline *obj)
 {
 	obj->destroyed = true;
 =======
+=======
+>>>>>>> v3.18
 static void sync_timeline_get(struct sync_timeline *obj)
 {
 	kref_get(&obj->kref);
@@ -138,6 +165,9 @@ void sync_timeline_destroy(struct sync_timeline *obj)
 	 * Ensure timeline is marked as destroyed before
 	 * changing timeline's fences status.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	smp_wmb();
 
@@ -145,6 +175,7 @@ void sync_timeline_destroy(struct sync_timeline *obj)
 	 * signal any children that their parent is going away.
 	 */
 	sync_timeline_signal(obj);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	kref_put(&obj->kref, sync_timeline_free);
@@ -180,15 +211,21 @@ static void sync_timeline_remove_pt(struct sync_pt *pt)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	sync_timeline_put(obj);
 }
 EXPORT_SYMBOL(sync_timeline_destroy);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void sync_timeline_signal(struct sync_timeline *obj)
 {
 	unsigned long flags;
 	LIST_HEAD(signaled_pts);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head *pos, *n;
 
@@ -223,6 +260,8 @@ EXPORT_SYMBOL(sync_timeline_signal);
 struct sync_pt *sync_pt_create(struct sync_timeline *parent, int size)
 {
 =======
+=======
+>>>>>>> v3.18
 	struct sync_pt *pt, *next;
 
 	trace_sync_timeline(obj);
@@ -242,6 +281,9 @@ EXPORT_SYMBOL(sync_timeline_signal);
 struct sync_pt *sync_pt_create(struct sync_timeline *obj, int size)
 {
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sync_pt *pt;
 
@@ -253,11 +295,14 @@ struct sync_pt *sync_pt_create(struct sync_timeline *obj, int size)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&pt->active_list);
 	kref_get(&parent->kref);
 	sync_timeline_add_pt(parent, pt);
 
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&obj->child_list_lock, flags);
 	sync_timeline_get(obj);
 	fence_init(&pt->base, &android_fence_ops, &obj->child_list_lock,
@@ -265,6 +310,9 @@ struct sync_pt *sync_pt_create(struct sync_timeline *obj, int size)
 	list_add_tail(&pt->child_list, &obj->child_list_head);
 	INIT_LIST_HEAD(&pt->active_list);
 	spin_unlock_irqrestore(&obj->child_list_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pt;
 }
@@ -272,6 +320,7 @@ EXPORT_SYMBOL(sync_pt_create);
 
 void sync_pt_free(struct sync_pt *pt)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pt->parent->ops->free_pt)
 		pt->parent->ops->free_pt(pt);
@@ -345,6 +394,8 @@ static struct sync_fence *sync_fence_alloc(const char *name)
 
 	fence = kzalloc(sizeof(struct sync_fence), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	fence_put(&pt->base);
 }
 EXPORT_SYMBOL(sync_pt_free);
@@ -354,6 +405,9 @@ static struct sync_fence *sync_fence_alloc(int size, const char *name)
 	struct sync_fence *fence;
 
 	fence = kzalloc(size, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (fence == NULL)
 		return NULL;
@@ -366,6 +420,7 @@ static struct sync_fence *sync_fence_alloc(int size, const char *name)
 	kref_init(&fence->kref);
 	strlcpy(fence->name, name, sizeof(fence->name));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	INIT_LIST_HEAD(&fence->pt_list_head);
 	INIT_LIST_HEAD(&fence->waiter_list_head);
@@ -381,6 +436,10 @@ static struct sync_fence *sync_fence_alloc(int size, const char *name)
 	init_waitqueue_head(&fence->wq);
 
 >>>>>>> v3.18
+=======
+	init_waitqueue_head(&fence->wq);
+
+>>>>>>> v3.18
 	return fence;
 
 err:
@@ -388,6 +447,7 @@ err:
 	return NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* TODO: implement a create which takes more that one sync_pt */
 struct sync_fence *sync_fence_create(const char *name, struct sync_pt *pt)
@@ -515,6 +575,8 @@ static void sync_fence_free_pts(struct sync_fence *fence)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 static void fence_check_cb_func(struct fence *f, struct fence_cb *cb)
 {
 	struct sync_fence_cb *check;
@@ -550,6 +612,9 @@ struct sync_fence *sync_fence_create(const char *name, struct sync_pt *pt)
 	return fence;
 }
 EXPORT_SYMBOL(sync_fence_create);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sync_fence *sync_fence_fdget(int fd)
@@ -583,6 +648,7 @@ void sync_fence_install(struct sync_fence *fence, int fd)
 EXPORT_SYMBOL(sync_fence_install);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sync_fence_get_status(struct sync_fence *fence)
 {
 	struct list_head *pos;
@@ -602,6 +668,8 @@ static int sync_fence_get_status(struct sync_fence *fence)
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 static void sync_fence_add_pt(struct sync_fence *fence,
 			      int *i, struct fence *pt)
 {
@@ -612,12 +680,16 @@ static void sync_fence_add_pt(struct sync_fence *fence,
 		fence_get(pt);
 		(*i)++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 struct sync_fence *sync_fence_merge(const char *name,
 				    struct sync_fence *a, struct sync_fence *b)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sync_fence *fence;
 	struct list_head *pos;
@@ -695,6 +767,8 @@ static void sync_fence_signal_pt(struct sync_pt *pt)
 		wake_up(&fence->wq);
 	}
 =======
+=======
+>>>>>>> v3.18
 	int num_fences = a->num_fences + b->num_fences;
 	struct sync_fence *fence;
 	int i, i_a, i_b;
@@ -761,12 +835,16 @@ int sync_fence_wake_up_wq(wait_queue_t *curr, unsigned mode,
 
 	wait->callback(wait->work.private, wait);
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int sync_fence_wait_async(struct sync_fence *fence,
 			  struct sync_fence_waiter *waiter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	int err = 0;
@@ -784,6 +862,8 @@ out:
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	int err = atomic_read(&fence->status);
 	unsigned long flags;
 
@@ -806,6 +886,9 @@ out:
 		return err;
 
 	return !err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(sync_fence_wait_async);
@@ -813,6 +896,7 @@ EXPORT_SYMBOL(sync_fence_wait_async);
 int sync_fence_cancel_async(struct sync_fence *fence,
 			     struct sync_fence_waiter *waiter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head *pos;
 	struct list_head *n;
@@ -837,6 +921,8 @@ int sync_fence_cancel_async(struct sync_fence *fence,
 	}
 	spin_unlock_irqrestore(&fence->waiter_list_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	int ret = 0;
 
@@ -846,11 +932,15 @@ int sync_fence_cancel_async(struct sync_fence *fence,
 	else
 		ret = -ENOENT;
 	spin_unlock_irqrestore(&fence->wq.lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL(sync_fence_cancel_async);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool sync_fence_check(struct sync_fence *fence)
 {
@@ -977,6 +1067,8 @@ int sync_fence_wait(struct sync_fence *fence, long timeout)
 }
 EXPORT_SYMBOL(sync_fence_wait);
 =======
+=======
+>>>>>>> v3.18
 int sync_fence_wait(struct sync_fence *fence, long timeout)
 {
 	long ret;
@@ -1124,15 +1216,21 @@ static const struct fence_ops android_fence_ops = {
 	.fence_value_str = android_fence_value_str,
 	.timeline_value_str = android_fence_timeline_value_str,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void sync_fence_free(struct kref *kref)
 {
 	struct sync_fence *fence = container_of(kref, struct sync_fence, kref);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sync_fence_free_pts(fence);
 =======
+=======
+>>>>>>> v3.18
 	int i, status = atomic_read(&fence->status);
 
 	for (i = 0; i < fence->num_fences; ++i) {
@@ -1141,6 +1239,9 @@ static void sync_fence_free(struct kref *kref)
 					      &fence->cbs[i].cb);
 		fence_put(fence->cbs[i].sync_pt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(fence);
@@ -1149,6 +1250,7 @@ static void sync_fence_free(struct kref *kref)
 static int sync_fence_release(struct inode *inode, struct file *file)
 {
 	struct sync_fence *fence = file->private_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -1171,10 +1273,15 @@ static int sync_fence_release(struct inode *inode, struct file *file)
 	kref_put(&fence->kref, sync_fence_free);
 
 =======
+=======
+>>>>>>> v3.18
 
 	sync_fence_debug_remove(fence);
 
 	kref_put(&fence->kref, sync_fence_free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1182,6 +1289,7 @@ static int sync_fence_release(struct inode *inode, struct file *file)
 static unsigned int sync_fence_poll(struct file *file, poll_table *wait)
 {
 	struct sync_fence *fence = file->private_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	poll_wait(file, &fence->wq, wait);
@@ -1199,6 +1307,8 @@ static unsigned int sync_fence_poll(struct file *file, poll_table *wait)
 	else
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	int status;
 
 	poll_wait(file, &fence->wq, wait);
@@ -1210,6 +1320,9 @@ static unsigned int sync_fence_poll(struct file *file, poll_table *wait)
 	else if (status < 0)
 		return POLLERR;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1226,7 +1339,11 @@ static long sync_fence_ioctl_wait(struct sync_fence *fence, unsigned long arg)
 static long sync_fence_ioctl_merge(struct sync_fence *fence, unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int fd = get_unused_fd();
+=======
+	int fd = get_unused_fd_flags(O_CLOEXEC);
+>>>>>>> v3.18
 =======
 	int fd = get_unused_fd_flags(O_CLOEXEC);
 >>>>>>> v3.18
@@ -1277,7 +1394,11 @@ err_put_fd:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sync_fill_pt_info(struct sync_pt *pt, void *data, int size)
+=======
+static int sync_fill_pt_info(struct fence *fence, void *data, int size)
+>>>>>>> v3.18
 =======
 static int sync_fill_pt_info(struct fence *fence, void *data, int size)
 >>>>>>> v3.18
@@ -1291,9 +1412,15 @@ static int sync_fill_pt_info(struct fence *fence, void *data, int size)
 	info->len = sizeof(struct sync_pt_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pt->parent->ops->fill_driver_data) {
 		ret = pt->parent->ops->fill_driver_data(pt, info->driver_data,
 							size - sizeof(*info));
+=======
+	if (fence->ops->fill_driver_data) {
+		ret = fence->ops->fill_driver_data(fence, info->driver_data,
+						   size - sizeof(*info));
+>>>>>>> v3.18
 =======
 	if (fence->ops->fill_driver_data) {
 		ret = fence->ops->fill_driver_data(fence, info->driver_data,
@@ -1306,12 +1433,15 @@ static int sync_fill_pt_info(struct fence *fence, void *data, int size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(info->obj_name, pt->parent->name, sizeof(info->obj_name));
 	strlcpy(info->driver_name, pt->parent->ops->driver_name,
 		sizeof(info->driver_name));
 	info->status = pt->status;
 	info->timestamp_ns = ktime_to_ns(pt->timestamp);
 =======
+=======
+>>>>>>> v3.18
 	strlcpy(info->obj_name, fence->ops->get_timeline_name(fence),
 		sizeof(info->obj_name));
 	strlcpy(info->driver_name, fence->ops->get_driver_name(fence),
@@ -1321,6 +1451,9 @@ static int sync_fill_pt_info(struct fence *fence, void *data, int size)
 	else
 		info->status = 0;
 	info->timestamp_ns = ktime_to_ns(fence->timestamp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return info->len;
@@ -1331,10 +1464,16 @@ static long sync_fence_ioctl_fence_info(struct sync_fence *fence,
 {
 	struct sync_fence_info_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *pos;
 	__u32 size;
 	__u32 len = 0;
 	int ret;
+=======
+	__u32 size;
+	__u32 len = 0;
+	int ret, i;
+>>>>>>> v3.18
 =======
 	__u32 size;
 	__u32 len = 0;
@@ -1356,6 +1495,7 @@ static long sync_fence_ioctl_fence_info(struct sync_fence *fence,
 
 	strlcpy(data->name, fence->name, sizeof(data->name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->status = fence->status;
 	len = sizeof(struct sync_fence_info_data);
 
@@ -1363,6 +1503,8 @@ static long sync_fence_ioctl_fence_info(struct sync_fence *fence,
 		struct sync_pt *pt =
 			container_of(pos, struct sync_pt, pt_list);
 =======
+=======
+>>>>>>> v3.18
 	data->status = atomic_read(&fence->status);
 	if (data->status >= 0)
 		data->status = !data->status;
@@ -1371,6 +1513,9 @@ static long sync_fence_ioctl_fence_info(struct sync_fence *fence,
 
 	for (i = 0; i < fence->num_fences; ++i) {
 		struct fence *pt = fence->cbs[i].sync_pt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = sync_fill_pt_info(pt, (u8 *)data + len, size - len);
@@ -1399,6 +1544,10 @@ static long sync_fence_ioctl(struct file *file, unsigned int cmd,
 {
 	struct sync_fence *fence = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1417,6 +1566,7 @@ static long sync_fence_ioctl(struct file *file, unsigned int cmd,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_DEBUG_FS
 static void sync_print_pt(struct seq_file *s, struct sync_pt *pt, bool fence)
@@ -1553,6 +1703,8 @@ static __init int sync_debugfs_init(void)
 late_initcall(sync_debugfs_init);
 #endif
 =======
+=======
+>>>>>>> v3.18
 static const struct file_operations sync_fence_fops = {
 	.release = sync_fence_release,
 	.poll = sync_fence_poll,
@@ -1560,4 +1712,7 @@ static const struct file_operations sync_fence_fops = {
 	.compat_ioctl = sync_fence_ioctl,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

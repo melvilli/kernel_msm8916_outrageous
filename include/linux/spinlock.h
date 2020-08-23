@@ -131,7 +131,10 @@ do {								\
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Place this after a lock-acquisition primitive to guarantee that
  * an UNLOCK+LOCK pair act as a full barrier.  This guarantee applies
@@ -142,6 +145,9 @@ do {								\
 #define smp_mb__after_unlock_lock()	do { } while (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * raw_spin_unlock_wait - wait until the spinlock gets unlocked
@@ -201,8 +207,11 @@ static inline void do_raw_spin_unlock(raw_spinlock_t *lock) __releases(lock)
 	 } while (0)
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define raw_spin_lock_nested(lock, subclass)		_raw_spin_lock(lock)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Always evaluate the 'subclass' argument to avoid that the compiler
  * warns about set-but-not-used variables when building with
@@ -210,6 +219,9 @@ static inline void do_raw_spin_unlock(raw_spinlock_t *lock) __releases(lock)
  */
 # define raw_spin_lock_nested(lock, subclass)		\
 	_raw_spin_lock(((void)(subclass), (lock)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define raw_spin_lock_nest_lock(lock, nest_lock)	_raw_spin_lock(lock)
 #endif

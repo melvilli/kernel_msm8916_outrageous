@@ -10,6 +10,10 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/fb.h>
+>>>>>>> v3.18
 =======
 #include <linux/fb.h>
 >>>>>>> v3.18
@@ -44,12 +48,18 @@ enum backlight_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum backlight_notification {
 	BACKLIGHT_REGISTERED,
 	BACKLIGHT_UNREGISTERED,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct backlight_device;
 struct fb_info;
@@ -113,8 +123,11 @@ struct backlight_device {
 	struct notifier_block fb_notif;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device dev;
 =======
+=======
+>>>>>>> v3.18
 	/* list entry of all registered backlight devices */
 	struct list_head entry;
 
@@ -124,6 +137,9 @@ struct backlight_device {
 	bool fb_bl_on[FB_MAX];
 
 	int use_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -139,10 +155,13 @@ extern struct backlight_device *backlight_device_register(const char *name,
 	struct device *dev, void *devdata, const struct backlight_ops *ops,
 	const struct backlight_properties *props);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void backlight_device_unregister(struct backlight_device *bd);
 extern void backlight_force_update(struct backlight_device *bd,
 				   enum backlight_update_reason reason);
 =======
+=======
+>>>>>>> v3.18
 extern struct backlight_device *devm_backlight_device_register(
 	struct device *dev, const char *name, struct device *parent,
 	void *devdata, const struct backlight_ops *ops,
@@ -155,6 +174,9 @@ extern void backlight_force_update(struct backlight_device *bd,
 extern bool backlight_device_registered(enum backlight_type type);
 extern int backlight_register_notifier(struct notifier_block *nb);
 extern int backlight_unregister_notifier(struct notifier_block *nb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define to_backlight_device(obj) container_of(obj, struct backlight_device, dev)

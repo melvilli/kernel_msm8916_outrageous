@@ -342,16 +342,22 @@ static void camif_clk_put(struct camif_dev *camif)
 
 	for (i = 0; i < CLK_MAX_NUM; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR_OR_NULL(camif->clock[i]))
 			continue;
 		clk_unprepare(camif->clock[i]);
 		clk_put(camif->clock[i]);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_ERR(camif->clock[i]))
 			continue;
 		clk_unprepare(camif->clock[i]);
 		clk_put(camif->clock[i]);
 		camif->clock[i] = ERR_PTR(-EINVAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -361,6 +367,12 @@ static int camif_clk_get(struct camif_dev *camif)
 	int ret, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for (i = 1; i < CLK_MAX_NUM; i++)
+		camif->clock[i] = ERR_PTR(-EINVAL);
+
+>>>>>>> v3.18
 =======
 	for (i = 1; i < CLK_MAX_NUM; i++)
 		camif->clock[i] = ERR_PTR(-EINVAL);

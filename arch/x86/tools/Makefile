@@ -41,7 +41,13 @@ HOST_EXTRACFLAGS += -I$(srctree)/tools/include
 hostprogs-y	+= relocs
 relocs-objs     := relocs_32.o relocs_64.o relocs_common.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 relocs: $(obj)/relocs
+=======
+PHONY += relocs
+relocs: $(obj)/relocs
+	@:
+>>>>>>> v3.18
 =======
 PHONY += relocs
 relocs: $(obj)/relocs

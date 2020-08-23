@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -38,7 +41,11 @@
 #include "ps.h"
 #include "regd.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "pci.h"
+>>>>>>> v3.18
 =======
 #include "pci.h"
 >>>>>>> v3.18
@@ -181,6 +188,10 @@ u8 rtl_tid_to_ac(u8 tid)
 	return tid_to_ac[tid];
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_tid_to_ac);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_tid_to_ac);
 >>>>>>> v3.18
@@ -222,7 +233,10 @@ static void _rtl_init_hw_ht_capab(struct ieee80211_hw *hw,
 	 */
 	if (rtlpriv->dm.supp_phymode_switch) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		RT_TRACE(rtlpriv, COMP_INIT, DBG_EMERG,
@@ -258,7 +272,10 @@ static void _rtl_init_hw_ht_capab(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void _rtl_init_hw_vht_capab(struct ieee80211_hw *hw,
 				   struct ieee80211_sta_vht_cap *vht_cap)
 {
@@ -336,6 +353,9 @@ static void _rtl_init_hw_vht_capab(struct ieee80211_hw *hw,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 {
@@ -346,9 +366,14 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 	struct ieee80211_supported_band *sband;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (rtlhal->macphymode == SINGLEMAC_SINGLEPHY && rtlhal->bandset ==
 	    BAND_ON_BOTH) {
+=======
+	if (rtlhal->macphymode == SINGLEMAC_SINGLEPHY &&
+	    rtlhal->bandset == BAND_ON_BOTH) {
+>>>>>>> v3.18
 =======
 	if (rtlhal->macphymode == SINGLEMAC_SINGLEPHY &&
 	    rtlhal->bandset == BAND_ON_BOTH) {
@@ -381,6 +406,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 		_rtl_init_hw_ht_capab(hw, &sband->ht_cap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		_rtl_init_hw_vht_capab(hw, &sband->vht_cap);
+>>>>>>> v3.18
 =======
 		_rtl_init_hw_vht_capab(hw, &sband->vht_cap);
 >>>>>>> v3.18
@@ -395,8 +424,13 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 			 * to default value(1T1R) */
 			memcpy(&(rtlmac->bands[IEEE80211_BAND_2GHZ]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 &rtl_band_2ghz,
 				 sizeof(struct ieee80211_supported_band));
+=======
+			       &rtl_band_2ghz,
+			       sizeof(struct ieee80211_supported_band));
+>>>>>>> v3.18
 =======
 			       &rtl_band_2ghz,
 			       sizeof(struct ieee80211_supported_band));
@@ -415,8 +449,13 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 			 * to default value(1T1R) */
 			memcpy(&(rtlmac->bands[IEEE80211_BAND_5GHZ]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 &rtl_band_5ghz,
 				 sizeof(struct ieee80211_supported_band));
+=======
+			       &rtl_band_5ghz,
+			       sizeof(struct ieee80211_supported_band));
+>>>>>>> v3.18
 =======
 			       &rtl_band_5ghz,
 			       sizeof(struct ieee80211_supported_band));
@@ -426,6 +465,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 			_rtl_init_hw_ht_capab(hw, &sband->ht_cap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			_rtl_init_hw_vht_capab(hw, &sband->vht_cap);
+>>>>>>> v3.18
 =======
 			_rtl_init_hw_vht_capab(hw, &sband->vht_cap);
 >>>>>>> v3.18
@@ -443,7 +486,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 	    IEEE80211_HW_CONNECTION_MONITOR |
 	    /* IEEE80211_HW_SUPPORTS_CQM_RSSI | */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    IEEE80211_HW_CONNECTION_MONITOR |
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	    IEEE80211_HW_MFP_CAPABLE |
@@ -456,7 +502,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 			/* IEEE80211_HW_SUPPORTS_DYNAMIC_PS | */
 			0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw->wiphy->interface_modes =
@@ -467,13 +516,19 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 	    BIT(NL80211_IFTYPE_P2P_CLIENT) |
 	    BIT(NL80211_IFTYPE_P2P_GO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 =======
+=======
+>>>>>>> v3.18
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 
 	hw->wiphy->flags |= WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hw->wiphy->rts_threshold = 2347;
 
@@ -483,7 +538,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 	/* TODO: Correct this value for our hw */
 	/* TODO: define these hard code value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->channel_change_time = 100;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw->max_listen_interval = 10;
@@ -492,7 +550,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 	hw->sta_data_size = sizeof(struct rtl_sta_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* wowlan is not supported by kernel if CONFIG_PM is not defined */
 #ifdef CONFIG_PM
 	if (rtlpriv->psc.wo_wlan_mode) {
@@ -508,6 +569,9 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* <6> mac address */
 	if (is_valid_ether_addr(rtlefuse->dev_addr)) {
@@ -518,7 +582,10 @@ static void _rtl_init_mac80211(struct ieee80211_hw *hw)
 		SET_IEEE80211_PERM_ADDR(hw, rtlmac1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -533,10 +600,16 @@ static void _rtl_init_deferred_work(struct ieee80211_hw *hw)
 	setup_timer(&rtlpriv->works.dualmac_easyconcurrent_retrytimer,
 		    rtl_easy_concurrent_retrytimer_callback, (unsigned long)hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* <2> work queue */
 	rtlpriv->works.hw = hw;
 	rtlpriv->works.rtl_wq = alloc_workqueue(rtlpriv->cfg->name, 0, 0);
+=======
+	/* <2> work queue */
+	rtlpriv->works.hw = hw;
+	rtlpriv->works.rtl_wq = alloc_workqueue("%s", 0, 0, rtlpriv->cfg->name);
+>>>>>>> v3.18
 =======
 	/* <2> work queue */
 	rtlpriv->works.hw = hw;
@@ -568,6 +641,10 @@ void rtl_deinit_deferred_work(struct ieee80211_hw *hw)
 	cancel_delayed_work(&rtlpriv->works.fwevt_wq);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_deinit_deferred_work);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_deinit_deferred_work);
 >>>>>>> v3.18
@@ -588,7 +665,11 @@ void rtl_init_rfkill(struct ieee80211_hw *hw)
 
 	if (valid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("wireless switch is %s\n",
+=======
+		pr_info("rtlwifi: wireless switch is %s\n",
+>>>>>>> v3.18
 =======
 		pr_info("rtlwifi: wireless switch is %s\n",
 >>>>>>> v3.18
@@ -609,6 +690,10 @@ void rtl_deinit_rfkill(struct ieee80211_hw *hw)
 	wiphy_rfkill_stop_polling(hw->wiphy);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_deinit_rfkill);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_deinit_rfkill);
 >>>>>>> v3.18
@@ -637,11 +722,16 @@ int rtl_init_core(struct ieee80211_hw *hw)
 	/* <4> locks */
 	mutex_init(&rtlpriv->locks.conf_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&rtlpriv->locks.ps_mutex);
 	spin_lock_init(&rtlpriv->locks.ips_lock);
 	spin_lock_init(&rtlpriv->locks.irq_th_lock);
 	spin_lock_init(&rtlpriv->locks.irq_pci_lock);
 	spin_lock_init(&rtlpriv->locks.tx_lock);
+=======
+	spin_lock_init(&rtlpriv->locks.ips_lock);
+	spin_lock_init(&rtlpriv->locks.irq_th_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&rtlpriv->locks.ips_lock);
 	spin_lock_init(&rtlpriv->locks.irq_th_lock);
@@ -652,7 +742,10 @@ int rtl_init_core(struct ieee80211_hw *hw)
 	spin_lock_init(&rtlpriv->locks.waitq_lock);
 	spin_lock_init(&rtlpriv->locks.entry_list_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&rtlpriv->locks.fw_ps_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_init(&rtlpriv->locks.cck_and_rw_pagea_lock);
@@ -660,7 +753,11 @@ int rtl_init_core(struct ieee80211_hw *hw)
 	spin_lock_init(&rtlpriv->locks.fw_ps_lock);
 	spin_lock_init(&rtlpriv->locks.lps_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	spin_lock_init(&rtlpriv->locks.iqk_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&rtlpriv->locks.iqk_lock);
 >>>>>>> v3.18
@@ -675,6 +772,10 @@ int rtl_init_core(struct ieee80211_hw *hw)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_init_core);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_init_core);
 >>>>>>> v3.18
@@ -683,6 +784,10 @@ void rtl_deinit_core(struct ieee80211_hw *hw)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_deinit_core);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_deinit_core);
 >>>>>>> v3.18
@@ -695,6 +800,10 @@ void rtl_init_rx_config(struct ieee80211_hw *hw)
 	rtlpriv->cfg->ops->get_hw_reg(hw, HW_VAR_RCR, (u8 *) (&mac->rx_conf));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_init_rx_config);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_init_rx_config);
 >>>>>>> v3.18
@@ -731,6 +840,10 @@ static void _rtl_query_shortgi(struct ieee80211_hw *hw,
 	u8 rate_flag = info->control.rates[0].flags;
 	u8 sgi_40 = 0, sgi_20 = 0, bw_40 = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 sgi_80 = 0, bw_80 = 0;
+>>>>>>> v3.18
 =======
 	u8 sgi_80 = 0, bw_80 = 0;
 >>>>>>> v3.18
@@ -742,8 +855,14 @@ static void _rtl_query_shortgi(struct ieee80211_hw *hw,
 	sgi_40 = sta->ht_cap.cap & IEEE80211_HT_CAP_SGI_40;
 	sgi_20 = sta->ht_cap.cap & IEEE80211_HT_CAP_SGI_20;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!(sta->ht_cap.ht_supported))
+=======
+	sgi_80 = sta->vht_cap.cap & IEEE80211_VHT_CAP_SHORT_GI_80;
+
+	if ((!sta->ht_cap.ht_supported) && (!sta->vht_cap.vht_supported))
+>>>>>>> v3.18
 =======
 	sgi_80 = sta->vht_cap.cap & IEEE80211_VHT_CAP_SHORT_GI_80;
 
@@ -754,6 +873,7 @@ static void _rtl_query_shortgi(struct ieee80211_hw *hw,
 	if (!sgi_40 && !sgi_20)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mac->opmode == NL80211_IFTYPE_STATION)
 		bw_40 = mac->bw_40;
@@ -767,6 +887,8 @@ static void _rtl_query_shortgi(struct ieee80211_hw *hw,
 	else if ((bw_40 == false) && sgi_20)
 		tcb_desc->use_shortgi = true;
 =======
+=======
+>>>>>>> v3.18
 	if (mac->opmode == NL80211_IFTYPE_STATION) {
 		bw_40 = mac->bw_40;
 		bw_80 = mac->bw_80;
@@ -788,6 +910,9 @@ static void _rtl_query_shortgi(struct ieee80211_hw *hw,
 		else if (!bw_40 && sgi_20)
 			tcb_desc->use_shortgi = true;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(rate_flag & IEEE80211_TX_RC_SHORT_GI))
@@ -839,7 +964,11 @@ static void _rtl_txrate_selectmode(struct ieee80211_hw *hw,
 			tcb_desc->ratr_index = 0;
 		} else if (mac->opmode == NL80211_IFTYPE_ADHOC ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   mac->opmode == NL80211_IFTYPE_MESH_POINT) {
+=======
+				mac->opmode == NL80211_IFTYPE_MESH_POINT) {
+>>>>>>> v3.18
 =======
 				mac->opmode == NL80211_IFTYPE_MESH_POINT) {
 >>>>>>> v3.18
@@ -864,8 +993,11 @@ static void _rtl_txrate_selectmode(struct ieee80211_hw *hw,
 			tcb_desc->mac_id = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (mac->mode == WIRELESS_MODE_N_24G)
 =======
+=======
+>>>>>>> v3.18
 			if (mac->mode == WIRELESS_MODE_AC_5G)
 				tcb_desc->ratr_index =
 					RATR_INX_WIRELESS_AC_5N;
@@ -873,6 +1005,9 @@ static void _rtl_txrate_selectmode(struct ieee80211_hw *hw,
 				tcb_desc->ratr_index =
 					RATR_INX_WIRELESS_AC_24N;
 			else if (mac->mode == WIRELESS_MODE_N_24G)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				tcb_desc->ratr_index = RATR_INX_WIRELESS_NGB;
 			else if (mac->mode == WIRELESS_MODE_N_5G)
@@ -884,8 +1019,14 @@ static void _rtl_txrate_selectmode(struct ieee80211_hw *hw,
 			else if (mac->mode & WIRELESS_MODE_A)
 				tcb_desc->ratr_index = RATR_INX_WIRELESS_G;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (mac->opmode == NL80211_IFTYPE_AP ||
 			   mac->opmode == NL80211_IFTYPE_ADHOC) {
+=======
+
+		} else if (mac->opmode == NL80211_IFTYPE_AP ||
+			mac->opmode == NL80211_IFTYPE_ADHOC) {
+>>>>>>> v3.18
 =======
 
 		} else if (mac->opmode == NL80211_IFTYPE_AP ||
@@ -917,7 +1058,12 @@ static void _rtl_query_bandwidth_mode(struct ieee80211_hw *hw,
 	    mac->opmode == NL80211_IFTYPE_ADHOC ||
 	    mac->opmode == NL80211_IFTYPE_MESH_POINT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sta->bandwidth == IEEE80211_STA_RX_BW_20)
+=======
+		if (!(sta->ht_cap.ht_supported) ||
+		    !(sta->ht_cap.cap & IEEE80211_HT_CAP_SUP_WIDTH_20_40))
+>>>>>>> v3.18
 =======
 		if (!(sta->ht_cap.ht_supported) ||
 		    !(sta->ht_cap.cap & IEEE80211_HT_CAP_SUP_WIDTH_20_40))
@@ -935,11 +1081,14 @@ static void _rtl_query_bandwidth_mode(struct ieee80211_hw *hw,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcb_desc->packet_bw = true;
 }
 
 static u8 _rtl_get_highest_n_rate(struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 	tcb_desc->packet_bw = HT_CHANNEL_WIDTH_20_40;
 
 	if (rtlpriv->rtlhal.hw_type == HARDWARE_TYPE_RTL8812AE ||
@@ -963,15 +1112,21 @@ static u8 _rtl_get_highest_n_rate(struct ieee80211_hw *hw)
 
 static u8 _rtl_get_vht_highest_n_rate(struct ieee80211_hw *hw,
 				      struct ieee80211_sta *sta)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 	u8 hw_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (get_rf_type(rtlphy) == RF_2T2R)
 =======
+=======
+>>>>>>> v3.18
 	u16 tx_mcs_map = le16_to_cpu(sta->vht_cap.vht_mcs.tx_mcs_map);
 
 	if ((get_rf_type(rtlphy) == RF_2T2R) &&
@@ -1013,6 +1168,9 @@ static u8 _rtl_get_highest_n_rate(struct ieee80211_hw *hw,
 
 	if ((get_rf_type(rtlphy) == RF_2T2R) &&
 	    (sta->ht_cap.mcs.rx_mask[1] != 0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hw_rate = rtlpriv->cfg->maps[RTL_RC_HT_RATEMCS15];
 	else
@@ -1122,9 +1280,13 @@ int rtlwifi_rate_mapping(struct ieee80211_hw *hw,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	} else {
 
+=======
+	} else {
+>>>>>>> v3.18
 =======
 	} else {
 >>>>>>> v3.18
@@ -1187,6 +1349,7 @@ int rtlwifi_rate_mapping(struct ieee80211_hw *hw,
 EXPORT_SYMBOL(rtlwifi_rate_mapping);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool rtl_tx_mgmt_proc(struct ieee80211_hw *hw, struct sk_buff *skb)
 {
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
@@ -1213,6 +1376,8 @@ bool rtl_tx_mgmt_proc(struct ieee80211_hw *hw, struct sk_buff *skb)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 		      struct ieee80211_tx_info *info,
 		      struct ieee80211_sta *sta,
@@ -1223,7 +1388,11 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 	struct ieee80211_hdr *hdr = rtl_get_hdr(skb);
 	struct ieee80211_rate *txrate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 fc = hdr->frame_control;
+=======
+	__le16 fc = rtl_get_fc(skb);
+>>>>>>> v3.18
 =======
 	__le16 fc = rtl_get_fc(skb);
 >>>>>>> v3.18
@@ -1232,8 +1401,11 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 	if (txrate)
 		tcb_desc->hw_rate = txrate->hw_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		tcb_desc->hw_rate = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1263,6 +1435,7 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 			 *when tcb_desc->use_driver_rate = false
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sta && (sta->ht_cap.ht_supported)) {
 				tcb_desc->hw_rate = _rtl_get_highest_n_rate(hw);
 			} else {
@@ -1273,6 +1446,8 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 					tcb_desc->hw_rate =
 					   rtlpriv->cfg->maps[RTL_RC_OFDM_RATE54M];
 =======
+=======
+>>>>>>> v3.18
 			if (sta && sta->vht_cap.vht_supported) {
 				tcb_desc->hw_rate =
 				_rtl_get_vht_highest_n_rate(hw, sta);
@@ -1288,6 +1463,9 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 						tcb_desc->hw_rate =
 						    rtlpriv->cfg->maps[RTL_RC_OFDM_RATE54M];
 					}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -1313,6 +1491,7 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 }
 EXPORT_SYMBOL(rtl_get_tcb_desc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool addbareq_rx(struct ieee80211_hw *hw, struct sk_buff *skb)
 {
@@ -1363,6 +1542,8 @@ static bool addbareq_rx(struct ieee80211_hw *hw, struct sk_buff *skb)
 	rcu_read_unlock();
 	return false;
 =======
+=======
+>>>>>>> v3.18
 bool rtl_tx_mgmt_proc(struct ieee80211_hw *hw, struct sk_buff *skb)
 {
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
@@ -1415,6 +1596,9 @@ static void process_agg_start(struct ieee80211_hw *hw,
 			      skb_delba->len);
 		ieee80211_rx_irqsafe(hw, skb_delba);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1424,8 +1608,13 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 	struct ieee80211_hdr *hdr = rtl_get_hdr(skb);
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 fc = hdr->frame_control;
 	u8 *act = (u8 *)skb->data + MAC80211_3ADDR_LEN;
+=======
+	__le16 fc = rtl_get_fc(skb);
+	u8 *act = (u8 *)(((u8 *)skb->data + MAC80211_3ADDR_LEN));
+>>>>>>> v3.18
 =======
 	__le16 fc = rtl_get_fc(skb);
 	u8 *act = (u8 *)(((u8 *)skb->data + MAC80211_3ADDR_LEN));
@@ -1446,6 +1635,7 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 
 			RT_TRACE(rtlpriv, (COMP_SEND | COMP_RECV), DBG_DMESG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "%s ACT_ADDBAREQ From :%pM\n",
 				 is_tx ? "Tx" : "Rx", hdr->addr2);
 			RT_PRINT_DATA(rtlpriv, COMP_INIT, DBG_DMESG, "req\n",
@@ -1454,6 +1644,8 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 				if (addbareq_rx(hw, skb))
 					return true;
 =======
+=======
+>>>>>>> v3.18
 				"%s ACT_ADDBAREQ From :%pM\n",
 				is_tx ? "Tx" : "Rx", hdr->addr2);
 			RT_PRINT_DATA(rtlpriv, COMP_INIT, DBG_DMESG, "req\n",
@@ -1490,13 +1682,20 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 					process_agg_start(hw, hdr, tid);
 				rcu_read_unlock();
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case ACT_ADDBARSP:
 			RT_TRACE(rtlpriv, (COMP_SEND | COMP_RECV), DBG_DMESG,
 				 "%s ACT_ADDBARSP From :%pM\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 is_tx ? "Tx" : "Rx", hdr->addr2);
+=======
+				  is_tx ? "Tx" : "Rx", hdr->addr2);
+>>>>>>> v3.18
 =======
 				  is_tx ? "Tx" : "Rx", hdr->addr2);
 >>>>>>> v3.18
@@ -1514,7 +1713,10 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(rtl_action_proc);
 
 static void setup_arp_tx(struct rtl_priv *rtlpriv, struct rtl_ps_ctl *ppsc)
@@ -1527,6 +1729,9 @@ static void setup_arp_tx(struct rtl_priv *rtlpriv, struct rtl_ps_ctl *ppsc)
 	schedule_work(&rtlpriv->works.lps_change_work);
 	ppsc->last_delaylps_stamp_jiffies = jiffies;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*should call before software enc*/
@@ -1537,6 +1742,7 @@ u8 rtl_is_special_data(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 	__le16 fc = rtl_get_fc(skb);
 	u16 ether_type;
 	u8 mac_hdr_len = ieee80211_get_hdrlen_from_skb(skb);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct iphdr *ip;
 
@@ -1591,6 +1797,8 @@ u8 rtl_is_special_data(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 	return true;
 }
 =======
+=======
+>>>>>>> v3.18
 	u8 encrypt_header_len = 0;
 	u8 offset;
 	const struct iphdr *ip;
@@ -1664,6 +1872,9 @@ end:
 	return false;
 }
 EXPORT_SYMBOL_GPL(rtl_is_special_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*********************************************************
@@ -1672,6 +1883,7 @@ EXPORT_SYMBOL_GPL(rtl_is_special_data);
  *
  *********************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtl_tx_agg_start(struct ieee80211_hw *hw,
 		struct ieee80211_sta *sta, u16 tid, u16 *ssn)
 {
@@ -1679,11 +1891,16 @@ int rtl_tx_agg_start(struct ieee80211_hw *hw,
 	struct rtl_tid_data *tid_data;
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 =======
+=======
+>>>>>>> v3.18
 int rtl_tx_agg_start(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 		     struct ieee80211_sta *sta, u16 tid, u16 *ssn)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_tid_data *tid_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtl_sta_info *sta_entry = NULL;
 
@@ -1699,8 +1916,14 @@ int rtl_tx_agg_start(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 	tid_data = &sta_entry->tids[tid];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG, "on ra = %pM tid = %d seq:%d\n",
 		 sta->addr, tid, tid_data->seq_number);
+=======
+	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
+		 "on ra = %pM tid = %d seq:%d\n", sta->addr, tid,
+		 tid_data->seq_number);
+>>>>>>> v3.18
 =======
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
 		 "on ra = %pM tid = %d seq:%d\n", sta->addr, tid,
@@ -1710,6 +1933,7 @@ int rtl_tx_agg_start(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 	*ssn = tid_data->seq_number;
 	tid_data->agg.agg_state = RTL_AGG_START;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ieee80211_start_tx_ba_cb_irqsafe(mac->vif, sta->addr, tid);
 
@@ -1722,6 +1946,8 @@ int rtl_tx_agg_stop(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 =======
+=======
+>>>>>>> v3.18
 	ieee80211_start_tx_ba_cb_irqsafe(vif, sta->addr, tid);
 	return 0;
 }
@@ -1731,12 +1957,16 @@ int rtl_tx_agg_stop(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_tid_data *tid_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtl_sta_info *sta_entry = NULL;
 
 	if (sta == NULL)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!sta->addr) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "ra = NULL\n");
@@ -1749,21 +1979,31 @@ int rtl_tx_agg_stop(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
 		 "on ra = %pM tid = %d\n", sta->addr, tid);
 >>>>>>> v3.18
+=======
+	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
+		 "on ra = %pM tid = %d\n", sta->addr, tid);
+>>>>>>> v3.18
 
 	if (unlikely(tid >= MAX_TID_COUNT))
 		return -EINVAL;
 
 	sta_entry = (struct rtl_sta_info *)sta->drv_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sta_entry->tids[tid].agg.agg_state = RTL_AGG_STOP;
 
 	ieee80211_stop_tx_ba_cb_irqsafe(mac->vif, sta->addr, tid);
 
 =======
+=======
+>>>>>>> v3.18
 	tid_data = &sta_entry->tids[tid];
 	sta_entry->tids[tid].agg.agg_state = RTL_AGG_STOP;
 
 	ieee80211_stop_tx_ba_cb_irqsafe(vif, sta->addr, tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1804,11 +2044,14 @@ int rtl_rx_agg_stop(struct ieee80211_hw *hw,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sta->addr) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "ra = NULL\n");
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
@@ -1823,7 +2066,10 @@ int rtl_rx_agg_stop(struct ieee80211_hw *hw,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int rtl_tx_agg_oper(struct ieee80211_hw *hw,
@@ -1836,6 +2082,7 @@ int rtl_tx_agg_oper(struct ieee80211_hw *hw,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sta->addr) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "ra = NULL\n");
 		return -EINVAL;
@@ -1843,6 +2090,10 @@ int rtl_tx_agg_oper(struct ieee80211_hw *hw,
 
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG, "on ra = %pM tid = %d\n",
 		 sta->addr, tid);
+=======
+	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
+		 "on ra = %pM tid = %d\n", sta->addr, tid);
+>>>>>>> v3.18
 =======
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_DMESG,
 		 "on ra = %pM tid = %d\n", sta->addr, tid);
@@ -1885,7 +2136,11 @@ void rtl_beacon_statistic(struct ieee80211_hw *hw, struct sk_buff *skb)
 
 	/* and only beacons from the associated BSSID, please */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (compare_ether_addr(hdr->addr3, rtlpriv->mac80211.bssid))
+=======
+	if (!ether_addr_equal(hdr->addr3, rtlpriv->mac80211.bssid))
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(hdr->addr3, rtlpriv->mac80211.bssid))
 >>>>>>> v3.18
@@ -1894,6 +2149,10 @@ void rtl_beacon_statistic(struct ieee80211_hw *hw, struct sk_buff *skb)
 	rtlpriv->link_info.bcn_rx_inperiod++;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_beacon_statistic);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_beacon_statistic);
 >>>>>>> v3.18
@@ -1932,8 +2191,12 @@ void rtl_watchdog_wq_callback(void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 *<2> to check if traffic busy, if
+=======
+	/* <2> to check if traffic busy, if
+>>>>>>> v3.18
 =======
 	/* <2> to check if traffic busy, if
 >>>>>>> v3.18
@@ -1985,8 +2248,13 @@ void rtl_watchdog_wq_callback(void *data)
 			for (idx = 0; idx <= 2; idx++)
 				rtlpriv->link_info.tidtx_in4period[tid][idx] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  rtlpriv->link_info.tidtx_in4period[tid]
 				  [idx + 1];
+=======
+					rtlpriv->link_info.tidtx_in4period[tid]
+					[idx + 1];
+>>>>>>> v3.18
 =======
 					rtlpriv->link_info.tidtx_in4period[tid]
 					[idx + 1];
@@ -1997,6 +2265,7 @@ void rtl_watchdog_wq_callback(void *data)
 			for (idx = 0; idx <= 3; idx++)
 				tidtx_inp4eriod[tid] +=
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  rtlpriv->link_info.tidtx_in4period[tid][idx];
 			aver_tidtx_inperiod[tid] = tidtx_inp4eriod[tid] / 4;
 			if (aver_tidtx_inperiod[tid] > 5000)
@@ -2006,6 +2275,8 @@ void rtl_watchdog_wq_callback(void *data)
 				rtlpriv->link_info.higher_busytxtraffic[tid] =
 						   false;
 =======
+=======
+>>>>>>> v3.18
 				   rtlpriv->link_info.tidtx_in4period[tid][idx];
 			aver_tidtx_inperiod[tid] = tidtx_inp4eriod[tid] / 4;
 			if (aver_tidtx_inperiod[tid] > 5000)
@@ -2014,6 +2285,9 @@ void rtl_watchdog_wq_callback(void *data)
 			else
 				rtlpriv->link_info.higher_busytxtraffic[tid] =
 									false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2021,12 +2295,18 @@ void rtl_watchdog_wq_callback(void *data)
 		      rtlpriv->link_info.num_tx_inperiod) > 8) ||
 		    (rtlpriv->link_info.num_rx_inperiod > 2))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rtlpriv->enter_ps = false;
 		else
 			rtlpriv->enter_ps = true;
 
 		/* LeisurePS only work in infra mode. */
 		schedule_work(&rtlpriv->works.lps_change_work);
+=======
+			rtl_lps_enter(hw);
+		else
+			rtl_lps_leave(hw);
+>>>>>>> v3.18
 =======
 			rtl_lps_enter(hw);
 		else
@@ -2047,7 +2327,12 @@ void rtl_watchdog_wq_callback(void *data)
 
 	/* <3> DM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlpriv->cfg->ops->dm_watchdog(hw);
+=======
+	if (!rtlpriv->cfg->mod_params->disable_watchdog)
+		rtlpriv->cfg->ops->dm_watchdog(hw);
+>>>>>>> v3.18
 =======
 	if (!rtlpriv->cfg->mod_params->disable_watchdog)
 		rtlpriv->cfg->ops->dm_watchdog(hw);
@@ -2057,6 +2342,7 @@ void rtl_watchdog_wq_callback(void *data)
 	if (mac->link_state == MAC80211_LINKED &&
 	    mac->opmode == NL80211_IFTYPE_STATION) {
 		if ((rtlpriv->link_info.bcn_rx_inperiod +
+<<<<<<< HEAD
 <<<<<<< HEAD
 		     rtlpriv->link_info.num_rx_inperiod) == 0) {
 			rtlpriv->link_info.roam_times++;
@@ -2074,6 +2360,8 @@ void rtl_watchdog_wq_callback(void *data)
 				rtlpriv->link_info.roam_times = 0;
 				ieee80211_connection_loss(rtlpriv->mac80211.vif);
 =======
+=======
+>>>>>>> v3.18
 		    rtlpriv->link_info.num_rx_inperiod) == 0) {
 			rtlpriv->link_info.roam_times++;
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_DMESG,
@@ -2089,6 +2377,9 @@ void rtl_watchdog_wq_callback(void *data)
 				rtlpriv->link_info.roam_times = 0;
 				ieee80211_connection_loss(
 					rtlpriv->mac80211.vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		} else {
@@ -2096,11 +2387,17 @@ void rtl_watchdog_wq_callback(void *data)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (rtlpriv->cfg->ops->get_btc_status())
 		rtlpriv->btcoexist.btc_ops->btc_periodical(rtlpriv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtlpriv->link_info.bcn_rx_inperiod = 0;
 }
@@ -2117,7 +2414,10 @@ void rtl_watch_dog_timer_callback(unsigned long data)
 		  jiffies + MSECS(RTL_WATCH_DOG_TIME));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void rtl_fwevt_wq_callback(void *data)
@@ -2130,7 +2430,10 @@ void rtl_fwevt_wq_callback(void *data)
 	rtlpriv->cfg->ops->c2h_command_handle(hw);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void rtl_easy_concurrent_retrytimer_callback(unsigned long data)
@@ -2145,7 +2448,10 @@ void rtl_easy_concurrent_retrytimer_callback(unsigned long data)
 	rtlpriv->cfg->ops->dualmac_easy_concurrent(hw);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*********************************************************
@@ -2176,7 +2482,12 @@ u8 *rtl_find_ie(u8 *data, unsigned int len, u8 ie)
 /* when we use 1 rx ant we send IEEE80211_SMPS_STATIC */
 static struct sk_buff *rtl_make_smps_action(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		enum ieee80211_smps_mode smps, u8 *da, u8 *bssid)
+=======
+				     enum ieee80211_smps_mode smps,
+				     u8 *da, u8 *bssid)
+>>>>>>> v3.18
 =======
 				     enum ieee80211_smps_mode smps,
 				     u8 *da, u8 *bssid)
@@ -2206,6 +2517,12 @@ static struct sk_buff *rtl_make_smps_action(struct ieee80211_hw *hw,
 	case IEEE80211_SMPS_NUM_MODES:/* 4 */
 		WARN_ON(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Here will get a 'MISSING_BREAK' in Coverity Test, just ignore it.
+	 * According to Kernel Code, here is right.
+	 */
+>>>>>>> v3.18
 =======
 	/* Here will get a 'MISSING_BREAK' in Coverity Test, just ignore it.
 	 * According to Kernel Code, here is right.
@@ -2230,8 +2547,13 @@ static struct sk_buff *rtl_make_smps_action(struct ieee80211_hw *hw,
 
 int rtl_send_smps_action(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ieee80211_sta *sta,
 		enum ieee80211_smps_mode smps)
+=======
+			 struct ieee80211_sta *sta,
+			 enum ieee80211_smps_mode smps)
+>>>>>>> v3.18
 =======
 			 struct ieee80211_sta *sta,
 			 enum ieee80211_smps_mode smps)
@@ -2271,6 +2593,10 @@ int rtl_send_smps_action(struct ieee80211_hw *hw,
 			(struct rtl_sta_info *) sta->drv_priv;
 		sta_entry->mimo_ps = smps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* rtlpriv->cfg->ops->update_rate_tbl(hw, sta, 0); */
+>>>>>>> v3.18
 =======
 		/* rtlpriv->cfg->ops->update_rate_tbl(hw, sta, 0); */
 >>>>>>> v3.18
@@ -2287,11 +2613,14 @@ err_free:
 EXPORT_SYMBOL(rtl_send_smps_action);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* There seem to be issues in mac80211 regarding when del ba frames can be
  * received. As a work around, we make a fake del_ba if we receive a ba_req;
  * however, rx_agg was opened to let mac80211 release some ba related
  * resources. This del_ba is for tx only.
 =======
+=======
+>>>>>>> v3.18
 void rtl_phy_scan_operation_backup(struct ieee80211_hw *hw, u8 operation)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2325,6 +2654,9 @@ EXPORT_SYMBOL(rtl_phy_scan_operation_backup);
  * so here we just make a fake del_ba if we receive a ba_req
  * but rx_agg was opened to let mac80211 release some ba
  * related resources, so please this del_ba for tx
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct sk_buff *rtl_make_del_ba(struct ieee80211_hw *hw,
@@ -2352,7 +2684,11 @@ struct sk_buff *rtl_make_del_ba(struct ieee80211_hw *hw,
 	action_frame->u.action.u.delba.action_code = WLAN_ACTION_DELBA;
 	params = (u16)(1 << 11);	/* bit 11 initiator */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	params |= (u16)(tid << 12);		/* bit 15:12 TID number */
+=======
+	params |= (u16)(tid << 12);	/* bit 15:12 TID number */
+>>>>>>> v3.18
 =======
 	params |= (u16)(tid << 12);	/* bit 15:12 TID number */
 >>>>>>> v3.18
@@ -2371,7 +2707,11 @@ struct sk_buff *rtl_make_del_ba(struct ieee80211_hw *hw,
  *********************************************************/
 static bool rtl_chk_vendor_ouisub(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct octet_string vendor_ie)
+=======
+				  struct octet_string vendor_ie)
+>>>>>>> v3.18
 =======
 				  struct octet_string vendor_ie)
 >>>>>>> v3.18
@@ -2480,7 +2820,11 @@ void rtl_recognize_peer(struct ieee80211_hw *hw, u8 *data, unsigned int len)
 
 	/* and only beacons from the associated BSSID, please */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ether_addr_equal(hdr->addr3, rtlpriv->mac80211.bssid))
+=======
+	if (!ether_addr_equal_64bits(hdr->addr3, rtlpriv->mac80211.bssid))
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal_64bits(hdr->addr3, rtlpriv->mac80211.bssid))
 >>>>>>> v3.18
@@ -2525,6 +2869,10 @@ void rtl_recognize_peer(struct ieee80211_hw *hw, u8 *data, unsigned int len)
 	mac->vendor = vendor;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_recognize_peer);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_recognize_peer);
 >>>>>>> v3.18
@@ -2553,6 +2901,7 @@ static ssize_t rtl_store_debug_level(struct device *d,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 0, &val);
 	if (ret) {
 		printk(KERN_DEBUG "%s is not in hex or decimal form.\n", buf);
@@ -2561,6 +2910,8 @@ static ssize_t rtl_store_debug_level(struct device *d,
 		printk(KERN_DEBUG "debuglevel:%x\n",
 		       rtlpriv->dbg.global_debuglevel);
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 0, &val);
 	if (ret) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_DMESG,
@@ -2570,6 +2921,9 @@ static ssize_t rtl_store_debug_level(struct device *d,
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_DMESG,
 			 "debuglevel:%x\n",
 			 rtlpriv->dbg.global_debuglevel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2597,6 +2951,10 @@ struct attribute_group rtl_attribute_group = {
 	.attrs = rtl_sysfs_entries,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl_attribute_group);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtl_attribute_group);
 >>>>>>> v3.18
@@ -2608,7 +2966,12 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Realtek 802.11n PCI wireless core");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rtl_global_var global_var = {};
+=======
+struct rtl_global_var rtl_global_var = {};
+EXPORT_SYMBOL_GPL(rtl_global_var);
+>>>>>>> v3.18
 =======
 struct rtl_global_var rtl_global_var = {};
 EXPORT_SYMBOL_GPL(rtl_global_var);
@@ -2618,17 +2981,23 @@ static int __init rtl_core_module_init(void)
 {
 	if (rtl_rate_control_register())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Unable to register rtl_rc, use default RC !!\n");
 
 	/* init some global vars */
 	INIT_LIST_HEAD(&global_var.glb_priv_list);
 	spin_lock_init(&global_var.glb_list_lock);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("rtl: Unable to register rtl_rc, use default RC !!\n");
 
 	/* init some global vars */
 	INIT_LIST_HEAD(&rtl_global_var.glb_priv_list);
 	spin_lock_init(&rtl_global_var.glb_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

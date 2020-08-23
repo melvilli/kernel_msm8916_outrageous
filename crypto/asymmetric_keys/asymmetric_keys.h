@@ -10,12 +10,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline const char *asymmetric_key_id(const struct key *key)
 =======
+=======
+>>>>>>> v3.18
 extern struct asymmetric_key_id *asymmetric_key_hex_to_key_id(const char *id);
 
 static inline
 const struct asymmetric_key_ids *asymmetric_key_ids(const struct key *key)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return key->type_data.p[1];

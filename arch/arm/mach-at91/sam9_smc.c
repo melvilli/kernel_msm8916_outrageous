@@ -37,6 +37,10 @@ void sam9_smc_write_mode(int id, int cs,
 	sam9_smc_cs_write_mode(AT91_SMC_CS(id, cs), config);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sam9_smc_write_mode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sam9_smc_write_mode);
 >>>>>>> v3.18
@@ -74,6 +78,10 @@ void sam9_smc_configure(int id, int cs,
 	sam9_smc_cs_configure(AT91_SMC_CS(id, cs), config);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sam9_smc_configure);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sam9_smc_configure);
 >>>>>>> v3.18
@@ -93,6 +101,10 @@ void sam9_smc_read_mode(int id, int cs,
 	sam9_smc_cs_read_mode(AT91_SMC_CS(id, cs), config);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sam9_smc_read_mode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sam9_smc_read_mode);
 >>>>>>> v3.18

@@ -29,7 +29,11 @@ static struct cpuidle_governor * __cpuidle_find_governor(const char *str)
 
 	list_for_each_entry(gov, &cpuidle_governors, governor_list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strnicmp(str, gov->name, CPUIDLE_NAME_LEN))
+=======
+		if (!strncasecmp(str, gov->name, CPUIDLE_NAME_LEN))
+>>>>>>> v3.18
 =======
 		if (!strncasecmp(str, gov->name, CPUIDLE_NAME_LEN))
 >>>>>>> v3.18
@@ -101,6 +105,7 @@ int cpuidle_register_governor(struct cpuidle_governor *gov)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * cpuidle_replace_governor - find a replacement governor
@@ -144,5 +149,7 @@ void cpuidle_unregister_governor(struct cpuidle_governor *gov)
 	mutex_unlock(&cpuidle_lock);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

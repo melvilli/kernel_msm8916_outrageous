@@ -316,10 +316,13 @@ ENDPROC(ret_from_kernel_thread)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Interrupt exit functions should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Return to user mode is not as complex as all this looks,
@@ -366,12 +369,18 @@ END(ret_from_exception)
 ENTRY(resume_kernel)
 	DISABLE_INTERRUPTS(CLBR_ANY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpl $0,TI_preempt_count(%ebp)	# non-zero preempt_count ?
 	jnz restore_all
 need_resched:
 	movl TI_flags(%ebp), %ecx	# need_resched set ?
 	testb $_TIF_NEED_RESCHED, %cl
 	jz restore_all
+=======
+need_resched:
+	cmpl $0,PER_CPU_VAR(__preempt_count)
+	jnz restore_all
+>>>>>>> v3.18
 =======
 need_resched:
 	cmpl $0,PER_CPU_VAR(__preempt_count)
@@ -385,10 +394,13 @@ END(resume_kernel)
 #endif
 	CFI_ENDPROC
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -471,6 +483,7 @@ sysenter_audit:
 	testl $(_TIF_WORK_SYSCALL_ENTRY & ~_TIF_SYSCALL_AUDIT),TI_flags(%ebp)
 	jnz syscall_trace_entry
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addl $4,%esp
 	CFI_ADJUST_CFA_OFFSET -4
 	/* %esi already in 8(%esp)	   6th arg: 4th syscall arg */
@@ -482,6 +495,8 @@ sysenter_audit:
 	call __audit_syscall_entry
 	pushl_cfi %ebx
 =======
+=======
+>>>>>>> v3.18
 	/* movl PT_EAX(%esp), %eax	already set, syscall number: 1st arg to audit */
 	movl PT_EBX(%esp), %edx		/* ebx/a0: 2nd arg to audit */
 	/* movl PT_ECX(%esp), %ecx	already set, a1: 3nd arg to audit */
@@ -490,6 +505,9 @@ sysenter_audit:
 	call __audit_syscall_entry
 	popl_cfi %ecx /* get that remapped edx off the stack */
 	popl_cfi %ecx /* get that remapped esi off the stack */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	movl PT_EAX(%esp),%eax		/* reload syscall number */
 	jmp sysenter_do_call
@@ -523,10 +541,13 @@ sysexit_audit:
 ENDPROC(ia32_sysenter_target)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * syscall stub including irq exit should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	# system call handler stub
@@ -725,12 +746,17 @@ sysenter_badsys:
 	movl $-ENOSYS,%eax
 	jmp sysenter_after_call
 <<<<<<< HEAD
+<<<<<<< HEAD
 END(syscall_badsys)
 	CFI_ENDPROC
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+END(sysenter_badsys)
+	CFI_ENDPROC
+>>>>>>> v3.18
 =======
 END(sysenter_badsys)
 	CFI_ENDPROC
@@ -826,10 +852,13 @@ ENDPROC(common_interrupt)
 	CFI_ENDPROC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *  Irq entries should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BUILD_INTERRUPT3(name, nr, fn)	\
@@ -846,8 +875,11 @@ ENTRY(name)				\
 ENDPROC(name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BUILD_INTERRUPT(name, nr)	BUILD_INTERRUPT3(name, nr, smp_##name)
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_TRACING
 #define TRACE_BUILD_INTERRUPT(name, nr)		\
@@ -859,6 +891,9 @@ ENDPROC(name)
 #define BUILD_INTERRUPT(name, nr) \
 	BUILD_INTERRUPT3(name, nr, smp_##name); \
 	TRACE_BUILD_INTERRUPT(name, nr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* The include is where all of the SMP etc. interrupts come from */
@@ -1013,10 +1048,13 @@ ENTRY(spurious_interrupt_bug)
 	CFI_ENDPROC
 END(spurious_interrupt_bug)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1128,9 +1166,12 @@ END(mcount)
 
 ENTRY(ftrace_caller)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpl $0, function_trace_stop
 	jne  ftrace_stub
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pushl %eax
@@ -1158,8 +1199,13 @@ ftrace_graph_call:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This is weak to keep gas from relaxing the jumps */
 WEAK(ftrace_stub)
+=======
+.globl ftrace_stub
+ftrace_stub:
+>>>>>>> v3.18
 =======
 .globl ftrace_stub
 ftrace_stub:
@@ -1170,8 +1216,11 @@ END(ftrace_caller)
 ENTRY(ftrace_regs_caller)
 	pushf	/* push flags before compare (in cs location) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpl $0, function_trace_stop
 	jne ftrace_restore_flags
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1233,7 +1282,10 @@ GLOBAL(ftrace_regs_call)
 	jmp ftrace_ret
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ftrace_restore_flags:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	popf
@@ -1242,8 +1294,13 @@ ftrace_restore_flags:
 
 ENTRY(mcount)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpl $0, function_trace_stop
 	jne  ftrace_stub
+=======
+	cmpl $__PAGE_OFFSET, %esp
+	jb ftrace_stub		/* Paging not enabled yet? */
+>>>>>>> v3.18
 =======
 	cmpl $__PAGE_OFFSET, %esp
 	jb ftrace_stub		/* Paging not enabled yet? */
@@ -1310,11 +1367,14 @@ return_to_handler:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Some functions should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRACING
 ENTRY(trace_page_fault)
 	RING0_EC_FRAME
@@ -1324,6 +1384,9 @@ ENTRY(trace_page_fault)
 	CFI_ENDPROC
 END(trace_page_fault)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ENTRY(page_fault)
@@ -1530,9 +1593,12 @@ END(async_page_fault)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

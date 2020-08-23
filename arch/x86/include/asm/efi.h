@@ -2,6 +2,7 @@
 #define _ASM_X86_EFI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_32
 
 #define EFI_LOADER_SIGNATURE	"EL32"
@@ -19,6 +20,8 @@ extern unsigned long asmlinkage efi_call_phys(void *, ...);
 #define efi_call_phys6(f, a1, a2, a3, a4, a5, a6)	\
 	efi_call_phys(f, a1, a2, a3, a4, a5, a6)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/i387.h>
 /*
  * We map the EFI regions needed for runtime services non-contiguously,
@@ -46,11 +49,15 @@ extern unsigned long asmlinkage efi_call_phys(void *, ...);
 
 extern unsigned long asmlinkage efi_call_phys(void *, ...);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Wrap all the virtual calls in a way that forces the parameters on the stack.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define efi_call_virt(f, args...) \
 	((efi_##f##_t __attribute__((regparm(0)))*)efi.systab->runtime->f)(args)
@@ -66,6 +73,8 @@ extern unsigned long asmlinkage efi_call_phys(void *, ...);
 #define efi_call_virt6(f, a1, a2, a3, a4, a5, a6)	\
 	efi_call_virt(f, a1, a2, a3, a4, a5, a6)
 =======
+=======
+>>>>>>> v3.18
 /* Use this macro if your virtual returns a non-void value */
 #define efi_call_virt(f, args...) \
 ({									\
@@ -85,6 +94,9 @@ extern unsigned long asmlinkage efi_call_phys(void *, ...);
 		efi.systab->runtime->f)(args);				\
 	kernel_fpu_end();						\
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define efi_ioremap(addr, size, type, attr)	ioremap_cache(addr, size)
@@ -93,6 +105,7 @@ extern unsigned long asmlinkage efi_call_phys(void *, ...);
 
 #define EFI_LOADER_SIGNATURE	"EL64"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern u64 efi_call0(void *fp);
 extern u64 efi_call1(void *fp, u64 arg1);
@@ -154,6 +167,8 @@ extern void efi_call_phys_epilog(void);
 extern void efi_unmap_memmap(void);
 extern void efi_memory_uc(u64 addr, unsigned long size);
 =======
+=======
+>>>>>>> v3.18
 extern u64 asmlinkage efi_call(void *fp, ...);
 
 #define efi_call_phys(f, args...)		efi_call((f), args)
@@ -211,6 +226,9 @@ struct efi_setup_data {
 };
 
 extern u64 efi_setup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_EFI
@@ -220,6 +238,7 @@ static inline bool efi_is_native(void)
 	return IS_ENABLED(CONFIG_X86_64) == efi_enabled(EFI_64BIT);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 /*
@@ -233,6 +252,8 @@ static inline bool efi_is_native(void)
 #define efi_call5(_f, _a1, _a2, _a3, _a4, _a5)		(-ENOSYS)
 #define efi_call6(_f, _a1, _a2, _a3, _a4, _a5, _a6)	(-ENOSYS)
 =======
+=======
+>>>>>>> v3.18
 static inline bool efi_runtime_supported(void)
 {
 	if (efi_is_native())
@@ -276,6 +297,9 @@ static inline bool efi_reboot_required(void)
 {
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_EFI */
 

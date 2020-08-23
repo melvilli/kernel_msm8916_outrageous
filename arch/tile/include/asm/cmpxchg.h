@@ -21,6 +21,7 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Nonexistent functions intended to cause link errors. */
 extern unsigned long __xchg_called_with_bad_pointer(void);
 extern unsigned long __cmpxchg_called_with_bad_pointer(void);
@@ -43,6 +44,8 @@ extern unsigned long __cmpxchg_called_with_bad_pointer(void);
 			__xchg_called_with_bad_pointer();		\
 		}							\
 =======
+=======
+>>>>>>> v3.18
 #include <asm/barrier.h>
 
 /* Nonexistent functions intended to cause compile errors. */
@@ -119,6 +122,9 @@ long long _atomic64_cmpxchg(long long *v, long long o, long long n);
 			break;						\
 		}							\
 		smp_mb();						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__x;							\
 	})
@@ -126,6 +132,7 @@ long long _atomic64_cmpxchg(long long *v, long long o, long long n);
 #define cmpxchg(ptr, o, n)						\
 	({								\
 		typeof(*(ptr)) __x;					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (sizeof(*(ptr))) {				\
 		case 4:							\
@@ -148,6 +155,8 @@ long long _atomic64_cmpxchg(long long *v, long long o, long long n);
 
 #define tas(ptr) (xchg((ptr), 1))
 =======
+=======
+>>>>>>> v3.18
 		__insn_mtspr(SPR_CMPEXCH_VALUE, (unsigned long)(o));	\
 		smp_mb();						\
 		switch (sizeof(*(ptr))) {				\
@@ -174,6 +183,9 @@ long long _atomic64_cmpxchg(long long *v, long long o, long long n);
 #endif
 
 #define tas(ptr) xchg((ptr), 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASSEMBLY__ */

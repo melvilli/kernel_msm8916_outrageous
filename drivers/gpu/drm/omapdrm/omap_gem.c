@@ -21,6 +21,10 @@
 #include <linux/spinlock.h>
 #include <linux/shmem_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_vma_manager.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_vma_manager.h>
 >>>>>>> v3.18
@@ -157,6 +161,7 @@ static void evict_entry(struct drm_gem_object *obj,
 		enum tiler_fmt fmt, struct usergart_entry *entry)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (obj->dev->dev_mapping) {
 		struct omap_gem_object *omap_obj = to_omap_bo(obj);
 		int n = usergart[fmt].height;
@@ -176,6 +181,8 @@ static void evict_entry(struct drm_gem_object *obj,
 			unmap_mapping_range(obj->dev->dev_mapping, off, size, 1);
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct omap_gem_object *omap_obj = to_omap_bo(obj);
 	int n = usergart[fmt].height;
 	size_t size = PAGE_SIZE * n;
@@ -194,6 +201,9 @@ static void evict_entry(struct drm_gem_object *obj,
 	} else {
 		unmap_mapping_range(obj->dev->anon_inode->i_mapping,
 				    off, size, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -258,11 +268,15 @@ static int omap_gem_attach_pages(struct drm_gem_object *obj)
 	WARN_ON(omap_obj->pages);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TODO: __GFP_DMA32 .. but somehow GFP_HIGHMEM is coming from the
 	 * mapping_gfp_mask(mapping) which conflicts w/ GFP_DMA32.. probably
 	 * we actually want CMA memory for it all anyways..
 	 */
 	pages = _drm_gem_get_pages(obj, GFP_KERNEL);
+=======
+	pages = drm_gem_get_pages(obj);
+>>>>>>> v3.18
 =======
 	pages = drm_gem_get_pages(obj);
 >>>>>>> v3.18
@@ -300,7 +314,11 @@ static int omap_gem_attach_pages(struct drm_gem_object *obj)
 
 free_pages:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_drm_gem_put_pages(obj, pages, true, false);
+=======
+	drm_gem_put_pages(obj, pages, true, false);
+>>>>>>> v3.18
 =======
 	drm_gem_put_pages(obj, pages, true, false);
 >>>>>>> v3.18
@@ -328,7 +346,11 @@ static void omap_gem_detach_pages(struct drm_gem_object *obj)
 	omap_obj->addrs = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_drm_gem_put_pages(obj, omap_obj->pages, true, false);
+=======
+	drm_gem_put_pages(obj, omap_obj->pages, true, false);
+>>>>>>> v3.18
 =======
 	drm_gem_put_pages(obj, omap_obj->pages, true, false);
 >>>>>>> v3.18
@@ -346,6 +368,7 @@ static uint64_t mmap_offset(struct drm_gem_object *obj)
 {
 	struct drm_device *dev = obj->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	WARN_ON(!mutex_is_locked(&dev->struct_mutex));
 
@@ -362,6 +385,8 @@ static uint64_t mmap_offset(struct drm_gem_object *obj)
 
 	return (uint64_t)obj->map_list.hash.key << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	size_t size;
 
@@ -376,6 +401,9 @@ static uint64_t mmap_offset(struct drm_gem_object *obj)
 	}
 
 	return drm_vma_node_offset_addr(&obj->vma_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -684,6 +712,7 @@ int omap_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * omap_gem_dumb_destroy	-	destroy a dumb buffer
  * @file: client file
  * @dev: our DRM device
@@ -699,6 +728,8 @@ int omap_gem_dumb_destroy(struct drm_file *file, struct drm_device *dev,
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * omap_gem_dumb_map	-	buffer mapping for dumb interface
@@ -1053,6 +1084,7 @@ int omap_gem_resume(struct device *dev)
 void omap_gem_describe(struct drm_gem_object *obj, struct seq_file *m)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *dev = obj->dev;
 	struct omap_gem_object *omap_obj = to_omap_bo(obj);
 	uint64_t off = 0;
@@ -1062,10 +1094,15 @@ void omap_gem_describe(struct drm_gem_object *obj, struct seq_file *m)
 	if (obj->map_list.map)
 		off = (uint64_t)obj->map_list.hash.key;
 =======
+=======
+>>>>>>> v3.18
 	struct omap_gem_object *omap_obj = to_omap_bo(obj);
 	uint64_t off;
 
 	off = drm_vma_node_start(&obj->vma_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	seq_printf(m, "%08x: %2d (%2d) %08llx %pad (%2d) %p %4d",
@@ -1131,15 +1168,21 @@ static inline bool is_waiting(struct omap_gem_sync_waiter *waiter)
 	struct omap_gem_object *omap_obj = waiter->omap_obj;
 	if ((waiter->op & OMAP_GEM_READ) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(omap_obj->sync->read_complete < waiter->read_target))
 		return true;
 	if ((waiter->op & OMAP_GEM_WRITE) &&
 			(omap_obj->sync->write_complete < waiter->write_target))
 =======
+=======
+>>>>>>> v3.18
 			(omap_obj->sync->write_complete < waiter->write_target))
 		return true;
 	if ((waiter->op & OMAP_GEM_WRITE) &&
 			(omap_obj->sync->read_complete < waiter->read_target))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	return false;
@@ -1274,9 +1317,13 @@ int omap_gem_op_sync(struct drm_gem_object *obj, enum omap_gem_op op)
 		}
 		spin_unlock(&sync_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (waiter)
 			kfree(waiter);
+=======
+		kfree(waiter);
+>>>>>>> v3.18
 =======
 		kfree(waiter);
 >>>>>>> v3.18
@@ -1321,6 +1368,11 @@ int omap_gem_op_async(struct drm_gem_object *obj, enum omap_gem_op op,
 
 		spin_unlock(&sync_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		kfree(waiter);
+>>>>>>> v3.18
 =======
 
 		kfree(waiter);
@@ -1371,11 +1423,14 @@ unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int omap_gem_init_object(struct drm_gem_object *obj)
 {
 	return -EINVAL;          /* unused */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* don't call directly.. called from GEM core when it is time to actually
@@ -1393,8 +1448,12 @@ void omap_gem_free_object(struct drm_gem_object *obj)
 	list_del(&omap_obj->mm_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (obj->map_list.map)
 		drm_gem_free_mmap_offset(obj);
+=======
+	drm_gem_free_mmap_offset(obj);
+>>>>>>> v3.18
 =======
 	drm_gem_free_mmap_offset(obj);
 >>>>>>> v3.18
@@ -1458,6 +1517,10 @@ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
 	struct omap_gem_object *omap_obj;
 	struct drm_gem_object *obj = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct address_space *mapping;
+>>>>>>> v3.18
 =======
 	struct address_space *mapping;
 >>>>>>> v3.18
@@ -1519,6 +1582,7 @@ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flags & (OMAP_BO_DMA|OMAP_BO_EXT_MEM))
 		ret = drm_gem_private_object_init(dev, obj, size);
 	else
@@ -1527,6 +1591,8 @@ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
 	if (ret)
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	if (flags & (OMAP_BO_DMA|OMAP_BO_EXT_MEM)) {
 		drm_gem_private_object_init(dev, obj, size);
 	} else {
@@ -1537,6 +1603,9 @@ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
 		mapping = file_inode(obj->filp)->i_mapping;
 		mapping_set_gfp_mask(mapping, GFP_USER | __GFP_DMA32);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return obj;

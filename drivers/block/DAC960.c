@@ -6412,6 +6412,7 @@ static bool DAC960_V2_ExecuteUserCommand(DAC960_Controller_T *Controller,
 					.SegmentByteCount =
 	    CommandMailbox->ControllerInfo.DataTransferSize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  DAC960_ExecuteCommand(Command);
 	  while (Controller->V2.NewControllerInformation->PhysicalScanActive)
 	    {
@@ -6419,12 +6420,17 @@ static bool DAC960_V2_ExecuteUserCommand(DAC960_Controller_T *Controller,
 	      sleep_on_timeout(&Controller->CommandWaitQueue, HZ);
 	    }
 =======
+=======
+>>>>>>> v3.18
 	  while (1) {
 	    DAC960_ExecuteCommand(Command);
 	    if (!Controller->V2.NewControllerInformation->PhysicalScanActive)
 		break;
 	    msleep(1000);
 	  }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  DAC960_UserCritical("Discovery Completed\n", Controller);
  	}
@@ -6751,17 +6757,23 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	if (DataTransferLength > 0)
 	  {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DataTransferBuffer = pci_alloc_consistent(Controller->PCIDevice,
 				DataTransferLength, &DataTransferBufferDMA);
 	    if (DataTransferBuffer == NULL)
 	    	break;
 	    memset(DataTransferBuffer, 0, DataTransferLength);
 =======
+=======
+>>>>>>> v3.18
 	    DataTransferBuffer = pci_zalloc_consistent(Controller->PCIDevice,
                                                        DataTransferLength,
                                                        &DataTransferBufferDMA);
 	    if (DataTransferBuffer == NULL)
 	    	break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  }
 	else if (DataTransferLength < 0)
@@ -6895,17 +6907,23 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	if (DataTransferLength > 0)
 	  {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DataTransferBuffer = pci_alloc_consistent(Controller->PCIDevice,
 				DataTransferLength, &DataTransferBufferDMA);
 	    if (DataTransferBuffer == NULL)
 	    	break;
 	    memset(DataTransferBuffer, 0, DataTransferLength);
 =======
+=======
+>>>>>>> v3.18
 	    DataTransferBuffer = pci_zalloc_consistent(Controller->PCIDevice,
                                                        DataTransferLength,
                                                        &DataTransferBufferDMA);
 	    if (DataTransferBuffer == NULL)
 	    	break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  }
 	else if (DataTransferLength < 0)
@@ -6925,8 +6943,14 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	if (RequestSenseLength > 0)
 	  {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    RequestSenseBuffer = pci_alloc_consistent(Controller->PCIDevice,
 			RequestSenseLength, &RequestSenseBufferDMA);
+=======
+	    RequestSenseBuffer = pci_zalloc_consistent(Controller->PCIDevice,
+                                                       RequestSenseLength,
+                                                       &RequestSenseBufferDMA);
+>>>>>>> v3.18
 =======
 	    RequestSenseBuffer = pci_zalloc_consistent(Controller->PCIDevice,
                                                        RequestSenseLength,
@@ -6938,7 +6962,10 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 		goto Failure2;
 	      }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    memset(RequestSenseBuffer, 0, RequestSenseLength);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	  }
@@ -7070,6 +7097,7 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (Controller->V2.HealthStatusBuffer->StatusChangeCounter
 	       == HealthStatusBuffer.StatusChangeCounter &&
 	       Controller->V2.HealthStatusBuffer->NextEventSequenceNumber
@@ -7083,6 +7111,8 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	    }
 	  }
 =======
+=======
+>>>>>>> v3.18
 	ErrorCode = wait_event_interruptible_timeout(Controller->HealthStatusWaitQueue,
 			!(Controller->V2.HealthStatusBuffer->StatusChangeCounter
 			    == HealthStatusBuffer.StatusChangeCounter &&
@@ -7093,6 +7123,9 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 		ErrorCode = -EINTR;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (copy_to_user(GetHealthStatus.HealthStatusBuffer,
 			 Controller->V2.HealthStatusBuffer,

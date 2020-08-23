@@ -4,7 +4,11 @@
  * Copyright 2003 José Fonseca.
  * Copyright 2003 Leif Delgass.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009, The Linux Foundation.
+=======
+ * Copyright (c) 2009, Code Aurora Forum.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009, Code Aurora Forum.
 >>>>>>> v3.18
@@ -33,7 +37,11 @@
 #include <drm/drmP.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -48,8 +56,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_get_platform_dev(struct platform_device *platdev,
 			 struct drm_driver *driver)
+=======
+static int drm_get_platform_dev(struct platform_device *platdev,
+				struct drm_driver *driver)
+>>>>>>> v3.18
 =======
 static int drm_get_platform_dev(struct platform_device *platdev,
 				struct drm_driver *driver)
@@ -61,7 +74,11 @@ static int drm_get_platform_dev(struct platform_device *platdev,
 	DRM_DEBUG("\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
+=======
+	dev = drm_dev_alloc(driver, &platdev->dev);
+>>>>>>> v3.18
 =======
 	dev = drm_dev_alloc(driver, &platdev->dev);
 >>>>>>> v3.18
@@ -69,6 +86,7 @@ static int drm_get_platform_dev(struct platform_device *platdev,
 		return -ENOMEM;
 
 	dev->platformdev = platdev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->dev = &platdev->dev;
 
@@ -109,10 +127,15 @@ static int drm_get_platform_dev(struct platform_device *platdev,
 
 	mutex_unlock(&drm_global_mutex);
 =======
+=======
+>>>>>>> v3.18
 
 	ret = drm_dev_register(dev, 0);
 	if (ret)
 		goto err_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DRM_INFO("Initialized %s %d.%d.%d %s on minor %d\n",
@@ -121,6 +144,7 @@ static int drm_get_platform_dev(struct platform_device *platdev,
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_g3:
 	drm_put_minor(&dev->primary);
@@ -208,6 +232,8 @@ static struct drm_bus drm_platform_bus = {
  */
 
 =======
+=======
+>>>>>>> v3.18
 err_free:
 	drm_dev_unref(dev);
 	return ret;
@@ -242,11 +268,15 @@ EXPORT_SYMBOL(drm_platform_set_busid);
  *
  * Return: 0 on success or a negative error code on failure.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int drm_platform_init(struct drm_driver *driver, struct platform_device *platform_device)
 {
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	driver->kdriver.platform_device = platform_device;
 	driver->bus = &drm_platform_bus;
@@ -265,6 +295,11 @@ void drm_platform_exit(struct drm_driver *driver, struct platform_device *platfo
 	DRM_INFO("Module unloaded\n");
 }
 EXPORT_SYMBOL(drm_platform_exit);
+=======
+	return drm_get_platform_dev(platform_device, driver);
+}
+EXPORT_SYMBOL(drm_platform_init);
+>>>>>>> v3.18
 =======
 	return drm_get_platform_dev(platform_device, driver);
 }

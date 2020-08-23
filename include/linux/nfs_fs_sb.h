@@ -42,15 +42,21 @@ struct nfs_client {
 #define NFS_CS_MIGRATION	2		/* - transparent state migr */
 #define NFS_CS_INFINITE_SLOTS	3		/* - don't limit TCP slots */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_storage	cl_addr;	/* server identifier */
 	size_t			cl_addrlen;
 	char *			cl_hostname;	/* hostname of server */
 =======
+=======
+>>>>>>> v3.18
 #define NFS_CS_NO_RETRANS_TIMEOUT	4	/* - Disable retransmit timeouts */
 	struct sockaddr_storage	cl_addr;	/* server identifier */
 	size_t			cl_addrlen;
 	char *			cl_hostname;	/* hostname of server */
 	char *			cl_acceptor;	/* GSSAPI acceptor name */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head	cl_share_link;	/* link in global client list */
 	struct list_head	cl_superblocks;	/* List of nfs_server structs */
@@ -65,6 +71,10 @@ struct nfs_client {
 
 #if IS_ENABLED(CONFIG_NFS_V4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	cl_ds_clients; /* auth flavor data servers */
+>>>>>>> v3.18
 =======
 	struct list_head	cl_ds_clients; /* auth flavor data servers */
 >>>>>>> v3.18
@@ -90,11 +100,17 @@ struct nfs_client {
 	u32			cl_cb_ident;	/* v4.0 callback identifier */
 	const struct nfs4_minor_version_ops *cl_mvops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		cl_mig_gen;
 
 	/* NFSv4.0 transport blocking */
 	struct nfs4_slot_table	*cl_slot_tbl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* The sequence id to use for the next CREATE_SESSION */
@@ -107,7 +123,10 @@ struct nfs_client {
 	struct nfs41_server_scope *cl_serverscope;
 	struct nfs41_impl_id	*cl_implid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* nfs 4.1+ state protection modes: */
 	unsigned long		cl_sp4_flags;
 #define NFS_SP4_MACH_CRED_MINIMAL  1	/* Minimal sp4_mach_cred - state ops
@@ -117,6 +136,9 @@ struct nfs_client {
 #define NFS_SP4_MACH_CRED_STATEID  4	/* TEST_STATEID and FREE_STATEID */
 #define NFS_SP4_MACH_CRED_WRITE    5	/* WRITE */
 #define NFS_SP4_MACH_CRED_COMMIT   6	/* COMMIT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_NFS_V4 */
 
@@ -166,7 +188,13 @@ struct nfs_server {
 	struct timespec		time_delta;	/* smallest time granularity */
 	unsigned long		mount_time;	/* when this fs was mounted */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_t			s_dev;		/* superblock dev numbers */
+=======
+	struct super_block	*super;		/* VFS super block */
+	dev_t			s_dev;		/* superblock dev numbers */
+	struct nfs_auth_info	auth_info;	/* parsed auth flavors */
+>>>>>>> v3.18
 =======
 	struct super_block	*super;		/* VFS super block */
 	dev_t			s_dev;		/* superblock dev numbers */
@@ -184,14 +212,20 @@ struct nfs_server {
 						   of attributes supported on this
 						   filesystem */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			cache_consistency_bitmask[2];
 =======
+=======
+>>>>>>> v3.18
 	u32			attr_bitmask_nl[3];
 						/* V4 bitmask representing the
 						   set of attributes supported
 						   on this filesystem excluding
 						   the label support bit. */
 	u32			cache_consistency_bitmask[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						/* V4 bitmask representing the subset
 						   of change attribute, size, ctime
@@ -216,13 +250,19 @@ struct nfs_server {
 	struct list_head	layouts;
 	struct list_head	delegations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	unsigned long		mig_gen;
 	unsigned long		mig_status;
 #define NFS_MIG_IN_TRANSITION		(1)
 #define NFS_MIG_FAILED			(2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*destroy)(struct nfs_server *);
 
@@ -256,6 +296,11 @@ struct nfs_server {
 #define NFS_CAP_STATEID_NFSV41	(1U << 16)
 #define NFS_CAP_ATOMIC_OPEN_V1	(1U << 17)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NFS_CAP_SECURITY_LABEL	(1U << 18)
+#define NFS_CAP_SEEK		(1U << 19)
+>>>>>>> v3.18
 =======
 #define NFS_CAP_SECURITY_LABEL	(1U << 18)
 #define NFS_CAP_SEEK		(1U << 19)

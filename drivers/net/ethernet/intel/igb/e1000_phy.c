@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/if_ether.h>
@@ -113,10 +119,13 @@ s32 igb_get_phy_id(struct e1000_hw *hw)
 	u16 phy_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ensure PHY page selection to fix misconfigured i210 */
 	if ((hw->mac.type == e1000_i210) || (hw->mac.type == e1000_i211))
 		phy->ops.write_reg(hw, I347AT4_PAGE_SELECT, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret_val = phy->ops.read_reg(hw, PHY_ID1, &phy_id);
@@ -374,7 +383,10 @@ s32 igb_write_phy_reg_i2c(struct e1000_hw *hw, u32 offset, u16 data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *  igb_read_sfp_data_byte - Reads SFP module data.
  *  @hw: pointer to the HW structure
  *  @offset: byte location offset to be read
@@ -428,6 +440,9 @@ s32 igb_read_sfp_data_byte(struct e1000_hw *hw, u16 offset, u8 *data)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  igb_read_phy_reg_igp - Read igp PHY register
  *  @hw: pointer to the HW structure
@@ -673,11 +688,14 @@ s32 igb_copper_link_setup_m88(struct e1000_hw *hw)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phy->type == e1000_phy_i210) {
 		ret_val = igb_set_master_slave_mode(hw);
 		if (ret_val)
 			return ret_val;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -699,10 +717,15 @@ s32 igb_copper_link_setup_m88_gen2(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phy->reset_disable) {
 		ret_val = 0;
 		goto out;
 	}
+=======
+	if (phy->reset_disable)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (phy->reset_disable)
 		return 0;
@@ -712,7 +735,11 @@ s32 igb_copper_link_setup_m88_gen2(struct e1000_hw *hw)
 	ret_val = phy->ops.read_reg(hw, M88E1000_PHY_SPEC_CTRL, &phy_data);
 	if (ret_val)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret_val;
+>>>>>>> v3.18
 =======
 		return ret_val;
 >>>>>>> v3.18
@@ -757,7 +784,10 @@ s32 igb_copper_link_setup_m88_gen2(struct e1000_hw *hw)
 
 	/* Enable downshift and setting it to X6 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phy->id == M88E1543_E_PHY_ID) {
 		phy_data &= ~I347AT4_PSCR_DOWNSHIFT_ENABLE;
 		ret_val =
@@ -772,6 +802,9 @@ s32 igb_copper_link_setup_m88_gen2(struct e1000_hw *hw)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	phy_data &= ~I347AT4_PSCR_DOWNSHIFT_MASK;
 	phy_data |= I347AT4_PSCR_DOWNSHIFT_6X;
@@ -780,7 +813,11 @@ s32 igb_copper_link_setup_m88_gen2(struct e1000_hw *hw)
 	ret_val = phy->ops.write_reg(hw, M88E1000_PHY_SPEC_CTRL, phy_data);
 	if (ret_val)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret_val;
+>>>>>>> v3.18
 =======
 		return ret_val;
 >>>>>>> v3.18
@@ -790,12 +827,15 @@ s32 igb_copper_link_setup_m88_gen2(struct e1000_hw *hw)
 	if (ret_val) {
 		hw_dbg("Error committing the PHY changes\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 	}
 
 out:
 	return ret_val;
 =======
+=======
+>>>>>>> v3.18
 		return ret_val;
 	}
 	ret_val = igb_set_master_slave_mode(hw);
@@ -803,6 +843,9 @@ out:
 		return ret_val;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -995,8 +1038,12 @@ static s32 igb_copper_link_autoneg(struct e1000_hw *hw)
 		ret_val = igb_wait_autoneg(hw);
 		if (ret_val) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hw_dbg("Error while waiting for "
 			       "autoneg to complete\n");
+=======
+			hw_dbg("Error while waiting for autoneg to complete\n");
+>>>>>>> v3.18
 =======
 			hw_dbg("Error while waiting for autoneg to complete\n");
 >>>>>>> v3.18
@@ -1821,7 +1868,11 @@ s32 igb_get_cable_length_m88_gen2(struct e1000_hw *hw)
 		phy->cable_length = phy_data / (is_cm ? 100 : 1);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case M88E1545_E_PHY_ID:
+=======
+	case M88E1543_E_PHY_ID:
+>>>>>>> v3.18
 =======
 	case M88E1543_E_PHY_ID:
 >>>>>>> v3.18
@@ -2157,7 +2208,11 @@ out:
  *  semaphore (if necessary) and read/set/write the device control reset
  *  bit in the PHY.  Wait the appropriate delay time for the device to
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  reset and relase the semaphore (if necessary).
+=======
+ *  reset and release the semaphore (if necessary).
+>>>>>>> v3.18
 =======
  *  reset and release the semaphore (if necessary).
 >>>>>>> v3.18
@@ -2291,7 +2346,10 @@ void igb_power_up_phy_copper(struct e1000_hw *hw)
 {
 	u16 mii_reg = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 power_reg = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2299,11 +2357,14 @@ void igb_power_up_phy_copper(struct e1000_hw *hw)
 	hw->phy.ops.read_reg(hw, PHY_CONTROL, &mii_reg);
 	mii_reg &= ~MII_CR_POWER_DOWN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hw->phy.type == e1000_phy_i210) {
 		hw->phy.ops.read_reg(hw, GS40G_COPPER_SPEC, &power_reg);
 		power_reg &= ~GS40G_CS_POWER_DOWN;
 		hw->phy.ops.write_reg(hw, GS40G_COPPER_SPEC, power_reg);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw->phy.ops.write_reg(hw, PHY_CONTROL, mii_reg);
@@ -2320,13 +2381,17 @@ void igb_power_down_phy_copper(struct e1000_hw *hw)
 {
 	u16 mii_reg = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 power_reg = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	/* The PHY will retain its settings across a power down/up cycle */
 	hw->phy.ops.read_reg(hw, PHY_CONTROL, &mii_reg);
 	mii_reg |= MII_CR_POWER_DOWN;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* i210 Phy requires an additional bit for power up/down */
@@ -2337,6 +2402,10 @@ void igb_power_down_phy_copper(struct e1000_hw *hw)
 	}
 	hw->phy.ops.write_reg(hw, PHY_CONTROL, mii_reg);
 	msleep(1);
+=======
+	hw->phy.ops.write_reg(hw, PHY_CONTROL, mii_reg);
+	usleep_range(1000, 2000);
+>>>>>>> v3.18
 =======
 	hw->phy.ops.write_reg(hw, PHY_CONTROL, mii_reg);
 	usleep_range(1000, 2000);

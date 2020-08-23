@@ -51,7 +51,11 @@ enum ads7828_chips { ads7828, ads7830 };
 /* Client specific data */
 struct ads7828_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -77,8 +81,13 @@ static inline u8 ads7828_cmd_byte(u8 cmd, int ch)
 static struct ads7828_data *ads7828_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ads7828_data *data = i2c_get_clientdata(client);
+=======
+	struct ads7828_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ads7828_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -126,7 +135,11 @@ static SENSOR_DEVICE_ATTR(in6_input, S_IRUGO, ads7828_show_in, NULL, 6);
 static SENSOR_DEVICE_ATTR(in7_input, S_IRUGO, ads7828_show_in, NULL, 7);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ads7828_attributes[] = {
+=======
+static struct attribute *ads7828_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ads7828_attrs[] = {
 >>>>>>> v3.18
@@ -141,6 +154,7 @@ static struct attribute *ads7828_attrs[] = {
 	NULL
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct attribute_group ads7828_group = {
 	.attrs = ads7828_attributes,
@@ -158,10 +172,14 @@ static int ads7828_remove(struct i2c_client *client)
 =======
 ATTRIBUTE_GROUPS(ads7828);
 >>>>>>> v3.18
+=======
+ATTRIBUTE_GROUPS(ads7828);
+>>>>>>> v3.18
 
 static int ads7828_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ads7828_platform_data *pdata = client->dev.platform_data;
 	struct ads7828_data *data;
@@ -170,12 +188,17 @@ static int ads7828_probe(struct i2c_client *client,
 	data = devm_kzalloc(&client->dev, sizeof(struct ads7828_data),
 			    GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct ads7828_platform_data *pdata = dev_get_platdata(dev);
 	struct ads7828_data *data;
 	struct device *hwmon_dev;
 
 	data = devm_kzalloc(dev, sizeof(struct ads7828_data), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!data)
 		return -ENOMEM;
@@ -209,6 +232,7 @@ static int ads7828_probe(struct i2c_client *client,
 		data->cmd_byte |= ADS7828_CMD_SD_SE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(client, data);
 	mutex_init(&data->update_lock);
 
@@ -228,6 +252,8 @@ error:
 	sysfs_remove_group(&client->dev.kobj, &ads7828_group);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	data->client = client;
 	mutex_init(&data->update_lock);
 
@@ -235,6 +261,9 @@ error:
 							   data,
 							   ads7828_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -253,7 +282,10 @@ static struct i2c_driver ads7828_driver = {
 	.id_table = ads7828_device_ids,
 	.probe = ads7828_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ads7828_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

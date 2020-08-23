@@ -139,7 +139,11 @@ static inline u8 read_byte(struct i2c_client *client, u8 reg)
 			"Unable to read from register 0x%02x.\n", reg);
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -154,7 +158,11 @@ static inline int write_byte(struct i2c_client *client, u8 reg, u8 data)
 			"Unable to write value 0x%02x to register 0x%02x.\n",
 			data, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -309,7 +317,11 @@ static ssize_t store_fan16(struct device *dev,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int asc7621_in_scaling[] = {
+=======
+static const int asc7621_in_scaling[] = {
+>>>>>>> v3.18
 =======
 static const int asc7621_in_scaling[] = {
 >>>>>>> v3.18
@@ -464,7 +476,11 @@ static ssize_t store_temp62(struct device *dev,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 asc7621_range_map[] = {
+=======
+static const u32 asc7621_range_map[] = {
+>>>>>>> v3.18
 =======
 static const u32 asc7621_range_map[] = {
 >>>>>>> v3.18
@@ -529,7 +545,11 @@ static ssize_t show_pwm_ac(struct device *dev,
 	SETUP_SHOW_DATA_PARAM(dev, attr);
 	u8 config, altbit, regval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 map[] = {
+=======
+	const u8 map[] = {
+>>>>>>> v3.18
 =======
 	const u8 map[] = {
 >>>>>>> v3.18
@@ -554,7 +574,11 @@ static ssize_t store_pwm_ac(struct device *dev,
 	unsigned long reqval;
 	u8 currval, config, altbit, newval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 map[] = {
+=======
+	const u16 map[] = {
+>>>>>>> v3.18
 =======
 	const u16 map[] = {
 >>>>>>> v3.18
@@ -676,7 +700,11 @@ static ssize_t store_pwm_enable(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 asc7621_pwm_freq_map[] = {
+=======
+static const u32 asc7621_pwm_freq_map[] = {
+>>>>>>> v3.18
 =======
 static const u32 asc7621_pwm_freq_map[] = {
 >>>>>>> v3.18
@@ -729,7 +757,11 @@ static ssize_t store_pwm_freq(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 asc7621_pwm_auto_spinup_map[] =  {
+=======
+static const u32 asc7621_pwm_auto_spinup_map[] =  {
+>>>>>>> v3.18
 =======
 static const u32 asc7621_pwm_auto_spinup_map[] =  {
 >>>>>>> v3.18
@@ -782,7 +814,11 @@ static ssize_t store_pwm_ast(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 asc7621_temp_smoothing_time_map[] = {
+=======
+static const u32 asc7621_temp_smoothing_time_map[] = {
+>>>>>>> v3.18
 =======
 static const u32 asc7621_temp_smoothing_time_map[] = {
 >>>>>>> v3.18
@@ -1067,7 +1103,11 @@ static struct asc7621_data *asc7621_update_device(struct device *dev)
 		}
 		data->last_high_reading = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};			/* last_reading */
+=======
+	}			/* last_reading */
+>>>>>>> v3.18
 =======
 	}			/* last_reading */
 >>>>>>> v3.18
@@ -1085,7 +1125,11 @@ static struct asc7621_data *asc7621_update_device(struct device *dev)
 		}
 		data->last_low_reading = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};			/* last_reading */
+=======
+	}			/* last_reading */
+>>>>>>> v3.18
 =======
 	}			/* last_reading */
 >>>>>>> v3.18
@@ -1129,17 +1173,23 @@ static void asc7621_init_client(struct i2c_client *client)
 			"Client (%d,0x%02x) config is locked.\n",
 			i2c_adapter_id(client->adapter), client->addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 	if (!(value & 0x04)) {
 		dev_err(&client->dev, "Client (%d,0x%02x) is not ready.\n",
 			i2c_adapter_id(client->adapter), client->addr);
 	};
 =======
+=======
+>>>>>>> v3.18
 	}
 	if (!(value & 0x04)) {
 		dev_err(&client->dev, "Client (%d,0x%02x) is not ready.\n",
 			i2c_adapter_id(client->adapter), client->addr);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1168,7 +1218,10 @@ asc7621_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 	i2c_set_clientdata(client, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->valid = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);

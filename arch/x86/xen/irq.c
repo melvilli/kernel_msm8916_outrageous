@@ -6,6 +6,10 @@
 #include <xen/interface/sched.h>
 #include <xen/interface/vcpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/features.h>
+>>>>>>> v3.18
 =======
 #include <xen/features.h>
 >>>>>>> v3.18
@@ -27,7 +31,11 @@ void xen_force_evtchn_callback(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long xen_save_fl(void)
+=======
+asmlinkage __visible unsigned long xen_save_fl(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible unsigned long xen_save_fl(void)
 >>>>>>> v3.18
@@ -49,7 +57,11 @@ asmlinkage __visible unsigned long xen_save_fl(void)
 PV_CALLEE_SAVE_REGS_THUNK(xen_save_fl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void xen_restore_fl(unsigned long flags)
+=======
+__visible void xen_restore_fl(unsigned long flags)
+>>>>>>> v3.18
 =======
 __visible void xen_restore_fl(unsigned long flags)
 >>>>>>> v3.18
@@ -59,6 +71,7 @@ __visible void xen_restore_fl(unsigned long flags)
 	/* convert from IF type flag */
 	flags = !(flags & X86_EFLAGS_IF);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* There's a one instruction preempt window here.  We need to
 	   make sure we're don't switch CPUs between getting the vcpu
@@ -82,6 +95,8 @@ PV_CALLEE_SAVE_REGS_THUNK(xen_restore_fl);
 
 static void xen_irq_disable(void)
 =======
+=======
+>>>>>>> v3.18
 	/* See xen_irq_enable() for why preemption must be disabled. */
 	preempt_disable();
 	vcpu = this_cpu_read(xen_vcpu);
@@ -98,6 +113,9 @@ static void xen_irq_disable(void)
 PV_CALLEE_SAVE_REGS_THUNK(xen_restore_fl);
 
 asmlinkage __visible void xen_irq_disable(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* There's a one instruction preempt window here.  We need to
@@ -110,6 +128,7 @@ asmlinkage __visible void xen_irq_disable(void)
 PV_CALLEE_SAVE_REGS_THUNK(xen_irq_disable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void xen_irq_enable(void)
 {
 	struct vcpu_info *vcpu;
@@ -119,6 +138,8 @@ static void xen_irq_enable(void)
 	   the caller is confused and is trying to re-enable interrupts
 	   on an indeterminate processor. */
 =======
+=======
+>>>>>>> v3.18
 asmlinkage __visible void xen_irq_enable(void)
 {
 	struct vcpu_info *vcpu;
@@ -129,6 +150,9 @@ asmlinkage __visible void xen_irq_enable(void)
 	 * events on the VCPU we are still running on.
 	 */
 	preempt_disable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	vcpu = this_cpu_read(xen_vcpu);
@@ -141,6 +165,11 @@ asmlinkage __visible void xen_irq_enable(void)
 	if (unlikely(vcpu->evtchn_upcall_pending))
 		xen_force_evtchn_callback();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	preempt_enable();
+>>>>>>> v3.18
 =======
 
 	preempt_enable();
@@ -179,7 +208,13 @@ static const struct pv_irq_ops xen_irq_ops __initconst = {
 void __init xen_init_irq_ops(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pv_irq_ops = xen_irq_ops;
+=======
+	/* For PVH we use default pv_irq_ops settings. */
+	if (!xen_feature(XENFEAT_hvm_callback_vector))
+		pv_irq_ops = xen_irq_ops;
+>>>>>>> v3.18
 =======
 	/* For PVH we use default pv_irq_ops settings. */
 	if (!xen_feature(XENFEAT_hvm_callback_vector))

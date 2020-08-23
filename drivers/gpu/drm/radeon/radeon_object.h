@@ -53,8 +53,11 @@ static inline unsigned radeon_mem_type_to_domain(u32 mem_type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_bo_reserve(struct radeon_bo *bo, bool no_intr);
 =======
+=======
+>>>>>>> v3.18
 /**
  * radeon_bo_reserve - reserve bo
  * @bo:		bo structure
@@ -76,6 +79,9 @@ static inline int radeon_bo_reserve(struct radeon_bo *bo, bool no_intr)
 	}
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void radeon_bo_unreserve(struct radeon_bo *bo)
@@ -103,11 +109,14 @@ static inline unsigned long radeon_bo_size(struct radeon_bo *bo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool radeon_bo_is_reserved(struct radeon_bo *bo)
 {
 	return ttm_bo_is_reserved(&bo->tbo);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned radeon_bo_ngpu_pages(struct radeon_bo *bo)
@@ -126,6 +135,7 @@ static inline unsigned radeon_bo_gpu_page_alignment(struct radeon_bo *bo)
  *
  * Returns mmap offset of the object.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Note: addr_space_offset is constant after ttm bo init thus isn't protected
  * by any lock.
@@ -134,10 +144,15 @@ static inline u64 radeon_bo_mmap_offset(struct radeon_bo *bo)
 {
 	return bo->tbo.addr_space_offset;
 =======
+=======
+>>>>>>> v3.18
  */
 static inline u64 radeon_bo_mmap_offset(struct radeon_bo *bo)
 {
 	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -147,12 +162,15 @@ extern int radeon_bo_wait(struct radeon_bo *bo, u32 *mem_type,
 extern int radeon_bo_create(struct radeon_device *rdev,
 			    unsigned long size, int byte_align,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    bool kernel, u32 domain,
 			    struct sg_table *sg,
 			    struct radeon_bo **bo_ptr);
 extern int radeon_bo_kmap(struct radeon_bo *bo, void **ptr);
 extern void radeon_bo_kunmap(struct radeon_bo *bo);
 =======
+=======
+>>>>>>> v3.18
 			    bool kernel, u32 domain, u32 flags,
 			    struct sg_table *sg,
 			    struct reservation_object *resv,
@@ -160,6 +178,9 @@ extern void radeon_bo_kunmap(struct radeon_bo *bo);
 extern int radeon_bo_kmap(struct radeon_bo *bo, void **ptr);
 extern void radeon_bo_kunmap(struct radeon_bo *bo);
 extern struct radeon_bo *radeon_bo_ref(struct radeon_bo *bo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void radeon_bo_unref(struct radeon_bo **bo);
 extern int radeon_bo_pin(struct radeon_bo *bo, u32 domain, u64 *gpu_addr);
@@ -171,9 +192,15 @@ extern void radeon_bo_force_delete(struct radeon_device *rdev);
 extern int radeon_bo_init(struct radeon_device *rdev);
 extern void radeon_bo_fini(struct radeon_device *rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void radeon_bo_list_add_object(struct radeon_bo_list *lobj,
 				struct list_head *head);
 extern int radeon_bo_list_validate(struct list_head *head, int ring);
+=======
+extern int radeon_bo_list_validate(struct radeon_device *rdev,
+				   struct ww_acquire_ctx *ticket,
+				   struct list_head *head, int ring);
+>>>>>>> v3.18
 =======
 extern int radeon_bo_list_validate(struct radeon_device *rdev,
 				   struct ww_acquire_ctx *ticket,
@@ -189,7 +216,11 @@ extern int radeon_bo_check_tiling(struct radeon_bo *bo, bool has_moved,
 				bool force_drop);
 extern void radeon_bo_move_notify(struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct ttm_mem_reg *mem);
+=======
+				  struct ttm_mem_reg *new_mem);
+>>>>>>> v3.18
 =======
 				  struct ttm_mem_reg *new_mem);
 >>>>>>> v3.18
@@ -213,7 +244,12 @@ static inline void * radeon_sa_bo_cpu_addr(struct radeon_sa_bo *sa_bo)
 extern int radeon_sa_bo_manager_init(struct radeon_device *rdev,
 				     struct radeon_sa_manager *sa_manager,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     unsigned size, u32 align, u32 domain);
+=======
+				     unsigned size, u32 align, u32 domain,
+				     u32 flags);
+>>>>>>> v3.18
 =======
 				     unsigned size, u32 align, u32 domain,
 				     u32 flags);
@@ -228,7 +264,11 @@ extern int radeon_sa_bo_new(struct radeon_device *rdev,
 			    struct radeon_sa_manager *sa_manager,
 			    struct radeon_sa_bo **sa_bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    unsigned size, unsigned align, bool block);
+=======
+			    unsigned size, unsigned align);
+>>>>>>> v3.18
 =======
 			    unsigned size, unsigned align);
 >>>>>>> v3.18

@@ -229,7 +229,11 @@ static struct gpio_chip ks8695_gpio_chip = {
 	.base			= 0,
 	.ngpio			= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep		= 0,
+=======
+	.can_sleep		= false,
+>>>>>>> v3.18
 =======
 	.can_sleep		= false,
 >>>>>>> v3.18
@@ -270,6 +274,7 @@ static int ks8695_gpio_show(struct seq_file *s, void *unused)
 
 				switch ((ctrl & intmask[i]) >> (4 * i)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					case IOPC_TM_LOW:
 						seq_printf(s, "(Low)");		break;
 					case IOPC_TM_HIGH:
@@ -287,6 +292,8 @@ static int ks8695_gpio_show(struct seq_file *s, void *unused)
 		}
 		else if (i <= KS8695_GPIO_5) {
 =======
+=======
+>>>>>>> v3.18
 				case IOPC_TM_LOW:
 					seq_printf(s, "(Low)");		break;
 				case IOPC_TM_HIGH:
@@ -301,15 +308,24 @@ static int ks8695_gpio_show(struct seq_file *s, void *unused)
 			} else
 				seq_printf(s, "GPIO\t");
 		} else if (i <= KS8695_GPIO_5) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ctrl & enable[i])
 				seq_printf(s, "TOUT%i\t", i - KS8695_GPIO_4);
 			else
 				seq_printf(s, "GPIO\t");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else
 			seq_printf(s, "GPIO\t");
+=======
+		} else {
+			seq_printf(s, "GPIO\t");
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			seq_printf(s, "GPIO\t");

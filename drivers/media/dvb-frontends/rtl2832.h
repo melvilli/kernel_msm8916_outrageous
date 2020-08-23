@@ -39,6 +39,7 @@ struct rtl2832_config {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * IFs for all used modes.
 	 * Hz
 	 * 4570000, 4571429, 36000000, 36125000, 36166667, 44000000
@@ -46,6 +47,8 @@ struct rtl2832_config {
 	u32 if_dvbt;
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * tuner
@@ -57,6 +60,10 @@ struct rtl2832_config {
 #define RTL2832_TUNER_FC0013    0x29
 #define RTL2832_TUNER_R820T	0x2a
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTL2832_TUNER_R828D	0x2b
+>>>>>>> v3.18
 =======
 #define RTL2832_TUNER_R828D	0x2b
 >>>>>>> v3.18
@@ -65,12 +72,15 @@ struct rtl2832_config {
 
 #if IS_ENABLED(CONFIG_DVB_RTL2832)
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct dvb_frontend *rtl2832_attach(
 	const struct rtl2832_config *cfg,
 	struct i2c_adapter *i2c
 );
 #else
 =======
+=======
+>>>>>>> v3.18
 struct dvb_frontend *rtl2832_attach(
 	const struct rtl2832_config *cfg,
 	struct i2c_adapter *i2c
@@ -86,6 +96,9 @@ extern struct i2c_adapter *rtl2832_get_private_i2c_adapter(
 
 #else
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct dvb_frontend *rtl2832_attach(
 	const struct rtl2832_config *config,
@@ -96,7 +109,10 @@ static inline struct dvb_frontend *rtl2832_attach(
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline struct i2c_adapter *rtl2832_get_i2c_adapter(
 	struct dvb_frontend *fe
@@ -112,6 +128,9 @@ static inline struct i2c_adapter *rtl2832_get_private_i2c_adapter(
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

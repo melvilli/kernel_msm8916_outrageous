@@ -44,9 +44,15 @@
  */
 #define onchip_setup(x)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int x##_disabled __cpuinitdata = !cpu_has_##x;	\
 							\
 static int __cpuinit x##_setup(char *opts)			\
+=======
+static int x##_disabled = !cpu_has_##x;			\
+							\
+static int x##_setup(char *opts)			\
+>>>>>>> v3.18
 =======
 static int x##_disabled = !cpu_has_##x;			\
 							\
@@ -66,7 +72,11 @@ onchip_setup(dsp);
 #define CPUOPM_RABD	(1 << 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit speculative_execution_init(void)
+=======
+static void speculative_execution_init(void)
+>>>>>>> v3.18
 =======
 static void speculative_execution_init(void)
 >>>>>>> v3.18
@@ -89,7 +99,11 @@ static void speculative_execution_init(void)
 #define EXPMASK_MMCAW		(1 << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit expmask_init(void)
+=======
+static void expmask_init(void)
+>>>>>>> v3.18
 =======
 static void expmask_init(void)
 >>>>>>> v3.18
@@ -127,7 +141,11 @@ static void cache_init(void)
 
 	jump_to_uncached();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccr = __raw_readl(CCR);
+=======
+	ccr = __raw_readl(SH_CCR);
+>>>>>>> v3.18
 =======
 	ccr = __raw_readl(SH_CCR);
 >>>>>>> v3.18
@@ -208,7 +226,11 @@ static void cache_init(void)
 	l2_cache_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(flags, CCR);
+=======
+	__raw_writel(flags, SH_CCR);
+>>>>>>> v3.18
 =======
 	__raw_writel(flags, SH_CCR);
 >>>>>>> v3.18
@@ -240,7 +262,11 @@ static void detect_cache_shape(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit fpu_init(void)
+=======
+static void fpu_init(void)
+>>>>>>> v3.18
 =======
 static void fpu_init(void)
 >>>>>>> v3.18
@@ -257,7 +283,11 @@ static void fpu_init(void)
 
 #ifdef CONFIG_SH_DSP
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit release_dsp(void)
+=======
+static void release_dsp(void)
+>>>>>>> v3.18
 =======
 static void release_dsp(void)
 >>>>>>> v3.18
@@ -275,7 +305,11 @@ static void release_dsp(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit dsp_init(void)
+=======
+static void dsp_init(void)
+>>>>>>> v3.18
 =======
 static void dsp_init(void)
 >>>>>>> v3.18
@@ -311,7 +345,11 @@ static void dsp_init(void)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __cpuinit dsp_init(void) { }
+=======
+static inline void dsp_init(void) { }
+>>>>>>> v3.18
 =======
 static inline void dsp_init(void) { }
 >>>>>>> v3.18
@@ -334,7 +372,11 @@ static inline void dsp_init(void) { }
  * and cache configuration in cpu_probe().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void __cpuinit cpu_init(void)
+=======
+asmlinkage void cpu_init(void)
+>>>>>>> v3.18
 =======
 asmlinkage void cpu_init(void)
 >>>>>>> v3.18

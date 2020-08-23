@@ -15,6 +15,10 @@
 #include "lock.h"
 #include "user.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ast.h"
+>>>>>>> v3.18
 =======
 #include "ast.h"
 >>>>>>> v3.18
@@ -272,10 +276,14 @@ int dlm_callback_start(struct dlm_ls *ls)
 {
 	ls->ls_callback_wq = alloc_workqueue("dlm_callback",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     WQ_UNBOUND |
 					     WQ_MEM_RECLAIM |
 					     WQ_NON_REENTRANT,
 					     0);
+=======
+					     WQ_UNBOUND | WQ_MEM_RECLAIM, 0);
+>>>>>>> v3.18
 =======
 					     WQ_UNBOUND | WQ_MEM_RECLAIM, 0);
 >>>>>>> v3.18
@@ -320,7 +328,11 @@ void dlm_callback_resume(struct dlm_ls *ls)
 
 	if (count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_callback_resume %d", count);
+=======
+		log_rinfo(ls, "dlm_callback_resume %d", count);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_callback_resume %d", count);
 >>>>>>> v3.18

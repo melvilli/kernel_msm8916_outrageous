@@ -34,12 +34,18 @@
 #include "80211mgr.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 #define AUTHENTICATE_TIMEOUT   1000 //ms
 #define ASSOCIATE_TIMEOUT      1000 //ms
 
 // Command code
+=======
+#define AUTHENTICATE_TIMEOUT   1000
+#define ASSOCIATE_TIMEOUT      1000
+
+>>>>>>> v3.18
 =======
 #define AUTHENTICATE_TIMEOUT   1000
 #define ASSOCIATE_TIMEOUT      1000
@@ -83,7 +89,10 @@ typedef struct tagCMD_ITEM {
 } CMD_ITEM, *PCMD_ITEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Command state
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef enum tagCMD_STATE {
@@ -102,6 +111,7 @@ typedef enum tagCMD_STATE {
 } CMD_STATE, *PCMD_STATE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
@@ -109,6 +119,8 @@ typedef enum tagCMD_STATE {
 /*---------------------  Export Types  ------------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void
@@ -138,7 +150,11 @@ vCommandTimerWait(
 	unsigned int MSecond
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef TxInSleep
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -147,7 +163,10 @@ BSSvSecondTxData(
 	void *hDeviceContext
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

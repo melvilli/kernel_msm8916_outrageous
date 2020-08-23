@@ -103,6 +103,10 @@
 #define HWCAP_S390_HIGH_GPRS	512
 #define HWCAP_S390_TE		1024
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HWCAP_S390_VXRS		2048
+>>>>>>> v3.18
 =======
 #define HWCAP_S390_VXRS		2048
 >>>>>>> v3.18
@@ -230,7 +234,11 @@ extern unsigned long arch_randomize_brk(struct mm_struct *mm);
 #define arch_randomize_brk arch_randomize_brk
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *fill_cpu_elf_notes(void *ptr, struct save_area *sa);
+=======
+void *fill_cpu_elf_notes(void *ptr, struct save_area *sa, __vector128 *vxrs);
+>>>>>>> v3.18
 =======
 void *fill_cpu_elf_notes(void *ptr, struct save_area *sa, __vector128 *vxrs);
 >>>>>>> v3.18

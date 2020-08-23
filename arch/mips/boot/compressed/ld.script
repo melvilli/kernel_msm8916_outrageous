@@ -9,6 +9,12 @@
 OUTPUT_ARCH(mips)
 ENTRY(start)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+PHDRS {
+	text PT_LOAD FLAGS(7); /* RWX */
+}
+>>>>>>> v3.18
 =======
 PHDRS {
 	text PT_LOAD FLAGS(7); /* RWX */
@@ -22,7 +28,11 @@ SECTIONS
 		*(.text)
 		*(.rodata)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+	}: text
+>>>>>>> v3.18
 =======
 	}: text
 >>>>>>> v3.18

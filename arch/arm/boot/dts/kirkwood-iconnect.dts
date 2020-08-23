@@ -1,8 +1,13 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 /include/ "kirkwood-6281.dtsi"
+=======
+#include "kirkwood.dtsi"
+#include "kirkwood-6281.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood.dtsi"
 #include "kirkwood-6281.dtsi"
@@ -20,6 +25,10 @@
 	chosen {
 		bootargs = "console=ttyS0,115200n8 earlyprintk";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		stdout-path = &uart0;
+>>>>>>> v3.18
 =======
 		stdout-path = &uart0;
 >>>>>>> v3.18
@@ -27,6 +36,7 @@
 		linux,initrd-end   = <0x4800000>;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ocp@f1000000 {
 		pinctrl: pinctrl@10000 {
@@ -76,6 +86,8 @@
 			};
 			pmx_gpio_48: pmx-gpio-48 {
 =======
+=======
+>>>>>>> v3.18
 	mbus {
 		pcie-controller {
 			status = "okay";
@@ -125,6 +137,9 @@
 				marvell,function = "gpio";
 			};
 			pmx_led_otb: pmx-led-otb {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				marvell,pins = "mpp48";
 				marvell,function = "gpio";
@@ -141,6 +156,7 @@
 		serial@12000 {
 			status = "ok";
 		};
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		nand@3000000 {
@@ -173,10 +189,13 @@
 		};
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	};
 
 	gpio-leds {
 		compatible = "gpio-leds";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		led-level {
@@ -213,6 +232,8 @@
 			label = "otb:blue";
 			gpios = <&gpio1 16 0>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = < &pmx_led_level &pmx_led_power_blue
 			      &pmx_led_power_red &pmx_led_usb1
 			      &pmx_led_usb2 &pmx_led_usb3
@@ -252,6 +273,9 @@
 		otb {
 			label = "otb:blue";
 			gpios = <&gpio1 16 GPIO_ACTIVE_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -261,11 +285,14 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		button@1 {
 			label = "OTB Button";
 			linux,code = <133>;
 			gpios = <&gpio1 3 1>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = < &pmx_button_reset &pmx_button_otb >;
 		pinctrl-names = "default";
 
@@ -273,14 +300,22 @@
 			label = "OTB Button";
 			linux,code = <KEY_COPY>;
 			gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			debounce-interval = <100>;
 		};
 		button@2 {
 			label = "Reset";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <0x198>;
 			gpios = <&gpio0 12 1>;
+=======
+			linux,code = <KEY_RESTART>;
+			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_RESTART>;
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
@@ -290,7 +325,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &nand {
 	status = "okay";
@@ -335,4 +373,7 @@
 		phy-handle = <&ethphy0>;
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

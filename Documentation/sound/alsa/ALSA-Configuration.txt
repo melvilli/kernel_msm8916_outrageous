@@ -617,7 +617,11 @@ Prior to version 0.9.0rc4 options had a 'snd_' prefix. This was removed.
     As default, snd-dummy drivers doesn't allocate the real buffers
     but either ignores read/write or mmap a single dummy page to all
 <<<<<<< HEAD
+<<<<<<< HEAD
     buffer pages, in order to save the resouces.  If your apps need
+=======
+    buffer pages, in order to save the resources.  If your apps need
+>>>>>>> v3.18
 =======
     buffer pages, in order to save the resources.  If your apps need
 >>>>>>> v3.18
@@ -953,7 +957,11 @@ Prior to version 0.9.0rc4 options had a 'snd_' prefix. This was removed.
     
     MORE NOTES ON "azx_get_response timeout" PROBLEMS:
 <<<<<<< HEAD
+<<<<<<< HEAD
     On some hardwares, you may need to add a proper probe_mask option
+=======
+    On some hardware, you may need to add a proper probe_mask option
+>>>>>>> v3.18
 =======
     On some hardware, you may need to add a proper probe_mask option
 >>>>>>> v3.18
@@ -1133,7 +1141,11 @@ Prior to version 0.9.0rc4 options had a 'snd_' prefix. This was removed.
                     motherboards (default yes on nForce chips,
 		    otherwise off)
 <<<<<<< HEAD
+<<<<<<< HEAD
     buggy_semaphore - Enable workaround for hardwares with buggy
+=======
+    buggy_semaphore - Enable workaround for hardware with buggy
+>>>>>>> v3.18
 =======
     buggy_semaphore - Enable workaround for hardware with buggy
 >>>>>>> v3.18

@@ -24,7 +24,11 @@ SUBSYSTEM=="aoe", KERNEL=="flush",	NAME="etherd/%k", GROUP="disk", MODE="0220"
 
 # aoe block devices     
 <<<<<<< HEAD
+<<<<<<< HEAD
 KERNEL=="etherd*",       NAME="%k", GROUP="disk"
+=======
+KERNEL=="etherd*",       GROUP="disk"
+>>>>>>> v3.18
 =======
 KERNEL=="etherd*",       GROUP="disk"
 >>>>>>> v3.18

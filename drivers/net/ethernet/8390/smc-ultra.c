@@ -112,6 +112,10 @@ MODULE_DEVICE_TABLE(isapnp, ultra_device_ids);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 ultra_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 ultra_msg_enable;
 >>>>>>> v3.18
@@ -216,6 +220,10 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 	unsigned char idreg = inb(ioaddr + 7);
 	unsigned char reg4 = inb(ioaddr + 4) & 0x7f;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -241,8 +249,13 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug  &&  version_printed++ == 0)
 		printk(version);
+=======
+	if ((ultra_msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
+		netdev_info(dev, version);
+>>>>>>> v3.18
 =======
 	if ((ultra_msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
 		netdev_info(dev, version);
@@ -254,8 +267,13 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 		dev->dev_addr[i] = inb(ioaddr + 8 + i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: %s at %#3x, %pM", dev->name, model_name,
 	       ioaddr, dev->dev_addr);
+=======
+	netdev_info(dev, "%s at %#3x, %pM", model_name,
+		    ioaddr, dev->dev_addr);
+>>>>>>> v3.18
 =======
 	netdev_info(dev, "%s at %#3x, %pM", model_name,
 		    ioaddr, dev->dev_addr);
@@ -284,7 +302,11 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 
 		if (irq == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(", failed to detect IRQ line.\n");
+=======
+			pr_cont(", failed to detect IRQ line.\n");
+>>>>>>> v3.18
 =======
 			pr_cont(", failed to detect IRQ line.\n");
 >>>>>>> v3.18
@@ -319,7 +341,11 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 	ei_status.mem = ioremap(dev->mem_start, (ei_status.stop_page - START_PG)*256);
 	if (!ei_status.mem) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(", failed to ioremap.\n");
+=======
+		pr_cont(", failed to ioremap.\n");
+>>>>>>> v3.18
 =======
 		pr_cont(", failed to ioremap.\n");
 >>>>>>> v3.18
@@ -331,8 +357,13 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 
 	if (piomode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(",%s IRQ %d programmed-I/O mode.\n",
 			   eeprom_irq ? "EEPROM" : "assigned ", dev->irq);
+=======
+		pr_cont(", %s IRQ %d programmed-I/O mode.\n",
+			eeprom_irq ? "EEPROM" : "assigned ", dev->irq);
+>>>>>>> v3.18
 =======
 		pr_cont(", %s IRQ %d programmed-I/O mode.\n",
 			eeprom_irq ? "EEPROM" : "assigned ", dev->irq);
@@ -342,8 +373,14 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 		ei_status.get_8390_hdr = &ultra_pio_get_hdr;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(",%s IRQ %d memory %#lx-%#lx.\n", eeprom_irq ? "" : "assigned ",
 			   dev->irq, dev->mem_start, dev->mem_end-1);
+=======
+		pr_cont(", %s IRQ %d memory %#lx-%#lx.\n",
+			eeprom_irq ? "" : "assigned ", dev->irq, dev->mem_start,
+			dev->mem_end-1);
+>>>>>>> v3.18
 =======
 		pr_cont(", %s IRQ %d memory %#lx-%#lx.\n",
 			eeprom_irq ? "" : "assigned ", dev->irq, dev->mem_start,
@@ -358,6 +395,10 @@ static int __init ultra_probe1(struct net_device *dev, int ioaddr)
 	dev->netdev_ops = &ultra_netdev_ops;
 	NS8390_init(dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ei_local->msg_enable = ultra_msg_enable;
+>>>>>>> v3.18
 =======
 	ei_local->msg_enable = ultra_msg_enable;
 >>>>>>> v3.18
@@ -398,6 +439,7 @@ static int __init ultra_probe_isapnp(struct net_device *dev)
 			dev->base_addr = pnp_port_start(idev, 0);
 			dev->irq = pnp_irq(idev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
                         printk(KERN_INFO "smc-ultra.c: ISAPnP reports %s at i/o %#lx, irq %d.\n",
                                 (char *) ultra_device_ids[i].driver_data,
                                 dev->base_addr, dev->irq);
@@ -405,6 +447,8 @@ static int __init ultra_probe_isapnp(struct net_device *dev)
                                 printk(KERN_ERR "smc-ultra.c: Probe of ISAPnP card at %#lx failed.\n", dev->base_addr);
                                 pnp_device_detach(idev);
 =======
+=======
+>>>>>>> v3.18
 			netdev_info(dev,
 				    "smc-ultra.c: ISAPnP reports %s at i/o %#lx, irq %d.\n",
 				    (char *) ultra_device_ids[i].driver_data,
@@ -414,6 +458,9 @@ static int __init ultra_probe_isapnp(struct net_device *dev)
 					   "smc-ultra.c: Probe of ISAPnP card at %#lx failed.\n",
 					   dev->base_addr);
 				pnp_device_detach(idev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return -ENXIO;
                         }
@@ -466,14 +513,20 @@ ultra_reset_8390(struct net_device *dev)
 {
 	int cmd_port = dev->base_addr - ULTRA_NIC_OFFSET; /* ASIC base addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	outb(ULTRA_RESET, cmd_port);
 	if (ei_debug > 1) printk("resetting Ultra, t=%ld...", jiffies);
 =======
+=======
+>>>>>>> v3.18
 	struct ei_device *ei_local = netdev_priv(dev);
 
 	outb(ULTRA_RESET, cmd_port);
 	netif_dbg(ei_local, hw, dev, "resetting Ultra, t=%ld...\n", jiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ei_status.txing = 0;
 
@@ -485,7 +538,11 @@ ultra_reset_8390(struct net_device *dev)
 		outb(0x01, cmd_port + 6);		/* Enable interrupts and memory. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1) printk("reset done\n");
+=======
+	netif_dbg(ei_local, hw, dev, "reset done\n");
+>>>>>>> v3.18
 =======
 	netif_dbg(ei_local, hw, dev, "reset done\n");
 >>>>>>> v3.18
@@ -595,17 +652,23 @@ ultra_close_card(struct net_device *dev)
 {
 	int ioaddr = dev->base_addr - ULTRA_NIC_OFFSET; /* CMDREG */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	netif_stop_queue(dev);
 
 	if (ei_debug > 1)
 		printk("%s: Shutting down ethercard.\n", dev->name);
 =======
+=======
+>>>>>>> v3.18
 	struct ei_device *ei_local = netdev_priv(dev);
 
 	netif_stop_queue(dev);
 
 	netif_dbg(ei_local, ifdown, dev, "Shutting down ethercard.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	outb(0x00, ioaddr + 6);		/* Disable interrupts. */
@@ -629,13 +692,19 @@ static int irq[MAX_ULTRA_CARDS];
 module_param_array(io, int, NULL, 0);
 module_param_array(irq, int, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(io, "I/O base address(es)");
 MODULE_PARM_DESC(irq, "IRQ number(s) (assigned)");
 =======
+=======
+>>>>>>> v3.18
 module_param_named(msg_enable, ultra_msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
 MODULE_PARM_DESC(io, "I/O base address(es)");
 MODULE_PARM_DESC(irq, "IRQ number(s) (assigned)");
 MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("SMC Ultra/EtherEZ ISA/PnP Ethernet driver");
 MODULE_LICENSE("GPL");

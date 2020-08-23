@@ -14,6 +14,11 @@
 #include <mach/global_reg.h>
 #include <asm/mach/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clockchips.h>
+#include <linux/clocksource.h>
+>>>>>>> v3.18
 =======
 #include <linux/clockchips.h>
 #include <linux/clocksource.h>
@@ -39,7 +44,10 @@
 #define TIMER_3_CR_INT			(1 << 8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int tick_rate;
 
 static int gemini_timer_set_next_event(unsigned long cycles,
@@ -109,6 +117,9 @@ static struct clock_event_device gemini_clockevent = {
 	.set_mode	= gemini_timer_set_mode,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * IRQ handler for the timer
@@ -116,8 +127,14 @@ static struct clock_event_device gemini_clockevent = {
 static irqreturn_t gemini_timer_interrupt(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timer_tick();
 
+=======
+	struct clock_event_device *evt = &gemini_clockevent;
+
+	evt->event_handler(evt);
+>>>>>>> v3.18
 =======
 	struct clock_event_device *evt = &gemini_clockevent;
 
@@ -129,7 +146,11 @@ static irqreturn_t gemini_timer_interrupt(int irq, void *dev_id)
 static struct irqaction gemini_timer_irq = {
 	.name		= "Gemini Timer Tick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags		= IRQF_TIMER,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER,
 >>>>>>> v3.18
@@ -142,9 +163,15 @@ static struct irqaction gemini_timer_irq = {
 void __init gemini_timer_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int tick_rate, reg_v;
 
 	reg_v = __raw_readl(IO_ADDRESS(GEMINI_GLOBAL_BASE + GLOBAL_STATUS));
+=======
+	u32 reg_v;
+
+	reg_v = readl(IO_ADDRESS(GEMINI_GLOBAL_BASE + GLOBAL_STATUS));
+>>>>>>> v3.18
 =======
 	u32 reg_v;
 
@@ -176,11 +203,14 @@ void __init gemini_timer_init(void)
 	 */
 	setup_irq(IRQ_TIMER2, &gemini_timer_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Start the timer */
 	__raw_writel(tick_rate / HZ, TIMER_COUNT(IO_ADDRESS(GEMINI_TIMER2_BASE)));
 	__raw_writel(tick_rate / HZ, TIMER_LOAD(IO_ADDRESS(GEMINI_TIMER2_BASE)));
 	__raw_writel(TIMER_2_CR_ENABLE | TIMER_2_CR_INT, TIMER_CR(IO_ADDRESS(GEMINI_TIMER_BASE)));
 =======
+=======
+>>>>>>> v3.18
 
 	/* Enable and use TIMER1 as clock source */
 	writel(0xffffffff, TIMER_COUNT(IO_ADDRESS(GEMINI_TIMER1_BASE)));
@@ -194,5 +224,8 @@ void __init gemini_timer_init(void)
 	/* Configure and register the clockevent */
 	clockevents_config_and_register(&gemini_clockevent, tick_rate,
 					1, 0xffffffff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

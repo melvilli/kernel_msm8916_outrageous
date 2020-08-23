@@ -88,12 +88,18 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 {
 	struct ht_irq_cfg *cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	u32 data;
 	int max_irq;
 	int pos;
 	int irq;
 	int node;
+=======
+	int max_irq, pos, irq;
+	unsigned long flags;
+	u32 data;
+>>>>>>> v3.18
 =======
 	int max_irq, pos, irq;
 	unsigned long flags;
@@ -112,7 +118,11 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 
 	max_irq = (data >> 16) & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ( idx > max_irq)
+=======
+	if (idx > max_irq)
+>>>>>>> v3.18
 =======
 	if (idx > max_irq)
 >>>>>>> v3.18
@@ -131,10 +141,15 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 	cfg->msg.address_hi = 0xffffffff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = dev_to_node(&dev->dev);
 	irq = create_irq_nr(0, node);
 
 	if (irq <= 0) {
+=======
+	irq = irq_alloc_hwirq(dev_to_node(&dev->dev));
+	if (!irq) {
+>>>>>>> v3.18
 =======
 	irq = irq_alloc_hwirq(dev_to_node(&dev->dev));
 	if (!irq) {
@@ -152,6 +167,10 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 	return irq;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__ht_create_irq);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__ht_create_irq);
 >>>>>>> v3.18
@@ -171,6 +190,10 @@ int ht_create_irq(struct pci_dev *dev, int idx)
 	return __ht_create_irq(dev, idx, NULL);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ht_create_irq);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ht_create_irq);
 >>>>>>> v3.18
@@ -190,6 +213,7 @@ void ht_destroy_irq(unsigned int irq)
 	irq_set_chip(irq, NULL);
 	irq_set_handler_data(irq, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destroy_irq(irq);
 
 	kfree(cfg);
@@ -198,9 +222,14 @@ void ht_destroy_irq(unsigned int irq)
 EXPORT_SYMBOL(__ht_create_irq);
 EXPORT_SYMBOL(ht_create_irq);
 =======
+=======
+>>>>>>> v3.18
 	irq_free_hwirq(irq);
 
 	kfree(cfg);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(ht_destroy_irq);

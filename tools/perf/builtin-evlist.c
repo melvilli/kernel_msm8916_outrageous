@@ -15,6 +15,11 @@
 #include "util/parse-options.h"
 #include "util/session.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+#include "util/debug.h"
+>>>>>>> v3.18
 =======
 #include "util/data.h"
 #include "util/debug.h"
@@ -25,6 +30,7 @@ static int __cmd_evlist(const char *file_name, struct perf_attr_details *details
 	struct perf_session *session;
 	struct perf_evsel *pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	session = perf_session__new(file_name, O_RDONLY, 0, false, NULL);
 	if (session == NULL)
@@ -32,6 +38,8 @@ static int __cmd_evlist(const char *file_name, struct perf_attr_details *details
 
 	list_for_each_entry(pos, &session->evlist->entries, node)
 =======
+=======
+>>>>>>> v3.18
 	struct perf_data_file file = {
 		.path = file_name,
 		.mode = PERF_DATA_MODE_READ,
@@ -42,6 +50,9 @@ static int __cmd_evlist(const char *file_name, struct perf_attr_details *details
 		return -1;
 
 	evlist__for_each(session->evlist, pos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		perf_evsel__fprintf(pos, details, stdout);
 

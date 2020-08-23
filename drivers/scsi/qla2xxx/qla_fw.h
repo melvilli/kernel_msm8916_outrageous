@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -96,7 +100,11 @@ struct nvram_24xx {
 	uint16_t version;
 	uint16_t reserved_1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t frame_payload_size;
+=======
+	__le16 frame_payload_size;
+>>>>>>> v3.18
 =======
 	__le16 frame_payload_size;
 >>>>>>> v3.18
@@ -326,8 +334,13 @@ struct init_cb_24xx {
 	 * BIT 4  = Enable Target Mode
 	 * BIT 5  = Disable Initiator Mode
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * BIT 6  = Reserved
 	 * BIT 7  = Reserved
+=======
+	 * BIT 6  = Acquire FA-WWN
+	 * BIT 7  = Enable D-port Diagnostics
+>>>>>>> v3.18
 =======
 	 * BIT 6  = Acquire FA-WWN
 	 * BIT 7  = Enable D-port Diagnostics
@@ -385,12 +398,18 @@ struct init_cb_24xx {
 	 * BIT 15 = Data Rate bit 2
 	 * BIT 16 = Enable 75 ohm Termination Select
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * BIT 17-31 = Reserved
 =======
+=======
+>>>>>>> v3.18
 	 * BIT 17-28 = Reserved
 	 * BIT 29 = Enable response queue 0 in index shadowing
 	 * BIT 30 = Enable request queue 0 out index shadowing
 	 * BIT 31 = Reserved
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	uint32_t firmware_options_3;
@@ -585,7 +604,11 @@ struct sts_entry_24xx {
 #define SF_FCP_RSP_DMA		BIT_0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t reserved_2;
+=======
+	uint16_t retry_delay;
+>>>>>>> v3.18
 =======
 	uint16_t retry_delay;
 >>>>>>> v3.18
@@ -1159,6 +1182,7 @@ struct device_reg_24xx {
 #define MAX_MULTI_ID_FABRIC	256	/* ... */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define for_each_mapped_vp_idx(_ha, _idx)		\
 	for (_idx = find_next_bit((_ha)->vp_idx_map,	\
 		(_ha)->max_npiv_vports + 1, 1);		\
@@ -1166,6 +1190,8 @@ struct device_reg_24xx {
 	    _idx = find_next_bit((_ha)->vp_idx_map,	\
 		(_ha)->max_npiv_vports + 1, _idx + 1))	\
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mid_conf_entry_24xx {
@@ -1406,11 +1432,17 @@ struct qla_flt_header {
 #define FLT_REG_VPD_1		0x16
 #define FLT_REG_NVRAM_1		0x17
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FLT_REG_VPD_2		0xD4
 #define FLT_REG_NVRAM_2		0xD5
 #define FLT_REG_VPD_3		0xD6
 #define FLT_REG_NVRAM_3		0xD7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FLT_REG_FDT		0x1a
 #define FLT_REG_FLT		0x1c
@@ -1422,6 +1454,11 @@ struct qla_flt_header {
 #define FLT_REG_FCP_PRIO_0	0x87
 #define FLT_REG_FCP_PRIO_1	0x88
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FLT_REG_CNA_FW		0x97
+#define FLT_REG_BOOT_CODE_8044	0xA2
+>>>>>>> v3.18
 =======
 #define FLT_REG_CNA_FW		0x97
 #define FLT_REG_BOOT_CODE_8044	0xA2

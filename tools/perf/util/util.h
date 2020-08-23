@@ -40,6 +40,11 @@
 #define _ALL_SOURCE 1
 #define _BSD_SOURCE 1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* glibc 2.20 deprecates _BSD_SOURCE in favour of _DEFAULT_SOURCE */
+#define _DEFAULT_SOURCE 1
+>>>>>>> v3.18
 =======
 /* glibc 2.20 deprecates _BSD_SOURCE in favour of _DEFAULT_SOURCE */
 #define _DEFAULT_SOURCE 1
@@ -70,6 +75,7 @@
 #include <utime.h>
 #include <sys/wait.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/poll.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -79,6 +85,8 @@
 #include <sys/ttydefaults.h>
 #include <lk/debugfs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <poll.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -91,6 +99,9 @@
 #include <termios.h>
 #include <linux/bitops.h>
 #include <termios.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern const char *graph_line;
@@ -100,6 +111,12 @@ extern char tracing_events_path[];
 extern void perf_debugfs_set_path(const char *mountpoint);
 const char *perf_debugfs_mount(const char *mountpoint);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const char *find_tracing_dir(void);
+char *get_tracing_file(const char *name);
+void put_tracing_file(char *file);
+>>>>>>> v3.18
 =======
 const char *find_tracing_dir(void);
 char *get_tracing_file(const char *name);
@@ -151,6 +168,11 @@ void put_tracing_file(char *file);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PERF_GTK_DSO  "libperf-gtk.so"
+
+>>>>>>> v3.18
 =======
 #define PERF_GTK_DSO  "libperf-gtk.so"
 
@@ -211,6 +233,11 @@ static inline void *zalloc(size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define zfree(ptr) ({ free(*ptr); *ptr = NULL; })
+
+>>>>>>> v3.18
 =======
 #define zfree(ptr) ({ free(*ptr); *ptr = NULL; })
 
@@ -241,6 +268,11 @@ static inline int has_extension(const char *filename, const char *ext)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int parse_nsec_time(const char *str, u64 *ptime);
+
+>>>>>>> v3.18
 =======
 int parse_nsec_time(const char *str, u64 *ptime);
 
@@ -263,8 +295,13 @@ extern unsigned char sane_ctype[256];
 #define isalnum(x) sane_istest(x,GIT_ALPHA | GIT_DIGIT)
 #define isprint(x) sane_istest(x,GIT_PRINT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define islower(x) (sane_istest(x,GIT_ALPHA) && sane_istest(x,0x20))
 #define isupper(x) (sane_istest(x,GIT_ALPHA) && !sane_istest(x,0x20))
+=======
+#define islower(x) (sane_istest(x,GIT_ALPHA) && (x & 0x20))
+#define isupper(x) (sane_istest(x,GIT_ALPHA) && !(x & 0x20))
+>>>>>>> v3.18
 =======
 #define islower(x) (sane_istest(x,GIT_ALPHA) && (x & 0x20))
 #define isupper(x) (sane_istest(x,GIT_ALPHA) && !(x & 0x20))
@@ -282,6 +319,10 @@ static inline int sane_case(int x, int high)
 int mkdir_p(char *path, mode_t mode);
 int copyfile(const char *from, const char *to);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int copyfile_mode(const char *from, const char *to, mode_t mode);
+>>>>>>> v3.18
 =======
 int copyfile_mode(const char *from, const char *to, mode_t mode);
 >>>>>>> v3.18
@@ -295,7 +336,12 @@ int strtailcmp(const char *s1, const char *s2);
 char *strxfrchar(char *s, char from, char to);
 unsigned long convert_unit(unsigned long value, char *unit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int readn(int fd, void *buf, size_t size);
+=======
+ssize_t readn(int fd, void *buf, size_t n);
+ssize_t writen(int fd, void *buf, size_t n);
+>>>>>>> v3.18
 =======
 ssize_t readn(int fd, void *buf, size_t n);
 ssize_t writen(int fd, void *buf, size_t n);
@@ -320,7 +366,10 @@ bool is_power_of_2(unsigned long n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned next_pow2(unsigned x)
 {
 	if (!x)
@@ -339,6 +388,9 @@ static inline unsigned long next_pow2_l(unsigned long x)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 size_t hex_width(u64 v);
 int hex2u64(const char *ptr, u64 *val);
@@ -350,10 +402,13 @@ void dump_stack(void);
 
 extern unsigned int page_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct winsize;
 void get_term_dimensions(struct winsize *ws);
 =======
+=======
+>>>>>>> v3.18
 extern int cacheline_size;
 
 void get_term_dimensions(struct winsize *ws);
@@ -397,5 +452,8 @@ void mem_bswap_32(void *src, int byte_size);
 
 const char *get_filename_for_perf_kvm(void);
 bool find_process(const char *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* GIT_COMPAT_UTIL_H */

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * \file drm_drv.c
  * Generic driver template
@@ -28,6 +29,8 @@
  * All Rights Reserved.
  *
 =======
+=======
+>>>>>>> v3.18
 /*
  * Created: Fri Jan 19 10:48:35 2001 by faith@acm.org
  *
@@ -36,6 +39,9 @@
  *
  * Author Rickard E. (Rik) Faith <faith@valinux.com>
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -51,6 +57,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+<<<<<<< HEAD
 <<<<<<< HEAD
  * VA LINUX SYSTEMS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
  * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
@@ -252,6 +259,8 @@ int drm_lastclose(struct drm_device * dev)
 
 /** File operations structure */
 =======
+=======
+>>>>>>> v3.18
  * PRECISION INSIGHT AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
  * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
@@ -1078,6 +1087,9 @@ out_unlock:
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct file_operations drm_stub_fops = {
 	.owner = THIS_MODULE,
@@ -1091,6 +1103,10 @@ static int __init drm_core_init(void)
 
 	drm_global_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_connector_ida_init();
+>>>>>>> v3.18
 =======
 	drm_connector_ida_init();
 >>>>>>> v3.18
@@ -1107,6 +1123,7 @@ static int __init drm_core_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_proc_root = proc_mkdir("dri", NULL);
 	if (!drm_proc_root) {
 		DRM_ERROR("Cannot create /proc/dri\n");
@@ -1114,6 +1131,8 @@ static int __init drm_core_init(void)
 		goto err_p3;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	drm_debugfs_root = debugfs_create_dir("dri", NULL);
@@ -1139,7 +1158,10 @@ err_p1:
 static void __exit drm_core_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remove_proc_entry("dri", NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	debugfs_remove(drm_debugfs_root);
@@ -1148,6 +1170,10 @@ static void __exit drm_core_exit(void)
 	unregister_chrdev(DRM_MAJOR, "drm");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_connector_ida_destroy();
+>>>>>>> v3.18
 =======
 	drm_connector_ida_destroy();
 >>>>>>> v3.18
@@ -1156,6 +1182,7 @@ static void __exit drm_core_exit(void)
 
 module_init(drm_core_init);
 module_exit(drm_core_exit);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -1362,5 +1389,7 @@ struct drm_local_map *drm_getsarea(struct drm_device *dev)
 	return NULL;
 }
 EXPORT_SYMBOL(drm_getsarea);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

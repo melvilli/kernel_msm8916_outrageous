@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -65,7 +69,12 @@ spinlock_t _dump_buf_lock;
 
 /* Used when mapping IRQ vectors in a driver centric manner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 uint16_t lpfc_used_cpu[LPFC_MAX_CPU];
+=======
+uint16_t *lpfc_used_cpu;
+uint32_t lpfc_present_cpu;
+>>>>>>> v3.18
 =======
 uint16_t *lpfc_used_cpu;
 uint32_t lpfc_present_cpu;
@@ -89,6 +98,10 @@ static void lpfc_sli4_cq_event_release_all(struct lpfc_hba *);
 static void lpfc_sli4_disable_intr(struct lpfc_hba *);
 static uint32_t lpfc_sli4_enable_intr(struct lpfc_hba *, uint32_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void lpfc_sli4_oas_verify(struct lpfc_hba *phba);
+>>>>>>> v3.18
 =======
 static void lpfc_sli4_oas_verify(struct lpfc_hba *phba);
 >>>>>>> v3.18
@@ -318,15 +331,21 @@ lpfc_dump_wakeup_param_cmpl(struct lpfc_hba *phba, LPFC_MBOXQ_t *pmboxq)
 
 	if ((prg->dist == 3) && (prg->num == 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf(phba->OptionROMVersion, "%d.%d%d",
 			prg->ver, prg->rev, prg->lev);
 	else
 		sprintf(phba->OptionROMVersion, "%d.%d%d%c%d",
 =======
+=======
+>>>>>>> v3.18
 		snprintf(phba->OptionROMVersion, 32, "%d.%d%d",
 			prg->ver, prg->rev, prg->lev);
 	else
 		snprintf(phba->OptionROMVersion, 32, "%d.%d%d%c%d",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			prg->ver, prg->rev, prg->lev,
 			dist, prg->num);
@@ -492,11 +511,14 @@ lpfc_config_port_post(struct lpfc_hba *phba)
 
 	/* Reset the DFT_HBA_Q_DEPTH to the max xri  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phba->cfg_hba_queue_depth > (mb->un.varRdConfig.max_xri+1))
 		phba->cfg_hba_queue_depth =
 			(mb->un.varRdConfig.max_xri + 1) -
 					lpfc_sli4_get_els_iocb_cnt(phba);
 =======
+=======
+>>>>>>> v3.18
 	i = (mb->un.varRdConfig.max_xri + 1);
 	if (phba->cfg_hba_queue_depth > i) {
 		lpfc_printf_log(phba, KERN_WARNING, LOG_INIT,
@@ -513,6 +535,9 @@ lpfc_config_port_post(struct lpfc_hba *phba)
 				phba->pport->cfg_lun_queue_depth, i);
 		phba->pport->cfg_lun_queue_depth = i;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	phba->lmt = mb->un.varRdConfig.lmt;
@@ -675,7 +700,11 @@ lpfc_config_port_post(struct lpfc_hba *phba)
  *		Any other value - error
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -780,7 +809,11 @@ lpfc_hba_init_link_fc_topology(struct lpfc_hba *phba, uint32_t fc_topology,
  *		Any other value - error
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -854,6 +887,7 @@ lpfc_hba_down_prep(struct lpfc_hba *phba)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lpfc_hba_down_post_s3 - Perform lpfc uninitialization after HBA reset
  * @phba: pointer to lpfc HBA data structure.
  *
@@ -867,6 +901,8 @@ lpfc_hba_down_prep(struct lpfc_hba *phba)
 static int
 lpfc_hba_down_post_s3(struct lpfc_hba *phba)
 =======
+=======
+>>>>>>> v3.18
  * lpfc_sli4_free_sp_events - Cleanup sp_queue_events to free
  * rspiocb which got deferred
  *
@@ -925,14 +961,22 @@ lpfc_sli4_free_sp_events(struct lpfc_hba *phba)
  **/
 static void
 lpfc_hba_free_post_buf(struct lpfc_hba *phba)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct lpfc_sli *psli = &phba->sli;
 	struct lpfc_sli_ring *pring;
 	struct lpfc_dmabuf *mp, *next_mp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LIST_HEAD(completions);
 	int i;
+=======
+	LIST_HEAD(buflist);
+	int count;
+>>>>>>> v3.18
 =======
 	LIST_HEAD(buflist);
 	int count;
@@ -943,6 +987,7 @@ lpfc_hba_free_post_buf(struct lpfc_hba *phba)
 	else {
 		/* Cleanup preposted buffers on the ELS ring */
 		pring = &psli->ring[LPFC_ELS_RING];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		list_for_each_entry_safe(mp, next_mp, &pring->postbufq, list) {
 			list_del(&mp->list);
@@ -957,6 +1002,8 @@ lpfc_hba_free_post_buf(struct lpfc_hba *phba)
 		pring = &psli->ring[i];
 
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_irq(&phba->hbalock);
 		list_splice_init(&pring->postbufq, &buflist);
 		spin_unlock_irq(&phba->hbalock);
@@ -999,25 +1046,35 @@ lpfc_hba_clean_txcmplq(struct lpfc_hba *phba)
 			spin_lock_irq(&pring->ring_lock);
 		else
 			spin_lock_irq(&phba->hbalock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* At this point in time the HBA is either reset or DOA. Either
 		 * way, nothing should be on txcmplq as it will NEVER complete.
 		 */
 		list_splice_init(&pring->txcmplq, &completions);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irq(&phba->hbalock);
 =======
+=======
+>>>>>>> v3.18
 		pring->txcmplq_cnt = 0;
 
 		if (phba->sli_rev >= LPFC_SLI_REV4)
 			spin_unlock_irq(&pring->ring_lock);
 		else
 			spin_unlock_irq(&phba->hbalock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Cancel all the IOCBs from the completions list */
 		lpfc_sli_cancel_iocbs(phba, &completions, IOSTAT_LOCAL_REJECT,
 				      IOERR_SLI_ABORTED);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		lpfc_sli_abort_iocb_ring(phba, pring);
@@ -1026,6 +1083,8 @@ lpfc_hba_clean_txcmplq(struct lpfc_hba *phba)
 	spin_unlock_irq(&phba->hbalock);
 
 =======
+=======
+>>>>>>> v3.18
 		lpfc_sli_abort_iocb_ring(phba, pring);
 	}
 }
@@ -1047,6 +1106,9 @@ lpfc_hba_down_post_s3(struct lpfc_hba *phba)
 {
 	lpfc_hba_free_post_buf(phba);
 	lpfc_hba_clean_txcmplq(phba);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1068,6 +1130,7 @@ lpfc_hba_down_post_s4(struct lpfc_hba *phba)
 	struct lpfc_scsi_buf *psb, *psb_next;
 	LIST_HEAD(aborts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	unsigned long iflag = 0;
 	struct lpfc_sglq *sglq_entry = NULL;
@@ -1076,6 +1139,8 @@ lpfc_hba_down_post_s4(struct lpfc_hba *phba)
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long iflag = 0;
 	struct lpfc_sglq *sglq_entry = NULL;
 	struct lpfc_sli *psli = &phba->sli;
@@ -1085,6 +1150,9 @@ lpfc_hba_down_post_s4(struct lpfc_hba *phba)
 	lpfc_hba_clean_txcmplq(phba);
 	pring = &psli->ring[LPFC_ELS_RING];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* At this point in time the HBA is either reset or DOA. Either
 	 * way, nothing should be on lpfc_abts_els_sgl_list, it needs to be
@@ -1103,13 +1171,19 @@ lpfc_hba_down_post_s4(struct lpfc_hba *phba)
 		sglq_entry->state = SGL_FREED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_splice_init(&phba->sli4_hba.lpfc_abts_els_sgl_list,
 			&phba->sli4_hba.lpfc_sgl_list);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&pring->ring_lock);
 	list_splice_init(&phba->sli4_hba.lpfc_abts_els_sgl_list,
 			&phba->sli4_hba.lpfc_sgl_list);
 	spin_unlock(&pring->ring_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&phba->sli4_hba.abts_sgl_list_lock);
 	/* abts_scsi_buf_list_lock required because worker thread uses this
@@ -1129,6 +1203,11 @@ lpfc_hba_down_post_s4(struct lpfc_hba *phba)
 	list_splice(&aborts, &phba->lpfc_scsi_buf_list_put);
 	spin_unlock_irqrestore(&phba->scsi_buf_list_put_lock, iflag);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	lpfc_sli4_free_sp_events(phba);
+>>>>>>> v3.18
 =======
 
 	lpfc_sli4_free_sp_events(phba);
@@ -1208,10 +1287,13 @@ lpfc_rrq_timeout(unsigned long ptr)
 	phba = (struct lpfc_hba *)ptr;
 	spin_lock_irqsave(&phba->pport->work_port_lock, iflag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phba->hba_flag |= HBA_RRQ_ACTIVE;
 	spin_unlock_irqrestore(&phba->pport->work_port_lock, iflag);
 	lpfc_worker_wake_up(phba);
 =======
+=======
+>>>>>>> v3.18
 	if (!(phba->pport->load_flag & FC_UNLOADING))
 		phba->hba_flag |= HBA_RRQ_ACTIVE;
 	else
@@ -1220,6 +1302,9 @@ lpfc_rrq_timeout(unsigned long ptr)
 
 	if (!(phba->pport->load_flag & FC_UNLOADING))
 		lpfc_worker_wake_up(phba);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1458,7 +1543,10 @@ lpfc_handle_deferred_eratt(struct lpfc_hba *phba)
 {
 	uint32_t old_host_status = phba->work_hs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpfc_sli_ring  *pring;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct lpfc_sli *psli = &phba->sli;
@@ -1490,8 +1578,12 @@ lpfc_handle_deferred_eratt(struct lpfc_hba *phba)
 	 * SCSI layer retry it after re-establishing link.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pring = &psli->ring[psli->fcp_ring];
 	lpfc_sli_abort_iocb_ring(phba, pring);
+=======
+	lpfc_sli_abort_fcp_rings(phba);
+>>>>>>> v3.18
 =======
 	lpfc_sli_abort_fcp_rings(phba);
 >>>>>>> v3.18
@@ -1563,7 +1655,10 @@ lpfc_handle_eratt_s3(struct lpfc_hba *phba)
 	struct lpfc_vport *vport = phba->pport;
 	struct lpfc_sli   *psli = &phba->sli;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpfc_sli_ring  *pring;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uint32_t event_data;
@@ -1618,8 +1713,12 @@ lpfc_handle_eratt_s3(struct lpfc_hba *phba)
 		* retry it after re-establishing link.
 		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pring = &psli->ring[psli->fcp_ring];
 		lpfc_sli_abort_iocb_ring(phba, pring);
+=======
+		lpfc_sli_abort_fcp_rings(phba);
+>>>>>>> v3.18
 =======
 		lpfc_sli_abort_fcp_rings(phba);
 >>>>>>> v3.18
@@ -1696,7 +1795,12 @@ lpfc_handle_eratt_s3(struct lpfc_hba *phba)
  **/
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 lpfc_sli4_port_sta_fn_reset(struct lpfc_hba *phba, int mbx_action)
+=======
+lpfc_sli4_port_sta_fn_reset(struct lpfc_hba *phba, int mbx_action,
+			    bool en_rn_msg)
+>>>>>>> v3.18
 =======
 lpfc_sli4_port_sta_fn_reset(struct lpfc_hba *phba, int mbx_action,
 			    bool en_rn_msg)
@@ -1713,14 +1817,20 @@ lpfc_sli4_port_sta_fn_reset(struct lpfc_hba *phba, int mbx_action,
 	if (!rc) {
 		/* need reset: attempt for port recovery */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"2887 Reset Needed: Attempting Port "
 				"Recovery...\n");
 =======
+=======
+>>>>>>> v3.18
 		if (en_rn_msg)
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"2887 Reset Needed: Attempting Port "
 					"Recovery...\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lpfc_offline_prep(phba, mbx_action);
 		lpfc_offline(phba);
@@ -1762,6 +1872,10 @@ lpfc_handle_eratt_s4(struct lpfc_hba *phba)
 	uint32_t uerrlo_reg, uemasklo_reg;
 	uint32_t pci_rd_rc1, pci_rd_rc2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool en_rn_msg = true;
+>>>>>>> v3.18
 =======
 	bool en_rn_msg = true;
 >>>>>>> v3.18
@@ -1816,17 +1930,23 @@ lpfc_handle_eratt_s4(struct lpfc_hba *phba)
 		}
 		if (reg_err1 == SLIPORT_ERR1_REG_ERR_CODE_2 &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    reg_err2 == SLIPORT_ERR2_REG_FW_RESTART)
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"3143 Port Down: Firmware Restarted\n");
 		else if (reg_err1 == SLIPORT_ERR1_REG_ERR_CODE_2 &&
 =======
+=======
+>>>>>>> v3.18
 		    reg_err2 == SLIPORT_ERR2_REG_FW_RESTART) {
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"3143 Port Down: Firmware Update "
 					"Detected\n");
 			en_rn_msg = false;
 		} else if (reg_err1 == SLIPORT_ERR1_REG_ERR_CODE_2 &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 reg_err2 == SLIPORT_ERR2_REG_FORCED_DUMP)
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
@@ -1838,7 +1958,12 @@ lpfc_handle_eratt_s4(struct lpfc_hba *phba)
 
 		/* Check port status register for function reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = lpfc_sli4_port_sta_fn_reset(phba, LPFC_MBX_NO_WAIT);
+=======
+		rc = lpfc_sli4_port_sta_fn_reset(phba, LPFC_MBX_NO_WAIT,
+				en_rn_msg);
+>>>>>>> v3.18
 =======
 		rc = lpfc_sli4_port_sta_fn_reset(phba, LPFC_MBX_NO_WAIT,
 				en_rn_msg);
@@ -2186,6 +2311,7 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	switch (dev_id) {
 	case PCI_DEVICE_ID_FIREFLY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		m = (typeof(m)){"LP6000", "PCI", "Fibre Channel Adapter"};
 		break;
 	case PCI_DEVICE_ID_SUPERFLY:
@@ -2253,6 +2379,8 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	case PCI_DEVICE_ID_NEPTUNE_DCSP:
 		m = (typeof(m)){"LPe1002-SP", "PCIe", "Fibre Channel Adapter"};
 =======
+=======
+>>>>>>> v3.18
 		m = (typeof(m)){"LP6000", "PCI",
 				"Obsolete, Unsupported Fibre Channel Adapter"};
 		break;
@@ -2321,6 +2449,9 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	case PCI_DEVICE_ID_NEPTUNE_DCSP:
 		m = (typeof(m)){"LPe1002-SP", "PCIe",
 				"Obsolete, Unsupported Fibre Channel Adapter"};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case PCI_DEVICE_ID_BMID:
@@ -2328,7 +2459,12 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		break;
 	case PCI_DEVICE_ID_BSMB:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		m = (typeof(m)){"LP111", "PCI-X2", "Fibre Channel Adapter"};
+=======
+		m = (typeof(m)){"LP111", "PCI-X2",
+				"Obsolete, Unsupported Fibre Channel Adapter"};
+>>>>>>> v3.18
 =======
 		m = (typeof(m)){"LP111", "PCI-X2",
 				"Obsolete, Unsupported Fibre Channel Adapter"};
@@ -2352,6 +2488,7 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		break;
 	case PCI_DEVICE_ID_LP101:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		m = (typeof(m)){"LP101", "PCI-X", "Fibre Channel Adapter"};
 		break;
 	case PCI_DEVICE_ID_LP10000S:
@@ -2363,6 +2500,8 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	case PCI_DEVICE_ID_LPE11000S:
 		m = (typeof(m)){"LPe11000-S", "PCIe", "Fibre Channel Adapter"};
 =======
+=======
+>>>>>>> v3.18
 		m = (typeof(m)){"LP101", "PCI-X",
 				"Obsolete, Unsupported Fibre Channel Adapter"};
 		break;
@@ -2377,6 +2516,9 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	case PCI_DEVICE_ID_LPE11000S:
 		m = (typeof(m)){"LPe11000-S", "PCIe",
 				"Obsolete, Unsupported Fibre Channel Adapter"};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case PCI_DEVICE_ID_SAT:
@@ -2399,7 +2541,12 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		break;
 	case PCI_DEVICE_ID_HORNET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		m = (typeof(m)){"LP21000", "PCIe", "FCoE Adapter"};
+=======
+		m = (typeof(m)){"LP21000", "PCIe",
+				"Obsolete, Unsupported FCoE Adapter"};
+>>>>>>> v3.18
 =======
 		m = (typeof(m)){"LP21000", "PCIe",
 				"Obsolete, Unsupported FCoE Adapter"};
@@ -2408,6 +2555,7 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		break;
 	case PCI_DEVICE_ID_PROTEUS_VF:
 		m = (typeof(m)){"LPev12000", "PCIe IOV",
+<<<<<<< HEAD
 <<<<<<< HEAD
 				"Fibre Channel Adapter"};
 		break;
@@ -2419,6 +2567,8 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		m = (typeof(m)){"LPemv12002-S", "PCIe IOV",
 				"Fibre Channel Adapter"};
 =======
+=======
+>>>>>>> v3.18
 				"Obsolete, Unsupported Fibre Channel Adapter"};
 		break;
 	case PCI_DEVICE_ID_PROTEUS_PF:
@@ -2428,6 +2578,9 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	case PCI_DEVICE_ID_PROTEUS_S:
 		m = (typeof(m)){"LPemv12002-S", "PCIe IOV",
 				"Obsolete, Unsupported Fibre Channel Adapter"};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case PCI_DEVICE_ID_TIGERSHARK:
@@ -2445,6 +2598,7 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 	case PCI_DEVICE_ID_BALIUS:
 		m = (typeof(m)){"LPVe12002", "PCIe Shared I/O",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"Fibre Channel Adapter"};
 		break;
 	case PCI_DEVICE_ID_LANCER_FC:
@@ -2457,6 +2611,8 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		m = (typeof(m)){"OCe15100", "PCIe", "FCoE"};
 		break;
 =======
+=======
+>>>>>>> v3.18
 				"Obsolete, Unsupported Fibre Channel Adapter"};
 		break;
 	case PCI_DEVICE_ID_LANCER_FC:
@@ -2475,6 +2631,9 @@ lpfc_get_hba_model_desc(struct lpfc_hba *phba, uint8_t *mdp, uint8_t *descp)
 		m = (typeof(m)){"OCe15100", "PCIe",
 				"Obsolete, Unsupported FCoE"};
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case PCI_DEVICE_ID_SKYHAWK:
 	case PCI_DEVICE_ID_SKYHAWK_VF:
@@ -3086,7 +3245,11 @@ lpfc_online(struct lpfc_hba *phba)
 
 	vports = lpfc_create_vport_work_array(phba);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vports != NULL) {
+=======
+	if (vports != NULL)
+>>>>>>> v3.18
 =======
 	if (vports != NULL)
 >>>>>>> v3.18
@@ -3107,8 +3270,12 @@ lpfc_online(struct lpfc_hba *phba)
 			spin_unlock_irq(shost->host_lock);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	lpfc_destroy_vport_work_array(phba, vports);
+=======
+		lpfc_destroy_vport_work_array(phba, vports);
+>>>>>>> v3.18
 =======
 		lpfc_destroy_vport_work_array(phba, vports);
 >>>>>>> v3.18
@@ -3325,6 +3492,10 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 	LIST_HEAD(scsi_sgl_list);
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct lpfc_sli_ring *pring = &phba->sli.ring[LPFC_ELS_RING];
+>>>>>>> v3.18
 =======
 	struct lpfc_sli_ring *pring = &phba->sli.ring[LPFC_ELS_RING];
 >>>>>>> v3.18
@@ -3369,7 +3540,13 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 		}
 		spin_lock_irq(&phba->hbalock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_splice_init(&els_sgl_list, &phba->sli4_hba.lpfc_sgl_list);
+=======
+		spin_lock(&pring->ring_lock);
+		list_splice_init(&els_sgl_list, &phba->sli4_hba.lpfc_sgl_list);
+		spin_unlock(&pring->ring_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&pring->ring_lock);
 		list_splice_init(&els_sgl_list, &phba->sli4_hba.lpfc_sgl_list);
@@ -3385,7 +3562,13 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 				els_xri_cnt);
 		spin_lock_irq(&phba->hbalock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_splice_init(&phba->sli4_hba.lpfc_sgl_list, &els_sgl_list);
+=======
+		spin_lock(&pring->ring_lock);
+		list_splice_init(&phba->sli4_hba.lpfc_sgl_list, &els_sgl_list);
+		spin_unlock(&pring->ring_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&pring->ring_lock);
 		list_splice_init(&phba->sli4_hba.lpfc_sgl_list, &els_sgl_list);
@@ -3404,7 +3587,13 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 		}
 		spin_lock_irq(&phba->hbalock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_splice_init(&els_sgl_list, &phba->sli4_hba.lpfc_sgl_list);
+=======
+		spin_lock(&pring->ring_lock);
+		list_splice_init(&els_sgl_list, &phba->sli4_hba.lpfc_sgl_list);
+		spin_unlock(&pring->ring_lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&pring->ring_lock);
 		list_splice_init(&els_sgl_list, &phba->sli4_hba.lpfc_sgl_list);
@@ -3451,15 +3640,21 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 
 	spin_lock_irq(&phba->scsi_buf_list_get_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&phba->scsi_buf_list_put_lock);
 	list_splice_init(&phba->lpfc_scsi_buf_list_get, &scsi_sgl_list);
 	list_splice(&phba->lpfc_scsi_buf_list_put, &scsi_sgl_list);
 	spin_unlock_irq(&phba->scsi_buf_list_put_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&phba->scsi_buf_list_put_lock);
 	list_splice_init(&phba->lpfc_scsi_buf_list_get, &scsi_sgl_list);
 	list_splice(&phba->lpfc_scsi_buf_list_put, &scsi_sgl_list);
 	spin_unlock(&phba->scsi_buf_list_put_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&phba->scsi_buf_list_get_lock);
 
@@ -3472,15 +3667,21 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 			list_remove_head(&scsi_sgl_list, psb,
 					 struct lpfc_scsi_buf, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_pool_free(phba->lpfc_scsi_dma_buf_pool, psb->data,
 				      psb->dma_handle);
 			kfree(psb);
 =======
+=======
+>>>>>>> v3.18
 			if (psb) {
 				pci_pool_free(phba->lpfc_scsi_dma_buf_pool,
 					      psb->data, psb->dma_handle);
 				kfree(psb);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		spin_lock_irq(&phba->scsi_buf_list_get_lock);
@@ -3505,15 +3706,21 @@ lpfc_sli4_xri_sgl_update(struct lpfc_hba *phba)
 	}
 	spin_lock_irq(&phba->scsi_buf_list_get_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&phba->scsi_buf_list_put_lock);
 	list_splice_init(&scsi_sgl_list, &phba->lpfc_scsi_buf_list_get);
 	INIT_LIST_HEAD(&phba->lpfc_scsi_buf_list_put);
 	spin_unlock_irq(&phba->scsi_buf_list_put_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&phba->scsi_buf_list_put_lock);
 	list_splice_init(&scsi_sgl_list, &phba->lpfc_scsi_buf_list_get);
 	INIT_LIST_HEAD(&phba->lpfc_scsi_buf_list_put);
 	spin_unlock(&phba->scsi_buf_list_put_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&phba->scsi_buf_list_get_lock);
 
@@ -3872,7 +4079,11 @@ lpfc_fcf_redisc_wait_start_timer(struct lpfc_hba *phba)
  * worker thread context.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -4508,6 +4719,7 @@ lpfc_sli4_perform_all_vport_cvl(struct lpfc_hba *phba)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lpfc_sli4_perform_inuse_fcf_recovery - Perform inuse fcf recovery
  * @vport: pointer to lpfc hba data structure.
  *
@@ -4554,6 +4766,8 @@ lpfc_sli4_perform_inuse_fcf_recovery(struct lpfc_hba *phba,
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * lpfc_sli4_async_fip_evt - Process the asynchronous FCoE FIP event
@@ -4621,6 +4835,7 @@ lpfc_sli4_async_fip_evt(struct lpfc_hba *phba,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* If FCF has been in discovered state, perform rediscovery
 		 * only if the FCF with the same index of the in-use FCF got
 		 * modified during normal operation. Otherwise, do nothing.
@@ -4637,6 +4852,11 @@ lpfc_sli4_async_fip_evt(struct lpfc_hba *phba,
 				lpfc_sli4_perform_inuse_fcf_recovery(phba,
 								     acqe_fip);
 			}
+=======
+		/* If the FCF has been in discovered state, do nothing. */
+		if (phba->fcf.fcf_flag & FCF_SCAN_DONE) {
+			spin_unlock_irq(&phba->hbalock);
+>>>>>>> v3.18
 =======
 		/* If the FCF has been in discovered state, do nothing. */
 		if (phba->fcf.fcf_flag & FCF_SCAN_DONE) {
@@ -4695,8 +4915,11 @@ lpfc_sli4_async_fip_evt(struct lpfc_hba *phba,
 		 * failover process already.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lpfc_sli4_perform_inuse_fcf_recovery(phba, acqe_fip);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_irq(&phba->hbalock);
 		/* Mark the fast failover process in progress */
 		phba->fcf.fcf_flag |= FCF_DEAD_DISC;
@@ -4730,6 +4953,9 @@ lpfc_sli4_async_fip_evt(struct lpfc_hba *phba,
 			 */
 			lpfc_sli4_perform_all_vport_cvl(phba);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case LPFC_FIP_EVENT_TYPE_CVL:
@@ -5063,7 +5289,11 @@ lpfc_enable_pci_dev(struct lpfc_hba *phba)
 
 	/* PCIe EEH recovery on powerpc platforms needs fundamental reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pci_find_capability(pdev, PCI_CAP_ID_EXP))
+=======
+	if (pci_is_pcie(pdev))
+>>>>>>> v3.18
 =======
 	if (pci_is_pcie(pdev))
 >>>>>>> v3.18
@@ -5103,8 +5333,11 @@ lpfc_disable_pci_dev(struct lpfc_hba *phba)
 	pci_release_selected_regions(pdev, bars);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Null out PCI private reference to driver */
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -5129,12 +5362,18 @@ lpfc_reset_hba(struct lpfc_hba *phba)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lpfc_offline_prep(phba, LPFC_MBX_WAIT);
 =======
+=======
+>>>>>>> v3.18
 	if (phba->sli.sli_flag & LPFC_SLI_ACTIVE)
 		lpfc_offline_prep(phba, LPFC_MBX_WAIT);
 	else
 		lpfc_offline_prep(phba, LPFC_MBX_NO_WAIT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lpfc_offline(phba);
 	lpfc_sli_brdrestart(phba);
@@ -5390,11 +5629,17 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 	struct lpfc_mqe *mqe;
 	int longs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int fof_vectors = 0;
 
 	/* Get all the module params for configuring this host */
 	lpfc_get_cfgparam(phba);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Before proceed, wait for POST done and device ready */
@@ -5441,6 +5686,7 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 	INIT_LIST_HEAD(&phba->mbox_ext_buf_ctx.ext_dmabuf_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We need to do a READ_CONFIG mailbox command here before
 	 * calling lpfc_get_cfgparam. For VFs this will report the
@@ -5455,6 +5701,10 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 	/* Eventually cfg_fcp_eq_count / cfg_fcp_wq_count will be depricated */
 	phba->cfg_fcp_io_channel = phba->cfg_fcp_eq_count;
 
+=======
+	phba->max_vpi = LPFC_MAX_VPI;
+
+>>>>>>> v3.18
 =======
 	phba->max_vpi = LPFC_MAX_VPI;
 
@@ -5616,6 +5866,12 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 	if (unlikely(rc))
 		goto out_free_bsmbx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rc = lpfc_mem_alloc_active_rrq_pool_s4(phba);
+	if (unlikely(rc))
+		goto out_free_bsmbx;
+>>>>>>> v3.18
 =======
 	rc = lpfc_mem_alloc_active_rrq_pool_s4(phba);
 	if (unlikely(rc))
@@ -5679,13 +5935,19 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 	}
 	mempool_free(mboxq, phba->mbox_mem_pool);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Verify OAS is supported */
 	lpfc_sli4_oas_verify(phba);
 	if (phba->cfg_fof)
 		fof_vectors = 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Verify all the SLI4 queues */
 	rc = lpfc_sli4_queue_verify(phba);
@@ -5729,7 +5991,12 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 	phba->sli4_hba.fcp_eq_hdl =
 			kzalloc((sizeof(struct lpfc_fcp_eq_hdl) *
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    phba->cfg_fcp_io_channel), GFP_KERNEL);
+=======
+			    (fof_vectors + phba->cfg_fcp_io_channel)),
+			    GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			    (fof_vectors + phba->cfg_fcp_io_channel)),
 			    GFP_KERNEL);
@@ -5744,7 +6011,12 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 
 	phba->sli4_hba.msix_entries = kzalloc((sizeof(struct msix_entry) *
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      phba->cfg_fcp_io_channel), GFP_KERNEL);
+=======
+				  (fof_vectors +
+				   phba->cfg_fcp_io_channel)), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 				  (fof_vectors +
 				   phba->cfg_fcp_io_channel)), GFP_KERNEL);
@@ -5768,7 +6040,10 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 		goto out_free_msix;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (lpfc_used_cpu == NULL) {
 		lpfc_used_cpu = kzalloc((sizeof(uint16_t) * lpfc_present_cpu),
 					 GFP_KERNEL);
@@ -5784,6 +6059,9 @@ lpfc_sli4_driver_resource_setup(struct lpfc_hba *phba)
 			lpfc_used_cpu[i] = LPFC_VECTOR_MAP_EMPTY;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Initialize io channels for round robin */
 	cpup = phba->sli4_hba.cpu_map;
@@ -5850,6 +6128,10 @@ lpfc_sli4_driver_resource_unset(struct lpfc_hba *phba)
 	phba->sli4_hba.num_present_cpu = 0;
 	phba->sli4_hba.num_online_cpu = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phba->sli4_hba.curr_disp_cpu = 0;
+>>>>>>> v3.18
 =======
 	phba->sli4_hba.curr_disp_cpu = 0;
 >>>>>>> v3.18
@@ -5977,11 +6259,17 @@ lpfc_setup_driver_resource_phase1(struct lpfc_hba *phba)
 	INIT_LIST_HEAD(&phba->fcf_conn_rec_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Initialize OAS configuration list */
 	spin_lock_init(&phba->devicelock);
 	INIT_LIST_HEAD(&phba->luns);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -6134,11 +6422,14 @@ lpfc_free_els_sgl_list(struct lpfc_hba *phba)
 {
 	LIST_HEAD(sglq_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Retrieve all els sgls from driver list */
 	spin_lock_irq(&phba->hbalock);
 	list_splice_init(&phba->sli4_hba.lpfc_sgl_list, &sglq_list);
 =======
+=======
+>>>>>>> v3.18
 	struct lpfc_sli_ring *pring = &phba->sli.ring[LPFC_ELS_RING];
 
 	/* Retrieve all els sgls from driver list */
@@ -6146,6 +6437,9 @@ lpfc_free_els_sgl_list(struct lpfc_hba *phba)
 	spin_lock(&pring->ring_lock);
 	list_splice_init(&phba->sli4_hba.lpfc_sgl_list, &sglq_list);
 	spin_unlock(&pring->ring_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&phba->hbalock);
 
@@ -6312,10 +6606,16 @@ lpfc_sli4_create_rpi_hdr(struct lpfc_hba *phba)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dmabuf->virt = dma_alloc_coherent(&phba->pcidev->dev,
 					  LPFC_HDR_TEMPLATE_SIZE,
 					  &dmabuf->phys,
 					  GFP_KERNEL);
+=======
+	dmabuf->virt = dma_zalloc_coherent(&phba->pcidev->dev,
+					   LPFC_HDR_TEMPLATE_SIZE,
+					   &dmabuf->phys, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	dmabuf->virt = dma_zalloc_coherent(&phba->pcidev->dev,
 					   LPFC_HDR_TEMPLATE_SIZE,
@@ -6327,7 +6627,10 @@ lpfc_sli4_create_rpi_hdr(struct lpfc_hba *phba)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dmabuf->virt, 0, LPFC_HDR_TEMPLATE_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!IS_ALIGNED(dmabuf->phys, LPFC_HDR_TEMPLATE_SIZE)) {
@@ -6719,6 +7022,7 @@ lpfc_sli_pci_mem_setup(struct lpfc_hba *phba)
 
 	/* Allocate memory for SLI-2 structures */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phba->slim2p.virt = dma_alloc_coherent(&pdev->dev,
 					       SLI2_SLIM_SIZE,
 					       &phba->slim2p.phys,
@@ -6728,11 +7032,16 @@ lpfc_sli_pci_mem_setup(struct lpfc_hba *phba)
 
 	memset(phba->slim2p.virt, 0, SLI2_SLIM_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	phba->slim2p.virt = dma_zalloc_coherent(&pdev->dev, SLI2_SLIM_SIZE,
 						&phba->slim2p.phys, GFP_KERNEL);
 	if (!phba->slim2p.virt)
 		goto out_iounmap;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	phba->mbox = phba->slim2p.virt + offsetof(struct lpfc_sli2_slim, mbx);
 	phba->mbox_ext = (phba->slim2p.virt +
@@ -7099,10 +7408,15 @@ lpfc_create_bootstrap_mbox(struct lpfc_hba *phba)
 	 */
 	bmbx_size = sizeof(struct lpfc_bmbx_create) + (LPFC_ALIGN_16_BYTE - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dmabuf->virt = dma_alloc_coherent(&phba->pcidev->dev,
 					  bmbx_size,
 					  &dmabuf->phys,
 					  GFP_KERNEL);
+=======
+	dmabuf->virt = dma_zalloc_coherent(&phba->pcidev->dev, bmbx_size,
+					   &dmabuf->phys, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	dmabuf->virt = dma_zalloc_coherent(&phba->pcidev->dev, bmbx_size,
 					   &dmabuf->phys, GFP_KERNEL);
@@ -7112,7 +7426,10 @@ lpfc_create_bootstrap_mbox(struct lpfc_hba *phba)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dmabuf->virt, 0, bmbx_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -7199,7 +7516,10 @@ lpfc_sli4_read_config(struct lpfc_hba *phba)
 	struct lpfc_rsrc_desc_fcfcoe *desc;
 	char *pdesc_0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t desc_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int length, i, rc = 0, rc2;
@@ -7297,6 +7617,7 @@ lpfc_sli4_read_config(struct lpfc_hba *phba)
 
 	/* Reset the DFT_HBA_Q_DEPTH to the max xri  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phba->cfg_hba_queue_depth >
 		(phba->sli4_hba.max_cfg_param.max_xri -
 			lpfc_sli4_get_els_iocb_cnt(phba)))
@@ -7304,6 +7625,8 @@ lpfc_sli4_read_config(struct lpfc_hba *phba)
 			phba->sli4_hba.max_cfg_param.max_xri -
 				lpfc_sli4_get_els_iocb_cnt(phba);
 =======
+=======
+>>>>>>> v3.18
 	length = phba->sli4_hba.max_cfg_param.max_xri -
 			lpfc_sli4_get_els_iocb_cnt(phba);
 	if (phba->cfg_hba_queue_depth > length) {
@@ -7312,6 +7635,9 @@ lpfc_sli4_read_config(struct lpfc_hba *phba)
 				phba->cfg_hba_queue_depth, length);
 		phba->cfg_hba_queue_depth = length;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bf_get(lpfc_sli_intf_if_type, &phba->sli4_hba.sli_intf) !=
@@ -7342,7 +7668,10 @@ lpfc_sli4_read_config(struct lpfc_hba *phba)
 	/* search for fc_fcoe resrouce descriptor */
 	get_func_cfg = &pmb->u.mqe.un.get_func_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc_count = get_func_cfg->func_cfg.rsrc_desc_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -7460,8 +7789,12 @@ lpfc_sli4_queue_verify(struct lpfc_hba *phba)
 	uint32_t cpu;
 	uint32_t i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t j = 0;
 
+=======
+	int fof_vectors = phba->cfg_fof ? 1 : 0;
+>>>>>>> v3.18
 =======
 	int fof_vectors = phba->cfg_fof ? 1 : 0;
 >>>>>>> v3.18
@@ -7479,15 +7812,21 @@ lpfc_sli4_queue_verify(struct lpfc_hba *phba)
 		if (cpu_online(cpu))
 			i++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		j++;
 	}
 	phba->sli4_hba.num_online_cpu = i;
 	phba->sli4_hba.num_present_cpu = j;
 =======
+=======
+>>>>>>> v3.18
 	}
 	phba->sli4_hba.num_online_cpu = i;
 	phba->sli4_hba.num_present_cpu = lpfc_present_cpu;
 	phba->sli4_hba.curr_disp_cpu = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i < cfg_fcp_io_channel) {
@@ -7500,7 +7839,11 @@ lpfc_sli4_queue_verify(struct lpfc_hba *phba)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cfg_fcp_io_channel >
+=======
+	if (cfg_fcp_io_channel + fof_vectors >
+>>>>>>> v3.18
 =======
 	if (cfg_fcp_io_channel + fof_vectors >
 >>>>>>> v3.18
@@ -7521,6 +7864,7 @@ lpfc_sli4_queue_verify(struct lpfc_hba *phba)
 				cfg_fcp_io_channel,
 				phba->sli4_hba.max_cfg_param.max_eq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg_fcp_io_channel = phba->sli4_hba.max_cfg_param.max_eq;
 	}
 
@@ -7530,11 +7874,16 @@ lpfc_sli4_queue_verify(struct lpfc_hba *phba)
 	phba->cfg_fcp_eq_count = cfg_fcp_io_channel;
 	phba->cfg_fcp_wq_count = cfg_fcp_io_channel;
 =======
+=======
+>>>>>>> v3.18
 		cfg_fcp_io_channel = phba->sli4_hba.max_cfg_param.max_eq -
 			fof_vectors;
 	}
 
 	/* The actual number of FCP event queues adopted */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	phba->cfg_fcp_io_channel = cfg_fcp_io_channel;
 
@@ -7744,6 +8093,12 @@ lpfc_sli4_queue_create(struct lpfc_hba *phba)
 	phba->sli4_hba.dat_rq = qdesc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Create the Queues needed for Flash Optimized Fabric operations */
+	if (phba->cfg_fof)
+		lpfc_fof_queue_create(phba);
+>>>>>>> v3.18
 =======
 	/* Create the Queues needed for Flash Optimized Fabric operations */
 	if (phba->cfg_fof)
@@ -7774,6 +8129,12 @@ lpfc_sli4_queue_destroy(struct lpfc_hba *phba)
 	int idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (phba->cfg_fof)
+		lpfc_fof_queue_destroy(phba);
+
+>>>>>>> v3.18
 =======
 	if (phba->cfg_fof)
 		lpfc_fof_queue_destroy(phba);
@@ -7819,6 +8180,7 @@ lpfc_sli4_queue_destroy(struct lpfc_hba *phba)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phba->pci_bar0_memmap_p) {
 		iounmap(phba->pci_bar0_memmap_p);
 		phba->pci_bar0_memmap_p = NULL;
@@ -7832,6 +8194,8 @@ lpfc_sli4_queue_destroy(struct lpfc_hba *phba)
 		phba->pci_bar4_memmap_p = NULL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Release FCP CQ mapping array */
@@ -7970,7 +8334,12 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"0523 Failed setup of fast-path EQ "
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"(%d), rc = 0x%x\n", fcp_eqidx, rc);
+=======
+					"(%d), rc = 0x%x\n", fcp_eqidx,
+					(uint32_t)rc);
+>>>>>>> v3.18
 =======
 					"(%d), rc = 0x%x\n", fcp_eqidx,
 					(uint32_t)rc);
@@ -8006,7 +8375,12 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"0527 Failed setup of fast-path FCP "
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"CQ (%d), rc = 0x%x\n", fcp_cqidx, rc);
+=======
+					"CQ (%d), rc = 0x%x\n", fcp_cqidx,
+					(uint32_t)rc);
+>>>>>>> v3.18
 =======
 					"CQ (%d), rc = 0x%x\n", fcp_cqidx,
 					(uint32_t)rc);
@@ -8051,7 +8425,12 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"0535 Failed setup of fast-path FCP "
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"WQ (%d), rc = 0x%x\n", fcp_wqidx, rc);
+=======
+					"WQ (%d), rc = 0x%x\n", fcp_wqidx,
+					(uint32_t)rc);
+>>>>>>> v3.18
 =======
 					"WQ (%d), rc = 0x%x\n", fcp_wqidx,
 					(uint32_t)rc);
@@ -8089,7 +8468,11 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"0529 Failed setup of slow-path mailbox CQ: "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"rc = 0x%x\n", rc);
+=======
+				"rc = 0x%x\n", (uint32_t)rc);
+>>>>>>> v3.18
 =======
 				"rc = 0x%x\n", (uint32_t)rc);
 >>>>>>> v3.18
@@ -8113,7 +8496,11 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"0531 Failed setup of slow-path ELS CQ: "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"rc = 0x%x\n", rc);
+=======
+				"rc = 0x%x\n", (uint32_t)rc);
+>>>>>>> v3.18
 =======
 				"rc = 0x%x\n", (uint32_t)rc);
 >>>>>>> v3.18
@@ -8161,7 +8548,11 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"0537 Failed setup of slow-path ELS WQ: "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"rc = 0x%x\n", rc);
+=======
+				"rc = 0x%x\n", (uint32_t)rc);
+>>>>>>> v3.18
 =======
 				"rc = 0x%x\n", (uint32_t)rc);
 >>>>>>> v3.18
@@ -8197,7 +8588,11 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"0541 Failed setup of Receive Queue: "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"rc = 0x%x\n", rc);
+=======
+				"rc = 0x%x\n", (uint32_t)rc);
+>>>>>>> v3.18
 =======
 				"rc = 0x%x\n", (uint32_t)rc);
 >>>>>>> v3.18
@@ -8211,9 +8606,12 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 			phba->sli4_hba.dat_rq->queue_id,
 			phba->sli4_hba.els_cq->queue_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (phba->cfg_fof) {
 		rc = lpfc_fof_queue_setup(phba);
@@ -8228,6 +8626,9 @@ lpfc_sli4_queue_setup(struct lpfc_hba *phba)
 
 out_destroy_els_rq:
 	lpfc_rq_destroy(phba, phba->sli4_hba.hdr_rq, phba->sli4_hba.dat_rq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_destroy_els_wq:
 	lpfc_wq_destroy(phba, phba->sli4_hba.els_wq);
@@ -8268,6 +8669,12 @@ lpfc_sli4_queue_unset(struct lpfc_hba *phba)
 	int fcp_qidx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Unset the queues created for Flash Optimized Fabric operations */
+	if (phba->cfg_fof)
+		lpfc_fof_queue_destroy(phba);
+>>>>>>> v3.18
 =======
 	/* Unset the queues created for Flash Optimized Fabric operations */
 	if (phba->cfg_fof)
@@ -8488,7 +8895,12 @@ lpfc_pci_function_reset(struct lpfc_hba *phba)
 	uint32_t rc = 0, if_type;
 	uint32_t shdr_status, shdr_add_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t rdy_chk, num_resets = 0, reset_again = 0;
+=======
+	uint32_t rdy_chk;
+	uint32_t port_reset = 0;
+>>>>>>> v3.18
 =======
 	uint32_t rdy_chk;
 	uint32_t port_reset = 0;
@@ -8533,10 +8945,13 @@ lpfc_pci_function_reset(struct lpfc_hba *phba)
 		break;
 	case LPFC_SLI_INTF_IF_TYPE_2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (num_resets = 0;
 		     num_resets < MAX_IF_TYPE_2_RESETS;
 		     num_resets++) {
 =======
+=======
+>>>>>>> v3.18
 wait:
 		/*
 		 * Poll the Port Status Register and wait for RDY for
@@ -8573,6 +8988,9 @@ wait:
 			/*
 			 * Reset the port now
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			reg_data.word0 = 0;
 			bf_set(lpfc_sliport_ctrl_end, &reg_data,
@@ -8584,6 +9002,7 @@ wait:
 			/* flush */
 			pci_read_config_word(phba->pcidev,
 					     PCI_DEVICE_ID, &devid);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/*
 			 * Poll the Port Status Register and wait for RDY for
@@ -8644,6 +9063,8 @@ wait:
 		msleep(100);
 		break;
 =======
+=======
+>>>>>>> v3.18
 
 			port_reset = 1;
 			msleep(20);
@@ -8654,6 +9075,9 @@ wait:
 		}
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case LPFC_SLI_INTF_IF_TYPE_1:
 	default:
@@ -8663,16 +9087,22 @@ wait:
 out:
 	/* Catch the not-ready port failure after a port reset. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num_resets >= MAX_IF_TYPE_2_RESETS) {
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"3317 HBA not functional: IP Reset Failed "
 				"after (%d) retries, try: "
 				"echo fw_reset > board_mode\n", num_resets);
 =======
+=======
+>>>>>>> v3.18
 	if (rc) {
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"3317 HBA not functional: IP Reset Failed "
 				"try: echo fw_reset > board_mode\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = -ENODEV;
 	}
@@ -8741,9 +9171,15 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 	 * SLI4 device.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pci_resource_start(pdev, 0)) {
 		phba->pci_bar0_map = pci_resource_start(pdev, 0);
 		bar0map_len = pci_resource_len(pdev, 0);
+=======
+	if (pci_resource_start(pdev, PCI_64BIT_BAR0)) {
+		phba->pci_bar0_map = pci_resource_start(pdev, PCI_64BIT_BAR0);
+		bar0map_len = pci_resource_len(pdev, PCI_64BIT_BAR0);
+>>>>>>> v3.18
 =======
 	if (pci_resource_start(pdev, PCI_64BIT_BAR0)) {
 		phba->pci_bar0_map = pci_resource_start(pdev, PCI_64BIT_BAR0);
@@ -8763,6 +9199,10 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		phba->pci_bar0_memmap_p = phba->sli4_hba.conf_regs_memmap_p;
+>>>>>>> v3.18
 =======
 		phba->pci_bar0_memmap_p = phba->sli4_hba.conf_regs_memmap_p;
 >>>>>>> v3.18
@@ -8789,7 +9229,11 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 
 	if ((if_type == LPFC_SLI_INTF_IF_TYPE_0) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (pci_resource_start(pdev, 2))) {
+=======
+	    (pci_resource_start(pdev, PCI_64BIT_BAR2))) {
+>>>>>>> v3.18
 =======
 	    (pci_resource_start(pdev, PCI_64BIT_BAR2))) {
 >>>>>>> v3.18
@@ -8798,8 +9242,13 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 		 * virtual address and setup the registers.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phba->pci_bar1_map = pci_resource_start(pdev, 2);
 		bar1map_len = pci_resource_len(pdev, 2);
+=======
+		phba->pci_bar1_map = pci_resource_start(pdev, PCI_64BIT_BAR2);
+		bar1map_len = pci_resource_len(pdev, PCI_64BIT_BAR2);
+>>>>>>> v3.18
 =======
 		phba->pci_bar1_map = pci_resource_start(pdev, PCI_64BIT_BAR2);
 		bar1map_len = pci_resource_len(pdev, PCI_64BIT_BAR2);
@@ -8812,6 +9261,10 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 			goto out_iounmap_conf;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		phba->pci_bar2_memmap_p = phba->sli4_hba.ctrl_regs_memmap_p;
+>>>>>>> v3.18
 =======
 		phba->pci_bar2_memmap_p = phba->sli4_hba.ctrl_regs_memmap_p;
 >>>>>>> v3.18
@@ -8820,7 +9273,11 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 
 	if ((if_type == LPFC_SLI_INTF_IF_TYPE_0) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (pci_resource_start(pdev, 4))) {
+=======
+	    (pci_resource_start(pdev, PCI_64BIT_BAR4))) {
+>>>>>>> v3.18
 =======
 	    (pci_resource_start(pdev, PCI_64BIT_BAR4))) {
 >>>>>>> v3.18
@@ -8829,8 +9286,13 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 		 * virtual address and setup the registers.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phba->pci_bar2_map = pci_resource_start(pdev, 4);
 		bar2map_len = pci_resource_len(pdev, 4);
+=======
+		phba->pci_bar2_map = pci_resource_start(pdev, PCI_64BIT_BAR4);
+		bar2map_len = pci_resource_len(pdev, PCI_64BIT_BAR4);
+>>>>>>> v3.18
 =======
 		phba->pci_bar2_map = pci_resource_start(pdev, PCI_64BIT_BAR4);
 		bar2map_len = pci_resource_len(pdev, PCI_64BIT_BAR4);
@@ -8843,6 +9305,10 @@ lpfc_sli4_pci_mem_setup(struct lpfc_hba *phba)
 			goto out_iounmap_ctrl;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		phba->pci_bar4_memmap_p = phba->sli4_hba.drbl_regs_memmap_p;
+>>>>>>> v3.18
 =======
 		phba->pci_bar4_memmap_p = phba->sli4_hba.drbl_regs_memmap_p;
 >>>>>>> v3.18
@@ -8900,9 +9366,15 @@ lpfc_sli4_pci_mem_unset(struct lpfc_hba *phba)
  *
  * This routine is invoked to enable the MSI-X interrupt vectors to device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * with SLI-3 interface specs. The kernel function pci_enable_msix() is
  * called to enable the MSI-X vectors. Note that pci_enable_msix(), once
  * invoked, enables either all or nothing, depending on the current
+=======
+ * with SLI-3 interface specs. The kernel function pci_enable_msix_exact()
+ * is called to enable the MSI-X vectors. Note that pci_enable_msix_exact(),
+ * once invoked, enables either all or nothing, depending on the current
+>>>>>>> v3.18
 =======
  * with SLI-3 interface specs. The kernel function pci_enable_msix_exact()
  * is called to enable the MSI-X vectors. Note that pci_enable_msix_exact(),
@@ -8932,6 +9404,7 @@ lpfc_sli_enable_msix(struct lpfc_hba *phba)
 
 	/* Configure MSI-X capability structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pci_enable_msix(phba->pcidev, phba->msix_entries,
 				ARRAY_SIZE(phba->msix_entries));
 	if (rc) {
@@ -8939,12 +9412,17 @@ lpfc_sli_enable_msix(struct lpfc_hba *phba)
 				"0420 PCI enable MSI-X failed (%d)\n", rc);
 		goto msi_fail_out;
 =======
+=======
+>>>>>>> v3.18
 	rc = pci_enable_msix_exact(phba->pcidev, phba->msix_entries,
 				   LPFC_MSIX_VECTORS);
 	if (rc) {
 		lpfc_printf_log(phba, KERN_INFO, LOG_INIT,
 				"0420 PCI enable MSI-X failed (%d)\n", rc);
 		goto vec_fail_out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	for (i = 0; i < LPFC_MSIX_VECTORS; i++)
@@ -9024,6 +9502,11 @@ msi_fail_out:
 	/* Unconfigure MSI-X capability structure */
 	pci_disable_msix(phba->pcidev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+vec_fail_out:
+>>>>>>> v3.18
 =======
 
 vec_fail_out:
@@ -9260,7 +9743,12 @@ lpfc_sli4_set_affinity(struct lpfc_hba *phba, int vectors)
 {
 	int i, idx, saved_chann, used_chann, cpu, phys_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int max_phys_id, num_io_channel, first_cpu;
+=======
+	int max_phys_id, min_phys_id;
+	int num_io_channel, first_cpu, chan;
+>>>>>>> v3.18
 =======
 	int max_phys_id, min_phys_id;
 	int num_io_channel, first_cpu, chan;
@@ -9283,6 +9771,10 @@ lpfc_sli4_set_affinity(struct lpfc_hba *phba, int vectors)
 
 	max_phys_id = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	min_phys_id = 0xff;
+>>>>>>> v3.18
 =======
 	min_phys_id = 0xff;
 >>>>>>> v3.18
@@ -9310,16 +9802,22 @@ lpfc_sli4_set_affinity(struct lpfc_hba *phba, int vectors)
 		if (cpup->phys_id > max_phys_id)
 			max_phys_id = cpup->phys_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpup++;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		if (cpup->phys_id < min_phys_id)
 			min_phys_id = cpup->phys_id;
 		cpup++;
 	}
 
 	phys_id = min_phys_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Now associate the HBA vectors with specific CPUs */
 	for (idx = 0; idx < vectors; idx++) {
@@ -9332,7 +9830,11 @@ lpfc_sli4_set_affinity(struct lpfc_hba *phba, int vectors)
 				phys_id++;
 				if (phys_id > max_phys_id)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					phys_id = 0;
+=======
+					phys_id = min_phys_id;
+>>>>>>> v3.18
 =======
 					phys_id = min_phys_id;
 >>>>>>> v3.18
@@ -9343,7 +9845,10 @@ lpfc_sli4_set_affinity(struct lpfc_hba *phba, int vectors)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Use round robin for scheduling */
 			phba->cfg_fcp_io_sched = LPFC_FCP_SCHED_ROUND_ROBIN;
 			chan = 0;
@@ -9356,6 +9861,9 @@ lpfc_sli4_set_affinity(struct lpfc_hba *phba, int vectors)
 					chan = 0;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 					"3329 Cannot set affinity:"
@@ -9395,7 +9903,11 @@ found:
 		phys_id++;
 		if (phys_id > max_phys_id)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phys_id = 0;
+=======
+			phys_id = min_phys_id;
+>>>>>>> v3.18
 =======
 			phys_id = min_phys_id;
 >>>>>>> v3.18
@@ -9409,7 +9921,11 @@ found:
 	 * assigned to other CPUs on the same phys_id.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i <= max_phys_id; i++) {
+=======
+	for (i = min_phys_id; i <= max_phys_id; i++) {
+>>>>>>> v3.18
 =======
 	for (i = min_phys_id; i <= max_phys_id; i++) {
 >>>>>>> v3.18
@@ -9495,16 +10011,22 @@ out:
 		lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
 				"3333 Set affinity mismatch:"
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"%d chann != %d cpus: %d vactors\n",
 				num_io_channel, phba->sli4_hba.num_present_cpu,
 				vectors);
 
 =======
+=======
+>>>>>>> v3.18
 				"%d chann != %d cpus: %d vectors\n",
 				num_io_channel, phba->sli4_hba.num_present_cpu,
 				vectors);
 
 	/* Enable using cpu affinity for scheduling */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	phba->cfg_fcp_io_sched = LPFC_FCP_SCHED_BY_CPU;
 	return 1;
@@ -9517,6 +10039,7 @@ out:
  *
  * This routine is invoked to enable the MSI-X interrupt vectors to device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * with SLI-4 interface spec. The kernel function pci_enable_msix() is called
  * to enable the MSI-X vectors. Note that pci_enable_msix(), once invoked,
  * enables either all or nothing, depending on the current availability of
@@ -9528,6 +10051,8 @@ out:
  * to do so results in a BUG_ON() and a device will be left with MSI-X
  * enabled and leaks its vectors.
 =======
+=======
+>>>>>>> v3.18
  * with SLI-4 interface spec. The kernel function pci_enable_msix_range()
  * is called to enable the MSI-X vectors. The device driver is responsible
  * for calling the individual request_irq() to register each MSI-X vector
@@ -9536,6 +10061,9 @@ out:
  * on all MSI-X vectors it has done request_irq() on before calling
  * pci_disable_msix(). Failure to do so results in a BUG_ON() and a device
  * will be left with MSI-X enabled and leaks its vectors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return codes
@@ -9554,6 +10082,7 @@ lpfc_sli4_enable_msix(struct lpfc_hba *phba)
 	/* Configure MSI-X capability structure */
 	vectors = phba->cfg_fcp_io_channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 enable_msix_vectors:
 	rc = pci_enable_msix(phba->pcidev, phba->sli4_hba.msix_entries,
 			     vectors);
@@ -9566,6 +10095,8 @@ enable_msix_vectors:
 		goto msi_fail_out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (phba->cfg_fof) {
 		phba->sli4_hba.msix_entries[index].entry = index;
 		vectors++;
@@ -9578,6 +10109,9 @@ enable_msix_vectors:
 		goto vec_fail_out;
 	}
 	vectors = rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Log MSI-X vector assignment */
@@ -9592,7 +10126,12 @@ enable_msix_vectors:
 	for (index = 0; index < vectors; index++) {
 		memset(&phba->sli4_hba.handler_name[index], 0, 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf((char *)&phba->sli4_hba.handler_name[index],
+=======
+		snprintf((char *)&phba->sli4_hba.handler_name[index],
+			 LPFC_SLI4_HANDLER_NAME_SZ,
+>>>>>>> v3.18
 =======
 		snprintf((char *)&phba->sli4_hba.handler_name[index],
 			 LPFC_SLI4_HANDLER_NAME_SZ,
@@ -9603,8 +10142,11 @@ enable_msix_vectors:
 		phba->sli4_hba.fcp_eq_hdl[index].phba = phba;
 		atomic_set(&phba->sli4_hba.fcp_eq_hdl[index].fcp_eq_in_use, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = request_irq(phba->sli4_hba.msix_entries[index].vector,
 =======
+=======
+>>>>>>> v3.18
 		if (phba->cfg_fof && (index == (vectors - 1)))
 			rc = request_irq(
 				phba->sli4_hba.msix_entries[index].vector,
@@ -9614,6 +10156,9 @@ enable_msix_vectors:
 		else
 			rc = request_irq(
 				phba->sli4_hba.msix_entries[index].vector,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 &lpfc_sli4_hba_intr_handler, IRQF_SHARED,
 				 (char *)&phba->sli4_hba.handler_name[index],
@@ -9627,6 +10172,12 @@ enable_msix_vectors:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (phba->cfg_fof)
+		vectors--;
+
+>>>>>>> v3.18
 =======
 	if (phba->cfg_fof)
 		vectors--;
@@ -9646,6 +10197,7 @@ enable_msix_vectors:
 cfg_fail_out:
 	/* free the irq already requested */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (--index; index >= 0; index--)
 		free_irq(phba->sli4_hba.msix_entries[index].vector,
 			 &phba->sli4_hba.fcp_eq_hdl[index]);
@@ -9654,6 +10206,8 @@ msi_fail_out:
 	/* Unconfigure MSI-X capability structure */
 	pci_disable_msix(phba->pcidev);
 =======
+=======
+>>>>>>> v3.18
 	for (--index; index >= 0; index--) {
 		irq_set_affinity_hint(phba->sli4_hba.msix_entries[index].
 					  vector, NULL);
@@ -9665,6 +10219,9 @@ msi_fail_out:
 	pci_disable_msix(phba->pcidev);
 
 vec_fail_out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -9683,11 +10240,14 @@ lpfc_sli4_disable_msix(struct lpfc_hba *phba)
 
 	/* Free up MSI-X multi-message vectors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (index = 0; index < phba->cfg_fcp_io_channel; index++)
 		free_irq(phba->sli4_hba.msix_entries[index].vector,
 			 &phba->sli4_hba.fcp_eq_hdl[index]);
 
 =======
+=======
+>>>>>>> v3.18
 	for (index = 0; index < phba->cfg_fcp_io_channel; index++) {
 		irq_set_affinity_hint(phba->sli4_hba.msix_entries[index].
 					  vector, NULL);
@@ -9698,6 +10258,9 @@ lpfc_sli4_disable_msix(struct lpfc_hba *phba)
 		free_irq(phba->sli4_hba.msix_entries[index].vector,
 			 &phba->sli4_hba.fcp_eq_hdl[index]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Disable MSI-X */
 	pci_disable_msix(phba->pcidev);
@@ -9749,11 +10312,17 @@ lpfc_sli4_enable_msi(struct lpfc_hba *phba)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->cfg_fof) {
 		phba->sli4_hba.fcp_eq_hdl[index].idx = index;
 		phba->sli4_hba.fcp_eq_hdl[index].phba = phba;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -9838,13 +10407,19 @@ lpfc_sli4_enable_intr(struct lpfc_hba *phba, uint32_t cfg_mode)
 					fcp_eq_in_use, 1);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (phba->cfg_fof) {
 				phba->sli4_hba.fcp_eq_hdl[index].idx = index;
 				phba->sli4_hba.fcp_eq_hdl[index].phba = phba;
 				atomic_set(&phba->sli4_hba.fcp_eq_hdl[index].
 					fcp_eq_in_use, 1);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -10157,6 +10732,10 @@ lpfc_get_sli4_parameters(struct lpfc_hba *phba, LPFC_MBOXQ_t *mboxq)
 	sli4_params->sge_supp_len = mbx_sli4_parameters->sge_supp_len;
 	sli4_params->loopbk_scope = bf_get(loopbk_scope, mbx_sli4_parameters);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sli4_params->oas_supported = bf_get(cfg_oas, mbx_sli4_parameters);
+>>>>>>> v3.18
 =======
 	sli4_params->oas_supported = bf_get(cfg_oas, mbx_sli4_parameters);
 >>>>>>> v3.18
@@ -10165,6 +10744,10 @@ lpfc_get_sli4_parameters(struct lpfc_hba *phba, LPFC_MBOXQ_t *mboxq)
 	sli4_params->wqv = bf_get(cfg_wqv, mbx_sli4_parameters);
 	sli4_params->rqv = bf_get(cfg_rqv, mbx_sli4_parameters);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sli4_params->wqsize = bf_get(cfg_wqsize, mbx_sli4_parameters);
+>>>>>>> v3.18
 =======
 	sli4_params->wqsize = bf_get(cfg_wqsize, mbx_sli4_parameters);
 >>>>>>> v3.18
@@ -10428,7 +11011,10 @@ lpfc_pci_remove_one_s3(struct pci_dev *pdev)
 	lpfc_sli_disable_intr(phba);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	scsi_host_put(shost);
@@ -10586,9 +11172,12 @@ static void
 lpfc_sli_prep_dev_for_recover(struct lpfc_hba *phba)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpfc_sli *psli = &phba->sli;
 	struct lpfc_sli_ring  *pring;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
@@ -10599,8 +11188,12 @@ lpfc_sli_prep_dev_for_recover(struct lpfc_hba *phba)
 	 * and let the SCSI mid-layer to retry them to recover.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pring = &psli->ring[psli->fcp_ring];
 	lpfc_sli_abort_iocb_ring(phba, pring);
+=======
+	lpfc_sli_abort_fcp_rings(phba);
+>>>>>>> v3.18
 =======
 	lpfc_sli_abort_fcp_rings(phba);
 >>>>>>> v3.18
@@ -11347,9 +11940,12 @@ static void
 lpfc_sli4_prep_dev_for_recover(struct lpfc_hba *phba)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpfc_sli *psli = &phba->sli;
 	struct lpfc_sli_ring  *pring;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lpfc_printf_log(phba, KERN_ERR, LOG_INIT,
@@ -11359,8 +11955,12 @@ lpfc_sli4_prep_dev_for_recover(struct lpfc_hba *phba)
 	 * and let the SCSI mid-layer to retry them to recover.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pring = &psli->ring[psli->fcp_ring];
 	lpfc_sli_abort_iocb_ring(phba, pring);
+=======
+	lpfc_sli_abort_fcp_rings(phba);
+>>>>>>> v3.18
 =======
 	lpfc_sli_abort_fcp_rings(phba);
 >>>>>>> v3.18
@@ -11815,7 +12415,10 @@ lpfc_io_resume(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * lpfc_sli4_oas_verify - Verify OAS is supported by this adapter
  * @phba: pointer to lpfc hba data structure.
@@ -11978,6 +12581,9 @@ lpfc_fof_queue_destroy(struct lpfc_hba *phba)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pci_device_id lpfc_id_table[] = {
 	{PCI_VENDOR_ID_EMULEX, PCI_DEVICE_ID_VIPER,
@@ -12091,7 +12697,10 @@ static struct pci_driver lpfc_driver = {
 	.probe		= lpfc_pci_probe_one,
 	.remove		= lpfc_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown	= lpfc_pci_remove_one,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.suspend        = lpfc_pci_suspend_one,
@@ -12154,13 +12763,19 @@ lpfc_init(void)
 
 	/* Initialize in case vector mapping is needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (cpu = 0; cpu < LPFC_MAX_CPU; cpu++)
 		lpfc_used_cpu[cpu] = LPFC_VECTOR_MAP_EMPTY;
 =======
+=======
+>>>>>>> v3.18
 	lpfc_used_cpu = NULL;
 	lpfc_present_cpu = 0;
 	for_each_present_cpu(cpu)
 		lpfc_present_cpu++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	error = pci_register_driver(&lpfc_driver);
@@ -12202,6 +12817,10 @@ lpfc_exit(void)
 		free_pages((unsigned long)_dump_buf_dif, _dump_buf_dif_order);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(lpfc_used_cpu);
+>>>>>>> v3.18
 =======
 	kfree(lpfc_used_cpu);
 >>>>>>> v3.18

@@ -13,10 +13,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -173,9 +176,15 @@ int dma_fifo_in(struct dma_fifo *fifo, const void *src, int n)
 
 	if (FAIL(fifo, addr_check(fifo->done, fifo->in, fifo->in + n) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fifo->avail < n,
 			"fifo corrupt: in:%u out:%u done:%u n:%d avail:%d",
 			fifo->in, fifo->out, fifo->done, n, fifo->avail))
+=======
+		 fifo->avail < n,
+		 "fifo corrupt: in:%u out:%u done:%u n:%d avail:%d",
+		 fifo->in, fifo->out, fifo->done, n, fifo->avail))
+>>>>>>> v3.18
 =======
 		 fifo->avail < n,
 		 "fifo corrupt: in:%u out:%u done:%u n:%d avail:%d",
@@ -246,6 +255,7 @@ int dma_fifo_out_pend(struct dma_fifo *fifo, struct dma_pending *pended)
 
 	if (FAIL(fifo, fifo->open > fifo->open_limit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"past open limit:%d (limit:%d)",
 			fifo->open, fifo->open_limit))
 		return -ENXIO;
@@ -253,12 +263,17 @@ int dma_fifo_out_pend(struct dma_fifo *fifo, struct dma_pending *pended)
 			"fifo out unaligned:%u (align:%u)",
 			fifo->out, fifo->align))
 =======
+=======
+>>>>>>> v3.18
 		 "past open limit:%d (limit:%d)",
 		 fifo->open, fifo->open_limit))
 		return -ENXIO;
 	if (FAIL(fifo, fifo->out & (fifo->align - 1),
 		 "fifo out unaligned:%u (align:%u)",
 		 fifo->out, fifo->align))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENXIO;
 
@@ -283,8 +298,13 @@ int dma_fifo_out_complete(struct dma_fifo *fifo, struct dma_pending *complete)
 
 	if (FAIL(fifo, list_empty(&fifo->pending) != (fifo->open == 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"pending list disagrees with open count:%d",
 			fifo->open))
+=======
+		 "pending list disagrees with open count:%d",
+		 fifo->open))
+>>>>>>> v3.18
 =======
 		 "pending list disagrees with open count:%d",
 		 fifo->open))
@@ -306,15 +326,21 @@ int dma_fifo_out_complete(struct dma_fifo *fifo, struct dma_pending *complete)
 
 		if (FAIL(fifo, pending->out != fifo->done ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 				addr_check(fifo->in, fifo->done, pending->next),
 				"in:%u out:%u done:%u saved:%u next:%u",
 				fifo->in, fifo->out, fifo->done, pending->out,
 				pending->next))
 =======
+=======
+>>>>>>> v3.18
 			 addr_check(fifo->in, fifo->done, pending->next),
 			 "in:%u out:%u done:%u saved:%u next:%u",
 			 fifo->in, fifo->out, fifo->done, pending->out,
 			 pending->next))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENXIO;
 
@@ -331,7 +357,11 @@ int dma_fifo_out_complete(struct dma_fifo *fifo, struct dma_pending *complete)
 		return -ENXIO;
 	if (FAIL(fifo, fifo->avail > fifo->size, "fifo avail:%d > size:%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fifo->avail, fifo->size))
+=======
+		 fifo->avail, fifo->size))
+>>>>>>> v3.18
 =======
 		 fifo->avail, fifo->size))
 >>>>>>> v3.18

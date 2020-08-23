@@ -19,12 +19,18 @@
 #include "ar-internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rxrpc_resend_timeout = 4;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Time till packet resend (in jiffies).
  */
 unsigned rxrpc_resend_timeout = 4 * HZ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int rxrpc_send_data(struct kiocb *iocb,
@@ -160,8 +166,13 @@ int rxrpc_client_sendmsg(struct kiocb *iocb, struct rxrpc_sock *rx,
 		service_id = rx->service_id;
 		if (msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct sockaddr_rxrpc *srx =
 				(struct sockaddr_rxrpc *) msg->msg_name;
+=======
+			DECLARE_SOCKADDR(struct sockaddr_rxrpc *, srx,
+					 msg->msg_name);
+>>>>>>> v3.18
 =======
 			DECLARE_SOCKADDR(struct sockaddr_rxrpc *, srx,
 					 msg->msg_name);
@@ -500,7 +511,11 @@ static void rxrpc_queue_packet(struct rxrpc_call *call, struct sk_buff *skb,
 
 	sp->need_resend = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sp->resend_at = jiffies + rxrpc_resend_timeout * HZ;
+=======
+	sp->resend_at = jiffies + rxrpc_resend_timeout;
+>>>>>>> v3.18
 =======
 	sp->resend_at = jiffies + rxrpc_resend_timeout;
 >>>>>>> v3.18
@@ -683,6 +698,10 @@ static int rxrpc_send_data(struct kiocb *iocb,
 		if (sp->remain <= 0 || (segment == 0 && !more)) {
 			struct rxrpc_connection *conn = call->conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			uint32_t seq;
+>>>>>>> v3.18
 =======
 			uint32_t seq;
 >>>>>>> v3.18
@@ -699,18 +718,24 @@ static int rxrpc_send_data(struct kiocb *iocb,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sp->hdr.epoch = conn->epoch;
 			sp->hdr.cid = call->cid;
 			sp->hdr.callNumber = call->call_id;
 			sp->hdr.seq =
 				htonl(atomic_inc_return(&call->sequence));
 =======
+=======
+>>>>>>> v3.18
 			seq = atomic_inc_return(&call->sequence);
 
 			sp->hdr.epoch = conn->epoch;
 			sp->hdr.cid = call->cid;
 			sp->hdr.callNumber = call->call_id;
 			sp->hdr.seq = htonl(seq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sp->hdr.serial =
 				htonl(atomic_inc_return(&conn->serial));
@@ -727,6 +752,11 @@ static int rxrpc_send_data(struct kiocb *iocb,
 					    call->acks_winsz) > 1)
 				sp->hdr.flags |= RXRPC_MORE_PACKETS;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (more && seq & 1)
+				sp->hdr.flags |= RXRPC_REQUEST_ACK;
+>>>>>>> v3.18
 =======
 			if (more && seq & 1)
 				sp->hdr.flags |= RXRPC_REQUEST_ACK;

@@ -27,7 +27,12 @@
 #include <net/mac80211.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl1271_tm_cmd(struct ieee80211_hw *hw, void *data, int len);
+=======
+int wl1271_tm_cmd(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+		  void *data, int len);
+>>>>>>> v3.18
 =======
 int wl1271_tm_cmd(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 		  void *data, int len);

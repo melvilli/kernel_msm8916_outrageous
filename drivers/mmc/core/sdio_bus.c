@@ -17,6 +17,10 @@
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_domain.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_domain.h>
 >>>>>>> v3.18
@@ -30,10 +34,13 @@
 #include "sdio_bus.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMC_EMBEDDED_SDIO
 #include <linux/mmc/host.h>
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* show configuration fields */
@@ -46,7 +53,12 @@ field##_show(struct device *dev, struct device_attribute *attr, char *buf)				\
 	func = dev_to_sdio_func (dev);					\
 	return sprintf (buf, format_string, func->field);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}									\
+static DEVICE_ATTR_RO(field)
+>>>>>>> v3.18
 =======
 }									\
 static DEVICE_ATTR_RO(field)
@@ -64,6 +76,7 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr, 
 			func->class, func->vendor, func->device);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute sdio_dev_attrs[] = {
 	__ATTR_RO(class),
@@ -73,6 +86,8 @@ static struct device_attribute sdio_dev_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static struct attribute *sdio_dev_attrs[] = {
@@ -83,6 +98,9 @@ static struct attribute *sdio_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(sdio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct sdio_device_id *sdio_match_one(struct sdio_func *func,
@@ -204,8 +222,13 @@ static int sdio_bus_remove(struct device *dev)
 
 	if (func->irq_handler) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("WARNING: driver %s did not remove "
 			"its interrupt handler!\n", drv->name);
+=======
+		pr_warn("WARNING: driver %s did not remove its interrupt handler!\n",
+			drv->name);
+>>>>>>> v3.18
 =======
 		pr_warn("WARNING: driver %s did not remove its interrupt handler!\n",
 			drv->name);
@@ -229,6 +252,7 @@ static int sdio_bus_remove(struct device *dev)
 #ifdef CONFIG_PM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 static int pm_no_operation(struct device *dev)
 {
@@ -248,12 +272,17 @@ static const struct dev_pm_ops sdio_bus_pm_ops = {
 		pm_generic_runtime_resume,
 		pm_generic_runtime_idle
 =======
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops sdio_bus_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(pm_generic_suspend, pm_generic_resume)
 	SET_RUNTIME_PM_OPS(
 		pm_generic_runtime_suspend,
 		pm_generic_runtime_resume,
 		NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	)
 };
@@ -269,7 +298,11 @@ static const struct dev_pm_ops sdio_bus_pm_ops = {
 static struct bus_type sdio_bus_type = {
 	.name		= "sdio",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= sdio_dev_attrs,
+=======
+	.dev_groups	= sdio_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= sdio_dev_groups,
 >>>>>>> v3.18
@@ -318,6 +351,7 @@ static void sdio_release_func(struct device *dev)
 	struct sdio_func *func = dev_to_sdio_func(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMC_EMBEDDED_SDIO
 	/*
 	 * If this device is embedded then we never allocated
@@ -326,6 +360,9 @@ static void sdio_release_func(struct device *dev)
 	if (!func->card->host->embedded_sdio_data.funcs)
 #endif
 		sdio_free_func_cis(func);
+=======
+	sdio_free_func_cis(func);
+>>>>>>> v3.18
 =======
 	sdio_free_func_cis(func);
 >>>>>>> v3.18
@@ -364,8 +401,12 @@ static void sdio_acpi_set_handle(struct sdio_func *func)
 	u64 addr = (host->slotno << 16) | func->num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_HANDLE_SET(&func->dev,
 			acpi_get_child(ACPI_HANDLE(host->parent), addr));
+=======
+	acpi_preset_companion(&func->dev, ACPI_COMPANION(host->parent), addr);
+>>>>>>> v3.18
 =======
 	acpi_preset_companion(&func->dev, ACPI_COMPANION(host->parent), addr);
 >>>>>>> v3.18
@@ -388,7 +429,11 @@ int sdio_add_func(struct sdio_func *func)
 	if (ret == 0) {
 		sdio_func_set_present(func);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_dev_pm_attach(&func->dev, false);
+=======
+		dev_pm_domain_attach(&func->dev, false);
+>>>>>>> v3.18
 =======
 		dev_pm_domain_attach(&func->dev, false);
 >>>>>>> v3.18
@@ -409,7 +454,11 @@ void sdio_remove_func(struct sdio_func *func)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_dev_pm_detach(&func->dev, false);
+=======
+	dev_pm_domain_detach(&func->dev, false);
+>>>>>>> v3.18
 =======
 	dev_pm_domain_detach(&func->dev, false);
 >>>>>>> v3.18

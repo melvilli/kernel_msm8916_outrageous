@@ -22,7 +22,10 @@
 
 #include <asm/traps.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/macintosh.h>
@@ -58,7 +61,11 @@ static void psc_debug_dump(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void psc_dma_die_die_die(void)
+=======
+static __init void psc_dma_die_die_die(void)
+>>>>>>> v3.18
 =======
 static __init void psc_dma_die_die_die(void)
 >>>>>>> v3.18

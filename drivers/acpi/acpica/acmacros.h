@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -68,6 +72,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * printf() format helper. This macros is a workaround for the difficulties
  * with emitting 64-bit integers and 64-bit pointers with the same code
  * for both 32-bit and 64-bit hosts.
@@ -77,6 +82,8 @@
 
 #define ACPI_FORMAT_UINT64(i)           ACPI_HIDWORD(i), ACPI_LODWORD(i)
 =======
+=======
+>>>>>>> v3.18
  * printf() format helpers. These macros are workarounds for the difficulties
  * with emitting 64-bit integers and 64-bit pointers with the same code
  * for both 32-bit and 64-bit hosts.
@@ -93,6 +100,9 @@
 #define ACPI_FORMAT_TO_UINT(i)          (u32) (i)
 #define ACPI_PRINTF_UINT                 "0x%8.8X"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -394,16 +404,22 @@
  * These macros are used for both the debug and non-debug versions of the code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_ERROR_NAMESPACE(s, e)      acpi_ut_namespace_error (AE_INFO, s, e);
 #define ACPI_ERROR_METHOD(s, n, p, e)   acpi_ut_method_error (AE_INFO, s, n, p, e);
 #define ACPI_WARN_PREDEFINED(plist)     acpi_ut_predefined_warning plist
 #define ACPI_INFO_PREDEFINED(plist)     acpi_ut_predefined_info plist
 =======
+=======
+>>>>>>> v3.18
 #define ACPI_ERROR_NAMESPACE(s, e)          acpi_ut_namespace_error (AE_INFO, s, e);
 #define ACPI_ERROR_METHOD(s, n, p, e)       acpi_ut_method_error (AE_INFO, s, n, p, e);
 #define ACPI_WARN_PREDEFINED(plist)         acpi_ut_predefined_warning plist
 #define ACPI_INFO_PREDEFINED(plist)         acpi_ut_predefined_info plist
 #define ACPI_BIOS_ERROR_PREDEFINED(plist)   acpi_ut_predefined_bios_error plist
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else
@@ -415,6 +431,10 @@
 #define ACPI_WARN_PREDEFINED(plist)
 #define ACPI_INFO_PREDEFINED(plist)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ACPI_BIOS_ERROR_PREDEFINED(plist)
+>>>>>>> v3.18
 =======
 #define ACPI_BIOS_ERROR_PREDEFINED(plist)
 >>>>>>> v3.18
@@ -439,6 +459,7 @@
 #endif
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Memory allocation tracking (DEBUG ONLY)
  */
@@ -471,6 +492,8 @@
 #endif				/* ACPI_DBG_TRACK_ALLOCATIONS */
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Macros used for ACPICA utilities only

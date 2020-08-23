@@ -231,11 +231,17 @@ enum ieee80211_radiotap_type {
 #define	IEEE80211_CHAN_DYN	0x0400	/* Dynamic CCK-OFDM channel */
 #define	IEEE80211_CHAN_GFSK	0x0800	/* GFSK channel (FHSS PHY) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	IEEE80211_CHAN_GSM	0x1000	/* GSM (900 MHz) */
 #define	IEEE80211_CHAN_STURBO	0x2000	/* Static Turbo */
 #define	IEEE80211_CHAN_HALF	0x4000	/* Half channel (10 MHz wide) */
 #define	IEEE80211_CHAN_QUARTER	0x8000	/* Quarter channel (5 MHz wide) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* For IEEE80211_RADIOTAP_FLAGS */
@@ -277,6 +283,10 @@ enum ieee80211_radiotap_type {
 #define IEEE80211_RADIOTAP_MCS_HAVE_FMT		0x08
 #define IEEE80211_RADIOTAP_MCS_HAVE_FEC		0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IEEE80211_RADIOTAP_MCS_HAVE_STBC	0x20
+>>>>>>> v3.18
 =======
 #define IEEE80211_RADIOTAP_MCS_HAVE_STBC	0x20
 >>>>>>> v3.18
@@ -290,13 +300,19 @@ enum ieee80211_radiotap_type {
 #define IEEE80211_RADIOTAP_MCS_FMT_GF		0x08
 #define IEEE80211_RADIOTAP_MCS_FEC_LDPC		0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IEEE80211_RADIOTAP_MCS_STBC_MASK	0x60
 #define		IEEE80211_RADIOTAP_MCS_STBC_1	1
 #define		IEEE80211_RADIOTAP_MCS_STBC_2	2
 #define		IEEE80211_RADIOTAP_MCS_STBC_3	3
 
 #define IEEE80211_RADIOTAP_MCS_STBC_SHIFT	5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* For IEEE80211_RADIOTAP_AMPDU_STATUS */
@@ -326,11 +342,17 @@ enum ieee80211_radiotap_type {
 #define IEEE80211_RADIOTAP_VHT_FLAG_BEAMFORMED			0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IEEE80211_RADIOTAP_CODING_LDPC_USER0			0x01
 #define IEEE80211_RADIOTAP_CODING_LDPC_USER1			0x02
 #define IEEE80211_RADIOTAP_CODING_LDPC_USER2			0x04
 #define IEEE80211_RADIOTAP_CODING_LDPC_USER3			0x08
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* helpers */

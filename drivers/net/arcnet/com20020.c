@@ -150,7 +150,10 @@ int com20020_check(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int com20020_set_hwaddr(struct net_device *dev, void *addr)
 {
 	int ioaddr = dev->base_addr;
@@ -164,6 +167,9 @@ static int com20020_set_hwaddr(struct net_device *dev, void *addr)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const struct net_device_ops com20020_netdev_ops = {
 	.ndo_open	= arcnet_open,
@@ -171,6 +177,10 @@ const struct net_device_ops com20020_netdev_ops = {
 	.ndo_start_xmit = arcnet_send_packet,
 	.ndo_tx_timeout = arcnet_timeout,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_set_mac_address = com20020_set_hwaddr,
+>>>>>>> v3.18
 =======
 	.ndo_set_mac_address = com20020_set_hwaddr,
 >>>>>>> v3.18

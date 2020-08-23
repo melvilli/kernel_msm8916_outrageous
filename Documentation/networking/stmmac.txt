@@ -124,12 +124,15 @@ struct plat_stmmacenet_data {
 	int pmt;
 	int force_sf_dma_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int riwt_off;
 	void (*fix_mac_speed)(void *priv, unsigned int speed);
 	void (*bus_setup)(void __iomem *ioaddr);
 	int (*init)(struct platform_device *pdev);
 	void (*exit)(struct platform_device *pdev);
 =======
+=======
+>>>>>>> v3.18
 	int force_thresh_dma_mode;
 	int riwt_off;
 	void (*fix_mac_speed)(void *priv, unsigned int speed);
@@ -137,6 +140,9 @@ struct plat_stmmacenet_data {
 	void *(*setup)(struct platform_device *pdev);
 	int (*init)(struct platform_device *pdev, void *priv);
 	void (*exit)(struct platform_device *pdev, void *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *custom_cfg;
 	void *custom_data;
@@ -170,6 +176,11 @@ Where:
  o force_sf_dma_mode: force DMA to use the Store and Forward mode
 		     instead of the Threshold.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ o force_thresh_dma_mode: force DMA to use the Threshold mode other than
+		     the Store and Forward mode.
+>>>>>>> v3.18
 =======
  o force_thresh_dma_mode: force DMA to use the Threshold mode other than
 		     the Store and Forward mode.
@@ -182,6 +193,7 @@ Where:
 	     this field is used to configure the AMBA  bridge to generate more
 	     efficient STBus traffic.
 <<<<<<< HEAD
+<<<<<<< HEAD
  o init/exit: callbacks used for calling a custom initialization;
 	     this is sometime necessary on some platforms (e.g. ST boxes)
 	     where the HW needs to have set some PIO lines or system cfg
@@ -190,6 +202,8 @@ Where:
 			   while initializing the resources.
  o bsp_priv: another private poiter.
 =======
+=======
+>>>>>>> v3.18
  o setup/init/exit: callbacks used for calling a custom initialization;
 	     this is sometime necessary on some platforms (e.g. ST boxes)
 	     where the HW needs to have set some PIO lines or system cfg
@@ -200,6 +214,9 @@ Where:
  o custom_cfg/custom_data: this is a custom configuration that can be passed
 			   while initializing the resources.
  o bsp_priv: another private pointer.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 For MDIO bus The we have:
@@ -297,7 +314,11 @@ reset procedure etc).
  o dwmac1000.h: specific header file for the GMAC;
  o dwmac100_core: MAC 100 core and dma code;
 <<<<<<< HEAD
+<<<<<<< HEAD
  o dwmac100_dma.c: dma funtions for the MAC chip;
+=======
+ o dwmac100_dma.c: dma functions for the MAC chip;
+>>>>>>> v3.18
 =======
  o dwmac100_dma.c: dma functions for the MAC chip;
 >>>>>>> v3.18
@@ -394,7 +415,11 @@ Auto-negotiated Link Parter Ability.
  o XGMAC is not supported.
  o Complete the TBI & RTBI support.
 <<<<<<< HEAD
+<<<<<<< HEAD
  o extened VLAN support for 3.70a SYNP GMAC.
+=======
+ o extend VLAN support for 3.70a SYNP GMAC.
+>>>>>>> v3.18
 =======
  o extend VLAN support for 3.70a SYNP GMAC.
 >>>>>>> v3.18

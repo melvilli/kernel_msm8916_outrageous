@@ -93,6 +93,7 @@ void __iounmap(volatile void __iomem *io_addr)
 EXPORT_SYMBOL(__iounmap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 int pci_ioremap_io(unsigned int offset, phys_addr_t phys_addr)
 {
@@ -108,6 +109,8 @@ EXPORT_SYMBOL_GPL(pci_ioremap_io);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __iomem *ioremap_cache(phys_addr_t phys_addr, size_t size)
 {
 	/* For normal memory we already have a cacheable mapping. */
@@ -120,6 +123,7 @@ void __iomem *ioremap_cache(phys_addr_t phys_addr, size_t size)
 EXPORT_SYMBOL(ioremap_cache);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_ARM64_64K_PAGES
 static pte_t bm_pte[PTRS_PER_PTE] __page_aligned_bss;
 #endif
@@ -129,6 +133,8 @@ static inline pmd_t * __init early_ioremap_pmd(unsigned long addr)
 	pgd_t *pgd;
 	pud_t *pud;
 =======
+=======
+>>>>>>> v3.18
 static pte_t bm_pte[PTRS_PER_PTE] __page_aligned_bss;
 #if CONFIG_ARM64_PGTABLE_LEVELS > 2
 static pmd_t bm_pmd[PTRS_PER_PMD] __page_aligned_bss;
@@ -140,14 +146,20 @@ static pud_t bm_pud[PTRS_PER_PUD] __page_aligned_bss;
 static inline pud_t * __init early_ioremap_pud(unsigned long addr)
 {
 	pgd_t *pgd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pgd = pgd_offset_k(addr);
 	BUG_ON(pgd_none(*pgd) || pgd_bad(*pgd));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pud = pud_offset(pgd, addr);
 =======
+=======
+>>>>>>> v3.18
 	return pud_offset(pgd, addr);
 }
 
@@ -155,6 +167,9 @@ static inline pmd_t * __init early_ioremap_pmd(unsigned long addr)
 {
 	pud_t *pud = early_ioremap_pud(addr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON(pud_none(*pud) || pud_bad(*pud));
 
@@ -173,6 +188,7 @@ static inline pte_t * __init early_ioremap_pte(unsigned long addr)
 void __init early_ioremap_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_t *pmd;
 
 	pmd = early_ioremap_pmd(fix_to_virt(FIX_BTMAP_BEGIN));
@@ -181,6 +197,8 @@ void __init early_ioremap_init(void)
 	pmd_populate_kernel(&init_mm, pmd, bm_pte);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	pgd_t *pgd;
 	pud_t *pud;
 	pmd_t *pmd;
@@ -193,6 +211,9 @@ void __init early_ioremap_init(void)
 	pmd = pmd_offset(pud, addr);
 	pmd_populate_kernel(&init_mm, pmd, bm_pte);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The boot-ioremap range spans multiple pmds, for which

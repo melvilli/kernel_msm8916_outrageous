@@ -34,7 +34,10 @@ config TCG_TIS
 	  M here; the module will be called tpm_tis.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TCG_TIS_I2C_ATMEL
 	tristate "TPM Interface Specification 1.2 Interface (I2C - Atmel)"
 	depends on I2C
@@ -44,6 +47,9 @@ config TCG_TIS_I2C_ATMEL
 	  To compile this driver as a module, choose M here; the module will
 	  be called tpm_tis_i2c_atmel.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TCG_TIS_I2C_INFINEON
 	tristate "TPM Interface Specification 1.2 Interface (I2C - Infineon)"
@@ -55,8 +61,11 @@ config TCG_TIS_I2C_INFINEON
 	  Linux.
 	  To compile this driver as a module, choose M here; the module
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  will be called tpm_tis_i2c_infineon.
 =======
+=======
+>>>>>>> v3.18
 	  will be called tpm_i2c_infineon.
 
 config TCG_TIS_I2C_NUVOTON
@@ -68,6 +77,9 @@ config TCG_TIS_I2C_NUVOTON
 	  from within Linux.
 	  To compile this driver as a module, choose M here; the module
 	  will be called tpm_i2c_nuvoton.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config TCG_NSC
@@ -109,6 +121,7 @@ config TCG_IBMVTPM
 
 config TCG_ST33_I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
         tristate "STMicroelectronics ST33 I2C TPM"
         depends on I2C
         depends on GPIOLIB
@@ -124,6 +137,8 @@ config TCG_TPMD_DEV
 	---help---
 	  Enables the TPM emulator driver
 =======
+=======
+>>>>>>> v3.18
 	tristate "STMicroelectronics ST33 I2C TPM"
 	depends on I2C
 	depends on GPIOLIB
@@ -144,6 +159,9 @@ config TCG_XEN
 	  the Xen source repository for more details.
 	  To compile this driver as a module, choose M here; the module
 	  will be called xen-tpmfront.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # TCG_TPM

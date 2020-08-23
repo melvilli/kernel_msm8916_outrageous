@@ -147,7 +147,11 @@ static void gsta_gpio_setup(struct gsta_gpio *chip) /* called from probe */
 	gpio->base = gpio_base;
 	gpio->ngpio = GSTA_NR_GPIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio->can_sleep = 0;
+=======
+	gpio->can_sleep = false;
+>>>>>>> v3.18
 =======
 	gpio->can_sleep = false;
 >>>>>>> v3.18
@@ -366,7 +370,11 @@ static int gsta_probe(struct platform_device *dev)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = *(struct pci_dev **)(dev->dev.platform_data);
+=======
+	pdev = *(struct pci_dev **)dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	pdev = *(struct pci_dev **)dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -380,15 +388,21 @@ static int gsta_probe(struct platform_device *dev)
 
 	chip = devm_kzalloc(&dev->dev, sizeof(*chip), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->dev = &dev->dev;
 	chip->reg_base = devm_request_and_ioremap(&dev->dev, res);
 =======
+=======
+>>>>>>> v3.18
 	if (!chip)
 		return -ENOMEM;
 	chip->dev = &dev->dev;
 	chip->reg_base = devm_ioremap_resource(&dev->dev, res);
 	if (IS_ERR(chip->reg_base))
 		return PTR_ERR(chip->reg_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < GSTA_NR_BLOCKS; i++) {

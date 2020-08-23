@@ -11,10 +11,13 @@ Required properties:
           number for SPI.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Example:
 
 codec: wm8737@1a {
 =======
+=======
+>>>>>>> v3.18
 Pins on the device (for linking into audio routes):
 
   * LOUT1
@@ -40,6 +43,9 @@ Pins on the device (for linking into audio routes):
 Example:
 
 codec: wm8753@1a {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	compatible = "wlf,wm8753";
 	reg = <0x1a>;

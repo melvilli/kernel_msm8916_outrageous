@@ -23,15 +23,21 @@
 #include <linux/irqdomain.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
 #include <linux/platform_data/gpio-rcar.h>
 #include <linux/platform_device.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/pinctrl/consumer.h>
 #include <linux/platform_data/gpio-rcar.h>
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/slab.h>
@@ -58,6 +64,12 @@ struct gpio_rcar_priv {
 #define EDGLEVEL 0x24
 #define FILONOFF 0x28
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BOTHEDGE 0x4c
+
+#define RCAR_MAX_GPIO_PER_BANK		32
+>>>>>>> v3.18
 =======
 #define BOTHEDGE 0x4c
 
@@ -106,7 +118,12 @@ static void gpio_rcar_config_interrupt_input_mode(struct gpio_rcar_priv *p,
 						  unsigned int hwirq,
 						  bool active_high_rising_edge,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  bool level_trigger)
+=======
+						  bool level_trigger,
+						  bool both)
+>>>>>>> v3.18
 =======
 						  bool level_trigger,
 						  bool both)
@@ -128,11 +145,17 @@ static void gpio_rcar_config_interrupt_input_mode(struct gpio_rcar_priv *p,
 	gpio_rcar_modify_bit(p, EDGLEVEL, hwirq, !level_trigger);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Select one edge or both edges in BOTHEDGE */
 	if (p->config.has_both_edge_trigger)
 		gpio_rcar_modify_bit(p, BOTHEDGE, hwirq, both);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Select "Interrupt Input Mode" in IOINTSEL */
 	gpio_rcar_modify_bit(p, IOINTSEL, hwirq, true);
@@ -154,6 +177,7 @@ static int gpio_rcar_irq_set_type(struct irq_data *d, unsigned int type)
 	switch (type & IRQ_TYPE_SENSE_MASK) {
 	case IRQ_TYPE_LEVEL_HIGH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_rcar_config_interrupt_input_mode(p, hwirq, true, true);
 		break;
 	case IRQ_TYPE_LEVEL_LOW:
@@ -165,6 +189,8 @@ static int gpio_rcar_irq_set_type(struct irq_data *d, unsigned int type)
 	case IRQ_TYPE_EDGE_FALLING:
 		gpio_rcar_config_interrupt_input_mode(p, hwirq, false, false);
 =======
+=======
+>>>>>>> v3.18
 		gpio_rcar_config_interrupt_input_mode(p, hwirq, true, true,
 						      false);
 		break;
@@ -185,6 +211,9 @@ static int gpio_rcar_irq_set_type(struct irq_data *d, unsigned int type)
 			return -EINVAL;
 		gpio_rcar_config_interrupt_input_mode(p, hwirq, true, false,
 						      true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -200,7 +229,12 @@ static irqreturn_t gpio_rcar_irq_handler(int irq, void *dev_id)
 	unsigned int offset, irqs_handled = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((pending = gpio_rcar_read(p, INTDT))) {
+=======
+	while ((pending = gpio_rcar_read(p, INTDT) &
+			  gpio_rcar_read(p, INTMSK))) {
+>>>>>>> v3.18
 =======
 	while ((pending = gpio_rcar_read(p, INTDT) &
 			  gpio_rcar_read(p, INTMSK))) {
@@ -269,8 +303,11 @@ static int gpio_rcar_direction_input(struct gpio_chip *chip, unsigned offset)
 static int gpio_rcar_get(struct gpio_chip *chip, unsigned offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (int)(gpio_rcar_read(gpio_to_priv(chip), INDT) & BIT(offset));
 =======
+=======
+>>>>>>> v3.18
 	u32 bit = BIT(offset);
 
 	/* testing on r8a7790 shows that INDT does not show correct pin state
@@ -279,6 +316,9 @@ static int gpio_rcar_get(struct gpio_chip *chip, unsigned offset)
 		return !!(gpio_rcar_read(gpio_to_priv(chip), OUTDT) & bit);
 	else
 		return !!(gpio_rcar_read(gpio_to_priv(chip), INDT) & bit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -307,6 +347,7 @@ static int gpio_rcar_to_irq(struct gpio_chip *chip, unsigned offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gpio_rcar_irq_domain_map(struct irq_domain *h, unsigned int virq,
 				 irq_hw_number_t hw)
 {
@@ -318,6 +359,8 @@ static int gpio_rcar_irq_domain_map(struct irq_domain *h, unsigned int virq,
 	irq_set_chip_and_handler(virq, &p->irq_chip, handle_level_irq);
 	set_irq_flags(virq, IRQF_VALID); /* kill me now */
 =======
+=======
+>>>>>>> v3.18
 static int gpio_rcar_irq_domain_map(struct irq_domain *h, unsigned int irq,
 				 irq_hw_number_t hwirq)
 {
@@ -328,6 +371,9 @@ static int gpio_rcar_irq_domain_map(struct irq_domain *h, unsigned int irq,
 	irq_set_chip_data(irq, h->host_data);
 	irq_set_chip_and_handler(irq, &p->irq_chip, handle_level_irq);
 	set_irq_flags(irq, IRQF_VALID); /* kill me now */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -335,12 +381,15 @@ static int gpio_rcar_irq_domain_map(struct irq_domain *h, unsigned int irq,
 static struct irq_domain_ops gpio_rcar_irq_domain_ops = {
 	.map	= gpio_rcar_irq_domain_map,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static int gpio_rcar_probe(struct platform_device *pdev)
 {
 	struct gpio_rcar_config *pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	.xlate	= irq_domain_xlate_twocell,
 };
 
@@ -411,11 +460,15 @@ static int gpio_rcar_parse_pdata(struct gpio_rcar_priv *p)
 
 static int gpio_rcar_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct gpio_rcar_priv *p;
 	struct resource *io, *irq;
 	struct gpio_chip *gpio_chip;
 	struct irq_chip *irq_chip;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const char *name = dev_name(&pdev->dev);
 	int ret;
@@ -424,17 +477,23 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	if (!p) {
 		dev_err(&pdev->dev, "failed to allocate driver data\n");
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	const char *name = dev_name(dev);
 	int ret;
 
 	p = devm_kzalloc(dev, sizeof(*p), GFP_KERNEL);
 	if (!p) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENOMEM;
 		goto err0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* deal with driver instance configuration */
 	if (pdata)
@@ -445,6 +504,8 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	spin_lock_init(&p->lock);
 
 =======
+=======
+>>>>>>> v3.18
 	p->pdev = pdev;
 	spin_lock_init(&p->lock);
 
@@ -458,13 +519,20 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	pm_runtime_enable(dev);
 	pm_runtime_get_sync(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	io = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 
 	if (!io || !irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "missing IRQ or IOMEM\n");
+=======
+		dev_err(dev, "missing IRQ or IOMEM\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "missing IRQ or IOMEM\n");
 >>>>>>> v3.18
@@ -473,10 +541,16 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->base = devm_ioremap_nocache(&pdev->dev, io->start,
 				       resource_size(io));
 	if (!p->base) {
 		dev_err(&pdev->dev, "failed to remap I/O memory\n");
+=======
+	p->base = devm_ioremap_nocache(dev, io->start, resource_size(io));
+	if (!p->base) {
+		dev_err(dev, "failed to remap I/O memory\n");
+>>>>>>> v3.18
 =======
 	p->base = devm_ioremap_nocache(dev, io->start, resource_size(io));
 	if (!p->base) {
@@ -496,6 +570,10 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	gpio_chip->to_irq = gpio_rcar_to_irq;
 	gpio_chip->label = name;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gpio_chip->dev = dev;
+>>>>>>> v3.18
 =======
 	gpio_chip->dev = dev;
 >>>>>>> v3.18
@@ -508,10 +586,16 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	irq_chip->irq_mask = gpio_rcar_irq_disable;
 	irq_chip->irq_unmask = gpio_rcar_irq_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_chip->irq_enable = gpio_rcar_irq_enable;
 	irq_chip->irq_disable = gpio_rcar_irq_disable;
 	irq_chip->irq_set_type = gpio_rcar_irq_set_type;
 	irq_chip->flags	= IRQCHIP_SKIP_SET_WAKE | IRQCHIP_SET_TYPE_MASKED;
+=======
+	irq_chip->irq_set_type = gpio_rcar_irq_set_type;
+	irq_chip->flags	= IRQCHIP_SKIP_SET_WAKE | IRQCHIP_SET_TYPE_MASKED
+			 | IRQCHIP_MASK_ON_SUSPEND;
+>>>>>>> v3.18
 =======
 	irq_chip->irq_set_type = gpio_rcar_irq_set_type;
 	irq_chip->flags	= IRQCHIP_SKIP_SET_WAKE | IRQCHIP_SET_TYPE_MASKED
@@ -525,6 +609,7 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	if (!p->irq_domain) {
 		ret = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "cannot initialize irq domain\n");
 		goto err0;
 	}
@@ -533,6 +618,8 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 			     gpio_rcar_irq_handler, IRQF_SHARED, name, p)) {
 		dev_err(&pdev->dev, "failed to request IRQ\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "cannot initialize irq domain\n");
 		goto err0;
 	}
@@ -540,6 +627,9 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	if (devm_request_irq(dev, irq->start, gpio_rcar_irq_handler,
 			     IRQF_SHARED, name, p)) {
 		dev_err(dev, "failed to request IRQ\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENOENT;
 		goto err1;
@@ -548,23 +638,30 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	ret = gpiochip_add(gpio_chip);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "failed to add GPIO controller\n");
 		goto err1;
 	}
 
 	dev_info(&pdev->dev, "driving %d GPIOs\n", p->config.number_of_pins);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "failed to add GPIO controller\n");
 		goto err1;
 	}
 
 	dev_info(dev, "driving %d GPIOs\n", p->config.number_of_pins);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* warn in case of mismatch if irq base is specified */
 	if (p->config.irq_base) {
 		ret = irq_find_mapping(p->irq_domain, 0);
 		if (p->config.irq_base != ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dev_warn(&pdev->dev, "irq base mismatch (%u/%u)\n",
 				 p->config.irq_base, ret);
@@ -575,6 +672,8 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 	if (ret < 0)
 		dev_warn(&pdev->dev, "failed to add pin range\n");
 =======
+=======
+>>>>>>> v3.18
 			dev_warn(dev, "irq base mismatch (%u/%u)\n",
 				 p->config.irq_base, ret);
 	}
@@ -585,6 +684,9 @@ static int gpio_rcar_probe(struct platform_device *pdev)
 		if (ret < 0)
 			dev_warn(dev, "failed to add pin range\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -593,6 +695,11 @@ err1:
 	irq_domain_remove(p->irq_domain);
 err0:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_runtime_put(dev);
+	pm_runtime_disable(dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_put(dev);
 	pm_runtime_disable(dev);
@@ -604,6 +711,7 @@ static int gpio_rcar_remove(struct platform_device *pdev)
 {
 	struct gpio_rcar_priv *p = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = gpiochip_remove(&p->gpio_chip);
@@ -612,12 +720,17 @@ static int gpio_rcar_remove(struct platform_device *pdev)
 
 	irq_domain_remove(p->irq_domain);
 =======
+=======
+>>>>>>> v3.18
 
 	gpiochip_remove(&p->gpio_chip);
 
 	irq_domain_remove(p->irq_domain);
 	pm_runtime_put(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -628,6 +741,10 @@ static struct platform_driver gpio_rcar_device_driver = {
 	.driver		= {
 		.name	= "gpio_rcar",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(gpio_rcar_of_table),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(gpio_rcar_of_table),
 >>>>>>> v3.18

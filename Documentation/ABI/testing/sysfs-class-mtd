@@ -105,7 +105,11 @@ Description:
 		type:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		absent, ram, rom, nor, nand, dataflash, ubi, unknown
+=======
+		absent, ram, rom, nor, nand, mlc-nand, dataflash, ubi, unknown
+>>>>>>> v3.18
 =======
 		absent, ram, rom, nor, nand, mlc-nand, dataflash, ubi, unknown
 >>>>>>> v3.18
@@ -133,9 +137,14 @@ Contact:	linux-mtd@lists.infradead.org
 Description:
 		Maximum number of bit errors that the device is capable of
 <<<<<<< HEAD
+<<<<<<< HEAD
 		correcting within each region covering an ecc step.  This will
 		always be a non-negative integer.  Note that some devices will
 		have multiple ecc steps within each writesize region.
+=======
+		correcting within each region covering an ECC step (see
+		ecc_step_size).  This will always be a non-negative integer.
+>>>>>>> v3.18
 =======
 		correcting within each region covering an ECC step (see
 		ecc_step_size).  This will always be a non-negative integer.
@@ -183,7 +192,10 @@ Description:
 		capability.  It is ignored on devices lacking ECC capability;
 		i.e., devices for which ecc_strength is zero.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/class/mtd/mtdX/ecc_step_size
 Date:		May 2013
@@ -234,4 +246,7 @@ Description:
 		The number of blocks that are marked as reserved, if any, in
 		this partition. These are typically used to store the in-flash
 		bad block table (BBT).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

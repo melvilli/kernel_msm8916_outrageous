@@ -15,6 +15,7 @@
  * <mux_reg conf_reg input_reg mux_mode input_val>
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MX6Q_PAD_SD2_DAT1__SD2_DATA1              0x04c 0x360 0x000 0x0 0x0
 #define MX6Q_PAD_SD2_DAT1__ECSPI5_SS0             0x04c 0x360 0x834 0x1 0x0
 #define MX6Q_PAD_SD2_DAT1__EIM_CS2_B              0x04c 0x360 0x000 0x2 0x0
@@ -1039,6 +1040,8 @@
 #define MX6Q_PAD_SD2_DAT3__AUD4_TXC               0x35c 0x744 0x7c4 0x3 0x1
 #define MX6Q_PAD_SD2_DAT3__GPIO1_IO12             0x35c 0x744 0x000 0x5 0x0
 =======
+=======
+>>>>>>> v3.18
 #define MX6QDL_PAD_SD2_DAT1__SD2_DATA1              0x04c 0x360 0x000 0x0 0x0
 #define MX6QDL_PAD_SD2_DAT1__ECSPI5_SS0             0x04c 0x360 0x834 0x1 0x0
 #define MX6QDL_PAD_SD2_DAT1__EIM_CS2_B              0x04c 0x360 0x000 0x2 0x0
@@ -2068,6 +2071,9 @@
 #define MX6QDL_PAD_SD2_DAT3__KEY_COL6               0x35c 0x744 0x8ec 0x2 0x2
 #define MX6QDL_PAD_SD2_DAT3__AUD4_TXC               0x35c 0x744 0x7c4 0x3 0x1
 #define MX6QDL_PAD_SD2_DAT3__GPIO1_IO12             0x35c 0x744 0x000 0x5 0x0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __DTS_IMX6Q_PINFUNC_H */

@@ -11,7 +11,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx28.dtsi"
+=======
+#include "imx28.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx28.dtsi"
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x0003 /* MX28_PAD_GPMI_D00__GPIO_0_0 */
 						0x0033 /* MX28_PAD_GPMI_D03__GPIO_0_3 */
 						0x0063 /* MX28_PAD_GPMI_D06__GPIO_0_6 */
@@ -42,6 +47,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_GPMI_D00__GPIO_0_0
 						MX28_PAD_GPMI_D03__GPIO_0_3
 						MX28_PAD_GPMI_D06__GPIO_0_6
@@ -49,6 +56,9 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
@@ -121,7 +131,11 @@
 			vbus-supply = <&reg_usb0_vbus>;
 			pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pinctrl-0 = <&usbphy0_pins_b>;
+=======
+			pinctrl-0 = <&usb0_pins_b>;
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&usb0_pins_b>;
 >>>>>>> v3.18
@@ -146,16 +160,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_usb0_vbus: usb0_vbus {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_usb0_vbus: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "usb0_vbus";
 			regulator-min-microvolt = <5000000>;

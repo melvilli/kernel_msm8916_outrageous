@@ -33,7 +33,11 @@ struct diag2fc_data {
 	__u32 lcpus;
 	__u32 vcpus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 cpu_min;
+=======
+	__u32 ocpus;
+>>>>>>> v3.18
 =======
 	__u32 ocpus;
 >>>>>>> v3.18
@@ -112,23 +116,33 @@ static void diag2fc_free(const void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ATTRIBUTE(sb, dir, name, member) \
 do { \
 	void *rc; \
 	rc = hypfs_create_u64(sb, dir, name, member); \
 =======
+=======
+>>>>>>> v3.18
 #define ATTRIBUTE(dir, name, member) \
 do { \
 	void *rc; \
 	rc = hypfs_create_u64(dir, name, member); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(rc)) \
 		return PTR_ERR(rc); \
 } while(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpyfs_vm_create_guest(struct super_block *sb,
 				 struct dentry *systems_dir,
+=======
+static int hpyfs_vm_create_guest(struct dentry *systems_dir,
+>>>>>>> v3.18
 =======
 static int hpyfs_vm_create_guest(struct dentry *systems_dir,
 >>>>>>> v3.18
@@ -145,6 +159,7 @@ static int hpyfs_vm_create_guest(struct dentry *systems_dir,
 	memcpy(guest_name, data->guest_name, NAME_LEN);
 	EBCASC(guest_name, NAME_LEN);
 	strim(guest_name);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	guest_dir = hypfs_mkdir(sb, systems_dir, guest_name);
 	if (IS_ERR(guest_dir))
@@ -187,6 +202,8 @@ static int hpyfs_vm_create_guest(struct dentry *systems_dir,
 
 int hypfs_vm_create_files(struct super_block *sb, struct dentry *root)
 =======
+=======
+>>>>>>> v3.18
 	guest_dir = hypfs_mkdir(systems_dir, guest_name);
 	if (IS_ERR(guest_dir))
 		return PTR_ERR(guest_dir);
@@ -232,6 +249,9 @@ int hypfs_vm_create_files(struct super_block *sb, struct dentry *root)
 }
 
 int hypfs_vm_create_files(struct dentry *root)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dentry *dir, *file;
@@ -245,7 +265,11 @@ int hypfs_vm_create_files(struct dentry *root)
 
 	/* Hpervisor Info */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dir = hypfs_mkdir(sb, root, "hyp");
+=======
+	dir = hypfs_mkdir(root, "hyp");
+>>>>>>> v3.18
 =======
 	dir = hypfs_mkdir(root, "hyp");
 >>>>>>> v3.18
@@ -254,7 +278,11 @@ int hypfs_vm_create_files(struct dentry *root)
 		goto failed;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file = hypfs_create_str(sb, dir, "type", "z/VM Hypervisor");
+=======
+	file = hypfs_create_str(dir, "type", "z/VM Hypervisor");
+>>>>>>> v3.18
 =======
 	file = hypfs_create_str(dir, "type", "z/VM Hypervisor");
 >>>>>>> v3.18
@@ -265,7 +293,11 @@ int hypfs_vm_create_files(struct dentry *root)
 
 	/* physical cpus */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dir = hypfs_mkdir(sb, root, "cpus");
+=======
+	dir = hypfs_mkdir(root, "cpus");
+>>>>>>> v3.18
 =======
 	dir = hypfs_mkdir(root, "cpus");
 >>>>>>> v3.18
@@ -274,7 +306,11 @@ int hypfs_vm_create_files(struct dentry *root)
 		goto failed;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file = hypfs_create_u64(sb, dir, "count", data->lcpus);
+=======
+	file = hypfs_create_u64(dir, "count", data->lcpus);
+>>>>>>> v3.18
 =======
 	file = hypfs_create_u64(dir, "count", data->lcpus);
 >>>>>>> v3.18
@@ -285,7 +321,11 @@ int hypfs_vm_create_files(struct dentry *root)
 
 	/* guests */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dir = hypfs_mkdir(sb, root, "systems");
+=======
+	dir = hypfs_mkdir(root, "systems");
+>>>>>>> v3.18
 =======
 	dir = hypfs_mkdir(root, "systems");
 >>>>>>> v3.18
@@ -296,7 +336,11 @@ int hypfs_vm_create_files(struct dentry *root)
 
 	for (i = 0; i < count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = hpyfs_vm_create_guest(sb, dir, &(data[i]));
+=======
+		rc = hpyfs_vm_create_guest(dir, &(data[i]));
+>>>>>>> v3.18
 =======
 		rc = hpyfs_vm_create_guest(dir, &(data[i]));
 >>>>>>> v3.18

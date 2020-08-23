@@ -95,7 +95,11 @@ static void unregister_devices(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int register_device(char *name, unsigned long start, unsigned long len)
+=======
+static int register_device(char *name, phys_addr_t start, size_t len)
+>>>>>>> v3.18
 =======
 static int register_device(char *name, phys_addr_t start, size_t len)
 >>>>>>> v3.18
@@ -146,6 +150,7 @@ out0:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ustrtoul(const char *cp, char **endp, unsigned int base)
 {
 	unsigned long result = simple_strtoul(cp, endp, base);
@@ -176,6 +181,8 @@ static int parse_num32(uint32_t *num32, const char *token)
 	*num32 = n;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static int parse_num64(uint64_t *num64, char *token)
 {
 	size_t len;
@@ -205,6 +212,9 @@ static int parse_num64(uint64_t *num64, char *token)
 	*num64 <<= shift;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -218,6 +228,7 @@ static int parse_name(char **pname, const char *token)
 		return -ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name = kmalloc(len, GFP_KERNEL);
 	if (!name)
 		return -ENOMEM;
@@ -225,10 +236,15 @@ static int parse_name(char **pname, const char *token)
 	strcpy(name, token);
 
 =======
+=======
+>>>>>>> v3.18
 	name = kstrdup(token, GFP_KERNEL);
 	if (!name)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*pname = name;
 	return 0;
@@ -239,6 +255,10 @@ static inline void kill_final_newline(char *str)
 {
 	char *newline = strrchr(str, '\n');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -253,6 +273,11 @@ static inline void kill_final_newline(char *str)
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef MODULE
+static int phram_init_called;
+>>>>>>> v3.18
 =======
 #ifndef MODULE
 static int phram_init_called;
@@ -261,6 +286,7 @@ static int phram_init_called;
  * This shall contain the module parameter if any. It is of the form:
  * - phram=<device>,<address>,<size> for module case
  * - phram.phram=<device>,<address>,<size> for built-in case
+<<<<<<< HEAD
 <<<<<<< HEAD
  * We leave 64 bytes for the device name, 12 for the address and 12 for the
  * size.
@@ -276,6 +302,8 @@ static int __init phram_setup(const char *val)
 	uint32_t start;
 	uint32_t len;
 =======
+=======
+>>>>>>> v3.18
  * We leave 64 bytes for the device name, 20 for the address and 20 for the
  * size.
  * Example: phram.phram=rootfs,0xa0000000,512Mi
@@ -290,6 +318,9 @@ static int phram_setup(const char *val)
 	char *name;
 	uint64_t start;
 	uint64_t len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i, ret;
 
@@ -300,7 +331,11 @@ static int phram_setup(const char *val)
 	kill_final_newline(str);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i<3; i++)
+=======
+	for (i = 0; i < 3; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < 3; i++)
 >>>>>>> v3.18
@@ -317,7 +352,11 @@ static int phram_setup(const char *val)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = parse_num32(&start, token[1]);
+=======
+	ret = parse_num64(&start, token[1]);
+>>>>>>> v3.18
 =======
 	ret = parse_num64(&start, token[1]);
 >>>>>>> v3.18
@@ -327,7 +366,11 @@ static int phram_setup(const char *val)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = parse_num32(&len, token[2]);
+=======
+	ret = parse_num64(&len, token[2]);
+>>>>>>> v3.18
 =======
 	ret = parse_num64(&len, token[2]);
 >>>>>>> v3.18
@@ -339,7 +382,11 @@ static int phram_setup(const char *val)
 	ret = register_device(name, start, len);
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("%s device: %#x at %#x\n", name, len, start);
+=======
+		pr_info("%s device: %#llx at %#llx\n", name, len, start);
+>>>>>>> v3.18
 =======
 		pr_info("%s device: %#llx at %#llx\n", name, len, start);
 >>>>>>> v3.18
@@ -350,6 +397,7 @@ static int phram_setup(const char *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init phram_param_call(const char *val, struct kernel_param *kp)
 {
 	/*
@@ -357,6 +405,8 @@ static int __init phram_param_call(const char *val, struct kernel_param *kp)
 	 * built-in or module.
 	 */
 =======
+=======
+>>>>>>> v3.18
 static int phram_param_call(const char *val, struct kernel_param *kp)
 {
 #ifdef MODULE
@@ -381,6 +431,9 @@ static int phram_param_call(const char *val, struct kernel_param *kp)
 	 * phram_setup().
 	 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (strlen(val) >= sizeof(phram_paramline))
 		return -ENOSPC;
@@ -388,6 +441,10 @@ static int phram_param_call(const char *val, struct kernel_param *kp)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -400,11 +457,14 @@ MODULE_PARM_DESC(phram, "Memory region to map. \"phram=<name>,<start>,<length>\"
 static int __init init_phram(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phram_paramline[0])
 		return phram_setup(phram_paramline);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 
 #ifndef MODULE
@@ -414,6 +474,9 @@ static int __init init_phram(void)
 #endif
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

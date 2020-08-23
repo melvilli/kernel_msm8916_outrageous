@@ -144,6 +144,11 @@ enum {
 	IFLA_NUM_RX_QUEUES,
 	IFLA_CARRIER,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFLA_PHYS_PORT_ID,
+	IFLA_CARRIER_CHANGES,
+>>>>>>> v3.18
 =======
 	IFLA_PHYS_PORT_ID,
 	IFLA_CARRIER_CHANGES,
@@ -208,6 +213,10 @@ enum {
 	IFLA_INET6_ICMP6STATS,	/* statistics (icmpv6)		*/
 	IFLA_INET6_TOKEN,	/* device token			*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFLA_INET6_ADDR_GEN_MODE, /* implicit address generator mode */
+>>>>>>> v3.18
 =======
 	IFLA_INET6_ADDR_GEN_MODE, /* implicit address generator mode */
 >>>>>>> v3.18
@@ -217,7 +226,10 @@ enum {
 #define IFLA_INET6_MAX	(__IFLA_INET6_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum in6_addr_gen_mode {
 	IN6_ADDR_GEN_MODE_EUI64,
 	IN6_ADDR_GEN_MODE_NONE,
@@ -235,6 +247,9 @@ enum {
 
 #define IFLA_BR_MAX	(__IFLA_BR_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	BRIDGE_MODE_UNSPEC,
@@ -251,6 +266,11 @@ enum {
 	IFLA_BRPORT_PROTECT,	/* root port protection    */
 	IFLA_BRPORT_FAST_LEAVE,	/* multicast fast leave    */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFLA_BRPORT_LEARNING,	/* mac learning */
+	IFLA_BRPORT_UNICAST_FLOOD, /* flood unicast traffic */
+>>>>>>> v3.18
 =======
 	IFLA_BRPORT_LEARNING,	/* mac learning */
 	IFLA_BRPORT_UNICAST_FLOOD, /* flood unicast traffic */
@@ -272,6 +292,11 @@ enum {
 	IFLA_INFO_DATA,
 	IFLA_INFO_XSTATS,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFLA_INFO_SLAVE_KIND,
+	IFLA_INFO_SLAVE_DATA,
+>>>>>>> v3.18
 =======
 	IFLA_INFO_SLAVE_KIND,
 	IFLA_INFO_SLAVE_DATA,
@@ -319,11 +344,17 @@ enum {
 	IFLA_MACVLAN_MODE,
 	IFLA_MACVLAN_FLAGS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IFLA_MACVLAN_MACADDR_MODE,
 	IFLA_MACVLAN_MACADDR,
 	IFLA_MACVLAN_MACADDR_DATA,
 	IFLA_MACVLAN_MACADDR_COUNT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IFLA_MACVLAN_MAX,
 };
@@ -336,7 +367,10 @@ enum macvlan_mode {
 	MACVLAN_MODE_BRIDGE  = 4, /* talk to bridge ports directly */
 	MACVLAN_MODE_PASSTHRU = 8,/* take over the underlying device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	MACVLAN_MODE_SOURCE  = 16,/* use source MAC address list to assign */
 };
 
@@ -345,6 +379,9 @@ enum macvlan_macaddr_mode {
 	MACVLAN_MACADDR_DEL,
 	MACVLAN_MACADDR_FLUSH,
 	MACVLAN_MACADDR_SET,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -369,12 +406,18 @@ enum {
 	IFLA_VXLAN_L3MISS,
 	IFLA_VXLAN_PORT,	/* destination port */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IFLA_VXLAN_GROUP6,
 	IFLA_VXLAN_LOCAL6,
 	IFLA_VXLAN_UDP_CSUM,
 	IFLA_VXLAN_UDP_ZERO_CSUM6_TX,
 	IFLA_VXLAN_UDP_ZERO_CSUM6_RX,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IFLA_VXLAN_MAX
 };
@@ -386,7 +429,10 @@ struct ifla_vxlan_port_range {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bonding section */
 
 enum {
@@ -444,6 +490,9 @@ enum {
 
 #define IFLA_BOND_SLAVE_MAX	(__IFLA_BOND_SLAVE_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SR-IOV virtual function management section */
 
@@ -460,13 +509,19 @@ enum {
 	IFLA_VF_MAC,		/* Hardware queue specific attributes */
 	IFLA_VF_VLAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IFLA_VF_TX_RATE,	/* TX Bandwidth Allocation */
 	IFLA_VF_SPOOFCHK,	/* Spoof Checking on/off switch */
 =======
+=======
+>>>>>>> v3.18
 	IFLA_VF_TX_RATE,	/* Max TX Bandwidth Allocation */
 	IFLA_VF_SPOOFCHK,	/* Spoof Checking on/off switch */
 	IFLA_VF_LINK_STATE,	/* link state enable/disable/auto switch */
 	IFLA_VF_RATE,		/* Min and Max TX Bandwidth Allocation */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IFLA_VF_MAX,
 };
@@ -490,13 +545,19 @@ struct ifla_vf_tx_rate {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ifla_vf_rate {
 	__u32 vf;
 	__u32 min_tx_rate; /* Min Bandwidth in Mbps */
 	__u32 max_tx_rate; /* Max Bandwidth in Mbps */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ifla_vf_spoofchk {
 	__u32 vf;
@@ -504,7 +565,10 @@ struct ifla_vf_spoofchk {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	IFLA_VF_LINK_STATE_AUTO,	/* link state of the uplink */
 	IFLA_VF_LINK_STATE_ENABLE,	/* link always up */
@@ -517,6 +581,9 @@ struct ifla_vf_link_state {
 	__u32 link_state;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* VF ports management section
  *
@@ -609,7 +676,10 @@ enum {
 #define IFLA_IPOIB_MAX (__IFLA_IPOIB_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* HSR section */
 
@@ -625,5 +695,8 @@ enum {
 
 #define IFLA_HSR_MAX (__IFLA_HSR_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _UAPI_LINUX_IF_LINK_H */

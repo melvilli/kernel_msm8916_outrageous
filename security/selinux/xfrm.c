@@ -57,7 +57,11 @@ atomic_t selinux_xfrm_refcount = ATOMIC_INIT(0);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns true if an LSM/SELinux context
+=======
+ * Returns true if the context is an LSM/SELinux context.
+>>>>>>> v3.18
 =======
  * Returns true if the context is an LSM/SELinux context.
 >>>>>>> v3.18
@@ -71,7 +75,11 @@ static inline int selinux_authorizable_ctx(struct xfrm_sec_ctx *ctx)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns true if the xfrm contains a security blob for SELinux
+=======
+ * Returns true if the xfrm contains a security blob for SELinux.
+>>>>>>> v3.18
 =======
  * Returns true if the xfrm contains a security blob for SELinux.
 >>>>>>> v3.18
@@ -82,6 +90,7 @@ static inline int selinux_authorizable_xfrm(struct xfrm_state *x)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * LSM hook implementation that authorizes that a flow can use
  * a xfrm policy rule.
@@ -113,6 +122,8 @@ int selinux_xfrm_policy_lookup(struct xfrm_sec_ctx *ctx, u32 fl_secid, u8 dir)
 		return -ESRCH;
 
 =======
+=======
+>>>>>>> v3.18
  * Allocates a xfrm_sec_state and populates it using the supplied security
  * xfrm_user_sec_ctx context.
  */
@@ -158,11 +169,15 @@ static int selinux_xfrm_alloc_user(struct xfrm_sec_ctx **ctxp,
 
 err:
 	kfree(ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * LSM hook implementation that authorizes that a state matches
  * the given policy, flow combo.
@@ -174,6 +189,8 @@ int selinux_xfrm_state_pol_flow_match(struct xfrm_state *x, struct xfrm_policy *
 	u32 state_sid;
 	int rc;
 =======
+=======
+>>>>>>> v3.18
  * Free the xfrm_sec_ctx structure.
  */
 static void selinux_xfrm_free(struct xfrm_sec_ctx *ctx)
@@ -231,6 +248,9 @@ int selinux_xfrm_state_pol_flow_match(struct xfrm_state *x,
 				      const struct flowi *fl)
 {
 	u32 state_sid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!xp->security)
@@ -255,6 +275,7 @@ int selinux_xfrm_state_pol_flow_match(struct xfrm_state *x,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = avc_has_perm(fl->flowi_secid, state_sid, SECCLASS_ASSOCIATION,
 			  ASSOCIATION__SENDTO,
 			  NULL)? 0:1;
@@ -268,6 +289,8 @@ int selinux_xfrm_state_pol_flow_match(struct xfrm_state *x,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	/* We don't need a separate SA Vs. policy polmatch check since the SA
 	 * is now of the same label as the flow and a flow Vs. policy polmatch
 	 * check had already happened in selinux_xfrm_policy_lookup() above. */
@@ -288,12 +311,16 @@ static u32 selinux_xfrm_skb_sid_egress(struct sk_buff *skb)
 		return SECSID_NULL;
 
 	return x->security->ctx_sid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int selinux_xfrm_skb_sid_ingress(struct sk_buff *skb,
 					u32 *sid, int ckall)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sec_path *sp = skb->sp;
 
@@ -304,6 +331,8 @@ static int selinux_xfrm_skb_sid_ingress(struct sk_buff *skb,
 
 		for (i = sp->len-1; i >= 0; i--) {
 =======
+=======
+>>>>>>> v3.18
 	u32 sid_session = SECSID_NULL;
 	struct sec_path *sp = skb->sp;
 
@@ -311,11 +340,15 @@ static int selinux_xfrm_skb_sid_ingress(struct sk_buff *skb,
 		int i;
 
 		for (i = sp->len - 1; i >= 0; i--) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct xfrm_state *x = sp->xvec[i];
 			if (selinux_authorizable_xfrm(x)) {
 				struct xfrm_sec_ctx *ctx = x->security;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (!sid_set) {
 					*sid = ctx->ctx_sid;
@@ -326,6 +359,8 @@ static int selinux_xfrm_skb_sid_ingress(struct sk_buff *skb,
 				} else if (*sid != ctx->ctx_sid)
 					return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				if (sid_session == SECSID_NULL) {
 					sid_session = ctx->ctx_sid;
 					if (!ckall)
@@ -334,11 +369,15 @@ static int selinux_xfrm_skb_sid_ingress(struct sk_buff *skb,
 					*sid = SECSID_NULL;
 					return -EINVAL;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -358,18 +397,26 @@ static u32 selinux_xfrm_skb_sid_egress(struct sk_buff *skb)
 }
 
 =======
+=======
+>>>>>>> v3.18
 out:
 	*sid = sid_session;
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * LSM hook implementation that checks and/or returns the xfrm sid for the
  * incoming packet.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int selinux_xfrm_decode_session(struct sk_buff *skb, u32 *sid, int ckall)
@@ -393,6 +440,7 @@ int selinux_xfrm_skb_sid(struct sk_buff *skb, u32 *sid)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Security blob allocation for xfrm_policy and xfrm_state
  * CTX does not have a meaningful value on input
@@ -506,6 +554,8 @@ int selinux_xfrm_policy_alloc(struct xfrm_sec_ctx **ctxp,
  * LSM hook implementation that copies security data structure from old to
  * new for policy cloning.
 =======
+=======
+>>>>>>> v3.18
  * LSM hook implementation that allocs and transfers uctx spec to xfrm_policy.
  */
 int selinux_xfrm_policy_alloc(struct xfrm_sec_ctx **ctxp,
@@ -518,6 +568,9 @@ int selinux_xfrm_policy_alloc(struct xfrm_sec_ctx **ctxp,
 /*
  * LSM hook implementation that copies security data structure from old to new
  * for policy cloning.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int selinux_xfrm_policy_clone(struct xfrm_sec_ctx *old_ctx,
@@ -525,6 +578,7 @@ int selinux_xfrm_policy_clone(struct xfrm_sec_ctx *old_ctx,
 {
 	struct xfrm_sec_ctx *new_ctx;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (old_ctx) {
 		new_ctx = kmalloc(sizeof(*old_ctx) + old_ctx->ctx_len,
@@ -538,6 +592,8 @@ int selinux_xfrm_policy_clone(struct xfrm_sec_ctx *old_ctx,
 		*new_ctxp = new_ctx;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!old_ctx)
 		return 0;
 
@@ -548,6 +604,9 @@ int selinux_xfrm_policy_clone(struct xfrm_sec_ctx *old_ctx,
 	atomic_inc(&selinux_xfrm_refcount);
 	*new_ctxp = new_ctx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -558,8 +617,12 @@ int selinux_xfrm_policy_clone(struct xfrm_sec_ctx *old_ctx,
 void selinux_xfrm_policy_free(struct xfrm_sec_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&selinux_xfrm_refcount);
 	kfree(ctx);
+=======
+	selinux_xfrm_free(ctx);
+>>>>>>> v3.18
 =======
 	selinux_xfrm_free(ctx);
 >>>>>>> v3.18
@@ -570,6 +633,7 @@ void selinux_xfrm_policy_free(struct xfrm_sec_ctx *ctx)
  */
 int selinux_xfrm_policy_delete(struct xfrm_sec_ctx *ctx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct task_security_struct *tsec = current_security();
 
@@ -597,6 +661,8 @@ int selinux_xfrm_state_alloc(struct xfrm_state *x, struct xfrm_user_sec_ctx *uct
 		atomic_inc(&selinux_xfrm_refcount);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	return selinux_xfrm_delete(ctx);
 }
 
@@ -649,6 +715,9 @@ int selinux_xfrm_state_alloc_acquire(struct xfrm_state *x,
 out:
 	kfree(ctx_str);
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -657,6 +726,7 @@ out:
  */
 void selinux_xfrm_state_free(struct xfrm_state *x)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	atomic_dec(&selinux_xfrm_refcount);
 	kfree(x->security);
@@ -677,6 +747,8 @@ int selinux_xfrm_state_delete(struct xfrm_state *x)
 			    SECCLASS_ASSOCIATION, ASSOCIATION__SETCONTEXT,
 			    NULL);
 =======
+=======
+>>>>>>> v3.18
 	selinux_xfrm_free(x->security);
 }
 
@@ -686,6 +758,9 @@ int selinux_xfrm_state_delete(struct xfrm_state *x)
 int selinux_xfrm_state_delete(struct xfrm_state *x)
 {
 	return selinux_xfrm_delete(x->security);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -697,6 +772,7 @@ int selinux_xfrm_state_delete(struct xfrm_state *x)
  * gone thru the IPSec process.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int selinux_xfrm_sock_rcv_skb(u32 isec_sid, struct sk_buff *skb,
 				struct common_audit_data *ad)
 {
@@ -706,12 +782,17 @@ int selinux_xfrm_sock_rcv_skb(u32 isec_sid, struct sk_buff *skb,
 
 	sp = skb->sp;
 =======
+=======
+>>>>>>> v3.18
 int selinux_xfrm_sock_rcv_skb(u32 sk_sid, struct sk_buff *skb,
 			      struct common_audit_data *ad)
 {
 	int i;
 	struct sec_path *sp = skb->sp;
 	u32 peer_sid = SECINITSID_UNLABELED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sp) {
@@ -721,7 +802,11 @@ int selinux_xfrm_sock_rcv_skb(u32 sk_sid, struct sk_buff *skb,
 			if (x && selinux_authorizable_xfrm(x)) {
 				struct xfrm_sec_ctx *ctx = x->security;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sel_sid = ctx->ctx_sid;
+=======
+				peer_sid = ctx->ctx_sid;
+>>>>>>> v3.18
 =======
 				peer_sid = ctx->ctx_sid;
 >>>>>>> v3.18
@@ -730,6 +815,7 @@ int selinux_xfrm_sock_rcv_skb(u32 sk_sid, struct sk_buff *skb,
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * This check even when there's no association involved is
@@ -743,11 +829,16 @@ int selinux_xfrm_sock_rcv_skb(u32 sk_sid, struct sk_buff *skb,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	/* This check even when there's no association involved is intended,
 	 * according to Trent Jaeger, to make sure a process can't engage in
 	 * non-IPsec communication unless explicitly allowed by policy. */
 	return avc_has_perm(sk_sid, peer_sid,
 			    SECCLASS_ASSOCIATION, ASSOCIATION__RECVFROM, ad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -758,6 +849,7 @@ int selinux_xfrm_sock_rcv_skb(u32 sk_sid, struct sk_buff *skb,
  * If we do have a authorizable security association, then it has already been
  * checked in the selinux_xfrm_state_pol_flow_match hook above.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int selinux_xfrm_postroute_last(u32 isec_sid, struct sk_buff *skb,
 					struct common_audit_data *ad, u8 proto)
@@ -779,16 +871,22 @@ int selinux_xfrm_postroute_last(u32 isec_sid, struct sk_buff *skb,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 int selinux_xfrm_postroute_last(u32 sk_sid, struct sk_buff *skb,
 				struct common_audit_data *ad, u8 proto)
 {
 	struct dst_entry *dst;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (proto) {
 	case IPPROTO_AH:
 	case IPPROTO_ESP:
 	case IPPROTO_COMP:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * We should have already seen this packet once before
@@ -797,15 +895,21 @@ int selinux_xfrm_postroute_last(u32 sk_sid, struct sk_buff *skb,
 		 */
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		/* We should have already seen this packet once before it
 		 * underwent xfrm(s). No need to subject it to the unlabeled
 		 * check. */
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * This check even when there's no association involved is
@@ -819,6 +923,8 @@ int selinux_xfrm_postroute_last(u32 sk_sid, struct sk_buff *skb,
 out:
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	dst = skb_dst(skb);
 	if (dst) {
 		struct dst_entry *iter;
@@ -836,5 +942,8 @@ out:
 	 * non-IPsec communication unless explicitly allowed by policy. */
 	return avc_has_perm(sk_sid, SECINITSID_UNLABELED,
 			    SECCLASS_ASSOCIATION, ASSOCIATION__SENDTO, ad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

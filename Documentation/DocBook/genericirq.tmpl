@@ -88,7 +88,11 @@
     <title>Rationale</title>
 	<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	The original implementation of interrupt handling in Linux is using
+=======
+	The original implementation of interrupt handling in Linux uses
+>>>>>>> v3.18
 =======
 	The original implementation of interrupt handling in Linux uses
 >>>>>>> v3.18
@@ -116,9 +120,15 @@
 	</para>
 	<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	This split implementation of highlevel IRQ handlers allows us to
 	optimize the flow of the interrupt handling for each specific
 	interrupt type. This reduces complexity in that particular codepath
+=======
+	This split implementation of high-level IRQ handlers allows us to
+	optimize the flow of the interrupt handling for each specific
+	interrupt type. This reduces complexity in that particular code path
+>>>>>>> v3.18
 =======
 	This split implementation of high-level IRQ handlers allows us to
 	optimize the flow of the interrupt handling for each specific
@@ -131,15 +141,21 @@
 	structures and their ->ack(), ->end() [etc.] callbacks to
 	differentiate the flow control in the super-handler. This leads to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	a mix of flow logic and lowlevel hardware logic, and it also leads
 	to unnecessary code duplication: for example in i386, there is a
 	ioapic_level_irq and a ioapic_edge_irq irq-type which share many
 	of the lowlevel details but have different flow handling.
 =======
+=======
+>>>>>>> v3.18
 	a mix of flow logic and low-level hardware logic, and it also leads
 	to unnecessary code duplication: for example in i386, there is an
 	ioapic_level_irq and an ioapic_edge_irq IRQ-type which share many
 	of the low-level details but have different flow handling.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	</para>
 	<para>
@@ -149,6 +165,7 @@
 	<para>
 	Analysing a couple of architecture's IRQ subsystem implementations
 	reveals that most of them can use a generic set of 'irq flow'
+<<<<<<< HEAD
 <<<<<<< HEAD
 	methods and only need to add the chip level specific code.
 	The separation is also valuable for (sub)architectures
@@ -161,6 +178,8 @@
 	handler, which is normally one of the generic
 	implementations. (This highlevel flow handler implementation also
 =======
+=======
+>>>>>>> v3.18
 	methods and only need to add the chip-level specific code.
 	The separation is also valuable for (sub)architectures
 	which need specific quirks in the IRQ flow itself but not in the
@@ -171,6 +190,9 @@
 	Each interrupt descriptor is assigned its own high-level flow
 	handler, which is normally one of the generic
 	implementations. (This high-level flow handler implementation also
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	makes it simple to provide demultiplexing handlers which can be
 	found in embedded platforms on various architectures.)
@@ -179,7 +201,11 @@
 	The separation makes the generic interrupt handling layer more
 	flexible and extensible. For example, an (sub)architecture can
 <<<<<<< HEAD
+<<<<<<< HEAD
 	use a generic irq-flow implementation for 'level type' interrupts
+=======
+	use a generic IRQ-flow implementation for 'level type' interrupts
+>>>>>>> v3.18
 =======
 	use a generic IRQ-flow implementation for 'level type' interrupts
 >>>>>>> v3.18
@@ -207,9 +233,15 @@
 	There are three main levels of abstraction in the interrupt code:
 	<orderedlist>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <listitem><para>Highlevel driver API</para></listitem>
 	  <listitem><para>Highlevel IRQ flow handlers</para></listitem>
 	  <listitem><para>Chiplevel hardware encapsulation</para></listitem>
+=======
+	  <listitem><para>High-level driver API</para></listitem>
+	  <listitem><para>High-level IRQ flow handlers</para></listitem>
+	  <listitem><para>Chip-level hardware encapsulation</para></listitem>
+>>>>>>> v3.18
 =======
 	  <listitem><para>High-level driver API</para></listitem>
 	  <listitem><para>High-level IRQ flow handlers</para></listitem>
@@ -223,7 +255,11 @@
 	Each interrupt is described by an interrupt descriptor structure
 	irq_desc. The interrupt is referenced by an 'unsigned int' numeric
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value which selects the corresponding interrupt decription structure
+=======
+	value which selects the corresponding interrupt description structure
+>>>>>>> v3.18
 =======
 	value which selects the corresponding interrupt description structure
 >>>>>>> v3.18
@@ -234,9 +270,15 @@
 	</para>
 	<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Whenever an interrupt triggers, the lowlevel arch code calls into
 	the generic interrupt code by calling desc->handle_irq().
 	This highlevel IRQ handling function only uses desc->irq_data.chip
+=======
+	Whenever an interrupt triggers, the low-level architecture code calls
+	into the generic interrupt code by calling desc->handle_irq().
+	This high-level IRQ handling function only uses desc->irq_data.chip
+>>>>>>> v3.18
 =======
 	Whenever an interrupt triggers, the low-level architecture code calls
 	into the generic interrupt code by calling desc->handle_irq().
@@ -247,9 +289,15 @@
     </sect1>
     <sect1 id="Highlevel_Driver_API">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<title>Highlevel Driver API</title>
 	<para>
 	  The highlevel Driver API consists of following functions:
+=======
+	<title>High-level Driver API</title>
+	<para>
+	  The high-level Driver API consists of following functions:
+>>>>>>> v3.18
 =======
 	<title>High-level Driver API</title>
 	<para>
@@ -273,7 +321,11 @@
     </sect1>
     <sect1 id="Highlevel_IRQ_flow_handlers">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<title>Highlevel IRQ flow handlers</title>
+=======
+	<title>High-level IRQ flow handlers</title>
+>>>>>>> v3.18
 =======
 	<title>High-level IRQ flow handlers</title>
 >>>>>>> v3.18
@@ -289,7 +341,11 @@
 	  <listitem><para>handle_bad_irq</para></listitem>
 	  </itemizedlist>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  The interrupt flow handlers (either predefined or architecture
+=======
+	  The interrupt flow handlers (either pre-defined or architecture
+>>>>>>> v3.18
 =======
 	  The interrupt flow handlers (either pre-defined or architecture
 >>>>>>> v3.18
@@ -362,7 +418,11 @@ desc->irq_data.chip->irq_unmask();
 		handle_fasteoi_irq provides a generic implementation
 		for interrupts, which only need an EOI at the end of
 <<<<<<< HEAD
+<<<<<<< HEAD
 		the handler
+=======
+		the handler.
+>>>>>>> v3.18
 =======
 		the handler.
 >>>>>>> v3.18
@@ -463,7 +523,11 @@ if (desc->irq_data.chip->irq_eoi)
 	which have no platform-specific IRQ handling quirks. If an architecture
 	needs to implement quirks on the 'flow' level then it can do so by
 <<<<<<< HEAD
+<<<<<<< HEAD
 	overriding the highlevel irq-flow handler.
+=======
+	overriding the high-level irq-flow handler.
+>>>>>>> v3.18
 =======
 	overriding the high-level irq-flow handler.
 >>>>>>> v3.18
@@ -492,9 +556,15 @@ if (desc->irq_data.chip->irq_eoi)
     </sect1>
     <sect1 id="Chiplevel_hardware_encapsulation">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<title>Chiplevel hardware encapsulation</title>
 	<para>
 	The chip level hardware descriptor structure irq_chip
+=======
+	<title>Chip-level hardware encapsulation</title>
+	<para>
+	The chip-level hardware descriptor structure irq_chip
+>>>>>>> v3.18
 =======
 	<title>Chip-level hardware encapsulation</title>
 	<para>
@@ -508,7 +578,11 @@ if (desc->irq_data.chip->irq_eoi)
 	  <listitem><para>irq_mask()</para></listitem>
 	  <listitem><para>irq_unmask()</para></listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <listitem><para>irq_eoi() - Optional, required for eoi flow handlers</para></listitem>
+=======
+	  <listitem><para>irq_eoi() - Optional, required for EOI flow handlers</para></listitem>
+>>>>>>> v3.18
 =======
 	  <listitem><para>irq_eoi() - Optional, required for EOI flow handlers</para></listitem>
 >>>>>>> v3.18
@@ -519,7 +593,11 @@ if (desc->irq_data.chip->irq_eoi)
 	These primitives are strictly intended to mean what they say: ack means
 	ACK, masking means masking of an IRQ line, etc. It is up to the flow
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handler(s) to use these basic units of lowlevel functionality.
+=======
+	handler(s) to use these basic units of low-level functionality.
+>>>>>>> v3.18
 =======
 	handler(s) to use these basic units of low-level functionality.
 >>>>>>> v3.18
@@ -532,7 +610,11 @@ if (desc->irq_data.chip->irq_eoi)
      <para>
 	The original implementation __do_IRQ() was an alternative entry
 <<<<<<< HEAD
+<<<<<<< HEAD
 	point for all types of interrupts. It not longer exists.
+=======
+	point for all types of interrupts. It no longer exists.
+>>>>>>> v3.18
 =======
 	point for all types of interrupts. It no longer exists.
 >>>>>>> v3.18
@@ -555,7 +637,10 @@ if (desc->irq_data.chip->irq_eoi)
      </para>
   </chapter>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
   <chapter id="genericchip">
      <title>Generic interrupt chip</title>
@@ -569,6 +654,9 @@ if (desc->irq_data.chip->irq_eoi)
 !Ekernel/irq/generic-chip.c
   </chapter>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   <chapter id="structs">
      <title>Structures</title>

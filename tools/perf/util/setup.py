@@ -19,8 +19,14 @@ class install_lib(_install_lib):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cflags = ['-fno-strict-aliasing', '-Wno-write-strings']
 cflags += getenv('CFLAGS', '').split()
+=======
+cflags = getenv('CFLAGS', '').split()
+# switch off several checks (need to be at the end of cflags list)
+cflags += ['-fno-strict-aliasing', '-Wno-write-strings', '-Wno-unused-parameter' ]
+>>>>>>> v3.18
 =======
 cflags = getenv('CFLAGS', '').split()
 # switch off several checks (need to be at the end of cflags list)
@@ -31,7 +37,11 @@ build_lib = getenv('PYTHON_EXTBUILD_LIB')
 build_tmp = getenv('PYTHON_EXTBUILD_TMP')
 libtraceevent = getenv('LIBTRACEEVENT')
 <<<<<<< HEAD
+<<<<<<< HEAD
 liblk = getenv('LIBLK')
+=======
+libapikfs = getenv('LIBAPIKFS')
+>>>>>>> v3.18
 =======
 libapikfs = getenv('LIBAPIKFS')
 >>>>>>> v3.18
@@ -44,7 +54,11 @@ perf = Extension('perf',
 		  include_dirs = ['util/include'],
 		  extra_compile_args = cflags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  extra_objects = [libtraceevent, liblk],
+=======
+		  extra_objects = [libtraceevent, libapikfs],
+>>>>>>> v3.18
 =======
 		  extra_objects = [libtraceevent, libapikfs],
 >>>>>>> v3.18

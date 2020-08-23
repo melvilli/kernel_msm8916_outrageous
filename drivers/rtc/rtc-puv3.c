@@ -54,17 +54,23 @@ static irqreturn_t puv3_rtc_tickirq(int irq, void *id)
 
 /* Update control registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void puv3_rtc_setaie(int to)
 {
 	unsigned int tmp;
 
 	pr_debug("%s: aie=%d\n", __func__, to);
 =======
+=======
+>>>>>>> v3.18
 static void puv3_rtc_setaie(struct device *dev, int to)
 {
 	unsigned int tmp;
 
 	dev_dbg(dev, "%s: aie=%d\n", __func__, to);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tmp = readl(RTC_RTSR) & ~RTC_RTSR_ALE;
@@ -80,7 +86,11 @@ static int puv3_rtc_setpie(struct device *dev, int enabled)
 	unsigned int tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: pie=%d\n", __func__, enabled);
+=======
+	dev_dbg(dev, "%s: pie=%d\n", __func__, enabled);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "%s: pie=%d\n", __func__, enabled);
 >>>>>>> v3.18
@@ -103,7 +113,11 @@ static int puv3_rtc_gettime(struct device *dev, struct rtc_time *rtc_tm)
 	rtc_time_to_tm(readl(RTC_RCNR), rtc_tm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("read time %02x.%02x.%02x %02x/%02x/%02x\n",
+=======
+	dev_dbg(dev, "read time %02x.%02x.%02x %02x/%02x/%02x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "read time %02x.%02x.%02x %02x/%02x/%02x\n",
 >>>>>>> v3.18
@@ -118,7 +132,11 @@ static int puv3_rtc_settime(struct device *dev, struct rtc_time *tm)
 	unsigned long rtc_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("set time %02d.%02d.%02d %02d/%02d/%02d\n",
+=======
+	dev_dbg(dev, "set time %02d.%02d.%02d %02d/%02d/%02d\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "set time %02d.%02d.%02d %02d/%02d/%02d\n",
 >>>>>>> v3.18
@@ -140,7 +158,11 @@ static int puv3_rtc_getalarm(struct device *dev, struct rtc_wkalrm *alrm)
 	alrm->enabled = readl(RTC_RTSR) & RTC_RTSR_ALE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("read alarm %02x %02x.%02x.%02x %02x/%02x/%02x\n",
+=======
+	dev_dbg(dev, "read alarm %02x %02x.%02x.%02x %02x/%02x/%02x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "read alarm %02x %02x.%02x.%02x %02x/%02x/%02x\n",
 >>>>>>> v3.18
@@ -157,7 +179,11 @@ static int puv3_rtc_setalarm(struct device *dev, struct rtc_wkalrm *alrm)
 	unsigned long rtcalarm_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("puv3_rtc_setalarm: %d, %02x/%02x/%02x %02x.%02x.%02x\n",
+=======
+	dev_dbg(dev, "puv3_rtc_setalarm: %d, %02x/%02x/%02x %02x.%02x.%02x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "puv3_rtc_setalarm: %d, %02x/%02x/%02x %02x.%02x.%02x\n",
 >>>>>>> v3.18
@@ -169,7 +195,11 @@ static int puv3_rtc_setalarm(struct device *dev, struct rtc_wkalrm *alrm)
 	writel(rtcalarm_count, RTC_RTAR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	puv3_rtc_setaie(alrm->enabled);
+=======
+	puv3_rtc_setaie(dev, alrm->enabled);
+>>>>>>> v3.18
 =======
 	puv3_rtc_setaie(dev, alrm->enabled);
 >>>>>>> v3.18
@@ -257,16 +287,22 @@ static int puv3_rtc_remove(struct platform_device *dev)
 	struct rtc_device *rtc = platform_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 	rtc_device_unregister(rtc);
 
 	puv3_rtc_setpie(&dev->dev, 0);
 	puv3_rtc_setaie(0);
 =======
+=======
+>>>>>>> v3.18
 	rtc_device_unregister(rtc);
 
 	puv3_rtc_setpie(&dev->dev, 0);
 	puv3_rtc_setaie(&dev->dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	release_resource(puv3_rtc_mem);
@@ -282,7 +318,11 @@ static int puv3_rtc_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: probe=%p\n", __func__, pdev);
+=======
+	dev_dbg(&pdev->dev, "%s: probe=%p\n", __func__, pdev);
+>>>>>>> v3.18
 =======
 	dev_dbg(&pdev->dev, "%s: probe=%p\n", __func__, pdev);
 >>>>>>> v3.18
@@ -301,7 +341,11 @@ static int puv3_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("PKUnity_rtc: tick irq %d, alarm irq %d\n",
+=======
+	dev_dbg(&pdev->dev, "PKUnity_rtc: tick irq %d, alarm irq %d\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&pdev->dev, "PKUnity_rtc: tick irq %d, alarm irq %d\n",
 >>>>>>> v3.18

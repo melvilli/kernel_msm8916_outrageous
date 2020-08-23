@@ -58,9 +58,13 @@
 #define P9_RDMA_ORD		0
 #define P9_RDMA_TIMEOUT		30000		/* 30 seconds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define P9_RDMA_MAXSIZE		(4*4096)	/* Min SGE is 4, so we can
 						 * safely advertise a maxsize
 						 * of 64k */
+=======
+#define P9_RDMA_MAXSIZE		(1024*1024)	/* 1MB */
+>>>>>>> v3.18
 =======
 #define P9_RDMA_MAXSIZE		(1024*1024)	/* 1MB */
 >>>>>>> v3.18
@@ -80,7 +84,13 @@
  * @sq_sem: Semaphore for the SQ
  * @rq_depth: The depth of the Receive Queue.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @rq_count: Count of requests in the Receive Queue.
+=======
+ * @rq_sem: Semaphore for the RQ
+ * @excess_rc : Amount of posted Receive Contexts without a pending request.
+ *		See rdma_request()
+>>>>>>> v3.18
 =======
  * @rq_sem: Semaphore for the RQ
  * @excess_rc : Amount of posted Receive Contexts without a pending request.
@@ -111,7 +121,12 @@ struct p9_trans_rdma {
 	struct semaphore sq_sem;
 	int rq_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t rq_count;
+=======
+	struct semaphore rq_sem;
+	atomic_t excess_rc;
+>>>>>>> v3.18
 =======
 	struct semaphore rq_sem;
 	atomic_t excess_rc;
@@ -208,6 +223,11 @@ static int parse_opts(char *params, struct p9_rdma_opts *opts)
 			continue;
 		token = match_token(p, tokens, args);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (token == Opt_err)
+			continue;
+>>>>>>> v3.18
 =======
 		if (token == Opt_err)
 			continue;
@@ -317,10 +337,13 @@ handle_recv(struct p9_client *client, struct p9_trans_rdma *rdma,
 		goto err_out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->rc = c->rc;
 	req->status = REQ_STATUS_RCVD;
 	p9_client_cb(client, req);
 =======
+=======
+>>>>>>> v3.18
 	/* Check that we have not yet received a reply for this request.
 	 */
 	if (unlikely(req->rc)) {
@@ -330,6 +353,9 @@ handle_recv(struct p9_client *client, struct p9_trans_rdma *rdma,
 
 	req->rc = c->rc;
 	p9_client_cb(client, req, REQ_STATUS_RCVD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
@@ -369,8 +395,13 @@ static void cq_comp_handler(struct ib_cq *cq, void *cq_context)
 		switch (c->wc_op) {
 		case IB_WC_RECV:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			atomic_dec(&rdma->rq_count);
 			handle_recv(client, rdma, c, wc.status, wc.byte_len);
+=======
+			handle_recv(client, rdma, c, wc.status, wc.byte_len);
+			up(&rdma->rq_sem);
+>>>>>>> v3.18
 =======
 			handle_recv(client, rdma, c, wc.status, wc.byte_len);
 			up(&rdma->rq_sem);
@@ -459,7 +490,10 @@ static int rdma_request(struct p9_client *client, struct p9_req_t *req)
 	struct p9_rdma_context *rpl_context = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* When an error occurs between posting the recv and the send,
 	 * there will be a receive context posted without a pending request.
 	 * Since there is no way to "un-post" it, we remember it and skip
@@ -480,11 +514,15 @@ static int rdma_request(struct p9_client *client, struct p9_req_t *req)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Allocate an fcall for the reply */
 	rpl_context = kmalloc(sizeof *rpl_context, GFP_NOFS);
 	if (!rpl_context) {
 		err = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_close;
 	}
@@ -513,6 +551,11 @@ static int rdma_request(struct p9_client *client, struct p9_req_t *req)
 	}
 	rpl_context->rc = req->rc;
 >>>>>>> v3.18
+=======
+		goto recv_error;
+	}
+	rpl_context->rc = req->rc;
+>>>>>>> v3.18
 
 	/*
 	 * Post a receive buffer for this request. We need to ensure
@@ -521,6 +564,7 @@ static int rdma_request(struct p9_client *client, struct p9_req_t *req)
 	 * outstanding request, so we must keep a count to avoid
 	 * overflowing the RQ.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (atomic_inc_return(&rdma->rq_count) <= rdma->rq_depth) {
 		err = post_recv(client, rpl_context);
@@ -533,6 +577,8 @@ static int rdma_request(struct p9_client *client, struct p9_req_t *req)
 	req->rc = NULL;
 
 =======
+=======
+>>>>>>> v3.18
 	if (down_interruptible(&rdma->rq_sem)) {
 		err = -EINTR;
 		goto recv_error;
@@ -547,13 +593,20 @@ static int rdma_request(struct p9_client *client, struct p9_req_t *req)
 	req->rc = NULL;
 
 dont_need_post_recv:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Post the request */
 	c = kmalloc(sizeof *c, GFP_NOFS);
 	if (!c) {
 		err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free1;
+=======
+		goto send_error;
+>>>>>>> v3.18
 =======
 		goto send_error;
 >>>>>>> v3.18
@@ -564,13 +617,19 @@ dont_need_post_recv:
 				    c->req->tc->sdata, c->req->tc->size,
 				    DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ib_dma_mapping_error(rdma->cm_id->device, c->busa))
 		goto error;
 =======
+=======
+>>>>>>> v3.18
 	if (ib_dma_mapping_error(rdma->cm_id->device, c->busa)) {
 		err = -EIO;
 		goto send_error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sge.addr = c->busa;
@@ -585,6 +644,7 @@ dont_need_post_recv:
 	wr.sg_list = &sge;
 	wr.num_sge = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (down_interruptible(&rdma->sq_sem))
 		goto error;
@@ -603,6 +663,8 @@ dont_need_post_recv:
 	kfree(rpl_context);
  err_close:
 =======
+=======
+>>>>>>> v3.18
 	if (down_interruptible(&rdma->sq_sem)) {
 		err = -EINTR;
 		goto send_error;
@@ -635,6 +697,9 @@ dont_need_post_recv:
  /* Handle errors that happened during or while preparing post_recv(): */
  recv_error:
 	kfree(rpl_context);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&rdma->req_lock, flags);
 	if (rdma->state < P9_RDMA_CLOSING) {
@@ -681,7 +746,12 @@ static struct p9_trans_rdma *alloc_rdma(struct p9_rdma_opts *opts)
 	init_completion(&rdma->cm_done);
 	sema_init(&rdma->sq_sem, rdma->sq_depth);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&rdma->rq_count, 0);
+=======
+	sema_init(&rdma->rq_sem, rdma->rq_depth);
+	atomic_set(&rdma->excess_rc, 0);
+>>>>>>> v3.18
 =======
 	sema_init(&rdma->rq_sem, rdma->rq_depth);
 	atomic_set(&rdma->excess_rc, 0);
@@ -691,6 +761,7 @@ static struct p9_trans_rdma *alloc_rdma(struct p9_rdma_opts *opts)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* its not clear to me we can do anything after send has been posted */
 static int rdma_cancel(struct p9_client *client, struct p9_req_t *req)
 {
@@ -698,6 +769,8 @@ static int rdma_cancel(struct p9_client *client, struct p9_req_t *req)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int rdma_cancel(struct p9_client *client, struct p9_req_t *req)
 {
 	/* Nothing to do here.
@@ -716,6 +789,9 @@ static int rdma_cancelled(struct p9_client *client, struct p9_req_t *req)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * trans_create_rdma - Transport method for creating atransport instance
@@ -851,6 +927,10 @@ static struct p9_trans_module p9_rdma_trans = {
 	.request = rdma_request,
 	.cancel = rdma_cancel,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cancelled = rdma_cancelled,
+>>>>>>> v3.18
 =======
 	.cancelled = rdma_cancelled,
 >>>>>>> v3.18

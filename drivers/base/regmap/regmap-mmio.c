@@ -19,7 +19,10 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -30,11 +33,14 @@
 struct regmap_mmio_context {
 	void __iomem *regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned val_bytes;
 	struct clk *clk;
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned reg_bytes;
 	unsigned val_bytes;
 	unsigned pad_bytes;
@@ -95,12 +101,16 @@ regmap_mmio_get_offset(const void *reg, size_t reg_size)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int regmap_mmio_gather_write(void *context,
 				    const void *reg, size_t reg_size,
 				    const void *val, size_t val_size)
 {
 	struct regmap_mmio_context *ctx = context;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 offset;
 	int ret;
@@ -109,12 +119,17 @@ static int regmap_mmio_gather_write(void *context,
 
 	if (ctx->clk) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int offset;
 	int ret;
 
 	regmap_mmio_regsize_check(reg_size);
 
 	if (!IS_ERR(ctx->clk)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = clk_enable(ctx->clk);
 		if (ret < 0)
@@ -122,7 +137,11 @@ static int regmap_mmio_gather_write(void *context,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	offset = *(u32 *)reg;
+=======
+	offset = regmap_mmio_get_offset(reg, reg_size);
+>>>>>>> v3.18
 =======
 	offset = regmap_mmio_get_offset(reg, reg_size);
 >>>>>>> v3.18
@@ -153,7 +172,11 @@ static int regmap_mmio_gather_write(void *context,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctx->clk)
+=======
+	if (!IS_ERR(ctx->clk))
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(ctx->clk))
 >>>>>>> v3.18
@@ -165,10 +188,13 @@ static int regmap_mmio_gather_write(void *context,
 static int regmap_mmio_write(void *context, const void *data, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(count < 4);
 
 	return regmap_mmio_gather_write(context, data, 4, data + 4, count - 4);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap_mmio_context *ctx = context;
 	unsigned int offset = ctx->reg_bytes + ctx->pad_bytes;
 
@@ -176,6 +202,9 @@ static int regmap_mmio_write(void *context, const void *data, size_t count)
 
 	return regmap_mmio_gather_write(context, data, ctx->reg_bytes,
 					data + offset, count - offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -185,6 +214,7 @@ static int regmap_mmio_read(void *context,
 {
 	struct regmap_mmio_context *ctx = context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 offset;
 	int ret;
 
@@ -192,12 +222,17 @@ static int regmap_mmio_read(void *context,
 
 	if (ctx->clk) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int offset;
 	int ret;
 
 	regmap_mmio_regsize_check(reg_size);
 
 	if (!IS_ERR(ctx->clk)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = clk_enable(ctx->clk);
 		if (ret < 0)
@@ -205,7 +240,11 @@ static int regmap_mmio_read(void *context,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	offset = *(u32 *)reg;
+=======
+	offset = regmap_mmio_get_offset(reg, reg_size);
+>>>>>>> v3.18
 =======
 	offset = regmap_mmio_get_offset(reg, reg_size);
 >>>>>>> v3.18
@@ -236,7 +275,11 @@ static int regmap_mmio_read(void *context,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctx->clk)
+=======
+	if (!IS_ERR(ctx->clk))
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(ctx->clk))
 >>>>>>> v3.18
@@ -250,7 +293,11 @@ static void regmap_mmio_free_context(void *context)
 	struct regmap_mmio_context *ctx = context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctx->clk) {
+=======
+	if (!IS_ERR(ctx->clk)) {
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(ctx->clk)) {
 >>>>>>> v3.18
@@ -280,8 +327,14 @@ static struct regmap_mmio_context *regmap_mmio_gen_context(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (config->reg_bits != 32)
 		return ERR_PTR(-EINVAL);
+=======
+	ret = regmap_mmio_regbits_check(config->reg_bits);
+	if (ret)
+		return ERR_PTR(ret);
+>>>>>>> v3.18
 =======
 	ret = regmap_mmio_regbits_check(config->reg_bits);
 	if (ret)
@@ -330,6 +383,12 @@ static struct regmap_mmio_context *regmap_mmio_gen_context(struct device *dev,
 	ctx->regs = regs;
 	ctx->val_bytes = config->val_bits / 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ctx->reg_bytes = config->reg_bits / 8;
+	ctx->pad_bytes = config->pad_bits / 8;
+	ctx->clk = ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 =======
 	ctx->reg_bytes = config->reg_bits / 8;
 	ctx->pad_bytes = config->pad_bits / 8;

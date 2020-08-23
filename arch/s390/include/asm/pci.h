@@ -7,6 +7,10 @@
 #define PCI_BAR_COUNT	6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 >>>>>>> v3.18
@@ -26,10 +30,13 @@ int pci_domain_nr(struct pci_bus *);
 int pci_proc_domain(struct pci_bus *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MSI arch hooks */
 #define arch_setup_msi_irqs	arch_setup_msi_irqs
 #define arch_teardown_msi_irqs	arch_teardown_msi_irqs
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ZPCI_BUS_NR			0	/* default bus number */
@@ -61,6 +68,7 @@ struct zpci_fmb {
 } __packed __aligned(16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct msi_map {
 	unsigned long irq;
 	struct msi_desc *msi;
@@ -69,6 +77,11 @@ struct msi_map {
 
 #define ZPCI_NR_MSI_VECS	64
 #define ZPCI_MSI_MASK		(ZPCI_NR_MSI_VECS - 1)
+=======
+#define ZPCI_MSI_VEC_BITS	11
+#define ZPCI_MSI_VEC_MAX	(1 << ZPCI_MSI_VEC_BITS)
+#define ZPCI_MSI_VEC_MASK	(ZPCI_MSI_VEC_MAX - 1)
+>>>>>>> v3.18
 =======
 #define ZPCI_MSI_VEC_BITS	11
 #define ZPCI_MSI_VEC_MAX	(1 << ZPCI_MSI_VEC_BITS)
@@ -85,14 +98,20 @@ enum zpci_state {
 
 struct zpci_bar_struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32		val;		/* bar start & 3 flag bits */
 	u8		size;		/* order 2 exponent */
 	u16		map_idx;	/* index into bar mapping array */
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;		/* bus resource */
 	u32		val;		/* bar start & 3 flag bits */
 	u16		map_idx;	/* index into bar mapping array */
 	u8		size;		/* order 2 exponent */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -106,6 +125,7 @@ struct zpci_dev {
 	u32		fid;		/* function ID, used by sclp */
 	u32		fh;		/* function handle, used by insn's */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16		pchid;		/* physical channel ID */
 	u8		pfgid;		/* function group ID */
 	u16		domain;
@@ -115,6 +135,8 @@ struct zpci_dev {
 	struct zdev_irq_map *irq_map;
 	struct msi_map *msi_map[ZPCI_NR_MSI_VECS];
 =======
+=======
+>>>>>>> v3.18
 	u16		vfn;		/* virtual function number */
 	u16		pchid;		/* physical channel ID */
 	u8		pfgid;		/* function group ID */
@@ -128,6 +150,9 @@ struct zpci_dev {
 	/* IRQ stuff */
 	u64		msi_addr;	/* MSI address */
 	struct airq_iv *aibv;		/* adapter interrupt bit vector */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int	aisb;		/* number of the summary bit */
 
@@ -143,6 +168,10 @@ struct zpci_dev {
 	unsigned int	next_bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char res_name[16];
+>>>>>>> v3.18
 =======
 	char res_name[16];
 >>>>>>> v3.18
@@ -161,12 +190,15 @@ struct zpci_dev {
 	struct dentry	*debugfs_dev;
 	struct dentry	*debugfs_perf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry	*debugfs_debug;
 };
 
 struct pci_hp_callback_ops {
 	int (*create_slot)	(struct zpci_dev *zdev);
 	void (*remove_slot)	(struct zpci_dev *zdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -177,6 +209,11 @@ static inline bool zdev_enabled(struct zpci_dev *zdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct attribute_group *zpci_attr_groups[];
+
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *zpci_attr_groups[];
 
@@ -186,7 +223,10 @@ extern const struct attribute_group *zpci_attr_groups[];
 ----------------------------------------------------------------------------- */
 /* Base stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct zpci_dev *zpci_alloc_device(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int zpci_create_device(struct zpci_dev *);
@@ -194,8 +234,11 @@ int zpci_enable_device(struct zpci_dev *);
 int zpci_disable_device(struct zpci_dev *);
 void zpci_stop_device(struct zpci_dev *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void zpci_free_device(struct zpci_dev *);
 int zpci_scan_device(struct zpci_dev *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int zpci_register_ioat(struct zpci_dev *, u8, u64, u64, u64);
@@ -203,7 +246,13 @@ int zpci_unregister_ioat(struct zpci_dev *, u8);
 
 /* CLP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int clp_find_pci_devices(void);
+=======
+int clp_scan_pci_devices(void);
+int clp_rescan_pci_devices(void);
+int clp_rescan_pci_devices_simple(void);
+>>>>>>> v3.18
 =======
 int clp_scan_pci_devices(void);
 int clp_rescan_pci_devices(void);
@@ -213,6 +262,7 @@ int clp_add_pci_device(u32, u32, int);
 int clp_enable_fh(struct zpci_dev *, u8);
 int clp_disable_fh(struct zpci_dev *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* MSI */
 struct msi_desc *__irq_get_msi_desc(unsigned int);
@@ -224,10 +274,13 @@ void zpci_msihash_exit(void);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 /* Error handling and recovery */
 void zpci_event_error(void *);
 void zpci_event_availability(void *);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else /* CONFIG_PCI */
 static inline void zpci_event_error(void *e) {}
@@ -243,6 +296,8 @@ bool zpci_fid_present(u32);
 int zpci_sysfs_add_device(struct device *);
 void zpci_sysfs_remove_device(struct device *);
 =======
+=======
+>>>>>>> v3.18
 void zpci_rescan(void);
 bool zpci_is_enabled(void);
 #else /* CONFIG_PCI */
@@ -265,12 +320,16 @@ static inline void zpci_exit_slot(struct zpci_dev *zdev) {}
 /* Helpers */
 struct zpci_dev *get_zdev(struct pci_dev *);
 struct zpci_dev *get_zdev_by_fid(u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DMA */
 int zpci_dma_init(void);
 void zpci_dma_exit(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Hotplug */
 extern struct mutex zpci_list_lock;
@@ -280,6 +339,8 @@ extern unsigned int s390_pci_probe;
 void zpci_register_hp_ops(struct pci_hp_callback_ops *);
 void zpci_deregister_hp_ops(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* FMB */

@@ -183,7 +183,12 @@ static int max7359_probe(struct i2c_client *client,
 					const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct matrix_keymap_data *keymap_data = client->dev.platform_data;
+=======
+	const struct matrix_keymap_data *keymap_data =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct matrix_keymap_data *keymap_data =
 			dev_get_platdata(&client->dev);
@@ -208,6 +213,7 @@ static int max7359_probe(struct i2c_client *client,
 	dev_dbg(&client->dev, "keys FIFO is 0x%02x\n", ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keypad = kzalloc(sizeof(struct max7359_keypad), GFP_KERNEL);
 	input_dev = input_allocate_device();
 	if (!keypad || !input_dev) {
@@ -215,6 +221,8 @@ static int max7359_probe(struct i2c_client *client,
 		error = -ENOMEM;
 		goto failed_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	keypad = devm_kzalloc(&client->dev, sizeof(struct max7359_keypad),
 			      GFP_KERNEL);
 	if (!keypad) {
@@ -226,6 +234,9 @@ static int max7359_probe(struct i2c_client *client,
 	if (!input_dev) {
 		dev_err(&client->dev, "failed to allocate input device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -249,6 +260,7 @@ static int max7359_probe(struct i2c_client *client,
 	max7359_build_keycode(keypad, keymap_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_threaded_irq(client->irq, NULL, max7359_interrupt,
 				     IRQF_TRIGGER_LOW | IRQF_ONESHOT,
 				     client->name, keypad);
@@ -256,6 +268,8 @@ static int max7359_probe(struct i2c_client *client,
 		dev_err(&client->dev, "failed to register interrupt\n");
 		goto failed_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_threaded_irq(&client->dev, client->irq, NULL,
 					  max7359_interrupt,
 					  IRQF_TRIGGER_LOW | IRQF_ONESHOT,
@@ -263,6 +277,9 @@ static int max7359_probe(struct i2c_client *client,
 	if (error) {
 		dev_err(&client->dev, "failed to register interrupt\n");
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -271,7 +288,11 @@ static int max7359_probe(struct i2c_client *client,
 	if (error) {
 		dev_err(&client->dev, "failed to register input device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed_free_irq;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -284,6 +305,7 @@ static int max7359_probe(struct i2c_client *client,
 	device_init_wakeup(&client->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 failed_free_irq:
@@ -306,6 +328,11 @@ static int max7359_remove(struct i2c_client *client)
 }
 
 #ifdef CONFIG_PM
+=======
+}
+
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 }
 
@@ -352,7 +379,10 @@ static struct i2c_driver max7359_i2c_driver = {
 	},
 	.probe		= max7359_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max7359_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= max7359_ids,

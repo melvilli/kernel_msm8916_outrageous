@@ -32,9 +32,12 @@
 #include <sound/info.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* enable debug print */
 #define SNDRV_SEQ_OSS_DEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* max. applications */
@@ -50,7 +53,10 @@
 
 /* device and proc interface name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNDRV_SEQ_OSS_DEVNAME		"seq_oss"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SNDRV_SEQ_OSS_PROCNAME		"oss"
@@ -138,6 +144,10 @@ unsigned int snd_seq_oss_poll(struct seq_oss_devinfo *dp, struct file *file, pol
 
 void snd_seq_oss_reset(struct seq_oss_devinfo *dp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void snd_seq_oss_drain_write(struct seq_oss_devinfo *dp);
+>>>>>>> v3.18
 =======
 void snd_seq_oss_drain_write(struct seq_oss_devinfo *dp);
 >>>>>>> v3.18
@@ -187,6 +197,7 @@ snd_seq_oss_fill_addr(struct seq_oss_devinfo *dp, struct snd_seq_event *ev,
 char *enabled_str(int bool);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* for debug */
 #ifdef SNDRV_SEQ_OSS_DEBUG
@@ -196,6 +207,8 @@ extern int seq_oss_debug;
 #define debug_printk(x)	/**/
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __SEQ_OSS_DEVICE_H */

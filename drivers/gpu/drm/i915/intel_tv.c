@@ -824,9 +824,15 @@ static const struct tv_mode tv_modes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct intel_tv *enc_to_intel_tv(struct drm_encoder *encoder)
 {
 	return container_of(encoder, struct intel_tv, base.base);
+=======
+static struct intel_tv *enc_to_tv(struct intel_encoder *encoder)
+{
+	return container_of(encoder, struct intel_tv, base);
+>>>>>>> v3.18
 =======
 static struct intel_tv *enc_to_tv(struct intel_encoder *encoder)
 {
@@ -837,9 +843,13 @@ static struct intel_tv *enc_to_tv(struct intel_encoder *encoder)
 static struct intel_tv *intel_attached_tv(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return container_of(intel_attached_encoder(connector),
 			    struct intel_tv,
 			    base);
+=======
+	return enc_to_tv(intel_attached_encoder(connector));
+>>>>>>> v3.18
 =======
 	return enc_to_tv(intel_attached_encoder(connector));
 >>>>>>> v3.18
@@ -919,7 +929,10 @@ intel_tv_mode_valid(struct drm_connector *connector,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 intel_tv_get_config(struct intel_encoder *encoder,
 		    struct intel_crtc_config *pipe_config)
@@ -927,13 +940,20 @@ intel_tv_get_config(struct intel_encoder *encoder,
 	pipe_config->adjusted_mode.crtc_clock = pipe_config->port_clock;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool
 intel_tv_compute_config(struct intel_encoder *encoder,
 			struct intel_crtc_config *pipe_config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct intel_tv *intel_tv = enc_to_intel_tv(&encoder->base);
+=======
+	struct intel_tv *intel_tv = enc_to_tv(encoder);
+>>>>>>> v3.18
 =======
 	struct intel_tv *intel_tv = enc_to_tv(encoder);
 >>>>>>> v3.18
@@ -943,10 +963,14 @@ intel_tv_compute_config(struct intel_encoder *encoder,
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intel_encoder_check_is_cloned(&intel_tv->base))
 		return false;
 
 	pipe_config->adjusted_mode.clock = tv_mode->clock;
+=======
+	pipe_config->adjusted_mode.crtc_clock = tv_mode->clock;
+>>>>>>> v3.18
 =======
 	pipe_config->adjusted_mode.crtc_clock = tv_mode->clock;
 >>>>>>> v3.18
@@ -965,6 +989,7 @@ intel_tv_compute_config(struct intel_encoder *encoder,
 }
 
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 intel_tv_mode_set(struct drm_encoder *encoder, struct drm_display_mode *mode,
 		  struct drm_display_mode *adjusted_mode)
@@ -1017,6 +1042,8 @@ intel_tv_mode_set(struct drm_encoder *encoder, struct drm_display_mode *mode,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 set_tv_mode_timings(struct drm_i915_private *dev_priv,
 		    const struct tv_mode *tv_mode,
 		    bool burst_ena)
@@ -1024,6 +1051,9 @@ set_tv_mode_timings(struct drm_i915_private *dev_priv,
 	u32 hctl1, hctl2, hctl3;
 	u32 vctl1, vctl2, vctl3, vctl4, vctl5, vctl6, vctl7;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hctl1 = (tv_mode->hsync_end << TV_HSYNC_END_SHIFT) |
 		(tv_mode->htotal << TV_HTOTAL_SHIFT);
@@ -1065,7 +1095,10 @@ set_tv_mode_timings(struct drm_i915_private *dev_priv,
 		(tv_mode->vburst_end_f4 << TV_VBURST_END_F4_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	I915_WRITE(TV_H_CTL_1, hctl1);
 	I915_WRITE(TV_H_CTL_2, hctl2);
 	I915_WRITE(TV_H_CTL_3, hctl3);
@@ -1146,6 +1179,9 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (intel_crtc->pipe == 1)
 		tv_ctl |= TV_ENC_PIPEB_SELECT;
@@ -1178,6 +1214,7 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 
 	/* Enable two fixes for the chips that need them. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->pci_device < 0x2772)
 		tv_ctl |= TV_ENC_C0_FIX | TV_ENC_SDP_FIX;
 
@@ -1192,16 +1229,22 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 	I915_WRITE(TV_V_CTL_6, vctl6);
 	I915_WRITE(TV_V_CTL_7, vctl7);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_I915GM(dev))
 		tv_ctl |= TV_ENC_C0_FIX | TV_ENC_SDP_FIX;
 
 	set_tv_mode_timings(dev_priv, tv_mode, burst_ena);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	I915_WRITE(TV_SC_CTL_1, scctl1);
 	I915_WRITE(TV_SC_CTL_2, scctl2);
 	I915_WRITE(TV_SC_CTL_3, scctl3);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (color_conversion) {
 		I915_WRITE(TV_CSC_Y, (color_conversion->ry << 16) |
@@ -1220,6 +1263,9 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 =======
 	set_color_conversion(dev_priv, color_conversion);
 >>>>>>> v3.18
+=======
+	set_color_conversion(dev_priv, color_conversion);
+>>>>>>> v3.18
 
 	if (INTEL_INFO(dev)->gen >= 4)
 		I915_WRITE(TV_CLR_KNOBS, 0x00404000);
@@ -1230,6 +1276,7 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 		I915_WRITE(TV_CLR_LEVEL,
 			   ((video_levels->black << TV_BLACK_LEVEL_SHIFT) |
 			    (video_levels->blank << TV_BLANK_LEVEL_SHIFT)));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		int pipeconf_reg = PIPECONF(pipe);
@@ -1272,6 +1319,8 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 		intel_flush_display_plane(dev_priv, intel_crtc->plane);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	assert_pipe_disabled(dev_priv, intel_crtc->pipe);
 
@@ -1291,6 +1340,9 @@ static void intel_tv_pre_enable(struct intel_encoder *encoder)
 		  intel_tv->margin[TV_MARGIN_BOTTOM]);
 	I915_WRITE(TV_WIN_POS, (xpos<<16)|ypos);
 	I915_WRITE(TV_WIN_SIZE, (xsize<<16)|ysize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	j = 0;
@@ -1350,8 +1402,13 @@ intel_tv_detect_type(struct intel_tv *intel_tv,
 		spin_lock_irqsave(&dev_priv->irq_lock, irqflags);
 		i915_disable_pipestat(dev_priv, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      PIPE_HOTPLUG_INTERRUPT_ENABLE |
 				      PIPE_HOTPLUG_TV_INTERRUPT_ENABLE);
+=======
+				      PIPE_HOTPLUG_INTERRUPT_STATUS |
+				      PIPE_HOTPLUG_TV_INTERRUPT_STATUS);
+>>>>>>> v3.18
 =======
 				      PIPE_HOTPLUG_INTERRUPT_STATUS |
 				      PIPE_HOTPLUG_TV_INTERRUPT_STATUS);
@@ -1432,8 +1489,13 @@ intel_tv_detect_type(struct intel_tv *intel_tv,
 		spin_lock_irqsave(&dev_priv->irq_lock, irqflags);
 		i915_enable_pipestat(dev_priv, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     PIPE_HOTPLUG_INTERRUPT_ENABLE |
 				     PIPE_HOTPLUG_TV_INTERRUPT_ENABLE);
+=======
+				     PIPE_HOTPLUG_INTERRUPT_STATUS |
+				     PIPE_HOTPLUG_TV_INTERRUPT_STATUS);
+>>>>>>> v3.18
 =======
 				     PIPE_HOTPLUG_INTERRUPT_STATUS |
 				     PIPE_HOTPLUG_TV_INTERRUPT_STATUS);
@@ -1484,9 +1546,12 @@ intel_tv_detect(struct drm_connector *connector, bool force)
 	struct drm_display_mode mode;
 	struct intel_tv *intel_tv = intel_attached_tv(connector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int type;
 
 =======
+=======
+>>>>>>> v3.18
 	enum drm_connector_status status;
 	int type;
 
@@ -1494,11 +1559,15 @@ intel_tv_detect(struct drm_connector *connector, bool force)
 		      connector->base.id, connector->name,
 		      force);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mode = reported_modes[0];
 
 	if (force) {
 		struct intel_load_detect_pipe tmp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (intel_get_load_detect_pipe(connector, &mode, &tmp)) {
@@ -1512,6 +1581,8 @@ intel_tv_detect(struct drm_connector *connector, bool force)
 	if (type < 0)
 		return connector_status_disconnected;
 =======
+=======
+>>>>>>> v3.18
 		struct drm_modeset_acquire_ctx ctx;
 
 		drm_modeset_acquire_init(&ctx, 0);
@@ -1532,6 +1603,9 @@ intel_tv_detect(struct drm_connector *connector, bool force)
 
 	if (status != connector_status_connected)
 		return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	intel_tv->type = type;
@@ -1640,7 +1714,10 @@ static void
 intel_tv_destroy(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	drm_connector_cleanup(connector);
@@ -1700,10 +1777,13 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct drm_encoder_helper_funcs intel_tv_helper_funcs = {
 	.mode_set = intel_tv_mode_set,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct drm_connector_funcs intel_tv_connector_funcs = {
@@ -1735,6 +1815,7 @@ static int tv_is_present_in_vbt(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct child_device_config *p_child;
 	int i, ret;
 
@@ -1755,6 +1836,8 @@ static int tv_is_present_in_vbt(struct drm_device *dev)
 		 */
 		if (p_child->addin_offset) {
 =======
+=======
+>>>>>>> v3.18
 	union child_device_config *p_child;
 	int i, ret;
 
@@ -1779,6 +1862,9 @@ static int tv_is_present_in_vbt(struct drm_device *dev)
 		 * as present.
 		 */
 		if (p_child->old.addin_offset) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = 1;
 			break;
@@ -1808,7 +1894,11 @@ intel_tv_init(struct drm_device *dev)
 	}
 	/* Even if we have an encoder we may not have a connector */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev_priv->int_tv_support)
+=======
+	if (!dev_priv->vbt.int_tv_support)
+>>>>>>> v3.18
 =======
 	if (!dev_priv->vbt.int_tv_support)
 >>>>>>> v3.18
@@ -1838,7 +1928,11 @@ intel_tv_init(struct drm_device *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_tv = kzalloc(sizeof(struct intel_tv), GFP_KERNEL);
+=======
+	intel_tv = kzalloc(sizeof(*intel_tv), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	intel_tv = kzalloc(sizeof(*intel_tv), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1847,7 +1941,11 @@ intel_tv_init(struct drm_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_connector = kzalloc(sizeof(struct intel_connector), GFP_KERNEL);
+=======
+	intel_connector = kzalloc(sizeof(*intel_connector), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	intel_connector = kzalloc(sizeof(*intel_connector), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1878,6 +1976,11 @@ intel_tv_init(struct drm_device *dev)
 
 	intel_encoder->compute_config = intel_tv_compute_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	intel_encoder->get_config = intel_tv_get_config;
+	intel_encoder->pre_enable = intel_tv_pre_enable;
+>>>>>>> v3.18
 =======
 	intel_encoder->get_config = intel_tv_get_config;
 	intel_encoder->pre_enable = intel_tv_pre_enable;
@@ -1887,6 +1990,10 @@ intel_tv_init(struct drm_device *dev)
 	intel_encoder->get_hw_state = intel_tv_get_hw_state;
 	intel_connector->get_hw_state = intel_connector_get_hw_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	intel_connector->unregister = intel_connector_unregister;
+>>>>>>> v3.18
 =======
 	intel_connector->unregister = intel_connector_unregister;
 >>>>>>> v3.18
@@ -1895,9 +2002,14 @@ intel_tv_init(struct drm_device *dev)
 	intel_encoder->type = INTEL_OUTPUT_TVOUT;
 	intel_encoder->crtc_mask = (1 << 0) | (1 << 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_encoder->cloneable = false;
 	intel_encoder->base.possible_crtcs = ((1 << 0) | (1 << 1));
 	intel_encoder->base.possible_clones = (1 << INTEL_OUTPUT_TVOUT);
+=======
+	intel_encoder->cloneable = 0;
+	intel_encoder->base.possible_crtcs = ((1 << 0) | (1 << 1));
+>>>>>>> v3.18
 =======
 	intel_encoder->cloneable = 0;
 	intel_encoder->base.possible_crtcs = ((1 << 0) | (1 << 1));
@@ -1913,7 +2025,10 @@ intel_tv_init(struct drm_device *dev)
 	intel_tv->tv_format = tv_modes[initial_mode].name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_encoder_helper_add(&intel_encoder->base, &intel_tv_helper_funcs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	drm_connector_helper_add(connector, &intel_tv_connector_helper_funcs);
@@ -1942,7 +2057,11 @@ intel_tv_init(struct drm_device *dev)
 				   dev->mode_config.tv_bottom_margin_property,
 				   intel_tv->margin[TV_MARGIN_BOTTOM]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18

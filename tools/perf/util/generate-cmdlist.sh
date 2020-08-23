@@ -23,7 +23,11 @@ do
 done
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "#ifdef LIBELF_SUPPORT"
+=======
+echo "#ifdef HAVE_LIBELF_SUPPORT"
+>>>>>>> v3.18
 =======
 echo "#ifdef HAVE_LIBELF_SUPPORT"
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ do
      }' "Documentation/perf-$cmd.txt"
 done
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "#endif /* LIBELF_SUPPORT */"
+=======
+echo "#endif /* HAVE_LIBELF_SUPPORT */"
+>>>>>>> v3.18
 =======
 echo "#endif /* HAVE_LIBELF_SUPPORT */"
 >>>>>>> v3.18

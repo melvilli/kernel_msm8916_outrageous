@@ -15,11 +15,16 @@
  * disables interrupts for a long time. This call is stateless.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_NMI_WATCHDOG) || defined(CONFIG_HARDLOCKUP_DETECTOR_NMI)
 #include <asm/nmi.h>
 #endif
 
 #if defined(CONFIG_HAVE_NMI_WATCHDOG) || defined(CONFIG_HARDLOCKUP_DETECTOR)
+=======
+#if defined(CONFIG_HAVE_NMI_WATCHDOG) || defined(CONFIG_HARDLOCKUP_DETECTOR)
+#include <asm/nmi.h>
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_HAVE_NMI_WATCHDOG) || defined(CONFIG_HARDLOCKUP_DETECTOR)
 #include <asm/nmi.h>
@@ -33,7 +38,10 @@ static inline void touch_nmi_watchdog(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_HARDLOCKUP_DETECTOR)
 extern void watchdog_enable_hardlockup_detector(bool val);
 extern bool watchdog_hardlockup_detector_is_enabled(void);
@@ -47,6 +55,9 @@ static inline bool watchdog_hardlockup_detector_is_enabled(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Create trigger_all_cpu_backtrace() out of the arch-provided
@@ -57,11 +68,14 @@ static inline bool watchdog_hardlockup_detector_is_enabled(void)
 static inline bool trigger_all_cpu_backtrace(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_trigger_all_cpu_backtrace();
 
 	return true;
 }
 =======
+=======
+>>>>>>> v3.18
 	arch_trigger_all_cpu_backtrace(true);
 
 	return true;
@@ -71,6 +85,9 @@ static inline bool trigger_allbutself_cpu_backtrace(void)
 	arch_trigger_all_cpu_backtrace(false);
 	return true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline bool trigger_all_cpu_backtrace(void)
@@ -78,11 +95,17 @@ static inline bool trigger_all_cpu_backtrace(void)
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool trigger_allbutself_cpu_backtrace(void)
 {
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -90,8 +113,14 @@ static inline bool trigger_allbutself_cpu_backtrace(void)
 int hw_nmi_is_cpu_stuck(struct pt_regs *);
 u64 hw_nmi_get_sample_period(int watchdog_thresh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int watchdog_enabled;
 extern int watchdog_thresh;
+=======
+extern int watchdog_user_enabled;
+extern int watchdog_thresh;
+extern int sysctl_softlockup_all_cpu_backtrace;
+>>>>>>> v3.18
 =======
 extern int watchdog_user_enabled;
 extern int watchdog_thresh;
@@ -103,10 +132,16 @@ extern int proc_dowatchdog(struct ctl_table *, int ,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ACPI_APEI_NMI
 #include <asm/nmi.h>
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

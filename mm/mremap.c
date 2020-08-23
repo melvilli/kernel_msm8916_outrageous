@@ -16,6 +16,10 @@
 #include <linux/capability.h>
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/swapops.h>
+>>>>>>> v3.18
 =======
 #include <linux/swapops.h>
 >>>>>>> v3.18
@@ -25,8 +29,13 @@
 #include <linux/mmu_notifier.h>
 #include <linux/sched/sysctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 
@@ -79,7 +88,10 @@ static pmd_t *alloc_new_pmd(struct mm_struct *mm, struct vm_area_struct *vma,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static pte_t move_soft_dirty_pte(pte_t pte)
 {
 	/*
@@ -97,6 +109,9 @@ static pte_t move_soft_dirty_pte(pte_t pte)
 	return pte;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void move_ptes(struct vm_area_struct *vma, pmd_t *old_pmd,
 		unsigned long old_addr, unsigned long old_end,
@@ -156,6 +171,10 @@ static void move_ptes(struct vm_area_struct *vma, pmd_t *old_pmd,
 		pte = ptep_get_and_clear(mm, old_addr, old_pte);
 		pte = move_pte(pte, new_vma->vm_page_prot, old_addr, new_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pte = move_soft_dirty_pte(pte);
+>>>>>>> v3.18
 =======
 		pte = move_soft_dirty_pte(pte);
 >>>>>>> v3.18
@@ -210,7 +229,12 @@ unsigned long move_page_tables(struct vm_area_struct *vma,
 			int err = 0;
 			if (extent == HPAGE_PMD_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				VM_BUG_ON(vma->vm_file || !vma->anon_vma);
+=======
+				VM_BUG_ON_VMA(vma->vm_file || !vma->anon_vma,
+					      vma);
+>>>>>>> v3.18
 =======
 				VM_BUG_ON_VMA(vma->vm_file || !vma->anon_vma,
 					      vma);
@@ -502,6 +526,7 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 	bool locked = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	down_write(&current->mm->mmap_sem);
 
 	if (flags & ~(MREMAP_FIXED | MREMAP_MAYMOVE))
@@ -510,6 +535,8 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 	if (addr & ~PAGE_MASK)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (flags & ~(MREMAP_FIXED | MREMAP_MAYMOVE))
 		return ret;
 
@@ -518,6 +545,9 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 
 	if (addr & ~PAGE_MASK)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	old_len = PAGE_ALIGN(old_len);
@@ -530,6 +560,7 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 	 */
 	if (!new_len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 
 	if (flags & MREMAP_FIXED) {
@@ -537,6 +568,8 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 			ret = mremap_to(addr, old_len, new_addr, new_len,
 					&locked);
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	down_write(&current->mm->mmap_sem);
@@ -544,6 +577,9 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 	if (flags & MREMAP_FIXED) {
 		ret = mremap_to(addr, old_len, new_addr, new_len,
 				&locked);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}

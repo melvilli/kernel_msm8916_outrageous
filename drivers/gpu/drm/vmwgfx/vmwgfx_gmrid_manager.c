@@ -47,7 +47,11 @@ struct vmwgfx_gmrid_man {
 static int vmw_gmrid_man_get_node(struct ttm_mem_type_manager *man,
 				  struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct ttm_placement *placement,
+=======
+				  const struct ttm_place *place,
+>>>>>>> v3.18
 =======
 				  const struct ttm_place *place,
 >>>>>>> v3.18
@@ -130,11 +134,14 @@ static int vmw_gmrid_man_init(struct ttm_mem_type_manager *man,
 
 	spin_lock_init(&gman->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gman->max_gmr_pages = dev_priv->max_gmr_pages;
 	gman->used_gmr_pages = 0;
 	ida_init(&gman->gmr_ida);
 	gman->max_gmr_ids = p_size;
 =======
+=======
+>>>>>>> v3.18
 	gman->used_gmr_pages = 0;
 	ida_init(&gman->gmr_ida);
 
@@ -150,6 +157,9 @@ static int vmw_gmrid_man_init(struct ttm_mem_type_manager *man,
 	default:
 		BUG();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	man->priv = (void *) gman;
 	return 0;

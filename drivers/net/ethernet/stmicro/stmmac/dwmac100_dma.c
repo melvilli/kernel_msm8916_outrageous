@@ -91,7 +91,11 @@ static void dwmac100_dump_dma_regs(void __iomem *ioaddr)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CHIP_DBG(KERN_DEBUG "DWMAC 100 DMA CSR\n");
+=======
+	pr_debug("DWMAC 100 DMA CSR\n");
+>>>>>>> v3.18
 =======
 	pr_debug("DWMAC 100 DMA CSR\n");
 >>>>>>> v3.18
@@ -100,9 +104,15 @@ static void dwmac100_dump_dma_regs(void __iomem *ioaddr)
 			 (DMA_BUS_MODE + i * 4),
 			 readl(ioaddr + DMA_BUS_MODE + i * 4));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CHIP_DBG(KERN_DEBUG "\t CSR20 (offset 0x%x): 0x%08x\n",
 		 DMA_CUR_TX_BUF_ADDR, readl(ioaddr + DMA_CUR_TX_BUF_ADDR));
 	CHIP_DBG(KERN_DEBUG "\t CSR21 (offset 0x%x): 0x%08x\n",
+=======
+
+	pr_debug("\tCSR20 (0x%x): 0x%08x, CSR21 (0x%x): 0x%08x\n",
+		 DMA_CUR_TX_BUF_ADDR, readl(ioaddr + DMA_CUR_TX_BUF_ADDR),
+>>>>>>> v3.18
 =======
 
 	pr_debug("\tCSR20 (0x%x): 0x%08x, CSR21 (0x%x): 0x%08x\n",

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -93,12 +102,15 @@ acpi_status acpi_reset(void)
 		 * validation mechanism, which may block a valid write to the reset
 		 * register.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Spec section 4.7.3.6 requires register width to be 8.
 		 */
 		status =
 		    acpi_os_write_port((acpi_io_address) reset_reg->address,
 				       acpi_gbl_FADT.reset_value, 8);
 =======
+=======
+>>>>>>> v3.18
 		 *
 		 * NOTE:
 		 * The ACPI spec requires the reset register width to be 8, so we
@@ -110,6 +122,9 @@ acpi_status acpi_reset(void)
 		    acpi_os_write_port((acpi_io_address) reset_reg->address,
 				       acpi_gbl_FADT.reset_value,
 				       ACPI_RESET_REGISTER_WIDTH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* Write the reset value to the reset register */
@@ -143,7 +158,12 @@ ACPI_EXPORT_SYMBOL(acpi_reset)
 acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 value;
+=======
+	u32 value_lo;
+	u32 value_hi;
+>>>>>>> v3.18
 =======
 	u32 value_lo;
 	u32 value_hi;
@@ -166,6 +186,7 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize entire 64-bit return value to zero */
 
 	*return_value = 0;
@@ -173,6 +194,10 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 
 	/*
 	 * Two address spaces supported: Memory or IO. PCI_Config is
+=======
+	/*
+	 * Two address spaces supported: Memory or I/O. PCI_Config is
+>>>>>>> v3.18
 =======
 	/*
 	 * Two address spaces supported: Memory or I/O. PCI_Config is
@@ -189,6 +214,12 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 	} else {		/* ACPI_ADR_SPACE_SYSTEM_IO, validated earlier */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		value_lo = 0;
+		value_hi = 0;
+
+>>>>>>> v3.18
 =======
 		value_lo = 0;
 		value_hi = 0;
@@ -201,16 +232,22 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 
 		status = acpi_hw_read_port((acpi_io_address)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   address, &value, width);
 		if (ACPI_FAILURE(status)) {
 			return (status);
 		}
 		*return_value = value;
 =======
+=======
+>>>>>>> v3.18
 					   address, &value_lo, width);
 		if (ACPI_FAILURE(status)) {
 			return (status);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (reg->bit_width == 64) {
@@ -219,6 +256,7 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 
 			status = acpi_hw_read_port((acpi_io_address)
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   (address + 4), &value, 32);
 			if (ACPI_FAILURE(status)) {
 				return (status);
@@ -226,6 +264,8 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 			*return_value |= ((u64)value << 32);
 		}
 =======
+=======
+>>>>>>> v3.18
 						   (address + 4), &value_hi,
 						   32);
 			if (ACPI_FAILURE(status)) {
@@ -236,6 +276,9 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 		/* Set the return value only if status is AE_OK */
 
 		*return_value = (value_lo | ((u64)value_hi << 32));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -246,7 +289,11 @@ acpi_status acpi_read(u64 *return_value, struct acpi_generic_address *reg)
 			  acpi_ut_get_region_name(reg->space_id)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (status);
+=======
+	return (AE_OK);
+>>>>>>> v3.18
 =======
 	return (AE_OK);
 >>>>>>> v3.18
@@ -559,7 +606,11 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 	 * for this state
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->pathname =
+=======
+	info->relative_pathname =
+>>>>>>> v3.18
 =======
 	info->relative_pathname =
 >>>>>>> v3.18
@@ -574,7 +625,11 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 	if (!info->return_object) {
 		ACPI_ERROR((AE_INFO, "No Sleep State object returned from [%s]",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    info->pathname));
+=======
+			    info->relative_pathname));
+>>>>>>> v3.18
 =======
 			    info->relative_pathname));
 >>>>>>> v3.18
@@ -600,6 +655,10 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 	switch (info->return_object->package.count) {
 	case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -608,6 +667,10 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 
 	case 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -625,6 +688,10 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 	case 2:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -642,6 +709,7 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup1:
 	acpi_ut_remove_reference(info->return_object);
 
@@ -651,6 +719,8 @@ acpi_get_sleep_type_data(u8 sleep_state, u8 *sleep_type_a, u8 *sleep_type_b)
 				"While evaluating Sleep State [%s]",
 				info->pathname));
 =======
+=======
+>>>>>>> v3.18
 cleanup1:
 	acpi_ut_remove_reference(info->return_object);
 
@@ -659,6 +729,9 @@ cleanup:
 		ACPI_EXCEPTION((AE_INFO, status,
 				"While evaluating Sleep State [%s]",
 				info->relative_pathname));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

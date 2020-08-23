@@ -19,7 +19,10 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -99,6 +102,7 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	struct serial8250_em_priv *priv;
 	struct uart_8250_port up;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EINVAL;
 
 	if (!regs || !irq) {
@@ -119,6 +123,8 @@ static int serial8250_em_probe(struct platform_device *pdev)
 		ret = PTR_ERR(priv->sclk);
 		goto err1;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (!regs || !irq) {
@@ -136,6 +142,9 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	if (IS_ERR(priv->sclk)) {
 		dev_err(&pdev->dev, "unable to get clock\n");
 		return PTR_ERR(priv->sclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -148,7 +157,11 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	up.port.private_data = priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(priv->sclk);
+=======
+	clk_prepare_enable(priv->sclk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(priv->sclk);
 >>>>>>> v3.18
@@ -164,7 +177,12 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(&pdev->dev, "unable to register 8250 port\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err2;
+=======
+		clk_disable_unprepare(priv->sclk);
+		return ret;
+>>>>>>> v3.18
 =======
 		clk_disable_unprepare(priv->sclk);
 		return ret;
@@ -174,6 +192,7 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	priv->line = ret;
 	platform_set_drvdata(pdev, priv);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
  err2:
@@ -185,6 +204,8 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	return ret;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int serial8250_em_remove(struct platform_device *pdev)
@@ -193,9 +214,13 @@ static int serial8250_em_remove(struct platform_device *pdev)
 
 	serial8250_unregister_port(priv->line);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(priv->sclk);
 	clk_put(priv->sclk);
 	kfree(priv);
+=======
+	clk_disable_unprepare(priv->sclk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(priv->sclk);
 >>>>>>> v3.18

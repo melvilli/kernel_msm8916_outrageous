@@ -27,6 +27,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cpu power scale management
  */
 
@@ -45,6 +46,8 @@ static DEFINE_PER_CPU(unsigned long, cpu_scale);
 
 unsigned long arch_scale_freq_power(struct sched_domain *sd, int cpu)
 =======
+=======
+>>>>>>> v3.18
  * cpu capacity scale management
  */
 
@@ -62,11 +65,15 @@ unsigned long arch_scale_freq_power(struct sched_domain *sd, int cpu)
 static DEFINE_PER_CPU(unsigned long, cpu_scale);
 
 unsigned long arch_scale_cpu_capacity(struct sched_domain *sd, int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return per_cpu(cpu_scale, cpu);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void set_power_scale(unsigned int cpu, unsigned long power)
 {
@@ -78,6 +85,11 @@ static DEFINE_PER_CPU(unsigned long, cpu_efficiency) = SCHED_POWER_SCALE;
 unsigned long arch_get_cpu_efficiency(int cpu)
 {
 	return per_cpu(cpu_efficiency, cpu);
+=======
+static void set_capacity_scale(unsigned int cpu, unsigned long capacity)
+{
+	per_cpu(cpu_scale, cpu) = capacity;
+>>>>>>> v3.18
 =======
 static void set_capacity_scale(unsigned int cpu, unsigned long capacity)
 {
@@ -96,6 +108,7 @@ struct cpu_efficiency {
  * The efficiency value must fit in 20bit and the final
  * cpu_scale value must be in the range
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   0 < cpu_scale < 3*SCHED_POWER_SCALE/2
  * in order to return at most 1 when DIV_ROUND_CLOSEST
  * is used to compute the capacity of a CPU.
@@ -104,6 +117,8 @@ struct cpu_efficiency {
  */
 struct cpu_efficiency table_efficiency[] = {
 =======
+=======
+>>>>>>> v3.18
  *   0 < cpu_scale < 3*SCHED_CAPACITY_SCALE/2
  * in order to return at most 1 when DIV_ROUND_CLOSEST
  * is used to compute the capacity of a CPU.
@@ -111,6 +126,9 @@ struct cpu_efficiency table_efficiency[] = {
  * use the default SCHED_CAPACITY_SCALE value for cpu_scale.
  */
 static const struct cpu_efficiency table_efficiency[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{"arm,cortex-a15", 3891},
 	{"arm,cortex-a7",  2048},
@@ -118,21 +136,28 @@ static const struct cpu_efficiency table_efficiency[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long *__cpu_capacity;
 #define cpu_capacity(cpu)	__cpu_capacity[cpu]
 
 unsigned long middle_capacity = 1;
 =======
+=======
+>>>>>>> v3.18
 static unsigned long *__cpu_capacity;
 #define cpu_capacity(cpu)	__cpu_capacity[cpu]
 
 static unsigned long middle_capacity = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Iterate all CPUs' descriptor in DT and compute the efficiency
  * (as per table_efficiency). Also calculate a middle efficiency
  * as close as possible to  (max{eff_i} - min{eff_i}) / 2
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This is later used to scale the cpu_power field such that an
  * 'average' CPU is of middle power. Also see the comments near
@@ -155,6 +180,8 @@ static void __init parse_dt_topology(void)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
  * This is later used to scale the cpu_capacity field such that an
  * 'average' CPU is of middle capacity. Also see the comments near
  * table_efficiency[] and update_cpu_capacity().
@@ -170,6 +197,9 @@ static void __init parse_dt_topology(void)
 
 	__cpu_capacity = kcalloc(nr_cpu_ids, sizeof(*__cpu_capacity),
 				 GFP_NOWAIT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for_each_possible_cpu(cpu) {
@@ -191,8 +221,11 @@ static void __init parse_dt_topology(void)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		per_cpu(cpu_efficiency, cpu) = cpu_eff->efficiency;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rate = of_get_property(cn, "clock-frequency", &len);
@@ -220,7 +253,11 @@ static void __init parse_dt_topology(void)
 	 * compute a middle_capacity factor that will ensure that the capacity
 	 * of an 'average' CPU of the system will be as close as possible to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * SCHED_POWER_SCALE, which is the default value, but with the
+=======
+	 * SCHED_CAPACITY_SCALE, which is the default value, but with the
+>>>>>>> v3.18
 =======
 	 * SCHED_CAPACITY_SCALE, which is the default value, but with the
 >>>>>>> v3.18
@@ -229,15 +266,21 @@ static void __init parse_dt_topology(void)
 	if (4*max_capacity < (3*(max_capacity + min_capacity)))
 		middle_capacity = (min_capacity + max_capacity)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				>> (SCHED_POWER_SHIFT+1);
 	else
 		middle_capacity = ((max_capacity / 3)
 				>> (SCHED_POWER_SHIFT-1)) + 1;
 =======
+=======
+>>>>>>> v3.18
 				>> (SCHED_CAPACITY_SHIFT+1);
 	else
 		middle_capacity = ((max_capacity / 3)
 				>> (SCHED_CAPACITY_SHIFT-1)) + 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -248,7 +291,11 @@ static void __init parse_dt_topology(void)
  * function returns directly for SMP system.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void update_cpu_power(unsigned int cpu)
+=======
+static void update_cpu_capacity(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void update_cpu_capacity(unsigned int cpu)
 >>>>>>> v3.18
@@ -257,22 +304,32 @@ static void update_cpu_capacity(unsigned int cpu)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_power_scale(cpu, cpu_capacity(cpu) / middle_capacity);
 
 	printk(KERN_INFO "CPU%u: update cpu_power %lu\n",
 		cpu, arch_scale_freq_power(NULL, cpu));
 =======
+=======
+>>>>>>> v3.18
 	set_capacity_scale(cpu, cpu_capacity(cpu) / middle_capacity);
 
 	printk(KERN_INFO "CPU%u: update cpu_capacity %lu\n",
 		cpu, arch_scale_cpu_capacity(NULL, cpu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 #else
 static inline void parse_dt_topology(void) {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void update_cpu_power(unsigned int cpuid) {}
+=======
+static inline void update_cpu_capacity(unsigned int cpuid) {}
+>>>>>>> v3.18
 =======
 static inline void update_cpu_capacity(unsigned int cpuid) {}
 >>>>>>> v3.18
@@ -290,8 +347,11 @@ const struct cpumask *cpu_coregroup_mask(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void update_siblings_masks(unsigned int cpuid)
 =======
+=======
+>>>>>>> v3.18
 /*
  * The current assumption is that we can power gate each core independently.
  * This will be superseded by DT binding once available.
@@ -302,6 +362,9 @@ const struct cpumask *cpu_corepower_mask(int cpu)
 }
 
 static void update_siblings_masks(unsigned int cpuid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cputopo_arm *cpu_topo, *cpuid_topo = &cpu_topology[cpuid];
@@ -376,7 +439,11 @@ void store_cpu_topology(unsigned int cpuid)
 	update_siblings_masks(cpuid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	update_cpu_power(cpuid);
+=======
+	update_cpu_capacity(cpuid);
+>>>>>>> v3.18
 =======
 	update_cpu_capacity(cpuid);
 >>>>>>> v3.18
@@ -388,7 +455,10 @@ void store_cpu_topology(unsigned int cpuid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int cpu_corepower_flags(void)
 {
 	return SD_SHARE_PKG_RESOURCES  | SD_SHARE_POWERDOMAIN;
@@ -403,6 +473,9 @@ static struct sched_domain_topology_level arm_topology[] = {
 	{ NULL, },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * init_cpu_topology is called at boot when only one cpu is running
@@ -413,7 +486,11 @@ void __init init_cpu_topology(void)
 	unsigned int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* init core mask and power*/
+=======
+	/* init core mask and capacity */
+>>>>>>> v3.18
 =======
 	/* init core mask and capacity */
 >>>>>>> v3.18
@@ -427,7 +504,11 @@ void __init init_cpu_topology(void)
 		cpumask_clear(&cpu_topo->thread_sibling);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_power_scale(cpu, SCHED_POWER_SCALE);
+=======
+		set_capacity_scale(cpu, SCHED_CAPACITY_SCALE);
+>>>>>>> v3.18
 =======
 		set_capacity_scale(cpu, SCHED_CAPACITY_SCALE);
 >>>>>>> v3.18
@@ -436,6 +517,12 @@ void __init init_cpu_topology(void)
 
 	parse_dt_topology();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Set scheduler topology descriptor */
+	set_sched_topology(arm_topology);
+>>>>>>> v3.18
 =======
 
 	/* Set scheduler topology descriptor */

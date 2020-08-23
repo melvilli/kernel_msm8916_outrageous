@@ -326,7 +326,11 @@ pci_map_single_1(struct pci_dev *pdev, void *cpu_addr, size_t size,
 static struct pci_dev *alpha_gendev_to_pci(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev && dev->bus == &pci_bus_type)
+=======
+	if (dev && dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (dev && dev_is_pci(dev))
 >>>>>>> v3.18

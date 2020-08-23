@@ -27,6 +27,10 @@
 #include <subdev/gpio.h>
 #include <subdev/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/fuse.h>
+>>>>>>> v3.18
 =======
 #include <subdev/fuse.h>
 >>>>>>> v3.18
@@ -38,7 +42,11 @@
 #include <subdev/timer.h>
 #include <subdev/fb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/ltcg.h>
+=======
+#include <subdev/ltc.h>
+>>>>>>> v3.18
 =======
 #include <subdev/ltc.h>
 >>>>>>> v3.18
@@ -47,6 +55,11 @@
 #include <subdev/vm.h>
 #include <subdev/bar.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/pwr.h>
+#include <subdev/volt.h>
+>>>>>>> v3.18
 =======
 #include <subdev/pwr.h>
 #include <subdev/volt.h>
@@ -63,6 +76,10 @@
 #include <engine/copy.h>
 #include <engine/disp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <engine/perfmon.h>
+>>>>>>> v3.18
 =======
 #include <engine/perfmon.h>
 >>>>>>> v3.18
@@ -74,6 +91,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xc0:
 		device->cname = "GF100";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
@@ -95,6 +113,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -117,6 +137,9 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc0_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
@@ -124,7 +147,12 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 		device->oclass[NVDEV_ENGINE_COPY1  ] = &nvc0_copy1_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -134,6 +162,7 @@ nvc0_identify(struct nouveau_device *device)
 		device->cname = "GF104";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_CLOCK  ] = &nvc0_clock_oclass;
@@ -154,6 +183,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -176,6 +207,9 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc4_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
@@ -183,7 +217,12 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 		device->oclass[NVDEV_ENGINE_COPY1  ] = &nvc0_copy1_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -193,6 +232,7 @@ nvc0_identify(struct nouveau_device *device)
 		device->cname = "GF106";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_CLOCK  ] = &nvc0_clock_oclass;
@@ -213,6 +253,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -235,13 +277,21 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc4_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -250,6 +300,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xce:
 		device->cname = "GF114";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
@@ -271,6 +322,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -293,6 +346,9 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc4_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
@@ -300,7 +356,12 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 		device->oclass[NVDEV_ENGINE_COPY1  ] = &nvc0_copy1_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -309,6 +370,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xcf:
 		device->cname = "GF116";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
@@ -330,6 +392,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -352,14 +416,22 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc4_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_COPY1  ] = &nvc0_copy1_oclass;
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -368,6 +440,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xc1:
 		device->cname = "GF108";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
@@ -389,6 +462,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -411,13 +486,21 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc1_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -426,6 +509,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xc8:
 		device->cname = "GF110";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nv50_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nv94_i2c_oclass;
@@ -447,6 +531,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nv94_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nv94_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -469,6 +555,9 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvc8_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
@@ -476,7 +565,12 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 		device->oclass[NVDEV_ENGINE_COPY1  ] = &nvc0_copy1_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nva3_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nva3_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -485,6 +579,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xd9:
 		device->cname = "GF119";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nvd0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nvd0_i2c_oclass;
@@ -506,6 +601,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nvd0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nvd0_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -528,13 +625,21 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvd9_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nvd0_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nvd0_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nvd0_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
@@ -543,6 +648,7 @@ nvc0_identify(struct nouveau_device *device)
 	case 0xd7:
 		device->cname = "GF117";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nvd0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nvd0_i2c_oclass;
@@ -564,6 +670,8 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] = &nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] = &nvc0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nvd0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  gf117_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -584,13 +692,21 @@ nvc0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_FIFO   ] =  nvc0_fifo_oclass;
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nvd7_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_VP     ] = &nvc0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_BSP    ] = &nvc0_bsp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nvc0_copy0_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nvd0_disp_oclass;
+=======
+		device->oclass[NVDEV_ENGINE_DISP   ] =  nvd0_disp_oclass;
+		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;
+>>>>>>> v3.18
 =======
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nvd0_disp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nvc0_perfmon_oclass;

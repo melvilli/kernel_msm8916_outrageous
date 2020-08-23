@@ -17,6 +17,7 @@
 #define __ASM_PGTABLE_HWDEF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARM64_64K_PAGES
 #include <asm/pgtable-2level-hwdef.h>
 #else
@@ -25,6 +26,8 @@
 
 /*
 =======
+=======
+>>>>>>> v3.18
 #define PTRS_PER_PTE		(1 << (PAGE_SHIFT - 3))
 
 /*
@@ -64,19 +67,28 @@
 #define SECTION_MASK		(~(SECTION_SIZE-1))
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Hardware page table definitions.
  *
  * Level 1 descriptor (PUD).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define PUD_TABLE_BIT		(_AT(pgdval_t, 1) << 1)
 =======
+=======
+>>>>>>> v3.18
 #define PUD_TYPE_TABLE		(_AT(pudval_t, 3) << 0)
 #define PUD_TABLE_BIT		(_AT(pgdval_t, 1) << 1)
 #define PUD_TYPE_MASK		(_AT(pgdval_t, 3) << 0)
 #define PUD_TYPE_SECT		(_AT(pgdval_t, 1) << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

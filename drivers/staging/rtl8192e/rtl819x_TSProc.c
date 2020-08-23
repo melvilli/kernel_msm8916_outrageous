@@ -80,7 +80,11 @@ static void RxPktPendingTimeout(unsigned long data)
 		if (index > REORDER_WIN_SIZE) {
 			RTLLIB_DEBUG(RTLLIB_DL_ERR, "RxReorderIndicatePacket():"
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     " Rx Reorer struct buffer full!!\n");
+=======
+				     " Rx Reorder struct buffer full!!\n");
+>>>>>>> v3.18
 =======
 				     " Rx Reorder struct buffer full!!\n");
 >>>>>>> v3.18
@@ -148,6 +152,10 @@ void TSInitialize(struct rtllib_device *ieee)
 	struct rx_reorder_entry *pRxReorderEntry = ieee->RxReorderEntry;
 	u8				count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -242,6 +250,10 @@ static struct ts_common_info *SearchAdmitTRStream(struct rtllib_device *ieee,
 	struct list_head *psearch_list;
 	struct ts_common_info *pRet = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -277,7 +289,11 @@ static struct ts_common_info *SearchAdmitTRStream(struct rtllib_device *ieee,
 
 	for (dir = 0; dir <= DIR_BI_DIR; dir++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (search_dir[dir] == false)
+=======
+		if (!search_dir[dir])
+>>>>>>> v3.18
 =======
 		if (!search_dir[dir])
 >>>>>>> v3.18
@@ -295,9 +311,14 @@ static struct ts_common_info *SearchAdmitTRStream(struct rtllib_device *ieee,
 
 	if (pRet && &pRet->List  != psearch_list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return pRet ;
 	else
 		return NULL;
+=======
+		return pRet;
+	return NULL;
+>>>>>>> v3.18
 =======
 		return pRet;
 	return NULL;
@@ -332,6 +353,10 @@ bool GetTs(struct rtllib_device *ieee, struct ts_common_info **ppTS,
 {
 	u8	UP = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -374,7 +399,11 @@ bool GetTs(struct rtllib_device *ieee, struct ts_common_info **ppTS,
 		return true;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bAddNewTs == false) {
+=======
+		if (!bAddNewTs) {
+>>>>>>> v3.18
 =======
 		if (!bAddNewTs) {
 >>>>>>> v3.18
@@ -473,6 +502,10 @@ static void RemoveTsEntry(struct rtllib_device *ieee, struct ts_common_info *pTs
 				int i = 0;
 				struct rtllib_rxb *prxb = pRxReorderEntry->prxb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -489,6 +522,10 @@ static void RemoveTsEntry(struct rtllib_device *ieee, struct ts_common_info *pTs
 	} else {
 		struct tx_ts_record *pTxTS = (struct tx_ts_record *)pTs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -500,6 +537,10 @@ void RemovePeerTS(struct rtllib_device *ieee, u8 *Addr)
 {
 	struct ts_common_info *pTS, *pTmpTS;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

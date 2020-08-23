@@ -58,6 +58,7 @@ struct ieee80211_ccmp_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_ccmp_aes_encrypt(struct crypto_tfm *tfm,
 			     const u8 pt[16], u8 ct[16])
 {
@@ -66,6 +67,8 @@ void ieee80211_ccmp_aes_encrypt(struct crypto_tfm *tfm,
 
 static void * ieee80211_ccmp_init(int key_idx)
 =======
+=======
+>>>>>>> v3.18
 static void ieee80211_ccmp_aes_encrypt(struct crypto_tfm *tfm,
 			     const u8 pt[16], u8 ct[16])
 {
@@ -73,6 +76,9 @@ static void ieee80211_ccmp_aes_encrypt(struct crypto_tfm *tfm,
 }
 
 static void *ieee80211_ccmp_init(int key_idx)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ieee80211_ccmp_data *priv;
@@ -83,7 +89,11 @@ static void *ieee80211_ccmp_init(int key_idx)
 	priv->key_idx = key_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        priv->tfm = (void*)crypto_alloc_cipher("aes", 0, CRYPTO_ALG_ASYNC);
+=======
+       priv->tfm = (void *)crypto_alloc_cipher("aes", 0, CRYPTO_ALG_ASYNC);
+>>>>>>> v3.18
 =======
        priv->tfm = (void *)crypto_alloc_cipher("aes", 0, CRYPTO_ALG_ASYNC);
 >>>>>>> v3.18
@@ -100,7 +110,11 @@ fail:
 	if (priv) {
 		if (priv->tfm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			crypto_free_cipher((void*)priv->tfm);
+=======
+			crypto_free_cipher((void *)priv->tfm);
+>>>>>>> v3.18
 =======
 			crypto_free_cipher((void *)priv->tfm);
 >>>>>>> v3.18
@@ -117,7 +131,11 @@ static void ieee80211_ccmp_deinit(void *priv)
 
 	if (_priv && _priv->tfm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		crypto_free_cipher((void*)_priv->tfm);
+=======
+		crypto_free_cipher((void *)_priv->tfm);
+>>>>>>> v3.18
 =======
 		crypto_free_cipher((void *)_priv->tfm);
 >>>>>>> v3.18
@@ -416,7 +434,11 @@ static int ieee80211_ccmp_set_key(void *key, int len, u8 *seq, void *priv)
 			data->rx_pn[5] = seq[0];
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		crypto_cipher_setkey((void*)data->tfm, data->key, CCMP_TK_LEN);
+=======
+		crypto_cipher_setkey((void *)data->tfm, data->key, CCMP_TK_LEN);
+>>>>>>> v3.18
 =======
 		crypto_cipher_setkey((void *)data->tfm, data->key, CCMP_TK_LEN);
 >>>>>>> v3.18
@@ -454,7 +476,11 @@ static int ieee80211_ccmp_get_key(void *key, int len, u8 *seq, void *priv)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char * ieee80211_ccmp_print_stats(char *p, void *priv)
+=======
+static char *ieee80211_ccmp_print_stats(char *p, void *priv)
+>>>>>>> v3.18
 =======
 static char *ieee80211_ccmp_print_stats(char *p, void *priv)
 >>>>>>> v3.18
@@ -475,7 +501,11 @@ static char *ieee80211_ccmp_print_stats(char *p, void *priv)
 void ieee80211_ccmp_null(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    printk("============>%s()\n", __FUNCTION__);
+=======
+//    printk("============>%s()\n", __func__);
+>>>>>>> v3.18
 =======
 //    printk("============>%s()\n", __func__);
 >>>>>>> v3.18

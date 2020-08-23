@@ -187,7 +187,11 @@ ENTRY(copy_user_generic_unrolled)
 	addl %ecx,%edx
 	jmp 60f
 <<<<<<< HEAD
+<<<<<<< HEAD
 40:	lea (%rdx,%rcx,8),%rdx
+=======
+40:	leal (%rdx,%rcx,8),%edx
+>>>>>>> v3.18
 =======
 40:	leal (%rdx,%rcx,8),%edx
 >>>>>>> v3.18
@@ -241,8 +245,11 @@ ENTRY(copy_user_generic_string)
 	CFI_STARTPROC
 	ASM_STAC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andl %edx,%edx
 	jz 4f
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmpl $8,%edx
@@ -257,7 +264,11 @@ ENTRY(copy_user_generic_string)
 3:	rep
 	movsb
 <<<<<<< HEAD
+<<<<<<< HEAD
 4:	xorl %eax,%eax
+=======
+	xorl %eax,%eax
+>>>>>>> v3.18
 =======
 	xorl %eax,%eax
 >>>>>>> v3.18
@@ -266,7 +277,11 @@ ENTRY(copy_user_generic_string)
 
 	.section .fixup,"ax"
 <<<<<<< HEAD
+<<<<<<< HEAD
 11:	lea (%rdx,%rcx,8),%rcx
+=======
+11:	leal (%rdx,%rcx,8),%ecx
+>>>>>>> v3.18
 =======
 11:	leal (%rdx,%rcx,8),%ecx
 >>>>>>> v3.18
@@ -295,6 +310,7 @@ ENTRY(copy_user_enhanced_fast_string)
 	CFI_STARTPROC
 	ASM_STAC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andl %edx,%edx
 	jz 2f
 	movl %edx,%ecx
@@ -302,10 +318,15 @@ ENTRY(copy_user_enhanced_fast_string)
 	movsb
 2:	xorl %eax,%eax
 =======
+=======
+>>>>>>> v3.18
 	movl %edx,%ecx
 1:	rep
 	movsb
 	xorl %eax,%eax
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ASM_CLAC
 	ret

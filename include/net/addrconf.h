@@ -54,6 +54,7 @@ struct prefix_info {
 #define IN6_ADDR_HSIZE		(1 << IN6_ADDR_HSIZE_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int			addrconf_init(void);
 extern void			addrconf_cleanup(void);
 
@@ -73,6 +74,8 @@ extern int			ipv6_chk_addr(struct net *net,
 extern int			ipv6_chk_home_addr(struct net *net,
 						   const struct in6_addr *addr);
 =======
+=======
+>>>>>>> v3.18
 int addrconf_init(void);
 void addrconf_cleanup(void);
 
@@ -85,6 +88,9 @@ int ipv6_chk_addr(struct net *net, const struct in6_addr *addr,
 
 #if defined(CONFIG_IPV6_MIP6) || defined(CONFIG_IPV6_MIP6_MODULE)
 int ipv6_chk_home_addr(struct net *net, const struct in6_addr *addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -92,6 +98,7 @@ bool ipv6_chk_custom_prefix(const struct in6_addr *addr,
 				   const unsigned int prefix_len,
 				   struct net_device *dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int			ipv6_chk_prefix(const struct in6_addr *addr,
 						struct net_device *dev);
@@ -119,6 +126,8 @@ extern void			addrconf_join_solict(struct net_device *dev,
 extern void			addrconf_leave_solict(struct inet6_dev *idev,
 					const struct in6_addr *addr);
 =======
+=======
+>>>>>>> v3.18
 int ipv6_chk_prefix(const struct in6_addr *addr, struct net_device *dev);
 
 struct inet6_ifaddr *ipv6_get_ifaddr(struct net *net,
@@ -135,6 +144,9 @@ int ipv6_get_lladdr(struct net_device *dev, struct in6_addr *addr,
 int ipv6_rcv_saddr_equal(const struct sock *sk, const struct sock *sk2);
 void addrconf_join_solict(struct net_device *dev, const struct in6_addr *addr);
 void addrconf_leave_solict(struct inet6_dev *idev, const struct in6_addr *addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline unsigned long addrconf_timeout_fixup(u32 timeout,
@@ -163,6 +175,7 @@ static inline int addrconf_finite_timeout(unsigned long timeout)
  *	IPv6 Address Label subsystem (addrlabel.c)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int			ipv6_addr_label_init(void);
 extern void			ipv6_addr_label_cleanup(void);
 extern void			ipv6_addr_label_rtnl_register(void);
@@ -170,16 +183,22 @@ extern u32			ipv6_addr_label(struct net *net,
 						const struct in6_addr *addr,
 						int type, int ifindex);
 =======
+=======
+>>>>>>> v3.18
 int ipv6_addr_label_init(void);
 void ipv6_addr_label_cleanup(void);
 void ipv6_addr_label_rtnl_register(void);
 u32 ipv6_addr_label(struct net *net, const struct in6_addr *addr,
 		    int type, int ifindex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  *	multicast prototypes (mcast.c)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int ipv6_sock_mc_join(struct sock *sk, int ifindex,
 			     const struct in6_addr *addr);
@@ -205,6 +224,8 @@ extern bool ipv6_chk_mcast_addr(struct net_device *dev,
 				const struct in6_addr *group,
 				const struct in6_addr *src_addr);
 =======
+=======
+>>>>>>> v3.18
 int ipv6_sock_mc_join(struct sock *sk, int ifindex,
 		      const struct in6_addr *addr);
 int ipv6_sock_mc_drop(struct sock *sk, int ifindex,
@@ -247,6 +268,9 @@ struct ipv6_stub {
 	struct neigh_table *nd_tbl;
 };
 extern const struct ipv6_stub *ipv6_stub __read_mostly;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -275,6 +299,7 @@ static inline bool ipv6_is_mld(struct sk_buff *skb, int nexthdr, int offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void addrconf_prefix_rcv(struct net_device *dev,
 				u8 *opt, int len, bool sllao);
 
@@ -283,10 +308,15 @@ u32 addrconf_rt_table(const struct net_device *dev, u32 default_table);
 void addrconf_prefix_rcv(struct net_device *dev,
 			 u8 *opt, int len, bool sllao);
 >>>>>>> v3.18
+=======
+void addrconf_prefix_rcv(struct net_device *dev,
+			 u8 *opt, int len, bool sllao);
+>>>>>>> v3.18
 
 /*
  *	anycast prototypes (anycast.c)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int ipv6_sock_ac_join(struct sock *sk,int ifindex, const struct in6_addr *addr);
 extern int ipv6_sock_ac_drop(struct sock *sk,int ifindex, const struct in6_addr *addr);
@@ -307,6 +337,8 @@ extern int inet6addr_notifier_call_chain(unsigned long val, void *v);
 extern void inet6_netconf_notify_devconf(struct net *net, int type, int ifindex,
 					 struct ipv6_devconf *devconf);
 =======
+=======
+>>>>>>> v3.18
 int ipv6_sock_ac_join(struct sock *sk, int ifindex,
 		      const struct in6_addr *addr);
 int ipv6_sock_ac_drop(struct sock *sk, int ifindex,
@@ -328,6 +360,9 @@ int inet6addr_notifier_call_chain(unsigned long val, void *v);
 
 void inet6_netconf_notify_devconf(struct net *net, int type, int ifindex,
 				  struct ipv6_devconf *devconf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -363,8 +398,11 @@ static inline struct inet6_dev *in6_dev_get(const struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void in6_dev_finish_destroy(struct inet6_dev *idev);
 =======
+=======
+>>>>>>> v3.18
 static inline struct neigh_parms *__in6_dev_nd_parms_get_rcu(const struct net_device *dev)
 {
 	struct inet6_dev *idev = __in6_dev_get(dev);
@@ -373,6 +411,9 @@ static inline struct neigh_parms *__in6_dev_nd_parms_get_rcu(const struct net_de
 }
 
 void in6_dev_finish_destroy(struct inet6_dev *idev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void in6_dev_put(struct inet6_dev *idev)
@@ -392,7 +433,11 @@ static inline void in6_dev_hold(struct inet6_dev *idev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet6_ifa_finish_destroy(struct inet6_ifaddr *ifp);
+=======
+void inet6_ifa_finish_destroy(struct inet6_ifaddr *ifp);
+>>>>>>> v3.18
 =======
 void inet6_ifa_finish_destroy(struct inet6_ifaddr *ifp);
 >>>>>>> v3.18
@@ -428,6 +473,7 @@ static inline void addrconf_addr_solict_mult(const struct in6_addr *addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool ipv6_addr_is_multicast(const struct in6_addr *addr)
 {
 	return (addr->s6_addr32[0] & htonl(0xFF000000)) == htonl(0xFF000000);
@@ -438,10 +484,15 @@ static inline bool ipv6_addr_is_ll_all_nodes(const struct in6_addr *addr)
 #if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS) && BITS_PER_LONG == 64
 	__u64 *p = (__u64 *)addr;
 =======
+=======
+>>>>>>> v3.18
 static inline bool ipv6_addr_is_ll_all_nodes(const struct in6_addr *addr)
 {
 #if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS) && BITS_PER_LONG == 64
 	__be64 *p = (__be64 *)addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ((p[0] ^ cpu_to_be64(0xff02000000000000UL)) | (p[1] ^ cpu_to_be64(1))) == 0UL;
 #else
@@ -455,7 +506,11 @@ static inline bool ipv6_addr_is_ll_all_routers(const struct in6_addr *addr)
 {
 #if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS) && BITS_PER_LONG == 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64 *p = (__u64 *)addr;
+=======
+	__be64 *p = (__be64 *)addr;
+>>>>>>> v3.18
 =======
 	__be64 *p = (__be64 *)addr;
 >>>>>>> v3.18
@@ -476,7 +531,11 @@ static inline bool ipv6_addr_is_solict_mult(const struct in6_addr *addr)
 {
 #if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS) && BITS_PER_LONG == 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64 *p = (__u64 *)addr;
+=======
+	__be64 *p = (__be64 *)addr;
+>>>>>>> v3.18
 =======
 	__be64 *p = (__be64 *)addr;
 >>>>>>> v3.18
@@ -493,8 +552,13 @@ static inline bool ipv6_addr_is_solict_mult(const struct in6_addr *addr)
 
 #ifdef CONFIG_PROC_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int if6_proc_init(void);
 extern void if6_proc_exit(void);
+=======
+int if6_proc_init(void);
+void if6_proc_exit(void);
+>>>>>>> v3.18
 =======
 int if6_proc_init(void);
 void if6_proc_exit(void);

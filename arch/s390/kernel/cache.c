@@ -147,9 +147,12 @@ static void __init cache_build_info(void)
 	for (level = 0; level < CACHE_MAX_LEVEL; level++) {
 		switch (ct.ci[level].scope) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case CACHE_SCOPE_NOTEXISTS:
 		case CACHE_SCOPE_RESERVED:
 			return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		case CACHE_SCOPE_SHARED:
@@ -159,6 +162,11 @@ static void __init cache_build_info(void)
 			private = 1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		default:
+			return;
+>>>>>>> v3.18
 =======
 		default:
 			return;
@@ -182,7 +190,11 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache_dir *__cpuinit cache_create_cache_dir(int cpu)
+=======
+static struct cache_dir *cache_create_cache_dir(int cpu)
+>>>>>>> v3.18
 =======
 static struct cache_dir *cache_create_cache_dir(int cpu)
 >>>>>>> v3.18
@@ -302,9 +314,14 @@ static struct kobj_type cache_index_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_create_index_dir(struct cache_dir *cache_dir,
 					    struct cache *cache, int index,
 					    int cpu)
+=======
+static int cache_create_index_dir(struct cache_dir *cache_dir,
+				  struct cache *cache, int index, int cpu)
+>>>>>>> v3.18
 =======
 static int cache_create_index_dir(struct cache_dir *cache_dir,
 				  struct cache *cache, int index, int cpu)
@@ -331,7 +348,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_add_cpu(int cpu)
+=======
+static int cache_add_cpu(int cpu)
+>>>>>>> v3.18
 =======
 static int cache_add_cpu(int cpu)
 >>>>>>> v3.18
@@ -357,7 +378,11 @@ static int cache_add_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_remove_cpu(int cpu)
+=======
+static void cache_remove_cpu(int cpu)
+>>>>>>> v3.18
 =======
 static void cache_remove_cpu(int cpu)
 >>>>>>> v3.18
@@ -380,8 +405,13 @@ static void cache_remove_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_hotplug(struct notifier_block *nfb,
 				   unsigned long action, void *hcpu)
+=======
+static int cache_hotplug(struct notifier_block *nfb, unsigned long action,
+			 void *hcpu)
+>>>>>>> v3.18
 =======
 static int cache_hotplug(struct notifier_block *nfb, unsigned long action,
 			 void *hcpu)
@@ -411,16 +441,22 @@ static int __init cache_init(void)
 		return 0;
 	cache_build_info();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_online_cpu(cpu)
 		cache_add_cpu(cpu);
 	hotcpu_notifier(cache_hotplug, 0);
 =======
+=======
+>>>>>>> v3.18
 
 	cpu_notifier_register_begin();
 	for_each_online_cpu(cpu)
 		cache_add_cpu(cpu);
 	__hotcpu_notifier(cache_hotplug, 0);
 	cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

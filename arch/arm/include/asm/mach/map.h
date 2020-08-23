@@ -23,6 +23,7 @@ struct map_desc {
 
 /* types 0-3 are defined in asm/io.h */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MT_UNCACHED		4
 #define MT_CACHECLEAN		5
 #define MT_MINICLEAN		6
@@ -40,6 +41,8 @@ struct map_desc {
 #define MT_MEMORY_RX		18
 #define MT_DEVICE_USER_ACCESSIBLE	19
 =======
+=======
+>>>>>>> v3.18
 enum {
 	MT_UNCACHED = 4,
 	MT_CACHECLEAN,
@@ -55,6 +58,9 @@ enum {
 	MT_MEMORY_RW_SO,
 	MT_MEMORY_DMA_READY,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_MMU
@@ -77,9 +83,12 @@ extern const struct mem_type *get_mem_type(unsigned int type);
 extern int ioremap_page(unsigned long virt, unsigned long phys,
 			const struct mem_type *mtype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern int ioremap_pages(unsigned long virt, unsigned long phys,
 			unsigned long size, const struct mem_type *mtype);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else

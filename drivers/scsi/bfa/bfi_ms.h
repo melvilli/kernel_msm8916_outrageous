@@ -277,8 +277,12 @@ struct bfi_fcport_set_svc_params_req_s {
 	struct bfi_mhdr_s  mh;		/*  msg header */
 	__be16	   tx_bbcredit;	/*  Tx credits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	bb_scn;		/* BB_SC FC credit recovery */
 	u8	rsvd;
+=======
+	u8	rsvd[2];
+>>>>>>> v3.18
 =======
 	u8	rsvd[2];
 >>>>>>> v3.18
@@ -451,8 +455,13 @@ struct bfi_lps_login_rsp_s {
 	u8		ext_status;
 	u8		brcd_switch;	/*  attached peer is brcd switch */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		bb_scn;		/* atatched port's bb_scn */
 	u8		bfa_tag;
+=======
+	u8		bfa_tag;
+	u8		rsvd;
+>>>>>>> v3.18
 =======
 	u8		bfa_tag;
 	u8		rsvd;

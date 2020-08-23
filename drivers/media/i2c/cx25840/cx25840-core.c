@@ -46,7 +46,10 @@
 #include <linux/math64.h>
 #include <media/v4l2-common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/cx25840.h>
@@ -502,7 +505,11 @@ static void cx23885_initialize(struct i2c_client *client)
 	/* Sys PLL */
 	switch (state->id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23888_AV:
+=======
+	case CX23888_AV:
+>>>>>>> v3.18
 =======
 	case CX23888_AV:
 >>>>>>> v3.18
@@ -519,7 +526,11 @@ static void cx23885_initialize(struct i2c_client *client)
 		cx25840_write4(client, 0x44c, 0x161f1000);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23887_AV:
+=======
+	case CX23887_AV:
+>>>>>>> v3.18
 =======
 	case CX23887_AV:
 >>>>>>> v3.18
@@ -531,7 +542,11 @@ static void cx23885_initialize(struct i2c_client *client)
 		cx25840_write4(client, 0x118, 0x00000416);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23885_AV:
+=======
+	case CX23885_AV:
+>>>>>>> v3.18
 =======
 	case CX23885_AV:
 >>>>>>> v3.18
@@ -562,7 +577,11 @@ static void cx23885_initialize(struct i2c_client *client)
 	/* HVR1850 */
 	switch (state->id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23888_AV:
+=======
+	case CX23888_AV:
+>>>>>>> v3.18
 =======
 	case CX23888_AV:
 >>>>>>> v3.18
@@ -590,7 +609,11 @@ static void cx23885_initialize(struct i2c_client *client)
 	 */
 	switch (state->id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23888_AV:
+=======
+	case CX23888_AV:
+>>>>>>> v3.18
 =======
 	case CX23888_AV:
 >>>>>>> v3.18
@@ -604,7 +627,11 @@ static void cx23885_initialize(struct i2c_client *client)
 		cx25840_write4(client, 0x110, 0x000a030e);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23887_AV:
+=======
+	case CX23887_AV:
+>>>>>>> v3.18
 =======
 	case CX23887_AV:
 >>>>>>> v3.18
@@ -617,7 +644,11 @@ static void cx23885_initialize(struct i2c_client *client)
 		cx25840_write4(client, 0x110, 0x000a030e);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX23885_AV:
+=======
+	case CX23885_AV:
+>>>>>>> v3.18
 =======
 	case CX23885_AV:
 >>>>>>> v3.18
@@ -1694,10 +1725,13 @@ static int cx25840_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->size = 1;
@@ -1710,10 +1744,13 @@ static int cx25840_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regi
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cx25840_write(client, reg->reg & 0x0fff, reg->val & 0xff);
@@ -1976,6 +2013,7 @@ static int cx25840_reset(struct v4l2_subdev *sd, u32 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cx25840_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct cx25840_state *state = to_state(sd);
@@ -1984,6 +2022,8 @@ static int cx25840_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 	return v4l2_chip_ident_i2c_client(client, chip, state->id, state->rev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int cx25840_log_status(struct v4l2_subdev *sd)
@@ -5092,7 +5132,10 @@ static const struct v4l2_ctrl_ops cx25840_ctrl_ops = {
 static const struct v4l2_subdev_core_ops cx25840_core_ops = {
 	.log_status = cx25840_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = cx25840_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ctrl = v4l2_subdev_g_ctrl,
@@ -5103,8 +5146,11 @@ static const struct v4l2_subdev_core_ops cx25840_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = cx25840_s_std,
 	.g_std = cx25840_g_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.reset = cx25840_reset,
@@ -5132,6 +5178,11 @@ static const struct v4l2_subdev_audio_ops cx25840_audio_ops = {
 
 static const struct v4l2_subdev_video_ops cx25840_video_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.s_std = cx25840_s_std,
+	.g_std = cx25840_g_std,
+>>>>>>> v3.18
 =======
 	.s_std = cx25840_s_std,
 	.g_std = cx25840_g_std,
@@ -5180,6 +5231,7 @@ static u32 get_cx2388x_ident(struct i2c_client *client)
 		if (((ret & 0xffff0000) >> 16) == (ret & 0xffff)) {
 			/* No DIF */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = V4L2_IDENT_CX23885_AV;
 		} else {
 			/* CX23887 has a broken DIF, but the registers
@@ -5193,6 +5245,8 @@ static u32 get_cx2388x_ident(struct i2c_client *client)
 		v4l_err(client, "Unable to detect h/w, assuming cx23887\n");
 		ret = V4L2_IDENT_CX23887_AV;
 =======
+=======
+>>>>>>> v3.18
 			ret = CX23885_AV;
 		} else {
 			/* CX23887 has a broken DIF, but the registers
@@ -5205,6 +5259,9 @@ static u32 get_cx2388x_ident(struct i2c_client *client)
 	} else {
 		v4l_err(client, "Unable to detect h/w, assuming cx23887\n");
 		ret = CX23887_AV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -5220,7 +5277,11 @@ static int cx25840_probe(struct i2c_client *client,
 	struct v4l2_subdev *sd;
 	int default_volume;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 id = V4L2_IDENT_NONE;
+=======
+	u32 id;
+>>>>>>> v3.18
 =======
 	u32 id;
 >>>>>>> v3.18
@@ -5240,9 +5301,15 @@ static int cx25840_probe(struct i2c_client *client,
 	 * 0x83 for the cx2583x and 0x84 for the cx2584x */
 	if ((device_id & 0xff00) == 0x8300) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		id = V4L2_IDENT_CX25836 + ((device_id >> 4) & 0xf) - 6;
 	} else if ((device_id & 0xff00) == 0x8400) {
 		id = V4L2_IDENT_CX25840 + ((device_id >> 4) & 0xf);
+=======
+		id = CX25836 + ((device_id >> 4) & 0xf) - 6;
+	} else if ((device_id & 0xff00) == 0x8400) {
+		id = CX25840 + ((device_id >> 4) & 0xf);
+>>>>>>> v3.18
 =======
 		id = CX25836 + ((device_id >> 4) & 0xf) - 6;
 	} else if ((device_id & 0xff00) == 0x8400) {
@@ -5253,7 +5320,11 @@ static int cx25840_probe(struct i2c_client *client,
 	} else if ((device_id & 0xfff0) == 0x5A30) {
 		/* The CX23100 (0x5A3C = 23100) doesn't have an A/V decoder */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		id = V4L2_IDENT_CX2310X_AV;
+=======
+		id = CX2310X_AV;
+>>>>>>> v3.18
 =======
 		id = CX2310X_AV;
 >>>>>>> v3.18
@@ -5271,7 +5342,11 @@ static int cx25840_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct cx25840_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -5282,6 +5357,7 @@ static int cx25840_probe(struct i2c_client *client,
 	v4l2_i2c_subdev_init(sd, client, &cx25840_ops);
 
 	switch (id) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case V4L2_IDENT_CX23885_AV:
 		v4l_info(client, "cx23885 A/V decoder found @ 0x%x (%s)\n",
@@ -5304,6 +5380,8 @@ static int cx25840_probe(struct i2c_client *client,
 	case V4L2_IDENT_CX25842:
 	case V4L2_IDENT_CX25843:
 =======
+=======
+>>>>>>> v3.18
 	case CX23885_AV:
 		v4l_info(client, "cx23885 A/V decoder found @ 0x%x (%s)\n",
 			 client->addr << 1, client->adapter->name);
@@ -5324,6 +5402,9 @@ static int cx25840_probe(struct i2c_client *client,
 	case CX25841:
 	case CX25842:
 	case CX25843:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Note: revision '(device_id & 0x0f) == 2' was never built. The
 		   marking skips from 0x1 == 22 to 0x3 == 23. */
@@ -5334,8 +5415,13 @@ static int cx25840_probe(struct i2c_client *client,
 			 client->addr << 1, client->adapter->name);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case V4L2_IDENT_CX25836:
 	case V4L2_IDENT_CX25837:
+=======
+	case CX25836:
+	case CX25837:
+>>>>>>> v3.18
 =======
 	case CX25836:
 	case CX25837:
@@ -5405,7 +5491,10 @@ static int cx25840_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -5433,7 +5522,10 @@ static int cx25840_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

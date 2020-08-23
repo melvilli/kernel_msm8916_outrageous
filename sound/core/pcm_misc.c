@@ -143,12 +143,15 @@ static struct pcm_format_data pcm_formats[(INT)SNDRV_PCM_FORMAT_LAST+1] = {
 	[SNDRV_PCM_FORMAT_DSD_U8] = {
 		.width = 8, .phys = 8, .le = 1, .signd = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.silence = {},
 	},
 	[SNDRV_PCM_FORMAT_DSD_U16_LE] = {
 		.width = 16, .phys = 16, .le = 1, .signd = 0,
 		.silence = {},
 =======
+=======
+>>>>>>> v3.18
 		.silence = { 0x69 },
 	},
 	[SNDRV_PCM_FORMAT_DSD_U16_LE] = {
@@ -166,6 +169,9 @@ static struct pcm_format_data pcm_formats[(INT)SNDRV_PCM_FORMAT_LAST+1] = {
 	[SNDRV_PCM_FORMAT_DSD_U32_BE] = {
 		.width = 32, .phys = 32, .le = 0, .signd = 0,
 		.silence = { 0x69, 0x69, 0x69, 0x69 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	/* FIXME: the following three formats are not defined properly yet */
@@ -177,9 +183,13 @@ static struct pcm_format_data pcm_formats[(INT)SNDRV_PCM_FORMAT_LAST+1] = {
 	},
 	[SNDRV_PCM_FORMAT_SPECIAL] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* set the width and phys same as S16_LE */
 		.width = 16, .phys = 16, .le = -1, .signd = -1,
 		.silence = {},
+=======
+		.le = -1, .signd = -1,
+>>>>>>> v3.18
 =======
 		.le = -1, .signd = -1,
 >>>>>>> v3.18
@@ -541,7 +551,10 @@ unsigned int snd_pcm_rate_bit_to_rate(unsigned int rate_bit)
 }
 EXPORT_SYMBOL(snd_pcm_rate_bit_to_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static unsigned int snd_pcm_rate_mask_sanitize(unsigned int rates)
 {
@@ -581,4 +594,7 @@ unsigned int snd_pcm_rate_mask_intersect(unsigned int rates_a,
 	return rates_a & rates_b;
 }
 EXPORT_SYMBOL_GPL(snd_pcm_rate_mask_intersect);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -163,7 +163,11 @@ static int enic_are_pp_different(struct enic_port_profile *pp1,
 		pp2->instance_uuid, PORT_UUID_MAX) |
 		!!memcmp(pp1->host_uuid, pp2->host_uuid, PORT_UUID_MAX) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		!!memcmp(pp1->mac_addr, pp2->mac_addr, ETH_ALEN);
+=======
+		!ether_addr_equal(pp1->mac_addr, pp2->mac_addr);
+>>>>>>> v3.18
 =======
 		!ether_addr_equal(pp1->mac_addr, pp2->mac_addr);
 >>>>>>> v3.18

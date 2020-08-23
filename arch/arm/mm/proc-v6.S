@@ -37,7 +37,11 @@
 
 ENTRY(cpu_v6_proc_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -48,7 +52,11 @@ ENTRY(cpu_v6_proc_fin)
 	bic	r0, r0, #0x0006			@ .............ca.
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -71,7 +79,11 @@ ENTRY(cpu_v6_reset)
 	mov	r1, #0
 	mcr	p15, 0, r1, c7, c5, 4		@ ISB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 =======
 	ret	r0
 >>>>>>> v3.18
@@ -90,7 +102,11 @@ ENTRY(cpu_v6_do_idle)
 	mcr	p15, 0, r1, c7, c10, 4		@ DWB - WFI may enter a low-power mode
 	mcr	p15, 0, r1, c7, c0, 4		@ wait for interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -101,7 +117,11 @@ ENTRY(cpu_v6_dcache_clean_area)
 	subs	r1, r1, #D_CACHE_LINE_SIZE
 	bhi	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -134,7 +154,11 @@ ENTRY(cpu_v6_switch_mm)
 	mcr	p15, 0, r1, c13, c0, 1		@ set context ID
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -156,7 +180,11 @@ ENTRY(cpu_v6_set_pte_ext)
 	armv6_set_pte_ext cpu_v6
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -169,13 +197,19 @@ ENTRY(cpu_v6_do_suspend)
 	stmfd	sp!, {r4 - r9, lr}
 	mrc	p15, 0, r4, c13, c0, 0	@ FCSE/PID
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrc	p15, 0, r5, c3, c0, 0	@ Domain ID
 	mrc	p15, 0, r6, c2, c0, 1	@ Translation table base 1
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 	mrc	p15, 0, r5, c3, c0, 0	@ Domain ID
 	mrc	p15, 0, r6, c2, c0, 1	@ Translation table base 1
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mrc	p15, 0, r7, c1, c0, 1	@ auxiliary control register
 	mrc	p15, 0, r8, c1, c0, 2	@ co-processor access control
@@ -194,6 +228,10 @@ ENTRY(cpu_v6_do_resume)
 	ldmia	r0, {r4 - r9}
 	mcr	p15, 0, r4, c13, c0, 0	@ FCSE/PID
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MMU
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MMU
 >>>>>>> v3.18
@@ -203,14 +241,20 @@ ENTRY(cpu_v6_do_resume)
 	mcr	p15, 0, r1, c2, c0, 0	@ Translation table base 0
 	mcr	p15, 0, r6, c2, c0, 1	@ Translation table base 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcr	p15, 0, r7, c1, c0, 1	@ auxiliary control register
 	mcr	p15, 0, r8, c1, c0, 2	@ co-processor access control
 	mcr	p15, 0, ip, c2, c0, 2	@ TTB control register
 =======
+=======
+>>>>>>> v3.18
 	mcr	p15, 0, ip, c2, c0, 2	@ TTB control register
 #endif
 	mcr	p15, 0, r7, c1, c0, 1	@ auxiliary control register
 	mcr	p15, 0, r8, c1, c0, 2	@ co-processor access control
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mcr	p15, 0, ip, c7, c5, 4	@ ISB
 	mov	r0, r9			@ control register
@@ -223,8 +267,11 @@ ENDPROC(cpu_v6_do_resume)
 	.align
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -269,9 +316,13 @@ __v6_setup:
 	adr	r5, v6_crval
 	ldmia	r5, {r5, r6}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 	orr	r6, r6, #1 << 25		@ big-endian page tables
 #endif
+=======
+ ARM_BE8(orr	r6, r6, #1 << 25)		@ big-endian page tables
+>>>>>>> v3.18
 =======
  ARM_BE8(orr	r6, r6, #1 << 25)		@ big-endian page tables
 >>>>>>> v3.18
@@ -295,7 +346,11 @@ __v6_setup:
 	orreq	r0, r0, #(1 << 21)		@ low interrupt latency configuration
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr				@ return to head.S:__ret
+=======
+	ret	lr				@ return to head.S:__ret
+>>>>>>> v3.18
 =======
 	ret	lr				@ return to head.S:__ret
 >>>>>>> v3.18

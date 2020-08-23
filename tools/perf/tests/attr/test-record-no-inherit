@@ -4,7 +4,11 @@ args    = -i kill >/dev/null 2>&1
 
 [event:base-record]
 <<<<<<< HEAD
+<<<<<<< HEAD
 sample_type=259
+=======
+sample_type=263
+>>>>>>> v3.18
 =======
 sample_type=263
 >>>>>>> v3.18

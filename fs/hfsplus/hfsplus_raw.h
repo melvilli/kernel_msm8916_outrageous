@@ -145,6 +145,10 @@ struct hfsplus_vh {
 #define HFSPLUS_VOL_JOURNALED		(1 << 13)
 #define HFSPLUS_VOL_SOFTLOCK		(1 << 15)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HFSPLUS_VOL_UNUSED_NODE_FIX	(1 << 31)
+>>>>>>> v3.18
 =======
 #define HFSPLUS_VOL_UNUSED_NODE_FIX	(1 << 31)
 >>>>>>> v3.18
@@ -161,15 +165,21 @@ struct hfs_bnode_desc {
 
 /* HFS+ BTree node types */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HFS_NODE_INDEX	0x00
 #define HFS_NODE_HEADER	0x01
 #define HFS_NODE_MAP	0x02
 #define HFS_NODE_LEAF	0xFF
 =======
+=======
+>>>>>>> v3.18
 #define HFS_NODE_INDEX	0x00	/* An internal (index) node */
 #define HFS_NODE_HEADER	0x01	/* The tree header node (node 0) */
 #define HFS_NODE_MAP	0x02	/* Holds part of the bitmap of used nodes */
 #define HFS_NODE_LEAF	0xFF	/* A leaf (ndNHeight==1) node */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* HFS+ BTree header */
@@ -199,6 +209,12 @@ struct hfs_btree_header_rec {
 #define HFSPLUS_TREE_HEAD 0
 #define HFSPLUS_NODE_MXSZ 32768
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HFSPLUS_ATTR_TREE_NODE_SIZE		8192
+#define HFSPLUS_BTREE_HDR_NODE_RECS_COUNT	3
+#define HFSPLUS_BTREE_HDR_USER_BYTES		128
+>>>>>>> v3.18
 =======
 #define HFSPLUS_ATTR_TREE_NODE_SIZE		8192
 #define HFSPLUS_BTREE_HDR_NODE_RECS_COUNT	3
@@ -276,7 +292,11 @@ struct hfsplus_cat_folder {
 	struct DXInfo finder_info;
 	__be32 text_encoding;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved;
+=======
+	__be32 subfolders;	/* Subfolder count in HFSX. Reserved in HFS+. */
+>>>>>>> v3.18
 =======
 	__be32 subfolders;	/* Subfolder count in HFSX. Reserved in HFS+. */
 >>>>>>> v3.18
@@ -320,7 +340,11 @@ struct hfsplus_cat_file {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* File attribute bits */
+=======
+/* File and folder flag bits */
+>>>>>>> v3.18
 =======
 /* File and folder flag bits */
 >>>>>>> v3.18
@@ -329,6 +353,11 @@ struct hfsplus_cat_file {
 #define HFSPLUS_XATTR_EXISTS		0x0004
 #define HFSPLUS_ACL_EXISTS		0x0008
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HFSPLUS_HAS_FOLDER_COUNT	0x0010	/* Folder has subfolder count
+						 * (HFSX only) */
+>>>>>>> v3.18
 =======
 #define HFSPLUS_HAS_FOLDER_COUNT	0x0010	/* Folder has subfolder count
 						 * (HFSX only) */

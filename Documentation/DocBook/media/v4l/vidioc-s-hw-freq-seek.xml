@@ -122,7 +122,13 @@ field and the &v4l2-tuner; <structfield>index</structfield> field.</entry>
 search in units of 62.5 kHz, or if the &v4l2-tuner;
 <structfield>capability</structfield> field has the
 <<<<<<< HEAD
+<<<<<<< HEAD
 <constant>V4L2_TUNER_CAP_LOW</constant> flag set, in units of 62.5 Hz.
+=======
+<constant>V4L2_TUNER_CAP_LOW</constant> flag set, in units of 62.5 Hz or if the &v4l2-tuner;
+<structfield>capability</structfield> field has the
+<constant>V4L2_TUNER_CAP_1HZ</constant> flag set, in units of 1 Hz.
+>>>>>>> v3.18
 =======
 <constant>V4L2_TUNER_CAP_LOW</constant> flag set, in units of 62.5 Hz or if the &v4l2-tuner;
 <structfield>capability</structfield> field has the
@@ -138,7 +144,13 @@ is used.</entry>
 search in units of 62.5 kHz, or if the &v4l2-tuner;
 <structfield>capability</structfield> field has the
 <<<<<<< HEAD
+<<<<<<< HEAD
 <constant>V4L2_TUNER_CAP_LOW</constant> flag set, in units of 62.5 Hz.
+=======
+<constant>V4L2_TUNER_CAP_LOW</constant> flag set, in units of 62.5 Hz or if the &v4l2-tuner;
+<structfield>capability</structfield> field has the
+<constant>V4L2_TUNER_CAP_1HZ</constant> flag set, in units of 1 Hz.
+>>>>>>> v3.18
 =======
 <constant>V4L2_TUNER_CAP_LOW</constant> flag set, in units of 62.5 Hz or if the &v4l2-tuner;
 <structfield>capability</structfield> field has the

@@ -47,7 +47,10 @@ enum tpm_addr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Indexes the duration array */
 enum tpm_duration {
 	TPM_SHORT = 0,
@@ -56,6 +59,9 @@ enum tpm_duration {
 	TPM_UNDEFINED,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TPM_WARN_RETRY          0x800
 #define TPM_WARN_DOING_SELFTEST 0x802
@@ -64,6 +70,7 @@ enum tpm_duration {
 #define TPM_ERR_INVALID_POSTINIT 38
 
 #define TPM_HEADER_SIZE		10
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern ssize_t tpm_show_pubek(struct device *, struct device_attribute *attr,
 				char *);
@@ -99,6 +106,11 @@ struct tpm_chip;
 
 struct tpm_vendor_specific {
 >>>>>>> v3.18
+=======
+struct tpm_chip;
+
+struct tpm_vendor_specific {
+>>>>>>> v3.18
 	void __iomem *iobase;		/* ioremapped address */
 	unsigned long base;		/* TPM base address */
 
@@ -108,6 +120,7 @@ struct tpm_vendor_specific {
 	int region_size;
 	int have_region;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*recv) (struct tpm_chip *, u8 *, size_t);
 	int (*send) (struct tpm_chip *, u8 *, size_t);
@@ -119,6 +132,9 @@ struct tpm_vendor_specific {
 	void (*release) (struct device *);
 	struct miscdevice miscdev;
 	struct attribute_group *attr_group;
+=======
+	struct miscdevice miscdev;
+>>>>>>> v3.18
 =======
 	struct miscdevice miscdev;
 >>>>>>> v3.18
@@ -145,6 +161,7 @@ struct tpm_vendor_specific {
 struct tpm_chip {
 	struct device *dev;	/* Device stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int dev_num;		/* /dev/tpm# */
 	unsigned long is_open;	/* only one allowed */
@@ -158,6 +175,8 @@ struct tpm_chip {
 	struct timer_list user_read_timer;	/* user needs to claim result */
 	struct work_struct work;
 =======
+=======
+>>>>>>> v3.18
 	const struct tpm_class_ops *ops;
 
 	int dev_num;		/* /dev/tpm# */
@@ -165,6 +184,9 @@ struct tpm_chip {
 	unsigned long is_open;	/* only one allowed */
 	int time_expired;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex tpm_mutex;	/* tpm is processing */
 
@@ -207,6 +229,11 @@ struct tpm_output_header {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TPM_TAG_RQU_COMMAND cpu_to_be16(193)
+
+>>>>>>> v3.18
 =======
 #define TPM_TAG_RQU_COMMAND cpu_to_be16(193)
 
@@ -285,7 +312,10 @@ typedef union {
 } cap_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum tpm_capabilities {
 	TPM_CAP_FLAG = cpu_to_be32(4),
 	TPM_CAP_PROP = cpu_to_be32(5),
@@ -304,6 +334,9 @@ enum tpm_sub_capabilities {
 
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct	tpm_getcap_params_in {
 	__be32	cap;
@@ -333,7 +366,10 @@ typedef union {
 } tpm_cmd_header;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TPM_DIGEST_SIZE 20
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct tpm_pcrread_out {
@@ -389,6 +425,11 @@ struct tpm_cmd_t {
 ssize_t	tpm_getcap(struct device *, __be32, cap_t *, const char *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ssize_t tpm_transmit(struct tpm_chip *chip, const char *buf,
+		     size_t bufsiz);
+>>>>>>> v3.18
 =======
 ssize_t tpm_transmit(struct tpm_chip *chip, const char *buf,
 		     size_t bufsiz);
@@ -398,6 +439,7 @@ extern void tpm_gen_interrupt(struct tpm_chip *);
 extern int tpm_do_selftest(struct tpm_chip *);
 extern unsigned long tpm_calc_ordinal_duration(struct tpm_chip *, u32);
 extern struct tpm_chip* tpm_register_hardware(struct device *,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 const struct tpm_vendor_specific *);
 extern int tpm_open(struct inode *, struct file *);
@@ -410,6 +452,10 @@ extern ssize_t tpm_read(struct file *, char __user *, size_t, loff_t *);
 					      const struct tpm_class_ops *ops);
 extern void tpm_dev_vendor_release(struct tpm_chip *);
 >>>>>>> v3.18
+=======
+					      const struct tpm_class_ops *ops);
+extern void tpm_dev_vendor_release(struct tpm_chip *);
+>>>>>>> v3.18
 extern void tpm_remove_hardware(struct device *);
 extern int tpm_pm_suspend(struct device *);
 extern int tpm_pm_resume(struct device *);
@@ -417,7 +463,10 @@ extern int wait_for_tpm_stat(struct tpm_chip *, u8, unsigned long,
 			     wait_queue_head_t *, bool);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int tpm_dev_add_device(struct tpm_chip *chip);
 void tpm_dev_del_device(struct tpm_chip *chip);
 int tpm_sysfs_add_device(struct tpm_chip *chip);
@@ -425,6 +474,9 @@ void tpm_sysfs_del_device(struct tpm_chip *chip);
 
 int tpm_pcr_read_dev(struct tpm_chip *chip, int pcr_idx, u8 *res_buf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_ACPI
 extern int tpm_add_ppi(struct kobject *);

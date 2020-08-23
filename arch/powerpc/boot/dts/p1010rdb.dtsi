@@ -70,7 +70,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nand@1,0 {
+=======
+	ifc_nand: nand@1,0 {
+>>>>>>> v3.18
 =======
 	ifc_nand: nand@1,0 {
 >>>>>>> v3.18
@@ -78,6 +82,7 @@
 		#size-cells = <1>;
 		compatible = "fsl,ifc-nand";
 		reg = <0x1 0x0 0x10000>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		partition@0 {
@@ -117,6 +122,8 @@
 			reg = <0x01900000 0x00700000>;
 			label = "NAND User area";
 		};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -201,7 +208,10 @@
 	mdio@24000 {
 		phy0: ethernet-phy@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <3 1 0 0>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg = <0x1>;
@@ -209,7 +219,10 @@
 
 		phy1: ethernet-phy@1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <2 1 0 0>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg = <0x0>;
@@ -217,7 +230,10 @@
 
 		phy2: ethernet-phy@2 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <2 1 0 0>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg = <0x2>;

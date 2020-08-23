@@ -19,6 +19,10 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/machdep.h>
+>>>>>>> v3.18
 =======
 #include <asm/machdep.h>
 >>>>>>> v3.18
@@ -33,7 +37,11 @@ struct update_props_workarea {
 	u64 reserved;
 	u32 nprops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -71,6 +79,10 @@ static int delete_dt_node(u32 phandle)
 
 	dlpar_detach_node(dn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(dn);
+>>>>>>> v3.18
 =======
 	of_node_put(dn);
 >>>>>>> v3.18
@@ -132,7 +144,11 @@ static int update_dt_property(struct device_node *dn, struct property **prop,
 	if (!more) {
 		of_update_property(dn, new_prop);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new_prop = NULL;
+=======
+		*prop = NULL;
+>>>>>>> v3.18
 =======
 		*prop = NULL;
 >>>>>>> v3.18
@@ -147,7 +163,11 @@ static int update_dt_node(u32 phandle, s32 scope)
 	struct device_node *dn;
 	struct property *prop = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, rc;
+=======
+	int i, rc, rtas_rc;
+>>>>>>> v3.18
 =======
 	int i, rc, rtas_rc;
 >>>>>>> v3.18
@@ -175,9 +195,15 @@ static int update_dt_node(u32 phandle, s32 scope)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = mobility_rtas_call(update_properties_token, rtas_buf,
 					scope);
 		if (rc < 0)
+=======
+		rtas_rc = mobility_rtas_call(update_properties_token, rtas_buf,
+					scope);
+		if (rtas_rc < 0)
+>>>>>>> v3.18
 =======
 		rtas_rc = mobility_rtas_call(update_properties_token, rtas_buf,
 					scope);
@@ -187,6 +213,7 @@ static int update_dt_node(u32 phandle, s32 scope)
 
 		prop_data = rtas_buf + sizeof(*upwa);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* The first element of the buffer is the path of the node
 		 * being updated in the form of a 8 byte string length
@@ -201,6 +228,8 @@ static int update_dt_node(u32 phandle, s32 scope)
 		 */
 		for (i = 1; i < upwa->nprops; i++) {
 =======
+=======
+>>>>>>> v3.18
 		/* On the first call to ibm,update-properties for a node the
 		 * the first property value descriptor contains an empty
 		 * property name, the property value length encoded as u32,
@@ -214,6 +243,9 @@ static int update_dt_node(u32 phandle, s32 scope)
 		}
 
 		for (i = 0; i < upwa->nprops; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			char *prop_name;
 
@@ -245,7 +277,11 @@ static int update_dt_node(u32 phandle, s32 scope)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (rc == 1);
+=======
+	} while (rtas_rc == 1);
+>>>>>>> v3.18
 =======
 	} while (rtas_rc == 1);
 >>>>>>> v3.18
@@ -262,6 +298,7 @@ static int add_dt_node(u32 parent_phandle, u32 drc_index)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dn = dlpar_configure_connector(drc_index);
 	if (!dn)
 		return -ENOENT;
@@ -274,6 +311,8 @@ static int add_dt_node(u32 parent_phandle, u32 drc_index)
 
 	dn->parent = parent_dn;
 =======
+=======
+>>>>>>> v3.18
 	parent_dn = of_find_node_by_phandle(parent_phandle);
 	if (!parent_dn)
 		return -ENOENT;
@@ -282,6 +321,9 @@ static int add_dt_node(u32 parent_phandle, u32 drc_index)
 	if (!dn)
 		return -ENOENT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = dlpar_attach_node(dn);
 	if (rc)
@@ -349,6 +391,7 @@ void post_mobility_fixup(void)
 	int activate_fw_token;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pseries_devicetree_update(MIGRATION_SCOPE);
 	if (rc) {
 		printk(KERN_ERR "Initial post-mobility device tree update "
@@ -358,6 +401,8 @@ void post_mobility_fixup(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	activate_fw_token = rtas_token("ibm,activate-firmware");
 	if (activate_fw_token == RTAS_UNKNOWN_SERVICE) {
 		printk(KERN_ERR "Could not make post-mobility "
@@ -365,6 +410,7 @@ void post_mobility_fixup(void)
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = rtas_call(activate_fw_token, 0, 1, NULL);
 	if (!rc) {
@@ -377,6 +423,8 @@ void post_mobility_fixup(void)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	do {
 		rc = rtas_call(activate_fw_token, 0, 1, NULL);
 	} while (rtas_busy_delay(rc));
@@ -388,6 +436,9 @@ void post_mobility_fixup(void)
 	if (rc)
 		printk(KERN_ERR "Post-mobility device tree update "
 			"failed: %d\n", rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
@@ -401,7 +452,11 @@ static ssize_t migrate_store(struct class *class, struct class_attribute *attr,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtoull(buf, 0, &streamid);
+=======
+	rc = kstrtou64(buf, 0, &streamid);
+>>>>>>> v3.18
 =======
 	rc = kstrtou64(buf, 0, &streamid);
 >>>>>>> v3.18
@@ -448,7 +503,11 @@ static int __init mobility_sysfs_init(void)
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 device_initcall(mobility_sysfs_init);
+=======
+machine_device_initcall(pseries, mobility_sysfs_init);
+>>>>>>> v3.18
 =======
 machine_device_initcall(pseries, mobility_sysfs_init);
 >>>>>>> v3.18

@@ -15,6 +15,10 @@
 #include <linux/mm.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #include <linux/compat.h>
 #include <linux/elf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -125,6 +133,10 @@ void flush_ptrace_access(struct vm_area_struct *vma, struct page *page,
 	preempt_enable();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(flush_ptrace_access);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(flush_ptrace_access);
 >>>>>>> v3.18
@@ -321,7 +333,11 @@ static int genregs64_set(struct task_struct *target,
 
 	if (!ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long y = regs->y;
+=======
+		unsigned long y;
+>>>>>>> v3.18
 =======
 		unsigned long y;
 >>>>>>> v3.18
@@ -1081,6 +1097,12 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs)
 	secure_computing_strict(regs->u_regs[UREG_G1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (test_thread_flag(TIF_NOHZ))
+		user_exit();
+
+>>>>>>> v3.18
 =======
 	if (test_thread_flag(TIF_NOHZ))
 		user_exit();
@@ -1093,6 +1115,7 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs)
 		trace_sys_enter(regs, regs->u_regs[UREG_G1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_entry((test_thread_flag(TIF_32BIT) ?
 			     AUDIT_ARCH_SPARC :
 			     AUDIT_ARCH_SPARC64),
@@ -1100,6 +1123,10 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs)
 			    regs->u_regs[UREG_I0],
 			    regs->u_regs[UREG_I1],
 			    regs->u_regs[UREG_I2],
+=======
+	audit_syscall_entry(regs->u_regs[UREG_G1], regs->u_regs[UREG_I0],
+			    regs->u_regs[UREG_I1], regs->u_regs[UREG_I2],
+>>>>>>> v3.18
 =======
 	audit_syscall_entry(regs->u_regs[UREG_G1], regs->u_regs[UREG_I0],
 			    regs->u_regs[UREG_I1], regs->u_regs[UREG_I2],
@@ -1112,6 +1139,7 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs)
 asmlinkage void syscall_trace_leave(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_exit(regs);
 
 	if (unlikely(test_thread_flag(TIF_SYSCALL_TRACEPOINT)))
@@ -1120,6 +1148,8 @@ asmlinkage void syscall_trace_leave(struct pt_regs *regs)
 	if (test_thread_flag(TIF_SYSCALL_TRACE))
 		tracehook_report_syscall_exit(regs, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (test_thread_flag(TIF_NOHZ))
 		user_exit();
 
@@ -1133,5 +1163,8 @@ asmlinkage void syscall_trace_leave(struct pt_regs *regs)
 
 	if (test_thread_flag(TIF_NOHZ))
 		user_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -5,15 +5,21 @@
 
 #define add_ssaaaa(sh, sl, ah, al, bh, bl) 				\
 <<<<<<< HEAD
+<<<<<<< HEAD
   __asm__ ("addcc %r4,%5,%1\n\t"						\
 	   "addx %r2,%3,%0\n"						\
 	   : "=r" ((USItype)(sh)),					\
 	     "=&r" ((USItype)(sl))					\
 =======
+=======
+>>>>>>> v3.18
   __asm__ ("addcc %r4,%5,%1\n\t"					\
 	   "addx %r2,%3,%0\n"						\
 	   : "=r" (sh),							\
 	     "=&r" (sl)							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	   : "%rJ" ((USItype)(ah)),					\
 	     "rI" ((USItype)(bh)),					\
@@ -22,15 +28,21 @@
 	   : "cc")
 #define sub_ddmmss(sh, sl, ah, al, bh, bl) 				\
 <<<<<<< HEAD
+<<<<<<< HEAD
   __asm__ ("subcc %r4,%5,%1\n\t"						\
 	   "subx %r2,%3,%0\n"						\
 	   : "=r" ((USItype)(sh)),					\
 	     "=&r" ((USItype)(sl))					\
 =======
+=======
+>>>>>>> v3.18
   __asm__ ("subcc %r4,%5,%1\n\t"					\
 	   "subx %r2,%3,%0\n"						\
 	   : "=r" (sh),							\
 	     "=&r" (sl)							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	   : "rJ" ((USItype)(ah)),					\
 	     "rI" ((USItype)(bh)),					\
@@ -80,8 +92,13 @@
 	"add	%%g1,%%g2,%0\n\t" 					\
 	"rd	%%y,%1\n"						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   : "=r" ((USItype)(w1)),					\
 	     "=r" ((USItype)(w0))					\
+=======
+	   : "=r" (w1),							\
+	     "=r" (w0)							\
+>>>>>>> v3.18
 =======
 	   : "=r" (w1),							\
 	     "=r" (w0)							\
@@ -118,8 +135,13 @@
 	   "3:	xnor	%0,0,%0\n\t"					\
 	   "! End of inline udiv_qrnnd\n"				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   : "=&r" ((USItype)(q)),					\
 	     "=&r" ((USItype)(r))					\
+=======
+	   : "=&r" (q),							\
+	     "=&r" (r)							\
+>>>>>>> v3.18
 =======
 	   : "=&r" (q),							\
 	     "=&r" (r)							\

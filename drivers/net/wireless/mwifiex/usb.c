@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: USB specific handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012, Marvell International Ltd.
+=======
+ * Copyright (C) 2012-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -27,8 +31,11 @@
 #define USB_VERSION	"1.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char usbdriver_name[] = "usb8797";
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u8 user_rmmod;
@@ -37,9 +44,12 @@ static struct semaphore add_remove_card_sem;
 
 static struct usb_device_id mwifiex_usb_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{USB_DEVICE(USB8797_VID, USB8797_PID_1)},
 	{USB_DEVICE_AND_INTERFACE_INFO(USB8797_VID, USB8797_PID_2,
 =======
+=======
+>>>>>>> v3.18
 	/* 8797 */
 	{USB_DEVICE(USB8XXX_VID, USB8797_PID_1)},
 	{USB_DEVICE_AND_INTERFACE_INFO(USB8XXX_VID, USB8797_PID_2,
@@ -48,6 +58,9 @@ static struct usb_device_id mwifiex_usb_table[] = {
 	/* 8897 */
 	{USB_DEVICE(USB8XXX_VID, USB8897_PID_1)},
 	{USB_DEVICE_AND_INTERFACE_INFO(USB8XXX_VID, USB8897_PID_2,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				       USB_CLASS_VENDOR_SPEC,
 				       USB_SUBCLASS_VENDOR_SPEC, 0xff)},
@@ -362,11 +375,14 @@ static int mwifiex_usb_probe(struct usb_interface *intf,
 
 	/* PID_1 is used for firmware downloading only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id_product == USB8797_PID_1)
 		card->usb_boot_state = USB8797_FW_DNLD;
 	else
 		card->usb_boot_state = USB8797_FW_READY;
 =======
+=======
+>>>>>>> v3.18
 	switch (id_product) {
 	case USB8797_PID_1:
 	case USB8897_PID_1:
@@ -381,6 +397,9 @@ static int mwifiex_usb_probe(struct usb_interface *intf,
 		card->usb_boot_state = USB8XXX_FW_DNLD;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	card->udev = udev;
@@ -481,6 +500,10 @@ static int mwifiex_usb_suspend(struct usb_interface *intf, pm_message_t message)
 	 */
 	adapter->is_suspended = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	adapter->hs_enabling = false;
+>>>>>>> v3.18
 =======
 	adapter->hs_enabling = false;
 >>>>>>> v3.18
@@ -558,7 +581,10 @@ static void mwifiex_usb_disconnect(struct usb_interface *intf)
 	struct usb_card_rec *card = usb_get_intfdata(intf);
 	struct mwifiex_adapter *adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -572,11 +598,14 @@ static void mwifiex_usb_disconnect(struct usb_interface *intf)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* In case driver is removed when asynchronous FW downloading is
 	 * in progress
 	 */
 	wait_for_completion(&adapter->fw_load);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (user_rmmod) {
@@ -585,11 +614,16 @@ static void mwifiex_usb_disconnect(struct usb_interface *intf)
 			mwifiex_usb_resume(intf);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < adapter->priv_num; i++)
 			if ((GET_BSS_ROLE(adapter->priv[i]) ==
 			     MWIFIEX_BSS_ROLE_STA) &&
 			    adapter->priv[i]->media_connected)
 				mwifiex_deauthenticate(adapter->priv[i], NULL);
+=======
+
+		mwifiex_deauthenticate_all(adapter);
+>>>>>>> v3.18
 =======
 
 		mwifiex_deauthenticate_all(adapter);
@@ -614,7 +648,11 @@ static void mwifiex_usb_disconnect(struct usb_interface *intf)
 
 static struct usb_driver mwifiex_usb_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = usbdriver_name,
+=======
+	.name = "mwifiex_usb",
+>>>>>>> v3.18
 =======
 	.name = "mwifiex_usb",
 >>>>>>> v3.18
@@ -624,6 +662,10 @@ static struct usb_driver mwifiex_usb_driver = {
 	.suspend = mwifiex_usb_suspend,
 	.resume = mwifiex_usb_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.soft_unbind = 1,
+>>>>>>> v3.18
 =======
 	.soft_unbind = 1,
 >>>>>>> v3.18
@@ -825,8 +867,11 @@ static int mwifiex_register_dev(struct mwifiex_adapter *adapter)
 	card->adapter = adapter;
 	adapter->dev = &card->udev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strcpy(adapter->fw_name, USB8797_DEFAULT_FW_NAME);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (le16_to_cpu(card->udev->descriptor.idProduct)) {
 	case USB8897_PID_1:
@@ -841,13 +886,19 @@ static int mwifiex_register_dev(struct mwifiex_adapter *adapter)
 		strcpy(adapter->fw_name, USB8797_DEFAULT_FW_NAME);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mwifiex_unregister_dev(struct mwifiex_adapter *adapter)
 {
 	struct usb_card_rec *card = (struct usb_card_rec *)adapter->card;
@@ -855,6 +906,9 @@ static void mwifiex_unregister_dev(struct mwifiex_adapter *adapter)
 	card->adapter = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 				    struct mwifiex_fw_image *fw)
@@ -862,7 +916,11 @@ static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 	int ret = 0;
 	u8 *firmware = fw->fw_buf, *recv_buff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 retries = USB8797_FW_MAX_RETRY, dlen;
+=======
+	u32 retries = USB8XXX_FW_MAX_RETRY, dlen;
+>>>>>>> v3.18
 =======
 	u32 retries = USB8XXX_FW_MAX_RETRY, dlen;
 >>>>>>> v3.18
@@ -968,7 +1026,11 @@ static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			retries = USB8797_FW_MAX_RETRY;
+=======
+			retries = USB8XXX_FW_MAX_RETRY;
+>>>>>>> v3.18
 =======
 			retries = USB8XXX_FW_MAX_RETRY;
 >>>>>>> v3.18
@@ -996,7 +1058,11 @@ static int mwifiex_usb_dnld_fw(struct mwifiex_adapter *adapter,
 	struct usb_card_rec *card = (struct usb_card_rec *)adapter->card;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (card->usb_boot_state == USB8797_FW_DNLD) {
+=======
+	if (card->usb_boot_state == USB8XXX_FW_DNLD) {
+>>>>>>> v3.18
 =======
 	if (card->usb_boot_state == USB8XXX_FW_DNLD) {
 >>>>>>> v3.18
@@ -1006,7 +1072,11 @@ static int mwifiex_usb_dnld_fw(struct mwifiex_adapter *adapter,
 
 		/* Boot state changes after successful firmware download */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (card->usb_boot_state == USB8797_FW_DNLD)
+=======
+		if (card->usb_boot_state == USB8XXX_FW_DNLD)
+>>>>>>> v3.18
 =======
 		if (card->usb_boot_state == USB8XXX_FW_DNLD)
 >>>>>>> v3.18
@@ -1043,11 +1113,17 @@ static int mwifiex_usb_cmd_event_complete(struct mwifiex_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mwifiex_usb_data_complete(struct mwifiex_adapter *adapter,
 				     struct sk_buff *skb)
 {
 	atomic_dec(&adapter->rx_pending);
 	dev_kfree_skb_any(skb);
+=======
+static int mwifiex_usb_data_complete(struct mwifiex_adapter *adapter)
+{
+	atomic_dec(&adapter->rx_pending);
+>>>>>>> v3.18
 =======
 static int mwifiex_usb_data_complete(struct mwifiex_adapter *adapter)
 {
@@ -1071,6 +1147,10 @@ static int mwifiex_pm_wakeup_card(struct mwifiex_adapter *adapter)
 static struct mwifiex_if_ops usb_ops = {
 	.register_dev =		mwifiex_register_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.unregister_dev =	mwifiex_unregister_dev,
+>>>>>>> v3.18
 =======
 	.unregister_dev =	mwifiex_unregister_dev,
 >>>>>>> v3.18
@@ -1134,7 +1214,12 @@ MODULE_DESCRIPTION("Marvell WiFi-Ex USB Driver version" USB_VERSION);
 MODULE_VERSION(USB_VERSION);
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_FIRMWARE("mrvl/usb8797_uapsta.bin");
+=======
+MODULE_FIRMWARE(USB8797_DEFAULT_FW_NAME);
+MODULE_FIRMWARE(USB8897_DEFAULT_FW_NAME);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(USB8797_DEFAULT_FW_NAME);
 MODULE_FIRMWARE(USB8897_DEFAULT_FW_NAME);

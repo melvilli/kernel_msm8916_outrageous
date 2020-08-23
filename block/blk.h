@@ -3,6 +3,11 @@
 
 #include <linux/idr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/blk-mq.h>
+#include "blk-mq.h"
+>>>>>>> v3.18
 =======
 #include <linux/blk-mq.h>
 #include "blk-mq.h"
@@ -15,11 +20,14 @@
 #define BLK_BATCH_REQ	32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct kmem_cache *blk_requestq_cachep;
 extern struct kobj_type blk_queue_ktype;
 extern struct ida blk_queue_ida;
 
 =======
+=======
+>>>>>>> v3.18
 /* Max future timer expiry for timeouts */
 #define BLK_MAX_TIMEOUT		(5 * HZ)
 
@@ -52,6 +60,9 @@ static inline struct blk_flush_queue *blk_get_flush_queue(
 	return hctx->fq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __blk_get_queue(struct request_queue *q)
 {
@@ -59,11 +70,17 @@ static inline void __blk_get_queue(struct request_queue *q)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct blk_flush_queue *blk_alloc_flush_queue(struct request_queue *q,
 		int node, int cmd_size);
 void blk_free_flush_queue(struct blk_flush_queue *q);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int blk_init_rl(struct request_list *rl, struct request_queue *q,
 		gfp_t gfp_mask);
@@ -82,9 +99,12 @@ bool __blk_end_bidi_request(struct request *rq, int error,
 
 void blk_rq_timed_out_timer(unsigned long data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void blk_delete_timer(struct request *);
 void blk_add_timer(struct request *);
 =======
+=======
+>>>>>>> v3.18
 unsigned long blk_rq_timeout(unsigned long timeout);
 void blk_add_timer(struct request *req);
 void blk_delete_timer(struct request *);
@@ -100,6 +120,9 @@ bool blk_attempt_plug_merge(struct request_queue *q, struct bio *bio,
 void blk_account_io_start(struct request *req, bool new_io);
 void blk_account_io_completion(struct request *req, unsigned int bytes);
 void blk_account_io_done(struct request *req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -108,6 +131,10 @@ void blk_account_io_done(struct request *req);
 enum rq_atomic_flags {
 	REQ_ATOM_COMPLETE = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REQ_ATOM_STARTED,
+>>>>>>> v3.18
 =======
 	REQ_ATOM_STARTED,
 >>>>>>> v3.18
@@ -131,10 +158,16 @@ static inline void blk_clear_rq_complete(struct request *rq)
  * Internal elevator interface
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ELV_ON_HASH(rq) hash_hashed(&(rq)->hash)
 
 void blk_insert_flush(struct request *rq);
 void blk_abort_flushes(struct request_queue *q);
+=======
+#define ELV_ON_HASH(rq) ((rq)->cmd_flags & REQ_HASHED)
+
+void blk_insert_flush(struct request *rq);
+>>>>>>> v3.18
 =======
 #define ELV_ON_HASH(rq) ((rq)->cmd_flags & REQ_HASHED)
 
@@ -145,6 +178,10 @@ static inline struct request *__elv_next_request(struct request_queue *q)
 {
 	struct request *rq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct blk_flush_queue *fq = blk_get_flush_queue(q, NULL);
+>>>>>>> v3.18
 =======
 	struct blk_flush_queue *fq = blk_get_flush_queue(q, NULL);
 >>>>>>> v3.18
@@ -171,9 +208,15 @@ static inline struct request *__elv_next_request(struct request_queue *q)
 		 * details.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (q->flush_pending_idx != q->flush_running_idx &&
 				!queue_flush_queueable(q)) {
 			q->flush_queue_delayed = 1;
+=======
+		if (fq->flush_pending_idx != fq->flush_running_idx &&
+				!queue_flush_queueable(q)) {
+			fq->flush_queue_delayed = 1;
+>>>>>>> v3.18
 =======
 		if (fq->flush_pending_idx != fq->flush_running_idx &&
 				!queue_flush_queueable(q)) {
@@ -224,6 +267,10 @@ int attempt_front_merge(struct request_queue *q, struct request *rq);
 int blk_attempt_req_merge(struct request_queue *q, struct request *rq,
 				struct request *next);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void blk_recalc_rq_segments(struct request *rq);
+>>>>>>> v3.18
 =======
 void blk_recalc_rq_segments(struct request *rq);
 >>>>>>> v3.18
@@ -257,6 +304,11 @@ static inline int queue_congestion_off_threshold(struct request_queue *q)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int blk_update_nr_requests(struct request_queue *, unsigned int);
+
+>>>>>>> v3.18
 =======
 extern int blk_update_nr_requests(struct request_queue *, unsigned int);
 

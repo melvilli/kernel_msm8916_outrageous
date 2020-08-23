@@ -6,8 +6,12 @@ config NET_VENDOR_IBM
 	bool "IBM devices"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MCA || PPC_PSERIES || PPC_PSERIES || PPC_DCR || \
 		   (IBMEBUS && SPARSEMEM)
+=======
+	depends on PPC_PSERIES || PPC_DCR || (IBMEBUS && SPARSEMEM)
+>>>>>>> v3.18
 =======
 	depends on PPC_PSERIES || PPC_DCR || (IBMEBUS && SPARSEMEM)
 >>>>>>> v3.18

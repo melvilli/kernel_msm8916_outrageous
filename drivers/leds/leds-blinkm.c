@@ -19,7 +19,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -165,6 +168,7 @@ static ssize_t show_color_common(struct device *dev, char *buf, int color)
 	case RED:
 		return scnprintf(buf, PAGE_SIZE, "%02X\n", data->red);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case GREEN:
 		return scnprintf(buf, PAGE_SIZE, "%02X\n", data->green);
@@ -173,10 +177,15 @@ static ssize_t show_color_common(struct device *dev, char *buf, int color)
 		return scnprintf(buf, PAGE_SIZE, "%02X\n", data->blue);
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case GREEN:
 		return scnprintf(buf, PAGE_SIZE, "%02X\n", data->green);
 	case BLUE:
 		return scnprintf(buf, PAGE_SIZE, "%02X\n", data->blue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -458,7 +467,11 @@ static void led_work(struct work_struct *work)
 	int ret;
 	struct blinkm_led *led;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct blinkm_data *data ;
+=======
+	struct blinkm_data *data;
+>>>>>>> v3.18
 =======
 	struct blinkm_data *data;
 >>>>>>> v3.18

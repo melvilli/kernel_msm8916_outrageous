@@ -215,6 +215,11 @@ static void pcibios_allocate_bridge_resources(struct pci_dev *dev)
 		if (!r->flags)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (r->parent)	/* Already allocated */
+			continue;
+>>>>>>> v3.18
 =======
 		if (r->parent)	/* Already allocated */
 			continue;
@@ -279,12 +284,15 @@ static void pcibios_allocate_dev_resources(struct pci_dev *dev, int pass)
 					idx, r, disabled, pass);
 				if (pci_claim_resource(dev, idx) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					/* We'll assign a new address later */
 					pcibios_save_fw_addr(dev,
 							idx, r->start);
 					r->end -= r->start;
 					r->start = 0;
 =======
+=======
+>>>>>>> v3.18
 					if (r->flags & IORESOURCE_PCI_FIXED) {
 						dev_info(&dev->dev, "BAR %d %pR is immovable\n",
 							 idx, r);
@@ -295,6 +303,9 @@ static void pcibios_allocate_dev_resources(struct pci_dev *dev, int pass)
 						r->end -= r->start;
 						r->start = 0;
 					}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -341,6 +352,11 @@ static void pcibios_allocate_dev_rom_resource(struct pci_dev *dev)
 	if (!r->flags || !r->start)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (r->parent) /* Already allocated */
+		return;
+>>>>>>> v3.18
 =======
 	if (r->parent) /* Already allocated */
 		return;
@@ -380,13 +396,19 @@ static int __init pcibios_assign_resources(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * called in fs_initcall (one below subsys_initcall),
  * give a chance for motherboard reserve resources
  */
 fs_initcall(pcibios_assign_resources);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pcibios_resource_survey_bus(struct pci_bus *bus)
 {
@@ -425,12 +447,15 @@ void __init pcibios_resource_survey(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * called in fs_initcall (one below subsys_initcall),
  * give a chance for motherboard reserve resources
  */
 fs_initcall(pcibios_assign_resources);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct vm_operations_struct pci_mmap_ops = {
@@ -469,8 +494,11 @@ int pci_mmap_page_range(struct pci_dev *dev, struct vm_area_struct *vma,
 		prot |= _PAGE_CACHE_UC_MINUS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prot |= _PAGE_IOMAP;	/* creating a mapping for IO */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vma->vm_page_prot = __pgprot(prot);

@@ -13,7 +13,11 @@
 	[RLIMIT_FSIZE]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
 	[RLIMIT_DATA]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[RLIMIT_STACK]		= {       _STK_LIM,   _STK_LIM_MAX },	\
+=======
+	[RLIMIT_STACK]		= {       _STK_LIM,  RLIM_INFINITY },	\
+>>>>>>> v3.18
 =======
 	[RLIMIT_STACK]		= {       _STK_LIM,  RLIM_INFINITY },	\
 >>>>>>> v3.18

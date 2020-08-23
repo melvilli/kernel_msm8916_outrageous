@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -45,7 +48,10 @@
 #include "debug.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	MASKBYTE0				0xff
 #define	MASKBYTE1				0xff00
 #define	MASKBYTE2				0xff0000
@@ -78,6 +84,9 @@
 #define	MASK20BITS				0xfffff
 #define RFREG_OFFSET_MASK			0xfffff
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RF_CHANGE_BY_INIT			0
 #define RF_CHANGE_BY_IPS			BIT(28)
@@ -88,6 +97,10 @@
 #define IQK_ADDA_REG_NUM			16
 #define IQK_MAC_REG_NUM				4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IQK_THRESHOLD				8
+>>>>>>> v3.18
 =======
 #define IQK_THRESHOLD				8
 >>>>>>> v3.18
@@ -129,8 +142,11 @@
 
 #define CHANNEL_MAX_NUMBER	(14 + 24 + 21)	/* 14 is the max channel no */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CHANNEL_GROUP_MAX	(3 + 9)	/*  ch1~3, 4~9, 10~14 = three groups */
 =======
+=======
+>>>>>>> v3.18
 #define CHANNEL_MAX_NUMBER_2G		14
 #define CHANNEL_MAX_NUMBER_5G		54 /* Please refer to
 					    *"phy_GetChnlGroup8812A" and
@@ -143,6 +159,9 @@
 					    * "Hal_ReadTxPowerInfo8812A"
 					    */
 #define CHANNEL_MAX_NUMBER_5G_80M	7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_PG_GROUP			13
 #define	CHANNEL_GROUP_MAX_2G		3
@@ -154,6 +173,10 @@
 #define AVG_THERMAL_NUM			8
 #define AVG_THERMAL_NUM_88E		4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AVG_THERMAL_NUM_8723BE		4
+>>>>>>> v3.18
 =======
 #define AVG_THERMAL_NUM_8723BE		4
 >>>>>>> v3.18
@@ -164,8 +187,11 @@
 #define EM_HDR_LEN			8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_TX_COUNT			4
 =======
+=======
+>>>>>>> v3.18
 enum rtl8192c_h2c_cmd {
 	H2C_AP_OFFLOAD = 0,
 	H2C_SETPWRMODE = 1,
@@ -187,13 +213,19 @@ enum rtl8192c_h2c_cmd {
 #define MAX_RATE_SECTION_NUM		6
 #define MAX_2_4G_BANDWITH_NUM		4
 #define MAX_5G_BANDWITH_NUM		4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	MAX_RF_PATH			4
 #define	MAX_CHNL_GROUP_24G		6
 #define	MAX_CHNL_GROUP_5G		14
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TX_PWR_BY_RATE_NUM_BAND		2
 #define TX_PWR_BY_RATE_NUM_RF		4
 #define TX_PWR_BY_RATE_NUM_SECTION	12
@@ -248,6 +280,9 @@ enum rf_tx_num {
 #define	WOL_REASON_REALWOW_V2_WAKEUPPKT	BIT(9)
 #define	WOL_REASON_REALWOW_V2_ACKLOST	BIT(10)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct txpower_info_2g {
 	u8 index_cck_base[MAX_RF_PATH][MAX_CHNL_GROUP_24G];
@@ -258,6 +293,11 @@ struct txpower_info_2g {
 	u8 bw20_diff[MAX_RF_PATH][MAX_TX_COUNT];
 	u8 bw40_diff[MAX_RF_PATH][MAX_TX_COUNT];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 bw80_diff[MAX_RF_PATH][MAX_TX_COUNT];
+	u8 bw160_diff[MAX_RF_PATH][MAX_TX_COUNT];
+>>>>>>> v3.18
 =======
 	u8 bw80_diff[MAX_RF_PATH][MAX_TX_COUNT];
 	u8 bw160_diff[MAX_RF_PATH][MAX_TX_COUNT];
@@ -271,7 +311,10 @@ struct txpower_info_5g {
 	u8 bw20_diff[MAX_RF_PATH][MAX_TX_COUNT];
 	u8 bw40_diff[MAX_RF_PATH][MAX_TX_COUNT];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 bw80_diff[MAX_RF_PATH][MAX_TX_COUNT];
 	u8 bw160_diff[MAX_RF_PATH][MAX_TX_COUNT];
 };
@@ -283,6 +326,9 @@ enum rate_section {
 	HT_MCS8_MCS15,
 	VHT_1SSMCS0_1SSMCS9,
 	VHT_2SSMCS0_2SSMCS9,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -299,7 +345,10 @@ enum radio_path {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum regulation_txpwr_lmt {
 	TXPWR_LMT_FCC = 0,
 	TXPWR_LMT_MKK = 1,
@@ -309,6 +358,9 @@ enum regulation_txpwr_lmt {
 	TXPWR_LMT_MAX_REGULATION_NUM = 4
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum rt_eeprom_type {
 	EEPROM_93C46,
@@ -333,11 +385,17 @@ enum hardware_type {
 	HARDWARE_TYPE_RTL8723U,
 	HARDWARE_TYPE_RTL8188EE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	HARDWARE_TYPE_RTL8723BE,
 	HARDWARE_TYPE_RTL8192EE,
 	HARDWARE_TYPE_RTL8821AE,
 	HARDWARE_TYPE_RTL8812AE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* keep it last */
@@ -369,6 +427,7 @@ enum hardware_type {
 #define	IS_HARDWARE_TYPE_8723(rtlhal)			\
 (IS_HARDWARE_TYPE_8723E(rtlhal) || IS_HARDWARE_TYPE_8723U(rtlhal))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_HARDWARE_TYPE_8723U(rtlhal)			\
 	(rtlhal->hw_type == HARDWARE_TYPE_RTL8723U)
 
@@ -381,6 +440,8 @@ enum hardware_type {
 enum scan_operation_backup_opt {
 	SCAN_OPT_BACKUP = 0,
 =======
+=======
+>>>>>>> v3.18
 
 #define RX_HAL_IS_CCK_RATE(rxmcs)			\
 	((rxmcs) == DESC92_RATE1M ||			\
@@ -392,6 +453,9 @@ enum scan_operation_backup_opt {
 	SCAN_OPT_BACKUP = 0,
 	SCAN_OPT_BACKUP_BAND0 = 0,
 	SCAN_OPT_BACKUP_BAND1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SCAN_OPT_RESTORE,
 	SCAN_OPT_MAX
@@ -428,7 +492,13 @@ struct bb_reg_def {
 enum io_type {
 	IO_CMD_PAUSE_DM_BY_SCAN = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IO_CMD_RESUME_DM_BY_SCAN = 1,
+=======
+	IO_CMD_PAUSE_BAND0_DM_BY_SCAN = 0,
+	IO_CMD_PAUSE_BAND1_DM_BY_SCAN = 1,
+	IO_CMD_RESUME_DM_BY_SCAN = 2,
+>>>>>>> v3.18
 =======
 	IO_CMD_PAUSE_BAND0_DM_BY_SCAN = 0,
 	IO_CMD_PAUSE_BAND1_DM_BY_SCAN = 1,
@@ -453,6 +523,10 @@ enum hw_variables {
 	HW_VAR_DEFAULTKEY3,
 	HW_VAR_SIFS,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HW_VAR_R2T_SIFS,
+>>>>>>> v3.18
 =======
 	HW_VAR_R2T_SIFS,
 >>>>>>> v3.18
@@ -505,13 +579,19 @@ enum hw_variables {
 	HW_VAR_H2C_FW_PWRMODE,
 	HW_VAR_H2C_FW_JOINBSSRPT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HW_VAR_H2C_FW_P2P_PS_OFFLOAD,
 	HW_VAR_FW_PSMODE_STATUS,
 =======
+=======
+>>>>>>> v3.18
 	HW_VAR_H2C_FW_MEDIASTATUSRPT,
 	HW_VAR_H2C_FW_P2P_PS_OFFLOAD,
 	HW_VAR_FW_PSMODE_STATUS,
 	HW_VAR_INIT_RTS_RATE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	HW_VAR_RESUME_CLK_ON,
 	HW_VAR_FW_LPS_ACTION,
@@ -544,6 +624,11 @@ enum hw_variables {
 	HAL_DEF_WOWLAN,
 	HW_VAR_MRC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HW_VAR_KEEP_ALIVE,
+	HW_VAR_NAV_UPPER,
+>>>>>>> v3.18
 =======
 	HW_VAR_KEEP_ALIVE,
 	HW_VAR_NAV_UPPER,
@@ -555,7 +640,11 @@ enum hw_variables {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum _RT_MEDIA_STATUS {
+=======
+enum rt_media_status {
+>>>>>>> v3.18
 =======
 enum rt_media_status {
 >>>>>>> v3.18
@@ -570,6 +659,7 @@ enum rt_oem_id {
 	RT_CID_8187_HW_LED = 3,
 	RT_CID_8187_NETGEAR = 4,
 	RT_CID_WHQL = 5,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	RT_CID_819x_CAMEO = 6,
 	RT_CID_819x_RUNTOP = 7,
@@ -600,6 +690,8 @@ enum rt_oem_id {
 	RT_CID_819x_PRONETS = 34,
 	RT_CID_819x_Edimax_ASUS = 35,
 =======
+=======
+>>>>>>> v3.18
 	RT_CID_819X_CAMEO = 6,
 	RT_CID_819X_RUNTOP = 7,
 	RT_CID_819X_SENAO = 8,
@@ -628,6 +720,9 @@ enum rt_oem_id {
 	RT_CID_819X_DELL = 33,
 	RT_CID_819X_PRONETS = 34,
 	RT_CID_819X_EDIMAX_ASUS = 35,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RT_CID_NETGEAR = 36,
 	RT_CID_PLANEX = 37,
@@ -643,6 +738,10 @@ enum hw_descs {
 	HW_DESC_RXPKT_LEN,
 	HW_DESC_RXERO,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HW_DESC_RX_PREPARE,
+>>>>>>> v3.18
 =======
 	HW_DESC_RX_PREPARE,
 >>>>>>> v3.18
@@ -665,6 +764,10 @@ enum ht_channel_width {
 	HT_CHANNEL_WIDTH_20 = 0,
 	HT_CHANNEL_WIDTH_20_40 = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HT_CHANNEL_WIDTH_80 = 2,
+>>>>>>> v3.18
 =======
 	HT_CHANNEL_WIDTH_80 = 2,
 >>>>>>> v3.18
@@ -733,6 +836,12 @@ enum rtl_var_map {
 	MAC_RCR_ACF,
 	MAC_RCR_AAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MAC_HIMR,
+	MAC_HIMRE,
+	MAC_HSISR,
+>>>>>>> v3.18
 =======
 	MAC_HIMR,
 	MAC_HIMRE,
@@ -801,6 +910,10 @@ enum rtl_var_map {
 	RTL_IMR_VODOK,		/*AC_VO DMA Interrupt */
 	RTL_IMR_ROK,		/*Receive DMA OK Interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RTL_IMR_HSISR_IND,	/*HSISR Interrupt*/
+>>>>>>> v3.18
 =======
 	RTL_IMR_HSISR_IND,	/*HSISR Interrupt*/
 >>>>>>> v3.18
@@ -828,7 +941,10 @@ enum rtl_var_map {
 	RTL_RC_HT_RATEMCS15,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	RTL_RC_VHT_RATE_1SS_MCS7,
 	RTL_RC_VHT_RATE_1SS_MCS8,
 	RTL_RC_VHT_RATE_1SS_MCS9,
@@ -836,6 +952,9 @@ enum rtl_var_map {
 	RTL_RC_VHT_RATE_2SS_MCS8,
 	RTL_RC_VHT_RATE_2SS_MCS9,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*keep it last */
 	RTL_VAR_MAP_MAX,
@@ -890,7 +1009,11 @@ enum acm_method {
 	eAcmWay0_SwAndHw = 0,
 	eAcmWay1_HW = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eAcmWay2_SW = 2,
+=======
+	EACMWAY2_SW = 2,
+>>>>>>> v3.18
 =======
 	EACMWAY2_SW = 2,
 >>>>>>> v3.18
@@ -931,13 +1054,19 @@ enum wireless_mode {
 	WIRELESS_MODE_AUTO = 0x08,
 	WIRELESS_MODE_N_24G = 0x10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WIRELESS_MODE_N_5G = 0x20
 =======
+=======
+>>>>>>> v3.18
 	WIRELESS_MODE_N_5G = 0x20,
 	WIRELESS_MODE_AC_5G = 0x40,
 	WIRELESS_MODE_AC_24G  = 0x80,
 	WIRELESS_MODE_AC_ONLY = 0x100,
 	WIRELESS_MODE_MAX = 0x800
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -963,6 +1092,11 @@ enum ratr_table_mode {
 	RATR_INX_WIRELESS_MC = 7,
 	RATR_INX_WIRELESS_A = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RATR_INX_WIRELESS_AC_5N = 8,
+	RATR_INX_WIRELESS_AC_24N = 9,
+>>>>>>> v3.18
 =======
 	RATR_INX_WIRELESS_AC_5N = 8,
 	RATR_INX_WIRELESS_AC_24N = 9,
@@ -996,7 +1130,10 @@ enum rt_polarity_ctl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* After 8188E, we use V2 reason define. 88C/8723A use V1 reason. */
 enum fw_wow_reason_v2 {
 	FW_WOW_V2_PTK_UPDATE_EVENT = 0x01,
@@ -1021,6 +1158,9 @@ enum wolpattern_type {
 	UNKNOWN_TYPE = 4,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct octet_string {
 	u8 *octet;
@@ -1123,6 +1263,10 @@ struct wireless_stats {
 
 	u32 rssi_calculate_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 pwdb_all_cnt;
+>>>>>>> v3.18
 =======
 	u32 pwdb_all_cnt;
 >>>>>>> v3.18
@@ -1133,15 +1277,21 @@ struct wireless_stats {
 
 	u8 rx_rssi_percentage[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 rx_evm_percentage[2];
 
 =======
+=======
+>>>>>>> v3.18
 	u8 rx_evm_dbm[4];
 	u8 rx_evm_percentage[2];
 
 	u16 rx_cfo_short[4];
 	u16 rx_cfo_tail[4];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rt_smooth_data ui_rssi;
 	struct rt_smooth_data ui_link_quality;
@@ -1156,9 +1306,15 @@ struct rate_adaptive {
 	u32 high2low_rssi_thresh_for_ra;
 	u8 low2high_rssi_thresh_for_ra40m;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 low_rssi_thresh_for_ra40M;
 	u8 low2high_rssi_thresh_for_ra20m;
 	u32 low_rssi_thresh_for_ra20M;
+=======
+	u32 low_rssi_thresh_for_ra40m;
+	u8 low2high_rssi_thresh_for_ra20m;
+	u32 low_rssi_thresh_for_ra20m;
+>>>>>>> v3.18
 =======
 	u32 low_rssi_thresh_for_ra40m;
 	u8 low2high_rssi_thresh_for_ra20m;
@@ -1178,11 +1334,17 @@ struct rate_adaptive {
 	u32 last_ratr;
 	u8 pre_ratr_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 ldpc_thres;
 	bool use_ldpc;
 	bool lower_rts_rate;
 	bool is_special_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1193,7 +1355,10 @@ struct regd_pair_mapping {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct dynamic_primary_cca {
 	u8 pricca_flag;
 	u8 intf_flag;
@@ -1204,6 +1369,9 @@ struct dynamic_primary_cca {
 	u8 mf_state;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl_regulatory {
 	char alpha2[2];
@@ -1341,6 +1509,11 @@ struct rtl_phy {
 	bool iqk_initialized;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool rfpath_rx_enable[MAX_RF_PATH];
+	u8 reg_837;
+>>>>>>> v3.18
 =======
 	bool rfpath_rx_enable[MAX_RF_PATH];
 	u8 reg_837;
@@ -1351,12 +1524,15 @@ struct rtl_phy {
 
 	bool rfpi_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u8 pwrgroup_cnt;
 	u8 cck_high_power;
 	/* MAX_PG_GROUP groups of pwr diff by rates */
 	u32 mcs_offset[MAX_PG_GROUP][16];
 =======
+=======
+>>>>>>> v3.18
 	bool iqk_in_progress;
 
 	u8 pwrgroup_cnt;
@@ -1375,6 +1551,9 @@ struct rtl_phy {
 	u8 txpwr_by_rate_base_5g[TX_PWR_BY_RATE_NUM_RF]
 				[TX_PWR_BY_RATE_NUM_RF]
 				[MAX_BASE_NUM_IN_PHY_REG_PG_5G];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 default_initialgain[4];
 
@@ -1385,7 +1564,10 @@ struct rtl_phy {
 	u8 cur_bw40_txpwridx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	char txpwr_limit_2_4g[MAX_REGULATION_NUM]
 			     [MAX_2_4G_BANDWITH_NUM]
 			     [MAX_RATE_SECTION_NUM]
@@ -1397,12 +1579,19 @@ struct rtl_phy {
 			   [CHANNEL_MAX_NUMBER_5G]
 			   [MAX_RF_PATH_NUM];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 rfreg_chnlval[2];
 	bool apk_done;
 	u32 reg_rf3c[2];	/* pathA / pathB  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 backup_rf_0x1a;/*92ee*/
+>>>>>>> v3.18
 =======
 	u32 backup_rf_0x1a;/*92ee*/
 >>>>>>> v3.18
@@ -1415,6 +1604,10 @@ struct rtl_phy {
 	u16 rf_pathmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 hw_rof_enable; /*Enable GPIO[9] as WL RF HW PDn source*/
+>>>>>>> v3.18
 =======
 	u8 hw_rof_enable; /*Enable GPIO[9] as WL RF HW PDn source*/
 >>>>>>> v3.18
@@ -1528,7 +1721,10 @@ struct rtl_mac {
 	struct sk_buff_head skb_waitq[MAX_TID_COUNT];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 ht_stbc_cap;
 	u8 ht_cur_stbc;
 
@@ -1540,13 +1736,20 @@ struct rtl_mac {
 	u8 vht_stbc_cap;
 	u8 vht_ldpc_cap;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*RDG*/
 	bool rdg_en;
 
 	/*AP*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 bssid[6];
+=======
+	u8 bssid[ETH_ALEN] __aligned(2);
+>>>>>>> v3.18
 =======
 	u8 bssid[ETH_ALEN] __aligned(2);
 >>>>>>> v3.18
@@ -1558,7 +1761,11 @@ struct rtl_mac {
 	u8 sgi_20;
 	u8 bw_40;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mode;		/* wireless mode */
+=======
+	u16 mode;		/* wireless mode */
+>>>>>>> v3.18
 =======
 	u16 mode;		/* wireless mode */
 >>>>>>> v3.18
@@ -1568,6 +1775,10 @@ struct rtl_mac {
 	u8 cur_40_prime_sc;
 	u8 cur_40_prime_sc_bk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 cur_80_prime_sc;
+>>>>>>> v3.18
 =======
 	u8 cur_80_prime_sc;
 >>>>>>> v3.18
@@ -1652,6 +1863,10 @@ struct rtl_hal {
 	bool bbrf_ready;
 	bool mac_func_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool pre_edcca_enable;
+>>>>>>> v3.18
 =======
 	bool pre_edcca_enable;
 >>>>>>> v3.18
@@ -1665,7 +1880,10 @@ struct rtl_hal {
 	u8 state;		/*stop 0, start 1 */
 	u8 board_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 external_pa;
 
 	u8 pa_mode;
@@ -1678,6 +1896,9 @@ struct rtl_hal {
 	u8 external_pa_5g;
 	u8 external_lna_5g;
 	u8 rfe_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*firmware */
@@ -1692,6 +1913,10 @@ struct rtl_hal {
 	u8 fw_rsvdpage_startoffset;
 	u8 h2c_txcmd_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 current_ra_rate;
+>>>>>>> v3.18
 =======
 	u8 current_ra_rate;
 >>>>>>> v3.18
@@ -1735,7 +1960,10 @@ struct rtl_hal {
 	bool master_of_dmsp;
 	bool slave_of_dmsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	u16 rx_tag;/*for 92ee*/
 	u8 rts_en;
@@ -1753,6 +1981,9 @@ struct rtl_hal {
 
 	bool real_wow_v2_enable;
 	bool re_init_llt_table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1803,7 +2034,10 @@ struct fast_ant_training {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct dm_phy_dbg_info {
 	char rx_snrdb[4];
 	u64 num_qry_phy_status;
@@ -1814,6 +2048,9 @@ struct dm_phy_dbg_info {
 	s32 rx_evm[4];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl_dm {
 	/*PHY status for Dynamic Management */
@@ -1855,6 +2092,7 @@ struct rtl_dm {
 	bool interrupt_migration;
 	bool disable_tx_int;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char ofdm_index[2];
 	char cck_index;
 	char delta_power_index;
@@ -1866,6 +2104,8 @@ struct rtl_dm {
 	u8	swing_idx_ofdm_cur;
 	u8	swing_idx_ofdm_base;
 =======
+=======
+>>>>>>> v3.18
 	char ofdm_index[MAX_RF_PATH];
 	u8 default_ofdm_index;
 	u8 default_cck_index;
@@ -1898,6 +2138,9 @@ struct rtl_dm {
 	u8	swing_idx_ofdm[MAX_RF_PATH];
 	u8	swing_idx_ofdm_cur;
 	u8	swing_idx_ofdm_base[MAX_RF_PATH];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool	swing_flag_ofdm;
 	u8	swing_idx_cck;
@@ -1905,6 +2148,7 @@ struct rtl_dm {
 	u8	swing_idx_cck_base;
 	bool	swing_flag_cck;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* DMSP */
 	bool supp_phymode_switch;
@@ -1914,6 +2158,8 @@ struct rtl_dm {
 
 #define	EFUSE_MAX_LOGICAL_SIZE			256
 =======
+=======
+>>>>>>> v3.18
 	char	swing_diff_2g;
 	char	swing_diff_5g;
 
@@ -1954,6 +2200,9 @@ struct rtl_dm {
 };
 
 #define	EFUSE_MAX_LOGICAL_SIZE			512
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct rtl_efuse {
@@ -1995,12 +2244,18 @@ struct rtl_efuse {
 	u8 eeprom_pwrlimit_ht20[CHANNEL_GROUP_MAX];
 	u8 eeprom_pwrlimit_ht40[CHANNEL_GROUP_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 eeprom_chnlarea_txpwr_cck[2][CHANNEL_GROUP_MAX_2G];
 	u8 eeprom_chnlarea_txpwr_ht40_1s[2][CHANNEL_GROUP_MAX];
 	u8 eprom_chnl_txpwr_ht40_2sdf[2][CHANNEL_GROUP_MAX];
 	u8 txpwrlevel_cck[2][CHANNEL_MAX_NUMBER_2G];
 	u8 txpwrlevel_ht40_1s[2][CHANNEL_MAX_NUMBER];	/*For HT 40MHZ pwr */
 	u8 txpwrlevel_ht40_2s[2][CHANNEL_MAX_NUMBER];	/*For HT 40MHZ pwr */
+=======
+	u8 eeprom_chnlarea_txpwr_cck[MAX_RF_PATH][CHANNEL_GROUP_MAX_2G];
+	u8 eeprom_chnlarea_txpwr_ht40_1s[MAX_RF_PATH][CHANNEL_GROUP_MAX];
+	u8 eprom_chnl_txpwr_ht40_2sdf[MAX_RF_PATH][CHANNEL_GROUP_MAX];
+>>>>>>> v3.18
 =======
 	u8 eeprom_chnlarea_txpwr_cck[MAX_RF_PATH][CHANNEL_GROUP_MAX_2G];
 	u8 eeprom_chnlarea_txpwr_ht40_1s[MAX_RF_PATH][CHANNEL_GROUP_MAX];
@@ -2017,10 +2272,13 @@ struct rtl_efuse {
 	u8 pwrgroup_ht40[2][CHANNEL_MAX_NUMBER];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char txpwr_ht20diff[2][CHANNEL_MAX_NUMBER]; /*HT 20<->40 Pwr diff */
 	/*For HT<->legacy pwr diff*/
 	u8 txpwr_legacyhtdiff[2][CHANNEL_MAX_NUMBER];
 =======
+=======
+>>>>>>> v3.18
 	u8 txpwrlevel_cck[MAX_RF_PATH][CHANNEL_MAX_NUMBER_2G];
 	/*For HT 40MHZ pwr */
 	u8 txpwrlevel_ht40_1s[MAX_RF_PATH][CHANNEL_MAX_NUMBER];
@@ -2053,6 +2311,9 @@ struct rtl_efuse {
 	char txpwr_5g_bw40diff[MAX_RF_PATH][MAX_TX_COUNT];
 	char txpwr_5g_bw80diff[MAX_RF_PATH][MAX_TX_COUNT];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 txpwr_safetyflag;			/* Band edge enable flag */
 	u16 eeprom_txpowerdiff;
@@ -2142,7 +2403,10 @@ struct rtl_ps_ctl {
 	u8 pwr_mode;
 	u8 smart_ps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* wake up on line */
 	u8 wo_wlan_mode;
@@ -2152,6 +2416,9 @@ struct rtl_ps_ctl {
 	u32 wakeup_reason;
 	/* Record the last waking time for comparison with setting key. */
 	u64 last_wakeup_time;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2189,6 +2456,10 @@ struct rtl_stats {
 	u32 timestamp_low;
 	u32 timestamp_high;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool shift;
+>>>>>>> v3.18
 =======
 	bool shift;
 >>>>>>> v3.18
@@ -2199,10 +2470,13 @@ struct rtl_stats {
 	bool isfirst_ampdu;
 	bool rx_is40Mhzpacket;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rx_pwdb_all;
 	u8 rx_mimo_signalstrength[4];	/*in 0~100 index */
 	s8 rx_mimo_sig_qual[2];
 =======
+=======
+>>>>>>> v3.18
 	u8 rx_packet_bw;
 	u32 rx_pwdb_all;
 	u8 rx_mimo_signalstrength[4];	/*in 0~100 index */
@@ -2216,6 +2490,9 @@ struct rtl_stats {
 	u8 rx_snr[4]; /* per-path's SNR */
 	u8 bandwidth;
 	u8 bt_coex_pwr_adjust;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool packet_matchbssid;
 	bool is_cck;
@@ -2225,11 +2502,17 @@ struct rtl_stats {
 	char cck_adc_pwdb[4];	/*for rx path selection */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool is_vht;
 	bool is_short_gi;
 	u8 vht_nss;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 packet_report_type;
 
@@ -2264,7 +2547,11 @@ struct rt_link_detect {
 
 struct rtl_tcb_desc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 packet_bw:1;
+=======
+	u8 packet_bw:2;
+>>>>>>> v3.18
 =======
 	u8 packet_bw:2;
 >>>>>>> v3.18
@@ -2298,10 +2585,13 @@ struct rtl_tcb_desc {
 	/* The max value by HW */
 	u32 empkt_len[10];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool btx_enable_sw_calc_duration;
 };
 
 =======
+=======
+>>>>>>> v3.18
 	bool tx_enable_sw_calc_duration;
 };
 
@@ -2315,6 +2605,9 @@ struct rtl_wow_pattern {
 
 struct rtl8723e_firmware_header;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl_hal_ops {
 	int (*init_sw_vars) (struct ieee80211_hw *hw);
@@ -2346,10 +2639,13 @@ struct rtl_hal_ops {
 	void (*update_rate_tbl) (struct ieee80211_hw *hw,
 			      struct ieee80211_sta *sta, u8 rssi_level);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*update_rate_mask) (struct ieee80211_hw *hw, u8 rssi_level);
 	void (*fill_tx_desc) (struct ieee80211_hw *hw,
 			      struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 =======
+=======
+>>>>>>> v3.18
 	void (*pre_fill_tx_bd_desc)(struct ieee80211_hw *hw, u8 *tx_bd_desc,
 				    u8 *desc, u8 queue_index,
 				    struct sk_buff *skb, dma_addr_t addr);
@@ -2361,6 +2657,9 @@ struct rtl_hal_ops {
 	void (*fill_tx_desc) (struct ieee80211_hw *hw,
 			      struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 			      u8 *pbd_desc_tx,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      struct ieee80211_tx_info *info,
 			      struct ieee80211_sta *sta,
@@ -2372,7 +2671,10 @@ struct rtl_hal_ops {
 				 bool firstseg, bool lastseg,
 				 struct sk_buff *skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool (*cmd_send_packet)(struct ieee80211_hw *hw, struct sk_buff *skb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool (*query_rx_desc) (struct ieee80211_hw *hw,
@@ -2388,14 +2690,20 @@ struct rtl_hal_ops {
 	void (*led_control) (struct ieee80211_hw *hw,
 			     enum led_ctl_mode ledaction);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_desc) (u8 *pdesc, bool istx, u8 desc_name, u8 *val);
 	u32 (*get_desc) (u8 *pdesc, bool istx, u8 desc_name);
 =======
+=======
+>>>>>>> v3.18
 	void (*set_desc)(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
 			 u8 desc_name, u8 *val);
 	u32 (*get_desc) (u8 *pdesc, bool istx, u8 desc_name);
 	bool (*is_tx_desc_closed) (struct ieee80211_hw *hw,
 				   u8 hw_queue, u16 index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*tx_polling) (struct ieee80211_hw *hw, u8 hw_queue);
 	void (*enable_hw_sec) (struct ieee80211_hw *hw);
@@ -2412,8 +2720,11 @@ struct rtl_hal_ops {
 	void (*set_rfreg) (struct ieee80211_hw *hw, enum radio_path rfpath,
 			   u32 regaddr, u32 bitmask, u32 data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*allow_all_destaddr)(struct ieee80211_hw *hw,
 		bool allow_all_da, bool write_into_reg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*linked_set_reg) (struct ieee80211_hw *hw);
@@ -2439,7 +2750,10 @@ struct rtl_hal_ops {
 	void (*fill_h2c_cmd) (struct ieee80211_hw *hw, u8 element_id,
 			      u32 cmd_len, u8 *p_cmdbuffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool (*get_btc_status) (void);
 	bool (*is_fw_header)(struct rtl8723e_firmware_header *hdr);
 	u32 (*rx_command_packet)(struct ieee80211_hw *hw,
@@ -2447,6 +2761,9 @@ struct rtl_hal_ops {
 	void (*add_wowlan_pattern)(struct ieee80211_hw *hw,
 				   struct rtl_wow_pattern *rtl_pattern,
 				   u8 index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2463,7 +2780,11 @@ struct rtl_intf_ops {
 			   struct sk_buff *skb,
 			   struct rtl_tcb_desc *ptcb_desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*flush)(struct ieee80211_hw *hw, bool drop);
+=======
+	void (*flush)(struct ieee80211_hw *hw, u32 queues, bool drop);
+>>>>>>> v3.18
 =======
 	void (*flush)(struct ieee80211_hw *hw, u32 queues, bool drop);
 >>>>>>> v3.18
@@ -2495,7 +2816,10 @@ struct rtl_mod_params {
 	/* default: 1 = using linked fw power save */
 	bool fwctrl_lps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* default: 0 = not using MSI interrupts mode
 	 * submodules should set their own default value
@@ -2504,6 +2828,9 @@ struct rtl_mod_params {
 
 	/* default 0: 1 means disable */
 	bool disable_watchdog;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2573,6 +2900,11 @@ struct rtl_locks {
 	/*Easy concurrent*/
 	spinlock_t check_sendpkt_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	spinlock_t iqk_lock;
+>>>>>>> v3.18
 =======
 
 	spinlock_t iqk_lock;
@@ -2646,6 +2978,10 @@ struct ps_t {
 	u8 pre_rfstate;
 	u8 cur_rfstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 initialize;
+>>>>>>> v3.18
 =======
 	u8 initialize;
 >>>>>>> v3.18
@@ -2674,6 +3010,10 @@ struct dig_t {
 	u8 presta_cstate;
 	u8 curmultista_cstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 stop_dig;
+>>>>>>> v3.18
 =======
 	u8 stop_dig;
 >>>>>>> v3.18
@@ -2695,6 +3035,10 @@ struct dig_t {
 	u8 large_fa_hit;
 	u8 dig_dynamic_min;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 dig_dynamic_min_1;
+>>>>>>> v3.18
 =======
 	u8 dig_dynamic_min_1;
 >>>>>>> v3.18
@@ -2715,6 +3059,10 @@ struct dig_t {
 	u8 dig_min_0;
 	u8 dig_min_1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 bt30_cur_igi;
+>>>>>>> v3.18
 =======
 	u8 bt30_cur_igi;
 >>>>>>> v3.18
@@ -2733,9 +3081,12 @@ struct rtl_global_var {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rtl_priv {
 	struct ieee80211_hw *hw;
 =======
+=======
+>>>>>>> v3.18
 struct rtl_btc_info {
 	u8 bt_type;
 	u8 btcoexist;
@@ -2833,6 +3184,9 @@ struct rtl_priv {
 	struct ieee80211_hw *hw;
 	/* Used to load a second firmware */
 	void (*rtl_fw_second_cb)(struct rtl_priv *rtlpriv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct completion firmware_loading_complete;
 	struct list_head list;
@@ -2855,6 +3209,10 @@ struct rtl_priv {
 	struct rtl_ps_ctl psc;
 	struct rate_adaptive ra;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dynamic_primary_cca primarycca;
+>>>>>>> v3.18
 =======
 	struct dynamic_primary_cca primarycca;
 >>>>>>> v3.18
@@ -2899,7 +3257,10 @@ struct rtl_priv {
 	u8 rate_mask[5];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* intel Proximity, should be alloc mem
 	 * in intel Proximity module and can only
 	 * be used in intel Proximity mode
@@ -2917,6 +3278,9 @@ struct rtl_priv {
 #ifdef CONFIG_PM
 	struct wiphy_wowlan_support wowlan;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*This must be the last item so
 	   that it points to the data allocated
@@ -2950,7 +3314,10 @@ enum bt_co_type {
 	BT_RTL8756 = 5,
 	BT_RTL8723A = 6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	BT_RTL8821A = 7,
 	BT_RTL8723B = 8,
 	BT_RTL8192E = 9,
@@ -2960,6 +3327,9 @@ enum bt_co_type {
 enum bt_total_ant_num {
 	ANT_TOTAL_X2 = 0,
 	ANT_TOTAL_X1 = 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2986,6 +3356,7 @@ enum bt_radio_shared {
 	BT_RADIO_INDIVIDUAL = 1,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct bt_coexist_info {
 
@@ -3043,6 +3414,8 @@ struct bt_coexist_info {
 	u8 lps_counter;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3229,7 +3602,10 @@ value to host byte ordering.*/
 	(des)[4] = (src)[4], (des)[5] = (src)[5])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	LDPC_HT_ENABLE_RX			BIT(0)
 #define	LDPC_HT_ENABLE_TX			BIT(1)
 #define	LDPC_HT_TEST_TX_ENABLE			BIT(2)
@@ -3250,6 +3626,9 @@ value to host byte ordering.*/
 #define	STBC_VHT_TEST_TX_ENABLE			BIT(2)
 #define	STBC_VHT_CAP_TX				BIT(3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u8 rtl_read_byte(struct rtl_priv *rtlpriv, u32 addr)
 {

@@ -13,6 +13,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef _PDATA_SHT15_H
+#define _PDATA_SHT15_H
+
+>>>>>>> v3.18
 =======
 #ifndef _PDATA_SHT15_H
 #define _PDATA_SHT15_H
@@ -38,6 +44,11 @@ struct sht15_platform_data {
 	bool low_resolution;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /* _PDATA_SHT15_H */
+>>>>>>> v3.18
 =======
 
 #endif /* _PDATA_SHT15_H */

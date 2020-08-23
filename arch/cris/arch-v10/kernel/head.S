@@ -2,6 +2,7 @@
  * Head of the kernel - alter with care
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000, 2001 Axis Communications AB
  *
  * Authors:	Bjorn Wesen (bjornw@axis.com)
@@ -9,10 +10,15 @@
  */
 	
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) 2000, 2001, 2010 Axis Communications AB
  *
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ASSEMBLER_MACROS_ONLY
 /* The IO_* macros use the ## token concatenation operator, so
@@ -26,9 +32,15 @@
 #define START_ETHERNET_CLOCK IO_STATE(R_NETWORK_GEN_CONFIG, enable, on) |\
                              IO_STATE(R_NETWORK_GEN_CONFIG, phy, mii_clk)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 	;; exported symbols
 		
+=======
+
+	;; exported symbols
+
+>>>>>>> v3.18
 =======
 
 	;; exported symbols
@@ -40,7 +52,11 @@
 	.globl	romfs_in_flash
 	.globl  swapper_pg_dir
 <<<<<<< HEAD
+<<<<<<< HEAD
 					
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -53,15 +69,21 @@
 	;;
 	;; NOTICE! The registers r8 and r9 are used as parameters carrying
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; information from the decompressor (if the kernel was compressed). 
 	;; They should not be used in the code below until read.
 	
 	nop	
 =======
+=======
+>>>>>>> v3.18
 	;; information from the decompressor (if the kernel was compressed).
 	;; They should not be used in the code below until read.
 
 	nop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	di
 
@@ -83,7 +105,11 @@
 #ifdef CONFIG_CRIS_LOW_MAP
 	; kseg mappings, temporary map of 0xc0->0x40
 <<<<<<< HEAD
+<<<<<<< HEAD
  	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_c, 4)		\
+=======
+	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_c, 4)		\
+>>>>>>> v3.18
 =======
 	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_c, 4)		\
 >>>>>>> v3.18
@@ -93,8 +119,13 @@
 	move.d	$r0, [R_MMU_KBASE_HI]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; temporary map of 0x40->0x40 and 0x60->0x40 
  	move.d	  IO_FIELD (R_MMU_KBASE_LO, base_6, 4)		\
+=======
+	; temporary map of 0x40->0x40 and 0x60->0x40
+	move.d	  IO_FIELD (R_MMU_KBASE_LO, base_6, 4)		\
+>>>>>>> v3.18
 =======
 	; temporary map of 0x40->0x40 and 0x60->0x40
 	move.d	  IO_FIELD (R_MMU_KBASE_LO, base_6, 4)		\
@@ -104,7 +135,11 @@
 
 	; mmu enable, segs e,c,b,a,6,5,4,0 segment mapped
 <<<<<<< HEAD
+<<<<<<< HEAD
  	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+=======
+	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+>>>>>>> v3.18
 =======
 	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
 >>>>>>> v3.18
@@ -131,7 +166,11 @@
 #else
 	; kseg mappings
 <<<<<<< HEAD
+<<<<<<< HEAD
  	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_e, 8)		\
+=======
+	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_e, 8)		\
+>>>>>>> v3.18
 =======
 	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_e, 8)		\
 >>>>>>> v3.18
@@ -140,7 +179,11 @@
 	move.d	$r0, [R_MMU_KBASE_HI]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; temporary map of 0x40->0x40 and 0x00->0x00 
+=======
+	; temporary map of 0x40->0x40 and 0x00->0x00
+>>>>>>> v3.18
 =======
 	; temporary map of 0x40->0x40 and 0x00->0x00
 >>>>>>> v3.18
@@ -149,7 +192,11 @@
 
 	; mmu enable, segs f,e,c,b,4,0 segment mapped
 <<<<<<< HEAD
+<<<<<<< HEAD
  	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+=======
+	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+>>>>>>> v3.18
 =======
 	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
 >>>>>>> v3.18
@@ -191,7 +238,11 @@
 	;; In both cases, we start in un-cached mode, and need to jump into a
 	;; cached PC after we're done fiddling around with the segments.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; 
+=======
+	;;
+>>>>>>> v3.18
 =======
 	;;
 >>>>>>> v3.18
@@ -200,7 +251,11 @@
 
 	;; Check if we start from DRAM or FLASH by testing PC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -221,7 +276,11 @@ _inflash0:
 	.section ".init.text", "ax"
 _inflash:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ETRAX_ETHERNET	
+=======
+#ifdef CONFIG_ETRAX_ETHERNET
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ETRAX_ETHERNET
 >>>>>>> v3.18
@@ -232,7 +291,10 @@ _inflash:
 
 	;; Set up waitstates etc according to kernel configuration.
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_SVINTO_SIM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	move.d   CONFIG_ETRAX_DEF_R_WAITSTATES, $r0
@@ -241,7 +303,10 @@ _inflash:
 	move.d   CONFIG_ETRAX_DEF_R_BUS_CONFIG, $r0
 	move.d   $r0, [R_BUS_CONFIG]
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -251,15 +316,21 @@ _inflash:
 	beq	_dram_init_finished
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 #include "../lib/dram_init.S"
 
 _dram_init_finished:		
 =======
+=======
+>>>>>>> v3.18
 
 #include "../lib/dram_init.S"
 
 _dram_init_finished:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	;; Copy text+data to DRAM
 	;; This is fragile - the calculation of r4 as the image size depends
@@ -273,7 +344,11 @@ _dram_init_finished:
 	;; and when run with compression, the kernel is actually unpacked to
 	;; DRAM and we never get here in the first place :))
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -308,15 +383,21 @@ _dram_init_finished:
 #endif
 	move.d	$r4, [romfs_start]
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	
 	moveq	1, $r0
 	move.d	$r0, [romfs_in_flash]
 		
 =======
+=======
+>>>>>>> v3.18
 1:
 	moveq	1, $r0
 	move.d	$r0, [romfs_in_flash]
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jump	_start_it	; enter code, cached this time
 
@@ -327,7 +408,11 @@ _inram:
 	moveq	0, $r0
 	move.d	$r0, [romfs_length] ; default if there is no cramfs
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -341,7 +426,11 @@ _inram:
 	;;  garbage but we do sanity checks on it, the chance that it points
 	;;  to a cramfs magic is small.. )
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -368,7 +457,11 @@ _inram:
 
 _no_romfs_in_flash:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -384,8 +477,13 @@ _no_romfs_in_flash:
 	nop
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; Ok. What is its size ? 
 	
+=======
+	;; Ok. What is its size ?
+
+>>>>>>> v3.18
 =======
 	;; Ok. What is its size ?
 
@@ -406,7 +504,11 @@ _no_romfs_in_flash:
 	add.d	$r2, $r0
 	add.d	$r2, $r1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -421,7 +523,11 @@ _no_romfs_in_flash:
 	nop
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:		
+=======
+2:
+>>>>>>> v3.18
 =======
 2:
 >>>>>>> v3.18
@@ -432,7 +538,11 @@ _no_romfs_in_flash:
 
 	jump	_start_it	; better skip the additional cramfs check below
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -463,7 +573,11 @@ no_command_line:
 	move	$r0,$ibr
 	move.d	$r0,[etrax_irv]	; set the interrupt base register and pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -476,7 +590,11 @@ no_command_line:
 	blo	1b
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -503,7 +621,11 @@ no_command_line:
 #ifdef CONFIG_JULIETTE
 	;; configure external DMA channel 0 before enabling it in genconfig
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -522,7 +644,11 @@ no_command_line:
 
 	;; reset dma4 and wait for completion
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -536,7 +662,11 @@ no_command_line:
 
 	;; reset dma5 and wait for completion
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -548,8 +678,13 @@ no_command_line:
 	beq	1b
 	nop
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	
 			
+=======
+#endif
+
+>>>>>>> v3.18
 =======
 #endif
 
@@ -608,7 +743,10 @@ no_command_line:
 	move.d	$r0,[genconfig_shadow] ; init a shadow register of R_GEN_CONFIG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_SVINTO_SIM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	move.d	$r0,[R_GEN_CONFIG]
@@ -629,7 +767,11 @@ no_command_line:
 	nop
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -650,7 +792,11 @@ no_command_line:
 	;; setup port PA and PB default initial directions and data
 	;; including their shadow registers
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -671,7 +817,11 @@ no_command_line:
 	move.b	$r0,[port_pa_data_shadow]
 	move.b	$r0,[R_PORT_PA_DATA]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -717,6 +867,7 @@ no_command_line:
 	move.d	$r0,[port_g_data_shadow]
 	move.d	$r0,[R_PORT_G_DATA]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	;; setup the serial port 0 at 115200 baud for debug purposes
 	
@@ -725,6 +876,8 @@ no_command_line:
 		| IO_FIELD (R_SERIAL0_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL0_XOFF] 
 =======
+=======
+>>>>>>> v3.18
 
 	;; setup the serial port 0 at 115200 baud for debug purposes
 
@@ -732,6 +885,9 @@ no_command_line:
 		| IO_STATE (R_SERIAL0_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL0_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL0_XOFF]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; 115.2kbaud for both transmit and receive
@@ -749,8 +905,13 @@ no_command_line:
 		| IO_STATE (R_SERIAL0_REC_CTRL, rec_par_en, disable)	\
 		| IO_STATE (R_SERIAL0_REC_CTRL, rec_bitnr, rec_8bit),$r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	move.b	$r0,[R_SERIAL0_REC_CTRL] 
 	
+=======
+	move.b	$r0,[R_SERIAL0_REC_CTRL]
+
+>>>>>>> v3.18
 =======
 	move.b	$r0,[R_SERIAL0_REC_CTRL]
 
@@ -768,17 +929,23 @@ no_command_line:
 
 	;; setup the serial port 1 at 115200 baud for debug purposes
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	moveq	  IO_STATE (R_SERIAL1_XOFF, tx_stop, enable)		\
 		| IO_STATE (R_SERIAL1_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL1_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL1_XOFF] 
 =======
+=======
+>>>>>>> v3.18
 
 	moveq	  IO_STATE (R_SERIAL1_XOFF, tx_stop, enable)		\
 		| IO_STATE (R_SERIAL1_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL1_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL1_XOFF]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; 115.2kbaud for both transmit and receive
@@ -796,8 +963,13 @@ no_command_line:
 		| IO_STATE (R_SERIAL1_REC_CTRL, rec_par_en, disable)	\
 		| IO_STATE (R_SERIAL1_REC_CTRL, rec_bitnr, rec_8bit),$r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	move.b	$r0,[R_SERIAL1_REC_CTRL] 
 	
+=======
+	move.b	$r0,[R_SERIAL1_REC_CTRL]
+
+>>>>>>> v3.18
 =======
 	move.b	$r0,[R_SERIAL1_REC_CTRL]
 
@@ -849,6 +1021,7 @@ no_command_line:
 	move.b	$r0,[R_SERIAL2_TR_CTRL]
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 #ifdef CONFIG_ETRAX_SERIAL_PORT3	
 	;; setup the serial port 3 at 115200 baud for debug purposes
@@ -858,6 +1031,8 @@ no_command_line:
 		| IO_FIELD (R_SERIAL3_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL3_XOFF] 
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_ETRAX_SERIAL_PORT3
 	;; setup the serial port 3 at 115200 baud for debug purposes
@@ -866,6 +1041,9 @@ no_command_line:
 		| IO_STATE (R_SERIAL3_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL3_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL3_XOFF]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; 115.2kbaud for both transmit and receive
@@ -883,8 +1061,13 @@ no_command_line:
 		| IO_STATE (R_SERIAL3_REC_CTRL, rec_par_en, disable)	\
 		| IO_STATE (R_SERIAL3_REC_CTRL, rec_bitnr, rec_8bit),$r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	move.b	$r0,[R_SERIAL3_REC_CTRL] 
 	
+=======
+	move.b	$r0,[R_SERIAL3_REC_CTRL]
+
+>>>>>>> v3.18
 =======
 	move.b	$r0,[R_SERIAL3_REC_CTRL]
 
@@ -901,6 +1084,7 @@ no_command_line:
 	move.b	$r0,[R_SERIAL3_TR_CTRL]
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 #endif /* CONFIG_SVINTO_SIM */
 
@@ -909,11 +1093,16 @@ no_command_line:
 	.data
 etrax_irv:	
 =======
+=======
+>>>>>>> v3.18
 
 	jump	start_kernel	; jump into the C-function start_kernel in init/main.c
 
 	.data
 etrax_irv:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dword	0
 romfs_start:
@@ -923,7 +1112,11 @@ romfs_length:
 romfs_in_flash:
 	.dword	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -933,7 +1126,11 @@ romfs_in_flash:
 #ifdef CONFIG_CRIS_LOW_MAP
 swapper_pg_dir = 0x60002000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else	
+=======
+#else
+>>>>>>> v3.18
 =======
 #else
 >>>>>>> v3.18

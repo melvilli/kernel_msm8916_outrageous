@@ -172,7 +172,11 @@ static int mpc85xx_l2ctlr_of_remove(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc85xx_l2ctlr_of_match[] = {
+=======
+static const struct of_device_id mpc85xx_l2ctlr_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc85xx_l2ctlr_of_match[] = {
 >>>>>>> v3.18

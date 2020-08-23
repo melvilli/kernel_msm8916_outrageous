@@ -1,9 +1,15 @@
 #!/bin/sh
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if [ $# -lt 1 ]
 then
 	echo "Usage: headers_install.sh OUTDIR SRCDIR [FILES...]
+=======
+if [ $# -lt 2 ]
+then
+	echo "Usage: headers_install.sh OUTDIR SRCDIR [FILES...]"
+>>>>>>> v3.18
 =======
 if [ $# -lt 2 ]
 then

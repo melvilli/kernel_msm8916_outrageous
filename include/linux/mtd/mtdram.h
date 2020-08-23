@@ -4,7 +4,11 @@
 #include <linux/mtd/mtd.h>
 int mtdram_init_device(struct mtd_info *mtd, void *mapped_address,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long size, char *name);
+=======
+			unsigned long size, const char *name);
+>>>>>>> v3.18
 =======
 			unsigned long size, const char *name);
 >>>>>>> v3.18

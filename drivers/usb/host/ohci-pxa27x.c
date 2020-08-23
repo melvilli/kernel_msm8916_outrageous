@@ -20,6 +20,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/device.h>
 #include <linux/signal.h>
 #include <linux/platform_device.h>
@@ -30,6 +31,8 @@
 #include <linux/platform_data/usb-ohci-pxa27x.h>
 #include <linux/platform_data/usb-pxa3xx-ulpi.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/device.h>
 #include <linux/dma-mapping.h>
@@ -52,6 +55,9 @@
 #include "ohci.h"
 
 #define DRIVER_DESC "OHCI PXA27x/PXA3x driver"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -127,6 +133,7 @@
 #define PXA_UHC_MAX_PORTNUM    3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pxa27x_ohci {
 	/* must be 1st member here for hcd_to_ohci() to work */
 	struct ohci_hcd ohci;
@@ -138,6 +145,8 @@ struct pxa27x_ohci {
 
 #define to_pxa27x_ohci(hcd)	(struct pxa27x_ohci *)hcd_to_ohci(hcd)
 =======
+=======
+>>>>>>> v3.18
 static const char hcd_name[] = "ohci-pxa27x";
 
 static struct hc_driver __read_mostly ohci_pxa27x_hc_driver;
@@ -150,6 +159,9 @@ struct pxa27x_ohci {
 };
 
 #define to_pxa27x_ohci(hcd)	(struct pxa27x_ohci *)(hcd_to_ohci(hcd)->priv)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -163,15 +175,21 @@ struct pxa27x_ohci {
       Ports are powered individually.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxa27x_ohci_select_pmm(struct pxa27x_ohci *ohci, int mode)
 {
 	uint32_t uhcrhda = __raw_readl(ohci->mmio_base + UHCRHDA);
 	uint32_t uhcrhdb = __raw_readl(ohci->mmio_base + UHCRHDB);
 =======
+=======
+>>>>>>> v3.18
 static int pxa27x_ohci_select_pmm(struct pxa27x_ohci *pxa_ohci, int mode)
 {
 	uint32_t uhcrhda = __raw_readl(pxa_ohci->mmio_base + UHCRHDA);
 	uint32_t uhcrhdb = __raw_readl(pxa_ohci->mmio_base + UHCRHDB);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (mode) {
@@ -197,6 +215,7 @@ static int pxa27x_ohci_select_pmm(struct pxa27x_ohci *pxa_ohci, int mode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(uhcrhda, ohci->mmio_base + UHCRHDA);
 	__raw_writel(uhcrhdb, ohci->mmio_base + UHCRHDB);
 	return 0;
@@ -212,6 +231,8 @@ static inline void pxa27x_setup_hc(struct pxa27x_ohci *ohci,
 	uint32_t uhchr = __raw_readl(ohci->mmio_base + UHCHR);
 	uint32_t uhcrhda = __raw_readl(ohci->mmio_base + UHCRHDA);
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(uhcrhda, pxa_ohci->mmio_base + UHCRHDA);
 	__raw_writel(uhcrhdb, pxa_ohci->mmio_base + UHCRHDB);
 	return 0;
@@ -270,6 +291,9 @@ static inline void pxa27x_setup_hc(struct pxa27x_ohci *pxa_ohci,
 {
 	uint32_t uhchr = __raw_readl(pxa_ohci->mmio_base + UHCHR);
 	uint32_t uhcrhda = __raw_readl(pxa_ohci->mmio_base + UHCRHDA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (inf->flags & ENABLE_PORT1)
@@ -303,6 +327,7 @@ static inline void pxa27x_setup_hc(struct pxa27x_ohci *pxa_ohci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(uhchr, ohci->mmio_base + UHCHR);
 	__raw_writel(uhcrhda, ohci->mmio_base + UHCRHDA);
 }
@@ -315,6 +340,8 @@ static inline void pxa27x_reset_hc(struct pxa27x_ohci *ohci)
 	udelay(11);
 	__raw_writel(uhchr & ~UHCHR_FHR, ohci->mmio_base + UHCHR);
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(uhchr, pxa_ohci->mmio_base + UHCHR);
 	__raw_writel(uhcrhda, pxa_ohci->mmio_base + UHCRHDA);
 }
@@ -326,6 +353,9 @@ static inline void pxa27x_reset_hc(struct pxa27x_ohci *pxa_ohci)
 	__raw_writel(uhchr | UHCHR_FHR, pxa_ohci->mmio_base + UHCHR);
 	udelay(11);
 	__raw_writel(uhchr & ~UHCHR_FHR, pxa_ohci->mmio_base + UHCHR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -336,7 +366,11 @@ extern void pxa27x_clear_otgph(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxa27x_start_hc(struct pxa27x_ohci *ohci, struct device *dev)
+=======
+static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
+>>>>>>> v3.18
 =======
 static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 >>>>>>> v3.18
@@ -344,6 +378,7 @@ static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 	int retval = 0;
 	struct pxaohci_platform_data *inf;
 	uint32_t uhchr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	inf = dev->platform_data;
@@ -360,6 +395,8 @@ static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 
 	pxa27x_setup_hc(ohci, inf);
 =======
+=======
+>>>>>>> v3.18
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
 
 	inf = dev_get_platdata(dev);
@@ -375,6 +412,9 @@ static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 		cpu_relax();
 
 	pxa27x_setup_hc(pxa_ohci, inf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (inf->init)
@@ -385,17 +425,23 @@ static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 
 	if (cpu_is_pxa3xx())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pxa3xx_u2d_start_hc(&ohci_to_hcd(&ohci->ohci)->self);
 
 	uhchr = __raw_readl(ohci->mmio_base + UHCHR) & ~UHCHR_SSE;
 	__raw_writel(uhchr, ohci->mmio_base + UHCHR);
 	__raw_writel(UHCHIE_UPRIE | UHCHIE_RWIE, ohci->mmio_base + UHCHIE);
 =======
+=======
+>>>>>>> v3.18
 		pxa3xx_u2d_start_hc(&hcd->self);
 
 	uhchr = __raw_readl(pxa_ohci->mmio_base + UHCHR) & ~UHCHR_SSE;
 	__raw_writel(uhchr, pxa_ohci->mmio_base + UHCHR);
 	__raw_writel(UHCHIE_UPRIE | UHCHIE_RWIE, pxa_ohci->mmio_base + UHCHIE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Clear any OTG Pin Hold */
@@ -403,6 +449,7 @@ static int pxa27x_start_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pxa27x_stop_hc(struct pxa27x_ohci *ohci, struct device *dev)
 {
@@ -414,6 +461,8 @@ static void pxa27x_stop_hc(struct pxa27x_ohci *ohci, struct device *dev)
 	if (cpu_is_pxa3xx())
 		pxa3xx_u2d_stop_hc(&ohci_to_hcd(&ohci->ohci)->self);
 =======
+=======
+>>>>>>> v3.18
 static void pxa27x_stop_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 {
 	struct pxaohci_platform_data *inf;
@@ -424,11 +473,15 @@ static void pxa27x_stop_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 
 	if (cpu_is_pxa3xx())
 		pxa3xx_u2d_stop_hc(&hcd->self);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (inf->exit)
 		inf->exit(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pxa27x_reset_hc(ohci);
 
@@ -439,6 +492,8 @@ static void pxa27x_stop_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 
 	clk_disable_unprepare(ohci->clk);
 =======
+=======
+>>>>>>> v3.18
 	pxa27x_reset_hc(pxa_ohci);
 
 	/* Host Controller Reset */
@@ -447,6 +502,9 @@ static void pxa27x_stop_hc(struct pxa27x_ohci *pxa_ohci, struct device *dev)
 	udelay(10);
 
 	clk_disable_unprepare(pxa_ohci->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -464,6 +522,10 @@ static int ohci_pxa_of_init(struct platform_device *pdev)
 	struct pxaohci_platform_data *pdata;
 	u32 tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -476,10 +538,16 @@ static int ohci_pxa_of_init(struct platform_device *pdev)
 	 * Once we have dma capability bindings this can go away.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.dma_mask)
 		pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
 	if (!pdev->dev.coherent_dma_mask)
 		pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 	if (ret)
@@ -543,15 +611,21 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 	struct usb_hcd *hcd;
 	struct pxaohci_platform_data *inf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_ohci *ohci;
 	struct resource *r;
 	struct clk *usb_clk;
 =======
+=======
+>>>>>>> v3.18
 	struct pxa27x_ohci *pxa_ohci;
 	struct ohci_hcd *ohci;
 	struct resource *r;
 	struct clk *usb_clk;
 	unsigned int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	retval = ohci_pxa_of_init(pdev);
@@ -559,7 +633,11 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 		return retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inf = pdev->dev.platform_data;
+=======
+	inf = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	inf = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -574,7 +652,11 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_clk = clk_get(&pdev->dev, NULL);
+=======
+	usb_clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	usb_clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -583,10 +665,15 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 
 	hcd = usb_create_hcd (driver, &pdev->dev, "pxa27x");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hcd) {
 		retval = -ENOMEM;
 		goto err0;
 	}
+=======
+	if (!hcd)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!hcd)
 		return -ENOMEM;
@@ -597,7 +684,11 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 		pr_err("no resource of IORESOURCE_MEM");
 		retval = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -606,6 +697,7 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 	hcd->rsrc_start = r->start;
 	hcd->rsrc_len = resource_size(r);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!request_mem_region(hcd->rsrc_start, hcd->rsrc_len, hcd_name)) {
 		pr_debug("request_mem_region failed");
@@ -634,6 +726,8 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 	/* Select Power Management Mode */
 	pxa27x_ohci_select_pmm(ohci, inf->port_mode);
 =======
+=======
+>>>>>>> v3.18
 	hcd->regs = devm_ioremap_resource(&pdev->dev, r);
 	if (IS_ERR(hcd->regs)) {
 		retval = PTR_ERR(hcd->regs);
@@ -663,11 +757,15 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 
 	/* Select Power Management Mode */
 	pxa27x_ohci_select_pmm(pxa_ohci, inf->port_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (inf->power_budget)
 		hcd->power_budget = inf->power_budget;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ohci_hcd_init(hcd_to_ohci(hcd));
 
@@ -685,6 +783,8 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
  err0:
 	clk_put(usb_clk);
 =======
+=======
+>>>>>>> v3.18
 	/* The value of NDP in roothub_a is incorrect on this hardware */
 	ohci = hcd_to_ohci(hcd);
 	ohci->num_ports = 3;
@@ -698,6 +798,9 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
 	pxa27x_stop_hc(pxa_ohci, &pdev->dev);
  err:
 	usb_put_hcd(hcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -718,6 +821,7 @@ int usb_hcd_pxa27x_probe (const struct hc_driver *driver, struct platform_device
  */
 void usb_hcd_pxa27x_remove (struct usb_hcd *hcd, struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pxa27x_ohci *ohci = to_pxa27x_ohci(hcd);
 
@@ -754,6 +858,8 @@ ohci_pxa27x_start (struct usb_hcd *hcd)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct pxa27x_ohci *pxa_ohci = to_pxa27x_ohci(hcd);
 	unsigned int i;
 
@@ -764,11 +870,15 @@ ohci_pxa27x_start (struct usb_hcd *hcd)
 		pxa27x_ohci_set_vbus_power(pxa_ohci, i, false);
 
 	usb_put_hcd(hcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct hc_driver ohci_pxa27x_hc_driver = {
 	.description =		hcd_name,
@@ -816,6 +926,8 @@ static const struct hc_driver ohci_pxa27x_hc_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ohci_hcd_pxa27x_drv_probe(struct platform_device *pdev)
 {
 	pr_debug ("In ohci_hcd_pxa27x_drv_probe");
@@ -832,7 +944,10 @@ static int ohci_hcd_pxa27x_drv_remove(struct platform_device *pdev)
 
 	usb_hcd_pxa27x_remove(hcd, pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -843,6 +958,7 @@ static int ohci_hcd_pxa27x_drv_suspend(struct device *dev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_ohci *ohci = to_pxa27x_ohci(hcd);
 
 	if (time_before(jiffies, ohci->ohci.next_statechange))
@@ -852,6 +968,8 @@ static int ohci_hcd_pxa27x_drv_suspend(struct device *dev)
 	pxa27x_stop_hc(ohci, dev);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct pxa27x_ohci *pxa_ohci = to_pxa27x_ohci(hcd);
 	struct ohci_hcd *ohci = hcd_to_ohci(hcd);
 	bool do_wakeup = device_may_wakeup(dev);
@@ -868,12 +986,16 @@ static int ohci_hcd_pxa27x_drv_suspend(struct device *dev)
 
 	pxa27x_stop_hc(pxa_ohci, dev);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ohci_hcd_pxa27x_drv_resume(struct device *dev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pxa27x_ohci *ohci = to_pxa27x_ohci(hcd);
 	struct pxaohci_platform_data *inf = dev->platform_data;
@@ -889,6 +1011,8 @@ static int ohci_hcd_pxa27x_drv_resume(struct device *dev)
 	/* Select Power Management Mode */
 	pxa27x_ohci_select_pmm(ohci, inf->port_mode);
 =======
+=======
+>>>>>>> v3.18
 	struct pxa27x_ohci *pxa_ohci = to_pxa27x_ohci(hcd);
 	struct pxaohci_platform_data *inf = dev_get_platdata(dev);
 	struct ohci_hcd *ohci = hcd_to_ohci(hcd);
@@ -904,6 +1028,9 @@ static int ohci_hcd_pxa27x_drv_resume(struct device *dev)
 
 	/* Select Power Management Mode */
 	pxa27x_ohci_select_pmm(pxa_ohci, inf->port_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ohci_resume(hcd, false);
@@ -917,9 +1044,12 @@ static const struct dev_pm_ops ohci_hcd_pxa27x_pm_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* work with hotplug and coldplug */
 MODULE_ALIAS("platform:pxa27x-ohci");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver ohci_hcd_pxa27x_driver = {
@@ -937,7 +1067,10 @@ static struct platform_driver ohci_hcd_pxa27x_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct ohci_driver_overrides pxa27x_overrides __initconst = {
 	.extra_priv_size =      sizeof(struct pxa27x_ohci),
 };
@@ -965,4 +1098,7 @@ module_exit(ohci_pxa27x_cleanup);
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:pxa27x-ohci");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

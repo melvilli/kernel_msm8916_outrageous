@@ -31,6 +31,10 @@
 #include <linux/wait.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/llist.h>
+>>>>>>> v3.18
 =======
 #include <linux/llist.h>
 >>>>>>> v3.18
@@ -279,6 +283,7 @@ enum ocfs2_mount_options
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OCFS2_OSB_SOFT_RO			0x0001
 #define OCFS2_OSB_HARD_RO			0x0002
 #define OCFS2_OSB_ERROR_FS			0x0004
@@ -286,10 +291,15 @@ enum ocfs2_mount_options
 
 #define OCFS2_DEFAULT_ATIME_QUANTUM		60
 =======
+=======
+>>>>>>> v3.18
 #define OCFS2_OSB_SOFT_RO	0x0001
 #define OCFS2_OSB_HARD_RO	0x0002
 #define OCFS2_OSB_ERROR_FS	0x0004
 #define OCFS2_DEFAULT_ATIME_QUANTUM	60
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ocfs2_journal;
@@ -298,7 +308,10 @@ struct ocfs2_recovery_map;
 struct ocfs2_replay_map;
 struct ocfs2_quota_recovery;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ocfs2_dentry_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ocfs2_super
@@ -362,7 +375,10 @@ struct ocfs2_super
 	int disable_recovery;
 	wait_queue_head_t checkpoint_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t needs_checkpoint;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ocfs2_journal *journal;
@@ -406,6 +422,10 @@ struct ocfs2_super
 
 	char osb_cluster_stack[OCFS2_STACK_LABEL_LEN + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char osb_cluster_name[OCFS2_CLUSTER_NAME_LEN + 1];
+>>>>>>> v3.18
 =======
 	char osb_cluster_name[OCFS2_CLUSTER_NAME_LEN + 1];
 >>>>>>> v3.18
@@ -436,10 +456,16 @@ struct ocfs2_super
 	unsigned long blocked_lock_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* List of dentry locks to release. Anyone can add locks to
 	 * the list, ocfs2_wq processes the list  */
 	struct ocfs2_dentry_lock *dentry_lock_list;
 	struct work_struct dentry_lock_work;
+=======
+	/* List of dquot structures to drop last reference to */
+	struct llist_head dquot_drop_list;
+	struct work_struct dquot_drop_work;
+>>>>>>> v3.18
 =======
 	/* List of dquot structures to drop last reference to */
 	struct llist_head dquot_drop_list;
@@ -453,6 +479,10 @@ struct ocfs2_super
 	struct buffer_head		*osb_tl_bh;
 	struct delayed_work		osb_truncate_log_wq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t			osb_tl_disable;
+>>>>>>> v3.18
 =======
 	atomic_t			osb_tl_disable;
 >>>>>>> v3.18
@@ -481,6 +511,11 @@ struct ocfs2_super
 	struct rb_root	osb_rf_lock_tree;
 	struct ocfs2_refcount_tree *osb_ref_tree_lru;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct mutex system_file_mutex;
+>>>>>>> v3.18
 =======
 
 	struct mutex system_file_mutex;
@@ -616,6 +651,7 @@ static inline void ocfs2_set_osb_flag(struct ocfs2_super *osb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline unsigned long  ocfs2_test_osb_flag(struct ocfs2_super *osb,
 						 unsigned long flag)
@@ -628,6 +664,8 @@ static inline unsigned long  ocfs2_test_osb_flag(struct ocfs2_super *osb,
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void ocfs2_set_ro_flag(struct ocfs2_super *osb,

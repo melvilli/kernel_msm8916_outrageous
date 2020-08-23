@@ -13,12 +13,15 @@
 #define __SOUND_HDA_GENERIC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* unsol event tags */
 enum {
 	HDA_GEN_HP_EVENT = 1, HDA_GEN_FRONT_EVENT, HDA_GEN_MIC_EVENT,
 	HDA_GEN_LAST_EVENT = HDA_GEN_MIC_EVENT
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* table entry for multi-io paths */
@@ -213,6 +216,10 @@ struct hda_gen_spec {
 	unsigned int keep_vref_in_automute:1; /* Don't clear VREF in automute */
 	unsigned int line_in_auto_switch:1; /* allow line-in auto switch */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int auto_mute_via_amp:1; /* auto-mute via amp instead of pinctl */
+>>>>>>> v3.18
 =======
 	unsigned int auto_mute_via_amp:1; /* auto-mute via amp instead of pinctl */
 >>>>>>> v3.18
@@ -227,6 +234,10 @@ struct hda_gen_spec {
 	unsigned int suppress_hp_mic_detect:1; /* Don't detect HP/mic */
 	unsigned int no_primary_hp:1; /* Don't prefer HP pins to speaker pins */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int no_multi_io:1; /* Don't try multi I/O config */
+>>>>>>> v3.18
 =======
 	unsigned int no_multi_io:1; /* Don't try multi I/O config */
 >>>>>>> v3.18
@@ -241,6 +252,10 @@ struct hda_gen_spec {
 	unsigned int add_jack_modes:1; /* add i/o jack mode enum ctls */
 	unsigned int power_down_unused:1; /* power down unused widgets */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int dac_min_mute:1; /* minimal = mute for DACs */
+>>>>>>> v3.18
 =======
 	unsigned int dac_min_mute:1; /* minimal = mute for DACs */
 >>>>>>> v3.18
@@ -253,13 +268,19 @@ struct hda_gen_spec {
 	unsigned int hp_mic_jack_modes:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* additional mute flags (only effective with auto_mute_via_amp=1) */
 	u64 mute_bits;
 
 	/* bitmask for skipping volume controls */
 	u64 out_vol_mask;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* badness tables for output path evaluations */
 	const struct badness_table *main_out_badness;
@@ -291,6 +312,10 @@ struct hda_gen_spec {
 	void (*automute_hook)(struct hda_codec *codec);
 	void (*cap_sync_hook)(struct hda_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			      struct snd_kcontrol *kcontrol,
+>>>>>>> v3.18
 =======
 			      struct snd_kcontrol *kcontrol,
 >>>>>>> v3.18
@@ -309,6 +334,7 @@ struct hda_gen_spec {
 	/* automute / autoswitch hooks */
 	void (*hp_automute_hook)(struct hda_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct hda_jack_tbl *tbl);
 	void (*line_automute_hook)(struct hda_codec *codec,
 				   struct hda_jack_tbl *tbl);
@@ -319,6 +345,8 @@ struct hda_gen_spec {
 int snd_hda_gen_spec_init(struct hda_gen_spec *spec);
 void snd_hda_gen_spec_free(struct hda_gen_spec *spec);
 =======
+=======
+>>>>>>> v3.18
 				 struct hda_jack_callback *cb);
 	void (*line_automute_hook)(struct hda_codec *codec,
 				   struct hda_jack_callback *cb);
@@ -327,6 +355,9 @@ void snd_hda_gen_spec_free(struct hda_gen_spec *spec);
 };
 
 int snd_hda_gen_spec_init(struct hda_gen_spec *spec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int snd_hda_gen_init(struct hda_codec *codec);
@@ -357,17 +388,23 @@ int snd_hda_gen_build_pcms(struct hda_codec *codec);
 /* standard jack event callbacks */
 void snd_hda_gen_hp_automute(struct hda_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     struct hda_jack_tbl *jack);
 void snd_hda_gen_line_automute(struct hda_codec *codec,
 			       struct hda_jack_tbl *jack);
 void snd_hda_gen_mic_autoswitch(struct hda_codec *codec,
 				struct hda_jack_tbl *jack);
 =======
+=======
+>>>>>>> v3.18
 			     struct hda_jack_callback *jack);
 void snd_hda_gen_line_automute(struct hda_codec *codec,
 			       struct hda_jack_callback *jack);
 void snd_hda_gen_mic_autoswitch(struct hda_codec *codec,
 				struct hda_jack_callback *jack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void snd_hda_gen_update_outputs(struct hda_codec *codec);
 
@@ -375,6 +412,12 @@ void snd_hda_gen_update_outputs(struct hda_codec *codec);
 int snd_hda_gen_check_power_status(struct hda_codec *codec, hda_nid_t nid);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned int snd_hda_gen_path_power_filter(struct hda_codec *codec,
+					   hda_nid_t nid,
+					   unsigned int power_state);
+>>>>>>> v3.18
 =======
 unsigned int snd_hda_gen_path_power_filter(struct hda_codec *codec,
 					   hda_nid_t nid,

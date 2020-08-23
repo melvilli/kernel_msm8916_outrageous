@@ -49,6 +49,7 @@ struct vmbus_channel_message_table_entry {
  * Set up and fill in default negotiate response message.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The max_fw_version specifies the maximum framework version that
  * we can support and max _srv_version specifies the maximum service
  * version we can support. A special value MAX_SRV_VER can be
@@ -67,6 +68,8 @@ void vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp,
 
 	icmsghdrp->icmsgsize = 0x10;
 =======
+=======
+>>>>>>> v3.18
  * The fw_version specifies the  framework version that
  * we can support and srv_version specifies the service
  * version we can support.
@@ -90,6 +93,9 @@ bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp,
 
 	srv_major = (srv_version >> 16);
 	srv_minor = (srv_version & 0xFFFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	negop = (struct icmsg_negotiate *)&buf[
@@ -97,14 +103,20 @@ bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp,
 		sizeof(struct icmsg_hdr)];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	icframe_vercnt = negop->icframe_vercnt;
 	icmsg_vercnt = negop->icmsg_vercnt;
 =======
+=======
+>>>>>>> v3.18
 	icframe_major = negop->icframe_vercnt;
 	icframe_minor = 0;
 
 	icmsg_major = negop->icmsg_vercnt;
 	icmsg_minor = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -113,6 +125,7 @@ bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp,
 	 */
 
 	for (i = 0; i < negop->icframe_vercnt; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (negop->icversion_data[i].major <= max_fw_version)
 			icframe_vercnt = negop->icversion_data[i].major;
@@ -135,6 +148,8 @@ bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp,
 	negop->icversion_data[1].major = icmsg_vercnt;
 	negop->icversion_data[1].minor = 0;
 =======
+=======
+>>>>>>> v3.18
 		if ((negop->icversion_data[i].major == fw_major) &&
 		   (negop->icversion_data[i].minor == fw_minor)) {
 			icframe_major = negop->icversion_data[i].major;
@@ -177,6 +192,9 @@ fw_error:
 	negop->icversion_data[1].major = icmsg_major;
 	negop->icversion_data[1].minor = icmsg_minor;
 	return found_match;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -195,11 +213,17 @@ static struct vmbus_channel *alloc_channel(void)
 
 	spin_lock_init(&channel->inbound_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&channel->sc_lock);
 
 	INIT_LIST_HEAD(&channel->sc_list);
 	INIT_LIST_HEAD(&channel->percpu_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	channel->controlwq = create_workqueue("hv_vmbus_ctl");
@@ -241,8 +265,11 @@ static void free_channel(struct vmbus_channel *channel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 static void percpu_channel_enq(void *arg)
 {
 	struct vmbus_channel *channel = arg;
@@ -257,6 +284,9 @@ static void percpu_channel_deq(void *arg)
 
 	list_del(&channel->percpu_list);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -270,15 +300,21 @@ static void vmbus_process_rescind_offer(struct work_struct *work)
 						     work);
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmbus_channel_relid_released msg;
 
 	vmbus_device_unregister(channel->device_obj);
 =======
+=======
+>>>>>>> v3.18
 	struct vmbus_channel *primary_channel;
 	struct vmbus_channel_relid_released msg;
 
 	if (channel->device_obj)
 		vmbus_device_unregister(channel->device_obj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(&msg, 0, sizeof(struct vmbus_channel_relid_released));
 	msg.child_relid = channel->offermsg.child_relid;
@@ -286,10 +322,13 @@ static void vmbus_process_rescind_offer(struct work_struct *work)
 	vmbus_post_msg(&msg, sizeof(struct vmbus_channel_relid_released));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&vmbus_connection.channel_lock, flags);
 	list_del(&channel->listentry);
 	spin_unlock_irqrestore(&vmbus_connection.channel_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (channel->target_cpu != get_cpu()) {
 		put_cpu();
 		smp_call_function_single(channel->target_cpu,
@@ -309,6 +348,9 @@ static void vmbus_process_rescind_offer(struct work_struct *work)
 		list_del(&channel->sc_list);
 		spin_unlock_irqrestore(&primary_channel->sc_lock, flags);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_channel(channel);
 }
@@ -336,6 +378,10 @@ static void vmbus_process_offer(struct work_struct *work)
 	struct vmbus_channel *channel;
 	bool fnew = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool enq = false;
+>>>>>>> v3.18
 =======
 	bool enq = false;
 >>>>>>> v3.18
@@ -359,6 +405,7 @@ static void vmbus_process_offer(struct work_struct *work)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fnew)
 		list_add_tail(&newchannel->listentry,
 			      &vmbus_connection.chn_list);
@@ -367,6 +414,8 @@ static void vmbus_process_offer(struct work_struct *work)
 
 	if (!fnew) {
 =======
+=======
+>>>>>>> v3.18
 	if (fnew) {
 		list_add_tail(&newchannel->listentry,
 			      &vmbus_connection.chn_list);
@@ -416,6 +465,9 @@ static void vmbus_process_offer(struct work_struct *work)
 			return;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		free_channel(newchannel);
 		return;
@@ -423,7 +475,10 @@ static void vmbus_process_offer(struct work_struct *work)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * This state is used to indicate a successful open
 	 * so that when we do close the channel normally, we
 	 * can cleanup properly
@@ -431,6 +486,9 @@ static void vmbus_process_offer(struct work_struct *work)
 	newchannel->state = CHANNEL_OPEN_STATE;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Start the process of binding this offer to the driver
 	 * We need to set the DeviceObject field before calling
@@ -458,6 +516,7 @@ static void vmbus_process_offer(struct work_struct *work)
 
 		free_channel(newchannel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/*
 		 * This state is used to indicate a successful open
@@ -465,6 +524,8 @@ static void vmbus_process_offer(struct work_struct *work)
 		 * can cleanup properly
 		 */
 		newchannel->state = CHANNEL_OPEN_STATE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -507,7 +568,11 @@ static u32  next_vp;
  * distributed across all available CPUs.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 get_vp_index(uuid_le *type_guid)
+=======
+static void init_vp_index(struct vmbus_channel *channel, const uuid_le *type_guid)
+>>>>>>> v3.18
 =======
 static void init_vp_index(struct vmbus_channel *channel, const uuid_le *type_guid)
 >>>>>>> v3.18
@@ -533,11 +598,14 @@ static void init_vp_index(struct vmbus_channel *channel, const uuid_le *type_gui
 		 * channel, bind it to cpu 0.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	}
 	cur_cpu = (++next_vp % max_cpus);
 	return hv_context.vp_index[cur_cpu];
 =======
+=======
+>>>>>>> v3.18
 		channel->target_cpu = 0;
 		channel->target_vp = 0;
 		return;
@@ -545,6 +613,9 @@ static void init_vp_index(struct vmbus_channel *channel, const uuid_le *type_gui
 	cur_cpu = (++next_vp % max_cpus);
 	channel->target_cpu = cur_cpu;
 	channel->target_vp = hv_context.vp_index[cur_cpu];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -594,7 +665,11 @@ static void vmbus_onoffer(struct vmbus_channel_message_header *hdr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	newchannel->target_vp = get_vp_index(&offer->offer.if_type);
+=======
+	init_vp_index(newchannel, &offer->offer.if_type);
+>>>>>>> v3.18
 =======
 	init_vp_index(newchannel, &offer->offer.if_type);
 >>>>>>> v3.18
@@ -869,7 +944,11 @@ int vmbus_request_offers(void)
 	struct vmbus_channel_message_header *msg;
 	struct vmbus_channel_msginfo *msginfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret, t;
+>>>>>>> v3.18
 =======
 	int ret, t;
 >>>>>>> v3.18
@@ -881,6 +960,11 @@ int vmbus_request_offers(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_completion(&msginfo->waitevent);
+
+>>>>>>> v3.18
 =======
 	init_completion(&msginfo->waitevent);
 
@@ -899,7 +983,10 @@ int vmbus_request_offers(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	t = wait_for_completion_timeout(&msginfo->waitevent, 5*HZ);
 	if (t == 0) {
 		ret = -ETIMEDOUT;
@@ -908,6 +995,9 @@ int vmbus_request_offers(void)
 
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 cleanup:
 	kfree(msginfo);
@@ -916,8 +1006,11 @@ cleanup:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* eof */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Retrieve the (sub) channel on which to send an outgoing request.
  * When a primary channel has multiple sub-channels, we choose a
@@ -1001,4 +1094,7 @@ bool vmbus_are_subchannels_present(struct vmbus_channel *primary)
 	return ret;
 }
 EXPORT_SYMBOL_GPL(vmbus_are_subchannels_present);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

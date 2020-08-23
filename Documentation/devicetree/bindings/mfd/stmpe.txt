@@ -14,6 +14,10 @@ Optional properties:
  - wakeup-source                : Marks the input device as wakable
  - st,autosleep-timeout         : Valid entries (ms); 4, 16, 32, 64, 128, 256, 512 and 1024
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ - irq-gpio                     : If present, which GPIO to use for event IRQ
+>>>>>>> v3.18
 =======
  - irq-gpio                     : If present, which GPIO to use for event IRQ
 >>>>>>> v3.18

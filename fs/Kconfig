@@ -62,8 +62,11 @@ config FILE_LOCKING
           call. Disabling this option saves about 11k.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "fs/crypto/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "fs/notify/Kconfig"
@@ -73,10 +76,14 @@ source "fs/quota/Kconfig"
 source "fs/autofs4/Kconfig"
 source "fs/fuse/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config GENERIC_ACL
 	bool
 	select FS_POSIX_ACL
+=======
+source "fs/overlayfs/Kconfig"
+>>>>>>> v3.18
 =======
 source "fs/overlayfs/Kconfig"
 >>>>>>> v3.18
@@ -110,6 +117,10 @@ menu "Pseudo filesystems"
 
 source "fs/proc/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "fs/kernfs/Kconfig"
+>>>>>>> v3.18
 =======
 source "fs/kernfs/Kconfig"
 >>>>>>> v3.18
@@ -133,7 +144,11 @@ config TMPFS_POSIX_ACL
 	depends on TMPFS
 	select TMPFS_XATTR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select GENERIC_ACL
+=======
+	select FS_POSIX_ACL
+>>>>>>> v3.18
 =======
 	select FS_POSIX_ACL
 >>>>>>> v3.18
@@ -206,7 +221,10 @@ source "fs/adfs/Kconfig"
 source "fs/affs/Kconfig"
 source "fs/ecryptfs/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "fs/sdcardfs/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "fs/hfs/Kconfig"
@@ -215,10 +233,13 @@ source "fs/befs/Kconfig"
 source "fs/bfs/Kconfig"
 source "fs/efs/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # Patched by YAFFS
 source "fs/yaffs2/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "fs/jffs2/Kconfig"
@@ -265,10 +286,13 @@ source "fs/nfs/Kconfig"
 source "fs/nfsd/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LOCKD
 	tristate
 	depends on FILE_LOCKING
 =======
+=======
+>>>>>>> v3.18
 config GRACE_PERIOD
 	tristate
 
@@ -276,6 +300,9 @@ config LOCKD
 	tristate
 	depends on FILE_LOCKING
 	select GRACE_PERIOD
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config LOCKD_V4
@@ -291,7 +318,11 @@ config NFS_ACL_SUPPORT
 config NFS_COMMON
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on NFSD || NFS_FS
+=======
+	depends on NFSD || NFS_FS || LOCKD
+>>>>>>> v3.18
 =======
 	depends on NFSD || NFS_FS || LOCKD
 >>>>>>> v3.18

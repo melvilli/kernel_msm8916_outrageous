@@ -33,10 +33,13 @@
 #define BOOKE_IRQPRIO_PROGRAM 3
 #define BOOKE_IRQPRIO_FP_UNAVAIL 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOOKE_IRQPRIO_SPE_UNAVAIL 5
 #define BOOKE_IRQPRIO_SPE_FP_DATA 6
 #define BOOKE_IRQPRIO_SPE_FP_ROUND 7
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SPE_POSSIBLE
 #define BOOKE_IRQPRIO_SPE_UNAVAIL 5
 #define BOOKE_IRQPRIO_SPE_FP_DATA 6
@@ -46,6 +49,9 @@
 #define BOOKE_IRQPRIO_ALTIVEC_UNAVAIL 5
 #define BOOKE_IRQPRIO_ALTIVEC_ASSIST 6
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BOOKE_IRQPRIO_SYSCALL 8
 #define BOOKE_IRQPRIO_AP_UNAVAIL 9
@@ -112,6 +118,7 @@ enum int_class {
 void kvmppc_set_pending_interrupt(struct kvm_vcpu *vcpu, enum int_class type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Load up guest vcpu FP state if it's needed.
  * It also set the MSR_FP in thread so that host know
@@ -142,6 +149,8 @@ static inline void kvmppc_save_guest_fp(struct kvm_vcpu *vcpu)
 		giveup_fpu(current);
 #endif
 =======
+=======
+>>>>>>> v3.18
 extern void kvmppc_mmu_destroy_e500(struct kvm_vcpu *vcpu);
 extern int kvmppc_core_emulate_op_e500(struct kvm_run *run,
 				       struct kvm_vcpu *vcpu,
@@ -162,6 +171,9 @@ extern int kvmppc_core_emulate_mfspr_e500(struct kvm_vcpu *vcpu, int sprn,
 static inline void kvmppc_clear_dbsr(void)
 {
 	mtspr(SPRN_DBSR, mfspr(SPRN_DBSR));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif /* __KVM_BOOKE_H__ */

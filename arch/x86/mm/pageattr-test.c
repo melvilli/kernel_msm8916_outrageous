@@ -9,7 +9,10 @@
 #include <linux/random.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -40,7 +43,11 @@ enum {
 static int pte_testbit(pte_t pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pte_flags(pte) & _PAGE_UNUSED1;
+=======
+	return pte_flags(pte) & _PAGE_SOFTW1;
+>>>>>>> v3.18
 =======
 	return pte_flags(pte) & _PAGE_SOFTW1;
 >>>>>>> v3.18

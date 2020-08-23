@@ -33,7 +33,10 @@
 #include <linux/vga_switcheroo.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 
 #if defined(CONFIG_VGA_SWITCHEROO)
@@ -41,6 +44,9 @@ bool radeon_has_atpx(void);
 #else
 static inline bool radeon_has_atpx(void) { return false; }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -61,10 +67,13 @@ int radeon_driver_unload_kms(struct drm_device *dev)
 	if (rdev == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->rmmio == NULL)
 		goto done_free;
 	radeon_acpi_fini(rdev);
 =======
+=======
+>>>>>>> v3.18
 
 	if (rdev->rmmio == NULL)
 		goto done_free;
@@ -73,6 +82,9 @@ int radeon_driver_unload_kms(struct drm_device *dev)
 
 	radeon_acpi_fini(rdev);
 	
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	radeon_modeset_fini(rdev);
 	radeon_device_fini(rdev);
@@ -117,12 +129,18 @@ int radeon_driver_load_kms(struct drm_device *dev, unsigned long flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((radeon_runtime_pm != 0) &&
 	    radeon_has_atpx() &&
 	    ((flags & RADEON_IS_IGP) == 0))
 		flags |= RADEON_IS_PX;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* radeon_device_init should report only fatal error
 	 * like memory allocation failure or iomapping failure,
@@ -155,10 +173,13 @@ int radeon_driver_load_kms(struct drm_device *dev, unsigned long flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	if (r)
 		radeon_driver_unload_kms(dev);
 =======
+=======
+>>>>>>> v3.18
 	if (radeon_is_px(dev)) {
 		pm_runtime_use_autosuspend(dev->dev);
 		pm_runtime_set_autosuspend_delay(dev->dev, 5000);
@@ -173,6 +194,9 @@ out:
 		radeon_driver_unload_kms(dev);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -222,7 +246,11 @@ static void radeon_set_filp_rights(struct drm_device *dev,
  * Returns 0 on success, -EINVAL on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
+=======
+static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
+>>>>>>> v3.18
 =======
 static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 >>>>>>> v3.18
@@ -242,7 +270,11 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 	switch (info->request) {
 	case RADEON_INFO_DEVICE_ID:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*value = dev->pci_device;
+=======
+		*value = dev->pdev->device;
+>>>>>>> v3.18
 =======
 		*value = dev->pdev->device;
 >>>>>>> v3.18
@@ -262,7 +294,11 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_CRTC_FROM_ID:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(value, value_ptr, sizeof(uint32_t))) {
+=======
+		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
 >>>>>>> v3.18
@@ -285,11 +321,14 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_ACCEL_WORKING2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*value = rdev->accel_working;
 		break;
 	case RADEON_INFO_TILING_CONFIG:
 		if (rdev->family >= CHIP_TAHITI)
 =======
+=======
+>>>>>>> v3.18
 		if (rdev->family == CHIP_HAWAII) {
 			if (rdev->accel_working) {
 				if (rdev->new_fw)
@@ -307,6 +346,9 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.tile_config;
 		else if (rdev->family >= CHIP_TAHITI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			*value = rdev->config.si.tile_config;
 		else if (rdev->family >= CHIP_CAYMAN)
@@ -330,7 +372,11 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		 * When returning, the value is 1 if filp owns hyper-z access,
 		 * 0 otherwise. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(value, value_ptr, sizeof(uint32_t))) {
+=======
+		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
 >>>>>>> v3.18
@@ -346,7 +392,11 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 	case RADEON_INFO_WANT_CMASK:
 		/* The same logic as Hyper-Z. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(value, value_ptr, sizeof(uint32_t))) {
+=======
+		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
 >>>>>>> v3.18
@@ -368,12 +418,18 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_NUM_BACKENDS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family >= CHIP_TAHITI)
 =======
+=======
+>>>>>>> v3.18
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.max_backends_per_se *
 				rdev->config.cik.max_shader_engines;
 		else if (rdev->family >= CHIP_TAHITI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			*value = rdev->config.si.max_backends_per_se *
 				rdev->config.si.max_shader_engines;
@@ -392,7 +448,13 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_NUM_TILE_PIPES:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family >= CHIP_TAHITI)
+=======
+		if (rdev->family >= CHIP_BONAIRE)
+			*value = rdev->config.cik.max_tile_pipes;
+		else if (rdev->family >= CHIP_TAHITI)
+>>>>>>> v3.18
 =======
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.max_tile_pipes;
@@ -416,7 +478,13 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_BACKEND_MAP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family >= CHIP_TAHITI)
+=======
+		if (rdev->family >= CHIP_BONAIRE)
+			*value = rdev->config.cik.backend_map;
+		else if (rdev->family >= CHIP_TAHITI)
+>>>>>>> v3.18
 =======
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.backend_map;
@@ -449,7 +517,13 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_MAX_PIPES:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family >= CHIP_TAHITI)
+=======
+		if (rdev->family >= CHIP_BONAIRE)
+			*value = rdev->config.cik.max_cu_per_sh;
+		else if (rdev->family >= CHIP_TAHITI)
+>>>>>>> v3.18
 =======
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.max_cu_per_sh;
@@ -479,7 +553,13 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_MAX_SE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family >= CHIP_TAHITI)
+=======
+		if (rdev->family >= CHIP_BONAIRE)
+			*value = rdev->config.cik.max_shader_engines;
+		else if (rdev->family >= CHIP_TAHITI)
+>>>>>>> v3.18
 =======
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.max_shader_engines;
@@ -495,7 +575,13 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_MAX_SH_PER_SE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family >= CHIP_TAHITI)
+=======
+		if (rdev->family >= CHIP_BONAIRE)
+			*value = rdev->config.cik.max_sh_per_se;
+		else if (rdev->family >= CHIP_TAHITI)
+>>>>>>> v3.18
 =======
 		if (rdev->family >= CHIP_BONAIRE)
 			*value = rdev->config.cik.max_sh_per_se;
@@ -510,7 +596,11 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_RING_WORKING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(value, value_ptr, sizeof(uint32_t))) {
+=======
+		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(value, value_ptr, sizeof(uint32_t))) {
 >>>>>>> v3.18
@@ -530,6 +620,12 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 			*value = rdev->ring[R600_RING_TYPE_UVD_INDEX].ready;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case RADEON_CS_RING_VCE:
+			*value = rdev->ring[TN_RING_TYPE_VCE1_INDEX].ready;
+			break;
+>>>>>>> v3.18
 =======
 		case RADEON_CS_RING_VCE:
 			*value = rdev->ring[TN_RING_TYPE_VCE1_INDEX].ready;
@@ -541,6 +637,7 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		break;
 	case RADEON_INFO_SI_TILE_MODE_ARRAY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdev->family < CHIP_TAHITI) {
 			DRM_DEBUG_KMS("tile mode array is si only!\n");
 			return -EINVAL;
@@ -548,6 +645,8 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		value = rdev->config.si.tile_mode_array;
 		value_size = sizeof(uint32_t)*32;
 =======
+=======
+>>>>>>> v3.18
 		if (rdev->family >= CHIP_BONAIRE) {
 			value = rdev->config.cik.tile_mode_array;
 			value_size = sizeof(uint32_t)*32;
@@ -567,13 +666,19 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 			DRM_DEBUG_KMS("macrotile mode array is cik+ only!\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case RADEON_INFO_SI_CP_DMA_COMPUTE:
 		*value = 1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case RADEON_INFO_SI_BACKEND_ENABLED_MASK:
 		if (rdev->family >= CHIP_BONAIRE) {
 			*value = rdev->config.cik.backend_enable_mask;
@@ -627,13 +732,20 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
 		else
 			*value = 1;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		DRM_DEBUG_KMS("Invalid request %d\n", info->request);
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_TO_USER(value_ptr, (char*)value, value_size)) {
+=======
+	if (copy_to_user(value_ptr, (char*)value, value_size)) {
+>>>>>>> v3.18
 =======
 	if (copy_to_user(value_ptr, (char*)value, value_size)) {
 >>>>>>> v3.18
@@ -649,6 +761,7 @@ static int radeon_info_ioctl(struct drm_device *dev, void *data, struct drm_file
  */
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * radeon_driver_firstopen_kms - drm callback for first open
  *
  * @dev: drm dev pointer
@@ -662,6 +775,8 @@ int radeon_driver_firstopen_kms(struct drm_device *dev)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * radeon_driver_firstopen_kms - drm callback for last close
@@ -688,6 +803,7 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 {
 	struct radeon_device *rdev = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	file_priv->driver_priv = NULL;
 
@@ -696,6 +812,8 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 		struct radeon_fpriv *fpriv;
 		struct radeon_bo_va *bo_va;
 =======
+=======
+>>>>>>> v3.18
 	int r;
 
 	file_priv->driver_priv = NULL;
@@ -708,6 +826,9 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 	if (rdev->family >= CHIP_CAYMAN) {
 		struct radeon_fpriv *fpriv;
 		struct radeon_vm *vm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		int r;
 
@@ -716,6 +837,7 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 			return -ENOMEM;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		radeon_vm_init(rdev, &fpriv->vm);
 
@@ -739,14 +861,22 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 		r = radeon_vm_init(rdev, vm);
 		if (r) {
 >>>>>>> v3.18
+=======
+		vm = &fpriv->vm;
+		r = radeon_vm_init(rdev, vm);
+		if (r) {
+>>>>>>> v3.18
 			kfree(fpriv);
 			return r;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		file_priv->driver_priv = fpriv;
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (rdev->accel_working) {
 			r = radeon_bo_reserve(rdev->ring_tmp_bo.bo, false);
 			if (r) {
@@ -776,6 +906,9 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 
 	pm_runtime_mark_last_busy(dev->dev);
 	pm_runtime_put_autosuspend(dev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -797,6 +930,7 @@ void radeon_driver_postclose_kms(struct drm_device *dev,
 	if (rdev->family >= CHIP_CAYMAN && file_priv->driver_priv) {
 		struct radeon_fpriv *fpriv = file_priv->driver_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct radeon_bo_va *bo_va;
 		int r;
 
@@ -811,6 +945,8 @@ void radeon_driver_postclose_kms(struct drm_device *dev,
 
 		radeon_vm_fini(rdev, &fpriv->vm);
 =======
+=======
+>>>>>>> v3.18
 		struct radeon_vm *vm = &fpriv->vm;
 		int r;
 
@@ -824,6 +960,9 @@ void radeon_driver_postclose_kms(struct drm_device *dev,
 		}
 
 		radeon_vm_fini(rdev, vm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(fpriv);
 		file_priv->driver_priv = NULL;
@@ -849,6 +988,10 @@ void radeon_driver_preclose_kms(struct drm_device *dev,
 		rdev->cmask_filp = NULL;
 	radeon_uvd_free_handles(rdev, file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_vce_free_handles(rdev, file_priv);
+>>>>>>> v3.18
 =======
 	radeon_vce_free_handles(rdev, file_priv);
 >>>>>>> v3.18
@@ -964,6 +1107,7 @@ int radeon_get_vblank_timestamp_kms(struct drm_device *dev, int crtc,
 	return drm_calc_vbltimestamp_from_scanoutpos(dev, crtc, max_error,
 						     vblank_time, flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						     drmcrtc);
 }
 
@@ -980,12 +1124,17 @@ int radeon_dma_ioctl_kms(struct drm_device *dev, void *data,
 #define KMS_INVALID_IOCTL(name)						\
 int name(struct drm_device *dev, void *data, struct drm_file *file_priv)\
 =======
+=======
+>>>>>>> v3.18
 						     drmcrtc, &drmcrtc->hwmode);
 }
 
 #define KMS_INVALID_IOCTL(name)						\
 static int name(struct drm_device *dev, void *data, struct drm_file	\
 		*file_priv)						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {									\
 	DRM_ERROR("invalid ioctl with kms %s\n", __func__);		\
@@ -1025,7 +1174,11 @@ KMS_INVALID_IOCTL(radeon_surface_free_kms)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc radeon_ioctls_kms[] = {
+=======
+const struct drm_ioctl_desc radeon_ioctls_kms[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc radeon_ioctls_kms[] = {
 >>>>>>> v3.18
@@ -1058,6 +1211,7 @@ const struct drm_ioctl_desc radeon_ioctls_kms[] = {
 	DRM_IOCTL_DEF_DRV(RADEON_SURF_FREE, radeon_surface_free_kms, DRM_AUTH),
 	/* KMS */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_INFO, radeon_gem_info_ioctl, DRM_AUTH|DRM_UNLOCKED),
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_CREATE, radeon_gem_create_ioctl, DRM_AUTH|DRM_UNLOCKED),
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_MMAP, radeon_gem_mmap_ioctl, DRM_AUTH|DRM_UNLOCKED),
@@ -1074,6 +1228,8 @@ const struct drm_ioctl_desc radeon_ioctls_kms[] = {
 };
 int radeon_max_kms_ioctl = DRM_ARRAY_SIZE(radeon_ioctls_kms);
 =======
+=======
+>>>>>>> v3.18
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_INFO, radeon_gem_info_ioctl, DRM_AUTH|DRM_UNLOCKED|DRM_RENDER_ALLOW),
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_CREATE, radeon_gem_create_ioctl, DRM_AUTH|DRM_UNLOCKED|DRM_RENDER_ALLOW),
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_MMAP, radeon_gem_mmap_ioctl, DRM_AUTH|DRM_UNLOCKED|DRM_RENDER_ALLOW),
@@ -1091,4 +1247,7 @@ int radeon_max_kms_ioctl = DRM_ARRAY_SIZE(radeon_ioctls_kms);
 	DRM_IOCTL_DEF_DRV(RADEON_GEM_USERPTR, radeon_gem_userptr_ioctl, DRM_AUTH|DRM_UNLOCKED|DRM_RENDER_ALLOW),
 };
 int radeon_max_kms_ioctl = ARRAY_SIZE(radeon_ioctls_kms);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

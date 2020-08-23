@@ -19,6 +19,7 @@
 #include <asm/barrier.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 /* Force people to define core atomics */
 # if !defined(atomic_add_return) || !defined(atomic_sub_return) || \
@@ -28,6 +29,8 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * atomic_$op() - $op integer to atomic variable
  * @i: integer value to $op
@@ -122,6 +125,9 @@ ATOMIC_OP(or, |)
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Atomic operations that C can't guarantee us.  Useful for
@@ -131,8 +137,11 @@ ATOMIC_OP(or, |)
 #define ATOMIC_INIT(i)	{ (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -143,7 +152,11 @@ ATOMIC_OP(or, |)
  */
 #ifndef atomic_read
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)	(*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)	ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -160,6 +173,7 @@ ATOMIC_OP(or, |)
 
 #include <linux/irqflags.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * atomic_add_return - add integer to atomic variable
@@ -209,6 +223,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline int atomic_add_negative(int i, atomic_t *v)
 {
 	return atomic_add_return(i, v) < 0;
@@ -246,6 +262,7 @@ static inline void atomic_dec(atomic_t *v)
 
 static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
   int c, old;
   c = atomic_read(v);
@@ -293,6 +310,8 @@ static inline void atomic_set_mask(unsigned int mask, atomic_t *v)
 
 #endif /* __KERNEL__ */
 =======
+=======
+>>>>>>> v3.18
 	int c, old;
 	c = atomic_read(v);
 	while (c != u && (old = atomic_cmpxchg(v, c, c + a)) != c)
@@ -300,5 +319,8 @@ static inline void atomic_set_mask(unsigned int mask, atomic_t *v)
 	return c;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_GENERIC_ATOMIC_H */

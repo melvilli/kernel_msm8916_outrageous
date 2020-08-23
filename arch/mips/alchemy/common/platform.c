@@ -12,6 +12,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -104,11 +108,14 @@ static struct platform_device au1xx0_uart_device = {
 static void __init alchemy_setup_uarts(int ctype)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int uartclk = get_au1x00_uart_baud_base() * 16;
 	int s = sizeof(struct plat_serial8250_port);
 	int c = alchemy_get_uarts(ctype);
 	struct plat_serial8250_port *ports;
 =======
+=======
+>>>>>>> v3.18
 	long uartclk;
 	int s = sizeof(struct plat_serial8250_port);
 	int c = alchemy_get_uarts(ctype);
@@ -123,6 +130,9 @@ static void __init alchemy_setup_uarts(int ctype)
 	}
 	uartclk = clk_get_rate(clk);
 	clk_put(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ports = kzalloc(s * (c + 1), GFP_KERNEL);
@@ -442,7 +452,11 @@ static void __init alchemy_setup_macs(int ctype)
 
 	/* Register second MAC if enabled in pinfunc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(au_readl(SYS_PINFUNC) & (u32)SYS_PF_NI2)) {
+=======
+	if (!(alchemy_rdsys(AU1000_SYS_PINFUNC) & SYS_PF_NI2)) {
+>>>>>>> v3.18
 =======
 	if (!(alchemy_rdsys(AU1000_SYS_PINFUNC) & SYS_PF_NI2)) {
 >>>>>>> v3.18

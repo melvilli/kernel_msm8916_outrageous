@@ -412,7 +412,10 @@ static int usb_ma901radio_probe(struct usb_interface *intf,
 	radio->vdev.release = video_device_release_empty;
 	radio->vdev.lock = &radio->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &radio->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

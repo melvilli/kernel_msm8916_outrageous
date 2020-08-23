@@ -18,7 +18,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/jiffies.h>
@@ -328,7 +331,11 @@ static int pca9541_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adap = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pca954x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct pca954x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct pca954x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

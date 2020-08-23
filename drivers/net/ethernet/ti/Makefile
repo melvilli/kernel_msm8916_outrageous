@@ -8,6 +8,10 @@ obj-$(CONFIG_TI_DAVINCI_EMAC) += davinci_emac.o
 obj-$(CONFIG_TI_DAVINCI_MDIO) += davinci_mdio.o
 obj-$(CONFIG_TI_DAVINCI_CPDMA) += davinci_cpdma.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_TI_CPSW_PHY_SEL) += cpsw-phy-sel.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_TI_CPSW_PHY_SEL) += cpsw-phy-sel.o
 >>>>>>> v3.18

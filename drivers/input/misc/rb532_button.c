@@ -88,7 +88,10 @@ static int rb532_button_remove(struct platform_device *pdev)
 	input_unregister_polled_device(poll_dev);
 	input_free_polled_device(poll_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

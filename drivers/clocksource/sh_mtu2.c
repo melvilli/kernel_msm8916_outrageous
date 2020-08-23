@@ -12,6 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -47,6 +48,8 @@ struct sh_mtu2_priv {
 
 static DEFINE_RAW_SPINLOCK(sh_mtu2_lock);
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/clk.h>
@@ -91,6 +94,9 @@ struct sh_mtu2_device {
 
 	bool has_clockevent;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define TSTR -1 /* shared register */
@@ -103,7 +109,10 @@ struct sh_mtu2_device {
 #define TGR  6 /* channel register */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TCR_CCLR_NONE		(0 << 5)
 #define TCR_CCLR_TGRA		(1 << 5)
 #define TCR_CCLR_TGRB		(2 << 5)
@@ -186,6 +195,9 @@ struct sh_mtu2_device {
 #define TSR_TGFB		(1 << 1)
 #define TSR_TGFA		(1 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long mtu2_reg_offs[] = {
 	[TCR] = 0,
@@ -198,6 +210,7 @@ static unsigned long mtu2_reg_offs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long sh_mtu2_read(struct sh_mtu2_priv *p, int reg_nr)
 {
 	struct sh_timer_config *cfg = p->pdev->dev.platform_data;
@@ -207,17 +220,23 @@ static inline unsigned long sh_mtu2_read(struct sh_mtu2_priv *p, int reg_nr)
 	if (reg_nr == TSTR)
 		return ioread8(base + cfg->channel_offset);
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long sh_mtu2_read(struct sh_mtu2_channel *ch, int reg_nr)
 {
 	unsigned long offs;
 
 	if (reg_nr == TSTR)
 		return ioread8(ch->mtu->mapbase + 0x280);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	offs = mtu2_reg_offs[reg_nr];
 
 	if ((reg_nr == TCNT) || (reg_nr == TGR))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ioread16(base + offs);
 	else
@@ -236,6 +255,8 @@ static inline void sh_mtu2_write(struct sh_mtu2_priv *p, int reg_nr,
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 		return ioread16(ch->base + offs);
 	else
 		return ioread8(ch->base + offs);
@@ -248,11 +269,15 @@ static inline void sh_mtu2_write(struct sh_mtu2_channel *ch, int reg_nr,
 
 	if (reg_nr == TSTR)
 		return iowrite8(value, ch->mtu->mapbase + 0x280);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	offs = mtu2_reg_offs[reg_nr];
 
 	if ((reg_nr == TCNT) || (reg_nr == TGR))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		iowrite16(value, base + offs);
 	else
@@ -289,6 +314,8 @@ static int sh_mtu2_enable(struct sh_mtu2_priv *p)
 	if (ret) {
 		dev_err(&p->pdev->dev, "cannot enable clock\n");
 =======
+=======
+>>>>>>> v3.18
 		iowrite16(value, ch->base + offs);
 	else
 		iowrite8(value, ch->base + offs);
@@ -325,11 +352,15 @@ static int sh_mtu2_enable(struct sh_mtu2_channel *ch)
 	if (ret) {
 		dev_err(&ch->mtu->pdev->dev, "ch%u: cannot enable clock\n",
 			ch->index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
 
 	/* make sure channel is disabled */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sh_mtu2_start_stop_ch(p, 0);
 
@@ -347,6 +378,8 @@ static int sh_mtu2_enable(struct sh_mtu2_channel *ch)
 	/* enable channel */
 	sh_mtu2_start_stop_ch(p, 1);
 =======
+=======
+>>>>>>> v3.18
 	sh_mtu2_start_stop_ch(ch, 0);
 
 	rate = clk_get_rate(ch->mtu->clk) / 64;
@@ -366,11 +399,15 @@ static int sh_mtu2_enable(struct sh_mtu2_channel *ch)
 
 	/* enable channel */
 	sh_mtu2_start_stop_ch(ch, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void sh_mtu2_disable(struct sh_mtu2_priv *p)
 {
@@ -383,6 +420,8 @@ static void sh_mtu2_disable(struct sh_mtu2_priv *p)
 	dev_pm_syscore_device(&p->pdev->dev, false);
 	pm_runtime_put(&p->pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 static void sh_mtu2_disable(struct sh_mtu2_channel *ch)
 {
 	/* disable channel */
@@ -393,11 +432,15 @@ static void sh_mtu2_disable(struct sh_mtu2_channel *ch)
 
 	dev_pm_syscore_device(&ch->mtu->pdev->dev, false);
 	pm_runtime_put(&ch->mtu->pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t sh_mtu2_interrupt(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_mtu2_priv *p = dev_id;
 
@@ -414,6 +457,8 @@ static struct sh_mtu2_priv *ced_to_sh_mtu2(struct clock_event_device *ced)
 {
 	return container_of(ced, struct sh_mtu2_priv, ced);
 =======
+=======
+>>>>>>> v3.18
 	struct sh_mtu2_channel *ch = dev_id;
 
 	/* acknowledge interrupt */
@@ -428,6 +473,9 @@ static struct sh_mtu2_priv *ced_to_sh_mtu2(struct clock_event_device *ced)
 static struct sh_mtu2_channel *ced_to_sh_mtu2(struct clock_event_device *ced)
 {
 	return container_of(ced, struct sh_mtu2_channel, ced);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -435,7 +483,11 @@ static void sh_mtu2_clock_event_mode(enum clock_event_mode mode,
 				    struct clock_event_device *ced)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_mtu2_priv *p = ced_to_sh_mtu2(ced);
+=======
+	struct sh_mtu2_channel *ch = ced_to_sh_mtu2(ced);
+>>>>>>> v3.18
 =======
 	struct sh_mtu2_channel *ch = ced_to_sh_mtu2(ced);
 >>>>>>> v3.18
@@ -445,7 +497,11 @@ static void sh_mtu2_clock_event_mode(enum clock_event_mode mode,
 	switch (ced->mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sh_mtu2_disable(p);
+=======
+		sh_mtu2_disable(ch);
+>>>>>>> v3.18
 =======
 		sh_mtu2_disable(ch);
 >>>>>>> v3.18
@@ -458,6 +514,7 @@ static void sh_mtu2_clock_event_mode(enum clock_event_mode mode,
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&p->pdev->dev, "used for periodic clock events\n");
 		sh_mtu2_enable(p);
 		break;
@@ -465,6 +522,8 @@ static void sh_mtu2_clock_event_mode(enum clock_event_mode mode,
 		if (!disabled)
 			sh_mtu2_disable(p);
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&ch->mtu->pdev->dev,
 			 "ch%u: used for periodic clock events\n", ch->index);
 		sh_mtu2_enable(ch);
@@ -472,6 +531,9 @@ static void sh_mtu2_clock_event_mode(enum clock_event_mode mode,
 	case CLOCK_EVT_MODE_UNUSED:
 		if (!disabled)
 			sh_mtu2_disable(ch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CLOCK_EVT_MODE_SHUTDOWN:
@@ -483,7 +545,11 @@ static void sh_mtu2_clock_event_mode(enum clock_event_mode mode,
 static void sh_mtu2_clock_event_suspend(struct clock_event_device *ced)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_genpd_syscore_poweroff(&ced_to_sh_mtu2(ced)->pdev->dev);
+=======
+	pm_genpd_syscore_poweroff(&ced_to_sh_mtu2(ced)->mtu->pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_genpd_syscore_poweroff(&ced_to_sh_mtu2(ced)->mtu->pdev->dev);
 >>>>>>> v3.18
@@ -491,6 +557,7 @@ static void sh_mtu2_clock_event_suspend(struct clock_event_device *ced)
 
 static void sh_mtu2_clock_event_resume(struct clock_event_device *ced)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pm_genpd_syscore_poweron(&ced_to_sh_mtu2(ced)->pdev->dev);
 }
@@ -508,6 +575,8 @@ static void sh_mtu2_register_clockevent(struct sh_mtu2_priv *p,
 	ced->rating = rating;
 	ced->cpumask = cpumask_of(0);
 =======
+=======
+>>>>>>> v3.18
 	pm_genpd_syscore_poweron(&ced_to_sh_mtu2(ced)->mtu->pdev->dev);
 }
 
@@ -520,11 +589,15 @@ static void sh_mtu2_register_clockevent(struct sh_mtu2_channel *ch,
 	ced->features = CLOCK_EVT_FEAT_PERIODIC;
 	ced->rating = 200;
 	ced->cpumask = cpu_possible_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ced->set_mode = sh_mtu2_clock_event_mode;
 	ced->suspend = sh_mtu2_clock_event_suspend;
 	ced->resume = sh_mtu2_clock_event_resume;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_info(&p->pdev->dev, "used for clock events\n");
 	clockevents_register_device(ced);
@@ -543,6 +616,8 @@ static int sh_mtu2_register(struct sh_mtu2_priv *p, char *name,
 	if (clockevent_rating)
 		sh_mtu2_register_clockevent(p, name, clockevent_rating);
 =======
+=======
+>>>>>>> v3.18
 	dev_info(&ch->mtu->pdev->dev, "ch%u: used for clock events\n",
 		 ch->index);
 	clockevents_register_device(ced);
@@ -603,11 +678,15 @@ static int sh_mtu2_map_memory(struct sh_mtu2_device *mtu)
 	mtu->mapbase = ioremap_nocache(res->start, resource_size(res));
 	if (mtu->mapbase == NULL)
 		return -ENXIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sh_mtu2_setup(struct sh_mtu2_priv *p, struct platform_device *pdev)
 {
@@ -667,6 +746,8 @@ static int sh_mtu2_setup(struct sh_mtu2_priv *p, struct platform_device *pdev)
 	iounmap(p->mapbase);
  err0:
 =======
+=======
+>>>>>>> v3.18
 static int sh_mtu2_setup(struct sh_mtu2_device *mtu,
 			 struct platform_device *pdev)
 {
@@ -722,6 +803,9 @@ err_clk_unprepare:
 	clk_unprepare(mtu->clk);
 err_clk_put:
 	clk_put(mtu->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -729,8 +813,12 @@ err_clk_put:
 static int sh_mtu2_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_mtu2_priv *p = platform_get_drvdata(pdev);
 	struct sh_timer_config *cfg = pdev->dev.platform_data;
+=======
+	struct sh_mtu2_device *mtu = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct sh_mtu2_device *mtu = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -742,7 +830,11 @@ static int sh_mtu2_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p) {
+=======
+	if (mtu) {
+>>>>>>> v3.18
 =======
 	if (mtu) {
 >>>>>>> v3.18
@@ -750,6 +842,7 @@ static int sh_mtu2_probe(struct platform_device *pdev)
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p = kmalloc(sizeof(*p), GFP_KERNEL);
 	if (p == NULL) {
@@ -762,6 +855,8 @@ static int sh_mtu2_probe(struct platform_device *pdev)
 		kfree(p);
 		platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	mtu = kzalloc(sizeof(*mtu), GFP_KERNEL);
 	if (mtu == NULL)
 		return -ENOMEM;
@@ -769,6 +864,9 @@ static int sh_mtu2_probe(struct platform_device *pdev)
 	ret = sh_mtu2_setup(mtu, pdev);
 	if (ret) {
 		kfree(mtu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pm_runtime_idle(&pdev->dev);
 		return ret;
@@ -778,7 +876,11 @@ static int sh_mtu2_probe(struct platform_device *pdev)
 
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cfg->clockevent_rating)
+=======
+	if (mtu->has_clockevent)
+>>>>>>> v3.18
 =======
 	if (mtu->has_clockevent)
 >>>>>>> v3.18
@@ -795,7 +897,10 @@ static int sh_mtu2_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_id sh_mtu2_id_table[] = {
 	{ "sh-mtu2", 0 },
 	{ },
@@ -808,6 +913,9 @@ static const struct of_device_id sh_mtu2_of_table[] __maybe_unused = {
 };
 MODULE_DEVICE_TABLE(of, sh_mtu2_of_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver sh_mtu2_device_driver = {
 	.probe		= sh_mtu2_probe,
@@ -815,7 +923,13 @@ static struct platform_driver sh_mtu2_device_driver = {
 	.driver		= {
 		.name	= "sh_mtu2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+		.of_match_table = of_match_ptr(sh_mtu2_of_table),
+	},
+	.id_table	= sh_mtu2_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(sh_mtu2_of_table),
 	},

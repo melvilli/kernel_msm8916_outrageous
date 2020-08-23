@@ -58,7 +58,11 @@ static int ad9832_write_frequency(struct ad9832_state *st,
 
 static int ad9832_write_phase(struct ad9832_state *st,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  unsigned long addr, unsigned long phase)
+=======
+			      unsigned long addr, unsigned long phase)
+>>>>>>> v3.18
 =======
 			      unsigned long addr, unsigned long phase)
 >>>>>>> v3.18
@@ -77,10 +81,15 @@ static int ad9832_write_phase(struct ad9832_state *st,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ad9832_write(struct device *dev,
 		struct device_attribute *attr,
 		const char *buf,
 		size_t len)
+=======
+static ssize_t ad9832_write(struct device *dev, struct device_attribute *attr,
+			    const char *buf, size_t len)
+>>>>>>> v3.18
 =======
 static ssize_t ad9832_write(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t len)
@@ -91,9 +100,15 @@ static ssize_t ad9832_write(struct device *dev, struct device_attribute *attr,
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtoul(buf, 10, &val);
+=======
+	unsigned long val;
+
+	ret = kstrtoul(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	unsigned long val;
 
@@ -125,17 +140,23 @@ static ssize_t ad9832_write(struct device *dev, struct device_attribute *attr,
 		break;
 	case AD9832_FREQ_SYM:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (val == 1)
 			st->ctrl_fp |= AD9832_FREQ;
 		else if (val == 0)
 			st->ctrl_fp &= ~AD9832_FREQ;
 		else {
 =======
+=======
+>>>>>>> v3.18
 		if (val == 1) {
 			st->ctrl_fp |= AD9832_FREQ;
 		} else if (val == 0) {
 			st->ctrl_fp &= ~AD9832_FREQ;
 		} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -EINVAL;
 			break;
@@ -146,7 +167,11 @@ static ssize_t ad9832_write(struct device *dev, struct device_attribute *attr,
 		break;
 	case AD9832_PHASE_SYM:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (val < 0 || val > 3) {
+=======
+		if (val > 3) {
+>>>>>>> v3.18
 =======
 		if (val > 3) {
 >>>>>>> v3.18
@@ -242,6 +267,7 @@ static int ad9832_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(reg)) {
 		ret = regulator_enable(reg);
@@ -251,6 +277,8 @@ static int ad9832_probe(struct spi_device *spi)
 
 	indio_dev = iio_device_alloc(sizeof(*st));
 =======
+=======
+>>>>>>> v3.18
 	reg = devm_regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(reg)) {
 		ret = regulator_enable(reg);
@@ -259,6 +287,9 @@ static int ad9832_probe(struct spi_device *spi)
 	}
 
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
@@ -318,7 +349,11 @@ static int ad9832_probe(struct spi_device *spi)
 	if (ret) {
 		dev_err(&spi->dev, "device init failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_device;
+=======
+		goto error_disable_reg;
+>>>>>>> v3.18
 =======
 		goto error_disable_reg;
 >>>>>>> v3.18
@@ -326,6 +361,7 @@ static int ad9832_probe(struct spi_device *spi)
 
 	ret = ad9832_write_frequency(st, AD9832_FREQ0HM, pdata->freq0);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_free_device;
 
@@ -364,6 +400,8 @@ error_put_reg:
 	if (!IS_ERR(reg))
 		regulator_put(reg);
 =======
+=======
+>>>>>>> v3.18
 		goto error_disable_reg;
 
 	ret = ad9832_write_frequency(st, AD9832_FREQ1HM, pdata->freq1);
@@ -395,6 +433,9 @@ error_put_reg:
 error_disable_reg:
 	if (!IS_ERR(reg))
 		regulator_disable(reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -407,11 +448,16 @@ static int ad9832_remove(struct spi_device *spi)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);

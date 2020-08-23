@@ -15,6 +15,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmaengine.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 #include <sound/initval.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -50,6 +58,7 @@ static struct snd_ac97_bus_ops pxa2xx_ac97_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa2xx_pcm_dma_params pxa2xx_ac97_pcm_out = {
 	.name			= "AC97 PCM out",
 	.dev_addr		= __PREG(PCDR),
@@ -65,6 +74,8 @@ static struct pxa2xx_pcm_dma_params pxa2xx_ac97_pcm_in = {
 	.dcmd			= DCMD_INCTRGADDR | DCMD_FLOWSRC |
 				  DCMD_BURST32 | DCMD_WIDTH4,
 =======
+=======
+>>>>>>> v3.18
 static unsigned long pxa2xx_ac97_pcm_out_req = 12;
 static struct snd_dmaengine_dai_dma_data pxa2xx_ac97_pcm_out = {
 	.addr		= __PREG(PCDR),
@@ -79,6 +90,9 @@ static struct snd_dmaengine_dai_dma_data pxa2xx_ac97_pcm_in = {
 	.addr_width	= DMA_SLAVE_BUSWIDTH_4_BYTES,
 	.maxburst	= 32,
 	.filter_data	= &pxa2xx_ac97_pcm_in_req,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -203,6 +217,7 @@ static int pxa2xx_ac97_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			      THIS_MODULE, 0, &card);
 	if (ret < 0)
@@ -211,12 +226,17 @@ static int pxa2xx_ac97_probe(struct platform_device *dev)
 	card->dev = &dev->dev;
 	strncpy(card->driver, dev->dev.driver->name, sizeof(card->driver));
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_card_new(&dev->dev, SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			   THIS_MODULE, 0, &card);
 	if (ret < 0)
 		goto err;
 
 	strlcpy(card->driver, dev->dev.driver->name, sizeof(card->driver));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = pxa2xx_pcm_new(card, &pxa2xx_ac97_pcm_client, &pxa2xx_ac97_pcm);
@@ -243,7 +263,10 @@ static int pxa2xx_ac97_probe(struct platform_device *dev)
 	if (pdata && pdata->codec_pdata[0])
 		snd_ac97_dev_add_pdata(ac97_bus->codec[0], pdata->codec_pdata[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &dev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = snd_card_register(card);
@@ -268,7 +291,10 @@ static int pxa2xx_ac97_remove(struct platform_device *dev)
 	if (card) {
 		snd_card_free(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pxa2xx_ac97_hw_remove(dev);

@@ -26,9 +26,13 @@
  *
  *     You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software
  *     Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *     MA 02111-1307 USA
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *     along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -681,7 +685,10 @@ static int irda_discover_daddr_and_lsap_sel(struct irda_sock *self, char *name)
 			kfree(discoveries);
 			return -EHOSTUNREACH;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -1047,11 +1054,16 @@ static int irda_connect(struct socket *sock, struct sockaddr *uaddr,
 
 	/* Check if we have opened a local TSAP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!self->tsap) {
 		err = irda_open_tsap(self, LSAP_ANY, addr->sir_name);
 		if (err)
 			goto out;
 	}
+=======
+	if (!self->tsap)
+		irda_open_tsap(self, LSAP_ANY, addr->sir_name);
+>>>>>>> v3.18
 =======
 	if (!self->tsap)
 		irda_open_tsap(self, LSAP_ANY, addr->sir_name);
@@ -1083,8 +1095,11 @@ static int irda_connect(struct socket *sock, struct sockaddr *uaddr,
 	if (sk->sk_state != TCP_ESTABLISHED) {
 		sock->state = SS_UNCONNECTED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sk->sk_prot->disconnect(sk, flags))
 			sock->state = SS_DISCONNECTING;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = sock_error(sk);
@@ -1124,9 +1139,12 @@ static int irda_create(struct net *net, struct socket *sock, int protocol,
 	IRDA_DEBUG(2, "%s()\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (protocol < 0 || protocol > SK_PROTOCOL_MAX)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (net != &init_net)
@@ -1679,7 +1697,11 @@ static int irda_sendmsg_ultra(struct kiocb *iocb, struct socket *sock,
 	/* Check if an address was specified with sendto. Jean II */
 	if (msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_irda *addr = (struct sockaddr_irda *) msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_irda *, addr, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_irda *, addr, msg->msg_name);
 >>>>>>> v3.18
@@ -2588,9 +2610,14 @@ bed:
 
 			/* Wait for IR-LMP to call us back */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__wait_event_interruptible(self->query_wait,
 			      (self->cachedaddr != 0 || self->errno == -ETIME),
 						   err);
+=======
+			err = __wait_event_interruptible(self->query_wait,
+			      (self->cachedaddr != 0 || self->errno == -ETIME));
+>>>>>>> v3.18
 =======
 			err = __wait_event_interruptible(self->query_wait,
 			      (self->cachedaddr != 0 || self->errno == -ETIME));

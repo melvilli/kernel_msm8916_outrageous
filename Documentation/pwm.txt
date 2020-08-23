@@ -20,7 +20,12 @@ consumers to providers, as given in the following example:
 
 	static struct pwm_lookup board_pwm_lookup[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PWM_LOOKUP("tegra-pwm", 0, "pwm-backlight", NULL),
+=======
+		PWM_LOOKUP("tegra-pwm", 0, "pwm-backlight", NULL,
+			   50000, PWM_POLARITY_NORMAL),
+>>>>>>> v3.18
 =======
 		PWM_LOOKUP("tegra-pwm", 0, "pwm-backlight", NULL,
 			   50000, PWM_POLARITY_NORMAL),
@@ -45,7 +50,11 @@ device or a consumer name. pwm_put() is used to free the PWM device. Managed
 variants of these functions, devm_pwm_get() and devm_pwm_put(), also exist.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 After being requested a PWM has to be configured using:
+=======
+After being requested, a PWM has to be configured using:
+>>>>>>> v3.18
 =======
 After being requested, a PWM has to be configured using:
 >>>>>>> v3.18
@@ -55,7 +64,10 @@ int pwm_config(struct pwm_device *pwm, int duty_ns, int period_ns);
 To start/stop toggling the PWM output use pwm_enable()/pwm_disable().
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Using PWMs with the sysfs interface
 -----------------------------------
 
@@ -93,6 +105,9 @@ enable - Enable/disable the PWM signal (read/write).
 	0 - disabled
 	1 - enabled
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Implementing a PWM driver
 -------------------------
@@ -107,10 +122,13 @@ A new PWM controller/chip can be added using pwmchip_add() and removed
 again with pwmchip_remove(). pwmchip_add() takes a filled in struct
 pwm_chip as argument which provides a description of the PWM chip, the
 <<<<<<< HEAD
+<<<<<<< HEAD
 number of PWM devices provider by the chip and the chip-specific
 implementation of the supported PWM operations to the framework.
 
 =======
+=======
+>>>>>>> v3.18
 number of PWM devices provided by the chip and the chip-specific
 implementation of the supported PWM operations to the framework.
 
@@ -121,6 +139,9 @@ goes low for the remainder of the period. Conversely, a signal with inversed
 polarity starts low for the duration of the duty cycle and goes high for the
 remainder of the period.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Locking
 -------

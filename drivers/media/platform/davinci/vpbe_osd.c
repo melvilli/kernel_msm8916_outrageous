@@ -120,7 +120,11 @@ static inline u32 osd_modify(struct osd_state *sd, u32 mask, u32 val,
 	(((pixfmt) == PIXFMT_RGB565) || ((pixfmt) == PIXFMT_RGB888))
 #define is_yc_pixfmt(pixfmt) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(((pixfmt) == PIXFMT_YCbCrI) || ((pixfmt) == PIXFMT_YCrCbI) || \
+=======
+	(((pixfmt) == PIXFMT_YCBCRI) || ((pixfmt) == PIXFMT_YCRCBI) || \
+>>>>>>> v3.18
 =======
 	(((pixfmt) == PIXFMT_YCBCRI) || ((pixfmt) == PIXFMT_YCRCBI) || \
 >>>>>>> v3.18
@@ -365,8 +369,13 @@ static void _osd_enable_color_key(struct osd_state *sd,
 				  OSD_TRANSPVALL);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PIXFMT_YCbCrI:
 	case PIXFMT_YCrCbI:
+=======
+	case PIXFMT_YCBCRI:
+	case PIXFMT_YCRCBI:
+>>>>>>> v3.18
 =======
 	case PIXFMT_YCBCRI:
 	case PIXFMT_YCRCBI:
@@ -823,8 +832,13 @@ static int try_layer_config(struct osd_state *sd, enum osd_layer layer,
 			bad_config = !is_vid_win(layer);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PIXFMT_YCbCrI:
 	case PIXFMT_YCrCbI:
+=======
+	case PIXFMT_YCBCRI:
+	case PIXFMT_YCRCBI:
+>>>>>>> v3.18
 =======
 	case PIXFMT_YCBCRI:
 	case PIXFMT_YCRCBI:
@@ -965,9 +979,15 @@ static void _osd_set_cbcr_order(struct osd_state *sd,
 	 * Cb/Cr order.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pixfmt == PIXFMT_YCbCrI)
 		osd_clear(sd, OSD_MODE_CS, OSD_MODE);
 	else if (pixfmt == PIXFMT_YCrCbI)
+=======
+	if (pixfmt == PIXFMT_YCBCRI)
+		osd_clear(sd, OSD_MODE_CS, OSD_MODE);
+	else if (pixfmt == PIXFMT_YCRCBI)
+>>>>>>> v3.18
 =======
 	if (pixfmt == PIXFMT_YCBCRI)
 		osd_clear(sd, OSD_MODE_CS, OSD_MODE);
@@ -1002,8 +1022,13 @@ static void _osd_set_layer_config(struct osd_state *sd, enum osd_layer layer,
 				_osd_enable_rgb888_pixblend(sd, OSDWIN_OSD0);
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case PIXFMT_YCbCrI:
 			case PIXFMT_YCrCbI:
+=======
+			case PIXFMT_YCBCRI:
+			case PIXFMT_YCRCBI:
+>>>>>>> v3.18
 =======
 			case PIXFMT_YCBCRI:
 			case PIXFMT_YCRCBI:
@@ -1154,8 +1179,13 @@ static void _osd_set_layer_config(struct osd_state *sd, enum osd_layer layer,
 							OSDWIN_OSD1);
 					break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				case PIXFMT_YCbCrI:
 				case PIXFMT_YCrCbI:
+=======
+				case PIXFMT_YCBCRI:
+				case PIXFMT_YCRCBI:
+>>>>>>> v3.18
 =======
 				case PIXFMT_YCBCRI:
 				case PIXFMT_YCRCBI:
@@ -1539,7 +1569,11 @@ static int osd_initialize(struct osd_state *osd)
 
 	/* set default Cb/Cr order */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	osd->yc_pixfmt = PIXFMT_YCbCrI;
+=======
+	osd->yc_pixfmt = PIXFMT_YCBCRI;
+>>>>>>> v3.18
 =======
 	osd->yc_pixfmt = PIXFMT_YCBCRI;
 >>>>>>> v3.18
@@ -1582,6 +1616,7 @@ static int osd_probe(struct platform_device *pdev)
 	struct osd_state *osd;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	osd = kzalloc(sizeof(struct osd_state), GFP_KERNEL);
@@ -1594,6 +1629,8 @@ static int osd_probe(struct platform_device *pdev)
 		goto free_mem;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	pdev_id = platform_get_device_id(pdev);
 	if (!pdev_id)
@@ -1603,12 +1640,16 @@ static int osd_probe(struct platform_device *pdev)
 	if (osd == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	osd->dev = &pdev->dev;
 	osd->vpbe_type = pdev_id->driver_data;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(osd->dev, "Unable to get OSD register address map\n");
@@ -1630,17 +1671,23 @@ static int osd_probe(struct platform_device *pdev)
 		goto release_mem_region;
 	}
 =======
+=======
+>>>>>>> v3.18
 	osd->osd_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(osd->osd_base))
 		return PTR_ERR(osd->osd_base);
 
 	osd->osd_base_phys = res->start;
 	osd->osd_size = resource_size(res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&osd->lock);
 	osd->ops = osd_ops;
 	platform_set_drvdata(pdev, osd);
 	dev_notice(osd->dev, "OSD sub device probe success\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ret;
 
@@ -1653,16 +1700,23 @@ free_mem:
 
 	return 0;
 >>>>>>> v3.18
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int osd_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct osd_state *osd = platform_get_drvdata(pdev);
 
 	iounmap((void *)osd->osd_base);
 	release_mem_region(osd->osd_base_phys, osd->osd_size);
 	kfree(osd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

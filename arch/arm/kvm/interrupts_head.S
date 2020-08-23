@@ -1,5 +1,9 @@
 #include <linux/irqchip/arm-gic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -308,21 +312,32 @@ vcpu	.req	r0		@ vcpu pointer always in r0
 	mrc	p15, 0, r2, c14, c1, 0	@ CNTKCTL
 	mrrc	p15, 0, r4, r5, c7	@ PAR
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.if \store_to_vcpu == 0
 	push	{r2,r4-r5}
 =======
+=======
+>>>>>>> v3.18
 	mrc	p15, 0, r6, c10, c3, 0	@ AMAIR0
 	mrc	p15, 0, r7, c10, c3, 1	@ AMAIR1
 
 	.if \store_to_vcpu == 0
 	push	{r2,r4-r7}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.else
 	str	r2, [vcpu, #CP15_OFFSET(c14_CNTKCTL)]
 	add	r12, vcpu, #CP15_OFFSET(c7_PAR)
 	strd	r4, r5, [r12]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	str	r6, [vcpu, #CP15_OFFSET(c10_AMAIR0)]
+	str	r7, [vcpu, #CP15_OFFSET(c10_AMAIR1)]
+>>>>>>> v3.18
 =======
 	str	r6, [vcpu, #CP15_OFFSET(c10_AMAIR0)]
 	str	r7, [vcpu, #CP15_OFFSET(c10_AMAIR1)]
@@ -340,7 +355,11 @@ vcpu	.req	r0		@ vcpu pointer always in r0
 .macro write_cp15_state read_from_vcpu
 	.if \read_from_vcpu == 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pop	{r2,r4-r5}
+=======
+	pop	{r2,r4-r7}
+>>>>>>> v3.18
 =======
 	pop	{r2,r4-r7}
 >>>>>>> v3.18
@@ -349,6 +368,11 @@ vcpu	.req	r0		@ vcpu pointer always in r0
 	add	r12, vcpu, #CP15_OFFSET(c7_PAR)
 	ldrd	r4, r5, [r12]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ldr	r6, [vcpu, #CP15_OFFSET(c10_AMAIR0)]
+	ldr	r7, [vcpu, #CP15_OFFSET(c10_AMAIR1)]
+>>>>>>> v3.18
 =======
 	ldr	r6, [vcpu, #CP15_OFFSET(c10_AMAIR0)]
 	ldr	r7, [vcpu, #CP15_OFFSET(c10_AMAIR1)]
@@ -358,6 +382,11 @@ vcpu	.req	r0		@ vcpu pointer always in r0
 	mcr	p15, 0, r2, c14, c1, 0	@ CNTKCTL
 	mcrr	p15, 0, r4, r5, c7	@ PAR
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mcr	p15, 0, r6, c10, c3, 0	@ AMAIR0
+	mcr	p15, 0, r7, c10, c3, 1	@ AMAIR1
+>>>>>>> v3.18
 =======
 	mcr	p15, 0, r6, c10, c3, 0	@ AMAIR0
 	mcr	p15, 0, r7, c10, c3, 1	@ AMAIR1
@@ -444,6 +473,7 @@ vcpu	.req	r0		@ vcpu pointer always in r0
 	ldr	r9, [r2, #GICH_ELRSR1]
 	ldr	r10, [r2, #GICH_APR]
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	str	r3, [r11, #VGIC_CPU_HCR]
 	str	r4, [r11, #VGIC_CPU_VMCR]
@@ -454,6 +484,8 @@ vcpu	.req	r0		@ vcpu pointer always in r0
 	str	r9, [r11, #(VGIC_CPU_ELRSR + 4)]
 	str	r10, [r11, #VGIC_CPU_APR]
 =======
+=======
+>>>>>>> v3.18
 ARM_BE8(rev	r3, r3	)
 ARM_BE8(rev	r4, r4	)
 ARM_BE8(rev	r5, r5	)
@@ -478,6 +510,9 @@ ARM_BE8(rev	r10, r10	)
 	str	r9, [r11, #(VGIC_V2_CPU_ELRSR + 4)]
 #endif
 	str	r10, [r11, #VGIC_V2_CPU_APR]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Clear GICH_HCR */
@@ -487,14 +522,20 @@ ARM_BE8(rev	r10, r10	)
 	/* Save list registers */
 	add	r2, r2, #GICH_LR0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	add	r3, r11, #VGIC_CPU_LR
 	ldr	r4, [r11, #VGIC_CPU_NR_LR]
 1:	ldr	r6, [r2], #4
 =======
+=======
+>>>>>>> v3.18
 	add	r3, r11, #VGIC_V2_CPU_LR
 	ldr	r4, [r11, #VGIC_CPU_NR_LR]
 1:	ldr	r6, [r2], #4
 ARM_BE8(rev	r6, r6	)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	str	r6, [r3], #4
 	subs	r4, r4, #1
@@ -521,16 +562,22 @@ ARM_BE8(rev	r6, r6	)
 
 	/* We only restore a minimal set of registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldr	r3, [r11, #VGIC_CPU_HCR]
 	ldr	r4, [r11, #VGIC_CPU_VMCR]
 	ldr	r8, [r11, #VGIC_CPU_APR]
 =======
+=======
+>>>>>>> v3.18
 	ldr	r3, [r11, #VGIC_V2_CPU_HCR]
 	ldr	r4, [r11, #VGIC_V2_CPU_VMCR]
 	ldr	r8, [r11, #VGIC_V2_CPU_APR]
 ARM_BE8(rev	r3, r3	)
 ARM_BE8(rev	r4, r4	)
 ARM_BE8(rev	r8, r8	)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	str	r3, [r2, #GICH_HCR]
@@ -540,14 +587,20 @@ ARM_BE8(rev	r8, r8	)
 	/* Restore list registers */
 	add	r2, r2, #GICH_LR0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	add	r3, r11, #VGIC_CPU_LR
 	ldr	r4, [r11, #VGIC_CPU_NR_LR]
 1:	ldr	r6, [r3], #4
 =======
+=======
+>>>>>>> v3.18
 	add	r3, r11, #VGIC_V2_CPU_LR
 	ldr	r4, [r11, #VGIC_CPU_NR_LR]
 1:	ldr	r6, [r3], #4
 ARM_BE8(rev	r6, r6  )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	str	r6, [r2], #4
 	subs	r4, r4, #1
@@ -580,7 +633,11 @@ ARM_BE8(rev	r6, r6  )
 	isb
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrrc	p15, 3, r2, r3, c14	@ CNTV_CVAL
+=======
+	mrrc	p15, 3, rr_lo_hi(r2, r3), c14	@ CNTV_CVAL
+>>>>>>> v3.18
 =======
 	mrrc	p15, 3, rr_lo_hi(r2, r3), c14	@ CNTV_CVAL
 >>>>>>> v3.18
@@ -624,7 +681,11 @@ ARM_BE8(rev	r6, r6  )
 	ldr	r2, [r4, #KVM_TIMER_CNTVOFF]
 	ldr	r3, [r4, #(KVM_TIMER_CNTVOFF + 4)]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcrr	p15, 4, r2, r3, c14	@ CNTVOFF
+=======
+	mcrr	p15, 4, rr_lo_hi(r2, r3), c14	@ CNTVOFF
+>>>>>>> v3.18
 =======
 	mcrr	p15, 4, rr_lo_hi(r2, r3), c14	@ CNTVOFF
 >>>>>>> v3.18
@@ -633,7 +694,11 @@ ARM_BE8(rev	r6, r6  )
 	add	r5, vcpu, r4
 	ldrd	r2, r3, [r5]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcrr	p15, 3, r2, r3, c14	@ CNTV_CVAL
+=======
+	mcrr	p15, 3, rr_lo_hi(r2, r3), c14	@ CNTV_CVAL
+>>>>>>> v3.18
 =======
 	mcrr	p15, 3, rr_lo_hi(r2, r3), c14	@ CNTV_CVAL
 >>>>>>> v3.18
@@ -664,6 +729,7 @@ ARM_BE8(rev	r6, r6  )
 
 /* Configures the HCPTR (Hyp Coprocessor Trap Register) on entry/return
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (hardware reset value is 0). Keep previous value in r2.
  * An ISB is emited on vmexit/vmtrap, but executed on vmexit only if
  * VFP wasn't already enabled (always executed on vmtrap).
@@ -671,6 +737,10 @@ ARM_BE8(rev	r6, r6  )
  * enabled.
  */
 .macro set_hcptr operation, mask, label = none
+=======
+ * (hardware reset value is 0). Keep previous value in r2. */
+.macro set_hcptr operation, mask
+>>>>>>> v3.18
 =======
  * (hardware reset value is 0). Keep previous value in r2. */
 .macro set_hcptr operation, mask
@@ -684,6 +754,7 @@ ARM_BE8(rev	r6, r6  )
 	.endif
 	mcr	p15, 4, r3, c1, c1, 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.if \operation != vmentry
 	.if \operation == vmexit
 	tst	r2, #(HCPTR_TCP(10) | HCPTR_TCP(11))
@@ -695,6 +766,8 @@ ARM_BE8(rev	r6, r6  )
 	.endif
 1:
 	.endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 .endm
@@ -715,6 +788,7 @@ ARM_BE8(rev	r6, r6  )
 /* Enable/Disable: stage-2 trans., trap interrupts, trap wfi, trap smc */
 .macro configure_hyp_role operation
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrc	p15, 4, r2, c1, c1, 0	@ HCR
 	bic	r2, r2, #HCR_VIRT_EXCP_MASK
 	ldr	r3, =HCR_GUEST_MASK
@@ -727,6 +801,8 @@ ARM_BE8(rev	r6, r6  )
 	.endif
 	mcr	p15, 4, r2, c1, c1, 0
 =======
+=======
+>>>>>>> v3.18
 	.if \operation == vmentry
 	ldr	r2, [vcpu, #VCPU_HCR]
 	ldr	r3, [vcpu, #VCPU_IRQ_LINES]
@@ -735,6 +811,9 @@ ARM_BE8(rev	r6, r6  )
 	mov	r2, #0
 	.endif
 	mcr	p15, 4, r2, c1, c1, 0	@ HCR
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 

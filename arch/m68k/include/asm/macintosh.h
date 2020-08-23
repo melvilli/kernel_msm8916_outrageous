@@ -5,6 +5,12 @@
 #include <linux/interrupt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-mac.h>
+
+
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-mac.h>
 
@@ -81,6 +87,7 @@ struct mac_model
 #define MAC_FLOPPY_AV		4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Gestalt numbers
  */
@@ -142,6 +149,8 @@ struct mac_model
 
 extern struct mac_model *macintosh_config;
 =======
+=======
+>>>>>>> v3.18
 extern struct mac_model *macintosh_config;
 
 
@@ -166,6 +175,9 @@ struct mac_booter_data
 };
 
 extern struct mac_booter_data mac_bi_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

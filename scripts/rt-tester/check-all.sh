@@ -20,6 +20,9 @@ testit t4-l2-pi-deboost.tst
 testit t5-l4-pi-boost-deboost.tst
 testit t5-l4-pi-boost-deboost-setsched.tst
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

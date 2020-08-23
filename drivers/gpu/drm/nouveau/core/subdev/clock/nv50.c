@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/clock.h>
 #include <subdev/bios.h>
 #include <subdev/bios/pll.h>
@@ -75,6 +76,8 @@ nv50_clock_pll_set(struct nouveau_clock *clk, u32 type, u32 freq)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/pll.h>
 
@@ -533,13 +536,19 @@ nv50_clock_calc(struct nouveau_clock *clk, struct nouveau_cstate *cstate)
 	clk_setf(hwsq, 0x10, 0x01); /* enable fb */
 	clk_wait(hwsq, 0x00, 0x00); /* wait for fb enabled */
 	clk_wr32(hwsq, fifo, 0x00000000); /* un-block fifo */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nv50_clock_prog(struct nouveau_clock *clk)
 {
 	struct nv50_clock_priv *priv = (void *)clk;
@@ -554,28 +563,38 @@ nv50_clock_tidy(struct nouveau_clock *clk)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		struct nouveau_oclass *oclass, void *data, u32 size,
 		struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv50_clock_priv *priv;
 	int ret;
 
 	ret = nouveau_clock_create(parent, engine, oclass, &priv);
 =======
+=======
+>>>>>>> v3.18
 	struct nv50_clock_oclass *pclass = (void *)oclass;
 	struct nv50_clock_priv *priv;
 	int ret;
 
 	ret = nouveau_clock_create(parent, engine, oclass, pclass->domains,
 				   NULL, 0, false, &priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*pobject = nv_object(priv);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->base.pll_set = nv50_clock_pll_set;
 	priv->base.pll_calc = nv04_clock_pll_calc;
@@ -587,6 +606,8 @@ nv50_clock_oclass = {
 	.handle = NV_SUBDEV(CLOCK, 0x50),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	priv->hwsq.r_fifo = hwsq_reg(0x002504);
 	priv->hwsq.r_spll[0] = hwsq_reg(0x004020);
 	priv->hwsq.r_spll[1] = hwsq_reg(0x004024);
@@ -625,6 +646,9 @@ struct nouveau_oclass *
 nv50_clock_oclass = &(struct nv50_clock_oclass) {
 	.base.handle = NV_SUBDEV(CLOCK, 0x50),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv50_clock_ctor,
 		.dtor = _nouveau_clock_dtor,
@@ -632,7 +656,12 @@ nv50_clock_oclass = &(struct nv50_clock_oclass) {
 		.fini = _nouveau_clock_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.domains = nv50_domains,
+}.base;
+>>>>>>> v3.18
 =======
 	.domains = nv50_domains,
 }.base;

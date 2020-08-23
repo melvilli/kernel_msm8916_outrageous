@@ -99,7 +99,11 @@ nfs_proc_get_root(struct nfs_server *server, struct nfs_fh *fhandle,
 static int
 nfs_proc_getattr(struct nfs_server *server, struct nfs_fh *fhandle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct nfs_fattr *fattr)
+=======
+		struct nfs_fattr *fattr, struct nfs4_label *label)
+>>>>>>> v3.18
 =======
 		struct nfs_fattr *fattr, struct nfs4_label *label)
 >>>>>>> v3.18
@@ -151,7 +155,12 @@ nfs_proc_setattr(struct dentry *dentry, struct nfs_fattr *fattr,
 static int
 nfs_proc_lookup(struct inode *dir, struct qstr *name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct nfs_fh *fhandle, struct nfs_fattr *fattr)
+=======
+		struct nfs_fh *fhandle, struct nfs_fattr *fattr,
+		struct nfs4_label *label)
+>>>>>>> v3.18
 =======
 		struct nfs_fh *fhandle, struct nfs_fattr *fattr,
 		struct nfs4_label *label)
@@ -244,7 +253,11 @@ nfs_proc_create(struct inode *dir, struct dentry *dentry, struct iattr *sattr,
 	int status = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("NFS call  create %s\n", dentry->d_name.name);
+=======
+	dprintk("NFS call  create %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	dprintk("NFS call  create %pd\n", dentry);
 >>>>>>> v3.18
@@ -257,7 +270,11 @@ nfs_proc_create(struct inode *dir, struct dentry *dentry, struct iattr *sattr,
 	nfs_mark_for_revalidate(dir);
 	if (status == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr);
+=======
+		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr, NULL);
+>>>>>>> v3.18
 =======
 		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr, NULL);
 >>>>>>> v3.18
@@ -282,7 +299,11 @@ nfs_proc_mknod(struct inode *dir, struct dentry *dentry, struct iattr *sattr,
 	int status = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("NFS call  mknod %s\n", dentry->d_name.name);
+=======
+	dprintk("NFS call  mknod %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	dprintk("NFS call  mknod %pd\n", dentry);
 >>>>>>> v3.18
@@ -312,7 +333,11 @@ nfs_proc_mknod(struct inode *dir, struct dentry *dentry, struct iattr *sattr,
 	}
 	if (status == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr);
+=======
+		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr, NULL);
+>>>>>>> v3.18
 =======
 		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr, NULL);
 >>>>>>> v3.18
@@ -382,6 +407,7 @@ nfs_proc_rename_done(struct rpc_task *task, struct inode *old_dir,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfs_proc_rename(struct inode *old_dir, struct qstr *old_name,
 		struct inode *new_dir, struct qstr *new_name)
 {
@@ -406,6 +432,8 @@ nfs_proc_rename(struct inode *old_dir, struct qstr *old_name,
 }
 
 static int
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 nfs_proc_link(struct inode *inode, struct inode *dir, struct qstr *name)
@@ -451,7 +479,11 @@ nfs_proc_symlink(struct inode *dir, struct dentry *dentry, struct page *page,
 	int status = -ENAMETOOLONG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("NFS call  symlink %s\n", dentry->d_name.name);
+=======
+	dprintk("NFS call  symlink %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	dprintk("NFS call  symlink %pd\n", dentry);
 >>>>>>> v3.18
@@ -475,7 +507,11 @@ nfs_proc_symlink(struct inode *dir, struct dentry *dentry, struct page *page,
 	 */
 	if (status == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = nfs_instantiate(dentry, fh, fattr);
+=======
+		status = nfs_instantiate(dentry, fh, fattr, NULL);
+>>>>>>> v3.18
 =======
 		status = nfs_instantiate(dentry, fh, fattr, NULL);
 >>>>>>> v3.18
@@ -498,7 +534,11 @@ nfs_proc_mkdir(struct inode *dir, struct dentry *dentry, struct iattr *sattr)
 	int status = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("NFS call  mkdir %s\n", dentry->d_name.name);
+=======
+	dprintk("NFS call  mkdir %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	dprintk("NFS call  mkdir %pd\n", dentry);
 >>>>>>> v3.18
@@ -512,7 +552,11 @@ nfs_proc_mkdir(struct inode *dir, struct dentry *dentry, struct iattr *sattr)
 	nfs_mark_for_revalidate(dir);
 	if (status == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr);
+=======
+		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr, NULL);
+>>>>>>> v3.18
 =======
 		status = nfs_instantiate(dentry, data->res.fh, data->res.fattr, NULL);
 >>>>>>> v3.18
@@ -646,6 +690,7 @@ nfs_proc_pathconf(struct nfs_server *server, struct nfs_fh *fhandle,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nfs_read_done(struct rpc_task *task, struct nfs_read_data *data)
 {
 	struct inode *inode = data->header->inode;
@@ -659,6 +704,8 @@ static int nfs_read_done(struct rpc_task *task, struct nfs_read_data *data)
 		if (data->args.offset + data->res.count >= data->res.fattr->size)
 			data->res.eof = 1;
 =======
+=======
+>>>>>>> v3.18
 static int nfs_read_done(struct rpc_task *task, struct nfs_pgio_header *hdr)
 {
 	struct inode *inode = hdr->inode;
@@ -671,13 +718,21 @@ static int nfs_read_done(struct rpc_task *task, struct nfs_pgio_header *hdr)
 		 */
 		if (hdr->args.offset + hdr->res.count >= hdr->res.fattr->size)
 			hdr->res.eof = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nfs_proc_read_setup(struct nfs_read_data *data, struct rpc_message *msg)
+=======
+static void nfs_proc_read_setup(struct nfs_pgio_header *hdr,
+				struct rpc_message *msg)
+>>>>>>> v3.18
 =======
 static void nfs_proc_read_setup(struct nfs_pgio_header *hdr,
 				struct rpc_message *msg)
@@ -686,6 +741,7 @@ static void nfs_proc_read_setup(struct nfs_pgio_header *hdr,
 	msg->rpc_proc = &nfs_procedures[NFSPROC_READ];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void nfs_proc_read_rpc_prepare(struct rpc_task *task, struct nfs_read_data *data)
 {
@@ -714,6 +770,8 @@ static void nfs_proc_write_rpc_prepare(struct rpc_task *task, struct nfs_write_d
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int nfs_proc_pgio_rpc_prepare(struct rpc_task *task,
 				     struct nfs_pgio_header *hdr)
 {
@@ -738,6 +796,9 @@ static void nfs_proc_write_setup(struct nfs_pgio_header *hdr,
 	msg->rpc_proc = &nfs_procedures[NFSPROC_WRITE];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void nfs_proc_commit_rpc_prepare(struct rpc_task *task, struct nfs_commit_data *data)
 {
@@ -834,7 +895,10 @@ const struct nfs_rpc_ops nfs_v2_clientops = {
 	.unlink_rpc_prepare = nfs_proc_unlink_rpc_prepare,
 	.unlink_done	= nfs_proc_unlink_done,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rename		= nfs_proc_rename,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.rename_setup	= nfs_proc_rename_setup,
@@ -851,6 +915,7 @@ const struct nfs_rpc_ops nfs_v2_clientops = {
 	.pathconf	= nfs_proc_pathconf,
 	.decode_dirent	= nfs2_decode_dirent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read_setup	= nfs_proc_read_setup,
 	.read_pageio_init = nfs_pageio_init_read,
 	.read_rpc_prepare = nfs_proc_read_rpc_prepare,
@@ -859,10 +924,15 @@ const struct nfs_rpc_ops nfs_v2_clientops = {
 	.write_pageio_init = nfs_pageio_init_write,
 	.write_rpc_prepare = nfs_proc_write_rpc_prepare,
 =======
+=======
+>>>>>>> v3.18
 	.pgio_rpc_prepare = nfs_proc_pgio_rpc_prepare,
 	.read_setup	= nfs_proc_read_setup,
 	.read_done	= nfs_read_done,
 	.write_setup	= nfs_proc_write_setup,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.write_done	= nfs_write_done,
 	.commit_setup	= nfs_proc_commit_setup,

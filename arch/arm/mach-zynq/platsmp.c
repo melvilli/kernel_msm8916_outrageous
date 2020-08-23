@@ -31,28 +31,37 @@
  * Store number of cores in the system
  * Because of scu_get_core_count() must be in __init section and can't
 <<<<<<< HEAD
+<<<<<<< HEAD
  * be called from zynq_cpun_start() because it is in __cpuinit section.
  */
 static int ncores;
 
 int __cpuinit zynq_cpun_start(u32 address, int cpu)
 =======
+=======
+>>>>>>> v3.18
  * be called from zynq_cpun_start() because it is not in __init section.
  */
 static int ncores;
 
 int zynq_cpun_start(u32 address, int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 trampoline_code_size = &zynq_secondary_trampoline_end -
 						&zynq_secondary_trampoline;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu > ncores) {
 		pr_warn("CPU No. is not available in the system\n");
 		return -1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* MS: Expectation that SLCR are directly map and accessible */
@@ -64,6 +73,7 @@ int zynq_cpun_start(u32 address, int cpu)
 						&zynq_secondary_trampoline;
 
 		zynq_slcr_cpu_stop(cpu);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (__pa(PAGE_OFFSET)) {
@@ -94,6 +104,8 @@ int zynq_cpun_start(u32 address, int cpu)
 			iounmap(zero);
 
 =======
+=======
+>>>>>>> v3.18
 		if (address) {
 			if (__pa(PAGE_OFFSET)) {
 				zero = ioremap(0, trampoline_code_size);
@@ -122,6 +134,9 @@ int zynq_cpun_start(u32 address, int cpu)
 			if (__pa(PAGE_OFFSET))
 				iounmap(zero);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		zynq_slcr_cpu_start(cpu);
 
@@ -135,15 +150,21 @@ int zynq_cpun_start(u32 address, int cpu)
 EXPORT_SYMBOL(zynq_cpun_start);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit zynq_boot_secondary(unsigned int cpu,
 						struct task_struct *idle)
 {
 	return zynq_cpun_start(virt_to_phys(secondary_startup), cpu);
 =======
+=======
+>>>>>>> v3.18
 static int zynq_boot_secondary(unsigned int cpu,
 						struct task_struct *idle)
 {
 	return zynq_cpun_start(virt_to_phys(zynq_secondary_startup), cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -164,6 +185,7 @@ static void __init zynq_smp_init_cpus(void)
 static void __init zynq_smp_prepare_cpus(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	/*
@@ -176,6 +198,8 @@ static void __init zynq_smp_prepare_cpus(unsigned int max_cpus)
 	scu_enable(zynq_scu_base);
 }
 =======
+=======
+>>>>>>> v3.18
 	scu_enable(zynq_scu_base);
 }
 
@@ -224,6 +248,9 @@ static void zynq_cpu_die(unsigned int cpu)
 		cpu_do_idle();
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct smp_operations zynq_smp_ops __initdata = {
@@ -231,13 +258,19 @@ struct smp_operations zynq_smp_ops __initdata = {
 	.smp_prepare_cpus	= zynq_smp_prepare_cpus,
 	.smp_boot_secondary	= zynq_boot_secondary,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG_CPU
 	.cpu_die		= zynq_platform_cpu_die,
 =======
+=======
+>>>>>>> v3.18
 	.smp_secondary_init	= zynq_secondary_init,
 #ifdef CONFIG_HOTPLUG_CPU
 	.cpu_die		= zynq_cpu_die,
 	.cpu_kill		= zynq_cpu_kill,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };

@@ -19,6 +19,11 @@ Mount Options
 
 When mounting an XFS filesystem, the following options are accepted.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+For boolean mount options, the names with the (*) suffix is the
+default behaviour.
+>>>>>>> v3.18
 =======
 For boolean mount options, the names with the (*) suffix is the
 default behaviour.
@@ -31,6 +36,7 @@ default behaviour.
 	through to 1GiB, inclusive, in power-of-2 increments.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   attr2/noattr2
 	The options enable/disable (default is disabled for backward
 	compatibility on-disk) an "opportunistic" improvement to be
@@ -39,6 +45,8 @@ default behaviour.
 	removing extended attributes) the on-disk superblock feature
 	bit field will be updated to reflect this format being in use.
 =======
+=======
+>>>>>>> v3.18
 	The default behaviour is for dynamic end-of-file
 	preallocation size, which uses a set of heuristics to
 	optimise the preallocation size based on the current
@@ -59,11 +67,15 @@ default behaviour.
 	bit indicating that attr2 behaviour is active. If either
 	mount option it set, then that becomes the new default used
 	by the filesystem.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	CRC enabled filesystems always use the attr2 format, and so
 	will reject the noattr2 mount option if it is set.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   barrier
 	Enables the use of block layer write barriers for writes into
@@ -146,6 +158,8 @@ default behaviour.
 	The default value for machines with more than 32MiB of memory
 	is 32768, machines with less memory use 16384 by default.
 =======
+=======
+>>>>>>> v3.18
   barrier (*)
   nobarrier
 	Enables/disables the use of block layer write barriers for
@@ -244,6 +258,9 @@ default behaviour.
 
 	The default value for for version 1 logs is 32768, while the
 	default value for version 2 logs is MAX(32768, log_sunit).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   logdev=device and rtdev=device
@@ -253,6 +270,7 @@ default behaviour.
 	optional, and the log section can be separate from the data
 	section or contained within it.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   mtpt=mountpoint
 	Use with the "dmapi" option.  The value specified here will be
@@ -265,11 +283,16 @@ default behaviour.
   noatime
 	Access timestamps are not updated when a file is read.
 =======
+=======
+>>>>>>> v3.18
   noalign
 	Data allocations will not be aligned at stripe unit
 	boundaries. This is only relevant to filesystems created
 	with non-zero data alignment parameters (sunit, swidth) by
 	mkfs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   norecovery
@@ -282,9 +305,12 @@ default behaviour.
 
   nouuid
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Don't check for double mounted file systems using the file system uuid.
 	This is useful to mount LVM snapshot volumes.
 =======
+=======
+>>>>>>> v3.18
 	Don't check for double mounted file systems using the file
 	system uuid.  This is useful to mount LVM snapshot volumes,
 	and often used in combination with "norecovery" for mounting
@@ -293,6 +319,9 @@ default behaviour.
   noquota
 	Forcibly turns off all quota accounting and enforcement
 	within the filesystem.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   uquota/usrquota/uqnoenforce/quota
@@ -309,6 +338,7 @@ default behaviour.
 
   sunit=value and swidth=value
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Used to specify the stripe unit and width for a RAID device or
 	a stripe volume.  "value" must be specified in 512-byte block
 	units.
@@ -322,6 +352,8 @@ default behaviour.
 	The "swidth" option is required if the "sunit" option has been
 	specified, and must be a multiple of the "sunit" value.
 =======
+=======
+>>>>>>> v3.18
 	Used to specify the stripe unit and width for a RAID device
 	or a stripe volume.  "value" must be specified in 512-byte
 	block units. These options are only relevant to filesystems
@@ -337,6 +369,9 @@ default behaviour.
 	after an underlying RAID device has had it's geometry
 	modified, such as adding a new disk to a RAID5 lun and
 	reshaping it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   swalloc
@@ -345,7 +380,10 @@ default behaviour.
 	size is larger than the stripe width size.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   wsync
 	When specified, all filesystem namespace operations are
 	executed synchronously. This ensures that when the namespace
@@ -383,6 +421,9 @@ Deprecated Mount Options
 	for these options any more.
 
 	Due for removal in 3.12.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 sysctls
@@ -396,6 +437,7 @@ The following sysctls are available for the XFS filesystem:
 
   fs.xfs.xfssyncd_centisecs	(Min: 100  Default: 3000  Max: 720000)
 <<<<<<< HEAD
+<<<<<<< HEAD
   	The interval at which the xfssyncd thread flushes metadata
   	out to disk.  This thread will flush log activity out, and
   	do some processing on unlinked inodes.
@@ -406,6 +448,8 @@ The following sysctls are available for the XFS filesystem:
   fs.xfs.age_buffer_centisecs	(Min: 100  Default: 1500  Max: 720000)
 	The age at which xfsbufd flushes dirty metadata buffers to disk.
 =======
+=======
+>>>>>>> v3.18
 	The interval at which the filesystem flushes metadata
 	out to disk and runs internal cache cleanup routines.
 
@@ -420,6 +464,9 @@ The following sysctls are available for the XFS filesystem:
 	with unused speculative preallocation runs. The scan
 	removes unused preallocation from clean inodes and releases
 	the unused space back to the free pool.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   fs.xfs.error_level		(Min: 0  Default: 3  Max: 11)
@@ -478,12 +525,18 @@ The following sysctls are available for the XFS filesystem:
 	inherited by files in that directory.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   fs.xfs.inherit_nodefrag	(Min: 0  Default: 1  Max: 1)
 	Setting this to "1" will cause the "nodefrag" flag set
 	by the xfs_io(8) chattr command on a directory to be
 	inherited by files in that directory.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   fs.xfs.rotorstep		(Min: 1  Default: 1  Max: 256)
 	In "inode32" allocation mode, this option determines how many
@@ -492,7 +545,10 @@ The following sysctls are available for the XFS filesystem:
 	is to control the rate at which the allocator moves between
 	allocation groups when allocating extents for new files.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Deprecated Sysctls
 ==================
@@ -510,4 +566,7 @@ Deprecated Sysctls
 	xfsbufd no longer exists, so this syctl does nothing.
 
 	Due for removal in 3.14.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 #include <linux/mutex.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dma-buf.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-buf.h>
 >>>>>>> v3.18
@@ -30,6 +34,7 @@
 #include <drm/drmP.h>
 #include <drm/drm.h>
 #include <drm/drm_gem_cma_helper.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static unsigned int get_gem_mmap_offset(struct drm_gem_object *obj)
@@ -43,6 +48,8 @@ static void drm_gem_cma_buf_destroy(struct drm_device *drm,
 	dma_free_writecombine(drm->dev, cma_obj->base.size, cma_obj->vaddr,
 			cma_obj->paddr);
 =======
+=======
+>>>>>>> v3.18
 #include <drm/drm_vma_manager.h>
 
 /*
@@ -83,6 +90,9 @@ __drm_gem_cma_create(struct drm_device *drm, unsigned int size)
 error:
 	kfree(cma_obj);
 	return ERR_PTR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -97,13 +107,17 @@ struct drm_gem_cma_object *drm_gem_cma_create(struct drm_device *drm,
 {
 	struct drm_gem_cma_object *cma_obj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_gem_object *gem_obj;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
 
 	size = round_up(size, PAGE_SIZE);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cma_obj = kzalloc(sizeof(*cma_obj), GFP_KERNEL);
 	if (!cma_obj)
@@ -113,10 +127,16 @@ struct drm_gem_cma_object *drm_gem_cma_create(struct drm_device *drm,
 	if (IS_ERR(cma_obj))
 		return cma_obj;
 >>>>>>> v3.18
+=======
+	cma_obj = __drm_gem_cma_create(drm, size);
+	if (IS_ERR(cma_obj))
+		return cma_obj;
+>>>>>>> v3.18
 
 	cma_obj->vaddr = dma_alloc_writecombine(drm->dev, size,
 			&cma_obj->paddr, GFP_KERNEL | __GFP_NOWARN);
 	if (!cma_obj->vaddr) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_err(drm->dev, "failed to allocate buffer with size %d\n", size);
 		ret = -ENOMEM;
@@ -145,6 +165,8 @@ err_dma_alloc:
 	kfree(cma_obj);
 
 =======
+=======
+>>>>>>> v3.18
 		dev_err(drm->dev, "failed to allocate buffer with size %d\n",
 			size);
 		ret = -ENOMEM;
@@ -155,6 +177,9 @@ err_dma_alloc:
 
 error:
 	drm_gem_cma_free_object(&cma_obj->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ERR_PTR(ret);
 }
@@ -210,6 +235,7 @@ void drm_gem_cma_free_object(struct drm_gem_object *gem_obj)
 	struct drm_gem_cma_object *cma_obj;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gem_obj->map_list.map)
 		drm_gem_free_mmap_offset(gem_obj);
 
@@ -219,6 +245,8 @@ void drm_gem_cma_free_object(struct drm_gem_object *gem_obj)
 
 	drm_gem_cma_buf_destroy(gem_obj->dev, cma_obj);
 =======
+=======
+>>>>>>> v3.18
 	drm_gem_free_mmap_offset(gem_obj);
 
 	cma_obj = to_drm_gem_cma_obj(gem_obj);
@@ -231,6 +259,9 @@ void drm_gem_cma_free_object(struct drm_gem_object *gem_obj)
 	}
 
 	drm_gem_object_release(gem_obj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(cma_obj);
@@ -259,10 +290,14 @@ int drm_gem_cma_dumb_create(struct drm_file *file_priv,
 	cma_obj = drm_gem_cma_create_with_handle(file_priv, dev,
 			args->size, &args->handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(cma_obj))
 		return PTR_ERR(cma_obj);
 
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(cma_obj);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(cma_obj);
 >>>>>>> v3.18
@@ -288,7 +323,11 @@ int drm_gem_cma_dumb_map_offset(struct drm_file *file_priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*offset = get_gem_mmap_offset(gem_obj);
+=======
+	*offset = drm_vma_node_offset_addr(&gem_obj->vma_node);
+>>>>>>> v3.18
 =======
 	*offset = drm_vma_node_offset_addr(&gem_obj->vma_node);
 >>>>>>> v3.18
@@ -308,7 +347,10 @@ const struct vm_operations_struct drm_gem_cma_vm_ops = {
 EXPORT_SYMBOL_GPL(drm_gem_cma_vm_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int drm_gem_cma_mmap_obj(struct drm_gem_cma_object *cma_obj,
 				struct vm_area_struct *vma)
 {
@@ -331,6 +373,9 @@ static int drm_gem_cma_mmap_obj(struct drm_gem_cma_object *cma_obj,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * drm_gem_cma_mmap - (struct file_operation)->mmap callback function
@@ -338,8 +383,13 @@ static int drm_gem_cma_mmap_obj(struct drm_gem_cma_object *cma_obj,
 int drm_gem_cma_mmap(struct file *filp, struct vm_area_struct *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_gem_object *gem_obj;
 	struct drm_gem_cma_object *cma_obj;
+=======
+	struct drm_gem_cma_object *cma_obj;
+	struct drm_gem_object *gem_obj;
+>>>>>>> v3.18
 =======
 	struct drm_gem_cma_object *cma_obj;
 	struct drm_gem_object *gem_obj;
@@ -353,6 +403,7 @@ int drm_gem_cma_mmap(struct file *filp, struct vm_area_struct *vma)
 	gem_obj = vma->vm_private_data;
 	cma_obj = to_drm_gem_cma_obj(gem_obj);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = remap_pfn_range(vma, vma->vm_start, cma_obj->paddr >> PAGE_SHIFT,
 			vma->vm_end - vma->vm_start, vma->vm_page_prot);
@@ -374,16 +425,22 @@ int drm_gem_cma_dumb_destroy(struct drm_file *file_priv,
 EXPORT_SYMBOL_GPL(drm_gem_cma_dumb_destroy);
 
 =======
+=======
+>>>>>>> v3.18
 	return drm_gem_cma_mmap_obj(cma_obj, vma);
 }
 EXPORT_SYMBOL_GPL(drm_gem_cma_mmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 void drm_gem_cma_describe(struct drm_gem_cma_object *cma_obj, struct seq_file *m)
 {
 	struct drm_gem_object *obj = &cma_obj->base;
 	struct drm_device *dev = obj->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint64_t off = 0;
 
@@ -396,6 +453,8 @@ void drm_gem_cma_describe(struct drm_gem_cma_object *cma_obj, struct seq_file *m
 			obj->name, obj->refcount.refcount.counter,
 			off, cma_obj->paddr, cma_obj->vaddr, obj->size);
 =======
+=======
+>>>>>>> v3.18
 	uint64_t off;
 
 	WARN_ON(!mutex_is_locked(&dev->struct_mutex));
@@ -405,6 +464,9 @@ void drm_gem_cma_describe(struct drm_gem_cma_object *cma_obj, struct seq_file *m
 	seq_printf(m, "%2d (%2d) %08llx %pad %p %d",
 			obj->name, obj->refcount.refcount.counter,
 			off, &cma_obj->paddr, cma_obj->vaddr, obj->size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	seq_printf(m, "\n");
@@ -412,7 +474,10 @@ void drm_gem_cma_describe(struct drm_gem_cma_object *cma_obj, struct seq_file *m
 EXPORT_SYMBOL_GPL(drm_gem_cma_describe);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* low-level interface prime helpers */
 struct sg_table *drm_gem_cma_prime_get_sg_table(struct drm_gem_object *obj)
@@ -493,4 +558,7 @@ void drm_gem_cma_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
 	/* Nothing to do */
 }
 EXPORT_SYMBOL_GPL(drm_gem_cma_prime_vunmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

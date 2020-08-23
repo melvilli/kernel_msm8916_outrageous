@@ -10,13 +10,19 @@ Required properties:
   range in the host1x address space. Should be 1.
 - ranges: The mapping of the host1x address space to the CPU address space.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - clocks: Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
 - resets: Must contain an entry for each entry in reset-names.
   See ../reset/reset.txt for details.
 - reset-names: Must include the following entries:
   - host1x
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The host1x top-level node defines a number of children, each representing one
@@ -29,13 +35,19 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain one entry, for the module clock.
     See ../clocks/clock-bindings.txt for details.
   - resets: Must contain an entry for each entry in reset-names.
     See ../reset/reset.txt for details.
   - reset-names: Must include the following entries:
     - mpe
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - vi: video input
@@ -45,13 +57,19 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain one entry, for the module clock.
     See ../clocks/clock-bindings.txt for details.
   - resets: Must contain an entry for each entry in reset-names.
     See ../reset/reset.txt for details.
   - reset-names: Must include the following entries:
     - vi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - epp: encoder pre-processor
@@ -61,13 +79,19 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain one entry, for the module clock.
     See ../clocks/clock-bindings.txt for details.
   - resets: Must contain an entry for each entry in reset-names.
     See ../reset/reset.txt for details.
   - reset-names: Must include the following entries:
     - epp
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - isp: image signal processor
@@ -77,13 +101,19 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain one entry, for the module clock.
     See ../clocks/clock-bindings.txt for details.
   - resets: Must contain an entry for each entry in reset-names.
     See ../reset/reset.txt for details.
   - reset-names: Must include the following entries:
     - isp
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - gr2d: 2D graphics engine
@@ -93,13 +123,19 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain one entry, for the module clock.
     See ../clocks/clock-bindings.txt for details.
   - resets: Must contain an entry for each entry in reset-names.
     See ../reset/reset.txt for details.
   - reset-names: Must include the following entries:
     - 2d
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - gr3d: 3D graphics engine
@@ -108,7 +144,10 @@ of the following host1x client modules:
   - compatible: "nvidia,tegra<chip>-gr3d"
   - reg: Physical base address and length of the controller's registers.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain an entry for each entry in clock-names.
     See ../clocks/clock-bindings.txt for details.
   - clock-names: Must include the following entries:
@@ -121,6 +160,9 @@ of the following host1x client modules:
   - reset-names: Must include the following entries:
     - 3d
     - 3d2 (Only required on SoCs with two 3D clocks)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - dc: display controller
@@ -130,7 +172,10 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain an entry for each entry in clock-names.
     See ../clocks/clock-bindings.txt for details.
   - clock-names: Must include the following entries:
@@ -144,6 +189,9 @@ of the following host1x client modules:
   - nvidia,head: The number of the display controller head. This is used to
     setup the various types of output to receive video data from the given
     head.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   Each display controller node has a child node, named "rgb", that represents
@@ -153,6 +201,10 @@ of the following host1x client modules:
   - nvidia,hpd-gpio: specifies a GPIO used for hotplug detection
   - nvidia,edid: supplies a binary EDID blob
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - nvidia,panel: phandle of a display panel
+>>>>>>> v3.18
 =======
   - nvidia,panel: phandle of a display panel
 >>>>>>> v3.18
@@ -164,9 +216,12 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
   - vdd-supply: regulator for supply voltage
   - pll-supply: regulator for PLL
 =======
+=======
+>>>>>>> v3.18
   - hdmi-supply: supply for the +5V HDMI connector pin
   - vdd-supply: regulator for supply voltage
   - pll-supply: regulator for PLL
@@ -180,6 +235,9 @@ of the following host1x client modules:
     See ../reset/reset.txt for details.
   - reset-names: Must include the following entries:
     - hdmi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   Optional properties:
@@ -187,6 +245,10 @@ of the following host1x client modules:
   - nvidia,hpd-gpio: specifies a GPIO used for hotplug detection
   - nvidia,edid: supplies a binary EDID blob
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - nvidia,panel: phandle of a display panel
+>>>>>>> v3.18
 =======
   - nvidia,panel: phandle of a display panel
 >>>>>>> v3.18
@@ -198,6 +260,11 @@ of the following host1x client modules:
   - reg: Physical base address and length of the controller's registers.
   - interrupts: The interrupt outputs from the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - clocks: Must contain one entry, for the module clock.
+    See ../clocks/clock-bindings.txt for details.
+>>>>>>> v3.18
 =======
   - clocks: Must contain one entry, for the module clock.
     See ../clocks/clock-bindings.txt for details.
@@ -209,7 +276,10 @@ of the following host1x client modules:
   - compatible: "nvidia,tegra<chip>-dsi"
   - reg: Physical base address and length of the controller's registers.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks: Must contain an entry for each entry in clock-names.
     See ../clocks/clock-bindings.txt for details.
   - clock-names: Must include the following entries:
@@ -273,6 +343,9 @@ of the following host1x client modules:
   - reset-names: Must include the following entries:
     - dpaux
   - vdd-supply: phandle of a supply that powers the DisplayPort link
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -286,6 +359,12 @@ Example:
 		interrupts = <0 65 0x04   /* mpcore syncpt */
 			      0 67 0x04>; /* mpcore general */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&tegra_car TEGRA20_CLK_HOST1X>;
+		resets = <&tegra_car 28>;
+		reset-names = "host1x";
+>>>>>>> v3.18
 =======
 		clocks = <&tegra_car TEGRA20_CLK_HOST1X>;
 		resets = <&tegra_car 28>;
@@ -302,6 +381,12 @@ Example:
 			reg = <0x54040000 0x00040000>;
 			interrupts = <0 68 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_MPE>;
+			resets = <&tegra_car 60>;
+			reset-names = "mpe";
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_MPE>;
 			resets = <&tegra_car 60>;
@@ -314,6 +399,12 @@ Example:
 			reg = <0x54080000 0x00040000>;
 			interrupts = <0 69 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_VI>;
+			resets = <&tegra_car 100>;
+			reset-names = "vi";
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_VI>;
 			resets = <&tegra_car 100>;
@@ -326,6 +417,12 @@ Example:
 			reg = <0x540c0000 0x00040000>;
 			interrupts = <0 70 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_EPP>;
+			resets = <&tegra_car 19>;
+			reset-names = "epp";
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_EPP>;
 			resets = <&tegra_car 19>;
@@ -338,6 +435,12 @@ Example:
 			reg = <0x54100000 0x00040000>;
 			interrupts = <0 71 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_ISP>;
+			resets = <&tegra_car 23>;
+			reset-names = "isp";
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_ISP>;
 			resets = <&tegra_car 23>;
@@ -350,6 +453,12 @@ Example:
 			reg = <0x54140000 0x00040000>;
 			interrupts = <0 72 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_GR2D>;
+			resets = <&tegra_car 21>;
+			reset-names = "2d";
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_GR2D>;
 			resets = <&tegra_car 21>;
@@ -361,6 +470,12 @@ Example:
 			compatible = "nvidia,tegra20-gr3d";
 			reg = <0x54180000 0x00040000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_GR3D>;
+			resets = <&tegra_car 24>;
+			reset-names = "3d";
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_GR3D>;
 			resets = <&tegra_car 24>;
@@ -373,12 +488,18 @@ Example:
 			reg = <0x54200000 0x00040000>;
 			interrupts = <0 73 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&tegra_car TEGRA20_CLK_DISP1>,
 				 <&tegra_car TEGRA20_CLK_PLL_P>;
 			clock-names = "dc", "parent";
 			resets = <&tegra_car 27>;
 			reset-names = "dc";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			rgb {
@@ -391,12 +512,18 @@ Example:
 			reg = <0x54240000 0x00040000>;
 			interrupts = <0 74 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&tegra_car TEGRA20_CLK_DISP2>,
 				 <&tegra_car TEGRA20_CLK_PLL_P>;
 			clock-names = "dc", "parent";
 			resets = <&tegra_car 26>;
 			reset-names = "dc";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			rgb {
@@ -409,12 +536,18 @@ Example:
 			reg = <0x54280000 0x00040000>;
 			interrupts = <0 75 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&tegra_car TEGRA20_CLK_HDMI>,
 				 <&tegra_car TEGRA20_CLK_PLL_D_OUT0>;
 			clock-names = "hdmi", "parent";
 			resets = <&tegra_car 51>;
 			reset-names = "hdmi";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "disabled";
 		};
@@ -424,6 +557,10 @@ Example:
 			reg = <0x542c0000 0x00040000>;
 			interrupts = <0 76 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&tegra_car TEGRA20_CLK_TVO>;
+>>>>>>> v3.18
 =======
 			clocks = <&tegra_car TEGRA20_CLK_TVO>;
 >>>>>>> v3.18
@@ -434,12 +571,18 @@ Example:
 			compatible = "nvidia,tegra20-dsi";
 			reg = <0x54300000 0x00040000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&tegra_car TEGRA20_CLK_DSI>,
 				 <&tegra_car TEGRA20_CLK_PLL_D_OUT0>;
 			clock-names = "dsi", "parent";
 			resets = <&tegra_car 48>;
 			reset-names = "dsi";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "disabled";
 		};

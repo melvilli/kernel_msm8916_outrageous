@@ -9,6 +9,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/lockdep.h>
 #include <linux/kobject_ns.h>
 #include <linux/fs.h>
@@ -137,15 +138,21 @@ struct sysfs_addrm_cxt {
 	struct sysfs_dirent	*removed;
 };
 =======
+=======
+>>>>>>> v3.18
 #ifndef __SYSFS_INTERNAL_H
 #define __SYSFS_INTERNAL_H
 
 #include <linux/sysfs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * mount.c
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -162,10 +169,14 @@ extern struct kmem_cache *sysfs_dir_cachep;
 =======
 extern struct kernfs_node *sysfs_root_kn;
 >>>>>>> v3.18
+=======
+extern struct kernfs_node *sysfs_root_kn;
+>>>>>>> v3.18
 
 /*
  * dir.c
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct mutex sysfs_mutex;
 extern spinlock_t sysfs_assoc_lock;
@@ -236,10 +247,16 @@ extern spinlock_t sysfs_symlink_target_lock;
 
 void sysfs_warn_dup(struct kernfs_node *parent, const char *name);
 >>>>>>> v3.18
+=======
+extern spinlock_t sysfs_symlink_target_lock;
+
+void sysfs_warn_dup(struct kernfs_node *parent, const char *name);
+>>>>>>> v3.18
 
 /*
  * file.c
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern const struct file_operations sysfs_file_operations;
 
@@ -254,23 +271,34 @@ int sysfs_add_file_mode(struct sysfs_dirent *dir_sd,
 extern const struct file_operations bin_fops;
 void unmap_bin_file(struct sysfs_dirent *attr_sd);
 =======
+=======
+>>>>>>> v3.18
 int sysfs_add_file(struct kernfs_node *parent,
 		   const struct attribute *attr, bool is_bin);
 int sysfs_add_file_mode_ns(struct kernfs_node *parent,
 			   const struct attribute *attr, bool is_bin,
 			   umode_t amode, const void *ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * symlink.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct inode_operations sysfs_symlink_inode_operations;
 int sysfs_create_link_sd(struct sysfs_dirent *sd, struct kobject *target,
 			 const char *name);
 =======
+=======
+>>>>>>> v3.18
 int sysfs_create_link_sd(struct kernfs_node *kn, struct kobject *target,
 			 const char *name);
 
 #endif	/* __SYSFS_INTERNAL_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -517,9 +517,13 @@ static void sdricoh_pcmcia_detach(struct pcmcia_device *link)
 static int sdricoh_pcmcia_suspend(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmc_host *mmc = link->priv;
 	dev_dbg(&link->dev, "suspend\n");
 	mmc_suspend_host(mmc);
+=======
+	dev_dbg(&link->dev, "suspend\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(&link->dev, "suspend\n");
 >>>>>>> v3.18
@@ -532,7 +536,10 @@ static int sdricoh_pcmcia_resume(struct pcmcia_device *link)
 	dev_dbg(&link->dev, "resume\n");
 	sdricoh_reset(mmc_priv(mmc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_resume_host(mmc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -109,7 +109,11 @@ static struct uvc_format_desc uvc_fmts[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= "RGB Bayer",
+=======
+		.name		= "BGGR Bayer (BY8 )",
+>>>>>>> v3.18
 =======
 		.name		= "BGGR Bayer (BY8 )",
 >>>>>>> v3.18
@@ -118,7 +122,10 @@ static struct uvc_format_desc uvc_fmts[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.name		= "BGGR Bayer (BA81)",
 		.guid		= UVC_GUID_FORMAT_BA81,
 		.fcc		= V4L2_PIX_FMT_SBGGR8,
@@ -139,6 +146,9 @@ static struct uvc_format_desc uvc_fmts[] = {
 		.fcc		= V4L2_PIX_FMT_SRGGB8,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name		= "RGB565",
 		.guid		= UVC_GUID_FORMAT_RGBP,
@@ -953,7 +963,11 @@ static int uvc_parse_standard_control(struct uvc_device *dev,
 		n = buflen >= 12 ? buffer[11] : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (buflen < 12 || buflen < 12 + n) {
+=======
+		if (buflen < 12 + n) {
+>>>>>>> v3.18
 =======
 		if (buflen < 12 + n) {
 >>>>>>> v3.18
@@ -1565,6 +1579,7 @@ static const char *uvc_print_chain(struct uvc_video_chain *chain)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct uvc_video_chain *uvc_alloc_chain(struct uvc_device *dev)
 {
 	struct uvc_video_chain *chain;
@@ -1675,6 +1690,8 @@ error:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Scan the device for video chains and register video devices.
  *
@@ -1698,11 +1715,14 @@ static int uvc_scan_device(struct uvc_device *dev)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chain = uvc_alloc_chain(dev);
 		if (chain == NULL)
 			return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 		chain = kzalloc(sizeof(*chain), GFP_KERNEL);
 		if (chain == NULL)
 			return -ENOMEM;
@@ -1712,6 +1732,9 @@ static int uvc_scan_device(struct uvc_device *dev)
 		chain->dev = dev;
 		v4l2_prio_init(&chain->prio);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		term->flags |= UVC_ENTITY_FLAG_DEFAULT;
 
@@ -1727,9 +1750,12 @@ static int uvc_scan_device(struct uvc_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&dev->chains))
 		uvc_scan_fallback(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (list_empty(&dev->chains)) {
@@ -1759,6 +1785,7 @@ static void uvc_delete(struct uvc_device *dev)
 	struct list_head *p, *n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uvc_status_cleanup(dev);
 	uvc_ctrl_cleanup_device(dev);
 
@@ -1766,12 +1793,17 @@ static void uvc_delete(struct uvc_device *dev)
 	usb_put_dev(dev->udev);
 
 =======
+=======
+>>>>>>> v3.18
 	usb_put_intf(dev->intf);
 	usb_put_dev(dev->udev);
 
 	uvc_status_cleanup(dev);
 	uvc_ctrl_cleanup_device(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dev->vdev.dev)
 		v4l2_device_unregister(&dev->vdev);
@@ -1891,7 +1923,10 @@ static int uvc_register_video(struct uvc_device *dev,
 	vdev->release = uvc_release;
 	vdev->prio = &stream->chain->prio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vdev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (stream->type == V4L2_BUF_TYPE_VIDEO_OUTPUT)
@@ -2004,8 +2039,13 @@ static int uvc_probe(struct usb_interface *intf,
 	INIT_LIST_HEAD(&dev->streams);
 	atomic_set(&dev->nstreams, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&dev->users, 0);
 	atomic_set(&dev->nmappings, 0);
+=======
+	atomic_set(&dev->nmappings, 0);
+	mutex_init(&dev->lock);
+>>>>>>> v3.18
 =======
 	atomic_set(&dev->nmappings, 0);
 	mutex_init(&dev->lock);
@@ -2123,9 +2163,12 @@ static int uvc_suspend(struct usb_interface *intf, pm_message_t message)
 	/* Controls are cached on the fly so they don't need to be saved. */
 	if (intf->cur_altsetting->desc.bInterfaceSubClass ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    UVC_SC_VIDEOCONTROL)
 		return uvc_status_suspend(dev);
 =======
+=======
+>>>>>>> v3.18
 	    UVC_SC_VIDEOCONTROL) {
 		mutex_lock(&dev->lock);
 		if (dev->users)
@@ -2133,6 +2176,9 @@ static int uvc_suspend(struct usb_interface *intf, pm_message_t message)
 		mutex_unlock(&dev->lock);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	list_for_each_entry(stream, &dev->streams, list) {
@@ -2156,28 +2202,40 @@ static int __uvc_resume(struct usb_interface *intf, int reset)
 	if (intf->cur_altsetting->desc.bInterfaceSubClass ==
 	    UVC_SC_VIDEOCONTROL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (reset) {
 			int ret = uvc_ctrl_resume_device(dev);
 
 =======
+=======
+>>>>>>> v3.18
 		int ret = 0;
 
 		if (reset) {
 			ret = uvc_ctrl_restore_values(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret < 0)
 				return ret;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return uvc_status_resume(dev);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&dev->lock);
 		if (dev->users)
 			ret = uvc_status_start(dev, GFP_NOIO);
 		mutex_unlock(&dev->lock);
 
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2278,7 +2336,10 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceProtocol	= 0,
 	  .driver_info		= UVC_QUIRK_PROBE_MINMAX },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Microsoft Lifecam NX-3000 */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -2288,6 +2349,9 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0,
 	  .driver_info		= UVC_QUIRK_PROBE_DEF },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Microsoft Lifecam VX-7000 */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
@@ -2347,7 +2411,10 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Logitech HD Pro Webcam C920 */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -2357,6 +2424,9 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0,
 	  .driver_info		= UVC_QUIRK_RESTORE_CTRLS_ON_INIT },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Chicony CNF7129 (Asus EEE 100HE) */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
@@ -2386,7 +2456,10 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceProtocol	= 0,
 	  .driver_info 		= UVC_QUIRK_PROBE_DEF },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Dell SP2008WFP Monitor */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -2423,6 +2496,9 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0,
 	  .driver_info		= UVC_QUIRK_PROBE_DEF },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Apple Built-In iSight */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE

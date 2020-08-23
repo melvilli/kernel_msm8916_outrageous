@@ -16,6 +16,10 @@
 #include <linux/kallsyms.h>
 #include <linux/utsname.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mempolicy.h>
+>>>>>>> v3.18
 =======
 #include <linux/mempolicy.h>
 >>>>>>> v3.18
@@ -115,8 +119,12 @@ static char *task_group_path(struct task_group *tg)
 		return group_path;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cgroup_path(tg->css.cgroup, group_path, PATH_MAX);
 	return group_path;
+=======
+	return cgroup_path(tg->css.cgroup, group_path, PATH_MAX);
+>>>>>>> v3.18
 =======
 	return cgroup_path(tg->css.cgroup, group_path, PATH_MAX);
 >>>>>>> v3.18
@@ -133,7 +141,11 @@ print_task(struct seq_file *m, struct rq *rq, struct task_struct *p)
 
 	SEQ_printf(m, "%15s %5d %9Ld.%06ld %9Ld %5d ",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->comm, p->pid,
+=======
+		p->comm, task_pid_nr(p),
+>>>>>>> v3.18
 =======
 		p->comm, task_pid_nr(p),
 >>>>>>> v3.18
@@ -150,6 +162,12 @@ print_task(struct seq_file *m, struct rq *rq, struct task_struct *p)
 		0LL, 0LL, 0LL, 0L, 0LL, 0L, 0LL, 0L);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NUMA_BALANCING
+	SEQ_printf(m, " %d", task_node(p));
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NUMA_BALANCING
 	SEQ_printf(m, " %d", task_node(p));
@@ -166,7 +184,10 @@ static void print_rq(struct seq_file *m, struct rq *rq, int rq_cpu)
 {
 	struct task_struct *g, *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -177,6 +198,7 @@ static void print_rq(struct seq_file *m, struct rq *rq, int rq_cpu)
 	"------------------------------------------------------"
 	"----------------------------------------------------\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	read_lock_irqsave(&tasklist_lock, flags);
 
@@ -189,6 +211,8 @@ static void print_rq(struct seq_file *m, struct rq *rq, int rq_cpu)
 
 	read_unlock_irqrestore(&tasklist_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	for_each_process_thread(g, p) {
 		if (task_cpu(p) != rq_cpu)
@@ -197,6 +221,9 @@ static void print_rq(struct seq_file *m, struct rq *rq, int rq_cpu)
 		print_task(m, rq, p);
 	}
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -242,6 +269,7 @@ void print_cfs_rq(struct seq_file *m, int cpu, struct cfs_rq *cfs_rq)
 	SEQ_printf(m, "  .%-30s: %d\n", "nr_running", cfs_rq->nr_running);
 	SEQ_printf(m, "  .%-30s: %ld\n", "load", cfs_rq->load.weight);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FAIR_GROUP_SCHED
 #ifdef CONFIG_SMP
 	SEQ_printf(m, "  .%-30s: %lld\n", "runnable_load_avg",
@@ -258,6 +286,8 @@ void print_cfs_rq(struct seq_file *m, int cpu, struct cfs_rq *cfs_rq)
 			atomic_read(&cfs_rq->tg->runnable_avg));
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	SEQ_printf(m, "  .%-30s: %ld\n", "runnable_load_avg",
 			cfs_rq->runnable_load_avg);
@@ -274,6 +304,9 @@ void print_cfs_rq(struct seq_file *m, int cpu, struct cfs_rq *cfs_rq)
 			atomic_read(&cfs_rq->tg->runnable_avg));
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CFS_BANDWIDTH
 	SEQ_printf(m, "  .%-30s: %d\n", "tg->cfs_bandwidth.timer_active",
@@ -285,6 +318,10 @@ void print_cfs_rq(struct seq_file *m, int cpu, struct cfs_rq *cfs_rq)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_FAIR_GROUP_SCHED
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_FAIR_GROUP_SCHED
 >>>>>>> v3.18
@@ -351,7 +388,11 @@ do {									\
 	P(nr_uninterruptible);
 	PN(next_balance);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	P(curr->pid);
+=======
+	SEQ_printf(m, "  .%-30s: %ld\n", "curr->pid", (long)(task_pid_nr(rq->curr)));
+>>>>>>> v3.18
 =======
 	SEQ_printf(m, "  .%-30s: %ld\n", "curr->pid", (long)(task_pid_nr(rq->curr)));
 >>>>>>> v3.18
@@ -361,6 +402,7 @@ do {									\
 	P(cpu_load[2]);
 	P(cpu_load[3]);
 	P(cpu_load[4]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 	P(cpu_power);
@@ -379,6 +421,8 @@ do {									\
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #undef P
 #undef PN
 
@@ -393,6 +437,10 @@ do {									\
 #ifdef CONFIG_SMP
 	P64(avg_idle);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	P64(max_idle_balance_cost);
+>>>>>>> v3.18
 =======
 	P64(max_idle_balance_cost);
 >>>>>>> v3.18
@@ -409,9 +457,13 @@ do {									\
 	print_rt_stats(m, cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	print_rq(m, rq, cpu);
 	rcu_read_unlock();
+=======
+	print_rq(m, rq, cpu);
+>>>>>>> v3.18
 =======
 	print_rq(m, rq, cpu);
 >>>>>>> v3.18
@@ -437,7 +489,11 @@ static void sched_debug_header(struct seq_file *m)
 	local_irq_restore(flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SEQ_printf(m, "Sched Debug Version: v0.10, %s %.*s\n",
+=======
+	SEQ_printf(m, "Sched Debug Version: v0.11, %s %.*s\n",
+>>>>>>> v3.18
 =======
 	SEQ_printf(m, "Sched Debug Version: v0.11, %s %.*s\n",
 >>>>>>> v3.18
@@ -455,7 +511,11 @@ static void sched_debug_header(struct seq_file *m)
 	P(jiffies);
 #ifdef CONFIG_HAVE_UNSTABLE_SCHED_CLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	P(sched_clock_stable);
+=======
+	P(sched_clock_stable());
+>>>>>>> v3.18
 =======
 	P(sched_clock_stable());
 >>>>>>> v3.18
@@ -476,6 +536,7 @@ static void sched_debug_header(struct seq_file *m)
 	P(sysctl_sched_child_runs_first);
 	P(sysctl_sched_features);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCHED_HMP
 	P(sched_mostly_idle_load);
 	P(sched_small_task);
@@ -488,6 +549,8 @@ static void sched_debug_header(struct seq_file *m)
 	P(sched_use_pelt);
 	P(sched_ravg_window);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #undef PN
@@ -513,7 +576,10 @@ static int sched_debug_show(struct seq_file *m, void *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SYSRQ_SCHED_DEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void sysrq_sched_debug_show(void)
@@ -526,7 +592,10 @@ void sysrq_sched_debug_show(void)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -611,6 +680,7 @@ static int __init init_sched_debug_procfs(void)
 __initcall(init_sched_debug_procfs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 {
 	unsigned long nr_switches;
@@ -631,6 +701,8 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 #define PN(F) \
 	SEQ_printf(m, "%-35s:%14Ld.%06ld\n", #F, SPLIT_NS((long long)p->F))
 =======
+=======
+>>>>>>> v3.18
 #define __P(F) \
 	SEQ_printf(m, "%-45s:%21Ld\n", #F, (long long)F)
 #define P(F) \
@@ -698,6 +770,9 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 	SEQ_printf(m, "%-45s:%14Ld.%06ld\n", #F, SPLIT_NS((long long)F))
 #define PN(F) \
 	SEQ_printf(m, "%-45s:%14Ld.%06ld\n", #F, SPLIT_NS((long long)p->F))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	PN(se.exec_start);
@@ -736,6 +811,7 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 	P(se.statistics.nr_wakeups_idle);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMP) && defined(CONFIG_FAIR_GROUP_SCHED)
 	__P(load_avg);
 #ifdef CONFIG_SCHED_HMP
@@ -746,6 +822,8 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 	P(se.avg.runnable_avg_period);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{
@@ -771,6 +849,7 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 #endif
 	__P(nr_switches);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SEQ_printf(m, "%-35s:%21Ld\n",
 		   "nr_voluntary_switches", (long long)p->nvcsw);
 	SEQ_printf(m, "%-35s:%21Ld\n",
@@ -778,6 +857,8 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 
 	P(se.load.weight);
 =======
+=======
+>>>>>>> v3.18
 	SEQ_printf(m, "%-45s:%21Ld\n",
 		   "nr_voluntary_switches", (long long)p->nvcsw);
 	SEQ_printf(m, "%-45s:%21Ld\n",
@@ -790,6 +871,9 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 	P(se.avg.load_avg_contrib);
 	P(se.avg.decay_count);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	P(policy);
 	P(prio);
@@ -805,15 +889,21 @@ void proc_sched_show_task(struct task_struct *p, struct seq_file *m)
 		t0 = cpu_clock(this_cpu);
 		t1 = cpu_clock(this_cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SEQ_printf(m, "%-35s:%21Ld\n",
 			   "clock-delta", (long long)(t1-t0));
 	}
 =======
+=======
+>>>>>>> v3.18
 		SEQ_printf(m, "%-45s:%21Ld\n",
 			   "clock-delta", (long long)(t1-t0));
 	}
 
 	sched_show_numa(p, m);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

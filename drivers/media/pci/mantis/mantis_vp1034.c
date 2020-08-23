@@ -37,7 +37,11 @@
 #include "mantis_reg.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mb86a16_config vp1034_mb86a16_config = {
+=======
+static struct mb86a16_config vp1034_mb86a16_config = {
+>>>>>>> v3.18
 =======
 static struct mb86a16_config vp1034_mb86a16_config = {
 >>>>>>> v3.18

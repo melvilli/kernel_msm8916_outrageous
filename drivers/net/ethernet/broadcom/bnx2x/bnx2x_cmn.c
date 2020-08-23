@@ -7,7 +7,11 @@
  * the Free Software Foundation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -26,15 +30,21 @@
 #include <linux/interrupt.h>
 #include <linux/ip.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/tcp.h>
 #include <net/ipv6.h>
 #include <net/ip6_checksum.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/crash_dump.h>
 #include <net/tcp.h>
 #include <net/ipv6.h>
 #include <net/ip6_checksum.h>
 #include <net/busy_poll.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/prefetch.h>
 #include "bnx2x_cmn.h"
@@ -42,7 +52,10 @@
 #include "bnx2x_sp.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void bnx2x_free_fp_mem_cnic(struct bnx2x *bp);
 static int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp);
 static int bnx2x_alloc_fp_mem(struct bnx2x *bp);
@@ -84,6 +97,9 @@ static int bnx2x_calc_num_queues(struct bnx2x *bp)
 	return nq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * bnx2x_move_fp - move content of the fastpath structure.
@@ -109,6 +125,10 @@ static inline void bnx2x_move_fp(struct bnx2x *bp, int from, int to)
 	int old_max_eth_txqs, new_max_eth_txqs;
 	int old_txdata_index = 0, new_txdata_index = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bnx2x_agg_info *old_tpa_info = to_fp->tpa_info;
+>>>>>>> v3.18
 =======
 	struct bnx2x_agg_info *old_tpa_info = to_fp->tpa_info;
 >>>>>>> v3.18
@@ -121,12 +141,18 @@ static inline void bnx2x_move_fp(struct bnx2x *bp, int from, int to)
 	to_fp->index = to;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Retain the tpa_info of the original `to' version as we don't want
 	 * 2 FPs to contain the same tpa_info pointer.
 	 */
 	to_fp->tpa_info = old_tpa_info;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* move sp_objs contents as well, as their indices match fp ones */
 	memcpy(to_sp_objs, from_sp_objs, sizeof(*to_sp_objs));
@@ -193,7 +219,11 @@ static void bnx2x_shrink_eth_fp(struct bnx2x *bp, int delta)
 
 	/* Queue pointer cannot be re-set on an fp-basis, as moving pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * backward along the array could cause memory to be overriden
+=======
+	 * backward along the array could cause memory to be overridden
+>>>>>>> v3.18
 =======
 	 * backward along the array could cause memory to be overridden
 >>>>>>> v3.18
@@ -211,7 +241,11 @@ static void bnx2x_shrink_eth_fp(struct bnx2x *bp, int delta)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int load_count[2][3] = { {0} }; /* per-path: 0-common, 1-port0, 2-port1 */
+=======
+int bnx2x_load_count[2][3] = { {0} }; /* per-path: 0-common, 1-port0, 2-port1 */
+>>>>>>> v3.18
 =======
 int bnx2x_load_count[2][3] = { {0} }; /* per-path: 0-common, 1-port0, 2-port1 */
 >>>>>>> v3.18
@@ -240,7 +274,10 @@ static u16 bnx2x_free_tx_pkt(struct bnx2x *bp, struct bnx2x_fp_txdata *txdata,
 	tx_start_bd = &txdata->tx_desc_ring[bd_idx].start_bd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nbd = le16_to_cpu(tx_start_bd->nbd) - 1;
@@ -350,7 +387,11 @@ int bnx2x_tx_int(struct bnx2x *bp, struct bnx2x_fp_txdata *txdata)
 
 	if (unlikely(netif_tx_queue_stopped(txq))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Taking tx_lock() is needed to prevent reenabling the queue
+=======
+		/* Taking tx_lock() is needed to prevent re-enabling the queue
+>>>>>>> v3.18
 =======
 		/* Taking tx_lock() is needed to prevent re-enabling the queue
 >>>>>>> v3.18
@@ -443,7 +484,11 @@ static inline void bnx2x_update_sge_prod(struct bnx2x_fastpath *fp,
 static u32 bnx2x_get_rxhash(const struct bnx2x *bp,
 			    const struct eth_fast_path_rx_cqe *cqe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    bool *l4_rxhash)
+=======
+			    enum pkt_hash_types *rxhash_type)
+>>>>>>> v3.18
 =======
 			    enum pkt_hash_types *rxhash_type)
 >>>>>>> v3.18
@@ -455,12 +500,15 @@ static u32 bnx2x_get_rxhash(const struct bnx2x *bp,
 
 		htype = cqe->status_flags & ETH_FAST_PATH_RX_CQE_RSS_HASH_TYPE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*l4_rxhash = (htype == TCP_IPV4_HASH_TYPE) ||
 			     (htype == TCP_IPV6_HASH_TYPE);
 		return le32_to_cpu(cqe->rss_hash_result);
 	}
 	*l4_rxhash = false;
 =======
+=======
+>>>>>>> v3.18
 		*rxhash_type = ((htype == TCP_IPV4_HASH_TYPE) ||
 				(htype == TCP_IPV6_HASH_TYPE)) ?
 			       PKT_HASH_TYPE_L4 : PKT_HASH_TYPE_L3;
@@ -468,6 +516,9 @@ static u32 bnx2x_get_rxhash(const struct bnx2x *bp,
 		return le32_to_cpu(cqe->rss_hash_result);
 	}
 	*rxhash_type = PKT_HASH_TYPE_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -523,7 +574,11 @@ static void bnx2x_tpa_start(struct bnx2x_fastpath *fp, u16 queue,
 	tpa_info->len_on_bd = le16_to_cpu(cqe->len_on_bd);
 	tpa_info->placement_offset = cqe->placement_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tpa_info->rxhash = bnx2x_get_rxhash(bp, cqe, &tpa_info->l4_rxhash);
+=======
+	tpa_info->rxhash = bnx2x_get_rxhash(bp, cqe, &tpa_info->rxhash_type);
+>>>>>>> v3.18
 =======
 	tpa_info->rxhash = bnx2x_get_rxhash(bp, cqe, &tpa_info->rxhash_type);
 >>>>>>> v3.18
@@ -536,11 +591,15 @@ static void bnx2x_tpa_start(struct bnx2x_fastpath *fp, u16 queue,
 #ifdef BNX2X_STOP_ON_ERROR
 	fp->tpa_queue_used |= (1 << queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef _ASM_GENERIC_INT_L64_H
 	DP(NETIF_MSG_RX_STATUS, "fp->tpa_queue_used = 0x%lx\n",
 #else
 	DP(NETIF_MSG_RX_STATUS, "fp->tpa_queue_used = 0x%llx\n",
 #endif
+=======
+	DP(NETIF_MSG_RX_STATUS, "fp->tpa_queue_used = 0x%llx\n",
+>>>>>>> v3.18
 =======
 	DP(NETIF_MSG_RX_STATUS, "fp->tpa_queue_used = 0x%llx\n",
 >>>>>>> v3.18
@@ -601,15 +660,21 @@ static void bnx2x_set_gro_params(struct sk_buff *skb, u16 parsing_flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_alloc_rx_sge(struct bnx2x *bp,
 			      struct bnx2x_fastpath *fp, u16 index)
 {
 	struct page *page = alloc_pages(GFP_ATOMIC, PAGES_PER_SGE_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 static int bnx2x_alloc_rx_sge(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 			      u16 index, gfp_t gfp_mask)
 {
 	struct page *page = alloc_pages(gfp_mask, PAGES_PER_SGE_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sw_rx_page *sw_buf = &fp->rx_page_ring[index];
 	struct eth_rx_sge *sge = &fp->rx_sge_ring[index];
@@ -690,7 +755,11 @@ static int bnx2x_fill_frag_skb(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 		/* If we fail to allocate a substitute page, we simply stop
 		   where we are and drop the whole packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = bnx2x_alloc_rx_sge(bp, fp, sge_idx);
+=======
+		err = bnx2x_alloc_rx_sge(bp, fp, sge_idx, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		err = bnx2x_alloc_rx_sge(bp, fp, sge_idx, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -700,7 +769,11 @@ static int bnx2x_fill_frag_skb(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Unmap the page as we r going to pass it to the stack */
+=======
+		/* Unmap the page as we're going to pass it to the stack */
+>>>>>>> v3.18
 =======
 		/* Unmap the page as we're going to pass it to the stack */
 >>>>>>> v3.18
@@ -742,6 +815,7 @@ static void bnx2x_frag_free(const struct bnx2x_fastpath *fp, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *bnx2x_frag_alloc(const struct bnx2x_fastpath *fp)
 {
 	if (fp->rx_frag_size)
@@ -749,6 +823,8 @@ static void *bnx2x_frag_alloc(const struct bnx2x_fastpath *fp)
 
 	return kmalloc(fp->rx_buf_size + NET_SKB_PAD, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 static void *bnx2x_frag_alloc(const struct bnx2x_fastpath *fp, gfp_t gfp_mask)
 {
 	if (fp->rx_frag_size) {
@@ -760,6 +836,9 @@ static void *bnx2x_frag_alloc(const struct bnx2x_fastpath *fp, gfp_t gfp_mask)
 	}
 
 	return kmalloc(fp->rx_buf_size + NET_SKB_PAD, gfp_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -842,7 +921,11 @@ static void bnx2x_tpa_stop(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 
 	/* Try to allocate the new data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_data = bnx2x_frag_alloc(fp);
+=======
+	new_data = bnx2x_frag_alloc(fp, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	new_data = bnx2x_frag_alloc(fp, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -867,8 +950,12 @@ static void bnx2x_tpa_stop(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 		skb_reserve(skb, pad + NET_SKB_PAD);
 		skb_put(skb, len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->rxhash = tpa_info->rxhash;
 		skb->l4_rxhash = tpa_info->l4_rxhash;
+=======
+		skb_set_hash(skb, tpa_info->rxhash, tpa_info->rxhash_type);
+>>>>>>> v3.18
 =======
 		skb_set_hash(skb, tpa_info->rxhash, tpa_info->rxhash_type);
 >>>>>>> v3.18
@@ -888,7 +975,10 @@ static void bnx2x_tpa_stop(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* put new data in bin */
@@ -906,8 +996,13 @@ drop:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_alloc_rx_data(struct bnx2x *bp,
 			       struct bnx2x_fastpath *fp, u16 index)
+=======
+static int bnx2x_alloc_rx_data(struct bnx2x *bp, struct bnx2x_fastpath *fp,
+			       u16 index, gfp_t gfp_mask)
+>>>>>>> v3.18
 =======
 static int bnx2x_alloc_rx_data(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 			       u16 index, gfp_t gfp_mask)
@@ -919,7 +1014,11 @@ static int bnx2x_alloc_rx_data(struct bnx2x *bp, struct bnx2x_fastpath *fp,
 	dma_addr_t mapping;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = bnx2x_frag_alloc(fp);
+=======
+	data = bnx2x_frag_alloc(fp, gfp_mask);
+>>>>>>> v3.18
 =======
 	data = bnx2x_frag_alloc(fp, gfp_mask);
 >>>>>>> v3.18
@@ -969,6 +1068,7 @@ void bnx2x_csum_validate(struct sk_buff *skb, union eth_rx_cqe *cqe,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 {
 	struct bnx2x *bp = fp->bp;
@@ -976,6 +1076,8 @@ int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 	u16 hw_comp_cons, sw_comp_cons, sw_comp_prod;
 	int rx_pkt = 0;
 =======
+=======
+>>>>>>> v3.18
 static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 {
 	struct bnx2x *bp = fp->bp;
@@ -984,12 +1086,16 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 	int rx_pkt = 0;
 	union eth_rx_cqe *cqe;
 	struct eth_fast_path_rx_cqe *cqe_fp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef BNX2X_STOP_ON_ERROR
 	if (unlikely(bp->panic))
 		return 0;
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* CQ "next element" is of the size of the regular element,
@@ -1001,6 +1107,10 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 	if (budget <= 0)
 		return rx_pkt;
 >>>>>>> v3.18
+=======
+	if (budget <= 0)
+		return rx_pkt;
+>>>>>>> v3.18
 
 	bd_cons = fp->rx_bd_cons;
 	bd_prod = fp->rx_bd_prod;
@@ -1008,6 +1118,7 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 	sw_comp_cons = fp->rx_comp_cons;
 	sw_comp_prod = fp->rx_comp_prod;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Memory barrier necessary as speculative reads of the rx
 	 * buffer can be ahead of the index in the status block
@@ -1024,6 +1135,8 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 		union eth_rx_cqe *cqe;
 		struct eth_fast_path_rx_cqe *cqe_fp;
 =======
+=======
+>>>>>>> v3.18
 	comp_ring_cons = RCQ_BD(sw_comp_cons);
 	cqe = &fp->rx_comp_ring[comp_ring_cons];
 	cqe_fp = &cqe->fast_path_cqe;
@@ -1034,13 +1147,21 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 	while (BNX2X_IS_CQE_COMPLETED(cqe_fp)) {
 		struct sw_rx_bd *rx_buf = NULL;
 		struct sk_buff *skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u8 cqe_fp_flags;
 		enum eth_rx_cqe_type cqe_fp_type;
 		u16 len, pad, queue;
 		u8 *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bool l4_rxhash;
+=======
+		u32 rxhash;
+		enum pkt_hash_types rxhash_type;
+>>>>>>> v3.18
 =======
 		u32 rxhash;
 		enum pkt_hash_types rxhash_type;
@@ -1052,6 +1173,7 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comp_ring_cons = RCQ_BD(sw_comp_cons);
 		bd_prod = RX_BD(bd_prod);
 		bd_cons = RX_BD(bd_cons);
@@ -1059,6 +1181,8 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 		cqe = &fp->rx_comp_ring[comp_ring_cons];
 		cqe_fp = &cqe->fast_path_cqe;
 =======
+=======
+>>>>>>> v3.18
 		bd_prod = RX_BD(bd_prod);
 		bd_cons = RX_BD(bd_cons);
 
@@ -1074,6 +1198,9 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 		 */
 		rmb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cqe_fp_flags = cqe_fp->type_error_flags;
 		cqe_fp_type = cqe_fp_flags & ETH_FAST_PATH_RX_CQE_TYPE;
@@ -1119,7 +1246,10 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 
 				goto next_rx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -1183,7 +1313,12 @@ static int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget)
 			bnx2x_reuse_rx_data(fp, bd_cons, bd_prod);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (likely(bnx2x_alloc_rx_data(bp, fp, bd_prod) == 0)) {
+=======
+			if (likely(bnx2x_alloc_rx_data(bp, fp, bd_prod,
+						       GFP_ATOMIC) == 0)) {
+>>>>>>> v3.18
 =======
 			if (likely(bnx2x_alloc_rx_data(bp, fp, bd_prod,
 						       GFP_ATOMIC) == 0)) {
@@ -1215,8 +1350,13 @@ reuse_rx:
 
 		/* Set Toeplitz hash for a none-LRO skb */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->rxhash = bnx2x_get_rxhash(bp, cqe_fp, &l4_rxhash);
 		skb->l4_rxhash = l4_rxhash;
+=======
+		rxhash = bnx2x_get_rxhash(bp, cqe_fp, &rxhash_type);
+		skb_set_hash(skb, rxhash, rxhash_type);
+>>>>>>> v3.18
 =======
 		rxhash = bnx2x_get_rxhash(bp, cqe_fp, &rxhash_type);
 		skb_set_hash(skb, rxhash, rxhash_type);
@@ -1231,22 +1371,31 @@ reuse_rx:
 		skb_record_rx_queue(skb, fp->rx_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Check if this packet was timestamped */
 		if (unlikely(cqe->fast_path_cqe.type_error_flags &
 			     (1 << ETH_FAST_PATH_RX_CQE_PTP_PKT_SHIFT)))
 			bnx2x_set_rx_ts(bp, skb);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (le16_to_cpu(cqe_fp->pars_flags.flags) &
 		    PARSING_FLAGS_VLAN)
 			__vlan_hwaccel_put_tag(skb, htons(ETH_P_8021Q),
 					       le16_to_cpu(cqe_fp->vlan_tag));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		napi_gro_receive(&fp->napi, skb);
 
 
 =======
+=======
+>>>>>>> v3.18
 
 		skb_mark_napi_id(skb, &fp->napi);
 
@@ -1254,6 +1403,9 @@ reuse_rx:
 			netif_receive_skb(skb);
 		else
 			napi_gro_receive(&fp->napi, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 next_rx:
 		rx_buf->data = NULL;
@@ -1267,9 +1419,12 @@ next_cqe:
 		sw_comp_cons = NEXT_RCQ_IDX(sw_comp_cons);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rx_pkt == budget)
 			break;
 =======
+=======
+>>>>>>> v3.18
 		/* mark CQE as free */
 		BNX2X_SEED_CQE(cqe_fp);
 
@@ -1279,6 +1434,9 @@ next_cqe:
 		comp_ring_cons = RCQ_BD(sw_comp_cons);
 		cqe = &fp->rx_comp_ring[comp_ring_cons];
 		cqe_fp = &cqe->fast_path_cqe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} /* while */
 
@@ -1316,8 +1474,11 @@ static irqreturn_t bnx2x_msix_fp_int(int irq, void *fp_cookie)
 
 	/* Handle Rx and Tx according to MSI-X vector */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prefetch(fp->rx_cons_sb);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_cos_in_tx_queue(fp, cos)
@@ -1380,6 +1541,7 @@ static void bnx2x_fill_report_data(struct bnx2x *bp,
 				   struct bnx2x_link_report_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 line_speed = bnx2x_get_mf_speed(bp);
 
 	memset(data, 0, sizeof(*data));
@@ -1404,6 +1566,8 @@ static void bnx2x_fill_report_data(struct bnx2x *bp,
 	if (bp->link_vars.flow_ctrl & BNX2X_FLOW_CTRL_TX)
 		__set_bit(BNX2X_LINK_REPORT_TX_FC_ON, &data->link_report_flags);
 =======
+=======
+>>>>>>> v3.18
 	memset(data, 0, sizeof(*data));
 
 	if (IS_PF(bp)) {
@@ -1436,6 +1600,9 @@ static void bnx2x_fill_report_data(struct bnx2x *bp,
 	} else { /* VF */
 		*data = bp->vf_link_vars;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1462,7 +1629,11 @@ void bnx2x_link_report(struct bnx2x *bp)
  * @bp:		driver handle
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * None atomic inmlementation.
+=======
+ * None atomic implementation.
+>>>>>>> v3.18
 =======
  * None atomic implementation.
 >>>>>>> v3.18
@@ -1495,11 +1666,17 @@ void __bnx2x_link_report(struct bnx2x *bp)
 	memcpy(&bp->last_reported_link, &cur_data, sizeof(cur_data));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* propagate status to VFs */
 	if (IS_PF(bp))
 		bnx2x_iov_link_update(bp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (test_bit(BNX2X_LINK_REPORT_LINK_DOWN,
 		     &cur_data.link_report_flags)) {
@@ -1616,7 +1793,11 @@ void bnx2x_init_rx_rings(struct bnx2x *bp)
 
 		if (!fp->disable_tpa) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Fill the per-aggregtion pool */
+=======
+			/* Fill the per-aggregation pool */
+>>>>>>> v3.18
 =======
 			/* Fill the per-aggregation pool */
 >>>>>>> v3.18
@@ -1627,7 +1808,12 @@ void bnx2x_init_rx_rings(struct bnx2x *bp)
 					&tpa_info->first_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				first_buf->data = bnx2x_frag_alloc(fp);
+=======
+				first_buf->data =
+					bnx2x_frag_alloc(fp, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 				first_buf->data =
 					bnx2x_frag_alloc(fp, GFP_KERNEL);
@@ -1654,7 +1840,12 @@ void bnx2x_init_rx_rings(struct bnx2x *bp)
 			     i < MAX_RX_SGE_CNT*NUM_RX_SGE_PAGES; i++) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (bnx2x_alloc_rx_sge(bp, fp, ring_prod) < 0) {
+=======
+				if (bnx2x_alloc_rx_sge(bp, fp, ring_prod,
+						       GFP_KERNEL) < 0) {
+>>>>>>> v3.18
 =======
 				if (bnx2x_alloc_rx_sge(bp, fp, ring_prod,
 						       GFP_KERNEL) < 0) {
@@ -1796,7 +1987,11 @@ static void bnx2x_free_rx_skbs(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_free_skbs_cnic(struct bnx2x *bp)
+=======
+static void bnx2x_free_skbs_cnic(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 static void bnx2x_free_skbs_cnic(struct bnx2x *bp)
 >>>>>>> v3.18
@@ -1913,8 +2108,13 @@ int bnx2x_enable_msix(struct bnx2x *bp)
 	   msix_vec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pci_enable_msix(bp->pdev, &bp->msix_table[0], msix_vec);
 
+=======
+	rc = pci_enable_msix_range(bp->pdev, &bp->msix_table[0],
+				   BNX2X_MIN_MSIX_VEC_CNT(bp), msix_vec);
+>>>>>>> v3.18
 =======
 	rc = pci_enable_msix_range(bp->pdev, &bp->msix_table[0],
 				   BNX2X_MIN_MSIX_VEC_CNT(bp), msix_vec);
@@ -1923,6 +2123,7 @@ int bnx2x_enable_msix(struct bnx2x *bp)
 	 * reconfigure number of tx/rx queues according to available
 	 * MSI-X vectors
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc >= BNX2X_MIN_MSIX_VEC_CNT(bp)) {
 		/* how less vectors we will have? */
@@ -1949,10 +2150,15 @@ int bnx2x_enable_msix(struct bnx2x *bp)
 		rc = pci_enable_msix(bp->pdev, &bp->msix_table[0], 1);
 		if (rc) {
 =======
+=======
+>>>>>>> v3.18
 	if (rc == -ENOSPC) {
 		/* Get by with single vector */
 		rc = pci_enable_msix_range(bp->pdev, &bp->msix_table[0], 1, 1);
 		if (rc < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			BNX2X_DEV_INFO("Single MSI-X is not attainable rc %d\n",
 				       rc);
@@ -1967,9 +2173,12 @@ int bnx2x_enable_msix(struct bnx2x *bp)
 		bp->num_queues = bp->num_ethernet_queues + bp->num_cnic_queues;
 	} else if (rc < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BNX2X_DEV_INFO("MSI-X is not attainable  rc %d\n", rc);
 		goto no_msix;
 =======
+=======
+>>>>>>> v3.18
 		BNX2X_DEV_INFO("MSI-X is not attainable rc %d\n", rc);
 		goto no_msix;
 	} else if (rc < msix_vec) {
@@ -1986,6 +2195,9 @@ int bnx2x_enable_msix(struct bnx2x *bp)
 
 		BNX2X_DEV_INFO("New queue configuration set: %d\n",
 			       bp->num_queues);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2087,7 +2299,11 @@ static int bnx2x_req_irq(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_setup_irqs(struct bnx2x *bp)
+=======
+static int bnx2x_setup_irqs(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 static int bnx2x_setup_irqs(struct bnx2x *bp)
 >>>>>>> v3.18
@@ -2124,13 +2340,19 @@ static void bnx2x_napi_enable_cnic(struct bnx2x *bp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_rx_queue_cnic(bp, i)
 		napi_enable(&bnx2x_fp(bp, i, napi));
 =======
+=======
+>>>>>>> v3.18
 	for_each_rx_queue_cnic(bp, i) {
 		bnx2x_fp_init_lock(&bp->fp[i]);
 		napi_enable(&bnx2x_fp(bp, i, napi));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2139,13 +2361,19 @@ static void bnx2x_napi_enable(struct bnx2x *bp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_eth_queue(bp, i)
 		napi_enable(&bnx2x_fp(bp, i, napi));
 =======
+=======
+>>>>>>> v3.18
 	for_each_eth_queue(bp, i) {
 		bnx2x_fp_init_lock(&bp->fp[i]);
 		napi_enable(&bnx2x_fp(bp, i, napi));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2154,14 +2382,20 @@ static void bnx2x_napi_disable_cnic(struct bnx2x *bp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_rx_queue_cnic(bp, i)
 		napi_disable(&bnx2x_fp(bp, i, napi));
 =======
+=======
+>>>>>>> v3.18
 	for_each_rx_queue_cnic(bp, i) {
 		napi_disable(&bnx2x_fp(bp, i, napi));
 		while (!bnx2x_fp_ll_disable(&bp->fp[i]))
 			usleep_range(1000, 2000);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2170,14 +2404,20 @@ static void bnx2x_napi_disable(struct bnx2x *bp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_eth_queue(bp, i)
 		napi_disable(&bnx2x_fp(bp, i, napi));
 =======
+=======
+>>>>>>> v3.18
 	for_each_eth_queue(bp, i) {
 		napi_disable(&bnx2x_fp(bp, i, napi));
 		while (!bnx2x_fp_ll_disable(&bp->fp[i]))
 			usleep_range(1000, 2000);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2202,7 +2442,12 @@ void bnx2x_netif_stop(struct bnx2x *bp, int disable_hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb)
+=======
+u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb,
+		       void *accel_priv, select_queue_fallback_t fallback)
+>>>>>>> v3.18
 =======
 u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb,
 		       void *accel_priv, select_queue_fallback_t fallback)
@@ -2229,7 +2474,11 @@ u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb,
 
 	/* select a non-FCoE queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __skb_tx_hash(dev, skb, BNX2X_NUM_ETH_QUEUES(bp));
+=======
+	return fallback(dev, skb) % BNX2X_NUM_ETH_QUEUES(bp);
+>>>>>>> v3.18
 =======
 	return fallback(dev, skb) % BNX2X_NUM_ETH_QUEUES(bp);
 >>>>>>> v3.18
@@ -2242,7 +2491,11 @@ void bnx2x_set_num_queues(struct bnx2x *bp)
 
 	/* override in STORAGE SD modes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MF_STORAGE_SD(bp) || IS_MF_FCOE_AFEX(bp))
+=======
+	if (IS_MF_STORAGE_ONLY(bp))
+>>>>>>> v3.18
 =======
 	if (IS_MF_STORAGE_ONLY(bp))
 >>>>>>> v3.18
@@ -2270,7 +2523,11 @@ void bnx2x_set_num_queues(struct bnx2x *bp)
  * If the actual number of Tx queues (for each CoS) is less than 16 then there
  * will be the holes at the end of each group of 16 ETh L2 indices (0..15,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 16..31,...) with indicies that are not coupled with any real Tx queue.
+=======
+ * 16..31,...) with indices that are not coupled with any real Tx queue.
+>>>>>>> v3.18
 =======
  * 16..31,...) with indices that are not coupled with any real Tx queue.
 >>>>>>> v3.18
@@ -2336,7 +2593,11 @@ static void bnx2x_set_rx_buf_size(struct bnx2x *bp)
 				  mtu +
 				  BNX2X_FW_RX_ALIGN_END;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Note : rx_buf_size doesnt take into account NET_SKB_PAD */
+=======
+		/* Note : rx_buf_size doesn't take into account NET_SKB_PAD */
+>>>>>>> v3.18
 =======
 		/* Note : rx_buf_size doesn't take into account NET_SKB_PAD */
 >>>>>>> v3.18
@@ -2348,7 +2609,11 @@ static void bnx2x_set_rx_buf_size(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_init_rss_pf(struct bnx2x *bp)
+=======
+static int bnx2x_init_rss(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 static int bnx2x_init_rss(struct bnx2x *bp)
 >>>>>>> v3.18
@@ -2357,7 +2622,11 @@ static int bnx2x_init_rss(struct bnx2x *bp)
 	u8 num_eth_queues = BNX2X_NUM_ETH_QUEUES(bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Prepare the initial contents fo the indirection table if RSS is
+=======
+	/* Prepare the initial contents for the indirection table if RSS is
+>>>>>>> v3.18
 =======
 	/* Prepare the initial contents for the indirection table if RSS is
 >>>>>>> v3.18
@@ -2380,8 +2649,13 @@ static int bnx2x_init_rss(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_config_rss_pf(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 			bool config_hash)
+=======
+int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
+	      bool config_hash, bool enable)
+>>>>>>> v3.18
 =======
 int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 	      bool config_hash, bool enable)
@@ -2401,6 +2675,7 @@ int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 	__set_bit(RAMROD_COMP_WAIT, &params.ramrod_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__set_bit(BNX2X_RSS_MODE_REGULAR, &params.rss_flags);
 
 	/* RSS configuration */
@@ -2413,6 +2688,8 @@ int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 	if (rss_obj->udp_rss_v6)
 		__set_bit(BNX2X_RSS_IPV6_UDP, &params.rss_flags);
 =======
+=======
+>>>>>>> v3.18
 	if (enable) {
 		__set_bit(BNX2X_RSS_MODE_REGULAR, &params.rss_flags);
 
@@ -2432,6 +2709,9 @@ int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 	} else {
 		__set_bit(BNX2X_RSS_MODE_DISABLED, &params.rss_flags);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Hash bits */
@@ -2442,12 +2722,15 @@ int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 	if (config_hash) {
 		/* RSS keys */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prandom_bytes(params.rss_key, sizeof(params.rss_key));
 		__set_bit(BNX2X_RSS_SET_SRCH, &params.rss_flags);
 	}
 
 	return bnx2x_config_rss(bp, &params);
 =======
+=======
+>>>>>>> v3.18
 		prandom_bytes(params.rss_key, T_ETH_RSS_KEY * 4);
 		__set_bit(BNX2X_RSS_SET_SRCH, &params.rss_flags);
 	}
@@ -2456,6 +2739,9 @@ int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 		return bnx2x_config_rss(bp, &params);
 	else
 		return bnx2x_vfpf_config_rss(bp, &params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2477,7 +2763,11 @@ static int bnx2x_init_hw(struct bnx2x *bp, u32 load_code)
 /*
  * Cleans the object that have internal lists without sending
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ramrods. Should be run when interrutps are disabled.
+=======
+ * ramrods. Should be run when interrupts are disabled.
+>>>>>>> v3.18
 =======
  * ramrods. Should be run when interrupts are disabled.
 >>>>>>> v3.18
@@ -2516,13 +2806,19 @@ void bnx2x_squeeze_objects(struct bnx2x *bp)
 	__set_bit(RAMROD_DRV_CLR_ONLY, &rparam.ramrod_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Add a DEL command... */
 =======
+=======
+>>>>>>> v3.18
 	/* Add a DEL command... - Since we're doing a driver cleanup only,
 	 * we take a lock surrounding both the initial send and the CONTs,
 	 * as we don't want a true completion to disrupt us in the middle.
 	 */
 	netif_addr_lock_bh(bp->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = bnx2x_config_mcast(bp, &rparam, BNX2X_MCAST_CMD_DEL);
 	if (rc < 0)
@@ -2536,6 +2832,10 @@ void bnx2x_squeeze_objects(struct bnx2x *bp)
 			BNX2X_ERR("Failed to clean multi-cast object: %d\n",
 				  rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			netif_addr_unlock_bh(bp->dev);
+>>>>>>> v3.18
 =======
 			netif_addr_unlock_bh(bp->dev);
 >>>>>>> v3.18
@@ -2545,6 +2845,10 @@ void bnx2x_squeeze_objects(struct bnx2x *bp)
 		rc = bnx2x_config_mcast(bp, &rparam, BNX2X_MCAST_CMD_CONT);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netif_addr_unlock_bh(bp->dev);
+>>>>>>> v3.18
 =======
 	netif_addr_unlock_bh(bp->dev);
 >>>>>>> v3.18
@@ -2637,13 +2941,19 @@ static int bnx2x_alloc_fw_stats_mem(struct bnx2x *bp)
 		sizeof(struct stats_counter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BNX2X_PCI_ALLOC(bp->fw_stats, &bp->fw_stats_mapping,
 			bp->fw_stats_data_sz + bp->fw_stats_req_sz);
 =======
+=======
+>>>>>>> v3.18
 	bp->fw_stats = BNX2X_PCI_ALLOC(&bp->fw_stats_mapping,
 				       bp->fw_stats_data_sz + bp->fw_stats_req_sz);
 	if (!bp->fw_stats)
 		goto alloc_mem_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set shortcuts */
@@ -2655,15 +2965,21 @@ static int bnx2x_alloc_fw_stats_mem(struct bnx2x *bp)
 		bp->fw_stats_req_sz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DP(BNX2X_MSG_SP, "statistics request base address set to %x %x",
 	   U64_HI(bp->fw_stats_req_mapping),
 	   U64_LO(bp->fw_stats_req_mapping));
 	DP(BNX2X_MSG_SP, "statistics data base address set to %x %x",
 =======
+=======
+>>>>>>> v3.18
 	DP(BNX2X_MSG_SP, "statistics request base address set to %x %x\n",
 	   U64_HI(bp->fw_stats_req_mapping),
 	   U64_LO(bp->fw_stats_req_mapping));
 	DP(BNX2X_MSG_SP, "statistics data base address set to %x %x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	   U64_HI(bp->fw_stats_data_mapping),
 	   U64_LO(bp->fw_stats_data_mapping));
@@ -2679,6 +2995,11 @@ alloc_mem_err:
 static int bnx2x_nic_load_request(struct bnx2x *bp, u32 *load_code)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 param;
+
+>>>>>>> v3.18
 =======
 	u32 param;
 
@@ -2696,10 +3017,13 @@ static int bnx2x_nic_load_request(struct bnx2x *bp, u32 *load_code)
 	BNX2X_DEV_INFO("drv_pulse 0x%x\n", bp->fw_drv_pulse_wr_seq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* load request */
 	(*load_code) = bnx2x_fw_command(bp, DRV_MSG_CODE_LOAD_REQ,
 					DRV_MSG_CODE_LOAD_REQ_WITH_LFA);
 =======
+=======
+>>>>>>> v3.18
 	param = DRV_MSG_CODE_LOAD_REQ_WITH_LFA;
 
 	if (IS_MF_SD(bp) && bnx2x_port_after_undi(bp))
@@ -2707,6 +3031,9 @@ static int bnx2x_nic_load_request(struct bnx2x *bp, u32 *load_code)
 
 	/* load request */
 	(*load_code) = bnx2x_fw_command(bp, DRV_MSG_CODE_LOAD_REQ, param);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* if mcp fails to respond we must abort */
@@ -2730,7 +3057,11 @@ static int bnx2x_nic_load_request(struct bnx2x *bp, u32 *load_code)
  * initialized the device including loading FW
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_nic_load_analyze_req(struct bnx2x *bp, u32 load_code)
+=======
+int bnx2x_compare_fw_ver(struct bnx2x *bp, u32 load_code, bool print_err)
+>>>>>>> v3.18
 =======
 int bnx2x_compare_fw_ver(struct bnx2x *bp, u32 load_code, bool print_err)
 >>>>>>> v3.18
@@ -2753,15 +3084,21 @@ int bnx2x_compare_fw_ver(struct bnx2x *bp, u32 load_code, bool print_err)
 		/* abort nic load if version mismatch */
 		if (my_fw != loaded_fw) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BNX2X_ERR("bnx2x with FW %x was already loaded which mismatches my %x FW. aborting\n",
 				  loaded_fw, my_fw);
 =======
+=======
+>>>>>>> v3.18
 			if (print_err)
 				BNX2X_ERR("bnx2x with FW %x was already loaded which mismatches my %x FW. Aborting\n",
 					  loaded_fw, my_fw);
 			else
 				BNX2X_DEV_INFO("bnx2x with FW %x was already loaded which mismatches my %x FW, possibly due to MF UNDI\n",
 					       loaded_fw, my_fw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EBUSY;
 		}
@@ -2776,6 +3113,7 @@ static int bnx2x_nic_load_no_mcp(struct bnx2x *bp, int port)
 
 	DP(NETIF_MSG_IFUP, "NO MCP - load counts[%d]      %d, %d, %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   path, load_count[path][0], load_count[path][1],
 	   load_count[path][2]);
 	load_count[path][0]++;
@@ -2787,6 +3125,8 @@ static int bnx2x_nic_load_no_mcp(struct bnx2x *bp, int port)
 		return FW_MSG_CODE_DRV_LOAD_COMMON;
 	else if (load_count[path][1 + port] == 1)
 =======
+=======
+>>>>>>> v3.18
 	   path, bnx2x_load_count[path][0], bnx2x_load_count[path][1],
 	   bnx2x_load_count[path][2]);
 	bnx2x_load_count[path][0]++;
@@ -2797,6 +3137,9 @@ static int bnx2x_nic_load_no_mcp(struct bnx2x *bp, int port)
 	if (bnx2x_load_count[path][0] == 1)
 		return FW_MSG_CODE_DRV_LOAD_COMMON;
 	else if (bnx2x_load_count[path][1 + port] == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return FW_MSG_CODE_DRV_LOAD_PORT;
 	else
@@ -2853,15 +3196,21 @@ static void bnx2x_bz_fp(struct bnx2x *bp, int index)
 {
 	struct bnx2x_fastpath *fp = &bp->fp[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int cos;
 	struct napi_struct orig_napi = fp->napi;
 	struct bnx2x_agg_info *orig_tpa_info = fp->tpa_info;
 =======
+=======
+>>>>>>> v3.18
 	int cos;
 	struct napi_struct orig_napi = fp->napi;
 	struct bnx2x_agg_info *orig_tpa_info = fp->tpa_info;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* bzero bnx2x_fastpath contents */
 	if (fp->tpa_info)
@@ -2889,8 +3238,12 @@ static void bnx2x_bz_fp(struct bnx2x *bp, int index)
 				BNX2X_NUM_ETH_QUEUES(bp) + index];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * set the tpa flag for each queue. The tpa flag determines the queue
+=======
+	/* set the tpa flag for each queue. The tpa flag determines the queue
+>>>>>>> v3.18
 =======
 	/* set the tpa flag for each queue. The tpa flag determines the queue
 >>>>>>> v3.18
@@ -2965,9 +3318,13 @@ int bnx2x_load_cnic(struct bnx2x *bp)
 
 	/* Initialize Rx filter. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_addr_lock_bh(bp->dev);
 	bnx2x_set_rx_mode(bp->dev);
 	netif_addr_unlock_bh(bp->dev);
+=======
+	bnx2x_set_rx_mode_inner(bp);
+>>>>>>> v3.18
 =======
 	bnx2x_set_rx_mode_inner(bp);
 >>>>>>> v3.18
@@ -2981,7 +3338,10 @@ int bnx2x_load_cnic(struct bnx2x *bp)
 		bnx2x_cnic_notify(bp, CNIC_CTL_START_CMD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DP(NETIF_MSG_IFUP, "Ending successfully CNIC-related load\n");
@@ -2997,8 +3357,12 @@ load_error_cnic1:
 	bnx2x_napi_disable_cnic(bp);
 	/* Update the number of queues without the cnic queues */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = bnx2x_set_real_num_queues(bp, 0);
 	if (rc)
+=======
+	if (bnx2x_set_real_num_queues(bp, 0))
+>>>>>>> v3.18
 =======
 	if (bnx2x_set_real_num_queues(bp, 0))
 >>>>>>> v3.18
@@ -3031,6 +3395,10 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 	bp->state = BNX2X_STATE_OPENING_WAIT4_LOAD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* zero the structure w/o any lock, before SP handler is initialized */
+>>>>>>> v3.18
 =======
 	/* zero the structure w/o any lock, before SP handler is initialized */
 >>>>>>> v3.18
@@ -3068,10 +3436,13 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Allocated memory for FW statistics  */
 	if (bnx2x_alloc_fw_stats_mem(bp))
 		LOAD_ERROR_EXIT(bp, load_error0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* need to be done after alloc mem, since it's self adjusting to amount
@@ -3084,11 +3455,17 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Allocated memory for FW statistics  */
 	if (bnx2x_alloc_fw_stats_mem(bp))
 		LOAD_ERROR_EXIT(bp, load_error0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* request pf to initialize status blocks */
 	if (IS_VF(bp)) {
@@ -3109,8 +3486,13 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 
 	/* configure multi cos mappings in kernel.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * this configuration may be overriden by a multi class queue discipline
 	 * or by a dcbx negotiation result.
+=======
+	 * this configuration may be overridden by a multi class queue
+	 * discipline or by a dcbx negotiation result.
+>>>>>>> v3.18
 =======
 	 * this configuration may be overridden by a multi class queue
 	 * discipline or by a dcbx negotiation result.
@@ -3136,7 +3518,11 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 
 			/* what did mcp say? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = bnx2x_nic_load_analyze_req(bp, load_code);
+=======
+			rc = bnx2x_compare_fw_ver(bp, load_code, true);
+>>>>>>> v3.18
 =======
 			rc = bnx2x_compare_fw_ver(bp, load_code, true);
 >>>>>>> v3.18
@@ -3208,6 +3594,7 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 		/* initialize FW coalescing state machines in RAM */
 		bnx2x_update_coalesce(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* setup the leading queue */
 		rc = bnx2x_setup_leading(bp);
@@ -3241,6 +3628,8 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* setup the leading queue */
@@ -3267,6 +3656,9 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 	if (rc) {
 		BNX2X_ERR("PF RSS init failed\n");
 		LOAD_ERROR_EXIT(bp, load_error3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3300,6 +3692,7 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 
 	/* Initialize Rx filter. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_addr_lock_bh(bp->dev);
 	bnx2x_set_rx_mode(bp->dev);
 	netif_addr_unlock_bh(bp->dev);
@@ -3309,6 +3702,8 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 	case LOAD_NORMAL:
 		/* Tx queue should be only reenabled */
 =======
+=======
+>>>>>>> v3.18
 	bnx2x_set_rx_mode_inner(bp);
 
 	if (bp->flags & PTP_SUPPORTED) {
@@ -3319,6 +3714,9 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 	switch (load_mode) {
 	case LOAD_NORMAL:
 		/* Tx queue should be only re-enabled */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		netif_tx_wake_all_queues(bp->dev);
 		break;
@@ -3349,6 +3747,12 @@ int bnx2x_nic_load(struct bnx2x *bp, int load_mode)
 		bnx2x_load_cnic(bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_PF(bp))
+		bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_GET_DRV_VERSION, 0);
+
+>>>>>>> v3.18
 =======
 	if (IS_PF(bp))
 		bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_GET_DRV_VERSION, 0);
@@ -3410,8 +3814,13 @@ load_error1:
 		bnx2x_clear_pf_load(bp);
 load_error0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2x_free_fp_mem(bp);
 	bnx2x_free_fw_stats_mem(bp);
+=======
+	bnx2x_free_fw_stats_mem(bp);
+	bnx2x_free_fp_mem(bp);
+>>>>>>> v3.18
 =======
 	bnx2x_free_fw_stats_mem(bp);
 	bnx2x_free_fp_mem(bp);
@@ -3476,7 +3885,11 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 
 	/* Nothing to do during unload if previous bnx2x_nic_load()
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * have not completed succesfully - all resourses are released.
+=======
+	 * have not completed successfully - all resources are released.
+>>>>>>> v3.18
 =======
 	 * have not completed successfully - all resources are released.
 >>>>>>> v3.18
@@ -3495,6 +3908,12 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 	smp_mb();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* indicate to VFs that the PF is going down */
+	bnx2x_iov_channel_down(bp);
+
+>>>>>>> v3.18
 =======
 	/* indicate to VFs that the PF is going down */
 	bnx2x_iov_channel_down(bp);
@@ -3535,10 +3954,16 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 		bnx2x_send_unload_req(bp, unload_mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Prevent transactions to host from the functions on the
 		 * engine that doesn't reset global blocks in case of global
 		 * attention once gloabl blocks are reset and gates are opened
+=======
+		/* Prevent transactions to host from the functions on the
+		 * engine that doesn't reset global blocks in case of global
+		 * attention once global blocks are reset and gates are opened
+>>>>>>> v3.18
 =======
 		/* Prevent transactions to host from the functions on the
 		 * engine that doesn't reset global blocks in case of global
@@ -3565,7 +3990,11 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * At this stage no more interrupts will arrive so we may safly clean
+=======
+	 * At this stage no more interrupts will arrive so we may safely clean
+>>>>>>> v3.18
 =======
 	 * At this stage no more interrupts will arrive so we may safely clean
 >>>>>>> v3.18
@@ -3580,11 +4009,17 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 	bp->port.pmf = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* clear pending work in rtnl task */
 	bp->sp_rtnl_state = 0;
 	smp_mb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Free SKBs, SGEs, TPA pool and driver internals */
 	bnx2x_free_skbs(bp);
@@ -3601,12 +4036,15 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 		if (CNIC_LOADED(bp))
 			bnx2x_free_mem_cnic(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bnx2x_free_mem(bp);
 	}
 	bp->state = BNX2X_STATE_CLOSED;
 	bp->cnic_loaded = false;
 
 =======
+=======
+>>>>>>> v3.18
 	}
 	bnx2x_free_mem(bp);
 
@@ -3617,6 +4055,9 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 	if (IS_PF(bp))
 		bnx2x_update_mng_version(bp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Check if there are pending parity attentions. If there are - set
 	 * RECOVERY_IN_PROGRESS.
@@ -3630,7 +4071,10 @@ int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* The last driver must disable a "close the gate" if there is no
@@ -3652,7 +4096,11 @@ int bnx2x_set_power_state(struct bnx2x *bp, pci_power_t state)
 
 	/* If there is no power capability, silently succeed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bp->pm_cap) {
+=======
+	if (!bp->pdev->pm_cap) {
+>>>>>>> v3.18
 =======
 	if (!bp->pdev->pm_cap) {
 >>>>>>> v3.18
@@ -3661,17 +4109,23 @@ int bnx2x_set_power_state(struct bnx2x *bp, pci_power_t state)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_word(bp->pdev, bp->pm_cap + PCI_PM_CTRL, &pmcsr);
 
 	switch (state) {
 	case PCI_D0:
 		pci_write_config_word(bp->pdev, bp->pm_cap + PCI_PM_CTRL,
 =======
+=======
+>>>>>>> v3.18
 	pci_read_config_word(bp->pdev, bp->pdev->pm_cap + PCI_PM_CTRL, &pmcsr);
 
 	switch (state) {
 	case PCI_D0:
 		pci_write_config_word(bp->pdev, bp->pdev->pm_cap + PCI_PM_CTRL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      ((pmcsr & ~PCI_PM_CTRL_STATE_MASK) |
 				       PCI_PM_CTRL_PME_STATUS));
@@ -3697,7 +4151,11 @@ int bnx2x_set_power_state(struct bnx2x *bp, pci_power_t state)
 			pmcsr |= PCI_PM_CTRL_PME_ENABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_write_config_word(bp->pdev, bp->pm_cap + PCI_PM_CTRL,
+=======
+		pci_write_config_word(bp->pdev, bp->pdev->pm_cap + PCI_PM_CTRL,
+>>>>>>> v3.18
 =======
 		pci_write_config_word(bp->pdev, bp->pdev->pm_cap + PCI_PM_CTRL,
 >>>>>>> v3.18
@@ -3719,7 +4177,11 @@ int bnx2x_set_power_state(struct bnx2x *bp, pci_power_t state)
  * net_device service functions
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_poll(struct napi_struct *napi, int budget)
+=======
+static int bnx2x_poll(struct napi_struct *napi, int budget)
+>>>>>>> v3.18
 =======
 static int bnx2x_poll(struct napi_struct *napi, int budget)
 >>>>>>> v3.18
@@ -3738,6 +4200,11 @@ static int bnx2x_poll(struct napi_struct *napi, int budget)
 		}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (!bnx2x_fp_lock_napi(fp))
+			return work_done;
+>>>>>>> v3.18
 =======
 		if (!bnx2x_fp_lock_napi(fp))
 			return work_done;
@@ -3752,6 +4219,7 @@ static int bnx2x_poll(struct napi_struct *napi, int budget)
 
 			/* must not complete if we consumed full budget */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (work_done >= budget)
 				break;
 		}
@@ -3759,6 +4227,8 @@ static int bnx2x_poll(struct napi_struct *napi, int budget)
 		/* Fall out from the NAPI loop if needed */
 		if (!(bnx2x_has_rx_work(fp) || bnx2x_has_tx_work(fp))) {
 =======
+=======
+>>>>>>> v3.18
 			if (work_done >= budget) {
 				bnx2x_fp_unlock_napi(fp);
 				break;
@@ -3768,6 +4238,9 @@ static int bnx2x_poll(struct napi_struct *napi, int budget)
 		/* Fall out from the NAPI loop if needed */
 		if (!bnx2x_fp_unlock_napi(fp) &&
 		    !(bnx2x_has_rx_work(fp) || bnx2x_has_tx_work(fp))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* No need to update SB for FCoE L2 ring as long as
@@ -3811,7 +4284,10 @@ static int bnx2x_poll(struct napi_struct *napi, int budget)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 /* must be called with local_bh_disable()d */
 int bnx2x_low_latency_recv(struct napi_struct *napi)
@@ -3838,6 +4314,9 @@ int bnx2x_low_latency_recv(struct napi_struct *napi)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* we split the first BD into headers and data BDs
  * to ease the pain of our fellow microcode engineers
@@ -3935,6 +4414,7 @@ static u32 bnx2x_xmit_type(struct bnx2x *bp, struct sk_buff *skb)
 		rc |= XMIT_CSUM_TCP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb_is_gso_v6(skb)) {
 		rc |= (XMIT_GSO_V6 | XMIT_CSUM_TCP);
 		if (rc & XMIT_CSUM_ENC)
@@ -3944,6 +4424,8 @@ static u32 bnx2x_xmit_type(struct bnx2x *bp, struct sk_buff *skb)
 		if (rc & XMIT_CSUM_ENC)
 			rc |= XMIT_GSO_ENC_V4;
 =======
+=======
+>>>>>>> v3.18
 	if (skb_is_gso(skb)) {
 		if (skb_is_gso_v6(skb)) {
 			rc |= (XMIT_GSO_V6 | XMIT_CSUM_TCP);
@@ -3954,6 +4436,9 @@ static u32 bnx2x_xmit_type(struct bnx2x *bp, struct sk_buff *skb)
 			if (rc & XMIT_CSUM_ENC)
 				rc |= XMIT_GSO_ENC_V4;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4041,6 +4526,7 @@ exit_lbl:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bnx2x_set_pbd_gso_e2(struct sk_buff *skb, u32 *parsing_data,
 				 u32 xmit_type)
 {
@@ -4063,6 +4549,8 @@ static void bnx2x_set_pbd_gso_e2(struct sk_buff *skb, u32 *parsing_data,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * bnx2x_set_pbd_gso - update PBD in GSO case.
  *
@@ -4073,7 +4561,10 @@ static void bnx2x_set_pbd_gso_e2(struct sk_buff *skb, u32 *parsing_data,
 static void bnx2x_set_pbd_gso(struct sk_buff *skb,
 			      struct eth_tx_parse_bd_e1x *pbd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct eth_tx_start_bd *tx_start_bd,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			      u32 xmit_type)
@@ -4089,9 +4580,12 @@ static void bnx2x_set_pbd_gso(struct sk_buff *skb,
 						   ip_hdr(skb)->daddr,
 						   0, IPPROTO_TCP, 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* GSO on 57710/57711 needs FW to calculate IP checksum */
 		tx_start_bd->bd_flags.as_bitfield |= ETH_TX_BD_FLAGS_IP_CSUM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -4262,6 +4756,7 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 	if (xmit_type & XMIT_CSUM_V4) {
 		struct iphdr *iph = ip_hdr(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pbd2->fw_ip_csum_wo_len_flags_frag =
 			bswab16(csum_fold((~iph->check) -
 					  iph->tot_len - iph->frag_off));
@@ -4269,6 +4764,8 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 		pbd2->fw_ip_hdr_to_payload_w =
 			hlen_w - ((sizeof(struct ipv6hdr)) >> 1);
 =======
+=======
+>>>>>>> v3.18
 		u32 csum = (__force u32)(~iph->check) -
 			   (__force u32)iph->tot_len -
 			   (__force u32)iph->frag_off;
@@ -4282,6 +4779,9 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 			hlen_w - ((sizeof(struct ipv6hdr)) >> 1);
 		pbd_e2->data.tunnel_data.flags |=
 			ETH_TUNNEL_DATA_IP_HDR_TYPE_OUTER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4290,7 +4790,12 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 	pbd2->tcp_flags = pbd_tcp_flags(inner_tcp_hdr(skb));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xmit_type & XMIT_GSO_V4) {
+=======
+	/* inner IP header info */
+	if (xmit_type & XMIT_CSUM_ENC_V4) {
+>>>>>>> v3.18
 =======
 	/* inner IP header info */
 	if (xmit_type & XMIT_CSUM_ENC_V4) {
@@ -4303,8 +4808,11 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 					inner_ip_hdr(skb)->daddr,
 					0, IPPROTO_TCP, 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		outerip_len = ip_hdr(skb)->ihl << 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -4320,8 +4828,11 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 	*global_data |=
 		outerip_off |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(!!(xmit_type & XMIT_CSUM_V6) <<
 			ETH_TX_PARSE_2ND_BD_IP_HDR_TYPE_OUTER_SHIFT) |
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		(outerip_len <<
@@ -4336,7 +4847,10 @@ static void bnx2x_update_pbds_gso_enc(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void bnx2x_set_ipv6_ext_e2(struct sk_buff *skb, u32 *parsing_data,
 					 u32 xmit_type)
 {
@@ -4354,6 +4868,9 @@ static inline void bnx2x_set_ipv6_ext_e2(struct sk_buff *skb, u32 *parsing_data,
 		*parsing_data |= ETH_TX_PARSE_BD_E2_IPV6_WITH_EXT_HDR;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* called with netif_tx_lock
  * bnx2x_tx_int() runs without netif_tx_lock unless it needs to call
@@ -4399,7 +4916,11 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	   txq_index, fp_index, txdata_index); */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable this debug print to view the tranmission details
+=======
+	/* enable this debug print to view the transmission details
+>>>>>>> v3.18
 =======
 	/* enable this debug print to view the transmission details
 >>>>>>> v3.18
@@ -4492,7 +5013,10 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	tx_start_bd->bd_flags.as_bitfield = ETH_TX_BD_FLAGS_START_BD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP)) {
 		if (!(bp->flags & TX_TIMESTAMPING_EN)) {
 			BNX2X_ERR("Tx timestamping was not enabled, this packet will not be timestamped\n");
@@ -4507,6 +5031,9 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* header nbd: indirectly zero other flags! */
 	tx_start_bd->general_data = 1 << ETH_TX_START_BD_HDR_NBDS_SHIFT;
@@ -4530,6 +5057,7 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		 * for fw to enforce it
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_VF(bp))
 			tx_start_bd->vlan_or_ethertype =
 				cpu_to_le16(ntohs(eth->h_proto));
@@ -4537,6 +5065,8 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 			/* used by FW for packet accounting */
 			tx_start_bd->vlan_or_ethertype = cpu_to_le16(pkt_prod);
 =======
+=======
+>>>>>>> v3.18
 #ifndef BNX2X_STOP_ON_ERROR
 		if (IS_VF(bp))
 #endif
@@ -4547,6 +5077,9 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 			/* used by FW for packet accounting */
 			tx_start_bd->vlan_or_ethertype = cpu_to_le16(pkt_prod);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4606,12 +5139,18 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Add the macs to the parsing BD this is a vf */
 =======
+=======
+>>>>>>> v3.18
 		bnx2x_set_ipv6_ext_e2(skb, &pbd_e2_parsing_data, xmit_type);
 		/* Add the macs to the parsing BD if this is a vf or if
 		 * Tx Switching is enabled.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_VF(bp)) {
 			/* override GRE parameters in BD */
@@ -4625,7 +5164,10 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 					      &pbd_e2->data.mac_addr.dst_lo,
 					      eth->h_dest);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			if (bp->flags & TX_SWITCHING)
 				bnx2x_set_fw_mac_addr(
@@ -4642,6 +5184,9 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 					      &pbd_e2->data.mac_addr.src_lo,
 					      eth->h_source);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -4690,17 +5235,23 @@ netdev_tx_t bnx2x_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		}
 		if (!CHIP_IS_E1x(bp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bnx2x_set_pbd_gso_e2(skb, &pbd_e2_parsing_data,
 					     xmit_type);
 		else
 			bnx2x_set_pbd_gso(skb, pbd_e1x, first_bd, xmit_type);
 =======
+=======
+>>>>>>> v3.18
 			pbd_e2_parsing_data |=
 				(skb_shinfo(skb)->gso_size <<
 				 ETH_TX_PARSE_BD_E2_LSO_MSS_SHIFT) &
 				 ETH_TX_PARSE_BD_E2_LSO_MSS;
 		else
 			bnx2x_set_pbd_gso(skb, pbd_e1x, xmit_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4853,7 +5404,11 @@ int bnx2x_setup_tc(struct net_device *dev, u8 num_tc)
 	ASSERT_RTNL();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* no traffic classes requested. aborting */
+=======
+	/* no traffic classes requested. Aborting */
+>>>>>>> v3.18
 =======
 	/* no traffic classes requested. Aborting */
 >>>>>>> v3.18
@@ -4865,7 +5420,11 @@ int bnx2x_setup_tc(struct net_device *dev, u8 num_tc)
 	/* requested to support too many traffic classes */
 	if (num_tc > bp->max_cos) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BNX2X_ERR("support for too many traffic classes requested: %d. max supported is %d\n",
+=======
+		BNX2X_ERR("support for too many traffic classes requested: %d. Max supported is %d\n",
+>>>>>>> v3.18
 =======
 		BNX2X_ERR("support for too many traffic classes requested: %d. Max supported is %d\n",
 >>>>>>> v3.18
@@ -4888,8 +5447,12 @@ int bnx2x_setup_tc(struct net_device *dev, u8 num_tc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Use this configuration to diffrentiate tc0 from other COSes
+=======
+	/* Use this configuration to differentiate tc0 from other COSes
+>>>>>>> v3.18
 =======
 	/* Use this configuration to differentiate tc0 from other COSes
 >>>>>>> v3.18
@@ -4923,7 +5486,11 @@ int bnx2x_change_mac_addr(struct net_device *dev, void *p)
 	int rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bnx2x_is_valid_ether_addr(bp, addr->sa_data)) {
+=======
+	if (!is_valid_ether_addr(addr->sa_data)) {
+>>>>>>> v3.18
 =======
 	if (!is_valid_ether_addr(addr->sa_data)) {
 >>>>>>> v3.18
@@ -4932,9 +5499,14 @@ int bnx2x_change_mac_addr(struct net_device *dev, void *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((IS_MF_STORAGE_SD(bp) || IS_MF_FCOE_AFEX(bp)) &&
 	    !is_zero_ether_addr(addr->sa_data)) {
 		BNX2X_ERR("Can't configure non-zero address on iSCSI or FCoE functions in MF-SD mode\n");
+=======
+	if (IS_MF_STORAGE_ONLY(bp)) {
+		BNX2X_ERR("Can't change address on STORAGE ONLY function\n");
+>>>>>>> v3.18
 =======
 	if (IS_MF_STORAGE_ONLY(bp)) {
 		BNX2X_ERR("Can't change address on STORAGE ONLY function\n");
@@ -5023,7 +5595,11 @@ static void bnx2x_free_fp_mem_at(struct bnx2x *bp, int fp_index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_free_fp_mem_cnic(struct bnx2x *bp)
+=======
+static void bnx2x_free_fp_mem_cnic(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 static void bnx2x_free_fp_mem_cnic(struct bnx2x *bp)
 >>>>>>> v3.18
@@ -5072,7 +5648,11 @@ static int bnx2x_alloc_rx_bds(struct bnx2x_fastpath *fp,
 	 */
 	for (i = 0; i < rx_ring_size; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bnx2x_alloc_rx_data(bp, fp, ring_prod) < 0) {
+=======
+		if (bnx2x_alloc_rx_data(bp, fp, ring_prod, GFP_KERNEL) < 0) {
+>>>>>>> v3.18
 =======
 		if (bnx2x_alloc_rx_data(bp, fp, ring_prod, GFP_KERNEL) < 0) {
 >>>>>>> v3.18
@@ -5126,8 +5706,12 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 	int rx_ring_size = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bp->rx_ring_size &&
 	    (IS_MF_STORAGE_SD(bp) || IS_MF_FCOE_AFEX(bp))) {
+=======
+	if (!bp->rx_ring_size && IS_MF_STORAGE_ONLY(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bp->rx_ring_size && IS_MF_STORAGE_ONLY(bp)) {
 >>>>>>> v3.18
@@ -5163,6 +5747,7 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 	if (!IS_FCOE_IDX(index)) {
 		/* status blocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!CHIP_IS_E1x(bp))
 			BNX2X_PCI_ALLOC(sb->e2_sb,
 				&bnx2x_fp(bp, index, status_blk_mapping),
@@ -5172,6 +5757,8 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 				&bnx2x_fp(bp, index, status_blk_mapping),
 			    sizeof(struct host_hc_status_block_e1x));
 =======
+=======
+>>>>>>> v3.18
 		if (!CHIP_IS_E1x(bp)) {
 			sb->e2_sb = BNX2X_PCI_ALLOC(&bnx2x_fp(bp, index, status_blk_mapping),
 						    sizeof(struct host_hc_status_block_e2));
@@ -5183,6 +5770,9 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 			if (!sb->e1x_sb)
 				goto alloc_mem_err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -5203,12 +5793,15 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 			   index, cos);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BNX2X_ALLOC(txdata->tx_buf_ring,
 				sizeof(struct sw_tx_bd) * NUM_TX_BD);
 			BNX2X_PCI_ALLOC(txdata->tx_desc_ring,
 				&txdata->tx_desc_mapping,
 				sizeof(union eth_tx_bd_types) * NUM_TX_BD);
 =======
+=======
+>>>>>>> v3.18
 			txdata->tx_buf_ring = kcalloc(NUM_TX_BD,
 						      sizeof(struct sw_tx_bd),
 						      GFP_KERNEL);
@@ -5218,6 +5811,9 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 							       sizeof(union eth_tx_bd_types) * NUM_TX_BD);
 			if (!txdata->tx_desc_ring)
 				goto alloc_mem_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -5225,6 +5821,7 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 	/* Rx */
 	if (!skip_rx_queue(bp, index)) {
 		/* fastpath rx rings: rx_buf rx_desc rx_comp */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		BNX2X_ALLOC(bnx2x_fp(bp, index, rx_buf_ring),
 				sizeof(struct sw_rx_bd) * NUM_RX_BD);
@@ -5244,6 +5841,8 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 				&bnx2x_fp(bp, index, rx_sge_mapping),
 				BCM_PAGE_SIZE * NUM_RX_SGE_PAGES);
 =======
+=======
+>>>>>>> v3.18
 		bnx2x_fp(bp, index, rx_buf_ring) =
 			kcalloc(NUM_RX_BD, sizeof(struct sw_rx_bd), GFP_KERNEL);
 		if (!bnx2x_fp(bp, index, rx_buf_ring))
@@ -5272,6 +5871,9 @@ static int bnx2x_alloc_fp_mem_at(struct bnx2x *bp, int index)
 					BCM_PAGE_SIZE * NUM_RX_SGE_PAGES);
 		if (!bnx2x_fp(bp, index, rx_sge_ring))
 			goto alloc_mem_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* RX BD ring */
 		bnx2x_set_next_page_rx_bd(fp);
@@ -5305,7 +5907,11 @@ alloc_mem_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp)
+=======
+static int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 static int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp)
 >>>>>>> v3.18
@@ -5322,7 +5928,11 @@ static int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bnx2x_alloc_fp_mem(struct bnx2x *bp)
+=======
+static int bnx2x_alloc_fp_mem(struct bnx2x *bp)
+>>>>>>> v3.18
 =======
 static int bnx2x_alloc_fp_mem(struct bnx2x *bp)
 >>>>>>> v3.18
@@ -5455,7 +6065,10 @@ alloc_err:
 	bnx2x_free_mem_bp(bp);
 	return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -5500,7 +6113,10 @@ int bnx2x_get_cur_phy_idx(struct bnx2x *bp)
 
 	return sel_phy_idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -5579,7 +6195,11 @@ netdev_features_t bnx2x_fix_features(struct net_device *dev,
 
 	/* TPA requires Rx CSUM offloading */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(features & NETIF_F_RXCSUM) || bp->disable_tpa) {
+=======
+	if (!(features & NETIF_F_RXCSUM)) {
+>>>>>>> v3.18
 =======
 	if (!(features & NETIF_F_RXCSUM)) {
 >>>>>>> v3.18
@@ -5588,11 +6208,17 @@ netdev_features_t bnx2x_fix_features(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Note: do not disable SW GRO in kernel when HW GRO is off */
 	if (bp->disable_tpa)
 		features &= ~NETIF_F_LRO;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return features;
 }
@@ -5602,6 +6228,10 @@ int bnx2x_set_features(struct net_device *dev, netdev_features_t features)
 	struct bnx2x *bp = netdev_priv(dev);
 	u32 flags = bp->flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 changes;
+>>>>>>> v3.18
 =======
 	u32 changes;
 >>>>>>> v3.18
@@ -5630,11 +6260,14 @@ int bnx2x_set_features(struct net_device *dev, netdev_features_t features)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flags ^ bp->flags) {
 		bp->flags = flags;
 		bnx2x_reload = true;
 	}
 =======
+=======
+>>>>>>> v3.18
 	changes = flags ^ bp->flags;
 
 	/* if GRO is changed while LRO is enabled, don't force a reload */
@@ -5649,6 +6282,9 @@ int bnx2x_set_features(struct net_device *dev, netdev_features_t features)
 		bnx2x_reload = true;
 
 	bp->flags = flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bnx2x_reload) {
@@ -5670,12 +6306,17 @@ void bnx2x_tx_timeout(struct net_device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_mb__before_clear_bit();
 	set_bit(BNX2X_SP_RTNL_TX_TIMEOUT, &bp->sp_rtnl_state);
 	smp_mb__after_clear_bit();
 
 	/* This allows the netif to be shutdown gracefully before resetting */
 	schedule_delayed_work(&bp->sp_rtnl_task, 0);
+=======
+	/* This allows the netif to be shutdown gracefully before resetting */
+	bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_TX_TIMEOUT, 0);
+>>>>>>> v3.18
 =======
 	/* This allows the netif to be shutdown gracefully before resetting */
 	bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_TX_TIMEOUT, 0);
@@ -5750,11 +6391,14 @@ int bnx2x_resume(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void bnx2x_set_ctx_validation(struct bnx2x *bp, struct eth_context *cxt,
 			      u32 cid)
 {
 =======
+=======
+>>>>>>> v3.18
 void bnx2x_set_ctx_validation(struct bnx2x *bp, struct eth_context *cxt,
 			      u32 cid)
 {
@@ -5763,6 +6407,9 @@ void bnx2x_set_ctx_validation(struct bnx2x *bp, struct eth_context *cxt,
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* ustorm cxt validation */
 	cxt->ustorm_ag_context.cdu_usage =
@@ -5779,7 +6426,10 @@ static void storm_memset_hc_timeout(struct bnx2x *bp, u8 port,
 				    u8 ticks)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 addr = BAR_CSTRORM_INTMEM +
@@ -5819,7 +6469,10 @@ void bnx2x_update_coalesce_sb_index(struct bnx2x *bp, u8 fw_sb_id,
 	storm_memset_hc_disable(bp, port, fw_sb_id, sb_index, disable);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void bnx2x_schedule_sp_rtnl(struct bnx2x *bp, enum sp_rtnl_flag flag,
 			    u32 verbose)
@@ -5832,4 +6485,7 @@ void bnx2x_schedule_sp_rtnl(struct bnx2x *bp, enum sp_rtnl_flag flag,
 	schedule_delayed_work(&bp->sp_rtnl_task, 0);
 }
 EXPORT_SYMBOL(bnx2x_schedule_sp_rtnl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

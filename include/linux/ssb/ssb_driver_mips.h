@@ -21,7 +21,10 @@ struct ssb_pflash {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SSB_SFLASH
 struct ssb_sflash {
 	bool present;
@@ -34,6 +37,9 @@ struct ssb_sflash {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ssb_mipscore {
 	struct ssb_device *dev;
@@ -43,6 +49,12 @@ struct ssb_mipscore {
 
 	struct ssb_pflash pflash;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SSB_SFLASH
+	struct ssb_sflash sflash;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SSB_SFLASH
 	struct ssb_sflash sflash;

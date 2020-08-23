@@ -91,7 +91,10 @@ static int adxrs450_spi_read_reg_16(struct iio_dev *indio_dev,
 				    u16 *val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_message msg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct adxrs450_state *st = iio_priv(indio_dev);
@@ -118,10 +121,14 @@ static int adxrs450_spi_read_reg_16(struct iio_dev *indio_dev,
 
 	st->tx = cpu_to_be32(tx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_message_init(&msg);
 	spi_message_add_tail(&xfers[0], &msg);
 	spi_message_add_tail(&xfers[1], &msg);
 	ret = spi_sync(st->us, &msg);
+=======
+	ret = spi_sync_transfer(st->us, xfers, ARRAY_SIZE(xfers));
+>>>>>>> v3.18
 =======
 	ret = spi_sync_transfer(st->us, xfers, ARRAY_SIZE(xfers));
 >>>>>>> v3.18
@@ -177,7 +184,10 @@ static int adxrs450_spi_write_reg_16(struct iio_dev *indio_dev,
 static int adxrs450_spi_sensor_data(struct iio_dev *indio_dev, s16 *val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_message msg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct adxrs450_state *st = iio_priv(indio_dev);
@@ -199,10 +209,14 @@ static int adxrs450_spi_sensor_data(struct iio_dev *indio_dev, s16 *val)
 	st->tx = cpu_to_be32(ADXRS450_SENSOR_DATA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_message_init(&msg);
 	spi_message_add_tail(&xfers[0], &msg);
 	spi_message_add_tail(&xfers[1], &msg);
 	ret = spi_sync(st->us, &msg);
+=======
+	ret = spi_sync_transfer(st->us, xfers, ARRAY_SIZE(xfers));
+>>>>>>> v3.18
 =======
 	ret = spi_sync_transfer(st->us, xfers, ARRAY_SIZE(xfers));
 >>>>>>> v3.18
@@ -369,7 +383,10 @@ static int adxrs450_read_raw(struct iio_dev *indio_dev,
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case IIO_CHAN_INFO_QUADRATURE_CORRECTION_RAW:
@@ -444,11 +461,17 @@ static int adxrs450_probe(struct spi_device *spi)
 
 	/* setup the industrialio driver allocated elements */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -469,9 +492,15 @@ static int adxrs450_probe(struct spi_device *spi)
 	indio_dev->name = spi->dev.driver->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
+=======
+	ret = devm_iio_device_register(&spi->dev, indio_dev);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = devm_iio_device_register(&spi->dev, indio_dev);
 	if (ret)
@@ -481,6 +510,7 @@ static int adxrs450_probe(struct spi_device *spi)
 	/* Get the device into a sane initial state */
 	ret = adxrs450_initial_setup(indio_dev);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_initial;
 	return 0;
@@ -497,6 +527,9 @@ static int adxrs450_remove(struct spi_device *spi)
 {
 	iio_device_unregister(spi_get_drvdata(spi));
 	iio_device_free(spi_get_drvdata(spi));
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -518,7 +551,10 @@ static struct spi_driver adxrs450_driver = {
 	},
 	.probe = adxrs450_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = adxrs450_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= adxrs450_id,

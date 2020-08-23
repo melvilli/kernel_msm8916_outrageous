@@ -18,6 +18,10 @@
 #include <asm/bootinfo.h>
 #include <asm/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -117,6 +121,11 @@ void __init prom_init(void)
 
 	add_memory_region(0x0, memsz, BOOT_MEM_RAM);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	setup_8250_early_printk_port(CKSEG1ADDR(0x1c800000), 0, 0);
+>>>>>>> v3.18
 =======
 
 	setup_8250_early_printk_port(CKSEG1ADDR(0x1c800000), 0, 0);

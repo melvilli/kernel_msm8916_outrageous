@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -135,11 +139,14 @@ void *acpi_ut_allocate_and_track(acpi_size size,
 	acpi_status status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allocation =
 	    acpi_ut_allocate(size + sizeof(struct acpi_debug_mem_header),
 			     component, module, line);
 	if (!allocation) {
 =======
+=======
+>>>>>>> v3.18
 	/* Check for an inadvertent size of zero bytes */
 
 	if (!size) {
@@ -157,6 +164,9 @@ void *acpi_ut_allocate_and_track(acpi_size size,
 		ACPI_WARNING((module, line,
 			      "Could not allocate size %u", (u32)size));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return (NULL);
 	}
@@ -204,10 +214,13 @@ void *acpi_ut_allocate_zeroed_and_track(acpi_size size,
 	acpi_status status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allocation =
 	    acpi_ut_allocate_zeroed(size + sizeof(struct acpi_debug_mem_header),
 				    component, module, line);
 =======
+=======
+>>>>>>> v3.18
 	/* Check for an inadvertent size of zero bytes */
 
 	if (!size) {
@@ -219,6 +232,9 @@ void *acpi_ut_allocate_zeroed_and_track(acpi_size size,
 	allocation =
 	    acpi_os_allocate_zeroed(size +
 				    sizeof(struct acpi_debug_mem_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!allocation) {
 
@@ -294,7 +310,12 @@ acpi_ut_free_and_track(void *allocation,
 
 	acpi_os_free(debug_block);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS, "%p freed\n", allocation));
+=======
+	ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS, "%p freed (block %p)\n",
+			  allocation, debug_block));
+>>>>>>> v3.18
 =======
 	ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS, "%p freed (block %p)\n",
 			  allocation, debug_block));
@@ -453,7 +474,11 @@ acpi_ut_track_allocation(struct acpi_debug_mem_block *allocation,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -651,6 +676,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						(descriptor)) {
 					case ACPI_DESC_TYPE_OPERAND:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -665,6 +694,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					case ACPI_DESC_TYPE_PARSER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -678,6 +711,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					case ACPI_DESC_TYPE_NAMED:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -692,6 +729,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -703,6 +744,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 					switch (descriptor_type) {
 					case ACPI_DESC_TYPE_OPERAND:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -717,6 +762,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					case ACPI_DESC_TYPE_PARSER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -728,6 +777,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					case ACPI_DESC_TYPE_NAMED:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -739,6 +792,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

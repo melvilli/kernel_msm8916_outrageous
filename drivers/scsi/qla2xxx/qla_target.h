@@ -294,6 +294,10 @@ struct ctio_to_2xxx {
 #define CTIO_INVALID_RX_ID		0x08
 #define CTIO_TIMEOUT			0x0B
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CTIO_DIF_ERROR			0x0C     /* DIF error detected  */
+>>>>>>> v3.18
 =======
 #define CTIO_DIF_ERROR			0x0C     /* DIF error detected  */
 >>>>>>> v3.18
@@ -320,7 +324,11 @@ struct fcp_hdr {
 	uint8_t  df_ctl;
 	uint16_t seq_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t ox_id;
+=======
+	__be16   ox_id;
+>>>>>>> v3.18
 =======
 	__be16   ox_id;
 >>>>>>> v3.18
@@ -449,9 +457,15 @@ struct ctio7_to_24xx {
 		struct {
 			uint16_t reserved1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint16_t flags;
 			uint32_t residual;
 			uint16_t ox_id;
+=======
+			__le16 flags;
+			uint32_t residual;
+			__le16 ox_id;
+>>>>>>> v3.18
 =======
 			__le16 flags;
 			uint32_t residual;
@@ -472,7 +486,11 @@ struct ctio7_to_24xx {
 			uint16_t flags;
 			uint32_t residual;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint16_t ox_id;
+=======
+			__le16 ox_id;
+>>>>>>> v3.18
 =======
 			__le16 ox_id;
 >>>>>>> v3.18
@@ -517,18 +535,24 @@ struct ctio7_from_24xx {
 #define CTIO7_FLAGS_STATUS_MODE_0	0
 #define CTIO7_FLAGS_STATUS_MODE_1	BIT_6
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CTIO7_FLAGS_EXPLICIT_CONFORM	BIT_5
 #define CTIO7_FLAGS_CONFIRM_SATISF	BIT_4
 #define CTIO7_FLAGS_DSD_PTR		BIT_2
 #define CTIO7_FLAGS_DATA_IN		BIT_1
 #define CTIO7_FLAGS_DATA_OUT		BIT_0
 =======
+=======
+>>>>>>> v3.18
 #define CTIO7_FLAGS_STATUS_MODE_2	BIT_7
 #define CTIO7_FLAGS_EXPLICIT_CONFORM	BIT_5
 #define CTIO7_FLAGS_CONFIRM_SATISF	BIT_4
 #define CTIO7_FLAGS_DSD_PTR		BIT_2
 #define CTIO7_FLAGS_DATA_IN		BIT_1 /* data to initiator */
 #define CTIO7_FLAGS_DATA_OUT		BIT_0 /* data from initiator */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ELS_PLOGI			0x3
@@ -542,7 +566,10 @@ struct ctio7_from_24xx {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *CTIO Type CRC_2 IOCB
  */
 struct ctio_crc2_to_fw {
@@ -605,6 +632,9 @@ struct ctio_crc_from_fw {
 } __packed;
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ISP queue - ABTS received/response entries structure definition for 24xx.
  */
@@ -734,6 +764,10 @@ struct qla_tgt_func_tmpl {
 			unsigned char *, uint32_t, int, int, int);
 	void (*handle_data)(struct qla_tgt_cmd *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*handle_dif_err)(struct qla_tgt_cmd *);
+>>>>>>> v3.18
 =======
 	void (*handle_dif_err)(struct qla_tgt_cmd *);
 >>>>>>> v3.18
@@ -902,13 +936,19 @@ struct qla_tgt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qla_tgt_sess_op {
 	struct scsi_qla_host *vha;
 	struct atio_from_isp atio;
 	struct work_struct work;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Equivilant to IT Nexus (Initiator-Target)
@@ -935,9 +975,15 @@ struct qla_tgt_sess {
 
 struct qla_tgt_cmd {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qla_tgt_sess *sess;
 	int state;
 	struct se_cmd se_cmd;
+=======
+	struct se_cmd se_cmd;
+	struct qla_tgt_sess *sess;
+	int state;
+>>>>>>> v3.18
 =======
 	struct se_cmd se_cmd;
 	struct qla_tgt_sess *sess;
@@ -955,12 +1001,18 @@ struct qla_tgt_cmd {
 	unsigned int aborted:1; /* Needed in case of SRR */
 	unsigned int write_data_transferred:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ctx_dsd_alloced:1;
 	unsigned int q_full:1;
 	unsigned int term_exchg:1;
 	unsigned int cmd_sent_to_fw:1;
 	unsigned int cmd_in_wq:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct scatterlist *sg;	/* cmd data buffer SG vector */
@@ -971,6 +1023,10 @@ struct qla_tgt_cmd {
 	uint32_t unpacked_lun;
 	enum dma_data_direction dma_data_direction;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t reset_count;
+>>>>>>> v3.18
 =======
 	uint32_t reset_count;
 >>>>>>> v3.18
@@ -982,7 +1038,10 @@ struct qla_tgt_cmd {
 
 	struct atio_from_isp atio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* t10dif */
 	struct scatterlist *prot_sg;
 	uint32_t prot_sg_cnt;
@@ -1012,6 +1071,9 @@ struct qla_tgt_cmd {
 	 * BIT_16 - complete free
 	 */
 	uint32_t cmd_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1037,6 +1099,10 @@ struct qla_tgt_mgmt_cmd {
 	struct work_struct free_work;
 	unsigned int flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t reset_count;
+>>>>>>> v3.18
 =======
 	uint32_t reset_count;
 >>>>>>> v3.18
@@ -1054,6 +1120,10 @@ struct qla_tgt_prm {
 	void *pkt;
 	struct scatterlist *sg;	/* cmd data buffer SG vector */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char *sense_buffer;
+>>>>>>> v3.18
 =======
 	unsigned char *sense_buffer;
 >>>>>>> v3.18
@@ -1062,11 +1132,14 @@ struct qla_tgt_prm {
 	uint16_t rq_result;
 	uint16_t scsi_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *sense_buffer;
 	int sense_buffer_len;
 	int residual;
 	int add_status_pkt;
 =======
+=======
+>>>>>>> v3.18
 	int sense_buffer_len;
 	int residual;
 	int add_status_pkt;
@@ -1074,6 +1147,9 @@ struct qla_tgt_prm {
 	struct scatterlist *prot_sg;
 	uint16_t prot_seg_cnt;
 	uint16_t tot_dsds;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1096,10 +1172,13 @@ struct qla_tgt_srr_ctio {
 
 extern struct qla_tgt_data qla_target;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Internal function prototypes
  */
 void qlt_disable_vha(struct scsi_qla_host *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1109,8 +1188,13 @@ void qlt_disable_vha(struct scsi_qla_host *);
 extern int qlt_add_target(struct qla_hw_data *, struct scsi_qla_host *);
 extern int qlt_remove_target(struct qla_hw_data *, struct scsi_qla_host *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int qlt_lport_register(struct qla_tgt_func_tmpl *, u64,
 			int (*callback)(struct scsi_qla_host *), void *);
+=======
+extern int qlt_lport_register(void *, u64, u64, u64,
+			int (*callback)(struct scsi_qla_host *, void *, u64, u64));
+>>>>>>> v3.18
 =======
 extern int qlt_lport_register(void *, u64, u64, u64,
 			int (*callback)(struct scsi_qla_host *, void *, u64, u64));
@@ -1120,8 +1204,11 @@ extern void qlt_unreg_sess(struct qla_tgt_sess *);
 extern void qlt_fc_port_added(struct scsi_qla_host *, fc_port_t *);
 extern void qlt_fc_port_deleted(struct scsi_qla_host *, fc_port_t *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void qlt_set_mode(struct scsi_qla_host *ha);
 extern void qlt_clear_mode(struct scsi_qla_host *ha);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int __init qlt_init(void);
@@ -1157,8 +1244,11 @@ static inline void qla_reverse_ini_mode(struct scsi_qla_host *ha)
  * Exported symbols from qla_target.c LLD logic used by qla2xxx code..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void qlt_24xx_atio_pkt_all_vps(struct scsi_qla_host *,
 	struct atio_from_isp *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void qlt_response_pkt_all_vps(struct scsi_qla_host *, response_t *);
@@ -1190,16 +1280,22 @@ extern void qlt_probe_one_stage1(struct scsi_qla_host *, struct qla_hw_data *);
 extern int qlt_mem_alloc(struct qla_hw_data *);
 extern void qlt_mem_free(struct qla_hw_data *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void qlt_stop_phase1(struct qla_tgt *);
 extern void qlt_stop_phase2(struct qla_tgt *);
 extern irqreturn_t qla83xx_msix_atio_q(int, void *);
 extern void qlt_83xx_iospace_config(struct qla_hw_data *);
 =======
+=======
+>>>>>>> v3.18
 extern int qlt_stop_phase1(struct qla_tgt *);
 extern void qlt_stop_phase2(struct qla_tgt *);
 extern irqreturn_t qla83xx_msix_atio_q(int, void *);
 extern void qlt_83xx_iospace_config(struct qla_hw_data *);
 extern int qlt_free_qfull_cmds(struct scsi_qla_host *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __QLA_TARGET_H */

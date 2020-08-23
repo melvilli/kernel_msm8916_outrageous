@@ -75,6 +75,7 @@ static int poodle_startup(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 
 	mutex_lock(&codec->mutex);
@@ -83,6 +84,11 @@ static int poodle_startup(struct snd_pcm_substream *substream)
 	poodle_ext_control(&codec->dapm);
 
 	mutex_unlock(&codec->mutex);
+=======
+
+	/* check the jack status at stream startup */
+	poodle_ext_control(&rtd->card->dapm);
+>>>>>>> v3.18
 =======
 
 	/* check the jack status at stream startup */
@@ -242,7 +248,10 @@ static int poodle_wm8731_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_nc_pin(dapm, "LLINEIN");
 	snd_soc_dapm_nc_pin(dapm, "RLINEIN");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_enable_pin(dapm, "MICIN");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -313,6 +322,10 @@ static struct platform_driver poodle_driver = {
 		.name	= "poodle-audio",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm     = &snd_soc_pm_ops,
 >>>>>>> v3.18

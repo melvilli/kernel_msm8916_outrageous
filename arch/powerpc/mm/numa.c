@@ -9,6 +9,11 @@
  * 2 of the License, or (at your option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "numa: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "numa: " fmt
 
@@ -66,7 +71,11 @@ static int form1_affinity;
 #define MAX_DISTANCE_REF_POINTS 4
 static int distance_ref_points_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned int *distance_ref_points;
+=======
+static const __be32 *distance_ref_points;
+>>>>>>> v3.18
 =======
 static const __be32 *distance_ref_points;
 >>>>>>> v3.18
@@ -204,7 +213,11 @@ static void unmap_cpu_from_node(unsigned long cpu)
 
 /* must hold reference to node during call */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const int *of_get_associativity(struct device_node *dev)
+=======
+static const __be32 *of_get_associativity(struct device_node *dev)
+>>>>>>> v3.18
 =======
 static const __be32 *of_get_associativity(struct device_node *dev)
 >>>>>>> v3.18
@@ -218,6 +231,7 @@ static const __be32 *of_get_associativity(struct device_node *dev)
  * added by kexec-tools)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const u32 *of_get_usable_memory(struct device_node *memory)
 {
 	const u32 *prop;
@@ -226,6 +240,8 @@ static const u32 *of_get_usable_memory(struct device_node *memory)
 	if (!prop || len < sizeof(unsigned int))
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 static const __be32 *of_get_usable_memory(struct device_node *memory)
 {
 	const __be32 *prop;
@@ -233,6 +249,9 @@ static const __be32 *of_get_usable_memory(struct device_node *memory)
 	prop = of_get_property(memory, "linux,drconf-usable-memory", &len);
 	if (!prop || len < sizeof(unsigned int))
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return prop;
 }
@@ -256,14 +275,20 @@ int __node_distance(int a, int b)
 	return distance;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void initialize_distance_lookup_table(int nid,
 		const unsigned int *associativity)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__node_distance);
 
 static void initialize_distance_lookup_table(int nid,
 		const __be32 *associativity)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -273,13 +298,19 @@ static void initialize_distance_lookup_table(int nid,
 
 	for (i = 0; i < distance_ref_points_depth; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		distance_lookup_table[nid][i] =
 			associativity[distance_ref_points[i]];
 =======
+=======
+>>>>>>> v3.18
 		const __be32 *entry;
 
 		entry = &associativity[be32_to_cpu(distance_ref_points[i])];
 		distance_lookup_table[nid][i] = of_read_number(entry, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -288,7 +319,11 @@ static void initialize_distance_lookup_table(int nid,
  * info is found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int associativity_to_nid(const unsigned int *associativity)
+=======
+static int associativity_to_nid(const __be32 *associativity)
+>>>>>>> v3.18
 =======
 static int associativity_to_nid(const __be32 *associativity)
 >>>>>>> v3.18
@@ -299,8 +334,13 @@ static int associativity_to_nid(const __be32 *associativity)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (associativity[0] >= min_common_depth)
 		nid = associativity[min_common_depth];
+=======
+	if (of_read_number(associativity, 1) >= min_common_depth)
+		nid = of_read_number(&associativity[min_common_depth], 1);
+>>>>>>> v3.18
 =======
 	if (of_read_number(associativity, 1) >= min_common_depth)
 		nid = of_read_number(&associativity[min_common_depth], 1);
@@ -311,7 +351,12 @@ static int associativity_to_nid(const __be32 *associativity)
 		nid = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nid > 0 && associativity[0] >= distance_ref_points_depth)
+=======
+	if (nid > 0 &&
+	    of_read_number(associativity, 1) >= distance_ref_points_depth)
+>>>>>>> v3.18
 =======
 	if (nid > 0 &&
 	    of_read_number(associativity, 1) >= distance_ref_points_depth)
@@ -329,7 +374,11 @@ static int of_node_to_nid_single(struct device_node *device)
 {
 	int nid = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int *tmp;
+=======
+	const __be32 *tmp;
+>>>>>>> v3.18
 =======
 	const __be32 *tmp;
 >>>>>>> v3.18
@@ -405,7 +454,11 @@ static int __init find_min_common_depth(void)
 
 	if (form1_affinity) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		depth = distance_ref_points[0];
+=======
+		depth = of_read_number(distance_ref_points, 1);
+>>>>>>> v3.18
 =======
 		depth = of_read_number(distance_ref_points, 1);
 >>>>>>> v3.18
@@ -417,7 +470,11 @@ static int __init find_min_common_depth(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		depth = distance_ref_points[1];
+=======
+		depth = of_read_number(&distance_ref_points[1], 1);
+>>>>>>> v3.18
 =======
 		depth = of_read_number(&distance_ref_points[1], 1);
 >>>>>>> v3.18
@@ -455,7 +512,11 @@ static void __init get_n_mem_cells(int *n_addr_cells, int *n_size_cells)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long read_n_cells(int n, const unsigned int **buf)
+=======
+static unsigned long read_n_cells(int n, const __be32 **buf)
+>>>>>>> v3.18
 =======
 static unsigned long read_n_cells(int n, const __be32 **buf)
 >>>>>>> v3.18
@@ -464,7 +525,11 @@ static unsigned long read_n_cells(int n, const __be32 **buf)
 
 	while (n--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = (result << 32) | **buf;
+=======
+		result = (result << 32) | of_read_number(*buf, 1);
+>>>>>>> v3.18
 =======
 		result = (result << 32) | of_read_number(*buf, 1);
 >>>>>>> v3.18
@@ -478,9 +543,15 @@ static unsigned long read_n_cells(int n, const __be32 **buf)
  * and return the information in the provided of_drconf_cell structure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void read_drconf_cell(struct of_drconf_cell *drmem, const u32 **cellp)
 {
 	const u32 *cp;
+=======
+static void read_drconf_cell(struct of_drconf_cell *drmem, const __be32 **cellp)
+{
+	const __be32 *cp;
+>>>>>>> v3.18
 =======
 static void read_drconf_cell(struct of_drconf_cell *drmem, const __be32 **cellp)
 {
@@ -491,15 +562,21 @@ static void read_drconf_cell(struct of_drconf_cell *drmem, const __be32 **cellp)
 
 	cp = *cellp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drmem->drc_index = cp[0];
 	drmem->reserved = cp[1];
 	drmem->aa_index = cp[2];
 	drmem->flags = cp[3];
 =======
+=======
+>>>>>>> v3.18
 	drmem->drc_index = of_read_number(cp, 1);
 	drmem->reserved = of_read_number(&cp[1], 1);
 	drmem->aa_index = of_read_number(&cp[2], 1);
 	drmem->flags = of_read_number(&cp[3], 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*cellp = cp + 4;
@@ -513,9 +590,15 @@ static void read_drconf_cell(struct of_drconf_cell *drmem, const __be32 **cellp)
  * contains information as laid out in the of_drconf_cell struct above.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int of_get_drconf_memory(struct device_node *memory, const u32 **dm)
 {
 	const u32 *prop;
+=======
+static int of_get_drconf_memory(struct device_node *memory, const __be32 **dm)
+{
+	const __be32 *prop;
+>>>>>>> v3.18
 =======
 static int of_get_drconf_memory(struct device_node *memory, const __be32 **dm)
 {
@@ -528,7 +611,11 @@ static int of_get_drconf_memory(struct device_node *memory, const __be32 **dm)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entries = *prop++;
+=======
+	entries = of_read_number(prop++, 1);
+>>>>>>> v3.18
 =======
 	entries = of_read_number(prop++, 1);
 >>>>>>> v3.18
@@ -550,7 +637,11 @@ static int of_get_drconf_memory(struct device_node *memory, const __be32 **dm)
 static u64 of_get_lmb_size(struct device_node *memory)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *prop;
+=======
+	const __be32 *prop;
+>>>>>>> v3.18
 =======
 	const __be32 *prop;
 >>>>>>> v3.18
@@ -567,7 +658,11 @@ struct assoc_arrays {
 	u32	n_arrays;
 	u32	array_sz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *arrays;
+=======
+	const __be32 *arrays;
+>>>>>>> v3.18
 =======
 	const __be32 *arrays;
 >>>>>>> v3.18
@@ -587,7 +682,11 @@ static int of_get_assoc_arrays(struct device_node *memory,
 			       struct assoc_arrays *aa)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *prop;
+=======
+	const __be32 *prop;
+>>>>>>> v3.18
 =======
 	const __be32 *prop;
 >>>>>>> v3.18
@@ -598,8 +697,13 @@ static int of_get_assoc_arrays(struct device_node *memory,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aa->n_arrays = *prop++;
 	aa->array_sz = *prop++;
+=======
+	aa->n_arrays = of_read_number(prop++, 1);
+	aa->array_sz = of_read_number(prop++, 1);
+>>>>>>> v3.18
 =======
 	aa->n_arrays = of_read_number(prop++, 1);
 	aa->array_sz = of_read_number(prop++, 1);
@@ -631,7 +735,11 @@ static int of_drconf_to_nid_single(struct of_drconf_cell *drmem,
 	    drmem->aa_index < aa->n_arrays) {
 		index = drmem->aa_index * aa->array_sz + min_common_depth - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nid = aa->arrays[index];
+=======
+		nid = of_read_number(&aa->arrays[index], 1);
+>>>>>>> v3.18
 =======
 		nid = of_read_number(&aa->arrays[index], 1);
 >>>>>>> v3.18
@@ -648,9 +756,15 @@ static int of_drconf_to_nid_single(struct of_drconf_cell *drmem,
  * Return the id of the domain used.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit numa_setup_cpu(unsigned long lcpu)
 {
 	int nid;
+=======
+static int numa_setup_cpu(unsigned long lcpu)
+{
+	int nid = -1;
+>>>>>>> v3.18
 =======
 static int numa_setup_cpu(unsigned long lcpu)
 {
@@ -673,18 +787,25 @@ static int numa_setup_cpu(unsigned long lcpu)
 	if (!cpu) {
 		WARN_ON(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nid = 0;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		if (cpu_present(lcpu))
 			goto out_present;
 		else
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	nid = of_node_to_nid_single(cpu);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (nid < 0 || !node_online(nid))
 		nid = first_online_node;
@@ -703,6 +824,8 @@ static int __cpuinit cpu_numa_callback(struct notifier_block *nfb,
 	unsigned long lcpu = (unsigned long)hcpu;
 	int ret = NOTIFY_DONE;
 =======
+=======
+>>>>>>> v3.18
 out_present:
 	if (nid < 0 || !node_online(nid))
 		nid = first_online_node;
@@ -739,13 +862,21 @@ static int cpu_numa_callback(struct notifier_block *nfb, unsigned long action,
 {
 	unsigned long lcpu = (unsigned long)hcpu;
 	int ret = NOTIFY_DONE, nid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (action) {
 	case CPU_UP_PREPARE:
 	case CPU_UP_PREPARE_FROZEN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		numa_setup_cpu(lcpu);
+=======
+		nid = numa_setup_cpu(lcpu);
+		verify_cpu_node_mapping((int)lcpu, nid);
+>>>>>>> v3.18
 =======
 		nid = numa_setup_cpu(lcpu);
 		verify_cpu_node_mapping((int)lcpu, nid);
@@ -797,7 +928,11 @@ static unsigned long __init numa_enforce_memory_limit(unsigned long start,
  * linux,drconf-usable-memory property
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __init read_usm_ranges(const u32 **usm)
+=======
+static inline int __init read_usm_ranges(const __be32 **usm)
+>>>>>>> v3.18
 =======
 static inline int __init read_usm_ranges(const __be32 **usm)
 >>>>>>> v3.18
@@ -818,7 +953,11 @@ static inline int __init read_usm_ranges(const __be32 **usm)
 static void __init parse_drconf_memory(struct device_node *memory)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *uninitialized_var(dm), *usm;
+=======
+	const __be32 *uninitialized_var(dm), *usm;
+>>>>>>> v3.18
 =======
 	const __be32 *uninitialized_var(dm), *usm;
 >>>>>>> v3.18
@@ -877,7 +1016,12 @@ static void __init parse_drconf_memory(struct device_node *memory)
 			sz = numa_enforce_memory_limit(base, size);
 			if (sz)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				memblock_set_node(base, sz, nid);
+=======
+				memblock_set_node(base, sz,
+						  &memblock.memory, nid);
+>>>>>>> v3.18
 =======
 				memblock_set_node(base, sz,
 						  &memblock.memory, nid);
@@ -936,7 +1080,11 @@ static int __init parse_numa_properties(void)
 		int nid;
 		int ranges;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const unsigned int *memcell_buf;
+=======
+		const __be32 *memcell_buf;
+>>>>>>> v3.18
 =======
 		const __be32 *memcell_buf;
 >>>>>>> v3.18
@@ -976,7 +1124,11 @@ new_range:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memblock_set_node(start, size, nid);
+=======
+		memblock_set_node(start, size, &memblock.memory, nid);
+>>>>>>> v3.18
 =======
 		memblock_set_node(start, size, &memblock.memory, nid);
 >>>>>>> v3.18
@@ -1017,7 +1169,12 @@ static void __init setup_nonnuma(void)
 		fake_numa_create_new_node(end_pfn, &nid);
 		memblock_set_node(PFN_PHYS(start_pfn),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  PFN_PHYS(end_pfn - start_pfn), nid);
+=======
+				  PFN_PHYS(end_pfn - start_pfn),
+				  &memblock.memory, nid);
+>>>>>>> v3.18
 =======
 				  PFN_PHYS(end_pfn - start_pfn),
 				  &memblock.memory, nid);
@@ -1147,7 +1304,11 @@ static void __init *careful_zallocation(int nid, unsigned long size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata ppc64_numa_nb = {
+=======
+static struct notifier_block ppc64_numa_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block ppc64_numa_nb = {
 >>>>>>> v3.18
@@ -1167,8 +1328,12 @@ static void __init mark_reserved_regions_for_nid(int nid)
 		unsigned long end_pfn = PFN_UP(physbase + size);
 		struct node_active_region node_ar;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long node_end_pfn = node->node_start_pfn +
 					     node->node_spanned_pages;
+=======
+		unsigned long node_end_pfn = pgdat_end_pfn(node);
+>>>>>>> v3.18
 =======
 		unsigned long node_end_pfn = pgdat_end_pfn(node);
 >>>>>>> v3.18
@@ -1230,7 +1395,11 @@ static void __init mark_reserved_regions_for_nid(int nid)
 void __init do_init_bootmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nid;
+=======
+	int nid, cpu;
+>>>>>>> v3.18
 =======
 	int nid, cpu;
 >>>>>>> v3.18
@@ -1307,6 +1476,7 @@ void __init do_init_bootmem(void)
 	reset_numa_cpu_lookup_table();
 	register_cpu_notifier(&ppc64_numa_nb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_numa_callback(&ppc64_numa_nb, CPU_UP_PREPARE,
 			  (void *)(unsigned long)boot_cpuid);
 }
@@ -1318,6 +1488,8 @@ void __init paging_init(void)
 	max_zone_pfns[ZONE_DMA] = memblock_end_of_DRAM() >> PAGE_SHIFT;
 	free_area_init_nodes(max_zone_pfns);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need the numa_cpu_lookup_table to be accurate for all CPUs,
 	 * even before we online them, so that we can use cpu_to_{node,mem}
@@ -1326,6 +1498,9 @@ void __init paging_init(void)
 	for_each_present_cpu(cpu) {
 		numa_setup_cpu((unsigned long)cpu);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1349,7 +1524,10 @@ static int __init early_numa(char *p)
 early_param("numa", early_numa);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool topology_updates_enabled = true;
 
 static int __init early_topology_updates(char *p)
@@ -1366,6 +1544,9 @@ static int __init early_topology_updates(char *p)
 }
 early_param("topology_updates", early_topology_updates);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MEMORY_HOTPLUG
 /*
@@ -1377,7 +1558,11 @@ static int hot_add_drconf_scn_to_nid(struct device_node *memory,
 				     unsigned long scn_addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *dm;
+=======
+	const __be32 *dm;
+>>>>>>> v3.18
 =======
 	const __be32 *dm;
 >>>>>>> v3.18
@@ -1426,7 +1611,11 @@ static int hot_add_drconf_scn_to_nid(struct device_node *memory,
  * each memblock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hot_add_node_scn_to_nid(unsigned long scn_addr)
+=======
+static int hot_add_node_scn_to_nid(unsigned long scn_addr)
+>>>>>>> v3.18
 =======
 static int hot_add_node_scn_to_nid(unsigned long scn_addr)
 >>>>>>> v3.18
@@ -1438,7 +1627,11 @@ static int hot_add_node_scn_to_nid(unsigned long scn_addr)
 		unsigned long start, size;
 		int ranges;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const unsigned int *memcell_buf;
+=======
+		const __be32 *memcell_buf;
+>>>>>>> v3.18
 =======
 		const __be32 *memcell_buf;
 >>>>>>> v3.18
@@ -1515,7 +1708,11 @@ static u64 hot_add_drconf_memory_max(void)
         unsigned int drconf_cell_cnt = 0;
         u64 lmb_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
         const u32 *dm = 0;
+=======
+	const __be32 *dm = NULL;
+>>>>>>> v3.18
 =======
 	const __be32 *dm = NULL;
 >>>>>>> v3.18
@@ -1624,15 +1821,21 @@ static int update_cpu_associativity_changes_mask(void)
  * to the sequence they would appear in the ibm,associativity property.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vphn_unpack_associativity(const long *packed, unsigned int *unpacked)
 {
 	int i, nr_assoc_doms = 0;
 	const u16 *field = (const u16*) packed;
 =======
+=======
+>>>>>>> v3.18
 static int vphn_unpack_associativity(const long *packed, __be32 *unpacked)
 {
 	int i, nr_assoc_doms = 0;
 	const __be16 *field = (const __be16 *) packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VPHN_FIELD_UNUSED	(0xffff)
@@ -1641,7 +1844,11 @@ static int vphn_unpack_associativity(const long *packed, __be32 *unpacked)
 
 	for (i = 1; i < VPHN_ASSOC_BUFSIZE; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*field == VPHN_FIELD_UNUSED) {
+=======
+		if (be16_to_cpup(field) == VPHN_FIELD_UNUSED) {
+>>>>>>> v3.18
 =======
 		if (be16_to_cpup(field) == VPHN_FIELD_UNUSED) {
 >>>>>>> v3.18
@@ -1650,18 +1857,24 @@ static int vphn_unpack_associativity(const long *packed, __be32 *unpacked)
 			 * Just store them.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unpacked[i] = *((u32*)field);
 			field += 2;
 		} else if (*field & VPHN_FIELD_MSB) {
 			/* Data is in the lower 15 bits of this field */
 			unpacked[i] = *field & VPHN_FIELD_MASK;
 =======
+=======
+>>>>>>> v3.18
 			unpacked[i] = *((__be32 *)field);
 			field += 2;
 		} else if (be16_to_cpup(field) & VPHN_FIELD_MSB) {
 			/* Data is in the lower 15 bits of this field */
 			unpacked[i] = cpu_to_be32(
 				be16_to_cpup(field) & VPHN_FIELD_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			field++;
 			nr_assoc_doms++;
@@ -1670,7 +1883,11 @@ static int vphn_unpack_associativity(const long *packed, __be32 *unpacked)
 			 * concatenated with the next 16 bit field
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unpacked[i] = *((u32*)field);
+=======
+			unpacked[i] = *((__be32 *)field);
+>>>>>>> v3.18
 =======
 			unpacked[i] = *((__be32 *)field);
 >>>>>>> v3.18
@@ -1681,7 +1898,11 @@ static int vphn_unpack_associativity(const long *packed, __be32 *unpacked)
 
 	/* The first cell contains the length of the property */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unpacked[0] = nr_assoc_doms;
+=======
+	unpacked[0] = cpu_to_be32(nr_assoc_doms);
+>>>>>>> v3.18
 =======
 	unpacked[0] = cpu_to_be32(nr_assoc_doms);
 >>>>>>> v3.18
@@ -1694,7 +1915,11 @@ static int vphn_unpack_associativity(const long *packed, __be32 *unpacked)
  * home node.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long hcall_vphn(unsigned long cpu, unsigned int *associativity)
+=======
+static long hcall_vphn(unsigned long cpu, __be32 *associativity)
+>>>>>>> v3.18
 =======
 static long hcall_vphn(unsigned long cpu, __be32 *associativity)
 >>>>>>> v3.18
@@ -1704,14 +1929,20 @@ static long hcall_vphn(unsigned long cpu, __be32 *associativity)
 	u64 flags = 1;
 	int hwcpu = get_hard_smp_processor_id(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rc = plpar_hcall9(H_HOME_NODE_ASSOCIATIVITY, retbuf, flags, hwcpu);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	rc = plpar_hcall9(H_HOME_NODE_ASSOCIATIVITY, retbuf, flags, hwcpu);
 	for (i = 0; i < 6; i++)
 		retbuf[i] = cpu_to_be64(retbuf[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vphn_unpack_associativity(retbuf, associativity);
 
@@ -1720,7 +1951,11 @@ static long hcall_vphn(unsigned long cpu, __be32 *associativity)
 
 static long vphn_get_associativity(unsigned long cpu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					unsigned int *associativity)
+=======
+					__be32 *associativity)
+>>>>>>> v3.18
 =======
 					__be32 *associativity)
 >>>>>>> v3.18
@@ -1762,12 +1997,15 @@ static int update_cpu_topology(void *data)
 
 	for (update = data; update; update = update->next) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cpu != update->cpu)
 			continue;
 
 		unmap_cpu_from_node(update->cpu);
 		map_cpu_to_node(update->cpu, update->new_nid);
 =======
+=======
+>>>>>>> v3.18
 		int new_nid = update->new_nid;
 		if (cpu != update->cpu)
 			continue;
@@ -1776,6 +2014,9 @@ static int update_cpu_topology(void *data)
 		map_cpu_to_node(cpu, new_nid);
 		set_cpu_numa_node(cpu, new_nid);
 		set_cpu_numa_mem(cpu, local_memory_node(new_nid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vdso_getcpu_init();
 	}
@@ -1819,7 +2060,11 @@ int arch_update_cpu_topology(void)
 	unsigned int cpu, sibling, changed = 0;
 	struct topology_update_data *updates, *ud;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int associativity[VPHN_ASSOC_BUFSIZE] = {0};
+=======
+	__be32 associativity[VPHN_ASSOC_BUFSIZE] = {0};
+>>>>>>> v3.18
 =======
 	__be32 associativity[VPHN_ASSOC_BUFSIZE] = {0};
 >>>>>>> v3.18
@@ -1828,6 +2073,12 @@ int arch_update_cpu_topology(void)
 	int weight, new_nid, i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!prrn_enabled && !vphn_enabled)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (!prrn_enabled && !vphn_enabled)
 		return 0;
@@ -1887,7 +2138,10 @@ int arch_update_cpu_topology(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("Topology update for the following CPUs:\n");
 	if (cpumask_weight(&updated_cpus)) {
 		for (ud = &updates[0]; ud; ud = ud->next) {
@@ -1911,6 +2165,9 @@ int arch_update_cpu_topology(void)
 	if (!cpumask_weight(&updated_cpus))
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stop_machine(update_cpu_topology, &updates[0], &updated_cpus);
 
@@ -1934,6 +2191,10 @@ int arch_update_cpu_topology(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -1948,7 +2209,11 @@ static void topology_work_fn(struct work_struct *work)
 static DECLARE_WORK(topology_work, topology_work_fn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void topology_schedule_update(void)
+=======
+static void topology_schedule_update(void)
+>>>>>>> v3.18
 =======
 static void topology_schedule_update(void)
 >>>>>>> v3.18
@@ -2030,7 +2295,11 @@ int start_topology_update(void)
 		}
 	} else if (firmware_has_feature(FW_FEATURE_VPHN) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   get_lppaca()->shared_proc) {
+=======
+		   lppaca_shared_proc(get_lppaca())) {
+>>>>>>> v3.18
 =======
 		   lppaca_shared_proc(get_lppaca())) {
 >>>>>>> v3.18
@@ -2118,15 +2387,21 @@ static const struct file_operations topology_ops = {
 static int topology_update_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	start_topology_update();
 	proc_create("powerpc/topology_updates", 644, NULL, &topology_ops);
 =======
+=======
+>>>>>>> v3.18
 	/* Do not poll for changes if disabled at boot */
 	if (topology_updates_enabled)
 		start_topology_update();
 
 	if (!proc_create("powerpc/topology_updates", 0644, NULL, &topology_ops))
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

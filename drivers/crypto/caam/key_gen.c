@@ -20,11 +20,16 @@ void split_key_done(struct device *dev, u32 *desc, u32 err,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		char tmp[CAAM_ERROR_STR_MAX];
 
 		dev_err(dev, "%08x: %s\n", err, caam_jr_strstatus(tmp, err));
 	}
+=======
+	if (err)
+		caam_jr_strstatus(dev, err);
+>>>>>>> v3.18
 =======
 	if (err)
 		caam_jr_strstatus(dev, err);
@@ -57,7 +62,11 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	struct split_key_result result;
 	dma_addr_t dma_addr_in, dma_addr_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int ret = -ENOMEM;
 >>>>>>> v3.18
@@ -65,6 +74,7 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	desc = kmalloc(CAAM_CMD_SZ * 6 + CAAM_PTR_SZ * 2, GFP_KERNEL | GFP_DMA);
 	if (!desc) {
 		dev_err(jrdev, "unable to allocate key input memory\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENOMEM;
 	}
@@ -76,15 +86,23 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	}
 
 >>>>>>> v3.18
+=======
+		return ret;
+	}
+
+>>>>>>> v3.18
 	dma_addr_in = dma_map_single(jrdev, (void *)key_in, keylen,
 				     DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, dma_addr_in)) {
 		dev_err(jrdev, "unable to map key input memory\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(desc);
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto out_free;
 	}
 
@@ -96,6 +114,9 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	}
 
 	init_job_desc(desc, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	append_key(desc, dma_addr_in, keylen, CLASS_2 | KEY_DEST_CLASS_REG);
 
@@ -114,6 +135,7 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	 * (0x26 output type)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_out = dma_map_single(jrdev, key_out, split_key_pad_len,
 				      DMA_FROM_DEVICE);
 	if (dma_mapping_error(jrdev, dma_addr_out)) {
@@ -123,14 +145,22 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	append_fifo_store(desc, dma_addr_out, split_key_len,
 			  LDST_CLASS_2_CCB | FIFOST_TYPE_SPLIT_KEK);
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "ctx.key@"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, key_in, keylen, 1);
 	print_hex_dump(KERN_ERR, "jobdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "ctx.key@"__stringify(__LINE__)": ",
+		       DUMP_PREFIX_ADDRESS, 16, 4, key_in, keylen, 1);
+	print_hex_dump(KERN_ERR, "jobdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "ctx.key@"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, key_in, keylen, 1);
@@ -146,15 +176,21 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	if (!ret) {
 		/* in progress */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wait_for_completion(&result.completion);
 		ret = result.err;
 #ifdef DEBUG
 		print_hex_dump(KERN_ERR, "ctx.key@"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 		wait_for_completion_interruptible(&result.completion);
 		ret = result.err;
 #ifdef DEBUG
 		print_hex_dump(KERN_ERR, "ctx.key@"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       DUMP_PREFIX_ADDRESS, 16, 4, key_out,
 			       split_key_pad_len, 1);
@@ -164,15 +200,21 @@ int gen_split_key(struct device *jrdev, u8 *key_out, int split_key_len,
 	dma_unmap_single(jrdev, dma_addr_out, split_key_pad_len,
 			 DMA_FROM_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_single(jrdev, dma_addr_in, keylen, DMA_TO_DEVICE);
 
 	kfree(desc);
 
 =======
+=======
+>>>>>>> v3.18
 out_unmap_in:
 	dma_unmap_single(jrdev, dma_addr_in, keylen, DMA_TO_DEVICE);
 out_free:
 	kfree(desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

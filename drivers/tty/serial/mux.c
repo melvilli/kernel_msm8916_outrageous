@@ -30,7 +30,11 @@
 #include <asm/parisc-device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MAGIC_SYSRQ
+=======
+#if defined(CONFIG_SERIAL_MUX_CONSOLE) && defined(CONFIG_MAGIC_SYSRQ)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_SERIAL_MUX_CONSOLE) && defined(CONFIG_MAGIC_SYSRQ)
 >>>>>>> v3.18
@@ -174,6 +178,7 @@ static void mux_stop_rx(struct uart_port *port)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * mux_enable_ms - Enable modum status interrupts.
  * @port: Ptr to the uart_port.
  *
@@ -184,6 +189,8 @@ static void mux_enable_ms(struct uart_port *port)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * mux_break_ctl - Control the transmitssion of a break signal.
@@ -457,7 +464,10 @@ static struct uart_ops mux_pops = {
 	.start_tx =		mux_start_tx,
 	.stop_rx =		mux_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms =		mux_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl =		mux_break_ctl,
@@ -624,7 +634,11 @@ static void __exit mux_exit(void)
 	/* Delete the Mux timer. */
 	if(port_cnt > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		del_timer(&mux_timer);
+=======
+		del_timer_sync(&mux_timer);
+>>>>>>> v3.18
 =======
 		del_timer_sync(&mux_timer);
 >>>>>>> v3.18

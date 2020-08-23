@@ -5,15 +5,21 @@ __NR_fchmod,
 #ifdef __NR_chown
 __NR_chown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 __NR_fchown,
 __NR_lchown,
 #endif
 =======
+=======
+>>>>>>> v3.18
 __NR_lchown,
 #endif
 #ifdef __NR_fchown
 __NR_fchown,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __NR_setxattr,
 __NR_lsetxattr,

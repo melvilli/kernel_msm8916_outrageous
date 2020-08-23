@@ -32,6 +32,11 @@
 #include <subdev/timer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/bios/fan.h>
+
+>>>>>>> v3.18
 =======
 #include <subdev/bios/fan.h>
 
@@ -217,7 +222,10 @@ nouveau_therm_fan_safety_checks(struct nouveau_therm *therm)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nouveau_therm_fan_init(struct nouveau_therm *therm)
 {
 	return 0;
@@ -235,6 +243,9 @@ nouveau_therm_fan_fini(struct nouveau_therm *therm, bool suspend)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau_therm_fan_ctor(struct nouveau_therm *therm)
 {
@@ -248,7 +259,12 @@ nouveau_therm_fan_ctor(struct nouveau_therm *therm)
 	ret = gpio->find(gpio, 0, DCB_GPIO_FAN, 0xff, &func);
 	if (ret == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (func.log[0] & DCB_GPIO_LOG_DIR_IN) {
+=======
+		/* FIXME: is this really the place to perform such checks ? */
+		if (func.line != 16 && func.log[0] & DCB_GPIO_LOG_DIR_IN) {
+>>>>>>> v3.18
 =======
 		/* FIXME: is this really the place to perform such checks ? */
 		if (func.line != 16 && func.log[0] & DCB_GPIO_LOG_DIR_IN) {
@@ -272,6 +288,12 @@ nouveau_therm_fan_ctor(struct nouveau_therm *therm)
 	nv_info(therm, "FAN control: %s\n", priv->fan->type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* read the current speed, it is useful when resuming */
+	priv->fan->percent = nouveau_therm_fan_get(therm);
+
+>>>>>>> v3.18
 =======
 	/* read the current speed, it is useful when resuming */
 	priv->fan->percent = nouveau_therm_fan_get(therm);
@@ -291,14 +313,20 @@ nouveau_therm_fan_ctor(struct nouveau_therm *therm)
 	nouveau_therm_fan_set_defaults(therm);
 	nvbios_perf_fan_parse(bios, &priv->fan->perf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nvbios_therm_fan_parse(bios, &priv->fan->bios))
 		nv_error(therm, "parsing the thermal table failed\n");
 =======
+=======
+>>>>>>> v3.18
 	if (!nvbios_fan_parse(bios, &priv->fan->bios)) {
 		nv_debug(therm, "parsing the fan table failed\n");
 		if (nvbios_therm_fan_parse(bios, &priv->fan->bios))
 			nv_error(therm, "parsing both fan tables failed\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nouveau_therm_fan_safety_checks(therm);
 	return 0;

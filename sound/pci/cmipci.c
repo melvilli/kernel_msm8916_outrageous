@@ -797,7 +797,11 @@ static int snd_cmipci_pcm_prepare(struct cmipci *cm, struct cmipci_pcm *rec,
 		rec->fmt |= 0x01;
 	if (rec->is_dac && set_dac_channels(cm, rec, runtime->channels) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("cannot set dac channels\n");
+=======
+		dev_dbg(cm->card->dev, "cannot set dac channels\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(cm->card->dev, "cannot set dac channels\n");
 >>>>>>> v3.18
@@ -832,7 +836,11 @@ static int snd_cmipci_pcm_prepare(struct cmipci *cm, struct cmipci_pcm *rec,
 		cm->ctrl |= val;
 	snd_cmipci_write(cm, CM_REG_FUNCTRL0, cm->ctrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//snd_printd("cmipci: functrl0 = %08x\n", cm->ctrl);
+=======
+	/* dev_dbg(cm->card->dev, "functrl0 = %08x\n", cm->ctrl); */
+>>>>>>> v3.18
 =======
 	/* dev_dbg(cm->card->dev, "functrl0 = %08x\n", cm->ctrl); */
 >>>>>>> v3.18
@@ -859,7 +867,11 @@ static int snd_cmipci_pcm_prepare(struct cmipci *cm, struct cmipci_pcm *rec,
 	}
 	snd_cmipci_write(cm, CM_REG_FUNCTRL1, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//snd_printd("cmipci: functrl1 = %08x\n", val);
+=======
+	dev_dbg(cm->card->dev, "functrl1 = %08x\n", val);
+>>>>>>> v3.18
 =======
 	dev_dbg(cm->card->dev, "functrl1 = %08x\n", val);
 >>>>>>> v3.18
@@ -879,7 +891,11 @@ static int snd_cmipci_pcm_prepare(struct cmipci *cm, struct cmipci_pcm *rec,
 	}
 	snd_cmipci_write(cm, CM_REG_CHFORMAT, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//snd_printd("cmipci: chformat = %08x\n", val);
+=======
+	dev_dbg(cm->card->dev, "chformat = %08x\n", val);
+>>>>>>> v3.18
 =======
 	dev_dbg(cm->card->dev, "chformat = %08x\n", val);
 >>>>>>> v3.18
@@ -921,7 +937,11 @@ static int snd_cmipci_pcm_trigger(struct cmipci *cm, struct cmipci_pcm *rec,
 		/* enable channel */
 		snd_cmipci_write(cm, CM_REG_FUNCTRL0, cm->ctrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//snd_printd("cmipci: functrl0 = %08x\n", cm->ctrl);
+=======
+		dev_dbg(cm->card->dev, "functrl0 = %08x\n", cm->ctrl);
+>>>>>>> v3.18
 =======
 		dev_dbg(cm->card->dev, "functrl0 = %08x\n", cm->ctrl);
 >>>>>>> v3.18
@@ -973,7 +993,11 @@ static snd_pcm_uframes_t snd_cmipci_pcm_pointer(struct cmipci *cm, struct cmipci
 			goto ok;
 	} 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "cmipci: invalid PCM pointer: %#x\n", rem);
+=======
+	dev_err(cm->card->dev, "invalid PCM pointer: %#x\n", rem);
+>>>>>>> v3.18
 =======
 	dev_err(cm->card->dev, "invalid PCM pointer: %#x\n", rem);
 >>>>>>> v3.18
@@ -2828,7 +2852,11 @@ static inline void snd_cmipci_proc_init(struct cmipci *cm) {}
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_cmipci_ids) = {
+=======
+static const struct pci_device_id snd_cmipci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_cmipci_ids[] = {
 >>>>>>> v3.18
@@ -2918,7 +2946,11 @@ static int snd_cmipci_create_gameport(struct cmipci *cm, int dev)
 
 	if (!r) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "cmipci: cannot reserve joystick ports\n");
+=======
+		dev_warn(cm->card->dev, "cannot reserve joystick ports\n");
+>>>>>>> v3.18
 =======
 		dev_warn(cm->card->dev, "cannot reserve joystick ports\n");
 >>>>>>> v3.18
@@ -2928,7 +2960,11 @@ static int snd_cmipci_create_gameport(struct cmipci *cm, int dev)
 	cm->gameport = gp = gameport_allocate_port();
 	if (!gp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cmipci: cannot allocate memory for gameport\n");
+=======
+		dev_err(cm->card->dev, "cannot allocate memory for gameport\n");
+>>>>>>> v3.18
 =======
 		dev_err(cm->card->dev, "cannot allocate memory for gameport\n");
 >>>>>>> v3.18
@@ -3032,8 +3068,14 @@ static int snd_cmipci_create_fm(struct cmipci *cm, long fm_port)
 		if (snd_opl3_create(cm->card, iosynth, iosynth + 2,
 				    OPL3_HW_OPL3, 0, &opl3) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "cmipci: no OPL device at %#lx, "
 			       "skipping...\n", iosynth);
+=======
+			dev_err(cm->card->dev,
+				"no OPL device at %#lx, skipping...\n",
+				iosynth);
+>>>>>>> v3.18
 =======
 			dev_err(cm->card->dev,
 				"no OPL device at %#lx, skipping...\n",
@@ -3044,7 +3086,11 @@ static int snd_cmipci_create_fm(struct cmipci *cm, long fm_port)
 	}
 	if ((err = snd_opl3_hwdep_new(opl3, 0, 1, NULL)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cmipci: cannot create OPL3 hwdep\n");
+=======
+		dev_err(cm->card->dev, "cannot create OPL3 hwdep\n");
+>>>>>>> v3.18
 =======
 		dev_err(cm->card->dev, "cannot create OPL3 hwdep\n");
 >>>>>>> v3.18
@@ -3072,7 +3118,11 @@ static int snd_cmipci_create(struct snd_card *card, struct pci_dev *pci,
 	char modelstr[16];
 	int pcm_index, pcm_spdif_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static DEFINE_PCI_DEVICE_TABLE(intel_82437vx) = {
+=======
+	static const struct pci_device_id intel_82437vx[] = {
+>>>>>>> v3.18
 =======
 	static const struct pci_device_id intel_82437vx[] = {
 >>>>>>> v3.18
@@ -3111,7 +3161,11 @@ static int snd_cmipci_create(struct snd_card *card, struct pci_dev *pci,
 	if (request_irq(pci->irq, snd_cmipci_interrupt,
 			IRQF_SHARED, KBUILD_MODNAME, cm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -3247,8 +3301,14 @@ static int snd_cmipci_create(struct snd_card *card, struct pci_dev *pci,
 			snd_cmipci_set_bit(cm, CM_REG_FUNCTRL1, CM_UART_EN);
 			if (inb(iomidi + 1) == 0xff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "cannot enable MPU-401 port"
 					   " at %#lx\n", iomidi);
+=======
+				dev_err(cm->card->dev,
+					"cannot enable MPU-401 port at %#lx\n",
+					iomidi);
+>>>>>>> v3.18
 =======
 				dev_err(cm->card->dev,
 					"cannot enable MPU-401 port at %#lx\n",
@@ -3298,7 +3358,12 @@ static int snd_cmipci_create(struct snd_card *card, struct pci_dev *pci,
 					       MPU401_INFO_IRQ_HOOK,
 					       -1, &cm->rmidi)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "cmipci: no UART401 device at 0x%lx\n", iomidi);
+=======
+			dev_err(cm->card->dev,
+				"no UART401 device at 0x%lx\n", iomidi);
+>>>>>>> v3.18
 =======
 			dev_err(cm->card->dev,
 				"no UART401 device at 0x%lx\n", iomidi);
@@ -3320,8 +3385,11 @@ static int snd_cmipci_create(struct snd_card *card, struct pci_dev *pci,
 		snd_cmipci_clear_bit(cm, CM_REG_FUNCTRL1, CM_JYSTK_EN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rcmipci = cm;
@@ -3349,7 +3417,12 @@ static int snd_cmipci_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -3391,7 +3464,10 @@ static void snd_cmipci_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3459,8 +3535,12 @@ static int snd_cmipci_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cmipci: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18

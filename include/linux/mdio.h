@@ -71,9 +71,12 @@ extern void mdio45_ethtool_gset_npage(const struct mdio_if_info *mdio,
 				      struct ethtool_cmd *ecmd,
 				      u32 npage_adv, u32 npage_lpa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void
 mdio45_ethtool_spauseparam_an(const struct mdio_if_info *mdio,
 			      const struct ethtool_pauseparam *ecmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

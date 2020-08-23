@@ -347,7 +347,11 @@ static int bfin_rtc_probe(struct platform_device *pdev)
 	struct bfin_rtc *rtc;
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -366,10 +370,15 @@ static int bfin_rtc_probe(struct platform_device *pdev)
 	rtc->rtc_dev = devm_rtc_device_register(dev, pdev->name, &bfin_rtc_ops,
 						THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(IS_ERR(rtc->rtc_dev))) {
 		ret = PTR_ERR(rtc->rtc_dev);
 		goto err;
 	}
+=======
+	if (unlikely(IS_ERR(rtc->rtc_dev)))
+		return PTR_ERR(rtc->rtc_dev);
+>>>>>>> v3.18
 =======
 	if (unlikely(IS_ERR(rtc->rtc_dev)))
 		return PTR_ERR(rtc->rtc_dev);
@@ -380,12 +389,18 @@ static int bfin_rtc_probe(struct platform_device *pdev)
 				pdev->name, dev);
 	if (unlikely(ret))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&pdev->dev,
 			"unable to request IRQ; alarm won't work, "
 			"and writes will be delayed\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* sometimes the bootloader touched things, but the write complete was not
 	 * enabled, so let's just do a quick timeout here since the IRQ will not fire ...
@@ -398,9 +413,12 @@ static int bfin_rtc_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -411,7 +429,10 @@ static int bfin_rtc_remove(struct platform_device *pdev)
 
 	bfin_rtc_reset(dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

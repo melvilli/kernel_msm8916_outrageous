@@ -34,6 +34,10 @@
 #include <linux/power/max17042_battery.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -72,6 +76,10 @@
 struct max17042_chip {
 	struct i2c_client *client;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18
@@ -82,6 +90,7 @@ struct max17042_chip {
 	int    init_complete;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int max17042_write_reg(struct i2c_client *client, u8 reg, u16 value)
 {
@@ -114,6 +123,8 @@ static void max17042_set_reg(struct i2c_client *client,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static enum power_supply_property max17042_battery_props[] = {
 	POWER_SUPPLY_PROP_PRESENT,
 	POWER_SUPPLY_PROP_CYCLE_COUNT,
@@ -137,7 +148,13 @@ static int max17042_get_property(struct power_supply *psy,
 	struct max17042_chip *chip = container_of(psy,
 				struct max17042_chip, battery);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	struct regmap *map = chip->regmap;
+	int ret;
+	u32 data;
+>>>>>>> v3.18
 =======
 	struct regmap *map = chip->regmap;
 	int ret;
@@ -150,23 +167,30 @@ static int max17042_get_property(struct power_supply *psy,
 	switch (psp) {
 	case POWER_SUPPLY_PROP_PRESENT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = max17042_read_reg(chip->client, MAX17042_STATUS);
 		if (ret < 0)
 			return ret;
 
 		if (ret & MAX17042_STATUS_BattAbsent)
 =======
+=======
+>>>>>>> v3.18
 		ret = regmap_read(map, MAX17042_STATUS, &data);
 		if (ret < 0)
 			return ret;
 
 		if (data & MAX17042_STATUS_BattAbsent)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			val->intval = 0;
 		else
 			val->intval = 1;
 		break;
 	case POWER_SUPPLY_PROP_CYCLE_COUNT:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = max17042_read_reg(chip->client, MAX17042_Cycles);
 		if (ret < 0)
@@ -181,6 +205,8 @@ static int max17042_get_property(struct power_supply *psy,
 
 		val->intval = ret >> 8;
 =======
+=======
+>>>>>>> v3.18
 		ret = regmap_read(map, MAX17042_Cycles, &data);
 		if (ret < 0)
 			return ret;
@@ -193,11 +219,15 @@ static int max17042_get_property(struct power_supply *psy,
 			return ret;
 
 		val->intval = data >> 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val->intval *= 20000; /* Units of LSB = 20mV */
 		break;
 	case POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN:
 		if (chip->chip_type == MAX17042)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ret = max17042_read_reg(chip->client, MAX17042_V_empty);
 		else
@@ -257,6 +287,8 @@ static int max17042_get_property(struct power_supply *psy,
 
 		val->intval = ret;
 =======
+=======
+>>>>>>> v3.18
 			ret = regmap_read(map, MAX17042_V_empty, &data);
 		else
 			ret = regmap_read(map, MAX17047_V_empty, &data);
@@ -314,6 +346,9 @@ static int max17042_get_property(struct power_supply *psy,
 			return ret;
 
 		val->intval = data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* The value is signed. */
 		if (val->intval & 0x8000) {
@@ -327,17 +362,23 @@ static int max17042_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CURRENT_NOW:
 		if (chip->pdata->enable_current_sense) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = max17042_read_reg(chip->client, MAX17042_Current);
 			if (ret < 0)
 				return ret;
 
 			val->intval = ret;
 =======
+=======
+>>>>>>> v3.18
 			ret = regmap_read(map, MAX17042_Current, &data);
 			if (ret < 0)
 				return ret;
 
 			val->intval = data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (val->intval & 0x8000) {
 				/* Negative */
@@ -353,6 +394,7 @@ static int max17042_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CURRENT_AVG:
 		if (chip->pdata->enable_current_sense) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = max17042_read_reg(chip->client,
 						MAX17042_AvgCurrent);
 			if (ret < 0)
@@ -360,11 +402,16 @@ static int max17042_get_property(struct power_supply *psy,
 
 			val->intval = ret;
 =======
+=======
+>>>>>>> v3.18
 			ret = regmap_read(map, MAX17042_AvgCurrent, &data);
 			if (ret < 0)
 				return ret;
 
 			val->intval = data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (val->intval & 0x8000) {
 				/* Negative */
@@ -384,6 +431,7 @@ static int max17042_get_property(struct power_supply *psy,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max17042_write_verify_reg(struct i2c_client *client,
 				u8 reg, u16 value)
 {
@@ -395,6 +443,8 @@ static int max17042_write_verify_reg(struct i2c_client *client,
 		ret = i2c_smbus_write_word_data(client, reg, value);
 		read_value =  max17042_read_reg(client, reg);
 =======
+=======
+>>>>>>> v3.18
 static int max17042_write_verify_reg(struct regmap *map, u8 reg, u32 value)
 {
 	int retries = 8;
@@ -404,6 +454,9 @@ static int max17042_write_verify_reg(struct regmap *map, u8 reg, u32 value)
 	do {
 		ret = regmap_write(map, reg, value);
 		regmap_read(map, reg, &read_value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (read_value != value) {
 			ret = -EIO;
@@ -413,7 +466,11 @@ static int max17042_write_verify_reg(struct regmap *map, u8 reg, u32 value)
 
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "%s: err %d\n", __func__, ret);
+=======
+		pr_err("%s: err %d\n", __func__, ret);
+>>>>>>> v3.18
 =======
 		pr_err("%s: err %d\n", __func__, ret);
 >>>>>>> v3.18
@@ -422,26 +479,38 @@ static int max17042_write_verify_reg(struct regmap *map, u8 reg, u32 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void max17042_override_por(
 	struct i2c_client *client, u8 reg, u16 value)
 {
 	if (value)
 		max17042_write_reg(client, reg, value);
 =======
+=======
+>>>>>>> v3.18
 static inline void max17042_override_por(struct regmap *map,
 					 u8 reg, u16 value)
 {
 	if (value)
 		regmap_write(map, reg, value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void max10742_unlock_model(struct max17042_chip *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = chip->client;
 	max17042_write_reg(client, MAX17042_MLOCKReg1, MODEL_UNLOCK1);
 	max17042_write_reg(client, MAX17042_MLOCKReg2, MODEL_UNLOCK2);
+=======
+	struct regmap *map = chip->regmap;
+	regmap_write(map, MAX17042_MLOCKReg1, MODEL_UNLOCK1);
+	regmap_write(map, MAX17042_MLOCKReg2, MODEL_UNLOCK2);
+>>>>>>> v3.18
 =======
 	struct regmap *map = chip->regmap;
 	regmap_write(map, MAX17042_MLOCKReg1, MODEL_UNLOCK1);
@@ -452,20 +521,27 @@ static inline void max10742_unlock_model(struct max17042_chip *chip)
 static inline void max10742_lock_model(struct max17042_chip *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = chip->client;
 	max17042_write_reg(client, MAX17042_MLOCKReg1, MODEL_LOCK1);
 	max17042_write_reg(client, MAX17042_MLOCKReg2, MODEL_LOCK2);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *map = chip->regmap;
 
 	regmap_write(map, MAX17042_MLOCKReg1, MODEL_LOCK1);
 	regmap_write(map, MAX17042_MLOCKReg2, MODEL_LOCK2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void max17042_write_model_data(struct max17042_chip *chip,
 					u8 addr, int size)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i2c_client *client = chip->client;
 	int i;
@@ -483,6 +559,8 @@ static inline void max17042_read_model_data(struct max17042_chip *chip,
 	for (i = 0; i < size; i++)
 		data[i] = max17042_read_reg(client, addr + i);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *map = chip->regmap;
 	int i;
 	for (i = 0; i < size; i++)
@@ -498,6 +576,9 @@ static inline void max17042_read_model_data(struct max17042_chip *chip,
 
 	for (i = 0; i < size; i++)
 		regmap_read(map, addr + i, &data[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -522,7 +603,11 @@ static int max17042_init_model(struct max17042_chip *chip)
 	int ret;
 	int table_size = ARRAY_SIZE(chip->pdata->config_data->cell_char_tbl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 *temp_data;
+=======
+	u32 *temp_data;
+>>>>>>> v3.18
 =======
 	u32 *temp_data;
 >>>>>>> v3.18
@@ -541,7 +626,11 @@ static int max17042_init_model(struct max17042_chip *chip)
 		chip,
 		chip->pdata->config_data->cell_char_tbl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp_data,
+=======
+		(u16 *)temp_data,
+>>>>>>> v3.18
 =======
 		(u16 *)temp_data,
 >>>>>>> v3.18
@@ -558,7 +647,11 @@ static int max17042_verify_model_lock(struct max17042_chip *chip)
 	int i;
 	int table_size = ARRAY_SIZE(chip->pdata->config_data->cell_char_tbl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 *temp_data;
+=======
+	u32 *temp_data;
+>>>>>>> v3.18
 =======
 	u32 *temp_data;
 >>>>>>> v3.18
@@ -582,6 +675,7 @@ static void max17042_write_config_regs(struct max17042_chip *chip)
 {
 	struct max17042_config_data *config = chip->pdata->config_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	max17042_write_reg(chip->client, MAX17042_CONFIG, config->config);
 	max17042_write_reg(chip->client, MAX17042_LearnCFG, config->learn_cfg);
@@ -591,6 +685,8 @@ static void max17042_write_config_regs(struct max17042_chip *chip)
 	if (chip->chip_type == MAX17047)
 		max17042_write_reg(chip->client, MAX17047_FullSOCThr,
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *map = chip->regmap;
 
 	regmap_write(map, MAX17042_CONFIG, config->config);
@@ -600,6 +696,9 @@ static void max17042_write_config_regs(struct max17042_chip *chip)
 	regmap_write(map, MAX17042_RelaxCFG, config->relax_cfg);
 	if (chip->chip_type == MAX17047)
 		regmap_write(map, MAX17047_FullSOCThr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						config->full_soc_thresh);
 }
@@ -607,6 +706,7 @@ static void max17042_write_config_regs(struct max17042_chip *chip)
 static void  max17042_write_custom_regs(struct max17042_chip *chip)
 {
 	struct max17042_config_data *config = chip->pdata->config_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	max17042_write_verify_reg(chip->client, MAX17042_RCOMP0,
@@ -629,6 +729,8 @@ static void  max17042_write_custom_regs(struct max17042_chip *chip)
 						config->qrtbl20);
 		max17042_write_verify_reg(chip->client, MAX17047_QRTbl30,
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *map = chip->regmap;
 
 	max17042_write_verify_reg(map, MAX17042_RCOMP0, config->rcomp0);
@@ -646,6 +748,9 @@ static void  max17042_write_custom_regs(struct max17042_chip *chip)
 		max17042_write_verify_reg(map, MAX17047_QRTbl20,
 						config->qrtbl20);
 		max17042_write_verify_reg(map, MAX17047_QRTbl30,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						config->qrtbl30);
 	}
@@ -655,6 +760,7 @@ static void max17042_update_capacity_regs(struct max17042_chip *chip)
 {
 	struct max17042_config_data *config = chip->pdata->config_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	max17042_write_verify_reg(chip->client, MAX17042_FullCAP,
 				config->fullcap);
@@ -662,18 +768,24 @@ static void max17042_update_capacity_regs(struct max17042_chip *chip)
 			config->design_cap);
 	max17042_write_verify_reg(chip->client, MAX17042_FullCAPNom,
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *map = chip->regmap;
 
 	max17042_write_verify_reg(map, MAX17042_FullCAP,
 				config->fullcap);
 	regmap_write(map, MAX17042_DesignCap, config->design_cap);
 	max17042_write_verify_reg(map, MAX17042_FullCAPNom,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				config->fullcapnom);
 }
 
 static void max17042_reset_vfsoc0_reg(struct max17042_chip *chip)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 vfSoc;
 
@@ -682,6 +794,8 @@ static void max17042_reset_vfsoc0_reg(struct max17042_chip *chip)
 	max17042_write_verify_reg(chip->client, MAX17042_VFSOC0, vfSoc);
 	max17042_write_reg(chip->client, MAX17042_VFSOC0Enable, VFSOC0_LOCK);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int vfSoc;
 	struct regmap *map = chip->regmap;
 
@@ -689,11 +803,15 @@ static void max17042_reset_vfsoc0_reg(struct max17042_chip *chip)
 	regmap_write(map, MAX17042_VFSOC0Enable, VFSOC0_UNLOCK);
 	max17042_write_verify_reg(map, MAX17042_VFSOC0, vfSoc);
 	regmap_write(map, MAX17042_VFSOC0Enable, VFSOC0_LOCK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void max17042_load_new_capacity_params(struct max17042_chip *chip)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 full_cap0, rep_cap, dq_acc, vfSoc;
 	u32 rem_cap;
@@ -703,6 +821,8 @@ static void max17042_load_new_capacity_params(struct max17042_chip *chip)
 	full_cap0 = max17042_read_reg(chip->client, MAX17042_FullCAP0);
 	vfSoc = max17042_read_reg(chip->client, MAX17042_VFSOC);
 =======
+=======
+>>>>>>> v3.18
 	u32 full_cap0, rep_cap, dq_acc, vfSoc;
 	u32 rem_cap;
 
@@ -711,6 +831,9 @@ static void max17042_load_new_capacity_params(struct max17042_chip *chip)
 
 	regmap_read(map, MAX17042_FullCAP0, &full_cap0);
 	regmap_read(map, MAX17042_VFSOC, &vfSoc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* fg_vfSoc needs to shifted by 8 bits to get the
@@ -718,6 +841,7 @@ static void max17042_load_new_capacity_params(struct max17042_chip *chip)
 	 * full_cap0, fg_vfSoc and devide by 100
 	 */
 	rem_cap = ((vfSoc >> 8) * full_cap0) / 100;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	max17042_write_verify_reg(chip->client, MAX17042_RemCap, (u16)rem_cap);
 
@@ -738,6 +862,8 @@ static void max17042_load_new_capacity_params(struct max17042_chip *chip)
 	/* Update SOC register with new SOC */
 	max17042_write_reg(chip->client, MAX17042_RepSOC, vfSoc);
 =======
+=======
+>>>>>>> v3.18
 	max17042_write_verify_reg(map, MAX17042_RemCap, rem_cap);
 
 	rep_cap = rem_cap;
@@ -756,6 +882,9 @@ static void max17042_load_new_capacity_params(struct max17042_chip *chip)
 			config->fullcapnom);
 	/* Update SOC register with new SOC */
 	regmap_write(map, MAX17042_RepSOC, vfSoc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -766,6 +895,7 @@ static void max17042_load_new_capacity_params(struct max17042_chip *chip)
  */
 static inline void max17042_override_por_values(struct max17042_chip *chip)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i2c_client *client = chip->client;
 	struct max17042_config_data *config = chip->pdata->config_data;
@@ -816,6 +946,8 @@ static inline void max17042_override_por_values(struct max17042_chip *chip)
 		max17042_override_por(client, MAX17042_K_empty0,
 					config->kempty0);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *map = chip->regmap;
 	struct max17042_config_data *config = chip->pdata->config_data;
 
@@ -864,6 +996,9 @@ static inline void max17042_override_por_values(struct max17042_chip *chip)
 						config->empty_tempco);
 		max17042_override_por(map, MAX17042_K_empty0,
 						config->kempty0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -871,6 +1006,10 @@ static inline void max17042_override_por_values(struct max17042_chip *chip)
 static int max17042_init_chip(struct max17042_chip *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regmap *map = chip->regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *map = chip->regmap;
 >>>>>>> v3.18
@@ -919,9 +1058,14 @@ static int max17042_init_chip(struct max17042_chip *chip)
 
 	/* Init complete, Clear the POR bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = max17042_read_reg(chip->client, MAX17042_STATUS);
 	max17042_write_reg(chip->client, MAX17042_STATUS,
 			val & (~STATUS_POR_BIT));
+=======
+	regmap_read(map, MAX17042_STATUS, &val);
+	regmap_write(map, MAX17042_STATUS, val & (~STATUS_POR_BIT));
+>>>>>>> v3.18
 =======
 	regmap_read(map, MAX17042_STATUS, &val);
 	regmap_write(map, MAX17042_STATUS, val & (~STATUS_POR_BIT));
@@ -932,7 +1076,12 @@ static int max17042_init_chip(struct max17042_chip *chip)
 static void max17042_set_soc_threshold(struct max17042_chip *chip, u16 off)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 soc, soc_tr;
+=======
+	struct regmap *map = chip->regmap;
+	u32 soc, soc_tr;
+>>>>>>> v3.18
 =======
 	struct regmap *map = chip->regmap;
 	u32 soc, soc_tr;
@@ -942,16 +1091,22 @@ static void max17042_set_soc_threshold(struct max17042_chip *chip, u16 off)
 	 * get interrupt for every 'off' perc change in the soc
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc = max17042_read_reg(chip->client, MAX17042_RepSOC) >> 8;
 	soc_tr = (soc + off) << 8;
 	soc_tr |= (soc - off);
 	max17042_write_reg(chip->client, MAX17042_SALRT_Th, soc_tr);
 =======
+=======
+>>>>>>> v3.18
 	regmap_read(map, MAX17042_RepSOC, &soc);
 	soc >>= 8;
 	soc_tr = (soc + off) << 8;
 	soc_tr |= (soc - off);
 	regmap_write(map, MAX17042_SALRT_Th, soc_tr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -959,9 +1114,15 @@ static irqreturn_t max17042_thread_handler(int id, void *dev)
 {
 	struct max17042_chip *chip = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 val;
 
 	val = max17042_read_reg(chip->client, MAX17042_STATUS);
+=======
+	u32 val;
+
+	regmap_read(chip->regmap, MAX17042_STATUS, &val);
+>>>>>>> v3.18
 =======
 	u32 val;
 
@@ -1028,13 +1189,19 @@ max17042_get_pdata(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct regmap_config max17042_regmap_config = {
 	.reg_bits = 8,
 	.val_bits = 16,
 	.val_format_endian = REGMAP_ENDIAN_NATIVE,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int max17042_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
@@ -1043,7 +1210,12 @@ static int max17042_probe(struct i2c_client *client,
 	struct max17042_chip *chip;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int reg;
+=======
+	int i;
+	u32 val;
+>>>>>>> v3.18
 =======
 	int i;
 	u32 val;
@@ -1058,13 +1230,19 @@ static int max17042_probe(struct i2c_client *client,
 
 	chip->client = client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	chip->regmap = devm_regmap_init_i2c(client, &max17042_regmap_config);
 	if (IS_ERR(chip->regmap)) {
 		dev_err(&client->dev, "Failed to initialize regmap\n");
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chip->pdata = max17042_get_pdata(&client->dev);
 	if (!chip->pdata) {
@@ -1074,6 +1252,7 @@ static int max17042_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, chip);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = max17042_read_reg(chip->client, MAX17042_DevName);
 	if (ret == MAX17042_IC_VERSION) {
@@ -1085,6 +1264,8 @@ static int max17042_probe(struct i2c_client *client,
 	} else {
 		dev_err(&client->dev, "device version mismatch: %x\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	regmap_read(chip->regmap, MAX17042_DevName, &val);
 	if (val == MAX17042_IC_VERSION) {
 		dev_dbg(&client->dev, "chip type max17042 detected\n");
@@ -1094,6 +1275,9 @@ static int max17042_probe(struct i2c_client *client,
 		chip->chip_type = MAX17047;
 	} else {
 		dev_err(&client->dev, "device version mismatch: %x\n", val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
@@ -1114,6 +1298,7 @@ static int max17042_probe(struct i2c_client *client,
 
 	if (chip->pdata->init_data)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max17042_set_reg(client, chip->pdata->init_data,
 				chip->pdata->num_init_data);
 
@@ -1122,6 +1307,8 @@ static int max17042_probe(struct i2c_client *client,
 		max17042_write_reg(client, MAX17042_MiscCFG, 0x0003);
 		max17042_write_reg(client, MAX17042_LearnCFG, 0x0007);
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i < chip->pdata->num_init_data; i++)
 			regmap_write(chip->regmap,
 					chip->pdata->init_data[i].addr,
@@ -1131,6 +1318,9 @@ static int max17042_probe(struct i2c_client *client,
 		regmap_write(chip->regmap, MAX17042_CGAIN, 0x0000);
 		regmap_write(chip->regmap, MAX17042_MiscCFG, 0x0003);
 		regmap_write(chip->regmap, MAX17042_LearnCFG, 0x0007);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1143,6 +1333,7 @@ static int max17042_probe(struct i2c_client *client,
 	if (client->irq) {
 		ret = request_threaded_irq(client->irq, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						max17042_thread_handler,
 						IRQF_TRIGGER_FALLING,
 						chip->battery.name, chip);
@@ -1151,6 +1342,8 @@ static int max17042_probe(struct i2c_client *client,
 			reg |= CONFIG_ALRT_BIT_ENBL;
 			max17042_write_reg(client, MAX17042_CONFIG, reg);
 =======
+=======
+>>>>>>> v3.18
 					max17042_thread_handler,
 					IRQF_TRIGGER_FALLING | IRQF_ONESHOT,
 					chip->battery.name, chip);
@@ -1158,6 +1351,9 @@ static int max17042_probe(struct i2c_client *client,
 			regmap_read(chip->regmap, MAX17042_CONFIG, &val);
 			val |= CONFIG_ALRT_BIT_ENBL;
 			regmap_write(chip->regmap, MAX17042_CONFIG, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			max17042_set_soc_threshold(chip, 1);
 		} else {
@@ -1168,8 +1364,13 @@ static int max17042_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = max17042_read_reg(chip->client, MAX17042_STATUS);
 	if (reg & STATUS_POR_BIT) {
+=======
+	regmap_read(chip->regmap, MAX17042_STATUS, &val);
+	if (val & STATUS_POR_BIT) {
+>>>>>>> v3.18
 =======
 	regmap_read(chip->regmap, MAX17042_STATUS, &val);
 	if (val & STATUS_POR_BIT) {
@@ -1194,7 +1395,11 @@ static int max17042_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1228,6 +1433,7 @@ static int max17042_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct dev_pm_ops max17042_pm_ops = {
 	.suspend	= max17042_suspend,
@@ -1240,11 +1446,16 @@ static const struct dev_pm_ops max17042_pm_ops = {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static SIMPLE_DEV_PM_OPS(max17042_pm_ops, max17042_suspend,
 			max17042_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id max17042_dt_match[] = {
@@ -1269,7 +1480,11 @@ static struct i2c_driver max17042_i2c_driver = {
 		.name	= "max17042",
 		.of_match_table = of_match_ptr(max17042_dt_match),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm	= MAX17042_PM_OPS,
+=======
+		.pm	= &max17042_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &max17042_pm_ops,
 >>>>>>> v3.18

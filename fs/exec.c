@@ -20,7 +20,11 @@
  * table to check for several different types  of binary formats.  We keep
  * trying until we recognize the file or we run out of supported binary
 <<<<<<< HEAD
+<<<<<<< HEAD
  * formats.
+=======
+ * formats. 
+>>>>>>> v3.18
 =======
  * formats. 
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #include <linux/fdtable.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmacache.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmacache.h>
 >>>>>>> v3.18
@@ -71,7 +79,10 @@
 #include <trace/events/task.h>
 #include "internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "coredump.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -86,6 +97,11 @@ void __register_binfmt(struct linux_binfmt * fmt, int insert)
 {
 	BUG_ON(!fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (WARN_ON(!fmt->load_binary))
+		return;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!fmt->load_binary))
 		return;
@@ -113,6 +129,10 @@ static inline void put_binfmt(struct linux_binfmt * fmt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_USELIB
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_USELIB
 >>>>>>> v3.18
@@ -125,6 +145,10 @@ static inline void put_binfmt(struct linux_binfmt * fmt)
 SYSCALL_DEFINE1(uselib, const char __user *, library)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct linux_binfmt *fmt;
+>>>>>>> v3.18
 =======
 	struct linux_binfmt *fmt;
 >>>>>>> v3.18
@@ -159,6 +183,7 @@ SYSCALL_DEFINE1(uselib, const char __user *, library)
 
 	error = -ENOEXEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(file->f_op) {
 		struct linux_binfmt * fmt;
 
@@ -178,6 +203,8 @@ SYSCALL_DEFINE1(uselib, const char __user *, library)
 		read_unlock(&binfmt_lock);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	read_lock(&binfmt_lock);
 	list_for_each_entry(fmt, &formats, lh) {
@@ -193,6 +220,9 @@ SYSCALL_DEFINE1(uselib, const char __user *, library)
 			break;
 	}
 	read_unlock(&binfmt_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit:
 	fput(file);
@@ -200,6 +230,10 @@ out:
   	return error;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* #ifdef CONFIG_USELIB */
+>>>>>>> v3.18
 =======
 #endif /* #ifdef CONFIG_USELIB */
 >>>>>>> v3.18
@@ -244,6 +278,7 @@ static struct page *get_arg_page(struct linux_binprm *bprm, unsigned long pos,
 	if (write) {
 		unsigned long size = bprm->vma->vm_end - bprm->vma->vm_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long ptr_size;
 		struct rlimit *rlim;
 
@@ -268,6 +303,10 @@ static struct page *get_arg_page(struct linux_binprm *bprm, unsigned long pos,
 		struct rlimit *rlim;
 
 >>>>>>> v3.18
+=======
+		struct rlimit *rlim;
+
+>>>>>>> v3.18
 		acct_arg_size(bprm, size / PAGE_SIZE);
 
 		/*
@@ -286,6 +325,7 @@ static struct page *get_arg_page(struct linux_binprm *bprm, unsigned long pos,
 		 */
 		rlim = current->signal->rlim;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (size > ACCESS_ONCE(rlim[RLIMIT_STACK].rlim_cur) / 4)
 			goto fail;
 	}
@@ -296,6 +336,8 @@ fail:
 	put_page(page);
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 		if (size > ACCESS_ONCE(rlim[RLIMIT_STACK].rlim_cur) / 4) {
 			put_page(page);
 			return NULL;
@@ -303,6 +345,9 @@ fail:
 	}
 
 	return page;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -348,7 +393,11 @@ static int __bprm_mm_init(struct linux_binprm *bprm)
 	vma->vm_end = STACK_TOP_MAX;
 	vma->vm_start = vma->vm_end - PAGE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags = VM_STACK_FLAGS | VM_STACK_INCOMPLETE_SETUP;
+=======
+	vma->vm_flags = VM_SOFTDIRTY | VM_STACK_FLAGS | VM_STACK_INCOMPLETE_SETUP;
+>>>>>>> v3.18
 =======
 	vma->vm_flags = VM_SOFTDIRTY | VM_STACK_FLAGS | VM_STACK_INCOMPLETE_SETUP;
 >>>>>>> v3.18
@@ -452,10 +501,13 @@ static int bprm_mm_init(struct linux_binprm *bprm)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = init_new_context(current, mm);
 	if (err)
 		goto err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = __bprm_mm_init(bprm);
@@ -838,16 +890,22 @@ EXPORT_SYMBOL(setup_arg_pages);
 #endif /* CONFIG_MMU */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct file *open_exec(const char *name)
 {
 	struct file *file;
 	int err;
 	struct filename tmp = { .name = name };
 =======
+=======
+>>>>>>> v3.18
 static struct file *do_open_exec(struct filename *name)
 {
 	struct file *file;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static const struct open_flags open_exec_flags = {
 		.open_flag = O_LARGEFILE | O_RDONLY | __FMODE_EXEC,
@@ -857,7 +915,11 @@ static struct file *do_open_exec(struct filename *name)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file = do_filp_open(AT_FDCWD, &tmp, &open_exec_flags);
+=======
+	file = do_filp_open(AT_FDCWD, name, &open_exec_flags);
+>>>>>>> v3.18
 =======
 	file = do_filp_open(AT_FDCWD, name, &open_exec_flags);
 >>>>>>> v3.18
@@ -885,13 +947,19 @@ exit:
 	return ERR_PTR(err);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct file *open_exec(const char *name)
 {
 	struct filename tmp = { .name = name };
 	return do_open_exec(&tmp);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(open_exec);
 
@@ -915,7 +983,11 @@ EXPORT_SYMBOL(kernel_read);
 ssize_t read_code(struct file *file, unsigned long addr, loff_t pos, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t res = file->f_op->read(file, (void __user *)addr, len, &pos);
+=======
+	ssize_t res = vfs_read(file, (void __user *)addr, len, &pos);
+>>>>>>> v3.18
 =======
 	ssize_t res = vfs_read(file, (void __user *)addr, len, &pos);
 >>>>>>> v3.18
@@ -929,7 +1001,11 @@ static int exec_mmap(struct mm_struct *mm)
 {
 	struct task_struct *tsk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mm_struct * old_mm, *active_mm;
+=======
+	struct mm_struct *old_mm, *active_mm;
+>>>>>>> v3.18
 =======
 	struct mm_struct *old_mm, *active_mm;
 >>>>>>> v3.18
@@ -959,8 +1035,14 @@ static int exec_mmap(struct mm_struct *mm)
 	tsk->active_mm = mm;
 	activate_mm(active_mm, mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task_unlock(tsk);
 	arch_pick_mmap_layout(mm);
+=======
+	tsk->mm->vmacache_seqnum = 0;
+	vmacache_flush(tsk);
+	task_unlock(tsk);
+>>>>>>> v3.18
 =======
 	tsk->mm->vmacache_seqnum = 0;
 	vmacache_flush(tsk);
@@ -1055,6 +1137,10 @@ static int de_thread(struct task_struct *tsk)
 		 */
 		tsk->start_time = leader->start_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tsk->real_start_time = leader->real_start_time;
+>>>>>>> v3.18
 =======
 		tsk->real_start_time = leader->real_start_time;
 >>>>>>> v3.18
@@ -1074,9 +1160,14 @@ static int de_thread(struct task_struct *tsk)
 		 *       is called.  Odd but simple and correct.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		detach_pid(tsk, PIDTYPE_PID);
 		tsk->pid = leader->pid;
 		attach_pid(tsk, PIDTYPE_PID,  task_pid(leader));
+=======
+		tsk->pid = leader->pid;
+		change_pid(tsk, PIDTYPE_PID, task_pid(leader));
+>>>>>>> v3.18
 =======
 		tsk->pid = leader->pid;
 		change_pid(tsk, PIDTYPE_PID, task_pid(leader));
@@ -1170,7 +1261,11 @@ EXPORT_SYMBOL_GPL(get_task_comm);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void set_task_comm(struct task_struct *tsk, char *buf)
+=======
+void __set_task_comm(struct task_struct *tsk, const char *buf, bool exec)
+>>>>>>> v3.18
 =======
 void __set_task_comm(struct task_struct *tsk, const char *buf, bool exec)
 >>>>>>> v3.18
@@ -1179,6 +1274,7 @@ void __set_task_comm(struct task_struct *tsk, const char *buf, bool exec)
 	trace_task_rename(tsk, buf);
 	strlcpy(tsk->comm, buf, sizeof(tsk->comm));
 	task_unlock(tsk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	perf_event_comm(tsk);
 }
@@ -1199,6 +1295,9 @@ static void filename_to_taskname(char *tcomm, const char *fn, unsigned int len)
 =======
 	perf_event_comm(tsk, exec);
 >>>>>>> v3.18
+=======
+	perf_event_comm(tsk, exec);
+>>>>>>> v3.18
 }
 
 int flush_old_exec(struct linux_binprm * bprm)
@@ -1215,8 +1314,11 @@ int flush_old_exec(struct linux_binprm * bprm)
 
 	set_mm_exe_file(bprm->mm, bprm->file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	filename_to_taskname(bprm->tcomm, bprm->filename, sizeof(bprm->tcomm));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1231,6 +1333,7 @@ int flush_old_exec(struct linux_binprm * bprm)
 
 	set_fs(USER_DS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->flags &=
 		~(PF_RANDOMIZE | PF_FORKNOEXEC | PF_KTHREAD | PF_NOFREEZE);
 	flush_thread();
@@ -1244,11 +1347,16 @@ int flush_old_exec(struct linux_binprm * bprm)
 	 */
 	do_close_on_exec(current->files);
 =======
+=======
+>>>>>>> v3.18
 	current->flags &= ~(PF_RANDOMIZE | PF_FORKNOEXEC | PF_KTHREAD |
 					PF_NOFREEZE | PF_NO_SETAFFINITY);
 	flush_thread();
 	current->personality &= ~bprm->per_clear;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1260,7 +1368,11 @@ EXPORT_SYMBOL(flush_old_exec);
 void would_dump(struct linux_binprm *bprm, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode_permission2(file->f_path.mnt, file_inode(file), MAY_READ) < 0)
+=======
+	if (inode_permission(file_inode(file), MAY_READ) < 0)
+>>>>>>> v3.18
 =======
 	if (inode_permission(file_inode(file), MAY_READ) < 0)
 >>>>>>> v3.18
@@ -1281,7 +1393,12 @@ void setup_new_exec(struct linux_binprm * bprm)
 		set_dumpable(current->mm, suid_dumpable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_task_comm(current, bprm->tcomm);
+=======
+	perf_event_exec();
+	__set_task_comm(current, kbasename(bprm->filename), true);
+>>>>>>> v3.18
 =======
 	perf_event_exec();
 	__set_task_comm(current, kbasename(bprm->filename), true);
@@ -1306,10 +1423,16 @@ void setup_new_exec(struct linux_binprm * bprm)
 	/* An exec changes our domain. We are no longer part of the thread
 	   group */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	current->self_exec_id++;
 			
 	flush_signal_handlers(current, 0);
+=======
+	current->self_exec_id++;
+	flush_signal_handlers(current, 0);
+	do_close_on_exec(current->files);
+>>>>>>> v3.18
 =======
 	current->self_exec_id++;
 	flush_signal_handlers(current, 0);
@@ -1338,7 +1461,11 @@ int prepare_bprm_creds(struct linux_binprm *bprm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void free_bprm(struct linux_binprm *bprm)
+=======
+static void free_bprm(struct linux_binprm *bprm)
+>>>>>>> v3.18
 =======
 static void free_bprm(struct linux_binprm *bprm)
 >>>>>>> v3.18
@@ -1349,11 +1476,17 @@ static void free_bprm(struct linux_binprm *bprm)
 		abort_creds(bprm->cred);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bprm->file) {
 		allow_write_access(bprm->file);
 		fput(bprm->file);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If a binfmt changed the interp, free it. */
 	if (bprm->interp != bprm->filename)
@@ -1407,16 +1540,22 @@ EXPORT_SYMBOL(install_exec_creds);
  *   PTRACE_ATTACH or seccomp thread-sync
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int check_unsafe_exec(struct linux_binprm *bprm)
 {
 	struct task_struct *p = current, *t;
 	unsigned n_fs;
 	int res = 0;
 =======
+=======
+>>>>>>> v3.18
 static void check_unsafe_exec(struct linux_binprm *bprm)
 {
 	struct task_struct *p = current, *t;
 	unsigned n_fs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (p->ptrace) {
@@ -1434,22 +1573,29 @@ static void check_unsafe_exec(struct linux_binprm *bprm)
 		bprm->unsafe |= LSM_UNSAFE_NO_NEW_PRIVS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n_fs = 1;
 	spin_lock(&p->fs->lock);
 	rcu_read_lock();
 	for (t = next_thread(p); t != p; t = next_thread(t)) {
 =======
+=======
+>>>>>>> v3.18
 	t = p;
 	n_fs = 1;
 	spin_lock(&p->fs->lock);
 	rcu_read_lock();
 	while_each_thread(p, t) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (t->fs == p->fs)
 			n_fs++;
 	}
 	rcu_read_unlock();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (p->fs->users > n_fs) {
 		bprm->unsafe |= LSM_UNSAFE_SHARE;
@@ -1515,6 +1661,8 @@ static void bprm_fill_uid(struct linux_binprm *bprm)
 /* 
  * Fill the binprm structure from the inode. 
 =======
+=======
+>>>>>>> v3.18
 	if (p->fs->users > n_fs)
 		bprm->unsafe |= LSM_UNSAFE_SHARE;
 	else
@@ -1524,6 +1672,9 @@ static void bprm_fill_uid(struct linux_binprm *bprm)
 
 /*
  * Fill the binprm structure from the inode.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Check permissions, then read the first 128 (BINPRM_BUF_SIZE) bytes
  *
@@ -1532,6 +1683,7 @@ static void bprm_fill_uid(struct linux_binprm *bprm)
 int prepare_binprm(struct linux_binprm *bprm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval;
 
 	if (bprm->file->f_op == NULL)
@@ -1539,6 +1691,8 @@ int prepare_binprm(struct linux_binprm *bprm)
 
 	bprm_fill_uid(bprm);
 =======
+=======
+>>>>>>> v3.18
 	struct inode *inode = file_inode(bprm->file);
 	umode_t mode = inode->i_mode;
 	int retval;
@@ -1569,6 +1723,9 @@ int prepare_binprm(struct linux_binprm *bprm)
 			bprm->cred->egid = inode->i_gid;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* fill in binprm security blob */
@@ -1628,6 +1785,10 @@ out:
 EXPORT_SYMBOL(remove_arg_zero);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define printable(c) (((c)=='\t') || ((c)=='\n') || (0x20<=(c) && (c)<=0x7e))
+>>>>>>> v3.18
 =======
 #define printable(c) (((c)=='\t') || ((c)=='\n') || (0x20<=(c) && (c)<=0x7e))
 >>>>>>> v3.18
@@ -1637,6 +1798,7 @@ EXPORT_SYMBOL(remove_arg_zero);
 int search_binary_handler(struct linux_binprm *bprm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int depth = bprm->recursion_depth;
 	int try,retval;
 	struct linux_binfmt *fmt;
@@ -1645,12 +1807,17 @@ int search_binary_handler(struct linux_binprm *bprm)
 	/* This allows 4 levels of binfmt rewrites before failing hard. */
 	if (depth > 5)
 =======
+=======
+>>>>>>> v3.18
 	bool need_retry = IS_ENABLED(CONFIG_MODULES);
 	struct linux_binfmt *fmt;
 	int retval;
 
 	/* This allows 4 levels of binfmt rewrites before failing hard. */
 	if (bprm->recursion_depth > 5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ELOOP;
 
@@ -1658,6 +1825,7 @@ int search_binary_handler(struct linux_binprm *bprm)
 	if (retval)
 		return retval;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval = audit_bprm(bprm);
 	if (retval)
@@ -1734,6 +1902,8 @@ EXPORT_SYMBOL(search_binary_handler);
  */
 static int do_execve_common(const char *filename,
 =======
+=======
+>>>>>>> v3.18
 	retval = -ENOENT;
  retry:
 	read_lock(&binfmt_lock);
@@ -1799,6 +1969,9 @@ static int exec_binprm(struct linux_binprm *bprm)
  * sys_execve() executes a new program.
  */
 static int do_execve_common(struct filename *filename,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				struct user_arg_ptr argv,
 				struct user_arg_ptr envp)
@@ -1807,15 +1980,21 @@ static int do_execve_common(struct filename *filename,
 	struct file *file;
 	struct files_struct *displaced;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool clear_in_exec;
 	int retval;
 	const struct cred *cred = current_cred();
 	bool is_su;
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 
 	if (IS_ERR(filename))
 		return PTR_ERR(filename);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1826,7 +2005,11 @@ static int do_execve_common(struct filename *filename,
 	 */
 	if ((current->flags & PF_NPROC_EXCEEDED) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    atomic_read(&cred->user->processes) > rlimit(RLIMIT_NPROC)) {
+=======
+	    atomic_read(&current_user()->processes) > rlimit(RLIMIT_NPROC)) {
+>>>>>>> v3.18
 =======
 	    atomic_read(&current_user()->processes) > rlimit(RLIMIT_NPROC)) {
 >>>>>>> v3.18
@@ -1852,6 +2035,7 @@ static int do_execve_common(struct filename *filename,
 		goto out_free;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = check_unsafe_exec(bprm);
 	if (retval < 0)
 		goto out_free;
@@ -1860,10 +2044,15 @@ static int do_execve_common(struct filename *filename,
 
 	file = open_exec(filename);
 =======
+=======
+>>>>>>> v3.18
 	check_unsafe_exec(bprm);
 	current->in_execve = 1;
 
 	file = do_open_exec(filename);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	retval = PTR_ERR(file);
 	if (IS_ERR(file))
@@ -1873,6 +2062,7 @@ static int do_execve_common(struct filename *filename,
 
 	bprm->file = file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bprm->filename = filename;
 	bprm->interp = filename;
 
@@ -1880,11 +2070,16 @@ static int do_execve_common(struct filename *filename,
 	if (retval)
 		goto out_file;
 =======
+=======
+>>>>>>> v3.18
 	bprm->filename = bprm->interp = filename->name;
 
 	retval = bprm_mm_init(bprm);
 	if (retval)
 		goto out_unmark;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bprm->argc = count(argv, MAX_ARG_STRINGS);
@@ -1913,6 +2108,7 @@ static int do_execve_common(struct filename *filename,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* search_binary_handler can release file and it may be freed */
 	is_su = d_is_su(file->f_dentry);
 
@@ -1926,17 +2122,28 @@ static int do_execve_common(struct filename *filename,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	retval = exec_binprm(bprm);
 	if (retval < 0)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* execve succeeded */
 	current->fs->in_exec = 0;
 	current->in_execve = 0;
 	acct_update_integrals(current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_bprm(bprm);
+=======
+	task_numa_free(current);
+	free_bprm(bprm);
+	putname(filename);
+>>>>>>> v3.18
 =======
 	task_numa_free(current);
 	free_bprm(bprm);
@@ -1953,6 +2160,7 @@ out:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_file:
 	if (bprm->file) {
 		allow_write_access(bprm->file);
@@ -1962,6 +2170,10 @@ out_file:
 out_unmark:
 	if (clear_in_exec)
 		current->fs->in_exec = 0;
+=======
+out_unmark:
+	current->fs->in_exec = 0;
+>>>>>>> v3.18
 =======
 out_unmark:
 	current->fs->in_exec = 0;
@@ -1976,16 +2188,22 @@ out_files:
 		reset_files_struct(displaced);
 out_ret:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return retval;
 }
 
 int do_execve(const char *filename,
 =======
+=======
+>>>>>>> v3.18
 	putname(filename);
 	return retval;
 }
 
 int do_execve(struct filename *filename,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char __user *const __user *__argv,
 	const char __user *const __user *__envp)
@@ -1997,7 +2215,11 @@ int do_execve(struct filename *filename,
 
 #ifdef CONFIG_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int compat_do_execve(const char *filename,
+=======
+static int compat_do_execve(struct filename *filename,
+>>>>>>> v3.18
 =======
 static int compat_do_execve(struct filename *filename,
 >>>>>>> v3.18
@@ -2027,6 +2249,7 @@ void set_binfmt(struct linux_binfmt *new)
 	if (new)
 		__module_get(new->module);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 EXPORT_SYMBOL(set_binfmt);
@@ -2090,6 +2313,8 @@ int get_dumpable(struct mm_struct *mm)
 {
 	return __get_dumpable(mm->flags);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(set_binfmt);
 
 /*
@@ -2106,6 +2331,9 @@ void set_dumpable(struct mm_struct *mm, int value)
 		old = ACCESS_ONCE(mm->flags);
 		new = (old & ~MMF_DUMPABLE_MASK) | value;
 	} while (cmpxchg(&mm->flags, old, new) != old);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2114,6 +2342,7 @@ SYSCALL_DEFINE3(execve,
 		const char __user *const __user *, argv,
 		const char __user *const __user *, envp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct filename *path = getname(filename);
 	int error = PTR_ERR(path);
@@ -2136,6 +2365,8 @@ asmlinkage long compat_sys_execve(const char __user * filename,
 	}
 	return error;
 =======
+=======
+>>>>>>> v3.18
 	return do_execve(getname(filename), argv, envp);
 }
 #ifdef CONFIG_COMPAT
@@ -2144,6 +2375,9 @@ COMPAT_SYSCALL_DEFINE3(execve, const char __user *, filename,
 	const compat_uptr_t __user *, envp)
 {
 	return compat_do_execve(getname(filename), argv, envp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

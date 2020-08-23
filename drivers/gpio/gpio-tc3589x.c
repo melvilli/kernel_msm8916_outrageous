@@ -13,8 +13,11 @@
 #include <linux/gpio.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -35,10 +38,13 @@ struct tc3589x_gpio {
 	struct device *dev;
 	struct mutex irq_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_domain *domain;
 
 	int irq_base;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Caches of interrupt control registers for bus_lock */
@@ -102,6 +108,7 @@ static int tc3589x_gpio_direction_input(struct gpio_chip *chip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * tc3589x_gpio_irq_get_virq(): Map an interrupt on a chip to a virtual IRQ
  *
@@ -128,6 +135,8 @@ static int tc3589x_gpio_to_irq(struct gpio_chip *chip, unsigned offset)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct gpio_chip template_chip = {
 	.label			= "tc3589x",
 	.owner			= THIS_MODULE,
@@ -136,8 +145,12 @@ static struct gpio_chip template_chip = {
 	.direction_output	= tc3589x_gpio_direction_output,
 	.set			= tc3589x_gpio_set,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.to_irq			= tc3589x_gpio_to_irq,
 	.can_sleep		= 1,
+=======
+	.can_sleep		= true,
+>>>>>>> v3.18
 =======
 	.can_sleep		= true,
 >>>>>>> v3.18
@@ -146,7 +159,12 @@ static struct gpio_chip template_chip = {
 static int tc3589x_gpio_irq_set_type(struct irq_data *d, unsigned int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc3589x_gpio *tc3589x_gpio = irq_data_get_irq_chip_data(d);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
@@ -178,7 +196,12 @@ static int tc3589x_gpio_irq_set_type(struct irq_data *d, unsigned int type)
 static void tc3589x_gpio_irq_lock(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc3589x_gpio *tc3589x_gpio = irq_data_get_irq_chip_data(d);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
@@ -190,7 +213,12 @@ static void tc3589x_gpio_irq_lock(struct irq_data *d)
 static void tc3589x_gpio_irq_sync_unlock(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc3589x_gpio *tc3589x_gpio = irq_data_get_irq_chip_data(d);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
@@ -223,7 +251,12 @@ static void tc3589x_gpio_irq_sync_unlock(struct irq_data *d)
 static void tc3589x_gpio_irq_mask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc3589x_gpio *tc3589x_gpio = irq_data_get_irq_chip_data(d);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
@@ -238,7 +271,12 @@ static void tc3589x_gpio_irq_mask(struct irq_data *d)
 static void tc3589x_gpio_irq_unmask(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc3589x_gpio *tc3589x_gpio = irq_data_get_irq_chip_data(d);
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct tc3589x_gpio *tc3589x_gpio = container_of(gc, struct tc3589x_gpio, chip);
@@ -281,14 +319,20 @@ static irqreturn_t tc3589x_gpio_irq(int irq, void *dev)
 			int bit = __ffs(stat);
 			int line = i * 8 + bit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int virq = tc3589x_gpio_irq_get_virq(tc3589x_gpio, line);
 
 			handle_nested_irq(virq);
 =======
+=======
+>>>>>>> v3.18
 			int irq = irq_find_mapping(tc3589x_gpio->chip.irqdomain,
 						   line);
 
 			handle_nested_irq(irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			stat &= ~(1 << bit);
 		}
@@ -299,6 +343,7 @@ static irqreturn_t tc3589x_gpio_irq(int irq, void *dev)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tc3589x_gpio_irq_map(struct irq_domain *d, unsigned int virq,
 				irq_hw_number_t hwirq)
@@ -357,6 +402,8 @@ static int tc3589x_gpio_irq_init(struct tc3589x_gpio *tc3589x_gpio,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int tc3589x_gpio_probe(struct platform_device *pdev)
 {
 	struct tc3589x *tc3589x = dev_get_drvdata(pdev->dev.parent);
@@ -378,7 +425,12 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 		return irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tc3589x_gpio = kzalloc(sizeof(struct tc3589x_gpio), GFP_KERNEL);
+=======
+	tc3589x_gpio = devm_kzalloc(&pdev->dev, sizeof(struct tc3589x_gpio),
+				    GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tc3589x_gpio = devm_kzalloc(&pdev->dev, sizeof(struct tc3589x_gpio),
 				    GFP_KERNEL);
@@ -401,15 +453,19 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tc3589x_gpio->irq_base = tc3589x->irq_base ?
 		tc3589x->irq_base + TC3589x_INT_GPIO(0) : 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Bring the GPIO module out of reset */
 	ret = tc3589x_set_bits(tc3589x, TC3589x_RSTCTRL,
 			       TC3589x_RSTCTRL_GPIRST, 0);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_free;
 
@@ -423,6 +479,8 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "unable to get irq: %d\n", ret);
 		goto out_free;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = devm_request_threaded_irq(&pdev->dev,
@@ -432,6 +490,9 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "unable to get irq: %d\n", ret);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -439,10 +500,13 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "unable to add gpiochip: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_freeirq;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -462,6 +526,9 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 				     irq,
 				     NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdata && pdata->setup)
 		pdata->setup(tc3589x, tc3589x_gpio->chip.base);
@@ -470,12 +537,15 @@ static int tc3589x_gpio_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out_freeirq:
 	free_irq(irq, tc3589x_gpio);
 out_free:
 	kfree(tc3589x_gpio);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -486,14 +556,18 @@ static int tc3589x_gpio_remove(struct platform_device *pdev)
 	struct tc3589x *tc3589x = tc3589x_gpio->tc3589x;
 	struct tc3589x_gpio_platform_data *pdata = tc3589x->pdata->gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq = platform_get_irq(pdev, 0);
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (pdata && pdata->remove)
 		pdata->remove(tc3589x, tc3589x_gpio->chip.base);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = gpiochip_remove(&tc3589x_gpio->chip);
 	if (ret < 0) {
@@ -506,6 +580,9 @@ static int tc3589x_gpio_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, NULL);
 	kfree(tc3589x_gpio);
+=======
+	gpiochip_remove(&tc3589x_gpio->chip);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&tc3589x_gpio->chip);
 >>>>>>> v3.18

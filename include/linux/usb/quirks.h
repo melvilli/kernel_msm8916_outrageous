@@ -9,6 +9,7 @@
 
 /* string descriptors must not be fetched using a 255-byte read */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_QUIRK_STRING_FETCH_255	0x00000001
 
 /* device can't resume correctly so reset it instead */
@@ -39,6 +40,8 @@
 /* device can't handle Link Power Management */
 #define USB_QUIRK_NO_LPM			BIT(10)
 =======
+=======
+>>>>>>> v3.18
 #define USB_QUIRK_STRING_FETCH_255		BIT(0)
 
 /* device can't resume correctly so reset it instead */
@@ -77,6 +80,9 @@
 
 /* device generates spurious wakeup, ignore remote wakeup capability */
 #define USB_QUIRK_IGNORE_REMOTE_WAKEUP		BIT(9)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __LINUX_USB_QUIRKS_H */

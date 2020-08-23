@@ -38,6 +38,12 @@ static irqreturn_t fnic_isr_legacy(int irq, void *data)
 		return IRQ_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
+	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
+
+>>>>>>> v3.18
 =======
 	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
 	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
@@ -73,6 +79,12 @@ static irqreturn_t fnic_isr_msi(int irq, void *data)
 	unsigned long work_done = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
+	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
+
+>>>>>>> v3.18
 =======
 	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
 	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
@@ -96,6 +108,12 @@ static irqreturn_t fnic_isr_msix_rq(int irq, void *data)
 	unsigned long rq_work_done = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
+	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
+
+>>>>>>> v3.18
 =======
 	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
 	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
@@ -116,6 +134,12 @@ static irqreturn_t fnic_isr_msix_wq(int irq, void *data)
 	unsigned long wq_work_done = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
+	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
+
+>>>>>>> v3.18
 =======
 	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
 	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
@@ -135,6 +159,12 @@ static irqreturn_t fnic_isr_msix_wq_copy(int irq, void *data)
 	unsigned long wq_copy_work_done = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
+	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
+
+>>>>>>> v3.18
 =======
 	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
 	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
@@ -153,6 +183,12 @@ static irqreturn_t fnic_isr_msix_err_notify(int irq, void *data)
 	struct fnic *fnic = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
+	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
+
+>>>>>>> v3.18
 =======
 	fnic->fnic_stats.misc_stats.last_isr_time = jiffies;
 	atomic64_inc(&fnic->fnic_stats.misc_stats.isr_count);
@@ -276,8 +312,13 @@ int fnic_set_intr_mode(struct fnic *fnic)
 	    fnic->wq_copy_count >= o &&
 	    fnic->cq_count >= n + m + o) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pci_enable_msix(fnic->pdev, fnic->msix_entry,
 				    n + m + o + 1)) {
+=======
+		if (!pci_enable_msix_exact(fnic->pdev, fnic->msix_entry,
+					   n + m + o + 1)) {
+>>>>>>> v3.18
 =======
 		if (!pci_enable_msix_exact(fnic->pdev, fnic->msix_entry,
 					   n + m + o + 1)) {

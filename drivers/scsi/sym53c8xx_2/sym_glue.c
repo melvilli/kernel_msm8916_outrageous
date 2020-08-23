@@ -852,7 +852,11 @@ static void sym53c8xx_slave_destroy(struct scsi_device *sdev)
 		 */
 		starget_printk(KERN_WARNING, tp->starget,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       "Removing busy LCB (%d)\n", sdev->lun);
+=======
+			       "Removing busy LCB (%d)\n", (u8)sdev->lun);
+>>>>>>> v3.18
 =======
 			       "Removing busy LCB (%d)\n", (u8)sdev->lun);
 >>>>>>> v3.18
@@ -1536,7 +1540,11 @@ static int sym_iomap_device(struct sym_device *device)
 	int i = 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_resource_to_bus(pdev, &bus_addr, &pdev->resource[1]);
+=======
+	pcibios_resource_to_bus(pdev->bus, &bus_addr, &pdev->resource[1]);
+>>>>>>> v3.18
 =======
 	pcibios_resource_to_bus(pdev->bus, &bus_addr, &pdev->resource[1]);
 >>>>>>> v3.18
@@ -1550,7 +1558,12 @@ static int sym_iomap_device(struct sym_device *device)
 		if (!pdev->resource[i].flags)
 			i++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcibios_resource_to_bus(pdev, &bus_addr, &pdev->resource[i]);
+=======
+		pcibios_resource_to_bus(pdev->bus, &bus_addr,
+					&pdev->resource[i]);
+>>>>>>> v3.18
 =======
 		pcibios_resource_to_bus(pdev->bus, &bus_addr,
 					&pdev->resource[i]);

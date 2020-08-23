@@ -32,7 +32,11 @@
 #include "common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -572,7 +576,11 @@ il_dbgfs_channels_read(struct file *file, char __user *user_buf, size_t count,
 				      " (IEEE 802.11h required)" : "",
 				      ((channels[i].
 <<<<<<< HEAD
+<<<<<<< HEAD
 					flags & IEEE80211_CHAN_NO_IBSS) ||
+=======
+					flags & IEEE80211_CHAN_NO_IR) ||
+>>>>>>> v3.18
 =======
 					flags & IEEE80211_CHAN_NO_IR) ||
 >>>>>>> v3.18
@@ -581,7 +589,11 @@ il_dbgfs_channels_read(struct file *file, char __user *user_buf, size_t count,
 				      ", IBSS",
 				      channels[i].
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      flags & IEEE80211_CHAN_PASSIVE_SCAN ?
+=======
+				      flags & IEEE80211_CHAN_NO_IR ?
+>>>>>>> v3.18
 =======
 				      flags & IEEE80211_CHAN_NO_IR ?
 >>>>>>> v3.18
@@ -607,7 +619,11 @@ il_dbgfs_channels_read(struct file *file, char __user *user_buf, size_t count,
 				      " (IEEE 802.11h required)" : "",
 				      ((channels[i].
 <<<<<<< HEAD
+<<<<<<< HEAD
 					flags & IEEE80211_CHAN_NO_IBSS) ||
+=======
+					flags & IEEE80211_CHAN_NO_IR) ||
+>>>>>>> v3.18
 =======
 					flags & IEEE80211_CHAN_NO_IR) ||
 >>>>>>> v3.18
@@ -616,7 +632,11 @@ il_dbgfs_channels_read(struct file *file, char __user *user_buf, size_t count,
 				      ", IBSS",
 				      channels[i].
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      flags & IEEE80211_CHAN_PASSIVE_SCAN ?
+=======
+				      flags & IEEE80211_CHAN_NO_IR ?
+>>>>>>> v3.18
 =======
 				      flags & IEEE80211_CHAN_NO_IR ?
 >>>>>>> v3.18

@@ -15,6 +15,10 @@
 #include <linux/fs.h>
 #include <linux/aio_abi.h>	/* for aio_context_t */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/unistd.h>
+>>>>>>> v3.18
 =======
 #include <linux/unistd.h>
 >>>>>>> v3.18
@@ -32,6 +36,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define COMPAT_SYSCALL_DEFINE0(name) \
+	asmlinkage long compat_sys_##name(void)
+
+>>>>>>> v3.18
 =======
 #define COMPAT_SYSCALL_DEFINE0(name) \
 	asmlinkage long compat_sys_##name(void)
@@ -52,20 +62,29 @@
 
 #define COMPAT_SYSCALL_DEFINEx(x, name, ...)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asmlinkage long compat_sys##name(__MAP(x,__SC_DECL,__VA_ARGS__));\
 	static inline long C_SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__));\
 =======
+=======
+>>>>>>> v3.18
 	asmlinkage long compat_sys##name(__MAP(x,__SC_DECL,__VA_ARGS__))\
 		__attribute__((alias(__stringify(compat_SyS##name))));  \
 	static inline long C_SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__));\
 	asmlinkage long compat_SyS##name(__MAP(x,__SC_LONG,__VA_ARGS__));\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asmlinkage long compat_SyS##name(__MAP(x,__SC_LONG,__VA_ARGS__))\
 	{								\
 		return C_SYSC##name(__MAP(x,__SC_DELOUSE,__VA_ARGS__));	\
 	}								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SYSCALL_ALIAS(compat_sys##name, compat_SyS##name);		\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	static inline long C_SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__))
@@ -88,6 +107,11 @@ typedef __compat_uid32_t	compat_uid_t;
 typedef __compat_gid32_t	compat_gid_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+typedef	compat_ulong_t		compat_aio_context_t;
+
+>>>>>>> v3.18
 =======
 typedef	compat_ulong_t		compat_aio_context_t;
 
@@ -166,6 +190,7 @@ struct compat_sigaction {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * These functions operate strictly on struct compat_time*
  */
 extern int get_compat_timespec(struct timespec *,
@@ -184,6 +209,10 @@ extern int put_compat_timeval(const struct timeval *,
  * These functions operate on 32- or 64-bit specs depending on
  * COMPAT_USE_64BIT_TIME, hence the void user pointer arguments.
 >>>>>>> v3.18
+=======
+ * These functions operate on 32- or 64-bit specs depending on
+ * COMPAT_USE_64BIT_TIME, hence the void user pointer arguments.
+>>>>>>> v3.18
  */
 extern int compat_get_timespec(struct timespec *, const void __user *);
 extern int compat_put_timespec(const struct timespec *, void __user *);
@@ -191,7 +220,10 @@ extern int compat_get_timeval(struct timeval *, const void __user *);
 extern int compat_put_timeval(const struct timeval *, void __user *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This function convert a timespec if necessary and returns a *user
  * space* pointer.  If no conversion is necessary, it returns the
@@ -201,6 +233,9 @@ extern int compat_put_timeval(const struct timeval *, void __user *);
 extern int compat_convert_timespec(struct timespec __user **,
 				   const void __user *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct compat_iovec {
 	compat_uptr_t	iov_base;
@@ -360,7 +395,11 @@ asmlinkage long compat_sys_msgsnd(int msqid, compat_uptr_t msgp,
 		compat_ssize_t msgsz, int msgflg);
 asmlinkage long compat_sys_msgrcv(int msqid, compat_uptr_t msgp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compat_ssize_t msgsz, long msgtyp, int msgflg);
+=======
+		compat_ssize_t msgsz, compat_long_t msgtyp, int msgflg);
+>>>>>>> v3.18
 =======
 		compat_ssize_t msgsz, compat_long_t msgtyp, int msgflg);
 >>>>>>> v3.18
@@ -383,8 +422,11 @@ asmlinkage ssize_t compat_sys_pwritev(compat_ulong_t fd,
 		const struct compat_iovec __user *vec,
 		compat_ulong_t vlen, u32 pos_low, u32 pos_high);
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long comat_sys_lseek(unsigned int, compat_off_t, unsigned int);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __ARCH_WANT_COMPAT_SYS_PREADV64
 asmlinkage long compat_sys_preadv64(unsigned long fd,
@@ -399,6 +441,9 @@ asmlinkage long compat_sys_pwritev64(unsigned long fd,
 #endif
 
 asmlinkage long compat_sys_lseek(unsigned int, compat_off_t, unsigned int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 asmlinkage long compat_sys_execve(const char __user *filename, const compat_uptr_t __user *argv,
@@ -514,7 +559,11 @@ asmlinkage long compat_sys_timerfd_gettime(int ufd,
 				   struct compat_itimerspec __user *otmr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_move_pages(pid_t pid, unsigned long nr_page,
+=======
+asmlinkage long compat_sys_move_pages(pid_t pid, compat_ulong_t nr_pages,
+>>>>>>> v3.18
 =======
 asmlinkage long compat_sys_move_pages(pid_t pid, compat_ulong_t nr_pages,
 >>>>>>> v3.18
@@ -548,6 +597,7 @@ asmlinkage long compat_sys_fstatfs64(unsigned int fd, compat_size_t sz,
 				     struct compat_statfs64 __user *buf);
 asmlinkage long compat_sys_fcntl64(unsigned int fd, unsigned int cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   unsigned long arg);
 asmlinkage long compat_sys_fcntl(unsigned int fd, unsigned int cmd,
 				 unsigned long arg);
@@ -563,6 +613,8 @@ asmlinkage long compat_sys_mount(const char __user *dev_name,
 				 const char __user *dir_name,
 				 const char __user *type, unsigned long flags,
 =======
+=======
+>>>>>>> v3.18
 				   compat_ulong_t arg);
 asmlinkage long compat_sys_fcntl(unsigned int fd, unsigned int cmd,
 				 compat_ulong_t arg);
@@ -577,6 +629,9 @@ asmlinkage long compat_sys_io_submit(compat_aio_context_t ctx_id, int nr,
 asmlinkage long compat_sys_mount(const char __user *dev_name,
 				 const char __user *dir_name,
 				 const char __user *type, compat_ulong_t flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 const void __user *data);
 asmlinkage long compat_sys_old_readdir(unsigned int fd,
@@ -635,9 +690,15 @@ asmlinkage long compat_sys_sendmmsg(int fd, struct compat_mmsghdr __user *mmsg,
 asmlinkage long compat_sys_recvmsg(int fd, struct compat_msghdr __user *msg,
 				   unsigned int flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_recv(int fd, void __user *buf, size_t len,
 				unsigned flags);
 asmlinkage long compat_sys_recvfrom(int fd, void __user *buf, size_t len,
+=======
+asmlinkage long compat_sys_recv(int fd, void __user *buf, compat_size_t len,
+				unsigned flags);
+asmlinkage long compat_sys_recvfrom(int fd, void __user *buf, compat_size_t len,
+>>>>>>> v3.18
 =======
 asmlinkage long compat_sys_recv(int fd, void __user *buf, compat_size_t len,
 				unsigned flags);
@@ -707,7 +768,11 @@ asmlinkage long compat_sys_rt_sigqueueinfo(compat_pid_t pid, int sig,
 asmlinkage long compat_sys_sysinfo(struct compat_sysinfo __user *info);
 asmlinkage long compat_sys_ioctl(unsigned int fd, unsigned int cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 unsigned long arg);
+=======
+				 compat_ulong_t arg);
+>>>>>>> v3.18
 =======
 				 compat_ulong_t arg);
 >>>>>>> v3.18
@@ -717,15 +782,21 @@ asmlinkage long compat_sys_futex(u32 __user *uaddr, int op, u32 val,
 asmlinkage long compat_sys_getsockopt(int fd, int level, int optname,
 				      char __user *optval, int __user *optlen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_kexec_load(unsigned long entry,
 				      unsigned long nr_segments,
 				      struct compat_kexec_segment __user *,
 				      unsigned long flags);
 =======
+=======
+>>>>>>> v3.18
 asmlinkage long compat_sys_kexec_load(compat_ulong_t entry,
 				      compat_ulong_t nr_segments,
 				      struct compat_kexec_segment __user *,
 				      compat_ulong_t flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 asmlinkage long compat_sys_mq_getsetattr(mqd_t mqdes,
 			const struct compat_mq_attr __user *u_mqstat,
@@ -738,17 +809,23 @@ asmlinkage long compat_sys_mq_open(const char __user *u_name,
 asmlinkage long compat_sys_mq_timedsend(mqd_t mqdes,
 			const char __user *u_msg_ptr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			size_t msg_len, unsigned int msg_prio,
 			const struct compat_timespec __user *u_abs_timeout);
 asmlinkage ssize_t compat_sys_mq_timedreceive(mqd_t mqdes,
 			char __user *u_msg_ptr,
 			size_t msg_len, unsigned int __user *u_msg_prio,
 =======
+=======
+>>>>>>> v3.18
 			compat_size_t msg_len, unsigned int msg_prio,
 			const struct compat_timespec __user *u_abs_timeout);
 asmlinkage ssize_t compat_sys_mq_timedreceive(mqd_t mqdes,
 			char __user *u_msg_ptr,
 			compat_size_t msg_len, unsigned int __user *u_msg_prio,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			const struct compat_timespec __user *u_abs_timeout);
 asmlinkage long compat_sys_socketcall(int call, u32 __user *args);
@@ -765,6 +842,7 @@ extern void __user *compat_alloc_user_space(unsigned long len);
 asmlinkage ssize_t compat_sys_process_vm_readv(compat_pid_t pid,
 		const struct compat_iovec __user *lvec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long liovcnt, const struct compat_iovec __user *rvec,
 		unsigned long riovcnt, unsigned long flags);
 asmlinkage ssize_t compat_sys_process_vm_writev(compat_pid_t pid,
@@ -772,12 +850,17 @@ asmlinkage ssize_t compat_sys_process_vm_writev(compat_pid_t pid,
 		unsigned long liovcnt, const struct compat_iovec __user *rvec,
 		unsigned long riovcnt, unsigned long flags);
 =======
+=======
+>>>>>>> v3.18
 		compat_ulong_t liovcnt, const struct compat_iovec __user *rvec,
 		compat_ulong_t riovcnt, compat_ulong_t flags);
 asmlinkage ssize_t compat_sys_process_vm_writev(compat_pid_t pid,
 		const struct compat_iovec __user *lvec,
 		compat_ulong_t liovcnt, const struct compat_iovec __user *rvec,
 		compat_ulong_t riovcnt, compat_ulong_t flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 asmlinkage long compat_sys_sendfile(int out_fd, int in_fd,

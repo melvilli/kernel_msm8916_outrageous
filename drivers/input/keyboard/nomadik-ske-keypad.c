@@ -223,7 +223,12 @@ static irqreturn_t ske_keypad_irq(int irq, void *dev_id)
 static int __init ske_keypad_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct ske_keypad_platform_data *plat = pdev->dev.platform_data;
+=======
+	const struct ske_keypad_platform_data *plat =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	const struct ske_keypad_platform_data *plat =
 			dev_get_platdata(&pdev->dev);

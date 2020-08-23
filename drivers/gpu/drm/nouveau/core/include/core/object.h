@@ -49,11 +49,17 @@ int  nouveau_object_init(struct nouveau_object *);
 int  nouveau_object_fini(struct nouveau_object *, bool suspend);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int _nouveau_object_ctor(struct nouveau_object *, struct nouveau_object *,
 			 struct nouveau_oclass *, void *, u32,
 			 struct nouveau_object **);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct nouveau_ofuncs nouveau_object_ofuncs;
 
@@ -86,6 +92,10 @@ struct nouveau_omthds {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct nvkm_event;
+>>>>>>> v3.18
 =======
 struct nvkm_event;
 >>>>>>> v3.18
@@ -97,6 +107,12 @@ struct nouveau_ofuncs {
 	int  (*init)(struct nouveau_object *);
 	int  (*fini)(struct nouveau_object *, bool suspend);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int  (*mthd)(struct nouveau_object *, u32, void *, u32);
+	int  (*ntfy)(struct nouveau_object *, u32, struct nvkm_event **);
+	int  (* map)(struct nouveau_object *, u64 *, u32 *);
+>>>>>>> v3.18
 =======
 	int  (*mthd)(struct nouveau_object *, u32, void *, u32);
 	int  (*ntfy)(struct nouveau_object *, u32, struct nvkm_event **);
@@ -124,10 +140,13 @@ int nouveau_object_inc(struct nouveau_object *);
 int nouveau_object_dec(struct nouveau_object *, bool suspend);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nouveau_object_new(struct nouveau_object *, u32 parent, u32 handle,
 		       u16 oclass, void *data, u32 size,
 		       struct nouveau_object **);
 int nouveau_object_del(struct nouveau_object *, u32 parent, u32 handle);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void nouveau_object_debug(void);
@@ -220,7 +239,10 @@ nv_memcmp(void *obj, u32 addr, const char *str, u32 len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <core/handle.h>
 
 static inline int
@@ -238,5 +260,8 @@ nouveau_object_del(struct nouveau_object *client, u32 parent, u32 handle)
 	return nouveau_handle_del(client, parent, handle);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

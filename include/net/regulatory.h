@@ -39,6 +39,7 @@ enum environment_cap {
  * @rcu_head: RCU head struct used to free the request
  * @wiphy_idx: this is set if this request's initiator is
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	%REGDOM_SET_BY_COUNTRY_IE or %REGDOM_SET_BY_DRIVER. This
  * 	can be used by the wireless core to deal with conflicts
  * 	and potentially inform users of which devices specifically
@@ -51,6 +52,8 @@ enum environment_cap {
  * 	99 - built by driver but a specific alpha2 cannot be determined
  * 	98 - result of an intersection between two regulatory domains
 =======
+=======
+>>>>>>> v3.18
  *	%REGDOM_SET_BY_COUNTRY_IE or %REGDOM_SET_BY_DRIVER. This
  *	can be used by the wireless core to deal with conflicts
  *	and potentially inform users of which devices specifically
@@ -62,6 +65,9 @@ enum environment_cap {
  *	00 - World regulatory domain
  *	99 - built by driver but a specific alpha2 cannot be determined
  *	98 - result of an intersection between two regulatory domains
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	97 - regulatory domain has not yet been configured
  * @dfs_region: If CRDA responded with a regulatory domain that requires
@@ -74,8 +80,13 @@ enum environment_cap {
  *	types.
  * @intersect: indicates whether the wireless core should intersect
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	the requested regulatory domain with the presently set regulatory
  * 	domain.
+=======
+ *	the requested regulatory domain with the presently set regulatory
+ *	domain.
+>>>>>>> v3.18
 =======
  *	the requested regulatory domain with the presently set regulatory
  *	domain.
@@ -88,9 +99,15 @@ enum environment_cap {
  *	is processed before processing any new requests.
  * @country_ie_checksum: checksum of the last processed and accepted
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	country IE
  * @country_ie_env: lets us know if the AP is telling us we are outdoor,
  * 	indoor, or if it doesn't matter
+=======
+ *	country IE
+ * @country_ie_env: lets us know if the AP is telling us we are outdoor,
+ *	indoor, or if it doesn't matter
+>>>>>>> v3.18
 =======
  *	country IE
  * @country_ie_env: lets us know if the AP is telling us we are outdoor,
@@ -105,7 +122,11 @@ struct regulatory_request {
 	enum nl80211_user_reg_hint_type user_reg_hint_type;
 	char alpha2[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 dfs_region;
+=======
+	enum nl80211_dfs_regions dfs_region;
+>>>>>>> v3.18
 =======
 	enum nl80211_dfs_regions dfs_region;
 >>>>>>> v3.18
@@ -116,7 +137,10 @@ struct regulatory_request {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum ieee80211_regulatory_flags - device regulatory flags
  *
@@ -177,6 +201,9 @@ enum ieee80211_regulatory_flags {
 	REGULATORY_ENABLE_RELAX_NO_IR           = BIT(5),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ieee80211_freq_range {
 	u32 start_freq_khz;
@@ -194,6 +221,10 @@ struct ieee80211_reg_rule {
 	struct ieee80211_power_rule power_rule;
 	u32 flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 dfs_cac_ms;
+>>>>>>> v3.18
 =======
 	u32 dfs_cac_ms;
 >>>>>>> v3.18
@@ -203,8 +234,13 @@ struct ieee80211_regdomain {
 	struct rcu_head rcu_head;
 	u32 n_reg_rules;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char alpha2[2];
 	u8 dfs_region;
+=======
+	char alpha2[3];
+	enum nl80211_dfs_regions dfs_region;
+>>>>>>> v3.18
 =======
 	char alpha2[3];
 	enum nl80211_dfs_regions dfs_region;
@@ -220,6 +256,7 @@ struct ieee80211_regdomain {
 #define MBM_TO_DBM(gain) ((gain) / 100)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_RULE(start, end, bw, gain, eirp, reg_flags) \
 {							\
 	.freq_range.start_freq_khz = MHZ_TO_KHZ(start),	\
@@ -231,6 +268,8 @@ struct ieee80211_regdomain {
 }
 
 =======
+=======
+>>>>>>> v3.18
 #define REG_RULE_EXT(start, end, bw, gain, eirp, dfs_cac, reg_flags)	\
 {									\
 	.freq_range.start_freq_khz = MHZ_TO_KHZ(start),			\
@@ -245,5 +284,8 @@ struct ieee80211_regdomain {
 #define REG_RULE(start, end, bw, gain, eirp, reg_flags) \
 	REG_RULE_EXT(start, end, bw, gain, eirp, 0, reg_flags)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -28,10 +28,13 @@ struct vm_event_state {
 DECLARE_PER_CPU(struct vm_event_state, vm_event_states);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __count_vm_event(enum vm_event_item item)
 {
 	__this_cpu_inc(vm_event_states.event[item]);
 =======
+=======
+>>>>>>> v3.18
 /*
  * vm counters are allowed to be racy. Use raw_cpu_ops to avoid the
  * local_irq_disable overhead.
@@ -39,6 +42,9 @@ static inline void __count_vm_event(enum vm_event_item item)
 static inline void __count_vm_event(enum vm_event_item item)
 {
 	raw_cpu_inc(vm_event_states.event[item]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -50,7 +56,11 @@ static inline void count_vm_event(enum vm_event_item item)
 static inline void __count_vm_events(enum vm_event_item item, long delta)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__this_cpu_add(vm_event_states.event[item], delta);
+=======
+	raw_cpu_add(vm_event_states.event[item], delta);
+>>>>>>> v3.18
 =======
 	raw_cpu_add(vm_event_states.event[item], delta);
 >>>>>>> v3.18
@@ -98,7 +108,10 @@ static inline void vm_events_fold_cpu(int cpu)
 #endif /* CONFIG_NUMA_BALANCING */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_TLBFLUSH
 #define count_vm_tlb_event(x)	   count_vm_event(x)
 #define count_vm_tlb_events(x, y)  count_vm_events(x, y)
@@ -113,6 +126,9 @@ static inline void vm_events_fold_cpu(int cpu)
 #define count_vm_vmacache_event(x) do {} while (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __count_zone_vm_events(item, zone, delta) \
 		__count_vm_events(item##_NORMAL - ZONE_NORMAL + \
@@ -174,6 +190,7 @@ static inline unsigned long zone_page_state_snapshot(struct zone *zone,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long global_page_state_snapshot(enum zone_stat_item item)
 {
 	long x = atomic_long_read(&vm_stat[item]);
@@ -193,6 +210,8 @@ static inline unsigned long global_page_state_snapshot(enum zone_stat_item item)
 	return x;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_NUMA
@@ -233,8 +252,11 @@ extern void zone_statistics(struct zone *, struct zone *, gfp_t gfp);
 #define sub_zone_page_state(__z, __i, __d) mod_zone_page_state(__z, __i, -(__d))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inc_zone_state(struct zone *, enum zone_stat_item);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
@@ -252,7 +274,11 @@ extern void dec_zone_state(struct zone *, enum zone_stat_item);
 extern void __dec_zone_state(struct zone *, enum zone_stat_item);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void refresh_cpu_vm_stats(int);
+=======
+void cpu_vm_stats_fold(int cpu);
+>>>>>>> v3.18
 =======
 void cpu_vm_stats_fold(int cpu);
 >>>>>>> v3.18
@@ -283,12 +309,15 @@ static inline void __inc_zone_state(struct zone *zone, enum zone_stat_item item)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __inc_zone_page_state(struct page *page,
 			enum zone_stat_item item)
 {
 	__inc_zone_state(page_zone(page), item);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void __dec_zone_state(struct zone *zone, enum zone_stat_item item)
@@ -298,13 +327,19 @@ static inline void __dec_zone_state(struct zone *zone, enum zone_stat_item item)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void __inc_zone_page_state(struct page *page,
 			enum zone_stat_item item)
 {
 	__inc_zone_state(page_zone(page), item);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __dec_zone_page_state(struct page *page,
 			enum zone_stat_item item)
@@ -321,6 +356,12 @@ static inline void __dec_zone_page_state(struct page *page,
 #define mod_zone_page_state __mod_zone_page_state
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define inc_zone_state __inc_zone_state
+#define dec_zone_state __dec_zone_state
+
+>>>>>>> v3.18
 =======
 #define inc_zone_state __inc_zone_state
 #define dec_zone_state __dec_zone_state
@@ -331,6 +372,10 @@ static inline void __dec_zone_page_state(struct page *page,
 static inline void refresh_cpu_vm_stats(int cpu) { }
 static inline void refresh_zone_stat_thresholds(void) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void cpu_vm_stats_fold(int cpu) { }
+>>>>>>> v3.18
 =======
 static inline void cpu_vm_stats_fold(int cpu) { }
 >>>>>>> v3.18

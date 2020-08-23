@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License along
 <<<<<<< HEAD
+<<<<<<< HEAD
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -41,21 +45,31 @@ struct slave;
 					 * to zero !!!
 					 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOND_ALB_LP_INTERVAL	    1	/* In seconds, periodic send of
 					 * learning packets to the switch
 					 */
 =======
+=======
+>>>>>>> v3.18
 #define BOND_ALB_DEFAULT_LP_INTERVAL 1
 #define BOND_ALB_LP_INTERVAL(bond) (bond->params.lp_interval)	/* In seconds, periodic send of
 								 * learning packets to the switch
 								 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BOND_TLB_REBALANCE_TICKS (BOND_TLB_REBALANCE_INTERVAL \
 				  * ALB_TIMER_TICKS_PER_SEC)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOND_ALB_LP_TICKS (BOND_ALB_LP_INTERVAL \
+=======
+#define BOND_ALB_LP_TICKS(bond) (BOND_ALB_LP_INTERVAL(bond) \
+>>>>>>> v3.18
 =======
 #define BOND_ALB_LP_TICKS(bond) (BOND_ALB_LP_INTERVAL(bond) \
 >>>>>>> v3.18
@@ -69,7 +83,10 @@ struct slave;
 
 #define TLB_NULL_INDEX		0xffffffff
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_LP_BURST		3
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -145,7 +162,10 @@ struct rlb_client_info {
 	u8  ntt;		/* flag - need to transmit client info */
 	struct slave *slave;	/* the slave assigned to this client */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 tag;			/* flag - need to tag skb */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short vlan_id;	/* VLAN tag associated with IP address */
@@ -165,7 +185,10 @@ struct tlb_slave_info {
 struct alb_bond_info {
 	struct tlb_client_info	*tx_hashtbl; /* Dynamically allocated */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t		tx_hashtbl_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32			unbalanced_load;
@@ -175,7 +198,10 @@ struct alb_bond_info {
 	int rlb_enabled;
 	struct rlb_client_info	*rx_hashtbl;	/* Receive hash table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t		rx_hashtbl_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32			rx_hashtbl_used_head;
@@ -183,9 +209,13 @@ struct alb_bond_info {
 					 * to all rx clients
 					 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct slave		*next_rx_slave;/* next slave to be assigned
 						* to a new rx client for
 						*/
+=======
+	struct slave		*rx_slave;/* last slave to xmit from */
+>>>>>>> v3.18
 =======
 	struct slave		*rx_slave;/* last slave to xmit from */
 >>>>>>> v3.18
@@ -202,7 +232,10 @@ struct alb_bond_info {
 						 * rebalanced
 						 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vlan_entry	*current_alb_vlan;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -215,6 +248,10 @@ void bond_alb_handle_link_change(struct bonding *bond, struct slave *slave, char
 void bond_alb_handle_active_change(struct bonding *bond, struct slave *new_slave);
 int bond_alb_xmit(struct sk_buff *skb, struct net_device *bond_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int bond_tlb_xmit(struct sk_buff *skb, struct net_device *bond_dev);
+>>>>>>> v3.18
 =======
 int bond_tlb_xmit(struct sk_buff *skb, struct net_device *bond_dev);
 >>>>>>> v3.18

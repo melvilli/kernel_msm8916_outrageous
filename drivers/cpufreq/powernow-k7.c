@@ -249,7 +249,11 @@ static void change_VID(int vid)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void change_speed(struct cpufreq_policy *policy, unsigned int index)
+=======
+static int powernow_target(struct cpufreq_policy *policy, unsigned int index)
+>>>>>>> v3.18
 =======
 static int powernow_target(struct cpufreq_policy *policy, unsigned int index)
 >>>>>>> v3.18
@@ -274,8 +278,11 @@ static int powernow_target(struct cpufreq_policy *policy, unsigned int index)
 	freqs.new = powernow_table[index].frequency;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Now do the magic poking into the MSRs.  */
@@ -298,7 +305,11 @@ static int powernow_target(struct cpufreq_policy *policy, unsigned int index)
 		local_irq_enable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -545,6 +556,7 @@ static int powernow_decode_bios(int maxfid, int startvid)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int powernow_target(struct cpufreq_policy *policy,
 			    unsigned int target_freq,
 			    unsigned int relation)
@@ -566,6 +578,8 @@ static int powernow_verify(struct cpufreq_policy *policy)
 	return cpufreq_frequency_table_verify(policy, powernow_table);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -693,6 +707,7 @@ static int powernow_cpu_init(struct cpufreq_policy *policy)
 		cpufreq_scale(2000000UL, fsb, latency);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = powernow_get(0);
 
 	cpufreq_frequency_table_get_attr(powernow_table, policy->cpu);
@@ -701,13 +716,19 @@ static int powernow_cpu_init(struct cpufreq_policy *policy)
 =======
 	return cpufreq_table_validate_and_show(policy, powernow_table);
 >>>>>>> v3.18
+=======
+	return cpufreq_table_validate_and_show(policy, powernow_table);
+>>>>>>> v3.18
 }
 
 static int powernow_cpu_exit(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_put_attr(policy->cpu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_POWERNOW_K7_ACPI
@@ -723,6 +744,7 @@ static int powernow_cpu_exit(struct cpufreq_policy *policy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct freq_attr *powernow_table_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
 	NULL,
@@ -736,6 +758,11 @@ static struct cpufreq_driver powernow_driver = {
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= powernow_target,
 >>>>>>> v3.18
+=======
+static struct cpufreq_driver powernow_driver = {
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= powernow_target,
+>>>>>>> v3.18
 	.get		= powernow_get,
 #ifdef CONFIG_X86_POWERNOW_K7_ACPI
 	.bios_limit	= acpi_processor_get_bios_limit,
@@ -744,7 +771,11 @@ static struct cpufreq_driver powernow_driver = {
 	.exit		= powernow_cpu_exit,
 	.name		= "powernow-k7",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attr		= powernow_table_attr,
+=======
+	.attr		= cpufreq_generic_attr,
+>>>>>>> v3.18
 =======
 	.attr		= cpufreq_generic_attr,
 >>>>>>> v3.18

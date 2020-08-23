@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *  SuperH Ethernet device driver
+=======
+/*  SuperH Ethernet device driver
+>>>>>>> v3.18
 =======
 /*  SuperH Ethernet device driver
 >>>>>>> v3.18
@@ -17,9 +21,12 @@
  *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  *  more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  You should have received a copy of the GNU General Public License along with
  *  this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -39,8 +46,12 @@
 #define TX_RING_MAX	1024
 #define RX_RING_MAX	1024
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ETHERSMALL		60
 #define PKT_BUF_SZ		1538
+=======
+#define PKT_BUF_SZ	1538
+>>>>>>> v3.18
 =======
 #define PKT_BUF_SZ	1538
 >>>>>>> v3.18
@@ -72,6 +83,10 @@ enum {
 	TFUCR,
 	RFOCR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RMIIMODE,
+>>>>>>> v3.18
 =======
 	RMIIMODE,
 >>>>>>> v3.18
@@ -172,6 +187,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Driver's parameters */
 #if defined(CONFIG_CPU_SH4) || defined(CONFIG_ARCH_SHMOBILE)
 #define SH4_SKB_RX_ALIGN	32
@@ -186,6 +202,8 @@ enum {
     defined(CONFIG_ARCH_R8A7740)
 /* EDSR */
 =======
+=======
+>>>>>>> v3.18
 enum {
 	SH_ETH_REG_GIGABIT,
 	SH_ETH_REG_FAST_RZ,
@@ -204,6 +222,9 @@ enum {
 /* Register's bits
  */
 /* EDSR : sh7734, sh7757, sh7763, r8a7740, and r7s72100 only */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum EDSR_BIT {
 	EDSR_ENT = 0x01, EDSR_ENR = 0x02,
@@ -211,16 +232,22 @@ enum EDSR_BIT {
 #define EDSR_ENALL (EDSR_ENT|EDSR_ENR)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* GECMR */
 enum GECMR_BIT {
 	GECMR_10 = 0x0, GECMR_100 = 0x04, GECMR_1000 = 0x01,
 };
 #endif
 =======
+=======
+>>>>>>> v3.18
 /* GECMR : sh7734, sh7763 and r8a7740 only */
 enum GECMR_BIT {
 	GECMR_10 = 0x0, GECMR_100 = 0x04, GECMR_1000 = 0x01,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* EDMR */
@@ -238,7 +265,11 @@ enum DMAC_T_BIT {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* EDRRR*/
+=======
+/* EDRRR */
+>>>>>>> v3.18
 =======
 /* EDRRR */
 >>>>>>> v3.18
@@ -299,7 +330,10 @@ enum EESR_BIT {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EESR_RX_CHECK		(EESR_FRC  | /* Frame recv */		\
 				 EESR_RMAF | /* Multicast address recv */ \
 				 EESR_RRF  | /* Bit frame recv */	\
@@ -308,6 +342,9 @@ enum EESR_BIT {
 				 EESR_PRE  | /* PHY-LSI recv error */	\
 				 EESR_CERF)  /* Recv frame CRC error */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DEFAULT_TX_CHECK	(EESR_FTC | EESR_CND | EESR_DLC | EESR_CD | \
 				 EESR_RTO)
@@ -315,8 +352,11 @@ enum EESR_BIT {
 				 EESR_RDE | EESR_RFRMER | EESR_ADE | \
 				 EESR_TFE | EESR_TDE | EESR_ECI)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFAULT_TX_ERROR_CHECK	(EESR_TWB | EESR_TABT | EESR_ADE | EESR_TDE | \
 				 EESR_TFE)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -361,17 +401,23 @@ enum FCFTR_BIT {
 #define DEFAULT_FIFO_F_D_RFD	(FCFTR_RFD2 | FCFTR_RFD1 | FCFTR_RFD0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Transfer descriptor bit */
 enum TD_STS_BIT {
 	TD_TACT = 0x80000000,
 	TD_TDLE = 0x40000000, TD_TFP1 = 0x20000000,
 	TD_TFP0 = 0x10000000,
 =======
+=======
+>>>>>>> v3.18
 /* Transmit descriptor bit */
 enum TD_STS_BIT {
 	TD_TACT = 0x80000000, TD_TDLE = 0x40000000,
 	TD_TFP1 = 0x20000000, TD_TFP0 = 0x10000000,
 	TD_TFE  = 0x08000000, TD_TWBI = 0x04000000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define TDF1ST	TD_TFP1
@@ -380,7 +426,13 @@ enum TD_STS_BIT {
 
 /* RMCR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFAULT_RMCR_VALUE	0x00000000
+=======
+enum RMCR_BIT {
+	RMCR_RNC = 0x00000001,
+};
+>>>>>>> v3.18
 =======
 enum RMCR_BIT {
 	RMCR_RNC = 0x00000001,
@@ -484,8 +536,12 @@ enum TSU_FWSLC_BIT {
 #define TSU_VTAG_VID_MASK	0x00000fff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The sh ether Tx buffer descriptors.
+=======
+/* The sh ether Tx buffer descriptors.
+>>>>>>> v3.18
 =======
 /* The sh ether Tx buffer descriptors.
 >>>>>>> v3.18
@@ -503,10 +559,16 @@ struct sh_eth_txdesc {
 	u32 addr;		/* TD2 */
 	u32 pad1;		/* padding data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((aligned(2), packed));
 
 /*
  * The sh ether Rx buffer descriptors.
+=======
+} __aligned(2) __packed;
+
+/* The sh ether Rx buffer descriptors.
+>>>>>>> v3.18
 =======
 } __aligned(2) __packed;
 
@@ -526,7 +588,11 @@ struct sh_eth_rxdesc {
 	u32 addr;		/* RD2 */
 	u32 pad0;		/* padding data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((aligned(2), packed));
+=======
+} __aligned(2) __packed;
+>>>>>>> v3.18
 =======
 } __aligned(2) __packed;
 >>>>>>> v3.18
@@ -540,6 +606,10 @@ struct sh_eth_cpu_data {
 
 	/* mandatory initialize value */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int register_type;
+>>>>>>> v3.18
 =======
 	int register_type;
 >>>>>>> v3.18
@@ -552,13 +622,17 @@ struct sh_eth_cpu_data {
 	unsigned long fcftr_value;
 	unsigned long rpadir_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long rmcr_value;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	/* interrupt checking mask */
 	unsigned long tx_check;
 	unsigned long eesr_err_check;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long tx_error_check;
 
@@ -576,6 +650,8 @@ struct sh_eth_cpu_data {
 	unsigned hw_crc:1;	/* E-DMAC have CSMR */
 	unsigned select_mii:1;	/* EtherC have RMII_MII (MII select register) */
 =======
+=======
+>>>>>>> v3.18
 
 	/* hardware features */
 	unsigned long irq_flags; /* IRQ configuration flags */
@@ -593,6 +669,9 @@ struct sh_eth_cpu_data {
 	unsigned select_mii:1;	/* EtherC have RMII_MII (MII select register) */
 	unsigned shift_rd0:1;	/* shift Rx descriptor word 0 right by 16 */
 	unsigned rmiimode:1;	/* EtherC has RMIIMODE register */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -611,6 +690,7 @@ struct sh_eth_private {
 	struct sk_buff **rx_skbuff;
 	struct sk_buff **tx_skbuff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;
 	u32 cur_rx, dirty_rx;	/* Producer/consumer ring indices */
 	u32 cur_tx, dirty_tx;
@@ -619,6 +699,8 @@ struct sh_eth_private {
 	/* MII transceiver section. */
 	u32 phy_id;					/* PHY ID */
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t lock;		/* Register access lock */
 	u32 cur_rx, dirty_rx;		/* Producer/consumer ring indices */
 	u32 cur_tx, dirty_tx;
@@ -627,6 +709,9 @@ struct sh_eth_private {
 	struct napi_struct napi;
 	/* MII transceiver section. */
 	u32 phy_id;			/* PHY ID */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mii_bus *mii_bus;	/* MDIO bus control */
 	struct phy_device *phydev;	/* PHY device control */
@@ -636,18 +721,24 @@ struct sh_eth_private {
 	int speed;
 	int duplex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int port;		/* for TSU */
 	int vlan_num_ids;	/* for VLAN tag filter */
 
 	unsigned no_ether_link:1;
 	unsigned ether_link_active_low:1;
 =======
+=======
+>>>>>>> v3.18
 	int port;			/* for TSU */
 	int vlan_num_ids;		/* for VLAN tag filter */
 
 	unsigned no_ether_link:1;
 	unsigned ether_link_active_low:1;
 	unsigned is_opened:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

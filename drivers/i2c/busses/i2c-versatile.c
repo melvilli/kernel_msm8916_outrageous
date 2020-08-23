@@ -17,7 +17,10 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -112,7 +115,10 @@ static int i2c_versatile_probe(struct platform_device *dev)
 	if (ret >= 0) {
 		platform_set_drvdata(dev, i2c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_i2c_register_devices(&i2c->adap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;

@@ -10,6 +10,7 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma.h>
 
 struct pxa2xx_runtime_data {
@@ -17,19 +18,29 @@ struct pxa2xx_runtime_data {
 	struct pxa2xx_pcm_dma_params *params;
 	pxa_dma_desc *dma_desc_array;
 =======
+=======
+>>>>>>> v3.18
 
 struct pxa2xx_runtime_data {
 	int dma_ch;
 	struct snd_dmaengine_dai_dma_data *params;
 	struct pxa_dma_desc *dma_desc_array;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_addr_t dma_desc_array_phys;
 };
 
 struct pxa2xx_pcm_client {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *playback_params;
 	struct pxa2xx_pcm_dma_params *capture_params;
+=======
+	struct snd_dmaengine_dai_dma_data *playback_params;
+	struct snd_dmaengine_dai_dma_data *capture_params;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *playback_params;
 	struct snd_dmaengine_dai_dma_data *capture_params;

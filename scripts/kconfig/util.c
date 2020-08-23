@@ -156,7 +156,10 @@ void *xcalloc(size_t nmemb, size_t size)
 	exit(1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

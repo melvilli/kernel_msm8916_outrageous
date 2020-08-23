@@ -72,9 +72,15 @@ static int notifier_chain_unregister(struct notifier_block **nl,
  *			last notifier function called.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes notifier_call_chain(struct notifier_block **nl,
 					unsigned long val, void *v,
 					int nr_to_call,	int *nr_calls)
+=======
+static int notifier_call_chain(struct notifier_block **nl,
+			       unsigned long val, void *v,
+			       int nr_to_call, int *nr_calls)
+>>>>>>> v3.18
 =======
 static int notifier_call_chain(struct notifier_block **nl,
 			       unsigned long val, void *v,
@@ -109,6 +115,10 @@ static int notifier_call_chain(struct notifier_block **nl,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(notifier_call_chain);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(notifier_call_chain);
 >>>>>>> v3.18
@@ -183,9 +193,15 @@ EXPORT_SYMBOL_GPL(atomic_notifier_chain_unregister);
  *	of the last notifier function called.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes __atomic_notifier_call_chain(struct atomic_notifier_head *nh,
 					unsigned long val, void *v,
 					int nr_to_call, int *nr_calls)
+=======
+int __atomic_notifier_call_chain(struct atomic_notifier_head *nh,
+				 unsigned long val, void *v,
+				 int nr_to_call, int *nr_calls)
+>>>>>>> v3.18
 =======
 int __atomic_notifier_call_chain(struct atomic_notifier_head *nh,
 				 unsigned long val, void *v,
@@ -201,20 +217,30 @@ int __atomic_notifier_call_chain(struct atomic_notifier_head *nh,
 }
 EXPORT_SYMBOL_GPL(__atomic_notifier_call_chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int __kprobes atomic_notifier_call_chain(struct atomic_notifier_head *nh,
 		unsigned long val, void *v)
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(__atomic_notifier_call_chain);
 
 int atomic_notifier_call_chain(struct atomic_notifier_head *nh,
 			       unsigned long val, void *v)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return __atomic_notifier_call_chain(nh, val, v, -1, NULL);
 }
 EXPORT_SYMBOL_GPL(atomic_notifier_call_chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(atomic_notifier_call_chain);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(atomic_notifier_call_chain);
 >>>>>>> v3.18
@@ -337,7 +363,11 @@ int __blocking_notifier_call_chain(struct blocking_notifier_head *nh,
 	 * is, we re-check the list after having taken the lock anyway:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rcu_dereference_raw(nh->head)) {
+=======
+	if (rcu_access_pointer(nh->head)) {
+>>>>>>> v3.18
 =======
 	if (rcu_access_pointer(nh->head)) {
 >>>>>>> v3.18
@@ -559,7 +589,11 @@ EXPORT_SYMBOL_GPL(srcu_init_notifier_head);
 static ATOMIC_NOTIFIER_HEAD(die_chain);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int notrace __kprobes notify_die(enum die_val val, const char *str,
+=======
+int notrace notify_die(enum die_val val, const char *str,
+>>>>>>> v3.18
 =======
 int notrace notify_die(enum die_val val, const char *str,
 >>>>>>> v3.18
@@ -576,6 +610,10 @@ int notrace notify_die(enum die_val val, const char *str,
 	return atomic_notifier_call_chain(&die_chain, val, &args);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(notify_die);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(notify_die);
 >>>>>>> v3.18

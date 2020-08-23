@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/mach-s3c2410/include/mach/regs-ac97.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -15,8 +19,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_REGS_AC97_H
 #define __ASM_ARCH_REGS_AC97_H __FILE__
+=======
+#ifndef __SAMSUNG_REGS_AC97_H__
+#define __SAMSUNG_REGS_AC97_H__
+>>>>>>> v3.18
 =======
 #ifndef __SAMSUNG_REGS_AC97_H__
 #define __SAMSUNG_REGS_AC97_H__
@@ -74,7 +83,11 @@
 #define S3C_AC97_MIC_DATA				(0x1C)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_REGS_AC97_H */
+=======
+#endif /* __SAMSUNG_REGS_AC97_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __SAMSUNG_REGS_AC97_H__ */
 >>>>>>> v3.18

@@ -154,7 +154,10 @@ snd_seq_oss_midi_check_new_port(struct snd_seq_port_info *pinfo)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("check for MIDI client %d port %d\n", pinfo->addr.client, pinfo->addr.port));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* the port must include generic midi */
@@ -179,7 +182,11 @@ snd_seq_oss_midi_check_new_port(struct snd_seq_port_info *pinfo)
 	 */
 	if ((mdev = kzalloc(sizeof(*mdev), GFP_KERNEL)) == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "can't malloc midi info\n");
+=======
+		pr_err("ALSA: seq_oss: can't malloc midi info\n");
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq_oss: can't malloc midi info\n");
 >>>>>>> v3.18
@@ -199,7 +206,11 @@ snd_seq_oss_midi_check_new_port(struct snd_seq_port_info *pinfo)
 	/* create MIDI coder */
 	if (snd_midi_event_new(MAX_MIDI_EVENT_BUF, &mdev->coder) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "can't malloc midi coder\n");
+=======
+		pr_err("ALSA: seq_oss: can't malloc midi coder\n");
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq_oss: can't malloc midi coder\n");
 >>>>>>> v3.18
@@ -418,7 +429,10 @@ snd_seq_oss_midi_close(struct seq_oss_devinfo *dp, int dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("closing client %d port %d mode %d\n", mdev->client, mdev->port, mdev->opened));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memset(&subs, 0, sizeof(subs));
@@ -485,7 +499,10 @@ snd_seq_oss_midi_reset(struct seq_oss_devinfo *dp, int dev)
 		int c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("resetting client %d port %d\n", mdev->client, mdev->port));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		memset(&ev, 0, sizeof(ev));

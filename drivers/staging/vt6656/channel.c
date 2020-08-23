@@ -29,8 +29,14 @@
  *
  * Revision History:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      01-18-2005      RobertYu:  remove the for loop searching in ChannelValid,
  *                                 change ChannelRuleTab to lookup-type, reorder table items.
+=======
+ *	01-18-2005	RobertYu:	remove the for loop searching in
+ *					ChannelValid, change ChannelRuleTab
+ *					to lookup-type, reorder table items.
+>>>>>>> v3.18
 =======
  *	01-18-2005	RobertYu:	remove the for loop searching in
  *					ChannelValid, change ChannelRuleTab
@@ -40,6 +46,7 @@
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/kernel.h>
 #include "country.h"
@@ -479,6 +486,8 @@ void CHvInitChannelTable(struct vnt_private *pDevice)
         }*/
     }
 =======
+=======
+>>>>>>> v3.18
 #include "device.h"
 #include "channel.h"
 #include "rf.h"
@@ -619,5 +628,8 @@ void vnt_init_bands(struct vnt_private *priv)
 						&vnt_supported_2ghz_band;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

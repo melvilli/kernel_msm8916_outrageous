@@ -1166,7 +1166,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1201,6 +1205,7 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			ib[idx] &= ~Z_ARRAY_MODE(0xf);
 			track->db_z_info &= ~Z_ARRAY_MODE(0xf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ib[idx] |= Z_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
 			track->db_z_info |= Z_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MACRO) {
@@ -1208,12 +1213,17 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 
 				evergreen_tiling_fields(reloc->lobj.tiling_flags,
 =======
+=======
+>>>>>>> v3.18
 			ib[idx] |= Z_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
 			track->db_z_info |= Z_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
 			if (reloc->tiling_flags & RADEON_TILING_MACRO) {
 				unsigned bankw, bankh, mtaspect, tile_split;
 
 				evergreen_tiling_fields(reloc->tiling_flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							&bankw, &bankh, &mtaspect,
 							&tile_split);
@@ -1251,7 +1261,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		track->db_z_read_offset = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1267,7 +1281,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		track->db_z_write_offset = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1283,7 +1301,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		track->db_s_read_offset = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1299,7 +1321,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		track->db_s_write_offset = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1327,7 +1353,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		tmp = (reg - VGT_STRMOUT_BUFFER_BASE_0) / 16;
 		track->vgt_strmout_bo_offset[tmp] = radeon_get_ib_value(p, idx) << 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1351,7 +1381,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1419,8 +1453,13 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ib[idx] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
 			track->cb_color_info[tmp] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
+=======
+			ib[idx] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
+			track->cb_color_info[tmp] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
+>>>>>>> v3.18
 =======
 			ib[idx] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
 			track->cb_color_info[tmp] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
@@ -1442,8 +1481,13 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ib[idx] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
 			track->cb_color_info[tmp] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
+=======
+			ib[idx] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
+			track->cb_color_info[tmp] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
+>>>>>>> v3.18
 =======
 			ib[idx] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
 			track->cb_color_info[tmp] |= CB_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
@@ -1509,15 +1553,21 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		if (!(p->cs_flags & RADEON_CS_KEEP_TILING_FLAGS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MACRO) {
 				unsigned bankw, bankh, mtaspect, tile_split;
 
 				evergreen_tiling_fields(reloc->lobj.tiling_flags,
 =======
+=======
+>>>>>>> v3.18
 			if (reloc->tiling_flags & RADEON_TILING_MACRO) {
 				unsigned bankw, bankh, mtaspect, tile_split;
 
 				evergreen_tiling_fields(reloc->tiling_flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							&bankw, &bankh, &mtaspect,
 							&tile_split);
@@ -1544,15 +1594,21 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		if (!(p->cs_flags & RADEON_CS_KEEP_TILING_FLAGS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MACRO) {
 				unsigned bankw, bankh, mtaspect, tile_split;
 
 				evergreen_tiling_fields(reloc->lobj.tiling_flags,
 =======
+=======
+>>>>>>> v3.18
 			if (reloc->tiling_flags & RADEON_TILING_MACRO) {
 				unsigned bankw, bankh, mtaspect, tile_split;
 
 				evergreen_tiling_fields(reloc->tiling_flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							&bankw, &bankh, &mtaspect,
 							&tile_split);
@@ -1582,7 +1638,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1603,7 +1663,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1648,7 +1712,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		tmp = (reg - CB_COLOR0_BASE) / 0x3c;
 		track->cb_color_bo_offset[tmp] = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1668,7 +1736,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		tmp = ((reg - CB_COLOR8_BASE) / 0x1c) + 8;
 		track->cb_color_bo_offset[tmp] = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1684,7 +1756,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 		}
 		track->htile_offset = radeon_get_ib_value(p, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1805,7 +1881,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1823,7 +1903,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1841,7 +1925,11 @@ static int evergreen_cs_check_reg(struct radeon_cs_parser *p, u32 reg, u32 idx)
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -1930,7 +2018,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset = reloc->lobj.gpu_offset +
+=======
+		offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 		offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -1980,7 +2072,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset = reloc->lobj.gpu_offset +
+=======
+		offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 		offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2011,7 +2107,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset = reloc->lobj.gpu_offset +
+=======
+		offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 		offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2043,7 +2143,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset = reloc->lobj.gpu_offset +
+=======
+		offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 		offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2137,7 +2241,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx+0] = idx_value + (u32)(reloc->lobj.gpu_offset & 0xffffffff);
+=======
+		ib[idx+0] = idx_value + (u32)(reloc->gpu_offset & 0xffffffff);
+>>>>>>> v3.18
 =======
 		ib[idx+0] = idx_value + (u32)(reloc->gpu_offset & 0xffffffff);
 >>>>>>> v3.18
@@ -2163,7 +2271,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset = reloc->lobj.gpu_offset +
+=======
+			offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 			offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2224,7 +2336,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 					((u64)(radeon_get_ib_value(p, idx+1) & 0xff) << 32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				offset = reloc->lobj.gpu_offset + tmp;
+=======
+				offset = reloc->gpu_offset + tmp;
+>>>>>>> v3.18
 =======
 				offset = reloc->gpu_offset + tmp;
 >>>>>>> v3.18
@@ -2266,7 +2382,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 					((u64)(radeon_get_ib_value(p, idx+3) & 0xff) << 32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				offset = reloc->lobj.gpu_offset + tmp;
+=======
+				offset = reloc->gpu_offset + tmp;
+>>>>>>> v3.18
 =======
 				offset = reloc->gpu_offset + tmp;
 >>>>>>> v3.18
@@ -2300,7 +2420,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ib[idx+2] += (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+			ib[idx+2] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 			ib[idx+2] += (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -2320,7 +2444,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset = reloc->lobj.gpu_offset +
+=======
+			offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 			offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2346,7 +2474,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset = reloc->lobj.gpu_offset +
+=======
+		offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 		offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2372,7 +2504,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset = reloc->lobj.gpu_offset +
+=======
+		offset = reloc->gpu_offset +
+>>>>>>> v3.18
 =======
 		offset = reloc->gpu_offset +
 >>>>>>> v3.18
@@ -2444,17 +2580,23 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				if (!(p->cs_flags & RADEON_CS_KEEP_TILING_FLAGS)) {
 					ib[idx+1+(i*8)+1] |=
 <<<<<<< HEAD
+<<<<<<< HEAD
 						TEX_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->lobj.tiling_flags));
 					if (reloc->lobj.tiling_flags & RADEON_TILING_MACRO) {
 						unsigned bankw, bankh, mtaspect, tile_split;
 
 						evergreen_tiling_fields(reloc->lobj.tiling_flags,
 =======
+=======
+>>>>>>> v3.18
 						TEX_ARRAY_MODE(evergreen_cs_get_aray_mode(reloc->tiling_flags));
 					if (reloc->tiling_flags & RADEON_TILING_MACRO) {
 						unsigned bankw, bankh, mtaspect, tile_split;
 
 						evergreen_tiling_fields(reloc->tiling_flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 									&bankw, &bankh, &mtaspect,
 									&tile_split);
@@ -2468,7 +2610,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				}
 				texture = reloc->robj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				toffset = (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+				toffset = (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 				toffset = (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -2491,7 +2637,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 						return -EINVAL;
 					}
 <<<<<<< HEAD
+<<<<<<< HEAD
 					moffset = (u32)((reloc->lobj.gpu_offset >> 8) & 0xffffffff);
+=======
+					moffset = (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
+>>>>>>> v3.18
 =======
 					moffset = (u32)((reloc->gpu_offset >> 8) & 0xffffffff);
 >>>>>>> v3.18
@@ -2522,7 +2672,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				offset64 = reloc->lobj.gpu_offset + offset;
+=======
+				offset64 = reloc->gpu_offset + offset;
+>>>>>>> v3.18
 =======
 				offset64 = reloc->gpu_offset + offset;
 >>>>>>> v3.18
@@ -2607,7 +2761,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset += reloc->lobj.gpu_offset;
+=======
+			offset += reloc->gpu_offset;
+>>>>>>> v3.18
 =======
 			offset += reloc->gpu_offset;
 >>>>>>> v3.18
@@ -2630,7 +2788,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset += reloc->lobj.gpu_offset;
+=======
+			offset += reloc->gpu_offset;
+>>>>>>> v3.18
 =======
 			offset += reloc->gpu_offset;
 >>>>>>> v3.18
@@ -2663,7 +2825,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset += reloc->lobj.gpu_offset;
+=======
+		offset += reloc->gpu_offset;
+>>>>>>> v3.18
 =======
 		offset += reloc->gpu_offset;
 >>>>>>> v3.18
@@ -2692,7 +2858,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset += reloc->lobj.gpu_offset;
+=======
+			offset += reloc->gpu_offset;
+>>>>>>> v3.18
 =======
 			offset += reloc->gpu_offset;
 >>>>>>> v3.18
@@ -2720,7 +2890,11 @@ static int evergreen_packet3_check(struct radeon_cs_parser *p,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset += reloc->lobj.gpu_offset;
+=======
+			offset += reloc->gpu_offset;
+>>>>>>> v3.18
 =======
 			offset += reloc->gpu_offset;
 >>>>>>> v3.18
@@ -2899,7 +3073,11 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 				dst_offset <<= 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
+=======
+				ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
+>>>>>>> v3.18
 =======
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
 >>>>>>> v3.18
@@ -2911,8 +3089,13 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 				dst_offset |= ((u64)(radeon_get_ib_value(p, idx+2) & 0xff)) << 32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+2] += upper_32_bits(dst_reloc->lobj.gpu_offset) & 0xff;
+=======
+				ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
+				ib[idx+2] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
+>>>>>>> v3.18
 =======
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+2] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
@@ -2959,15 +3142,21 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+2] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+3] += upper_32_bits(dst_reloc->lobj.gpu_offset) & 0xff;
 				ib[idx+4] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+2] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+3] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
 				ib[idx+4] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p->idx += 5;
 				break;
@@ -2979,6 +3168,7 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					src_offset = radeon_get_ib_value(p, idx+1);
 					src_offset <<= 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					ib[idx+1] += (u32)(src_reloc->lobj.gpu_offset >> 8);
 
 					dst_offset = radeon_get_ib_value(p, idx + 7);
@@ -2986,17 +3176,23 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					ib[idx+7] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(dst_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 					ib[idx+1] += (u32)(src_reloc->gpu_offset >> 8);
 
 					dst_offset = radeon_get_ib_value(p, idx + 7);
 					dst_offset |= ((u64)(radeon_get_ib_value(p, idx+8) & 0xff)) << 32;
 					ib[idx+7] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				} else {
 					/* linear src, tiled dst */
 					src_offset = radeon_get_ib_value(p, idx+7);
 					src_offset |= ((u64)(radeon_get_ib_value(p, idx+8) & 0xff)) << 32;
+<<<<<<< HEAD
 <<<<<<< HEAD
 					ib[idx+7] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
@@ -3005,12 +3201,17 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					dst_offset <<= 8;
 					ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
 =======
+=======
+>>>>>>> v3.18
 					ib[idx+7] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
 
 					dst_offset = radeon_get_ib_value(p, idx+1);
 					dst_offset <<= 8;
 					ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 				if ((src_offset + (count * 4)) > radeon_bo_size(src_reloc->robj)) {
@@ -3043,15 +3244,21 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset & 0xffffffff);
 				ib[idx+2] += (u32)(src_reloc->lobj.gpu_offset & 0xffffffff);
 				ib[idx+3] += upper_32_bits(dst_reloc->lobj.gpu_offset) & 0xff;
 				ib[idx+4] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xffffffff);
 				ib[idx+2] += (u32)(src_reloc->gpu_offset & 0xffffffff);
 				ib[idx+3] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
 				ib[idx+4] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p->idx += 5;
 				break;
@@ -3063,15 +3270,21 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(src_reloc->lobj.gpu_offset & 0xffffffff);
 				ib[idx+2] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 				ib[idx+4] += (u32)(dst_reloc->lobj.gpu_offset & 0xffffffff);
 				ib[idx+5] += upper_32_bits(dst_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(src_reloc->gpu_offset & 0xffffffff);
 				ib[idx+2] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
 				ib[idx+4] += (u32)(dst_reloc->gpu_offset & 0xffffffff);
 				ib[idx+5] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				p->idx += 9;
@@ -3106,6 +3319,7 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+2] += (u32)(dst2_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+3] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
@@ -3113,12 +3327,17 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 				ib[idx+5] += upper_32_bits(dst2_reloc->lobj.gpu_offset) & 0xff;
 				ib[idx+6] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+2] += (u32)(dst2_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+3] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+4] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
 				ib[idx+5] += upper_32_bits(dst2_reloc->gpu_offset) & 0xff;
 				ib[idx+6] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p->idx += 7;
 				break;
@@ -3155,15 +3374,21 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
 				ib[idx+2] += (u32)(dst2_reloc->lobj.gpu_offset >> 8);
 				ib[idx+8] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+9] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
 				ib[idx+2] += (u32)(dst2_reloc->gpu_offset >> 8);
 				ib[idx+8] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+9] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p->idx += 10;
 				break;
@@ -3178,6 +3403,7 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 				if (radeon_get_ib_value(p, idx + 2) & (1 << 31)) {
 					/* tiled src, linear dst */
 <<<<<<< HEAD
+<<<<<<< HEAD
 					ib[idx+1] += (u32)(src_reloc->lobj.gpu_offset >> 8);
 
 					ib[idx+7] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
@@ -3189,6 +3415,8 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 
 					ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
 =======
+=======
+>>>>>>> v3.18
 					ib[idx+1] += (u32)(src_reloc->gpu_offset >> 8);
 
 					ib[idx+7] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
@@ -3199,6 +3427,9 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					ib[idx+8] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
 
 					ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 				p->idx += 12;
@@ -3237,15 +3468,21 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
 				ib[idx+2] += (u32)(dst2_reloc->lobj.gpu_offset >> 8);
 				ib[idx+8] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+9] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
 				ib[idx+2] += (u32)(dst2_reloc->gpu_offset >> 8);
 				ib[idx+8] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+9] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p->idx += 10;
 				break;
@@ -3258,6 +3495,7 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					src_offset = radeon_get_ib_value(p, idx+1);
 					src_offset <<= 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					ib[idx+1] += (u32)(src_reloc->lobj.gpu_offset >> 8);
 
 					dst_offset = radeon_get_ib_value(p, idx+7);
@@ -3265,17 +3503,23 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					ib[idx+7] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(dst_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 					ib[idx+1] += (u32)(src_reloc->gpu_offset >> 8);
 
 					dst_offset = radeon_get_ib_value(p, idx+7);
 					dst_offset |= ((u64)(radeon_get_ib_value(p, idx+8) & 0xff)) << 32;
 					ib[idx+7] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(dst_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				} else {
 					/* linear src, tiled dst */
 					src_offset = radeon_get_ib_value(p, idx+7);
 					src_offset |= ((u64)(radeon_get_ib_value(p, idx+8) & 0xff)) << 32;
+<<<<<<< HEAD
 <<<<<<< HEAD
 					ib[idx+7] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
@@ -3284,12 +3528,17 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					dst_offset <<= 8;
 					ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
 =======
+=======
+>>>>>>> v3.18
 					ib[idx+7] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 					ib[idx+8] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
 
 					dst_offset = radeon_get_ib_value(p, idx+1);
 					dst_offset <<= 8;
 					ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 				if ((src_offset + (count * 4)) > radeon_bo_size(src_reloc->robj)) {
@@ -3312,8 +3561,13 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(src_reloc->lobj.gpu_offset >> 8);
 				ib[idx+4] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
+=======
+				ib[idx+1] += (u32)(src_reloc->gpu_offset >> 8);
+				ib[idx+4] += (u32)(dst_reloc->gpu_offset >> 8);
+>>>>>>> v3.18
 =======
 				ib[idx+1] += (u32)(src_reloc->gpu_offset >> 8);
 				ib[idx+4] += (u32)(dst_reloc->gpu_offset >> 8);
@@ -3354,15 +3608,21 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 					return -EINVAL;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset >> 8);
 				ib[idx+2] += (u32)(dst2_reloc->lobj.gpu_offset >> 8);
 				ib[idx+8] += (u32)(src_reloc->lobj.gpu_offset & 0xfffffffc);
 				ib[idx+9] += upper_32_bits(src_reloc->lobj.gpu_offset) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 				ib[idx+1] += (u32)(dst_reloc->gpu_offset >> 8);
 				ib[idx+2] += (u32)(dst2_reloc->gpu_offset >> 8);
 				ib[idx+8] += (u32)(src_reloc->gpu_offset & 0xfffffffc);
 				ib[idx+9] += upper_32_bits(src_reloc->gpu_offset) & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p->idx += 10;
 				break;
@@ -3385,8 +3645,13 @@ int evergreen_dma_cs_parse(struct radeon_cs_parser *p)
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ib[idx+1] += (u32)(dst_reloc->lobj.gpu_offset & 0xfffffffc);
 			ib[idx+3] += (upper_32_bits(dst_reloc->lobj.gpu_offset) << 16) & 0x00ff0000;
+=======
+			ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
+			ib[idx+3] += (upper_32_bits(dst_reloc->gpu_offset) << 16) & 0x00ff0000;
+>>>>>>> v3.18
 =======
 			ib[idx+1] += (u32)(dst_reloc->gpu_offset & 0xfffffffc);
 			ib[idx+3] += (upper_32_bits(dst_reloc->gpu_offset) << 16) & 0x00ff0000;

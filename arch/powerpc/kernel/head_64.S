@@ -24,6 +24,10 @@
 
 #include <linux/threads.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 >>>>>>> v3.18
@@ -73,7 +77,12 @@ _GLOBAL(__start)
 	/* NOP this out unconditionally */
 BEGIN_FTR_SECTION
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.__start_initialization_multiplatform
+=======
+	FIXUP_ENDIAN
+	b	__start_initialization_multiplatform
+>>>>>>> v3.18
 =======
 	FIXUP_ENDIAN
 	b	__start_initialization_multiplatform
@@ -84,17 +93,23 @@ END_FTR_SECTION(0, 1)
 	trap
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Secondary processors spin on this value until it becomes nonzero.
 	 * When it does it contains the real address of the descriptor
 	 * of the function that the cpu should jump to to continue
 	 * initialization.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	/* Secondary processors spin on this value until it becomes non-zero.
 	 * When non-zero, it contains the real address of the function the cpu
 	 * should jump to.
 	 */
 	.balign 8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.globl  __secondary_hold_spinloop
 __secondary_hold_spinloop:
@@ -133,6 +148,10 @@ __run_at_load:
 	.globl	__secondary_hold
 __secondary_hold:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FIXUP_ENDIAN
+>>>>>>> v3.18
 =======
 	FIXUP_ENDIAN
 >>>>>>> v3.18
@@ -158,8 +177,13 @@ __secondary_hold:
 #endif
 	/* All secondary cpus wait here until told to start. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 100:	ld	r4,__secondary_hold_spinloop-_stext(r26)
 	cmpdi	0,r4,0
+=======
+100:	ld	r12,__secondary_hold_spinloop-_stext(r26)
+	cmpdi	0,r12,0
+>>>>>>> v3.18
 =======
 100:	ld	r12,__secondary_hold_spinloop-_stext(r26)
 	cmpdi	0,r12,0
@@ -169,10 +193,16 @@ __secondary_hold:
 #if defined(CONFIG_SMP) || defined(CONFIG_KEXEC)
 #ifdef CONFIG_PPC_BOOK3E
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tovirt(r4,r4)
 #endif
 	ld	r4,0(r4)		/* deref function descriptor */
 	mtctr	r4
+=======
+	tovirt(r12,r12)
+#endif
+	mtctr	r12
+>>>>>>> v3.18
 =======
 	tovirt(r12,r12)
 #endif
@@ -211,7 +241,10 @@ exception_marker:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3E
 _GLOBAL(fsl_secondary_thread_init)
 	/* Enable branch prediction */
@@ -234,21 +267,30 @@ _GLOBAL(fsl_secondary_thread_init)
 	mtspr	SPRN_PIR, r3
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 _GLOBAL(generic_secondary_thread_init)
 	mr	r24,r3
 
 	/* turn on 64-bit mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.enable_64b_mode
 
 	/* get a valid TOC pointer, wherever we're mapped at */
 	bl	.relative_toc
 =======
+=======
+>>>>>>> v3.18
 	bl	enable_64b_mode
 
 	/* get a valid TOC pointer, wherever we're mapped at */
 	bl	relative_toc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tovirt(r2,r2)
 
@@ -256,7 +298,11 @@ _GLOBAL(generic_secondary_thread_init)
 	/* Book3E initialization */
 	mr	r3,r24
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.book3e_secondary_thread_init
+=======
+	bl	book3e_secondary_thread_init
+>>>>>>> v3.18
 =======
 	bl	book3e_secondary_thread_init
 >>>>>>> v3.18
@@ -274,6 +320,10 @@ _GLOBAL(generic_secondary_thread_init)
  */
 _GLOBAL(generic_secondary_smp_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FIXUP_ENDIAN
+>>>>>>> v3.18
 =======
 	FIXUP_ENDIAN
 >>>>>>> v3.18
@@ -282,15 +332,21 @@ _GLOBAL(generic_secondary_smp_init)
 
 	/* turn on 64-bit mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.enable_64b_mode
 
 	/* get a valid TOC pointer, wherever we're mapped at */
 	bl	.relative_toc
 =======
+=======
+>>>>>>> v3.18
 	bl	enable_64b_mode
 
 	/* get a valid TOC pointer, wherever we're mapped at */
 	bl	relative_toc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tovirt(r2,r2)
 
@@ -299,7 +355,11 @@ _GLOBAL(generic_secondary_smp_init)
 	mr	r3,r24
 	mr	r4,r25
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.book3e_secondary_core_init
+=======
+	bl	book3e_secondary_core_init
+>>>>>>> v3.18
 =======
 	bl	book3e_secondary_core_init
 >>>>>>> v3.18
@@ -315,7 +375,11 @@ generic_secondary_common_init:
 #ifndef CONFIG_SMP
 	addi	r13,r13,PACA_SIZE	/* know r13 if used accidentally */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.kexec_wait		/* wait for next kernel if !SMP	 */
+=======
+	b	kexec_wait		/* wait for next kernel if !SMP	 */
+>>>>>>> v3.18
 =======
 	b	kexec_wait		/* wait for next kernel if !SMP	 */
 >>>>>>> v3.18
@@ -333,7 +397,11 @@ generic_secondary_common_init:
 
 	mr	r3,r24			/* not found, copy phys to r3	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.kexec_wait		/* next kernel might do better	 */
+=======
+	b	kexec_wait		/* next kernel might do better	 */
+>>>>>>> v3.18
 =======
 	b	kexec_wait		/* next kernel might do better	 */
 >>>>>>> v3.18
@@ -351,12 +419,15 @@ generic_secondary_common_init:
 	LOAD_REG_ADDR(r23, cur_cpu_spec)
 	ld	r23,0(r23)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r23,CPU_SPEC_RESTORE(r23)
 	cmpdi	0,r23,0
 	beq	3f
 	ld	r23,0(r23)
 	mtctr	r23
 =======
+=======
+>>>>>>> v3.18
 	ld	r12,CPU_SPEC_RESTORE(r23)
 	cmpdi	0,r12,0
 	beq	3f
@@ -364,6 +435,9 @@ generic_secondary_common_init:
 	ld	r12,0(r12)
 #endif
 	mtctr	r12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bctrl
 
@@ -396,7 +470,11 @@ generic_secondary_common_init:
  */
 #ifdef CONFIG_PPC_BOOK3S
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(__mmu_off)
+=======
+__mmu_off:
+>>>>>>> v3.18
 =======
 __mmu_off:
 >>>>>>> v3.18
@@ -425,6 +503,7 @@ __mmu_off:
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(__start_initialization_multiplatform)
 	/* Make sure we are running in 64 bits mode */
 	bl	.enable_64b_mode
@@ -432,12 +511,17 @@ _GLOBAL(__start_initialization_multiplatform)
 	/* Get TOC pointer (current runtime address) */
 	bl	.relative_toc
 =======
+=======
+>>>>>>> v3.18
 __start_initialization_multiplatform:
 	/* Make sure we are running in 64 bits mode */
 	bl	enable_64b_mode
 
 	/* Get TOC pointer (current runtime address) */
 	bl	relative_toc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* find out where we are now */
@@ -452,7 +536,11 @@ __start_initialization_multiplatform:
 	cmpldi	cr0,r5,0
 	beq	1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.__boot_from_prom		/* yes -> prom */
+=======
+	b	__boot_from_prom		/* yes -> prom */
+>>>>>>> v3.18
 =======
 	b	__boot_from_prom		/* yes -> prom */
 >>>>>>> v3.18
@@ -468,8 +556,13 @@ __start_initialization_multiplatform:
 
 #ifdef CONFIG_PPC_BOOK3E
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.start_initialization_book3e
 	b	.__after_prom_start
+=======
+	bl	start_initialization_book3e
+	b	__after_prom_start
+>>>>>>> v3.18
 =======
 	bl	start_initialization_book3e
 	b	__after_prom_start
@@ -487,6 +580,7 @@ __start_initialization_multiplatform:
 	cmpwi	r0,0x45		/* 970GX */
 	bne	2f
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	bl	.__cpu_preinit_ppc970
 2:
 
@@ -497,6 +591,8 @@ __start_initialization_multiplatform:
 
 _INIT_STATIC(__boot_from_prom)
 =======
+=======
+>>>>>>> v3.18
 1:	bl	__cpu_preinit_ppc970
 2:
 
@@ -506,6 +602,9 @@ _INIT_STATIC(__boot_from_prom)
 #endif /* CONFIG_PPC_BOOK3E */
 
 __boot_from_prom:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_OF_BOOT_TRAMPOLINE
 	/* Save parameters */
@@ -526,7 +625,11 @@ __boot_from_prom:
 	/* Relocate code for where we are now */
 	mr	r3,r26
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.relocate
+=======
+	bl	relocate
+>>>>>>> v3.18
 =======
 	bl	relocate
 >>>>>>> v3.18
@@ -542,7 +645,11 @@ __boot_from_prom:
 	/* Do all of the interaction with OF client interface */
 	mr	r8,r26
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.prom_init
+=======
+	bl	prom_init
+>>>>>>> v3.18
 =======
 	bl	prom_init
 >>>>>>> v3.18
@@ -553,7 +660,11 @@ __boot_from_prom:
 	trap
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(__after_prom_start)
+=======
+__after_prom_start:
+>>>>>>> v3.18
 =======
 __after_prom_start:
 >>>>>>> v3.18
@@ -567,7 +678,11 @@ __after_prom_start:
 	add	r25,r25,r26
 1:	mr	r3,r25
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.relocate
+=======
+	bl	relocate
+>>>>>>> v3.18
 =======
 	bl	relocate
 >>>>>>> v3.18
@@ -611,6 +726,7 @@ __after_prom_start:
 	addi	r5,r5,(copy_to_here - _stext)@l /* # bytes of memory to copy */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.copy_and_flush		/* copy the first n bytes	 */
 					/* this includes the code being	 */
 					/* executed here.		 */
@@ -618,12 +734,17 @@ __after_prom_start:
 	addi	r8,r8,(4f - _stext)@l	/* that we just made */
 	mtctr	r8
 =======
+=======
+>>>>>>> v3.18
 	bl	copy_and_flush		/* copy the first n bytes	 */
 					/* this includes the code being	 */
 					/* executed here.		 */
 	addis	r8,r3,(4f - _stext)@ha	/* Jump to the copy of this code */
 	addi	r12,r8,(4f - _stext)@l	/* that we just made */
 	mtctr	r12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bctr
 
@@ -634,9 +755,15 @@ p_end:	.llong	_end - _stext
 	addis	r5,r26,(p_end - _stext)@ha
 	ld	r5,(p_end - _stext)@l(r5)	/* get _end */
 <<<<<<< HEAD
+<<<<<<< HEAD
 5:	bl	.copy_and_flush		/* copy the rest */
 
 9:	b	.start_here_multiplatform
+=======
+5:	bl	copy_and_flush		/* copy the rest */
+
+9:	b	start_here_multiplatform
+>>>>>>> v3.18
 =======
 5:	bl	copy_and_flush		/* copy the rest */
 
@@ -706,7 +833,11 @@ __secondary_start_pmac_0:
 _GLOBAL(pmac_secondary_start)
 	/* turn on 64-bit mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.enable_64b_mode
+=======
+	bl	enable_64b_mode
+>>>>>>> v3.18
 =======
 	bl	enable_64b_mode
 >>>>>>> v3.18
@@ -722,17 +853,23 @@ _GLOBAL(pmac_secondary_start)
 
 	/* get TOC pointer (real address) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.relative_toc
 	tovirt(r2,r2)
 
 	/* Copy some CPU settings from CPU 0 */
 	bl	.__restore_cpu_ppc970
 =======
+=======
+>>>>>>> v3.18
 	bl	relative_toc
 	tovirt(r2,r2)
 
 	/* Copy some CPU settings from CPU 0 */
 	bl	__restore_cpu_ppc970
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* pSeries do that early though I don't think we really need it */
@@ -792,8 +929,13 @@ __secondary_start:
 	std	r14,PACAKSAVE(r13)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Do early setup for that CPU (stab, slb, hash table pointer) */
 	bl	.early_setup_secondary
+=======
+	/* Do early setup for that CPU (SLB and hash table pointer) */
+	bl	early_setup_secondary
+>>>>>>> v3.18
 =======
 	/* Do early setup for that CPU (SLB and hash table pointer) */
 	bl	early_setup_secondary
@@ -818,7 +960,11 @@ __secondary_start:
 
 	/* enable MMU and jump to start_secondary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD_REG_ADDR(r3, .start_secondary_prolog)
+=======
+	LOAD_REG_ADDR(r3, start_secondary_prolog)
+>>>>>>> v3.18
 =======
 	LOAD_REG_ADDR(r3, start_secondary_prolog)
 >>>>>>> v3.18
@@ -835,17 +981,23 @@ __secondary_start:
  * before going into C code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(start_secondary_prolog)
 	ld	r2,PACATOC(r13)
 	li	r3,0
 	std	r3,0(r1)		/* Zero the stack frame pointer	*/
 	bl	.start_secondary
 =======
+=======
+>>>>>>> v3.18
 start_secondary_prolog:
 	ld	r2,PACATOC(r13)
 	li	r3,0
 	std	r3,0(r1)		/* Zero the stack frame pointer	*/
 	bl	start_secondary
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	.
 /*
@@ -858,7 +1010,11 @@ _GLOBAL(start_secondary_resume)
 	li	r3,0
 	std	r3,0(r1)		/* Zero the stack frame pointer	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.start_secondary
+=======
+	bl	start_secondary
+>>>>>>> v3.18
 =======
 	bl	start_secondary
 >>>>>>> v3.18
@@ -869,7 +1025,11 @@ _GLOBAL(start_secondary_resume)
  * This subroutine clobbers r11 and r12
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(enable_64b_mode)
+=======
+enable_64b_mode:
+>>>>>>> v3.18
 =======
 enable_64b_mode:
 >>>>>>> v3.18
@@ -908,6 +1068,10 @@ _GLOBAL(relative_toc)
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+.balign 8
+>>>>>>> v3.18
 =======
 .balign 8
 >>>>>>> v3.18
@@ -917,9 +1081,15 @@ p_toc:	.llong	__toc_start + 0x8000 - 0b
  * This is where the main kernel code starts.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _INIT_STATIC(start_here_multiplatform)
 	/* set up the TOC */
 	bl      .relative_toc
+=======
+start_here_multiplatform:
+	/* set up the TOC */
+	bl      relative_toc
+>>>>>>> v3.18
 =======
 start_here_multiplatform:
 	/* set up the TOC */
@@ -979,6 +1149,7 @@ start_here_multiplatform:
 	stdu	r0,-STACK_FRAME_OVERHEAD(r1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Do very early kernel initializations, including initial hash table,
 	 * stab and slb setup before we turn on relocation.	*/
 
@@ -988,6 +1159,8 @@ start_here_multiplatform:
 
 	LOAD_REG_ADDR(r3, .start_here_common)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Do very early kernel initializations, including initial hash table
 	 * and SLB setup before we turn on relocation.
@@ -998,6 +1171,9 @@ start_here_multiplatform:
 	bl	early_setup		/* also sets r13 and SPRG_PACA */
 
 	LOAD_REG_ADDR(r3, start_here_common)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ld	r4,PACAKMSR(r13)
 	mtspr	SPRN_SRR0,r3
@@ -1007,7 +1183,12 @@ start_here_multiplatform:
 	
 	/* This is where all platforms converge execution */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _INIT_GLOBAL(start_here_common)
+=======
+
+start_here_common:
+>>>>>>> v3.18
 =======
 
 start_here_common:
@@ -1020,7 +1201,11 @@ start_here_common:
 
 	/* Do more system initializations in virtual mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.setup_system
+=======
+	bl	setup_system
+>>>>>>> v3.18
 =======
 	bl	setup_system
 >>>>>>> v3.18
@@ -1035,7 +1220,11 @@ start_here_common:
 
 	/* Generic kernel entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.start_kernel
+=======
+	bl	start_kernel
+>>>>>>> v3.18
 =======
 	bl	start_kernel
 >>>>>>> v3.18

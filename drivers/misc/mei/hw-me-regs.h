@@ -116,6 +116,10 @@
 
 #define MEI_DEV_ID_WPT_LP     0x9CBA  /* Wildcat Point LP */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MEI_DEV_ID_WPT_LP_2   0x9CBB  /* Wildcat Point LP 2 */
+>>>>>>> v3.18
 =======
 #define MEI_DEV_ID_WPT_LP_2   0x9CBB  /* Wildcat Point LP 2 */
 >>>>>>> v3.18
@@ -138,6 +142,11 @@
 /* ME_CSR_HA - ME Control Status Host Access register (read only) */
 #define ME_CSR_HA  0xC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* H_HGC_CSR - PGI register */
+#define H_HPG_CSR  0x10
+>>>>>>> v3.18
 =======
 /* H_HGC_CSR - PGI register */
 #define H_HPG_CSR  0x10
@@ -172,6 +181,11 @@ access to ME_CBD */
 /* ME CB Read Pointer HRA - host read only access to ME_CBRP */
 #define ME_CBRP_HRA       0x0000FF00
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ME Power Gate Isolation Capability HRA  - host ready only access */
+#define ME_PGIC_HRA       0x00000040
+>>>>>>> v3.18
 =======
 /* ME Power Gate Isolation Capability HRA  - host ready only access */
 #define ME_PGIC_HRA       0x00000040
@@ -188,11 +202,17 @@ access to ME_CBD */
 #define ME_IE_HRA         0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* register bits - H_HPG_CSR */
 #define H_HPG_CSR_PGIHEXR       0x00000001
 #define H_HPG_CSR_PGI           0x00000002
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _MEI_HW_MEI_REGS_H_ */

@@ -755,7 +755,11 @@ static void if_cs_prog_firmware(struct lbs_private *priv, int ret,
 		ret = if_cs_prog_real(card, mainfw);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -766,7 +770,11 @@ static void if_cs_prog_firmware(struct lbs_private *priv, int ret,
 	if (ret) {
 		pr_err("error in request_irq\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -786,10 +794,13 @@ static void if_cs_prog_firmware(struct lbs_private *priv, int ret,
 		free_irq(card->p_dev->irq, card);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out:
 	release_firmware(helper);
 	release_firmware(mainfw);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -918,6 +929,10 @@ static int if_cs_probe(struct pcmcia_device *p_dev)
 		pr_err("unsupported manf_id 0x%04x / card_id 0x%04x\n",
 		       p_dev->manf_id, p_dev->card_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = -ENODEV;
+>>>>>>> v3.18
 =======
 		ret = -ENODEV;
 >>>>>>> v3.18

@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -7,12 +11,15 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 reciprocal_value(u32 k)
 {
 	u64 val = (1LL << 32) + (k - 1);
 	do_div(val, k);
 	return (u32)val;
 =======
+=======
+>>>>>>> v3.18
 /*
  * For a description of the algorithm please have a look at
  * include/linux/reciprocal_div.h
@@ -33,6 +40,9 @@ struct reciprocal_value reciprocal_value(u32 d)
 	R.sh2 = max(l - 1, 0);
 
 	return R;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(reciprocal_value);

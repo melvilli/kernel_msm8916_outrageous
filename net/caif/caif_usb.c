@@ -15,6 +15,10 @@
 #include <linux/usb.h>
 #include <linux/usb/usbnet.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -91,6 +95,7 @@ static struct cflayer *cfusbl_create(int phyid, u8 ethaddr[ETH_ALEN],
 	struct cfusbl *this = kmalloc(sizeof(struct cfusbl), GFP_ATOMIC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!this) {
 		pr_warn("Out of memory\n");
 		return NULL;
@@ -99,12 +104,17 @@ static struct cflayer *cfusbl_create(int phyid, u8 ethaddr[ETH_ALEN],
 
 	memset(this, 0, sizeof(struct cflayer));
 =======
+=======
+>>>>>>> v3.18
 	if (!this)
 		return NULL;
 
 	caif_assert(offsetof(struct cfusbl, layer) == 0);
 
 	memset(&this->layer, 0, sizeof(this->layer));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	this->layer.receive = cfusbl_receive;
 	this->layer.transmit = cfusbl_transmit;
@@ -119,8 +129,13 @@ static struct cflayer *cfusbl_create(int phyid, u8 ethaddr[ETH_ALEN],
 	 *	12-13	protocol type
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&this->tx_eth_hdr[ETH_ALEN], braddr, ETH_ALEN);
 	memcpy(&this->tx_eth_hdr[ETH_ALEN], ethaddr, ETH_ALEN);
+=======
+	ether_addr_copy(&this->tx_eth_hdr[ETH_ALEN], braddr);
+	ether_addr_copy(&this->tx_eth_hdr[ETH_ALEN], ethaddr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(&this->tx_eth_hdr[ETH_ALEN], braddr);
 	ether_addr_copy(&this->tx_eth_hdr[ETH_ALEN], ethaddr);
@@ -140,9 +155,15 @@ static struct packet_type caif_usb_type __read_mostly = {
 
 static int cfusbl_device_notify(struct notifier_block *me, unsigned long what,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				void *arg)
 {
 	struct net_device *dev = arg;
+=======
+				void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 				void *ptr)
 {

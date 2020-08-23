@@ -21,7 +21,11 @@
 #include <asm/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_IPI	8
+=======
+#define NR_IPI	6
+>>>>>>> v3.18
 =======
 #define NR_IPI	6
 >>>>>>> v3.18
@@ -52,8 +56,11 @@ static inline void ack_bad_irq(unsigned int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void handle_IRQ(unsigned int, struct pt_regs *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

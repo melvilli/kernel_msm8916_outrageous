@@ -32,6 +32,7 @@ void bacct_add_tsk(struct user_namespace *user_ns,
 {
 	const struct cred *tcred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec uptime, ts;
 	cputime_t utime, stime, utimescaled, stimescaled;
 	u64 ac_etime;
@@ -47,6 +48,8 @@ void bacct_add_tsk(struct user_namespace *user_ns,
 	stats->ac_etime = ac_etime;
 	stats->ac_btime = get_seconds() - ts.tv_sec;
 =======
+=======
+>>>>>>> v3.18
 	cputime_t utime, stime, utimescaled, stimescaled;
 	u64 delta;
 
@@ -60,6 +63,9 @@ void bacct_add_tsk(struct user_namespace *user_ns,
 	/* Convert to seconds for btime */
 	do_div(delta, USEC_PER_SEC);
 	stats->ac_btime = get_seconds() - delta;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (thread_group_leader(tsk)) {
 		stats->ac_exitcode = tsk->exit_code;

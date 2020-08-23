@@ -100,7 +100,11 @@ static int hdlc_device_event(struct notifier_block *this, unsigned long event,
 			     void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -261,7 +265,12 @@ struct net_device *alloc_hdlcdev(void *priv)
 {
 	struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct hdlc_device), "hdlc%d", hdlc_setup);
+=======
+	dev = alloc_netdev(sizeof(struct hdlc_device), "hdlc%d",
+			   NET_NAME_UNKNOWN, hdlc_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(struct hdlc_device), "hdlc%d",
 			   NET_NAME_UNKNOWN, hdlc_setup);

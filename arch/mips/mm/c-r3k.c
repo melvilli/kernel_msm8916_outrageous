@@ -10,7 +10,10 @@
  * Copyright (C) 2001, 2004, 2007  Maciej W. Rozycki
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -30,7 +33,11 @@ static unsigned long icache_size, dcache_size;		/* Size in bytes */
 static unsigned long icache_lsize, dcache_lsize;	/* Size in bytes */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __cpuinit r3k_cache_size(unsigned long ca_flags)
+=======
+unsigned long r3k_cache_size(unsigned long ca_flags)
+>>>>>>> v3.18
 =======
 unsigned long r3k_cache_size(unsigned long ca_flags)
 >>>>>>> v3.18
@@ -69,7 +76,11 @@ unsigned long r3k_cache_size(unsigned long ca_flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __cpuinit r3k_cache_lsize(unsigned long ca_flags)
+=======
+unsigned long r3k_cache_lsize(unsigned long ca_flags)
+>>>>>>> v3.18
 =======
 unsigned long r3k_cache_lsize(unsigned long ca_flags)
 >>>>>>> v3.18
@@ -102,7 +113,11 @@ unsigned long r3k_cache_lsize(unsigned long ca_flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit r3k_probe_cache(void)
+=======
+static void r3k_probe_cache(void)
+>>>>>>> v3.18
 =======
 static void r3k_probe_cache(void)
 >>>>>>> v3.18
@@ -328,7 +343,11 @@ static void r3k_dma_cache_wback_inv(unsigned long start, unsigned long size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit r3k_cache_init(void)
+=======
+void r3k_cache_init(void)
+>>>>>>> v3.18
 =======
 void r3k_cache_init(void)
 >>>>>>> v3.18

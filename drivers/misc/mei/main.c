@@ -14,9 +14,12 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -24,6 +27,10 @@
 #include <linux/kernel.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -33,7 +40,10 @@
 #include <linux/fcntl.h>
 #include <linux/aio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/poll.h>
@@ -46,7 +56,10 @@
 #include <linux/jiffies.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -54,7 +67,10 @@
 
 #include "mei_dev.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hw-me.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "client.h"
@@ -64,6 +80,7 @@
  *
  * @inode: pointer to inode structure
  * @file: pointer to file structure
+<<<<<<< HEAD
 <<<<<<< HEAD
  e
  * returns 0 on success, <0 on error
@@ -112,6 +129,8 @@ static int mei_open(struct inode *inode, struct file *file)
 
 	file->private_data = cl;
 =======
+=======
+>>>>>>> v3.18
  *
  * Return: 0 on success, <0 on error
  */
@@ -149,16 +168,25 @@ static int mei_open(struct inode *inode, struct file *file)
 
 	file->private_data = cl;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->device_lock);
 
 	return nonseekable_open(inode, file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unlock:
 	mutex_unlock(&dev->device_lock);
 	kfree(cl);
 out:
+=======
+err_unlock:
+	mutex_unlock(&dev->device_lock);
+	kfree(cl);
+>>>>>>> v3.18
 =======
 err_unlock:
 	mutex_unlock(&dev->device_lock);
@@ -174,7 +202,11 @@ err_unlock:
  * @file: pointer to file structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 on success, <0 on error
+=======
+ * Return: 0 on success, <0 on error
+>>>>>>> v3.18
 =======
  * Return: 0 on success, <0 on error
 >>>>>>> v3.18
@@ -199,6 +231,7 @@ static int mei_release(struct inode *inode, struct file *file)
 	if (cl->state == MEI_FILE_CONNECTED) {
 		cl->state = MEI_FILE_DISCONNECTING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&dev->pdev->dev,
 			"disconnecting client host client = %d, "
 		    "ME client = %d\n",
@@ -216,12 +249,17 @@ static int mei_release(struct inode *inode, struct file *file)
 		dev->open_handle_count--;
 	}
 =======
+=======
+>>>>>>> v3.18
 		cl_dbg(dev, cl, "disconnecting\n");
 		rets = mei_cl_disconnect(cl);
 	}
 	mei_cl_flush_queues(cl);
 	cl_dbg(dev, cl, "removing\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mei_cl_unlink(cl);
 
@@ -241,10 +279,14 @@ static int mei_release(struct inode *inode, struct file *file)
 	file->private_data = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cb) {
 		mei_io_cb_free(cb);
 		cb = NULL;
 	}
+=======
+	mei_io_cb_free(cb);
+>>>>>>> v3.18
 =======
 	mei_io_cb_free(cb);
 >>>>>>> v3.18
@@ -265,7 +307,11 @@ out:
  * @offset: data offset in buffer
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns >=0 data length on success , <0 on error
+=======
+ * Return: >=0 data length on success , <0 on error
+>>>>>>> v3.18
 =======
  * Return: >=0 data length on success , <0 on error
 >>>>>>> v3.18
@@ -278,7 +324,10 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 	struct mei_cl_cb *cb = NULL;
 	struct mei_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rets;
@@ -291,6 +340,10 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 	dev = cl->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -300,6 +353,7 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((cl->sm_state & MEI_WD_STATE_INDEPENDENCE_MSG_SENT) == 0) {
 		/* Do not allow to read watchdog client */
@@ -318,6 +372,11 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 		rets = 0;
 		goto out;
 >>>>>>> v3.18
+=======
+	if (length == 0) {
+		rets = 0;
+		goto out;
+>>>>>>> v3.18
 	}
 
 	if (cl == &dev->iamthif_cl) {
@@ -325,6 +384,7 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cl->read_cb && cl->read_cb->buf_idx > *offset) {
 		cb = cl->read_cb;
@@ -340,6 +400,8 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 		rets = 0;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (cl->read_cb) {
 		cb = cl->read_cb;
 		/* read what left */
@@ -355,13 +417,20 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 			*offset = 0;
 	} else if (*offset > 0) {
 		*offset = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = mei_cl_read_start(cl, length);
 	if (err && err != -EBUSY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&dev->pdev->dev,
+=======
+		dev_dbg(dev->dev,
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->dev,
 >>>>>>> v3.18
@@ -408,7 +477,11 @@ static ssize_t mei_read(struct file *file, char __user *ubuf,
 	/* now copy the data to user space */
 copy_buffer:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&dev->pdev->dev, "buf.size = %d buf.idx= %ld\n",
+=======
+	dev_dbg(dev->dev, "buf.size = %d buf.idx= %ld\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(dev->dev, "buf.size = %d buf.idx= %ld\n",
 >>>>>>> v3.18
@@ -424,6 +497,10 @@ copy_buffer:
 
 	if (copy_to_user(ubuf, cb->response_buffer.data + *offset, length)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_dbg(dev->dev, "failed to copy data to userland\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->dev, "failed to copy data to userland\n");
 >>>>>>> v3.18
@@ -446,7 +523,11 @@ free:
 	cl->read_cb = NULL;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&dev->pdev->dev, "end mei read rets= %d\n", rets);
+=======
+	dev_dbg(dev->dev, "end mei read rets= %d\n", rets);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev->dev, "end mei read rets= %d\n", rets);
 >>>>>>> v3.18
@@ -462,7 +543,11 @@ out:
  * @offset: data offset in buffer
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns >=0 data length on success , <0 on error
+=======
+ * Return: >=0 data length on success , <0 on error
+>>>>>>> v3.18
 =======
  * Return: >=0 data length on success , <0 on error
 >>>>>>> v3.18
@@ -472,6 +557,10 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 {
 	struct mei_cl *cl = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mei_me_client *me_cl;
+>>>>>>> v3.18
 =======
 	struct mei_me_client *me_cl;
 >>>>>>> v3.18
@@ -480,7 +569,10 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 	unsigned long timeout = 0;
 	int rets;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -497,6 +589,7 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id = mei_me_cl_by_id(dev, cl->me_client_id);
 	if (id < 0) {
 		rets = -ENODEV;
@@ -505,6 +598,8 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 	if (length > dev->me_clients[id].props.max_msg_length || length <= 0) {
 		rets = -EMSGSIZE;
 =======
+=======
+>>>>>>> v3.18
 	me_cl = mei_me_cl_by_uuid_id(dev, &cl->cl_uuid, cl->me_client_id);
 	if (!me_cl) {
 		rets = -ENOTTY;
@@ -518,13 +613,20 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 
 	if (length > me_cl->props.max_msg_length) {
 		rets = -EFBIG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
 
 	if (cl->state != MEI_FILE_CONNECTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "host client = %d,  is not connected to ME client = %d",
+=======
+		dev_err(dev->dev, "host client = %d,  is not connected to ME client = %d",
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "host client = %d,  is not connected to ME client = %d",
 >>>>>>> v3.18
@@ -567,7 +669,10 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 	write_cb = mei_io_cb_init(cl, file);
 	if (!write_cb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "write cb allocation failed\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rets = -ENOMEM;
@@ -578,6 +683,7 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 		goto out;
 
 	rets = copy_from_user(write_cb->request_buffer.data, ubuf, length);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rets)
 		goto out;
@@ -592,11 +698,16 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 				 write_cb->request_buffer.data, 4) == 0)))
 		cl->sm_state |= MEI_WD_STATE_INDEPENDENCE_MSG_SENT;
 =======
+=======
+>>>>>>> v3.18
 	if (rets) {
 		dev_dbg(dev->dev, "failed to copy data from userland\n");
 		rets = -EFAULT;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cl == &dev->iamthif_cl) {
@@ -604,7 +715,11 @@ static ssize_t mei_write(struct file *file, const char __user *ubuf,
 
 		if (rets) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&dev->pdev->dev,
+=======
+			dev_err(dev->dev,
+>>>>>>> v3.18
 =======
 			dev_err(dev->dev,
 >>>>>>> v3.18
@@ -627,6 +742,7 @@ out:
  * mei_ioctl_connect_client - the connect to fw client IOCTL function
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: the device structure
  * @data: IOCTL connect data, input and output parameters
  * @file: private data of the file object
@@ -635,12 +751,17 @@ out:
  *
  * returns 0 on success, <0 on failure.
 =======
+=======
+>>>>>>> v3.18
  * @file: private data of the file object
  * @data: IOCTL connect data, input and output parameters
  *
  * Locking: called under "dev->device_lock" lock
  *
  * Return: 0 on success, <0 on failure.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int mei_ioctl_connect_client(struct file *file,
@@ -648,6 +769,7 @@ static int mei_ioctl_connect_client(struct file *file,
 {
 	struct mei_device *dev;
 	struct mei_client *client;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mei_cl *cl;
 	int i;
@@ -658,11 +780,16 @@ static int mei_ioctl_connect_client(struct file *file,
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	struct mei_me_client *me_cl;
 	struct mei_cl *cl;
 	int rets;
 
 	cl = file->private_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev = cl->dev;
 
@@ -678,6 +805,7 @@ static int mei_ioctl_connect_client(struct file *file,
 	}
 
 	/* find ME client we're trying to connect to */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i = mei_me_cl_by_uuid(dev, &data->in_client_uuid);
 	if (i < 0 || dev->me_clients[i].props.fixed_address) {
@@ -697,6 +825,8 @@ static int mei_ioctl_connect_client(struct file *file,
 	dev_dbg(&dev->pdev->dev, "FW Client - Max Msg Len = %d\n",
 			dev->me_clients[i].props.max_msg_length);
 =======
+=======
+>>>>>>> v3.18
 	me_cl = mei_me_cl_by_uuid(dev, &data->in_client_uuid);
 	if (!me_cl || me_cl->props.fixed_address) {
 		dev_dbg(dev->dev, "Cannot connect to FW Client UUID = %pUl\n",
@@ -714,6 +844,9 @@ static int mei_ioctl_connect_client(struct file *file,
 			me_cl->props.protocol_version);
 	dev_dbg(dev->dev, "FW Client - Max Msg Len = %d\n",
 			me_cl->props.max_msg_length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* if we're connecting to amthif client then we will use the
@@ -721,7 +854,11 @@ static int mei_ioctl_connect_client(struct file *file,
 	 */
 	if (uuid_le_cmp(data->in_client_uuid, mei_amthif_guid) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&dev->pdev->dev, "FW Client is amthi\n");
+=======
+		dev_dbg(dev->dev, "FW Client is amthi\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->dev, "FW Client is amthi\n");
 >>>>>>> v3.18
@@ -730,13 +867,17 @@ static int mei_ioctl_connect_client(struct file *file,
 			goto end;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(cl->host_client_id, dev->host_clients_map);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		mei_cl_unlink(cl);
 
 		kfree(cl);
 		cl = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		file->private_data = &dev->iamthif_cl;
 
@@ -746,12 +887,17 @@ static int mei_ioctl_connect_client(struct file *file,
 		client->protocol_version =
 			dev->me_clients[i].props.protocol_version;
 =======
+=======
+>>>>>>> v3.18
 		dev->iamthif_open_count++;
 		file->private_data = &dev->iamthif_cl;
 
 		client = &data->out_client_properties;
 		client->max_msg_length = me_cl->props.max_msg_length;
 		client->protocol_version = me_cl->props.protocol_version;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rets = dev->iamthif_cl.status;
 
@@ -762,9 +908,15 @@ static int mei_ioctl_connect_client(struct file *file,
 	/* prepare the output buffer */
 	client = &data->out_client_properties;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	client->max_msg_length = dev->me_clients[i].props.max_msg_length;
 	client->protocol_version = dev->me_clients[i].props.protocol_version;
 	dev_dbg(&dev->pdev->dev, "Can connect?\n");
+=======
+	client->max_msg_length = me_cl->props.max_msg_length;
+	client->protocol_version = me_cl->props.protocol_version;
+	dev_dbg(dev->dev, "Can connect?\n");
+>>>>>>> v3.18
 =======
 	client->max_msg_length = me_cl->props.max_msg_length;
 	client->protocol_version = me_cl->props.protocol_version;
@@ -779,7 +931,10 @@ end:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -790,7 +945,11 @@ end:
  * @data: pointer to mei message structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 on success , <0 on error
+=======
+ * Return: 0 on success , <0 on error
+>>>>>>> v3.18
 =======
  * Return: 0 on success , <0 on error
 >>>>>>> v3.18
@@ -800,11 +959,17 @@ static long mei_ioctl(struct file *file, unsigned int cmd, unsigned long data)
 	struct mei_device *dev;
 	struct mei_cl *cl = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mei_connect_client_data *connect_data = NULL;
 	int rets;
 
 	if (cmd != IOCTL_MEI_CONNECT_CLIENT)
 		return -EINVAL;
+=======
+	struct mei_connect_client_data connect_data;
+	int rets;
+
+>>>>>>> v3.18
 =======
 	struct mei_connect_client_data connect_data;
 	int rets;
@@ -817,7 +982,11 @@ static long mei_ioctl(struct file *file, unsigned int cmd, unsigned long data)
 	dev = cl->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&dev->pdev->dev, "IOCTL cmd = 0x%x", cmd);
+=======
+	dev_dbg(dev->dev, "IOCTL cmd = 0x%x", cmd);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev->dev, "IOCTL cmd = 0x%x", cmd);
 >>>>>>> v3.18
@@ -828,6 +997,7 @@ static long mei_ioctl(struct file *file, unsigned int cmd, unsigned long data)
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(&dev->pdev->dev, ": IOCTL_MEI_CONNECT_CLIENT.\n");
 
@@ -862,6 +1032,8 @@ static long mei_ioctl(struct file *file, unsigned int cmd, unsigned long data)
 out:
 	kfree(connect_data);
 =======
+=======
+>>>>>>> v3.18
 	switch (cmd) {
 	case IOCTL_MEI_CONNECT_CLIENT:
 		dev_dbg(dev->dev, ": IOCTL_MEI_CONNECT_CLIENT.\n");
@@ -892,6 +1064,9 @@ out:
 	}
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->device_lock);
 	return rets;
@@ -905,7 +1080,11 @@ out:
  * @data: pointer to mei message structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 on success , <0 on error
+=======
+ * Return: 0 on success , <0 on error
+>>>>>>> v3.18
 =======
  * Return: 0 on success , <0 on error
 >>>>>>> v3.18
@@ -926,7 +1105,11 @@ static long mei_compat_ioctl(struct file *file,
  * @wait: pointer to poll_table structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns poll mask
+=======
+ * Return: poll mask
+>>>>>>> v3.18
 =======
  * Return: poll mask
 >>>>>>> v3.18
@@ -939,7 +1122,11 @@ static unsigned int mei_poll(struct file *file, poll_table *wait)
 
 	if (WARN_ON(!cl || !cl->dev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return mask;
+=======
+		return POLLERR;
+>>>>>>> v3.18
 =======
 		return POLLERR;
 >>>>>>> v3.18
@@ -948,6 +1135,7 @@ static unsigned int mei_poll(struct file *file, poll_table *wait)
 
 	mutex_lock(&dev->device_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev->dev_state != MEI_DEV_ENABLED)
 		goto out;
@@ -959,16 +1147,23 @@ static unsigned int mei_poll(struct file *file, poll_table *wait)
 	if (!mei_cl_is_connected(cl)) {
 		mask = POLLERR;
 >>>>>>> v3.18
+=======
+	if (!mei_cl_is_connected(cl)) {
+		mask = POLLERR;
+>>>>>>> v3.18
 		goto out;
 	}
 
 	mutex_unlock(&dev->device_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	poll_wait(file, &cl->tx_wait, wait);
 	mutex_lock(&dev->device_lock);
 	if (MEI_WRITE_COMPLETE == cl->writing_state)
 		mask |= (POLLIN | POLLRDNORM);
 =======
+=======
+>>>>>>> v3.18
 
 
 	if (cl == &dev->iamthif_cl)
@@ -984,6 +1179,9 @@ static unsigned int mei_poll(struct file *file, poll_table *wait)
 	}
 
 	mask |= (POLLIN | POLLRDNORM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -1009,6 +1207,7 @@ static const struct file_operations mei_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Misc Device Struct
  */
@@ -1032,6 +1231,8 @@ int mei_register(struct mei_device *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static struct class *mei_class;
 static dev_t mei_devt;
 #define MEI_MAX_DEVS  MINORMASK
@@ -1119,6 +1320,9 @@ err_dev_create:
 err_dev_add:
 	mei_minor_free(dev);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(mei_register);
@@ -1126,10 +1330,13 @@ EXPORT_SYMBOL_GPL(mei_register);
 void mei_deregister(struct mei_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mei_dbgfs_deregister(dev);
 	misc_deregister(&mei_misc_device);
 	mei_misc_device.parent = NULL;
 =======
+=======
+>>>>>>> v3.18
 	int devno;
 
 	devno = dev->cdev.dev;
@@ -1140,6 +1347,9 @@ void mei_deregister(struct mei_device *dev)
 	device_destroy(mei_class, devno);
 
 	mei_minor_free(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(mei_deregister);
@@ -1147,8 +1357,11 @@ EXPORT_SYMBOL_GPL(mei_deregister);
 static int __init mei_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mei_cl_bus_init();
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	mei_class = class_create(THIS_MODULE, "mei");
@@ -1178,12 +1391,20 @@ err_class:
 	class_destroy(mei_class);
 err:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit mei_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unregister_chrdev_region(mei_devt, MEI_MAX_DEVS);
+	class_destroy(mei_class);
+>>>>>>> v3.18
 =======
 	unregister_chrdev_region(mei_devt, MEI_MAX_DEVS);
 	class_destroy(mei_class);

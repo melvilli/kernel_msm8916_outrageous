@@ -23,7 +23,11 @@
 static void cpuidle_cpu_output(unsigned int cpu, int verbose)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int idlestates, idlestate;
+=======
+	unsigned int idlestates, idlestate;
+>>>>>>> v3.18
 =======
 	unsigned int idlestates, idlestate;
 >>>>>>> v3.18
@@ -36,10 +40,15 @@ static void cpuidle_cpu_output(unsigned int cpu, int verbose)
 		printf(_("CPU %u: No idle states\n"), cpu);
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (idlestates <= 0) {
 		printf(_("CPU %u: Can't read idle state info\n"), cpu);
 		return;
 	}
+=======
+	}
+
+>>>>>>> v3.18
 =======
 	}
 
@@ -60,11 +69,14 @@ static void cpuidle_cpu_output(unsigned int cpu, int verbose)
 
 	for (idlestate = 0; idlestate < idlestates; idlestate++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = sysfs_get_idlestate_name(cpu, idlestate);
 		if (!tmp)
 			continue;
 		printf("%s:\n", tmp);
 =======
+=======
+>>>>>>> v3.18
 		int disabled = sysfs_is_idlestate_disabled(cpu, idlestate);
 		/* Disabled interface not supported on older kernels */
 		if (disabled < 0)
@@ -73,6 +85,9 @@ static void cpuidle_cpu_output(unsigned int cpu, int verbose)
 		if (!tmp)
 			continue;
 		printf("%s%s:\n", tmp, (disabled) ? " (DISABLED) " : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		free(tmp);
 
@@ -119,6 +134,7 @@ static void proc_cpuidle_cpu_output(unsigned int cpu)
 {
 	long max_allowed_cstate = 2000000000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cstates, cstate;
 
 	cstates = sysfs_get_idlestate_count(cpu);
@@ -135,6 +151,8 @@ static void proc_cpuidle_cpu_output(unsigned int cpu)
 	}
 	/* printf("Cstates: %d\n", cstates); */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int cstate, cstates;
 
 	cstates = sysfs_get_idlestate_count(cpu);
@@ -142,6 +160,9 @@ static void proc_cpuidle_cpu_output(unsigned int cpu)
 		printf(_("CPU %u: No C-states info\n"), cpu);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printf(_("active state:            C0\n"));

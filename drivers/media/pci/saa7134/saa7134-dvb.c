@@ -603,15 +603,21 @@ static int configure_tda827x_fe(struct saa7134_dev *dev,
 				struct tda827x_config *tuner_conf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dvb_frontend *fe0;
 
 	/* Get the first frontend */
 	fe0 = videobuf_dvb_get_frontend(&dev->frontends, 1);
 =======
+=======
+>>>>>>> v3.18
 	struct vb2_dvb_frontend *fe0;
 
 	/* Get the first frontend */
 	fe0 = vb2_dvb_get_frontend(&dev->frontends, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!fe0)
@@ -1223,7 +1229,12 @@ static int dvb_init(struct saa7134_dev *dev)
 	int ret;
 	int attach_xc3028 = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dvb_frontend *fe0;
+=======
+	struct vb2_dvb_frontend *fe0;
+	struct vb2_queue *q;
+>>>>>>> v3.18
 =======
 	struct vb2_dvb_frontend *fe0;
 	struct vb2_queue *q;
@@ -1235,7 +1246,11 @@ static int dvb_init(struct saa7134_dev *dev)
 
 	printk(KERN_INFO "%s() allocating 1 frontend\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fe0 = videobuf_dvb_alloc_frontend(&dev->frontends, 1);
+=======
+	fe0 = vb2_dvb_alloc_frontend(&dev->frontends, 1);
+>>>>>>> v3.18
 =======
 	fe0 = vb2_dvb_alloc_frontend(&dev->frontends, 1);
 >>>>>>> v3.18
@@ -1244,6 +1259,7 @@ static int dvb_init(struct saa7134_dev *dev)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* init struct videobuf_dvb */
 	dev->ts.nr_bufs    = 32;
@@ -1256,6 +1272,8 @@ static int dvb_init(struct saa7134_dev *dev)
 			    sizeof(struct saa7134_buf),
 			    dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	/* init struct vb2_dvb */
 	dev->ts.nr_bufs    = 32;
 	dev->ts.nr_packets = 32*4;
@@ -1274,6 +1292,9 @@ static int dvb_init(struct saa7134_dev *dev)
 		vb2_dvb_dealloc_frontends(&dev->frontends);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (dev->board) {
@@ -1914,7 +1935,11 @@ static int dvb_init(struct saa7134_dev *dev)
 
 	/* register everything else */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = videobuf_dvb_register_bus(&dev->frontends, THIS_MODULE, dev,
+=======
+	ret = vb2_dvb_register_bus(&dev->frontends, THIS_MODULE, dev,
+>>>>>>> v3.18
 =======
 	ret = vb2_dvb_register_bus(&dev->frontends, THIS_MODULE, dev,
 >>>>>>> v3.18
@@ -1935,7 +1960,12 @@ static int dvb_init(struct saa7134_dev *dev)
 
 detach_frontend:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	videobuf_dvb_dealloc_frontends(&dev->frontends);
+=======
+	vb2_dvb_dealloc_frontends(&dev->frontends);
+	vb2_queue_release(&fe0->dvb.dvbq);
+>>>>>>> v3.18
 =======
 	vb2_dvb_dealloc_frontends(&dev->frontends);
 	vb2_queue_release(&fe0->dvb.dvbq);
@@ -1946,15 +1976,21 @@ detach_frontend:
 static int dvb_fini(struct saa7134_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dvb_frontend *fe0;
 
 	/* Get the first frontend */
 	fe0 = videobuf_dvb_get_frontend(&dev->frontends, 1);
 =======
+=======
+>>>>>>> v3.18
 	struct vb2_dvb_frontend *fe0;
 
 	/* Get the first frontend */
 	fe0 = vb2_dvb_get_frontend(&dev->frontends, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!fe0)
 		return -EINVAL;
@@ -1987,7 +2023,12 @@ static int dvb_fini(struct saa7134_dev *dev)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	videobuf_dvb_unregister_bus(&dev->frontends);
+=======
+	vb2_dvb_unregister_bus(&dev->frontends);
+	vb2_queue_release(&fe0->dvb.dvbq);
+>>>>>>> v3.18
 =======
 	vb2_dvb_unregister_bus(&dev->frontends);
 	vb2_queue_release(&fe0->dvb.dvbq);
@@ -2014,6 +2055,7 @@ static void __exit dvb_unregister(void)
 module_init(dvb_register);
 module_exit(dvb_unregister);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ------------------------------------------------------------------ */
 /*
@@ -2021,5 +2063,7 @@ module_exit(dvb_unregister);
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

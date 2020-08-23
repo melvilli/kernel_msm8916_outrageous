@@ -15,6 +15,7 @@
 #include "cmp.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMPR_SPEED_MASK		0xc0000000
 #define IMPR_SPEED_SHIFT	30
 #define IMPR_XSPEED_MASK	0x00000060
@@ -28,6 +29,8 @@
 #define IPCR_CHANNEL_MASK	0x003f0000
 #define IPCR_CHANNEL_SHIFT	16
 =======
+=======
+>>>>>>> v3.18
 /* MPR common fields */
 #define MPR_SPEED_MASK		0xc0000000
 #define MPR_SPEED_SHIFT		30
@@ -50,6 +53,9 @@
 #define OPCR_SPEED_SHIFT	14
 #define OPCR_OVERHEAD_ID_MASK	0x00003C00
 #define OPCR_OVERHEAD_ID_SHIFT	10
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum bus_reset_handling {
@@ -65,11 +71,14 @@ void cmp_error(struct cmp_connection *c, const char *fmt, ...)
 	va_start(va, fmt);
 	dev_err(&c->resources.unit->device, "%cPCR%u: %pV",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		'i', c->pcr_index, &(struct va_format){ fmt, &va });
 	va_end(va);
 }
 
 =======
+=======
+>>>>>>> v3.18
 		(c->direction == CMP_INPUT) ? 'i' : 'o',
 		c->pcr_index, &(struct va_format){ fmt, &va });
 	va_end(va);
@@ -91,6 +100,9 @@ static u64 pcr_address(struct cmp_connection *c)
 		return CSR_REGISTER_BASE + CSR_OPCR(c->pcr_index);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pcr_modify(struct cmp_connection *c,
 		      __be32 (*modify)(struct cmp_connection *c, __be32 old),
@@ -98,9 +110,12 @@ static int pcr_modify(struct cmp_connection *c,
 		      enum bus_reset_handling bus_reset_handling)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_device *device = fw_parent_device(c->resources.unit);
 	int generation = c->resources.generation;
 	int rcode, errors = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__be32 old_arg, buffer[2];
@@ -111,6 +126,7 @@ static int pcr_modify(struct cmp_connection *c,
 		old_arg = buffer[0];
 		buffer[1] = modify(c, buffer[0]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcode = fw_run_transaction(
 				device->card, TCODE_LOCK_COMPARE_SWAP,
@@ -132,6 +148,8 @@ static int pcr_modify(struct cmp_connection *c,
 		else if (rcode_is_permanent_error(rcode) || ++errors >= 3)
 			goto io_error;
 =======
+=======
+>>>>>>> v3.18
 		err = snd_fw_transaction(
 				c->resources.unit, TCODE_LOCK_COMPARE_SWAP,
 				pcr_address(c), buffer, 8,
@@ -152,11 +170,15 @@ static int pcr_modify(struct cmp_connection *c,
 			if (err < 0)
 				return err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	c->last_pcr_value = buffer[1];
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 io_error:
@@ -167,6 +189,8 @@ bus_reset:
 	return bus_reset_handling == ABORT_ON_BUS_RESET ? -EAGAIN : 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 
@@ -174,6 +198,7 @@ bus_reset:
  * cmp_connection_init - initializes a connection manager
  * @c: the connection manager to initialize
  * @unit: a unit of the target device
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @ipcr_index: the index of the iPCR on the target device
  */
@@ -194,6 +219,8 @@ int cmp_connection_init(struct cmp_connection *c,
 
 	if (ipcr_index >= (impr & IMPR_PLUGS_MASK))
 =======
+=======
+>>>>>>> v3.18
  * @pcr_index: the index of the iPCR/oPCR on the target device
  */
 int cmp_connection_init(struct cmp_connection *c,
@@ -213,6 +240,9 @@ int cmp_connection_init(struct cmp_connection *c,
 	mpr = be32_to_cpu(mpr_be);
 
 	if (pcr_index >= (mpr & MPR_PLUGS_MASK))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -224,15 +254,21 @@ int cmp_connection_init(struct cmp_connection *c,
 	mutex_init(&c->mutex);
 	c->last_pcr_value = cpu_to_be32(0x80000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->pcr_index = ipcr_index;
 	c->max_speed = (impr & IMPR_SPEED_MASK) >> IMPR_SPEED_SHIFT;
 	if (c->max_speed == SCODE_BETA)
 		c->max_speed += (impr & IMPR_XSPEED_MASK) >> IMPR_XSPEED_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	c->pcr_index = pcr_index;
 	c->max_speed = (mpr & MPR_SPEED_MASK) >> MPR_SPEED_SHIFT;
 	if (c->max_speed == SCODE_BETA)
 		c->max_speed += (mpr & MPR_XSPEED_MASK) >> MPR_XSPEED_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -241,7 +277,10 @@ EXPORT_SYMBOL(cmp_connection_init);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * cmp_connection_check_used - check connection is already esablished or not
  * @c: the connection manager to be checked
  */
@@ -262,6 +301,9 @@ int cmp_connection_check_used(struct cmp_connection *c, bool *used)
 EXPORT_SYMBOL(cmp_connection_check_used);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * cmp_connection_destroy - free connection manager resources
  * @c: the connection manager
@@ -278,22 +320,29 @@ EXPORT_SYMBOL(cmp_connection_destroy);
 static __be32 ipcr_set_modify(struct cmp_connection *c, __be32 ipcr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipcr &= ~cpu_to_be32(IPCR_BCAST_CONN |
 			     IPCR_P2P_CONN_MASK |
 			     IPCR_CHANNEL_MASK);
 	ipcr |= cpu_to_be32(1 << IPCR_P2P_CONN_SHIFT);
 	ipcr |= cpu_to_be32(c->resources.channel << IPCR_CHANNEL_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	ipcr &= ~cpu_to_be32(PCR_BCAST_CONN |
 			     PCR_P2P_CONN_MASK |
 			     PCR_CHANNEL_MASK);
 	ipcr |= cpu_to_be32(1 << PCR_P2P_CONN_SHIFT);
 	ipcr |= cpu_to_be32(c->resources.channel << PCR_CHANNEL_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ipcr;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ipcr_set_check(struct cmp_connection *c, __be32 ipcr)
 {
@@ -304,6 +353,8 @@ static int ipcr_set_check(struct cmp_connection *c, __be32 ipcr)
 	}
 	if (!(ipcr & cpu_to_be32(IPCR_ONLINE))) {
 =======
+=======
+>>>>>>> v3.18
 static int get_overhead_id(struct cmp_connection *c)
 {
 	int id;
@@ -359,6 +410,9 @@ static int pcr_set_check(struct cmp_connection *c, __be32 pcr)
 		return -EBUSY;
 	}
 	if (!(pcr & cpu_to_be32(PCR_ONLINE))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cmp_error(c, "plug is not on-line\n");
 		return -ECONNREFUSED;
@@ -375,9 +429,15 @@ static int pcr_set_check(struct cmp_connection *c, __be32 pcr)
  * This function establishes a point-to-point connection from the local
  * computer to the target by allocating isochronous resources (channel and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bandwidth) and setting the target's input plug control register.  When this
  * function succeeds, the caller is responsible for starting transmitting
  * packets.
+=======
+ * bandwidth) and setting the target's input/output plug control register.
+ * When this function succeeds, the caller is responsible for starting
+ * transmitting packets.
+>>>>>>> v3.18
 =======
  * bandwidth) and setting the target's input/output plug control register.
  * When this function succeeds, the caller is responsible for starting
@@ -404,9 +464,12 @@ retry_after_bus_reset:
 		goto err_mutex;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pcr_modify(c, ipcr_set_modify, ipcr_set_check,
 			 ABORT_ON_BUS_RESET);
 =======
+=======
+>>>>>>> v3.18
 	if (c->direction == CMP_OUTPUT)
 		err = pcr_modify(c, opcr_set_modify, pcr_set_check,
 				 ABORT_ON_BUS_RESET);
@@ -414,6 +477,9 @@ retry_after_bus_reset:
 		err = pcr_modify(c, ipcr_set_modify, pcr_set_check,
 				 ABORT_ON_BUS_RESET);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err == -EAGAIN) {
 		fw_iso_resources_free(&c->resources);
@@ -442,8 +508,13 @@ EXPORT_SYMBOL(cmp_connection_establish);
  * @c: the connection manager
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function must be called from the driver's .update handler to reestablish
  * any connection that might have been active.
+=======
+ * This function must be called from the driver's .update handler to
+ * reestablish any connection that might have been active.
+>>>>>>> v3.18
 =======
  * This function must be called from the driver's .update handler to
  * reestablish any connection that might have been active.
@@ -468,9 +539,12 @@ int cmp_connection_update(struct cmp_connection *c)
 		goto err_unconnect;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pcr_modify(c, ipcr_set_modify, ipcr_set_check,
 			 SUCCEED_ON_BUS_RESET);
 =======
+=======
+>>>>>>> v3.18
 	if (c->direction == CMP_OUTPUT)
 		err = pcr_modify(c, opcr_set_modify, pcr_set_check,
 				 SUCCEED_ON_BUS_RESET);
@@ -478,6 +552,9 @@ int cmp_connection_update(struct cmp_connection *c)
 		err = pcr_modify(c, ipcr_set_modify, pcr_set_check,
 				 SUCCEED_ON_BUS_RESET);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		goto err_resources;
@@ -497,10 +574,16 @@ err_unconnect:
 EXPORT_SYMBOL(cmp_connection_update);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static __be32 ipcr_break_modify(struct cmp_connection *c, __be32 ipcr)
 {
 	return ipcr & ~cpu_to_be32(IPCR_BCAST_CONN | IPCR_P2P_CONN_MASK);
+=======
+static __be32 pcr_break_modify(struct cmp_connection *c, __be32 pcr)
+{
+	return pcr & ~cpu_to_be32(PCR_BCAST_CONN | PCR_P2P_CONN_MASK);
+>>>>>>> v3.18
 =======
 static __be32 pcr_break_modify(struct cmp_connection *c, __be32 pcr)
 {
@@ -513,9 +596,15 @@ static __be32 pcr_break_modify(struct cmp_connection *c, __be32 pcr)
  * @c: the connection manager
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function deactives the connection in the target's input plug control
  * register, and frees the isochronous resources of the connection.  Before
  * calling this function, the caller should cease transmitting packets.
+=======
+ * This function deactives the connection in the target's input/output plug
+ * control register, and frees the isochronous resources of the connection.
+ * Before calling this function, the caller should cease transmitting packets.
+>>>>>>> v3.18
 =======
  * This function deactives the connection in the target's input/output plug
  * control register, and frees the isochronous resources of the connection.
@@ -534,7 +623,11 @@ void cmp_connection_break(struct cmp_connection *c)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pcr_modify(c, ipcr_break_modify, NULL, SUCCEED_ON_BUS_RESET);
+=======
+	err = pcr_modify(c, pcr_break_modify, NULL, SUCCEED_ON_BUS_RESET);
+>>>>>>> v3.18
 =======
 	err = pcr_modify(c, pcr_break_modify, NULL, SUCCEED_ON_BUS_RESET);
 >>>>>>> v3.18

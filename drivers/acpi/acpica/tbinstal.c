@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -48,7 +52,10 @@
 #include <acpi/acpi.h>
 #include "accommon.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "acnamesp.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "actables.h"
@@ -56,6 +63,7 @@
 #define _COMPONENT          ACPI_TABLES
 ACPI_MODULE_NAME("tbinstal")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /******************************************************************************
  *
@@ -101,6 +109,8 @@ acpi_status acpi_tb_verify_table(struct acpi_table_desc *table_desc)
 
 	return_ACPI_STATUS(status);
 =======
+=======
+>>>>>>> v3.18
 /* Local prototypes */
 static u8
 acpi_tb_compare_tables(struct acpi_table_desc *table_desc, u32 table_index);
@@ -147,11 +157,15 @@ acpi_tb_compare_tables(struct acpi_table_desc *table_desc, u32 table_index)
 
 	acpi_tb_release_table(table, table_length, table_flags);
 	return (is_identical);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_tb_add_table
  *
@@ -302,6 +316,8 @@ acpi_tb_add_table(struct acpi_table_desc *table_desc, u32 *table_index)
 	(void)acpi_ut_release_mutex(ACPI_MTX_TABLES);
 	return_ACPI_STATUS(status);
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_install_table_with_override
  *
  * PARAMETERS:  table_index             - Index into root table array
@@ -352,11 +368,15 @@ acpi_tb_install_table_with_override(u32 table_index,
 	if (table_index == ACPI_TABLE_INDEX_DSDT) {
 		acpi_ut_set_integer_width(new_table_desc->pointer->revision);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_tb_table_override
  *
@@ -443,6 +463,8 @@ struct acpi_table_header *acpi_tb_table_override(struct acpi_table_header
 
 	return (new_table);
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_install_fixed_table
  *
  * PARAMETERS:  address                 - Physical address of DSDT or FACS
@@ -498,11 +520,15 @@ release_and_exit:
 
 	acpi_tb_release_temp_table(&new_table_desc);
 	return_ACPI_STATUS(status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_tb_resize_root_table_list
  *
@@ -652,6 +678,8 @@ void acpi_tb_delete_table(struct acpi_table_desc *table_desc)
 
 	table_desc->pointer = NULL;
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_install_standard_table
  *
  * PARAMETERS:  address             - Address of the table (might be a virtual
@@ -809,11 +837,15 @@ release_and_exit:
 
 	acpi_tb_release_temp_table(&new_table_desc);
 	return_ACPI_STATUS(status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_tb_terminate
  *
@@ -914,6 +946,8 @@ acpi_status acpi_tb_delete_namespace_by_owner(u32 table_index)
 	status = acpi_ut_acquire_mutex(ACPI_MTX_INTERPRETER);
 	return_ACPI_STATUS(status);
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_override_table
  *
  * PARAMETERS:  old_table_desc      - Validated table descriptor to be
@@ -993,11 +1027,15 @@ finish_override:
 	/* Release the temporary table descriptor */
 
 	acpi_tb_release_temp_table(&new_table_desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_tb_allocate_owner_id
  *
@@ -1054,6 +1092,8 @@ acpi_status acpi_tb_release_owner_id(u32 table_index)
 	(void)acpi_ut_release_mutex(ACPI_MTX_TABLES);
 	return_ACPI_STATUS(status);
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_store_table
  *
  * PARAMETERS:  address             - Table address
@@ -1087,11 +1127,15 @@ acpi_tb_store_table(acpi_physical_address address,
 	acpi_tb_init_table_descriptor(table_desc, address, flags, table);
 	table_desc->pointer = table;
 	return (AE_OK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_tb_get_owner_id
  *
@@ -1175,6 +1219,8 @@ void acpi_tb_set_table_loaded_flag(u32 table_index, u8 is_loaded)
 
 	(void)acpi_ut_release_mutex(ACPI_MTX_TABLES);
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_uninstall_table
  *
  * PARAMETERS:  table_desc          - Table descriptor
@@ -1205,5 +1251,8 @@ void acpi_tb_uninstall_table(struct acpi_table_desc *table_desc)
 
 	table_desc->address = ACPI_PTR_TO_PHYSADDR(NULL);
 	return_VOID;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

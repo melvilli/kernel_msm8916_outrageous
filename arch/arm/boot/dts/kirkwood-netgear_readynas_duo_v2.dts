@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /dts-v1/;
 
 /include/ "kirkwood.dtsi"
 /include/ "kirkwood-6282.dtsi"
 =======
+=======
+>>>>>>> v3.18
 /*
  * Device Tree file for NETGEAR ReadyNAS Duo v2
  *
@@ -19,6 +22,9 @@
 
 #include "kirkwood.dtsi"
 #include "kirkwood-6282.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -32,6 +38,7 @@
 
 	chosen {
 		bootargs = "console=ttyS0,115200n8 earlyprintk";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	};
 
@@ -50,6 +57,8 @@
 			pinctrl-names = "default";
 
 =======
+=======
+>>>>>>> v3.18
 		stdout-path = &uart0;
 	};
 
@@ -65,12 +74,19 @@
 
 	ocp@f1000000 {
 		pinctrl: pin-controller@10000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pmx_button_power: pmx-button-power {
 				marvell,pins = "mpp47";
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -79,6 +95,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -87,6 +107,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -95,6 +119,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -103,6 +131,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -111,6 +143,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -119,6 +155,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -127,7 +167,10 @@
 				marvell,function = "gpio";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			pmx_poweroff: pmx-poweroff {
 				marvell,pins = "mpp30";
@@ -141,6 +184,9 @@
 				 #clock-cells = <0>;
 				 clock-frequency = <8192>;
 		       };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -151,6 +197,7 @@
 				compatible = "ricoh,rs5c372a";
 				reg = <0x32>;
 			};
+<<<<<<< HEAD
 <<<<<<< HEAD
 		};
 
@@ -187,6 +234,8 @@
 				reg = <0x1800000 0x6800000>;
 			};
 =======
+=======
+>>>>>>> v3.18
 
 			g762: g762@3e {
 				compatible = "gmt,g762";
@@ -200,6 +249,9 @@
 
 		serial@12000 {
 			status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -211,6 +263,7 @@
 
 	gpio-leds {
 		compatible = "gpio-leds";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		power_led {
@@ -275,6 +328,8 @@
                 };
         };
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = < &pmx_led_blue_power &pmx_led_blue_activity
 			      &pmx_led_blue_disk1 &pmx_led_blue_disk2
 			      &pmx_led_blue_backup >;
@@ -401,5 +456,8 @@
 	ethernet0-port@0 {
 		phy-handle = <&ethphy0>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

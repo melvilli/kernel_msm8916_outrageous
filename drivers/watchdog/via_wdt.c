@@ -233,7 +233,11 @@ static void wdt_remove(struct pci_dev *pdev)
 {
 	watchdog_unregister_device(&wdt_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&timer);
+=======
+	del_timer_sync(&timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&timer);
 >>>>>>> v3.18
@@ -244,7 +248,11 @@ static void wdt_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(wdt_pci_table) = {
+=======
+static const struct pci_device_id wdt_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id wdt_pci_table[] = {
 >>>>>>> v3.18

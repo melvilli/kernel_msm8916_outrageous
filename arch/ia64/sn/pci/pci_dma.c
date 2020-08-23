@@ -35,7 +35,11 @@
 static int sn_dma_supported(struct device *dev, u64 mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -55,7 +59,11 @@ static int sn_dma_supported(struct device *dev, u64 mask)
 int sn_dma_set_mask(struct device *dev, u64 dma_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -94,7 +102,11 @@ static void *sn_dma_alloc_coherent(struct device *dev, size_t size,
 	struct sn_pcibus_provider *provider = SN_PCIDEV_BUSPROVIDER(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -156,7 +168,11 @@ static void sn_dma_free_coherent(struct device *dev, size_t size, void *cpu_addr
 	struct sn_pcibus_provider *provider = SN_PCIDEV_BUSPROVIDER(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -204,7 +220,11 @@ static dma_addr_t sn_dma_map_page(struct device *dev, struct page *page,
 	dmabarr = dma_get_attr(DMA_ATTR_WRITE_BARRIER, attrs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -244,7 +264,11 @@ static void sn_dma_unmap_page(struct device *dev, dma_addr_t dma_addr,
 	struct sn_pcibus_provider *provider = SN_PCIDEV_BUSPROVIDER(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -272,7 +296,11 @@ static void sn_dma_unmap_sg(struct device *dev, struct scatterlist *sgl,
 	struct scatterlist *sg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -313,7 +341,11 @@ static int sn_dma_map_sg(struct device *dev, struct scatterlist *sgl,
 	dmabarr = dma_get_attr(DMA_ATTR_WRITE_BARRIER, attrs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -356,7 +388,11 @@ static void sn_dma_sync_single_for_cpu(struct device *dev, dma_addr_t dma_handle
 				       size_t size, enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -367,7 +403,11 @@ static void sn_dma_sync_single_for_device(struct device *dev, dma_addr_t dma_han
 					  enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -377,7 +417,11 @@ static void sn_dma_sync_sg_for_cpu(struct device *dev, struct scatterlist *sg,
 				   int nelems, enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18
@@ -387,7 +431,11 @@ static void sn_dma_sync_sg_for_device(struct device *dev, struct scatterlist *sg
 				      int nelems, enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dev->bus != &pci_bus_type);
+=======
+	BUG_ON(!dev_is_pci(dev));
+>>>>>>> v3.18
 =======
 	BUG_ON(!dev_is_pci(dev));
 >>>>>>> v3.18

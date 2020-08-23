@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //=====================================================
 // CopyRight (C) 2007 Qualcomm Inc. All Rights Reserved.
 //
@@ -11,12 +12,17 @@
 
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
 /*
 * CopyRight (C) 2007 Qualcomm Inc. All Rights Reserved.
 *
 * This file is part of Express Card USB Driver
 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -69,7 +75,11 @@
 #define  MAX_LENGTH              0x7f0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Temporary download mechanism for Magnemite
+=======
+/* Temporary download mechanism for Magnemite */
+>>>>>>> v3.18
 =======
 /* Temporary download mechanism for Magnemite */
 >>>>>>> v3.18
@@ -92,7 +102,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // New Magnemite downloader
+=======
+/* New Magnemite downloader */
+>>>>>>> v3.18
 =======
 /* New Magnemite downloader */
 >>>>>>> v3.18
@@ -102,6 +116,7 @@
 #define  DWNLD_MAG1_PS_HDR_LOC        0x03
 
 struct dsp_file_hdr {
+<<<<<<< HEAD
 <<<<<<< HEAD
    long              version_id;          // Version ID of this image format.
    long              package_id;          // Package ID of code release.
@@ -115,6 +130,8 @@ struct dsp_file_hdr {
    long              version_data_size;   // Size, in words, of scrambled version data.
    long              nDspImages;          // Number of DSP images in file.
 =======
+=======
+>>>>>>> v3.18
 	long              version_id;          /* Version ID of this image format. */
 	long              package_id;          /* Package ID of code release. */
 	long              build_date;          /* Date/time stamp when file was built. */
@@ -126,11 +143,15 @@ struct dsp_file_hdr {
 	long              version_data_offset; /* Offset were scrambled version data begins. */
 	long              version_data_size;   /* Size, in words, of scrambled version data. */
 	long              nDspImages;          /* Number of DSP images in file. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #pragma pack(1)
 struct dsp_image_info {
+<<<<<<< HEAD
 <<<<<<< HEAD
    long              coff_date;           // Date/time when DSP Coff image was built.
    long              begin_offset;        // Offset in file where image begins.
@@ -161,6 +182,8 @@ static u32 check_usb_db (struct ft1000_usb *ft1000dev)
 	u16 temp;
 	u32 status;
 =======
+=======
+>>>>>>> v3.18
 	long              coff_date;           /* Date/time when DSP Coff image was built. */
 	long              begin_offset;        /* Offset in file where image begins. */
 	long              end_offset;          /* Offset in file where image begins. */
@@ -178,6 +201,9 @@ static int check_usb_db(struct ft1000_usb *ft1000dev)
 	int loopcnt;
 	u16 temp;
 	int status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	loopcnt = 0;
@@ -197,10 +223,16 @@ static int check_usb_db(struct ft1000_usb *ft1000dev)
 						FT1000_REG_DOORBELL);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else {
 			loopcnt++;
 			msleep(10);
 		}
+=======
+		}
+		loopcnt++;
+		msleep(10);
+>>>>>>> v3.18
 =======
 		}
 		loopcnt++;
@@ -224,6 +256,7 @@ static int check_usb_db(struct ft1000_usb *ft1000dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return HANDSHAKE_MAG_TIMEOUT_VALUE;
 }
 
@@ -242,17 +275,26 @@ static int check_usb_db(struct ft1000_usb *ft1000dev)
 //
 //---------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	return -1;
 }
 
 /* gets the handshake and compares it with the expected value */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u16 get_handshake(struct ft1000_usb *ft1000dev, u16 expected_value)
 {
 	u16 handshake;
 	int loopcnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 status = 0;
+=======
+	int status = 0;
+>>>>>>> v3.18
 =======
 	int status = 0;
 >>>>>>> v3.18
@@ -269,9 +311,14 @@ static u16 get_handshake(struct ft1000_usb *ft1000dev, u16 expected_value)
 			ft1000dev->fcodeldr = 0;
 			status = check_usb_db(ft1000dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (status != STATUS_SUCCESS) {
 				DEBUG("get_handshake: check_usb_db failed\n");
 				status = STATUS_FAILURE;
+=======
+			if (status != 0) {
+				DEBUG("get_handshake: check_usb_db failed\n");
+>>>>>>> v3.18
 =======
 			if (status != 0) {
 				DEBUG("get_handshake: check_usb_db failed\n");
@@ -294,10 +341,16 @@ static u16 get_handshake(struct ft1000_usb *ft1000dev, u16 expected_value)
 		    (handshake == HANDSHAKE_RESET_VALUE_USB)) {
 			return handshake;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else	{
 			loopcnt++;
 			msleep(10);
 		}
+=======
+		}
+		loopcnt++;
+		msleep(10);
+>>>>>>> v3.18
 =======
 		}
 		loopcnt++;
@@ -308,6 +361,7 @@ static u16 get_handshake(struct ft1000_usb *ft1000dev, u16 expected_value)
 	return HANDSHAKE_TIMEOUT_VALUE;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    put_handshake
@@ -329,12 +383,17 @@ static void put_handshake(struct ft1000_usb *ft1000dev,u16 handshake_value)
 	u16 tempword;
 	u32 status;
 =======
+=======
+>>>>>>> v3.18
 /* write the handshake value to the handshake location */
 static void put_handshake(struct ft1000_usb *ft1000dev, u16 handshake_value)
 {
 	u32 tempx;
 	u16 tempword;
 	int status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tempx = (u32)handshake_value;
@@ -356,7 +415,11 @@ static u16 get_handshake_usb(struct ft1000_usb *ft1000dev, u16 expected_value)
 	int loopcnt;
 	u16 temp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 status = 0;
+=======
+	int status = 0;
+>>>>>>> v3.18
 =======
 	int status = 0;
 >>>>>>> v3.18
@@ -402,6 +465,7 @@ static u16 get_handshake_usb(struct ft1000_usb *ft1000dev, u16 expected_value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void put_handshake_usb(struct ft1000_usb *ft1000dev,u16 handshake_value)
 {
 	int i;
@@ -426,6 +490,8 @@ static u16 get_request_type(struct ft1000_usb *ft1000dev)
 	u16 request_type;
 	u32 status;
 =======
+=======
+>>>>>>> v3.18
 static void put_handshake_usb(struct ft1000_usb *ft1000dev, u16 handshake_value)
 {
 	int i;
@@ -438,6 +504,9 @@ static u16 get_request_type(struct ft1000_usb *ft1000dev)
 {
 	u16 request_type;
 	int status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 tempword;
 	u32 tempx;
@@ -462,7 +531,11 @@ static u16 get_request_type_usb(struct ft1000_usb *ft1000dev)
 {
 	u16 request_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 status;
+=======
+	int status;
+>>>>>>> v3.18
 =======
 	int status;
 >>>>>>> v3.18
@@ -492,6 +565,7 @@ static u16 get_request_type_usb(struct ft1000_usb *ft1000dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    get_request_value
 //
@@ -506,12 +580,18 @@ static u16 get_request_type_usb(struct ft1000_usb *ft1000dev)
 //---------------------------------------------------------------------------
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static long get_request_value(struct ft1000_usb *ft1000dev)
 {
 	u32 value;
 	u16 tempword;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 status;
+=======
+	int status;
+>>>>>>> v3.18
 =======
 	int status;
 >>>>>>> v3.18
@@ -535,6 +615,7 @@ static long get_request_value(struct ft1000_usb *ft1000dev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    put_request_value
 //
@@ -553,11 +634,16 @@ static void put_request_value(struct ft1000_usb *ft1000dev, long lvalue)
 	u32    tempx;
 	u32    status;
 =======
+=======
+>>>>>>> v3.18
 /* writes a value to DWNLD_MAG1_SIZE_LOC */
 static void put_request_value(struct ft1000_usb *ft1000dev, long lvalue)
 {
 	u32    tempx;
 	int    status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tempx = ntohl(lvalue);
@@ -567,6 +653,7 @@ static void put_request_value(struct ft1000_usb *ft1000dev, long lvalue)
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    hdr_checksum
@@ -580,6 +667,9 @@ static void put_request_value(struct ft1000_usb *ft1000dev, long lvalue)
 // Notes:
 //
 //---------------------------------------------------------------------------
+=======
+/* returns the checksum of the pseudo header */
+>>>>>>> v3.18
 =======
 /* returns the checksum of the pseudo header */
 >>>>>>> v3.18
@@ -602,7 +692,11 @@ static int check_buffers(u16 *buff_w, u16 *buff_r, int len, int offset)
 	for (i = 0; i < len; i++) {
 		if (buff_w[i] != buff_r[i + offset])
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -1;
+=======
+			return -EREMOTEIO;
+>>>>>>> v3.18
 =======
 			return -EREMOTEIO;
 >>>>>>> v3.18
@@ -611,6 +705,7 @@ static int check_buffers(u16 *buff_w, u16 *buff_r, int len, int offset)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //---------------------------------------------------------------------------
 // Function:    write_blk
@@ -773,6 +868,8 @@ static u32 write_blk_fifo(struct ft1000_usb *ft1000dev, u16 **pUsFile,
 {
 	u32 Status = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 static int write_dpram32_and_check(struct ft1000_usb *ft1000dev,
 		u16 tempbuffer[], u16 dpram)
 {
@@ -907,6 +1004,9 @@ static void usb_dnld_complete(struct urb *urb)
 static int write_blk_fifo(struct ft1000_usb *ft1000dev, u16 **pUsFile,
 			  u8 **pUcFile, long word_length)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int byte_length;
 
@@ -933,6 +1033,7 @@ static int write_blk_fifo(struct ft1000_usb *ft1000dev, u16 **pUsFile,
 	*pUcFile = *pUcFile + (word_length << 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return Status;
 }
 
@@ -953,6 +1054,8 @@ u16 scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 {
 	u16 status = STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1021,6 +1124,9 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 		u32 FileLength)
 {
 	int status = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 state;
 	u16 handshake;
@@ -1030,7 +1136,10 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 	u16 request;
 	u16 temp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 tempword;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1062,9 +1171,15 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 	ft1000dev->dspalive = 0xffff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//
 	// Get version id of file, at first 4 bytes of file, for newer files.
 	//
+=======
+	/*
+	 * Get version id of file, at first 4 bytes of file, for newer files.
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * Get version id of file, at first 4 bytes of file, for newer files.
@@ -1084,6 +1199,7 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 
 	loader_code_address = file_hdr->loader_code_address;
 	loader_code_size = file_hdr->loader_code_size;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	correct_version = FALSE;
 
@@ -1114,6 +1230,8 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 			state = STATE_BOOT_DWNLD;
 
 =======
+=======
+>>>>>>> v3.18
 	correct_version = false;
 
 	while ((status == 0) && (state != STATE_DONE_FILE)) {
@@ -1121,6 +1239,9 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 		case STATE_START_DWNLD:
 			status = scram_start_dwnld(ft1000dev, &handshake,
 						   &state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -1150,8 +1271,13 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					s_file = (u16 *) (boot_end);
 					c_file = (u8 *) (boot_end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					//DEBUG("FT1000:download:s_file = 0x%8x\n", (int)s_file);
 					//DEBUG("FT1000:download:c_file = 0x%8x\n", (int)c_file);
+=======
+					/* DEBUG("FT1000:download:s_file = 0x%8x\n", (int)s_file); */
+					/* DEBUG("FT1000:download:c_file = 0x%8x\n", (int)c_file); */
+>>>>>>> v3.18
 =======
 					/* DEBUG("FT1000:download:s_file = 0x%8x\n", (int)s_file); */
 					/* DEBUG("FT1000:download:c_file = 0x%8x\n", (int)c_file); */
@@ -1160,6 +1286,7 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					ft1000dev->fcodeldr = 1;
 					break;
 				case REQUEST_CODE_SEGMENT:
+<<<<<<< HEAD
 <<<<<<< HEAD
 					//DEBUG("FT1000:REQUEST_CODE_SEGMENT\n");
 					word_length =
@@ -1197,18 +1324,27 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					//DEBUG("write_blk returned %d\n", status);
 					break;
 =======
+=======
+>>>>>>> v3.18
 					status = request_code_segment(ft1000dev,
 							&s_file, &c_file,
 							(const u8 *)boot_end,
 							true);
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				default:
 					DEBUG
 					    ("FT1000:download:Download error: Bad request type=%d in BOOT download state.\n",
 					     request);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					status = STATUS_FAILURE;
+=======
+					status = -1;
+>>>>>>> v3.18
 =======
 					status = -1;
 >>>>>>> v3.18
@@ -1224,7 +1360,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 				DEBUG
 				    ("FT1000:download:Download error: Handshake failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = STATUS_FAILURE;
+=======
+				status = -1;
+>>>>>>> v3.18
 =======
 				status = -1;
 >>>>>>> v3.18
@@ -1234,7 +1374,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 
 		case STATE_CODE_DWNLD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//DEBUG("FT1000:STATE_CODE_DWNLD\n");
+=======
+			/* DEBUG("FT1000:STATE_CODE_DWNLD\n"); */
+>>>>>>> v3.18
 =======
 			/* DEBUG("FT1000:STATE_CODE_DWNLD\n"); */
 >>>>>>> v3.18
@@ -1276,7 +1420,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						DEBUG
 						    ("FT1000:download:Download error: Got Run address request before image offset request.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 						status = STATUS_FAILURE;
+=======
+						status = -1;
+>>>>>>> v3.18
 =======
 						status = -1;
 >>>>>>> v3.18
@@ -1296,7 +1444,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						DEBUG
 						    ("FT1000:download:Download error: Got Size request before image offset request.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 						status = STATUS_FAILURE;
+=======
+						status = -1;
+>>>>>>> v3.18
 =======
 						status = -1;
 >>>>>>> v3.18
@@ -1315,6 +1467,7 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					state = STATE_DONE_DWNLD;
 					break;
 				case REQUEST_CODE_SEGMENT:
+<<<<<<< HEAD
 <<<<<<< HEAD
 					//DEBUG("FT1000:download: REQUEST_CODE_SEGMENT - CODELOADER\n");
 					if (!correct_version) {
@@ -1364,6 +1517,8 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 								     0);
 					}
 =======
+=======
+>>>>>>> v3.18
 					/* DEBUG("FT1000:download: REQUEST_CODE_SEGMENT - CODELOADER\n"); */
 					if (!correct_version) {
 						DEBUG
@@ -1376,6 +1531,9 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 							&s_file, &c_file,
 							(const u8 *)code_end,
 							false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 					break;
@@ -1384,7 +1542,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					DEBUG
 					    ("FT1000:download: REQUEST_MAILBOX_DATA\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// Convert length from byte count to word count. Make sure we round up.
+=======
+					/* Convert length from byte count to word count. Make sure we round up. */
+>>>>>>> v3.18
 =======
 					/* Convert length from byte count to word count. Make sure we round up. */
 >>>>>>> v3.18
@@ -1401,7 +1563,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					data = (u16 *) & mailbox_data->data[0];
+=======
+					data = (u16 *) &mailbox_data->data[0];
+>>>>>>> v3.18
 =======
 					data = (u16 *) &mailbox_data->data[0];
 >>>>>>> v3.18
@@ -1419,7 +1585,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						    fix_ft1000_write_dpram32
 						    (ft1000dev, dpram++,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						     (u8 *) & templong);
+=======
+						     (u8 *) &templong);
+>>>>>>> v3.18
 =======
 						     (u8 *) &templong);
 >>>>>>> v3.18
@@ -1458,7 +1628,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						    fix_ft1000_write_dpram32
 						    (ft1000dev, dpram++,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						     (u8 *) & templong);
+=======
+						     (u8 *) &templong);
+>>>>>>> v3.18
 =======
 						     (u8 *) &templong);
 >>>>>>> v3.18
@@ -1470,7 +1644,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					DEBUG
 					    ("FT1000:download:REQUEST_CODE_BY_VERSION\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 					correct_version = FALSE;
+=======
+					correct_version = false;
+>>>>>>> v3.18
 =======
 					correct_version = false;
 >>>>>>> v3.18
@@ -1491,7 +1669,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						if (dsp_img_info->version ==
 						    requested_version) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 							correct_version = TRUE;
+=======
+							correct_version = true;
+>>>>>>> v3.18
 =======
 							correct_version = true;
 >>>>>>> v3.18
@@ -1524,7 +1706,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						dsp_img_info++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					}	//end of for
+=======
+					}	/* end of for */
+>>>>>>> v3.18
 =======
 					}	/* end of for */
 >>>>>>> v3.18
@@ -1537,7 +1723,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						    ("FT1000:download:Download error: Bad Version Request = 0x%x.\n",
 						     (int)requested_version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 						status = STATUS_FAILURE;
+=======
+						status = -1;
+>>>>>>> v3.18
 =======
 						status = -1;
 >>>>>>> v3.18
@@ -1550,7 +1740,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					    ("FT1000:download:Download error: Bad request type=%d in CODE download state.\n",
 					     request);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					status = STATUS_FAILURE;
+=======
+					status = -1;
+>>>>>>> v3.18
 =======
 					status = -1;
 >>>>>>> v3.18
@@ -1566,7 +1760,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 				DEBUG
 				    ("FT1000:download:Download error: Handshake failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = STATUS_FAILURE;
+=======
+				status = -1;
+>>>>>>> v3.18
 =======
 				status = -1;
 >>>>>>> v3.18
@@ -1587,7 +1785,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 			    hdr_checksum(pseudo_header)) {
 				if (pseudo_header->portdest !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    0x80 /* Dsp OAM */ ) {
+=======
+				    0x80 /* Dsp OAM */) {
+>>>>>>> v3.18
 =======
 				    0x80 /* Dsp OAM */) {
 >>>>>>> v3.18
@@ -1597,7 +1799,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 				pseudo_header_len = ntohs(pseudo_header->length);	/* Byte length for PROV records */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Get buffer for provisioning data
+=======
+				/* Get buffer for provisioning data */
+>>>>>>> v3.18
 =======
 				/* Get buffer for provisioning data */
 >>>>>>> v3.18
@@ -1611,7 +1817,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 						      sizeof(struct
 							     pseudo_hdr)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// link provisioning data
+=======
+					/* link provisioning data */
+>>>>>>> v3.18
 =======
 					/* link provisioning data */
 >>>>>>> v3.18
@@ -1626,7 +1836,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 							      &pft1000info->
 							      prov_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 						// Move to next entry if available
+=======
+						/* Move to next entry if available */
+>>>>>>> v3.18
 =======
 						/* Move to next entry if available */
 >>>>>>> v3.18
@@ -1643,6 +1857,7 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 					} else {
 						kfree(pbuffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 						status = STATUS_FAILURE;
 					}
 				} else {
@@ -1652,6 +1867,8 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 				/* Checksum did not compute */
 				status = STATUS_FAILURE;
 =======
+=======
+>>>>>>> v3.18
 						status = -1;
 					}
 				} else {
@@ -1660,6 +1877,9 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 			} else {
 				/* Checksum did not compute */
 				status = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			DEBUG
@@ -1674,6 +1894,7 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = STATUS_FAILURE;
 			break;
 		}		/* End Switch */
@@ -1682,12 +1903,17 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 			status = -1;
 			break;
 		}		/* End Switch */
 
 		if (status != 0)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /****
@@ -1695,7 +1921,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
       status = Harley_Read_Register(&temp, FT1000_REG_SUP_IMASK);
       if ( (status != NDIS_STATUS_SUCCESS) || (temp == 0x0000) ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
           break;
+=======
+	break;
+>>>>>>> v3.18
 =======
 	break;
 >>>>>>> v3.18
@@ -1704,7 +1934,11 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
       status = Harley_Read_Register(&temp, FT1000_REG_ASIC_ID);
       if ( (status != NDIS_STATUS_SUCCESS) || (temp == 0xffff) ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
           break;
+=======
+	break;
+>>>>>>> v3.18
 =======
 	break;
 >>>>>>> v3.18
@@ -1720,6 +1954,9 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 	return status;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

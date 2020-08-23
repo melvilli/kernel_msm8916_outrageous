@@ -10,6 +10,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 

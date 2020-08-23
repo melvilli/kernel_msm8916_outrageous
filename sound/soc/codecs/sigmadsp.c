@@ -35,6 +35,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sigma_action {
 	u8 instr;
 	u8 len_hi;
@@ -52,6 +53,8 @@ struct sigma_firmware {
 			size_t len);
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline u32 sigma_action_len(struct sigma_action *sa)
@@ -142,7 +145,11 @@ process_sigma_actions(struct sigma_firmware *ssfw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _process_sigma_firmware(struct device *dev,
+=======
+int _process_sigma_firmware(struct device *dev,
+>>>>>>> v3.18
 =======
 int _process_sigma_firmware(struct device *dev,
 >>>>>>> v3.18
@@ -184,6 +191,7 @@ int _process_sigma_firmware(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ssfw_head->version != 1) {
 		dev_err(dev,
 			"Failed to load firmware: Invalid version %d. Supported firmware versions: 1\n",
@@ -191,6 +199,8 @@ int _process_sigma_firmware(struct device *dev,
 		goto done;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	crc = crc32(0, fw->data + sizeof(*ssfw_head),
@@ -214,6 +224,7 @@ int _process_sigma_firmware(struct device *dev,
 
 	return ret;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #if IS_ENABLED(CONFIG_I2C)
@@ -260,6 +271,9 @@ int process_sigma_firmware_regmap(struct device *dev, struct regmap *regmap,
 EXPORT_SYMBOL(process_sigma_firmware_regmap);
 
 #endif
+=======
+EXPORT_SYMBOL_GPL(_process_sigma_firmware);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(_process_sigma_firmware);
 >>>>>>> v3.18

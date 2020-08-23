@@ -138,7 +138,11 @@ static void scrollscreen(void)
 #endif /* ndef NO_SCROLL */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void btext_drawchar(char c)
+=======
+static void btext_drawchar(char c)
+>>>>>>> v3.18
 =======
 static void btext_drawchar(char c)
 >>>>>>> v3.18

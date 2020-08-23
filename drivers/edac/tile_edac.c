@@ -258,7 +258,10 @@ static void __exit tile_edac_exit(void)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		platform_device_unregister(pdev);

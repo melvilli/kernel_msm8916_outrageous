@@ -3,7 +3,11 @@
  * Copyright (C) 2008 Red Hat, Inc.
  * Author:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Chris Wright
+=======
+ *	Chris Wright
+>>>>>>> v3.18
 =======
  *	Chris Wright
 >>>>>>> v3.18
@@ -13,7 +17,11 @@
  * Usage is simple, allocate a new id to the stub driver and bind the
  * device to it.  For example:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> v3.18
 =======
  *
 >>>>>>> v3.18
@@ -64,7 +72,11 @@ static int __init pci_stub_init(void)
 	while ((id = strsep(&p, ","))) {
 		unsigned int vendor, device, subvendor = PCI_ANY_ID,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			subdevice = PCI_ANY_ID, class=0, class_mask=0;
+=======
+			subdevice = PCI_ANY_ID, class = 0, class_mask = 0;
+>>>>>>> v3.18
 =======
 			subdevice = PCI_ANY_ID, class = 0, class_mask = 0;
 >>>>>>> v3.18

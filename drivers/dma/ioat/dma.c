@@ -570,6 +570,7 @@ static void ioat1_cleanup_event(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ioat_dma_unmap(struct ioat_chan_common *chan, enum dma_ctrl_flags flags,
 		    size_t len, struct ioat_dma_descriptor *hw)
 {
@@ -585,6 +586,8 @@ void ioat_dma_unmap(struct ioat_chan_common *chan, enum dma_ctrl_flags flags,
 			   PCI_DMA_TODEVICE, flags, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 dma_addr_t ioat_get_current_completion(struct ioat_chan_common *chan)
@@ -644,7 +647,11 @@ static void __cleanup(struct ioat_dma_chan *ioat, dma_addr_t phys_complete)
 		if (tx->cookie) {
 			dma_cookie_complete(tx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ioat_dma_unmap(chan, tx->flags, desc->len, desc->hw);
+=======
+			dma_descriptor_unmap(tx);
+>>>>>>> v3.18
 =======
 			dma_descriptor_unmap(tx);
 >>>>>>> v3.18
@@ -779,7 +786,11 @@ ioat_dma_tx_status(struct dma_chan *c, dma_cookie_t cookie,
 
 	ret = dma_cookie_status(c, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS)
+=======
+	if (ret == DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 	if (ret == DMA_COMPLETE)
 >>>>>>> v3.18
@@ -882,10 +893,13 @@ int ioat_dma_self_test(struct ioatdma_device *device)
 
 	dma_src = dma_map_single(dev, src, IOAT_TEST_SIZE, DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_dest = dma_map_single(dev, dest, IOAT_TEST_SIZE, DMA_FROM_DEVICE);
 	flags = DMA_COMPL_SKIP_SRC_UNMAP | DMA_COMPL_SKIP_DEST_UNMAP |
 		DMA_PREP_INTERRUPT;
 =======
+=======
+>>>>>>> v3.18
 	if (dma_mapping_error(dev, dma_src)) {
 		dev_err(dev, "mapping src buffer failed\n");
 		goto free_resources;
@@ -896,6 +910,9 @@ int ioat_dma_self_test(struct ioatdma_device *device)
 		goto unmap_src;
 	}
 	flags = DMA_PREP_INTERRUPT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tx = device->common.device_prep_dma_memcpy(dma_chan, dma_dest, dma_src,
 						   IOAT_TEST_SIZE, flags);
@@ -922,7 +939,11 @@ int ioat_dma_self_test(struct ioatdma_device *device)
 	if (tmo == 0 ||
 	    dma->device_tx_status(dma_chan, cookie, NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					!= DMA_SUCCESS) {
+=======
+					!= DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 					!= DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -938,8 +959,14 @@ int ioat_dma_self_test(struct ioatdma_device *device)
 
 unmap_dma:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_single(dev, dma_src, IOAT_TEST_SIZE, DMA_TO_DEVICE);
 	dma_unmap_single(dev, dma_dest, IOAT_TEST_SIZE, DMA_FROM_DEVICE);
+=======
+	dma_unmap_single(dev, dma_dest, IOAT_TEST_SIZE, DMA_FROM_DEVICE);
+unmap_src:
+	dma_unmap_single(dev, dma_src, IOAT_TEST_SIZE, DMA_TO_DEVICE);
+>>>>>>> v3.18
 =======
 	dma_unmap_single(dev, dma_dest, IOAT_TEST_SIZE, DMA_FROM_DEVICE);
 unmap_src:
@@ -958,8 +985,12 @@ module_param_string(ioat_interrupt_style, ioat_interrupt_style,
 		    sizeof(ioat_interrupt_style), 0644);
 MODULE_PARM_DESC(ioat_interrupt_style,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "set ioat interrupt style: msix (default), "
 		 "msix-single-vector, msi, intx)");
+=======
+		 "set ioat interrupt style: msix (default), msi, intx");
+>>>>>>> v3.18
 =======
 		 "set ioat interrupt style: msix (default), msi, intx");
 >>>>>>> v3.18
@@ -981,8 +1012,11 @@ int ioat_dma_setup_interrupts(struct ioatdma_device *device)
 	if (!strcmp(ioat_interrupt_style, "msix"))
 		goto msix;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(ioat_interrupt_style, "msix-single-vector"))
 		goto msix_single_vector;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!strcmp(ioat_interrupt_style, "msi"))
@@ -999,11 +1033,17 @@ msix:
 		device->msix_entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pci_enable_msix(pdev, device->msix_entries, msixcnt);
 	if (err < 0)
 		goto msi;
 	if (err > 0)
 		goto msix_single_vector;
+=======
+	err = pci_enable_msix_exact(pdev, device->msix_entries, msixcnt);
+	if (err)
+		goto msi;
+>>>>>>> v3.18
 =======
 	err = pci_enable_msix_exact(pdev, device->msix_entries, msixcnt);
 	if (err)
@@ -1023,7 +1063,11 @@ msix:
 				devm_free_irq(dev, msix->vector, chan);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto msix_single_vector;
+=======
+			goto msi;
+>>>>>>> v3.18
 =======
 			goto msi;
 >>>>>>> v3.18
@@ -1033,6 +1077,7 @@ msix:
 	device->irq_mode = IOAT_MSIX;
 	goto done;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 msix_single_vector:
 	msix = &device->msix_entries[0];
@@ -1052,6 +1097,8 @@ msix_single_vector:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 msi:
 	err = pci_enable_msi(pdev);
 	if (err)
@@ -1064,7 +1111,11 @@ msi:
 		goto intx;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device->irq_mode = IOAT_MSIX;
+=======
+	device->irq_mode = IOAT_MSI;
+>>>>>>> v3.18
 =======
 	device->irq_mode = IOAT_MSI;
 >>>>>>> v3.18
@@ -1202,7 +1253,11 @@ static ssize_t cap_show(struct dma_chan *c, char *page)
 	struct dma_device *dma = c->device;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(page, "copy%s%s%s%s%s%s\n",
+=======
+	return sprintf(page, "copy%s%s%s%s%s\n",
+>>>>>>> v3.18
 =======
 	return sprintf(page, "copy%s%s%s%s%s\n",
 >>>>>>> v3.18
@@ -1211,7 +1266,10 @@ static ssize_t cap_show(struct dma_chan *c, char *page)
 		       dma_has_cap(DMA_XOR, dma->cap_mask) ? " xor" : "",
 		       dma_has_cap(DMA_XOR_VAL, dma->cap_mask) ? " xor_val" : "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       dma_has_cap(DMA_MEMSET, dma->cap_mask)  ? " fill" : "",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		       dma_has_cap(DMA_INTERRUPT, dma->cap_mask) ? " intr" : "");
@@ -1317,7 +1375,10 @@ int ioat1_dma_probe(struct ioatdma_device *device, int dca)
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioat_set_tcp_copy_break(4096);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = ioat_register(device);

@@ -10,7 +10,11 @@ common pinctrl bindings used by client devices, including the meaning of the
 phrase "pin configuration node".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Lantiq's pin configuration nodes act as a container for an abitrary number of
+=======
+Lantiq's pin configuration nodes act as a container for an arbitrary number of
+>>>>>>> v3.18
 =======
 Lantiq's pin configuration nodes act as a container for an arbitrary number of
 >>>>>>> v3.18

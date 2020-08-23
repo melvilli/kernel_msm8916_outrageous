@@ -33,15 +33,21 @@
 #include "crypto4xx_core.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void set_dynamic_sa_command_0(struct dynamic_sa_ctl *sa, u32 save_h,
 			      u32 save_iv, u32 ld_h, u32 ld_iv, u32 hdr_proc,
 			      u32 h, u32 c, u32 pad_type, u32 op_grp, u32 op,
 			      u32 dir)
 =======
+=======
+>>>>>>> v3.18
 static void set_dynamic_sa_command_0(struct dynamic_sa_ctl *sa, u32 save_h,
 				     u32 save_iv, u32 ld_h, u32 ld_iv,
 				     u32 hdr_proc, u32 h, u32 c, u32 pad_type,
 				     u32 op_grp, u32 op, u32 dir)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	sa->sa_command_0.w = 0;
@@ -60,14 +66,20 @@ static void set_dynamic_sa_command_0(struct dynamic_sa_ctl *sa, u32 save_h,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void set_dynamic_sa_command_1(struct dynamic_sa_ctl *sa, u32 cm, u32 hmac_mc,
 			      u32 cfb, u32 esn, u32 sn_mask, u32 mute,
 			      u32 cp_pad, u32 cp_pay, u32 cp_hdr)
 =======
+=======
+>>>>>>> v3.18
 static void set_dynamic_sa_command_1(struct dynamic_sa_ctl *sa, u32 cm,
 				     u32 hmac_mc, u32 cfb, u32 esn,
 				     u32 sn_mask, u32 mute, u32 cp_pad,
 				     u32 cp_pay, u32 cp_hdr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	sa->sa_command_1.w = 0;

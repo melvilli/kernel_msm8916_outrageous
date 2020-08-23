@@ -12,6 +12,7 @@
 
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/export.h>
 #include <linux/acpi_gpio.h>
@@ -24,6 +25,8 @@ struct acpi_gpio_evt_pin {
 	unsigned int pin;
 	unsigned int irq;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/gpio/consumer.h>
 #include <linux/gpio/driver.h>
 #include <linux/export.h>
@@ -58,6 +61,9 @@ struct acpi_gpio_chip {
 	struct mutex conn_lock;
 	struct gpio_chip *chip;
 	struct list_head events;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -71,6 +77,7 @@ static int acpi_gpiochip_find(struct gpio_chip *gc, void *data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * acpi_get_gpio() - Translate ACPI GPIO pin to GPIO number usable with GPIO API
  * @path:	ACPI GPIO controller full path name, (e.g. "\\_SB.GPO1")
  * @pin:	ACPI GPIO pin number (0-based, controller-relative)
@@ -80,6 +87,8 @@ static int acpi_gpiochip_find(struct gpio_chip *gc, void *data)
 
 int acpi_get_gpio(char *path, int pin)
 =======
+=======
+>>>>>>> v3.18
  * acpi_get_gpiod() - Translate ACPI GPIO pin to GPIO descriptor usable with GPIO API
  * @path:	ACPI GPIO controller full path name, (e.g. "\\_SB.GPO1")
  * @pin:	ACPI GPIO pin number (0-based, controller-relative)
@@ -89,6 +98,9 @@ int acpi_get_gpio(char *path, int pin)
  */
 
 static struct gpio_desc *acpi_get_gpiod(char *path, int pin)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct gpio_chip *chip;
@@ -97,6 +109,7 @@ static struct gpio_desc *acpi_get_gpiod(char *path, int pin)
 
 	status = acpi_get_handle(NULL, path, &handle);
 	if (ACPI_FAILURE(status))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENODEV;
 
@@ -117,6 +130,8 @@ static irqreturn_t acpi_gpio_irq_handler(int irq, void *data)
 
 	acpi_evaluate_object(handle, NULL, NULL, NULL);
 =======
+=======
+>>>>>>> v3.18
 		return ERR_PTR(-ENODEV);
 
 	chip = gpiochip_find(handle, acpi_gpiochip_find);
@@ -134,6 +149,9 @@ static irqreturn_t acpi_gpio_irq_handler(int irq, void *data)
 	struct acpi_gpio_event *event = data;
 
 	acpi_evaluate_object(event->handle, NULL, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -141,6 +159,7 @@ static irqreturn_t acpi_gpio_irq_handler(int irq, void *data)
 
 static irqreturn_t acpi_gpio_irq_handler_evt(int irq, void *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct acpi_gpio_evt_pin *evt_pin = data;
 	struct acpi_object_list args;
@@ -157,12 +176,21 @@ static irqreturn_t acpi_gpio_irq_handler_evt(int irq, void *data)
 
 	acpi_execute_simple_method(event->handle, NULL, event->pin);
 >>>>>>> v3.18
+=======
+	struct acpi_gpio_event *event = data;
+
+	acpi_execute_simple_method(event->handle, NULL, event->pin);
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void acpi_gpio_evt_dh(acpi_handle handle, void *data)
+=======
+static void acpi_gpio_chip_dh(acpi_handle handle, void *data)
+>>>>>>> v3.18
 =======
 static void acpi_gpio_chip_dh(acpi_handle handle, void *data)
 >>>>>>> v3.18
@@ -171,10 +199,13 @@ static void acpi_gpio_chip_dh(acpi_handle handle, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * acpi_gpiochip_request_interrupts() - Register isr for gpio chip ACPI events
  * @chip:      gpio chip
 =======
+=======
+>>>>>>> v3.18
 static acpi_status acpi_gpiochip_request_interrupt(struct acpi_resource *ares,
 						   void *context)
 {
@@ -287,6 +318,9 @@ fail_free_desc:
 /**
  * acpi_gpiochip_request_interrupts() - Register isr for gpio chip ACPI events
  * @chip:      GPIO chip
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * ACPI5 platforms can use GPIO signaled ACPI events. These GPIO interrupts are
@@ -297,6 +331,7 @@ fail_free_desc:
  */
 void acpi_gpiochip_request_interrupts(struct gpio_chip *chip)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct acpi_buffer buf = {ACPI_ALLOCATE_BUFFER, NULL};
 	struct acpi_resource *res;
@@ -311,6 +346,11 @@ void acpi_gpiochip_request_interrupts(struct gpio_chip *chip)
 	acpi_handle handle;
 	acpi_status status;
 >>>>>>> v3.18
+=======
+	struct acpi_gpio_chip *acpi_gpio;
+	acpi_handle handle;
+	acpi_status status;
+>>>>>>> v3.18
 
 	if (!chip->dev || !chip->to_irq)
 		return;
@@ -319,6 +359,7 @@ void acpi_gpiochip_request_interrupts(struct gpio_chip *chip)
 	if (!handle)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = acpi_get_event_resources(handle, &buf);
 	if (ACPI_FAILURE(status))
@@ -402,6 +443,8 @@ void acpi_gpiochip_request_interrupts(struct gpio_chip *chip)
 }
 EXPORT_SYMBOL(acpi_gpiochip_request_interrupts);
 =======
+=======
+>>>>>>> v3.18
 	status = acpi_get_data(handle, acpi_gpio_chip_dh, (void **)&acpi_gpio);
 	if (ACPI_FAILURE(status))
 		return;
@@ -449,13 +492,20 @@ void acpi_gpiochip_free_interrupts(struct gpio_chip *chip)
 		kfree(event);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct acpi_gpio_lookup {
 	struct acpi_gpio_info info;
 	int index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gpio;
+=======
+	struct gpio_desc *desc;
+>>>>>>> v3.18
 =======
 	struct gpio_desc *desc;
 >>>>>>> v3.18
@@ -470,6 +520,7 @@ static int acpi_find_gpio(struct acpi_resource *ares, void *data)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lookup->n++ == lookup->index && lookup->gpio < 0) {
 		const struct acpi_resource_gpio *agpio = &ares->data.gpio;
 
@@ -478,6 +529,8 @@ static int acpi_find_gpio(struct acpi_resource *ares, void *data)
 		lookup->info.gpioint =
 			agpio->connection_type == ACPI_RESOURCE_GPIO_TYPE_INT;
 =======
+=======
+>>>>>>> v3.18
 	if (lookup->n++ == lookup->index && !lookup->desc) {
 		const struct acpi_resource_gpio *agpio = &ares->data.gpio;
 
@@ -487,6 +540,9 @@ static int acpi_find_gpio(struct acpi_resource *ares, void *data)
 			agpio->connection_type == ACPI_RESOURCE_GPIO_TYPE_INT;
 		lookup->info.active_low =
 			agpio->polarity == ACPI_ACTIVE_LOW;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -495,7 +551,11 @@ static int acpi_find_gpio(struct acpi_resource *ares, void *data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * acpi_get_gpio_by_index() - get a GPIO number from device resources
+=======
+ * acpi_get_gpiod_by_index() - get a GPIO descriptor from device resources
+>>>>>>> v3.18
 =======
  * acpi_get_gpiod_by_index() - get a GPIO descriptor from device resources
 >>>>>>> v3.18
@@ -505,17 +565,23 @@ static int acpi_find_gpio(struct acpi_resource *ares, void *data)
  *
  * Function goes through ACPI resources for @dev and based on @index looks
 <<<<<<< HEAD
+<<<<<<< HEAD
  * up a GpioIo/GpioInt resource, translates it to the Linux GPIO number,
  * and returns it. @index matches GpioIo/GpioInt resources only so if there
  * are total %3 GPIO resources, the index goes from %0 to %2.
  *
  * If the GPIO cannot be translated or there is an error, negative errno is
 =======
+=======
+>>>>>>> v3.18
  * up a GpioIo/GpioInt resource, translates it to the Linux GPIO descriptor,
  * and returns it. @index matches GpioIo/GpioInt resources only so if there
  * are total %3 GPIO resources, the index goes from %0 to %2.
  *
  * If the GPIO cannot be translated or there is an error an ERR_PTR is
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * returned.
  *
@@ -523,8 +589,13 @@ static int acpi_find_gpio(struct acpi_resource *ares, void *data)
  * function only returns the first.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_get_gpio_by_index(struct device *dev, int index,
 			   struct acpi_gpio_info *info)
+=======
+struct gpio_desc *acpi_get_gpiod_by_index(struct device *dev, int index,
+					  struct acpi_gpio_info *info)
+>>>>>>> v3.18
 =======
 struct gpio_desc *acpi_get_gpiod_by_index(struct device *dev, int index,
 					  struct acpi_gpio_info *info)
@@ -538,6 +609,7 @@ struct gpio_desc *acpi_get_gpiod_by_index(struct device *dev, int index,
 
 	if (!dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
 
 	handle = ACPI_HANDLE(dev);
@@ -548,6 +620,8 @@ struct gpio_desc *acpi_get_gpiod_by_index(struct device *dev, int index,
 	lookup.index = index;
 	lookup.gpio = -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 		return ERR_PTR(-EINVAL);
 
 	handle = ACPI_HANDLE(dev);
@@ -556,12 +630,16 @@ struct gpio_desc *acpi_get_gpiod_by_index(struct device *dev, int index,
 
 	memset(&lookup, 0, sizeof(lookup));
 	lookup.index = index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_LIST_HEAD(&resource_list);
 	ret = acpi_dev_get_resources(adev, &resource_list, acpi_find_gpio,
 				     &lookup);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ret;
 
@@ -592,6 +670,8 @@ void acpi_gpiochip_free_interrupts(struct gpio_chip *chip)
 
 	if (!chip->dev || !chip->to_irq)
 =======
+=======
+>>>>>>> v3.18
 		return ERR_PTR(ret);
 
 	acpi_dev_free_resource_list(&resource_list);
@@ -755,6 +835,9 @@ void acpi_gpiochip_add(struct gpio_chip *chip)
 	acpi_status status;
 
 	if (!chip || !chip->dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -762,6 +845,7 @@ void acpi_gpiochip_add(struct gpio_chip *chip)
 	if (!handle)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = acpi_get_data(handle, acpi_gpio_evt_dh, (void **)&evt_pins);
 	if (ACPI_FAILURE(status))
@@ -778,6 +862,8 @@ void acpi_gpiochip_add(struct gpio_chip *chip)
 }
 EXPORT_SYMBOL(acpi_gpiochip_free_interrupts);
 =======
+=======
+>>>>>>> v3.18
 	acpi_gpio = kzalloc(sizeof(*acpi_gpio), GFP_KERNEL);
 	if (!acpi_gpio) {
 		dev_err(chip->dev,
@@ -821,4 +907,7 @@ void acpi_gpiochip_remove(struct gpio_chip *chip)
 	acpi_detach_data(handle, acpi_gpio_chip_dh);
 	kfree(acpi_gpio);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

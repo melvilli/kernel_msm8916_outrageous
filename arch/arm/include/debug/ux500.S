@@ -46,7 +46,11 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/hardware/debug-pl01x.S>
+=======
+#include <debug/pl01x.S>
+>>>>>>> v3.18
 =======
 #include <debug/pl01x.S>
 >>>>>>> v3.18

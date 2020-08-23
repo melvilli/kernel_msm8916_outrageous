@@ -135,7 +135,11 @@ struct ib_srq *mlx4_ib_create_srq(struct ib_pd *pd,
 			goto err_mtt;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = mlx4_db_alloc(dev->dev, &srq->db, 0);
+=======
+		err = mlx4_db_alloc(dev->dev, &srq->db, 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = mlx4_db_alloc(dev->dev, &srq->db, 0, GFP_KERNEL);
 >>>>>>> v3.18
@@ -145,7 +149,12 @@ struct ib_srq *mlx4_ib_create_srq(struct ib_pd *pd,
 		*srq->db.db = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mlx4_buf_alloc(dev->dev, buf_size, PAGE_SIZE * 2, &srq->buf)) {
+=======
+		if (mlx4_buf_alloc(dev->dev, buf_size, PAGE_SIZE * 2, &srq->buf,
+				   GFP_KERNEL)) {
+>>>>>>> v3.18
 =======
 		if (mlx4_buf_alloc(dev->dev, buf_size, PAGE_SIZE * 2, &srq->buf,
 				   GFP_KERNEL)) {
@@ -175,7 +184,11 @@ struct ib_srq *mlx4_ib_create_srq(struct ib_pd *pd,
 			goto err_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = mlx4_buf_write_mtt(dev->dev, &srq->mtt, &srq->buf);
+=======
+		err = mlx4_buf_write_mtt(dev->dev, &srq->mtt, &srq->buf, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = mlx4_buf_write_mtt(dev->dev, &srq->mtt, &srq->buf, GFP_KERNEL);
 >>>>>>> v3.18

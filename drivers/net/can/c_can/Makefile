@@ -6,7 +6,10 @@ obj-$(CONFIG_CAN_C_CAN) += c_can.o
 obj-$(CONFIG_CAN_C_CAN_PLATFORM) += c_can_platform.o
 obj-$(CONFIG_CAN_C_CAN_PCI) += c_can_pci.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ccflags-$(CONFIG_CAN_DEBUG_DEVICES) := -DDEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

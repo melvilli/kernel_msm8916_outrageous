@@ -70,6 +70,11 @@
  */
 #define WUSB_CHANNEL_STOP_DELAY_MS 8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define WUSB_RETRY_COUNT_MAX 15
+#define WUSB_RETRY_COUNT_INFINITE 0
+>>>>>>> v3.18
 =======
 #define WUSB_RETRY_COUNT_MAX 15
 #define WUSB_RETRY_COUNT_INFINITE 0
@@ -101,6 +106,10 @@ struct wusb_dev {
 	struct wusbhc *wusbhc;
 	struct list_head cack_node;	/* Connect-Ack list */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head rekey_node;	/* GTK rekey list */
+>>>>>>> v3.18
 =======
 	struct list_head rekey_node;	/* GTK rekey list */
 >>>>>>> v3.18
@@ -115,8 +124,11 @@ struct wusb_dev {
 	struct uwb_mas_bm availability;
 	struct work_struct devconnect_acked_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct urb *set_gtk_urb;
 	struct usb_ctrlrequest *set_gtk_req;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct usb_device *usb_dev;
@@ -176,7 +188,11 @@ struct wusb_port {
  * issues use this data type to refer to the host.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @usb_hcd 	   Instantiation of a USB host controller
+=======
+ * @usb_hcd	   Instantiation of a USB host controller
+>>>>>>> v3.18
 =======
  * @usb_hcd	   Instantiation of a USB host controller
 >>>>>>> v3.18
@@ -212,7 +228,11 @@ struct wusb_port {
  *                 ports) this HC will take. Read-only.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @port      	   Array of port status for each fake root port. Guaranteed to
+=======
+ * @port	   Array of port status for each fake root port. Guaranteed to
+>>>>>>> v3.18
 =======
  * @port	   Array of port status for each fake root port. Guaranteed to
 >>>>>>> v3.18
@@ -273,6 +293,12 @@ struct wusbhc {
 	struct wusb_ckhdid chid;
 	uint8_t phy_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint8_t dnts_num_slots;
+	uint8_t dnts_interval;
+	uint8_t retry_count;
+>>>>>>> v3.18
 =======
 	uint8_t dnts_num_slots;
 	uint8_t dnts_interval;
@@ -318,13 +344,19 @@ struct wusbhc {
 	u8 gtk_index;
 	u32 gtk_tkid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct gtk_rekey_done_work;
 	int pending_set_gtks;
 =======
+=======
+>>>>>>> v3.18
 
 	/* workqueue for WUSB security related tasks. */
 	struct workqueue_struct *wq_security;
 	struct work_struct gtk_rekey_work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct usb_encryption_descriptor *ccm1_etd;
@@ -360,7 +392,12 @@ void wusbhc_pal_unregister(struct wusbhc *wusbhc);
  * time during the @usb_dev life cycle.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct usb_hcd *usb_hcd_get_by_usb_dev(struct usb_device *usb_dev)
+=======
+static inline
+struct usb_hcd *usb_hcd_get_by_usb_dev(struct usb_device *usb_dev)
+>>>>>>> v3.18
 =======
 static inline
 struct usb_hcd *usb_hcd_get_by_usb_dev(struct usb_device *usb_dev)
@@ -438,8 +475,11 @@ extern void wusbhc_rh_destroy(struct wusbhc *);
 extern int wusbhc_rh_status_data(struct usb_hcd *, char *);
 extern int wusbhc_rh_control(struct usb_hcd *, u16, u16, u16, char *, u16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int wusbhc_rh_suspend(struct usb_hcd *);
 extern int wusbhc_rh_resume(struct usb_hcd *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int wusbhc_rh_start_port_reset(struct usb_hcd *, unsigned);

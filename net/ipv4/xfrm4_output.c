@@ -22,13 +22,17 @@ static int xfrm4_tunnel_check_size(struct sk_buff *skb)
 {
 	int mtu, ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dst_entry *dst;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (IPCB(skb)->flags & IPSKB_XFRM_TUNNEL_SIZE)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(ip_hdr(skb)->frag_off & htons(IP_DF)) || skb->local_df)
 		goto out;
@@ -40,6 +44,8 @@ static int xfrm4_tunnel_check_size(struct sk_buff *skb)
 			ip_local_error(skb->sk, EMSGSIZE, ip_hdr(skb)->daddr,
 				       inet_sk(skb->sk)->inet_dport, mtu);
 =======
+=======
+>>>>>>> v3.18
 	if (!(ip_hdr(skb)->frag_off & htons(IP_DF)) || skb->ignore_df)
 		goto out;
 
@@ -47,6 +53,9 @@ static int xfrm4_tunnel_check_size(struct sk_buff *skb)
 	if (skb->len > mtu) {
 		if (skb->sk)
 			xfrm_local_error(skb, mtu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			icmp_send(skb, ICMP_DEST_UNREACH,
@@ -79,10 +88,14 @@ int xfrm4_prepare_output(struct xfrm_state *x, struct sk_buff *skb)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(IPCB(skb), 0, sizeof(*IPCB(skb)));
 	IPCB(skb)->flags |= IPSKB_XFRM_TUNNEL_SIZE | IPSKB_XFRM_TRANSFORMED;
 
 	skb->protocol = htons(ETH_P_IP);
+=======
+	IPCB(skb)->flags |= IPSKB_XFRM_TUNNEL_SIZE;
+>>>>>>> v3.18
 =======
 	IPCB(skb)->flags |= IPSKB_XFRM_TUNNEL_SIZE;
 >>>>>>> v3.18
@@ -93,6 +106,7 @@ EXPORT_SYMBOL(xfrm4_prepare_output);
 
 int xfrm4_output_finish(struct sk_buff *skb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_NETFILTER
 	if (!skb_dst(skb)->xfrm) {
@@ -118,6 +132,8 @@ int xfrm4_output(struct sk_buff *skb)
 			    !(IPCB(skb)->flags & IPSKB_REROUTED));
 }
 =======
+=======
+>>>>>>> v3.18
 	memset(IPCB(skb), 0, sizeof(*IPCB(skb)));
 	skb->protocol = htons(ETH_P_IP);
 
@@ -157,4 +173,7 @@ void xfrm4_local_error(struct sk_buff *skb, u32 mtu)
 	ip_local_error(skb->sk, EMSGSIZE, hdr->daddr,
 		       inet_sk(skb->sk)->inet_dport, mtu);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

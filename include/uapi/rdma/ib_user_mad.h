@@ -192,7 +192,10 @@ struct ib_user_mad_reg_req {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ib_user_mad_reg_req2 - MAD registration request
  *
@@ -232,6 +235,9 @@ struct ib_user_mad_reg_req2 {
 	__u8	reserved[3];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IB_IOCTL_MAGIC		0x1b
 
@@ -243,6 +249,12 @@ struct ib_user_mad_reg_req2 {
 #define IB_USER_MAD_ENABLE_PKEY		_IO(IB_IOCTL_MAGIC, 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IB_USER_MAD_REGISTER_AGENT2     _IOWR(IB_IOCTL_MAGIC, 4, \
+					      struct ib_user_mad_reg_req2)
+
+>>>>>>> v3.18
 =======
 #define IB_USER_MAD_REGISTER_AGENT2     _IOWR(IB_IOCTL_MAGIC, 4, \
 					      struct ib_user_mad_reg_req2)

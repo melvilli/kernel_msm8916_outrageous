@@ -22,6 +22,10 @@
 #include <linux/syscore_ops.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 
 #include <mach/hardware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -45,6 +53,7 @@
 
 #include <mach/regs-clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 
 #include <plat/cpu.h>
@@ -53,6 +62,12 @@
 #include <plat/pll.h>
 #include <plat/pm.h>
 #include <plat/watchdog-reset.h>
+=======
+
+#include <plat/cpu.h>
+#include <plat/devs.h>
+#include <plat/pm.h>
+>>>>>>> v3.18
 =======
 
 #include <plat/cpu.h>
@@ -97,6 +112,7 @@ void __init s3c2410_map_io(void)
 	iotable_init(s3c2410_iodesc, ARRAY_SIZE(s3c2410_iodesc));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init_or_cpufreq s3c2410_setup_clocks(void)
 {
@@ -159,6 +175,8 @@ void __init s3c2410_init_clocks(int xtal)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct bus_type s3c2410_subsys = {
 	.name = "s3c2410-core",
 	.dev_name = "s3c2410-core",
@@ -214,6 +232,7 @@ int __init s3c2410a_init(void)
 	return s3c2410_init();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void s3c2410_restart(enum reboot_mode mode, const char *cmd)
 {
@@ -226,5 +245,7 @@ void s3c2410_restart(enum reboot_mode mode, const char *cmd)
 	/* we'll take a jump through zero as a poor second */
 	soft_restart(0);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

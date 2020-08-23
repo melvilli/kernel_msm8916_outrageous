@@ -37,6 +37,10 @@
 #include <linux/sunrpc/rpc_pipe_fs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../nfs4_fs.h"
+>>>>>>> v3.18
 =======
 #include "../nfs4_fs.h"
 >>>>>>> v3.18
@@ -47,6 +51,7 @@
 #define PAGE_CACHE_SECTOR_SHIFT (PAGE_CACHE_SHIFT - SECTOR_SHIFT)
 #define SECTOR_SIZE (1 << SECTOR_SHIFT)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct block_mount_id {
 	spinlock_t			bm_lock;    /* protects list */
@@ -86,6 +91,8 @@ struct pnfs_inval_tracking {
 	int		 it_sector;
 	int		 it_tags;
 =======
+=======
+>>>>>>> v3.18
 struct pnfs_block_dev;
 
 enum pnfs_block_volume_type {
@@ -164,27 +171,37 @@ enum exstate4 {
 	PNFS_BLOCK_READ_DATA		= 1,
 	PNFS_BLOCK_INVALID_DATA		= 2, /* mapped, but data is invalid */
 	PNFS_BLOCK_NONE_DATA		= 3  /* unmapped, it's a hole */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* sector_t fields are all in 512-byte sectors */
 struct pnfs_block_extent {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kref	be_refcnt;
 	struct list_head be_node;	/* link into lseg list */
 	struct nfs4_deviceid be_devid;  /* FIXME: could use device cache instead */
 	struct block_device *be_mdev;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct rb_node	be_node;
 		struct list_head be_list;
 	};
 	struct nfs4_deviceid_node *be_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sector_t	be_f_offset;	/* the starting offset in the file */
 	sector_t	be_length;	/* the size of the extent */
 	sector_t	be_v_offset;	/* the starting offset in the volume */
 	enum exstate4	be_state;	/* the state of this extent */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pnfs_inval_markings *be_inval; /* tracks INVAL->RW transition */
 };
@@ -237,6 +254,8 @@ struct pnfs_block_layout {
 #define BLK_ID(lo) ((struct block_mount_id *)(NFS_SERVER(lo->plh_inode)->pnfs_ld_data))
 
 =======
+=======
+>>>>>>> v3.18
 #define EXTENT_WRITTEN		1
 #define EXTENT_COMMITTING	2
 	unsigned int	be_tag;
@@ -252,6 +271,9 @@ struct pnfs_block_layout {
 	spinlock_t		bl_ext_lock;   /* Protects list manipulation */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct pnfs_block_layout *
 BLK_LO2EXT(struct pnfs_layout_hdr *lo)
@@ -281,6 +303,7 @@ struct bl_msg_hdr {
 #define BL_DEVICE_REQUEST_PROC         0x1 /* User level process succeeds */
 #define BL_DEVICE_REQUEST_ERR          0x2 /* User level process fails */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* blocklayoutdev.c */
 ssize_t bl_pipe_downcall(struct file *, const char __user *, size_t);
@@ -319,6 +342,8 @@ struct pnfs_block_short_extent *
 bl_pop_one_short_extent(struct pnfs_inval_markings *marks);
 void bl_free_short_extents(struct pnfs_inval_markings *marks, int num_to_free);
 =======
+=======
+>>>>>>> v3.18
 /* dev.c */
 struct nfs4_deviceid_node *bl_alloc_deviceid_node(struct nfs_server *server,
 		struct pnfs_device *pdev, gfp_t gfp_mask);
@@ -341,6 +366,9 @@ dev_t bl_resolve_deviceid(struct nfs_server *server,
 		struct pnfs_block_volume *b, gfp_t gfp_mask);
 int __init bl_init_pipefs(void);
 void __exit bl_cleanup_pipefs(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* FS_NFS_NFS4BLOCKLAYOUT_H */

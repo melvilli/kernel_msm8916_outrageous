@@ -66,7 +66,11 @@ static int do_adjust_pte(struct vm_area_struct *vma, unsigned long address,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if USE_SPLIT_PTLOCKS
+=======
+#if USE_SPLIT_PTE_PTLOCKS
+>>>>>>> v3.18
 =======
 #if USE_SPLIT_PTE_PTLOCKS
 >>>>>>> v3.18
@@ -89,15 +93,21 @@ static inline void do_pte_unlock(spinlock_t *ptl)
 	spin_unlock(ptl);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* !USE_SPLIT_PTLOCKS */
 static inline void do_pte_lock(spinlock_t *ptl) {}
 static inline void do_pte_unlock(spinlock_t *ptl) {}
 #endif /* USE_SPLIT_PTLOCKS */
 =======
+=======
+>>>>>>> v3.18
 #else /* !USE_SPLIT_PTE_PTLOCKS */
 static inline void do_pte_lock(spinlock_t *ptl) {}
 static inline void do_pte_unlock(spinlock_t *ptl) {}
 #endif /* USE_SPLIT_PTE_PTLOCKS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int adjust_pte(struct vm_area_struct *vma, unsigned long address,

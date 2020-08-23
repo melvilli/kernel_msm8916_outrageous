@@ -27,16 +27,22 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      CONTROLnsRequestOut - Write variable length bytes to MEM/BB/MAC/EEPROM
  *      CONTROLnsRequestIn - Read variable length bytes from MEM/BB/MAC/EEPROM
  *      ControlvWriteByte - Write one byte to MEM/BB/MAC/EEPROM
  *      ControlvReadByte - Read one byte from MEM/BB/MAC/EEPROM
  *      ControlvMaskByte - Read one byte from MEM/BB/MAC/EEPROM and clear/set some bits in the same address
 =======
+=======
+>>>>>>> v3.18
  *	vnt_control_out - Write variable length bytes to MEM/BB/MAC/EEPROM
  *	vnt_control_in - Read variable length bytes from MEM/BB/MAC/EEPROM
  *	vnt_control_out_u8 - Write one byte to MEM/BB/MAC/EEPROM
  *	vnt_control_in_u8 - Read one byte from MEM/BB/MAC/EEPROM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Revision History:
@@ -48,6 +54,7 @@
 #include "int.h"
 #include "rxtx.h"
 #include "dpc.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "control.h"
 #include "desc.h"
@@ -267,6 +274,8 @@ static void s_nsControlInUsbIoCompleteRead(struct urb *urb)
 {
 	struct vnt_private *pDevice = (struct vnt_private *)urb->context;
 =======
+=======
+>>>>>>> v3.18
 #include "desc.h"
 #include "device.h"
 #include "usbpipe.h"
@@ -396,11 +405,15 @@ static void vnt_submit_rx_urb_complete(struct urb *urb)
 	struct vnt_rcb *rcb = urb->context;
 	struct vnt_private *priv = rcb->priv;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (urb->status) {
 	case 0:
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case -EINPROGRESS:
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO"ctrl read urb status EINPROGRESS%d\n", urb->status);
@@ -834,6 +847,8 @@ static void s_nsBulkOutIoCompleteWrite(struct urb *urb)
 
     return;
 =======
+=======
+>>>>>>> v3.18
 	case -ECONNRESET:
 	case -ENOENT:
 	case -ESHUTDOWN:
@@ -966,5 +981,8 @@ int vnt_tx_context(struct vnt_private *priv,
 	}
 
 	return STATUS_PENDING;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

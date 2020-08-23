@@ -31,6 +31,10 @@
 #include <linux/of_device.h>
 #include <linux/mtd/nand.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_runtime.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_runtime.h>
 >>>>>>> v3.18
@@ -72,6 +76,12 @@
 #define	GPMC_ECC_BCH_RESULT_2	0x248	/* not available on OMAP2 */
 #define	GPMC_ECC_BCH_RESULT_3	0x24c	/* not available on OMAP2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	GPMC_ECC_BCH_RESULT_4	0x300	/* not available on OMAP2 */
+#define	GPMC_ECC_BCH_RESULT_5	0x304	/* not available on OMAP2 */
+#define	GPMC_ECC_BCH_RESULT_6	0x308	/* not available on OMAP2 */
+>>>>>>> v3.18
 =======
 #define	GPMC_ECC_BCH_RESULT_4	0x300	/* not available on OMAP2 */
 #define	GPMC_ECC_BCH_RESULT_5	0x304	/* not available on OMAP2 */
@@ -159,7 +169,11 @@ struct omap3_gpmc_regs {
 static struct gpmc_client_irq gpmc_client_irq[GPMC_NR_IRQ];
 static struct irq_chip gpmc_irq_chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned gpmc_irq_start;
+=======
+static int gpmc_irq_start;
+>>>>>>> v3.18
 =======
 static int gpmc_irq_start;
 >>>>>>> v3.18
@@ -170,6 +184,10 @@ static DEFINE_SPINLOCK(gpmc_mem_lock);
 /* Define chip-selects as reserved by default until probe completes */
 static unsigned int gpmc_cs_map = ((1 << GPMC_CS_NUM) - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static unsigned int gpmc_cs_num = GPMC_CS_NUM;
+>>>>>>> v3.18
 =======
 static unsigned int gpmc_cs_num = GPMC_CS_NUM;
 >>>>>>> v3.18
@@ -187,7 +205,11 @@ static irqreturn_t gpmc_handle_irq(int irq, void *dev);
 static void gpmc_write_reg(int idx, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, gpmc_base + idx);
+=======
+	writel_relaxed(val, gpmc_base + idx);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, gpmc_base + idx);
 >>>>>>> v3.18
@@ -196,7 +218,11 @@ static void gpmc_write_reg(int idx, u32 val)
 static u32 gpmc_read_reg(int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(gpmc_base + idx);
+=======
+	return readl_relaxed(gpmc_base + idx);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(gpmc_base + idx);
 >>>>>>> v3.18
@@ -208,7 +234,11 @@ void gpmc_cs_write_reg(int cs, int idx, u32 val)
 
 	reg_addr = gpmc_base + GPMC_CS0_OFFSET + (cs * GPMC_CS_SIZE) + idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, reg_addr);
+=======
+	writel_relaxed(val, reg_addr);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, reg_addr);
 >>>>>>> v3.18
@@ -220,7 +250,11 @@ static u32 gpmc_cs_read_reg(int cs, int idx)
 
 	reg_addr = gpmc_base + GPMC_CS0_OFFSET + (cs * GPMC_CS_SIZE) + idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(reg_addr);
+=======
+	return readl_relaxed(reg_addr);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(reg_addr);
 >>>>>>> v3.18
@@ -534,7 +568,11 @@ static int gpmc_cs_delete_mem(int cs)
 
 	spin_lock(&gpmc_mem_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = release_resource(&gpmc_cs_mem[cs]);
+=======
+	r = release_resource(res);
+>>>>>>> v3.18
 =======
 	r = release_resource(res);
 >>>>>>> v3.18
@@ -560,9 +598,12 @@ static int gpmc_cs_remap(int cs, u32 base)
 	u32 old_base, size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cs > GPMC_CS_NUM)
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	if (cs > gpmc_cs_num) {
 		pr_err("%s: requested chip-select is disabled\n", __func__);
 		return -ENODEV;
@@ -575,6 +616,9 @@ static int gpmc_cs_remap(int cs, u32 base)
 	 */ 
 	base &= ~(SZ_16M - 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpmc_cs_get_memconf(cs, &old_base, &size);
 	if (base == old_base)
@@ -599,14 +643,20 @@ int gpmc_cs_request(int cs, unsigned long size, unsigned long *base)
 	int r = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cs > GPMC_CS_NUM)
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	if (cs > gpmc_cs_num) {
 		pr_err("%s: requested chip-select is disabled\n", __func__);
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size = gpmc_mem_align(size);
 	if (size > (1 << GPMC_SECTION_SHIFT))
@@ -642,13 +692,19 @@ EXPORT_SYMBOL(gpmc_cs_request);
 void gpmc_cs_free(int cs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&gpmc_mem_lock);
 	if (cs >= GPMC_CS_NUM || cs < 0 || !gpmc_cs_reserved(cs)) {
 =======
+=======
+>>>>>>> v3.18
 	struct resource	*res = &gpmc_cs_mem[cs];
 
 	spin_lock(&gpmc_mem_lock);
 	if (cs >= gpmc_cs_num || cs < 0 || !gpmc_cs_reserved(cs)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "Trying to free non-reserved GPMC CS%d\n", cs);
 		BUG();
@@ -657,7 +713,12 @@ void gpmc_cs_free(int cs)
 	}
 	gpmc_cs_disable_mem(cs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_resource(&gpmc_cs_mem[cs]);
+=======
+	if (res->flags)
+		release_resource(res);
+>>>>>>> v3.18
 =======
 	if (res->flags)
 		release_resource(res);
@@ -734,13 +795,19 @@ void gpmc_update_nand_reg(struct gpmc_nand_regs *reg, int cs)
 		reg->gpmc_bch_result3[i] = gpmc_base + GPMC_ECC_BCH_RESULT_3 +
 					   GPMC_BCH_SIZE * i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		reg->gpmc_bch_result4[i] = gpmc_base + GPMC_ECC_BCH_RESULT_4 +
 					   i * GPMC_BCH_SIZE;
 		reg->gpmc_bch_result5[i] = gpmc_base + GPMC_ECC_BCH_RESULT_5 +
 					   i * GPMC_BCH_SIZE;
 		reg->gpmc_bch_result6[i] = gpmc_base + GPMC_ECC_BCH_RESULT_6 +
 					   i * GPMC_BCH_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -859,7 +926,11 @@ static void gpmc_mem_exit(void)
 	int cs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (cs = 0; cs < GPMC_CS_NUM; cs++) {
+=======
+	for (cs = 0; cs < gpmc_cs_num; cs++) {
+>>>>>>> v3.18
 =======
 	for (cs = 0; cs < gpmc_cs_num; cs++) {
 >>>>>>> v3.18
@@ -884,7 +955,11 @@ static void gpmc_mem_init(void)
 
 	/* Reserve all regions that has been set up by bootloader */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (cs = 0; cs < GPMC_CS_NUM; cs++) {
+=======
+	for (cs = 0; cs < gpmc_cs_num; cs++) {
+>>>>>>> v3.18
 =======
 	for (cs = 0; cs < gpmc_cs_num; cs++) {
 >>>>>>> v3.18
@@ -1272,8 +1347,12 @@ int gpmc_cs_program_settings(int cs, struct gpmc_settings *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p->wait_on_read || p->wait_on_write) &&
 	    (p->wait_pin > gpmc_nr_waitpins)) {
+=======
+	if (p->wait_pin > gpmc_nr_waitpins) {
+>>>>>>> v3.18
 =======
 	if (p->wait_pin > gpmc_nr_waitpins) {
 >>>>>>> v3.18
@@ -1313,7 +1392,11 @@ int gpmc_cs_program_settings(int cs, struct gpmc_settings *p)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id gpmc_dt_ids[] = {
+=======
+static const struct of_device_id gpmc_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id gpmc_dt_ids[] = {
 >>>>>>> v3.18
@@ -1343,7 +1426,10 @@ void gpmc_read_settings_dt(struct device_node *np, struct gpmc_settings *p)
 	p->sync_read = of_property_read_bool(np, "gpmc,sync-read");
 	p->sync_write = of_property_read_bool(np, "gpmc,sync-write");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->device_nand = of_property_read_bool(np, "gpmc,device-nand");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	of_property_read_u32(np, "gpmc,device-width", &p->device_width);
@@ -1365,8 +1451,13 @@ void gpmc_read_settings_dt(struct device_node *np, struct gpmc_settings *p)
 							 "gpmc,wait-on-write");
 		if (!p->wait_on_read && !p->wait_on_write)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warn("%s: read/write wait monitoring not enabled!\n",
 				__func__);
+=======
+			pr_debug("%s: rd/wr wait monitoring not enabled!\n",
+				 __func__);
+>>>>>>> v3.18
 =======
 			pr_debug("%s: rd/wr wait monitoring not enabled!\n",
 				 __func__);
@@ -1443,6 +1534,7 @@ static void __maybe_unused gpmc_read_timings_dt(struct device_node *np,
 #if IS_ENABLED(CONFIG_MTD_NAND)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char * const nand_ecc_opts[] = {
 	[OMAP_ECC_HAMMING_CODE_DEFAULT]		= "sw",
 	[OMAP_ECC_HAMMING_CODE_HW]		= "hw",
@@ -1450,11 +1542,16 @@ static const char * const nand_ecc_opts[] = {
 	[OMAP_ECC_BCH4_CODE_HW]			= "bch4",
 	[OMAP_ECC_BCH8_CODE_HW]			= "bch8",
 =======
+=======
+>>>>>>> v3.18
 static const char * const nand_xfer_types[] = {
 	[NAND_OMAP_PREFETCH_POLLED]		= "prefetch-polled",
 	[NAND_OMAP_POLLED]			= "polled",
 	[NAND_OMAP_PREFETCH_DMA]		= "prefetch-dma",
 	[NAND_OMAP_PREFETCH_IRQ]		= "prefetch-irq",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1481,6 +1578,7 @@ static int gpmc_probe_nand_child(struct platform_device *pdev,
 	gpmc_nand_data->of_node = child;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_property_read_string(child, "ti,nand-ecc-opt", &s))
 		for (val = 0; val < ARRAY_SIZE(nand_ecc_opts); val++)
 			if (!strcasecmp(s, nand_ecc_opts[val])) {
@@ -1489,6 +1587,8 @@ static int gpmc_probe_nand_child(struct platform_device *pdev,
 			}
 
 =======
+=======
+>>>>>>> v3.18
 	/* Detect availability of ELM module */
 	gpmc_nand_data->elm_of_node = of_parse_phandle(child, "ti,elm-id", 0);
 	if (gpmc_nand_data->elm_of_node == NULL)
@@ -1542,6 +1642,9 @@ static int gpmc_probe_nand_child(struct platform_device *pdev,
 
 	gpmc_nand_data->flash_bbt = of_get_nand_on_flash_bbt(child);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	val = of_get_nand_bus_width(child);
 	if (val == 16)
@@ -1634,7 +1737,10 @@ static int gpmc_probe_generic_child(struct platform_device *pdev,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * For some GPMC devices we still need to rely on the bootloader
 	 * timings because the devices can be connected via FPGA. So far
 	 * the list is smc91x on the omap2 SDP boards, and 8250 on zooms.
@@ -1651,6 +1757,9 @@ static int gpmc_probe_generic_child(struct platform_device *pdev,
 	}
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * FIXME: gpmc_cs_request() will map the CS to an arbitary
 	 * location in the gpmc address space. When booting with
@@ -1662,8 +1771,13 @@ static int gpmc_probe_generic_child(struct platform_device *pdev,
 	ret = gpmc_cs_remap(cs, res.start);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "cannot remap GPMC CS %d to 0x%x\n",
 			cs, res.start);
+=======
+		dev_err(&pdev->dev, "cannot remap GPMC CS %d to %pa\n",
+			cs, &res.start);
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "cannot remap GPMC CS %d to %pa\n",
 			cs, &res.start);
@@ -1685,6 +1799,10 @@ static int gpmc_probe_generic_child(struct platform_device *pdev,
 	gpmc_cs_set_timings(cs, &gpmc_t);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+no_timings:
+>>>>>>> v3.18
 =======
 no_timings:
 >>>>>>> v3.18
@@ -1711,7 +1829,10 @@ static int gpmc_probe_dt(struct platform_device *pdev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = of_property_read_u32(pdev->dev.of_node, "gpmc,num-cs",
 				   &gpmc_cs_num);
 	if (ret < 0) {
@@ -1726,6 +1847,9 @@ static int gpmc_probe_dt(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = of_property_read_u32(pdev->dev.of_node, "gpmc,num-waitpins",
 				   &gpmc_nr_waitpins);
@@ -1735,7 +1859,11 @@ static int gpmc_probe_dt(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_child_of_node(pdev->dev.of_node, child) {
+=======
+	for_each_available_child_of_node(pdev->dev.of_node, child) {
+>>>>>>> v3.18
 =======
 	for_each_available_child_of_node(pdev->dev.of_node, child) {
 >>>>>>> v3.18
@@ -1749,7 +1877,12 @@ static int gpmc_probe_dt(struct platform_device *pdev)
 			ret = gpmc_probe_onenand_child(pdev, child);
 		else if (of_node_cmp(child->name, "ethernet") == 0 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 of_node_cmp(child->name, "nor") == 0)
+=======
+			 of_node_cmp(child->name, "nor") == 0 ||
+			 of_node_cmp(child->name, "uart") == 0)
+>>>>>>> v3.18
 =======
 			 of_node_cmp(child->name, "nor") == 0 ||
 			 of_node_cmp(child->name, "uart") == 0)
@@ -1801,7 +1934,12 @@ static int gpmc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(gpmc_l3_clk);
+=======
+	pm_runtime_enable(&pdev->dev);
+	pm_runtime_get_sync(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_get_sync(&pdev->dev);
@@ -1839,6 +1977,7 @@ static int gpmc_probe(struct platform_device *pdev)
 	gpmc_cs_map = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.of_node)
 		gpmc_nr_waitpins = GPMC_NR_WAITPINS;
 
@@ -1846,6 +1985,8 @@ static int gpmc_probe(struct platform_device *pdev)
 	if (rc < 0) {
 		clk_disable_unprepare(gpmc_l3_clk);
 =======
+=======
+>>>>>>> v3.18
 	if (!pdev->dev.of_node) {
 		gpmc_cs_num	 = GPMC_CS_NUM;
 		gpmc_nr_waitpins = GPMC_NR_WAITPINS;
@@ -1854,6 +1995,9 @@ static int gpmc_probe(struct platform_device *pdev)
 	rc = gpmc_probe_dt(pdev);
 	if (rc < 0) {
 		pm_runtime_put_sync(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clk_put(gpmc_l3_clk);
 		dev_err(gpmc_dev, "failed to probe DT parameters\n");
@@ -1868,6 +2012,11 @@ static int gpmc_remove(struct platform_device *pdev)
 	gpmc_free_irq();
 	gpmc_mem_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_runtime_put_sync(&pdev->dev);
+	pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
@@ -1877,7 +2026,10 @@ static int gpmc_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int gpmc_suspend(struct device *dev)
 {
@@ -1896,6 +2048,9 @@ static int gpmc_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(gpmc_pm_ops, gpmc_suspend, gpmc_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver gpmc_driver = {
 	.probe		= gpmc_probe,
@@ -1905,6 +2060,10 @@ static struct platform_driver gpmc_driver = {
 		.owner	= THIS_MODULE,
 		.of_match_table = of_match_ptr(gpmc_dt_ids),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &gpmc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &gpmc_pm_ops,
 >>>>>>> v3.18
@@ -1948,7 +2107,11 @@ static int __init omap_gpmc_init(void)
 	WARN(IS_ERR(pdev), "could not build omap_device for %s\n", oh_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR(pdev) ? PTR_ERR(pdev) : 0;
+=======
+	return PTR_RET(pdev);
+>>>>>>> v3.18
 =======
 	return PTR_RET(pdev);
 >>>>>>> v3.18
@@ -1975,7 +2138,10 @@ static irqreturn_t gpmc_handle_irq(int irq, void *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_OMAP3
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct omap3_gpmc_regs gpmc_context;
@@ -1992,7 +2158,11 @@ void omap3_gpmc_save_context(void)
 	gpmc_context.prefetch_config2 = gpmc_read_reg(GPMC_PREFETCH_CONFIG2);
 	gpmc_context.prefetch_control = gpmc_read_reg(GPMC_PREFETCH_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < GPMC_CS_NUM; i++) {
+=======
+	for (i = 0; i < gpmc_cs_num; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < gpmc_cs_num; i++) {
 >>>>>>> v3.18
@@ -2028,7 +2198,11 @@ void omap3_gpmc_restore_context(void)
 	gpmc_write_reg(GPMC_PREFETCH_CONFIG2, gpmc_context.prefetch_config2);
 	gpmc_write_reg(GPMC_PREFETCH_CONTROL, gpmc_context.prefetch_control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < GPMC_CS_NUM; i++) {
+=======
+	for (i = 0; i < gpmc_cs_num; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < gpmc_cs_num; i++) {
 >>>>>>> v3.18
@@ -2051,6 +2225,9 @@ void omap3_gpmc_restore_context(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_ARCH_OMAP3 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

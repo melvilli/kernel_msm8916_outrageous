@@ -71,6 +71,10 @@ static int ad2s1200_read_raw(struct iio_dev *indio_dev,
 		vel = (vel << 4) >> 4;
 		*val = vel;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -111,6 +115,7 @@ static int ad2s1200_probe(struct spi_device *spi)
 	unsigned short *pins = spi->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (pn = 0; pn < AD2S1200_PN; pn++)
 		if (gpio_request_one(pins[pn], GPIOF_DIR_OUT, DRV_NAME)) {
 			pr_err("%s: request gpio pin %d failed\n",
@@ -123,6 +128,8 @@ static int ad2s1200_probe(struct spi_device *spi)
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (pn = 0; pn < AD2S1200_PN; pn++) {
 		ret = devm_gpio_request_one(&spi->dev, pins[pn], GPIOF_DIR_OUT,
 					    DRV_NAME);
@@ -135,6 +142,9 @@ static int ad2s1200_probe(struct spi_device *spi)
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spi_set_drvdata(spi, indio_dev);
 	st = iio_priv(indio_dev);
@@ -151,9 +161,15 @@ static int ad2s1200_probe(struct spi_device *spi)
 	indio_dev->name = spi_get_device_id(spi)->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
+=======
+	ret = devm_iio_device_register(&spi->dev, indio_dev);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = devm_iio_device_register(&spi->dev, indio_dev);
 	if (ret)
@@ -165,6 +181,7 @@ static int ad2s1200_probe(struct spi_device *spi)
 	spi_setup(spi);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 error_free_dev:
@@ -183,6 +200,8 @@ static int ad2s1200_remove(struct spi_device *spi)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct spi_device_id ad2s1200_id[] = {
@@ -199,7 +218,10 @@ static struct spi_driver ad2s1200_driver = {
 	},
 	.probe = ad2s1200_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ad2s1200_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ad2s1200_id,

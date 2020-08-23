@@ -273,7 +273,11 @@ il4965_hw_valid_rtc_data_addr(u32 addr)
 	 (t) > IL_TX_POWER_TEMPERATURE_MAX)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il4965_temperature_calib(struct il_priv *il);
+=======
+void il4965_temperature_calib(struct il_priv *il);
+>>>>>>> v3.18
 =======
 void il4965_temperature_calib(struct il_priv *il);
 >>>>>>> v3.18

@@ -487,7 +487,10 @@ static __init int celleb_setup_pciex(struct device_node *node,
 {
 	struct resource	r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int virq;
@@ -511,6 +514,7 @@ static __init int celleb_setup_pciex(struct device_node *node,
 
 	/* internal interrupt handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_irq_map_one(node, 1, &oirq)) {
 		pr_err("PCIEXC:Failed to map irq\n");
 		goto error;
@@ -518,11 +522,16 @@ static __init int celleb_setup_pciex(struct device_node *node,
 	virq = irq_create_of_mapping(oirq.controller, oirq.specifier,
 				     oirq.size);
 =======
+=======
+>>>>>>> v3.18
 	virq = irq_of_parse_and_map(node, 1);
 	if (!virq) {
 		pr_err("PCIEXC:Failed to map irq\n");
 		goto error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (request_irq(virq, pciex_handle_internal_irq,
 			0, "pciex", (void *)phb)) {

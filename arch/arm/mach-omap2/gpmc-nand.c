@@ -25,6 +25,7 @@
 #define	NAND_IO_SIZE	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource gpmc_nand_resource[] = {
 	{
 		.flags		= IORESOURCE_MEM,
@@ -103,6 +104,8 @@ static bool gpmc_hwecc_bch_capable(enum omap_ecc ecc_opt)
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 static bool gpmc_hwecc_bch_capable(enum omap_ecc ecc_opt)
 {
 	/* platforms which support all ECC schemes */
@@ -149,6 +152,9 @@ static void gpmc_set_legacy(struct omap_nand_platform_data *gpmc_nand_data,
 		s->device_width = GPMC_DEVWIDTH_16BIT;
 	else
 		s->device_width = GPMC_DEVWIDTH_8BIT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -157,6 +163,7 @@ int gpmc_nand_init(struct omap_nand_platform_data *gpmc_nand_data,
 {
 	int err	= 0;
 	struct gpmc_settings s;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device *dev = &gpmc_nand_device.dev;
 
@@ -223,6 +230,8 @@ int gpmc_nand_init(struct omap_nand_platform_data *gpmc_nand_data,
 		dev_err(dev, "Unable to register NAND device\n");
 		goto out_free_cs;
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device *pdev;
 	struct resource gpmc_nand_res[] = {
 		{ .flags = IORESOURCE_MEM, },
@@ -291,12 +300,20 @@ int gpmc_nand_init(struct omap_nand_platform_data *gpmc_nand_data,
 	if (err) {
 		dev_err(&pdev->dev, "Unable to register NAND device\n");
 		goto out_free_pdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_free_pdev:
+	platform_device_put(pdev);
+>>>>>>> v3.18
 =======
 out_free_pdev:
 	platform_device_put(pdev);

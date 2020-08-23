@@ -5,6 +5,7 @@
 lib-y = cacheflush.o checksum.o cpumask.o delay.o uaccess.o \
 	memmove.o memcpy_$(BITS).o memchr_$(BITS).o memset_$(BITS).o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strchr_$(BITS).o strlen_$(BITS).o
 
 ifeq ($(CONFIG_TILEGX),y)
@@ -18,6 +19,8 @@ lib-$(CONFIG_SMP) += spinlock_$(BITS).o usercopy_$(BITS).o
 
 obj-$(CONFIG_MODULES) += exports.o
 =======
+=======
+>>>>>>> v3.18
 	strchr_$(BITS).o strlen_$(BITS).o strnlen_$(BITS).o
 
 lib-$(CONFIG_TILEGX) += memcpy_user_64.o
@@ -30,4 +33,7 @@ obj-$(CONFIG_MODULES) += exports.o
 # have -pg added, since they both rely on being leaf functions.
 CFLAGS_REMOVE_cacheflush.o = -pg
 CFLAGS_REMOVE_memcpy_user_64.o = -pg
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

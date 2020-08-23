@@ -2,7 +2,11 @@
 #define _ASM_X86_PAGE_64_DEFS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define THREAD_SIZE_ORDER	1
+=======
+#define THREAD_SIZE_ORDER	2
+>>>>>>> v3.18
 =======
 #define THREAD_SIZE_ORDER	2
 >>>>>>> v3.18
@@ -36,11 +40,14 @@
 #define __PAGE_OFFSET           _AC(0xffff880000000000, UL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __PHYSICAL_START	((CONFIG_PHYSICAL_START +	 	\
 				  (CONFIG_PHYSICAL_ALIGN - 1)) &	\
 				 ~(CONFIG_PHYSICAL_ALIGN - 1))
 
 #define __START_KERNEL		(__START_KERNEL_map + __PHYSICAL_START)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __START_KERNEL_map	_AC(0xffffffff80000000, UL)
@@ -51,11 +58,14 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Kernel image size is limited to 512 MB (see level2_kernel_pgt in
  * arch/x86/kernel/head_64.S), and it is mapped here:
  */
 #define KERNEL_IMAGE_SIZE	(512 * 1024 * 1024)
 =======
+=======
+>>>>>>> v3.18
  * Kernel image size is limited to 1GiB due to the fixmap living in the
  * next 1GiB (see level2_kernel_pgt in arch/x86/kernel/head_64.S). Use
  * 512MiB by default, leaving 1.5GiB for modules once the page tables
@@ -69,6 +79,9 @@
 #else
 #define KERNEL_IMAGE_SIZE      KERNEL_IMAGE_SIZE_DEFAULT
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_X86_PAGE_64_DEFS_H */

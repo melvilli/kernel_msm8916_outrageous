@@ -7,17 +7,23 @@
 #include <linux/pci.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io_apic.h>
 #include <asm/smp.h>
 #include <asm/cpu.h>
 #include <linux/intel-iommu.h>
 #include <acpi/acpi.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/intel-iommu.h>
 #include <linux/acpi.h>
 #include <asm/io_apic.h>
 #include <asm/smp.h>
 #include <asm/cpu.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/irq_remapping.h>
 #include <asm/pci-direct.h>
@@ -47,9 +53,12 @@ static struct hpet_scope ir_hpet[MAX_HPET_TBS];
 static int ir_ioapic_num, ir_hpet_num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_RAW_SPINLOCK(irq_2_ir_lock);
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Lock ordering:
  * ->dmar_global_lock
@@ -65,6 +74,9 @@ static DEFINE_RAW_SPINLOCK(irq_2_ir_lock);
 
 static int __init parse_ioapics_under_ir(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct irq_2_iommu *irq_2_iommu(unsigned int irq)
 {
@@ -73,7 +85,11 @@ static struct irq_2_iommu *irq_2_iommu(unsigned int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int get_irte(int irq, struct irte *entry)
+=======
+static int get_irte(int irq, struct irte *entry)
+>>>>>>> v3.18
 =======
 static int get_irte(int irq, struct irte *entry)
 >>>>>>> v3.18
@@ -88,12 +104,18 @@ static int get_irte(int irq, struct irte *entry)
 	raw_spin_lock_irqsave(&irq_2_ir_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!irq_iommu->iommu)) {
 		raw_spin_unlock_irqrestore(&irq_2_ir_lock, flags);
 		return -1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	index = irq_iommu->irte_index + irq_iommu->sub_handle;
 	*entry = *(irq_iommu->iommu->ir_table->base + index);
@@ -108,10 +130,16 @@ static int alloc_irte(struct intel_iommu *iommu, int irq, u16 count)
 	struct irq_2_iommu *irq_iommu = irq_2_iommu(irq);
 	struct irq_cfg *cfg = irq_get_chip_data(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 index, start_index;
 	unsigned int mask = 0;
 	unsigned long flags;
 	int i;
+=======
+	unsigned int mask = 0;
+	unsigned long flags;
+	int index;
+>>>>>>> v3.18
 =======
 	unsigned int mask = 0;
 	unsigned long flags;
@@ -122,11 +150,14 @@ static int alloc_irte(struct intel_iommu *iommu, int irq, u16 count)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * start the IRTE search from index 0.
 	 */
 	index = start_index = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (count > 1) {
@@ -143,6 +174,7 @@ static int alloc_irte(struct intel_iommu *iommu, int irq, u16 count)
 	}
 
 	raw_spin_lock_irqsave(&irq_2_ir_lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do {
 		for (i = index; i < index + count; i++)
@@ -171,6 +203,8 @@ static int alloc_irte(struct intel_iommu *iommu, int irq, u16 count)
 	irq_iommu->irte_mask = mask;
 
 =======
+=======
+>>>>>>> v3.18
 	index = bitmap_find_free_region(table->bitmap,
 					INTR_REMAP_TABLE_ENTRIES, mask);
 	if (index < 0) {
@@ -182,6 +216,9 @@ static int alloc_irte(struct intel_iommu *iommu, int irq, u16 count)
 		irq_iommu->sub_handle = 0;
 		irq_iommu->irte_mask = mask;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	raw_spin_unlock_irqrestore(&irq_2_ir_lock, flags);
 
@@ -316,6 +353,11 @@ static int clear_entries(struct irq_2_iommu *irq_iommu)
 		set_64bit(&entry->high, 0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bitmap_release_region(iommu->ir_table->bitmap, index,
+			      irq_iommu->irte_mask);
+>>>>>>> v3.18
 =======
 	bitmap_release_region(iommu->ir_table->bitmap, index,
 			      irq_iommu->irte_mask);
@@ -391,6 +433,10 @@ static int set_ioapic_sid(struct irte *irte, int apic)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	down_read(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	down_read(&dmar_global_lock);
 >>>>>>> v3.18
@@ -401,6 +447,10 @@ static int set_ioapic_sid(struct irte *irte, int apic)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	up_read(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	up_read(&dmar_global_lock);
 >>>>>>> v3.18
@@ -411,7 +461,11 @@ static int set_ioapic_sid(struct irte *irte, int apic)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_irte_sid(irte, 1, 0, sid);
+=======
+	set_irte_sid(irte, SVT_VERIFY_SID_SQ, SQ_ALL_16, sid);
+>>>>>>> v3.18
 =======
 	set_irte_sid(irte, SVT_VERIFY_SID_SQ, SQ_ALL_16, sid);
 >>>>>>> v3.18
@@ -428,6 +482,10 @@ static int set_hpet_sid(struct irte *irte, u8 id)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	down_read(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	down_read(&dmar_global_lock);
 >>>>>>> v3.18
@@ -438,6 +496,10 @@ static int set_hpet_sid(struct irte *irte, u8 id)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	up_read(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	up_read(&dmar_global_lock);
 >>>>>>> v3.18
@@ -458,10 +520,13 @@ static int set_hpet_sid(struct irte *irte, u8 id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_msi_sid(struct irte *irte, struct pci_dev *dev)
 {
 	struct pci_dev *bridge;
 =======
+=======
+>>>>>>> v3.18
 struct set_msi_sid_data {
 	struct pci_dev *pdev;
 	u16 alias;
@@ -480,11 +545,15 @@ static int set_msi_sid_cb(struct pci_dev *pdev, u16 alias, void *opaque)
 static int set_msi_sid(struct irte *irte, struct pci_dev *dev)
 {
 	struct set_msi_sid_data data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!irte || !dev)
 		return -1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* PCIe device or Root Complex integrated PCI device */
 	if (pci_is_pcie(dev) || !dev->bus->parent) {
@@ -503,6 +572,8 @@ static int set_msi_sid(struct irte *irte, struct pci_dev *dev)
 				(bridge->bus->number << 8) | bridge->devfn);
 	}
 =======
+=======
+>>>>>>> v3.18
 	pci_for_each_dma_alias(dev, set_msi_sid_cb, &data);
 
 	/*
@@ -527,6 +598,9 @@ static int set_msi_sid(struct irte *irte, struct pci_dev *dev)
 	else
 		set_irte_sid(irte, SVT_VERIFY_SID_SQ, SQ_ALL_16,
 			     PCI_DEVID(dev->bus->number, dev->devfn));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -547,8 +621,12 @@ static void iommu_set_irq_remapping(struct intel_iommu *iommu, int mode)
 
 	/* Set interrupt-remapping table pointer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iommu->gcmd |= DMA_GCMD_SIRTP;
 	writel(iommu->gcmd, iommu->reg + DMAR_GCMD_REG);
+=======
+	writel(iommu->gcmd | DMA_GCMD_SIRTP, iommu->reg + DMAR_GCMD_REG);
+>>>>>>> v3.18
 =======
 	writel(iommu->gcmd | DMA_GCMD_SIRTP, iommu->reg + DMAR_GCMD_REG);
 >>>>>>> v3.18
@@ -592,6 +670,10 @@ static int intel_setup_irq_remapping(struct intel_iommu *iommu, int mode)
 	struct ir_table *ir_table;
 	struct page *pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long *bitmap;
+>>>>>>> v3.18
 =======
 	unsigned long *bitmap;
 >>>>>>> v3.18
@@ -607,8 +689,13 @@ static int intel_setup_irq_remapping(struct intel_iommu *iommu, int mode)
 
 	if (!pages) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "failed to allocate pages of order %d\n",
 		       INTR_REMAP_PAGE_ORDER);
+=======
+		pr_err("IR%d: failed to allocate pages of order %d\n",
+		       iommu->seq_id, INTR_REMAP_PAGE_ORDER);
+>>>>>>> v3.18
 =======
 		pr_err("IR%d: failed to allocate pages of order %d\n",
 		       iommu->seq_id, INTR_REMAP_PAGE_ORDER);
@@ -618,8 +705,11 @@ static int intel_setup_irq_remapping(struct intel_iommu *iommu, int mode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir_table->base = page_address(pages);
 =======
+=======
+>>>>>>> v3.18
 	bitmap = kcalloc(BITS_TO_LONGS(INTR_REMAP_TABLE_ENTRIES),
 			 sizeof(long), GFP_ATOMIC);
 	if (bitmap == NULL) {
@@ -631,6 +721,9 @@ static int intel_setup_irq_remapping(struct intel_iommu *iommu, int mode)
 
 	ir_table->base = page_address(pages);
 	ir_table->bitmap = bitmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iommu_set_irq_remapping(iommu, mode);
@@ -657,7 +750,11 @@ static void iommu_disable_irq_remapping(struct intel_iommu *iommu)
 	raw_spin_lock_irqsave(&iommu->register_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sts = readl(iommu->reg + DMAR_GSTS_REG);
+=======
+	sts = dmar_readq(iommu->reg + DMAR_GSTS_REG);
+>>>>>>> v3.18
 =======
 	sts = dmar_readq(iommu->reg + DMAR_GSTS_REG);
 >>>>>>> v3.18
@@ -687,6 +784,10 @@ static int __init intel_irq_remapping_supported(void)
 {
 	struct dmar_drhd_unit *drhd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct intel_iommu *iommu;
+>>>>>>> v3.18
 =======
 	struct intel_iommu *iommu;
 >>>>>>> v3.18
@@ -709,12 +810,18 @@ static int __init intel_irq_remapping_supported(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_drhd_unit(drhd) {
 		struct intel_iommu *iommu = drhd->iommu;
 
 		if (!ecap_ir_support(iommu->ecap))
 			return 0;
 	}
+=======
+	for_each_iommu(iommu, drhd)
+		if (!ecap_ir_support(iommu->ecap))
+			return 0;
+>>>>>>> v3.18
 =======
 	for_each_iommu(iommu, drhd)
 		if (!ecap_ir_support(iommu->ecap))
@@ -728,6 +835,10 @@ static int __init intel_enable_irq_remapping(void)
 {
 	struct dmar_drhd_unit *drhd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct intel_iommu *iommu;
+>>>>>>> v3.18
 =======
 	struct intel_iommu *iommu;
 >>>>>>> v3.18
@@ -744,6 +855,11 @@ static int __init intel_enable_irq_remapping(void)
 
 	if (x2apic_present) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pr_info("Queued invalidation will be enabled to support x2apic and Intr-remapping.\n");
+
+>>>>>>> v3.18
 =======
 		pr_info("Queued invalidation will be enabled to support x2apic and Intr-remapping.\n");
 
@@ -757,9 +873,13 @@ static int __init intel_enable_irq_remapping(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_drhd_unit(drhd) {
 		struct intel_iommu *iommu = drhd->iommu;
 
+=======
+	for_each_iommu(iommu, drhd) {
+>>>>>>> v3.18
 =======
 	for_each_iommu(iommu, drhd) {
 >>>>>>> v3.18
@@ -788,9 +908,13 @@ static int __init intel_enable_irq_remapping(void)
 	 * check for the Interrupt-remapping support
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_drhd_unit(drhd) {
 		struct intel_iommu *iommu = drhd->iommu;
 
+=======
+	for_each_iommu(iommu, drhd) {
+>>>>>>> v3.18
 =======
 	for_each_iommu(iommu, drhd) {
 >>>>>>> v3.18
@@ -808,10 +932,15 @@ static int __init intel_enable_irq_remapping(void)
 	 * Enable queued invalidation for all the DRHD's.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_drhd_unit(drhd) {
 		int ret;
 		struct intel_iommu *iommu = drhd->iommu;
 		ret = dmar_enable_qi(iommu);
+=======
+	for_each_iommu(iommu, drhd) {
+		int ret = dmar_enable_qi(iommu);
+>>>>>>> v3.18
 =======
 	for_each_iommu(iommu, drhd) {
 		int ret = dmar_enable_qi(iommu);
@@ -829,9 +958,13 @@ static int __init intel_enable_irq_remapping(void)
 	 * Setup Interrupt-remapping for all the DRHD's now.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_drhd_unit(drhd) {
 		struct intel_iommu *iommu = drhd->iommu;
 
+=======
+	for_each_iommu(iommu, drhd) {
+>>>>>>> v3.18
 =======
 	for_each_iommu(iommu, drhd) {
 >>>>>>> v3.18
@@ -867,8 +1000,12 @@ error:
 
 	if (x2apic_present)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, KERN_WARNING
 			"Failed to enable irq remapping.  You are vulnerable to irq-injection attacks.\n");
+=======
+		pr_warn("Failed to enable irq remapping.  You are vulnerable to irq-injection attacks.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to enable irq remapping.  You are vulnerable to irq-injection attacks.\n");
 >>>>>>> v3.18
@@ -894,7 +1031,11 @@ static void ir_parse_one_hpet_scope(struct acpi_dmar_device_scope *scope,
 		 * subsystem isn't initialized yet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bus = read_pci_config_byte(bus, path->dev, path->fn,
+=======
+		bus = read_pci_config_byte(bus, path->device, path->function,
+>>>>>>> v3.18
 =======
 		bus = read_pci_config_byte(bus, path->device, path->function,
 >>>>>>> v3.18
@@ -903,7 +1044,11 @@ static void ir_parse_one_hpet_scope(struct acpi_dmar_device_scope *scope,
 	}
 	ir_hpet[ir_hpet_num].bus   = bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir_hpet[ir_hpet_num].devfn = PCI_DEVFN(path->dev, path->fn);
+=======
+	ir_hpet[ir_hpet_num].devfn = PCI_DEVFN(path->device, path->function);
+>>>>>>> v3.18
 =======
 	ir_hpet[ir_hpet_num].devfn = PCI_DEVFN(path->device, path->function);
 >>>>>>> v3.18
@@ -930,7 +1075,11 @@ static void ir_parse_one_ioapic_scope(struct acpi_dmar_device_scope *scope,
 		 * subsystem isn't initialized yet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bus = read_pci_config_byte(bus, path->dev, path->fn,
+=======
+		bus = read_pci_config_byte(bus, path->device, path->function,
+>>>>>>> v3.18
 =======
 		bus = read_pci_config_byte(bus, path->device, path->function,
 >>>>>>> v3.18
@@ -940,7 +1089,11 @@ static void ir_parse_one_ioapic_scope(struct acpi_dmar_device_scope *scope,
 
 	ir_ioapic[ir_ioapic_num].bus   = bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir_ioapic[ir_ioapic_num].devfn = PCI_DEVFN(path->dev, path->fn);
+=======
+	ir_ioapic[ir_ioapic_num].devfn = PCI_DEVFN(path->device, path->function);
+>>>>>>> v3.18
 =======
 	ir_ioapic[ir_ioapic_num].devfn = PCI_DEVFN(path->device, path->function);
 >>>>>>> v3.18
@@ -997,6 +1150,7 @@ static int ir_parse_ioapic_hpet_scope(struct acpi_dmar_header *header,
  * hardware unit.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init parse_ioapics_under_ir(void)
 {
 	struct dmar_drhd_unit *drhd;
@@ -1007,6 +1161,8 @@ int __init parse_ioapics_under_ir(void)
 		struct intel_iommu *iommu = drhd->iommu;
 
 =======
+=======
+>>>>>>> v3.18
 static int __init parse_ioapics_under_ir(void)
 {
 	struct dmar_drhd_unit *drhd;
@@ -1015,6 +1171,9 @@ static int __init parse_ioapics_under_ir(void)
 	int ioapic_idx;
 
 	for_each_iommu(iommu, drhd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ecap_ir_support(iommu->ecap)) {
 			if (ir_parse_ioapic_hpet_scope(drhd->hdr, iommu))
@@ -1023,7 +1182,10 @@ static int __init parse_ioapics_under_ir(void)
 			ir_supported = 1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1044,6 +1206,7 @@ static int __init parse_ioapics_under_ir(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ir_dev_scope_init(void)
 {
 	if (!irq_remapping_enabled)
@@ -1051,6 +1214,8 @@ int __init ir_dev_scope_init(void)
 
 	return dmar_dev_scope_init();
 =======
+=======
+>>>>>>> v3.18
 static int __init ir_dev_scope_init(void)
 {
 	int ret;
@@ -1063,6 +1228,9 @@ static int __init ir_dev_scope_init(void)
 	up_write(&dmar_global_lock);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 rootfs_initcall(ir_dev_scope_init);
@@ -1145,7 +1313,11 @@ static int intel_setup_ioapic_entry(int irq,
 {
 	int ioapic_id = mpc_ioapic_id(attr->ioapic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct intel_iommu *iommu = map_ioapic_to_ir(ioapic_id);
+=======
+	struct intel_iommu *iommu;
+>>>>>>> v3.18
 =======
 	struct intel_iommu *iommu;
 >>>>>>> v3.18
@@ -1153,6 +1325,7 @@ static int intel_setup_ioapic_entry(int irq,
 	struct irte irte;
 	int index;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!iommu) {
 		pr_warn("No mapping iommu for ioapic %d\n", ioapic_id);
@@ -1167,6 +1340,8 @@ static int intel_setup_ioapic_entry(int irq,
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	down_read(&dmar_global_lock);
 	iommu = map_ioapic_to_ir(ioapic_id);
 	if (!iommu) {
@@ -1183,6 +1358,9 @@ static int intel_setup_ioapic_entry(int irq,
 	up_read(&dmar_global_lock);
 	if (index < 0)
 		return index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	prepare_irte(&irte, vector, destination);
@@ -1203,6 +1381,10 @@ static int intel_setup_ioapic_entry(int irq,
 		irte.sid, irte.sq, irte.svt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	entry = (struct IR_IO_APIC_route_entry *)route_entry;
+>>>>>>> v3.18
 =======
 	entry = (struct IR_IO_APIC_route_entry *)route_entry;
 >>>>>>> v3.18
@@ -1337,6 +1519,10 @@ static int intel_msi_alloc_irq(struct pci_dev *dev, int irq, int nvec)
 	int index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	down_read(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	down_read(&dmar_global_lock);
 >>>>>>> v3.18
@@ -1344,6 +1530,7 @@ static int intel_msi_alloc_irq(struct pci_dev *dev, int irq, int nvec)
 	if (!iommu) {
 		printk(KERN_ERR
 		       "Unable to map PCI %s to iommu\n", pci_name(dev));
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENOENT;
 	}
@@ -1356,6 +1543,8 @@ static int intel_msi_alloc_irq(struct pci_dev *dev, int irq, int nvec)
 		return -ENOSPC;
 	}
 =======
+=======
+>>>>>>> v3.18
 		index = -ENOENT;
 	} else {
 		index = alloc_irte(iommu, irq, nvec);
@@ -1368,6 +1557,9 @@ static int intel_msi_alloc_irq(struct pci_dev *dev, int irq, int nvec)
 	}
 	up_read(&dmar_global_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return index;
 }
@@ -1376,6 +1568,7 @@ static int intel_msi_setup_irq(struct pci_dev *pdev, unsigned int irq,
 			       int index, int sub_handle)
 {
 	struct intel_iommu *iommu;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	iommu = map_dev_to_ir(pdev);
@@ -1405,6 +1598,8 @@ static int intel_setup_hpet_msi(unsigned int irq, unsigned int id)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret = -ENOENT;
 
 	down_read(&dmar_global_lock);
@@ -1439,6 +1634,9 @@ static int intel_alloc_hpet_msi(unsigned int irq, unsigned int id)
 	up_read(&dmar_global_lock);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1456,7 +1654,11 @@ struct irq_remap_ops intel_irq_remap_ops = {
 	.msi_alloc_irq		= intel_msi_alloc_irq,
 	.msi_setup_irq		= intel_msi_setup_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.setup_hpet_msi		= intel_setup_hpet_msi,
+=======
+	.alloc_hpet_msi		= intel_alloc_hpet_msi,
+>>>>>>> v3.18
 =======
 	.alloc_hpet_msi		= intel_alloc_hpet_msi,
 >>>>>>> v3.18

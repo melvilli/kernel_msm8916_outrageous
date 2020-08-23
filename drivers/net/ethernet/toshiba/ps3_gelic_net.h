@@ -38,7 +38,10 @@
 #define GELIC_CARD_RX_CSUM_DEFAULT      1 /* hw chksum */
 #define GELIC_NET_WATCHDOG_TIMEOUT      5*HZ
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GELIC_NET_NAPI_WEIGHT           (GELIC_NET_RX_DESCRIPTORS)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define GELIC_NET_BROADCAST_ADDR        0xffffffffffffL
@@ -364,7 +367,11 @@ static inline void *port_priv(struct gelic_port *port)
 
 #ifdef CONFIG_PPC_EARLY_DEBUG_PS3GELIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void udbg_shutdown_ps3gelic(void);
+=======
+void udbg_shutdown_ps3gelic(void);
+>>>>>>> v3.18
 =======
 void udbg_shutdown_ps3gelic(void);
 >>>>>>> v3.18
@@ -372,6 +379,7 @@ void udbg_shutdown_ps3gelic(void);
 static inline void udbg_shutdown_ps3gelic(void) {}
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int gelic_card_set_irq_mask(struct gelic_card *card, u64 mask);
 /* shared netdev ops */
@@ -391,6 +399,8 @@ extern void gelic_net_get_drvinfo(struct net_device *netdev,
 				  struct ethtool_drvinfo *info);
 extern void gelic_net_poll_controller(struct net_device *netdev);
 =======
+=======
+>>>>>>> v3.18
 int gelic_card_set_irq_mask(struct gelic_card *card, u64 mask);
 /* shared netdev ops */
 void gelic_card_up(struct gelic_card *card);
@@ -407,6 +417,9 @@ int gelic_net_setup_netdev(struct net_device *netdev, struct gelic_card *card);
 void gelic_net_get_drvinfo(struct net_device *netdev,
 			   struct ethtool_drvinfo *info);
 void gelic_net_poll_controller(struct net_device *netdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _GELIC_NET_H */

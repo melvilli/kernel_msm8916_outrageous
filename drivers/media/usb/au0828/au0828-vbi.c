@@ -22,6 +22,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "au0828.h"
+
+>>>>>>> v3.18
 =======
 #include "au0828.h"
 
@@ -32,8 +37,11 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "au0828.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int vbibufs = 5;

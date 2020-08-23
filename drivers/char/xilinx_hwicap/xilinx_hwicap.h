@@ -38,7 +38,11 @@
 #include <linux/platform_device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -90,8 +94,11 @@ struct hwicap_driver_config {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Number of times to poll the done regsiter */
 =======
+=======
+>>>>>>> v3.18
 /* Number of times to poll the done register. This has to be large
  * enough to allow an entire configuration to complete. If an entire
  * page (4kb) is configured at once, that could take up to 4k cycles
@@ -99,6 +106,9 @@ struct hwicap_driver_config {
  * used with a much smaller fifo, but this should be sufficient in the
  * worst case.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XHI_MAX_RETRIES     5000
 

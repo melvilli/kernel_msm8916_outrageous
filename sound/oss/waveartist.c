@@ -93,7 +93,11 @@ static unsigned short levels[SOUND_MIXER_NRDEVICES] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct {
+=======
+struct wavnc_info {
+>>>>>>> v3.18
 =======
 struct wavnc_info {
 >>>>>>> v3.18
@@ -124,7 +128,11 @@ struct wavnc_info {
 	unsigned int	use_slider	:1;/* use slider setting for o/p vol */
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 } wavnc_info;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -138,6 +146,7 @@ struct waveartist_mixer_info {
 	unsigned int	stereo_devs;	   /* Stereo devices	*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int	(*select_input)(wavnc_info *, unsigned int,
 					unsigned char *, unsigned char *);
 	int		(*decode_mixer)(wavnc_info *, int,
@@ -147,6 +156,8 @@ struct waveartist_mixer_info {
 
 typedef struct wavnc_port_info {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	(*select_input)(struct wavnc_info *, unsigned int,
 					unsigned char *, unsigned char *);
 	int		(*decode_mixer)(struct wavnc_info *, int,
@@ -155,21 +166,30 @@ typedef struct wavnc_port_info {
 };
 
 struct wavnc_port_info {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int		open_mode;
 	int		speed;
 	int		channels;
 	int		audio_format;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } wavnc_port_info;
 
 static int		nr_waveartist_devs;
 static wavnc_info	adev_info[MAX_AUDIO_DEV];
 =======
+=======
+>>>>>>> v3.18
 };
 
 static int		nr_waveartist_devs;
 static struct wavnc_info	adev_info[MAX_AUDIO_DEV];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_SPINLOCK(waveartist_lock);
 
@@ -178,7 +198,12 @@ static DEFINE_SPINLOCK(waveartist_lock);
 #else
 static struct timer_list vnc_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vnc_configure_mixer(wavnc_info *devc, unsigned int input_mask);
+=======
+static void vnc_configure_mixer(struct wavnc_info *devc,
+				unsigned int input_mask);
+>>>>>>> v3.18
 =======
 static void vnc_configure_mixer(struct wavnc_info *devc,
 				unsigned int input_mask);
@@ -201,7 +226,11 @@ waveartist_set_ctlr(struct address_info *hw, unsigned char clear, unsigned char 
  */
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_iack(wavnc_info *devc)
+=======
+waveartist_iack(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 waveartist_iack(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -224,7 +253,11 @@ waveartist_sleep(int timeout_ms)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_reset(wavnc_info *devc)
+=======
+waveartist_reset(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 waveartist_reset(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -263,7 +296,11 @@ waveartist_reset(struct wavnc_info *devc)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_cmd(wavnc_info *devc,
+=======
+waveartist_cmd(struct wavnc_info *devc,
+>>>>>>> v3.18
 =======
 waveartist_cmd(struct wavnc_info *devc,
 >>>>>>> v3.18
@@ -343,7 +380,11 @@ waveartist_cmd(struct wavnc_info *devc,
  */
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_cmd1(wavnc_info *devc, unsigned int cmd)
+=======
+waveartist_cmd1(struct wavnc_info *devc, unsigned int cmd)
+>>>>>>> v3.18
 =======
 waveartist_cmd1(struct wavnc_info *devc, unsigned int cmd)
 >>>>>>> v3.18
@@ -356,7 +397,11 @@ waveartist_cmd1(struct wavnc_info *devc, unsigned int cmd)
  */
 static inline unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_cmd1_r(wavnc_info *devc, unsigned int cmd)
+=======
+waveartist_cmd1_r(struct wavnc_info *devc, unsigned int cmd)
+>>>>>>> v3.18
 =======
 waveartist_cmd1_r(struct wavnc_info *devc, unsigned int cmd)
 >>>>>>> v3.18
@@ -374,7 +419,11 @@ waveartist_cmd1_r(struct wavnc_info *devc, unsigned int cmd)
  */
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_cmd2(wavnc_info *devc, unsigned int cmd, unsigned int arg)
+=======
+waveartist_cmd2(struct wavnc_info *devc, unsigned int cmd, unsigned int arg)
+>>>>>>> v3.18
 =======
 waveartist_cmd2(struct wavnc_info *devc, unsigned int cmd, unsigned int arg)
 >>>>>>> v3.18
@@ -392,7 +441,11 @@ waveartist_cmd2(struct wavnc_info *devc, unsigned int cmd, unsigned int arg)
  */
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_cmd3(wavnc_info *devc, unsigned int cmd,
+=======
+waveartist_cmd3(struct wavnc_info *devc, unsigned int cmd,
+>>>>>>> v3.18
 =======
 waveartist_cmd3(struct wavnc_info *devc, unsigned int cmd,
 >>>>>>> v3.18
@@ -409,7 +462,11 @@ waveartist_cmd3(struct wavnc_info *devc, unsigned int cmd,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_getrev(wavnc_info *devc, char *rev)
+=======
+waveartist_getrev(struct wavnc_info *devc, char *rev)
+>>>>>>> v3.18
 =======
 waveartist_getrev(struct wavnc_info *devc, char *rev)
 >>>>>>> v3.18
@@ -435,8 +492,13 @@ static int
 waveartist_open(int dev, int mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc;
 	wavnc_port_info	*portc;
+=======
+	struct wavnc_info	*devc;
+	struct wavnc_port_info	*portc;
+>>>>>>> v3.18
 =======
 	struct wavnc_info	*devc;
 	struct wavnc_port_info	*portc;
@@ -447,8 +509,13 @@ waveartist_open(int dev, int mode)
 		return -ENXIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devc  = (wavnc_info *) audio_devs[dev]->devc;
 	portc = (wavnc_port_info *) audio_devs[dev]->portc;
+=======
+	devc  = (struct wavnc_info *) audio_devs[dev]->devc;
+	portc = (struct wavnc_port_info *) audio_devs[dev]->portc;
+>>>>>>> v3.18
 =======
 	devc  = (struct wavnc_info *) audio_devs[dev]->devc;
 	portc = (struct wavnc_port_info *) audio_devs[dev]->portc;
@@ -478,13 +545,19 @@ static void
 waveartist_close(int dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
 	wavnc_port_info	*portc = (wavnc_port_info *) audio_devs[dev]->portc;
 =======
+=======
+>>>>>>> v3.18
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
 	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
 					 audio_devs[dev]->portc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long	flags;
 
@@ -503,13 +576,19 @@ static void
 waveartist_output_block(int dev, unsigned long buf, int __count, int intrflag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_port_info	*portc = (wavnc_port_info *) audio_devs[dev]->portc;
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
 =======
+=======
+>>>>>>> v3.18
 	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
 					 audio_devs[dev]->portc;
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long	flags;
 	unsigned int	count = __count; 
@@ -555,13 +634,19 @@ static void
 waveartist_start_input(int dev, unsigned long buf, int __count, int intrflag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_port_info *portc = (wavnc_port_info *) audio_devs[dev]->portc;
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
 =======
+=======
+>>>>>>> v3.18
 	struct wavnc_port_info *portc = (struct wavnc_port_info *)
 					audio_devs[dev]->portc;
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long	flags;
 	unsigned int	count = __count;
@@ -609,7 +694,11 @@ waveartist_ioctl(int dev, unsigned int cmd, void __user * arg)
 
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_get_speed(wavnc_port_info *portc)
+=======
+waveartist_get_speed(struct wavnc_port_info *portc)
+>>>>>>> v3.18
 =======
 waveartist_get_speed(struct wavnc_port_info *portc)
 >>>>>>> v3.18
@@ -641,7 +730,11 @@ waveartist_get_speed(struct wavnc_port_info *portc)
 
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_get_bits(wavnc_port_info *portc)
+=======
+waveartist_get_bits(struct wavnc_port_info *portc)
+>>>>>>> v3.18
 =======
 waveartist_get_bits(struct wavnc_port_info *portc)
 >>>>>>> v3.18
@@ -663,13 +756,19 @@ waveartist_prepare_for_input(int dev, int bsize, int bcount)
 {
 	unsigned long	flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
 	wavnc_port_info	*portc = (wavnc_port_info *) audio_devs[dev]->portc;
 =======
+=======
+>>>>>>> v3.18
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
 	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
 					 audio_devs[dev]->portc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int	speed, bits;
 
@@ -725,13 +824,19 @@ waveartist_prepare_for_output(int dev, int bsize, int bcount)
 {
 	unsigned long	flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
 	wavnc_port_info	*portc = (wavnc_port_info *) audio_devs[dev]->portc;
 =======
+=======
+>>>>>>> v3.18
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
 	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
 					 audio_devs[dev]->portc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int	speed, bits;
 
@@ -777,8 +882,14 @@ static void
 waveartist_halt(int dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_port_info	*portc = (wavnc_port_info *) audio_devs[dev]->portc;
 	wavnc_info	*devc;
+=======
+	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
+					 audio_devs[dev]->portc;
+	struct wavnc_info	*devc;
+>>>>>>> v3.18
 =======
 	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
 					 audio_devs[dev]->portc;
@@ -792,7 +903,11 @@ waveartist_halt(int dev)
 		waveartist_halt_input(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devc = (wavnc_info *) audio_devs[dev]->devc;
+=======
+	devc = (struct wavnc_info *) audio_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	devc = (struct wavnc_info *) audio_devs[dev]->devc;
 >>>>>>> v3.18
@@ -803,7 +918,12 @@ static void
 waveartist_halt_input(int dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
+=======
+	struct wavnc_info	*devc = (struct wavnc_info *)
+					audio_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
@@ -835,7 +955,12 @@ static void
 waveartist_halt_output(int dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
+=======
+	struct wavnc_info	*devc = (struct wavnc_info *)
+					audio_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
@@ -864,13 +989,19 @@ static void
 waveartist_trigger(int dev, int state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info	*devc = (wavnc_info *) audio_devs[dev]->devc;
 	wavnc_port_info	*portc = (wavnc_port_info *) audio_devs[dev]->portc;
 =======
+=======
+>>>>>>> v3.18
 	struct wavnc_info	*devc = (struct wavnc_info *)
 					audio_devs[dev]->devc;
 	struct wavnc_port_info	*portc = (struct wavnc_port_info *)
 					 audio_devs[dev]->portc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long	flags;
 
@@ -908,7 +1039,12 @@ static int
 waveartist_set_speed(int dev, int arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_port_info *portc = (wavnc_port_info *) audio_devs[dev]->portc;
+=======
+	struct wavnc_port_info *portc = (struct wavnc_port_info *)
+					audio_devs[dev]->portc;
+>>>>>>> v3.18
 =======
 	struct wavnc_port_info *portc = (struct wavnc_port_info *)
 					audio_devs[dev]->portc;
@@ -931,7 +1067,12 @@ static short
 waveartist_set_channels(int dev, short arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_port_info *portc = (wavnc_port_info *) audio_devs[dev]->portc;
+=======
+	struct wavnc_port_info *portc = (struct wavnc_port_info *)
+					audio_devs[dev]->portc;
+>>>>>>> v3.18
 =======
 	struct wavnc_port_info *portc = (struct wavnc_port_info *)
 					audio_devs[dev]->portc;
@@ -948,7 +1089,12 @@ static unsigned int
 waveartist_set_bits(int dev, unsigned int arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_port_info *portc = (wavnc_port_info *) audio_devs[dev]->portc;
+=======
+	struct wavnc_port_info *portc = (struct wavnc_port_info *)
+					audio_devs[dev]->portc;
+>>>>>>> v3.18
 =======
 	struct wavnc_port_info *portc = (struct wavnc_port_info *)
 					audio_devs[dev]->portc;
@@ -988,7 +1134,11 @@ static irqreturn_t
 waveartist_intr(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info *devc = dev_id;
+=======
+	struct wavnc_info *devc = dev_id;
+>>>>>>> v3.18
 =======
 	struct wavnc_info *devc = dev_id;
 >>>>>>> v3.18
@@ -1075,7 +1225,11 @@ static const struct mix_ent mix_devs[SOUND_MIXER_NRDEVICES] = {
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_mixer_update(wavnc_info *devc, int whichDev)
+=======
+waveartist_mixer_update(struct wavnc_info *devc, int whichDev)
+>>>>>>> v3.18
 =======
 waveartist_mixer_update(struct wavnc_info *devc, int whichDev)
 >>>>>>> v3.18
@@ -1140,7 +1294,12 @@ waveartist_mixer_update(struct wavnc_info *devc, int whichDev)
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_set_adc_mux(wavnc_info *devc, char left_dev, char right_dev)
+=======
+waveartist_set_adc_mux(struct wavnc_info *devc, char left_dev,
+		       char right_dev)
+>>>>>>> v3.18
 =======
 waveartist_set_adc_mux(struct wavnc_info *devc, char left_dev,
 		       char right_dev)
@@ -1168,7 +1327,11 @@ waveartist_set_adc_mux(struct wavnc_info *devc, char left_dev,
  */
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_select_input(wavnc_info *devc, unsigned int recmask,
+=======
+waveartist_select_input(struct wavnc_info *devc, unsigned int recmask,
+>>>>>>> v3.18
 =======
 waveartist_select_input(struct wavnc_info *devc, unsigned int recmask,
 >>>>>>> v3.18
@@ -1200,7 +1363,12 @@ waveartist_select_input(struct wavnc_info *devc, unsigned int recmask,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_decode_mixer(wavnc_info *devc, int dev, unsigned char lev_l,
+=======
+waveartist_decode_mixer(struct wavnc_info *devc, int dev,
+			unsigned char lev_l,
+>>>>>>> v3.18
 =======
 waveartist_decode_mixer(struct wavnc_info *devc, int dev,
 			unsigned char lev_l,
@@ -1231,7 +1399,11 @@ waveartist_decode_mixer(struct wavnc_info *devc, int dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int waveartist_get_mixer(wavnc_info *devc, int dev)
+=======
+static int waveartist_get_mixer(struct wavnc_info *devc, int dev)
+>>>>>>> v3.18
 =======
 static int waveartist_get_mixer(struct wavnc_info *devc, int dev)
 >>>>>>> v3.18
@@ -1253,7 +1425,11 @@ static const struct waveartist_mixer_info waveartist_mixer = {
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_set_recmask(wavnc_info *devc, unsigned int recmask)
+=======
+waveartist_set_recmask(struct wavnc_info *devc, unsigned int recmask)
+>>>>>>> v3.18
 =======
 waveartist_set_recmask(struct wavnc_info *devc, unsigned int recmask)
 >>>>>>> v3.18
@@ -1281,7 +1457,11 @@ waveartist_set_recmask(struct wavnc_info *devc, unsigned int recmask)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_set_mixer(wavnc_info *devc, int dev, unsigned int level)
+=======
+waveartist_set_mixer(struct wavnc_info *devc, int dev, unsigned int level)
+>>>>>>> v3.18
 =======
 waveartist_set_mixer(struct wavnc_info *devc, int dev, unsigned int level)
 >>>>>>> v3.18
@@ -1313,7 +1493,11 @@ static int
 waveartist_mixer_ioctl(int dev, unsigned int cmd, void __user * arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info *devc = (wavnc_info *)audio_devs[dev]->devc;
+=======
+	struct wavnc_info *devc = (struct wavnc_info *)audio_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct wavnc_info *devc = (struct wavnc_info *)audio_devs[dev]->devc;
 >>>>>>> v3.18
@@ -1401,7 +1585,11 @@ static struct mixer_operations waveartist_mixer_operations =
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 waveartist_mixer_reset(wavnc_info *devc)
+=======
+waveartist_mixer_reset(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 waveartist_mixer_reset(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -1442,9 +1630,15 @@ waveartist_mixer_reset(struct wavnc_info *devc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init waveartist_init(wavnc_info *devc)
 {
 	wavnc_port_info *portc;
+=======
+static int __init waveartist_init(struct wavnc_info *devc)
+{
+	struct wavnc_port_info *portc;
+>>>>>>> v3.18
 =======
 static int __init waveartist_init(struct wavnc_info *devc)
 {
@@ -1468,7 +1662,11 @@ static int __init waveartist_init(struct wavnc_info *devc)
 		     devc->hw.dma, devc->hw.dma2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	portc = kzalloc(sizeof(wavnc_port_info), GFP_KERNEL);
+=======
+	portc = kzalloc(sizeof(struct wavnc_port_info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	portc = kzalloc(sizeof(struct wavnc_port_info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1541,7 +1739,11 @@ nomem:
 static int __init probe_waveartist(struct address_info *hw_config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info *devc = &adev_info[nr_waveartist_devs];
+=======
+	struct wavnc_info *devc = &adev_info[nr_waveartist_devs];
+>>>>>>> v3.18
 =======
 	struct wavnc_info *devc = &adev_info[nr_waveartist_devs];
 >>>>>>> v3.18
@@ -1582,7 +1784,11 @@ static void __init
 attach_waveartist(struct address_info *hw, const struct waveartist_mixer_info *mix)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info *devc = &adev_info[nr_waveartist_devs];
+=======
+	struct wavnc_info *devc = &adev_info[nr_waveartist_devs];
+>>>>>>> v3.18
 =======
 	struct wavnc_info *devc = &adev_info[nr_waveartist_devs];
 >>>>>>> v3.18
@@ -1629,7 +1835,11 @@ attach_waveartist(struct address_info *hw, const struct waveartist_mixer_info *m
 static void __exit unload_waveartist(struct address_info *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info *devc = NULL;
+=======
+	struct wavnc_info *devc = NULL;
+>>>>>>> v3.18
 =======
 	struct wavnc_info *devc = NULL;
 >>>>>>> v3.18
@@ -1701,7 +1911,11 @@ static void __exit unload_waveartist(struct address_info *hw)
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 vnc_mute_spkr(wavnc_info *devc)
+=======
+vnc_mute_spkr(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 vnc_mute_spkr(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -1715,7 +1929,11 @@ vnc_mute_spkr(struct wavnc_info *devc)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 vnc_mute_lout(wavnc_info *devc)
+=======
+vnc_mute_lout(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 vnc_mute_lout(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -1738,7 +1956,11 @@ vnc_mute_lout(struct wavnc_info *devc)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 vnc_volume_slider(wavnc_info *devc)
+=======
+vnc_volume_slider(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 vnc_volume_slider(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -1802,7 +2024,11 @@ vnc_volume_slider(struct wavnc_info *devc)
  */
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 netwinder_select_input(wavnc_info *devc, unsigned int recmask,
+=======
+netwinder_select_input(struct wavnc_info *devc, unsigned int recmask,
+>>>>>>> v3.18
 =======
 netwinder_select_input(struct wavnc_info *devc, unsigned int recmask,
 >>>>>>> v3.18
@@ -1843,7 +2069,11 @@ netwinder_select_input(struct wavnc_info *devc, unsigned int recmask,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 netwinder_decode_mixer(wavnc_info *devc, int dev, unsigned char lev_l,
+=======
+netwinder_decode_mixer(struct wavnc_info *devc, int dev, unsigned char lev_l,
+>>>>>>> v3.18
 =======
 netwinder_decode_mixer(struct wavnc_info *devc, int dev, unsigned char lev_l,
 >>>>>>> v3.18
@@ -1886,7 +2116,11 @@ netwinder_decode_mixer(struct wavnc_info *devc, int dev, unsigned char lev_l,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int netwinder_get_mixer(wavnc_info *devc, int dev)
+=======
+static int netwinder_get_mixer(struct wavnc_info *devc, int dev)
+>>>>>>> v3.18
 =======
 static int netwinder_get_mixer(struct wavnc_info *devc, int dev)
 >>>>>>> v3.18
@@ -1950,7 +2184,11 @@ static const struct waveartist_mixer_info netwinder_mixer = {
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 vnc_configure_mixer(wavnc_info *devc, unsigned int recmask)
+=======
+vnc_configure_mixer(struct wavnc_info *devc, unsigned int recmask)
+>>>>>>> v3.18
 =======
 vnc_configure_mixer(struct wavnc_info *devc, unsigned int recmask)
 >>>>>>> v3.18
@@ -1980,7 +2218,11 @@ vnc_configure_mixer(struct wavnc_info *devc, unsigned int recmask)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 vnc_slider(wavnc_info *devc)
+=======
+vnc_slider(struct wavnc_info *devc)
+>>>>>>> v3.18
 =======
 vnc_slider(struct wavnc_info *devc)
 >>>>>>> v3.18
@@ -2050,7 +2292,11 @@ static int
 vnc_private_ioctl(int dev, unsigned int cmd, int __user * arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wavnc_info *devc = (wavnc_info *)audio_devs[dev]->devc;
+=======
+	struct wavnc_info *devc = (struct wavnc_info *)audio_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct wavnc_info *devc = (struct wavnc_info *)audio_devs[dev]->devc;
 >>>>>>> v3.18

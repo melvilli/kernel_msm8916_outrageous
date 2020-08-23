@@ -13,8 +13,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "boot.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include "ctype.h"
 
@@ -25,6 +28,9 @@ int memcmp(const void *s1, const void *s2, size_t len)
 	    : "=qm" (diff), "+D" (s1), "+S" (s2), "+c" (len));
 	return diff;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int strcmp(const char *str1, const char *str2)

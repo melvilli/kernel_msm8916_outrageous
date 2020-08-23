@@ -24,11 +24,14 @@
 #include <asm/proc-fns.h>
 #include <asm/cp15.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "sleep.h"
 #include "flowctrl.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cache.h>
 
 #include "irammap.h"
@@ -73,6 +76,9 @@
 	movne	\rd, #(0x3 << 8)		@ 2 devices
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_HOTPLUG_CPU) || defined(CONFIG_PM_SLEEP)
 /*
@@ -86,7 +92,11 @@ ENTRY(tegra20_hotplug_shutdown)
 	cpu_id	r0
 	bl	tegra20_cpu_shutdown
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr			@ should never get here
+=======
+	ret	lr			@ should never get here
+>>>>>>> v3.18
 =======
 	ret	lr			@ should never get here
 >>>>>>> v3.18
@@ -108,7 +118,11 @@ ENDPROC(tegra20_hotplug_shutdown)
 ENTRY(tegra20_cpu_shutdown)
 	cmp	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr			@ must not be called for CPU 0
+=======
+	reteq	lr			@ must not be called for CPU 0
+>>>>>>> v3.18
 =======
 	reteq	lr			@ must not be called for CPU 0
 >>>>>>> v3.18
@@ -133,7 +147,11 @@ ENTRY(tegra20_cpu_shutdown)
 	cmp	r3, r0
 	beq	.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -184,7 +202,11 @@ ENTRY(tegra_pen_lock)
 	beq	1b			@ while !turn == cpu && flag[!cpu] == 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr			@ locked
+=======
+	ret	lr			@ locked
+>>>>>>> v3.18
 =======
 	ret	lr			@ locked
 >>>>>>> v3.18
@@ -200,7 +222,11 @@ ENTRY(tegra_pen_unlock)
 	mov	r12, #0
 	str	r12, [r2]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov     pc, lr
+=======
+	ret     lr
+>>>>>>> v3.18
 =======
 	ret     lr
 >>>>>>> v3.18
@@ -217,7 +243,11 @@ ENTRY(tegra20_cpu_clear_resettable)
 	mov	r12, #CPU_NOT_RESETTABLE
 	str	r12, [r1]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -234,7 +264,11 @@ ENTRY(tegra20_cpu_set_resettable_soon)
 	mov	r12, #CPU_RESETTABLE_SOON
 	str	r12, [r1]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -253,11 +287,14 @@ ENTRY(tegra20_cpu_is_resettable_soon)
 	moveq	r0, #1
 	movne	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 ENDPROC(tegra20_cpu_is_resettable_soon)
 
 /*
 =======
+=======
+>>>>>>> v3.18
 	ret	lr
 ENDPROC(tegra20_cpu_is_resettable_soon)
 
@@ -284,6 +321,9 @@ ENTRY(tegra20_sleep_core_finish)
 ENDPROC(tegra20_sleep_core_finish)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * tegra20_sleep_cpu_secondary_finish(unsigned long v2p)
  *
@@ -296,6 +336,10 @@ ENTRY(tegra20_sleep_cpu_secondary_finish)
 
 	/* Flush and disable the L1 data cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mov	r0, #TEGRA_FLUSH_CACHE_LOUIS
+>>>>>>> v3.18
 =======
 	mov	r0, #TEGRA_FLUSH_CACHE_LOUIS
 >>>>>>> v3.18
@@ -359,7 +403,10 @@ ENTRY(tegra20_tear_down_cpu)
 ENDPROC(tegra20_tear_down_cpu)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* START OF ROUTINES COPIED TO IRAM */
 	.align L1_CACHE_SHIFT
 	.globl tegra20_iram_start
@@ -504,6 +551,9 @@ tegra20_switch_cpu_to_clk32k:
 
 	ret	lr
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * tegra20_enter_sleep
@@ -530,7 +580,10 @@ halted:
 	b	halted
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * tegra20_sdram_self_refresh
  *
@@ -622,5 +675,8 @@ tegra20_sdram_pad_save:
 	.globl tegra20_iram_end
 tegra20_iram_end:
 	b	.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

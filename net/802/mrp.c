@@ -25,12 +25,18 @@ static unsigned int mrp_join_time __read_mostly = 200;
 module_param(mrp_join_time, uint, 0644);
 MODULE_PARM_DESC(mrp_join_time, "Join time in ms (default 200ms)");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static unsigned int mrp_periodic_time __read_mostly = 1000;
 module_param(mrp_periodic_time, uint, 0644);
 MODULE_PARM_DESC(mrp_periodic_time, "Periodic time in ms (default 1s)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");
 
@@ -587,7 +593,11 @@ static void mrp_join_timer_arm(struct mrp_applicant *app)
 	unsigned long delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	delay = (u64)msecs_to_jiffies(mrp_join_time) * net_random() >> 32;
+=======
+	delay = (u64)msecs_to_jiffies(mrp_join_time) * prandom_u32() >> 32;
+>>>>>>> v3.18
 =======
 	delay = (u64)msecs_to_jiffies(mrp_join_time) * prandom_u32() >> 32;
 >>>>>>> v3.18
@@ -608,7 +618,10 @@ static void mrp_join_timer(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mrp_periodic_timer_arm(struct mrp_applicant *app)
 {
 	mod_timer(&app->periodic_timer,
@@ -627,6 +640,9 @@ static void mrp_periodic_timer(unsigned long data)
 	mrp_periodic_timer_arm(app);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mrp_pdu_parse_end_mark(struct sk_buff *skb, int *offset)
 {
@@ -879,6 +895,12 @@ int mrp_init_applicant(struct net_device *dev, struct mrp_application *appl)
 	setup_timer(&app->join_timer, mrp_join_timer, (unsigned long)app);
 	mrp_join_timer_arm(app);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setup_timer(&app->periodic_timer, mrp_periodic_timer,
+		    (unsigned long)app);
+	mrp_periodic_timer_arm(app);
+>>>>>>> v3.18
 =======
 	setup_timer(&app->periodic_timer, mrp_periodic_timer,
 		    (unsigned long)app);
@@ -910,6 +932,10 @@ void mrp_uninit_applicant(struct net_device *dev, struct mrp_application *appl)
 	 */
 	del_timer_sync(&app->join_timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	del_timer_sync(&app->periodic_timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&app->periodic_timer);
 >>>>>>> v3.18

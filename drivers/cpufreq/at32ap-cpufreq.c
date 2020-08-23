@@ -20,6 +20,7 @@
 #include <linux/err.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct clk *cpuclk;
 
@@ -45,10 +46,16 @@ static unsigned int at32_get_speed(unsigned int cpu)
 
 static struct cpufreq_frequency_table *freq_table;
 >>>>>>> v3.18
+=======
+#include <linux/slab.h>
+
+static struct cpufreq_frequency_table *freq_table;
+>>>>>>> v3.18
 
 static unsigned int	ref_freq;
 static unsigned long	loops_per_jiffy_ref;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int at32_set_target(struct cpufreq_policy *policy,
 			  unsigned int target_freq,
@@ -87,6 +94,8 @@ static int at32_set_target(struct cpufreq_policy *policy,
 
 	pr_debug("cpufreq: set frequency %lu Hz\n", freq);
 =======
+=======
+>>>>>>> v3.18
 static int at32_set_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	unsigned int old_freq, new_freq;
@@ -106,21 +115,30 @@ static int at32_set_target(struct cpufreq_policy *policy, unsigned int index)
 	if (new_freq < old_freq)
 		boot_cpu_data.loops_per_jiffy = cpufreq_scale(
 				loops_per_jiffy_ref, ref_freq, new_freq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init at32_cpufreq_driver_init(struct cpufreq_policy *policy)
 {
 =======
+=======
+>>>>>>> v3.18
 static int at32_cpufreq_driver_init(struct cpufreq_policy *policy)
 {
 	unsigned int frequency, rate, min_freq;
 	struct clk *cpuclk;
 	int retval, steps, i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (policy->cpu != 0)
 		return -EINVAL;
@@ -128,6 +146,7 @@ static int at32_cpufreq_driver_init(struct cpufreq_policy *policy)
 	cpuclk = clk_get(NULL, "cpu");
 	if (IS_ERR(cpuclk)) {
 		pr_debug("cpufreq: could not get CPU clk\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return PTR_ERR(cpuclk);
 	}
@@ -143,6 +162,8 @@ static int at32_cpufreq_driver_init(struct cpufreq_policy *policy)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		retval = PTR_ERR(cpuclk);
 		goto out_err;
 	}
@@ -191,6 +212,9 @@ out_err_put_clk:
 	clk_put(cpuclk);
 out_err:
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -198,9 +222,15 @@ static struct cpufreq_driver at32_driver = {
 	.name		= "at32ap",
 	.init		= at32_cpufreq_driver_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.verify		= at32_verify_speed,
 	.target		= at32_set_target,
 	.get		= at32_get_speed,
+=======
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= at32_set_target,
+	.get		= cpufreq_generic_get,
+>>>>>>> v3.18
 =======
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= at32_set_target,

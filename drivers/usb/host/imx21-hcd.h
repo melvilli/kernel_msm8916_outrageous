@@ -25,11 +25,17 @@
 #define __LINUX_IMX21_HCD_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 #define DEBUG
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_data/usb-mx2.h>
 

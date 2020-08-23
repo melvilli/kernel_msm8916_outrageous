@@ -998,16 +998,22 @@ static void ata_hsm_qc_complete(struct ata_queued_cmd *qc, int in_wq)
 {
 	struct ata_port *ap = qc->ap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ap->ops->error_handler) {
 		if (in_wq) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	if (ap->ops->error_handler) {
 		if (in_wq) {
 			spin_lock_irqsave(ap->lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* EH might have kicked in while host lock is
 			 * released.
@@ -1021,6 +1027,11 @@ static void ata_hsm_qc_complete(struct ata_queued_cmd *qc, int in_wq)
 					ata_port_freeze(ap);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+			spin_unlock_irqrestore(ap->lock, flags);
+>>>>>>> v3.18
 =======
 
 			spin_unlock_irqrestore(ap->lock, flags);
@@ -1034,13 +1045,19 @@ static void ata_hsm_qc_complete(struct ata_queued_cmd *qc, int in_wq)
 	} else {
 		if (in_wq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ata_sff_irq_on(ap);
 			ata_qc_complete(qc);
 =======
+=======
+>>>>>>> v3.18
 			spin_lock_irqsave(ap->lock, flags);
 			ata_sff_irq_on(ap);
 			ata_qc_complete(qc);
 			spin_unlock_irqrestore(ap->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			ata_qc_complete(qc);
@@ -1063,10 +1080,16 @@ int ata_sff_hsm_move(struct ata_port *ap, struct ata_queued_cmd *qc,
 	struct ata_link *link = qc->dev->link;
 	struct ata_eh_info *ehi = &link->eh_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int poll_next;
 
 	lockdep_assert_held(ap->lock);
 
+=======
+	unsigned long flags = 0;
+	int poll_next;
+
+>>>>>>> v3.18
 =======
 	unsigned long flags = 0;
 	int poll_next;
@@ -1134,7 +1157,10 @@ fsm_start:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Send the CDB (atapi) or the first data block (ata pio out).
 		 * During the state transition, interrupt handler shouldn't
 		 * be invoked before the data transfer is complete and
@@ -1143,6 +1169,9 @@ fsm_start:
 		if (in_wq)
 			spin_lock_irqsave(ap->lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (qc->tf.protocol == ATA_PROT_PIO) {
 			/* PIO data out protocol.
@@ -1160,6 +1189,12 @@ fsm_start:
 			atapi_send_cdb(ap, qc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (in_wq)
+			spin_unlock_irqrestore(ap->lock, flags);
+
+>>>>>>> v3.18
 =======
 		if (in_wq)
 			spin_unlock_irqrestore(ap->lock, flags);
@@ -1361,6 +1396,7 @@ void ata_sff_flush_pio_task(struct ata_port *ap)
 
 	cancel_delayed_work_sync(&ap->sff_pio_task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * We wanna reset the HSM state to IDLE.  If we do so without
@@ -1374,6 +1410,9 @@ void ata_sff_flush_pio_task(struct ata_port *ap)
 	ap->hsm_task_state = HSM_ST_IDLE;
 	spin_unlock_irq(ap->lock);
 
+=======
+	ap->hsm_task_state = HSM_ST_IDLE;
+>>>>>>> v3.18
 =======
 	ap->hsm_task_state = HSM_ST_IDLE;
 >>>>>>> v3.18
@@ -1393,8 +1432,11 @@ static void ata_sff_pio_task(struct work_struct *work)
 	int poll_next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(ap->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(ap->sff_pio_task_link == NULL);
@@ -1403,7 +1445,11 @@ static void ata_sff_pio_task(struct work_struct *work)
 	if (!qc) {
 		ap->sff_pio_task_link = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_unlock;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -1422,6 +1468,7 @@ fsm_start:
 	status = ata_sff_busy_wait(ap, ATA_BUSY, 5);
 	if (status & ATA_BUSY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irq(ap->lock);
 		ata_msleep(ap, 2);
 		spin_lock_irq(ap->lock);
@@ -1431,11 +1478,16 @@ fsm_start:
 			ata_sff_queue_pio_task(link, ATA_SHORT_PAUSE);
 			goto out_unlock;
 =======
+=======
+>>>>>>> v3.18
 		ata_msleep(ap, 2);
 		status = ata_sff_busy_wait(ap, ATA_BUSY, 10);
 		if (status & ATA_BUSY) {
 			ata_sff_queue_pio_task(link, ATA_SHORT_PAUSE);
 			return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1454,8 +1506,11 @@ fsm_start:
 	if (poll_next)
 		goto fsm_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unlock:
 	spin_unlock_irq(ap->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2500,6 +2555,7 @@ int ata_pci_sff_activate_host(struct ata_host *host,
 		if ((tmp8 & mask) != mask)
 			legacy_mode = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NO_ATA_LEGACY)
 		/* Some platforms with PCI limits cannot address compat
 		   port space. In that case we punt if their firmware has
@@ -2509,6 +2565,8 @@ int ata_pci_sff_activate_host(struct ata_host *host,
 			return -EOPNOTSUPP;
 		}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

@@ -25,6 +25,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Protocol overview
  *
  * request:  CMD [ P0 P1 P2 ... Pn S ]
@@ -45,12 +46,17 @@
 
 /* Current version of this protocol */
 =======
+=======
+>>>>>>> v3.18
  * Current version of this protocol
  *
  * TODO(crosbug.com/p/11223): This is effectively useless; protocol is
  * determined in other ways.  Remove this once the kernel code no longer
  * depends on it.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EC_PROTO_VERSION          0x00000002
 
@@ -67,6 +73,7 @@
 
 /* I/O addresses for host command args and params */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EC_LPC_ADDR_HOST_ARGS  0x800
 #define EC_LPC_ADDR_HOST_PARAM 0x804
 #define EC_HOST_PARAM_SIZE     0x0fc  /* Size of param area in bytes */
@@ -75,6 +82,8 @@
 #define EC_LPC_ADDR_OLD_PARAM  0x880
 #define EC_OLD_PARAM_SIZE      0x080  /* Size of param area in bytes */
 =======
+=======
+>>>>>>> v3.18
 /* Protocol version 2 */
 #define EC_LPC_ADDR_HOST_ARGS    0x800  /* And 0x801, 0x802, 0x803 */
 #define EC_LPC_ADDR_HOST_PARAM   0x804  /* For version 2 params; size is
@@ -88,6 +97,9 @@
 #define EC_HOST_CMD_REGION0    0x800
 #define EC_HOST_CMD_REGION1    0x880
 #define EC_HOST_CMD_REGION_SIZE 0x80
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* EC command register bit functions */
@@ -105,15 +117,21 @@
 
 /* The offset address of each type of data in mapped memory. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EC_MEMMAP_TEMP_SENSOR      0x00 /* Temp sensors */
 #define EC_MEMMAP_FAN              0x10 /* Fan speeds */
 #define EC_MEMMAP_TEMP_SENSOR_B    0x18 /* Temp sensors (second set) */
 #define EC_MEMMAP_ID               0x20 /* 'E' 'C' */
 =======
+=======
+>>>>>>> v3.18
 #define EC_MEMMAP_TEMP_SENSOR      0x00 /* Temp sensors 0x00 - 0x0f */
 #define EC_MEMMAP_FAN              0x10 /* Fan speeds 0x10 - 0x17 */
 #define EC_MEMMAP_TEMP_SENSOR_B    0x18 /* More temp sensors 0x18 - 0x1f */
 #define EC_MEMMAP_ID               0x20 /* 0x20 == 'E', 0x21 == 'C' */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EC_MEMMAP_ID_VERSION       0x22 /* Version of data in 0x20 - 0x2f */
 #define EC_MEMMAP_THERMAL_VERSION  0x23 /* Version of data in 0x00 - 0x1f */
@@ -121,10 +139,13 @@
 #define EC_MEMMAP_SWITCHES_VERSION 0x25 /* Version of data in 0x30 - 0x33 */
 #define EC_MEMMAP_EVENTS_VERSION   0x26 /* Version of data in 0x34 - 0x3f */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EC_MEMMAP_HOST_CMD_FLAGS   0x27 /* Host command interface flags */
 #define EC_MEMMAP_SWITCHES         0x30
 #define EC_MEMMAP_HOST_EVENTS      0x34
 =======
+=======
+>>>>>>> v3.18
 #define EC_MEMMAP_HOST_CMD_FLAGS   0x27 /* Host cmd interface flags (8 bits) */
 /* Unused 0x28 - 0x2f */
 #define EC_MEMMAP_SWITCHES         0x30	/* 8 bits */
@@ -132,6 +153,9 @@
 #define EC_MEMMAP_HOST_EVENTS      0x34 /* 32 bits */
 /* Reserve 0x38 - 0x3f for additional host event-related stuff */
 /* Battery values are all 32 bits */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EC_MEMMAP_BATT_VOLT        0x40 /* Battery Present Voltage */
 #define EC_MEMMAP_BATT_RATE        0x44 /* Battery Present Rate */
@@ -142,6 +166,10 @@
 #define EC_MEMMAP_BATT_LFCC        0x58 /* Battery Last Full Charge Capacity */
 #define EC_MEMMAP_BATT_CCNT        0x5c /* Battery Cycle Count */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Strings are all 8 bytes (EC_MEMMAP_TEXT_MAX) */
+>>>>>>> v3.18
 =======
 /* Strings are all 8 bytes (EC_MEMMAP_TEXT_MAX) */
 >>>>>>> v3.18
@@ -150,7 +178,10 @@
 #define EC_MEMMAP_BATT_SERIAL      0x70 /* Battery Serial Number String */
 #define EC_MEMMAP_BATT_TYPE        0x78 /* Battery Type String */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EC_MEMMAP_ALS              0x80 /* ALS readings in lux (2 X 16 bits) */
 /* Unused 0x84 - 0x8f */
 #define EC_MEMMAP_ACC_STATUS       0x90 /* Accelerometer status (8 bits )*/
@@ -164,6 +195,9 @@
 #define EC_MEMMAP_ACC_STATUS_SAMPLE_ID_MASK  0x0f
 #define EC_MEMMAP_ACC_STATUS_BUSY_BIT        (1 << 4)
 #define EC_MEMMAP_ACC_STATUS_PRESENCE_BIT    (1 << 7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Number of temp sensors at EC_MEMMAP_TEMP_SENSOR */
@@ -175,6 +209,11 @@
  */
 #define EC_TEMP_SENSOR_B_ENTRIES      8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/* Special values for mapped temperature sensors */
+>>>>>>> v3.18
 =======
 
 /* Special values for mapped temperature sensors */
@@ -190,7 +229,10 @@
 #define EC_TEMP_SENSOR_OFFSET      200
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Number of ALS readings at EC_MEMMAP_ALS
  */
@@ -203,6 +245,9 @@
  */
 #define EC_TEMP_SENSOR_DEFAULT     (296 - EC_TEMP_SENSOR_OFFSET)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EC_FAN_SPEED_ENTRIES       4       /* Number of fans at EC_MEMMAP_FAN */
 #define EC_FAN_SPEED_NOT_PRESENT   0xffff  /* Entry not present */
@@ -220,8 +265,13 @@
 #define EC_SWITCH_POWER_BUTTON_PRESSED   0x02
 #define EC_SWITCH_WRITE_PROTECT_DISABLED 0x04
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Recovery requested via keyboard */
 #define EC_SWITCH_KEYBOARD_RECOVERY      0x08
+=======
+/* Was recovery requested via keyboard; now unused. */
+#define EC_SWITCH_IGNORE1		 0x08
+>>>>>>> v3.18
 =======
 /* Was recovery requested via keyboard; now unused. */
 #define EC_SWITCH_IGNORE1		 0x08
@@ -235,11 +285,14 @@
 /* Host command interface supports LPC args (LPC interface only) */
 #define EC_HOST_CMD_FLAG_LPC_ARGS_SUPPORTED  0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Wireless switch flags */
 #define EC_WIRELESS_SWITCH_WLAN      0x01
 #define EC_WIRELESS_SWITCH_BLUETOOTH 0x02
 =======
+=======
+>>>>>>> v3.18
 /* Host command interface supports version 3 protocol */
 #define EC_HOST_CMD_FLAG_VERSION_3   0x02
 
@@ -249,6 +302,9 @@
 #define EC_WIRELESS_SWITCH_BLUETOOTH  0x02  /* Bluetooth radio */
 #define EC_WIRELESS_SWITCH_WWAN       0x04  /* WWAN power */
 #define EC_WIRELESS_SWITCH_WLAN_POWER 0x08  /* WLAN power */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -259,7 +315,10 @@
 #ifndef __ACPI__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Define __packed if someone hasn't beat us to it.  Linux kernel style
  * checking prefers __packed over __attribute__((packed)).
@@ -268,6 +327,9 @@
 #define __packed __attribute__((packed))
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* LPC command status byte masks */
 /* EC has written a byte in the data register and host hasn't read it yet */
@@ -309,6 +371,12 @@ enum ec_status {
 	EC_RES_TIMEOUT = 10,		/* We got a timeout */
 	EC_RES_OVERFLOW = 11,		/* Table / data overflow */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EC_RES_INVALID_HEADER = 12,     /* Header contains invalid data */
+	EC_RES_REQUEST_TRUNCATED = 13,  /* Didn't get the entire request */
+	EC_RES_RESPONSE_TOO_BIG = 14    /* Response was too big to handle */
+>>>>>>> v3.18
 =======
 	EC_RES_INVALID_HEADER = 12,     /* Header contains invalid data */
 	EC_RES_REQUEST_TRUNCATED = 13,  /* Didn't get the entire request */
@@ -352,7 +420,10 @@ enum host_event_code {
 	EC_HOST_EVENT_BATTERY_SHUTDOWN = 17,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Suggest that the AP throttle itself */
 	EC_HOST_EVENT_THROTTLE_START = 18,
 	/* Suggest that the AP resume normal speed */
@@ -363,6 +434,9 @@ enum host_event_code {
 	/* Hang detect logic detected a hang and warm rebooted the AP */
 	EC_HOST_EVENT_HANG_REBOOT = 21,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The high bit of the event mask is not used as a host event code.  If
@@ -409,7 +483,10 @@ struct ec_lpc_host_args {
 #define EC_HOST_ARGS_FLAG_TO_HOST   0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*****************************************************************************/
 /*
  * Byte codes returned by EC over SPI interface.
@@ -592,6 +669,9 @@ struct ec_host_response {
 } __packed;
 
 /*****************************************************************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Notes on commands:
@@ -733,7 +813,10 @@ struct ec_response_get_comms_status {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Fake a variety of responses, purely for testing purposes. */
 #define EC_CMD_TEST_PROTOCOL		0x0a
 
@@ -796,6 +879,9 @@ struct ec_response_get_set_value {
 /* More than one command can use these structs to get/set paramters. */
 #define EC_CMD_GSV_PAUSE_IN_S5	0x0c
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*****************************************************************************/
@@ -805,6 +891,10 @@ struct ec_response_get_set_value {
 #define EC_CMD_FLASH_INFO 0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Version 0 returns these fields */
+>>>>>>> v3.18
 =======
 /* Version 0 returns these fields */
 >>>>>>> v3.18
@@ -829,7 +919,10 @@ struct ec_response_flash_info {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Flags for version 1+ flash info command */
 /* EC flash erases bits to 0 instead of 1 */
 #define EC_FLASH_INFO_ERASE_TO_0 (1 << 0)
@@ -861,6 +954,9 @@ struct ec_response_flash_info_1 {
 	uint32_t flags;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Read flash
@@ -877,22 +973,32 @@ struct ec_params_flash_read {
 /* Write flash */
 #define EC_CMD_FLASH_WRITE 0x12
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EC_VER_FLASH_WRITE 1
 
 /* Version 0 of the flash command supported only 64 bytes of data */
 #define EC_FLASH_WRITE_VER0_SIZE 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ec_params_flash_write {
 	uint32_t offset;   /* Byte offset to write */
 	uint32_t size;     /* Size to write in bytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Data to write.  Could really use EC_PARAM_SIZE - 8, but tidiest to
 	 * use a power of 2 so writes stay aligned.
 	 */
 	uint8_t data[64];
+=======
+	/* Followed by data to write */
+>>>>>>> v3.18
 =======
 	/* Followed by data to write */
 >>>>>>> v3.18
@@ -972,7 +1078,11 @@ struct ec_response_flash_protect {
 enum ec_flash_region {
 	/* Region which holds read-only EC image */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EC_FLASH_REGION_RO,
+=======
+	EC_FLASH_REGION_RO = 0,
+>>>>>>> v3.18
 =======
 	EC_FLASH_REGION_RO = 0,
 >>>>>>> v3.18
@@ -984,6 +1094,11 @@ enum ec_flash_region {
 	 */
 	EC_FLASH_REGION_WP_RO,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Number of regions */
+	EC_FLASH_REGION_COUNT,
+>>>>>>> v3.18
 =======
 	/* Number of regions */
 	EC_FLASH_REGION_COUNT,
@@ -1077,6 +1192,7 @@ struct rgb_s {
 struct lightbar_params {
 	/* Timing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int google_ramp_up;
 	int google_ramp_down;
 	int s3s0_ramp_up;
@@ -1087,6 +1203,8 @@ struct lightbar_params {
 	int s3_ramp_up;
 	int s3_ramp_down;
 =======
+=======
+>>>>>>> v3.18
 	int32_t google_ramp_up;
 	int32_t google_ramp_down;
 	int32_t s3s0_ramp_up;
@@ -1096,6 +1214,9 @@ struct lightbar_params {
 	int32_t s3_sleep_for;
 	int32_t s3_ramp_up;
 	int32_t s3_ramp_down;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Oscillation */
@@ -1126,7 +1247,11 @@ struct ec_params_lightbar {
 		struct {
 			/* no args */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} dump, off, on, init, get_seq, get_params;
+=======
+		} dump, off, on, init, get_seq, get_params, version;
+>>>>>>> v3.18
 =======
 		} dump, off, on, init, get_seq, get_params, version;
 >>>>>>> v3.18
@@ -1164,12 +1289,18 @@ struct ec_response_lightbar {
 		struct lightbar_params get_params;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct version {
 			uint32_t num;
 			uint32_t flags;
 		} version;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct {
 			/* no return params */
@@ -1192,6 +1323,10 @@ enum lightbar_command {
 	LIGHTBAR_CMD_GET_PARAMS = 10,
 	LIGHTBAR_CMD_SET_PARAMS = 11,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LIGHTBAR_CMD_VERSION = 12,
+>>>>>>> v3.18
 =======
 	LIGHTBAR_CMD_VERSION = 12,
 >>>>>>> v3.18
@@ -1200,7 +1335,10 @@ enum lightbar_command {
 
 /*****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* LED control commands */
 
 #define EC_CMD_LED_CONTROL 0x29
@@ -1252,6 +1390,9 @@ struct ec_response_led_control {
 } __packed;
 
 /*****************************************************************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Verified boot commands */
 
@@ -1310,7 +1451,10 @@ enum ec_vboot_hash_status {
 
 /*****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Motion sense commands. We'll make separate structs for sub-commands with
  * different input args, so that we know how much to expect.
@@ -1486,6 +1630,9 @@ struct ec_response_motion_sense {
 } __packed;
 
 /*****************************************************************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* USB charging control commands */
 
@@ -1566,12 +1713,15 @@ struct ec_response_port80_last_boot {
 
 /*****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Thermal engine commands */
 
 /* Set thershold value */
 #define EC_CMD_THERMAL_SET_THRESHOLD 0x50
 
 =======
+=======
+>>>>>>> v3.18
 /* Thermal engine commands. Note that there are two implementations. We'll
  * reuse the command number, but the data and behavior is incompatible.
  * Version 0 is what originally shipped on Link.
@@ -1586,6 +1736,9 @@ struct ec_response_port80_last_boot {
  */
 
 /* Version 0 - set */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ec_params_thermal_set_threshold {
 	uint8_t sensor_type;
@@ -1594,9 +1747,13 @@ struct ec_params_thermal_set_threshold {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Get threshold value */
 #define EC_CMD_THERMAL_GET_THRESHOLD 0x51
 
+=======
+/* Version 0 - get */
+>>>>>>> v3.18
 =======
 /* Version 0 - get */
 >>>>>>> v3.18
@@ -1610,7 +1767,10 @@ struct ec_response_thermal_get_threshold {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* The version 1 structs are visible. */
 enum ec_temp_thresholds {
@@ -1646,6 +1806,9 @@ struct ec_params_thermal_set_threshold_v1 {
 
 /****************************************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Toggle automatic fan control */
 #define EC_CMD_THERMAL_AUTO_FAN_CTRL 0x52
@@ -1677,7 +1840,10 @@ struct ec_params_tmp006_set_calibration {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Read raw TMP006 data */
 #define EC_CMD_TMP006_GET_RAW 0x55
 
@@ -1690,6 +1856,9 @@ struct ec_response_tmp006_get_raw {
 	int32_t v;  /* In nV */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************************/
 /* MKBP - Matrix KeyBoard Protocol */
@@ -1890,12 +2059,15 @@ struct ec_params_switch_enable_backlight {
 /* Enable/disable WLAN/Bluetooth */
 #define EC_CMD_SWITCH_ENABLE_WIRELESS 0x91
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct ec_params_switch_enable_wireless {
 	uint8_t enabled;
 } __packed;
 
 =======
+=======
+>>>>>>> v3.18
 #define EC_VER_SWITCH_ENABLE_WIRELESS 1
 
 /* Version 0 params; no response */
@@ -1931,6 +2103,9 @@ struct ec_response_switch_enable_wireless_v1 {
 	uint8_t suspend_flags;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************************/
 /* GPIO commands. Only available on EC if write protect has been disabled. */
@@ -1957,19 +2132,29 @@ struct ec_response_gpio_get {
 /* I2C commands. Only available when flash write protect is unlocked. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * TODO(crosbug.com/p/23570): These commands are deprecated, and will be
  * removed soon.  Use EC_CMD_I2C_XFER instead.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Read I2C bus */
 #define EC_CMD_I2C_READ 0x94
 
 struct ec_params_i2c_read {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t addr;
+=======
+	uint16_t addr; /* 8-bit address (7-bit shifted << 1) */
+>>>>>>> v3.18
 =======
 	uint16_t addr; /* 8-bit address (7-bit shifted << 1) */
 >>>>>>> v3.18
@@ -1987,7 +2172,11 @@ struct ec_response_i2c_read {
 struct ec_params_i2c_write {
 	uint16_t data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t addr;
+=======
+	uint16_t addr; /* 8-bit address (7-bit shifted << 1) */
+>>>>>>> v3.18
 =======
 	uint16_t addr; /* 8-bit address (7-bit shifted << 1) */
 >>>>>>> v3.18
@@ -2000,12 +2189,15 @@ struct ec_params_i2c_write {
 /* Charge state commands. Only available when flash write protect unlocked. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Force charge state machine to stop in idle mode */
 #define EC_CMD_CHARGE_FORCE_IDLE 0x96
 
 struct ec_params_force_idle {
 	uint8_t enabled;
 =======
+=======
+>>>>>>> v3.18
 /* Force charge state machine to stop charging the battery or force it to
  * discharge the battery.
  */
@@ -2020,6 +2212,9 @@ enum ec_charge_control_mode {
 
 struct ec_params_charge_control {
 	uint32_t mode;  /* enum charge_control_mode */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -2049,6 +2244,7 @@ struct ec_params_charge_control {
 
 /*****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Temporary debug commands. TODO: remove this crosbug.com/p/13849 */
 
 /*
@@ -2058,6 +2254,8 @@ struct ec_params_charge_control {
  */
 #define EC_CMD_CHARGE_DUMP 0xa0
 =======
+=======
+>>>>>>> v3.18
 /* USB port mux control. */
 
 /*
@@ -2280,6 +2478,9 @@ struct ec_response_charge_state {
 	};
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2289,8 +2490,11 @@ struct ec_response_charge_state {
 
 struct ec_params_current_limit {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t limit;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t limit; /* in mA */
 } __packed;
 
@@ -2336,6 +2540,9 @@ struct ec_response_sb_rd_block {
 struct ec_params_sb_wr_block {
 	uint8_t reg;
 	uint16_t data[32];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -2344,8 +2551,13 @@ struct ec_params_sb_wr_block {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * TODO: this is a confusing name, since it doesn't necessarily reboot the EC.
  * Rename to "set image" or something similar.
+=======
+ * TODO(crosbug.com/p/23747): This is a confusing name, since it doesn't
+ * necessarily reboot the EC.  Rename to "image" or something similar?
+>>>>>>> v3.18
 =======
  * TODO(crosbug.com/p/23747): This is a confusing name, since it doesn't
  * necessarily reboot the EC.  Rename to "image" or something similar?
@@ -2429,6 +2641,10 @@ struct ec_params_reboot_ec {
 
 /* Valid addresses in ACPI memory space, for read/write commands */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2442,9 +2658,12 @@ struct ec_params_reboot_ec {
 /* Test compliment; writes here are ignored. */
 #define EC_ACPI_MEM_TEST_COMPLIMENT    0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Keyboard backlight brightness percent (0 - 100) */
 #define EC_ACPI_MEM_KEYBOARD_BACKLIGHT 0x03
 =======
+=======
+>>>>>>> v3.18
 
 /* Keyboard backlight brightness percent (0 - 100) */
 #define EC_ACPI_MEM_KEYBOARD_BACKLIGHT 0x03
@@ -2499,6 +2718,9 @@ struct ec_params_reboot_ec {
 #define EC_ACPI_MEM_CHARGING_LIMIT_STEP_MA   64
 /* Value to disable DPTF battery charging limit */
 #define EC_ACPI_MEM_CHARGING_LIMIT_DISABLED  0xff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Current version of ACPI memory address space */
@@ -2542,7 +2764,11 @@ struct ec_params_reboot_ec {
  * EC_CMD_VERSION0 + 1 means we are using version 1.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The old EC interface must not use commands 0dc or higher.
+=======
+ * The old EC interface must not use commands 0xdc or higher.
+>>>>>>> v3.18
 =======
  * The old EC interface must not use commands 0xdc or higher.
 >>>>>>> v3.18
@@ -2552,7 +2778,10 @@ struct ec_params_reboot_ec {
 #endif  /* !__ACPI__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*****************************************************************************/
 /*
  * Deprecated constants. These constants have been renamed for clarity. The
@@ -2564,5 +2793,8 @@ struct ec_params_reboot_ec {
 #define EC_LPC_ADDR_OLD_PARAM   EC_HOST_CMD_REGION1
 #define EC_OLD_PARAM_SIZE       EC_HOST_CMD_REGION_SIZE
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif  /* __CROS_EC_COMMANDS_H */

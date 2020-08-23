@@ -12,6 +12,11 @@
 #include <linux/interrupt.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -51,6 +56,7 @@ static int alloc_dbdma_descriptor_ring(struct i2sbus_dev *i2sdev,
 	 * enough or until we get some macio-specific versions
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r->space = dma_alloc_coherent(
 			&macio_get_pci_dev(i2sdev->macio)->dev,
 			r->size,
@@ -61,11 +67,16 @@ static int alloc_dbdma_descriptor_ring(struct i2sbus_dev *i2sdev,
 
 	memset(r->space, 0, r->size);
 =======
+=======
+>>>>>>> v3.18
 	r->space = dma_zalloc_coherent(&macio_get_pci_dev(i2sdev->macio)->dev,
 				       r->size, &r->bus_addr, GFP_KERNEL);
 	if (!r->space)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r->cmds = (void*)DBDMA_ALIGN(r->space);
 	r->bus_cmd_start = r->bus_addr +

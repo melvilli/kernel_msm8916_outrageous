@@ -29,6 +29,11 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-amiga.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-amiga.h>
 #include <asm/byteorder.h>
@@ -146,6 +151,7 @@ static struct resource ram_resource[NUM_MEMINFO];
      */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int amiga_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
@@ -175,6 +181,8 @@ int amiga_parse_bootinfo(const struct bi_record *record)
 	case BI_AMIGA_PSFREQ:
 		amiga_psfreq = *(const unsigned char *)data;
 =======
+=======
+>>>>>>> v3.18
 int __init amiga_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
@@ -203,12 +211,16 @@ int __init amiga_parse_bootinfo(const struct bi_record *record)
 
 	case BI_AMIGA_PSFREQ:
 		amiga_psfreq = *(const __u8 *)data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	case BI_AMIGA_AUTOCON:
 #ifdef CONFIG_ZORRO
 		if (zorro_num_autocon < ZORRO_NUM_AUTO) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			const struct ConfigDev *cd = (struct ConfigDev *)data;
 			struct zorro_dev *dev = &zorro_autocon[zorro_num_autocon++];
@@ -220,6 +232,8 @@ int __init amiga_parse_bootinfo(const struct bi_record *record)
 		} else
 			printk("amiga_parse_bootinfo: too many AutoConfig devices\n");
 =======
+=======
+>>>>>>> v3.18
 			const struct ConfigDev *cd = data;
 			struct zorro_dev_init *dev = &zorro_autocon_init[zorro_num_autocon++];
 			dev->rom = cd->cd_Rom;
@@ -229,6 +243,9 @@ int __init amiga_parse_bootinfo(const struct bi_record *record)
 			dev->boardsize = be32_to_cpu(cd->cd_BoardSize);
 		} else
 			pr_warn("amiga_parse_bootinfo: too many AutoConfig devices\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_ZORRO */
 		break;
@@ -256,9 +273,15 @@ static void __init amiga_identify(void)
 	memset(&amiga_hw_present, 0, sizeof(amiga_hw_present));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Amiga hardware found: ");
 	if (amiga_model >= AMI_500 && amiga_model <= AMI_DRACO) {
 		printk("[%s] ", amiga_models[amiga_model-AMI_500]);
+=======
+	pr_info("Amiga hardware found: ");
+	if (amiga_model >= AMI_500 && amiga_model <= AMI_DRACO) {
+		pr_cont("[%s] ", amiga_models[amiga_model-AMI_500]);
+>>>>>>> v3.18
 =======
 	pr_info("Amiga hardware found: ");
 	if (amiga_model >= AMI_500 && amiga_model <= AMI_DRACO) {
@@ -375,7 +398,11 @@ static void __init amiga_identify(void)
 #define AMIGAHW_ANNOUNCE(name, str)		\
 	if (AMIGAHW_PRESENT(name))		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(str)
+=======
+		pr_cont(str)
+>>>>>>> v3.18
 =======
 		pr_cont(str)
 >>>>>>> v3.18
@@ -411,8 +438,13 @@ static void __init amiga_identify(void)
 	AMIGAHW_ANNOUNCE(PCMCIA, "PCMCIA ");
 	if (AMIGAHW_PRESENT(ZORRO))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("ZORRO%s ", AMIGAHW_PRESENT(ZORRO3) ? "3" : "");
 	printk("\n");
+=======
+		pr_cont("ZORRO%s ", AMIGAHW_PRESENT(ZORRO3) ? "3" : "");
+	pr_cont("\n");
+>>>>>>> v3.18
 =======
 		pr_cont("ZORRO%s ", AMIGAHW_PRESENT(ZORRO3) ? "3" : "");
 	pr_cont("\n");
@@ -422,7 +454,10 @@ static void __init amiga_identify(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static unsigned long amiga_random_get_entropy(void)
 {
@@ -431,6 +466,9 @@ static unsigned long amiga_random_get_entropy(void)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     /*
      *  Setup the Amiga configuration info
@@ -470,6 +508,11 @@ void __init config_amiga(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mach_random_get_entropy = amiga_random_get_entropy;
+
+>>>>>>> v3.18
 =======
 	mach_random_get_entropy = amiga_random_get_entropy;
 
@@ -492,7 +535,11 @@ void __init config_amiga(void)
 				if (i == 0) {
 					/* don't cut off the branch we're sitting on */
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk("Warning: kernel runs in Zorro II memory\n");
+=======
+					pr_warn("Warning: kernel runs in Zorro II memory\n");
+>>>>>>> v3.18
 =======
 					pr_warn("Warning: kernel runs in Zorro II memory\n");
 >>>>>>> v3.18
@@ -507,8 +554,13 @@ void __init config_amiga(void)
 		}
 		if (disabled_z2mem)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%dK of Zorro II memory will not be used as system memory\n",
 		disabled_z2mem>>10);
+=======
+			pr_info("%dK of Zorro II memory will not be used as system memory\n",
+				disabled_z2mem>>10);
+>>>>>>> v3.18
 =======
 			pr_info("%dK of Zorro II memory will not be used as system memory\n",
 				disabled_z2mem>>10);
@@ -552,7 +604,11 @@ static void __init amiga_sched_init(irq_handler_t timer_routine)
 
 	if (request_resource(&mb_resources._ciab, &sched_res))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Cannot allocate ciab.ta{lo,hi}\n");
+=======
+		pr_warn("Cannot allocate ciab.ta{lo,hi}\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Cannot allocate ciab.ta{lo,hi}\n");
 >>>>>>> v3.18
@@ -701,6 +757,11 @@ static void amiga_mem_console_write(struct console *co, const char *s,
 static int __init amiga_savekmsg_setup(char *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool registered;
+
+>>>>>>> v3.18
 =======
 	bool registered;
 
@@ -716,7 +777,11 @@ static int __init amiga_savekmsg_setup(char *arg)
 	/* Just steal the block, the chipram allocator isn't functional yet */
 	amiga_chip_size -= SAVEKMSG_MAXMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	savekmsg = (void *)ZTWO_VADDR(CHIP_PHYSADDR + amiga_chip_size);
+=======
+	savekmsg = ZTWO_VADDR(CHIP_PHYSADDR + amiga_chip_size);
+>>>>>>> v3.18
 =======
 	savekmsg = ZTWO_VADDR(CHIP_PHYSADDR + amiga_chip_size);
 >>>>>>> v3.18
@@ -726,13 +791,19 @@ static int __init amiga_savekmsg_setup(char *arg)
 	savekmsg->size = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amiga_console_driver.write = amiga_mem_console_write;
 	register_console(&amiga_console_driver);
 =======
+=======
+>>>>>>> v3.18
 	registered = !!amiga_console_driver.write;
 	amiga_console_driver.write = amiga_mem_console_write;
 	if (!registered)
 		register_console(&amiga_console_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -816,12 +887,15 @@ void amiga_serial_gets(struct console *co, char *s, int len)
 static int __init amiga_debug_setup(char *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (MACH_IS_AMIGA && !strcmp(arg, "ser")) {
 		/* no initialization required (?) */
 		amiga_console_driver.write = amiga_serial_console_write;
 		register_console(&amiga_console_driver);
 	}
 =======
+=======
+>>>>>>> v3.18
 	bool registered;
 
 	if (!MACH_IS_AMIGA || strcmp(arg, "ser"))
@@ -832,6 +906,9 @@ static int __init amiga_debug_setup(char *arg)
 	amiga_console_driver.write = amiga_serial_console_write;
 	if (!registered)
 		register_console(&amiga_console_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

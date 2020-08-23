@@ -8,14 +8,18 @@ struct tsc2007_platform_data {
 	u16	x_plate_ohms;	/* must be non-zero value */
 	u16	max_rt; /* max. resistance above which samples are ignored */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long poll_delay; /* delay (in ms) after pen-down event
 				     before polling starts */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long poll_period; /* time (in ms) between samples */
 	int	fuzzx; /* fuzz factor for X, Y and pressure axes */
 	int	fuzzy;
 	int	fuzzz;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16	min_x;
 	u16	min_y;
@@ -34,12 +38,17 @@ struct tsc2007_platform_data {
 	void	(*exit_platform_hw)(void);
 	int	(*power_shutdown)(bool);
 =======
+=======
+>>>>>>> v3.18
 
 	int	(*get_pendown_state)(struct device *);
 	/* If needed, clear 2nd level interrupt source */
 	void	(*clear_penirq)(void);
 	int	(*init_platform_hw)(void);
 	void	(*exit_platform_hw)(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -20,7 +20,11 @@
 /* First the mem*() things. */
 #define __HAVE_ARCH_MEMMOVE
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *memmove(void *, const void *, __kernel_size_t);
+=======
+void *memmove(void *, const void *, __kernel_size_t);
+>>>>>>> v3.18
 =======
 void *memmove(void *, const void *, __kernel_size_t);
 >>>>>>> v3.18
@@ -37,8 +41,13 @@ void *memmove(void *, const void *, __kernel_size_t);
 #define memscan(__arg0, __char, __arg2)					\
 ({									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void *__memscan_zero(void *, size_t);			\
 	extern void *__memscan_generic(void *, int, size_t);		\
+=======
+	void *__memscan_zero(void *, size_t);				\
+	void *__memscan_generic(void *, int, size_t);			\
+>>>>>>> v3.18
 =======
 	void *__memscan_zero(void *, size_t);				\
 	void *__memscan_generic(void *, int, size_t);			\
@@ -56,6 +65,7 @@ void *memmove(void *, const void *, __kernel_size_t);
 
 #define __HAVE_ARCH_MEMCMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int memcmp(const void *,const void *,__kernel_size_t);
 
 /* Now the str*() stuff... */
@@ -65,6 +75,8 @@ extern __kernel_size_t strlen(const char *);
 #define __HAVE_ARCH_STRNCMP
 extern int strncmp(const char *, const char *, __kernel_size_t);
 =======
+=======
+>>>>>>> v3.18
 int memcmp(const void *,const void *,__kernel_size_t);
 
 /* Now the str*() stuff... */
@@ -73,6 +85,9 @@ __kernel_size_t strlen(const char *);
 
 #define __HAVE_ARCH_STRNCMP
 int strncmp(const char *, const char *, __kernel_size_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !EXPORT_SYMTAB_STROPS */

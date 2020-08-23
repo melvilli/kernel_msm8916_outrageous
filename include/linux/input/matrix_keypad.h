@@ -6,6 +6,7 @@
 #include <linux/of.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MATRIX_MAX_ROWS		18
 #define MATRIX_MAX_COLS		18
 
@@ -13,12 +14,17 @@
 				 (((col) % (MATRIX_MAX_COLS)) << 16) |\
 				 (val & 0xffff))
 =======
+=======
+>>>>>>> v3.18
 #define MATRIX_MAX_ROWS		32
 #define MATRIX_MAX_COLS		32
 
 #define KEY(row, col, val)	((((row) & (MATRIX_MAX_ROWS - 1)) << 24) |\
 				 (((col) & (MATRIX_MAX_COLS - 1)) << 16) |\
 				 ((val) & 0xffff))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KEY_ROW(k)		(((k) >> 24) & 0xff)

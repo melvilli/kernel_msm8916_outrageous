@@ -35,7 +35,12 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/acpi.h>
+#include <linux/hpet.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <linux/hpet.h>
@@ -45,10 +50,13 @@
 #include <asm/div64.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi.h>
 #include <acpi/acpi_bus.h>
 #include <linux/hpet.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -376,6 +384,7 @@ static unsigned int hpet_poll(struct file *file, poll_table * wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpet_mmap(struct file *file, struct vm_area_struct *vma)
 {
 #ifdef	CONFIG_HPET_MMAP
@@ -383,6 +392,8 @@ static int hpet_mmap(struct file *file, struct vm_area_struct *vma)
 	unsigned long addr;
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HPET_MMAP
 #ifdef CONFIG_HPET_MMAP_DEFAULT
 static int hpet_mmap_enabled = 1;
@@ -406,6 +417,9 @@ static int hpet_mmap(struct file *file, struct vm_area_struct *vma)
 	if (!hpet_mmap_enabled)
 		return -EACCES;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	devp = file->private_data;
 	addr = devp->hd_hpets->hp_hpet_phys;
@@ -416,11 +430,14 @@ static int hpet_mmap(struct file *file, struct vm_area_struct *vma)
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
 	return vm_iomap_memory(vma, addr, PAGE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	return -ENOSYS;
 #endif
 }
 =======
+=======
+>>>>>>> v3.18
 }
 #else
 static int hpet_mmap(struct file *file, struct vm_area_struct *vma)
@@ -428,6 +445,9 @@ static int hpet_mmap(struct file *file, struct vm_area_struct *vma)
 	return -ENOSYS;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int hpet_fasync(int fd, struct file *file, int on)
@@ -531,8 +551,12 @@ static int hpet_ioctl_ieon(struct hpet_dev *devp)
 
 		sprintf(devp->hd_name, "hpet%d", (int)(devp - hpetp->hp_dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_flags = devp->hd_flags & HPET_SHARED_IRQ
 						? IRQF_SHARED : IRQF_DISABLED;
+=======
+		irq_flags = devp->hd_flags & HPET_SHARED_IRQ ? IRQF_SHARED : 0;
+>>>>>>> v3.18
 =======
 		irq_flags = devp->hd_flags & HPET_SHARED_IRQ ? IRQF_SHARED : 0;
 >>>>>>> v3.18
@@ -774,7 +798,11 @@ static int hpet_is_known(struct hpet_data *hdp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table hpet_table[] = {
+=======
+static struct ctl_table hpet_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table hpet_table[] = {
 >>>>>>> v3.18
@@ -789,7 +817,11 @@ static struct ctl_table hpet_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table hpet_root[] = {
+=======
+static struct ctl_table hpet_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table hpet_root[] = {
 >>>>>>> v3.18
@@ -803,7 +835,11 @@ static struct ctl_table hpet_root[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table dev_root[] = {
+=======
+static struct ctl_table dev_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table dev_root[] = {
 >>>>>>> v3.18
@@ -1032,8 +1068,11 @@ static acpi_status hpet_resources(struct acpi_resource *res, void *data)
 
 		fixmem32 = &res->data.fixed_memory32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!fixmem32)
 			return AE_NO_MEMORY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

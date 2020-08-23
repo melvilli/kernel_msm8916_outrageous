@@ -88,8 +88,11 @@ cifs_prime_dcache(struct dentry *parent, struct qstr *name,
 
 	if (dentry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		inode = dentry->d_inode;
@@ -109,10 +112,15 @@ cifs_prime_dcache(struct dentry *parent, struct qstr *name,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = d_invalidate(dentry);
 		dput(dentry);
 		if (err)
 			return;
+=======
+		d_invalidate(dentry);
+		dput(dentry);
+>>>>>>> v3.18
 =======
 		d_invalidate(dentry);
 		dput(dentry);
@@ -157,7 +165,10 @@ cifs_fill_common_info(struct cifs_fattr *fattr, struct cifs_sb_info *cifs_sb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need to revalidate it further to make a decision about whether it
 	 * is a symbolic link, DFS referral or a reparse point with a direct
@@ -169,6 +180,9 @@ cifs_fill_common_info(struct cifs_fattr *fattr, struct cifs_sb_info *cifs_sb)
 	/* non-unix readdir doesn't provide nlink */
 	fattr->cf_flags |= CIFS_FATTR_UNKNOWN_NLINK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (fattr->cf_cifsattrs & ATTR_READONLY)
 		fattr->cf_mode &= ~S_IWUGO;
@@ -255,7 +269,11 @@ int get_symlink_reparse_path(char *full_path, struct cifs_sb_info *cifs_sb,
 			OPEN_REPARSE_POINT, &fid, &oplock, NULL,
 			cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+			cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 			cifs_remap(cifs_sb);
 >>>>>>> v3.18
@@ -572,7 +590,11 @@ static int cifs_save_resume_key(const char *current_entry,
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 find_cifs_entry(const unsigned int xid, struct cifs_tcon *tcon,
+=======
+find_cifs_entry(const unsigned int xid, struct cifs_tcon *tcon, loff_t pos,
+>>>>>>> v3.18
 =======
 find_cifs_entry(const unsigned int xid, struct cifs_tcon *tcon, loff_t pos,
 >>>>>>> v3.18
@@ -583,7 +605,11 @@ find_cifs_entry(const unsigned int xid, struct cifs_tcon *tcon, loff_t pos,
 	int pos_in_buf = 0;
 	loff_t first_entry_in_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t index_to_find = file->f_pos;
+=======
+	loff_t index_to_find = pos;
+>>>>>>> v3.18
 =======
 	loff_t index_to_find = pos;
 >>>>>>> v3.18
@@ -702,8 +728,14 @@ find_cifs_entry(const unsigned int xid, struct cifs_tcon *tcon, loff_t pos,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cifs_filldir(char *find_entry, struct file *file, filldir_t filldir,
 		void *dirent, char *scratch_buf, unsigned int max_len)
+=======
+static int cifs_filldir(char *find_entry, struct file *file,
+		struct dir_context *ctx,
+		char *scratch_buf, unsigned int max_len)
+>>>>>>> v3.18
 =======
 static int cifs_filldir(char *find_entry, struct file *file,
 		struct dir_context *ctx,
@@ -737,7 +769,13 @@ static int cifs_filldir(char *find_entry, struct file *file,
 	if (file_info->srch_inf.unicode) {
 		struct nls_table *nlt = cifs_sb->local_nls;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+		int map_type;
+
+		map_type = cifs_remap(cifs_sb);
+>>>>>>> v3.18
 =======
 		int map_type;
 
@@ -749,9 +787,13 @@ static int cifs_filldir(char *find_entry, struct file *file,
 					UNICODE_NAME_MAX,
 					min_t(size_t, de.namelen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      (size_t)max_len), nlt,
 					cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+					      (size_t)max_len), nlt, map_type);
+>>>>>>> v3.18
 =======
 					      (size_t)max_len), nlt, map_type);
 >>>>>>> v3.18
@@ -788,7 +830,11 @@ static int cifs_filldir(char *find_entry, struct file *file,
 
 	if ((cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MF_SYMLINKS) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    CIFSCouldBeMFSymlink(&fattr))
+=======
+	    couldbe_mf_symlink(&fattr))
+>>>>>>> v3.18
 =======
 	    couldbe_mf_symlink(&fattr))
 >>>>>>> v3.18
@@ -803,6 +849,7 @@ static int cifs_filldir(char *find_entry, struct file *file,
 
 	ino = cifs_uniqueid_to_ino_t(fattr.cf_uniqueid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = filldir(dirent, name.name, name.len, file->f_pos, ino,
 		     fattr.cf_dtype);
 	return rc;
@@ -811,11 +858,16 @@ static int cifs_filldir(char *find_entry, struct file *file,
 
 int cifs_readdir(struct file *file, void *direntry, filldir_t filldir)
 =======
+=======
+>>>>>>> v3.18
 	return !dir_emit(ctx, name.name, name.len, ino, fattr.cf_dtype);
 }
 
 
 int cifs_readdir(struct file *file, struct dir_context *ctx)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int rc = 0;
@@ -842,6 +894,7 @@ int cifs_readdir(struct file *file, struct dir_context *ctx)
 			goto rddir2_exit;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch ((int) file->f_pos) {
 	case 0:
@@ -941,6 +994,8 @@ int cifs_readdir(struct file *file, struct dir_context *ctx)
 		break;
 	} /* end switch */
 =======
+=======
+>>>>>>> v3.18
 	if (!dir_emit_dots(file, ctx))
 		goto rddir2_exit;
 
@@ -1021,6 +1076,9 @@ int cifs_readdir(struct file *file, struct dir_context *ctx)
 					cifsFile->srch_inf.info_level);
 	}
 	kfree(tmp_buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 rddir2_exit:

@@ -32,6 +32,10 @@
 #include <linux/sysrq.h>
 #include <linux/nmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -92,7 +96,11 @@ void arch_cpu_idle(void)
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 void arch_cpu_idle_dead()
+=======
+void arch_cpu_idle_dead(void)
+>>>>>>> v3.18
 =======
 void arch_cpu_idle_dead(void)
 >>>>>>> v3.18
@@ -247,7 +255,11 @@ static void __global_reg_poll(struct global_reg_snapshot *gp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void arch_trigger_all_cpu_backtrace(void)
+=======
+void arch_trigger_all_cpu_backtrace(bool include_self)
+>>>>>>> v3.18
 =======
 void arch_trigger_all_cpu_backtrace(bool include_self)
 >>>>>>> v3.18
@@ -263,32 +275,44 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 	spin_lock_irqsave(&global_cpu_snapshot_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(global_cpu_snapshot, 0, sizeof(global_cpu_snapshot));
 
 	this_cpu = raw_smp_processor_id();
 
 	__global_reg_self(tp, regs, this_cpu);
 =======
+=======
+>>>>>>> v3.18
 	this_cpu = raw_smp_processor_id();
 
 	memset(global_cpu_snapshot, 0, sizeof(global_cpu_snapshot));
 
 	if (include_self)
 		__global_reg_self(tp, regs, this_cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	smp_fetch_global_regs();
 
 	for_each_online_cpu(cpu) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct global_reg_snapshot *gp = &global_cpu_snapshot[cpu].reg;
 =======
+=======
+>>>>>>> v3.18
 		struct global_reg_snapshot *gp;
 
 		if (!include_self && cpu == this_cpu)
 			continue;
 
 		gp = &global_cpu_snapshot[cpu].reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		__global_reg_poll(gp);
@@ -311,8 +335,11 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 			       gp->tpc, gp->o7, gp->i7, gp->rpc);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		touch_nmi_watchdog();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -327,7 +354,11 @@ void arch_trigger_all_cpu_backtrace(bool include_self)
 static void sysrq_handle_globreg(int key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_trigger_all_cpu_backtrace();
+=======
+	arch_trigger_all_cpu_backtrace(true);
+>>>>>>> v3.18
 =======
 	arch_trigger_all_cpu_backtrace(true);
 >>>>>>> v3.18
@@ -345,6 +376,12 @@ static void __global_pmu_self(int this_cpu)
 	int i, num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pcr_ops)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!pcr_ops)
 		return;
@@ -398,8 +435,11 @@ static void pmu_snapshot_all_cpus(void)
 		       pp->pcr[0], pp->pcr[1], pp->pcr[2], pp->pcr[3],
 		       pp->pic[0], pp->pic[1], pp->pic[2], pp->pic[3]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		touch_nmi_watchdog();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -610,6 +650,10 @@ void fault_in_user_windows(void)
 barf:
 	set_thread_wsaved(window + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	user_exit();
+>>>>>>> v3.18
 =======
 	user_exit();
 >>>>>>> v3.18

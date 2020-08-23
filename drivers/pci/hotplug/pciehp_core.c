@@ -42,7 +42,11 @@ bool pciehp_debug;
 bool pciehp_poll_mode;
 int pciehp_poll_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool pciehp_force;
+=======
+static bool pciehp_force;
+>>>>>>> v3.18
 =======
 static bool pciehp_force;
 >>>>>>> v3.18
@@ -74,6 +78,10 @@ static int get_attention_status	(struct hotplug_slot *slot, u8 *value);
 static int get_latch_status	(struct hotplug_slot *slot, u8 *value);
 static int get_adapter_status	(struct hotplug_slot *slot, u8 *value);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int reset_slot		(struct hotplug_slot *slot, int probe);
+>>>>>>> v3.18
 =======
 static int reset_slot		(struct hotplug_slot *slot, int probe);
 >>>>>>> v3.18
@@ -116,6 +124,10 @@ static int init_slot(struct controller *ctrl)
 	if (!ops)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -124,6 +136,10 @@ static int init_slot(struct controller *ctrl)
 	ops->get_power_status = get_power_status;
 	ops->get_adapter_status = get_adapter_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ops->reset_slot = reset_slot;
+>>>>>>> v3.18
 =======
 	ops->reset_slot = reset_slot;
 >>>>>>> v3.18
@@ -175,7 +191,12 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 status)
 		  __func__, slot_name(slot));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pciehp_set_attention_status(slot, status);
+=======
+	pciehp_set_attention_status(slot, status);
+	return 0;
+>>>>>>> v3.18
 =======
 	pciehp_set_attention_status(slot, status);
 	return 0;
@@ -212,7 +233,12 @@ static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
 		  __func__, slot_name(slot));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pciehp_get_power_status(slot, value);
+=======
+	pciehp_get_power_status(slot, value);
+	return 0;
+>>>>>>> v3.18
 =======
 	pciehp_get_power_status(slot, value);
 	return 0;
@@ -227,7 +253,12 @@ static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 		  __func__, slot_name(slot));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pciehp_get_attention_status(slot, value);
+=======
+	pciehp_get_attention_status(slot, value);
+	return 0;
+>>>>>>> v3.18
 =======
 	pciehp_get_attention_status(slot, value);
 	return 0;
@@ -242,7 +273,12 @@ static int get_latch_status(struct hotplug_slot *hotplug_slot, u8 *value)
 		 __func__, slot_name(slot));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pciehp_get_latch_status(slot, value);
+=======
+	pciehp_get_latch_status(slot, value);
+	return 0;
+>>>>>>> v3.18
 =======
 	pciehp_get_latch_status(slot, value);
 	return 0;
@@ -257,8 +293,11 @@ static int get_adapter_status(struct hotplug_slot *hotplug_slot, u8 *value)
 		 __func__, slot_name(slot));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pciehp_get_adapter_status(slot, value);
 =======
+=======
+>>>>>>> v3.18
 	pciehp_get_adapter_status(slot, value);
 	return 0;
 }
@@ -271,6 +310,9 @@ static int reset_slot(struct hotplug_slot *hotplug_slot, int probe)
 		 __func__, slot_name(slot));
 
 	return pciehp_reset_slot(slot, probe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -289,7 +331,10 @@ static int pciehp_probe(struct pcie_device *dev)
 		goto err_out_none;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!dev->port->subordinate) {
 		/* Can happen if we run out of bus numbers during probe */
 		dev_err(&dev->device,
@@ -297,6 +342,9 @@ static int pciehp_probe(struct pcie_device *dev)
 		goto err_out_none;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctrl = pcie_init(dev);
 	if (!ctrl) {
@@ -310,8 +358,12 @@ static int pciehp_probe(struct pcie_device *dev)
 	if (rc) {
 		if (rc == -EBUSY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ctrl_warn(ctrl, "Slot already registered by another "
 				  "hotplug driver\n");
+=======
+			ctrl_warn(ctrl, "Slot already registered by another hotplug driver\n");
+>>>>>>> v3.18
 =======
 			ctrl_warn(ctrl, "Slot already registered by another hotplug driver\n");
 >>>>>>> v3.18
@@ -332,14 +384,20 @@ static int pciehp_probe(struct pcie_device *dev)
 	pciehp_get_adapter_status(slot, &occupied);
 	pciehp_get_power_status(slot, &poweron);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (occupied && pciehp_force)
 		pciehp_enable_slot(slot);
 =======
+=======
+>>>>>>> v3.18
 	if (occupied && pciehp_force) {
 		mutex_lock(&slot->hotplug_lock);
 		pciehp_enable_slot(slot);
 		mutex_unlock(&slot->hotplug_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If empty slot's power status is on, turn power off */
 	if (!occupied && poweron && POWER_CTRL(ctrl))
@@ -365,7 +423,11 @@ static void pciehp_remove(struct pcie_device *dev)
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pciehp_suspend (struct pcie_device *dev)
+=======
+static int pciehp_suspend(struct pcie_device *dev)
+>>>>>>> v3.18
 =======
 static int pciehp_suspend(struct pcie_device *dev)
 >>>>>>> v3.18
@@ -374,7 +436,11 @@ static int pciehp_suspend(struct pcie_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pciehp_resume (struct pcie_device *dev)
+=======
+static int pciehp_resume(struct pcie_device *dev)
+>>>>>>> v3.18
 =======
 static int pciehp_resume(struct pcie_device *dev)
 >>>>>>> v3.18
@@ -393,6 +459,10 @@ static int pciehp_resume(struct pcie_device *dev)
 	/* Check if slot is occupied */
 	pciehp_get_adapter_status(slot, &status);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&slot->hotplug_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&slot->hotplug_lock);
 >>>>>>> v3.18
@@ -401,6 +471,10 @@ static int pciehp_resume(struct pcie_device *dev)
 	else
 		pciehp_disable_slot(slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&slot->hotplug_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&slot->hotplug_lock);
 >>>>>>> v3.18
@@ -429,8 +503,13 @@ static int __init pcied_init(void)
 	pciehp_firmware_init();
 	retval = pcie_port_service_register(&hpdriver_portdrv);
 <<<<<<< HEAD
+<<<<<<< HEAD
  	dbg("pcie_port_service_register = %d\n", retval);
   	info(DRIVER_DESC " version: " DRIVER_VERSION "\n");
+=======
+	dbg("pcie_port_service_register = %d\n", retval);
+	info(DRIVER_DESC " version: " DRIVER_VERSION "\n");
+>>>>>>> v3.18
 =======
 	dbg("pcie_port_service_register = %d\n", retval);
 	info(DRIVER_DESC " version: " DRIVER_VERSION "\n");

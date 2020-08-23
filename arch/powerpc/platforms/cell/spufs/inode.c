@@ -165,7 +165,11 @@ static void spufs_prune_dir(struct dentry *dir)
 
 	mutex_lock(&dir->d_inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(dentry, tmp, &dir->d_subdirs, d_child) {
+=======
+	list_for_each_entry_safe(dentry, tmp, &dir->d_subdirs, d_u.d_child) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry_safe(dentry, tmp, &dir->d_subdirs, d_u.d_child) {
 >>>>>>> v3.18
@@ -243,7 +247,11 @@ const struct file_operations spufs_context_fops = {
 	.llseek		= dcache_dir_lseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= dcache_readdir,
+=======
+	.iterate	= dcache_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= dcache_readdir,
 >>>>>>> v3.18
@@ -629,7 +637,13 @@ spufs_parse_options(struct super_block *sb, char *options, struct inode *root)
 			if (match_int(&args[0], &option))
 				return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			root->i_uid = option;
+=======
+			root->i_uid = make_kuid(current_user_ns(), option);
+			if (!uid_valid(root->i_uid))
+				return 0;
+>>>>>>> v3.18
 =======
 			root->i_uid = make_kuid(current_user_ns(), option);
 			if (!uid_valid(root->i_uid))
@@ -640,7 +654,13 @@ spufs_parse_options(struct super_block *sb, char *options, struct inode *root)
 			if (match_int(&args[0], &option))
 				return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			root->i_gid = option;
+=======
+			root->i_gid = make_kgid(current_user_ns(), option);
+			if (!gid_valid(root->i_gid))
+				return 0;
+>>>>>>> v3.18
 =======
 			root->i_gid = make_kgid(current_user_ns(), option);
 			if (!gid_valid(root->i_gid))

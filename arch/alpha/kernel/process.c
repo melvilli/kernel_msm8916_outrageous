@@ -47,7 +47,10 @@ void (*pm_power_off)(void) = machine_power_off;
 EXPORT_SYMBOL(pm_power_off);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ALPHA_WTINT
 /*
  * Sleep the CPU.
@@ -65,6 +68,9 @@ void arch_cpu_idle_dead(void)
 }
 #endif /* ALPHA_WTINT */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct halt_info {
 	int mode;
@@ -138,7 +144,13 @@ common_shutdown_1(void *generic_ptr)
 			irq_exit();
 		/* This has the effect of resetting the VGA video origin.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		take_over_console(&dummy_con, 0, MAX_NR_CONSOLES-1, 1);
+=======
+		console_lock();
+		do_take_over_console(&dummy_con, 0, MAX_NR_CONSOLES-1, 1);
+		console_unlock();
+>>>>>>> v3.18
 =======
 		console_lock();
 		do_take_over_console(&dummy_con, 0, MAX_NR_CONSOLES-1, 1);

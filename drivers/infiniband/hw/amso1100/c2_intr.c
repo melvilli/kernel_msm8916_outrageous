@@ -170,7 +170,12 @@ static void handle_vq(struct c2_dev *c2dev, u32 mq_index)
 		 * never send us a reply that we're not expecting.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vq_repbuf_free(c2dev, host_msg);
+=======
+		if (reply_msg != NULL)
+			vq_repbuf_free(c2dev, host_msg);
+>>>>>>> v3.18
 =======
 		if (reply_msg != NULL)
 			vq_repbuf_free(c2dev, host_msg);

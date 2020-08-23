@@ -130,13 +130,19 @@ static int mlx4_en_test_speed(struct mlx4_en_priv *priv)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The device currently only supports 10G speed */
 	if (priv->port_state.link_speed != SPEED_10000)
 =======
+=======
+>>>>>>> v3.18
 	/* The device supports 1G, 10G and 40G speeds */
 	if (priv->port_state.link_speed != 1000 &&
 	    priv->port_state.link_speed != 10000 &&
 	    priv->port_state.link_speed != 40000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return priv->port_state.link_speed;
 	return 0;
@@ -148,7 +154,10 @@ void mlx4_en_ex_selftest(struct net_device *dev, u32 *flags, u64 *buf)
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 	struct mlx4_en_dev *mdev = priv->mdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mlx4_en_tx_ring *tx_ring;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, carrier_ok;
@@ -161,13 +170,17 @@ void mlx4_en_ex_selftest(struct net_device *dev, u32 *flags, u64 *buf)
 
 		netif_carrier_off(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 retry_tx:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Wait until all tx queues are empty.
 		 * there should not be any additional incoming traffic
 		 * since we turned the carrier off */
 		msleep(200);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < priv->tx_ring_num && carrier_ok; i++) {
 			tx_ring = &priv->tx_ring[i];
@@ -176,12 +189,19 @@ retry_tx:
 		}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 		if (priv->mdev->dev->caps.flags &
 					MLX4_DEV_CAP_FLAG_UC_LOOPBACK) {
 			buf[3] = mlx4_en_test_registers(priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buf[4] = mlx4_en_test_loopback(priv);
+=======
+			if (priv->port_up)
+				buf[4] = mlx4_en_test_loopback(priv);
+>>>>>>> v3.18
 =======
 			if (priv->port_up)
 				buf[4] = mlx4_en_test_loopback(priv);

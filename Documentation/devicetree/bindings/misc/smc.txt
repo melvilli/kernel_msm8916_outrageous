@@ -5,7 +5,12 @@ used for non-secure to secure communications.
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : "bcm,kona-smc"
+=======
+- compatible : "brcm,kona-smc"
+- DEPRECATED: compatible : "bcm,kona-smc"
+>>>>>>> v3.18
 =======
 - compatible : "brcm,kona-smc"
 - DEPRECATED: compatible : "bcm,kona-smc"
@@ -15,7 +20,11 @@ Required properties:
 Example:
 	smc@0x3404c000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "bcm,bcm11351-smc", "bcm,kona-smc";
+=======
+		compatible = "brcm,bcm11351-smc", "brcm,kona-smc";
+>>>>>>> v3.18
 =======
 		compatible = "brcm,bcm11351-smc", "brcm,kona-smc";
 >>>>>>> v3.18

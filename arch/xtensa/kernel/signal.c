@@ -332,17 +332,23 @@ gen_return_code(unsigned char *codemem)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 		       sigset_t *set, struct pt_regs *regs)
 {
 	struct rt_sigframe *frame;
 	int err = 0;
 =======
+=======
+>>>>>>> v3.18
 static int setup_frame(struct ksignal *ksig, sigset_t *set,
 		       struct pt_regs *regs)
 {
 	struct rt_sigframe *frame;
 	int err = 0, sig = ksig->sig;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int signal;
 	unsigned long sp, ra, tp;
@@ -350,7 +356,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 	sp = regs->areg[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ka->sa.sa_flags & SA_ONSTACK) != 0 && sas_ss_flags(sp) == 0) {
+=======
+	if ((ksig->ka.sa.sa_flags & SA_ONSTACK) != 0 && sas_ss_flags(sp) == 0) {
+>>>>>>> v3.18
 =======
 	if ((ksig->ka.sa.sa_flags & SA_ONSTACK) != 0 && sas_ss_flags(sp) == 0) {
 >>>>>>> v3.18
@@ -364,7 +374,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -377,8 +391,13 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 		: sig;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO) {
 		err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
+		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
 		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
@@ -394,8 +413,13 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 	err |= __copy_to_user(&frame->uc.uc_sigmask, set, sizeof(*set));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_RESTORER) {
 		ra = (unsigned long)ka->sa.sa_restorer;
+=======
+	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
+		ra = (unsigned long)ksig->ka.sa.sa_restorer;
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
 		ra = (unsigned long)ksig->ka.sa.sa_restorer;
@@ -408,7 +432,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -424,7 +452,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 	/* Set up registers for signal handler; preserve the threadptr */
 	tp = regs->threadptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	start_thread(regs, (unsigned long) ka->sa.sa_handler,
+=======
+	start_thread(regs, (unsigned long) ksig->ka.sa.sa_handler,
+>>>>>>> v3.18
 =======
 	start_thread(regs, (unsigned long) ksig->ka.sa.sa_handler,
 >>>>>>> v3.18
@@ -451,10 +483,13 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -471,6 +506,7 @@ give_sigsegv:
 static void do_signal(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
@@ -481,11 +517,16 @@ static void do_signal(struct pt_regs *regs)
 
 	if (signr > 0) {
 =======
+=======
+>>>>>>> v3.18
 	struct ksignal ksig;
 
 	task_pt_regs(current)->icountlevel = 0;
 
 	if (get_signal(&ksig)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		int ret;
 
@@ -503,7 +544,11 @@ static void do_signal(struct pt_regs *regs)
 
 				case -ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (!(ka.sa.sa_flags & SA_RESTART)) {
+=======
+					if (!(ksig.ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 =======
 					if (!(ksig.ka.sa.sa_flags & SA_RESTART)) {
 >>>>>>> v3.18
@@ -526,11 +571,16 @@ static void do_signal(struct pt_regs *regs)
 		/* Whee!  Actually deliver the signal.  */
 		/* Set up the stack frame */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = setup_frame(signr, &ka, &info, sigmask_to_save(), regs);
 		if (ret)
 			return;
 
 		signal_delivered(signr, &info, &ka, regs, 0);
+=======
+		ret = setup_frame(&ksig, sigmask_to_save(), regs);
+		signal_setup_done(ret, &ksig, 0);
+>>>>>>> v3.18
 =======
 		ret = setup_frame(&ksig, sigmask_to_save(), regs);
 		signal_setup_done(ret, &ksig, 0);

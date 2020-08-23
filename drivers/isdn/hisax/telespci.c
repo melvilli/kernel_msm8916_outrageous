@@ -291,10 +291,13 @@ int setup_telespci(struct IsdnCard *card)
 	char tmp[64];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __BIG_ENDIAN
 #error "not running on big endian machines now"
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(tmp, telespci_revision);

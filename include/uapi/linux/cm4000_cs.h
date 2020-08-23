@@ -3,6 +3,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ioctl.h>
+>>>>>>> v3.18
 =======
 #include <linux/ioctl.h>
 >>>>>>> v3.18

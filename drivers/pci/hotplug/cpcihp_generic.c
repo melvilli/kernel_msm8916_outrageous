@@ -14,6 +14,7 @@
  *
  * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY 
  * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
  * THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
@@ -23,6 +24,8 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 =======
+=======
+>>>>>>> v3.18
  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
  * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
  * THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
@@ -31,6 +34,9 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
@@ -65,15 +71,21 @@
 #define dbg(format, arg...)					\
 	do {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(debug)					\
 			printk (KERN_DEBUG "%s: " format "\n",	\
 				MY_NAME , ## arg); 		\
 	} while(0)
 =======
+=======
+>>>>>>> v3.18
 		if (debug)					\
 			printk (KERN_DEBUG "%s: " format "\n",	\
 				MY_NAME , ## arg);		\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define err(format, arg...) printk(KERN_ERR "%s: " format "\n", MY_NAME , ## arg)
 #define info(format, arg...) printk(KERN_INFO "%s: " format "\n", MY_NAME , ## arg)
@@ -97,22 +109,29 @@ static struct cpci_hp_controller generic_hpc;
 static int __init validate_parameters(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char* str;
 	char* p;
 	unsigned long tmp;
 
 	if(!bridge) {
 =======
+=======
+>>>>>>> v3.18
 	char *str;
 	char *p;
 	unsigned long tmp;
 
 	if (!bridge) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		info("not configured, disabling.");
 		return -EINVAL;
 	}
 	str = bridge;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if(!*str)
 		return -EINVAL;
@@ -120,11 +139,16 @@ static int __init validate_parameters(void)
 	tmp = simple_strtoul(str, &p, 16);
 	if(p == str || tmp > 0xff) {
 =======
+=======
+>>>>>>> v3.18
 	if (!*str)
 		return -EINVAL;
 
 	tmp = simple_strtoul(str, &p, 16);
 	if (p == str || tmp > 0xff) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err("Invalid hotplug bus bridge device bus number");
 		return -EINVAL;
@@ -132,7 +156,11 @@ static int __init validate_parameters(void)
 	bridge_busnr = (u8) tmp;
 	dbg("bridge_busnr = 0x%02x", bridge_busnr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(*p != ':') {
+=======
+	if (*p != ':') {
+>>>>>>> v3.18
 =======
 	if (*p != ':') {
 >>>>>>> v3.18
@@ -142,7 +170,11 @@ static int __init validate_parameters(void)
 	str = p + 1;
 	tmp = simple_strtoul(str, &p, 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(p == str || tmp > 0x1f) {
+=======
+	if (p == str || tmp > 0x1f) {
+>>>>>>> v3.18
 =======
 	if (p == str || tmp > 0x1f) {
 >>>>>>> v3.18
@@ -155,17 +187,23 @@ static int __init validate_parameters(void)
 	dbg("first_slot = 0x%02x", first_slot);
 	dbg("last_slot = 0x%02x", last_slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!(first_slot && last_slot)) {
 		err("Need to specify first_slot and last_slot");
 		return -EINVAL;
 	}
 	if(last_slot < first_slot) {
 =======
+=======
+>>>>>>> v3.18
 	if (!(first_slot && last_slot)) {
 		err("Need to specify first_slot and last_slot");
 		return -EINVAL;
 	}
 	if (last_slot < first_slot) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err("first_slot must be less than last_slot");
 		return -EINVAL;
@@ -174,7 +212,11 @@ static int __init validate_parameters(void)
 	dbg("port = 0x%04x", port);
 	dbg("enum_bit = 0x%02x", enum_bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(enum_bit > 7) {
+=======
+	if (enum_bit > 7) {
+>>>>>>> v3.18
 =======
 	if (enum_bit > 7) {
 >>>>>>> v3.18
@@ -197,8 +239,13 @@ static int __init cpcihp_generic_init(void)
 {
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource* r;
 	struct pci_dev* dev;
+=======
+	struct resource *r;
+	struct pci_dev *dev;
+>>>>>>> v3.18
 =======
 	struct resource *r;
 	struct pci_dev *dev;
@@ -211,7 +258,11 @@ static int __init cpcihp_generic_init(void)
 
 	r = request_region(port, 1, "#ENUM hotswap signal register");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!r)
+=======
+	if (!r)
+>>>>>>> v3.18
 =======
 	if (!r)
 >>>>>>> v3.18
@@ -220,7 +271,11 @@ static int __init cpcihp_generic_init(void)
 	dev = pci_get_domain_bus_and_slot(0, bridge_busnr,
 					  PCI_DEVFN(bridge_slot, 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!dev || dev->hdr_type != PCI_HEADER_TYPE_BRIDGE) {
+=======
+	if (!dev || dev->hdr_type != PCI_HEADER_TYPE_BRIDGE) {
+>>>>>>> v3.18
 =======
 	if (!dev || dev->hdr_type != PCI_HEADER_TYPE_BRIDGE) {
 >>>>>>> v3.18
@@ -237,7 +292,11 @@ static int __init cpcihp_generic_init(void)
 
 	status = cpci_hp_register_controller(&generic_hpc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
+=======
+	if (status != 0) {
+>>>>>>> v3.18
 =======
 	if (status != 0) {
 >>>>>>> v3.18
@@ -248,7 +307,11 @@ static int __init cpcihp_generic_init(void)
 
 	status = cpci_hp_register_bus(bus, first_slot, last_slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
+=======
+	if (status != 0) {
+>>>>>>> v3.18
 =======
 	if (status != 0) {
 >>>>>>> v3.18
@@ -259,7 +322,11 @@ static int __init cpcihp_generic_init(void)
 
 	status = cpci_hp_start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
+=======
+	if (status != 0) {
+>>>>>>> v3.18
 =======
 	if (status != 0) {
 >>>>>>> v3.18

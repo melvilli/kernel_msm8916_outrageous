@@ -35,6 +35,10 @@
 #include "psb_intel_drv.h"
 #include "psb_intel_reg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gma_display.h"
+>>>>>>> v3.18
 =======
 #include "gma_display.h"
 >>>>>>> v3.18
@@ -73,7 +77,11 @@ struct cdv_intel_dp {
 	uint8_t lane_count;
 	uint8_t dpcd[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *encoder;
+=======
+	struct gma_encoder *encoder;
+>>>>>>> v3.18
 =======
 	struct gma_encoder *encoder;
 >>>>>>> v3.18
@@ -123,7 +131,11 @@ static uint32_t dp_vswing_premph_table[] = {
  * will return true, and false otherwise.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool is_edp(struct psb_intel_encoder *encoder)
+=======
+static bool is_edp(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 static bool is_edp(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -133,6 +145,7 @@ static bool is_edp(struct gma_encoder *encoder)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_dp_start_link_train(struct psb_intel_encoder *encoder);
 static void cdv_intel_dp_complete_link_train(struct psb_intel_encoder *encoder);
 static void cdv_intel_dp_link_down(struct psb_intel_encoder *encoder);
@@ -140,12 +153,17 @@ static void cdv_intel_dp_link_down(struct psb_intel_encoder *encoder);
 static int
 cdv_intel_dp_max_lane_count(struct psb_intel_encoder *encoder)
 =======
+=======
+>>>>>>> v3.18
 static void cdv_intel_dp_start_link_train(struct gma_encoder *encoder);
 static void cdv_intel_dp_complete_link_train(struct gma_encoder *encoder);
 static void cdv_intel_dp_link_down(struct gma_encoder *encoder);
 
 static int
 cdv_intel_dp_max_lane_count(struct gma_encoder *encoder)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cdv_intel_dp *intel_dp = encoder->dev_priv;
@@ -165,7 +183,11 @@ cdv_intel_dp_max_lane_count(struct gma_encoder *encoder)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_max_link_bw(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_dp_max_link_bw(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_max_link_bw(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -206,7 +228,11 @@ cdv_intel_dp_max_data_rate(int max_link_clock, int max_lanes)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_edp_panel_vdd_on(struct psb_intel_encoder *intel_encoder)
+=======
+static void cdv_intel_edp_panel_vdd_on(struct gma_encoder *intel_encoder)
+>>>>>>> v3.18
 =======
 static void cdv_intel_edp_panel_vdd_on(struct gma_encoder *intel_encoder)
 >>>>>>> v3.18
@@ -230,7 +256,11 @@ static void cdv_intel_edp_panel_vdd_on(struct gma_encoder *intel_encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_edp_panel_vdd_off(struct psb_intel_encoder *intel_encoder)
+=======
+static void cdv_intel_edp_panel_vdd_off(struct gma_encoder *intel_encoder)
+>>>>>>> v3.18
 =======
 static void cdv_intel_edp_panel_vdd_off(struct gma_encoder *intel_encoder)
 >>>>>>> v3.18
@@ -249,7 +279,11 @@ static void cdv_intel_edp_panel_vdd_off(struct gma_encoder *intel_encoder)
 
 /* Returns true if the panel was already on when called */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool cdv_intel_edp_panel_on(struct psb_intel_encoder *intel_encoder)
+=======
+static bool cdv_intel_edp_panel_on(struct gma_encoder *intel_encoder)
+>>>>>>> v3.18
 =======
 static bool cdv_intel_edp_panel_on(struct gma_encoder *intel_encoder)
 >>>>>>> v3.18
@@ -280,7 +314,11 @@ static bool cdv_intel_edp_panel_on(struct gma_encoder *intel_encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_edp_panel_off (struct psb_intel_encoder *intel_encoder)
+=======
+static void cdv_intel_edp_panel_off (struct gma_encoder *intel_encoder)
+>>>>>>> v3.18
 =======
 static void cdv_intel_edp_panel_off (struct gma_encoder *intel_encoder)
 >>>>>>> v3.18
@@ -316,7 +354,11 @@ static void cdv_intel_edp_panel_off (struct gma_encoder *intel_encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_edp_backlight_on (struct psb_intel_encoder *intel_encoder)
+=======
+static void cdv_intel_edp_backlight_on (struct gma_encoder *intel_encoder)
+>>>>>>> v3.18
 =======
 static void cdv_intel_edp_backlight_on (struct gma_encoder *intel_encoder)
 >>>>>>> v3.18
@@ -340,7 +382,11 @@ static void cdv_intel_edp_backlight_on (struct gma_encoder *intel_encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_edp_backlight_off (struct psb_intel_encoder *intel_encoder)
+=======
+static void cdv_intel_edp_backlight_off (struct gma_encoder *intel_encoder)
+>>>>>>> v3.18
 =======
 static void cdv_intel_edp_backlight_off (struct gma_encoder *intel_encoder)
 >>>>>>> v3.18
@@ -364,7 +410,11 @@ cdv_intel_dp_mode_valid(struct drm_connector *connector,
 		    struct drm_display_mode *mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *encoder = psb_intel_attached_encoder(connector);
+=======
+	struct gma_encoder *encoder = gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *encoder = gma_attached_encoder(connector);
 >>>>>>> v3.18
@@ -424,7 +474,11 @@ unpack_aux(uint32_t src, uint8_t *dst, int dst_bytes)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_aux_ch(struct psb_intel_encoder *encoder,
+=======
+cdv_intel_dp_aux_ch(struct gma_encoder *encoder,
+>>>>>>> v3.18
 =======
 cdv_intel_dp_aux_ch(struct gma_encoder *encoder,
 >>>>>>> v3.18
@@ -530,7 +584,11 @@ cdv_intel_dp_aux_ch(struct gma_encoder *encoder,
 /* Write data to the aux channel in native mode */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_aux_native_write(struct psb_intel_encoder *encoder,
+=======
+cdv_intel_dp_aux_native_write(struct gma_encoder *encoder,
+>>>>>>> v3.18
 =======
 cdv_intel_dp_aux_native_write(struct gma_encoder *encoder,
 >>>>>>> v3.18
@@ -544,7 +602,11 @@ cdv_intel_dp_aux_native_write(struct gma_encoder *encoder,
 	if (send_bytes > 16)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msg[0] = AUX_NATIVE_WRITE << 4;
+=======
+	msg[0] = DP_AUX_NATIVE_WRITE << 4;
+>>>>>>> v3.18
 =======
 	msg[0] = DP_AUX_NATIVE_WRITE << 4;
 >>>>>>> v3.18
@@ -558,14 +620,20 @@ cdv_intel_dp_aux_native_write(struct gma_encoder *encoder,
 		if (ret < 0)
 			return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((ack & AUX_NATIVE_REPLY_MASK) == AUX_NATIVE_REPLY_ACK)
 			break;
 		else if ((ack & AUX_NATIVE_REPLY_MASK) == AUX_NATIVE_REPLY_DEFER)
 =======
+=======
+>>>>>>> v3.18
 		ack >>= 4;
 		if ((ack & DP_AUX_NATIVE_REPLY_MASK) == DP_AUX_NATIVE_REPLY_ACK)
 			break;
 		else if ((ack & DP_AUX_NATIVE_REPLY_MASK) == DP_AUX_NATIVE_REPLY_DEFER)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			udelay(100);
 		else
@@ -577,7 +645,11 @@ cdv_intel_dp_aux_native_write(struct gma_encoder *encoder,
 /* Write a single byte to the aux channel in native mode */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_aux_native_write_1(struct psb_intel_encoder *encoder,
+=======
+cdv_intel_dp_aux_native_write_1(struct gma_encoder *encoder,
+>>>>>>> v3.18
 =======
 cdv_intel_dp_aux_native_write_1(struct gma_encoder *encoder,
 >>>>>>> v3.18
@@ -589,7 +661,11 @@ cdv_intel_dp_aux_native_write_1(struct gma_encoder *encoder,
 /* read bytes from a native aux channel */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_aux_native_read(struct psb_intel_encoder *encoder,
+=======
+cdv_intel_dp_aux_native_read(struct gma_encoder *encoder,
+>>>>>>> v3.18
 =======
 cdv_intel_dp_aux_native_read(struct gma_encoder *encoder,
 >>>>>>> v3.18
@@ -603,7 +679,11 @@ cdv_intel_dp_aux_native_read(struct gma_encoder *encoder,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msg[0] = AUX_NATIVE_READ << 4;
+=======
+	msg[0] = DP_AUX_NATIVE_READ << 4;
+>>>>>>> v3.18
 =======
 	msg[0] = DP_AUX_NATIVE_READ << 4;
 >>>>>>> v3.18
@@ -622,6 +702,7 @@ cdv_intel_dp_aux_native_read(struct gma_encoder *encoder,
 		if (ret < 0)
 			return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ack = reply[0];
 		if ((ack & AUX_NATIVE_REPLY_MASK) == AUX_NATIVE_REPLY_ACK) {
 			memcpy(recv, reply + 1, ret - 1);
@@ -629,12 +710,17 @@ cdv_intel_dp_aux_native_read(struct gma_encoder *encoder,
 		}
 		else if ((ack & AUX_NATIVE_REPLY_MASK) == AUX_NATIVE_REPLY_DEFER)
 =======
+=======
+>>>>>>> v3.18
 		ack = reply[0] >> 4;
 		if ((ack & DP_AUX_NATIVE_REPLY_MASK) == DP_AUX_NATIVE_REPLY_ACK) {
 			memcpy(recv, reply + 1, ret - 1);
 			return ret - 1;
 		}
 		else if ((ack & DP_AUX_NATIVE_REPLY_MASK) == DP_AUX_NATIVE_REPLY_DEFER)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			udelay(100);
 		else
@@ -651,7 +737,11 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 						struct cdv_intel_dp,
 						adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *encoder = intel_dp->encoder;
+=======
+	struct gma_encoder *encoder = intel_dp->encoder;
+>>>>>>> v3.18
 =======
 	struct gma_encoder *encoder = intel_dp->encoder;
 >>>>>>> v3.18
@@ -666,6 +756,7 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 	/* Set up the command byte */
 	if (mode & MODE_I2C_READ)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msg[0] = AUX_I2C_READ << 4;
 	else
 		msg[0] = AUX_I2C_WRITE << 4;
@@ -673,12 +764,17 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 	if (!(mode & MODE_I2C_STOP))
 		msg[0] |= AUX_I2C_MOT << 4;
 =======
+=======
+>>>>>>> v3.18
 		msg[0] = DP_AUX_I2C_READ << 4;
 	else
 		msg[0] = DP_AUX_I2C_WRITE << 4;
 
 	if (!(mode & MODE_I2C_STOP))
 		msg[0] |= DP_AUX_I2C_MOT << 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	msg[1] = address >> 8;
@@ -712,8 +808,13 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (reply[0] & AUX_NATIVE_REPLY_MASK) {
 		case AUX_NATIVE_REPLY_ACK:
+=======
+		switch ((reply[0] >> 4) & DP_AUX_NATIVE_REPLY_MASK) {
+		case DP_AUX_NATIVE_REPLY_ACK:
+>>>>>>> v3.18
 =======
 		switch ((reply[0] >> 4) & DP_AUX_NATIVE_REPLY_MASK) {
 		case DP_AUX_NATIVE_REPLY_ACK:
@@ -723,15 +824,21 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 			 */
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case AUX_NATIVE_REPLY_NACK:
 			DRM_DEBUG_KMS("aux_ch native nack\n");
 			return -EREMOTEIO;
 		case AUX_NATIVE_REPLY_DEFER:
 =======
+=======
+>>>>>>> v3.18
 		case DP_AUX_NATIVE_REPLY_NACK:
 			DRM_DEBUG_KMS("aux_ch native nack\n");
 			return -EREMOTEIO;
 		case DP_AUX_NATIVE_REPLY_DEFER:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			udelay(100);
 			continue;
@@ -742,8 +849,13 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (reply[0] & AUX_I2C_REPLY_MASK) {
 		case AUX_I2C_REPLY_ACK:
+=======
+		switch ((reply[0] >> 4) & DP_AUX_I2C_REPLY_MASK) {
+		case DP_AUX_I2C_REPLY_ACK:
+>>>>>>> v3.18
 =======
 		switch ((reply[0] >> 4) & DP_AUX_I2C_REPLY_MASK) {
 		case DP_AUX_I2C_REPLY_ACK:
@@ -753,15 +865,21 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 			}
 			return reply_bytes - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case AUX_I2C_REPLY_NACK:
 			DRM_DEBUG_KMS("aux_i2c nack\n");
 			return -EREMOTEIO;
 		case AUX_I2C_REPLY_DEFER:
 =======
+=======
+>>>>>>> v3.18
 		case DP_AUX_I2C_REPLY_NACK:
 			DRM_DEBUG_KMS("aux_i2c nack\n");
 			return -EREMOTEIO;
 		case DP_AUX_I2C_REPLY_DEFER:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			DRM_DEBUG_KMS("aux_i2c defer\n");
 			udelay(100);
@@ -778,7 +896,12 @@ cdv_intel_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_i2c_init(struct psb_intel_connector *connector, struct psb_intel_encoder *encoder, const char *name)
+=======
+cdv_intel_dp_i2c_init(struct gma_connector *connector,
+		      struct gma_encoder *encoder, const char *name)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_i2c_init(struct gma_connector *connector,
 		      struct gma_encoder *encoder, const char *name)
@@ -800,7 +923,11 @@ cdv_intel_dp_i2c_init(struct gma_connector *connector,
 	intel_dp->adapter.name[sizeof(intel_dp->adapter.name) - 1] = '\0';
 	intel_dp->adapter.algo_data = &intel_dp->algo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_dp->adapter.dev.parent = &connector->base.kdev;
+=======
+	intel_dp->adapter.dev.parent = connector->base.kdev;
+>>>>>>> v3.18
 =======
 	intel_dp->adapter.dev.parent = connector->base.kdev;
 >>>>>>> v3.18
@@ -815,7 +942,11 @@ cdv_intel_dp_i2c_init(struct gma_connector *connector,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cdv_intel_fixed_panel_mode(struct drm_display_mode *fixed_mode,
+=======
+static void cdv_intel_fixed_panel_mode(struct drm_display_mode *fixed_mode,
+>>>>>>> v3.18
 =======
 static void cdv_intel_fixed_panel_mode(struct drm_display_mode *fixed_mode,
 >>>>>>> v3.18
@@ -842,7 +973,11 @@ cdv_intel_dp_mode_fixup(struct drm_encoder *encoder, const struct drm_display_mo
 {
 	struct drm_psb_private *dev_priv = encoder->dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *intel_encoder = to_psb_intel_encoder(encoder);
+=======
+	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
 >>>>>>> v3.18
@@ -940,15 +1075,21 @@ cdv_intel_dp_set_m_n(struct drm_crtc *crtc, struct drm_display_mode *mode,
 	struct drm_mode_config *mode_config = &dev->mode_config;
 	struct drm_encoder *encoder;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *intel_crtc = to_psb_intel_crtc(crtc);
 	int lane_count = 4, bpp = 24;
 	struct cdv_intel_dp_m_n m_n;
 	int pipe = intel_crtc->pipe;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int lane_count = 4, bpp = 24;
 	struct cdv_intel_dp_m_n m_n;
 	int pipe = gma_crtc->pipe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -956,7 +1097,11 @@ cdv_intel_dp_set_m_n(struct drm_crtc *crtc, struct drm_display_mode *mode,
 	 */
 	list_for_each_entry(encoder, &mode_config->encoder_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_encoder *intel_encoder;
+=======
+		struct gma_encoder *intel_encoder;
+>>>>>>> v3.18
 =======
 		struct gma_encoder *intel_encoder;
 >>>>>>> v3.18
@@ -966,7 +1111,11 @@ cdv_intel_dp_set_m_n(struct drm_crtc *crtc, struct drm_display_mode *mode,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intel_encoder = to_psb_intel_encoder(encoder);
+=======
+		intel_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 =======
 		intel_encoder = to_gma_encoder(encoder);
 >>>>>>> v3.18
@@ -1004,9 +1153,15 @@ cdv_intel_dp_mode_set(struct drm_encoder *encoder, struct drm_display_mode *mode
 		  struct drm_display_mode *adjusted_mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *intel_encoder = to_psb_intel_encoder(encoder);
 	struct drm_crtc *crtc = encoder->crtc;
 	struct psb_intel_crtc *intel_crtc = to_psb_intel_crtc(crtc);
+=======
+	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
+	struct drm_crtc *crtc = encoder->crtc;
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
 	struct drm_crtc *crtc = encoder->crtc;
@@ -1054,7 +1209,11 @@ cdv_intel_dp_mode_set(struct drm_encoder *encoder, struct drm_display_mode *mode
 
 	/* CPT DP's pipe select is decided in TRANS_DP_CTL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intel_crtc->pipe == 1)
+=======
+	if (gma_crtc->pipe == 1)
+>>>>>>> v3.18
 =======
 	if (gma_crtc->pipe == 1)
 >>>>>>> v3.18
@@ -1073,7 +1232,11 @@ cdv_intel_dp_mode_set(struct drm_encoder *encoder, struct drm_display_mode *mode
 			pfit_control = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pfit_control |= intel_crtc->pipe << PFIT_PIPE_SHIFT;
+=======
+		pfit_control |= gma_crtc->pipe << PFIT_PIPE_SHIFT;
+>>>>>>> v3.18
 =======
 		pfit_control |= gma_crtc->pipe << PFIT_PIPE_SHIFT;
 >>>>>>> v3.18
@@ -1085,7 +1248,11 @@ cdv_intel_dp_mode_set(struct drm_encoder *encoder, struct drm_display_mode *mode
 
 /* If the sink supports it, try to set the power state appropriately */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_dp_sink_dpms(struct psb_intel_encoder *encoder, int mode)
+=======
+static void cdv_intel_dp_sink_dpms(struct gma_encoder *encoder, int mode)
+>>>>>>> v3.18
 =======
 static void cdv_intel_dp_sink_dpms(struct gma_encoder *encoder, int mode)
 >>>>>>> v3.18
@@ -1121,7 +1288,11 @@ static void cdv_intel_dp_sink_dpms(struct gma_encoder *encoder, int mode)
 static void cdv_intel_dp_prepare(struct drm_encoder *encoder)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *intel_encoder = to_psb_intel_encoder(encoder);
+=======
+	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
 >>>>>>> v3.18
@@ -1142,7 +1313,11 @@ static void cdv_intel_dp_prepare(struct drm_encoder *encoder)
 static void cdv_intel_dp_commit(struct drm_encoder *encoder)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *intel_encoder = to_psb_intel_encoder(encoder);
+=======
+	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
 >>>>>>> v3.18
@@ -1160,7 +1335,11 @@ static void
 cdv_intel_dp_dpms(struct drm_encoder *encoder, int mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *intel_encoder = to_psb_intel_encoder(encoder);
+=======
+	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *intel_encoder = to_gma_encoder(encoder);
 >>>>>>> v3.18
@@ -1199,7 +1378,11 @@ cdv_intel_dp_dpms(struct drm_encoder *encoder, int mode)
  */
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_aux_native_read_retry(struct psb_intel_encoder *encoder, uint16_t address,
+=======
+cdv_intel_dp_aux_native_read_retry(struct gma_encoder *encoder, uint16_t address,
+>>>>>>> v3.18
 =======
 cdv_intel_dp_aux_native_read_retry(struct gma_encoder *encoder, uint16_t address,
 >>>>>>> v3.18
@@ -1228,7 +1411,11 @@ cdv_intel_dp_aux_native_read_retry(struct gma_encoder *encoder, uint16_t address
  */
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_get_link_status(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_dp_get_link_status(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_get_link_status(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1287,7 +1474,11 @@ static char	*link_train_names[] = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CDV_DP_VOLTAGE_MAX	    DP_TRAIN_VOLTAGE_SWING_1200
+=======
+#define CDV_DP_VOLTAGE_MAX	    DP_TRAIN_VOLTAGE_SWING_LEVEL_3
+>>>>>>> v3.18
 =======
 #define CDV_DP_VOLTAGE_MAX	    DP_TRAIN_VOLTAGE_SWING_LEVEL_3
 >>>>>>> v3.18
@@ -1310,7 +1501,11 @@ cdv_intel_dp_pre_emphasis_max(uint8_t voltage_swing)
 */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_get_adjust_train(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_get_adjust_train(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_get_adjust_train(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1373,7 +1568,11 @@ cdv_intel_clock_recovery_ok(uint8_t link_status[DP_LINK_STATUS_SIZE], int lane_c
 			 DP_LANE_SYMBOL_LOCKED)
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_channel_eq_ok(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_channel_eq_ok(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_channel_eq_ok(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1397,7 +1596,11 @@ cdv_intel_channel_eq_ok(struct gma_encoder *encoder)
 
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_set_link_train(struct psb_intel_encoder *encoder,
+=======
+cdv_intel_dp_set_link_train(struct gma_encoder *encoder,
+>>>>>>> v3.18
 =======
 cdv_intel_dp_set_link_train(struct gma_encoder *encoder,
 >>>>>>> v3.18
@@ -1428,7 +1631,11 @@ cdv_intel_dp_set_link_train(struct gma_encoder *encoder,
 
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dplink_set_level(struct psb_intel_encoder *encoder,
+=======
+cdv_intel_dplink_set_level(struct gma_encoder *encoder,
+>>>>>>> v3.18
 =======
 cdv_intel_dplink_set_level(struct gma_encoder *encoder,
 >>>>>>> v3.18
@@ -1453,7 +1660,11 @@ cdv_intel_dplink_set_level(struct gma_encoder *encoder,
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_set_vswing_premph(struct psb_intel_encoder *encoder, uint8_t signal_level)
+=======
+cdv_intel_dp_set_vswing_premph(struct gma_encoder *encoder, uint8_t signal_level)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_set_vswing_premph(struct gma_encoder *encoder, uint8_t signal_level)
 >>>>>>> v3.18
@@ -1498,7 +1709,11 @@ cdv_intel_dp_set_vswing_premph(struct gma_encoder *encoder, uint8_t signal_level
 
 	/* ;gfx_dpio_set_reg(0x814c, 0x40802040) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((vswing + premph) == DP_TRAIN_VOLTAGE_SWING_1200)
+=======
+	if ((vswing + premph) == DP_TRAIN_VOLTAGE_SWING_LEVEL_3)
+>>>>>>> v3.18
 =======
 	if ((vswing + premph) == DP_TRAIN_VOLTAGE_SWING_LEVEL_3)
 >>>>>>> v3.18
@@ -1527,7 +1742,11 @@ cdv_intel_dp_set_vswing_premph(struct gma_encoder *encoder, uint8_t signal_level
 /* Enable corresponding port and start training pattern 1 */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_start_link_train(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_dp_start_link_train(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_start_link_train(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1550,7 +1769,11 @@ cdv_intel_dp_start_link_train(struct gma_encoder *encoder)
 	REG_WRITE(intel_dp->output_reg, reg);
 	REG_READ(intel_dp->output_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -1629,7 +1852,11 @@ cdv_intel_dp_start_link_train(struct gma_encoder *encoder)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_complete_link_train(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_dp_complete_link_train(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_complete_link_train(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1719,7 +1946,11 @@ cdv_intel_dp_complete_link_train(struct gma_encoder *encoder)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 cdv_intel_dp_link_down(struct psb_intel_encoder *encoder)
+=======
+cdv_intel_dp_link_down(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 cdv_intel_dp_link_down(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1747,8 +1978,12 @@ cdv_intel_dp_link_down(struct gma_encoder *encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static enum drm_connector_status
 cdv_dp_detect(struct psb_intel_encoder *encoder)
+=======
+static enum drm_connector_status cdv_dp_detect(struct gma_encoder *encoder)
+>>>>>>> v3.18
 =======
 static enum drm_connector_status cdv_dp_detect(struct gma_encoder *encoder)
 >>>>>>> v3.18
@@ -1780,7 +2015,11 @@ static enum drm_connector_status
 cdv_intel_dp_detect(struct drm_connector *connector, bool force)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *encoder = psb_intel_attached_encoder(connector);
+=======
+	struct gma_encoder *encoder = gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *encoder = gma_attached_encoder(connector);
 >>>>>>> v3.18
@@ -1818,7 +2057,11 @@ cdv_intel_dp_detect(struct drm_connector *connector, bool force)
 static int cdv_intel_dp_get_modes(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *intel_encoder = psb_intel_attached_encoder(connector);
+=======
+	struct gma_encoder *intel_encoder = gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *intel_encoder = gma_attached_encoder(connector);
 >>>>>>> v3.18
@@ -1878,7 +2121,11 @@ static bool
 cdv_intel_dp_detect_audio(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *encoder = psb_intel_attached_encoder(connector);
+=======
+	struct gma_encoder *encoder = gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *encoder = gma_attached_encoder(connector);
 >>>>>>> v3.18
@@ -1908,7 +2155,11 @@ cdv_intel_dp_set_property(struct drm_connector *connector,
 {
 	struct drm_psb_private *dev_priv = connector->dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *encoder = psb_intel_attached_encoder(connector);
+=======
+	struct gma_encoder *encoder = gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *encoder = gma_attached_encoder(connector);
 >>>>>>> v3.18
@@ -1956,7 +2207,11 @@ done:
 		drm_crtc_helper_set_mode(crtc, &crtc->mode,
 					 crtc->x, crtc->y,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 crtc->fb);
+=======
+					 crtc->primary->fb);
+>>>>>>> v3.18
 =======
 					 crtc->primary->fb);
 >>>>>>> v3.18
@@ -1969,16 +2224,22 @@ static void
 cdv_intel_dp_destroy(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
 	struct cdv_intel_dp *intel_dp = psb_intel_encoder->dev_priv;
 
 	if (is_edp(psb_intel_encoder)) {
 =======
+=======
+>>>>>>> v3.18
 	struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
 	struct cdv_intel_dp *intel_dp = gma_encoder->dev_priv;
 
 	if (is_edp(gma_encoder)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*	cdv_intel_panel_destroy_backlight(connector->dev); */
 		if (intel_dp->panel_fixed_mode) {
@@ -1988,7 +2249,11 @@ cdv_intel_dp_destroy(struct drm_connector *connector)
 	}
 	i2c_del_adapter(&intel_dp->adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -2021,7 +2286,11 @@ static const struct drm_connector_helper_funcs cdv_intel_dp_connector_helper_fun
 	.get_modes = cdv_intel_dp_get_modes,
 	.mode_valid = cdv_intel_dp_mode_valid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.best_encoder = psb_intel_best_encoder,
+=======
+	.best_encoder = gma_best_encoder,
+>>>>>>> v3.18
 =======
 	.best_encoder = gma_best_encoder,
 >>>>>>> v3.18
@@ -2084,8 +2353,13 @@ void
 cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev, int output_reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder;
 	struct psb_intel_connector *psb_intel_connector;
+=======
+	struct gma_encoder *gma_encoder;
+	struct gma_connector *gma_connector;
+>>>>>>> v3.18
 =======
 	struct gma_encoder *gma_encoder;
 	struct gma_connector *gma_connector;
@@ -2097,17 +2371,23 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 	int type = DRM_MODE_CONNECTOR_DisplayPort;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder = kzalloc(sizeof(struct psb_intel_encoder), GFP_KERNEL);
 	if (!psb_intel_encoder)
 		return;
         psb_intel_connector = kzalloc(sizeof(struct psb_intel_connector), GFP_KERNEL);
         if (!psb_intel_connector)
 =======
+=======
+>>>>>>> v3.18
 	gma_encoder = kzalloc(sizeof(struct gma_encoder), GFP_KERNEL);
 	if (!gma_encoder)
 		return;
         gma_connector = kzalloc(sizeof(struct gma_connector), GFP_KERNEL);
         if (!gma_connector)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                 goto err_connector;
 	intel_dp = kzalloc(sizeof(struct cdv_intel_dp), GFP_KERNEL);
@@ -2118,8 +2398,13 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 		type = DRM_MODE_CONNECTOR_eDP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	connector = &psb_intel_connector->base;
 	encoder = &psb_intel_encoder->base;
+=======
+	connector = &gma_connector->base;
+	encoder = &gma_encoder->base;
+>>>>>>> v3.18
 =======
 	connector = &gma_connector->base;
 	encoder = &gma_encoder->base;
@@ -2128,6 +2413,7 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 	drm_connector_init(dev, connector, &cdv_intel_dp_connector_funcs, type);
 	drm_encoder_init(dev, encoder, &cdv_intel_dp_enc_funcs, DRM_MODE_ENCODER_TMDS);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	psb_intel_connector_attach_encoder(psb_intel_connector, psb_intel_encoder);
 
@@ -2140,6 +2426,8 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 	psb_intel_encoder->dev_priv=intel_dp;
 	intel_dp->encoder = psb_intel_encoder;
 =======
+=======
+>>>>>>> v3.18
 	gma_connector_attach_encoder(gma_connector, gma_encoder);
 
 	if (type == DRM_MODE_CONNECTOR_DisplayPort)
@@ -2150,6 +2438,9 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 
 	gma_encoder->dev_priv=intel_dp;
 	intel_dp->encoder = gma_encoder;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	intel_dp->output_reg = output_reg;
 	
@@ -2161,7 +2452,11 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 	connector->doublescan_allowed = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18
@@ -2171,17 +2466,23 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 		case DP_B:
 			name = "DPDDC-B";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			psb_intel_encoder->ddi_select = (DP_MASK | DDI0_SELECT);
 			break;
 		case DP_C:
 			name = "DPDDC-C";
 			psb_intel_encoder->ddi_select = (DP_MASK | DDI1_SELECT);
 =======
+=======
+>>>>>>> v3.18
 			gma_encoder->ddi_select = (DP_MASK | DDI0_SELECT);
 			break;
 		case DP_C:
 			name = "DPDDC-C";
 			gma_encoder->ddi_select = (DP_MASK | DDI1_SELECT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 	}
@@ -2189,17 +2490,23 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 	cdv_disable_intel_clock_gating(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdv_intel_dp_i2c_init(psb_intel_connector, psb_intel_encoder, name);
         /* FIXME:fail check */
 	cdv_intel_dp_add_properties(connector);
 
 	if (is_edp(psb_intel_encoder)) {
 =======
+=======
+>>>>>>> v3.18
 	cdv_intel_dp_i2c_init(gma_connector, gma_encoder, name);
         /* FIXME:fail check */
 	cdv_intel_dp_add_properties(connector);
 
 	if (is_edp(gma_encoder)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		int ret;
 		struct edp_power_seq cur;
@@ -2255,17 +2562,23 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cdv_intel_edp_panel_vdd_on(psb_intel_encoder);
 		ret = cdv_intel_dp_aux_native_read(psb_intel_encoder, DP_DPCD_REV,
 					       intel_dp->dpcd,
 					       sizeof(intel_dp->dpcd));
 		cdv_intel_edp_panel_vdd_off(psb_intel_encoder);
 =======
+=======
+>>>>>>> v3.18
 		cdv_intel_edp_panel_vdd_on(gma_encoder);
 		ret = cdv_intel_dp_aux_native_read(gma_encoder, DP_DPCD_REV,
 					       intel_dp->dpcd,
 					       sizeof(intel_dp->dpcd));
 		cdv_intel_edp_panel_vdd_off(gma_encoder);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret == 0) {
 			/* if this fails, presume the device is a ghost */
@@ -2288,9 +2601,15 @@ cdv_intel_dp_init(struct drm_device *dev, struct psb_intel_mode_device *mode_dev
 
 err_priv:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(psb_intel_connector);
 err_connector:
 	kfree(psb_intel_encoder);
+=======
+	kfree(gma_connector);
+err_connector:
+	kfree(gma_encoder);
+>>>>>>> v3.18
 =======
 	kfree(gma_connector);
 err_connector:

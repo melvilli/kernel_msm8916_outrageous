@@ -17,6 +17,10 @@
 #include <linux/module.h>
 #include <linux/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -29,7 +33,10 @@ static LIST_HEAD(clockevents_released);
 /* Protection for the above */
 static DEFINE_RAW_SPINLOCK(clockevents_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Protection for unbind operations */
 static DEFINE_MUTEX(clockevents_mutex);
 
@@ -37,6 +44,9 @@ struct ce_unbind {
 	struct clock_event_device *ce;
 	int res;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u64 cev_delta2ns(unsigned long latch, struct clock_event_device *evt,
@@ -79,7 +89,11 @@ static u64 cev_delta2ns(unsigned long latch, struct clock_event_device *evt,
 	 */
 	if ((~0ULL - clc > rnd) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (!ismax || evt->mult <= (1U << evt->shift)))
+=======
+	    (!ismax || evt->mult <= (1ULL << evt->shift)))
+>>>>>>> v3.18
 =======
 	    (!ismax || evt->mult <= (1ULL << evt->shift)))
 >>>>>>> v3.18
@@ -300,7 +314,10 @@ static void clockevents_notify_released(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Try to install a replacement clock event device
  */
@@ -385,6 +402,9 @@ int clockevents_unbind_device(struct clock_event_device *ced, int cpu)
 }
 EXPORT_SYMBOL_GPL(clockevents_unbind);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * clockevents_register_device - register a clock event device
@@ -459,11 +479,14 @@ int __clockevents_update_freq(struct clock_event_device *dev, u32 freq)
 	clockevents_config(dev, freq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->mode != CLOCK_EVT_MODE_ONESHOT)
 		return 0;
 
 	return clockevents_program_event(dev, dev->next_event, false);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->mode == CLOCK_EVT_MODE_ONESHOT)
 		return clockevents_program_event(dev, dev->next_event, false);
 
@@ -471,6 +494,9 @@ int __clockevents_update_freq(struct clock_event_device *dev, u32 freq)
 		dev->set_mode(CLOCK_EVT_MODE_PERIODIC, dev);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -630,8 +656,11 @@ int clockevents_notify(unsigned long reason, void *arg)
 }
 EXPORT_SYMBOL_GPL(clockevents_notify);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_SYSFS
 struct bus_type clockevents_subsys = {
@@ -752,4 +781,7 @@ device_initcall(clockevents_init_sysfs);
 #endif /* SYSFS */
 
 #endif /* GENERIC_CLOCK_EVENTS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

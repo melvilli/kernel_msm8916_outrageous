@@ -16,6 +16,7 @@
 #include <linux/of.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mct_init(void __iomem *base, int irq_g0, int irq_l0, int irq_l1);
 void exynos_init_time(void);
 extern unsigned long xxti_f, xusbxti_f;
@@ -78,6 +79,8 @@ struct device_node;
 void combiner_init(void __iomem *combiner_base, struct device_node *np,
 			unsigned int max_nr, int irq_base);
 =======
+=======
+>>>>>>> v3.18
 #define EXYNOS3250_SOC_ID	0xE3472000
 #define EXYNOS3_SOC_MASK	0xFFFFF000
 
@@ -190,6 +193,9 @@ static inline void exynos_pm_init(void) {}
 #endif
 
 extern void exynos_cpu_resume(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct smp_operations exynos_smp_ops;
@@ -199,7 +205,11 @@ extern void exynos_cpu_die(unsigned int cpu);
 /* PMU(Power Management Unit) support */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PMU_TABLE_END	NULL
+=======
+#define PMU_TABLE_END	(-1U)
+>>>>>>> v3.18
 =======
 #define PMU_TABLE_END	(-1U)
 >>>>>>> v3.18
@@ -212,9 +222,14 @@ enum sys_powerdown {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long l2x0_regs_phys;
 struct exynos_pmu_conf {
 	void __iomem *reg;
+=======
+struct exynos_pmu_conf {
+	unsigned int offset;
+>>>>>>> v3.18
 =======
 struct exynos_pmu_conf {
 	unsigned int offset;
@@ -224,8 +239,11 @@ struct exynos_pmu_conf {
 
 extern void exynos_sys_powerdown_conf(enum sys_powerdown mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s3c_cpu_resume(void);
 =======
+=======
+>>>>>>> v3.18
 extern void exynos_cpu_power_down(int cpu);
 extern void exynos_cpu_power_up(int cpu);
 extern int  exynos_cpu_power_state(int cpu);
@@ -246,6 +264,9 @@ static inline u32 pmu_raw_readl(u32 offset)
 {
 	return __raw_readl(pmu_base_addr + offset);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ARCH_ARM_MACH_EXYNOS_COMMON_H */

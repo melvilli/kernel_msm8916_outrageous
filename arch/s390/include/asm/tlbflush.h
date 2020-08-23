@@ -8,7 +8,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Flush all tlb entries on the local cpu.
+=======
+ * Flush all TLB entries on the local CPU.
+>>>>>>> v3.18
 =======
  * Flush all TLB entries on the local CPU.
 >>>>>>> v3.18
@@ -19,6 +23,7 @@ static inline void __tlb_flush_local(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 /*
  * Flush all tlb entries on all cpus.
@@ -26,6 +31,8 @@ static inline void __tlb_flush_local(void)
 void smp_ptlb_all(void);
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flush TLB entries for a specific ASCE on all CPUs
  */
@@ -54,6 +61,9 @@ void smp_ptlb_all(void);
 /*
  * Flush all TLB entries on all CPUs.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __tlb_flush_global(void)
 {
@@ -77,6 +87,7 @@ static inline void __tlb_flush_global(void)
 		: : "d" (reg2), "d" (reg3), "d" (reg4), "m" (dummy) : "cc" );
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void __tlb_flush_full(struct mm_struct *mm)
 {
@@ -109,6 +120,8 @@ static inline void __tlb_flush_idte(unsigned long asce)
 }
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flush TLB entries for a specific mm on all CPUs (in case gmap is used
  * this implicates multiple ASCEs!).
@@ -192,6 +205,9 @@ static inline void __tlb_flush_kernel(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __tlb_flush_mm(struct mm_struct * mm)
 {
@@ -202,7 +218,11 @@ static inline void __tlb_flush_mm(struct mm_struct * mm)
 	 */
 	if (MACHINE_HAS_IDTE && list_empty(&mm->context.gmap_list))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__tlb_flush_idte((unsigned long) mm->pgd |
+=======
+		__tlb_flush_asce(mm, (unsigned long) mm->pgd |
+>>>>>>> v3.18
 =======
 		__tlb_flush_asce(mm, (unsigned long) mm->pgd |
 >>>>>>> v3.18
@@ -212,7 +232,11 @@ static inline void __tlb_flush_mm(struct mm_struct * mm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __tlb_flush_mm_cond(struct mm_struct * mm)
+=======
+static inline void __tlb_flush_mm_lazy(struct mm_struct * mm)
+>>>>>>> v3.18
 =======
 static inline void __tlb_flush_mm_lazy(struct mm_struct * mm)
 >>>>>>> v3.18
@@ -248,7 +272,11 @@ static inline void __tlb_flush_mm_lazy(struct mm_struct * mm)
 static inline void flush_tlb_mm(struct mm_struct *mm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__tlb_flush_mm_cond(mm);
+=======
+	__tlb_flush_mm_lazy(mm);
+>>>>>>> v3.18
 =======
 	__tlb_flush_mm_lazy(mm);
 >>>>>>> v3.18
@@ -258,7 +286,11 @@ static inline void flush_tlb_range(struct vm_area_struct *vma,
 				   unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__tlb_flush_mm_cond(vma->vm_mm);
+=======
+	__tlb_flush_mm_lazy(vma->vm_mm);
+>>>>>>> v3.18
 =======
 	__tlb_flush_mm_lazy(vma->vm_mm);
 >>>>>>> v3.18
@@ -268,7 +300,11 @@ static inline void flush_tlb_kernel_range(unsigned long start,
 					  unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__tlb_flush_mm(&init_mm);
+=======
+	__tlb_flush_kernel();
+>>>>>>> v3.18
 =======
 	__tlb_flush_kernel();
 >>>>>>> v3.18

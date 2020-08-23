@@ -173,7 +173,11 @@ get_sparsemem_vmemmap_info(struct kcore_list *ent, struct list_head *head)
 	start = ((unsigned long)pfn_to_page(pfn)) & PAGE_MASK;
 	end = ((unsigned long)pfn_to_page(pfn + nr_pages)) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end = ALIGN(end, PAGE_SIZE);
+=======
+	end = PAGE_ALIGN(end);
+>>>>>>> v3.18
 =======
 	end = PAGE_ALIGN(end);
 >>>>>>> v3.18
@@ -260,8 +264,12 @@ static int kcore_update_ram(void)
 	for_each_node_state(nid, N_MEMORY) {
 		unsigned long node_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		node_end  = NODE_DATA(nid)->node_start_pfn +
 			NODE_DATA(nid)->node_spanned_pages;
+=======
+		node_end = node_end_pfn(nid);
+>>>>>>> v3.18
 =======
 		node_end = node_end_pfn(nid);
 >>>>>>> v3.18
@@ -417,7 +425,11 @@ static void elf_kcore_store_hdr(char *bufp, int nphdr, int dataoff)
 
 	strcpy(prpsinfo.pr_fname, "vmlinux");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(prpsinfo.pr_psargs, saved_command_line, ELF_PRARGSZ);
+=======
+	strlcpy(prpsinfo.pr_psargs, saved_command_line, sizeof(prpsinfo.pr_psargs));
+>>>>>>> v3.18
 =======
 	strlcpy(prpsinfo.pr_psargs, saved_command_line, sizeof(prpsinfo.pr_psargs));
 >>>>>>> v3.18
@@ -624,13 +636,19 @@ struct kcore_list kcore_modules;
 static void __init add_modules_range(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kclist_add(&kcore_modules, (void *)MODULES_VADDR,
 			MODULES_END - MODULES_VADDR, KCORE_VMALLOC);
 =======
+=======
+>>>>>>> v3.18
 	if (MODULES_VADDR != VMALLOC_START && MODULES_END != VMALLOC_END) {
 		kclist_add(&kcore_modules, (void *)MODULES_VADDR,
 			MODULES_END - MODULES_VADDR, KCORE_VMALLOC);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -660,7 +678,11 @@ static int __init proc_kcore_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_kcore_init);
+=======
+fs_initcall(proc_kcore_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_kcore_init);
 >>>>>>> v3.18

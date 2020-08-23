@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * linux/fs/posix_acl.c
  *
  *  Copyright (C) 2002 by Andreas Gruenbacher <a.gruenbacher@computer.org>
@@ -7,10 +8,15 @@
  *  Fixes from William Schumacher incorporated on 15 March 2001.
  *     (Reported by Charles Bertsch, <CBertsch@microtest.com>).
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) 2002,2003 by Andreas Gruenbacher <a.gruenbacher@computer.org>
  *
  * Fixes from William Schumacher incorporated on 15 March 2001.
  *    (Reported by Charles Bertsch, <CBertsch@microtest.com>).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -26,6 +32,7 @@
 #include <linux/sched.h>
 #include <linux/posix_acl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 
 #include <linux/errno.h>
@@ -36,6 +43,8 @@ EXPORT_SYMBOL(posix_acl_valid);
 EXPORT_SYMBOL(posix_acl_equiv_mode);
 EXPORT_SYMBOL(posix_acl_from_mode);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/posix_acl_xattr.h>
 #include <linux/xattr.h>
 #include <linux/export.h>
@@ -142,6 +151,9 @@ struct posix_acl *get_acl(struct inode *inode, int type)
 	return inode->i_op->get_acl(inode, type);
 }
 EXPORT_SYMBOL(get_acl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -154,6 +166,10 @@ posix_acl_init(struct posix_acl *acl, int count)
 	acl->a_count = count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(posix_acl_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(posix_acl_init);
 >>>>>>> v3.18
@@ -172,6 +188,10 @@ posix_acl_alloc(int count, gfp_t flags)
 	return acl;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(posix_acl_alloc);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(posix_acl_alloc);
 >>>>>>> v3.18
@@ -203,8 +223,11 @@ posix_acl_valid(const struct posix_acl *acl)
 	const struct posix_acl_entry *pa, *pe;
 	int state = ACL_USER_OBJ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kuid_t prev_uid = INVALID_UID;
 	kgid_t prev_gid = INVALID_GID;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int needs_mask = 0;
@@ -226,10 +249,13 @@ posix_acl_valid(const struct posix_acl *acl)
 				if (!uid_valid(pa->e_uid))
 					return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (uid_valid(prev_uid) &&
 				    uid_lte(pa->e_uid, prev_uid))
 					return -EINVAL;
 				prev_uid = pa->e_uid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				needs_mask = 1;
@@ -248,10 +274,13 @@ posix_acl_valid(const struct posix_acl *acl)
 				if (!gid_valid(pa->e_gid))
 					return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (gid_valid(prev_gid) &&
 				    gid_lte(pa->e_gid, prev_gid))
 					return -EINVAL;
 				prev_gid = pa->e_gid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				needs_mask = 1;
@@ -280,6 +309,10 @@ posix_acl_valid(const struct posix_acl *acl)
 	return -EINVAL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(posix_acl_valid);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(posix_acl_valid);
 >>>>>>> v3.18
@@ -330,6 +363,10 @@ posix_acl_equiv_mode(const struct posix_acl *acl, umode_t *mode_p)
         return not_equiv;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(posix_acl_equiv_mode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(posix_acl_equiv_mode);
 >>>>>>> v3.18
@@ -355,6 +392,10 @@ posix_acl_from_mode(umode_t mode, gfp_t flags)
 	return acl;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(posix_acl_from_mode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(posix_acl_from_mode);
 >>>>>>> v3.18
@@ -490,7 +531,11 @@ static int posix_acl_create_masq(struct posix_acl *acl, umode_t *mode_p)
  * Modify the ACL for the chmod syscall.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int posix_acl_chmod_masq(struct posix_acl *acl, umode_t mode)
+=======
+static int __posix_acl_chmod_masq(struct posix_acl *acl, umode_t mode)
+>>>>>>> v3.18
 =======
 static int __posix_acl_chmod_masq(struct posix_acl *acl, umode_t mode)
 >>>>>>> v3.18
@@ -540,7 +585,11 @@ static int __posix_acl_chmod_masq(struct posix_acl *acl, umode_t mode)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 posix_acl_create(struct posix_acl **acl, gfp_t gfp, umode_t *mode_p)
+=======
+__posix_acl_create(struct posix_acl **acl, gfp_t gfp, umode_t *mode_p)
+>>>>>>> v3.18
 =======
 __posix_acl_create(struct posix_acl **acl, gfp_t gfp, umode_t *mode_p)
 >>>>>>> v3.18
@@ -558,6 +607,7 @@ __posix_acl_create(struct posix_acl **acl, gfp_t gfp, umode_t *mode_p)
 	*acl = clone;
 	return err;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(posix_acl_create);
 
@@ -595,17 +645,26 @@ EXPORT_SYMBOL(posix_acl_update_mode);
 int
 posix_acl_chmod(struct posix_acl **acl, gfp_t gfp, umode_t mode)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__posix_acl_create);
 
 int
 __posix_acl_chmod(struct posix_acl **acl, gfp_t gfp, umode_t mode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct posix_acl *clone = posix_acl_clone(*acl, gfp);
 	int err = -ENOMEM;
 	if (clone) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = posix_acl_chmod_masq(clone, mode);
+=======
+		err = __posix_acl_chmod_masq(clone, mode);
+>>>>>>> v3.18
 =======
 		err = __posix_acl_chmod_masq(clone, mode);
 >>>>>>> v3.18
@@ -619,8 +678,11 @@ __posix_acl_chmod(struct posix_acl **acl, gfp_t gfp, umode_t mode)
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(posix_acl_chmod);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__posix_acl_chmod);
 
 int
@@ -1007,4 +1069,7 @@ int simple_acl_create(struct inode *dir, struct inode *inode)
 		posix_acl_release(acl);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

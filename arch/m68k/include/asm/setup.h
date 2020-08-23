@@ -23,6 +23,10 @@
 #define _M68K_SETUP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/asm/bootinfo.h>
+>>>>>>> v3.18
 =======
 #include <uapi/asm/bootinfo.h>
 >>>>>>> v3.18
@@ -302,7 +306,11 @@ extern int m68k_is040or060;
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mem_info {
+=======
+struct m68k_mem_info {
+>>>>>>> v3.18
 =======
 struct m68k_mem_info {
 >>>>>>> v3.18
@@ -313,7 +321,11 @@ struct m68k_mem_info {
 extern int m68k_num_memory;		/* # of memory blocks found (and used) */
 extern int m68k_realnum_memory;		/* real # of memory blocks found */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct mem_info m68k_memory[NUM_MEMINFO];/* memory description */
+=======
+extern struct m68k_mem_info m68k_memory[NUM_MEMINFO];/* memory description */
+>>>>>>> v3.18
 =======
 extern struct m68k_mem_info m68k_memory[NUM_MEMINFO];/* memory description */
 >>>>>>> v3.18

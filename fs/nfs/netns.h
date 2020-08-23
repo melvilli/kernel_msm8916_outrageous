@@ -20,6 +20,10 @@ struct nfs_net {
 	struct bl_dev_msg bl_mount_reply;
 	wait_queue_head_t bl_wq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex bl_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex bl_mutex;
 >>>>>>> v3.18
@@ -34,6 +38,12 @@ struct nfs_net {
 	spinlock_t nfs_client_lock;
 	struct timespec boot_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PROC_FS
+	struct proc_dir_entry *proc_nfsfs;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PROC_FS
 	struct proc_dir_entry *proc_nfsfs;

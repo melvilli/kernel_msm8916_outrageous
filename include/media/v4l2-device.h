@@ -121,7 +121,10 @@ int __must_check
 v4l2_device_register_subdev_nodes(struct v4l2_device *v4l2_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Send a notification to v4l2_device. */
 static inline void v4l2_subdev_notify(struct v4l2_subdev *sd,
 				      unsigned int notification, void *arg)
@@ -130,6 +133,9 @@ static inline void v4l2_subdev_notify(struct v4l2_subdev *sd,
 		sd->v4l2_dev->notify(sd, notification, arg);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Iterate over all subdevs. */
 #define v4l2_device_for_each_subdev(sd, v4l2_dev)			\

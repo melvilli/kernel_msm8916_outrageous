@@ -19,7 +19,11 @@ __xchg_u32(volatile void *p, unsigned long val)
 
 	__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_ENTRY_BARRIER
+=======
+	PPC_RELEASE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_RELEASE_BARRIER
 >>>>>>> v3.18
@@ -28,7 +32,11 @@ __xchg_u32(volatile void *p, unsigned long val)
 "	stwcx.	%3,0,%2 \n\
 	bne-	1b"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_EXIT_BARRIER
+=======
+	PPC_ACQUIRE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_ACQUIRE_BARRIER
 >>>>>>> v3.18
@@ -70,7 +78,11 @@ __xchg_u64(volatile void *p, unsigned long val)
 
 	__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_ENTRY_BARRIER
+=======
+	PPC_RELEASE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_RELEASE_BARRIER
 >>>>>>> v3.18
@@ -79,7 +91,11 @@ __xchg_u64(volatile void *p, unsigned long val)
 "	stdcx.	%3,0,%2 \n\
 	bne-	1b"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_EXIT_BARRIER
+=======
+	PPC_ACQUIRE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_ACQUIRE_BARRIER
 >>>>>>> v3.18
@@ -169,7 +185,11 @@ __cmpxchg_u32(volatile unsigned int *p, unsigned long old, unsigned long new)
 
 	__asm__ __volatile__ (
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_ENTRY_BARRIER
+=======
+	PPC_RELEASE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_RELEASE_BARRIER
 >>>>>>> v3.18
@@ -180,7 +200,11 @@ __cmpxchg_u32(volatile unsigned int *p, unsigned long old, unsigned long new)
 "	stwcx.	%4,0,%2\n\
 	bne-	1b"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_EXIT_BARRIER
+=======
+	PPC_ACQUIRE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_ACQUIRE_BARRIER
 >>>>>>> v3.18
@@ -223,7 +247,11 @@ __cmpxchg_u64(volatile unsigned long *p, unsigned long old, unsigned long new)
 
 	__asm__ __volatile__ (
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_ENTRY_BARRIER
+=======
+	PPC_RELEASE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_RELEASE_BARRIER
 >>>>>>> v3.18
@@ -233,7 +261,11 @@ __cmpxchg_u64(volatile unsigned long *p, unsigned long old, unsigned long new)
 	stdcx.	%4,0,%2\n\
 	bne-	1b"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_ATOMIC_EXIT_BARRIER
+=======
+	PPC_ACQUIRE_BARRIER
+>>>>>>> v3.18
 =======
 	PPC_ACQUIRE_BARRIER
 >>>>>>> v3.18
@@ -333,6 +365,10 @@ __cmpxchg_local(volatile void *ptr, unsigned long old, unsigned long new,
 	cmpxchg_local((ptr), (o), (n));					\
   })
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cmpxchg64_relaxed	cmpxchg64_local
+>>>>>>> v3.18
 =======
 #define cmpxchg64_relaxed	cmpxchg64_local
 >>>>>>> v3.18

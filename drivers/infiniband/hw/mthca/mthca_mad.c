@@ -295,7 +295,11 @@ int mthca_create_agents(struct mthca_dev *dev)
 						      q ? IB_QPT_GSI : IB_QPT_SMI,
 						      NULL, 0, send_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      NULL, NULL);
+=======
+						      NULL, NULL, 0);
+>>>>>>> v3.18
 =======
 						      NULL, NULL, 0);
 >>>>>>> v3.18

@@ -17,6 +17,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -27,6 +31,10 @@
 #include <linux/mtd/nand_ecc.h>
 #include <linux/mtd/partitions.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -41,7 +49,10 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/regs-gpio.h>
@@ -53,7 +64,10 @@
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/devs.h>
@@ -141,6 +155,7 @@ static struct platform_device *vstms_devices[] __initdata = {
 	&s3c_device_rtc,
 	&s3c_device_nand,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static void __init vstms_fixup(struct tag *tags, char **cmdline,
@@ -151,6 +166,8 @@ static void __init vstms_fixup(struct tag *tags, char **cmdline,
 		mi->bank[0].start = 0x30000000;
 		mi->bank[0].size = SZ_64M;
 =======
+=======
+>>>>>>> v3.18
 	&s3c2412_device_dma,
 };
 
@@ -158,6 +175,9 @@ static void __init vstms_fixup(struct tag *tags, char **cmdline)
 {
 	if (tags != phys_to_virt(S3C2410_SDRAM_PA + 0x100)) {
 		memblock_add(0x30000000, SZ_64M);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -166,7 +186,10 @@ static void __init vstms_map_io(void)
 {
 	s3c24xx_init_io(vstms_iodesc, ARRAY_SIZE(vstms_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(vstms_uartcfgs, ARRAY_SIZE(vstms_uartcfgs));
@@ -174,13 +197,19 @@ static void __init vstms_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init vstms_init_time(void)
 {
 	s3c2412_init_clocks(12000000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init vstms_init(void)
 {
@@ -198,8 +227,12 @@ MACHINE_START(VSTMS, "VSTMS")
 	.init_machine	= vstms_init,
 	.map_io		= vstms_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c2412_restart,
+=======
+	.init_time	= vstms_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= vstms_init_time,
 >>>>>>> v3.18

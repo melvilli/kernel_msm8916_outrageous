@@ -40,7 +40,10 @@ CONFIG_BLK_DEV_XIP=y
 # CONFIG_MISC_DEVICES is not set
 CONFIG_SCSI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=m
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y
@@ -73,7 +76,10 @@ CONFIG_SERIAL_VR41XX_CONSOLE=y
 # CONFIG_HID_SUPPORT is not set
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_EHCI_HCD=y

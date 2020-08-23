@@ -199,7 +199,11 @@ static int tosa_lcd_probe(struct spi_device *spi)
 				GPIOF_OUT_INIT_LOW, "tg #pwr");
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_gpio_tg;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -211,8 +215,13 @@ static int tosa_lcd_probe(struct spi_device *spi)
 	tosa_lcd_tg_on(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->lcd = lcd_device_register("tosa-lcd", &spi->dev, data,
 			&tosa_lcd_ops);
+=======
+	data->lcd = devm_lcd_device_register(&spi->dev, "tosa-lcd", &spi->dev,
+					data, &tosa_lcd_ops);
+>>>>>>> v3.18
 =======
 	data->lcd = devm_lcd_device_register(&spi->dev, "tosa-lcd", &spi->dev,
 					data, &tosa_lcd_ops);
@@ -229,8 +238,11 @@ static int tosa_lcd_probe(struct spi_device *spi)
 err_register:
 	tosa_lcd_tg_off(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_gpio_tg:
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -241,8 +253,11 @@ static int tosa_lcd_remove(struct spi_device *spi)
 	struct tosa_lcd_data *data = spi_get_drvdata(spi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_device_unregister(data->lcd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (data->i2c)
@@ -251,8 +266,11 @@ static int tosa_lcd_remove(struct spi_device *spi)
 	tosa_lcd_tg_off(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

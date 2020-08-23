@@ -2,16 +2,22 @@
 config DRM_OMAP
 	tristate "OMAP DRM"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM && !CONFIG_FB_OMAP2
 	depends on ARCH_OMAP2PLUS || ARCH_MULTIPLATFORM
 	depends on OMAP2_DSS
 	select DRM_KMS_HELPER
 =======
+=======
+>>>>>>> v3.18
 	depends on DRM
 	depends on ARCH_OMAP2PLUS || ARCH_MULTIPLATFORM
 	depends on OMAP2_DSS
 	select DRM_KMS_HELPER
 	select DRM_KMS_FB_HELPER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select FB_SYS_FILLRECT
 	select FB_SYS_COPYAREA

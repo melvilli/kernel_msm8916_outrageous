@@ -50,9 +50,15 @@ extern bool rpaphp_debug;
 #define dbg(format, arg...)					\
 	do {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rpaphp_debug)					\
 			printk(KERN_DEBUG "%s: " format,	\
 				MY_NAME , ## arg); 		\
+=======
+		if (rpaphp_debug)				\
+			printk(KERN_DEBUG "%s: " format,	\
+				MY_NAME , ## arg);		\
+>>>>>>> v3.18
 =======
 		if (rpaphp_debug)				\
 			printk(KERN_DEBUG "%s: " format,	\
@@ -106,7 +112,11 @@ struct slot *alloc_slot_struct(struct device_node *dn, int drc_index, char *drc_
 int rpaphp_register_slot(struct slot *slot);
 int rpaphp_deregister_slot(struct slot *slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

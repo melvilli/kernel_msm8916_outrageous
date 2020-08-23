@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uint32_t nv98_pcrypt_data[] = {
+=======
+uint32_t nv98_pcrypt_data[] = {
+>>>>>>> v3.18
 =======
 uint32_t nv98_pcrypt_data[] = {
 >>>>>>> v3.18
@@ -155,7 +159,11 @@ uint32_t nv98_pcrypt_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uint32_t nv98_pcrypt_code[] = {
+=======
+uint32_t nv98_pcrypt_code[] = {
+>>>>>>> v3.18
 =======
 uint32_t nv98_pcrypt_code[] = {
 >>>>>>> v3.18

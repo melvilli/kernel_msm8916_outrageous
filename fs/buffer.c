@@ -62,6 +62,7 @@ inline void touch_buffer(struct buffer_head *bh)
 EXPORT_SYMBOL(touch_buffer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sleep_on_buffer(void *word)
 {
 	io_schedule();
@@ -72,6 +73,11 @@ void __lock_buffer(struct buffer_head *bh)
 {
 	wait_on_bit_lock(&bh->b_state, BH_Lock, sleep_on_buffer,
 							TASK_UNINTERRUPTIBLE);
+=======
+void __lock_buffer(struct buffer_head *bh)
+{
+	wait_on_bit_lock_io(&bh->b_state, BH_Lock, TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 void __lock_buffer(struct buffer_head *bh)
 {
@@ -130,7 +136,11 @@ EXPORT_SYMBOL(buffer_check_dirty_writeback);
 void __wait_on_buffer(struct buffer_head * bh)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_on_bit(&bh->b_state, BH_Lock, sleep_on_buffer, TASK_UNINTERRUPTIBLE);
+=======
+	wait_on_bit_io(&bh->b_state, BH_Lock, TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 	wait_on_bit_io(&bh->b_state, BH_Lock, TASK_UNINTERRUPTIBLE);
 >>>>>>> v3.18
@@ -145,6 +155,7 @@ __clear_page_buffers(struct page *page)
 	page_cache_release(page);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int quiet_error(struct buffer_head *bh)
@@ -162,6 +173,8 @@ static void buffer_io_error(struct buffer_head *bh)
 			bdevname(bh->b_bdev, b),
 			(unsigned long long)bh->b_blocknr);
 =======
+=======
+>>>>>>> v3.18
 static void buffer_io_error(struct buffer_head *bh, char *msg)
 {
 	char b[BDEVNAME_SIZE];
@@ -171,6 +184,9 @@ static void buffer_io_error(struct buffer_head *bh, char *msg)
 			"Buffer I/O error on dev %s, logical block %llu%s\n",
 			bdevname(bh->b_bdev, b),
 			(unsigned long long)bh->b_blocknr, msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -207,6 +223,7 @@ EXPORT_SYMBOL(end_buffer_read_sync);
 void end_buffer_write_sync(struct buffer_head *bh, int uptodate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char b[BDEVNAME_SIZE];
 
 	if (uptodate) {
@@ -219,10 +236,15 @@ void end_buffer_write_sync(struct buffer_head *bh, int uptodate)
 				       bdevname(bh->b_bdev, b));
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (uptodate) {
 		set_buffer_uptodate(bh);
 	} else {
 		buffer_io_error(bh, ", lost sync page write");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_buffer_write_io_error(bh);
 		clear_buffer_uptodate(bh);
@@ -257,7 +279,11 @@ __find_get_block_slow(struct block_device *bdev, sector_t block)
 
 	index = block >> (PAGE_CACHE_SHIFT - bd_inode->i_blkbits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page = find_get_page(bd_mapping, index);
+=======
+	page = find_get_page_flags(bd_mapping, index, FGP_ACCESSED);
+>>>>>>> v3.18
 =======
 	page = find_get_page_flags(bd_mapping, index, FGP_ACCESSED);
 >>>>>>> v3.18
@@ -345,8 +371,12 @@ static void end_buffer_async_read(struct buffer_head *bh, int uptodate)
 	} else {
 		clear_buffer_uptodate(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!quiet_error(bh))
 			buffer_io_error(bh);
+=======
+		buffer_io_error(bh, ", async page read");
+>>>>>>> v3.18
 =======
 		buffer_io_error(bh, ", async page read");
 >>>>>>> v3.18
@@ -398,7 +428,10 @@ still_busy:
 void end_buffer_async_write(struct buffer_head *bh, int uptodate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char b[BDEVNAME_SIZE];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long flags;
@@ -413,12 +446,16 @@ void end_buffer_async_write(struct buffer_head *bh, int uptodate)
 		set_buffer_uptodate(bh);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!quiet_error(bh)) {
 			buffer_io_error(bh);
 			printk(KERN_WARNING "lost page write due to "
 					"I/O error on %s\n",
 			       bdevname(bh->b_bdev, b));
 		}
+=======
+		buffer_io_error(bh, ", lost async page write");
+>>>>>>> v3.18
 =======
 		buffer_io_error(bh, ", lost async page write");
 >>>>>>> v3.18
@@ -707,8 +744,11 @@ static void __set_page_dirty(struct page *page,
 		radix_tree_tag_set(&mapping->page_tree,
 				page_index(page), PAGECACHE_TAG_DIRTY);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Save the task that is dirtying this page */
 		page->tsk_dirty = current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1050,7 +1090,11 @@ init_page_buffers(struct page *page, struct block_device *bdev,
 static int
 grow_dev_page(struct block_device *bdev, sector_t block,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pgoff_t index, int size, int sizebits)
+=======
+	      pgoff_t index, int size, int sizebits, gfp_t gfp)
+>>>>>>> v3.18
 =======
 	      pgoff_t index, int size, int sizebits, gfp_t gfp)
 >>>>>>> v3.18
@@ -1061,10 +1105,13 @@ grow_dev_page(struct block_device *bdev, sector_t block,
 	sector_t end_block;
 	int ret = 0;		/* Will call free_more_memory() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	page = find_or_create_page(inode->i_mapping, index,
 		(mapping_gfp_mask(inode->i_mapping) & ~__GFP_FS)|__GFP_MOVABLE);
 =======
+=======
+>>>>>>> v3.18
 	gfp_t gfp_mask;
 
 	gfp_mask = (mapping_gfp_mask(inode->i_mapping) & ~__GFP_FS) | gfp;
@@ -1078,6 +1125,9 @@ grow_dev_page(struct block_device *bdev, sector_t block,
 	gfp_mask |= __GFP_NOFAIL;
 
 	page = find_or_create_page(inode->i_mapping, index, gfp_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!page)
 		return ret;
@@ -1127,7 +1177,11 @@ failed:
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 grow_buffers(struct block_device *bdev, sector_t block, int size)
+=======
+grow_buffers(struct block_device *bdev, sector_t block, int size, gfp_t gfp)
+>>>>>>> v3.18
 =======
 grow_buffers(struct block_device *bdev, sector_t block, int size, gfp_t gfp)
 >>>>>>> v3.18
@@ -1158,18 +1212,24 @@ grow_buffers(struct block_device *bdev, sector_t block, int size, gfp_t gfp)
 
 	/* Create a page with the proper size buffers.. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return grow_dev_page(bdev, block, index, size, sizebits);
 }
 
 static struct buffer_head *
 __getblk_slow(struct block_device *bdev, sector_t block, int size)
 =======
+=======
+>>>>>>> v3.18
 	return grow_dev_page(bdev, block, index, size, sizebits, gfp);
 }
 
 struct buffer_head *
 __getblk_slow(struct block_device *bdev, sector_t block,
 	     unsigned size, gfp_t gfp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* Size must be multiple of hard sectorsize */
@@ -1193,7 +1253,11 @@ __getblk_slow(struct block_device *bdev, sector_t block,
 			return bh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = grow_buffers(bdev, block, size);
+=======
+		ret = grow_buffers(bdev, block, size, gfp);
+>>>>>>> v3.18
 =======
 		ret = grow_buffers(bdev, block, size, gfp);
 >>>>>>> v3.18
@@ -1204,6 +1268,10 @@ __getblk_slow(struct block_device *bdev, sector_t block,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__getblk_slow);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__getblk_slow);
 >>>>>>> v3.18
@@ -1341,7 +1409,11 @@ static struct buffer_head *__bread_slow(struct buffer_head *bh)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BH_LRU_SIZE	8
+=======
+#define BH_LRU_SIZE	16
+>>>>>>> v3.18
 =======
 #define BH_LRU_SIZE	16
 >>>>>>> v3.18
@@ -1401,7 +1473,11 @@ static void bh_lru_install(struct buffer_head *bh)
 		while (out < BH_LRU_SIZE)
 			bhs[out++] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(__this_cpu_ptr(&bh_lrus.bhs), bhs, sizeof(bhs));
+=======
+		memcpy(this_cpu_ptr(&bh_lrus.bhs), bhs, sizeof(bhs));
+>>>>>>> v3.18
 =======
 		memcpy(this_cpu_ptr(&bh_lrus.bhs), bhs, sizeof(bhs));
 >>>>>>> v3.18
@@ -1427,8 +1503,13 @@ lookup_bh_lru(struct block_device *bdev, sector_t block, unsigned size)
 		struct buffer_head *bh = __this_cpu_read(bh_lrus.bhs[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bh && bh->b_bdev == bdev &&
 				bh->b_blocknr == block && bh->b_size == size) {
+=======
+		if (bh && bh->b_blocknr == block && bh->b_bdev == bdev &&
+		    bh->b_size == size) {
+>>>>>>> v3.18
 =======
 		if (bh && bh->b_blocknr == block && bh->b_bdev == bdev &&
 		    bh->b_size == size) {
@@ -1462,6 +1543,7 @@ __find_get_block(struct block_device *bdev, sector_t block, unsigned size)
 
 	if (bh == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bh = __find_get_block_slow(bdev, block);
 		if (bh)
 			bh_lru_install(bh);
@@ -1469,6 +1551,8 @@ __find_get_block(struct block_device *bdev, sector_t block, unsigned size)
 	if (bh)
 		touch_buffer(bh);
 =======
+=======
+>>>>>>> v3.18
 		/* __find_get_block_slow will mark the page accessed */
 		bh = __find_get_block_slow(bdev, block);
 		if (bh)
@@ -1476,12 +1560,16 @@ __find_get_block(struct block_device *bdev, sector_t block, unsigned size)
 	} else
 		touch_buffer(bh);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return bh;
 }
 EXPORT_SYMBOL(__find_get_block);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * __getblk will locate (and, if necessary, create) the buffer_head
  * which corresponds to the passed block_device, block and size. The
@@ -1493,6 +1581,8 @@ EXPORT_SYMBOL(__find_get_block);
 struct buffer_head *
 __getblk(struct block_device *bdev, sector_t block, unsigned size)
 =======
+=======
+>>>>>>> v3.18
  * __getblk_gfp() will locate (and, if necessary, create) the buffer_head
  * which corresponds to the passed block_device, block and size. The
  * returned buffer has its reference count incremented.
@@ -1503,6 +1593,9 @@ __getblk(struct block_device *bdev, sector_t block, unsigned size)
 struct buffer_head *
 __getblk_gfp(struct block_device *bdev, sector_t block,
 	     unsigned size, gfp_t gfp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct buffer_head *bh = __find_get_block(bdev, block, size);
@@ -1510,15 +1603,21 @@ __getblk_gfp(struct block_device *bdev, sector_t block,
 	might_sleep();
 	if (bh == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bh = __getblk_slow(bdev, block, size);
 	return bh;
 }
 EXPORT_SYMBOL(__getblk);
 =======
+=======
+>>>>>>> v3.18
 		bh = __getblk_slow(bdev, block, size, gfp);
 	return bh;
 }
 EXPORT_SYMBOL(__getblk_gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1536,6 +1635,7 @@ EXPORT_SYMBOL(__breadahead);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  __bread() - reads a specified block and returns the bh
  *  @bdev: the block_device to read from
  *  @block: number of block
@@ -1549,6 +1649,8 @@ __bread(struct block_device *bdev, sector_t block, unsigned size)
 {
 	struct buffer_head *bh = __getblk(bdev, block, size);
 =======
+=======
+>>>>>>> v3.18
  *  __bread_gfp() - reads a specified block and returns the bh
  *  @bdev: the block_device to read from
  *  @block: number of block
@@ -1565,6 +1667,9 @@ __bread_gfp(struct block_device *bdev, sector_t block,
 		   unsigned size, gfp_t gfp)
 {
 	struct buffer_head *bh = __getblk_gfp(bdev, block, size, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (likely(bh) && !buffer_uptodate(bh))
@@ -1572,7 +1677,11 @@ __bread_gfp(struct block_device *bdev, sector_t block,
 	return bh;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__bread);
+=======
+EXPORT_SYMBOL(__bread_gfp);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__bread_gfp);
 >>>>>>> v3.18
@@ -1608,6 +1717,7 @@ static bool has_bh_in_lru(int cpu, void *dummy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __evict_bh_lru(void *arg)
 {
 	struct bh_lru *b = &get_cpu_var(bh_lrus);
@@ -1641,6 +1751,8 @@ static bool bh_exists_in_lru(int cpu, void *arg)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void invalidate_bh_lrus(void)
 {
 	on_each_cpu_cond(has_bh_in_lru, invalidate_bh_lru, NULL, 1, GFP_KERNEL);
@@ -1648,12 +1760,15 @@ void invalidate_bh_lrus(void)
 EXPORT_SYMBOL_GPL(invalidate_bh_lrus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void evict_bh_lrus(struct buffer_head *bh)
 {
 	on_each_cpu_cond(bh_exists_in_lru, __evict_bh_lru, bh, 1, GFP_ATOMIC);
 }
 EXPORT_SYMBOL_GPL(evict_bh_lrus);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void set_bh_page(struct buffer_head *bh,
@@ -1675,6 +1790,7 @@ EXPORT_SYMBOL(set_bh_page);
  * Called when truncating a buffer on a page completely.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void discard_buffer(struct buffer_head * bh)
 {
 	lock_buffer(bh);
@@ -1686,6 +1802,8 @@ static void discard_buffer(struct buffer_head * bh)
 	clear_buffer_delay(bh);
 	clear_buffer_unwritten(bh);
 =======
+=======
+>>>>>>> v3.18
 
 /* Bits that are cleared during an invalidate */
 #define BUFFER_FLAGS_DISCARD \
@@ -1707,6 +1825,9 @@ static void discard_buffer(struct buffer_head * bh)
 			break;
 		b_state = b_state_old;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unlock_buffer(bh);
 }
@@ -1716,7 +1837,12 @@ static void discard_buffer(struct buffer_head * bh)
  *
  * @page: the page which is affected
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @offset: the index of the truncation point
+=======
+ * @offset: start of the range to invalidate
+ * @length: length of the range to invalidate
+>>>>>>> v3.18
 =======
  * @offset: start of the range to invalidate
  * @length: length of the range to invalidate
@@ -1732,17 +1858,23 @@ static void discard_buffer(struct buffer_head * bh)
  * blocks on-disk.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void block_invalidatepage(struct page *page, unsigned long offset)
 {
 	struct buffer_head *head, *bh, *next;
 	unsigned int curr_off = 0;
 =======
+=======
+>>>>>>> v3.18
 void block_invalidatepage(struct page *page, unsigned int offset,
 			  unsigned int length)
 {
 	struct buffer_head *head, *bh, *next;
 	unsigned int curr_off = 0;
 	unsigned int stop = length + offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!PageLocked(page));
@@ -1750,12 +1882,18 @@ void block_invalidatepage(struct page *page, unsigned int offset,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Check for overflow
 	 */
 	BUG_ON(stop > PAGE_CACHE_SIZE || stop < length);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	head = page_buffers(page);
 	bh = head;
@@ -1765,13 +1903,19 @@ void block_invalidatepage(struct page *page, unsigned int offset,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		 * Are we still fully in range ?
 		 */
 		if (next_off > stop)
 			goto out;
 
 		/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * is this block fully invalidated?
 		 */
@@ -1794,6 +1938,10 @@ out:
 EXPORT_SYMBOL(block_invalidatepage);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2353,8 +2501,13 @@ EXPORT_SYMBOL(generic_write_end);
  * we want to read are uptodate.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int block_is_partially_uptodate(struct page *page, read_descriptor_t *desc,
 					unsigned long from)
+=======
+int block_is_partially_uptodate(struct page *page, unsigned long from,
+					unsigned long count)
+>>>>>>> v3.18
 =======
 int block_is_partially_uptodate(struct page *page, unsigned long from,
 					unsigned long count)
@@ -2371,7 +2524,11 @@ int block_is_partially_uptodate(struct page *page, unsigned long from,
 	head = page_buffers(page);
 	blocksize = head->b_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	to = min_t(unsigned, PAGE_CACHE_SIZE - from, desc->count);
+=======
+	to = min_t(unsigned, PAGE_CACHE_SIZE - from, count);
+>>>>>>> v3.18
 =======
 	to = min_t(unsigned, PAGE_CACHE_SIZE - from, count);
 >>>>>>> v3.18
@@ -3132,10 +3289,16 @@ EXPORT_SYMBOL(block_truncate_page);
 /*
  * The generic ->writepage function for buffer-backed address_spaces
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this form passes in the end_io handler used to finish the IO.
  */
 int block_write_full_page_endio(struct page *page, get_block_t *get_block,
 			struct writeback_control *wbc, bh_end_io_t *handler)
+=======
+ */
+int block_write_full_page(struct page *page, get_block_t *get_block,
+			struct writeback_control *wbc)
+>>>>>>> v3.18
 =======
  */
 int block_write_full_page(struct page *page, get_block_t *get_block,
@@ -3151,7 +3314,11 @@ int block_write_full_page(struct page *page, get_block_t *get_block,
 	if (page->index < end_index)
 		return __block_write_full_page(inode, page, get_block, wbc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       handler);
+=======
+					       end_buffer_async_write);
+>>>>>>> v3.18
 =======
 					       end_buffer_async_write);
 >>>>>>> v3.18
@@ -3165,7 +3332,11 @@ int block_write_full_page(struct page *page, get_block_t *get_block,
 		 * freeable here, so the page does not leak.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		do_invalidatepage(page, 0);
+=======
+		do_invalidatepage(page, 0, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 =======
 		do_invalidatepage(page, 0, PAGE_CACHE_SIZE);
 >>>>>>> v3.18
@@ -3182,6 +3353,7 @@ int block_write_full_page(struct page *page, get_block_t *get_block,
 	 */
 	zero_user_segment(page, offset, PAGE_CACHE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __block_write_full_page(inode, page, get_block, wbc, handler);
 }
 EXPORT_SYMBOL(block_write_full_page_endio);
@@ -3194,6 +3366,10 @@ int block_write_full_page(struct page *page, get_block_t *get_block,
 {
 	return block_write_full_page_endio(page, get_block, wbc,
 					   end_buffer_async_write);
+=======
+	return __block_write_full_page(inode, page, get_block, wbc,
+							end_buffer_async_write);
+>>>>>>> v3.18
 =======
 	return __block_write_full_page(inode, page, get_block, wbc,
 							end_buffer_async_write);
@@ -3232,7 +3408,11 @@ static void end_bio_bh_io_sync(struct bio *bio, int err)
 /*
  * This allows us to do IO even on the odd last sectors
 <<<<<<< HEAD
+<<<<<<< HEAD
  * of a device, even if the bh block size is some multiple
+=======
+ * of a device, even if the block size is some multiple
+>>>>>>> v3.18
 =======
  * of a device, even if the block size is some multiple
 >>>>>>> v3.18
@@ -3246,16 +3426,22 @@ static void end_bio_bh_io_sync(struct bio *bio, int err)
  * do IO at the final sector" case.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void guard_bh_eod(int rw, struct bio *bio, struct buffer_head *bh)
 {
 	sector_t maxsector;
 	unsigned bytes;
 =======
+=======
+>>>>>>> v3.18
 void guard_bio_eod(int rw, struct bio *bio)
 {
 	sector_t maxsector;
 	struct bio_vec *bvec = &bio->bi_io_vec[bio->bi_vcnt - 1];
 	unsigned truncated_bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	maxsector = i_size_read(bio->bi_bdev->bd_inode) >> 9;
@@ -3267,6 +3453,7 @@ void guard_bio_eod(int rw, struct bio *bio)
 	 * let it through, and the IO layer will turn it into
 	 * an EIO.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unlikely(bio->bi_sector >= maxsector))
 		return;
@@ -3290,6 +3477,8 @@ void guard_bio_eod(int rw, struct bio *bio)
 		kunmap_atomic(kaddr);
 		flush_dcache_page(bh->b_page);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(bio->bi_iter.bi_sector >= maxsector))
 		return;
 
@@ -3308,6 +3497,9 @@ void guard_bio_eod(int rw, struct bio *bio)
 	if ((rw & RW_MASK) == READ) {
 		zero_user(bvec->bv_page, bvec->bv_offset + bvec->bv_len,
 				truncated_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -3336,7 +3528,11 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 	bio = bio_alloc(GFP_NOIO, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = bh->b_blocknr * (bh->b_size >> 9);
+=======
+	bio->bi_iter.bi_sector = bh->b_blocknr * (bh->b_size >> 9);
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = bh->b_blocknr * (bh->b_size >> 9);
 >>>>>>> v3.18
@@ -3347,7 +3543,11 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 
 	bio->bi_vcnt = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_size = bh->b_size;
+=======
+	bio->bi_iter.bi_size = bh->b_size;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_size = bh->b_size;
 >>>>>>> v3.18
@@ -3358,7 +3558,11 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 
 	/* Take care of bh's that straddle the end of the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	guard_bh_eod(rw, bio, bh);
+=======
+	guard_bio_eod(rw, bio);
+>>>>>>> v3.18
 =======
 	guard_bio_eod(rw, bio);
 >>>>>>> v3.18
@@ -3405,7 +3609,11 @@ EXPORT_SYMBOL(submit_bh);
  *
  * ll_rw_block sets b_end_io to simple completion handler that marks
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the buffer up-to-date (if approriate), unlocks the buffer and wakes
+=======
+ * the buffer up-to-date (if appropriate), unlocks the buffer and wakes
+>>>>>>> v3.18
 =======
  * the buffer up-to-date (if appropriate), unlocks the buffer and wakes
 >>>>>>> v3.18
@@ -3524,6 +3732,7 @@ drop_buffers(struct page *page, struct buffer_head **buffers_to_free)
 		if (buffer_write_io_error(bh) && page->mapping)
 			set_bit(AS_EIO, &page->mapping->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (buffer_busy(bh)) {
 			/*
 			 * Check if the busy failure was due to an
@@ -3533,6 +3742,10 @@ drop_buffers(struct page *page, struct buffer_head **buffers_to_free)
 			if (buffer_busy(bh))
 				goto failed;
 		}
+=======
+		if (buffer_busy(bh))
+			goto failed;
+>>>>>>> v3.18
 =======
 		if (buffer_busy(bh))
 			goto failed;

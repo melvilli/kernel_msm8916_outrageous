@@ -18,6 +18,10 @@
 #include <linux/slab.h>
 #include <linux/spi/spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -32,10 +36,13 @@ static int arizona_spi_probe(struct spi_device *spi)
 	struct arizona *arizona;
 	const struct regmap_config *regmap_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	switch (id->driver_data) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long type;
 	int ret;
 
@@ -45,6 +52,9 @@ static int arizona_spi_probe(struct spi_device *spi)
 		type = id->driver_data;
 
 	switch (type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MFD_WM5102
 	case WM5102:
@@ -101,6 +111,10 @@ static struct spi_driver arizona_spi_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &arizona_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table	= of_match_ptr(arizona_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table	= of_match_ptr(arizona_of_match),
 >>>>>>> v3.18

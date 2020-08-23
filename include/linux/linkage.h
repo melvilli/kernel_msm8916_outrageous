@@ -7,12 +7,18 @@
 #include <asm/linkage.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Some toolchains use other characters (e.g. '`') to mark new line in macro */
 #ifndef ASM_NL
 #define ASM_NL		 ;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef __cplusplus
 #define CPP_ASMLINKAGE extern "C"
@@ -84,9 +90,15 @@
 #ifndef ENTRY
 #define ENTRY(name) \
 <<<<<<< HEAD
+<<<<<<< HEAD
   .globl name; \
   ALIGN; \
   name:
+=======
+	.globl name ASM_NL \
+	ALIGN ASM_NL \
+	name:
+>>>>>>> v3.18
 =======
 	.globl name ASM_NL \
 	ALIGN ASM_NL \
@@ -98,7 +110,11 @@
 #ifndef WEAK
 #define WEAK(name)	   \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.weak name;	   \
+=======
+	.weak name ASM_NL   \
+>>>>>>> v3.18
 =======
 	.weak name ASM_NL   \
 >>>>>>> v3.18
@@ -108,7 +124,11 @@
 #ifndef END
 #define END(name) \
 <<<<<<< HEAD
+<<<<<<< HEAD
   .size name, .-name
+=======
+	.size name, .-name
+>>>>>>> v3.18
 =======
 	.size name, .-name
 >>>>>>> v3.18
@@ -121,8 +141,13 @@
 #ifndef ENDPROC
 #define ENDPROC(name) \
 <<<<<<< HEAD
+<<<<<<< HEAD
   .type name, @function; \
   END(name)
+=======
+	.type name, @function ASM_NL \
+	END(name)
+>>>>>>> v3.18
 =======
 	.type name, @function ASM_NL \
 	END(name)

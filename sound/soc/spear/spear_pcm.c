@@ -5,7 +5,11 @@
  *
  * Copyright (C) 2012 ST Microelectronics
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Rajeev Kumar<rajeev-dlh.kumar@st.com>
+=======
+ * Rajeev Kumar<rajeevkumar.linux@gmail.com>
+>>>>>>> v3.18
 =======
  * Rajeev Kumar<rajeevkumar.linux@gmail.com>
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 
 #include <linux/module.h>
 #include <linux/dmaengine.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/dma-mapping.h>
 #include <linux/init.h>
@@ -32,6 +37,8 @@
 
 static struct snd_pcm_hardware spear_pcm_hardware = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <sound/dmaengine_pcm.h>
 #include <sound/pcm.h>
@@ -40,6 +47,9 @@ static struct snd_pcm_hardware spear_pcm_hardware = {
 #include "spear_pcm.h"
 
 static const struct snd_pcm_hardware spear_pcm_hardware = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.info = (SNDRV_PCM_INFO_INTERLEAVED | SNDRV_PCM_INFO_BLOCK_TRANSFER |
 		 SNDRV_PCM_INFO_MMAP | SNDRV_PCM_INFO_MMAP_VALID |
@@ -52,6 +62,7 @@ static const struct snd_pcm_hardware spear_pcm_hardware = {
 	.fifo_size = 0, /* fifo size in bytes */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int spear_pcm_hw_params(struct snd_pcm_substream *substream,
 		struct snd_pcm_hw_params *params)
@@ -216,6 +227,8 @@ MODULE_DESCRIPTION("SPEAr PCM DMA module");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:spear-pcm-audio");
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_dmaengine_pcm_config spear_dmaengine_pcm_config = {
 	.pcm_hardware = &spear_pcm_hardware,
 	.prealloc_buffer_size = 16 * 1024,
@@ -237,4 +250,7 @@ EXPORT_SYMBOL_GPL(devm_spear_pcm_platform_register);
 MODULE_AUTHOR("Rajeev Kumar <rajeevkumar.linux@gmail.com>");
 MODULE_DESCRIPTION("SPEAr PCM DMA module");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

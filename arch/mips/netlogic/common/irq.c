@@ -41,11 +41,17 @@
 #include <linux/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqdomain.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/errno.h>
 #include <asm/signal.h>
@@ -184,6 +190,10 @@ static void __init nlm_init_percpu_irqs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -210,6 +220,11 @@ void nlm_set_pic_extra_ack(int node, int irq, void (*xack)(struct irq_data *))
 	xirq = nlm_irq_to_xirq(node, irq);
 	pic_data = irq_get_handler_data(xirq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (WARN_ON(!pic_data))
+		return;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!pic_data))
 		return;
@@ -219,6 +234,7 @@ void nlm_set_pic_extra_ack(int node, int irq, void (*xack)(struct irq_data *))
 
 static void nlm_init_node_irqs(int node)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i, irt;
 	uint64_t irqmask;
@@ -250,6 +266,8 @@ void __init arch_init_irq(void)
 	nlm_setup_fmn_irq();
 #endif
 =======
+=======
+>>>>>>> v3.18
 	struct nlm_soc_info *nodep;
 	int i, irt;
 
@@ -268,6 +286,9 @@ void __init arch_init_irq(void)
 				node * nlm_threads_per_node(), 0);
 		nlm_setup_pic_irq(node, i, i, irt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -276,8 +297,13 @@ void nlm_smp_irq_init(int hwcpuid)
 	int node, cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = hwcpuid / NLM_CPUS_PER_NODE;
 	cpu  = hwcpuid % NLM_CPUS_PER_NODE;
+=======
+	node = nlm_cpuid_to_node(hwcpuid);
+	cpu  = hwcpuid % nlm_threads_per_node();
+>>>>>>> v3.18
 =======
 	node = nlm_cpuid_to_node(hwcpuid);
 	cpu  = hwcpuid % nlm_threads_per_node();
@@ -296,6 +322,7 @@ asmlinkage void plat_irq_dispatch(void)
 	node = nlm_nodeid();
 	eirr = read_c0_eirr_and_eimr();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	i = __ilog2_u64(eirr);
 	if (i == -1)
@@ -304,22 +331,30 @@ asmlinkage void plat_irq_dispatch(void)
 	/* per-CPU IRQs don't need translation */
 	if (eirr & PERCPU_IRQ_MASK) {
 =======
+=======
+>>>>>>> v3.18
 	if (eirr == 0)
 		return;
 
 	i = __ffs64(eirr);
 	/* per-CPU IRQs don't need translation */
 	if (i < PIC_IRQ_BASE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		do_IRQ(i);
 		return;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* top level irq handling */
 	do_IRQ(nlm_irq_to_xirq(node, i));
 }
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PCI_MSI) && defined(CONFIG_CPU_XLP)
 	/* PCI interrupts need a second level dispatch for MSI bits */
 	if (i >= PIC_PCIE_LINK_MSI_IRQ(0) && i <= PIC_PCIE_LINK_MSI_IRQ(3)) {
@@ -413,4 +448,7 @@ void __init arch_init_irq(void)
 	of_irq_init(xlp_pic_irq_ids);
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

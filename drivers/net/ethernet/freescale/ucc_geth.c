@@ -32,6 +32,11 @@
 #include <linux/phy.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -439,11 +444,14 @@ static void hw_add_addr_in_hash(struct ucc_geth_private *ugeth,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int compare_addr(u8 **addr1, u8 **addr2)
 {
 	return memcmp(addr1, addr2, ETH_ALEN);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef DEBUG
@@ -1740,9 +1748,12 @@ static int init_phy(struct net_device *dev)
 	phydev = of_phy_connect(dev, ug_info->phy_node, &adjust_link, 0,
 				priv->phy_interface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!phydev)
 		phydev = of_phy_connect_fixed_link(dev, &adjust_link,
 						   priv->phy_interface);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!phydev) {
@@ -2414,7 +2425,10 @@ static int ucc_geth_startup(struct ucc_geth_private *ugeth)
 			pr_err("Bad number of Rx threads value\n");
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2440,7 +2454,10 @@ static int ucc_geth_startup(struct ucc_geth_private *ugeth)
 			pr_err("Bad number of Tx threads value\n");
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -3014,17 +3031,23 @@ static int ucc_geth_startup(struct ucc_geth_private *ugeth)
 		size += THREAD_RX_PRAM_ADDITIONAL_FOR_EXTENDED_FILTERING;
 		if (ug_info->largestexternallookupkeysize ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    QE_FLTR_TABLE_LOOKUP_KEY_SIZE_8_BYTES)
 			size +=
 			    THREAD_RX_PRAM_ADDITIONAL_FOR_EXTENDED_FILTERING_8;
 		if (ug_info->largestexternallookupkeysize ==
 		    QE_FLTR_TABLE_LOOKUP_KEY_SIZE_16_BYTES)
 =======
+=======
+>>>>>>> v3.18
 		    QE_FLTR_LARGEST_EXTERNAL_TABLE_LOOKUP_KEY_SIZE_8_BYTES)
 			size +=
 			    THREAD_RX_PRAM_ADDITIONAL_FOR_EXTENDED_FILTERING_8;
 		if (ug_info->largestexternallookupkeysize ==
 		    QE_FLTR_LARGEST_EXTERNAL_TABLE_LOOKUP_KEY_SIZE_16_BYTES)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			size +=
 			    THREAD_RX_PRAM_ADDITIONAL_FOR_EXTENDED_FILTERING_16;
@@ -3290,7 +3313,11 @@ static int ucc_geth_tx(struct net_device *dev, u8 txQ)
 		dev->stats.tx_packets++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -3594,7 +3621,11 @@ static void ucc_geth_timeout(struct net_device *dev)
 static int ucc_geth_suspend(struct platform_device *ofdev, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -3626,7 +3657,11 @@ static int ucc_geth_suspend(struct platform_device *ofdev, pm_message_t state)
 static int ucc_geth_resume(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -3831,7 +3866,10 @@ static int ucc_geth_probe(struct platform_device* ofdev)
 
 	ug_info->phy_node = of_parse_phandle(np, "phy-handle", 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!ug_info->phy_node && of_phy_is_fixed_link(np)) {
 		/*
 		 * In the case of a fixed PHY, the DT node associated
@@ -3842,6 +3880,9 @@ static int ucc_geth_probe(struct platform_device* ofdev)
 			return err;
 		ug_info->phy_node = of_node_get(np);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Find the TBI PHY node.  If it's not there, we don't support SGMII */
@@ -3910,14 +3951,20 @@ static int ucc_geth_probe(struct platform_device* ofdev)
 	dev = alloc_etherdev(sizeof(*ugeth));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev == NULL)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (dev == NULL) {
 		of_node_put(ug_info->tbi_node);
 		of_node_put(ug_info->phy_node);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ugeth = netdev_priv(dev);
@@ -3953,6 +4000,11 @@ static int ucc_geth_probe(struct platform_device* ofdev)
 			       dev->name);
 		free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		of_node_put(ug_info->tbi_node);
+		of_node_put(ug_info->phy_node);
+>>>>>>> v3.18
 =======
 		of_node_put(ug_info->tbi_node);
 		of_node_put(ug_info->phy_node);
@@ -3963,7 +4015,11 @@ static int ucc_geth_probe(struct platform_device* ofdev)
 	mac_addr = of_get_mac_address(np);
 	if (mac_addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(dev->dev_addr, mac_addr, 6);
+=======
+		memcpy(dev->dev_addr, mac_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(dev->dev_addr, mac_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -3979,8 +4035,12 @@ static int ucc_geth_probe(struct platform_device* ofdev)
 static int ucc_geth_remove(struct platform_device* ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *device = &ofdev->dev;
 	struct net_device *dev = dev_get_drvdata(device);
+=======
+	struct net_device *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -3990,7 +4050,12 @@ static int ucc_geth_remove(struct platform_device* ofdev)
 	free_netdev(dev);
 	ucc_geth_memclean(ugeth);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(device, NULL);
+=======
+	of_node_put(ugeth->ug_info->tbi_node);
+	of_node_put(ugeth->ug_info->phy_node);
+>>>>>>> v3.18
 =======
 	of_node_put(ugeth->ug_info->tbi_node);
 	of_node_put(ugeth->ug_info->phy_node);

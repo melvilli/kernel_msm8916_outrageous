@@ -140,6 +140,12 @@ clocks and IDs.
 	reserved		125
 	wdt_ipg			126
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cko_div			127
+	cko_sel			128
+	cko			129
+>>>>>>> v3.18
 =======
 	cko_div			127
 	cko_sel			128

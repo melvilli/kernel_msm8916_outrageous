@@ -117,11 +117,14 @@ static int adt7316_spi_probe(struct spi_device *spi_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adt7316_spi_remove(struct spi_device *spi_dev)
 {
 	return adt7316_remove(&spi_dev->dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct spi_device_id adt7316_spi_id[] = {
@@ -144,7 +147,10 @@ static struct spi_driver adt7316_driver = {
 	},
 	.probe = adt7316_spi_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = adt7316_spi_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = adt7316_spi_id,
@@ -153,8 +159,12 @@ module_spi_driver(adt7316_driver);
 
 MODULE_AUTHOR("Sonic Zhang <sonic.zhang@analog.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("SPI bus driver for Analog Devices ADT7316/7/8 and"
 			"ADT7516/7/9 digital temperature sensor, ADC and DAC");
+=======
+MODULE_DESCRIPTION("SPI bus driver for Analog Devices ADT7316/7/8 and ADT7516/7/9 digital temperature sensor, ADC and DAC");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("SPI bus driver for Analog Devices ADT7316/7/8 and ADT7516/7/9 digital temperature sensor, ADC and DAC");
 >>>>>>> v3.18

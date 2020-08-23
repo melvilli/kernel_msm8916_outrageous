@@ -23,11 +23,17 @@
 struct firmware_ops {
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Inform the firmware we intend to enter CPU idle mode
 	 */
 	int (*prepare_idle)(void);
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Enters CPU idle mode
 	 */

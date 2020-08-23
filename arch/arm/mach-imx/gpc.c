@@ -28,7 +28,11 @@ static u32 gpc_wake_irqs[IMR_NUM];
 static u32 gpc_saved_imrs[IMR_NUM];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void imx_gpc_pre_suspend(void)
+=======
+void imx_gpc_pre_suspend(bool arm_power_off)
+>>>>>>> v3.18
 =======
 void imx_gpc_pre_suspend(bool arm_power_off)
 >>>>>>> v3.18
@@ -38,7 +42,12 @@ void imx_gpc_pre_suspend(bool arm_power_off)
 
 	/* Tell GPC to power off ARM core when suspend */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel_relaxed(0x1, gpc_base + GPC_PGC_CPU_PDN);
+=======
+	if (arm_power_off)
+		writel_relaxed(0x1, gpc_base + GPC_PGC_CPU_PDN);
+>>>>>>> v3.18
 =======
 	if (arm_power_off)
 		writel_relaxed(0x1, gpc_base + GPC_PGC_CPU_PDN);
@@ -100,7 +109,11 @@ void imx_gpc_restore_all(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void imx_gpc_irq_unmask(struct irq_data *d)
+=======
+void imx_gpc_irq_unmask(struct irq_data *d)
+>>>>>>> v3.18
 =======
 void imx_gpc_irq_unmask(struct irq_data *d)
 >>>>>>> v3.18
@@ -119,7 +132,11 @@ void imx_gpc_irq_unmask(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void imx_gpc_irq_mask(struct irq_data *d)
+=======
+void imx_gpc_irq_mask(struct irq_data *d)
+>>>>>>> v3.18
 =======
 void imx_gpc_irq_mask(struct irq_data *d)
 >>>>>>> v3.18

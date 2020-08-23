@@ -6,7 +6,10 @@ config INFINIBAND_QIB
 	channel adapters.  This driver does not support the Intel
 	HyperTransport card (model QHT7140).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config INFINIBAND_QIB_DCA
 	bool "QIB DCA support"
@@ -15,4 +18,7 @@ config INFINIBAND_QIB_DCA
 	---help---
 	Setting this enables DCA support on some Intel chip sets
 	with the iba7322 HCA.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

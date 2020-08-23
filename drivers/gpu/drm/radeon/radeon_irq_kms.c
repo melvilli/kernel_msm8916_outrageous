@@ -33,6 +33,11 @@
 #include "atom.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_runtime.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/pm_runtime.h>
 
@@ -43,7 +48,11 @@
  * radeon_driver_irq_handler_kms - irq handler for KMS
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @DRM_IRQ_ARGS: args
+=======
+ * @int irq, void *arg: args
+>>>>>>> v3.18
 =======
  * @int irq, void *arg: args
 >>>>>>> v3.18
@@ -53,6 +62,7 @@
  * irq handler callback.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t radeon_driver_irq_handler_kms(DRM_IRQ_ARGS)
 {
 	struct drm_device *dev = (struct drm_device *) arg;
@@ -60,6 +70,8 @@ irqreturn_t radeon_driver_irq_handler_kms(DRM_IRQ_ARGS)
 
 	return radeon_irq_process(rdev);
 =======
+=======
+>>>>>>> v3.18
 irqreturn_t radeon_driver_irq_handler_kms(int irq, void *arg)
 {
 	struct drm_device *dev = (struct drm_device *) arg;
@@ -70,6 +82,9 @@ irqreturn_t radeon_driver_irq_handler_kms(int irq, void *arg)
 	if (ret == IRQ_HANDLED)
 		pm_runtime_mark_last_busy(dev->dev);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -96,6 +111,7 @@ static void radeon_hotplug_work_func(struct work_struct *work)
 	struct drm_connector *connector;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we can race here at startup, some boards seem to trigger
 	 * hotplug irqs when they shouldn't. */
 	if (!rdev->mode_info.mode_config_initialized)
@@ -104,12 +120,17 @@ static void radeon_hotplug_work_func(struct work_struct *work)
 	mutex_lock(&mode_config->mutex);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (mode_config->num_connector) {
 		list_for_each_entry(connector, &mode_config->connector_list, head)
 			radeon_connector_hotplug(connector);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&mode_config->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Just fire off a uevent and let userspace tell us what to do */
@@ -135,6 +156,10 @@ void radeon_driver_irq_preinstall_kms(struct drm_device *dev)
 	for (i = 0; i < RADEON_NUM_RINGS; i++)
 		atomic_set(&rdev->irq.ring_int[i], 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rdev->irq.dpm_thermal = false;
+>>>>>>> v3.18
 =======
 	rdev->irq.dpm_thermal = false;
 >>>>>>> v3.18
@@ -186,6 +211,10 @@ void radeon_driver_irq_uninstall_kms(struct drm_device *dev)
 	for (i = 0; i < RADEON_NUM_RINGS; i++)
 		atomic_set(&rdev->irq.ring_int[i], 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rdev->irq.dpm_thermal = false;
+>>>>>>> v3.18
 =======
 	rdev->irq.dpm_thermal = false;
 >>>>>>> v3.18
@@ -221,7 +250,10 @@ static bool radeon_msi_ok(struct radeon_device *rdev)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Older chips have a HW limitation, they can only generate 40 bits
 	 * of address for "64-bit" MSIs which breaks on some platforms, notably
@@ -232,6 +264,9 @@ static bool radeon_msi_ok(struct radeon_device *rdev)
 		rdev->pdev->no_64bit_msi = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* force MSI on */
 	if (radeon_msi == 1)
@@ -313,6 +348,7 @@ int radeon_irq_kms_init(struct radeon_device *rdev)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->irq.installed = true;
 	r = drm_irq_install(rdev->ddev);
 	if (r) {
@@ -324,6 +360,8 @@ int radeon_irq_kms_init(struct radeon_device *rdev)
 	INIT_WORK(&rdev->audio_work, r600_audio_update_hdmi);
 
 =======
+=======
+>>>>>>> v3.18
 
 	INIT_WORK(&rdev->hotplug_work, radeon_hotplug_work_func);
 	INIT_WORK(&rdev->audio_work, r600_audio_update_hdmi);
@@ -336,6 +374,9 @@ int radeon_irq_kms_init(struct radeon_device *rdev)
 		return r;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DRM_INFO("radeon: irq initialized.\n");
 	return 0;
@@ -386,7 +427,10 @@ void radeon_irq_kms_sw_irq_get(struct radeon_device *rdev, int ring)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * radeon_irq_kms_sw_irq_get_delayed - enable software interrupt
  *
  * @rdev: radeon device pointer
@@ -402,6 +446,9 @@ bool radeon_irq_kms_sw_irq_get_delayed(struct radeon_device *rdev, int ring)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * radeon_irq_kms_sw_irq_put - disable software interrupt
  *

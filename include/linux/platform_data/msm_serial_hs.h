@@ -1,7 +1,10 @@
 /*
  * Copyright (C) 2008 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010-2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Author: Nick Pelly <npelly@google.com>
@@ -21,6 +24,7 @@
 
 #include <linux/serial_core.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct msm_serial_hs_platform_data - platform device data
@@ -65,6 +69,8 @@ struct uart_port *msm_hs_get_uart_port(int port_index);
 void msm_hs_set_mctrl(struct uart_port *uport,
 				    unsigned int mctrl);
 =======
+=======
+>>>>>>> v3.18
 /* API to request the uart clock off or on for low power management
  * Clients should call request_clock_off() when no uart data is expected,
  * and must call request_clock_on() before any further uart data can be
@@ -94,5 +100,8 @@ struct msm_serial_hs_platform_data {
 	void (*exit_lpm_cb)(struct uart_port *);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -21,6 +21,10 @@
 #include <net/netfilter/nf_conntrack_helper.h>
 #include <net/netfilter/nf_conntrack_expect.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_conntrack_seqadj.h>
 >>>>>>> v3.18
@@ -159,7 +163,11 @@ static unsigned int nf_nat_sip(struct sk_buff *skb, unsigned int protoff,
 
 	/* Basic rules: requests and responses. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strnicmp(*dptr, "SIP/2.0", strlen("SIP/2.0")) != 0) {
+=======
+	if (strncasecmp(*dptr, "SIP/2.0", strlen("SIP/2.0")) != 0) {
+>>>>>>> v3.18
 =======
 	if (strncasecmp(*dptr, "SIP/2.0", strlen("SIP/2.0")) != 0) {
 >>>>>>> v3.18
@@ -317,7 +325,11 @@ static void nf_nat_sip_seq_adjust(struct sk_buff *skb, unsigned int protoff,
 
 	th = (struct tcphdr *)(skb->data + protoff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_nat_set_seq_adjust(ct, ctinfo, th->seq, off);
+=======
+	nf_ct_seqadj_set(ct, ctinfo, th->seq, off);
+>>>>>>> v3.18
 =======
 	nf_ct_seqadj_set(ct, ctinfo, th->seq, off);
 >>>>>>> v3.18
@@ -637,6 +649,7 @@ static struct nf_ct_helper_expectfn sip_nat = {
 static void __exit nf_nat_sip_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RCU_INIT_POINTER(nf_nat_sip_hook, NULL);
 	RCU_INIT_POINTER(nf_nat_sip_seq_adjust_hook, NULL);
 	RCU_INIT_POINTER(nf_nat_sip_expect_hook, NULL);
@@ -648,10 +661,15 @@ static void __exit nf_nat_sip_fini(void)
 	RCU_INIT_POINTER(nf_nat_sip_hooks, NULL);
 
 >>>>>>> v3.18
+=======
+	RCU_INIT_POINTER(nf_nat_sip_hooks, NULL);
+
+>>>>>>> v3.18
 	nf_ct_helper_expectfn_unregister(&sip_nat);
 	synchronize_rcu();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init nf_nat_sip_init(void)
 {
@@ -670,6 +688,8 @@ static int __init nf_nat_sip_init(void)
 	RCU_INIT_POINTER(nf_nat_sdp_session_hook, nf_nat_sdp_session);
 	RCU_INIT_POINTER(nf_nat_sdp_media_hook, nf_nat_sdp_media);
 =======
+=======
+>>>>>>> v3.18
 static const struct nf_nat_sip_hooks sip_hooks = {
 	.msg		= nf_nat_sip,
 	.seq_adjust	= nf_nat_sip_seq_adjust,
@@ -684,6 +704,9 @@ static int __init nf_nat_sip_init(void)
 {
 	BUG_ON(nf_nat_sip_hooks != NULL);
 	RCU_INIT_POINTER(nf_nat_sip_hooks, &sip_hooks);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nf_ct_helper_expectfn_register(&sip_nat);
 	return 0;

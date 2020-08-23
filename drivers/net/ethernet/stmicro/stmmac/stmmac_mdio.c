@@ -28,6 +28,12 @@
 #include <linux/phy.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_gpio.h>
@@ -132,7 +138,11 @@ static int stmmac_mdio_write(struct mii_bus *bus, int phyaddr, int phyreg,
  * Description: reset the MII bus
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stmmac_mdio_reset(struct mii_bus *bus)
+=======
+int stmmac_mdio_reset(struct mii_bus *bus)
+>>>>>>> v3.18
 =======
 int stmmac_mdio_reset(struct mii_bus *bus)
 >>>>>>> v3.18
@@ -142,11 +152,14 @@ int stmmac_mdio_reset(struct mii_bus *bus)
 	struct stmmac_priv *priv = netdev_priv(ndev);
 	unsigned int mii_address = priv->hw->mii.addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (priv->plat->mdio_bus_data->phy_reset) {
 		pr_debug("stmmac_mdio_reset: calling phy_reset\n");
 		priv->plat->mdio_bus_data->phy_reset(priv->plat->bsp_priv);
 =======
+=======
+>>>>>>> v3.18
 	struct stmmac_mdio_bus_data *data = priv->plat->mdio_bus_data;
 
 #ifdef CONFIG_OF
@@ -186,6 +199,9 @@ int stmmac_mdio_reset(struct mii_bus *bus)
 	if (data->phy_reset) {
 		pr_debug("stmmac_mdio_reset: calling phy_reset\n");
 		data->phy_reset(priv->plat->bsp_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -220,11 +236,14 @@ int stmmac_mdio_register(struct net_device *ndev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mdio_bus_data->irqs)
 		irqlist = mdio_bus_data->irqs;
 	else
 		irqlist = priv->mii_irq;
 =======
+=======
+>>>>>>> v3.18
 	if (mdio_bus_data->irqs) {
 		irqlist = mdio_bus_data->irqs;
 	} else {
@@ -237,6 +256,9 @@ int stmmac_mdio_register(struct net_device *ndev)
 	if (priv->device->of_node)
 		mdio_bus_data->reset_gpio = -1;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	new_bus->name = "stmmac";
@@ -275,7 +297,11 @@ int stmmac_mdio_register(struct net_device *ndev)
 
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * If we're  going to bind the MAC to this PHY bus,
+=======
+			 * If we're going to bind the MAC to this PHY bus,
+>>>>>>> v3.18
 =======
 			 * If we're going to bind the MAC to this PHY bus,
 >>>>>>> v3.18
@@ -308,7 +334,11 @@ int stmmac_mdio_register(struct net_device *ndev)
 
 	if (!found) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: No PHY found\n", ndev->name);
+=======
+		pr_warn("%s: No PHY found\n", ndev->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: No PHY found\n", ndev->name);
 >>>>>>> v3.18

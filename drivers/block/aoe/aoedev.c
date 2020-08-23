@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012 Coraid, Inc.  See COPYING for GPL terms. */
+=======
+/* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
 >>>>>>> v3.18
@@ -17,6 +21,10 @@
 #include <linux/kdev_t.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/string.h>
+>>>>>>> v3.18
 =======
 #include <linux/string.h>
 >>>>>>> v3.18
@@ -250,7 +258,11 @@ static int
 user_req(char *s, size_t slen, struct aoedev *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *p;
+=======
+	const char *p;
+>>>>>>> v3.18
 =======
 	const char *p;
 >>>>>>> v3.18
@@ -259,11 +271,15 @@ user_req(char *s, size_t slen, struct aoedev *d)
 	if (!d->gd)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = strrchr(d->gd->disk_name, '/');
 	if (!p)
 		p = d->gd->disk_name;
 	else
 		p += 1;
+=======
+	p = kbasename(d->gd->disk_name);
+>>>>>>> v3.18
 =======
 	p = kbasename(d->gd->disk_name);
 >>>>>>> v3.18
@@ -295,6 +311,10 @@ freedev(struct aoedev *d)
 	del_timer_sync(&d->timer);
 	if (d->gd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		aoedisk_rm_debugfs(d);
+>>>>>>> v3.18
 =======
 		aoedisk_rm_debugfs(d);
 >>>>>>> v3.18
@@ -539,7 +559,10 @@ aoedev_exit(void)
 {
 	flush_scheduled_work();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aoe_flush_iocq();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	flush(NULL, 0, EXITING);

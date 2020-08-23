@@ -198,6 +198,7 @@ typedef struct _hfc4s8s_hw {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************/
 /* inline function defines */
 /***************************/
@@ -217,6 +218,8 @@ typedef struct _hfc4s8s_hw {
 
 #else
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* inline functions io mapped */
@@ -310,8 +313,11 @@ wait_busy(hfc4s8s_hw *a)
 #define PCI_ENA_REGIO	0x01
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* HISAX_HFC4S8S_PCIMEM */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /******************************************************/
@@ -731,6 +737,7 @@ rx_d_frame(struct hfc4s8s_l1 *l1p, int ech)
 			} else {
 				/* read errornous D frame */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef HISAX_HFC4S8S_PCIMEM
 				SetRegAddr(l1p->hw, A_FIFO_DATA0);
@@ -743,21 +750,30 @@ rx_d_frame(struct hfc4s8s_l1 *l1p, int ech)
 					fRead_hfc32(l1p->hw);
 #endif
 =======
+=======
+>>>>>>> v3.18
 				SetRegAddr(l1p->hw, A_FIFO_DATA0);
 
 				while (z1 >= 4) {
 					fRead_hfc32(l1p->hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					z1 -= 4;
 				}
 
 				while (z1--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 					Read_hfc8(l1p->hw, A_FIFO_DATA0);
 #else
 				fRead_hfc8(l1p->hw);
 #endif
+=======
+					fRead_hfc8(l1p->hw);
+>>>>>>> v3.18
 =======
 					fRead_hfc8(l1p->hw);
 >>>>>>> v3.18
@@ -770,6 +786,7 @@ rx_d_frame(struct hfc4s8s_l1 *l1p, int ech)
 
 		cp = skb->data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef HISAX_HFC4S8S_PCIMEM
 		SetRegAddr(l1p->hw, A_FIFO_DATA0);
@@ -788,17 +805,27 @@ rx_d_frame(struct hfc4s8s_l1 *l1p, int ech)
 		while (z1 >= 4) {
 			*((unsigned long *) cp) = fRead_hfc32(l1p->hw);
 >>>>>>> v3.18
+=======
+		SetRegAddr(l1p->hw, A_FIFO_DATA0);
+
+		while (z1 >= 4) {
+			*((unsigned long *) cp) = fRead_hfc32(l1p->hw);
+>>>>>>> v3.18
 			cp += 4;
 			z1 -= 4;
 		}
 
 		while (z1--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 			*cp++ = Read_hfc8(l1p->hw, A_FIFO_DATA0);
 #else
 		*cp++ = fRead_hfc8(l1p->hw);
 #endif
+=======
+			*cp++ = fRead_hfc8(l1p->hw);
+>>>>>>> v3.18
 =======
 			*cp++ = fRead_hfc8(l1p->hw);
 >>>>>>> v3.18
@@ -888,6 +915,7 @@ rx_b_frame(struct hfc4s8s_btype *bch)
 			return;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HISAX_HFC4S8S_PCIMEM
 		SetRegAddr(l1->hw, A_FIFO_DATA0);
 #endif
@@ -901,11 +929,16 @@ rx_b_frame(struct hfc4s8s_btype *bch)
 				fRead_hfc32(l1->hw);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		SetRegAddr(l1->hw, A_FIFO_DATA0);
 
 		while (z1 >= 4) {
 			*((unsigned long *) bch->rx_ptr) =
 				fRead_hfc32(l1->hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bch->rx_ptr += 4;
 			z1 -= 4;
@@ -913,11 +946,15 @@ rx_b_frame(struct hfc4s8s_btype *bch)
 
 		while (z1--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 			*(bch->rx_ptr++) = Read_hfc8(l1->hw, A_FIFO_DATA0);
 #else
 		*(bch->rx_ptr++) = fRead_hfc8(l1->hw);
 #endif
+=======
+			*(bch->rx_ptr++) = fRead_hfc8(l1->hw);
+>>>>>>> v3.18
 =======
 			*(bch->rx_ptr++) = fRead_hfc8(l1->hw);
 >>>>>>> v3.18
@@ -981,6 +1018,7 @@ tx_d_frame(struct hfc4s8s_l1 *l1p)
 		cp = skb->data;
 		cnt = skb->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HISAX_HFC4S8S_PCIMEM
 		SetRegAddr(l1p->hw, A_FIFO_DATA0);
 #endif
@@ -1000,10 +1038,18 @@ tx_d_frame(struct hfc4s8s_l1 *l1p)
 			SetRegAddr(l1p->hw, A_FIFO_DATA0);
 			fWrite_hfc32(l1p->hw, *(unsigned long *) cp);
 >>>>>>> v3.18
+=======
+		SetRegAddr(l1p->hw, A_FIFO_DATA0);
+
+		while (cnt >= 4) {
+			SetRegAddr(l1p->hw, A_FIFO_DATA0);
+			fWrite_hfc32(l1p->hw, *(unsigned long *) cp);
+>>>>>>> v3.18
 			cp += 4;
 			cnt -= 4;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 		while (cnt--)
@@ -1012,6 +1058,10 @@ tx_d_frame(struct hfc4s8s_l1 *l1p)
 		while (cnt--)
 			fWrite_hfc8(l1p->hw, *cp++);
 #endif
+=======
+		while (cnt--)
+			fWrite_hfc8(l1p->hw, *cp++);
+>>>>>>> v3.18
 =======
 		while (cnt--)
 			fWrite_hfc8(l1p->hw, *cp++);
@@ -1091,6 +1141,7 @@ tx_b_frame(struct hfc4s8s_btype *bch)
 		bch->tx_cnt += cnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HISAX_HFC4S8S_PCIMEM
 		SetRegAddr(l1->hw, A_FIFO_DATA0);
 #endif
@@ -1106,17 +1157,26 @@ tx_b_frame(struct hfc4s8s_btype *bch)
 		while (cnt >= 4) {
 			fWrite_hfc32(l1->hw, *(unsigned long *) cp);
 >>>>>>> v3.18
+=======
+		SetRegAddr(l1->hw, A_FIFO_DATA0);
+		while (cnt >= 4) {
+			fWrite_hfc32(l1->hw, *(unsigned long *) cp);
+>>>>>>> v3.18
 			cp += 4;
 			cnt -= 4;
 		}
 
 		while (cnt--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 			fWrite_hfc8(l1->hw, A_FIFO_DATA0, *cp++);
 #else
 		fWrite_hfc8(l1->hw, *cp++);
 #endif
+=======
+			fWrite_hfc8(l1->hw, *cp++);
+>>>>>>> v3.18
 =======
 			fWrite_hfc8(l1->hw, *cp++);
 >>>>>>> v3.18
@@ -1345,10 +1405,15 @@ hfc4s8s_interrupt(int intno, void *dev_id)
 		return IRQ_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	HISAX_HFC4S8S_PCIMEM
 	/* read current selected regsister */
 	old_ioreg = GetRegAddr(hw);
 #endif
+=======
+	/* read current selected regsister */
+	old_ioreg = GetRegAddr(hw);
+>>>>>>> v3.18
 =======
 	/* read current selected regsister */
 	old_ioreg = GetRegAddr(hw);
@@ -1361,9 +1426,13 @@ hfc4s8s_interrupt(int intno, void *dev_id)
 	    (b = (Read_hfc8(hw, R_STATUS) & (M_MISC_IRQSTA | M_FR_IRQSTA)))
 	    && !hw->mr.r_irq_statech) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	HISAX_HFC4S8S_PCIMEM
 		SetRegAddr(hw, old_ioreg);
 #endif
+=======
+		SetRegAddr(hw, old_ioreg);
+>>>>>>> v3.18
 =======
 		SetRegAddr(hw, old_ioreg);
 >>>>>>> v3.18
@@ -1395,9 +1464,13 @@ hfc4s8s_interrupt(int intno, void *dev_id)
 	schedule_work(&hw->tqueue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	HISAX_HFC4S8S_PCIMEM
 	SetRegAddr(hw, old_ioreg);
 #endif
+=======
+	SetRegAddr(hw, old_ioreg);
+>>>>>>> v3.18
 =======
 	SetRegAddr(hw, old_ioreg);
 >>>>>>> v3.18
@@ -1548,6 +1621,7 @@ release_pci_ports(hfc4s8s_hw *hw)
 {
 	pci_write_config_word(hw->pdev, PCI_COMMAND, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 	if (hw->membase)
 		iounmap((void *) hw->membase);
@@ -1555,6 +1629,10 @@ release_pci_ports(hfc4s8s_hw *hw)
 	if (hw->iobase)
 		release_region(hw->iobase, 8);
 #endif
+=======
+	if (hw->iobase)
+		release_region(hw->iobase, 8);
+>>>>>>> v3.18
 =======
 	if (hw->iobase)
 		release_region(hw->iobase, 8);
@@ -1568,11 +1646,15 @@ static void
 enable_pci_ports(hfc4s8s_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 	pci_write_config_word(hw->pdev, PCI_COMMAND, PCI_ENA_MEMIO);
 #else
 	pci_write_config_word(hw->pdev, PCI_COMMAND, PCI_ENA_REGIO);
 #endif
+=======
+	pci_write_config_word(hw->pdev, PCI_COMMAND, PCI_ENA_REGIO);
+>>>>>>> v3.18
 =======
 	pci_write_config_word(hw->pdev, PCI_COMMAND, PCI_ENA_REGIO);
 >>>>>>> v3.18
@@ -1647,6 +1729,7 @@ setup_instance(hfc4s8s_hw *hw)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 	printk(KERN_INFO
 	       "HFC-4S/8S: found PCI card at membase 0x%p, irq %d\n",
@@ -1656,6 +1739,11 @@ setup_instance(hfc4s8s_hw *hw)
 	       "HFC-4S/8S: found PCI card at iobase 0x%x, irq %d\n",
 	       hw->iobase, hw->irq);
 #endif
+=======
+	printk(KERN_INFO
+	       "HFC-4S/8S: found PCI card at iobase 0x%x, irq %d\n",
+	       hw->iobase, hw->irq);
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO
 	       "HFC-4S/8S: found PCI card at iobase 0x%x, irq %d\n",
@@ -1706,6 +1794,7 @@ hfc4s8s_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	hw->iobase = pci_resource_start(pdev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HISAX_HFC4S8S_PCIMEM
 	hw->hw_membase = (u_char *) pci_resource_start(pdev, 1);
 	hw->membase = ioremap((ulong) hw->hw_membase, 256);
@@ -1718,12 +1807,17 @@ hfc4s8s_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (!request_region(hw->iobase, 8, hw->card_name)) {
 		printk(KERN_INFO
 		       "HFC-4S/8S: failed to request address space at 0x%04x\n",
 		       hw->iobase);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_set_drvdata(pdev, hw);

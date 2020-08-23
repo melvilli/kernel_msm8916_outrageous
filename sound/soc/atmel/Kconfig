@@ -14,6 +14,10 @@ config SND_ATMEL_SOC_DMA
 	tristate
 	depends on SND_ATMEL_SOC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SND_SOC_GENERIC_DMAENGINE_PCM
+>>>>>>> v3.18
 =======
 	select SND_SOC_GENERIC_DMAENGINE_PCM
 >>>>>>> v3.18
@@ -29,7 +33,11 @@ config SND_ATMEL_SOC_SSC
 config SND_AT91_SOC_SAM9G20_WM8731
 	tristate "SoC Audio support for WM8731-based At91sam9g20 evaluation board"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_AT91 && ATMEL_SSC && SND_ATMEL_SOC && AT91_PROGRAMMABLE_CLOCKS
+=======
+	depends on ARCH_AT91 && ATMEL_SSC && SND_ATMEL_SOC
+>>>>>>> v3.18
 =======
 	depends on ARCH_AT91 && ATMEL_SSC && SND_ATMEL_SOC
 >>>>>>> v3.18
@@ -41,7 +49,10 @@ config SND_AT91_SOC_SAM9G20_WM8731
 	  AT91sam9g20 evaluation board.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SND_ATMEL_SOC_WM8904
 	tristate "Atmel ASoC driver for boards using WM8904 codec"
 	depends on ARCH_AT91 && ATMEL_SSC && SND_ATMEL_SOC && I2C
@@ -62,6 +73,9 @@ config SND_AT91_SOC_SAM9X5_WM8731
 	  Say Y if you want to add support for audio SoC on an
 	  at91sam9x5 based board that is using WM8731 codec.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SND_AT91_SOC_AFEB9260
 	tristate "SoC Audio support for AFEB9260 board"
@@ -69,7 +83,11 @@ config SND_AT91_SOC_AFEB9260
 	select SND_ATMEL_SOC_PDC
 	select SND_ATMEL_SOC_SSC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_SOC_TLV320AIC23
+=======
+	select SND_SOC_TLV320AIC23_I2C
+>>>>>>> v3.18
 =======
 	select SND_SOC_TLV320AIC23_I2C
 >>>>>>> v3.18

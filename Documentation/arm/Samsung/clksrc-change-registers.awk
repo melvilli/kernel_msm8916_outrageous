@@ -69,7 +69,10 @@ BEGIN {
     while (getline line < ARGV[1] > 0) {
 	if (line ~ /\#define.*_MASK/ &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !(line ~ /S5PC100_EPLL_MASK/) &&
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	    !(line ~ /USB_SIG_MASK/)) {

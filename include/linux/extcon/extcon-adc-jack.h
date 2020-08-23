@@ -21,15 +21,21 @@
 /**
  * struct adc_jack_cond - condition to use an extcon state
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state      - the corresponding extcon state (if 0, this struct denotes
  *             the last adc_jack_cond element among the array)
  * @min_adc    - min adc value for this condition
  * @max_adc    - max adc value for this condition
 =======
+=======
+>>>>>>> v3.18
  * @state:		the corresponding extcon state (if 0, this struct
  *			denotes the last adc_jack_cond element among the array)
  * @min_adc:		min adc value for this condition
  * @max_adc:		max adc value for this condition
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * For example, if { .state = 0x3, .min_adc = 100, .max_adc = 200}, it means
@@ -41,7 +47,11 @@
  */
 struct adc_jack_cond {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 state; /* extcon state value. 0 if invalid */
+=======
+	u32 state;	/* extcon state value. 0 if invalid */
+>>>>>>> v3.18
 =======
 	u32 state;	/* extcon state value. 0 if invalid */
 >>>>>>> v3.18
@@ -51,6 +61,7 @@ struct adc_jack_cond {
 
 /**
  * struct adc_jack_pdata - platform data for adc jack device.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @name       - name of the extcon device. If null, "adc-jack" is used.
  * @consumer_channel - Unique name to identify the channel on the consumer
@@ -66,6 +77,8 @@ struct adc_jack_cond {
  *                     describe such delays with @handling_delay_ms, which
  *                     is rounded-off by jiffies.
 =======
+=======
+>>>>>>> v3.18
  * @name:		name of the extcon device. If null, "adc-jack" is used.
  * @consumer_channel:	Unique name to identify the channel on the consumer
  *			side. This typically describes the channels used within
@@ -79,21 +92,30 @@ struct adc_jack_cond {
  *			milli-seconds after the interrupt occurs. You may
  *			describe such delays with @handling_delay_ms, which
  *			is rounded-off by jiffies.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct adc_jack_pdata {
 	const char *name;
 	const char *consumer_channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * The last entry should be NULL
 	 */
 	const char **cable_names;
 =======
+=======
+>>>>>>> v3.18
 
 	/* The last entry should be NULL */
 	const char **cable_names;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* The last entry's state should be 0 */
 	struct adc_jack_cond *adc_conditions;

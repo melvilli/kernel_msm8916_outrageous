@@ -177,13 +177,19 @@ static int sdv_register_irqsupport(struct sdv_gpio_chip_data *sd,
 	sd->id = irq_domain_add_legacy(pdev->dev.of_node, SDV_NUM_PUB_GPIOS,
 				sd->irq_base, 0, &irq_domain_sdv_ops, sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sd->id)
 		goto out_free_irq;
 =======
+=======
+>>>>>>> v3.18
 	if (!sd->id) {
 		ret = -ENODEV;
 		goto out_free_irq;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 out_free_irq:
@@ -220,13 +226,19 @@ static int sdv_gpio_probe(struct pci_dev *pdev,
 
 	addr = pci_resource_start(pdev, GPIO_BAR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!addr)
 		goto release_reg;
 =======
+=======
+>>>>>>> v3.18
 	if (!addr) {
 		ret = -ENODEV;
 		goto release_reg;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sd->gpio_pub_base = ioremap(addr, pci_resource_len(pdev, GPIO_BAR));
 
@@ -276,9 +288,13 @@ static void sdv_gpio_remove(struct pci_dev *pdev)
 	irq_free_descs(sd->irq_base, SDV_NUM_PUB_GPIOS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpiochip_remove(&sd->bgpio.gc))
 		dev_err(&pdev->dev, "gpiochip_remove() failed.\n");
 
+=======
+	gpiochip_remove(&sd->bgpio.gc);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&sd->bgpio.gc);
 >>>>>>> v3.18
@@ -289,7 +305,11 @@ static void sdv_gpio_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sdv_gpio_pci_ids) = {
+=======
+static const struct pci_device_id sdv_gpio_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sdv_gpio_pci_ids[] = {
 >>>>>>> v3.18

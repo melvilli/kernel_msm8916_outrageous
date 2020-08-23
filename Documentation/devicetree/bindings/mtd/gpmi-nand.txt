@@ -18,7 +18,10 @@ Optional properties:
   - nand-on-flash-bbt: boolean to enable on flash bbt option if not
                        present false
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - fsl,use-minimum-ecc: Protect this NAND flash with the minimum ECC
                        strength required. The required ECC strength is
                        automatically discoverable for some flash
@@ -37,6 +40,9 @@ Optional properties:
                        partitions written from Linux with this feature
                        turned on may not be accessible by the BootROM
                        code.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The device tree may optionally contain sub-nodes describing partitions of the

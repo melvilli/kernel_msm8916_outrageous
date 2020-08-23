@@ -2,7 +2,10 @@
 #define _PARISC_SWAB_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/bitsperlong.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -43,7 +46,11 @@ static inline __attribute_const__ __u32 __arch_swab32(__u32 x)
 #define __arch_swab32 __arch_swab32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if __BITS_PER_LONG > 32
+=======
+#if BITS_PER_LONG > 32
+>>>>>>> v3.18
 =======
 #if BITS_PER_LONG > 32
 >>>>>>> v3.18
@@ -70,7 +77,11 @@ static inline __attribute_const__ __u64 __arch_swab64(__u64 x)
 }
 #define __arch_swab64 __arch_swab64
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __BITS_PER_LONG > 32 */
+=======
+#endif /* BITS_PER_LONG > 32 */
+>>>>>>> v3.18
 =======
 #endif /* BITS_PER_LONG > 32 */
 >>>>>>> v3.18

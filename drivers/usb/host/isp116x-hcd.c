@@ -61,7 +61,10 @@
 #include <linux/seq_file.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -1492,7 +1495,11 @@ static int isp116x_bus_resume(struct usb_hcd *hcd)
 
 	hcd->state = HC_STATE_RESUMING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(USB_RESUME_TIMEOUT);
+=======
+	msleep(20);
+>>>>>>> v3.18
 =======
 	msleep(20);
 >>>>>>> v3.18
@@ -1634,7 +1641,11 @@ static int isp116x_probe(struct platform_device *pdev)
 	spin_lock_init(&isp116x->lock);
 	INIT_LIST_HEAD(&isp116x->async);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp116x->board = pdev->dev.platform_data;
+=======
+	isp116x->board = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	isp116x->board = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1657,6 +1668,11 @@ static int isp116x_probe(struct platform_device *pdev)
 		goto err6;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 
@@ -1722,7 +1738,11 @@ static struct platform_driver isp116x_driver = {
 	.resume = isp116x_resume,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = (char *)hcd_name,
+=======
+		.name = hcd_name,
+>>>>>>> v3.18
 =======
 		.name = hcd_name,
 >>>>>>> v3.18

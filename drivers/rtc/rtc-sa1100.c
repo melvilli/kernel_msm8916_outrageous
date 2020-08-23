@@ -250,7 +250,11 @@ static int sa1100_rtc_probe(struct platform_device *pdev)
 	ret = clk_prepare_enable(info->clk);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_enable_clk;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -308,8 +312,11 @@ static int sa1100_rtc_probe(struct platform_device *pdev)
 err_dev:
 	clk_disable_unprepare(info->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_enable_clk:
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -320,10 +327,15 @@ static int sa1100_rtc_remove(struct platform_device *pdev)
 	struct sa1100_rtc *info = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (info) {
 		clk_disable_unprepare(info->clk);
 		platform_set_drvdata(pdev, NULL);
 	}
+=======
+	if (info)
+		clk_disable_unprepare(info->clk);
+>>>>>>> v3.18
 =======
 	if (info)
 		clk_disable_unprepare(info->clk);
@@ -355,7 +367,11 @@ static SIMPLE_DEV_PM_OPS(sa1100_rtc_pm_ops, sa1100_rtc_suspend,
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id sa1100_rtc_dt_ids[] = {
+=======
+static const struct of_device_id sa1100_rtc_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id sa1100_rtc_dt_ids[] = {
 >>>>>>> v3.18

@@ -108,6 +108,7 @@ static int eps_set_state(struct eps_cpu_data *centaur,
 			 u32 dest_state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpufreq_freqs freqs;
 	u32 lo, hi;
 	int err = 0;
@@ -122,6 +123,11 @@ static int eps_set_state(struct eps_cpu_data *centaur,
 	int i;
 
 >>>>>>> v3.18
+=======
+	u32 lo, hi;
+	int i;
+
+>>>>>>> v3.18
 	/* Wait while CPU is busy */
 	rdmsr(MSR_IA32_PERF_STATUS, lo, hi);
 	i = 0;
@@ -131,8 +137,12 @@ static int eps_set_state(struct eps_cpu_data *centaur,
 		i++;
 		if (unlikely(i > 64)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = -ENODEV;
 			goto postchange;
+=======
+			return -ENODEV;
+>>>>>>> v3.18
 =======
 			return -ENODEV;
 >>>>>>> v3.18
@@ -148,6 +158,7 @@ static int eps_set_state(struct eps_cpu_data *centaur,
 		i++;
 		if (unlikely(i > 64)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = -ENODEV;
 			goto postchange;
 		}
@@ -159,10 +170,15 @@ postchange:
 	freqs.new = centaur->fsb * ((lo >> 8) & 0xff);
 
 =======
+=======
+>>>>>>> v3.18
 			return -ENODEV;
 		}
 	} while (lo & ((1 << 16) | (1 << 17)));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef DEBUG
 	{
@@ -179,6 +195,7 @@ postchange:
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 	return err;
 }
@@ -190,12 +207,17 @@ static int eps_target(struct cpufreq_policy *policy,
 	struct eps_cpu_data *centaur;
 	unsigned int newstate = 0;
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static int eps_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	struct eps_cpu_data *centaur;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int cpu = policy->cpu;
 	unsigned int dest_state;
@@ -205,6 +227,7 @@ static int eps_target(struct cpufreq_policy *policy, unsigned int index)
 		return -ENODEV;
 	centaur = eps_cpu[cpu];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unlikely(cpufreq_frequency_table_target(policy,
 			&eps_cpu[cpu]->freq_table[0],
@@ -220,6 +243,10 @@ static int eps_target(struct cpufreq_policy *policy, unsigned int index)
 	/* Make frequency transition */
 	dest_state = centaur->freq_table[index].driver_data & 0xffff;
 >>>>>>> v3.18
+=======
+	/* Make frequency transition */
+	dest_state = centaur->freq_table[index].driver_data & 0xffff;
+>>>>>>> v3.18
 	ret = eps_set_state(centaur, policy, dest_state);
 	if (ret)
 		printk(KERN_ERR "eps: Timeout!\n");
@@ -227,12 +254,15 @@ static int eps_target(struct cpufreq_policy *policy, unsigned int index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int eps_verify(struct cpufreq_policy *policy)
 {
 	return cpufreq_frequency_table_verify(policy,
 			&eps_cpu[policy->cpu]->freq_table[0]);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int eps_cpu_init(struct cpufreq_policy *policy)
@@ -433,9 +463,14 @@ static int eps_cpu_init(struct cpufreq_policy *policy)
 
 	policy->cpuinfo.transition_latency = 140000; /* 844mV -> 700mV in ns */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = fsb * current_multiplier;
 
 	ret = cpufreq_frequency_table_cpuinfo(policy, &centaur->freq_table[0]);
+=======
+
+	ret = cpufreq_table_validate_and_show(policy, &centaur->freq_table[0]);
+>>>>>>> v3.18
 =======
 
 	ret = cpufreq_table_validate_and_show(policy, &centaur->freq_table[0]);
@@ -446,7 +481,10 @@ static int eps_cpu_init(struct cpufreq_policy *policy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_get_attr(&centaur->freq_table[0], policy->cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -458,7 +496,10 @@ static int eps_cpu_exit(struct cpufreq_policy *policy)
 
 	/* Bye */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_put_attr(policy->cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(eps_cpu[cpu]);
@@ -466,6 +507,7 @@ static int eps_cpu_exit(struct cpufreq_policy *policy)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct freq_attr *eps_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
@@ -480,12 +522,21 @@ static struct cpufreq_driver eps_driver = {
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= eps_target,
 >>>>>>> v3.18
+=======
+static struct cpufreq_driver eps_driver = {
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= eps_target,
+>>>>>>> v3.18
 	.init		= eps_cpu_init,
 	.exit		= eps_cpu_exit,
 	.get		= eps_get,
 	.name		= "e_powersaver",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attr		= eps_attr,
+=======
+	.attr		= cpufreq_generic_attr,
+>>>>>>> v3.18
 =======
 	.attr		= cpufreq_generic_attr,
 >>>>>>> v3.18

@@ -13,6 +13,11 @@
 
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 #include <linux/of.h>
@@ -33,14 +38,20 @@
 #define CLK_IS_BASIC		BIT(5) /* Basic clk, can't do a to_clk_foo() */
 #define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct clk_hw;
 =======
+=======
+>>>>>>> v3.18
 #define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
 #define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
 
 struct clk_hw;
 struct dentry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -49,6 +60,7 @@ struct dentry;
  * through the clk_* api.
  *
  * @prepare:	Prepare the clock for enabling. This must not return until
+<<<<<<< HEAD
 <<<<<<< HEAD
  * 		the clock is fully prepared, and it's safe to call clk_enable.
  * 		This callback is intended to allow clock implementations to
@@ -59,6 +71,8 @@ struct dentry;
  * 		undo any work done in the @prepare callback. Called with
  * 		prepare_lock held.
 =======
+=======
+>>>>>>> v3.18
  *		the clock is fully prepared, and it's safe to call clk_enable.
  *		This callback is intended to allow clock implementations to
  *		do any initialisation that may sleep. Called with
@@ -67,6 +81,9 @@ struct dentry;
  * @unprepare:	Release the clock from its prepared state. This will typically
  *		undo any work done in the @prepare callback. Called with
  *		prepare_lock held.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * @is_prepared: Queries the hardware to determine if the clock is prepared.
@@ -79,6 +96,7 @@ struct dentry;
  *
  * @enable:	Enable the clock atomically. This must not return until the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		clock is generating a valid clock signal, usable by consumer
  * 		devices. Called with enable_lock held. This function must not
  * 		sleep.
@@ -90,6 +108,8 @@ struct dentry;
  * 		This function must not sleep. Optional, if this op is not
  * 		set then the enable count will be used.
 =======
+=======
+>>>>>>> v3.18
  *		clock is generating a valid clock signal, usable by consumer
  *		devices. Called with enable_lock held. This function must not
  *		sleep.
@@ -100,6 +120,9 @@ struct dentry;
  * @is_enabled:	Queries the hardware to determine if the clock is enabled.
  *		This function must not sleep. Optional, if this op is not
  *		set then the enable count will be used.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * @disable_unused: Disable the clock atomically.  Only called from
@@ -108,6 +131,7 @@ struct dentry;
  *		sleep.
  *
  * @recalc_rate	Recalculate the rate of this clock, by querying hardware. The
+<<<<<<< HEAD
 <<<<<<< HEAD
  * 		parent rate is an input parameter.  It is up to the caller to
  * 		ensure that the prepare_mutex is held across this call.
@@ -134,6 +158,8 @@ struct dentry;
  * 		array index into the value programmed into the hardware.
  * 		Returns 0 on success, -EERROR otherwise.
 =======
+=======
+>>>>>>> v3.18
  *		parent rate is an input parameter.  It is up to the caller to
  *		ensure that the prepare_mutex is held across this call.
  *		Returns the calculated rate.  Optional, but recommended - if
@@ -163,6 +189,9 @@ struct dentry;
  *		__clk_init.  This callback is mandatory for clocks with
  *		multiple parents.  It is optional (and unnecessary) for clocks
  *		with 0 or 1 parents.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * @set_rate:	Change the rate of this clock. The requested rate is specified
@@ -172,7 +201,10 @@ struct dentry;
  *		Returns 0 on success, -EERROR otherwise.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @set_rate_and_parent: Change the rate and the parent of this clock. The
  *		requested rate is specified by the second argument, which
  *		should typically be the return of .round_rate call.  The
@@ -211,6 +243,9 @@ struct dentry;
  *		prepare_lock held.  Returns 0 on success, -EERROR otherwise.
  *
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The clk_enable/clk_disable and clk_prepare/clk_unprepare pairs allow
  * implementations to split any work between atomic (enable) and sleepable
@@ -235,6 +270,7 @@ struct clk_ops {
 	unsigned long	(*recalc_rate)(struct clk_hw *hw,
 					unsigned long parent_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long		(*round_rate)(struct clk_hw *hw, unsigned long,
 					unsigned long *);
 	int		(*set_parent)(struct clk_hw *hw, u8 index);
@@ -243,6 +279,8 @@ struct clk_ops {
 				    unsigned long);
 	void		(*init)(struct clk_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 	long		(*round_rate)(struct clk_hw *hw, unsigned long rate,
 					unsigned long *parent_rate);
 	long		(*determine_rate)(struct clk_hw *hw, unsigned long rate,
@@ -261,6 +299,9 @@ struct clk_ops {
 	int		(*set_phase)(struct clk_hw *hw, int degrees);
 	void		(*init)(struct clk_hw *hw);
 	int		(*debug_init)(struct clk_hw *hw, struct dentry *dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -317,6 +358,10 @@ struct clk_fixed_rate {
 	struct		clk_hw hw;
 	unsigned long	fixed_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long	fixed_accuracy;
+>>>>>>> v3.18
 =======
 	unsigned long	fixed_accuracy;
 >>>>>>> v3.18
@@ -328,6 +373,12 @@ struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
 		const char *parent_name, unsigned long flags,
 		unsigned long fixed_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct clk *clk_register_fixed_rate_with_accuracy(struct device *dev,
+		const char *name, const char *parent_name, unsigned long flags,
+		unsigned long fixed_rate, unsigned long fixed_accuracy);
+>>>>>>> v3.18
 =======
 struct clk *clk_register_fixed_rate_with_accuracy(struct device *dev,
 		const char *name, const char *parent_name, unsigned long flags,
@@ -350,15 +401,21 @@ void of_fixed_clk_setup(struct device_node *np);
  * Flags:
  * CLK_GATE_SET_TO_DISABLE - by default this clock sets the bit at bit_idx to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	enable the clock.  Setting this flag does the opposite: setting the bit
  * 	disable the clock and clearing it enables the clock
 =======
+=======
+>>>>>>> v3.18
  *	enable the clock.  Setting this flag does the opposite: setting the bit
  *	disable the clock and clearing it enables the clock
  * CLK_GATE_HIWORD_MASK - The gate settings are only in lower 16-bit
  *	of this register, and mask of gate bits are in higher 16-bit of this
  *	register.  While setting the gate bits, higher 16-bit should also be
  *	updated to indicate changing gate bits.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct clk_gate {
@@ -371,6 +428,10 @@ struct clk_gate {
 
 #define CLK_GATE_SET_TO_DISABLE		BIT(0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLK_GATE_HIWORD_MASK		BIT(1)
+>>>>>>> v3.18
 =======
 #define CLK_GATE_HIWORD_MASK		BIT(1)
 >>>>>>> v3.18
@@ -402,17 +463,23 @@ struct clk_div_table {
  * Flags:
  * CLK_DIVIDER_ONE_BASED - by default the divisor is the value read from the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	register plus one.  If CLK_DIVIDER_ONE_BASED is set then the divider is
  * 	the raw value read from the register, with the value of zero considered
  *	invalid, unless CLK_DIVIDER_ALLOW_ZERO is set.
  * CLK_DIVIDER_POWER_OF_TWO - clock divisor is 2 raised to the value read from
  * 	the hardware register
 =======
+=======
+>>>>>>> v3.18
  *	register plus one.  If CLK_DIVIDER_ONE_BASED is set then the divider is
  *	the raw value read from the register, with the value of zero considered
  *	invalid, unless CLK_DIVIDER_ALLOW_ZERO is set.
  * CLK_DIVIDER_POWER_OF_TWO - clock divisor is 2 raised to the value read from
  *	the hardware register
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * CLK_DIVIDER_ALLOW_ZERO - Allow zero divisors.  For dividers which have
  *	CLK_DIVIDER_ONE_BASED set, it is possible to end up with a zero divisor.
@@ -420,7 +487,10 @@ struct clk_div_table {
  *	zero divisor by not modifying their input clock
  *	(divide by one / bypass).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * CLK_DIVIDER_HIWORD_MASK - The divider settings are only in lower 16-bit
  *	of this register, and mask of divider bits are in higher 16-bit of this
  *	register.  While setting the divider bits, higher 16-bit should also be
@@ -429,6 +499,9 @@ struct clk_div_table {
  *	to the closest integer instead of the up one.
  * CLK_DIVIDER_READ_ONLY - The divider settings are preconfigured and should
  *	not be changed by the clock framework.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct clk_divider {
@@ -445,6 +518,12 @@ struct clk_divider {
 #define CLK_DIVIDER_POWER_OF_TWO	BIT(1)
 #define CLK_DIVIDER_ALLOW_ZERO		BIT(2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLK_DIVIDER_HIWORD_MASK		BIT(3)
+#define CLK_DIVIDER_ROUND_CLOSEST	BIT(4)
+#define CLK_DIVIDER_READ_ONLY		BIT(5)
+>>>>>>> v3.18
 =======
 #define CLK_DIVIDER_HIWORD_MASK		BIT(3)
 #define CLK_DIVIDER_ROUND_CLOSEST	BIT(4)
@@ -479,11 +558,17 @@ struct clk *clk_register_divider_table(struct device *dev, const char *name,
  * CLK_MUX_INDEX_ONE - register index starts at 1, not 0
  * CLK_MUX_INDEX_BIT - register index is a single bit (power of two)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * CLK_MUX_HIWORD_MASK - The mux settings are only in lower 16-bit of this
  *	register, and mask of mux bits are in higher 16-bit of this register.
  *	While setting the mux bits, higher 16-bit should also be updated to
  *	indicate changing mux bits.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct clk_mux {
@@ -499,14 +584,20 @@ struct clk_mux {
 #define CLK_MUX_INDEX_ONE		BIT(0)
 #define CLK_MUX_INDEX_BIT		BIT(1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern const struct clk_ops clk_mux_ops;
 =======
+=======
+>>>>>>> v3.18
 #define CLK_MUX_HIWORD_MASK		BIT(2)
 #define CLK_MUX_READ_ONLY	BIT(3) /* mux setting cannot be changed */
 
 extern const struct clk_ops clk_mux_ops;
 extern const struct clk_ops clk_mux_ro_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct clk *clk_register_mux(struct device *dev, const char *name,
@@ -545,7 +636,10 @@ struct clk *clk_register_fixed_factor(struct device *dev, const char *name,
 		unsigned int mult, unsigned int div);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct clk_fractional_divider - adjustable fractional divider clock
  *
@@ -577,6 +671,9 @@ struct clk *clk_register_fractional_divider(struct device *dev,
 		void __iomem *reg, u8 mshift, u8 mwidth, u8 nshift, u8 nwidth,
 		u8 clk_divider_flags, spinlock_t *lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /***
  * struct clk_composite - aggregate clock of mux, divider and gate clocks
@@ -610,7 +707,10 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
 		unsigned long flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /***
  * struct clk_gpio_gate - gpio gated clock
  *
@@ -633,6 +733,9 @@ struct clk *clk_register_gpio_gate(struct device *dev, const char *name,
 
 void of_gpio_clk_gate_setup(struct device_node *node);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * clk_register - allocate a new clock, register it and return an opaque cookie
@@ -657,21 +760,33 @@ struct clk_hw *__clk_get_hw(struct clk *clk);
 u8 __clk_get_num_parents(struct clk *clk);
 struct clk *__clk_get_parent(struct clk *clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __clk_get_enable_count(struct clk *clk);
 unsigned int __clk_get_prepare_count(struct clk *clk);
 unsigned long __clk_get_rate(struct clk *clk);
 =======
+=======
+>>>>>>> v3.18
 struct clk *clk_get_parent_by_index(struct clk *clk, u8 index);
 unsigned int __clk_get_enable_count(struct clk *clk);
 unsigned int __clk_get_prepare_count(struct clk *clk);
 unsigned long __clk_get_rate(struct clk *clk);
 unsigned long __clk_get_accuracy(struct clk *clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned long __clk_get_flags(struct clk *clk);
 bool __clk_is_prepared(struct clk *clk);
 bool __clk_is_enabled(struct clk *clk);
 struct clk *__clk_lookup(const char *name);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+long __clk_mux_determine_rate(struct clk_hw *hw, unsigned long rate,
+			      unsigned long *best_parent_rate,
+			      struct clk **best_parent_p);
+>>>>>>> v3.18
 =======
 long __clk_mux_determine_rate(struct clk_hw *hw, unsigned long rate,
 			      unsigned long *best_parent_rate,
@@ -691,7 +806,10 @@ struct of_device_id;
 typedef void (*of_clk_init_cb_t)(struct device_node *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct clk_onecell_data {
 	struct clk **clks;
 	unsigned int clk_num;
@@ -702,6 +820,9 @@ extern struct of_device_id __clk_of_table;
 #define CLK_OF_DECLARE(name, compat, fn) OF_DECLARE_1(clk, name, compat, fn)
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int of_clk_add_provider(struct device_node *np,
 			struct clk *(*clk_src_get)(struct of_phandle_args *args,
@@ -710,6 +831,7 @@ int of_clk_add_provider(struct device_node *np,
 void of_clk_del_provider(struct device_node *np);
 struct clk *of_clk_src_simple_get(struct of_phandle_args *clkspec,
 				  void *data);
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct clk_onecell_data {
 	struct clk **clks;
@@ -720,10 +842,15 @@ struct clk *of_clk_src_onecell_get(struct of_phandle_args *clkspec, void *data);
 struct clk *of_clk_src_onecell_get(struct of_phandle_args *clkspec, void *data);
 int of_clk_get_parent_count(struct device_node *np);
 >>>>>>> v3.18
+=======
+struct clk *of_clk_src_onecell_get(struct of_phandle_args *clkspec, void *data);
+int of_clk_get_parent_count(struct device_node *np);
+>>>>>>> v3.18
 const char *of_clk_get_parent_name(struct device_node *np, int index);
 
 void of_clk_init(const struct of_device_id *matches);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CLK_OF_DECLARE(name, compat, fn)			\
 	static const struct of_device_id __clk_of_table_##name	\
@@ -739,6 +866,8 @@ static inline void __init of_clk_init(const struct of_device_id *matches)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #else /* !CONFIG_OF */
 
 static inline int of_clk_add_provider(struct device_node *np,
@@ -805,6 +934,9 @@ struct dentry *clk_debugfs_add_file(struct clk *clk, char *name, umode_t mode,
 				void *data, const struct file_operations *fops);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_COMMON_CLK */
 #endif /* CLK_PROVIDER_H */

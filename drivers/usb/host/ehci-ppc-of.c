@@ -17,6 +17,11 @@
 
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -34,7 +39,11 @@ static const struct hc_driver ehci_ppc_of_hc_driver = {
 	 */
 	.irq			= ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags			= HCD_MEMORY | HCD_USB2,
+=======
+	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
 >>>>>>> v3.18
@@ -127,7 +136,12 @@ static int ehci_hcd_ppc_of_probe(struct platform_device *op)
 	irq = irq_of_parse_and_map(dn, 0);
 	if (irq == NO_IRQ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: irq_of_parse_and_map failed\n", __FILE__);
+=======
+		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
+			__FILE__);
+>>>>>>> v3.18
 =======
 		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
 			__FILE__);
@@ -182,6 +196,10 @@ static int ehci_hcd_ppc_of_probe(struct platform_device *op)
 		goto err_ioremap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -199,7 +217,11 @@ err_irq:
 static int ehci_hcd_ppc_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -209,8 +231,11 @@ static int ehci_hcd_ppc_of_remove(struct platform_device *op)
 	struct resource res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_dbg(&op->dev, "stopping PPC-OF USB Controller\n");
@@ -243,6 +268,7 @@ static int ehci_hcd_ppc_of_remove(struct platform_device *op)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ehci_hcd_ppc_of_shutdown(struct platform_device *op)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
@@ -252,6 +278,8 @@ static void ehci_hcd_ppc_of_shutdown(struct platform_device *op)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id ehci_hcd_ppc_of_match[] = {
@@ -267,7 +295,11 @@ static struct platform_driver ehci_hcd_ppc_of_driver = {
 	.probe		= ehci_hcd_ppc_of_probe,
 	.remove		= ehci_hcd_ppc_of_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown	= ehci_hcd_ppc_of_shutdown,
+=======
+	.shutdown	= usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= usb_hcd_platform_shutdown,
 >>>>>>> v3.18

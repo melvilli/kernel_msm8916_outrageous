@@ -17,7 +17,10 @@
 	compatible = "armadeus,imx51-apf51dev", "armadeus,imx51-apf51", "fsl,imx51";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	display@di1 {
 		compatible = "fsl,imx-parallel-display";
 		interface-pix-fmt = "bgr666";
@@ -50,6 +53,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpio-keys {
 		compatible = "gpio-keys";
@@ -57,7 +63,11 @@
 		user-key {
 			label = "user";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 3 0>;
+=======
+			gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -71,7 +81,11 @@
 		user {
 			label = "Heartbeat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 2 0>;
+=======
+			gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -83,14 +97,20 @@
 &ecspi1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_ecspi1_1>;
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio4 24 0>, <&gpio4 25 0>;
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_ecspi1>;
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio4 24 GPIO_ACTIVE_HIGH>,
 		   <&gpio4 25 GPIO_ACTIVE_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -98,14 +118,20 @@
 &ecspi2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_ecspi2_1>;
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio3 28 1>, <&gpio3 27 1>;
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_ecspi2>;
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio3 28 GPIO_ACTIVE_LOW>,
 		   <&gpio3 27 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -113,8 +139,13 @@
 &esdhc1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc1_1>;
 	cd-gpios = <&gpio2 29 0>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc1>;
+	cd-gpios = <&gpio2 29 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc1>;
 	cd-gpios = <&gpio2 29 GPIO_ACTIVE_HIGH>;
@@ -126,7 +157,11 @@
 &esdhc2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc2_1>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc2>;
 >>>>>>> v3.18
@@ -138,7 +173,11 @@
 &i2c2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_i2c2_2>;
+=======
+	pinctrl-0 = <&pinctrl_i2c2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_i2c2>;
 >>>>>>> v3.18
@@ -150,7 +189,11 @@
 	pinctrl-0 = <&pinctrl_hog>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hog {
+=======
+	imx51-apf51dev {
+>>>>>>> v3.18
 =======
 	imx51-apf51dev {
 >>>>>>> v3.18
@@ -168,9 +211,12 @@
 			>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 
 		pinctrl_ecspi1: ecspi1grp {
 			fsl,pins = <
@@ -253,4 +299,7 @@
 &ipu_di0_disp0 {
 	remote-endpoint = <&display_in>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

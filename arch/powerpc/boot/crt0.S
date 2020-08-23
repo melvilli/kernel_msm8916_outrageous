@@ -2,6 +2,11 @@
  * Copyright (C) Paul Mackerras 1997.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Adapted for 64 bit LE PowerPC by Andrew Tauferner
+ *
+>>>>>>> v3.18
 =======
  * Adapted for 64 bit LE PowerPC by Andrew Tauferner
  *
@@ -12,8 +17,11 @@
  * 2 of the License, or (at your option) any later version.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * NOTE: this code runs in 32 bit mode, is position-independent,
  * and is packaged as ELF32.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -21,6 +29,12 @@
 #include "ppc_asm.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+RELA = 7
+RELACOUNT = 0x6ffffff9
+
+>>>>>>> v3.18
 =======
 RELA = 7
 RELACOUNT = 0x6ffffff9
@@ -36,7 +50,10 @@ _zimage_start_opd:
 	.long	0x500000, 0, 0, 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __powerpc64__
 .balign 8
 p_start:	.llong	_start
@@ -51,6 +68,9 @@ p_prom:		.llong	0
 	.weak	_platform_stack_top
 p_pstack:	.llong	_platform_stack_top
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 p_start:	.long	_start
 p_etext:	.long	_etext
@@ -60,6 +80,10 @@ p_end:		.long	_end
 	.weak	_platform_stack_top
 p_pstack:	.long	_platform_stack_top
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -74,6 +98,10 @@ _zimage_start_lib:
 	bl	.+4
 p_base:	mflr	r10		/* r10 now points to runtime addr of p_base */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __powerpc64__
+>>>>>>> v3.18
 =======
 #ifndef __powerpc64__
 >>>>>>> v3.18
@@ -91,8 +119,11 @@ p_base:	mflr	r10		/* r10 now points to runtime addr of p_base */
 	/* The dynamic section contains a series of tagged entries.
 	 * We need the RELA and RELACOUNT entries. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 RELA = 7
 RELACOUNT = 0x6ffffff9
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	li	r9,0
@@ -163,8 +194,11 @@ RELACOUNT = 0x6ffffff9
 	stwu	r0,-16(r1)	/* establish a stack frame */
 6:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #else /* __powerpc64__ */
 	/* Save the prom pointer at p_prom. */
 	std	r5,(p_prom-p_base)(r10)
@@ -249,6 +283,9 @@ RELACOUNT = 0x6ffffff9
 	stdu	r0,-16(r1)	/* establish a stack frame */
 6:
 #endif  /* __powerpc64__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Call platform_init() */
 	bl	platform_init
@@ -256,7 +293,10 @@ RELACOUNT = 0x6ffffff9
 	/* Call start */
 	b	start
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __powerpc64__
 
@@ -329,4 +369,7 @@ prom:
 	mtlr    r0
 	blr
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

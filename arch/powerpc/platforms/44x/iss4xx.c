@@ -33,7 +33,11 @@
 #include <asm/mmu.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct of_device_id iss4xx_of_bus[] = {
+=======
+static const struct of_device_id iss4xx_of_bus[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id iss4xx_of_bus[] __initconst = {
 >>>>>>> v3.18
@@ -86,7 +90,11 @@ static void __init iss4xx_init_irq(void)
 
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit smp_iss4xx_setup_cpu(int cpu)
+=======
+static void smp_iss4xx_setup_cpu(int cpu)
+>>>>>>> v3.18
 =======
 static void smp_iss4xx_setup_cpu(int cpu)
 >>>>>>> v3.18
@@ -95,7 +103,11 @@ static void smp_iss4xx_setup_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit smp_iss4xx_kick_cpu(int cpu)
+=======
+static int smp_iss4xx_kick_cpu(int cpu)
+>>>>>>> v3.18
 =======
 static int smp_iss4xx_kick_cpu(int cpu)
 >>>>>>> v3.18

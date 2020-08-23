@@ -79,10 +79,13 @@ static int ttc_pm860x_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* connected pins */
 	snd_soc_dapm_enable_pin(dapm, "Ext Speaker");
 	snd_soc_dapm_enable_pin(dapm, "Ext Mic 1");
 	snd_soc_dapm_enable_pin(dapm, "Ext Mic 3");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_soc_dapm_disable_pin(dapm, "Headset Mic 2");
@@ -126,6 +129,10 @@ static struct snd_soc_dai_link ttc_pm860x_hifi_dai[] = {
 static struct snd_soc_card ttc_dkb_card = {
 	.name = "ttc-dkb-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner = THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner = THIS_MODULE,
 >>>>>>> v3.18
@@ -167,6 +174,10 @@ static struct platform_driver ttc_dkb_driver = {
 		.name	= "ttc-dkb-audio",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm     = &snd_soc_pm_ops,
 >>>>>>> v3.18

@@ -196,8 +196,14 @@ static int cr_backlight_probe(struct platform_device *pdev)
 	memset(&props, 0, sizeof(struct backlight_properties));
 	props.type = BACKLIGHT_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdp = backlight_device_register("cr-backlight", &pdev->dev, NULL,
 					&cr_backlight_ops, &props);
+=======
+	bdp = devm_backlight_device_register(&pdev->dev, "cr-backlight",
+					&pdev->dev, NULL, &cr_backlight_ops,
+					&props);
+>>>>>>> v3.18
 =======
 	bdp = devm_backlight_device_register(&pdev->dev, "cr-backlight",
 					&pdev->dev, NULL, &cr_backlight_ops,
@@ -209,9 +215,15 @@ static int cr_backlight_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldp = lcd_device_register("cr-lcd", &pdev->dev, NULL, &cr_lcd_ops);
 	if (IS_ERR(ldp)) {
 		backlight_device_unregister(bdp);
+=======
+	ldp = devm_lcd_device_register(&pdev->dev, "cr-lcd", &pdev->dev, NULL,
+					&cr_lcd_ops);
+	if (IS_ERR(ldp)) {
+>>>>>>> v3.18
 =======
 	ldp = devm_lcd_device_register(&pdev->dev, "cr-lcd", &pdev->dev, NULL,
 					&cr_lcd_ops);
@@ -228,8 +240,11 @@ static int cr_backlight_probe(struct platform_device *pdev)
 	crp = devm_kzalloc(&pdev->dev, sizeof(*crp), GFP_KERNEL);
 	if (!crp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lcd_device_unregister(ldp);
 		backlight_device_unregister(bdp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pci_dev_put(lpc_dev);
@@ -252,6 +267,10 @@ static int cr_backlight_remove(struct platform_device *pdev)
 {
 	struct cr_panel *crp = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -261,8 +280,11 @@ static int cr_backlight_remove(struct platform_device *pdev)
 	cr_backlight_set_intensity(crp->cr_backlight_device);
 	cr_lcd_set_power(crp->cr_lcd_device, FB_BLANK_POWERDOWN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(crp->cr_backlight_device);
 	lcd_device_unregister(crp->cr_lcd_device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_dev_put(lpc_dev);

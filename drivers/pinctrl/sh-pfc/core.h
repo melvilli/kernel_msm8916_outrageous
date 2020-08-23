@@ -12,6 +12,10 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/spinlock.h>
 >>>>>>> v3.18
@@ -29,12 +33,18 @@ struct sh_pfc_chip;
 struct sh_pfc_pinctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sh_pfc_pin_range {
 	u16 start;
 	u16 end;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sh_pfc {
 	struct device *dev;
@@ -43,10 +53,13 @@ struct sh_pfc {
 
 	unsigned int num_windows;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_pfc_window *window;
 
 	unsigned int nr_pins;
 =======
+=======
+>>>>>>> v3.18
 	struct sh_pfc_window *windows;
 	unsigned int num_irqs;
 	unsigned int *irqs;
@@ -55,6 +68,9 @@ struct sh_pfc {
 	unsigned int nr_ranges;
 
 	unsigned int nr_gpio_pins;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct sh_pfc_chip *gpio;
@@ -80,12 +96,18 @@ int sh_pfc_config_mux(struct sh_pfc *pfc, unsigned mark, int pinmux_type);
 extern const struct sh_pfc_soc_info r8a73a4_pinmux_info;
 extern const struct sh_pfc_soc_info r8a7740_pinmux_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct sh_pfc_soc_info r8a7779_pinmux_info;
 =======
+=======
+>>>>>>> v3.18
 extern const struct sh_pfc_soc_info r8a7778_pinmux_info;
 extern const struct sh_pfc_soc_info r8a7779_pinmux_info;
 extern const struct sh_pfc_soc_info r8a7790_pinmux_info;
 extern const struct sh_pfc_soc_info r8a7791_pinmux_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern const struct sh_pfc_soc_info sh7203_pinmux_info;
 extern const struct sh_pfc_soc_info sh7264_pinmux_info;

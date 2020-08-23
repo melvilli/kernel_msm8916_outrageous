@@ -48,16 +48,22 @@
 #include <asm/netlogic/haldefs.h>
 #include <asm/netlogic/common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/netlogic/xlp-hal/iomap.h>
 #include <asm/netlogic/xlp-hal/pic.h>
 #include <asm/netlogic/xlp-hal/xlp.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/netlogic/mips-extns.h>
 
 #include <asm/netlogic/xlp-hal/iomap.h>
 #include <asm/netlogic/xlp-hal/xlp.h>
 #include <asm/netlogic/xlp-hal/pic.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/netlogic/xlp-hal/pcibus.h>
 #include <asm/netlogic/xlp-hal/bridge.h>
@@ -75,10 +81,13 @@ static inline u32 pci_cfg_read_32bit(struct pci_bus *bus, unsigned int devfn,
 
 	where &= ~3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bus->number == 0 && PCI_SLOT(devfn) == 1 && where == 0x954)
 		return 0xffffffff;
 
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx()) {
 		/* be very careful on SoC buses */
 		if (bus->number == 0) {
@@ -95,6 +104,9 @@ static inline u32 pci_cfg_read_32bit(struct pci_bus *bus, unsigned int devfn,
 	} else if (bus->number == 0 && PCI_SLOT(devfn) == 1 && where == 0x954) {
 		return 0xffffffff;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfgaddr = (u32 *)(pci_config_base +
 			pci_cfg_addr(bus->number, devfn, where));
@@ -190,6 +202,7 @@ struct pci_controller nlm_pci_controller = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_dev *xlp_get_pcie_link(const struct pci_dev *dev)
 {
 	struct pci_bus *bus, *p;
@@ -206,6 +219,8 @@ static inline int nlm_pci_link_to_irq(int link)
 {
 	return PIC_PCIE_LINK_0_IRQ + link;
 =======
+=======
+>>>>>>> v3.18
 struct pci_dev *xlp_get_pcie_link(const struct pci_dev *dev)
 {
 	struct pci_bus *bus, *p;
@@ -233,6 +248,9 @@ int xlp_socdev_to_node(const struct pci_dev *lnkdev)
 		return PCI_FUNC(lnkdev->bus->self->devfn);
 	else
 		return PCI_SLOT(lnkdev->devfn) / 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -240,7 +258,11 @@ int __init pcibios_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
 {
 	struct pci_dev *lnkdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int lnkslot, lnkfunc;
+=======
+	int lnkfunc, node;
+>>>>>>> v3.18
 =======
 	int lnkfunc, node;
 >>>>>>> v3.18
@@ -253,15 +275,21 @@ int __init pcibios_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
 	if (lnkdev == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lnkfunc = PCI_FUNC(lnkdev->devfn);
 	lnkslot = PCI_SLOT(lnkdev->devfn);
 	return nlm_irq_to_xirq(lnkslot / 8, nlm_pci_link_to_irq(lnkfunc));
 =======
+=======
+>>>>>>> v3.18
 
 	lnkfunc = PCI_FUNC(lnkdev->devfn);
 	node = xlp_socdev_to_node(lnkdev);
 
 	return nlm_irq_to_xirq(node, PIC_PCIE_LINK_LEGACY_IRQ(lnkfunc));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -290,6 +318,7 @@ static void xlp_config_pci_bswap(int node, int link)
 	 * from the link's address ranges.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = nlm_read_bridge_reg(nbubase, BRIDGE_PCIEMEM_BASE0 + link);
 	nlm_write_pci_reg(lnkbase, PCIE_BYTE_SWAP_MEM_BASE, reg);
 
@@ -302,6 +331,8 @@ static void xlp_config_pci_bswap(int node, int link)
 	reg = nlm_read_bridge_reg(nbubase, BRIDGE_PCIEIO_LIMIT0 + link);
 	nlm_write_pci_reg(lnkbase, PCIE_BYTE_SWAP_IO_LIM, reg | 0xfff);
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx()) {
 		reg = nlm_read_bridge_reg(nbubase,
 				BRIDGE_9XX_PCIEMEM_BASE0 + link);
@@ -334,6 +365,9 @@ static void xlp_config_pci_bswap(int node, int link)
 		reg = nlm_read_bridge_reg(nbubase, BRIDGE_PCIEIO_LIMIT0 + link);
 		nlm_write_pci_reg(lnkbase, PCIE_BYTE_SWAP_IO_LIM, reg | 0xfff);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -344,7 +378,10 @@ static inline void xlp_config_pci_bswap(int node, int link) {}
 static int __init pcibios_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nlm_soc_info *nodep;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uint64_t pciebase;
@@ -361,21 +398,28 @@ static int __init pcibios_init(void)
 
 	for (n = 0; n < NLM_NR_NODES; n++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nodep = nlm_get_node(n);
 		if (!nodep->coremask)
 			continue;	/* node does not exist */
 
 		for (link = 0; link < 4; link++) {
 =======
+=======
+>>>>>>> v3.18
 		if (!nlm_node_present(n))
 			continue;
 
 		for (link = 0; link < PCIE_NLINKS; link++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pciebase = nlm_get_pcie_base(n, link);
 			if (nlm_read_pci_reg(pciebase, 0) == 0xffffffff)
 				continue;
 			xlp_config_pci_bswap(n, link);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			/* put in intpin and irq - u-boot does not */
@@ -383,12 +427,17 @@ static int __init pcibios_init(void)
 			reg &= ~0x1fu;
 			reg |= (1 << 8) | nlm_pci_link_to_irq(link);
 =======
+=======
+>>>>>>> v3.18
 			xlp_init_node_msi_irqs(n, link);
 
 			/* put in intpin and irq - u-boot does not */
 			reg = nlm_read_pci_reg(pciebase, 0xf);
 			reg &= ~0x1ffu;
 			reg |= (1 << 8) | PIC_PCIE_LINK_LEGACY_IRQ(link);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nlm_write_pci_reg(pciebase, 0xf, reg);
 			pr_info("XLP PCIe: Link %d-%d initialized.\n", n, link);

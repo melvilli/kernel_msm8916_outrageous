@@ -99,12 +99,15 @@
  * Conversion between a struct page and a physical address.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note: when converting an unknown physical address to a
  * struct page, the resulting pointer must be validated
  * using VALID_PAGE().  It must return an invalid struct page
  * for any physical address not corresponding to a system
  * RAM address.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  page_to_pfn(page)	convert a struct page * to a PFN number

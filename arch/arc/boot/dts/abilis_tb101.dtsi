@@ -22,10 +22,13 @@
 /include/ "abilis_tb10x.dtsi"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* interrupt specifiers
  * --------------------
  * 0: rising, 1: low, 2: high, 3: falling,
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -50,6 +53,7 @@
 		iomux: iomux@FF10601c {
 			/* Port 1 */
 			pctl_tsin_s0: pctl-tsin-s0 {   /* Serial TS-in 0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pingrp = "mis0_pins";
 			};
@@ -179,6 +183,8 @@
 			pctl_gpio_i: pctl-gpio-i {
 				pingrp = "gpioi_pins";
 =======
+=======
+>>>>>>> v3.18
 				abilis,function = "mis0";
 			};
 			pctl_tsin_s1: pctl-tsin-s1 {   /* Serial TS-in 1 */
@@ -306,6 +312,9 @@
 			};
 			pctl_gpio_i: pctl-gpio-i {
 				abilis,function = "gpioi";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};
@@ -316,6 +325,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF140000 0x1000>;
 			gpio-controller;
@@ -323,6 +333,8 @@
 			gpio-base  = <0>;
 			gpio-pins = <&pctl_gpio_a>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF140000 0x1000>;
 			gpio-controller;
@@ -330,6 +342,9 @@
 			abilis,ngpio = <3>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpioa";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiob: gpio@FF141000 {
@@ -338,6 +353,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF141000 0x1000>;
 			gpio-controller;
@@ -345,6 +361,8 @@
 			gpio-base  = <3>;
 			gpio-pins = <&pctl_gpio_b>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF141000 0x1000>;
 			gpio-controller;
@@ -352,6 +370,9 @@
 			abilis,ngpio = <2>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiob";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpioc: gpio@FF142000 {
@@ -360,6 +381,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF142000 0x1000>;
 			gpio-controller;
@@ -367,6 +389,8 @@
 			gpio-base  = <5>;
 			gpio-pins = <&pctl_gpio_c>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF142000 0x1000>;
 			gpio-controller;
@@ -374,6 +398,9 @@
 			abilis,ngpio = <3>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpioc";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiod: gpio@FF143000 {
@@ -382,6 +409,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF143000 0x1000>;
 			gpio-controller;
@@ -389,6 +417,8 @@
 			gpio-base  = <8>;
 			gpio-pins = <&pctl_gpio_d>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF143000 0x1000>;
 			gpio-controller;
@@ -396,6 +426,9 @@
 			abilis,ngpio = <2>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiod";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpioe: gpio@FF144000 {
@@ -404,6 +437,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF144000 0x1000>;
 			gpio-controller;
@@ -411,6 +445,8 @@
 			gpio-base  = <10>;
 			gpio-pins = <&pctl_gpio_e>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF144000 0x1000>;
 			gpio-controller;
@@ -418,6 +454,9 @@
 			abilis,ngpio = <3>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpioe";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiof: gpio@FF145000 {
@@ -426,6 +465,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF145000 0x1000>;
 			gpio-controller;
@@ -433,6 +473,8 @@
 			gpio-base  = <13>;
 			gpio-pins = <&pctl_gpio_f>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF145000 0x1000>;
 			gpio-controller;
@@ -440,6 +482,9 @@
 			abilis,ngpio = <2>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiof";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiog: gpio@FF146000 {
@@ -448,6 +493,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF146000 0x1000>;
 			gpio-controller;
@@ -455,6 +501,8 @@
 			gpio-base  = <15>;
 			gpio-pins = <&pctl_gpio_g>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF146000 0x1000>;
 			gpio-controller;
@@ -462,6 +510,9 @@
 			abilis,ngpio = <3>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiog";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpioh: gpio@FF147000 {
@@ -470,6 +521,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF147000 0x1000>;
 			gpio-controller;
@@ -477,6 +529,8 @@
 			gpio-base  = <18>;
 			gpio-pins = <&pctl_gpio_h>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF147000 0x1000>;
 			gpio-controller;
@@ -484,6 +538,9 @@
 			abilis,ngpio = <2>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpioh";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpioi: gpio@FF148000 {
@@ -492,6 +549,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF148000 0x1000>;
 			gpio-controller;
@@ -499,6 +557,8 @@
 			gpio-base  = <20>;
 			gpio-pins = <&pctl_gpio_i>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF148000 0x1000>;
 			gpio-controller;
@@ -506,6 +566,9 @@
 			abilis,ngpio = <12>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpioi";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpioj: gpio@FF149000 {
@@ -514,6 +577,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF149000 0x1000>;
 			gpio-controller;
@@ -521,6 +585,8 @@
 			gpio-base  = <32>;
 			gpio-pins = <&pctl_gpio_j>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF149000 0x1000>;
 			gpio-controller;
@@ -528,6 +594,9 @@
 			abilis,ngpio = <32>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpioj";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiok: gpio@FF14a000 {
@@ -536,6 +605,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF14A000 0x1000>;
 			gpio-controller;
@@ -543,6 +613,8 @@
 			gpio-base  = <64>;
 			gpio-pins = <&pctl_gpio_k>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF14A000 0x1000>;
 			gpio-controller;
@@ -550,6 +622,9 @@
 			abilis,ngpio = <22>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiok";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiol: gpio@FF14b000 {
@@ -558,6 +633,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF14B000 0x1000>;
 			gpio-controller;
@@ -565,6 +641,8 @@
 			gpio-base  = <86>;
 			gpio-pins = <&pctl_gpio_l>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF14B000 0x1000>;
 			gpio-controller;
@@ -572,6 +650,9 @@
 			abilis,ngpio = <4>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiol";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpiom: gpio@FF14c000 {
@@ -580,6 +661,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF14C000 0x1000>;
 			gpio-controller;
@@ -587,6 +669,8 @@
 			gpio-base  = <90>;
 			gpio-pins = <&pctl_gpio_m>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF14C000 0x1000>;
 			gpio-controller;
@@ -594,6 +678,9 @@
 			abilis,ngpio = <4>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpiom";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		gpion: gpio@FF14d000 {
@@ -602,6 +689,7 @@
 			#interrupt-cells = <1>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <27 1>;
 			reg = <0xFF14D000 0x1000>;
 			gpio-controller;
@@ -609,6 +697,8 @@
 			gpio-base  = <94>;
 			gpio-pins = <&pctl_gpio_n>;
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <27 2>;
 			reg = <0xFF14D000 0x1000>;
 			gpio-controller;
@@ -616,6 +706,9 @@
 			abilis,ngpio = <5>;
 			gpio-ranges = <&iomux 0 0 0>;
 			gpio-ranges-group-names = "gpion";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

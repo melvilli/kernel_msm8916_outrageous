@@ -14,9 +14,12 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpcon {
 		/* CP controller registers */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The Integrator/CP overall clocking architecture can be found in
 	 * ARM DUI 0184B page 7-28 "Integrator/CP922T system clocks" which
@@ -99,15 +102,24 @@
 
 	syscon {
 		compatible = "arm,integrator-cp-syscon";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg = <0xcb000000 0x100>;
 	};
 
 	timer0: timer@13000000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* TIMER0 runs @ 25MHz */
 		compatible = "arm,integrator-cp-timer";
 		status = "disabled";
+=======
+		/* TIMER0 runs directly on the 25MHz chrystal */
+		compatible = "arm,integrator-cp-timer";
+		clocks = <&xtal25mhz>;
+>>>>>>> v3.18
 =======
 		/* TIMER0 runs directly on the 25MHz chrystal */
 		compatible = "arm,integrator-cp-timer";
@@ -119,6 +131,10 @@
 		/* TIMER1 runs @ 1MHz */
 		compatible = "arm,integrator-cp-timer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&timclk>;
+>>>>>>> v3.18
 =======
 		clocks = <&timclk>;
 >>>>>>> v3.18
@@ -128,6 +144,10 @@
 		/* TIMER2 runs @ 1MHz */
 		compatible = "arm,integrator-cp-timer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&timclk>;
+>>>>>>> v3.18
 =======
 		clocks = <&timclk>;
 >>>>>>> v3.18
@@ -147,14 +167,20 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sic: sic@ca000000 {
 		compatible = "arm,versatile-fpga-irq";
 =======
+=======
+>>>>>>> v3.18
 	/* The SIC is cascaded off IRQ 26 on the PIC */
 	sic: sic@ca000000 {
 		compatible = "arm,versatile-fpga-irq";
 		interrupt-parent = <&pic>;
 		interrupts = <26>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		#interrupt-cells = <1>;
 		interrupt-controller;
@@ -179,6 +205,11 @@
 		rtc@15000000 {
 			compatible = "arm,pl031", "arm,primecell";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -188,6 +219,11 @@
 		uart@16000000 {
 			compatible = "arm,pl011", "arm,primecell";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&uartclk>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&uartclk>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -197,6 +233,11 @@
 		uart@17000000 {
 			compatible = "arm,pl011", "arm,primecell";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&uartclk>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&uartclk>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -206,6 +247,11 @@
 		kmi@18000000 {
 			compatible = "arm,pl050", "arm,primecell";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&kmiclk>, <&pclk>;
+			clock-names = "KMIREFCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&kmiclk>, <&pclk>;
 			clock-names = "KMIREFCLK", "apb_pclk";
@@ -215,6 +261,11 @@
 		kmi@19000000 {
 			compatible = "arm,pl050", "arm,primecell";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&kmiclk>, <&pclk>;
+			clock-names = "KMIREFCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&kmiclk>, <&pclk>;
 			clock-names = "KMIREFCLK", "apb_pclk";
@@ -230,6 +281,11 @@
 			interrupts = <23 24>;
 			max-frequency = <515633>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&uartclk>, <&pclk>;
+			clock-names = "mclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&uartclk>, <&pclk>;
 			clock-names = "mclk", "apb_pclk";
@@ -241,6 +297,11 @@
 			reg = <0x1d000000 0x1000>;
 			interrupts = <25>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -252,6 +313,11 @@
 			reg = <0xC0000000 0x1000>;
 			interrupts = <22>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&auxosc>, <&pclk>;
+			clock-names = "clcd", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&auxosc>, <&pclk>;
 			clock-names = "clcd", "apb_pclk";

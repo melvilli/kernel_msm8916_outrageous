@@ -14,6 +14,11 @@
 #define _ASM_MICROBLAZE_DELAY_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/param.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/param.h>
 
@@ -65,6 +70,7 @@ extern void __bad_udelay(void);		/* deliberately undefined */
 extern void __bad_ndelay(void);		/* deliberately undefined */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define udelay(n) (__builtin_constant_p(n) ? \
 	((n) > __MAX_UDELAY ? __bad_udelay() : __udelay((n) * (19 * HZ))) : \
 	__udelay((n) * (19 * HZ)))
@@ -73,6 +79,8 @@ extern void __bad_ndelay(void);		/* deliberately undefined */
 	((n) > __MAX_NDELAY ? __bad_ndelay() : __udelay((n) * HZ)) : \
 	__udelay((n) * HZ))
 =======
+=======
+>>>>>>> v3.18
 #define udelay(n)						\
 	({							\
 		if (__builtin_constant_p(n)) {			\
@@ -96,6 +104,9 @@ extern void __bad_ndelay(void);		/* deliberately undefined */
 			__udelay((n) * HZ);			\
 		}						\
 	})
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define muldiv(a, b, c)		(((a)*(b))/(c))

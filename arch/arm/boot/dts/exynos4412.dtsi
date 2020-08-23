@@ -18,6 +18,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos4x12.dtsi"
 
 / {
@@ -69,6 +70,8 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 =======
+=======
+>>>>>>> v3.18
 #include "exynos4x12.dtsi"
 
 / {
@@ -88,6 +91,9 @@
 
 	pmu_system_controller: system-controller@10020000 {
 		compatible = "samsung,exynos4412-pmu", "syscon";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

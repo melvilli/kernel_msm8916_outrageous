@@ -150,7 +150,11 @@ static int iwch_l2t_send(struct t3cdev *tdev, struct sk_buff *skb, struct l2t_en
 	if (error < 0)
 		kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error < 0 ? error : 0;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -170,7 +174,11 @@ int iwch_cxgb3_ofld_send(struct t3cdev *tdev, struct sk_buff *skb)
 	if (error < 0)
 		kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error < 0 ? error : 0;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -427,6 +435,10 @@ static int send_abort(struct iwch_ep *ep, struct sk_buff *skb, gfp_t gfp)
 	set_arp_failure_handler(skb, abort_arp_failure);
 	req = (struct cpl_abort_req *) skb_put(skb, sizeof(*req));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(req, 0, sizeof(*req));
+>>>>>>> v3.18
 =======
 	memset(req, 0, sizeof(*req));
 >>>>>>> v3.18
@@ -734,13 +746,19 @@ static void connect_reply_upcall(struct iwch_ep *ep, int status)
 	event.event = IW_CM_EVENT_CONNECT_REPLY;
 	event.status = status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event.local_addr = ep->com.local_addr;
 	event.remote_addr = ep->com.remote_addr;
 =======
+=======
+>>>>>>> v3.18
 	memcpy(&event.local_addr, &ep->com.local_addr,
 	       sizeof(ep->com.local_addr));
 	memcpy(&event.remote_addr, &ep->com.remote_addr,
 	       sizeof(ep->com.remote_addr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((status == 0) || (status == -ECONNREFUSED)) {
@@ -767,13 +785,19 @@ static void connect_request_upcall(struct iwch_ep *ep)
 	memset(&event, 0, sizeof(event));
 	event.event = IW_CM_EVENT_CONNECT_REQUEST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	event.local_addr = ep->com.local_addr;
 	event.remote_addr = ep->com.remote_addr;
 =======
+=======
+>>>>>>> v3.18
 	memcpy(&event.local_addr, &ep->com.local_addr,
 	       sizeof(ep->com.local_addr));
 	memcpy(&event.remote_addr, &ep->com.remote_addr,
 	       sizeof(ep->com.local_addr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	event.private_data_len = ep->plen;
 	event.private_data = ep->mpa_pkt + sizeof(struct mpa_message);
@@ -1899,8 +1923,14 @@ static int is_loopback_dst(struct iw_cm_id *cm_id)
 {
 	struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev = ip_dev_find(&init_net, cm_id->remote_addr.sin_addr.s_addr);
+=======
+	struct sockaddr_in *raddr = (struct sockaddr_in *)&cm_id->remote_addr;
+
+	dev = ip_dev_find(&init_net, raddr->sin_addr.s_addr);
+>>>>>>> v3.18
 =======
 	struct sockaddr_in *raddr = (struct sockaddr_in *)&cm_id->remote_addr;
 
@@ -1919,7 +1949,10 @@ int iwch_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *conn_param)
 	struct rtable *rt;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct sockaddr_in *laddr = (struct sockaddr_in *)&cm_id->local_addr;
 	struct sockaddr_in *raddr = (struct sockaddr_in *)&cm_id->remote_addr;
 
@@ -1927,6 +1960,9 @@ int iwch_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *conn_param)
 		err = -ENOSYS;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (is_loopback_dst(cm_id)) {
@@ -1972,11 +2008,17 @@ int iwch_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *conn_param)
 
 	/* find a route */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt = find_route(h->rdev.t3cdev_p,
 			cm_id->local_addr.sin_addr.s_addr,
 			cm_id->remote_addr.sin_addr.s_addr,
 			cm_id->local_addr.sin_port,
 			cm_id->remote_addr.sin_port, IPTOS_LOWDELAY);
+=======
+	rt = find_route(h->rdev.t3cdev_p, laddr->sin_addr.s_addr,
+			raddr->sin_addr.s_addr, laddr->sin_port,
+			raddr->sin_port, IPTOS_LOWDELAY);
+>>>>>>> v3.18
 =======
 	rt = find_route(h->rdev.t3cdev_p, laddr->sin_addr.s_addr,
 			raddr->sin_addr.s_addr, laddr->sin_port,
@@ -1990,7 +2032,11 @@ int iwch_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *conn_param)
 	ep->dst = &rt->dst;
 	ep->l2t = t3_l2t_get(ep->com.tdev, ep->dst, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     &cm_id->remote_addr.sin_addr.s_addr);
+=======
+			     &raddr->sin_addr.s_addr);
+>>>>>>> v3.18
 =======
 			     &raddr->sin_addr.s_addr);
 >>>>>>> v3.18
@@ -2003,13 +2049,19 @@ int iwch_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *conn_param)
 	state_set(&ep->com, CONNECTING);
 	ep->tos = IPTOS_LOWDELAY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep->com.local_addr = cm_id->local_addr;
 	ep->com.remote_addr = cm_id->remote_addr;
 =======
+=======
+>>>>>>> v3.18
 	memcpy(&ep->com.local_addr, &cm_id->local_addr,
 	       sizeof(ep->com.local_addr));
 	memcpy(&ep->com.remote_addr, &cm_id->remote_addr,
 	       sizeof(ep->com.remote_addr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* send connect request to rnic */
@@ -2039,12 +2091,18 @@ int iwch_create_listen(struct iw_cm_id *cm_id, int backlog)
 	might_sleep();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cm_id->local_addr.ss_family != PF_INET) {
 		err = -ENOSYS;
 		goto fail1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ep = alloc_ep(sizeof(*ep), GFP_KERNEL);
 	if (!ep) {
@@ -2058,7 +2116,12 @@ int iwch_create_listen(struct iw_cm_id *cm_id, int backlog)
 	ep->com.cm_id = cm_id;
 	ep->backlog = backlog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep->com.local_addr = cm_id->local_addr;
+=======
+	memcpy(&ep->com.local_addr, &cm_id->local_addr,
+	       sizeof(ep->com.local_addr));
+>>>>>>> v3.18
 =======
 	memcpy(&ep->com.local_addr, &cm_id->local_addr,
 	       sizeof(ep->com.local_addr));

@@ -4,7 +4,10 @@ ToDos sorted by priority:
   (current implementation has issues on AMD)
 - Try to read out boost states and frequencies on Intel
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Adjust README
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - Somewhere saw the ability to read power consumption of

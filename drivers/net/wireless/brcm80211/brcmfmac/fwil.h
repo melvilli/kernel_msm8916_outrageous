@@ -18,7 +18,10 @@
 #define _fwil_h_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*******************************************************************************
  * Dongle command codes that are interpreted by firmware
  ******************************************************************************/
@@ -80,6 +83,9 @@
 #define BRCMF_C_GET_VAR				262
 #define BRCMF_C_SET_VAR				263
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 s32 brcmf_fil_cmd_data_set(struct brcmf_if *ifp, u32 cmd, void *data, u32 len);
 s32 brcmf_fil_cmd_data_get(struct brcmf_if *ifp, u32 cmd, void *data, u32 len);
@@ -87,7 +93,11 @@ s32 brcmf_fil_cmd_int_set(struct brcmf_if *ifp, u32 cmd, u32 data);
 s32 brcmf_fil_cmd_int_get(struct brcmf_if *ifp, u32 cmd, u32 *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, void *data,
+=======
+s32 brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, const void *data,
+>>>>>>> v3.18
 =======
 s32 brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, const void *data,
 >>>>>>> v3.18

@@ -132,7 +132,12 @@ static int lm8333_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct lm8333_platform_data *pdata = client->dev.platform_data;
+=======
+	const struct lm8333_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct lm8333_platform_data *pdata =
 			dev_get_platdata(&client->dev);

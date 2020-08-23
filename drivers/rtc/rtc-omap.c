@@ -24,9 +24,13 @@
 #include <linux/of_device.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/io.h>
 
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -77,6 +81,7 @@
 #define OMAP_RTC_KICK1_REG		0x70
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* OMAP_RTC_CTRL_REG bit fields: */
 #define OMAP_RTC_CTRL_SPLIT		(1<<7)
 #define OMAP_RTC_CTRL_DISABLE		(1<<6)
@@ -101,6 +106,8 @@
 #define OMAP_RTC_INTERRUPTS_IT_ALARM    (1<<3)
 #define OMAP_RTC_INTERRUPTS_IT_TIMER    (1<<2)
 =======
+=======
+>>>>>>> v3.18
 #define OMAP_RTC_IRQWAKEEN		0x7c
 
 /* OMAP_RTC_CTRL_REG bit fields: */
@@ -132,6 +139,9 @@
 
 /* OMAP_RTC_IRQWAKEEN bit fields: */
 #define OMAP_RTC_IRQWAKEEN_ALARM_WAKEEN	BIT(1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* OMAP_RTC_KICKER values */
@@ -139,8 +149,11 @@
 #define	KICK1_VALUE			0x95a4f1e0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	OMAP_RTC_HAS_KICKER		0x1
 =======
+=======
+>>>>>>> v3.18
 #define	OMAP_RTC_HAS_KICKER		BIT(0)
 
 /*
@@ -154,6 +167,9 @@
  * the 32KHz clock to be explicitly enabled.
  */
 #define OMAP_RTC_HAS_32KCLK_EN		BIT(2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __iomem	*rtc_base;
@@ -208,17 +224,24 @@ static irqreturn_t rtc_irq(int irq, void *rtc)
 static int omap_rtc_alarm_irq_enable(struct device *dev, unsigned int enabled)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reg;
 =======
+=======
+>>>>>>> v3.18
 	u8 reg, irqwake_reg = 0;
 	struct platform_device *pdev = to_platform_device(dev);
 	const struct platform_device_id *id_entry =
 					platform_get_device_id(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_disable();
 	rtc_wait_not_busy();
 	reg = rtc_read(OMAP_RTC_INTERRUPTS_REG);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (enabled)
 		reg |= OMAP_RTC_INTERRUPTS_IT_ALARM;
@@ -227,6 +250,8 @@ static int omap_rtc_alarm_irq_enable(struct device *dev, unsigned int enabled)
 	rtc_wait_not_busy();
 	rtc_write(reg, OMAP_RTC_INTERRUPTS_REG);
 =======
+=======
+>>>>>>> v3.18
 	if (id_entry->driver_data & OMAP_RTC_HAS_IRQWAKEEN)
 		irqwake_reg = rtc_read(OMAP_RTC_IRQWAKEEN);
 
@@ -241,6 +266,9 @@ static int omap_rtc_alarm_irq_enable(struct device *dev, unsigned int enabled)
 	rtc_write(reg, OMAP_RTC_INTERRUPTS_REG);
 	if (id_entry->driver_data & OMAP_RTC_HAS_IRQWAKEEN)
 		rtc_write(irqwake_reg, OMAP_RTC_IRQWAKEEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_enable();
 
@@ -342,12 +370,18 @@ static int omap_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *alm)
 static int omap_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reg;
 =======
+=======
+>>>>>>> v3.18
 	u8 reg, irqwake_reg = 0;
 	struct platform_device *pdev = to_platform_device(dev);
 	const struct platform_device_id *id_entry =
 					platform_get_device_id(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (tm2bcd(&alm->time) < 0)
@@ -365,12 +399,15 @@ static int omap_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alm)
 
 	reg = rtc_read(OMAP_RTC_INTERRUPTS_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (alm->enabled)
 		reg |= OMAP_RTC_INTERRUPTS_IT_ALARM;
 	else
 		reg &= ~OMAP_RTC_INTERRUPTS_IT_ALARM;
 	rtc_write(reg, OMAP_RTC_INTERRUPTS_REG);
 =======
+=======
+>>>>>>> v3.18
 	if (id_entry->driver_data & OMAP_RTC_HAS_IRQWAKEEN)
 		irqwake_reg = rtc_read(OMAP_RTC_IRQWAKEEN);
 
@@ -384,6 +421,9 @@ static int omap_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alm)
 	rtc_write(reg, OMAP_RTC_INTERRUPTS_REG);
 	if (id_entry->driver_data & OMAP_RTC_HAS_IRQWAKEEN)
 		rtc_write(irqwake_reg, OMAP_RTC_IRQWAKEEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_enable();
@@ -403,7 +443,12 @@ static int omap_rtc_alarm;
 static int omap_rtc_timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	OMAP_RTC_DATA_DA830_IDX	1
+=======
+#define	OMAP_RTC_DATA_AM3352_IDX	1
+#define	OMAP_RTC_DATA_DA830_IDX		2
+>>>>>>> v3.18
 =======
 #define	OMAP_RTC_DATA_AM3352_IDX	1
 #define	OMAP_RTC_DATA_DA830_IDX		2
@@ -413,8 +458,11 @@ static struct platform_device_id omap_rtc_devtype[] = {
 	{
 		.name	= DRIVER_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}, {
 =======
+=======
+>>>>>>> v3.18
 	},
 	[OMAP_RTC_DATA_AM3352_IDX] = {
 		.name	= "am3352-rtc",
@@ -422,6 +470,9 @@ static struct platform_device_id omap_rtc_devtype[] = {
 			       OMAP_RTC_HAS_32KCLK_EN,
 	},
 	[OMAP_RTC_DATA_DA830_IDX] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name	= "da830-rtc",
 		.driver_data = OMAP_RTC_HAS_KICKER,
@@ -435,6 +486,12 @@ static const struct of_device_id omap_rtc_of_match[] = {
 		.data		= &omap_rtc_devtype[OMAP_RTC_DATA_DA830_IDX],
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{	.compatible	= "ti,am3352-rtc",
+		.data		= &omap_rtc_devtype[OMAP_RTC_DATA_AM3352_IDX],
+	},
+>>>>>>> v3.18
 =======
 	{	.compatible	= "ti,am3352-rtc",
 		.data		= &omap_rtc_devtype[OMAP_RTC_DATA_AM3352_IDX],
@@ -457,13 +514,19 @@ static int __init omap_rtc_probe(struct platform_device *pdev)
 		pdev->id_entry = of_id->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	id_entry = platform_get_device_id(pdev);
 	if (!id_entry) {
 		dev_err(&pdev->dev, "no matching device entry\n");
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	omap_rtc_timer = platform_get_irq(pdev, 0);
 	if (omap_rtc_timer <= 0) {
@@ -487,8 +550,12 @@ static int __init omap_rtc_probe(struct platform_device *pdev)
 	pm_runtime_get_sync(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id_entry = platform_get_device_id(pdev);
 	if (id_entry && (id_entry->driver_data & OMAP_RTC_HAS_KICKER)) {
+=======
+	if (id_entry->driver_data & OMAP_RTC_HAS_KICKER) {
+>>>>>>> v3.18
 =======
 	if (id_entry->driver_data & OMAP_RTC_HAS_KICKER) {
 >>>>>>> v3.18
@@ -511,11 +578,17 @@ static int __init omap_rtc_probe(struct platform_device *pdev)
 	rtc_write(0, OMAP_RTC_INTERRUPTS_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* enable RTC functional clock */
 	if (id_entry->driver_data & OMAP_RTC_HAS_32KCLK_EN)
 		rtc_writel(OMAP_RTC_OSC_32KCLK_EN, OMAP_RTC_OSC_REG);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* clear old status */
 	reg = rtc_read(OMAP_RTC_STATUS_REG);
@@ -566,6 +639,11 @@ static int __init omap_rtc_probe(struct platform_device *pdev)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_init_wakeup(&pdev->dev, true);
+
+>>>>>>> v3.18
 =======
 	device_init_wakeup(&pdev->dev, true);
 
@@ -580,7 +658,11 @@ static int __init omap_rtc_probe(struct platform_device *pdev)
 
 fail0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id_entry && (id_entry->driver_data & OMAP_RTC_HAS_KICKER))
+=======
+	if (id_entry->driver_data & OMAP_RTC_HAS_KICKER)
+>>>>>>> v3.18
 =======
 	if (id_entry->driver_data & OMAP_RTC_HAS_KICKER)
 >>>>>>> v3.18
@@ -601,7 +683,11 @@ static int __exit omap_rtc_remove(struct platform_device *pdev)
 	rtc_write(0, OMAP_RTC_INTERRUPTS_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id_entry && (id_entry->driver_data & OMAP_RTC_HAS_KICKER))
+=======
+	if (id_entry->driver_data & OMAP_RTC_HAS_KICKER)
+>>>>>>> v3.18
 =======
 	if (id_entry->driver_data & OMAP_RTC_HAS_KICKER)
 >>>>>>> v3.18
@@ -623,8 +709,13 @@ static int omap_rtc_suspend(struct device *dev)
 
 	/* FIXME the RTC alarm is not currently acting as a wakeup event
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * source, and in fact this enable() call is just saving a flag
 	 * that's never used...
+=======
+	 * source on some platforms, and in fact this enable() call is just
+	 * saving a flag that's never used...
+>>>>>>> v3.18
 =======
 	 * source on some platforms, and in fact this enable() call is just
 	 * saving a flag that's never used...
@@ -651,6 +742,10 @@ static int omap_rtc_resume(struct device *dev)
 	else
 		rtc_write(irqstat, OMAP_RTC_INTERRUPTS_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -674,7 +769,11 @@ static struct platform_driver omap_rtc_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &omap_rtc_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(omap_rtc_of_match),
+=======
+		.of_match_table = omap_rtc_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = omap_rtc_of_match,
 >>>>>>> v3.18

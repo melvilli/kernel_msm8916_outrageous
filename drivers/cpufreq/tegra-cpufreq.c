@@ -27,6 +27,7 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/suspend.h>
 
 /* Frequency table index must be sequential starting at 0 */
@@ -41,6 +42,8 @@ static struct cpufreq_frequency_table freq_table[] = {
 	{ 7, 1000000 },
 	{ 8, CPUFREQ_TABLE_END },
 =======
+=======
+>>>>>>> v3.18
 
 static struct cpufreq_frequency_table freq_table[] = {
 	{ .frequency = 216000 },
@@ -52,6 +55,9 @@ static struct cpufreq_frequency_table freq_table[] = {
 	{ .frequency = 912000 },
 	{ .frequency = 1000000 },
 	{ .frequency = CPUFREQ_TABLE_END },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -61,6 +67,7 @@ static struct clk *cpu_clk;
 static struct clk *pll_x_clk;
 static struct clk *pll_p_clk;
 static struct clk *emc_clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static unsigned long target_cpu_speed[NUM_CPUS];
@@ -85,6 +92,8 @@ static unsigned int tegra_getspeed(unsigned int cpu)
 
 static int tegra_cpu_clk_set_rate(unsigned long rate)
 =======
+=======
+>>>>>>> v3.18
 static bool pll_x_prepared;
 
 static unsigned int tegra_get_intermediate(struct cpufreq_policy *policy,
@@ -105,6 +114,9 @@ static unsigned int tegra_get_intermediate(struct cpufreq_policy *policy,
 
 static int tegra_target_intermediate(struct cpufreq_policy *policy,
 				     unsigned int index)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
@@ -112,8 +124,11 @@ static int tegra_target_intermediate(struct cpufreq_policy *policy,
 	/*
 	 * Take an extra reference to the main pll so it doesn't turn
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * off when we move the cpu off of it
 =======
+=======
+>>>>>>> v3.18
 	 * off when we move the cpu off of it as enabling it again while we
 	 * switch to it from tegra_target() would take additional time.
 	 *
@@ -121,11 +136,15 @@ static int tegra_target_intermediate(struct cpufreq_policy *policy,
 	 * switch to an intermediate freq and so this routine isn't called.
 	 * Also, we wouldn't be using pll_x anymore and must not take extra
 	 * reference to it, as it can be disabled now to save some power.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	clk_prepare_enable(pll_x_clk);
 
 	ret = clk_set_parent(cpu_clk, pll_p_clk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret) {
 		pr_err("Failed to switch cpu to clock pll_p\n");
@@ -164,6 +183,8 @@ static int tegra_update_cpu_speed(struct cpufreq_policy *policy,
 	if (freqs.old == freqs.new)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret)
 		clk_disable_unprepare(pll_x_clk);
 	else
@@ -177,6 +198,9 @@ static int tegra_target(struct cpufreq_policy *policy, unsigned int index)
 	unsigned long rate = freq_table[index].frequency;
 	unsigned int ifreq = clk_get_rate(pll_p_clk) / 1000;
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -190,6 +214,7 @@ static int tegra_target(struct cpufreq_policy *policy, unsigned int index)
 	else
 		clk_set_rate(emc_clk, 100000000);  /* emc 50Mhz */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
@@ -275,6 +300,8 @@ static struct notifier_block tegra_cpu_pm_notifier = {
 static int tegra_cpu_init(struct cpufreq_policy *policy)
 {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * target freq == pll_p, don't need to take extra reference to pll_x_clk
 	 * as it isn't used anymore.
@@ -307,6 +334,9 @@ static int tegra_cpu_init(struct cpufreq_policy *policy)
 {
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (policy->cpu >= NUM_CPUS)
 		return -EINVAL;
@@ -314,6 +344,7 @@ static int tegra_cpu_init(struct cpufreq_policy *policy)
 	clk_prepare_enable(emc_clk);
 	clk_prepare_enable(cpu_clk);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpufreq_frequency_table_cpuinfo(policy, freq_table);
 	cpufreq_frequency_table_get_attr(freq_table, policy->cpu);
@@ -329,6 +360,8 @@ static int tegra_cpu_init(struct cpufreq_policy *policy)
 		register_pm_notifier(&tegra_cpu_pm_notifier);
 
 =======
+=======
+>>>>>>> v3.18
 	/* FIXME: what's the actual transition time? */
 	ret = cpufreq_generic_init(policy, freq_table, 300 * 1000);
 	if (ret) {
@@ -339,6 +372,9 @@ static int tegra_cpu_init(struct cpufreq_policy *policy)
 
 	policy->clk = cpu_clk;
 	policy->suspend_freq = freq_table[0].frequency;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -346,7 +382,11 @@ static int tegra_cpu_init(struct cpufreq_policy *policy)
 static int tegra_cpu_exit(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_cpuinfo(policy, freq_table);
+=======
+	clk_disable_unprepare(cpu_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(cpu_clk);
 >>>>>>> v3.18
@@ -354,6 +394,7 @@ static int tegra_cpu_exit(struct cpufreq_policy *policy)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct freq_attr *tegra_cpufreq_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
@@ -369,6 +410,8 @@ static struct cpufreq_driver tegra_cpufreq_driver = {
 	.name		= "tegra",
 	.attr		= tegra_cpufreq_attr,
 =======
+=======
+>>>>>>> v3.18
 static struct cpufreq_driver tegra_cpufreq_driver = {
 	.flags			= CPUFREQ_NEED_INITIAL_FREQ_CHECK,
 	.verify			= cpufreq_generic_frequency_table_verify,
@@ -383,13 +426,20 @@ static struct cpufreq_driver tegra_cpufreq_driver = {
 #ifdef CONFIG_PM
 	.suspend		= cpufreq_generic_suspend,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int __init tegra_cpufreq_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_clk = clk_get_sys(NULL, "cpu");
+=======
+	cpu_clk = clk_get_sys(NULL, "cclk");
+>>>>>>> v3.18
 =======
 	cpu_clk = clk_get_sys(NULL, "cclk");
 >>>>>>> v3.18
@@ -401,7 +451,11 @@ static int __init tegra_cpufreq_init(void)
 		return PTR_ERR(pll_x_clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pll_p_clk = clk_get_sys(NULL, "pll_p_cclk");
+=======
+	pll_p_clk = clk_get_sys(NULL, "pll_p");
+>>>>>>> v3.18
 =======
 	pll_p_clk = clk_get_sys(NULL, "pll_p");
 >>>>>>> v3.18

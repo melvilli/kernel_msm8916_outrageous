@@ -94,6 +94,7 @@ config INPUT_BMA150
 	  module will be called bma150.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config INPUT_HBTP_INPUT
 	tristate "HBTP input driver support"
 	help
@@ -105,6 +106,8 @@ config INPUT_HBTP_INPUT
 	  To compile this driver as a module, choose M here: the
 	  module will be called hbtp_input.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config INPUT_PCSPKR
@@ -159,7 +162,10 @@ config INPUT_M68K_BEEP
 	depends on M68K
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INPUT_MAX77693_HAPTIC
 	tristate "MAXIM MAX77693 haptic controller support"
 	depends on MFD_MAX77693 && PWM
@@ -171,6 +177,9 @@ config INPUT_MAX77693_HAPTIC
 	  To compile this driver as module, choose M here: the
 	  module will be called max77693-haptic.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config INPUT_MAX8925_ONKEY
 	tristate "MAX8925 ONKEY support"
@@ -185,7 +194,11 @@ config INPUT_MAX8925_ONKEY
 config INPUT_MAX8997_HAPTIC
 	tristate "MAXIM MAX8997 haptic controller support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_PWM && MFD_MAX8997
+=======
+	depends on PWM && MFD_MAX8997
+>>>>>>> v3.18
 =======
 	depends on PWM && MFD_MAX8997
 >>>>>>> v3.18
@@ -201,7 +214,11 @@ config INPUT_MAX8997_HAPTIC
 config INPUT_MC13783_PWRBUTTON
 	tristate "MC13783 ON buttons"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MFD_MC13783
+=======
+	depends on MFD_MC13XXX
+>>>>>>> v3.18
 =======
 	depends on MFD_MC13XXX
 >>>>>>> v3.18
@@ -234,6 +251,7 @@ config INPUT_MPU3050
 	  module will be called mpu3050.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_MPU6050
 	tristate "MPU6050 6-axix gyroscope + acceleromater combo"
 	depends on I2C
@@ -254,6 +272,8 @@ config SENSORS_LIS3DH
 	  To compile this driver as a module, choose M here: the
 	  module will be called lis3dh_acc.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config INPUT_APANEL
@@ -282,7 +302,10 @@ config INPUT_GP2A
 	  module will be called gp2ap002a00f.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INPUT_GPIO_BEEPER
 	tristate "Generic GPIO Beeper support"
 	depends on GPIOLIB
@@ -292,6 +315,9 @@ config INPUT_GPIO_BEEPER
 	  To compile this driver as a module, choose M here: the
 	  module will be called gpio-beeper.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config INPUT_GPIO_TILT_POLLED
 	tristate "Polled GPIO tilt switch"
@@ -332,7 +358,11 @@ config INPUT_COBALT_BTNS
 config INPUT_WISTRON_BTNS
 	tristate "x86 Wistron laptop button interface"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86 && !X86_64
+=======
+	depends on X86_32
+>>>>>>> v3.18
 =======
 	depends on X86_32
 >>>>>>> v3.18
@@ -375,6 +405,7 @@ config INPUT_ATI_REMOTE2
 	  called ati_remote2.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config INPUT_KEYCHORD
 	tristate "Key chord input driver support"
 	help
@@ -386,6 +417,8 @@ config INPUT_KEYCHORD
 	  To compile this driver as a module, choose M here: the
 	  module will be called keychord.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config INPUT_KEYSPAN_REMOTE
@@ -524,6 +557,7 @@ config INPUT_SGI_BTNS
 	  module will be called sgi_btns.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config INPUT_GPIO
 	tristate "GPIO driver support"
 	help
@@ -543,6 +577,8 @@ config INPUT_ISA1200_FF_MEMLESS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config HP_SDC_RTC
 	tristate "HP SDC Real Time Clock"
 	depends on (GSC || HP300) && SERIO
@@ -552,7 +588,10 @@ config HP_SDC_RTC
 	  of the HP SDC controller.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INPUT_PALMAS_PWRBUTTON
 	tristate "Palmas Power button Driver"
 	depends on MFD_PALMAS
@@ -563,6 +602,9 @@ config INPUT_PALMAS_PWRBUTTON
 	  To compile this driver as a module, choose M here. The module will
 	  be called palmas_pwrbutton.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config INPUT_PCF50633_PMU
 	tristate "PCF50633 PMU events"
@@ -584,7 +626,11 @@ config INPUT_PCF8574
 config INPUT_PWM_BEEPER
 	tristate "PWM beeper support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_PWM || PWM
+=======
+	depends on PWM
+>>>>>>> v3.18
 =======
 	depends on PWM
 >>>>>>> v3.18
@@ -763,6 +809,7 @@ config INPUT_XEN_KBDDEV_FRONTEND
 	  To compile this driver as a module, choose M here: the
 	  module will be called xen-kbdfront.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config BMP18X
        tristate "BMP18X digital pressure sensor"
@@ -980,6 +1027,8 @@ config BTP_FPC1140
 endif
 
 =======
+=======
+>>>>>>> v3.18
 config INPUT_SIRFSOC_ONKEY
 	bool "CSR SiRFSoC power on/off/suspend key support"
 	depends on ARCH_SIRF && OF
@@ -1033,4 +1082,7 @@ config INPUT_DRV2667_HAPTICS
 	  module will be called drv260x-haptics.
 
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

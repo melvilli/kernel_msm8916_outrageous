@@ -28,8 +28,13 @@
 #define FEC_IEVENT		0x004 /* Interrupt event reg */
 #define FEC_IMASK		0x008 /* Interrupt mask reg */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FEC_R_DES_ACTIVE	0x010 /* Receive descriptor reg */
 #define FEC_X_DES_ACTIVE	0x014 /* Transmit descriptor reg */
+=======
+#define FEC_R_DES_ACTIVE_0	0x010 /* Receive descriptor reg */
+#define FEC_X_DES_ACTIVE_0	0x014 /* Transmit descriptor reg */
+>>>>>>> v3.18
 =======
 #define FEC_R_DES_ACTIVE_0	0x010 /* Receive descriptor reg */
 #define FEC_X_DES_ACTIVE_0	0x014 /* Transmit descriptor reg */
@@ -44,13 +49,19 @@
 #define FEC_ADDR_HIGH		0x0e8 /* High 16bits MAC address */
 #define FEC_OPD			0x0ec /* Opcode + Pause duration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FEC_TXIC0		0xF0  /* Tx Interrupt Coalescing for ring 0 */
 #define FEC_TXIC1		0xF4  /* Tx Interrupt Coalescing for ring 1 */
 #define FEC_TXIC2		0xF8  /* Tx Interrupt Coalescing for ring 2 */
 #define FEC_RXIC0		0x100 /* Rx Interrupt Coalescing for ring 0 */
 #define FEC_RXIC1		0x104 /* Rx Interrupt Coalescing for ring 1 */
 #define FEC_RXIC2		0x108 /* Rx Interrupt Coalescing for ring 2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FEC_HASH_TABLE_HIGH	0x118 /* High 32bits hash table */
 #define FEC_HASH_TABLE_LOW	0x11c /* Low 32bits hash table */
@@ -60,15 +71,21 @@
 #define FEC_R_BOUND		0x14c /* FIFO receive bound reg */
 #define FEC_R_FSTART		0x150 /* FIFO receive start reg */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FEC_R_DES_START		0x180 /* Receive descriptor ring */
 #define FEC_X_DES_START		0x184 /* Transmit descriptor ring */
 =======
+=======
+>>>>>>> v3.18
 #define FEC_R_DES_START_1	0x160 /* Receive descriptor ring 1 */
 #define FEC_X_DES_START_1	0x164 /* Transmit descriptor ring 1 */
 #define FEC_R_DES_START_2	0x16c /* Receive descriptor ring 2 */
 #define FEC_X_DES_START_2	0x170 /* Transmit descriptor ring 2 */
 #define FEC_R_DES_START_0	0x180 /* Receive descriptor ring */
 #define FEC_X_DES_START_0	0x184 /* Transmit descriptor ring */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FEC_R_BUFF_SIZE		0x188 /* Maximum receive buff size */
 #define FEC_R_FIFO_RSFL		0x190 /* Receive FIFO section full threshold */
@@ -77,7 +94,10 @@
 #define FEC_R_FIFO_RAFL		0x19c /* Receive FIFO almost full threshold */
 #define FEC_RACC		0x1C4 /* Receive Accelerator function */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FEC_RCMR_1		0x1c8 /* Receive classification match ring 1 */
 #define FEC_RCMR_2		0x1cc /* Receive classification match ring 2 */
 #define FEC_DMA_CFG_1		0x1d8 /* DMA class configuration for ring 1 */
@@ -87,6 +107,9 @@
 #define FEC_R_DES_ACTIVE_2	0x1e8 /* Rx descriptor active for ring 2 */
 #define FEC_X_DES_ACTIVE_2	0x1ec /* Tx descriptor active for ring 2 */
 #define FEC_QOS_SCHEME		0x1f0 /* Set multi queues Qos scheme */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FEC_MIIGSK_CFGR		0x300 /* MIIGSK Configuration reg */
 #define FEC_MIIGSK_ENR		0x308 /* MIIGSK Enable reg */
@@ -96,7 +119,10 @@
 #define BM_MIIGSK_CFGR_FRCONT_10M	0x40
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RMON_T_DROP		0x200 /* Count of frames not cntd correctly */
 #define RMON_T_PACKETS		0x204 /* RMON TX packet count */
 #define RMON_T_BC_PKT		0x208 /* RMON TX broadcast pkts */
@@ -152,6 +178,9 @@
 #define IEEE_R_FDXFC		0x2DC /* Flow control pause frames rx'd */
 #define IEEE_R_OCTETS_OK	0x2E0 /* Octet cnt for frames rx'd w/o err */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 
@@ -160,15 +189,21 @@
 #define FEC_IMASK		0x008 /* Interrupt mask reg */
 #define FEC_IVEC		0x00c /* Interrupt vec status reg */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FEC_R_DES_ACTIVE	0x010 /* Receive descriptor reg */
 #define FEC_X_DES_ACTIVE	0x014 /* Transmit descriptor reg */
 =======
+=======
+>>>>>>> v3.18
 #define FEC_R_DES_ACTIVE_0	0x010 /* Receive descriptor reg */
 #define FEC_R_DES_ACTIVE_1	FEC_R_DES_ACTIVE_0
 #define FEC_R_DES_ACTIVE_2	FEC_R_DES_ACTIVE_0
 #define FEC_X_DES_ACTIVE_0	0x014 /* Transmit descriptor reg */
 #define FEC_X_DES_ACTIVE_1	FEC_X_DES_ACTIVE_0
 #define FEC_X_DES_ACTIVE_2	FEC_X_DES_ACTIVE_0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FEC_MII_DATA		0x040 /* MII manage frame reg */
 #define FEC_MII_SPEED		0x044 /* MII speed control reg */
@@ -184,12 +219,15 @@
 #define FEC_GRP_HASH_TABLE_HIGH	0x3c8 /* High 32bits hash table */
 #define FEC_GRP_HASH_TABLE_LOW	0x3cc /* Low 32bits hash table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FEC_R_DES_START		0x3d0 /* Receive descriptor ring */
 #define FEC_X_DES_START		0x3d4 /* Transmit descriptor ring */
 #define FEC_R_BUFF_SIZE		0x3d8 /* Maximum receive buff size */
 #define FEC_FIFO_RAM		0x400 /* FIFO RAM buffer */
 
 =======
+=======
+>>>>>>> v3.18
 #define FEC_R_DES_START_0	0x3d0 /* Receive descriptor ring */
 #define FEC_R_DES_START_1	FEC_R_DES_START_0
 #define FEC_R_DES_START_2	FEC_R_DES_START_0
@@ -211,6 +249,9 @@
 #define FEC_RXIC0		0xFFF
 #define FEC_RXIC1		0xFFF
 #define FEC_RXIC2		0xFFF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_M5272 */
 
@@ -275,6 +316,12 @@ struct bufdesc_ex {
 #define BD_ENET_RX_STATS        ((ushort)0x013f)        /* All status bits */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Enhanced buffer descriptor control/status used by Ethernet receive */
+#define BD_ENET_RX_VLAN         0x00000004
+
+>>>>>>> v3.18
 =======
 /* Enhanced buffer descriptor control/status used by Ethernet receive */
 #define BD_ENET_RX_VLAN         0x00000004
@@ -296,7 +343,11 @@ struct bufdesc_ex {
 #define BD_ENET_TX_UN           ((ushort)0x0002)
 #define BD_ENET_TX_CSL          ((ushort)0x0001)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BD_ENET_TX_STATS        ((ushort)0x03ff)        /* All status bits */
+=======
+#define BD_ENET_TX_STATS        ((ushort)0x0fff)        /* All status bits */
+>>>>>>> v3.18
 =======
 #define BD_ENET_TX_STATS        ((ushort)0x0fff)        /* All status bits */
 >>>>>>> v3.18
@@ -312,7 +363,10 @@ struct bufdesc_ex {
 #define FEC_IRQ_NUM		3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Maximum number of queues supported
  * ENET with AVB IP can support up to 3 independent tx queues and rx queues.
  * User can point the queue number that is less than or equal to 3.
@@ -351,6 +405,9 @@ struct bufdesc_ex {
 #define RCMR_CMP(X)		((X == 1) ? RCMR_CMP_1 : RCMR_CMP_2)
 #define FEC_TX_BD_FTYPE(X)	((X & 0xF) << 20)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* The number of Tx and Rx buffers.  These are allocated from the page
  * pool.  The code may assume these are power of two, so it it best
@@ -360,7 +417,11 @@ struct bufdesc_ex {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FEC_ENET_RX_PAGES	8
+=======
+#define FEC_ENET_RX_PAGES	256
+>>>>>>> v3.18
 =======
 #define FEC_ENET_RX_PAGES	256
 >>>>>>> v3.18
@@ -370,8 +431,13 @@ struct bufdesc_ex {
 #define FEC_ENET_TX_FRSIZE	2048
 #define FEC_ENET_TX_FRPPG	(PAGE_SIZE / FEC_ENET_TX_FRSIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TX_RING_SIZE		16	/* Must be power of two */
 #define TX_RING_MOD_MASK	15	/*   for this to work */
+=======
+#define TX_RING_SIZE		512	/* Must be power of two */
+#define TX_RING_MOD_MASK	511	/*   for this to work */
+>>>>>>> v3.18
 =======
 #define TX_RING_SIZE		512	/* Must be power of two */
 #define TX_RING_MOD_MASK	511	/*   for this to work */
@@ -385,10 +451,13 @@ struct bufdesc_ex {
 #define FLAG_RX_CSUM_ERROR	(BD_ENET_RX_ICE | BD_ENET_RX_PCR)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct fec_enet_delayed_work {
 	struct delayed_work delay_work;
 	bool timeout;
 =======
+=======
+>>>>>>> v3.18
 /* Interrupt events/masks. */
 #define FEC_ENET_HBERR  ((uint)0x80000000)      /* Heartbeat error */
 #define FEC_ENET_BABR   ((uint)0x40000000)      /* Babbling receiver */
@@ -500,6 +569,9 @@ struct fec_enet_priv_rx_q {
 	uint rx_ring_size;
 
 	struct bufdesc	*cur_rx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -519,6 +591,7 @@ struct fec_enet_private {
 
 	struct clk *clk_ipg;
 	struct clk *clk_ahb;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clk *clk_enet_out;
 	struct clk *clk_ptp;
@@ -542,6 +615,8 @@ struct fec_enet_private {
 
 	int	opened;
 =======
+=======
+>>>>>>> v3.18
 	struct clk *clk_ref;
 	struct clk *clk_enet_out;
 	struct clk *clk_ptp;
@@ -567,6 +642,9 @@ struct fec_enet_private {
 
 	struct	platform_device *pdev;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int	dev_id;
 
@@ -577,6 +655,10 @@ struct fec_enet_private {
 	uint	phy_speed;
 	phy_interface_t	phy_interface;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *phy_node;
+>>>>>>> v3.18
 =======
 	struct device_node *phy_node;
 >>>>>>> v3.18
@@ -592,6 +674,11 @@ struct fec_enet_private {
 	int	csum_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct tx_timeout_work;
+
+>>>>>>> v3.18
 =======
 	struct work_struct tx_timeout_work;
 
@@ -608,6 +695,7 @@ struct fec_enet_private {
 	int hwts_rx_en;
 	int hwts_tx_en;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list time_keep;
 	struct fec_enet_delayed_work delay_work;
 };
@@ -616,6 +704,8 @@ void fec_ptp_init(struct net_device *ndev, struct platform_device *pdev);
 void fec_ptp_start_cyclecounter(struct net_device *ndev);
 int fec_ptp_ioctl(struct net_device *ndev, struct ifreq *ifr, int cmd);
 =======
+=======
+>>>>>>> v3.18
 	struct delayed_work time_keep;
 	struct regulator *reg_phy;
 
@@ -646,6 +736,9 @@ void fec_ptp_start_cyclecounter(struct net_device *ndev);
 int fec_ptp_set(struct net_device *ndev, struct ifreq *ifr);
 int fec_ptp_get(struct net_device *ndev, struct ifreq *ifr);
 uint fec_ptp_check_pps_event(struct fec_enet_private *fep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /****************************************************************************/

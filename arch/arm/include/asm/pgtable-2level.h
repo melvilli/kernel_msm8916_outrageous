@@ -183,7 +183,10 @@ static inline pmd_t *pmd_offset(pud_t *pud, unsigned long addr)
 
 #define set_pte_ext(ptep,pte,ext) cpu_set_pte_ext(ptep,pte,ext)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define pte_special(pte)	(0)
 static inline pte_t pte_mkspecial(pte_t pte) { return pte; }
 
@@ -193,6 +196,9 @@ static inline pte_t pte_mkspecial(pte_t pte) { return pte; }
  */
 #define pmd_hugewillfault(pmd)	(0)
 #define pmd_thp_or_huge(pmd)	(0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASSEMBLY__ */

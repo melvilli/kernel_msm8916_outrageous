@@ -64,15 +64,21 @@ uint8_t ast_get_index_reg_mask(struct ast_private *ast,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ast_detect_chip(struct drm_device *dev)
 {
 	struct ast_private *ast = dev->dev_private;
 =======
+=======
+>>>>>>> v3.18
 static int ast_detect_chip(struct drm_device *dev, bool *need_post)
 {
 	struct ast_private *ast = dev->dev_private;
 	uint32_t data, jreg;
 	ast_open_key(ast);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dev->pdev->device == PCI_CHIP_AST1180) {
@@ -80,12 +86,18 @@ static int ast_detect_chip(struct drm_device *dev, bool *need_post)
 		DRM_INFO("AST 1180 detected\n");
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->pdev->revision >= 0x20) {
 =======
+=======
+>>>>>>> v3.18
 		if (dev->pdev->revision >= 0x30) {
 			ast->chip = AST2400;
 			DRM_INFO("AST 2400 detected\n");
 		} else if (dev->pdev->revision >= 0x20) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ast->chip = AST2300;
 			DRM_INFO("AST 2300 detected\n");
@@ -120,7 +132,10 @@ static int ast_detect_chip(struct drm_device *dev, bool *need_post)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If VGA isn't enabled, we need to enable now or subsequent
@@ -219,6 +234,9 @@ static int ast_detect_chip(struct drm_device *dev, bool *need_post)
 	default:
 		DRM_INFO("Analog VGA only\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -237,6 +255,7 @@ static int ast_get_dram_info(struct drm_device *dev)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pci_channel_offline(dev->pdev))
 			return -EIO;
 	} while (ast_read32(ast, 0x10000) != 0x01);
@@ -244,18 +263,27 @@ static int ast_get_dram_info(struct drm_device *dev)
 
 	if (data & 0x40)
 =======
+=======
+>>>>>>> v3.18
 		;
 	} while (ast_read32(ast, 0x10000) != 0x01);
 	data = ast_read32(ast, 0x10004);
 
 	if (data & 0x400)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ast->dram_bus_width = 16;
 	else
 		ast->dram_bus_width = 32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ast->chip == AST2300) {
+=======
+	if (ast->chip == AST2300 || ast->chip == AST2400) {
+>>>>>>> v3.18
 =======
 	if (ast->chip == AST2300 || ast->chip == AST2400) {
 >>>>>>> v3.18
@@ -319,6 +347,7 @@ static int ast_get_dram_info(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 uint32_t ast_get_max_dclk(struct drm_device *dev, int bpp)
 {
 	struct ast_private *ast = dev->dev_private;
@@ -366,6 +395,8 @@ uint32_t ast_get_max_dclk(struct drm_device *dev, int bpp)
 	return dclk;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ast_user_framebuffer_destroy(struct drm_framebuffer *fb)
@@ -437,6 +468,7 @@ static u32 ast_get_vram_info(struct drm_device *dev)
 	struct ast_private *ast = dev->dev_private;
 	u8 jreg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ast_open_key(ast);
 
@@ -449,6 +481,8 @@ static u32 ast_get_vram_info(struct drm_device *dev)
 	}
 	return AST_VIDMEM_DEFAULT_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	u32 vram_size;
 	ast_open_key(ast);
 
@@ -475,6 +509,9 @@ static u32 ast_get_vram_info(struct drm_device *dev)
 	}
 
 	return vram_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -482,6 +519,10 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 {
 	struct ast_private *ast;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool need_post;
+>>>>>>> v3.18
 =======
 	bool need_post;
 >>>>>>> v3.18
@@ -500,6 +541,7 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 		goto out_free;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ast->ioregs = pci_iomap(dev->pdev, 2, 0);
 	if (!ast->ioregs) {
 		ret = -EIO;
@@ -513,6 +555,8 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 		if (ret)
 			goto out_free;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If we don't have IO space at all, use MMIO now and
@@ -537,12 +581,21 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 
 	if (ast->chip != AST1180) {
 		ast_get_dram_info(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ast->vram_size = ast_get_vram_info(dev);
 		DRM_INFO("dram %d %d %d %08x\n", ast->mclk, ast->dram_type, ast->dram_bus_width, ast->vram_size);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (need_post)
+		ast_post_gpu(dev);
+
+>>>>>>> v3.18
 =======
 	if (need_post)
 		ast_post_gpu(dev);
@@ -560,7 +613,10 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 	dev->mode_config.preferred_depth = 24;
 	dev->mode_config.prefer_shadow = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->mode_config.fb_base = pci_resource_start(ast->dev->pdev, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -568,6 +624,10 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 	    ast->chip == AST2200 ||
 	    ast->chip == AST2300 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    ast->chip == AST2400 ||
+>>>>>>> v3.18
 =======
 	    ast->chip == AST2400 ||
 >>>>>>> v3.18
@@ -599,6 +659,10 @@ int ast_driver_unload(struct drm_device *dev)
 	struct ast_private *ast = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(ast->dp501_fw_addr);
+>>>>>>> v3.18
 =======
 	kfree(ast->dp501_fw_addr);
 >>>>>>> v3.18
@@ -662,6 +726,7 @@ int ast_dumb_create(struct drm_file *file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ast_dumb_destroy(struct drm_file *file,
 		     struct drm_device *dev,
 		     uint32_t handle)
@@ -679,6 +744,9 @@ void ast_bo_unref(struct ast_bo **bo)
 =======
 static void ast_bo_unref(struct ast_bo **bo)
 >>>>>>> v3.18
+=======
+static void ast_bo_unref(struct ast_bo **bo)
+>>>>>>> v3.18
 {
 	struct ttm_buffer_object *tbo;
 
@@ -687,6 +755,7 @@ static void ast_bo_unref(struct ast_bo **bo)
 
 	tbo = &((*bo)->bo);
 	ttm_bo_unref(&tbo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tbo == NULL)
 		*bo = NULL;
@@ -697,13 +766,21 @@ static void ast_bo_unref(struct ast_bo **bo)
 }
 
 >>>>>>> v3.18
+=======
+	*bo = NULL;
+}
+
+>>>>>>> v3.18
 void ast_gem_free_object(struct drm_gem_object *obj)
 {
 	struct ast_bo *ast_bo = gem_to_ast_bo(obj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ast_bo)
 		return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ast_bo_unref(&ast_bo);
@@ -713,7 +790,11 @@ void ast_gem_free_object(struct drm_gem_object *obj)
 static inline u64 ast_bo_mmap_offset(struct ast_bo *bo)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bo->bo.addr_space_offset;
+=======
+	return drm_vma_node_offset_addr(&bo->bo.vma_node);
+>>>>>>> v3.18
 =======
 	return drm_vma_node_offset_addr(&bo->bo.vma_node);
 >>>>>>> v3.18

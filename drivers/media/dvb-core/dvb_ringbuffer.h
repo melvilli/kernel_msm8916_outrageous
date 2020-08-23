@@ -6,8 +6,11 @@
  * Copyright (C) 2004 Andrew de Quincey
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012,2014 The Linux Foundation. All rights reserved.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * based on code originally found in av7110.c & dvb_ci.c:
@@ -113,11 +116,15 @@ extern void dvb_ringbuffer_flush_spinlock_wakeup(struct dvb_ringbuffer *rbuf);
 /* advance read ptr by <num> bytes */
 #define DVB_RINGBUFFER_SKIP(rbuf,num)	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(rbuf)->pread = ((rbuf)->pread+(num))%(rbuf)->size
 
 /* advance write ptr by <num> bytes */
 #define DVB_RINGBUFFER_PUSH(rbuf, num)	\
 			((rbuf)->pwrite = (((rbuf)->pwrite+(num))%(rbuf)->size))
+=======
+			(rbuf)->pread=((rbuf)->pread+(num))%(rbuf)->size
+>>>>>>> v3.18
 =======
 			(rbuf)->pread=((rbuf)->pread+(num))%(rbuf)->size
 >>>>>>> v3.18
@@ -139,7 +146,11 @@ extern void dvb_ringbuffer_read(struct dvb_ringbuffer *rbuf,
 #define DVB_RINGBUFFER_WRITE_BYTE(rbuf,byte)	\
 			{ (rbuf)->data[(rbuf)->pwrite]=(byte); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(rbuf)->pwrite = ((rbuf)->pwrite+1)%(rbuf)->size; }
+=======
+			(rbuf)->pwrite=((rbuf)->pwrite+1)%(rbuf)->size; }
+>>>>>>> v3.18
 =======
 			(rbuf)->pwrite=((rbuf)->pwrite+1)%(rbuf)->size; }
 >>>>>>> v3.18
@@ -151,9 +162,15 @@ extern void dvb_ringbuffer_read(struct dvb_ringbuffer *rbuf,
 extern ssize_t dvb_ringbuffer_write(struct dvb_ringbuffer *rbuf, const u8 *buf,
 				    size_t len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern ssize_t dvb_ringbuffer_write_user(struct dvb_ringbuffer *rbuf,
 					const u8 __user *buf, size_t len);
+=======
+extern ssize_t dvb_ringbuffer_write_user(struct dvb_ringbuffer *rbuf,
+				         const u8 __user *buf, size_t len);
+
+>>>>>>> v3.18
 =======
 extern ssize_t dvb_ringbuffer_write_user(struct dvb_ringbuffer *rbuf,
 				         const u8 __user *buf, size_t len);
@@ -209,6 +226,7 @@ extern ssize_t dvb_ringbuffer_pkt_next(struct dvb_ringbuffer *rbuf, size_t idx, 
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * Start a new packet that will be written directly by the user to the packet buffer.
  * The function only writes the header of the packet into the packet buffer,
@@ -235,6 +253,8 @@ extern ssize_t dvb_ringbuffer_pkt_start(struct dvb_ringbuffer *rbuf,
 extern int dvb_ringbuffer_pkt_close(struct dvb_ringbuffer *rbuf, ssize_t idx);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _DVB_RINGBUFFER_H_ */

@@ -57,7 +57,11 @@ int brcms_debugfs_attach(struct brcms_pub *drvr)
 	drvr->dbgfs_dir = debugfs_create_dir(
 		 dev_name(&drvr->wlc->hw->d11core->dev), root_folder);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(drvr->dbgfs_dir);
+=======
+	return PTR_ERR_OR_ZERO(drvr->dbgfs_dir);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(drvr->dbgfs_dir);
 >>>>>>> v3.18

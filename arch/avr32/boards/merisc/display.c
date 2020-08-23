@@ -46,7 +46,11 @@ static struct fb_monspecs merisc_fb_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct atmel_lcdfb_info merisc_lcdc_data = {
+=======
+struct atmel_lcdfb_pdata merisc_lcdc_data = {
+>>>>>>> v3.18
 =======
 struct atmel_lcdfb_pdata merisc_lcdc_data = {
 >>>>>>> v3.18

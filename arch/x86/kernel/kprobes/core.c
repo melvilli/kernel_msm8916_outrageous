@@ -113,7 +113,12 @@ struct kretprobe_blackpoint kretprobe_blacklist[] = {
 const int kretprobe_blacklist_size = ARRAY_SIZE(kretprobe_blacklist);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes __synthesize_relative_insn(void *from, void *to, u8 op)
+=======
+static nokprobe_inline void
+__synthesize_relative_insn(void *from, void *to, u8 op)
+>>>>>>> v3.18
 =======
 static nokprobe_inline void
 __synthesize_relative_insn(void *from, void *to, u8 op)
@@ -131,6 +136,7 @@ __synthesize_relative_insn(void *from, void *to, u8 op)
 
 /* Insert a jump instruction at address 'from', which jumps to address 'to'.*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes synthesize_reljump(void *from, void *to)
 {
 	__synthesize_relative_insn(from, to, RELATIVEJUMP_OPCODE);
@@ -142,6 +148,8 @@ void __kprobes synthesize_relcall(void *from, void *to)
 	__synthesize_relative_insn(from, to, RELATIVECALL_OPCODE);
 }
 =======
+=======
+>>>>>>> v3.18
 void synthesize_reljump(void *from, void *to)
 {
 	__synthesize_relative_insn(from, to, RELATIVEJUMP_OPCODE);
@@ -154,13 +162,20 @@ void synthesize_relcall(void *from, void *to)
 	__synthesize_relative_insn(from, to, RELATIVECALL_OPCODE);
 }
 NOKPROBE_SYMBOL(synthesize_relcall);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Skip the prefixes of the instruction.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static kprobe_opcode_t *__kprobes skip_prefixes(kprobe_opcode_t *insn)
+=======
+static kprobe_opcode_t *skip_prefixes(kprobe_opcode_t *insn)
+>>>>>>> v3.18
 =======
 static kprobe_opcode_t *skip_prefixes(kprobe_opcode_t *insn)
 >>>>>>> v3.18
@@ -179,6 +194,10 @@ static kprobe_opcode_t *skip_prefixes(kprobe_opcode_t *insn)
 	return insn;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(skip_prefixes);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(skip_prefixes);
 >>>>>>> v3.18
@@ -188,7 +207,11 @@ NOKPROBE_SYMBOL(skip_prefixes);
  * RIP relative instructions are adjusted at copying time in 64 bits mode
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes can_boost(kprobe_opcode_t *opcodes)
+=======
+int can_boost(kprobe_opcode_t *opcodes)
+>>>>>>> v3.18
 =======
 int can_boost(kprobe_opcode_t *opcodes)
 >>>>>>> v3.18
@@ -293,7 +316,11 @@ unsigned long recover_probed_instruction(kprobe_opcode_t *buf, unsigned long add
 
 /* Check if paddr is at an instruction boundary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes can_probe(unsigned long paddr)
+=======
+static int can_probe(unsigned long paddr)
+>>>>>>> v3.18
 =======
 static int can_probe(unsigned long paddr)
 >>>>>>> v3.18
@@ -336,7 +363,11 @@ static int can_probe(unsigned long paddr)
  * Returns non-zero if opcode modifies the interrupt flag.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes is_IF_modifier(kprobe_opcode_t *insn)
+=======
+static int is_IF_modifier(kprobe_opcode_t *insn)
+>>>>>>> v3.18
 =======
 static int is_IF_modifier(kprobe_opcode_t *insn)
 >>>>>>> v3.18
@@ -363,7 +394,11 @@ static int is_IF_modifier(kprobe_opcode_t *insn)
  * Only applicable to 64-bit x86.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes __copy_instruction(u8 *dest, u8 *src)
+=======
+int __copy_instruction(u8 *dest, u8 *src)
+>>>>>>> v3.18
 =======
 int __copy_instruction(u8 *dest, u8 *src)
 >>>>>>> v3.18
@@ -410,7 +445,11 @@ int __copy_instruction(u8 *dest, u8 *src)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes arch_copy_kprobe(struct kprobe *p)
+=======
+static int arch_copy_kprobe(struct kprobe *p)
+>>>>>>> v3.18
 =======
 static int arch_copy_kprobe(struct kprobe *p)
 >>>>>>> v3.18
@@ -441,7 +480,11 @@ static int arch_copy_kprobe(struct kprobe *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes arch_prepare_kprobe(struct kprobe *p)
+=======
+int arch_prepare_kprobe(struct kprobe *p)
+>>>>>>> v3.18
 =======
 int arch_prepare_kprobe(struct kprobe *p)
 >>>>>>> v3.18
@@ -460,7 +503,11 @@ int arch_prepare_kprobe(struct kprobe *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes arch_arm_kprobe(struct kprobe *p)
+=======
+void arch_arm_kprobe(struct kprobe *p)
+>>>>>>> v3.18
 =======
 void arch_arm_kprobe(struct kprobe *p)
 >>>>>>> v3.18
@@ -469,7 +516,11 @@ void arch_arm_kprobe(struct kprobe *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes arch_disarm_kprobe(struct kprobe *p)
+=======
+void arch_disarm_kprobe(struct kprobe *p)
+>>>>>>> v3.18
 =======
 void arch_disarm_kprobe(struct kprobe *p)
 >>>>>>> v3.18
@@ -478,7 +529,11 @@ void arch_disarm_kprobe(struct kprobe *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes arch_remove_kprobe(struct kprobe *p)
+=======
+void arch_remove_kprobe(struct kprobe *p)
+>>>>>>> v3.18
 =======
 void arch_remove_kprobe(struct kprobe *p)
 >>>>>>> v3.18
@@ -490,7 +545,12 @@ void arch_remove_kprobe(struct kprobe *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes save_previous_kprobe(struct kprobe_ctlblk *kcb)
+=======
+static nokprobe_inline void
+save_previous_kprobe(struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 static nokprobe_inline void
 save_previous_kprobe(struct kprobe_ctlblk *kcb)
@@ -503,7 +563,12 @@ save_previous_kprobe(struct kprobe_ctlblk *kcb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes restore_previous_kprobe(struct kprobe_ctlblk *kcb)
+=======
+static nokprobe_inline void
+restore_previous_kprobe(struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 static nokprobe_inline void
 restore_previous_kprobe(struct kprobe_ctlblk *kcb)
@@ -516,8 +581,14 @@ restore_previous_kprobe(struct kprobe_ctlblk *kcb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
 				struct kprobe_ctlblk *kcb)
+=======
+static nokprobe_inline void
+set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
+		   struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 static nokprobe_inline void
 set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
@@ -532,7 +603,11 @@ set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes clear_btf(void)
+=======
+static nokprobe_inline void clear_btf(void)
+>>>>>>> v3.18
 =======
 static nokprobe_inline void clear_btf(void)
 >>>>>>> v3.18
@@ -546,7 +621,11 @@ static nokprobe_inline void clear_btf(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes restore_btf(void)
+=======
+static nokprobe_inline void restore_btf(void)
+>>>>>>> v3.18
 =======
 static nokprobe_inline void restore_btf(void)
 >>>>>>> v3.18
@@ -560,8 +639,12 @@ static nokprobe_inline void restore_btf(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes
 arch_prepare_kretprobe(struct kretprobe_instance *ri, struct pt_regs *regs)
+=======
+void arch_prepare_kretprobe(struct kretprobe_instance *ri, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void arch_prepare_kretprobe(struct kretprobe_instance *ri, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -574,14 +657,20 @@ void arch_prepare_kretprobe(struct kretprobe_instance *ri, struct pt_regs *regs)
 	*sara = (unsigned long) &kretprobe_trampoline;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void __kprobes
 setup_singlestep(struct kprobe *p, struct pt_regs *regs, struct kprobe_ctlblk *kcb, int reenter)
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(arch_prepare_kretprobe);
 
 static void setup_singlestep(struct kprobe *p, struct pt_regs *regs,
 			     struct kprobe_ctlblk *kcb, int reenter)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (setup_detour_execution(p, regs, reenter))
@@ -619,6 +708,10 @@ static void setup_singlestep(struct kprobe *p, struct pt_regs *regs,
 		regs->ip = (unsigned long)p->ainsn.insn;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(setup_singlestep);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(setup_singlestep);
 >>>>>>> v3.18
@@ -629,8 +722,13 @@ NOKPROBE_SYMBOL(setup_singlestep);
  * step on the instruction of the new probe without calling any user handlers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes
 reenter_kprobe(struct kprobe *p, struct pt_regs *regs, struct kprobe_ctlblk *kcb)
+=======
+static int reenter_kprobe(struct kprobe *p, struct pt_regs *regs,
+			  struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 static int reenter_kprobe(struct kprobe *p, struct pt_regs *regs,
 			  struct kprobe_ctlblk *kcb)
@@ -640,16 +738,22 @@ static int reenter_kprobe(struct kprobe *p, struct pt_regs *regs,
 	case KPROBE_HIT_SSDONE:
 	case KPROBE_HIT_ACTIVE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kprobes_inc_nmissed_count(p);
 		setup_singlestep(p, regs, kcb, 1);
 		break;
 	case KPROBE_HIT_SS:
 =======
+=======
+>>>>>>> v3.18
 	case KPROBE_HIT_SS:
 		kprobes_inc_nmissed_count(p);
 		setup_singlestep(p, regs, kcb, 1);
 		break;
 	case KPROBE_REENTER:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* A probe has been hit in the codepath leading up to, or just
 		 * after, single-stepping of a probed instruction. This entire
@@ -670,6 +774,10 @@ static int reenter_kprobe(struct kprobe *p, struct pt_regs *regs,
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(reenter_kprobe);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(reenter_kprobe);
 >>>>>>> v3.18
@@ -679,7 +787,11 @@ NOKPROBE_SYMBOL(reenter_kprobe);
  * remain disabled throughout this function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes kprobe_handler(struct pt_regs *regs)
+=======
+int kprobe_int3_handler(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 int kprobe_int3_handler(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -689,6 +801,12 @@ int kprobe_int3_handler(struct pt_regs *regs)
 	struct kprobe_ctlblk *kcb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (user_mode_vm(regs))
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (user_mode_vm(regs))
 		return 0;
@@ -752,6 +870,10 @@ int kprobe_int3_handler(struct pt_regs *regs)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(kprobe_int3_handler);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(kprobe_int3_handler);
 >>>>>>> v3.18
@@ -761,7 +883,11 @@ NOKPROBE_SYMBOL(kprobe_int3_handler);
  * calls trampoline_handler() runs, which calls the kretprobe's handler.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __used __kprobes kretprobe_trampoline_holder(void)
+=======
+static void __used kretprobe_trampoline_holder(void)
+>>>>>>> v3.18
 =======
 static void __used kretprobe_trampoline_holder(void)
 >>>>>>> v3.18
@@ -796,6 +922,11 @@ static void __used kretprobe_trampoline_holder(void)
 			"	ret\n");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(kretprobe_trampoline_holder);
+NOKPROBE_SYMBOL(kretprobe_trampoline);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(kretprobe_trampoline_holder);
 NOKPROBE_SYMBOL(kretprobe_trampoline);
@@ -805,7 +936,11 @@ NOKPROBE_SYMBOL(kretprobe_trampoline);
  * Called from kretprobe_trampoline
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __used __kprobes void *trampoline_handler(struct pt_regs *regs)
+=======
+__visible __used void *trampoline_handler(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 __visible __used void *trampoline_handler(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -895,6 +1030,10 @@ __visible __used void *trampoline_handler(struct pt_regs *regs)
 	return (void *)orig_ret_address;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(trampoline_handler);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(trampoline_handler);
 >>>>>>> v3.18
@@ -927,8 +1066,13 @@ NOKPROBE_SYMBOL(trampoline_handler);
  * instruction after the probepoint.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes
 resume_execution(struct kprobe *p, struct pt_regs *regs, struct kprobe_ctlblk *kcb)
+=======
+static void resume_execution(struct kprobe *p, struct pt_regs *regs,
+			     struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 static void resume_execution(struct kprobe *p, struct pt_regs *regs,
 			     struct kprobe_ctlblk *kcb)
@@ -1008,6 +1152,10 @@ no_change:
 	restore_btf();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(resume_execution);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(resume_execution);
 >>>>>>> v3.18
@@ -1017,7 +1165,11 @@ NOKPROBE_SYMBOL(resume_execution);
  * remain disabled throughout this function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes post_kprobe_handler(struct pt_regs *regs)
+=======
+int kprobe_debug_handler(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 int kprobe_debug_handler(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -1056,8 +1208,14 @@ out:
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int __kprobes kprobe_fault_handler(struct pt_regs *regs, int trapnr)
+=======
+NOKPROBE_SYMBOL(kprobe_debug_handler);
+
+int kprobe_fault_handler(struct pt_regs *regs, int trapnr)
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(kprobe_debug_handler);
 
@@ -1068,14 +1226,20 @@ int kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 	struct kprobe_ctlblk *kcb = get_kprobe_ctlblk();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (kcb->kprobe_status) {
 	case KPROBE_HIT_SS:
 	case KPROBE_REENTER:
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(regs->ip == (unsigned long)cur->ainsn.insn)) {
 		/* This must happen on single-stepping */
 		WARN_ON(kcb->kprobe_status != KPROBE_HIT_SS &&
 			kcb->kprobe_status != KPROBE_REENTER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * We are here because the instruction being single
@@ -1085,6 +1249,7 @@ int kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 		 * normal page fault.
 		 */
 		regs->ip = (unsigned long)cur->addr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * Trap flag (TF) has been set here because this fault
@@ -1102,15 +1267,23 @@ int kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 =======
 		regs->flags |= kcb->kprobe_old_flags;
 >>>>>>> v3.18
+=======
+		regs->flags |= kcb->kprobe_old_flags;
+>>>>>>> v3.18
 		if (kcb->kprobe_status == KPROBE_REENTER)
 			restore_previous_kprobe(kcb);
 		else
 			reset_current_kprobe();
 		preempt_enable_no_resched();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case KPROBE_HIT_ACTIVE:
 	case KPROBE_HIT_SSDONE:
+=======
+	} else if (kcb->kprobe_status == KPROBE_HIT_ACTIVE ||
+		   kcb->kprobe_status == KPROBE_HIT_SSDONE) {
+>>>>>>> v3.18
 =======
 	} else if (kcb->kprobe_status == KPROBE_HIT_ACTIVE ||
 		   kcb->kprobe_status == KPROBE_HIT_SSDONE) {
@@ -1144,6 +1317,7 @@ int kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 		 * Let do_page_fault() fix it.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	default:
 		break;
@@ -1151,19 +1325,29 @@ int kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	return 0;
 }
 NOKPROBE_SYMBOL(kprobe_fault_handler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Wrapper routine for handling exceptions.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes
 kprobe_exceptions_notify(struct notifier_block *self, unsigned long val, void *data)
+=======
+int kprobe_exceptions_notify(struct notifier_block *self, unsigned long val,
+			     void *data)
+>>>>>>> v3.18
 =======
 int kprobe_exceptions_notify(struct notifier_block *self, unsigned long val,
 			     void *data)
@@ -1175,6 +1359,7 @@ int kprobe_exceptions_notify(struct notifier_block *self, unsigned long val,
 	if (args->regs && user_mode_vm(args->regs))
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (val) {
 	case DIE_INT3:
@@ -1195,6 +1380,9 @@ int kprobe_exceptions_notify(struct notifier_block *self, unsigned long val,
 =======
 	if (val == DIE_GPF) {
 >>>>>>> v3.18
+=======
+	if (val == DIE_GPF) {
+>>>>>>> v3.18
 		/*
 		 * To be potentially processing a kprobe fault and to
 		 * trust the result from kprobe_running(), we have
@@ -1203,6 +1391,7 @@ int kprobe_exceptions_notify(struct notifier_block *self, unsigned long val,
 		if (!preemptible() && kprobe_running() &&
 		    kprobe_fault_handler(args->regs, args->trapnr))
 			ret = NOTIFY_STOP;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		break;
 	default:
@@ -1213,12 +1402,17 @@ int kprobe_exceptions_notify(struct notifier_block *self, unsigned long val,
 
 int __kprobes setjmp_pre_handler(struct kprobe *p, struct pt_regs *regs)
 =======
+=======
+>>>>>>> v3.18
 	}
 	return ret;
 }
 NOKPROBE_SYMBOL(kprobe_exceptions_notify);
 
 int setjmp_pre_handler(struct kprobe *p, struct pt_regs *regs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct jprobe *jp = container_of(p, struct jprobe, kp);
@@ -1242,6 +1436,7 @@ int setjmp_pre_handler(struct kprobe *p, struct pt_regs *regs)
 	trace_hardirqs_off();
 	regs->ip = (unsigned long)(jp->entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * jprobes use jprobe_return() which skips the normal return
@@ -1256,11 +1451,16 @@ int setjmp_pre_handler(struct kprobe *p, struct pt_regs *regs)
 
 void __kprobes jprobe_return(void)
 =======
+=======
+>>>>>>> v3.18
 	return 1;
 }
 NOKPROBE_SYMBOL(setjmp_pre_handler);
 
 void jprobe_return(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kprobe_ctlblk *kcb = get_kprobe_ctlblk();
@@ -1278,18 +1478,25 @@ void jprobe_return(void)
 			(kcb->jprobe_saved_sp):"memory");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int __kprobes longjmp_break_handler(struct kprobe *p, struct pt_regs *regs)
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(jprobe_return);
 NOKPROBE_SYMBOL(jprobe_return_end);
 
 int longjmp_break_handler(struct kprobe *p, struct pt_regs *regs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kprobe_ctlblk *kcb = get_kprobe_ctlblk();
 	u8 *addr = (u8 *) (regs->ip - 1);
 	struct jprobe *jp = container_of(p, struct jprobe, kp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void *saved_sp = kcb->jprobe_saved_sp;
 
@@ -1301,6 +1508,8 @@ int longjmp_break_handler(struct kprobe *p, struct pt_regs *regs)
 			       "current sp %p does not match saved sp %p\n",
 			       stack_addr(regs), saved_sp);
 =======
+=======
+>>>>>>> v3.18
 
 	if ((addr > (u8 *) jprobe_return) &&
 	    (addr < (u8 *) jprobe_return_end)) {
@@ -1309,6 +1518,9 @@ int longjmp_break_handler(struct kprobe *p, struct pt_regs *regs)
 			printk(KERN_ERR
 			       "current sp %p does not match saved sp %p\n",
 			       stack_addr(regs), kcb->jprobe_saved_sp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk(KERN_ERR "Saved registers for jprobe %p\n", jp);
 			show_regs(saved_regs);
@@ -1317,21 +1529,28 @@ int longjmp_break_handler(struct kprobe *p, struct pt_regs *regs)
 			BUG();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* It's OK to start function graph tracing again */
 		unpause_graph_tracing();
 		*regs = kcb->jprobe_saved_regs;
 		memcpy(saved_sp, kcb->jprobes_stack, MIN_STACK_SIZE(saved_sp));
 =======
+=======
+>>>>>>> v3.18
 		*regs = kcb->jprobe_saved_regs;
 		memcpy((kprobe_opcode_t *)(kcb->jprobe_saved_sp),
 		       kcb->jprobes_stack,
 		       MIN_STACK_SIZE(kcb->jprobe_saved_sp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		preempt_enable_no_resched();
 		return 1;
 	}
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int __init arch_init_kprobes(void)
@@ -1341,6 +1560,8 @@ int __init arch_init_kprobes(void)
 
 int __kprobes arch_trampoline_kprobe(struct kprobe *p)
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(longjmp_break_handler);
 
 bool arch_within_kprobe_blacklist(unsigned long addr)
@@ -1357,6 +1578,9 @@ int __init arch_init_kprobes(void)
 }
 
 int arch_trampoline_kprobe(struct kprobe *p)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;

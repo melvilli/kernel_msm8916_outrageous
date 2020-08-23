@@ -61,7 +61,11 @@ s16 __apicid_to_node[MAX_LOCAL_APIC] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit numa_cpu_node(int cpu)
+=======
+int numa_cpu_node(int cpu)
+>>>>>>> v3.18
 =======
 int numa_cpu_node(int cpu)
 >>>>>>> v3.18
@@ -190,8 +194,13 @@ int __init numa_add_memblk(int nid, u64 start, u64 end)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Initialize NODE_DATA for a node on the local memory */
 static void __init setup_node_data(int nid, u64 start, u64 end)
+=======
+/* Allocate NODE_DATA for a node on the local memory */
+static void __init alloc_node_data(int nid)
+>>>>>>> v3.18
 =======
 /* Allocate NODE_DATA for a node on the local memory */
 static void __init alloc_node_data(int nid)
@@ -203,6 +212,7 @@ static void __init alloc_node_data(int nid)
 	int tnid;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Don't confuse VM with a node that doesn't have the
 	 * minimum amount of memory:
@@ -218,16 +228,21 @@ static void __init alloc_node_data(int nid)
 	/*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	 * Allocate node data.  Try node-local memory and then any node.
 	 * Never allocate in DMA zone.
 	 */
 	nd_pa = memblock_alloc_nid(nd_size, SMP_CACHE_BYTES, nid);
 	if (!nd_pa) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Cannot find %zu bytes in node %d\n",
 		       nd_size, nid);
 		return;
 =======
+=======
+>>>>>>> v3.18
 		nd_pa = __memblock_alloc_base(nd_size, SMP_CACHE_BYTES,
 					      MEMBLOCK_ALLOC_ACCESSIBLE);
 		if (!nd_pa) {
@@ -235,13 +250,20 @@ static void __init alloc_node_data(int nid)
 			       nd_size, nid);
 			return;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	nd = __va(nd_pa);
 
 	/* report and initialize */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "  NODE_DATA [mem %#010Lx-%#010Lx]\n",
+=======
+	printk(KERN_INFO "NODE_DATA(%d) allocated [mem %#010Lx-%#010Lx]\n", nid,
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "NODE_DATA(%d) allocated [mem %#010Lx-%#010Lx]\n", nid,
 >>>>>>> v3.18
@@ -253,9 +275,12 @@ static void __init alloc_node_data(int nid)
 	node_data[nid] = nd;
 	memset(NODE_DATA(nid), 0, sizeof(pg_data_t));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NODE_DATA(nid)->node_id = nid;
 	NODE_DATA(nid)->node_start_pfn = start >> PAGE_SHIFT;
 	NODE_DATA(nid)->node_spanned_pages = (end - start) >> PAGE_SHIFT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -504,7 +529,10 @@ static bool __init numa_meminfo_cover_memory(const struct numa_meminfo *mi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init numa_clear_kernel_node_hotplug(void)
 {
 	int i, nid;
@@ -541,6 +569,9 @@ static void __init numa_clear_kernel_node_hotplug(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init numa_register_memblks(struct numa_meminfo *mi)
 {
@@ -556,11 +587,14 @@ static int __init numa_register_memblks(struct numa_meminfo *mi)
 	for (i = 0; i < mi->nr_blks; i++) {
 		struct numa_memblk *mb = &mi->blk[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memblock_set_node(mb->start, mb->end - mb->start, mb->nid);
 	}
 
 	/*
 =======
+=======
+>>>>>>> v3.18
 		memblock_set_node(mb->start, mb->end - mb->start,
 				  &memblock.memory, mb->nid);
 	}
@@ -575,6 +609,9 @@ static int __init numa_register_memblks(struct numa_meminfo *mi)
 	numa_clear_kernel_node_hotplug();
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * If sections array is gonna be used for pfn -> nid mapping, check
 	 * whether its granularity is fine enough.
@@ -604,9 +641,12 @@ static int __init numa_register_memblks(struct numa_meminfo *mi)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (start < end)
 			setup_node_data(nid, start, end);
 =======
+=======
+>>>>>>> v3.18
 		if (start >= end)
 			continue;
 
@@ -618,6 +658,9 @@ static int __init numa_register_memblks(struct numa_meminfo *mi)
 			continue;
 
 		alloc_node_data(nid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -661,14 +704,20 @@ static int __init numa_init(int (*init_func)(void))
 	nodes_clear(node_online_map);
 	memset(&numa_meminfo, 0, sizeof(numa_meminfo));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(memblock_set_node(0, ULLONG_MAX, MAX_NUMNODES));
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(memblock_set_node(0, ULLONG_MAX, &memblock.memory,
 				  MAX_NUMNODES));
 	WARN_ON(memblock_set_node(0, ULLONG_MAX, &memblock.reserved,
 				  MAX_NUMNODES));
 	/* In case that parsing SRAT failed. */
 	WARN_ON(memblock_clear_hotplug(0, ULLONG_MAX));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	numa_reset_distance();
 
@@ -676,7 +725,10 @@ static int __init numa_init(int (*init_func)(void))
 	if (ret < 0)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * We reset memblock back to the top-down direction
@@ -688,6 +740,9 @@ static int __init numa_init(int (*init_func)(void))
 	 */
 	memblock_set_bottom_up(false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = numa_cleanup_meminfo(&numa_meminfo);
 	if (ret < 0)
@@ -709,6 +764,10 @@ static int __init numa_init(int (*init_func)(void))
 	}
 	numa_init_array();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -748,10 +807,13 @@ void __init x86_numa_init(void)
 {
 	if (!numa_off) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_NUMAQ
 		if (!numa_init(numaq_numa_init))
 			return;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ACPI_NUMA
@@ -821,7 +883,11 @@ void __init init_cpu_to_node(void)
 
 # ifndef CONFIG_NUMA_EMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit numa_add_cpu(int cpu)
+=======
+void numa_add_cpu(int cpu)
+>>>>>>> v3.18
 =======
 void numa_add_cpu(int cpu)
 >>>>>>> v3.18
@@ -830,7 +896,11 @@ void numa_add_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit numa_remove_cpu(int cpu)
+=======
+void numa_remove_cpu(int cpu)
+>>>>>>> v3.18
 =======
 void numa_remove_cpu(int cpu)
 >>>>>>> v3.18
@@ -901,7 +971,11 @@ void debug_cpumask_set_cpu(int cpu, int node, bool enable)
 
 # ifndef CONFIG_NUMA_EMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit numa_set_cpumask(int cpu, bool enable)
+=======
+static void numa_set_cpumask(int cpu, bool enable)
+>>>>>>> v3.18
 =======
 static void numa_set_cpumask(int cpu, bool enable)
 >>>>>>> v3.18
@@ -910,7 +984,11 @@ static void numa_set_cpumask(int cpu, bool enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit numa_add_cpu(int cpu)
+=======
+void numa_add_cpu(int cpu)
+>>>>>>> v3.18
 =======
 void numa_add_cpu(int cpu)
 >>>>>>> v3.18
@@ -919,7 +997,11 @@ void numa_add_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit numa_remove_cpu(int cpu)
+=======
+void numa_remove_cpu(int cpu)
+>>>>>>> v3.18
 =======
 void numa_remove_cpu(int cpu)
 >>>>>>> v3.18

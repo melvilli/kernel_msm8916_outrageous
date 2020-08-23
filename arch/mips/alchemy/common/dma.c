@@ -142,6 +142,7 @@ void dump_au1000_dma_channel(unsigned int dmanr)
 	printk(KERN_INFO "Au1000 DMA%d Register Dump:\n", dmanr);
 	printk(KERN_INFO "  mode = 0x%08x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       au_readl(chan->io + DMA_MODE_SET));
 	printk(KERN_INFO "  addr = 0x%08x\n",
 	       au_readl(chan->io + DMA_PERIPHERAL_ADDR));
@@ -154,6 +155,8 @@ void dump_au1000_dma_channel(unsigned int dmanr)
 	printk(KERN_INFO "  count1 = 0x%08x\n",
 	       au_readl(chan->io + DMA_BUFFER1_COUNT));
 =======
+=======
+>>>>>>> v3.18
 	       __raw_readl(chan->io + DMA_MODE_SET));
 	printk(KERN_INFO "  addr = 0x%08x\n",
 	       __raw_readl(chan->io + DMA_PERIPHERAL_ADDR));
@@ -165,6 +168,9 @@ void dump_au1000_dma_channel(unsigned int dmanr)
 	       __raw_readl(chan->io + DMA_BUFFER0_COUNT));
 	printk(KERN_INFO "  count1 = 0x%08x\n",
 	       __raw_readl(chan->io + DMA_BUFFER1_COUNT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -219,7 +225,12 @@ int request_au1000_dma(int dev_id, const char *dev_str,
 
 	/* fill it in */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->io = KSEG1ADDR(AU1000_DMA_PHYS_ADDR) + i * DMA_CHANNEL_LEN;
+=======
+	chan->io = (void __iomem *)(KSEG1ADDR(AU1000_DMA_PHYS_ADDR) +
+			i * DMA_CHANNEL_LEN);
+>>>>>>> v3.18
 =======
 	chan->io = (void __iomem *)(KSEG1ADDR(AU1000_DMA_PHYS_ADDR) +
 			i * DMA_CHANNEL_LEN);

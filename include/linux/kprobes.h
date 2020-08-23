@@ -206,15 +206,21 @@ struct kretprobe_blackpoint {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kprobe_blackpoint {
 	const char *name;
 	unsigned long start_addr;
 	unsigned long range;
 =======
+=======
+>>>>>>> v3.18
 struct kprobe_blacklist_entry {
 	struct list_head list;
 	unsigned long start_addr;
 	unsigned long end_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -272,10 +278,13 @@ extern void arch_disarm_kprobe(struct kprobe *p);
 extern int arch_init_kprobes(void);
 extern void show_registers(struct pt_regs *regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern kprobe_opcode_t *get_insn_slot(void);
 extern void free_insn_slot(kprobe_opcode_t *slot, int dirty);
 extern void kprobes_inc_nmissed_count(struct kprobe *p);
 =======
+=======
+>>>>>>> v3.18
 extern void kprobes_inc_nmissed_count(struct kprobe *p);
 extern bool arch_within_kprobe_blacklist(unsigned long addr);
 
@@ -306,6 +315,9 @@ static inline void free_##__name##_slot(kprobe_opcode_t *slot, int dirty)\
 }									\
 
 DEFINE_INSN_CACHE_OPS(insn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_OPTPROBES
@@ -328,8 +340,11 @@ extern void arch_unoptimize_kprobes(struct list_head *oplist,
 				    struct list_head *done_list);
 extern void arch_unoptimize_kprobe(struct optimized_kprobe *op);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern kprobe_opcode_t *get_optinsn_slot(void);
 extern void free_optinsn_slot(kprobe_opcode_t *slot, int dirty);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int arch_within_optimized_kprobe(struct optimized_kprobe *op,
@@ -338,6 +353,11 @@ extern int arch_within_optimized_kprobe(struct optimized_kprobe *op,
 extern void opt_pre_handler(struct kprobe *p, struct pt_regs *regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DEFINE_INSN_CACHE_OPS(optinsn);
+
+>>>>>>> v3.18
 =======
 DEFINE_INSN_CACHE_OPS(optinsn);
 
@@ -378,7 +398,11 @@ static inline void reset_current_kprobe(void)
 static inline struct kprobe_ctlblk *get_kprobe_ctlblk(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (&__get_cpu_var(kprobe_ctlblk));
+=======
+	return this_cpu_ptr(&kprobe_ctlblk);
+>>>>>>> v3.18
 =======
 	return this_cpu_ptr(&kprobe_ctlblk);
 >>>>>>> v3.18
@@ -503,7 +527,10 @@ static inline int enable_jprobe(struct jprobe *jp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KPROBES
 /*
  * Blacklist ganerating macro. Specify functions which is not probed
@@ -518,5 +545,8 @@ static unsigned long __used				\
 #define NOKPROBE_SYMBOL(fname)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_KPROBES_H */

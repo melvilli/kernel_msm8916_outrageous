@@ -49,6 +49,10 @@
 
 /* Activation Status Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ACTS_ASC0_ACT	0x00001000
+>>>>>>> v3.18
 =======
 #define ACTS_ASC0_ACT	0x00001000
 >>>>>>> v3.18
@@ -113,6 +117,10 @@ static int sysctl_clken(struct clk *clk)
 {
 	sysctl_w32(clk->module, clk->bits, SYSCTL_CLKEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sysctl_w32(clk->module, clk->bits, SYSCTL_ACT);
+>>>>>>> v3.18
 =======
 	sysctl_w32(clk->module, clk->bits, SYSCTL_ACT);
 >>>>>>> v3.18
@@ -228,7 +236,11 @@ void __init ltq_soc_init(void)
 				resource_size(&res_sys[2]),
 				res_sys[2].name) < 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Failed to request core reources");
+=======
+		pr_err("Failed to request core resources");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to request core resources");
 >>>>>>> v3.18
@@ -269,7 +281,12 @@ void __init ltq_soc_init(void)
 	clkdev_add_sys("1e800500.pad", SYSCTL_SYS1, ACTS_PADCTRL3);
 	clkdev_add_sys("1e800600.pad", SYSCTL_SYS1, ACTS_PADCTRL4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clkdev_add_sys("1e100C00.serial", SYSCTL_SYS1, ACTS_ASC1_ACT);
+=======
+	clkdev_add_sys("1e100b00.serial", SYSCTL_SYS1, ACTS_ASC1_ACT);
+	clkdev_add_sys("1e100c00.serial", SYSCTL_SYS1, ACTS_ASC0_ACT);
+>>>>>>> v3.18
 =======
 	clkdev_add_sys("1e100b00.serial", SYSCTL_SYS1, ACTS_ASC1_ACT);
 	clkdev_add_sys("1e100c00.serial", SYSCTL_SYS1, ACTS_ASC0_ACT);

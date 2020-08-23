@@ -57,9 +57,15 @@ struct cpci_hp_controller_ops {
 	int (*disable_irq) (void);
 	int (*check_irq) (void *dev_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*hardware_test) (struct slot* slot, u32 value);
 	u8  (*get_power) (struct slot* slot);
 	int (*set_power) (struct slot* slot, int value);
+=======
+	int (*hardware_test) (struct slot *slot, u32 value);
+	u8  (*get_power) (struct slot *slot);
+	int (*set_power) (struct slot *slot, int value);
+>>>>>>> v3.18
 =======
 	int (*hardware_test) (struct slot *slot, u32 value);
 	u8  (*get_power) (struct slot *slot);
@@ -96,6 +102,7 @@ u8 cpci_get_attention_status(struct slot *slot);
 u8 cpci_get_latch_status(struct slot *slot);
 u8 cpci_get_adapter_status(struct slot *slot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 cpci_get_hs_csr(struct slot * slot);
 int cpci_set_attention_status(struct slot *slot, int status);
 int cpci_check_and_clear_ins(struct slot * slot);
@@ -104,6 +111,8 @@ int cpci_clear_ext(struct slot * slot);
 int cpci_led_on(struct slot * slot);
 int cpci_led_off(struct slot * slot);
 =======
+=======
+>>>>>>> v3.18
 u16 cpci_get_hs_csr(struct slot *slot);
 int cpci_set_attention_status(struct slot *slot, int status);
 int cpci_check_and_clear_ins(struct slot *slot);
@@ -111,6 +120,9 @@ int cpci_check_ext(struct slot *slot);
 int cpci_clear_ext(struct slot *slot);
 int cpci_led_on(struct slot *slot);
 int cpci_led_off(struct slot *slot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int cpci_configure_slot(struct slot *slot);
 int cpci_unconfigure_slot(struct slot *slot);

@@ -48,7 +48,10 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/io.h>
@@ -216,7 +219,10 @@ static void scb2_flash_remove(struct pci_dev *dev)
 	if (!region_fail)
 		release_mem_region(SCB2_ADDR, SCB2_WINDOW);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

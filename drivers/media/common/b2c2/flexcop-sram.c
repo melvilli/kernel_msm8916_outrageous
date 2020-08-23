@@ -86,7 +86,11 @@ static void flexcop_sram_write(struct adapter *adapter, u32 bank, u32 addr, u8 *
 			mdelay(1);
 			retries--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -115,7 +119,11 @@ static void flex_sram_read(struct adapter *adapter, u32 bank, u32 addr, u8 *buf,
 			mdelay(1);
 			retries--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -131,7 +139,11 @@ static void flex_sram_read(struct adapter *adapter, u32 bank, u32 addr, u8 *buf,
 			mdelay(1);
 			retries--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18

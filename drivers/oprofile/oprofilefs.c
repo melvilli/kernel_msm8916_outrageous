@@ -133,9 +133,14 @@ static const struct file_operations ulong_ro_fops = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __oprofilefs_create_file(struct super_block *sb,
 	struct dentry *root, char const *name, const struct file_operations *fops,
 	int perm, void *priv)
+=======
+static int __oprofilefs_create_file(struct dentry *root, char const *name,
+	const struct file_operations *fops, int perm, void *priv)
+>>>>>>> v3.18
 =======
 static int __oprofilefs_create_file(struct dentry *root, char const *name,
 	const struct file_operations *fops, int perm, void *priv)
@@ -151,7 +156,11 @@ static int __oprofilefs_create_file(struct dentry *root, char const *name,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = oprofilefs_get_inode(sb, S_IFREG | perm);
+=======
+	inode = oprofilefs_get_inode(root->d_sb, S_IFREG | perm);
+>>>>>>> v3.18
 =======
 	inode = oprofilefs_get_inode(root->d_sb, S_IFREG | perm);
 >>>>>>> v3.18
@@ -169,30 +178,42 @@ static int __oprofilefs_create_file(struct dentry *root, char const *name,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int oprofilefs_create_ulong(struct super_block *sb, struct dentry *root,
 	char const *name, unsigned long *val)
 {
 	return __oprofilefs_create_file(sb, root, name,
 =======
+=======
+>>>>>>> v3.18
 int oprofilefs_create_ulong(struct dentry *root,
 	char const *name, unsigned long *val)
 {
 	return __oprofilefs_create_file(root, name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&ulong_fops, 0644, val);
 }
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int oprofilefs_create_ro_ulong(struct super_block *sb, struct dentry *root,
 	char const *name, unsigned long *val)
 {
 	return __oprofilefs_create_file(sb, root, name,
 =======
+=======
+>>>>>>> v3.18
 int oprofilefs_create_ro_ulong(struct dentry *root,
 	char const *name, unsigned long *val)
 {
 	return __oprofilefs_create_file(root, name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&ulong_ro_fops, 0444, val);
 }
@@ -213,20 +234,27 @@ static const struct file_operations atomic_ro_fops = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int oprofilefs_create_ro_atomic(struct super_block *sb, struct dentry *root,
 	char const *name, atomic_t *val)
 {
 	return __oprofilefs_create_file(sb, root, name,
 =======
+=======
+>>>>>>> v3.18
 int oprofilefs_create_ro_atomic(struct dentry *root,
 	char const *name, atomic_t *val)
 {
 	return __oprofilefs_create_file(root, name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&atomic_ro_fops, 0444, val);
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int oprofilefs_create_file(struct super_block *sb, struct dentry *root,
 	char const *name, const struct file_operations *fops)
@@ -245,6 +273,8 @@ int oprofilefs_create_file_perm(struct super_block *sb, struct dentry *root,
 struct dentry *oprofilefs_mkdir(struct super_block *sb,
 	struct dentry *root, char const *name)
 =======
+=======
+>>>>>>> v3.18
 int oprofilefs_create_file(struct dentry *root,
 	char const *name, const struct file_operations *fops)
 {
@@ -260,11 +290,15 @@ int oprofilefs_create_file_perm(struct dentry *root,
 
 
 struct dentry *oprofilefs_mkdir(struct dentry *parent, char const *name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dentry *dentry;
 	struct inode *inode;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&root->d_inode->i_mutex);
 	dentry = d_alloc_name(root, name);
@@ -277,6 +311,8 @@ struct dentry *oprofilefs_mkdir(struct dentry *parent, char const *name)
 		dput(dentry);
 		mutex_unlock(&root->d_inode->i_mutex);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&parent->d_inode->i_mutex);
 	dentry = d_alloc_name(parent, name);
 	if (!dentry) {
@@ -287,6 +323,9 @@ struct dentry *oprofilefs_mkdir(struct dentry *parent, char const *name)
 	if (!inode) {
 		dput(dentry);
 		mutex_unlock(&parent->d_inode->i_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -294,7 +333,11 @@ struct dentry *oprofilefs_mkdir(struct dentry *parent, char const *name)
 	inode->i_fop = &simple_dir_operations;
 	d_add(dentry, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&root->d_inode->i_mutex);
+=======
+	mutex_unlock(&parent->d_inode->i_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&parent->d_inode->i_mutex);
 >>>>>>> v3.18
@@ -322,7 +365,11 @@ static int oprofilefs_fill_super(struct super_block *sb, void *data, int silent)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oprofile_create_files(sb, sb->s_root);
+=======
+	oprofile_create_files(sb->s_root);
+>>>>>>> v3.18
 =======
 	oprofile_create_files(sb->s_root);
 >>>>>>> v3.18

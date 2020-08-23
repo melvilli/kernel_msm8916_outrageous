@@ -26,7 +26,11 @@
 #include <asm/mach_traps.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit x86_init_noop(void) { }
+=======
+void x86_init_noop(void) { }
+>>>>>>> v3.18
 =======
 void x86_init_noop(void) { }
 >>>>>>> v3.18
@@ -90,7 +94,11 @@ struct x86_init_ops x86_init __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct x86_cpuinit_ops x86_cpuinit __cpuinitdata = {
+=======
+struct x86_cpuinit_ops x86_cpuinit = {
+>>>>>>> v3.18
 =======
 struct x86_cpuinit_ops x86_cpuinit = {
 >>>>>>> v3.18
@@ -116,6 +124,11 @@ struct x86_platform_ops x86_platform = {
 
 EXPORT_SYMBOL_GPL(x86_platform);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#if defined(CONFIG_PCI_MSI)
+>>>>>>> v3.18
 =======
 
 #if defined(CONFIG_PCI_MSI)
@@ -128,9 +141,12 @@ struct x86_msi_ops x86_msi = {
 	.restore_msi_irqs	= default_restore_msi_irqs,
 	.setup_hpet_msi		= default_setup_hpet_msi,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.msi_mask_irq		= default_msi_mask_irq,
 	.msix_mask_irq		= default_msix_mask_irq,
 };
@@ -165,6 +181,9 @@ u32 arch_msix_mask_irq(struct msi_desc *desc, u32 flag)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct x86_io_apic_ops x86_io_apic_ops = {
 	.init			= native_io_apic_init_mappings,

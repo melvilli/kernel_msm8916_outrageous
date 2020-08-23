@@ -47,6 +47,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Must be 1MB-aligned since a 1MB mapping is used early on.
  * Must not overlap with regions in mach-tegra/io.c:tegra_io_desc[].
  */
@@ -57,6 +58,8 @@
 		movw	rp, #TEGRA_CLK_RST_DEVICES_##lhu & 0xffff ; \
 		movt	rp, #TEGRA_CLK_RST_DEVICES_##lhu >> 16 ; \
 =======
+=======
+>>>>>>> v3.18
  * Must be section-aligned since a section mapping is used early on.
  * Must not overlap with regions in mach-tegra/io.c:tegra_io_desc[].
  */
@@ -65,6 +68,9 @@
 #define checkuart(rp, rv, lhu, bit, uart) \
 		/* Load address of CLK_RST register */ \
 		ldr	rp, =TEGRA_CLK_RST_DEVICES_##lhu ; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Load value from CLK_RST register */ \
 		ldr	rp, [rp, #0] ; \
@@ -74,8 +80,12 @@
 		bne	90f ; \
 		/* Load address of CLK_OUT_ENB register */ \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		movw	rp, #TEGRA_CLK_OUT_ENB_##lhu & 0xffff ; \
 		movt	rp, #TEGRA_CLK_OUT_ENB_##lhu >> 16 ; \
+=======
+		ldr	rp, =TEGRA_CLK_OUT_ENB_##lhu ; \
+>>>>>>> v3.18
 =======
 		ldr	rp, =TEGRA_CLK_OUT_ENB_##lhu ; \
 >>>>>>> v3.18
@@ -87,8 +97,12 @@
 		beq	90f ; \
 		/* Passed all tests, load address of UART registers */ \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		movw	rp, #TEGRA_UART##uart##_BASE & 0xffff ; \
 		movt	rp, #TEGRA_UART##uart##_BASE >> 16 ; \
+=======
+		ldr	rp, =TEGRA_UART##uart##_BASE ; \
+>>>>>>> v3.18
 =======
 		ldr	rp, =TEGRA_UART##uart##_BASE ; \
 >>>>>>> v3.18
@@ -110,22 +124,33 @@
 #ifdef CONFIG_TEGRA_DEBUG_UART_AUTO_ODMDATA
 		/* Check ODMDATA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 10:		movw	\rp, #TEGRA_PMC_SCRATCH20 & 0xffff
 		movt	\rp, #TEGRA_PMC_SCRATCH20 >> 16
 		ldr	\rp, [\rp, #0]		@ Load PMC_SCRATCH20
 		ubfx	\rv, \rp, #18, #2	@ 19:18 are console type
 =======
+=======
+>>>>>>> v3.18
 10:		ldr	\rp, =TEGRA_PMC_SCRATCH20
 		ldr	\rp, [\rp, #0]		@ Load PMC_SCRATCH20
 		lsr	\rv, \rp, #18		@ 19:18 are console type
 		and	\rv, \rv, #3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cmp	\rv, #2			@ 2 and 3 mean DCC, UART
 		beq	11f			@ some boards swap the meaning
 		cmp	\rv, #3			@ so accept either
 		bne	90f
 <<<<<<< HEAD
+<<<<<<< HEAD
 11:		ubfx	\rv, \rp, #15, #3	@ 17:15 are UART ID
+=======
+11:		lsr	\rv, \rp, #15		@ 17:15 are UART ID
+		and	\rv, #7	
+>>>>>>> v3.18
 =======
 11:		lsr	\rv, \rp, #15		@ 17:15 are UART ID
 		and	\rv, #7	
@@ -188,6 +213,7 @@
 		add	\rv, \rv, #UART_VIRTUAL_BASE
 		str	\rv, [\tmp, #8]		@ Store in tegra_uart_virt
 <<<<<<< HEAD
+<<<<<<< HEAD
 		movw	\rv, #TEGRA_APB_MISC_GP_HIDREV & 0xffff
 		movt	\rv, #TEGRA_APB_MISC_GP_HIDREV >> 16
 		ldr	\rv, [\rv, #0]		@ Load HIDREV
@@ -210,6 +236,8 @@
 		/* uart[UART_LCR] = UART_LCR_WLEN8; */
 		mov	\rv, #UART_LCR_WLEN8
 		str	\rv, [\rp, #UART_LCR << UART_SHIFT]
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		b	100f
@@ -240,8 +268,13 @@
 		beq	1002f
 1001:		ldrb	\rd, [\rx, #UART_LSR << UART_SHIFT]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		and	\rd, \rd, #UART_LSR_TEMT | UART_LSR_THRE
 		teq	\rd, #UART_LSR_TEMT | UART_LSR_THRE
+=======
+		and	\rd, \rd, #UART_LSR_THRE
+		teq	\rd, #UART_LSR_THRE
+>>>>>>> v3.18
 =======
 		and	\rd, \rd, #UART_LSR_THRE
 		teq	\rd, #UART_LSR_THRE
@@ -261,7 +294,10 @@
 #endif
 		.endm
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Storage for the state maintained by the macros above.
@@ -289,4 +325,7 @@ tegra_uart_config:
 	/* Debug UART virtual address */
 	.word 0
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

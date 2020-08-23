@@ -134,10 +134,13 @@ static inline void tracehook_report_syscall_exit(struct pt_regs *regs, int step)
 /**
  * tracehook_signal_handler - signal handler setup is complete
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sig:		number of signal being delivered
  * @info:		siginfo_t of signal being delivered
  * @ka:			sigaction setting that chose the handler
  * @regs:		user register state
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @stepping:		nonzero if debugger single-step or block-step in use
@@ -150,9 +153,13 @@ static inline void tracehook_report_syscall_exit(struct pt_regs *regs, int step)
  * (or handling more signals).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void tracehook_signal_handler(int sig, siginfo_t *info,
 					    const struct k_sigaction *ka,
 					    struct pt_regs *regs, int stepping)
+=======
+static inline void tracehook_signal_handler(int stepping)
+>>>>>>> v3.18
 =======
 static inline void tracehook_signal_handler(int stepping)
 >>>>>>> v3.18

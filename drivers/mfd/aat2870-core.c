@@ -294,7 +294,11 @@ static ssize_t aat2870_reg_write_file(struct file *file,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf_size = min(count, (sizeof(buf)-1));
+=======
+	buf_size = min(count, (size_t)(sizeof(buf)-1));
+>>>>>>> v3.18
 =======
 	buf_size = min(count, (size_t)(sizeof(buf)-1));
 >>>>>>> v3.18
@@ -308,12 +312,18 @@ static ssize_t aat2870_reg_write_file(struct file *file,
 		start++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = simple_strtoul(start, &start, 16);
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(start, 16, &addr);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (addr >= AAT2870_REG_NUM) {
 		dev_err(aat2870->dev, "Invalid address, 0x%lx\n", addr);
@@ -324,8 +334,14 @@ static ssize_t aat2870_reg_write_file(struct file *file,
 		start++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(start, 16, &val))
 		return -EINVAL;
+=======
+	ret = kstrtoul(start, 16, &val);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(start, 16, &val);
 	if (ret)
@@ -380,7 +396,11 @@ static int aat2870_i2c_probe(struct i2c_client *client,
 			     const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aat2870_platform_data *pdata = client->dev.platform_data;
+=======
+	struct aat2870_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct aat2870_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

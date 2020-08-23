@@ -209,7 +209,11 @@ static long sbwdog_ioctl(struct file *file, unsigned int cmd,
 		 * which is 1*8 before the config register
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = put_user(__raw_readq(user_dog - 8) / 1000000, p);
+=======
+		ret = put_user((u32)__raw_readq(user_dog - 8) / 1000000, p);
+>>>>>>> v3.18
 =======
 		ret = put_user((u32)__raw_readq(user_dog - 8) / 1000000, p);
 >>>>>>> v3.18
@@ -346,7 +350,10 @@ MODULE_PARM_DESC(timeout,
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

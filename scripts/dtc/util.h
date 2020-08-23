@@ -3,6 +3,10 @@
 
 #include <stdarg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <getopt.h>
+>>>>>>> v3.18
 =======
 #include <getopt.h>
 >>>>>>> v3.18
@@ -28,7 +32,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __attribute__((noreturn)) die(char * str, ...)
+=======
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+
+static inline void __attribute__((noreturn)) die(const char *str, ...)
+>>>>>>> v3.18
 =======
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -68,6 +78,7 @@ extern char *join_path(const char *path, const char *name);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Check a string of a given length to see if it is all printable and
  * has a valid terminator.
  *
@@ -75,6 +86,8 @@ extern char *join_path(const char *path, const char *name);
  * @param len	The string length including terminator
  * @return 1 if a valid printable string, 0 if not */
 =======
+=======
+>>>>>>> v3.18
  * Check a property of a given length to see if it is all printable and
  * has a valid terminator. The property can contain either a single string,
  * or multiple strings each of non-zero length.
@@ -83,6 +96,9 @@ extern char *join_path(const char *path, const char *name);
  * @param len	The string length including terminator
  * @return 1 if a valid printable string, 0 if not
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int util_is_printable_string(const void *data, int len);
 
@@ -105,7 +121,10 @@ char *utilfdt_read(const char *filename);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Like utilfdt_read(), but also passes back the size of the file read.
  *
  * @param len		If non-NULL, the amount of data we managed to read
@@ -113,6 +132,9 @@ char *utilfdt_read(const char *filename);
 char *utilfdt_read_len(const char *filename, off_t *len);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Read a device tree file into a buffer. Does not report errors, but only
  * returns them. The value returned can be passed to strerror() to obtain
@@ -125,13 +147,19 @@ char *utilfdt_read_len(const char *filename, off_t *len);
 int utilfdt_read_err(const char *filename, char **buffp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * Like utilfdt_read_err(), but also passes back the size of the file read.
  *
  * @param len		If non-NULL, the amount of data we managed to read
  */
 int utilfdt_read_err_len(const char *filename, char **buffp, off_t *len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -189,8 +217,11 @@ int utilfdt_decode_type(const char *fmt, int *type, int *size);
 	"<type>\ts=string, i=int, u=unsigned, x=hex\n" \
 	"\tOptional modifier prefix:\n" \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"\t\thh or b=byte, h=2 byte, l=4 byte (default)\n";
 =======
+=======
+>>>>>>> v3.18
 	"\t\thh or b=byte, h=2 byte, l=4 byte (default)";
 
 /**
@@ -271,6 +302,9 @@ void util_usage(const char *errmsg, const char *synopsis,
 	case 'h': usage(NULL); \
 	case 'V': util_version(); \
 	case '?': usage("unknown option");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UTIL_H */

@@ -181,6 +181,7 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 ipack_device_attr(id_format, "0x%hhu\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute ipack_dev_attrs[] = {
 	__ATTR_RO(id),
 	__ATTR_RO(id_device),
@@ -189,6 +190,8 @@ static struct device_attribute ipack_dev_attrs[] = {
 	__ATTR_RO(modalias),
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(id);
 static DEVICE_ATTR_RO(id_device);
 static DEVICE_ATTR_RO(id_format);
@@ -204,6 +207,9 @@ static struct attribute *ipack_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(ipack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct bus_type ipack_bus_type = {
@@ -212,7 +218,11 @@ static struct bus_type ipack_bus_type = {
 	.match     = ipack_bus_match,
 	.remove    = ipack_bus_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = ipack_dev_attrs,
+=======
+	.dev_groups = ipack_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = ipack_groups,
 >>>>>>> v3.18
@@ -221,7 +231,12 @@ static struct bus_type ipack_bus_type = {
 
 struct ipack_bus_device *ipack_bus_register(struct device *parent, int slots,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    const struct ipack_bus_ops *ops)
+=======
+					    const struct ipack_bus_ops *ops,
+					    struct module *owner)
+>>>>>>> v3.18
 =======
 					    const struct ipack_bus_ops *ops,
 					    struct module *owner)
@@ -245,6 +260,10 @@ struct ipack_bus_device *ipack_bus_register(struct device *parent, int slots,
 	bus->slots = slots;
 	bus->ops = ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bus->owner = owner;
+>>>>>>> v3.18
 =======
 	bus->owner = owner;
 >>>>>>> v3.18

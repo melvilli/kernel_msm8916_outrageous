@@ -43,6 +43,7 @@
 #include "bearer.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_IB_BEARERS		MAX_BEARERS
 
 /**
@@ -345,6 +346,8 @@ static struct tipc_media ib_media_info = {
 	.addr2msg	= ib_addr2msg,
 	.msg2addr	= ib_msg2addr,
 =======
+=======
+>>>>>>> v3.18
 /* convert InfiniBand address (media address format) media address to string */
 static int tipc_ib_addr2str(struct tipc_media_addr *a, char *str_buf,
 			    int str_size)
@@ -395,11 +398,15 @@ struct tipc_media ib_media_info = {
 	.addr2msg	= tipc_ib_addr2msg,
 	.msg2addr	= tipc_ib_msg2addr,
 	.raw2addr	= tipc_ib_raw2addr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.priority	= TIPC_DEF_LINK_PRI,
 	.tolerance	= TIPC_DEF_LINK_TOL,
 	.window		= TIPC_DEF_LINK_WIN,
 	.type_id	= TIPC_MEDIA_TYPE_IB,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.name		= "ib"
 };
@@ -439,6 +446,11 @@ void tipc_ib_media_stop(void)
 	unregister_netdevice_notifier(&notifier);
 	ib_started = 0;
 }
+=======
+	.hwaddr_len	= INFINIBAND_ALEN,
+	.name		= "ib"
+};
+>>>>>>> v3.18
 =======
 	.hwaddr_len	= INFINIBAND_ALEN,
 	.name		= "ib"

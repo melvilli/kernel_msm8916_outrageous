@@ -74,7 +74,11 @@ static int snd_vortex_midi(vortex_t *vortex)
 	temp = hwread(vortex->mmio, VORTEX_MIDI_DATA);
 	if (temp != MPU401_ACK /*0xfe */ ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "midi port doesn't acknowledge!\n");
+=======
+		pr_err( "midi port doesn't acknowledge!\n");
+>>>>>>> v3.18
 =======
 		pr_err( "midi port doesn't acknowledge!\n");
 >>>>>>> v3.18

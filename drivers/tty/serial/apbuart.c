@@ -72,11 +72,14 @@ static void apbuart_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void apbuart_enable_ms(struct uart_port *port)
 {
 	/* No modem status change interrupts for APBUART */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void apbuart_rx_chars(struct uart_port *port)
@@ -129,7 +132,13 @@ static void apbuart_rx_chars(struct uart_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(&port->state->port);
+=======
+	spin_unlock(&port->lock);
+	tty_flip_buffer_push(&port->state->port);
+	spin_lock(&port->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&port->lock);
 	tty_flip_buffer_push(&port->state->port);
@@ -345,7 +354,10 @@ static struct uart_ops grlib_apbuart_ops = {
 	.start_tx = apbuart_start_tx,
 	.stop_rx = apbuart_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms = apbuart_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl = apbuart_break_ctl,

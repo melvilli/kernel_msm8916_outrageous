@@ -12,8 +12,13 @@ struct tcf_ipt {
 	struct xt_entry_target	*tcfi_t;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_ipt(pc) \
 	container_of(pc, struct tcf_ipt, common)
+=======
+#define to_ipt(a) \
+	container_of(a->priv, struct tcf_ipt, common)
+>>>>>>> v3.18
 =======
 #define to_ipt(a) \
 	container_of(a->priv, struct tcf_ipt, common)

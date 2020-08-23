@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -72,6 +82,10 @@
  *****************************************************************************/
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmalloc.h>
 >>>>>>> v3.18
@@ -94,6 +108,10 @@
 #include "fw-api-scan.h"
 #include "time-event.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "iwl-fw-error-dump.h"
+>>>>>>> v3.18
 =======
 #include "iwl-fw-error-dump.h"
 >>>>>>> v3.18
@@ -183,9 +201,12 @@ static void iwl_mvm_nic_config(struct iwl_op_mode *op_mode)
 		 ~CSR_HW_IF_CONFIG_REG_MSK_PHY_TYPE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* silicon bits */
 	reg_val |= CSR_HW_IF_CONFIG_REG_BIT_RADIO_SI;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * TODO: Bits 7-8 of CSR in 8000 HW family set the ADC sampling, and
 	 * shouldn't be set to any non-zero value. The same is supposed to be
@@ -195,6 +216,9 @@ static void iwl_mvm_nic_config(struct iwl_op_mode *op_mode)
 	 */
 	if (mvm->trans->cfg->device_family != IWL_DEVICE_FAMILY_8000)
 		reg_val |= CSR_HW_IF_CONFIG_REG_BIT_RADIO_SI;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iwl_trans_set_bits_mask(mvm->trans, CSR_HW_IF_CONFIG_REG,
@@ -216,14 +240,20 @@ static void iwl_mvm_nic_config(struct iwl_op_mode *op_mode)
 	 * to lose ownership and not being able to obtain it back.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_set_bits_mask_prph(mvm->trans, APMG_PS_CTRL_REG,
 			       APMG_PS_CTRL_EARLY_PWR_OFF_RESET_DIS,
 			       ~APMG_PS_CTRL_EARLY_PWR_OFF_RESET_DIS);
 =======
+=======
+>>>>>>> v3.18
 	if (mvm->trans->cfg->device_family != IWL_DEVICE_FAMILY_8000)
 		iwl_set_bits_mask_prph(mvm->trans, APMG_PS_CTRL_REG,
 				       APMG_PS_CTRL_EARLY_PWR_OFF_RESET_DIS,
 				       ~APMG_PS_CTRL_EARLY_PWR_OFF_RESET_DIS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -253,6 +283,7 @@ static const struct iwl_rx_handlers iwl_mvm_rx_handlers[] = {
 	RX_HANDLER(TX_CMD, iwl_mvm_rx_tx_cmd, false),
 	RX_HANDLER(BA_NOTIF, iwl_mvm_rx_ba_notif, false),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RX_HANDLER(TIME_EVENT_NOTIFICATION, iwl_mvm_rx_time_event_notif, false),
 
 	RX_HANDLER(SCAN_REQUEST_CMD, iwl_mvm_rx_scan_response, false),
@@ -261,6 +292,8 @@ static const struct iwl_rx_handlers iwl_mvm_rx_handlers[] = {
 	RX_HANDLER(BT_PROFILE_NOTIFICATION, iwl_mvm_rx_bt_coex_notif, true),
 	RX_HANDLER(BEACON_NOTIFICATION, iwl_mvm_rx_beacon_notif, false),
 =======
+=======
+>>>>>>> v3.18
 
 	RX_HANDLER(BT_PROFILE_NOTIFICATION, iwl_mvm_rx_bt_coex_notif, true),
 	RX_HANDLER(BEACON_NOTIFICATION, iwl_mvm_rx_beacon_notif, true),
@@ -278,27 +311,40 @@ static const struct iwl_rx_handlers iwl_mvm_rx_handlers[] = {
 		   iwl_mvm_rx_scan_offload_complete_notif, true),
 	RX_HANDLER(MATCH_FOUND_NOTIFICATION, iwl_mvm_rx_scan_offload_results,
 		   false),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	RX_HANDLER(RADIO_VERSION_NOTIFICATION, iwl_mvm_rx_radio_ver, false),
 	RX_HANDLER(CARD_STATE_NOTIFICATION, iwl_mvm_rx_card_state_notif, false),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RX_HANDLER(REPLY_ERROR, iwl_mvm_rx_fw_error, false),
 =======
+=======
+>>>>>>> v3.18
 	RX_HANDLER(MISSED_BEACONS_NOTIFICATION, iwl_mvm_rx_missed_beacons_notif,
 		   false),
 
 	RX_HANDLER(REPLY_ERROR, iwl_mvm_rx_fw_error, false),
 	RX_HANDLER(PSM_UAPSD_AP_MISBEHAVING_NOTIFICATION,
 		   iwl_mvm_power_uapsd_misbehaving_ap_notif, false),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #undef RX_HANDLER
 #define CMD(x) [x] = #x
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *iwl_mvm_cmd_strings[REPLY_MAX] = {
+=======
+static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
+>>>>>>> v3.18
 =======
 static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 >>>>>>> v3.18
@@ -315,6 +361,10 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(BINDING_CONTEXT_CMD),
 	CMD(TIME_QUOTA_CMD),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CMD(NON_QOS_TX_COUNTER_CMD),
+>>>>>>> v3.18
 =======
 	CMD(NON_QOS_TX_COUNTER_CMD),
 >>>>>>> v3.18
@@ -330,6 +380,10 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(SET_CALIB_DEFAULT_CMD),
 	CMD(CALIBRATION_COMPLETE_NOTIFICATION),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CMD(ADD_STA_KEY),
+>>>>>>> v3.18
 =======
 	CMD(ADD_STA_KEY),
 >>>>>>> v3.18
@@ -338,11 +392,14 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(LQ_CMD),
 	CMD(SCAN_OFFLOAD_CONFIG_CMD),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CMD(SCAN_OFFLOAD_REQUEST_CMD),
 	CMD(SCAN_OFFLOAD_ABORT_CMD),
 	CMD(SCAN_OFFLOAD_COMPLETE),
 	CMD(SCAN_OFFLOAD_UPDATE_PROFILES_CMD),
 =======
+=======
+>>>>>>> v3.18
 	CMD(MATCH_FOUND_NOTIFICATION),
 	CMD(SCAN_OFFLOAD_REQUEST_CMD),
 	CMD(SCAN_OFFLOAD_ABORT_CMD),
@@ -350,6 +407,9 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(SCAN_OFFLOAD_COMPLETE),
 	CMD(SCAN_OFFLOAD_UPDATE_PROFILES_CMD),
 	CMD(SCAN_ITERATION_COMPLETE),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CMD(POWER_TABLE_CMD),
 	CMD(WEP_KEY),
@@ -359,14 +419,20 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(BEACON_TEMPLATE_CMD),
 	CMD(STATISTICS_NOTIFICATION),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CMD(TX_ANT_CONFIGURATION_CMD),
 	CMD(D3_CONFIG_CMD),
 =======
+=======
+>>>>>>> v3.18
 	CMD(EOSP_NOTIFICATION),
 	CMD(REDUCE_TX_POWER_CMD),
 	CMD(TX_ANT_CONFIGURATION_CMD),
 	CMD(D3_CONFIG_CMD),
 	CMD(D0I3_END_CMD),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CMD(PROT_OFFLOAD_CONFIG_CMD),
 	CMD(OFFLOADS_QUERY_CMD),
@@ -385,6 +451,10 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(NET_DETECT_HOTSPOTS_QUERY_CMD),
 	CMD(CARD_STATE_NOTIFICATION),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CMD(MISSED_BEACONS_NOTIFICATION),
+>>>>>>> v3.18
 =======
 	CMD(MISSED_BEACONS_NOTIFICATION),
 >>>>>>> v3.18
@@ -394,8 +464,11 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(BT_CONFIG),
 	CMD(MCAST_FILTER_CMD),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CMD(LTR_CONFIG),
 =======
+=======
+>>>>>>> v3.18
 	CMD(BCAST_FILTER_CMD),
 	CMD(REPLY_SF_CFG_CMD),
 	CMD(REPLY_BEACON_FILTERING_CMD),
@@ -411,6 +484,9 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 	CMD(PSM_UAPSD_AP_MISBEHAVING_NOTIFICATION),
 	CMD(ANTENNA_COUPLING_NOTIFICATION),
 	CMD(SCD_QUEUE_CFG),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #undef CMD
@@ -418,7 +494,10 @@ static const char *const iwl_mvm_cmd_strings[REPLY_MAX] = {
 /* this forward declaration can avoid to export the function */
 static void iwl_mvm_async_handlers_wk(struct work_struct *wk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void iwl_mvm_d0i3_exit_work(struct work_struct *wk);
 
 static u32 calc_min_backoff(struct iwl_trans *trans, const struct iwl_cfg *cfg)
@@ -439,6 +518,9 @@ static u32 calc_min_backoff(struct iwl_trans *trans, const struct iwl_cfg *cfg)
 }
 
 static void iwl_mvm_fw_error_dump_wk(struct work_struct *work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct iwl_op_mode *
@@ -454,7 +536,10 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	};
 	int err, scan_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 min_backoff;
 
 	/*
@@ -463,6 +548,9 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	 * array size.
 	 */
 	BUILD_BUG_ON(ARRAY_SIZE(mvm->fw_id_to_mac_id) != IWL_MVM_STATION_COUNT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/********************************
@@ -475,15 +563,21 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	op_mode = hw->priv;
 	op_mode->ops = &iwl_mvm_ops;
 	op_mode->trans = trans;
 =======
+=======
+>>>>>>> v3.18
 	if (cfg->max_rx_agg_size)
 		hw->max_rx_aggregation_subframes = cfg->max_rx_agg_size;
 
 	op_mode = hw->priv;
 	op_mode->ops = &iwl_mvm_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mvm = IWL_OP_MODE_GET_MVM(op_mode);
@@ -494,10 +588,13 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	mvm->hw = hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&mvm->mutex);
 	spin_lock_init(&mvm->async_handlers_lock);
 	INIT_LIST_HEAD(&mvm->time_event_list);
 =======
+=======
+>>>>>>> v3.18
 	mvm->restart_fw = iwlwifi_mod_params.restart_fw ? -1 : 0;
 
 	mvm->aux_queue = 15;
@@ -516,6 +613,9 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	spin_lock_init(&mvm->async_handlers_lock);
 	INIT_LIST_HEAD(&mvm->time_event_list);
 	INIT_LIST_HEAD(&mvm->aux_roc_te_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&mvm->async_handlers_list);
 	spin_lock_init(&mvm->time_event_lock);
@@ -524,7 +624,10 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	INIT_WORK(&mvm->roc_done_wk, iwl_mvm_roc_done_wk);
 	INIT_WORK(&mvm->sta_drained_wk, iwl_mvm_sta_drained_wk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	INIT_WORK(&mvm->d0i3_exit_work, iwl_mvm_d0i3_exit_work);
 	INIT_WORK(&mvm->fw_error_dump_wk, iwl_mvm_fw_error_dump_wk);
 
@@ -532,6 +635,9 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	spin_lock_init(&mvm->refs_lock);
 	skb_queue_head_init(&mvm->d0i3_tx);
 	init_waitqueue_head(&mvm->d0i3_exit_waitq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SET_IEEE80211_DEV(mvm->hw, mvm->trans->dev);
@@ -557,7 +663,12 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 
 	trans_cfg.cmd_queue = IWL_MVM_CMD_QUEUE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trans_cfg.cmd_fifo = IWL_MVM_CMD_FIFO;
+=======
+	trans_cfg.cmd_fifo = IWL_MVM_TX_FIFO_CMD;
+	trans_cfg.scd_set_active = true;
+>>>>>>> v3.18
 =======
 	trans_cfg.cmd_fifo = IWL_MVM_TX_FIFO_CMD;
 	trans_cfg.scd_set_active = true;
@@ -587,6 +698,7 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 		 mvm->cfg->name, mvm->trans->hw_rev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = iwl_trans_start_hw(mvm->trans);
 	if (err)
 		goto out_free;
@@ -607,6 +719,8 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 		mvm->fw->ucode_capa.max_probe_length +
 		(MAX_NUM_SCAN_CHANNELS * sizeof(struct iwl_scan_channel));
 =======
+=======
+>>>>>>> v3.18
 	min_backoff = calc_min_backoff(trans, cfg);
 	iwl_mvm_tt_initialize(mvm, min_backoff);
 	/* set the nvm_file_name according to priority */
@@ -656,6 +770,9 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 			mvm->fw->ucode_capa.n_scan_channels *
 				sizeof(struct iwl_scan_channel);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mvm->scan_cmd = kmalloc(scan_size, GFP_KERNEL);
 	if (!mvm->scan_cmd)
@@ -670,12 +787,18 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 		goto out_unregister;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	memset(&mvm->rx_stats, 0, sizeof(struct mvm_statistics_rx));
 
 	/* rpm starts with a taken ref. only set the appropriate bit here. */
 	mvm->refs[IWL_MVM_REF_UCODE_DOWN] = 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return op_mode;
 
@@ -686,7 +809,12 @@ iwl_op_mode_mvm_start(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	iwl_phy_db_free(mvm->phy_db);
 	kfree(mvm->scan_cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_trans_stop_hw(trans, true);
+=======
+	if (!cfg->no_power_up_nic_in_init || !mvm->nvm_file_name)
+		iwl_trans_op_mode_leave(trans);
+>>>>>>> v3.18
 =======
 	if (!cfg->no_power_up_nic_in_init || !mvm->nvm_file_name)
 		iwl_trans_op_mode_leave(trans);
@@ -703,12 +831,15 @@ static void iwl_op_mode_mvm_stop(struct iwl_op_mode *op_mode)
 	iwl_mvm_leds_exit(mvm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee80211_unregister_hw(mvm->hw);
 
 	kfree(mvm->scan_cmd);
 
 	iwl_trans_stop_hw(mvm->trans, true);
 =======
+=======
+>>>>>>> v3.18
 	iwl_mvm_tt_exit(mvm);
 
 	ieee80211_unregister_hw(mvm->hw);
@@ -727,6 +858,9 @@ static void iwl_op_mode_mvm_stop(struct iwl_op_mode *op_mode)
 #endif
 
 	iwl_trans_op_mode_leave(mvm->trans);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iwl_phy_db_free(mvm->phy_db);
@@ -734,7 +868,11 @@ static void iwl_op_mode_mvm_stop(struct iwl_op_mode *op_mode)
 
 	iwl_free_nvm_data(mvm->nvm_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < NVM_NUM_OF_SECTIONS; i++)
+=======
+	for (i = 0; i < NVM_MAX_NUM_SECTIONS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < NVM_MAX_NUM_SECTIONS; i++)
 >>>>>>> v3.18
@@ -847,7 +985,11 @@ static void iwl_mvm_stop_sw_queue(struct iwl_op_mode *op_mode, int queue)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_inc_return(&mvm->queue_stop_count[mq]) > 1) {
+=======
+	if (atomic_inc_return(&mvm->mac80211_queue_stop_count[mq]) > 1) {
+>>>>>>> v3.18
 =======
 	if (atomic_inc_return(&mvm->mac80211_queue_stop_count[mq]) > 1) {
 >>>>>>> v3.18
@@ -858,7 +1000,10 @@ static void iwl_mvm_stop_sw_queue(struct iwl_op_mode *op_mode, int queue)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(mq, &mvm->transport_queue_stop);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ieee80211_stop_queue(mvm->hw, mq);
@@ -873,9 +1018,15 @@ static void iwl_mvm_wake_sw_queue(struct iwl_op_mode *op_mode, int queue)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_dec_return(&mvm->queue_stop_count[mq]) > 0) {
 		IWL_DEBUG_TX_QUEUES(mvm,
 				    "queue %d (mac80211 %d) already awake\n",
+=======
+	if (atomic_dec_return(&mvm->mac80211_queue_stop_count[mq]) > 0) {
+		IWL_DEBUG_TX_QUEUES(mvm,
+				    "queue %d (mac80211 %d) still stopped\n",
+>>>>>>> v3.18
 =======
 	if (atomic_dec_return(&mvm->mac80211_queue_stop_count[mq]) > 0) {
 		IWL_DEBUG_TX_QUEUES(mvm,
@@ -886,6 +1037,7 @@ static void iwl_mvm_wake_sw_queue(struct iwl_op_mode *op_mode, int queue)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(mq, &mvm->transport_queue_stop);
 
 	ieee80211_wake_queue(mvm->hw, mq);
@@ -895,6 +1047,8 @@ static void iwl_mvm_set_hw_rfkill_state(struct iwl_op_mode *op_mode, bool state)
 {
 	struct iwl_mvm *mvm = IWL_OP_MODE_GET_MVM(op_mode);
 =======
+=======
+>>>>>>> v3.18
 	ieee80211_wake_queue(mvm->hw, mq);
 }
 
@@ -912,6 +1066,9 @@ static bool iwl_mvm_set_hw_rfkill_state(struct iwl_op_mode *op_mode, bool state)
 {
 	struct iwl_mvm *mvm = IWL_OP_MODE_GET_MVM(op_mode);
 	bool calibrating = ACCESS_ONCE(mvm->calibrating);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (state)
@@ -920,8 +1077,11 @@ static bool iwl_mvm_set_hw_rfkill_state(struct iwl_op_mode *op_mode, bool state)
 		clear_bit(IWL_MVM_STATUS_HW_RFKILL, &mvm->status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wiphy_rfkill_set_hw_state(mvm->hw->wiphy, state);
 =======
+=======
+>>>>>>> v3.18
 	wiphy_rfkill_set_hw_state(mvm->hw->wiphy, iwl_mvm_is_radio_killed(mvm));
 
 	/* iwl_run_init_mvm_ucode is waiting for results, abort it */
@@ -933,6 +1093,9 @@ static bool iwl_mvm_set_hw_rfkill_state(struct iwl_op_mode *op_mode, bool state)
 	 * middle of the calibrations.
 	 */
 	return state && (mvm->cur_ucode != IWL_UCODE_INIT || calibrating);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -947,8 +1110,11 @@ static void iwl_mvm_free_skb(struct iwl_op_mode *op_mode, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void iwl_mvm_nic_restart(struct iwl_mvm *mvm)
 =======
+=======
+>>>>>>> v3.18
 struct iwl_mvm_reprobe {
 	struct device *dev;
 	struct work_struct work;
@@ -976,13 +1142,19 @@ static void iwl_mvm_fw_error_dump_wk(struct work_struct *work)
 }
 
 void iwl_mvm_nic_restart(struct iwl_mvm *mvm, bool fw_error)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	iwl_abort_notification_waits(&mvm->notif_wait);
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * This is a bit racy, but worst case we tell mac80211 about
 	 * a stopped/aborted scan when that was already done which
 	 * is not a problem. It is necessary to abort any os scan
@@ -1006,6 +1178,9 @@ void iwl_mvm_nic_restart(struct iwl_mvm *mvm, bool fw_error)
 	}
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * If we're restarting already, don't cycle restarts.
 	 * If INIT fw asserted, it will likely fail again.
@@ -1013,6 +1188,7 @@ void iwl_mvm_nic_restart(struct iwl_mvm *mvm, bool fw_error)
 	 * can't recover this since we're already half suspended.
 	 */
 	if (test_and_set_bit(IWL_MVM_STATUS_IN_HW_RESTART, &mvm->status)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		IWL_ERR(mvm, "Firmware error during reconfiguration! Abort.\n");
 	} else if (mvm->cur_ucode == IWL_UCODE_REGULAR &&
@@ -1036,6 +1212,8 @@ void iwl_mvm_nic_restart(struct iwl_mvm *mvm, bool fw_error)
 
 		ieee80211_restart_hw(mvm->hw);
 =======
+=======
+>>>>>>> v3.18
 		struct iwl_mvm_reprobe *reprobe;
 
 		IWL_ERR(mvm,
@@ -1069,6 +1247,9 @@ void iwl_mvm_nic_restart(struct iwl_mvm *mvm, bool fw_error)
 		ieee80211_restart_hw(mvm->hw);
 	} else if (fw_error) {
 		schedule_work(&mvm->fw_error_dump_wk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1080,7 +1261,11 @@ static void iwl_mvm_nic_error(struct iwl_op_mode *op_mode)
 	iwl_mvm_dump_nic_error_log(mvm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_mvm_nic_restart(mvm);
+=======
+	iwl_mvm_nic_restart(mvm, true);
+>>>>>>> v3.18
 =======
 	iwl_mvm_nic_restart(mvm, true);
 >>>>>>> v3.18
@@ -1092,8 +1277,11 @@ static void iwl_mvm_cmd_queue_full(struct iwl_op_mode *op_mode)
 
 	WARN_ON(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_mvm_nic_restart(mvm);
 =======
+=======
+>>>>>>> v3.18
 	iwl_mvm_nic_restart(mvm, true);
 }
 
@@ -1440,6 +1628,9 @@ static void iwl_mvm_napi_add(struct iwl_op_mode *op_mode,
 	struct iwl_mvm *mvm = IWL_OP_MODE_GET_MVM(op_mode);
 
 	ieee80211_napi_add(mvm->hw, napi, napi_dev, poll, weight);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1455,6 +1646,12 @@ static const struct iwl_op_mode_ops iwl_mvm_ops = {
 	.cmd_queue_full = iwl_mvm_cmd_queue_full,
 	.nic_config = iwl_mvm_nic_config,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enter_d0i3 = iwl_mvm_enter_d0i3,
+	.exit_d0i3 = iwl_mvm_exit_d0i3,
+	.napi_add = iwl_mvm_napi_add,
+>>>>>>> v3.18
 =======
 	.enter_d0i3 = iwl_mvm_enter_d0i3,
 	.exit_d0i3 = iwl_mvm_exit_d0i3,

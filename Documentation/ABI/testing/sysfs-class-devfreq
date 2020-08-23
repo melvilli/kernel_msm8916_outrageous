@@ -79,7 +79,10 @@ Description:
 		The /sys/class/devfreq/.../available_governors shows
 		currently available governors in the system.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/class/devfreq/.../min_freq
 Date:		January 2013
@@ -100,4 +103,7 @@ Description:
 		frequency requested by governors and min_freq.
 		The max_freq overrides min_freq because max_freq may be
 		used to throttle devices to avoid overheating.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

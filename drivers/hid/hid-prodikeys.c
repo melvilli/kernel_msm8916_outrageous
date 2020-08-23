@@ -625,7 +625,12 @@ static int pcmidi_snd_initialise(struct pcmidi_snd *pm)
 	/* Setup sound card */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pm->pk->hdev->dev, index[dev], id[dev],
+			   THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pm->pk->hdev->dev, index[dev], id[dev],
 			   THIS_MODULE, 0, &card);
@@ -666,8 +671,11 @@ static int pcmidi_snd_initialise(struct pcmidi_snd *pm)
 		&pcmidi_in_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pm->pk->hdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* create sysfs variables */

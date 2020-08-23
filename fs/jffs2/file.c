@@ -52,15 +52,21 @@ const struct file_operations jffs2_file_operations =
 	.llseek =	generic_file_llseek,
 	.open =		generic_file_open,
 <<<<<<< HEAD
+<<<<<<< HEAD
  	.read =		do_sync_read,
  	.aio_read =	generic_file_aio_read,
  	.write =	do_sync_write,
  	.aio_write =	generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
  	.read =		new_sync_read,
  	.read_iter =	generic_file_read_iter,
  	.write =	new_sync_write,
  	.write_iter =	generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.unlocked_ioctl=jffs2_ioctl,
 	.mmap =		generic_file_readonly_mmap,
@@ -74,6 +80,10 @@ const struct inode_operations jffs2_file_inode_operations =
 {
 	.get_acl =	jffs2_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl =	jffs2_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl =	jffs2_set_acl,
 >>>>>>> v3.18
@@ -150,6 +160,12 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 	struct inode *inode = mapping->host;
 	struct jffs2_inode_info *f = JFFS2_INODE_INFO(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct jffs2_sb_info *c = JFFS2_SB_INFO(inode->i_sb);
+	struct jffs2_raw_inode ri;
+	uint32_t alloc_len = 0;
+>>>>>>> v3.18
 =======
 	struct jffs2_sb_info *c = JFFS2_SB_INFO(inode->i_sb);
 	struct jffs2_raw_inode ri;
@@ -159,6 +175,7 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 	uint32_t pageofs = index << PAGE_CACHE_SHIFT;
 	int ret = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pg = grab_cache_page_write_begin(mapping, index, flags);
 	if (!pg)
@@ -174,6 +191,8 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 		struct jffs2_full_dnode *fn;
 		uint32_t alloc_len;
 =======
+=======
+>>>>>>> v3.18
 	jffs2_dbg(1, "%s()\n", __func__);
 
 	if (pageofs > inode->i_size) {
@@ -196,11 +215,15 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 	if (alloc_len) {
 		/* Make new hole frag from old EOF to new page */
 		struct jffs2_full_dnode *fn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		jffs2_dbg(1, "Writing new hole frag 0x%x-0x%x between current EOF and new page\n",
 			  (unsigned int)inode->i_size, pageofs);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = jffs2_reserve_space(c, sizeof(ri), &alloc_len,
 					  ALLOC_NORMAL, JFFS2_SUMMARY_INODE_SIZE);
@@ -208,6 +231,8 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 			goto out_page;
 
 		mutex_lock(&f->sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		memset(&ri, 0, sizeof(ri));
@@ -237,7 +262,10 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 			ret = PTR_ERR(fn);
 			jffs2_complete_reservation(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(&f->sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto out_page;
@@ -255,7 +283,10 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 			jffs2_free_full_dnode(fn);
 			jffs2_complete_reservation(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(&f->sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto out_page;
@@ -263,7 +294,10 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 		jffs2_complete_reservation(c);
 		inode->i_size = pageofs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&f->sem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -275,6 +309,7 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 	 */
 	if (!PageUptodate(pg)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&f->sem);
 		ret = jffs2_do_readpage_nolock(inode, pg);
 		mutex_unlock(&f->sem);
@@ -282,11 +317,16 @@ static int jffs2_write_begin(struct file *filp, struct address_space *mapping,
 			goto out_page;
 	}
 =======
+=======
+>>>>>>> v3.18
 		ret = jffs2_do_readpage_nolock(inode, pg);
 		if (ret)
 			goto out_page;
 	}
 	mutex_unlock(&f->sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jffs2_dbg(1, "end write_begin(). pg->flags %lx\n", pg->flags);
 	return ret;
@@ -295,6 +335,10 @@ out_page:
 	unlock_page(pg);
 	page_cache_release(pg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&f->sem);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&f->sem);
 >>>>>>> v3.18

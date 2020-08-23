@@ -1,6 +1,10 @@
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005 - 2014 Emulex
 >>>>>>> v3.18
@@ -63,11 +67,14 @@ struct iscsi_cls_session *beiscsi_session_create(struct iscsi_endpoint *ep,
 	beiscsi_ep = ep->dd_data;
 	phba = beiscsi_ep->phba;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shost = phba->shost;
 
 	beiscsi_log(phba, KERN_INFO, BEISCSI_LOG_CONFIG,
 		    "BS_%d : In beiscsi_session_create\n");
 =======
+=======
+>>>>>>> v3.18
 
 	if (phba->state & BE_ADAPTER_PCI_ERR) {
 		beiscsi_log(phba, KERN_ERR, BEISCSI_LOG_CONFIG,
@@ -77,6 +84,9 @@ struct iscsi_cls_session *beiscsi_session_create(struct iscsi_endpoint *ep,
 		beiscsi_log(phba, KERN_INFO, BEISCSI_LOG_CONFIG,
 			    "BS_%d : In beiscsi_session_create\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cmds_max > beiscsi_ep->phba->params.wrbs_per_cxn) {
@@ -91,6 +101,10 @@ struct iscsi_cls_session *beiscsi_session_create(struct iscsi_endpoint *ep,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	shost = phba->shost;
+>>>>>>> v3.18
 =======
 	shost = phba->shost;
 >>>>>>> v3.18
@@ -215,6 +229,11 @@ int beiscsi_conn_bind(struct iscsi_cls_session *cls_session,
 	struct Scsi_Host *shost = iscsi_session_to_shost(cls_session);
 	struct beiscsi_hba *phba = iscsi_host_priv(shost);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hwi_controller *phwi_ctrlr = phba->phwi_ctrlr;
+	struct hwi_wrb_context *pwrb_context;
+>>>>>>> v3.18
 =======
 	struct hwi_controller *phwi_ctrlr = phba->phwi_ctrlr;
 	struct hwi_wrb_context *pwrb_context;
@@ -240,10 +259,13 @@ int beiscsi_conn_bind(struct iscsi_cls_session *cls_session,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beiscsi_conn->beiscsi_conn_cid = beiscsi_ep->ep_cid;
 	beiscsi_conn->ep = beiscsi_ep;
 	beiscsi_ep->conn = beiscsi_conn;
 =======
+=======
+>>>>>>> v3.18
 	pwrb_context = &phwi_ctrlr->wrb_context[BE_GET_CRI_FROM_CID(
 						beiscsi_ep->ep_cid)];
 
@@ -251,6 +273,9 @@ int beiscsi_conn_bind(struct iscsi_cls_session *cls_session,
 	beiscsi_conn->ep = beiscsi_ep;
 	beiscsi_ep->conn = beiscsi_conn;
 	beiscsi_conn->doorbell_offset = pwrb_context->doorbell_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	beiscsi_log(phba, KERN_INFO, BEISCSI_LOG_CONFIG,
@@ -301,6 +326,7 @@ static int beiscsi_create_ipv6_iface(struct beiscsi_hba *phba)
 void beiscsi_create_def_ifaces(struct beiscsi_hba *phba)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_cmd_get_if_info_resp if_info;
 
 	if (!mgmt_get_if_info(phba, BE2_IPV4, &if_info))
@@ -309,6 +335,8 @@ void beiscsi_create_def_ifaces(struct beiscsi_hba *phba)
 	if (!mgmt_get_if_info(phba, BE2_IPV6, &if_info))
 		beiscsi_create_ipv6_iface(phba);
 =======
+=======
+>>>>>>> v3.18
 	struct be_cmd_get_if_info_resp *if_info;
 
 	if (!mgmt_get_if_info(phba, BE2_IPV4, &if_info)) {
@@ -320,6 +348,9 @@ void beiscsi_create_def_ifaces(struct beiscsi_hba *phba)
 		beiscsi_create_ipv6_iface(phba);
 		kfree(if_info);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -517,13 +548,19 @@ int be2iscsi_iface_set_param(struct Scsi_Host *shost,
 	int ret = 0 ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->state & BE_ADAPTER_PCI_ERR) {
 		beiscsi_log(phba, KERN_ERR, BEISCSI_LOG_CONFIG,
 			    "BS_%d : In PCI_ERROR Recovery\n");
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nla_for_each_attr(attrib, data, dt_len, rm_len) {
 		iface_param = nla_data(attrib);
@@ -571,11 +608,17 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 		char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_cmd_get_if_info_resp if_info;
 	int len, ip_type = BE2_IPV4;
 
 	memset(&if_info, 0, sizeof(if_info));
 
+=======
+	struct be_cmd_get_if_info_resp *if_info;
+	int len, ip_type = BE2_IPV4;
+
+>>>>>>> v3.18
 =======
 	struct be_cmd_get_if_info_resp *if_info;
 	int len, ip_type = BE2_IPV4;
@@ -591,6 +634,7 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 	switch (param) {
 	case ISCSI_NET_PARAM_IPV4_ADDR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = sprintf(buf, "%pI4\n", &if_info.ip_addr.addr);
 		break;
 	case ISCSI_NET_PARAM_IPV6_ADDR:
@@ -599,6 +643,8 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 	case ISCSI_NET_PARAM_IPV4_BOOTPROTO:
 		if (!if_info.dhcp_state)
 =======
+=======
+>>>>>>> v3.18
 		len = sprintf(buf, "%pI4\n", if_info->ip_addr.addr);
 		break;
 	case ISCSI_NET_PARAM_IPV6_ADDR:
@@ -606,12 +652,16 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 		break;
 	case ISCSI_NET_PARAM_IPV4_BOOTPROTO:
 		if (!if_info->dhcp_state)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			len = sprintf(buf, "static\n");
 		else
 			len = sprintf(buf, "dhcp\n");
 		break;
 	case ISCSI_NET_PARAM_IPV4_SUBNET:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		len = sprintf(buf, "%pI4\n", &if_info.ip_addr.subnet_mask);
 		break;
@@ -635,6 +685,8 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 			len = sprintf(buf, "%d\n",
 				     ((if_info.vlan_priority >> 13) &
 =======
+=======
+>>>>>>> v3.18
 		len = sprintf(buf, "%pI4\n", if_info->ip_addr.subnet_mask);
 		break;
 	case ISCSI_NET_PARAM_VLAN_ENABLED:
@@ -656,6 +708,9 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 		else
 			len = sprintf(buf, "%d\n",
 				     ((if_info->vlan_priority >> 13) &
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     ISCSI_MAX_VLAN_PRIORITY));
 		break;
@@ -664,6 +719,10 @@ static int be2iscsi_get_if_param(struct beiscsi_hba *phba,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(if_info);
+>>>>>>> v3.18
 =======
 	kfree(if_info);
 >>>>>>> v3.18
@@ -680,13 +739,19 @@ int be2iscsi_iface_get_param(struct iscsi_iface *iface,
 	int len = -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->state & BE_ADAPTER_PCI_ERR) {
 		beiscsi_log(phba, KERN_ERR, BEISCSI_LOG_CONFIG,
 			    "BS_%d : In PCI_ERROR Recovery\n");
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (param) {
 	case ISCSI_NET_PARAM_IPV4_ADDR:
@@ -784,8 +849,12 @@ int beiscsi_set_param(struct iscsi_cls_conn *cls_conn,
 		break;
 	case ISCSI_PARAM_MAX_XMIT_DLENGTH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((conn->max_xmit_dlength > 65536) ||
 		    (conn->max_xmit_dlength == 0))
+=======
+		if (conn->max_xmit_dlength > 65536)
+>>>>>>> v3.18
 =======
 		if (conn->max_xmit_dlength > 65536)
 >>>>>>> v3.18
@@ -843,7 +912,11 @@ static void beiscsi_get_port_state(struct Scsi_Host *shost)
 	struct iscsi_cls_host *ihost = shost->shost_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ihost->port_state = (phba->state == BE_ADAPTER_UP) ?
+=======
+	ihost->port_state = (phba->state == BE_ADAPTER_LINK_UP) ?
+>>>>>>> v3.18
 =======
 	ihost->port_state = (phba->state == BE_ADAPTER_LINK_UP) ?
 >>>>>>> v3.18
@@ -887,7 +960,11 @@ static int beiscsi_get_port_speed(struct Scsi_Host *shost)
 		break;
 	case BE2ISCSI_LINK_SPEED_100MBPS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ihost->port_speed = BE2ISCSI_LINK_SPEED_100MBPS;
+=======
+		ihost->port_speed = ISCSI_PORT_SPEED_100MBPS;
+>>>>>>> v3.18
 =======
 		ihost->port_speed = ISCSI_PORT_SPEED_100MBPS;
 >>>>>>> v3.18
@@ -919,10 +996,13 @@ int beiscsi_get_host_param(struct Scsi_Host *shost,
 	int status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beiscsi_log(phba, KERN_INFO, BEISCSI_LOG_CONFIG,
 		    "BS_%d : In beiscsi_get_host_param,"
 		    " param= %d\n", param);
 =======
+=======
+>>>>>>> v3.18
 
 	if (phba->state & BE_ADAPTER_PCI_ERR) {
 		beiscsi_log(phba, KERN_ERR, BEISCSI_LOG_CONFIG,
@@ -933,6 +1013,9 @@ int beiscsi_get_host_param(struct Scsi_Host *shost,
 			    "BS_%d : In beiscsi_get_host_param,"
 			    " param = %d\n", param);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (param) {
@@ -977,7 +1060,11 @@ int beiscsi_get_macaddr(char *buf, struct beiscsi_hba *phba)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strlen(phba->mac_address))
+=======
+	if (phba->mac_addr_set)
+>>>>>>> v3.18
 =======
 	if (phba->mac_addr_set)
 >>>>>>> v3.18
@@ -989,6 +1076,10 @@ int beiscsi_get_macaddr(char *buf, struct beiscsi_hba *phba)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phba->mac_addr_set = true;
+>>>>>>> v3.18
 =======
 	phba->mac_addr_set = true;
 >>>>>>> v3.18
@@ -1025,7 +1116,11 @@ void beiscsi_conn_get_stats(struct iscsi_cls_conn *cls_conn,
 	stats->digest_err = 0;
 	stats->timeout_err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats->custom_length = 0;
+=======
+	stats->custom_length = 1;
+>>>>>>> v3.18
 =======
 	stats->custom_length = 1;
 >>>>>>> v3.18
@@ -1072,11 +1167,17 @@ static void  beiscsi_set_params_for_offld(struct beiscsi_conn *beiscsi_conn,
 	AMAP_SET_BITS(struct amap_beiscsi_offload_params, exp_statsn, params,
 		      (conn->exp_statsn - 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	AMAP_SET_BITS(struct amap_beiscsi_offload_params,
 		      max_recv_data_segment_length, params,
 		      conn->max_recv_dlength);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1091,11 +1192,14 @@ int beiscsi_conn_start(struct iscsi_cls_conn *cls_conn)
 	struct beiscsi_endpoint *beiscsi_ep;
 	struct beiscsi_offload_params params;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	beiscsi_log(beiscsi_conn->phba, KERN_INFO,
 		    BEISCSI_LOG_CONFIG,
 		    "BS_%d : In beiscsi_conn_start\n");
 =======
+=======
+>>>>>>> v3.18
 	struct beiscsi_hba *phba;
 
 	phba = ((struct beiscsi_conn *)conn->dd_data)->phba;
@@ -1109,6 +1213,9 @@ int beiscsi_conn_start(struct iscsi_cls_conn *cls_conn)
 			    BEISCSI_LOG_CONFIG,
 			    "BS_%d : In beiscsi_conn_start\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&params, 0, sizeof(struct beiscsi_offload_params));
@@ -1132,6 +1239,7 @@ int beiscsi_conn_start(struct iscsi_cls_conn *cls_conn)
 static int beiscsi_get_cid(struct beiscsi_hba *phba)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short cid = 0xFFFF;
 
 	if (!phba->avlbl_cids)
@@ -1142,6 +1250,8 @@ static int beiscsi_get_cid(struct beiscsi_hba *phba)
 		phba->cid_alloc = 0;
 	phba->avlbl_cids--;
 =======
+=======
+>>>>>>> v3.18
 	unsigned short cid = 0xFFFF, cid_from_ulp;
 	struct ulp_cid_info *cid_info = NULL;
 	uint16_t cid_avlbl_ulp0, cid_avlbl_ulp1;
@@ -1167,6 +1277,9 @@ static int beiscsi_get_cid(struct beiscsi_hba *phba)
 
 		cid_info->avlbl_cids--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return cid;
 }
@@ -1179,11 +1292,14 @@ static int beiscsi_get_cid(struct beiscsi_hba *phba)
 static void beiscsi_put_cid(struct beiscsi_hba *phba, unsigned short cid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phba->avlbl_cids++;
 	phba->cid_array[phba->cid_free++] = cid;
 	if (phba->cid_free == phba->params.cxns_per_ctrl)
 		phba->cid_free = 0;
 =======
+=======
+>>>>>>> v3.18
 	uint16_t cid_post_ulp;
 	struct hwi_controller *phwi_ctrlr;
 	struct hwi_wrb_context *pwrb_context;
@@ -1200,6 +1316,9 @@ static void beiscsi_put_cid(struct beiscsi_hba *phba, unsigned short cid)
 	cid_info->cid_array[cid_info->cid_free++] = cid;
 	if (cid_info->cid_free == BEISCSI_GET_CID_COUNT(phba, cid_post_ulp))
 		cid_info->cid_free = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1250,7 +1369,11 @@ static int beiscsi_open_conn(struct iscsi_endpoint *ep,
 	struct tcp_connect_and_offload_out *ptcpcnct_out;
 	struct be_dma_mem nonemb_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int tag;
+=======
+	unsigned int tag, req_memsize;
+>>>>>>> v3.18
 =======
 	unsigned int tag, req_memsize;
 >>>>>>> v3.18
@@ -1275,9 +1398,12 @@ static int beiscsi_open_conn(struct iscsi_endpoint *ep,
 
 	beiscsi_ep->cid_vld = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nonemb_cmd.va = pci_alloc_consistent(phba->ctrl.pdev,
 				sizeof(struct tcp_connect_and_offload_in),
 =======
+=======
+>>>>>>> v3.18
 
 	if (is_chip_be2_be3r(phba))
 		req_memsize = sizeof(struct tcp_connect_and_offload_in);
@@ -1286,6 +1412,9 @@ static int beiscsi_open_conn(struct iscsi_endpoint *ep,
 
 	nonemb_cmd.va = pci_alloc_consistent(phba->ctrl.pdev,
 				req_memsize,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				&nonemb_cmd.dma);
 	if (nonemb_cmd.va == NULL) {
@@ -1298,7 +1427,11 @@ static int beiscsi_open_conn(struct iscsi_endpoint *ep,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nonemb_cmd.size = sizeof(struct tcp_connect_and_offload_in);
+=======
+	nonemb_cmd.size = req_memsize;
+>>>>>>> v3.18
 =======
 	nonemb_cmd.size = req_memsize;
 >>>>>>> v3.18
@@ -1316,7 +1449,11 @@ static int beiscsi_open_conn(struct iscsi_endpoint *ep,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = beiscsi_mccq_compl(phba, tag, NULL, nonemb_cmd.va);
+=======
+	ret = beiscsi_mccq_compl(phba, tag, NULL, &nonemb_cmd);
+>>>>>>> v3.18
 =======
 	ret = beiscsi_mccq_compl(phba, tag, NULL, &nonemb_cmd);
 >>>>>>> v3.18
@@ -1326,17 +1463,23 @@ static int beiscsi_open_conn(struct iscsi_endpoint *ep,
 			    "BS_%d : mgmt_open_connection Failed");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_free_consistent(phba->ctrl.pdev, nonemb_cmd.size,
 			    nonemb_cmd.va, nonemb_cmd.dma);
 		beiscsi_free_ep(beiscsi_ep);
 		return -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 		if (ret != -EBUSY)
 			pci_free_consistent(phba->ctrl.pdev, nonemb_cmd.size,
 					    nonemb_cmd.va, nonemb_cmd.dma);
 
 		beiscsi_free_ep(beiscsi_ep);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1386,14 +1529,20 @@ beiscsi_ep_connect(struct Scsi_Host *shost, struct sockaddr *dst_addr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phba->state != BE_ADAPTER_UP) {
 =======
+=======
+>>>>>>> v3.18
 	if (phba->state & BE_ADAPTER_PCI_ERR) {
 		ret = -EBUSY;
 		beiscsi_log(phba, KERN_ERR, BEISCSI_LOG_CONFIG,
 			    "BS_%d : In PCI_ERROR Recovery\n");
 		return ERR_PTR(ret);
 	} else if (phba->state & BE_ADAPTER_LINK_DOWN) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -EBUSY;
 		beiscsi_log(phba, KERN_WARNING, BEISCSI_LOG_CONFIG,
@@ -1446,7 +1595,10 @@ int beiscsi_ep_poll(struct iscsi_endpoint *ep, int timeout_ms)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * beiscsi_flush_cq()- Flush the CQ created.
  * @phba: ptr device priv structure.
  *
@@ -1472,6 +1624,9 @@ static void beiscsi_flush_cq(struct beiscsi_hba *phba)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * beiscsi_close_conn - Upload the  connection
  * @ep: The iscsi endpoint
@@ -1494,11 +1649,17 @@ static int beiscsi_close_conn(struct  beiscsi_endpoint *beiscsi_ep, int flag)
 
 	ret = beiscsi_mccq_compl(phba, tag, NULL, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Flush the CQ entries */
 	beiscsi_flush_cq(phba);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1555,13 +1716,19 @@ void beiscsi_ep_disconnect(struct iscsi_endpoint *ep)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->state & BE_ADAPTER_PCI_ERR) {
 		beiscsi_log(phba, KERN_ERR, BEISCSI_LOG_CONFIG,
 			    "BS_%d : PCI_ERROR Recovery\n");
 		goto free_ep;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tag = mgmt_invalidate_connection(phba, beiscsi_ep,
 					  beiscsi_ep->ep_cid,
@@ -1576,6 +1743,11 @@ void beiscsi_ep_disconnect(struct iscsi_endpoint *ep)
 	beiscsi_mccq_compl(phba, tag, NULL, NULL);
 	beiscsi_close_conn(beiscsi_ep, tcp_upload_flag);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+free_ep:
+	msleep(BEISCSI_LOGOUT_SYNC_DELAY);
+>>>>>>> v3.18
 =======
 free_ep:
 	msleep(BEISCSI_LOGOUT_SYNC_DELAY);

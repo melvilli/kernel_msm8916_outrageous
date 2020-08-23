@@ -28,7 +28,10 @@
 #include <linux/sched.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/timer.h>
@@ -99,7 +102,11 @@ static int r8a66597_clock_enable(struct r8a66597 *r8a66597)
 
 	if (r8a66597->pdata->on_chip) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_enable(r8a66597->clk);
+=======
+		clk_prepare_enable(r8a66597->clk);
+>>>>>>> v3.18
 =======
 		clk_prepare_enable(r8a66597->clk);
 >>>>>>> v3.18
@@ -147,7 +154,11 @@ static void r8a66597_clock_disable(struct r8a66597 *r8a66597)
 
 	if (r8a66597->pdata->on_chip) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_disable(r8a66597->clk);
+=======
+		clk_disable_unprepare(r8a66597->clk);
+>>>>>>> v3.18
 =======
 		clk_disable_unprepare(r8a66597->clk);
 >>>>>>> v3.18
@@ -1282,7 +1293,11 @@ static void set_td_timer(struct r8a66597 *r8a66597, struct r8a66597_td *td)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			time = 50;
+=======
+			time = 300;
+>>>>>>> v3.18
 =======
 			time = 300;
 >>>>>>> v3.18
@@ -1802,7 +1817,10 @@ static void r8a66597_td_timer(unsigned long _r8a66597)
 		pipe_stop(r8a66597, pipe);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Select a different address or endpoint */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		new_td = td;
@@ -1815,8 +1833,12 @@ static void r8a66597_td_timer(unsigned long _r8a66597)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while (td != new_td && td->address == new_td->address &&
 			td->pipe->info.epnum == new_td->pipe->info.epnum);
+=======
+		} while (td != new_td && td->address == new_td->address);
+>>>>>>> v3.18
 =======
 		} while (td != new_td && td->address == new_td->address);
 >>>>>>> v3.18
@@ -2326,7 +2348,11 @@ static int r8a66597_bus_resume(struct usb_hcd *hcd)
 		rh->port |= USB_PORT_STAT_C_SUSPEND << 16;
 		r8a66597_mdfy(r8a66597, RESUME, RESUME | UACT, dvstctr_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(USB_RESUME_TIMEOUT);
+=======
+		msleep(50);
+>>>>>>> v3.18
 =======
 		msleep(50);
 >>>>>>> v3.18
@@ -2422,7 +2448,11 @@ static const struct dev_pm_ops r8a66597_dev_pm_ops = {
 static int r8a66597_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct r8a66597		*r8a66597 = dev_get_drvdata(&pdev->dev);
+=======
+	struct r8a66597		*r8a66597 = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct r8a66597		*r8a66597 = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -2499,8 +2529,13 @@ static int r8a66597_probe(struct platform_device *pdev)
 	r8a66597 = hcd_to_r8a66597(hcd);
 	memset(r8a66597, 0, sizeof(struct r8a66597));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, r8a66597);
 	r8a66597->pdata = pdev->dev.platform_data;
+=======
+	platform_set_drvdata(pdev, r8a66597);
+	r8a66597->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, r8a66597);
 	r8a66597->pdata = dev_get_platdata(&pdev->dev);
@@ -2552,6 +2587,10 @@ static int r8a66597_probe(struct platform_device *pdev)
 		goto clean_up3;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -2576,7 +2615,11 @@ static struct platform_driver r8a66597_driver = {
 	.remove =	r8a66597_remove,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = (char *) hcd_name,
+=======
+		.name = hcd_name,
+>>>>>>> v3.18
 =======
 		.name = hcd_name,
 >>>>>>> v3.18

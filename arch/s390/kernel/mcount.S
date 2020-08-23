@@ -9,6 +9,10 @@
 #include <asm/asm-offsets.h>
 #include <asm/ftrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/ptrace.h>
+>>>>>>> v3.18
 =======
 #include <asm/ptrace.h>
 >>>>>>> v3.18
@@ -18,6 +22,7 @@
 ENTRY(ftrace_stub)
 	br	%r14
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ENTRY(_mcount)
 #ifdef CONFIG_DYNAMIC_FTRACE
@@ -58,6 +63,8 @@ ENTRY(ftrace_graph_caller)
 3:	lm	%r2,%r5,16(%r15)
 	br	%r14
 =======
+=======
+>>>>>>> v3.18
 #define STACK_FRAME_SIZE  (STACK_FRAME_OVERHEAD + __PT_SIZE)
 #define STACK_PTREGS	  (STACK_FRAME_OVERHEAD)
 #define STACK_PTREGS_GPRS (STACK_PTREGS + __PT_GPRS)
@@ -105,11 +112,15 @@ ftrace_graph_caller_end:
 	lg	%r1,(STACK_PTREGS_PSW+8)(%r15)
 	lmg	%r2,%r15,(STACK_PTREGS_GPRS+2*8)(%r15)
 	br	%r1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 
 ENTRY(return_to_handler)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	stm	%r2,%r5,16(%r15)
 	st	%r14,56(%r15)
@@ -124,6 +135,8 @@ ENTRY(return_to_handler)
 	ahi	%r15,96
 	lm	%r2,%r5,16(%r15)
 =======
+=======
+>>>>>>> v3.18
 	stmg	%r2,%r5,32(%r15)
 	lgr	%r1,%r15
 	aghi	%r15,-STACK_FRAME_OVERHEAD
@@ -132,6 +145,9 @@ ENTRY(return_to_handler)
 	aghi	%r15,STACK_FRAME_OVERHEAD
 	lgr	%r14,%r2
 	lmg	%r2,%r5,32(%r15)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	br	%r14
 

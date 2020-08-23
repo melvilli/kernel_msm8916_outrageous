@@ -26,15 +26,21 @@
 #include <linux/clockchips.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/sched_clock.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/err.h>
 #include <linux/sched_clock.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach/time.h>
@@ -66,12 +72,15 @@
 #define MX2_TSTAT_COMP		(1 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MX31, MX35, MX25, MX5 */
 #define V2_TCTL_WAITEN		(1 << 3) /* Wait enable mode */
 #define V2_TCTL_CLK_IPG		(1 << 6)
 #define V2_TCTL_CLK_PER		(2 << 6)
 #define V2_TCTL_FRR		(1 << 9)
 =======
+=======
+>>>>>>> v3.18
 /* MX31, MX35, MX25, MX5, MX6 */
 #define V2_TCTL_WAITEN		(1 << 3) /* Wait enable mode */
 #define V2_TCTL_CLK_IPG		(1 << 6)
@@ -80,6 +89,9 @@
 #define V2_TCTL_FRR		(1 << 9)
 #define V2_TCTL_24MEN		(1 << 10)
 #define V2_TPRER_PRE24M		12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define V2_IR			0x0c
 #define V2_TSTAT		0x08
@@ -88,6 +100,11 @@
 #define V2_TCMP			0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V2_TIMER_RATE_OSC_DIV8	3000000
+
+>>>>>>> v3.18
 =======
 #define V2_TIMER_RATE_OSC_DIV8	3000000
 
@@ -137,7 +154,11 @@ static void gpt_irq_acknowledge(void)
 static void __iomem *sched_clock_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace mxc_read_sched_clock(void)
+=======
+static u64 notrace mxc_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace mxc_read_sched_clock(void)
 >>>>>>> v3.18
@@ -146,7 +167,10 @@ static u64 notrace mxc_read_sched_clock(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct delay_timer imx_delay_timer;
 
 static unsigned long imx_read_current_timer(void)
@@ -154,6 +178,9 @@ static unsigned long imx_read_current_timer(void)
 	return __raw_readl(sched_clock_reg);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init mxc_clocksource_init(struct clk *timer_clk)
 {
@@ -161,10 +188,13 @@ static int __init mxc_clocksource_init(struct clk *timer_clk)
 	void __iomem *reg = timer_base + (timer_is_v2() ? V2_TCN : MX1_2_TCN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sched_clock_reg = reg;
 
 	setup_sched_clock(mxc_read_sched_clock, 32, c);
 =======
+=======
+>>>>>>> v3.18
 	imx_delay_timer.read_current_timer = &imx_read_current_timer;
 	imx_delay_timer.freq = c;
 	register_current_timer_delay(&imx_delay_timer);
@@ -172,6 +202,9 @@ static int __init mxc_clocksource_init(struct clk *timer_clk)
 	sched_clock_reg = reg;
 
 	sched_clock_register(mxc_read_sched_clock, 32, c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return clocksource_mmio_init(reg, "mxc_timer1", c, 200, 32,
 			clocksource_mmio_readl_up);
@@ -300,7 +333,11 @@ static irqreturn_t mxc_timer_interrupt(int irq, void *dev_id)
 static struct irqaction mxc_timer_irq = {
 	.name		= "i.MX Timer Tick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -329,6 +366,7 @@ static int __init mxc_clockevent_init(struct clk *timer_clk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mxc_timer_init(void __iomem *base, int irq)
 {
 	uint32_t tctl_val;
@@ -338,17 +376,23 @@ void __init mxc_timer_init(void __iomem *base, int irq)
 	timer_clk = clk_get_sys("imx-gpt.0", "per");
 	if (IS_ERR(timer_clk)) {
 =======
+=======
+>>>>>>> v3.18
 static void __init _mxc_timer_init(int irq,
 				   struct clk *clk_per, struct clk *clk_ipg)
 {
 	uint32_t tctl_val;
 
 	if (IS_ERR(clk_per)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("i.MX timer: unable to get clk\n");
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	timer_ipg_clk = clk_get_sys("imx-gpt.0", "ipg");
 	if (!IS_ERR(timer_ipg_clk))
@@ -358,10 +402,15 @@ static void __init _mxc_timer_init(int irq,
 
 	timer_base = base;
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(clk_ipg))
 		clk_prepare_enable(clk_ipg);
 
 	clk_prepare_enable(clk_per);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -372,11 +421,14 @@ static void __init _mxc_timer_init(int irq,
 	__raw_writel(0, timer_base + MXC_TPRER); /* see datasheet note */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (timer_is_v2())
 		tctl_val = V2_TCTL_CLK_PER | V2_TCTL_FRR | V2_TCTL_WAITEN | MXC_TCTL_TEN;
 	else
 		tctl_val = MX1_2_TCTL_FRR | MX1_2_TCTL_CLK_PCLK1 | MXC_TCTL_TEN;
 =======
+=======
+>>>>>>> v3.18
 	if (timer_is_v2()) {
 		tctl_val = V2_TCTL_FRR | V2_TCTL_WAITEN | MXC_TCTL_TEN;
 		if (clk_get_rate(clk_per) == V2_TIMER_RATE_OSC_DIV8) {
@@ -393,14 +445,22 @@ static void __init _mxc_timer_init(int irq,
 	} else {
 		tctl_val = MX1_2_TCTL_FRR | MX1_2_TCTL_CLK_PCLK1 | MXC_TCTL_TEN;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__raw_writel(tctl_val, timer_base + MXC_TCTL);
 
 	/* init and register the timer to the framework */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxc_clocksource_init(timer_clk);
 	mxc_clockevent_init(timer_clk);
+=======
+	mxc_clocksource_init(clk_per);
+	mxc_clockevent_init(clk_per);
+>>>>>>> v3.18
 =======
 	mxc_clocksource_init(clk_per);
 	mxc_clockevent_init(clk_per);
@@ -410,7 +470,10 @@ static void __init _mxc_timer_init(int irq,
 	setup_irq(irq, &mxc_timer_irq);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init mxc_timer_init(void __iomem *base, int irq)
 {
@@ -451,4 +514,7 @@ CLOCKSOURCE_OF_DECLARE(mx53_timer, "fsl,imx53-gpt", mxc_timer_init_dt);
 CLOCKSOURCE_OF_DECLARE(mx6q_timer, "fsl,imx6q-gpt", mxc_timer_init_dt);
 CLOCKSOURCE_OF_DECLARE(mx6sl_timer, "fsl,imx6sl-gpt", mxc_timer_init_dt);
 CLOCKSOURCE_OF_DECLARE(mx6sx_timer, "fsl,imx6sx-gpt", mxc_timer_init_dt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -33,6 +33,7 @@ config LEDS_88PM860X
 	  Semiconductor 88PM8606 PMIC.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LEDS_ATMEL_PWM
 	tristate "LED Support using Atmel PWM outputs"
 	depends on LEDS_CLASS
@@ -41,6 +42,8 @@ config LEDS_ATMEL_PWM
 	  This option enables support for LEDs driven using outputs
 	  of the dedicated PWM controller found on newer Atmel SOCs.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config LEDS_LM3530
@@ -147,7 +150,10 @@ config LEDS_SUNFIRE
 	  LEDs on the I/O and CPU boards of SunFire UltraSPARC servers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config LEDS_IPAQ_MICRO
 	tristate "LED Support for the Compaq iPAQ h3xxx"
 	depends on MFD_IPAQ_MICRO
@@ -155,6 +161,9 @@ config LEDS_IPAQ_MICRO
 	  Choose this option if you want to use the notification LED on
 	  Compaq/HP iPAQ h3100 and h3600.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config LEDS_HP6XX
 	tristate "LED Support for the HP Jornada 6xx"
@@ -208,17 +217,23 @@ config LEDS_LP3944
 
 config LEDS_LP55XX_COMMON
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Common Driver for TI/National LP5521, LP5523/55231 and LP5562"
 	depends on LEDS_LP5521 || LEDS_LP5523 || LEDS_LP5562
 	select FW_LOADER
 	help
 	  This option supports common operations for LP5521 and LP5523/55231
 =======
+=======
+>>>>>>> v3.18
 	tristate "Common Driver for TI/National LP5521/5523/55231/5562/8501"
 	depends on LEDS_LP5521 || LEDS_LP5523 || LEDS_LP5562 || LEDS_LP8501
 	select FW_LOADER
 	help
 	  This option supports common operations for LP5521/5523/55231/5562/8501
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  devices.
 
@@ -254,7 +269,10 @@ config LEDS_LP5562
 	  programming the engines.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config LEDS_LP8501
 	tristate "LED Support for TI LP8501 LED driver chip"
 	depends on LEDS_CLASS && I2C
@@ -267,6 +285,9 @@ config LEDS_LP8501
 	  It is similar as LP5523, but output power selection is available.
 	  And register layout and engine program schemes are different.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config LEDS_LP8788
 	tristate "LED support for the TI LP8788 PMIC"
@@ -316,6 +337,7 @@ config LEDS_PCA955X
 	  devices include PCA9550, PCA9551, PCA9552, and PCA9553.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LEDS_PCA9633
 	tristate "LED support for PCA9633 I2C chip"
 	depends on LEDS_CLASS
@@ -363,6 +385,8 @@ config LEDS_MSM_GPIO_FLASH
 	  To compile this driver as a module, choose M here: the module will
 	  be called leds-gpio-flash.
 =======
+=======
+>>>>>>> v3.18
 config LEDS_PCA963X
 	tristate "LED support for PCA963x I2C chip"
 	depends on LEDS_CLASS
@@ -371,6 +395,9 @@ config LEDS_PCA963X
 	  This option enables support for LEDs connected to the PCA963x
 	  LED driver chip accessed via the I2C bus. Supported
 	  devices include PCA9633 and PCA9634
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config LEDS_WM831X_STATUS
@@ -446,6 +473,7 @@ config LEDS_INTEL_SS4200
 	  can stop the front LED from blinking after startup.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LEDS_KTD2026
 	tristate "LED driver for the KTD2026"
 	depends on LEDS_CLASS
@@ -455,6 +483,8 @@ config LEDS_KTD2026
 	  This option enabled support for KTD2026 RGB LED driver chips
 	  accessed via I2C bus.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config LEDS_LT3593
@@ -487,6 +517,7 @@ config LEDS_DELL_NETBOOKS
 
 config LEDS_MC13783
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "LED Support for MC13783 PMIC"
 	depends on LEDS_CLASS
 	depends on MFD_MC13783
@@ -494,22 +525,31 @@ config LEDS_MC13783
 	  This option enable support for on-chip LED drivers found
 	  on Freescale Semiconductor MC13783 PMIC.
 =======
+=======
+>>>>>>> v3.18
 	tristate "LED Support for MC13XXX PMIC"
 	depends on LEDS_CLASS
 	depends on MFD_MC13XXX
 	help
 	  This option enable support for on-chip LED drivers found
 	  on Freescale Semiconductor MC13783/MC13892/MC34708 PMIC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config LEDS_NS2
 	tristate "LED support for Network Space v2 GPIO LEDs"
 	depends on LEDS_CLASS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MACH_NETSPACE_V2 || MACH_INETSPACE_V2 || \
 		   MACH_NETSPACE_MAX_V2 || MACH_D2NET_V2 || \
 		   MACH_NETSPACE_V2_DT || MACH_INETSPACE_V2_DT || \
 		   MACH_NETSPACE_MAX_V2_DT || MACH_NETSPACE_MINI_V2_DT
+=======
+	depends on MACH_KIRKWOOD
+>>>>>>> v3.18
 =======
 	depends on MACH_KIRKWOOD
 >>>>>>> v3.18
@@ -522,8 +562,13 @@ config LEDS_NS2
 config LEDS_NETXBIG
 	tristate "LED support for Big Network series LEDs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MACH_NET2BIG_V2 || MACH_NET5BIG_V2
 	depends on LEDS_CLASS
+=======
+	depends on LEDS_CLASS
+	depends on MACH_KIRKWOOD
+>>>>>>> v3.18
 =======
 	depends on LEDS_CLASS
 	depends on MACH_KIRKWOOD
@@ -546,6 +591,7 @@ config LEDS_ASIC3
 	  period from 62ms to 125s. Say Y to enable LEDs on the HP iPAQ hx4700.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LEDS_RENESAS_TPU
 	bool "LED support for Renesas TPU"
 	depends on LEDS_CLASS=y && HAVE_CLK && GPIOLIB
@@ -558,6 +604,8 @@ config LEDS_RENESAS_TPU
 	  pin function. The latter to support brightness control.
 	  Brightness control is supported but hardware blinking is not.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config LEDS_TCA6507
@@ -586,7 +634,11 @@ config LEDS_LM355x
 config LEDS_OT200
 	tristate "LED support for the Bachmann OT200"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on LEDS_CLASS && HAS_IOMEM
+=======
+	depends on LEDS_CLASS && HAS_IOMEM && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on LEDS_CLASS && HAS_IOMEM && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -595,7 +647,10 @@ config LEDS_OT200
 	  Say Y to enable LEDs on the Bachmann OT200.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config LEDS_MENF21BMC
 	tristate "LED support for the MEN 14F021P00 BMC"
 	depends on LEDS_CLASS && MFD_MENF21BMC
@@ -607,6 +662,9 @@ config LEDS_MENF21BMC
 
 comment "LED driver for blink(1) USB RGB LED is under Special HID drivers (HID_THINGM)"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config LEDS_BLINKM
 	tristate "LED support for the BlinkM I2C RGB LED"
@@ -617,6 +675,7 @@ config LEDS_BLINKM
 	  through I2C. Say Y to enable support for the BlinkM LED.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LEDS_AW2013
 	tristate "LED support for AW2013"
 	depends on LEDS_CLASS && I2C
@@ -624,6 +683,8 @@ config LEDS_AW2013
 	  This option enables support for the AW2013 RGB LED connected
 	  through I2C. Say Y to enable support for the AW2013 LED.
 =======
+=======
+>>>>>>> v3.18
 config LEDS_SYSCON
 	bool "LED support for LEDs on system controllers"
 	depends on LEDS_CLASS=y
@@ -641,6 +702,9 @@ config LEDS_VERSATILE
 	help
 	  This option enabled support for the LEDs on the ARM Versatile
 	  and RealView boards. Say Y to enabled these.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 comment "LED Triggers"

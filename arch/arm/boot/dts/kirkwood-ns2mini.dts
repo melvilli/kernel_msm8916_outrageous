@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood-ns2-common.dtsi"
+=======
+#include "kirkwood-ns2-common.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood-ns2-common.dtsi"
 >>>>>>> v3.18
@@ -19,6 +23,11 @@
 	ocp@f1000000 {
 		sata@80000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pinctrl-0 = <&pmx_ns2_sata0>;
+			pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&pmx_ns2_sata0>;
 			pinctrl-names = "default";
@@ -31,15 +40,21 @@
 	gpio_fan {
 		compatible = "gpio-fan";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpios = <&gpio0 22 1
 			 &gpio0  7 1
 			 &gpio1  1 1
 			 &gpio0 23 1>;
 =======
+=======
+>>>>>>> v3.18
 		gpios = <&gpio0 22 GPIO_ACTIVE_LOW
 			 &gpio0  7 GPIO_ACTIVE_LOW
 			 &gpio1  1 GPIO_ACTIVE_LOW
 			 &gpio0 23 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio-fan,speed-map =
 			<   0  0
@@ -52,7 +67,11 @@
 			 7980  9
 			 9200  8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		alarm-gpios = <&gpio0 25 1>;
+=======
+		alarm-gpios = <&gpio0 25 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 		alarm-gpios = <&gpio0 25 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -69,6 +88,11 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+&ethphy0 { reg = <0>; };
+>>>>>>> v3.18
 =======
 
 &ethphy0 { reg = <0>; };

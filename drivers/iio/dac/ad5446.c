@@ -133,8 +133,14 @@ static const struct iio_chan_spec_ext_info ad5446_ext_info_powerdown[] = {
 		.read = ad5446_read_dac_powerdown,
 		.write = ad5446_write_dac_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	IIO_ENUM("powerdown_mode", false, &ad5446_powerdown_mode_enum),
+=======
+		.shared = IIO_SEPARATE,
+	},
+	IIO_ENUM("powerdown_mode", IIO_SEPARATE, &ad5446_powerdown_mode_enum),
+>>>>>>> v3.18
 =======
 		.shared = IIO_SEPARATE,
 	},
@@ -145,7 +151,11 @@ static const struct iio_chan_spec_ext_info ad5446_ext_info_powerdown[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _AD5446_CHANNEL(bits, storage, shift, ext) { \
+=======
+#define _AD5446_CHANNEL(bits, storage, _shift, ext) { \
+>>>>>>> v3.18
 =======
 #define _AD5446_CHANNEL(bits, storage, _shift, ext) { \
 >>>>>>> v3.18
@@ -156,14 +166,20 @@ static const struct iio_chan_spec_ext_info ad5446_ext_info_powerdown[] = {
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW), \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (bits), (storage), (shift)), \
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = { \
 		.sign = 'u', \
 		.realbits = (bits), \
 		.storagebits = (storage), \
 		.shift = (_shift), \
 		}, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = (ext), \
 }
@@ -182,7 +198,10 @@ static int ad5446_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad5446_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -192,11 +211,17 @@ static int ad5446_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_uv = (st->vref_mv * 1000) >> chan->scan_type.realbits;
 		*val =  scale_uv / 1000;
 		*val2 = (scale_uv % 1000) * 1000;
 		return IIO_VAL_INT_PLUS_MICRO;
 
+=======
+		*val = st->vref_mv;
+		*val2 = chan->scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = st->vref_mv;
 		*val2 = chan->scan_type.realbits;
@@ -249,17 +274,23 @@ static int ad5446_probe(struct device *dev, const char *name,
 	int ret, voltage_uv = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = regulator_get(dev, "vcc");
 	if (!IS_ERR(reg)) {
 		ret = regulator_enable(reg);
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	reg = devm_regulator_get(dev, "vcc");
 	if (!IS_ERR(reg)) {
 		ret = regulator_enable(reg);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = regulator_get_voltage(reg);
@@ -270,7 +301,11 @@ static int ad5446_probe(struct device *dev, const char *name,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
 >>>>>>> v3.18
@@ -305,6 +340,7 @@ static int ad5446_probe(struct device *dev, const char *name,
 	ret = iio_device_register(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_device;
 
 	return 0;
@@ -319,6 +355,8 @@ error_put_reg:
 		regulator_put(reg);
 
 =======
+=======
+>>>>>>> v3.18
 		goto error_disable_reg;
 
 	return 0;
@@ -326,6 +364,9 @@ error_put_reg:
 error_disable_reg:
 	if (!IS_ERR(reg))
 		regulator_disable(reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -337,11 +378,16 @@ static int ad5446_remove(struct device *dev)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
@@ -394,6 +440,10 @@ enum ad5446_supported_spi_device_ids {
 	ID_AD5611,
 	ID_AD5621,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ID_AD5641,
+>>>>>>> v3.18
 =======
 	ID_AD5641,
 >>>>>>> v3.18
@@ -460,11 +510,17 @@ static const struct ad5446_chip_info ad5446_spi_chip_info[] = {
 		.write = ad5446_write,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[ID_AD5641] = {
 		.channel = AD5446_CHANNEL_POWERDOWN(14, 16, 0),
 		.write = ad5446_write,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[ID_AD5620_2500] = {
 		.channel = AD5446_CHANNEL_POWERDOWN(12, 16, 2),
@@ -521,6 +577,10 @@ static const struct spi_device_id ad5446_spi_ids[] = {
 	{"ad5611", ID_AD5611},
 	{"ad5621", ID_AD5621},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"ad5641", ID_AD5641},
+>>>>>>> v3.18
 =======
 	{"ad5641", ID_AD5641},
 >>>>>>> v3.18

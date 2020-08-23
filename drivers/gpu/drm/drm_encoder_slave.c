@@ -68,7 +68,11 @@ int drm_i2c_encoder_init(struct drm_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!client->driver) {
+=======
+	if (!client->dev.driver) {
+>>>>>>> v3.18
 =======
 	if (!client->dev.driver) {
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ int drm_i2c_encoder_init(struct drm_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module = client->driver->driver.owner;
+=======
+	module = client->dev.driver->owner;
+>>>>>>> v3.18
 =======
 	module = client->dev.driver->owner;
 >>>>>>> v3.18
@@ -89,7 +97,11 @@ int drm_i2c_encoder_init(struct drm_device *dev,
 	encoder->bus_priv = client;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	encoder_drv = to_drm_i2c_encoder_driver(client->driver);
+=======
+	encoder_drv = to_drm_i2c_encoder_driver(to_i2c_driver(client->dev.driver));
+>>>>>>> v3.18
 =======
 	encoder_drv = to_drm_i2c_encoder_driver(to_i2c_driver(client->dev.driver));
 >>>>>>> v3.18
@@ -124,7 +136,11 @@ void drm_i2c_encoder_destroy(struct drm_encoder *drm_encoder)
 	struct drm_encoder_slave *encoder = to_encoder_slave(drm_encoder);
 	struct i2c_client *client = drm_i2c_encoder_get_client(drm_encoder);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct module *module = client->driver->driver.owner;
+=======
+	struct module *module = client->dev.driver->owner;
+>>>>>>> v3.18
 =======
 	struct module *module = client->dev.driver->owner;
 >>>>>>> v3.18

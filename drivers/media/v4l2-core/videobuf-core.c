@@ -331,7 +331,10 @@ static void videobuf_status(struct videobuf_queue *q, struct v4l2_buffer *b,
 	case V4L2_MEMORY_USERPTR:
 		b->m.userptr = vb->baddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		b->reserved = vb->boff;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		b->length    = vb->bsize;
@@ -446,11 +449,14 @@ int videobuf_reqbufs(struct videobuf_queue *q,
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->count < 1) {
 		dprintk(1, "reqbufs: count invalid (%d)\n", req->count);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (req->memory != V4L2_MEMORY_MMAP     &&
@@ -479,13 +485,19 @@ int videobuf_reqbufs(struct videobuf_queue *q,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (req->count == 0) {
 		dprintk(1, "reqbufs: count invalid (%d)\n", req->count);
 		retval = __videobuf_free(q);
 		goto done;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	count = req->count;
 	if (count > VIDEO_MAX_FRAME)
@@ -605,7 +617,10 @@ int videobuf_qbuf(struct videobuf_queue *q, struct v4l2_buffer *b)
 			q->ops->buf_release(q, buf);
 		buf->baddr = b->m.userptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf->boff = b->reserved;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1148,6 +1163,11 @@ unsigned int videobuf_poll_stream(struct file *file,
 					 struct videobuf_buffer, stream);
 	} else if (req_events & (POLLIN | POLLRDNORM)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (!q->reading)
+			__videobuf_read_start(q);
+>>>>>>> v3.18
 =======
 		if (!q->reading)
 			__videobuf_read_start(q);

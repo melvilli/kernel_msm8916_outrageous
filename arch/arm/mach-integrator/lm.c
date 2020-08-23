@@ -13,7 +13,11 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/lm.h>
+=======
+#include "lm.h"
+>>>>>>> v3.18
 =======
 #include "lm.h"
 >>>>>>> v3.18

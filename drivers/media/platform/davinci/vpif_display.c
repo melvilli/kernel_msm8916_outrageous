@@ -4,6 +4,10 @@
  *
  * Copyright (C) 2009 Texas Instruments Incorporated - http://www.ti.com/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Lad, Prabhakar <prabhakar.csengg@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Lad, Prabhakar <prabhakar.csengg@gmail.com>
 >>>>>>> v3.18
@@ -18,6 +22,7 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/init.h>
@@ -47,6 +52,8 @@
 #include "vpif_display.h"
 #include "vpif.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -56,6 +63,9 @@
 
 #include "vpif.h"
 #include "vpif_display.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("TI DaVinci VPIF Display driver");
@@ -69,6 +79,7 @@ MODULE_VERSION(VPIF_DISPLAY_VERSION);
 		v4l2_dbg(level, debug, &vpif_obj.v4l2_dev, fmt, ## arg)
 
 static int debug = 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 ch2_numbuffers = 3;
 static u32 ch3_numbuffers = 3;
@@ -97,6 +108,8 @@ static struct vpif_config_params config_params = {
 	.channel_bufsize[1]	= 720 * 576 * 2,
 };
 =======
+=======
+>>>>>>> v3.18
 
 module_param(debug, int, 0644);
 
@@ -108,6 +121,9 @@ MODULE_PARM_DESC(debug, "Debug level 0-1");
 static int ycmux_mode;
 
 static u8 channel_first_int[VPIF_NUMOBJECTS][2] = { {1, 1} };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct vpif_device vpif_obj = { {NULL} };
@@ -115,6 +131,7 @@ static struct device *vpif_dev;
 static void vpif_calculate_offsets(struct channel_obj *ch);
 static void vpif_config_addr(struct channel_obj *ch, int muxmode);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * buffer_prepare: This is the callback function called from vb2_qbuf()
@@ -156,6 +173,8 @@ buf_align_exit:
 /*
  * vpif_buffer_queue_setup: This function allocates memory for the buffers
 =======
+=======
+>>>>>>> v3.18
 static inline struct vpif_disp_buffer *to_vpif_buffer(struct vb2_buffer *vb)
 {
 	return container_of(vb, struct vpif_disp_buffer, vb);
@@ -208,6 +227,9 @@ static int vpif_buffer_prepare(struct vb2_buffer *vb)
  *
  * This callback function is called when reqbuf() is called to adjust
  * the buffer count and buffer size
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int vpif_buffer_queue_setup(struct vb2_queue *vq,
@@ -215,6 +237,7 @@ static int vpif_buffer_queue_setup(struct vb2_queue *vq,
 				unsigned int *nbuffers, unsigned int *nplanes,
 				unsigned int sizes[], void *alloc_ctxs[])
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vpif_fh *fh = vb2_get_drv_priv(vq);
 	struct channel_obj *ch = fh->channel;
@@ -263,6 +286,8 @@ static void vpif_buffer_queue(struct vb2_buffer *vb)
 				struct vpif_disp_buffer, vb);
 	struct channel_obj *ch = fh->channel;
 =======
+=======
+>>>>>>> v3.18
 	struct channel_obj *ch = vb2_get_drv_priv(vq);
 	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
 
@@ -292,6 +317,9 @@ static void vpif_buffer_queue(struct vb2_buffer *vb)
 {
 	struct vpif_disp_buffer *buf = to_vpif_buffer(vb);
 	struct channel_obj *ch = vb2_get_drv_priv(vb->vb2_queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct common_obj *common;
 	unsigned long flags;
@@ -304,6 +332,7 @@ static void vpif_buffer_queue(struct vb2_buffer *vb)
 	spin_unlock_irqrestore(&common->irqlock, flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * vpif_buf_cleanup: This function is called from the videobuf2 layer to
@@ -359,16 +388,22 @@ static int vpif_buffer_init(struct vb2_buffer *vb)
 static u8 channel_first_int[VPIF_NUMOBJECTS][2] = { {1, 1} };
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * vpif_start_streaming : Starts the DMA engine for streaming
  * @vb: ptr to vb2_buffer
  * @count: number of buffers
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 {
 	struct vpif_display_config *vpif_config_data =
 					vpif_dev->platform_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vpif_fh *fh = vb2_get_drv_priv(vq);
 	struct channel_obj *ch = fh->channel;
@@ -412,6 +447,8 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct channel_obj *ch = vb2_get_drv_priv(vq);
 	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
 	struct vpif_params *vpif = &ch->vpifparams;
@@ -423,6 +460,9 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 
 	/* Initialize field_id */
 	ch->field_id = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* clock settings */
@@ -432,7 +472,11 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 		if (ret < 0) {
 			vpif_err("can't set clock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
+=======
+			goto err;
+>>>>>>> v3.18
 =======
 			goto err;
 >>>>>>> v3.18
@@ -443,11 +487,14 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 	ret = vpif_set_video_params(vpif, ch->channel_id + 2);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
 
 	common->started = ret;
 	vpif_config_addr(ch, ret);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 
 	ycmux_mode = ret;
@@ -461,6 +508,9 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 	spin_unlock_irqrestore(&common->irqlock, flags);
 
 	addr = vb2_dma_contig_plane_dma_addr(&common->cur_frm->vb, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	common->set_addr((addr + common->ytop_off),
 			    (addr + common->ybtm_off),
@@ -468,13 +518,19 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 			    (addr + common->cbtm_off));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set interrupt for both the fields in VPIF
 	    Register enable channel in VPIF register */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set interrupt for both the fields in VPIF
 	 * Register enable channel in VPIF register
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	channel_first_int[VPIF_VIDEO_INDEX][ch->channel_id] = 1;
 	if (VPIF_CHANNEL2_VIDEO == ch->channel_id) {
@@ -486,8 +542,12 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((VPIF_CHANNEL3_VIDEO == ch->channel_id)
 		|| (common->started == 2)) {
+=======
+	if (VPIF_CHANNEL3_VIDEO == ch->channel_id || ycmux_mode == 2) {
+>>>>>>> v3.18
 =======
 	if (VPIF_CHANNEL3_VIDEO == ch->channel_id || ycmux_mode == 2) {
 >>>>>>> v3.18
@@ -499,6 +559,7 @@ static int vpif_start_streaming(struct vb2_queue *vq, unsigned int count)
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -518,6 +579,8 @@ static int vpif_stop_streaming(struct vb2_queue *vq)
 	/* release all active buffers */
 	spin_lock_irqsave(&common->irqlock, flags);
 =======
+=======
+>>>>>>> v3.18
 
 err:
 	list_for_each_entry_safe(buf, tmp, &common->dma_queue, list) {
@@ -567,6 +630,9 @@ static void vpif_stop_streaming(struct vb2_queue *vq)
 					VB2_BUF_STATE_ERROR);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (!list_empty(&common->dma_queue)) {
 		common->next_frm = list_entry(common->dma_queue.next,
@@ -576,14 +642,18 @@ static void vpif_stop_streaming(struct vb2_queue *vq)
 	}
 	spin_unlock_irqrestore(&common->irqlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
 
 static struct vb2_ops video_qops = {
 	.queue_setup		= vpif_buffer_queue_setup,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.wait_prepare		= vpif_wait_prepare,
 	.wait_finish		= vpif_wait_finish,
@@ -593,11 +663,16 @@ static struct vb2_ops video_qops = {
 	.stop_streaming		= vpif_stop_streaming,
 	.buf_cleanup		= vpif_buf_cleanup,
 =======
+=======
+>>>>>>> v3.18
 	.wait_prepare		= vb2_ops_wait_prepare,
 	.wait_finish		= vb2_ops_wait_finish,
 	.buf_prepare		= vpif_buffer_prepare,
 	.start_streaming	= vpif_start_streaming,
 	.stop_streaming		= vpif_stop_streaming,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.buf_queue		= vpif_buffer_queue,
 };
@@ -614,8 +689,11 @@ static void process_progressive_mode(struct common_obj *common)
 	list_del(&common->next_frm->list);
 	spin_unlock(&common->irqlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Mark status of the buffer as active */
 	common->next_frm->vb.state = VB2_BUF_STATE_ACTIVE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -671,7 +749,10 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 	struct channel_obj *ch;
 	struct common_obj *common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum v4l2_field field;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int fid = -1, i;
@@ -683,12 +764,18 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 
 	ch = dev->dev[channel_id];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	field = ch->common[VPIF_VIDEO_INDEX].fmt.fmt.pix.field;
 	for (i = 0; i < VPIF_NUMOBJECTS; i++) {
 		common = &ch->common[i];
 		/* If streaming is started in this channel */
 		if (0 == common->started)
 			continue;
+=======
+	for (i = 0; i < VPIF_NUMOBJECTS; i++) {
+		common = &ch->common[i];
+		/* If streaming is started in this channel */
+>>>>>>> v3.18
 =======
 	for (i = 0; i < VPIF_NUMOBJECTS; i++) {
 		common = &ch->common[i];
@@ -790,6 +877,10 @@ static int vpif_update_resolution(struct channel_obj *ch)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	common->fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUV422P;
+>>>>>>> v3.18
 =======
 	common->fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUV422P;
 >>>>>>> v3.18
@@ -802,7 +893,10 @@ static int vpif_update_resolution(struct channel_obj *ch)
 	common->height = std_info->height;
 	common->width = std_info->width;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	common->fmt.fmt.pix.sizeimage = common->height * common->width * 2;
 
 	if (vid_ch->stdid)
@@ -814,6 +908,9 @@ static int vpif_update_resolution(struct channel_obj *ch)
 		common->fmt.fmt.pix.field = V4L2_FIELD_NONE;
 	else
 		common->fmt.fmt.pix.field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -830,7 +927,11 @@ static void vpif_calculate_offsets(struct channel_obj *ch)
 	enum v4l2_field field = common->fmt.fmt.pix.field;
 	struct video_obj *vid_ch = &ch->video;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int hpitch, vpitch, sizeimage;
+=======
+	unsigned int hpitch, sizeimage;
+>>>>>>> v3.18
 =======
 	unsigned int hpitch, sizeimage;
 >>>>>>> v3.18
@@ -848,7 +949,10 @@ static void vpif_calculate_offsets(struct channel_obj *ch)
 
 	hpitch = common->fmt.fmt.pix.bytesperline;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vpitch = sizeimage / (hpitch * 2);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((V4L2_FIELD_NONE == vid_ch->buf_field) ||
@@ -892,6 +996,7 @@ static void vpif_calculate_offsets(struct channel_obj *ch)
 	ch->vpifparams.video_params.stdid = ch->vpifparams.std_info.stdid;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void vpif_config_format(struct channel_obj *ch)
 {
@@ -959,6 +1064,8 @@ invalid_pitch_exit:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void vpif_config_addr(struct channel_obj *ch, int muxmode)
 {
 	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
@@ -973,6 +1080,7 @@ static void vpif_config_addr(struct channel_obj *ch, int muxmode)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * vpif_mmap: It is used to map kernel space buffers into user spaces
@@ -1109,6 +1217,8 @@ static int vpif_release(struct file *filep)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* functions implementing ioctls */
 /**
  * vpif_querycap() - QUERYCAP handler
@@ -1124,7 +1234,11 @@ static int vpif_querycap(struct file *file, void  *priv,
 	cap->device_caps = V4L2_CAP_VIDEO_OUTPUT | V4L2_CAP_STREAMING;
 	cap->capabilities = cap->device_caps | V4L2_CAP_DEVICE_CAPS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(cap->driver, sizeof(cap->driver), "%s", dev_name(vpif_dev));
+=======
+	strlcpy(cap->driver, VPIF_DRIVER_NAME, sizeof(cap->driver));
+>>>>>>> v3.18
 =======
 	strlcpy(cap->driver, VPIF_DRIVER_NAME, sizeof(cap->driver));
 >>>>>>> v3.18
@@ -1139,10 +1253,15 @@ static int vpif_enum_fmt_vid_out(struct file *file, void  *priv,
 					struct v4l2_fmtdesc *fmt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fmt->index != 0) {
 		vpif_err("Invalid format index\n");
 		return -EINVAL;
 	}
+=======
+	if (fmt->index != 0)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (fmt->index != 0)
 		return -EINVAL;
@@ -1153,7 +1272,11 @@ static int vpif_enum_fmt_vid_out(struct file *file, void  *priv,
 	strcpy(fmt->description, "YCbCr4:2:2 YC Planar");
 	fmt->pixelformat = V4L2_PIX_FMT_YUV422P;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	fmt->flags = 0;
+>>>>>>> v3.18
 =======
 	fmt->flags = 0;
 >>>>>>> v3.18
@@ -1164,8 +1287,13 @@ static int vpif_g_fmt_vid_out(struct file *file, void *priv,
 				struct v4l2_format *fmt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
+=======
+	struct video_device *vdev = video_devdata(file);
+	struct channel_obj *ch = video_get_drvdata(vdev);
+>>>>>>> v3.18
 =======
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1182,6 +1310,7 @@ static int vpif_g_fmt_vid_out(struct file *file, void *priv,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int vpif_s_fmt_vid_out(struct file *file, void *priv,
 				struct v4l2_format *fmt)
@@ -1215,6 +1344,8 @@ static int vpif_s_fmt_vid_out(struct file *file, void *priv,
 	/* Check for valid field format */
 	ret = vpif_check_format(ch, pixfmt);
 =======
+=======
+>>>>>>> v3.18
 static int vpif_try_fmt_vid_out(struct file *file, void *priv,
 				struct v4l2_format *fmt)
 {
@@ -1246,6 +1377,7 @@ static int vpif_try_fmt_vid_out(struct file *file, void *priv,
 static int vpif_s_fmt_vid_out(struct file *file, void *priv,
 				struct v4l2_format *fmt)
 {
+<<<<<<< HEAD
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
 	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
@@ -1400,10 +1532,32 @@ static int vpif_qbuf(struct file *file, void *priv, struct v4l2_buffer *buf)
 	}
 
 	return vb2_qbuf(&common->buffer_queue, buf);
+=======
+	struct video_device *vdev = video_devdata(file);
+	struct channel_obj *ch = video_get_drvdata(vdev);
+	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
+	struct v4l2_pix_format *pixfmt = &fmt->fmt.pix;
+	int ret;
+
+	if (vb2_is_busy(&common->buffer_queue))
+		return -EBUSY;
+
+	ret = vpif_try_fmt_vid_out(file, priv, fmt);
+	if (ret)
+		return ret;
+
+	/* store the pix format in the channel object */
+	common->fmt.fmt.pix = *pixfmt;
+
+	/* store the format in the channel object */
+	common->fmt = *fmt;
+	return 0;
+>>>>>>> v3.18
 }
 
 static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 {
+<<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
 	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
@@ -1411,6 +1565,8 @@ static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 =======
 static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 {
+=======
+>>>>>>> v3.18
 	struct vpif_display_config *config = vpif_dev->platform_data;
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1430,17 +1586,23 @@ static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 	if (vb2_is_busy(&common->buffer_queue))
 		return -EBUSY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(std_id & VPIF_V4L2_STD))
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (common->started) {
 		vpif_err("streaming in progress\n");
 		return -EBUSY;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Call encoder subdevice function to set the standard */
@@ -1450,6 +1612,7 @@ static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 	if (vpif_update_resolution(ch))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((ch->vpifparams.std_info.width *
 		ch->vpifparams.std_info.height * 2) >
@@ -1464,6 +1627,9 @@ static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 =======
 	common->fmt.fmt.pix.bytesperline = common->fmt.fmt.pix.width;
 >>>>>>> v3.18
+=======
+	common->fmt.fmt.pix.bytesperline = common->fmt.fmt.pix.width;
+>>>>>>> v3.18
 
 	ret = v4l2_device_call_until_err(&vpif_obj.v4l2_dev, 1, video,
 						s_std_output, std_id);
@@ -1473,7 +1639,11 @@ static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = v4l2_device_call_until_err(&vpif_obj.v4l2_dev, 1, core,
+=======
+	ret = v4l2_device_call_until_err(&vpif_obj.v4l2_dev, 1, video,
+>>>>>>> v3.18
 =======
 	ret = v4l2_device_call_until_err(&vpif_obj.v4l2_dev, 1, video,
 >>>>>>> v3.18
@@ -1485,6 +1655,7 @@ static int vpif_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 
 static int vpif_g_std(struct file *file, void *priv, v4l2_std_id *std)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
@@ -1613,6 +1784,8 @@ static int vpif_cropcap(struct file *file, void *priv,
 	crop->defrect.width = crop->bounds.width = common->width;
 
 =======
+=======
+>>>>>>> v3.18
 	struct vpif_display_config *config = vpif_dev->platform_data;
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1628,6 +1801,9 @@ static int vpif_cropcap(struct file *file, void *priv,
 		return -ENODATA;
 
 	*std = ch->video.stdid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1638,9 +1814,15 @@ static int vpif_enum_output(struct file *file, void *fh,
 
 	struct vpif_display_config *config = vpif_dev->platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_display_chan_config *chan_cfg;
 	struct vpif_fh *vpif_handler = fh;
 	struct channel_obj *ch = vpif_handler->channel;
+=======
+	struct video_device *vdev = video_devdata(file);
+	struct channel_obj *ch = video_get_drvdata(vdev);
+	struct vpif_display_chan_config *chan_cfg;
+>>>>>>> v3.18
 =======
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1707,7 +1889,10 @@ static int vpif_set_output(struct vpif_display_config *vpif_cfg,
 	struct vpif_display_chan_config *chan_cfg =
 		&vpif_cfg->chan_config[ch->channel_id];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_subdev_info *subdev_info = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v4l2_subdev *sd = NULL;
@@ -1717,10 +1902,15 @@ static int vpif_set_output(struct vpif_display_config *vpif_cfg,
 
 	sd_index = vpif_output_to_subdev(vpif_cfg, chan_cfg, index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sd_index >= 0) {
 		sd = vpif_obj.sd[sd_index];
 		subdev_info = &vpif_cfg->subdevinfo[sd_index];
 	}
+=======
+	if (sd_index >= 0)
+		sd = vpif_obj.sd[sd_index];
+>>>>>>> v3.18
 =======
 	if (sd_index >= 0)
 		sd = vpif_obj.sd[sd_index];
@@ -1748,12 +1938,15 @@ static int vpif_s_output(struct file *file, void *priv, unsigned int i)
 {
 	struct vpif_display_config *config = vpif_dev->platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_display_chan_config *chan_cfg;
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
 	struct common_obj *common = &ch->common[VPIF_VIDEO_INDEX];
 
 =======
+=======
+>>>>>>> v3.18
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
 	struct vpif_display_chan_config *chan_cfg;
@@ -1762,12 +1955,16 @@ static int vpif_s_output(struct file *file, void *priv, unsigned int i)
 	if (vb2_is_busy(&common->buffer_queue))
 		return -EBUSY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chan_cfg = &config->chan_config[ch->channel_id];
 
 	if (i >= chan_cfg->output_count)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (common->started) {
 		vpif_err("Streaming in progress\n");
@@ -1776,14 +1973,21 @@ static int vpif_s_output(struct file *file, void *priv, unsigned int i)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return vpif_set_output(config, ch, i);
 }
 
 static int vpif_g_output(struct file *file, void *priv, unsigned int *i)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
+=======
+	struct video_device *vdev = video_devdata(file);
+	struct channel_obj *ch = video_get_drvdata(vdev);
+>>>>>>> v3.18
 =======
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1794,6 +1998,7 @@ static int vpif_g_output(struct file *file, void *priv, unsigned int *i)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int vpif_g_priority(struct file *file, void *priv, enum v4l2_priority *p)
 {
@@ -1815,6 +2020,8 @@ static int vpif_s_priority(struct file *file, void *priv, enum v4l2_priority p)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * vpif_enum_dv_timings() - ENUM_DV_TIMINGS handler
  * @file: file ptr
@@ -1826,12 +2033,15 @@ vpif_enum_dv_timings(struct file *file, void *priv,
 		     struct v4l2_enum_dv_timings *timings)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
 	int ret;
 
 	ret = v4l2_subdev_call(ch->sd, video, enum_dv_timings, timings);
 =======
+=======
+>>>>>>> v3.18
 	struct vpif_display_config *config = vpif_dev->platform_data;
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1850,6 +2060,9 @@ vpif_enum_dv_timings(struct file *file, void *priv,
 	timings->pad = 0;
 
 	ret = v4l2_subdev_call(ch->sd, pad, enum_dv_timings, timings);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret == -ENOIOCTLCMD || ret == -ENODEV)
 		return -EINVAL;
@@ -1866,6 +2079,7 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 		struct v4l2_dv_timings *timings)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
 	struct vpif_params *vpifparams = &ch->vpifparams;
@@ -1875,6 +2089,8 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 	struct vpif_display_config *config = vpif_dev->platform_data;
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -1898,6 +2114,9 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 	if (vb2_is_busy(&common->buffer_queue))
 		return -EBUSY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (timings->type != V4L2_DV_BT_656_1120) {
 		vpif_dbg(2, debug, "Timing type not defined\n");
@@ -1933,8 +2152,12 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 	/* Configure video port timings */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std_info->eav2sav = bt->hbackporch + bt->hfrontporch +
 		bt->hsync - 8;
+=======
+	std_info->eav2sav = V4L2_DV_BT_BLANKING_WIDTH(bt) - 8;
+>>>>>>> v3.18
 =======
 	std_info->eav2sav = V4L2_DV_BT_BLANKING_WIDTH(bt) - 8;
 >>>>>>> v3.18
@@ -1944,12 +2167,18 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 	std_info->l3 = bt->vsync + bt->vbackporch + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bt->interlaced) {
 		if (bt->il_vbackporch || bt->il_vfrontporch || bt->il_vsync) {
 			std_info->vsize = bt->height * 2 +
 				bt->vfrontporch + bt->vsync + bt->vbackporch +
 				bt->il_vfrontporch + bt->il_vsync +
 				bt->il_vbackporch;
+=======
+	std_info->vsize = V4L2_DV_BT_FRAME_HEIGHT(bt);
+	if (bt->interlaced) {
+		if (bt->il_vbackporch || bt->il_vfrontporch || bt->il_vsync) {
+>>>>>>> v3.18
 =======
 	std_info->vsize = V4L2_DV_BT_FRAME_HEIGHT(bt);
 	if (bt->interlaced) {
@@ -1969,8 +2198,11 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		std_info->vsize = bt->height + bt->vfrontporch +
 			bt->vsync + bt->vbackporch;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		std_info->l5 = std_info->vsize - (bt->vfrontporch - 1);
@@ -1999,6 +2231,7 @@ static int vpif_s_dv_timings(struct file *file, void *priv,
 static int vpif_g_dv_timings(struct file *file, void *priv,
 		struct v4l2_dv_timings *timings)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vpif_fh *fh = priv;
 	struct channel_obj *ch = fh->channel;
@@ -2069,6 +2302,8 @@ static int vpif_dbg_s_register(struct file *file, void *priv,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	struct vpif_display_config *config = vpif_dev->platform_data;
 	struct video_device *vdev = video_devdata(file);
 	struct channel_obj *ch = video_get_drvdata(vdev);
@@ -2091,6 +2326,9 @@ static int vpif_dbg_s_register(struct file *file, void *priv,
 error:
 	return -ENODATA;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2110,6 +2348,7 @@ static int vpif_log_status(struct file *filep, void *priv)
 
 /* vpif display ioctl operations */
 static const struct v4l2_ioctl_ops vpif_ioctl_ops = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.vidioc_querycap        	= vpif_querycap,
 	.vidioc_g_priority		= vpif_g_priority,
@@ -2139,6 +2378,8 @@ static const struct v4l2_ioctl_ops vpif_ioctl_ops = {
 	.vidioc_s_register		= vpif_dbg_s_register,
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.vidioc_querycap		= vpif_querycap,
 	.vidioc_enum_fmt_vid_out	= vpif_enum_fmt_vid_out,
 	.vidioc_g_fmt_vid_out		= vpif_g_fmt_vid_out,
@@ -2165,12 +2406,16 @@ static const struct v4l2_ioctl_ops vpif_ioctl_ops = {
 	.vidioc_s_dv_timings		= vpif_s_dv_timings,
 	.vidioc_g_dv_timings		= vpif_g_dv_timings,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.vidioc_log_status		= vpif_log_status,
 };
 
 static const struct v4l2_file_operations vpif_fops = {
 	.owner		= THIS_MODULE,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.open		= vpif_open,
 	.release	= vpif_release,
@@ -2184,11 +2429,16 @@ static struct video_device vpif_video_template = {
 	.fops		= &vpif_fops,
 	.ioctl_ops	= &vpif_ioctl_ops,
 =======
+=======
+>>>>>>> v3.18
 	.open		= v4l2_fh_open,
 	.release	= vb2_fop_release,
 	.unlocked_ioctl	= video_ioctl2,
 	.mmap		= vb2_fop_mmap,
 	.poll		= vb2_fop_poll
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2196,6 +2446,7 @@ static struct video_device vpif_video_template = {
 static int initialize_vpif(void)
 {
 	int free_channel_objects_index;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int free_buffer_channel_index;
 	int free_buffer_index;
@@ -2233,6 +2484,9 @@ static int initialize_vpif(void)
 =======
 	int err, i, j;
 >>>>>>> v3.18
+=======
+	int err, i, j;
+>>>>>>> v3.18
 
 	/* Allocate memory for six channel objects */
 	for (i = 0; i < VPIF_DISPLAY_MAX_DEVICES; i++) {
@@ -2247,10 +2501,13 @@ static int initialize_vpif(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_channel_objects_index = VPIF_DISPLAY_MAX_DEVICES;
 	free_buffer_channel_index = VPIF_DISPLAY_NUM_CHANNELS;
 	free_buffer_index = config_params.numbuffers[i - 1];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2262,7 +2519,10 @@ vpif_init_free_channel_objects:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vpif_async_bound(struct v4l2_async_notifier *notifier,
 			    struct v4l2_subdev *subdev,
 			    struct v4l2_async_subdev *asd)
@@ -2390,6 +2650,9 @@ static int vpif_async_complete(struct v4l2_async_notifier *notifier)
 	return vpif_probe_complete();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * vpif_probe: This function creates device entries by register itself to the
@@ -2398,6 +2661,7 @@ static int vpif_async_complete(struct v4l2_async_notifier *notifier)
 static __init int vpif_probe(struct platform_device *pdev)
 {
 	struct vpif_subdev_info *subdevdata;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vpif_display_config *config;
 	int i, j = 0, k, err = 0;
@@ -2409,12 +2673,20 @@ static __init int vpif_probe(struct platform_device *pdev)
 	int res_idx = 0;
 	struct i2c_adapter *i2c_adap;
 >>>>>>> v3.18
+=======
+	int i, j = 0, err = 0;
+	int res_idx = 0;
+	struct i2c_adapter *i2c_adap;
+>>>>>>> v3.18
 	struct channel_obj *ch;
 	struct video_device *vfd;
 	struct resource *res;
 	int subdev_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2434,6 +2706,7 @@ static __init int vpif_probe(struct platform_device *pdev)
 
 	while ((res = platform_get_resource(pdev, IORESOURCE_IRQ, res_idx))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = res->start; i <= res->end; i++) {
 			if (request_irq(i, vpif_channel_isr, IRQF_SHARED,
 					"VPIF_Display", (void *)
@@ -2445,6 +2718,8 @@ static __init int vpif_probe(struct platform_device *pdev)
 				goto vpif_int_err;
 			}
 =======
+=======
+>>>>>>> v3.18
 		err = devm_request_irq(&pdev->dev, res->start, vpif_channel_isr,
 					IRQF_SHARED, VPIF_DRIVER_NAME,
 					(void *)(&vpif_obj.dev[res_idx]->
@@ -2453,6 +2728,9 @@ static __init int vpif_probe(struct platform_device *pdev)
 			err = -EINVAL;
 			vpif_err("VPIF IRQ request failed\n");
 			goto vpif_unregister;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		res_idx++;
@@ -2471,6 +2749,7 @@ static __init int vpif_probe(struct platform_device *pdev)
 			}
 			err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto vpif_int_err;
 		}
 
@@ -2488,10 +2767,16 @@ static __init int vpif_probe(struct platform_device *pdev)
 		}
 
 >>>>>>> v3.18
+=======
+			goto vpif_unregister;
+		}
+
+>>>>>>> v3.18
 		/* Set video_dev to the video device */
 		ch->video_dev = vfd;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (res) {
@@ -2520,6 +2805,11 @@ static __init int vpif_probe(struct platform_device *pdev)
 	subdev_count = vpif_obj.config->subdev_count;
 	subdevdata = vpif_obj.config->subdevinfo;
 >>>>>>> v3.18
+=======
+	vpif_obj.config = pdev->dev.platform_data;
+	subdev_count = vpif_obj.config->subdev_count;
+	subdevdata = vpif_obj.config->subdevinfo;
+>>>>>>> v3.18
 	vpif_obj.sd = kzalloc(sizeof(struct v4l2_subdev *) * subdev_count,
 								GFP_KERNEL);
 	if (vpif_obj.sd == NULL) {
@@ -2528,6 +2818,7 @@ static __init int vpif_probe(struct platform_device *pdev)
 		goto vpif_sd_error;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < subdev_count; i++) {
 		vpif_obj.sd[i] = v4l2_i2c_new_subdev_board(&vpif_obj.v4l2_dev,
@@ -2609,6 +2900,8 @@ probe_out:
 		ch->video_dev = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!vpif_obj.config->asd_sizes) {
 		i2c_adap = i2c_get_adapter(1);
 		for (i = 0; i < subdev_count; i++) {
@@ -2644,6 +2937,9 @@ probe_out:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 probe_subdev_out:
 	kfree(vpif_obj.sd);
@@ -2654,6 +2950,7 @@ vpif_sd_error:
 		video_device_release(ch->video_dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 vpif_int_err:
 	v4l2_device_unregister(&vpif_obj.v4l2_dev);
 	vpif_err("VPIF IRQ request failed\n");
@@ -2662,6 +2959,10 @@ vpif_int_err:
 		for (j = res->start; j <= res->end; j++)
 			free_irq(j, (void *)(&vpif_obj.dev[i]->channel_id));
 	}
+=======
+vpif_unregister:
+	v4l2_device_unregister(&vpif_obj.v4l2_dev);
+>>>>>>> v3.18
 =======
 vpif_unregister:
 	v4l2_device_unregister(&vpif_obj.v4l2_dev);
@@ -2676,6 +2977,10 @@ vpif_unregister:
 static int vpif_remove(struct platform_device *device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct common_obj *common;
+>>>>>>> v3.18
 =======
 	struct common_obj *common;
 >>>>>>> v3.18
@@ -2685,6 +2990,10 @@ static int vpif_remove(struct platform_device *device)
 	v4l2_device_unregister(&vpif_obj.v4l2_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(vpif_obj.sd);
+>>>>>>> v3.18
 =======
 	kfree(vpif_obj.sd);
 >>>>>>> v3.18
@@ -2693,6 +3002,11 @@ static int vpif_remove(struct platform_device *device)
 		/* Get the pointer to the channel object */
 		ch = vpif_obj.dev[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		common = &ch->common[VPIF_VIDEO_INDEX];
+		vb2_dma_contig_cleanup_ctx(common->alloc_ctx);
+>>>>>>> v3.18
 =======
 		common = &ch->common[VPIF_VIDEO_INDEX];
 		vb2_dma_contig_cleanup_ctx(common->alloc_ctx);
@@ -2702,6 +3016,10 @@ static int vpif_remove(struct platform_device *device)
 
 		ch->video_dev = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kfree(vpif_obj.dev[i]);
+>>>>>>> v3.18
 =======
 		kfree(vpif_obj.dev[i]);
 >>>>>>> v3.18
@@ -2711,7 +3029,11 @@ static int vpif_remove(struct platform_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -2726,6 +3048,7 @@ static int vpif_suspend(struct device *dev)
 		ch = vpif_obj.dev[i];
 		common = &ch->common[VPIF_VIDEO_INDEX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&common->lock);
 		if (atomic_read(&ch->usrs) && common->io_usrs) {
 			/* Disable channel */
@@ -2739,6 +3062,8 @@ static int vpif_suspend(struct device *dev)
 				channel3_intr_enable(0);
 			}
 =======
+=======
+>>>>>>> v3.18
 
 		if (!vb2_start_streaming_called(&common->buffer_queue))
 			continue;
@@ -2753,6 +3078,9 @@ static int vpif_suspend(struct device *dev)
 			ycmux_mode == 2) {
 			enable_channel3(0);
 			channel3_intr_enable(0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		mutex_unlock(&common->lock);
@@ -2773,6 +3101,7 @@ static int vpif_resume(struct device *dev)
 		ch = vpif_obj.dev[i];
 		common = &ch->common[VPIF_VIDEO_INDEX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&common->lock);
 		if (atomic_read(&ch->usrs) && common->io_usrs) {
 			/* Enable channel */
@@ -2786,6 +3115,8 @@ static int vpif_resume(struct device *dev)
 				channel3_intr_enable(1);
 			}
 =======
+=======
+>>>>>>> v3.18
 
 		if (!vb2_start_streaming_called(&common->buffer_queue))
 			continue;
@@ -2800,6 +3131,9 @@ static int vpif_resume(struct device *dev)
 				ycmux_mode == 2) {
 			enable_channel3(1);
 			channel3_intr_enable(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		mutex_unlock(&common->lock);
@@ -2808,6 +3142,7 @@ static int vpif_resume(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct dev_pm_ops vpif_pm = {
 	.suspend        = vpif_suspend,
@@ -2825,6 +3160,8 @@ static __refdata struct platform_driver vpif_driver = {
 			.owner	= THIS_MODULE,
 			.pm	= vpif_pm_ops,
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static SIMPLE_DEV_PM_OPS(vpif_pm_ops, vpif_suspend, vpif_resume);
@@ -2834,12 +3171,16 @@ static __refdata struct platform_driver vpif_driver = {
 			.name	= VPIF_DRIVER_NAME,
 			.owner	= THIS_MODULE,
 			.pm	= &vpif_pm_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe	= vpif_probe,
 	.remove	= vpif_remove,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __init int vpif_init(void)
 {
@@ -2875,6 +3216,9 @@ static void vpif_cleanup(void)
 
 module_init(vpif_init);
 module_exit(vpif_cleanup);
+=======
+module_platform_driver(vpif_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(vpif_driver);
 >>>>>>> v3.18

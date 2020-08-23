@@ -10,6 +10,10 @@
 #include <asm/pgtable.h>
 #include <asm/mmu_context.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -92,7 +96,11 @@ void flush_tsb_user(struct tlb_batch *tb)
 		if (tlb_type == cheetah_plus || tlb_type == hypervisor)
 			base = __pa(base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_tsb_one(tb, HPAGE_SHIFT, base, nentries);
+=======
+		__flush_tsb_one(tb, REAL_HPAGE_SHIFT, base, nentries);
+>>>>>>> v3.18
 =======
 		__flush_tsb_one(tb, REAL_HPAGE_SHIFT, base, nentries);
 >>>>>>> v3.18
@@ -120,7 +128,11 @@ void flush_tsb_user_page(struct mm_struct *mm, unsigned long vaddr)
 		if (tlb_type == cheetah_plus || tlb_type == hypervisor)
 			base = __pa(base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_tsb_one_entry(base, vaddr, HPAGE_SHIFT, nentries);
+=======
+		__flush_tsb_one_entry(base, vaddr, REAL_HPAGE_SHIFT, nentries);
+>>>>>>> v3.18
 =======
 		__flush_tsb_one_entry(base, vaddr, REAL_HPAGE_SHIFT, nentries);
 >>>>>>> v3.18
@@ -298,7 +310,11 @@ void __init pgtable_cache_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 8; i++) {
+=======
+	for (i = 0; i < ARRAY_SIZE(tsb_cache_names); i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ARRAY_SIZE(tsb_cache_names); i++) {
 >>>>>>> v3.18
@@ -501,8 +517,11 @@ int init_new_context(struct task_struct *tsk, struct mm_struct *mm)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mm->context.pgtable_page = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* copy_mm() copies over the parent's mm_struct before calling
@@ -544,7 +563,10 @@ void destroy_context(struct mm_struct *mm)
 {
 	unsigned long flags, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *page;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -552,12 +574,15 @@ void destroy_context(struct mm_struct *mm)
 		tsb_destroy_one(&mm->context.tsb_block[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page = mm->context.pgtable_page;
 	if (page && put_page_testzero(page)) {
 		pgtable_page_dtor(page);
 		free_hot_cold_page(page, 0);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&ctx_alloc_lock, flags);

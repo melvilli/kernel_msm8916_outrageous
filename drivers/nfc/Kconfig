@@ -27,7 +27,10 @@ config NFC_WILINK
 	  into the kernel or say M to compile it as module.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NFC_TRF7970A
 	tristate "Texas Instruments TRF7970a NFC driver"
 	depends on SPI && NFC_DIGITAL
@@ -40,6 +43,9 @@ config NFC_TRF7970A
 	  say M  to compile it as a module. The module will be called
 	  trf7970a.ko.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NFC_MEI_PHY
 	tristate "MEI bus NFC device support"
@@ -51,6 +57,7 @@ config NFC_MEI_PHY
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 source "drivers/nfc/pn544/Kconfig"
 source "drivers/nfc/microread/Kconfig"
@@ -75,6 +82,8 @@ config NFC_NQ
 	  This is for i2c connected version. NCI protocol logic
 	  resides in the usermode and it has no other NFC dependencies.
 =======
+=======
+>>>>>>> v3.18
 config NFC_SIM
 	tristate "NFC hardware simulator driver"
 	help
@@ -101,4 +110,7 @@ source "drivers/nfc/nfcmrvl/Kconfig"
 source "drivers/nfc/st21nfca/Kconfig"
 source "drivers/nfc/st21nfcb/Kconfig"
 endmenu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

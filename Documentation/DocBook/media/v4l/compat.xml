@@ -398,7 +398,11 @@ linkend="control" />.</para>
       <para>The <structfield>depth</structfield> (average number of
 bits per pixel) of a video image is implied by the selected image
 <<<<<<< HEAD
+<<<<<<< HEAD
 format. V4L2 does not explicitely provide such information assuming
+=======
+format. V4L2 does not explicitly provide such information assuming
+>>>>>>> v3.18
 =======
 format. V4L2 does not explicitly provide such information assuming
 >>>>>>> v3.18
@@ -2259,7 +2263,11 @@ video encoding.</para>
 	<listitem>
 	  <para>The <constant>VIDIOC_G_CHIP_IDENT</constant> ioctl was renamed
 <<<<<<< HEAD
+<<<<<<< HEAD
 to <constant>VIDIOC_G_CHIP_IDENT_OLD</constant> and &VIDIOC-DBG-G-CHIP-IDENT;
+=======
+to <constant>VIDIOC_G_CHIP_IDENT_OLD</constant> and <constant>VIDIOC_DBG_G_CHIP_IDENT</constant>
+>>>>>>> v3.18
 =======
 to <constant>VIDIOC_G_CHIP_IDENT_OLD</constant> and <constant>VIDIOC_DBG_G_CHIP_IDENT</constant>
 >>>>>>> v3.18
@@ -2522,7 +2530,10 @@ that used it. It was originally scheduled for removal in 2.6.35.
     </section>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     <section>
       <title>V4L2 in Linux 3.11</title>
       <orderedlist>
@@ -2589,6 +2600,9 @@ fields changed from _s32 to _u32.
       </orderedlist>
     </section>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     <section id="other">
       <title>Relation of V4L2 to other Linux multimedia APIs</title>
@@ -2674,7 +2688,11 @@ ioctls.</para>
         </listitem>
         <listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <para>&VIDIOC-DBG-G-CHIP-IDENT; ioctl.</para>
+=======
+	  <para>&VIDIOC-DBG-G-CHIP-INFO; ioctl.</para>
+>>>>>>> v3.18
 =======
 	  <para>&VIDIOC-DBG-G-CHIP-INFO; ioctl.</para>
 >>>>>>> v3.18
@@ -2711,6 +2729,12 @@ ioctls.</para>
 	  <para>Exporting DMABUF files using &VIDIOC-EXPBUF; ioctl.</para>
         </listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        <listitem>
+	  <para>Software Defined Radio (SDR) Interface, <xref linkend="sdr" />.</para>
+        </listitem>
+>>>>>>> v3.18
 =======
         <listitem>
 	  <para>Software Defined Radio (SDR) Interface, <xref linkend="sdr" />.</para>

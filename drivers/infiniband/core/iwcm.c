@@ -197,10 +197,13 @@ static void rem_ref(struct iw_cm_id *cm_id)
 {
 	struct iwcm_id_private *cm_id_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cm_id_priv = container_of(cm_id, struct iwcm_id_private, id);
 	if (iwcm_deref_id(cm_id_priv) &&
 	    test_bit(IWCM_F_CALLBACK_DESTROY, &cm_id_priv->flags)) {
 =======
+=======
+>>>>>>> v3.18
 	int cb_destroy;
 
 	cm_id_priv = container_of(cm_id, struct iwcm_id_private, id);
@@ -211,6 +214,9 @@ static void rem_ref(struct iw_cm_id *cm_id)
 	 */
 	cb_destroy = test_bit(IWCM_F_CALLBACK_DESTROY, &cm_id_priv->flags);
 	if (iwcm_deref_id(cm_id_priv) && cb_destroy) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BUG_ON(!list_empty(&cm_id_priv->work_list));
 		free_cm_id(cm_id_priv);
@@ -356,7 +362,10 @@ static void destroy_cm_id(struct iw_cm_id *cm_id)
 	struct iwcm_id_private *cm_id_priv;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -375,7 +384,11 @@ static void destroy_cm_id(struct iw_cm_id *cm_id)
 		spin_unlock_irqrestore(&cm_id_priv->lock, flags);
 		/* destroy the listening endpoint */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = cm_id->device->iwcm->destroy_listen(cm_id);
+=======
+		cm_id->device->iwcm->destroy_listen(cm_id);
+>>>>>>> v3.18
 =======
 		cm_id->device->iwcm->destroy_listen(cm_id);
 >>>>>>> v3.18

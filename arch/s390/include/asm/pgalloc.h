@@ -19,10 +19,13 @@ unsigned long *crst_table_alloc(struct mm_struct *);
 void crst_table_free(struct mm_struct *, unsigned long *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long *page_table_alloc(struct mm_struct *, unsigned long);
 void page_table_free(struct mm_struct *, unsigned long *);
 void page_table_free_rcu(struct mmu_gather *, unsigned long *);
 =======
+=======
+>>>>>>> v3.18
 unsigned long *page_table_alloc(struct mm_struct *);
 void page_table_free(struct mm_struct *, unsigned long *);
 void page_table_free_rcu(struct mmu_gather *, unsigned long *, unsigned long);
@@ -31,6 +34,9 @@ void page_table_reset_pgste(struct mm_struct *, unsigned long, unsigned long,
 			    bool init_skey);
 int set_guest_storage_key(struct mm_struct *mm, unsigned long addr,
 			  unsigned long key, bool nq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void clear_table(unsigned long *s, unsigned long val, size_t n)
@@ -100,12 +106,15 @@ static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long vmaddr)
 {
 	unsigned long *table = crst_table_alloc(mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (table)
 		crst_table_init(table, _SEGMENT_ENTRY_EMPTY);
 	return (pmd_t *) table;
 }
 #define pmd_free(mm, pmd) crst_table_free(mm, (unsigned long *) pmd)
 =======
+=======
+>>>>>>> v3.18
 
 	if (!table)
 		return NULL;
@@ -122,6 +131,9 @@ static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
 	pgtable_pmd_page_dtor(virt_to_page(pmd));
 	crst_table_free(mm, (unsigned long *) pmd);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void pgd_populate(struct mm_struct *mm, pgd_t *pgd, pud_t *pud)
@@ -160,8 +172,13 @@ static inline void pmd_populate(struct mm_struct *mm,
  * page table entry allocation/free routines.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pte_alloc_one_kernel(mm, vmaddr) ((pte_t *) page_table_alloc(mm, vmaddr))
 #define pte_alloc_one(mm, vmaddr) ((pte_t *) page_table_alloc(mm, vmaddr))
+=======
+#define pte_alloc_one_kernel(mm, vmaddr) ((pte_t *) page_table_alloc(mm))
+#define pte_alloc_one(mm, vmaddr) ((pte_t *) page_table_alloc(mm))
+>>>>>>> v3.18
 =======
 #define pte_alloc_one_kernel(mm, vmaddr) ((pte_t *) page_table_alloc(mm))
 #define pte_alloc_one(mm, vmaddr) ((pte_t *) page_table_alloc(mm))

@@ -32,7 +32,10 @@
 #include <linux/i2c.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -149,6 +152,7 @@ static int tda9840_g_tuner(struct v4l2_subdev *sd, struct v4l2_tuner *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tda9840_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -166,6 +170,10 @@ static const struct v4l2_subdev_core_ops tda9840_core_ops = {
 /* ----------------------------------------------------------------------- */
 
 >>>>>>> v3.18
+=======
+/* ----------------------------------------------------------------------- */
+
+>>>>>>> v3.18
 static const struct v4l2_subdev_tuner_ops tda9840_tuner_ops = {
 	.s_tuner = tda9840_s_tuner,
 	.g_tuner = tda9840_g_tuner,
@@ -173,7 +181,10 @@ static const struct v4l2_subdev_tuner_ops tda9840_tuner_ops = {
 
 static const struct v4l2_subdev_ops tda9840_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.core = &tda9840_core_ops,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.tuner = &tda9840_tuner_ops,
@@ -196,7 +207,11 @@ static int tda9840_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd = kzalloc(sizeof(struct v4l2_subdev), GFP_KERNEL);
+=======
+	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
 >>>>>>> v3.18
@@ -217,7 +232,10 @@ static int tda9840_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

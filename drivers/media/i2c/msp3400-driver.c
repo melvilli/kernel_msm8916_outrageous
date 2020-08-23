@@ -571,6 +571,7 @@ static int msp_s_i2s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int msp_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct msp_state *state = to_state(sd);
@@ -580,6 +581,8 @@ static int msp_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *
 			(state->rev1 << 16) | state->rev2);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int msp_log_status(struct v4l2_subdev *sd)
@@ -655,7 +658,10 @@ static const struct v4l2_ctrl_ops msp_ctrl_ops = {
 static const struct v4l2_subdev_core_ops msp_core_ops = {
 	.log_status = msp_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = msp_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -666,15 +672,21 @@ static const struct v4l2_subdev_core_ops msp_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = msp_s_std,
 };
 
 static const struct v4l2_subdev_video_ops msp_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const struct v4l2_subdev_video_ops msp_video_ops = {
 	.s_std = msp_s_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.querystd = msp_querystd,
 };
@@ -721,7 +733,11 @@ static int msp_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(*state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -750,7 +766,10 @@ static int msp_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		v4l_dbg(1, msp_debug, client,
 				"not an msp3400 (cannot read chip version)\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -ENODEV;
@@ -848,7 +867,10 @@ static int msp_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 		v4l2_ctrl_handler_free(hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -913,7 +935,10 @@ static int msp_remove(struct i2c_client *client)
 
 	v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

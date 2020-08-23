@@ -14,6 +14,7 @@ config SOUND_BCM_CS4297A
 	  time, since it also attempts to use this UART port.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SOUND_VWSND
 	tristate "SGI Visual Workstation Sound"
 	depends on X86_VISWS
@@ -23,6 +24,8 @@ config SOUND_VWSND
 	  <file:Documentation/sound/oss/vwsnd> for more info on this driver's
 	  capabilities.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SOUND_MSNDCLAS

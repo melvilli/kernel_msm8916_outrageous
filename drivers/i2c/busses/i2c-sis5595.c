@@ -12,10 +12,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -373,7 +376,11 @@ static struct i2c_adapter sis5595_adapter = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sis5595_ids) = {
+=======
+static const struct pci_device_id sis5595_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sis5595_ids[] = {
 >>>>>>> v3.18

@@ -99,11 +99,16 @@ static unsigned long __kprobes dform_ea(unsigned int instr, struct pt_regs *regs
 	ra = (instr >> 16) & 0x1f;
 	ea = (signed short) instr;		/* sign-extend */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ra) {
 		ea += regs->gpr[ra];
 		if (instr & 0x04000000)		/* update forms */
 			regs->gpr[ra] = ea;
 	}
+=======
+	if (ra)
+		ea += regs->gpr[ra];
+>>>>>>> v3.18
 =======
 	if (ra)
 		ea += regs->gpr[ra];
@@ -124,11 +129,16 @@ static unsigned long __kprobes dsform_ea(unsigned int instr, struct pt_regs *reg
 	ra = (instr >> 16) & 0x1f;
 	ea = (signed short) (instr & ~3);	/* sign-extend */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ra) {
 		ea += regs->gpr[ra];
 		if ((instr & 3) == 1)		/* update forms */
 			regs->gpr[ra] = ea;
 	}
+=======
+	if (ra)
+		ea += regs->gpr[ra];
+>>>>>>> v3.18
 =======
 	if (ra)
 		ea += regs->gpr[ra];
@@ -142,8 +152,13 @@ static unsigned long __kprobes dsform_ea(unsigned int instr, struct pt_regs *reg
  * Calculate effective address for an X-form instruction
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __kprobes xform_ea(unsigned int instr, struct pt_regs *regs,
 				     int do_update)
+=======
+static unsigned long __kprobes xform_ea(unsigned int instr,
+					struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static unsigned long __kprobes xform_ea(unsigned int instr,
 					struct pt_regs *regs)
@@ -156,11 +171,16 @@ static unsigned long __kprobes xform_ea(unsigned int instr,
 	rb = (instr >> 11) & 0x1f;
 	ea = regs->gpr[rb];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ra) {
 		ea += regs->gpr[ra];
 		if (do_update)		/* update forms */
 			regs->gpr[ra] = ea;
 	}
+=======
+	if (ra)
+		ea += regs->gpr[ra];
+>>>>>>> v3.18
 =======
 	if (ra)
 		ea += regs->gpr[ra];
@@ -231,6 +251,12 @@ static int __kprobes read_mem_unaligned(unsigned long *dest, unsigned long ea,
 	int err;
 	unsigned long x, b, c;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __LITTLE_ENDIAN__
+	int len = nb; /* save a copy of the length for byte reversal */
+#endif
+>>>>>>> v3.18
 =======
 #ifdef __LITTLE_ENDIAN__
 	int len = nb; /* save a copy of the length for byte reversal */
@@ -241,14 +267,20 @@ static int __kprobes read_mem_unaligned(unsigned long *dest, unsigned long ea,
 	x = 0;
 	for (; nb > 0; nb -= c) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c = max_align(ea);
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 		c = 1;
 #endif
 #ifdef __BIG_ENDIAN__
 		c = max_align(ea);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (c > nb)
 			c = max_align(nb);
@@ -259,8 +291,11 @@ static int __kprobes read_mem_unaligned(unsigned long *dest, unsigned long ea,
 		ea += c;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*dest = x;
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 	switch (len) {
 	case 2:
@@ -279,6 +314,9 @@ static int __kprobes read_mem_unaligned(unsigned long *dest, unsigned long ea,
 #ifdef __BIG_ENDIAN__
 	*dest = x;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -328,10 +366,13 @@ static int __kprobes write_mem_unaligned(unsigned long val, unsigned long ea,
 	unsigned long c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* unaligned or little-endian, do this in pieces */
 	for (; nb > 0; nb -= c) {
 		c = max_align(ea);
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 	switch (nb) {
 	case 2:
@@ -355,6 +396,9 @@ static int __kprobes write_mem_unaligned(unsigned long val, unsigned long ea,
 #ifdef __BIG_ENDIAN__
 		c = max_align(ea);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (c > nb)
 			c = max_align(nb);
@@ -362,7 +406,11 @@ static int __kprobes write_mem_unaligned(unsigned long val, unsigned long ea,
 		if (err)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		++ea;
+=======
+		ea += c;
+>>>>>>> v3.18
 =======
 		ea += c;
 >>>>>>> v3.18
@@ -395,8 +443,11 @@ static int __kprobes do_fp_load(int rn, int (*func)(int, unsigned long),
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val[sizeof(double) / sizeof(long)];
 =======
+=======
+>>>>>>> v3.18
 	union {
 		double dbl;
 		unsigned long ul[2];
@@ -411,6 +462,9 @@ static int __kprobes do_fp_load(int rn, int (*func)(int, unsigned long),
 #endif
 		} single;
 	} data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long ptr;
 
@@ -418,6 +472,7 @@ static int __kprobes do_fp_load(int rn, int (*func)(int, unsigned long),
 		return -EFAULT;
 	if ((ea & 3) == 0)
 		return (*func)(rn, ea);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ptr = (unsigned long) &val[0];
 	if (sizeof(unsigned long) == 8 || nb == 4) {
@@ -429,6 +484,8 @@ static int __kprobes do_fp_load(int rn, int (*func)(int, unsigned long),
 		if (!err)
 			err = read_mem_unaligned(&val[1], ea + 4, 4, regs);
 =======
+=======
+>>>>>>> v3.18
 	ptr = (unsigned long) &data.ul;
 	if (sizeof(unsigned long) == 8 || nb == 4) {
 		err = read_mem_unaligned(&data.ul[0], ea, nb, regs);
@@ -439,6 +496,9 @@ static int __kprobes do_fp_load(int rn, int (*func)(int, unsigned long),
 		err = read_mem_unaligned(&data.ul[0], ea, 4, regs);
 		if (!err)
 			err = read_mem_unaligned(&data.ul[1], ea + 4, 4, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (err)
@@ -452,8 +512,11 @@ static int __kprobes do_fp_store(int rn, int (*func)(int, unsigned long),
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val[sizeof(double) / sizeof(long)];
 =======
+=======
+>>>>>>> v3.18
 	union {
 		double dbl;
 		unsigned long ul[2];
@@ -468,6 +531,9 @@ static int __kprobes do_fp_store(int rn, int (*func)(int, unsigned long),
 #endif
 		} single;
 	} data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long ptr;
 
@@ -475,6 +541,7 @@ static int __kprobes do_fp_store(int rn, int (*func)(int, unsigned long),
 		return -EFAULT;
 	if ((ea & 3) == 0)
 		return (*func)(rn, ea);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ptr = (unsigned long) &val[0];
 	if (sizeof(unsigned long) == 8 || nb == 4) {
@@ -484,6 +551,8 @@ static int __kprobes do_fp_store(int rn, int (*func)(int, unsigned long),
 			return err;
 		err = write_mem_unaligned(val[0], ea, nb, regs);
 =======
+=======
+>>>>>>> v3.18
 	ptr = (unsigned long) &data.ul[0];
 	if (sizeof(unsigned long) == 8 || nb == 4) {
 		if (nb == 4)
@@ -492,6 +561,9 @@ static int __kprobes do_fp_store(int rn, int (*func)(int, unsigned long),
 		if (err)
 			return err;
 		err = write_mem_unaligned(data.ul[0], ea, nb, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* writing a double on 32-bit */
@@ -499,9 +571,15 @@ static int __kprobes do_fp_store(int rn, int (*func)(int, unsigned long),
 		if (err)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = write_mem_unaligned(val[0], ea, 4, regs);
 		if (!err)
 			err = write_mem_unaligned(val[1], ea + 4, 4, regs);
+=======
+		err = write_mem_unaligned(data.ul[0], ea, 4, regs);
+		if (!err)
+			err = write_mem_unaligned(data.ul[1], ea + 4, 4, regs);
+>>>>>>> v3.18
 =======
 		err = write_mem_unaligned(data.ul[0], ea, 4, regs);
 		if (!err)
@@ -687,7 +765,10 @@ static void __kprobes do_cmp_unsigned(struct pt_regs *regs, unsigned long v1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __kprobes trap_compare(long v1, long v2)
 {
 	int ret = 0;
@@ -705,6 +786,9 @@ static int __kprobes trap_compare(long v1, long v2)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Elements of 32-bit rotate and mask instructions.
@@ -723,6 +807,7 @@ static int __kprobes trap_compare(long v1, long v2)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Emulate instructions that cause a transfer of control,
  * loads and stores, and a few other instructions.
  * Returns 1 if the step was emulated, 0 if not,
@@ -731,6 +816,8 @@ static int __kprobes trap_compare(long v1, long v2)
  */
 int __kprobes emulate_step(struct pt_regs *regs, unsigned int instr)
 =======
+=======
+>>>>>>> v3.18
  * Decode an instruction, and execute it if that can be done just by
  * modifying *regs (i.e. integer arithmetic and logical instructions,
  * branches, and barrier instructions).
@@ -739,11 +826,15 @@ int __kprobes emulate_step(struct pt_regs *regs, unsigned int instr)
  */
 int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			    unsigned int instr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int opcode, ra, rb, rd, spr, u;
 	unsigned long int imm;
 	unsigned long int val, val2;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long int ea;
 	unsigned int cr, mb, me, sh;
@@ -755,6 +846,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 	switch (opcode) {
 	case 16:	/* bc */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int mb, me, sh;
 	long ival;
 
@@ -764,6 +857,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 	switch (opcode) {
 	case 16:	/* bc */
 		op->type = BRANCH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		imm = (signed short)(instr & 0xfffc);
 		if ((instr & 2) == 0)
@@ -773,6 +869,7 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		if (instr & 1)
 			regs->link = regs->nip;
 		if (branch_taken(instr, regs))
+<<<<<<< HEAD
 <<<<<<< HEAD
 			regs->nip = imm;
 		return 1;
@@ -799,6 +896,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 #endif
 	case 18:	/* b */
 =======
+=======
+>>>>>>> v3.18
 			regs->nip = truncate_if_32bit(regs->msr, imm);
 		return 1;
 #ifdef CONFIG_PPC64
@@ -811,6 +910,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 #endif
 	case 18:	/* b */
 		op->type = BRANCH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		imm = instr & 0x03fffffc;
 		if (imm & 0x02000000)
@@ -825,9 +927,12 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 	case 19:
 		switch ((instr >> 1) & 0x3ff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 16:	/* bclr */
 		case 528:	/* bcctr */
 =======
+=======
+>>>>>>> v3.18
 		case 0:		/* mcrf */
 			rd = (instr >> 21) & 0x1c;
 			ra = (instr >> 16) & 0x1c;
@@ -838,6 +943,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 16:	/* bclr */
 		case 528:	/* bcctr */
 			op->type = BRANCH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			imm = (instr & 0x400)? regs->ctr: regs->link;
 			regs->nip = truncate_if_32bit(regs->msr, regs->nip + 4);
@@ -850,10 +958,13 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 		case 18:	/* rfid, scary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -1;
 
 		case 150:	/* isync */
 =======
+=======
+>>>>>>> v3.18
 			if (regs->msr & MSR_PR)
 				goto priv;
 			op->type = RFI;
@@ -861,6 +972,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 		case 150:	/* isync */
 			op->type = BARRIER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			isync();
 			goto instr_done;
@@ -888,6 +1002,10 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		switch ((instr >> 1) & 0x3ff) {
 		case 598:	/* sync */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			op->type = BARRIER;
+>>>>>>> v3.18
 =======
 			op->type = BARRIER;
 >>>>>>> v3.18
@@ -906,6 +1024,10 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 		case 854:	/* eieio */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			op->type = BARRIER;
+>>>>>>> v3.18
 =======
 			op->type = BARRIER;
 >>>>>>> v3.18
@@ -925,7 +1047,10 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 	switch (opcode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __powerpc64__
 	case 2:		/* tdi */
 		if (rd & trap_compare(regs->gpr[ra], (short) instr))
@@ -937,6 +1062,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			goto trap;
 		goto instr_done;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 7:		/* mulli */
 		regs->gpr[rd] = regs->gpr[ra] * (short) instr;
@@ -1087,6 +1215,7 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 	case 31:
 		switch ((instr >> 1) & 0x3ff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 83:	/* mfmsr */
 			if (regs->msr & MSR_PR)
 				break;
@@ -1131,6 +1260,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			}
 
 =======
+=======
+>>>>>>> v3.18
 		case 4:		/* tw */
 			if (rd == 0x1f ||
 			    (rd & trap_compare((int)regs->gpr[ra],
@@ -1170,6 +1301,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 #endif
 
 		case 19:	/* mfcr */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regs->gpr[rd] = regs->ccr;
 			regs->gpr[rd] &= 0xffffffffUL;
@@ -1188,6 +1322,7 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 		case 339:	/* mfspr */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spr = (instr >> 11) & 0x3ff;
 			switch (spr) {
 			case 0x20:	/* mfxer */
@@ -1201,6 +1336,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				regs->gpr[rd] = regs->ctr;
 				goto instr_done;
 =======
+=======
+>>>>>>> v3.18
 			spr = ((instr >> 16) & 0x1f) | ((instr >> 6) & 0x3e0);
 			switch (spr) {
 			case SPRN_XER:	/* mfxer */
@@ -1218,11 +1355,15 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				op->reg = rd;
 				op->spr = spr;
 				return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
 
 		case 467:	/* mtspr */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			spr = (instr >> 11) & 0x3ff;
 			switch (spr) {
@@ -1236,6 +1377,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				regs->ctr = regs->gpr[rd];
 				goto instr_done;
 =======
+=======
+>>>>>>> v3.18
 			spr = ((instr >> 16) & 0x1f) | ((instr >> 6) & 0x3e0);
 			switch (spr) {
 			case SPRN_XER:	/* mtxer */
@@ -1252,6 +1395,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				op->val = regs->gpr[rd];
 				op->spr = spr;
 				return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -1471,7 +1617,11 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			ival = (signed int) regs->gpr[rd];
 			regs->gpr[ra] = ival >> (sh < 32 ? sh : 31);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ival < 0 && (sh >= 32 || (ival & ((1 << sh) - 1)) != 0))
+=======
+			if (ival < 0 && (sh >= 32 || (ival & ((1ul << sh) - 1)) != 0))
+>>>>>>> v3.18
 =======
 			if (ival < 0 && (sh >= 32 || (ival & ((1ul << sh) - 1)) != 0))
 >>>>>>> v3.18
@@ -1485,7 +1635,11 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			ival = (signed int) regs->gpr[rd];
 			regs->gpr[ra] = ival >> sh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ival < 0 && (ival & ((1 << sh) - 1)) != 0)
+=======
+			if (ival < 0 && (ival & ((1ul << sh) - 1)) != 0)
+>>>>>>> v3.18
 =======
 			if (ival < 0 && (ival & ((1ul << sh) - 1)) != 0)
 >>>>>>> v3.18
@@ -1497,7 +1651,11 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 #ifdef __powerpc64__
 		case 27:	/* sld */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sh = regs->gpr[rd] & 0x7f;
+=======
+			sh = regs->gpr[rb] & 0x7f;
+>>>>>>> v3.18
 =======
 			sh = regs->gpr[rb] & 0x7f;
 >>>>>>> v3.18
@@ -1520,7 +1678,11 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			ival = (signed long int) regs->gpr[rd];
 			regs->gpr[ra] = ival >> (sh < 64 ? sh : 63);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ival < 0 && (sh >= 64 || (ival & ((1 << sh) - 1)) != 0))
+=======
+			if (ival < 0 && (sh >= 64 || (ival & ((1ul << sh) - 1)) != 0))
+>>>>>>> v3.18
 =======
 			if (ival < 0 && (sh >= 64 || (ival & ((1ul << sh) - 1)) != 0))
 >>>>>>> v3.18
@@ -1535,7 +1697,11 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			ival = (signed long int) regs->gpr[rd];
 			regs->gpr[ra] = ival >> sh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ival < 0 && (ival & ((1 << sh) - 1)) != 0)
+=======
+			if (ival < 0 && (ival & ((1ul << sh) - 1)) != 0)
+>>>>>>> v3.18
 =======
 			if (ival < 0 && (ival & ((1ul << sh) - 1)) != 0)
 >>>>>>> v3.18
@@ -1549,6 +1715,7 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
  * Cache instructions
  */
 		case 54:	/* dcbst */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ea = xform_ea(instr, regs, 0);
 			if (!address_ok(regs, ea, 8))
@@ -1584,6 +1751,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			goto instr_done;
 
 =======
+=======
+>>>>>>> v3.18
 			op->type = MKOP(CACHEOP, DCBST, 0);
 			op->ea = xform_ea(instr, regs);
 			return 0;
@@ -1609,12 +1778,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(CACHEOP, ICBI, 0);
 			op->ea = xform_ea(instr, regs);
 			return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
 	}
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Following cases are for loads and stores, so bail out
 	 * if we're in little-endian mode.
@@ -1695,6 +1868,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				       8, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 	 * Loads and stores.
 	 */
 	op->type = UNKNOWN;
@@ -1729,11 +1904,15 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 53:	/* ldux */
 			op->type = MKOP(LOAD, u, 8);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 		case 23:	/* lwzx */
 		case 55:	/* lwzux */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			err = read_mem(&regs->gpr[rd], xform_ea(instr, regs, u),
 				       4, regs);
@@ -1745,6 +1924,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				       1, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			op->type = MKOP(LOAD, u, 4);
 			break;
 
@@ -1752,12 +1933,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 119:	/* lbzux */
 			op->type = MKOP(LOAD, u, 1);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_ALTIVEC
 		case 103:	/* lvx */
 		case 359:	/* lvxl */
 			if (!(regs->msr & MSR_VEC))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				break;
 			ea = xform_ea(instr, regs, 0);
@@ -1768,15 +1953,26 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(LOAD_VMX, 0, 16);
 			break;
 >>>>>>> v3.18
+=======
+				goto vecunavail;
+			op->type = MKOP(LOAD_VMX, 0, 16);
+			break;
+>>>>>>> v3.18
 
 		case 231:	/* stvx */
 		case 487:	/* stvxl */
 			if (!(regs->msr & MSR_VEC))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
 			ea = xform_ea(instr, regs, 0);
 			err = do_vec_store(rd, do_stvx, ea, regs);
 			goto ldst_done;
+=======
+				goto vecunavail;
+			op->type = MKOP(STORE_VMX, 0, 16);
+			break;
+>>>>>>> v3.18
 =======
 				goto vecunavail;
 			op->type = MKOP(STORE_VMX, 0, 16);
@@ -1788,9 +1984,14 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 149:	/* stdx */
 		case 181:	/* stdux */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = regs->gpr[rd];
 			err = write_mem(val, xform_ea(instr, regs, u), 8, regs);
 			goto ldst_done;
+=======
+			op->type = MKOP(STORE, u, 8);
+			break;
+>>>>>>> v3.18
 =======
 			op->type = MKOP(STORE, u, 8);
 			break;
@@ -1799,6 +2000,7 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 		case 151:	/* stwx */
 		case 183:	/* stwux */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			val = regs->gpr[rd];
 			err = write_mem(val, xform_ea(instr, regs, u), 4, regs);
@@ -1816,6 +2018,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				       2, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			op->type = MKOP(STORE, u, 4);
 			break;
 
@@ -1828,11 +2032,15 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 311:	/* lhzux */
 			op->type = MKOP(LOAD, u, 2);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef __powerpc64__
 		case 341:	/* lwax */
 		case 373:	/* lwaux */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			err = read_mem(&regs->gpr[rd], xform_ea(instr, regs, u),
 				       4, regs);
@@ -1843,10 +2051,15 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(LOAD, SIGNEXT | u, 4);
 			break;
 >>>>>>> v3.18
+=======
+			op->type = MKOP(LOAD, SIGNEXT | u, 4);
+			break;
+>>>>>>> v3.18
 #endif
 
 		case 343:	/* lhax */
 		case 375:	/* lhaux */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			err = read_mem(&regs->gpr[rd], xform_ea(instr, regs, u),
 				       2, regs);
@@ -1875,6 +2088,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				regs->gpr[rd] = byterev_4(val);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			op->type = MKOP(LOAD, SIGNEXT | u, 2);
 			break;
 
@@ -1906,12 +2121,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				op->ea = truncate_if_32bit(regs->msr,
 							   regs->gpr[ra]);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PPC_FPU
 		case 535:	/* lfsx */
 		case 567:	/* lfsux */
 			if (!(regs->msr & MSR_FP))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				break;
 			ea = xform_ea(instr, regs, u);
@@ -1922,10 +2141,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(LOAD_FP, u, 4);
 			break;
 >>>>>>> v3.18
+=======
+				goto fpunavail;
+			op->type = MKOP(LOAD_FP, u, 4);
+			break;
+>>>>>>> v3.18
 
 		case 599:	/* lfdx */
 		case 631:	/* lfdux */
 			if (!(regs->msr & MSR_FP))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				break;
 			ea = xform_ea(instr, regs, u);
@@ -1936,10 +2161,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(LOAD_FP, u, 8);
 			break;
 >>>>>>> v3.18
+=======
+				goto fpunavail;
+			op->type = MKOP(LOAD_FP, u, 8);
+			break;
+>>>>>>> v3.18
 
 		case 663:	/* stfsx */
 		case 695:	/* stfsux */
 			if (!(regs->msr & MSR_FP))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				break;
 			ea = xform_ea(instr, regs, u);
@@ -1950,10 +2181,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(STORE_FP, u, 4);
 			break;
 >>>>>>> v3.18
+=======
+				goto fpunavail;
+			op->type = MKOP(STORE_FP, u, 4);
+			break;
+>>>>>>> v3.18
 
 		case 727:	/* stfdx */
 		case 759:	/* stfdux */
 			if (!(regs->msr & MSR_FP))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				break;
 			ea = xform_ea(instr, regs, u);
@@ -1964,10 +2201,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(STORE_FP, u, 8);
 			break;
 >>>>>>> v3.18
+=======
+				goto fpunavail;
+			op->type = MKOP(STORE_FP, u, 8);
+			break;
+>>>>>>> v3.18
 #endif
 
 #ifdef __powerpc64__
 		case 660:	/* stdbrx */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			val = byterev_8(regs->gpr[rd]);
 			err = write_mem(val, xform_ea(instr, regs, 0), 8, regs);
@@ -1990,6 +2233,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			err = write_mem(val, xform_ea(instr, regs, 0), 2, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			op->type = MKOP(STORE, BYTEREV, 8);
 			op->val = byterev_8(regs->gpr[rd]);
 			break;
@@ -2022,6 +2267,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			op->type = MKOP(STORE, BYTEREV, 2);
 			op->val = byterev_2(regs->gpr[rd]);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_VSX
@@ -2029,21 +2277,28 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 876:	/* lxvd2ux */
 			if (!(regs->msr & MSR_VSX))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
 			rd |= (instr & 1) << 5;
 			ea = xform_ea(instr, regs, u);
 			err = do_vsx_load(rd, do_lxvd2x, ea, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 				goto vsxunavail;
 			op->reg = rd | ((instr & 1) << 5);
 			op->type = MKOP(LOAD_VSX, u, 16);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		case 972:	/* stxvd2x */
 		case 1004:	/* stxvd2ux */
 			if (!(regs->msr & MSR_VSX))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				break;
 			rd |= (instr & 1) << 5;
@@ -2051,10 +2306,15 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			err = do_vsx_store(rd, do_stxvd2x, ea, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 				goto vsxunavail;
 			op->reg = rd | ((instr & 1) << 5);
 			op->type = MKOP(STORE_VSX, u, 16);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_VSX */
@@ -2063,6 +2323,7 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 
 	case 32:	/* lwz */
 	case 33:	/* lwzu */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = read_mem(&regs->gpr[rd], dform_ea(instr, regs), 4, regs);
 		goto ldst_done;
@@ -2157,6 +2418,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		} while (++rd < 32);
 		goto instr_done;
 =======
+=======
+>>>>>>> v3.18
 		op->type = MKOP(LOAD, u, 4);
 		op->ea = dform_ea(instr, regs);
 		break;
@@ -2208,6 +2471,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		op->type = MKOP(STORE_MULTI, 0, 4 * (32 - rd));
 		op->ea = dform_ea(instr, regs);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PPC_FPU
@@ -2215,65 +2481,90 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 	case 49:	/* lfsu */
 		if (!(regs->msr & MSR_FP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		ea = dform_ea(instr, regs);
 		err = do_fp_load(rd, do_lfs, ea, 4, regs);
 		goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			goto fpunavail;
 		op->type = MKOP(LOAD_FP, u, 4);
 		op->ea = dform_ea(instr, regs);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case 50:	/* lfd */
 	case 51:	/* lfdu */
 		if (!(regs->msr & MSR_FP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		ea = dform_ea(instr, regs);
 		err = do_fp_load(rd, do_lfd, ea, 8, regs);
 		goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			goto fpunavail;
 		op->type = MKOP(LOAD_FP, u, 8);
 		op->ea = dform_ea(instr, regs);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case 52:	/* stfs */
 	case 53:	/* stfsu */
 		if (!(regs->msr & MSR_FP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		ea = dform_ea(instr, regs);
 		err = do_fp_store(rd, do_stfs, ea, 4, regs);
 		goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			goto fpunavail;
 		op->type = MKOP(STORE_FP, u, 4);
 		op->ea = dform_ea(instr, regs);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case 54:	/* stfd */
 	case 55:	/* stfdu */
 		if (!(regs->msr & MSR_FP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		ea = dform_ea(instr, regs);
 		err = do_fp_store(rd, do_stfd, ea, 8, regs);
 		goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 			goto fpunavail;
 		op->type = MKOP(STORE_FP, u, 8);
 		op->ea = dform_ea(instr, regs);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifdef __powerpc64__
 	case 58:	/* ld[u], lwa */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (instr & 3) {
 		case 0:		/* ld */
@@ -2291,6 +2582,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 				regs->gpr[rd] = (signed int) regs->gpr[rd];
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 		op->ea = dsform_ea(instr, regs);
 		switch (instr & 3) {
 		case 0:		/* ld */
@@ -2302,11 +2595,15 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 2:		/* lwa */
 			op->type = MKOP(LOAD, SIGNEXT, 4);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
 
 	case 62:	/* std[u] */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		val = regs->gpr[rd];
 		switch (instr & 3) {
@@ -2317,6 +2614,8 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 			err = write_mem(val, dsform_ea(instr, regs), 8, regs);
 			goto ldst_done;
 =======
+=======
+>>>>>>> v3.18
 		op->ea = dsform_ea(instr, regs);
 		switch (instr & 3) {
 		case 0:		/* std */
@@ -2325,12 +2624,16 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 		case 1:		/* stdu */
 			op->type = MKOP(STORE, UPDATE, 8);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
 #endif /* __powerpc64__ */
 
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = -EINVAL;
 
@@ -2345,6 +2648,9 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 
  logical_done:
 	if (instr & 1)
@@ -2355,8 +2661,11 @@ int __kprobes analyse_instr(struct instruction_op *op, struct pt_regs *regs,
 	if (instr & 1)
 		set_cr0(regs, rd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	goto instr_done;
 =======
+=======
+>>>>>>> v3.18
 
  instr_done:
 	regs->nip = truncate_if_32bit(regs->msr, regs->nip + 4);
@@ -2702,5 +3011,8 @@ int __kprobes emulate_step(struct pt_regs *regs, unsigned int instr)
  instr_done:
 	regs->nip = truncate_if_32bit(regs->msr, regs->nip + 4);
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

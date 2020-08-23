@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -156,6 +160,10 @@ acpi_status acpi_ns_root_initialize(void)
 			switch (init_val->type) {
 			case ACPI_TYPE_METHOD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -248,7 +256,11 @@ acpi_status acpi_ns_root_initialize(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -436,8 +448,14 @@ acpi_ns_lookup(union acpi_generic_state *scope_info,
 
 					ACPI_ERROR((AE_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    "ACPI path has too many parent prefixes (^) "
 						    "- reached beyond root node"));
+=======
+						    "%s: Path has too many parent prefixes (^) "
+						    "- reached beyond root node",
+						    pathname));
+>>>>>>> v3.18
 =======
 						    "%s: Path has too many parent prefixes (^) "
 						    "- reached beyond root node",

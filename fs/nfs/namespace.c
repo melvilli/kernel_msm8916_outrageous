@@ -254,9 +254,14 @@ struct vfsmount *nfs_do_submount(struct dentry *dentry, struct nfs_fh *fh,
 	dprintk("--> nfs_do_submount()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s: submounting on %s/%s\n", __func__,
 			dentry->d_parent->d_name.name,
 			dentry->d_name.name);
+=======
+	dprintk("%s: submounting on %pd2\n", __func__,
+			dentry);
+>>>>>>> v3.18
 =======
 	dprintk("%s: submounting on %pd2\n", __func__,
 			dentry);
@@ -286,7 +291,11 @@ struct vfsmount *nfs_submount(struct nfs_server *server, struct dentry *dentry,
 
 	/* Look it up again to get its attributes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = server->nfs_client->rpc_ops->lookup(parent->d_inode, &dentry->d_name, fh, fattr);
+=======
+	err = server->nfs_client->rpc_ops->lookup(parent->d_inode, &dentry->d_name, fh, fattr, NULL);
+>>>>>>> v3.18
 =======
 	err = server->nfs_client->rpc_ops->lookup(parent->d_inode, &dentry->d_name, fh, fattr, NULL);
 >>>>>>> v3.18

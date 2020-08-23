@@ -14,6 +14,10 @@
 #include <asm/cmpxchg.h>
 #include <asm/dcache_clear.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -32,7 +36,11 @@
  * Atomically reads the value of @v.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)	(*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)	ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -46,6 +54,7 @@
  */
 #define atomic_set(v,i)	(((v)->counter) = (i))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * atomic_add_return - add integer to atomic variable and return it
@@ -127,6 +136,8 @@ static __inline__ int atomic_sub_return(int i, atomic_t *v)
  */
 #define atomic_sub(i,v) ((void) atomic_sub_return((i), (v)))
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CHIP_M32700_TS1
 #define __ATOMIC_CLOBBER	, "r4"
 #else
@@ -185,6 +196,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -220,9 +234,13 @@ static __inline__ int atomic_inc_return(atomic_t *v)
 		: "r" (&v->counter)
 		: "memory"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CHIP_M32700_TS1
 		, "r4"
 #endif	/* CONFIG_CHIP_M32700_TS1 */
+=======
+		__ATOMIC_CLOBBER
+>>>>>>> v3.18
 =======
 		__ATOMIC_CLOBBER
 >>>>>>> v3.18
@@ -254,9 +272,13 @@ static __inline__ int atomic_dec_return(atomic_t *v)
 		: "r" (&v->counter)
 		: "memory"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CHIP_M32700_TS1
 		, "r4"
 #endif	/* CONFIG_CHIP_M32700_TS1 */
+=======
+		__ATOMIC_CLOBBER
+>>>>>>> v3.18
 =======
 		__ATOMIC_CLOBBER
 >>>>>>> v3.18
@@ -357,9 +379,13 @@ static __inline__ void atomic_clear_mask(unsigned long  mask, atomic_t *addr)
 		: "r" (addr), "r" (~mask)
 		: "memory"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CHIP_M32700_TS1
 		, "r5"
 #endif	/* CONFIG_CHIP_M32700_TS1 */
+=======
+		__ATOMIC_CLOBBER
+>>>>>>> v3.18
 =======
 		__ATOMIC_CLOBBER
 >>>>>>> v3.18
@@ -383,9 +409,13 @@ static __inline__ void atomic_set_mask(unsigned long  mask, atomic_t *addr)
 		: "r" (addr), "r" (mask)
 		: "memory"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CHIP_M32700_TS1
 		, "r5"
 #endif	/* CONFIG_CHIP_M32700_TS1 */
+=======
+		__ATOMIC_CLOBBER
+>>>>>>> v3.18
 =======
 		__ATOMIC_CLOBBER
 >>>>>>> v3.18
@@ -394,12 +424,15 @@ static __inline__ void atomic_set_mask(unsigned long  mask, atomic_t *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomic operations are already serializing on m32r */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* _ASM_M32R_ATOMIC_H */

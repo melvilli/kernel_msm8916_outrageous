@@ -24,8 +24,12 @@ int perf_gtk__deactivate_context(struct perf_gtk_context **ctx)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(*ctx);
 	*ctx = NULL;
+=======
+	zfree(ctx);
+>>>>>>> v3.18
 =======
 	zfree(ctx);
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ static int perf_gtk__error(const char *format, va_list args)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_GTK_INFO_BAR
+=======
+#ifdef HAVE_GTK_INFO_BAR_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_GTK_INFO_BAR_SUPPORT
 >>>>>>> v3.18
@@ -114,7 +122,11 @@ static int perf_gtk__warning_statusbar(const char *format, va_list args)
 struct perf_error_ops perf_gtk_eops = {
 	.error		= perf_gtk__error,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_GTK_INFO_BAR
+=======
+#ifdef HAVE_GTK_INFO_BAR_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_GTK_INFO_BAR_SUPPORT
 >>>>>>> v3.18

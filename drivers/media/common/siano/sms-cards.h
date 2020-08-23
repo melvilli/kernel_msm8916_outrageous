@@ -46,6 +46,10 @@
 #define SMS1XXX_BOARD_SIANO_DENVER_1530	19
 #define SMS1XXX_BOARD_SIANO_DENVER_2160 20
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SMS1XXX_BOARD_PCTV_77E		21
+>>>>>>> v3.18
 =======
 #define SMS1XXX_BOARD_PCTV_77E		21
 >>>>>>> v3.18

@@ -53,7 +53,13 @@ void imx_cpu_die(unsigned int cpu)
 	 */
 	imx_set_cpu_arg(cpu, ~0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_do_idle();
+=======
+
+	while (1)
+		cpu_do_idle();
+>>>>>>> v3.18
 =======
 
 	while (1)

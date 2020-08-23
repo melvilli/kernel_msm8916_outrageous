@@ -116,7 +116,11 @@ nouveau_gpuobj_create_(struct nouveau_object *parent,
 
 	if (heap) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = nouveau_mm_head(heap, 1, size, size,
+=======
+		ret = nouveau_mm_head(heap, 0, 1, size, size,
+>>>>>>> v3.18
 =======
 		ret = nouveau_mm_head(heap, 0, 1, size, size,
 >>>>>>> v3.18

@@ -6,7 +6,10 @@
 #include <linux/workqueue.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rpc_pipe_dir_head {
 	struct list_head pdh_entries;
 	struct dentry *pdh_dentry;
@@ -27,6 +30,9 @@ struct rpc_pipe_dir_object_ops {
 			struct rpc_pipe_dir_object *pdo);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rpc_pipe_msg {
 	struct list_head list;
@@ -88,7 +94,12 @@ enum {
 extern struct dentry *rpc_d_lookup_sb(const struct super_block *sb,
 				      const unsigned char *dir_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rpc_pipefs_init_net(struct net *net);
+=======
+extern int rpc_pipefs_init_net(struct net *net);
+extern void rpc_pipefs_exit_net(struct net *net);
+>>>>>>> v3.18
 =======
 extern int rpc_pipefs_init_net(struct net *net);
 extern void rpc_pipefs_exit_net(struct net *net);
@@ -102,6 +113,7 @@ extern int rpc_queue_upcall(struct rpc_pipe *, struct rpc_pipe_msg *);
 
 struct rpc_clnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct dentry *rpc_create_client_dir(struct dentry *, struct qstr *, struct rpc_clnt *);
 extern int rpc_remove_client_dir(struct dentry *);
 
@@ -109,6 +121,8 @@ struct cache_detail;
 extern struct dentry *rpc_create_cache_dir(struct dentry *,
 					   struct qstr *,
 =======
+=======
+>>>>>>> v3.18
 extern struct dentry *rpc_create_client_dir(struct dentry *, const char *, struct rpc_clnt *);
 extern int rpc_remove_client_dir(struct rpc_clnt *);
 
@@ -132,6 +146,9 @@ extern struct rpc_pipe_dir_object *rpc_find_or_alloc_pipe_dir_object(
 struct cache_detail;
 extern struct dentry *rpc_create_cache_dir(struct dentry *,
 					   const char *,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   umode_t umode,
 					   struct cache_detail *);
@@ -148,6 +165,11 @@ extern int register_rpc_pipefs(void);
 extern void unregister_rpc_pipefs(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool gssd_running(struct net *net);
+
+>>>>>>> v3.18
 =======
 extern bool gssd_running(struct net *net);
 

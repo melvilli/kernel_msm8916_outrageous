@@ -89,7 +89,11 @@ static int sb1250_set_affinity(struct irq_data *d, const struct cpumask *mask,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i = cpumask_first(mask);
+=======
+	i = cpumask_first_and(mask, cpu_online_mask);
+>>>>>>> v3.18
 =======
 	i = cpumask_first_and(mask, cpu_online_mask);
 >>>>>>> v3.18

@@ -23,7 +23,10 @@ const struct inode_operations jffs2_symlink_inode_operations =
 	.readlink =	generic_readlink,
 	.follow_link =	jffs2_follow_link,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_acl =	jffs2_get_acl,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.setattr =	jffs2_setattr,

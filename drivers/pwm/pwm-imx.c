@@ -15,18 +15,25 @@
 #include <linux/err.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/pwm.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <linux/pwm.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/of_device.h>
 
 /* i.MX1 and i.MX21 share the same PWM function block: */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MX1_PWMC    0x00   /* PWM Control Register */
 #define MX1_PWMS    0x04   /* PWM Sample Register */
@@ -47,6 +54,8 @@
 #define MX3_PWMCR_CLKSRC_IPG      (1 << 16)
 #define MX3_PWMCR_EN              (1 << 0)
 =======
+=======
+>>>>>>> v3.18
 #define MX1_PWMC			0x00   /* PWM Control Register */
 #define MX1_PWMS			0x04   /* PWM Sample Register */
 #define MX1_PWMP			0x08   /* PWM Period Register */
@@ -71,6 +80,9 @@
 #define MX3_PWMSR_FIFOAV_MASK		0x7
 
 #define MX3_PWM_SWR_LOOP		5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct imx_chip {
@@ -137,10 +149,13 @@ static int imx_pwm_config_v2(struct pwm_chip *chip,
 {
 	struct imx_chip *imx = to_imx_chip(chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long long c;
 	unsigned long period_cycles, duty_cycles, prescale;
 	u32 cr;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = chip->dev;
 	unsigned long long c;
 	unsigned long period_cycles, duty_cycles, prescale;
@@ -178,6 +193,9 @@ static int imx_pwm_config_v2(struct pwm_chip *chip,
 		if (cr & MX3_PWMCR_SWR)
 			dev_warn(dev, "software reset timeout\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	c = clk_get_rate(imx->clk_per);
@@ -209,7 +227,11 @@ static int imx_pwm_config_v2(struct pwm_chip *chip,
 		MX3_PWMCR_DBGEN | MX3_PWMCR_CLKSRC_IPG_HIGH;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(PWMF_ENABLED, &pwm->flags))
+=======
+	if (enable)
+>>>>>>> v3.18
 =======
 	if (enable)
 >>>>>>> v3.18
@@ -319,10 +341,15 @@ static int imx_pwm_probe(struct platform_device *pdev)
 
 	imx = devm_kzalloc(&pdev->dev, sizeof(*imx), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (imx == NULL) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (imx == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (imx == NULL)
 		return -ENOMEM;
@@ -347,6 +374,10 @@ static int imx_pwm_probe(struct platform_device *pdev)
 	imx->chip.base = -1;
 	imx->chip.npwm = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	imx->chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	imx->chip.can_sleep = true;
 >>>>>>> v3.18
@@ -383,7 +414,12 @@ static struct platform_driver imx_pwm_driver = {
 	.driver		= {
 		.name	= "imx-pwm",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(imx_pwm_dt_ids),
+=======
+		.owner = THIS_MODULE,
+		.of_match_table = imx_pwm_dt_ids,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 		.of_match_table = imx_pwm_dt_ids,

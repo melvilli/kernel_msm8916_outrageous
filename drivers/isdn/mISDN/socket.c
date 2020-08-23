@@ -136,7 +136,11 @@ mISDN_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 
 	if (msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_mISDN *maddr = msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_mISDN *, maddr, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_mISDN *, maddr, msg->msg_name);
 >>>>>>> v3.18
@@ -184,7 +188,10 @@ mISDN_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	struct sk_buff		*skb;
 	int			err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_mISDN	*maddr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -222,7 +229,11 @@ mISDN_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	if (msg->msg_namelen >= sizeof(struct sockaddr_mISDN)) {
 		/* if we have a address, we use it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		maddr = (struct sockaddr_mISDN *)msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_mISDN *, maddr, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_mISDN *, maddr, msg->msg_name);
 >>>>>>> v3.18
@@ -729,9 +740,12 @@ base_sock_bind(struct socket *sock, struct sockaddr *addr, int addr_len)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr_len < sizeof(struct sockaddr_mISDN))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lock_sock(sk);

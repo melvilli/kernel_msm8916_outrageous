@@ -32,6 +32,11 @@
 #include <linux/percpu.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __ARCH_WANT_KPROBES_INSN_SLOT
+
+>>>>>>> v3.18
 =======
 #define __ARCH_WANT_KPROBES_INSN_SLOT
 
@@ -63,7 +68,11 @@ typedef u16 kprobe_opcode_t;
 struct arch_specific_insn {
 	/* copy of original instruction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kprobe_opcode_t insn[MAX_INSN_SIZE];
+=======
+	kprobe_opcode_t *insn;
+>>>>>>> v3.18
 =======
 	kprobe_opcode_t *insn;
 >>>>>>> v3.18
@@ -92,11 +101,17 @@ int kprobe_exceptions_notify(struct notifier_block *self,
 	unsigned long val, void *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int probe_is_prohibited_opcode(u16 *insn);
 int probe_get_fixup_type(u16 *insn);
 int probe_is_insn_relative_long(u16 *insn);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define flush_insn_slot(p)	do { } while (0)
 

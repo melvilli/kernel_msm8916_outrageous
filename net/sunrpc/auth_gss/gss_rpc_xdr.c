@@ -261,7 +261,11 @@ static int gssx_dec_option_array(struct xdr_stream *xdr,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	creds = kzalloc(sizeof(struct svc_cred), GFP_KERNEL);
+=======
+	creds = kmalloc(sizeof(struct svc_cred), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	creds = kmalloc(sizeof(struct svc_cred), GFP_KERNEL);
 >>>>>>> v3.18
@@ -564,6 +568,11 @@ static int gssx_enc_cred(struct xdr_stream *xdr,
 	/* cred->elements */
 	err = dummy_enc_credel_array(xdr, &cred->elements);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	if (err)
 		return err;
@@ -750,6 +759,7 @@ void gssx_enc_accept_sec_context(struct rpc_rqst *req,
 
 	/* arg->context_handle */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (arg->context_handle) {
 		err = gssx_enc_ctx(xdr, arg->context_handle);
 		if (err)
@@ -767,6 +777,8 @@ void gssx_enc_accept_sec_context(struct rpc_rqst *req,
 		err = gssx_enc_bool(xdr, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (arg->context_handle)
 		err = gssx_enc_ctx(xdr, arg->context_handle);
 	else
@@ -781,6 +793,9 @@ void gssx_enc_accept_sec_context(struct rpc_rqst *req,
 		err = gssx_enc_bool(xdr, 0);
 	if (err)
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* arg->input_token */
@@ -790,6 +805,7 @@ void gssx_enc_accept_sec_context(struct rpc_rqst *req,
 
 	/* arg->input_cb */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (arg->input_cb) {
 		err = gssx_enc_cb(xdr, arg->input_cb);
 		if (err)
@@ -798,12 +814,17 @@ void gssx_enc_accept_sec_context(struct rpc_rqst *req,
 		err = gssx_enc_bool(xdr, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (arg->input_cb)
 		err = gssx_enc_cb(xdr, arg->input_cb);
 	else
 		err = gssx_enc_bool(xdr, 0);
 	if (err)
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = gssx_enc_bool(xdr, arg->ret_deleg_cred);
@@ -830,6 +851,7 @@ int gssx_dec_accept_sec_context(struct rpc_rqst *rqstp,
 	u32 value_follows;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *scratch;
 
 	scratch = alloc_page(GFP_KERNEL);
@@ -838,12 +860,18 @@ int gssx_dec_accept_sec_context(struct rpc_rqst *rqstp,
 	xdr_set_scratch_buffer(xdr, page_address(scratch), PAGE_SIZE);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	/* res->status */
 	err = gssx_dec_status(xdr, &res->status);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -852,17 +880,23 @@ int gssx_dec_accept_sec_context(struct rpc_rqst *rqstp,
 	err = gssx_dec_bool(xdr, &value_follows);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
 	if (value_follows) {
 		err = gssx_dec_ctx(xdr, res->context_handle);
 		if (err)
 			goto out_free;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	if (value_follows) {
 		err = gssx_dec_ctx(xdr, res->context_handle);
 		if (err)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		res->context_handle = NULL;
@@ -872,17 +906,23 @@ int gssx_dec_accept_sec_context(struct rpc_rqst *rqstp,
 	err = gssx_dec_bool(xdr, &value_follows);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
 	if (value_follows) {
 		err = gssx_dec_buffer(xdr, res->output_token);
 		if (err)
 			goto out_free;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	if (value_follows) {
 		err = gssx_dec_buffer(xdr, res->output_token);
 		if (err)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		res->output_token = NULL;
@@ -892,16 +932,22 @@ int gssx_dec_accept_sec_context(struct rpc_rqst *rqstp,
 	err = gssx_dec_bool(xdr, &value_follows);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
 	if (value_follows) {
 		/* we do not support upcall servers sending this data. */
 		err = -EINVAL;
 		goto out_free;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	if (value_follows) {
 		/* we do not support upcall servers sending this data. */
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -909,8 +955,11 @@ int gssx_dec_accept_sec_context(struct rpc_rqst *rqstp,
 	err = gssx_dec_option_array(xdr, &res->options);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free:
 	__free_page(scratch);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;

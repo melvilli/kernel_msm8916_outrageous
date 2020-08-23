@@ -2,10 +2,13 @@
 generic-y += clkdev.h
 generic-y += exec.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += kvm_para.h
 generic-y += mcs_spinlock.h
 generic-y += trace_clock.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += hash.h
 generic-y += irq_work.h
 generic-y += kvm_para.h
@@ -14,4 +17,7 @@ generic-y += preempt.h
 generic-y += scatterlist.h
 generic-y += trace_clock.h
 generic-y += vtime.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

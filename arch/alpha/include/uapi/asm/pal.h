@@ -47,6 +47,10 @@
 #define PAL_whami	60
 #define PAL_retsys	61
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PAL_wtint	62
+>>>>>>> v3.18
 =======
 #define PAL_wtint	62
 >>>>>>> v3.18

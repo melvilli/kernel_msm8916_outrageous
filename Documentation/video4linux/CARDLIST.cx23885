@@ -32,7 +32,11 @@
  31 -> Leadtek Winfast PxDVR3200 H XC4000                  [107d:6f39]
  32 -> MPX-885
 <<<<<<< HEAD
+<<<<<<< HEAD
  33 -> Mygica X8507                                        [14f1:8502]
+=======
+ 33 -> Mygica X8502/X8507 ISDB-T                           [14f1:8502]
+>>>>>>> v3.18
 =======
  33 -> Mygica X8502/X8507 ISDB-T                           [14f1:8502]
 >>>>>>> v3.18
@@ -43,10 +47,16 @@
  38 -> Hauppauge WinTV-HVR4400                             [0070:c108,0070:c138,0070:c12a,0070:c1f8]
  39 -> AVerTV Hybrid Express Slim HC81R                    [1461:d939]
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  40 -> TurboSight TBS 6981                                 [6981:8888]
  41 -> TurboSight TBS 6980                                 [6980:8888]
  42 -> Leadtek Winfast PxPVR2200                           [107d:6f21]
  43 -> Hauppauge ImpactVCB-e                               [0070:7133]
  44 -> DViCO FusionHDTV DVB-T Dual Express2                [18ac:db98]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

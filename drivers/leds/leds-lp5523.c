@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lp5523.c - LP5523 LED Driver
+=======
+ * lp5523.c - LP5523, LP55231 LED Driver
+>>>>>>> v3.18
 =======
  * lp5523.c - LP5523, LP55231 LED Driver
 >>>>>>> v3.18
@@ -30,15 +34,21 @@
 #include <linux/firmware.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/leds.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_data/leds-lp55xx.h>
 #include <linux/slab.h>
@@ -46,8 +56,11 @@
 #include "leds-lp55xx-common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LP5523_PROGRAM_LENGTH		32
 =======
+=======
+>>>>>>> v3.18
 #define LP5523_PROGRAM_LENGTH		32	/* bytes */
 /* Memory is used like this:
    0x00 engine 1 program
@@ -57,6 +70,9 @@
    0x40 engine 2 muxing info
    0x50 engine 3 muxing info
 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LP5523_MAX_LEDS			9
 
@@ -73,6 +89,12 @@
 #define LP5523_REG_LED_TEST_CTRL	0x41
 #define LP5523_REG_LED_TEST_ADC		0x42
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LP5523_REG_CH1_PROG_START	0x4C
+#define LP5523_REG_CH2_PROG_START	0x4D
+#define LP5523_REG_CH3_PROG_START	0x4E
+>>>>>>> v3.18
 =======
 #define LP5523_REG_CH1_PROG_START	0x4C
 #define LP5523_REG_CH2_PROG_START	0x4D
@@ -95,6 +117,10 @@
 #define LP5523_ADC_SHORTCIRC_LIM	80
 #define LP5523_EXT_CLK_USED		0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LP5523_ENG_STATUS_MASK		0x07
+>>>>>>> v3.18
 =======
 #define LP5523_ENG_STATUS_MASK		0x07
 >>>>>>> v3.18
@@ -104,6 +130,12 @@
 #define LP5523_PAGE_ENG2		1
 #define LP5523_PAGE_ENG3		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LP5523_PAGE_MUX1		3
+#define LP5523_PAGE_MUX2		4
+#define LP5523_PAGE_MUX3		5
+>>>>>>> v3.18
 =======
 #define LP5523_PAGE_MUX1		3
 #define LP5523_PAGE_MUX2		4
@@ -134,6 +166,11 @@
 #define LP5523_RUN_ENG3			0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LED_ACTIVE(mux, led)		(!!(mux & (0x0001 << led)))
+
+>>>>>>> v3.18
 =======
 #define LED_ACTIVE(mux, led)		(!!(mux & (0x0001 << led)))
 
@@ -144,6 +181,11 @@ enum lp5523_chip_id {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int lp5523_init_program_engine(struct lp55xx_chip *chip);
+
+>>>>>>> v3.18
 =======
 static int lp5523_init_program_engine(struct lp55xx_chip *chip);
 
@@ -184,13 +226,19 @@ static int lp5523_post_init_device(struct lp55xx_chip *chip)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return lp55xx_write(chip, LP5523_REG_ENABLE_LEDS_LSB, 0xff);
 =======
+=======
+>>>>>>> v3.18
 	ret = lp55xx_write(chip, LP5523_REG_ENABLE_LEDS_LSB, 0xff);
 	if (ret)
 		return ret;
 
 	return lp5523_init_program_engine(chip);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -210,7 +258,10 @@ static void lp5523_load_engine(struct lp55xx_chip *chip)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	lp55xx_update_bits(chip, LP5523_REG_OP_MODE, mask[idx], val[idx]);
 
 	lp5523_wait_opmode_done();
@@ -219,6 +270,9 @@ static void lp5523_load_engine(struct lp55xx_chip *chip)
 static void lp5523_load_engine_and_select_page(struct lp55xx_chip *chip)
 {
 	enum lp55xx_engine_index idx = chip->engine_idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 page_sel[] = {
 		[LP55XX_ENGINE_1] = LP5523_PAGE_ENG1,
@@ -227,9 +281,13 @@ static void lp5523_load_engine_and_select_page(struct lp55xx_chip *chip)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp55xx_update_bits(chip, LP5523_REG_OP_MODE, mask[idx], val[idx]);
 
 	lp5523_wait_opmode_done();
+=======
+	lp5523_load_engine(chip);
+>>>>>>> v3.18
 =======
 	lp5523_load_engine(chip);
 >>>>>>> v3.18
@@ -238,7 +296,11 @@ static void lp5523_load_engine_and_select_page(struct lp55xx_chip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void lp5523_stop_engine(struct lp55xx_chip *chip)
+=======
+static void lp5523_stop_all_engines(struct lp55xx_chip *chip)
+>>>>>>> v3.18
 =======
 static void lp5523_stop_all_engines(struct lp55xx_chip *chip)
 >>>>>>> v3.18
@@ -248,7 +310,10 @@ static void lp5523_stop_all_engines(struct lp55xx_chip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void lp5523_stop_engine(struct lp55xx_chip *chip)
 {
 	enum lp55xx_engine_index idx = chip->engine_idx;
@@ -263,6 +328,9 @@ static void lp5523_stop_engine(struct lp55xx_chip *chip)
 	lp5523_wait_opmode_done();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void lp5523_turn_off_channels(struct lp55xx_chip *chip)
 {
@@ -321,7 +389,10 @@ static void lp5523_run_engine(struct lp55xx_chip *chip, bool start)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int lp5523_init_program_engine(struct lp55xx_chip *chip)
 {
 	int i;
@@ -380,6 +451,9 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int lp5523_update_program_memory(struct lp55xx_chip *chip,
 					const u8 *data, size_t size)
@@ -387,6 +461,7 @@ static int lp5523_update_program_memory(struct lp55xx_chip *chip,
 	u8 pattern[LP5523_PROGRAM_LENGTH] = {0};
 	unsigned cmd;
 	char c[3];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int update_size;
 	int nrchars;
@@ -400,11 +475,16 @@ static int lp5523_update_program_memory(struct lp55xx_chip *chip,
 
 	i = 0;
 =======
+=======
+>>>>>>> v3.18
 	int nrchars;
 	int ret;
 	int offset = 0;
 	int i = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while ((offset < size - 1) && (i < LP5523_PROGRAM_LENGTH)) {
 		/* separate sscanfs because length is working only for %s */
@@ -426,12 +506,15 @@ static int lp5523_update_program_memory(struct lp55xx_chip *chip,
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	update_size = i;
 	for (i = 0; i < update_size; i++)
 		lp55xx_write(chip, LP5523_REG_PROG_MEM + i, pattern[i]);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < LP5523_PROGRAM_LENGTH; i++) {
 		ret = lp55xx_write(chip, LP5523_REG_PROG_MEM + i, pattern[i]);
 		if (ret)
@@ -439,6 +522,9 @@ static int lp5523_update_program_memory(struct lp55xx_chip *chip,
 	}
 
 	return size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err:
@@ -463,11 +549,14 @@ static void lp5523_firmware_loaded(struct lp55xx_chip *chip)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp5523_load_engine(chip);
 	lp5523_update_program_memory(chip, fw->data, fw->size);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	lp5523_load_engine_and_select_page(chip);
 	lp5523_update_program_memory(chip, fw->data, fw->size);
 }
@@ -660,6 +749,9 @@ store_load(1)
 store_load(2)
 store_load(3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t lp5523_selftest(struct device *dev,
 			       struct device_attribute *attr,
@@ -761,10 +853,13 @@ static void lp5523_led_brightness_work(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(selftest, S_IRUGO, lp5523_selftest, NULL);
 
 static struct attribute *lp5523_attributes[] = {
 =======
+=======
+>>>>>>> v3.18
 static LP55XX_DEV_ATTR_RW(engine1_mode, show_engine1_mode, store_engine1_mode);
 static LP55XX_DEV_ATTR_RW(engine2_mode, show_engine2_mode, store_engine2_mode);
 static LP55XX_DEV_ATTR_RW(engine3_mode, show_engine3_mode, store_engine3_mode);
@@ -786,6 +881,9 @@ static struct attribute *lp5523_attributes[] = {
 	&dev_attr_engine1_leds.attr,
 	&dev_attr_engine2_leds.attr,
 	&dev_attr_engine3_leds.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&dev_attr_selftest.attr,
 	NULL,
@@ -821,6 +919,7 @@ static int lp5523_probe(struct i2c_client *client,
 	struct lp55xx_chip *chip;
 	struct lp55xx_led *led;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lp55xx_platform_data *pdata = client->dev.platform_data;
 
 	if (!pdata) {
@@ -828,6 +927,8 @@ static int lp5523_probe(struct i2c_client *client,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct lp55xx_platform_data *pdata;
 	struct device_node *np = client->dev.of_node;
 
@@ -842,6 +943,9 @@ static int lp5523_probe(struct i2c_client *client,
 		}
 	}
 	pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
@@ -893,7 +997,11 @@ static int lp5523_remove(struct i2c_client *client)
 	struct lp55xx_chip *chip = led->chip;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp5523_stop_engine(chip);
+=======
+	lp5523_stop_all_engines(chip);
+>>>>>>> v3.18
 =======
 	lp5523_stop_all_engines(chip);
 >>>>>>> v3.18
@@ -913,10 +1021,13 @@ static const struct i2c_device_id lp5523_id[] = {
 MODULE_DEVICE_TABLE(i2c, lp5523_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_driver lp5523_driver = {
 	.driver = {
 		.name	= "lp5523x",
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id of_lp5523_leds_match[] = {
 	{ .compatible = "national,lp5523", },
@@ -931,6 +1042,9 @@ static struct i2c_driver lp5523_driver = {
 	.driver = {
 		.name	= "lp5523x",
 		.of_match_table = of_match_ptr(of_lp5523_leds_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe		= lp5523_probe,

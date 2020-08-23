@@ -34,11 +34,17 @@
 #include <linux/mutex.h>
 #include <linux/notifier.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
 #include <linux/clk/tegra.h>
+=======
+#include <linux/slab.h>
+#include <linux/spinlock.h>
+#include <linux/workqueue.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/spinlock.h>
@@ -91,7 +97,11 @@ enum nvec_sleep_subcmds {
 static struct nvec_chip *nvec_power_handle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell nvec_devices[] = {
+=======
+static const struct mfd_cell nvec_devices[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell nvec_devices[] = {
 >>>>>>> v3.18
@@ -245,8 +255,12 @@ static size_t nvec_msg_size(struct nvec_msg *msg)
 	else if (event_length == NVEC_3BYTES)
 		return 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return 0;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -695,9 +709,15 @@ static irqreturn_t nvec_interrupt(int irq, void *dev)
 		else
 			dev_err(nvec->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"RX buffer overflow on %p: "
 				"Trying to write byte %u of %u\n",
 				nvec->rx, nvec->rx->pos, NVEC_MSG_SIZE);
+=======
+				"RX buffer overflow on %p: Trying to write byte %u of %u\n",
+				nvec->rx, nvec->rx ? nvec->rx->pos : 0,
+				NVEC_MSG_SIZE);
+>>>>>>> v3.18
 =======
 				"RX buffer overflow on %p: Trying to write byte %u of %u\n",
 				nvec->rx, nvec->rx ? nvec->rx->pos : 0,
@@ -755,9 +775,15 @@ static void tegra_init_i2c_slave(struct nvec_chip *nvec)
 	clk_prepare_enable(nvec->i2c_clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_periph_reset_assert(nvec->i2c_clk);
 	udelay(2);
 	tegra_periph_reset_deassert(nvec->i2c_clk);
+=======
+	reset_control_assert(nvec->rst);
+	udelay(2);
+	reset_control_deassert(nvec->rst);
+>>>>>>> v3.18
 =======
 	reset_control_assert(nvec->rst);
 	udelay(2);
@@ -778,8 +804,11 @@ static void tegra_init_i2c_slave(struct nvec_chip *nvec)
 
 	enable_irq(nvec->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	clk_disable_unprepare(nvec->i2c_clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -802,7 +831,10 @@ static void nvec_power_off(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  *  Parse common device tree data
  */
@@ -824,13 +856,19 @@ static int nvec_i2c_parse_dt_pdata(struct nvec_chip *nvec)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tegra_nvec_probe(struct platform_device *pdev)
 {
 	int err, ret;
 	struct clk *i2c_clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvec_platform_data *pdata = pdev->dev.platform_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct nvec_chip *nvec;
@@ -841,6 +879,7 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 		unmute_speakers[] = { NVEC_OEM0, 0x10, 0x59, 0x95 },
 		enable_event[7] = { NVEC_SYS, CNF_EVENT_REPORTING, true };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nvec = devm_kzalloc(&pdev->dev, sizeof(struct nvec_chip), GFP_KERNEL);
 	if (nvec == NULL) {
@@ -870,6 +909,8 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!pdev->dev.of_node) {
 		dev_err(&pdev->dev, "must be instantiated using device tree\n");
 		return -ENODEV;
@@ -885,6 +926,9 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 	err = nvec_i2c_parse_dt_pdata(nvec);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -893,8 +937,13 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 		return PTR_ERR(base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 	if (!res) {
+=======
+	nvec->irq = platform_get_irq(pdev, 0);
+	if (nvec->irq < 0) {
+>>>>>>> v3.18
 =======
 	nvec->irq = platform_get_irq(pdev, 0);
 	if (nvec->irq < 0) {
@@ -910,9 +959,12 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvec->base = base;
 	nvec->irq = res->start;
 =======
+=======
+>>>>>>> v3.18
 	nvec->rst = devm_reset_control_get(&pdev->dev, "i2c");
 	if (IS_ERR(nvec->rst)) {
 		dev_err(nvec->dev, "failed to get controller reset\n");
@@ -920,6 +972,9 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 	}
 
 	nvec->base = base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nvec->i2c_clk = i2c_clk;
 	nvec->rx = &nvec->msg_pool[0];
@@ -954,9 +1009,12 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 	tegra_init_i2c_slave(nvec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(i2c_clk);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* enable event reporting */
@@ -980,7 +1038,11 @@ static int tegra_nvec_probe(struct platform_device *pdev)
 
 	ret = mfd_add_devices(nvec->dev, -1, nvec_devices,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      ARRAY_SIZE(nvec_devices), base, 0, NULL);
+=======
+			      ARRAY_SIZE(nvec_devices), NULL, 0, NULL);
+>>>>>>> v3.18
 =======
 			      ARRAY_SIZE(nvec_devices), NULL, 0, NULL);
 >>>>>>> v3.18
@@ -1051,7 +1113,11 @@ static int nvec_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SIMPLE_DEV_PM_OPS(nvec_pm_ops, nvec_suspend, nvec_resume);
+=======
+static SIMPLE_DEV_PM_OPS(nvec_pm_ops, nvec_suspend, nvec_resume);
+>>>>>>> v3.18
 =======
 static SIMPLE_DEV_PM_OPS(nvec_pm_ops, nvec_suspend, nvec_resume);
 >>>>>>> v3.18

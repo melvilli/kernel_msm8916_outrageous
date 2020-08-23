@@ -366,14 +366,20 @@ static int hvc_open(struct tty_struct *tty, struct file * filp)
 		tty_port_put(&hp->port);
 		printk(KERN_ERR "hvc_open: request_irq failed with rc %d.\n", rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 	} else
 		/* We are ready... raise DTR/RTS */
 		if (C_BAUD(tty))
 			if (hp->ops->dtr_rts)
 				hp->ops->dtr_rts(hp, 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Force wakeup of the polling thread */
 	hvc_kick();
@@ -407,11 +413,17 @@ static void hvc_close(struct tty_struct *tty, struct file * filp)
 		tty_port_tty_set(&hp->port, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (C_HUPCL(tty))
 			if (hp->ops->dtr_rts)
 				hp->ops->dtr_rts(hp, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (hp->ops->notifier_del)
 			hp->ops->notifier_del(hp, hp->data);
@@ -768,11 +780,14 @@ static int khvcd(void *unused)
 				schedule();
 			else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (timeout < MAX_TIMEOUT)
 					timeout += (timeout >> 6) + 1;
 
 				msleep_interruptible(timeout);
 =======
+=======
+>>>>>>> v3.18
 				unsigned long j_timeout;
 
 				if (timeout < MAX_TIMEOUT)
@@ -784,6 +799,9 @@ static int khvcd(void *unused)
 				 */
 				j_timeout = msecs_to_jiffies(timeout) + 1;
 				schedule_timeout_interruptible(j_timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -814,7 +832,11 @@ static int hvc_tiocmset(struct tty_struct *tty,
 
 #ifdef CONFIG_CONSOLE_POLL
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hvc_poll_init(struct tty_driver *driver, int line, char *options)
+=======
+static int hvc_poll_init(struct tty_driver *driver, int line, char *options)
+>>>>>>> v3.18
 =======
 static int hvc_poll_init(struct tty_driver *driver, int line, char *options)
 >>>>>>> v3.18

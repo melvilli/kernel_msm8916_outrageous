@@ -44,7 +44,11 @@ struct iounit_struct {
 	unsigned long		bmap[(IOUNIT_DMA_SIZE >> (PAGE_SHIFT + 3)) / sizeof(unsigned long)];
 	spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iopte_t			*page_table;
+=======
+	iopte_t __iomem		*page_table;
+>>>>>>> v3.18
 =======
 	iopte_t __iomem		*page_table;
 >>>>>>> v3.18

@@ -18,6 +18,7 @@
 
 struct pt_regs {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * 1 word gutter after reg-file has been saved
 	 * Technically not needed, Since SP always points to a "full" location
@@ -31,18 +32,24 @@ struct pt_regs {
 	long lp_end;
 	long lp_count;
 =======
+=======
+>>>>>>> v3.18
 
 	/* Real registers */
 	long bta;	/* bta_l1, bta_l2, erbta */
 
 	long lp_start, lp_end, lp_count;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	long status32;	/* status32_l1, status32_l2, erstatus */
 	long ret;	/* ilink1, ilink2 or eret */
 	long blink;
 	long fp;
 	long r26;	/* gp */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	long r12;
 	long r11;
@@ -73,6 +80,8 @@ struct pt_regs {
 		long orig_r8_word;
 	};
 =======
+=======
+>>>>>>> v3.18
 
 	long r12, r11, r10, r9, r8, r7, r6, r5, r4, r3, r2, r1, r0;
 
@@ -100,12 +109,16 @@ struct pt_regs {
 	};
 
 	long user_r25;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* Callee saved registers - need to be saved only when you are scheduled out */
 
 struct callee_regs {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	long res;	/* Again this is not needed */
 	long r25;
@@ -125,10 +138,15 @@ struct callee_regs {
 
 #define instruction_pointer(regs)	(unsigned long)((regs)->ret)
 =======
+=======
+>>>>>>> v3.18
 	long r25, r24, r23, r22, r21, r20, r19, r18, r17, r16, r15, r14, r13;
 };
 
 #define instruction_pointer(regs)	((regs)->ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define profile_pc(regs)		instruction_pointer(regs)
 
@@ -148,12 +166,15 @@ struct callee_regs {
 #define delay_mode(regs) ((regs->status32 & STATUS_DE_MASK) == STATUS_DE_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define in_syscall(regs)    (regs->event & orig_r8_IS_SCALL)
 #define in_brkpt_trap(regs) (regs->event & orig_r8_IS_BRKPT)
 
 #define syscall_wont_restart(regs) (regs->event |= orig_r8_IS_SCALL_RESTARTED)
 #define syscall_restartable(regs) !(regs->event &  orig_r8_IS_SCALL_RESTARTED)
 =======
+=======
+>>>>>>> v3.18
 #define in_syscall(regs)    ((regs->ecr_vec == ECR_V_TRAP) && !regs->ecr_param)
 #define in_brkpt_trap(regs) ((regs->ecr_vec == ECR_V_TRAP) && regs->ecr_param)
 
@@ -161,6 +182,9 @@ struct callee_regs {
 
 #define syscall_wont_restart(reg) (reg->state |= STATE_SCALL_RESTARTED)
 #define syscall_restartable(reg) !(reg->state &  STATE_SCALL_RESTARTED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define current_pt_regs()					\
@@ -169,7 +193,11 @@ struct callee_regs {
 	register unsigned long sp asm ("sp");			\
 	unsigned long pg_start = (sp & ~(THREAD_SIZE - 1));	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(struct pt_regs *)(pg_start + THREAD_SIZE - 4) - 1;	\
+=======
+	(struct pt_regs *)(pg_start + THREAD_SIZE) - 1;	\
+>>>>>>> v3.18
 =======
 	(struct pt_regs *)(pg_start + THREAD_SIZE) - 1;	\
 >>>>>>> v3.18
@@ -183,6 +211,7 @@ static inline long regs_return_value(struct pt_regs *regs)
 #endif /* !__ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define orig_r8_IS_SCALL		0x0001
 #define orig_r8_IS_SCALL_RESTARTED	0x0002
 #define orig_r8_IS_BRKPT		0x0004
@@ -190,6 +219,8 @@ static inline long regs_return_value(struct pt_regs *regs)
 #define orig_r8_IS_IRQ1			0x0010
 #define orig_r8_IS_IRQ2			0x0020
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASM_PTRACE_H */

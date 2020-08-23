@@ -442,6 +442,10 @@ static int mvs_task_prep_ata(struct mvs_info *mvi,
 			     struct mvs_task_exec_info *tei)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sas_ha_struct *sha = mvi->sas;
+>>>>>>> v3.18
 =======
 	struct sas_ha_struct *sha = mvi->sas;
 >>>>>>> v3.18
@@ -451,6 +455,11 @@ static int mvs_task_prep_ata(struct mvs_info *mvi,
 	struct mvs_cmd_hdr *hdr = tei->hdr;
 	struct asd_sas_port *sas_port = dev->port;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sas_phy *sphy = dev->phy;
+	struct asd_sas_phy *sas_phy = sha->sas_phy[sphy->number];
+>>>>>>> v3.18
 =======
 	struct sas_phy *sphy = dev->phy;
 	struct asd_sas_phy *sas_phy = sha->sas_phy[sphy->number];
@@ -475,7 +484,11 @@ static int mvs_task_prep_ata(struct mvs_info *mvi,
 	del_q = TXQ_MODE_I | tag |
 		(TXQ_CMD_STP << TXQ_CMD_SHIFT) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		((sas_port->phy_mask & TXQ_PHY_MASK) << TXQ_PHY_SHIFT) |
+=======
+		(MVS_PHY_ID << TXQ_PHY_SHIFT) |
+>>>>>>> v3.18
 =======
 		(MVS_PHY_ID << TXQ_PHY_SHIFT) |
 >>>>>>> v3.18
@@ -697,7 +710,12 @@ static int mvs_task_prep_ssp(struct mvs_info *mvi,
 		buf_cmd[9] = fburst | task->ssp_task.task_attr |
 				(task->ssp_task.task_prio << 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(buf_cmd + 12, &task->ssp_task.cdb, 16);
+=======
+		memcpy(buf_cmd + 12, task->ssp_task.cmd->cmnd,
+		       task->ssp_task.cmd->cmd_len);
+>>>>>>> v3.18
 =======
 		memcpy(buf_cmd + 12, task->ssp_task.cmd->cmnd,
 		       task->ssp_task.cmd->cmd_len);
@@ -755,8 +773,13 @@ static int mvs_task_prep(struct sas_task *task, struct mvs_info *mvi, int is_tmf
 				SAS_ADDR(dev->sas_addr));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = SAS_PHY_DOWN;
 		return rc;
+=======
+			rc = SAS_PHY_DOWN;
+			return rc;
+>>>>>>> v3.18
 =======
 			rc = SAS_PHY_DOWN;
 			return rc;
@@ -1011,8 +1034,11 @@ static void mvs_slot_task_free(struct mvs_info *mvi, struct sas_task *task,
 			  struct mvs_slot_info *slot, u32 slot_idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!slot)
 		return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!slot->task)
@@ -1369,6 +1395,7 @@ void mvs_dev_gone_notify(struct domain_device *dev)
 	unsigned long flags = 0;
 	struct mvs_device *mvi_dev = dev->lldd_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mvs_info *mvi = mvi_dev->mvi_info;
 
 	spin_lock_irqsave(&mvi->lock, flags);
@@ -1383,6 +1410,8 @@ void mvs_dev_gone_notify(struct domain_device *dev)
 		mv_dprintk("found dev has gone.\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct mvs_info *mvi;
 
 	if (!mvi_dev) {
@@ -1400,6 +1429,9 @@ void mvs_dev_gone_notify(struct domain_device *dev)
 	mvs_free_reg_set(mvi, mvi_dev);
 	mvs_free_dev(mvi_dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->lldd_dev = NULL;
 	mvi_dev->sas_device = NULL;
@@ -1456,7 +1488,11 @@ static int mvs_exec_internal_tmf_task(struct domain_device *dev,
 		if (res) {
 			del_timer(&task->slow_task->timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mv_printk("executing internel task failed:%d\n", res);
+=======
+			mv_printk("executing internal task failed:%d\n", res);
+>>>>>>> v3.18
 =======
 			mv_printk("executing internal task failed:%d\n", res);
 >>>>>>> v3.18
@@ -1906,12 +1942,15 @@ int mvs_slot_complete(struct mvs_info *mvi, u32 rx_desc, u32 flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* error info record present */
 	if (unlikely((rx_desc & RXQ_ERR) && (*(u64 *) slot->response))) {
 		mv_dprintk("port %d slot %d rx_desc %X has error info"
 			"%016llX.\n", slot->port->sas_port.id, slot_idx,
 			 rx_desc, (u64)(*(u64 *)slot->response));
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * error info record present; slot->response is 32 bit aligned but may
 	 * not be 64 bit aligned, so check for zero in two 32 bit reads
@@ -1922,6 +1961,9 @@ int mvs_slot_complete(struct mvs_info *mvi, u32 rx_desc, u32 flags)
 		mv_dprintk("port %d slot %d rx_desc %X has error info"
 			"%016llX.\n", slot->port->sas_port.id, slot_idx,
 			 rx_desc, get_unaligned_le64(slot->response));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tstat->stat = mvs_slot_err(mvi, task, slot_idx);
 		tstat->resp = SAS_TASK_COMPLETE;

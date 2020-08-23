@@ -53,7 +53,11 @@ struct fq_codel_flow {
 
 struct fq_codel_sched_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_proto *filter_list;	/* optional external classifier */
+=======
+	struct tcf_proto __rcu *filter_list; /* optional external classifier */
+>>>>>>> v3.18
 =======
 	struct tcf_proto __rcu *filter_list; /* optional external classifier */
 >>>>>>> v3.18
@@ -82,7 +86,12 @@ static unsigned int fq_codel_hash(const struct fq_codel_sched_data *q,
 			    (__force u32)keys.src ^ keys.ip_proto,
 			    (__force u32)keys.ports, q->perturbation);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((u64)hash * q->flows_cnt) >> 32;
+=======
+
+	return reciprocal_scale(hash, q->flows_cnt);
+>>>>>>> v3.18
 =======
 
 	return reciprocal_scale(hash, q->flows_cnt);
@@ -94,6 +103,10 @@ static unsigned int fq_codel_classify(struct sk_buff *skb, struct Qdisc *sch,
 {
 	struct fq_codel_sched_data *q = qdisc_priv(sch);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto *filter;
+>>>>>>> v3.18
 =======
 	struct tcf_proto *filter;
 >>>>>>> v3.18
@@ -106,18 +119,24 @@ static unsigned int fq_codel_classify(struct sk_buff *skb, struct Qdisc *sch,
 		return TC_H_MIN(skb->priority);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!q->filter_list)
 		return fq_codel_hash(q, skb) + 1;
 
 	*qerr = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 	result = tc_classify(skb, q->filter_list, &res);
 =======
+=======
+>>>>>>> v3.18
 	filter = rcu_dereference(q->filter_list);
 	if (!filter)
 		return fq_codel_hash(q, skb) + 1;
 
 	*qerr = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 	result = tc_classify(skb, filter, &res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (result >= 0) {
 #ifdef CONFIG_NET_CLS_ACT
@@ -184,8 +203,13 @@ static unsigned int fq_codel_drop(struct Qdisc *sch)
 	kfree_skb(skb);
 	sch->q.qlen--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.drops++;
 	sch->qstats.backlog -= len;
+=======
+	qdisc_qstats_drop(sch);
+	qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_drop(sch);
 	qdisc_qstats_backlog_dec(sch, skb);
@@ -205,7 +229,11 @@ static int fq_codel_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	if (idx == 0) {
 		if (ret & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -219,7 +247,11 @@ static int fq_codel_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	flow_queue_add(flow, skb);
 	q->backlogs[idx] += qdisc_pkt_len(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.backlog += qdisc_pkt_len(skb);
+=======
+	qdisc_qstats_backlog_inc(sch, skb);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_backlog_inc(sch, skb);
 >>>>>>> v3.18
@@ -401,12 +433,16 @@ static void *fq_codel_zalloc(size_t sz)
 static void fq_codel_free(void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr) {
 		if (is_vmalloc_addr(addr))
 			vfree(addr);
 		else
 			kfree(addr);
 	}
+=======
+	kvfree(addr);
+>>>>>>> v3.18
 =======
 	kvfree(addr);
 >>>>>>> v3.18
@@ -430,7 +466,11 @@ static int fq_codel_init(struct Qdisc *sch, struct nlattr *opt)
 	q->flows_cnt = 1024;
 	q->quantum = psched_mtu(qdisc_dev(sch));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->perturbation = net_random();
+=======
+	q->perturbation = prandom_u32();
+>>>>>>> v3.18
 =======
 	q->perturbation = prandom_u32();
 >>>>>>> v3.18
@@ -494,8 +534,12 @@ static int fq_codel_dump(struct Qdisc *sch, struct sk_buff *skb)
 		goto nla_put_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nla_nest_end(skb, opts);
 	return skb->len;
+=======
+	return nla_nest_end(skb, opts);
+>>>>>>> v3.18
 =======
 	return nla_nest_end(skb, opts);
 >>>>>>> v3.18
@@ -549,7 +593,12 @@ static void fq_codel_put(struct Qdisc *q, unsigned long cl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **fq_codel_find_tcf(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **fq_codel_find_tcf(struct Qdisc *sch,
+						  unsigned long cl)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **fq_codel_find_tcf(struct Qdisc *sch,
 						  unsigned long cl)
@@ -605,7 +654,11 @@ static int fq_codel_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 		qs.drops = flow->dropped;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gnet_stats_copy_queue(d, &qs) < 0)
+=======
+	if (gnet_stats_copy_queue(d, NULL, &qs, 0) < 0)
+>>>>>>> v3.18
 =======
 	if (gnet_stats_copy_queue(d, NULL, &qs, 0) < 0)
 >>>>>>> v3.18

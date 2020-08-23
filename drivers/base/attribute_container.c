@@ -13,7 +13,10 @@
 
 #include <linux/attribute_container.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/device.h>
@@ -79,9 +82,15 @@ attribute_container_register(struct attribute_container *cont)
 {
 	INIT_LIST_HEAD(&cont->node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	klist_init(&cont->containers,internal_container_klist_get,
 		   internal_container_klist_put);
 		
+=======
+	klist_init(&cont->containers, internal_container_klist_get,
+		   internal_container_klist_put);
+
+>>>>>>> v3.18
 =======
 	klist_init(&cont->containers, internal_container_klist_get,
 		   internal_container_klist_put);
@@ -115,7 +124,11 @@ attribute_container_unregister(struct attribute_container *cont)
 	mutex_unlock(&attribute_container_mutex);
 	return retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -126,7 +139,11 @@ EXPORT_SYMBOL_GPL(attribute_container_unregister);
 static void attribute_container_release(struct device *classdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct internal_container *ic 
+=======
+	struct internal_container *ic
+>>>>>>> v3.18
 =======
 	struct internal_container *ic
 >>>>>>> v3.18
@@ -185,7 +202,11 @@ attribute_container_add_device(struct device *dev,
 		ic->classdev.class = cont->class;
 		cont->class->dev_release = attribute_container_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_name(&ic->classdev, dev_name(dev));
+=======
+		dev_set_name(&ic->classdev, "%s", dev_name(dev));
+>>>>>>> v3.18
 =======
 		dev_set_name(&ic->classdev, "%s", dev_name(dev));
 >>>>>>> v3.18
@@ -207,8 +228,13 @@ attribute_container_add_device(struct device *dev,
 		n ? container_of(n, typeof(*pos), member) : \
 			({ klist_iter_exit(iter) ; NULL; }); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}) ) != NULL; )
 			
+=======
+	})) != NULL;)
+
+>>>>>>> v3.18
 =======
 	})) != NULL;)
 
@@ -275,7 +301,11 @@ attribute_container_remove_device(struct device *dev,
  */
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 attribute_container_device_trigger(struct device *dev, 
+=======
+attribute_container_device_trigger(struct device *dev,
+>>>>>>> v3.18
 =======
 attribute_container_device_trigger(struct device *dev,
 >>>>>>> v3.18

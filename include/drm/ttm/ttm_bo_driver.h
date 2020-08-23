@@ -34,12 +34,15 @@
 #include <ttm/ttm_memory.h>
 #include <ttm/ttm_module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_mm.h>
 #include <drm/drm_global.h>
 #include <linux/workqueue.h>
 #include <linux/fs.h>
 #include <linux/spinlock.h>
 =======
+=======
+>>>>>>> v3.18
 #include <ttm/ttm_placement.h>
 #include <drm/drm_mm.h>
 #include <drm/drm_global.h>
@@ -48,6 +51,9 @@
 #include <linux/fs.h>
 #include <linux/spinlock.h>
 #include <linux/reservation.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ttm_backend_func {
@@ -142,6 +148,10 @@ struct ttm_tt {
  *
  * @ttm: Base ttm_tt struct.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cpu_address: The CPU address of the pages
+>>>>>>> v3.18
 =======
  * @cpu_address: The CPU address of the pages
 >>>>>>> v3.18
@@ -155,6 +165,10 @@ struct ttm_tt {
 struct ttm_dma_tt {
 	struct ttm_tt ttm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void **cpu_address;
+>>>>>>> v3.18
 =======
 	void **cpu_address;
 >>>>>>> v3.18
@@ -199,6 +213,10 @@ struct ttm_mem_type_manager_func {
 	 * @bo: Pointer to the buffer object we're allocating space for.
 	 * @placement: Placement details.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * @flags: Additional placement flags.
+>>>>>>> v3.18
 =======
 	 * @flags: Additional placement flags.
 >>>>>>> v3.18
@@ -226,7 +244,11 @@ struct ttm_mem_type_manager_func {
 	int  (*get_node)(struct ttm_mem_type_manager *man,
 			 struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ttm_placement *placement,
+=======
+			 const struct ttm_place *place,
+>>>>>>> v3.18
 =======
 			 const struct ttm_place *place,
 >>>>>>> v3.18
@@ -334,11 +356,14 @@ struct ttm_mem_type_manager {
  * move a buffer.
  * If set to NULL, a potentially slow memcpy() move is used.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sync_obj_signaled: See ttm_fence_api.h
  * @sync_obj_wait: See ttm_fence_api.h
  * @sync_obj_flush: See ttm_fence_api.h
  * @sync_obj_unref: See ttm_fence_api.h
  * @sync_obj_ref: See ttm_fence_api.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -443,6 +468,7 @@ struct ttm_bo_driver {
 			      struct file *filp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/**
 	 * In case a driver writer dislikes the TTM fence objects,
 	 * the driver writer can replace those with sync objects of
@@ -460,6 +486,8 @@ struct ttm_bo_driver {
 	void (*sync_obj_unref) (void **sync_obj);
 	void *(*sync_obj_ref) (void *sync_obj);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* hook to notify driver about a driver move so it
@@ -549,9 +577,13 @@ struct ttm_bo_global {
  * @driver: Pointer to a struct ttm_bo_driver struct setup by the driver.
  * @man: An array of mem_type_managers.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @fence_lock: Protects the synchronizing members on *all* bos belonging
  * to this device.
  * @addr_space_mm: Range manager for the device address space.
+=======
+ * @vma_manager: Address space manager
+>>>>>>> v3.18
 =======
  * @vma_manager: Address space manager
 >>>>>>> v3.18
@@ -573,6 +605,7 @@ struct ttm_bo_device {
 	struct ttm_bo_global *glob;
 	struct ttm_bo_driver *driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rwlock_t vm_lock;
 	struct ttm_mem_type_manager man[TTM_NUM_MEM_TYPES];
 	spinlock_t fence_lock;
@@ -582,12 +615,17 @@ struct ttm_bo_device {
 	struct rb_root addr_space_rb;
 	struct drm_mm addr_space_mm;
 =======
+=======
+>>>>>>> v3.18
 	struct ttm_mem_type_manager man[TTM_NUM_MEM_TYPES];
 
 	/*
 	 * Protected by internal locks.
 	 */
 	struct drm_vma_offset_manager vma_manager;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -698,6 +736,7 @@ extern int ttm_tt_swapin(struct ttm_tt *ttm);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ttm_tt_cache_flush:
  *
  * @pages: An array of pointers to struct page:s to flush.
@@ -710,6 +749,8 @@ extern int ttm_tt_swapin(struct ttm_tt *ttm);
 extern void ttm_tt_cache_flush(struct page *pages[], unsigned long num_pages);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ttm_tt_set_placement_caching:
@@ -729,7 +770,10 @@ extern int ttm_tt_swapout(struct ttm_tt *ttm,
 			  struct file *persistent_swap_storage);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ttm_tt_unpopulate - free pages from a ttm
  *
@@ -739,6 +783,9 @@ extern int ttm_tt_swapout(struct ttm_tt *ttm,
  */
 extern void ttm_tt_unpopulate(struct ttm_tt *ttm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * ttm_bo.c
@@ -798,6 +845,10 @@ extern int ttm_bo_device_release(struct ttm_bo_device *bdev);
  * @glob: A pointer to an initialized struct ttm_bo_global.
  * @driver: A pointer to a struct ttm_bo_driver set up by the caller.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @mapping: The address space to use for this bo.
+>>>>>>> v3.18
 =======
  * @mapping: The address space to use for this bo.
 >>>>>>> v3.18
@@ -813,6 +864,10 @@ extern int ttm_bo_device_init(struct ttm_bo_device *bdev,
 			      struct ttm_bo_global *glob,
 			      struct ttm_bo_driver *driver,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			      struct address_space *mapping,
+>>>>>>> v3.18
 =======
 			      struct address_space *mapping,
 >>>>>>> v3.18
@@ -841,7 +896,10 @@ extern int ttm_mem_io_lock(struct ttm_mem_type_manager *man,
 extern void ttm_mem_io_unlock(struct ttm_mem_type_manager *man);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void ttm_bo_del_sub_from_lru(struct ttm_buffer_object *bo);
 extern void ttm_bo_add_to_lru(struct ttm_buffer_object *bo);
 
@@ -891,6 +949,9 @@ static inline int __ttm_bo_reserve(struct ttm_buffer_object *bo,
 		return -ERESTARTSYS;
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -900,8 +961,13 @@ static inline int __ttm_bo_reserve(struct ttm_buffer_object *bo,
  * @interruptible: Sleep interruptible if waiting.
  * @no_wait: Don't sleep while trying to reserve, rather return -EBUSY.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @use_sequence: If @bo is already reserved, Only sleep waiting for
  * it to become unreserved if @sequence < (@bo)->sequence.
+=======
+ * @use_ticket: If @bo is already reserved, Only sleep waiting for
+ * it to become unreserved if @ticket->stamp is older.
+>>>>>>> v3.18
 =======
  * @use_ticket: If @bo is already reserved, Only sleep waiting for
  * it to become unreserved if @ticket->stamp is older.
@@ -920,7 +986,11 @@ static inline int __ttm_bo_reserve(struct ttm_buffer_object *bo,
  * (typically execbuf), should first obtain a unique 32-bit
  * validation sequence number,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and call this function with @use_sequence == 1 and @sequence == the unique
+=======
+ * and call this function with @use_ticket == 1 and @ticket->stamp == the unique
+>>>>>>> v3.18
 =======
  * and call this function with @use_ticket == 1 and @ticket->stamp == the unique
 >>>>>>> v3.18
@@ -939,7 +1009,11 @@ static inline int __ttm_bo_reserve(struct ttm_buffer_object *bo,
  *
  * Returns:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * -EAGAIN: The reservation may cause a deadlock.
+=======
+ * -EDEADLK: The reservation may cause a deadlock.
+>>>>>>> v3.18
 =======
  * -EDEADLK: The reservation may cause a deadlock.
 >>>>>>> v3.18
@@ -948,6 +1022,7 @@ static inline int __ttm_bo_reserve(struct ttm_buffer_object *bo,
  * -ERESTARTSYS: A wait for the buffer to become unreserved was interrupted by
  * a signal. Release all buffer reservations and return to user-space.
  * -EBUSY: The function needed to sleep, but @no_wait was true
+<<<<<<< HEAD
 <<<<<<< HEAD
  * -EDEADLK: Bo already reserved using @sequence. This error code will only
  * be returned if @use_sequence is set to true.
@@ -974,6 +1049,8 @@ extern int ttm_bo_reserve_slowpath_nolru(struct ttm_buffer_object *bo,
 					 uint32_t sequence);
 
 =======
+=======
+>>>>>>> v3.18
  * -EALREADY: Bo already reserved using @ticket. This error code will only
  * be returned if @use_ticket is set to true.
  */
@@ -992,6 +1069,9 @@ static inline int ttm_bo_reserve(struct ttm_buffer_object *bo,
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1004,6 +1084,7 @@ static inline int ttm_bo_reserve(struct ttm_buffer_object *bo,
  * from all our other reservations. Because there are no other reservations
  * held by us, this function cannot deadlock any more.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int ttm_bo_reserve_slowpath(struct ttm_buffer_object *bo,
 				   bool interruptible, uint32_t sequence);
@@ -1035,6 +1116,8 @@ extern int ttm_bo_reserve_nolru(struct ttm_buffer_object *bo,
 				 bool no_wait, bool use_sequence,
 				 uint32_t sequence);
 =======
+=======
+>>>>>>> v3.18
 static inline int ttm_bo_reserve_slowpath(struct ttm_buffer_object *bo,
 					  bool interruptible,
 					  struct ww_acquire_ctx *ticket)
@@ -1068,6 +1151,9 @@ static inline void __ttm_bo_unreserve(struct ttm_buffer_object *bo)
 {
 	ww_mutex_unlock(&bo->resv->lock);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1077,6 +1163,7 @@ static inline void __ttm_bo_unreserve(struct ttm_buffer_object *bo)
  *
  * Unreserve a previous reservation of @bo.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void ttm_bo_unreserve(struct ttm_buffer_object *bo);
 
@@ -1090,6 +1177,8 @@ extern void ttm_bo_unreserve(struct ttm_buffer_object *bo);
  */
 extern void ttm_bo_unreserve_locked(struct ttm_buffer_object *bo);
 =======
+=======
+>>>>>>> v3.18
 static inline void ttm_bo_unreserve(struct ttm_buffer_object *bo)
 {
 	if (!(bo->mem.placement & TTM_PL_FLAG_NO_EVICT)) {
@@ -1112,6 +1201,9 @@ static inline void ttm_bo_unreserve_ticket(struct ttm_buffer_object *bo,
 {
 	ttm_bo_unreserve(bo);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1180,7 +1272,11 @@ extern void ttm_bo_free_old_node(struct ttm_buffer_object *bo);
  *
  * @bo: A pointer to a struct ttm_buffer_object.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sync_obj: A sync object that signals when moving is complete.
+=======
+ * @fence: A fence object that signals when moving is complete.
+>>>>>>> v3.18
 =======
  * @fence: A fence object that signals when moving is complete.
 >>>>>>> v3.18
@@ -1198,7 +1294,11 @@ extern void ttm_bo_free_old_node(struct ttm_buffer_object *bo);
 
 extern int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     void *sync_obj,
+=======
+				     struct fence *fence,
+>>>>>>> v3.18
 =======
 				     struct fence *fence,
 >>>>>>> v3.18

@@ -25,7 +25,10 @@
 struct device mxc_aips_bus = {
 	.init_name	= "mxc_aips",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.parent		= &platform_bus,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -33,7 +36,10 @@ struct device mxc_aips_bus = {
 struct device mxc_ahb_bus = {
 	.init_name	= "mxc_ahb",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.parent		= &platform_bus,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

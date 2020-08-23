@@ -103,12 +103,18 @@ struct usbdevfs_urb {
 	int actual_length;
 	int start_frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int number_of_packets;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		int number_of_packets;	/* Only used for isoc urbs */
 		unsigned int stream_id;	/* Only used with bulk streams */
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int error_count;
 	unsigned int signr;	/* signal to be sent on completion,
@@ -133,7 +139,11 @@ struct usbdevfs_hub_portinfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* System and bus capability flags */
+=======
+/* Device capability flags */
+>>>>>>> v3.18
 =======
 /* Device capability flags */
 >>>>>>> v3.18
@@ -142,7 +152,10 @@ struct usbdevfs_hub_portinfo {
 #define USBDEVFS_CAP_NO_PACKET_SIZE_LIM		0x04
 #define USBDEVFS_CAP_BULK_SCATTER_GATHER	0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USBDEVFS_CAP_REAP_AFTER_DISCONNECT	0x10
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -160,12 +173,18 @@ struct usbdevfs_disconnect_claim {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct usbdevfs_streams {
 	unsigned int num_streams; /* Not used by USBDEVFS_FREE_STREAMS */
 	unsigned int num_eps;
 	unsigned char eps[0];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define USBDEVFS_CONTROL           _IOWR('U', 0, struct usbdevfs_ctrltransfer)
@@ -200,6 +219,11 @@ struct usbdevfs_streams {
 #define USBDEVFS_GET_CAPABILITIES  _IOR('U', 26, __u32)
 #define USBDEVFS_DISCONNECT_CLAIM  _IOR('U', 27, struct usbdevfs_disconnect_claim)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USBDEVFS_ALLOC_STREAMS     _IOR('U', 28, struct usbdevfs_streams)
+#define USBDEVFS_FREE_STREAMS      _IOR('U', 29, struct usbdevfs_streams)
+>>>>>>> v3.18
 =======
 #define USBDEVFS_ALLOC_STREAMS     _IOR('U', 28, struct usbdevfs_streams)
 #define USBDEVFS_FREE_STREAMS      _IOR('U', 29, struct usbdevfs_streams)

@@ -53,6 +53,10 @@ struct nfs_access_entry {
 	struct rpc_cred *	cred;
 	int			mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head		rcu_head;
+>>>>>>> v3.18
 =======
 	struct rcu_head		rcu_head;
 >>>>>>> v3.18
@@ -97,6 +101,10 @@ struct nfs_open_context {
 
 struct nfs_open_dir_context {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head list;
+>>>>>>> v3.18
 =======
 	struct list_head list;
 >>>>>>> v3.18
@@ -163,10 +171,13 @@ struct nfs_inode {
 	struct list_head	access_cache_entry_lru;
 	struct list_head	access_cache_inode_lru;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NFS_V3_ACL
 	struct posix_acl	*acl_access;
 	struct posix_acl	*acl_default;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -219,6 +230,10 @@ struct nfs_inode {
 #define NFS_INO_REVAL_PAGECACHE	0x0020		/* must revalidate pagecache */
 #define NFS_INO_REVAL_FORCED	0x0040		/* force revalidation ignoring a delegation */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NFS_INO_INVALID_LABEL	0x0080		/* cached label is invalid */
+>>>>>>> v3.18
 =======
 #define NFS_INO_INVALID_LABEL	0x0080		/* cached label is invalid */
 >>>>>>> v3.18
@@ -230,6 +245,10 @@ struct nfs_inode {
 #define NFS_INO_STALE		(1)		/* possible stale inode */
 #define NFS_INO_ACL_LRU_SET	(2)		/* Inode is on the LRU list */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NFS_INO_INVALIDATING	(3)		/* inode is being invalidated */
+>>>>>>> v3.18
 =======
 #define NFS_INO_INVALIDATING	(3)		/* inode is being invalidated */
 >>>>>>> v3.18
@@ -288,10 +307,13 @@ static inline int NFS_STALE(const struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int NFS_FSCACHE(const struct inode *inode)
 {
 	return test_bit(NFS_INO_FSCACHE, &NFS_I(inode)->flags);
 =======
+=======
+>>>>>>> v3.18
 static inline struct fscache_cookie *nfs_i_fscache(struct inode *inode)
 {
 #ifdef CONFIG_NFS_FSCACHE
@@ -299,6 +321,9 @@ static inline struct fscache_cookie *nfs_i_fscache(struct inode *inode)
 #else
 	return NULL;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -366,7 +391,11 @@ extern void nfs_zap_caches(struct inode *);
 extern void nfs_invalidate_atime(struct inode *);
 extern struct inode *nfs_fhget(struct super_block *, struct nfs_fh *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct nfs_fattr *);
+=======
+				struct nfs_fattr *, struct nfs4_label *);
+>>>>>>> v3.18
 =======
 				struct nfs_fattr *, struct nfs4_label *);
 >>>>>>> v3.18
@@ -381,7 +410,13 @@ extern int nfs_open(struct inode *, struct file *);
 extern int nfs_release(struct inode *, struct file *);
 extern int nfs_attribute_timeout(struct inode *inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nfs_revalidate_inode(struct nfs_server *server, struct inode *inode);
+=======
+extern int nfs_attribute_cache_expired(struct inode *inode);
+extern int nfs_revalidate_inode(struct nfs_server *server, struct inode *inode);
+extern int nfs_revalidate_inode_rcu(struct nfs_server *server, struct inode *inode);
+>>>>>>> v3.18
 =======
 extern int nfs_attribute_cache_expired(struct inode *inode);
 extern int nfs_revalidate_inode(struct nfs_server *server, struct inode *inode);
@@ -392,6 +427,11 @@ extern int nfs_revalidate_mapping(struct inode *inode, struct address_space *map
 extern int nfs_setattr(struct dentry *, struct iattr *);
 extern void nfs_setattr_update_inode(struct inode *inode, struct iattr *attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void nfs_setsecurity(struct inode *inode, struct nfs_fattr *fattr,
+				struct nfs4_label *label);
+>>>>>>> v3.18
 =======
 extern void nfs_setsecurity(struct inode *inode, struct nfs_fattr *fattr,
 				struct nfs4_label *label);
@@ -401,6 +441,10 @@ extern void put_nfs_open_context(struct nfs_open_context *ctx);
 extern struct nfs_open_context *nfs_find_open_context(struct inode *inode, struct rpc_cred *cred, fmode_t mode);
 extern struct nfs_open_context *alloc_nfs_open_context(struct dentry *dentry, fmode_t f_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void nfs_inode_attach_open_context(struct nfs_open_context *ctx);
+>>>>>>> v3.18
 =======
 extern void nfs_inode_attach_open_context(struct nfs_open_context *ctx);
 >>>>>>> v3.18
@@ -483,6 +527,7 @@ static inline struct rpc_cred *nfs_file_cred(struct file *file)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * linux/fs/nfs/xattr.c
  */
 #ifdef CONFIG_NFS_V3_ACL
@@ -510,6 +555,8 @@ extern ssize_t nfs_file_direct_write(struct kiocb *iocb,
 			const struct iovec *iov, unsigned long nr_segs,
 			loff_t pos, bool uio);
 =======
+=======
+>>>>>>> v3.18
  * linux/fs/nfs/direct.c
  */
 extern ssize_t nfs_direct_IO(int, struct kiocb *, struct iov_iter *, loff_t);
@@ -519,6 +566,9 @@ extern ssize_t nfs_file_direct_read(struct kiocb *iocb,
 extern ssize_t nfs_file_direct_write(struct kiocb *iocb,
 			struct iov_iter *iter,
 			loff_t pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -529,7 +579,12 @@ extern const struct dentry_operations nfs_dentry_operations;
 
 extern void nfs_force_lookup_revalidate(struct inode *dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nfs_instantiate(struct dentry *dentry, struct nfs_fh *fh, struct nfs_fattr *fattr);
+=======
+extern int nfs_instantiate(struct dentry *dentry, struct nfs_fh *fh,
+			struct nfs_fattr *fattr, struct nfs4_label *label);
+>>>>>>> v3.18
 =======
 extern int nfs_instantiate(struct dentry *dentry, struct nfs_fh *fh,
 			struct nfs_fattr *fattr, struct nfs4_label *label);
@@ -566,9 +621,15 @@ extern void nfs_release_automount_timer(void);
  */
 extern void nfs_complete_unlink(struct dentry *dentry, struct inode *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nfs_block_sillyrename(struct dentry *dentry);
 extern void nfs_unblock_sillyrename(struct dentry *dentry);
 extern int  nfs_sillyrename(struct inode *dir, struct dentry *dentry);
+=======
+extern void nfs_wait_on_sillyrename(struct dentry *dentry);
+extern void nfs_block_sillyrename(struct dentry *dentry);
+extern void nfs_unblock_sillyrename(struct dentry *dentry);
+>>>>>>> v3.18
 =======
 extern void nfs_wait_on_sillyrename(struct dentry *dentry);
 extern void nfs_block_sillyrename(struct dentry *dentry);
@@ -584,7 +645,10 @@ extern int  nfs_writepages(struct address_space *, struct writeback_control *);
 extern int  nfs_flush_incompatible(struct file *file, struct page *page);
 extern int  nfs_updatepage(struct file *, struct page *, unsigned int, unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nfs_writeback_done(struct rpc_task *, struct nfs_write_data *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -595,6 +659,7 @@ extern void nfs_writeback_done(struct rpc_task *, struct nfs_write_data *);
 extern int nfs_wb_all(struct inode *inode);
 extern int nfs_wb_page(struct inode *inode, struct page* page);
 extern int nfs_wb_page_cancel(struct inode *inode, struct page* page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if IS_ENABLED(CONFIG_NFS_V3) || IS_ENABLED(CONFIG_NFS_V4)
 extern int  nfs_commit_inode(struct inode *, int);
@@ -607,6 +672,11 @@ nfs_commit_inode(struct inode *inode, int how)
 	return 0;
 }
 #endif
+=======
+extern int  nfs_commit_inode(struct inode *, int);
+extern struct nfs_commit_data *nfs_commitdata_alloc(void);
+extern void nfs_commit_free(struct nfs_commit_data *data);
+>>>>>>> v3.18
 =======
 extern int  nfs_commit_inode(struct inode *, int);
 extern struct nfs_commit_data *nfs_commitdata_alloc(void);
@@ -626,13 +696,17 @@ extern int  nfs_readpage(struct file *, struct page *);
 extern int  nfs_readpages(struct file *, struct address_space *,
 		struct list_head *, unsigned);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  nfs_readpage_result(struct rpc_task *, struct nfs_read_data *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int  nfs_readpage_async(struct nfs_open_context *, struct inode *,
 			       struct page *);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * linux/fs/nfs3proc.c
  */
@@ -659,13 +733,21 @@ static inline void nfs3_forget_cached_acls(struct inode *inode)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * inline functions
  */
 
 static inline loff_t nfs_size_to_loff_t(__u64 size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return min_t(u64, size, OFFSET_MAX);
+=======
+	if (size > (__u64) OFFSET_MAX - 1)
+		return OFFSET_MAX - 1;
+	return (loff_t) size;
+>>>>>>> v3.18
 =======
 	if (size > (__u64) OFFSET_MAX - 1)
 		return OFFSET_MAX - 1;

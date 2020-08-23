@@ -10,6 +10,12 @@
 
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/interrupt.h>
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 #include <linux/interrupt.h>
@@ -21,12 +27,18 @@
 #include "ssb_private.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**************************************************
  * Shared
  **************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ssb_bus *ssb_gpio_get_bus(struct gpio_chip *chip)
 {
@@ -34,7 +46,10 @@ static struct ssb_bus *ssb_gpio_get_bus(struct gpio_chip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SSB_EMBEDDED)
 static int ssb_gpio_to_irq(struct gpio_chip *chip, unsigned gpio)
 {
@@ -51,6 +66,9 @@ static int ssb_gpio_to_irq(struct gpio_chip *chip, unsigned gpio)
  * ChipCommon
  **************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ssb_gpio_chipco_get_value(struct gpio_chip *chip, unsigned gpio)
 {
@@ -108,6 +126,7 @@ static void ssb_gpio_chipco_free(struct gpio_chip *chip, unsigned gpio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ssb_gpio_chipco_to_irq(struct gpio_chip *chip, unsigned gpio)
 {
 	struct ssb_bus *bus = ssb_gpio_get_bus(chip);
@@ -122,6 +141,8 @@ static int ssb_gpio_chipco_init(struct ssb_bus *bus)
 {
 	struct gpio_chip *chip = &bus->gpio;
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SSB_EMBEDDED)
 static void ssb_gpio_irq_chipco_mask(struct irq_data *d)
 {
@@ -245,6 +266,9 @@ static int ssb_gpio_chipco_init(struct ssb_bus *bus)
 {
 	struct gpio_chip *chip = &bus->gpio;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chip->label		= "ssb_chipco_gpio";
@@ -256,7 +280,13 @@ static int ssb_gpio_chipco_init(struct ssb_bus *bus)
 	chip->direction_input	= ssb_gpio_chipco_direction_input;
 	chip->direction_output	= ssb_gpio_chipco_direction_output;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->to_irq		= ssb_gpio_chipco_to_irq;
+=======
+#if IS_ENABLED(CONFIG_SSB_EMBEDDED)
+	chip->to_irq		= ssb_gpio_to_irq;
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SSB_EMBEDDED)
 	chip->to_irq		= ssb_gpio_to_irq;
@@ -272,10 +302,13 @@ static int ssb_gpio_chipco_init(struct ssb_bus *bus)
 		chip->base		= -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_add(chip);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	err = ssb_gpio_irq_chipco_domain_init(bus);
 	if (err)
 		return err;
@@ -293,6 +326,9 @@ static int ssb_gpio_chipco_init(struct ssb_bus *bus)
  * EXTIF
  **************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SSB_DRIVER_EXTIF
 
@@ -331,6 +367,7 @@ static int ssb_gpio_extif_direction_output(struct gpio_chip *chip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ssb_gpio_extif_to_irq(struct gpio_chip *chip, unsigned gpio)
 {
 	struct ssb_bus *bus = ssb_gpio_get_bus(chip);
@@ -341,6 +378,8 @@ static int ssb_gpio_extif_to_irq(struct gpio_chip *chip, unsigned gpio)
 		return -EINVAL;
 }
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SSB_EMBEDDED)
 static void ssb_gpio_irq_extif_mask(struct irq_data *d)
 {
@@ -457,12 +496,19 @@ static void ssb_gpio_irq_extif_domain_exit(struct ssb_bus *bus)
 {
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ssb_gpio_extif_init(struct ssb_bus *bus)
 {
 	struct gpio_chip *chip = &bus->gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -474,7 +520,13 @@ static int ssb_gpio_extif_init(struct ssb_bus *bus)
 	chip->direction_input	= ssb_gpio_extif_direction_input;
 	chip->direction_output	= ssb_gpio_extif_direction_output;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->to_irq		= ssb_gpio_extif_to_irq;
+=======
+#if IS_ENABLED(CONFIG_SSB_EMBEDDED)
+	chip->to_irq		= ssb_gpio_to_irq;
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SSB_EMBEDDED)
 	chip->to_irq		= ssb_gpio_to_irq;
@@ -490,8 +542,11 @@ static int ssb_gpio_extif_init(struct ssb_bus *bus)
 		chip->base		= -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_add(chip);
 =======
+=======
+>>>>>>> v3.18
 	err = ssb_gpio_irq_extif_domain_init(bus);
 	if (err)
 		return err;
@@ -503,6 +558,9 @@ static int ssb_gpio_extif_init(struct ssb_bus *bus)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -514,11 +572,17 @@ static int ssb_gpio_extif_init(struct ssb_bus *bus)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**************************************************
  * Init
  **************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ssb_gpio_init(struct ssb_bus *bus)
 {
@@ -537,7 +601,12 @@ int ssb_gpio_unregister(struct ssb_bus *bus)
 	if (ssb_chipco_available(&bus->chipco) ||
 	    ssb_extif_available(&bus->extif)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return gpiochip_remove(&bus->gpio);
+=======
+		gpiochip_remove(&bus->gpio);
+		return 0;
+>>>>>>> v3.18
 =======
 		gpiochip_remove(&bus->gpio);
 		return 0;

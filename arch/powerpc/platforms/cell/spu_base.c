@@ -77,10 +77,13 @@ static DEFINE_SPINLOCK(spu_full_list_lock);
 static DEFINE_MUTEX(spu_full_list_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct spu_slb {
 	u64 esid, vsid;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void spu_invalidate_slbs(struct spu *spu)
@@ -153,7 +156,11 @@ static void spu_restart_dma(struct spu *spu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void spu_load_slb(struct spu *spu, int slbe, struct spu_slb *slb)
+=======
+static inline void spu_load_slb(struct spu *spu, int slbe, struct copro_slb *slb)
+>>>>>>> v3.18
 =======
 static inline void spu_load_slb(struct spu *spu, int slbe, struct copro_slb *slb)
 >>>>>>> v3.18
@@ -174,6 +181,7 @@ static inline void spu_load_slb(struct spu *spu, int slbe, struct copro_slb *slb
 
 static int __spu_trap_data_seg(struct spu *spu, unsigned long ea)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mm_struct *mm = spu->mm;
 	struct spu_slb slb;
@@ -215,12 +223,17 @@ static int __spu_trap_data_seg(struct spu *spu, unsigned long ea)
 	}
 	slb.vsid |= mmu_psize_defs[psize].sllp;
 =======
+=======
+>>>>>>> v3.18
 	struct copro_slb slb;
 	int ret;
 
 	ret = copro_calculate_slb(spu->mm, ea, &slb);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spu_load_slb(spu, spu->slb_replace, &slb);
@@ -270,7 +283,11 @@ static int __spu_trap_data_map(struct spu *spu, unsigned long ea, u64 dsisr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __spu_kernel_slb(void *addr, struct spu_slb *slb)
+=======
+static void __spu_kernel_slb(void *addr, struct copro_slb *slb)
+>>>>>>> v3.18
 =======
 static void __spu_kernel_slb(void *addr, struct copro_slb *slb)
 >>>>>>> v3.18
@@ -293,7 +310,11 @@ static void __spu_kernel_slb(void *addr, struct copro_slb *slb)
  * address @new_addr is present.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __slb_present(struct spu_slb *slbs, int nr_slbs,
+=======
+static inline int __slb_present(struct copro_slb *slbs, int nr_slbs,
+>>>>>>> v3.18
 =======
 static inline int __slb_present(struct copro_slb *slbs, int nr_slbs,
 >>>>>>> v3.18
@@ -322,7 +343,11 @@ void spu_setup_kernel_slbs(struct spu *spu, struct spu_lscsa *lscsa,
 		void *code, int code_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spu_slb slbs[4];
+=======
+	struct copro_slb slbs[4];
+>>>>>>> v3.18
 =======
 	struct copro_slb slbs[4];
 >>>>>>> v3.18
@@ -640,7 +665,10 @@ static int __init create_spu(void *data)
 	static int number;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -684,8 +712,12 @@ static int __init create_spu(void *data)
 
 	spu->stats.util_state = SPU_UTIL_IDLE_LOADED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts);
 	spu->stats.tstamp = timespec_to_ns(&ts);
+=======
+	spu->stats.tstamp = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	spu->stats.tstamp = ktime_get_ns();
 >>>>>>> v3.18
@@ -712,7 +744,10 @@ static unsigned long long spu_acct_time(struct spu *spu,
 		enum spu_utilization_state state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long long time = spu->stats.times[state];
@@ -723,10 +758,15 @@ static unsigned long long spu_acct_time(struct spu *spu,
 	 * last recorded state of the spu.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spu->stats.util_state == state) {
 		ktime_get_ts(&ts);
 		time += timespec_to_ns(&ts) - spu->stats.tstamp;
 	}
+=======
+	if (spu->stats.util_state == state)
+		time += ktime_get_ns() - spu->stats.tstamp;
+>>>>>>> v3.18
 =======
 	if (spu->stats.util_state == state)
 		time += ktime_get_ns() - spu->stats.tstamp;

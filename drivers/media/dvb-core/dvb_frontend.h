@@ -202,6 +202,11 @@ struct dvb_tuner_ops {
 	int (*init)(struct dvb_frontend *fe);
 	int (*sleep)(struct dvb_frontend *fe);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*suspend)(struct dvb_frontend *fe);
+	int (*resume)(struct dvb_frontend *fe);
+>>>>>>> v3.18
 =======
 	int (*suspend)(struct dvb_frontend *fe);
 	int (*resume)(struct dvb_frontend *fe);
@@ -411,12 +416,18 @@ struct dtv_frontend_properties {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DVB_FE_NO_EXIT  0
 #define DVB_FE_NORMAL_EXIT      1
 #define DVB_FE_DEVICE_REMOVED   2
 #define DVB_FE_DEVICE_RESUME    3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dvb_frontend {
 	struct dvb_frontend_ops ops;
@@ -432,6 +443,10 @@ struct dvb_frontend {
 	int (*callback)(void *adapter_priv, int component, int cmd, int arg);
 	int id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int exit;
+>>>>>>> v3.18
 =======
 	unsigned int exit;
 >>>>>>> v3.18

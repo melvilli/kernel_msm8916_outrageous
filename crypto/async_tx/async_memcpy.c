@@ -51,16 +51,22 @@ async_memcpy(struct page *dest, struct page *src, unsigned int dest_offset,
 	struct dma_device *device = chan ? chan->device : NULL;
 	struct dma_async_tx_descriptor *tx = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (device && is_dma_copy_aligned(device, src_offset, dest_offset, len)) {
 		dma_addr_t dma_dest, dma_src;
 =======
+=======
+>>>>>>> v3.18
 	struct dmaengine_unmap_data *unmap = NULL;
 
 	if (device)
 		unmap = dmaengine_get_unmap_data(device->dev, 2, GFP_NOIO);
 
 	if (unmap && is_dma_copy_aligned(device, src_offset, dest_offset, len)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned long dma_prep_flags = 0;
 
@@ -68,6 +74,7 @@ async_memcpy(struct page *dest, struct page *src, unsigned int dest_offset,
 			dma_prep_flags |= DMA_PREP_INTERRUPT;
 		if (submit->flags & ASYNC_TX_FENCE)
 			dma_prep_flags |= DMA_PREP_FENCE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dma_dest = dma_map_page(device->dev, dest, dest_offset, len,
 					DMA_FROM_DEVICE);
@@ -84,6 +91,8 @@ async_memcpy(struct page *dest, struct page *src, unsigned int dest_offset,
 				       DMA_TO_DEVICE);
 		}
 =======
+=======
+>>>>>>> v3.18
 
 		unmap->to_cnt = 1;
 		unmap->addr[0] = dma_map_page(device->dev, src, src_offset, len,
@@ -96,12 +105,20 @@ async_memcpy(struct page *dest, struct page *src, unsigned int dest_offset,
 		tx = device->device_prep_dma_memcpy(chan, unmap->addr[1],
 						    unmap->addr[0], len,
 						    dma_prep_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (tx) {
 		pr_debug("%s: (async) len: %zu\n", __func__, len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		dma_set_unmap(tx, unmap);
+>>>>>>> v3.18
 =======
 
 		dma_set_unmap(tx, unmap);
@@ -126,6 +143,11 @@ async_memcpy(struct page *dest, struct page *src, unsigned int dest_offset,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dmaengine_unmap_put(unmap);
+
+>>>>>>> v3.18
 =======
 	dmaengine_unmap_put(unmap);
 

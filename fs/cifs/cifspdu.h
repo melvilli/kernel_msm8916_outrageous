@@ -143,12 +143,18 @@
 #define CIFS_SESS_KEY_SIZE (16)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Size of the smb3 signing key
  */
 #define SMB3_SIGN_KEY_SIZE (16)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CIFS_CLIENT_CHALLENGE_SIZE (8)
 #define CIFS_SERVER_CHALLENGE_SIZE (8)
@@ -432,7 +438,11 @@ struct smb_hdr {
 	__le16 Pid;
 	__u16 Uid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 Mid;
+=======
+	__le16 Mid;
+>>>>>>> v3.18
 =======
 	__le16 Mid;
 >>>>>>> v3.18
@@ -544,7 +554,11 @@ typedef struct lanman_neg_rsp {
 #define WRITE_RAW_ENABLE 2
 #define RAW_ENABLE (READ_RAW_ENABLE | WRITE_RAW_ENABLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define SMB1_CLIENT_GUID_SIZE (16)
+>>>>>>> v3.18
 =======
 #define SMB1_CLIENT_GUID_SIZE (16)
 >>>>>>> v3.18
@@ -570,7 +584,11 @@ typedef struct negotiate_rsp {
 		/* then security blob if cap_extended_security negotiated */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned char GUID[16];
+=======
+			unsigned char GUID[SMB1_CLIENT_GUID_SIZE];
+>>>>>>> v3.18
 =======
 			unsigned char GUID[SMB1_CLIENT_GUID_SIZE];
 >>>>>>> v3.18
@@ -713,8 +731,11 @@ struct ntlmssp2_name {
 
 struct ntlmv2_resp {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char ntlmv2_hash[CIFS_ENCPWD_SIZE];
 =======
+=======
+>>>>>>> v3.18
 	union {
 	    char ntlmv2_hash[CIFS_ENCPWD_SIZE];
 	    struct {
@@ -722,6 +743,9 @@ struct ntlmv2_resp {
 		__u8 key[CIFS_SERVER_CHALLENGE_SIZE];
 	    } __attribute__((packed)) challenge;
 	} __attribute__((packed));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 blob_signature;
 	__u32  reserved;
@@ -1346,7 +1370,10 @@ typedef struct smb_com_ntransact_rsp {
 } __attribute__((packed)) NTRANSACT_RSP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* See MS-SMB 2.2.7.2.1.1 */
 struct srv_copychunk {
 	__le64 SourceOffset;
@@ -1355,6 +1382,9 @@ struct srv_copychunk {
 	__u32  Reserved;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct smb_com_transaction_ioctl_req {
 	struct smb_hdr hdr;	/* wct = 23 */
@@ -1381,7 +1411,10 @@ typedef struct smb_com_transaction_ioctl_req {
 } __attribute__((packed)) TRANSACT_IOCTL_REQ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct smb_com_transaction_compr_ioctl_req {
 	struct smb_hdr hdr;	/* wct = 23 */
 	__u8 MaxSetupCount;
@@ -1411,6 +1444,9 @@ typedef struct smb_com_transaction_compr_ioctl_req {
 #define COMPRESSION_FORMAT_DEFAULT	0x0001
 #define COMPRESSION_FORMAT_LZNT1	0x0002
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct smb_com_transaction_ioctl_rsp {
 	struct smb_hdr hdr;	/* wct = 19 */
@@ -1552,6 +1588,7 @@ struct file_notify_information {
 } __attribute__((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct reparse_data {
 	__u32	ReparseTag;
 	__u16	ReparseDataLength;
@@ -1562,6 +1599,8 @@ struct reparse_data {
 	__u16	TargetNameLen;
 	char	LinkNamesBuf[1];
 =======
+=======
+>>>>>>> v3.18
 /* For IO_REPARSE_TAG_SYMLINK */
 struct reparse_symlink_data {
 	__le32	ReparseTag;
@@ -1587,6 +1626,9 @@ struct reparse_posix_data {
 	__u16	Reserved;
 	__le64	InodeType; /* LNK, FIFO, CHR etc. */
 	char	PathBuffer[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__((packed));
 
@@ -2288,7 +2330,10 @@ typedef struct {
 } __attribute__((packed)) FILE_SYSTEM_DEVICE_INFO; /* device info level 0x104 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* minimum includes first three fields, and empty FS Name */
 #define MIN_FS_ATTR_INFO_SIZE 12
 
@@ -2315,6 +2360,9 @@ typedef struct {
 #define FILE_UNICODE_ON_DISK		0x00000004
 #define FILE_CASE_PRESERVED_NAMES	0x00000002
 #define FILE_CASE_SENSITIVE_SEARCH	0x00000001
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct {
 	__le32 Attributes;
@@ -2769,6 +2817,7 @@ typedef struct file_xattr_info {
 					      level 0x205 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* flags for chattr command */
 #define EXT_SECURE_DELETE		0x00000001 /* EXT3_SECRM_FL */
@@ -2789,6 +2838,9 @@ typedef struct file_xattr_info {
 
 #define EXT_SET_MASK			0x000300FF
 #define EXT_GET_MASK			0x0003DFFF
+=======
+/* flags for lsattr and chflags commands removed arein uapi/linux/fs.h */
+>>>>>>> v3.18
 =======
 /* flags for lsattr and chflags commands removed arein uapi/linux/fs.h */
 >>>>>>> v3.18

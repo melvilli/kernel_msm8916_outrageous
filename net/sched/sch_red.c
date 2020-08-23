@@ -75,7 +75,11 @@ static int red_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 	case RED_PROB_MARK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.overlimits++;
+=======
+		qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ static int red_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 	case RED_HARD_MARK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.overlimits++;
+=======
+		qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -109,7 +117,11 @@ static int red_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	} else if (net_xmit_drop_count(ret)) {
 		q->stats.pdrop++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -155,7 +167,11 @@ static unsigned int red_drop(struct Qdisc *sch)
 	if (child->ops->drop && (len = child->ops->drop(child)) > 0) {
 		q->stats.other++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 >>>>>>> v3.18

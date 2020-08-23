@@ -28,6 +28,10 @@
 #include <linux/init.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 >>>>>>> v3.18

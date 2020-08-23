@@ -14,7 +14,11 @@
 #include <asm/hw_irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_HWEVENTS 4
+=======
+#define MAX_HWEVENTS 6
+>>>>>>> v3.18
 =======
 #define MAX_HWEVENTS 6
 >>>>>>> v3.18

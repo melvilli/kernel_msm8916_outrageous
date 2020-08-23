@@ -59,8 +59,13 @@ static inline void print_cp_instr(const struct coproc_params *p)
 	/* Look, we even formatted it for you to paste into the table! */
 	if (p->is_64bit) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kvm_pr_unimpl(" { CRm(%2lu), Op1(%2lu), is64, func_%s },\n",
 			      p->CRm, p->Op1, p->is_write ? "write" : "read");
+=======
+		kvm_pr_unimpl(" { CRm64(%2lu), Op1(%2lu), is64, func_%s },\n",
+			      p->CRn, p->Op1, p->is_write ? "write" : "read");
+>>>>>>> v3.18
 =======
 		kvm_pr_unimpl(" { CRm64(%2lu), Op1(%2lu), is64, func_%s },\n",
 			      p->CRn, p->Op1, p->is_write ? "write" : "read");
@@ -141,8 +146,11 @@ static inline int cmp_reg(const struct coproc_reg *i1,
 	if (i1->CRn != i2->CRn)
 		return i1->CRn - i2->CRn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i1->is_64 != i2->is_64)
 		return i2->is_64 - i1->is_64;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (i1->CRm != i2->CRm)
@@ -150,7 +158,13 @@ static inline int cmp_reg(const struct coproc_reg *i1,
 	if (i1->Op1 != i2->Op1)
 		return i1->Op1 - i2->Op1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return i1->Op2 - i2->Op2;
+=======
+	if (i1->Op2 != i2->Op2)
+		return i1->Op2 - i2->Op2;
+	return i2->is_64 - i1->is_64;
+>>>>>>> v3.18
 =======
 	if (i1->Op2 != i2->Op2)
 		return i1->Op2 - i2->Op2;
@@ -168,10 +182,16 @@ static inline int cmp_reg(const struct coproc_reg *i1,
 #define is32		.is_64 = false
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool access_sctlr(struct kvm_vcpu *vcpu,
 		  const struct coproc_params *p,
 		  const struct coproc_reg *r);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ARM_KVM_COPROC_LOCAL_H__ */

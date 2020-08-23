@@ -439,7 +439,11 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev,
 		sd->swapRB * (gspca_dev->cam.cam_mode[mode].bytesperline + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Test only against 0202h, so endianess does not matter */
+=======
+	/* Test only against 0202h, so endianness does not matter */
+>>>>>>> v3.18
 =======
 	/* Test only against 0202h, so endianness does not matter */
 >>>>>>> v3.18

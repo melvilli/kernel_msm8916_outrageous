@@ -281,8 +281,13 @@ static int camif_prepare_addr(struct camif_vp *vp, struct vb2_buffer *vb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("DMA address: y: %#x  cb: %#x cr: %#x\n",
 		 paddr->y, paddr->cb, paddr->cr);
+=======
+	pr_debug("DMA address: y: %pad  cb: %pad cr: %pad\n",
+		 &paddr->y, &paddr->cb, &paddr->cr);
+>>>>>>> v3.18
 =======
 	pr_debug("DMA address: y: %pad  cb: %pad cr: %pad\n",
 		 &paddr->y, &paddr->cb, &paddr->cr);
@@ -441,15 +446,21 @@ static int start_streaming(struct vb2_queue *vq, unsigned int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *vq)
 {
 	struct camif_vp *vp = vb2_get_drv_priv(vq);
 	return camif_stop_capture(vp);
 =======
+=======
+>>>>>>> v3.18
 static void stop_streaming(struct vb2_queue *vq)
 {
 	struct camif_vp *vp = vb2_get_drv_priv(vq);
 	camif_stop_capture(vp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -858,7 +869,11 @@ static int camif_pipeline_validate(struct camif_dev *camif)
 
 	/* Retrieve format at the sensor subdev source pad */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pad = media_entity_remote_source(&camif->pads[0]);
+=======
+	pad = media_entity_remote_pad(&camif->pads[0]);
+>>>>>>> v3.18
 =======
 	pad = media_entity_remote_pad(&camif->pads[0]);
 >>>>>>> v3.18
@@ -1177,7 +1192,11 @@ int s3c_camif_register_video_node(struct camif_dev *camif, int idx)
 	q->buf_struct_size = sizeof(struct camif_buffer);
 	q->drv_priv = vp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 =======
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 >>>>>>> v3.18
@@ -1193,7 +1212,10 @@ int s3c_camif_register_video_node(struct camif_dev *camif, int idx)
 
 	video_set_drvdata(vfd, vp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1295,6 +1317,10 @@ static int s3c_camif_subdev_get_fmt(struct v4l2_subdev *sd,
 
 	mutex_unlock(&camif->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mf->field = V4L2_FIELD_NONE;
+>>>>>>> v3.18
 =======
 	mf->field = V4L2_FIELD_NONE;
 >>>>>>> v3.18
@@ -1347,6 +1373,10 @@ static int s3c_camif_subdev_set_fmt(struct v4l2_subdev *sd,
 		 fmt->pad, mf->code, mf->width, mf->height);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mf->field = V4L2_FIELD_NONE;
+>>>>>>> v3.18
 =======
 	mf->field = V4L2_FIELD_NONE;
 >>>>>>> v3.18
@@ -1624,7 +1654,12 @@ int s3c_camif_create_subdev(struct camif_dev *camif)
 			s3c_camif_test_pattern_menu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	camif->ctrl_colorfx = v4l2_ctrl_new_std_menu(handler,
+=======
+	if (camif->variant->has_img_effect) {
+		camif->ctrl_colorfx = v4l2_ctrl_new_std_menu(handler,
+>>>>>>> v3.18
 =======
 	if (camif->variant->has_img_effect) {
 		camif->ctrl_colorfx = v4l2_ctrl_new_std_menu(handler,
@@ -1634,15 +1669,21 @@ int s3c_camif_create_subdev(struct camif_dev *camif)
 				~0x981f, V4L2_COLORFX_NONE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	camif->ctrl_colorfx_cbcr = v4l2_ctrl_new_std(handler,
 				&s3c_camif_subdev_ctrl_ops,
 				V4L2_CID_COLORFX_CBCR, 0, 0xffff, 1, 0);
 =======
+=======
+>>>>>>> v3.18
 		camif->ctrl_colorfx_cbcr = v4l2_ctrl_new_std(handler,
 				&s3c_camif_subdev_ctrl_ops,
 				V4L2_CID_COLORFX_CBCR, 0, 0xffff, 1, 0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (handler->error) {
 		v4l2_ctrl_handler_free(handler);
@@ -1651,6 +1692,7 @@ int s3c_camif_create_subdev(struct camif_dev *camif)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_ctrl_auto_cluster(2, &camif->ctrl_colorfx,
 			       V4L2_COLORFX_SET_CBCR, false);
 	if (!camif->variant->has_img_effect) {
@@ -1658,10 +1700,15 @@ int s3c_camif_create_subdev(struct camif_dev *camif)
 		camif->ctrl_colorfx_cbcr->flags |= V4L2_CTRL_FLAG_DISABLED;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (camif->variant->has_img_effect)
 		v4l2_ctrl_auto_cluster(2, &camif->ctrl_colorfx,
 			       V4L2_COLORFX_SET_CBCR, false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sd->ctrl_handler = handler;
 	v4l2_set_subdevdata(sd, camif);

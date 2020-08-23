@@ -15,22 +15,32 @@
 /*----------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dm_bio_prison {
 	spinlock_t lock;
 =======
+=======
+>>>>>>> v3.18
 struct bucket {
 	spinlock_t lock;
 	struct hlist_head cells;
 };
 
 struct dm_bio_prison {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mempool_t *cell_pool;
 
 	unsigned nr_buckets;
 	unsigned hash_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_head *cells;
+=======
+	struct bucket *buckets;
+>>>>>>> v3.18
 =======
 	struct bucket *buckets;
 >>>>>>> v3.18
@@ -54,13 +64,19 @@ static uint32_t calc_nr_buckets(unsigned nr_cells)
 static struct kmem_cache *_cell_cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void init_bucket(struct bucket *b)
 {
 	spin_lock_init(&b->lock);
 	INIT_HLIST_HEAD(&b->cells);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * @nr_cells should be the number of cells you want in use _concurrently_.
@@ -72,7 +88,11 @@ struct dm_bio_prison *dm_bio_prison_create(unsigned nr_cells)
 	uint32_t nr_buckets = calc_nr_buckets(nr_cells);
 	size_t len = sizeof(struct dm_bio_prison) +
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(sizeof(struct hlist_head) * nr_buckets);
+=======
+		(sizeof(struct bucket) * nr_buckets);
+>>>>>>> v3.18
 =======
 		(sizeof(struct bucket) * nr_buckets);
 >>>>>>> v3.18
@@ -82,7 +102,10 @@ struct dm_bio_prison *dm_bio_prison_create(unsigned nr_cells)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&prison->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	prison->cell_pool = mempool_create_slab_pool(nr_cells, _cell_cache);
@@ -94,9 +117,15 @@ struct dm_bio_prison *dm_bio_prison_create(unsigned nr_cells)
 	prison->nr_buckets = nr_buckets;
 	prison->hash_mask = nr_buckets - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prison->cells = (struct hlist_head *) (prison + 1);
 	for (i = 0; i < nr_buckets; i++)
 		INIT_HLIST_HEAD(prison->cells + i);
+=======
+	prison->buckets = (struct bucket *) (prison + 1);
+	for (i = 0; i < nr_buckets; i++)
+		init_bucket(prison->buckets + i);
+>>>>>>> v3.18
 =======
 	prison->buckets = (struct bucket *) (prison + 1);
 	for (i = 0; i < nr_buckets; i++)
@@ -143,8 +172,11 @@ static int keys_equal(struct dm_cell_key *lhs, struct dm_cell_key *rhs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dm_bio_prison_cell *__search_bucket(struct hlist_head *bucket,
 =======
+=======
+>>>>>>> v3.18
 static struct bucket *get_bucket(struct dm_bio_prison *prison,
 				 struct dm_cell_key *key)
 {
@@ -152,13 +184,20 @@ static struct bucket *get_bucket(struct dm_bio_prison *prison,
 }
 
 static struct dm_bio_prison_cell *__search_bucket(struct bucket *b,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						  struct dm_cell_key *key)
 {
 	struct dm_bio_prison_cell *cell;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each_entry(cell, bucket, list)
+=======
+	hlist_for_each_entry(cell, &b->cells, list)
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry(cell, &b->cells, list)
 >>>>>>> v3.18
@@ -169,10 +208,16 @@ static struct dm_bio_prison_cell *__search_bucket(struct bucket *b,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __setup_new_cell(struct dm_bio_prison *prison,
 			     struct dm_cell_key *key,
 			     struct bio *holder,
 			     uint32_t hash,
+=======
+static void __setup_new_cell(struct bucket *b,
+			     struct dm_cell_key *key,
+			     struct bio *holder,
+>>>>>>> v3.18
 =======
 static void __setup_new_cell(struct bucket *b,
 			     struct dm_cell_key *key,
@@ -184,15 +229,21 @@ static void __setup_new_cell(struct bucket *b,
 	cell->holder = holder;
 	bio_list_init(&cell->bios);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_add_head(&cell->list, prison->cells + hash);
 }
 
 static int __bio_detain(struct dm_bio_prison *prison,
 =======
+=======
+>>>>>>> v3.18
 	hlist_add_head(&cell->list, &b->cells);
 }
 
 static int __bio_detain(struct bucket *b,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct dm_cell_key *key,
 			struct bio *inmate,
@@ -200,10 +251,16 @@ static int __bio_detain(struct bucket *b,
 			struct dm_bio_prison_cell **cell_result)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t hash = hash_key(prison, key);
 	struct dm_bio_prison_cell *cell;
 
 	cell = __search_bucket(prison->cells + hash, key);
+=======
+	struct dm_bio_prison_cell *cell;
+
+	cell = __search_bucket(b, key);
+>>>>>>> v3.18
 =======
 	struct dm_bio_prison_cell *cell;
 
@@ -217,7 +274,11 @@ static int __bio_detain(struct bucket *b,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__setup_new_cell(prison, key, inmate, hash, cell_prealloc);
+=======
+	__setup_new_cell(b, key, inmate, cell_prealloc);
+>>>>>>> v3.18
 =======
 	__setup_new_cell(b, key, inmate, cell_prealloc);
 >>>>>>> v3.18
@@ -234,16 +295,22 @@ static int bio_detain(struct dm_bio_prison *prison,
 	int r;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irqsave(&prison->lock, flags);
 	r = __bio_detain(prison, key, inmate, cell_prealloc, cell_result);
 	spin_unlock_irqrestore(&prison->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct bucket *b = get_bucket(prison, key);
 
 	spin_lock_irqsave(&b->lock, flags);
 	r = __bio_detain(b, key, inmate, cell_prealloc, cell_result);
 	spin_unlock_irqrestore(&b->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r;
@@ -289,16 +356,22 @@ void dm_cell_release(struct dm_bio_prison *prison,
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irqsave(&prison->lock, flags);
 	__cell_release(cell, bios);
 	spin_unlock_irqrestore(&prison->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct bucket *b = get_bucket(prison, &cell->key);
 
 	spin_lock_irqsave(&b->lock, flags);
 	__cell_release(cell, bios);
 	spin_unlock_irqrestore(&b->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(dm_cell_release);
@@ -319,21 +392,28 @@ void dm_cell_release_no_holder(struct dm_bio_prison *prison,
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irqsave(&prison->lock, flags);
 	__cell_release_no_holder(cell, inmates);
 	spin_unlock_irqrestore(&prison->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct bucket *b = get_bucket(prison, &cell->key);
 
 	spin_lock_irqsave(&b->lock, flags);
 	__cell_release_no_holder(cell, inmates);
 	spin_unlock_irqrestore(&b->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(dm_cell_release_no_holder);
 
 void dm_cell_error(struct dm_bio_prison *prison,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		   struct dm_bio_prison_cell *cell)
 {
@@ -350,6 +430,8 @@ void dm_cell_error(struct dm_bio_prison *prison,
 	while ((bio = bio_list_pop(&bios)))
 		bio_io_error(bio);
 =======
+=======
+>>>>>>> v3.18
 		   struct dm_bio_prison_cell *cell, int error)
 {
 	struct bio_list bios;
@@ -360,6 +442,9 @@ void dm_cell_error(struct dm_bio_prison *prison,
 
 	while ((bio = bio_list_pop(&bios)))
 		bio_endio(bio, error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(dm_cell_error);

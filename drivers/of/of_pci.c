@@ -2,6 +2,7 @@
 #include <linux/export.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_pci.h>
 #include <asm/prom.h>
 
@@ -15,6 +16,8 @@ static inline int __of_pci_pci_compare(struct device_node *node,
 		return 0;
 	return ((be32_to_cpup(&reg[0]) >> 8) & 0xff) == devfn;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/of_pci.h>
 #include <linux/slab.h>
@@ -29,6 +32,9 @@ static inline int __of_pci_pci_compare(struct device_node *node,
 		return 0;
 
 	return devfn == data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -58,7 +64,10 @@ struct device_node *of_pci_find_child_device(struct device_node *parent,
 }
 EXPORT_SYMBOL_GPL(of_pci_find_child_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * of_pci_get_devfn() - Get device and function numbers for a device node
@@ -292,4 +301,7 @@ struct msi_chip *of_pci_find_msi_chip_by_node(struct device_node *of_node)
 EXPORT_SYMBOL_GPL(of_pci_find_msi_chip_by_node);
 
 #endif /* CONFIG_PCI_MSI */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

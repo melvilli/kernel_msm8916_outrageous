@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2011 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ qla4_8xxx_sysfs_write_fw_dump(struct file *filep, struct kobject *kobj,
 					    QLA8XXX_DEV_NEED_RESET);
 			if (is_qla8022(ha) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    (is_qla8032(ha) &&
+=======
+			    ((is_qla8032(ha) || is_qla8042(ha)) &&
+>>>>>>> v3.18
 =======
 			    ((is_qla8032(ha) || is_qla8042(ha)) &&
 >>>>>>> v3.18
@@ -167,6 +175,7 @@ qla4xxx_fw_version_show(struct device *dev,
 	if (is_qla80XX(ha))
 		return snprintf(buf, PAGE_SIZE, "%d.%02d.%02d (%x)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ha->firmware_version[0],
 				ha->firmware_version[1],
 				ha->patch_number, ha->build_number);
@@ -176,12 +185,17 @@ qla4xxx_fw_version_show(struct device *dev,
 				ha->firmware_version[1],
 				ha->patch_number, ha->build_number);
 =======
+=======
+>>>>>>> v3.18
 				ha->fw_info.fw_major, ha->fw_info.fw_minor,
 				ha->fw_info.fw_patch, ha->fw_info.fw_build);
 	else
 		return snprintf(buf, PAGE_SIZE, "%d.%02d.%02d.%02d\n",
 				ha->fw_info.fw_major, ha->fw_info.fw_minor,
 				ha->fw_info.fw_patch, ha->fw_info.fw_build);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -199,8 +213,13 @@ qla4xxx_iscsi_version_show(struct device *dev, struct device_attribute *attr,
 {
 	struct scsi_qla_host *ha = to_qla_host(class_to_shost(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(buf, PAGE_SIZE, "%d.%02d\n", ha->iscsi_major,
 			ha->iscsi_minor);
+=======
+	return snprintf(buf, PAGE_SIZE, "%d.%02d\n", ha->fw_info.iscsi_major,
+			ha->fw_info.iscsi_minor);
+>>>>>>> v3.18
 =======
 	return snprintf(buf, PAGE_SIZE, "%d.%02d\n", ha->fw_info.iscsi_major,
 			ha->fw_info.iscsi_minor);
@@ -214,8 +233,13 @@ qla4xxx_optrom_version_show(struct device *dev, struct device_attribute *attr,
 	struct scsi_qla_host *ha = to_qla_host(class_to_shost(dev));
 	return snprintf(buf, PAGE_SIZE, "%d.%02d.%02d.%02d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ha->bootload_major, ha->bootload_minor,
 			ha->bootload_patch, ha->bootload_build);
+=======
+			ha->fw_info.bootload_major, ha->fw_info.bootload_minor,
+			ha->fw_info.bootload_patch, ha->fw_info.bootload_build);
+>>>>>>> v3.18
 =======
 			ha->fw_info.bootload_major, ha->fw_info.bootload_minor,
 			ha->fw_info.bootload_patch, ha->fw_info.bootload_build);
@@ -287,7 +311,10 @@ qla4xxx_hba_model_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t
 qla4xxx_fw_timestamp_show(struct device *dev, struct device_attribute *attr,
 			  char *buf)
@@ -345,6 +372,9 @@ qla4xxx_fw_uptime_show(struct device *dev, struct device_attribute *attr,
 			ha->fw_uptime_msecs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(fw_version, S_IRUGO, qla4xxx_fw_version_show, NULL);
 static DEVICE_ATTR(serial_num, S_IRUGO, qla4xxx_serial_num_show, NULL);
@@ -357,13 +387,19 @@ static DEVICE_ATTR(phy_port_num, S_IRUGO, qla4xxx_phy_port_num_show, NULL);
 static DEVICE_ATTR(iscsi_func_cnt, S_IRUGO, qla4xxx_iscsi_func_cnt_show, NULL);
 static DEVICE_ATTR(hba_model, S_IRUGO, qla4xxx_hba_model_show, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(fw_timestamp, S_IRUGO, qla4xxx_fw_timestamp_show, NULL);
 static DEVICE_ATTR(fw_build_user, S_IRUGO, qla4xxx_fw_build_user_show, NULL);
 static DEVICE_ATTR(fw_ext_timestamp, S_IRUGO, qla4xxx_fw_ext_timestamp_show,
 		   NULL);
 static DEVICE_ATTR(fw_load_src, S_IRUGO, qla4xxx_fw_load_src_show, NULL);
 static DEVICE_ATTR(fw_uptime, S_IRUGO, qla4xxx_fw_uptime_show, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct device_attribute *qla4xxx_host_attrs[] = {
@@ -378,12 +414,18 @@ struct device_attribute *qla4xxx_host_attrs[] = {
 	&dev_attr_iscsi_func_cnt,
 	&dev_attr_hba_model,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_fw_timestamp,
 	&dev_attr_fw_build_user,
 	&dev_attr_fw_ext_timestamp,
 	&dev_attr_fw_load_src,
 	&dev_attr_fw_uptime,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };

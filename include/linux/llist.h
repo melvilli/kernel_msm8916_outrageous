@@ -126,7 +126,10 @@ static inline void init_llist_head(struct llist_head *list)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * llist_for_each_entry_safe - iterate over some deleted entries of lock-less list of given type
  *			       safe against removal of list entry
  * @pos:	the type * to use as a loop cursor.
@@ -150,6 +153,9 @@ static inline void init_llist_head(struct llist_head *list)
 	     pos = n)
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * llist_empty - tests whether a lock-less list is empty
  * @head:	the list to test
@@ -169,6 +175,12 @@ static inline struct llist_node *llist_next(struct llist_node *node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool llist_add_batch(struct llist_node *new_first,
+			    struct llist_node *new_last,
+			    struct llist_head *head);
+>>>>>>> v3.18
 =======
 extern bool llist_add_batch(struct llist_node *new_first,
 			    struct llist_node *new_last,
@@ -184,6 +196,7 @@ extern bool llist_add_batch(struct llist_node *new_first,
 static inline bool llist_add(struct llist_node *new, struct llist_head *head)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct llist_node *entry, *old_entry;
 
 	entry = head->first;
@@ -196,6 +209,9 @@ static inline bool llist_add(struct llist_node *new, struct llist_head *head)
 	}
 
 	return old_entry == NULL;
+=======
+	return llist_add_batch(new, new, head);
+>>>>>>> v3.18
 =======
 	return llist_add_batch(new, new, head);
 >>>>>>> v3.18
@@ -215,15 +231,21 @@ static inline struct llist_node *llist_del_all(struct llist_head *head)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool llist_add_batch(struct llist_node *new_first,
 			    struct llist_node *new_last,
 			    struct llist_head *head);
 extern struct llist_node *llist_del_first(struct llist_head *head);
 
 =======
+=======
+>>>>>>> v3.18
 extern struct llist_node *llist_del_first(struct llist_head *head);
 
 struct llist_node *llist_reverse_order(struct llist_node *head);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LLIST_H */

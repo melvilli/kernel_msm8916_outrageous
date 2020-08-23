@@ -31,6 +31,10 @@
 #include <asm/cacheflush.h>
 #include <asm/cputype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/debug-monitors.h>
+>>>>>>> v3.18
 =======
 #include <asm/debug-monitors.h>
 >>>>>>> v3.18
@@ -142,16 +146,22 @@ static bool access_vm_reg(struct kvm_vcpu *vcpu,
 		vcpu_sys_reg(vcpu, r->reg) = val;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vcpu_cp15(vcpu, r->reg) = val & 0xffffffffUL;
 		if (!p->is_32bit)
 			vcpu_cp15(vcpu, r->reg + 1) = val >> 32;
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (!p->is_32bit)
 			vcpu_cp15_64_high(vcpu, r->reg) = val >> 32;
 		vcpu_cp15_64_low(vcpu, r->reg) = val & 0xffffffffUL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return true;
 }
@@ -176,6 +186,7 @@ static bool access_sctlr(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * We could trap ID_DFR0 and tell the guest we don't support performance
  * monitoring.  Unfortunately the patch to make the kernel check ID_DFR0 was
@@ -193,6 +204,11 @@ static bool trap_raz_wi(struct kvm_vcpu *vcpu,
 			const struct sys_reg_params *p,
 			const struct sys_reg_desc *r)
 >>>>>>> v3.18
+=======
+static bool trap_raz_wi(struct kvm_vcpu *vcpu,
+			const struct sys_reg_params *p,
+			const struct sys_reg_desc *r)
+>>>>>>> v3.18
 {
 	if (p->is_write)
 		return ignore_write(vcpu, p);
@@ -201,7 +217,10 @@ static bool trap_raz_wi(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool trap_oslsr_el1(struct kvm_vcpu *vcpu,
 			   const struct sys_reg_params *p,
 			   const struct sys_reg_desc *r)
@@ -269,6 +288,9 @@ static bool trap_debug_regs(struct kvm_vcpu *vcpu,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void reset_amair_el1(struct kvm_vcpu *vcpu, const struct sys_reg_desc *r)
 {
@@ -287,10 +309,13 @@ static void reset_mpidr(struct kvm_vcpu *vcpu, const struct sys_reg_desc *r)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Architected system registers.
  * Important: Must be sorted ascending by Op0, Op1, CRn, CRm, Op2
 =======
+=======
+>>>>>>> v3.18
 /* Silly macro to expand the DBG{BCR,BVR,WVR,WCR}n_EL1 registers in one go */
 #define DBG_BCR_BVR_WCR_WVR_EL1(n)					\
 	/* DBGBVRn_EL1 */						\
@@ -324,6 +349,9 @@ static void reset_mpidr(struct kvm_vcpu *vcpu, const struct sys_reg_desc *r)
  * that we don't implement any of the external debug, none of the
  * OSlock protocol. This should be revisited if we ever encounter a
  * more demanding guest...
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static const struct sys_reg_desc sys_reg_descs[] = {
@@ -338,7 +366,10 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	  access_dcsw },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	DBG_BCR_BVR_WCR_WVR_EL1(0),
 	DBG_BCR_BVR_WCR_WVR_EL1(1),
 	/* MDCCINT_EL1 */
@@ -387,6 +418,9 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	{ Op0(0b10), Op1(0b000), CRn(0b0111), CRm(0b1110), Op2(0b110),
 	  trap_dbgauthstatus_el1 },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* TEECR32_EL1 */
 	{ Op0(0b10), Op1(0b010), CRn(0b0000), CRm(0b0000), Op2(0b000),
@@ -395,7 +429,10 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	{ Op0(0b10), Op1(0b010), CRn(0b0001), CRm(0b0000), Op2(0b000),
 	  NULL, reset_val, TEEHBR32_EL1, 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* MDCCSR_EL1 */
 	{ Op0(0b10), Op1(0b011), CRn(0b0000), CRm(0b0001), Op2(0b000),
@@ -407,6 +444,9 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	{ Op0(0b10), Op1(0b011), CRn(0b0000), CRm(0b0101), Op2(0b000),
 	  trap_raz_wi },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* DBGVCR32_EL2 */
 	{ Op0(0b10), Op1(0b100), CRn(0b0000), CRm(0b0111), Op2(0b000),
@@ -450,15 +490,21 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	/* PMINTENSET_EL1 */
 	{ Op0(0b11), Op1(0b000), CRn(0b1001), CRm(0b1110), Op2(0b001),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  pm_fake },
 	/* PMINTENCLR_EL1 */
 	{ Op0(0b11), Op1(0b000), CRn(0b1001), CRm(0b1110), Op2(0b010),
 	  pm_fake },
 =======
+=======
+>>>>>>> v3.18
 	  trap_raz_wi },
 	/* PMINTENCLR_EL1 */
 	{ Op0(0b11), Op1(0b000), CRn(0b1001), CRm(0b1110), Op2(0b010),
 	  trap_raz_wi },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* MAIR_EL1 */
@@ -472,12 +518,18 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	{ Op0(0b11), Op1(0b000), CRn(0b1100), CRm(0b0000), Op2(0b000),
 	  NULL, reset_val, VBAR_EL1, 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* ICC_SRE_EL1 */
 	{ Op0(0b11), Op1(0b000), CRn(0b1100), CRm(0b1100), Op2(0b101),
 	  trap_raz_wi },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* CONTEXTIDR_EL1 */
 	{ Op0(0b11), Op1(0b000), CRn(0b1101), CRm(0b0000), Op2(0b001),
@@ -497,6 +549,7 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	/* PMCR_EL0 */
 	{ Op0(0b11), Op1(0b011), CRn(0b1001), CRm(0b1100), Op2(0b000),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  pm_fake },
 	/* PMCNTENSET_EL0 */
 	{ Op0(0b11), Op1(0b011), CRn(0b1001), CRm(0b1100), Op2(0b001),
@@ -535,6 +588,8 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	{ Op0(0b11), Op1(0b011), CRn(0b1001), CRm(0b1110), Op2(0b011),
 	  pm_fake },
 =======
+=======
+>>>>>>> v3.18
 	  trap_raz_wi },
 	/* PMCNTENSET_EL0 */
 	{ Op0(0b11), Op1(0b011), CRn(0b1001), CRm(0b1100), Op2(0b001),
@@ -572,6 +627,9 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 	/* PMOVSSET_EL0 */
 	{ Op0(0b11), Op1(0b011), CRn(0b1001), CRm(0b1110), Op2(0b011),
 	  trap_raz_wi },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* TPIDR_EL0 */
@@ -593,7 +651,10 @@ static const struct sys_reg_desc sys_reg_descs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool trap_dbgidr(struct kvm_vcpu *vcpu,
 			const struct sys_reg_params *p,
 			const struct sys_reg_desc *r)
@@ -743,6 +804,9 @@ static const struct sys_reg_desc cp14_64_regs[] = {
 	{ Op1( 0), CRm( 2), .access = trap_raz_wi },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Trapped cp15 registers. TTBR0/TTBR1 get a double encoding,
@@ -751,7 +815,10 @@ static const struct sys_reg_desc cp14_64_regs[] = {
  */
 static const struct sys_reg_desc cp15_regs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ Op1( 0), CRn( 0), CRm( 2), Op2( 0), access_vm_reg, NULL, c2_TTBR0 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ Op1( 0), CRn( 1), CRm( 0), Op2( 0), access_sctlr, NULL, c1_SCTLR },
@@ -774,6 +841,7 @@ static const struct sys_reg_desc cp15_regs[] = {
 	{ Op1( 0), CRn( 7), CRm(14), Op2( 2), access_dcsw },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ Op1( 0), CRn( 9), CRm(12), Op2( 0), pm_fake },
 	{ Op1( 0), CRn( 9), CRm(12), Op2( 1), pm_fake },
 	{ Op1( 0), CRn( 9), CRm(12), Op2( 2), pm_fake },
@@ -788,6 +856,8 @@ static const struct sys_reg_desc cp15_regs[] = {
 	{ Op1( 0), CRn( 9), CRm(14), Op2( 1), pm_fake },
 	{ Op1( 0), CRn( 9), CRm(14), Op2( 2), pm_fake },
 =======
+=======
+>>>>>>> v3.18
 	/* PMU */
 	{ Op1( 0), CRn( 9), CRm(12), Op2( 0), trap_raz_wi },
 	{ Op1( 0), CRn( 9), CRm(12), Op2( 1), trap_raz_wi },
@@ -802,6 +872,9 @@ static const struct sys_reg_desc cp15_regs[] = {
 	{ Op1( 0), CRn( 9), CRm(14), Op2( 0), trap_raz_wi },
 	{ Op1( 0), CRn( 9), CRm(14), Op2( 1), trap_raz_wi },
 	{ Op1( 0), CRn( 9), CRm(14), Op2( 2), trap_raz_wi },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{ Op1( 0), CRn(10), CRm( 2), Op2( 0), access_vm_reg, NULL, c10_PRRR },
@@ -809,9 +882,12 @@ static const struct sys_reg_desc cp15_regs[] = {
 	{ Op1( 0), CRn(10), CRm( 3), Op2( 0), access_vm_reg, NULL, c10_AMAIR0 },
 	{ Op1( 0), CRn(10), CRm( 3), Op2( 1), access_vm_reg, NULL, c10_AMAIR1 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ Op1( 0), CRn(13), CRm( 0), Op2( 1), access_vm_reg, NULL, c13_CID },
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* ICC_SRE */
 	{ Op1( 0), CRn(12), CRm(12), Op2( 5), trap_raz_wi },
@@ -821,6 +897,9 @@ static const struct sys_reg_desc cp15_regs[] = {
 
 static const struct sys_reg_desc cp15_64_regs[] = {
 	{ Op1( 0), CRn( 0), CRm( 2), Op2( 0), access_vm_reg, NULL, c2_TTBR0 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ Op1( 1), CRn( 0), CRm( 2), Op2( 0), access_vm_reg, NULL, c2_TTBR1 },
 };
@@ -883,6 +962,7 @@ int kvm_handle_cp14_load_store(struct kvm_vcpu *vcpu, struct kvm_run *run)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_handle_cp14_access(struct kvm_vcpu *vcpu, struct kvm_run *run)
 {
 	kvm_inject_undefined(vcpu);
@@ -904,6 +984,8 @@ static void emulate_cp15(struct kvm_vcpu *vcpu,
 
 	if (likely(r)) {
 =======
+=======
+>>>>>>> v3.18
 /*
  * emulate_cp --  tries to match a sys_reg access in a handling table, and
  *                call the corresponding trap handler.
@@ -927,6 +1009,9 @@ static int emulate_cp(struct kvm_vcpu *vcpu,
 	r = find_reg(params, table, num);
 
 	if (r) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Not having an accessor means that we have
@@ -940,6 +1025,7 @@ static int emulate_cp(struct kvm_vcpu *vcpu,
 			/* Skip instruction, since it was emulated */
 			kvm_skip_instr(vcpu, kvm_vcpu_trap_il_is32bit(vcpu));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
 		}
 		/* If access function fails, it should complain. */
@@ -947,6 +1033,8 @@ static int emulate_cp(struct kvm_vcpu *vcpu,
 
 	kvm_err("Unsupported guest CP15 access at: %08lx\n", *vcpu_pc(vcpu));
 =======
+=======
+>>>>>>> v3.18
 		}
 
 		/* Handled */
@@ -978,6 +1066,9 @@ static void unhandled_cp_access(struct kvm_vcpu *vcpu,
 
 	kvm_err("Unsupported guest CP%d access at: %08lx\n",
 		cp, *vcpu_pc(vcpu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	print_sys_reg_instr(params);
 	kvm_inject_undefined(vcpu);
@@ -985,12 +1076,15 @@ static void unhandled_cp_access(struct kvm_vcpu *vcpu,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * kvm_handle_cp15_64 -- handles a mrrc/mcrr trap on a guest CP15 access
  * @vcpu: The VCPU pointer
  * @run:  The kvm_run struct
  */
 int kvm_handle_cp15_64(struct kvm_vcpu *vcpu, struct kvm_run *run)
 =======
+=======
+>>>>>>> v3.18
  * kvm_handle_cp_64 -- handles a mrrc/mcrr trap on a guest CP15 access
  * @vcpu: The VCPU pointer
  * @run:  The kvm_run struct
@@ -1000,6 +1094,9 @@ static int kvm_handle_cp_64(struct kvm_vcpu *vcpu,
 			    size_t nr_global,
 			    const struct sys_reg_desc *target_specific,
 			    size_t nr_specific)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct sys_reg_params params;
@@ -1030,9 +1127,12 @@ static int kvm_handle_cp_64(struct kvm_vcpu *vcpu,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	emulate_cp15(vcpu, &params);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!emulate_cp(vcpu, &params, target_specific, nr_specific))
 		goto out;
 	if (!emulate_cp(vcpu, &params, global, nr_global))
@@ -1041,6 +1141,9 @@ static int kvm_handle_cp_64(struct kvm_vcpu *vcpu,
 	unhandled_cp_access(vcpu, &params);
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Do the opposite hack for the read side */
 	if (!params.is_write) {
@@ -1058,13 +1161,19 @@ out:
  * @run:  The kvm_run struct
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_handle_cp15_32(struct kvm_vcpu *vcpu, struct kvm_run *run)
 =======
+=======
+>>>>>>> v3.18
 static int kvm_handle_cp_32(struct kvm_vcpu *vcpu,
 			    const struct sys_reg_desc *global,
 			    size_t nr_global,
 			    const struct sys_reg_desc *target_specific,
 			    size_t nr_specific)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct sys_reg_params params;
@@ -1081,11 +1190,14 @@ static int kvm_handle_cp_32(struct kvm_vcpu *vcpu,
 	params.Op2 = (hsr >> 17) & 0x7;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	emulate_cp15(vcpu, &params);
 	return 1;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (!emulate_cp(vcpu, &params, target_specific, nr_specific))
 		return 1;
 	if (!emulate_cp(vcpu, &params, global, nr_global))
@@ -1131,6 +1243,9 @@ int kvm_handle_cp14_32(struct kvm_vcpu *vcpu, struct kvm_run *run)
 				NULL, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int emulate_sys_reg(struct kvm_vcpu *vcpu,
 			   const struct sys_reg_params *params)
@@ -1344,9 +1459,14 @@ static struct sys_reg_desc invariant_sys_regs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int reg_from_user(void *val, const void __user *uaddr, u64 id)
 {
 	/* This Just Works because we are little endian. */
+=======
+static int reg_from_user(u64 *val, const void __user *uaddr, u64 id)
+{
+>>>>>>> v3.18
 =======
 static int reg_from_user(u64 *val, const void __user *uaddr, u64 id)
 {
@@ -1357,9 +1477,14 @@ static int reg_from_user(u64 *val, const void __user *uaddr, u64 id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int reg_to_user(void __user *uaddr, const void *val, u64 id)
 {
 	/* This Just Works because we are little endian. */
+=======
+static int reg_to_user(void __user *uaddr, const u64 *val, u64 id)
+{
+>>>>>>> v3.18
 =======
 static int reg_to_user(void __user *uaddr, const u64 *val, u64 id)
 {
@@ -1414,7 +1539,11 @@ static bool is_valid_cache(u32 val)
 
 	if (val >= CSSELR_MAX)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOENT;
+=======
+		return false;
+>>>>>>> v3.18
 =======
 		return false;
 >>>>>>> v3.18
@@ -1544,7 +1673,11 @@ static unsigned int num_demux_regs(void)
 static int write_demux_regids(u64 __user *uindices)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 val = KVM_REG_ARM | KVM_REG_SIZE_U32 | KVM_REG_ARM_DEMUX;
+=======
+	u64 val = KVM_REG_ARM64 | KVM_REG_SIZE_U32 | KVM_REG_ARM_DEMUX;
+>>>>>>> v3.18
 =======
 	u64 val = KVM_REG_ARM64 | KVM_REG_SIZE_U32 | KVM_REG_ARM_DEMUX;
 >>>>>>> v3.18
@@ -1655,7 +1788,10 @@ int kvm_arm_copy_sys_reg_indices(struct kvm_vcpu *vcpu, u64 __user *uindices)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int check_sysreg_table(const struct sys_reg_desc *table, unsigned int n)
 {
 	unsigned int i;
@@ -1670,6 +1806,9 @@ static int check_sysreg_table(const struct sys_reg_desc *table, unsigned int n)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvm_sys_reg_table_init(void)
 {
@@ -1678,15 +1817,21 @@ void kvm_sys_reg_table_init(void)
 
 	/* Make sure tables are unique and in order. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i < ARRAY_SIZE(sys_reg_descs); i++)
 		BUG_ON(cmp_sys_reg(&sys_reg_descs[i-1], &sys_reg_descs[i]) >= 0);
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(check_sysreg_table(sys_reg_descs, ARRAY_SIZE(sys_reg_descs)));
 	BUG_ON(check_sysreg_table(cp14_regs, ARRAY_SIZE(cp14_regs)));
 	BUG_ON(check_sysreg_table(cp14_64_regs, ARRAY_SIZE(cp14_64_regs)));
 	BUG_ON(check_sysreg_table(cp15_regs, ARRAY_SIZE(cp15_regs)));
 	BUG_ON(check_sysreg_table(cp15_64_regs, ARRAY_SIZE(cp15_64_regs)));
 	BUG_ON(check_sysreg_table(invariant_sys_regs, ARRAY_SIZE(invariant_sys_regs)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We abuse the reset function to overwrite the table itself. */

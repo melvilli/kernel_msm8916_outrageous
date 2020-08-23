@@ -119,7 +119,11 @@ void *snd_lookup_minor_data(unsigned int minor, int type)
 		private_data = mreg->private_data;
 		if (private_data && mreg->card_ptr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			atomic_inc(&mreg->card_ptr->refcount);
+=======
+			get_device(&mreg->card_ptr->card_dev);
+>>>>>>> v3.18
 =======
 			get_device(&mreg->card_ptr->card_dev);
 >>>>>>> v3.18
@@ -158,7 +162,11 @@ static int snd_open(struct inode *inode, struct file *file)
 	unsigned int minor = iminor(inode);
 	struct snd_minor *mptr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct file_operations *old_fops;
+=======
+	const struct file_operations *new_fops;
+>>>>>>> v3.18
 =======
 	const struct file_operations *new_fops;
 >>>>>>> v3.18
@@ -175,6 +183,7 @@ static int snd_open(struct inode *inode, struct file *file)
 			return -ENODEV;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	old_fops = file->f_op;
 	file->f_op = fops_get(mptr->f_ops);
@@ -195,6 +204,8 @@ static int snd_open(struct inode *inode, struct file *file)
 	}
 	fops_put(old_fops);
 =======
+=======
+>>>>>>> v3.18
 	new_fops = fops_get(mptr->f_ops);
 	mutex_unlock(&sound_mutex);
 	if (!new_fops)
@@ -203,6 +214,9 @@ static int snd_open(struct inode *inode, struct file *file)
 
 	if (file->f_op->open)
 		err = file->f_op->open(inode, file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -385,6 +399,7 @@ int snd_unregister_device(int type, struct snd_card *card, int dev)
 EXPORT_SYMBOL(snd_unregister_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_add_device_sysfs_file(int type, struct snd_card *card, int dev,
 			      struct device_attribute *attr)
 {
@@ -402,6 +417,8 @@ int snd_add_device_sysfs_file(int type, struct snd_card *card, int dev,
 
 EXPORT_SYMBOL(snd_add_device_sysfs_file);
 =======
+=======
+>>>>>>> v3.18
 /* get the assigned device to the given type and device number;
  * the caller needs to release it via put_device() after using it
  */
@@ -421,6 +438,9 @@ struct device *snd_get_device(int type, struct snd_card *card, int dev)
 	return d;
 }
 EXPORT_SYMBOL(snd_get_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PROC_FS
@@ -510,7 +530,11 @@ static int __init alsa_sound_init(void)
 	snd_ecards_limit = cards_limit;
 	if (register_chrdev(major, "alsa", &snd_fops)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to register native major device number %d\n", major);
+=======
+		pr_err("ALSA core: unable to register native major device number %d\n", major);
+>>>>>>> v3.18
 =======
 		pr_err("ALSA core: unable to register native major device number %d\n", major);
 >>>>>>> v3.18
@@ -523,7 +547,11 @@ static int __init alsa_sound_init(void)
 	snd_info_minor_register();
 #ifndef MODULE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Advanced Linux Sound Architecture Driver Initialized.\n");
+=======
+	pr_info("Advanced Linux Sound Architecture Driver Initialized.\n");
+>>>>>>> v3.18
 =======
 	pr_info("Advanced Linux Sound Architecture Driver Initialized.\n");
 >>>>>>> v3.18

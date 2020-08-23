@@ -69,7 +69,10 @@ TRACE_EVENT(kvm_s390_destroy_vcpu,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Trace point for start and stop of vpcus.
  */
 TRACE_EVENT(kvm_s390_vcpu_start_stop,
@@ -91,6 +94,9 @@ TRACE_EVENT(kvm_s390_vcpu_start_stop,
 	);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Trace points for injection of interrupts, either per machine or
  * per vcpu.
@@ -248,7 +254,10 @@ TRACE_EVENT(kvm_s390_enable_css,
 	);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Trace point for enabling and disabling interlocking-and-broadcasting
  * suppression.
@@ -271,6 +280,9 @@ TRACE_EVENT(kvm_s390_enable_disable_ibs,
 		      __entry->state ? "enabling" : "disabling", __entry->id)
 	);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _TRACE_KVMS390_H */

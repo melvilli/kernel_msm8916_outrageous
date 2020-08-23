@@ -8,6 +8,10 @@
 #include <linux/device-mapper.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "dm.h"
+>>>>>>> v3.18
 =======
 #include "dm.h"
 >>>>>>> v3.18
@@ -97,10 +101,13 @@ struct multipath {
 	unsigned pg_init_delay_msecs;	/* Number of msecs before pg_init retry */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned queue_size;
 	struct work_struct process_queued_ios;
 	struct list_head queued_ios;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct work_struct trigger_event;
@@ -125,6 +132,7 @@ struct dm_mpath_io {
 typedef int (*action_fn) (struct pgpath *pgpath);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIN_IOS 256	/* Mempool size */
 
 static struct kmem_cache *_mpio_cache;
@@ -134,12 +142,17 @@ static void process_queued_ios(struct work_struct *work);
 static void trigger_event(struct work_struct *work);
 static void activate_path(struct work_struct *work);
 =======
+=======
+>>>>>>> v3.18
 static struct kmem_cache *_mpio_cache;
 
 static struct workqueue_struct *kmultipathd, *kmpath_handlerd;
 static void trigger_event(struct work_struct *work);
 static void activate_path(struct work_struct *work);
 static int __pgpath_busy(struct pgpath *pgpath);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -208,6 +221,10 @@ static struct multipath *alloc_multipath(struct dm_target *ti)
 {
 	struct multipath *m;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned min_ios = dm_get_reserved_rq_based_ios();
+>>>>>>> v3.18
 =======
 	unsigned min_ios = dm_get_reserved_rq_based_ios();
 >>>>>>> v3.18
@@ -215,6 +232,7 @@ static struct multipath *alloc_multipath(struct dm_target *ti)
 	m = kzalloc(sizeof(*m), GFP_KERNEL);
 	if (m) {
 		INIT_LIST_HEAD(&m->priority_groups);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		INIT_LIST_HEAD(&m->queued_ios);
 		spin_lock_init(&m->lock);
@@ -226,6 +244,8 @@ static struct multipath *alloc_multipath(struct dm_target *ti)
 		mutex_init(&m->work_mutex);
 		m->mpio_pool = mempool_create_slab_pool(MIN_IOS, _mpio_cache);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_init(&m->lock);
 		m->queue_io = 1;
 		m->pg_init_delay_msecs = DM_PG_INIT_DELAY_DEFAULT;
@@ -233,6 +253,9 @@ static struct multipath *alloc_multipath(struct dm_target *ti)
 		init_waitqueue_head(&m->pg_init_wait);
 		mutex_init(&m->work_mutex);
 		m->mpio_pool = mempool_create_slab_pool(min_ios, _mpio_cache);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!m->mpio_pool) {
 			kfree(m);
@@ -287,7 +310,11 @@ static void clear_mapinfo(struct multipath *m, union map_info *info)
  *-----------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __pg_init_all_paths(struct multipath *m)
+=======
+static int __pg_init_all_paths(struct multipath *m)
+>>>>>>> v3.18
 =======
 static int __pg_init_all_paths(struct multipath *m)
 >>>>>>> v3.18
@@ -296,9 +323,12 @@ static int __pg_init_all_paths(struct multipath *m)
 	unsigned long pg_init_delay = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->pg_init_count++;
 	m->pg_init_required = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (m->pg_init_in_progress || m->pg_init_disabled)
 		return 0;
 
@@ -309,6 +339,9 @@ static int __pg_init_all_paths(struct multipath *m)
 	if (!m->current_pg)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (m->pg_init_delay_retry)
 		pg_init_delay = msecs_to_jiffies(m->pg_init_delay_msecs != DM_PG_INIT_DELAY_DEFAULT ?
@@ -322,6 +355,10 @@ static int __pg_init_all_paths(struct multipath *m)
 			m->pg_init_in_progress++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return m->pg_init_in_progress;
+>>>>>>> v3.18
 =======
 	return m->pg_init_in_progress;
 >>>>>>> v3.18
@@ -366,13 +403,19 @@ static void __choose_pgpath(struct multipath *m, size_t nr_bytes)
 	unsigned bypassed = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!m->nr_valid_paths)
 		goto failed;
 =======
+=======
+>>>>>>> v3.18
 	if (!m->nr_valid_paths) {
 		m->queue_io = 0;
 		goto failed;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Were we instructed to switch PG? */
@@ -424,6 +467,7 @@ failed:
 static int __must_push_back(struct multipath *m)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (m->queue_if_no_path != m->saved_queue_if_no_path &&
 		dm_noflush_suspending(m->ti));
 }
@@ -433,6 +477,8 @@ static int map_io(struct multipath *m, struct request *clone,
 {
 	int r = DM_MAPIO_REMAPPED;
 =======
+=======
+>>>>>>> v3.18
 	return (m->queue_if_no_path ||
 		(m->queue_if_no_path != m->saved_queue_if_no_path &&
 		 dm_noflush_suspending(m->ti)));
@@ -446,13 +492,20 @@ static int multipath_map(struct dm_target *ti, struct request *clone,
 {
 	struct multipath *m = (struct multipath *) ti->private;
 	int r = DM_MAPIO_REQUEUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t nr_bytes = blk_rq_bytes(clone);
 	unsigned long flags;
 	struct pgpath *pgpath;
 	struct block_device *bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_mpath_io *mpio = map_context->ptr;
+=======
+	struct dm_mpath_io *mpio;
+>>>>>>> v3.18
 =======
 	struct dm_mpath_io *mpio;
 >>>>>>> v3.18
@@ -466,6 +519,7 @@ static int multipath_map(struct dm_target *ti, struct request *clone,
 
 	pgpath = m->current_pgpath;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (was_queued)
 		m->queue_size--;
@@ -497,6 +551,8 @@ static int multipath_map(struct dm_target *ti, struct request *clone,
 					      nr_bytes);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!pgpath) {
 		if (!__must_push_back(m))
 			r = -EIO;	/* Failed */
@@ -524,6 +580,9 @@ static int multipath_map(struct dm_target *ti, struct request *clone,
 	r = DM_MAPIO_REMAPPED;
 
 out_unlock:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&m->lock, flags);
 
@@ -545,6 +604,7 @@ static int queue_if_no_path(struct multipath *m, unsigned queue_if_no_path,
 	else
 		m->saved_queue_if_no_path = queue_if_no_path;
 	m->queue_if_no_path = queue_if_no_path;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!m->queue_if_no_path && m->queue_size)
 		queue_work(kmultipathd, &m->process_queued_ios);
@@ -615,12 +675,17 @@ static void process_queued_ios(struct work_struct *work)
 	if (!must_queue)
 		dispatch_queued_ios(m);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&m->lock, flags);
 
 	if (!queue_if_no_path)
 		dm_table_run_md_queue_async(m->ti->table);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1087,6 +1152,7 @@ static void multipath_dtr(struct dm_target *ti)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Map cloned requests
  */
 static int multipath_map(struct dm_target *ti, struct request *clone,
@@ -1108,6 +1174,8 @@ static int multipath_map(struct dm_target *ti, struct request *clone,
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Take a path out of use.
@@ -1150,7 +1218,11 @@ out:
 static int reinstate_path(struct pgpath *pgpath)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int r = 0;
+=======
+	int r = 0, run_queue = 0;
+>>>>>>> v3.18
 =======
 	int r = 0, run_queue = 0;
 >>>>>>> v3.18
@@ -1176,9 +1248,15 @@ static int reinstate_path(struct pgpath *pgpath)
 	pgpath->is_active = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!m->nr_valid_paths++ && m->queue_size) {
 		m->current_pgpath = NULL;
 		queue_work(kmultipathd, &m->process_queued_ios);
+=======
+	if (!m->nr_valid_paths++) {
+		m->current_pgpath = NULL;
+		run_queue = 1;
+>>>>>>> v3.18
 =======
 	if (!m->nr_valid_paths++) {
 		m->current_pgpath = NULL;
@@ -1197,6 +1275,11 @@ static int reinstate_path(struct pgpath *pgpath)
 out:
 	spin_unlock_irqrestore(&m->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (run_queue)
+		dm_table_run_md_queue_async(m->ti->table);
+>>>>>>> v3.18
 =======
 	if (run_queue)
 		dm_table_run_md_queue_async(m->ti->table);
@@ -1385,18 +1468,24 @@ static void pg_init_done(void *data, int errors)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!m->pg_init_required)
 		m->queue_io = 0;
 
 	m->pg_init_delay_retry = delay_retry;
 	queue_work(kmultipathd, &m->process_queued_ios);
 =======
+=======
+>>>>>>> v3.18
 	if (m->pg_init_required) {
 		m->pg_init_delay_retry = delay_retry;
 		if (__pg_init_all_paths(m))
 			goto out;
 	}
 	m->queue_io = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1414,9 +1503,12 @@ static void activate_path(struct work_struct *work)
 		container_of(work, struct pgpath, activate_path.work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_dh_activate(bdev_get_queue(pgpath->path.dev->bdev),
 				pg_init_done, pgpath);
 =======
+=======
+>>>>>>> v3.18
 	if (pgpath->is_active)
 		scsi_dh_activate(bdev_get_queue(pgpath->path.dev->bdev),
 				 pg_init_done, pgpath);
@@ -1437,6 +1529,9 @@ static int noretry_error(int error)
 
 	/* Anything else could be a path failure, so should be retried */
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1464,6 +1559,7 @@ static int do_end_io(struct multipath *m, struct request *clone,
 		return 0;	/* I/O complete */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (error == -EOPNOTSUPP || error == -EREMOTEIO || error == -EILSEQ) {
 		if ((clone->cmd_flags & REQ_WRITE_SAME) &&
 		    !clone->q->limits.max_write_same_sectors) {
@@ -1475,6 +1571,10 @@ static int do_end_io(struct multipath *m, struct request *clone,
 		}
 		return error;
 	}
+=======
+	if (noretry_error(error))
+		return error;
+>>>>>>> v3.18
 =======
 	if (noretry_error(error))
 		return error;
@@ -1588,7 +1688,11 @@ static void multipath_status(struct dm_target *ti, status_type_t type,
 	/* Features */
 	if (type == STATUSTYPE_INFO)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMEMIT("2 %u %u ", m->queue_size, m->pg_init_count);
+=======
+		DMEMIT("2 %u %u ", m->queue_io, m->pg_init_count);
+>>>>>>> v3.18
 =======
 		DMEMIT("2 %u %u ", m->queue_io, m->pg_init_count);
 >>>>>>> v3.18
@@ -1711,7 +1815,11 @@ static int multipath_message(struct dm_target *ti, unsigned argc, char **argv)
 
 	if (argc != 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMWARN("Unrecognised multipath message received.");
+=======
+		DMWARN("Invalid multipath message arguments. Expected 2 arguments, got %d.", argc);
+>>>>>>> v3.18
 =======
 		DMWARN("Invalid multipath message arguments. Expected 2 arguments, got %d.", argc);
 >>>>>>> v3.18
@@ -1733,7 +1841,11 @@ static int multipath_message(struct dm_target *ti, unsigned argc, char **argv)
 		action = fail_path;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMWARN("Unrecognised multipath message received.");
+=======
+		DMWARN("Unrecognised multipath message received: %s", argv[0]);
+>>>>>>> v3.18
 =======
 		DMWARN("Unrecognised multipath message received: %s", argv[0]);
 >>>>>>> v3.18
@@ -1793,12 +1905,15 @@ static int multipath_ioctl(struct dm_target *ti, unsigned int cmd,
 	 * Only pass ioctls through if the device sizes match exactly.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!r && ti->len != i_size_read(bdev->bd_inode) >> SECTOR_SHIFT)
 		r = scsi_verify_blk_ioctl(NULL, cmd);
 
 	if (r == -ENOTCONN && !fatal_signal_pending(current))
 		queue_work(kmultipathd, &m->process_queued_ios);
 =======
+=======
+>>>>>>> v3.18
 	if (!bdev || ti->len != i_size_read(bdev->bd_inode) >> SECTOR_SHIFT) {
 		int err = scsi_verify_blk_ioctl(NULL, cmd);
 		if (err)
@@ -1816,6 +1931,9 @@ static int multipath_ioctl(struct dm_target *ti, unsigned int cmd,
 		spin_unlock_irqrestore(&m->lock, flags);
 		dm_table_run_md_queue_async(m->ti->table);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r ? : __blkdev_driver_ioctl(bdev, mode, cmd, arg);
@@ -1867,13 +1985,19 @@ static int multipath_busy(struct dm_target *ti)
 	spin_lock_irqsave(&m->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* pg_init in progress or no paths available */
 	if (m->pg_init_in_progress ||
 	    (!m->nr_valid_paths && m->queue_if_no_path)) {
 		busy = 1;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Guess which priority_group will be used at next mapping time */
 	if (unlikely(!m->current_pgpath && m->next_pg))
@@ -1925,7 +2049,11 @@ out:
 static struct target_type multipath_target = {
 	.name = "multipath",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.version = {1, 6, 0},
+=======
+	.version = {1, 7, 0},
+>>>>>>> v3.18
 =======
 	.version = {1, 7, 0},
 >>>>>>> v3.18

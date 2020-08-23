@@ -161,7 +161,11 @@ module_param_array(enable, bool, NULL, 0444);
 MODULE_PARM_DESC(enable, "Enable Audiowerk2 soundcard.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_aw2_ids) = {
+=======
+static const struct pci_device_id snd_aw2_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_aw2_ids[] = {
 >>>>>>> v3.18
@@ -267,7 +271,11 @@ static int snd_aw2_create(struct snd_card *card,
 	if ((pci_set_dma_mask(pci, DMA_BIT_MASK(32)) < 0) ||
 	    (pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(32)) < 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: Impossible to set 32bit mask DMA\n");
+=======
+		dev_err(card->dev, "Impossible to set 32bit mask DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Impossible to set 32bit mask DMA\n");
 >>>>>>> v3.18
@@ -299,7 +307,11 @@ static int snd_aw2_create(struct snd_card *card,
 
 	if (chip->iobase_virt == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: unable to remap memory region");
+=======
+		dev_err(card->dev, "unable to remap memory region");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to remap memory region");
 >>>>>>> v3.18
@@ -315,7 +327,11 @@ static int snd_aw2_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_aw2_saa7146_interrupt,
 			IRQF_SHARED, KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: Cannot grab irq %d\n", pci->irq);
+=======
+		dev_err(card->dev, "Cannot grab irq %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Cannot grab irq %d\n", pci->irq);
 >>>>>>> v3.18
@@ -339,6 +355,7 @@ static int snd_aw2_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 	*rchip = chip;
 
@@ -346,10 +363,15 @@ static int snd_aw2_create(struct snd_card *card,
 	       "Audiowerk 2 sound card (saa7146 chipset) detected and "
 	       "managed\n");
 =======
+=======
+>>>>>>> v3.18
 	*rchip = chip;
 
 	dev_info(card->dev,
 		 "Audiowerk 2 sound card (saa7146 chipset) detected and managed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -373,7 +395,12 @@ static int snd_aw2_probe(struct pci_dev *pci,
 
 	/* (2) Create card instance */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -421,7 +448,10 @@ static void snd_aw2_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -432,7 +462,11 @@ static int snd_aw2_pcm_playback_open(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime = substream->runtime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_DEBUG "aw2: Playback_open\n");
+=======
+	dev_dbg(substream->pcm->card->dev, "Playback_open\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(substream->pcm->card->dev, "Playback_open\n");
 >>>>>>> v3.18
@@ -452,7 +486,11 @@ static int snd_aw2_pcm_capture_open(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime = substream->runtime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_DEBUG "aw2: Capture_open\n");
+=======
+	dev_dbg(substream->pcm->card->dev, "Capture_open\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(substream->pcm->card->dev, "Capture_open\n");
 >>>>>>> v3.18
@@ -644,7 +682,11 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 			  &pcm_playback_ana);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: snd_pcm_new error (0x%X)\n", err);
+=======
+		dev_err(chip->card->dev, "snd_pcm_new error (0x%X)\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "snd_pcm_new error (0x%X)\n", err);
 >>>>>>> v3.18
@@ -678,8 +720,14 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 						    64 * 1024, 64 * 1024);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: snd_pcm_lib_preallocate_pages_for_all "
 		       "error (0x%X)\n", err);
+=======
+		dev_err(chip->card->dev,
+			"snd_pcm_lib_preallocate_pages_for_all error (0x%X)\n",
+			err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"snd_pcm_lib_preallocate_pages_for_all error (0x%X)\n",
@@ -691,7 +739,11 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: snd_pcm_new error (0x%X)\n", err);
+=======
+		dev_err(chip->card->dev, "snd_pcm_new error (0x%X)\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "snd_pcm_new error (0x%X)\n", err);
 >>>>>>> v3.18
@@ -724,11 +776,17 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 						    64 * 1024, 64 * 1024);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "aw2: snd_pcm_lib_preallocate_pages_for_all error "
 		       "(0x%X)\n", err);
 
 
+=======
+		dev_err(chip->card->dev,
+			"snd_pcm_lib_preallocate_pages_for_all error (0x%X)\n",
+			err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"snd_pcm_lib_preallocate_pages_for_all error (0x%X)\n",
@@ -740,7 +798,11 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: snd_pcm_new error (0x%X)\n", err);
+=======
+		dev_err(chip->card->dev, "snd_pcm_new error (0x%X)\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "snd_pcm_new error (0x%X)\n", err);
 >>>>>>> v3.18
@@ -774,9 +836,15 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 						    64 * 1024, 64 * 1024);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "aw2: snd_pcm_lib_preallocate_pages_for_all error "
 		       "(0x%X)\n", err);
+=======
+		dev_err(chip->card->dev,
+			"snd_pcm_lib_preallocate_pages_for_all error (0x%X)\n",
+			err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"snd_pcm_lib_preallocate_pages_for_all error (0x%X)\n",
@@ -788,7 +856,11 @@ static int snd_aw2_new_pcm(struct aw2 *chip)
 	err = snd_ctl_add(chip->card, snd_ctl_new1(&aw2_control, chip));
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "aw2: snd_ctl_add error (0x%X)\n", err);
+=======
+		dev_err(chip->card->dev, "snd_ctl_add error (0x%X)\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "snd_ctl_add error (0x%X)\n", err);
 >>>>>>> v3.18

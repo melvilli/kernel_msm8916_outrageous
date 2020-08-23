@@ -22,6 +22,10 @@
 #include <asm/dcache_clear.h>
 #include <asm/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ static __inline__ void set_bit(int nr, volatile void * addr)
  * clear_bit() is atomic and may not be reordered.  However, it does
  * not contain a memory barrier, so if it is used for locking purposes,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * you should call smp_mb__before_clear_bit() and/or smp_mb__after_clear_bit()
+=======
+ * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
+>>>>>>> v3.18
 =======
  * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
 >>>>>>> v3.18
@@ -112,9 +120,12 @@ static __inline__ void clear_bit(int nr, volatile void * addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

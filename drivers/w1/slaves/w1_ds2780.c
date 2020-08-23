@@ -90,10 +90,16 @@ int w1_ds2780_eeprom_cmd(struct device *dev, int addr, int cmd)
 EXPORT_SYMBOL(w1_ds2780_eeprom_cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_ds2780_read_bin(struct file *filp,
 				  struct kobject *kobj,
 				  struct bin_attribute *bin_attr,
 				  char *buf, loff_t off, size_t count)
+=======
+static ssize_t w1_slave_read(struct file *filp, struct kobject *kobj,
+			     struct bin_attribute *bin_attr, char *buf,
+			     loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t w1_slave_read(struct file *filp, struct kobject *kobj,
 			     struct bin_attribute *bin_attr, char *buf,
@@ -105,6 +111,7 @@ static ssize_t w1_slave_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bin_attribute w1_ds2780_bin_attr = {
 	.attr = {
 		.name = "w1_slave",
@@ -113,6 +120,8 @@ static struct bin_attribute w1_ds2780_bin_attr = {
 	.size = DS2780_DATA_SIZE,
 	.read = w1_ds2780_read_bin,
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RO(w1_slave, DS2780_DATA_SIZE);
 
 static struct bin_attribute *w1_ds2780_bin_attrs[] = {
@@ -127,6 +136,9 @@ static const struct attribute_group w1_ds2780_group = {
 static const struct attribute_group *w1_ds2780_groups[] = {
 	&w1_ds2780_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -156,10 +168,13 @@ static int w1_ds2780_add_slave(struct w1_slave *sl)
 		goto pdev_add_failed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sysfs_create_bin_file(&sl->dev.kobj, &w1_ds2780_bin_attr);
 	if (ret)
 		goto bin_attr_failed;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_set_drvdata(&sl->dev, pdev);
@@ -167,8 +182,11 @@ static int w1_ds2780_add_slave(struct w1_slave *sl)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bin_attr_failed:
 	platform_device_del(pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 pdev_add_failed:
@@ -187,7 +205,10 @@ static void w1_ds2780_remove_slave(struct w1_slave *sl)
 	platform_device_unregister(pdev);
 	ida_simple_remove(&bat_ida, id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_bin_file(&sl->dev.kobj, &w1_ds2780_bin_attr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -196,6 +217,10 @@ static struct w1_family_ops w1_ds2780_fops = {
 	.add_slave    = w1_ds2780_add_slave,
 	.remove_slave = w1_ds2780_remove_slave,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.groups       = w1_ds2780_groups,
+>>>>>>> v3.18
 =======
 	.groups       = w1_ds2780_groups,
 >>>>>>> v3.18
@@ -225,6 +250,10 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Clifton Barnes <cabarnes@indesign-llc.com>");
 MODULE_DESCRIPTION("1-wire Driver for Maxim/Dallas DS2780 Stand-Alone Fuel Gauge IC");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2780));
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2780));
 >>>>>>> v3.18

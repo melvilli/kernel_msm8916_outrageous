@@ -36,6 +36,7 @@ endif
 export LD_BFD
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cflags-$(CONFIG_MARCH_G5)   += $(call cc-option,-march=g5)
 cflags-$(CONFIG_MARCH_Z900) += $(call cc-option,-march=z900)
 cflags-$(CONFIG_MARCH_Z990) += $(call cc-option,-march=z990)
@@ -44,6 +45,8 @@ cflags-$(CONFIG_MARCH_Z10) += $(call cc-option,-march=z10)
 cflags-$(CONFIG_MARCH_Z196) += $(call cc-option,-march=z196)
 cflags-$(CONFIG_MARCH_ZEC12) += $(call cc-option,-march=zEC12)
 =======
+=======
+>>>>>>> v3.18
 mflags-$(CONFIG_MARCH_G5)     := -march=g5
 mflags-$(CONFIG_MARCH_Z900)   := -march=z900
 mflags-$(CONFIG_MARCH_Z990)   := -march=z990
@@ -62,6 +65,9 @@ cflags-$(CONFIG_MARCH_Z9_109_TUNE)	+= -mtune=z9-109
 cflags-$(CONFIG_MARCH_Z10_TUNE)		+= -mtune=z10
 cflags-$(CONFIG_MARCH_Z196_TUNE)	+= -mtune=z196
 cflags-$(CONFIG_MARCH_ZEC12_TUNE)	+= -mtune=zEC12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #KBUILD_IMAGE is necessary for make rpm

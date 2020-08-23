@@ -31,8 +31,12 @@ static void sdhci_cns3xxx_set_clock(struct sdhci_host *host, unsigned int clock)
 	unsigned long timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (clock == host->clock)
 		return;
+=======
+	host->mmc->actual_clock = 0;
+>>>>>>> v3.18
 =======
 	host->mmc->actual_clock = 0;
 >>>>>>> v3.18
@@ -41,7 +45,11 @@ static void sdhci_cns3xxx_set_clock(struct sdhci_host *host, unsigned int clock)
 
 	if (clock == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -84,8 +92,11 @@ static void sdhci_cns3xxx_set_clock(struct sdhci_host *host, unsigned int clock)
 	clk |= SDHCI_CLOCK_CARD_EN;
 	sdhci_writew(host, clk, SDHCI_CLOCK_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	host->clock = clock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -94,6 +105,12 @@ static const struct sdhci_ops sdhci_cns3xxx_ops = {
 	.get_max_clock	= sdhci_cns3xxx_get_max_clk,
 	.set_clock	= sdhci_cns3xxx_set_clock,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_bus_width	= sdhci_set_bus_width,
+	.reset          = sdhci_reset,
+	.set_uhs_signaling = sdhci_set_uhs_signaling,
+>>>>>>> v3.18
 =======
 	.set_bus_width	= sdhci_set_bus_width,
 	.reset          = sdhci_reset,
@@ -108,8 +125,12 @@ static const struct sdhci_pltfm_data sdhci_cns3xxx_pdata = {
 		  SDHCI_QUIRK_INVERTED_WRITE_PROTECT |
 		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  SDHCI_QUIRK_BROKEN_TIMEOUT_VAL |
 		  SDHCI_QUIRK_NONSTANDARD_CLOCK,
+=======
+		  SDHCI_QUIRK_BROKEN_TIMEOUT_VAL,
+>>>>>>> v3.18
 =======
 		  SDHCI_QUIRK_BROKEN_TIMEOUT_VAL,
 >>>>>>> v3.18
@@ -118,7 +139,11 @@ static const struct sdhci_pltfm_data sdhci_cns3xxx_pdata = {
 static int sdhci_cns3xxx_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sdhci_pltfm_register(pdev, &sdhci_cns3xxx_pdata);
+=======
+	return sdhci_pltfm_register(pdev, &sdhci_cns3xxx_pdata, 0);
+>>>>>>> v3.18
 =======
 	return sdhci_pltfm_register(pdev, &sdhci_cns3xxx_pdata, 0);
 >>>>>>> v3.18
@@ -133,7 +158,10 @@ static struct platform_driver sdhci_cns3xxx_driver = {
 	.driver		= {
 		.name	= "sdhci-cns3xxx",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	= SDHCI_PLTFM_PMOPS,

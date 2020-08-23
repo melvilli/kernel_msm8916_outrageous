@@ -6,7 +6,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/head.h>
@@ -22,7 +25,10 @@
 	.globl sun4d_cpu_startup
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.align 4
@@ -101,7 +107,10 @@ smp_panic:
 #define SUN4D_BOOTBUS_CPUID	0xf0140000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.align	4
@@ -156,7 +165,10 @@ sun4d_cpu_startup:
 	b,a	smp_panic
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.align	4

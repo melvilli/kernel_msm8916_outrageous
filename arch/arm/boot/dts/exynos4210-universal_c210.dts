@@ -14,17 +14,23 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos4210.dtsi"
 
 / {
 	model = "Samsung Universal C210 based on Exynos4210 rev0";
 	compatible = "samsung,universal_c210", "samsung,exynos4210";
 =======
+=======
+>>>>>>> v3.18
 #include "exynos4210.dtsi"
 
 / {
 	model = "Samsung Universal C210 based on Exynos4210 rev0";
 	compatible = "samsung,universal_c210", "samsung,exynos4210", "samsung,exynos4";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memory {
@@ -37,7 +43,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	sysram@02020000 {
 		smp-sysram@0 {
 			status = "disabled";
@@ -53,6 +62,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mct@10050000 {
 		compatible = "none";
@@ -80,13 +92,19 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	hsotg@12480000 {
 		vusb_d-supply = <&ldo3_reg>;
 		vusb_a-supply = <&ldo8_reg>;
 		status = "okay";
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sdhci_emmc: sdhci@12510000 {
 		bus-width = <8>;
@@ -98,7 +116,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	sdhci_sd: sdhci@12530000 {
 		bus-width = <4>;
 		pinctrl-0 = <&sd2_clk &sd2_cmd &sd2_bus4>;
@@ -127,6 +148,9 @@
 		status = "okay";
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	serial@13800000 {
 		status = "okay";
@@ -268,6 +292,10 @@
 					regulator-min-microvolt = <1100000>;
 					regulator-max-microvolt = <1100000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					regulator-always-on;
+>>>>>>> v3.18
 =======
 					regulator-always-on;
 >>>>>>> v3.18
@@ -302,6 +330,10 @@
 					regulator-min-microvolt = <3300000>;
 					regulator-max-microvolt = <3300000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					regulator-always-on;
+>>>>>>> v3.18
 =======
 					regulator-always-on;
 >>>>>>> v3.18
@@ -420,7 +452,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spi-lcd {
 		compatible = "spi-gpio";
 		#address-cells = <1>;
@@ -485,13 +520,19 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pwm@139D0000 {
 		compatible = "samsung,s5p6440-pwm";
 		status = "okay";
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	camera {
 		status = "okay";
@@ -519,5 +560,8 @@
 
 &mdma1 {
 	reg = <0x12840000 0x1000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

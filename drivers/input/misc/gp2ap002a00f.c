@@ -126,7 +126,11 @@ static int gp2a_probe(struct i2c_client *client,
 				const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct gp2a_platform_data *pdata = client->dev.platform_data;
+=======
+	const struct gp2a_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct gp2a_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

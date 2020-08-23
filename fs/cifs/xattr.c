@@ -29,6 +29,11 @@
 #include "cifsproto.h"
 #include "cifs_debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cifs_fs_sb.h"
+#include "cifs_unicode.h"
+>>>>>>> v3.18
 =======
 #include "cifs_fs_sb.h"
 #include "cifs_unicode.h"
@@ -91,8 +96,12 @@ int cifs_removexattr(struct dentry *direntry, const char *ea_name)
 			rc = pTcon->ses->server->ops->set_EA(xid, pTcon,
 				full_path, ea_name, NULL, (__u16)0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -164,8 +173,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 			rc = pTcon->ses->server->ops->set_EA(xid, pTcon,
 				full_path, ea_name, ea_value, (__u16)value_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -179,8 +192,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 			rc = pTcon->ses->server->ops->set_EA(xid, pTcon,
 				full_path, ea_name, ea_value, (__u16)value_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -217,8 +234,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 					ea_value, (const int)value_size,
 					ACL_TYPE_ACCESS, cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+					cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 					cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -234,8 +255,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 					ea_value, (const int)value_size,
 					ACL_TYPE_DEFAULT, cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+					cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 					cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -311,8 +336,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 			rc = pTcon->ses->server->ops->query_all_EAs(xid, pTcon,
 				full_path, ea_name, ea_value, buf_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -325,8 +354,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 			rc = pTcon->ses->server->ops->query_all_EAs(xid, pTcon,
 				full_path, ea_name, ea_value, buf_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -338,8 +371,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 				ea_value, buf_size, ACL_TYPE_ACCESS,
 				cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -354,8 +391,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 				ea_value, buf_size, ACL_TYPE_DEFAULT,
 				cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -463,8 +504,12 @@ ssize_t cifs_listxattr(struct dentry *direntry, char *data, size_t buf_size)
 		rc = pTcon->ses->server->ops->query_all_EAs(xid, pTcon,
 				full_path, NULL, data, buf_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
 >>>>>>> v3.18

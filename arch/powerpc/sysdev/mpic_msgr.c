@@ -185,7 +185,11 @@ static int mpic_msgr_probe(struct platform_device *dev)
 				mpic_msgr_count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mpic_msgrs = kzalloc(sizeof(struct mpic_msgr) * mpic_msgr_count,
+=======
+		mpic_msgrs = kcalloc(mpic_msgr_count, sizeof(*mpic_msgrs),
+>>>>>>> v3.18
 =======
 		mpic_msgrs = kcalloc(mpic_msgr_count, sizeof(*mpic_msgrs),
 >>>>>>> v3.18
@@ -242,9 +246,14 @@ static int mpic_msgr_probe(struct platform_device *dev)
 
 		if (receive_mask & (1 << i)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct resource irq;
 
 			if (of_irq_to_resource(np, irq_index, &irq) == NO_IRQ) {
+=======
+			msgr->irq = irq_of_parse_and_map(np, irq_index);
+			if (msgr->irq == NO_IRQ) {
+>>>>>>> v3.18
 =======
 			msgr->irq = irq_of_parse_and_map(np, irq_index);
 			if (msgr->irq == NO_IRQ) {
@@ -255,7 +264,10 @@ static int mpic_msgr_probe(struct platform_device *dev)
 				return -EFAULT;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			msgr->irq = irq.start;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			irq_index += 1;

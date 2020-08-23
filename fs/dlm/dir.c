@@ -69,7 +69,11 @@ int dlm_recover_directory(struct dlm_ls *ls)
 	unsigned int count = 0, count_match = 0, count_bad = 0, count_add = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover_directory");
+=======
+	log_rinfo(ls, "dlm_recover_directory");
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover_directory");
 >>>>>>> v3.18
@@ -194,7 +198,11 @@ int dlm_recover_directory(struct dlm_ls *ls)
 	dlm_set_recover_status(ls, DLM_RS_DIR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover_directory %u in %u new",
+=======
+	log_rinfo(ls, "dlm_recover_directory %u in %u new",
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover_directory %u in %u new",
 >>>>>>> v3.18

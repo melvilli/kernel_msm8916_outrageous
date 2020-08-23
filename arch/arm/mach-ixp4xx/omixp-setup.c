@@ -18,9 +18,13 @@
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_LEDS_CLASS
 #include <linux/leds.h>
 #endif
+=======
+#include <linux/leds.h>
+>>>>>>> v3.18
 =======
 #include <linux/leds.h>
 >>>>>>> v3.18
@@ -32,6 +36,11 @@
 #include <asm/mach/flash.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/hardware.h>
+
+>>>>>>> v3.18
 =======
 #include <mach/hardware.h>
 

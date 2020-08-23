@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_sb.h"
 #include "xfs_ag.h"
@@ -37,6 +38,8 @@
 #include "xfs_ioctl.h"
 #include "xfs_trace.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -59,6 +62,9 @@
 #include "xfs_log.h"
 #include "xfs_dinode.h"
 #include "xfs_icache.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/aio.h>
@@ -202,7 +208,11 @@ xfs_file_fsync(
 
 	if (XFS_FORCED_SHUTDOWN(mp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -252,6 +262,7 @@ xfs_file_fsync(
 		xfs_blkdev_issue_flush(mp->m_ddev_targp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -error;
 }
 
@@ -262,6 +273,8 @@ xfs_file_aio_read(
 	unsigned long		nr_segs,
 	loff_t			pos)
 =======
+=======
+>>>>>>> v3.18
 	return error;
 }
 
@@ -269,12 +282,16 @@ STATIC ssize_t
 xfs_file_read_iter(
 	struct kiocb		*iocb,
 	struct iov_iter		*to)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct file		*file = iocb->ki_filp;
 	struct inode		*inode = file->f_mapping->host;
 	struct xfs_inode	*ip = XFS_I(inode);
 	struct xfs_mount	*mp = ip->i_mount;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	size_t			size = 0;
 	ssize_t			ret = 0;
@@ -303,6 +320,8 @@ xfs_file_read_iter(
 				return 0;
 			return -XFS_ERROR(EINVAL);
 =======
+=======
+>>>>>>> v3.18
 	size_t			size = iov_iter_count(to);
 	ssize_t			ret = 0;
 	int			ioflags = 0;
@@ -325,6 +344,9 @@ xfs_file_read_iter(
 			if (pos == i_size_read(inode))
 				return 0;
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -351,7 +373,11 @@ xfs_file_read_iter(
 	 */
 	xfs_rw_ilock(ip, XFS_IOLOCK_SHARED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ioflags & IO_ISDIRECT) && inode->i_mapping->nrpages) {
+=======
+	if ((ioflags & XFS_IO_ISDIRECT) && inode->i_mapping->nrpages) {
+>>>>>>> v3.18
 =======
 	if ((ioflags & XFS_IO_ISDIRECT) && inode->i_mapping->nrpages) {
 >>>>>>> v3.18
@@ -360,9 +386,15 @@ xfs_file_read_iter(
 
 		if (inode->i_mapping->nrpages) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -filemap_write_and_wait_range(
 							VFS_I(ip)->i_mapping,
 							pos, -1);
+=======
+			ret = filemap_write_and_wait_range(
+							VFS_I(ip)->i_mapping,
+							pos, pos + size - 1);
+>>>>>>> v3.18
 =======
 			ret = filemap_write_and_wait_range(
 							VFS_I(ip)->i_mapping,
@@ -380,7 +412,12 @@ xfs_file_read_iter(
 			 */
 			ret = invalidate_inode_pages2_range(VFS_I(ip)->i_mapping,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						pos >> PAGE_CACHE_SHIFT, -1);
+=======
+					pos >> PAGE_CACHE_SHIFT,
+					(pos + size - 1) >> PAGE_CACHE_SHIFT);
+>>>>>>> v3.18
 =======
 					pos >> PAGE_CACHE_SHIFT,
 					(pos + size - 1) >> PAGE_CACHE_SHIFT);
@@ -394,7 +431,11 @@ xfs_file_read_iter(
 	trace_xfs_file_read(ip, size, pos, ioflags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = generic_file_aio_read(iocb, iovp, nr_segs, pos);
+=======
+	ret = generic_file_read_iter(iocb, to);
+>>>>>>> v3.18
 =======
 	ret = generic_file_read_iter(iocb, to);
 >>>>>>> v3.18
@@ -421,7 +462,11 @@ xfs_file_splice_read(
 
 	if (infilp->f_mode & FMODE_NOCMTIME)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ioflags |= IO_INVIS;
+=======
+		ioflags |= XFS_IO_INVIS;
+>>>>>>> v3.18
 =======
 		ioflags |= XFS_IO_INVIS;
 >>>>>>> v3.18
@@ -442,6 +487,7 @@ xfs_file_splice_read(
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xfs_file_splice_write() does not use xfs_rw_ilock() because
  * generic_file_splice_write() takes the i_mutex itself. This, in theory,
@@ -484,6 +530,8 @@ xfs_file_splice_write(
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This routine is called to handle zeroing any space in the last block of the
@@ -668,7 +716,11 @@ restart:
 			goto restart;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -xfs_zero_eof(ip, *pos, i_size_read(inode));
+=======
+		error = xfs_zero_eof(ip, *pos, i_size_read(inode));
+>>>>>>> v3.18
 =======
 		error = xfs_zero_eof(ip, *pos, i_size_read(inode));
 >>>>>>> v3.18
@@ -725,10 +777,14 @@ STATIC ssize_t
 xfs_file_dio_aio_write(
 	struct kiocb		*iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct iovec	*iovp,
 	unsigned long		nr_segs,
 	loff_t			pos,
 	size_t			ocount)
+=======
+	struct iov_iter		*from)
+>>>>>>> v3.18
 =======
 	struct iov_iter		*from)
 >>>>>>> v3.18
@@ -740,6 +796,7 @@ xfs_file_dio_aio_write(
 	struct xfs_mount	*mp = ip->i_mount;
 	ssize_t			ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t			count = ocount;
 	int			unaligned_io = 0;
 	int			iolock;
@@ -750,6 +807,8 @@ xfs_file_dio_aio_write(
 		return -XFS_ERROR(EINVAL);
 
 =======
+=======
+>>>>>>> v3.18
 	int			unaligned_io = 0;
 	int			iolock;
 	size_t			count = iov_iter_count(from);
@@ -762,6 +821,9 @@ xfs_file_dio_aio_write(
 		return -EINVAL;
 
 	/* "unaligned" here means not aligned to a filesystem block */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((pos & mp->m_blockmask) || ((pos + count) & mp->m_blockmask))
 		unaligned_io = 1;
@@ -794,16 +856,22 @@ xfs_file_dio_aio_write(
 	if (ret)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (mapping->nrpages) {
 		ret = -filemap_write_and_wait_range(VFS_I(ip)->i_mapping,
 						    pos, -1);
 =======
+=======
+>>>>>>> v3.18
 	iov_iter_truncate(from, count);
 
 	if (mapping->nrpages) {
 		ret = filemap_write_and_wait_range(VFS_I(ip)->i_mapping,
 						    pos, pos + count - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			goto out;
@@ -814,7 +882,12 @@ xfs_file_dio_aio_write(
 		 */
 		ret = invalidate_inode_pages2_range(VFS_I(ip)->i_mapping,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						pos >> PAGE_CACHE_SHIFT, -1);
+=======
+					pos >> PAGE_CACHE_SHIFT,
+					(pos + count - 1) >> PAGE_CACHE_SHIFT);
+>>>>>>> v3.18
 =======
 					pos >> PAGE_CACHE_SHIFT,
 					(pos + count - 1) >> PAGE_CACHE_SHIFT);
@@ -836,8 +909,12 @@ xfs_file_dio_aio_write(
 
 	trace_xfs_file_direct_write(ip, count, iocb->ki_pos, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = generic_file_direct_write(iocb, iovp,
 			&nr_segs, pos, &iocb->ki_pos, count, ocount);
+=======
+	ret = generic_file_direct_write(iocb, from, pos);
+>>>>>>> v3.18
 =======
 	ret = generic_file_direct_write(iocb, from, pos);
 >>>>>>> v3.18
@@ -854,10 +931,14 @@ STATIC ssize_t
 xfs_file_buffered_aio_write(
 	struct kiocb		*iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct iovec	*iovp,
 	unsigned long		nr_segs,
 	loff_t			pos,
 	size_t			ocount)
+=======
+	struct iov_iter		*from)
+>>>>>>> v3.18
 =======
 	struct iov_iter		*from)
 >>>>>>> v3.18
@@ -870,7 +951,12 @@ xfs_file_buffered_aio_write(
 	int			enospc = 0;
 	int			iolock = XFS_IOLOCK_EXCL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t			count = ocount;
+=======
+	loff_t			pos = iocb->ki_pos;
+	size_t			count = iov_iter_count(from);
+>>>>>>> v3.18
 =======
 	loff_t			pos = iocb->ki_pos;
 	size_t			count = iov_iter_count(from);
@@ -883,6 +969,10 @@ xfs_file_buffered_aio_write(
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iov_iter_truncate(from, count);
+>>>>>>> v3.18
 =======
 	iov_iter_truncate(from, count);
 >>>>>>> v3.18
@@ -891,6 +981,7 @@ xfs_file_buffered_aio_write(
 
 write_retry:
 	trace_xfs_file_buffered_write(ip, count, iocb->ki_pos, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = generic_file_buffered_write(iocb, iovp, nr_segs,
 			pos, &iocb->ki_pos, count, 0);
@@ -904,6 +995,8 @@ write_retry:
 		enospc = 1;
 		xfs_flush_inodes(ip->i_mount);
 =======
+=======
+>>>>>>> v3.18
 	ret = generic_perform_write(file, from, pos);
 	if (likely(ret >= 0))
 		iocb->ki_pos = pos + ret;
@@ -929,6 +1022,9 @@ write_retry:
 		eofb.eof_scan_owner = ip->i_ino; /* for locking */
 		eofb.eof_flags = XFS_EOF_FLAGS_SYNC;
 		xfs_icache_free_eofblocks(ip->i_mount, &eofb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto write_retry;
 	}
@@ -941,11 +1037,17 @@ out:
 
 STATIC ssize_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs_file_aio_write(
 	struct kiocb		*iocb,
 	const struct iovec	*iovp,
 	unsigned long		nr_segs,
 	loff_t			pos)
+=======
+xfs_file_write_iter(
+	struct kiocb		*iocb,
+	struct iov_iter		*from)
+>>>>>>> v3.18
 =======
 xfs_file_write_iter(
 	struct kiocb		*iocb,
@@ -957,6 +1059,7 @@ xfs_file_write_iter(
 	struct inode		*inode = mapping->host;
 	struct xfs_inode	*ip = XFS_I(inode);
 	ssize_t			ret;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	size_t			ocount = 0;
 
@@ -982,6 +1085,8 @@ xfs_file_write_iter(
 		ret = xfs_file_buffered_aio_write(iocb, iovp, nr_segs, pos,
 						  ocount);
 =======
+=======
+>>>>>>> v3.18
 	size_t			ocount = iov_iter_count(from);
 
 	XFS_STATS_INC(xs_write_calls);
@@ -996,6 +1101,9 @@ xfs_file_write_iter(
 		ret = xfs_file_dio_aio_write(iocb, from);
 	else
 		ret = xfs_file_buffered_aio_write(iocb, from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret > 0) {
@@ -1005,6 +1113,7 @@ xfs_file_write_iter(
 
 		/* Handle various SYNC-type writes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = generic_write_sync(file, pos, ret);
 		if (err < 0)
 			ret = err;
@@ -1012,16 +1121,22 @@ xfs_file_write_iter(
 
 out:
 =======
+=======
+>>>>>>> v3.18
 		err = generic_write_sync(file, iocb->ki_pos - ret, ret);
 		if (err < 0)
 			ret = err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 STATIC long
 xfs_file_fallocate(
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct file	*file,
 	int		mode,
@@ -1054,6 +1169,8 @@ xfs_file_fallocate(
 		new_size = offset + len;
 		error = inode_newsize_ok(inode, new_size);
 =======
+=======
+>>>>>>> v3.18
 	struct file		*file,
 	int			mode,
 	loff_t			offset,
@@ -1112,17 +1229,23 @@ xfs_file_fallocate(
 		else
 			error = xfs_alloc_file_space(ip, offset, len,
 						     XFS_BMAPI_PREALLOC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (error)
 			goto out_unlock;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (file->f_flags & O_DSYNC)
 		attr_flags |= XFS_ATTR_SYNC;
 
 	error = -xfs_change_file_space(ip, cmd, &bf, 0, attr_flags);
 =======
+=======
+>>>>>>> v3.18
 	tp = xfs_trans_alloc(ip->i_mount, XFS_TRANS_WRITEID);
 	error = xfs_trans_reserve(tp, &M_RES(ip->i_mount)->tr_writeid, 0, 0);
 	if (error) {
@@ -1145,6 +1268,9 @@ xfs_file_fallocate(
 	if (file->f_flags & O_DSYNC)
 		xfs_trans_set_sync(tp);
 	error = xfs_trans_commit(tp, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (error)
 		goto out_unlock;
@@ -1156,7 +1282,11 @@ xfs_file_fallocate(
 		iattr.ia_valid = ATTR_SIZE;
 		iattr.ia_size = new_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -xfs_setattr_size(ip, &iattr, XFS_ATTR_NOLOCK);
+=======
+		error = xfs_setattr_size(ip, &iattr);
+>>>>>>> v3.18
 =======
 		error = xfs_setattr_size(ip, &iattr);
 >>>>>>> v3.18
@@ -1198,9 +1328,15 @@ xfs_dir_open(
 	 * certain to have the next operation be a read there.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = xfs_ilock_map_shared(ip);
 	if (ip->i_d.di_nextents > 0)
 		xfs_dir3_data_readahead(NULL, ip, 0, -1);
+=======
+	mode = xfs_ilock_data_map_shared(ip);
+	if (ip->i_d.di_nextents > 0)
+		xfs_dir3_data_readahead(ip, 0, -1);
+>>>>>>> v3.18
 =======
 	mode = xfs_ilock_data_map_shared(ip);
 	if (ip->i_d.di_nextents > 0)
@@ -1216,7 +1352,11 @@ xfs_file_release(
 	struct file	*filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -xfs_release(XFS_I(inode));
+=======
+	return xfs_release(XFS_I(inode));
+>>>>>>> v3.18
 =======
 	return xfs_release(XFS_I(inode));
 >>>>>>> v3.18
@@ -1225,16 +1365,22 @@ xfs_file_release(
 STATIC int
 xfs_file_readdir(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file	*filp,
 	void		*dirent,
 	filldir_t	filldir)
 {
 	struct inode	*inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 	struct file	*file,
 	struct dir_context *ctx)
 {
 	struct inode	*inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xfs_inode_t	*ip = XFS_I(inode);
 	int		error;
@@ -1255,10 +1401,16 @@ xfs_file_readdir(
 	bufsize = (size_t)min_t(loff_t, 32768, ip->i_d.di_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_readdir(ip, dirent, bufsize,
 				(xfs_off_t *)&filp->f_pos, filldir);
 	if (error)
 		return -error;
+=======
+	error = xfs_readdir(ip, ctx, bufsize);
+	if (error)
+		return error;
+>>>>>>> v3.18
 =======
 	error = xfs_readdir(ip, ctx, bufsize);
 	if (error)
@@ -1295,7 +1447,11 @@ xfs_vm_page_mkwrite(
 /*
  * This type is designed to indicate the type of offset we would like
 <<<<<<< HEAD
+<<<<<<< HEAD
  * to search from page cache for either xfs_seek_data() or xfs_seek_hole().
+=======
+ * to search from page cache for xfs_seek_hole_data().
+>>>>>>> v3.18
 =======
  * to search from page cache for xfs_seek_hole_data().
 >>>>>>> v3.18
@@ -1356,7 +1512,11 @@ xfs_lookup_buffer_offset(
  * This routine is called to find out and return a data or hole offset
  * from the page cache for unwritten extents according to the desired
 <<<<<<< HEAD
+<<<<<<< HEAD
  * type for xfs_seek_data() or xfs_seek_hole().
+=======
+ * type for xfs_seek_hole_data().
+>>>>>>> v3.18
 =======
  * type for xfs_seek_hole_data().
 >>>>>>> v3.18
@@ -1520,14 +1680,20 @@ out:
 
 STATIC loff_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs_seek_data(
 	struct file		*file,
 	loff_t			start)
 =======
+=======
+>>>>>>> v3.18
 xfs_seek_hole_data(
 	struct file		*file,
 	loff_t			start,
 	int			whence)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct inode		*inode = file->f_mapping->host;
@@ -1541,12 +1707,15 @@ xfs_seek_hole_data(
 	int			error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock = xfs_ilock_map_shared(ip);
 
 	isize = i_size_read(inode);
 	if (start >= isize) {
 		error = ENXIO;
 =======
+=======
+>>>>>>> v3.18
 	if (XFS_FORCED_SHUTDOWN(mp))
 		return -EIO;
 
@@ -1555,6 +1724,9 @@ xfs_seek_hole_data(
 	isize = i_size_read(inode);
 	if (start >= isize) {
 		error = -ENXIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_unlock;
 	}
@@ -1566,6 +1738,10 @@ xfs_seek_hole_data(
 	fsbno = XFS_B_TO_FSBT(mp, start);
 	end = XFS_B_TO_FSB(mp, isize);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1582,7 +1758,11 @@ xfs_seek_hole_data(
 		/* No extents at given offset, must be beyond EOF */
 		if (nmap == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = ENXIO;
+=======
+			error = -ENXIO;
+>>>>>>> v3.18
 =======
 			error = -ENXIO;
 >>>>>>> v3.18
@@ -1593,6 +1773,7 @@ xfs_seek_hole_data(
 			offset = max_t(loff_t, start,
 				       XFS_FSB_TO_B(mp, map[i].br_startoff));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* Landed in a data extent */
 			if (map[i].br_startblock == DELAYSTARTBLOCK ||
@@ -1608,6 +1789,8 @@ xfs_seek_hole_data(
 				if (xfs_find_get_desired_pgoff(inode, &map[i],
 							DATA_OFF, &offset))
 =======
+=======
+>>>>>>> v3.18
 			/* Landed in the hole we wanted? */
 			if (whence == SEEK_HOLE &&
 			    map[i].br_startblock == HOLESTARTBLOCK)
@@ -1628,12 +1811,16 @@ xfs_seek_hole_data(
 				if (xfs_find_get_desired_pgoff(inode, &map[i],
 				      whence == SEEK_HOLE ? HOLE_OFF : DATA_OFF,
 							&offset))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					goto out;
 			}
 		}
 
 		/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * map[0] is hole or its an unwritten extent but
 		 * without data in page cache.  Probably means that
@@ -1642,6 +1829,8 @@ xfs_seek_hole_data(
 		if (nmap == 1) {
 			error = ENXIO;
 =======
+=======
+>>>>>>> v3.18
 		 * We only received one extent out of the two requested. This
 		 * means we've hit EOF and didn't find what we are looking for.
 		 */
@@ -1660,6 +1849,9 @@ xfs_seek_hole_data(
 			 */
 			ASSERT(whence == SEEK_DATA);
 			error = -ENXIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out_unlock;
 		}
@@ -1669,7 +1861,11 @@ xfs_seek_hole_data(
 		/*
 		 * Nothing was found, proceed to the next round of search
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * if reading offset not beyond or hit EOF.
+=======
+		 * if the next reading offset is not at or beyond EOF.
+>>>>>>> v3.18
 =======
 		 * if the next reading offset is not at or beyond EOF.
 >>>>>>> v3.18
@@ -1677,6 +1873,7 @@ xfs_seek_hole_data(
 		fsbno = map[i - 1].br_startoff + map[i - 1].br_blockcount;
 		start = XFS_FSB_TO_B(mp, fsbno);
 		if (start >= isize) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			error = ENXIO;
 			goto out_unlock;
@@ -1783,6 +1980,8 @@ xfs_seek_hole(
 			offset = isize;
 			break;
 =======
+=======
+>>>>>>> v3.18
 			if (whence == SEEK_HOLE) {
 				offset = isize;
 				break;
@@ -1790,12 +1989,16 @@ xfs_seek_hole(
 			ASSERT(whence == SEEK_DATA);
 			error = -ENXIO;
 			goto out_unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 out:
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * At this point, we must have found a hole.  However, the returned
 	 * offset may be bigger than the file size as it may be aligned to
@@ -1812,6 +2015,8 @@ out_unlock:
 	if (error)
 		return -error;
 =======
+=======
+>>>>>>> v3.18
 	 * If at this point we have found the hole we wanted, the returned
 	 * offset may be bigger than the file size as it may be aligned to
 	 * page boundary for unwritten extents.  We need to deal with this
@@ -1826,6 +2031,9 @@ out_unlock:
 
 	if (error)
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return offset;
 }
@@ -1834,6 +2042,7 @@ STATIC loff_t
 xfs_file_llseek(
 	struct file	*file,
 	loff_t		offset,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int		origin)
 {
@@ -1847,6 +2056,8 @@ xfs_file_llseek(
 	case SEEK_HOLE:
 		return xfs_seek_hole(file, offset);
 =======
+=======
+>>>>>>> v3.18
 	int		whence)
 {
 	switch (whence) {
@@ -1857,6 +2068,9 @@ xfs_file_llseek(
 	case SEEK_HOLE:
 	case SEEK_DATA:
 		return xfs_seek_hole_data(file, offset, whence);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -1866,6 +2080,7 @@ xfs_file_llseek(
 const struct file_operations xfs_file_operations = {
 	.llseek		= xfs_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= xfs_file_aio_read,
@@ -1873,12 +2088,17 @@ const struct file_operations xfs_file_operations = {
 	.splice_read	= xfs_file_splice_read,
 	.splice_write	= xfs_file_splice_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.write		= new_sync_write,
 	.read_iter	= xfs_file_read_iter,
 	.write_iter	= xfs_file_write_iter,
 	.splice_read	= xfs_file_splice_read,
 	.splice_write	= iter_file_splice_write,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.unlocked_ioctl	= xfs_file_ioctl,
 #ifdef CONFIG_COMPAT
@@ -1895,7 +2115,11 @@ const struct file_operations xfs_dir_file_operations = {
 	.open		= xfs_dir_open,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= xfs_file_readdir,
+=======
+	.iterate	= xfs_file_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= xfs_file_readdir,
 >>>>>>> v3.18
@@ -1910,6 +2134,10 @@ const struct file_operations xfs_dir_file_operations = {
 static const struct vm_operations_struct xfs_file_vm_ops = {
 	.fault		= filemap_fault,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.map_pages	= filemap_map_pages,
+>>>>>>> v3.18
 =======
 	.map_pages	= filemap_map_pages,
 >>>>>>> v3.18

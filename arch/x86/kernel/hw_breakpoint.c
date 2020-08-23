@@ -33,7 +33,10 @@
 #include <linux/notifier.h>
 #include <linux/kallsyms.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kprobes.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/percpu.h>
@@ -42,7 +45,10 @@
 #include <linux/module.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/smp.h>
@@ -117,7 +123,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 
 	for (i = 0; i < HBP_NUM; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct perf_event **slot = &__get_cpu_var(bp_per_reg[i]);
+=======
+		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
+>>>>>>> v3.18
 =======
 		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
 >>>>>>> v3.18
@@ -135,7 +145,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 	__this_cpu_write(cpu_debugreg[i], info->address);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dr7 = &__get_cpu_var(cpu_dr7);
+=======
+	dr7 = this_cpu_ptr(&cpu_dr7);
+>>>>>>> v3.18
 =======
 	dr7 = this_cpu_ptr(&cpu_dr7);
 >>>>>>> v3.18
@@ -163,7 +177,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 
 	for (i = 0; i < HBP_NUM; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct perf_event **slot = &__get_cpu_var(bp_per_reg[i]);
+=======
+		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
+>>>>>>> v3.18
 =======
 		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
 >>>>>>> v3.18
@@ -178,7 +196,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dr7 = &__get_cpu_var(cpu_dr7);
+=======
+	dr7 = this_cpu_ptr(&cpu_dr7);
+>>>>>>> v3.18
 =======
 	dr7 = this_cpu_ptr(&cpu_dr7);
 >>>>>>> v3.18
@@ -416,6 +438,12 @@ void flush_ptrace_hw_breakpoint(struct task_struct *tsk)
 		t->ptrace_bps[i] = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	t->debugreg6 = 0;
+	t->ptrace_dr7 = 0;
+>>>>>>> v3.18
 =======
 
 	t->debugreg6 = 0;
@@ -451,7 +479,11 @@ EXPORT_SYMBOL_GPL(hw_breakpoint_restore);
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes hw_breakpoint_handler(struct die_args *args)
+=======
+static int hw_breakpoint_handler(struct die_args *args)
+>>>>>>> v3.18
 =======
 static int hw_breakpoint_handler(struct die_args *args)
 >>>>>>> v3.18
@@ -542,7 +574,11 @@ static int hw_breakpoint_handler(struct die_args *args)
  * Handle debug exception notifications.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes hw_breakpoint_exceptions_notify(
+=======
+int hw_breakpoint_exceptions_notify(
+>>>>>>> v3.18
 =======
 int hw_breakpoint_exceptions_notify(
 >>>>>>> v3.18

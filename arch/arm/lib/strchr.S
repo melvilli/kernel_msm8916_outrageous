@@ -24,7 +24,11 @@ ENTRY(strchr)
 		movne	r0, #0
 		subeq	r0, r0, #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

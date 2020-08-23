@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: station TX data handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -100,6 +104,12 @@ void *mwifiex_process_sta_txpd(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (tx_info->flags & MWIFIEX_BUF_FLAG_TDLS_PKT)
+		local_tx_pd->flags |= MWIFIEX_TXPD_FLAGS_TDLS_PACKET;
+
+>>>>>>> v3.18
 =======
 	if (tx_info->flags & MWIFIEX_BUF_FLAG_TDLS_PKT)
 		local_tx_pd->flags |= MWIFIEX_TXPD_FLAGS_TDLS_PACKET;
@@ -136,6 +146,10 @@ int mwifiex_send_null_packet(struct mwifiex_private *priv, u8 flags)
 	struct mwifiex_adapter *adapter = priv->adapter;
 	struct txpd *local_tx_pd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mwifiex_tx_param tx_param;
+>>>>>>> v3.18
 =======
 	struct mwifiex_tx_param tx_param;
 >>>>>>> v3.18
@@ -161,13 +175,19 @@ int mwifiex_send_null_packet(struct mwifiex_private *priv, u8 flags)
 
 	tx_info = MWIFIEX_SKB_TXCB(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_info->bss_num = priv->bss_num;
 	tx_info->bss_type = priv->bss_type;
 =======
+=======
+>>>>>>> v3.18
 	memset(tx_info, 0, sizeof(*tx_info));
 	tx_info->bss_num = priv->bss_num;
 	tx_info->bss_type = priv->bss_type;
 	tx_info->pkt_len = data_len - (sizeof(struct txpd) + INTF_HEADER_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_reserve(skb, sizeof(struct txpd) + INTF_HEADER_LEN);
 	skb_push(skb, sizeof(struct txpd));
@@ -186,8 +206,14 @@ int mwifiex_send_null_packet(struct mwifiex_private *priv, u8 flags)
 	} else {
 		skb_push(skb, INTF_HEADER_LEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = adapter->if_ops.host_to_card(adapter, MWIFIEX_TYPE_DATA,
 						   skb, NULL);
+=======
+		tx_param.next_pkt_len = 0;
+		ret = adapter->if_ops.host_to_card(adapter, MWIFIEX_TYPE_DATA,
+						   skb, &tx_param);
+>>>>>>> v3.18
 =======
 		tx_param.next_pkt_len = 0;
 		ret = adapter->if_ops.host_to_card(adapter, MWIFIEX_TYPE_DATA,

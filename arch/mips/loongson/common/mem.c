@@ -12,10 +12,13 @@
 
 #include <loongson.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mem.h>
 #include <pci.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <boot_param.h>
 #include <mem.h>
 #include <pci.h>
@@ -24,6 +27,9 @@
 
 u32 memsize, highmemsize;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init prom_init_memory(void)
 {
@@ -61,7 +67,10 @@ void __init prom_init_memory(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else /* CONFIG_LEFI_FIRMWARE_INTERFACE */
 
 void __init prom_init_memory(void)
@@ -99,6 +108,9 @@ void __init prom_init_memory(void)
 
 #endif /* CONFIG_LEFI_FIRMWARE_INTERFACE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* override of arch/mips/mm/cache.c: __uncached_access */
 int __uncached_access(struct file *file, unsigned long addr)

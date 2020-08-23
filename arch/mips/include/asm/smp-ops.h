@@ -14,6 +14,11 @@
 #include <linux/errno.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mips-cm.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/mips-cm.h>
 
@@ -30,7 +35,10 @@ struct plat_smp_ops {
 	void (*init_secondary)(void);
 	void (*smp_finish)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*cpus_done)(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*boot_secondary)(int cpu, struct task_struct *idle);
@@ -52,6 +60,12 @@ static inline void plat_smp_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void gic_send_ipi_single(int cpu, unsigned int action);
+extern void gic_send_ipi_mask(const struct cpumask *mask, unsigned int action);
+
+>>>>>>> v3.18
 =======
 extern void gic_send_ipi_single(int cpu, unsigned int action);
 extern void gic_send_ipi_mask(const struct cpumask *mask, unsigned int action);
@@ -91,6 +105,12 @@ static inline int register_cmp_smp_ops(void)
 	extern struct plat_smp_ops cmp_smp_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!mips_cm_present())
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!mips_cm_present())
 		return -ENODEV;
@@ -118,7 +138,10 @@ static inline int register_vsmp_smp_ops(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MIPS_CPS
 extern int register_cps_smp_ops(void);
 #else
@@ -128,5 +151,8 @@ static inline int register_cps_smp_ops(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_SMP_OPS_H */

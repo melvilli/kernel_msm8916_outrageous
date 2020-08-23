@@ -41,9 +41,13 @@
 #include <mach/usb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	DEBUG
 #undef	VERBOSE
 #endif
+=======
+#undef VERBOSE
+>>>>>>> v3.18
 =======
 #undef VERBOSE
 >>>>>>> v3.18
@@ -392,7 +396,10 @@ static void
 dump_regs(struct isp1301 *isp, const char *label)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef	DEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8	ctrl = isp1301_get_u8(isp, ISP1301_OTG_CONTROL_1);
@@ -404,7 +411,10 @@ dump_regs(struct isp1301 *isp, const char *label)
 		ctrl, status, src);
 	/* mode control and irq enables don't change much */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1026,7 +1036,11 @@ static void isp_update_otg(struct isp1301 *isp, u8 stat)
 			case OTG_STATE_A_WAIT_VFALL:
 				state = OTG_STATE_A_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* khubd may take a while to notice and
+=======
+				/* hub_wq may take a while to notice and
+>>>>>>> v3.18
 =======
 				/* hub_wq may take a while to notice and
 >>>>>>> v3.18
@@ -1296,7 +1310,11 @@ isp1301_set_host(struct usb_otg *otg, struct usb_bus *host)
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver)
+=======
+	if (isp != the_transceiver)
+>>>>>>> v3.18
 =======
 	if (isp != the_transceiver)
 >>>>>>> v3.18
@@ -1356,7 +1374,11 @@ isp1301_set_peripheral(struct usb_otg *otg, struct usb_gadget *gadget)
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver)
+=======
+	if (isp != the_transceiver)
+>>>>>>> v3.18
 =======
 	if (isp != the_transceiver)
 >>>>>>> v3.18
@@ -1441,8 +1463,12 @@ isp1301_start_srp(struct usb_otg *otg)
 	u32		otg_ctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver
 			|| isp->phy.state != OTG_STATE_B_IDLE)
+=======
+	if (isp != the_transceiver || isp->phy.state != OTG_STATE_B_IDLE)
+>>>>>>> v3.18
 =======
 	if (isp != the_transceiver || isp->phy.state != OTG_STATE_B_IDLE)
 >>>>>>> v3.18
@@ -1473,7 +1499,11 @@ isp1301_start_hnp(struct usb_otg *otg)
 	u32 l;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver)
+=======
+	if (isp != the_transceiver)
+>>>>>>> v3.18
 =======
 	if (isp != the_transceiver)
 >>>>>>> v3.18

@@ -77,7 +77,11 @@ static int atmel_tcb_pwm_request(struct pwm_chip *chip,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_enable(tc->clk[group]);
+=======
+	ret = clk_prepare_enable(tc->clk[group]);
+>>>>>>> v3.18
 =======
 	ret = clk_prepare_enable(tc->clk[group]);
 >>>>>>> v3.18
@@ -129,7 +133,11 @@ static void atmel_tcb_pwm_free(struct pwm_chip *chip, struct pwm_device *pwm)
 	struct atmel_tc *tc = tcbpwmc->tc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(tc->clk[pwm->hwpwm / 2]);
+=======
+	clk_disable_unprepare(tc->clk[pwm->hwpwm / 2]);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(tc->clk[pwm->hwpwm / 2]);
 >>>>>>> v3.18
@@ -258,6 +266,11 @@ static int atmel_tcb_pwm_enable(struct pwm_chip *chip, struct pwm_device *pwm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmr |= (tcbpwm->div & ATMEL_TC_TCCLKS);
+
+>>>>>>> v3.18
 =======
 	cmr |= (tcbpwm->div & ATMEL_TC_TCCLKS);
 
@@ -319,7 +332,11 @@ static int atmel_tcb_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,
 		rate = 32768;
 		min = div_u64(NSEC_PER_SEC, rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max = min << 16;
+=======
+		max = min << tc->tcb_config->counter_width;
+>>>>>>> v3.18
 =======
 		max = min << tc->tcb_config->counter_width;
 >>>>>>> v3.18
@@ -395,7 +412,11 @@ static int atmel_tcb_pwm_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tc = atmel_tc_alloc(tcblock, "tcb-pwm");
+=======
+	tc = atmel_tc_alloc(tcblock);
+>>>>>>> v3.18
 =======
 	tc = atmel_tc_alloc(tcblock);
 >>>>>>> v3.18
@@ -456,6 +477,10 @@ static struct platform_driver atmel_tcb_pwm_driver = {
 	.driver = {
 		.name = "atmel-tcb-pwm",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 >>>>>>> v3.18

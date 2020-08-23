@@ -7,8 +7,14 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/types.h>
 #include <asm/byteorder.h>
+=======
+#include <asm/types.h>		/* for BITS_PER_LONG/SHIFT_PER_LONG */
+#include <asm/byteorder.h>
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/types.h>		/* for BITS_PER_LONG/SHIFT_PER_LONG */
 #include <asm/byteorder.h>
@@ -23,6 +29,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if __BITS_PER_LONG == 64
 #define SHIFT_PER_LONG 6
 #else
@@ -35,6 +42,11 @@
 #define smp_mb__before_clear_bit()      smp_mb()
 #define smp_mb__after_clear_bit()       smp_mb()
 
+=======
+#define CHOP_SHIFTCOUNT(x) (((unsigned long) (x)) & (BITS_PER_LONG - 1))
+
+
+>>>>>>> v3.18
 =======
 #define CHOP_SHIFTCOUNT(x) (((unsigned long) (x)) & (BITS_PER_LONG - 1))
 

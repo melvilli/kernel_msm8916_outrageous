@@ -34,6 +34,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_SWIOTLB) || defined(CONFIG_INTEL_IOMMU)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_SWIOTLB) || defined(CONFIG_INTEL_IOMMU)
 >>>>>>> v3.18
@@ -415,13 +419,19 @@ static void ttm_dma_page_put(struct dma_pool *pool, struct dma_page *d_page)
  * @pool: to free the pages from
  * @nr_free: If set to true will free all pages in pool
 <<<<<<< HEAD
+<<<<<<< HEAD
  **/
 static unsigned ttm_dma_page_pool_free(struct dma_pool *pool, unsigned nr_free)
 =======
+=======
+>>>>>>> v3.18
  * @gfp: GFP flags.
  **/
 static unsigned ttm_dma_page_pool_free(struct dma_pool *pool, unsigned nr_free,
 				       gfp_t gfp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long irq_flags;
@@ -441,8 +451,12 @@ static unsigned ttm_dma_page_pool_free(struct dma_pool *pool, unsigned nr_free,
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *),
 			GFP_KERNEL);
+=======
+	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *), gfp);
+>>>>>>> v3.18
 =======
 	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *), gfp);
 >>>>>>> v3.18
@@ -545,7 +559,11 @@ static void ttm_dma_free_pool(struct device *dev, enum pool_type type)
 			continue;
 		/* Takes a spinlock.. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ttm_dma_page_pool_free(pool, FREE_ALL_PAGES);
+=======
+		ttm_dma_page_pool_free(pool, FREE_ALL_PAGES, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		ttm_dma_page_pool_free(pool, FREE_ALL_PAGES, GFP_KERNEL);
 >>>>>>> v3.18
@@ -866,6 +884,10 @@ static int ttm_dma_pool_get_pages(struct dma_pool *pool,
 		d_page = list_first_entry(&pool->free_list, struct dma_page, page_list);
 		ttm->pages[index] = d_page->p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ttm_dma->cpu_address[index] = d_page->vaddr;
+>>>>>>> v3.18
 =======
 		ttm_dma->cpu_address[index] = d_page->vaddr;
 >>>>>>> v3.18
@@ -942,6 +964,7 @@ int ttm_dma_populate(struct ttm_dma_tt *ttm_dma, struct device *dev)
 EXPORT_SYMBOL_GPL(ttm_dma_populate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Get good estimation how many pages are free in pools */
 static int ttm_dma_pool_get_num_unused_pages(void)
 {
@@ -955,6 +978,8 @@ static int ttm_dma_pool_get_num_unused_pages(void)
 	return total;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Put all pages in pages list to correct pool to wait for reuse */
@@ -1017,6 +1042,10 @@ void ttm_dma_unpopulate(struct ttm_dma_tt *ttm_dma, struct device *dev)
 	for (i = 0; i < ttm->num_pages; i++) {
 		ttm->pages[i] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ttm_dma->cpu_address[i] = 0;
+>>>>>>> v3.18
 =======
 		ttm_dma->cpu_address[i] = 0;
 >>>>>>> v3.18
@@ -1026,7 +1055,11 @@ void ttm_dma_unpopulate(struct ttm_dma_tt *ttm_dma, struct device *dev)
 	/* shrink pool if necessary (only on !is_cached pools)*/
 	if (npages)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ttm_dma_page_pool_free(pool, npages);
+=======
+		ttm_dma_page_pool_free(pool, npages, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		ttm_dma_page_pool_free(pool, npages, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1037,10 +1070,13 @@ EXPORT_SYMBOL_GPL(ttm_dma_unpopulate);
 /**
  * Callback for mm to request pool to reduce number of page held.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static int ttm_dma_pool_mm_shrink(struct shrinker *shrink,
 				  struct shrink_control *sc)
 =======
+=======
+>>>>>>> v3.18
  *
  * XXX: (dchinner) Deadlock warning!
  *
@@ -1051,6 +1087,9 @@ static int ttm_dma_pool_mm_shrink(struct shrinker *shrink,
  */
 static unsigned long
 ttm_dma_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	static unsigned start_pool;
@@ -1059,12 +1098,15 @@ ttm_dma_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 	unsigned shrink_pages = sc->nr_to_scan;
 	struct device_pools *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (list_empty(&_manager->pools))
 		return 0;
 
 	mutex_lock(&_manager->lock);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long freed = 0;
 
 	if (list_empty(&_manager->pools))
@@ -1072,6 +1114,9 @@ ttm_dma_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 
 	if (!mutex_trylock(&_manager->lock))
 		return SHRINK_STOP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!_manager->npools)
 		goto out;
@@ -1088,12 +1133,18 @@ ttm_dma_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 			continue;
 		nr_free = shrink_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shrink_pages = ttm_dma_page_pool_free(p->pool, nr_free);
 =======
+=======
+>>>>>>> v3.18
 		shrink_pages = ttm_dma_page_pool_free(p->pool, nr_free,
 						      sc->gfp_mask);
 		freed += nr_free - shrink_pages;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_debug("%s: (%s:%d) Asked to shrink %d, have %d more to go\n",
 			 p->pool->dev_name, p->pool->name, current->pid,
@@ -1102,9 +1153,12 @@ ttm_dma_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 out:
 	mutex_unlock(&_manager->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* return estimated number of unused pages in pool */
 	return ttm_dma_pool_get_num_unused_pages();
 =======
+=======
+>>>>>>> v3.18
 	return freed;
 }
 
@@ -1120,13 +1174,21 @@ ttm_dma_pool_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
 		count += p->pool->npages_free;
 	mutex_unlock(&_manager->lock);
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ttm_dma_pool_mm_shrink_init(struct ttm_pool_manager *manager)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	manager->mm_shrink.shrink = &ttm_dma_pool_mm_shrink;
+=======
+	manager->mm_shrink.count_objects = ttm_dma_pool_shrink_count;
+	manager->mm_shrink.scan_objects = &ttm_dma_pool_shrink_scan;
+>>>>>>> v3.18
 =======
 	manager->mm_shrink.count_objects = ttm_dma_pool_shrink_count;
 	manager->mm_shrink.scan_objects = &ttm_dma_pool_shrink_scan;
@@ -1220,6 +1282,11 @@ int ttm_dma_page_alloc_debugfs(struct seq_file *m, void *data)
 }
 EXPORT_SYMBOL_GPL(ttm_dma_page_alloc_debugfs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif
+>>>>>>> v3.18
 =======
 
 #endif

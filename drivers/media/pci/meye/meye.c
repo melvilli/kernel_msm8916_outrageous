@@ -1167,7 +1167,10 @@ static int vidioc_try_fmt_vid_cap(struct file *file, void *fh,
 			       f->fmt.pix.bytesperline;
 	f->fmt.pix.colorspace = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1236,7 +1239,10 @@ static int vidioc_s_fmt_vid_cap(struct file *file, void *fh,
 			       f->fmt.pix.bytesperline;
 	f->fmt.pix.colorspace = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1705,7 +1711,11 @@ static int meye_probe(struct pci_dev *pcidev, const struct pci_device_id *ent)
 	meye.mchip_irq = pcidev->irq;
 	if (request_irq(meye.mchip_irq, meye_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_SHARED, "meye", meye_irq)) {
+=======
+			IRQF_SHARED, "meye", meye_irq)) {
+>>>>>>> v3.18
 =======
 			IRQF_SHARED, "meye", meye_irq)) {
 >>>>>>> v3.18
@@ -1760,7 +1770,10 @@ static int meye_probe(struct pci_dev *pcidev, const struct pci_device_id *ent)
 	v4l2_ctrl_handler_setup(&meye.hdl);
 	meye.vdev->ctrl_handler = &meye.hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &meye.vdev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

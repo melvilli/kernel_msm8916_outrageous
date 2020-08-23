@@ -15,6 +15,10 @@
 #include <linux/kdebug.h>
 #include <linux/nmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 >>>>>>> v3.18
@@ -34,6 +38,12 @@
 #include <asm/x86_init.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CREATE_TRACE_POINTS
+#include <trace/events/nmi.h>
+
+>>>>>>> v3.18
 =======
 #define CREATE_TRACE_POINTS
 #include <trace/events/nmi.h>
@@ -93,8 +103,11 @@ __setup("unknown_nmi_panic", setup_unknown_nmi_panic);
 #define nmi_to_desc(type) (&nmi_desc[type])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
 =======
+=======
+>>>>>>> v3.18
 static u64 nmi_longest_ns = 1 * NSEC_PER_MSEC;
 
 static int __init nmi_warning_debugfs(void)
@@ -120,6 +133,9 @@ static void nmi_max_handler(struct irq_work *w)
 }
 
 static int nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct nmi_desc *desc = nmi_to_desc(type);
@@ -135,9 +151,12 @@ static int nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
 	 * to handle those situations.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_rcu(a, &desc->head, list)
 		handled += a->handler(type, regs);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_rcu(a, &desc->head, list) {
 		int thishandled;
 		u64 delta;
@@ -154,6 +173,9 @@ static int nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
 		a->max_duration = delta;
 		irq_work_queue(&a->irq_work);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rcu_read_unlock();
@@ -162,6 +184,10 @@ static int nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
 	return handled;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(nmi_handle);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(nmi_handle);
 >>>>>>> v3.18
@@ -175,6 +201,11 @@ int __register_nmi_handler(unsigned int type, struct nmiaction *action)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_irq_work(&action->irq_work, nmi_max_handler);
+
+>>>>>>> v3.18
 =======
 	init_irq_work(&action->irq_work, nmi_max_handler);
 
@@ -231,7 +262,11 @@ void unregister_nmi_handler(unsigned int type, const char *name)
 EXPORT_SYMBOL_GPL(unregister_nmi_handler);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __kprobes void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -265,8 +300,14 @@ pci_serr_error(unsigned char reason, struct pt_regs *regs)
 	outb(reason, NMI_REASON_PORT);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static __kprobes void
+=======
+NOKPROBE_SYMBOL(pci_serr_error);
+
+static void
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(pci_serr_error);
 
@@ -302,8 +343,14 @@ io_check_error(unsigned char reason, struct pt_regs *regs)
 	outb(reason, NMI_REASON_PORT);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static __kprobes void
+=======
+NOKPROBE_SYMBOL(io_check_error);
+
+static void
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(io_check_error);
 
@@ -337,6 +384,10 @@ unknown_nmi_error(unsigned char reason, struct pt_regs *regs)
 	pr_emerg("Dazed and confused, but trying to continue\n");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(unknown_nmi_error);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(unknown_nmi_error);
 >>>>>>> v3.18
@@ -345,7 +396,11 @@ static DEFINE_PER_CPU(bool, swallow_nmi);
 static DEFINE_PER_CPU(unsigned long, last_nmi_rip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __kprobes void default_do_nmi(struct pt_regs *regs)
+=======
+static void default_do_nmi(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void default_do_nmi(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -448,6 +503,10 @@ static void default_do_nmi(struct pt_regs *regs)
 		unknown_nmi_error(reason, regs);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(default_do_nmi);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(default_do_nmi);
 >>>>>>> v3.18
@@ -571,7 +630,11 @@ static inline void nmi_nesting_postprocess(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 dotraplinkage notrace __kprobes void
+=======
+dotraplinkage notrace void
+>>>>>>> v3.18
 =======
 dotraplinkage notrace void
 >>>>>>> v3.18
@@ -592,6 +655,10 @@ do_nmi(struct pt_regs *regs, long error_code)
 	nmi_nesting_postprocess();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(do_nmi);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(do_nmi);
 >>>>>>> v3.18

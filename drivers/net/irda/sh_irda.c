@@ -805,7 +805,11 @@ static int sh_irda_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_irq(irq, sh_irda_irq, IRQF_DISABLED, "sh_irda", self);
+=======
+	err = devm_request_irq(&pdev->dev, irq, sh_irda_irq, 0, "sh_irda", self);
+>>>>>>> v3.18
 =======
 	err = devm_request_irq(&pdev->dev, irq, sh_irda_irq, 0, "sh_irda", self);
 >>>>>>> v3.18
@@ -843,7 +847,10 @@ static int sh_irda_remove(struct platform_device *pdev)
 	iounmap(self->membase);
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

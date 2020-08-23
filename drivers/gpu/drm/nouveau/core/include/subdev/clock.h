@@ -8,11 +8,14 @@ struct nouveau_pll_vals;
 struct nvbios_pll;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_clock {
 	struct nouveau_subdev base;
 
 	int (*pll_set)(struct nouveau_clock *, u32 type, u32 freq);
 =======
+=======
+>>>>>>> v3.18
 enum nv_clk_src {
 	nv_clk_src_crystal,
 	nv_clk_src_href,
@@ -97,6 +100,9 @@ struct nouveau_clock {
 	int  (*calc)(struct nouveau_clock *, struct nouveau_cstate *);
 	int  (*prog)(struct nouveau_clock *);
 	void (*tidy)(struct nouveau_clock *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*XXX: die, these are here *only* to support the completely
@@ -114,6 +120,7 @@ nouveau_clock(void *obj)
 	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_CLOCK];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nouveau_clock_create(p,e,o,d)                                          \
 	nouveau_subdev_create((p), (e), (o), 0, "CLOCK", "clock", d)
@@ -137,6 +144,8 @@ extern struct nouveau_oclass nv50_clock_oclass;
 extern struct nouveau_oclass nva3_clock_oclass;
 extern struct nouveau_oclass nvc0_clock_oclass;
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_clocks {
 	enum nv_clk_src name;
 	u8 bios; /* 0xff for none */
@@ -179,6 +188,9 @@ extern struct nouveau_oclass nva3_clock_oclass;
 extern struct nouveau_oclass nvc0_clock_oclass;
 extern struct nouveau_oclass nve0_clock_oclass;
 extern struct nouveau_oclass gk20a_clock_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int nv04_clock_pll_set(struct nouveau_clock *, u32 type, u32 freq);
@@ -190,11 +202,17 @@ int nva3_clock_pll_calc(struct nouveau_clock *, struct nvbios_pll *,
 			int clk, struct nouveau_pll_vals *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nouveau_clock_ustate(struct nouveau_clock *, int req, int pwr);
 int nouveau_clock_astate(struct nouveau_clock *, int req, int rel);
 int nouveau_clock_dstate(struct nouveau_clock *, int req, int rel);
 int nouveau_clock_tstate(struct nouveau_clock *, int req, int rel);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

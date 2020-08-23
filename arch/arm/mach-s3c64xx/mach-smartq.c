@@ -17,6 +17,10 @@
 #include <linux/pwm_backlight.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -30,8 +34,13 @@
 #include <mach/map.h>
 #include <mach/regs-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <plat/clock.h>
+=======
+#include <mach/gpio-samsung.h>
+
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 
@@ -42,7 +51,10 @@
 #include <plat/gpio-cfg.h>
 #include <linux/platform_data/hwmon-s3c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/usb-ohci-s3c2410.h>
@@ -119,7 +131,11 @@ static void smartq_usb_host_enableoc(struct s3c2410_hcd_info *info, int on)
 	if (on) {
 		ret = request_irq(gpio_to_irq(S3C64XX_GPL(10)),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  smartq_usb_host_ocirq, IRQF_DISABLED |
+=======
+				  smartq_usb_host_ocirq,
+>>>>>>> v3.18
 =======
 				  smartq_usb_host_ocirq,
 >>>>>>> v3.18
@@ -168,6 +184,10 @@ static struct platform_pwm_backlight_data smartq_backlight_data = {
 	.dft_brightness	= 600,
 	.pwm_period_ns	= 1000000000 / (1000 * 20),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -178,7 +198,11 @@ static struct platform_device smartq_backlight_device = {
 	.name		= "pwm-backlight",
 	.dev		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.parent	= &s3c_device_timer[1].dev,
+=======
+		.parent	= &samsung_device_pwm.dev,
+>>>>>>> v3.18
 =======
 		.parent	= &samsung_device_pwm.dev,
 >>>>>>> v3.18
@@ -271,7 +295,11 @@ static struct platform_device *smartq_devices[] __initdata = {
 	&s3c_device_ohci,
 	&s3c_device_rtc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&s3c_device_timer[1],
+=======
+	&samsung_device_pwm,
+>>>>>>> v3.18
 =======
 	&samsung_device_pwm,
 >>>>>>> v3.18
@@ -366,6 +394,7 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init smartq_usb_otg_init(void)
 {
 	clk_xusbxti.rate = 12000000;
@@ -373,6 +402,8 @@ static int __init smartq_usb_otg_init(void)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init smartq_wifi_init(void)
@@ -409,7 +440,12 @@ void __init smartq_map_io(void)
 {
 	s3c64xx_init_io(smartq_iodesc, ARRAY_SIZE(smartq_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+	s3c64xx_set_xusbxti_freq(12000000);
+>>>>>>> v3.18
 =======
 	s3c64xx_set_xtal_freq(12000000);
 	s3c64xx_set_xusbxti_freq(12000000);
@@ -436,7 +472,10 @@ void __init smartq_machine_init(void)
 	WARN_ON(smartq_power_off_init());
 	WARN_ON(smartq_usb_host_init());
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(smartq_usb_otg_init());
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	WARN_ON(smartq_wifi_init());

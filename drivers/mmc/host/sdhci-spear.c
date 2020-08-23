@@ -28,6 +28,10 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/sdhci-spear.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmc/slot-gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmc/slot-gpio.h>
 >>>>>>> v3.18
@@ -41,6 +45,7 @@ struct spear_sdhci {
 
 /* sdhci ops */
 static const struct sdhci_ops sdhci_pltfm_ops = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Nothing to do for now. */
 };
@@ -76,12 +81,17 @@ static irqreturn_t sdhci_gpio_irq(int irq, void *dev_id)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	.set_clock = sdhci_set_clock,
 	.set_bus_width = sdhci_set_bus_width,
 	.reset = sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct sdhci_plat_data *sdhci_probe_config_dt(struct platform_device *pdev)
@@ -98,6 +108,7 @@ static struct sdhci_plat_data *sdhci_probe_config_dt(struct platform_device *pde
 	if (cd_gpio != -1) {
 		pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pdata) {
 			dev_err(&pdev->dev, "DT: kzalloc failed\n");
 			return ERR_PTR(-ENOMEM);
@@ -107,12 +118,17 @@ static struct sdhci_plat_data *sdhci_probe_config_dt(struct platform_device *pde
 	pdata->card_int_gpio = cd_gpio;
 
 =======
+=======
+>>>>>>> v3.18
 		if (!pdata)
 			dev_err(&pdev->dev, "DT: kzalloc failed\n");
 		else
 			pdata->card_int_gpio = cd_gpio;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pdata;
 }
@@ -129,6 +145,7 @@ static int sdhci_probe(struct platform_device *pdev)
 	struct sdhci_host *host;
 	struct resource *iomem;
 	struct spear_sdhci *sdhci;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -160,6 +177,8 @@ static int sdhci_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "Error getting clock\n");
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev;
 	int ret;
 
@@ -192,6 +211,9 @@ static int sdhci_probe(struct platform_device *pdev)
 		ret = PTR_ERR(sdhci->clk);
 		dev_dbg(&pdev->dev, "Error getting clock\n");
 		goto err_host;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -199,7 +221,11 @@ static int sdhci_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_dbg(&pdev->dev, "Error enabling clock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto put_clk;
+=======
+		goto err_host;
+>>>>>>> v3.18
 =======
 		goto err_host;
 >>>>>>> v3.18
@@ -215,7 +241,11 @@ static int sdhci_probe(struct platform_device *pdev)
 		if (IS_ERR(sdhci->data)) {
 			dev_err(&pdev->dev, "DT: Failed to get pdata\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -ENODEV;
+=======
+			goto disable_clk;
+>>>>>>> v3.18
 =======
 			goto disable_clk;
 >>>>>>> v3.18
@@ -224,6 +254,7 @@ static int sdhci_probe(struct platform_device *pdev)
 		sdhci->data = dev_get_platdata(&pdev->dev);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pdev->dev.platform_data = sdhci;
 
@@ -250,6 +281,8 @@ static int sdhci_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "failed to remap registers\n");
 		goto free_host;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * It is optional to use GPIOs for sdhci card detection. If
 	 * sdhci->data is NULL, then use original sdhci lines otherwise
@@ -264,6 +297,9 @@ static int sdhci_probe(struct platform_device *pdev)
 				sdhci->data->card_int_gpio);
 			goto disable_clk;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -271,7 +307,11 @@ static int sdhci_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_dbg(&pdev->dev, "error adding host\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto free_host;
+=======
+		goto disable_clk;
+>>>>>>> v3.18
 =======
 		goto disable_clk;
 >>>>>>> v3.18
@@ -279,6 +319,7 @@ static int sdhci_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, host);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * It is optional to use GPIOs for sdhci Power control & sdhci card
@@ -354,12 +395,17 @@ disable_clk:
 put_clk:
 	clk_put(sdhci->clk);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 
 disable_clk:
 	clk_disable_unprepare(sdhci->clk);
 err_host:
 	sdhci_free_host(host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err:
 	dev_err(&pdev->dev, "spear-sdhci probe failed: %d\n", ret);
@@ -370,16 +416,22 @@ static int sdhci_remove(struct platform_device *pdev)
 {
 	struct sdhci_host *host = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spear_sdhci *sdhci = dev_get_platdata(&pdev->dev);
 	int dead = 0;
 	u32 scratch;
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct spear_sdhci *sdhci = sdhci_priv(host);
 	int dead = 0;
 	u32 scratch;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	scratch = readl(host->ioaddr + SDHCI_INT_STATUS);
 	if (scratch == (u32)-1)
@@ -387,9 +439,14 @@ static int sdhci_remove(struct platform_device *pdev)
 
 	sdhci_remove_host(host, dead);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdhci_free_host(host);
 	clk_disable_unprepare(sdhci->clk);
 	clk_put(sdhci->clk);
+=======
+	clk_disable_unprepare(sdhci->clk);
+	sdhci_free_host(host);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(sdhci->clk);
 	sdhci_free_host(host);
@@ -403,7 +460,11 @@ static int sdhci_suspend(struct device *dev)
 {
 	struct sdhci_host *host = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spear_sdhci *sdhci = dev_get_platdata(dev);
+=======
+	struct spear_sdhci *sdhci = sdhci_priv(host);
+>>>>>>> v3.18
 =======
 	struct spear_sdhci *sdhci = sdhci_priv(host);
 >>>>>>> v3.18
@@ -420,7 +481,11 @@ static int sdhci_resume(struct device *dev)
 {
 	struct sdhci_host *host = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spear_sdhci *sdhci = dev_get_platdata(dev);
+=======
+	struct spear_sdhci *sdhci = sdhci_priv(host);
+>>>>>>> v3.18
 =======
 	struct spear_sdhci *sdhci = sdhci_priv(host);
 >>>>>>> v3.18
@@ -450,7 +515,10 @@ static struct platform_driver sdhci_driver = {
 	.driver = {
 		.name	= "sdhci",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	= &sdhci_pm_ops,

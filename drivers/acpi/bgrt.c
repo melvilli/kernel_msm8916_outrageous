@@ -52,7 +52,11 @@ static ssize_t show_yoffset(struct device *dev,
 static DEVICE_ATTR(yoffset, S_IRUGO, show_yoffset, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_image(struct file *file, struct kobject *kobj,
+=======
+static ssize_t image_read(struct file *file, struct kobject *kobj,
+>>>>>>> v3.18
 =======
 static ssize_t image_read(struct file *file, struct kobject *kobj,
 >>>>>>> v3.18
@@ -63,6 +67,7 @@ static ssize_t image_read(struct file *file, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bin_attribute image_attr = {
 	.attr = {
 		.name = "image",
@@ -70,6 +75,9 @@ static struct bin_attribute image_attr = {
 	},
 	.read = show_image,
 };
+=======
+static BIN_ATTR_RO(image, 0);	/* size gets filled in later */
+>>>>>>> v3.18
 =======
 static BIN_ATTR_RO(image, 0);	/* size gets filled in later */
 >>>>>>> v3.18
@@ -84,9 +92,12 @@ static struct attribute *bgrt_attributes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute_group bgrt_attribute_group = {
 	.attrs = bgrt_attributes,
 =======
+=======
+>>>>>>> v3.18
 static struct bin_attribute *bgrt_bin_attributes[] = {
 	&bin_attr_image,
 	NULL,
@@ -95,6 +106,9 @@ static struct bin_attribute *bgrt_bin_attributes[] = {
 static struct attribute_group bgrt_attribute_group = {
 	.attrs = bgrt_attributes,
 	.bin_attrs = bgrt_bin_attributes,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -106,9 +120,14 @@ static int __init bgrt_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_bin_attr_init(&image_attr);
 	image_attr.private = bgrt_image;
 	image_attr.size = bgrt_image_size;
+=======
+	bin_attr_image.private = bgrt_image;
+	bin_attr_image.size = bgrt_image_size;
+>>>>>>> v3.18
 =======
 	bin_attr_image.private = bgrt_image;
 	bin_attr_image.size = bgrt_image_size;
@@ -123,6 +142,7 @@ static int __init bgrt_init(void)
 		goto out_kobject;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sysfs_create_bin_file(bgrt_kobj, &image_attr);
 	if (ret)
 		goto out_group;
@@ -131,6 +151,10 @@ static int __init bgrt_init(void)
 
 out_group:
 	sysfs_remove_group(bgrt_kobj, &bgrt_attribute_group);
+=======
+	return 0;
+
+>>>>>>> v3.18
 =======
 	return 0;
 

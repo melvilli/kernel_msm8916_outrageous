@@ -15,6 +15,10 @@
 #include <asm/byteorder.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/vectors.h>
+>>>>>>> v3.18
 =======
 #include <asm/vectors.h>
 >>>>>>> v3.18
@@ -24,6 +28,7 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XCHAL_KIO_CACHED_VADDR	0xe0000000
 #define XCHAL_KIO_BYPASS_VADDR	0xf0000000
 #define XCHAL_KIO_PADDR		0xf0000000
@@ -31,12 +36,17 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define IOADDR(x)		(XCHAL_KIO_BYPASS_VADDR + (x))
 #define IO_SPACE_LIMIT ~0
 
 #ifdef CONFIG_MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if XCHAL_HAVE_PTP_MMU && XCHAL_HAVE_SPANNING_WAY && defined(CONFIG_OF)
 extern unsigned long xtensa_kio_paddr;
@@ -47,6 +57,9 @@ static inline unsigned long xtensa_get_kio_paddr(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Return the virtual address for the specified bus memory.

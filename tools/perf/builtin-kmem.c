@@ -14,6 +14,11 @@
 #include "util/parse-options.h"
 #include "util/trace-event.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+#include "util/cpumap.h"
+>>>>>>> v3.18
 =======
 #include "util/data.h"
 #include "util/cpumap.h"
@@ -36,9 +41,12 @@ static int			caller_lines = -1;
 static bool			raw_ip;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int			*cpunode_map;
 static int			max_cpu_num;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct alloc_stat {
@@ -62,6 +70,7 @@ static struct rb_root root_caller_sorted;
 static unsigned long total_requested, total_allocated;
 static unsigned long nr_allocs, nr_cross_allocs;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PATH_SYS_NODE	"/sys/devices/system/node"
 
@@ -133,6 +142,8 @@ static int setup_cpunode_map(void)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int insert_alloc_stat(unsigned long call_site, unsigned long ptr,
@@ -246,7 +257,11 @@ static int perf_evsel__process_alloc_node_event(struct perf_evsel *evsel,
 
 	if (!ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int node1 = cpunode_map[sample->cpu],
+=======
+		int node1 = cpu__get_node(sample->cpu),
+>>>>>>> v3.18
 =======
 		int node1 = cpu__get_node(sample->cpu),
 >>>>>>> v3.18
@@ -321,7 +336,12 @@ static int process_sample_event(struct perf_tool *tool __maybe_unused,
 				struct machine *machine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, event->ip.pid);
+=======
+	struct thread *thread = machine__findnew_thread(machine, sample->pid,
+							sample->tid);
+>>>>>>> v3.18
 =======
 	struct thread *thread = machine__findnew_thread(machine, sample->pid,
 							sample->tid);
@@ -334,15 +354,21 @@ static int process_sample_event(struct perf_tool *tool __maybe_unused,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_printf(" ... thread: %s:%d\n", thread->comm, thread->pid);
 
 	if (evsel->handler.func != NULL) {
 		tracepoint_handler f = evsel->handler.func;
 =======
+=======
+>>>>>>> v3.18
 	dump_printf(" ... thread: %s:%d\n", thread__comm_str(thread), thread->tid);
 
 	if (evsel->handler != NULL) {
 		tracepoint_handler f = evsel->handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return f(evsel, sample);
 	}
@@ -354,7 +380,13 @@ static struct perf_tool perf_kmem = {
 	.sample		 = process_sample_event,
 	.comm		 = perf_event__process_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ordered_samples = true,
+=======
+	.mmap		 = perf_event__process_mmap,
+	.mmap2		 = perf_event__process_mmap2,
+	.ordered_events	 = true,
+>>>>>>> v3.18
 =======
 	.mmap		 = perf_event__process_mmap,
 	.mmap2		 = perf_event__process_mmap2,
@@ -507,10 +539,16 @@ static void sort_result(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cmd_kmem(void)
 {
 	int err = -EINVAL;
 	struct perf_session *session;
+=======
+static int __cmd_kmem(struct perf_session *session)
+{
+	int err = -EINVAL;
+>>>>>>> v3.18
 =======
 static int __cmd_kmem(struct perf_session *session)
 {
@@ -526,6 +564,7 @@ static int __cmd_kmem(struct perf_session *session)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	session = perf_session__new(input_name, O_RDONLY, 0, false, &perf_kmem);
 	if (session == NULL)
 		return -ENOMEM;
@@ -540,12 +579,17 @@ static int __cmd_kmem(struct perf_session *session)
 		pr_err("Initializing perf session tracepoint handlers failed\n");
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	if (!perf_session__has_traces(session, "kmem record"))
 		goto out;
 
 	if (perf_session__set_tracepoints_handlers(session, kmem_tracepoints)) {
 		pr_err("Initializing perf session tracepoint handlers failed\n");
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -553,16 +597,22 @@ static int __cmd_kmem(struct perf_session *session)
 	err = perf_session__process_events(session, &perf_kmem);
 	if (err != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_delete;
 	sort_result();
 	print_result(session);
 out_delete:
 	perf_session__delete(session);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	sort_result();
 	print_result(session);
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -764,7 +814,11 @@ static int __cmd_record(int argc, const char **argv)
 {
 	const char * const record_args[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"record", "-a", "-R", "-f", "-c", "1",
+=======
+	"record", "-a", "-R", "-c", "1",
+>>>>>>> v3.18
 =======
 	"record", "-a", "-R", "-c", "1",
 >>>>>>> v3.18
@@ -810,12 +864,15 @@ int cmd_kmem(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_END()
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char * const kmem_usage[] = {
 		"perf kmem [<options>] {record|stat}",
 		NULL
 	};
 	argc = parse_options(argc, argv, kmem_options, kmem_usage, 0);
 =======
+=======
+>>>>>>> v3.18
 	const char *const kmem_subcommands[] = { "record", "stat", NULL };
 	const char *kmem_usage[] = {
 		NULL,
@@ -830,11 +887,15 @@ int cmd_kmem(int argc, const char **argv, const char *prefix __maybe_unused)
 
 	argc = parse_options_subcommand(argc, argv, kmem_options,
 					kmem_subcommands, kmem_usage, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!argc)
 		usage_with_options(kmem_usage, kmem_options);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	symbol__init();
 
@@ -844,6 +905,8 @@ int cmd_kmem(int argc, const char **argv, const char *prefix __maybe_unused)
 		if (setup_cpunode_map())
 			return -1;
 =======
+=======
+>>>>>>> v3.18
 	if (!strncmp(argv[0], "rec", 3)) {
 		symbol__init(NULL);
 		return __cmd_record(argc, argv);
@@ -858,6 +921,9 @@ int cmd_kmem(int argc, const char **argv, const char *prefix __maybe_unused)
 	if (!strcmp(argv[0], "stat")) {
 		if (cpu__setup_cpunode_map())
 			goto out_delete;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (list_empty(&caller_sort))
@@ -866,12 +932,15 @@ int cmd_kmem(int argc, const char **argv, const char *prefix __maybe_unused)
 			setup_sorting(&alloc_sort, default_sort_order);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return __cmd_kmem();
 	} else
 		usage_with_options(kmem_usage, kmem_options);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		ret = __cmd_kmem(session);
 	} else
 		usage_with_options(kmem_usage, kmem_options);
@@ -880,6 +949,9 @@ out_delete:
 	perf_session__delete(session);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

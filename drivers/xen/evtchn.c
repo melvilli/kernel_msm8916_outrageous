@@ -32,6 +32,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
 
@@ -61,6 +66,10 @@
 struct per_user_data {
 	struct mutex bind_mutex; /* serialize bind/unbind operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rb_root evtchns;
+>>>>>>> v3.18
 =======
 	struct rb_root evtchns;
 >>>>>>> v3.18
@@ -72,6 +81,10 @@ struct per_user_data {
 	unsigned int ring_cons, ring_prod, ring_overflow;
 	struct mutex ring_cons_mutex; /* protect against concurrent readers */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t ring_prod_lock; /* product against concurrent interrupts */
+>>>>>>> v3.18
 =======
 	spinlock_t ring_prod_lock; /* product against concurrent interrupts */
 >>>>>>> v3.18
@@ -82,6 +95,7 @@ struct per_user_data {
 	const char *name;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Who's bound to each port?  This is logically an array of struct
@@ -112,6 +126,8 @@ static inline void set_port_enabled(unsigned port, bool enabled)
 	else
 		port_user[port] &= ~1;
 =======
+=======
+>>>>>>> v3.18
 struct user_evtchn {
 	struct rb_node node;
 	struct per_user_data *user;
@@ -167,11 +183,15 @@ static struct user_evtchn *find_evtchn(struct per_user_data *u, unsigned port)
 			return evtchn;
 	}
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t evtchn_interrupt(int irq, void *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int port = (unsigned long)data;
 	struct per_user_data *u;
@@ -190,6 +210,8 @@ static irqreturn_t evtchn_interrupt(int irq, void *data)
 	if ((u->ring_prod - u->ring_cons) < EVTCHN_RING_SIZE) {
 		u->ring[EVTCHN_RING_MASK(u->ring_prod)] = port;
 =======
+=======
+>>>>>>> v3.18
 	struct user_evtchn *evtchn = data;
 	struct per_user_data *u = evtchn->user;
 
@@ -204,6 +226,9 @@ static irqreturn_t evtchn_interrupt(int irq, void *data)
 
 	if ((u->ring_prod - u->ring_cons) < EVTCHN_RING_SIZE) {
 		u->ring[EVTCHN_RING_MASK(u->ring_prod)] = evtchn->port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wmb(); /* Ensure ring contents visible */
 		if (u->ring_cons == u->ring_prod++) {
@@ -215,7 +240,11 @@ static irqreturn_t evtchn_interrupt(int irq, void *data)
 		u->ring_overflow = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&port_user_lock);
+=======
+	spin_unlock(&u->ring_prod_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&u->ring_prod_lock);
 >>>>>>> v3.18
@@ -320,6 +349,7 @@ static ssize_t evtchn_write(struct file *file, const char __user *buf,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&port_user_lock);
 
 	for (i = 0; i < (count/sizeof(evtchn_port_t)); i++) {
@@ -330,6 +360,8 @@ static ssize_t evtchn_write(struct file *file, const char __user *buf,
 		    !get_port_enabled(port)) {
 			set_port_enabled(port, true);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&u->bind_mutex);
 
 	for (i = 0; i < (count/sizeof(evtchn_port_t)); i++) {
@@ -339,13 +371,20 @@ static ssize_t evtchn_write(struct file *file, const char __user *buf,
 		evtchn = find_evtchn(u, port);
 		if (evtchn && !evtchn->enabled) {
 			evtchn->enabled = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			enable_irq(irq_from_evtchn(port));
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&port_user_lock);
+=======
+	mutex_unlock(&u->bind_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&u->bind_mutex);
 >>>>>>> v3.18
@@ -360,6 +399,11 @@ static ssize_t evtchn_write(struct file *file, const char __user *buf,
 static int evtchn_bind_to_user(struct per_user_data *u, int port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct user_evtchn *evtchn;
+	struct evtchn_close close;
+>>>>>>> v3.18
 =======
 	struct user_evtchn *evtchn;
 	struct evtchn_close close;
@@ -374,6 +418,7 @@ static int evtchn_bind_to_user(struct per_user_data *u, int port)
 	 * interrupt handler yet, and our caller has already
 	 * serialized bind operations.)
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BUG_ON(get_port_user(port) != NULL);
 	set_port_user(port, u);
@@ -405,6 +450,8 @@ static void evtchn_unbind_from_user(struct per_user_data *u, int port)
 
 	set_port_user(port, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	evtchn = kzalloc(sizeof(*evtchn), GFP_KERNEL);
 	if (!evtchn)
@@ -445,6 +492,9 @@ static void evtchn_unbind_from_user(struct per_user_data *u,
 	unbind_from_irqhandler(irq, evtchn);
 
 	del_evtchn(u, evtchn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -525,6 +575,10 @@ static long evtchn_ioctl(struct file *file,
 	case IOCTL_EVTCHN_UNBIND: {
 		struct ioctl_evtchn_unbind unbind;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct user_evtchn *evtchn;
+>>>>>>> v3.18
 =======
 		struct user_evtchn *evtchn;
 >>>>>>> v3.18
@@ -534,6 +588,7 @@ static long evtchn_ioctl(struct file *file,
 			break;
 
 		rc = -EINVAL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (unbind.port >= NR_EVENT_CHANNELS)
 			break;
@@ -547,6 +602,8 @@ static long evtchn_ioctl(struct file *file,
 		evtchn_unbind_from_user(u, unbind.port);
 
 =======
+=======
+>>>>>>> v3.18
 		if (unbind.port >= xen_evtchn_nr_channels())
 			break;
 
@@ -557,6 +614,9 @@ static long evtchn_ioctl(struct file *file,
 
 		disable_irq(irq_from_evtchn(unbind.port));
 		evtchn_unbind_from_user(u, evtchn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = 0;
 		break;
@@ -565,6 +625,10 @@ static long evtchn_ioctl(struct file *file,
 	case IOCTL_EVTCHN_NOTIFY: {
 		struct ioctl_evtchn_notify notify;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct user_evtchn *evtchn;
+>>>>>>> v3.18
 =======
 		struct user_evtchn *evtchn;
 >>>>>>> v3.18
@@ -574,11 +638,17 @@ static long evtchn_ioctl(struct file *file,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (notify.port >= NR_EVENT_CHANNELS) {
 			rc = -EINVAL;
 		} else if (get_port_user(notify.port) != u) {
 			rc = -ENOTCONN;
 		} else {
+=======
+		rc = -ENOTCONN;
+		evtchn = find_evtchn(u, notify.port);
+		if (evtchn) {
+>>>>>>> v3.18
 =======
 		rc = -ENOTCONN;
 		evtchn = find_evtchn(u, notify.port);
@@ -594,9 +664,15 @@ static long evtchn_ioctl(struct file *file,
 		/* Initialise the ring to empty. Clear errors. */
 		mutex_lock(&u->ring_cons_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irq(&port_user_lock);
 		u->ring_cons = u->ring_prod = u->ring_overflow = 0;
 		spin_unlock_irq(&port_user_lock);
+=======
+		spin_lock_irq(&u->ring_prod_lock);
+		u->ring_cons = u->ring_prod = u->ring_overflow = 0;
+		spin_unlock_irq(&u->ring_prod_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_irq(&u->ring_prod_lock);
 		u->ring_cons = u->ring_prod = u->ring_overflow = 0;
@@ -661,6 +737,10 @@ static int evtchn_open(struct inode *inode, struct file *filp)
 	mutex_init(&u->bind_mutex);
 	mutex_init(&u->ring_cons_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&u->ring_prod_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&u->ring_prod_lock);
 >>>>>>> v3.18
@@ -673,6 +753,7 @@ static int evtchn_open(struct inode *inode, struct file *filp)
 static int evtchn_release(struct inode *inode, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	struct per_user_data *u = filp->private_data;
 
@@ -683,6 +764,8 @@ static int evtchn_release(struct inode *inode, struct file *filp)
 		disable_irq(irq_from_evtchn(i));
 		evtchn_unbind_from_user(get_port_user(i), i);
 =======
+=======
+>>>>>>> v3.18
 	struct per_user_data *u = filp->private_data;
 	struct rb_node *node;
 
@@ -692,6 +775,9 @@ static int evtchn_release(struct inode *inode, struct file *filp)
 		evtchn = rb_entry(node, struct user_evtchn, node);
 		disable_irq(irq_from_evtchn(evtchn->port));
 		evtchn_unbind_from_user(u, evtchn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -727,6 +813,7 @@ static int __init evtchn_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_user = kcalloc(NR_EVENT_CHANNELS, sizeof(*port_user), GFP_KERNEL);
 	if (port_user == NULL)
 		return -ENOMEM;
@@ -742,6 +829,8 @@ static int __init evtchn_init(void)
 
 	printk(KERN_INFO "Event-channel device installed.\n");
 =======
+=======
+>>>>>>> v3.18
 	/* Create '/dev/xen/evtchn'. */
 	err = misc_register(&evtchn_miscdev);
 	if (err != 0) {
@@ -750,6 +839,9 @@ static int __init evtchn_init(void)
 	}
 
 	pr_info("Event-channel device installed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -758,9 +850,12 @@ static int __init evtchn_init(void)
 static void __exit evtchn_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(port_user);
 	port_user = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	misc_deregister(&evtchn_miscdev);

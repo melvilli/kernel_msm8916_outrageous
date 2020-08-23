@@ -189,6 +189,7 @@ static void joydev_detach_client(struct joydev *joydev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void joydev_refresh_state(struct joydev *joydev)
 {
 	struct input_dev *dev = joydev->handle.dev;
@@ -200,6 +201,8 @@ static void joydev_refresh_state(struct joydev *joydev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int joydev_open_device(struct joydev *joydev)
@@ -217,8 +220,11 @@ static int joydev_open_device(struct joydev *joydev)
 		if (retval)
 			joydev->open--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			joydev_refresh_state(joydev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -843,6 +849,10 @@ static int joydev_connect(struct input_handler *handler, struct input_dev *dev,
 		if (input_abs_get_max(dev, j) == input_abs_get_min(dev, j)) {
 			joydev->corr[i].type = JS_CORR_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			joydev->abs[i] = input_abs_get_val(dev, j);
+>>>>>>> v3.18
 =======
 			joydev->abs[i] = input_abs_get_val(dev, j);
 >>>>>>> v3.18
@@ -861,11 +871,17 @@ static int joydev_connect(struct input_handler *handler, struct input_dev *dev,
 			joydev->corr[i].coef[2] = (1 << 29) / t;
 			joydev->corr[i].coef[3] = (1 << 29) / t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			joydev->abs[i] =
 				joydev_correct(input_abs_get_val(dev, j),
 					       joydev->corr + i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

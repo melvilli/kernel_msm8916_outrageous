@@ -293,7 +293,11 @@ static struct platform_driver xway_stp_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init xway_stp_init(void)
+=======
+static int __init xway_stp_init(void)
+>>>>>>> v3.18
 =======
 static int __init xway_stp_init(void)
 >>>>>>> v3.18

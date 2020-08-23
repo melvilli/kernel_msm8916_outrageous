@@ -152,10 +152,15 @@ static int da9055_wdt_probe(struct platform_device *pdev)
 	driver_data = devm_kzalloc(&pdev->dev, sizeof(*driver_data),
 				   GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!driver_data) {
 		dev_err(da9055->dev, "Failed to allocate watchdog device\n");
 		return -ENOMEM;
 	}
+=======
+	if (!driver_data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!driver_data)
 		return -ENOMEM;
@@ -180,7 +185,11 @@ static int da9055_wdt_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, driver_data);
+=======
+	platform_set_drvdata(pdev, driver_data);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, driver_data);
 >>>>>>> v3.18
@@ -197,7 +206,11 @@ err:
 static int da9055_wdt_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da9055_wdt_data *driver_data = dev_get_drvdata(&pdev->dev);
+=======
+	struct da9055_wdt_data *driver_data = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct da9055_wdt_data *driver_data = platform_get_drvdata(pdev);
 >>>>>>> v3.18

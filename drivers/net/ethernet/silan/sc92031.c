@@ -988,7 +988,11 @@ out_unlock:
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -1566,7 +1570,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sc92031_pci_device_id_table) = {
+=======
+static const struct pci_device_id sc92031_pci_device_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sc92031_pci_device_id_table[] = {
 >>>>>>> v3.18
@@ -1587,6 +1595,7 @@ static struct pci_driver sc92031_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init sc92031_init(void)
 {
 	return pci_register_driver(&sc92031_pci_driver);
@@ -1600,6 +1609,9 @@ static void __exit sc92031_exit(void)
 module_init(sc92031_init);
 module_exit(sc92031_exit);
 
+=======
+module_pci_driver(sc92031_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(sc92031_pci_driver);
 >>>>>>> v3.18

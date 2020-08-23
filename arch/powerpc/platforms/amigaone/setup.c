@@ -25,6 +25,10 @@
 #include <asm/time.h>
 #include <asm/udbg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dma.h>
+>>>>>>> v3.18
 =======
 #include <asm/dma.h>
 >>>>>>> v3.18

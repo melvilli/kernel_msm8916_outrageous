@@ -6,6 +6,10 @@ config DRM_GMA500
 	select FB_CFB_IMAGEBLIT
 	select DRM_KMS_HELPER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 =======
 	select DRM_KMS_FB_HELPER
 >>>>>>> v3.18
@@ -14,7 +18,10 @@ config DRM_GMA500
 	select ACPI_VIDEO if ACPI
 	select BACKLIGHT_CLASS_DEVICE if ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select VIDEO_OUTPUT_CONTROL if ACPI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select INPUT if ACPI

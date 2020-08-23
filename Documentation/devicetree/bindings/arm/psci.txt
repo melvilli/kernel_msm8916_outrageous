@@ -22,8 +22,11 @@ to #0.
 Main node required properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  - compatible    : Must be "arm,psci"
 =======
+=======
+>>>>>>> v3.18
  - compatible    : should contain at least one of:
 
 				 * "arm,psci" : for implementations complying to PSCI versions prior to
@@ -33,6 +36,9 @@ Main node required properties:
 					IDs are not required and should be ignored by an OS with PSCI 0.2
 					support, but are permitted to be present for compatibility with
 					existing software when "arm,psci" is later in the compatible list.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  - method        : The method of calling the PSCI firmware. Permitted
@@ -55,10 +61,13 @@ Main node optional properties:
  - migrate       : Function ID for MIGRATE operation
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Example:
 
 =======
+=======
+>>>>>>> v3.18
 Device tree nodes that require usage of PSCI CPU_SUSPEND function (ie idle
 state nodes, as per bindings in [1]) must specify the following properties:
 
@@ -74,6 +83,9 @@ Example:
 
 Case 1: PSCI v0.1 only.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	psci {
 		compatible	= "arm,psci";
@@ -84,7 +96,10 @@ Case 1: PSCI v0.1 only.
 		migrate		= <0x95c10003>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Case 2: PSCI v0.2 only
 
@@ -112,4 +127,7 @@ Case 3: PSCI v0.2 and PSCI v0.1.
 
 [1] Kernel documentation - ARM idle states bindings
     Documentation/devicetree/bindings/arm/idle-states.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

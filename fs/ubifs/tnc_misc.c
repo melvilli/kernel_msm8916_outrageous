@@ -294,9 +294,15 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 
 	if (znode->child_cnt > c->fanout || znode->level > UBIFS_MAX_LEVELS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("current fanout %d, branch count %d", c->vi.ubi_num,
 			  c->fanout, znode->child_cnt);
 		ubifs_err("max levels %d, znode level %d", c->vi.ubi_num,
+=======
+		ubifs_err("current fanout %d, branch count %d",
+			  c->fanout, znode->child_cnt);
+		ubifs_err("max levels %d, znode level %d",
+>>>>>>> v3.18
 =======
 		ubifs_err("current fanout %d, branch count %d",
 			  c->fanout, znode->child_cnt);
@@ -323,7 +329,11 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 		    zbr->lnum >= c->leb_cnt || zbr->offs < 0 ||
 		    zbr->offs + zbr->len > c->leb_size || zbr->offs & 7) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad branch %d", c->vi.ubi_num, i);
+=======
+			ubifs_err("bad branch %d", i);
+>>>>>>> v3.18
 =======
 			ubifs_err("bad branch %d", i);
 >>>>>>> v3.18
@@ -339,7 +349,11 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad key type at slot %d: %d", c->vi.ubi_num,
+=======
+			ubifs_err("bad key type at slot %d: %d",
+>>>>>>> v3.18
 =======
 			ubifs_err("bad key type at slot %d: %d",
 >>>>>>> v3.18
@@ -356,9 +370,14 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 			if (zbr->len != c->ranges[type].len) {
 				ubifs_err("bad target node (type %d) length (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, type, zbr->len);
 				ubifs_err("have to be %d", c->vi.ubi_num,
 					  c->ranges[type].len);
+=======
+					  type, zbr->len);
+				ubifs_err("have to be %d", c->ranges[type].len);
+>>>>>>> v3.18
 =======
 					  type, zbr->len);
 				ubifs_err("have to be %d", c->ranges[type].len);
@@ -370,9 +389,15 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 			   zbr->len > c->ranges[type].max_len) {
 			ubifs_err("bad target node (type %d) length (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, type, zbr->len);
 			ubifs_err("have to be in range of %d-%d",
 				  c->vi.ubi_num, c->ranges[type].min_len,
+=======
+				  type, zbr->len);
+			ubifs_err("have to be in range of %d-%d",
+				  c->ranges[type].min_len,
+>>>>>>> v3.18
 =======
 				  type, zbr->len);
 			ubifs_err("have to be in range of %d-%d",
@@ -397,8 +422,12 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 		cmp = keys_cmp(c, key1, key2);
 		if (cmp > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad key order (keys %d and %d)",
 					c->vi.ubi_num, i, i + 1);
+=======
+			ubifs_err("bad key order (keys %d and %d)", i, i + 1);
+>>>>>>> v3.18
 =======
 			ubifs_err("bad key order (keys %d and %d)", i, i + 1);
 >>>>>>> v3.18
@@ -408,7 +437,11 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 			/* These can only be keys with colliding hash */
 			ubifs_err("keys %d and %d are not hashed but equivalent",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					c->vi.ubi_num, i, i + 1);
+=======
+				  i, i + 1);
+>>>>>>> v3.18
 =======
 				  i, i + 1);
 >>>>>>> v3.18
@@ -422,8 +455,12 @@ static int read_znode(struct ubifs_info *c, int lnum, int offs, int len,
 
 out_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("bad indexing node at LEB %d:%d, error %d", c->vi.ubi_num,
 			lnum, offs, err);
+=======
+	ubifs_err("bad indexing node at LEB %d:%d, error %d", lnum, offs, err);
+>>>>>>> v3.18
 =======
 	ubifs_err("bad indexing node at LEB %d:%d, error %d", lnum, offs, err);
 >>>>>>> v3.18
@@ -523,7 +560,11 @@ int ubifs_tnc_read_node(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 	key_read(c, node + UBIFS_KEY_OFFSET, &key1);
 	if (!keys_eq(c, key, &key1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad key in node at LEB %d:%d", c->vi.ubi_num,
+=======
+		ubifs_err("bad key in node at LEB %d:%d",
+>>>>>>> v3.18
 =======
 		ubifs_err("bad key in node at LEB %d:%d",
 >>>>>>> v3.18

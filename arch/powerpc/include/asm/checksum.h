@@ -15,6 +15,12 @@
  * of 32-bit words and is always >= 5.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_GENERIC_CSUM
+#include <asm-generic/checksum.h>
+#else
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_GENERIC_CSUM
 #include <asm-generic/checksum.h>
@@ -130,6 +136,11 @@ static inline __wsum csum_tcpudp_nofold(__be32 saddr, __be32 daddr,
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif
+>>>>>>> v3.18
 =======
 
 #endif

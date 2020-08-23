@@ -35,6 +35,10 @@
 #include <linux/pm.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mbus.h>
+>>>>>>> v3.18
 =======
 #include <linux/mbus.h>
 >>>>>>> v3.18
@@ -62,8 +66,11 @@
 #define SDCE_MISC_INT_EN	(1<<1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pxav3_set_private_registers(struct sdhci_host *host, u8 mask)
 =======
+=======
+>>>>>>> v3.18
 /*
  * These registers are relative to the second register region, for the
  * MBus bridge.
@@ -119,12 +126,20 @@ static int mv_conf_mbus_windows(struct platform_device *pdev,
 }
 
 static void pxav3_reset(struct sdhci_host *host, u8 mask)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct platform_device *pdev = to_platform_device(mmc_dev(host->mmc));
 	struct sdhci_pxa_platdata *pdata = pdev->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sdhci_reset(host, mask);
+
+>>>>>>> v3.18
 =======
 	sdhci_reset(host, mask);
 
@@ -197,7 +212,11 @@ static void pxav3_gen_init_74_clocks(struct sdhci_host *host, u8 power_mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxav3_set_uhs_signaling(struct sdhci_host *host, unsigned int uhs)
+=======
+static void pxav3_set_uhs_signaling(struct sdhci_host *host, unsigned int uhs)
+>>>>>>> v3.18
 =======
 static void pxav3_set_uhs_signaling(struct sdhci_host *host, unsigned int uhs)
 >>>>>>> v3.18
@@ -235,6 +254,7 @@ static void pxav3_set_uhs_signaling(struct sdhci_host *host, unsigned int uhs)
 		"%s uhs = %d, ctrl_2 = %04X\n",
 		__func__, uhs, ctrl_2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
@@ -245,6 +265,8 @@ static const struct sdhci_ops pxav3_sdhci_ops = {
 	.platform_send_init_74_clocks = pxav3_gen_init_74_clocks,
 	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
 =======
+=======
+>>>>>>> v3.18
 }
 
 static const struct sdhci_ops pxav3_sdhci_ops = {
@@ -254,6 +276,9 @@ static const struct sdhci_ops pxav3_sdhci_ops = {
 	.set_bus_width = sdhci_set_bus_width,
 	.reset = pxav3_reset,
 	.set_uhs_signaling = pxav3_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -271,6 +296,12 @@ static const struct of_device_id sdhci_pxav3_of_match[] = {
 		.compatible = "mrvl,pxav3-mmc",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{
+		.compatible = "marvell,armada-380-sdhci",
+	},
+>>>>>>> v3.18
 =======
 	{
 		.compatible = "marvell,armada-380-sdhci",
@@ -291,8 +322,13 @@ static struct sdhci_pxa_platdata *pxav3_get_mmc_pdata(struct device *dev)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_property_read_u32(np, "mrvl,clk-delay-cycles",
 				  &clk_delay_cycles))
+=======
+	of_property_read_u32(np, "mrvl,clk-delay-cycles", &clk_delay_cycles);
+	if (clk_delay_cycles > 0)
+>>>>>>> v3.18
 =======
 	of_property_read_u32(np, "mrvl,clk-delay-cycles", &clk_delay_cycles);
 	if (clk_delay_cycles > 0)
@@ -314,6 +350,10 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 	struct sdhci_pxa_platdata *pdata = pdev->dev.platform_data;
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *np = pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	struct device_node *np = pdev->dev.of_node;
 >>>>>>> v3.18
@@ -324,6 +364,7 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 	int ret;
 	struct clk *clk;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pxa = kzalloc(sizeof(struct sdhci_pxa), GFP_KERNEL);
 	if (!pxa)
@@ -339,6 +380,8 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 
 	clk = clk_get(dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	pxa = devm_kzalloc(&pdev->dev, sizeof(struct sdhci_pxa), GFP_KERNEL);
 	if (!pxa)
 		return -ENOMEM;
@@ -358,6 +401,9 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 	pltfm_host->priv = pxa;
 
 	clk = devm_clk_get(dev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(clk)) {
 		dev_err(dev, "failed to get io clock\n");
@@ -373,16 +419,22 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 	match = of_match_device(of_match_ptr(sdhci_pxav3_of_match), &pdev->dev);
 	if (match) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mmc_of_parse(host->mmc);
 		sdhci_get_of_property(pdev);
 		pdata = pxav3_get_mmc_pdata(dev);
 		pdev->dev.platform_data = pdata;
 =======
+=======
+>>>>>>> v3.18
 		ret = mmc_of_parse(host->mmc);
 		if (ret)
 			goto err_of_parse;
 		sdhci_get_of_property(pdev);
 		pdata = pxav3_get_mmc_pdata(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (pdata) {
 		/* on-chip device */
@@ -406,7 +458,12 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 
 		if (gpio_is_valid(pdata->ext_cd_gpio)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = mmc_gpio_request_cd(host->mmc, pdata->ext_cd_gpio);
+=======
+			ret = mmc_gpio_request_cd(host->mmc, pdata->ext_cd_gpio,
+						  0);
+>>>>>>> v3.18
 =======
 			ret = mmc_gpio_request_cd(host->mmc, pdata->ext_cd_gpio,
 						  0);
@@ -420,6 +477,7 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_set_active(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_set_autosuspend_delay(&pdev->dev, PXAV3_RPM_DELAY_MS);
@@ -427,19 +485,27 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 	pm_suspend_ignore_children(&pdev->dev, 1);
 	pm_runtime_get_noresume(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_get_sync(&pdev->dev);
 	pm_runtime_set_autosuspend_delay(&pdev->dev, PXAV3_RPM_DELAY_MS);
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_suspend_ignore_children(&pdev->dev, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sdhci_add_host(host);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to add host\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm_runtime_forbid(&pdev->dev);
 		pm_runtime_disable(&pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto err_add_host;
@@ -460,6 +526,7 @@ static int sdhci_pxav3_probe(struct platform_device *pdev)
 
 err_add_host:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(clk);
 	clk_put(clk);
 err_cd_req:
@@ -467,6 +534,8 @@ err_clk_get:
 	sdhci_pltfm_free(pdev);
 	kfree(pxa);
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 err_of_parse:
@@ -475,6 +544,9 @@ err_cd_req:
 err_clk_get:
 err_mbus_win:
 	sdhci_pltfm_free(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -484,7 +556,10 @@ static int sdhci_pxav3_remove(struct platform_device *pdev)
 	struct sdhci_host *host = platform_get_drvdata(pdev);
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_pxa *pxa = pltfm_host->priv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -494,12 +569,17 @@ static int sdhci_pxav3_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(pltfm_host->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(pltfm_host->clk);
 
 	sdhci_pltfm_free(pdev);
 	kfree(pxa);
 
 	platform_set_drvdata(pdev, NULL);
+=======
+
+	sdhci_pltfm_free(pdev);
+>>>>>>> v3.18
 =======
 
 	sdhci_pltfm_free(pdev);
@@ -592,7 +672,10 @@ static struct platform_driver sdhci_pxav3_driver = {
 		.of_match_table = sdhci_pxav3_of_match,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	= SDHCI_PXAV3_PMOPS,

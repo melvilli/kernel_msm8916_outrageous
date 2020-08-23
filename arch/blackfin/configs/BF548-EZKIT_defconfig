@@ -65,7 +65,10 @@ CONFIG_FW_LOADER=m
 CONFIG_MTD=y
 CONFIG_MTD_CMDLINE_PARTS=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_CHAR=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_BLOCK=y
@@ -79,6 +82,10 @@ CONFIG_MTD_NAND=y
 CONFIG_MTD_NAND_BF5XX=y
 # CONFIG_MTD_NAND_BF5XX_HWECC is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_MTD_SPI_NOR=y
+>>>>>>> v3.18
 =======
 CONFIG_MTD_SPI_NOR=y
 >>>>>>> v3.18
@@ -167,7 +174,10 @@ CONFIG_HID_SONY=y
 CONFIG_HID_SUNPLUS=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

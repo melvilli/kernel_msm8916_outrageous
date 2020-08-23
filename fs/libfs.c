@@ -4,6 +4,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/blkdev.h>
+>>>>>>> v3.18
 =======
 #include <linux/blkdev.h>
 >>>>>>> v3.18
@@ -15,6 +19,10 @@
 #include <linux/quotaops.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/namei.h>
+>>>>>>> v3.18
 =======
 #include <linux/namei.h>
 >>>>>>> v3.18
@@ -40,6 +48,10 @@ int simple_getattr(struct vfsmount *mnt, struct dentry *dentry,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_getattr);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_getattr);
 >>>>>>> v3.18
@@ -52,6 +64,10 @@ int simple_statfs(struct dentry *dentry, struct kstatfs *buf)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_statfs);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_statfs);
 >>>>>>> v3.18
@@ -61,11 +77,14 @@ EXPORT_SYMBOL(simple_statfs);
  * memory and lookup time: arrange for them to be deleted immediately.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int simple_delete_dentry(const struct dentry *dentry)
 {
 	return 1;
 }
 =======
+=======
+>>>>>>> v3.18
 int always_delete_dentry(const struct dentry *dentry)
 {
 	return 1;
@@ -76,6 +95,9 @@ const struct dentry_operations simple_dentry_operations = {
 	.d_delete = always_delete_dentry,
 };
 EXPORT_SYMBOL(simple_dentry_operations);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -84,6 +106,7 @@ EXPORT_SYMBOL(simple_dentry_operations);
  */
 struct dentry *simple_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	static const struct dentry_operations simple_dentry_operations = {
 		.d_delete = simple_delete_dentry,
@@ -96,6 +119,8 @@ struct dentry *simple_lookup(struct inode *dir, struct dentry *dentry, unsigned 
 	return NULL;
 }
 =======
+=======
+>>>>>>> v3.18
 	if (dentry->d_name.len > NAME_MAX)
 		return ERR_PTR(-ENAMETOOLONG);
 	if (!dentry->d_sb->s_d_op)
@@ -104,6 +129,9 @@ struct dentry *simple_lookup(struct inode *dir, struct dentry *dentry, unsigned 
 	return NULL;
 }
 EXPORT_SYMBOL(simple_lookup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int dcache_dir_open(struct inode *inode, struct file *file)
@@ -115,6 +143,10 @@ int dcache_dir_open(struct inode *inode, struct file *file)
 	return file->private_data ? 0 : -ENOMEM;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(dcache_dir_open);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(dcache_dir_open);
 >>>>>>> v3.18
@@ -125,6 +157,10 @@ int dcache_dir_close(struct inode *inode, struct file *file)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(dcache_dir_close);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(dcache_dir_close);
 >>>>>>> v3.18
@@ -153,17 +189,23 @@ loff_t dcache_dir_lseek(struct file *file, loff_t offset, int whence)
 			spin_lock(&dentry->d_lock);
 			/* d_lock not required for cursor */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_del(&cursor->d_child);
 			p = dentry->d_subdirs.next;
 			while (n && p != &dentry->d_subdirs) {
 				struct dentry *next;
 				next = list_entry(p, struct dentry, d_child);
 =======
+=======
+>>>>>>> v3.18
 			list_del(&cursor->d_u.d_child);
 			p = dentry->d_subdirs.next;
 			while (n && p != &dentry->d_subdirs) {
 				struct dentry *next;
 				next = list_entry(p, struct dentry, d_u.d_child);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				spin_lock_nested(&next->d_lock, DENTRY_D_LOCK_NESTED);
 				if (simple_positive(next))
@@ -172,7 +214,11 @@ loff_t dcache_dir_lseek(struct file *file, loff_t offset, int whence)
 				p = p->next;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add_tail(&cursor->d_child, p);
+=======
+			list_add_tail(&cursor->d_u.d_child, p);
+>>>>>>> v3.18
 =======
 			list_add_tail(&cursor->d_u.d_child, p);
 >>>>>>> v3.18
@@ -183,6 +229,10 @@ loff_t dcache_dir_lseek(struct file *file, loff_t offset, int whence)
 	return offset;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(dcache_dir_lseek);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(dcache_dir_lseek);
 >>>>>>> v3.18
@@ -199,6 +249,7 @@ static inline unsigned char dt_type(struct inode *inode)
  * both impossible due to the lock on directory.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int dcache_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
@@ -257,6 +308,8 @@ int dcache_readdir(struct file * filp, void * dirent, filldir_t filldir)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 int dcache_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct dentry *dentry = file->f_path.dentry;
@@ -294,6 +347,9 @@ int dcache_readdir(struct file *file, struct dir_context *ctx)
 	return 0;
 }
 EXPORT_SYMBOL(dcache_readdir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ssize_t generic_read_dir(struct file *filp, char __user *buf, size_t siz, loff_t *ppos)
@@ -301,6 +357,10 @@ ssize_t generic_read_dir(struct file *filp, char __user *buf, size_t siz, loff_t
 	return -EISDIR;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(generic_read_dir);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(generic_read_dir);
 >>>>>>> v3.18
@@ -311,20 +371,30 @@ const struct file_operations simple_dir_operations = {
 	.llseek		= dcache_dir_lseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= dcache_readdir,
 	.fsync		= noop_fsync,
 };
 =======
+=======
+>>>>>>> v3.18
 	.iterate	= dcache_readdir,
 	.fsync		= noop_fsync,
 };
 EXPORT_SYMBOL(simple_dir_operations);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 const struct inode_operations simple_dir_inode_operations = {
 	.lookup		= simple_lookup,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_dir_inode_operations);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_dir_inode_operations);
 >>>>>>> v3.18
@@ -383,6 +453,10 @@ Enomem:
 	return ERR_PTR(-ENOMEM);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(mount_pseudo);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(mount_pseudo);
 >>>>>>> v3.18
@@ -394,6 +468,10 @@ int simple_open(struct inode *inode, struct file *file)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_open);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_open);
 >>>>>>> v3.18
@@ -410,6 +488,10 @@ int simple_link(struct dentry *old_dentry, struct inode *dir, struct dentry *den
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_link);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_link);
 >>>>>>> v3.18
@@ -421,7 +503,11 @@ int simple_empty(struct dentry *dentry)
 
 	spin_lock(&dentry->d_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(child, &dentry->d_subdirs, d_child) {
+=======
+	list_for_each_entry(child, &dentry->d_subdirs, d_u.d_child) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(child, &dentry->d_subdirs, d_u.d_child) {
 >>>>>>> v3.18
@@ -438,6 +524,10 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_empty);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_empty);
 >>>>>>> v3.18
@@ -452,6 +542,10 @@ int simple_unlink(struct inode *dir, struct dentry *dentry)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_unlink);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_unlink);
 >>>>>>> v3.18
@@ -467,6 +561,10 @@ int simple_rmdir(struct inode *dir, struct dentry *dentry)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_rmdir);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_rmdir);
 >>>>>>> v3.18
@@ -497,6 +595,10 @@ int simple_rename(struct inode *old_dir, struct dentry *old_dentry,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_rename);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_rename);
 >>>>>>> v3.18
@@ -541,6 +643,10 @@ int simple_readpage(struct file *file, struct page *page)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_readpage);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_readpage);
 >>>>>>> v3.18
@@ -568,6 +674,10 @@ int simple_write_begin(struct file *file, struct address_space *mapping,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_write_begin);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_write_begin);
 >>>>>>> v3.18
@@ -623,6 +733,10 @@ int simple_write_end(struct file *file, struct address_space *mapping,
 	return copied;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_write_end);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_write_end);
 >>>>>>> v3.18
@@ -695,6 +809,10 @@ out:
 	return -ENOMEM;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_fill_super);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_fill_super);
 >>>>>>> v3.18
@@ -721,6 +839,10 @@ int simple_pin_fs(struct file_system_type *type, struct vfsmount **mount, int *c
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_pin_fs);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_pin_fs);
 >>>>>>> v3.18
@@ -736,6 +858,10 @@ void simple_release_fs(struct vfsmount **mount, int *count)
 	mntput(mnt);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_release_fs);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_release_fs);
 >>>>>>> v3.18
@@ -774,6 +900,10 @@ ssize_t simple_read_from_buffer(void __user *to, size_t count, loff_t *ppos,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_read_from_buffer);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_read_from_buffer);
 >>>>>>> v3.18
@@ -812,6 +942,10 @@ ssize_t simple_write_to_buffer(void *to, size_t available, loff_t *ppos,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_write_to_buffer);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_write_to_buffer);
 >>>>>>> v3.18
@@ -847,6 +981,10 @@ ssize_t memory_read_from_buffer(void *to, size_t count, loff_t *ppos,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(memory_read_from_buffer);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(memory_read_from_buffer);
 >>>>>>> v3.18
@@ -872,6 +1010,10 @@ void simple_transaction_set(struct file *file, size_t n)
 	ar->size = n;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_transaction_set);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_transaction_set);
 >>>>>>> v3.18
@@ -907,6 +1049,10 @@ char *simple_transaction_get(struct file *file, const char __user *buf, size_t s
 	return ar->data;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_transaction_get);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_transaction_get);
 >>>>>>> v3.18
@@ -920,6 +1066,10 @@ ssize_t simple_transaction_read(struct file *file, char __user *buf, size_t size
 	return simple_read_from_buffer(buf, size, pos, ar->data, ar->size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_transaction_read);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_transaction_read);
 >>>>>>> v3.18
@@ -930,6 +1080,10 @@ int simple_transaction_release(struct inode *inode, struct file *file)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(simple_transaction_release);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(simple_transaction_release);
 >>>>>>> v3.18
@@ -969,6 +1123,10 @@ int simple_attr_open(struct inode *inode, struct file *file,
 	return nonseekable_open(inode, file);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(simple_attr_open);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(simple_attr_open);
 >>>>>>> v3.18
@@ -979,6 +1137,10 @@ int simple_attr_release(struct inode *inode, struct file *file)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(simple_attr_release);	/* GPL-only?  This?  Really? */
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(simple_attr_release);	/* GPL-only?  This?  Really? */
 >>>>>>> v3.18
@@ -1018,6 +1180,10 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(simple_attr_read);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(simple_attr_read);
 >>>>>>> v3.18
@@ -1054,6 +1220,10 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(simple_attr_write);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(simple_attr_write);
 >>>>>>> v3.18
@@ -1125,14 +1295,20 @@ EXPORT_SYMBOL_GPL(generic_fh_to_parent);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * generic_file_fsync - generic fsync implementation for simple filesystems
  * @file:	file to synchronize
 =======
+=======
+>>>>>>> v3.18
  * __generic_file_fsync - generic fsync implementation for simple filesystems
  *
  * @file:	file to synchronize
  * @start:	start offset in bytes
  * @end:	end offset in bytes (inclusive)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @datasync:	only synchronize essential metadata if true
  *
@@ -1141,8 +1317,13 @@ EXPORT_SYMBOL_GPL(generic_fh_to_parent);
  * hanging off the address_space structure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int generic_file_fsync(struct file *file, loff_t start, loff_t end,
 		       int datasync)
+=======
+int __generic_file_fsync(struct file *file, loff_t start, loff_t end,
+				 int datasync)
+>>>>>>> v3.18
 =======
 int __generic_file_fsync(struct file *file, loff_t start, loff_t end,
 				 int datasync)
@@ -1167,6 +1348,10 @@ int __generic_file_fsync(struct file *file, loff_t start, loff_t end,
 	if (ret == 0)
 		ret = err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1175,7 +1360,10 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__generic_file_fsync);
 
 /**
@@ -1199,6 +1387,9 @@ int generic_file_fsync(struct file *file, loff_t start, loff_t end,
 		return err;
 	return blkdev_issue_flush(inode->i_sb->s_bdev, GFP_KERNEL, NULL);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(generic_file_fsync);
 
@@ -1239,6 +1430,7 @@ int noop_fsync(struct file *file, loff_t start, loff_t end, int datasync)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(dcache_dir_close);
 EXPORT_SYMBOL(dcache_dir_lseek);
@@ -1276,6 +1468,8 @@ EXPORT_SYMBOL_GPL(simple_attr_release);
 EXPORT_SYMBOL_GPL(simple_attr_read);
 EXPORT_SYMBOL_GPL(simple_attr_write);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(noop_fsync);
 
 void kfree_put_link(struct dentry *dentry, struct nameidata *nd,
@@ -1347,4 +1541,7 @@ simple_nosetlease(struct file *filp, long arg, struct file_lock **flp,
 	return -EINVAL;
 }
 EXPORT_SYMBOL(simple_nosetlease);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

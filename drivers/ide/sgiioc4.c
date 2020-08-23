@@ -601,7 +601,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ioc4_ide_attach_one(struct ioc4_driver_data *idd)
+=======
+static int ioc4_ide_attach_one(struct ioc4_driver_data *idd)
+>>>>>>> v3.18
 =======
 static int ioc4_ide_attach_one(struct ioc4_driver_data *idd)
 >>>>>>> v3.18

@@ -193,6 +193,12 @@ int ipoib_transport_dev_init(struct net_device *dev, struct ib_device *ca)
 		init_attr.create_flags |= IB_QP_CREATE_BLOCK_MULTICAST_LOOPBACK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (priv->hca_caps & IB_DEVICE_MANAGED_FLOW_STEERING)
+		init_attr.create_flags |= IB_QP_CREATE_NETIF_QP;
+
+>>>>>>> v3.18
 =======
 	if (priv->hca_caps & IB_DEVICE_MANAGED_FLOW_STEERING)
 		init_attr.create_flags |= IB_QP_CREATE_NETIF_QP;

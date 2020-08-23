@@ -23,6 +23,10 @@ static void wusbhc_channel_changed(struct uwb_pal *pal, int channel)
 	struct wusbhc *wusbhc = container_of(pal, struct wusbhc, pal);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_dbg(wusbhc->dev, "%s: channel = %d\n", __func__, channel);
+>>>>>>> v3.18
 =======
 	dev_dbg(wusbhc->dev, "%s: channel = %d\n", __func__, channel);
 >>>>>>> v3.18
@@ -50,7 +54,11 @@ int wusbhc_pal_register(struct wusbhc *wusbhc)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * wusbhc_pal_register - unregister the WUSB HC as a UWB PAL
+=======
+ * wusbhc_pal_unregister - unregister the WUSB HC as a UWB PAL
+>>>>>>> v3.18
 =======
  * wusbhc_pal_unregister - unregister the WUSB HC as a UWB PAL
 >>>>>>> v3.18
@@ -59,7 +67,12 @@ int wusbhc_pal_register(struct wusbhc *wusbhc)
 void wusbhc_pal_unregister(struct wusbhc *wusbhc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uwb_pal_unregister(&wusbhc->pal);
+=======
+	if (wusbhc->uwb_rc)
+		uwb_pal_unregister(&wusbhc->pal);
+>>>>>>> v3.18
 =======
 	if (wusbhc->uwb_rc)
 		uwb_pal_unregister(&wusbhc->pal);

@@ -28,6 +28,11 @@
 #include <asm/dma.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "mm_32.h"
+
+>>>>>>> v3.18
 =======
 #include "mm_32.h"
 
@@ -43,9 +48,12 @@
 #define IOMMU_ORDER	6				/* 4096 * (1<<6) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* srmmu.c */
 extern int viking_mxcc_present;
 extern int flush_page_for_dma_global;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int viking_flush;
@@ -68,6 +76,11 @@ static void __init sbus_iommu_init(struct platform_device *op)
 	unsigned int impl, vers;
 	unsigned long *bitmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long control;
+	unsigned long base;
+>>>>>>> v3.18
 =======
 	unsigned long control;
 	unsigned long base;
@@ -87,6 +100,7 @@ static void __init sbus_iommu_init(struct platform_device *op)
 		prom_halt();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	impl = (iommu->regs->control & IOMMU_CTRL_IMPL) >> 28;
 	vers = (iommu->regs->control & IOMMU_CTRL_VERS) >> 24;
 	tmp = iommu->regs->control;
@@ -94,6 +108,8 @@ static void __init sbus_iommu_init(struct platform_device *op)
 	tmp |= (IOMMU_RNGE_256MB | IOMMU_CTRL_ENAB);
 	iommu->regs->control = tmp;
 =======
+=======
+>>>>>>> v3.18
 
 	control = sbus_readl(&iommu->regs->control);
 	impl = (control & IOMMU_CTRL_IMPL) >> 28;
@@ -102,6 +118,9 @@ static void __init sbus_iommu_init(struct platform_device *op)
 	control |= (IOMMU_RNGE_256MB | IOMMU_CTRL_ENAB);
 	sbus_writel(control, &iommu->regs->control);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iommu_invalidate(iommu->regs);
 	iommu->start = IOMMU_START;
@@ -125,7 +144,13 @@ static void __init sbus_iommu_init(struct platform_device *op)
 	flush_cache_all();
 	flush_tlb_all();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iommu->regs->base = __pa((unsigned long) iommu->page_table) >> 4;
+=======
+
+	base = __pa((unsigned long)iommu->page_table) >> 4;
+	sbus_writel(base, &iommu->regs->base);
+>>>>>>> v3.18
 =======
 
 	base = __pa((unsigned long)iommu->page_table) >> 4;

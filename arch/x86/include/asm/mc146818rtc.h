@@ -14,7 +14,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_X86_32) && defined(__HAVE_ARCH_CMPXCHG)
+=======
+#if defined(CONFIG_X86_32)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_X86_32)
 >>>>>>> v3.18
@@ -100,8 +104,13 @@ unsigned char rtc_cmos_read(unsigned char addr);
 void rtc_cmos_write(unsigned char val, unsigned char addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int mach_set_rtc_mmss(unsigned long nowtime);
 extern unsigned long mach_get_cmos_time(void);
+=======
+extern int mach_set_rtc_mmss(const struct timespec *now);
+extern void mach_get_cmos_time(struct timespec *now);
+>>>>>>> v3.18
 =======
 extern int mach_set_rtc_mmss(const struct timespec *now);
 extern void mach_get_cmos_time(struct timespec *now);

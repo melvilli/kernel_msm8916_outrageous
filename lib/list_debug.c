@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/rculist.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bug.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -39,10 +42,13 @@ void __list_add(struct list_head *new,
 	     "list_add double add: new=%p, prev=%p, next=%p.\n",
 	     new, prev, next);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	BUG_ON((prev->next != next || next->prev != prev ||
 		 new == prev || new == next) && PANIC_CORRUPTION);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	next->prev = new;
@@ -71,10 +77,15 @@ void __list_del_entry(struct list_head *entry)
 	    WARN(next->prev != entry,
 		"list_del corruption. next->prev should be %p, "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"but was %p\n", entry, next->prev)) {
 		BUG_ON(PANIC_CORRUPTION);
 		return;
 	}
+=======
+		"but was %p\n", entry, next->prev))
+		return;
+>>>>>>> v3.18
 =======
 		"but was %p\n", entry, next->prev))
 		return;

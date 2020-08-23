@@ -599,7 +599,11 @@ static ssize_t class_osdblk_remove(struct class *c,
 	struct list_head *tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtoul(buf, 10, &ul);
+=======
+	rc = kstrtoul(buf, 10, &ul);
+>>>>>>> v3.18
 =======
 	rc = kstrtoul(buf, 10, &ul);
 >>>>>>> v3.18

@@ -13,6 +13,7 @@
 #include <asm/mipsregs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	fpu_save_double thread status tmp1=t0
 	cfc1	\tmp1,  fcr31
 	sdc1	$f0,  THREAD_FPR0(\thread)
@@ -128,6 +129,8 @@
 	lwc1	$f31, THREAD_FPR31(\thread)
 	ctc1	\tmp, fcr31
 =======
+=======
+>>>>>>> v3.18
 	.macro	fpu_save_single thread tmp=t0
 	.set push
 	SET_HARDFLOAT
@@ -206,6 +209,9 @@
 	lwc1	$f31, THREAD_FPR31_LS64(\thread)
 	ctc1	\tmp, fcr31
 	.set pop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 

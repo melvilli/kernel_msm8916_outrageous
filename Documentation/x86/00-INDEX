@@ -1,11 +1,14 @@
 00-INDEX
 	- this file
 <<<<<<< HEAD
+<<<<<<< HEAD
 mtrr.txt
 	- how to use x86 Memory Type Range Registers to increase performance
 exception-tables.txt
 	- why and how Linux kernel uses exception tables on x86
 =======
+=======
+>>>>>>> v3.18
 boot.txt
 	- List of boot protocol versions
 early-microcode.txt
@@ -24,4 +27,7 @@ usb-legacy-support.txt
 	- how to fix/avoid quirks when using emulated PS/2 mouse/keyboard.
 zero-page.txt
 	- layout of the first page of memory.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

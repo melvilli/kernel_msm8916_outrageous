@@ -22,7 +22,12 @@
 #include <asm/pgalloc.h>
 #include <asm/sections.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <arch/sim_def.h>
+=======
+#include <asm/vdso.h>
+#include <arch/sim.h>
+>>>>>>> v3.18
 =======
 #include <asm/vdso.h>
 #include <arch/sim.h>
@@ -44,6 +49,7 @@ static void sim_notify_exec(const char *binary_name)
 static int notify_exec(struct mm_struct *mm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval = 0;  /* failure */
 
 	if (mm->exe_file) {
@@ -60,6 +66,8 @@ static int notify_exec(struct mm_struct *mm)
 	}
 	return retval;
 =======
+=======
+>>>>>>> v3.18
 	char *buf, *path;
 	struct vm_area_struct *vma;
 
@@ -109,6 +117,9 @@ static int notify_exec(struct mm_struct *mm)
 	sim_notify_exec(path);
 	free_page((unsigned long)buf);
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -125,6 +136,7 @@ static void sim_notify_interp(unsigned long load_addr)
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Kernel address of page used to map read-only kernel data into userspace. */
 static void *vdso_page;
@@ -154,12 +166,17 @@ const char *arch_vma_name(struct vm_area_struct *vma)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int arch_setup_additional_pages(struct linux_binprm *bprm,
 				int executable_stack)
 {
 	struct mm_struct *mm = current->mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long vdso_base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int retval = 0;
@@ -175,6 +192,7 @@ int arch_setup_additional_pages(struct linux_binprm *bprm,
 		sim_notify_exec(bprm->filename);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * MAYWRITE to allow gdb to COW and set breakpoints
 	 */
@@ -183,6 +201,9 @@ int arch_setup_additional_pages(struct linux_binprm *bprm,
 					 VM_READ|VM_EXEC|
 					 VM_MAYREAD|VM_MAYWRITE|VM_MAYEXEC,
 					 vdso_pages);
+=======
+	retval = setup_vdso_pages();
+>>>>>>> v3.18
 =======
 	retval = setup_vdso_pages();
 >>>>>>> v3.18

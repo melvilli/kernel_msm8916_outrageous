@@ -141,7 +141,11 @@ int ipoib_vlan_add(struct net_device *pdev, unsigned short pkey)
 		return restart_syscall();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ppriv->vlan_mutex);
+=======
+	down_write(&ppriv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 	down_write(&ppriv->vlan_rwsem);
 >>>>>>> v3.18
@@ -168,9 +172,13 @@ int ipoib_vlan_add(struct net_device *pdev, unsigned short pkey)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ppriv->vlan_mutex);
 
 	rtnl_unlock();
+=======
+	up_write(&ppriv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 	up_write(&ppriv->vlan_rwsem);
 >>>>>>> v3.18
@@ -179,6 +187,11 @@ out:
 		free_netdev(priv->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rtnl_unlock();
+
+>>>>>>> v3.18
 =======
 	rtnl_unlock();
 
@@ -199,7 +212,12 @@ int ipoib_vlan_delete(struct net_device *pdev, unsigned short pkey)
 	if (!rtnl_trylock())
 		return restart_syscall();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ppriv->vlan_mutex);
+=======
+
+	down_write(&ppriv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 
 	down_write(&ppriv->vlan_rwsem);
@@ -214,7 +232,12 @@ int ipoib_vlan_delete(struct net_device *pdev, unsigned short pkey)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ppriv->vlan_mutex);
+=======
+	up_write(&ppriv->vlan_rwsem);
+
+>>>>>>> v3.18
 =======
 	up_write(&ppriv->vlan_rwsem);
 

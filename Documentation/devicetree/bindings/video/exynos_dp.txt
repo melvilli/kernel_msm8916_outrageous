@@ -7,15 +7,21 @@ We use two nodes:
 
 For the DP-PHY initialization, we use the dptx-phy node.
 <<<<<<< HEAD
+<<<<<<< HEAD
 Required properties for dptx-phy:
 	-reg:
 		Base address of DP PHY register.
 	-samsung,enable-mask:
 =======
+=======
+>>>>>>> v3.18
 Required properties for dptx-phy: deprecated, use phys and phy-names
 	-reg: deprecated
 		Base address of DP PHY register.
 	-samsung,enable-mask: deprecated
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		The bit-mask used to enable/disable DP PHY.
 
@@ -29,9 +35,12 @@ Required properties for dp-controller:
 	-interrupts:
 		interrupt combiner values.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	-interrupt-parent:
 		phandle to Interrupt combiner node.
 =======
+=======
+>>>>>>> v3.18
 	-clocks:
 		from common clock binding: handle to dp clock.
 	-clock-names:
@@ -42,6 +51,9 @@ Required properties for dp-controller:
 		from general PHY binding: the phandle for the PHY device.
 	-phy-names:
 		from general PHY binding: Should be "dp".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	-samsung,color-space:
 		input video data format.
@@ -62,6 +74,11 @@ Required properties for dp-controller:
 		number of lanes supported by the panel.
 			LANE_COUNT1 = 1, LANE_COUNT2 = 2, LANE_COUNT4 = 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	- display-timings: timings for the connected panel as described by
+		Documentation/devicetree/bindings/video/display-timing.txt
+>>>>>>> v3.18
 =======
 	- display-timings: timings for the connected panel as described by
 		Documentation/devicetree/bindings/video/display-timing.txt
@@ -78,11 +95,17 @@ Optional properties for dp-controller:
 		HSYNC polarity configuration.
 			High if defined, Low if not defined
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	-samsung,hpd-gpio:
 		Hotplug detect GPIO.
 			Indicates which GPIO should be used for hotplug
 			detection
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -94,6 +117,7 @@ SOC specific portion:
 		interrupts = <10 3>;
 		interrupt-parent = <&combiner>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		dptx-phy {
 			reg = <0x10040720>;
@@ -101,11 +125,16 @@ SOC specific portion:
 		};
 
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock 342>;
 		clock-names = "dp";
 
 		phys = <&dp_phy>;
 		phy-names = "dp";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -118,7 +147,10 @@ Board Specific portion:
 		samsung,link-rate = <0x0a>;
 		samsung,lane-count = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		display-timings {
 			native-mode = <&lcd_timing>;
@@ -134,5 +166,8 @@ Board Specific portion:
 				vsync-len = <6>;
 			};
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

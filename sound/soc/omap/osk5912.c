@@ -97,7 +97,11 @@ static struct snd_soc_dai_link osk_dai = {
 	.cpu_dai_name = "omap-mcbsp.1",
 	.codec_dai_name = "tlv320aic23-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name = "omap-pcm-audio",
+=======
+	.platform_name = "omap-mcbsp.1",
+>>>>>>> v3.18
 =======
 	.platform_name = "omap-mcbsp.1",
 >>>>>>> v3.18

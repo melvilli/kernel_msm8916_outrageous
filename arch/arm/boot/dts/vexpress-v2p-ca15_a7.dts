@@ -38,6 +38,11 @@
 			compatible = "arm,cortex-a15";
 			reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cci-control-port = <&cci_control1>;
+			cpu-idle-states = <&CLUSTER_SLEEP_BIG>;
+>>>>>>> v3.18
 =======
 			cci-control-port = <&cci_control1>;
 			cpu-idle-states = <&CLUSTER_SLEEP_BIG>;
@@ -49,6 +54,11 @@
 			compatible = "arm,cortex-a15";
 			reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cci-control-port = <&cci_control1>;
+			cpu-idle-states = <&CLUSTER_SLEEP_BIG>;
+>>>>>>> v3.18
 =======
 			cci-control-port = <&cci_control1>;
 			cpu-idle-states = <&CLUSTER_SLEEP_BIG>;
@@ -60,6 +70,11 @@
 			compatible = "arm,cortex-a7";
 			reg = <0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cci-control-port = <&cci_control2>;
+			cpu-idle-states = <&CLUSTER_SLEEP_LITTLE>;
+>>>>>>> v3.18
 =======
 			cci-control-port = <&cci_control2>;
 			cpu-idle-states = <&CLUSTER_SLEEP_LITTLE>;
@@ -71,6 +86,11 @@
 			compatible = "arm,cortex-a7";
 			reg = <0x101>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cci-control-port = <&cci_control2>;
+			cpu-idle-states = <&CLUSTER_SLEEP_LITTLE>;
+>>>>>>> v3.18
 =======
 			cci-control-port = <&cci_control2>;
 			cpu-idle-states = <&CLUSTER_SLEEP_LITTLE>;
@@ -82,7 +102,10 @@
 			compatible = "arm,cortex-a7";
 			reg = <0x102>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			cci-control-port = <&cci_control2>;
 			cpu-idle-states = <&CLUSTER_SLEEP_LITTLE>;
 		};
@@ -103,6 +126,9 @@
 				exit-latency-us = <500>;
 				min-residency-us = <2500>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -148,7 +174,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cci@2c090000 {
 		compatible = "arm,cci-400";
 		#address-cells = <1>;
@@ -169,6 +198,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memory-controller@7ffd0000 {
 		compatible = "arm,pl354", "arm,primecell";
@@ -192,13 +224,19 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
         scc@7fff0000 {
 		compatible = "arm,vexpress-scc,v2p-ca15_a7", "arm,vexpress-scc";
 		reg = <0 0x7fff0000 0 0x1000>;
 		interrupts = <0 95 4>;
         };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	timer {
 		compatible = "arm,armv7-timer";
@@ -357,6 +395,10 @@
 			label = "A15 Pcore";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -371,7 +413,11 @@
 			/* Total energy for the two A15 cores */
 			compatible = "arm,vexpress-energy";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			arm,vexpress-sysreg,func = <13 0>;
+=======
+			arm,vexpress-sysreg,func = <13 0>, <13 1>;
+>>>>>>> v3.18
 =======
 			arm,vexpress-sysreg,func = <13 0>, <13 1>;
 >>>>>>> v3.18
@@ -382,7 +428,11 @@
 			/* Total energy for the three A7 cores */
 			compatible = "arm,vexpress-energy";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			arm,vexpress-sysreg,func = <13 2>;
+=======
+			arm,vexpress-sysreg,func = <13 2>, <13 3>;
+>>>>>>> v3.18
 =======
 			arm,vexpress-sysreg,func = <13 2>, <13 3>;
 >>>>>>> v3.18

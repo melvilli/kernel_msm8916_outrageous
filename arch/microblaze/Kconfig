@@ -1,6 +1,7 @@
 config MICROBLAZE
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_MEMBLOCK
 	select HAVE_MEMBLOCK_NODE_MAP
 	select HAVE_FUNCTION_TRACER
@@ -30,6 +31,8 @@ config MICROBLAZE
 	select MODULES_USE_ELF_RELA
 	select CLONE_BACKWARDS3
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_MIGHT_HAVE_PC_PARPORT
 	select ARCH_WANT_IPC_PARSE_VERSION
 	select ARCH_WANT_OPTIONAL_GPIOLIB
@@ -62,6 +65,9 @@ config MICROBLAZE
 	select OF_EARLY_FLATTREE
 	select TRACING_SUPPORT
 	select VIRT_TO_BUS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SWAP
@@ -105,7 +111,11 @@ source "init/Kconfig"
 source "kernel/Kconfig.freezer"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "arch/microblaze/platform/Kconfig.platform"
+=======
+source "arch/microblaze/Kconfig.platform"
+>>>>>>> v3.18
 =======
 source "arch/microblaze/Kconfig.platform"
 >>>>>>> v3.18
@@ -121,11 +131,14 @@ config MMU
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NO_MMU
 	bool
 	depends on !MMU
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 comment "Boot options"
@@ -171,13 +184,19 @@ config SECCOMP
 endmenu
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "Advanced setup"
 =======
+=======
+>>>>>>> v3.18
 menu "Kernel features"
 
 config NR_CPUS
 	int
 	default "1"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ADVANCED_OPTIONS
@@ -300,6 +319,7 @@ config MICROBLAZE_64K_PAGES
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config KERNEL_PAD
 	hex "Kernel PAD for unpacking" if ADVANCED_OPTIONS
 	default "0x80000" if MMU
@@ -309,10 +329,15 @@ endmenu
 source "mm/Kconfig"
 
 =======
+=======
+>>>>>>> v3.18
 source "mm/Kconfig"
 
 endmenu
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 menu "Executable file formats"
 

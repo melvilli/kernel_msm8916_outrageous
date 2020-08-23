@@ -238,7 +238,11 @@ static int init_maxfreq_mode(void)
 	unsigned long min;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpupower_cpu_info.caps & CPUPOWER_CAP_INV_TSC)
+=======
+	if (!(cpupower_cpu_info.caps & CPUPOWER_CAP_INV_TSC))
+>>>>>>> v3.18
 =======
 	if (!(cpupower_cpu_info.caps & CPUPOWER_CAP_INV_TSC))
 >>>>>>> v3.18

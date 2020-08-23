@@ -81,7 +81,10 @@ static int xfrm4_fill_dst(struct xfrm_dst *xdst, struct net_device *dev,
 
 	xdst->u.rt.rt_iif = fl4->flowi4_iif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xdst->u.rt.rt_uid = fl4->flowi4_uid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -109,10 +112,13 @@ _decode_session4(struct sk_buff *skb, struct flowi *fl, int reverse)
 	u8 *xprth = skb_network_header(skb) + iph->ihl * 4;
 	struct flowi4 *fl4 = &fl->u.ip4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	memset(fl4, 0, sizeof(struct flowi4));
 	fl4->flowi4_mark = skb->mark;
 =======
+=======
+>>>>>>> v3.18
 	int oif = 0;
 
 	if (skb_dst(skb))
@@ -121,6 +127,9 @@ _decode_session4(struct sk_buff *skb, struct flowi *fl, int reverse)
 	memset(fl4, 0, sizeof(struct flowi4));
 	fl4->flowi4_mark = skb->mark;
 	fl4->flowi4_oif = reverse ? skb->skb_iif : oif;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ip_is_fragment(iph)) {
@@ -336,6 +345,10 @@ void __init xfrm4_init(void)
 	xfrm4_state_init();
 	xfrm4_policy_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xfrm4_protocol_init();
+>>>>>>> v3.18
 =======
 	xfrm4_protocol_init();
 >>>>>>> v3.18

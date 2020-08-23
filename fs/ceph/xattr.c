@@ -1,5 +1,9 @@
 #include <linux/ceph/ceph_debug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ceph/pagelist.h>
+>>>>>>> v3.18
 =======
 #include <linux/ceph/pagelist.h>
 >>>>>>> v3.18
@@ -11,6 +15,10 @@
 
 #include <linux/xattr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/posix_acl_xattr.h>
+>>>>>>> v3.18
 =======
 #include <linux/posix_acl_xattr.h>
 >>>>>>> v3.18
@@ -20,7 +28,10 @@
 #define XATTR_CEPH_PREFIX_LEN (sizeof (XATTR_CEPH_PREFIX) - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __remove_xattr(struct ceph_inode_info *ci,
 			  struct ceph_inode_xattr *xattr);
 
@@ -36,6 +47,9 @@ const struct xattr_handler *ceph_xattr_handlers[] = {
 	NULL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool ceph_is_valid_xattr(const char *name)
 {
@@ -43,6 +57,10 @@ static bool ceph_is_valid_xattr(const char *name)
 	       !strncmp(name, XATTR_SECURITY_PREFIX,
 			XATTR_SECURITY_PREFIX_LEN) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	       !strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN) ||
+>>>>>>> v3.18
 =======
 	       !strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN) ||
 >>>>>>> v3.18
@@ -78,7 +96,11 @@ static bool ceph_vxattrcb_layout_exists(struct ceph_inode_info *ci)
 
 static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					size_t size)
+=======
+				   size_t size)
+>>>>>>> v3.18
 =======
 				   size_t size)
 >>>>>>> v3.18
@@ -89,6 +111,10 @@ static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 	s64 pool = ceph_file_layout_pg_pool(ci->i_layout);
 	const char *pool_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char buf[128];
+>>>>>>> v3.18
 =======
 	char buf[128];
 >>>>>>> v3.18
@@ -96,6 +122,7 @@ static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 	dout("ceph_vxattrcb_layout %p\n", &ci->vfs_inode);
 	down_read(&osdc->map_sem);
 	pool_name = ceph_pg_pool_name_by_id(osdc->osdmap, pool);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pool_name)
 		ret = snprintf(val, size,
@@ -107,6 +134,8 @@ static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 	else
 		ret = snprintf(val, size,
 =======
+=======
+>>>>>>> v3.18
 	if (pool_name) {
 		size_t len = strlen(pool_name);
 		ret = snprintf(buf, sizeof(buf),
@@ -125,6 +154,9 @@ static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 		}
 	} else {
 		ret = snprintf(buf, sizeof(buf),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"stripe_unit=%lld stripe_count=%lld object_size=%lld pool=%lld",
 		(unsigned long long)ceph_file_layout_su(ci->i_layout),
@@ -132,8 +164,11 @@ static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 	        (unsigned long long)ceph_file_layout_object_size(ci->i_layout),
 		(unsigned long long)pool);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 		if (size) {
 			if (ret <= size)
 				memcpy(val, buf, ret);
@@ -141,6 +176,9 @@ static size_t ceph_vxattrcb_layout(struct ceph_inode_info *ci, char *val,
 				ret = -ERANGE;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	up_read(&osdc->map_sem);
 	return ret;
@@ -268,7 +306,11 @@ static struct ceph_vxattr ceph_dir_vxattrs[] = {
 		.getxattr_cb = ceph_vxattrcb_layout,
 		.readonly = false,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hidden = false,
+=======
+		.hidden = true,
+>>>>>>> v3.18
 =======
 		.hidden = true,
 >>>>>>> v3.18
@@ -299,7 +341,11 @@ static struct ceph_vxattr ceph_file_vxattrs[] = {
 		.getxattr_cb = ceph_vxattrcb_layout,
 		.readonly = false,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hidden = false,
+=======
+		.hidden = true,
+>>>>>>> v3.18
 =======
 		.hidden = true,
 >>>>>>> v3.18
@@ -329,8 +375,12 @@ static size_t ceph_vxattrs_name_size(struct ceph_vxattr *vxattrs)
 	if (vxattrs == ceph_file_vxattrs)
 		return ceph_file_vxattrs_name_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG();
 
+=======
+	BUG_ON(vxattrs);
+>>>>>>> v3.18
 =======
 	BUG_ON(vxattrs);
 >>>>>>> v3.18
@@ -387,8 +437,12 @@ static int __set_xattr(struct ceph_inode_info *ci,
 			   const char *name, int name_len,
 			   const char *val, int val_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   int dirty,
 			   int should_free_name, int should_free_val,
+=======
+			   int flags, int update_xattr,
+>>>>>>> v3.18
 =======
 			   int flags, int update_xattr,
 >>>>>>> v3.18
@@ -421,7 +475,10 @@ static int __set_xattr(struct ceph_inode_info *ci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (update_xattr) {
 		int err = 0;
 		if (xattr && (flags & XATTR_CREATE))
@@ -441,6 +498,9 @@ static int __set_xattr(struct ceph_inode_info *ci,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!xattr) {
 		new = 1;
@@ -448,7 +508,11 @@ static int __set_xattr(struct ceph_inode_info *ci,
 		xattr->name = name;
 		xattr->name_len = name_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xattr->should_free_name = should_free_name;
+=======
+		xattr->should_free_name = update_xattr;
+>>>>>>> v3.18
 =======
 		xattr->should_free_name = update_xattr;
 >>>>>>> v3.18
@@ -462,7 +526,11 @@ static int __set_xattr(struct ceph_inode_info *ci,
 			kfree((void *)xattr->val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (should_free_name) {
+=======
+		if (update_xattr) {
+>>>>>>> v3.18
 =======
 		if (update_xattr) {
 >>>>>>> v3.18
@@ -481,8 +549,13 @@ static int __set_xattr(struct ceph_inode_info *ci,
 
 	xattr->val_len = val_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xattr->dirty = dirty;
 	xattr->should_free_val = (val && should_free_val);
+=======
+	xattr->dirty = update_xattr;
+	xattr->should_free_val = (val && update_xattr);
+>>>>>>> v3.18
 =======
 	xattr->dirty = update_xattr;
 	xattr->should_free_val = (val && update_xattr);
@@ -549,7 +622,11 @@ static int __remove_xattr(struct ceph_inode_info *ci,
 {
 	if (!xattr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EOPNOTSUPP;
+=======
+		return -ENODATA;
+>>>>>>> v3.18
 =======
 		return -ENODATA;
 >>>>>>> v3.18
@@ -666,7 +743,11 @@ start:
 		spin_unlock(&ci->i_ceph_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xattrs = kcalloc(numattr, sizeof(struct ceph_xattr *),
+=======
+		xattrs = kcalloc(numattr, sizeof(struct ceph_inode_xattr *),
+>>>>>>> v3.18
 =======
 		xattrs = kcalloc(numattr, sizeof(struct ceph_inode_xattr *),
 >>>>>>> v3.18
@@ -675,7 +756,11 @@ start:
 		if (!xattrs)
 			goto bad_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(xattrs, 0, numattr*sizeof(struct ceph_xattr *));
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -707,7 +792,11 @@ start:
 
 			err = __set_xattr(ci, name, namelen, val, len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  0, 0, 0, &xattrs[numattr]);
+=======
+					  0, 0, &xattrs[numattr]);
+>>>>>>> v3.18
 =======
 					  0, 0, &xattrs[numattr]);
 >>>>>>> v3.18
@@ -800,10 +889,16 @@ void __ceph_build_xattrs_blob(struct ceph_inode_info *ci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t ceph_getxattr(struct dentry *dentry, const char *name, void *value,
 		      size_t size)
 {
 	struct inode *inode = dentry->d_inode;
+=======
+ssize_t __ceph_getxattr(struct inode *inode, const char *name, void *value,
+		      size_t size)
+{
+>>>>>>> v3.18
 =======
 ssize_t __ceph_getxattr(struct inode *inode, const char *name, void *value,
 		      size_t size)
@@ -818,7 +913,10 @@ ssize_t __ceph_getxattr(struct inode *inode, const char *name, void *value,
 		return -ENODATA;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* let's see if a virtual xattr was requested */
@@ -832,6 +930,7 @@ ssize_t __ceph_getxattr(struct inode *inode, const char *name, void *value,
 	dout("getxattr %p ver=%lld index_ver=%lld\n", inode,
 	     ci->i_xattrs.version, ci->i_xattrs.index_version);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (__ceph_caps_issued_mask(ci, CEPH_CAP_XATTR_SHARED, 1) &&
 	    (ci->i_xattrs.index_version >= ci->i_xattrs.version)) {
@@ -847,6 +946,8 @@ ssize_t __ceph_getxattr(struct inode *inode, const char *name, void *value,
 	spin_lock(&ci->i_ceph_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	if (ci->i_xattrs.version == 0 ||
 	    !__ceph_caps_issued_mask(ci, CEPH_CAP_XATTR_SHARED, 1)) {
 		spin_unlock(&ci->i_ceph_lock);
@@ -857,13 +958,19 @@ ssize_t __ceph_getxattr(struct inode *inode, const char *name, void *value,
 		spin_lock(&ci->i_ceph_lock);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = __build_xattrs(inode);
 	if (err < 0)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 get_xattr:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = -ENODATA;  /* == ENOATTR */
@@ -887,7 +994,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ssize_t ceph_getxattr(struct dentry *dentry, const char *name, void *value,
 		      size_t size)
 {
@@ -897,6 +1007,9 @@ ssize_t ceph_getxattr(struct dentry *dentry, const char *name, void *value,
 	return __ceph_getxattr(dentry->d_inode, name, value, size);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ssize_t ceph_listxattr(struct dentry *dentry, char *names, size_t size)
 {
@@ -913,6 +1026,7 @@ ssize_t ceph_listxattr(struct dentry *dentry, char *names, size_t size)
 	dout("listxattr %p ver=%lld index_ver=%lld\n", inode,
 	     ci->i_xattrs.version, ci->i_xattrs.index_version);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (__ceph_caps_issued_mask(ci, CEPH_CAP_XATTR_SHARED, 1) &&
 	    (ci->i_xattrs.index_version >= ci->i_xattrs.version)) {
@@ -932,6 +1046,8 @@ ssize_t ceph_listxattr(struct dentry *dentry, char *names, size_t size)
 
 list_xattr:
 =======
+=======
+>>>>>>> v3.18
 	if (ci->i_xattrs.version == 0 ||
 	    !__ceph_caps_issued_mask(ci, CEPH_CAP_XATTR_SHARED, 1)) {
 		spin_unlock(&ci->i_ceph_lock);
@@ -944,6 +1060,9 @@ list_xattr:
 	err = __build_xattrs(inode);
 	if (err < 0)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Start with virtual dir xattr names (if any) (including
@@ -989,6 +1108,7 @@ static int ceph_sync_setxattr(struct dentry *dentry, const char *name,
 	struct inode *inode = dentry->d_inode;
 	struct ceph_inode_info *ci = ceph_inode(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *parent_inode;
 	struct ceph_mds_request *req;
 	struct ceph_mds_client *mdsc = fsc->mdsc;
@@ -1015,6 +1135,8 @@ static int ceph_sync_setxattr(struct dentry *dentry, const char *name,
 			       min(PAGE_CACHE_SIZE, size-i*PAGE_CACHE_SIZE));
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct ceph_mds_request *req;
 	struct ceph_mds_client *mdsc = fsc->mdsc;
 	struct ceph_pagelist *pagelist = NULL;
@@ -1032,6 +1154,9 @@ static int ceph_sync_setxattr(struct dentry *dentry, const char *name,
 			goto out;
 	} else {
 		flags |= CEPH_XATTR_REMOVE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1052,6 +1177,7 @@ static int ceph_sync_setxattr(struct dentry *dentry, const char *name,
 	req->r_path2 = kstrdup(name, GFP_NOFS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->r_pages = pages;
 	req->r_num_pages = nr_pages;
 	req->r_data_len = size;
@@ -1061,16 +1187,22 @@ static int ceph_sync_setxattr(struct dentry *dentry, const char *name,
 	err = ceph_mdsc_do_request(mdsc, parent_inode, req);
 	iput(parent_inode);
 =======
+=======
+>>>>>>> v3.18
 	req->r_pagelist = pagelist;
 	pagelist = NULL;
 
 	dout("xattr.ver (before): %lld\n", ci->i_xattrs.version);
 	err = ceph_mdsc_do_request(mdsc, NULL, req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ceph_mdsc_put_request(req);
 	dout("xattr.ver (after): %lld\n", ci->i_xattrs.version);
 
 out:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pages) {
 		for (i = 0; i < nr_pages; i++)
@@ -1083,6 +1215,8 @@ out:
 int ceph_setxattr(struct dentry *dentry, const char *name,
 		  const void *value, size_t size, int flags)
 =======
+=======
+>>>>>>> v3.18
 	if (pagelist)
 		ceph_pagelist_release(pagelist);
 	return err;
@@ -1090,6 +1224,9 @@ int ceph_setxattr(struct dentry *dentry, const char *name,
 
 int __ceph_setxattr(struct dentry *dentry, const char *name,
 			const void *value, size_t size, int flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct inode *inode = dentry->d_inode;
@@ -1098,7 +1235,11 @@ int __ceph_setxattr(struct dentry *dentry, const char *name,
 	int issued;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dirty;
+=======
+	int dirty = 0;
+>>>>>>> v3.18
 =======
 	int dirty = 0;
 >>>>>>> v3.18
@@ -1110,9 +1251,12 @@ int __ceph_setxattr(struct dentry *dentry, const char *name,
 	int required_blob_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ceph_snap(inode) != CEPH_NOSNAP)
 		return -EROFS;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ceph_is_valid_xattr(name))
@@ -1147,7 +1291,11 @@ retry:
 	issued = __ceph_caps_issued(ci, NULL);
 	dout("setxattr %p issued %s\n", inode, ceph_cap_string(issued));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(issued & CEPH_CAP_XATTR_EXCL))
+=======
+	if (ci->i_xattrs.version == 0 || !(issued & CEPH_CAP_XATTR_EXCL))
+>>>>>>> v3.18
 =======
 	if (ci->i_xattrs.version == 0 || !(issued & CEPH_CAP_XATTR_EXCL))
 >>>>>>> v3.18
@@ -1173,6 +1321,7 @@ retry:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __set_xattr(ci, newname, name_len, newval,
 			  val_len, 1, 1, 1, &xattr);
 
@@ -1180,6 +1329,8 @@ retry:
 	ci->i_xattrs.dirty = true;
 	inode->i_ctime = CURRENT_TIME;
 =======
+=======
+>>>>>>> v3.18
 	err = __set_xattr(ci, newname, name_len, newval, val_len,
 			  flags, value ? 1 : -1, &xattr);
 
@@ -1188,6 +1339,9 @@ retry:
 		ci->i_xattrs.dirty = true;
 		inode->i_ctime = CURRENT_TIME;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock(&ci->i_ceph_lock);
@@ -1207,7 +1361,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ceph_setxattr(struct dentry *dentry, const char *name,
 		  const void *value, size_t size, int flags)
 {
@@ -1220,6 +1377,9 @@ int ceph_setxattr(struct dentry *dentry, const char *name,
 	return __ceph_setxattr(dentry, name, value, size, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ceph_send_removexattr(struct dentry *dentry, const char *name)
 {
@@ -1227,7 +1387,10 @@ static int ceph_send_removexattr(struct dentry *dentry, const char *name)
 	struct ceph_mds_client *mdsc = fsc->mdsc;
 	struct inode *inode = dentry->d_inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *parent_inode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ceph_mds_request *req;
@@ -1244,9 +1407,13 @@ static int ceph_send_removexattr(struct dentry *dentry, const char *name)
 	req->r_path2 = kstrdup(name, GFP_NOFS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parent_inode = ceph_get_dentry_parent_inode(dentry);
 	err = ceph_mdsc_do_request(mdsc, parent_inode, req);
 	iput(parent_inode);
+=======
+	err = ceph_mdsc_do_request(mdsc, NULL, req);
+>>>>>>> v3.18
 =======
 	err = ceph_mdsc_do_request(mdsc, NULL, req);
 >>>>>>> v3.18
@@ -1255,7 +1422,11 @@ static int ceph_send_removexattr(struct dentry *dentry, const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ceph_removexattr(struct dentry *dentry, const char *name)
+=======
+int __ceph_removexattr(struct dentry *dentry, const char *name)
+>>>>>>> v3.18
 =======
 int __ceph_removexattr(struct dentry *dentry, const char *name)
 >>>>>>> v3.18
@@ -1269,9 +1440,12 @@ int __ceph_removexattr(struct dentry *dentry, const char *name)
 	int dirty;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ceph_snap(inode) != CEPH_NOSNAP)
 		return -EROFS;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ceph_is_valid_xattr(name))
@@ -1292,7 +1466,11 @@ retry:
 	dout("removexattr %p issued %s\n", inode, ceph_cap_string(issued));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(issued & CEPH_CAP_XATTR_EXCL))
+=======
+	if (ci->i_xattrs.version == 0 || !(issued & CEPH_CAP_XATTR_EXCL))
+>>>>>>> v3.18
 =======
 	if (ci->i_xattrs.version == 0 || !(issued & CEPH_CAP_XATTR_EXCL))
 >>>>>>> v3.18
@@ -1335,7 +1513,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ceph_removexattr(struct dentry *dentry, const char *name)
 {
 	if (ceph_snap(dentry->d_inode) != CEPH_NOSNAP)
@@ -1346,4 +1527,7 @@ int ceph_removexattr(struct dentry *dentry, const char *name)
 
 	return __ceph_removexattr(dentry, name);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

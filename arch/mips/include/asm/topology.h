@@ -10,10 +10,13 @@
 
 #include <topology.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_SMP
 #define smt_capable()	(smp_num_siblings > 1)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/smp.h>
 
 #ifdef CONFIG_SMP
@@ -21,6 +24,9 @@
 #define topology_core_id(cpu)			(cpu_data[cpu].core)
 #define topology_core_cpumask(cpu)		(&cpu_core_map[cpu])
 #define topology_thread_cpumask(cpu)		(&cpu_sibling_map[cpu])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

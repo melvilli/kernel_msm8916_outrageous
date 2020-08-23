@@ -76,14 +76,20 @@ typedef struct user_fxsr_struct elf_fpxregset_t;
 #include <asm/vdso.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int vdso_enabled;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 extern unsigned int vdso64_enabled;
 #endif
 #if defined(CONFIG_X86_32) || defined(CONFIG_COMPAT)
 extern unsigned int vdso32_enabled;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -280,9 +286,15 @@ extern int force_personality32;
 struct task_struct;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ARCH_DLINFO_IA32(vdso_enabled)					\
 do {									\
 	if (VDSO_CURRENT_BASE) {					\
+=======
+#define	ARCH_DLINFO_IA32						\
+do {									\
+	if (vdso32_enabled) {						\
+>>>>>>> v3.18
 =======
 #define	ARCH_DLINFO_IA32						\
 do {									\
@@ -298,9 +310,13 @@ do {									\
 #define STACK_RND_MASK (0x7ff)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VDSO_HIGH_BASE		(__fix_to_virt(FIX_VDSO))
 
 #define ARCH_DLINFO		ARCH_DLINFO_IA32(vdso_enabled)
+=======
+#define ARCH_DLINFO		ARCH_DLINFO_IA32
+>>>>>>> v3.18
 =======
 #define ARCH_DLINFO		ARCH_DLINFO_IA32
 >>>>>>> v3.18
@@ -310,8 +326,11 @@ do {									\
 #else /* CONFIG_X86_32 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VDSO_HIGH_BASE		0xffffe000U /* CONFIG_COMPAT_VDSO address */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* 1GB for 64bit, 8MB for 32bit */
@@ -319,6 +338,7 @@ do {									\
 
 #define ARCH_DLINFO							\
 do {									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (vdso_enabled)						\
 		NEW_AUX_ENT(AT_SYSINFO_EHDR,				\
@@ -331,6 +351,8 @@ do {									\
 		NEW_AUX_ENT(AT_SYSINFO_EHDR,				\
 			    (unsigned long)current->mm->context.vdso);	\
 =======
+=======
+>>>>>>> v3.18
 	if (vdso64_enabled)						\
 		NEW_AUX_ENT(AT_SYSINFO_EHDR,				\
 			    (unsigned long __force)current->mm->context.vdso); \
@@ -342,6 +364,9 @@ do {									\
 	if (vdso64_enabled)						\
 		NEW_AUX_ENT(AT_SYSINFO_EHDR,				\
 			    (unsigned long __force)current->mm->context.vdso); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } while (0)
 
@@ -352,7 +377,11 @@ if (test_thread_flag(TIF_X32))						\
 	ARCH_DLINFO_X32;						\
 else									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ARCH_DLINFO_IA32(sysctl_vsyscall32)
+=======
+	ARCH_DLINFO_IA32
+>>>>>>> v3.18
 =======
 	ARCH_DLINFO_IA32
 >>>>>>> v3.18
@@ -365,7 +394,12 @@ else									\
 
 #define VDSO_ENTRY							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	((unsigned long)VDSO32_SYMBOL(VDSO_CURRENT_BASE, vsyscall))
+=======
+	((unsigned long)current->mm->context.vdso +			\
+	 selected_vdso32->sym___kernel_vsyscall)
+>>>>>>> v3.18
 =======
 	((unsigned long)current->mm->context.vdso +			\
 	 selected_vdso32->sym___kernel_vsyscall)
@@ -377,11 +411,17 @@ struct linux_binprm;
 extern int arch_setup_additional_pages(struct linux_binprm *bprm,
 				       int uses_interp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int x32_setup_additional_pages(struct linux_binprm *bprm,
 				      int uses_interp);
 
 extern int syscall32_setup_pages(struct linux_binprm *, int exstack);
 #define compat_arch_setup_additional_pages	syscall32_setup_pages
+=======
+extern int compat_arch_setup_additional_pages(struct linux_binprm *bprm,
+					      int uses_interp);
+#define compat_arch_setup_additional_pages compat_arch_setup_additional_pages
+>>>>>>> v3.18
 =======
 extern int compat_arch_setup_additional_pages(struct linux_binprm *bprm,
 					      int uses_interp);

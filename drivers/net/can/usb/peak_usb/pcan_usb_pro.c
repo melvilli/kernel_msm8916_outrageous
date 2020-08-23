@@ -334,6 +334,11 @@ static int pcan_usb_pro_send_req(struct peak_usb_device *dev, int req_id,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(req_addr, '\0', req_size);
+
+>>>>>>> v3.18
 =======
 	memset(req_addr, '\0', req_size);
 
@@ -349,7 +354,10 @@ static int pcan_usb_pro_send_req(struct peak_usb_device *dev, int req_id,
 		p = usb_rcvctrlpipe(dev->udev, 0);
 		req_type |= USB_DIR_IN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(req_addr, '\0', req_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;

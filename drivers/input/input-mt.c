@@ -237,7 +237,10 @@ void input_mt_report_pointer_emulation(struct input_dev *dev, bool use_count)
 EXPORT_SYMBOL(input_mt_report_pointer_emulation);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __input_mt_drop_unused(struct input_dev *dev, struct input_mt *mt)
 {
 	int i;
@@ -267,6 +270,9 @@ void input_mt_drop_unused(struct input_dev *dev)
 }
 EXPORT_SYMBOL(input_mt_drop_unused);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * input_mt_sync_frame() - synchronize mt frame
@@ -280,7 +286,10 @@ void input_mt_sync_frame(struct input_dev *dev)
 {
 	struct input_mt *mt = dev->mt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct input_mt_slot *s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool use_count = false;
@@ -288,6 +297,7 @@ void input_mt_sync_frame(struct input_dev *dev)
 	if (!mt)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mt->flags & INPUT_MT_DROP_UNUSED) {
 		for (s = mt->slots; s != mt->slots + mt->num_slots; s++) {
@@ -297,6 +307,10 @@ void input_mt_sync_frame(struct input_dev *dev)
 			input_event(dev, EV_ABS, ABS_MT_TRACKING_ID, -1);
 		}
 	}
+=======
+	if (mt->flags & INPUT_MT_DROP_UNUSED)
+		__input_mt_drop_unused(dev, mt);
+>>>>>>> v3.18
 =======
 	if (mt->flags & INPUT_MT_DROP_UNUSED)
 		__input_mt_drop_unused(dev, mt);

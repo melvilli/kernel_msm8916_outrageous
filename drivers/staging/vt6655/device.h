@@ -32,7 +32,10 @@
 #include <linux/module.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -54,6 +57,10 @@
 #include <linux/io.h>
 #include <linux/if.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/crc32.h>
+>>>>>>> v3.18
 =======
 #include <linux/crc32.h>
 >>>>>>> v3.18
@@ -63,12 +70,16 @@
 #include <linux/inetdevice.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef SIOCETHTOOL
 #define DEVICE_ETHTOOL_IOCTL_SUPPORT
 #include <linux/ethtool.h>
 #else
 #undef DEVICE_ETHTOOL_IOCTL_SUPPORT
 #endif
+=======
+#include <linux/ethtool.h>
+>>>>>>> v3.18
 =======
 #include <linux/ethtool.h>
 >>>>>>> v3.18
@@ -153,9 +164,13 @@
 #define	AVAIL_TD(p, q)	((p)->sOpts.nTxDescs[(q)] - ((p)->iTDUsed[(q)]))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //PLICE_DEBUG ->
 #define	NUM				64
 //PLICE_DEUBG <-
+=======
+#define	NUM				64
+>>>>>>> v3.18
 =======
 #define	NUM				64
 >>>>>>> v3.18
@@ -165,14 +180,20 @@
 /*---------------------  Export Types  ------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DBG_PRT(l, p, args...) { if (l <= msglevel) printk(p, ##args); }
 #define PRINT_K(p, args...) { if (PRIVATE_Message) printk(p, ##args); }
 =======
+=======
+>>>>>>> v3.18
 #define PRINT_K(p, args...)		\
 do {					\
 	if (PRIVATE_Message)		\
 		printk(p, ##args);	\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 //0:11A 1:11B 2:11G
@@ -201,12 +222,15 @@ typedef enum __device_msg_level {
 } DEVICE_MSG_LEVEL, *PDEVICE_MSG_LEVEL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum __device_init_type {
 	DEVICE_INIT_COLD = 0,         // cold init
 	DEVICE_INIT_RESET,          // reset init or Dx to D0 power remain init
 	DEVICE_INIT_DXPL            // Dx to D0 power lost init
 } DEVICE_INIT_TYPE, *PDEVICE_INIT_TYPE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 //++ NDIS related
@@ -220,8 +244,12 @@ typedef enum __device_init_type {
 typedef unsigned char NDIS_802_11_PMKID_VALUE[16];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _NDIS_802_11_WEP_STATUS
 {
+=======
+typedef enum _NDIS_802_11_WEP_STATUS {
+>>>>>>> v3.18
 =======
 typedef enum _NDIS_802_11_WEP_STATUS {
 >>>>>>> v3.18
@@ -241,8 +269,12 @@ typedef enum _NDIS_802_11_WEP_STATUS {
 	NDIS_802_11_ENCRYPTION_STATUS, *PNDIS_802_11_ENCRYPTION_STATUS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _NDIS_802_11_STATUS_TYPE
 {
+=======
+typedef enum _NDIS_802_11_STATUS_TYPE {
+>>>>>>> v3.18
 =======
 typedef enum _NDIS_802_11_STATUS_TYPE {
 >>>>>>> v3.18
@@ -254,6 +286,7 @@ typedef enum _NDIS_802_11_STATUS_TYPE {
 
 //Added new types for PMKID Candidate lists.
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct _PMKID_CANDIDATE {
 	NDIS_802_11_MAC_ADDRESS BSSID;
 	unsigned long Flags;
@@ -262,12 +295,17 @@ typedef struct _PMKID_CANDIDATE {
 typedef struct _BSSID_INFO
 {
 =======
+=======
+>>>>>>> v3.18
 struct pmkid_candidate {
 	NDIS_802_11_MAC_ADDRESS BSSID;
 	unsigned long Flags;
 };
 
 typedef struct _BSSID_INFO {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NDIS_802_11_MAC_ADDRESS BSSID;
 	NDIS_802_11_PMKID_VALUE PMKID;
@@ -284,7 +322,11 @@ typedef struct tagSPMKIDCandidateEvent {
 	unsigned long Version;       // Version of the structure
 	unsigned long NumCandidates; // No. of pmkid candidates
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PMKID_CANDIDATE CandidateList[MAX_PMKIDLIST];
+=======
+	struct pmkid_candidate CandidateList[MAX_PMKIDLIST];
+>>>>>>> v3.18
 =======
 	struct pmkid_candidate CandidateList[MAX_PMKIDLIST];
 >>>>>>> v3.18
@@ -333,8 +375,12 @@ typedef struct tagSCache {
 #define CB_MAX_RX_FRAG                 64
 // DeFragment Control Block, used for collecting fragments prior to reassembly
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct tagSDeFragControlBlock
 {
+=======
+typedef struct tagSDeFragControlBlock {
+>>>>>>> v3.18
 =======
 typedef struct tagSDeFragControlBlock {
 >>>>>>> v3.18
@@ -376,6 +422,7 @@ typedef struct tagSDeFragControlBlock {
 #define     DEVICE_LINK_CHANGE           0x00000001UL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //PLICE_DEBUG->
 
 typedef	struct _RxManagementQueue
@@ -387,6 +434,8 @@ typedef	struct _RxManagementQueue
 
 //PLICE_DEBUG<-
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct __device_opt {
@@ -405,6 +454,7 @@ typedef struct __device_opt {
 } OPTIONS, *POPTIONS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct __device_info {
 	struct __device_info *next;
 	struct __device_info *prev;
@@ -420,11 +470,16 @@ typedef struct __device_info {
 	struct net_device *next_module;
 	struct net_device_stats     stats;
 =======
+=======
+>>>>>>> v3.18
 struct vnt_private {
 	struct pci_dev *pcid;
 
 // netdev
 	struct net_device *dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 //dma addr, rx/tx pool
@@ -446,7 +501,11 @@ struct vnt_private {
 	CHIP_TYPE                   chip_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long               PortOffset;
+=======
+	void __iomem                *PortOffset;
+>>>>>>> v3.18
 =======
 	void __iomem                *PortOffset;
 >>>>>>> v3.18
@@ -488,6 +547,7 @@ struct vnt_private {
 
 	spinlock_t                  lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 //PLICE_DEBUG->
 	struct	tasklet_struct	RxMngWorkItem;
 	RxManagementQueue	rxManeQueue;
@@ -498,10 +558,15 @@ struct vnt_private {
 	struct semaphore	mlme_semaphore;
 //PLICE_DEBUG <-
 =======
+=======
+>>>>>>> v3.18
 
 	pid_t			MLMEThr_pid;
 	struct completion	notify;
 	struct semaphore	mlme_semaphore;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u32                         rx_bytes;
@@ -573,7 +638,11 @@ struct vnt_private {
 	unsigned char byShortRetryLimit;
 	unsigned char byLongRetryLimit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CARD_OP_MODE                eOPMode;
+=======
+	enum nl80211_iftype op_mode;
+>>>>>>> v3.18
 =======
 	enum nl80211_iftype op_mode;
 >>>>>>> v3.18
@@ -583,7 +652,10 @@ struct vnt_private {
 	unsigned char abyBSSID[ETH_ALEN];
 	unsigned char abyDesireBSSID[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short wCTSDuration;       // update while speed change
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short wACKDuration;       // update while speed change
@@ -594,7 +666,10 @@ struct vnt_private {
 	unsigned long dwMaxReceiveLifetime;       // dot11MaxReceiveLifetime
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool bCCK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool bEncryptionEnable;
@@ -666,7 +741,11 @@ struct vnt_private {
 	unsigned long dwIVCounter;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QWORD                   qwPacketNumber; //For CCMP and TKIP as TSC(6 bytes)
+=======
+	u64 qwPacketNumber; /* For CCMP and TKIP as TSC(6 bytes) */
+>>>>>>> v3.18
 =======
 	u64 qwPacketNumber; /* For CCMP and TKIP as TSC(6 bytes) */
 >>>>>>> v3.18
@@ -747,7 +826,10 @@ struct vnt_private {
 	// command timer
 	struct timer_list       sTimerCommand;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef TxInSleep
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct timer_list       sTimerTxData;
@@ -755,7 +837,10 @@ struct vnt_private {
 	bool fTxDataInSleep;
 	bool IsTxDataTrigger;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -836,12 +921,15 @@ struct vnt_private {
 	struct sk_buff          *skb;
 #ifdef WPA_SUPPLICANT_DRIVER_WEXT_SUPPORT
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
   bool bwextstep0;
   bool bwextstep1;
   bool bwextstep2;
   bool bwextstep3;
 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int	bwextcount;
@@ -862,6 +950,7 @@ struct vnt_private {
 
 	struct iw_statistics	wstats;		// wireless stats
 	bool bCommit;
+<<<<<<< HEAD
 <<<<<<< HEAD
 } DEVICE_INFO, *PSDevice;
 
@@ -901,10 +990,15 @@ void	InitRxManagementQueue(PSDevice   pDevice);
 
 inline static bool device_get_ip(PSDevice pInfo) {
 =======
+=======
+>>>>>>> v3.18
 };
 
 static inline bool device_get_ip(struct vnt_private *pInfo)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct in_device *in_dev = (struct in_device *)pInfo->dev->ip_ptr;
 	struct in_ifaddr *ifa;
@@ -932,15 +1026,21 @@ static inline PDEVICE_TD_INFO alloc_td_info(void)
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool device_dma0_xmit(PSDevice pDevice, struct sk_buff *skb, unsigned int uNodeIndex);
 bool device_alloc_frag_buf(PSDevice pDevice, PSDeFragControlBlock pDeF);
 int Config_FileOperation(PSDevice pDevice, bool fwrite, unsigned char *Parameter);
 =======
+=======
+>>>>>>> v3.18
 bool device_dma0_xmit(struct vnt_private *pDevice,
 		      struct sk_buff *skb, unsigned int uNodeIndex);
 bool device_alloc_frag_buf(struct vnt_private *pDevice,
 			   PSDeFragControlBlock pDeF);
 int Config_FileOperation(struct vnt_private *pDevice,
 			 bool fwrite, unsigned char *Parameter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

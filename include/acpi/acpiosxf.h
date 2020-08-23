@@ -8,7 +8,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -82,10 +86,13 @@ struct acpi_signal_fatal_info {
  * OSL Initialization and shutdown primitives
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status __init acpi_os_initialize(void);
 
 acpi_status acpi_os_terminate(void);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_initialize
 acpi_status acpi_os_initialize(void);
 #endif
@@ -93,11 +100,15 @@ acpi_status acpi_os_initialize(void);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_terminate
 acpi_status acpi_os_terminate(void);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * ACPI Table interfaces
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_physical_address acpi_os_get_root_pointer(void);
 
@@ -110,6 +121,8 @@ acpi_os_table_override(struct acpi_table_header *existing_table,
 		       struct acpi_table_header **new_table);
 
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_get_root_pointer
 acpi_physical_address acpi_os_get_root_pointer(void);
 #endif
@@ -127,12 +140,19 @@ acpi_os_table_override(struct acpi_table_header *existing_table,
 #endif
 
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_physical_table_override
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 acpi_status
 acpi_os_physical_table_override(struct acpi_table_header *existing_table,
 				acpi_physical_address * new_address,
 				u32 *new_table_length);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -140,6 +160,7 @@ acpi_os_physical_table_override(struct acpi_table_header *existing_table,
 /*
  * Spinlock primitives
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef acpi_os_create_lock
 acpi_status acpi_os_create_lock(acpi_spinlock * out_handle);
@@ -151,6 +172,8 @@ acpi_cpu_flags acpi_os_acquire_lock(acpi_spinlock handle);
 
 void acpi_os_release_lock(acpi_spinlock handle, acpi_cpu_flags flags);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_create_lock
 acpi_status acpi_os_create_lock(acpi_spinlock * out_handle);
 #endif
@@ -166,11 +189,15 @@ acpi_cpu_flags acpi_os_acquire_lock(acpi_spinlock handle);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_release_lock
 void acpi_os_release_lock(acpi_spinlock handle, acpi_cpu_flags flags);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Semaphore primitives
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status
 acpi_os_create_semaphore(u32 max_units,
@@ -183,6 +210,8 @@ acpi_os_wait_semaphore(acpi_semaphore handle, u32 units, u16 timeout);
 
 acpi_status acpi_os_signal_semaphore(acpi_semaphore handle, u32 units);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_create_semaphore
 acpi_status
 acpi_os_create_semaphore(u32 max_units,
@@ -201,6 +230,9 @@ acpi_os_wait_semaphore(acpi_semaphore handle, u32 units, u16 timeout);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_signal_semaphore
 acpi_status acpi_os_signal_semaphore(acpi_semaphore handle, u32 units);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -209,6 +241,7 @@ acpi_status acpi_os_signal_semaphore(acpi_semaphore handle, u32 units);
  */
 #if (ACPI_MUTEX_TYPE != ACPI_BINARY_SEMAPHORE)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status acpi_os_create_mutex(acpi_mutex * out_handle);
 
@@ -234,6 +267,8 @@ void early_acpi_os_unmap_memory(void __iomem * virt, acpi_size size);
 
 #ifdef ACPI_FUTURE_USAGE
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_create_mutex
 acpi_status acpi_os_create_mutex(acpi_mutex * out_handle);
 #endif
@@ -276,6 +311,9 @@ void acpi_os_unmap_memory(void *logical_address, acpi_size size);
 #endif
 
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_get_physical_address
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 acpi_status
 acpi_os_get_physical_address(void *logical_address,
@@ -286,6 +324,10 @@ acpi_os_get_physical_address(void *logical_address,
  * Memory/Object Cache
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_create_cache
+>>>>>>> v3.18
 =======
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_create_cache
 >>>>>>> v3.18
@@ -293,6 +335,7 @@ acpi_status
 acpi_os_create_cache(char *cache_name,
 		     u16 object_size,
 		     u16 max_depth, acpi_cache_t ** return_cache);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 acpi_status acpi_os_delete_cache(acpi_cache_t * cache);
@@ -303,6 +346,8 @@ void *acpi_os_acquire_object(acpi_cache_t * cache);
 
 acpi_status acpi_os_release_object(acpi_cache_t * cache, void *object);
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_delete_cache
@@ -320,12 +365,19 @@ void *acpi_os_acquire_object(acpi_cache_t * cache);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_release_object
 acpi_status acpi_os_release_object(acpi_cache_t * cache, void *object);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Interrupt handlers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_install_interrupt_handler
+>>>>>>> v3.18
 =======
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_install_interrupt_handler
 >>>>>>> v3.18
@@ -333,6 +385,7 @@ acpi_status
 acpi_os_install_interrupt_handler(u32 interrupt_number,
 				  acpi_osd_handler service_routine,
 				  void *context);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 acpi_status
@@ -342,6 +395,8 @@ acpi_os_remove_interrupt_handler(u32 interrupt_number,
 void acpi_os_gpe_count(u32 gpe_number);
 void acpi_os_fixed_event_count(u32 fixed_event_number);
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_remove_interrupt_handler
@@ -349,11 +404,15 @@ acpi_status
 acpi_os_remove_interrupt_handler(u32 interrupt_number,
 				 acpi_osd_handler service_routine);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Threads and Scheduling
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_thread_id acpi_os_get_thread_id(void);
 
@@ -370,6 +429,8 @@ void acpi_os_sleep(u64 milliseconds);
 
 void acpi_os_stall(u32 microseconds);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_get_thread_id
 acpi_thread_id acpi_os_get_thread_id(void);
 #endif
@@ -391,16 +452,22 @@ void acpi_os_sleep(u64 milliseconds);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_stall
 void acpi_os_stall(u32 microseconds);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Platform and hardware-independent I/O interfaces
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_os_read_port(acpi_io_address address, u32 * value, u32 width);
 
 acpi_status acpi_os_write_port(acpi_io_address address, u32 value, u32 width);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_read_port
 acpi_status acpi_os_read_port(acpi_io_address address, u32 *value, u32 width);
 #endif
@@ -408,11 +475,15 @@ acpi_status acpi_os_read_port(acpi_io_address address, u32 *value, u32 width);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_write_port
 acpi_status acpi_os_write_port(acpi_io_address address, u32 value, u32 width);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Platform and hardware-independent physical memory interfaces
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status
 acpi_os_read_memory(acpi_physical_address address, u64 *value, u32 width);
@@ -420,6 +491,8 @@ acpi_os_read_memory(acpi_physical_address address, u64 *value, u32 width);
 acpi_status
 acpi_os_write_memory(acpi_physical_address address, u64 value, u32 width);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_read_memory
 acpi_status
 acpi_os_read_memory(acpi_physical_address address, u64 *value, u32 width);
@@ -429,6 +502,9 @@ acpi_os_read_memory(acpi_physical_address address, u64 *value, u32 width);
 acpi_status
 acpi_os_write_memory(acpi_physical_address address, u64 value, u32 width);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -436,6 +512,7 @@ acpi_os_write_memory(acpi_physical_address address, u64 value, u32 width);
  * Note: Can't use "Register" as a parameter, changed to "Reg" --
  * certain compilers complain.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status
 acpi_os_read_pci_configuration(struct acpi_pci_id *pci_id,
@@ -445,6 +522,8 @@ acpi_status
 acpi_os_write_pci_configuration(struct acpi_pci_id *pci_id,
 				u32 reg, u64 value, u32 width);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_read_pci_configuration
 acpi_status
 acpi_os_read_pci_configuration(struct acpi_pci_id *pci_id,
@@ -456,16 +535,22 @@ acpi_status
 acpi_os_write_pci_configuration(struct acpi_pci_id *pci_id,
 				u32 reg, u64 value, u32 width);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Miscellaneous
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 acpi_os_get_timer(void);
 
 acpi_status acpi_os_signal(u32 function, void *info);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_readable
 u8 acpi_os_readable(void *pointer, acpi_size length);
 #endif
@@ -481,11 +566,15 @@ u64 acpi_os_get_timer(void);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_signal
 acpi_status acpi_os_signal(u32 function, void *info);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Debug print routines
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ACPI_INTERNAL_VAR_XFACE acpi_os_printf(const char *format, ...);
 
@@ -499,6 +588,8 @@ void acpi_os_redirect_output(void *destination);
  */
 u32 acpi_os_get_line(char *buffer);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_printf
 void ACPI_INTERNAL_VAR_XFACE acpi_os_printf(const char *format, ...);
 #endif
@@ -540,6 +631,9 @@ acpi_os_get_table_by_index(u32 index,
 acpi_status
 acpi_os_get_table_by_address(acpi_physical_address address,
 			     struct acpi_table_header **table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -547,13 +641,19 @@ acpi_os_get_table_by_address(acpi_physical_address address,
  * Directory manipulation
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *acpi_os_open_directory(char *pathname,
 			     char *wildcard_spec, char requested_file_type);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_open_directory
 void *acpi_os_open_directory(char *pathname,
 			     char *wildcard_spec, char requested_file_type);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* requeste_file_type values */
@@ -562,10 +662,13 @@ void *acpi_os_open_directory(char *pathname,
 #define REQUEST_DIR_ONLY                    1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char *acpi_os_get_next_filename(void *dir_handle);
 
 void acpi_os_close_directory(void *dir_handle);
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_get_next_filename
 char *acpi_os_get_next_filename(void *dir_handle);
 #endif
@@ -604,6 +707,9 @@ long acpi_os_get_file_offset(ACPI_FILE file);
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_acpi_os_set_file_offset
 acpi_status acpi_os_set_file_offset(ACPI_FILE file, long offset, u8 from);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* __ACPIOSXF_H__ */

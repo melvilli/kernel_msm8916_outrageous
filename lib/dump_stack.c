@@ -7,7 +7,10 @@
 #include <linux/export.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/smp.h>
 #include <linux/atomic.h>
 
@@ -16,6 +19,9 @@ static void __dump_stack(void)
 	dump_stack_print_info(KERN_DEFAULT);
 	show_stack(NULL, NULL);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -24,12 +30,15 @@ static void __dump_stack(void)
  * Architectures can override this implementation by implementing its own.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dump_stack(void)
 {
 	dump_stack_print_info(KERN_DEFAULT);
 	show_stack(NULL, NULL);
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 static atomic_t dump_lock = ATOMIC_INIT(-1);
 
@@ -70,5 +79,8 @@ asmlinkage __visible void dump_stack(void)
 	__dump_stack();
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(dump_stack);

@@ -30,11 +30,17 @@ static debug_info_t *chsc_debug_msg_id;
 static debug_info_t *chsc_debug_log_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct chsc_request *on_close_request;
 static struct chsc_async_area *on_close_chsc_area;
 static DEFINE_MUTEX(on_close_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CHSC_MSG(imp, args...) do {					\
 		debug_sprintf_event(chsc_debug_msg_id, imp , ##args);	\
@@ -62,7 +68,11 @@ static void chsc_subchannel_irq(struct subchannel *sch)
 	struct chsc_private *private = dev_get_drvdata(&sch->dev);
 	struct chsc_request *request = private->request;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irb *irb = (struct irb *)&S390_lowcore.irb;
+=======
+	struct irb *irb = this_cpu_ptr(&cio_irb);
+>>>>>>> v3.18
 =======
 	struct irb *irb = this_cpu_ptr(&cio_irb);
 >>>>>>> v3.18
@@ -181,8 +191,12 @@ static struct css_driver chsc_subchannel_driver = {
 static int __init chsc_init_dbfs(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chsc_debug_msg_id = debug_register("chsc_msg", 16, 1,
 					   16 * sizeof(long));
+=======
+	chsc_debug_msg_id = debug_register("chsc_msg", 8, 1, 4 * sizeof(long));
+>>>>>>> v3.18
 =======
 	chsc_debug_msg_id = debug_register("chsc_msg", 8, 1, 4 * sizeof(long));
 >>>>>>> v3.18
@@ -274,7 +288,11 @@ static int chsc_async(struct chsc_async_area *chsc_area,
 		CHSC_LOG_HEX(2, &sch->schid, sizeof(sch->schid));
 		cc = chsc(chsc_area);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf(dbf, "cc:%d", cc);
+=======
+		snprintf(dbf, sizeof(dbf), "cc:%d", cc);
+>>>>>>> v3.18
 =======
 		snprintf(dbf, sizeof(dbf), "cc:%d", cc);
 >>>>>>> v3.18
@@ -307,17 +325,23 @@ static int chsc_async(struct chsc_async_area *chsc_area,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void chsc_log_command(struct chsc_async_area *chsc_area)
 {
 	char dbf[10];
 
 	sprintf(dbf, "CHSC:%x", chsc_area->header.code);
 =======
+=======
+>>>>>>> v3.18
 static void chsc_log_command(void *chsc_area)
 {
 	char dbf[10];
 
 	snprintf(dbf, sizeof(dbf), "CHSC:%x", ((uint16_t *)chsc_area)[1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CHSC_LOG(0, dbf);
 	CHSC_LOG_HEX(0, chsc_area, 32);
@@ -383,7 +407,11 @@ static int chsc_ioctl_start(void __user *user_area)
 			ret = -EFAULT;
 out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(dbf, "ret:%d", ret);
+=======
+	snprintf(dbf, sizeof(dbf), "ret:%d", ret);
+>>>>>>> v3.18
 =======
 	snprintf(dbf, sizeof(dbf), "ret:%d", ret);
 >>>>>>> v3.18
@@ -394,7 +422,10 @@ out_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int chsc_ioctl_on_close_set(void __user *user_area)
 {
 	char dbf[13];
@@ -488,6 +519,9 @@ out_free:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int chsc_ioctl_info_channel_path(void __user *user_cd)
 {
@@ -923,6 +957,11 @@ static long chsc_ioctl(struct file *filp, unsigned int cmd,
 	case CHSC_START:
 		return chsc_ioctl_start(argp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CHSC_START_SYNC:
+		return chsc_ioctl_start_sync(argp);
+>>>>>>> v3.18
 =======
 	case CHSC_START_SYNC:
 		return chsc_ioctl_start_sync(argp);
@@ -942,11 +981,17 @@ static long chsc_ioctl(struct file *filp, unsigned int cmd,
 	case CHSC_INFO_DCAL:
 		return chsc_ioctl_dcal(argp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CHSC_ON_CLOSE_SET:
 		return chsc_ioctl_on_close_set(argp);
 	case CHSC_ON_CLOSE_REMOVE:
 		return chsc_ioctl_on_close_remove();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default: /* unknown ioctl number */
 		return -ENOIOCTLCMD;
@@ -954,10 +999,13 @@ static long chsc_ioctl(struct file *filp, unsigned int cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct file_operations chsc_fops = {
 	.owner = THIS_MODULE,
 	.open = nonseekable_open,
 =======
+=======
+>>>>>>> v3.18
 static atomic_t chsc_ready_for_use = ATOMIC_INIT(1);
 
 static int chsc_open(struct inode *inode, struct file *file)
@@ -1003,6 +1051,9 @@ static const struct file_operations chsc_fops = {
 	.owner = THIS_MODULE,
 	.open = chsc_open,
 	.release = chsc_release,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.unlocked_ioctl = chsc_ioctl,
 	.compat_ioctl = chsc_ioctl,

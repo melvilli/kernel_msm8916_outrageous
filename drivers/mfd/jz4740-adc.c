@@ -87,7 +87,11 @@ static inline void jz4740_adc_clk_enable(struct jz4740_adc *adc)
 {
 	if (atomic_inc_return(&adc->clk_ref) == 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_enable(adc->clk);
+=======
+		clk_prepare_enable(adc->clk);
+>>>>>>> v3.18
 =======
 		clk_prepare_enable(adc->clk);
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ static inline void jz4740_adc_clk_disable(struct jz4740_adc *adc)
 {
 	if (atomic_dec_return(&adc->clk_ref) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_disable(adc->clk);
+=======
+		clk_disable_unprepare(adc->clk);
+>>>>>>> v3.18
 =======
 		clk_disable_unprepare(adc->clk);
 >>>>>>> v3.18
@@ -190,7 +198,11 @@ static struct resource jz4740_battery_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell jz4740_adc_cells[] = {
+=======
+static const struct mfd_cell jz4740_adc_cells[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell jz4740_adc_cells[] = {
 >>>>>>> v3.18
@@ -307,7 +319,10 @@ err_clk_put:
 	clk_put(adc->clk);
 err_iounmap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(adc->base);
@@ -333,8 +348,11 @@ static int jz4740_adc_remove(struct platform_device *pdev)
 	clk_put(adc->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

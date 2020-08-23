@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -32,7 +36,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -603,8 +610,13 @@ static void rt73usb_config_antenna_5x(struct rt2x00_dev *rt2x00dev,
 	case ANTENNA_HW_DIVERSITY:
 		rt2x00_set_field8(&r4, BBP_R4_RX_ANTENNA_CONTROL, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = !test_bit(CAPABILITY_FRAME_TYPE, &rt2x00dev->cap_flags)
 		       && (rt2x00dev->curr_band != IEEE80211_BAND_5GHZ);
+=======
+		temp = !rt2x00_has_cap_frame_type(rt2x00dev) &&
+		       (rt2x00dev->curr_band != IEEE80211_BAND_5GHZ);
+>>>>>>> v3.18
 =======
 		temp = !rt2x00_has_cap_frame_type(rt2x00dev) &&
 		       (rt2x00dev->curr_band != IEEE80211_BAND_5GHZ);
@@ -649,7 +661,11 @@ static void rt73usb_config_antenna_2x(struct rt2x00_dev *rt2x00dev,
 	rt2x00_set_field8(&r3, BBP_R3_SMART_MODE, 0);
 	rt2x00_set_field8(&r4, BBP_R4_RX_FRAME_END,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  !test_bit(CAPABILITY_FRAME_TYPE, &rt2x00dev->cap_flags));
+=======
+			  !rt2x00_has_cap_frame_type(rt2x00dev));
+>>>>>>> v3.18
 =======
 			  !rt2x00_has_cap_frame_type(rt2x00dev));
 >>>>>>> v3.18
@@ -726,15 +742,21 @@ static void rt73usb_config_ant(struct rt2x00_dev *rt2x00dev,
 	if (rt2x00dev->curr_band == IEEE80211_BAND_5GHZ) {
 		sel = antenna_sel_a;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lna = test_bit(CAPABILITY_EXTERNAL_LNA_A, &rt2x00dev->cap_flags);
 	} else {
 		sel = antenna_sel_bg;
 		lna = test_bit(CAPABILITY_EXTERNAL_LNA_BG, &rt2x00dev->cap_flags);
 =======
+=======
+>>>>>>> v3.18
 		lna = rt2x00_has_cap_external_lna_a(rt2x00dev);
 	} else {
 		sel = antenna_sel_bg;
 		lna = rt2x00_has_cap_external_lna_bg(rt2x00dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -764,7 +786,11 @@ static void rt73usb_config_lna_gain(struct rt2x00_dev *rt2x00dev,
 
 	if (libconf->conf->chandef.chan->band == IEEE80211_BAND_2GHZ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_BG, &rt2x00dev->cap_flags))
+=======
+		if (rt2x00_has_cap_external_lna_bg(rt2x00dev))
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_bg(rt2x00dev))
 >>>>>>> v3.18
@@ -958,7 +984,11 @@ static void rt73usb_link_tuner(struct rt2x00_dev *rt2x00dev,
 		up_bound = 0x48;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_A, &rt2x00dev->cap_flags)) {
+=======
+		if (rt2x00_has_cap_external_lna_a(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_a(rt2x00dev)) {
 >>>>>>> v3.18
@@ -978,7 +1008,11 @@ static void rt73usb_link_tuner(struct rt2x00_dev *rt2x00dev,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_BG, &rt2x00dev->cap_flags)) {
+=======
+		if (rt2x00_has_cap_external_lna_bg(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_bg(rt2x00dev)) {
 >>>>>>> v3.18
@@ -1636,7 +1670,11 @@ static void rt73usb_clear_beacon(struct queue_entry *entry)
 	struct rt2x00_dev *rt2x00dev = entry->queue->rt2x00dev;
 	unsigned int beacon_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg;
+=======
+	u32 orig_reg, reg;
+>>>>>>> v3.18
 =======
 	u32 orig_reg, reg;
 >>>>>>> v3.18
@@ -1646,7 +1684,12 @@ static void rt73usb_clear_beacon(struct queue_entry *entry)
 	 * otherwise we might be sending out invalid data.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt2x00usb_register_read(rt2x00dev, TXRX_CSR9, &reg);
+=======
+	rt2x00usb_register_read(rt2x00dev, TXRX_CSR9, &orig_reg);
+	reg = orig_reg;
+>>>>>>> v3.18
 =======
 	rt2x00usb_register_read(rt2x00dev, TXRX_CSR9, &orig_reg);
 	reg = orig_reg;
@@ -1662,10 +1705,16 @@ static void rt73usb_clear_beacon(struct queue_entry *entry)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Enable beaconing again.
 	 */
 	rt2x00_set_field32(&reg, TXRX_CSR9_BEACON_GEN, 1);
 	rt2x00usb_register_write(rt2x00dev, TXRX_CSR9, reg);
+=======
+	 * Restore beaconing state.
+	 */
+	rt2x00usb_register_write(rt2x00dev, TXRX_CSR9, orig_reg);
+>>>>>>> v3.18
 =======
 	 * Restore beaconing state.
 	 */
@@ -1712,7 +1761,11 @@ static int rt73usb_agc_to_rssi(struct rt2x00_dev *rt2x00dev, int rxd_w1)
 
 	if (rt2x00dev->curr_band == IEEE80211_BAND_5GHZ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_A, &rt2x00dev->cap_flags)) {
+=======
+		if (rt2x00_has_cap_external_lna_a(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_a(rt2x00dev)) {
 >>>>>>> v3.18
@@ -2415,6 +2468,7 @@ static const struct rt2x00lib_ops rt73usb_rt2x00_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct data_queue_desc rt73usb_queue_rx = {
 	.entry_num		= 32,
 	.data_size		= DATA_FRAME_SIZE,
@@ -2436,6 +2490,8 @@ static const struct data_queue_desc rt73usb_queue_bcn = {
 	.priv_size		= sizeof(struct queue_entry_priv_usb),
 };
 =======
+=======
+>>>>>>> v3.18
 static void rt73usb_queue_init(struct data_queue *queue)
 {
 	switch (queue->qid) {
@@ -2470,6 +2526,9 @@ static void rt73usb_queue_init(struct data_queue *queue)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct rt2x00_ops rt73usb_ops = {
@@ -2479,10 +2538,14 @@ static const struct rt2x00_ops rt73usb_ops = {
 	.rf_size		= RF_SIZE,
 	.tx_queues		= NUM_TX_QUEUES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.extra_tx_headroom	= TXD_DESC_SIZE,
 	.rx			= &rt73usb_queue_rx,
 	.tx			= &rt73usb_queue_tx,
 	.bcn			= &rt73usb_queue_bcn,
+=======
+	.queue_init		= rt73usb_queue_init,
+>>>>>>> v3.18
 =======
 	.queue_init		= rt73usb_queue_init,
 >>>>>>> v3.18

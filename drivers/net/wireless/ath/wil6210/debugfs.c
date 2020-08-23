@@ -567,6 +567,10 @@ static ssize_t wil_write_file_txmgmt(struct file *file, const char __user *buf,
 	struct wiphy *wiphy = wil_to_wiphy(wil);
 	struct wireless_dev *wdev = wil_to_wdev(wil);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cfg80211_mgmt_tx_params params;
+>>>>>>> v3.18
 =======
 	struct cfg80211_mgmt_tx_params params;
 >>>>>>> v3.18
@@ -580,14 +584,20 @@ static ssize_t wil_write_file_txmgmt(struct file *file, const char __user *buf,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = wil_cfg80211_mgmt_tx(wiphy, wdev, wdev->preset_chandef.chan,
 				true, 0, frame, len, true, false, NULL);
 =======
+=======
+>>>>>>> v3.18
 	params.buf = frame;
 	params.len = len;
 	params.chan = wdev->preset_chandef.chan;
 
 	rc = wil_cfg80211_mgmt_tx(wiphy, wdev, &params, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(frame);
@@ -931,7 +941,11 @@ static int wil_freq_debugfs_show(struct seq_file *s, void *data)
 	struct wil6210_priv *wil = s->private;
 	struct wireless_dev *wdev = wil_to_wdev(wil);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 freq = wdev->channel ? wdev->channel->center_freq : 0;
+=======
+	u16 freq = wdev->chandef.chan ? wdev->chandef.chan->center_freq : 0;
+>>>>>>> v3.18
 =======
 	u16 freq = wdev->chandef.chan ? wdev->chandef.chan->center_freq : 0;
 >>>>>>> v3.18
@@ -1054,7 +1068,10 @@ static const struct file_operations fops_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*---------recovery------------*/
 /* mode = [manual|auto]
  * state = [idle|pending|running]
@@ -1120,6 +1137,9 @@ static const struct file_operations fops_recovery = {
 	.open  = simple_open,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*---------Station matrix------------*/
 static void wil_print_rxtid(struct seq_file *s, struct wil_tid_ampdu_rx *r)
@@ -1233,6 +1253,10 @@ static const struct {
 	{"link",	S_IRUGO,		&fops_link},
 	{"info",	S_IRUGO,		&fops_info},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"recovery",	S_IRUGO | S_IWUSR,	&fops_recovery},
+>>>>>>> v3.18
 =======
 	{"recovery",	S_IRUGO | S_IWUSR,	&fops_recovery},
 >>>>>>> v3.18
@@ -1279,6 +1303,10 @@ static const struct dbg_off dbg_wil_off[] = {
 	WIL_FIELD(fw_version,	S_IRUGO,		doff_u32),
 	WIL_FIELD(hw_version,	S_IRUGO,		doff_x32),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WIL_FIELD(recovery_count, S_IRUGO,		doff_u32),
+>>>>>>> v3.18
 =======
 	WIL_FIELD(recovery_count, S_IRUGO,		doff_u32),
 >>>>>>> v3.18

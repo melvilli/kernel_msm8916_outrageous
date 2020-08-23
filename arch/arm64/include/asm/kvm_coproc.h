@@ -40,7 +40,12 @@ void kvm_register_target_sys_reg_table(unsigned int target,
 
 int kvm_handle_cp14_load_store(struct kvm_vcpu *vcpu, struct kvm_run *run);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_handle_cp14_access(struct kvm_vcpu *vcpu, struct kvm_run *run);
+=======
+int kvm_handle_cp14_32(struct kvm_vcpu *vcpu, struct kvm_run *run);
+int kvm_handle_cp14_64(struct kvm_vcpu *vcpu, struct kvm_run *run);
+>>>>>>> v3.18
 =======
 int kvm_handle_cp14_32(struct kvm_vcpu *vcpu, struct kvm_run *run);
 int kvm_handle_cp14_64(struct kvm_vcpu *vcpu, struct kvm_run *run);

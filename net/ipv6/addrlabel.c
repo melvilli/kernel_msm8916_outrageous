@@ -7,7 +7,11 @@
 /*
  * Author:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	YOSHIFUJI Hideaki @ USAGI/WIDE Project <yoshfuji@linux-ipv6.org>
+=======
+ *	YOSHIFUJI Hideaki @ USAGI/WIDE Project <yoshfuji@linux-ipv6.org>
+>>>>>>> v3.18
 =======
  *	YOSHIFUJI Hideaki @ USAGI/WIDE Project <yoshfuji@linux-ipv6.org>
 >>>>>>> v3.18
@@ -27,7 +31,11 @@
 #define ADDRLABEL(x...) printk(x)
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADDRLABEL(x...) do { ; } while(0)
+=======
+#define ADDRLABEL(x...) do { ; } while (0)
+>>>>>>> v3.18
 =======
 #define ADDRLABEL(x...) do { ; } while (0)
 >>>>>>> v3.18
@@ -37,8 +45,12 @@
  * Policy Table
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ip6addrlbl_entry
 {
+=======
+struct ip6addrlbl_entry {
+>>>>>>> v3.18
 =======
 struct ip6addrlbl_entry {
 >>>>>>> v3.18
@@ -101,6 +113,7 @@ static const __net_initconst struct ip6addrlbl_init_table
 		.prefix = &in6addr_any,
 		.label = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},{	/* fc00::/7 */
 		.prefix = &(struct in6_addr){{{ 0xfc }}},
 		.prefixlen = 7,
@@ -135,6 +148,8 @@ static const __net_initconst struct ip6addrlbl_init_table
 		.label = 3,
 	},{	/* ::1/128 */
 =======
+=======
+>>>>>>> v3.18
 	}, {	/* fc00::/7 */
 		.prefix = &(struct in6_addr){ { { 0xfc } } } ,
 		.prefixlen = 7,
@@ -168,6 +183,9 @@ static const __net_initconst struct ip6addrlbl_init_table
 		.prefixlen = 96,
 		.label = 3,
 	}, {	/* ::1/128 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.prefix = &in6addr_loopback,
 		.prefixlen = 128,
@@ -327,7 +345,11 @@ static int __ip6addrlbl_add(struct ip6addrlbl_entry *newp, int replace)
 	}
 	if (last)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_add_after_rcu(&last->list, &newp->list);
+=======
+		hlist_add_behind_rcu(&newp->list, &last->list);
+>>>>>>> v3.18
 =======
 		hlist_add_behind_rcu(&newp->list, &last->list);
 >>>>>>> v3.18
@@ -494,7 +516,11 @@ static int ip6addrlbl_newdel(struct sk_buff *skb, struct nlmsghdr *nlh)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(nlh->nlmsg_type) {
+=======
+	switch (nlh->nlmsg_type) {
+>>>>>>> v3.18
 =======
 	switch (nlh->nlmsg_type) {
 >>>>>>> v3.18
@@ -562,6 +588,7 @@ static int ip6addrlbl_dump(struct sk_buff *skb, struct netlink_callback *cb)
 		if (idx >= s_idx &&
 		    net_eq(ip6addrlbl_net(p), net)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((err = ip6addrlbl_fill(skb, p,
 						   ip6addrlbl_table.seq,
 						   NETLINK_CB(cb->skb).portid,
@@ -569,6 +596,8 @@ static int ip6addrlbl_dump(struct sk_buff *skb, struct netlink_callback *cb)
 						   RTM_NEWADDRLABEL,
 						   NLM_F_MULTI)) <= 0)
 =======
+=======
+>>>>>>> v3.18
 			err = ip6addrlbl_fill(skb, p,
 					      ip6addrlbl_table.seq,
 					      NETLINK_CB(cb->skb).portid,
@@ -576,6 +605,9 @@ static int ip6addrlbl_dump(struct sk_buff *skb, struct netlink_callback *cb)
 					      RTM_NEWADDRLABEL,
 					      NLM_F_MULTI);
 			if (err <= 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 		}
@@ -594,7 +626,11 @@ static inline int ip6addrlbl_msgsize(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ip6addrlbl_get(struct sk_buff *in_skb, struct nlmsghdr* nlh)
+=======
+static int ip6addrlbl_get(struct sk_buff *in_skb, struct nlmsghdr *nlh)
+>>>>>>> v3.18
 =======
 static int ip6addrlbl_get(struct sk_buff *in_skb, struct nlmsghdr *nlh)
 >>>>>>> v3.18
@@ -629,7 +665,11 @@ static int ip6addrlbl_get(struct sk_buff *in_skb, struct nlmsghdr *nlh)
 	rcu_read_lock();
 	p = __ipv6_addr_label(net, addr, ipv6_addr_type(addr), ifal->ifal_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p && !ip6addrlbl_hold(p))
+=======
+	if (p && ip6addrlbl_hold(p))
+>>>>>>> v3.18
 =======
 	if (p && ip6addrlbl_hold(p))
 >>>>>>> v3.18
@@ -643,7 +683,12 @@ static int ip6addrlbl_get(struct sk_buff *in_skb, struct nlmsghdr *nlh)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(skb = nlmsg_new(ip6addrlbl_msgsize(), GFP_KERNEL))) {
+=======
+	skb = nlmsg_new(ip6addrlbl_msgsize(), GFP_KERNEL);
+	if (!skb) {
+>>>>>>> v3.18
 =======
 	skb = nlmsg_new(ip6addrlbl_msgsize(), GFP_KERNEL);
 	if (!skb) {

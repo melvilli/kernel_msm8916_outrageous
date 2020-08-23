@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Based on arch/arm/include/asm/pci.h
  */
@@ -78,6 +79,8 @@ static inline int pci_get_legacy_ide_irq(struct pci_dev *dev, int channel)
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ASM_PCI_H
 #define __ASM_PCI_H
 #ifdef __KERNEL__
@@ -115,4 +118,7 @@ static inline int pci_proc_domain(struct pci_bus *bus)
 
 #endif  /* __KERNEL__ */
 #endif  /* __ASM_PCI_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

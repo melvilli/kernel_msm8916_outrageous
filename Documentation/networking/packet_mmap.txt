@@ -99,12 +99,18 @@ The destruction of the socket and all associated resources
 is done by a simple call to close(fd).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Similarly as without PACKET_MMAP, it is possible to use one socket
 for capture and transmission. This can be done by mapping the
 allocated RX and TX buffer ring with a single mmap() call.
 See "Mapping and use of the circular buffer (ring)".
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Next I will describe PACKET_MMAP settings and its constraints,
 also the mapping of the circular buffer in the user process and 
@@ -423,7 +429,10 @@ the frames. This is because a frame cannot be spawn across two
 blocks. 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 To use one socket for capture and transmission, the mapping of both the
 RX and TX buffer ring has to be done with one call to mmap:
 
@@ -437,6 +446,9 @@ RX and TX buffer ring has to be done with one call to mmap:
 RX must be the first as the kernel maps the TX ring memory right
 after the RX one.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 At the beginning of each frame there is an status field (see 
 struct tpacket_hdr). If this field is 0 means that the frame is ready
@@ -460,7 +472,11 @@ TP_STATUS_COPY        : This flag indicates that the frame (and associated
                         the PACKET_COPY_THRESH option. 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                         The number of frames than can be buffered to 
+=======
+                        The number of frames that can be buffered to
+>>>>>>> v3.18
 =======
                         The number of frames that can be buffered to
 >>>>>>> v3.18
@@ -546,8 +562,11 @@ TPACKET_V1:
 	- Default if not otherwise specified by setsockopt(2)
 	- RX_RING, TX_RING available
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- VLAN metadata information available for packets
 	  (TP_STATUS_VLAN_VALID)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -558,7 +577,10 @@ TPACKET_V1 --> TPACKET_V2:
 	- Timestamp resolution in nanoseconds instead of microseconds
 	- RX_RING, TX_RING available
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	- VLAN metadata information available for packets
 	  (TP_STATUS_VLAN_VALID, TP_STATUS_VLAN_TPID_VALID),
 	  in the tpacket2_hdr structure:
@@ -566,6 +588,9 @@ TPACKET_V1 --> TPACKET_V2:
 		  that the tp_vlan_tci field has valid VLAN TCI value
 		- TP_STATUS_VLAN_TPID_VALID bit being set into the tp_status field
 		  indicates that the tp_vlan_tpid field has valid VLAN TPID value
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	- How to switch to TPACKET_V2:
 		1. Replace struct tpacket_hdr by struct tpacket2_hdr
@@ -595,7 +620,10 @@ In the AF_PACKET fanout mode, packet reception can be load balanced among
 processes. This also works in combination with mmap(2) on packet sockets.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Currently implemented fanout policies are:
 
   - PACKET_FANOUT_HASH: schedule to socket by skb's packet hash
@@ -605,6 +633,9 @@ Currently implemented fanout policies are:
   - PACKET_FANOUT_ROLLOVER: if one socket is full, rollover to another
   - PACKET_FANOUT_QM: schedule to socket by skbs recorded queue_mapping
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Minimal example code by David S. Miller (try things like "./test eth0 hash",
 "./test eth0 lb", etc.):
@@ -768,13 +799,19 @@ Minimal example code by Daniel Borkmann based on Chetan Loke's lolpcap (compile
 it with gcc -Wall -O2 blob.c, and try things like "./a.out eth0", etc.):
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Written from scratch, but kernel-to-user space API usage
  * dissected from lolpcap:
  *  Copyright 2011, Chetan Loke <loke.chetan@gmail.com>
  *  License: GPL, version 2.0
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <stdio.h>
 #include <stdlib.h>
@@ -794,6 +831,7 @@ it with gcc -Wall -O2 blob.c, and try things like "./a.out eth0", etc.):
 #include <linux/if_ether.h>
 #include <linux/ip.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define BLOCK_SIZE		(1 << 22)
 #define FRAME_SIZE		2048
@@ -816,6 +854,8 @@ it with gcc -Wall -O2 blob.c, and try things like "./a.out eth0", etc.):
 #define BLOCK_HDR_LEN		(ALIGN_8(sizeof(struct block_desc)))
 #define BLOCK_PLUS_PRIV(sz_pri)	(BLOCK_HDR_LEN + ALIGN_8((sz_pri)))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef likely
@@ -841,7 +881,11 @@ static unsigned long packets_total = 0, bytes_total = 0;
 static sig_atomic_t sigint = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sighandler(int num)
+=======
+static void sighandler(int num)
+>>>>>>> v3.18
 =======
 static void sighandler(int num)
 >>>>>>> v3.18
@@ -854,6 +898,11 @@ static int setup_socket(struct ring *ring, char *netdev)
 	int err, i, fd, v = TPACKET_V3;
 	struct sockaddr_ll ll;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int blocksiz = 1 << 22, framesiz = 1 << 11;
+	unsigned int blocknum = 64;
+>>>>>>> v3.18
 =======
 	unsigned int blocksiz = 1 << 22, framesiz = 1 << 11;
 	unsigned int blocknum = 64;
@@ -873,6 +922,7 @@ static int setup_socket(struct ring *ring, char *netdev)
 
 	memset(&ring->req, 0, sizeof(ring->req));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring->req.tp_block_size = BLOCK_SIZE;
 	ring->req.tp_frame_size = FRAME_SIZE;
 	ring->req.tp_block_nr = NUM_BLOCKS;
@@ -881,12 +931,17 @@ static int setup_socket(struct ring *ring, char *netdev)
 	ring->req.tp_sizeof_priv = BLOCK_PRIV_AREA_SZ;
 	ring->req.tp_feature_req_word |= TP_FT_REQ_FILL_RXHASH;
 =======
+=======
+>>>>>>> v3.18
 	ring->req.tp_block_size = blocksiz;
 	ring->req.tp_frame_size = framesiz;
 	ring->req.tp_block_nr = blocknum;
 	ring->req.tp_frame_nr = (blocksiz * blocknum) / framesiz;
 	ring->req.tp_retire_blk_tov = 60;
 	ring->req.tp_feature_req_word = TP_FT_REQ_FILL_RXHASH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = setsockopt(fd, SOL_PACKET, PACKET_RX_RING, &ring->req,
@@ -898,8 +953,12 @@ static int setup_socket(struct ring *ring, char *netdev)
 
 	ring->map = mmap(NULL, ring->req.tp_block_size * ring->req.tp_block_nr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 PROT_READ | PROT_WRITE, MAP_SHARED | MAP_LOCKED,
 			 fd, 0);
+=======
+			 PROT_READ | PROT_WRITE, MAP_SHARED | MAP_LOCKED, fd, 0);
+>>>>>>> v3.18
 =======
 			 PROT_READ | PROT_WRITE, MAP_SHARED | MAP_LOCKED, fd, 0);
 >>>>>>> v3.18
@@ -932,6 +991,7 @@ static int setup_socket(struct ring *ring, char *netdev)
 	return fd;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef __checked
 static uint64_t prev_block_seq_num = 0;
@@ -987,6 +1047,8 @@ static void assert_block_len(struct block_desc *pbd, uint32_t bytes, int block_n
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void display(struct tpacket3_hdr *ppd)
 {
 	struct ethhdr *eth = (struct ethhdr *) ((uint8_t *) ppd + ppd->tp_mac);
@@ -1017,6 +1079,7 @@ static void display(struct tpacket3_hdr *ppd)
 static void walk_block(struct block_desc *pbd, const int block_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num_pkts = BLOCK_NUM_PKTS(pbd), i;
 	unsigned long bytes = 0;
 	unsigned long bytes_with_padding = BLOCK_PLUS_PRIV(BLOCK_PRIV_AREA_SZ);
@@ -1041,6 +1104,8 @@ static void walk_block(struct block_desc *pbd, const int block_num)
 	assert_block_len(pbd, bytes_with_padding, block_num);
 
 =======
+=======
+>>>>>>> v3.18
 	int num_pkts = pbd->h1.num_pkts, i;
 	unsigned long bytes = 0;
 	struct tpacket3_hdr *ppd;
@@ -1055,16 +1120,25 @@ static void walk_block(struct block_desc *pbd, const int block_num)
 					       ppd->tp_next_offset);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	packets_total += num_pkts;
 	bytes_total += bytes;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_block(struct block_desc *pbd)
 {
 	BLOCK_STATUS(pbd) = TP_STATUS_KERNEL;
 	__sync_synchronize();
+=======
+static void flush_block(struct block_desc *pbd)
+{
+	pbd->h1.block_status = TP_STATUS_KERNEL;
+>>>>>>> v3.18
 =======
 static void flush_block(struct block_desc *pbd)
 {
@@ -1086,7 +1160,11 @@ int main(int argc, char **argp)
 	struct ring ring;
 	struct pollfd pfd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int block_num = 0;
+=======
+	unsigned int block_num = 0, blocks = 64;
+>>>>>>> v3.18
 =======
 	unsigned int block_num = 0, blocks = 64;
 >>>>>>> v3.18
@@ -1112,22 +1190,32 @@ int main(int argc, char **argp)
 	while (likely(!sigint)) {
 		pbd = (struct block_desc *) ring.rd[block_num].iov_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 retry_block:
 		if ((BLOCK_STATUS(pbd) & TP_STATUS_USER) == 0) {
 			poll(&pfd, 1, -1);
 			goto retry_block;
 =======
+=======
+>>>>>>> v3.18
 
 		if ((pbd->h1.block_status & TP_STATUS_USER) == 0) {
 			poll(&pfd, 1, -1);
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		walk_block(pbd, block_num);
 		flush_block(pbd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		block_num = (block_num + 1) % NUM_BLOCKS;
+=======
+		block_num = (block_num + 1) % blocks;
+>>>>>>> v3.18
 =======
 		block_num = (block_num + 1) % blocks;
 >>>>>>> v3.18
@@ -1151,7 +1239,10 @@ retry_block:
 
 -------------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 + PACKET_QDISC_BYPASS
 -------------------------------------------------------------------------------
 
@@ -1173,6 +1264,9 @@ On default, PACKET_QDISC_BYPASS is disabled and needs to be explicitly enabled
 on PF_PACKET sockets.
 
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 + PACKET_TIMESTAMP
 -------------------------------------------------------------------------------
@@ -1184,6 +1278,7 @@ hardware timestamps to be used. Note: you may need to enable the generation
 of hardware timestamps with SIOCSHWTSTAMP (see related information from
 Documentation/networking/timestamping.txt).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 PACKET_TIMESTAMP accepts the same integer bit field as
 SO_TIMESTAMPING.  However, only the SOF_TIMESTAMPING_SYS_HARDWARE
@@ -1198,6 +1293,11 @@ PACKET_TIMESTAMP accepts the same integer bit field as SO_TIMESTAMPING:
 
     int req = SOF_TIMESTAMPING_RAW_HARDWARE;
 >>>>>>> v3.18
+=======
+PACKET_TIMESTAMP accepts the same integer bit field as SO_TIMESTAMPING:
+
+    int req = SOF_TIMESTAMPING_RAW_HARDWARE;
+>>>>>>> v3.18
     setsockopt(fd, SOL_PACKET, PACKET_TIMESTAMP, (void *) &req, sizeof(req))
 
 For the mmap(2)ed ring buffers, such timestamps are stored in the
@@ -1206,7 +1306,10 @@ what kind of timestamp has been reported, the tp_status field is binary |'ed
 with the following possible bits ...
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     TP_STATUS_TS_SYS_HARDWARE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     TP_STATUS_TS_RAW_HARDWARE
@@ -1214,9 +1317,15 @@ with the following possible bits ...
 
 ... that are equivalent to its SOF_TIMESTAMPING_* counterparts. For the
 <<<<<<< HEAD
+<<<<<<< HEAD
 RX_RING, if none of those 3 are set (i.e. PACKET_TIMESTAMP is not set),
 then this means that a software fallback was invoked *within* PF_PACKET's
 processing code (less precise).
+=======
+RX_RING, if neither is set (i.e. PACKET_TIMESTAMP is not set), then a
+software fallback was invoked *within* PF_PACKET's processing code (less
+precise).
+>>>>>>> v3.18
 =======
 RX_RING, if neither is set (i.e. PACKET_TIMESTAMP is not set), then a
 software fallback was invoked *within* PF_PACKET's processing code (less

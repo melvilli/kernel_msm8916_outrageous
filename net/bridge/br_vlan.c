@@ -28,10 +28,13 @@ static void __vlan_add_flags(struct net_port_vlans *v, u16 vid, u16 flags)
 	if (flags & BRIDGE_VLAN_INFO_PVID)
 		__vlan_add_pvid(v, vid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (flags & BRIDGE_VLAN_INFO_UNTAGGED)
 		set_bit(vid, v->untagged_bitmap);
 =======
+=======
+>>>>>>> v3.18
 	else
 		__vlan_delete_pvid(v, vid);
 
@@ -39,13 +42,19 @@ static void __vlan_add_flags(struct net_port_vlans *v, u16 vid, u16 flags)
 		set_bit(vid, v->untagged_bitmap);
 	else
 		clear_bit(vid, v->untagged_bitmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int __vlan_add(struct net_port_vlans *v, u16 vid, u16 flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct net_device_ops *ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct net_bridge_port *p = NULL;
@@ -58,6 +67,7 @@ static int __vlan_add(struct net_port_vlans *v, u16 vid, u16 flags)
 		return 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (vid) {
 		if (v->port_idx) {
@@ -91,6 +101,8 @@ static int __vlan_add(struct net_port_vlans *v, u16 vid, u16 flags)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 	if (v->port_idx) {
 		p = v->parent.port;
 		br = p->br;
@@ -115,6 +127,9 @@ static int __vlan_add(struct net_port_vlans *v, u16 vid, u16 flags)
 		br_err(br, "failed insert local address into bridge "
 		       "forwarding table\n");
 		goto out_filt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -126,8 +141,13 @@ static int __vlan_add(struct net_port_vlans *v, u16 vid, u16 flags)
 
 out_filt:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p && (dev->features & NETIF_F_HW_VLAN_CTAG_FILTER))
 		ops->ndo_vlan_rx_kill_vid(dev, htons(ETH_P_8021Q), vid);
+=======
+	if (p)
+		vlan_vid_del(dev, br->vlan_proto, vid);
+>>>>>>> v3.18
 =======
 	if (p)
 		vlan_vid_del(dev, br->vlan_proto, vid);
@@ -144,12 +164,18 @@ static int __vlan_del(struct net_port_vlans *v, u16 vid)
 	clear_bit(vid, v->untagged_bitmap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v->port_idx && vid) {
 		struct net_device *dev = v->parent.port->dev;
 		const struct net_device_ops *ops = dev->netdev_ops;
 
 		if (dev->features & NETIF_F_HW_VLAN_CTAG_FILTER)
 			ops->ndo_vlan_rx_kill_vid(dev, htons(ETH_P_8021Q), vid);
+=======
+	if (v->port_idx) {
+		struct net_bridge_port *p = v->parent.port;
+		vlan_vid_del(p->dev, p->br->vlan_proto, vid);
+>>>>>>> v3.18
 =======
 	if (v->port_idx) {
 		struct net_bridge_port *p = v->parent.port;
@@ -162,9 +188,15 @@ static int __vlan_del(struct net_port_vlans *v, u16 vid)
 	if (bitmap_empty(v->vlan_bitmap, VLAN_N_VID)) {
 		if (v->port_idx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rcu_assign_pointer(v->parent.port->vlan_info, NULL);
 		else
 			rcu_assign_pointer(v->parent.br->vlan_info, NULL);
+=======
+			RCU_INIT_POINTER(v->parent.port->vlan_info, NULL);
+		else
+			RCU_INIT_POINTER(v->parent.br->vlan_info, NULL);
+>>>>>>> v3.18
 =======
 			RCU_INIT_POINTER(v->parent.port->vlan_info, NULL);
 		else
@@ -181,6 +213,7 @@ static void __vlan_flush(struct net_port_vlans *v)
 	v->pvid = 0;
 	bitmap_zero(v->vlan_bitmap, VLAN_N_VID);
 	if (v->port_idx)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcu_assign_pointer(v->parent.port->vlan_info, NULL);
 	else
@@ -205,12 +238,17 @@ static struct sk_buff *br_vlan_untag(struct sk_buff *skb)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		RCU_INIT_POINTER(v->parent.port->vlan_info, NULL);
 	else
 		RCU_INIT_POINTER(v->parent.br->vlan_info, NULL);
 	kfree_rcu(v, rcu);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sk_buff *br_handle_vlan(struct net_bridge *br,
 			       const struct net_port_vlans *pv,
@@ -218,6 +256,7 @@ struct sk_buff *br_handle_vlan(struct net_bridge *br,
 {
 	u16 vid;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!br->vlan_enabled)
 		goto out;
@@ -251,6 +290,8 @@ struct sk_buff *br_handle_vlan(struct net_bridge *br,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* If this packet was not filtered at input, let it pass */
 	if (!BR_INPUT_SKB_CB(skb)->vlan_filtered)
 		goto out;
@@ -276,6 +317,9 @@ struct sk_buff *br_handle_vlan(struct net_bridge *br,
 	br_vlan_get_tag(skb, &vid);
 	if (test_bit(vid, pv->untagged_bitmap))
 		skb->vlan_tci = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -287,12 +331,15 @@ bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 			struct sk_buff *skb, u16 *vid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If VLAN filtering is disabled on the bridge, all packets are
 	 * permitted.
 	 */
 	if (!br->vlan_enabled)
 		return true;
 =======
+=======
+>>>>>>> v3.18
 	bool tagged;
 	__be16 proto;
 
@@ -303,6 +350,9 @@ bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 		BR_INPUT_SKB_CB(skb)->vlan_filtered = false;
 		return true;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If there are no vlan in the permitted list, all packets are
@@ -311,6 +361,7 @@ bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 	if (!v)
 		goto drop;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (br_vlan_get_tag(skb, vid)) {
 		u16 pvid = br_get_pvid(v);
@@ -327,6 +378,8 @@ bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 		 */
 		__vlan_hwaccel_put_tag(skb, htons(ETH_P_8021Q), pvid);
 =======
+=======
+>>>>>>> v3.18
 	BR_INPUT_SKB_CB(skb)->vlan_filtered = true;
 	proto = br->vlan_proto;
 
@@ -388,6 +441,9 @@ bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 			 */
 			skb->vlan_tci |= pvid;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	}
@@ -408,7 +464,12 @@ bool br_allowed_egress(struct net_bridge *br,
 	u16 vid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!br->vlan_enabled)
+=======
+	/* If this packet was not filtered at input, let it pass */
+	if (!BR_INPUT_SKB_CB(skb)->vlan_filtered)
+>>>>>>> v3.18
 =======
 	/* If this packet was not filtered at input, let it pass */
 	if (!BR_INPUT_SKB_CB(skb)->vlan_filtered)
@@ -426,8 +487,11 @@ bool br_allowed_egress(struct net_bridge *br,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Must be protected by RTNL */
 =======
+=======
+>>>>>>> v3.18
 /* Called under RCU */
 bool br_should_learn(struct net_bridge_port *p, struct sk_buff *skb, u16 *vid)
 {
@@ -462,6 +526,9 @@ bool br_should_learn(struct net_bridge_port *p, struct sk_buff *skb, u16 *vid)
 /* Must be protected by RTNL.
  * Must be called with vid in range from 1 to 4094 inclusive.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int br_vlan_add(struct net_bridge *br, u16 vid, u16 flags)
 {
@@ -493,7 +560,13 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Must be protected by RTNL */
+=======
+/* Must be protected by RTNL.
+ * Must be called with vid in range from 1 to 4094 inclusive.
+ */
+>>>>>>> v3.18
 =======
 /* Must be protected by RTNL.
  * Must be called with vid in range from 1 to 4094 inclusive.
@@ -510,6 +583,7 @@ int br_vlan_delete(struct net_bridge *br, u16 vid)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vid) {
 		/* If the VID !=0 remove fdb for this vid. VID 0 is special
 		 * in that it's the default and is always there in the fdb.
@@ -518,6 +592,9 @@ int br_vlan_delete(struct net_bridge *br, u16 vid)
 		fdb_delete_by_addr(br, br->dev->dev_addr, vid);
 		spin_unlock_bh(&br->hash_lock);
 	}
+=======
+	br_fdb_find_delete_local(br, NULL, br->dev->dev_addr, vid);
+>>>>>>> v3.18
 =======
 	br_fdb_find_delete_local(br, NULL, br->dev->dev_addr, vid);
 >>>>>>> v3.18
@@ -539,7 +616,10 @@ void br_vlan_flush(struct net_bridge *br)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool br_vlan_find(struct net_bridge *br, u16 vid)
 {
 	struct net_port_vlans *pv;
@@ -586,6 +666,9 @@ void br_recalculate_fwd_mask(struct net_bridge *br)
 					      ~(1u << br->group_addr[5]);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int br_vlan_filter_toggle(struct net_bridge *br, unsigned long val)
 {
@@ -597,6 +680,12 @@ int br_vlan_filter_toggle(struct net_bridge *br, unsigned long val)
 
 	br->vlan_enabled = val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	br_manage_promisc(br);
+	recalculate_group_addr(br);
+	br_recalculate_fwd_mask(br);
+>>>>>>> v3.18
 =======
 	br_manage_promisc(br);
 	recalculate_group_addr(br);
@@ -609,8 +698,11 @@ unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Must be protected by RTNL */
 =======
+=======
+>>>>>>> v3.18
 int br_vlan_set_proto(struct net_bridge *br, unsigned long val)
 {
 	int err = 0;
@@ -819,6 +911,9 @@ int br_vlan_init(struct net_bridge *br)
 /* Must be protected by RTNL.
  * Must be called with vid in range from 1 to 4094 inclusive.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nbp_vlan_add(struct net_bridge_port *port, u16 vid, u16 flags)
 {
@@ -854,7 +949,13 @@ clean_up:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Must be protected by RTNL */
+=======
+/* Must be protected by RTNL.
+ * Must be called with vid in range from 1 to 4094 inclusive.
+ */
+>>>>>>> v3.18
 =======
 /* Must be protected by RTNL.
  * Must be called with vid in range from 1 to 4094 inclusive.
@@ -871,6 +972,7 @@ int nbp_vlan_delete(struct net_bridge_port *port, u16 vid)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vid) {
 		/* If the VID !=0 remove fdb for this vid. VID 0 is special
 		 * in that it's the default and is always there in the fdb.
@@ -882,6 +984,9 @@ int nbp_vlan_delete(struct net_bridge_port *port, u16 vid)
 =======
 	br_fdb_find_delete_local(port->br, port, port->dev->dev_addr, vid);
 >>>>>>> v3.18
+=======
+	br_fdb_find_delete_local(port->br, port, port->dev->dev_addr, vid);
+>>>>>>> v3.18
 
 	return __vlan_del(pv, vid);
 }
@@ -890,6 +995,10 @@ void nbp_vlan_flush(struct net_bridge_port *port)
 {
 	struct net_port_vlans *pv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 vid;
+>>>>>>> v3.18
 =======
 	u16 vid;
 >>>>>>> v3.18
@@ -901,6 +1010,12 @@ void nbp_vlan_flush(struct net_bridge_port *port)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for_each_set_bit(vid, pv->vlan_bitmap, VLAN_N_VID)
+		vlan_vid_del(port->dev, port->br->vlan_proto, vid);
+
+>>>>>>> v3.18
 =======
 	for_each_set_bit(vid, pv->vlan_bitmap, VLAN_N_VID)
 		vlan_vid_del(port->dev, port->br->vlan_proto, vid);
@@ -928,7 +1043,10 @@ out:
 	return found;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int nbp_vlan_init(struct net_bridge_port *p)
 {
@@ -938,4 +1056,7 @@ int nbp_vlan_init(struct net_bridge_port *p)
 				     BRIDGE_VLAN_INFO_UNTAGGED) :
 			0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

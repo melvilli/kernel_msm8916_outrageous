@@ -19,7 +19,10 @@
  * 	- Kernel memory map built from EFI memory map
  * 	- ELF core header
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	- xen start info if CONFIG_XEN
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *

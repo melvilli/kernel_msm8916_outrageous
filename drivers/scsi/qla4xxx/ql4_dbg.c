@@ -142,6 +142,7 @@ void qla4_8xxx_dump_peg_reg(struct scsi_qla_host *ha)
 	if (is_qla8022(ha)) {
 		ql4_printk(KERN_INFO, ha,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "scsi(%ld): %s, ISP8022 Dumping hw/fw registers:\n"
 			   " PEG_HALT_STATUS1: 0x%x, PEG_HALT_STATUS2: 0x%x,\n"
 			   " PEG_NET_0_PC: 0x%x, PEG_NET_1_PC: 0x%x,\n"
@@ -149,12 +150,17 @@ void qla4_8xxx_dump_peg_reg(struct scsi_qla_host *ha)
 			   " PEG_NET_4_PC: 0x%x\n", ha->host_no,
 			   __func__, halt_status1, halt_status2,
 =======
+=======
+>>>>>>> v3.18
 			   "scsi(%ld): %s, ISP%04x Dumping hw/fw registers:\n"
 			   " PEG_HALT_STATUS1: 0x%x, PEG_HALT_STATUS2: 0x%x,\n"
 			   " PEG_NET_0_PC: 0x%x, PEG_NET_1_PC: 0x%x,\n"
 			   " PEG_NET_2_PC: 0x%x, PEG_NET_3_PC: 0x%x,\n"
 			   " PEG_NET_4_PC: 0x%x\n", ha->host_no, __func__,
 			   ha->pdev->device, halt_status1, halt_status2,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   qla4_82xx_rd_32(ha, QLA82XX_CRB_PEG_NET_0 + 0x3c),
 			   qla4_82xx_rd_32(ha, QLA82XX_CRB_PEG_NET_1 + 0x3c),
@@ -162,18 +168,24 @@ void qla4_8xxx_dump_peg_reg(struct scsi_qla_host *ha)
 			   qla4_82xx_rd_32(ha, QLA82XX_CRB_PEG_NET_3 + 0x3c),
 			   qla4_82xx_rd_32(ha, QLA82XX_CRB_PEG_NET_4 + 0x3c));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (is_qla8032(ha)) {
 		ql4_printk(KERN_INFO, ha,
 			   "scsi(%ld): %s, ISP8324 Dumping hw/fw registers:\n"
 			   " PEG_HALT_STATUS1: 0x%x, PEG_HALT_STATUS2: 0x%x,\n",
 			   ha->host_no, __func__, halt_status1, halt_status2);
 =======
+=======
+>>>>>>> v3.18
 	} else if (is_qla8032(ha) || is_qla8042(ha)) {
 		ql4_printk(KERN_INFO, ha,
 			   "scsi(%ld): %s, ISP%04x Dumping hw/fw registers:\n"
 			   " PEG_HALT_STATUS1: 0x%x, PEG_HALT_STATUS2: 0x%x,\n",
 			   ha->host_no, __func__, ha->pdev->device,
 			   halt_status1, halt_status2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

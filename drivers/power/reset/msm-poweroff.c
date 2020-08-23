@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2013, The Linux Foundation. All rights reserved.
 >>>>>>> v3.18
@@ -25,6 +29,7 @@
 #include <linux/module.h>
 #include <linux/reboot.h>
 #include <linux/pm.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/delay.h>
 #include <linux/qpnp/power-on.h>
@@ -424,6 +429,8 @@ static void do_msm_poweroff(void)
 	pr_err("Powering off has failed\n");
 	return;
 =======
+=======
+>>>>>>> v3.18
 
 static void __iomem *msm_ps_hold;
 static int do_msm_restart(struct notifier_block *nb, unsigned long action,
@@ -444,6 +451,9 @@ static void do_msm_poweroff(void)
 {
 	/* TODO: Add poweroff capability */
 	do_msm_restart(&restart_nb, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -451,6 +461,7 @@ static int msm_restart_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 	struct resource *mem;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device_node *np;
 	int ret = 0;
@@ -493,12 +504,15 @@ static int msm_restart_probe(struct platform_device *pdev)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	msm_ps_hold = devm_ioremap_resource(dev, mem);
 	if (IS_ERR(msm_ps_hold))
 		return PTR_ERR(msm_ps_hold);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MACH_OPPO
 	__raw_writel(0x7766550a, restart_reason);
@@ -528,11 +542,16 @@ err_restart_reason:
 #endif
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	register_restart_handler(&restart_nb);
 
 	pm_power_off = do_msm_poweroff;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

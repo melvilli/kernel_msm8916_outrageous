@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -81,6 +84,7 @@ If you do not specify any options, they will default to
 
 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "../comedidev.h"
 
@@ -178,6 +182,8 @@ static int adq12b_ai_rinsn(struct comedi_device *dev,
 	/* return the number of samples read/written */
 	return n;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/delay.h>
 
@@ -269,6 +275,9 @@ static int adq12b_ai_insn_read(struct comedi_device *dev,
 	}
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -279,7 +288,11 @@ static int adq12b_di_insn_bits(struct comedi_device *dev,
 
 	/* only bits 0-4 have information about digital inputs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data[1] = (inb(dev->iobase + ADQ12B_STINR) & (0x1f));
+=======
+	data[1] = (inb(dev->iobase + ADQ12B_STINR) & ADQ12B_STINR_IN_MASK);
+>>>>>>> v3.18
 =======
 	data[1] = (inb(dev->iobase + ADQ12B_STINR) & ADQ12B_STINR_IN_MASK);
 >>>>>>> v3.18
@@ -289,6 +302,7 @@ static int adq12b_di_insn_bits(struct comedi_device *dev,
 
 static int adq12b_do_insn_bits(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       struct comedi_insn *insn, unsigned int *data)
 {
@@ -308,6 +322,8 @@ static int adq12b_do_insn_bits(struct comedi_device *dev,
 
 	data[1] = devpriv->digital_state;
 =======
+=======
+>>>>>>> v3.18
 			       struct comedi_insn *insn,
 			       unsigned int *data)
 {
@@ -327,6 +343,9 @@ static int adq12b_do_insn_bits(struct comedi_device *dev,
 	}
 
 	data[1] = s->state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -338,6 +357,7 @@ static int adq12b_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	struct comedi_subdevice *s;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], ADQ12B_SIZE);
 	if (ret)
@@ -358,6 +378,8 @@ static int adq12b_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	devpriv->last_channel = -1;
 	devpriv->last_range = -1;
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_request_region(dev, it->options[0], 0x10);
 	if (ret)
 		return ret;
@@ -367,12 +389,16 @@ static int adq12b_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		return -ENOMEM;
 
 	devpriv->last_ctreg = -1;	/* force ctreg update */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 3);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s = &dev->subdevices[0];
 	/* analog input subdevice */
@@ -414,6 +440,8 @@ static int adq12b_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	s->range_table = &range_digital;
 	s->insn_bits = adq12b_do_insn_bits;
 =======
+=======
+>>>>>>> v3.18
 	/* Analog Input subdevice */
 	s = &dev->subdevices[0];
 	s->type		= COMEDI_SUBD_AI;
@@ -446,6 +474,9 @@ static int adq12b_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	s->maxdata	= 1;
 	s->range_table	= &range_digital;
 	s->insn_bits	= adq12b_do_insn_bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

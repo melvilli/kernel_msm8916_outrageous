@@ -236,7 +236,10 @@ static int tpm_ascii_bios_measurements_show(struct seq_file *m, void *v)
 {
 	int len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *eventname;
@@ -255,8 +258,12 @@ static int tpm_ascii_bios_measurements_show(struct seq_file *m, void *v)
 
 	/* 2nd: SHA1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 20; i++)
 		seq_printf(m, "%02x", event->pcr_value[i]);
+=======
+	seq_printf(m, "%20phN", event->pcr_value);
+>>>>>>> v3.18
 =======
 	seq_printf(m, "%20phN", event->pcr_value);
 >>>>>>> v3.18
@@ -414,7 +421,10 @@ out:
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(tpm_bios_log_setup);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -426,7 +436,10 @@ void tpm_bios_log_teardown(struct dentry **lst)
 		securityfs_remove(lst[i]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(tpm_bios_log_teardown);
 MODULE_LICENSE("GPL");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

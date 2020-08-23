@@ -57,7 +57,10 @@ extern int amd_iommu_domain_clear_gcr3(struct iommu_domain *dom, int pasid);
 extern struct iommu_domain *amd_iommu_get_v2_domain(struct pci_dev *pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* IOMMU Performance Counter functions */
 extern bool amd_iommu_pc_supported(void);
 extern u8 amd_iommu_pc_get_max_banks(u16 devid);
@@ -65,6 +68,9 @@ extern u8 amd_iommu_pc_get_max_counters(u16 devid);
 extern int amd_iommu_pc_get_set_reg_val(u16 devid, u8 bank, u8 cntr, u8 fxn,
 				    u64 *value, bool is_write);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PPR_SUCCESS			0x0
 #define PPR_INVALID			0x1

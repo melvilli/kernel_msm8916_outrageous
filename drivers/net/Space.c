@@ -33,6 +33,10 @@
 #include <linux/init.h>
 #include <linux/netlink.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/Space.h>
+>>>>>>> v3.18
 =======
 #include <net/Space.h>
 >>>>>>> v3.18
@@ -41,6 +45,7 @@
    ethernet adaptor have the name "eth[0123...]".
    */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct net_device *hp100_probe(int unit);
 extern struct net_device *ultra_probe(int unit);
@@ -70,6 +75,8 @@ extern int iph5526_probe(struct net_device *dev);
 /* SBNI adapters */
 extern int sbni_probe(int unit);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct devprobe2 {
@@ -110,8 +117,12 @@ static struct devprobe2 isa_probes[] __initdata = {
 	{wd_probe, 0},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NE2000) || \
     defined(CONFIG_NE_H8300)  /* ISA (use ne2k-pci for PCI cards) */
+=======
+#if defined(CONFIG_NE2000) /* ISA (use ne2k-pci for PCI cards) */
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_NE2000) /* ISA (use ne2k-pci for PCI cards) */
 >>>>>>> v3.18

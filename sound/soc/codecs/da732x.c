@@ -36,7 +36,10 @@
 struct da732x_priv {
 	struct regmap *regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -221,7 +224,11 @@ static void da732x_set_charge_pump(struct snd_soc_codec *codec, int state)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(KERN_ERR "Wrong charge pump state\n");
+=======
+		pr_err("Wrong charge pump state\n");
+>>>>>>> v3.18
 =======
 		pr_err("Wrong charge pump state\n");
 >>>>>>> v3.18
@@ -276,6 +283,7 @@ static const char *da732x_hpf_voice[] = {
 	"150Hz", "200Hz", "300Hz", "400Hz"
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum da732x_dac1_hpf_mode_enum[] = {
 	SOC_ENUM_SINGLE(DA732X_REG_DAC1_HPF, DA732X_HPF_MODE_SHIFT,
@@ -353,6 +361,8 @@ static const struct soc_enum da732x_adc2_voice_filter_enum[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(da732x_dac1_hpf_mode_enum,
 			    DA732X_REG_DAC1_HPF, DA732X_HPF_MODE_SHIFT,
 			    da732x_hpf_mode);
@@ -412,13 +422,20 @@ static SOC_ENUM_SINGLE_DECL(da732x_adc1_voice_filter_enum,
 static SOC_ENUM_SINGLE_DECL(da732x_adc2_voice_filter_enum,
 			    DA732X_REG_ADC2_HPF, DA732X_HPF_VOICE_SHIFT,
 			    da732x_hpf_voice);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int da732x_hpf_set(struct snd_kcontrol *kcontrol,
 			  struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -450,7 +467,11 @@ static int da732x_hpf_get(struct snd_kcontrol *kcontrol,
 			  struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -792,9 +813,15 @@ static const char *enable_text[] = {
 
 /* ADC1LMUX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adc1l_enum =
 	SOC_ENUM_SINGLE(DA732X_REG_INP_MUX, DA732X_ADC1L_MUX_SEL_SHIFT,
 			DA732X_ADCL_MUX_MAX, adcl_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adc1l_enum,
+			    DA732X_REG_INP_MUX, DA732X_ADC1L_MUX_SEL_SHIFT,
+			    adcl_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adc1l_enum,
 			    DA732X_REG_INP_MUX, DA732X_ADC1L_MUX_SEL_SHIFT,
@@ -805,9 +832,15 @@ static const struct snd_kcontrol_new adc1l_mux =
 
 /* ADC1RMUX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adc1r_enum =
 	SOC_ENUM_SINGLE(DA732X_REG_INP_MUX, DA732X_ADC1R_MUX_SEL_SHIFT,
 			DA732X_ADCR_MUX_MAX, adcr_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adc1r_enum,
+			    DA732X_REG_INP_MUX, DA732X_ADC1R_MUX_SEL_SHIFT,
+			    adcr_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adc1r_enum,
 			    DA732X_REG_INP_MUX, DA732X_ADC1R_MUX_SEL_SHIFT,
@@ -818,9 +851,15 @@ static const struct snd_kcontrol_new adc1r_mux =
 
 /* ADC2LMUX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adc2l_enum =
 	SOC_ENUM_SINGLE(DA732X_REG_INP_MUX, DA732X_ADC2L_MUX_SEL_SHIFT,
 			DA732X_ADCL_MUX_MAX, adcl_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adc2l_enum,
+			    DA732X_REG_INP_MUX, DA732X_ADC2L_MUX_SEL_SHIFT,
+			    adcl_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adc2l_enum,
 			    DA732X_REG_INP_MUX, DA732X_ADC2L_MUX_SEL_SHIFT,
@@ -831,9 +870,15 @@ static const struct snd_kcontrol_new adc2l_mux =
 
 /* ADC2RMUX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adc2r_enum =
 	SOC_ENUM_SINGLE(DA732X_REG_INP_MUX, DA732X_ADC2R_MUX_SEL_SHIFT,
 			DA732X_ADCR_MUX_MAX, adcr_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adc2r_enum,
+			    DA732X_REG_INP_MUX, DA732X_ADC2R_MUX_SEL_SHIFT,
+			    adcr_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adc2r_enum,
 			    DA732X_REG_INP_MUX, DA732X_ADC2R_MUX_SEL_SHIFT,
@@ -844,9 +889,15 @@ static const struct snd_kcontrol_new adc2r_mux =
 	SOC_DAPM_ENUM("ADC Route", adc2r_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum da732x_hp_left_output =
 	SOC_ENUM_SINGLE(DA732X_REG_HPL, DA732X_HP_OUT_DAC_EN_SHIFT,
 			DA732X_DAC_EN_MAX, enable_text);
+=======
+static SOC_ENUM_SINGLE_DECL(da732x_hp_left_output,
+			    DA732X_REG_HPL, DA732X_HP_OUT_DAC_EN_SHIFT,
+			    enable_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(da732x_hp_left_output,
 			    DA732X_REG_HPL, DA732X_HP_OUT_DAC_EN_SHIFT,
@@ -857,9 +908,15 @@ static const struct snd_kcontrol_new hpl_mux =
 	SOC_DAPM_ENUM("HPL Switch", da732x_hp_left_output);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum da732x_hp_right_output =
 	SOC_ENUM_SINGLE(DA732X_REG_HPR, DA732X_HP_OUT_DAC_EN_SHIFT,
 			DA732X_DAC_EN_MAX, enable_text);
+=======
+static SOC_ENUM_SINGLE_DECL(da732x_hp_right_output,
+			    DA732X_REG_HPR, DA732X_HP_OUT_DAC_EN_SHIFT,
+			    enable_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(da732x_hp_right_output,
 			    DA732X_REG_HPR, DA732X_HP_OUT_DAC_EN_SHIFT,
@@ -870,9 +927,15 @@ static const struct snd_kcontrol_new hpr_mux =
 	SOC_DAPM_ENUM("HPR Switch", da732x_hp_right_output);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum da732x_speaker_output =
 	SOC_ENUM_SINGLE(DA732X_REG_LIN3, DA732X_LOUT_DAC_EN_SHIFT,
 			DA732X_DAC_EN_MAX, enable_text);
+=======
+static SOC_ENUM_SINGLE_DECL(da732x_speaker_output,
+			    DA732X_REG_LIN3, DA732X_LOUT_DAC_EN_SHIFT,
+			    enable_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(da732x_speaker_output,
 			    DA732X_REG_LIN3, DA732X_LOUT_DAC_EN_SHIFT,
@@ -883,9 +946,15 @@ static const struct snd_kcontrol_new spk_mux =
 	SOC_DAPM_ENUM("SPK Switch", da732x_speaker_output);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum da732x_lout4_output =
 	SOC_ENUM_SINGLE(DA732X_REG_LIN4, DA732X_LOUT_DAC_EN_SHIFT,
 			DA732X_DAC_EN_MAX, enable_text);
+=======
+static SOC_ENUM_SINGLE_DECL(da732x_lout4_output,
+			    DA732X_REG_LIN4, DA732X_LOUT_DAC_EN_SHIFT,
+			    enable_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(da732x_lout4_output,
 			    DA732X_REG_LIN4, DA732X_LOUT_DAC_EN_SHIFT,
@@ -896,9 +965,15 @@ static const struct snd_kcontrol_new lout4_mux =
 	SOC_DAPM_ENUM("LOUT4 Switch", da732x_lout4_output);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum da732x_lout2_output =
 	SOC_ENUM_SINGLE(DA732X_REG_LIN2, DA732X_LOUT_DAC_EN_SHIFT,
 			DA732X_DAC_EN_MAX, enable_text);
+=======
+static SOC_ENUM_SINGLE_DECL(da732x_lout2_output,
+			    DA732X_REG_LIN2, DA732X_LOUT_DAC_EN_SHIFT,
+			    enable_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(da732x_lout2_output,
 			    DA732X_REG_LIN2, DA732X_LOUT_DAC_EN_SHIFT,
@@ -1105,6 +1180,7 @@ static int da732x_hw_params(struct snd_pcm_substream *substream,
 	reg_aif = dai->driver->base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		aif |= DA732X_AIF_WORD_16;
@@ -1117,6 +1193,8 @@ static int da732x_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		aif |= DA732X_AIF_WORD_16;
@@ -1128,6 +1206,9 @@ static int da732x_hw_params(struct snd_pcm_substream *substream,
 		aif |= DA732X_AIF_WORD_24;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		aif |= DA732X_AIF_WORD_32;
 		break;
@@ -1459,9 +1540,15 @@ static void da732x_dac_offset_adjust(struct snd_soc_codec *codec)
 
 	/* Check DAC offset sign */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sign[DA732X_HPL_DAC] = (codec->hw_read(codec, DA732X_REG_HPL_DAC_OFF_CNTL) &
 				DA732X_HP_DAC_OFF_CNTL_COMPO);
 	sign[DA732X_HPR_DAC] = (codec->hw_read(codec, DA732X_REG_HPR_DAC_OFF_CNTL) &
+=======
+	sign[DA732X_HPL_DAC] = (snd_soc_read(codec, DA732X_REG_HPL_DAC_OFF_CNTL) &
+				DA732X_HP_DAC_OFF_CNTL_COMPO);
+	sign[DA732X_HPR_DAC] = (snd_soc_read(codec, DA732X_REG_HPR_DAC_OFF_CNTL) &
+>>>>>>> v3.18
 =======
 	sign[DA732X_HPL_DAC] = (snd_soc_read(codec, DA732X_REG_HPL_DAC_OFF_CNTL) &
 				DA732X_HP_DAC_OFF_CNTL_COMPO);
@@ -1484,15 +1571,21 @@ static void da732x_dac_offset_adjust(struct snd_soc_codec *codec)
 		msleep(DA732X_WAIT_FOR_STABILIZATION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((codec->hw_read(codec, DA732X_REG_HPL_DAC_OFF_CNTL) &
 		     DA732X_HP_DAC_OFF_CNTL_COMPO) ^ sign[DA732X_HPL_DAC])
 			offset[DA732X_HPL_DAC] &= ~step;
 		if ((codec->hw_read(codec, DA732X_REG_HPR_DAC_OFF_CNTL) &
 =======
+=======
+>>>>>>> v3.18
 		if ((snd_soc_read(codec, DA732X_REG_HPL_DAC_OFF_CNTL) &
 		     DA732X_HP_DAC_OFF_CNTL_COMPO) ^ sign[DA732X_HPL_DAC])
 			offset[DA732X_HPL_DAC] &= ~step;
 		if ((snd_soc_read(codec, DA732X_REG_HPR_DAC_OFF_CNTL) &
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     DA732X_HP_DAC_OFF_CNTL_COMPO) ^ sign[DA732X_HPR_DAC])
 			offset[DA732X_HPR_DAC] &= ~step;
@@ -1535,9 +1628,15 @@ static void da732x_output_offset_adjust(struct snd_soc_codec *codec)
 
 	/* Check output offset sign */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sign[DA732X_HPL_AMP] = codec->hw_read(codec, DA732X_REG_HPL) &
 			       DA732X_HP_OUT_COMPO;
 	sign[DA732X_HPR_AMP] = codec->hw_read(codec, DA732X_REG_HPR) &
+=======
+	sign[DA732X_HPL_AMP] = snd_soc_read(codec, DA732X_REG_HPL) &
+			       DA732X_HP_OUT_COMPO;
+	sign[DA732X_HPR_AMP] = snd_soc_read(codec, DA732X_REG_HPR) &
+>>>>>>> v3.18
 =======
 	sign[DA732X_HPL_AMP] = snd_soc_read(codec, DA732X_REG_HPL) &
 			       DA732X_HP_OUT_COMPO;
@@ -1564,15 +1663,21 @@ static void da732x_output_offset_adjust(struct snd_soc_codec *codec)
 		msleep(DA732X_WAIT_FOR_STABILIZATION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((codec->hw_read(codec, DA732X_REG_HPL) &
 		     DA732X_HP_OUT_COMPO) ^ sign[DA732X_HPL_AMP])
 			offset[DA732X_HPL_AMP] &= ~step;
 		if ((codec->hw_read(codec, DA732X_REG_HPR) &
 =======
+=======
+>>>>>>> v3.18
 		if ((snd_soc_read(codec, DA732X_REG_HPL) &
 		     DA732X_HP_OUT_COMPO) ^ sign[DA732X_HPL_AMP])
 			offset[DA732X_HPL_AMP] &= ~step;
 		if ((snd_soc_read(codec, DA732X_REG_HPR) &
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     DA732X_HP_OUT_COMPO) ^ sign[DA732X_HPR_AMP])
 			offset[DA732X_HPR_AMP] &= ~step;
@@ -1671,8 +1776,13 @@ static int da732x_set_bias_level(struct snd_soc_codec *codec,
 			da732x_hp_dc_offset_cancellation(codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			regcache_cache_only(codec->control_data, false);
 			regcache_sync(codec->control_data);
+=======
+			regcache_cache_only(da732x->regmap, false);
+			regcache_sync(da732x->regmap);
+>>>>>>> v3.18
 =======
 			regcache_cache_only(da732x->regmap, false);
 			regcache_sync(da732x->regmap);
@@ -1688,7 +1798,11 @@ static int da732x_set_bias_level(struct snd_soc_codec *codec,
 		break;
 	case SND_SOC_BIAS_OFF:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regcache_cache_only(codec->control_data, true);
+=======
+		regcache_cache_only(da732x->regmap, true);
+>>>>>>> v3.18
 =======
 		regcache_cache_only(da732x->regmap, true);
 >>>>>>> v3.18
@@ -1704,6 +1818,7 @@ static int da732x_set_bias_level(struct snd_soc_codec *codec,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int da732x_probe(struct snd_soc_codec *codec)
 {
@@ -1742,6 +1857,9 @@ static struct snd_soc_codec_driver soc_codec_dev_da732x = {
 =======
 static struct snd_soc_codec_driver soc_codec_dev_da732x = {
 >>>>>>> v3.18
+=======
+static struct snd_soc_codec_driver soc_codec_dev_da732x = {
+>>>>>>> v3.18
 	.set_bias_level		= da732x_set_bias_level,
 	.controls		= da732x_snd_controls,
 	.num_controls		= ARRAY_SIZE(da732x_snd_controls),
@@ -1751,7 +1869,10 @@ static struct snd_soc_codec_driver soc_codec_dev_da732x = {
 	.num_dapm_routes	= ARRAY_SIZE(da732x_dapm_routes),
 	.set_pll		= da732x_set_dai_pll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size		= ARRAY_SIZE(da732x_reg_cache),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1785,7 +1906,12 @@ static int da732x_i2c_probe(struct i2c_client *i2c,
 
 	dev_info(&i2c->dev, "Revision: %d.%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 (reg & DA732X_ID_MAJOR_MASK), (reg & DA732X_ID_MINOR_MASK));
+=======
+		 (reg & DA732X_ID_MAJOR_MASK) >> 4,
+		 (reg & DA732X_ID_MINOR_MASK));
+>>>>>>> v3.18
 =======
 		 (reg & DA732X_ID_MAJOR_MASK) >> 4,
 		 (reg & DA732X_ID_MINOR_MASK));

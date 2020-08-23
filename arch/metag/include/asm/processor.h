@@ -24,7 +24,11 @@
 #define STACK_TOP_MAX	STACK_TOP
 /* Maximum virtual space for stack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STACK_SIZE_MAX	(1 << 28)	/* 256 MB */
+=======
+#define STACK_SIZE_MAX	(CONFIG_MAX_STACK_SIZE_MB*1024*1024)
+>>>>>>> v3.18
 =======
 #define STACK_SIZE_MAX	(CONFIG_MAX_STACK_SIZE_MB*1024*1024)
 >>>>>>> v3.18
@@ -154,8 +158,13 @@ extern void exit_thread(void);
 unsigned long get_wchan(struct task_struct *p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	KSTK_EIP(tsk)	(task_pt_regs(tsk)->ctx.CurrPC)
 #define	KSTK_ESP(tsk)	(task_pt_regs(tsk)->ctx.AX[0].U0)
+=======
+#define	KSTK_EIP(tsk)	((tsk)->thread.kernel_context->CurrPC)
+#define	KSTK_ESP(tsk)	((tsk)->thread.kernel_context->AX[0].U0)
+>>>>>>> v3.18
 =======
 #define	KSTK_EIP(tsk)	((tsk)->thread.kernel_context->CurrPC)
 #define	KSTK_ESP(tsk)	((tsk)->thread.kernel_context->AX[0].U0)
@@ -165,6 +174,10 @@ unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()     barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()  cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency()  cpu_relax()
 >>>>>>> v3.18
@@ -215,6 +228,11 @@ extern void show_trace(struct task_struct *tsk, unsigned long *sp,
 		       struct pt_regs *regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct seq_operations cpuinfo_op;
+
+>>>>>>> v3.18
 =======
 extern const struct seq_operations cpuinfo_op;
 

@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* linux/arch/arm/plat-s3c/include/plat/hwmon.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -16,8 +20,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_ADC_HWMON_H
 #define __ASM_ARCH_ADC_HWMON_H __FILE__
+=======
+#ifndef __HWMON_S3C_H__
+#define __HWMON_S3C_H__
+>>>>>>> v3.18
 =======
 #ifndef __HWMON_S3C_H__
 #define __HWMON_S3C_H__
@@ -57,8 +66,12 @@ struct s3c_hwmon_pdata {
 extern void __init s3c_hwmon_set_platdata(struct s3c_hwmon_pdata *pd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_ADC_HWMON_H */
 
+=======
+#endif /* __HWMON_S3C_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __HWMON_S3C_H__ */
 >>>>>>> v3.18

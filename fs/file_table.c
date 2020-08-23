@@ -53,7 +53,10 @@ static inline void file_free(struct file *f)
 {
 	percpu_counter_dec(&nr_files);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file_check_state(f);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	call_rcu(&f->f_u.fu_rcuhead, file_free_rcu);
@@ -81,7 +84,11 @@ EXPORT_SYMBOL_GPL(get_max_files);
  */
 #if defined(CONFIG_SYSCTL) && defined(CONFIG_PROC_FS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_nr_files(ctl_table *table, int write,
+=======
+int proc_nr_files(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_nr_files(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -92,7 +99,11 @@ int proc_nr_files(struct ctl_table *table, int write,
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_nr_files(ctl_table *table, int write,
+=======
+int proc_nr_files(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_nr_files(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -147,6 +158,10 @@ struct file *get_empty_filp(void)
 	rwlock_init(&f->f_owner.lock);
 	spin_lock_init(&f->f_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&f->f_pos_lock);
+>>>>>>> v3.18
 =======
 	mutex_init(&f->f_pos_lock);
 >>>>>>> v3.18
@@ -166,6 +181,7 @@ over:
 /**
  * alloc_file - allocate and initialize a 'struct file'
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mnt: the vfsmount on which the file will reside
  * @dentry: the dentry representing the new file
  * @mode: the mode with which the new file will be opened
@@ -179,10 +195,15 @@ over:
  * If all the callers of init_file() are eliminated, its
  * code should be moved into this function.
 =======
+=======
+>>>>>>> v3.18
  *
  * @path: the (dentry, vfsmount) pair for the new file
  * @mode: the mode with which the new file will be opened
  * @fop: the 'struct file_operations' for the new file
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct file *alloc_file(struct path *path, fmode_t mode,
@@ -198,6 +219,7 @@ struct file *alloc_file(struct path *path, fmode_t mode,
 	file->f_inode = path->dentry->d_inode;
 	file->f_mapping = path->dentry->d_inode->i_mapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file->f_mode = mode;
 	file->f_op = fop;
 
@@ -212,6 +234,8 @@ struct file *alloc_file(struct path *path, fmode_t mode,
 		WARN_ON(mnt_clone_write(path->mnt));
 	}
 =======
+=======
+>>>>>>> v3.18
 	if ((mode & FMODE_READ) &&
 	     likely(fop->read || fop->aio_read || fop->read_iter))
 		mode |= FMODE_CAN_READ;
@@ -220,6 +244,9 @@ struct file *alloc_file(struct path *path, fmode_t mode,
 		mode |= FMODE_CAN_WRITE;
 	file->f_mode = mode;
 	file->f_op = fop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((mode & (FMODE_READ | FMODE_WRITE)) == FMODE_READ)
 		i_readcount_inc(path->dentry->d_inode);
@@ -227,6 +254,7 @@ struct file *alloc_file(struct path *path, fmode_t mode,
 }
 EXPORT_SYMBOL(alloc_file);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * drop_file_write_access - give up ability to write to a file
@@ -254,6 +282,8 @@ static void drop_file_write_access(struct file *file)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* the real guts of fput() - releasing the last reference to file
  */
 static void __fput(struct file *file)
@@ -261,7 +291,11 @@ static void __fput(struct file *file)
 	struct dentry *dentry = file->f_path.dentry;
 	struct vfsmount *mnt = file->f_path.mnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = dentry->d_inode;
+=======
+	struct inode *inode = file->f_inode;
+>>>>>>> v3.18
 =======
 	struct inode *inode = file->f_inode;
 >>>>>>> v3.18
@@ -275,6 +309,7 @@ static void __fput(struct file *file)
 	 */
 	eventpoll_release(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	locks_remove_flock(file);
 
 	if (unlikely(file->f_flags & FASYNC)) {
@@ -284,6 +319,8 @@ static void __fput(struct file *file)
 	ima_file_free(file);
 	if (file->f_op && file->f_op->release)
 =======
+=======
+>>>>>>> v3.18
 	locks_remove_file(file);
 
 	if (unlikely(file->f_flags & FASYNC)) {
@@ -292,6 +329,9 @@ static void __fput(struct file *file)
 	}
 	ima_file_free(file);
 	if (file->f_op->release)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		file->f_op->release(inode, file);
 	security_file_free(file);
@@ -304,13 +344,19 @@ static void __fput(struct file *file)
 	if ((file->f_mode & (FMODE_READ | FMODE_WRITE)) == FMODE_READ)
 		i_readcount_dec(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (file->f_mode & FMODE_WRITE)
 		drop_file_write_access(file);
 =======
+=======
+>>>>>>> v3.18
 	if (file->f_mode & FMODE_WRITER) {
 		put_write_access(inode);
 		__mnt_drop_write(mnt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	file->f_path.dentry = NULL;
 	file->f_path.mnt = NULL;
@@ -353,7 +399,11 @@ void flush_delayed_fput(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DECLARE_WORK(delayed_fput_work, delayed_fput);
+=======
+static DECLARE_DELAYED_WORK(delayed_fput_work, delayed_fput);
+>>>>>>> v3.18
 =======
 static DECLARE_DELAYED_WORK(delayed_fput_work, delayed_fput);
 >>>>>>> v3.18
@@ -368,11 +418,14 @@ void fput(struct file *file)
 			if (!task_work_add(task, &file->f_u.fu_rcuhead, true))
 				return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		if (llist_add(&file->f_u.fu_llist, &delayed_fput_list))
 			schedule_work(&delayed_fput_work);
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * After this task has run exit_task_work(),
 			 * task_work_add() will fail.  Fall through to delayed
@@ -382,6 +435,9 @@ void fput(struct file *file)
 
 		if (llist_add(&file->f_u.fu_llist, &delayed_fput_list))
 			schedule_delayed_work(&delayed_fput_work, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -428,8 +484,12 @@ void __init files_init(unsigned long mempages)
 	n = (mempages * (PAGE_SIZE / 1024)) / 10;
 	files_stat.max_files = max_t(unsigned long, n, NR_FILE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	files_defer_init();
 	percpu_counter_init(&nr_files, 0);
+=======
+	percpu_counter_init(&nr_files, 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	percpu_counter_init(&nr_files, 0, GFP_KERNEL);
 >>>>>>> v3.18

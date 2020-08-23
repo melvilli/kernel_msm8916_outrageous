@@ -36,7 +36,11 @@
 
 #define v4l_client_printk(level, client, fmt, arg...)			    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l_printk(level, (client)->driver->driver.name, (client)->adapter, \
+=======
+	v4l_printk(level, (client)->dev.driver->name, (client)->adapter, \
+>>>>>>> v3.18
 =======
 	v4l_printk(level, (client)->dev.driver->name, (client)->adapter, \
 >>>>>>> v3.18
@@ -91,6 +95,10 @@ int v4l2_ctrl_check(struct v4l2_ext_control *ctrl, struct v4l2_queryctrl *qctrl,
 const char *v4l2_ctrl_get_name(u32 id);
 const char * const *v4l2_ctrl_get_menu(u32 id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const s64 *v4l2_ctrl_get_int_menu(u32 id, u32 *len);
+>>>>>>> v3.18
 =======
 const s64 *v4l2_ctrl_get_int_menu(u32 id, u32 *len);
 >>>>>>> v3.18
@@ -109,6 +117,7 @@ u32 v4l2_ctrl_next(const u32 * const *ctrl_classes, u32 id);
 /* ------------------------------------------------------------------------- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Register/chip ident helper function */
 
 struct i2c_client; /* forward reference */
@@ -119,6 +128,8 @@ int v4l2_chip_match_host(const struct v4l2_dbg_match *match);
 
 /* ------------------------------------------------------------------------- */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* I2C Helper functions */
@@ -223,6 +234,7 @@ const struct v4l2_frmsize_discrete *v4l2_find_nearest_format(
 		s32 width, s32 height);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool v4l_match_dv_timings(const struct v4l2_dv_timings *t1,
 			  const struct v4l2_dv_timings *t2,
 			  unsigned pclock_delta);
@@ -236,6 +248,8 @@ bool v4l2_detect_gtf(unsigned frame_height, unsigned hfreq, unsigned vsync,
 
 struct v4l2_fract v4l2_calc_aspect_ratio(u8 hor_landscape, u8 vert_portrait);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void v4l2_get_timestamp(struct timeval *tv);

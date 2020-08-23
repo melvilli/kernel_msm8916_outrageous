@@ -267,17 +267,23 @@ static ssize_t set_mode(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(min_microvolts, 0666, show_min_uV, set_min_uV);
 static DEVICE_ATTR(max_microvolts, 0666, show_max_uV, set_max_uV);
 static DEVICE_ATTR(min_microamps, 0666, show_min_uA, set_min_uA);
 static DEVICE_ATTR(max_microamps, 0666, show_max_uA, set_max_uA);
 static DEVICE_ATTR(mode, 0666, show_mode, set_mode);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(min_microvolts, 0664, show_min_uV, set_min_uV);
 static DEVICE_ATTR(max_microvolts, 0664, show_max_uV, set_max_uV);
 static DEVICE_ATTR(min_microamps, 0664, show_min_uA, set_min_uA);
 static DEVICE_ATTR(max_microamps, 0664, show_max_uA, set_max_uA);
 static DEVICE_ATTR(mode, 0664, show_mode, set_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct attribute *regulator_virtual_attributes[] = {
@@ -296,7 +302,11 @@ static const struct attribute_group regulator_virtual_attr_group = {
 static int regulator_virtual_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *reg_id = pdev->dev.platform_data;
+=======
+	char *reg_id = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	char *reg_id = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -343,8 +353,11 @@ static int regulator_virtual_remove(struct platform_device *pdev)
 		regulator_disable(drvdata->regulator);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

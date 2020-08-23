@@ -45,7 +45,13 @@
 static char *policycap_names[] = {
 	"network_peer_controls",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"open_perms"
+=======
+	"open_perms",
+	"redhat1",
+	"always_check_network"
+>>>>>>> v3.18
 =======
 	"open_perms",
 	"redhat1",
@@ -59,7 +65,11 @@ static int __init checkreqprot_setup(char *str)
 {
 	unsigned long checkreqprot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strict_strtoul(str, 0, &checkreqprot))
+=======
+	if (!kstrtoul(str, 0, &checkreqprot))
+>>>>>>> v3.18
 =======
 	if (!kstrtoul(str, 0, &checkreqprot))
 >>>>>>> v3.18
@@ -161,7 +171,11 @@ static ssize_t sel_write_enforce(struct file *file, const char __user *buf,
 
 	/* No partial writes. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = -EINVAL;
+=======
+	length = EINVAL;
+>>>>>>> v3.18
 =======
 	length = EINVAL;
 >>>>>>> v3.18
@@ -589,7 +603,11 @@ static ssize_t sel_write_context(struct file *file, char *buf, size_t size)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = security_context_to_sid(buf, size, &sid);
+=======
+	length = security_context_to_sid(buf, size, &sid, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	length = security_context_to_sid(buf, size, &sid, GFP_KERNEL);
 >>>>>>> v3.18
@@ -748,12 +766,15 @@ static ssize_t sel_write_access(struct file *file, char *buf, size_t size)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid);
 	if (length)
 		goto out;
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid);
 =======
+=======
+>>>>>>> v3.18
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid,
 					 GFP_KERNEL);
 	if (length)
@@ -761,6 +782,9 @@ static ssize_t sel_write_access(struct file *file, char *buf, size_t size)
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid,
 					 GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (length)
 		goto out;
@@ -844,12 +868,15 @@ static ssize_t sel_write_create(struct file *file, char *buf, size_t size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid);
 	if (length)
 		goto out;
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid);
 =======
+=======
+>>>>>>> v3.18
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid,
 					 GFP_KERNEL);
 	if (length)
@@ -857,6 +884,9 @@ static ssize_t sel_write_create(struct file *file, char *buf, size_t size)
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid,
 					 GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (length)
 		goto out;
@@ -915,12 +945,15 @@ static ssize_t sel_write_relabel(struct file *file, char *buf, size_t size)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid);
 	if (length)
 		goto out;
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid);
 =======
+=======
+>>>>>>> v3.18
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid,
 					 GFP_KERNEL);
 	if (length)
@@ -928,6 +961,9 @@ static ssize_t sel_write_relabel(struct file *file, char *buf, size_t size)
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid,
 					 GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (length)
 		goto out;
@@ -981,7 +1017,11 @@ static ssize_t sel_write_user(struct file *file, char *buf, size_t size)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = security_context_to_sid(con, strlen(con) + 1, &sid);
+=======
+	length = security_context_to_sid(con, strlen(con) + 1, &sid, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	length = security_context_to_sid(con, strlen(con) + 1, &sid, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1045,12 +1085,15 @@ static ssize_t sel_write_member(struct file *file, char *buf, size_t size)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid);
 	if (length)
 		goto out;
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid);
 =======
+=======
+>>>>>>> v3.18
 	length = security_context_to_sid(scon, strlen(scon) + 1, &ssid,
 					 GFP_KERNEL);
 	if (length)
@@ -1058,6 +1101,9 @@ static ssize_t sel_write_member(struct file *file, char *buf, size_t size)
 
 	length = security_context_to_sid(tcon, strlen(tcon) + 1, &tsid,
 					 GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (length)
 		goto out;
@@ -1253,7 +1299,11 @@ static void sel_remove_entries(struct dentry *de)
 	node = de->d_subdirs.next;
 	while (node != &de->d_subdirs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct dentry *d = list_entry(node, struct dentry, d_child);
+=======
+		struct dentry *d = list_entry(node, struct dentry, d_u.d_child);
+>>>>>>> v3.18
 =======
 		struct dentry *d = list_entry(node, struct dentry, d_u.d_child);
 >>>>>>> v3.18
@@ -1731,7 +1781,11 @@ static void sel_remove_classes(void)
 	list_for_each(class_node, &class_dir->d_subdirs) {
 		struct dentry *class_subdir = list_entry(class_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct dentry, d_child);
+=======
+					struct dentry, d_u.d_child);
+>>>>>>> v3.18
 =======
 					struct dentry, d_u.d_child);
 >>>>>>> v3.18
@@ -1740,7 +1794,11 @@ static void sel_remove_classes(void)
 		list_for_each(class_subdir_node, &class_subdir->d_subdirs) {
 			struct dentry *d = list_entry(class_subdir_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						struct dentry, d_child);
+=======
+						struct dentry, d_u.d_child);
+>>>>>>> v3.18
 =======
 						struct dentry, d_u.d_child);
 >>>>>>> v3.18

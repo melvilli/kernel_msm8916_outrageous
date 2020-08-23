@@ -1,6 +1,11 @@
 # UAPI Header export list
 header-y += evtchn.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += gntalloc.h
+header-y += gntdev.h
+>>>>>>> v3.18
 =======
 header-y += gntalloc.h
 header-y += gntdev.h

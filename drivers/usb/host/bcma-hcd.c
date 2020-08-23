@@ -228,8 +228,12 @@ static int bcma_hcd_probe(struct bcma_device *dev)
 	/* TODO: Probably need checks here; is the core connected? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma_set_mask(dev->dma_dev, DMA_BIT_MASK(32)) ||
 	    dma_set_coherent_mask(dev->dma_dev, DMA_BIT_MASK(32)))
+=======
+	if (dma_set_mask_and_coherent(dev->dma_dev, DMA_BIT_MASK(32)))
+>>>>>>> v3.18
 =======
 	if (dma_set_mask_and_coherent(dev->dma_dev, DMA_BIT_MASK(32)))
 >>>>>>> v3.18
@@ -243,7 +247,11 @@ static int bcma_hcd_probe(struct bcma_device *dev)
 
 	/* In AI chips EHCI is addrspace 0, OHCI is 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ohci_addr = dev->addr1;
+=======
+	ohci_addr = dev->addr_s[0];
+>>>>>>> v3.18
 =======
 	ohci_addr = dev->addr_s[0];
 >>>>>>> v3.18

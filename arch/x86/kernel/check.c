@@ -92,7 +92,11 @@ void __init setup_bios_corruption_check(void)
 	corruption_check_size = round_up(corruption_check_size, PAGE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_free_mem_range(i, MAX_NUMNODES, &start, &end, NULL) {
+=======
+	for_each_free_mem_range(i, NUMA_NO_NODE, &start, &end, NULL) {
+>>>>>>> v3.18
 =======
 	for_each_free_mem_range(i, NUMA_NO_NODE, &start, &end, NULL) {
 >>>>>>> v3.18

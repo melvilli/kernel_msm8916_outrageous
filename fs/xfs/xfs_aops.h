@@ -46,7 +46,10 @@ typedef struct xfs_ioend {
 	int			io_error;	/* I/O error code */
 	atomic_t		io_remaining;	/* hold count */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		io_isasync : 1;	/* needs aio_complete */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int		io_isdirect : 1;/* direct I/O */
@@ -58,8 +61,11 @@ typedef struct xfs_ioend {
 	struct work_struct	io_work;	/* xfsdatad work queue */
 	struct xfs_trans	*io_append_trans;/* xact. for size update */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kiocb		*io_iocb;
 	int			io_result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } xfs_ioend_t;

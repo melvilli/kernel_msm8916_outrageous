@@ -468,7 +468,11 @@ of machine interrupts and the associated clock sources are no longer completely
 synchronized with real time.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This same problem can occur on native harware to a degree, as SMM mode may
+=======
+This same problem can occur on native hardware to a degree, as SMM mode may
+>>>>>>> v3.18
 =======
 This same problem can occur on native hardware to a degree, as SMM mode may
 >>>>>>> v3.18

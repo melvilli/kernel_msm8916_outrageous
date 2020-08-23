@@ -367,7 +367,11 @@ static int ttusb_dec_get_stb_state (struct ttusb_dec *dec, unsigned int *mode,
 		return 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -ENOENT;
+>>>>>>> v3.18
 =======
 		return -ENOENT;
 >>>>>>> v3.18
@@ -1156,11 +1160,17 @@ static int ttusb_dec_alloc_iso_urbs(struct ttusb_dec *dec)
 	dprintk("%s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dec->iso_buffer = pci_alloc_consistent(NULL,
 					       ISO_FRAME_SIZE *
 					       (FRAMES_PER_ISO_BUF *
 						ISO_BUF_COUNT),
 					       &dec->iso_dma_handle);
+=======
+	dec->iso_buffer = pci_zalloc_consistent(NULL,
+						ISO_FRAME_SIZE * (FRAMES_PER_ISO_BUF * ISO_BUF_COUNT),
+						&dec->iso_dma_handle);
+>>>>>>> v3.18
 =======
 	dec->iso_buffer = pci_zalloc_consistent(NULL,
 						ISO_FRAME_SIZE * (FRAMES_PER_ISO_BUF * ISO_BUF_COUNT),
@@ -1174,9 +1184,12 @@ static int ttusb_dec_alloc_iso_urbs(struct ttusb_dec *dec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dec->iso_buffer, 0,
 	       ISO_FRAME_SIZE * (FRAMES_PER_ISO_BUF * ISO_BUF_COUNT));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < ISO_BUF_COUNT; i++) {
@@ -1255,6 +1268,11 @@ static void ttusb_dec_init_v_pes(struct ttusb_dec *dec)
 static int ttusb_dec_init_usb(struct ttusb_dec *dec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int result;
+
+>>>>>>> v3.18
 =======
 	int result;
 
@@ -1277,7 +1295,11 @@ static int ttusb_dec_init_usb(struct ttusb_dec *dec)
 		}
 		dec->irq_buffer = usb_alloc_coherent(dec->udev,IRQ_PACKET_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					GFP_ATOMIC, &dec->irq_dma_handle);
+=======
+					GFP_KERNEL, &dec->irq_dma_handle);
+>>>>>>> v3.18
 =======
 					GFP_KERNEL, &dec->irq_dma_handle);
 >>>>>>> v3.18
@@ -1293,8 +1315,11 @@ static int ttusb_dec_init_usb(struct ttusb_dec *dec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ttusb_dec_alloc_iso_urbs(dec);
 =======
+=======
+>>>>>>> v3.18
 	result = ttusb_dec_alloc_iso_urbs(dec);
 	if (result) {
 		usb_free_urb(dec->irq_urb);
@@ -1302,6 +1327,9 @@ static int ttusb_dec_init_usb(struct ttusb_dec *dec)
 				  dec->irq_buffer, dec->irq_dma_handle);
 	}
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1326,16 +1354,22 @@ static int ttusb_dec_boot_dsp(struct ttusb_dec *dec)
 	dprintk("%s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_firmware(&fw_entry, dec->firmware_name, &dec->udev->dev)) {
 		printk(KERN_ERR "%s: Firmware (%s) unavailable.\n",
 		       __func__, dec->firmware_name);
 		return 1;
 =======
+=======
+>>>>>>> v3.18
 	result = request_firmware(&fw_entry, dec->firmware_name, &dec->udev->dev);
 	if (result) {
 		printk(KERN_ERR "%s: Firmware (%s) unavailable.\n",
 		       __func__, dec->firmware_name);
 		return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1347,7 +1381,11 @@ static int ttusb_dec_boot_dsp(struct ttusb_dec *dec)
 			__func__, firmware_size);
 		release_firmware(fw_entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -ENOENT;
+>>>>>>> v3.18
 =======
 		return -ENOENT;
 >>>>>>> v3.18
@@ -1365,7 +1403,11 @@ static int ttusb_dec_boot_dsp(struct ttusb_dec *dec)
 			__func__, crc32_csum, crc32_check);
 		release_firmware(fw_entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -ENOENT;
+>>>>>>> v3.18
 =======
 		return -ENOENT;
 >>>>>>> v3.18
@@ -1438,6 +1480,7 @@ static int ttusb_dec_init_stb(struct ttusb_dec *dec)
 
 	result = ttusb_dec_get_stb_state(dec, &mode, &model, &version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!result) {
 		if (!mode) {
@@ -1488,6 +1531,8 @@ static int ttusb_dec_init_stb(struct ttusb_dec *dec)
 	else
 		return result;
 =======
+=======
+>>>>>>> v3.18
 	if (result)
 		return result;
 
@@ -1530,6 +1575,9 @@ static int ttusb_dec_init_stb(struct ttusb_dec *dec)
 				dec->can_playback = 1;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1633,6 +1681,7 @@ static void ttusb_dec_exit_dvb(struct ttusb_dec *dec)
 static void ttusb_dec_exit_rc(struct ttusb_dec *dec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dprintk("%s\n", __func__);
 	/* we have to check whether the irq URB is already submitted.
@@ -1646,6 +1695,9 @@ static void ttusb_dec_exit_rc(struct ttusb_dec *dec)
 
 	usb_free_coherent(dec->udev,IRQ_PACKET_SIZE,
 			  dec->irq_buffer, dec->irq_dma_handle);
+=======
+	dprintk("%s\n", __func__);
+>>>>>>> v3.18
 =======
 	dprintk("%s\n", __func__);
 >>>>>>> v3.18
@@ -1664,7 +1716,10 @@ static void ttusb_dec_exit_usb(struct ttusb_dec *dec)
 	dprintk("%s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (enable_rc) {
 		/* we have to check whether the irq URB is already submitted.
 		 * As the irq is submitted after the interface is changed,
@@ -1679,6 +1734,9 @@ static void ttusb_dec_exit_usb(struct ttusb_dec *dec)
 				  dec->irq_buffer, dec->irq_dma_handle);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dec->iso_stream_count = 0;
 
@@ -1738,6 +1796,10 @@ static int ttusb_dec_probe(struct usb_interface *intf,
 	struct usb_device *udev;
 	struct ttusb_dec *dec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int result;
+>>>>>>> v3.18
 =======
 	int result;
 >>>>>>> v3.18
@@ -1770,6 +1832,7 @@ static int ttusb_dec_probe(struct usb_interface *intf,
 	dec->udev = udev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ttusb_dec_init_usb(dec))
 		return 0;
 	if (ttusb_dec_init_stb(dec)) {
@@ -1778,6 +1841,8 @@ static int ttusb_dec_probe(struct usb_interface *intf,
 	}
 	ttusb_dec_init_dvb(dec);
 =======
+=======
+>>>>>>> v3.18
 	result = ttusb_dec_init_usb(dec);
 	if (result)
 		goto err_usb;
@@ -1787,6 +1852,9 @@ static int ttusb_dec_probe(struct usb_interface *intf,
 	result = ttusb_dec_init_dvb(dec);
 	if (result)
 		goto err_stb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dec->adapter.priv = dec;
@@ -1827,12 +1895,18 @@ static int ttusb_dec_probe(struct usb_interface *intf,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_stb:
 	ttusb_dec_exit_usb(dec);
 err_usb:
 	kfree(dec);
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

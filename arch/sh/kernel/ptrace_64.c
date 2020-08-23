@@ -505,6 +505,7 @@ asmlinkage int sh64_ptrace(long request, long pid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_arch(void)
 {
 	int arch = EM_SH;
@@ -519,6 +520,8 @@ static inline int audit_arch(void)
 	return arch;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 asmlinkage long long do_syscall_trace_enter(struct pt_regs *regs)
@@ -540,8 +543,12 @@ asmlinkage long long do_syscall_trace_enter(struct pt_regs *regs)
 		trace_sys_enter(regs, regs->regs[9]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_entry(audit_arch(), regs->regs[1],
 			    regs->regs[2], regs->regs[3],
+=======
+	audit_syscall_entry(regs->regs[1], regs->regs[2], regs->regs[3],
+>>>>>>> v3.18
 =======
 	audit_syscall_entry(regs->regs[1], regs->regs[2], regs->regs[3],
 >>>>>>> v3.18

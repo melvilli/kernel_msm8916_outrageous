@@ -29,6 +29,7 @@
  * helper for sa1100fb
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void h3600_lcd_power(int enable)
 {
 	if (gpio_request(H3XXX_EGPIO_LCD_ON, "LCD power")) {
@@ -48,6 +49,8 @@ static void h3600_lcd_power(int enable)
 		goto err4;
 	}
 =======
+=======
+>>>>>>> v3.18
 static struct gpio h3600_lcd_gpio[] = {
 	{ H3XXX_EGPIO_LCD_ON,	GPIOF_OUT_INIT_LOW,	"LCD power" },
 	{ H3600_EGPIO_LCD_PCI,	GPIOF_OUT_INIT_LOW,	"LCD control" },
@@ -76,6 +79,9 @@ static void h3600_lcd_power(int enable)
 {
 	if (!h3600_lcd_request())
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gpio_direction_output(H3XXX_EGPIO_LCD_ON, enable);
@@ -83,12 +89,15 @@ static void h3600_lcd_power(int enable)
 	gpio_direction_output(H3600_EGPIO_LCD_5V_ON, enable);
 	gpio_direction_output(H3600_EGPIO_LVDD_ON, enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	gpio_free(H3600_EGPIO_LVDD_ON);
 err4:	gpio_free(H3600_EGPIO_LCD_5V_ON);
 err3:	gpio_free(H3600_EGPIO_LCD_PCI);
 err2:	gpio_free(H3XXX_EGPIO_LCD_ON);
 err1:	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -128,12 +137,18 @@ static void __init h3600_map_io(void)
  * This turns the IRDA power on or off on the Compaq H3600
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct gpio h3600_irda_gpio[] = {
 	{ H3600_EGPIO_IR_ON,	GPIOF_OUT_INIT_LOW, "IrDA power" },
 	{ H3600_EGPIO_IR_FSEL,	GPIOF_OUT_INIT_LOW, "IrDA fsel" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int h3600_irda_set_power(struct device *dev, unsigned int state)
 {
@@ -148,6 +163,7 @@ static void h3600_irda_set_speed(struct device *dev, unsigned int speed)
 
 static int h3600_irda_startup(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err = gpio_request(H3600_EGPIO_IR_ON, "IrDA power");
 	if (err)
@@ -169,13 +185,20 @@ err1:	return err;
 =======
 	return gpio_request_array(h3600_irda_gpio, sizeof(h3600_irda_gpio));
 >>>>>>> v3.18
+=======
+	return gpio_request_array(h3600_irda_gpio, sizeof(h3600_irda_gpio));
+>>>>>>> v3.18
 }
 
 static void h3600_irda_shutdown(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_free(H3600_EGPIO_IR_ON);
 	gpio_free(H3600_EGPIO_IR_FSEL);
+=======
+	return gpio_free_array(h3600_irda_gpio, sizeof(h3600_irda_gpio));
+>>>>>>> v3.18
 =======
 	return gpio_free_array(h3600_irda_gpio, sizeof(h3600_irda_gpio));
 >>>>>>> v3.18
@@ -189,6 +212,7 @@ static struct irda_platform_data h3600_irda_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct gpio_default_state h3600_default_gpio[] = {
 	{ H3XXX_GPIO_COM_DCD,	GPIO_MODE_IN,	"COM DCD" },
 	{ H3XXX_GPIO_COM_CTS,	GPIO_MODE_IN,	"COM CTS" },
@@ -198,6 +222,10 @@ static struct gpio_default_state h3600_default_gpio[] = {
 static void __init h3600_mach_init(void)
 {
 	h3xxx_init_gpio(h3600_default_gpio, ARRAY_SIZE(h3600_default_gpio));
+=======
+static void __init h3600_mach_init(void)
+{
+>>>>>>> v3.18
 =======
 static void __init h3600_mach_init(void)
 {

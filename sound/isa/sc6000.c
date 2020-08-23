@@ -560,8 +560,13 @@ static int snd_sc6000_probe(struct device *devptr, unsigned int dev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, sizeof(vport),
 				&card);
+=======
+	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
+			   sizeof(vport), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
 			   sizeof(vport), &card);
@@ -674,8 +679,11 @@ static int snd_sc6000_probe(struct device *devptr, unsigned int dev)
 		mss_port[dev], xirq, xdma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, devptr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_card_register(card);
@@ -707,7 +715,10 @@ static int snd_sc6000_remove(struct device *devptr, unsigned int dev)
 	release_region(mss_port[dev], 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_card_free(card);

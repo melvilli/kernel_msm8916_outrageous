@@ -11,8 +11,11 @@
 #include "affs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct timezone sys_tz;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char ErrorBuffer[256];
@@ -38,7 +41,11 @@ affs_insert_hash(struct inode *dir, struct buffer_head *bh)
 	offset = affs_hash_name(sb, AFFS_TAIL(sb, bh)->name + 1, AFFS_TAIL(sb, bh)->name[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: insert_hash(dir=%u, ino=%d)\n", (u32)dir->i_ino, ino);
+=======
+	pr_debug("%s(dir=%u, ino=%d)\n", __func__, (u32)dir->i_ino, ino);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(dir=%u, ino=%d)\n", __func__, (u32)dir->i_ino, ino);
 >>>>>>> v3.18
@@ -92,7 +99,12 @@ affs_remove_hash(struct inode *dir, struct buffer_head *rem_bh)
 	rem_ino = rem_bh->b_blocknr;
 	offset = affs_hash_name(sb, AFFS_TAIL(sb, rem_bh)->name+1, AFFS_TAIL(sb, rem_bh)->name[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: remove_hash(dir=%d, ino=%d, hashval=%d)\n", (u32)dir->i_ino, rem_ino, offset);
+=======
+	pr_debug("%s(dir=%d, ino=%d, hashval=%d)\n",
+		 __func__, (u32)dir->i_ino, rem_ino, offset);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(dir=%d, ino=%d, hashval=%d)\n",
 		 __func__, (u32)dir->i_ino, rem_ino, offset);
@@ -139,7 +151,11 @@ affs_fix_dcache(struct inode *inode, u32 entry_ino)
 	struct dentry *dentry;
 	spin_lock(&inode->i_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each_entry(dentry, &inode->i_dentry, d_u.d_alias) {
+=======
+	hlist_for_each_entry(dentry, &inode->i_dentry, d_alias) {
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry(dentry, &inode->i_dentry, d_alias) {
 >>>>>>> v3.18
@@ -164,7 +180,11 @@ affs_remove_link(struct dentry *dentry)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: remove_link(key=%ld)\n", inode->i_ino);
+=======
+	pr_debug("%s(key=%ld)\n", __func__, inode->i_ino);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(key=%ld)\n", __func__, inode->i_ino);
 >>>>>>> v3.18
@@ -300,7 +320,11 @@ affs_remove_header(struct dentry *dentry)
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: remove_header(key=%ld)\n", inode->i_ino);
+=======
+	pr_debug("%s(key=%ld)\n", __func__, inode->i_ino);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(key=%ld)\n", __func__, inode->i_ino);
 >>>>>>> v3.18
@@ -476,15 +500,21 @@ affs_error(struct super_block *sb, const char *function, const char *fmt, ...)
 	va_end(args);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_CRIT "AFFS error (device %s): %s(): %s\n", sb->s_id,
 		function,ErrorBuffer);
 	if (!(sb->s_flags & MS_RDONLY))
 		printk(KERN_WARNING "AFFS: Remounting filesystem read-only\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_crit("error (device %s): %s(): %s\n", sb->s_id,
 		function,ErrorBuffer);
 	if (!(sb->s_flags & MS_RDONLY))
 		pr_warn("Remounting filesystem read-only\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sb->s_flags |= MS_RDONLY;
 }
@@ -498,6 +528,7 @@ affs_warning(struct super_block *sb, const char *function, const char *fmt, ...)
 	vsnprintf(ErrorBuffer,sizeof(ErrorBuffer),fmt,args);
 	va_end(args);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk(KERN_WARNING "AFFS warning (device %s): %s(): %s\n", sb->s_id,
 		function,ErrorBuffer);
@@ -518,6 +549,8 @@ affs_check_name(const unsigned char *name, int len)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	pr_warn("(device %s): %s(): %s\n", sb->s_id,
 		function,ErrorBuffer);
 }
@@ -543,6 +576,9 @@ affs_check_name(const unsigned char *name, int len, bool notruncate)
 		else
 			len = 30;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < len; i++) {
 		if (name[i] < ' ' || name[i] == ':'

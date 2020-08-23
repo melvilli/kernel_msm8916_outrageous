@@ -123,8 +123,13 @@ struct ceph_client {
 	int (*extra_mon_dispatch)(struct ceph_client *, struct ceph_msg *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 supported_features;
 	u32 required_features;
+=======
+	u64 supported_features;
+	u64 required_features;
+>>>>>>> v3.18
 =======
 	u64 supported_features;
 	u64 required_features;
@@ -179,12 +184,18 @@ static inline int calc_pages_for(u64 off, u64 len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern struct kmem_cache *ceph_inode_cachep;
 extern struct kmem_cache *ceph_cap_cachep;
 extern struct kmem_cache *ceph_dentry_cachep;
 extern struct kmem_cache *ceph_file_cachep;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ceph_common.c */
 extern bool libceph_compatible(void *data);
@@ -192,10 +203,15 @@ extern bool libceph_compatible(void *data);
 extern const char *ceph_msg_type_name(int type);
 extern int ceph_check_fsid(struct ceph_client *client, struct ceph_fsid *fsid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct kmem_cache *ceph_inode_cachep;
 extern struct kmem_cache *ceph_cap_cachep;
 extern struct kmem_cache *ceph_dentry_cachep;
 extern struct kmem_cache *ceph_file_cachep;
+=======
+extern void *ceph_kvmalloc(size_t size, gfp_t flags);
+extern void ceph_kvfree(const void *ptr);
+>>>>>>> v3.18
 =======
 extern void *ceph_kvmalloc(size_t size, gfp_t flags);
 extern void ceph_kvfree(const void *ptr);
@@ -211,8 +227,13 @@ extern int ceph_compare_options(struct ceph_options *new_opt,
 extern struct ceph_client *ceph_create_client(struct ceph_options *opt,
 					      void *private,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      unsigned supported_features,
 					      unsigned required_features);
+=======
+					      u64 supported_features,
+					      u64 required_features);
+>>>>>>> v3.18
 =======
 					      u64 supported_features,
 					      u64 required_features);
@@ -232,7 +253,10 @@ extern struct page **ceph_get_direct_page_vector(const void __user *data,
 extern void ceph_put_page_vector(struct page **pages, int num_pages,
 				 bool dirty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ceph_release_page_vector(struct page **pages, int num_pages);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct page **ceph_alloc_page_vector(int num_pages, gfp_t flags);
@@ -246,8 +270,11 @@ extern void ceph_copy_from_page_vector(struct page **pages,
 				    void *data,
 				    loff_t off, size_t len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ceph_copy_page_vector_to_user(struct page **pages, void __user *data,
 				    loff_t off, size_t len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void ceph_zero_page_vector_range(int off, int len, struct page **pages);

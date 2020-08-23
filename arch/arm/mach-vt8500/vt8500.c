@@ -19,9 +19,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/io.h>
 #include <linux/irqchip.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -39,8 +43,11 @@
 #include <linux/of_platform.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "common.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define LEGACY_GPIO_BASE	0xD8110000
@@ -56,7 +63,11 @@
 static void __iomem *pmc_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vt8500_restart(enum reboot_mode mode, const char *cmd)
+=======
+static void vt8500_restart(enum reboot_mode mode, const char *cmd)
+>>>>>>> v3.18
 =======
 static void vt8500_restart(enum reboot_mode mode, const char *cmd)
 >>>>>>> v3.18
@@ -76,7 +87,11 @@ static struct map_desc vt8500_io_desc[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init vt8500_map_io(void)
+=======
+static void __init vt8500_map_io(void)
+>>>>>>> v3.18
 =======
 static void __init vt8500_map_io(void)
 >>>>>>> v3.18
@@ -89,15 +104,21 @@ static void vt8500_power_off(void)
 	local_irq_disable();
 	writew(5, pmc_base + VT8500_HCR_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm("mcr%? p15, 0, %0, c7, c0, 4" : : "r" (0));
 }
 
 void __init vt8500_init(void)
 =======
+=======
+>>>>>>> v3.18
 	asm("mcr p15, 0, %0, c7, c0, 4" : : "r" (0));
 }
 
 static void __init vt8500_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct device_node *np;
@@ -186,8 +207,11 @@ static void __init vt8500_init(void)
 		pr_err("%s: PMC Hibernation register could not be remapped, not enabling power off!\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vtwm_clk_init(pmc_base);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
@@ -206,9 +230,13 @@ DT_MACHINE_START(WMT_DT, "VIA/Wondermedia SoC (Device Tree Support)")
 	.dt_compat	= vt8500_dt_compat,
 	.map_io		= vt8500_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= irqchip_init,
 	.init_machine	= vt8500_init,
 	.init_time	= clocksource_of_init,
+=======
+	.init_machine	= vt8500_init,
+>>>>>>> v3.18
 =======
 	.init_machine	= vt8500_init,
 >>>>>>> v3.18

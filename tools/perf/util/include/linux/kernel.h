@@ -95,6 +95,7 @@ static inline int scnprintf(char * buf, size_t size, const char * fmt, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long
 simple_strtoul(const char *nptr, char **endptr, int base)
 {
@@ -122,6 +123,8 @@ int eprintf(int level,
 #define pr_debug3(fmt, ...) pr_debugN(3, pr_fmt(fmt), ##__VA_ARGS__)
 #define pr_debug4(fmt, ...) pr_debugN(4, pr_fmt(fmt), ##__VA_ARGS__)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

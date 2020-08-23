@@ -46,7 +46,10 @@
 #define SMP_DIRECT 1
 #define SMP_INDIRECT 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 int pm80xx_bar4_shift(struct pm8001_hba_info *pm8001_ha, u32 shift_value)
@@ -262,6 +265,9 @@ moreData:
 		(char *)buf;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * read_main_config_table - read the configure table and save it.
@@ -649,13 +655,19 @@ static int mpi_init_check(struct pm8001_hba_info *pm8001_ha)
 	pm8001_cw32(pm8001_ha, 0, MSGU_IBDB_SET, SPCv_MSGU_CFG_TABLE_UPDATE);
 	/* wait until Inbound DoorBell Clear Register toggled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_wait_count = 2 * 1000 * 1000;/* 2 sec for spcv/ve */
 =======
+=======
+>>>>>>> v3.18
 	if (IS_SPCV_12G(pm8001_ha->pdev)) {
 		max_wait_count = 4 * 1000 * 1000;/* 4 sec */
 	} else {
 		max_wait_count = 2 * 1000 * 1000;/* 2 sec */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	do {
 		udelay(1);
@@ -806,6 +818,12 @@ static void init_pci_device_addresses(struct pm8001_hba_info *pm8001_ha)
 		base_addr + (pm8001_cr32(pm8001_ha, pcibar, offset + 0x90) &
 					0xFFFFFF);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm8001_ha->fatal_tbl_addr =
+		base_addr + (pm8001_cr32(pm8001_ha, pcibar, offset + 0xA0) &
+					0xFFFFFF);
+>>>>>>> v3.18
 =======
 	pm8001_ha->fatal_tbl_addr =
 		base_addr + (pm8001_cr32(pm8001_ha, pcibar, offset + 0xA0) &
@@ -867,6 +885,11 @@ pm80xx_set_thermal_config(struct pm8001_hba_info *pm8001_ha)
 
 	rc = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &payload, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (rc)
+		pm8001_tag_free(pm8001_ha, tag);
+>>>>>>> v3.18
 =======
 	if (rc)
 		pm8001_tag_free(pm8001_ha, tag);
@@ -952,6 +975,11 @@ pm80xx_set_sas_protocol_timer_config(struct pm8001_hba_info *pm8001_ha)
 
 	rc = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &payload, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (rc)
+		pm8001_tag_free(pm8001_ha, tag);
+>>>>>>> v3.18
 =======
 	if (rc)
 		pm8001_tag_free(pm8001_ha, tag);
@@ -969,7 +997,11 @@ pm80xx_get_encrypt_info(struct pm8001_hba_info *pm8001_ha)
 {
 	u32 scratch3_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = -1;
+>>>>>>> v3.18
 =======
 	int ret = -1;
 >>>>>>> v3.18
@@ -1007,7 +1039,11 @@ pm80xx_get_encrypt_info(struct pm8001_hba_info *pm8001_ha)
 		pm8001_ha->encrypt_info.cipher_mode = 0;
 		pm8001_ha->encrypt_info.sec_mode = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		ret = 0;
+>>>>>>> v3.18
 =======
 		ret = 0;
 >>>>>>> v3.18
@@ -1033,7 +1069,10 @@ pm80xx_get_encrypt_info(struct pm8001_hba_info *pm8001_ha)
 			pm8001_ha->encrypt_info.sec_mode,
 			pm8001_ha->encrypt_info.status));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if ((scratch3_value & SCRATCH_PAD3_ENC_MASK) ==
@@ -1060,7 +1099,10 @@ pm80xx_get_encrypt_info(struct pm8001_hba_info *pm8001_ha)
 			pm8001_ha->encrypt_info.sec_mode,
 			pm8001_ha->encrypt_info.status));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1094,6 +1136,11 @@ static int pm80xx_encrypt_update(struct pm8001_hba_info *pm8001_ha)
 
 	rc = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &payload, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (rc)
+		pm8001_tag_free(pm8001_ha, tag);
+>>>>>>> v3.18
 =======
 	if (rc)
 		pm8001_tag_free(pm8001_ha, tag);
@@ -1175,13 +1222,19 @@ static int mpi_uninit_check(struct pm8001_hba_info *pm8001_ha)
 
 	/* wait until Inbound DoorBell Clear Register toggled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_wait_count = 2 * 1000 * 1000;	/* 2 sec for spcv/ve */
 =======
+=======
+>>>>>>> v3.18
 	if (IS_SPCV_12G(pm8001_ha->pdev)) {
 		max_wait_count = 4 * 1000 * 1000;/* 4 sec */
 	} else {
 		max_wait_count = 2 * 1000 * 1000;/* 2 sec */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	do {
 		udelay(1);
@@ -1229,6 +1282,10 @@ pm80xx_chip_soft_rst(struct pm8001_hba_info *pm8001_ha)
 	u32 regval;
 	u32 bootloader_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ibutton0, ibutton1;
+>>>>>>> v3.18
 =======
 	u32 ibutton0, ibutton1;
 >>>>>>> v3.18
@@ -1291,8 +1348,11 @@ pm80xx_chip_soft_rst(struct pm8001_hba_info *pm8001_ha)
 		PM8001_FAIL_DBG(pm8001_ha,
 			pm8001_printk("Firmware is not ready!\n"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 		/* check iButton feature support for motherboard controller */
 		if (pm8001_ha->pdev->subsystem_vendor !=
 			PCI_VENDOR_ID_ADAPTEC2 &&
@@ -1314,6 +1374,9 @@ pm80xx_chip_soft_rst(struct pm8001_hba_info *pm8001_ha)
 				return -EBUSY;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	PM8001_INIT_DBG(pm8001_ha,
@@ -1434,13 +1497,19 @@ static void pm80xx_send_abort_all(struct pm8001_hba_info *pm8001_ha,
 
 	res = pm8001_tag_alloc(pm8001_ha, &ccb_tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	if (res) {
 		sas_free_task(task);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ccb = &pm8001_ha->ccb_info[ccb_tag];
@@ -1457,12 +1526,18 @@ static void pm80xx_send_abort_all(struct pm8001_hba_info *pm8001_ha,
 
 	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &task_abort, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		sas_free_task(task);
 		pm8001_tag_free(pm8001_ha, ccb_tag);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1491,6 +1566,10 @@ static void pm80xx_send_read_log(struct pm8001_hba_info *pm8001_ha,
 	res = pm8001_tag_alloc(pm8001_ha, &ccb_tag);
 	if (res) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		sas_free_task(task);
+>>>>>>> v3.18
 =======
 		sas_free_task(task);
 >>>>>>> v3.18
@@ -1505,6 +1584,7 @@ static void pm80xx_send_read_log(struct pm8001_hba_info *pm8001_ha,
 	dev = kzalloc(sizeof(struct domain_device), GFP_ATOMIC);
 	if (!dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PM8001_FAIL_DBG(pm8001_ha,
 			pm8001_printk("Domain device cannot be allocated\n"));
 		sas_free_task(task);
@@ -1515,6 +1595,8 @@ static void pm80xx_send_read_log(struct pm8001_hba_info *pm8001_ha,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		sas_free_task(task);
 		pm8001_tag_free(pm8001_ha, ccb_tag);
 		PM8001_FAIL_DBG(pm8001_ha,
@@ -1525,6 +1607,9 @@ static void pm80xx_send_read_log(struct pm8001_hba_info *pm8001_ha,
 	task->dev = dev;
 	task->dev->lldd_dev = pm8001_ha_dev;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ccb = &pm8001_ha->ccb_info[ccb_tag];
 	ccb->device = pm8001_ha_dev;
@@ -1551,13 +1636,19 @@ static void pm80xx_send_read_log(struct pm8001_hba_info *pm8001_ha,
 
 	res = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &sata_cmd, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	if (res) {
 		sas_free_task(task);
 		pm8001_tag_free(pm8001_ha, ccb_tag);
 		kfree(dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1605,7 +1696,10 @@ mpi_ssp_completion(struct pm8001_hba_info *pm8001_ha , void *piomb)
 		return;
 	ts = &t->task_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Print sas address of IO failed device */
 	if ((status != IO_SUCCESS) && (status != IO_OVERFLOW) &&
 		(status != IO_UNDERFLOW))
@@ -1613,6 +1707,9 @@ mpi_ssp_completion(struct pm8001_hba_info *pm8001_ha , void *piomb)
 			pm8001_printk("SAS Address of IO Failure Drive"
 			":%016llx", SAS_ADDR(t->dev->sas_addr)));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (status) {
 	case IO_SUCCESS:
@@ -2038,11 +2135,17 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 	u32 status;
 	u32 tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int i, j;
 	u8 sata_addr_low[4];
 	u32 temp_sata_addr_low, temp_sata_addr_hi;
 	u8 sata_addr_hi[4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sata_completion_resp *psataPayload;
 	struct task_status_struct *ts;
@@ -2094,8 +2197,11 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	/* Print sas address of IO failed device */
 	if ((status != IO_SUCCESS) && (status != IO_OVERFLOW) &&
 		(status != IO_UNDERFLOW)) {
@@ -2137,6 +2243,9 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 				"%016llx", SAS_ADDR(t->dev->sas_addr)));
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (status) {
 	case IO_SUCCESS:
@@ -2268,11 +2377,15 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 			ts->resp = SAS_TASK_UNDELIVERED;
 			ts->stat = SAS_QUEUE_FULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 			mb();/*in order to force CPU ordering*/
 			spin_unlock_irq(&pm8001_ha->lock);
 			t->task_done(t);
 			spin_lock_irq(&pm8001_ha->lock);
+=======
+			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
 >>>>>>> v3.18
@@ -2292,11 +2405,15 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 			ts->resp = SAS_TASK_UNDELIVERED;
 			ts->stat = SAS_QUEUE_FULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 			mb();/*ditto*/
 			spin_unlock_irq(&pm8001_ha->lock);
 			t->task_done(t);
 			spin_lock_irq(&pm8001_ha->lock);
+=======
+			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
 >>>>>>> v3.18
@@ -2322,11 +2439,15 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 			ts->resp = SAS_TASK_UNDELIVERED;
 			ts->stat = SAS_QUEUE_FULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 			mb();/* ditto*/
 			spin_unlock_irq(&pm8001_ha->lock);
 			t->task_done(t);
 			spin_lock_irq(&pm8001_ha->lock);
+=======
+			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
 >>>>>>> v3.18
@@ -2393,11 +2514,15 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 			ts->resp = SAS_TASK_UNDELIVERED;
 			ts->stat = SAS_QUEUE_FULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 			mb();/*ditto*/
 			spin_unlock_irq(&pm8001_ha->lock);
 			t->task_done(t);
 			spin_lock_irq(&pm8001_ha->lock);
+=======
+			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
 >>>>>>> v3.18
@@ -2421,11 +2546,15 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 			ts->resp = SAS_TASK_UNDELIVERED;
 			ts->stat = SAS_QUEUE_FULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 			mb();/*ditto*/
 			spin_unlock_irq(&pm8001_ha->lock);
 			t->task_done(t);
 			spin_lock_irq(&pm8001_ha->lock);
+=======
+			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
 >>>>>>> v3.18
@@ -2458,6 +2587,7 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 			t, status, ts->resp, ts->stat));
 		pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (t->uldd_task) {
 		spin_unlock_irqrestore(&t->task_state_lock, flags);
 		pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
@@ -2472,6 +2602,11 @@ mpi_sata_completion(struct pm8001_hba_info *pm8001_ha, void *piomb)
 		spin_unlock_irq(&pm8001_ha->lock);
 		t->task_done(t);
 		spin_lock_irq(&pm8001_ha->lock);
+=======
+	} else {
+		spin_unlock_irqrestore(&t->task_state_lock, flags);
+		pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 	} else {
 		spin_unlock_irqrestore(&t->task_state_lock, flags);
@@ -2589,11 +2724,15 @@ static void mpi_sata_event(struct pm8001_hba_info *pm8001_ha , void *piomb)
 			ts->resp = SAS_TASK_COMPLETE;
 			ts->stat = SAS_QUEUE_FULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 			mb();/*ditto*/
 			spin_unlock_irq(&pm8001_ha->lock);
 			t->task_done(t);
 			spin_lock_irq(&pm8001_ha->lock);
+=======
+			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 			pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
 >>>>>>> v3.18
@@ -2719,6 +2858,7 @@ static void mpi_sata_event(struct pm8001_hba_info *pm8001_ha , void *piomb)
 			t, event, ts->resp, ts->stat));
 		pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (t->uldd_task) {
 		spin_unlock_irqrestore(&t->task_state_lock, flags);
 		pm8001_ccb_task_free(pm8001_ha, t, ccb, tag);
@@ -2733,6 +2873,11 @@ static void mpi_sata_event(struct pm8001_hba_info *pm8001_ha , void *piomb)
 		spin_unlock_irq(&pm8001_ha->lock);
 		t->task_done(t);
 		spin_lock_irq(&pm8001_ha->lock);
+=======
+	} else {
+		spin_unlock_irqrestore(&t->task_state_lock, flags);
+		pm8001_ccb_task_free_done(pm8001_ha, t, ccb, tag);
+>>>>>>> v3.18
 =======
 	} else {
 		spin_unlock_irqrestore(&t->task_state_lock, flags);
@@ -3023,6 +3168,10 @@ hw_event_sas_phy_up(struct pm8001_hba_info *pm8001_ha, void *piomb)
 	u8 deviceType = pPayload->sas_identify.dev_type;
 	port->port_state = portstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phy->phy_state = PHY_STATE_LINK_UP_SPCV;
+>>>>>>> v3.18
 =======
 	phy->phy_state = PHY_STATE_LINK_UP_SPCV;
 >>>>>>> v3.18
@@ -3111,6 +3260,10 @@ hw_event_sata_phy_up(struct pm8001_hba_info *pm8001_ha, void *piomb)
 
 	port->port_state = portstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phy->phy_state = PHY_STATE_LINK_UP_SPCV;
+>>>>>>> v3.18
 =======
 	phy->phy_state = PHY_STATE_LINK_UP_SPCV;
 >>>>>>> v3.18
@@ -3545,10 +3698,13 @@ static int mpi_set_phy_profile_resp(struct pm8001_hba_info *pm8001_ha,
 			void *piomb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PM8001_MSG_DBG(pm8001_ha,
 			pm8001_printk(" pm80xx_addition_functionality\n"));
 
 =======
+=======
+>>>>>>> v3.18
 	u8 page_code;
 	struct set_phy_profile_resp *pPayload =
 		(struct set_phy_profile_resp *)(piomb + 4);
@@ -3570,6 +3726,9 @@ static int mpi_set_phy_profile_resp(struct pm8001_hba_info *pm8001_ha,
 			return -1;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -3670,7 +3829,11 @@ static void process_one_iomb(struct pm8001_hba_info *pm8001_ha, void *piomb)
 	case OPC_OUB_DEREG_DEV:
 		PM8001_MSG_DBG(pm8001_ha,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm8001_printk("unresgister the deviece\n"));
+=======
+			pm8001_printk("unregister the device\n"));
+>>>>>>> v3.18
 =======
 			pm8001_printk("unregister the device\n"));
 >>>>>>> v3.18
@@ -3954,8 +4117,11 @@ static int pm80xx_chip_smp_req(struct pm8001_hba_info *pm8001_ha,
 		pm8001_ha->smp_exp_mode = SMP_INDIRECT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* DIRECT MODE support only in spcv/ve */
 	pm8001_ha->smp_exp_mode = SMP_DIRECT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3974,7 +4140,11 @@ static int pm80xx_chip_smp_req(struct pm8001_hba_info *pm8001_ha,
 		smp_cmd.long_smp_req.long_req_addr =
 			cpu_to_le64((u64)sg_dma_address
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(&task->smp_task.smp_req) - 4);
+=======
+				(&task->smp_task.smp_req) + 4);
+>>>>>>> v3.18
 =======
 				(&task->smp_task.smp_req) + 4);
 >>>>>>> v3.18
@@ -4022,12 +4192,18 @@ static int pm80xx_chip_smp_req(struct pm8001_hba_info *pm8001_ha,
 	build_smp_cmd(pm8001_dev->device_id, smp_cmd.tag,
 				&smp_cmd, pm8001_ha->smp_exp_mode, length);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, (u32 *)&smp_cmd, 0);
 =======
+=======
+>>>>>>> v3.18
 	rc = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc,
 					(u32 *)&smp_cmd, 0);
 	if (rc)
 		goto err_out_2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -4043,9 +4219,15 @@ err_out:
 static int check_enc_sas_cmd(struct sas_task *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((task->ssp_task.cdb[0] == READ_10)
 		|| (task->ssp_task.cdb[0] == WRITE_10)
 		|| (task->ssp_task.cdb[0] == WRITE_VERIFY))
+=======
+	u8 cmd = task->ssp_task.cmd->cmnd[0];
+
+	if (cmd == READ_10 || cmd == WRITE_10 || cmd == WRITE_VERIFY)
+>>>>>>> v3.18
 =======
 	u8 cmd = task->ssp_task.cmd->cmnd[0];
 
@@ -4094,15 +4276,21 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 	u32 tag = ccb->ccb_tag;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 phys_addr;
 	struct inbound_queue_table *circularQ;
 	static u32 inb;
 	static u32 outb;
 =======
+=======
+>>>>>>> v3.18
 	u64 phys_addr, start_addr, end_addr;
 	u32 end_addr_high, end_addr_low;
 	struct inbound_queue_table *circularQ;
 	u32 q_index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 opc = OPC_INB_SSPINIIOSTART;
 	memset(&ssp_cmd, 0, sizeof(ssp_cmd));
@@ -4121,13 +4309,19 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 	ssp_cmd.ssp_iu.efb_prio_attr |= (task->ssp_task.task_prio << 3);
 	ssp_cmd.ssp_iu.efb_prio_attr |= (task->ssp_task.task_attr & 7);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(ssp_cmd.ssp_iu.cdb, task->ssp_task.cdb, 16);
 	circularQ = &pm8001_ha->inbnd_q_tbl[0];
 =======
+=======
+>>>>>>> v3.18
 	memcpy(ssp_cmd.ssp_iu.cdb, task->ssp_task.cmd->cmnd,
 		       task->ssp_task.cmd->cmd_len);
 	q_index = (u32) (pm8001_dev->id & 0x00ffffff) % PM8001_MAX_INB_NUM;
 	circularQ = &pm8001_ha->inbnd_q_tbl[q_index];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check if encryption is set */
@@ -4136,7 +4330,11 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 		PM8001_IO_DBG(pm8001_ha, pm8001_printk(
 			"Encryption enabled.Sending Encrypt SAS command 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			task->ssp_task.cdb[0]));
+=======
+			task->ssp_task.cmd->cmnd[0]));
+>>>>>>> v3.18
 =======
 			task->ssp_task.cmd->cmnd[0]));
 >>>>>>> v3.18
@@ -4165,7 +4363,10 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 			ssp_cmd.enc_len = cpu_to_le32(task->total_xfer_len);
 			ssp_cmd.enc_esgl = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Check 4G Boundary */
 			start_addr = cpu_to_le64(dma_addr);
 			end_addr = (start_addr + ssp_cmd.enc_len) - 1;
@@ -4190,6 +4391,9 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 					cpu_to_le32(upper_32_bits(phys_addr));
 				ssp_cmd.enc_esgl = cpu_to_le32(1<<31);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (task->num_scatter == 0) {
 			ssp_cmd.enc_addr_low = 0;
@@ -4201,6 +4405,7 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 		ssp_cmd.key_cmode = 0x6 << 4;
 		/* set tweak values. Should be the start lba */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ssp_cmd.twk_val0 = cpu_to_le32((task->ssp_task.cdb[2] << 24) |
 						(task->ssp_task.cdb[3] << 16) |
 						(task->ssp_task.cdb[4] << 8) |
@@ -4210,6 +4415,8 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 			"Sending Normal SAS command 0x%x inb q %x\n",
 			task->ssp_task.cdb[0], inb));
 =======
+=======
+>>>>>>> v3.18
 		ssp_cmd.twk_val0 = cpu_to_le32((task->ssp_task.cmd->cmnd[2] << 24) |
 						(task->ssp_task.cmd->cmnd[3] << 16) |
 						(task->ssp_task.cmd->cmnd[4] << 8) |
@@ -4218,6 +4425,9 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 		PM8001_IO_DBG(pm8001_ha, pm8001_printk(
 			"Sending Normal SAS command 0x%x inb q %x\n",
 			task->ssp_task.cmd->cmnd[0], q_index));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* fill in PRD (scatter/gather) table, if any */
 		if (task->num_scatter > 1) {
@@ -4238,7 +4448,10 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 			ssp_cmd.len = cpu_to_le32(task->total_xfer_len);
 			ssp_cmd.esgl = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Check 4G Boundary */
 			start_addr = cpu_to_le64(dma_addr);
 			end_addr = (start_addr + ssp_cmd.len) - 1;
@@ -4263,6 +4476,9 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 					cpu_to_le32(upper_32_bits(phys_addr));
 				ssp_cmd.esgl = cpu_to_le32(1<<31);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (task->num_scatter == 0) {
 			ssp_cmd.addr_low = 0;
@@ -4272,11 +4488,17 @@ static int pm80xx_chip_ssp_io_req(struct pm8001_hba_info *pm8001_ha,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &ssp_cmd, outb++);
 
 	/* rotate the outb queue */
 	outb = outb%PM8001_MAX_SPCV_OUTB_NUM;
 
+=======
+	q_index = (u32) (pm8001_dev->id & 0x00ffffff) % PM8001_MAX_OUTB_NUM;
+	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc,
+						&ssp_cmd, q_index);
+>>>>>>> v3.18
 =======
 	q_index = (u32) (pm8001_dev->id & 0x00ffffff) % PM8001_MAX_OUTB_NUM;
 	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc,
@@ -4294,17 +4516,23 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 	u32 tag = ccb->ccb_tag;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static u32 inb;
 	static u32 outb;
 	struct sata_start_req sata_cmd;
 	u32 hdr_tag, ncg_tag = 0;
 	u64 phys_addr;
 =======
+=======
+>>>>>>> v3.18
 	u32 q_index;
 	struct sata_start_req sata_cmd;
 	u32 hdr_tag, ncg_tag = 0;
 	u64 phys_addr, start_addr, end_addr;
 	u32 end_addr_high, end_addr_low;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 ATAP = 0x0;
 	u32 dir;
@@ -4313,7 +4541,12 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 	u32 opc = OPC_INB_SATA_HOST_OPSTART;
 	memset(&sata_cmd, 0, sizeof(sata_cmd));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	circularQ = &pm8001_ha->inbnd_q_tbl[0];
+=======
+	q_index = (u32) (pm8001_ha_dev->id & 0x00ffffff) % PM8001_MAX_INB_NUM;
+	circularQ = &pm8001_ha->inbnd_q_tbl[q_index];
+>>>>>>> v3.18
 =======
 	q_index = (u32) (pm8001_ha_dev->id & 0x00ffffff) % PM8001_MAX_INB_NUM;
 	circularQ = &pm8001_ha->inbnd_q_tbl[q_index];
@@ -4379,7 +4612,10 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 			sata_cmd.enc_len = cpu_to_le32(task->total_xfer_len);
 			sata_cmd.enc_esgl = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Check 4G Boundary */
 			start_addr = cpu_to_le64(dma_addr);
 			end_addr = (start_addr + sata_cmd.enc_len) - 1;
@@ -4405,6 +4641,9 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 				sata_cmd.enc_esgl =
 					cpu_to_le32(1 << 31);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (task->num_scatter == 0) {
 			sata_cmd.enc_addr_low = 0;
@@ -4427,7 +4666,11 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 		PM8001_IO_DBG(pm8001_ha, pm8001_printk(
 			"Sending Normal SATA command 0x%x inb %x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sata_cmd.sata_fis.command, inb));
+=======
+			sata_cmd.sata_fis.command, q_index));
+>>>>>>> v3.18
 =======
 			sata_cmd.sata_fis.command, q_index));
 >>>>>>> v3.18
@@ -4452,7 +4695,10 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 			sata_cmd.len = cpu_to_le32(task->total_xfer_len);
 			sata_cmd.esgl = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Check 4G Boundary */
 			start_addr = cpu_to_le64(dma_addr);
 			end_addr = (start_addr + sata_cmd.len) - 1;
@@ -4477,6 +4723,9 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 					upper_32_bits(phys_addr);
 				sata_cmd.esgl = cpu_to_le32(1 << 31);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (task->num_scatter == 0) {
 			sata_cmd.addr_low = 0;
@@ -4534,6 +4783,7 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 				pm8001_ccb_task_free(pm8001_ha, task, ccb, tag);
 				return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (task->uldd_task) {
 				spin_unlock_irqrestore(&task->task_state_lock,
 							flags);
@@ -4552,16 +4802,22 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 				task->task_done(task);
 				spin_lock_irq(&pm8001_ha->lock);
 =======
+=======
+>>>>>>> v3.18
 			} else {
 				spin_unlock_irqrestore(&task->task_state_lock,
 							flags);
 				pm8001_ccb_task_free_done(pm8001_ha, task,
 								ccb, tag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return 0;
 			}
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc,
@@ -4569,6 +4825,11 @@ static int pm80xx_chip_sata_req(struct pm8001_hba_info *pm8001_ha,
 
 	/* rotate the outb queue */
 	outb = outb%PM8001_MAX_SPCV_OUTB_NUM;
+=======
+	q_index = (u32) (pm8001_ha_dev->id & 0x00ffffff) % PM8001_MAX_OUTB_NUM;
+	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc,
+						&sata_cmd, q_index);
+>>>>>>> v3.18
 =======
 	q_index = (u32) (pm8001_ha_dev->id & 0x00ffffff) % PM8001_MAX_OUTB_NUM;
 	ret = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc,
@@ -4605,10 +4866,13 @@ pm80xx_chip_phy_start_req(struct pm8001_hba_info *pm8001_ha, u8 phy_id)
 	 ** [15] ob no change in current PHY analig setup 1b enable using SPAST
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	payload.ase_sh_lm_slr_phyid = cpu_to_le32(SPINHOLD_DISABLE |
 			LINKMODE_AUTO | LINKRATE_15 |
 			LINKRATE_30 | LINKRATE_60 | phy_id);
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_SPCV_12G(pm8001_ha->pdev))
 		payload.ase_sh_lm_slr_phyid = cpu_to_le32(SPINHOLD_DISABLE |
 				LINKMODE_AUTO | LINKRATE_15 |
@@ -4619,6 +4883,9 @@ pm80xx_chip_phy_start_req(struct pm8001_hba_info *pm8001_ha, u8 phy_id)
 				LINKRATE_30 | LINKRATE_60 | LINKRATE_120 |
 				phy_id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* SSC Disable and SAS Analog ST configuration */
 	/**
@@ -4724,6 +4991,11 @@ static int pm80xx_chip_reg_dev_req(struct pm8001_hba_info *pm8001_ha,
 
 	rc = pm8001_mpi_build_cmd(pm8001_ha, circularQ, opc, &payload, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (rc)
+		pm8001_tag_free(pm8001_ha, tag);
+>>>>>>> v3.18
 =======
 	if (rc)
 		pm8001_tag_free(pm8001_ha, tag);
@@ -4784,7 +5056,10 @@ pm80xx_chip_isr(struct pm8001_hba_info *pm8001_ha, u8 vec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void mpi_set_phy_profile_req(struct pm8001_hba_info *pm8001_ha,
 	u32 operation, u32 phyid, u32 length, u32 *buf)
 {
@@ -4826,6 +5101,9 @@ void pm8001_set_phy_profile(struct pm8001_hba_info *pm8001_ha,
 	}
 	PM8001_INIT_DBG(pm8001_ha, pm8001_printk("phy settings completed\n"));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const struct pm8001_dispatch pm8001_80xx_dispatch = {
 	.name			= "pmc80xx",

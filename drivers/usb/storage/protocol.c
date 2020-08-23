@@ -136,6 +136,7 @@ unsigned int usb_stor_access_xfer_buf(unsigned char *buffer,
 	unsigned int *offset, enum xfer_buf_dir dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int cnt;
 	struct scatterlist *sg = *sgptr;
 
@@ -200,6 +201,8 @@ unsigned int usb_stor_access_xfer_buf(unsigned char *buffer,
 
 	/* Return the amount actually transferred */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int cnt = 0;
 	struct scatterlist *sg = *sgptr;
 	struct sg_mapping_iter miter;
@@ -236,6 +239,9 @@ unsigned int usb_stor_access_xfer_buf(unsigned char *buffer,
 	}
 	sg_miter_stop(&miter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return cnt;
 }

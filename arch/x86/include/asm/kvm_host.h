@@ -51,11 +51,15 @@
 			  | X86_CR0_NW | X86_CR0_CD | X86_CR0_PG))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CR3_PAE_RESERVED_BITS ((X86_CR3_PWT | X86_CR3_PCD) - 1)
 #define CR3_NONPAE_RESERVED_BITS ((PAGE_SIZE-1) & ~(X86_CR3_PWT | X86_CR3_PCD))
 #define CR3_PCID_ENABLED_RESERVED_BITS 0xFFFFFF0000000000ULL
 #define CR3_L_MODE_RESERVED_BITS (CR3_NONPAE_RESERVED_BITS |	\
 				  0xFFFFFF0000000000ULL)
+=======
+#define CR3_L_MODE_RESERVED_BITS 0xFFFFFF0000000000ULL
+>>>>>>> v3.18
 =======
 #define CR3_L_MODE_RESERVED_BITS 0xFFFFFF0000000000ULL
 >>>>>>> v3.18
@@ -65,7 +69,11 @@
 			  | X86_CR4_PGE | X86_CR4_PCE | X86_CR4_OSFXSR | X86_CR4_PCIDE \
 			  | X86_CR4_OSXSAVE | X86_CR4_SMEP | X86_CR4_FSGSBASE \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  | X86_CR4_OSXMMEXCPT | X86_CR4_VMXE))
+=======
+			  | X86_CR4_OSXMMEXCPT | X86_CR4_VMXE | X86_CR4_SMAP))
+>>>>>>> v3.18
 =======
 			  | X86_CR4_OSXMMEXCPT | X86_CR4_VMXE | X86_CR4_SMAP))
 >>>>>>> v3.18
@@ -112,10 +120,13 @@ static inline gfn_t gfn_to_index(gfn_t gfn, gfn_t base_gfn, int level)
 #define ASYNC_PF_PER_VCPU 64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kvm_vcpu;
 struct kvm;
 struct kvm_async_pf;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum kvm_reg {
@@ -146,7 +157,10 @@ enum kvm_reg_ex {
 	VCPU_EXREG_CR3,
 	VCPU_EXREG_RFLAGS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VCPU_EXREG_CPL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	VCPU_EXREG_SEGMENTS,
@@ -172,13 +186,19 @@ enum {
 #define DR6_BD		(1 << 13)
 #define DR6_BS		(1 << 14)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DR6_FIXED_1	0xffff0ff0
 #define DR6_VOLATILE	0x0000e00f
 =======
+=======
+>>>>>>> v3.18
 #define DR6_RTM		(1 << 16)
 #define DR6_FIXED_1	0xfffe0ff0
 #define DR6_INIT	0xffff0ff0
 #define DR6_VOLATILE	0x0001e00f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DR7_BP_EN_MASK	0x000000ff
@@ -186,7 +206,11 @@ enum {
 #define DR7_GD		(1 << 13)
 #define DR7_FIXED_1	0x00000400
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DR7_VOLATILE	0xffff23ff
+=======
+#define DR7_VOLATILE	0xffff2bff
+>>>>>>> v3.18
 =======
 #define DR7_VOLATILE	0xffff2bff
 >>>>>>> v3.18
@@ -255,6 +279,7 @@ struct kvm_mmu_page {
 	unsigned int unsync_children;
 	unsigned long parent_ptes;	/* Reverse mapping for parent_pte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_BITMAP(unsync_child_bitmap, 512);
 
 #ifdef CONFIG_X86_32
@@ -264,6 +289,8 @@ struct kvm_mmu_page {
 	int write_flooding_count;
 	bool mmio_cached;
 =======
+=======
+>>>>>>> v3.18
 
 	/* The page is obsolete if mmu_valid_gen != kvm->arch.mmu_valid_gen.  */
 	unsigned long mmu_valid_gen;
@@ -280,6 +307,9 @@ struct kvm_mmu_page {
 
 	/* Number of writes since the last time traversal visited this page.  */
 	int write_flooding_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -297,7 +327,10 @@ struct kvm_pio_request {
  */
 struct kvm_mmu {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*new_cr3)(struct kvm_vcpu *vcpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*set_cr3)(struct kvm_vcpu *vcpu, unsigned long root);
@@ -308,15 +341,21 @@ struct kvm_mmu {
 	void (*inject_page_fault)(struct kvm_vcpu *vcpu,
 				  struct x86_exception *fault);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*free)(struct kvm_vcpu *vcpu);
 	gpa_t (*gva_to_gpa)(struct kvm_vcpu *vcpu, gva_t gva, u32 access,
 			    struct x86_exception *exception);
 	gpa_t (*translate_gpa)(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access);
 =======
+=======
+>>>>>>> v3.18
 	gpa_t (*gva_to_gpa)(struct kvm_vcpu *vcpu, gva_t gva, u32 access,
 			    struct x86_exception *exception);
 	gpa_t (*translate_gpa)(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access,
 			       struct x86_exception *exception);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*sync_page)(struct kvm_vcpu *vcpu,
 			 struct kvm_mmu_page *sp);
@@ -340,6 +379,10 @@ struct kvm_mmu {
 	u64 *lm_root;
 	u64 rsvd_bits_mask[2][4];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 bad_mt_xwr;
+>>>>>>> v3.18
 =======
 	u64 bad_mt_xwr;
 >>>>>>> v3.18
@@ -381,6 +424,10 @@ struct kvm_pmu {
 	u64 counter_bitmask[2];
 	u64 global_ctrl_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 reserved_bits;
+>>>>>>> v3.18
 =======
 	u64 reserved_bits;
 >>>>>>> v3.18
@@ -392,12 +439,18 @@ struct kvm_pmu {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	KVM_DEBUGREG_BP_ENABLED = 1,
 	KVM_DEBUGREG_WONT_EXIT = 2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kvm_vcpu_arch {
 	/*
@@ -457,6 +510,11 @@ struct kvm_vcpu_arch {
 	struct fpu guest_fpu;
 	u64 xcr0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 guest_supported_xcr0;
+	u32 guest_xstate_size;
+>>>>>>> v3.18
 =======
 	u64 guest_supported_xcr0;
 	u32 guest_xstate_size;
@@ -510,7 +568,10 @@ struct kvm_vcpu_arch {
 
 	u64 last_guest_tsc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 last_kernel_ns;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 last_host_tsc;
@@ -518,7 +579,11 @@ struct kvm_vcpu_arch {
 	u64 this_tsc_nsec;
 	u64 this_tsc_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  this_tsc_generation;
+=======
+	u64 this_tsc_generation;
+>>>>>>> v3.18
 =======
 	u64 this_tsc_generation;
 >>>>>>> v3.18
@@ -537,7 +602,11 @@ struct kvm_vcpu_arch {
 	u64 pat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int switch_db_regs;
+=======
+	unsigned switch_db_regs;
+>>>>>>> v3.18
 =======
 	unsigned switch_db_regs;
 >>>>>>> v3.18
@@ -598,7 +667,10 @@ struct kvm_vcpu_arch {
 	 */
 	bool write_fault_to_shadow_pgtable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* set at EPT violation at this point */
 	unsigned long exit_qualification;
@@ -607,6 +679,9 @@ struct kvm_vcpu_arch {
 	struct {
 		bool pv_unhalted;
 	} pv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -635,6 +710,10 @@ struct kvm_arch {
 	unsigned int n_max_mmu_pages;
 	unsigned int indirect_shadow_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long mmu_valid_gen;
+>>>>>>> v3.18
 =======
 	unsigned long mmu_valid_gen;
 >>>>>>> v3.18
@@ -644,6 +723,7 @@ struct kvm_arch {
 	 */
 	struct list_head active_mmu_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head assigned_dev_head;
 	struct iommu_domain *iommu_domain;
 	int iommu_flags;
@@ -652,6 +732,8 @@ struct kvm_arch {
 	struct kvm_pit *vpit;
 	atomic_t vapics_in_nmi_mode;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head zapped_obsolete_pages;
 
 	struct list_head assigned_dev_head;
@@ -663,11 +745,15 @@ struct kvm_arch {
 	struct kvm_ioapic *vioapic;
 	struct kvm_pit *vpit;
 	int vapics_in_nmi_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex apic_map_lock;
 	struct kvm_apic_map *apic_map;
 
 	unsigned int tss_addr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct page *apic_access_page;
 
@@ -675,10 +761,15 @@ struct kvm_arch {
 
 	struct page *ept_identity_pagetable;
 =======
+=======
+>>>>>>> v3.18
 	bool apic_access_page_done;
 
 	gpa_t wall_clock;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool ept_identity_pagetable_done;
 	gpa_t ept_identity_map_addr;
@@ -693,7 +784,11 @@ struct kvm_arch {
 	u64 cur_tsc_write;
 	u64 cur_tsc_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  cur_tsc_generation;
+=======
+	u64 cur_tsc_generation;
+>>>>>>> v3.18
 =======
 	u64 cur_tsc_generation;
 >>>>>>> v3.18
@@ -704,6 +799,11 @@ struct kvm_arch {
 	u64 master_kernel_ns;
 	cycle_t master_cycle_now;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct delayed_work kvmclock_update_work;
+	struct delayed_work kvmclock_sync_work;
+>>>>>>> v3.18
 =======
 	struct delayed_work kvmclock_update_work;
 	struct delayed_work kvmclock_sync_work;
@@ -715,6 +815,10 @@ struct kvm_arch {
 	u64 hv_guest_os_id;
 	u64 hv_hypercall;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 hv_tsc_page;
+>>>>>>> v3.18
 =======
 	u64 hv_tsc_page;
 >>>>>>> v3.18
@@ -775,8 +879,13 @@ struct kvm_x86_ops {
 	int (*cpu_has_kvm_support)(void);          /* __init */
 	int (*disabled_by_bios)(void);             /* __init */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*hardware_enable)(void *dummy);
 	void (*hardware_disable)(void *dummy);
+=======
+	int (*hardware_enable)(void);
+	void (*hardware_disable)(void);
+>>>>>>> v3.18
 =======
 	int (*hardware_enable)(void);
 	void (*hardware_disable)(void);
@@ -818,6 +927,12 @@ struct kvm_x86_ops {
 	void (*get_gdt)(struct kvm_vcpu *vcpu, struct desc_ptr *dt);
 	void (*set_gdt)(struct kvm_vcpu *vcpu, struct desc_ptr *dt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 (*get_dr6)(struct kvm_vcpu *vcpu);
+	void (*set_dr6)(struct kvm_vcpu *vcpu, unsigned long value);
+	void (*sync_dirty_debug_regs)(struct kvm_vcpu *vcpu);
+>>>>>>> v3.18
 =======
 	u64 (*get_dr6)(struct kvm_vcpu *vcpu);
 	void (*set_dr6)(struct kvm_vcpu *vcpu, unsigned long value);
@@ -828,7 +943,10 @@ struct kvm_x86_ops {
 	unsigned long (*get_rflags)(struct kvm_vcpu *vcpu);
 	void (*set_rflags)(struct kvm_vcpu *vcpu, unsigned long rflags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*fpu_activate)(struct kvm_vcpu *vcpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*fpu_deactivate)(struct kvm_vcpu *vcpu);
@@ -840,7 +958,11 @@ struct kvm_x86_ops {
 	void (*skip_emulated_instruction)(struct kvm_vcpu *vcpu);
 	void (*set_interrupt_shadow)(struct kvm_vcpu *vcpu, int mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 (*get_interrupt_shadow)(struct kvm_vcpu *vcpu, int mask);
+=======
+	u32 (*get_interrupt_shadow)(struct kvm_vcpu *vcpu);
+>>>>>>> v3.18
 =======
 	u32 (*get_interrupt_shadow)(struct kvm_vcpu *vcpu);
 >>>>>>> v3.18
@@ -857,8 +979,13 @@ struct kvm_x86_ops {
 	bool (*get_nmi_mask)(struct kvm_vcpu *vcpu);
 	void (*set_nmi_mask)(struct kvm_vcpu *vcpu, bool masked);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*enable_nmi_window)(struct kvm_vcpu *vcpu);
 	int (*enable_irq_window)(struct kvm_vcpu *vcpu);
+=======
+	void (*enable_nmi_window)(struct kvm_vcpu *vcpu);
+	void (*enable_irq_window)(struct kvm_vcpu *vcpu);
+>>>>>>> v3.18
 =======
 	void (*enable_nmi_window)(struct kvm_vcpu *vcpu);
 	void (*enable_irq_window)(struct kvm_vcpu *vcpu);
@@ -870,6 +997,10 @@ struct kvm_x86_ops {
 	void (*load_eoi_exitmap)(struct kvm_vcpu *vcpu, u64 *eoi_exit_bitmap);
 	void (*set_virtual_x2apic_mode)(struct kvm_vcpu *vcpu, bool set);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*set_apic_access_page_addr)(struct kvm_vcpu *vcpu, hpa_t hpa);
+>>>>>>> v3.18
 =======
 	void (*set_apic_access_page_addr)(struct kvm_vcpu *vcpu, hpa_t hpa);
 >>>>>>> v3.18
@@ -903,12 +1034,18 @@ struct kvm_x86_ops {
 			       enum x86_intercept_stage stage);
 	void (*handle_external_intr)(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool (*mpx_supported)(void);
 
 	int (*check_nested_events)(struct kvm_vcpu *vcpu, bool external_intr);
 
 	void (*sched_in)(struct kvm_vcpu *kvm, int cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -938,17 +1075,23 @@ void kvm_mmu_module_exit(void);
 void kvm_mmu_destroy(struct kvm_vcpu *vcpu);
 int kvm_mmu_create(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_mmu_setup(struct kvm_vcpu *vcpu);
 void kvm_mmu_set_mask_ptes(u64 user_mask, u64 accessed_mask,
 		u64 dirty_mask, u64 nx_mask, u64 x_mask);
 
 int kvm_mmu_reset_context(struct kvm_vcpu *vcpu);
 =======
+=======
+>>>>>>> v3.18
 void kvm_mmu_setup(struct kvm_vcpu *vcpu);
 void kvm_mmu_set_mask_ptes(u64 user_mask, u64 accessed_mask,
 		u64 dirty_mask, u64 nx_mask, u64 x_mask);
 
 void kvm_mmu_reset_context(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvm_mmu_slot_remove_write_access(struct kvm *kvm, int slot);
 void kvm_mmu_write_protect_pt_masked(struct kvm *kvm,
@@ -956,7 +1099,11 @@ void kvm_mmu_write_protect_pt_masked(struct kvm *kvm,
 				     gfn_t gfn_offset, unsigned long mask);
 void kvm_mmu_zap_all(struct kvm *kvm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_mmu_zap_mmio_sptes(struct kvm *kvm);
+=======
+void kvm_mmu_invalidate_mmio_sptes(struct kvm *kvm);
+>>>>>>> v3.18
 =======
 void kvm_mmu_invalidate_mmio_sptes(struct kvm *kvm);
 >>>>>>> v3.18
@@ -982,8 +1129,13 @@ extern u32  kvm_max_guest_tsc_khz;
 
 enum emulation_result {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EMULATE_DONE,       /* no further processing */
 	EMULATE_DO_MMIO,      /* kvm_run filled with mmio request */
+=======
+	EMULATE_DONE,         /* no further processing */
+	EMULATE_USER_EXIT,    /* kvm_run ready for userspace exit */
+>>>>>>> v3.18
 =======
 	EMULATE_DONE,         /* no further processing */
 	EMULATE_USER_EXIT,    /* kvm_run ready for userspace exit */
@@ -1051,7 +1203,10 @@ int kvm_read_guest_page_mmu(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 			    gfn_t gfn, void *data, int offset, int len,
 			    u32 access);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_propagate_fault(struct kvm_vcpu *vcpu, struct x86_exception *fault);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool kvm_require_cpl(struct kvm_vcpu *vcpu, int required_cpl);
@@ -1076,7 +1231,10 @@ void kvm_inject_nmi(struct kvm_vcpu *vcpu);
 int fx_init(struct kvm_vcpu *vcpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_mmu_flush_tlb(struct kvm_vcpu *vcpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void kvm_mmu_pte_write(struct kvm_vcpu *vcpu, gpa_t gpa,
@@ -1088,7 +1246,12 @@ int kvm_mmu_load(struct kvm_vcpu *vcpu);
 void kvm_mmu_unload(struct kvm_vcpu *vcpu);
 void kvm_mmu_sync_roots(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 gpa_t translate_nested_gpa(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access);
+=======
+gpa_t translate_nested_gpa(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access,
+			   struct x86_exception *exception);
+>>>>>>> v3.18
 =======
 gpa_t translate_nested_gpa(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access,
 			   struct x86_exception *exception);
@@ -1108,6 +1271,10 @@ int kvm_mmu_page_fault(struct kvm_vcpu *vcpu, gva_t gva, u32 error_code,
 		       void *insn, int insn_len);
 void kvm_mmu_invlpg(struct kvm_vcpu *vcpu, gva_t gva);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void kvm_mmu_new_cr3(struct kvm_vcpu *vcpu);
+>>>>>>> v3.18
 =======
 void kvm_mmu_new_cr3(struct kvm_vcpu *vcpu);
 >>>>>>> v3.18
@@ -1116,10 +1283,15 @@ void kvm_enable_tdp(void);
 void kvm_disable_tdp(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int complete_pio(struct kvm_vcpu *vcpu);
 bool kvm_check_iopl(struct kvm_vcpu *vcpu);
 
 static inline gpa_t translate_gpa(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access)
+=======
+static inline gpa_t translate_gpa(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access,
+				  struct x86_exception *exception)
+>>>>>>> v3.18
 =======
 static inline gpa_t translate_gpa(struct kvm_vcpu *vcpu, gpa_t gpa, u32 access,
 				  struct x86_exception *exception)
@@ -1229,7 +1401,11 @@ asmlinkage void kvm_spurious_fault(void);
 int kvm_unmap_hva(struct kvm *kvm, unsigned long hva);
 int kvm_unmap_hva_range(struct kvm *kvm, unsigned long start, unsigned long end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_age_hva(struct kvm *kvm, unsigned long hva);
+=======
+int kvm_age_hva(struct kvm *kvm, unsigned long start, unsigned long end);
+>>>>>>> v3.18
 =======
 int kvm_age_hva(struct kvm *kvm, unsigned long start, unsigned long end);
 >>>>>>> v3.18
@@ -1242,6 +1418,12 @@ int kvm_arch_interrupt_allowed(struct kvm_vcpu *vcpu);
 int kvm_cpu_get_interrupt(struct kvm_vcpu *v);
 void kvm_vcpu_reset(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void kvm_vcpu_reload_apic_access_page(struct kvm_vcpu *vcpu);
+void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
+					   unsigned long address);
+>>>>>>> v3.18
 =======
 void kvm_vcpu_reload_apic_access_page(struct kvm_vcpu *vcpu);
 void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
@@ -1274,6 +1456,10 @@ bool kvm_pmu_msr(struct kvm_vcpu *vcpu, u32 msr);
 int kvm_pmu_get_msr(struct kvm_vcpu *vcpu, u32 msr, u64 *data);
 int kvm_pmu_set_msr(struct kvm_vcpu *vcpu, struct msr_data *msr_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int kvm_pmu_check_pmc(struct kvm_vcpu *vcpu, unsigned pmc);
+>>>>>>> v3.18
 =======
 int kvm_pmu_check_pmc(struct kvm_vcpu *vcpu, unsigned pmc);
 >>>>>>> v3.18

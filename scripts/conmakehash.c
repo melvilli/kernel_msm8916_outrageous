@@ -105,7 +105,11 @@ int main(int argc, char *argv[])
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /* For now we assume the default font is always 256 characters. */    
+=======
+  /* For now we assume the default font is always 256 characters. */
+>>>>>>> v3.18
 =======
   /* For now we assume the default font is always 256 characters. */
 >>>>>>> v3.18
@@ -241,9 +245,15 @@ int main(int argc, char *argv[])
 
   /* Okay, we hit EOF, now output hash table */
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   fclose(ctbl);
   
+=======
+
+  fclose(ctbl);
+
+>>>>>>> v3.18
 =======
 
   fclose(ctbl);
@@ -255,7 +265,11 @@ int main(int argc, char *argv[])
   for ( i = 0 ; i < fontlen ; i++ )
     nuni += unicount[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -283,9 +297,15 @@ u8 dfont_unicount[%d] = \n\
         printf(", ");
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   printf("\nu16 dfont_unitable[%d] = \n{\n\t", nuni);
   
+=======
+
+  printf("\nu16 dfont_unitable[%d] = \n{\n\t", nuni);
+
+>>>>>>> v3.18
 =======
 
   printf("\nu16 dfont_unitable[%d] = \n{\n\t", nuni);

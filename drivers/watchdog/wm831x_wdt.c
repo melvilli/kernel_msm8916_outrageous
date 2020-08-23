@@ -185,7 +185,11 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm831x_pdata *chip_pdata;
+=======
+	struct wm831x_pdata *chip_pdata = dev_get_platdata(pdev->dev.parent);
+>>>>>>> v3.18
 =======
 	struct wm831x_pdata *chip_pdata = dev_get_platdata(pdev->dev.parent);
 >>>>>>> v3.18
@@ -209,7 +213,10 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 				   GFP_KERNEL);
 	if (!driver_data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(wm831x->dev, "Unable to alloacate watchdog device\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;
@@ -239,6 +246,7 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 
 	/* Apply any configuration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.parent->platform_data) {
 		chip_pdata = pdev->dev.parent->platform_data;
 		pdata = chip_pdata->watchdog;
@@ -246,10 +254,15 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 		pdata = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (chip_pdata)
 		pdata = chip_pdata->watchdog;
 	else
 		pdata = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pdata) {
@@ -262,14 +275,20 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 
 		if (pdata->update_gpio) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = gpio_request_one(pdata->update_gpio,
 					       GPIOF_DIR_OUT | GPIOF_INIT_LOW,
 					       "Watchdog update");
 =======
+=======
+>>>>>>> v3.18
 			ret = devm_gpio_request_one(&pdev->dev,
 						pdata->update_gpio,
 						GPIOF_OUT_INIT_LOW,
 						"Watchdog update");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret < 0) {
 				dev_err(wm831x->dev,
@@ -292,7 +311,11 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 			dev_err(wm831x->dev,
 				"Failed to unlock security key: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_gpio;
+=======
+			goto err;
+>>>>>>> v3.18
 =======
 			goto err;
 >>>>>>> v3.18
@@ -303,6 +326,7 @@ static int wm831x_wdt_probe(struct platform_device *pdev)
 	if (ret != 0) {
 		dev_err(wm831x->dev, "watchdog_register_device() failed: %d\n",
 			ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_gpio;
 	}
@@ -315,6 +339,8 @@ err_gpio:
 	if (driver_data->update_gpio)
 		gpio_free(driver_data->update_gpio);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 	}
 
@@ -322,6 +348,9 @@ err_gpio:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err:
 	return ret;
@@ -329,6 +358,7 @@ err:
 
 static int wm831x_wdt_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct wm831x_wdt_drvdata *driver_data = dev_get_drvdata(&pdev->dev);
 
@@ -338,10 +368,15 @@ static int wm831x_wdt_remove(struct platform_device *pdev)
 		gpio_free(driver_data->update_gpio);
 
 =======
+=======
+>>>>>>> v3.18
 	struct wm831x_wdt_drvdata *driver_data = platform_get_drvdata(pdev);
 
 	watchdog_unregister_device(&driver_data->wdt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

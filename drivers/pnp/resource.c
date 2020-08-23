@@ -32,7 +32,11 @@ static int pnp_reserve_mem[16] = {[0 ... 15] = -1 };	/* reserve (don't use) some
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pnp_option *pnp_build_option(struct pnp_dev *dev, unsigned long type,
+=======
+static struct pnp_option *pnp_build_option(struct pnp_dev *dev, unsigned long type,
+>>>>>>> v3.18
 =======
 static struct pnp_option *pnp_build_option(struct pnp_dev *dev, unsigned long type,
 >>>>>>> v3.18
@@ -365,7 +369,11 @@ int pnp_check_irq(struct pnp_dev *dev, struct resource *res)
 
 	/* check if the resource is valid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*irq < 0 || *irq > 15)
+=======
+	if (*irq > 15)
+>>>>>>> v3.18
 =======
 	if (*irq > 15)
 >>>>>>> v3.18
@@ -394,7 +402,11 @@ int pnp_check_irq(struct pnp_dev *dev, struct resource *res)
 	if (!dev->active) {
 		if (request_irq(*irq, pnp_test_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IRQF_DISABLED | IRQF_PROBE_SHARED, "pnp", NULL))
+=======
+				IRQF_PROBE_SHARED, "pnp", NULL))
+>>>>>>> v3.18
 =======
 				IRQF_PROBE_SHARED, "pnp", NULL))
 >>>>>>> v3.18
@@ -437,7 +449,11 @@ int pnp_check_dma(struct pnp_dev *dev, struct resource *res)
 
 	/* check if the resource is valid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*dma < 0 || *dma == 4 || *dma > 7)
+=======
+	if (*dma == 4 || *dma > 7)
+>>>>>>> v3.18
 =======
 	if (*dma == 4 || *dma > 7)
 >>>>>>> v3.18
@@ -532,6 +548,10 @@ struct pnp_resource *pnp_add_resource(struct pnp_dev *dev,
 
 	pnp_res->res = *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pnp_res->res.name = dev->name;
+>>>>>>> v3.18
 =======
 	pnp_res->res.name = dev->name;
 >>>>>>> v3.18

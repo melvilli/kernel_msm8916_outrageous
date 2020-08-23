@@ -2,7 +2,11 @@
  * Secondary CPU startup routine source file.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2009 Texas Instruments, Inc.
+=======
+ * Copyright (C) 2009-2014 Texas Instruments, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2009-2014 Texas Instruments, Inc.
 >>>>>>> v3.18
@@ -25,8 +29,11 @@
 #include "omap44xx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Physical address needed since MMU not enabled yet on secondary core */
@@ -38,7 +45,11 @@
  * secondary core is held until we're ready for it to initialise.
  * The primary core will update this flag using a hardware
 <<<<<<< HEAD
+<<<<<<< HEAD
 + * register AuxCoreBoot0.
+=======
+ * register AuxCoreBoot0.
+>>>>>>> v3.18
 =======
  * register AuxCoreBoot0.
 >>>>>>> v3.18
@@ -53,7 +64,11 @@ wait:	ldr	r2, =AUX_CORE_BOOT0_PA	@ read from AuxCoreBoot0
 	bne	wait
 	b	secondary_startup
 <<<<<<< HEAD
+<<<<<<< HEAD
 END(omap5_secondary_startup)
+=======
+ENDPROC(omap5_secondary_startup)
+>>>>>>> v3.18
 =======
 ENDPROC(omap5_secondary_startup)
 >>>>>>> v3.18
@@ -65,7 +80,11 @@ ENDPROC(omap5_secondary_startup)
  * register AuxCoreBoot0.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(omap_secondary_startup)
+=======
+ENTRY(omap4_secondary_startup)
+>>>>>>> v3.18
 =======
 ENTRY(omap4_secondary_startup)
 >>>>>>> v3.18
@@ -84,9 +103,15 @@ hold:	ldr	r12,=0x103
 	 */
 	b	secondary_startup
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(omap_secondary_startup)
 
 ENTRY(omap_secondary_startup_4460)
+=======
+ENDPROC(omap4_secondary_startup)
+
+ENTRY(omap4460_secondary_startup)
+>>>>>>> v3.18
 =======
 ENDPROC(omap4_secondary_startup)
 
@@ -127,7 +152,11 @@ hold_2:	ldr	r12,=0x103
 	 */
 	b	secondary_startup
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(omap_secondary_startup_4460)
+=======
+ENDPROC(omap4460_secondary_startup)
+>>>>>>> v3.18
 =======
 ENDPROC(omap4460_secondary_startup)
 >>>>>>> v3.18

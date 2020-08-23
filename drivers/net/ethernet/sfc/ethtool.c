@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -26,6 +32,7 @@
 #include "nic.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ethtool_string {
 	char name[ETH_GSTRING_LEN];
 };
@@ -34,6 +41,11 @@ struct efx_ethtool_stat {
 	const char *name;
 	enum {
 		EFX_ETHTOOL_STAT_SOURCE_mac_stats,
+=======
+struct efx_sw_stat_desc {
+	const char *name;
+	enum {
+>>>>>>> v3.18
 =======
 struct efx_sw_stat_desc {
 	const char *name;
@@ -48,7 +60,11 @@ struct efx_sw_stat_desc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Initialiser for a struct #efx_ethtool_stat with type-checking */
+=======
+/* Initialiser for a struct efx_sw_stat_desc with type-checking */
+>>>>>>> v3.18
 =======
 /* Initialiser for a struct efx_sw_stat_desc with type-checking */
 >>>>>>> v3.18
@@ -69,6 +85,7 @@ static u64 efx_get_uint_stat(void *field)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 efx_get_u64_stat(void *field)
 {
 	return *(u64 *) field;
@@ -76,11 +93,14 @@ static u64 efx_get_u64_stat(void *field)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static u64 efx_get_atomic_stat(void *field)
 {
 	return atomic_read((atomic_t *) field);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EFX_ETHTOOL_U64_MAC_STAT(field)				\
 	EFX_ETHTOOL_STAT(field, mac_stats, field,		\
@@ -90,6 +110,8 @@ static u64 efx_get_atomic_stat(void *field)
 	EFX_ETHTOOL_STAT(name, nic, n_##name,			\
 			 unsigned int, efx_get_uint_stat)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EFX_ETHTOOL_ATOMIC_NIC_ERROR_STAT(field)		\
@@ -104,6 +126,7 @@ static u64 efx_get_atomic_stat(void *field)
 	EFX_ETHTOOL_STAT(tx_##field, tx_queue, field,		\
 			 unsigned int, efx_get_uint_stat)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct efx_ethtool_stat efx_ethtool_stats[] = {
 	EFX_ETHTOOL_U64_MAC_STAT(tx_bytes),
@@ -139,10 +162,15 @@ static const struct efx_ethtool_stat efx_ethtool_stats[] = {
 static const struct efx_sw_stat_desc efx_sw_stat_desc[] = {
 	EFX_ETHTOOL_UINT_TXQ_STAT(merge_events),
 >>>>>>> v3.18
+=======
+static const struct efx_sw_stat_desc efx_sw_stat_desc[] = {
+	EFX_ETHTOOL_UINT_TXQ_STAT(merge_events),
+>>>>>>> v3.18
 	EFX_ETHTOOL_UINT_TXQ_STAT(tso_bursts),
 	EFX_ETHTOOL_UINT_TXQ_STAT(tso_long_headers),
 	EFX_ETHTOOL_UINT_TXQ_STAT(tso_packets),
 	EFX_ETHTOOL_UINT_TXQ_STAT(pushes),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	EFX_ETHTOOL_U64_MAC_STAT(rx_bytes),
 	EFX_ETHTOOL_U64_MAC_STAT(rx_good_bytes),
@@ -179,6 +207,9 @@ static const struct efx_sw_stat_desc efx_sw_stat_desc[] = {
 =======
 	EFX_ETHTOOL_UINT_TXQ_STAT(pio_packets),
 >>>>>>> v3.18
+=======
+	EFX_ETHTOOL_UINT_TXQ_STAT(pio_packets),
+>>>>>>> v3.18
 	EFX_ETHTOOL_ATOMIC_NIC_ERROR_STAT(rx_reset),
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_tobe_disc),
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_ip_hdr_chksum_err),
@@ -186,17 +217,23 @@ static const struct efx_sw_stat_desc efx_sw_stat_desc[] = {
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_mcast_mismatch),
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_frm_trunc),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_nodesc_trunc),
 };
 
 /* Number of ethtool statistics */
 #define EFX_ETHTOOL_NUM_STATS ARRAY_SIZE(efx_ethtool_stats)
 =======
+=======
+>>>>>>> v3.18
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_merge_events),
 	EFX_ETHTOOL_UINT_CHANNEL_STAT(rx_merge_packets),
 };
 
 #define EFX_ETHTOOL_SW_STAT_COUNT ARRAY_SIZE(efx_sw_stat_desc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define EFX_ETHTOOL_EEPROM_MAGIC 0xEFAB
@@ -245,8 +282,11 @@ static int efx_ethtool_get_settings(struct net_device *net_dev,
 	mutex_unlock(&efx->mac_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* GMAC does not support 1000Mbps HD */
 	ecmd->supported &= ~SUPPORTED_1000baseT_Half;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Both MACs support pause frames (bidirectional and respond-only) */
@@ -334,6 +374,7 @@ static void efx_ethtool_set_msglevel(struct net_device *net_dev, u32 msg_enable)
  * Fill in an individual self-test entry.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void efx_fill_test(unsigned int test_index,
 			  struct ethtool_string *strings, u64 *data,
 			  int *test, const char *unit_format, int unit_id,
@@ -341,11 +382,16 @@ static void efx_fill_test(unsigned int test_index,
 {
 	struct ethtool_string unit_str, test_str;
 =======
+=======
+>>>>>>> v3.18
 static void efx_fill_test(unsigned int test_index, u8 *strings, u64 *data,
 			  int *test, const char *unit_format, int unit_id,
 			  const char *test_format, const char *test_id)
 {
 	char unit_str[ETH_GSTRING_LEN], test_str[ETH_GSTRING_LEN];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Fill data value, if applicable */
@@ -355,6 +401,7 @@ static void efx_fill_test(unsigned int test_index, u8 *strings, u64 *data,
 	/* Fill string, if applicable */
 	if (strings) {
 		if (strchr(unit_format, '%'))
+<<<<<<< HEAD
 <<<<<<< HEAD
 			snprintf(unit_str.name, sizeof(unit_str.name),
 				 unit_format, unit_id);
@@ -366,6 +413,8 @@ static void efx_fill_test(unsigned int test_index, u8 *strings, u64 *data,
 			 sizeof(strings[test_index].name),
 			 "%-6s %-24s", unit_str.name, test_str.name);
 =======
+=======
+>>>>>>> v3.18
 			snprintf(unit_str, sizeof(unit_str),
 				 unit_format, unit_id);
 		else
@@ -374,6 +423,9 @@ static void efx_fill_test(unsigned int test_index, u8 *strings, u64 *data,
 		snprintf(strings + test_index * ETH_GSTRING_LEN,
 			 ETH_GSTRING_LEN,
 			 "%-6s %-24s", unit_str, test_str);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -393,6 +445,12 @@ static void efx_fill_test(unsigned int test_index, u8 *strings, u64 *data,
  * @strings:		Ethtool strings, or %NULL
  * @data:		Ethtool test results, or %NULL
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Fill in a block of loopback self-test entries.  Return new test
+ * index.
+>>>>>>> v3.18
 =======
  *
  * Fill in a block of loopback self-test entries.  Return new test
@@ -404,7 +462,11 @@ static int efx_fill_loopback_test(struct efx_nic *efx,
 				  enum efx_loopback_mode mode,
 				  unsigned int test_index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct ethtool_string *strings, u64 *data)
+=======
+				  u8 *strings, u64 *data)
+>>>>>>> v3.18
 =======
 				  u8 *strings, u64 *data)
 >>>>>>> v3.18
@@ -442,12 +504,15 @@ static int efx_fill_loopback_test(struct efx_nic *efx,
  * @strings:		Ethtool strings, or %NULL
  * @data:		Ethtool test results, or %NULL
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static int efx_ethtool_fill_self_tests(struct efx_nic *efx,
 				       struct efx_self_tests *tests,
 				       struct ethtool_string *strings,
 				       u64 *data)
 =======
+=======
+>>>>>>> v3.18
  *
  * Get self-test number of strings, strings, and/or test results.
  * Return number of strings (== number of test results).
@@ -458,6 +523,9 @@ static int efx_ethtool_fill_self_tests(struct efx_nic *efx,
 static int efx_ethtool_fill_self_tests(struct efx_nic *efx,
 				       struct efx_self_tests *tests,
 				       u8 *strings, u64 *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct efx_channel *channel;
@@ -484,6 +552,11 @@ static int efx_ethtool_fill_self_tests(struct efx_nic *efx,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	efx_fill_test(n++, strings, data, &tests->memory,
+		      "core", 0, "memory", NULL);
+>>>>>>> v3.18
 =======
 	efx_fill_test(n++, strings, data, &tests->memory,
 		      "core", 0, "memory", NULL);
@@ -520,6 +593,7 @@ static int efx_ethtool_fill_self_tests(struct efx_nic *efx,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efx_ethtool_get_sset_count(struct net_device *net_dev,
 				      int string_set)
 {
@@ -530,6 +604,8 @@ static int efx_ethtool_get_sset_count(struct net_device *net_dev,
 		return efx_ethtool_fill_self_tests(netdev_priv(net_dev),
 						   NULL, NULL, NULL);
 =======
+=======
+>>>>>>> v3.18
 static size_t efx_describe_per_queue_stats(struct efx_nic *efx, u8 *strings)
 {
 	size_t n_stats = 0;
@@ -574,6 +650,9 @@ static int efx_ethtool_get_sset_count(struct net_device *net_dev,
 		       efx_ptp_describe_stats(efx, NULL);
 	case ETH_SS_TEST:
 		return efx_ethtool_fill_self_tests(efx, NULL, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -585,14 +664,18 @@ static void efx_ethtool_get_strings(struct net_device *net_dev,
 {
 	struct efx_nic *efx = netdev_priv(net_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ethtool_string *ethtool_strings =
 		(struct ethtool_string *)strings;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
 
 	switch (string_set) {
 	case ETH_SS_STATS:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < EFX_ETHTOOL_NUM_STATS; i++)
 			strlcpy(ethtool_strings[i].name,
@@ -603,6 +686,8 @@ static void efx_ethtool_get_strings(struct net_device *net_dev,
 		efx_ethtool_fill_self_tests(efx, NULL,
 					    ethtool_strings, NULL);
 =======
+=======
+>>>>>>> v3.18
 		strings += (efx->type->describe_stats(efx, strings) *
 			    ETH_GSTRING_LEN);
 		for (i = 0; i < EFX_ETHTOOL_SW_STAT_COUNT; i++)
@@ -615,6 +700,9 @@ static void efx_ethtool_get_strings(struct net_device *net_dev,
 		break;
 	case ETH_SS_TEST:
 		efx_ethtool_fill_self_tests(efx, NULL, strings, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -628,6 +716,7 @@ static void efx_ethtool_get_stats(struct net_device *net_dev,
 				  u64 *data)
 {
 	struct efx_nic *efx = netdev_priv(net_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct efx_mac_stats *mac_stats = &efx->mac_stats;
 	const struct efx_ethtool_stat *stat;
@@ -651,6 +740,8 @@ static void efx_ethtool_get_stats(struct net_device *net_dev,
 						 stat->offset);
 			break;
 =======
+=======
+>>>>>>> v3.18
 	const struct efx_sw_stat_desc *stat;
 	struct efx_channel *channel;
 	struct efx_tx_queue *tx_queue;
@@ -666,6 +757,9 @@ static void efx_ethtool_get_stats(struct net_device *net_dev,
 	for (i = 0; i < EFX_ETHTOOL_SW_STAT_COUNT; i++) {
 		stat = &efx_sw_stat_desc[i];
 		switch (stat->source) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case EFX_ETHTOOL_STAT_SOURCE_nic:
 			data[i] = stat->get_stat((void *)efx + stat->offset);
@@ -688,9 +782,12 @@ static void efx_ethtool_get_stats(struct net_device *net_dev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_unlock_bh(&efx->stats_lock);
 =======
+=======
+>>>>>>> v3.18
 	data += EFX_ETHTOOL_SW_STAT_COUNT;
 
 	spin_unlock_bh(&efx->stats_lock);
@@ -715,6 +812,9 @@ static void efx_ethtool_get_stats(struct net_device *net_dev,
 	}
 
 	efx_ptp_update_stats(efx, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -724,7 +824,11 @@ static void efx_ethtool_self_test(struct net_device *net_dev,
 	struct efx_nic *efx = netdev_priv(net_dev);
 	struct efx_self_tests *efx_tests;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int already_up;
+=======
+	bool already_up;
+>>>>>>> v3.18
 =======
 	bool already_up;
 >>>>>>> v3.18
@@ -736,8 +840,13 @@ static void efx_ethtool_self_test(struct net_device *net_dev,
 
 	if (efx->state != STATE_READY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -EIO;
 		goto fail1;
+=======
+		rc = -EBUSY;
+		goto out;
+>>>>>>> v3.18
 =======
 		rc = -EBUSY;
 		goto out;
@@ -755,7 +864,11 @@ static void efx_ethtool_self_test(struct net_device *net_dev,
 			netif_err(efx, drv, efx->net_dev,
 				  "failed opening device.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail1;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -772,8 +885,12 @@ static void efx_ethtool_self_test(struct net_device *net_dev,
 		   (test->flags & ETH_TEST_FL_OFFLINE) ? "off" : "on");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail1:
 	/* Fill ethtool results structures */
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -888,7 +1005,11 @@ static void efx_ethtool_get_ringparam(struct net_device *net_dev,
 
 	ring->rx_max_pending = EFX_MAX_DMAQ_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring->tx_max_pending = EFX_MAX_DMAQ_SIZE;
+=======
+	ring->tx_max_pending = EFX_TXQ_MAX_ENT(efx);
+>>>>>>> v3.18
 =======
 	ring->tx_max_pending = EFX_TXQ_MAX_ENT(efx);
 >>>>>>> v3.18
@@ -905,7 +1026,11 @@ static int efx_ethtool_set_ringparam(struct net_device *net_dev,
 	if (ring->rx_mini_pending || ring->rx_jumbo_pending ||
 	    ring->rx_pending > EFX_MAX_DMAQ_SIZE ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ring->tx_pending > EFX_MAX_DMAQ_SIZE)
+=======
+	    ring->tx_pending > EFX_TXQ_MAX_ENT(efx))
+>>>>>>> v3.18
 =======
 	    ring->tx_pending > EFX_TXQ_MAX_ENT(efx))
 >>>>>>> v3.18
@@ -934,7 +1059,10 @@ static int efx_ethtool_set_pauseparam(struct net_device *net_dev,
 	u8 wanted_fc, old_fc;
 	u32 old_adv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rc = 0;
@@ -960,6 +1088,7 @@ static int efx_ethtool_set_pauseparam(struct net_device *net_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TX flow control may automatically turn itself off if the
 	 * link partner (intermittently) stops responding to pause
 	 * frames. There isn't any indication that this has happened,
@@ -979,10 +1108,15 @@ static int efx_ethtool_set_pauseparam(struct net_device *net_dev,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Hook for Falcon bug 11482 workaround */
 	if (efx->type->prepare_enable_fc_tx &&
 	    (wanted_fc & EFX_FC_TX) && !(efx->wanted_fc & EFX_FC_TX))
 		efx->type->prepare_enable_fc_tx(efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	old_adv = efx->link_advertising;
@@ -1021,7 +1155,10 @@ static void efx_ethtool_get_pauseparam(struct net_device *net_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void efx_ethtool_get_wol(struct net_device *net_dev,
@@ -1052,18 +1189,24 @@ static int efx_ethtool_reset(struct net_device *net_dev, u32 *flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MAC address mask including only MC flag */
 static const u8 mac_addr_mc_mask[ETH_ALEN] = { 0x01, 0, 0, 0, 0, 0 };
 
 #define IP4_ADDR_FULL_MASK	((__force __be32)~0)
 #define PORT_FULL_MASK		((__force __be16)~0)
 =======
+=======
+>>>>>>> v3.18
 /* MAC address mask including only I/G bit */
 static const u8 mac_addr_ig_mask[ETH_ALEN] __aligned(2) = {0x01, 0, 0, 0, 0, 0};
 
 #define IP4_ADDR_FULL_MASK	((__force __be32)~0)
 #define PORT_FULL_MASK		((__force __be16)~0)
 #define ETHER_TYPE_FULL_MASK	((__force __be16)~0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int efx_ethtool_get_class_rule(struct efx_nic *efx,
@@ -1075,8 +1218,11 @@ static int efx_ethtool_get_class_rule(struct efx_nic *efx,
 	struct ethhdr *mac_mask = &rule->m_u.ether_spec;
 	struct efx_filter_spec spec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 vid;
 	u8 proto;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rc;
@@ -1087,7 +1233,11 @@ static int efx_ethtool_get_class_rule(struct efx_nic *efx,
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spec.dmaq_id == 0xfff)
+=======
+	if (spec.dmaq_id == EFX_FILTER_RX_DMAQ_ID_DROP)
+>>>>>>> v3.18
 =======
 	if (spec.dmaq_id == EFX_FILTER_RX_DMAQ_ID_DROP)
 >>>>>>> v3.18
@@ -1095,6 +1245,7 @@ static int efx_ethtool_get_class_rule(struct efx_nic *efx,
 	else
 		rule->ring_cookie = spec.dmaq_id;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (spec.type == EFX_FILTER_MC_DEF || spec.type == EFX_FILTER_UC_DEF) {
 		rule->flow_type = ETHER_FLOW;
@@ -1130,6 +1281,8 @@ static int efx_ethtool_get_class_rule(struct efx_nic *efx,
 	ip_mask->ip4dst = IP4_ADDR_FULL_MASK;
 	ip_mask->pdst = PORT_FULL_MASK;
 =======
+=======
+>>>>>>> v3.18
 	if ((spec.match_flags & EFX_FILTER_MATCH_ETHER_TYPE) &&
 	    spec.ether_type == htons(ETH_P_IP) &&
 	    (spec.match_flags & EFX_FILTER_MATCH_IP_PROTO) &&
@@ -1191,6 +1344,9 @@ static int efx_ethtool_get_class_rule(struct efx_nic *efx,
 		rule->m_ext.vlan_tci = htons(0xfff);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -1300,6 +1456,7 @@ static int efx_ethtool_set_class_rule(struct efx_nic *efx,
 			   efx->rx_scatter ? EFX_FILTER_FLAG_RX_SCATTER : 0,
 			   (rule->ring_cookie == RX_CLS_FLOW_DISC) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   0xfff : rule->ring_cookie);
 
 	switch (rule->flow_type) {
@@ -1372,6 +1529,8 @@ static int efx_ethtool_set_class_rule(struct efx_nic *efx,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 			   EFX_FILTER_RX_DMAQ_ID_DROP : rule->ring_cookie);
 
 	switch (rule->flow_type & ~FLOW_EXT) {
@@ -1434,6 +1593,9 @@ static int efx_ethtool_set_class_rule(struct efx_nic *efx,
 			spec.ether_type = mac_entry->h_proto;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	default:
@@ -1441,7 +1603,10 @@ static int efx_ethtool_set_class_rule(struct efx_nic *efx,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((rule->flow_type & FLOW_EXT) && rule->m_ext.vlan_tci) {
 		if (rule->m_ext.vlan_tci != htons(0xfff))
 			return -EINVAL;
@@ -1449,6 +1614,9 @@ static int efx_ethtool_set_class_rule(struct efx_nic *efx,
 		spec.outer_vid = rule->h_ext.vlan_tci;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = efx_filter_insert_filter(efx, &spec, true);
 	if (rc < 0)
@@ -1489,7 +1657,11 @@ static u32 efx_ethtool_get_rxfh_indir_size(struct net_device *net_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efx_ethtool_get_rxfh_indir(struct net_device *net_dev, u32 *indir)
+=======
+static int efx_ethtool_get_rxfh(struct net_device *net_dev, u32 *indir, u8 *key)
+>>>>>>> v3.18
 =======
 static int efx_ethtool_get_rxfh(struct net_device *net_dev, u32 *indir, u8 *key)
 >>>>>>> v3.18
@@ -1501,8 +1673,13 @@ static int efx_ethtool_get_rxfh(struct net_device *net_dev, u32 *indir, u8 *key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efx_ethtool_set_rxfh_indir(struct net_device *net_dev,
 				      const u32 *indir)
+=======
+static int efx_ethtool_set_rxfh(struct net_device *net_dev,
+				const u32 *indir, const u8 *key)
+>>>>>>> v3.18
 =======
 static int efx_ethtool_set_rxfh(struct net_device *net_dev,
 				const u32 *indir, const u8 *key)
@@ -1512,8 +1689,11 @@ static int efx_ethtool_set_rxfh(struct net_device *net_dev,
 
 	memcpy(efx->rx_indir_table, indir, sizeof(efx->rx_indir_table));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_nic_push_rx_indir_table(efx);
 =======
+=======
+>>>>>>> v3.18
 	efx->type->rx_push_rss_config(efx);
 	return 0;
 }
@@ -1529,6 +1709,9 @@ static int efx_ethtool_get_ts_info(struct net_device *net_dev,
 	ts_info->phc_index = -1;
 
 	efx_ptp_get_ts_info(efx, ts_info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1594,9 +1777,15 @@ const struct ethtool_ops efx_ethtool_ops = {
 	.set_rxnfc		= efx_ethtool_set_rxnfc,
 	.get_rxfh_indir_size	= efx_ethtool_get_rxfh_indir_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_rxfh_indir		= efx_ethtool_get_rxfh_indir,
 	.set_rxfh_indir		= efx_ethtool_set_rxfh_indir,
 	.get_ts_info		= efx_ptp_get_ts_info,
+=======
+	.get_rxfh		= efx_ethtool_get_rxfh,
+	.set_rxfh		= efx_ethtool_set_rxfh,
+	.get_ts_info		= efx_ethtool_get_ts_info,
+>>>>>>> v3.18
 =======
 	.get_rxfh		= efx_ethtool_get_rxfh,
 	.set_rxfh		= efx_ethtool_set_rxfh,

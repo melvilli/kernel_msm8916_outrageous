@@ -29,6 +29,11 @@
 	/* Save floating point context */
 LEAF(_save_fp_context)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set	push
+	SET_HARDFLOAT
+>>>>>>> v3.18
 =======
 	.set	push
 	SET_HARDFLOAT
@@ -71,6 +76,10 @@ LEAF(_save_fp_context)
 	cfc1	t0,$0				# implementation/version
 	jr	ra
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set	pop
+>>>>>>> v3.18
 =======
 	.set	pop
 >>>>>>> v3.18
@@ -90,6 +99,11 @@ LEAF(_save_fp_context)
  */
 LEAF(_restore_fp_context)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set	push
+	SET_HARDFLOAT
+>>>>>>> v3.18
 =======
 	.set	push
 	SET_HARDFLOAT
@@ -131,6 +145,10 @@ LEAF(_restore_fp_context)
 	jr	ra
 	 ctc1	t0,fcr31
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set	pop
+>>>>>>> v3.18
 =======
 	.set	pop
 >>>>>>> v3.18

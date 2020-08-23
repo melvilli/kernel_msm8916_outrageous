@@ -37,7 +37,10 @@
 #include <linux/sched.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/time.h>
@@ -48,9 +51,12 @@
 #include "musb_core.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void musb_port_suspend(struct musb *musb, bool do_suspend)
 =======
+=======
+>>>>>>> v3.18
 void musb_host_finish_resume(struct work_struct *work)
 {
 	struct musb *musb;
@@ -83,6 +89,9 @@ void musb_host_finish_resume(struct work_struct *work)
 }
 
 void musb_port_suspend(struct musb *musb, bool do_suspend)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_otg	*otg = musb->xceiv->otg;
@@ -145,18 +154,24 @@ void musb_port_suspend(struct musb *musb, bool do_suspend)
 		/* later, GetPortStatus will stop RESUME signaling */
 		musb->port1_status |= MUSB_PORT_STAT_RESUME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		musb->rh_timer = jiffies + msecs_to_jiffies(20);
 	}
 }
 
 static void musb_port_reset(struct musb *musb, bool do_reset)
 =======
+=======
+>>>>>>> v3.18
 		schedule_delayed_work(&musb->finish_resume_work,
 				      msecs_to_jiffies(20));
 	}
 }
 
 void musb_port_reset(struct musb *musb, bool do_reset)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u8		power;
@@ -177,7 +192,10 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 	power = musb_readb(mbase, MUSB_POWER);
 	if (do_reset) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -189,6 +207,7 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 		 */
 		if (power &  MUSB_POWER_RESUME) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (time_before(jiffies, musb->rh_timer))
 				msleep(1);
 			musb_writeb(mbase, MUSB_POWER,
@@ -198,6 +217,8 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 
 		musb->ignore_disconnect = true;
 =======
+=======
+>>>>>>> v3.18
 			long remain = (unsigned long) musb->rh_timer - jiffies;
 
 			if (musb->rh_timer > 0 && remain > 0) {
@@ -216,6 +237,9 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 			return;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		power &= 0xf0;
 		musb_writeb(mbase, MUSB_POWER,
@@ -224,7 +248,12 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 		musb->port1_status |= USB_PORT_STAT_RESET;
 		musb->port1_status &= ~USB_PORT_STAT_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		musb->rh_timer = jiffies + msecs_to_jiffies(50);
+=======
+		schedule_delayed_work(&musb->deassert_reset_work,
+				      msecs_to_jiffies(50));
+>>>>>>> v3.18
 =======
 		schedule_delayed_work(&musb->deassert_reset_work,
 				      msecs_to_jiffies(50));
@@ -235,8 +264,11 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 				power & ~MUSB_POWER_RESET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		musb->ignore_disconnect = false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		power = musb_readb(mbase, MUSB_POWER);
@@ -250,7 +282,11 @@ void musb_port_reset(struct musb *musb, bool do_reset)
 					| (USB_PORT_STAT_C_RESET << 16)
 					| (USB_PORT_STAT_C_ENABLE << 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_hcd_poll_rh_status(musb_to_hcd(musb));
+=======
+		usb_hcd_poll_rh_status(musb->hcd);
+>>>>>>> v3.18
 =======
 		usb_hcd_poll_rh_status(musb->hcd);
 >>>>>>> v3.18
@@ -267,7 +303,11 @@ void musb_root_disconnect(struct musb *musb)
 			| (USB_PORT_STAT_C_CONNECTION << 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_hcd_poll_rh_status(musb_to_hcd(musb));
+=======
+	usb_hcd_poll_rh_status(musb->hcd);
+>>>>>>> v3.18
 =======
 	usb_hcd_poll_rh_status(musb->hcd);
 >>>>>>> v3.18
@@ -312,7 +352,10 @@ int musb_hub_status_data(struct usb_hcd *hcd, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int musb_has_gadget(struct musb *musb)
 {
 	/*
@@ -330,6 +373,9 @@ static int musb_has_gadget(struct musb *musb)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int musb_hub_control(
 	struct usb_hcd	*hcd,
@@ -420,6 +466,7 @@ int musb_hub_control(
 			goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* finish RESET signaling? */
 		if ((musb->port1_status & USB_PORT_STAT_RESET)
 				&& time_after_eq(jiffies, musb->rh_timer))
@@ -452,6 +499,8 @@ int musb_hub_control(
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		put_unaligned(cpu_to_le32(musb->port1_status
 					& ~MUSB_PORT_STAT_RESUME),
 				(__le32 *) buf);
@@ -477,7 +526,11 @@ int musb_hub_control(
 			 * logic relating to VBUS power-up.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!hcd->self.is_b_host)
+=======
+			if (!hcd->self.is_b_host && musb_has_gadget(musb))
+>>>>>>> v3.18
 =======
 			if (!hcd->self.is_b_host && musb_has_gadget(musb))
 >>>>>>> v3.18

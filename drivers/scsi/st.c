@@ -59,6 +59,10 @@ static const char *verstr = "20101219";
 #define DEBUG 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ST_DEB_MSG  KERN_NOTICE
+>>>>>>> v3.18
 =======
 #define ST_DEB_MSG  KERN_NOTICE
 >>>>>>> v3.18
@@ -67,7 +71,10 @@ static const char *verstr = "20101219";
    so that people can easily see the messages. Later when the debugging messages
    in the drivers are more widely classified, this may be changed to KERN_DEBUG. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ST_DEB_MSG  KERN_NOTICE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DEB(a) a
@@ -90,7 +97,11 @@ static int try_wdio = 1;
 
 static struct class st_sysfs_class;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute st_dev_attrs[];
+=======
+static const struct attribute_group *st_dev_groups[];
+>>>>>>> v3.18
 =======
 static const struct attribute_group *st_dev_groups[];
 >>>>>>> v3.18
@@ -317,7 +328,10 @@ static inline char *tape_name(struct scsi_tape *tape)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define st_printk(prefix, t, fmt, a...) \
 	sdev_printk(prefix, (t)->device, "%s: " fmt, \
 		    tape_name(t), ##a)
@@ -327,6 +341,9 @@ static inline char *tape_name(struct scsi_tape *tape)
 #else
 #define DEBC_printk(t, fmt, a...)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void st_analyze_sense(struct st_request *SRpnt, struct st_cmdstatus *s)
@@ -382,6 +399,7 @@ static int st_chk_result(struct scsi_tape *STp, struct st_request * SRpnt)
 		scode = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEB(
         if (debugging) {
                 printk(ST_DEB_MSG "%s: Error: %x, cmd: %x %x %x %x %x %x\n",
@@ -389,12 +407,17 @@ static int st_chk_result(struct scsi_tape *STp, struct st_request * SRpnt)
 		       SRpnt->cmd[0], SRpnt->cmd[1], SRpnt->cmd[2],
 		       SRpnt->cmd[3], SRpnt->cmd[4], SRpnt->cmd[5]);
 =======
+=======
+>>>>>>> v3.18
 	DEB(
 	if (debugging) {
 		st_printk(ST_DEB_MSG, STp,
 			    "Error: %x, cmd: %x %x %x %x %x %x\n", result,
 			    SRpnt->cmd[0], SRpnt->cmd[1], SRpnt->cmd[2],
 			    SRpnt->cmd[3], SRpnt->cmd[4], SRpnt->cmd[5]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (cmdstatp->have_sense)
 			 __scsi_print_sense(name, SRpnt->sense, SCSI_SENSE_BUFFERSIZE);
@@ -402,10 +425,16 @@ static int st_chk_result(struct scsi_tape *STp, struct st_request * SRpnt)
 	if (!debugging) { /* Abnormal conditions for tape */
 		if (!cmdstatp->have_sense)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "%s: Error %x (driver bt 0x%x, host bt 0x%x).\n",
 			       name, result, driver_byte(result),
 			       host_byte(result));
+=======
+			st_printk(KERN_WARNING, STp,
+			       "Error %x (driver bt 0x%x, host bt 0x%x).\n",
+			       result, driver_byte(result), host_byte(result));
+>>>>>>> v3.18
 =======
 			st_printk(KERN_WARNING, STp,
 			       "Error %x (driver bt 0x%x, host bt 0x%x).\n",
@@ -450,7 +479,11 @@ static int st_chk_result(struct scsi_tape *STp, struct st_request * SRpnt)
 		STp->recover_reg++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEB(
+=======
+		DEB(
+>>>>>>> v3.18
 =======
 		DEB(
 >>>>>>> v3.18
@@ -462,8 +495,14 @@ static int st_chk_result(struct scsi_tape *STp, struct st_request * SRpnt)
 			else
 				stp = "ioctl";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(ST_DEB_MSG "%s: Recovered %s error (%d).\n", name, stp,
 			       STp->recover_count);
+=======
+			st_printk(ST_DEB_MSG, STp,
+				  "Recovered %s error (%d).\n",
+				  stp, STp->recover_count);
+>>>>>>> v3.18
 =======
 			st_printk(ST_DEB_MSG, STp,
 				  "Recovered %s error (%d).\n",
@@ -486,8 +525,13 @@ static struct st_request *st_allocate_request(struct scsi_tape *stp)
 		streq->stp = stp;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBC(printk(KERN_ERR "%s: Can't get SCSI request.\n",
 			    tape_name(stp)););
+=======
+		st_printk(KERN_ERR, stp,
+			  "Can't get SCSI request.\n");
+>>>>>>> v3.18
 =======
 		st_printk(KERN_ERR, stp,
 			  "Can't get SCSI request.\n");
@@ -535,7 +579,11 @@ static int st_scsi_execute(struct st_request *SRpnt, const unsigned char *cmd,
 	req = blk_get_request(SRpnt->stp->device->request_queue, write,
 			      GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!req)
+=======
+	if (IS_ERR(req))
+>>>>>>> v3.18
 =======
 	if (IS_ERR(req))
 >>>>>>> v3.18
@@ -583,8 +631,13 @@ st_do_scsi(struct st_request * SRpnt, struct scsi_tape * STp, unsigned char *cmd
 	/* if async, make sure there's no command outstanding */
 	if (!do_wait && ((STp->buffer)->last_SRpnt)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: Async command already active.\n",
 		       tape_name(STp));
+=======
+		st_printk(KERN_ERR, STp,
+			  "Async command already active.\n");
+>>>>>>> v3.18
 =======
 		st_printk(KERN_ERR, STp,
 			  "Async command already active.\n");
@@ -660,7 +713,11 @@ static int write_behind_check(struct scsi_tape * STp)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEB(
+=======
+	DEB(
+>>>>>>> v3.18
 =======
 	DEB(
 >>>>>>> v3.18
@@ -669,7 +726,11 @@ static int write_behind_check(struct scsi_tape * STp)
 	else
 		STp->nbr_finished++;
 <<<<<<< HEAD
+<<<<<<< HEAD
         ) /* end DEB */
+=======
+	) /* end DEB */
+>>>>>>> v3.18
 =======
 	) /* end DEB */
 >>>>>>> v3.18
@@ -710,8 +771,14 @@ static int write_behind_check(struct scsi_tape * STp)
 
 	DEB(if (debugging && retval)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    printk(ST_DEB_MSG "%s: Async write error %x, return value %d.\n",
 		   tape_name(STp), STbuffer->cmdstat.midlevel_result, retval);) /* end DEB */
+=======
+		    st_printk(ST_DEB_MSG, STp,
+				"Async write error %x, return value %d.\n",
+				STbuffer->cmdstat.midlevel_result, retval);) /* end DEB */
+>>>>>>> v3.18
 =======
 		    st_printk(ST_DEB_MSG, STp,
 				"Async write error %x, return value %d.\n",
@@ -739,8 +806,13 @@ static int cross_eof(struct scsi_tape * STp, int forward)
 	cmd[5] = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEBC(printk(ST_DEB_MSG "%s: Stepping over filemark %s.\n",
 		   tape_name(STp), forward ? "forward" : "backward"));
+=======
+	DEBC_printk(STp, "Stepping over filemark %s.\n",
+		    forward ? "forward" : "backward");
+>>>>>>> v3.18
 =======
 	DEBC_printk(STp, "Stepping over filemark %s.\n",
 		    forward ? "forward" : "backward");
@@ -757,8 +829,14 @@ static int cross_eof(struct scsi_tape * STp, int forward)
 
 	if ((STp->buffer)->cmdstat.midlevel_result != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: Stepping over filemark %s failed.\n",
 		   tape_name(STp), forward ? "forward" : "backward");
+=======
+		st_printk(KERN_ERR, STp,
+			  "Stepping over filemark %s failed.\n",
+			  forward ? "forward" : "backward");
+>>>>>>> v3.18
 =======
 		st_printk(KERN_ERR, STp,
 			  "Stepping over filemark %s failed.\n",
@@ -787,8 +865,12 @@ static int st_flush_write_buffer(struct scsi_tape * STp)
 
 		transfer = STp->buffer->buffer_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Flushing %d bytes.\n",
                                tape_name(STp), transfer));
+=======
+		DEBC_printk(STp, "Flushing %d bytes.\n", transfer);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Flushing %d bytes.\n", transfer);
 >>>>>>> v3.18
@@ -824,8 +906,12 @@ static int st_flush_write_buffer(struct scsi_tape * STp)
 				result = (-ENOSPC);
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "%s: Error on flush.\n",
                                        tape_name(STp));
+=======
+				st_printk(KERN_ERR, STp, "Error on flush.\n");
+>>>>>>> v3.18
 =======
 				st_printk(KERN_ERR, STp, "Error on flush.\n");
 >>>>>>> v3.18
@@ -907,7 +993,10 @@ static int set_mode_densblk(struct scsi_tape * STp, struct st_modedef * STm)
 	int set_it = 0;
 	unsigned long arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -929,14 +1018,20 @@ static int set_mode_densblk(struct scsi_tape * STp, struct st_modedef * STm)
 	if (set_it &&
 	    st_int_ioctl(STp, SET_DENS_AND_BLK, arg)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "%s: Can't set default block size to %d bytes and density %x.\n",
 		       name, STm->default_blksize, STm->default_density);
 =======
+=======
+>>>>>>> v3.18
 		st_printk(KERN_WARNING, STp,
 			  "Can't set default block size to %d bytes "
 			  "and density %x.\n",
 			  STm->default_blksize, STm->default_density);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (modes_defined)
 			return (-EINVAL);
@@ -950,12 +1045,18 @@ static int do_door_lock(struct scsi_tape * STp, int do_lock)
 {
 	int retval, cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(char *name = tape_name(STp);)
 
 
 	cmd = do_lock ? SCSI_IOCTL_DOORLOCK : SCSI_IOCTL_DOORUNLOCK;
 	DEBC(printk(ST_DEB_MSG "%s: %socking drive door.\n", name,
 		    do_lock ? "L" : "Unl"));
+=======
+
+	cmd = do_lock ? SCSI_IOCTL_DOORLOCK : SCSI_IOCTL_DOORUNLOCK;
+	DEBC_printk(STp, "%socking drive door.\n", do_lock ? "L" : "Unl");
+>>>>>>> v3.18
 =======
 
 	cmd = do_lock ? SCSI_IOCTL_DOORLOCK : SCSI_IOCTL_DOORUNLOCK;
@@ -1088,7 +1189,10 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 	struct st_modedef *STm;
 	struct st_partstat *STps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct inode *inode = file_inode(filp);
@@ -1098,8 +1202,13 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 
 	if (mode != STp->current_mode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Mode change from %d to %d.\n",
 			       name, STp->current_mode, mode));
+=======
+		DEBC_printk(STp, "Mode change from %d to %d.\n",
+			    STp->current_mode, mode);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Mode change from %d to %d.\n",
 			    STp->current_mode, mode);
@@ -1175,6 +1284,7 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 			    (STp->buffer)->b_data[5];
 			if ( DEB( debugging || ) !STp->inited)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO
                                        "%s: Block limits %d - %d bytes.\n", name,
                                        STp->min_block, STp->max_block);
@@ -1183,12 +1293,17 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
                         DEBC(printk(ST_DEB_MSG "%s: Can't read block limits.\n",
                                        name));
 =======
+=======
+>>>>>>> v3.18
 				st_printk(KERN_INFO, STp,
 					  "Block limits %d - %d bytes.\n",
 					  STp->min_block, STp->max_block);
 		} else {
 			STp->min_block = STp->max_block = (-1);
 			DEBC_printk(STp, "Can't read block limits.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1207,7 +1322,11 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 
 	if ((STp->buffer)->syscall_result != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: No Mode Sense.\n", name));
+=======
+		DEBC_printk(STp, "No Mode Sense.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "No Mode Sense.\n");
 >>>>>>> v3.18
@@ -1216,18 +1335,24 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 		STp->drv_write_prot = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG
                             "%s: Mode sense. Length %d, medium %x, WBS %x, BLL %d\n",
                             name,
                             (STp->buffer)->b_data[0], (STp->buffer)->b_data[1],
                             (STp->buffer)->b_data[2], (STp->buffer)->b_data[3]));
 =======
+=======
+>>>>>>> v3.18
 		DEBC_printk(STp,"Mode sense. Length %d, "
 			    "medium %x, WBS %x, BLL %d\n",
 			    (STp->buffer)->b_data[0],
 			    (STp->buffer)->b_data[1],
 			    (STp->buffer)->b_data[2],
 			    (STp->buffer)->b_data[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if ((STp->buffer)->b_data[3] >= 8) {
@@ -1235,6 +1360,7 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 			STp->density = (STp->buffer)->b_data[4];
 			STp->block_size = (STp->buffer)->b_data[9] * 65536 +
 			    (STp->buffer)->b_data[10] * 256 + (STp->buffer)->b_data[11];
+<<<<<<< HEAD
 <<<<<<< HEAD
                         DEBC(printk(ST_DEB_MSG
                                     "%s: Density %x, tape length: %x, drv buffer: %d\n",
@@ -1248,6 +1374,8 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 			    "%s: non-buffered tape: disabling writing immediate filemarks\n",
 			    name);
 =======
+=======
+>>>>>>> v3.18
 			DEBC_printk(STp, "Density %x, tape length: %x, "
 				    "drv buffer: %d\n",
 				    STp->density,
@@ -1261,6 +1389,9 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 			st_printk(KERN_WARNING, STp,
 				  "non-buffered tape: disabling "
 				  "writing immediate filemarks\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			STp->immediate_filemark = 0;
 		}
@@ -1268,22 +1399,29 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 	st_release_request(SRpnt);
 	SRpnt = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
         STp->inited = 1;
 
 	if (STp->block_size > 0)
 		(STp->buffer)->buffer_blocks =
                         (STp->buffer)->buffer_size / STp->block_size;
 =======
+=======
+>>>>>>> v3.18
 	STp->inited = 1;
 
 	if (STp->block_size > 0)
 		(STp->buffer)->buffer_blocks =
 			(STp->buffer)->buffer_size / STp->block_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		(STp->buffer)->buffer_blocks = 1;
 	(STp->buffer)->buffer_bytes = (STp->buffer)->read_pointer = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         DEBC(printk(ST_DEB_MSG
                        "%s: Block size: %d, buffer size: %d (%d blocks).\n", name,
@@ -1294,12 +1432,21 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 		    STp->block_size, (STp->buffer)->buffer_size,
 		    (STp->buffer)->buffer_blocks);
 >>>>>>> v3.18
+=======
+	DEBC_printk(STp, "Block size: %d, buffer size: %d (%d blocks).\n",
+		    STp->block_size, (STp->buffer)->buffer_size,
+		    (STp->buffer)->buffer_blocks);
+>>>>>>> v3.18
 
 	if (STp->drv_write_prot) {
 		STp->write_prot = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Write protected\n", name));
+=======
+		DEBC_printk(STp, "Write protected\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Write protected\n");
 >>>>>>> v3.18
@@ -1317,8 +1464,12 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 		   after the driver has been initialized with tape in the drive and the
 		   partition support has been enabled. */
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG
                             "%s: Updating partition number in status.\n", name));
+=======
+		DEBC_printk(STp, "Updating partition number in status.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Updating partition number in status.\n");
 >>>>>>> v3.18
@@ -1340,14 +1491,20 @@ static int check_tape(struct scsi_tape *STp, struct file *filp)
 		if (STp->default_drvbuffer != 0xff) {
 			if (st_int_ioctl(STp, MTSETDRVBUFFER, STp->default_drvbuffer))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING
                                        "%s: Can't set default drive buffering to %d.\n",
 				       name, STp->default_drvbuffer);
 =======
+=======
+>>>>>>> v3.18
 				st_printk(KERN_WARNING, STp,
 					  "Can't set default drive "
 					  "buffering to %d.\n",
 					  STp->default_drvbuffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1369,7 +1526,10 @@ static int st_open(struct inode *inode, struct file *filp)
 	struct st_partstat *STps;
 	int dev = TAPE_NR(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1386,7 +1546,10 @@ static int st_open(struct inode *inode, struct file *filp)
 
 	filp->private_data = STp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1395,7 +1558,11 @@ static int st_open(struct inode *inode, struct file *filp)
 		spin_unlock(&st_use_lock);
 		scsi_tape_put(STp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEB( printk(ST_DEB_MSG "%s: Device already in use.\n", name); )
+=======
+		DEBC_printk(STp, "Device already in use.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Device already in use.\n");
 >>>>>>> v3.18
@@ -1419,8 +1586,13 @@ static int st_open(struct inode *inode, struct file *filp)
 	/* See that we have at least a one page buffer available */
 	if (!enlarge_buffer(STp->buffer, PAGE_SIZE, STp->restr_dma)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: Can't allocate one page tape buffer.\n",
 		       name);
+=======
+		st_printk(KERN_WARNING, STp,
+			  "Can't allocate one page tape buffer.\n");
+>>>>>>> v3.18
 =======
 		st_printk(KERN_WARNING, STp,
 			  "Can't allocate one page tape buffer.\n");
@@ -1464,9 +1636,15 @@ static int st_open(struct inode *inode, struct file *filp)
 	STp->in_use = 0;
 	spin_unlock(&st_use_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (resumed)
 		scsi_autopm_put_device(STp->device);
 	scsi_tape_put(STp);
+=======
+	scsi_tape_put(STp);
+	if (resumed)
+		scsi_autopm_put_device(STp->device);
+>>>>>>> v3.18
 =======
 	scsi_tape_put(STp);
 	if (resumed)
@@ -1487,7 +1665,10 @@ static int st_flush(struct file *filp, fl_owner_t id)
 	struct st_modedef *STm = &(STp->modes[STp->current_mode]);
 	struct st_partstat *STps = &(STp->ps[STp->partition]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1503,8 +1684,12 @@ static int st_flush(struct file *filp, fl_owner_t id)
 	if (STp->can_partitions &&
 	    (result2 = switch_partition(STp)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG
                                "%s: switch_partition at close failed.\n", name));
+=======
+		DEBC_printk(STp, "switch_partition at close failed.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "switch_partition at close failed.\n");
 >>>>>>> v3.18
@@ -1515,28 +1700,40 @@ static int st_flush(struct file *filp, fl_owner_t id)
 
 	DEBC( if (STp->nbr_requests)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: Number of r/w requests %d, dio used in %d, pages %d.\n",
 		       name, STp->nbr_requests, STp->nbr_dio, STp->nbr_pages));
 =======
+=======
+>>>>>>> v3.18
 		st_printk(KERN_DEBUG, STp,
 			  "Number of r/w requests %d, dio used in %d, "
 			  "pages %d.\n", STp->nbr_requests, STp->nbr_dio,
 			  STp->nbr_pages));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (STps->rw == ST_WRITING && !STp->pos_unknown) {
 		struct st_cmdstatus *cmdstatp = &STp->buffer->cmdstat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Async write waits %d, finished %d.\n",
                             name, STp->nbr_waits, STp->nbr_finished);
 		)
 
 =======
+=======
+>>>>>>> v3.18
 #if DEBUG
 		DEBC_printk(STp, "Async write waits %d, finished %d.\n",
 			    STp->nbr_waits, STp->nbr_finished);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memset(cmd, 0, MAX_COMMAND_SIZE);
 		cmd[0] = WRITE_FILEMARKS;
@@ -1572,7 +1769,12 @@ static int st_flush(struct file *filp, fl_owner_t id)
 			st_release_request(SRpnt);
 			SRpnt = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: Error on write filemark.\n", name);
+=======
+			st_printk(KERN_ERR, STp,
+				  "Error on write filemark.\n");
+>>>>>>> v3.18
 =======
 			st_printk(KERN_ERR, STp,
 				  "Error on write filemark.\n");
@@ -1582,8 +1784,12 @@ static int st_flush(struct file *filp, fl_owner_t id)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Buffer flushed, %d EOF(s) written\n",
                             name, cmd[4]));
+=======
+		DEBC_printk(STp, "Buffer flushed, %d EOF(s) written\n", cmd[4]);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Buffer flushed, %d EOF(s) written\n", cmd[4]);
 >>>>>>> v3.18
@@ -1685,14 +1891,20 @@ static ssize_t rw_checks(struct scsi_tape *STp, struct file *filp, size_t count)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEB(
 	if (!STp->in_use) {
 		printk(ST_DEB_MSG "%s: Incorrect device.\n", tape_name(STp));
 =======
+=======
+>>>>>>> v3.18
 	DEB(
 	if (!STp->in_use) {
 		st_printk(ST_DEB_MSG, STp,
 			  "Incorrect device.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = (-EIO);
 		goto out;
@@ -1764,8 +1976,14 @@ static int setup_buffering(struct scsi_tape *STp, const char __user *buf,
 		if (bufsize > STbp->buffer_size &&
 		    !enlarge_buffer(STbp, bufsize, STp->restr_dma)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: Can't allocate %d byte tape buffer.\n",
 			       tape_name(STp), bufsize);
+=======
+			st_printk(KERN_WARNING, STp,
+				  "Can't allocate %d byte tape buffer.\n",
+				  bufsize);
+>>>>>>> v3.18
 =======
 			st_printk(KERN_WARNING, STp,
 				  "Can't allocate %d byte tape buffer.\n",
@@ -1814,7 +2032,10 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 	struct st_partstat *STps;
 	struct st_buffer *STbp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1828,8 +2049,13 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 	/* Write must be integral number of blocks */
 	if (STp->block_size != 0 && (count % STp->block_size) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: Write not multiple of tape block size.\n",
 		       name);
+=======
+		st_printk(KERN_WARNING, STp,
+			  "Write not multiple of tape block size.\n");
+>>>>>>> v3.18
 =======
 		st_printk(KERN_WARNING, STp,
 			  "Write not multiple of tape block size.\n");
@@ -1860,8 +2086,13 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 		    !(STp->compression_changed)) {
 			if (st_compression(STp, (STm->default_compression == ST_YES))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING "%s: Can't set default compression.\n",
 				       name);
+=======
+				st_printk(KERN_WARNING, STp,
+					  "Can't set default compression.\n");
+>>>>>>> v3.18
 =======
 				st_printk(KERN_WARNING, STp,
 					  "Can't set default compression.\n");
@@ -1987,7 +2218,11 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 			struct st_cmdstatus *cmdstatp = &STp->buffer->cmdstat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                         DEBC(printk(ST_DEB_MSG "%s: Error on write:\n", name));
+=======
+			DEBC_printk(STp, "Error on write:\n");
+>>>>>>> v3.18
 =======
 			DEBC_printk(STp, "Error on write:\n");
 >>>>>>> v3.18
@@ -2018,9 +2253,15 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 					    undone > 0 || count == 0)
 						retval = (-ENOSPC); /* EOM within current request */
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         DEBC(printk(ST_DEB_MSG
                                                        "%s: EOM with %d bytes unwritten.\n",
 						       name, (int)count));
+=======
+					DEBC_printk(STp, "EOM with %d "
+						    "bytes unwritten.\n",
+						    (int)count);
+>>>>>>> v3.18
 =======
 					DEBC_printk(STp, "EOM with %d "
 						    "bytes unwritten.\n",
@@ -2039,14 +2280,20 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 						}
 						STps->eof = ST_EOM_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 						DEBC(printk(ST_DEB_MSG
 							    "%s: Retry write of %d bytes at EOM.\n",
 							    name, STp->buffer->buffer_bytes));
 =======
+=======
+>>>>>>> v3.18
 						DEBC_printk(STp, "Retry "
 							    "write of %d "
 							    "bytes at EOM.\n",
 							    STp->buffer->buffer_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						goto retry_write;
 					}
@@ -2059,9 +2306,14 @@ st_write(struct file *filp, const char __user *buf, size_t count, loff_t * ppos)
 						STps->drv_block = (-1); /* Too cautious? */
 						retval = (-EIO);	/* EOM for old data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 						DEBC(printk(ST_DEB_MSG
 							    "%s: EOM with lost data.\n",
 							    name));
+=======
+						DEBC_printk(STp, "EOM with "
+							    "lost data.\n");
+>>>>>>> v3.18
 =======
 						DEBC_printk(STp, "EOM with "
 							    "lost data.\n");
@@ -2125,7 +2377,10 @@ static long read_tape(struct scsi_tape *STp, long count,
 	struct st_buffer *STbp;
 	int retval = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2180,6 +2435,7 @@ static long read_tape(struct scsi_tape *STp, long count,
 
 		retval = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBC(printk(ST_DEB_MSG "%s: Sense: %2x %2x %2x %2x %2x %2x %2x %2x\n",
                             name,
                             SRpnt->sense[0], SRpnt->sense[1],
@@ -2187,12 +2443,17 @@ static long read_tape(struct scsi_tape *STp, long count,
                             SRpnt->sense[4], SRpnt->sense[5],
                             SRpnt->sense[6], SRpnt->sense[7]));
 =======
+=======
+>>>>>>> v3.18
 		DEBC_printk(STp,
 			    "Sense: %2x %2x %2x %2x %2x %2x %2x %2x\n",
 			    SRpnt->sense[0], SRpnt->sense[1],
 			    SRpnt->sense[2], SRpnt->sense[3],
 			    SRpnt->sense[4], SRpnt->sense[5],
 			    SRpnt->sense[6], SRpnt->sense[7]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (cmdstatp->have_sense) {
 
@@ -2211,6 +2472,7 @@ static long read_tape(struct scsi_tape *STp, long count,
 
 				if (cmdstatp->flags & SENSE_ILI) {	/* ILI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (STp->block_size == 0) {
 						if (transfer <= 0) {
 							if (transfer < 0)
@@ -2223,6 +2485,8 @@ static long read_tape(struct scsi_tape *STp, long count,
 							return (-ENOMEM);
 						}
 =======
+=======
+>>>>>>> v3.18
 					if (STp->block_size == 0 &&
 					    transfer < 0) {
 						st_printk(KERN_NOTICE, STp,
@@ -2236,6 +2500,9 @@ static long read_tape(struct scsi_tape *STp, long count,
 						STbp->buffer_bytes = 0;
 						return (-ENOMEM);
 					} else if (STp->block_size == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						STbp->buffer_bytes = bytes - transfer;
 					} else {
@@ -2243,7 +2510,13 @@ static long read_tape(struct scsi_tape *STp, long count,
 						SRpnt = *aSRpnt = NULL;
 						if (transfer == blks) {	/* We did not get anything, error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 							printk(KERN_NOTICE "%s: Incorrect block size.\n", name);
+=======
+							st_printk(KERN_NOTICE, STp,
+								  "Incorrect "
+								  "block size.\n");
+>>>>>>> v3.18
 =======
 							st_printk(KERN_NOTICE, STp,
 								  "Incorrect "
@@ -2258,15 +2531,21 @@ static long read_tape(struct scsi_tape *STp, long count,
 						STbp->buffer_bytes = (blks - transfer) *
 						    STp->block_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 DEBC(printk(ST_DEB_MSG
                                                             "%s: ILI but enough data received %ld %d.\n",
                                                             name, count, STbp->buffer_bytes));
 =======
+=======
+>>>>>>> v3.18
 						DEBC_printk(STp, "ILI but "
 							    "enough data "
 							    "received %ld "
 							    "%d.\n", count,
 							    STbp->buffer_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						if (STps->drv_block >= 0)
 							STps->drv_block += 1;
@@ -2284,9 +2563,15 @@ static long read_tape(struct scsi_tape *STp, long count,
 						STbp->buffer_bytes =
 						    bytes - transfer * STp->block_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         DEBC(printk(ST_DEB_MSG
                                                     "%s: EOF detected (%d bytes read).\n",
                                                     name, STbp->buffer_bytes));
+=======
+					DEBC_printk(STp, "EOF detected (%d "
+						    "bytes read).\n",
+						    STbp->buffer_bytes);
+>>>>>>> v3.18
 =======
 					DEBC_printk(STp, "EOF detected (%d "
 						    "bytes read).\n",
@@ -2304,6 +2589,7 @@ static long read_tape(struct scsi_tape *STp, long count,
 						    bytes - transfer * STp->block_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         DEBC(printk(ST_DEB_MSG "%s: EOM detected (%d bytes read).\n",
                                                     name, STbp->buffer_bytes));
 				}
@@ -2319,6 +2605,8 @@ static long read_tape(struct scsi_tape *STp, long count,
                                                     "%s: Zero returned for first BLANK CHECK after EOF.\n",
                                                     name));
 =======
+=======
+>>>>>>> v3.18
 					DEBC_printk(STp, "EOM detected (%d "
 						    "bytes read).\n",
 						    STbp->buffer_bytes);
@@ -2333,6 +2621,9 @@ static long read_tape(struct scsi_tape *STp, long count,
 					DEBC_printk(STp, "Zero returned for "
 						    "first BLANK CHECK "
 						    "after EOF.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					STps->eof = ST_EOD_2;	/* First BLANK_CHECK after FM */
 				} else	/* Some other extended sense code */
@@ -2343,7 +2634,11 @@ static long read_tape(struct scsi_tape *STp, long count,
 				STbp->buffer_bytes = 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* End of extended sense test */ 
+=======
+		/* End of extended sense test */
+>>>>>>> v3.18
 =======
 		/* End of extended sense test */
 >>>>>>> v3.18
@@ -2353,7 +2648,11 @@ static long read_tape(struct scsi_tape *STp, long count,
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* End of error handling */ 
+=======
+	/* End of error handling */
+>>>>>>> v3.18
 =======
 	/* End of error handling */
 >>>>>>> v3.18
@@ -2387,7 +2686,10 @@ st_read(struct file *filp, char __user *buf, size_t count, loff_t * ppos)
 	struct st_partstat *STps;
 	struct st_buffer *STbp = STp->buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB( char *name = tape_name(STp); )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2415,18 +2717,24 @@ st_read(struct file *filp, char __user *buf, size_t count, loff_t * ppos)
 		STps->rw = ST_READING;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEB(
 	if (debugging && STps->eof != ST_NOEOF)
 		printk(ST_DEB_MSG "%s: EOF/EOM flag up (%d). Bytes %d\n", name,
 		       STps->eof, STbp->buffer_bytes);
         ) /* end DEB */
 =======
+=======
+>>>>>>> v3.18
 	DEB(
 	if (debugging && STps->eof != ST_NOEOF)
 		st_printk(ST_DEB_MSG, STp,
 			  "EOF/EOM flag up (%d). Bytes %d\n",
 			  STps->eof, STbp->buffer_bytes);
 	) /* end DEB */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	retval = setup_buffering(STp, buf, count, 1);
@@ -2475,6 +2783,7 @@ st_read(struct file *filp, char __user *buf, size_t count, loff_t * ppos)
 		/* Move the data from driver buffer to user buffer */
 		if (STbp->buffer_bytes > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                         DEB(
 			if (debugging && STps->eof != ST_NOEOF)
 				printk(ST_DEB_MSG
@@ -2483,6 +2792,8 @@ st_read(struct file *filp, char __user *buf, size_t count, loff_t * ppos)
                                        (int)(count - total));
                         ) /* end DEB */
 =======
+=======
+>>>>>>> v3.18
 			DEB(
 			if (debugging && STps->eof != ST_NOEOF)
 				st_printk(ST_DEB_MSG, STp,
@@ -2490,6 +2801,9 @@ st_read(struct file *filp, char __user *buf, size_t count, loff_t * ppos)
 					  STps->eof, STbp->buffer_bytes,
 					  (int)(count - total));
 			) /* end DEB */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			transfer = STbp->buffer_bytes < count - total ?
 			    STbp->buffer_bytes : count - total;
@@ -2547,6 +2861,7 @@ st_read(struct file *filp, char __user *buf, size_t count, loff_t * ppos)
 DEB(
 /* Set the driver options */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void st_log_options(struct scsi_tape * STp, struct st_modedef * STm, char *name)
 {
 	if (debugging) {
@@ -2568,6 +2883,8 @@ static void st_log_options(struct scsi_tape * STp, struct st_modedef * STm, char
 		printk(KERN_INFO "%s:    debugging: %d\n",
 		       name, debugging);
 =======
+=======
+>>>>>>> v3.18
 static void st_log_options(struct scsi_tape * STp, struct st_modedef * STm)
 {
 	if (debugging) {
@@ -2592,6 +2909,9 @@ static void st_log_options(struct scsi_tape * STp, struct st_modedef * STm)
 			  STm->sysv, STp->immediate, STp->sili,
 			  STp->immediate_filemark);
 		st_printk(KERN_INFO, STp, "    debugging: %d\n", debugging);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2603,6 +2923,7 @@ static int st_set_options(struct scsi_tape *STp, long options)
 	int value;
 	long code;
 	struct st_modedef *STm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char *name = tape_name(STp);
 	struct cdev *cd0, *cd1;
@@ -2617,6 +2938,8 @@ static int st_set_options(struct scsi_tape *STp, long options)
                             "%s: Initialized mode %d definition from mode 0\n",
                             name, STp->current_mode));
 =======
+=======
+>>>>>>> v3.18
 	struct cdev *cd0, *cd1;
 	struct device *d0, *d1;
 
@@ -2634,6 +2957,9 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		modes_defined = 1;
 		DEBC_printk(STp, "Initialized mode %d definition from mode 0\n",
 			    STp->current_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2657,7 +2983,11 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		STp->sili = (options & MT_ST_SILI) != 0;
 		DEB( debugging = (options & MT_ST_DEBUGGING) != 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     st_log_options(STp, STm, name); )
+=======
+		     st_log_options(STp, STm); )
+>>>>>>> v3.18
 =======
 		     st_log_options(STp, STm); )
 >>>>>>> v3.18
@@ -2695,15 +3025,21 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		if ((options & MT_ST_SILI) != 0)
 			STp->sili = value;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEB(
 		if ((options & MT_ST_DEBUGGING) != 0)
 			debugging = value;
 			st_log_options(STp, STm, name); )
 =======
+=======
+>>>>>>> v3.18
 		DEB(
 		if ((options & MT_ST_DEBUGGING) != 0)
 			debugging = value;
 			st_log_options(STp, STm); )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (code == MT_ST_WRITE_THRESHOLD) {
 		/* Retained for compatibility */
@@ -2712,17 +3048,23 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		if (value == ~MT_ST_OPTIONS) {
 			STm->default_blksize = (-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBC( printk(KERN_INFO "%s: Default block size disabled.\n", name));
 		} else {
 			STm->default_blksize = value;
 			DEBC( printk(KERN_INFO "%s: Default block size set to %d bytes.\n",
 			       name, STm->default_blksize));
 =======
+=======
+>>>>>>> v3.18
 			DEBC_printk(STp, "Default block size disabled.\n");
 		} else {
 			STm->default_blksize = value;
 			DEBC_printk(STp,"Default block size set to "
 				    "%d bytes.\n", STm->default_blksize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (STp->ready == ST_READY) {
 				STp->blksize_changed = 0;
@@ -2734,6 +3076,7 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		if ((value & MT_ST_SET_LONG_TIMEOUT) != 0) {
 			STp->long_timeout = (value & ~MT_ST_SET_LONG_TIMEOUT) * HZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBC( printk(KERN_INFO "%s: Long timeout set to %d seconds.\n", name,
 			       (value & ~MT_ST_SET_LONG_TIMEOUT)));
 		} else {
@@ -2742,6 +3085,8 @@ static int st_set_options(struct scsi_tape *STp, long options)
 			DEBC( printk(KERN_INFO "%s: Normal timeout set to %d seconds.\n",
 				name, value) );
 =======
+=======
+>>>>>>> v3.18
 			DEBC_printk(STp, "Long timeout set to %d seconds.\n",
 				    (value & ~MT_ST_SET_LONG_TIMEOUT));
 		} else {
@@ -2749,6 +3094,9 @@ static int st_set_options(struct scsi_tape *STp, long options)
 					     value * HZ);
 			DEBC_printk(STp, "Normal timeout set to %d seconds.\n",
 				    value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else if (code == MT_ST_SET_CLN) {
@@ -2761,9 +3109,15 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		STp->cln_sense_mask = (options >> 8) & 0xff;
 		STp->cln_sense_value = (options >> 16) & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO
 		       "%s: Cleaning request mode %d, mask %02x, value %02x\n",
 		       name, value, STp->cln_sense_mask, STp->cln_sense_value);
+=======
+		st_printk(KERN_INFO, STp,
+			  "Cleaning request mode %d, mask %02x, value %02x\n",
+			  value, STp->cln_sense_mask, STp->cln_sense_value);
+>>>>>>> v3.18
 =======
 		st_printk(KERN_INFO, STp,
 			  "Cleaning request mode %d, mask %02x, value %02x\n",
@@ -2776,6 +3130,7 @@ static int st_set_options(struct scsi_tape *STp, long options)
 			if (value == MT_ST_CLEAR_DEFAULT) {
 				STm->default_density = (-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DEBC( printk(KERN_INFO "%s: Density default disabled.\n",
                                        name));
 			} else {
@@ -2783,12 +3138,17 @@ static int st_set_options(struct scsi_tape *STp, long options)
 				DEBC( printk(KERN_INFO "%s: Density default set to %x\n",
 				       name, STm->default_density));
 =======
+=======
+>>>>>>> v3.18
 				DEBC_printk(STp,
 					    "Density default disabled.\n");
 			} else {
 				STm->default_density = value & 0xff;
 				DEBC_printk(STp, "Density default set to %x\n",
 					    STm->default_density);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (STp->ready == ST_READY) {
 					STp->density_changed = 0;
@@ -2799,6 +3159,7 @@ static int st_set_options(struct scsi_tape *STp, long options)
 			if (value == MT_ST_CLEAR_DEFAULT) {
 				STp->default_drvbuffer = 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DEBC( printk(KERN_INFO
                                        "%s: Drive buffer default disabled.\n", name));
 			} else {
@@ -2807,6 +3168,8 @@ static int st_set_options(struct scsi_tape *STp, long options)
                                        "%s: Drive buffer default set to %x\n",
 				       name, STp->default_drvbuffer));
 =======
+=======
+>>>>>>> v3.18
 				DEBC_printk(STp,
 					    "Drive buffer default disabled.\n");
 			} else {
@@ -2814,6 +3177,9 @@ static int st_set_options(struct scsi_tape *STp, long options)
 				DEBC_printk(STp,
 					    "Drive buffer default set to %x\n",
 					    STp->default_drvbuffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (STp->ready == ST_READY)
 					st_int_ioctl(STp, MTSETDRVBUFFER, STp->default_drvbuffer);
@@ -2821,6 +3187,7 @@ static int st_set_options(struct scsi_tape *STp, long options)
 		} else if (code == MT_ST_DEF_COMPRESSION) {
 			if (value == MT_ST_CLEAR_DEFAULT) {
 				STm->default_compression = ST_DONT_TOUCH;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				DEBC( printk(KERN_INFO
                                        "%s: Compression default disabled.\n", name));
@@ -2835,6 +3202,8 @@ static int st_set_options(struct scsi_tape *STp, long options)
 					DEBC( printk(KERN_INFO "%s: Compression default set to %x\n",
 					       name, (value & 1)));
 =======
+=======
+>>>>>>> v3.18
 				DEBC_printk(STp,
 					    "Compression default disabled.\n");
 			} else {
@@ -2849,6 +3218,9 @@ static int st_set_options(struct scsi_tape *STp, long options)
 					DEBC_printk(STp, "Compression default "
 						    "set to %x\n",
 						    (value & 1));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					if (STp->ready == ST_READY) {
 						STp->compression_changed = 0;
@@ -2965,7 +3337,10 @@ static int st_compression(struct scsi_tape * STp, int state)
 	int mpoffs;  /* Offset to mode page start */
 	unsigned char *b_data = (STp->buffer)->b_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB( char *name = tape_name(STp); )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2976,8 +3351,12 @@ static int st_compression(struct scsi_tape * STp, int state)
 	retval = read_mode_page(STp, COMPRESSION_PAGE, 0);
 	if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Compression mode page not supported.\n",
                             name));
+=======
+		DEBC_printk(STp, "Compression mode page not supported.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Compression mode page not supported.\n");
 >>>>>>> v3.18
@@ -2986,6 +3365,7 @@ static int st_compression(struct scsi_tape * STp, int state)
 
 	mpoffs = MODE_HEADER_LENGTH + b_data[MH_OFF_BDESCS_LENGTH];
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEBC(printk(ST_DEB_MSG "%s: Compression state is %d.\n", name,
                     (b_data[mpoffs + CP_OFF_DCE_DCC] & DCE_MASK ? 1 : 0)));
 
@@ -2993,12 +3373,17 @@ static int st_compression(struct scsi_tape * STp, int state)
 	if ((b_data[mpoffs + CP_OFF_DCE_DCC] & DCC_MASK) == 0) {
                 DEBC(printk(ST_DEB_MSG "%s: Compression not supported.\n", name));
 =======
+=======
+>>>>>>> v3.18
 	DEBC_printk(STp, "Compression state is %d.\n",
 		    (b_data[mpoffs + CP_OFF_DCE_DCC] & DCE_MASK ? 1 : 0));
 
 	/* Check if compression can be changed */
 	if ((b_data[mpoffs + CP_OFF_DCE_DCC] & DCC_MASK) == 0) {
 		DEBC_printk(STp, "Compression not supported.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return (-EIO);
 	}
@@ -3018,16 +3403,22 @@ static int st_compression(struct scsi_tape * STp, int state)
 	retval = write_mode_page(STp, COMPRESSION_PAGE, 0);
 	if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Compression change failed.\n", name));
 		return (-EIO);
 	}
         DEBC(printk(ST_DEB_MSG "%s: Compression state changed to %d.\n",
 		       name, state));
 =======
+=======
+>>>>>>> v3.18
 		DEBC_printk(STp, "Compression change failed.\n");
 		return (-EIO);
 	}
 	DEBC_printk(STp, "Compression state changed to %d.\n", state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	STp->compression_changed = 1;
@@ -3040,7 +3431,10 @@ static int do_load_unload(struct scsi_tape *STp, struct file *filp, int load_cod
 {
 	int retval = (-EIO), timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB( char *name = tape_name(STp); )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char cmd[MAX_COMMAND_SIZE];
@@ -3064,9 +3458,15 @@ static int do_load_unload(struct scsi_tape *STp, struct file *filp, int load_cod
 	if (load_code >= 1 + MT_ST_HPLOADER_OFFSET
 	    && load_code <= 6 + MT_ST_HPLOADER_OFFSET) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBC(printk(ST_DEB_MSG "%s: Enhanced %sload slot %2d.\n",
 			    name, (cmd[4]) ? "" : "un",
 			    load_code - MT_ST_HPLOADER_OFFSET));
+=======
+		DEBC_printk(STp, " Enhanced %sload slot %2d.\n",
+			    (cmd[4]) ? "" : "un",
+			    load_code - MT_ST_HPLOADER_OFFSET);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, " Enhanced %sload slot %2d.\n",
 			    (cmd[4]) ? "" : "un",
@@ -3084,9 +3484,15 @@ static int do_load_unload(struct scsi_tape *STp, struct file *filp, int load_cod
 	DEBC(
 		if (!load_code)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(ST_DEB_MSG "%s: Unloading tape.\n", name);
 		else
 		printk(ST_DEB_MSG "%s: Loading tape.\n", name);
+=======
+			st_printk(ST_DEB_MSG, STp, "Unloading tape.\n");
+		else
+			st_printk(ST_DEB_MSG, STp, "Loading tape.\n");
+>>>>>>> v3.18
 =======
 			st_printk(ST_DEB_MSG, STp, "Unloading tape.\n");
 		else
@@ -3127,11 +3533,14 @@ static int do_load_unload(struct scsi_tape *STp, struct file *filp, int load_cod
 #define ST_DEB_FORWARD  0
 #define ST_DEB_BACKWARD 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void deb_space_print(char *name, int direction, char *units, unsigned char *cmd)
 {
 	s32 sc;
 
 =======
+=======
+>>>>>>> v3.18
 static void deb_space_print(struct scsi_tape *STp, int direction, char *units, unsigned char *cmd)
 {
 	s32 sc;
@@ -3139,16 +3548,22 @@ static void deb_space_print(struct scsi_tape *STp, int direction, char *units, u
 	if (!debugging)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sc = cmd[2] & 0x80 ? 0xff000000 : 0;
 	sc |= (cmd[2] << 16) | (cmd[3] << 8) | cmd[4];
 	if (direction)
 		sc = -sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(ST_DEB_MSG "%s: Spacing tape %s over %d %s.\n", name,
 	       direction ? "backward" : "forward", sc, units);
 }
 =======
+=======
+>>>>>>> v3.18
 	st_printk(ST_DEB_MSG, STp, "Spacing tape %s over %d %s.\n",
 		  direction ? "backward" : "forward", sc, units);
 }
@@ -3156,6 +3571,9 @@ static void deb_space_print(struct scsi_tape *STp, int direction, char *units, u
 #define ST_DEB_FORWARD  0
 #define ST_DEB_BACKWARD 1
 static void deb_space_print(struct scsi_tape *STp, int direction, char *units, unsigned char *cmd) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -3173,7 +3591,10 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 	int fileno, blkno, at_sm, undone;
 	int datalen = 0, direction = DMA_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3201,7 +3622,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[3] = (arg >> 8);
 		cmd[4] = arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(deb_space_print(name, ST_DEB_FORWARD, "filemarks", cmd);)
+=======
+		deb_space_print(STp, ST_DEB_FORWARD, "filemarks", cmd);
+>>>>>>> v3.18
 =======
 		deb_space_print(STp, ST_DEB_FORWARD, "filemarks", cmd);
 >>>>>>> v3.18
@@ -3220,7 +3645,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[3] = (ltmp >> 8);
 		cmd[4] = ltmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(deb_space_print(name, ST_DEB_BACKWARD, "filemarks", cmd);)
+=======
+		deb_space_print(STp, ST_DEB_BACKWARD, "filemarks", cmd);
+>>>>>>> v3.18
 =======
 		deb_space_print(STp, ST_DEB_BACKWARD, "filemarks", cmd);
 >>>>>>> v3.18
@@ -3236,7 +3665,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[3] = (arg >> 8);
 		cmd[4] = arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(deb_space_print(name, ST_DEB_FORWARD, "blocks", cmd);)
+=======
+		deb_space_print(STp, ST_DEB_FORWARD, "blocks", cmd);
+>>>>>>> v3.18
 =======
 		deb_space_print(STp, ST_DEB_FORWARD, "blocks", cmd);
 >>>>>>> v3.18
@@ -3252,7 +3685,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[3] = (ltmp >> 8);
 		cmd[4] = ltmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(deb_space_print(name, ST_DEB_BACKWARD, "blocks", cmd);)
+=======
+		deb_space_print(STp, ST_DEB_BACKWARD, "blocks", cmd);
+>>>>>>> v3.18
 =======
 		deb_space_print(STp, ST_DEB_BACKWARD, "blocks", cmd);
 >>>>>>> v3.18
@@ -3267,7 +3704,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[3] = (arg >> 8);
 		cmd[4] = arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(deb_space_print(name, ST_DEB_FORWARD, "setmarks", cmd);)
+=======
+		deb_space_print(STp, ST_DEB_FORWARD, "setmarks", cmd);
+>>>>>>> v3.18
 =======
 		deb_space_print(STp, ST_DEB_FORWARD, "setmarks", cmd);
 >>>>>>> v3.18
@@ -3284,7 +3725,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[3] = (ltmp >> 8);
 		cmd[4] = ltmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(deb_space_print(name, ST_DEB_BACKWARD, "setmarks", cmd);)
+=======
+		deb_space_print(STp, ST_DEB_BACKWARD, "setmarks", cmd);
+>>>>>>> v3.18
 =======
 		deb_space_print(STp, ST_DEB_BACKWARD, "setmarks", cmd);
 >>>>>>> v3.18
@@ -3309,6 +3754,7 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[4] = arg;
 		timeout = STp->device->request_queue->rq_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(
 		     if (cmd_in != MTWSM)
                                printk(ST_DEB_MSG "%s: Writing %d filemarks.\n", name,
@@ -3317,6 +3763,8 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 				printk(ST_DEB_MSG "%s: Writing %d setmarks.\n", name,
 				 cmd[2] * 65536 + cmd[3] * 256 + cmd[4]);
 =======
+=======
+>>>>>>> v3.18
 		DEBC(
 			if (cmd_in != MTWSM)
 				st_printk(ST_DEB_MSG, STp,
@@ -3330,6 +3778,9 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 					  cmd[2] * 65536 +
 					  cmd[3] * 256 +
 					  cmd[4]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		)
 		if (fileno >= 0)
@@ -3344,17 +3795,23 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 			timeout = STp->device->request_queue->rq_timeout;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Rewinding tape.\n", name));
 		fileno = blkno = at_sm = 0;
 		break;
 	case MTNOP:
                 DEBC(printk(ST_DEB_MSG "%s: No op on tape.\n", name));
 =======
+=======
+>>>>>>> v3.18
 		DEBC_printk(STp, "Rewinding tape.\n");
 		fileno = blkno = at_sm = 0;
 		break;
 	case MTNOP:
 		DEBC_printk(STp, "No op on tape.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;	/* Should do something ? */
 		break;
@@ -3366,7 +3823,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		}
 		cmd[4] = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Retensioning tape.\n", name));
+=======
+		DEBC_printk(STp, "Retensioning tape.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Retensioning tape.\n");
 >>>>>>> v3.18
@@ -3388,8 +3849,12 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		cmd[0] = SPACE;
 		cmd[1] = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Spacing to end of recorded medium.\n",
                             name));
+=======
+		DEBC_printk(STp, "Spacing to end of recorded medium.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Spacing to end of recorded medium.\n");
 >>>>>>> v3.18
@@ -3409,7 +3874,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 			timeout = STp->long_timeout * 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Erasing tape.\n", name));
+=======
+		DEBC_printk(STp, "Erasing tape.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Erasing tape.\n");
 >>>>>>> v3.18
@@ -3428,7 +3897,11 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		    ((arg & MT_ST_BLKSIZE_MASK) < STp->min_block ||
 		     (arg & MT_ST_BLKSIZE_MASK) > STp->max_block)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: Illegal block size.\n", name);
+=======
+			st_printk(KERN_WARNING, STp, "Illegal block size.\n");
+>>>>>>> v3.18
 =======
 			st_printk(KERN_WARNING, STp, "Illegal block size.\n");
 >>>>>>> v3.18
@@ -3465,6 +3938,7 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 		(STp->buffer)->b_data[11] = ltmp;
 		timeout = STp->device->request_queue->rq_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(
 			if (cmd_in == MTSETBLK || cmd_in == SET_DENS_AND_BLK)
 				printk(ST_DEB_MSG
@@ -3481,6 +3955,8 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
                                        "%s: Setting drive buffer code to %d.\n", name,
 				    ((STp->buffer)->b_data[2] >> 4) & 7);
 =======
+=======
+>>>>>>> v3.18
 		DEBC(
 			if (cmd_in == MTSETBLK || cmd_in == SET_DENS_AND_BLK)
 				st_printk(ST_DEB_MSG, STp,
@@ -3496,6 +3972,9 @@ static int st_int_ioctl(struct scsi_tape *STp, unsigned int cmd_in, unsigned lon
 				st_printk(ST_DEB_MSG, STp,
 					  "Setting drive buffer code to %d.\n",
 					  ((STp->buffer)->b_data[2] >> 4) & 7);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		)
 		break;
@@ -3654,7 +4133,10 @@ static int get_location(struct scsi_tape *STp, unsigned int *block, int *partiti
 	unsigned char scmd[MAX_COMMAND_SIZE];
 	struct st_request *SRpnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB( char *name = tape_name(STp); )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3681,7 +4163,11 @@ static int get_location(struct scsi_tape *STp, unsigned int *block, int *partiti
 	     ((STp->buffer)->b_data[0] & 4) != 0)) {
 		*block = *partition = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Can't read tape position.\n", name));
+=======
+		DEBC_printk(STp, " Can't read tape position.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, " Can't read tape position.\n");
 >>>>>>> v3.18
@@ -3704,8 +4190,13 @@ static int get_location(struct scsi_tape *STp, unsigned int *block, int *partiti
 				STp->ps[0].drv_block = STp->ps[0].drv_file = 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Got tape pos. blk %d part %d.\n", name,
                             *block, *partition));
+=======
+		DEBC_printk(STp, "Got tape pos. blk %d part %d.\n",
+			    *block, *partition);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Got tape pos. blk %d part %d.\n",
 			    *block, *partition);
@@ -3730,7 +4221,10 @@ static int set_location(struct scsi_tape *STp, unsigned int block, int partition
 	unsigned char scmd[MAX_COMMAND_SIZE];
 	struct st_request *SRpnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB( char *name = tape_name(STp); )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3740,8 +4234,13 @@ static int set_location(struct scsi_tape *STp, unsigned int block, int partition
 	STps = &(STp->ps[STp->partition]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEBC(printk(ST_DEB_MSG "%s: Setting block to %d and partition to %d.\n",
                     name, block, partition));
+=======
+	DEBC_printk(STp, "Setting block to %d and partition to %d.\n",
+		    block, partition);
+>>>>>>> v3.18
 =======
 	DEBC_printk(STp, "Setting block to %d and partition to %d.\n",
 		    block, partition);
@@ -3760,9 +4259,15 @@ static int set_location(struct scsi_tape *STp, unsigned int block, int partition
 			STps->last_block_valid = 1;
 			STps->last_block_visited = blk;
 <<<<<<< HEAD
+<<<<<<< HEAD
                         DEBC(printk(ST_DEB_MSG
                                     "%s: Visited block %d for partition %d saved.\n",
                                     name, blk, STp->partition));
+=======
+			DEBC_printk(STp, "Visited block %d for "
+				    "partition %d saved.\n",
+				    blk, STp->partition);
+>>>>>>> v3.18
 =======
 			DEBC_printk(STp, "Visited block %d for "
 				    "partition %d saved.\n",
@@ -3790,9 +4295,15 @@ static int set_location(struct scsi_tape *STp, unsigned int block, int partition
 			scmd[1] |= 2;
 			scmd[8] = partition;
 <<<<<<< HEAD
+<<<<<<< HEAD
                         DEBC(printk(ST_DEB_MSG
                                     "%s: Trying to change partition from %d to %d\n",
                                     name, STp->partition, partition));
+=======
+			DEBC_printk(STp, "Trying to change partition "
+				    "from %d to %d\n", STp->partition,
+				    partition);
+>>>>>>> v3.18
 =======
 			DEBC_printk(STp, "Trying to change partition "
 				    "from %d to %d\n", STp->partition,
@@ -3889,7 +4400,10 @@ static int nbr_partitions(struct scsi_tape *STp)
 {
 	int result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB( char *name = tape_name(STp); )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3900,8 +4414,12 @@ static int nbr_partitions(struct scsi_tape *STp)
 
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Can't read medium partition page.\n",
                             name));
+=======
+		DEBC_printk(STp, "Can't read medium partition page.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Can't read medium partition page.\n");
 >>>>>>> v3.18
@@ -3910,7 +4428,11 @@ static int nbr_partitions(struct scsi_tape *STp)
 		result = (STp->buffer)->b_data[MODE_HEADER_LENGTH +
 					      PP_OFF_NBR_ADD_PARTS] + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Number of partitions %d.\n", name, result));
+=======
+		DEBC_printk(STp, "Number of partitions %d.\n", result);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Number of partitions %d.\n", result);
 >>>>>>> v3.18
@@ -3942,7 +4464,10 @@ static int nbr_partitions(struct scsi_tape *STp)
 static int partition_tape(struct scsi_tape *STp, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int result;
@@ -3952,7 +4477,11 @@ static int partition_tape(struct scsi_tape *STp, int size)
 	result = read_mode_page(STp, PART_PAGE, 0);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBC(printk(ST_DEB_MSG "%s: Can't read partition mode page.\n", name));
+=======
+		DEBC_printk(STp, "Can't read partition mode page.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Can't read partition mode page.\n");
 >>>>>>> v3.18
@@ -3962,8 +4491,13 @@ static int partition_tape(struct scsi_tape *STp, int size)
 	bp = (STp->buffer)->b_data;
 	pgo = MODE_HEADER_LENGTH + bp[MH_OFF_BDESCS_LENGTH];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBC(printk(ST_DEB_MSG "%s: Partition page length is %d bytes.\n",
 		    name, bp[pgo + MP_OFF_PAGE_LENGTH] + 2));
+=======
+	DEBC_printk(STp, "Partition page length is %d bytes.\n",
+		    bp[pgo + MP_OFF_PAGE_LENGTH] + 2);
+>>>>>>> v3.18
 =======
 	DEBC_printk(STp, "Partition page length is %d bytes.\n",
 		    bp[pgo + MP_OFF_PAGE_LENGTH] + 2);
@@ -3978,9 +4512,15 @@ static int partition_tape(struct scsi_tape *STp, int size)
 	memset(bp + psdo, 0, bp[pgo + PP_OFF_NBR_ADD_PARTS] * 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBC(printk("%s: psd_cnt %d, max.parts %d, nbr_parts %d\n", name,
 		    psd_cnt, bp[pgo + PP_OFF_MAX_ADD_PARTS],
 		    bp[pgo + PP_OFF_NBR_ADD_PARTS]));
+=======
+	DEBC_printk(STp, "psd_cnt %d, max.parts %d, nbr_parts %d\n",
+		    psd_cnt, bp[pgo + PP_OFF_MAX_ADD_PARTS],
+		    bp[pgo + PP_OFF_NBR_ADD_PARTS]);
+>>>>>>> v3.18
 =======
 	DEBC_printk(STp, "psd_cnt %d, max.parts %d, nbr_parts %d\n",
 		    psd_cnt, bp[pgo + PP_OFF_MAX_ADD_PARTS],
@@ -3992,8 +4532,12 @@ static int partition_tape(struct scsi_tape *STp, int size)
 		if (psd_cnt <= bp[pgo + PP_OFF_MAX_ADD_PARTS])
 		    bp[pgo + MP_OFF_PAGE_LENGTH] = 6;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG "%s: Formatting tape with one partition.\n",
                             name));
+=======
+		DEBC_printk(STp, "Formatting tape with one partition.\n");
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Formatting tape with one partition.\n");
 >>>>>>> v3.18
@@ -4004,9 +4548,14 @@ static int partition_tape(struct scsi_tape *STp, int size)
 		if (bp[pgo + MP_OFF_PAGE_LENGTH] < 8)
 		    bp[pgo + MP_OFF_PAGE_LENGTH] = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DEBC(printk(ST_DEB_MSG
                             "%s: Formatting tape with two partitions (1 = %d MB).\n",
                             name, size));
+=======
+		DEBC_printk(STp, "Formatting tape with two partitions "
+			    "(1 = %d MB).\n", size);
+>>>>>>> v3.18
 =======
 		DEBC_printk(STp, "Formatting tape with two partitions "
 			    "(1 = %d MB).\n", size);
@@ -4019,7 +4568,11 @@ static int partition_tape(struct scsi_tape *STp, int size)
 	result = write_mode_page(STp, PART_PAGE, 1);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: Partitioning of tape failed.\n", name);
+=======
+		st_printk(KERN_INFO, STp, "Partitioning of tape failed.\n");
+>>>>>>> v3.18
 =======
 		st_printk(KERN_INFO, STp, "Partitioning of tape failed.\n");
 >>>>>>> v3.18
@@ -4041,7 +4594,10 @@ static long st_ioctl(struct file *file, unsigned int cmd_in, unsigned long arg)
 	struct st_modedef *STm;
 	struct st_partstat *STps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name = tape_name(STp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __user *p = (void __user *)arg;
@@ -4050,9 +4606,15 @@ static long st_ioctl(struct file *file, unsigned int cmd_in, unsigned long arg)
 		return -ERESTARTSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         DEB(
 	if (debugging && !STp->in_use) {
 		printk(ST_DEB_MSG "%s: Incorrect device.\n", name);
+=======
+	DEB(
+	if (debugging && !STp->in_use) {
+		st_printk(ST_DEB_MSG, STp, "Incorrect device.\n");
+>>>>>>> v3.18
 =======
 	DEB(
 	if (debugging && !STp->in_use) {
@@ -4096,8 +4658,13 @@ static long st_ioctl(struct file *file, unsigned int cmd_in, unsigned long arg)
 
 		if (mtc.mt_op == MTSETDRVBUFFER && !capable(CAP_SYS_ADMIN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
                                "%s: MTSETDRVBUFFER only allowed for root.\n", name);
+=======
+			st_printk(KERN_WARNING, STp,
+				  "MTSETDRVBUFFER only allowed for root.\n");
+>>>>>>> v3.18
 =======
 			st_printk(KERN_WARNING, STp,
 				  "MTSETDRVBUFFER only allowed for root.\n");
@@ -4449,7 +5016,11 @@ static struct st_buffer *new_tape_buffer(int need_dma, int max_sg)
 static int enlarge_buffer(struct st_buffer * STbuffer, int new_size, int need_dma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int segs, nbr, max_segs, b_size, order, got;
+=======
+	int segs, max_segs, b_size, order, got;
+>>>>>>> v3.18
 =======
 	int segs, max_segs, b_size, order, got;
 >>>>>>> v3.18
@@ -4463,9 +5034,12 @@ static int enlarge_buffer(struct st_buffer * STbuffer, int new_size, int need_dm
 
 	max_segs = STbuffer->use_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nbr = max_segs - STbuffer->frp_segs;
 	if (nbr <= 0)
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4820,17 +5394,23 @@ static int st_probe(struct device *dev)
 	if ((stp = st_incompatible(SDp))) {
 		sdev_printk(KERN_INFO, SDp, "Found incompatible tape\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "st: The suggested driver is %s.\n", stp);
 		return -ENODEV;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		sdev_printk(KERN_INFO, SDp,
 			    "st: The suggested driver is %s.\n", stp);
 		return -ENODEV;
 	}
 
 	scsi_autopm_get_device(SDp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i = queue_max_segments(SDp->request_queue);
 	if (st_max_sg_segs < i)
@@ -4838,8 +5418,14 @@ static int st_probe(struct device *dev)
 	buffer = new_tape_buffer((SDp->host)->unchecked_isa_dma, i);
 	if (buffer == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "st: Can't allocate new tape buffer. Device not attached.\n");
+=======
+		sdev_printk(KERN_ERR, SDp,
+			    "st: Can't allocate new tape buffer. "
+			    "Device not attached.\n");
+>>>>>>> v3.18
 =======
 		sdev_printk(KERN_ERR, SDp,
 			    "st: Can't allocate new tape buffer. "
@@ -4851,7 +5437,12 @@ static int st_probe(struct device *dev)
 	disk = alloc_disk(1);
 	if (!disk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "st: out of memory. Device not attached.\n");
+=======
+		sdev_printk(KERN_ERR, SDp,
+			    "st: out of memory. Device not attached.\n");
+>>>>>>> v3.18
 =======
 		sdev_printk(KERN_ERR, SDp,
 			    "st: out of memory. Device not attached.\n");
@@ -4862,7 +5453,12 @@ static int st_probe(struct device *dev)
 	tpnt = kzalloc(sizeof(struct scsi_tape), GFP_ATOMIC);
 	if (tpnt == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "st: Can't allocate device descriptor.\n");
+=======
+		sdev_printk(KERN_ERR, SDp,
+			    "st: Can't allocate device descriptor.\n");
+>>>>>>> v3.18
 =======
 		sdev_printk(KERN_ERR, SDp,
 			    "st: Can't allocate device descriptor.\n");
@@ -4985,6 +5581,10 @@ out_buffer_free:
 	kfree(buffer);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	scsi_autopm_put_device(SDp);
+>>>>>>> v3.18
 =======
 	scsi_autopm_put_device(SDp);
 >>>>>>> v3.18
@@ -5040,7 +5640,11 @@ static void scsi_tape_release(struct kref *kref)
 static struct class st_sysfs_class = {
 	.name = "scsi_tape",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = st_dev_attrs,
+=======
+	.dev_groups = st_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = st_dev_groups,
 >>>>>>> v3.18
@@ -5178,6 +5782,10 @@ defined_show(struct device *dev, struct device_attribute *attr, char *buf)
 	return l;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(defined);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(defined);
 >>>>>>> v3.18
@@ -5193,7 +5801,11 @@ default_blksize_show(struct device *dev, struct device_attribute *attr,
 	return l;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+static DEVICE_ATTR_RO(default_blksize);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(default_blksize);
 >>>>>>> v3.18
@@ -5211,6 +5823,10 @@ default_density_show(struct device *dev, struct device_attribute *attr,
 	return l;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(default_density);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(default_density);
 >>>>>>> v3.18
@@ -5226,6 +5842,10 @@ default_compression_show(struct device *dev, struct device_attribute *attr,
 	return l;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(default_compression);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(default_compression);
 >>>>>>> v3.18
@@ -5258,6 +5878,7 @@ options_show(struct device *dev, struct device_attribute *attr, char *buf)
 	return l;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute st_dev_attrs[] = {
 	__ATTR_RO(defined),
@@ -5268,6 +5889,8 @@ static struct device_attribute st_dev_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(options);
 
 static struct attribute *st_dev_attrs[] = {
@@ -5279,6 +5902,9 @@ static struct attribute *st_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(st_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* The following functions may be useful for a larger audience. */

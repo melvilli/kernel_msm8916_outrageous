@@ -30,7 +30,11 @@ config FUSION_FC
 	tristate "Fusion MPT ScsiHost drivers for FC"
 	depends on PCI && SCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 =======
 	depends on SCSI_FC_ATTRS
 >>>>>>> v3.18

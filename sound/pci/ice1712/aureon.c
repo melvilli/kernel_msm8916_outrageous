@@ -1938,16 +1938,22 @@ static int aureon_add_controls(struct snd_ice1712 *ice)
 		id = aureon_cs8415_get(ice, CS8415_ID);
 		if (id != 0x41)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_INFO "No CS8415 chip. Skipping CS8415 controls.\n");
 		else if ((id & 0x0F) != 0x01)
 			snd_printk(KERN_INFO "Detected unsupported CS8415 rev. (%c)\n", (char)((id & 0x0F) + 'A' - 1));
 =======
+=======
+>>>>>>> v3.18
 			dev_info(ice->card->dev,
 				 "No CS8415 chip. Skipping CS8415 controls.\n");
 		else if ((id & 0x0F) != 0x01)
 			dev_info(ice->card->dev,
 				 "Detected unsupported CS8415 rev. (%c)\n",
 				 (char)((id & 0x0F) + 'A' - 1));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else {
 			for (i = 0; i < ARRAY_SIZE(cs8415_controls); i++) {

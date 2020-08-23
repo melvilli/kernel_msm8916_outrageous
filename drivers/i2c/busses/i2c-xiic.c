@@ -13,10 +13,13 @@
  * GNU General Public License for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -34,8 +37,13 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/errno.h>
+=======
+#include <linux/errno.h>
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/errno.h>
 #include <linux/err.h>
@@ -49,7 +57,11 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -82,7 +94,11 @@ struct xiic_i2c {
 	struct i2c_msg		*tx_msg;
 	spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int 		tx_pos;
+=======
+	unsigned int		tx_pos;
+>>>>>>> v3.18
 =======
 	unsigned int		tx_pos;
 >>>>>>> v3.18
@@ -289,8 +305,13 @@ static void xiic_read_rx(struct xiic_i2c *i2c)
 	bytes_in_fifo = xiic_getreg8(i2c, XIIC_RFO_REG_OFFSET) + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(i2c->adap.dev.parent, "%s entry, bytes in fifo: %d, msg: %d"
 		", SR: 0x%x, CR: 0x%x\n",
+=======
+	dev_dbg(i2c->adap.dev.parent,
+		"%s entry, bytes in fifo: %d, msg: %d, SR: 0x%x, CR: 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(i2c->adap.dev.parent,
 		"%s entry, bytes in fifo: %d, msg: %d, SR: 0x%x, CR: 0x%x\n",
@@ -362,14 +383,20 @@ static void xiic_process(struct xiic_i2c *i2c)
 	pend = isr & ier;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(i2c->adap.dev.parent, "%s entry, IER: 0x%x, ISR: 0x%x, "
 		"pend: 0x%x, SR: 0x%x, msg: %p, nmsgs: %d\n",
 		__func__, ier, isr, pend, xiic_getreg8(i2c, XIIC_SR_REG_OFFSET),
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(i2c->adap.dev.parent, "%s: IER: 0x%x, ISR: 0x%x, pend: 0x%x\n",
 		__func__, ier, isr, pend);
 	dev_dbg(i2c->adap.dev.parent, "%s: SR: 0x%x, msg: %p, nmsgs: %d\n",
 		__func__, xiic_getreg8(i2c, XIIC_SR_REG_OFFSET),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		i2c->tx_msg, i2c->nmsgs);
 
@@ -571,14 +598,20 @@ static void xiic_start_send(struct xiic_i2c *i2c)
 	xiic_irq_clr(i2c, XIIC_INTR_TX_ERROR_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(i2c->adap.dev.parent, "%s entry, msg: %p, len: %d, "
 		"ISR: 0x%x, CR: 0x%x\n",
 		__func__, msg, msg->len, xiic_getreg32(i2c, XIIC_IISR_OFFSET),
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(i2c->adap.dev.parent, "%s entry, msg: %p, len: %d",
 		__func__, msg, msg->len);
 	dev_dbg(i2c->adap.dev.parent, "%s entry, ISR: 0x%x, CR: 0x%x\n",
 		__func__, xiic_getreg32(i2c, XIIC_IISR_OFFSET),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		xiic_getreg8(i2c, XIIC_CR_REG_OFFSET));
 
@@ -711,6 +744,7 @@ static u32 xiic_func(struct i2c_adapter *adap)
 
 static const struct i2c_algorithm xiic_algorithm = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.master_xfer	= xiic_xfer,
 	.functionality	= xiic_func,
 };
@@ -721,6 +755,8 @@ static struct i2c_adapter xiic_adapter = {
 	.class		= I2C_CLASS_HWMON | I2C_CLASS_SPD,
 	.algo		= &xiic_algorithm,
 =======
+=======
+>>>>>>> v3.18
 	.master_xfer = xiic_xfer,
 	.functionality = xiic_func,
 };
@@ -730,6 +766,9 @@ static struct i2c_adapter xiic_adapter = {
 	.name = DRIVER_NAME,
 	.class = I2C_CLASS_DEPRECATED,
 	.algo = &xiic_algorithm,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -742,6 +781,7 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 	int ret, irq;
 	u8 i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
@@ -770,6 +810,8 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 		goto map_failed;
 	}
 =======
+=======
+>>>>>>> v3.18
 	i2c = devm_kzalloc(&pdev->dev, sizeof(*i2c), GFP_KERNEL);
 	if (!i2c)
 		return -ENOMEM;
@@ -784,6 +826,9 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 		return irq;
 
 	pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* hook up driver to tree */
@@ -793,6 +838,7 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 	i2c->adap.dev.parent = &pdev->dev;
 	i2c->adap.dev.of_node = pdev->dev.of_node;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xiic_reinit(i2c);
 
@@ -805,6 +851,8 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&i2c->lock);
 	init_waitqueue_head(&i2c->wait);
 
@@ -816,13 +864,21 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 
 	xiic_reinit(i2c);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* add i2c adapter to i2c tree */
 	ret = i2c_add_adapter(&i2c->adap);
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to add adapter\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto add_adapter_failed;
+=======
+		xiic_deinit(i2c);
+		return ret;
+>>>>>>> v3.18
 =======
 		xiic_deinit(i2c);
 		return ret;
@@ -835,6 +891,7 @@ static int xiic_i2c_probe(struct platform_device *pdev)
 			i2c_new_device(&i2c->adap, pdata->devices + i);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	of_i2c_register_devices(&i2c->adap);
 
@@ -857,13 +914,19 @@ resource_missing:
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int xiic_i2c_remove(struct platform_device *pdev)
 {
 	struct xiic_i2c *i2c = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -872,6 +935,7 @@ static int xiic_i2c_remove(struct platform_device *pdev)
 
 	xiic_deinit(i2c);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	free_irq(platform_get_irq(pdev, 0), i2c);
 
@@ -883,6 +947,8 @@ static int xiic_i2c_remove(struct platform_device *pdev)
 
 	kfree(i2c);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

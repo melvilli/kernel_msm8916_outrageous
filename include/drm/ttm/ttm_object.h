@@ -42,6 +42,10 @@
 #include <linux/kref.h>
 #include <linux/rcupdate.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dma-buf.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-buf.h>
 >>>>>>> v3.18
@@ -82,6 +86,10 @@ enum ttm_object_type {
 	ttm_buffer_type,
 	ttm_lock_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ttm_prime_type,
+>>>>>>> v3.18
 =======
 	ttm_prime_type,
 >>>>>>> v3.18
@@ -141,7 +149,10 @@ struct ttm_base_object {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * struct ttm_prime_object - Modified base object that is prime-aware
@@ -166,6 +177,9 @@ struct ttm_prime_object {
 	void (*refcount_release) (struct ttm_base_object **);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ttm_base_object_init
@@ -200,8 +214,11 @@ extern int ttm_base_object_init(struct ttm_object_file *tfile,
  *
  * Looks up a struct ttm_base_object with the key @key.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Also verifies that the object is visible to the application, by
  * comparing the @tfile argument and checking the object shareable flag.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -211,7 +228,10 @@ extern struct ttm_base_object *ttm_base_object_lookup(struct ttm_object_file
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ttm_base_object_lookup_for_ref
  *
  * @tdev: Pointer to a struct ttm_object_device.
@@ -226,6 +246,9 @@ extern struct ttm_base_object *
 ttm_base_object_lookup_for_ref(struct ttm_object_device *tdev, uint32_t key);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ttm_base_object_unref
  *
@@ -248,6 +271,11 @@ extern void ttm_base_object_unref(struct ttm_base_object **p_base);
  * already existed, and the refcount was upped on that object instead.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Checks that the base object is shareable and adds a ref object to it.
+ *
+>>>>>>> v3.18
 =======
  * Checks that the base object is shareable and adds a ref object to it.
  *
@@ -265,11 +293,17 @@ extern int ttm_ref_object_add(struct ttm_object_file *tfile,
 			      struct ttm_base_object *base,
 			      enum ttm_ref_type ref_type, bool *existed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 extern bool ttm_ref_object_exists(struct ttm_object_file *tfile,
 				  struct ttm_base_object *base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ttm_ref_object_base_unref
@@ -316,7 +350,13 @@ extern void ttm_object_file_release(struct ttm_object_file **p_tfile);
  * ttm_object device init - initialize a struct ttm_object_device
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @hash_order: Order of hash table used to hash the base objects.
+=======
+ * @mem_glob: struct ttm_mem_global for memory accounting.
+ * @hash_order: Order of hash table used to hash the base objects.
+ * @ops: DMA buf ops for prime objects of this device.
+>>>>>>> v3.18
 =======
  * @mem_glob: struct ttm_mem_global for memory accounting.
  * @hash_order: Order of hash table used to hash the base objects.
@@ -328,13 +368,19 @@ extern void ttm_object_file_release(struct ttm_object_file **p_tfile);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct ttm_object_device *ttm_object_device_init
     (struct ttm_mem_global *mem_glob, unsigned int hash_order);
 =======
+=======
+>>>>>>> v3.18
 extern struct ttm_object_device *
 ttm_object_device_init(struct ttm_mem_global *mem_glob,
 		       unsigned int hash_order,
 		       const struct dma_buf_ops *ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -353,7 +399,10 @@ extern void ttm_object_device_release(struct ttm_object_device **p_tdev);
 #define ttm_base_object_kfree(__object, __base)\
 	kfree_rcu(__object, __base.rhead)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 extern int ttm_prime_object_init(struct ttm_object_file *tfile,
 				 size_t size,
@@ -381,5 +430,8 @@ extern int ttm_prime_handle_to_fd(struct ttm_object_file *tfile,
 
 #define ttm_prime_object_kfree(__obj, __prime)		\
 	kfree_rcu(__obj, __prime.base.rhead)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

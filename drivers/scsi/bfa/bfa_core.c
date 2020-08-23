@@ -1368,10 +1368,13 @@ bfa_faa_query(struct bfa_s *bfa, struct bfa_faa_attr_s *attr,
 	bfa_status_t            status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iocfc->faa_args.faa_attr = attr;
 	iocfc->faa_args.faa_cb.faa_cbfn = cbfn;
 	iocfc->faa_args.faa_cb.faa_cbarg = cbarg;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = bfa_faa_validate_request(bfa);
@@ -1382,11 +1385,17 @@ bfa_faa_query(struct bfa_s *bfa, struct bfa_faa_attr_s *attr,
 		return BFA_STATUS_DEVBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	iocfc->faa_args.faa_attr = attr;
 	iocfc->faa_args.faa_cb.faa_cbfn = cbfn;
 	iocfc->faa_args.faa_cb.faa_cbarg = cbarg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iocfc->faa_args.busy = BFA_TRUE;
 	memset(&faa_attr_req, 0, sizeof(struct bfi_faa_query_s));
@@ -1443,6 +1452,10 @@ bfa_iocfc_disable_cbfn(void *bfa_arg)
 	struct bfa_s	*bfa = bfa_arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bfa->queue_process = BFA_FALSE;
+>>>>>>> v3.18
 =======
 	bfa->queue_process = BFA_FALSE;
 >>>>>>> v3.18
@@ -1582,7 +1595,10 @@ void
 bfa_iocfc_stop(struct bfa_s *bfa)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa->queue_process = BFA_FALSE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bfa_fsm_send_event(&bfa->iocfc, IOCFC_E_STOP);
@@ -1692,7 +1708,10 @@ bfa_iocfc_disable(struct bfa_s *bfa)
 		     "IOC Disable");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa->queue_process = BFA_FALSE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bfa_fsm_send_event(&bfa->iocfc, IOCFC_E_DISABLE);

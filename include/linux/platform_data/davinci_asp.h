@@ -19,7 +19,11 @@
 #include <linux/genalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_platform_data {
+=======
+struct davinci_mcasp_pdata {
+>>>>>>> v3.18
 =======
 struct davinci_mcasp_pdata {
 >>>>>>> v3.18
@@ -89,13 +93,19 @@ struct davinci_mcasp_pdata {
 	u8 txnumevt;
 	u8 rxnumevt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	int tx_dma_channel;
 	int rx_dma_channel;
 };
 /* TODO: Fix arch/arm/mach-davinci/ users and remove this define */
 #define snd_platform_data davinci_mcasp_pdata
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -103,6 +113,10 @@ enum {
 	MCASP_VERSION_2,	/* DA8xx/OMAPL1x */
 	MCASP_VERSION_3,        /* TI81xx/AM33xx */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MCASP_VERSION_4,	/* DRA7xxx */
+>>>>>>> v3.18
 =======
 	MCASP_VERSION_4,	/* DRA7xxx */
 >>>>>>> v3.18

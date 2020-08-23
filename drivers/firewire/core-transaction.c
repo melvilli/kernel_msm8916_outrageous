@@ -478,7 +478,11 @@ void fw_send_phy_config(struct fw_card *card,
 	phy_config_packet.header[2] = ~data;
 	phy_config_packet.generation = generation;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(phy_config_done);
+=======
+	reinit_completion(&phy_config_done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&phy_config_done);
 >>>>>>> v3.18
@@ -528,17 +532,23 @@ static LIST_HEAD(address_handler_list);
 
 const struct fw_address_region fw_high_memory_region =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .start = 0x000100000000ULL, .end = 0xffffe0000000ULL,  };
 EXPORT_SYMBOL(fw_high_memory_region);
 
 static const struct fw_address_region low_memory_region =
 	{ .start = 0x000000000000ULL, .end = 0x000100000000ULL,  };
 =======
+=======
+>>>>>>> v3.18
 	{ .start = FW_MAX_PHYSICAL_RANGE, .end = 0xffffe0000000ULL, };
 EXPORT_SYMBOL(fw_high_memory_region);
 
 static const struct fw_address_region low_memory_region =
 	{ .start = 0x000000000000ULL, .end = FW_MAX_PHYSICAL_RANGE, };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if 0
@@ -1230,7 +1240,11 @@ static void handle_low_memory(struct fw_card *card, struct fw_request *request,
 
 static struct fw_address_handler low_memory = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.length			= 0x000100000000ULL,
+=======
+	.length			= FW_MAX_PHYSICAL_RANGE,
+>>>>>>> v3.18
 =======
 	.length			= FW_MAX_PHYSICAL_RANGE,
 >>>>>>> v3.18
@@ -1279,8 +1293,12 @@ static int __init fw_core_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fw_workqueue = alloc_workqueue("firewire",
 				       WQ_NON_REENTRANT | WQ_MEM_RECLAIM, 0);
+=======
+	fw_workqueue = alloc_workqueue("firewire", WQ_MEM_RECLAIM, 0);
+>>>>>>> v3.18
 =======
 	fw_workqueue = alloc_workqueue("firewire", WQ_MEM_RECLAIM, 0);
 >>>>>>> v3.18

@@ -3,7 +3,11 @@
 
 #include "tool.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -19,7 +23,11 @@ struct perf_top {
 	struct perf_tool   tool;
 	struct perf_evlist *evlist;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_record_opts record_opts;
+=======
+	struct record_opts record_opts;
+>>>>>>> v3.18
 =======
 	struct record_opts record_opts;
 >>>>>>> v3.18
@@ -33,9 +41,15 @@ struct perf_top {
 	u64		   guest_us_samples, guest_kernel_samples;
 	int		   print_entries, count_filter, delay_secs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		   hide_kernel_symbols, hide_user_symbols, zero;
 	bool		   use_tui, use_stdio;
 	bool		   sort_has_symbols;
+=======
+	int		   max_stack;
+	bool		   hide_kernel_symbols, hide_user_symbols, zero;
+	bool		   use_tui, use_stdio;
+>>>>>>> v3.18
 =======
 	int		   max_stack;
 	bool		   hide_kernel_symbols, hide_user_symbols, zero;
@@ -52,14 +66,20 @@ struct perf_top {
 	int		   sym_pcnt_filter;
 	const char	   *sym_filter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	float		   min_percent;
 };
 
 #define CONSOLE_CLEAR "[H[2J"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 size_t perf_top__header_snprintf(struct perf_top *top, char *bf, size_t size);
 void perf_top__reset_sample_counters(struct perf_top *top);

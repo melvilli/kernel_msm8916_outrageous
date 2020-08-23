@@ -56,7 +56,10 @@ static unsigned long clk_composite_recalc_rate(struct clk_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static long clk_composite_determine_rate(struct clk_hw *hw, unsigned long rate,
 					unsigned long *best_parent_rate,
 					struct clk **best_parent_p)
@@ -126,6 +129,9 @@ static long clk_composite_determine_rate(struct clk_hw *hw, unsigned long rate,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long clk_composite_round_rate(struct clk_hw *hw, unsigned long rate,
 				  unsigned long *prate)
@@ -211,7 +217,11 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
 
 	if (mux_hw && mux_ops) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!mux_ops->get_parent || !mux_ops->set_parent) {
+=======
+		if (!mux_ops->get_parent) {
+>>>>>>> v3.18
 =======
 		if (!mux_ops->get_parent) {
 >>>>>>> v3.18
@@ -223,12 +233,18 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
 		composite->mux_ops = mux_ops;
 		clk_composite_ops->get_parent = clk_composite_get_parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_composite_ops->set_parent = clk_composite_set_parent;
 =======
+=======
+>>>>>>> v3.18
 		if (mux_ops->set_parent)
 			clk_composite_ops->set_parent = clk_composite_set_parent;
 		if (mux_ops->determine_rate)
 			clk_composite_ops->determine_rate = clk_composite_determine_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -237,6 +253,7 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
 			clk = ERR_PTR(-EINVAL);
 			goto err;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		/* .round_rate is a prerequisite for .set_rate */
@@ -250,6 +267,8 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
 				"%s: missing round_rate op is required\n",
 				__func__);
 =======
+=======
+>>>>>>> v3.18
 		clk_composite_ops->recalc_rate = clk_composite_recalc_rate;
 
 		if (rate_ops->determine_rate)
@@ -267,13 +286,19 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
 			else
 				WARN(1, "%s: missing round_rate op is required\n",
 						__func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		composite->rate_hw = rate_hw;
 		composite->rate_ops = rate_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_composite_ops->recalc_rate = clk_composite_recalc_rate;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

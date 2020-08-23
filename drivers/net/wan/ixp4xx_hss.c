@@ -1385,7 +1385,10 @@ static int hss_remove_one(struct platform_device *pdev)
 	free_netdev(port->netdev);
 	npe_release(port->npe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(port);

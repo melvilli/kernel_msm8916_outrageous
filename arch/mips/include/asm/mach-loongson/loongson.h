@@ -16,6 +16,10 @@
 #include <linux/irq.h>
 #include <linux/kconfig.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <boot_param.h>
+>>>>>>> v3.18
 =======
 #include <boot_param.h>
 >>>>>>> v3.18
@@ -29,8 +33,14 @@ extern void mach_prepare_shutdown(void);
 
 /* environment arguments from bootloader */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long cpu_clock_freq;
 extern unsigned long memsize, highmemsize;
+=======
+extern u32 cpu_clock_freq;
+extern u32 memsize, highmemsize;
+extern struct plat_smp_ops loongson3_smp_ops;
+>>>>>>> v3.18
 =======
 extern u32 cpu_clock_freq;
 extern u32 memsize, highmemsize;
@@ -72,13 +82,19 @@ extern int mach_i8259_irq(void);
 	(*(volatile u32 *)((char *)CKSEG1ADDR(LOONGSON_REG_BASE) + (x)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define LOONGSON3_REG8(base, x) \
 	(*(volatile u8 *)((char *)TO_UNCAC(base) + (x)))
 
 #define LOONGSON3_REG32(base, x) \
 	(*(volatile u32 *)((char *)TO_UNCAC(base) + (x)))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LOONGSON_IRQ_BASE	32
 #define LOONGSON2_PERFCNT_IRQ	(MIPS_CPU_IRQ_BASE + 6) /* cpu perf counter */
@@ -106,11 +122,17 @@ static inline void do_perfcnt_IRQ(void)
 #define LOONGSON_REG_SIZE	0x00100000	/* 256Bytes + 256Bytes + ??? */
 #define LOONGSON_REG_TOP	(LOONGSON_REG_BASE+LOONGSON_REG_SIZE-1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Loongson-3 specific registers */
 #define LOONGSON3_REG_BASE	0x3ff00000
 #define LOONGSON3_REG_SIZE	0x00100000	/* 256Bytes + 256Bytes + ??? */
 #define LOONGSON3_REG_TOP	(LOONGSON3_REG_BASE+LOONGSON3_REG_SIZE-1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define LOONGSON_LIO1_BASE	0x1ff00000
@@ -128,8 +150,11 @@ static inline void do_perfcnt_IRQ(void)
 #define LOONGSON_PCICFG_SIZE	0x00000800	/* 2K */
 #define LOONGSON_PCICFG_TOP	(LOONGSON_PCICFG_BASE+LOONGSON_PCICFG_SIZE-1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOONGSON_PCIIO_BASE	0x1fd00000
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_HT_PCI)
 #define LOONGSON_PCIIO_BASE	loongson_sysconf.pci_io_base
@@ -137,6 +162,9 @@ static inline void do_perfcnt_IRQ(void)
 #define LOONGSON_PCIIO_BASE	0x1fd00000
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LOONGSON_PCIIO_SIZE	0x00100000	/* 1M */
 #define LOONGSON_PCIIO_TOP	(LOONGSON_PCIIO_BASE+LOONGSON_PCIIO_SIZE-1)
@@ -268,7 +296,10 @@ static inline void do_perfcnt_IRQ(void)
 #define LOONGSON_PXARB_STATUS		LOONGSON_REG(LOONGSON_REGBASE + 0x6c)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MAX_PACKAGES 4
 
 /* Chip Config registor of each physical cpu package, PRid >= Loongson-2F */
@@ -279,6 +310,9 @@ extern u64 loongson_chipcfg[MAX_PACKAGES];
 extern u64 loongson_freqctrl[MAX_PACKAGES];
 #define LOONGSON_FREQCTRL(id) (*(volatile u32 *)(loongson_freqctrl[id]))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* pcimap */
 
@@ -296,9 +330,12 @@ extern u64 loongson_freqctrl[MAX_PACKAGES];
 #include <linux/cpufreq.h>
 extern struct cpufreq_frequency_table loongson2_clockmod_table[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Chip Config */
 #define LOONGSON_CHIPCFG0		LOONGSON_REG(LOONGSON_REGBASE + 0x80)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

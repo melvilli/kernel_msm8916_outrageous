@@ -67,7 +67,11 @@ void ctcm_dbf_longtext(enum ctcm_dbf_names dbf_nix, int level, char *fmt, ...)
 	va_list args;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (level > (ctcm_dbf[dbf_nix].id)->level)
+=======
+	if (!debug_level_enabled(ctcm_dbf[dbf_nix].id, level))
+>>>>>>> v3.18
 =======
 	if (!debug_level_enabled(ctcm_dbf[dbf_nix].id, level))
 >>>>>>> v3.18

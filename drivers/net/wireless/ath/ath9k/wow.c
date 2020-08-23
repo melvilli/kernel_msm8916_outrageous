@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Qualcomm Atheros, Inc.
+=======
+ * Copyright (c) 2013 Qualcomm Atheros, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013 Qualcomm Atheros, Inc.
 >>>>>>> v3.18
@@ -18,6 +22,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/export.h>
 #include "ath9k.h"
@@ -536,6 +541,8 @@ void ath9k_hw_wow_enable(struct ath_hw *ah, u32 pattern_enable)
 }
 EXPORT_SYMBOL(ath9k_hw_wow_enable);
 =======
+=======
+>>>>>>> v3.18
 #include "ath9k.h"
 
 static const struct wiphy_wowlan_support ath9k_wowlan_support = {
@@ -882,4 +889,7 @@ void ath9k_init_wow(struct ieee80211_hw *hw)
 	atomic_set(&sc->wow_sleep_proc_intr, -1);
 	atomic_set(&sc->wow_got_bmiss_intr, -1);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

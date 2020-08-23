@@ -420,7 +420,11 @@ static int af9015_eeprom_hash(struct dvb_usb_device *d)
 	for (i = 0; i < AF9015_EEPROM_SIZE / sizeof(u32); i++) {
 		state->eeprom_sum *= GOLDEN_RATIO_PRIME_32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		state->eeprom_sum += le32_to_cpu(((u32 *)buf)[i]);
+=======
+		state->eeprom_sum += le32_to_cpu(((__le32 *)buf)[i]);
+>>>>>>> v3.18
 =======
 		state->eeprom_sum += le32_to_cpu(((__le32 *)buf)[i]);
 >>>>>>> v3.18
@@ -1218,7 +1222,11 @@ static int af9015_rc_query(struct dvb_usb_device *d)
 			!memcmp(&buf[12], state->rc_last, 4)) {
 		dev_dbg(&d->udev->dev, "%s: key repeated\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(d->rc_dev, state->rc_keycode, 0);
+=======
+		rc_repeat(d->rc_dev);
+>>>>>>> v3.18
 =======
 		rc_repeat(d->rc_dev);
 >>>>>>> v3.18
@@ -1242,6 +1250,7 @@ static int af9015_rc_query(struct dvb_usb_device *d)
 			if (buf[12] == (u8) ~buf[13]) {
 				/* NEC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				state->rc_keycode = buf[12] << 8 | buf[14];
 			} else {
 				/* NEC extended*/
@@ -1255,6 +1264,8 @@ static int af9015_rc_query(struct dvb_usb_device *d)
 		}
 		rc_keydown(d->rc_dev, state->rc_keycode, 0);
 =======
+=======
+>>>>>>> v3.18
 				state->rc_keycode = RC_SCANCODE_NEC(buf[12],
 								    buf[14]);
 			} else {
@@ -1271,6 +1282,9 @@ static int af9015_rc_query(struct dvb_usb_device *d)
 							      buf[15]);
 		}
 		rc_keydown(d->rc_dev, RC_TYPE_NEC, state->rc_keycode, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		dev_dbg(&d->udev->dev, "%s: no key press\n", __func__);

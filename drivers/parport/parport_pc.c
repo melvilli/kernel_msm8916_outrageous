@@ -1703,7 +1703,10 @@ static int parport_ECP_supported(struct parport *pb)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 static int intel_bug_present_check_epp(struct parport *pb)
 {
@@ -1744,6 +1747,9 @@ static int intel_bug_present(struct parport *pb)
 }
 #endif /* CONFIG_X86_32 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int parport_ECPPS2_supported(struct parport *pb)
 {
@@ -1766,8 +1772,11 @@ static int parport_ECPPS2_supported(struct parport *pb)
 static int parport_EPP_supported(struct parport *pb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct parport_pc_private *priv = pb->private_data;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1789,6 +1798,7 @@ static int parport_EPP_supported(struct parport *pb)
 
 	/* Check for Intel bug. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->ecr) {
 		unsigned char i;
 		for (i = 0x00; i < 0x80; i += 0x20) {
@@ -1799,6 +1809,10 @@ static int parport_EPP_supported(struct parport *pb)
 			}
 		}
 	}
+=======
+	if (intel_bug_present(pb))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (intel_bug_present(pb))
 		return 0;
@@ -2056,6 +2070,10 @@ struct parport *parport_pc_probe_port(unsigned long int base,
 	struct resource	*EPP_res = NULL;
 	struct platform_device *pdev = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -2070,14 +2088,20 @@ struct parport *parport_pc_probe_port(unsigned long int base,
 		dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->coherent_dma_mask = DMA_BIT_MASK(24);
 		dev->dma_mask = &dev->coherent_dma_mask;
 =======
+=======
+>>>>>>> v3.18
 		ret = dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(24));
 		if (ret) {
 			dev_err(dev, "Unable to set coherent dma mask: disabling DMA\n");
 			dma = PARPORT_DMA_NONE;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2881,9 +2905,13 @@ static int parport_pc_pci_probe(struct pci_dev *dev,
 			printk(KERN_DEBUG
 	"PCI parallel port detected: %04x:%04x, I/O at %#lx(%#lx)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				parport_pc_pci_tbl[i + last_sio].vendor,
 				parport_pc_pci_tbl[i + last_sio].device,
 				io_lo, io_hi);
+=======
+				id->vendor, id->device, io_lo, io_hi);
+>>>>>>> v3.18
 =======
 				id->vendor, id->device, io_lo, io_hi);
 >>>>>>> v3.18
@@ -2892,9 +2920,13 @@ static int parport_pc_pci_probe(struct pci_dev *dev,
 			printk(KERN_DEBUG
 	"PCI parallel port detected: %04x:%04x, I/O at %#lx(%#lx), IRQ %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				parport_pc_pci_tbl[i + last_sio].vendor,
 				parport_pc_pci_tbl[i + last_sio].device,
 				io_lo, io_hi, irq);
+=======
+				id->vendor, id->device, io_lo, io_hi, irq);
+>>>>>>> v3.18
 =======
 				id->vendor, id->device, io_lo, io_hi, irq);
 >>>>>>> v3.18
@@ -2928,8 +2960,11 @@ static void parport_pc_pci_remove(struct pci_dev *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (data) {

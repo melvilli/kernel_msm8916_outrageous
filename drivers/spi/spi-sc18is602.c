@@ -184,6 +184,7 @@ static int sc18is602_check_transfer(struct spi_device *spi,
 				    struct spi_transfer *t, int tlen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bpw;
 	uint32_t hz;
 
@@ -207,6 +208,11 @@ static int sc18is602_check_transfer(struct spi_device *spi,
 		return -EINVAL;
 
 >>>>>>> v3.18
+=======
+	if (t && t->len + tlen > SC18IS602_BUFSIZ)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -218,6 +224,7 @@ static int sc18is602_transfer_one(struct spi_master *master,
 	struct spi_transfer *t;
 	int status = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* SC18IS602 does not support CS2 */
 	if (hw->id == sc18is602 && spi->chip_select == 2) {
@@ -232,6 +239,10 @@ static int sc18is602_transfer_one(struct spi_master *master,
 	hw->tlen = 0;
 	list_for_each_entry(t, &m->transfers, transfer_list) {
 >>>>>>> v3.18
+=======
+	hw->tlen = 0;
+	list_for_each_entry(t, &m->transfers, transfer_list) {
+>>>>>>> v3.18
 		bool do_transfer;
 
 		status = sc18is602_check_transfer(spi, t, hw->tlen);
@@ -239,7 +250,11 @@ static int sc18is602_transfer_one(struct spi_master *master,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = sc18is602_setup_transfer(hw, hz, spi->mode);
+=======
+		status = sc18is602_setup_transfer(hw, t->speed_hz, spi->mode);
+>>>>>>> v3.18
 =======
 		status = sc18is602_setup_transfer(hw, t->speed_hz, spi->mode);
 >>>>>>> v3.18
@@ -261,7 +276,10 @@ static int sc18is602_transfer_one(struct spi_master *master,
 			udelay(t->delay_usecs);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 error:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	m->status = status;
@@ -273,6 +291,7 @@ error:
 static int sc18is602_setup(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!spi->bits_per_word)
 		spi->bits_per_word = 8;
 
@@ -281,6 +300,8 @@ static int sc18is602_setup(struct spi_device *spi)
 
 	return sc18is602_check_transfer(spi, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct sc18is602 *hw = spi_master_get_devdata(spi->master);
 
 	/* SC18IS602 does not support CS2 */
@@ -288,6 +309,9 @@ static int sc18is602_setup(struct spi_device *spi)
 		return -ENXIO;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -344,12 +368,15 @@ static int sc18is602_probe(struct i2c_client *client,
 	master->bus_num = client->adapter->nr;
 	master->mode_bits = SPI_CPHA | SPI_CPOL | SPI_LSB_FIRST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = sc18is602_setup;
 	master->transfer_one_message = sc18is602_transfer_one;
 	master->dev.of_node = np;
 
 	error = spi_register_master(master);
 =======
+=======
+>>>>>>> v3.18
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 	master->setup = sc18is602_setup;
 	master->transfer_one_message = sc18is602_transfer_one;
@@ -358,6 +385,9 @@ static int sc18is602_probe(struct i2c_client *client,
 	master->max_speed_hz = hw->freq / 4;
 
 	error = devm_spi_register_master(dev, master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (error)
 		goto error_reg;
@@ -370,6 +400,7 @@ error_reg:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sc18is602_remove(struct i2c_client *client)
 {
 	struct sc18is602 *hw = i2c_get_clientdata(client);
@@ -380,6 +411,8 @@ static int sc18is602_remove(struct i2c_client *client)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct i2c_device_id sc18is602_id[] = {
@@ -396,7 +429,10 @@ static struct i2c_driver sc18is602_driver = {
 	},
 	.probe = sc18is602_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = sc18is602_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = sc18is602_id,

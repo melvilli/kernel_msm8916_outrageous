@@ -31,7 +31,11 @@
 
 /* kick the remote processor, and let it know which virtqueue to poke at */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rproc_virtio_notify(struct virtqueue *vq)
+=======
+static bool rproc_virtio_notify(struct virtqueue *vq)
+>>>>>>> v3.18
 =======
 static bool rproc_virtio_notify(struct virtqueue *vq)
 >>>>>>> v3.18
@@ -44,6 +48,10 @@ static bool rproc_virtio_notify(struct virtqueue *vq)
 
 	rproc->ops->kick(rproc, notifyid);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18

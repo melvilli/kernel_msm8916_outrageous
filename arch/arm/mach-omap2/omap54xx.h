@@ -31,10 +31,16 @@
 #define OMAP54XX_SAR_RAM_BASE		0x4ae26000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRA7XX_CM_CORE_AON_BASE		0x4a005000
 #define DRA7XX_CTRL_BASE		0x4a003400
 #define DRA7XX_TAP_BASE			0x4ae0c000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_SOC_OMAP555554XX_H */

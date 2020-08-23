@@ -8,9 +8,15 @@
  * the Free Software Foundation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
  * Written by: Eliezer Tamir
  * Modified by: Vladislav Zolotarov <vladz@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+ * Written by: Eliezer Tamir
+ * Modified by: Vladislav Zolotarov
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
  * Written by: Eliezer Tamir
@@ -647,11 +653,14 @@ static const struct {
  * [31] MCP Latched scpad_parity
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MISC_AEU_ENABLE_MCP_PRTY_BITS	\
 	(AEU_INPUTS_ATTN_BITS_MCP_LATCHED_ROM_PARITY | \
 	 AEU_INPUTS_ATTN_BITS_MCP_LATCHED_UMP_RX_PARITY | \
 	 AEU_INPUTS_ATTN_BITS_MCP_LATCHED_UMP_TX_PARITY | \
 =======
+=======
+>>>>>>> v3.18
 #define MISC_AEU_ENABLE_MCP_PRTY_SUB_BITS	\
 	(AEU_INPUTS_ATTN_BITS_MCP_LATCHED_ROM_PARITY | \
 	 AEU_INPUTS_ATTN_BITS_MCP_LATCHED_UMP_RX_PARITY | \
@@ -659,6 +668,9 @@ static const struct {
 
 #define MISC_AEU_ENABLE_MCP_PRTY_BITS	\
 	(MISC_AEU_ENABLE_MCP_PRTY_SUB_BITS | \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 AEU_INPUTS_ATTN_BITS_MCP_LATCHED_SCPAD_PARITY)
 
@@ -666,6 +678,7 @@ static const struct {
  * MISC_AEU_ENABLE_MCP_PRTY_BITS are set - attentions are
  * enabled, when cleared - disabled.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const u32 mcp_attn_ctl_regs[] = {
 	MISC_REG_AEU_ENABLE4_FUNC_0_OUT_0,
@@ -675,6 +688,8 @@ static const u32 mcp_attn_ctl_regs[] = {
 	MISC_REG_AEU_ENABLE4_NIG_1,
 	MISC_REG_AEU_ENABLE4_PXP_1
 =======
+=======
+>>>>>>> v3.18
 static const struct {
 	u32 addr;
 	u32 bits;
@@ -691,6 +706,9 @@ static const struct {
 		MISC_AEU_ENABLE_MCP_PRTY_SUB_BITS },
 	{ MISC_REG_AEU_ENABLE4_PXP_1,
 		MISC_AEU_ENABLE_MCP_PRTY_SUB_BITS }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -701,6 +719,7 @@ static inline void bnx2x_set_mcp_parity(struct bnx2x *bp, u8 enable)
 
 	for (i = 0; i < ARRAY_SIZE(mcp_attn_ctl_regs); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_val = REG_RD(bp, mcp_attn_ctl_regs[i]);
 
 		if (enable)
@@ -710,6 +729,8 @@ static inline void bnx2x_set_mcp_parity(struct bnx2x *bp, u8 enable)
 
 		REG_WR(bp, mcp_attn_ctl_regs[i], reg_val);
 =======
+=======
+>>>>>>> v3.18
 		reg_val = REG_RD(bp, mcp_attn_ctl_regs[i].addr);
 
 		if (enable)
@@ -718,6 +739,9 @@ static inline void bnx2x_set_mcp_parity(struct bnx2x *bp, u8 enable)
 			reg_val &= ~mcp_attn_ctl_regs[i].bits;
 
 		REG_WR(bp, mcp_attn_ctl_regs[i].addr, reg_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

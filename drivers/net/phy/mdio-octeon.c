@@ -11,7 +11,10 @@
 #include <linux/delay.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/gfp.h>
@@ -226,7 +229,11 @@ static int octeon_mdiobus_probe(struct platform_device *pdev)
 	bus->mii_bus->write = octeon_mdiobus_write;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, bus);
+=======
+	platform_set_drvdata(pdev, bus);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, bus);
 >>>>>>> v3.18
@@ -252,7 +259,11 @@ static int octeon_mdiobus_remove(struct platform_device *pdev)
 	union cvmx_smix_en smi_en;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus = dev_get_drvdata(&pdev->dev);
+=======
+	bus = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	bus = platform_get_drvdata(pdev);
 >>>>>>> v3.18

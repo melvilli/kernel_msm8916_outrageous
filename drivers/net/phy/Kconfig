@@ -25,13 +25,19 @@ config AMD_PHY
 	  Currently supports the am79c874
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AMD_XGBE_PHY
 	tristate "Driver for the AMD 10GbE (amd-xgbe) PHYs"
 	depends on OF
 	---help---
 	  Currently supports the AMD 10GbE PHY
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MARVELL_PHY
 	tristate "Drivers for Marvell PHYs"
@@ -81,13 +87,19 @@ config BCM63XX_PHY
 	  Currently supports the 6348 and 6358 PHYs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BCM7XXX_PHY
 	tristate "Drivers for Broadcom 7xxx SOCs internal PHYs"
 	---help---
 	  Currently supports the BCM7366, BCM7439, BCM7445, and
 	  40nm and 65nm generation of BCM7xxx Set Top Box SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config BCM87XX_PHY
 	tristate "Driver for Broadcom BCM8706 and BCM8727 PHYs"
@@ -154,7 +166,11 @@ config MDIO_GPIO
 config MDIO_OCTEON
 	tristate "Support for MDIO buses on Octeon SOCs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on  CPU_CAVIUM_OCTEON
+=======
+	depends on CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC
 >>>>>>> v3.18
@@ -167,7 +183,10 @@ config MDIO_OCTEON
 	  If in doubt, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MDIO_SUN4I
 	tristate "Allwinner sun4i MDIO interface support"
 	depends on ARCH_SUNXI
@@ -183,6 +202,9 @@ config MDIO_MOXART
           This driver supports the MDIO interface found in the network
           interface units of the MOXA ART SoC
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MDIO_BUS_MUX
 	tristate
@@ -217,7 +239,10 @@ config MDIO_BUS_MUX_MMIOREG
 	  Currently, only 8-bit registers are supported.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MDIO_BCM_UNIMAC
 	tristate "Broadcom UniMAC MDIO bus controller"
 	depends on HAS_IOMEM
@@ -227,6 +252,9 @@ config MDIO_BCM_UNIMAC
 	  controllers as well as some Broadcom Ethernet switches such as the
 	  Starfighter 2 switches.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # PHYLIB
 

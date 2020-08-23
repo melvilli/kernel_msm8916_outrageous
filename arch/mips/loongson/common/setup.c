@@ -19,9 +19,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void (*__wbflush)(void);
 EXPORT_SYMBOL(__wbflush);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void wbflush_loongson(void)
@@ -36,16 +39,22 @@ static void wbflush_loongson(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init plat_mem_setup(void)
 {
 	__wbflush = wbflush_loongson;
 
 =======
+=======
+>>>>>>> v3.18
 void (*__wbflush)(void) = wbflush_loongson;
 EXPORT_SYMBOL(__wbflush);
 
 void __init plat_mem_setup(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_VT
 #if defined(CONFIG_VGA_CONSOLE)

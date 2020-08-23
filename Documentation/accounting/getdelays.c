@@ -273,7 +273,11 @@ int main(int argc, char *argv[])
 	int loop = 0;
 	int containerset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char containerpath[1024];
+=======
+	char *containerpath = NULL;
+>>>>>>> v3.18
 =======
 	char *containerpath = NULL;
 >>>>>>> v3.18
@@ -304,7 +308,11 @@ int main(int argc, char *argv[])
 		case 'C':
 			containerset = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strncpy(containerpath, optarg, strlen(optarg) + 1);
+=======
+			containerpath = optarg;
+>>>>>>> v3.18
 =======
 			containerpath = optarg;
 >>>>>>> v3.18
@@ -323,6 +331,10 @@ int main(int argc, char *argv[])
 		case 'm':
 			strncpy(cpumask, optarg, sizeof(cpumask));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			cpumask[sizeof(cpumask) - 1] = '\0';
+>>>>>>> v3.18
 =======
 			cpumask[sizeof(cpumask) - 1] = '\0';
 >>>>>>> v3.18

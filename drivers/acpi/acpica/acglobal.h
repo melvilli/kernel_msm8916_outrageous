@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -48,6 +52,7 @@
 #ifndef __ACGLOBAL_H__
 #define __ACGLOBAL_H__
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Ensure that the globals are actually defined and initialized only once.
@@ -173,6 +178,8 @@ ACPI_EXTERN struct acpi_table_list acpi_gbl_root_table_list;
 #if (!ACPI_REDUCED_HARDWARE)
 ACPI_EXTERN struct acpi_table_facs *acpi_gbl_FACS;
 =======
+=======
+>>>>>>> v3.18
 /*****************************************************************************
  *
  * Globals related to the ACPI tables
@@ -190,12 +197,16 @@ ACPI_GLOBAL(struct acpi_table_header, acpi_gbl_original_dsdt_header);
 
 #if (!ACPI_REDUCED_HARDWARE)
 ACPI_GLOBAL(struct acpi_table_facs *, acpi_gbl_FACS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* !ACPI_REDUCED_HARDWARE */
 
 /* These addresses are calculated from the FADT Event Block addresses */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ACPI_EXTERN struct acpi_generic_address acpi_gbl_xpm1a_status;
 ACPI_EXTERN struct acpi_generic_address acpi_gbl_xpm1a_enable;
@@ -217,6 +228,8 @@ ACPI_EXTERN u8 acpi_gbl_integer_bit_width;
 ACPI_EXTERN u8 acpi_gbl_integer_byte_width;
 ACPI_EXTERN u8 acpi_gbl_integer_nybble_width;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(struct acpi_generic_address, acpi_gbl_xpm1a_status);
 ACPI_GLOBAL(struct acpi_generic_address, acpi_gbl_xpm1a_enable);
 
@@ -231,6 +244,9 @@ ACPI_GLOBAL(struct acpi_generic_address, acpi_gbl_xpm1b_enable);
 ACPI_GLOBAL(u8, acpi_gbl_integer_bit_width);
 ACPI_GLOBAL(u8, acpi_gbl_integer_byte_width);
 ACPI_GLOBAL(u8, acpi_gbl_integer_nybble_width);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*****************************************************************************
@@ -245,7 +261,11 @@ ACPI_GLOBAL(u8, acpi_gbl_integer_nybble_width);
  * (The table maps local handles to the real OS handles)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN struct acpi_mutex_info acpi_gbl_mutex_info[ACPI_NUM_MUTEX];
+=======
+ACPI_GLOBAL(struct acpi_mutex_info, acpi_gbl_mutex_info[ACPI_NUM_MUTEX]);
+>>>>>>> v3.18
 =======
 ACPI_GLOBAL(struct acpi_mutex_info, acpi_gbl_mutex_info[ACPI_NUM_MUTEX]);
 >>>>>>> v3.18
@@ -256,6 +276,7 @@ ACPI_GLOBAL(struct acpi_mutex_info, acpi_gbl_mutex_info[ACPI_NUM_MUTEX]);
  * Global lock spinlock is used for "pending" handshake
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN union acpi_operand_object *acpi_gbl_global_lock_mutex;
 ACPI_EXTERN acpi_semaphore acpi_gbl_global_lock_semaphore;
 ACPI_EXTERN acpi_spinlock acpi_gbl_global_lock_pending_lock;
@@ -264,6 +285,8 @@ ACPI_EXTERN u8 acpi_gbl_global_lock_acquired;
 ACPI_EXTERN u8 acpi_gbl_global_lock_present;
 ACPI_EXTERN u8 acpi_gbl_global_lock_pending;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(union acpi_operand_object *, acpi_gbl_global_lock_mutex);
 ACPI_GLOBAL(acpi_semaphore, acpi_gbl_global_lock_semaphore);
 ACPI_GLOBAL(acpi_spinlock, acpi_gbl_global_lock_pending_lock);
@@ -271,12 +294,16 @@ ACPI_GLOBAL(u16, acpi_gbl_global_lock_handle);
 ACPI_GLOBAL(u8, acpi_gbl_global_lock_acquired);
 ACPI_GLOBAL(u8, acpi_gbl_global_lock_present);
 ACPI_GLOBAL(u8, acpi_gbl_global_lock_pending);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Spinlocks are used for interfaces that can be possibly called at
  * interrupt level
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 ACPI_EXTERN acpi_spinlock acpi_gbl_gpe_lock;	/* For GPE data structs and registers */
 ACPI_EXTERN acpi_spinlock acpi_gbl_hardware_lock;	/* For ACPI H/W except GPE registers */
@@ -290,6 +317,8 @@ ACPI_EXTERN acpi_mutex acpi_gbl_osi_mutex;
 
 ACPI_EXTERN struct acpi_rw_lock acpi_gbl_namespace_rw_lock;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(acpi_spinlock, acpi_gbl_gpe_lock);	/* For GPE data structs and registers */
 ACPI_GLOBAL(acpi_spinlock, acpi_gbl_hardware_lock);	/* For ACPI H/W except GPE registers */
 ACPI_GLOBAL(acpi_spinlock, acpi_gbl_reference_count_lock);
@@ -301,6 +330,9 @@ ACPI_GLOBAL(acpi_mutex, acpi_gbl_osi_mutex);
 /* Reader/Writer lock is used for namespace walk and dynamic table unload */
 
 ACPI_GLOBAL(struct acpi_rw_lock, acpi_gbl_namespace_rw_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*****************************************************************************
@@ -311,6 +343,7 @@ ACPI_GLOBAL(struct acpi_rw_lock, acpi_gbl_namespace_rw_lock);
 
 /* Object caches */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ACPI_EXTERN acpi_cache_t *acpi_gbl_namespace_cache;
 ACPI_EXTERN acpi_cache_t *acpi_gbl_state_cache;
@@ -377,6 +410,8 @@ ACPI_EXTERN struct acpi_memory_list *acpi_gbl_ns_node_list;
 ACPI_EXTERN u8 acpi_gbl_display_final_mem_stats;
 ACPI_EXTERN u8 acpi_gbl_disable_mem_tracking;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(acpi_cache_t *, acpi_gbl_namespace_cache);
 ACPI_GLOBAL(acpi_cache_t *, acpi_gbl_state_cache);
 ACPI_GLOBAL(acpi_cache_t *, acpi_gbl_ps_node_cache);
@@ -438,6 +473,9 @@ ACPI_GLOBAL(struct acpi_memory_list *, acpi_gbl_global_list);
 ACPI_GLOBAL(struct acpi_memory_list *, acpi_gbl_ns_node_list);
 ACPI_GLOBAL(u8, acpi_gbl_display_final_mem_stats);
 ACPI_GLOBAL(u8, acpi_gbl_disable_mem_tracking);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -454,15 +492,21 @@ ACPI_GLOBAL(u8, acpi_gbl_disable_mem_tracking);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN struct acpi_namespace_node acpi_gbl_root_node_struct;
 ACPI_EXTERN struct acpi_namespace_node *acpi_gbl_root_node;
 ACPI_EXTERN struct acpi_namespace_node *acpi_gbl_fadt_gpe_device;
 ACPI_EXTERN union acpi_operand_object *acpi_gbl_module_code_list;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(struct acpi_namespace_node, acpi_gbl_root_node_struct);
 ACPI_GLOBAL(struct acpi_namespace_node *, acpi_gbl_root_node);
 ACPI_GLOBAL(struct acpi_namespace_node *, acpi_gbl_fadt_gpe_device);
 ACPI_GLOBAL(union acpi_operand_object *, acpi_gbl_module_code_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern const u8 acpi_gbl_ns_properties[ACPI_NUM_NS_TYPES];
@@ -471,6 +515,7 @@ extern const struct acpi_predefined_names
 
 #ifdef ACPI_DEBUG_OUTPUT
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN u32 acpi_gbl_current_node_count;
 ACPI_EXTERN u32 acpi_gbl_current_node_size;
 ACPI_EXTERN u32 acpi_gbl_max_concurrent_node_count;
@@ -478,6 +523,8 @@ ACPI_EXTERN acpi_size *acpi_gbl_entry_stack_pointer;
 ACPI_EXTERN acpi_size *acpi_gbl_lowest_stack_pointer;
 ACPI_EXTERN u32 acpi_gbl_deepest_nesting;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(u32, acpi_gbl_current_node_count);
 ACPI_GLOBAL(u32, acpi_gbl_current_node_size);
 ACPI_GLOBAL(u32, acpi_gbl_max_concurrent_node_count);
@@ -485,6 +532,9 @@ ACPI_GLOBAL(acpi_size *, acpi_gbl_entry_stack_pointer);
 ACPI_GLOBAL(acpi_size *, acpi_gbl_lowest_stack_pointer);
 ACPI_GLOBAL(u32, acpi_gbl_deepest_nesting);
 ACPI_INIT_GLOBAL(u32, acpi_gbl_nesting_level, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -495,17 +545,23 @@ ACPI_INIT_GLOBAL(u32, acpi_gbl_nesting_level, 0);
  ****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN struct acpi_thread_state *acpi_gbl_current_walk_list;
 
 /* Control method single step flag */
 
 ACPI_EXTERN u8 acpi_gbl_cm_single_step;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(struct acpi_thread_state *, acpi_gbl_current_walk_list);
 
 /* Control method single step flag */
 
 ACPI_GLOBAL(u8, acpi_gbl_cm_single_step);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*****************************************************************************
@@ -517,8 +573,14 @@ ACPI_GLOBAL(u8, acpi_gbl_cm_single_step);
 extern struct acpi_bit_register_info
     acpi_gbl_bit_register_info[ACPI_NUM_BITREG];
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN u8 acpi_gbl_sleep_type_a;
 ACPI_EXTERN u8 acpi_gbl_sleep_type_b;
+=======
+
+ACPI_GLOBAL(u8, acpi_gbl_sleep_type_a);
+ACPI_GLOBAL(u8, acpi_gbl_sleep_type_b);
+>>>>>>> v3.18
 =======
 
 ACPI_GLOBAL(u8, acpi_gbl_sleep_type_a);
@@ -534,6 +596,7 @@ ACPI_GLOBAL(u8, acpi_gbl_sleep_type_b);
 #if (!ACPI_REDUCED_HARDWARE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXTERN u8 acpi_gbl_all_gpes_initialized;
 ACPI_EXTERN struct acpi_gpe_xrupt_info *acpi_gbl_gpe_xrupt_list_head;
 ACPI_EXTERN struct acpi_gpe_block_info
@@ -543,6 +606,8 @@ ACPI_EXTERN void *acpi_gbl_global_event_handler_context;
 ACPI_EXTERN struct acpi_fixed_event_handler
     acpi_gbl_fixed_event_handlers[ACPI_NUM_FIXED_EVENTS];
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(u8, acpi_gbl_all_gpes_initialized);
 ACPI_GLOBAL(struct acpi_gpe_xrupt_info *, acpi_gbl_gpe_xrupt_list_head);
 ACPI_GLOBAL(struct acpi_gpe_block_info *,
@@ -552,6 +617,9 @@ ACPI_GLOBAL(void *, acpi_gbl_global_event_handler_context);
 ACPI_GLOBAL(struct acpi_fixed_event_handler,
 	    acpi_gbl_fixed_event_handlers[ACPI_NUM_FIXED_EVENTS]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct acpi_fixed_event_info
     acpi_gbl_fixed_event_info[ACPI_NUM_FIXED_EVENTS];
@@ -564,6 +632,7 @@ extern struct acpi_fixed_event_info
  *
  ****************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Procedure nesting level for debug output */
 
@@ -581,6 +650,8 @@ ACPI_EXTERN u32 acpi_gbl_original_dbg_layer;
 ACPI_EXTERN u32 acpi_gbl_trace_dbg_level;
 ACPI_EXTERN u32 acpi_gbl_trace_dbg_layer;
 =======
+=======
+>>>>>>> v3.18
 /* Event counters */
 
 ACPI_GLOBAL(u32, acpi_method_count);
@@ -594,6 +665,9 @@ ACPI_GLOBAL(u32, acpi_gbl_original_dbg_level);
 ACPI_GLOBAL(u32, acpi_gbl_original_dbg_layer);
 ACPI_GLOBAL(u32, acpi_gbl_trace_dbg_level);
 ACPI_GLOBAL(u32, acpi_gbl_trace_dbg_layer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*****************************************************************************
@@ -602,6 +676,7 @@ ACPI_GLOBAL(u32, acpi_gbl_trace_dbg_layer);
  *
  ****************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ACPI_EXTERN u8 acpi_gbl_db_output_flags;
 
@@ -616,6 +691,8 @@ ACPI_EXTERN u32 acpi_gbl_resolved_external_methods;
 ACPI_EXTERN struct acpi_external_list *acpi_gbl_external_list;
 ACPI_EXTERN struct acpi_external_file *acpi_gbl_external_file_list;
 =======
+=======
+>>>>>>> v3.18
 ACPI_INIT_GLOBAL(u8, acpi_gbl_db_output_flags, ACPI_DB_CONSOLE_OUTPUT);
 
 #ifdef ACPI_DISASSEMBLER
@@ -631,11 +708,15 @@ ACPI_GLOBAL(u8, acpi_gbl_num_external_methods);
 ACPI_GLOBAL(u32, acpi_gbl_resolved_external_methods);
 ACPI_GLOBAL(struct acpi_external_list *, acpi_gbl_external_list);
 ACPI_GLOBAL(struct acpi_external_file *, acpi_gbl_external_file_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifdef ACPI_DEBUGGER
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern u8 acpi_gbl_method_executing;
 extern u8 acpi_gbl_abort_method;
@@ -659,6 +740,8 @@ ACPI_EXTERN u32 acpi_gbl_db_debug_level;
 ACPI_EXTERN u32 acpi_gbl_db_console_debug_level;
 ACPI_EXTERN struct acpi_namespace_node *acpi_gbl_db_scope_node;
 =======
+=======
+>>>>>>> v3.18
 ACPI_INIT_GLOBAL(u8, acpi_gbl_db_terminate_threads, FALSE);
 ACPI_INIT_GLOBAL(u8, acpi_gbl_abort_method, FALSE);
 ACPI_INIT_GLOBAL(u8, acpi_gbl_method_executing, FALSE);
@@ -683,11 +766,15 @@ ACPI_GLOBAL(char, acpi_gbl_db_line_buf[ACPI_DB_LINE_BUFFER_SIZE]);
 ACPI_GLOBAL(char, acpi_gbl_db_parsed_buf[ACPI_DB_LINE_BUFFER_SIZE]);
 ACPI_GLOBAL(char, acpi_gbl_db_scope_buf[ACPI_DB_LINE_BUFFER_SIZE]);
 ACPI_GLOBAL(char, acpi_gbl_db_debug_filename[ACPI_DB_LINE_BUFFER_SIZE]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Statistic globals
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 ACPI_EXTERN u16 acpi_gbl_obj_type_count[ACPI_TYPE_NS_NODE_MAX + 1];
 ACPI_EXTERN u16 acpi_gbl_node_type_count[ACPI_TYPE_NS_NODE_MAX + 1];
@@ -701,12 +788,17 @@ ACPI_EXTERN u32 acpi_gbl_size_of_method_trees;
 ACPI_EXTERN u32 acpi_gbl_size_of_node_entries;
 ACPI_EXTERN u32 acpi_gbl_size_of_acpi_objects;
 =======
+=======
+>>>>>>> v3.18
 ACPI_GLOBAL(u16, acpi_gbl_obj_type_count[ACPI_TYPE_NS_NODE_MAX + 1]);
 ACPI_GLOBAL(u16, acpi_gbl_node_type_count[ACPI_TYPE_NS_NODE_MAX + 1]);
 ACPI_GLOBAL(u16, acpi_gbl_obj_type_count_misc);
 ACPI_GLOBAL(u16, acpi_gbl_node_type_count_misc);
 ACPI_GLOBAL(u32, acpi_gbl_num_nodes);
 ACPI_GLOBAL(u32, acpi_gbl_num_objects);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* ACPI_DEBUGGER */
@@ -714,7 +806,10 @@ ACPI_GLOBAL(u32, acpi_gbl_num_objects);
 /*****************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Application globals
  *
  ****************************************************************************/
@@ -733,6 +828,9 @@ ACPI_GLOBAL(char, acpi_gbl_print_buffer[1024]);
 
 /*****************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Info/help support
  *
@@ -740,6 +838,10 @@ ACPI_GLOBAL(char, acpi_gbl_print_buffer[1024]);
 
 extern const struct ah_predefined_name asl_predefined_info[];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct ah_device_id asl_device_ids[];
+>>>>>>> v3.18
 =======
 extern const struct ah_device_id asl_device_ids[];
 >>>>>>> v3.18

@@ -22,9 +22,15 @@
 #include "dhd.h"
 #include "dhd_bus.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dhd_proto.h"
 #include "dhd_dbg.h"
 #include "fwil.h"
+=======
+#include "dhd_dbg.h"
+#include "fwil.h"
+#include "fwil_types.h"
+>>>>>>> v3.18
 =======
 #include "dhd_dbg.h"
 #include "fwil.h"
@@ -39,6 +45,7 @@
 #define BRCMF_DEFAULT_PACKET_FILTER	"100 0 0 0 0x01 0x00"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 static const char brcmf_version[] =
 	"Dongle Host Driver, version " BRCMF_VERSION_STR "\nCompiled on "
@@ -47,6 +54,10 @@ static const char brcmf_version[] =
 static const char brcmf_version[] =
 	"Dongle Host Driver, version " BRCMF_VERSION_STR;
 #endif
+=======
+/* boost value for RSSI_DELTA in preferred join selection */
+#define BRCMF_JOIN_PREF_RSSI_BOOST	8
+>>>>>>> v3.18
 =======
 /* boost value for RSSI_DELTA in preferred join selection */
 #define BRCMF_JOIN_PREF_RSSI_BOOST	8
@@ -267,10 +278,16 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 	s8 eventmask[BRCMF_EVENTING_MASK_LEN];
 	u8 buf[BRCMF_DCMD_SMLEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *ptr;
 	s32 err;
 	struct brcmf_bus_dcmd *cmdlst;
 	struct list_head *cur, *q;
+=======
+	struct brcmf_join_pref_params join_pref_params[2];
+	char *ptr;
+	s32 err;
+>>>>>>> v3.18
 =======
 	struct brcmf_join_pref_params join_pref_params[2];
 	char *ptr;
@@ -299,10 +316,13 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 	ptr = (char *)buf;
 	strsep(&ptr, "\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Print fw version info */
 	brcmf_err("Firmware version = %s\n", buf);
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Print fw version info */
 	brcmf_err("Firmware version = %s\n", buf);
@@ -318,6 +338,9 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 		goto done;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Setup timeout if Beacons are lost and roam is off to report
@@ -340,7 +363,10 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Setup join_pref to select target by RSSI(with boost on 5GHz) */
 	join_pref_params[0].type = BRCMF_JOIN_PREF_RSSI_DELTA;
 	join_pref_params[0].len = 2;
@@ -355,6 +381,9 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 	if (err)
 		brcmf_err("Set join_pref error (%d)\n", err);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Setup event_msgs, enable E_IF */
 	err = brcmf_fil_iovar_data_get(ifp, "event_msgs", eventmask,
@@ -395,6 +424,7 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 					 0, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set bus specific command if there is any */
 	list_for_each_safe(cur, q, &ifp->drvr->bus_if->dcmd_list) {
 		cmdlst = list_entry(cur, struct brcmf_bus_dcmd, list);
@@ -406,6 +436,10 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 		list_del(cur);
 		kfree(cmdlst);
 	}
+=======
+	/* do bus specific preinit here */
+	err = brcmf_bus_preinit(ifp->drvr->bus_if);
+>>>>>>> v3.18
 =======
 	/* do bus specific preinit here */
 	err = brcmf_bus_preinit(ifp->drvr->bus_if);

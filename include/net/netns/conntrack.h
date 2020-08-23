@@ -5,7 +5,13 @@
 #include <linux/list_nulls.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/netfilter/nf_conntrack_tcp.h>
+=======
+#include <linux/workqueue.h>
+#include <linux/netfilter/nf_conntrack_tcp.h>
+#include <linux/seqlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/workqueue.h>
 #include <linux/netfilter/nf_conntrack_tcp.h>
@@ -69,6 +75,7 @@ struct nf_ip_net {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct netns_ct {
 	atomic_t		count;
 	unsigned int		expect_count;
@@ -91,6 +98,8 @@ struct netns_ct {
 	int			sysctl_auto_assign_helper;
 	bool			auto_assign_helper_warned;
 =======
+=======
+>>>>>>> v3.18
 struct ct_pcpu {
 	spinlock_t		lock;
 	struct hlist_nulls_head unconfirmed;
@@ -130,6 +139,9 @@ struct netns_ct {
 	struct ip_conntrack_stat __percpu *stat;
 	struct nf_ct_event_notifier __rcu *nf_conntrack_event_cb;
 	struct nf_exp_event_notifier __rcu *nf_expect_event_cb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nf_ip_net	nf_ct_proto;
 #if defined(CONFIG_NF_CONNTRACK_LABELS)
@@ -141,6 +153,7 @@ struct netns_ct {
 	unsigned int		nat_htable_size;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SYSCTL
 	struct ctl_table_header	*sysctl_header;
 	struct ctl_table_header	*acct_sysctl_header;
@@ -149,6 +162,8 @@ struct netns_ct {
 	struct ctl_table_header	*helper_sysctl_header;
 #endif
 	char			*slabname;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

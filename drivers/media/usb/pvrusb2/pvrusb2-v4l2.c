@@ -32,6 +32,10 @@
 #include <linux/module.h>
 #include <media/v4l2-dev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-device.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-device.h>
 >>>>>>> v3.18
@@ -805,6 +809,7 @@ static int pvr2_log_status(struct file *file, void *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int pvr2_g_register(struct file *file, void *priv, struct v4l2_dbg_register *req)
 {
@@ -835,6 +840,8 @@ static int pvr2_s_register(struct file *file, void *priv, const struct v4l2_dbg_
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct v4l2_ioctl_ops pvr2_ioctl_ops = {
@@ -872,10 +879,13 @@ static const struct v4l2_ioctl_ops pvr2_ioctl_ops = {
 	.vidioc_s_ext_ctrls		    = pvr2_s_ext_ctrls,
 	.vidioc_try_ext_ctrls		    = pvr2_try_ext_ctrls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register		    = pvr2_g_register,
 	.vidioc_s_register		    = pvr2_s_register,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -915,8 +925,13 @@ static void pvr2_v4l2_dev_disassociate_parent(struct pvr2_v4l2_dev *dip)
 {
 	if (!dip) return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dip->devbase.parent) return;
 	dip->devbase.parent = NULL;
+=======
+	if (!dip->devbase.v4l2_dev->dev) return;
+	dip->devbase.v4l2_dev->dev = NULL;
+>>>>>>> v3.18
 =======
 	if (!dip->devbase.v4l2_dev->dev) return;
 	dip->devbase.v4l2_dev->dev = NULL;
@@ -1000,6 +1015,7 @@ static long pvr2_v4l2_ioctl(struct file *file,
 		if (pvrusb2_debug & PVR2_TRACE_V4LIOCTL) {
 			pvr2_trace(PVR2_TRACE_V4LIOCTL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   "pvr2_v4l2_do_ioctl failure, ret=%ld", ret);
 		} else {
 			if (pvrusb2_debug & PVR2_TRACE_V4LIOCTL) {
@@ -1009,6 +1025,11 @@ static long pvr2_v4l2_ioctl(struct file *file,
 				v4l_printk_ioctl(pvr2_hdw_get_driver_name(hdw),
 						cmd);
 			}
+=======
+				   "pvr2_v4l2_do_ioctl failure, ret=%ld"
+				   " command was:", ret);
+			v4l_printk_ioctl(pvr2_hdw_get_driver_name(hdw), cmd);
+>>>>>>> v3.18
 =======
 				   "pvr2_v4l2_do_ioctl failure, ret=%ld"
 				   " command was:", ret);
@@ -1320,7 +1341,10 @@ static void pvr2_v4l2_dev_init(struct pvr2_v4l2_dev *dip,
 			       int v4l_type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_device *usbdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int mindevnum;
@@ -1331,7 +1355,10 @@ static void pvr2_v4l2_dev_init(struct pvr2_v4l2_dev *dip,
 
 	hdw = vp->channel.mc_head->hdw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usbdev = pvr2_hdw_get_dev(hdw);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dip->v4l_type = v4l_type;
@@ -1383,7 +1410,11 @@ static void pvr2_v4l2_dev_init(struct pvr2_v4l2_dev *dip,
 		mindevnum = nr_ptr[unit_number];
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dip->devbase.parent = &usbdev->dev;
+=======
+	pvr2_hdw_set_v4l2_dev(hdw, &dip->devbase);
+>>>>>>> v3.18
 =======
 	pvr2_hdw_set_v4l2_dev(hdw, &dip->devbase);
 >>>>>>> v3.18

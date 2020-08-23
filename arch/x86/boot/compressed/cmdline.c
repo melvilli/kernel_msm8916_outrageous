@@ -1,7 +1,11 @@
 #include "misc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_EARLY_PRINTK
+=======
+#if CONFIG_EARLY_PRINTK || CONFIG_RANDOMIZE_BASE
+>>>>>>> v3.18
 =======
 #if CONFIG_EARLY_PRINTK || CONFIG_RANDOMIZE_BASE
 >>>>>>> v3.18

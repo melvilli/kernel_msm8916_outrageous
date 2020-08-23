@@ -31,6 +31,7 @@
 #include "ppc_cbe_cpufreq.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_MUTEX(cbe_switch_mutex);
 
 
@@ -46,6 +47,8 @@ static struct cpufreq_frequency_table cbe_freqs[] = {
 	{10,	0},
 	{0,	CPUFREQ_TABLE_END},
 =======
+=======
+>>>>>>> v3.18
 /* the CBE supports an 8 step frequency scaling */
 static struct cpufreq_frequency_table cbe_freqs[] = {
 	{0, 1,	0},
@@ -57,6 +60,9 @@ static struct cpufreq_frequency_table cbe_freqs[] = {
 	{0, 8,	0},
 	{0, 10,	0},
 	{0, 0,	CPUFREQ_TABLE_END},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -85,14 +91,20 @@ static int set_pmode(unsigned int cpu, unsigned int slow_mode)
 static int cbe_cpufreq_cpu_init(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *max_freqp;
 	u32 max_freq;
 	int i, cur_pmode;
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_frequency_table *pos;
 	const u32 *max_freqp;
 	u32 max_freq;
 	int cur_pmode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device_node *cpu;
 
@@ -127,9 +139,15 @@ static int cbe_cpufreq_cpu_init(struct cpufreq_policy *policy)
 
 	/* initialize frequency table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; cbe_freqs[i].frequency!=CPUFREQ_TABLE_END; i++) {
 		cbe_freqs[i].frequency = max_freq / cbe_freqs[i].driver_data;
 		pr_debug("%d: %d\n", i, cbe_freqs[i].frequency);
+=======
+	cpufreq_for_each_entry(pos, cbe_freqs) {
+		pos->frequency = max_freq / pos->driver_data;
+		pr_debug("%d: %d\n", (int)(pos - cbe_freqs), pos->frequency);
+>>>>>>> v3.18
 =======
 	cpufreq_for_each_entry(pos, cbe_freqs) {
 		pos->frequency = max_freq / pos->driver_data;
@@ -150,6 +168,7 @@ static int cbe_cpufreq_cpu_init(struct cpufreq_policy *policy)
 	cpumask_copy(policy->cpus, cpu_sibling_mask(policy->cpu));
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpufreq_frequency_table_get_attr(cbe_freqs, policy->cpu);
 
@@ -190,6 +209,8 @@ static int cbe_cpufreq_target(struct cpufreq_policy *policy,
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
 =======
+=======
+>>>>>>> v3.18
 	/* this ensures that policy->cpuinfo_min
 	 * and policy->cpuinfo_max are set correctly */
 	return cpufreq_table_validate_and_show(policy, cbe_freqs);
@@ -198,6 +219,9 @@ static int cbe_cpufreq_target(struct cpufreq_policy *policy,
 static int cbe_cpufreq_target(struct cpufreq_policy *policy,
 			      unsigned int cbe_pmode_new)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_debug("setting frequency for cpu %d to %d kHz, " \
 		 "1/%d of max frequency\n",
@@ -205,6 +229,7 @@ static int cbe_cpufreq_target(struct cpufreq_policy *policy,
 		 cbe_freqs[cbe_pmode_new].frequency,
 		 cbe_freqs[cbe_pmode_new].driver_data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = set_pmode(policy->cpu, cbe_pmode_new);
 
@@ -220,6 +245,8 @@ static struct cpufreq_driver cbe_cpufreq_driver = {
 	.init		= cbe_cpufreq_cpu_init,
 	.exit		= cbe_cpufreq_cpu_exit,
 =======
+=======
+>>>>>>> v3.18
 	return set_pmode(policy->cpu, cbe_pmode_new);
 }
 
@@ -227,6 +254,9 @@ static struct cpufreq_driver cbe_cpufreq_driver = {
 	.verify		= cpufreq_generic_frequency_table_verify,
 	.target_index	= cbe_cpufreq_target,
 	.init		= cbe_cpufreq_cpu_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name		= "cbe-cpufreq",
 	.flags		= CPUFREQ_CONST_LOOPS,

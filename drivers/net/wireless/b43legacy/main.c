@@ -979,7 +979,11 @@ static void b43legacy_write_beacon_template(struct b43legacy_wldev *dev,
 
 	bcn = (const struct ieee80211_mgmt *)(dev->wl->current_beacon->data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = min((size_t)dev->wl->current_beacon->len,
+=======
+	len = min_t(size_t, dev->wl->current_beacon->len,
+>>>>>>> v3.18
 =======
 	len = min_t(size_t, dev->wl->current_beacon->len,
 >>>>>>> v3.18
@@ -1160,7 +1164,11 @@ static void b43legacy_write_probe_resp_template(struct b43legacy_wldev *dev,
 					&b43legacy_b_ratetable[3]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = min((size_t)size,
+=======
+	size = min_t(size_t, size,
+>>>>>>> v3.18
 =======
 	size = min_t(size_t, size,
 >>>>>>> v3.18

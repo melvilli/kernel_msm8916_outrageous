@@ -180,6 +180,10 @@ SECTIONS
 		*(.pdr)
 		*(.reginfo)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		*(.eh_frame)
+>>>>>>> v3.18
 =======
 		*(.eh_frame)
 >>>>>>> v3.18

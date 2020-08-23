@@ -41,9 +41,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __bitmap_empty(const unsigned long *bitmap, int bits)
 {
 	int k, lim = bits/BITS_PER_LONG;
+=======
+int __bitmap_empty(const unsigned long *bitmap, unsigned int bits)
+{
+	unsigned int k, lim = bits/BITS_PER_LONG;
+>>>>>>> v3.18
 =======
 int __bitmap_empty(const unsigned long *bitmap, unsigned int bits)
 {
@@ -62,9 +68,15 @@ int __bitmap_empty(const unsigned long *bitmap, unsigned int bits)
 EXPORT_SYMBOL(__bitmap_empty);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __bitmap_full(const unsigned long *bitmap, int bits)
 {
 	int k, lim = bits/BITS_PER_LONG;
+=======
+int __bitmap_full(const unsigned long *bitmap, unsigned int bits)
+{
+	unsigned int k, lim = bits/BITS_PER_LONG;
+>>>>>>> v3.18
 =======
 int __bitmap_full(const unsigned long *bitmap, unsigned int bits)
 {
@@ -84,9 +96,15 @@ EXPORT_SYMBOL(__bitmap_full);
 
 int __bitmap_equal(const unsigned long *bitmap1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const unsigned long *bitmap2, int bits)
 {
 	int k, lim = bits/BITS_PER_LONG;
+=======
+		const unsigned long *bitmap2, unsigned int bits)
+{
+	unsigned int k, lim = bits/BITS_PER_LONG;
+>>>>>>> v3.18
 =======
 		const unsigned long *bitmap2, unsigned int bits)
 {
@@ -105,9 +123,15 @@ int __bitmap_equal(const unsigned long *bitmap1,
 EXPORT_SYMBOL(__bitmap_equal);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __bitmap_complement(unsigned long *dst, const unsigned long *src, int bits)
 {
 	int k, lim = bits/BITS_PER_LONG;
+=======
+void __bitmap_complement(unsigned long *dst, const unsigned long *src, unsigned int bits)
+{
+	unsigned int k, lim = bits/BITS_PER_LONG;
+>>>>>>> v3.18
 =======
 void __bitmap_complement(unsigned long *dst, const unsigned long *src, unsigned int bits)
 {
@@ -118,7 +142,11 @@ void __bitmap_complement(unsigned long *dst, const unsigned long *src, unsigned 
 
 	if (bits % BITS_PER_LONG)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst[k] = ~src[k] & BITMAP_LAST_WORD_MASK(bits);
+=======
+		dst[k] = ~src[k];
+>>>>>>> v3.18
 =======
 		dst[k] = ~src[k];
 >>>>>>> v3.18
@@ -215,6 +243,7 @@ EXPORT_SYMBOL(__bitmap_shift_left);
 
 int __bitmap_and(unsigned long *dst, const unsigned long *bitmap1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const unsigned long *bitmap2, int bits)
 {
 	int k;
@@ -224,6 +253,8 @@ int __bitmap_and(unsigned long *dst, const unsigned long *bitmap1,
 	for (k = 0; k < nr; k++)
 		result |= (dst[k] = bitmap1[k] & bitmap2[k]);
 =======
+=======
+>>>>>>> v3.18
 				const unsigned long *bitmap2, unsigned int bits)
 {
 	unsigned int k;
@@ -235,6 +266,9 @@ int __bitmap_and(unsigned long *dst, const unsigned long *bitmap1,
 	if (bits % BITS_PER_LONG)
 		result |= (dst[k] = bitmap1[k] & bitmap2[k] &
 			   BITMAP_LAST_WORD_MASK(bits));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return result != 0;
 }
@@ -242,15 +276,21 @@ EXPORT_SYMBOL(__bitmap_and);
 
 void __bitmap_or(unsigned long *dst, const unsigned long *bitmap1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const unsigned long *bitmap2, int bits)
 {
 	int k;
 	int nr = BITS_TO_LONGS(bits);
 =======
+=======
+>>>>>>> v3.18
 				const unsigned long *bitmap2, unsigned int bits)
 {
 	unsigned int k;
 	unsigned int nr = BITS_TO_LONGS(bits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (k = 0; k < nr; k++)
@@ -260,15 +300,21 @@ EXPORT_SYMBOL(__bitmap_or);
 
 void __bitmap_xor(unsigned long *dst, const unsigned long *bitmap1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const unsigned long *bitmap2, int bits)
 {
 	int k;
 	int nr = BITS_TO_LONGS(bits);
 =======
+=======
+>>>>>>> v3.18
 				const unsigned long *bitmap2, unsigned int bits)
 {
 	unsigned int k;
 	unsigned int nr = BITS_TO_LONGS(bits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (k = 0; k < nr; k++)
@@ -277,6 +323,7 @@ void __bitmap_xor(unsigned long *dst, const unsigned long *bitmap1,
 EXPORT_SYMBOL(__bitmap_xor);
 
 int __bitmap_andnot(unsigned long *dst, const unsigned long *bitmap1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				const unsigned long *bitmap2, int bits)
 {
@@ -287,6 +334,8 @@ int __bitmap_andnot(unsigned long *dst, const unsigned long *bitmap1,
 	for (k = 0; k < nr; k++)
 		result |= (dst[k] = bitmap1[k] & ~bitmap2[k]);
 =======
+=======
+>>>>>>> v3.18
 				const unsigned long *bitmap2, unsigned int bits)
 {
 	unsigned int k;
@@ -298,6 +347,9 @@ int __bitmap_andnot(unsigned long *dst, const unsigned long *bitmap1,
 	if (bits % BITS_PER_LONG)
 		result |= (dst[k] = bitmap1[k] & ~bitmap2[k] &
 			   BITMAP_LAST_WORD_MASK(bits));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return result != 0;
 }
@@ -305,9 +357,15 @@ EXPORT_SYMBOL(__bitmap_andnot);
 
 int __bitmap_intersects(const unsigned long *bitmap1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const unsigned long *bitmap2, int bits)
 {
 	int k, lim = bits/BITS_PER_LONG;
+=======
+			const unsigned long *bitmap2, unsigned int bits)
+{
+	unsigned int k, lim = bits/BITS_PER_LONG;
+>>>>>>> v3.18
 =======
 			const unsigned long *bitmap2, unsigned int bits)
 {
@@ -326,9 +384,15 @@ EXPORT_SYMBOL(__bitmap_intersects);
 
 int __bitmap_subset(const unsigned long *bitmap1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const unsigned long *bitmap2, int bits)
 {
 	int k, lim = bits/BITS_PER_LONG;
+=======
+		    const unsigned long *bitmap2, unsigned int bits)
+{
+	unsigned int k, lim = bits/BITS_PER_LONG;
+>>>>>>> v3.18
 =======
 		    const unsigned long *bitmap2, unsigned int bits)
 {
@@ -346,14 +410,20 @@ int __bitmap_subset(const unsigned long *bitmap1,
 EXPORT_SYMBOL(__bitmap_subset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __bitmap_weight(const unsigned long *bitmap, int bits)
 {
 	int k, w = 0, lim = bits/BITS_PER_LONG;
 =======
+=======
+>>>>>>> v3.18
 int __bitmap_weight(const unsigned long *bitmap, unsigned int bits)
 {
 	unsigned int k, lim = bits/BITS_PER_LONG;
 	int w = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (k = 0; k < lim; k++)
@@ -367,6 +437,7 @@ int __bitmap_weight(const unsigned long *bitmap, unsigned int bits)
 EXPORT_SYMBOL(__bitmap_weight);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bitmap_set(unsigned long *map, int start, int nr)
 {
 	unsigned long *p = map + BIT_WORD(start);
@@ -378,6 +449,8 @@ void bitmap_set(unsigned long *map, int start, int nr)
 		*p |= mask_to_set;
 		nr -= bits_to_set;
 =======
+=======
+>>>>>>> v3.18
 void bitmap_set(unsigned long *map, unsigned int start, int len)
 {
 	unsigned long *p = map + BIT_WORD(start);
@@ -388,13 +461,20 @@ void bitmap_set(unsigned long *map, unsigned int start, int len)
 	while (len - bits_to_set >= 0) {
 		*p |= mask_to_set;
 		len -= bits_to_set;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bits_to_set = BITS_PER_LONG;
 		mask_to_set = ~0UL;
 		p++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nr) {
+=======
+	if (len) {
+>>>>>>> v3.18
 =======
 	if (len) {
 >>>>>>> v3.18
@@ -404,6 +484,7 @@ void bitmap_set(unsigned long *map, unsigned int start, int len)
 }
 EXPORT_SYMBOL(bitmap_set);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void bitmap_clear(unsigned long *map, int start, int nr)
 {
@@ -416,6 +497,8 @@ void bitmap_clear(unsigned long *map, int start, int nr)
 		*p &= ~mask_to_clear;
 		nr -= bits_to_clear;
 =======
+=======
+>>>>>>> v3.18
 void bitmap_clear(unsigned long *map, unsigned int start, int len)
 {
 	unsigned long *p = map + BIT_WORD(start);
@@ -426,13 +509,20 @@ void bitmap_clear(unsigned long *map, unsigned int start, int len)
 	while (len - bits_to_clear >= 0) {
 		*p &= ~mask_to_clear;
 		len -= bits_to_clear;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bits_to_clear = BITS_PER_LONG;
 		mask_to_clear = ~0UL;
 		p++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nr) {
+=======
+	if (len) {
+>>>>>>> v3.18
 =======
 	if (len) {
 >>>>>>> v3.18
@@ -443,7 +533,11 @@ void bitmap_clear(unsigned long *map, unsigned int start, int len)
 EXPORT_SYMBOL(bitmap_clear);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -453,6 +547,7 @@ EXPORT_SYMBOL(bitmap_clear);
  * @start: The bitnumber to start searching at
  * @nr: The number of zeroed bits we're looking for
  * @align_mask: Alignment mask for zero area
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @align_offset: Alignment offset for zero area.
  *
@@ -467,6 +562,8 @@ unsigned long bitmap_find_next_zero_area_off(unsigned long *map,
 					     unsigned long align_mask,
 					     unsigned long align_offset)
 =======
+=======
+>>>>>>> v3.18
  *
  * The @align_mask should be one less than a power of 2; the effect is that
  * the bit offset of all zero areas this function finds is multiples of that
@@ -477,6 +574,9 @@ unsigned long bitmap_find_next_zero_area(unsigned long *map,
 					 unsigned long start,
 					 unsigned int nr,
 					 unsigned long align_mask)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long index, end, i;
@@ -485,7 +585,11 @@ again:
 
 	/* Align allocation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = __ALIGN_MASK(index + align_offset, align_mask) - align_offset;
+=======
+	index = __ALIGN_MASK(index, align_mask);
+>>>>>>> v3.18
 =======
 	index = __ALIGN_MASK(index, align_mask);
 >>>>>>> v3.18
@@ -501,7 +605,11 @@ again:
 	return index;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(bitmap_find_next_zero_area_off);
+=======
+EXPORT_SYMBOL(bitmap_find_next_zero_area);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(bitmap_find_next_zero_area);
 >>>>>>> v3.18
@@ -754,7 +862,11 @@ static int __bitmap_parselist(const char *buf, unsigned int buflen,
 	int c, old_c, totaldigits;
 	const char __user __force *ubuf = (const char __user __force *)buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int at_start, in_range;
+=======
+	int exp_digit, in_range;
+>>>>>>> v3.18
 =======
 	int exp_digit, in_range;
 >>>>>>> v3.18
@@ -763,7 +875,11 @@ static int __bitmap_parselist(const char *buf, unsigned int buflen,
 	bitmap_zero(maskp, nmaskbits);
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		at_start = 1;
+=======
+		exp_digit = 1;
+>>>>>>> v3.18
 =======
 		exp_digit = 1;
 >>>>>>> v3.18
@@ -796,16 +912,22 @@ static int __bitmap_parselist(const char *buf, unsigned int buflen,
 
 			if (c == '-') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (at_start || in_range)
 					return -EINVAL;
 				b = 0;
 				in_range = 1;
 =======
+=======
+>>>>>>> v3.18
 				if (exp_digit || in_range)
 					return -EINVAL;
 				b = 0;
 				in_range = 1;
 				exp_digit = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 			}
@@ -817,7 +939,11 @@ static int __bitmap_parselist(const char *buf, unsigned int buflen,
 			if (!in_range)
 				a = b;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			at_start = 0;
+=======
+			exp_digit = 0;
+>>>>>>> v3.18
 =======
 			exp_digit = 0;
 >>>>>>> v3.18
@@ -828,11 +954,17 @@ static int __bitmap_parselist(const char *buf, unsigned int buflen,
 		if (b >= nmaskbits)
 			return -ERANGE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!at_start) {
 			while (a <= b) {
 				set_bit(a, maskp);
 				a++;
 			}
+=======
+		while (a <= b) {
+			set_bit(a, maskp);
+			a++;
+>>>>>>> v3.18
 =======
 		while (a <= b) {
 			set_bit(a, maskp);
@@ -846,6 +978,7 @@ static int __bitmap_parselist(const char *buf, unsigned int buflen,
 int bitmap_parselist(const char *bp, unsigned long *maskp, int nmaskbits)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *nl  = strchr(bp, '\n');
 	int len;
 
@@ -853,6 +986,10 @@ int bitmap_parselist(const char *bp, unsigned long *maskp, int nmaskbits)
 		len = nl - bp;
 	else
 		len = strlen(bp);
+=======
+	char *nl  = strchrnul(bp, '\n');
+	int len = nl - bp;
+>>>>>>> v3.18
 =======
 	char *nl  = strchrnul(bp, '\n');
 	int len = nl - bp;
@@ -903,7 +1040,11 @@ EXPORT_SYMBOL(bitmap_parselist_user);
  * If for example, just bits 4 through 7 are set in @buf, then @pos
  * values 4 through 7 will get mapped to 0 through 3, respectively,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and other @pos values will get mapped to 0.  When @pos value 7
+=======
+ * and other @pos values will get mapped to -1.  When @pos value 7
+>>>>>>> v3.18
 =======
  * and other @pos values will get mapped to -1.  When @pos value 7
 >>>>>>> v3.18
@@ -1073,7 +1214,11 @@ EXPORT_SYMBOL(bitmap_bitremap);
  *
  * In other words, @orig is mapped onto (surjectively) @dst,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * using the the map { <n, m> | the n-th bit of @relmap is the
+=======
+ * using the map { <n, m> | the n-th bit of @relmap is the
+>>>>>>> v3.18
 =======
  * using the map { <n, m> | the n-th bit of @relmap is the
 >>>>>>> v3.18
@@ -1125,7 +1270,11 @@ EXPORT_SYMBOL(bitmap_bitremap);
  *  Further lets say we use the following code, invoking
  *  bitmap_fold() then bitmap_onto, as suggested above to
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  avoid the possitility of an empty @dst result:
+=======
+ *  avoid the possibility of an empty @dst result:
+>>>>>>> v3.18
 =======
  *  avoid the possibility of an empty @dst result:
 >>>>>>> v3.18
@@ -1245,7 +1394,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __reg_op(unsigned long *bitmap, int pos, int order, int reg_op)
+=======
+static int __reg_op(unsigned long *bitmap, unsigned int pos, int order, int reg_op)
+>>>>>>> v3.18
 =======
 static int __reg_op(unsigned long *bitmap, unsigned int pos, int order, int reg_op)
 >>>>>>> v3.18
@@ -1315,17 +1468,23 @@ done:
  * or -errno on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bitmap_find_free_region(unsigned long *bitmap, int bits, int order)
 {
 	int pos, end;		/* scans bitmap by regions of size order */
 
 	for (pos = 0 ; (end = pos + (1 << order)) <= bits; pos = end) {
 =======
+=======
+>>>>>>> v3.18
 int bitmap_find_free_region(unsigned long *bitmap, unsigned int bits, int order)
 {
 	unsigned int pos, end;		/* scans bitmap by regions of size order */
 
 	for (pos = 0 ; (end = pos + (1U << order)) <= bits; pos = end) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!__reg_op(bitmap, pos, order, REG_OP_ISFREE))
 			continue;
@@ -1348,7 +1507,11 @@ EXPORT_SYMBOL(bitmap_find_free_region);
  * No return value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bitmap_release_region(unsigned long *bitmap, int pos, int order)
+=======
+void bitmap_release_region(unsigned long *bitmap, unsigned int pos, int order)
+>>>>>>> v3.18
 =======
 void bitmap_release_region(unsigned long *bitmap, unsigned int pos, int order)
 >>>>>>> v3.18
@@ -1369,6 +1532,7 @@ EXPORT_SYMBOL(bitmap_release_region);
  * free (not all bits were zero).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bitmap_allocate_region(unsigned long *bitmap, int pos, int order)
 {
 	if (!__reg_op(bitmap, pos, order, REG_OP_ISFREE))
@@ -1376,11 +1540,16 @@ int bitmap_allocate_region(unsigned long *bitmap, int pos, int order)
 	__reg_op(bitmap, pos, order, REG_OP_ALLOC);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 int bitmap_allocate_region(unsigned long *bitmap, unsigned int pos, int order)
 {
 	if (!__reg_op(bitmap, pos, order, REG_OP_ISFREE))
 		return -EBUSY;
 	return __reg_op(bitmap, pos, order, REG_OP_ALLOC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(bitmap_allocate_region);

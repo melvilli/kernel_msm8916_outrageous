@@ -74,7 +74,11 @@ EXPORT_SYMBOL(sg_nents);
 struct scatterlist *sg_last(struct scatterlist *sgl, unsigned int nents)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ARCH_HAS_SG_CHAIN
+=======
+#ifndef CONFIG_ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -170,6 +174,10 @@ static void sg_kfree(struct scatterlist *sg, unsigned int nents)
  * @table:	The sg table header to use
  * @max_ents:	The maximum number of entries per single scatterlist
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @skip_first_chunk: don't free the (preallocated) first scatterlist chunk
+>>>>>>> v3.18
 =======
  * @skip_first_chunk: don't free the (preallocated) first scatterlist chunk
 >>>>>>> v3.18
@@ -183,7 +191,11 @@ static void sg_kfree(struct scatterlist *sg, unsigned int nents)
  **/
 void __sg_free_table(struct sg_table *table, unsigned int max_ents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     sg_free_fn *free_fn)
+=======
+		     bool skip_first_chunk, sg_free_fn *free_fn)
+>>>>>>> v3.18
 =======
 		     bool skip_first_chunk, sg_free_fn *free_fn)
 >>>>>>> v3.18
@@ -215,12 +227,18 @@ void __sg_free_table(struct sg_table *table, unsigned int max_ents,
 
 		table->orig_nents -= sg_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_fn(sgl, alloc_size);
 =======
+=======
+>>>>>>> v3.18
 		if (skip_first_chunk)
 			skip_first_chunk = false;
 		else
 			free_fn(sgl, alloc_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sgl = next;
 	}
@@ -237,7 +255,11 @@ EXPORT_SYMBOL(__sg_free_table);
 void sg_free_table(struct sg_table *table)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__sg_free_table(table, SG_MAX_SINGLE_ALLOC, sg_kfree);
+=======
+	__sg_free_table(table, SG_MAX_SINGLE_ALLOC, false, sg_kfree);
+>>>>>>> v3.18
 =======
 	__sg_free_table(table, SG_MAX_SINGLE_ALLOC, false, sg_kfree);
 >>>>>>> v3.18
@@ -265,8 +287,13 @@ EXPORT_SYMBOL(sg_free_table);
  **/
 int __sg_alloc_table(struct sg_table *table, unsigned int nents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned int max_ents, gfp_t gfp_mask,
 		     sg_alloc_fn *alloc_fn)
+=======
+		     unsigned int max_ents, struct scatterlist *first_chunk,
+		     gfp_t gfp_mask, sg_alloc_fn *alloc_fn)
+>>>>>>> v3.18
 =======
 		     unsigned int max_ents, struct scatterlist *first_chunk,
 		     gfp_t gfp_mask, sg_alloc_fn *alloc_fn)
@@ -280,7 +307,11 @@ int __sg_alloc_table(struct sg_table *table, unsigned int nents,
 	if (nents == 0)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ARCH_HAS_SG_CHAIN
+=======
+#ifndef CONFIG_ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -302,14 +333,20 @@ int __sg_alloc_table(struct sg_table *table, unsigned int nents,
 		left -= sg_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sg = alloc_fn(alloc_size, gfp_mask);
 =======
+=======
+>>>>>>> v3.18
 		if (first_chunk) {
 			sg = first_chunk;
 			first_chunk = NULL;
 		} else {
 			sg = alloc_fn(alloc_size, gfp_mask);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(!sg)) {
 			/*
@@ -366,9 +403,15 @@ int sg_alloc_table(struct sg_table *table, unsigned int nents, gfp_t gfp_mask)
 
 	ret = __sg_alloc_table(table, nents, SG_MAX_SINGLE_ALLOC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       gfp_mask, sg_kmalloc);
 	if (unlikely(ret))
 		__sg_free_table(table, SG_MAX_SINGLE_ALLOC, sg_kfree);
+=======
+			       NULL, gfp_mask, sg_kmalloc);
+	if (unlikely(ret))
+		__sg_free_table(table, SG_MAX_SINGLE_ALLOC, false, sg_kfree);
+>>>>>>> v3.18
 =======
 			       NULL, gfp_mask, sg_kmalloc);
 	if (unlikely(ret))
@@ -503,7 +546,10 @@ void sg_miter_start(struct sg_mapping_iter *miter, struct scatterlist *sgl,
 EXPORT_SYMBOL(sg_miter_start);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool sg_miter_get_next_page(struct sg_mapping_iter *miter)
 {
 	if (!miter->__remaining) {
@@ -564,6 +610,9 @@ bool sg_miter_skip(struct sg_mapping_iter *miter, off_t offset)
 }
 EXPORT_SYMBOL(sg_miter_skip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * sg_miter_next - proceed mapping iterator to the next mapping
@@ -591,6 +640,7 @@ bool sg_miter_next(struct sg_mapping_iter *miter)
 	 * __remaining, __offset is adjusted by sg_miter_stop
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!miter->__remaining) {
 		struct scatterlist *sg;
 		unsigned long pgoffset;
@@ -607,6 +657,11 @@ bool sg_miter_next(struct sg_mapping_iter *miter)
 		miter->__remaining = min_t(unsigned long, miter->__remaining,
 					   PAGE_SIZE - miter->__offset);
 	}
+=======
+	if (!sg_miter_get_next_page(miter))
+		return false;
+
+>>>>>>> v3.18
 =======
 	if (!sg_miter_get_next_page(miter))
 		return false;
@@ -672,8 +727,14 @@ EXPORT_SYMBOL(sg_miter_stop);
  * @buf:		 Where to copy from
  * @buflen:		 The number of bytes to copy
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @to_buffer: 		 transfer direction (non zero == from an sg list to a
  * 			 buffer, 0 == from a buffer to an sg list
+=======
+ * @skip:		 Number of bytes to skip before copying
+ * @to_buffer:		 transfer direction (true == from an sg list to a
+ *			 buffer, false == from a buffer to an sg list
+>>>>>>> v3.18
 =======
  * @skip:		 Number of bytes to skip before copying
  * @to_buffer:		 transfer direction (true == from an sg list to a
@@ -685,7 +746,12 @@ EXPORT_SYMBOL(sg_miter_stop);
  **/
 static size_t sg_copy_buffer(struct scatterlist *sgl, unsigned int nents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     void *buf, size_t buflen, int to_buffer)
+=======
+			     void *buf, size_t buflen, off_t skip,
+			     bool to_buffer)
+>>>>>>> v3.18
 =======
 			     void *buf, size_t buflen, off_t skip,
 			     bool to_buffer)
@@ -704,6 +770,12 @@ static size_t sg_copy_buffer(struct scatterlist *sgl, unsigned int nents,
 	sg_miter_start(&miter, sgl, nents, sg_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!sg_miter_skip(&miter, skip))
+		return false;
+
+>>>>>>> v3.18
 =======
 	if (!sg_miter_skip(&miter, skip))
 		return false;
@@ -744,7 +816,11 @@ size_t sg_copy_from_buffer(struct scatterlist *sgl, unsigned int nents,
 			   void *buf, size_t buflen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sg_copy_buffer(sgl, nents, buf, buflen, 0);
+=======
+	return sg_copy_buffer(sgl, nents, buf, buflen, 0, false);
+>>>>>>> v3.18
 =======
 	return sg_copy_buffer(sgl, nents, buf, buflen, 0, false);
 >>>>>>> v3.18
@@ -765,10 +841,13 @@ size_t sg_copy_to_buffer(struct scatterlist *sgl, unsigned int nents,
 			 void *buf, size_t buflen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sg_copy_buffer(sgl, nents, buf, buflen, 1);
 }
 EXPORT_SYMBOL(sg_copy_to_buffer);
 =======
+=======
+>>>>>>> v3.18
 	return sg_copy_buffer(sgl, nents, buf, buflen, 0, true);
 }
 EXPORT_SYMBOL(sg_copy_to_buffer);
@@ -808,4 +887,7 @@ size_t sg_pcopy_to_buffer(struct scatterlist *sgl, unsigned int nents,
 	return sg_copy_buffer(sgl, nents, buf, buflen, skip, true);
 }
 EXPORT_SYMBOL(sg_pcopy_to_buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

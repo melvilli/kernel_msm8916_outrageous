@@ -21,6 +21,7 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/platform_data/clk-integrator.h>
 #include <linux/slab.h>
@@ -29,6 +30,8 @@
 #include <mach/impd1.h>
 #include <asm/sizes.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/amba/mmci.h>
 #include <linux/amba/pl061.h>
 #include <linux/io.h>
@@ -40,6 +43,9 @@
 #include <asm/sizes.h>
 #include "lm.h"
 #include "impd1.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int module_id;
@@ -50,6 +56,10 @@ MODULE_PARM_DESC(lmid, "logic module stack position");
 struct impd1_module {
 	void __iomem	*base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem	*vic_base;
+>>>>>>> v3.18
 =======
 	void __iomem	*vic_base;
 >>>>>>> v3.18
@@ -69,7 +79,10 @@ EXPORT_SYMBOL(impd1_tweak_control);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * MMC support
  */
 static struct mmci_platform_data mmc_data = {
@@ -77,6 +90,9 @@ static struct mmci_platform_data mmc_data = {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * CLCD support
  */
@@ -291,9 +307,12 @@ struct impd1_device {
 static struct impd1_device impd1_devs[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.offset	= 0x03000000,
 		.id	= 0x00041190,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.offset	= 0x00100000,
@@ -324,6 +343,10 @@ static struct impd1_device impd1_devs[] = {
 		.irq	= { 7, 8 },
 		.id	= 0x00041181,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.platform_data = &mmc_data,
+>>>>>>> v3.18
 =======
 		.platform_data = &mmc_data,
 >>>>>>> v3.18
@@ -340,11 +363,14 @@ static struct impd1_device impd1_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int impd1_probe(struct lm_device *dev)
 {
 	struct impd1_module *impd1;
 	int i, ret;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Valid IRQs: 0 thru 9 and 11, 10 unused.
  */
@@ -360,11 +386,15 @@ static int __init_refok impd1_probe(struct lm_device *dev)
 	struct impd1_module *impd1;
 	int irq_base;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dev->id != module_id)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!request_mem_region(dev->resource.start, SZ_4K, "LM registers"))
 		return -EBUSY;
@@ -388,6 +418,8 @@ static int __init_refok impd1_probe(struct lm_device *dev)
 
 	integrator_impd1_clk_init(impd1->base, dev->id);
 =======
+=======
+>>>>>>> v3.18
 	if (!devm_request_mem_region(&dev->dev, dev->resource.start,
 				     SZ_4K, "LM registers"))
 		return -EBUSY;
@@ -421,6 +453,9 @@ static int __init_refok impd1_probe(struct lm_device *dev)
 
 	dev_info(&dev->dev, "IM-PD1 found at 0x%08lx\n",
 		 (unsigned long)dev->resource.start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(impd1_devs); i++) {
@@ -429,12 +464,15 @@ static int __init_refok impd1_probe(struct lm_device *dev)
 		unsigned long pc_base;
 		char devname[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		pc_base = dev->resource.start + idev->offset;
 		snprintf(devname, 32, "lm%x:%5.5lx", dev->id, idev->offset >> 12);
 		d = amba_ahb_device_add_res(&dev->dev, devname, pc_base, SZ_4K,
 					    dev->irq, dev->irq,
 =======
+=======
+>>>>>>> v3.18
 		int irq1 = idev->irq[0];
 		int irq2 = idev->irq[1];
 
@@ -485,6 +523,9 @@ static int __init_refok impd1_probe(struct lm_device *dev)
 
 		d = amba_ahb_device_add_res(&dev->dev, devname, pc_base, SZ_4K,
 					    irq1, irq2,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    idev->platform_data, idev->id,
 					    &dev->resource);
@@ -496,6 +537,7 @@ static int __init_refok impd1_probe(struct lm_device *dev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  free_impd1:
 	if (impd1 && impd1->base)
@@ -504,6 +546,8 @@ static int __init_refok impd1_probe(struct lm_device *dev)
  release_lm:
 	release_mem_region(dev->resource.start, SZ_4K);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -517,8 +561,11 @@ static int impd1_remove_one(struct device *dev, void *data)
 static void impd1_remove(struct lm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct impd1_module *impd1 = lm_get_drvdata(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_for_each_child(&dev->dev, NULL, impd1_remove_one);
@@ -526,10 +573,13 @@ static void impd1_remove(struct lm_device *dev)
 
 	lm_set_drvdata(dev, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	iounmap(impd1->base);
 	kfree(impd1);
 	release_mem_region(dev->resource.start, SZ_4K);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -538,12 +588,18 @@ static struct lm_driver impd1_driver = {
 	.drv = {
 		.name	= "impd1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * As we're dropping the probe() function, suppress driver
 		 * binding from sysfs.
 		 */
 		.suppress_bind_attrs = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe		= impd1_probe,

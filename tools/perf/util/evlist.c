@@ -8,7 +8,11 @@
  */
 #include "util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <lk/debugfs.h>
+=======
+#include <api/fs/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <api/fs/debugfs.h>
 >>>>>>> v3.18
@@ -19,15 +23,21 @@
 #include "evlist.h"
 #include "evsel.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <unistd.h>
 
 #include "parse-events.h"
 =======
+=======
+>>>>>>> v3.18
 #include "debug.h"
 #include <unistd.h>
 
 #include "parse-events.h"
 #include "parse-options.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <sys/mman.h>
@@ -36,6 +46,12 @@
 #include <linux/hash.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void perf_evlist__mmap_put(struct perf_evlist *evlist, int idx);
+static void __perf_evlist__munmap(struct perf_evlist *evlist, int idx);
+
+>>>>>>> v3.18
 =======
 static void perf_evlist__mmap_put(struct perf_evlist *evlist, int idx);
 static void __perf_evlist__munmap(struct perf_evlist *evlist, int idx);
@@ -54,6 +70,10 @@ void perf_evlist__init(struct perf_evlist *evlist, struct cpu_map *cpus,
 	INIT_LIST_HEAD(&evlist->entries);
 	perf_evlist__set_maps(evlist, cpus, threads);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fdarray__init(&evlist->pollfd, 64);
+>>>>>>> v3.18
 =======
 	fdarray__init(&evlist->pollfd, 64);
 >>>>>>> v3.18
@@ -70,6 +90,7 @@ struct perf_evlist *perf_evlist__new(void)
 	return evlist;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void perf_evlist__config(struct perf_evlist *evlist,
 			struct perf_record_opts *opts)
@@ -92,6 +113,8 @@ void perf_evlist__config(struct perf_evlist *evlist,
 			perf_evsel__set_sample_id(evsel);
 	}
 =======
+=======
+>>>>>>> v3.18
 struct perf_evlist *perf_evlist__new_default(void)
 {
 	struct perf_evlist *evlist = perf_evlist__new();
@@ -127,6 +150,9 @@ static void perf_evlist__update_id_pos(struct perf_evlist *evlist)
 		perf_evsel__calc_id_pos(evsel);
 
 	perf_evlist__set_id_pos(evlist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -135,7 +161,11 @@ static void perf_evlist__purge(struct perf_evlist *evlist)
 	struct perf_evsel *pos, *n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(pos, n, &evlist->entries, node) {
+=======
+	evlist__for_each_safe(evlist, n, pos) {
+>>>>>>> v3.18
 =======
 	evlist__for_each_safe(evlist, n, pos) {
 >>>>>>> v3.18
@@ -149,10 +179,15 @@ static void perf_evlist__purge(struct perf_evlist *evlist)
 void perf_evlist__exit(struct perf_evlist *evlist)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(evlist->mmap);
 	free(evlist->pollfd);
 	evlist->mmap = NULL;
 	evlist->pollfd = NULL;
+=======
+	zfree(&evlist->mmap);
+	fdarray__exit(&evlist->pollfd);
+>>>>>>> v3.18
 =======
 	zfree(&evlist->mmap);
 	fdarray__exit(&evlist->pollfd);
@@ -162,13 +197,19 @@ void perf_evlist__exit(struct perf_evlist *evlist)
 void perf_evlist__delete(struct perf_evlist *evlist)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	perf_evlist__munmap(evlist);
 	perf_evlist__close(evlist);
 	cpu_map__delete(evlist->cpus);
 	thread_map__delete(evlist->threads);
 	evlist->cpus = NULL;
 	evlist->threads = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	perf_evlist__purge(evlist);
 	perf_evlist__exit(evlist);
@@ -179,13 +220,19 @@ void perf_evlist__add(struct perf_evlist *evlist, struct perf_evsel *entry)
 {
 	list_add_tail(&entry->node, &evlist->entries);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	++evlist->nr_entries;
 =======
+=======
+>>>>>>> v3.18
 	entry->idx = evlist->nr_entries;
 	entry->tracking = !entry->idx;
 
 	if (!evlist->nr_entries++)
 		perf_evlist__set_id_pos(evlist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -194,15 +241,21 @@ void perf_evlist__splice_list_tail(struct perf_evlist *evlist,
 				   int nr_entries)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_splice_tail(list, &evlist->entries);
 	evlist->nr_entries += nr_entries;
 =======
+=======
+>>>>>>> v3.18
 	bool set_id_pos = !evlist->nr_entries;
 
 	list_splice_tail(list, &evlist->entries);
 	evlist->nr_entries += nr_entries;
 	if (set_id_pos)
 		perf_evlist__set_id_pos(evlist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -216,7 +269,11 @@ void __perf_evlist__set_leader(struct list_head *list)
 	leader->nr_members = evsel->idx - leader->idx + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, list, node) {
+=======
+	__evlist__for_each(list, evsel) {
+>>>>>>> v3.18
 =======
 	__evlist__for_each(list, evsel) {
 >>>>>>> v3.18
@@ -243,7 +300,11 @@ int perf_evlist__add_default(struct perf_evlist *evlist)
 	event_attr_init(&attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	evsel = perf_evsel__new(&attr, 0);
+=======
+	evsel = perf_evsel__new(&attr);
+>>>>>>> v3.18
 =======
 	evsel = perf_evsel__new(&attr);
 >>>>>>> v3.18
@@ -272,7 +333,11 @@ static int perf_evlist__add_attrs(struct perf_evlist *evlist,
 
 	for (i = 0; i < nr_attrs; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		evsel = perf_evsel__new(attrs + i, evlist->nr_entries + i);
+=======
+		evsel = perf_evsel__new_idx(attrs + i, evlist->nr_entries + i);
+>>>>>>> v3.18
 =======
 		evsel = perf_evsel__new_idx(attrs + i, evlist->nr_entries + i);
 >>>>>>> v3.18
@@ -287,7 +352,11 @@ static int perf_evlist__add_attrs(struct perf_evlist *evlist,
 
 out_delete_partial_list:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(evsel, n, &head, node)
+=======
+	__evlist__for_each_safe(&head, n, evsel)
+>>>>>>> v3.18
 =======
 	__evlist__for_each_safe(&head, n, evsel)
 >>>>>>> v3.18
@@ -312,7 +381,11 @@ perf_evlist__find_tracepoint_by_id(struct perf_evlist *evlist, int id)
 	struct perf_evsel *evsel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, evsel) {
 >>>>>>> v3.18
@@ -325,6 +398,7 @@ perf_evlist__find_tracepoint_by_id(struct perf_evlist *evlist, int id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_evlist__add_newtp(struct perf_evlist *evlist,
 			   const char *sys, const char *name, void *handler)
 {
@@ -336,6 +410,8 @@ int perf_evlist__add_newtp(struct perf_evlist *evlist,
 
 	evsel->handler.func = handler;
 =======
+=======
+>>>>>>> v3.18
 struct perf_evsel *
 perf_evlist__find_tracepoint_by_name(struct perf_evlist *evlist,
 				     const char *name)
@@ -360,13 +436,19 @@ int perf_evlist__add_newtp(struct perf_evlist *evlist,
 		return -1;
 
 	evsel->handler = handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	perf_evlist__add(evlist, evsel);
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int perf_evlist__nr_threads(struct perf_evlist *evlist,
 				   struct perf_evsel *evsel)
 {
@@ -376,12 +458,16 @@ static int perf_evlist__nr_threads(struct perf_evlist *evlist,
 		return thread_map__nr(evlist->threads);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void perf_evlist__disable(struct perf_evlist *evlist)
 {
 	int cpu, thread;
 	struct perf_evsel *pos;
 	int nr_cpus = cpu_map__nr(evlist->cpus);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int nr_threads = thread_map__nr(evlist->threads);
 
@@ -390,6 +476,8 @@ void perf_evlist__disable(struct perf_evlist *evlist)
 			if (!perf_evsel__is_group_leader(pos))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 	int nr_threads;
 
 	for (cpu = 0; cpu < nr_cpus; cpu++) {
@@ -397,6 +485,9 @@ void perf_evlist__disable(struct perf_evlist *evlist)
 			if (!perf_evsel__is_group_leader(pos) || !pos->fd)
 				continue;
 			nr_threads = perf_evlist__nr_threads(evlist, pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			for (thread = 0; thread < nr_threads; thread++)
 				ioctl(FD(pos, cpu, thread),
@@ -411,6 +502,7 @@ void perf_evlist__enable(struct perf_evlist *evlist)
 	struct perf_evsel *pos;
 	int nr_cpus = cpu_map__nr(evlist->cpus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nr_threads = thread_map__nr(evlist->threads);
 
 	for (cpu = 0; cpu < nr_cpus; cpu++) {
@@ -418,6 +510,8 @@ void perf_evlist__enable(struct perf_evlist *evlist)
 			if (!perf_evsel__is_group_leader(pos))
 				continue;
 =======
+=======
+>>>>>>> v3.18
 	int nr_threads;
 
 	for (cpu = 0; cpu < nr_cpus; cpu++) {
@@ -425,6 +519,9 @@ void perf_evlist__enable(struct perf_evlist *evlist)
 			if (!perf_evsel__is_group_leader(pos) || !pos->fd)
 				continue;
 			nr_threads = perf_evlist__nr_threads(evlist, pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			for (thread = 0; thread < nr_threads; thread++)
 				ioctl(FD(pos, cpu, thread),
@@ -433,6 +530,7 @@ void perf_evlist__enable(struct perf_evlist *evlist)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int perf_evlist__alloc_pollfd(struct perf_evlist *evlist)
 {
@@ -450,6 +548,8 @@ void perf_evlist__add_pollfd(struct perf_evlist *evlist, int fd)
 	evlist->pollfd[evlist->nr_fds].events = POLLIN;
 	evlist->nr_fds++;
 =======
+=======
+>>>>>>> v3.18
 int perf_evlist__disable_event(struct perf_evlist *evlist,
 			       struct perf_evsel *evsel)
 {
@@ -597,6 +697,9 @@ int perf_evlist__filter_pollfd(struct perf_evlist *evlist, short revents_and_mas
 int perf_evlist__poll(struct perf_evlist *evlist, int timeout)
 {
 	return fdarray__poll(&evlist->pollfd, timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -627,7 +730,10 @@ static int perf_evlist__id_add_fd(struct perf_evlist *evlist,
 	u64 read_data[4] = { 0, };
 	int id_idx = 1; /* The first entry is the counter value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u64 id;
 	int ret;
 
@@ -646,6 +752,9 @@ static int perf_evlist__id_add_fd(struct perf_evlist *evlist,
 	 */
 	if (perf_evlist__read_format(evlist) & PERF_FORMAT_GROUP)
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(evsel->attr.read_format & PERF_FORMAT_ID) ||
@@ -658,12 +767,15 @@ static int perf_evlist__id_add_fd(struct perf_evlist *evlist,
 		++id_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_evlist__id_add(evlist, evsel, cpu, thread, read_data[id_idx]);
 	return 0;
 }
 
 struct perf_evsel *perf_evlist__id2evsel(struct perf_evlist *evlist, u64 id)
 =======
+=======
+>>>>>>> v3.18
 	id = read_data[id_idx];
 
  add:
@@ -672,6 +784,9 @@ struct perf_evsel *perf_evlist__id2evsel(struct perf_evlist *evlist, u64 id)
 }
 
 struct perf_sample_id *perf_evlist__id2sid(struct perf_evlist *evlist, u64 id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hlist_head *head;
@@ -679,9 +794,12 @@ struct perf_sample_id *perf_evlist__id2sid(struct perf_evlist *evlist, u64 id)
 	int hash;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (evlist->nr_entries == 1)
 		return perf_evlist__first(evlist);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hash = hash_64(id, PERF_EVLIST__HLIST_BITS);
@@ -690,8 +808,11 @@ struct perf_sample_id *perf_evlist__id2sid(struct perf_evlist *evlist, u64 id)
 	hlist_for_each_entry(sid, head, node)
 		if (sid->id == id)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return sid->evsel;
 =======
+=======
+>>>>>>> v3.18
 			return sid;
 
 	return NULL;
@@ -707,6 +828,9 @@ struct perf_evsel *perf_evlist__id2evsel(struct perf_evlist *evlist, u64 id)
 	sid = perf_evlist__id2sid(evlist, id);
 	if (sid)
 		return sid->evsel;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!perf_evlist__sample_id_all(evlist))
@@ -716,7 +840,10 @@ struct perf_evsel *perf_evlist__id2evsel(struct perf_evlist *evlist, u64 id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int perf_evlist__event2id(struct perf_evlist *evlist,
 				 union perf_event *event, u64 *id)
 {
@@ -771,6 +898,9 @@ static struct perf_evsel *perf_evlist__event2evsel(struct perf_evlist *evlist,
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 union perf_event *perf_evlist__mmap_read(struct perf_evlist *evlist, int idx)
 {
@@ -814,7 +944,11 @@ union perf_event *perf_evlist__mmap_read(struct perf_evlist *evlist, int idx)
 			unsigned int offset = old;
 			unsigned int len = min(sizeof(*event), size), cpy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void *dst = &md->event_copy;
+=======
+			void *dst = md->event_copy;
+>>>>>>> v3.18
 =======
 			void *dst = md->event_copy;
 >>>>>>> v3.18
@@ -828,7 +962,11 @@ union perf_event *perf_evlist__mmap_read(struct perf_evlist *evlist, int idx)
 			} while (len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			event = &md->event_copy;
+=======
+			event = (union perf_event *) md->event_copy;
+>>>>>>> v3.18
 =======
 			event = (union perf_event *) md->event_copy;
 >>>>>>> v3.18
@@ -840,11 +978,14 @@ union perf_event *perf_evlist__mmap_read(struct perf_evlist *evlist, int idx)
 	md->prev = old;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!evlist->overwrite)
 		perf_mmap__write_tail(md, old);
 
 	return event;
 =======
+=======
+>>>>>>> v3.18
 	return event;
 }
 
@@ -887,6 +1028,9 @@ static void __perf_evlist__munmap(struct perf_evlist *evlist, int idx)
 		evlist->mmap[idx].base = NULL;
 		evlist->mmap[idx].refcnt = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -894,6 +1038,7 @@ void perf_evlist__munmap(struct perf_evlist *evlist)
 {
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < evlist->nr_mmaps; i++) {
 		if (evlist->mmap[i].base != NULL) {
@@ -905,6 +1050,8 @@ void perf_evlist__munmap(struct perf_evlist *evlist)
 	free(evlist->mmap);
 	evlist->mmap = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (evlist->mmap == NULL)
 		return;
 
@@ -912,6 +1059,9 @@ void perf_evlist__munmap(struct perf_evlist *evlist)
 		__perf_evlist__munmap(evlist, i);
 
 	zfree(&evlist->mmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -919,7 +1069,11 @@ static int perf_evlist__alloc_mmap(struct perf_evlist *evlist)
 {
 	evlist->nr_mmaps = cpu_map__nr(evlist->cpus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_map__all(evlist->cpus))
+=======
+	if (cpu_map__empty(evlist->cpus))
+>>>>>>> v3.18
 =======
 	if (cpu_map__empty(evlist->cpus))
 >>>>>>> v3.18
@@ -928,6 +1082,7 @@ static int perf_evlist__alloc_mmap(struct perf_evlist *evlist)
 	return evlist->mmap != NULL ? 0 : -ENOMEM;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __perf_evlist__mmap(struct perf_evlist *evlist,
 			       int idx, int prot, int mask, int fd)
@@ -938,6 +1093,8 @@ static int __perf_evlist__mmap(struct perf_evlist *evlist,
 				      MAP_SHARED, fd, 0);
 	if (evlist->mmap[idx].base == MAP_FAILED) {
 =======
+=======
+>>>>>>> v3.18
 struct mmap_params {
 	int prot;
 	int mask;
@@ -967,11 +1124,15 @@ static int __perf_evlist__mmap(struct perf_evlist *evlist, int idx,
 	if (evlist->mmap[idx].base == MAP_FAILED) {
 		pr_debug2("failed to mmap perf event ring buffer, error %d\n",
 			  errno);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		evlist->mmap[idx].base = NULL;
 		return -1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	perf_evlist__add_pollfd(evlist, fd);
 	return 0;
@@ -981,6 +1142,8 @@ static int perf_evlist__mmap_per_cpu(struct perf_evlist *evlist, int prot, int m
 {
 	struct perf_evsel *evsel;
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1025,12 +1188,19 @@ static int perf_evlist__mmap_per_evsel(struct perf_evlist *evlist, int idx,
 static int perf_evlist__mmap_per_cpu(struct perf_evlist *evlist,
 				     struct mmap_params *mp)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int cpu, thread;
 	int nr_cpus = cpu_map__nr(evlist->cpus);
 	int nr_threads = thread_map__nr(evlist->threads);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_debug2("perf event ring buffer mmapped per cpu\n");
+>>>>>>> v3.18
 =======
 	pr_debug2("perf event ring buffer mmapped per cpu\n");
 >>>>>>> v3.18
@@ -1038,6 +1208,7 @@ static int perf_evlist__mmap_per_cpu(struct perf_evlist *evlist,
 		int output = -1;
 
 		for (thread = 0; thread < nr_threads; thread++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			list_for_each_entry(evsel, &evlist->entries, node) {
 				int fd = FD(evsel, cpu, thread);
@@ -1061,12 +1232,18 @@ static int perf_evlist__mmap_per_cpu(struct perf_evlist *evlist,
 							thread, &output))
 				goto out_unmap;
 >>>>>>> v3.18
+=======
+			if (perf_evlist__mmap_per_evsel(evlist, cpu, mp, cpu,
+							thread, &output))
+				goto out_unmap;
+>>>>>>> v3.18
 		}
 	}
 
 	return 0;
 
 out_unmap:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (cpu = 0; cpu < nr_cpus; cpu++) {
 		if (evlist->mmap[cpu].base != NULL) {
@@ -1104,6 +1281,8 @@ static int perf_evlist__mmap_per_thread(struct perf_evlist *evlist, int prot, in
 				goto out_unmap;
 		}
 =======
+=======
+>>>>>>> v3.18
 	for (cpu = 0; cpu < nr_cpus; cpu++)
 		__perf_evlist__munmap(evlist, cpu);
 	return -1;
@@ -1122,12 +1301,16 @@ static int perf_evlist__mmap_per_thread(struct perf_evlist *evlist,
 		if (perf_evlist__mmap_per_evsel(evlist, thread, mp, 0, thread,
 						&output))
 			goto out_unmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 out_unmap:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (thread = 0; thread < nr_threads; thread++) {
 		if (evlist->mmap[thread].base != NULL) {
@@ -1153,6 +1336,8 @@ out_unmap:
  *
  * Using perf_evlist__read_on_cpu does this automatically.
 =======
+=======
+>>>>>>> v3.18
 	for (thread = 0; thread < nr_threads; thread++)
 		__perf_evlist__munmap(evlist, thread);
 	return -1;
@@ -1244,6 +1429,9 @@ int perf_evlist__parse_mmap_pages(const struct option *opt, const char *str,
  * automatically.
  *
  * Return: %0 on success, negative error code otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
@@ -1252,6 +1440,7 @@ int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
 	struct perf_evsel *evsel;
 	const struct cpu_map *cpus = evlist->cpus;
 	const struct thread_map *threads = evlist->threads;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int prot = PROT_READ | (overwrite ? 0 : PROT_WRITE), mask;
 
@@ -1267,10 +1456,16 @@ int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
 		.prot = PROT_READ | (overwrite ? 0 : PROT_WRITE),
 	};
 >>>>>>> v3.18
+=======
+	struct mmap_params mp = {
+		.prot = PROT_READ | (overwrite ? 0 : PROT_WRITE),
+	};
+>>>>>>> v3.18
 
 	if (evlist->mmap == NULL && perf_evlist__alloc_mmap(evlist) < 0)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (evlist->pollfd == NULL && perf_evlist__alloc_pollfd(evlist) < 0)
 		return -ENOMEM;
@@ -1280,6 +1475,8 @@ int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
 
 	list_for_each_entry(evsel, &evlist->entries, node) {
 =======
+=======
+>>>>>>> v3.18
 	if (evlist->pollfd.entries == NULL && perf_evlist__alloc_pollfd(evlist) < 0)
 		return -ENOMEM;
 
@@ -1289,6 +1486,9 @@ int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
 	mp.mask = evlist->mmap_len - page_size - 1;
 
 	evlist__for_each(evlist, evsel) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((evsel->attr.read_format & PERF_FORMAT_ID) &&
 		    evsel->sample_id == NULL &&
@@ -1296,6 +1496,7 @@ int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
 			return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu_map__all(cpus))
 		return perf_evlist__mmap_per_thread(evlist, prot, mask);
@@ -1306,6 +1507,8 @@ int perf_evlist__mmap(struct perf_evlist *evlist, unsigned int pages,
 int perf_evlist__create_maps(struct perf_evlist *evlist,
 			     struct perf_target *target)
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_map__empty(cpus))
 		return perf_evlist__mmap_per_thread(evlist, &mp);
 
@@ -1313,6 +1516,9 @@ int perf_evlist__create_maps(struct perf_evlist *evlist,
 }
 
 int perf_evlist__create_maps(struct perf_evlist *evlist, struct target *target)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	evlist->threads = thread_map__new_str(target->pid, target->tid,
@@ -1322,9 +1528,13 @@ int perf_evlist__create_maps(struct perf_evlist *evlist, struct target *target)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (perf_target__has_task(target))
 		evlist->cpus = cpu_map__dummy_new();
 	else if (!perf_target__has_cpu(target) && !target->uses_mmap)
+=======
+	if (target__uses_dummy_map(target))
+>>>>>>> v3.18
 =======
 	if (target__uses_dummy_map(target))
 >>>>>>> v3.18
@@ -1340,6 +1550,7 @@ int perf_evlist__create_maps(struct perf_evlist *evlist, struct target *target)
 out_delete_threads:
 	thread_map__delete(evlist->threads);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
 }
 
@@ -1349,6 +1560,10 @@ void perf_evlist__delete_maps(struct perf_evlist *evlist)
 	thread_map__delete(evlist->threads);
 	evlist->cpus	= NULL;
 	evlist->threads = NULL;
+=======
+	evlist->threads = NULL;
+	return -1;
+>>>>>>> v3.18
 =======
 	evlist->threads = NULL;
 	return -1;
@@ -1363,7 +1578,11 @@ int perf_evlist__apply_filters(struct perf_evlist *evlist)
 		  nthreads = thread_map__nr(evlist->threads);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, evsel) {
 >>>>>>> v3.18
@@ -1386,7 +1605,11 @@ int perf_evlist__set_filter(struct perf_evlist *evlist, const char *filter)
 		  nthreads = thread_map__nr(evlist->threads);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, evsel) {
 >>>>>>> v3.18
@@ -1400,6 +1623,7 @@ int perf_evlist__set_filter(struct perf_evlist *evlist, const char *filter)
 
 bool perf_evlist__valid_sample_type(struct perf_evlist *evlist)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct perf_evsel *first = perf_evlist__first(evlist), *pos = first;
 
@@ -1416,6 +1640,8 @@ u64 perf_evlist__sample_type(struct perf_evlist *evlist)
 	struct perf_evsel *first = perf_evlist__first(evlist);
 	return first->attr.sample_type;
 =======
+=======
+>>>>>>> v3.18
 	struct perf_evsel *pos;
 
 	if (evlist->nr_entries == 1)
@@ -1476,6 +1702,9 @@ u64 perf_evlist__read_format(struct perf_evlist *evlist)
 {
 	struct perf_evsel *first = perf_evlist__first(evlist);
 	return first->attr.read_format;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1506,6 +1735,12 @@ u16 perf_evlist__id_hdr_size(struct perf_evlist *evlist)
 	if (sample_type & PERF_SAMPLE_CPU)
 		size += sizeof(data->cpu) * 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (sample_type & PERF_SAMPLE_IDENTIFIER)
+		size += sizeof(data->id);
+>>>>>>> v3.18
 =======
 
 	if (sample_type & PERF_SAMPLE_IDENTIFIER)
@@ -1520,7 +1755,11 @@ bool perf_evlist__valid_sample_id_all(struct perf_evlist *evlist)
 	struct perf_evsel *first = perf_evlist__first(evlist), *pos = first;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_continue(pos, &evlist->entries, node) {
+=======
+	evlist__for_each_continue(evlist, pos) {
+>>>>>>> v3.18
 =======
 	evlist__for_each_continue(evlist, pos) {
 >>>>>>> v3.18
@@ -1549,10 +1788,13 @@ void perf_evlist__close(struct perf_evlist *evlist)
 	int ncpus = cpu_map__nr(evlist->cpus);
 	int nthreads = thread_map__nr(evlist->threads);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	list_for_each_entry_reverse(evsel, &evlist->entries, node)
 		perf_evsel__close(evsel, ncpus, nthreads);
 =======
+=======
+>>>>>>> v3.18
 	int n;
 
 	evlist__for_each_reverse(evlist, evsel) {
@@ -1589,6 +1831,9 @@ out_free_cpus:
 	cpu_map__delete(evlist->cpus);
 	evlist->cpus = NULL;
 	goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1598,8 +1843,11 @@ int perf_evlist__open(struct perf_evlist *evlist)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Default: one fd per CPU, all threads, aka systemwide
 	 * as sys_perf_event_open(cpu = -1, thread = -1) is EINVAL
@@ -1613,6 +1861,9 @@ int perf_evlist__open(struct perf_evlist *evlist)
 	perf_evlist__update_id_pos(evlist);
 
 	evlist__for_each(evlist, evsel) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = perf_evsel__open(evsel, evlist->cpus, evlist->threads);
 		if (err < 0)
@@ -1627,10 +1878,16 @@ out_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_evlist__prepare_workload(struct perf_evlist *evlist,
 				  struct perf_target *target,
 				  const char *argv[], bool pipe_output,
 				  bool want_signal)
+=======
+int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *target,
+				  const char *argv[], bool pipe_output,
+				  void (*exec_error)(int signo, siginfo_t *info, void *ucontext))
+>>>>>>> v3.18
 =======
 int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *target,
 				  const char *argv[], bool pipe_output,
@@ -1658,10 +1915,13 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 
 	if (!evlist->workload.pid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pipe_output)
 			dup2(2, 1);
 
 =======
+=======
+>>>>>>> v3.18
 		int ret;
 
 		if (pipe_output)
@@ -1669,12 +1929,16 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 
 		signal(SIGTERM, SIG_DFL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		close(child_ready_pipe[0]);
 		close(go_pipe[1]);
 		fcntl(go_pipe[0], F_SETFD, FD_CLOEXEC);
 
 		/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * Do a dummy execvp to get the PLT entry resolved,
 		 * so we avoid the resolver overhead on the real
@@ -1685,6 +1949,8 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 		/*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		 * Tell the parent we're ready to go
 		 */
 		close(child_ready_pipe[1]);
@@ -1692,6 +1958,7 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 		/*
 		 * Wait until the parent tells us to go.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (read(go_pipe[0], &bf, 1) == -1)
 			perror("unable to read pipe");
@@ -1707,6 +1974,8 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 	if (perf_target__none(target))
 		evlist->threads->map[0] = evlist->workload.pid;
 =======
+=======
+>>>>>>> v3.18
 		ret = read(go_pipe[0], &bf, 1);
 		/*
 		 * The parent will ask for the execvp() to be performed by
@@ -1753,6 +2022,9 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 		}
 		evlist->threads->map[0] = evlist->workload.pid;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	close(child_ready_pipe[1]);
@@ -1766,6 +2038,10 @@ int perf_evlist__prepare_workload(struct perf_evlist *evlist, struct target *tar
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fcntl(go_pipe[1], F_SETFD, FD_CLOEXEC);
+>>>>>>> v3.18
 =======
 	fcntl(go_pipe[1], F_SETFD, FD_CLOEXEC);
 >>>>>>> v3.18
@@ -1786,11 +2062,14 @@ int perf_evlist__start_workload(struct perf_evlist *evlist)
 {
 	if (evlist->workload.cork_fd > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Remove the cork, let it rip!
 		 */
 		return close(evlist->workload.cork_fd);
 =======
+=======
+>>>>>>> v3.18
 		char bf = 0;
 		int ret;
 		/*
@@ -1802,6 +2081,9 @@ int perf_evlist__start_workload(struct perf_evlist *evlist)
 
 		close(evlist->workload.cork_fd);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1812,12 +2094,18 @@ int perf_evlist__parse_sample(struct perf_evlist *evlist, union perf_event *even
 			      struct perf_sample *sample)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_evsel *evsel = perf_evlist__first(evlist);
 =======
+=======
+>>>>>>> v3.18
 	struct perf_evsel *evsel = perf_evlist__event2evsel(evlist, event);
 
 	if (!evsel)
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return perf_evsel__parse_sample(evsel, event, sample);
 }
@@ -1828,7 +2116,11 @@ size_t perf_evlist__fprintf(struct perf_evlist *evlist, FILE *fp)
 	size_t printed = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, evsel) {
 >>>>>>> v3.18
@@ -1837,8 +2129,11 @@ size_t perf_evlist__fprintf(struct perf_evlist *evlist, FILE *fp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return printed + fprintf(fp, "\n");;
 =======
+=======
+>>>>>>> v3.18
 	return printed + fprintf(fp, "\n");
 }
 
@@ -1936,5 +2231,8 @@ void perf_evlist__set_tracking_event(struct perf_evlist *evlist,
 	}
 
 	tracking_evsel->tracking = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

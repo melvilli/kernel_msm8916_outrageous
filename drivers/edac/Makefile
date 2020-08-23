@@ -38,6 +38,10 @@ obj-$(CONFIG_EDAC_I82975X)		+= i82975x_edac.o
 obj-$(CONFIG_EDAC_I3000)		+= i3000_edac.o
 obj-$(CONFIG_EDAC_I3200)		+= i3200_edac.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_EDAC_IE31200)		+= ie31200_edac.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_EDAC_IE31200)		+= ie31200_edac.o
 >>>>>>> v3.18
@@ -69,7 +73,12 @@ obj-$(CONFIG_EDAC_OCTEON_L2C)		+= octeon_edac-l2c.o
 obj-$(CONFIG_EDAC_OCTEON_LMC)		+= octeon_edac-lmc.o
 obj-$(CONFIG_EDAC_OCTEON_PCI)		+= octeon_edac-pci.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_EDAC_CORTEX_ARM64)		+= cortex_arm64_edac.o
+=======
+
+obj-$(CONFIG_EDAC_ALTERA_MC)		+= altera_edac.o
+>>>>>>> v3.18
 =======
 
 obj-$(CONFIG_EDAC_ALTERA_MC)		+= altera_edac.o

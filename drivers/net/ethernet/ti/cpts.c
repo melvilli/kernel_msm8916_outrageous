@@ -27,6 +27,11 @@
 #include <linux/uaccess.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+#include <linux/if_vlan.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 #include <linux/if_vlan.h>
@@ -37,10 +42,13 @@
 #ifdef CONFIG_TI_CPTS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sock_filter ptp_filter[] = {
 	PTP_FILTER
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define cpts_read32(c, r)	__raw_readl(&c->reg->r)
@@ -226,6 +234,10 @@ static struct ptp_clock_info cpts_info = {
 	.max_adj	= 1000000,
 	.n_ext_ts	= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 =======
 	.n_pins		= 0,
 >>>>>>> v3.18
@@ -250,6 +262,7 @@ static void cpts_overflow_check(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPTS_REF_CLOCK_NAME "cpsw_cpts_rft_clk"
 
 static void cpts_clk_init(struct cpts *cpts)
@@ -258,11 +271,16 @@ static void cpts_clk_init(struct cpts *cpts)
 	if (IS_ERR(cpts->refclk)) {
 		pr_err("Failed to clk_get %s\n", CPTS_REF_CLOCK_NAME);
 =======
+=======
+>>>>>>> v3.18
 static void cpts_clk_init(struct device *dev, struct cpts *cpts)
 {
 	cpts->refclk = devm_clk_get(dev, "cpts");
 	if (IS_ERR(cpts->refclk)) {
 		dev_err(dev, "Failed to get cpts refclk\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cpts->refclk = NULL;
 		return;
@@ -274,7 +292,10 @@ static void cpts_clk_release(struct cpts *cpts)
 {
 	clk_disable(cpts->refclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(cpts->refclk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -283,6 +304,7 @@ static int cpts_match(struct sk_buff *skb, unsigned int ptp_class,
 		      u16 ts_seqid, u8 ts_msgtype)
 {
 	u16 *seqid;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int offset;
 	u8 *msgtype, *data = skb->data;
@@ -302,6 +324,8 @@ static int cpts_match(struct sk_buff *skb, unsigned int ptp_class,
 	case PTP_CLASS_V2_VLAN:
 		offset = ETH_HLEN + VLAN_HLEN;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int offset = 0;
 	u8 *msgtype, *data = skb->data;
 
@@ -317,6 +341,9 @@ static int cpts_match(struct sk_buff *skb, unsigned int ptp_class,
 		break;
 	case PTP_CLASS_L2:
 		offset += ETH_HLEN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -342,7 +369,11 @@ static u64 cpts_find_ts(struct cpts *cpts, struct sk_buff *skb, int ev_type)
 	struct cpts_event *event;
 	struct list_head *this, *next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int class = sk_run_filter(skb, ptp_filter);
+=======
+	unsigned int class = ptp_classify_raw(skb);
+>>>>>>> v3.18
 =======
 	unsigned int class = ptp_classify_raw(skb);
 >>>>>>> v3.18
@@ -417,10 +448,13 @@ int cpts_register(struct device *dev, struct cpts *cpts,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ptp_filter_init(ptp_filter, ARRAY_SIZE(ptp_filter))) {
 		pr_err("cpts: bad ptp filter\n");
 		return -EINVAL;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cpts->info = cpts_info;
@@ -444,7 +478,11 @@ int cpts_register(struct device *dev, struct cpts *cpts,
 		list_add(&cpts->pool_data[i].list, &cpts->pool);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpts_clk_init(cpts);
+=======
+	cpts_clk_init(dev, cpts);
+>>>>>>> v3.18
 =======
 	cpts_clk_init(dev, cpts);
 >>>>>>> v3.18

@@ -133,7 +133,11 @@ devices.</para>
 	    <entry>&v4l2-fract;</entry>
 	    <entry><structfield>timeperframe</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry><para>This is is the desired period between
+=======
+	    <entry><para>This is the desired period between
+>>>>>>> v3.18
 =======
 	    <entry><para>This is the desired period between
 >>>>>>> v3.18
@@ -198,7 +202,11 @@ applications must set the array to zero.</entry>
 	    <entry>&v4l2-fract;</entry>
 	    <entry><structfield>timeperframe</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>This is is the desired period between
+=======
+	    <entry>This is the desired period between
+>>>>>>> v3.18
 =======
 	    <entry>This is the desired period between
 >>>>>>> v3.18

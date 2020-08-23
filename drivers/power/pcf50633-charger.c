@@ -192,9 +192,15 @@ static ssize_t set_usblim(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 10, &ma);
 	if (ret)
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 10, &ma);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 10, &ma);
 	if (ret)
@@ -235,9 +241,15 @@ static ssize_t set_chglim(struct device *dev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 10, &ma);
 	if (ret)
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 10, &ma);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 10, &ma);
 	if (ret)

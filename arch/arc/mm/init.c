@@ -11,6 +11,12 @@
 #include <linux/bootmem.h>
 #include <linux/memblock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_BLK_DEV_INITRD
+#include <linux/initrd.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_BLK_DEV_INITRD
 #include <linux/initrd.h>
@@ -49,7 +55,10 @@ void __init early_init_dt_add_memory_arch(u64 base, u64 size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_INITRD
 static int __init early_initrd(char *p)
 {
@@ -68,6 +77,9 @@ static int __init early_initrd(char *p)
 early_param("initrd", early_initrd);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * First memory setup routine called from setup_arch()
@@ -102,7 +114,11 @@ void __init setup_arch_memory(void)
 	max_low_pfn = max_pfn = PFN_DOWN(end_mem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_mapnr = num_physpages = max_low_pfn - min_low_pfn;
+=======
+	max_mapnr = max_low_pfn - min_low_pfn;
+>>>>>>> v3.18
 =======
 	max_mapnr = max_low_pfn - min_low_pfn;
 >>>>>>> v3.18
@@ -112,20 +128,30 @@ void __init setup_arch_memory(void)
 			 __pa(_end) - CONFIG_LINUX_LINK_BASE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_INITRD
 	/*------------- reserve initrd image -----------------------*/
 	if (initrd_start)
 		memblock_reserve(__pa(initrd_start), initrd_end - initrd_start);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memblock_dump_all();
 
 	/*-------------- node setup --------------------------------*/
 	memset(zones_size, 0, sizeof(zones_size));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zones_size[ZONE_NORMAL] = num_physpages;
+=======
+	zones_size[ZONE_NORMAL] = max_low_pfn - min_low_pfn;
+>>>>>>> v3.18
 =======
 	zones_size[ZONE_NORMAL] = max_low_pfn - min_low_pfn;
 >>>>>>> v3.18
@@ -150,6 +176,7 @@ void __init setup_arch_memory(void)
  */
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int codesize, datasize, initsize, reserved_pages, free_pages;
 	int tmp;
@@ -189,6 +216,11 @@ void __init mem_init(void)
 	free_all_bootmem();
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	high_memory = (void *)(CONFIG_LINUX_LINK_BASE + arc_mem_sz);
+	free_all_bootmem();
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 /*
@@ -197,7 +229,11 @@ void __init mem_init(void)
 void __init_refok free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -206,6 +242,7 @@ void __init_refok free_initmem(void)
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
 }
@@ -217,6 +254,11 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 	pr_err("%s(%llx, %llx)\n", __func__, start, end);
 }
 #endif /* CONFIG_OF_FLATTREE */
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+}
+#endif
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 }

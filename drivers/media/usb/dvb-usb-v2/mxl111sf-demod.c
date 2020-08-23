@@ -2,7 +2,11 @@
  *  mxl111sf-demod.c - driver for the MaxLinear MXL111SF DVB-T demodulator
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2010 Michael Krufky <mkrufky@kernellabs.com>
+=======
+ *  Copyright (C) 2010-2014 Michael Krufky <mkrufky@linuxtv.org>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2010-2014 Michael Krufky <mkrufky@linuxtv.org>
 >>>>>>> v3.18
@@ -606,7 +610,11 @@ EXPORT_SYMBOL_GPL(mxl111sf_demod_attach);
 
 MODULE_DESCRIPTION("MaxLinear MxL111SF DVB-T demodulator driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Michael Krufky <mkrufky@kernellabs.com>");
+=======
+MODULE_AUTHOR("Michael Krufky <mkrufky@linuxtv.org>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Michael Krufky <mkrufky@linuxtv.org>");
 >>>>>>> v3.18

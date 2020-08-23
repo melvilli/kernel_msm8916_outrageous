@@ -44,13 +44,19 @@ static void bfa_ioc_ct_sync_leave(struct bfa_ioc_s *ioc);
 static void bfa_ioc_ct_sync_ack(struct bfa_ioc_s *ioc);
 static bfa_boolean_t bfa_ioc_ct_sync_complete(struct bfa_ioc_s *ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void bfa_ioc_ct_set_cur_ioc_fwstate(
 			struct bfa_ioc_s *ioc, enum bfi_ioc_state fwstate);
 static enum bfi_ioc_state bfa_ioc_ct_get_cur_ioc_fwstate(struct bfa_ioc_s *ioc);
 static void bfa_ioc_ct_set_alt_ioc_fwstate(
 			struct bfa_ioc_s *ioc, enum bfi_ioc_state fwstate);
 static enum bfi_ioc_state bfa_ioc_ct_get_alt_ioc_fwstate(struct bfa_ioc_s *ioc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct bfa_ioc_hwif_s hwif_ct;
@@ -522,11 +528,17 @@ bfa_ioc_set_ctx_hwif(struct bfa_ioc_s *ioc, struct bfa_ioc_hwif_s *hwif)
 	hwif->ioc_sync_ack = bfa_ioc_ct_sync_ack;
 	hwif->ioc_sync_complete = bfa_ioc_ct_sync_complete;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	hwif->ioc_set_fwstate = bfa_ioc_ct_set_cur_ioc_fwstate;
 	hwif->ioc_get_fwstate = bfa_ioc_ct_get_cur_ioc_fwstate;
 	hwif->ioc_set_alt_fwstate = bfa_ioc_ct_set_alt_ioc_fwstate;
 	hwif->ioc_get_alt_fwstate = bfa_ioc_ct_get_alt_ioc_fwstate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -935,7 +947,10 @@ bfa_ioc_ct2_pll_init(void __iomem *rb, enum bfi_asic_mode mode)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	* The very first PCIe DMA Read done by LPU fails with a fatal error,
 	* when Address Translation Cache (ATC) has been enabled by system BIOS.
@@ -946,6 +961,9 @@ bfa_ioc_ct2_pll_init(void __iomem *rb, enum bfi_asic_mode mode)
 	*/
 	r32 = readl(rb + CT2_CHIP_MISC_PRG);
 	writel((r32 & 0xfbffffff), (rb + CT2_CHIP_MISC_PRG));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -979,7 +997,10 @@ bfa_ioc_ct2_pll_init(void __iomem *rb, enum bfi_asic_mode mode)
 	return BFA_STATUS_OK;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void
 bfa_ioc_ct_set_cur_ioc_fwstate(struct bfa_ioc_s *ioc,
@@ -1006,4 +1027,7 @@ bfa_ioc_ct_get_alt_ioc_fwstate(struct bfa_ioc_s *ioc)
 {
 	return (enum bfi_ioc_state) readl(ioc->ioc_regs.alt_ioc_fwstate);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -45,7 +45,12 @@ static void __init og_register_pci(void)
 		ks8695_gpio_interrupt(KS8695_GPIO_1, IRQ_TYPE_LEVEL_LOW);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ks8695_init_pci(&og_pci);
+=======
+	if (IS_ENABLED(CONFIG_PCI))
+		ks8695_init_pci(&og_pci);
+>>>>>>> v3.18
 =======
 	if (IS_ENABLED(CONFIG_PCI))
 		ks8695_init_pci(&og_pci);

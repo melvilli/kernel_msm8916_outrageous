@@ -5,7 +5,10 @@
  *
  * Copyright (C) 2004, 2010 Nokia Corporation
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Written by Timo Teras <ext-timo.teras@nokia.com>
@@ -37,10 +40,13 @@
 
 #define MAX_IDLETIMER_LABEL_SIZE 28
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NLMSG_MAX_SIZE 64
 
 #define NL_EVENT_TYPE_INACTIVE 0
 #define NL_EVENT_TYPE_ACTIVE 1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -50,9 +56,12 @@ struct idletimer_tg_info {
 	char label[MAX_IDLETIMER_LABEL_SIZE];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Use netlink messages for notification in addition to sysfs */
 	__u8 send_nl_msg;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* for kernel module internal use only */

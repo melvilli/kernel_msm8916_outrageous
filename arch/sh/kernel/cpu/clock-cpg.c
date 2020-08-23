@@ -57,10 +57,13 @@ int __init __deprecated cpg_clk_init(void)
 	clkdev_add_table(lookups, ARRAY_SIZE(lookups));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_add_alias("tmu_fck", NULL, "peripheral_clk", NULL);
 	clk_add_alias("mtu2_fck", NULL, "peripheral_clk", NULL);
 	clk_add_alias("cmt_fck", NULL, "peripheral_clk", NULL);
 =======
+=======
+>>>>>>> v3.18
 	clk_add_alias("fck", "sh-tmu-sh3.0", "peripheral_clk", NULL);
 	clk_add_alias("fck", "sh-tmu.0", "peripheral_clk", NULL);
 	clk_add_alias("fck", "sh-tmu.1", "peripheral_clk", NULL);
@@ -68,6 +71,9 @@ int __init __deprecated cpg_clk_init(void)
 	clk_add_alias("fck", "sh-mtu2", "peripheral_clk", NULL);
 	clk_add_alias("fck", "sh-cmt-16.0", "peripheral_clk", NULL);
 	clk_add_alias("fck", "sh-cmt-32.0", "peripheral_clk", NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_add_alias("sci_ick", NULL, "peripheral_clk", NULL);
 

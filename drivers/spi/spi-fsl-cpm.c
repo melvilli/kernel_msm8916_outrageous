@@ -16,6 +16,7 @@
  * option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 #include <linux/kernel.h>
 #include <linux/spi/spi.h>
@@ -27,6 +28,8 @@
 #include "spi-fsl-lib.h"
 #include "spi-fsl-cpm.h"
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cpm.h>
 #include <asm/qe.h>
 #include <linux/dma-mapping.h>
@@ -38,6 +41,9 @@
 
 #include "spi-fsl-cpm.h"
 #include "spi-fsl-lib.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "spi-fsl-spi.h"
 
@@ -314,7 +320,11 @@ int fsl_spi_cpm_init(struct mpc8xxx_spi *mspi)
 		switch (mspi->subblock) {
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_warn(dev, "cell-index unspecified, assuming SPI1");
+=======
+			dev_warn(dev, "cell-index unspecified, assuming SPI1\n");
+>>>>>>> v3.18
 =======
 			dev_warn(dev, "cell-index unspecified, assuming SPI1\n");
 >>>>>>> v3.18

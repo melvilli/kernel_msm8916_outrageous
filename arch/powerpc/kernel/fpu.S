@@ -36,6 +36,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX);					\
 3:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __REST_32FPVSRS_TRANSACT(n,c,base)				\
 BEGIN_FTR_SECTION							\
 	b	2f;							\
@@ -45,6 +46,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX);					\
 2:	REST_32VSRS_TRANSACT(n,c,base);					\
 3:
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __SAVE_32FPVSRS(n,c,base)					\
@@ -57,6 +60,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX);					\
 3:
 #else
 #define __REST_32FPVSRS(n,b,base)	REST_32FPRS(n, base)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __REST_32FPVSRS_TRANSACT(n,b,base)	REST_32FPRS(n, base)
 #define __SAVE_32FPVSRS(n,b,base)	SAVE_32FPRS(n, base)
@@ -100,6 +104,14 @@ _GLOBAL(do_load_up_fpu)
 
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 >>>>>>> v3.18
+=======
+#define __SAVE_32FPVSRS(n,b,base)	SAVE_32FPRS(n, base)
+#endif
+#define REST_32FPVSRS(n,c,base) __REST_32FPVSRS(n,__REG_##c,__REG_##base)
+#define SAVE_32FPVSRS(n,c,base) __SAVE_32FPVSRS(n,__REG_##c,__REG_##base)
+
+#ifdef CONFIG_PPC_TRANSACTIONAL_MEM
+>>>>>>> v3.18
 /* void do_load_up_transact_fpu(struct thread_struct *thread)
  *
  * This is similar to load_up_fpu but for the transactional version of the FP
@@ -118,14 +130,20 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	MTMSRD(r5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lfd	fr0,THREAD_TRANSACT_FPSCR(r3)
 	MTFSF_L(fr0)
 	REST_32FPVSRS_TRANSACT(0, R4, R3)
 =======
+=======
+>>>>>>> v3.18
 	addi	r7,r3,THREAD_TRANSACT_FPSTATE
 	lfd	fr0,FPSTATE_FPSCR(r7)
 	MTFSF_L(fr0)
 	REST_32FPVSRS(0, R4, R7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* FP/VSX off again */
@@ -137,7 +155,10 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Enable use of the FPU, and VSX if possible, for the caller.
  */
 _GLOBAL(fp_enable)
@@ -174,6 +195,9 @@ _GLOBAL(store_fp_state)
 	blr
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This task wants to use the FPU now.
  * On UP, disable FP for the task which had the FPU previously,
@@ -181,6 +205,11 @@ _GLOBAL(store_fp_state)
  * Load up this task's FP registers from its thread_struct,
  * enable the FPU for the current task and return to the task.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Note that on 32-bit this can only use registers that will be
+ * restored by fast_exception_return, i.e. r3 - r6, r10 and r11.
+>>>>>>> v3.18
 =======
  * Note that on 32-bit this can only use registers that will be
  * restored by fast_exception_return, i.e. r3 - r6, r10 and r11.
@@ -211,14 +240,20 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	toreal(r4)
 	addi	r4,r4,THREAD		/* want last_task_used_math->thread */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SAVE_32FPVSRS(0, R5, R4)
 	mffs	fr0
 	stfd	fr0,THREAD_FPSCR(r4)
 =======
+=======
+>>>>>>> v3.18
 	addi	r10,r4,THREAD_FPSTATE
 	SAVE_32FPVSRS(0, R5, R10)
 	mffs	fr0
 	stfd	fr0,FPSTATE_FPSCR(r10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PPC_LL	r5,PT_REGS(r4)
 	toreal(r5)
@@ -231,7 +266,11 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	/* enable use of FP after return */
 #ifdef CONFIG_PPC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfspr	r5,SPRN_SPRG_THREAD		/* current task's THREAD (phys) */
+=======
+	mfspr	r5,SPRN_SPRG_THREAD	/* current task's THREAD (phys) */
+>>>>>>> v3.18
 =======
 	mfspr	r5,SPRN_SPRG_THREAD	/* current task's THREAD (phys) */
 >>>>>>> v3.18
@@ -247,14 +286,20 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	std	r12,_MSR(r1)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lfd	fr0,THREAD_FPSCR(r5)
 	MTFSF_L(fr0)
 	REST_32FPVSRS(0, R4, R5)
 =======
+=======
+>>>>>>> v3.18
 	addi	r10,r5,THREAD_FPSTATE
 	lfd	fr0,FPSTATE_FPSCR(r10)
 	MTFSF_L(fr0)
 	REST_32FPVSRS(0, R4, R10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_SMP
 	subi	r4,r5,THREAD
@@ -288,12 +333,15 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	beqlr-				/* if no previous owner, done */
 	addi	r3,r3,THREAD	        /* want THREAD of task */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_LL	r5,PT_REGS(r3)
 	PPC_LCMPI	0,r5,0
 	SAVE_32FPVSRS(0, R4 ,R3)
 	mffs	fr0
 	stfd	fr0,THREAD_FPSCR(r3)
 =======
+=======
+>>>>>>> v3.18
 	PPC_LL	r6,THREAD_FPSAVEAREA(r3)
 	PPC_LL	r5,PT_REGS(r3)
 	PPC_LCMPI	0,r6,0
@@ -303,6 +351,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	SAVE_32FPVSRS(0, R4, R6)
 	mffs	fr0
 	stfd	fr0,FPSTATE_FPSCR(r6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	beq	1f
 	PPC_LL	r4,_MSR-STACK_FRAME_OVERHEAD(r5)

@@ -3,7 +3,11 @@
  *
  * Copyright (c) 2000-2006, Ericsson AB
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2005, 2010-2011, Wind River Systems
+=======
+ * Copyright (c) 2005, 2010-2014, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2005, 2010-2014, Wind River Systems
 >>>>>>> v3.18
@@ -46,6 +50,10 @@
 #include "net.h"
 #include "bearer.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "msg.h"
+>>>>>>> v3.18
 =======
 #include "msg.h"
 >>>>>>> v3.18
@@ -56,11 +64,14 @@
 #define INVALID_NODE_SIG 0x10000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Flags used to block (re)establishment of contact with a neighboring node */
 #define WAIT_PEER_DOWN	0x0001	/* wait to see that peer's links are down */
 #define WAIT_NAMES_GONE	0x0002	/* wait for peer's publications to be purged */
 #define WAIT_NODE_DOWN	0x0004	/* wait until peer node is declared down */
 =======
+=======
+>>>>>>> v3.18
 /* Flags used to take different actions according to flag type
  * TIPC_WAIT_PEER_LINKS_DOWN: wait to see that peer's links are down
  * TIPC_WAIT_OWN_LINKS_DOWN: wait until peer node is declared down
@@ -102,6 +113,9 @@ struct tipc_node_bclink {
 	struct sk_buff *reasm_buf;
 	bool recv_permitted;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -109,6 +123,7 @@ struct tipc_node_bclink {
  * @addr: network address of node
  * @lock: spinlock governing access to structure
  * @hash: links to adjacent nodes in unsorted hash chain
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @list: links to adjacent nodes in sorted list of cluster's nodes
  * @nsub: list of "node down" subscriptions monitoring node
@@ -130,6 +145,8 @@ struct tipc_node_bclink {
  *    @defragm: list of partially reassembled b'cast message fragments from node
  *    @recv_permitted: true if node is allowed to receive b'cast messages
 =======
+=======
+>>>>>>> v3.18
  * @active_links: pointers to active links to node
  * @links: pointers to all links to node
  * @action_flags: bit mask of different types of node actions
@@ -141,12 +158,16 @@ struct tipc_node_bclink {
  * @link_id: local and remote bearer ids of changing link, if any
  * @nsub: list of "node down" subscriptions monitoring node
  * @rcu: rcu struct for tipc_node
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct tipc_node {
 	u32 addr;
 	spinlock_t lock;
 	struct hlist_node hash;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head list;
 	struct list_head nsub;
@@ -169,6 +190,8 @@ struct tipc_node {
 		bool recv_permitted;
 	} bclink;
 =======
+=======
+>>>>>>> v3.18
 	struct tipc_link *active_links[2];
 	u32 act_mtus[2];
 	struct tipc_link *links[MAX_BEARERS];
@@ -183,6 +206,9 @@ struct tipc_node {
 	struct sk_buff_head waiting_sks;
 	struct list_head conn_sks;
 	struct rcu_head rcu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -191,7 +217,11 @@ extern struct list_head tipc_node_list;
 struct tipc_node *tipc_node_find(u32 addr);
 struct tipc_node *tipc_node_create(u32 addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_node_delete(struct tipc_node *n_ptr);
+=======
+void tipc_node_stop(void);
+>>>>>>> v3.18
 =======
 void tipc_node_stop(void);
 >>>>>>> v3.18
@@ -200,6 +230,7 @@ void tipc_node_detach_link(struct tipc_node *n_ptr, struct tipc_link *l_ptr);
 void tipc_node_link_down(struct tipc_node *n_ptr, struct tipc_link *l_ptr);
 void tipc_node_link_up(struct tipc_node *n_ptr, struct tipc_link *l_ptr);
 int tipc_node_active_links(struct tipc_node *n_ptr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int tipc_node_redundant_links(struct tipc_node *n_ptr);
 int tipc_node_is_up(struct tipc_node *n_ptr);
@@ -215,6 +246,8 @@ static inline void tipc_node_unlock(struct tipc_node *n_ptr)
 {
 	spin_unlock_bh(&n_ptr->lock);
 =======
+=======
+>>>>>>> v3.18
 int tipc_node_is_up(struct tipc_node *n_ptr);
 struct sk_buff *tipc_node_get_links(const void *req_tlv_area, int req_tlv_space);
 struct sk_buff *tipc_node_get_nodes(const void *req_tlv_area, int req_tlv_space);
@@ -247,6 +280,9 @@ static inline uint tipc_node_get_mtu(u32 addr, u32 selector)
 		mtu = MAX_MSG_SIZE;
 
 	return mtu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

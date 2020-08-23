@@ -261,7 +261,11 @@ struct via82xx_modem {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_via82xx_modem_ids) = {
+=======
+static const struct pci_device_id snd_via82xx_modem_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_via82xx_modem_ids[] = {
 >>>>>>> v3.18
@@ -317,7 +321,11 @@ static int build_via_table(struct viadev *dev, struct snd_pcm_substream *substre
 
 			if (idx >= VIA_TABLE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "via82xx: too much table size!\n");
+=======
+				dev_err(&pci->dev, "too much table size!\n");
+>>>>>>> v3.18
 =======
 				dev_err(&pci->dev, "too much table size!\n");
 >>>>>>> v3.18
@@ -338,8 +346,14 @@ static int build_via_table(struct viadev *dev, struct snd_pcm_substream *substre
 				flag = 0; /* period continues to the next */
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "via: tbl %d: at %d  size %d "
 			       "(rest %d)\n", idx, ofs, r, rest);
+=======
+			dev_dbg(&pci->dev,
+				"tbl %d: at %d  size %d (rest %d)\n",
+				idx, ofs, r, rest);
+>>>>>>> v3.18
 =======
 			dev_dbg(&pci->dev,
 				"tbl %d: at %d  size %d (rest %d)\n",
@@ -397,7 +411,11 @@ static int snd_via82xx_codec_ready(struct via82xx_modem *chip, int secondary)
 			return val & 0xffff;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "codec_ready: codec %i is not ready [0x%x]\n",
+=======
+	dev_err(chip->card->dev, "codec_ready: codec %i is not ready [0x%x]\n",
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "codec_ready: codec %i is not ready [0x%x]\n",
 >>>>>>> v3.18
@@ -462,7 +480,12 @@ static unsigned short snd_via82xx_codec_read(struct snd_ac97 *ac97, unsigned sho
       	while (1) {
       		if (again++ > 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "codec_read: codec %i is not valid [0x%x]\n",
+=======
+			dev_err(chip->card->dev,
+				"codec_read: codec %i is not valid [0x%x]\n",
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"codec_read: codec %i is not valid [0x%x]\n",
@@ -584,7 +607,13 @@ static int snd_via82xx_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 				     viadev->lastpos < viadev->bufsize2))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int calc_linear_pos(struct viadev *viadev, unsigned int idx,
+=======
+static inline unsigned int calc_linear_pos(struct via82xx_modem *chip,
+					   struct viadev *viadev,
+					   unsigned int idx,
+>>>>>>> v3.18
 =======
 static inline unsigned int calc_linear_pos(struct via82xx_modem *chip,
 					   struct viadev *viadev,
@@ -600,7 +629,12 @@ static inline unsigned int calc_linear_pos(struct via82xx_modem *chip,
 	/* check the validity of the calculated position */
 	if (size < count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_ERR "invalid via82xx_cur_ptr (size = %d, count = %d)\n",
+=======
+		dev_err(chip->card->dev,
+			"invalid via82xx_cur_ptr (size = %d, count = %d)\n",
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"invalid via82xx_cur_ptr (size = %d, count = %d)\n",
@@ -610,9 +644,15 @@ static inline unsigned int calc_linear_pos(struct via82xx_modem *chip,
 	} else if (check_invalid_pos(viadev, res)) {
 #ifdef POINTER_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "fail: idx = %i/%i, lastpos = 0x%x, "
 		       "bufsize2 = 0x%x, offsize = 0x%x, size = 0x%x, "
 		       "count = 0x%x\n", idx, viadev->tbl_entries, viadev->lastpos,
+=======
+		dev_dbg(chip->card->dev,
+			"fail: idx = %i/%i, lastpos = 0x%x, bufsize2 = 0x%x, offsize = 0x%x, size = 0x%x, count = 0x%x\n",
+			idx, viadev->tbl_entries, viadev->lastpos,
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"fail: idx = %i/%i, lastpos = 0x%x, bufsize2 = 0x%x, offsize = 0x%x, size = 0x%x, count = 0x%x\n",
@@ -623,8 +663,13 @@ static inline unsigned int calc_linear_pos(struct via82xx_modem *chip,
 #endif
 		if (count && size < count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd(KERN_ERR "invalid via82xx_cur_ptr, "
 				   "using last valid pointer\n");
+=======
+			dev_dbg(chip->card->dev,
+				"invalid via82xx_cur_ptr, using last valid pointer\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(chip->card->dev,
 				"invalid via82xx_cur_ptr, using last valid pointer\n");
@@ -641,8 +686,13 @@ static inline unsigned int calc_linear_pos(struct via82xx_modem *chip,
 				res = viadev->idx_table[idx].offset + size;
 			if (check_invalid_pos(viadev, res)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printd(KERN_ERR "invalid via82xx_cur_ptr (2), "
 					   "using last valid pointer\n");
+=======
+				dev_dbg(chip->card->dev,
+					"invalid via82xx_cur_ptr (2), using last valid pointer\n");
+>>>>>>> v3.18
 =======
 				dev_dbg(chip->card->dev,
 					"invalid via82xx_cur_ptr (2), using last valid pointer\n");
@@ -683,7 +733,11 @@ static snd_pcm_uframes_t snd_via686_pcm_pointer(struct snd_pcm_substream *substr
 		idx = ((ptr - (unsigned int)viadev->table.addr) / 8 - 1) %
 			viadev->tbl_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = calc_linear_pos(viadev, idx, count);
+=======
+	res = calc_linear_pos(chip, viadev, idx, count);
+>>>>>>> v3.18
 =======
 	res = calc_linear_pos(chip, viadev, idx, count);
 >>>>>>> v3.18
@@ -1046,7 +1100,12 @@ static int snd_via82xx_chip_init(struct via82xx_modem *chip)
 
 	if ((val = snd_via82xx_codec_xread(chip)) & VIA_REG_AC97_BUSY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "AC'97 codec is not ready [0x%x]\n", val);
+=======
+		dev_err(chip->card->dev,
+			"AC'97 codec is not ready [0x%x]\n", val);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"AC'97 codec is not ready [0x%x]\n", val);
@@ -1114,8 +1173,12 @@ static int snd_via82xx_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "via82xx-modem: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -1201,7 +1264,11 @@ static int snd_via82xx_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_via82xx_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -1229,8 +1296,11 @@ static int snd_via82xx_create(struct snd_card *card,
 	pci_set_master(pci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*r_via = chip;
@@ -1248,7 +1318,11 @@ static int snd_via82xx_probe(struct pci_dev *pci,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
 >>>>>>> v3.18
@@ -1263,7 +1337,11 @@ static int snd_via82xx_probe(struct pci_dev *pci,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid card type %d\n", card_type);
+=======
+		dev_err(card->dev, "invalid card type %d\n", card_type);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "invalid card type %d\n", card_type);
 >>>>>>> v3.18
@@ -1306,7 +1384,10 @@ static void snd_via82xx_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

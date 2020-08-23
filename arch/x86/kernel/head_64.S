@@ -66,9 +66,12 @@ startup_64:
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sanitize CPU configuration */
 	call verify_cpu
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -181,9 +184,12 @@ ENTRY(secondary_startup_64)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sanitize CPU configuration */
 	call verify_cpu
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	movq	$(init_level4_pgt - __START_KERNEL_map), %rax
@@ -301,8 +307,11 @@ ENTRY(secondary_startup_64)
 	lretq
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "verify_cpu.S"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
@@ -339,7 +348,12 @@ bad_address:
 
 	__INIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(early_idt_handler_array)
+=======
+	.globl early_idt_handlers
+early_idt_handlers:
+>>>>>>> v3.18
 =======
 	.globl early_idt_handlers
 early_idt_handlers:
@@ -350,6 +364,7 @@ early_idt_handlers:
 	#  80(%rsp) error code
 	i = 0
 	.rept NUM_EXCEPTION_VECTORS
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.ifeq (EXCEPTION_ERRCODE_MASK >> i) & 1
 	pushq $0		# Dummy error code, to make stack frame uniform
@@ -367,6 +382,8 @@ early_idt_handler_common:
 	 * vector number.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	.if (EXCEPTION_ERRCODE_MASK >> i) & 1
 	ASM_NOP2
 	.else
@@ -379,6 +396,9 @@ early_idt_handler_common:
 
 /* This is global to keep gas from relaxing the jumps */
 ENTRY(early_idt_handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cld
 
@@ -452,7 +472,11 @@ is_nmi:
 	addq $16,%rsp		# drop vector number and error code
 	INTERRUPT_RETURN
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(early_idt_handler_common)
+=======
+ENDPROC(early_idt_handler)
+>>>>>>> v3.18
 =======
 ENDPROC(early_idt_handler)
 >>>>>>> v3.18
@@ -560,6 +584,7 @@ ENTRY(phys_base)
 #include "../../x86/xen/xen-head.S"
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.section .bss, "aw", @nobits
 	.align PAGE_SIZE
 ENTRY(idt_table)
@@ -569,6 +594,8 @@ ENTRY(idt_table)
 ENTRY(nmi_idt_table)
 	.skip IDT_ENTRIES * 16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__PAGE_ALIGNED_BSS

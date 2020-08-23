@@ -270,9 +270,15 @@ static ssize_t ade7758_write_8bit(struct device *dev,
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u8 val;
+
+	ret = kstrtou8(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	u8 val;
 
@@ -294,9 +300,15 @@ static ssize_t ade7758_write_16bit(struct device *dev,
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u16 val;
+
+	ret = kstrtou16(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	u16 val;
 
@@ -315,6 +327,10 @@ static int ade7758_reset(struct device *dev)
 	int ret;
 	u8 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -329,6 +345,7 @@ static int ade7758_reset(struct device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t ade7758_write_reset(struct device *dev,
 		struct device_attribute *attr,
@@ -345,6 +362,8 @@ static ssize_t ade7758_write_reset(struct device *dev,
 	return len;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static IIO_DEV_ATTR_VPEAK(S_IWUSR | S_IRUGO,
@@ -453,6 +472,10 @@ int ade7758_set_irq(struct device *dev, bool enable)
 	int ret;
 	u32 irqen;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -480,6 +503,10 @@ static int ade7758_stop_device(struct device *dev)
 	int ret;
 	u8 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -526,6 +553,10 @@ static ssize_t ade7758_read_frequency(struct device *dev,
 	u8 t;
 	int sps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -549,17 +580,23 @@ static ssize_t ade7758_write_frequency(struct device *dev,
 {
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 	int ret;
 	u8 reg, t;
 
 	ret = strict_strtol(buf, 10, &val);
 =======
+=======
+>>>>>>> v3.18
 	u16 val;
 	int ret;
 	u8 reg, t;
 
 	ret = kstrtou16(buf, 10, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -631,8 +668,11 @@ static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO,
 		ade7758_write_frequency);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static IIO_DEV_ATTR_RESET(ade7758_write_reset);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static IIO_CONST_ATTR_SAMP_FREQ_AVAIL("26040 13020 6510 3255");
@@ -644,7 +684,10 @@ static struct attribute *ade7758_attributes[] = {
 	&iio_dev_attr_sampling_frequency.dev_attr.attr,
 	&iio_const_attr_sampling_frequency_available.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&iio_dev_attr_reset.dev_attr.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&iio_dev_attr_awatthr.dev_attr.attr,
@@ -877,6 +920,7 @@ static int ade7758_probe(struct spi_device *spi)
 	int ret;
 	struct ade7758_state *st;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iio_dev *indio_dev = iio_device_alloc(sizeof(*st));
 
 	if (indio_dev == NULL) {
@@ -884,11 +928,16 @@ static int ade7758_probe(struct spi_device *spi)
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct iio_dev *indio_dev;
 
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	st = iio_priv(indio_dev);
@@ -898,10 +947,15 @@ static int ade7758_probe(struct spi_device *spi)
 	/* Allocate the comms buffers */
 	st->rx = kcalloc(ADE7758_MAX_RX, sizeof(*st->rx), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (st->rx == NULL) {
 		ret = -ENOMEM;
 		goto error_free_dev;
 	}
+=======
+	if (!st->rx)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!st->rx)
 		return -ENOMEM;
@@ -962,9 +1016,12 @@ error_free_tx:
 error_free_rx:
 	kfree(st->rx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -984,8 +1041,11 @@ static int ade7758_remove(struct spi_device *spi)
 	kfree(st->rx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

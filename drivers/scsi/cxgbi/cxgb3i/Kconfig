@@ -1,7 +1,11 @@
 config SCSI_CXGB3_ISCSI
 	tristate "Chelsio T3 iSCSI support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && INET
+=======
+	depends on PCI && INET && (IPV6 || IPV6=n)
+>>>>>>> v3.18
 =======
 	depends on PCI && INET && (IPV6 || IPV6=n)
 >>>>>>> v3.18

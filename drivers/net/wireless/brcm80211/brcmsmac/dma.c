@@ -747,7 +747,11 @@ dma64_dd_upd(struct dma_info *di, struct dma64desc *ddring,
 void dma_detach(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -847,7 +851,11 @@ static void _dma_rxenable(struct dma_info *di)
 void dma_rxinit(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -933,7 +941,11 @@ static struct sk_buff *_dma_getnextrxp(struct dma_info *di, bool forceall)
 int dma_rx(struct dma_pub *pub, struct sk_buff_head *skb_list)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1035,7 +1047,11 @@ static bool dma64_txidle(struct dma_info *di)
 bool dma_rxfill(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1096,10 +1112,15 @@ bool dma_rxfill(struct dma_pub *pub)
 		pa = dma_map_single(di->dmadev, p->data, di->rxbufsize,
 				    DMA_FROM_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dma_mapping_error(di->dmadev, pa)) {
 			brcmu_pkt_buf_free_skb(p);
 			return false;
 		}
+=======
+		if (dma_mapping_error(di->dmadev, pa))
+			return false;
+>>>>>>> v3.18
 =======
 		if (dma_mapping_error(di->dmadev, pa))
 			return false;
@@ -1130,7 +1151,11 @@ bool dma_rxfill(struct dma_pub *pub)
 void dma_rxreclaim(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1154,7 +1179,11 @@ void dma_counterreset(struct dma_pub *pub)
 unsigned long dma_getvar(struct dma_pub *pub, const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1169,7 +1198,11 @@ unsigned long dma_getvar(struct dma_pub *pub, const char *name)
 void dma_txinit(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1206,7 +1239,11 @@ void dma_txinit(struct dma_pub *pub)
 void dma_txsuspend(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1222,7 +1259,11 @@ void dma_txsuspend(struct dma_pub *pub)
 void dma_txresume(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1238,7 +1279,11 @@ void dma_txresume(struct dma_pub *pub)
 bool dma_txsuspended(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1252,7 +1297,11 @@ bool dma_txsuspended(struct dma_pub *pub)
 void dma_txreclaim(struct dma_pub *pub, enum txd_range range)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1277,7 +1326,11 @@ void dma_txreclaim(struct dma_pub *pub, enum txd_range range)
 bool dma_txreset(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1308,7 +1361,11 @@ bool dma_txreset(struct dma_pub *pub)
 bool dma_rxreset(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1437,7 +1494,11 @@ int dma_txfast(struct brcms_c_info *wlc, struct dma_pub *pub,
 	       struct sk_buff *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1491,7 +1552,11 @@ int dma_txfast(struct brcms_c_info *wlc, struct dma_pub *pub,
 void dma_txflush(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1504,7 +1569,11 @@ void dma_txflush(struct dma_pub *pub)
 int dma_txpending(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1518,7 +1587,11 @@ int dma_txpending(struct dma_pub *pub)
 void dma_kick_tx(struct dma_pub *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1541,7 +1614,11 @@ void dma_kick_tx(struct dma_pub *pub)
 struct sk_buff *dma_getnexttxp(struct dma_pub *pub, enum txd_range range)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *)pub;
+=======
+	struct dma_info *di = container_of(pub, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(pub, struct dma_info, dma);
 >>>>>>> v3.18
@@ -1627,7 +1704,11 @@ void dma_walk_packets(struct dma_pub *dmah, void (*callback_fnc)
 		      (void *pkt, void *arg_a), void *arg_a)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dma_info *di = (struct dma_info *) dmah;
+=======
+	struct dma_info *di = container_of(dmah, struct dma_info, dma);
+>>>>>>> v3.18
 =======
 	struct dma_info *di = container_of(dmah, struct dma_info, dma);
 >>>>>>> v3.18

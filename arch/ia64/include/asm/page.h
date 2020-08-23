@@ -232,6 +232,11 @@ get_order (unsigned long size)
 #define LOAD_OFFSET		(KERNEL_START - KERNEL_TR_PAGE_SIZE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __HAVE_ARCH_GATE_AREA	1
+
+>>>>>>> v3.18
 =======
 #define __HAVE_ARCH_GATE_AREA	1
 

@@ -193,7 +193,11 @@ typedef struct {
 	uint32_t packets;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Number of indentified L2 multicast packets.	Does not
+=======
+	 * Number of identified L2 multicast packets.	Does not
+>>>>>>> v3.18
 =======
 	 * Number of identified L2 multicast packets.	Does not
 >>>>>>> v3.18
@@ -203,7 +207,11 @@ typedef struct {
 	uint32_t multicast_packets;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Number of indentified L2 broadcast packets.	Does not
+=======
+	 * Number of identified L2 broadcast packets.	Does not
+>>>>>>> v3.18
 =======
 	 * Number of identified L2 broadcast packets.	Does not
 >>>>>>> v3.18

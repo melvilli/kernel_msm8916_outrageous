@@ -6,6 +6,10 @@ config DRM_CIRRUS_QEMU
 	select FB_SYS_IMAGEBLIT
 	select DRM_KMS_HELPER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 =======
 	select DRM_KMS_FB_HELPER
 >>>>>>> v3.18

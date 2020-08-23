@@ -22,6 +22,10 @@
 #include <linux/init.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -569,6 +573,7 @@ static enum dma_status pd_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 				    struct dma_tx_state *txstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pch_dma_chan *pd_chan = to_pd_chan(chan);
 	enum dma_status ret;
 
@@ -577,6 +582,9 @@ static enum dma_status pd_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	spin_unlock_irq(&pd_chan->lock);
 
 	return ret;
+=======
+	return dma_cookie_status(chan, cookie, txstate);
+>>>>>>> v3.18
 =======
 	return dma_cookie_status(chan, cookie, txstate);
 >>>>>>> v3.18
@@ -876,6 +884,10 @@ static int pch_dma_probe(struct pci_dev *pdev,
 	if (!(pci_resource_flags(pdev, 1) & IORESOURCE_MEM)) {
 		dev_err(&pdev->dev, "Cannot find proper base address\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -ENODEV;
+>>>>>>> v3.18
 =======
 		err = -ENODEV;
 >>>>>>> v3.18
@@ -983,6 +995,11 @@ static void pch_dma_remove(struct pci_dev *pdev)
 		dma_async_device_unregister(&pd->dma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		free_irq(pdev->irq, pd);
+
+>>>>>>> v3.18
 =======
 		free_irq(pdev->irq, pd);
 
@@ -992,7 +1009,10 @@ static void pch_dma_remove(struct pci_dev *pdev)
 			pd_chan = to_pd_chan(chan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tasklet_disable(&pd_chan->tasklet);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			tasklet_kill(&pd_chan->tasklet);
@@ -1000,7 +1020,10 @@ static void pch_dma_remove(struct pci_dev *pdev)
 
 		pci_pool_destroy(pd->pool);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_irq(pdev->irq, pd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pci_iounmap(pdev, pd->membase);
@@ -1026,7 +1049,11 @@ static void pch_dma_remove(struct pci_dev *pdev)
 #define PCI_DEVICE_ID_ML7831_DMA2_4CH	0x8815
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PCI_DEVICE_TABLE(pch_dma_id_table) = {
+=======
+const struct pci_device_id pch_dma_id_table[] = {
+>>>>>>> v3.18
 =======
 const struct pci_device_id pch_dma_id_table[] = {
 >>>>>>> v3.18
@@ -1063,6 +1090,10 @@ MODULE_DESCRIPTION("Intel EG20T PCH / LAPIS Semicon ML7213/ML7223/ML7831 IOH "
 MODULE_AUTHOR("Yong Wang <yong.y.wang@intel.com>");
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(pci, pch_dma_id_table);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(pci, pch_dma_id_table);
 >>>>>>> v3.18

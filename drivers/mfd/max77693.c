@@ -29,6 +29,10 @@
 #include <linux/err.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -44,6 +48,7 @@
 #define I2C_ADDR_MUIC	(0x4A >> 1)
 #define I2C_ADDR_HAPTIC	(0x90 >> 1)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct mfd_cell max77693_devs[] = {
 	{ .name = "max77693-pmic", },
@@ -110,6 +115,8 @@ static const struct regmap_config max77693_regmap_config = {
 	.val_bits = 8,
 	.max_register = MAX77693_PMIC_REG_END,
 =======
+=======
+>>>>>>> v3.18
 static const struct mfd_cell max77693_devs[] = {
 	{ .name = "max77693-pmic", },
 	{ .name = "max77693-charger", },
@@ -214,6 +221,9 @@ static const struct regmap_irq_chip max77693_muic_irq_chip = {
 	.num_regs		= 3,
 	.irqs			= max77693_muic_irqs,
 	.num_irqs		= ARRAY_SIZE(max77693_muic_irqs),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -221,6 +231,7 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 			      const struct i2c_device_id *id)
 {
 	struct max77693_dev *max77693;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct max77693_platform_data *pdata = i2c->dev.platform_data;
 	u8 reg_data;
@@ -231,6 +242,11 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 		return -EINVAL;
 	}
 
+=======
+	unsigned int reg_data;
+	int ret = 0;
+
+>>>>>>> v3.18
 =======
 	unsigned int reg_data;
 	int ret = 0;
@@ -256,9 +272,13 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max77693->wakeup = pdata->wakeup;
 
 	ret = max77693_read_reg(max77693->regmap, MAX77693_PMIC_REG_PMIC_ID2,
+=======
+	ret = regmap_read(max77693->regmap, MAX77693_PMIC_REG_PMIC_ID2,
+>>>>>>> v3.18
 =======
 	ret = regmap_read(max77693->regmap, MAX77693_PMIC_REG_PMIC_ID2,
 >>>>>>> v3.18
@@ -291,7 +311,11 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 	 */
 	max77693->regmap_muic = devm_regmap_init_i2c(max77693->muic,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 &max77693_regmap_config);
+=======
+					 &max77693_regmap_muic_config);
+>>>>>>> v3.18
 =======
 					 &max77693_regmap_muic_config);
 >>>>>>> v3.18
@@ -303,10 +327,13 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = max77693_irq_init(max77693);
 	if (ret < 0)
 		goto err_irq;
 =======
+=======
+>>>>>>> v3.18
 	ret = regmap_add_irq_chip(max77693->regmap, max77693->irq,
 				IRQF_ONESHOT | IRQF_SHARED |
 				IRQF_TRIGGER_FALLING, 0,
@@ -357,6 +384,9 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 			ret);
 		goto err_intsrc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pm_runtime_set_active(max77693->dev);
@@ -367,6 +397,7 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 		goto err_mfd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_init_wakeup(max77693->dev, pdata->wakeup);
 
 	return ret;
@@ -375,6 +406,8 @@ err_mfd:
 	max77693_irq_exit(max77693);
 err_irq:
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 
 err_mfd:
@@ -387,6 +420,9 @@ err_irq_charger:
 	regmap_del_irq_chip(max77693->irq, max77693->irq_data_topsys);
 err_irq_topsys:
 	regmap_del_irq_chip(max77693->irq, max77693->irq_data_led);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_regmap_muic:
 	i2c_unregister_device(max77693->haptic);
@@ -401,14 +437,20 @@ static int max77693_i2c_remove(struct i2c_client *i2c)
 
 	mfd_remove_devices(max77693->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max77693_irq_exit(max77693);
 =======
+=======
+>>>>>>> v3.18
 
 	regmap_del_irq_chip(max77693->irq, max77693->irq_data_muic);
 	regmap_del_irq_chip(max77693->irq, max77693->irq_data_charger);
 	regmap_del_irq_chip(max77693->irq, max77693->irq_data_topsys);
 	regmap_del_irq_chip(max77693->irq, max77693->irq_data_led);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_unregister_device(max77693->muic);
 	i2c_unregister_device(max77693->haptic);
@@ -428,14 +470,20 @@ static int max77693_suspend(struct device *dev)
 	struct max77693_dev *max77693 = i2c_get_clientdata(i2c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device_may_wakeup(dev))
 		irq_set_irq_wake(max77693->irq, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (device_may_wakeup(dev)) {
 		enable_irq_wake(max77693->irq);
 		disable_irq(max77693->irq);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -446,16 +494,22 @@ static int max77693_resume(struct device *dev)
 	struct max77693_dev *max77693 = i2c_get_clientdata(i2c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device_may_wakeup(dev))
 		irq_set_irq_wake(max77693->irq, 0);
 	return max77693_irq_resume(max77693);
 =======
+=======
+>>>>>>> v3.18
 	if (device_may_wakeup(dev)) {
 		disable_irq_wake(max77693->irq);
 		enable_irq(max77693->irq);
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -465,7 +519,10 @@ static const struct dev_pm_ops max77693_pm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id max77693_dt_match[] = {
 	{ .compatible = "maxim,max77693" },
@@ -473,6 +530,9 @@ static const struct of_device_id max77693_dt_match[] = {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver max77693_i2c_driver = {
 	.driver = {
@@ -480,6 +540,10 @@ static struct i2c_driver max77693_i2c_driver = {
 		   .owner = THIS_MODULE,
 		   .pm = &max77693_pm,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		   .of_match_table = of_match_ptr(max77693_dt_match),
+>>>>>>> v3.18
 =======
 		   .of_match_table = of_match_ptr(max77693_dt_match),
 >>>>>>> v3.18

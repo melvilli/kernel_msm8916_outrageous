@@ -56,7 +56,12 @@ xt_cluster_hash(const struct nf_conn *ct,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (((u64)hash * info->total_nodes) >> 32);
+=======
+
+	return reciprocal_scale(hash, info->total_nodes);
+>>>>>>> v3.18
 =======
 
 	return reciprocal_scale(hash, info->total_nodes);

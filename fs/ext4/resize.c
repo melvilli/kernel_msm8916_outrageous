@@ -80,8 +80,13 @@ static int verify_group_input(struct super_block *sb,
 	ext4_group_t group = input->group;
 	ext4_fsblk_t itend = input->inode_table + sbi->s_itb_per_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned overhead = ext4_group_overhead_blocks(sb, group);
 	ext4_fsblk_t metaend = start + overhead;
+=======
+	unsigned overhead;
+	ext4_fsblk_t metaend;
+>>>>>>> v3.18
 =======
 	unsigned overhead;
 	ext4_fsblk_t metaend;
@@ -91,7 +96,10 @@ static int verify_group_input(struct super_block *sb,
 	int err = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (group != sbi->s_groups_count) {
 		ext4_warning(sb, "Cannot add at group %u (only %u groups)",
 			     input->group, sbi->s_groups_count);
@@ -100,6 +108,9 @@ static int verify_group_input(struct super_block *sb,
 
 	overhead = ext4_group_overhead_blocks(sb, group);
 	metaend = start + overhead;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	input->free_blocks_count = free_blocks_count =
 		input->blocks_count - 2 - overhead - sbi->s_itb_per_group;
@@ -113,10 +124,14 @@ static int verify_group_input(struct super_block *sb,
 
 	ext4_get_group_no_and_offset(sb, start, NULL, &offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (group != sbi->s_groups_count)
 		ext4_warning(sb, "Cannot add at group %u (only %u groups)",
 			     input->group, sbi->s_groups_count);
 	else if (offset != 0)
+=======
+	if (offset != 0)
+>>>>>>> v3.18
 =======
 	if (offset != 0)
 >>>>>>> v3.18
@@ -202,7 +217,11 @@ static struct ext4_new_flex_group_data *alloc_flex_gd(unsigned long flexbg_size)
 		goto out3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flexbg_size >= UINT_MAX / sizeof(struct ext4_new_group_data))
+=======
+	if (flexbg_size >= UINT_MAX / sizeof(struct ext4_new_flex_group_data))
+>>>>>>> v3.18
 =======
 	if (flexbg_size >= UINT_MAX / sizeof(struct ext4_new_flex_group_data))
 >>>>>>> v3.18
@@ -368,6 +387,10 @@ static struct buffer_head *bclean(handle_t *handle, struct super_block *sb,
 	if (unlikely(!bh))
 		return ERR_PTR(-ENOMEM);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(bh, "get_write_access");
 >>>>>>> v3.18
@@ -450,6 +473,10 @@ static int set_flexbg_block_bitmap(struct super_block *sb, handle_t *handle,
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		BUFFER_TRACE(bh, "get_write_access");
+>>>>>>> v3.18
 =======
 		BUFFER_TRACE(bh, "get_write_access");
 >>>>>>> v3.18
@@ -546,6 +573,10 @@ static int setup_new_flex_group_blocks(struct super_block *sb,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			BUFFER_TRACE(gdb, "get_write_access");
+>>>>>>> v3.18
 =======
 			BUFFER_TRACE(gdb, "get_write_access");
 >>>>>>> v3.18
@@ -604,6 +635,10 @@ handle_bb:
 		if (IS_ERR(bh)) {
 			err = PTR_ERR(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			bh = NULL;
+>>>>>>> v3.18
 =======
 			bh = NULL;
 >>>>>>> v3.18
@@ -636,6 +671,10 @@ handle_ib:
 		if (IS_ERR(bh)) {
 			err = PTR_ERR(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			bh = NULL;
+>>>>>>> v3.18
 =======
 			bh = NULL;
 >>>>>>> v3.18
@@ -830,6 +869,10 @@ static int add_new_gdb(handle_t *handle, struct inode *inode,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(EXT4_SB(sb)->s_sbh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(EXT4_SB(sb)->s_sbh, "get_write_access");
 >>>>>>> v3.18
@@ -838,6 +881,10 @@ static int add_new_gdb(handle_t *handle, struct inode *inode,
 		goto exit_dind;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(gdb_bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(gdb_bh, "get_write_access");
 >>>>>>> v3.18
@@ -846,6 +893,10 @@ static int add_new_gdb(handle_t *handle, struct inode *inode,
 		goto exit_dind;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(dind, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(dind, "get_write_access");
 >>>>>>> v3.18
@@ -954,6 +1005,10 @@ static int add_new_gdb_meta_bg(struct super_block *sb,
 	EXT4_SB(sb)->s_gdb_count++;
 	ext4_kvfree(o_group_desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(gdb_bh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(gdb_bh, "get_write_access");
 >>>>>>> v3.18
@@ -1033,6 +1088,10 @@ static int reserve_backup_gdb(handle_t *handle, struct inode *inode,
 
 	for (i = 0; i < reserved_gdb; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		BUFFER_TRACE(primary[i], "get_write_access");
+>>>>>>> v3.18
 =======
 		BUFFER_TRACE(primary[i], "get_write_access");
 >>>>>>> v3.18
@@ -1090,7 +1149,11 @@ exit_free:
  * which changed s_groups_count will backup again.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void update_backups(struct super_block *sb, sector_t blk_off, char *data,
+=======
+static void update_backups(struct super_block *sb, int blk_off, char *data,
+>>>>>>> v3.18
 =======
 static void update_backups(struct super_block *sb, int blk_off, char *data,
 >>>>>>> v3.18
@@ -1119,7 +1182,11 @@ static void update_backups(struct super_block *sb, int blk_off, char *data,
 		last = sbi->s_groups_count;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		group = ext4_get_group_number(sb, blk_off) + 1;
+=======
+		group = ext4_meta_bg_first_group(sb, group) + 1;
+>>>>>>> v3.18
 =======
 		group = ext4_meta_bg_first_group(sb, group) + 1;
 >>>>>>> v3.18
@@ -1152,6 +1219,10 @@ static void update_backups(struct super_block *sb, int blk_off, char *data,
 			   backup_block, backup_block -
 			   ext4_group_first_block_no(sb, group));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		BUFFER_TRACE(bh, "get_write_access");
+>>>>>>> v3.18
 =======
 		BUFFER_TRACE(bh, "get_write_access");
 >>>>>>> v3.18
@@ -1235,6 +1306,10 @@ static int ext4_add_new_descs(handle_t *handle, struct super_block *sb,
 		if (gdb_off) {
 			gdb_bh = sbi->s_group_desc[gdb_num];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			BUFFER_TRACE(gdb_bh, "get_write_access");
+>>>>>>> v3.18
 =======
 			BUFFER_TRACE(gdb_bh, "get_write_access");
 >>>>>>> v3.18
@@ -1276,8 +1351,12 @@ static int ext4_set_bitmap_checksums(struct super_block *sb,
 	struct buffer_head *bh;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 					EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 	if (!ext4_has_metadata_csum(sb))
 >>>>>>> v3.18
@@ -1513,6 +1592,10 @@ static int ext4_flex_group_add(struct super_block *sb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(sbi->s_sbh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(sbi->s_sbh, "get_write_access");
 >>>>>>> v3.18
@@ -1648,16 +1731,22 @@ int ext4_group_add(struct super_block *sb, struct ext4_new_group_data *input)
 		le16_to_cpu(es->s_reserved_gdt_blocks) : 0;
 	struct inode *inode = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gdb_off, gdb_num;
 	int err;
 	__u16 bg_flags = 0;
 
 	gdb_num = input->group / EXT4_DESC_PER_BLOCK(sb);
 =======
+=======
+>>>>>>> v3.18
 	int gdb_off;
 	int err;
 	__u16 bg_flags = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gdb_off = input->group % EXT4_DESC_PER_BLOCK(sb);
 
@@ -1737,6 +1826,10 @@ static int ext4_group_extend_no_check(struct super_block *sb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(EXT4_SB(sb)->s_sbh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(EXT4_SB(sb)->s_sbh, "get_write_access");
 >>>>>>> v3.18
@@ -1900,6 +1993,10 @@ static int ext4_convert_meta_bg(struct super_block *sb, struct inode *inode)
 		return PTR_ERR(handle);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUFFER_TRACE(sbi->s_sbh, "get_write_access");
+>>>>>>> v3.18
 =======
 	BUFFER_TRACE(sbi->s_sbh, "get_write_access");
 >>>>>>> v3.18
@@ -2015,8 +2112,12 @@ retry:
 				le16_to_cpu(es->s_reserved_gdt_blocks);
 			n_group = n_desc_blocks * EXT4_DESC_PER_BLOCK(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			n_blocks_count = (ext4_fsblk_t)n_group *
 				EXT4_BLOCKS_PER_GROUP(sb);
+=======
+			n_blocks_count = n_group * EXT4_BLOCKS_PER_GROUP(sb);
+>>>>>>> v3.18
 =======
 			n_blocks_count = n_group * EXT4_BLOCKS_PER_GROUP(sb);
 >>>>>>> v3.18

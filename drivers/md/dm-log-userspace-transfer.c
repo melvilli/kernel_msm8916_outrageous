@@ -67,7 +67,11 @@ static int dm_ulog_sendto_server(struct dm_ulog_request *tfr)
 	msg->len = sizeof(struct dm_ulog_request) + tfr->data_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = cn_netlink_send(msg, 0, gfp_any());
+=======
+	r = cn_netlink_send(msg, 0, 0, gfp_any());
+>>>>>>> v3.18
 =======
 	r = cn_netlink_send(msg, 0, 0, gfp_any());
 >>>>>>> v3.18

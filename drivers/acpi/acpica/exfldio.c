@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -128,12 +132,15 @@ acpi_ex_setup_region(union acpi_operand_object *obj_desc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Exit if Address/Length have been disallowed by the host OS */
 
 	if (rgn_desc->common.flags & AOPOBJ_INVALID) {
 		return_ACPI_STATUS(AE_AML_ILLEGAL_ADDRESS);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -277,7 +284,11 @@ acpi_ex_access_region(union acpi_operand_object *obj_desc,
 
 	ACPI_DEBUG_PRINT_RAW((ACPI_DB_BFIELD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      " Region [%s:%X], Width %X, ByteBase %X, Offset %X at %8.8X%8.8X\n",
+=======
+			      " Region [%s:%X], Width %X, ByteBase %X, Offset %X at %p\n",
+>>>>>>> v3.18
 =======
 			      " Region [%s:%X], Width %X, ByteBase %X, Offset %X at %p\n",
 >>>>>>> v3.18
@@ -287,15 +298,21 @@ acpi_ex_access_region(union acpi_operand_object *obj_desc,
 			      obj_desc->common_field.access_byte_width,
 			      obj_desc->common_field.base_byte_offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      field_datum_byte_offset,
 			      ACPI_FORMAT_UINT64(rgn_desc->region.address +
 						 region_offset)));
 =======
+=======
+>>>>>>> v3.18
 			      field_datum_byte_offset, ACPI_CAST_PTR(void,
 								     (rgn_desc->
 								      region.
 								      address +
 								      region_offset))));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Invoke the appropriate address_space/op_region handler */
@@ -464,7 +481,10 @@ acpi_ex_field_datum_io(union acpi_operand_object *obj_desc,
 
 	case ACPI_TYPE_LOCAL_BANK_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -509,7 +529,10 @@ acpi_ex_field_datum_io(union acpi_operand_object *obj_desc,
 
 	case ACPI_TYPE_LOCAL_INDEX_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -1028,7 +1051,11 @@ acpi_ex_insert_into_field(union acpi_operand_object *obj_desc,
 						field_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

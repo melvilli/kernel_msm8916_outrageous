@@ -51,6 +51,11 @@ extern const struct dentry_operations v9fs_cached_dentry_operations;
 extern const struct file_operations v9fs_cached_file_operations;
 extern const struct file_operations v9fs_cached_file_operations_dotl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct file_operations v9fs_mmap_file_operations;
+extern const struct file_operations v9fs_mmap_file_operations_dotl;
+>>>>>>> v3.18
 =======
 extern const struct file_operations v9fs_mmap_file_operations;
 extern const struct file_operations v9fs_mmap_file_operations_dotl;

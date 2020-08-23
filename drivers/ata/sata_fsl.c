@@ -25,6 +25,11 @@
 #include <linux/libata.h>
 #include <asm/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -738,8 +743,13 @@ static int sata_fsl_port_start(struct ata_port *ap)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem = dma_alloc_coherent(dev, SATA_FSL_PORT_PRIV_DMA_SZ, &mem_dma,
 				 GFP_KERNEL);
+=======
+	mem = dma_zalloc_coherent(dev, SATA_FSL_PORT_PRIV_DMA_SZ, &mem_dma,
+				  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	mem = dma_zalloc_coherent(dev, SATA_FSL_PORT_PRIV_DMA_SZ, &mem_dma,
 				  GFP_KERNEL);
@@ -749,7 +759,10 @@ static int sata_fsl_port_start(struct ata_port *ap)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mem, 0, SATA_FSL_PORT_PRIV_DMA_SZ);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -786,6 +799,7 @@ static int sata_fsl_port_start(struct ata_port *ap)
 	VPRINTK("CHBA  = 0x%x\n", ioread32(hcr_base + CHBA));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MPC8315_DS
 	/*
 	 * Workaround for 8315DS board 3gbps link-up issue,
@@ -800,6 +814,8 @@ static int sata_fsl_port_start(struct ata_port *ap)
 	dev_warn(dev, "scr_control, speed limited to %x\n", temp);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1550,7 +1566,11 @@ static int sata_fsl_probe(struct platform_device *ofdev)
 			  &sata_fsl_sht);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, host);
+=======
+	platform_set_drvdata(ofdev, host);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, host);
 >>>>>>> v3.18
@@ -1580,10 +1600,15 @@ static int sata_fsl_probe(struct platform_device *ofdev)
 error_exit_with_cleanup:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (host) {
 		dev_set_drvdata(&ofdev->dev, NULL);
 		ata_host_detach(host);
 	}
+=======
+	if (host)
+		ata_host_detach(host);
+>>>>>>> v3.18
 =======
 	if (host)
 		ata_host_detach(host);
@@ -1599,7 +1624,11 @@ error_exit_with_cleanup:
 static int sata_fsl_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&ofdev->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -1611,8 +1640,11 @@ static int sata_fsl_remove(struct platform_device *ofdev)
 	ata_host_detach(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq_dispose_mapping(host_priv->irq);
@@ -1623,15 +1655,21 @@ static int sata_fsl_remove(struct platform_device *ofdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int sata_fsl_suspend(struct platform_device *op, pm_message_t state)
 {
 	struct ata_host *host = dev_get_drvdata(&op->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int sata_fsl_suspend(struct platform_device *op, pm_message_t state)
 {
 	struct ata_host *host = platform_get_drvdata(op);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ata_host_suspend(host, state);
 }
@@ -1639,7 +1677,11 @@ static int sata_fsl_suspend(struct platform_device *op, pm_message_t state)
 static int sata_fsl_resume(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&op->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1690,7 +1732,11 @@ static struct platform_driver fsl_sata_driver = {
 	.probe		= sata_fsl_probe,
 	.remove		= sata_fsl_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

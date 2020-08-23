@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -36,7 +39,10 @@
 #define EFUSE_IC_ID_OFFSET		506
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EFUSE_MAP_LEN			128
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EFUSE_MAX_WORD_UNIT		4
@@ -111,6 +117,7 @@ struct efuse_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void read_efuse_byte(struct ieee80211_hw *hw, u16 _offset, u8 *pbuf);
 extern void efuse_initialize(struct ieee80211_hw *hw);
 extern u8 efuse_read_1byte(struct ieee80211_hw *hw, u16 address);
@@ -127,6 +134,8 @@ extern void rtl_efuse_shadow_map_update(struct ieee80211_hw *hw);
 extern void efuse_force_write_vendor_Id(struct ieee80211_hw *hw);
 extern void efuse_re_pg_section(struct ieee80211_hw *hw, u8 section_idx);
 =======
+=======
+>>>>>>> v3.18
 void read_efuse_byte(struct ieee80211_hw *hw, u16 _offset, u8 *pbuf);
 void efuse_initialize(struct ieee80211_hw *hw);
 u8 efuse_read_1byte(struct ieee80211_hw *hw, u16 address);
@@ -143,6 +152,9 @@ bool efuse_shadow_update_chk(struct ieee80211_hw *hw);
 void rtl_efuse_shadow_map_update(struct ieee80211_hw *hw);
 void efuse_force_write_vendor_Id(struct ieee80211_hw *hw);
 void efuse_re_pg_section(struct ieee80211_hw *hw, u8 section_idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

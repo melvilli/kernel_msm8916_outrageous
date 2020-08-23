@@ -499,7 +499,11 @@ static int if_sdio_prog_helper(struct if_sdio_card *card,
 		mdelay(2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chunk_size = min(size, (size_t)60);
+=======
+		chunk_size = min_t(size_t, size, 60);
+>>>>>>> v3.18
 =======
 		chunk_size = min_t(size_t, size, 60);
 >>>>>>> v3.18
@@ -644,7 +648,11 @@ static int if_sdio_prog_real(struct if_sdio_card *card,
 
 		while (req_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			chunk_size = min(req_size, (size_t)512);
+=======
+			chunk_size = min_t(size_t, req_size, 512);
+>>>>>>> v3.18
 =======
 			chunk_size = min_t(size_t, req_size, 512);
 >>>>>>> v3.18
@@ -717,7 +725,11 @@ static void if_sdio_do_prog_firmware(struct lbs_private *priv, int ret,
 	ret = if_sdio_prog_helper(card, helper);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -726,6 +738,7 @@ static void if_sdio_do_prog_firmware(struct lbs_private *priv, int ret,
 
 	ret = if_sdio_prog_real(card, mainfw);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out;
 
@@ -736,10 +749,15 @@ out:
 	release_firmware(helper);
 	release_firmware(mainfw);
 =======
+=======
+>>>>>>> v3.18
 		return;
 
 	lbs_deb_sdio("Firmware loaded\n");
 	if_sdio_finish_power_on(card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -873,7 +891,11 @@ static void if_sdio_finish_power_on(struct if_sdio_card *card)
 			/* Tell PM core that we don't need the card to be
 			 * powered now */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm_runtime_put_noidle(&func->dev);
+=======
+			pm_runtime_put(&func->dev);
+>>>>>>> v3.18
 =======
 			pm_runtime_put(&func->dev);
 >>>>>>> v3.18
@@ -935,8 +957,13 @@ static int if_sdio_power_on(struct if_sdio_card *card)
 	ret = if_sdio_prog_firmware(card);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sdio_disable_func(func);
 		return ret;
+=======
+		sdio_claim_host(func);
+		goto disable;
+>>>>>>> v3.18
 =======
 		sdio_claim_host(func);
 		goto disable;

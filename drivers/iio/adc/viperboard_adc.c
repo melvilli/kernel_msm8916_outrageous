@@ -43,12 +43,15 @@ struct vprbrd_adc {
 	.channel = _index,				\
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_index = _index,				\
 	.scan_type = {					\
 		.sign = 'u',				\
 		.realbits = 8,				\
 		.storagebits = 8,			\
 	},						\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -77,7 +80,11 @@ static int vprbrd_iio_read_raw(struct iio_dev *iio_dev,
 
 		admsg->cmd = VPRBRD_ADC_CMD_GET;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		admsg->chan = chan->scan_index;
+=======
+		admsg->chan = chan->channel;
+>>>>>>> v3.18
 =======
 		admsg->chan = chan->channel;
 >>>>>>> v3.18
@@ -132,7 +139,11 @@ static int vprbrd_adc_probe(struct platform_device *pdev)
 
 	/* registering iio */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*adc));
+=======
+	indio_dev = devm_iio_device_alloc(&pdev->dev, sizeof(*adc));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&pdev->dev, sizeof(*adc));
 >>>>>>> v3.18
@@ -150,6 +161,7 @@ static int vprbrd_adc_probe(struct platform_device *pdev)
 	indio_dev->channels = vprbrd_adc_iio_channels;
 	indio_dev->num_channels = ARRAY_SIZE(vprbrd_adc_iio_channels);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret) {
@@ -174,12 +186,17 @@ static int vprbrd_adc_remove(struct platform_device *pdev)
 	iio_device_free(indio_dev);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_iio_device_register(&pdev->dev, indio_dev);
 	if (ret) {
 		dev_err(&pdev->dev, "could not register iio (adc)");
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -188,10 +205,15 @@ static struct platform_driver vprbrd_adc_driver = {
 	.driver = {
 		.name	= "viperboard-adc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 	},
 	.probe		= vprbrd_adc_probe,
 	.remove		= vprbrd_adc_remove,
+=======
+	},
+	.probe		= vprbrd_adc_probe,
+>>>>>>> v3.18
 =======
 	},
 	.probe		= vprbrd_adc_probe,

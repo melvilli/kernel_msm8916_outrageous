@@ -44,7 +44,11 @@ MODULE_PARM_DESC(vbibufs,"number of vbi buffers, range 2-32");
 /* ------------------------------------------------------------------ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VBI_LINE_COUNT     16
+=======
+#define VBI_LINE_COUNT     17
+>>>>>>> v3.18
 =======
 #define VBI_LINE_COUNT     17
 >>>>>>> v3.18
@@ -72,15 +76,21 @@ static void task_init(struct saa7134_dev *dev, struct saa7134_buf *buf,
 	saa_writeb(SAA7134_VBI_PHASE_OFFSET_CHROMA(task), 0x00);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saa_writeb(SAA7134_VBI_H_LEN1(task), buf->vb.width   & 0xff);
 	saa_writeb(SAA7134_VBI_H_LEN2(task), buf->vb.width   >> 8);
 	saa_writeb(SAA7134_VBI_V_LEN1(task), buf->vb.height  & 0xff);
 	saa_writeb(SAA7134_VBI_V_LEN2(task), buf->vb.height  >> 8);
 =======
+=======
+>>>>>>> v3.18
 	saa_writeb(SAA7134_VBI_H_LEN1(task), dev->vbi_hlen & 0xff);
 	saa_writeb(SAA7134_VBI_H_LEN2(task), dev->vbi_hlen >> 8);
 	saa_writeb(SAA7134_VBI_V_LEN1(task), dev->vbi_vlen & 0xff);
 	saa_writeb(SAA7134_VBI_V_LEN2(task), dev->vbi_vlen >> 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	saa_andorb(SAA7134_DATA_PATH(task), 0xc0, 0x00);
@@ -93,6 +103,7 @@ static int buffer_activate(struct saa7134_dev *dev,
 			   struct saa7134_buf *next)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long control,base;
 
 	dprintk("buffer_activate [%p]\n",buf);
@@ -102,6 +113,8 @@ static int buffer_activate(struct saa7134_dev *dev,
 	task_init(dev,buf,TASK_A);
 	task_init(dev,buf,TASK_B);
 =======
+=======
+>>>>>>> v3.18
 	struct saa7134_dmaqueue *dmaq = buf->vb2.vb2_queue->drv_priv;
 	unsigned long control, base;
 
@@ -110,6 +123,9 @@ static int buffer_activate(struct saa7134_dev *dev,
 
 	task_init(dev, buf, TASK_A);
 	task_init(dev, buf, TASK_B);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	saa_writeb(SAA7134_OFMT_DATA_A, 0x06);
 	saa_writeb(SAA7134_OFMT_DATA_B, 0x06);
@@ -118,6 +134,7 @@ static int buffer_activate(struct saa7134_dev *dev,
 	base    = saa7134_buffer_base(buf);
 	control = SAA7134_RS_CONTROL_BURST_16 |
 		SAA7134_RS_CONTROL_ME |
+<<<<<<< HEAD
 <<<<<<< HEAD
 		(buf->pt->dma >> 12);
 	saa_writel(SAA7134_RS_BA1(2),base);
@@ -133,6 +150,8 @@ static int buffer_activate(struct saa7134_dev *dev,
 	saa7134_set_dmabits(dev);
 	mod_timer(&dev->vbi_q.timeout, jiffies+BUFFER_TIMEOUT);
 =======
+=======
+>>>>>>> v3.18
 		(dmaq->pt.dma >> 12);
 	saa_writel(SAA7134_RS_BA1(2), base);
 	saa_writel(SAA7134_RS_BA2(2), base + dev->vbi_hlen * dev->vbi_vlen);
@@ -146,6 +165,7 @@ static int buffer_activate(struct saa7134_dev *dev,
 	/* start DMA */
 	saa7134_set_dmabits(dev);
 	mod_timer(&dmaq->timeout, jiffies + BUFFER_TIMEOUT);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return 0;
@@ -240,6 +260,12 @@ struct videobuf_queue_ops saa7134_vbi_qops = {
 	.buf_queue    = buffer_queue,
 	.buf_release  = buffer_release,
 =======
+=======
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static int buffer_prepare(struct vb2_buffer *vb2)
 {
 	struct saa7134_dmaqueue *dmaq = vb2->vb2_queue->drv_priv;
@@ -316,6 +342,9 @@ struct vb2_ops saa7134_vbi_qops = {
 	.wait_finish	= vb2_ops_wait_finish,
 	.start_streaming = saa7134_vb2_start_streaming,
 	.stop_streaming = saa7134_vb2_stop_streaming,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -332,8 +361,13 @@ int saa7134_vbi_init1(struct saa7134_dev *dev)
 	if (vbibufs < 2)
 		vbibufs = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vbibufs > VB2_MAX_FRAME)
 		vbibufs = VB2_MAX_FRAME;
+=======
+	if (vbibufs > VIDEO_MAX_FRAME)
+		vbibufs = VIDEO_MAX_FRAME;
+>>>>>>> v3.18
 =======
 	if (vbibufs > VIDEO_MAX_FRAME)
 		vbibufs = VIDEO_MAX_FRAME;
@@ -352,7 +386,10 @@ void saa7134_irq_vbi_done(struct saa7134_dev *dev, unsigned long status)
 	spin_lock(&dev->slock);
 	if (dev->vbi_q.curr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->vbi_fieldcount++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* make sure we have seen both fields */
@@ -364,10 +401,16 @@ void saa7134_irq_vbi_done(struct saa7134_dev *dev, unsigned long status)
 			goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->vbi_q.curr->vb.field_count = dev->vbi_fieldcount;
 		saa7134_buffer_finish(dev,&dev->vbi_q,VIDEOBUF_DONE);
 	}
 	saa7134_buffer_next(dev,&dev->vbi_q);
+=======
+		saa7134_buffer_finish(dev, &dev->vbi_q, VB2_BUF_STATE_DONE);
+	}
+	saa7134_buffer_next(dev, &dev->vbi_q);
+>>>>>>> v3.18
 =======
 		saa7134_buffer_finish(dev, &dev->vbi_q, VB2_BUF_STATE_DONE);
 	}
@@ -378,6 +421,7 @@ void saa7134_irq_vbi_done(struct saa7134_dev *dev, unsigned long status)
 	spin_unlock(&dev->slock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ----------------------------------------------------------- */
 /*
@@ -385,5 +429,7 @@ void saa7134_irq_vbi_done(struct saa7134_dev *dev, unsigned long status)
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

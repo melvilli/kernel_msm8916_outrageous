@@ -8,7 +8,11 @@
  * Written Doug Thompson <norsk5@xmission.com> www.softwarebitmaker.com
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) 2012-2013 - Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * (c) 2012-2013 - Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * (c) 2012-2013 - Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -113,7 +117,13 @@ static const char * const mem_types[] = {
 	[MEM_XDR] = "XDR",
 	[MEM_DDR3] = "Unbuffered-DDR3",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[MEM_RDDR3] = "Registered-DDR3"
+=======
+	[MEM_RDDR3] = "Registered-DDR3",
+	[MEM_DDR4] = "Unbuffered-DDR4",
+	[MEM_RDDR4] = "Registered-DDR4"
+>>>>>>> v3.18
 =======
 	[MEM_RDDR3] = "Registered-DDR3",
 	[MEM_DDR4] = "Unbuffered-DDR4",
@@ -693,7 +703,11 @@ static ssize_t mci_sdram_scrub_rate_store(struct device *dev,
 	int new_bw = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(data, 10, &bandwidth) < 0)
+=======
+	if (kstrtoul(data, 10, &bandwidth) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(data, 10, &bandwidth) < 0)
 >>>>>>> v3.18
@@ -931,7 +945,11 @@ void __exit edac_debugfs_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int edac_create_debug_nodes(struct mem_ctl_info *mci)
+=======
+static int edac_create_debug_nodes(struct mem_ctl_info *mci)
+>>>>>>> v3.18
 =======
 static int edac_create_debug_nodes(struct mem_ctl_info *mci)
 >>>>>>> v3.18
@@ -992,7 +1010,10 @@ nomem:
 int edac_create_sysfs_mci_device(struct mem_ctl_info *mci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, err;
@@ -1001,6 +1022,7 @@ int edac_create_sysfs_mci_device(struct mem_ctl_info *mci)
 	 * The memory controller needs its own bus, in order to avoid
 	 * namespace conflicts at /sys/bus/edac.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	name = kasprintf(GFP_KERNEL, "mc%d", mci->mc_idx);
 	if (!name)
@@ -1016,6 +1038,8 @@ int edac_create_sysfs_mci_device(struct mem_ctl_info *mci)
 		return err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mci->bus->name = kasprintf(GFP_KERNEL, "mc%d", mci->mc_idx);
 	if (!mci->bus->name)
 		return -ENOMEM;
@@ -1025,6 +1049,9 @@ int edac_create_sysfs_mci_device(struct mem_ctl_info *mci)
 	err = bus_register(mci->bus);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* get the /sys/devices/system/edac subsys reference */
@@ -1110,8 +1137,12 @@ fail2:
 	device_unregister(&mci->dev);
 	bus_unregister(mci->bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(name);
 
+=======
+	kfree(mci->bus->name);
+>>>>>>> v3.18
 =======
 	kfree(mci->bus->name);
 >>>>>>> v3.18
@@ -1146,6 +1177,7 @@ void edac_remove_sysfs_mci_device(struct mem_ctl_info *mci)
 void edac_unregister_sysfs(struct mem_ctl_info *mci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *name = mci->bus->name;
 
 	edac_dbg(1, "Unregistering device %s\n", dev_name(&mci->dev));
@@ -1153,10 +1185,15 @@ void edac_unregister_sysfs(struct mem_ctl_info *mci)
 	bus_unregister(mci->bus);
 	kfree(name);
 =======
+=======
+>>>>>>> v3.18
 	edac_dbg(1, "Unregistering device %s\n", dev_name(&mci->dev));
 	device_unregister(&mci->dev);
 	bus_unregister(mci->bus);
 	kfree(mci->bus->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

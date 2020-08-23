@@ -3,6 +3,10 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CFLAGS_prom.o		= -I$(src)/../../../scripts/dtc/libfdt
+>>>>>>> v3.18
 =======
 CFLAGS_prom.o		= -I$(src)/../../../scripts/dtc/libfdt
 >>>>>>> v3.18
@@ -44,9 +48,15 @@ obj-$(CONFIG_HAVE_HW_BREAKPOINT)	+= hw_breakpoint.o
 obj-$(CONFIG_PPC_BOOK3S_64)	+= cpu_setup_ppc970.o cpu_setup_pa6t.o
 obj-$(CONFIG_PPC_BOOK3S_64)	+= cpu_setup_power.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj64-$(CONFIG_RELOCATABLE)	+= reloc_64.o
 obj-$(CONFIG_PPC_BOOK3E_64)	+= exceptions-64e.o idle_book3e.o
 obj-$(CONFIG_PPC_A2)		+= cpu_setup_a2.o
+=======
+obj-$(CONFIG_PPC_BOOK3S_64)	+= mce.o mce_power.o
+obj64-$(CONFIG_RELOCATABLE)	+= reloc_64.o
+obj-$(CONFIG_PPC_BOOK3E_64)	+= exceptions-64e.o idle_book3e.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PPC_BOOK3S_64)	+= mce.o mce_power.o
 obj64-$(CONFIG_RELOCATABLE)	+= reloc_64.o
@@ -58,7 +68,10 @@ obj-$(CONFIG_PPC_970_NAP)	+= idle_power4.o
 obj-$(CONFIG_PPC_P7_NAP)	+= idle_power7.o
 obj-$(CONFIG_PPC_OF)		+= of_platform.o prom_parse.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PPC_CLOCK)		+= clock.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 procfs-y			:= proc_powerpc.o
@@ -69,14 +82,20 @@ obj-$(CONFIG_PPC_RTAS_DAEMON)	+= rtasd.o
 obj-$(CONFIG_RTAS_FLASH)	+= rtas_flash.o
 obj-$(CONFIG_RTAS_PROC)		+= rtas-proc.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_LPARCFG)		+= lparcfg.o
 obj-$(CONFIG_IBMVIO)		+= vio.o
 obj-$(CONFIG_IBMEBUS)           += ibmebus.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_IBMVIO)		+= vio.o
 obj-$(CONFIG_IBMEBUS)           += ibmebus.o
 obj-$(CONFIG_EEH)              += eeh.o eeh_pe.o eeh_dev.o eeh_cache.o \
 				  eeh_driver.o eeh_event.o eeh_sysfs.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_GENERIC_TBSYNC)	+= smp-tbsync.o
 obj-$(CONFIG_CRASH_DUMP)	+= crash_dump.o
@@ -113,6 +132,12 @@ obj-$(CONFIG_PPC64)		+= dma-iommu.o iommu.o
 obj-$(CONFIG_KGDB)		+= kgdb.o
 obj-$(CONFIG_MODULES)		+= ppc_ksyms.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ifeq ($(CONFIG_PPC32),y)
+obj-$(CONFIG_MODULES)		+= ppc_ksyms_32.o
+endif
+>>>>>>> v3.18
 =======
 ifeq ($(CONFIG_PPC32),y)
 obj-$(CONFIG_MODULES)		+= ppc_ksyms_32.o
@@ -127,7 +152,11 @@ obj-$(CONFIG_STACKTRACE)	+= stacktrace.o
 obj-$(CONFIG_SWIOTLB)		+= dma-swiotlb.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pci64-$(CONFIG_PPC64)		+= pci_dn.o isa-bridge.o
+=======
+pci64-$(CONFIG_PPC64)		+= pci_dn.o pci-hotplug.o isa-bridge.o
+>>>>>>> v3.18
 =======
 pci64-$(CONFIG_PPC64)		+= pci_dn.o pci-hotplug.o isa-bridge.o
 >>>>>>> v3.18
@@ -146,9 +175,13 @@ obj-$(CONFIG_FUNCTION_GRAPH_TRACER)	+= ftrace.o
 obj-$(CONFIG_FTRACE_SYSCALLS)	+= ftrace.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_8XX_MINIMAL_FPEMU) += softemu8xx.o
 
 ifneq ($(CONFIG_PPC_INDIRECT_IO),y)
+=======
+ifneq ($(CONFIG_PPC_INDIRECT_PIO),y)
+>>>>>>> v3.18
 =======
 ifneq ($(CONFIG_PPC_INDIRECT_PIO),y)
 >>>>>>> v3.18

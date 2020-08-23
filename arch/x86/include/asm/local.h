@@ -53,12 +53,16 @@ static inline void local_sub(long i, local_t *l)
 static inline int local_sub_and_test(long i, local_t *l)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(_ASM_SUB "%2,%0; sete %1"
 		     : "+m" (l->a.counter), "=qm" (c)
 		     : "ir" (i) : "memory");
 	return c;
+=======
+	GEN_BINARY_RMWcc(_ASM_SUB, l->a.counter, "er", i, "%0", "e");
+>>>>>>> v3.18
 =======
 	GEN_BINARY_RMWcc(_ASM_SUB, l->a.counter, "er", i, "%0", "e");
 >>>>>>> v3.18
@@ -75,12 +79,16 @@ static inline int local_sub_and_test(long i, local_t *l)
 static inline int local_dec_and_test(local_t *l)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(_ASM_DEC "%0; sete %1"
 		     : "+m" (l->a.counter), "=qm" (c)
 		     : : "memory");
 	return c != 0;
+=======
+	GEN_UNARY_RMWcc(_ASM_DEC, l->a.counter, "%0", "e");
+>>>>>>> v3.18
 =======
 	GEN_UNARY_RMWcc(_ASM_DEC, l->a.counter, "%0", "e");
 >>>>>>> v3.18
@@ -97,12 +105,16 @@ static inline int local_dec_and_test(local_t *l)
 static inline int local_inc_and_test(local_t *l)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(_ASM_INC "%0; sete %1"
 		     : "+m" (l->a.counter), "=qm" (c)
 		     : : "memory");
 	return c != 0;
+=======
+	GEN_UNARY_RMWcc(_ASM_INC, l->a.counter, "%0", "e");
+>>>>>>> v3.18
 =======
 	GEN_UNARY_RMWcc(_ASM_INC, l->a.counter, "%0", "e");
 >>>>>>> v3.18
@@ -120,12 +132,16 @@ static inline int local_inc_and_test(local_t *l)
 static inline int local_add_negative(long i, local_t *l)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char c;
 
 	asm volatile(_ASM_ADD "%2,%0; sets %1"
 		     : "+m" (l->a.counter), "=qm" (c)
 		     : "ir" (i) : "memory");
 	return c;
+=======
+	GEN_BINARY_RMWcc(_ASM_ADD, l->a.counter, "er", i, "%0", "s");
+>>>>>>> v3.18
 =======
 	GEN_BINARY_RMWcc(_ASM_ADD, l->a.counter, "er", i, "%0", "s");
 >>>>>>> v3.18

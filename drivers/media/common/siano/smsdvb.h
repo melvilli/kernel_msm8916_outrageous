@@ -96,7 +96,11 @@ struct RECEPTION_STATISTICS_PER_SLICES_S {
 
 	u32 ber_bit_count;	/* Total number of SYNC bits. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ber_error_count;	/* Number of erronous SYNC bits. */
+=======
+	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
+>>>>>>> v3.18
 =======
 	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
 >>>>>>> v3.18

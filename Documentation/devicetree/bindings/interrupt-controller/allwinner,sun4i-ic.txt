@@ -3,7 +3,11 @@ Allwinner Sunxi Interrupt Controller
 Required properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : should be "allwinner,sun4i-ic"
+=======
+- compatible : should be "allwinner,sun4i-a10-ic"
+>>>>>>> v3.18
 =======
 - compatible : should be "allwinner,sun4i-a10-ic"
 >>>>>>> v3.18
@@ -12,6 +16,7 @@ Required properties:
 - #interrupt-cells : Specifies the number of cells needed to encode an
   interrupt source. The value shall be 1.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 The interrupt sources are as follows:
 
@@ -107,6 +112,8 @@ intc: interrupt-controller {
 	interrupt-controller;
 	#interrupt-cells = <2>;
 =======
+=======
+>>>>>>> v3.18
 Example:
 
 intc: interrupt-controller {
@@ -114,5 +121,8 @@ intc: interrupt-controller {
 	reg = <0x01c20400 0x400>;
 	interrupt-controller;
 	#interrupt-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

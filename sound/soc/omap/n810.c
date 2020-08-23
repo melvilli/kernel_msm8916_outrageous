@@ -69,6 +69,7 @@ static void n810_ext_control(struct snd_soc_dapm_context *dapm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (n810_spk_func)
 		snd_soc_dapm_enable_pin(dapm, "Ext Spk");
 	else
@@ -90,6 +91,8 @@ static void n810_ext_control(struct snd_soc_dapm_context *dapm)
 
 	snd_soc_dapm_sync(dapm);
 =======
+=======
+>>>>>>> v3.18
 	snd_soc_dapm_mutex_lock(dapm);
 
 	if (n810_spk_func)
@@ -114,6 +117,9 @@ static void n810_ext_control(struct snd_soc_dapm_context *dapm)
 	snd_soc_dapm_sync_unlocked(dapm);
 
 	snd_soc_dapm_mutex_unlock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -128,7 +134,11 @@ static int n810_startup(struct snd_pcm_substream *substream)
 
 	n810_ext_control(&codec->dapm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return clk_enable(sys_clkout2);
+=======
+	return clk_prepare_enable(sys_clkout2);
+>>>>>>> v3.18
 =======
 	return clk_prepare_enable(sys_clkout2);
 >>>>>>> v3.18
@@ -137,7 +147,11 @@ static int n810_startup(struct snd_pcm_substream *substream)
 static void n810_shutdown(struct snd_pcm_substream *substream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(sys_clkout2);
+=======
+	clk_disable_unprepare(sys_clkout2);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(sys_clkout2);
 >>>>>>> v3.18
@@ -310,7 +324,11 @@ static struct snd_soc_dai_link n810_dai = {
 	.stream_name = "AIC33",
 	.cpu_dai_name = "omap-mcbsp.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name = "omap-pcm-audio",
+=======
+	.platform_name = "omap-mcbsp.2",
+>>>>>>> v3.18
 =======
 	.platform_name = "omap-mcbsp.2",
 >>>>>>> v3.18
@@ -345,7 +363,13 @@ static int __init n810_soc_init(void)
 	struct device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(machine_is_nokia_n810() || machine_is_nokia_n810_wimax()))
+=======
+	if (!of_have_populated_dt() ||
+	    (!of_machine_is_compatible("nokia,n810") &&
+	     !of_machine_is_compatible("nokia,n810-wimax")))
+>>>>>>> v3.18
 =======
 	if (!of_have_populated_dt() ||
 	    (!of_machine_is_compatible("nokia,n810") &&
@@ -390,14 +414,20 @@ static int __init n810_soc_init(void)
 	clk_set_rate(sys_clkout2, 12000000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON((gpio_request(N810_HEADSET_AMP_GPIO, "hs_amp") < 0) ||
 	       (gpio_request(N810_SPEAKER_AMP_GPIO, "spk_amp") < 0));
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON((gpio_request(N810_HEADSET_AMP_GPIO, "hs_amp") < 0) ||
 		    (gpio_request(N810_SPEAKER_AMP_GPIO, "spk_amp") < 0))) {
 		err = -EINVAL;
 		goto err4;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gpio_direction_output(N810_HEADSET_AMP_GPIO, 0);

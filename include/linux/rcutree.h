@@ -13,8 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -36,16 +41,22 @@
 #define __LINUX_RCUTREE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rcu_init(void);
 extern void rcu_note_context_switch(int cpu);
 extern int rcu_needs_cpu(int cpu, unsigned long *delta_jiffies);
 extern void rcu_cpu_stall_reset(void);
 =======
+=======
+>>>>>>> v3.18
 void rcu_note_context_switch(int cpu);
 #ifndef CONFIG_RCU_NOCB_CPU_ALL
 int rcu_needs_cpu(int cpu, unsigned long *delta_jiffies);
 #endif /* #ifndef CONFIG_RCU_NOCB_CPU_ALL */
 void rcu_cpu_stall_reset(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -59,9 +70,15 @@ static inline void rcu_virt_note_context_switch(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void synchronize_rcu_bh(void);
 extern void synchronize_sched_expedited(void);
 extern void synchronize_rcu_expedited(void);
+=======
+void synchronize_rcu_bh(void);
+void synchronize_sched_expedited(void);
+void synchronize_rcu_expedited(void);
+>>>>>>> v3.18
 =======
 void synchronize_rcu_bh(void);
 void synchronize_sched_expedited(void);
@@ -92,6 +109,7 @@ static inline void synchronize_rcu_bh_expedited(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rcu_barrier(void);
 extern void rcu_barrier_bh(void);
 extern void rcu_barrier_sched(void);
@@ -110,6 +128,8 @@ extern void rcu_scheduler_starting(void);
 extern int rcu_scheduler_active __read_mostly;
 
 =======
+=======
+>>>>>>> v3.18
 void rcu_barrier(void);
 void rcu_barrier_bh(void);
 void rcu_barrier_sched(void);
@@ -134,5 +154,8 @@ extern int rcu_scheduler_active __read_mostly;
 
 bool rcu_is_watching(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_RCUTREE_H */

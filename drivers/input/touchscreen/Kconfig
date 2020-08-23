@@ -12,8 +12,14 @@ menuconfig INPUT_TOUCHSCREEN
 if INPUT_TOUCHSCREEN
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/input/touchscreen/synaptics_dsx/Kconfig"
 source "drivers/input/touchscreen/synaptics_oppo/Kconfig"
+=======
+config OF_TOUCHSCREEN
+	def_tristate INPUT
+	depends on INPUT && OF
+>>>>>>> v3.18
 =======
 config OF_TOUCHSCREEN
 	def_tristate INPUT
@@ -96,6 +102,7 @@ config TOUCHSCREEN_AD7879_SPI
 	  module will be called ad7879-spi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TOUCHSCREEN_ATMEL_MXT
 	tristate "Atmel mXT I2C Touchscreen"
 	depends on I2C
@@ -103,17 +110,23 @@ config TOUCHSCREEN_ATMEL_MXT
 	  Say Y here if you have Atmel mXT series I2C touchscreen,
 	  such as AT42QT602240/ATMXT224, connected to your system.
 =======
+=======
+>>>>>>> v3.18
 config TOUCHSCREEN_AR1021_I2C
 	tristate "Microchip AR1021 i2c touchscreen"
 	depends on I2C && OF
 	help
 	  Say Y here if you have the Microchip AR1021 touchscreen controller
 	  chip in your system.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If unsure, say N.
 
 	  To compile this driver as a module, choose M here: the
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  module will be called atmel_mxt_ts.
 
@@ -124,6 +137,8 @@ config TOUCHSCREEN_ATMEL_MAXTOUCH_TS
 	  Say Y here if you have Atmel MaXTouch Touchscreen
 	  using i2c connected to your system.
 =======
+=======
+>>>>>>> v3.18
 	  module will be called ar1021_i2c.
 
 config TOUCHSCREEN_ATMEL_MXT
@@ -133,13 +148,20 @@ config TOUCHSCREEN_ATMEL_MXT
 	help
 	  Say Y here if you have Atmel mXT series I2C touchscreen,
 	  such as AT42QT602240/ATMXT224, connected to your system.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If unsure, say N.
 
 	  To compile this driver as a module, choose M here: the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  module will be called atmel_maxtouch_ts.
+=======
+	  module will be called atmel_mxt_ts.
+>>>>>>> v3.18
 =======
 	  module will be called atmel_mxt_ts.
 >>>>>>> v3.18
@@ -214,7 +236,10 @@ config TOUCHSCREEN_CYTTSP_SPI
 	  module will be called cyttsp_spi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TOUCHSCREEN_CYTTSP4_CORE
 	tristate "Cypress TrueTouch Gen4 Touchscreen Driver"
 	help
@@ -245,6 +270,9 @@ config TOUCHSCREEN_CYTTSP4_SPI
 	  To compile this driver as a module, choose M here: the
 	  module will be called cyttsp4_spi.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TOUCHSCREEN_DA9034
 	tristate "Touchscreen support for Dialog Semiconductor DA9034"
@@ -516,7 +544,10 @@ config TOUCHSCREEN_HP7XX
 	  module will be called jornada720_ts.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TOUCHSCREEN_IPAQ_MICRO
 	tristate "HP iPAQ Atmel Micro ASIC touchscreen"
 	depends on MFD_IPAQ_MICRO
@@ -529,6 +560,9 @@ config TOUCHSCREEN_IPAQ_MICRO
 	  To compile this driver as a module, choose M here: the
 	  module will be called ipaq-micro-ts.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TOUCHSCREEN_HTCPEN
 	tristate "HTC Shift X9500 touchscreen"
@@ -579,6 +613,7 @@ config TOUCHSCREEN_MIGOR
 	  module will be called migor_ts.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TOUCHSCREEN_TNETV107X
 	tristate "TI TNETV107X touchscreen support"
 	depends on ARCH_DAVINCI_TNETV107X
@@ -600,6 +635,8 @@ config SYNA_MULTI_TOUCH
 	depends on TOUCHSCREEN_SYNAPTICS_RMI4_I2C
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config TOUCHSCREEN_TOUCHRIGHT
@@ -639,6 +676,7 @@ config TOUCHSCREEN_TI_AM335X_TSC
 	  module will be called ti_am335x_tsc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TOUCHSCREEN_ATMEL_TSADCC
 	tristate "Atmel Touchscreen Interface"
 	depends on ARCH_AT91
@@ -651,6 +689,8 @@ config TOUCHSCREEN_ATMEL_TSADCC
 	  To compile this driver as a module, choose M here: the
 	  module will be called atmel_tsadcc.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config TOUCHSCREEN_UCB1400
@@ -732,7 +772,11 @@ config TOUCHSCREEN_WM9713
 config TOUCHSCREEN_WM97XX_ATMEL
 	tristate "WM97xx Atmel accelerated touch"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on TOUCHSCREEN_WM97XX && (AVR32 || ARCH_AT91)
+=======
+	depends on TOUCHSCREEN_WM97XX && AVR32
+>>>>>>> v3.18
 =======
 	depends on TOUCHSCREEN_WM97XX && AVR32
 >>>>>>> v3.18
@@ -804,7 +848,11 @@ config TOUCHSCREEN_USB_COMPOSITE
 config TOUCHSCREEN_MC13783
 	tristate "Freescale MC13783 touchscreen input driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MFD_MC13783
+=======
+	depends on MFD_MC13XXX
+>>>>>>> v3.18
 =======
 	depends on MFD_MC13XXX
 >>>>>>> v3.18
@@ -956,6 +1004,7 @@ config TOUCHSCREEN_TSC2007
 	  module will be called tsc2007.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ANDROID_TOUCHSCREEN_MSM_HACKS
 	default y
 	depends on TOUCHSCREEN_MSM_LEGACY
@@ -969,6 +1018,11 @@ config ANDROID_TOUCHSCREEN_MSM_HACKS
 config TOUCHSCREEN_W90X900
 	tristate "W90P910 touchscreen driver"
 	depends on HAVE_CLK
+=======
+config TOUCHSCREEN_W90X900
+	tristate "W90P910 touchscreen driver"
+	depends on ARCH_W90X900
+>>>>>>> v3.18
 =======
 config TOUCHSCREEN_W90X900
 	tristate "W90P910 touchscreen driver"
@@ -1012,6 +1066,7 @@ config TOUCHSCREEN_STMPE
 	  To compile this driver as a module, choose M here: the
 	  module will be called stmpe-ts.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config TOUCHSCREEN_TPS6507X
 	tristate "TPS6507x based touchscreens"
@@ -1181,6 +1236,8 @@ config TOUCHSCREEN_IT7260_I2C
 	  Say Y here if you have a IT7260 Touchscreen Driver
 	  connected to your system.
 =======
+=======
+>>>>>>> v3.18
 config TOUCHSCREEN_SUN4I
 	tristate "Allwinner sun4i resistive touchscreen controller support"
 	depends on ARCH_SUNXI || COMPILE_TEST
@@ -1223,13 +1280,20 @@ config TOUCHSCREEN_ZFORCE
 	help
 	  Say Y here if you have a touchscreen using the zforce
 	  infraread technology from Neonode.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If unsure, say N.
 
 	  To compile this driver as a module, choose M here: the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  module will be called it7258_ts_i2c.
+=======
+	  module will be called zforce_ts.
+>>>>>>> v3.18
 =======
 	  module will be called zforce_ts.
 >>>>>>> v3.18

@@ -14,6 +14,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -109,7 +114,11 @@ static void hmac_add_misc(struct shash_desc *desc, struct inode *inode,
 	} hmac_misc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&hmac_misc, 0, sizeof hmac_misc);
+=======
+	memset(&hmac_misc, 0, sizeof(hmac_misc));
+>>>>>>> v3.18
 =======
 	memset(&hmac_misc, 0, sizeof(hmac_misc));
 >>>>>>> v3.18
@@ -119,8 +128,13 @@ static void hmac_add_misc(struct shash_desc *desc, struct inode *inode,
 	hmac_misc.gid = from_kgid(&init_user_ns, inode->i_gid);
 	hmac_misc.mode = inode->i_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_shash_update(desc, (const u8 *)&hmac_misc, sizeof hmac_misc);
 	if (evm_hmac_version > 1)
+=======
+	crypto_shash_update(desc, (const u8 *)&hmac_misc, sizeof(hmac_misc));
+	if (evm_hmac_attrs & EVM_ATTR_FSUUID)
+>>>>>>> v3.18
 =======
 	crypto_shash_update(desc, (const u8 *)&hmac_misc, sizeof(hmac_misc));
 	if (evm_hmac_attrs & EVM_ATTR_FSUUID)
@@ -152,7 +166,11 @@ static int evm_calc_hmac_or_hash(struct dentry *dentry,
 	int size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!inode->i_op || !inode->i_op->getxattr)
+=======
+	if (!inode->i_op->getxattr)
+>>>>>>> v3.18
 =======
 	if (!inode->i_op->getxattr)
 >>>>>>> v3.18
@@ -240,7 +258,11 @@ int evm_init_hmac(struct inode *inode, const struct xattr *lsm_xattr,
 	desc = init_desc(EVM_XATTR_HMAC);
 	if (IS_ERR(desc)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "init_desc failed\n");
+=======
+		pr_info("init_desc failed\n");
+>>>>>>> v3.18
 =======
 		pr_info("init_desc failed\n");
 >>>>>>> v3.18

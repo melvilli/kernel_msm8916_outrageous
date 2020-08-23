@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -99,6 +103,7 @@ static struct acpi_exdump_info acpi_ex_dump_buffer[5] = {
 	{ACPI_EXD_UINT32, ACPI_EXD_OFFSET(buffer.length), "Length"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(buffer.pointer), "Pointer"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(buffer.node), "Parent Node"},
 	{ACPI_EXD_BUFFER, 0, NULL}
 };
@@ -106,6 +111,8 @@ static struct acpi_exdump_info acpi_ex_dump_buffer[5] = {
 static struct acpi_exdump_info acpi_ex_dump_package[5] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_package), NULL},
 =======
+=======
+>>>>>>> v3.18
 	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(buffer.node), "Parent Node"},
 	{ACPI_EXD_BUFFER, 0, NULL}
 };
@@ -113,6 +120,9 @@ static struct acpi_exdump_info acpi_ex_dump_package[5] = {
 static struct acpi_exdump_info acpi_ex_dump_package[6] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_package), NULL},
 	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(package.node), "Parent Node"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(package.flags), "Flags"},
 	{ACPI_EXD_UINT32, ACPI_EXD_OFFSET(package.count), "Elements"},
@@ -123,17 +133,23 @@ static struct acpi_exdump_info acpi_ex_dump_package[6] = {
 static struct acpi_exdump_info acpi_ex_dump_device[4] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_device), NULL},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(device.handler), "Handler"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(device.notify_list[0]),
 	 "System Notify"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(device.notify_list[1]),
 	 "Device Notify"}
 =======
+=======
+>>>>>>> v3.18
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(device.notify_list[0]),
 	 "System Notify"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(device.notify_list[1]),
 	 "Device Notify"},
 	{ACPI_EXD_HDLR_LIST, ACPI_EXD_OFFSET(device.handler), "Handler"}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -156,15 +172,21 @@ static struct acpi_exdump_info acpi_ex_dump_method[9] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct acpi_exdump_info acpi_ex_dump_mutex[5] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_mutex), NULL},
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(mutex.sync_level), "Sync Level"},
 =======
+=======
+>>>>>>> v3.18
 static struct acpi_exdump_info acpi_ex_dump_mutex[6] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_mutex), NULL},
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(mutex.sync_level), "Sync Level"},
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(mutex.original_sync_level),
 	 "Original Sync Level"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(mutex.owner_thread), "Owner Thread"},
 	{ACPI_EXD_UINT16, ACPI_EXD_OFFSET(mutex.acquisition_depth),
@@ -172,6 +194,7 @@ static struct acpi_exdump_info acpi_ex_dump_mutex[6] = {
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(mutex.os_mutex), "OsMutex"}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct acpi_exdump_info acpi_ex_dump_region[7] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_region), NULL},
@@ -185,6 +208,8 @@ static struct acpi_exdump_info acpi_ex_dump_region[7] = {
 
 static struct acpi_exdump_info acpi_ex_dump_power[5] = {
 =======
+=======
+>>>>>>> v3.18
 static struct acpi_exdump_info acpi_ex_dump_region[8] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_region), NULL},
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(region.space_id), "Space Id"},
@@ -197,6 +222,9 @@ static struct acpi_exdump_info acpi_ex_dump_region[8] = {
 };
 
 static struct acpi_exdump_info acpi_ex_dump_power[6] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_power), NULL},
 	{ACPI_EXD_UINT32, ACPI_EXD_OFFSET(power_resource.system_level),
@@ -207,7 +235,12 @@ static struct acpi_exdump_info acpi_ex_dump_power[6] = {
 	 "System Notify"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(power_resource.notify_list[1]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 "Device Notify"}
+=======
+	 "Device Notify"},
+	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(power_resource.handler), "Handler"}
+>>>>>>> v3.18
 =======
 	 "Device Notify"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(power_resource.handler), "Handler"}
@@ -276,7 +309,11 @@ static struct acpi_exdump_info acpi_ex_dump_reference[8] = {
 	{ACPI_EXD_UINT32, ACPI_EXD_OFFSET(reference.value), "Value"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(reference.object), "Object Desc"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(reference.node), "Node"},
+=======
+	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(reference.node), "Node"},
+>>>>>>> v3.18
 =======
 	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(reference.node), "Node"},
 >>>>>>> v3.18
@@ -289,15 +326,21 @@ static struct acpi_exdump_info acpi_ex_dump_address_handler[6] = {
 	 NULL},
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(address_space.space_id), "Space Id"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(address_space.next), "Next"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(address_space.region_list),
 	 "Region List"},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(address_space.node), "Node"},
 =======
+=======
+>>>>>>> v3.18
 	{ACPI_EXD_HDLR_LIST, ACPI_EXD_OFFSET(address_space.next), "Next"},
 	{ACPI_EXD_RGN_LIST, ACPI_EXD_OFFSET(address_space.region_list),
 	 "Region List"},
 	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(address_space.node), "Node"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(address_space.context), "Context"}
 };
@@ -305,7 +348,11 @@ static struct acpi_exdump_info acpi_ex_dump_address_handler[6] = {
 static struct acpi_exdump_info acpi_ex_dump_notify[7] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_notify), NULL},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(notify.node), "Node"},
+=======
+	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(notify.node), "Node"},
+>>>>>>> v3.18
 =======
 	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(notify.node), "Node"},
 >>>>>>> v3.18
@@ -318,10 +365,13 @@ static struct acpi_exdump_info acpi_ex_dump_notify[7] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Miscellaneous tables */
 
 static struct acpi_exdump_info acpi_ex_dump_common[4] = {
 =======
+=======
+>>>>>>> v3.18
 static struct acpi_exdump_info acpi_ex_dump_extra[6] = {
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_extra), NULL},
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(extra.method_REG), "_REG Method"},
@@ -341,13 +391,21 @@ static struct acpi_exdump_info acpi_ex_dump_data[3] = {
 /* Miscellaneous tables */
 
 static struct acpi_exdump_info acpi_ex_dump_common[5] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ACPI_EXD_INIT, ACPI_EXD_TABLE_SIZE(acpi_ex_dump_common), NULL},
 	{ACPI_EXD_TYPE, 0, NULL},
 	{ACPI_EXD_UINT16, ACPI_EXD_OFFSET(common.reference_count),
 	 "Reference Count"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(common.flags), "Flags"}
+=======
+	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(common.flags), "Flags"},
+	{ACPI_EXD_LIST, ACPI_EXD_OFFSET(common.next_object), "Object List"}
+>>>>>>> v3.18
 =======
 	{ACPI_EXD_UINT8, ACPI_EXD_OFFSET(common.flags), "Flags"},
 	{ACPI_EXD_LIST, ACPI_EXD_OFFSET(common.next_object), "Object List"}
@@ -367,6 +425,7 @@ static struct acpi_exdump_info acpi_ex_dump_field_common[7] = {
 	{ACPI_EXD_UINT32, ACPI_EXD_OFFSET(common_field.base_byte_offset),
 	 "Base Byte Offset"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ACPI_EXD_POINTER, ACPI_EXD_OFFSET(common_field.node), "Parent Node"}
 };
 
@@ -377,6 +436,8 @@ static struct acpi_exdump_info acpi_ex_dump_node[5] = {
 	{ACPI_EXD_POINTER, ACPI_EXD_NSOFFSET(child), "Child List"},
 	{ACPI_EXD_POINTER, ACPI_EXD_NSOFFSET(peer), "Next Peer"}
 =======
+=======
+>>>>>>> v3.18
 	{ACPI_EXD_NODE, ACPI_EXD_OFFSET(common_field.node), "Parent Node"}
 };
 
@@ -388,6 +449,9 @@ static struct acpi_exdump_info acpi_ex_dump_node[7] = {
 	{ACPI_EXD_NODE, ACPI_EXD_NSOFFSET(parent), "Parent"},
 	{ACPI_EXD_NODE, ACPI_EXD_NSOFFSET(child), "Child"},
 	{ACPI_EXD_NODE, ACPI_EXD_NSOFFSET(peer), "Peer"}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -422,7 +486,13 @@ static struct acpi_exdump_info *acpi_ex_dump_info[] = {
 	NULL,
 	NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL
+=======
+	NULL,
+	acpi_ex_dump_extra,
+	acpi_ex_dump_data
+>>>>>>> v3.18
 =======
 	NULL,
 	acpi_ex_dump_extra,
@@ -451,14 +521,20 @@ acpi_ex_dump_object(union acpi_operand_object *obj_desc,
 	u8 *target;
 	char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 count;
 =======
+=======
+>>>>>>> v3.18
 	const char *reference_name;
 	u8 count;
 	union acpi_operand_object *start;
 	union acpi_operand_object *data = NULL;
 	union acpi_operand_object *next;
 	struct acpi_namespace_node *node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!info) {
@@ -479,6 +555,10 @@ acpi_ex_dump_object(union acpi_operand_object *obj_desc,
 		switch (info->opcode) {
 		case ACPI_EXD_INIT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -487,9 +567,15 @@ acpi_ex_dump_object(union acpi_operand_object *obj_desc,
 		case ACPI_EXD_TYPE:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acpi_ex_out_string("Type",
 					   acpi_ut_get_object_type_name
 					   (obj_desc));
+=======
+			acpi_os_printf("%20s : %2.2X [%s]\n", "Type",
+				       obj_desc->common.type,
+				       acpi_ut_get_object_type_name(obj_desc));
+>>>>>>> v3.18
 =======
 			acpi_os_printf("%20s : %2.2X [%s]\n", "Type",
 				       obj_desc->common.type,
@@ -557,6 +643,7 @@ acpi_ex_dump_object(union acpi_operand_object *obj_desc,
 		case ACPI_EXD_REFERENCE:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acpi_ex_out_string("Class Name",
 					   ACPI_CAST_PTR(char,
 							 acpi_ut_get_reference_name
@@ -565,6 +652,8 @@ acpi_ex_dump_object(union acpi_operand_object *obj_desc,
 			break;
 
 =======
+=======
+>>>>>>> v3.18
 			reference_name = acpi_ut_get_reference_name(obj_desc);
 			acpi_ex_out_string("Class Name",
 					   ACPI_CAST_PTR(char, reference_name));
@@ -686,6 +775,9 @@ acpi_ex_dump_object(union acpi_operand_object *obj_desc,
 			acpi_os_printf("\n");
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 
@@ -877,8 +969,13 @@ void acpi_ex_dump_operand(union acpi_operand_object *obj_desc, u32 depth)
 		} else {
 			acpi_os_printf(" base %8.8X%8.8X Length %X\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       ACPI_FORMAT_UINT64(obj_desc->region.
 							  address),
+=======
+				       ACPI_FORMAT_NATIVE_UINT(obj_desc->region.
+							       address),
+>>>>>>> v3.18
 =======
 				       ACPI_FORMAT_NATIVE_UINT(obj_desc->region.
 							       address),
@@ -979,6 +1076,10 @@ void acpi_ex_dump_operand(union acpi_operand_object *obj_desc, u32 depth)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1084,10 +1185,15 @@ void acpi_ex_dump_namespace_node(struct acpi_namespace_node *node, u32 flags)
 
 	acpi_os_printf("%20s : %4.4s\n", "Name", acpi_ut_get_node_name(node));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_ex_out_string("Type", acpi_ut_get_type_name(node->type));
 	acpi_ex_out_pointer("Attached Object",
 			    acpi_ns_get_attached_object(node));
 	acpi_ex_out_pointer("Parent", node->parent);
+=======
+	acpi_os_printf("%20s : %2.2X [%s]\n", "Type",
+		       node->type, acpi_ut_get_type_name(node->type));
+>>>>>>> v3.18
 =======
 	acpi_os_printf("%20s : %2.2X [%s]\n", "Type",
 		       node->type, acpi_ut_get_type_name(node->type));
@@ -1285,6 +1391,7 @@ acpi_ex_dump_object_descriptor(union acpi_operand_object *obj_desc, u32 flags)
 			       object);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ex_dump_object_descriptor(((struct acpi_namespace_node *)
 						obj_desc)->object, flags);
 		return_VOID;
@@ -1302,6 +1409,8 @@ acpi_ex_dump_object_descriptor(union acpi_operand_object *obj_desc, u32 flags)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		obj_desc = ((struct acpi_namespace_node *)obj_desc)->object;
 		goto dump_object;
 	}
@@ -1322,6 +1431,9 @@ acpi_ex_dump_object_descriptor(union acpi_operand_object *obj_desc, u32 flags)
 
 dump_object:
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Common Fields */
 
@@ -1331,7 +1443,10 @@ dump_object:
 
 	acpi_ex_dump_object(obj_desc, acpi_ex_dump_info[obj_desc->common.type]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (obj_desc->common.type == ACPI_TYPE_REGION) {
 		obj_desc = obj_desc->common.next_object;
@@ -1348,6 +1463,9 @@ dump_object:
 				    acpi_ex_dump_info[obj_desc->common.type]);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return_VOID;
 }

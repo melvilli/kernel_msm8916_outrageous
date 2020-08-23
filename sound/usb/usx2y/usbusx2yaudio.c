@@ -684,9 +684,12 @@ static int usX2Y_rate_set(struct usX2Ydev *usX2Y, int rate)
 			usb_fill_bulk_urb(us->urb[i], usX2Y->dev, usb_sndbulkpipe(usX2Y->dev, 4),
 					  usbdata + i, 2, i_usX2Y_04Int, usX2Y);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OLD_USB
 			us->urb[i]->transfer_flags = USB_QUEUE_BULK;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -759,6 +762,7 @@ static int snd_usX2Y_pcm_hw_params(struct snd_pcm_substream *substream,
 	snd_pcm_format_t	format = params_format(hw_params);
 	struct snd_card *card = substream->pstr->pcm->card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *list;
 
 	snd_printdd("snd_usX2Y_hw_params(%p, %p)\n", substream, hw_params);
@@ -790,6 +794,8 @@ static int snd_usX2Y_pcm_hw_params(struct snd_pcm_substream *substream,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct usX2Ydev	*dev = usX2Y(card);
 	int i;
 
@@ -828,6 +834,9 @@ static int snd_usX2Y_pcm_hw_params(struct snd_pcm_substream *substream,
  error:
 	mutex_unlock(&usX2Y(card)->pcm_mutex);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -839,7 +848,11 @@ static int snd_usX2Y_pcm_hw_free(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	struct snd_usX2Y_substream *subs = runtime->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&subs->usX2Y->prepare_mutex);
+=======
+	mutex_lock(&subs->usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&subs->usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -864,7 +877,11 @@ static int snd_usX2Y_pcm_hw_free(struct snd_pcm_substream *substream)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&subs->usX2Y->prepare_mutex);
+=======
+	mutex_unlock(&subs->usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&subs->usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -885,7 +902,11 @@ static int snd_usX2Y_pcm_prepare(struct snd_pcm_substream *substream)
 	snd_printdd("snd_usX2Y_pcm_prepare(%p)\n", substream);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&usX2Y->prepare_mutex);
+=======
+	mutex_lock(&usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -909,7 +930,11 @@ static int snd_usX2Y_pcm_prepare(struct snd_pcm_substream *substream)
 
  up_prepare_mutex:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&usX2Y->prepare_mutex);
+=======
+	mutex_unlock(&usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&usX2Y->pcm_mutex);
 >>>>>>> v3.18

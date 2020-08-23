@@ -21,6 +21,10 @@
 #include <linux/module.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -30,6 +34,11 @@
 #define PCF8563_REG_ST1		0x00 /* status */
 #define PCF8563_REG_ST2		0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCF8563_BIT_AIE		(1 << 1)
+#define PCF8563_BIT_AF		(1 << 3)
+>>>>>>> v3.18
 =======
 #define PCF8563_BIT_AIE		(1 << 1)
 #define PCF8563_BIT_AF		(1 << 3)
@@ -45,9 +54,12 @@
 
 #define PCF8563_REG_AMN		0x09 /* alarm */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCF8563_REG_AHR		0x0A
 #define PCF8563_REG_ADM		0x0B
 #define PCF8563_REG_ADW		0x0C
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -79,6 +91,7 @@ struct pcf8563 {
 	int c_polarity;	/* 0: MO_C=1 means 19xx, otherwise MO_C=1 means 20xx */
 	int voltage_low; /* incicates if a low_voltage was detected */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /*
@@ -91,6 +104,8 @@ static int pcf8563_get_datetime(struct i2c_client *client, struct rtc_time *tm)
 	unsigned char buf[13] = { PCF8563_REG_ST1 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	struct i2c_client *client;
 };
@@ -98,11 +113,15 @@ static int pcf8563_get_datetime(struct i2c_client *client, struct rtc_time *tm)
 static int pcf8563_read_block_data(struct i2c_client *client, unsigned char reg,
 				   unsigned char length, unsigned char *buf)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct i2c_msg msgs[] = {
 		{/* setup read ptr */
 			.addr = client->addr,
 			.len = 1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			.buf = buf
 		},
@@ -111,19 +130,27 @@ static int pcf8563_read_block_data(struct i2c_client *client, unsigned char reg,
 			.flags = I2C_M_RD,
 			.len = 13,
 =======
+=======
+>>>>>>> v3.18
 			.buf = &reg,
 		},
 		{
 			.addr = client->addr,
 			.flags = I2C_M_RD,
 			.len = length,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.buf = buf
 		},
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* read registers */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((i2c_transfer(client->adapter, msgs, 2)) != 2) {
@@ -132,7 +159,10 @@ static int pcf8563_read_block_data(struct i2c_client *client, unsigned char reg,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -234,6 +264,9 @@ static int pcf8563_get_datetime(struct i2c_client *client, struct rtc_time *tm)
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (buf[PCF8563_REG_SC] & PCF8563_SC_LV) {
 		pcf8563->voltage_low = 1;
@@ -282,7 +315,11 @@ static int pcf8563_set_datetime(struct i2c_client *client, struct rtc_time *tm)
 {
 	struct pcf8563 *pcf8563 = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err;
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -312,6 +349,7 @@ static int pcf8563_set_datetime(struct i2c_client *client, struct rtc_time *tm)
 	buf[PCF8563_REG_DW] = tm->tm_wday & 0x07;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* write register's data */
 	for (i = 0; i < 7; i++) {
 		unsigned char data[2] = { PCF8563_REG_SC + i,
@@ -326,10 +364,15 @@ static int pcf8563_set_datetime(struct i2c_client *client, struct rtc_time *tm)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	err = pcf8563_write_block_data(client, PCF8563_REG_SC,
 				9 - PCF8563_REG_SC, buf + PCF8563_REG_SC);
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -384,7 +427,10 @@ static int pcf8563_rtc_set_time(struct device *dev, struct rtc_time *tm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pcf8563_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *tm)
 {
 	struct i2c_client *client = to_i2c_client(dev);
@@ -448,12 +494,21 @@ static int pcf8563_irq_enable(struct device *dev, unsigned int enabled)
 	return pcf8563_set_alarm_mode(to_i2c_client(dev), !!enabled);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct rtc_class_ops pcf8563_rtc_ops = {
 	.ioctl		= pcf8563_rtc_ioctl,
 	.read_time	= pcf8563_rtc_read_time,
 	.set_time	= pcf8563_rtc_set_time,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.read_alarm	= pcf8563_rtc_read_alarm,
+	.set_alarm	= pcf8563_rtc_set_alarm,
+	.alarm_irq_enable = pcf8563_irq_enable,
+>>>>>>> v3.18
 =======
 	.read_alarm	= pcf8563_rtc_read_alarm,
 	.set_alarm	= pcf8563_rtc_set_alarm,
@@ -466,6 +521,10 @@ static int pcf8563_probe(struct i2c_client *client,
 {
 	struct pcf8563 *pcf8563;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -484,6 +543,11 @@ static int pcf8563_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, pcf8563);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pcf8563->client = client;
+	device_set_wakeup_capable(&client->dev, 1);
+>>>>>>> v3.18
 =======
 	pcf8563->client = client;
 	device_set_wakeup_capable(&client->dev, 1);
@@ -497,12 +561,15 @@ static int pcf8563_probe(struct i2c_client *client,
 		return PTR_ERR(pcf8563->rtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 static int pcf8563_remove(struct i2c_client *client)
 {
 =======
+=======
+>>>>>>> v3.18
 	if (client->irq > 0) {
 		err = devm_request_threaded_irq(&client->dev, client->irq,
 				NULL, pcf8563_irq,
@@ -516,6 +583,9 @@ static int pcf8563_remove(struct i2c_client *client)
 
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -543,7 +613,10 @@ static struct i2c_driver pcf8563_driver = {
 	},
 	.probe		= pcf8563_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= pcf8563_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= pcf8563_id,

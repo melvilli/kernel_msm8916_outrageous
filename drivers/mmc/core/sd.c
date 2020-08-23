@@ -15,6 +15,10 @@
 #include <linux/slab.h>
 #include <linux/stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_runtime.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_runtime.h>
 >>>>>>> v3.18
@@ -24,7 +28,10 @@
 #include <linux/mmc/mmc.h>
 #include <linux/mmc/sd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_runtime.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -35,12 +42,15 @@
 #include "sd_ops.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UHS_SDR104_MIN_DTR	(100 * 1000 * 1000)
 #define UHS_DDR50_MIN_DTR	(50 * 1000 * 1000)
 #define UHS_SDR50_MIN_DTR	(50 * 1000 * 1000)
 #define UHS_SDR25_MIN_DTR	(25 * 1000 * 1000)
 #define UHS_SDR12_MIN_DTR	(12.5 * 1000 * 1000)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const unsigned int tran_exp[] = {
@@ -144,6 +154,10 @@ static int mmc_decode_csd(struct mmc_card *card)
 		csd->write_misalign = UNSTUFF_BITS(resp, 78, 1);
 		csd->read_misalign = UNSTUFF_BITS(resp, 77, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		csd->dsr_imp = UNSTUFF_BITS(resp, 76, 1);
+>>>>>>> v3.18
 =======
 		csd->dsr_imp = UNSTUFF_BITS(resp, 76, 1);
 >>>>>>> v3.18
@@ -249,8 +263,13 @@ static int mmc_read_ssr(struct mmc_card *card)
 
 	if (!(card->csd.cmdclass & CCC_APP_SPEC)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: card lacks mandatory SD Status "
 			"function.\n", mmc_hostname(card->host));
+=======
+		pr_warn("%s: card lacks mandatory SD Status function\n",
+			mmc_hostname(card->host));
+>>>>>>> v3.18
 =======
 		pr_warn("%s: card lacks mandatory SD Status function\n",
 			mmc_hostname(card->host));
@@ -265,8 +284,13 @@ static int mmc_read_ssr(struct mmc_card *card)
 	err = mmc_app_sd_status(card, ssr);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: problem reading SD Status "
 			"register.\n", mmc_hostname(card->host));
+=======
+		pr_warn("%s: problem reading SD Status register\n",
+			mmc_hostname(card->host));
+>>>>>>> v3.18
 =======
 		pr_warn("%s: problem reading SD Status register\n",
 			mmc_hostname(card->host));
@@ -295,8 +319,13 @@ static int mmc_read_ssr(struct mmc_card *card)
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: SD Status: Invalid Allocation Unit size.\n",
 				   mmc_hostname(card->host));
+=======
+			pr_warn("%s: SD Status: Invalid Allocation Unit size\n",
+				mmc_hostname(card->host));
+>>>>>>> v3.18
 =======
 			pr_warn("%s: SD Status: Invalid Allocation Unit size\n",
 				mmc_hostname(card->host));
@@ -321,8 +350,12 @@ static int mmc_read_switch(struct mmc_card *card)
 
 	if (!(card->csd.cmdclass & CCC_SWITCH)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: card lacks mandatory switch "
 			"function, performance might suffer.\n",
+=======
+		pr_warn("%s: card lacks mandatory switch function, performance might suffer\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: card lacks mandatory switch function, performance might suffer\n",
 >>>>>>> v3.18
@@ -355,7 +388,11 @@ static int mmc_read_switch(struct mmc_card *card)
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: problem reading Bus Speed modes.\n",
+=======
+		pr_warn("%s: problem reading Bus Speed modes\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: problem reading Bus Speed modes\n",
 >>>>>>> v3.18
@@ -415,8 +452,12 @@ int mmc_sd_switch_hs(struct mmc_card *card)
 
 	if ((status[16] & 0xF) != 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: Problem switching card "
 			"into high-speed mode!\n",
+=======
+		pr_warn("%s: Problem switching card into high-speed mode!\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Problem switching card into high-speed mode!\n",
 >>>>>>> v3.18
@@ -487,7 +528,11 @@ static int sd_select_driver_type(struct mmc_card *card, u8 *status)
 
 	if ((status[15] & 0xF) != drive_strength) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: Problem setting drive strength!\n",
+=======
+		pr_warn("%s: Problem setting drive strength!\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Problem setting drive strength!\n",
 >>>>>>> v3.18
@@ -513,6 +558,7 @@ static void sd_update_bus_speed_mode(struct mmc_card *card)
 
 	if ((card->host->caps & MMC_CAP_UHS_SDR104) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (card->sw_caps.sd3_bus_mode & SD_MODE_UHS_SDR104) &&
 	    (card->host->f_max > UHS_SDR104_MIN_DTR)) {
 			card->sd_bus_speed = UHS_SDR104_BUS_SPEED;
@@ -530,6 +576,8 @@ static void sd_update_bus_speed_mode(struct mmc_card *card)
 		   (card->sw_caps.sd3_bus_mode & SD_MODE_UHS_SDR25) &&
 		 (card->host->f_max > UHS_SDR25_MIN_DTR)) {
 =======
+=======
+>>>>>>> v3.18
 	    (card->sw_caps.sd3_bus_mode & SD_MODE_UHS_SDR104)) {
 			card->sd_bus_speed = UHS_SDR104_BUS_SPEED;
 	} else if ((card->host->caps & MMC_CAP_UHS_DDR50) &&
@@ -542,6 +590,9 @@ static void sd_update_bus_speed_mode(struct mmc_card *card)
 	} else if ((card->host->caps & (MMC_CAP_UHS_SDR104 |
 		    MMC_CAP_UHS_SDR50 | MMC_CAP_UHS_SDR25)) &&
 		   (card->sw_caps.sd3_bus_mode & SD_MODE_UHS_SDR25)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			card->sd_bus_speed = UHS_SDR25_BUS_SPEED;
 	} else if ((card->host->caps & (MMC_CAP_UHS_SDR104 |
@@ -588,7 +639,11 @@ static int sd_set_bus_speed_mode(struct mmc_card *card, u8 *status)
 
 	if ((status[16] & 0xF) != card->sd_bus_speed)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: Problem setting bus speed mode!\n",
+=======
+		pr_warn("%s: Problem setting bus speed mode!\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Problem setting bus speed mode!\n",
 >>>>>>> v3.18
@@ -672,7 +727,11 @@ static int sd_set_current_limit(struct mmc_card *card, u8 *status)
 
 		if (((status[15] >> 4) & 0x0F) != current_limit)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Problem setting current limit!\n",
+=======
+			pr_warn("%s: Problem setting current limit!\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Problem setting current limit!\n",
 >>>>>>> v3.18
@@ -683,6 +742,7 @@ static int sd_set_current_limit(struct mmc_card *card, u8 *status)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * mmc_sd_change_bus_speed() - Change SD card bus frequency at runtime
@@ -755,6 +815,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * UHS-I specific initialization procedure
  */
@@ -808,9 +870,12 @@ static int mmc_sd_init_uhs_card(struct mmc_card *card)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SPI mode doesn't define CMD19 */
 	if (!mmc_host_is_spi(card->host) && card->host->ops->execute_tuning) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * SPI mode doesn't define CMD19 and tuning is only valid for SDR50 and
 	 * SDR104 mode SD-cards. Note that tuning is mandatory for SDR104.
@@ -818,6 +883,9 @@ static int mmc_sd_init_uhs_card(struct mmc_card *card)
 	if (!mmc_host_is_spi(card->host) && card->host->ops->execute_tuning &&
 			(card->sd_bus_speed == UHS_SDR50_BUS_SPEED ||
 			 card->sd_bus_speed == UHS_SDR104_BUS_SPEED)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mmc_host_clk_hold(card->host);
 		err = card->host->ops->execute_tuning(card->host,
@@ -863,6 +931,7 @@ static struct attribute *sd_std_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct attribute_group sd_std_attr_group = {
 	.attrs = sd_std_attrs,
@@ -876,10 +945,15 @@ static const struct attribute_group *sd_attr_groups[] = {
 struct device_type sd_type = {
 	.groups = sd_attr_groups,
 =======
+=======
+>>>>>>> v3.18
 ATTRIBUTE_GROUPS(sd_std);
 
 struct device_type sd_type = {
 	.groups = sd_std_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -892,6 +966,10 @@ int mmc_sd_get_cid(struct mmc_host *host, u32 ocr, u32 *cid, u32 *rocr)
 	u32 max_current;
 	int retries = 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 pocr = ocr;
+>>>>>>> v3.18
 =======
 	u32 pocr = ocr;
 >>>>>>> v3.18
@@ -900,8 +978,12 @@ try_again:
 	if (!retries) {
 		ocr &= ~SD_OCR_S18R;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: Skipping voltage switch\n",
 			mmc_hostname(host));
+=======
+		pr_warn("%s: Skipping voltage switch\n", mmc_hostname(host));
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Skipping voltage switch\n", mmc_hostname(host));
 >>>>>>> v3.18
@@ -952,7 +1034,12 @@ try_again:
 	if (!mmc_host_is_spi(host) && rocr &&
 	   ((*rocr & 0x41000000) == 0x41000000)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = mmc_set_signal_voltage(host, MMC_SIGNAL_VOLTAGE_180);
+=======
+		err = mmc_set_signal_voltage(host, MMC_SIGNAL_VOLTAGE_180,
+					pocr);
+>>>>>>> v3.18
 =======
 		err = mmc_set_signal_voltage(host, MMC_SIGNAL_VOLTAGE_180,
 					pocr);
@@ -997,9 +1084,12 @@ int mmc_sd_setup_card(struct mmc_host *host, struct mmc_card *card,
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 	int retries;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1029,6 +1119,7 @@ int mmc_sd_setup_card(struct mmc_host *host, struct mmc_card *card,
 		 * Fetch switch information from card.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 		for (retries = 1; retries <= 3; retries++) {
 			err = mmc_read_switch(card);
@@ -1049,6 +1140,9 @@ int mmc_sd_setup_card(struct mmc_host *host, struct mmc_card *card,
 		err = mmc_read_switch(card);
 #endif
 
+=======
+		err = mmc_read_switch(card);
+>>>>>>> v3.18
 =======
 		err = mmc_read_switch(card);
 >>>>>>> v3.18
@@ -1082,9 +1176,13 @@ int mmc_sd_setup_card(struct mmc_host *host, struct mmc_card *card,
 
 		if (ro < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: host does not "
 				"support reading read-only "
 				"switch. assuming write-enable.\n",
+=======
+			pr_warn("%s: host does not support reading read-only switch, assuming write-enable\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s: host does not support reading read-only switch, assuming write-enable\n",
 >>>>>>> v3.18
@@ -1102,7 +1200,11 @@ unsigned mmc_sd_get_max_clock(struct mmc_card *card)
 	unsigned max_dtr = (unsigned int)-1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mmc_card_highspeed(card)) {
+=======
+	if (mmc_card_hs(card)) {
+>>>>>>> v3.18
 =======
 	if (mmc_card_hs(card)) {
 >>>>>>> v3.18
@@ -1116,12 +1218,15 @@ unsigned mmc_sd_get_max_clock(struct mmc_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mmc_sd_go_highspeed(struct mmc_card *card)
 {
 	mmc_card_set_highspeed(card);
 	mmc_set_timing(card->host, MMC_TIMING_SD_HS);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -1159,6 +1264,10 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 			return PTR_ERR(card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		card->ocr = ocr;
+>>>>>>> v3.18
 =======
 		card->ocr = ocr;
 >>>>>>> v3.18
@@ -1173,7 +1282,11 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 		err = mmc_send_relative_addr(host, &card->rca);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return err;
+=======
+			goto free_card;
+>>>>>>> v3.18
 =======
 			goto free_card;
 >>>>>>> v3.18
@@ -1183,7 +1296,11 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 		err = mmc_sd_get_csd(host, card);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return err;
+=======
+			goto free_card;
+>>>>>>> v3.18
 =======
 			goto free_card;
 >>>>>>> v3.18
@@ -1193,7 +1310,10 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * handling only for cards supporting DSR and hosts requesting
 	 * DSR configuration
 	 */
@@ -1201,6 +1321,9 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 		mmc_set_dsr(host);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Select card, as all following commands rely on that.
 	 */
@@ -1208,7 +1331,11 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 		err = mmc_select_card(card);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return err;
+=======
+			goto free_card;
+>>>>>>> v3.18
 =======
 			goto free_card;
 >>>>>>> v3.18
@@ -1224,9 +1351,12 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 		if (err)
 			goto free_card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Card is an ultra-high-speed card */
 		mmc_card_set_uhs(card);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -1236,7 +1366,11 @@ static int mmc_sd_init_card(struct mmc_host *host, u32 ocr,
 		err = mmc_sd_switch_hs(card);
 		if (err > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mmc_sd_go_highspeed(card);
+=======
+			mmc_set_timing(card->host, MMC_TIMING_SD_HS);
+>>>>>>> v3.18
 =======
 			mmc_set_timing(card->host, MMC_TIMING_SD_HS);
 >>>>>>> v3.18
@@ -1280,12 +1414,17 @@ static void mmc_sd_remove(struct mmc_host *host)
 	BUG_ON(!host->card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_exit_clk_scaling(host);
 	mmc_remove_card(host->card);
 
 	mmc_claim_host(host);
 	host->card = NULL;
 	mmc_release_host(host);
+=======
+	mmc_remove_card(host->card);
+	host->card = NULL;
+>>>>>>> v3.18
 =======
 	mmc_remove_card(host->card);
 	host->card = NULL;
@@ -1306,10 +1445,14 @@ static int mmc_sd_alive(struct mmc_host *host)
 static void mmc_sd_detect(struct mmc_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 	int retries = 5;
 #endif
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -1318,8 +1461,12 @@ static void mmc_sd_detect(struct mmc_host *host)
 	BUG_ON(!host->card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_rpm_hold(host, &host->card->dev);
 	mmc_claim_host(host);
+=======
+	mmc_get_card(host->card);
+>>>>>>> v3.18
 =======
 	mmc_get_card(host->card);
 >>>>>>> v3.18
@@ -1327,6 +1474,7 @@ static void mmc_sd_detect(struct mmc_host *host)
 	/*
 	 * Just check if our card has been removed.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 	while(retries) {
@@ -1360,6 +1508,11 @@ static void mmc_sd_detect(struct mmc_host *host)
 
 	mmc_put_card(host->card);
 >>>>>>> v3.18
+=======
+	err = _mmc_detect_card_removed(host);
+
+	mmc_put_card(host->card);
+>>>>>>> v3.18
 
 	if (err) {
 		mmc_sd_remove(host);
@@ -1372,10 +1525,14 @@ static void mmc_sd_detect(struct mmc_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Suspend callback from host.
  */
 static int mmc_sd_suspend(struct mmc_host *host)
+=======
+static int _mmc_sd_suspend(struct mmc_host *host)
+>>>>>>> v3.18
 =======
 static int _mmc_sd_suspend(struct mmc_host *host)
 >>>>>>> v3.18
@@ -1385,6 +1542,7 @@ static int _mmc_sd_suspend(struct mmc_host *host)
 	BUG_ON(!host);
 	BUG_ON(!host->card);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Disable clock scaling before suspend and enable it after resume so
@@ -1398,6 +1556,8 @@ static int _mmc_sd_suspend(struct mmc_host *host)
 	host->card->state &= ~MMC_STATE_HIGHSPEED;
 	mmc_release_host(host);
 =======
+=======
+>>>>>>> v3.18
 	mmc_claim_host(host);
 
 	if (mmc_card_suspended(host->card))
@@ -1428,12 +1588,16 @@ static int mmc_sd_suspend(struct mmc_host *host)
 		pm_runtime_disable(&host->card->dev);
 		pm_runtime_set_suspended(&host->card->dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Resume callback from host.
  *
@@ -1447,18 +1611,24 @@ static int mmc_sd_resume(struct mmc_host *host)
 	int retries;
 #endif
 =======
+=======
+>>>>>>> v3.18
  * This function tries to determine if the same card is still present
  * and, if so, restore all state to it.
  */
 static int _mmc_sd_resume(struct mmc_host *host)
 {
 	int err = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!host);
 	BUG_ON(!host->card);
 
 	mmc_claim_host(host);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 	retries = 5;
@@ -1489,6 +1659,8 @@ static int _mmc_sd_resume(struct mmc_host *host)
 	if (mmc_can_scale_clk(host))
 		mmc_init_clk_scaling(host);
 =======
+=======
+>>>>>>> v3.18
 
 	if (!mmc_card_suspended(host->card))
 		goto out;
@@ -1533,13 +1705,19 @@ static int mmc_sd_runtime_suspend(struct mmc_host *host)
 	if (err)
 		pr_err("%s: error %d doing aggessive suspend\n",
 			mmc_hostname(host), err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Callback for runtime_resume.
  */
@@ -1558,11 +1736,15 @@ static int mmc_sd_runtime_resume(struct mmc_host *host)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mmc_sd_power_restore(struct mmc_host *host)
 {
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Disable clk scaling to avoid switching frequencies intermittently */
 	mmc_disable_clk_scaling(host);
@@ -1576,10 +1758,15 @@ static int mmc_sd_power_restore(struct mmc_host *host)
 		mmc_init_clk_scaling(host);
 
 =======
+=======
+>>>>>>> v3.18
 	mmc_claim_host(host);
 	ret = mmc_sd_init_card(host, host->card->ocr, host->card);
 	mmc_release_host(host);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1587,6 +1774,7 @@ static int mmc_sd_power_restore(struct mmc_host *host)
 static const struct mmc_bus_ops mmc_sd_ops = {
 	.remove = mmc_sd_remove,
 	.detect = mmc_sd_detect,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.suspend = NULL,
 	.resume = NULL,
@@ -1602,10 +1790,15 @@ static const struct mmc_bus_ops mmc_sd_ops_unsafe = {
 	.runtime_suspend = mmc_sd_runtime_suspend,
 	.runtime_resume = mmc_sd_runtime_resume,
 >>>>>>> v3.18
+=======
+	.runtime_suspend = mmc_sd_runtime_suspend,
+	.runtime_resume = mmc_sd_runtime_resume,
+>>>>>>> v3.18
 	.suspend = mmc_sd_suspend,
 	.resume = mmc_sd_resume,
 	.power_restore = mmc_sd_power_restore,
 	.alive = mmc_sd_alive,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.change_bus_speed = mmc_sd_change_bus_speed,
 };
@@ -1626,6 +1819,11 @@ static void mmc_sd_attach_bus_ops(struct mmc_host *host)
 };
 
 >>>>>>> v3.18
+=======
+	.shutdown = mmc_sd_suspend,
+};
+
+>>>>>>> v3.18
 /*
  * Starting point for SD card init.
  */
@@ -1633,10 +1831,14 @@ int mmc_attach_sd(struct mmc_host *host)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ocr;
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 	int retries;
 #endif
+=======
+	u32 ocr, rocr;
+>>>>>>> v3.18
 =======
 	u32 ocr, rocr;
 >>>>>>> v3.18
@@ -1649,7 +1851,11 @@ int mmc_attach_sd(struct mmc_host *host)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_sd_attach_bus_ops(host);
+=======
+	mmc_attach_bus(host, &mmc_sd_ops);
+>>>>>>> v3.18
 =======
 	mmc_attach_bus(host, &mmc_sd_ops);
 >>>>>>> v3.18
@@ -1667,6 +1873,7 @@ int mmc_attach_sd(struct mmc_host *host)
 			goto err;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Sanity check the voltages that the card claims to
@@ -1691,12 +1898,19 @@ int mmc_attach_sd(struct mmc_host *host)
 =======
 	rocr = mmc_select_voltage(host, ocr);
 >>>>>>> v3.18
+=======
+	rocr = mmc_select_voltage(host, ocr);
+>>>>>>> v3.18
 
 	/*
 	 * Can we support the voltage(s) of the card(s)?
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host->ocr) {
+=======
+	if (!rocr) {
+>>>>>>> v3.18
 =======
 	if (!rocr) {
 >>>>>>> v3.18
@@ -1707,6 +1921,7 @@ int mmc_attach_sd(struct mmc_host *host)
 	/*
 	 * Detect and init the card.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MMC_PARANOID_SD_INIT
 	retries = 5;
@@ -1745,6 +1960,11 @@ int mmc_attach_sd(struct mmc_host *host)
 	if (err)
 		goto err;
 >>>>>>> v3.18
+=======
+	err = mmc_sd_init_card(host, rocr, NULL);
+	if (err)
+		goto err;
+>>>>>>> v3.18
 
 	mmc_release_host(host);
 	err = mmc_add_card(host->card);
@@ -1753,8 +1973,11 @@ int mmc_attach_sd(struct mmc_host *host)
 		goto remove_card;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_init_clk_scaling(host);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1767,9 +1990,15 @@ remove_card:
 err:
 	mmc_detach_bus(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
 		pr_err("%s: error %d whilst initialising SD card: rescan: %d\n",
 		       mmc_hostname(host), err, host->rescan_disable);
+=======
+
+	pr_err("%s: error %d whilst initialising SD card\n",
+		mmc_hostname(host), err);
+>>>>>>> v3.18
 =======
 
 	pr_err("%s: error %d whilst initialising SD card\n",

@@ -42,7 +42,11 @@ static int __init proc_softirqs_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_softirqs_init);
+=======
+fs_initcall(proc_softirqs_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_softirqs_init);
 >>>>>>> v3.18

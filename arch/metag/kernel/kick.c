@@ -27,6 +27,11 @@
  */
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hardirq.h>
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/hardirq.h>
 #include <linux/irq.h>
@@ -72,6 +77,10 @@ TBIRES
 kick_handler(TBIRES State, int SigNum, int Triggers, int Inst, PTBI pTBI)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pt_regs *old_regs;
+>>>>>>> v3.18
 =======
 	struct pt_regs *old_regs;
 >>>>>>> v3.18
@@ -89,6 +98,12 @@ kick_handler(TBIRES State, int SigNum, int Triggers, int Inst, PTBI pTBI)
 	trace_hardirqs_off();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	old_regs = set_irq_regs((struct pt_regs *)State.Sig.pCtx);
+	irq_enter();
+
+>>>>>>> v3.18
 =======
 	old_regs = set_irq_regs((struct pt_regs *)State.Sig.pCtx);
 	irq_enter();
@@ -113,6 +128,12 @@ kick_handler(TBIRES State, int SigNum, int Triggers, int Inst, PTBI pTBI)
 	WARN_ON(!handled);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	irq_exit();
+	set_irq_regs(old_regs);
+
+>>>>>>> v3.18
 =======
 	irq_exit();
 	set_irq_regs(old_regs);

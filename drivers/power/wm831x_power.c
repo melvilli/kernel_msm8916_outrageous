@@ -568,7 +568,11 @@ static int wm831x_power_probe(struct platform_device *pdev)
 	irq = wm831x_irq(wm831x, platform_get_irq_byname(pdev, "SYSLO"));
 	ret = request_threaded_irq(irq, NULL, wm831x_syslo_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   IRQF_TRIGGER_RISING | IRQF_ONESHOT, "System power low",
+=======
+				   IRQF_TRIGGER_RISING, "System power low",
+>>>>>>> v3.18
 =======
 				   IRQF_TRIGGER_RISING, "System power low",
 >>>>>>> v3.18
@@ -582,7 +586,11 @@ static int wm831x_power_probe(struct platform_device *pdev)
 	irq = wm831x_irq(wm831x, platform_get_irq_byname(pdev, "PWR SRC"));
 	ret = request_threaded_irq(irq, NULL, wm831x_pwr_src_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   IRQF_TRIGGER_RISING | IRQF_ONESHOT, "Power source",
+=======
+				   IRQF_TRIGGER_RISING, "Power source",
+>>>>>>> v3.18
 =======
 				   IRQF_TRIGGER_RISING, "Power source",
 >>>>>>> v3.18
@@ -599,7 +607,11 @@ static int wm831x_power_probe(struct platform_device *pdev)
 							 wm831x_bat_irqs[i]));
 		ret = request_threaded_irq(irq, NULL, wm831x_bat_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+=======
+					   IRQF_TRIGGER_RISING,
+>>>>>>> v3.18
 =======
 					   IRQF_TRIGGER_RISING,
 >>>>>>> v3.18

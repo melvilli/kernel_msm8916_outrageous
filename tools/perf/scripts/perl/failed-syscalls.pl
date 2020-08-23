@@ -27,12 +27,18 @@ sub raw_syscalls::sys_exit
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 sub syscalls::sys_exit
 {
 	raw_syscalls::sys_exit(@_)
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 sub trace_end
 {

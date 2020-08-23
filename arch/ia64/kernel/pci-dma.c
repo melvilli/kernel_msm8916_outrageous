@@ -34,6 +34,7 @@ int force_iommu __read_mostly;
 int iommu_pass_through;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Dummy device used for NULL arguments (normally ISA). Better would
    be probably a smaller DMA mask, but this is bug-to-bug compatible
    to i386. */
@@ -43,6 +44,8 @@ struct device fallback_dev = {
 	.dma_mask = &fallback_dev.coherent_dma_mask,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct dma_map_ops intel_dma_ops;

@@ -20,12 +20,15 @@
 #define _MEI_INTERFACE_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mei.h>
 #include "mei_dev.h"
 #include "client.h"
 
 struct mei_me_hw {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqreturn.h>
 #include <linux/pci.h>
 #include <linux/mei.h>
@@ -64,6 +67,9 @@ struct mei_cfg {
  */
 struct mei_me_hw {
 	const struct mei_cfg *cfg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *mem_addr;
 	/*
@@ -72,6 +78,10 @@ struct mei_me_hw {
 	u32 host_hw_state;
 	u32 me_hw_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum mei_pg_state pg_state;
+>>>>>>> v3.18
 =======
 	enum mei_pg_state pg_state;
 >>>>>>> v3.18
@@ -80,8 +90,11 @@ struct mei_me_hw {
 #define to_me_hw(dev) (struct mei_me_hw *)((dev)->hw)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mei_device *mei_me_dev_init(struct pci_dev *pdev);
 =======
+=======
+>>>>>>> v3.18
 extern const struct mei_cfg mei_me_legacy_cfg;
 extern const struct mei_cfg mei_me_ich_cfg;
 extern const struct mei_cfg mei_me_pch_cfg;
@@ -93,6 +106,9 @@ struct mei_device *mei_me_dev_init(struct pci_dev *pdev,
 
 int mei_me_pg_set_sync(struct mei_device *dev);
 int mei_me_pg_unset_sync(struct mei_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 irqreturn_t mei_me_irq_quick_handler(int irq, void *dev_id);

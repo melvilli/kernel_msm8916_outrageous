@@ -50,10 +50,13 @@ struct posix_acl *gfs2_get_acl(struct inode *inode, int type)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acl = get_cached_acl(&ip->i_inode, type);
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	name = gfs2_acl_name(type);
@@ -72,6 +75,7 @@ struct posix_acl *gfs2_get_acl(struct inode *inode, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gfs2_set_mode(struct inode *inode, umode_t mode)
 {
 	int error = 0;
@@ -88,6 +92,9 @@ static int gfs2_acl_set(struct inode *inode, int type, struct posix_acl *acl)
 =======
 int gfs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 >>>>>>> v3.18
+=======
+int gfs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
+>>>>>>> v3.18
 {
 	int error;
 	int len;
@@ -95,6 +102,7 @@ int gfs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 	const char *name = gfs2_acl_name(type);
 
 	BUG_ON(name == NULL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len = posix_acl_to_xattr(&init_user_ns, acl, NULL, 0);
 	if (len == 0)
@@ -311,6 +319,8 @@ const struct xattr_handler gfs2_xattr_system_handler = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (acl->a_count > GFS2_ACL_MAX_ENTRIES(GFS2_SB(inode)))
 		return -E2BIG;
@@ -358,4 +368,7 @@ out:
 	kfree(data);
 	return error;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

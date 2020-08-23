@@ -54,6 +54,10 @@ static int utimes_common(struct path *path, struct timespec *times)
 	struct iattr newattrs;
 	struct inode *inode = path->dentry->d_inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct inode *delegated_inode = NULL;
+>>>>>>> v3.18
 =======
 	struct inode *delegated_inode = NULL;
 >>>>>>> v3.18
@@ -101,7 +105,11 @@ static int utimes_common(struct path *path, struct timespec *times)
 
 		if (!inode_owner_or_capable(inode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = inode_permission2(path->mnt, inode, MAY_WRITE);
+=======
+			error = inode_permission(inode, MAY_WRITE);
+>>>>>>> v3.18
 =======
 			error = inode_permission(inode, MAY_WRITE);
 >>>>>>> v3.18
@@ -110,10 +118,13 @@ static int utimes_common(struct path *path, struct timespec *times)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&inode->i_mutex);
 	error = notify_change2(path->mnt, path->dentry, &newattrs);
 	mutex_unlock(&inode->i_mutex);
 =======
+=======
+>>>>>>> v3.18
 retry_deleg:
 	mutex_lock(&inode->i_mutex);
 	error = notify_change(path->dentry, &newattrs, &delegated_inode);
@@ -123,6 +134,9 @@ retry_deleg:
 		if (!error)
 			goto retry_deleg;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 mnt_drop_write_and_out:

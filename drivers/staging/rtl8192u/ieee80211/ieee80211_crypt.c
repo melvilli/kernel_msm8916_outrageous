@@ -156,7 +156,11 @@ int ieee80211_unregister_crypto_ops(struct ieee80211_crypto_ops *ops)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ieee80211_crypto_ops * ieee80211_get_crypto_ops(const char *name)
+=======
+struct ieee80211_crypto_ops *ieee80211_get_crypto_ops(const char *name)
+>>>>>>> v3.18
 =======
 struct ieee80211_crypto_ops *ieee80211_get_crypto_ops(const char *name)
 >>>>>>> v3.18
@@ -187,7 +191,11 @@ struct ieee80211_crypto_ops *ieee80211_get_crypto_ops(const char *name)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * ieee80211_crypt_null_init(int keyidx) { return (void *) 1; }
+=======
+static void *ieee80211_crypt_null_init(int keyidx) { return (void *) 1; }
+>>>>>>> v3.18
 =======
 static void *ieee80211_crypt_null_init(int keyidx) { return (void *) 1; }
 >>>>>>> v3.18

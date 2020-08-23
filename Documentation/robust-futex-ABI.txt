@@ -147,8 +147,13 @@ On removal:
     to be removed,
  2) remove the lock entry for this lock from the 'head' list,
 <<<<<<< HEAD
+<<<<<<< HEAD
  2) release the futex lock, and
  2) clear the 'lock_op_pending' word.
+=======
+ 3) release the futex lock, and
+ 4) clear the 'lock_op_pending' word.
+>>>>>>> v3.18
 =======
  3) release the futex lock, and
  4) clear the 'lock_op_pending' word.

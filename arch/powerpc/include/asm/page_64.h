@@ -43,6 +43,7 @@
 typedef unsigned long pte_basic_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __inline__ void clear_page(void *addr)
 {
 	unsigned long lines, line_size;
@@ -58,6 +59,8 @@ static __inline__ void clear_page(void *addr)
         : "=r" (addr)
         : "r" (lines), "0" (addr), "r" (line_size)
 =======
+=======
+>>>>>>> v3.18
 static inline void clear_page(void *addr)
 {
 	unsigned long iterations;
@@ -92,6 +95,9 @@ static inline void clear_page(void *addr)
 	: "r" (iterations), "0" (addr), "b" (onex), "b" (twox),
 		"b" (twox+onex), "b" (fourx), "b" (fourx+onex),
 		"b" (twox+fourx), "b" (eightx-onex), "r" (eightx)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	: "ctr", "memory");
 }
@@ -142,7 +148,10 @@ extern unsigned int get_slice_psize(struct mm_struct *mm,
 				    unsigned long addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void slice_init_context(struct mm_struct *mm, unsigned int psize);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void slice_set_user_psize(struct mm_struct *mm, unsigned int psize);

@@ -20,6 +20,10 @@
 #include <linux/vmalloc.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -28,7 +32,10 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-ctrls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/ov7670.h>
@@ -75,7 +82,11 @@ MODULE_PARM_DESC(dma_buf_size,
 		"will be made.");
 #else /* MCAM_MODE_VMALLOC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const bool alloc_bufs_at_read = 0;
+=======
+static const bool alloc_bufs_at_read;
+>>>>>>> v3.18
 =======
 static const bool alloc_bufs_at_read;
 >>>>>>> v3.18
@@ -106,6 +117,12 @@ MODULE_PARM_DESC(buffer_mode,
 #define CF_SINGLE_BUFFER 5	/* Running with a single buffer */
 #define CF_SG_RESTART	 6	/* SG restart needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CF_FRAME_SOF0	 7	/* Frame 0 started */
+#define CF_FRAME_SOF1	 8
+#define CF_FRAME_SOF2	 9
+>>>>>>> v3.18
 =======
 #define CF_FRAME_SOF0	 7	/* Frame 0 started */
 #define CF_FRAME_SOF1	 8
@@ -120,6 +137,10 @@ static struct mcam_format_struct {
 	__u32 pixelformat;
 	int bpp;   /* Bytes per pixel */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool planar;
+>>>>>>> v3.18
 =======
 	bool planar;
 >>>>>>> v3.18
@@ -131,7 +152,10 @@ static struct mcam_format_struct {
 		.mbus_code	= V4L2_MBUS_FMT_YUYV8_2X8,
 		.bpp		= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.planar		= false,
 	},
 	{
@@ -161,6 +185,9 @@ static struct mcam_format_struct {
 		.mbus_code	= V4L2_MBUS_FMT_YUYV8_2X8,
 		.bpp		= 2,
 		.planar		= true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -169,6 +196,10 @@ static struct mcam_format_struct {
 		.mbus_code	= V4L2_MBUS_FMT_RGB444_2X8_PADHI_LE,
 		.bpp		= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.planar		= false,
+>>>>>>> v3.18
 =======
 		.planar		= false,
 >>>>>>> v3.18
@@ -179,6 +210,10 @@ static struct mcam_format_struct {
 		.mbus_code	= V4L2_MBUS_FMT_RGB565_2X8_LE,
 		.bpp		= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.planar		= false,
+>>>>>>> v3.18
 =======
 		.planar		= false,
 >>>>>>> v3.18
@@ -188,7 +223,12 @@ static struct mcam_format_struct {
 		.pixelformat	= V4L2_PIX_FMT_SBGGR8,
 		.mbus_code	= V4L2_MBUS_FMT_SBGGR8_1X8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.bpp		= 1
+=======
+		.bpp		= 1,
+		.planar		= false,
+>>>>>>> v3.18
 =======
 		.bpp		= 1,
 		.planar		= false,
@@ -236,13 +276,19 @@ struct mcam_dma_desc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct yuv_pointer_t {
 	dma_addr_t y;
 	dma_addr_t u;
 	dma_addr_t v;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Our buffer type for working with videobuf2.  Note that the vb2
@@ -256,6 +302,10 @@ struct mcam_vb_buffer {
 	dma_addr_t dma_desc_pa;		/* Descriptor physical address */
 	int dma_desc_nent;		/* Number of mapped descriptors */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct yuv_pointer_t yuv_p;
+>>>>>>> v3.18
 =======
 	struct yuv_pointer_t yuv_p;
 >>>>>>> v3.18
@@ -300,13 +350,19 @@ static void mcam_reset_buffers(struct mcam_camera *cam)
 
 	cam->next_buf = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < cam->nbufs; i++)
 		clear_bit(i, &cam->flags);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < cam->nbufs; i++) {
 		clear_bit(i, &cam->flags);
 		clear_bit(CF_FRAME_SOF0 + i, &cam->flags);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -341,7 +397,10 @@ static void mcam_ctlr_stop(struct mcam_camera *cam)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mcam_enable_mipi(struct mcam_camera *mcam)
 {
 	/* Using MIPI mode and enable MIPI */
@@ -381,6 +440,9 @@ static void mcam_disable_mipi(struct mcam_camera *mcam)
 	mcam->mipi_enabled = false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ------------------------------------------------------------------- */
 
@@ -465,7 +527,11 @@ static void mcam_ctlr_dma_vmalloc(struct mcam_camera *cam)
 	} else
 		mcam_reg_set_bit(cam, REG_CTRL1, C1_TWOBUFS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cam->chip_id == V4L2_IDENT_CAFE)
+=======
+	if (cam->chip_id == MCAM_CAFE)
+>>>>>>> v3.18
 =======
 	if (cam->chip_id == MCAM_CAFE)
 >>>>>>> v3.18
@@ -559,7 +625,10 @@ static inline int mcam_check_dma_buffers(struct mcam_camera *cam)
  * DMA-contiguous code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static bool mcam_fmt_is_planar(__u32 pfmt)
 {
@@ -569,6 +638,9 @@ static bool mcam_fmt_is_planar(__u32 pfmt)
 	return f->planar;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Set up a contiguous buffer for the given frame.  Here also is where
@@ -582,18 +654,25 @@ static void mcam_set_contig_buffer(struct mcam_camera *cam, int frame)
 {
 	struct mcam_vb_buffer *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_pix_format *fmt = &cam->pix_format;
 	dma_addr_t dma_handle;
 	u32 pixel_count = fmt->width * fmt->height;
 	struct vb2_buffer *vb;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If there are no available buffers, go into single mode
 	 */
 	if (list_empty(&cam->buffers)) {
 		buf = cam->vb_bufs[frame ^ 0x1];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cam->vb_bufs[frame] = buf;
 		mcam_reg_write(cam, frame == 0 ? REG_Y0BAR : REG_Y1BAR,
@@ -612,6 +691,8 @@ static void mcam_set_contig_buffer(struct mcam_camera *cam, int frame)
 	cam->vb_bufs[frame] = buf;
 	clear_bit(CF_SINGLE_BUFFER, &cam->flags);
 =======
+=======
+>>>>>>> v3.18
 		set_bit(CF_SINGLE_BUFFER, &cam->flags);
 		cam->frame_state.singles++;
 	} else {
@@ -654,6 +735,9 @@ static void mcam_set_contig_buffer(struct mcam_camera *cam, int frame)
 		mcam_reg_write(cam, frame == 0 ?
 					REG_V0BAR : REG_V1BAR, buf->yuv_p.v);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -813,6 +897,7 @@ static inline void mcam_sg_restart(struct mcam_camera *cam)
 static void mcam_ctlr_image(struct mcam_camera *cam)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int imgsz;
 	struct v4l2_pix_format *fmt = &cam->pix_format;
 
@@ -856,6 +941,8 @@ static void mcam_ctlr_image(struct mcam_camera *cam)
 	mcam_reg_write_mask(cam, REG_CTRL0, C0_SIF_HVSYNC,
 			C0_SIFM_MASK);
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_pix_format *fmt = &cam->pix_format;
 	u32 widthy = 0, widthuv = 0, imgsz_h, imgsz_w;
 
@@ -940,6 +1027,9 @@ static void mcam_ctlr_image(struct mcam_camera *cam)
 	if (cam->bus_type != V4L2_MBUS_CSI2)
 		mcam_reg_set_bit(cam, REG_CTRL0,
 				C0_EOF_VSYNC | C0_VEDGE_CTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1039,6 +1129,7 @@ static void mcam_ctlr_stop_dma(struct mcam_camera *cam)
  * Power up and down.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mcam_ctlr_power_up(struct mcam_camera *cam)
 {
 	unsigned long flags;
@@ -1049,6 +1140,8 @@ static void mcam_ctlr_power_up(struct mcam_camera *cam)
 	spin_unlock_irqrestore(&cam->dev_lock, flags);
 	msleep(5); /* Just to be sure */
 =======
+=======
+>>>>>>> v3.18
 static int mcam_ctlr_power_up(struct mcam_camera *cam)
 {
 	unsigned long flags;
@@ -1064,6 +1157,9 @@ static int mcam_ctlr_power_up(struct mcam_camera *cam)
 	spin_unlock_irqrestore(&cam->dev_lock, flags);
 	msleep(5); /* Just to be sure */
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1099,7 +1195,10 @@ static int __mcam_cam_reset(struct mcam_camera *cam)
 static int mcam_cam_init(struct mcam_camera *cam)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_dbg_chip_ident chip;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -1109,6 +1208,7 @@ static int mcam_cam_init(struct mcam_camera *cam)
 		cam_warn(cam, "Cam init with device in funky state %d",
 				cam->state);
 	ret = __mcam_cam_reset(cam);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret)
 		goto out;
@@ -1128,6 +1228,10 @@ static int mcam_cam_init(struct mcam_camera *cam)
 	ret = 0;
 	cam->state = S_IDLE;
 out:
+=======
+	/* Get/set parameters? */
+	cam->state = S_IDLE;
+>>>>>>> v3.18
 =======
 	/* Get/set parameters? */
 	cam->state = S_IDLE;
@@ -1198,7 +1302,10 @@ static int mcam_read_setup(struct mcam_camera *cam)
 	clear_bit(CF_DMA_ACTIVE, &cam->flags);
 	mcam_reset_buffers(cam);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Update CSI2_DPHY value
 	 */
@@ -1210,6 +1317,9 @@ static int mcam_read_setup(struct mcam_camera *cam)
 		mcam_enable_mipi(cam);
 	else
 		mcam_disable_mipi(cam);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mcam_ctlr_irq_enable(cam);
 	cam->state = S_STREAMING;
@@ -1286,6 +1396,10 @@ static int mcam_vb_start_streaming(struct vb2_queue *vq, unsigned int count)
 {
 	struct mcam_camera *cam = vb2_get_drv_priv(vq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int frame;
+>>>>>>> v3.18
 =======
 	unsigned int frame;
 >>>>>>> v3.18
@@ -1307,11 +1421,14 @@ static int mcam_vb_start_streaming(struct vb2_queue *vq, unsigned int count)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mcam_read_setup(cam);
 }
 
 static int mcam_vb_stop_streaming(struct vb2_queue *vq)
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Ensure clear the left over frame flags
@@ -1324,6 +1441,9 @@ static int mcam_vb_stop_streaming(struct vb2_queue *vq)
 }
 
 static void mcam_vb_stop_streaming(struct vb2_queue *vq)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mcam_camera *cam = vb2_get_drv_priv(vq);
@@ -1333,6 +1453,7 @@ static void mcam_vb_stop_streaming(struct vb2_queue *vq)
 		/* They never gave us buffers */
 		cam->state = S_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	}
 	if (cam->state != S_STREAMING)
@@ -1340,6 +1461,8 @@ static void mcam_vb_stop_streaming(struct vb2_queue *vq)
 	mcam_ctlr_stop_dma(cam);
 	/*
 =======
+=======
+>>>>>>> v3.18
 		return;
 	}
 	if (cam->state != S_STREAMING)
@@ -1352,6 +1475,9 @@ static void mcam_vb_stop_streaming(struct vb2_queue *vq)
 	if (cam->ctlr_reset)
 		cam->ctlr_reset(cam);
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * VB2 reclaims the buffers, so we need to forget
 	 * about them.
@@ -1360,7 +1486,10 @@ static void mcam_vb_stop_streaming(struct vb2_queue *vq)
 	INIT_LIST_HEAD(&cam->buffers);
 	spin_unlock_irqrestore(&cam->dev_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1402,7 +1531,11 @@ static int mcam_vb_sg_buf_prepare(struct vb2_buffer *vb)
 	struct mcam_vb_buffer *mvb = vb_to_mvb(vb);
 	struct mcam_camera *cam = vb2_get_drv_priv(vb->vb2_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vb2_dma_sg_desc *sgd = vb2_dma_sg_plane_desc(vb, 0);
+=======
+	struct sg_table *sg_table = vb2_dma_sg_plane_desc(vb, 0);
+>>>>>>> v3.18
 =======
 	struct sg_table *sg_table = vb2_dma_sg_plane_desc(vb, 0);
 >>>>>>> v3.18
@@ -1411,17 +1544,23 @@ static int mcam_vb_sg_buf_prepare(struct vb2_buffer *vb)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvb->dma_desc_nent = dma_map_sg(cam->dev, sgd->sglist, sgd->num_pages,
 			DMA_FROM_DEVICE);
 	if (mvb->dma_desc_nent <= 0)
 		return -EIO;  /* Not sure what's right here */
 	for_each_sg(sgd->sglist, sg, mvb->dma_desc_nent, i) {
 =======
+=======
+>>>>>>> v3.18
 	mvb->dma_desc_nent = dma_map_sg(cam->dev, sg_table->sgl,
 			sg_table->nents, DMA_FROM_DEVICE);
 	if (mvb->dma_desc_nent <= 0)
 		return -EIO;  /* Not sure what's right here */
 	for_each_sg(sg_table->sgl, sg, mvb->dma_desc_nent, i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		desc->dma_addr = sg_dma_address(sg);
 		desc->segment_len = sg_dma_len(sg);
@@ -1431,6 +1570,7 @@ static int mcam_vb_sg_buf_prepare(struct vb2_buffer *vb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mcam_vb_sg_buf_finish(struct vb2_buffer *vb)
 {
 	struct mcam_camera *cam = vb2_get_drv_priv(vb->vb2_queue);
@@ -1439,6 +1579,8 @@ static int mcam_vb_sg_buf_finish(struct vb2_buffer *vb)
 	dma_unmap_sg(cam->dev, sgd->sglist, sgd->num_pages, DMA_FROM_DEVICE);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void mcam_vb_sg_buf_finish(struct vb2_buffer *vb)
 {
 	struct mcam_camera *cam = vb2_get_drv_priv(vb->vb2_queue);
@@ -1447,6 +1589,9 @@ static void mcam_vb_sg_buf_finish(struct vb2_buffer *vb)
 	if (sg_table)
 		dma_unmap_sg(cam->dev, sg_table->sgl,
 				sg_table->nents, DMA_FROM_DEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1490,6 +1635,10 @@ static int mcam_setup_vb2(struct mcam_camera *cam)
 		vq->ops = &mcam_vb2_ops;
 		vq->mem_ops = &vb2_dma_contig_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vq->buf_struct_size = sizeof(struct mcam_vb_buffer);
+>>>>>>> v3.18
 =======
 		vq->buf_struct_size = sizeof(struct mcam_vb_buffer);
 >>>>>>> v3.18
@@ -1504,6 +1653,10 @@ static int mcam_setup_vb2(struct mcam_camera *cam)
 		vq->ops = &mcam_vb2_sg_ops;
 		vq->mem_ops = &vb2_dma_sg_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		vq->buf_struct_size = sizeof(struct mcam_vb_buffer);
+>>>>>>> v3.18
 =======
 		vq->buf_struct_size = sizeof(struct mcam_vb_buffer);
 >>>>>>> v3.18
@@ -1658,8 +1811,11 @@ static int mcam_vidioc_try_fmt_vid_cap(struct file *filp, void *priv,
 	mutex_unlock(&cam->s_mutex);
 	v4l2_fill_pix_format(pix, &mbus_fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->bytesperline = pix->width * f->bpp;
 =======
+=======
+>>>>>>> v3.18
 	switch (f->pixelformat) {
 	case V4L2_PIX_FMT_YUV420:
 	case V4L2_PIX_FMT_YVU420:
@@ -1669,6 +1825,9 @@ static int mcam_vidioc_try_fmt_vid_cap(struct file *filp, void *priv,
 		pix->bytesperline = pix->width * f->bpp;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pix->sizeimage = pix->height * pix->bytesperline;
 	return ret;
@@ -1767,13 +1926,19 @@ static int mcam_vidioc_s_std(struct file *filp, void *priv, v4l2_std_id a)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mcam_vidioc_g_std(struct file *filp, void *priv, v4l2_std_id *a)
 {
 	*a = V4L2_STD_NTSC_M;
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * G/S_PARM.  Most of this is done by the sensor, but we are
@@ -1806,6 +1971,7 @@ static int mcam_vidioc_s_parm(struct file *filp, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mcam_vidioc_g_chip_ident(struct file *file, void *priv,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -1820,6 +1986,8 @@ static int mcam_vidioc_g_chip_ident(struct file *file, void *priv,
 	return sensor_call(cam, core, g_chip_ident, chip);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mcam_vidioc_enum_framesizes(struct file *filp, void *priv,
@@ -1853,6 +2021,7 @@ static int mcam_vidioc_g_register(struct file *file, void *priv,
 	struct mcam_camera *cam = priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v4l2_chip_match_host(&reg->match)) {
 		reg->val = mcam_reg_read(cam, reg->reg);
 		reg->size = 4;
@@ -1860,11 +2029,16 @@ static int mcam_vidioc_g_register(struct file *file, void *priv,
 	}
 	return sensor_call(cam, core, g_register, reg);
 =======
+=======
+>>>>>>> v3.18
 	if (reg->reg > cam->regs_size - 4)
 		return -EINVAL;
 	reg->val = mcam_reg_read(cam, reg->reg);
 	reg->size = 4;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1874,16 +2048,22 @@ static int mcam_vidioc_s_register(struct file *file, void *priv,
 	struct mcam_camera *cam = priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v4l2_chip_match_host(&reg->match)) {
 		mcam_reg_write(cam, reg->reg, reg->val);
 		return 0;
 	}
 	return sensor_call(cam, core, s_register, reg);
 =======
+=======
+>>>>>>> v3.18
 	if (reg->reg > cam->regs_size - 4)
 		return -EINVAL;
 	mcam_reg_write(cam, reg->reg, reg->val);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -1899,6 +2079,10 @@ static const struct v4l2_ioctl_ops mcam_v4l_ioctl_ops = {
 	.vidioc_s_input		= mcam_vidioc_s_input,
 	.vidioc_s_std		= mcam_vidioc_s_std,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.vidioc_g_std		= mcam_vidioc_g_std,
+>>>>>>> v3.18
 =======
 	.vidioc_g_std		= mcam_vidioc_g_std,
 >>>>>>> v3.18
@@ -1913,7 +2097,10 @@ static const struct v4l2_ioctl_ops mcam_v4l_ioctl_ops = {
 	.vidioc_enum_framesizes = mcam_vidioc_enum_framesizes,
 	.vidioc_enum_frameintervals = mcam_vidioc_enum_frameintervals,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident	= mcam_vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1942,7 +2129,13 @@ static int mcam_v4l_open(struct file *filp)
 		if (ret)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcam_ctlr_power_up(cam);
+=======
+		ret = mcam_ctlr_power_up(cam);
+		if (ret)
+			goto out;
+>>>>>>> v3.18
 =======
 		ret = mcam_ctlr_power_up(cam);
 		if (ret)
@@ -1971,6 +2164,10 @@ static int mcam_v4l_release(struct file *filp)
 		mcam_ctlr_stop_dma(cam);
 		mcam_cleanup_vb2(cam);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mcam_disable_mipi(cam);
+>>>>>>> v3.18
 =======
 		mcam_disable_mipi(cam);
 >>>>>>> v3.18
@@ -1979,6 +2176,10 @@ static int mcam_v4l_release(struct file *filp)
 			mcam_free_dma_bufs(cam);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2046,7 +2247,10 @@ static struct video_device mcam_v4l_template = {
 	.name = "mcam",
 	.tvnorms = V4L2_STD_NTSC_M,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.current_norm = V4L2_STD_NTSC_M,  /* make mplayer happy */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2102,15 +2306,21 @@ int mccic_irq(struct mcam_camera *cam, unsigned int irqs)
 	 */
 	for (frame = 0; frame < cam->nbufs; frame++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (irqs & (IRQ_EOF0 << frame)) {
 			mcam_frame_complete(cam, frame);
 			handled = 1;
 =======
+=======
+>>>>>>> v3.18
 		if (irqs & (IRQ_EOF0 << frame) &&
 			test_bit(CF_FRAME_SOF0 + frame, &cam->flags)) {
 			mcam_frame_complete(cam, frame);
 			handled = 1;
 			clear_bit(CF_FRAME_SOF0 + frame, &cam->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (cam->buffer_mode == B_DMA_sg)
 				break;
@@ -2121,10 +2331,13 @@ int mccic_irq(struct mcam_camera *cam, unsigned int irqs)
 	 * at once; may want to rethink that.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irqs & (IRQ_SOF0 | IRQ_SOF1 | IRQ_SOF2)) {
 		set_bit(CF_DMA_ACTIVE, &cam->flags);
 		handled = 1;
 =======
+=======
+>>>>>>> v3.18
 	for (frame = 0; frame < cam->nbufs; frame++) {
 		if (irqs & (IRQ_SOF0 << frame)) {
 			set_bit(CF_FRAME_SOF0 + frame, &cam->flags);
@@ -2134,6 +2347,9 @@ int mccic_irq(struct mcam_camera *cam, unsigned int irqs)
 
 	if (handled == IRQ_HANDLED) {
 		set_bit(CF_DMA_ACTIVE, &cam->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (cam->buffer_mode == B_DMA_sg)
 			mcam_ctlr_stop(cam);
@@ -2171,7 +2387,11 @@ int mccic_register(struct mcam_camera *cam)
 		cam->buffer_mode = buffer_mode;
 	if (cam->buffer_mode == B_DMA_sg &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cam->chip_id == V4L2_IDENT_CAFE) {
+=======
+			cam->chip_id == MCAM_CAFE) {
+>>>>>>> v3.18
 =======
 			cam->chip_id == MCAM_CAFE) {
 >>>>>>> v3.18
@@ -2296,13 +2516,19 @@ int mccic_resume(struct mcam_camera *cam)
 	mutex_lock(&cam->s_mutex);
 	if (cam->users > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcam_ctlr_power_up(cam);
 =======
+=======
+>>>>>>> v3.18
 		ret = mcam_ctlr_power_up(cam);
 		if (ret) {
 			mutex_unlock(&cam->s_mutex);
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__mcam_cam_reset(cam);
 	} else {

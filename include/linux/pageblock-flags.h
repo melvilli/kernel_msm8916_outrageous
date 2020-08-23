@@ -31,16 +31,22 @@ enum pageblock_bits {
 	PB_migrate_end = PB_migrate + 3 - 1,
 			/* 3 bits required for migrate types */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_COMPACTION
 	PB_migrate_skip,/* If set the block is skipped by compaction */
 #endif /* CONFIG_COMPACTION */
 =======
+=======
+>>>>>>> v3.18
 	PB_migrate_skip,/* If set the block is skipped by compaction */
 
 	/*
 	 * Assume the bits will always align on a word. If this assumption
 	 * changes then get/set pageblock needs updating.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NR_PAGEBLOCK_BITS
 };
@@ -72,12 +78,15 @@ extern int pageblock_order;
 struct page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Declarations for getting and setting flags. See mm/page_alloc.c */
 unsigned long get_pageblock_flags_group(struct page *page,
 					int start_bitidx, int end_bitidx);
 void set_pageblock_flags_group(struct page *page, unsigned long flags,
 					int start_bitidx, int end_bitidx);
 =======
+=======
+>>>>>>> v3.18
 unsigned long get_pfnblock_flags_mask(struct page *page,
 				unsigned long pfn,
 				unsigned long end_bitidx,
@@ -98,6 +107,9 @@ void set_pfnblock_flags_mask(struct page *page,
 	set_pfnblock_flags_mask(page, flags, page_to_pfn(page),		\
 			end_bitidx,					\
 			(1 << (end_bitidx - start_bitidx + 1)) - 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_COMPACTION
@@ -113,12 +125,15 @@ void set_pfnblock_flags_mask(struct page *page,
 #endif /* CONFIG_COMPACTION */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define get_pageblock_flags(page) \
 			get_pageblock_flags_group(page, 0, PB_migrate_end)
 #define set_pageblock_flags(page, flags) \
 			set_pageblock_flags_group(page, flags,	\
 						  0, PB_migrate_end)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* PAGEBLOCK_FLAGS_H */

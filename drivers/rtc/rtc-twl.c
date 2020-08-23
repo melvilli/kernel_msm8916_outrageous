@@ -214,6 +214,7 @@ static int mask_rtc_irq_bit(unsigned char bit)
 static int twl_rtc_alarm_irq_enable(struct device *dev, unsigned enabled)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	if (enabled)
@@ -221,6 +222,8 @@ static int twl_rtc_alarm_irq_enable(struct device *dev, unsigned enabled)
 	else
 		ret = mask_rtc_irq_bit(BIT_RTC_INTERRUPTS_REG_IT_ALARM_M);
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device *pdev = to_platform_device(dev);
 	int irq = platform_get_irq(pdev, 0);
 	static bool twl_rtc_wake_enabled;
@@ -239,6 +242,9 @@ static int twl_rtc_alarm_irq_enable(struct device *dev, unsigned enabled)
 			twl_rtc_wake_enabled = false;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -489,12 +495,15 @@ static int twl_rtc_probe(struct platform_device *pdev)
 
 	if (irq <= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out1;
 
 	ret = twl_rtc_read_u8(&rd_reg, REG_RTC_STATUS_REG);
 	if (ret < 0)
 		goto out1;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	/* Initialize the register map */
@@ -506,6 +515,9 @@ static int twl_rtc_probe(struct platform_device *pdev)
 	ret = twl_rtc_read_u8(&rd_reg, REG_RTC_STATUS_REG);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rd_reg & BIT_RTC_STATUS_REG_POWER_UP_M)
@@ -518,7 +530,11 @@ static int twl_rtc_probe(struct platform_device *pdev)
 	ret = twl_rtc_write_u8(rd_reg, REG_RTC_STATUS_REG);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -534,7 +550,11 @@ static int twl_rtc_probe(struct platform_device *pdev)
 	ret = twl_rtc_write_u8(BIT_RTC_CTRL_REG_STOP_RTC_M, REG_RTC_CTRL_REG);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -547,6 +567,7 @@ static int twl_rtc_probe(struct platform_device *pdev)
 	/* init cached IRQ enable bits */
 	ret = twl_rtc_read_u8(&rtc_irq_bits, REG_RTC_INTERRUPTS_REG);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out1;
 
@@ -576,6 +597,8 @@ out2:
 out1:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	device_init_wakeup(&pdev->dev, 1);
@@ -599,6 +622,9 @@ out1:
 
 	platform_set_drvdata(pdev, rtc);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -610,9 +636,12 @@ static int twl_rtc_remove(struct platform_device *pdev)
 {
 	/* leave rtc running, but disable irqs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtc_device *rtc = platform_get_drvdata(pdev);
 	int irq = platform_get_irq(pdev, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mask_rtc_irq_bit(BIT_RTC_INTERRUPTS_REG_IT_ALARM_M);
@@ -625,11 +654,14 @@ static int twl_rtc_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	free_irq(irq, rtc);
 
 	rtc_device_unregister(rtc);
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -685,6 +717,7 @@ static struct platform_driver twl4030rtc_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init twl_rtc_init(void)
 {
 	if (twl_class_is_4030())
@@ -701,6 +734,9 @@ static void __exit twl_rtc_exit(void)
 	platform_driver_unregister(&twl4030rtc_driver);
 }
 module_exit(twl_rtc_exit);
+=======
+module_platform_driver(twl4030rtc_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(twl4030rtc_driver);
 >>>>>>> v3.18

@@ -3,6 +3,10 @@
  * Copyright (C) Semihalf 2009
  * Copyright (C) Ilya Yanok, Emcraft Systems 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) Alexander Popov, Promcontroller 2014
+>>>>>>> v3.18
 =======
  * Copyright (C) Alexander Popov, Promcontroller 2014
 >>>>>>> v3.18
@@ -34,9 +38,12 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This is initial version of MPC5121 DMA driver. Only memory to memory
  * transfers are supported (tested using dmatest module).
 =======
+=======
+>>>>>>> v3.18
  * MPC512x and MPC8308 DMA driver. It supports
  * memory to memory data transfers (tested using dmatest module) and
  * data transfers between memory and peripheral I/O memory
@@ -49,6 +56,9 @@
  *  - minimal memory <-> I/O memory transfer chunk is 4 bytes and consequently
  *     source and destination addresses must be 4-byte aligned
  *     and transfer size must be aligned on (4 * maxburst) boundary;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -59,12 +69,18 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_device.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/of_device.h>
 #include <linux/of_irq.h>
 #include <linux/of_dma.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/of_platform.h>
 
@@ -77,10 +93,13 @@
 
 /* Macro definitions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPC_DMA_CHANNELS	64
 #define MPC_DMA_TCD_OFFSET	0x1000
 
 =======
+=======
+>>>>>>> v3.18
 #define MPC_DMA_TCD_OFFSET	0x1000
 
 /*
@@ -92,6 +111,9 @@
 #define MPC512x_DMACHAN_MAX	64
 #define MPC_DMA_CHANNELS	64
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Arbitration mode of group and channel */
 #define MPC_DMA_DMACR_EDCG	(1 << 31)
@@ -220,6 +242,10 @@ struct mpc_dma_desc {
 	int				error;
 	struct list_head		node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int				will_access_peripheral;
+>>>>>>> v3.18
 =======
 	int				will_access_peripheral;
 >>>>>>> v3.18
@@ -236,13 +262,19 @@ struct mpc_dma_chan {
 	dma_addr_t			tcd_paddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Settings for access to peripheral FIFO */
 	dma_addr_t			src_per_paddr;
 	u32				src_tcd_nunits;
 	dma_addr_t			dst_per_paddr;
 	u32				dst_tcd_nunits;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Lock for this structure */
 	spinlock_t			lock;
@@ -295,9 +327,12 @@ static void mpc_dma_execute(struct mpc_dma_chan *mchan)
 	int cid = mchan->chan.chan_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Move all queued descriptors to active list */
 	list_splice_tail_init(&mchan->queued, &mchan->active);
 =======
+=======
+>>>>>>> v3.18
 	while (!list_empty(&mchan->queued)) {
 		mdesc = list_first_entry(&mchan->queued,
 						struct mpc_dma_desc, node);
@@ -315,6 +350,9 @@ static void mpc_dma_execute(struct mpc_dma_chan *mchan)
 			list_move_tail(&mdesc->node, &mchan->active);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Chain descriptors into one transaction */
@@ -342,8 +380,11 @@ static void mpc_dma_execute(struct mpc_dma_chan *mchan)
 	if (first != prev)
 		mdma->tcd[cid].e_sg = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_8(&mdma->regs->dmassrt, cid);
 =======
+=======
+>>>>>>> v3.18
 
 	if (mdma->is_mpc8308) {
 		/* MPC8308, no request lines, software initiated start */
@@ -355,6 +396,9 @@ static void mpc_dma_execute(struct mpc_dma_chan *mchan)
 		/* Memory to memory transfer, software initiated start */
 		out_8(&mdma->regs->dmassrt, cid);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -644,6 +688,7 @@ mpc_dma_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	       struct dma_tx_state *txstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc_dma_chan *mchan = dma_chan_to_mpc_dma_chan(chan);
 	enum dma_status ret;
 	unsigned long flags;
@@ -653,6 +698,9 @@ mpc_dma_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	spin_unlock_irqrestore(&mchan->lock, flags);
 
 	return ret;
+=======
+	return dma_cookie_status(chan, cookie, txstate);
+>>>>>>> v3.18
 =======
 	return dma_cookie_status(chan, cookie, txstate);
 >>>>>>> v3.18
@@ -686,6 +734,10 @@ mpc_dma_prep_memcpy(struct dma_chan *chan, dma_addr_t dst, dma_addr_t src,
 
 	mdesc->error = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mdesc->will_access_peripheral = 0;
+>>>>>>> v3.18
 =======
 	mdesc->will_access_peripheral = 0;
 >>>>>>> v3.18
@@ -737,7 +789,10 @@ mpc_dma_prep_memcpy(struct dma_chan *chan, dma_addr_t dst, dma_addr_t src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct dma_async_tx_descriptor *
 mpc_dma_prep_slave_sg(struct dma_chan *chan, struct scatterlist *sgl,
 		unsigned int sg_len, enum dma_transfer_direction direction,
@@ -925,6 +980,9 @@ static int mpc_dma_device_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 	return -ENXIO;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mpc_dma_probe(struct platform_device *op)
 {
@@ -941,7 +999,12 @@ static int mpc_dma_probe(struct platform_device *op)
 	if (!mdma) {
 		dev_err(dev, "Memory exhausted!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		retval = -ENOMEM;
+		goto err;
+>>>>>>> v3.18
 =======
 		retval = -ENOMEM;
 		goto err;
@@ -952,7 +1015,12 @@ static int mpc_dma_probe(struct platform_device *op)
 	if (mdma->irq == NO_IRQ) {
 		dev_err(dev, "Error mapping IRQ!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		retval = -EINVAL;
+		goto err;
+>>>>>>> v3.18
 =======
 		retval = -EINVAL;
 		goto err;
@@ -965,7 +1033,12 @@ static int mpc_dma_probe(struct platform_device *op)
 		if (mdma->irq2 == NO_IRQ) {
 			dev_err(dev, "Error mapping IRQ!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -EINVAL;
+=======
+			retval = -EINVAL;
+			goto err_dispose1;
+>>>>>>> v3.18
 =======
 			retval = -EINVAL;
 			goto err_dispose1;
@@ -977,7 +1050,11 @@ static int mpc_dma_probe(struct platform_device *op)
 	if (retval) {
 		dev_err(dev, "Error parsing memory region!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return retval;
+=======
+		goto err_dispose2;
+>>>>>>> v3.18
 =======
 		goto err_dispose2;
 >>>>>>> v3.18
@@ -989,7 +1066,12 @@ static int mpc_dma_probe(struct platform_device *op)
 	if (!devm_request_mem_region(dev, regs_start, regs_size, DRV_NAME)) {
 		dev_err(dev, "Error requesting memory region!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EBUSY;
+=======
+		retval = -EBUSY;
+		goto err_dispose2;
+>>>>>>> v3.18
 =======
 		retval = -EBUSY;
 		goto err_dispose2;
@@ -1000,7 +1082,12 @@ static int mpc_dma_probe(struct platform_device *op)
 	if (!mdma->regs) {
 		dev_err(dev, "Error mapping memory region!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		retval = -ENOMEM;
+		goto err_dispose2;
+>>>>>>> v3.18
 =======
 		retval = -ENOMEM;
 		goto err_dispose2;
@@ -1010,6 +1097,7 @@ static int mpc_dma_probe(struct platform_device *op)
 	mdma->tcd = (struct mpc_dma_tcd *)((u8 *)(mdma->regs)
 							+ MPC_DMA_TCD_OFFSET);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval = devm_request_irq(dev, mdma->irq, &mpc_dma_irq, 0, DRV_NAME,
 									mdma);
@@ -1025,6 +1113,8 @@ static int mpc_dma_probe(struct platform_device *op)
 			dev_err(dev, "Error requesting IRQ2!\n");
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	retval = request_irq(mdma->irq, &mpc_dma_irq, 0, DRV_NAME, mdma);
 	if (retval) {
 		dev_err(dev, "Error requesting IRQ!\n");
@@ -1039,6 +1129,9 @@ static int mpc_dma_probe(struct platform_device *op)
 			dev_err(dev, "Error requesting IRQ2!\n");
 			retval = -EINVAL;
 			goto err_free1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1048,15 +1141,21 @@ static int mpc_dma_probe(struct platform_device *op)
 	dma = &mdma->dma;
 	dma->dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mdma->is_mpc8308)
 		dma->chancnt = MPC_DMA_CHANNELS;
 	else
 		dma->chancnt = 16; /* MPC8308 DMA has only 16 channels */
 =======
+=======
+>>>>>>> v3.18
 	if (mdma->is_mpc8308)
 		dma->chancnt = MPC8308_DMACHAN_MAX;
 	else
 		dma->chancnt = MPC512x_DMACHAN_MAX;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma->device_alloc_chan_resources = mpc_dma_alloc_chan_resources;
 	dma->device_free_chan_resources = mpc_dma_free_chan_resources;
@@ -1064,16 +1163,22 @@ static int mpc_dma_probe(struct platform_device *op)
 	dma->device_tx_status = mpc_dma_tx_status;
 	dma->device_prep_dma_memcpy = mpc_dma_prep_memcpy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	INIT_LIST_HEAD(&dma->channels);
 	dma_cap_set(DMA_MEMCPY, dma->cap_mask);
 =======
+=======
+>>>>>>> v3.18
 	dma->device_prep_slave_sg = mpc_dma_prep_slave_sg;
 	dma->device_control = mpc_dma_device_control;
 
 	INIT_LIST_HEAD(&dma->channels);
 	dma_cap_set(DMA_MEMCPY, dma->cap_mask);
 	dma_cap_set(DMA_SLAVE, dma->cap_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < dma->chancnt; i++) {
@@ -1101,8 +1206,11 @@ static int mpc_dma_probe(struct platform_device *op)
 	 * - Round-robin channel arbitration.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mdma->is_mpc8308) {
 =======
+=======
+>>>>>>> v3.18
 	if (mdma->is_mpc8308) {
 		/* MPC8308 has 16 channels and lacks some registers */
 		out_be32(&mdma->regs->dmacr, MPC_DMA_DMACR_ERCA);
@@ -1116,6 +1224,9 @@ static int mpc_dma_probe(struct platform_device *op)
 		out_be32(&mdma->regs->dmaintl, 0xFFFF);
 		out_be32(&mdma->regs->dmaerrl, 0xFFFF);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		out_be32(&mdma->regs->dmacr, MPC_DMA_DMACR_EDCG |
 					MPC_DMA_DMACR_ERGA | MPC_DMA_DMACR_ERCA);
@@ -1138,6 +1249,7 @@ static int mpc_dma_probe(struct platform_device *op)
 		out_be32(&mdma->regs->dmaihsa, 0);
 		out_be32(&mdma->regs->dmailsa, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/* MPC8308 has 16 channels and lacks some registers */
 		out_be32(&mdma->regs->dmacr, MPC_DMA_DMACR_ERCA);
@@ -1152,11 +1264,14 @@ static int mpc_dma_probe(struct platform_device *op)
 		out_be32(&mdma->regs->dmaerrl, 0xFFFF);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	}
 
 	/* Register DMA engine */
 	dev_set_drvdata(dev, mdma);
 	retval = dma_async_device_register(dma);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (retval) {
 		devm_free_irq(dev, mdma->irq, mdma);
@@ -1164,6 +1279,8 @@ static int mpc_dma_probe(struct platform_device *op)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (retval)
 		goto err_free2;
 
@@ -1188,6 +1305,9 @@ err_dispose2:
 err_dispose1:
 	irq_dispose_mapping(mdma->irq);
 err:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -1198,9 +1318,12 @@ static int mpc_dma_remove(struct platform_device *op)
 	struct mpc_dma *mdma = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_async_device_unregister(&mdma->dma);
 	devm_free_irq(dev, mdma->irq, mdma);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->of_node)
 		of_dma_controller_free(dev->of_node);
 	dma_async_device_unregister(&mdma->dma);
@@ -1209,6 +1332,9 @@ static int mpc_dma_remove(struct platform_device *op)
 		irq_dispose_mapping(mdma->irq2);
 	}
 	free_irq(mdma->irq, mdma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_dispose_mapping(mdma->irq);
 
@@ -1218,6 +1344,10 @@ static int mpc_dma_remove(struct platform_device *op)
 static struct of_device_id mpc_dma_match[] = {
 	{ .compatible = "fsl,mpc5121-dma", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "fsl,mpc8308-dma", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "fsl,mpc8308-dma", },
 >>>>>>> v3.18

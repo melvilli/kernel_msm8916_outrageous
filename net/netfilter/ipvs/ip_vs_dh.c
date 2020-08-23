@@ -215,6 +215,7 @@ static inline int is_overloaded(struct ip_vs_dest *dest)
  */
 static struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_dh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
 {
 	struct ip_vs_dest *dest;
@@ -223,18 +224,27 @@ ip_vs_dh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
 
 	ip_vs_fill_iph_addr_only(svc->af, skb, &iph);
 =======
+=======
+>>>>>>> v3.18
 ip_vs_dh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		  struct ip_vs_iphdr *iph)
 {
 	struct ip_vs_dest *dest;
 	struct ip_vs_dh_state *s;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	IP_VS_DBG(6, "%s(): Scheduling...\n", __func__);
 
 	s = (struct ip_vs_dh_state *) svc->sched_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest = ip_vs_dh_get(svc->af, s, &iph.daddr);
+=======
+	dest = ip_vs_dh_get(svc->af, s, &iph->daddr);
+>>>>>>> v3.18
 =======
 	dest = ip_vs_dh_get(svc->af, s, &iph->daddr);
 >>>>>>> v3.18
@@ -248,8 +258,13 @@ ip_vs_dh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 
 	IP_VS_DBG_BUF(6, "DH: destination IP address %s --> server %s:%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      IP_VS_DBG_ADDR(svc->af, &iph.daddr),
 		      IP_VS_DBG_ADDR(svc->af, &dest->addr),
+=======
+		      IP_VS_DBG_ADDR(svc->af, &iph->daddr),
+		      IP_VS_DBG_ADDR(dest->af, &dest->addr),
+>>>>>>> v3.18
 =======
 		      IP_VS_DBG_ADDR(svc->af, &iph->daddr),
 		      IP_VS_DBG_ADDR(dest->af, &dest->addr),

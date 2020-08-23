@@ -41,6 +41,10 @@ EXPORT_SYMBOL(memmove);
 EXPORT_SYMBOL(__memcpy);
 EXPORT_SYMBOL(__memset);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(___memset);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(___memset);
 >>>>>>> v3.18

@@ -110,7 +110,11 @@ struct ar {
 	struct v4l2_device v4l2_dev;
 	struct video_device vdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int start_capture;	/* duaring capture in INT. mode. */
+=======
+	int start_capture;	/* duaring capture in INT. mode. */
+>>>>>>> v3.18
 =======
 	int start_capture;	/* duaring capture in INT. mode. */
 >>>>>>> v3.18
@@ -312,17 +316,23 @@ static ssize_t ar_read(struct file *file, char *buf, size_t count, loff_t *ppos)
 	 * Okay, kick AR LSI to invoke an interrupt
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ar->start_capture = 0;
 	ar_outl(arvcr1 | ARVCR1_HIEN, ARVCR1);
 	local_irq_restore(flags);
 	/* .... AR interrupts .... */
 	interruptible_sleep_on(&ar->wait);
 =======
+=======
+>>>>>>> v3.18
 	ar->start_capture = -1;
 	ar_outl(arvcr1 | ARVCR1_HIEN, ARVCR1);
 	local_irq_restore(flags);
 	/* .... AR interrupts .... */
 	wait_event_interruptible(ar->wait, ar->start_capture == 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (signal_pending(current)) {
 		printk(KERN_ERR "arv: interrupted while get frame data.\n");
@@ -786,7 +796,10 @@ static int __init ar_init(void)
 	ar->vdev.ioctl_ops = &ar_ioctl_ops;
 	ar->vdev.release = video_device_release_empty;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &ar->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(&ar->vdev, ar);

@@ -160,7 +160,11 @@ typedef struct {
 
 #define ST_TX_EOM     0x80	/* End of frame */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ST_TX_EOT     0x01	/* End of transmition */
+=======
+#define ST_TX_EOT     0x01	/* End of transmission */
+>>>>>>> v3.18
 =======
 #define ST_TX_EOT     0x01	/* End of transmission */
 >>>>>>> v3.18
@@ -216,7 +220,11 @@ typedef struct {
 #define CTL_NORTS     0x01
 #define CTL_IDLE      0x10	/* Transmit an idle pattern */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CTL_UDRNC     0x20	/* Idle after CRC or FCS+flag transmition */
+=======
+#define CTL_UDRNC     0x20	/* Idle after CRC or FCS+flag transmission */
+>>>>>>> v3.18
 =======
 #define CTL_UDRNC     0x20	/* Idle after CRC or FCS+flag transmission */
 >>>>>>> v3.18

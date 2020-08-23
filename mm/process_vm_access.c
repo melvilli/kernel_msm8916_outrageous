@@ -24,6 +24,7 @@
 /**
  * process_vm_rw_pages - read/write pages from task specified
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @task: task to read/write from
  * @mm: mm for task
  * @process_pages: struct pages area that can store at least
@@ -148,6 +149,8 @@ end:
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
  * @pages: array of pointers to pages we want to copy
  * @start_offset: offset in page to start copying from/to
  * @len: number of bytes to copy
@@ -182,6 +185,9 @@ static int process_vm_rw_pages(struct page **pages,
 		offset = 0;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -193,10 +199,14 @@ static int process_vm_rw_pages(struct page **pages,
  * @addr: start memory address of target process
  * @len: size of area to copy to/from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @lvec: iovec array specifying where to copy to/from locally
  * @lvec_cnt: number of elements in iovec array
  * @lvec_current: index in iovec array we are up to
  * @lvec_offset: offset in bytes from current iovec iov_base we are up to
+=======
+ * @iter: where to copy to/from locally
+>>>>>>> v3.18
 =======
  * @iter: where to copy to/from locally
 >>>>>>> v3.18
@@ -206,13 +216,17 @@ static int process_vm_rw_pages(struct page **pages,
  * @task: task to read/write from
  * @vm_write: 0 means copy from, 1 means copy to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @bytes_copied: returns number of bytes successfully copied
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Returns 0 on success or on failure error code
  */
 static int process_vm_rw_single_vec(unsigned long addr,
 				    unsigned long len,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				    const struct iovec *lvec,
 				    unsigned long lvec_cnt,
@@ -224,16 +238,22 @@ static int process_vm_rw_single_vec(unsigned long addr,
 				    int vm_write,
 				    ssize_t *bytes_copied)
 =======
+=======
+>>>>>>> v3.18
 				    struct iov_iter *iter,
 				    struct page **process_pages,
 				    struct mm_struct *mm,
 				    struct task_struct *task,
 				    int vm_write)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long pa = addr & PAGE_MASK;
 	unsigned long start_offset = addr - pa;
 	unsigned long nr_pages;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ssize_t bytes_copied_loop;
 	ssize_t rc = 0;
@@ -245,16 +265,22 @@ static int process_vm_rw_single_vec(unsigned long addr,
 	*bytes_copied = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	ssize_t rc = 0;
 	unsigned long max_pages_per_loop = PVM_MAX_KMALLOC_PAGES
 		/ sizeof(struct pages *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Work out address and page range required */
 	if (len == 0)
 		return 0;
 	nr_pages = (addr + len - 1) / PAGE_SIZE - addr / PAGE_SIZE + 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while ((nr_pages_copied < nr_pages) && (*lvec_current < lvec_cnt)) {
 		nr_pages_to_copy = min(nr_pages - nr_pages_copied,
@@ -277,6 +303,8 @@ static int process_vm_rw_single_vec(unsigned long addr,
 			pa += nr_pages_to_copy * PAGE_SIZE;
 		}
 =======
+=======
+>>>>>>> v3.18
 	while (!rc && nr_pages && iov_iter_count(iter)) {
 		int pages = min(nr_pages, max_pages_per_loop);
 		size_t bytes;
@@ -303,6 +331,9 @@ static int process_vm_rw_single_vec(unsigned long addr,
 		pa += pages * PAGE_SIZE;
 		while (pages)
 			put_page(process_pages[--pages]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -317,8 +348,12 @@ static int process_vm_rw_single_vec(unsigned long addr,
  * process_vm_rw_core - core of reading/writing pages from task specified
  * @pid: PID of process to read/write from/to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @lvec: iovec array specifying where to copy to/from locally
  * @liovcnt: size of lvec array
+=======
+ * @iter: where to copy to/from locally
+>>>>>>> v3.18
 =======
  * @iter: where to copy to/from locally
 >>>>>>> v3.18
@@ -331,8 +366,12 @@ static int process_vm_rw_single_vec(unsigned long addr,
  *  process.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t process_vm_rw_core(pid_t pid, const struct iovec *lvec,
 				  unsigned long liovcnt,
+=======
+static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
+>>>>>>> v3.18
 =======
 static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
 >>>>>>> v3.18
@@ -347,6 +386,7 @@ static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
 	unsigned long i;
 	ssize_t rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t bytes_copied_loop;
 	ssize_t bytes_copied = 0;
 	unsigned long nr_pages = 0;
@@ -355,10 +395,15 @@ static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
 	size_t iov_l_curr_offset = 0;
 	ssize_t iov_len;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long nr_pages = 0;
 	unsigned long nr_pages_iov;
 	ssize_t iov_len;
 	size_t total_len = iov_iter_count(iter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -402,7 +447,11 @@ static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mm = mm_access(task, PTRACE_MODE_ATTACH_REALCREDS);
+=======
+	mm = mm_access(task, PTRACE_MODE_ATTACH);
+>>>>>>> v3.18
 =======
 	mm = mm_access(task, PTRACE_MODE_ATTACH);
 >>>>>>> v3.18
@@ -417,6 +466,7 @@ static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
 		goto put_task_struct;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < riovcnt && iov_l_curr_idx < liovcnt; i++) {
 		rc = process_vm_rw_single_vec(
@@ -437,6 +487,8 @@ static ssize_t process_vm_rw_core(pid_t pid, struct iov_iter *iter,
 	rc = bytes_copied;
 put_mm:
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < riovcnt && iov_iter_count(iter) && !rc; i++)
 		rc = process_vm_rw_single_vec(
 			(unsigned long)rvec[i].iov_base, rvec[i].iov_len,
@@ -451,6 +503,9 @@ put_mm:
 	if (total_len)
 		rc = total_len;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mmput(mm);
 
@@ -488,6 +543,10 @@ static ssize_t process_vm_rw(pid_t pid,
 	struct iovec *iov_l = iovstack_l;
 	struct iovec *iov_r = iovstack_r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iov_iter iter;
+>>>>>>> v3.18
 =======
 	struct iov_iter iter;
 >>>>>>> v3.18
@@ -507,6 +566,11 @@ static ssize_t process_vm_rw(pid_t pid,
 		goto free_iovecs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iov_iter_init(&iter, vm_write ? WRITE : READ, iov_l, liovcnt, rc);
+
+>>>>>>> v3.18
 =======
 	iov_iter_init(&iter, vm_write ? WRITE : READ, iov_l, liovcnt, rc);
 
@@ -517,8 +581,12 @@ static ssize_t process_vm_rw(pid_t pid,
 		goto free_iovecs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = process_vm_rw_core(pid, iov_l, liovcnt, iov_r, riovcnt, flags,
 				vm_write);
+=======
+	rc = process_vm_rw_core(pid, &iter, iov_r, riovcnt, flags, vm_write);
+>>>>>>> v3.18
 =======
 	rc = process_vm_rw_core(pid, &iter, iov_r, riovcnt, flags, vm_write);
 >>>>>>> v3.18
@@ -550,7 +618,11 @@ SYSCALL_DEFINE6(process_vm_writev, pid_t, pid,
 #ifdef CONFIG_COMPAT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage ssize_t
+=======
+static ssize_t
+>>>>>>> v3.18
 =======
 static ssize_t
 >>>>>>> v3.18
@@ -566,6 +638,10 @@ compat_process_vm_rw(compat_pid_t pid,
 	struct iovec *iov_l = iovstack_l;
 	struct iovec *iov_r = iovstack_r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iov_iter iter;
+>>>>>>> v3.18
 =======
 	struct iov_iter iter;
 >>>>>>> v3.18
@@ -585,6 +661,10 @@ compat_process_vm_rw(compat_pid_t pid,
 	if (rc <= 0)
 		goto free_iovecs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iov_iter_init(&iter, vm_write ? WRITE : READ, iov_l, liovcnt, rc);
+>>>>>>> v3.18
 =======
 	iov_iter_init(&iter, vm_write ? WRITE : READ, iov_l, liovcnt, rc);
 >>>>>>> v3.18
@@ -595,8 +675,12 @@ compat_process_vm_rw(compat_pid_t pid,
 		goto free_iovecs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = process_vm_rw_core(pid, iov_l, liovcnt, iov_r, riovcnt, flags,
 			   vm_write);
+=======
+	rc = process_vm_rw_core(pid, &iter, iov_r, riovcnt, flags, vm_write);
+>>>>>>> v3.18
 =======
 	rc = process_vm_rw_core(pid, &iter, iov_r, riovcnt, flags, vm_write);
 >>>>>>> v3.18
@@ -610,6 +694,7 @@ free_iovecs:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage ssize_t
 compat_sys_process_vm_readv(compat_pid_t pid,
 			    const struct compat_iovec __user *lvec,
@@ -618,18 +703,24 @@ compat_sys_process_vm_readv(compat_pid_t pid,
 			    unsigned long riovcnt,
 			    unsigned long flags)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE6(process_vm_readv, compat_pid_t, pid,
 		       const struct compat_iovec __user *, lvec,
 		       compat_ulong_t, liovcnt,
 		       const struct compat_iovec __user *, rvec,
 		       compat_ulong_t, riovcnt,
 		       compat_ulong_t, flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return compat_process_vm_rw(pid, lvec, liovcnt, rvec,
 				    riovcnt, flags, 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 asmlinkage ssize_t
 compat_sys_process_vm_writev(compat_pid_t pid,
@@ -639,12 +730,17 @@ compat_sys_process_vm_writev(compat_pid_t pid,
 			     unsigned long riovcnt,
 			     unsigned long flags)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE6(process_vm_writev, compat_pid_t, pid,
 		       const struct compat_iovec __user *, lvec,
 		       compat_ulong_t, liovcnt,
 		       const struct compat_iovec __user *, rvec,
 		       compat_ulong_t, riovcnt,
 		       compat_ulong_t, flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return compat_process_vm_rw(pid, lvec, liovcnt, rvec,

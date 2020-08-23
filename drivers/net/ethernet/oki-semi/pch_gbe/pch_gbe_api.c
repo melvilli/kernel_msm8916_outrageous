@@ -15,17 +15,23 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
  */
 #include "pch_gbe.h"
 #include "pch_gbe_phy.h"
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 #include "pch_gbe.h"
 #include "pch_gbe_phy.h"
 #include "pch_gbe_api.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* bus type values */
@@ -79,7 +85,13 @@ static s32 pch_gbe_plat_init_hw(struct pch_gbe_hw *hw)
 	ret_val = pch_gbe_phy_get_id(hw);
 	if (ret_val) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("pch_gbe_phy_get_id error\n");
+=======
+		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
+
+		netdev_err(adapter->netdev, "pch_gbe_phy_get_id error\n");
+>>>>>>> v3.18
 =======
 		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 
@@ -127,17 +139,23 @@ static void pch_gbe_plat_init_function_pointers(struct pch_gbe_hw *hw)
  *	ENOSYS:	Function is not registered
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline s32 pch_gbe_hal_setup_init_funcs(struct pch_gbe_hw *hw)
 {
 	if (!hw->reg) {
 		pr_err("ERROR: Registers not mapped\n");
 =======
+=======
+>>>>>>> v3.18
 s32 pch_gbe_hal_setup_init_funcs(struct pch_gbe_hw *hw)
 {
 	if (!hw->reg) {
 		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 
 		netdev_err(adapter->netdev, "ERROR: Registers not mapped\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOSYS;
 	}
@@ -150,6 +168,7 @@ s32 pch_gbe_hal_setup_init_funcs(struct pch_gbe_hw *hw)
  * @hw:	Pointer to the HW structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void pch_gbe_hal_get_bus_info(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->get_bus_info)
@@ -157,6 +176,8 @@ inline void pch_gbe_hal_get_bus_info(struct pch_gbe_hw *hw)
 	else
 		hw->func->get_bus_info(hw);
 =======
+=======
+>>>>>>> v3.18
 void pch_gbe_hal_get_bus_info(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->get_bus_info) {
@@ -166,6 +187,9 @@ void pch_gbe_hal_get_bus_info(struct pch_gbe_hw *hw)
 		return;
 	}
 	hw->func->get_bus_info(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -177,17 +201,23 @@ void pch_gbe_hal_get_bus_info(struct pch_gbe_hw *hw)
  *	ENOSYS:	Function is not registered
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline s32 pch_gbe_hal_init_hw(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->init_hw) {
 		pr_err("ERROR: configuration\n");
 =======
+=======
+>>>>>>> v3.18
 s32 pch_gbe_hal_init_hw(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->init_hw) {
 		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 
 		netdev_err(adapter->netdev, "ERROR: configuration\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOSYS;
 	}
@@ -204,7 +234,11 @@ s32 pch_gbe_hal_init_hw(struct pch_gbe_hw *hw)
  *	Negative value:	Failed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline s32 pch_gbe_hal_read_phy_reg(struct pch_gbe_hw *hw, u32 offset,
+=======
+s32 pch_gbe_hal_read_phy_reg(struct pch_gbe_hw *hw, u32 offset,
+>>>>>>> v3.18
 =======
 s32 pch_gbe_hal_read_phy_reg(struct pch_gbe_hw *hw, u32 offset,
 >>>>>>> v3.18
@@ -225,7 +259,11 @@ s32 pch_gbe_hal_read_phy_reg(struct pch_gbe_hw *hw, u32 offset,
  *	Negative value:	Failed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline s32 pch_gbe_hal_write_phy_reg(struct pch_gbe_hw *hw, u32 offset,
+=======
+s32 pch_gbe_hal_write_phy_reg(struct pch_gbe_hw *hw, u32 offset,
+>>>>>>> v3.18
 =======
 s32 pch_gbe_hal_write_phy_reg(struct pch_gbe_hw *hw, u32 offset,
 >>>>>>> v3.18
@@ -241,6 +279,7 @@ s32 pch_gbe_hal_write_phy_reg(struct pch_gbe_hw *hw, u32 offset,
  * @hw:	    Pointer to the HW structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void pch_gbe_hal_phy_hw_reset(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->reset_phy)
@@ -248,6 +287,8 @@ inline void pch_gbe_hal_phy_hw_reset(struct pch_gbe_hw *hw)
 	else
 		hw->func->reset_phy(hw);
 =======
+=======
+>>>>>>> v3.18
 void pch_gbe_hal_phy_hw_reset(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->reset_phy) {
@@ -257,6 +298,9 @@ void pch_gbe_hal_phy_hw_reset(struct pch_gbe_hw *hw)
 		return;
 	}
 	hw->func->reset_phy(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -265,6 +309,7 @@ void pch_gbe_hal_phy_hw_reset(struct pch_gbe_hw *hw)
  * @hw:	    Pointer to the HW structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void pch_gbe_hal_phy_sw_reset(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->sw_reset_phy)
@@ -272,6 +317,8 @@ inline void pch_gbe_hal_phy_sw_reset(struct pch_gbe_hw *hw)
 	else
 		hw->func->sw_reset_phy(hw);
 =======
+=======
+>>>>>>> v3.18
 void pch_gbe_hal_phy_sw_reset(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->sw_reset_phy) {
@@ -281,6 +328,9 @@ void pch_gbe_hal_phy_sw_reset(struct pch_gbe_hw *hw)
 		return;
 	}
 	hw->func->sw_reset_phy(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -292,17 +342,23 @@ void pch_gbe_hal_phy_sw_reset(struct pch_gbe_hw *hw)
  *	ENOSYS:	Function is not registered
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline s32 pch_gbe_hal_read_mac_addr(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->read_mac_addr) {
 		pr_err("ERROR: configuration\n");
 =======
+=======
+>>>>>>> v3.18
 s32 pch_gbe_hal_read_mac_addr(struct pch_gbe_hw *hw)
 {
 	if (!hw->func->read_mac_addr) {
 		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 
 		netdev_err(adapter->netdev, "ERROR: configuration\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOSYS;
 	}
@@ -314,7 +370,11 @@ s32 pch_gbe_hal_read_mac_addr(struct pch_gbe_hw *hw)
  * @hw:	Pointer to the HW structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void pch_gbe_hal_power_up_phy(struct pch_gbe_hw *hw)
+=======
+void pch_gbe_hal_power_up_phy(struct pch_gbe_hw *hw)
+>>>>>>> v3.18
 =======
 void pch_gbe_hal_power_up_phy(struct pch_gbe_hw *hw)
 >>>>>>> v3.18
@@ -328,7 +388,11 @@ void pch_gbe_hal_power_up_phy(struct pch_gbe_hw *hw)
  * @hw:	Pointer to the HW structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void pch_gbe_hal_power_down_phy(struct pch_gbe_hw *hw)
+=======
+void pch_gbe_hal_power_down_phy(struct pch_gbe_hw *hw)
+>>>>>>> v3.18
 =======
 void pch_gbe_hal_power_down_phy(struct pch_gbe_hw *hw)
 >>>>>>> v3.18

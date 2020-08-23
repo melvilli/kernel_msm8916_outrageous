@@ -54,18 +54,27 @@ enum {
 	IFLA_IPTUN_6RD_PREFIXLEN,
 	IFLA_IPTUN_6RD_RELAY_PREFIXLEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IFLA_IPTUN_ENCAP_TYPE,
 	IFLA_IPTUN_ENCAP_FLAGS,
 	IFLA_IPTUN_ENCAP_SPORT,
 	IFLA_IPTUN_ENCAP_DPORT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IFLA_IPTUN_MAX,
 };
 #define IFLA_IPTUN_MAX	(__IFLA_IPTUN_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum tunnel_encap_types {
 	TUNNEL_ENCAP_NONE,
 	TUNNEL_ENCAP_FOU,
@@ -75,6 +84,9 @@ enum tunnel_encap_types {
 #define TUNNEL_ENCAP_FLAG_CSUM		(1<<0)
 #define TUNNEL_ENCAP_FLAG_CSUM6		(1<<1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SIT-mode i_flags */
 #define	SIT_ISATAP	0x0001
@@ -114,11 +126,17 @@ enum {
 	IFLA_GRE_FLOWINFO,
 	IFLA_GRE_FLAGS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IFLA_GRE_ENCAP_TYPE,
 	IFLA_GRE_ENCAP_FLAGS,
 	IFLA_GRE_ENCAP_SPORT,
 	IFLA_GRE_ENCAP_DPORT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IFLA_GRE_MAX,
 };
@@ -127,7 +145,11 @@ enum {
 
 /* VTI-mode i_flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VTI_ISVTI 0x0001
+=======
+#define VTI_ISVTI ((__force __be16)0x0001)
+>>>>>>> v3.18
 =======
 #define VTI_ISVTI ((__force __be16)0x0001)
 >>>>>>> v3.18

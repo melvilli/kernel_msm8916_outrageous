@@ -67,7 +67,11 @@ static int ladder_select_state(struct cpuidle_driver *drv,
 				struct cpuidle_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ladder_device *ldev = &__get_cpu_var(ladder_devices);
+=======
+	struct ladder_device *ldev = this_cpu_ptr(&ladder_devices);
+>>>>>>> v3.18
 =======
 	struct ladder_device *ldev = this_cpu_ptr(&ladder_devices);
 >>>>>>> v3.18
@@ -149,7 +153,11 @@ static int ladder_enable_device(struct cpuidle_driver *drv,
 	ldev->last_state_idx = CPUIDLE_DRIVER_STATE_START;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < drv->state_count; i++) {
+=======
+	for (i = CPUIDLE_DRIVER_STATE_START; i < drv->state_count; i++) {
+>>>>>>> v3.18
 =======
 	for (i = CPUIDLE_DRIVER_STATE_START; i < drv->state_count; i++) {
 >>>>>>> v3.18
@@ -165,7 +173,11 @@ static int ladder_enable_device(struct cpuidle_driver *drv,
 		if (i < drv->state_count - 1)
 			lstate->threshold.promotion_time = state->exit_latency;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i > 0)
+=======
+		if (i > CPUIDLE_DRIVER_STATE_START)
+>>>>>>> v3.18
 =======
 		if (i > CPUIDLE_DRIVER_STATE_START)
 >>>>>>> v3.18
@@ -183,7 +195,11 @@ static int ladder_enable_device(struct cpuidle_driver *drv,
 static void ladder_reflect(struct cpuidle_device *dev, int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ladder_device *ldev = &__get_cpu_var(ladder_devices);
+=======
+	struct ladder_device *ldev = this_cpu_ptr(&ladder_devices);
+>>>>>>> v3.18
 =======
 	struct ladder_device *ldev = this_cpu_ptr(&ladder_devices);
 >>>>>>> v3.18
@@ -209,6 +225,7 @@ static int __init init_ladder(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * exit_ladder - exits the governor
  */
@@ -220,6 +237,9 @@ static void __exit exit_ladder(void)
 MODULE_LICENSE("GPL");
 module_init(init_ladder);
 module_exit(exit_ladder);
+=======
+postcore_initcall(init_ladder);
+>>>>>>> v3.18
 =======
 postcore_initcall(init_ladder);
 >>>>>>> v3.18

@@ -11,6 +11,7 @@
  */
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/of_fdt.h>
 #include <linux/initrd.h>
@@ -42,6 +43,10 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 }
 #endif
 
+=======
+#include <linux/memblock.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 

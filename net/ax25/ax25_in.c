@@ -423,7 +423,11 @@ static int ax25_rcv(struct sk_buff *skb, struct net_device *dev,
 	if (sk) {
 		if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sk->sk_data_ready(sk, skb->len);
+=======
+			sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 			sk->sk_data_ready(sk);
 >>>>>>> v3.18

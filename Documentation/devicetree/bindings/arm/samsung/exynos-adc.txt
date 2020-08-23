@@ -12,12 +12,15 @@ New driver handles the following
 Required properties:
 - compatible:		Must be "samsung,exynos-adc-v1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 				for exynos4412/5250 controllers.
 			Must be "samsung,exynos-adc-v2" for
 				future controllers.
 - reg:			Contains ADC register address range (base address and
 			length) and the address of the phy enable register.
 =======
+=======
+>>>>>>> v3.18
 				for exynos4412/5250 and s5pv210 controllers.
 			Must be "samsung,exynos-adc-v2" for
 				future controllers.
@@ -37,15 +40,21 @@ Required properties:
 			- The base address and range of ADC register
 			- The base address and range of ADC_PHY register (every
 			  SoC except for s3c24xx/s3c64xx ADC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - interrupts: 		Contains the interrupt information for the timer. The
 			format is being dependent on which interrupt controller
 			the Samsung device uses.
 - #io-channel-cells = <1>; As ADC has multiple outputs
 <<<<<<< HEAD
+<<<<<<< HEAD
 - clocks		From common clock binding: handle to adc clock.
 - clock-names		From common clock binding: Shall be "adc".
 =======
+=======
+>>>>>>> v3.18
 - clocks		From common clock bindings: handles to clocks specified
 			in "clock-names" property, in the same order.
 - clock-names		From common clock bindings: list of clock input names
@@ -53,6 +62,9 @@ Required properties:
 			- "adc" : ADC bus clock
 			- "sclk" : ADC special clock (only for Exynos3250 and
 				   compatible ADC block)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - vdd-supply		VDD input supply.
 
@@ -74,7 +86,10 @@ adc: adc@12D10000 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Example: adding device info in dtsi file for Exynos3250 with additional sclk
 
 adc: adc@126C0000 {
@@ -89,6 +104,9 @@ adc: adc@126C0000 {
 
 	vdd-supply = <&buck5_reg>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example: Adding child nodes in dts file
@@ -98,8 +116,13 @@ adc@12D10000 {
 	/* NTC thermistor is a hwmon device */
 	ncp15wb473@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "ntc,ncp15wb473";
 		pullup-uV = <1800000>;
+=======
+		compatible = "murata,ncp15wb473";
+		pullup-uv = <1800000>;
+>>>>>>> v3.18
 =======
 		compatible = "murata,ncp15wb473";
 		pullup-uv = <1800000>;

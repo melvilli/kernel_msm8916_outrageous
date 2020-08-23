@@ -24,7 +24,10 @@
 #include <linux/types.h>
 #include <linux/blk_types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/msm_rtb.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -38,9 +41,14 @@
 /*
  * Generic IO read/write.  These perform native-endian accesses.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * that some architectures will want to re-define __raw_{read,write}w.
  */
 static inline void __raw_writeb_no_log(u8 val, volatile void __iomem *addr)
+=======
+ */
+static inline void __raw_writeb(u8 val, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
  */
 static inline void __raw_writeb(u8 val, volatile void __iomem *addr)
@@ -50,7 +58,11 @@ static inline void __raw_writeb(u8 val, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_writew_no_log(u16 val, volatile void __iomem *addr)
+=======
+static inline void __raw_writew(u16 val, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline void __raw_writew(u16 val, volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -59,7 +71,11 @@ static inline void __raw_writew(u16 val, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_writel_no_log(u32 val, volatile void __iomem *addr)
+=======
+static inline void __raw_writel(u32 val, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline void __raw_writel(u32 val, volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -68,7 +84,11 @@ static inline void __raw_writel(u32 val, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __raw_writeq_no_log(u64 val, volatile void __iomem *addr)
+=======
+static inline void __raw_writeq(u64 val, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline void __raw_writeq(u64 val, volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -76,6 +96,7 @@ static inline void __raw_writeq(u64 val, volatile void __iomem *addr)
 	asm volatile("str %0, [%1]" : : "r" (val), "r" (addr));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ARM64_A57_ERRATA_832075
 static inline u8 __raw_readb_no_log(const volatile void __iomem *addr)
@@ -110,6 +131,9 @@ static inline u8 __raw_readb_no_log(const volatile void __iomem *addr)
 =======
 static inline u8 __raw_readb(const volatile void __iomem *addr)
 >>>>>>> v3.18
+=======
+static inline u8 __raw_readb(const volatile void __iomem *addr)
+>>>>>>> v3.18
 {
 	u8 val;
 	asm volatile("ldrb %w0, [%1]" : "=r" (val) : "r" (addr));
@@ -117,7 +141,11 @@ static inline u8 __raw_readb(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u16 __raw_readw_no_log(const volatile void __iomem *addr)
+=======
+static inline u16 __raw_readw(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline u16 __raw_readw(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -128,7 +156,11 @@ static inline u16 __raw_readw(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 __raw_readl_no_log(const volatile void __iomem *addr)
+=======
+static inline u32 __raw_readl(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline u32 __raw_readl(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -139,7 +171,11 @@ static inline u32 __raw_readl(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u64 __raw_readq_no_log(const volatile void __iomem *addr)
+=======
+static inline u64 __raw_readq(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline u64 __raw_readq(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -148,6 +184,7 @@ static inline u64 __raw_readq(const volatile void __iomem *addr)
 	asm volatile("ldr %0, [%1]" : "=r" (val) : "r" (addr));
 	return val;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif /* CONFIG_ARM64_A57_ERRATA_832075 */
 
@@ -190,6 +227,8 @@ static inline u64 __raw_readq(const volatile void __iomem *addr)
 #define __raw_readq(a)		__raw_read_logged((a), q, u64)
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /* IO barriers */
 #define __iormb()		rmb()
@@ -213,6 +252,7 @@ static inline u64 __raw_readq(const volatile void __iomem *addr)
 #define writeq_relaxed(v,c)	((void)__raw_writeq((__force u64)cpu_to_le64(v),(c)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define readb_relaxed_no_log(c)	({ u8 __v = __raw_readb_no_log(c); __v; })
 #define readw_relaxed_no_log(c)	({ u16 __v = le16_to_cpu((__force __le16)__raw_readw_no_log(c)); __v; })
 #define readl_relaxed_no_log(c)	({ u32 __v = le32_to_cpu((__force __le32)__raw_readl_no_log(c)); __v; })
@@ -223,6 +263,8 @@ static inline u64 __raw_readq(const volatile void __iomem *addr)
 #define writel_relaxed_no_log(v, c)	((void)__raw_writel_no_log((__force u32)cpu_to_le32(v), (c)))
 #define writeq_relaxed_no_log(v, c)	((void)__raw_writeq_no_log((__force u64)cpu_to_le64(v), (c)))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -240,6 +282,7 @@ static inline u64 __raw_readq(const volatile void __iomem *addr)
 #define writel(v,c)		({ __iowmb(); writel_relaxed((v),(c)); })
 #define writeq(v,c)		({ __iowmb(); writeq_relaxed((v),(c)); })
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define readb_no_log(c)		({ u8  __v = readb_relaxed_no_log(c); __iormb(); __v; })
 #define readw_no_log(c)		({ u16 __v = readw_relaxed_no_log(c); __iormb(); __v; })
@@ -277,6 +320,8 @@ extern void ioport_unmap(void __iomem *addr);
 extern int pci_ioremap_io(unsigned int offset, phys_addr_t phys_addr);
 
 =======
+=======
+>>>>>>> v3.18
 /*
  *  I/O port access primitives.
  */
@@ -284,6 +329,9 @@ extern int pci_ioremap_io(unsigned int offset, phys_addr_t phys_addr);
 #define IO_SPACE_LIMIT		(SZ_32M - 1)
 #define PCI_IOBASE		((void __iomem *)(MODULES_VADDR - SZ_32M))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u8 inb(unsigned long addr)
 {
@@ -392,11 +440,14 @@ extern void __iounmap(volatile void __iomem *addr);
 extern void __iomem *ioremap_cache(phys_addr_t phys_addr, size_t size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PROT_DEFAULT		(PTE_TYPE_PAGE | PTE_AF | PTE_DIRTY)
 #define PROT_DEVICE_nGnRE	(PROT_DEFAULT | PTE_PXN | PTE_UXN | PTE_ATTRINDX(MT_DEVICE_nGnRE))
 #define PROT_NORMAL_NC		(PROT_DEFAULT | PTE_ATTRINDX(MT_NORMAL_NC))
 #define PROT_NORMAL		(PROT_DEFAULT | PTE_ATTRINDX(MT_NORMAL))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ioremap(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
@@ -405,9 +456,12 @@ extern void __iomem *ioremap_cache(phys_addr_t phys_addr, size_t size);
 #define iounmap				__iounmap
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PROT_SECT_DEFAULT	(PMD_TYPE_SECT | PMD_SECT_AF)
 #define PROT_SECT_DEVICE_nGnRE	(PROT_SECT_DEFAULT | PTE_PXN | PTE_UXN | PMD_ATTRINDX(MT_DEVICE_nGnRE))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ARCH_HAS_IOREMAP_WC
@@ -419,7 +473,11 @@ extern void __iomem *ioremap_cache(phys_addr_t phys_addr, size_t size);
  */
 #define ARCH_HAS_VALID_PHYS_ADDR_RANGE
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int valid_phys_addr_range(unsigned long addr, size_t size);
+=======
+extern int valid_phys_addr_range(phys_addr_t addr, size_t size);
+>>>>>>> v3.18
 =======
 extern int valid_phys_addr_range(phys_addr_t addr, size_t size);
 >>>>>>> v3.18

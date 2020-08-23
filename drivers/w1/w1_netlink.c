@@ -30,6 +30,7 @@
 
 #if defined(CONFIG_W1_CON) && (defined(CONFIG_CONNECTOR) || (defined(CONFIG_CONNECTOR_MODULE) && defined(CONFIG_W1_MODULE)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 void w1_netlink_send(struct w1_master *dev, struct w1_netlink_msg *msg)
 {
 	char buf[sizeof(struct cn_msg) + sizeof(struct w1_netlink_msg)];
@@ -143,6 +144,8 @@ static int w1_send_read_reply(struct cn_msg *msg, struct w1_netlink_msg *hdr,
 static int w1_process_command_io(struct w1_master *dev, struct cn_msg *msg,
 		struct w1_netlink_msg *hdr, struct w1_netlink_cmd *cmd)
 =======
+=======
+>>>>>>> v3.18
 
 #define MIN(a, b)                   (((a) < (b)) ? (a) : (b))
 
@@ -420,6 +423,9 @@ static int w1_get_slaves(struct w1_master *dev, struct w1_netlink_cmd *req_cmd)
 
 static int w1_process_command_io(struct w1_master *dev,
 	struct w1_netlink_cmd *cmd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err = 0;
@@ -428,17 +434,23 @@ static int w1_process_command_io(struct w1_master *dev,
 	case W1_CMD_TOUCH:
 		w1_touch_block(dev, cmd->data, cmd->len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		w1_send_read_reply(msg, hdr, cmd);
 		break;
 	case W1_CMD_READ:
 		w1_read_block(dev, cmd->data, cmd->len);
 		w1_send_read_reply(msg, hdr, cmd);
 =======
+=======
+>>>>>>> v3.18
 		w1_netlink_queue_cmd(dev->priv, cmd);
 		break;
 	case W1_CMD_READ:
 		w1_read_block(dev, cmd->data, cmd->len);
 		w1_netlink_queue_cmd(dev->priv, cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case W1_CMD_WRITE:
@@ -452,6 +464,7 @@ static int w1_process_command_io(struct w1_master *dev,
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int w1_process_command_master(struct w1_master *dev, struct cn_msg *req_msg,
 		struct w1_netlink_msg *req_hdr, struct w1_netlink_cmd *req_cmd)
@@ -486,6 +499,8 @@ static int w1_process_command_master(struct w1_master *dev, struct cn_msg *req_m
 		err = w1_process_search_command(dev, msg,
 				PAGE_SIZE - msg->len - sizeof(struct cn_msg));
 =======
+=======
+>>>>>>> v3.18
 static int w1_process_command_addremove(struct w1_master *dev,
 	struct w1_netlink_cmd *cmd)
 {
@@ -535,13 +550,20 @@ static int w1_process_command_master(struct w1_master *dev,
 		mutex_unlock(&dev->bus_mutex);
 		err = w1_get_slaves(dev, req_cmd);
 		mutex_lock(&dev->bus_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case W1_CMD_READ:
 	case W1_CMD_WRITE:
 	case W1_CMD_TOUCH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = w1_process_command_io(dev, req_msg, req_hdr, req_cmd);
+=======
+		err = w1_process_command_io(dev, req_cmd);
+>>>>>>> v3.18
 =======
 		err = w1_process_command_io(dev, req_cmd);
 >>>>>>> v3.18
@@ -550,7 +572,10 @@ static int w1_process_command_master(struct w1_master *dev,
 		err = w1_reset_bus(dev);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case W1_CMD_SLAVE_ADD:
 	case W1_CMD_SLAVE_REMOVE:
 		mutex_unlock(&dev->bus_mutex);
@@ -559,12 +584,16 @@ static int w1_process_command_master(struct w1_master *dev,
 		mutex_unlock(&dev->mutex);
 		mutex_lock(&dev->bus_mutex);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -EINVAL;
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kfree(msg);
 	return err;
@@ -573,17 +602,23 @@ static int w1_process_command_master(struct w1_master *dev,
 static int w1_process_command_slave(struct w1_slave *sl, struct cn_msg *msg,
 		struct w1_netlink_msg *hdr, struct w1_netlink_cmd *cmd)
 =======
+=======
+>>>>>>> v3.18
 	return err;
 }
 
 static int w1_process_command_slave(struct w1_slave *sl,
 		struct w1_netlink_cmd *cmd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	dev_dbg(&sl->master->dev, "%s: %02x.%012llx.%02x: cmd=%02x, len=%u.\n",
 		__func__, sl->reg_num.family, (unsigned long long)sl->reg_num.id,
 		sl->reg_num.crc, cmd->cmd, cmd->len);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return w1_process_command_io(sl->master, msg, hdr, cmd);
 }
@@ -602,6 +637,8 @@ static int w1_process_command_root(struct cn_msg *msg, struct w1_netlink_msg *mc
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	return w1_process_command_io(sl->master, cmd);
 }
 
@@ -612,6 +649,9 @@ static int w1_process_command_root(struct cn_msg *req_cn, u32 portid)
 	struct w1_netlink_msg *msg;
 	u32 *id;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cn = kmalloc(PAGE_SIZE, GFP_KERNEL);
 	if (!cn)
@@ -620,6 +660,7 @@ static int w1_process_command_root(struct cn_msg *req_cn, u32 portid)
 	cn->id.idx = CN_W1_IDX;
 	cn->id.val = CN_W1_VAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cn->seq = msg->seq;
 	cn->ack = 1;
@@ -649,6 +690,8 @@ static int w1_process_command_root(struct cn_msg *req_cn, u32 portid)
 	cn->ack = 0;
 	cn_netlink_send(cn, 0, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	cn->seq = req_cn->seq;
 	cn->ack = req_cn->seq + 1;
 	cn->len = sizeof(struct w1_netlink_msg);
@@ -674,6 +717,9 @@ static int w1_process_command_root(struct cn_msg *req_cn, u32 portid)
 		id++;
 	}
 	cn_netlink_send(cn, portid, 0, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&w1_mlock);
 
@@ -681,6 +727,7 @@ static int w1_process_command_root(struct cn_msg *req_cn, u32 portid)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int w1_netlink_send_error(struct cn_msg *rcmsg, struct w1_netlink_msg *rmsg,
 		struct w1_netlink_cmd *rcmd, int error)
@@ -740,6 +787,8 @@ static void w1_cn_callback(struct cn_msg *msg, struct netlink_skb_parms *nsp)
 #endif
 		if (m->len + sizeof(struct w1_netlink_msg) > msg->len) {
 =======
+=======
+>>>>>>> v3.18
 static void w1_process_cb(struct w1_master *dev, struct w1_async_cmd *async_cmd)
 {
 	struct w1_cb_node *node = container_of(async_cmd, struct w1_cb_node,
@@ -936,11 +985,15 @@ static void w1_cn_callback(struct cn_msg *cn, struct netlink_skb_parms *nsp)
 		sl = NULL;
 
 		if (msg->len + sizeof(struct w1_netlink_msg) > msg_len) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = -E2BIG;
 			break;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (m->type == W1_MASTER_CMD) {
 			dev = w1_search_master_id(m->id.mst.id);
@@ -951,6 +1004,8 @@ static void w1_cn_callback(struct cn_msg *cn, struct netlink_skb_parms *nsp)
 		} else {
 			err = w1_process_command_root(msg, m);
 =======
+=======
+>>>>>>> v3.18
 		/* execute on this thread, no need to process later */
 		if (msg->type == W1_LIST_MASTERS) {
 			err = w1_process_command_root(cn, nsp->portid);
@@ -977,6 +1032,9 @@ static void w1_cn_callback(struct cn_msg *cn, struct netlink_skb_parms *nsp)
 				__func__, cn->id.idx, cn->id.val,
 				msg->type, msg->len);
 			err = -EPROTO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out_cont;
 		}
@@ -987,6 +1045,7 @@ static void w1_cn_callback(struct cn_msg *cn, struct netlink_skb_parms *nsp)
 		}
 
 		err = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!mlen)
 			goto out_cont;
@@ -1028,6 +1087,8 @@ out_cont:
 		msg->len -= sizeof(struct w1_netlink_msg) + m->len;
 		m = (struct w1_netlink_msg *)(((u8 *)m) + sizeof(struct w1_netlink_msg) + m->len);
 =======
+=======
+>>>>>>> v3.18
 
 		atomic_inc(&block->refcnt);
 		node->async.cb = w1_process_cb;
@@ -1053,6 +1114,9 @@ out_cont:
 		msg_len -= sizeof(struct w1_netlink_msg) + msg->len;
 		msg = (struct w1_netlink_msg *)(((u8 *)msg) +
 			sizeof(struct w1_netlink_msg) + msg->len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -1062,6 +1126,11 @@ out_cont:
 			err = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (block)
+		w1_unref_block(block);
+>>>>>>> v3.18
 =======
 	if (block)
 		w1_unref_block(block);
@@ -1083,7 +1152,11 @@ void w1_fini_netlink(void)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 void w1_netlink_send(struct w1_master *dev, struct w1_netlink_msg *msg)
+=======
+void w1_netlink_send(struct w1_master *dev, struct w1_netlink_msg *cn)
+>>>>>>> v3.18
 =======
 void w1_netlink_send(struct w1_master *dev, struct w1_netlink_msg *cn)
 >>>>>>> v3.18

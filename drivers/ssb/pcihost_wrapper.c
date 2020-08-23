@@ -39,7 +39,11 @@ static int ssb_pcihost_resume(struct pci_dev *dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(dev, 0);
+=======
+	pci_set_power_state(dev, PCI_D0);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(dev, PCI_D0);
 >>>>>>> v3.18

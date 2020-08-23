@@ -6,7 +6,10 @@
 #define FALLOC_FL_NO_HIDE_STALE	0x04 /* reserved codepoint */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * FALLOC_FL_COLLAPSE_RANGE is used to remove a range of a file
  * without leaving a hole in the file. The contents of the file beyond
@@ -42,6 +45,9 @@
  * size to remain the same.
  */
 #define FALLOC_FL_ZERO_RANGE		0x10
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_FALLOC_H_ */

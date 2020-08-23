@@ -75,7 +75,11 @@ static int snd_cs5535audio_suspend(struct device *dev)
 
 	if (pci_save_state(pci)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cs5535audio: pci_save_state failed!\n");
+=======
+		dev_err(dev, "pci_save_state failed!\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_save_state failed!\n");
 >>>>>>> v3.18
@@ -99,8 +103,12 @@ static int snd_cs5535audio_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cs5535audio: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -122,7 +130,11 @@ static int snd_cs5535audio_resume(struct device *dev)
 
 	if (!timeout)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Failure getting AC Link ready\n");
+=======
+		dev_err(cs5535au->card->dev, "Failure getting AC Link ready\n");
+>>>>>>> v3.18
 =======
 		dev_err(cs5535au->card->dev, "Failure getting AC Link ready\n");
 >>>>>>> v3.18

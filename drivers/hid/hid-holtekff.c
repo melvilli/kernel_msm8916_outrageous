@@ -99,7 +99,11 @@ static void holtekff_send(struct holtekff_device *holtekff,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg_hid("sending %*ph\n", 7, data);
+=======
+	dbg_hid("sending %7ph\n", data);
+>>>>>>> v3.18
 =======
 	dbg_hid("sending %7ph\n", data);
 >>>>>>> v3.18

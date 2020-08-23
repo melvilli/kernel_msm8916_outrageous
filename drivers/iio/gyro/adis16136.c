@@ -498,7 +498,11 @@ static int adis16136_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*adis16136));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*adis16136));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*adis16136));
 >>>>>>> v3.18
@@ -520,17 +524,23 @@ static int adis16136_probe(struct spi_device *spi)
 	ret = adis_init(&adis16136->adis, indio_dev, spi, &adis16136_data);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
 
 	ret = adis_setup_buffer_and_trigger(&adis16136->adis, indio_dev, NULL);
 	if (ret)
 		goto error_free_dev;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = adis_setup_buffer_and_trigger(&adis16136->adis, indio_dev, NULL);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = adis16136_initial_setup(indio_dev);
@@ -550,8 +560,11 @@ error_stop_device:
 error_cleanup_buffer:
 	adis_cleanup_buffer_and_trigger(&adis16136->adis, indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -568,8 +581,11 @@ static int adis16136_remove(struct spi_device *spi)
 	adis_cleanup_buffer_and_trigger(&adis16136->adis, indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

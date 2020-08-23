@@ -20,6 +20,7 @@
 #include <linux/kvm_host.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The current code can have up to 256 pages for virtio */
 #define VIRTIODESCSPACE (256ul * 4096ul)
 
@@ -31,6 +32,8 @@ typedef int (*intercept_handler_t)(struct kvm_vcpu *vcpu);
 int kvm_handle_sie_intercept(struct kvm_vcpu *vcpu);
 
 =======
+=======
+>>>>>>> v3.18
 typedef int (*intercept_handler_t)(struct kvm_vcpu *vcpu);
 
 /* declare vfacilities extern */
@@ -43,6 +46,9 @@ int kvm_handle_sie_intercept(struct kvm_vcpu *vcpu);
 #define TDB_FORMAT1		1
 #define IS_ITDB_VALID(vcpu)	((*(char *)vcpu->arch.sie_block->itdba == TDB_FORMAT1))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VM_EVENT(d_kvm, d_loglevel, d_string, d_args...)\
 do { \
@@ -59,9 +65,15 @@ do { \
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __cpu_is_stopped(struct kvm_vcpu *vcpu)
 {
 	return atomic_read(&vcpu->arch.sie_block->cpuflags) & CPUSTAT_STOP_INT;
+=======
+static inline int is_vcpu_stopped(struct kvm_vcpu *vcpu)
+{
+	return atomic_read(&vcpu->arch.sie_block->cpuflags) & CPUSTAT_STOPPED;
+>>>>>>> v3.18
 =======
 static inline int is_vcpu_stopped(struct kvm_vcpu *vcpu)
 {
@@ -81,11 +93,14 @@ static inline int kvm_is_ucontrol(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void kvm_s390_set_prefix(struct kvm_vcpu *vcpu, u32 prefix)
 {
 	vcpu->arch.sie_block->prefix = prefix & 0x7fffe000u;
 	vcpu->arch.sie_block->ihcpu  = 0xffff;
 =======
+=======
+>>>>>>> v3.18
 #define GUEST_PREFIX_SHIFT 13
 static inline u32 kvm_s390_get_prefix(struct kvm_vcpu *vcpu)
 {
@@ -97,6 +112,9 @@ static inline void kvm_s390_set_prefix(struct kvm_vcpu *vcpu, u32 prefix)
 	vcpu->arch.sie_block->prefix = prefix >> GUEST_PREFIX_SHIFT;
 	kvm_make_request(KVM_REQ_TLB_FLUSH, vcpu);
 	kvm_make_request(KVM_REQ_MMU_RELOAD, vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -121,7 +139,10 @@ static inline void kvm_s390_get_base_disp_sse(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void kvm_s390_get_regs_rre(struct kvm_vcpu *vcpu, int *r1, int *r2)
 {
 	if (r1)
@@ -130,6 +151,9 @@ static inline void kvm_s390_get_regs_rre(struct kvm_vcpu *vcpu, int *r1, int *r2
 		*r2 = (vcpu->arch.sie_block->ipb & 0x000f0000) >> 16;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u64 kvm_s390_get_base_disp_rsy(struct kvm_vcpu *vcpu)
 {
@@ -152,12 +176,15 @@ static inline u64 kvm_s390_get_base_disp_rs(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_s390_handle_wait(struct kvm_vcpu *vcpu);
 enum hrtimer_restart kvm_s390_idle_wakeup(struct hrtimer *timer);
 void kvm_s390_tasklet(unsigned long parm);
 void kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu);
 void kvm_s390_deliver_pending_machine_checks(struct kvm_vcpu *vcpu);
 =======
+=======
+>>>>>>> v3.18
 /* Set the condition code in the guest program status word */
 static inline void kvm_s390_set_psw_cc(struct kvm_vcpu *vcpu, unsigned long cc)
 {
@@ -177,6 +204,9 @@ enum hrtimer_restart kvm_s390_idle_wakeup(struct hrtimer *timer);
 int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu);
 void kvm_s390_clear_local_irqs(struct kvm_vcpu *vcpu);
 void kvm_s390_clear_float_irqs(struct kvm *kvm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __must_check kvm_s390_inject_vm(struct kvm *kvm,
 				    struct kvm_s390_interrupt *s390int);
@@ -184,12 +214,15 @@ int __must_check kvm_s390_inject_vcpu(struct kvm_vcpu *vcpu,
 				      struct kvm_s390_interrupt *s390int);
 int __must_check kvm_s390_inject_program_int(struct kvm_vcpu *vcpu, u16 code);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check kvm_s390_inject_sigp_stop(struct kvm_vcpu *vcpu, int action);
 struct kvm_s390_interrupt_info *kvm_s390_get_io_int(struct kvm *kvm,
 						    u64 cr6, u64 schid);
 
 /* implemented in priv.c */
 =======
+=======
+>>>>>>> v3.18
 struct kvm_s390_interrupt_info *kvm_s390_get_io_int(struct kvm *kvm,
 						    u64 cr6, u64 schid);
 void kvm_s390_reinject_io_int(struct kvm *kvm,
@@ -198,12 +231,16 @@ int kvm_s390_mask_adapter(struct kvm *kvm, unsigned int id, bool masked);
 
 /* implemented in priv.c */
 int is_valid_psw(psw_t *psw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvm_s390_handle_b2(struct kvm_vcpu *vcpu);
 int kvm_s390_handle_e5(struct kvm_vcpu *vcpu);
 int kvm_s390_handle_01(struct kvm_vcpu *vcpu);
 int kvm_s390_handle_b9(struct kvm_vcpu *vcpu);
 int kvm_s390_handle_lpsw(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int kvm_s390_handle_priv_eb(struct kvm_vcpu *vcpu);
 
@@ -216,6 +253,8 @@ int kvm_s390_vcpu_store_status(struct kvm_vcpu *vcpu,
 /* implemented in diag.c */
 int kvm_s390_handle_diag(struct kvm_vcpu *vcpu);
 =======
+=======
+>>>>>>> v3.18
 int kvm_s390_handle_stctl(struct kvm_vcpu *vcpu);
 int kvm_s390_handle_lctl(struct kvm_vcpu *vcpu);
 int kvm_s390_handle_eb(struct kvm_vcpu *vcpu);
@@ -295,6 +334,9 @@ int kvm_s390_import_bp_data(struct kvm_vcpu *vcpu,
 void kvm_s390_clear_bp_data(struct kvm_vcpu *vcpu);
 void kvm_s390_prepare_debug_exit(struct kvm_vcpu *vcpu);
 void kvm_s390_handle_per_event(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

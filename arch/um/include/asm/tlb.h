@@ -60,7 +60,10 @@ extern void flush_tlb_mm_range(struct mm_struct *mm, unsigned long start,
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
 {
 	flush_tlb_mm_range(tlb->mm, tlb->start, tlb->end);
@@ -73,6 +76,9 @@ tlb_flush_mmu_free(struct mmu_gather *tlb)
 }
 
 static inline void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 tlb_flush_mmu(struct mmu_gather *tlb)
 {
@@ -80,8 +86,13 @@ tlb_flush_mmu(struct mmu_gather *tlb)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_tlb_mm_range(tlb->mm, tlb->start, tlb->end);
 	init_tlb_gather(tlb);
+=======
+	tlb_flush_mmu_tlbonly(tlb);
+	tlb_flush_mmu_free(tlb);
+>>>>>>> v3.18
 =======
 	tlb_flush_mmu_tlbonly(tlb);
 	tlb_flush_mmu_free(tlb);

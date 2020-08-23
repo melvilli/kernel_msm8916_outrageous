@@ -22,6 +22,7 @@
 #include <linux/serial_core.h>
 #include <linux/serial.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/clk.h>
 #include <linux/tty.h>
@@ -33,6 +34,8 @@
 
 #define UART_CLPS711X_NAME	"uart-clps711x"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/io.h>
 #include <linux/tty.h>
@@ -48,11 +51,15 @@
 #include "serial_mctrl_gpio.h"
 
 #define UART_CLPS711X_DEVNAME	"ttyCL"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UART_CLPS711X_NR	2
 #define UART_CLPS711X_MAJOR	204
 #define UART_CLPS711X_MINOR	40
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define UBRLCR(port)		((port)->line ? UBRLCR2 : UBRLCR1)
 #define UARTDR(port)		((port)->line ? UARTDR2 : UARTDR1)
@@ -70,6 +77,8 @@ struct clps711x_port {
 	struct console		console;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define UARTDR_OFFSET		(0x00)
 #define UBRLCR_OFFSET		(0x40)
 
@@ -104,6 +113,9 @@ static struct uart_driver clps711x_uart = {
 	.major		= UART_CLPS711X_MAJOR,
 	.minor		= UART_CLPS711X_MINOR,
 	.nr		= UART_CLPS711X_NR,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -112,9 +124,15 @@ static void uart_clps711x_stop_tx(struct uart_port *port)
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s->tx_enabled[port->line]) {
 		disable_irq(TX_IRQ(port));
 		s->tx_enabled[port->line] = 0;
+=======
+	if (s->tx_enabled) {
+		disable_irq(port->irq);
+		s->tx_enabled = 0;
+>>>>>>> v3.18
 =======
 	if (s->tx_enabled) {
 		disable_irq(port->irq);
@@ -127,6 +145,7 @@ static void uart_clps711x_start_tx(struct uart_port *port)
 {
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!s->tx_enabled[port->line]) {
 		enable_irq(TX_IRQ(port));
@@ -156,6 +175,8 @@ static irqreturn_t uart_clps711x_int_rx(int irq, void *dev_id)
 
 		ch = clps_readw(UARTDR(port));
 =======
+=======
+>>>>>>> v3.18
 	if (!s->tx_enabled) {
 		s->tx_enabled = 1;
 		enable_irq(port->irq);
@@ -177,6 +198,9 @@ static irqreturn_t uart_clps711x_int_rx(int irq, void *dev_id)
 			break;
 
 		ch = readw(port->membase + UARTDR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = ch & (UARTDR_FRMERR | UARTDR_PARERR | UARTDR_OVERR);
 		ch &= 0xff;
@@ -224,7 +248,11 @@ static irqreturn_t uart_clps711x_int_tx(int irq, void *dev_id)
 
 	if (port->x_char) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clps_writew(port->x_char, UARTDR(port));
+=======
+		writew(port->x_char, port->membase + UARTDR_OFFSET);
+>>>>>>> v3.18
 =======
 		writew(port->x_char, port->membase + UARTDR_OFFSET);
 >>>>>>> v3.18
@@ -235,24 +263,33 @@ static irqreturn_t uart_clps711x_int_tx(int irq, void *dev_id)
 
 	if (uart_circ_empty(xmit) || uart_tx_stopped(port)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		disable_irq_nosync(TX_IRQ(port));
 		s->tx_enabled[port->line] = 0;
 =======
+=======
+>>>>>>> v3.18
 		if (s->tx_enabled) {
 			disable_irq_nosync(port->irq);
 			s->tx_enabled = 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return IRQ_HANDLED;
 	}
 
 	while (!uart_circ_empty(xmit)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clps_writew(xmit->buf[xmit->tail], UARTDR(port));
 		xmit->tail = (xmit->tail + 1) & (UART_XMIT_SIZE - 1);
 		port->icount.tx++;
 		if (clps_readl(SYSFLG(port) & SYSFLG_UTXFF))
 =======
+=======
+>>>>>>> v3.18
 		u32 sysflg = 0;
 
 		writew(xmit->buf[xmit->tail], port->membase + UARTDR_OFFSET);
@@ -261,6 +298,9 @@ static irqreturn_t uart_clps711x_int_tx(int irq, void *dev_id)
 
 		regmap_read(s->syscon, SYSFLG_OFFSET, &sysflg);
 		if (sysflg & SYSFLG_UTXFF)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 	}
@@ -274,19 +314,26 @@ static irqreturn_t uart_clps711x_int_tx(int irq, void *dev_id)
 static unsigned int uart_clps711x_tx_empty(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (clps_readl(SYSFLG(port) & SYSFLG_UBUSY)) ? 0 : TIOCSER_TEMT;
 =======
+=======
+>>>>>>> v3.18
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 	u32 sysflg = 0;
 
 	regmap_read(s->syscon, SYSFLG_OFFSET, &sysflg);
 
 	return (sysflg & SYSFLG_UBUSY) ? 0 : TIOCSER_TEMT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static unsigned int uart_clps711x_get_mctrl(struct uart_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int status, result = 0;
 
@@ -303,17 +350,28 @@ static unsigned int uart_clps711x_get_mctrl(struct uart_port *port)
 
 	return result;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int result = TIOCM_DSR | TIOCM_CTS | TIOCM_CAR;
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 
 	return mctrl_gpio_get(s->gpios, &result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void uart_clps711x_set_mctrl(struct uart_port *port, unsigned int mctrl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Do nothing */
+=======
+	struct clps711x_port *s = dev_get_drvdata(port->dev);
+
+	mctrl_gpio_set(s->gpios, mctrl);
+>>>>>>> v3.18
 =======
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 
@@ -323,6 +381,7 @@ static void uart_clps711x_set_mctrl(struct uart_port *port, unsigned int mctrl)
 
 static void uart_clps711x_break_ctl(struct uart_port *port, int break_state)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	unsigned int ubrlcr;
@@ -335,15 +394,23 @@ static void uart_clps711x_break_ctl(struct uart_port *port, int break_state)
 
 	ubrlcr = readl(port->membase + UBRLCR_OFFSET);
 >>>>>>> v3.18
+=======
+	unsigned int ubrlcr;
+
+	ubrlcr = readl(port->membase + UBRLCR_OFFSET);
+>>>>>>> v3.18
 	if (break_state)
 		ubrlcr |= UBRLCR_BREAK;
 	else
 		ubrlcr &= ~UBRLCR_BREAK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clps_writel(ubrlcr, UBRLCR(port));
 
 	spin_unlock_irqrestore(&port->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	writel(ubrlcr, port->membase + UBRLCR_OFFSET);
 }
 
@@ -355,12 +422,16 @@ static void uart_clps711x_set_ldisc(struct uart_port *port, int ld)
 		regmap_update_bits(s->syscon, SYSCON_OFFSET, SYSCON1_SIREN,
 				   (ld == N_IRDA) ? SYSCON1_SIREN : 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int uart_clps711x_startup(struct uart_port *port)
 {
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -386,6 +457,8 @@ static int uart_clps711x_startup(struct uart_port *port)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	/* Disable break */
 	writel(readl(port->membase + UBRLCR_OFFSET) & ~UBRLCR_BREAK,
@@ -394,11 +467,15 @@ static int uart_clps711x_startup(struct uart_port *port)
 	/* Enable the port */
 	return regmap_update_bits(s->syscon, SYSCON_OFFSET,
 				  SYSCON_UARTEN, SYSCON_UARTEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void uart_clps711x_shutdown(struct uart_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Free the interrupts */
 	devm_free_irq(port->dev, TX_IRQ(port), port);
@@ -407,10 +484,15 @@ static void uart_clps711x_shutdown(struct uart_port *port)
 	/* Disable the port */
 	clps_writel(clps_readl(SYSCON(port)) & ~SYSCON_UARTEN, SYSCON(port));
 =======
+=======
+>>>>>>> v3.18
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 
 	/* Disable the port */
 	regmap_update_bits(s->syscon, SYSCON_OFFSET, SYSCON_UARTEN, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -419,8 +501,13 @@ static void uart_clps711x_set_termios(struct uart_port *port,
 				      struct ktermios *old)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ubrlcr, baud, quot;
 	unsigned long flags;
+=======
+	u32 ubrlcr;
+	unsigned int baud, quot;
+>>>>>>> v3.18
 =======
 	u32 ubrlcr;
 	unsigned int baud, quot;
@@ -464,8 +551,11 @@ static void uart_clps711x_set_termios(struct uart_port *port,
 	ubrlcr |= UBRLCR_FIFOEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&port->lock, flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set read status mask */
@@ -482,9 +572,13 @@ static void uart_clps711x_set_termios(struct uart_port *port,
 	uart_update_timeout(port, termios->c_cflag, baud);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clps_writel(ubrlcr | (quot - 1), UBRLCR(port));
 
 	spin_unlock_irqrestore(&port->lock, flags);
+=======
+	writel(ubrlcr | (quot - 1), port->membase + UBRLCR_OFFSET);
+>>>>>>> v3.18
 =======
 	writel(ubrlcr | (quot - 1), port->membase + UBRLCR_OFFSET);
 >>>>>>> v3.18
@@ -502,6 +596,7 @@ static void uart_clps711x_config_port(struct uart_port *port, int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void uart_clps711x_release_port(struct uart_port *port)
 {
 	/* Do nothing */
@@ -511,12 +606,17 @@ static int uart_clps711x_request_port(struct uart_port *port)
 {
 	/* Do nothing */
 =======
+=======
+>>>>>>> v3.18
 static void uart_clps711x_nop_void(struct uart_port *port)
 {
 }
 
 static int uart_clps711x_nop_int(struct uart_port *port)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -528,9 +628,15 @@ static const struct uart_ops uart_clps711x_ops = {
 	.stop_tx	= uart_clps711x_stop_tx,
 	.start_tx	= uart_clps711x_start_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.stop_rx	= uart_clps711x_stop_rx,
 	.enable_ms	= uart_clps711x_enable_ms,
 	.break_ctl	= uart_clps711x_break_ctl,
+=======
+	.stop_rx	= uart_clps711x_nop_void,
+	.break_ctl	= uart_clps711x_break_ctl,
+	.set_ldisc	= uart_clps711x_set_ldisc,
+>>>>>>> v3.18
 =======
 	.stop_rx	= uart_clps711x_nop_void,
 	.break_ctl	= uart_clps711x_break_ctl,
@@ -542,8 +648,13 @@ static const struct uart_ops uart_clps711x_ops = {
 	.type		= uart_clps711x_type,
 	.config_port	= uart_clps711x_config_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release_port	= uart_clps711x_release_port,
 	.request_port	= uart_clps711x_request_port,
+=======
+	.release_port	= uart_clps711x_nop_void,
+	.request_port	= uart_clps711x_nop_int,
+>>>>>>> v3.18
 =======
 	.release_port	= uart_clps711x_nop_void,
 	.request_port	= uart_clps711x_nop_int,
@@ -554,11 +665,14 @@ static const struct uart_ops uart_clps711x_ops = {
 static void uart_clps711x_console_putchar(struct uart_port *port, int ch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (clps_readl(SYSFLG(port)) & SYSFLG_UTXFF)
 		barrier();
 
 	clps_writew(ch, UARTDR(port));
 =======
+=======
+>>>>>>> v3.18
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 	u32 sysflg = 0;
 
@@ -568,12 +682,16 @@ static void uart_clps711x_console_putchar(struct uart_port *port, int ch)
 	} while (sysflg & SYSFLG_UTXFF);
 
 	writew(ch, port->membase + UARTDR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void uart_clps711x_console_write(struct console *co, const char *c,
 					unsigned n)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clps711x_port *s = (struct clps711x_port *)co->data;
 	struct uart_port *port = &s->port[co->index];
@@ -587,10 +705,16 @@ static void uart_clps711x_console_write(struct console *co, const char *c,
 	struct clps711x_port *s = dev_get_drvdata(port->dev);
 	u32 sysflg = 0;
 >>>>>>> v3.18
+=======
+	struct uart_port *port = clps711x_uart.state[co->index].uart_port;
+	struct clps711x_port *s = dev_get_drvdata(port->dev);
+	u32 sysflg = 0;
+>>>>>>> v3.18
 
 	uart_console_write(port, c, n, uart_clps711x_console_putchar);
 
 	/* Wait for transmitter to become empty */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (clps_readl(SYSFLG(port)) & SYSFLG_UBUSY)
 		barrier();
@@ -640,6 +764,8 @@ static int uart_clps711x_console_setup(struct console *co, char *options)
 	return uart_set_options(port, co, baud, parity, bits, flow);
 }
 =======
+=======
+>>>>>>> v3.18
 	do {
 		regmap_read(s->syscon, SYSFLG_OFFSET, &sysflg);
 	} while (sysflg & SYSFLG_UBUSY);
@@ -702,11 +828,15 @@ static struct console clps711x_console = {
 	.flags	= CON_PRINTBUFFER,
 	.index	= -1,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 static int uart_clps711x_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clps711x_port *s;
 	int ret, i;
@@ -765,6 +895,8 @@ static int uart_clps711x_probe(struct platform_device *pdev)
 err_out:
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = pdev->dev.of_node;
 	int ret, index = np ? of_alias_get_id(np, "serial") : pdev->id;
 	struct clps711x_port *s;
@@ -843,6 +975,9 @@ err_out:
 			       dev_name(&pdev->dev), &s->port);
 	if (ret)
 		uart_remove_one_port(&clps711x_uart, &s->port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -851,6 +986,7 @@ err_out:
 static int uart_clps711x_remove(struct platform_device *pdev)
 {
 	struct clps711x_port *s = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -869,6 +1005,8 @@ static struct platform_driver clps711x_uart_driver = {
 		.name	= UART_CLPS711X_NAME,
 		.owner	= THIS_MODULE,
 =======
+=======
+>>>>>>> v3.18
 
 	return uart_remove_one_port(&clps711x_uart, &s->port);
 }
@@ -884,11 +1022,15 @@ static struct platform_driver clps711x_uart_platform = {
 		.name		= "clps711x-uart",
 		.owner		= THIS_MODULE,
 		.of_match_table	= of_match_ptr(clps711x_uart_dt_ids),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe	= uart_clps711x_probe,
 	.remove	= uart_clps711x_remove,
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 module_platform_driver(clps711x_uart_driver);
 
@@ -900,6 +1042,8 @@ static int __init uart_clps711x_init(void)
 {
 	return platform_device_register(&clps711x_uart_device);
 =======
+=======
+>>>>>>> v3.18
 
 static int __init uart_clps711x_init(void)
 {
@@ -915,6 +1059,9 @@ static int __init uart_clps711x_init(void)
 		return ret;
 
 	return platform_driver_register(&clps711x_uart_platform);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 module_init(uart_clps711x_init);
@@ -922,7 +1069,12 @@ module_init(uart_clps711x_init);
 static void __exit uart_clps711x_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_unregister(&clps711x_uart_device);
+=======
+	platform_driver_unregister(&clps711x_uart_platform);
+	uart_unregister_driver(&clps711x_uart);
+>>>>>>> v3.18
 =======
 	platform_driver_unregister(&clps711x_uart_platform);
 	uart_unregister_driver(&clps711x_uart);

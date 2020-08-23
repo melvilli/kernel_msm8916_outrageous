@@ -40,11 +40,17 @@ static const struct platform_device_id ath9k_platform_id_table[] = {
 		.driver_data = AR9300_DEVID_QCA955X,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.name = "qca953x_wmac",
 		.driver_data = AR9300_DEVID_AR953X,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -62,7 +68,11 @@ static bool ath_ahb_eeprom_read(struct ath_common *common, u32 off, u16 *data)
 	struct ath9k_platform_data *pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = (struct ath9k_platform_data *) pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -96,7 +106,11 @@ static int ath_ahb_probe(struct platform_device *pdev)
 	char hw_name[64];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.platform_data) {
+=======
+	if (!dev_get_platdata(&pdev->dev)) {
+>>>>>>> v3.18
 =======
 	if (!dev_get_platdata(&pdev->dev)) {
 >>>>>>> v3.18
@@ -125,6 +139,10 @@ static int ath_ahb_probe(struct platform_device *pdev)
 	irq = res->start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ath9k_fill_chanctx_ops();
+>>>>>>> v3.18
 =======
 	ath9k_fill_chanctx_ops();
 >>>>>>> v3.18
@@ -144,9 +162,12 @@ static int ath_ahb_probe(struct platform_device *pdev)
 	sc->irq = irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Will be cleared in ath9k_start() */
 	set_bit(SC_OP_INVALID, &sc->sc_flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = request_irq(irq, ath_isr, IRQF_SHARED, "ath9k", sc);
@@ -173,7 +194,10 @@ static int ath_ahb_probe(struct platform_device *pdev)
  err_free_hw:
 	ieee80211_free_hw(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -190,7 +214,10 @@ static int ath_ahb_remove(struct platform_device *pdev)
 		free_irq(sc->irq, sc);
 		ieee80211_free_hw(sc->hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

@@ -10,7 +10,11 @@
 #define SCxSR_BRK(port)		(((port)->type == PORT_SCI) ? 0x00       : SCIF_BRK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCxSR_ERRORS(port)	(to_sci_port(port)->cfg->error_mask)
+=======
+#define SCxSR_ERRORS(port)	(to_sci_port(port)->error_mask)
+>>>>>>> v3.18
 =======
 #define SCxSR_ERRORS(port)	(to_sci_port(port)->error_mask)
 >>>>>>> v3.18

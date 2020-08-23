@@ -17,7 +17,11 @@ ipv6-$(CONFIG_IPV6_MROUTE) += ip6mr.o
 
 ipv6-$(CONFIG_XFRM) += xfrm6_policy.o xfrm6_state.o xfrm6_input.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm6_output.o
+=======
+	xfrm6_output.o xfrm6_protocol.o
+>>>>>>> v3.18
 =======
 	xfrm6_output.o xfrm6_protocol.o
 >>>>>>> v3.18
@@ -41,6 +45,10 @@ obj-$(CONFIG_IPV6_MIP6) += mip6.o
 obj-$(CONFIG_NETFILTER)	+= netfilter/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_IPV6_VTI) += ip6_vti.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_IPV6_VTI) += ip6_vti.o
 >>>>>>> v3.18
@@ -53,9 +61,15 @@ obj-$(CONFIG_INET) += output_core.o protocol.o $(ipv6-offload)
 
 obj-$(subst m,y,$(CONFIG_IPV6)) += inet6_hashtables.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 ifneq ($(CONFIG_IPV6),)
 obj-$(CONFIG_NET_UDP_TUNNEL) += ip6_udp_tunnel.o
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

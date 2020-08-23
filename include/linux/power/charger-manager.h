@@ -38,6 +38,11 @@ enum cm_event_types {
 	CM_EVENT_BATT_IN,
 	CM_EVENT_BATT_OUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CM_EVENT_BATT_OVERHEAT,
+	CM_EVENT_BATT_COLD,
+>>>>>>> v3.18
 =======
 	CM_EVENT_BATT_OVERHEAT,
 	CM_EVENT_BATT_COLD,
@@ -179,16 +184,22 @@ struct charger_regulator {
  * @charger_regulators: array of charger regulators
  * @psy_fuel_gauge: the name of power-supply for fuel gauge
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @temperature_out_of_range:
  *	Determine whether the status is overheat or cold or normal.
  *	return_value > 0: overheat
  *	return_value == 0: normal
  *	return_value < 0: cold
 =======
+=======
+>>>>>>> v3.18
  * @thermal_zone : the name of thermal zone for battery
  * @temp_min : Minimum battery temperature for charging.
  * @temp_max : Maximum battery temperature for charging.
  * @temp_diff : Temperature diffential to restart charging.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @measure_battery_temp:
  *	true: measure battery temperature
@@ -203,7 +214,11 @@ struct charger_regulator {
  */
 struct charger_desc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *psy_name;
+=======
+	const char *psy_name;
+>>>>>>> v3.18
 =======
 	const char *psy_name;
 >>>>>>> v3.18
@@ -220,7 +235,11 @@ struct charger_desc {
 	enum data_source battery_present;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char **psy_charger_stat;
+=======
+	const char **psy_charger_stat;
+>>>>>>> v3.18
 =======
 	const char **psy_charger_stat;
 >>>>>>> v3.18
@@ -228,6 +247,7 @@ struct charger_desc {
 	int num_charger_regulators;
 	struct charger_regulator *charger_regulators;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char *psy_fuel_gauge;
 
@@ -237,6 +257,8 @@ struct charger_desc {
 	u64 charging_max_duration_ms;
 	u64 discharging_max_duration_ms;
 =======
+=======
+>>>>>>> v3.18
 	const char *psy_fuel_gauge;
 
 	const char *thermal_zone;
@@ -249,6 +271,9 @@ struct charger_desc {
 
 	u32 charging_max_duration_ms;
 	u32 discharging_max_duration_ms;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -262,6 +287,10 @@ struct charger_desc {
  * @fuel_gauge: power_supply for fuel gauge
  * @charger_stat: array of power_supply for chargers
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @tzd_batt : thermal zone device for battery
+>>>>>>> v3.18
 =======
  * @tzd_batt : thermal zone device for battery
 >>>>>>> v3.18
@@ -272,7 +301,10 @@ struct charger_desc {
  * @emergency_stop:
  *	When setting true, stop charging
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @last_temp_mC: the measured temperature in milli-Celsius
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @psy_name_buf: the name of power-supply-class for charger manager
@@ -290,9 +322,15 @@ struct charger_manager {
 	struct charger_desc *desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct power_supply *fuel_gauge;
 	struct power_supply **charger_stat;
 
+=======
+#ifdef CONFIG_THERMAL
+	struct thermal_zone_device *tzd_batt;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_THERMAL
 	struct thermal_zone_device *tzd_batt;
@@ -305,7 +343,10 @@ struct charger_manager {
 
 	int emergency_stop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int last_temp_mC;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

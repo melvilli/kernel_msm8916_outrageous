@@ -14,7 +14,12 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "am33xx.dtsi"
+=======
+#include "am33xx.dtsi"
+#include <dt-bindings/pwm/pwm.h>
+>>>>>>> v3.18
 =======
 #include "am33xx.dtsi"
 #include <dt-bindings/pwm/pwm.h>
@@ -35,6 +40,7 @@
 		reg = <0x80000000 0x10000000>; /* 256 MB */
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	am33xx_pinmux: pinmux@44e10800 {
 		pinctrl-names = "default";
@@ -104,6 +110,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	vbat: fixedregulator@0 {
 		compatible = "regulator-fixed";
 		regulator-name = "vbat";
@@ -119,8 +127,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	leds {
 =======
+=======
+>>>>>>> v3.18
 	wl12xx_vmmc: fixedregulator@2 {
 		pinctrl-names = "default";
 		pinctrl-0 = <&wl12xx_gpio>;
@@ -148,13 +159,20 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&user_leds_s0>;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "gpio-leds";
 
 		led@1 {
 			label = "evmsk:green:usr0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 4 0>;
+=======
+			gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -164,7 +182,11 @@
 		led@2 {
 			label = "evmsk:green:usr1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 5 0>;
+=======
+			gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -174,7 +196,11 @@
 		led@3 {
 			label = "evmsk:green:mmc0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 6 0>;
+=======
+			gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -185,7 +211,11 @@
 		led@4 {
 			label = "evmsk:green:heartbeat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 7 0>;
+=======
+			gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -203,7 +233,11 @@
 			label = "button0";
 			linux,code = <0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio2 3 0>;
+=======
+			gpios = <&gpio2 3 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio2 3 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -213,7 +247,11 @@
 			label = "button1";
 			linux,code = <0x101>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio2 2 0>;
+=======
+			gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -223,7 +261,11 @@
 			label = "button2";
 			linux,code = <0x102>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio0 30 0>;
+=======
+			gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -234,8 +276,11 @@
 			label = "button3";
 			linux,code = <0x103>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio2 5 0>;
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&gpio2 5 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -289,14 +334,20 @@
 				hsync-active    = <0>;
 				vsync-active    = <0>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "tps65910.dtsi"
 =======
+=======
+>>>>>>> v3.18
 &am33xx_pinmux {
 	pinctrl-names = "default";
 	pinctrl-0 = <&gpio_keys_s0 &clkout2_pin>;
@@ -625,6 +676,9 @@
 };
 
 #include "tps65910.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 &tps {
@@ -698,6 +752,11 @@
 
 		vmmc_reg: regulator@12 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <3300000>;
+>>>>>>> v3.18
 =======
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <3300000>;
@@ -707,7 +766,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &mac {
 	pinctrl-names = "default", "sleep";
@@ -796,4 +858,7 @@
 &lcdc {
       status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

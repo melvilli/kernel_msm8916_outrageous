@@ -36,6 +36,11 @@
 /* Don't allow forwarding control protocols like STP and LLDP */
 #define BR_GROUPFWD_RESTRICTED	0x4007u
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* The Nearest Customer Bridge Group Address, 01-80-C2-00-00-[00,0B,0C,0D,0F] */
+#define BR_GROUPFWD_8021AD	0xB801u
+>>>>>>> v3.18
 =======
 /* The Nearest Customer Bridge Group Address, 01-80-C2-00-00-[00,0B,0C,0D,0F] */
 #define BR_GROUPFWD_8021AD	0xB801u
@@ -52,7 +57,11 @@ struct bridge_id
 {
 	unsigned char	prio[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char	addr[6];
+=======
+	unsigned char	addr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	unsigned char	addr[ETH_ALEN];
 >>>>>>> v3.18
@@ -60,6 +69,7 @@ struct bridge_id
 
 struct mac_addr
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned char	addr[6];
 };
@@ -77,6 +87,8 @@ struct br_ip
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned char	addr[ETH_ALEN];
 };
 
@@ -100,6 +112,9 @@ struct bridge_mcast_querier {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct net_port_vlans {
 	u16				port_idx;
@@ -126,6 +141,10 @@ struct net_bridge_fdb_entry
 	unsigned char			is_local;
 	unsigned char			is_static;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char			added_by_user;
+>>>>>>> v3.18
 =======
 	unsigned char			added_by_user;
 >>>>>>> v3.18
@@ -197,6 +216,7 @@ struct net_bridge_port
 #define BR_MULTICAST_FAST_LEAVE	0x00000008
 #define BR_ADMIN_COST		0x00000010
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_BRIDGE_IGMP_SNOOPING
 	u32				multicast_startup_queries_sent;
@@ -204,6 +224,8 @@ struct net_bridge_port
 	struct timer_list		multicast_router_timer;
 	struct timer_list		multicast_query_timer;
 =======
+=======
+>>>>>>> v3.18
 #define BR_LEARNING		0x00000020
 #define BR_FLOOD		0x00000040
 #define BR_AUTO_MASK (BR_FLOOD | BR_LEARNING)
@@ -216,6 +238,9 @@ struct net_bridge_port
 #endif /* IS_ENABLED(CONFIG_IPV6) */
 	unsigned char			multicast_router;
 	struct timer_list		multicast_router_timer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct hlist_head		mglist;
 	struct hlist_node		rlist;
@@ -234,6 +259,12 @@ struct net_bridge_port
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define br_auto_port(p) ((p)->flags & BR_AUTO_MASK)
+#define br_promisc_port(p) ((p)->flags & BR_PROMISC)
+
+>>>>>>> v3.18
 =======
 #define br_auto_port(p) ((p)->flags & BR_AUTO_MASK)
 #define br_promisc_port(p) ((p)->flags & BR_PROMISC)
@@ -253,6 +284,7 @@ static inline struct net_bridge_port *br_port_get_rtnl(const struct net_device *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct br_cpu_netstats {
 	u64			rx_packets;
 	u64			rx_bytes;
@@ -263,6 +295,8 @@ struct br_cpu_netstats {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct net_bridge
 {
 	spinlock_t			lock;
@@ -270,15 +304,21 @@ struct net_bridge
 	struct net_device		*dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct br_cpu_netstats __percpu *stats;
 	spinlock_t			hash_lock;
 	struct hlist_head		hash[BR_HASH_SIZE];
 #ifdef CONFIG_BRIDGE_NETFILTER
 =======
+=======
+>>>>>>> v3.18
 	struct pcpu_sw_netstats		__percpu *stats;
 	spinlock_t			hash_lock;
 	struct hlist_head		hash[BR_HASH_SIZE];
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtable 			fake_rtable;
 	bool				nf_call_iptables;
@@ -287,6 +327,10 @@ struct net_bridge
 #endif
 	u16				group_fwd_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16				group_fwd_mask_required;
+>>>>>>> v3.18
 =======
 	u16				group_fwd_mask_required;
 >>>>>>> v3.18
@@ -305,6 +349,10 @@ struct net_bridge
 
 	u8				group_addr[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool				group_addr_set;
+>>>>>>> v3.18
 =======
 	bool				group_addr_set;
 >>>>>>> v3.18
@@ -325,6 +373,10 @@ struct net_bridge
 	u8				multicast_disabled:1;
 	u8				multicast_querier:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8				multicast_query_use_ifaddr:1;
+>>>>>>> v3.18
 =======
 	u8				multicast_query_use_ifaddr:1;
 >>>>>>> v3.18
@@ -334,7 +386,10 @@ struct net_bridge
 
 	u32				multicast_last_member_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32				multicast_startup_queries_sent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32				multicast_startup_query_count;
@@ -352,9 +407,12 @@ struct net_bridge
 
 	struct timer_list		multicast_router_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list		multicast_querier_timer;
 	struct timer_list		multicast_query_timer;
 =======
+=======
+>>>>>>> v3.18
 	struct bridge_mcast_other_query	ip4_other_query;
 	struct bridge_mcast_own_query	ip4_own_query;
 	struct bridge_mcast_querier	ip4_querier;
@@ -363,6 +421,9 @@ struct net_bridge
 	struct bridge_mcast_own_query	ip6_own_query;
 	struct bridge_mcast_querier	ip6_querier;
 #endif /* IS_ENABLED(CONFIG_IPV6) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -372,14 +433,20 @@ struct net_bridge
 	struct timer_list		gc_timer;
 	struct kobject			*ifobj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_VLAN_FILTERING
 	u8				vlan_enabled;
 =======
+=======
+>>>>>>> v3.18
 	u32				auto_cnt;
 #ifdef CONFIG_BRIDGE_VLAN_FILTERING
 	u8				vlan_enabled;
 	__be16				vlan_proto;
 	u16				default_pvid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct net_port_vlans __rcu	*vlan_info;
 #endif
@@ -388,6 +455,10 @@ struct net_bridge
 struct br_input_skb_cb {
 	struct net_device *brdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -396,13 +467,19 @@ struct br_input_skb_cb {
 	int mrouters_only;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	u16 frag_max_size;
 
 #ifdef CONFIG_BRIDGE_VLAN_FILTERING
 	bool vlan_filtered;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -430,8 +507,11 @@ struct br_input_skb_cb {
 	pr_debug("%s: " format,  (br)->dev->name, ##args)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct notifier_block br_device_notifier;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* called under bridge lock */
@@ -441,6 +521,7 @@ static inline int br_is_root_bridge(const struct net_bridge *br)
 }
 
 /* br_device.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void br_dev_setup(struct net_device *dev);
 extern void br_dev_delete(struct net_device *dev, struct list_head *list);
@@ -453,10 +534,15 @@ static inline struct netpoll_info *br_netpoll_info(struct net_bridge *br)
 }
 
 =======
+=======
+>>>>>>> v3.18
 void br_dev_setup(struct net_device *dev);
 void br_dev_delete(struct net_device *dev, struct list_head *list);
 netdev_tx_t br_dev_xmit(struct sk_buff *skb, struct net_device *dev);
 #ifdef CONFIG_NET_POLL_CONTROLLER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void br_netpoll_send_skb(const struct net_bridge_port *p,
 				       struct sk_buff *skb)
@@ -467,6 +553,7 @@ static inline void br_netpoll_send_skb(const struct net_bridge_port *p,
 		netpoll_send_skb(np, skb);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int br_netpoll_enable(struct net_bridge_port *p, gfp_t gfp);
 extern void br_netpoll_disable(struct net_bridge_port *p);
@@ -481,13 +568,22 @@ int br_netpoll_enable(struct net_bridge_port *p);
 void br_netpoll_disable(struct net_bridge_port *p);
 #else
 >>>>>>> v3.18
+=======
+int br_netpoll_enable(struct net_bridge_port *p);
+void br_netpoll_disable(struct net_bridge_port *p);
+#else
+>>>>>>> v3.18
 static inline void br_netpoll_send_skb(const struct net_bridge_port *p,
 				       struct sk_buff *skb)
 {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int br_netpoll_enable(struct net_bridge_port *p, gfp_t gfp)
+=======
+static inline int br_netpoll_enable(struct net_bridge_port *p)
+>>>>>>> v3.18
 =======
 static inline int br_netpoll_enable(struct net_bridge_port *p)
 >>>>>>> v3.18
@@ -501,6 +597,7 @@ static inline void br_netpoll_disable(struct net_bridge_port *p)
 #endif
 
 /* br_fdb.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int br_fdb_init(void);
 extern void br_fdb_fini(void);
@@ -567,6 +664,8 @@ extern netdev_features_t br_features_recompute(struct net_bridge *br,
 extern int br_handle_frame_finish(struct sk_buff *skb);
 extern rx_handler_result_t br_handle_frame(struct sk_buff **pskb);
 =======
+=======
+>>>>>>> v3.18
 int br_fdb_init(void);
 void br_fdb_fini(void);
 void br_fdb_flush(struct net_bridge *br);
@@ -622,6 +721,9 @@ void br_manage_promisc(struct net_bridge *br);
 /* br_input.c */
 int br_handle_frame_finish(struct sk_buff *skb);
 rx_handler_result_t br_handle_frame(struct sk_buff **pskb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool br_rx_handler_check_rcu(const struct net_device *dev)
@@ -636,8 +738,14 @@ static inline struct net_bridge_port *br_port_get_check_rcu(const struct net_dev
 
 /* br_ioctl.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd);
 extern int br_ioctl_deviceless_stub(struct net *net, unsigned int cmd, void __user *arg);
+=======
+int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd);
+int br_ioctl_deviceless_stub(struct net *net, unsigned int cmd,
+			     void __user *arg);
+>>>>>>> v3.18
 =======
 int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd);
 int br_ioctl_deviceless_stub(struct net *net, unsigned int cmd,
@@ -647,6 +755,7 @@ int br_ioctl_deviceless_stub(struct net *net, unsigned int cmd,
 /* br_multicast.c */
 #ifdef CONFIG_BRIDGE_IGMP_SNOOPING
 extern unsigned int br_mdb_rehash_seq;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int br_multicast_rcv(struct net_bridge *br,
 			    struct net_bridge_port *port,
@@ -686,6 +795,8 @@ extern void br_mdb_uninit(void);
 extern void br_mdb_notify(struct net_device *dev, struct net_bridge_port *port,
 			  struct br_ip *group, int type);
 =======
+=======
+>>>>>>> v3.18
 int br_multicast_rcv(struct net_bridge *br, struct net_bridge_port *port,
 		     struct sk_buff *skb, u16 vid);
 struct net_bridge_mdb_entry *br_mdb_get(struct net_bridge *br,
@@ -720,11 +831,15 @@ void br_mdb_init(void);
 void br_mdb_uninit(void);
 void br_mdb_notify(struct net_device *dev, struct net_bridge_port *port,
 		   struct br_ip *group, int type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define mlock_dereference(X, br) \
 	rcu_dereference_protected(X, lockdep_is_held(&br->multicast_lock))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if IS_ENABLED(CONFIG_IPV6)
 #include <net/addrconf.h>
@@ -738,6 +853,8 @@ static inline int ipv6_is_transient_multicast(const struct in6_addr *addr)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline bool br_multicast_is_router(struct net_bridge *br)
 {
 	return br->multicast_router == 2 ||
@@ -745,11 +862,14 @@ static inline bool br_multicast_is_router(struct net_bridge *br)
 		timer_pending(&br->multicast_router_timer));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline int br_multicast_rcv(struct net_bridge *br,
 				   struct net_bridge_port *port,
 				   struct sk_buff *skb)
 =======
+=======
+>>>>>>> v3.18
 
 static inline bool
 __br_multicast_querier_exists(struct net_bridge *br,
@@ -778,6 +898,9 @@ static inline int br_multicast_rcv(struct net_bridge *br,
 				   struct net_bridge_port *port,
 				   struct sk_buff *skb,
 				   u16 vid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;
@@ -832,12 +955,18 @@ static inline bool br_multicast_is_router(struct net_bridge *br)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool br_multicast_querier_exists(struct net_bridge *br,
 					       struct ethhdr *eth)
 {
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void br_mdb_init(void)
 {
@@ -849,6 +978,7 @@ static inline void br_mdb_uninit(void)
 
 /* br_vlan.c */
 #ifdef CONFIG_BRIDGE_VLAN_FILTERING
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 			       struct sk_buff *skb, u16 *vid);
@@ -867,6 +997,8 @@ extern int nbp_vlan_delete(struct net_bridge_port *port, u16 vid);
 extern void nbp_vlan_flush(struct net_bridge_port *port);
 extern bool nbp_vlan_find(struct net_bridge_port *port, u16 vid);
 =======
+=======
+>>>>>>> v3.18
 bool br_allowed_ingress(struct net_bridge *br, struct net_port_vlans *v,
 			struct sk_buff *skb, u16 *vid);
 bool br_allowed_egress(struct net_bridge *br, const struct net_port_vlans *v,
@@ -889,6 +1021,9 @@ int nbp_vlan_delete(struct net_bridge_port *port, u16 vid);
 void nbp_vlan_flush(struct net_bridge_port *port);
 bool nbp_vlan_find(struct net_bridge_port *port, u16 vid);
 int nbp_vlan_init(struct net_bridge_port *port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct net_port_vlans *br_get_vlan_info(
@@ -923,6 +1058,7 @@ static inline int br_vlan_get_tag(const struct sk_buff *skb, u16 *vid)
 static inline u16 br_get_pvid(const struct net_port_vlans *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Return just the VID if it is set, or VLAN_N_VID (invalid vid) if
 	 * vid wasn't set
 	 */
@@ -933,6 +1069,8 @@ static inline u16 br_get_pvid(const struct net_port_vlans *v)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (!v)
 		return 0;
 
@@ -944,6 +1082,9 @@ static inline int br_vlan_enabled(struct net_bridge *br)
 {
 	return br->vlan_enabled;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline bool br_allowed_ingress(struct net_bridge *br,
@@ -962,13 +1103,19 @@ static inline bool br_allowed_egress(struct net_bridge *br,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool br_should_learn(struct net_bridge_port *p,
 				   struct sk_buff *skb, u16 *vid)
 {
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct sk_buff *br_handle_vlan(struct net_bridge *br,
 					     const struct net_port_vlans *v,
@@ -992,7 +1139,10 @@ static inline void br_vlan_flush(struct net_bridge *br)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool br_vlan_find(struct net_bridge *br, u16 vid)
 {
 	return false;
@@ -1007,6 +1157,9 @@ static inline int br_vlan_init(struct net_bridge *br)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int nbp_vlan_add(struct net_bridge_port *port, u16 vid, u16 flags)
 {
@@ -1039,12 +1192,18 @@ static inline bool nbp_vlan_find(struct net_bridge_port *port, u16 vid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int nbp_vlan_init(struct net_bridge_port *port)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u16 br_vlan_get_tag(const struct sk_buff *skb, u16 *tag)
 {
@@ -1053,19 +1212,26 @@ static inline u16 br_vlan_get_tag(const struct sk_buff *skb, u16 *tag)
 static inline u16 br_get_pvid(const struct net_port_vlans *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return VLAN_N_VID;	/* Returns invalid vid */
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static inline int br_vlan_enabled(struct net_bridge *br)
 {
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
 
 /* br_netfilter.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
 extern int br_netfilter_init(void);
@@ -1075,6 +1241,8 @@ extern void br_netfilter_rtable_init(struct net_bridge *);
 #define br_netfilter_init()	(0)
 #define br_netfilter_fini()	do { } while(0)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 int br_nf_core_init(void);
 void br_nf_core_fini(void);
@@ -1082,11 +1250,15 @@ void br_netfilter_rtable_init(struct net_bridge *);
 #else
 static inline int br_nf_core_init(void) { return 0; }
 static inline void br_nf_core_fini(void) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define br_netfilter_rtable_init(x)
 #endif
 
 /* br_stp.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void br_log_state(const struct net_bridge_port *p);
 extern struct net_bridge_port *br_get_port(struct net_bridge *br,
@@ -1126,6 +1298,8 @@ extern void br_stp_timer_init(struct net_bridge *br);
 extern void br_stp_port_timer_init(struct net_bridge_port *p);
 extern unsigned long br_timer_value(const struct timer_list *timer);
 =======
+=======
+>>>>>>> v3.18
 void br_log_state(const struct net_bridge_port *p);
 void br_set_state(struct net_bridge_port *p, unsigned int state);
 struct net_bridge_port *br_get_port(struct net_bridge *br, u16 port_no);
@@ -1160,6 +1334,9 @@ void br_stp_rcv(const struct stp_proto *proto, struct sk_buff *skb,
 void br_stp_timer_init(struct net_bridge *br);
 void br_stp_port_timer_init(struct net_bridge_port *p);
 unsigned long br_timer_value(const struct timer_list *timer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* br.c */
@@ -1170,6 +1347,7 @@ extern int (*br_fdb_test_addr_hook)(struct net_device *dev, unsigned char *addr)
 /* br_netlink.c */
 extern struct rtnl_link_ops br_link_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int br_netlink_init(void);
 extern void br_netlink_fini(void);
 extern void br_ifinfo_notify(int event, struct net_bridge_port *port);
@@ -1178,6 +1356,8 @@ extern int br_dellink(struct net_device *dev, struct nlmsghdr *nlmsg);
 extern int br_getlink(struct sk_buff *skb, u32 pid, u32 seq,
 		      struct net_device *dev, u32 filter_mask);
 =======
+=======
+>>>>>>> v3.18
 int br_netlink_init(void);
 void br_netlink_fini(void);
 void br_ifinfo_notify(int event, struct net_bridge_port *port);
@@ -1185,11 +1365,15 @@ int br_setlink(struct net_device *dev, struct nlmsghdr *nlmsg);
 int br_dellink(struct net_device *dev, struct nlmsghdr *nlmsg);
 int br_getlink(struct sk_buff *skb, u32 pid, u32 seq, struct net_device *dev,
 	       u32 filter_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SYSFS
 /* br_sysfs_if.c */
 extern const struct sysfs_ops brport_sysfs_ops;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int br_sysfs_addif(struct net_bridge_port *p);
 extern int br_sysfs_renameif(struct net_bridge_port *p);
@@ -1198,12 +1382,17 @@ extern int br_sysfs_renameif(struct net_bridge_port *p);
 extern int br_sysfs_addbr(struct net_device *dev);
 extern void br_sysfs_delbr(struct net_device *dev);
 =======
+=======
+>>>>>>> v3.18
 int br_sysfs_addif(struct net_bridge_port *p);
 int br_sysfs_renameif(struct net_bridge_port *p);
 
 /* br_sysfs_br.c */
 int br_sysfs_addbr(struct net_device *dev);
 void br_sysfs_delbr(struct net_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else

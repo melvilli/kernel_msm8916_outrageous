@@ -233,9 +233,13 @@ struct fsi_stream {
 	 */
 	struct dma_chan		*chan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_dmae_slave	slave; /* see fsi_handler_init() */
 	struct work_struct	work;
 	dma_addr_t		dma;
+=======
+	int			dma_id;
+>>>>>>> v3.18
 =======
 	int			dma_id;
 >>>>>>> v3.18
@@ -267,6 +271,7 @@ struct fsi_priv {
 
 	int chan_num:16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int clk_master:1;
 	int clk_cpg:1;
 	int spdif:1;
@@ -274,12 +279,17 @@ struct fsi_priv {
 	int bit_clk_inv:1;
 	int lr_clk_inv:1;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int clk_master:1;
 	unsigned int clk_cpg:1;
 	unsigned int spdif:1;
 	unsigned int enable_stream:1;
 	unsigned int bit_clk_inv:1;
 	unsigned int lr_clk_inv:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -290,7 +300,11 @@ struct fsi_stream_handler {
 	int (*transfer)(struct fsi_priv *fsi, struct fsi_stream *io);
 	int (*remove)(struct fsi_priv *fsi, struct fsi_stream *io);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*start_stop)(struct fsi_priv *fsi, struct fsi_stream *io,
+=======
+	int (*start_stop)(struct fsi_priv *fsi, struct fsi_stream *io,
+>>>>>>> v3.18
 =======
 	int (*start_stop)(struct fsi_priv *fsi, struct fsi_stream *io,
 >>>>>>> v3.18
@@ -1058,7 +1072,10 @@ static int fsi_clk_set_rate_cpg(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void fsi_pointer_update(struct fsi_stream *io, int size)
 {
 	io->buff_sample_pos += size;
@@ -1079,6 +1096,9 @@ static void fsi_pointer_update(struct fsi_stream *io, int size)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *		pio data transfer handler
@@ -1147,6 +1167,7 @@ static int fsi_pio_transfer(struct fsi_priv *fsi, struct fsi_stream *io,
 		int samples)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_runtime *runtime;
 	struct snd_pcm_substream *substream;
 	u8 *buf;
@@ -1154,10 +1175,14 @@ static int fsi_pio_transfer(struct fsi_priv *fsi, struct fsi_stream *io,
 =======
 	u8 *buf;
 >>>>>>> v3.18
+=======
+	u8 *buf;
+>>>>>>> v3.18
 
 	if (!fsi_stream_is_working(fsi, io))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	over_period	= 0;
 	substream	= io->substream;
@@ -1178,6 +1203,8 @@ static int fsi_pio_transfer(struct fsi_priv *fsi, struct fsi_stream *io,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	buf = fsi_pio_get_area(fsi, io);
 
 	switch (io->sample_width) {
@@ -1192,11 +1219,15 @@ static int fsi_pio_transfer(struct fsi_priv *fsi, struct fsi_stream *io,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* update buff_sample_pos */
 	io->buff_sample_pos += samples;
 
 	if (over_period)
 		snd_pcm_period_elapsed(substream);
+=======
+	fsi_pointer_update(io, samples);
+>>>>>>> v3.18
 =======
 	fsi_pointer_update(io, samples);
 >>>>>>> v3.18
@@ -1240,7 +1271,11 @@ static int fsi_pio_push(struct fsi_priv *fsi, struct fsi_stream *io)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fsi_pio_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
+=======
+static int fsi_pio_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
+>>>>>>> v3.18
 =======
 static int fsi_pio_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
 >>>>>>> v3.18
@@ -1257,6 +1292,11 @@ static int fsi_pio_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
 	if (fsi_is_clk_master(fsi))
 		fsi_master_mask_set(master, CLK_RST, clk, (enable) ? clk : 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -1336,11 +1376,14 @@ static irqreturn_t fsi_interrupt(int irq, void *data)
 static int fsi_dma_init(struct fsi_priv *fsi, struct fsi_stream *io)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_runtime *runtime = io->substream->runtime;
 	struct snd_soc_dai *dai = fsi_get_dai(io->substream);
 	enum dma_data_direction dir = fsi_stream_is_play(fsi, io) ?
 				DMA_TO_DEVICE : DMA_FROM_DEVICE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1350,6 +1393,7 @@ static int fsi_dma_init(struct fsi_priv *fsi, struct fsi_stream *io)
 	io->bus_option = BUSOP_SET(24, PACKAGE_24BITBUS_BACK) |
 			 BUSOP_SET(16, PACKAGE_16BITBUS_STREAM);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	io->dma = dma_map_single(dai->dev, runtime->dma_area,
 				 snd_pcm_lib_buffer_bytes(io->substream), dir);
@@ -1379,10 +1423,16 @@ static dma_addr_t fsi_dma_get_area(struct fsi_stream *io)
 }
 
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 static void fsi_dma_complete(void *data)
 {
 	struct fsi_stream *io = (struct fsi_stream *)data;
 	struct fsi_priv *fsi = fsi_stream_to_priv(io);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_pcm_runtime *runtime = io->substream->runtime;
 	struct snd_soc_dai *dai = fsi_get_dai(io->substream);
@@ -1435,6 +1485,8 @@ static void fsi_dma_do_work(struct work_struct *work)
 		dev_err(dai->dev, "dmaengine_prep_slave_sg() fail\n");
 		return;
 =======
+=======
+>>>>>>> v3.18
 
 	fsi_pointer_update(io, io->period_samples);
 
@@ -1464,6 +1516,9 @@ static int fsi_dma_transfer(struct fsi_priv *fsi, struct fsi_stream *io)
 	if (!desc) {
 		dev_err(dai->dev, "dmaengine_prep_dma_cyclic() fail\n");
 		goto fsi_dma_transfer_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1473,7 +1528,11 @@ static int fsi_dma_transfer(struct fsi_priv *fsi, struct fsi_stream *io)
 	if (dmaengine_submit(desc) < 0) {
 		dev_err(dai->dev, "tx_submit() fail\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto fsi_dma_transfer_err;
+>>>>>>> v3.18
 =======
 		goto fsi_dma_transfer_err;
 >>>>>>> v3.18
@@ -1497,6 +1556,7 @@ static int fsi_dma_transfer(struct fsi_priv *fsi, struct fsi_stream *io)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static bool fsi_dma_filter(struct dma_chan *chan, void *param)
@@ -1517,6 +1577,8 @@ static int fsi_dma_transfer(struct fsi_priv *fsi, struct fsi_stream *io)
 
 static void fsi_dma_push_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
 =======
+=======
+>>>>>>> v3.18
 
 	ret = 0;
 
@@ -1525,6 +1587,9 @@ fsi_dma_transfer_err:
 }
 
 static int fsi_dma_push_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 int start)
 {
@@ -1539,6 +1604,11 @@ static int fsi_dma_push_start_stop(struct fsi_priv *fsi, struct fsi_stream *io,
 	if (fsi_is_clk_master(fsi))
 		fsi_master_mask_set(master, CLK_RST, clk, (enable) ? clk : 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -1549,6 +1619,10 @@ static int fsi_dma_probe(struct fsi_priv *fsi, struct fsi_stream *io, struct dev
 {
 	dma_cap_mask_t mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int is_play = fsi_stream_is_play(fsi, io);
+>>>>>>> v3.18
 =======
 	int is_play = fsi_stream_is_play(fsi, io);
 >>>>>>> v3.18
@@ -1557,12 +1631,15 @@ static int fsi_dma_probe(struct fsi_priv *fsi, struct fsi_stream *io, struct dev
 	dma_cap_set(DMA_SLAVE, mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io->chan = dma_request_channel(mask, fsi_dma_filter, &io->slave);
 	if (!io->chan) {
 
 		/* switch to PIO handler */
 		if (fsi_stream_is_play(fsi, io))
 =======
+=======
+>>>>>>> v3.18
 	io->chan = dma_request_slave_channel_compat(mask,
 				shdma_chan_filter, (void *)io->dma_id,
 				dev, is_play ? "tx" : "rx");
@@ -1586,6 +1663,9 @@ static int fsi_dma_probe(struct fsi_priv *fsi, struct fsi_stream *io, struct dev
 
 		/* switch to PIO handler */
 		if (is_play)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fsi->playback.handler	= &fsi_pio_push_handler;
 		else
@@ -1598,8 +1678,11 @@ static int fsi_dma_probe(struct fsi_priv *fsi, struct fsi_stream *io, struct dev
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&io->work, fsi_dma_do_work);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1608,8 +1691,11 @@ static int fsi_dma_probe(struct fsi_priv *fsi, struct fsi_stream *io, struct dev
 static int fsi_dma_remove(struct fsi_priv *fsi, struct fsi_stream *io)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cancel_work_sync(&io->work);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fsi_stream_stop(fsi, io);
@@ -1624,7 +1710,10 @@ static int fsi_dma_remove(struct fsi_priv *fsi, struct fsi_stream *io)
 static struct fsi_stream_handler fsi_dma_push_handler = {
 	.init		= fsi_dma_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.quit		= fsi_dma_quit,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.probe		= fsi_dma_probe,
@@ -1789,9 +1878,15 @@ static int fsi_dai_trigger(struct snd_pcm_substream *substream, int cmd,
 			ret = fsi_hw_startup(fsi, io, dai->dev);
 		if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = fsi_stream_transfer(io);
 		if (!ret)
 			fsi_stream_start(fsi, io);
+=======
+			ret = fsi_stream_start(fsi, io);
+		if (!ret)
+			ret = fsi_stream_transfer(io);
+>>>>>>> v3.18
 =======
 			ret = fsi_stream_start(fsi, io);
 		if (!ret)
@@ -1849,9 +1944,15 @@ static int fsi_dai_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 	switch (fmt & SND_SOC_DAIFMT_MASTER_MASK) {
 	case SND_SOC_DAIFMT_CBM_CFM:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsi->clk_master = 1;
 		break;
 	case SND_SOC_DAIFMT_CBS_CFS:
+=======
+		break;
+	case SND_SOC_DAIFMT_CBS_CFS:
+		fsi->clk_master = 1; /* codec is slave, cpu is master */
+>>>>>>> v3.18
 =======
 		break;
 	case SND_SOC_DAIFMT_CBS_CFS:
@@ -1929,6 +2030,7 @@ static struct snd_pcm_hardware fsi_pcm_hardware = {
 	.info =		SNDRV_PCM_INFO_INTERLEAVED	|
 			SNDRV_PCM_INFO_MMAP		|
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SNDRV_PCM_INFO_MMAP_VALID	|
 			SNDRV_PCM_INFO_PAUSE,
 	.formats		= FSI_FMTS,
@@ -1937,6 +2039,9 @@ static struct snd_pcm_hardware fsi_pcm_hardware = {
 	.rate_max		= 192000,
 	.channels_min		= 2,
 	.channels_max		= 2,
+=======
+			SNDRV_PCM_INFO_MMAP_VALID,
+>>>>>>> v3.18
 =======
 			SNDRV_PCM_INFO_MMAP_VALID,
 >>>>>>> v3.18
@@ -2004,6 +2109,7 @@ static void fsi_pcm_free(struct snd_pcm *pcm)
 static int fsi_pcm_new(struct snd_soc_pcm_runtime *rtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm *pcm = rtd->pcm;
 
 	/*
@@ -2015,10 +2121,15 @@ static int fsi_pcm_new(struct snd_soc_pcm_runtime *rtd)
 		SNDRV_DMA_TYPE_CONTINUOUS,
 		snd_dma_continuous_data(GFP_KERNEL),
 =======
+=======
+>>>>>>> v3.18
 	return snd_pcm_lib_preallocate_pages_for_all(
 		rtd->pcm,
 		SNDRV_DMA_TYPE_DEV,
 		rtd->card->snd_card->dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		PREALLOC_BUFFER, PREALLOC_BUFFER_MAX);
 }
@@ -2125,7 +2236,11 @@ static void fsi_handler_init(struct fsi_priv *fsi,
 
 	if (info->tx_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsi->playback.slave.shdma_slave.slave_id = info->tx_id;
+=======
+		fsi->playback.dma_id  = info->tx_id;
+>>>>>>> v3.18
 =======
 		fsi->playback.dma_id  = info->tx_id;
 >>>>>>> v3.18

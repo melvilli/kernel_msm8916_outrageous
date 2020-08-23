@@ -12,6 +12,11 @@ menuconfig RESET_CONTROLLER
 
 	  If unsure, say no.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+source "drivers/reset/sti/Kconfig"
+>>>>>>> v3.18
 =======
 
 source "drivers/reset/sti/Kconfig"

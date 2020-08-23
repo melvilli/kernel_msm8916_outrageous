@@ -17,17 +17,23 @@ PPC64_CACHES:
         .section        ".text"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(copy_page)
 BEGIN_FTR_SECTION
 	lis	r5,PAGE_SIZE@h
 FTR_SECTION_ELSE
 	b	.copypage_power7
 =======
+=======
+>>>>>>> v3.18
 _GLOBAL_TOC(copy_page)
 BEGIN_FTR_SECTION
 	lis	r5,PAGE_SIZE@h
 FTR_SECTION_ELSE
 	b	copypage_power7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ALT_FTR_SECTION_END_IFCLR(CPU_FTR_VMX_COPY)
 	ori	r5,r5,PAGE_SIZE@l

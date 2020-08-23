@@ -27,6 +27,10 @@
 #include <net/dst.h>
 #include <net/xfrm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/rtnetlink.h>
+>>>>>>> v3.18
 =======
 #include <net/rtnetlink.h>
 >>>>>>> v3.18
@@ -72,7 +76,11 @@ static int internal_dev_xmit(struct sk_buff *skb, struct net_device *netdev)
 {
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ovs_vport_receive(internal_dev_priv(netdev)->vport, skb);
+=======
+	ovs_vport_receive(internal_dev_priv(netdev)->vport, skb, NULL);
+>>>>>>> v3.18
 =======
 	ovs_vport_receive(internal_dev_priv(netdev)->vport, skb, NULL);
 >>>>>>> v3.18
@@ -130,11 +138,17 @@ static const struct net_device_ops internal_dev_netdev_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct rtnl_link_ops internal_dev_link_ops __read_mostly = {
 	.kind = "openvswitch",
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void do_setup(struct net_device *netdev)
 {
@@ -146,6 +160,7 @@ static void do_setup(struct net_device *netdev)
 	netdev->priv_flags |= IFF_LIVE_ADDR_CHANGE;
 	netdev->destructor = internal_dev_destructor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &internal_dev_ethtool_ops);
 	netdev->tx_queue_len = 0;
 
@@ -156,6 +171,8 @@ static void do_setup(struct net_device *netdev)
 	netdev->features |= NETIF_F_HW_VLAN_CTAG_TX;
 	netdev->hw_features = netdev->features & ~NETIF_F_LLTX;
 =======
+=======
+>>>>>>> v3.18
 	netdev->ethtool_ops = &internal_dev_ethtool_ops;
 	netdev->rtnl_link_ops = &internal_dev_link_ops;
 	netdev->tx_queue_len = 0;
@@ -169,6 +186,9 @@ static void do_setup(struct net_device *netdev)
 	netdev->features |= NETIF_F_HW_VLAN_CTAG_TX;
 	netdev->hw_features = netdev->features & ~NETIF_F_LLTX;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eth_hw_addr_random(netdev);
 }
@@ -191,7 +211,12 @@ static struct vport *internal_dev_create(const struct vport_parms *parms)
 
 	netdev_vport->dev = alloc_netdev(sizeof(struct internal_dev),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 parms->name, do_setup);
+=======
+					 parms->name, NET_NAME_UNKNOWN,
+					 do_setup);
+>>>>>>> v3.18
 =======
 					 parms->name, NET_NAME_UNKNOWN,
 					 do_setup);
@@ -258,6 +283,10 @@ static int internal_dev_recv(struct vport *vport, struct sk_buff *skb)
 	skb->pkt_type = PACKET_HOST;
 	skb->protocol = eth_type_trans(skb, netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb_postpull_rcsum(skb, eth_hdr(skb), ETH_HLEN);
+>>>>>>> v3.18
 =======
 	skb_postpull_rcsum(skb, eth_hdr(skb), ETH_HLEN);
 >>>>>>> v3.18
@@ -288,7 +317,10 @@ struct vport *ovs_internal_dev_get_vport(struct net_device *netdev)
 	return internal_dev_priv(netdev)->vport;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int ovs_internal_dev_rtnl_link_register(void)
 {
@@ -299,4 +331,7 @@ void ovs_internal_dev_rtnl_link_unregister(void)
 {
 	rtnl_link_unregister(&internal_dev_link_ops);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

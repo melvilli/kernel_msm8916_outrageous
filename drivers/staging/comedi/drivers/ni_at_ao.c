@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/ni_at_ao.c
     Driver for NI AT-AO-6/10 boards
 
@@ -154,6 +155,8 @@ Configuration options:
  * Some drivers use arrays such as this, other do not.
  */
 =======
+=======
+>>>>>>> v3.18
  * ni_at_ao.c
  * Driver for NI AT-AO-6/10 boards
  *
@@ -254,12 +257,16 @@ Configuration options:
 #define ATAO_2_RTSISHFT_RSI	(1 << 0)
 #define ATAO_2_RTSISTRB_REG	0x07
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct atao_board {
 	const char *name;
 	int n_ao_chans;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct atao_private {
 
@@ -353,6 +360,8 @@ static int atao_dio_insn_bits(struct comedi_device *dev,
 
 	data[1] = inw(dev->iobase + ATAO_DIN);
 =======
+=======
+>>>>>>> v3.18
 static const struct atao_board atao_boards[] = {
 	{
 		.name		= "at-ao-6",
@@ -451,6 +460,7 @@ static int atao_dio_insn_config(struct comedi_device *dev,
 		devpriv->cfg3 &= ~ATAO_CFG3_DOUTEN2;
 
 	outw(devpriv->cfg3, dev->iobase + ATAO_CFG3_REG);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return insn->n;
@@ -536,6 +546,12 @@ static int atao_calib_insn_write(struct comedi_device *dev,
 
 	return insn->n;
 =======
+=======
+
+	return insn->n;
+}
+
+>>>>>>> v3.18
 /*
  * There are three DAC8800 TrimDACs on the board. These are 8-channel,
  * 8-bit DACs that are used to calibrate the Analog Output channels.
@@ -645,11 +661,15 @@ static void atao_reset(struct comedi_device *dev)
 	outw(0, dev->iobase + ATAO_2_INT2CLR_REG);
 	outw(0, dev->iobase + ATAO_2_DMATCCLR_REG);
 	atao_select_reg_group(dev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int atao_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct atao_board *board = comedi_board(dev);
 	struct atao_private *devpriv;
@@ -668,6 +688,8 @@ static int atao_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		return -ENOMEM;
 	dev->private = devpriv;
 =======
+=======
+>>>>>>> v3.18
 	const struct atao_board *board = dev->board_ptr;
 	struct atao_private *devpriv;
 	struct comedi_subdevice *s;
@@ -680,12 +702,16 @@ static int atao_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 4);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s = &dev->subdevices[0];
 	/* analog output subdevice */
@@ -742,6 +768,8 @@ static const struct atao_board atao_boards[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	/* Analog Output subdevice */
 	s = &dev->subdevices[0];
 	s->type		= COMEDI_SUBD_AO;
@@ -784,6 +812,9 @@ static const struct atao_board atao_boards[] = {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct comedi_driver ni_at_ao_driver = {
 	.driver_name	= "ni_at_ao",
@@ -798,7 +829,11 @@ module_comedi_driver(ni_at_ao_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for NI AT-AO-6/10 boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for NI AT-AO-6/10 boards");
 >>>>>>> v3.18

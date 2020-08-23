@@ -4,31 +4,43 @@
 #include "thread_map.h"
 #include "tests.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int test__syscall_open_tp_fields(void)
 {
 	struct perf_record_opts opts = {
 =======
+=======
+>>>>>>> v3.18
 #include "debug.h"
 
 int test__syscall_open_tp_fields(void)
 {
 	struct record_opts opts = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.target = {
 			.uid = UINT_MAX,
 			.uses_mmap = true,
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.no_delay   = true,
 		.freq	    = 1,
 		.mmap_pages = 256,
 		.raw_samples = true,
 =======
+=======
+>>>>>>> v3.18
 		.no_buffering = true,
 		.freq	      = 1,
 		.mmap_pages   = 256,
 		.raw_samples  = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	const char *filename = "/etc/passwd";
@@ -37,6 +49,10 @@ int test__syscall_open_tp_fields(void)
 	struct perf_evsel *evsel;
 	int err = -1, i, nr_events = 0, nr_polls = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -47,7 +63,11 @@ int test__syscall_open_tp_fields(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	evsel = perf_evsel__newtp("syscalls", "sys_enter_open", 0);
+=======
+	evsel = perf_evsel__newtp("syscalls", "sys_enter_open");
+>>>>>>> v3.18
 =======
 	evsel = perf_evsel__newtp("syscalls", "sys_enter_open");
 >>>>>>> v3.18
@@ -71,8 +91,14 @@ int test__syscall_open_tp_fields(void)
 	err = perf_evlist__open(evlist);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("perf_evlist__open: %s\n", strerror(errno));
 		goto out_delete_maps;
+=======
+		pr_debug("perf_evlist__open: %s\n",
+			 strerror_r(errno, sbuf, sizeof(sbuf)));
+		goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 		pr_debug("perf_evlist__open: %s\n",
 			 strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -83,8 +109,14 @@ int test__syscall_open_tp_fields(void)
 	err = perf_evlist__mmap(evlist, UINT_MAX, false);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("perf_evlist__mmap: %s\n", strerror(errno));
 		goto out_close_evlist;
+=======
+		pr_debug("perf_evlist__mmap: %s\n",
+			 strerror_r(errno, sbuf, sizeof(sbuf)));
+		goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 		pr_debug("perf_evlist__mmap: %s\n",
 			 strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -113,20 +145,30 @@ int test__syscall_open_tp_fields(void)
 				++nr_events;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (type != PERF_RECORD_SAMPLE)
 					continue;
 =======
+=======
+>>>>>>> v3.18
 				if (type != PERF_RECORD_SAMPLE) {
 					perf_evlist__mmap_consume(evlist, i);
 					continue;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				err = perf_evsel__parse_sample(evsel, event, &sample);
 				if (err) {
 					pr_err("Can't parse sample, err = %d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					goto out_munmap;
+=======
+					goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 					goto out_delete_evlist;
 >>>>>>> v3.18
@@ -138,7 +180,11 @@ int test__syscall_open_tp_fields(void)
 					pr_debug("%s: Expected flags=%#x, got %#x\n",
 						 __func__, flags, tp_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					goto out_munmap;
+=======
+					goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 					goto out_delete_evlist;
 >>>>>>> v3.18
@@ -150,22 +196,29 @@ int test__syscall_open_tp_fields(void)
 
 		if (nr_events == before)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			poll(evlist->pollfd, evlist->nr_fds, 10);
 
 		if (++nr_polls > 5) {
 			pr_debug("%s: no events!\n", __func__);
 			goto out_munmap;
 =======
+=======
+>>>>>>> v3.18
 			perf_evlist__poll(evlist, 10);
 
 		if (++nr_polls > 5) {
 			pr_debug("%s: no events!\n", __func__);
 			goto out_delete_evlist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 out_ok:
 	err = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_munmap:
 	perf_evlist__munmap(evlist);
@@ -173,6 +226,8 @@ out_close_evlist:
 	perf_evlist__close(evlist);
 out_delete_maps:
 	perf_evlist__delete_maps(evlist);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_delete_evlist:

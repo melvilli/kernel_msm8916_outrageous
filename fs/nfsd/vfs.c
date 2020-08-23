@@ -29,6 +29,10 @@
 #include <linux/exportfs.h>
 #include <linux/writeback.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/security.h>
+>>>>>>> v3.18
 =======
 #include <linux/security.h>
 >>>>>>> v3.18
@@ -193,8 +197,12 @@ nfsd_lookup_dentry(struct svc_rqst *rqstp, struct svc_fh *fhp,
 
 	dparent = fhp->fh_dentry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exp  = fhp->fh_export;
 	exp_get(exp);
+=======
+	exp = exp_get(fhp->fh_export);
+>>>>>>> v3.18
 =======
 	exp = exp_get(fhp->fh_export);
 >>>>>>> v3.18
@@ -215,14 +223,20 @@ nfsd_lookup_dentry(struct svc_rqst *rqstp, struct svc_fh *fhp,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fh_lock(fhp);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * In the nfsd4_open() case, this may be held across
 		 * subsequent open and delegation acquisition which may
 		 * need to take the child's i_mutex:
 		 */
 		fh_lock_nested(fhp, I_MUTEX_PARENT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dentry = lookup_one_len(name, dparent, len);
 		host_err = PTR_ERR(dentry);
@@ -290,6 +304,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nfsd_break_lease(struct inode *inode)
 {
 	if (!S_ISREG(inode->i_mode))
@@ -297,6 +312,8 @@ static int nfsd_break_lease(struct inode *inode)
 	return break_lease(inode, O_WRONLY | O_NONBLOCK);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -368,8 +385,12 @@ nfsd_sanitize_attrs(struct inode *inode, struct iattr *iap)
 	/* Revoke setuid/setgid on chown */
 	if (!S_ISDIR(inode->i_mode) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (((iap->ia_valid & ATTR_UID) && !uid_eq(iap->ia_uid, inode->i_uid)) ||
 	     ((iap->ia_valid & ATTR_GID) && !gid_eq(iap->ia_gid, inode->i_gid)))) {
+=======
+	    ((iap->ia_valid & ATTR_UID) || (iap->ia_valid & ATTR_GID))) {
+>>>>>>> v3.18
 =======
 	    ((iap->ia_valid & ATTR_UID) || (iap->ia_valid & ATTR_GID))) {
 >>>>>>> v3.18
@@ -473,7 +494,10 @@ nfsd_setattr(struct svc_rqst *rqstp, struct svc_fh *fhp, struct iattr *iap,
 			goto out;
 		size_change = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * RFC5661, Section 18.30.4:
@@ -484,6 +508,9 @@ nfsd_setattr(struct svc_rqst *rqstp, struct svc_fh *fhp, struct iattr *iap,
 		 */
 		if (iap->ia_size != i_size_read(inode))
 			iap->ia_valid |= ATTR_MTIME;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -494,6 +521,7 @@ nfsd_setattr(struct svc_rqst *rqstp, struct svc_fh *fhp, struct iattr *iap,
 		goto out_put_write_access;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	host_err = nfsd_break_lease(inode);
 	if (host_err)
@@ -506,18 +534,27 @@ nfsd_setattr(struct svc_rqst *rqstp, struct svc_fh *fhp, struct iattr *iap,
 out_put_write_access_nfserror:
 	err = nfserrno(host_err);
 =======
+=======
+>>>>>>> v3.18
 	fh_lock(fhp);
 	host_err = notify_change(dentry, iap, NULL);
 	fh_unlock(fhp);
 	err = nfserrno(host_err);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_put_write_access:
 	if (size_change)
 		put_write_access(inode);
 	if (!err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		commit_metadata(fhp);
+=======
+		err = nfserrno(commit_metadata(fhp));
+>>>>>>> v3.18
 =======
 		err = nfserrno(commit_metadata(fhp));
 >>>>>>> v3.18
@@ -525,6 +562,7 @@ out:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_NFSD_V2_ACL) || \
     defined(CONFIG_NFSD_V3_ACL) || \
@@ -684,6 +722,9 @@ nfsd4_get_nfs4_acl(struct svc_rqst *rqstp, struct dentry *dentry, struct nfs4_ac
 =======
 #if defined(CONFIG_NFSD_V4)
 >>>>>>> v3.18
+=======
+#if defined(CONFIG_NFSD_V4)
+>>>>>>> v3.18
 /*
  * NFS junction information is stored in an extended attribute.
  */
@@ -712,7 +753,10 @@ int nfsd4_is_junction(struct dentry *dentry)
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NFSD_V4_SECURITY_LABEL
 __be32 nfsd4_set_nfs4_label(struct svc_rqst *rqstp, struct svc_fh *fhp,
 		struct xdr_netobj *label)
@@ -740,6 +784,9 @@ __be32 nfsd4_set_nfs4_label(struct svc_rqst *rqstp, struct svc_fh *fhp,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* defined(CONFIG_NFSD_V4) */
 
@@ -868,6 +915,10 @@ nfsd_open(struct svc_rqst *rqstp, struct svc_fh *fhp, umode_t type,
 	struct path	path;
 	struct inode	*inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct file	*file;
+>>>>>>> v3.18
 =======
 	struct file	*file;
 >>>>>>> v3.18
@@ -926,6 +977,7 @@ nfsd_open(struct svc_rqst *rqstp, struct svc_fh *fhp, umode_t type,
 			flags = O_WRONLY|O_LARGEFILE;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*filp = dentry_open(&path, flags, current_cred());
 	if (IS_ERR(*filp)) {
 		host_err = PTR_ERR(*filp);
@@ -940,6 +992,8 @@ nfsd_open(struct svc_rqst *rqstp, struct svc_fh *fhp, umode_t type,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 	file = dentry_open(&path, flags, current_cred());
 	if (IS_ERR(file)) {
@@ -959,6 +1013,9 @@ nfsd_open(struct svc_rqst *rqstp, struct svc_fh *fhp, umode_t type,
 		file->f_mode |= FMODE_32BITHASH;
 
 	*filp = file;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_nfserr:
 	err = nfserrno(host_err);
@@ -1065,6 +1122,7 @@ static int nfsd_direct_splice_actor(struct pipe_inode_info *pipe,
 
 static __be32
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd_vfs_read(struct svc_rqst *rqstp, struct svc_fh *fhp, struct file *file,
               loff_t offset, struct kvec *vec, int vlen, unsigned long *count)
 {
@@ -1110,6 +1168,8 @@ static void kill_suid(struct dentry *dentry)
 	notify_change(dentry, &ia);
 	mutex_unlock(&dentry->d_inode->i_mutex);
 =======
+=======
+>>>>>>> v3.18
 nfsd_finish_read(struct file *file, unsigned long *count, int host_err)
 {
 	if (host_err >= 0) {
@@ -1158,6 +1218,9 @@ nfsd_vfs_read(struct svc_rqst *rqstp, struct file *file,
 		return nfsd_splice_read(rqstp, file, offset, count);
 	else
 		return nfsd_readv(file, offset, vec, vlen, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1213,7 +1276,10 @@ nfsd_vfs_write(struct svc_rqst *rqstp, struct svc_fh *fhp, struct file *file,
 	int			use_wgather;
 	loff_t			pos = offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		pflags = current->flags;
 
 	if (rqstp->rq_local)
@@ -1224,6 +1290,9 @@ nfsd_vfs_write(struct svc_rqst *rqstp, struct svc_fh *fhp, struct file *file,
 		 * the client's dirty pages or its congested queue.
 		 */
 		current->flags |= PF_LESS_THROTTLE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dentry = file->f_path.dentry;
@@ -1246,10 +1315,13 @@ nfsd_vfs_write(struct svc_rqst *rqstp, struct svc_fh *fhp, struct file *file,
 	fsnotify_modify(file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* clear setuid/setgid flag after write */
 	if (inode->i_mode & (S_ISUID | S_ISGID))
 		kill_suid(dentry);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (stable) {
@@ -1265,6 +1337,7 @@ out_nfserr:
 		err = 0;
 	else
 		err = nfserrno(host_err);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return err;
 }
@@ -1297,6 +1370,8 @@ __be32 nfsd_read(struct svc_rqst *rqstp, struct svc_fh *fhp,
 	err = nfsd_vfs_read(rqstp, fhp, file, offset, vec, vlen, count);
 
 =======
+=======
+>>>>>>> v3.18
 	if (rqstp->rq_local)
 		tsk_restore_flags(current, pflags, PF_LESS_THROTTLE);
 	return err;
@@ -1324,6 +1399,9 @@ __be32 nfsd_get_tmp_read_open(struct svc_rqst *rqstp, struct svc_fh *fhp,
 
 void nfsd_put_tmp_read_open(struct file *file, struct raparms *ra)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Write back readahead params */
 	if (ra) {
@@ -1334,6 +1412,7 @@ void nfsd_put_tmp_read_open(struct file *file, struct raparms *ra)
 		ra->p_count--;
 		spin_unlock(&rab->pb_lock);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	nfsd_close(file);
@@ -1358,6 +1437,8 @@ nfsd_read_file(struct svc_rqst *rqstp, struct svc_fh *fhp, struct file *file,
 		err = nfsd_read(rqstp, fhp, offset, vec, vlen, count);
 out:
 =======
+=======
+>>>>>>> v3.18
 	nfsd_close(file);
 }
 
@@ -1381,6 +1462,9 @@ __be32 nfsd_read(struct svc_rqst *rqstp, struct svc_fh *fhp,
 
 	nfsd_put_tmp_read_open(file, ra);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1481,7 +1565,12 @@ nfsd_create_setattr(struct svc_rqst *rqstp, struct svc_fh *resfhp,
 	if (iap->ia_valid)
 		return nfsd_setattr(rqstp, resfhp, iap, 0, (time_t)0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	/* Callers expect file metadata to be committed here */
+	return nfserrno(commit_metadata(resfhp));
+>>>>>>> v3.18
 =======
 	/* Callers expect file metadata to be committed here */
 	return nfserrno(commit_metadata(resfhp));
@@ -1564,9 +1653,14 @@ nfsd_create(struct svc_rqst *rqstp, struct svc_fh *fhp,
 			/* not actually possible */
 			printk(KERN_ERR
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"nfsd_create: parent %s/%s not locked!\n",
 				dentry->d_parent->d_name.name,
 				dentry->d_name.name);
+=======
+				"nfsd_create: parent %pd2 not locked!\n",
+				dentry);
+>>>>>>> v3.18
 =======
 				"nfsd_create: parent %pd2 not locked!\n",
 				dentry);
@@ -1581,8 +1675,13 @@ nfsd_create(struct svc_rqst *rqstp, struct svc_fh *fhp,
 	err = nfserr_exist;
 	if (dchild->d_inode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("nfsd_create: dentry %s/%s not negative!\n",
 			dentry->d_name.name, dchild->d_name.name);
+=======
+		dprintk("nfsd_create: dentry %pd/%pd not negative!\n",
+			dentry, dchild);
+>>>>>>> v3.18
 =======
 		dprintk("nfsd_create: dentry %pd/%pd not negative!\n",
 			dentry, dchild);
@@ -1629,14 +1728,20 @@ nfsd_create(struct svc_rqst *rqstp, struct svc_fh *fhp,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * nfsd_setattr already committed the child.  Transactional filesystems
 	 * had a chance to commit changes for both parent and child
 	 * simultaneously making the following commit_metadata a noop.
 =======
+=======
+>>>>>>> v3.18
 	 * nfsd_create_setattr already committed the child.  Transactional
 	 * filesystems had a chance to commit changes for both parent and
 	 * child * simultaneously making the following commit_metadata a
 	 * noop.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	err2 = nfserrno(commit_metadata(fhp));
@@ -1809,7 +1914,12 @@ do_nfsd_create(struct svc_rqst *rqstp, struct svc_fh *fhp,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * nfsd_setattr already committed the child (and possibly also the parent).
+=======
+	 * nfsd_create_setattr already committed the child
+	 * (and possibly also the parent).
+>>>>>>> v3.18
 =======
 	 * nfsd_create_setattr already committed the child
 	 * (and possibly also the parent).
@@ -1892,9 +2002,14 @@ __be32
 nfsd_symlink(struct svc_rqst *rqstp, struct svc_fh *fhp,
 				char *fname, int flen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				char *path,  int plen,
 				struct svc_fh *resfhp,
 				struct iattr *iap)
+=======
+				char *path,
+				struct svc_fh *resfhp)
+>>>>>>> v3.18
 =======
 				char *path,
 				struct svc_fh *resfhp)
@@ -1906,7 +2021,11 @@ nfsd_symlink(struct svc_rqst *rqstp, struct svc_fh *fhp,
 
 	err = nfserr_noent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!flen || !plen)
+=======
+	if (!flen || path[0] == '\0')
+>>>>>>> v3.18
 =======
 	if (!flen || path[0] == '\0')
 >>>>>>> v3.18
@@ -1931,6 +2050,7 @@ nfsd_symlink(struct svc_rqst *rqstp, struct svc_fh *fhp,
 		goto out_nfserr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(path[plen] != 0)) {
 		char *path_alloced = kmalloc(plen+1, GFP_KERNEL);
 		if (path_alloced == NULL)
@@ -1943,6 +2063,9 @@ nfsd_symlink(struct svc_rqst *rqstp, struct svc_fh *fhp,
 		}
 	} else
 		host_err = vfs_symlink(dentry->d_inode, dnew, path);
+=======
+	host_err = vfs_symlink(dentry->d_inode, dnew, path);
+>>>>>>> v3.18
 =======
 	host_err = vfs_symlink(dentry->d_inode, dnew, path);
 >>>>>>> v3.18
@@ -2014,12 +2137,16 @@ nfsd_link(struct svc_rqst *rqstp, struct svc_fh *ffhp,
 	if (!dold->d_inode)
 		goto out_dput;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host_err = nfsd_break_lease(dold->d_inode);
 	if (host_err) {
 		err = nfserrno(host_err);
 		goto out_dput;
 	}
 	host_err = vfs_link(dold, dirp, dnew);
+=======
+	host_err = vfs_link(dold, dirp, dnew, NULL);
+>>>>>>> v3.18
 =======
 	host_err = vfs_link(dold, dirp, dnew, NULL);
 >>>>>>> v3.18
@@ -2116,6 +2243,7 @@ nfsd_rename(struct svc_rqst *rqstp, struct svc_fh *ffhp, char *fname, int flen,
 		goto out_dput_new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host_err = nfsd_break_lease(odentry->d_inode);
 	if (host_err)
 		goto out_dput_new;
@@ -2125,6 +2253,9 @@ nfsd_rename(struct svc_rqst *rqstp, struct svc_fh *ffhp, char *fname, int flen,
 			goto out_dput_new;
 	}
 	host_err = vfs_rename(fdir, odentry, tdir, ndentry);
+=======
+	host_err = vfs_rename(fdir, odentry, tdir, ndentry, NULL, 0);
+>>>>>>> v3.18
 =======
 	host_err = vfs_rename(fdir, odentry, tdir, ndentry, NULL, 0);
 >>>>>>> v3.18
@@ -2140,15 +2271,21 @@ nfsd_rename(struct svc_rqst *rqstp, struct svc_fh *ffhp, char *fname, int flen,
  out_nfserr:
 	err = nfserrno(host_err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* we cannot reply on fh_unlock on the two filehandles,
 	 * as that would do the wrong thing if the two directories
 	 * were the same, so again we do it by hand
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We cannot rely on fh_unlock on the two filehandles,
 	 * as that would do the wrong thing if the two directories
 	 * were the same, so again we do it by hand.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	fill_post_wcc(ffhp);
@@ -2204,6 +2341,7 @@ nfsd_unlink(struct svc_rqst *rqstp, struct svc_fh *fhp, int type,
 		type = rdentry->d_inode->i_mode & S_IFMT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host_err = nfsd_break_lease(rdentry->d_inode);
 	if (host_err)
 		goto out_put;
@@ -2213,12 +2351,19 @@ nfsd_unlink(struct svc_rqst *rqstp, struct svc_fh *fhp, int type,
 	if (type != S_IFDIR)
 		host_err = vfs_unlink(dirp, rdentry, NULL);
 >>>>>>> v3.18
+=======
+	if (type != S_IFDIR)
+		host_err = vfs_unlink(dirp, rdentry, NULL);
+>>>>>>> v3.18
 	else
 		host_err = vfs_rmdir(dirp, rdentry);
 	if (!host_err)
 		host_err = commit_metadata(fhp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_put:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dput(rdentry);
@@ -2534,8 +2679,12 @@ nfsd_racache_init(int cache_size)
 		return 0;
 	nperbucket = DIV_ROUND_UP(cache_size, RAPARM_HASH_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nperbucket < 2)
 		nperbucket = 2;
+=======
+	nperbucket = max(2, nperbucket);
+>>>>>>> v3.18
 =======
 	nperbucket = max(2, nperbucket);
 >>>>>>> v3.18
@@ -2564,6 +2713,7 @@ out_nomem:
 	nfsd_racache_shutdown();
 	return -ENOMEM;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #if defined(CONFIG_NFSD_V2_ACL) || defined(CONFIG_NFSD_V3_ACL)
@@ -2655,5 +2805,7 @@ getout:
 	return error;
 }
 #endif  /* defined(CONFIG_NFSD_V2_ACL) || defined(CONFIG_NFSD_V3_ACL) */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

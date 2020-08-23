@@ -49,7 +49,11 @@ il3945_stats_flag(struct il_priv *il, char *buf, int bufsz)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t
+=======
+static ssize_t
+>>>>>>> v3.18
 =======
 static ssize_t
 >>>>>>> v3.18
@@ -318,7 +322,11 @@ il3945_ucode_rx_stats_read(struct file *file, char __user *user_buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t
+=======
+static ssize_t
+>>>>>>> v3.18
 =======
 static ssize_t
 >>>>>>> v3.18
@@ -412,7 +420,11 @@ il3945_ucode_tx_stats_read(struct file *file, char __user *user_buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t
+=======
+static ssize_t
+>>>>>>> v3.18
 =======
 static ssize_t
 >>>>>>> v3.18

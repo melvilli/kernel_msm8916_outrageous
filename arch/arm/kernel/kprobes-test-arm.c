@@ -11,6 +11,11 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/system_info.h>
+#include <asm/opcodes.h>
+>>>>>>> v3.18
 =======
 #include <asm/system_info.h>
 #include <asm/opcodes.h>
@@ -78,8 +83,11 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(  op "gt" s "	r12, r13"       ", r",14,val, ", ror r",14,7,"")\
 	TEST_RR(  op "le" s "	r14, r",0, val, ", r13"       ", lsl r",14,8,"")\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_RR(  op s "	r12, pc"        ", r",14,val, ", ror r",14,7,"")\
 	TEST_RR(  op s "	r14, r",0, val, ", pc"        ", lsl r",14,8,"")\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TEST_R(   op "eq" s "	r0,  r",11,VAL1,", #0xf5")			\
@@ -110,8 +118,11 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(  op "le	r13"       ", r",14,val, ", ror r",14,7,"")	\
 	TEST_RR(  op "gt	r",0, val, ", r13"       ", lsl r",14,8,"")	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_RR(  op "	pc"        ", r",14,val, ", ror r",14,7,"")		\
 	TEST_RR(  op "	r",0, val, ", pc"        ", lsl r",14,8,"")		\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TEST_R(   op "eq	r",11,VAL1,", #0xf5")				\
@@ -135,7 +146,10 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(  op "lt" s "	r12, r",11,val, ", ror r",14,7,"")	\
 	TEST_R(   op "gt" s "	r14, r13"       ", lsl r",14,8,"")	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_R(   op "le" s "	r14, pc"        ", lsl r",14,8,"")	\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TEST(     op "eq" s "	r0,  #0xf5")				\
@@ -172,6 +186,7 @@ void kprobe_arm_test_cases(void)
 	TEST_SUPPORTED("cmp	sp, #0x1000");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Data-processing with PC as shift*/
 	TEST_UNSUPPORTED(".word 0xe15c0f1e	@ cmp	r12, r14, asl pc")
 	TEST_UNSUPPORTED(".word 0xe1a0cf1e	@ mov	r12, r14, asl pc")
@@ -179,6 +194,8 @@ void kprobe_arm_test_cases(void)
 
 	/* Data-processing with PC as shift*/
 =======
+=======
+>>>>>>> v3.18
 	/* Data-processing with PC and a shift count in a register */
 	TEST_UNSUPPORTED(__inst_arm(0xe15c0f1e) "	@ cmp	r12, r14, asl pc")
 	TEST_UNSUPPORTED(__inst_arm(0xe1a0cf1e) "	@ mov	r12, r14, asl pc")
@@ -192,6 +209,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe081f312) "	@ add	pc, r1, r2, lsl r3")
 
 	/* Data-processing with PC as a target and status registers updated */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TEST_UNSUPPORTED("movs	pc, r1")
 	TEST_UNSUPPORTED("movs	pc, r1, lsl r2")
@@ -216,7 +236,11 @@ void kprobe_arm_test_cases(void)
 	TEST_BF_R ("add	pc, r",14,2f-1f-8,", pc")
 	TEST_BF_R ("mov	pc, r",0,2f,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_BF_RR("mov	pc, r",0,2f,", asl r",1,0,"")
+=======
+	TEST_BF_R ("add	pc, pc, r",14,(2f-1f-8)*2,", asr #1")
+>>>>>>> v3.18
 =======
 	TEST_BF_R ("add	pc, pc, r",14,(2f-1f-8)*2,", asr #1")
 >>>>>>> v3.18
@@ -227,7 +251,11 @@ void kprobe_arm_test_cases(void)
 	TEST_BB_R( "sub	pc, pc, r",14, 1f-2f+8,"")
 	TEST_BB_R( "rsb	pc, r",14,1f-2f+8,", pc")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_RR(   "add	pc, pc, r",10,-2,", asl r",11,1,"")
+=======
+	TEST_R(    "add	pc, pc, r",10,-2,", asl #1")
+>>>>>>> v3.18
 =======
 	TEST_R(    "add	pc, pc, r",10,-2,", asl #1")
 >>>>>>> v3.18
@@ -241,7 +269,11 @@ void kprobe_arm_test_cases(void)
 	TEST("mrspl	r7, cpsr")
 	TEST("mrs	r14, cpsr")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe10ff000	@ mrs r15, cpsr")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe10ff000) "	@ mrs r15, cpsr")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe10ff000) "	@ mrs r15, cpsr")
 >>>>>>> v3.18
@@ -257,6 +289,10 @@ void kprobe_arm_test_cases(void)
 	TEST_BF_R("bxeq	r",14,2f,"")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if __LINUX_ARM_ARCH__ >= 5
+>>>>>>> v3.18
 =======
 #if __LINUX_ARM_ARCH__ >= 5
 >>>>>>> v3.18
@@ -265,8 +301,13 @@ void kprobe_arm_test_cases(void)
 	TEST_R("clz	lr, r",7, 0xffffffff,"")
 	TEST(  "clz	r4, sp")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0x016fff10	@ clz pc, r0")
 	TEST_UNSUPPORTED(".word 0x016f0f1f	@ clz r0, pc")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0x016fff10) "	@ clz pc, r0")
+	TEST_UNSUPPORTED(__inst_arm(0x016f0f1f) "	@ clz r0, pc")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0x016fff10) "	@ clz pc, r0")
 	TEST_UNSUPPORTED(__inst_arm(0x016f0f1f) "	@ clz r0, pc")
@@ -280,7 +321,11 @@ void kprobe_arm_test_cases(void)
 	TEST_BB_R("blx	r",7,2f,"")
 	TEST_BF_R("blxeq	r",14,2f,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0x0120003f	@ blx pc")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0x0120003f) "	@ blx pc")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0x0120003f) "	@ blx pc")
 >>>>>>> v3.18
@@ -298,6 +343,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(   "qdsubvs	lr, r",9, VAL2,", r",8, VAL1,"")
 	TEST_R(    "qdsub	lr, r",9, VAL2,", r13")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe101f050	@ qadd pc, r0, r1")
 	TEST_UNSUPPORTED(".word 0xe121f050	@ qsub pc, r0, r1")
 	TEST_UNSUPPORTED(".word 0xe141f050	@ qdadd pc, r0, r1")
@@ -305,19 +351,28 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe16f2050	@ qdsub r2, r0, pc")
 	TEST_UNSUPPORTED(".word 0xe161205f	@ qdsub r2, pc, r1")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe101f050) "	@ qadd pc, r0, r1")
 	TEST_UNSUPPORTED(__inst_arm(0xe121f050) "	@ qsub pc, r0, r1")
 	TEST_UNSUPPORTED(__inst_arm(0xe141f050) "	@ qdadd pc, r0, r1")
 	TEST_UNSUPPORTED(__inst_arm(0xe161f050) "	@ qdsub pc, r0, r1")
 	TEST_UNSUPPORTED(__inst_arm(0xe16f2050) "	@ qdsub r2, r0, pc")
 	TEST_UNSUPPORTED(__inst_arm(0xe161205f) "	@ qdsub r2, pc, r1")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_UNSUPPORTED("bkpt	0xffff")
 	TEST_UNSUPPORTED("bkpt	0x0000")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1600070 @ smc #0")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1600070) " @ smc #0")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1600070) " @ smc #0")
 >>>>>>> v3.18
@@ -327,6 +382,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RRR(    "smlabb	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(    "smlabbge	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
 	TEST_RR(     "smlabb	lr, r",1, VAL2,", r",2, VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe10f3281 @ smlabb pc, r1, r2, r3")
 	TEST_RRR(    "smlatb	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
@@ -342,6 +398,8 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(     "smlatt	lr, r",1, VAL2,", r",2, VAL3,", r13")
 	TEST_UNSUPPORTED(".word 0xe10f32e1 @ smlatt pc, r1, r2, r3")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe10f3281) " @ smlabb pc, r1, r2, r3")
 	TEST_RRR(    "smlatb	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(    "smlatbge	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
@@ -355,11 +413,15 @@ void kprobe_arm_test_cases(void)
 	TEST_RRR(    "smlattge	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
 	TEST_RR(     "smlatt	lr, r",1, VAL2,", r",2, VAL3,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe10f32e1) " @ smlatt pc, r1, r2, r3")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRR(    "smlawb	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(    "smlawbge	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
 	TEST_RR(     "smlawb	lr, r",1, VAL2,", r",2, VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe12f3281 @ smlawb pc, r1, r2, r3")
 	TEST_RRR(    "smlawt	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
@@ -370,6 +432,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe1203fc1 @ smlawt r0, r1, pc, r3")
 	TEST_UNSUPPORTED(".word 0xe120f2c1 @ smlawt r0, r1, r2, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe12f3281) " @ smlawb pc, r1, r2, r3")
 	TEST_RRR(    "smlawt	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(    "smlawtge	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
@@ -378,11 +442,15 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe12032cf) " @ smlawt r0, pc, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe1203fc1) " @ smlawt r0, r1, pc, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe120f2c1) " @ smlawt r0, r1, r2, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "smulwb	r0, r",1, VAL1,", r",2, VAL2,"")
 	TEST_RR(    "smulwbge	r7, r",8, VAL3,", r",9, VAL1,"")
 	TEST_R(     "smulwb	lr, r",1, VAL2,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe12f02a1 @ smulwb pc, r1, r2")
 	TEST_RR(    "smulwt	r0, r",1, VAL1,", r",2, VAL2,"")
@@ -390,16 +458,22 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "smulwt	lr, r",1, VAL2,", r13")
 	TEST_UNSUPPORTED(".word 0xe12f02e1 @ smulwt pc, r1, r2")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe12f02a1) " @ smulwb pc, r1, r2")
 	TEST_RR(    "smulwt	r0, r",1, VAL1,", r",2, VAL2,"")
 	TEST_RR(    "smulwtge	r7, r",8, VAL3,", r",9, VAL1,"")
 	TEST_R(     "smulwt	lr, r",1, VAL2,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe12f02e1) " @ smulwt pc, r1, r2")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRRR(  "smlalbb	r",0, VAL1,", r",1, VAL2,", r",2, VAL3,", r",3, VAL4)
 	TEST_RRRR(  "smlalbble	r",8, VAL4,", r",9, VAL1,", r",10,VAL2,", r",11,VAL3)
 	TEST_RRR(   "smlalbb	r",14,VAL3,", r",7, VAL4,", r",5, VAL1,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe14f1382 @ smlalbb pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe141f382 @ smlalbb r1, pc, r2, r3")
@@ -421,6 +495,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe14013ef @ smlalbb r0, r1, pc, r3")
 	TEST_UNSUPPORTED(".word 0xe1401fe2 @ smlalbb r0, r1, r2, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe14f1382) " @ smlalbb pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe141f382) " @ smlalbb r1, pc, r2, r3")
 	TEST_RRRR(  "smlaltb	r",0, VAL1,", r",1, VAL2,", r",2, VAL3,", r",3, VAL4)
@@ -440,11 +516,15 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe140f3e2) " @ smlalbb r0, pc, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe14013ef) " @ smlalbb r0, r1, pc, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe1401fe2) " @ smlalbb r0, r1, r2, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "smulbb	r0, r",1, VAL1,", r",2, VAL2,"")
 	TEST_RR(    "smulbbge	r7, r",8, VAL3,", r",9, VAL1,"")
 	TEST_R(     "smulbb	lr, r",1, VAL2,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe16f0281 @ smulbb pc, r1, r2")
 	TEST_RR(    "smultb	r0, r",1, VAL1,", r",2, VAL2,"")
@@ -462,6 +542,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe16002ef @ smultt r0, pc, r2")
 	TEST_UNSUPPORTED(".word 0xe1600fe1 @ smultt r0, r1, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe16f0281) " @ smulbb pc, r1, r2")
 	TEST_RR(    "smultb	r0, r",1, VAL1,", r",2, VAL2,"")
 	TEST_RR(    "smultbge	r7, r",8, VAL3,", r",9, VAL1,"")
@@ -478,6 +560,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe16002ef) " @ smultt r0, pc, r2")
 	TEST_UNSUPPORTED(__inst_arm(0xe1600fe1) " @ smultt r0, r1, pc")
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Multiply and multiply-accumulate")
@@ -485,6 +570,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(    "mul	r0, r",1, VAL1,", r",2, VAL2,"")
 	TEST_RR(    "mulls	r7, r",8, VAL2,", r",9, VAL2,"")
 	TEST_R(     "mul	lr, r",4, VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe00f0291 @ mul pc, r1, r2")
 	TEST_UNSUPPORTED(".word 0xe000029f @ mul r0, pc, r2")
@@ -494,6 +580,8 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "muls	lr, r",4, VAL3,", r13")
 	TEST_UNSUPPORTED(".word 0xe01f0291 @ muls pc, r1, r2")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe00f0291) " @ mul pc, r1, r2")
 	TEST_UNSUPPORTED(__inst_arm(0xe000029f) " @ mul r0, pc, r2")
 	TEST_UNSUPPORTED(__inst_arm(0xe0000f91) " @ mul r0, r1, pc")
@@ -501,11 +589,15 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(    "mullss	r7, r",8, VAL2,", r",9, VAL2,"")
 	TEST_R(     "muls	lr, r",4, VAL3,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe01f0291) " @ muls pc, r1, r2")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRR(    "mla	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(    "mlahi	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
 	TEST_RR(     "mla	lr, r",1, VAL2,", r",2, VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe02f3291 @ mla pc, r1, r2, r3")
 	TEST_RRR(    "mlas	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
@@ -513,11 +605,16 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(     "mlas	lr, r",1, VAL2,", r",2, VAL3,", r13")
 	TEST_UNSUPPORTED(".word 0xe03f3291 @ mlas pc, r1, r2, r3")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe02f3291) " @ mla pc, r1, r2, r3")
 	TEST_RRR(    "mlas	r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(    "mlahis	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
 	TEST_RR(     "mlas	lr, r",1, VAL2,", r",2, VAL3,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe03f3291) " @ mlas pc, r1, r2, r3")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if __LINUX_ARM_ARCH__ >= 6
@@ -525,15 +622,21 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(  "umaalls	r7, r8, r",9, VAL2,", r",10, VAL1,"")
 	TEST_R(   "umaal	lr, r12, r",11,VAL3,", r13")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe041f392 @ umaal pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe04f0392 @ umaal r0, pc, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe0500090 @ undef")
 	TEST_UNSUPPORTED(".word 0xe05fff9f @ undef")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe041f392) " @ umaal pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe04f0392) " @ umaal r0, pc, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0500090) " @ undef")
 	TEST_UNSUPPORTED(__inst_arm(0xe05fff9f) " @ undef")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -541,6 +644,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RRR(  "mls		r0, r",1, VAL1,", r",2, VAL2,", r",3,  VAL3,"")
 	TEST_RRR(  "mlshi	r7, r",8, VAL3,", r",9, VAL1,", r",10, VAL2,"")
 	TEST_RR(   "mls		lr, r",1, VAL2,", r",2, VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe06f3291 @ mls pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe060329f @ mls r0, pc, r2, r3")
@@ -551,6 +655,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe0700090 @ undef")
 	TEST_UNSUPPORTED(".word 0xe07fff9f @ undef")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe06f3291) " @ mls pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe060329f) " @ mls r0, pc, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0603f91) " @ mls r0, r1, pc, r3")
@@ -559,11 +665,15 @@ void kprobe_arm_test_cases(void)
 
 	TEST_UNSUPPORTED(__inst_arm(0xe0700090) " @ undef")
 	TEST_UNSUPPORTED(__inst_arm(0xe07fff9f) " @ undef")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(  "umull	r0, r1, r",2, VAL1,", r",3, VAL2,"")
 	TEST_RR(  "umullls	r7, r8, r",9, VAL2,", r",10, VAL1,"")
 	TEST_R(   "umull	lr, r12, r",11,VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe081f392 @ umull pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe08f1392 @ umull r1, pc, r2, r3")
@@ -573,6 +683,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe091f392 @ umulls pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe09f1392 @ umulls r1, pc, r2, r3")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe081f392) " @ umull pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe08f1392) " @ umull r1, pc, r2, r3")
 	TEST_RR(  "umulls	r0, r1, r",2, VAL1,", r",3, VAL2,"")
@@ -580,11 +692,15 @@ void kprobe_arm_test_cases(void)
 	TEST_R(   "umulls	lr, r12, r",11,VAL3,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe091f392) " @ umulls pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe09f1392) " @ umulls r1, pc, r2, r3")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRRR(  "umlal	r",0, VAL1,", r",1, VAL2,", r",2, VAL3,", r",3, VAL4)
 	TEST_RRRR(  "umlalle	r",8, VAL4,", r",9, VAL1,", r",10,VAL2,", r",11,VAL3)
 	TEST_RRR(   "umlal	r",14,VAL3,", r",7, VAL4,", r",5, VAL1,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe0af1392 @ umlal pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe0a1f392 @ umlal r1, pc, r2, r3")
@@ -594,6 +710,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe0bf1392 @ umlals pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe0b1f392 @ umlals r1, pc, r2, r3")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe0af1392) " @ umlal pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0a1f392) " @ umlal r1, pc, r2, r3")
 	TEST_RRRR(  "umlals	r",0, VAL1,", r",1, VAL2,", r",2, VAL3,", r",3, VAL4)
@@ -601,11 +719,15 @@ void kprobe_arm_test_cases(void)
 	TEST_RRR(   "umlals	r",14,VAL3,", r",7, VAL4,", r",5, VAL1,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe0bf1392) " @ umlals pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0b1f392) " @ umlals r1, pc, r2, r3")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(  "smull	r0, r1, r",2, VAL1,", r",3, VAL2,"")
 	TEST_RR(  "smullls	r7, r8, r",9, VAL2,", r",10, VAL1,"")
 	TEST_R(   "smull	lr, r12, r",11,VAL3,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe0c1f392 @ smull pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe0cf1392 @ smull r1, pc, r2, r3")
@@ -615,6 +737,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe0d1f392 @ smulls pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe0df1392 @ smulls r1, pc, r2, r3")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe0c1f392) " @ smull pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0cf1392) " @ smull r1, pc, r2, r3")
 	TEST_RR(  "smulls	r0, r1, r",2, VAL1,", r",3, VAL2,"")
@@ -622,11 +746,15 @@ void kprobe_arm_test_cases(void)
 	TEST_R(   "smulls	lr, r12, r",11,VAL3,", r13")
 	TEST_UNSUPPORTED(__inst_arm(0xe0d1f392) " @ smulls pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0df1392) " @ smulls r1, pc, r2, r3")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RRRR(  "smlal	r",0, VAL1,", r",1, VAL2,", r",2, VAL3,", r",3, VAL4)
 	TEST_RRRR(  "smlalle	r",8, VAL4,", r",9, VAL1,", r",10,VAL2,", r",11,VAL3)
 	TEST_RRR(   "smlal	r",14,VAL3,", r",7, VAL4,", r",5, VAL1,", r13")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe0ef1392 @ smlal pc, r1, r2, r3")
 	TEST_UNSUPPORTED(".word 0xe0e1f392 @ smlal r1, pc, r2, r3")
@@ -638,6 +766,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe0f0139f @ smlals r0, r1, pc, r3")
 	TEST_UNSUPPORTED(".word 0xe0f01f92 @ smlals r0, r1, r2, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe0ef1392) " @ smlal pc, r1, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0e1f392) " @ smlal r1, pc, r2, r3")
 	TEST_RRRR(  "smlals	r",0, VAL1,", r",1, VAL2,", r",2, VAL3,", r",3, VAL4)
@@ -647,6 +777,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe0f0f392) " @ smlals r0, pc, r2, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0f0139f) " @ smlals r0, r1, pc, r3")
 	TEST_UNSUPPORTED(__inst_arm(0xe0f01f92) " @ smlals r0, r1, r2, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Synchronization primitives")
@@ -657,6 +790,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RP("swp	sp, r",14,VAL2,", [r",12,13*4,"]")
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe108e097 @ swp	lr, r7, [r8]")
 	TEST_UNSUPPORTED(".word 0x610d0091 @ swpvs	r0, r1, [sp]")
 	TEST_UNSUPPORTED(".word 0xe10cd09e @ swp	sp, r14 [r12]")
@@ -665,6 +799,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe102009f @ swp r0, pc, [r2]")
 	TEST_UNSUPPORTED(".word 0xe10f0091 @ swp r0, r1, [pc]")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe108e097) " @ swp	lr, r7, [r8]")
 	TEST_UNSUPPORTED(__inst_arm(0x610d0091) " @ swpvs	r0, r1, [sp]")
 	TEST_UNSUPPORTED(__inst_arm(0xe10cd09e) " @ swp	sp, r14 [r12]")
@@ -672,11 +808,15 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe102f091) " @ swp pc, r1, [r2]")
 	TEST_UNSUPPORTED(__inst_arm(0xe102009f) " @ swp r0, pc, [r2]")
 	TEST_UNSUPPORTED(__inst_arm(0xe10f0091) " @ swp r0, r1, [pc]")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if __LINUX_ARM_ARCH__ < 6
 	TEST_RP("swpb	lr, r",7,VAL2,", [r",8,0,"]")
 	TEST_R( "swpvsb	r0, r",1,VAL1,", [sp]")
 #else
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe148e097 @ swpb	lr, r7, [r8]")
 	TEST_UNSUPPORTED(".word 0x614d0091 @ swpvsb	r0, r1, [sp]")
@@ -690,6 +830,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word	0xe1600090") /* Unallocated space */
 	TEST_UNSUPPORTED(".word	0xe1700090") /* Unallocated space */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe148e097) " @ swpb	lr, r7, [r8]")
 	TEST_UNSUPPORTED(__inst_arm(0x614d0091) " @ swpvsb	r0, r1, [sp]")
 #endif
@@ -701,6 +843,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe1500090)) /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_arm(0xe1600090)) /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_arm(0xe1700090)) /* Unallocated space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if __LINUX_ARM_ARCH__ >= 6
 	TEST_UNSUPPORTED("ldrex	r2, [sp]")
@@ -722,9 +867,15 @@ void kprobe_arm_test_cases(void)
 	TEST_RPR(  "strh	r",2, VAL1,", [r",3, 24,"], r",4, 48,"")
 	TEST_RPR(  "strh	r",10,VAL2,", [r",9, 48,"], -r",11,24,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1afc0ba	@ strh r12, [pc, r10]!")
 	TEST_UNSUPPORTED(".word 0xe089f0bb	@ strh pc, [r9], r11")
 	TEST_UNSUPPORTED(".word 0xe089a0bf	@ strh r10, [r9], pc")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1afc0ba) "	@ strh r12, [pc, r10]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe089f0bb) "	@ strh pc, [r9], r11")
+	TEST_UNSUPPORTED(__inst_arm(0xe089a0bf) "	@ strh r10, [r9], pc")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1afc0ba) "	@ strh r12, [pc, r10]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe089f0bb) "	@ strh pc, [r9], r11")
@@ -738,9 +889,15 @@ void kprobe_arm_test_cases(void)
 	TEST_PR(   "ldrh	r2, [r",3,  24,"], r",4, 48,"")
 	TEST_PR(   "ldrh	r10, [r",9, 48,"], -r",11,24,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1bfc0ba	@ ldrh r12, [pc, r10]!")
 	TEST_UNSUPPORTED(".word 0xe099f0bb	@ ldrh pc, [r9], r11")
 	TEST_UNSUPPORTED(".word 0xe099a0bf	@ ldrh r10, [r9], pc")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1bfc0ba) "	@ ldrh r12, [pc, r10]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe099f0bb) "	@ ldrh pc, [r9], r11")
+	TEST_UNSUPPORTED(__inst_arm(0xe099a0bf) "	@ ldrh r10, [r9], pc")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1bfc0ba) "	@ ldrh r12, [pc, r10]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe099f0bb) "	@ ldrh pc, [r9], r11")
@@ -754,8 +911,13 @@ void kprobe_arm_test_cases(void)
 	TEST_RP(   "strh	r",2, VAL1,", [r",3, 24,"], #48")
 	TEST_RP(   "strh	r",10,VAL2,", [r",9, 64,"], #-48")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1efc3b0	@ strh r12, [pc, #48]!")
 	TEST_UNSUPPORTED(".word 0xe0c9f3b0	@ strh pc, [r9], #48")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1efc3b0) "	@ strh r12, [pc, #48]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe0c9f3b0) "	@ strh pc, [r9], #48")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1efc3b0) "	@ strh r12, [pc, #48]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe0c9f3b0) "	@ strh pc, [r9], #48")
@@ -769,8 +931,13 @@ void kprobe_arm_test_cases(void)
 	TEST_P(	   "ldrh	r10, [r",9, 64,"], #-48")
 	TEST(      "ldrh	r0, [pc, #0]")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1ffc3b0	@ ldrh r12, [pc, #48]!")
 	TEST_UNSUPPORTED(".word 0xe0d9f3b0	@ ldrh pc, [r9], #48")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1ffc3b0) "	@ ldrh r12, [pc, #48]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe0d9f3b0) "	@ ldrh pc, [r9], #48")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1ffc3b0) "	@ ldrh r12, [pc, #48]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe0d9f3b0) "	@ ldrh pc, [r9], #48")
@@ -783,8 +950,13 @@ void kprobe_arm_test_cases(void)
 	TEST_PR(   "ldrsb	r2, [r",3,  24,"], r",4, 48,"")
 	TEST_PR(   "ldrsb	r10, [r",9, 48,"], -r",11,24,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1bfc0da	@ ldrsb r12, [pc, r10]!")
 	TEST_UNSUPPORTED(".word 0xe099f0db	@ ldrsb pc, [r9], r11")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1bfc0da) "	@ ldrsb r12, [pc, r10]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe099f0db) "	@ ldrsb pc, [r9], r11")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1bfc0da) "	@ ldrsb r12, [pc, r10]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe099f0db) "	@ ldrsb pc, [r9], r11")
@@ -798,8 +970,13 @@ void kprobe_arm_test_cases(void)
 	TEST_P(	   "ldrsb	r10, [r",9, 64,"], #-48")
 	TEST(      "ldrsb	r0, [pc, #0]")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1ffc3d0	@ ldrsb r12, [pc, #48]!")
 	TEST_UNSUPPORTED(".word 0xe0d9f3d0	@ ldrsb pc, [r9], #48")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1ffc3d0) "	@ ldrsb r12, [pc, #48]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe0d9f3d0) "	@ ldrsb pc, [r9], #48")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1ffc3d0) "	@ ldrsb r12, [pc, #48]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe0d9f3d0) "	@ ldrsb pc, [r9], #48")
@@ -812,8 +989,13 @@ void kprobe_arm_test_cases(void)
 	TEST_PR(   "ldrsh	r2, [r",3,  24,"], r",4, 48,"")
 	TEST_PR(   "ldrsh	r10, [r",9, 48,"], -r",11,24,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1bfc0fa	@ ldrsh r12, [pc, r10]!")
 	TEST_UNSUPPORTED(".word 0xe099f0fb	@ ldrsh pc, [r9], r11")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1bfc0fa) "	@ ldrsh r12, [pc, r10]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe099f0fb) "	@ ldrsh pc, [r9], r11")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1bfc0fa) "	@ ldrsh r12, [pc, r10]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe099f0fb) "	@ ldrsh pc, [r9], r11")
@@ -827,8 +1009,13 @@ void kprobe_arm_test_cases(void)
 	TEST_P(	   "ldrsh	r10, [r",9, 64,"], #-48")
 	TEST(      "ldrsh	r0, [pc, #0]")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1ffc3f0	@ ldrsh r12, [pc, #48]!")
 	TEST_UNSUPPORTED(".word 0xe0d9f3f0	@ ldrsh pc, [r9], #48")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1ffc3f0) "	@ ldrsh r12, [pc, #48]!")
+	TEST_UNSUPPORTED(__inst_arm(0xe0d9f3f0) "	@ ldrsh pc, [r9], #48")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1ffc3f0) "	@ ldrsh r12, [pc, #48]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe0d9f3f0) "	@ ldrsh pc, [r9], #48")
@@ -846,6 +1033,10 @@ void kprobe_arm_test_cases(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if __LINUX_ARM_ARCH__ >= 5
+>>>>>>> v3.18
 =======
 #if __LINUX_ARM_ARCH__ >= 5
 >>>>>>> v3.18
@@ -856,7 +1047,11 @@ void kprobe_arm_test_cases(void)
 	TEST_RPR(  "strd	r",2, VAL1,", [r",5, 24,"], r",4,48,"")
 	TEST_RPR(  "strd	r",10,VAL2,", [r",9, 48,"], -r",7,24,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1afc0fa	@ strd r12, [pc, r10]!")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1afc0fa) "	@ strd r12, [pc, r10]!")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1afc0fa) "	@ strd r12, [pc, r10]!")
 >>>>>>> v3.18
@@ -868,15 +1063,21 @@ void kprobe_arm_test_cases(void)
 	TEST_PR(   "ldrd	r2, [r",5, 24,"], r",4,48,"")
 	TEST_PR(   "ldrd	r10, [r",9,48,"], -r",7,24,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1afc0da	@ ldrd r12, [pc, r10]!")
 	TEST_UNSUPPORTED(".word 0xe089f0db	@ ldrd pc, [r9], r11")
 	TEST_UNSUPPORTED(".word 0xe089e0db	@ ldrd lr, [r9], r11")
 	TEST_UNSUPPORTED(".word 0xe089c0df	@ ldrd r12, [r9], pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe1afc0da) "	@ ldrd r12, [pc, r10]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe089f0db) "	@ ldrd pc, [r9], r11")
 	TEST_UNSUPPORTED(__inst_arm(0xe089e0db) "	@ ldrd lr, [r9], r11")
 	TEST_UNSUPPORTED(__inst_arm(0xe089c0df) "	@ ldrd r12, [r9], pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RP(   "strd	r",0, VAL1,", [r",1, 24,", #-8]")
@@ -886,7 +1087,11 @@ void kprobe_arm_test_cases(void)
 	TEST_RP(   "strd	r",2, VAL1,", [r",4, 24,"], #48")
 	TEST_RP(   "strd	r",10,VAL2,", [r",9, 64,"], #-48")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1efc3f0	@ strd r12, [pc, #48]!")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe1efc3f0) "	@ strd r12, [pc, #48]!")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe1efc3f0) "	@ strd r12, [pc, #48]!")
 >>>>>>> v3.18
@@ -898,14 +1103,20 @@ void kprobe_arm_test_cases(void)
 	TEST_P(	   "ldrd	r2, [r",5, 24,"], #48")
 	TEST_P(	   "ldrd	r10, [r",9,6,"], #-48")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe1efc3d0	@ ldrd r12, [pc, #48]!")
 	TEST_UNSUPPORTED(".word 0xe0c9f3d0	@ ldrd pc, [r9], #48")
 	TEST_UNSUPPORTED(".word 0xe0c9e3d0	@ ldrd lr, [r9], #48")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe1efc3d0) "	@ ldrd r12, [pc, #48]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe0c9f3d0) "	@ ldrd pc, [r9], #48")
 	TEST_UNSUPPORTED(__inst_arm(0xe0c9e3d0) "	@ ldrd lr, [r9], #48")
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_GROUP("Miscellaneous")
@@ -915,17 +1126,23 @@ void kprobe_arm_test_cases(void)
 	TEST("movw	r0, #0xffff")
 	TEST("movw	lr, #0xffff")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe300f000	@ movw pc, #0")
 	TEST_R("movt	r",0, VAL1,", #0")
 	TEST_R("movt	r",0, VAL2,", #0xffff")
 	TEST_R("movt	r",14,VAL1,", #0xffff")
 	TEST_UNSUPPORTED(".word 0xe340f000	@ movt pc, #0")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe300f000) "	@ movw pc, #0")
 	TEST_R("movt	r",0, VAL1,", #0")
 	TEST_R("movt	r",0, VAL2,", #0xffff")
 	TEST_R("movt	r",14,VAL1,", #0xffff")
 	TEST_UNSUPPORTED(__inst_arm(0xe340f000) "	@ movt pc, #0")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -995,6 +1212,7 @@ void kprobe_arm_test_cases(void)
 	TEST_ARM_TO_THUMB_INTERWORK_P("ldr	pc, [r",0,0,", #15*4]")
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe5af6008	@ str r6, [pc, #8]!")
 	TEST_UNSUPPORTED(".word 0xe7af6008	@ str r6, [pc, r8]!")
 	TEST_UNSUPPORTED(".word 0xe5bf6008	@ ldr r6, [pc, #8]!")
@@ -1010,6 +1228,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe5ff6008	@ ldrb r6, [pc, #8]!")
 	TEST_UNSUPPORTED(".word 0xe7ff6008	@ ldrb r6, [pc, r3]!")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe5af6008) "	@ str r6, [pc, #8]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe7af6008) "	@ str r6, [pc, r8]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe5bf6008) "	@ ldr r6, [pc, #8]!")
@@ -1024,6 +1244,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe7ef6008) "	@ strb r6, [pc, r3]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe5ff6008) "	@ ldrb r6, [pc, #8]!")
 	TEST_UNSUPPORTED(__inst_arm(0xe7ff6008) "	@ ldrb r6, [pc, r3]!")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_UNSUPPORTED("ldrt	r0, [r1], #4")
@@ -1038,6 +1261,7 @@ void kprobe_arm_test_cases(void)
 #if __LINUX_ARM_ARCH__ >= 7
 	TEST_GROUP("Parallel addition and subtraction, signed")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6000010") /* Unallocated space */
 	TEST_UNSUPPORTED(".word 0xe60fffff") /* Unallocated space */
@@ -1187,6 +1411,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe67feffa	@ uhsub8	r14, pc, r10")
 	TEST_UNSUPPORTED(".word 0xe67cefff	@ uhsub8	r14, r12, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe6000010) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_arm(0xe60fffff) "") /* Unallocated space */
 
@@ -1334,6 +1560,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe67cfffa) "	@ uhsub8	pc, r12, r10")
 	TEST_UNSUPPORTED(__inst_arm(0xe67feffa) "	@ uhsub8	r14, pc, r10")
 	TEST_UNSUPPORTED(__inst_arm(0xe67cefff) "	@ uhsub8	r14, r12, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_ARM_ARCH__ >= 7 */
 
@@ -1342,6 +1571,7 @@ void kprobe_arm_test_cases(void)
 
 	TEST_RR(    "pkhbt	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "pkhbt	r14,r",12, HH1,", r",10,HH2,", lsl #2")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe68cf11a	@ pkhbt	pc, r12, r10, lsl #2")
 	TEST_RR(    "pkhtb	r0, r",0,  HH1,", r",1, HH2,"")
@@ -1352,6 +1582,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe6900010") /* Unallocated space */
 	TEST_UNSUPPORTED(".word 0xe69fffdf") /* Unallocated space */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe68cf11a) "	@ pkhbt	pc, r12, r10, lsl #2")
 	TEST_RR(    "pkhtb	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "pkhtb	r14,r",12, HH1,", r",10,HH2,", asr #2")
@@ -1360,6 +1592,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe68ce15f) "	@ pkhtb	r14, r12, pc, asr #2")
 	TEST_UNSUPPORTED(__inst_arm(0xe6900010) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_arm(0xe69fffdf) "") /* Unallocated space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_R(     "ssat	r0, #24, r",0,   VAL1,"")
@@ -1367,7 +1602,11 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "ssat	r0, #24, r",0,   VAL1,", lsl #8")
 	TEST_R(     "ssat	r14, #24, r",12, VAL2,", asr #8")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6b7f01c	@ ssat	pc, #24, r12")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe6b7f01c) "	@ ssat	pc, #24, r12")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe6b7f01c) "	@ ssat	pc, #24, r12")
 >>>>>>> v3.18
@@ -1377,7 +1616,11 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "usat	r0, #24, r",0,   VAL1,", lsl #8")
 	TEST_R(     "usat	r14, #24, r",12, VAL2,", asr #8")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6f7f01c	@ usat	pc, #24, r12")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe6f7f01c) "	@ usat	pc, #24, r12")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe6f7f01c) "	@ usat	pc, #24, r12")
 >>>>>>> v3.18
@@ -1385,6 +1628,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(    "sxtab16	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "sxtab16	r14,r",12, HH2,", r",10,HH1,", ror #8")
 	TEST_R(     "sxtb16	r8, r",7,  HH1,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe68cf47a	@ sxtab16	pc,r12, r10, ror #8")
 
@@ -1398,6 +1642,8 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "ssat16	r14, #12, r",12, HH2,"")
 	TEST_UNSUPPORTED(".word 0xe6abff3c	@ ssat16	pc, #12, r12")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe68cf47a) "	@ sxtab16	pc,r12, r10, ror #8")
 
 	TEST_RR(    "sel	r0, r",0,  VAL1,", r",1, VAL2,"")
@@ -1409,11 +1655,15 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "ssat16	r0, #12, r",0,   HH1,"")
 	TEST_R(     "ssat16	r14, #12, r",12, HH2,"")
 	TEST_UNSUPPORTED(__inst_arm(0xe6abff3c) "	@ ssat16	pc, #12, r12")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "sxtab	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "sxtab	r14,r",12, HH2,", r",10,HH1,", ror #8")
 	TEST_R(     "sxtb	r8, r",7,  HH1,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6acf47a	@ sxtab	pc,r12, r10, ror #8")
 
@@ -1421,16 +1671,22 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "rev	r14, r",12, VAL2,"")
 	TEST_UNSUPPORTED(".word 0xe6bfff3c	@ rev	pc, r12")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe6acf47a) "	@ sxtab	pc,r12, r10, ror #8")
 
 	TEST_R(     "rev	r0, r",0,   VAL1,"")
 	TEST_R(     "rev	r14, r",12, VAL2,"")
 	TEST_UNSUPPORTED(__inst_arm(0xe6bfff3c) "	@ rev	pc, r12")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "sxtah	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "sxtah	r14,r",12, HH2,", r",10,HH1,", ror #8")
 	TEST_R(     "sxth	r8, r",7,  HH1,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6bcf47a	@ sxtah	pc,r12, r10, ror #8")
 
@@ -1438,16 +1694,22 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "rev16	r14, r",12, VAL2,"")
 	TEST_UNSUPPORTED(".word 0xe6bfffbc	@ rev16	pc, r12")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe6bcf47a) "	@ sxtah	pc,r12, r10, ror #8")
 
 	TEST_R(     "rev16	r0, r",0,   VAL1,"")
 	TEST_R(     "rev16	r14, r",12, VAL2,"")
 	TEST_UNSUPPORTED(__inst_arm(0xe6bfffbc) "	@ rev16	pc, r12")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "uxtab16	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "uxtab16	r14,r",12, HH2,", r",10,HH1,", ror #8")
 	TEST_R(     "uxtb16	r8, r",7,  HH1,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6ccf47a	@ uxtab16	pc,r12, r10, ror #8")
 
@@ -1456,19 +1718,28 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe6ecff3c	@ usat16	pc, #12, r12")
 	TEST_UNSUPPORTED(".word 0xe6ecef3f	@ usat16	r14, #12, pc")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe6ccf47a) "	@ uxtab16	pc,r12, r10, ror #8")
 
 	TEST_R(     "usat16	r0, #12, r",0,   HH1,"")
 	TEST_R(     "usat16	r14, #12, r",12, HH2,"")
 	TEST_UNSUPPORTED(__inst_arm(0xe6ecff3c) "	@ usat16	pc, #12, r12")
 	TEST_UNSUPPORTED(__inst_arm(0xe6ecef3f) "	@ usat16	r14, #12, pc")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TEST_RR(    "uxtab	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "uxtab	r14,r",12, HH2,", r",10,HH1,", ror #8")
 	TEST_R(     "uxtb	r8, r",7,  HH1,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6ecf47a	@ uxtab	pc,r12, r10, ror #8")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe6ecf47a) "	@ uxtab	pc,r12, r10, ror #8")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe6ecf47a) "	@ uxtab	pc,r12, r10, ror #8")
 >>>>>>> v3.18
@@ -1477,7 +1748,11 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "rbit	r0, r",0,   VAL1,"")
 	TEST_R(     "rbit	r14, r",12, VAL2,"")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6ffff3c	@ rbit	pc, r12")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe6ffff3c) "	@ rbit	pc, r12")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe6ffff3c) "	@ rbit	pc, r12")
 >>>>>>> v3.18
@@ -1486,6 +1761,7 @@ void kprobe_arm_test_cases(void)
 	TEST_RR(    "uxtah	r0, r",0,  HH1,", r",1, HH2,"")
 	TEST_RR(    "uxtah	r14,r",12, HH2,", r",10,HH1,", ror #8")
 	TEST_R(     "uxth	r8, r",7,  HH1,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe6fff077	@ uxth	pc, r7")
 	TEST_UNSUPPORTED(".word 0xe6ff807f	@ uxth	r8, pc")
@@ -1503,6 +1779,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe6d00070") /* Unallocated space */
 	TEST_UNSUPPORTED(".word 0xe6dfff7f") /* Unallocated space */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe6fff077) "	@ uxth	pc, r7")
 	TEST_UNSUPPORTED(__inst_arm(0xe6ff807f) "	@ uxth	r8, pc")
 	TEST_UNSUPPORTED(__inst_arm(0xe6fcf47a) "	@ uxtah	pc, r12, r10, ror #8")
@@ -1518,6 +1796,9 @@ void kprobe_arm_test_cases(void)
 
 	TEST_UNSUPPORTED(__inst_arm(0xe6d00070) "") /* Unallocated space */
 	TEST_UNSUPPORTED(__inst_arm(0xe6dfff7f) "") /* Unallocated space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_ARM_ARCH__ >= 6 */
 
@@ -1526,6 +1807,7 @@ void kprobe_arm_test_cases(void)
 
 	TEST_RRR(   "smlad	r0, r",0,  HH1,", r",1, HH2,", r",2, VAL1,"")
 	TEST_RRR(   "smlad	r14, r",12,HH2,", r",10,HH1,", r",8, VAL2,"")
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe70f8a1c	@ smlad	pc, r12, r10, r8")
 	TEST_RRR(   "smladx	r0, r",0,  HH1,", r",1, HH2,", r",2, VAL1,"")
@@ -1601,6 +1883,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xe78e8a1f	@ usada8	r14, pc, r10, r8")
 	TEST_UNSUPPORTED(".word 0xe78e8f1c	@ usada8	r14, r12, pc, r8")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe70f8a1c) "	@ smlad	pc, r12, r10, r8")
 	TEST_RRR(   "smladx	r0, r",0,  HH1,", r",1, HH2,", r",2, VAL1,"")
 	TEST_RRR(   "smladx	r14, r",12,HH2,", r",10,HH1,", r",8, VAL2,"")
@@ -1674,6 +1958,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xe78f8a1c) "	@ usada8	pc, r12, r10, r8")
 	TEST_UNSUPPORTED(__inst_arm(0xe78e8a1f) "	@ usada8	r14, pc, r10, r8")
 	TEST_UNSUPPORTED(__inst_arm(0xe78e8f1c) "	@ usada8	r14, r12, pc, r8")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_ARM_ARCH__ >= 6 */
 
@@ -1684,7 +1971,11 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "sbfxeq	r14, r",12, VAL2,", #8, #16")
 	TEST_R(     "sbfx	r4, r",10,  VAL1,", #16, #15")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe7aff45c	@ sbfx	pc, r12, #8, #16")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe7aff45c) "	@ sbfx	pc, r12, #8, #16")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe7aff45c) "	@ sbfx	pc, r12, #8, #16")
 >>>>>>> v3.18
@@ -1693,8 +1984,13 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "ubfxcs	r14, r",12, VAL2,", #8, #16")
 	TEST_R(     "ubfx	r4, r",10,  VAL1,", #16, #15")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe7eff45c	@ ubfx	pc, r12, #8, #16")
 	TEST_UNSUPPORTED(".word 0xe7efc45f	@ ubfx	r12, pc, #8, #16")
+=======
+	TEST_UNSUPPORTED(__inst_arm(0xe7eff45c) "	@ ubfx	pc, r12, #8, #16")
+	TEST_UNSUPPORTED(__inst_arm(0xe7efc45f) "	@ ubfx	r12, pc, #8, #16")
+>>>>>>> v3.18
 =======
 	TEST_UNSUPPORTED(__inst_arm(0xe7eff45c) "	@ ubfx	pc, r12, #8, #16")
 	TEST_UNSUPPORTED(__inst_arm(0xe7efc45f) "	@ ubfx	r12, pc, #8, #16")
@@ -1705,6 +2001,7 @@ void kprobe_arm_test_cases(void)
 	TEST_R(     "bfc	r",7, VAL1,", #0, #31")
 	TEST_R(     "bfc	r",8, VAL2,", #0, #31")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xe7def01f	@ bfc	pc, #0, #31");
 
 	TEST_RR(    "bfi	r",0, VAL1,", r",0  , VAL2,", #0, #31")
@@ -1714,6 +2011,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0x07f000f0")  /* Permanently UNDEFINED */
 	TEST_UNSUPPORTED(".word 0x07ffffff")  /* Permanently UNDEFINED */
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xe7def01f) "	@ bfc	pc, #0, #31");
 
 	TEST_RR(    "bfi	r",0, VAL1,", r",0  , VAL2,", #0, #31")
@@ -1722,6 +2021,9 @@ void kprobe_arm_test_cases(void)
 
 	TEST_UNSUPPORTED(__inst_arm(0x07f000f0) "")  /* Permanently UNDEFINED */
 	TEST_UNSUPPORTED(__inst_arm(0x07ffffff) "")  /* Permanently UNDEFINED */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_ARM_ARCH__ >= 6 */
 
@@ -1850,6 +2152,7 @@ void kprobe_arm_test_cases(void)
 	TEST_COPROCESSOR( "stc"two"	0, cr0, [r15, #4]")			\
 	TEST_COPROCESSOR( "stc"two"	0, cr0, [r15, #-4]")			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0x"cc"daf0001	@ stc"two"	0, cr0, [r15, #4]!")	\
 	TEST_UNSUPPORTED(".word 0x"cc"d2f0001	@ stc"two"	0, cr0, [r15, #-4]!")	\
 	TEST_UNSUPPORTED(".word 0x"cc"caf0001	@ stc"two"	0, cr0, [r15], #4")	\
@@ -1876,6 +2179,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0x"cc"cff0001	@ ldc"two"l	0, cr0, [r15], #4")	\
 	TEST_UNSUPPORTED(".word 0x"cc"c7f0001	@ ldc"two"l	0, cr0, [r15], #-4")	\
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##daf0001) "	@ stc"two"	0, cr0, [r15, #4]!")	\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##d2f0001) "	@ stc"two"	0, cr0, [r15, #-4]!")	\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##caf0001) "	@ stc"two"	0, cr0, [r15], #4")	\
@@ -1901,6 +2206,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##d7f0001) "	@ ldc"two"l	0, cr0, [r15, #-4]!")	\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##cff0001) "	@ ldc"two"l	0, cr0, [r15], #4")	\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##c7f0001) "	@ ldc"two"l	0, cr0, [r15], #-4")	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TEST_COPROCESSOR( "ldc"two"l	0, cr0, [r15], {1}")
 
@@ -1909,6 +2217,7 @@ void kprobe_arm_test_cases(void)
 	TEST_COPROCESSOR( "mcrr"two"	0, 15, r0, r14, cr0")			\
 	TEST_COPROCESSOR( "mcrr"two"	15, 0, r14, r0, cr15")			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0x"cc"c4f00f0	@ mcrr"two"	0, 15, r0, r15, cr0")	\
 	TEST_UNSUPPORTED(".word 0x"cc"c40ff0f	@ mcrr"two"	15, 0, r15, r0, cr15")	\
 	TEST_COPROCESSOR( "mrrc"two"	0, 15, r0, r14, cr0")			\
@@ -1916,12 +2225,17 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0x"cc"c5f00f0	@ mrrc"two"	0, 15, r0, r15, cr0")	\
 	TEST_UNSUPPORTED(".word 0x"cc"c50ff0f	@ mrrc"two"	15, 0, r15, r0, cr15")	\
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##c4f00f0) "	@ mcrr"two"	0, 15, r0, r15, cr0")	\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##c40ff0f) "	@ mcrr"two"	15, 0, r15, r0, cr15")	\
 	TEST_COPROCESSOR( "mrrc"two"	0, 15, r0, r14, cr0")			\
 	TEST_COPROCESSOR( "mrrc"two"	15, 0, r14, r0, cr15")			\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##c5f00f0) "	@ mrrc"two"	0, 15, r0, r15, cr0")	\
 	TEST_UNSUPPORTED(__inst_arm(0x##cc##c50ff0f) "	@ mrrc"two"	15, 0, r15, r0, cr15")	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TEST_COPROCESSOR( "cdp"two"	15, 15, cr15, cr15, cr15, 7")		\
 	TEST_COPROCESSOR( "cdp"two"	0, 0, cr0, cr0, cr0, 0")		\
@@ -1931,13 +2245,19 @@ void kprobe_arm_test_cases(void)
 	TEST_COPROCESSOR( "mrc"two"	0, 0, r0, cr0, cr0, 0")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	COPROCESSOR_INSTRUCTIONS_ST_LD("","e")
 	COPROCESSOR_INSTRUCTIONS_MC_MR("","e")
 =======
+=======
+>>>>>>> v3.18
 	COPROCESSOR_INSTRUCTIONS_ST_LD("",e)
 #if __LINUX_ARM_ARCH__ >= 5
 	COPROCESSOR_INSTRUCTIONS_MC_MR("",e)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TEST_UNSUPPORTED("svc	0")
 	TEST_UNSUPPORTED("svc	0xffffff")
@@ -1965,6 +2285,7 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED("rfeia	sp!")
 	TEST_UNSUPPORTED("rfeib	sp!")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_UNSUPPORTED(".word 0xf81d0a00	@ rfeda	pc")
 	TEST_UNSUPPORTED(".word 0xf91d0a00	@ rfedb	pc")
 	TEST_UNSUPPORTED(".word 0xf89d0a00	@ rfeia	pc")
@@ -1974,6 +2295,8 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word 0xf8bd0a00	@ rfeia	pc!")
 	TEST_UNSUPPORTED(".word 0xf9bd0a00	@ rfeib	pc!")
 =======
+=======
+>>>>>>> v3.18
 	TEST_UNSUPPORTED(__inst_arm(0xf81d0a00) "	@ rfeda	pc")
 	TEST_UNSUPPORTED(__inst_arm(0xf91d0a00) "	@ rfedb	pc")
 	TEST_UNSUPPORTED(__inst_arm(0xf89d0a00) "	@ rfeia	pc")
@@ -1982,6 +2305,9 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(__inst_arm(0xf93d0a00) "	@ rfedb	pc!")
 	TEST_UNSUPPORTED(__inst_arm(0xf8bd0a00) "	@ rfeia	pc!")
 	TEST_UNSUPPORTED(__inst_arm(0xf9bd0a00) "	@ rfeib	pc!")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_ARM_ARCH__ >= 6 */
 
@@ -2010,15 +2336,21 @@ void kprobe_arm_test_cases(void)
 #endif /* __LINUX_ARM_ARCH__ >= 6 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	COPROCESSOR_INSTRUCTIONS_ST_LD("2","f")
 #if __LINUX_ARM_ARCH__ >= 6
 	COPROCESSOR_INSTRUCTIONS_MC_MR("2","f")
 =======
+=======
+>>>>>>> v3.18
 #if __LINUX_ARM_ARCH__ >= 5
 	COPROCESSOR_INSTRUCTIONS_ST_LD("2",f)
 #endif
 #if __LINUX_ARM_ARCH__ >= 6
 	COPROCESSOR_INSTRUCTIONS_MC_MR("2",f)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -2050,9 +2382,15 @@ void kprobe_arm_test_cases(void)
 
 #if __LINUX_ARM_ARCH__ >= 7
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TEST_SUPPORTED(  ".word 0xf590f000	@ pldw [r0, #0]")
 	TEST_SUPPORTED(  ".word 0xf797f000	@ pldw	[r7, r0]")
 	TEST_SUPPORTED(  ".word 0xf798f18c	@ pldw	[r8, r12, lsl #3]");
+=======
+	TEST_SUPPORTED(  __inst_arm(0xf590f000) "	@ pldw [r0, #0]")
+	TEST_SUPPORTED(  __inst_arm(0xf797f000) "	@ pldw	[r7, r0]")
+	TEST_SUPPORTED(  __inst_arm(0xf798f18c) "	@ pldw	[r8, r12, lsl #3]");
+>>>>>>> v3.18
 =======
 	TEST_SUPPORTED(  __inst_arm(0xf590f000) "	@ pldw [r0, #0]")
 	TEST_SUPPORTED(  __inst_arm(0xf797f000) "	@ pldw	[r7, r0]")

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
   comedi/drivers/s626.h
   Sensoray s626 Comedi driver, header file
 
@@ -76,6 +77,8 @@
 #define S626_SIZE 0x0200
 #define DMABUF_SIZE			4096	/*  4k pages */
 =======
+=======
+>>>>>>> v3.18
  * comedi/drivers/s626.h
  * Sensoray s626 Comedi driver, header file
  *
@@ -100,12 +103,16 @@
 #define S626_H_INCLUDED
 
 #define S626_DMABUF_SIZE	4096	/* 4k pages */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define S626_ADC_CHANNELS       16
 #define S626_DAC_CHANNELS       4
 #define S626_ENCODER_CHANNELS   6
 #define S626_DIO_CHANNELS       48
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define S626_DIO_BANKS		3	/*  Number of DIO groups. */
 #define S626_DIO_EXTCHANS	40	/*  Number of */
@@ -724,6 +731,8 @@ struct bufferDMA {
 	uint32_t DMAHandle;
 };
 =======
+=======
+>>>>>>> v3.18
 #define S626_DIO_BANKS		3	/* Number of DIO groups. */
 #define S626_DIO_EXTCHANS	40	/* Number of extended-capability
 					 * DIO channels. */
@@ -1454,4 +1463,7 @@ struct bufferDMA {
 	S626_UNMAKE((v), S626_STDWID_CLKENAB, S626_STDBIT_CLKENAB)
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

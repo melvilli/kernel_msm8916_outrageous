@@ -16,8 +16,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -32,7 +36,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -527,7 +534,11 @@ static int rndis_set_default_key(struct wiphy *wiphy, struct net_device *netdev,
 
 static int rndis_get_station(struct wiphy *wiphy, struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					u8 *mac, struct station_info *sinfo);
+=======
+			     const u8 *mac, struct station_info *sinfo);
+>>>>>>> v3.18
 =======
 			     const u8 *mac, struct station_info *sinfo);
 >>>>>>> v3.18
@@ -1304,7 +1315,12 @@ static int set_channel(struct usbnet *usbdev, int channel)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsconfig = ieee80211_dsss_chan_to_freq(channel) * 1000;
+=======
+	dsconfig = 1000 *
+		ieee80211_channel_to_frequency(channel, IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 	dsconfig = 1000 *
 		ieee80211_channel_to_frequency(channel, IEEE80211_BAND_2GHZ);
@@ -2040,14 +2056,20 @@ static bool rndis_bss_info_update(struct usbnet *usbdev,
 	beacon_interval = le16_to_cpu(fixed->beacon_interval);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bss = cfg80211_inform_bss(priv->wdev.wiphy, channel, bssid->mac,
 		timestamp, capability, beacon_interval, ie, ie_len, signal,
 		GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	bss = cfg80211_inform_bss(priv->wdev.wiphy, channel,
 				  CFG80211_BSS_FTYPE_UNKNOWN, bssid->mac,
 				  timestamp, capability, beacon_interval,
 				  ie, ie_len, signal, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg80211_put_bss(priv->wdev.wiphy, bss);
 
@@ -2515,7 +2537,11 @@ static void rndis_fill_station_info(struct usbnet *usbdev,
 
 static int rndis_get_station(struct wiphy *wiphy, struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					u8 *mac, struct station_info *sinfo)
+=======
+			     const u8 *mac, struct station_info *sinfo)
+>>>>>>> v3.18
 =======
 			     const u8 *mac, struct station_info *sinfo)
 >>>>>>> v3.18
@@ -2740,14 +2766,20 @@ static void rndis_wlan_craft_connected_bss(struct usbnet *usbdev, u8 *bssid,
 		ssid.essid, signal);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bss = cfg80211_inform_bss(priv->wdev.wiphy, channel, bssid,
 		timestamp, capability, beacon_period, ie_buf, ie_len,
 		signal, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	bss = cfg80211_inform_bss(priv->wdev.wiphy, channel,
 				  CFG80211_BSS_FTYPE_UNKNOWN, bssid,
 				  timestamp, capability, beacon_period,
 				  ie_buf, ie_len, signal, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg80211_put_bss(priv->wdev.wiphy, bss);
 }
@@ -2872,7 +2904,13 @@ static void rndis_wlan_do_link_up_work(struct usbnet *usbdev)
 					resp_ie, resp_ie_len, GFP_KERNEL);
 	} else if (priv->infra_mode == NDIS_80211_INFRA_ADHOC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg80211_ibss_joined(usbdev->net, bssid, GFP_KERNEL);
+=======
+		cfg80211_ibss_joined(usbdev->net, bssid,
+				     get_current_channel(usbdev, NULL),
+				     GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		cfg80211_ibss_joined(usbdev->net, bssid,
 				     get_current_channel(usbdev, NULL),

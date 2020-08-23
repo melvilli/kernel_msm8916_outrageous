@@ -900,6 +900,10 @@ lcs_send_lancmd(struct lcs_card *card, struct lcs_buffer *buffer,
 	wait_event(reply->wait_q, reply->received);
 	del_timer_sync(&timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	destroy_timer_on_stack(&timer);
+>>>>>>> v3.18
 =======
 	destroy_timer_on_stack(&timer);
 >>>>>>> v3.18
@@ -1947,7 +1951,11 @@ lcs_portno_store (struct device *dev, struct device_attribute *attr, const char 
 {
         struct lcs_card *card;
 <<<<<<< HEAD
+<<<<<<< HEAD
         int value;
+=======
+	int value, rc;
+>>>>>>> v3.18
 =======
 	int value, rc;
 >>>>>>> v3.18
@@ -1958,7 +1966,13 @@ lcs_portno_store (struct device *dev, struct device_attribute *attr, const char 
                 return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         sscanf(buf, "%u", &value);
+=======
+	rc = sscanf(buf, "%d", &value);
+	if (rc != 1)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	rc = sscanf(buf, "%d", &value);
 	if (rc != 1)
@@ -2011,7 +2025,12 @@ lcs_timeout_store (struct device *dev, struct device_attribute *attr, const char
 {
         struct lcs_card *card;
 <<<<<<< HEAD
+<<<<<<< HEAD
         int value;
+=======
+	unsigned int value;
+	int rc;
+>>>>>>> v3.18
 =======
 	unsigned int value;
 	int rc;
@@ -2023,7 +2042,13 @@ lcs_timeout_store (struct device *dev, struct device_attribute *attr, const char
                 return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         sscanf(buf, "%u", &value);
+=======
+	rc = sscanf(buf, "%u", &value);
+	if (rc != 1)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	rc = sscanf(buf, "%u", &value);
 	if (rc != 1)
@@ -2467,7 +2492,11 @@ __init lcs_init_module(void)
 		goto out_err;
 	lcs_root_dev = root_device_register("lcs");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = IS_ERR(lcs_root_dev) ? PTR_ERR(lcs_root_dev) : 0;
+=======
+	rc = PTR_ERR_OR_ZERO(lcs_root_dev);
+>>>>>>> v3.18
 =======
 	rc = PTR_ERR_OR_ZERO(lcs_root_dev);
 >>>>>>> v3.18

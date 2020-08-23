@@ -113,14 +113,20 @@ struct cyttsp;
 struct cyttsp_bus_ops {
 	u16 bustype;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*write)(struct cyttsp *ts,
 		     u8 addr, u8 length, const void *values);
 	int (*read)(struct cyttsp *ts, u8 addr, u8 length, void *values);
 =======
+=======
+>>>>>>> v3.18
 	int (*write)(struct device *dev, u8 *xfer_buf, u16 addr, u8 length,
 			const void *values);
 	int (*read)(struct device *dev, u8 *xfer_buf, u16 addr, u8 length,
 			void *values);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -152,11 +158,17 @@ struct cyttsp *cyttsp_probe(const struct cyttsp_bus_ops *bus_ops,
 void cyttsp_remove(struct cyttsp *ts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int cyttsp_i2c_write_block_data(struct device *dev, u8 *xfer_buf, u16 addr,
 		u8 length, const void *values);
 int cyttsp_i2c_read_block_data(struct device *dev, u8 *xfer_buf, u16 addr,
 		u8 length, void *values);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern const struct dev_pm_ops cyttsp_pm_ops;
 

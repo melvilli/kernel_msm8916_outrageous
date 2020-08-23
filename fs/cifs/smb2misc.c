@@ -172,6 +172,7 @@ smb2_check_message(char *buf, unsigned int length)
 		cifs_dbg(FYI, "Calculated size %u length %u mismatch mid %llu\n",
 			 clc_len, 4 + len, mid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Windows 7 server returns 24 bytes more */
 		if (clc_len + 20 == len && command == SMB2_OPLOCK_BREAK_HE)
 			return 0;
@@ -179,6 +180,8 @@ smb2_check_message(char *buf, unsigned int length)
 		if (clc_len == 4 + len + 1)
 			return 0;
 =======
+=======
+>>>>>>> v3.18
 		/* create failed on symlink */
 		if (command == SMB2_CREATE_HE &&
 		    hdr->Status == STATUS_STOPPED_ON_SYMLINK)
@@ -204,6 +207,9 @@ smb2_check_message(char *buf, unsigned int length)
 			return 0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	}
@@ -295,11 +301,17 @@ smb2_get_data_area_len(int *off, int *len, struct smb2_hdr *hdr)
 		break;
 	case SMB2_IOCTL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		*off = le32_to_cpu(
 		  ((struct smb2_ioctl_rsp *)hdr)->OutputOffset);
 		*len = le32_to_cpu(((struct smb2_ioctl_rsp *)hdr)->OutputCount);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SMB2_CHANGE_NOTIFY:
 	default:
@@ -392,7 +404,10 @@ cifs_convert_path_to_utf16(const char *from, struct cifs_sb_info *cifs_sb)
 	const char *start_of_path;
 	__le16 *to;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int map_type;
 
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SFM_CHR)
@@ -401,6 +416,9 @@ cifs_convert_path_to_utf16(const char *from, struct cifs_sb_info *cifs_sb)
 		map_type = SFU_MAP_UNI_RSVD;
 	else
 		map_type = NO_MAP_UNI_RSVD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Windows doesn't allow paths beginning with \ */
@@ -410,9 +428,13 @@ cifs_convert_path_to_utf16(const char *from, struct cifs_sb_info *cifs_sb)
 		start_of_path = from;
 	to = cifs_strndup_to_utf16(start_of_path, PATH_MAX, &len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   cifs_sb->local_nls,
 				   cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				   cifs_sb->local_nls, map_type);
+>>>>>>> v3.18
 =======
 				   cifs_sb->local_nls, map_type);
 >>>>>>> v3.18
@@ -422,6 +444,7 @@ cifs_convert_path_to_utf16(const char *from, struct cifs_sb_info *cifs_sb)
 __le32
 smb2_get_lease_state(struct cifsInodeInfo *cinode)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cinode->clientCanCacheAll)
 		return SMB2_LEASE_WRITE_CACHING | SMB2_LEASE_READ_CACHING;
@@ -441,6 +464,8 @@ __u8 smb2_map_lease_to_oplock(__le32 lease_state)
 		return SMB2_OPLOCK_LEVEL_II;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	__le32 lease = 0;
 
 	if (CIFS_CACHE_WRITE(cinode))
@@ -450,6 +475,9 @@ __u8 smb2_map_lease_to_oplock(__le32 lease_state)
 	if (CIFS_CACHE_READ(cinode))
 		lease |= SMB2_LEASE_READ_CACHING;
 	return lease;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -483,6 +511,10 @@ smb2_tcon_has_lease(struct cifs_tcon *tcon, struct smb2_lease_break *rsp,
 	struct list_head *tmp;
 	struct cifsFileInfo *cfile;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct TCP_Server_Info *server = tcon->ses->server;
+>>>>>>> v3.18
 =======
 	struct TCP_Server_Info *server = tcon->ses->server;
 >>>>>>> v3.18
@@ -492,7 +524,11 @@ smb2_tcon_has_lease(struct cifs_tcon *tcon, struct smb2_lease_break *rsp,
 				  SMB2_NOTIFY_BREAK_LEASE_FLAG_ACK_REQUIRED);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lease_state = smb2_map_lease_to_oplock(rsp->NewLeaseState);
+=======
+	lease_state = le32_to_cpu(rsp->NewLeaseState);
+>>>>>>> v3.18
 =======
 	lease_state = le32_to_cpu(rsp->NewLeaseState);
 >>>>>>> v3.18
@@ -507,15 +543,21 @@ smb2_tcon_has_lease(struct cifs_tcon *tcon, struct smb2_lease_break *rsp,
 
 		cifs_dbg(FYI, "found in the open list\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(FYI, "lease key match, lease break 0x%d\n",
 			 le32_to_cpu(rsp->NewLeaseState));
 
 		smb2_set_oplock_level(cinode, lease_state);
 =======
+=======
+>>>>>>> v3.18
 		cifs_dbg(FYI, "lease key match, lease break 0x%x\n",
 			 le32_to_cpu(rsp->NewLeaseState));
 
 		server->ops->set_oplock_level(cinode, lease_state, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (ack_req)
@@ -544,7 +586,11 @@ smb2_tcon_has_lease(struct cifs_tcon *tcon, struct smb2_lease_break *rsp,
 
 		cifs_dbg(FYI, "found in the pending open list\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(FYI, "lease key match, lease break 0x%d\n",
+=======
+		cifs_dbg(FYI, "lease key match, lease break 0x%x\n",
+>>>>>>> v3.18
 =======
 		cifs_dbg(FYI, "lease key match, lease break 0x%x\n",
 >>>>>>> v3.18
@@ -627,7 +673,11 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cifs_dbg(FYI, "oplock level 0x%d\n", rsp->OplockLevel);
+=======
+	cifs_dbg(FYI, "oplock level 0x%x\n", rsp->OplockLevel);
+>>>>>>> v3.18
 =======
 	cifs_dbg(FYI, "oplock level 0x%x\n", rsp->OplockLevel);
 >>>>>>> v3.18
@@ -654,7 +704,11 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
 				cinode = CIFS_I(cfile->dentry->d_inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (!cinode->clientCanCacheAll &&
+=======
+				if (!CIFS_CACHE_WRITE(cinode) &&
+>>>>>>> v3.18
 =======
 				if (!CIFS_CACHE_WRITE(cinode) &&
 >>>>>>> v3.18
@@ -664,9 +718,12 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
 					cfile->oplock_break_cancelled = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				smb2_set_oplock_level(cinode,
 				  rsp->OplockLevel ? SMB2_OPLOCK_LEVEL_II : 0);
 =======
+=======
+>>>>>>> v3.18
 				set_bit(CIFS_INODE_PENDING_OPLOCK_BREAK,
 					&cinode->flags);
 
@@ -682,6 +739,9 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
 					clear_bit(
 					   CIFS_INODE_DOWNGRADE_OPLOCK_TO_L2,
 					   &cinode->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				queue_work(cifsiod_wq, &cfile->oplock_break);

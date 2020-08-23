@@ -38,6 +38,7 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-fh.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/tuner.h>
 #include <media/rc-core.h>
 #include <media/ir-kbd-i2c.h>
@@ -47,6 +48,8 @@
 #if IS_ENABLED(CONFIG_VIDEO_SAA7134_DVB)
 #include <media/videobuf-dvb.h>
 =======
+=======
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 #include <media/tuner.h>
 #include <media/rc-core.h>
@@ -56,6 +59,9 @@
 #include <sound/pcm.h>
 #if IS_ENABLED(CONFIG_VIDEO_SAA7134_DVB)
 #include <media/videobuf2-dvb.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #include "tda8290.h"
@@ -350,6 +356,10 @@ struct saa7134_card_ir {
 #define SAA7134_BOARD_HAWELL_HW_9004V1      191
 #define SAA7134_BOARD_AVERMEDIA_A706		192
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SAA7134_BOARD_WIS_VOYAGER           193
+>>>>>>> v3.18
 =======
 #define SAA7134_BOARD_WIS_VOYAGER           193
 >>>>>>> v3.18
@@ -384,6 +394,10 @@ enum saa7134_mpeg_type {
 	SAA7134_MPEG_EMPRESS,
 	SAA7134_MPEG_DVB,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SAA7134_MPEG_GO7007,
+>>>>>>> v3.18
 =======
 	SAA7134_MPEG_GO7007,
 >>>>>>> v3.18
@@ -427,6 +441,10 @@ struct saa7134_board {
 #define card_is_empress(dev)  (SAA7134_MPEG_EMPRESS == saa7134_boards[dev->board].mpeg)
 #define card_is_dvb(dev)      (SAA7134_MPEG_DVB     == saa7134_boards[dev->board].mpeg)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define card_is_go7007(dev)   (SAA7134_MPEG_GO7007  == saa7134_boards[dev->board].mpeg)
+>>>>>>> v3.18
 =======
 #define card_is_go7007(dev)   (SAA7134_MPEG_GO7007  == saa7134_boards[dev->board].mpeg)
 >>>>>>> v3.18
@@ -435,12 +453,18 @@ struct saa7134_board {
 #define card_in(dev,n)        (saa7134_boards[dev->board].inputs[n])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_CID_PRIVATE_INVERT      (V4L2_CID_USER_SAA7134_BASE + 0)
 #define V4L2_CID_PRIVATE_Y_ODD       (V4L2_CID_USER_SAA7134_BASE + 1)
 #define V4L2_CID_PRIVATE_Y_EVEN      (V4L2_CID_USER_SAA7134_BASE + 2)
 #define V4L2_CID_PRIVATE_AUTOMUTE    (V4L2_CID_USER_SAA7134_BASE + 3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ----------------------------------------------------------- */
 /* device / file handle status                                 */
@@ -449,6 +473,10 @@ struct saa7134_board {
 #define RESOURCE_VIDEO         2
 #define RESOURCE_VBI           4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RESOURCE_EMPRESS       8
+>>>>>>> v3.18
 =======
 #define RESOURCE_EMPRESS       8
 >>>>>>> v3.18
@@ -483,10 +511,16 @@ struct saa7134_thread {
 struct saa7134_buf {
 	/* common v4l buffer stuff -- must be first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_buffer vb;
 
 	/* saa7134 specific */
 	struct saa7134_format   *fmt;
+=======
+	struct vb2_buffer vb2;
+
+	/* saa7134 specific */
+>>>>>>> v3.18
 =======
 	struct vb2_buffer vb2;
 
@@ -498,8 +532,12 @@ struct saa7134_buf {
 			struct saa7134_buf *next);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* page tables */
 	struct saa7134_pgtable  *pt;
+=======
+	struct list_head	entry;
+>>>>>>> v3.18
 =======
 	struct list_head	entry;
 >>>>>>> v3.18
@@ -511,6 +549,7 @@ struct saa7134_dmaqueue {
 	struct list_head           queue;
 	struct timer_list          timeout;
 	unsigned int               need_two;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -541,6 +580,10 @@ struct saa7134_fh {
 	unsigned int               seq_nr;
 	struct saa7134_pgtable     pt;
 >>>>>>> v3.18
+=======
+	unsigned int               seq_nr;
+	struct saa7134_pgtable     pt;
+>>>>>>> v3.18
 };
 
 /* dmasound dsp status */
@@ -567,12 +610,18 @@ struct saa7134_dmasound {
 	unsigned int               bufsize;
 	struct saa7134_pgtable     pt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dmabuf     dma;
 =======
+=======
+>>>>>>> v3.18
 	void			   *vaddr;
 	struct scatterlist	   *sglist;
 	int                        sglen;
 	int                        nr_pages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int               dma_blk;
 	unsigned int               read_offset;
@@ -585,7 +634,10 @@ struct saa7134_dmasound {
 struct saa7134_ts {
 	/* TS capture */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct saa7134_pgtable     pt_ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int                        nr_packets;
@@ -600,6 +652,11 @@ struct saa7134_mpeg_ops {
 	int                        (*fini)(struct saa7134_dev *dev);
 	void                       (*signal_change)(struct saa7134_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void                       (*irq_ts_done)(struct saa7134_dev *dev,
+						  unsigned long status);
+>>>>>>> v3.18
 =======
 	void                       (*irq_ts_done)(struct saa7134_dev *dev,
 						  unsigned long status);
@@ -659,6 +716,7 @@ struct saa7134_dev {
 	unsigned int               ovenable;
 	enum v4l2_field            ovfield;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* video+ts+vbi capture */
 	struct saa7134_dmaqueue    video_q;
@@ -666,6 +724,8 @@ struct saa7134_dev {
 	unsigned int               video_fieldcount;
 	unsigned int               vbi_fieldcount;
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_window         win;
 	struct v4l2_clip           clips[8];
 	unsigned int               nclips;
@@ -697,12 +757,19 @@ struct saa7134_dev {
 	struct work_struct         empress_workqueue;
 	int                        empress_started;
 	struct v4l2_ctrl_handler   empress_ctrl_handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* various v4l controls */
 	struct saa7134_tvnorm      *tvnorm;              /* video */
 	struct saa7134_tvaudio     *tvaudio;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_ctrl_handler   ctrl_handler;
+>>>>>>> v3.18
 =======
 	struct v4l2_ctrl_handler   ctrl_handler;
 >>>>>>> v3.18
@@ -734,6 +801,10 @@ struct saa7134_dev {
 	int                        nosignal;
 	unsigned int               insuspend;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_ctrl_handler   radio_ctrl_handler;
+>>>>>>> v3.18
 =======
 	struct v4l2_ctrl_handler   radio_ctrl_handler;
 >>>>>>> v3.18
@@ -741,6 +812,7 @@ struct saa7134_dev {
 	/* I2C keyboard data */
 	struct IR_i2c_init_data    init_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* SAA7134_MPEG_* */
 	struct saa7134_ts          ts;
@@ -758,6 +830,11 @@ struct saa7134_dev {
 #if IS_ENABLED(CONFIG_VIDEO_SAA7134_DVB)
 	/* SAA7134_MPEG_DVB only */
 	struct videobuf_dvb_frontends frontends;
+=======
+#if IS_ENABLED(CONFIG_VIDEO_SAA7134_DVB)
+	/* SAA7134_MPEG_DVB only */
+	struct vb2_dvb_frontends frontends;
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_VIDEO_SAA7134_DVB)
 	/* SAA7134_MPEG_DVB only */
@@ -817,7 +894,10 @@ struct saa7134_dev {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool is_empress(struct file *file)
 {
 	struct video_device *vdev = video_devdata(file);
@@ -826,6 +906,9 @@ static inline bool is_empress(struct file *file)
 	return vdev->queue == &dev->empress_vbq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ----------------------------------------------------------- */
 /* saa7134-core.c                                              */
@@ -834,6 +917,10 @@ extern struct list_head  saa7134_devlist;
 extern struct mutex saa7134_devlist_lock;
 extern int saa7134_no_overlay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool saa7134_userptr;
+>>>>>>> v3.18
 =======
 extern bool saa7134_userptr;
 >>>>>>> v3.18
@@ -860,7 +947,11 @@ void saa7134_buffer_finish(struct saa7134_dev *dev, struct saa7134_dmaqueue *q,
 void saa7134_buffer_next(struct saa7134_dev *dev, struct saa7134_dmaqueue *q);
 void saa7134_buffer_timeout(unsigned long data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void saa7134_dma_free(struct videobuf_queue *q,struct saa7134_buf *buf);
+=======
+void saa7134_stop_streaming(struct saa7134_dev *dev, struct saa7134_dmaqueue *q);
+>>>>>>> v3.18
 =======
 void saa7134_stop_streaming(struct saa7134_dev *dev, struct saa7134_dmaqueue *q);
 >>>>>>> v3.18
@@ -898,11 +989,14 @@ extern struct video_device saa7134_video_template;
 extern struct video_device saa7134_radio_template;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int saa7134_s_ctrl_internal(struct saa7134_dev *dev,  struct saa7134_fh *fh, struct v4l2_control *c);
 int saa7134_g_ctrl_internal(struct saa7134_dev *dev,  struct saa7134_fh *fh, struct v4l2_control *c);
 int saa7134_queryctrl(struct file *file, void *priv, struct v4l2_queryctrl *c);
 int saa7134_s_std_internal(struct saa7134_dev *dev,  struct saa7134_fh *fh, v4l2_std_id id);
 =======
+=======
+>>>>>>> v3.18
 void saa7134_vb2_buffer_queue(struct vb2_buffer *vb);
 int saa7134_vb2_start_streaming(struct vb2_queue *vq, unsigned int count);
 void saa7134_vb2_stop_streaming(struct vb2_queue *vq);
@@ -923,6 +1017,9 @@ int saa7134_g_frequency(struct file *file, void *priv,
 					struct v4l2_frequency *f);
 int saa7134_s_frequency(struct file *file, void *priv,
 					const struct v4l2_frequency *f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int saa7134_videoport_init(struct saa7134_dev *dev);
@@ -933,6 +1030,10 @@ int saa7134_video_init2(struct saa7134_dev *dev);
 void saa7134_irq_video_signalchange(struct saa7134_dev *dev);
 void saa7134_irq_video_done(struct saa7134_dev *dev, unsigned long status);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void saa7134_video_fini(struct saa7134_dev *dev);
+>>>>>>> v3.18
 =======
 void saa7134_video_fini(struct saa7134_dev *dev);
 >>>>>>> v3.18
@@ -944,8 +1045,11 @@ void saa7134_video_fini(struct saa7134_dev *dev);
 #define TS_PACKET_SIZE 188 /* TS packets 188 bytes */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct videobuf_queue_ops saa7134_ts_qops;
 =======
+=======
+>>>>>>> v3.18
 int saa7134_ts_buffer_init(struct vb2_buffer *vb2);
 int saa7134_ts_buffer_prepare(struct vb2_buffer *vb2);
 void saa7134_ts_buffer_finish(struct vb2_buffer *vb2);
@@ -956,6 +1060,9 @@ int saa7134_ts_start_streaming(struct vb2_queue *vq, unsigned int count);
 void saa7134_ts_stop_streaming(struct vb2_queue *vq);
 
 extern struct vb2_ops saa7134_ts_qops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int saa7134_ts_init1(struct saa7134_dev *dev);
@@ -974,7 +1081,11 @@ int saa7134_ts_stop(struct saa7134_dev *dev);
 /* saa7134-vbi.c                                               */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct videobuf_queue_ops saa7134_vbi_qops;
+=======
+extern struct vb2_ops saa7134_vbi_qops;
+>>>>>>> v3.18
 =======
 extern struct vb2_ops saa7134_vbi_qops;
 >>>>>>> v3.18

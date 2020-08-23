@@ -38,15 +38,21 @@
 #define PIC_UART_0_IRQ			17
 #define PIC_UART_1_IRQ			18
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PIC_PCIE_LINK_0_IRQ		19
 #define PIC_PCIE_LINK_1_IRQ		20
 #define PIC_PCIE_LINK_2_IRQ		21
 #define PIC_PCIE_LINK_3_IRQ		22
 =======
+=======
+>>>>>>> v3.18
 
 #define PIC_PCIE_LINK_LEGACY_IRQ_BASE	19
 #define PIC_PCIE_LINK_LEGACY_IRQ(i)	(19 + (i))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PIC_EHCI_0_IRQ			23
 #define PIC_EHCI_1_IRQ			24
@@ -55,10 +61,13 @@
 #define PIC_OHCI_2_IRQ			27
 #define PIC_OHCI_3_IRQ			28
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PIC_MMC_IRQ			29
 #define PIC_I2C_0_IRQ			30
 #define PIC_I2C_1_IRQ			31
 =======
+=======
+>>>>>>> v3.18
 #define PIC_2XX_XHCI_0_IRQ		23
 #define PIC_2XX_XHCI_1_IRQ		24
 #define PIC_2XX_XHCI_2_IRQ		25
@@ -92,6 +101,9 @@
 #define PIC_IRQ_BASE			8
 #define PIC_IRT_FIRST_IRQ		PIC_IRQ_BASE
 #define PIC_IRT_LAST_IRQ		63
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
@@ -103,8 +115,11 @@ void xlp_wakeup_secondary_cpus(void);
 void xlp_mmu_init(void);
 void nlm_hal_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 int xlp_get_dram_map(int n, uint64_t *dram_map);
 
 struct pci_dev;
@@ -130,6 +145,9 @@ static inline int cpu_is_xlp9xx(void)
 	return chip == PRID_IMP_NETLOGIC_XLP9XX ||
 		chip == PRID_IMP_NETLOGIC_XLP5XX;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !__ASSEMBLY__ */
 #endif /* _ASM_NLM_XLP_H */

@@ -6,7 +6,11 @@ config NET_VENDOR_TI
 	bool "Texas Instruments (TI) devices"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI || EISA || AR7 || (ARM && (ARCH_DAVINCI || ARCH_OMAP3 || SOC_AM33XX))
+=======
+	depends on PCI || EISA || AR7 || (ARM && (ARCH_DAVINCI || ARCH_OMAP3 || SOC_AM33XX || ARCH_KEYSTONE))
+>>>>>>> v3.18
 =======
 	depends on PCI || EISA || AR7 || (ARM && (ARCH_DAVINCI || ARCH_OMAP3 || SOC_AM33XX || ARCH_KEYSTONE))
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ config TI_DAVINCI_EMAC
 config TI_DAVINCI_MDIO
 	tristate "TI DaVinci MDIO Support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM && ( ARCH_DAVINCI || ARCH_OMAP3 || SOC_AM33XX )
+=======
+	depends on ARM && ( ARCH_DAVINCI || ARCH_OMAP3 || SOC_AM33XX || ARCH_KEYSTONE )
+>>>>>>> v3.18
 =======
 	depends on ARM && ( ARCH_DAVINCI || ARCH_OMAP3 || SOC_AM33XX || ARCH_KEYSTONE )
 >>>>>>> v3.18
@@ -58,7 +66,10 @@ config TI_DAVINCI_CPDMA
 	  will be called davinci_cpdma.  This is recommended.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TI_CPSW_PHY_SEL
 	boolean "TI CPSW Switch Phy sel Support"
 	depends on TI_CPSW
@@ -66,6 +77,9 @@ config TI_CPSW_PHY_SEL
 	  This driver supports configuring of the phy mode connected to
 	  the CPSW.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TI_CPSW
 	tristate "TI CPSW Switch Support"
@@ -73,6 +87,12 @@ config TI_CPSW
 	select TI_DAVINCI_CPDMA
 	select TI_DAVINCI_MDIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select TI_CPSW_PHY_SEL
+	select MFD_SYSCON
+	select REGMAP
+>>>>>>> v3.18
 =======
 	select TI_CPSW_PHY_SEL
 	select MFD_SYSCON

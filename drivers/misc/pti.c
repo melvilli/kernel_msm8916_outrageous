@@ -893,7 +893,10 @@ static void pti_pci_remove(struct pci_dev *pdev)
 
 	iounmap(drv_data->pti_ioaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(drv_data);

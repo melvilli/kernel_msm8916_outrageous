@@ -24,7 +24,10 @@ static struct srcu_struct srcu;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This function allows mmu_notifier::release callback to delay a call to
  * a function that will free appropriate resources. The function must be
  * quick and must not block.
@@ -44,6 +47,9 @@ void mmu_notifier_synchronize(void)
 EXPORT_SYMBOL_GPL(mmu_notifier_synchronize);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This function can't run concurrently against mmu_notifier_register
  * because mm->mm_users > 0 during mmu_notifier_register and exit_mmap
@@ -76,7 +82,10 @@ void __mmu_notifier_release(struct mm_struct *mm)
 		if (mn->ops->release)
 			mn->ops->release(mn, mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srcu_read_unlock(&srcu, id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -95,6 +104,10 @@ void __mmu_notifier_release(struct mm_struct *mm)
 	}
 	spin_unlock(&mm->mmu_notifier_mm->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	srcu_read_unlock(&srcu, id);
+>>>>>>> v3.18
 =======
 	srcu_read_unlock(&srcu, id);
 >>>>>>> v3.18
@@ -118,7 +131,12 @@ void __mmu_notifier_release(struct mm_struct *mm)
  */
 int __mmu_notifier_clear_flush_young(struct mm_struct *mm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					unsigned long address)
+=======
+					unsigned long start,
+					unsigned long end)
+>>>>>>> v3.18
 =======
 					unsigned long start,
 					unsigned long end)
@@ -131,7 +149,11 @@ int __mmu_notifier_clear_flush_young(struct mm_struct *mm,
 	hlist_for_each_entry_rcu(mn, &mm->mmu_notifier_mm->list, hlist) {
 		if (mn->ops->clear_flush_young)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			young |= mn->ops->clear_flush_young(mn, mm, address);
+=======
+			young |= mn->ops->clear_flush_young(mn, mm, start, end);
+>>>>>>> v3.18
 =======
 			young |= mn->ops->clear_flush_young(mn, mm, start, end);
 >>>>>>> v3.18
@@ -354,7 +376,11 @@ void mmu_notifier_unregister(struct mmu_notifier *mn, struct mm_struct *mm)
 	/*
 	 * Wait for any running method to finish, of course including
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * ->release if it was run by mmu_notifier_relase instead of us.
+=======
+	 * ->release if it was run by mmu_notifier_release instead of us.
+>>>>>>> v3.18
 =======
 	 * ->release if it was run by mmu_notifier_release instead of us.
 >>>>>>> v3.18
@@ -368,7 +394,10 @@ void mmu_notifier_unregister(struct mmu_notifier *mn, struct mm_struct *mm)
 EXPORT_SYMBOL_GPL(mmu_notifier_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Same as mmu_notifier_unregister but no callback and no srcu synchronization.
  */
@@ -388,14 +417,21 @@ void mmu_notifier_unregister_no_release(struct mmu_notifier *mn,
 }
 EXPORT_SYMBOL_GPL(mmu_notifier_unregister_no_release);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init mmu_notifier_init(void)
 {
 	return init_srcu_struct(&srcu);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(mmu_notifier_init);
+=======
+subsys_initcall(mmu_notifier_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(mmu_notifier_init);
 >>>>>>> v3.18

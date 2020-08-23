@@ -29,7 +29,10 @@
 #define _SSM2602_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/regmap.h>
 
 struct device;
@@ -44,6 +47,9 @@ extern const struct regmap_config ssm2602_regmap_config;
 int ssm2602_probe(struct device *dev, enum ssm2602_type type,
 	struct regmap *regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SSM2602 Codec Register definitions */
 

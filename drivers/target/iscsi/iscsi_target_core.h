@@ -10,7 +10,11 @@
 #include <target/target_core_base.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISCSIT_VERSION			"v4.1.0-rc2"
+=======
+#define ISCSIT_VERSION			"v4.1.0"
+>>>>>>> v3.18
 =======
 #define ISCSIT_VERSION			"v4.1.0"
 >>>>>>> v3.18
@@ -22,6 +26,12 @@
 #define SECONDS_FOR_LOGOUT_COMP		15
 #define WHITE_SPACE			" \t\v\f\n\r"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ISCSIT_MIN_TAGS			16
+#define ISCSIT_EXTRA_TAGS		8
+#define ISCSIT_TCP_BACKLOG		256
+>>>>>>> v3.18
 =======
 #define ISCSIT_MIN_TAGS			16
 #define ISCSIT_EXTRA_TAGS		8
@@ -45,9 +55,12 @@
 #define NA_RANDOM_DATAIN_SEQ_OFFSETS	0
 #define NA_RANDOM_R2T_OFFSETS		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NA_DEFAULT_ERL			0
 #define NA_DEFAULT_ERL_MAX		2
 #define NA_DEFAULT_ERL_MIN		0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -61,7 +74,11 @@
 #define TA_NETIF_TIMEOUT_MIN		2
 #define TA_GENERATE_NODE_ACLS		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TA_DEFAULT_CMDSN_DEPTH		16
+=======
+#define TA_DEFAULT_CMDSN_DEPTH		64
+>>>>>>> v3.18
 =======
 #define TA_DEFAULT_CMDSN_DEPTH		64
 >>>>>>> v3.18
@@ -73,14 +90,20 @@
 /* Disabled by default in production mode w/ explict ACLs */
 #define TA_PROD_MODE_WRITE_PROTECT	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TA_CACHE_CORE_NPS		0
 
 =======
+=======
+>>>>>>> v3.18
 #define TA_DEMO_MODE_DISCOVERY		1
 #define TA_DEFAULT_ERL			0
 #define TA_CACHE_CORE_NPS		0
 /* T10 protection information disabled by default */
 #define TA_DEFAULT_T10_PI		0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ISCSI_IOV_DATA_BUFFER		5
@@ -158,6 +181,11 @@ enum cmd_flags_table {
 	ICF_ATTACHED_TO_RQUEUE			= 0x00000040,
 	ICF_OOO_CMDSN				= 0x00000080,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFC_SENDTARGETS_ALL			= 0x00000100,
+	IFC_SENDTARGETS_SINGLE			= 0x00000200,
+>>>>>>> v3.18
 =======
 	IFC_SENDTARGETS_ALL			= 0x00000100,
 	IFC_SENDTARGETS_SINGLE			= 0x00000200,
@@ -218,6 +246,10 @@ enum recover_cmdsn_ret_table {
 	CMDSN_LOWER_THAN_EXP		= 1,
 	CMDSN_HIGHER_THAN_EXP		= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CMDSN_MAXCMDSN_OVERRUN		= 3,
+>>>>>>> v3.18
 =======
 	CMDSN_MAXCMDSN_OVERRUN		= 3,
 >>>>>>> v3.18
@@ -463,6 +495,11 @@ struct iscsi_cmd {
 	/* Buffer used for various purposes */
 	void			*buf_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Used by SendTargets=[iqn.,eui.] discovery */
+	void			*text_in_ptr;
+>>>>>>> v3.18
 =======
 	/* Used by SendTargets=[iqn.,eui.] discovery */
 	void			*text_in_ptr;
@@ -525,7 +562,10 @@ struct iscsi_cmd {
 	u32			kmapped_nents;
 	sense_reason_t		sense_reason;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*release_cmd)(struct iscsi_cmd *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }  ____cacheline_aligned;
@@ -571,8 +611,11 @@ struct iscsi_conn {
 	/* Used for calculating OFMarker offset to next PDU */
 	u32			of_marker_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Complete Bad PDU for sending reject */
 	unsigned char		bad_hdr[ISCSI_HDR_LEN];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IPV6_ADDRESS_SPACE				48
@@ -598,10 +641,13 @@ struct iscsi_conn {
 	/* socket used by this connection */
 	struct socket		*sock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list	nopin_timer;
 	struct timer_list	nopin_response_timer;
 	struct timer_list	transport_timer;
 =======
+=======
+>>>>>>> v3.18
 	void			(*orig_data_ready)(struct sock *);
 	void			(*orig_state_change)(struct sock *);
 #define LOGIN_FLAGS_READ_ACTIVE		1
@@ -615,6 +661,9 @@ struct iscsi_conn {
 	struct timer_list	nopin_response_timer;
 	struct timer_list	transport_timer;
 	struct task_struct	*login_kworker;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Spinlock used for add/deleting cmd's from conn_cmd_list */
 	spinlock_t		cmd_lock;
@@ -644,6 +693,10 @@ struct iscsi_conn {
 	struct iscsi_login_thread_s *login_thread;
 	struct iscsi_portal_group *tpg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iscsi_tpg_np	*tpg_np;
+>>>>>>> v3.18
 =======
 	struct iscsi_tpg_np	*tpg_np;
 >>>>>>> v3.18
@@ -652,12 +705,15 @@ struct iscsi_conn {
 	/* Pointer to thread_set in use for this conn's threads */
 	struct iscsi_thread_set	*thread_set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			bitmap_id;
 	int			rx_thread_active;
 	struct task_struct	*rx_thread;
 	struct completion	rx_login_comp;
 	int			tx_thread_active;
 	struct task_struct	*tx_thread;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* list_head for session connection list */
@@ -710,6 +766,7 @@ struct iscsi_session {
 	int			session_usage_count;
 	int			session_waiting_on_uc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			cmd_pdus;
 	u32			rsp_pdus;
 	u64			tx_data_octets;
@@ -719,6 +776,8 @@ struct iscsi_session {
 	u64			creation_time;
 	spinlock_t		session_stats_lock;
 =======
+=======
+>>>>>>> v3.18
 	atomic_long_t		cmd_pdus;
 	atomic_long_t		rsp_pdus;
 	atomic_long_t		tx_data_octets;
@@ -726,6 +785,9 @@ struct iscsi_session {
 	atomic_long_t		conn_digest_errors;
 	atomic_long_t		conn_timeout_errors;
 	u64			creation_time;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Number of active connections */
 	atomic_t		nconn;
@@ -765,6 +827,10 @@ struct iscsi_login {
 	u8 login_complete;
 	u8 login_failed;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool zero_tsih;
+>>>>>>> v3.18
 =======
 	bool zero_tsih;
 >>>>>>> v3.18
@@ -781,6 +847,10 @@ struct iscsi_login {
 	char *rsp_buf;
 	struct iscsi_conn *conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iscsi_np *np;
+>>>>>>> v3.18
 =======
 	struct iscsi_np *np;
 >>>>>>> v3.18
@@ -831,11 +901,14 @@ struct iscsi_node_acl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NODE_STAT_GRPS(nacl)	(&(nacl)->node_stat_grps)
 
 #define ISCSI_NODE_ATTRIB(t)	(&(t)->node_attrib)
 #define ISCSI_NODE_AUTH(t)	(&(t)->node_auth)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct iscsi_tpg_attrib {
@@ -848,6 +921,12 @@ struct iscsi_tpg_attrib {
 	u32			demo_mode_write_protect;
 	u32			prod_mode_write_protect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			demo_mode_discovery;
+	u32			default_erl;
+	u8			t10_pi;
+>>>>>>> v3.18
 =======
 	u32			demo_mode_discovery;
 	u32			default_erl;
@@ -874,15 +953,21 @@ struct iscsi_np {
 	struct task_struct	*np_thread;
 	struct timer_list	np_login_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_portal_group *np_login_tpg;
 	void			*np_context;
 	struct iscsit_transport *np_transport;
 	struct list_head	np_list;
 =======
+=======
+>>>>>>> v3.18
 	void			*np_context;
 	struct iscsit_transport *np_transport;
 	struct list_head	np_list;
 	struct iscsi_tpg_np	*tpg_np;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } ____cacheline_aligned;
 
@@ -896,6 +981,11 @@ struct iscsi_tpg_np {
 	struct se_tpg_np	se_tpg_np;
 	spinlock_t		tpg_np_parent_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct completion	tpg_np_comp;
+	struct kref		tpg_np_kref;
+>>>>>>> v3.18
 =======
 	struct completion	tpg_np_comp;
 	struct kref		tpg_np_kref;
@@ -922,8 +1012,14 @@ struct iscsi_portal_group {
 	struct se_portal_group tpg_se_tpg;
 	struct mutex		tpg_access_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex		np_login_lock;
 	struct iscsi_tpg_attrib	tpg_attrib;
+=======
+	struct semaphore	np_login_sem;
+	struct iscsi_tpg_attrib	tpg_attrib;
+	struct iscsi_node_auth	tpg_demo_auth;
+>>>>>>> v3.18
 =======
 	struct semaphore	np_login_sem;
 	struct iscsi_tpg_attrib	tpg_attrib;
@@ -937,12 +1033,15 @@ struct iscsi_portal_group {
 } ____cacheline_aligned;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISCSI_TPG_C(c)		((struct iscsi_portal_group *)(c)->tpg)
 #define ISCSI_TPG_LUN(c, l)  ((iscsi_tpg_list_t *)(c)->tpg->tpg_lun_list_t[l])
 #define ISCSI_TPG_S(s)		((struct iscsi_portal_group *)(s)->tpg)
 #define ISCSI_TPG_ATTRIB(t)	(&(t)->tpg_attrib)
 #define SE_TPG(tpg)		(&(tpg)->tpg_se_tpg)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct iscsi_wwn_stat_grps {
@@ -976,8 +1075,11 @@ struct iscsi_tiqn {
 } ____cacheline_aligned;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WWN_STAT_GRPS(tiqn)	(&(tiqn)->tiqn_stat_grps)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct iscsit_global {
@@ -988,7 +1090,10 @@ struct iscsit_global {
 	u32			auth_id;
 	u32			inactive_ts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISCSIT_BITMAP_BITS	262144
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Thread Set bitmap count */
@@ -996,7 +1101,10 @@ struct iscsit_global {
 	/* Thread Set bitmap pointer */
 	unsigned long		*ts_bitmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t		ts_bitmap_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Used for iSCSI discovery session authentication */

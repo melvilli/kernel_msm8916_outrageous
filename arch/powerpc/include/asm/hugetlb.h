@@ -72,7 +72,11 @@ pte_t *huge_pte_offset_and_shift(struct mm_struct *mm,
 void flush_dcache_icache_hugepage(struct page *page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PPC_MM_SLICES) || defined(CONFIG_PPC_SUBPAGE_PROT)
+=======
+#if defined(CONFIG_PPC_MM_SLICES)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_PPC_MM_SLICES)
 >>>>>>> v3.18
@@ -132,7 +136,11 @@ static inline pte_t huge_ptep_get_and_clear(struct mm_struct *mm,
 {
 #ifdef CONFIG_PPC64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __pte(pte_update(mm, addr, ptep, ~0UL, 1));
+=======
+	return __pte(pte_update(mm, addr, ptep, ~0UL, 0, 1));
+>>>>>>> v3.18
 =======
 	return __pte(pte_update(mm, addr, ptep, ~0UL, 0, 1));
 >>>>>>> v3.18
@@ -200,9 +208,12 @@ static inline void flush_hugetlb_page(struct vm_area_struct *vma,
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_HUGETLB_PAGE */
 
 =======
+=======
+>>>>>>> v3.18
 
 #define hugepd_shift(x) 0
 static inline pte_t *hugepte_offset(hugepd_t *hpdp, unsigned long addr,
@@ -211,6 +222,9 @@ static inline pte_t *hugepte_offset(hugepd_t *hpdp, unsigned long addr,
 	return 0;
 }
 #endif /* CONFIG_HUGETLB_PAGE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

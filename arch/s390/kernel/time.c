@@ -93,8 +93,12 @@ void clock_comparator_work(void)
 
 	S390_lowcore.clock_comparator = -1ULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_clock_comparator(S390_lowcore.clock_comparator);
 	cd = &__get_cpu_var(comparators);
+=======
+	cd = this_cpu_ptr(&comparators);
+>>>>>>> v3.18
 =======
 	cd = this_cpu_ptr(&comparators);
 >>>>>>> v3.18
@@ -114,6 +118,7 @@ static void fixup_clock_comparator(unsigned long long delta)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s390_next_ktime(ktime_t expires,
 			   struct clock_event_device *evt)
 {
@@ -129,10 +134,15 @@ static int s390_next_ktime(ktime_t expires,
 	if (unlikely(S390_lowcore.clock_comparator < sched_clock_base_cc))
 		S390_lowcore.clock_comparator = -1ULL;
 =======
+=======
+>>>>>>> v3.18
 static int s390_next_event(unsigned long delta,
 			   struct clock_event_device *evt)
 {
 	S390_lowcore.clock_comparator = get_tod_clock() + delta;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_clock_comparator(S390_lowcore.clock_comparator);
 	return 0;
@@ -159,8 +169,12 @@ void init_cpu_timer(void)
 	cd = &per_cpu(comparators, cpu);
 	cd->name		= "comparator";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cd->features		= CLOCK_EVT_FEAT_ONESHOT |
 				  CLOCK_EVT_FEAT_KTIME;
+=======
+	cd->features		= CLOCK_EVT_FEAT_ONESHOT;
+>>>>>>> v3.18
 =======
 	cd->features		= CLOCK_EVT_FEAT_ONESHOT;
 >>>>>>> v3.18
@@ -171,7 +185,11 @@ void init_cpu_timer(void)
 	cd->rating		= 400;
 	cd->cpumask		= cpumask_of(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cd->set_next_ktime	= s390_next_ktime;
+=======
+	cd->set_next_event	= s390_next_event;
+>>>>>>> v3.18
 =======
 	cd->set_next_event	= s390_next_event;
 >>>>>>> v3.18
@@ -242,22 +260,29 @@ struct clocksource * __init clocksource_default_clock(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void update_vsyscall_old(struct timespec *wall_time, struct timespec *wtm,
 			struct clocksource *clock, u32 mult)
 {
 	if (clock != &clocksource_tod)
 =======
+=======
+>>>>>>> v3.18
 void update_vsyscall(struct timekeeper *tk)
 {
 	u64 nsecps;
 
 	if (tk->tkr.clock != &clocksource_tod)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
 	/* Make userspace gettimeofday spin until we're done. */
 	++vdso_data->tb_update_count;
 	smp_wmb();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vdso_data->xtime_tod_stamp = clock->cycle_last;
 	vdso_data->xtime_clock_sec = wall_time->tv_sec;
@@ -266,6 +291,8 @@ void update_vsyscall(struct timekeeper *tk)
 	vdso_data->wtom_clock_nsec = wtm->tv_nsec;
 	vdso_data->ntp_mult = mult;
 =======
+=======
+>>>>>>> v3.18
 	vdso_data->xtime_tod_stamp = tk->tkr.cycle_last;
 	vdso_data->xtime_clock_sec = tk->xtime_sec;
 	vdso_data->xtime_clock_nsec = tk->tkr.xtime_nsec;
@@ -293,6 +320,9 @@ void update_vsyscall(struct timekeeper *tk)
 
 	vdso_data->tk_mult = tk->tkr.mult;
 	vdso_data->tk_shift = tk->tkr.shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	smp_wmb();
 	++vdso_data->tb_update_count;
@@ -323,17 +353,23 @@ void __init time_init(void)
 
 	/* request the clock comparator external interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (register_external_interrupt(0x1004, clock_comparator_interrupt))
                 panic("Couldn't request external interrupt 0x1004");
 
 	/* request the timing alert external interrupt */
 	if (register_external_interrupt(0x1406, timing_alert_interrupt))
 =======
+=======
+>>>>>>> v3.18
 	if (register_external_irq(EXT_IRQ_CLK_COMP, clock_comparator_interrupt))
 		panic("Couldn't request external interrupt 0x1004");
 
 	/* request the timing alert external interrupt */
 	if (register_external_irq(EXT_IRQ_TIMING_ALERT, timing_alert_interrupt))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		panic("Couldn't request external interrupt 0x1406");
 
@@ -429,7 +465,11 @@ EXPORT_SYMBOL(get_sync_clock);
 static void disable_sync_clock(void *dummy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t *sw_ptr = &__get_cpu_var(clock_sync_word);
+=======
+	atomic_t *sw_ptr = this_cpu_ptr(&clock_sync_word);
+>>>>>>> v3.18
 =======
 	atomic_t *sw_ptr = this_cpu_ptr(&clock_sync_word);
 >>>>>>> v3.18
@@ -450,7 +490,11 @@ static void disable_sync_clock(void *dummy)
 static void enable_sync_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t *sw_ptr = &__get_cpu_var(clock_sync_word);
+=======
+	atomic_t *sw_ptr = this_cpu_ptr(&clock_sync_word);
+>>>>>>> v3.18
 =======
 	atomic_t *sw_ptr = this_cpu_ptr(&clock_sync_word);
 >>>>>>> v3.18

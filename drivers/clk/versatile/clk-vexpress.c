@@ -38,8 +38,13 @@ static void __init vexpress_sp810_init(void __iomem *base)
 
 		vexpress_sp810_timerclken[i] = clk_register_mux(NULL, name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				parents, 2, 0, base + SCCTRL,
 				SCCTRL_TIMERENnSEL_SHIFT(i), 1,
+=======
+				parents, 2, CLK_SET_RATE_NO_REPARENT,
+				base + SCCTRL, SCCTRL_TIMERENnSEL_SHIFT(i), 1,
+>>>>>>> v3.18
 =======
 				parents, 2, CLK_SET_RATE_NO_REPARENT,
 				base + SCCTRL, SCCTRL_TIMERENnSEL_SHIFT(i), 1,

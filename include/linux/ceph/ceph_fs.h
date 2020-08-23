@@ -54,7 +54,10 @@ struct ceph_file_layout {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ceph_file_layout_su(l) ((__s32)le32_to_cpu((l).fl_stripe_unit))
 #define ceph_file_layout_stripe_count(l) \
 	((__s32)le32_to_cpu((l).fl_stripe_count))
@@ -78,6 +81,9 @@ static inline unsigned ceph_file_layout_period(struct ceph_file_layout *l)
 		le32_to_cpu(l->fl_stripe_count);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CEPH_MIN_STRIPE_UNIT 65536
 
@@ -309,6 +315,11 @@ enum {
 	CEPH_SESSION_STALE,
 	CEPH_SESSION_RECALL_STATE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CEPH_SESSION_FLUSHMSG,
+	CEPH_SESSION_FLUSHMSG_ACK,
+>>>>>>> v3.18
 =======
 	CEPH_SESSION_FLUSHMSG,
 	CEPH_SESSION_FLUSHMSG_ACK,
@@ -339,6 +350,10 @@ enum {
 	CEPH_MDS_OP_LOOKUPPARENT = 0x00103,
 	CEPH_MDS_OP_LOOKUPINO  = 0x00104,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CEPH_MDS_OP_LOOKUPNAME = 0x00105,
+>>>>>>> v3.18
 =======
 	CEPH_MDS_OP_LOOKUPNAME = 0x00105,
 >>>>>>> v3.18
@@ -384,8 +399,14 @@ extern const char *ceph_mds_op_name(int op);
  * Ceph setxattr request flags.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEPH_XATTR_CREATE  1
 #define CEPH_XATTR_REPLACE 2
+=======
+#define CEPH_XATTR_CREATE  (1 << 0)
+#define CEPH_XATTR_REPLACE (1 << 1)
+#define CEPH_XATTR_REMOVE  (1 << 31)
+>>>>>>> v3.18
 =======
 #define CEPH_XATTR_CREATE  (1 << 0)
 #define CEPH_XATTR_REPLACE (1 << 1)
@@ -436,8 +457,13 @@ union ceph_mds_request_args {
 		__u8 rule; /* currently fcntl or flock */
 		__u8 type; /* shared, exclusive, remove*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__le64 pid; /* process id requesting the lock */
 		__le64 pid_namespace;
+=======
+		__le64 owner; /* owner of the lock */
+		__le64 pid; /* process id requesting the lock */
+>>>>>>> v3.18
 =======
 		__le64 owner; /* owner of the lock */
 		__le64 pid; /* process id requesting the lock */
@@ -504,7 +530,12 @@ struct ceph_mds_reply_cap {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEPH_CAP_FLAG_AUTH  1          /* cap is issued by auth mds */
+=======
+#define CEPH_CAP_FLAG_AUTH	(1 << 0)  /* cap is issued by auth mds */
+#define CEPH_CAP_FLAG_RELEASE	(1 << 1)  /* release the cap */
+>>>>>>> v3.18
 =======
 #define CEPH_CAP_FLAG_AUTH	(1 << 0)  /* cap is issued by auth mds */
 #define CEPH_CAP_FLAG_RELEASE	(1 << 1)  /* release the cap */
@@ -557,8 +588,13 @@ struct ceph_filelock {
 	__le64 length; /* num bytes to lock; 0 for all following start */
 	__le64 client; /* which client holds the lock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le64 pid; /* process id holding the lock on the client */
 	__le64 pid_namespace;
+=======
+	__le64 owner; /* owner the lock */
+	__le64 pid; /* process id holding the lock on the client */
+>>>>>>> v3.18
 =======
 	__le64 owner; /* owner the lock */
 	__le64 pid; /* process id holding the lock on the client */
@@ -654,6 +690,11 @@ int ceph_flags_to_mode(int flags);
 			   CEPH_CAP_XATTR_EXCL |	\
 			   CEPH_CAP_FILE_EXCL)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CEPH_CAP_ANY_FILE_RD (CEPH_CAP_FILE_RD | CEPH_CAP_FILE_CACHE | \
+			      CEPH_CAP_FILE_SHARED)
+>>>>>>> v3.18
 =======
 #define CEPH_CAP_ANY_FILE_RD (CEPH_CAP_FILE_RD | CEPH_CAP_FILE_CACHE | \
 			      CEPH_CAP_FILE_SHARED)
@@ -720,7 +761,10 @@ struct ceph_mds_caps {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ceph_mds_cap_peer {
 	__le64 cap_id;
 	__le32 seq;
@@ -729,6 +773,9 @@ struct ceph_mds_cap_peer {
 	__u8   flags;
 } __attribute__ ((packed));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* cap release msg head */
 struct ceph_mds_cap_release {

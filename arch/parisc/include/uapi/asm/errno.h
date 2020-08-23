@@ -38,7 +38,11 @@
 #define	EUSERS		68	/* Too many users */
 #define	EDQUOT		69	/* Quota exceeded */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ESTALE		70	/* Stale NFS file handle */
+=======
+#define	ESTALE		70	/* Stale file handle */
+>>>>>>> v3.18
 =======
 #define	ESTALE		70	/* Stale file handle */
 >>>>>>> v3.18
@@ -111,7 +115,11 @@
 #define	EALREADY	244	/* Operation already in progress */
 #define	EINPROGRESS	245	/* Operation now in progress */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	EWOULDBLOCK	246	/* Operation would block (Linux returns EAGAIN) */
+=======
+#define	EWOULDBLOCK	EAGAIN	/* Operation would block (Not HPUX compliant) */
+>>>>>>> v3.18
 =======
 #define	EWOULDBLOCK	EAGAIN	/* Operation would block (Not HPUX compliant) */
 >>>>>>> v3.18

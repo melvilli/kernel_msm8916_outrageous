@@ -6,7 +6,12 @@
 obj-$(CONFIG_SUNRPC) += sunrpc.o
 obj-$(CONFIG_SUNRPC_GSS) += auth_gss/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SUNRPC_XPRT_RDMA) += xprtrdma/
+=======
+
+obj-y += xprtrdma/
+>>>>>>> v3.18
 =======
 
 obj-y += xprtrdma/

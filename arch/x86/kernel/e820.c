@@ -683,7 +683,11 @@ void __init parse_e820_ext(u64 phys_addr, u32 data_len)
  *
  * This function requires the e820 map to be sorted and without any
 <<<<<<< HEAD
+<<<<<<< HEAD
  * overlapping entries and assumes the first e820 area to be RAM.
+=======
+ * overlapping entries.
+>>>>>>> v3.18
 =======
  * overlapping entries.
 >>>>>>> v3.18
@@ -692,10 +696,16 @@ void __init e820_mark_nosave_regions(unsigned long limit_pfn)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long pfn;
 
 	pfn = PFN_DOWN(e820.map[0].addr + e820.map[0].size);
 	for (i = 1; i < e820.nr_map; i++) {
+=======
+	unsigned long pfn = 0;
+
+	for (i = 0; i < e820.nr_map; i++) {
+>>>>>>> v3.18
 =======
 	unsigned long pfn = 0;
 
@@ -1131,7 +1141,11 @@ void __init memblock_find_dma_reserve(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_free_mem_range(u, MAX_NUMNODES, &start, &end, NULL) {
+=======
+	for_each_free_mem_range(u, NUMA_NO_NODE, &start, &end, NULL) {
+>>>>>>> v3.18
 =======
 	for_each_free_mem_range(u, NUMA_NO_NODE, &start, &end, NULL) {
 >>>>>>> v3.18

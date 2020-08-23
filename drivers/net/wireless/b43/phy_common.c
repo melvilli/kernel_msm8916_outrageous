@@ -46,16 +46,22 @@ int b43_phy_allocate(struct b43_wldev *dev)
 
 	switch (phy->type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case B43_PHYTYPE_A:
 		phy->ops = &b43_phyops_a;
 		break;
 	case B43_PHYTYPE_G:
 		phy->ops = &b43_phyops_g;
 =======
+=======
+>>>>>>> v3.18
 	case B43_PHYTYPE_G:
 #ifdef CONFIG_B43_PHY_G
 		phy->ops = &b43_phyops_g;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case B43_PHYTYPE_N:
@@ -102,10 +108,13 @@ int b43_phy_init(struct b43_wldev *dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy->channel = ops->get_default_chan(dev);
 
 	ops->software_rfkill(dev, false);
 =======
+=======
+>>>>>>> v3.18
 	/* During PHY init we need to use some channel. On the first init this
 	 * function is called *before* b43_op_config, so our pointer is NULL.
 	 */
@@ -117,6 +126,9 @@ int b43_phy_init(struct b43_wldev *dev)
 	phy->ops->switch_analog(dev, true);
 	b43_software_rfkill(dev, false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = ops->init(dev);
 	if (err) {
@@ -124,9 +136,15 @@ int b43_phy_init(struct b43_wldev *dev)
 		goto err_block_rf;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure to switch hardware and firmware (SHM) to
 	 * the default channel. */
 	err = b43_switch_channel(dev, ops->get_default_chan(dev));
+=======
+	phy->do_full_init = false;
+
+	err = b43_switch_channel(dev, phy->channel);
+>>>>>>> v3.18
 =======
 	phy->do_full_init = false;
 
@@ -141,16 +159,22 @@ int b43_phy_init(struct b43_wldev *dev)
 
 err_phy_exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ops->exit)
 		ops->exit(dev);
 err_block_rf:
 	ops->software_rfkill(dev, true);
 =======
+=======
+>>>>>>> v3.18
 	phy->do_full_init = true;
 	if (ops->exit)
 		ops->exit(dev);
 err_block_rf:
 	b43_software_rfkill(dev, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -161,7 +185,12 @@ void b43_phy_exit(struct b43_wldev *dev)
 	const struct b43_phy_operations *ops = dev->phy.ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ops->software_rfkill(dev, true);
+=======
+	b43_software_rfkill(dev, true);
+	dev->phy.do_full_init = true;
+>>>>>>> v3.18
 =======
 	b43_software_rfkill(dev, true);
 	dev->phy.do_full_init = true;
@@ -174,9 +203,15 @@ bool b43_has_hardware_pctl(struct b43_wldev *dev)
 {
 	if (!dev->phy.hardware_power_control)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	if (!dev->phy.ops->supports_hwpctl)
 		return 0;
+=======
+		return false;
+	if (!dev->phy.ops->supports_hwpctl)
+		return false;
+>>>>>>> v3.18
 =======
 		return false;
 	if (!dev->phy.ops->supports_hwpctl)
@@ -260,6 +295,10 @@ u16 b43_radio_read(struct b43_wldev *dev, u16 reg)
 {
 	assert_mac_suspended(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->phy.writes_counter = 0;
+>>>>>>> v3.18
 =======
 	dev->phy.writes_counter = 0;
 >>>>>>> v3.18
@@ -270,12 +309,18 @@ void b43_radio_write(struct b43_wldev *dev, u16 reg, u16 value)
 {
 	assert_mac_suspended(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (b43_bus_host_is_pci(dev->dev) &&
 	    ++dev->phy.writes_counter > B43_MAX_WRITES_IN_ROW) {
 		b43_read32(dev, B43_MMIO_MACCTL);
 		dev->phy.writes_counter = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->phy.ops->radio_write(dev, reg, value);
 }
@@ -318,14 +363,20 @@ u16 b43_phy_read(struct b43_wldev *dev, u16 reg)
 	assert_mac_suspended(dev);
 	dev->phy.writes_counter = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dev->phy.ops->phy_read(dev, reg);
 =======
+=======
+>>>>>>> v3.18
 
 	if (dev->phy.ops->phy_read)
 		return dev->phy.ops->phy_read(dev, reg);
 
 	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
 	return b43_read16(dev, B43_MMIO_PHY_DATA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -333,12 +384,15 @@ void b43_phy_write(struct b43_wldev *dev, u16 reg, u16 value)
 {
 	assert_mac_suspended(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->phy.ops->phy_write(dev, reg, value);
 	if (++dev->phy.writes_counter == B43_MAX_WRITES_IN_ROW) {
 		b43_read16(dev, B43_MMIO_PHY_VER);
 		dev->phy.writes_counter = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (b43_bus_host_is_pci(dev->dev) &&
 	    ++dev->phy.writes_counter > B43_MAX_WRITES_IN_ROW) {
 		b43_read16(dev, B43_MMIO_PHY_VER);
@@ -350,15 +404,22 @@ void b43_phy_write(struct b43_wldev *dev, u16 reg, u16 value)
 
 	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
 	b43_write16(dev, B43_MMIO_PHY_DATA, value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void b43_phy_copy(struct b43_wldev *dev, u16 destreg, u16 srcreg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	assert_mac_suspended(dev);
 	dev->phy.ops->phy_write(dev, destreg,
 		dev->phy.ops->phy_read(dev, srcreg));
+=======
+	b43_phy_write(dev, destreg, b43_phy_read(dev, srcreg));
+>>>>>>> v3.18
 =======
 	b43_phy_write(dev, destreg, b43_phy_read(dev, srcreg));
 >>>>>>> v3.18
@@ -398,7 +459,10 @@ void b43_phy_maskset(struct b43_wldev *dev, u16 offset, u16 mask, u16 set)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void b43_phy_put_into_reset(struct b43_wldev *dev)
 {
 	u32 tmp;
@@ -483,6 +547,9 @@ void b43_phy_take_out_of_reset(struct b43_wldev *dev)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int b43_switch_channel(struct b43_wldev *dev, unsigned int new_channel)
 {
@@ -491,9 +558,12 @@ int b43_switch_channel(struct b43_wldev *dev, unsigned int new_channel)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_channel == B43_DEFAULT_CHANNEL)
 		new_channel = phy->ops->get_default_chan(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* First we set the channel radio code to prevent the
@@ -514,7 +584,10 @@ int b43_switch_channel(struct b43_wldev *dev, unsigned int new_channel)
 		goto err_restore_cookie;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->phy.channel = new_channel;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Wait for the radio to tune to the channel and stabilize. */
@@ -636,10 +709,16 @@ void b43_phyop_switch_analog_generic(struct b43_wldev *dev, bool on)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool b43_channel_type_is_40mhz(enum nl80211_channel_type channel_type)
 {
 	return (channel_type == NL80211_CHAN_HT40MINUS ||
 		channel_type == NL80211_CHAN_HT40PLUS);
+=======
+bool b43_is_40mhz(struct b43_wldev *dev)
+{
+	return dev->phy.chandef->width == NL80211_CHAN_WIDTH_40;
+>>>>>>> v3.18
 =======
 bool b43_is_40mhz(struct b43_wldev *dev)
 {

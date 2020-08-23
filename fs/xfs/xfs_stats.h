@@ -184,8 +184,11 @@ struct xfsstats {
 	__uint32_t		xs_ibt_2_free;
 	__uint32_t		xs_ibt_2_moves;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFSSTAT_END_XQMSTAT		(XFSSTAT_END_IBT_V2+6)
 =======
+=======
+>>>>>>> v3.18
 #define XFSSTAT_END_FIBT_V2		(XFSSTAT_END_IBT_V2+15)
 	__uint32_t		xs_fibt_2_lookup;
 	__uint32_t		xs_fibt_2_compare;
@@ -203,6 +206,9 @@ struct xfsstats {
 	__uint32_t		xs_fibt_2_free;
 	__uint32_t		xs_fibt_2_moves;
 #define XFSSTAT_END_XQMSTAT		(XFSSTAT_END_FIBT_V2+6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__uint32_t		xs_qm_dqreclaims;
 	__uint32_t		xs_qm_dqreclaim_misses;

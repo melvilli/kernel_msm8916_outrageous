@@ -19,12 +19,18 @@
 #include <asm/uaccess.h>
 #include "internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #include <keys/user-type.h>
 
 static int request_key_auth_preparse(struct key_preparsed_payload *);
 static void request_key_auth_free_preparse(struct key_preparsed_payload *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int request_key_auth_instantiate(struct key *,
 					struct key_preparsed_payload *);
@@ -40,6 +46,11 @@ struct key_type key_type_request_key_auth = {
 	.name		= ".request_key_auth",
 	.def_datalen	= sizeof(struct request_key_auth),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.preparse	= request_key_auth_preparse,
+	.free_preparse	= request_key_auth_free_preparse,
+>>>>>>> v3.18
 =======
 	.preparse	= request_key_auth_preparse,
 	.free_preparse	= request_key_auth_free_preparse,
@@ -52,7 +63,10 @@ struct key_type key_type_request_key_auth = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int request_key_auth_preparse(struct key_preparsed_payload *prep)
 {
 	return 0;
@@ -62,6 +76,9 @@ static void request_key_auth_free_preparse(struct key_preparsed_payload *prep)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Instantiate a request-key authorisation key.
@@ -247,6 +264,7 @@ error_alloc:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See if an authorisation key is associated with a particular key.
  */
 static int key_get_instantiation_authkey_match(const struct key *key,
@@ -261,11 +279,14 @@ static int key_get_instantiation_authkey_match(const struct key *key,
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Search the current process's keyrings for the authorisation key for
  * instantiation of a key.
  */
 struct key *key_get_instantiation_authkey(key_serial_t target_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct cred *cred = current_cred();
 	struct key *authkey;
@@ -277,6 +298,8 @@ struct key *key_get_instantiation_authkey(key_serial_t target_id)
 		key_get_instantiation_authkey_match,
 		cred);
 =======
+=======
+>>>>>>> v3.18
 	char description[16];
 	struct keyring_search_context ctx = {
 		.index_key.type		= &key_type_request_key_auth,
@@ -293,6 +316,9 @@ struct key *key_get_instantiation_authkey(key_serial_t target_id)
 	sprintf(description, "%x", target_id);
 
 	authkey_ref = search_process_keyrings(&ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (IS_ERR(authkey_ref)) {

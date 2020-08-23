@@ -20,9 +20,13 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
 #include <linux/watchdog.h>
 #include <linux/init.h>
+=======
+#include <linux/watchdog.h>
+>>>>>>> v3.18
 =======
 #include <linux/watchdog.h>
 >>>>>>> v3.18
@@ -263,6 +267,9 @@ MODULE_PARM_DESC(nodelay,
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

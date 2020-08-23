@@ -11,13 +11,19 @@ Required properties:
 
   - interrupts : G2D interrupt number to the CPU.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - clocks : from common clock binding: handle to G2D clocks.
   - clock-names : names of clocks listed in clocks property, in the same
 		  order, depending on SoC type:
 		  - for S5PV210 and Exynos4 based SoCs: "fimg2d" and
 		    "sclk_fimg2d"
 		  - for Exynos5250 SoC: "fimg2d".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -26,6 +32,11 @@ Example:
 		reg = <0x12800000 0x1000>;
 		interrupts = <0 89 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clock 177>, <&clock 277>;
+		clock-names = "sclk_fimg2d", "fimg2d";
+>>>>>>> v3.18
 =======
 		clocks = <&clock 177>, <&clock 277>;
 		clock-names = "sclk_fimg2d", "fimg2d";

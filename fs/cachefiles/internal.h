@@ -10,7 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
@@ -18,6 +21,9 @@
 #define pr_fmt(fmt) "CacheFiles: " fmt
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/fscache-cache.h>
 #include <linux/timer.h>
@@ -246,6 +252,10 @@ extern int cachefiles_set_object_xattr(struct cachefiles_object *object,
 extern int cachefiles_update_object_xattr(struct cachefiles_object *object,
 					  struct cachefiles_xattr *auxdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int cachefiles_check_auxdata(struct cachefiles_object *object);
+>>>>>>> v3.18
 =======
 extern int cachefiles_check_auxdata(struct cachefiles_object *object);
 >>>>>>> v3.18
@@ -259,16 +269,22 @@ extern int cachefiles_remove_object_xattr(struct cachefiles_cache *cache,
  * error handling
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define kerror(FMT, ...) printk(KERN_ERR "CacheFiles: "FMT"\n", ##__VA_ARGS__)
 
 #define cachefiles_io_error(___cache, FMT, ...)		\
 do {							\
 	kerror("I/O Error: " FMT, ##__VA_ARGS__);	\
 =======
+=======
+>>>>>>> v3.18
 
 #define cachefiles_io_error(___cache, FMT, ...)		\
 do {							\
 	pr_err("I/O Error: " FMT"\n", ##__VA_ARGS__);	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fscache_io_error(&(___cache)->cache);		\
 	set_bit(CACHEFILES_DEAD, &(___cache)->flags);	\
@@ -331,8 +347,13 @@ do {							\
 do {									\
 	if (unlikely(!(X))) {						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+>>>>>>> v3.18
 =======
 		pr_err("\n");						\
 		pr_err("Assertion failed\n");		\
@@ -345,9 +366,15 @@ do {									\
 do {									\
 	if (unlikely(!((X) OP (Y)))) {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
 		printk(KERN_ERR "%lx " #OP " %lx is false\n",		\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+		pr_err("%lx " #OP " %lx is false\n",			\
+>>>>>>> v3.18
 =======
 		pr_err("\n");						\
 		pr_err("Assertion failed\n");		\
@@ -362,8 +389,13 @@ do {									\
 do {									\
 	if (unlikely((C) && !(X))) {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+>>>>>>> v3.18
 =======
 		pr_err("\n");						\
 		pr_err("Assertion failed\n");		\
@@ -376,9 +408,15 @@ do {									\
 do {									\
 	if (unlikely((C) && !((X) OP (Y)))) {				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
 		printk(KERN_ERR "%lx " #OP " %lx is false\n",		\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+		pr_err("%lx " #OP " %lx is false\n",			\
+>>>>>>> v3.18
 =======
 		pr_err("\n");						\
 		pr_err("Assertion failed\n");		\

@@ -403,6 +403,10 @@
  */
 #define AVIVO_D1GRPH_LUT_SEL                                    0x6108
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define AVIVO_LUT_10BIT_BYPASS_EN                        (1 << 8)
+>>>>>>> v3.18
 =======
 #       define AVIVO_LUT_10BIT_BYPASS_EN                        (1 << 8)
 >>>>>>> v3.18

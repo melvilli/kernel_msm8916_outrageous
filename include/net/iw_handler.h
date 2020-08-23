@@ -433,8 +433,12 @@ struct iw_public_data {
 
 /* Handle /proc/net/wireless, called in net/code/dev.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dev_get_wireless_info(char * buffer, char **start, off_t offset,
 				 int length);
+=======
+int dev_get_wireless_info(char *buffer, char **start, off_t offset, int length);
+>>>>>>> v3.18
 =======
 int dev_get_wireless_info(char *buffer, char **start, off_t offset, int length);
 >>>>>>> v3.18
@@ -442,6 +446,7 @@ int dev_get_wireless_info(char *buffer, char **start, off_t offset, int length);
 /* Second : functions that may be called by driver modules */
 
 /* Send a single event to user space */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void wireless_send_event(struct net_device *	dev,
 				unsigned int		cmd,
@@ -451,11 +456,16 @@ extern void wireless_send_event(struct net_device *	dev,
 void wireless_send_event(struct net_device *dev, unsigned int cmd,
 			 union iwreq_data *wrqu, const char *extra);
 >>>>>>> v3.18
+=======
+void wireless_send_event(struct net_device *dev, unsigned int cmd,
+			 union iwreq_data *wrqu, const char *extra);
+>>>>>>> v3.18
 
 /* We may need a function to send a stream of events to user space.
  * More on that later... */
 
 /* Standard handler for SIOCSIWSPY */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int iw_handler_set_spy(struct net_device *	dev,
 			      struct iw_request_info *	info,
@@ -481,6 +491,8 @@ extern void wireless_spy_update(struct net_device *	dev,
 				unsigned char *		address,
 				struct iw_quality *	wstats);
 =======
+=======
+>>>>>>> v3.18
 int iw_handler_set_spy(struct net_device *dev, struct iw_request_info *info,
 		       union iwreq_data *wrqu, char *extra);
 /* Standard handler for SIOCGIWSPY */
@@ -495,6 +507,9 @@ int iw_handler_get_thrspy(struct net_device *dev, struct iw_request_info *info,
 /* Driver call to update spy records */
 void wireless_spy_update(struct net_device *dev, unsigned char *address,
 			 struct iw_quality *wstats);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /************************* INLINE FUNTIONS *************************/
@@ -578,8 +593,12 @@ iwe_stream_add_point(struct iw_request_info *info, char *stream, char *ends,
 		       ((char *) &iwe->u) + IW_EV_POINT_OFF,
 		       IW_EV_POINT_PK_LEN - IW_EV_LCP_PK_LEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (iwe->u.data.length && extra)
 			memcpy(stream + point_len, extra, iwe->u.data.length);
+=======
+		memcpy(stream + point_len, extra, iwe->u.data.length);
+>>>>>>> v3.18
 =======
 		memcpy(stream + point_len, extra, iwe->u.data.length);
 >>>>>>> v3.18

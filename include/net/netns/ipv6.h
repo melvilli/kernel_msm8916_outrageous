@@ -28,12 +28,18 @@ struct netns_sysctl_ipv6 {
 	int ip6_rt_mtu_expires;
 	int ip6_rt_min_advmss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int icmpv6_time;
 =======
+=======
+>>>>>>> v3.18
 	int flowlabel_consistency;
 	int auto_flowlabels;
 	int icmpv6_time;
 	int anycast_src_echo_reply;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int fwmark_reflect;
 };
@@ -81,6 +87,10 @@ struct netns_ipv6 {
 #endif
 	atomic_t		dev_addr_genid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t		fib6_sernum;
+>>>>>>> v3.18
 =======
 	atomic_t		fib6_sernum;
 >>>>>>> v3.18

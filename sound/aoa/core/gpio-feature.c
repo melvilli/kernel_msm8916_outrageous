@@ -11,8 +11,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/pmac_feature.h>
 #include <linux/interrupt.h>
+=======
+#include <linux/of_irq.h>
+#include <linux/interrupt.h>
+#include <asm/pmac_feature.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 #include <linux/interrupt.h>

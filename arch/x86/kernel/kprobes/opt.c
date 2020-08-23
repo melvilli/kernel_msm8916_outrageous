@@ -78,7 +78,11 @@ found:
 
 /* Insert a move instruction which sets a pointer to eax/rdi (1st arg). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes synthesize_set_arg1(kprobe_opcode_t *addr, unsigned long val)
+=======
+static void synthesize_set_arg1(kprobe_opcode_t *addr, unsigned long val)
+>>>>>>> v3.18
 =======
 static void synthesize_set_arg1(kprobe_opcode_t *addr, unsigned long val)
 >>>>>>> v3.18
@@ -93,9 +97,13 @@ static void synthesize_set_arg1(kprobe_opcode_t *addr, unsigned long val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __used __kprobes kprobes_optinsn_template_holder(void)
 {
 	asm volatile (
+=======
+asm (
+>>>>>>> v3.18
 =======
 asm (
 >>>>>>> v3.18
@@ -138,7 +146,10 @@ asm (
 			".global optprobe_template_end\n"
 			"optprobe_template_end:\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -153,7 +164,12 @@ asm (
 
 /* Optimized kprobe call back function: called from optinsn */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes optimized_callback(struct optimized_kprobe *op, struct pt_regs *regs)
+=======
+static void
+optimized_callback(struct optimized_kprobe *op, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void
 optimized_callback(struct optimized_kprobe *op, struct pt_regs *regs)
@@ -188,8 +204,14 @@ optimized_callback(struct optimized_kprobe *op, struct pt_regs *regs)
 	local_irq_restore(flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __kprobes copy_optimized_instructions(u8 *dest, u8 *src)
+=======
+NOKPROBE_SYMBOL(optimized_callback);
+
+static int copy_optimized_instructions(u8 *dest, u8 *src)
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(optimized_callback);
 
@@ -215,7 +237,11 @@ static int copy_optimized_instructions(u8 *dest, u8 *src)
 
 /* Check whether insn is indirect jump */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes insn_is_indirect_jump(struct insn *insn)
+=======
+static int insn_is_indirect_jump(struct insn *insn)
+>>>>>>> v3.18
 =======
 static int insn_is_indirect_jump(struct insn *insn)
 >>>>>>> v3.18
@@ -254,7 +280,11 @@ static int insn_jump_into_range(struct insn *insn, unsigned long start, int len)
 
 /* Decode whole function to ensure any instructions don't jump into target */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __kprobes can_optimize(unsigned long paddr)
+=======
+static int can_optimize(unsigned long paddr)
+>>>>>>> v3.18
 =======
 static int can_optimize(unsigned long paddr)
 >>>>>>> v3.18
@@ -309,7 +339,11 @@ static int can_optimize(unsigned long paddr)
 
 /* Check optimized_kprobe can actually be optimized. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes arch_check_optimized_kprobe(struct optimized_kprobe *op)
+=======
+int arch_check_optimized_kprobe(struct optimized_kprobe *op)
+>>>>>>> v3.18
 =======
 int arch_check_optimized_kprobe(struct optimized_kprobe *op)
 >>>>>>> v3.18
@@ -328,8 +362,13 @@ int arch_check_optimized_kprobe(struct optimized_kprobe *op)
 
 /* Check the addr is within the optimized instructions. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes
 arch_within_optimized_kprobe(struct optimized_kprobe *op, unsigned long addr)
+=======
+int arch_within_optimized_kprobe(struct optimized_kprobe *op,
+				 unsigned long addr)
+>>>>>>> v3.18
 =======
 int arch_within_optimized_kprobe(struct optimized_kprobe *op,
 				 unsigned long addr)
@@ -341,7 +380,11 @@ int arch_within_optimized_kprobe(struct optimized_kprobe *op,
 
 /* Free optimized instruction slot */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __kprobes
+=======
+static
+>>>>>>> v3.18
 =======
 static
 >>>>>>> v3.18
@@ -355,7 +398,11 @@ void __arch_remove_optimized_kprobe(struct optimized_kprobe *op, int dirty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes arch_remove_optimized_kprobe(struct optimized_kprobe *op)
+=======
+void arch_remove_optimized_kprobe(struct optimized_kprobe *op)
+>>>>>>> v3.18
 =======
 void arch_remove_optimized_kprobe(struct optimized_kprobe *op)
 >>>>>>> v3.18
@@ -369,7 +416,11 @@ void arch_remove_optimized_kprobe(struct optimized_kprobe *op)
  * This is called when new aggr(opt)probe is allocated or reused.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes arch_prepare_optimized_kprobe(struct optimized_kprobe *op)
+=======
+int arch_prepare_optimized_kprobe(struct optimized_kprobe *op)
+>>>>>>> v3.18
 =======
 int arch_prepare_optimized_kprobe(struct optimized_kprobe *op)
 >>>>>>> v3.18
@@ -391,13 +442,19 @@ int arch_prepare_optimized_kprobe(struct optimized_kprobe *op)
 	 */
 	rel = (long)op->optinsn.insn - (long)op->kp.addr + RELATIVEJUMP_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (abs(rel) > 0x7fffffff)
 		return -ERANGE;
 =======
+=======
+>>>>>>> v3.18
 	if (abs(rel) > 0x7fffffff) {
 		__arch_remove_optimized_kprobe(op, 0);
 		return -ERANGE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	buf = (u8 *)op->optinsn.insn;
@@ -430,6 +487,7 @@ int arch_prepare_optimized_kprobe(struct optimized_kprobe *op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_OPTIMIZE_PROBES 256
 static struct text_poke_param *jump_poke_params;
 static struct jump_poke_buffer {
@@ -457,10 +515,13 @@ static void __kprobes setup_optimize_kprobe(struct text_poke_param *tprm,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Replace breakpoints (int3) with relative jumps.
  * Caller must call with locking kprobe_mutex and text_mutex.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __kprobes arch_optimize_kprobes(struct list_head *oplist)
 {
@@ -497,6 +558,8 @@ static void __kprobes setup_unoptimize_kprobe(struct text_poke_param *tprm,
 	tprm->opcode = insn_buf;
 	tprm->len = RELATIVEJUMP_SIZE;
 =======
+=======
+>>>>>>> v3.18
 void arch_optimize_kprobes(struct list_head *oplist)
 {
 	struct optimized_kprobe *op, *tmp;
@@ -532,6 +595,9 @@ void arch_unoptimize_kprobe(struct optimized_kprobe *op)
 	memcpy(insn_buf + 1, op->optinsn.copied_insn, RELATIVE_ADDR_SIZE);
 	text_poke_bp(op->kp.addr, insn_buf, RELATIVEJUMP_SIZE,
 		     op->optinsn.insn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -543,6 +609,7 @@ extern void arch_unoptimize_kprobes(struct list_head *oplist,
 				    struct list_head *done_list)
 {
 	struct optimized_kprobe *op, *tmp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int c = 0;
 
@@ -577,6 +644,8 @@ void __kprobes arch_unoptimize_kprobe(struct optimized_kprobe *op)
 int  __kprobes
 setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter)
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry_safe(op, tmp, oplist, list) {
 		arch_unoptimize_kprobe(op);
@@ -585,6 +654,9 @@ setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter)
 }
 
 int setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct optimized_kprobe *op;
@@ -601,6 +673,7 @@ int setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter)
 	}
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int __kprobes arch_init_optprobes(void)
@@ -621,6 +694,9 @@ int __kprobes arch_init_optprobes(void)
 
 	return 0;
 }
+=======
+NOKPROBE_SYMBOL(setup_detour_execution);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(setup_detour_execution);
 >>>>>>> v3.18

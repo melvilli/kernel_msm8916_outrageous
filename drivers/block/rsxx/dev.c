@@ -156,7 +156,12 @@ static void bio_dma_done_cb(struct rsxx_cardinfo *card,
 
 	if (atomic_dec_and_test(&meta->pending_dmas)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		disk_stats_complete(card, meta->bio, meta->start_time);
+=======
+		if (!card->eeh_state && card->gendisk)
+			disk_stats_complete(card, meta->bio, meta->start_time);
+>>>>>>> v3.18
 =======
 		if (!card->eeh_state && card->gendisk)
 			disk_stats_complete(card, meta->bio, meta->start_time);
@@ -176,13 +181,19 @@ static void rsxx_make_request(struct request_queue *q, struct bio *bio)
 	might_sleep();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!card)
 		goto req_err;
 
 	if (bio_end_sector(bio) > get_capacity(card->gendisk))
 		goto req_err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(card->halt)) {
 		st = -EFAULT;
@@ -195,7 +206,11 @@ static void rsxx_make_request(struct request_queue *q, struct bio *bio)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio->bi_size == 0) {
+=======
+	if (bio->bi_iter.bi_size == 0) {
+>>>>>>> v3.18
 =======
 	if (bio->bi_iter.bi_size == 0) {
 >>>>>>> v3.18
@@ -215,18 +230,24 @@ static void rsxx_make_request(struct request_queue *q, struct bio *bio)
 	bio_meta->start_time = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk_stats_start(card, bio);
 
 	dev_dbg(CARD_TO_DEV(card), "BIO[%c]: meta: %p addr8: x%llx size: %d\n",
 		 bio_data_dir(bio) ? 'W' : 'R', bio_meta,
 		 (u64)bio->bi_sector << 9, bio->bi_size);
 =======
+=======
+>>>>>>> v3.18
 	if (!unlikely(card->halt))
 		disk_stats_start(card, bio);
 
 	dev_dbg(CARD_TO_DEV(card), "BIO[%c]: meta: %p addr8: x%llx size: %d\n",
 		 bio_data_dir(bio) ? 'W' : 'R', bio_meta,
 		 (u64)bio->bi_iter.bi_sector << 9, bio->bi_iter.bi_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	st = rsxx_dma_queue_bio(card, bio, &bio_meta->pending_dmas,
@@ -253,6 +274,7 @@ static bool rsxx_discard_supported(struct rsxx_cardinfo *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned short rsxx_get_logical_block_size(
 					struct rsxx_cardinfo *card)
 {
@@ -271,6 +293,8 @@ static unsigned short rsxx_get_logical_block_size(
 		return RSXX_HW_BLK_SIZE;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int rsxx_attach_dev(struct rsxx_cardinfo *card)
@@ -336,6 +360,7 @@ int rsxx_setup_dev(struct rsxx_cardinfo *card)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blk_size = rsxx_get_logical_block_size(card);
 
 	blk_queue_make_request(card->queue, rsxx_make_request);
@@ -347,6 +372,8 @@ int rsxx_setup_dev(struct rsxx_cardinfo *card)
 
 	queue_flag_set_unlocked(QUEUE_FLAG_NONROT, card->queue);
 =======
+=======
+>>>>>>> v3.18
 	if (card->config_valid) {
 		blk_size = card->config.data.block_size;
 		blk_queue_dma_alignment(card->queue, blk_size - 1);
@@ -360,6 +387,9 @@ int rsxx_setup_dev(struct rsxx_cardinfo *card)
 
 	queue_flag_set_unlocked(QUEUE_FLAG_NONROT, card->queue);
 	queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, card->queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rsxx_discard_supported(card)) {
 		queue_flag_set_unlocked(QUEUE_FLAG_DISCARD, card->queue);
@@ -394,6 +424,10 @@ void rsxx_destroy_dev(struct rsxx_cardinfo *card)
 
 	blk_cleanup_queue(card->queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	card->queue->queuedata = NULL;
+>>>>>>> v3.18
 =======
 	card->queue->queuedata = NULL;
 >>>>>>> v3.18

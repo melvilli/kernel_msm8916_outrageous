@@ -33,6 +33,7 @@ static inline unsigned int timer_value(unsigned int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __volatile__ unsigned int *master_l10_counter;
 
 extern irqreturn_t notrace timer_interrupt(int dummy, void *dev_id);
@@ -41,6 +42,8 @@ extern irqreturn_t notrace timer_interrupt(int dummy, void *dev_id);
 DECLARE_PER_CPU(struct clock_event_device, sparc32_clockevent);
 extern void register_percpu_ce(int cpu);
 =======
+=======
+>>>>>>> v3.18
 extern volatile u32 __iomem *master_l10_counter;
 
 irqreturn_t notrace timer_interrupt(int dummy, void *dev_id);
@@ -48,6 +51,9 @@ irqreturn_t notrace timer_interrupt(int dummy, void *dev_id);
 #ifdef CONFIG_SMP
 DECLARE_PER_CPU(struct clock_event_device, sparc32_clockevent);
 void register_percpu_ce(int cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

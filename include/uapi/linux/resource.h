@@ -24,6 +24,7 @@ struct	rusage {
 	struct timeval ru_utime;	/* user time used */
 	struct timeval ru_stime;	/* system time used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long	ru_maxrss;		/* maximum resident set size */
 	long	ru_ixrss;		/* integral shared memory size */
 	long	ru_idrss;		/* integral unshared data size */
@@ -44,6 +45,8 @@ struct rlimit {
 	unsigned long	rlim_cur;
 	unsigned long	rlim_max;
 =======
+=======
+>>>>>>> v3.18
 	__kernel_long_t	ru_maxrss;	/* maximum resident set size */
 	__kernel_long_t	ru_ixrss;	/* integral shared memory size */
 	__kernel_long_t	ru_idrss;	/* integral unshared data size */
@@ -63,6 +66,9 @@ struct rlimit {
 struct rlimit {
 	__kernel_ulong_t	rlim_cur;
 	__kernel_ulong_t	rlim_max;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

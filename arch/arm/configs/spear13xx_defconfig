@@ -12,6 +12,7 @@ CONFIG_MACH_SPEAR1310=y
 CONFIG_MACH_SPEAR1340=y
 # CONFIG_SWP_EMULATE is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SMP=y
 # CONFIG_SMP_ON_UP is not set
 # CONFIG_ARM_CPU_TOPOLOGY is not set
@@ -20,6 +21,8 @@ CONFIG_ARM_ATAG_DTB_COMPAT=y
 CONFIG_BINFMT_MISC=y
 CONFIG_NET=y
 =======
+=======
+>>>>>>> v3.18
 CONFIG_PCI=y
 CONFIG_PCI_MSI=y
 CONFIG_PCIE_SPEAR13XX=y
@@ -38,6 +41,9 @@ CONFIG_IP_PNP=y
 CONFIG_IP_PNP_DHCP=y
 CONFIG_IP_PNP_BOOTP=y
 CONFIG_NET_IPIP=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 CONFIG_MTD=y
@@ -49,6 +55,10 @@ CONFIG_MTD_NAND_FSMC=y
 CONFIG_BLK_DEV_RAM=y
 CONFIG_BLK_DEV_RAM_SIZE=16384
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_BLK_DEV_SD=y
+>>>>>>> v3.18
 =======
 CONFIG_BLK_DEV_SD=y
 >>>>>>> v3.18
@@ -87,7 +97,10 @@ CONFIG_GPIO_PL061=y
 # CONFIG_HWMON is not set
 CONFIG_WATCHDOG=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MPCORE_WATCHDOG=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_HID_SUPPORT is not set
@@ -96,6 +109,10 @@ CONFIG_USB=y
 CONFIG_USB_EHCI_HCD=y
 CONFIG_USB_OHCI_HCD=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_USB_STORAGE=y
+>>>>>>> v3.18
 =======
 CONFIG_USB_STORAGE=y
 >>>>>>> v3.18
@@ -113,6 +130,10 @@ CONFIG_EXT3_FS=y
 CONFIG_EXT3_FS_SECURITY=y
 CONFIG_AUTOFS4_FS=m
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_FUSE_FS=y
+>>>>>>> v3.18
 =======
 CONFIG_FUSE_FS=y
 >>>>>>> v3.18
@@ -122,6 +143,11 @@ CONFIG_FAT_DEFAULT_IOCHARSET="ascii"
 CONFIG_TMPFS=y
 CONFIG_JFFS2_FS=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NFS_FS=y
+CONFIG_ROOT_NFS=y
+>>>>>>> v3.18
 =======
 CONFIG_NFS_FS=y
 CONFIG_ROOT_NFS=y

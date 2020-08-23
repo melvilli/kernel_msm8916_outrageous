@@ -4,7 +4,10 @@
  * Copyright (C) 2001 Deep Blue Solutions Ltd.
  * Copyright (C) 2012 ARM Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -27,6 +30,7 @@
 
 #include "proc-macros.S"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  /*
  *     flush_dcache_louis()
@@ -62,6 +66,8 @@ ENTRY(flush_cache_louis)
 	ret x12
 ENDPROC(flush_cache_louis)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -222,7 +228,11 @@ ENTRY(__inval_cache_range)
  *	- end     - virtual end address of region
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(__dma_inv_range)
+=======
+__dma_inv_range:
+>>>>>>> v3.18
 =======
 __dma_inv_range:
 >>>>>>> v3.18
@@ -252,7 +262,11 @@ ENDPROC(__dma_inv_range)
  *	- end     - virtual end address of region
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(__dma_clean_range)
+=======
+__dma_clean_range:
+>>>>>>> v3.18
 =======
 __dma_clean_range:
 >>>>>>> v3.18

@@ -6,6 +6,11 @@
 #include <linux/of_address.h>
 #include <linux/pci_regs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sizes.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/sizes.h>
 #include <linux/slab.h>
@@ -97,7 +102,11 @@ static unsigned int of_bus_default_get_flags(const __be32 *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
+=======
+#ifdef CONFIG_OF_ADDRESS_PCI
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_OF_ADDRESS_PCI
 >>>>>>> v3.18
@@ -176,7 +185,13 @@ static int of_bus_pci_translate(__be32 *addr, u64 offset, int na)
 	return of_bus_default_translate(addr + 1, offset, na - 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif /* CONFIG_OF_ADDRESS_PCI */
+
+#ifdef CONFIG_PCI
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_OF_ADDRESS_PCI */
 
@@ -240,7 +255,10 @@ int of_pci_address_to_resource(struct device_node *dev, int bar,
 }
 EXPORT_SYMBOL_GPL(of_pci_address_to_resource);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int of_pci_range_parser_init(struct of_pci_range_parser *parser,
 				struct device_node *node)
@@ -353,6 +371,9 @@ invalid_range:
 	res->end = (resource_size_t)OF_BAD_ADDR;
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PCI */
 
@@ -420,7 +441,11 @@ static unsigned int of_bus_isa_get_flags(const __be32 *addr)
 
 static struct of_bus of_busses[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
+=======
+#ifdef CONFIG_OF_ADDRESS_PCI
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_OF_ADDRESS_PCI
 >>>>>>> v3.18
@@ -435,7 +460,11 @@ static struct of_bus of_busses[] = {
 		.get_flags = of_bus_pci_get_flags,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PCI */
+=======
+#endif /* CONFIG_OF_ADDRESS_PCI */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_OF_ADDRESS_PCI */
 >>>>>>> v3.18
@@ -567,7 +596,11 @@ static u64 __of_translate_address(struct device_node *dev,
 	u64 result = OF_BAD_ADDR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("OF: ** translation for device %s **\n", dev->full_name);
+=======
+	pr_debug("OF: ** translation for device %s **\n", of_node_full_name(dev));
+>>>>>>> v3.18
 =======
 	pr_debug("OF: ** translation for device %s **\n", of_node_full_name(dev));
 >>>>>>> v3.18
@@ -585,8 +618,12 @@ static u64 __of_translate_address(struct device_node *dev,
 	bus->count_cells(dev, &na, &ns);
 	if (!OF_CHECK_COUNTS(na, ns)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "prom_parse: Bad cell count for %s\n",
 		       dev->full_name);
+=======
+		pr_debug("OF: Bad cell count for %s\n", of_node_full_name(dev));
+>>>>>>> v3.18
 =======
 		pr_debug("OF: Bad cell count for %s\n", of_node_full_name(dev));
 >>>>>>> v3.18
@@ -596,7 +633,11 @@ static u64 __of_translate_address(struct device_node *dev,
 
 	pr_debug("OF: bus is %s (na=%d, ns=%d) on %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    bus->name, na, ns, parent->full_name);
+=======
+	    bus->name, na, ns, of_node_full_name(parent));
+>>>>>>> v3.18
 =======
 	    bus->name, na, ns, of_node_full_name(parent));
 >>>>>>> v3.18
@@ -622,7 +663,11 @@ static u64 __of_translate_address(struct device_node *dev,
 		if (!OF_CHECK_COUNTS(pna, pns)) {
 			printk(KERN_ERR "prom_parse: Bad cell count for %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       dev->full_name);
+=======
+			       of_node_full_name(dev));
+>>>>>>> v3.18
 =======
 			       of_node_full_name(dev));
 >>>>>>> v3.18
@@ -631,7 +676,11 @@ static u64 __of_translate_address(struct device_node *dev,
 
 		pr_debug("OF: parent bus is %s (na=%d, ns=%d) on %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    pbus->name, pna, pns, parent->full_name);
+=======
+		    pbus->name, pna, pns, of_node_full_name(parent));
+>>>>>>> v3.18
 =======
 		    pbus->name, pna, pns, of_node_full_name(parent));
 >>>>>>> v3.18
@@ -667,6 +716,7 @@ u64 of_translate_dma_address(struct device_node *dev, const __be32 *in_addr)
 EXPORT_SYMBOL(of_translate_dma_address);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool of_can_translate_address(struct device_node *dev)
 {
 	struct device_node *parent;
@@ -686,6 +736,8 @@ bool of_can_translate_address(struct device_node *dev)
 }
 EXPORT_SYMBOL(of_can_translate_address);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 const __be32 *of_get_address(struct device_node *dev, int index, u64 *size,
@@ -727,6 +779,7 @@ const __be32 *of_get_address(struct device_node *dev, int index, u64 *size,
 EXPORT_SYMBOL(of_get_address);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const __be32 *of_get_address_by_name(struct device_node *dev, const char *name,
 		u64 *size, unsigned int *flags)
 {
@@ -743,6 +796,8 @@ const __be32 *of_get_address_by_name(struct device_node *dev, const char *name,
 }
 EXPORT_SYMBOL(of_get_address_by_name);
 =======
+=======
+>>>>>>> v3.18
 #ifdef PCI_IOBASE
 struct io_range {
 	struct list_head list;
@@ -857,6 +912,9 @@ unsigned long __weak pci_address_to_pio(phys_addr_t address)
 	return (unsigned long) address;
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __of_address_to_resource(struct device_node *dev,
@@ -924,15 +982,21 @@ struct device_node *of_find_matching_node_by_address(struct device_node *from,
 
 	while (dn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!of_address_to_resource(dn, 0, &res) &&
 		    res.start == base_address)
 			return dn;
 
 =======
+=======
+>>>>>>> v3.18
 		if (of_address_to_resource(dn, 0, &res))
 			continue;
 		if (res.start == base_address)
 			return dn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dn = of_find_matching_node(dn, matches);
 	}
@@ -960,6 +1024,7 @@ void __iomem *of_iomap(struct device_node *np, int index)
 EXPORT_SYMBOL(of_iomap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem *of_iomap_by_name(struct device_node *np, const char *name)
 {
 	int index;
@@ -976,6 +1041,8 @@ void __iomem *of_iomap_by_name(struct device_node *np, const char *name)
 }
 EXPORT_SYMBOL(of_iomap_by_name);
 =======
+=======
+>>>>>>> v3.18
 /*
  * of_io_request_and_map - Requests a resource and maps the memory mapped IO
  *			   for a given device_node
@@ -1121,4 +1188,7 @@ bool of_dma_is_coherent(struct device_node *np)
 	return false;
 }
 EXPORT_SYMBOL_GPL(of_dma_is_coherent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -33,7 +33,11 @@
 #define MAX_TAP			8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_KEYLEN		56
+=======
+#define MAX_KEYLEN		160
+>>>>>>> v3.18
 =======
 #define MAX_KEYLEN		160
 >>>>>>> v3.18
@@ -97,7 +101,10 @@ struct cprng_testvec {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct drbg_testvec {
 	unsigned char *entropy;
 	size_t entropylen;
@@ -113,6 +120,9 @@ struct drbg_testvec {
 	size_t expectedlen;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static char zeroed_string[48];
 
@@ -473,7 +483,10 @@ static struct hash_testvec rmd320_tv_template[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CRCT10DIF_TEST_VECTORS	3
 static struct hash_testvec crct10dif_tv_template[] = {
 	{
@@ -507,17 +520,23 @@ static struct hash_testvec crct10dif_tv_template[] = {
 	}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * SHA1 test vectors  from from FIPS PUB 180-1
  * Long vector from CAVS 5.0
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHA1_TEST_VECTORS	3
 
 static struct hash_testvec sha1_tv_template[] = {
 	{
 =======
+=======
+>>>>>>> v3.18
 #define SHA1_TEST_VECTORS	6
 
 static struct hash_testvec sha1_tv_template[] = {
@@ -527,6 +546,9 @@ static struct hash_testvec sha1_tv_template[] = {
 		.digest	= "\xda\x39\xa3\xee\x5e\x6b\x4b\x0d\x32\x55"
 			  "\xbf\xef\x95\x60\x18\x90\xaf\xd8\x07\x09",
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.plaintext = "abc",
 		.psize	= 3,
@@ -567,7 +589,10 @@ static struct hash_testvec sha1_tv_template[] = {
 		.np	= 4,
 		.tap	= { 63, 64, 31, 5 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.plaintext = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-",
 		.psize	= 64,
@@ -706,6 +731,9 @@ static struct hash_testvec sha1_tv_template[] = {
 		.digest    = "\xb8\xe3\x54\xed\xc5\xfc\xef\xa4"
 			     "\x55\x73\x4a\x81\x99\xe4\x47\x2a"
 			     "\x30\xd6\xc9\x85",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -715,11 +743,14 @@ static struct hash_testvec sha1_tv_template[] = {
  * SHA224 test vectors from from FIPS PUB 180-2
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHA224_TEST_VECTORS     2
 
 static struct hash_testvec sha224_tv_template[] = {
 	{
 =======
+=======
+>>>>>>> v3.18
 #define SHA224_TEST_VECTORS     5
 
 static struct hash_testvec sha224_tv_template[] = {
@@ -731,6 +762,9 @@ static struct hash_testvec sha224_tv_template[] = {
 			  "\x15\xa2\xb0\x1f\x82\x8e\xa6\x2a"
 			  "\xc5\xb3\xe4\x2f",
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.plaintext = "abc",
 		.psize  = 3,
@@ -749,7 +783,10 @@ static struct hash_testvec sha224_tv_template[] = {
 		.np     = 2,
 		.tap    = { 28, 28 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.plaintext = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-",
 		.psize	= 64,
@@ -891,6 +928,9 @@ static struct hash_testvec sha224_tv_template[] = {
 			     "\x78\xb1\x8b\xfd\x04\xf5\x2d\x91"
 			     "\x20\x48\xa4\x28\xff\x55\xb1\xd3"
 			     "\xe6\xf9\x4f\xcc",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 };
@@ -899,11 +939,14 @@ static struct hash_testvec sha224_tv_template[] = {
  * SHA256 test vectors from from NIST
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHA256_TEST_VECTORS	2
 
 static struct hash_testvec sha256_tv_template[] = {
 	{
 =======
+=======
+>>>>>>> v3.18
 #define SHA256_TEST_VECTORS	5
 
 static struct hash_testvec sha256_tv_template[] = {
@@ -915,6 +958,9 @@ static struct hash_testvec sha256_tv_template[] = {
 			  "\x27\xae\x41\xe4\x64\x9b\x93\x4c"
 			  "\xa4\x95\x99\x1b\x78\x52\xb8\x55",
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.plaintext = "abc",
 		.psize	= 3,
@@ -932,8 +978,11 @@ static struct hash_testvec sha256_tv_template[] = {
 		.np	= 2,
 		.tap	= { 28, 28 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.plaintext = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-",
 		.psize	= 64,
@@ -1076,6 +1125,9 @@ static struct hash_testvec sha256_tv_template[] = {
 			     "\xf3\xed\x50\x10\x64\x8e\x06\xbe"
 			     "\x9b\x4a\xa6\xbb\x05\x89\x59\x51",
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1083,11 +1135,14 @@ static struct hash_testvec sha256_tv_template[] = {
  * SHA384 test vectors from from NIST and kerneli
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHA384_TEST_VECTORS	4
 
 static struct hash_testvec sha384_tv_template[] = {
 	{
 =======
+=======
+>>>>>>> v3.18
 #define SHA384_TEST_VECTORS	6
 
 static struct hash_testvec sha384_tv_template[] = {
@@ -1101,6 +1156,9 @@ static struct hash_testvec sha384_tv_template[] = {
 			  "\x27\x4e\xde\xbf\xe7\x6f\x65\xfb"
 			  "\xd5\x1a\xd2\xf1\x48\x98\xb9\x5b",
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.plaintext= "abc",
 		.psize	= 3,
@@ -1142,8 +1200,11 @@ static struct hash_testvec sha384_tv_template[] = {
 		.np	= 4,
 		.tap	= { 26, 26, 26, 26 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.plaintext = "\x08\x9f\x13\xaa\x41\xd8\x4c\xe3"
 			     "\x7a\x11\x85\x1c\xb3\x27\xbe\x55"
@@ -1281,6 +1342,9 @@ static struct hash_testvec sha384_tv_template[] = {
 			     "\x75\x29\x62\x83\xae\x3f\x17\xab"
 			     "\xfd\x10\x4d\x8e\x17\x1c\x1f\xca",
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1288,11 +1352,14 @@ static struct hash_testvec sha384_tv_template[] = {
  * SHA512 test vectors from from NIST and kerneli
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHA512_TEST_VECTORS	4
 
 static struct hash_testvec sha512_tv_template[] = {
 	{
 =======
+=======
+>>>>>>> v3.18
 #define SHA512_TEST_VECTORS	6
 
 static struct hash_testvec sha512_tv_template[] = {
@@ -1308,6 +1375,9 @@ static struct hash_testvec sha512_tv_template[] = {
 			  "\x63\xb9\x31\xbd\x47\x41\x7a\x81"
 			  "\xa5\x38\x32\x7a\xf9\x27\xda\x3e",
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.plaintext = "abc",
 		.psize	= 3,
@@ -1357,8 +1427,11 @@ static struct hash_testvec sha512_tv_template[] = {
 		.np	= 4,
 		.tap	= { 26, 26, 26, 26 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.plaintext = "\x08\x9f\x13\xaa\x41\xd8\x4c\xe3"
 			     "\x7a\x11\x85\x1c\xb3\x27\xbe\x55"
@@ -1498,6 +1571,9 @@ static struct hash_testvec sha512_tv_template[] = {
 			     "\x59\xca\x9d\xcc\x25\x0c\x43\xba"
 			     "\x85\xa8\xf8\xfe\xb5\x24\xb2\xee",
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1886,7 +1962,11 @@ static struct hash_testvec tgr128_tv_template[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GHASH_TEST_VECTORS 1
+=======
+#define GHASH_TEST_VECTORS 5
+>>>>>>> v3.18
 =======
 #define GHASH_TEST_VECTORS 5
 >>>>>>> v3.18
@@ -1894,6 +1974,7 @@ static struct hash_testvec tgr128_tv_template[] = {
 static struct hash_testvec ghash_tv_template[] =
 {
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		.key	= "\xdf\xa6\xbf\x4d\xed\x81\xdb\x03\xff\xca\xff\x95\xf8\x30\xf0\x61",
@@ -1903,6 +1984,8 @@ static struct hash_testvec ghash_tv_template[] =
 		.digest	= "\xda\x53\xeb\x0a\xd2\xc5\x5b\xb6"
 			  "\x4f\xc4\x80\x2c\xc3\xfe\xda\x60",
 =======
+=======
+>>>>>>> v3.18
 		.key	= "\xdf\xa6\xbf\x4d\xed\x81\xdb\x03"
 			  "\xff\xca\xff\x95\xf8\x30\xf0\x61",
 		.ksize	= 16,
@@ -1951,6 +2034,9 @@ static struct hash_testvec ghash_tv_template[] =
 		.psize	= 20,
 		.digest	= "\xf8\x94\x87\x2a\x4b\x63\x99\x28"
 			  "\x23\xf7\x93\xf7\x19\xf5\x96\xd9",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -3231,8 +3317,13 @@ static struct cipher_testvec des_enc_tv_template[] = {
 		.rlen	= 248,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 248 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 248 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 248 - 10, 2, 8 },
@@ -3346,8 +3437,13 @@ static struct cipher_testvec des_dec_tv_template[] = {
 		.rlen	= 248,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 248 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 248 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 248 - 10, 2, 8 },
@@ -3477,8 +3573,13 @@ static struct cipher_testvec des_cbc_enc_tv_template[] = {
 		.rlen	= 248,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 248 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 248 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 248 - 10, 2, 8 },
@@ -3591,8 +3692,13 @@ static struct cipher_testvec des_cbc_dec_tv_template[] = {
 		.rlen	= 248,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 248 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 248 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 248 - 10, 2, 8 },
@@ -3671,8 +3777,13 @@ static struct cipher_testvec des_ctr_enc_tv_template[] = {
 		.rlen	= 248,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 248 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 248 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 248 - 10, 2, 8 },
@@ -3822,8 +3933,13 @@ static struct cipher_testvec des_ctr_dec_tv_template[] = {
 		.rlen	= 248,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 248 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 248 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 248 - 10, 2, 8 },
@@ -4063,8 +4179,13 @@ static struct cipher_testvec des3_ede_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -4233,8 +4354,13 @@ static struct cipher_testvec des3_ede_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -4418,8 +4544,13 @@ static struct cipher_testvec des3_ede_cbc_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -4603,8 +4734,13 @@ static struct cipher_testvec des3_ede_cbc_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -4748,8 +4884,13 @@ static struct cipher_testvec des3_ede_ctr_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -5031,8 +5172,13 @@ static struct cipher_testvec des3_ede_ctr_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -5376,8 +5522,13 @@ static struct cipher_testvec bf_enc_tv_template[] = {
 		.rlen	= 504,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 504 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 504 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 504 - 10, 2, 8 },
@@ -5573,8 +5724,13 @@ static struct cipher_testvec bf_dec_tv_template[] = {
 		.rlen	= 504,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 504 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 504 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 504 - 10, 2, 8 },
@@ -5735,8 +5891,13 @@ static struct cipher_testvec bf_cbc_enc_tv_template[] = {
 		.rlen	= 504,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 504 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 504 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 504 - 10, 2, 8 },
@@ -5897,8 +6058,13 @@ static struct cipher_testvec bf_cbc_dec_tv_template[] = {
 		.rlen	= 504,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 504 - 8, 8 },
+=======
+		.np	= 3,
+		.tap	= { 504 - 10, 2, 8 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 504 - 10, 2, 8 },
@@ -6908,8 +7074,13 @@ static struct cipher_testvec tf_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -7081,8 +7252,13 @@ static struct cipher_testvec tf_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -7269,8 +7445,13 @@ static struct cipher_testvec tf_cbc_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -7457,8 +7638,13 @@ static struct cipher_testvec tf_cbc_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -8536,8 +8722,13 @@ static struct cipher_testvec tf_lrw_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -8794,8 +8985,13 @@ static struct cipher_testvec tf_lrw_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -9141,8 +9337,13 @@ static struct cipher_testvec tf_xts_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -9489,8 +9690,13 @@ static struct cipher_testvec tf_xts_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -9692,8 +9898,13 @@ static struct cipher_testvec serpent_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -9923,8 +10134,13 @@ static struct cipher_testvec serpent_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -10110,8 +10326,13 @@ static struct cipher_testvec serpent_cbc_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -10256,8 +10477,13 @@ static struct cipher_testvec serpent_cbc_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -11335,8 +11561,13 @@ static struct cipher_testvec serpent_lrw_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -11593,8 +11824,13 @@ static struct cipher_testvec serpent_lrw_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -11940,8 +12176,13 @@ static struct cipher_testvec serpent_xts_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -12288,8 +12529,13 @@ static struct cipher_testvec serpent_xts_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -12476,8 +12722,13 @@ static struct cipher_testvec cast6_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -12652,8 +12903,13 @@ static struct cipher_testvec cast6_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -12798,8 +13054,13 @@ static struct cipher_testvec cast6_cbc_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -12944,8 +13205,13 @@ static struct cipher_testvec cast6_cbc_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -13106,8 +13372,13 @@ static struct cipher_testvec cast6_ctr_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -13268,8 +13539,13 @@ static struct cipher_testvec cast6_ctr_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -13420,8 +13696,13 @@ static struct cipher_testvec cast6_lrw_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -13572,8 +13853,13 @@ static struct cipher_testvec cast6_lrw_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -13726,8 +14012,13 @@ static struct cipher_testvec cast6_xts_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -13880,8 +14171,13 @@ static struct cipher_testvec cast6_xts_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -13898,10 +14194,13 @@ static struct cipher_testvec cast6_xts_dec_tv_template[] = {
 #define AES_CBC_ENC_TEST_VECTORS 5
 #define AES_CBC_DEC_TEST_VECTORS 5
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HMAC_SHA1_AES_CBC_ENC_TEST_VECTORS 7
 #define HMAC_SHA256_AES_CBC_ENC_TEST_VECTORS 7
 #define HMAC_SHA512_AES_CBC_ENC_TEST_VECTORS 7
 =======
+=======
+>>>>>>> v3.18
 #define HMAC_MD5_ECB_CIPHER_NULL_ENC_TEST_VECTORS 2
 #define HMAC_MD5_ECB_CIPHER_NULL_DEC_TEST_VECTORS 2
 #define HMAC_SHA1_ECB_CIPHER_NULL_ENC_TEST_VEC 2
@@ -13909,6 +14208,9 @@ static struct cipher_testvec cast6_xts_dec_tv_template[] = {
 #define HMAC_SHA1_AES_CBC_ENC_TEST_VEC 7
 #define HMAC_SHA256_AES_CBC_ENC_TEST_VEC 7
 #define HMAC_SHA512_AES_CBC_ENC_TEST_VEC 7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AES_LRW_ENC_TEST_VECTORS 8
 #define AES_LRW_DEC_TEST_VECTORS 8
@@ -13927,7 +14229,11 @@ static struct cipher_testvec cast6_xts_dec_tv_template[] = {
 #define AES_GCM_4543_ENC_TEST_VECTORS 1
 #define AES_GCM_4543_DEC_TEST_VECTORS 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AES_CCM_ENC_TEST_VECTORS 7
+=======
+#define AES_CCM_ENC_TEST_VECTORS 8
+>>>>>>> v3.18
 =======
 #define AES_CCM_ENC_TEST_VECTORS 8
 >>>>>>> v3.18
@@ -14103,8 +14409,13 @@ static struct cipher_testvec aes_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -14280,8 +14591,13 @@ static struct cipher_testvec aes_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -14504,8 +14820,13 @@ static struct cipher_testvec aes_cbc_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -14728,6 +15049,7 @@ static struct cipher_testvec aes_cbc_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
 	},
@@ -14735,6 +15057,8 @@ static struct cipher_testvec aes_cbc_dec_tv_template[] = {
 
 static struct aead_testvec hmac_sha1_aes_cbc_enc_tv_template[] = {
 =======
+=======
+>>>>>>> v3.18
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
 	},
@@ -14825,6 +15149,9 @@ static struct aead_testvec hmac_md5_ecb_cipher_null_dec_tv_template[] = {
 };
 
 static struct aead_testvec hmac_sha1_aes_cbc_enc_tv_temp[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ /* RFC 3602 Case 1 */
 #ifdef __LITTLE_ENDIAN
@@ -15075,8 +15402,13 @@ static struct aead_testvec hmac_sha1_aes_cbc_enc_tv_temp[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct aead_testvec hmac_sha256_aes_cbc_enc_tv_template[] = {
 	{ /* RFC 3602 Case 1 */
+=======
+static struct aead_testvec hmac_sha1_ecb_cipher_null_enc_tv_temp[] = {
+	{ /* Input data from RFC 2410 Case 1 */
+>>>>>>> v3.18
 =======
 static struct aead_testvec hmac_sha1_ecb_cipher_null_enc_tv_temp[] = {
 	{ /* Input data from RFC 2410 Case 1 */
@@ -15088,6 +15420,7 @@ static struct aead_testvec hmac_sha1_ecb_cipher_null_enc_tv_temp[] = {
 		.key    = "\x00\x08"		/* rta length */
 			  "\x00\x01"		/* rta type */
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 			  "\x00\x00\x00\x10"	/* enc key length */
 			  "\x00\x00\x00\x00\x00\x00\x00\x00"
@@ -15110,6 +15443,8 @@ static struct aead_testvec hmac_sha1_ecb_cipher_null_enc_tv_temp[] = {
 		.rlen   = 16 + 32,
 	}, { /* RFC 3602 Case 2 */
 =======
+=======
+>>>>>>> v3.18
 			  "\x00\x00\x00\x00"	/* enc key length */
 			  "\x00\x00\x00\x00\x00\x00\x00\x00"
 			  "\x00\x00\x00\x00\x00\x00\x00\x00"
@@ -15149,6 +15484,9 @@ static struct aead_testvec hmac_sha1_ecb_cipher_null_enc_tv_temp[] = {
 
 static struct aead_testvec hmac_sha1_ecb_cipher_null_dec_tv_temp[] = {
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN
 		.key    = "\x08\x00"		/* rta length */
@@ -15158,6 +15496,7 @@ static struct aead_testvec hmac_sha1_ecb_cipher_null_dec_tv_temp[] = {
 			  "\x00\x01"		/* rta type */
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "\x00\x00\x00\x10"	/* enc key length */
 			  "\x20\x21\x22\x23\x24\x25\x26\x27"
 			  "\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f"
@@ -15165,6 +15504,8 @@ static struct aead_testvec hmac_sha1_ecb_cipher_null_dec_tv_temp[] = {
 			  "\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f"
 			  "\xc2\x86\x69\x6d\x88\x7c\x9a\xa0"
 =======
+=======
+>>>>>>> v3.18
 			  "\x00\x00\x00\x00"	/* enc key length */
 			  "\x00\x00\x00\x00\x00\x00\x00\x00"
 			  "\x00\x00\x00\x00\x00\x00\x00\x00"
@@ -15244,6 +15585,9 @@ static struct aead_testvec hmac_sha256_aes_cbc_enc_tv_temp[] = {
 			  "\x30\x31\x32\x33\x34\x35\x36\x37"
 			  "\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f"
 			  "\xc2\x86\x69\x6d\x88\x7c\x9a\xa0"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  "\x61\x1b\xbb\x3e\x20\x25\xa4\x5a",
 		.klen   = 8 + 32 + 16,
@@ -15467,7 +15811,11 @@ static struct aead_testvec hmac_sha256_aes_cbc_enc_tv_temp[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct aead_testvec hmac_sha512_aes_cbc_enc_tv_template[] = {
+=======
+static struct aead_testvec hmac_sha512_aes_cbc_enc_tv_temp[] = {
+>>>>>>> v3.18
 =======
 static struct aead_testvec hmac_sha512_aes_cbc_enc_tv_temp[] = {
 >>>>>>> v3.18
@@ -15743,10 +16091,13 @@ static struct aead_testvec hmac_sha512_aes_cbc_enc_tv_temp[] = {
 #else
 		.key    = "\x00\x08"		/* rta length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "\x00\x01"            /* rta type */
 #endif
 			  "\x00\x00\x00\x20"	/* enc key length */
 =======
+=======
+>>>>>>> v3.18
 			  "\x00\x01"            /* rta type */
 #endif
 			  "\x00\x00\x00\x20"	/* enc key length */
@@ -16380,6 +16731,9 @@ static struct aead_testvec hmac_sha512_des3_ede_cbc_enc_tv_temp[] = {
 			  "\x00\x01"		/* rta type */
 #endif
 			  "\x00\x00\x00\x18"	/* enc key length */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  "\x11\x22\x33\x44\x55\x66\x77\x88"
 			  "\x99\xaa\xbb\xcc\xdd\xee\xff\x11"
@@ -16389,6 +16743,7 @@ static struct aead_testvec hmac_sha512_des3_ede_cbc_enc_tv_temp[] = {
 			  "\xbb\xcc\xdd\xee\xff\x11\x22\x33"
 			  "\x44\x55\x66\x77\x88\x99\xaa\xbb"
 			  "\xcc\xdd\xee\xff\x11\x22\x33\x44"
+<<<<<<< HEAD
 <<<<<<< HEAD
 			  "\x60\x3d\xeb\x10\x15\xca\x71\xbe"
 			  "\x2b\x73\xae\xf0\x85\x7d\x77\x81"
@@ -16424,6 +16779,8 @@ static struct aead_testvec hmac_sha512_des3_ede_cbc_enc_tv_temp[] = {
 			  "\x2c\xb1\x62\x2c\x10\xca\xf1\x21",
 		.rlen   = 64 + 64,
 =======
+=======
+>>>>>>> v3.18
 			  "\xE9\xC0\xFF\x2E\x76\x0B\x64\x24"
 		  "\x44\x4D\x99\x5A\x12\xD6\x40\xC0"
 			  "\xEA\xC2\x84\xE8\x14\x95\xDB\xE8",
@@ -16473,6 +16830,9 @@ static struct aead_testvec hmac_sha512_des3_ede_cbc_enc_tv_temp[] = {
 			  "\xd5\x02\x6d\xe6\xaf\xc9\x2f\xf2"
 			  "\x57\xaa\x85\xf7\xf3\x6a\xcb\xdb",
 		.rlen	= 128 + 64,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -16726,8 +17086,13 @@ static struct cipher_testvec aes_lrw_enc_tv_template[] = {
 		.rlen   = 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -16985,8 +17350,13 @@ static struct cipher_testvec aes_lrw_dec_tv_template[] = {
 		.rlen   = 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -17332,8 +17702,13 @@ static struct cipher_testvec aes_xts_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -17679,8 +18054,13 @@ static struct cipher_testvec aes_xts_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -17901,8 +18281,13 @@ static struct cipher_testvec aes_ctr_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -18261,8 +18646,13 @@ static struct cipher_testvec aes_ctr_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -20616,8 +21006,11 @@ static struct aead_testvec aes_ccm_enc_tv_template[] = {
 			  "\xba",
 		.rlen	= 33,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		/*
 		 * This is the same vector as aes_ccm_rfc4309_enc_tv_template[0]
@@ -20641,6 +21034,9 @@ static struct aead_testvec aes_ccm_enc_tv_template[] = {
 			  "\xa4\xbe\xd9\xf2\x1a\x6d\x22\xa8",
 		.rlen	= 48,
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -21238,7 +21634,10 @@ static struct cprng_testvec ansi_cprng_aes_tv_template[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * SP800-90A DRBG Test vectors from
  * http://csrc.nist.gov/groups/STM/cavp/documents/drbg/drbgtestvectors.zip
@@ -22067,6 +22466,9 @@ static struct drbg_testvec drbg_nopr_ctr_aes128_tv_template[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Cast5 test vectors from RFC 2144 */
 #define CAST5_ENC_TEST_VECTORS		4
@@ -22233,8 +22635,13 @@ static struct cipher_testvec cast5_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -22399,8 +22806,13 @@ static struct cipher_testvec cast5_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -22542,8 +22954,13 @@ static struct cipher_testvec cast5_cbc_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -22685,8 +23102,13 @@ static struct cipher_testvec cast5_cbc_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -22841,8 +23263,13 @@ static struct cipher_testvec cast5_ctr_enc_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -22997,8 +23424,13 @@ static struct cipher_testvec cast5_ctr_dec_tv_template[] = {
 		.rlen	= 496,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 496 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 496 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 496 - 20, 4, 16 },
@@ -24161,8 +24593,13 @@ static struct cipher_testvec camellia_enc_tv_template[] = {
 		.rlen	= 1008,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 1008 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 1008 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 1008 - 20, 4, 16 },
@@ -24466,8 +24903,13 @@ static struct cipher_testvec camellia_dec_tv_template[] = {
 		.rlen	= 1008,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 1008 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 1008 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 1008 - 20, 4, 16 },
@@ -24767,8 +25209,13 @@ static struct cipher_testvec camellia_cbc_enc_tv_template[] = {
 		.rlen	= 1008,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 1008 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 1008 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 1008 - 20, 4, 16 },
@@ -25068,8 +25515,13 @@ static struct cipher_testvec camellia_cbc_dec_tv_template[] = {
 		.rlen	= 1008,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 1008 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 1008 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 1008 - 20, 4, 16 },
@@ -26659,8 +27111,13 @@ static struct cipher_testvec camellia_lrw_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -26917,8 +27374,13 @@ static struct cipher_testvec camellia_lrw_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -27264,8 +27726,13 @@ static struct cipher_testvec camellia_xts_enc_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -27612,8 +28079,13 @@ static struct cipher_testvec camellia_xts_dec_tv_template[] = {
 		.rlen	= 512,
 		.also_non_np = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.np	= 2,
 		.tap	= { 512 - 16, 16 },
+=======
+		.np	= 3,
+		.tap	= { 512 - 20, 4, 16 },
+>>>>>>> v3.18
 =======
 		.np	= 3,
 		.tap	= { 512 - 20, 4, 16 },
@@ -29985,7 +30457,10 @@ static struct hash_testvec bfin_crc_tv_template[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define LZ4_COMP_TEST_VECTORS 1
 #define LZ4_DECOMP_TEST_VECTORS 1
 
@@ -30052,5 +30527,8 @@ static struct comp_testvec lz4hc_decomp_tv_template[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* _CRYPTO_TESTMGR_H */

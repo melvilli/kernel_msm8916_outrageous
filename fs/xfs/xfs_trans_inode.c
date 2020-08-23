@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -31,6 +32,8 @@
 #include "xfs_inode.h"
 #include "xfs_btree.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -40,6 +43,9 @@
 #include "xfs_mount.h"
 #include "xfs_inode.h"
 #include "xfs_trans.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_trans_priv.h"
 #include "xfs_inode_item.h"
@@ -86,7 +92,11 @@ xfs_trans_ichgtime(
 {
 	struct inode		*inode = VFS_I(ip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timespec_t		tv;
+=======
+	struct timespec		tv;
+>>>>>>> v3.18
 =======
 	struct timespec		tv;
 >>>>>>> v3.18
@@ -129,7 +139,10 @@ xfs_trans_log_inode(
 	ASSERT(xfs_isilocked(ip, XFS_ILOCK_EXCL));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * First time we log the inode in a transaction, bump the inode change
 	 * counter if it is configured for this to occur. We don't use
@@ -143,6 +156,9 @@ xfs_trans_log_inode(
 		flags |= XFS_ILOG_CORE;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tp->t_flags |= XFS_TRANS_DIRTY;
 	ip->i_itemp->ili_item.li_desc->lid_flags |= XFS_LID_DIRTY;

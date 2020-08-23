@@ -3,8 +3,11 @@
 MSI-HOWTO.txt
 	- the Message Signaled Interrupts (MSI) Driver Guide HOWTO and FAQ.
 <<<<<<< HEAD
+<<<<<<< HEAD
 PCI-DMA-mapping.txt
 	- info for PCI drivers using DMA portably across all platforms
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 PCIEBUS-HOWTO.txt
@@ -12,6 +15,11 @@ PCIEBUS-HOWTO.txt
 pci-error-recovery.txt
 	- info on PCI error recovery
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+pci-iov-howto.txt
+	- the PCI Express I/O Virtualization HOWTO
+>>>>>>> v3.18
 =======
 pci-iov-howto.txt
 	- the PCI Express I/O Virtualization HOWTO

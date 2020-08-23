@@ -58,6 +58,11 @@ OPTIONS
 --tid=::
         Record events on existing thread ID (comma separated list).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        This option also disables inheritance by default.  Enable it by adding
+        --inherit.
+>>>>>>> v3.18
 =======
         This option also disables inheritance by default.  Enable it by adding
         --inherit.
@@ -71,6 +76,7 @@ OPTIONS
 --realtime=::
 	Collect data with this RT SCHED_FIFO priority.
 <<<<<<< HEAD
+<<<<<<< HEAD
 -D::
 --no-delay::
 	Collect data without buffering.
@@ -81,6 +87,11 @@ OPTIONS
 -f::
 --force::
 	Overwrite existing data file. (deprecated)
+=======
+
+--no-buffering::
+	Collect data without buffering.
+>>>>>>> v3.18
 =======
 
 --no-buffering::
@@ -105,12 +116,15 @@ OPTIONS
 -m::
 --mmap-pages=::
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Number of mmap data pages. Must be a power of two.
 
 -g::
 --call-graph::
 	Do call-graph (stack chain/backtrace) recording.
 =======
+=======
+>>>>>>> v3.18
 	Number of mmap data pages (must be a power of two) or size
 	specification with appended unit character - B/K/M/G. The
 	size is rounded up to have nearest pages power of two value.
@@ -130,6 +144,9 @@ OPTIONS
 	--fomit-frame-pointer, using the "fp" method will produce bogus
 	call graphs, using "dwarf", if available (perf tools linked to
 	the libunwind library) should be used instead.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 -q::
@@ -171,7 +188,11 @@ the thread executes on the designated CPUs. Default is to monitor all CPUs.
 -N::
 --no-buildid-cache::
 <<<<<<< HEAD
+<<<<<<< HEAD
 Do not update the builid cache. This saves some overhead in situations
+=======
+Do not update the buildid cache. This saves some overhead in situations
+>>>>>>> v3.18
 =======
 Do not update the buildid cache. This saves some overhead in situations
 >>>>>>> v3.18
@@ -210,10 +231,13 @@ following filters are defined:
         - k: only when the branch target is in the kernel
         - hv: only when the target is at the hypervisor level
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 +
 The option requires at least one branch type among any, any_call, any_ret, ind_call.
 =======
+=======
+>>>>>>> v3.18
 	- in_tx: only when the target is in a hardware transaction
 	- no_tx: only when the target is not in a hardware transaction
 	- abort_tx: only when the target is a hardware transaction abort
@@ -221,6 +245,9 @@ The option requires at least one branch type among any, any_call, any_ret, ind_c
 
 +
 The option requires at least one branch type among any, any_call, any_ret, ind_call, cond.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 The privilege levels may be omitted, in which case, the privilege levels of the associated
 event are applied to the branch filter. Both kernel (k) and hypervisor (hv) privilege
@@ -230,7 +257,10 @@ The various filters must be specified as a comma separated list: --branch-filter
 Note that this feature may not be available on all processors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -W::
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 --weight::
@@ -239,7 +269,10 @@ displayed with the weight and local_weight sort keys.  This currently works for 
 abort events and some memory events in precise mode on modern Intel CPUs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 --transaction::
 Record transaction flags for transaction related events.
 
@@ -254,6 +287,9 @@ if combined with -a or -C options.
 After starting the program, wait msecs before measuring. This is useful to
 filter out the startup phase of the program, which is often very different.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SEE ALSO
 --------

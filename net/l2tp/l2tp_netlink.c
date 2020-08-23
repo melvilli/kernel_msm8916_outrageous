@@ -162,7 +162,10 @@ static int l2tp_nl_cmd_tunnel_create(struct sk_buff *skb, struct genl_info *info
 		if (info->attrs[L2TP_ATTR_UDP_CSUM])
 			cfg.use_udp_checksums = nla_get_flag(info->attrs[L2TP_ATTR_UDP_CSUM]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if IS_ENABLED(CONFIG_IPV6)
 		if (info->attrs[L2TP_ATTR_UDP_ZERO_CSUM6_TX])
@@ -170,6 +173,9 @@ static int l2tp_nl_cmd_tunnel_create(struct sk_buff *skb, struct genl_info *info
 		if (info->attrs[L2TP_ATTR_UDP_ZERO_CSUM6_RX])
 			cfg.udp6_zero_rx_checksums = nla_get_flag(info->attrs[L2TP_ATTR_UDP_ZERO_CSUM6_RX]);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -308,8 +314,12 @@ static int l2tp_nl_tunnel_send(struct sk_buff *skb, u32 portid, u32 seq, int fla
 		if (nla_put_u16(skb, L2TP_ATTR_UDP_SPORT, ntohs(inet->inet_sport)) ||
 		    nla_put_u16(skb, L2TP_ATTR_UDP_DPORT, ntohs(inet->inet_dport)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    nla_put_u8(skb, L2TP_ATTR_UDP_CSUM,
 			       (sk->sk_no_check != UDP_CSUM_NOXMIT)))
+=======
+		    nla_put_u8(skb, L2TP_ATTR_UDP_CSUM, !sk->sk_no_check_tx))
+>>>>>>> v3.18
 =======
 		    nla_put_u8(skb, L2TP_ATTR_UDP_CSUM, !sk->sk_no_check_tx))
 >>>>>>> v3.18
@@ -321,8 +331,13 @@ static int l2tp_nl_tunnel_send(struct sk_buff *skb, u32 portid, u32 seq, int fla
 			if (nla_put(skb, L2TP_ATTR_IP6_SADDR, sizeof(np->saddr),
 				    &np->saddr) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    nla_put(skb, L2TP_ATTR_IP6_DADDR, sizeof(np->daddr),
 				    &np->daddr))
+=======
+			    nla_put(skb, L2TP_ATTR_IP6_DADDR, sizeof(sk->sk_v6_daddr),
+				    &sk->sk_v6_daddr))
+>>>>>>> v3.18
 =======
 			    nla_put(skb, L2TP_ATTR_IP6_DADDR, sizeof(sk->sk_v6_daddr),
 				    &sk->sk_v6_daddr))
@@ -598,13 +613,19 @@ static int l2tp_nl_cmd_session_modify(struct sk_buff *skb, struct genl_info *inf
 		session->recv_seq = nla_get_u8(info->attrs[L2TP_ATTR_RECV_SEQ]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (info->attrs[L2TP_ATTR_SEND_SEQ])
 		session->send_seq = nla_get_u8(info->attrs[L2TP_ATTR_SEND_SEQ]);
 =======
+=======
+>>>>>>> v3.18
 	if (info->attrs[L2TP_ATTR_SEND_SEQ]) {
 		session->send_seq = nla_get_u8(info->attrs[L2TP_ATTR_SEND_SEQ]);
 		l2tp_session_set_header_len(session, session->tunnel->version);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (info->attrs[L2TP_ATTR_LNS_MODE])
@@ -746,7 +767,11 @@ static int l2tp_nl_cmd_session_dump(struct sk_buff *skb, struct netlink_callback
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		session = l2tp_session_get_nth(tunnel, si, false);
+=======
+		session = l2tp_session_find_nth(tunnel, si);
+>>>>>>> v3.18
 =======
 		session = l2tp_session_find_nth(tunnel, si);
 >>>>>>> v3.18
@@ -760,11 +785,16 @@ static int l2tp_nl_cmd_session_dump(struct sk_buff *skb, struct netlink_callback
 		if (l2tp_nl_session_send(skb, NETLINK_CB(cb->skb).portid,
 					 cb->nlh->nlmsg_seq, NLM_F_MULTI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 session) <= 0) {
 			l2tp_session_dec_refcount(session);
 			break;
 		}
 		l2tp_session_dec_refcount(session);
+=======
+					 session) <= 0)
+			break;
+>>>>>>> v3.18
 =======
 					 session) <= 0)
 			break;
@@ -832,7 +862,11 @@ static struct nla_policy l2tp_nl_policy[L2TP_ATTR_MAX + 1] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops l2tp_nl_ops[] = {
+=======
+static const struct genl_ops l2tp_nl_ops[] = {
+>>>>>>> v3.18
 =======
 static const struct genl_ops l2tp_nl_ops[] = {
 >>>>>>> v3.18
@@ -930,6 +964,7 @@ EXPORT_SYMBOL_GPL(l2tp_nl_unregister_ops);
 static int l2tp_nl_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	pr_info("L2TP netlink interface\n");
@@ -937,6 +972,10 @@ static int l2tp_nl_init(void)
 					    ARRAY_SIZE(l2tp_nl_ops));
 
 	return err;
+=======
+	pr_info("L2TP netlink interface\n");
+	return genl_register_family_with_ops(&l2tp_nl_family, l2tp_nl_ops);
+>>>>>>> v3.18
 =======
 	pr_info("L2TP netlink interface\n");
 	return genl_register_family_with_ops(&l2tp_nl_family, l2tp_nl_ops);

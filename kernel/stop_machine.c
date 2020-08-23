@@ -21,6 +21,10 @@
 #include <linux/smpboot.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/lglock.h>
+>>>>>>> v3.18
 =======
 #include <linux/lglock.h>
 >>>>>>> v3.18
@@ -48,7 +52,10 @@ static DEFINE_PER_CPU(struct task_struct *, cpu_stopper_task);
 static bool stop_machine_initialized = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Avoids a race between stop_two_cpus and global stop_cpus, where
  * the stoppers could get queued up in reverse order, leading to
@@ -57,6 +64,9 @@ static bool stop_machine_initialized = false;
  */
 DEFINE_STATIC_LGLOCK(stop_cpus_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void cpu_stop_init_done(struct cpu_stop_done *done, unsigned int nr_todo)
 {
@@ -131,7 +141,10 @@ int stop_one_cpu(unsigned int cpu, cpu_stop_fn_t fn, void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This controls the threads on each CPU. */
 enum multi_stop_state {
 	/* Dummy starting state for thread. */
@@ -310,6 +323,9 @@ int stop_two_cpus(unsigned int cpu1, unsigned int cpu2, cpu_stop_fn_t fn, void *
 	return done.executed ? done.ret : -ENOENT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * stop_one_cpu_nowait - stop a cpu but don't wait for completion
@@ -317,6 +333,10 @@ int stop_two_cpus(unsigned int cpu1, unsigned int cpu2, cpu_stop_fn_t fn, void *
  * @fn: function to execute
  * @arg: argument to @fn
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @work_buf: pointer to cpu_stop_work structure
+>>>>>>> v3.18
 =======
  * @work_buf: pointer to cpu_stop_work structure
 >>>>>>> v3.18
@@ -360,15 +380,21 @@ static void queue_stop_cpus_work(const struct cpumask *cpumask,
 	 * to enter @fn which can lead to deadlock.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
 	for_each_cpu(cpu, cpumask)
 		cpu_stop_queue_work(cpu, &per_cpu(stop_cpus_work, cpu));
 	preempt_enable();
 =======
+=======
+>>>>>>> v3.18
 	lg_global_lock(&stop_cpus_lock);
 	for_each_cpu(cpu, cpumask)
 		cpu_stop_queue_work(cpu, &per_cpu(stop_cpus_work, cpu));
 	lg_global_unlock(&stop_cpus_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -567,6 +593,7 @@ early_initcall(cpu_stop_init);
 #ifdef CONFIG_STOP_MACHINE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This controls the threads on each CPU. */
 enum stopmachine_state {
 	/* Dummy starting state for thread. */
@@ -660,6 +687,8 @@ int __stop_machine(int (*fn)(void *), void *data, const struct cpumask *cpus)
 					    .num_threads = num_online_cpus(),
 					    .active_cpus = cpus };
 =======
+=======
+>>>>>>> v3.18
 int __stop_machine(int (*fn)(void *), void *data, const struct cpumask *cpus)
 {
 	struct multi_stop_data msdata = {
@@ -668,6 +697,9 @@ int __stop_machine(int (*fn)(void *), void *data, const struct cpumask *cpus)
 		.num_threads = num_online_cpus(),
 		.active_cpus = cpus,
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!stop_machine_initialized) {
@@ -680,7 +712,11 @@ int __stop_machine(int (*fn)(void *), void *data, const struct cpumask *cpus)
 		int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ON_ONCE(smdata.num_threads != 1);
+=======
+		WARN_ON_ONCE(msdata.num_threads != 1);
+>>>>>>> v3.18
 =======
 		WARN_ON_ONCE(msdata.num_threads != 1);
 >>>>>>> v3.18
@@ -695,8 +731,13 @@ int __stop_machine(int (*fn)(void *), void *data, const struct cpumask *cpus)
 
 	/* Set the initial state and stop all online cpus. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_state(&smdata, STOPMACHINE_PREPARE);
 	return stop_cpus(cpu_online_mask, stop_machine_cpu_stop, &smdata);
+=======
+	set_state(&msdata, MULTI_STOP_PREPARE);
+	return stop_cpus(cpu_online_mask, multi_cpu_stop, &msdata);
+>>>>>>> v3.18
 =======
 	set_state(&msdata, MULTI_STOP_PREPARE);
 	return stop_cpus(cpu_online_mask, multi_cpu_stop, &msdata);
@@ -741,7 +782,11 @@ int stop_machine_from_inactive_cpu(int (*fn)(void *), void *data,
 				  const struct cpumask *cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct stop_machine_data smdata = { .fn = fn, .data = data,
+=======
+	struct multi_stop_data msdata = { .fn = fn, .data = data,
+>>>>>>> v3.18
 =======
 	struct multi_stop_data msdata = { .fn = fn, .data = data,
 >>>>>>> v3.18
@@ -752,7 +797,11 @@ int stop_machine_from_inactive_cpu(int (*fn)(void *), void *data,
 	/* Local CPU must be inactive and CPU hotplug in progress. */
 	BUG_ON(cpu_active(raw_smp_processor_id()));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smdata.num_threads = num_active_cpus() + 1;	/* +1 for local */
+=======
+	msdata.num_threads = num_active_cpus() + 1;	/* +1 for local */
+>>>>>>> v3.18
 =======
 	msdata.num_threads = num_active_cpus() + 1;	/* +1 for local */
 >>>>>>> v3.18
@@ -763,17 +812,23 @@ int stop_machine_from_inactive_cpu(int (*fn)(void *), void *data,
 
 	/* Schedule work on other CPUs and execute directly for local CPU */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_state(&smdata, STOPMACHINE_PREPARE);
 	cpu_stop_init_done(&done, num_active_cpus());
 	queue_stop_cpus_work(cpu_active_mask, stop_machine_cpu_stop, &smdata,
 			     &done);
 	ret = stop_machine_cpu_stop(&smdata);
 =======
+=======
+>>>>>>> v3.18
 	set_state(&msdata, MULTI_STOP_PREPARE);
 	cpu_stop_init_done(&done, num_active_cpus());
 	queue_stop_cpus_work(cpu_active_mask, multi_cpu_stop, &msdata,
 			     &done);
 	ret = multi_cpu_stop(&msdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Busy wait for completion. */

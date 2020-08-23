@@ -56,7 +56,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	int error, neg = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover %llu", (unsigned long long)rv->seq);
+=======
+	log_rinfo(ls, "dlm_recover %llu", (unsigned long long)rv->seq);
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover %llu", (unsigned long long)rv->seq);
 >>>>>>> v3.18
@@ -81,7 +85,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_recover_members(ls, rv, &neg);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_members error %d", error);
+=======
+		log_rinfo(ls, "dlm_recover_members error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_members error %d", error);
 >>>>>>> v3.18
@@ -99,7 +107,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_recover_members_wait(ls);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_members_wait error %d", error);
+=======
+		log_rinfo(ls, "dlm_recover_members_wait error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_members_wait error %d", error);
 >>>>>>> v3.18
@@ -116,7 +128,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_recover_directory(ls);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_directory error %d", error);
+=======
+		log_rinfo(ls, "dlm_recover_directory error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_directory error %d", error);
 >>>>>>> v3.18
@@ -128,17 +144,23 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_recover_directory_wait(ls);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_directory_wait error %d", error);
 		goto fail;
 	}
 
 	log_debug(ls, "dlm_recover_directory %u out %u messages",
 =======
+=======
+>>>>>>> v3.18
 		log_rinfo(ls, "dlm_recover_directory_wait error %d", error);
 		goto fail;
 	}
 
 	log_rinfo(ls, "dlm_recover_directory %u out %u messages",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  ls->ls_recover_dir_sent_res, ls->ls_recover_dir_sent_msg);
 
@@ -169,7 +191,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 		error = dlm_recover_masters(ls);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_debug(ls, "dlm_recover_masters error %d", error);
+=======
+			log_rinfo(ls, "dlm_recover_masters error %d", error);
+>>>>>>> v3.18
 =======
 			log_rinfo(ls, "dlm_recover_masters error %d", error);
 >>>>>>> v3.18
@@ -183,7 +209,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 		error = dlm_recover_locks(ls);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_debug(ls, "dlm_recover_locks error %d", error);
+=======
+			log_rinfo(ls, "dlm_recover_locks error %d", error);
+>>>>>>> v3.18
 =======
 			log_rinfo(ls, "dlm_recover_locks error %d", error);
 >>>>>>> v3.18
@@ -195,17 +225,23 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 		error = dlm_recover_locks_wait(ls);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_debug(ls, "dlm_recover_locks_wait error %d", error);
 			goto fail;
 		}
 
 		log_debug(ls, "dlm_recover_locks %u in",
 =======
+=======
+>>>>>>> v3.18
 			log_rinfo(ls, "dlm_recover_locks_wait error %d", error);
 			goto fail;
 		}
 
 		log_rinfo(ls, "dlm_recover_locks %u in",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  ls->ls_recover_locks_in);
 
@@ -227,7 +263,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 		error = dlm_recover_locks_wait(ls);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_debug(ls, "dlm_recover_locks_wait error %d", error);
+=======
+			log_rinfo(ls, "dlm_recover_locks_wait error %d", error);
+>>>>>>> v3.18
 =======
 			log_rinfo(ls, "dlm_recover_locks_wait error %d", error);
 >>>>>>> v3.18
@@ -250,7 +290,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_recover_done_wait(ls);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_done_wait error %d", error);
+=======
+		log_rinfo(ls, "dlm_recover_done_wait error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_done_wait error %d", error);
 >>>>>>> v3.18
@@ -266,7 +310,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = enable_locking(ls, rv->seq);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "enable_locking error %d", error);
+=======
+		log_rinfo(ls, "enable_locking error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "enable_locking error %d", error);
 >>>>>>> v3.18
@@ -276,7 +324,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_process_requestqueue(ls);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_process_requestqueue error %d", error);
+=======
+		log_rinfo(ls, "dlm_process_requestqueue error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_process_requestqueue error %d", error);
 >>>>>>> v3.18
@@ -286,7 +338,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	error = dlm_recover_waiters_post(ls);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "dlm_recover_waiters_post error %d", error);
+=======
+		log_rinfo(ls, "dlm_recover_waiters_post error %d", error);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "dlm_recover_waiters_post error %d", error);
 >>>>>>> v3.18
@@ -296,7 +352,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
 	dlm_recover_grant(ls);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover %llu generation %u done: %u ms",
+=======
+	log_rinfo(ls, "dlm_recover %llu generation %u done: %u ms",
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover %llu generation %u done: %u ms",
 >>>>>>> v3.18
@@ -310,7 +370,11 @@ static int ls_recover(struct dlm_ls *ls, struct dlm_recover *rv)
  fail:
 	dlm_release_root_list(ls);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover %llu error %d",
+=======
+	log_rinfo(ls, "dlm_recover %llu error %d",
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover %llu error %d",
 >>>>>>> v3.18

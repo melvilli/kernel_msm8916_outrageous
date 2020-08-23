@@ -23,7 +23,11 @@
 
 #include <media/soc_camera.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 >>>>>>> v3.18
@@ -308,8 +312,13 @@ struct ov2640_priv {
 	struct v4l2_ctrl_handler	hdl;
 	enum v4l2_mbus_pixelcode	cfmt_code;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct ov2640_win_size	*win;
 	int				model;
+=======
+	struct v4l2_clk			*clk;
+	const struct ov2640_win_size	*win;
+>>>>>>> v3.18
 =======
 	struct v4l2_clk			*clk;
 	const struct ov2640_win_size	*win;
@@ -733,6 +742,7 @@ static int ov2640_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ov2640_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
 {
@@ -745,6 +755,8 @@ static int ov2640_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -785,8 +797,14 @@ static int ov2640_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct ov2640_priv *priv = to_ov2640(client);
+
+	return soc_camera_set_power(&client->dev, ssdd, priv->clk, on);
+>>>>>>> v3.18
 =======
 	struct ov2640_priv *priv = to_ov2640(client);
 
@@ -1028,7 +1046,10 @@ static int ov2640_video_probe(struct i2c_client *client)
 	case PID_OV2640:
 		devname     = "ov2640";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->model = V4L2_IDENT_OV2640;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1056,7 +1077,10 @@ static const struct v4l2_ctrl_ops ov2640_ctrl_ops = {
 
 static struct v4l2_subdev_core_ops ov2640_subdev_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident	= ov2640_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1138,12 +1162,15 @@ static int ov2640_probe(struct i2c_client *client,
 		return priv->hdl.error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ov2640_video_probe(client);
 	if (ret)
 		v4l2_ctrl_handler_free(&priv->hdl);
 	else
 		dev_info(&adapter->dev, "OV2640 Probed\n");
 =======
+=======
+>>>>>>> v3.18
 	priv->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(priv->clk)) {
 		ret = PTR_ERR(priv->clk);
@@ -1158,6 +1185,9 @@ eclkget:
 	} else {
 		dev_info(&adapter->dev, "OV2640 Probed\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1168,6 +1198,10 @@ static int ov2640_remove(struct i2c_client *client)
 	struct ov2640_priv       *priv = to_ov2640(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 =======
 	v4l2_clk_put(priv->clk);
 >>>>>>> v3.18

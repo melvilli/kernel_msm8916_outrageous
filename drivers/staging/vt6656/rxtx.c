@@ -26,6 +26,7 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      s_vGenerateTxParameter - Generate tx dma required parameter.
  *      s_vGenerateMACHeader - Translate 802.3 to 802.11 header
  *      csBeacon_xmit - beacon tx function
@@ -43,12 +44,17 @@
  *      vDMA0_tx_80211- tx 802.11 frame via dma0
  *      vGenerateFIFOHeader- Generate tx FIFO ctl header
 =======
+=======
+>>>>>>> v3.18
  *      vnt_generate_tx_parameter - Generate tx dma required parameter.
  *      vnt_get_duration_le - get tx data required duration
  *      vnt_get_rtscts_duration_le- get rtx/cts required duration
  *      vnt_get_rtscts_rsvtime_le- get rts/cts reserved time
  *      vnt_get_rsvtime- get frame reserved time
  *      vnt_fill_cts_head- fulfill CTS ctl header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Revision History:
@@ -57,6 +63,7 @@
 
 #include "device.h"
 #include "rxtx.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "tether.h"
 #include "card.h"
@@ -89,6 +96,8 @@ const u16 wFB_Opt1[2][5] = {
         {RATE_6M , RATE_6M,  RATE_12M, RATE_12M, RATE_18M}, // fallback_rate1
     };
 =======
+=======
+>>>>>>> v3.18
 #include "card.h"
 #include "mac.h"
 #include "rf.h"
@@ -108,6 +117,9 @@ static const u16 vnt_fb_opt1[2][5] = {
 	{RATE_12M, RATE_18M, RATE_24M, RATE_24M, RATE_36M}, /* fallback_rate0 */
 	{RATE_6M , RATE_6M,  RATE_12M, RATE_12M, RATE_18M}, /* fallback_rate1 */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define RTSDUR_BB       0
@@ -125,6 +137,7 @@ static const u16 vnt_fb_opt1[2][5] = {
 #define DATADUR_A_F0    12
 #define DATADUR_A_F1    13
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void s_vSaveTxPktInfo(struct vnt_private *pDevice, u8 byPktNum,
 	u8 *pbyDestAddr, u16 wPktLength, u16 wFIFOCtl);
@@ -2959,6 +2972,8 @@ int bRelayPacketSend(struct vnt_private *pDevice, u8 *pbySkbData, u32 uDataLen,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static struct vnt_usb_send_context
 	*vnt_get_free_context(struct vnt_private *priv)
 {
@@ -3983,4 +3998,7 @@ int vnt_beacon_enable(struct vnt_private *priv, struct ieee80211_vif *vif,
 
 	return vnt_beacon_make(priv, vif);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

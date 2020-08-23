@@ -26,8 +26,11 @@
 #define USB_DEVICE_ID_DIOLAN_U2C	0x3370
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DIOLAN_OUT_EP		0x02
 #define DIOLAN_IN_EP		0x84
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -88,6 +91,10 @@ struct i2c_diolan_u2c {
 	u8 obuffer[DIOLAN_OUTBUF_LEN];	/* output buffer */
 	u8 ibuffer[DIOLAN_INBUF_LEN];	/* input buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ep_in, ep_out;              /* Endpoints    */
+>>>>>>> v3.18
 =======
 	int ep_in, ep_out;              /* Endpoints    */
 >>>>>>> v3.18
@@ -117,7 +124,11 @@ static int diolan_usb_transfer(struct i2c_diolan_u2c *dev)
 
 	ret = usb_bulk_msg(dev->usb_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   usb_sndbulkpipe(dev->usb_dev, DIOLAN_OUT_EP),
+=======
+			   usb_sndbulkpipe(dev->usb_dev, dev->ep_out),
+>>>>>>> v3.18
 =======
 			   usb_sndbulkpipe(dev->usb_dev, dev->ep_out),
 >>>>>>> v3.18
@@ -130,7 +141,11 @@ static int diolan_usb_transfer(struct i2c_diolan_u2c *dev)
 			tmpret = usb_bulk_msg(dev->usb_dev,
 					      usb_rcvbulkpipe(dev->usb_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							      DIOLAN_IN_EP),
+=======
+							      dev->ep_in),
+>>>>>>> v3.18
 =======
 							      dev->ep_in),
 >>>>>>> v3.18
@@ -226,7 +241,11 @@ static void diolan_flush_input(struct i2c_diolan_u2c *dev)
 
 		ret = usb_bulk_msg(dev->usb_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   usb_rcvbulkpipe(dev->usb_dev, DIOLAN_IN_EP),
+=======
+				   usb_rcvbulkpipe(dev->usb_dev, dev->ep_in),
+>>>>>>> v3.18
 =======
 				   usb_rcvbulkpipe(dev->usb_dev, dev->ep_in),
 >>>>>>> v3.18
@@ -465,6 +484,7 @@ static int diolan_u2c_probe(struct usb_interface *interface,
 			    const struct usb_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_diolan_u2c *dev;
 	int ret;
 
@@ -476,6 +496,8 @@ static int diolan_u2c_probe(struct usb_interface *interface,
 		goto error;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct usb_host_interface *hostif = interface->cur_altsetting;
 	struct i2c_diolan_u2c *dev;
 	int ret;
@@ -492,6 +514,9 @@ static int diolan_u2c_probe(struct usb_interface *interface,
 	}
 	dev->ep_out = hostif->endpoint[0].desc.bEndpointAddress;
 	dev->ep_in = hostif->endpoint[1].desc.bEndpointAddress;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->usb_dev = usb_get_dev(interface_to_usbdev(interface));

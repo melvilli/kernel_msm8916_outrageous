@@ -258,9 +258,15 @@ static int match_group_mux(const struct ltq_pin_group *grp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ltq_pmx_enable(struct pinctrl_dev *pctrldev,
 				unsigned func,
 				unsigned group)
+=======
+static int ltq_pmx_set(struct pinctrl_dev *pctrldev,
+		       unsigned func,
+		       unsigned group)
+>>>>>>> v3.18
 =======
 static int ltq_pmx_set(struct pinctrl_dev *pctrldev,
 		       unsigned func,
@@ -323,7 +329,11 @@ static const struct pinmux_ops ltq_pmx_ops = {
 	.get_function_name	= ltq_pmx_func_name,
 	.get_function_groups	= ltq_pmx_get_groups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable			= ltq_pmx_enable,
+=======
+	.set_mux		= ltq_pmx_set,
+>>>>>>> v3.18
 =======
 	.set_mux		= ltq_pmx_set,
 >>>>>>> v3.18

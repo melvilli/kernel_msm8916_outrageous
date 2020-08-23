@@ -26,7 +26,10 @@
 #include <linux/module.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -128,13 +131,19 @@ static inline void greth_enable_tx(struct greth_private *greth)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void greth_enable_tx_and_irq(struct greth_private *greth)
 {
 	wmb(); /* BDs must been written to memory before enabling TX */
 	GRETH_REGORIN(greth->regs->control, GRETH_TXEN | GRETH_TXI);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void greth_disable_tx(struct greth_private *greth)
 {
@@ -461,7 +470,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u16 greth_num_free_bds(u16 tx_last, u16 tx_next)
 {
 	if (tx_next < tx_last)
@@ -469,6 +481,9 @@ static inline u16 greth_num_free_bds(u16 tx_last, u16 tx_next)
 	else
 		return GRETH_TXBD_NUM - (tx_next - tx_last) - 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static netdev_tx_t
@@ -476,6 +491,7 @@ greth_start_xmit_gbit(struct sk_buff *skb, struct net_device *dev)
 {
 	struct greth_private *greth = netdev_priv(dev);
 	struct greth_bd *bdp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 status = 0, dma_addr, ctrl;
 	int curr_tx, nr_frags, i, err = NETDEV_TX_OK;
@@ -495,6 +511,8 @@ greth_start_xmit_gbit(struct sk_buff *skb, struct net_device *dev)
 		netif_stop_queue(dev);
 		spin_unlock_irqrestore(&greth->devlock, flags);
 =======
+=======
+>>>>>>> v3.18
 	u32 status, dma_addr;
 	int curr_tx, nr_frags, i, err = NETDEV_TX_OK;
 	unsigned long flags;
@@ -506,6 +524,9 @@ greth_start_xmit_gbit(struct sk_buff *skb, struct net_device *dev)
 
 	if (greth_num_free_bds(tx_last, greth->tx_next) < nr_frags + 1) {
 		netif_stop_queue(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = NETDEV_TX_BUSY;
 		goto out;
@@ -526,6 +547,11 @@ greth_start_xmit_gbit(struct sk_buff *skb, struct net_device *dev)
 	if (nr_frags != 0)
 		status = GRETH_TXBD_MORE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else
+		status = GRETH_BD_IE;
+>>>>>>> v3.18
 =======
 	else
 		status = GRETH_BD_IE;
@@ -588,6 +614,7 @@ greth_start_xmit_gbit(struct sk_buff *skb, struct net_device *dev)
 	/* Enable the descriptor chain by enabling the first descriptor */
 	bdp = greth->tx_bd_base + greth->tx_next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	greth_write_bd(&bdp->stat, greth_read_bd(&bdp->stat) | GRETH_BD_EN);
 	greth->tx_next = curr_tx;
 	greth->tx_free -= nr_frags + 1;
@@ -597,12 +624,17 @@ greth_start_xmit_gbit(struct sk_buff *skb, struct net_device *dev)
 	spin_lock_irqsave(&greth->devlock, flags); /*save from poll/irq*/
 	greth_enable_tx(greth);
 =======
+=======
+>>>>>>> v3.18
 	greth_write_bd(&bdp->stat,
 		       greth_read_bd(&bdp->stat) | GRETH_BD_EN);
 
 	spin_lock_irqsave(&greth->devlock, flags); /*save from poll/irq*/
 	greth->tx_next = curr_tx;
 	greth_enable_tx_and_irq(greth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&greth->devlock, flags);
 
@@ -700,7 +732,10 @@ static void greth_clean_tx(struct net_device *dev)
 		netif_wake_queue(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -725,6 +760,7 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 	struct greth_private *greth;
 	struct greth_bd *bdp, *bdp_last_frag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *skb;
 	u32 stat;
 	int nr_frags, i;
@@ -735,6 +771,8 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 
 		skb = greth->tx_skbuff[greth->tx_last];
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *skb = NULL;
 	u32 stat;
 	int nr_frags, i;
@@ -746,13 +784,20 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 	while (tx_last != greth->tx_next) {
 
 		skb = greth->tx_skbuff[tx_last];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		nr_frags = skb_shinfo(skb)->nr_frags;
 
 		/* We only clean fully completed SKBs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bdp_last_frag = greth->tx_bd_base + SKIP_TX(greth->tx_last, nr_frags);
+=======
+		bdp_last_frag = greth->tx_bd_base + SKIP_TX(tx_last, nr_frags);
+>>>>>>> v3.18
 =======
 		bdp_last_frag = greth->tx_bd_base + SKIP_TX(tx_last, nr_frags);
 >>>>>>> v3.18
@@ -765,7 +810,11 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		greth->tx_skbuff[greth->tx_last] = NULL;
+=======
+		greth->tx_skbuff[tx_last] = NULL;
+>>>>>>> v3.18
 =======
 		greth->tx_skbuff[tx_last] = NULL;
 >>>>>>> v3.18
@@ -774,9 +823,15 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 		dev->stats.tx_bytes += skb->len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bdp = greth->tx_bd_base + greth->tx_last;
 
 		greth->tx_last = NEXT_TX(greth->tx_last);
+=======
+		bdp = greth->tx_bd_base + tx_last;
+
+		tx_last = NEXT_TX(tx_last);
+>>>>>>> v3.18
 =======
 		bdp = greth->tx_bd_base + tx_last;
 
@@ -791,7 +846,11 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 		for (i = 0; i < nr_frags; i++) {
 			skb_frag_t *frag = &skb_shinfo(skb)->frags[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bdp = greth->tx_bd_base + greth->tx_last;
+=======
+			bdp = greth->tx_bd_base + tx_last;
+>>>>>>> v3.18
 =======
 			bdp = greth->tx_bd_base + tx_last;
 >>>>>>> v3.18
@@ -802,6 +861,7 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 				       DMA_TO_DEVICE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			greth->tx_last = NEXT_TX(greth->tx_last);
 		}
 		greth->tx_free += nr_frags+1;
@@ -811,6 +871,8 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 	if (netif_queue_stopped(dev) && (greth->tx_free > (MAX_SKB_FRAGS+1)))
 		netif_wake_queue(dev);
 =======
+=======
+>>>>>>> v3.18
 			tx_last = NEXT_TX(tx_last);
 		}
 		dev_kfree_skb(skb);
@@ -824,6 +886,9 @@ static void greth_clean_tx_gbit(struct net_device *dev)
 		    (MAX_SKB_FRAGS+1)))
 			netif_wake_queue(dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1068,6 +1133,7 @@ static int greth_poll(struct napi_struct *napi, int budget)
 
 restart_txrx_poll:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netif_queue_stopped(greth->netdev)) {
 		if (greth->gbit_mac)
 			greth_clean_tx_gbit(greth->netdev);
@@ -1079,12 +1145,17 @@ restart_txrx_poll:
 		work_done += greth_rx_gbit(greth->netdev, budget - work_done);
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	if (greth->gbit_mac) {
 		greth_clean_tx_gbit(greth->netdev);
 		work_done += greth_rx_gbit(greth->netdev, budget - work_done);
 	} else {
 		if (netif_queue_stopped(greth->netdev))
 			greth_clean_tx(greth->netdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		work_done += greth_rx(greth->netdev, budget - work_done);
 	}
@@ -1095,7 +1166,12 @@ restart_txrx_poll:
 
 		ctrl = GRETH_REGLOAD(greth->regs->control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (netif_queue_stopped(greth->netdev)) {
+=======
+		if ((greth->gbit_mac && (greth->tx_last != greth->tx_next)) ||
+		    (!greth->gbit_mac && netif_queue_stopped(greth->netdev))) {
+>>>>>>> v3.18
 =======
 		if ((greth->gbit_mac && (greth->tx_last != greth->tx_next)) ||
 		    (!greth->gbit_mac && netif_queue_stopped(greth->netdev))) {
@@ -1330,11 +1406,14 @@ static int greth_mdio_write(struct mii_bus *bus, int phy, int reg, u16 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int greth_mdio_reset(struct mii_bus *bus)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void greth_link_change(struct net_device *dev)
@@ -1452,7 +1531,10 @@ static int greth_mdio_init(struct greth_private *greth)
 	greth->mdio->read = greth_mdio_read;
 	greth->mdio->write = greth_mdio_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	greth->mdio->reset = greth_mdio_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	greth->mdio->priv = greth;
@@ -1483,7 +1565,11 @@ static int greth_mdio_init(struct greth_private *greth)
 		while (!phy_aneg_done(greth->phy) && time_before(jiffies, timeout)) {
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		genphy_read_status(greth->phy);
+=======
+		phy_read_status(greth->phy);
+>>>>>>> v3.18
 =======
 		phy_read_status(greth->phy);
 >>>>>>> v3.18
@@ -1590,9 +1676,15 @@ static int greth_of_probe(struct platform_device *ofdev)
 
 	/* Allocate TX descriptor ring in coherent memory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	greth->tx_bd_base = dma_alloc_coherent(greth->dev, 1024,
 					       &greth->tx_bd_base_phys,
 					       GFP_KERNEL | __GFP_ZERO);
+=======
+	greth->tx_bd_base = dma_zalloc_coherent(greth->dev, 1024,
+						&greth->tx_bd_base_phys,
+						GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	greth->tx_bd_base = dma_zalloc_coherent(greth->dev, 1024,
 						&greth->tx_bd_base_phys,
@@ -1605,9 +1697,15 @@ static int greth_of_probe(struct platform_device *ofdev)
 
 	/* Allocate RX descriptor ring in coherent memory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	greth->rx_bd_base = dma_alloc_coherent(greth->dev, 1024,
 					       &greth->rx_bd_base_phys,
 					       GFP_KERNEL | __GFP_ZERO);
+=======
+	greth->rx_bd_base = dma_zalloc_coherent(greth->dev, 1024,
+						&greth->rx_bd_base_phys,
+						GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	greth->rx_bd_base = dma_zalloc_coherent(greth->dev, 1024,
 						&greth->rx_bd_base_phys,
@@ -1703,7 +1801,11 @@ error1:
 static int greth_of_remove(struct platform_device *of_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&of_dev->dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(of_dev);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(of_dev);
 >>>>>>> v3.18
@@ -1715,8 +1817,11 @@ static int greth_of_remove(struct platform_device *of_dev)
 	dma_free_coherent(&of_dev->dev, 1024, greth->tx_bd_base, greth->tx_bd_base_phys);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&of_dev->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (greth->phy)

@@ -89,14 +89,20 @@ enum befs_err {
 /****************************/
 /* debug.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void befs_error(const struct super_block *sb, const char *fmt, ...);
 void befs_warning(const struct super_block *sb, const char *fmt, ...);
 =======
+=======
+>>>>>>> v3.18
 __printf(2, 3)
 void befs_error(const struct super_block *sb, const char *fmt, ...);
 __printf(2, 3)
 void befs_warning(const struct super_block *sb, const char *fmt, ...);
 __printf(2, 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void befs_debug(const struct super_block *sb, const char *fmt, ...);
 

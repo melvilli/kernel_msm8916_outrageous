@@ -146,7 +146,11 @@ int ubifs_calc_lpt_geom(struct ubifs_info *c)
 	lebs_needed = div_u64(sz + c->leb_size - 1, c->leb_size);
 	if (lebs_needed > c->lpt_lebs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("too few LPT LEBs", c->vi.ubi_num);
+=======
+		ubifs_err("too few LPT LEBs");
+>>>>>>> v3.18
 =======
 		ubifs_err("too few LPT LEBs");
 >>>>>>> v3.18
@@ -156,7 +160,11 @@ int ubifs_calc_lpt_geom(struct ubifs_info *c)
 	/* Verify that ltab fits in a single LEB (since ltab is a single node */
 	if (c->ltab_sz > c->leb_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("LPT ltab too big", c->vi.ubi_num);
+=======
+		ubifs_err("LPT ltab too big");
+>>>>>>> v3.18
 =======
 		ubifs_err("LPT ltab too big");
 >>>>>>> v3.18
@@ -222,7 +230,11 @@ static int calc_dflt_lpt_geom(struct ubifs_info *c, int *main_lebs,
 		}
 		if (c->ltab_sz > c->leb_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("LPT ltab too big", c->vi.ubi_num);
+=======
+			ubifs_err("LPT ltab too big");
+>>>>>>> v3.18
 =======
 			ubifs_err("LPT ltab too big");
 >>>>>>> v3.18
@@ -924,7 +936,11 @@ static void replace_cats(struct ubifs_info *c, struct ubifs_pnode *old_pnode,
  * This function returns %0 on success and a negative error code on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int check_lpt_crc(const struct ubifs_info *c, void *buf, int len)
+=======
+static int check_lpt_crc(void *buf, int len)
+>>>>>>> v3.18
 =======
 static int check_lpt_crc(void *buf, int len)
 >>>>>>> v3.18
@@ -938,8 +954,13 @@ static int check_lpt_crc(void *buf, int len)
 			 len - UBIFS_LPT_CRC_BYTES);
 	if (crc != calc_crc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("invalid crc in LPT node: crc %hx calc %hx",
 				c->vi.ubi_num, crc, calc_crc);
+=======
+		ubifs_err("invalid crc in LPT node: crc %hx calc %hx", crc,
+			  calc_crc);
+>>>>>>> v3.18
 =======
 		ubifs_err("invalid crc in LPT node: crc %hx calc %hx", crc,
 			  calc_crc);
@@ -960,8 +981,12 @@ static int check_lpt_crc(void *buf, int len)
  * This function returns %0 on success and a negative error code on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int check_lpt_type(const struct ubifs_info *c, uint8_t **addr, int *pos,
 			  int type)
+=======
+static int check_lpt_type(uint8_t **addr, int *pos, int type)
+>>>>>>> v3.18
 =======
 static int check_lpt_type(uint8_t **addr, int *pos, int type)
 >>>>>>> v3.18
@@ -971,8 +996,13 @@ static int check_lpt_type(uint8_t **addr, int *pos, int type)
 	node_type = ubifs_unpack_bits(addr, pos, UBIFS_LPT_TYPE_BITS);
 	if (node_type != type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("invalid type (%d) in LPT node type %d",
 				c->vi.ubi_num, node_type, type);
+=======
+		ubifs_err("invalid type (%d) in LPT node type %d", node_type,
+			  type);
+>>>>>>> v3.18
 =======
 		ubifs_err("invalid type (%d) in LPT node type %d", node_type,
 			  type);
@@ -998,7 +1028,11 @@ static int unpack_pnode(const struct ubifs_info *c, void *buf,
 	int i, pos = 0, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_type(c, &addr, &pos, UBIFS_LPT_PNODE);
+=======
+	err = check_lpt_type(&addr, &pos, UBIFS_LPT_PNODE);
+>>>>>>> v3.18
 =======
 	err = check_lpt_type(&addr, &pos, UBIFS_LPT_PNODE);
 >>>>>>> v3.18
@@ -1021,7 +1055,11 @@ static int unpack_pnode(const struct ubifs_info *c, void *buf,
 		lprops->flags |= ubifs_categorize_lprops(c, lprops);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_crc(c, buf, c->pnode_sz);
+=======
+	err = check_lpt_crc(buf, c->pnode_sz);
+>>>>>>> v3.18
 =======
 	err = check_lpt_crc(buf, c->pnode_sz);
 >>>>>>> v3.18
@@ -1043,7 +1081,11 @@ int ubifs_unpack_nnode(const struct ubifs_info *c, void *buf,
 	int i, pos = 0, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_type(c, &addr, &pos, UBIFS_LPT_NNODE);
+=======
+	err = check_lpt_type(&addr, &pos, UBIFS_LPT_NNODE);
+>>>>>>> v3.18
 =======
 	err = check_lpt_type(&addr, &pos, UBIFS_LPT_NNODE);
 >>>>>>> v3.18
@@ -1063,7 +1105,11 @@ int ubifs_unpack_nnode(const struct ubifs_info *c, void *buf,
 						     c->lpt_offs_bits);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_crc(c, buf, c->nnode_sz);
+=======
+	err = check_lpt_crc(buf, c->nnode_sz);
+>>>>>>> v3.18
 =======
 	err = check_lpt_crc(buf, c->nnode_sz);
 >>>>>>> v3.18
@@ -1083,7 +1129,11 @@ static int unpack_ltab(const struct ubifs_info *c, void *buf)
 	int i, pos = 0, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_type(c, &addr, &pos, UBIFS_LPT_LTAB);
+=======
+	err = check_lpt_type(&addr, &pos, UBIFS_LPT_LTAB);
+>>>>>>> v3.18
 =======
 	err = check_lpt_type(&addr, &pos, UBIFS_LPT_LTAB);
 >>>>>>> v3.18
@@ -1103,7 +1153,11 @@ static int unpack_ltab(const struct ubifs_info *c, void *buf)
 		c->ltab[i].cmt = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_crc(c, buf, c->ltab_sz);
+=======
+	err = check_lpt_crc(buf, c->ltab_sz);
+>>>>>>> v3.18
 =======
 	err = check_lpt_crc(buf, c->ltab_sz);
 >>>>>>> v3.18
@@ -1123,7 +1177,11 @@ static int unpack_lsave(const struct ubifs_info *c, void *buf)
 	int i, pos = 0, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_type(c, &addr, &pos, UBIFS_LPT_LSAVE);
+=======
+	err = check_lpt_type(&addr, &pos, UBIFS_LPT_LSAVE);
+>>>>>>> v3.18
 =======
 	err = check_lpt_type(&addr, &pos, UBIFS_LPT_LSAVE);
 >>>>>>> v3.18
@@ -1137,7 +1195,11 @@ static int unpack_lsave(const struct ubifs_info *c, void *buf)
 		c->lsave[i] = lnum;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = check_lpt_crc(c, buf, c->lsave_sz);
+=======
+	err = check_lpt_crc(buf, c->lsave_sz);
+>>>>>>> v3.18
 =======
 	err = check_lpt_crc(buf, c->lsave_sz);
 >>>>>>> v3.18
@@ -1307,8 +1369,12 @@ int ubifs_read_nnode(struct ubifs_info *c, struct ubifs_nnode *parent, int iip)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("error %d reading nnode at %d:%d", c->vi.ubi_num, err, lnum,
 			offs);
+=======
+	ubifs_err("error %d reading nnode at %d:%d", err, lnum, offs);
+>>>>>>> v3.18
 =======
 	ubifs_err("error %d reading nnode at %d:%d", err, lnum, offs);
 >>>>>>> v3.18
@@ -1377,6 +1443,7 @@ static int read_pnode(struct ubifs_info *c, struct ubifs_nnode *parent, int iip)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("error %d reading pnode at %d:%d", c->vi.ubi_num, err, lnum,
 			offs);
 	ubifs_dump_pnode(c, pnode, parent, iip);
@@ -1384,10 +1451,15 @@ out:
 	ubifs_err("calc num: %d", c->vi.ubi_num,
 		  calc_pnode_num_from_parent(c, parent, iip));
 =======
+=======
+>>>>>>> v3.18
 	ubifs_err("error %d reading pnode at %d:%d", err, lnum, offs);
 	ubifs_dump_pnode(c, pnode, parent, iip);
 	dump_stack();
 	ubifs_err("calc num: %d", calc_pnode_num_from_parent(c, parent, iip));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(pnode);
 	return err;
@@ -1542,7 +1614,10 @@ struct ubifs_lprops *ubifs_lpt_lookup(struct ubifs_info *c, int lnum)
 	}
 	iip = ((i >> shft) & (UBIFS_LPT_FANOUT - 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shft -= UBIFS_LPT_FANOUT_SHIFT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pnode = ubifs_get_pnode(c, nnode, iip);
@@ -1685,7 +1760,10 @@ struct ubifs_lprops *ubifs_lpt_lookup_dirty(struct ubifs_info *c, int lnum)
 	}
 	iip = ((i >> shft) & (UBIFS_LPT_FANOUT - 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shft -= UBIFS_LPT_FANOUT_SHIFT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pnode = ubifs_get_pnode(c, nnode, iip);
@@ -2048,7 +2126,10 @@ again:
 	}
 	iip = ((i >> shft) & (UBIFS_LPT_FANOUT - 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shft -= UBIFS_LPT_FANOUT_SHIFT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pnode = scan_get_pnode(c, path + h, nnode, iip);
@@ -2186,8 +2267,12 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 	if (pnode->num != col) {
 		ubifs_err("pnode num %d expected %d parent num %d iip %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, pnode->num, col,
 			  pnode->parent->num, pnode->iip);
+=======
+			  pnode->num, col, pnode->parent->num, pnode->iip);
+>>>>>>> v3.18
 =======
 			  pnode->num, col, pnode->parent->num, pnode->iip);
 >>>>>>> v3.18
@@ -2206,7 +2291,11 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 		if (lprops->lnum != lnum) {
 			ubifs_err("bad LEB number %d expected %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, lprops->lnum, lnum);
+=======
+				  lprops->lnum, lnum);
+>>>>>>> v3.18
 =======
 				  lprops->lnum, lnum);
 >>>>>>> v3.18
@@ -2216,7 +2305,11 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 			if (cat != LPROPS_UNCAT) {
 				ubifs_err("LEB %d taken but not uncat %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, lprops->lnum, cat);
+=======
+					  lprops->lnum, cat);
+>>>>>>> v3.18
 =======
 					  lprops->lnum, cat);
 >>>>>>> v3.18
@@ -2233,7 +2326,11 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 			default:
 				ubifs_err("LEB %d index but cat %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, lprops->lnum, cat);
+=======
+					  lprops->lnum, cat);
+>>>>>>> v3.18
 =======
 					  lprops->lnum, cat);
 >>>>>>> v3.18
@@ -2250,7 +2347,11 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 			default:
 				ubifs_err("LEB %d not index but cat %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, lprops->lnum, cat);
+=======
+					  lprops->lnum, cat);
+>>>>>>> v3.18
 =======
 					  lprops->lnum, cat);
 >>>>>>> v3.18
@@ -2295,7 +2396,11 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 		if (!found) {
 			ubifs_err("LEB %d cat %d not found in cat heap/list",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, lprops->lnum, cat);
+=======
+				  lprops->lnum, cat);
+>>>>>>> v3.18
 =======
 				  lprops->lnum, cat);
 >>>>>>> v3.18
@@ -2306,32 +2411,44 @@ static int dbg_chk_pnode(struct ubifs_info *c, struct ubifs_pnode *pnode,
 			if (lprops->free != c->leb_size) {
 				ubifs_err("LEB %d cat %d free %d dirty %d",
 <<<<<<< HEAD
-					  c->vi.ubi_num, lprops->lnum, cat,
-					  lprops->free, lprops->dirty);
-				return -EINVAL;
-			}
-=======
-					  lprops->lnum, cat, lprops->free,
-					  lprops->dirty);
-				return -EINVAL;
-			}
-			break;
->>>>>>> v3.18
-		case LPROPS_FREEABLE:
-		case LPROPS_FRDI_IDX:
-			if (lprops->free + lprops->dirty != c->leb_size) {
-				ubifs_err("LEB %d cat %d free %d dirty %d",
 <<<<<<< HEAD
 					  c->vi.ubi_num, lprops->lnum, cat,
 					  lprops->free, lprops->dirty);
 				return -EINVAL;
 			}
 =======
+=======
+>>>>>>> v3.18
 					  lprops->lnum, cat, lprops->free,
 					  lprops->dirty);
 				return -EINVAL;
 			}
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
+>>>>>>> v3.18
+		case LPROPS_FREEABLE:
+		case LPROPS_FRDI_IDX:
+			if (lprops->free + lprops->dirty != c->leb_size) {
+				ubifs_err("LEB %d cat %d free %d dirty %d",
+<<<<<<< HEAD
+<<<<<<< HEAD
+					  c->vi.ubi_num, lprops->lnum, cat,
+					  lprops->free, lprops->dirty);
+				return -EINVAL;
+			}
+=======
+=======
+>>>>>>> v3.18
+					  lprops->lnum, cat, lprops->free,
+					  lprops->dirty);
+				return -EINVAL;
+			}
+			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2366,7 +2483,11 @@ int dbg_check_lpt_nodes(struct ubifs_info *c, struct ubifs_cnode *cnode,
 			if (cnode->num != num) {
 				ubifs_err("nnode num %d expected %d parent num %d iip %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, cnode->num, num,
+=======
+					  cnode->num, num,
+>>>>>>> v3.18
 =======
 					  cnode->num, num,
 >>>>>>> v3.18

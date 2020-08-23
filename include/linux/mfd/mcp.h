@@ -11,6 +11,11 @@
 #define MCP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 

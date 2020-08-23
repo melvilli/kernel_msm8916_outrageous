@@ -3,6 +3,7 @@
 
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct pci_dev;
 struct of_irq;
@@ -12,6 +13,8 @@ struct device_node;
 struct device_node *of_pci_find_child_device(struct device_node *parent,
 					     unsigned int devfn);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/msi.h>
 
 struct pci_dev;
@@ -78,6 +81,9 @@ static inline void of_pci_msi_chip_remove(struct msi_chip *chip) { }
 static inline struct msi_chip *
 of_pci_find_msi_chip_by_node(struct device_node *of_node) { return NULL; }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

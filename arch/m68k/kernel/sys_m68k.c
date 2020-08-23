@@ -377,7 +377,10 @@ asmlinkage int
 sys_cacheflush (unsigned long addr, int scope, int cache, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vm_area_struct *vma;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret = -EINVAL;
@@ -393,18 +396,25 @@ sys_cacheflush (unsigned long addr, int scope, int cache, unsigned long len)
 			goto out;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct vm_area_struct *vma;
 
 		/* Check for overflow.  */
 		if (addr + len < addr)
 			goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Verify that the specified address region actually belongs
 		 * to this process.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		vma = find_vma (current->mm, addr);
 		ret = -EINVAL;
@@ -414,11 +424,16 @@ sys_cacheflush (unsigned long addr, int scope, int cache, unsigned long len)
 		if (vma == NULL || addr < vma->vm_start || addr + len > vma->vm_end)
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 		ret = -EINVAL;
 		down_read(&current->mm->mmap_sem);
 		vma = find_vma(current->mm, addr);
 		if (!vma || addr < vma->vm_start || addr + len > vma->vm_end)
 			goto out_unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -450,7 +465,11 @@ sys_cacheflush (unsigned long addr, int scope, int cache, unsigned long len)
 		}
 		ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_unlock;
+>>>>>>> v3.18
 =======
 		goto out_unlock;
 >>>>>>> v3.18
@@ -471,6 +490,11 @@ sys_cacheflush (unsigned long addr, int scope, int cache, unsigned long len)
 	    }
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_unlock:
+	up_read(&current->mm->mmap_sem);
+>>>>>>> v3.18
 =======
 out_unlock:
 	up_read(&current->mm->mmap_sem);

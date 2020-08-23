@@ -31,6 +31,7 @@ struct denali_dt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __iomem *request_and_map(struct device *dev,
 				     const struct resource *res)
 {
@@ -49,6 +50,8 @@ static void __iomem *request_and_map(struct device *dev,
 	return ptr;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id denali_nand_dt_ids[] = {
@@ -82,6 +85,7 @@ static int denali_dt_probe(struct platform_device *ofdev)
 	denali = &dt->denali;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	denali_reg = platform_get_resource_byname(ofdev, IORESOURCE_MEM, "denali_reg");
 	nand_data = platform_get_resource_byname(ofdev, IORESOURCE_MEM, "nand_data");
 	if (!denali_reg || !nand_data) {
@@ -89,6 +93,8 @@ static int denali_dt_probe(struct platform_device *ofdev)
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	denali->platform = DT;
@@ -100,6 +106,7 @@ static int denali_dt_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	denali->flash_reg = request_and_map(&ofdev->dev, denali_reg);
 	if (!denali->flash_reg)
 		return -ENOMEM;
@@ -108,6 +115,8 @@ static int denali_dt_probe(struct platform_device *ofdev)
 	if (!denali->flash_mem)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	denali_reg = platform_get_resource_byname(ofdev, IORESOURCE_MEM, "denali_reg");
 	denali->flash_reg = devm_ioremap_resource(&ofdev->dev, denali_reg);
 	if (IS_ERR(denali->flash_reg))
@@ -117,6 +126,9 @@ static int denali_dt_probe(struct platform_device *ofdev)
 	denali->flash_mem = devm_ioremap_resource(&ofdev->dev, nand_data);
 	if (IS_ERR(denali->flash_mem))
 		return PTR_ERR(denali->flash_mem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!of_property_read_u32(ofdev->dev.of_node,
@@ -127,7 +139,11 @@ static int denali_dt_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dt->clk = clk_get(&ofdev->dev, NULL);
+=======
+	dt->clk = devm_clk_get(&ofdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	dt->clk = devm_clk_get(&ofdev->dev, NULL);
 >>>>>>> v3.18
@@ -147,7 +163,10 @@ static int denali_dt_probe(struct platform_device *ofdev)
 out_disable_clk:
 	clk_disable_unprepare(dt->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(dt->clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -161,7 +180,10 @@ static int denali_dt_remove(struct platform_device *ofdev)
 	denali_remove(&dt->denali);
 	clk_disable(dt->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(dt->clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

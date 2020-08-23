@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -152,6 +156,10 @@ acpi_rs_move_data(void *destination, void *source, u16 item_count, u8 move_type)
 		case ACPI_RSC_MOVE_SERIAL_VEN:
 		case ACPI_RSC_MOVE_SERIAL_RES:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -166,6 +174,10 @@ acpi_rs_move_data(void *destination, void *source, u16 item_count, u8 move_type)
 		case ACPI_RSC_MOVE16:
 		case ACPI_RSC_MOVE_GPIO_PIN:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -175,6 +187,10 @@ acpi_rs_move_data(void *destination, void *source, u16 item_count, u8 move_type)
 
 		case ACPI_RSC_MOVE32:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -184,6 +200,10 @@ acpi_rs_move_data(void *destination, void *source, u16 item_count, u8 move_type)
 
 		case ACPI_RSC_MOVE64:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -193,6 +213,10 @@ acpi_rs_move_data(void *destination, void *source, u16 item_count, u8 move_type)
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -761,7 +785,11 @@ acpi_rs_set_srs_method_data(struct acpi_namespace_node *node,
 
 	info->prefix_node = node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->pathname = METHOD_NAME__SRS;
+=======
+	info->relative_pathname = METHOD_NAME__SRS;
+>>>>>>> v3.18
 =======
 	info->relative_pathname = METHOD_NAME__SRS;
 >>>>>>> v3.18
@@ -777,7 +805,11 @@ acpi_rs_set_srs_method_data(struct acpi_namespace_node *node,
 	 */
 	buffer.length = ACPI_ALLOCATE_LOCAL_BUFFER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_rs_create_aml_resources(in_buffer->pointer, &buffer);
+=======
+	status = acpi_rs_create_aml_resources(in_buffer, &buffer);
+>>>>>>> v3.18
 =======
 	status = acpi_rs_create_aml_resources(in_buffer, &buffer);
 >>>>>>> v3.18
@@ -812,7 +844,11 @@ acpi_rs_set_srs_method_data(struct acpi_namespace_node *node,
 	acpi_ut_remove_reference(args[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

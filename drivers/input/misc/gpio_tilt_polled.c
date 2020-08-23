@@ -17,7 +17,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -102,7 +105,12 @@ static void gpio_tilt_polled_close(struct input_polled_dev *dev)
 static int gpio_tilt_polled_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct gpio_tilt_platform_data *pdata = pdev->dev.platform_data;
+=======
+	const struct gpio_tilt_platform_data *pdata =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	const struct gpio_tilt_platform_data *pdata =
 			dev_get_platdata(&pdev->dev);
@@ -193,8 +201,11 @@ static int gpio_tilt_polled_remove(struct platform_device *pdev)
 	const struct gpio_tilt_platform_data *pdata = tdev->pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	input_unregister_polled_device(tdev->poll_dev);

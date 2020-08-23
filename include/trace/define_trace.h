@@ -45,11 +45,17 @@
 	DEFINE_TRACE(name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef DEFINE_EVENT_FN
 #define DEFINE_EVENT_FN(template, name, proto, args, reg, unreg) \
 	DEFINE_TRACE_FN(name, reg, unreg)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef DEFINE_EVENT_PRINT
 #define DEFINE_EVENT_PRINT(template, name, proto, args, print)	\
@@ -99,6 +105,10 @@
 #undef DECLARE_EVENT_CLASS
 #undef DEFINE_EVENT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef DEFINE_EVENT_FN
+>>>>>>> v3.18
 =======
 #undef DEFINE_EVENT_FN
 >>>>>>> v3.18

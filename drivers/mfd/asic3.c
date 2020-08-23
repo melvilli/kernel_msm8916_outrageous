@@ -606,7 +606,12 @@ static int asic3_gpio_remove(struct platform_device *pdev)
 	struct asic3 *asic = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&asic->gpio);
+=======
+	gpiochip_remove(&asic->gpio);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&asic->gpio);
 	return 0;
@@ -701,7 +706,11 @@ static int ds1wm_disable(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell asic3_cell_ds1wm = {
+=======
+static const struct mfd_cell asic3_cell_ds1wm = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell asic3_cell_ds1wm = {
 >>>>>>> v3.18
@@ -807,7 +816,11 @@ static int asic3_mmc_disable(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell asic3_cell_mmc = {
+=======
+static const struct mfd_cell asic3_cell_mmc = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell asic3_cell_mmc = {
 >>>>>>> v3.18
@@ -913,6 +926,7 @@ static int __init asic3_mfd_probe(struct platform_device *pdev,
 
 	/* MMC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asic->tmio_cnf = ioremap((ASIC3_SD_CONFIG_BASE >> asic->bus_shift) +
 				 mem_sdio->start,
 				 ASIC3_SD_CONFIG_SIZE >> asic->bus_shift);
@@ -921,6 +935,8 @@ static int __init asic3_mfd_probe(struct platform_device *pdev,
 		dev_dbg(asic->dev, "Couldn't ioremap SD_CONFIG\n");
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (mem_sdio) {
 		asic->tmio_cnf = ioremap((ASIC3_SD_CONFIG_BASE >> asic->bus_shift) +
 				 mem_sdio->start,
@@ -930,6 +946,9 @@ static int __init asic3_mfd_probe(struct platform_device *pdev,
 			dev_dbg(asic->dev, "Couldn't ioremap SD_CONFIG\n");
 			goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	asic3_mmc_resources[0].start >>= asic->bus_shift;
@@ -978,7 +997,11 @@ static void asic3_mfd_remove(struct platform_device *pdev)
 static int __init asic3_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct asic3_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct asic3_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct asic3_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -988,7 +1011,12 @@ static int __init asic3_probe(struct platform_device *pdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asic = kzalloc(sizeof(struct asic3), GFP_KERNEL);
+=======
+	asic = devm_kzalloc(&pdev->dev,
+			    sizeof(struct asic3), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	asic = devm_kzalloc(&pdev->dev,
 			    sizeof(struct asic3), GFP_KERNEL);
@@ -1005,9 +1033,14 @@ static int __init asic3_probe(struct platform_device *pdev)
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!mem) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		dev_err(asic->dev, "no MEM resource\n");
 		goto out_free;
+=======
+		dev_err(asic->dev, "no MEM resource\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		dev_err(asic->dev, "no MEM resource\n");
 		return -ENOMEM;
@@ -1017,9 +1050,14 @@ static int __init asic3_probe(struct platform_device *pdev)
 	asic->mapping = ioremap(mem->start, resource_size(mem));
 	if (!asic->mapping) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		dev_err(asic->dev, "Couldn't ioremap\n");
 		goto out_free;
+=======
+		dev_err(asic->dev, "Couldn't ioremap\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		dev_err(asic->dev, "Couldn't ioremap\n");
 		return -ENOMEM;
@@ -1078,9 +1116,12 @@ static int __init asic3_probe(struct platform_device *pdev)
 	iounmap(asic->mapping);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  out_free:
 	kfree(asic);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1106,8 +1147,11 @@ static int asic3_remove(struct platform_device *pdev)
 	iounmap(asic->mapping);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(asic);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

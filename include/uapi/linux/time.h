@@ -23,10 +23,13 @@ struct timezone {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FD_SET(fd,fdsetp)       __FD_SET(fd,fdsetp)
 #define FD_CLR(fd,fdsetp)       __FD_CLR(fd,fdsetp)
 #define FD_ISSET(fd,fdsetp)     __FD_ISSET(fd,fdsetp)
 #define FD_ZERO(fdsetp)         __FD_ZERO(fdsetp)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

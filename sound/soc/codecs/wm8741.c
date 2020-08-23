@@ -45,7 +45,11 @@ struct wm8741_priv {
 	struct regulator_bulk_data supplies[WM8741_NUM_SUPPLIES];
 	unsigned int sysclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_hw_constraint_list *sysclk_constraints;
+=======
+	const struct snd_pcm_hw_constraint_list *sysclk_constraints;
+>>>>>>> v3.18
 =======
 	const struct snd_pcm_hw_constraint_list *sysclk_constraints;
 >>>>>>> v3.18
@@ -127,22 +131,29 @@ static struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int rates_11289[] = {
 	44100, 88235,
 };
 
 static struct snd_pcm_hw_constraint_list constraints_11289 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_11289[] = {
 	44100, 88235,
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_11289 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_11289),
 	.list	= rates_11289,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_12288[] = {
 	32000, 48000, 96000,
@@ -150,16 +161,22 @@ static unsigned int rates_12288[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_12288 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_12288[] = {
 	32000, 48000, 96000,
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_12288 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_12288),
 	.list	= rates_12288,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_16384[] = {
 	32000,
@@ -167,16 +184,22 @@ static unsigned int rates_16384[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_16384 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_16384[] = {
 	32000,
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_16384 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_16384),
 	.list	= rates_16384,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_16934[] = {
 	44100, 88235,
@@ -184,16 +207,22 @@ static unsigned int rates_16934[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_16934 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_16934[] = {
 	44100, 88235,
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_16934 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_16934),
 	.list	= rates_16934,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_18432[] = {
 	48000, 96000,
@@ -201,16 +230,22 @@ static unsigned int rates_18432[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_18432 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_18432[] = {
 	48000, 96000,
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_18432 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_18432),
 	.list	= rates_18432,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_22579[] = {
 	44100, 88235, 1764000
@@ -218,16 +253,22 @@ static unsigned int rates_22579[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_22579 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_22579[] = {
 	44100, 88235, 1764000
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_22579 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_22579),
 	.list	= rates_22579,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_24576[] = {
 	32000, 48000, 96000, 192000
@@ -235,16 +276,22 @@ static unsigned int rates_24576[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_24576 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_24576[] = {
 	32000, 48000, 96000, 192000
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_24576 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_24576),
 	.list	= rates_24576,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int rates_36864[] = {
 	48000, 96000, 19200
@@ -252,11 +299,16 @@ static unsigned int rates_36864[] = {
 
 static struct snd_pcm_hw_constraint_list constraints_36864 = {
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int rates_36864[] = {
 	48000, 96000, 19200
 };
 
 static const struct snd_pcm_hw_constraint_list constraints_36864 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_36864),
 	.list	= rates_36864,
@@ -310,6 +362,7 @@ static int wm8741_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -321,6 +374,8 @@ static int wm8741_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -331,13 +386,20 @@ static int wm8741_hw_params(struct snd_pcm_substream *substream,
 		iface |= 0x0002;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iface |= 0x0003;
 		break;
 	default:
 		dev_dbg(codec->dev, "wm8741_hw_params:    Unsupported bit size param = %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			params_format(params));
+=======
+			params_width(params));
+>>>>>>> v3.18
 =======
 			params_width(params));
 >>>>>>> v3.18
@@ -346,7 +408,11 @@ static int wm8741_hw_params(struct snd_pcm_substream *substream,
 
 	dev_dbg(codec->dev, "wm8741_hw_params:    bit size param = %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		params_format(params));
+=======
+		params_width(params));
+>>>>>>> v3.18
 =======
 		params_width(params));
 >>>>>>> v3.18
@@ -503,7 +569,10 @@ static int wm8741_resume(struct snd_soc_codec *codec)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define wm8741_suspend NULL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define wm8741_resume NULL
@@ -522,12 +591,15 @@ static int wm8741_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret != 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		goto err_enable;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = wm8741_reset(codec);
@@ -596,7 +668,11 @@ static const struct regmap_config wm8741_regmap = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -717,7 +793,11 @@ static int __init wm8741_modinit(void)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -743,7 +823,11 @@ static void __exit wm8741_exit(void)
 	spi_unregister_driver(&wm8741_spi_driver);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

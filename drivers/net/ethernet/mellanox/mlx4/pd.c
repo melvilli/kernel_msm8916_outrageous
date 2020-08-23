@@ -32,7 +32,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -63,7 +66,11 @@ EXPORT_SYMBOL_GPL(mlx4_pd_alloc);
 void mlx4_pd_free(struct mlx4_dev *dev, u32 pdn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&mlx4_priv(dev)->pd_bitmap, pdn);
+=======
+	mlx4_bitmap_free(&mlx4_priv(dev)->pd_bitmap, pdn, MLX4_USE_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&mlx4_priv(dev)->pd_bitmap, pdn, MLX4_USE_RR);
 >>>>>>> v3.18
@@ -104,7 +111,11 @@ EXPORT_SYMBOL_GPL(mlx4_xrcd_alloc);
 void __mlx4_xrcd_free(struct mlx4_dev *dev, u32 xrcdn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&mlx4_priv(dev)->xrcd_bitmap, xrcdn);
+=======
+	mlx4_bitmap_free(&mlx4_priv(dev)->xrcd_bitmap, xrcdn, MLX4_USE_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&mlx4_priv(dev)->xrcd_bitmap, xrcdn, MLX4_USE_RR);
 >>>>>>> v3.18
@@ -176,17 +187,23 @@ EXPORT_SYMBOL_GPL(mlx4_uar_alloc);
 void mlx4_uar_free(struct mlx4_dev *dev, struct mlx4_uar *uar)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&mlx4_priv(dev)->uar_table.bitmap, uar->index);
 }
 EXPORT_SYMBOL_GPL(mlx4_uar_free);
 
 int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf)
 =======
+=======
+>>>>>>> v3.18
 	mlx4_bitmap_free(&mlx4_priv(dev)->uar_table.bitmap, uar->index, MLX4_USE_RR);
 }
 EXPORT_SYMBOL_GPL(mlx4_uar_free);
 
 int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf, int node)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mlx4_priv *priv = mlx4_priv(dev);
@@ -206,11 +223,14 @@ int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf, int node)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uar = kmalloc(sizeof *uar, GFP_KERNEL);
 		if (!uar) {
 			err = -ENOMEM;
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 		uar = kmalloc_node(sizeof(*uar), GFP_KERNEL, node);
 		if (!uar) {
 			uar = kmalloc(sizeof(*uar), GFP_KERNEL);
@@ -218,6 +238,9 @@ int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf, int node)
 				err = -ENOMEM;
 				goto out;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		err = mlx4_uar_alloc(dev, uar);

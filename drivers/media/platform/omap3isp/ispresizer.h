@@ -13,6 +13,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,29 +26,41 @@
  * 02110-1301 USA
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 
 #ifndef OMAP3_ISP_RESIZER_H
 #define OMAP3_ISP_RESIZER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 
 /*
  * Constants for filter coefficents count
 =======
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/types.h>
 
 /*
  * Constants for filter coefficients count
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define COEFF_CNT		32
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct isprsz_coef - Structure for resizer filter coeffcients.
+=======
+ * struct isprsz_coef - Structure for resizer filter coefficients.
+>>>>>>> v3.18
 =======
  * struct isprsz_coef - Structure for resizer filter coefficients.
 >>>>>>> v3.18
@@ -112,6 +125,10 @@ enum resizer_input_entity {
 /*
  * struct isp_res_device - OMAP3 ISP resizer module
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @lock: Protects formats and crop rectangles between set_selection and IRQ
+>>>>>>> v3.18
 =======
  * @lock: Protects formats and crop rectangles between set_selection and IRQ
 >>>>>>> v3.18
@@ -136,6 +153,10 @@ struct isp_res_device {
 	wait_queue_head_t wait;
 	atomic_t stopping;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t lock;
+>>>>>>> v3.18
 =======
 	spinlock_t lock;
 >>>>>>> v3.18

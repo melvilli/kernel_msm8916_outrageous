@@ -43,8 +43,12 @@
 MODULE_FIRMWARE("3826.arm");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * gpios should be handled in board files and provided via platform data,
+=======
+/* gpios should be handled in board files and provided via platform data,
+>>>>>>> v3.18
 =======
 /* gpios should be handled in board files and provided via platform data,
 >>>>>>> v3.18
@@ -196,16 +200,22 @@ static int p54spi_request_eeprom(struct ieee80211_hw *dev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * allow users to customize their eeprom.
 	 */
 
 	ret = request_firmware(&eeprom, "3826.eeprom", &priv->spi->dev);
 =======
+=======
+>>>>>>> v3.18
 	/* allow users to customize their eeprom.
 	 */
 
 	ret = request_firmware_direct(&eeprom, "3826.eeprom", &priv->spi->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0) {
 #ifdef CONFIG_P54_SPI_DEFAULT_EEPROM
@@ -297,8 +307,12 @@ static void p54spi_power_on(struct p54s_priv *priv)
 	enable_irq(gpio_to_irq(p54spi_gpio_irq));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * need to wait a while before device can be accessed, the length
+=======
+	/* need to wait a while before device can be accessed, the length
+>>>>>>> v3.18
 =======
 	/* need to wait a while before device can be accessed, the length
 >>>>>>> v3.18
@@ -381,7 +395,12 @@ static int p54spi_rx(struct p54s_priv *priv)
 	 * but it does not amend the size of SPI data transfer.
 	 * Such packets has correct data size in header, thus referencing
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * past the end of allocated skb. Reserve extra 4 bytes for this case */
+=======
+	 * past the end of allocated skb. Reserve extra 4 bytes for this case
+	 */
+>>>>>>> v3.18
 =======
 	 * past the end of allocated skb. Reserve extra 4 bytes for this case
 	 */
@@ -404,7 +423,12 @@ static int p54spi_rx(struct p54s_priv *priv)
 	p54spi_sleep(priv);
 	/* Put additional bytes to compensate for the possible
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * alignment-caused truncation */
+=======
+	 * alignment-caused truncation
+	 */
+>>>>>>> v3.18
 =======
 	 * alignment-caused truncation
 	 */
@@ -663,7 +687,11 @@ static int p54spi_probe(struct spi_device *spi)
 
 	ret = request_irq(gpio_to_irq(p54spi_gpio_irq),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  p54spi_interrupt, IRQF_DISABLED, "p54spi",
+=======
+			  p54spi_interrupt, 0, "p54spi",
+>>>>>>> v3.18
 =======
 			  p54spi_interrupt, 0, "p54spi",
 >>>>>>> v3.18
@@ -743,6 +771,7 @@ static struct spi_driver p54spi_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init p54spi_init(void)
 {
 	int ret;
@@ -764,6 +793,9 @@ static void __exit p54spi_exit(void)
 
 module_init(p54spi_init);
 module_exit(p54spi_exit);
+=======
+module_spi_driver(p54spi_driver);
+>>>>>>> v3.18
 =======
 module_spi_driver(p54spi_driver);
 >>>>>>> v3.18

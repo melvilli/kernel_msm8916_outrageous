@@ -22,17 +22,23 @@
 #include "hub.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group *port_dev_group[];
 
 static ssize_t show_port_connect_type(struct device *dev,
 	struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static int usb_port_block_power_off;
 
 static const struct attribute_group *port_dev_group[];
 
 static ssize_t connect_type_show(struct device *dev,
 				 struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_port *port_dev = to_usb_port(dev);
@@ -56,8 +62,12 @@ static ssize_t connect_type_show(struct device *dev,
 	return sprintf(buf, "%s\n", result);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(connect_type, S_IRUGO, show_port_connect_type,
 		NULL);
+=======
+static DEVICE_ATTR_RO(connect_type);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(connect_type);
 >>>>>>> v3.18
@@ -81,6 +91,10 @@ static void usb_port_device_release(struct device *dev)
 	struct usb_port *port_dev = to_usb_port(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(port_dev->req);
+>>>>>>> v3.18
 =======
 	kfree(port_dev->req);
 >>>>>>> v3.18
@@ -95,6 +109,11 @@ static int usb_port_runtime_resume(struct device *dev)
 	struct usb_interface *intf = to_usb_interface(dev->parent);
 	struct usb_hub *hub = usb_hub_to_struct_hub(hdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_device *udev = port_dev->child;
+	struct usb_port *peer = port_dev->peer;
+>>>>>>> v3.18
 =======
 	struct usb_device *udev = port_dev->child;
 	struct usb_port *peer = port_dev->peer;
@@ -104,6 +123,7 @@ static int usb_port_runtime_resume(struct device *dev)
 
 	if (!hub)
 		return -EINVAL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	usb_autopm_get_interface(intf);
@@ -128,6 +148,8 @@ static int usb_port_runtime_resume(struct device *dev)
 	clear_bit(port1, hub->busy_bits);
 	usb_autopm_put_interface(intf);
 =======
+=======
+>>>>>>> v3.18
 	if (hub->in_reset) {
 		set_bit(port1, hub->power_bits);
 		return 0;
@@ -168,6 +190,9 @@ static int usb_port_runtime_resume(struct device *dev)
 
 	usb_autopm_put_interface(intf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -179,6 +204,10 @@ static int usb_port_runtime_suspend(struct device *dev)
 	struct usb_interface *intf = to_usb_interface(dev->parent);
 	struct usb_hub *hub = usb_hub_to_struct_hub(hdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_port *peer = port_dev->peer;
+>>>>>>> v3.18
 =======
 	struct usb_port *peer = port_dev->peer;
 >>>>>>> v3.18
@@ -188,6 +217,11 @@ static int usb_port_runtime_suspend(struct device *dev)
 	if (!hub)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (hub->in_reset)
+		return -EBUSY;
+>>>>>>> v3.18
 =======
 	if (hub->in_reset)
 		return -EBUSY;
@@ -198,6 +232,7 @@ static int usb_port_runtime_suspend(struct device *dev)
 		return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_autopm_get_interface(intf);
 	set_bit(port1, hub->busy_bits);
 	retval = usb_hub_set_port_power(hdev, hub, port1, false);
@@ -206,6 +241,8 @@ static int usb_port_runtime_suspend(struct device *dev)
 	clear_bit(port1, hub->busy_bits);
 	usb_autopm_put_interface(intf);
 =======
+=======
+>>>>>>> v3.18
 	if (usb_port_block_power_off)
 		return -EBUSY;
 
@@ -224,6 +261,9 @@ static int usb_port_runtime_suspend(struct device *dev)
 	if (!port_dev->is_superspeed && peer)
 		pm_runtime_put(&peer->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -234,7 +274,10 @@ static const struct dev_pm_ops usb_port_pm_ops = {
 	.runtime_suspend =	usb_port_runtime_suspend,
 	.runtime_resume =	usb_port_runtime_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.runtime_idle =		pm_generic_runtime_idle,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -247,6 +290,7 @@ struct device_type usb_port_device_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int usb_hub_create_port_device(struct usb_hub *hub, int port1)
 {
 	struct usb_port *port_dev = NULL;
@@ -257,6 +301,8 @@ int usb_hub_create_port_device(struct usb_hub *hub, int port1)
 		retval = -ENOMEM;
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 static struct device_driver usb_port_driver = {
 	.name = "usb",
 	.owner = THIS_MODULE,
@@ -485,11 +531,15 @@ int usb_hub_create_port_device(struct usb_hub *hub, int port1)
 	if (!port_dev->req) {
 		kfree(port_dev);
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	hub->ports[port1 - 1] = port_dev;
 	port_dev->portnum = port1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	port_dev->power_is_on = true;
 	port_dev->dev.parent = hub->intfdev;
@@ -527,6 +577,8 @@ void usb_hub_remove_port_device(struct usb_hub *hub,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	set_bit(port1, hub->power_bits);
 	port_dev->dev.parent = hub->intfdev;
 	port_dev->dev.groups = port_dev_group;
@@ -597,4 +649,7 @@ void usb_hub_remove_port_device(struct usb_hub *hub, int port1)
 		unlink_peers(port_dev, peer);
 	device_unregister(&port_dev->dev);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

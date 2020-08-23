@@ -33,7 +33,10 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-common.h>
@@ -393,6 +396,7 @@ static int bcap_start_streaming(struct vb2_queue *vq, unsigned int count)
 		params.hdelay = bt->hsync + bt->hbackporch;
 		params.vdelay = bt->vsync + bt->vbackporch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		params.line = bt->hfrontporch + bt->hsync
 				+ bt->hbackporch + bt->width;
 		params.frame = bt->vfrontporch + bt->vsync
@@ -400,6 +404,10 @@ static int bcap_start_streaming(struct vb2_queue *vq, unsigned int count)
 		if (bt->interlaced)
 			params.frame += bt->il_vfrontporch + bt->il_vsync
 					+ bt->il_vbackporch;
+=======
+		params.line = V4L2_DV_BT_FRAME_WIDTH(bt);
+		params.frame = V4L2_DV_BT_FRAME_HEIGHT(bt);
+>>>>>>> v3.18
 =======
 		params.line = V4L2_DV_BT_FRAME_WIDTH(bt);
 		params.frame = V4L2_DV_BT_FRAME_HEIGHT(bt);
@@ -437,7 +445,11 @@ static int bcap_start_streaming(struct vb2_queue *vq, unsigned int count)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(bcap_dev->comp);
+=======
+	reinit_completion(&bcap_dev->comp);
+>>>>>>> v3.18
 =======
 	reinit_completion(&bcap_dev->comp);
 >>>>>>> v3.18
@@ -446,7 +458,11 @@ static int bcap_start_streaming(struct vb2_queue *vq, unsigned int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcap_stop_streaming(struct vb2_queue *vq)
+=======
+static void bcap_stop_streaming(struct vb2_queue *vq)
+>>>>>>> v3.18
 =======
 static void bcap_stop_streaming(struct vb2_queue *vq)
 >>>>>>> v3.18
@@ -456,9 +472,12 @@ static void bcap_stop_streaming(struct vb2_queue *vq)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vb2_is_streaming(vq))
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bcap_dev->stop = true;
@@ -475,10 +494,16 @@ static void bcap_stop_streaming(struct vb2_queue *vq)
 		bcap_dev->cur_frm = list_entry(bcap_dev->dma_queue.next,
 						struct bcap_buffer, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del(&bcap_dev->cur_frm->list);
 		vb2_buffer_done(&bcap_dev->cur_frm->vb, VB2_BUF_STATE_ERROR);
 	}
 	return 0;
+=======
+		list_del_init(&bcap_dev->cur_frm->list);
+		vb2_buffer_done(&bcap_dev->cur_frm->vb, VB2_BUF_STATE_ERROR);
+	}
+>>>>>>> v3.18
 =======
 		list_del_init(&bcap_dev->cur_frm->list);
 		vb2_buffer_done(&bcap_dev->cur_frm->vb, VB2_BUF_STATE_ERROR);
@@ -569,7 +594,11 @@ static irqreturn_t bcap_isr(int irq, void *dev_id)
 		bcap_dev->cur_frm = list_entry(bcap_dev->dma_queue.next,
 				struct bcap_buffer, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del(&bcap_dev->cur_frm->list);
+=======
+		list_del_init(&bcap_dev->cur_frm->list);
+>>>>>>> v3.18
 =======
 		list_del_init(&bcap_dev->cur_frm->list);
 >>>>>>> v3.18
@@ -623,7 +652,11 @@ static int bcap_streamon(struct file *file, void *priv,
 					struct bcap_buffer, list);
 	/* remove buffer from the dma queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_del(&bcap_dev->cur_frm->list);
+=======
+	list_del_init(&bcap_dev->cur_frm->list);
+>>>>>>> v3.18
 =======
 	list_del_init(&bcap_dev->cur_frm->list);
 >>>>>>> v3.18
@@ -675,7 +708,11 @@ static int bcap_s_std(struct file *file, void *priv, v4l2_std_id std)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = v4l2_subdev_call(bcap_dev->sd, core, s_std, std);
+=======
+	ret = v4l2_subdev_call(bcap_dev->sd, video, s_std, std);
+>>>>>>> v3.18
 =======
 	ret = v4l2_subdev_call(bcap_dev->sd, video, s_std, std);
 >>>>>>> v3.18
@@ -686,6 +723,7 @@ static int bcap_s_std(struct file *file, void *priv, v4l2_std_id std)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int bcap_g_dv_timings(struct file *file, void *priv,
 				struct v4l2_dv_timings *timings)
@@ -700,6 +738,8 @@ static int bcap_g_dv_timings(struct file *file, void *priv,
 
 	bcap_dev->dv_timings = *timings;
 =======
+=======
+>>>>>>> v3.18
 static int bcap_enum_dv_timings(struct file *file, void *priv,
 				struct v4l2_enum_dv_timings *timings)
 {
@@ -726,6 +766,9 @@ static int bcap_g_dv_timings(struct file *file, void *priv,
 	struct bcap_device *bcap_dev = video_drvdata(file);
 
 	*timings = bcap_dev->dv_timings;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -931,6 +974,7 @@ static int bcap_s_parm(struct file *file, void *fh,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcap_g_chip_ident(struct file *file, void *priv,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -968,6 +1012,8 @@ static int bcap_dbg_s_register(struct file *file, void *priv,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int bcap_log_status(struct file *file, void *priv)
 {
 	struct bcap_device *bcap_dev = video_drvdata(file);
@@ -991,6 +1037,11 @@ static const struct v4l2_ioctl_ops bcap_ioctl_ops = {
 	.vidioc_s_dv_timings     = bcap_s_dv_timings,
 	.vidioc_g_dv_timings     = bcap_g_dv_timings,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.vidioc_query_dv_timings = bcap_query_dv_timings,
+	.vidioc_enum_dv_timings  = bcap_enum_dv_timings,
+>>>>>>> v3.18
 =======
 	.vidioc_query_dv_timings = bcap_query_dv_timings,
 	.vidioc_enum_dv_timings  = bcap_enum_dv_timings,
@@ -1004,11 +1055,14 @@ static const struct v4l2_ioctl_ops bcap_ioctl_ops = {
 	.vidioc_g_parm           = bcap_g_parm,
 	.vidioc_s_parm           = bcap_s_parm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident     = bcap_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register       = bcap_dbg_g_register,
 	.vidioc_s_register       = bcap_dbg_s_register,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.vidioc_log_status       = bcap_log_status,
@@ -1038,7 +1092,11 @@ static int bcap_probe(struct platform_device *pdev)
 
 	config = pdev->dev.platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!config) {
+=======
+	if (!config || !config->num_inputs) {
+>>>>>>> v3.18
 =======
 	if (!config || !config->num_inputs) {
 >>>>>>> v3.18
@@ -1055,7 +1113,11 @@ static int bcap_probe(struct platform_device *pdev)
 	bcap_dev->cfg = config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcap_dev->ppi = ppi_create_instance(config->ppi_info);
+=======
+	bcap_dev->ppi = ppi_create_instance(pdev, config->ppi_info);
+>>>>>>> v3.18
 =======
 	bcap_dev->ppi = ppi_create_instance(pdev, config->ppi_info);
 >>>>>>> v3.18
@@ -1086,7 +1148,10 @@ static int bcap_probe(struct platform_device *pdev)
 	vfd->tvnorms            = 0;
 	vfd->v4l2_dev           = &bcap_dev->v4l2_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strncpy(vfd->name, CAPTURE_DRV_NAME, sizeof(vfd->name));
@@ -1118,15 +1183,21 @@ static int bcap_probe(struct platform_device *pdev)
 	q->ops = &bcap_video_qops;
 	q->mem_ops = &vb2_dma_contig_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 
 	vb2_queue_init(q);
 =======
+=======
+>>>>>>> v3.18
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 
 	ret = vb2_queue_init(q);
 	if (ret)
 		goto err_free_handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_init(&bcap_dev->mutex);
@@ -1164,11 +1235,14 @@ static int bcap_probe(struct platform_device *pdev)
 	if (bcap_dev->sd) {
 		int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!config->num_inputs) {
 			v4l2_err(&bcap_dev->v4l2_dev,
 					"Unable to work without input\n");
 			goto err_unreg_vdev;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1179,6 +1253,10 @@ static int bcap_probe(struct platform_device *pdev)
 		v4l2_err(&bcap_dev->v4l2_dev,
 				"Unable to register sub device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = -ENODEV;
+>>>>>>> v3.18
 =======
 		ret = -ENODEV;
 >>>>>>> v3.18
@@ -1207,7 +1285,11 @@ static int bcap_probe(struct platform_device *pdev)
 	if (config->inputs[0].capabilities & V4L2_IN_CAP_STD) {
 		v4l2_std_id std;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = v4l2_subdev_call(bcap_dev->sd, core, g_std, &std);
+=======
+		ret = v4l2_subdev_call(bcap_dev->sd, video, g_std, &std);
+>>>>>>> v3.18
 =======
 		ret = v4l2_subdev_call(bcap_dev->sd, video, g_std, &std);
 >>>>>>> v3.18

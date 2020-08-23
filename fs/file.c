@@ -26,12 +26,18 @@
 int sysctl_nr_open __read_mostly = 1024*1024;
 int sysctl_nr_open_min = BITS_PER_LONG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sysctl_nr_open_max = 1024 * 1024; /* raised later */
 =======
+=======
+>>>>>>> v3.18
 /* our max() is unusable in constant expressions ;-/ */
 #define __const_max(x, y) ((x) < (y) ? (x) : (y))
 int sysctl_nr_open_max = __const_max(INT_MAX, ~(size_t)0/sizeof(void *)) &
 			 -BITS_PER_LONG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void *alloc_fdmem(size_t size)
@@ -49,6 +55,7 @@ static void *alloc_fdmem(size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void free_fdmem(void *ptr)
 {
 	is_vmalloc_addr(ptr) ? vfree(ptr) : kfree(ptr);
@@ -59,10 +66,15 @@ static void __free_fdtable(struct fdtable *fdt)
 	free_fdmem(fdt->fd);
 	free_fdmem(fdt->open_fds);
 =======
+=======
+>>>>>>> v3.18
 static void __free_fdtable(struct fdtable *fdt)
 {
 	kvfree(fdt->fd);
 	kvfree(fdt->open_fds);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(fdt);
 }
@@ -142,7 +154,11 @@ static struct fdtable * alloc_fdtable(unsigned int nr)
 
 out_arr:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_fdmem(fdt->fd);
+=======
+	kvfree(fdt->fd);
+>>>>>>> v3.18
 =======
 	kvfree(fdt->fd);
 >>>>>>> v3.18
@@ -367,6 +383,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void close_files(struct files_struct * files)
 {
 	int i, j;
@@ -383,6 +400,8 @@ static void close_files(struct files_struct * files)
 	fdt = files_fdtable(files);
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 static struct fdtable *close_files(struct files_struct * files)
 {
 	/*
@@ -393,6 +412,9 @@ static struct fdtable *close_files(struct files_struct * files)
 	struct fdtable *fdt = rcu_dereference_raw(files->fdt);
 	int i, j = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (;;) {
 		unsigned long set;
@@ -406,7 +428,11 @@ static struct fdtable *close_files(struct files_struct * files)
 				if (file) {
 					filp_close(file, files);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cond_resched();
+=======
+					cond_resched_rcu_qs();
+>>>>>>> v3.18
 =======
 					cond_resched_rcu_qs();
 >>>>>>> v3.18
@@ -417,6 +443,11 @@ static struct fdtable *close_files(struct files_struct * files)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return fdt;
+>>>>>>> v3.18
 =======
 
 	return fdt;
@@ -439,6 +470,7 @@ struct files_struct *get_files_struct(struct task_struct *task)
 void put_files_struct(struct files_struct *files)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fdtable *fdt;
 
 	if (atomic_dec_and_test(&files->count)) {
@@ -447,6 +479,11 @@ void put_files_struct(struct files_struct *files)
 		rcu_read_lock();
 		fdt = files_fdtable(files);
 		rcu_read_unlock();
+=======
+	if (atomic_dec_and_test(&files->count)) {
+		struct fdtable *fdt = close_files(files);
+
+>>>>>>> v3.18
 =======
 	if (atomic_dec_and_test(&files->count)) {
 		struct fdtable *fdt = close_files(files);
@@ -484,12 +521,15 @@ void exit_files(struct task_struct *tsk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init files_defer_init(void)
 {
 	sysctl_nr_open_max = min((size_t)INT_MAX, ~(size_t)0/sizeof(void *)) &
 			     -BITS_PER_LONG;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct files_struct init_files = {
@@ -555,7 +595,11 @@ repeat:
 #if 1
 	/* Sanity check */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rcu_dereference_raw(fdt->fd[fd]) != NULL) {
+=======
+	if (rcu_access_pointer(fdt->fd[fd]) != NULL) {
+>>>>>>> v3.18
 =======
 	if (rcu_access_pointer(fdt->fd[fd]) != NULL) {
 >>>>>>> v3.18
@@ -574,7 +618,10 @@ static int alloc_fd(unsigned start, unsigned flags)
 	return __alloc_fd(current->files, start, rlimit(RLIMIT_NOFILE), flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(alloc_fd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -703,15 +750,21 @@ void do_close_on_exec(struct files_struct *files)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct file *fget(unsigned int fd)
 {
 	struct file *file;
 	struct files_struct *files = current->files;
 =======
+=======
+>>>>>>> v3.18
 static struct file *__fget(unsigned int fd, fmode_t mask)
 {
 	struct files_struct *files = current->files;
 	struct file *file;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rcu_read_lock();
@@ -719,7 +772,11 @@ static struct file *__fget(unsigned int fd, fmode_t mask)
 	if (file) {
 		/* File object ref couldn't be taken */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (file->f_mode & FMODE_PATH ||
+=======
+		if ((file->f_mode & mask) ||
+>>>>>>> v3.18
 =======
 		if ((file->f_mode & mask) ||
 >>>>>>> v3.18
@@ -732,16 +789,23 @@ static struct file *__fget(unsigned int fd, fmode_t mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct file *fget(unsigned int fd)
 {
 	return __fget(fd, FMODE_PATH);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(fget);
 
 struct file *fget_raw(unsigned int fd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct file *file;
 	struct files_struct *files = current->files;
@@ -758,6 +822,10 @@ struct file *fget_raw(unsigned int fd)
 	return file;
 }
 
+=======
+	return __fget(fd, 0);
+}
+>>>>>>> v3.18
 =======
 	return __fget(fd, 0);
 }
@@ -780,6 +848,7 @@ EXPORT_SYMBOL(fget_raw);
  * The fput_needed flag returned by fget_light should be passed to the
  * corresponding fput_light.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct file *fget_light(unsigned int fd, int *fput_needed)
 {
@@ -834,6 +903,8 @@ struct file *fget_raw_light(unsigned int fd, int *fput_needed)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static unsigned long __fget_light(unsigned int fd, fmode_t mask)
 {
 	struct files_struct *files = current->files;
@@ -882,6 +953,9 @@ unsigned long __fdget_pos(unsigned int fd)
  * file count (done either by fdget() or by fork()).
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void set_close_on_exec(unsigned int fd, int flag)
 {
@@ -911,6 +985,10 @@ bool get_close_on_exec(unsigned int fd)
 static int do_dup2(struct files_struct *files,
 	struct file *file, unsigned fd, unsigned flags)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__releases(&files->file_lock)
+>>>>>>> v3.18
 =======
 __releases(&files->file_lock)
 >>>>>>> v3.18

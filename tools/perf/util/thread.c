@@ -7,6 +7,7 @@
 #include "util.h"
 #include "debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct thread *thread__new(pid_t pid)
 {
@@ -54,6 +55,8 @@ int thread__comm_len(struct thread *self)
 
 	return self->comm_len;
 =======
+=======
+>>>>>>> v3.18
 #include "comm.h"
 #include "unwind.h"
 
@@ -196,11 +199,15 @@ int thread__comm_len(struct thread *thread)
 	}
 
 	return thread->comm_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 size_t thread__fprintf(struct thread *thread, FILE *fp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return fprintf(fp, "Thread %d %s\n", thread->pid, thread->comm) +
 	       map_groups__fprintf(&thread->mg, verbose, fp);
@@ -231,6 +238,8 @@ int thread__fork(struct thread *self, struct thread *parent)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	return fprintf(fp, "Thread %d %s\n", thread->tid, thread__comm_str(thread)) +
 	       map_groups__fprintf(thread->mg, fp);
 }
@@ -296,4 +305,7 @@ void thread__find_cpumode_addr_location(struct thread *thread,
 			break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

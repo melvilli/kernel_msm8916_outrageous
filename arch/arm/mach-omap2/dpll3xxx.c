@@ -29,11 +29,16 @@
 #include <linux/clkdev.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
 #include "clockdomain.h"
 #include "clock.h"
 #include "cm2xxx_3xxx.h"
 #include "cm-regbits-34xx.h"
+=======
+#include "clockdomain.h"
+#include "clock.h"
+>>>>>>> v3.18
 =======
 #include "clockdomain.h"
 #include "clock.h"
@@ -56,15 +61,21 @@ static void _omap3_dpll_write_clken(struct clk_hw_omap *clk, u8 clken_bits)
 	dd = clk->dpll_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->control_reg);
 	v &= ~dd->enable_mask;
 	v |= clken_bits << __ffs(dd->enable_mask);
 	__raw_writel(v, dd->control_reg);
 =======
+=======
+>>>>>>> v3.18
 	v = omap2_clk_readl(clk, dd->control_reg);
 	v &= ~dd->enable_mask;
 	v |= clken_bits << __ffs(dd->enable_mask);
 	omap2_clk_writel(v, clk, dd->control_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -82,8 +93,13 @@ static int _omap3_wait_dpll_status(struct clk_hw_omap *clk, u8 state)
 	state <<= __ffs(dd->idlest_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (((__raw_readl(dd->idlest_reg) & dd->idlest_mask) != state) &&
 	       i < MAX_DPLL_WAIT_TRIES) {
+=======
+	while (((omap2_clk_readl(clk, dd->idlest_reg) & dd->idlest_mask)
+		!= state) && i < MAX_DPLL_WAIT_TRIES) {
+>>>>>>> v3.18
 =======
 	while (((omap2_clk_readl(clk, dd->idlest_reg) & dd->idlest_mask)
 		!= state) && i < MAX_DPLL_WAIT_TRIES) {
@@ -165,7 +181,11 @@ static int _omap3_noncore_dpll_lock(struct clk_hw_omap *clk)
 
 	/* Check if already locked */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((__raw_readl(dd->idlest_reg) & dd->idlest_mask) == state)
+=======
+	if ((omap2_clk_readl(clk, dd->idlest_reg) & dd->idlest_mask) == state)
+>>>>>>> v3.18
 =======
 	if ((omap2_clk_readl(clk, dd->idlest_reg) & dd->idlest_mask) == state)
 >>>>>>> v3.18
@@ -332,6 +352,7 @@ static int omap3_noncore_dpll_program(struct clk_hw_omap *clk, u16 freqsel)
 	 * only since freqsel field is no longer present on other devices.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_is_omap343x()) {
 		v = __raw_readl(dd->control_reg);
 		v &= ~dd->freqsel_mask;
@@ -342,6 +363,8 @@ static int omap3_noncore_dpll_program(struct clk_hw_omap *clk, u16 freqsel)
 	/* Set DPLL multiplier, divider */
 	v = __raw_readl(dd->mult_div1_reg);
 =======
+=======
+>>>>>>> v3.18
 	if (ti_clk_features.flags & TI_CLK_DPLL_HAS_FREQSEL) {
 		v = omap2_clk_readl(clk, dd->control_reg);
 		v &= ~dd->freqsel_mask;
@@ -360,6 +383,9 @@ static int omap3_noncore_dpll_program(struct clk_hw_omap *clk, u16 freqsel)
 			v &= ~dd->dcc_mask; /* Disable DCC */
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v &= ~(dd->mult_mask | dd->div1_mask);
 	v |= dd->last_rounded_m << __ffs(dd->mult_mask);
@@ -379,17 +405,23 @@ static int omap3_noncore_dpll_program(struct clk_hw_omap *clk, u16 freqsel)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(v, dd->mult_div1_reg);
 
 	/* Set 4X multiplier and low-power mode */
 	if (dd->m4xen_mask || dd->lpmode_mask) {
 		v = __raw_readl(dd->control_reg);
 =======
+=======
+>>>>>>> v3.18
 	omap2_clk_writel(v, clk, dd->mult_div1_reg);
 
 	/* Set 4X multiplier and low-power mode */
 	if (dd->m4xen_mask || dd->lpmode_mask) {
 		v = omap2_clk_readl(clk, dd->control_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (dd->m4xen_mask) {
@@ -407,7 +439,11 @@ static int omap3_noncore_dpll_program(struct clk_hw_omap *clk, u16 freqsel)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writel(v, dd->control_reg);
+=======
+		omap2_clk_writel(v, clk, dd->control_reg);
+>>>>>>> v3.18
 =======
 		omap2_clk_writel(v, clk, dd->control_reg);
 >>>>>>> v3.18
@@ -524,6 +560,10 @@ int omap3_noncore_dpll_set_rate(struct clk_hw *hw, unsigned long rate,
 	struct clk_hw_omap *clk = to_clk_hw_omap(hw);
 	struct clk *new_parent = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long rrate;
+>>>>>>> v3.18
 =======
 	unsigned long rrate;
 >>>>>>> v3.18
@@ -555,9 +595,12 @@ int omap3_noncore_dpll_set_rate(struct clk_hw *hw, unsigned long rate,
 		clk_enable(dd->clk_ref);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dd->last_rounded_rate != rate)
 			rate = __clk_round_rate(hw->clk, rate);
 =======
+=======
+>>>>>>> v3.18
 		/* XXX this check is probably pointless in the CCF context */
 		if (dd->last_rounded_rate != rate) {
 			rrate = __clk_round_rate(hw->clk, rate);
@@ -568,6 +611,9 @@ int omap3_noncore_dpll_set_rate(struct clk_hw *hw, unsigned long rate,
 				rate = rrate;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (dd->last_rounded_rate == 0)
@@ -575,7 +621,11 @@ int omap3_noncore_dpll_set_rate(struct clk_hw *hw, unsigned long rate,
 
 		/* Freqsel is available only on OMAP343X devices */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cpu_is_omap343x()) {
+=======
+		if (ti_clk_features.flags & TI_CLK_DPLL_HAS_FREQSEL) {
+>>>>>>> v3.18
 =======
 		if (ti_clk_features.flags & TI_CLK_DPLL_HAS_FREQSEL) {
 >>>>>>> v3.18
@@ -601,7 +651,11 @@ int omap3_noncore_dpll_set_rate(struct clk_hw *hw, unsigned long rate,
 	*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret)
+=======
+	if (!ret && clk_get_parent(hw->clk) != new_parent)
+>>>>>>> v3.18
 =======
 	if (!ret && clk_get_parent(hw->clk) != new_parent)
 >>>>>>> v3.18
@@ -634,7 +688,11 @@ u32 omap3_dpll_autoidle_read(struct clk_hw_omap *clk)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->autoidle_reg);
+=======
+	v = omap2_clk_readl(clk, dd->autoidle_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, dd->autoidle_reg);
 >>>>>>> v3.18
@@ -672,15 +730,21 @@ void omap3_dpll_allow_idle(struct clk_hw_omap *clk)
 	 * optionally enter this mode.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->autoidle_reg);
 	v &= ~dd->autoidle_mask;
 	v |= DPLL_AUTOIDLE_LOW_POWER_STOP << __ffs(dd->autoidle_mask);
 	__raw_writel(v, dd->autoidle_reg);
 =======
+=======
+>>>>>>> v3.18
 	v = omap2_clk_readl(clk, dd->autoidle_reg);
 	v &= ~dd->autoidle_mask;
 	v |= DPLL_AUTOIDLE_LOW_POWER_STOP << __ffs(dd->autoidle_mask);
 	omap2_clk_writel(v, clk, dd->autoidle_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -705,21 +769,28 @@ void omap3_dpll_deny_idle(struct clk_hw_omap *clk)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->autoidle_reg);
 	v &= ~dd->autoidle_mask;
 	v |= DPLL_AUTOIDLE_DISABLE << __ffs(dd->autoidle_mask);
 	__raw_writel(v, dd->autoidle_reg);
 =======
+=======
+>>>>>>> v3.18
 	v = omap2_clk_readl(clk, dd->autoidle_reg);
 	v &= ~dd->autoidle_mask;
 	v |= DPLL_AUTOIDLE_DISABLE << __ffs(dd->autoidle_mask);
 	omap2_clk_writel(v, clk, dd->autoidle_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
 
 /* Clock control for DPLL outputs */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * omap3_clkoutx2_recalc - recalculate DPLL X2 output virtual clock rate
@@ -734,6 +805,11 @@ unsigned long omap3_clkoutx2_recalc(struct clk_hw *hw,
 	const struct dpll_data *dd;
 	unsigned long rate;
 	u32 v;
+=======
+/* Find the parent DPLL for the given clkoutx2 clock */
+static struct clk_hw_omap *omap3_find_clkoutx2_dpll(struct clk_hw *hw)
+{
+>>>>>>> v3.18
 =======
 /* Find the parent DPLL for the given clkoutx2 clock */
 static struct clk_hw_omap *omap3_find_clkoutx2_dpll(struct clk_hw *hw)
@@ -757,10 +833,13 @@ static struct clk_hw_omap *omap3_find_clkoutx2_dpll(struct clk_hw *hw)
 	if (!pclk) {
 		WARN_ON(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -790,13 +869,20 @@ unsigned long omap3_clkoutx2_recalc(struct clk_hw *hw,
 	if (!pclk)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dd = pclk->dpll_data;
 
 	WARN_ON(!dd->enable_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->control_reg) & dd->enable_mask;
+=======
+	v = omap2_clk_readl(pclk, dd->control_reg) & dd->enable_mask;
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(pclk, dd->control_reg) & dd->enable_mask;
 >>>>>>> v3.18
@@ -809,7 +895,10 @@ unsigned long omap3_clkoutx2_recalc(struct clk_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int omap3_clkoutx2_set_rate(struct clk_hw *hw, unsigned long rate,
 					unsigned long parent_rate)
 {
@@ -859,6 +948,9 @@ long omap3_clkoutx2_round_rate(struct clk_hw *hw, unsigned long rate,
 	return *prate * 2;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* OMAP3/4 non-CORE DPLL clkops */
 const struct clk_hw_omap_ops clkhwops_omap3_dpll = {

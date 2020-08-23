@@ -2615,6 +2615,7 @@ static struct pci_driver lanai_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init lanai_module_init(void)
 {
 	int x;
@@ -2636,6 +2637,9 @@ static void __exit lanai_module_exit(void)
 
 module_init(lanai_module_init);
 module_exit(lanai_module_exit);
+=======
+module_pci_driver(lanai_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(lanai_driver);
 >>>>>>> v3.18

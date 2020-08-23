@@ -173,6 +173,10 @@
 #define SSB_SPROMSIZE_BYTES_R123	(SSB_SPROMSIZE_WORDS_R123 * sizeof(u16))
 #define SSB_SPROMSIZE_BYTES_R4		(SSB_SPROMSIZE_WORDS_R4 * sizeof(u16))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SSB_SPROMSIZE_WORDS_R10		230
+>>>>>>> v3.18
 =======
 #define SSB_SPROMSIZE_WORDS_R10		230
 >>>>>>> v3.18
@@ -349,7 +353,10 @@
 #define  SSB_SPROM4_TXPID5GH3		0xFF00
 #define  SSB_SPROM4_TXPID5GH3_SHIFT	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* There are 4 blocks with power info sharing the same layout */
 #define SSB_SPROM4_PWR_INFO_CORE0	0x0080
@@ -387,6 +394,9 @@
 #define SSB_SPROM4_5GH_PA_3		0x24
 
 /* TODO: Make it deprecated */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SSB_SPROM4_MAXP_BG		0x0080  /* Max Power BG in path 1 */
 #define  SSB_SPROM4_MAXP_BG_MASK	0x00FF  /* Mask for Max Power BG */

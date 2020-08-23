@@ -30,13 +30,19 @@ static inline cycles_t get_cycles(void)
 
 	__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"97:	mftb %0\n"
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx
 		"97:	mftb %0\n"
 #else
 		"97:	mfspr %0, %2\n"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"99:\n"
 		".section __ftr_fixup,\"a\"\n"
@@ -50,13 +56,19 @@ static inline cycles_t get_cycles(void)
 		"	.long 0\n"
 		".previous"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "=r" (ret) : "i" (CPU_FTR_601));
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx
 		: "=r" (ret) : "i" (CPU_FTR_601));
 #else
 		: "=r" (ret) : "i" (CPU_FTR_601), "i" (SPRN_TBRL));
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 #endif

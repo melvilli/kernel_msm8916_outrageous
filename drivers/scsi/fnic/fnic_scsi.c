@@ -112,13 +112,19 @@ static inline spinlock_t *fnic_io_lock_hash(struct fnic *fnic,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline spinlock_t *fnic_io_lock_tag(struct fnic *fnic,
 					    int tag)
 {
 	return &fnic->io_req_lock[tag & (FNIC_IO_LOCKS - 1)];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Unmap the data buffer and sense buffer for an io_req,
@@ -230,6 +236,7 @@ int fnic_fw_reset_handler(struct fnic *fnic)
 	if (!vnic_wq_copy_desc_avail(wq))
 		ret = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		fnic_queue_wq_copy_desc_fw_reset(wq, SCSI_NO_TAG);
 
@@ -240,6 +247,8 @@ int fnic_fw_reset_handler(struct fnic *fnic)
 			      "Issued fw reset\n");
 	else {
 =======
+=======
+>>>>>>> v3.18
 	else {
 		fnic_queue_wq_copy_desc_fw_reset(wq, SCSI_NO_TAG);
 		atomic64_inc(&fnic->fnic_stats.fw_stats.active_fw_reqs);
@@ -257,6 +266,9 @@ int fnic_fw_reset_handler(struct fnic *fnic)
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 			      "Issued fw reset\n");
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fnic_clear_state_flags(fnic, FNIC_FLAGS_FWRESET);
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
@@ -315,13 +327,19 @@ int fnic_flogi_reg_handler(struct fnic *fnic, u32 fc_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	atomic64_inc(&fnic->fnic_stats.fw_stats.active_fw_reqs);
 	if (atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs) >
 		  atomic64_read(&fnic->fnic_stats.fw_stats.max_fw_reqs))
 		atomic64_set(&fnic->fnic_stats.fw_stats.max_fw_reqs,
 		  atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 flogi_reg_ioreq_end:
 	spin_unlock_irqrestore(&fnic->wq_copy_lock[0], flags);
@@ -343,6 +361,10 @@ static inline int fnic_queue_wq_copy_desc(struct fnic *fnic,
 	struct fc_rport_libfc_priv *rp = rport->dd_data;
 	struct host_sg_desc *desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
+>>>>>>> v3.18
 =======
 	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
 >>>>>>> v3.18
@@ -395,6 +417,10 @@ static inline int fnic_queue_wq_copy_desc(struct fnic *fnic,
 		FNIC_SCSI_DBG(KERN_INFO, fnic->lport->host,
 			  "fnic_queue_wq_copy_desc failure - no descriptors\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&misc_stats->io_cpwq_alloc_failures);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&misc_stats->io_cpwq_alloc_failures);
 >>>>>>> v3.18
@@ -427,13 +453,19 @@ static inline int fnic_queue_wq_copy_desc(struct fnic *fnic,
 					 rp->e_d_tov);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	atomic64_inc(&fnic->fnic_stats.fw_stats.active_fw_reqs);
 	if (atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs) >
 		  atomic64_read(&fnic->fnic_stats.fw_stats.max_fw_reqs))
 		atomic64_set(&fnic->fnic_stats.fw_stats.max_fw_reqs,
 		  atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&fnic->wq_copy_lock[0], intr_flags);
 	return 0;
@@ -451,6 +483,10 @@ static int fnic_queuecommand_lck(struct scsi_cmnd *sc, void (*done)(struct scsi_
 	struct fnic_io_req *io_req = NULL;
 	struct fnic *fnic = lport_priv(lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct fnic_stats *fnic_stats = &fnic->fnic_stats;
+>>>>>>> v3.18
 =======
 	struct fnic_stats *fnic_stats = &fnic->fnic_stats;
 >>>>>>> v3.18
@@ -468,6 +504,10 @@ static int fnic_queuecommand_lck(struct scsi_cmnd *sc, void (*done)(struct scsi_
 	ret = fc_remote_port_chkready(rport);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->misc_stats.rport_not_ready);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->misc_stats.rport_not_ready);
 >>>>>>> v3.18
@@ -494,6 +534,10 @@ static int fnic_queuecommand_lck(struct scsi_cmnd *sc, void (*done)(struct scsi_
 	io_req = mempool_alloc(fnic->io_req_pool, GFP_ATOMIC);
 	if (!io_req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->io_stats.alloc_failures);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->io_stats.alloc_failures);
 >>>>>>> v3.18
@@ -524,6 +568,10 @@ static int fnic_queuecommand_lck(struct scsi_cmnd *sc, void (*done)(struct scsi_
 				      GFP_ATOMIC);
 		if (!io_req->sgl_list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			atomic64_inc(&fnic_stats->io_stats.alloc_failures);
+>>>>>>> v3.18
 =======
 			atomic64_inc(&fnic_stats->io_stats.alloc_failures);
 >>>>>>> v3.18
@@ -575,7 +623,10 @@ static int fnic_queuecommand_lck(struct scsi_cmnd *sc, void (*done)(struct scsi_
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		atomic64_inc(&fnic_stats->io_stats.active_ios);
 		atomic64_inc(&fnic_stats->io_stats.num_ios);
 		if (atomic64_read(&fnic_stats->io_stats.active_ios) >
@@ -583,6 +634,9 @@ static int fnic_queuecommand_lck(struct scsi_cmnd *sc, void (*done)(struct scsi_
 			atomic64_set(&fnic_stats->io_stats.max_active_ios,
 			     atomic64_read(&fnic_stats->io_stats.active_ios));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* REVISIT: Use per IO lock in the final code */
 		CMD_FLAGS(sc) |= FNIC_IO_ISSUED;
@@ -618,6 +672,7 @@ static int fnic_fcpio_fw_reset_cmpl_handler(struct fnic *fnic,
 	int ret = 0;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	fcpio_header_dec(&desc->hdr, &type, &hdr_status, &tag);
 
@@ -625,6 +680,8 @@ static int fnic_fcpio_fw_reset_cmpl_handler(struct fnic *fnic,
 	fnic_cleanup_io(fnic, SCSI_NO_TAG);
 
 =======
+=======
+>>>>>>> v3.18
 	struct reset_stats *reset_stats = &fnic->fnic_stats.reset_stats;
 
 	fcpio_header_dec(&desc->hdr, &type, &hdr_status, &tag);
@@ -637,6 +694,9 @@ static int fnic_fcpio_fw_reset_cmpl_handler(struct fnic *fnic,
 	atomic64_set(&fnic->fnic_stats.fw_stats.active_fw_reqs, 0);
 	atomic64_set(&fnic->fnic_stats.io_stats.active_ios, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&fnic->fnic_lock, flags);
 
@@ -662,6 +722,10 @@ static int fnic_fcpio_fw_reset_cmpl_handler(struct fnic *fnic,
 			 */
 			fnic->state = FNIC_IN_FC_MODE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			atomic64_inc(&reset_stats->fw_reset_failures);
+>>>>>>> v3.18
 =======
 			atomic64_inc(&reset_stats->fw_reset_failures);
 >>>>>>> v3.18
@@ -673,6 +737,10 @@ static int fnic_fcpio_fw_reset_cmpl_handler(struct fnic *fnic,
 			      "Unexpected state %s while processing"
 			      " reset cmpl\n", fnic_state_to_str(fnic->state));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&reset_stats->fw_reset_failures);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&reset_stats->fw_reset_failures);
 >>>>>>> v3.18
@@ -800,11 +868,14 @@ static inline void fnic_fcpio_ack_handler(struct fnic *fnic,
 	spin_lock_irqsave(&fnic->wq_copy_lock[0], flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_ack_index_in_range(wq, request_out)) {
 		fnic->fw_ack_index[0] = request_out;
 		fnic->fw_ack_recd[0] = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	fnic->fnic_stats.misc_stats.last_ack_time = jiffies;
 	if (is_ack_index_in_range(wq, request_out)) {
 		fnic->fw_ack_index[0] = request_out;
@@ -813,6 +884,9 @@ static inline void fnic_fcpio_ack_handler(struct fnic *fnic,
 		atomic64_inc(
 			&fnic->fnic_stats.misc_stats.ack_index_out_of_range);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&fnic->wq_copy_lock[0], flags);
 	FNIC_TRACE(fnic_fcpio_ack_handler,
@@ -836,6 +910,10 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	struct fnic_io_req *io_req;
 	struct scsi_cmnd *sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct fnic_stats *fnic_stats = &fnic->fnic_stats;
+>>>>>>> v3.18
 =======
 	struct fnic_stats *fnic_stats = &fnic->fnic_stats;
 >>>>>>> v3.18
@@ -850,7 +928,11 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	icmnd_cmpl = &desc->u.icmnd_cmpl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id >= FNIC_MAX_IO_REQ) {
+=======
+	if (id >= fnic->fnic_max_tag_id) {
+>>>>>>> v3.18
 =======
 	if (id >= fnic->fnic_max_tag_id) {
 >>>>>>> v3.18
@@ -864,6 +946,10 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	WARN_ON_ONCE(!sc);
 	if (!sc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->io_stats.sc_null);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->io_stats.sc_null);
 >>>>>>> v3.18
@@ -888,6 +974,10 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	WARN_ON_ONCE(!io_req);
 	if (!io_req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->io_stats.ioreq_null);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->io_stats.ioreq_null);
 >>>>>>> v3.18
@@ -950,6 +1040,7 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 			xfer_len -= icmnd_cmpl->residual;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * If queue_full, then try to reduce queue depth for all
 		 * LUNS on the target. Todo: this should be accompanied
@@ -986,18 +1077,27 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 
 	case FCPIO_TIMEOUT:          /* request was timed out */
 =======
+=======
+>>>>>>> v3.18
 		if (icmnd_cmpl->scsi_status == SAM_STAT_TASK_SET_FULL)
 			atomic64_inc(&fnic_stats->misc_stats.queue_fulls);
 		break;
 
 	case FCPIO_TIMEOUT:          /* request was timed out */
 		atomic64_inc(&fnic_stats->misc_stats.fcpio_timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sc->result = (DID_TIME_OUT << 16) | icmnd_cmpl->scsi_status;
 		break;
 
 	case FCPIO_ABORTED:          /* request was aborted */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->misc_stats.fcpio_aborted);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->misc_stats.fcpio_aborted);
 >>>>>>> v3.18
@@ -1006,6 +1106,10 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 
 	case FCPIO_DATA_CNT_MISMATCH: /* recv/sent more/less data than exp. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->misc_stats.data_count_mismatch);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->misc_stats.data_count_mismatch);
 >>>>>>> v3.18
@@ -1014,6 +1118,7 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 		break;
 
 	case FCPIO_OUT_OF_RESOURCE:  /* out of resources to complete request */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sc->result = (DID_REQUEUE << 16) | icmnd_cmpl->scsi_status;
 		break;
@@ -1025,6 +1130,8 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	case FCPIO_MSS_INVALID:      /* request was aborted due to mss error */
 	case FCPIO_FW_ERR:           /* request was terminated due fw error */
 =======
+=======
+>>>>>>> v3.18
 		atomic64_inc(&fnic_stats->fw_stats.fw_out_of_resources);
 		sc->result = (DID_REQUEUE << 16) | icmnd_cmpl->scsi_status;
 		break;
@@ -1052,6 +1159,9 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	case FCPIO_INVALID_HEADER:   /* header contains invalid data */
 	case FCPIO_INVALID_PARAM:    /* some parameter in request invalid */
 	case FCPIO_REQ_NOT_SUPPORTED:/* request type is not supported */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		shost_printk(KERN_ERR, fnic->lport->host, "hdr status = %s\n",
@@ -1061,12 +1171,18 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (hdr_status != FCPIO_SUCCESS) {
 		atomic64_inc(&fnic_stats->io_stats.io_failures);
 		shost_printk(KERN_ERR, fnic->lport->host, "hdr status = %s\n",
 			     fnic_fcpio_status_to_str(hdr_status));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Break link with the SCSI command */
 	CMD_SP(sc) = NULL;
@@ -1102,13 +1218,19 @@ static void fnic_fcpio_icmnd_cmpl_handler(struct fnic *fnic,
 		fnic->lport->host_stats.fcp_control_requests++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	atomic64_dec(&fnic_stats->io_stats.active_ios);
 	if (atomic64_read(&fnic->io_cmpl_skip))
 		atomic64_dec(&fnic->io_cmpl_skip);
 	else
 		atomic64_inc(&fnic_stats->io_stats.io_completions);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Call SCSI completion function to complete the IO */
 	if (sc->scsi_done)
@@ -1128,11 +1250,17 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 	struct scsi_cmnd *sc;
 	struct fnic_io_req *io_req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct fnic_stats *fnic_stats = &fnic->fnic_stats;
 	struct abort_stats *abts_stats = &fnic->fnic_stats.abts_stats;
 	struct terminate_stats *term_stats = &fnic->fnic_stats.term_stats;
 	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 	spinlock_t *io_lock;
@@ -1142,7 +1270,11 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 	fcpio_tag_id_dec(&tag, &id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((id & FNIC_TAG_MASK) >= FNIC_MAX_IO_REQ) {
+=======
+	if ((id & FNIC_TAG_MASK) >= fnic->fnic_max_tag_id) {
+>>>>>>> v3.18
 =======
 	if ((id & FNIC_TAG_MASK) >= fnic->fnic_max_tag_id) {
 >>>>>>> v3.18
@@ -1156,6 +1288,10 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 	WARN_ON_ONCE(!sc);
 	if (!sc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->io_stats.sc_null);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->io_stats.sc_null);
 >>>>>>> v3.18
@@ -1170,6 +1306,10 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 	WARN_ON_ONCE(!io_req);
 	if (!io_req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->io_stats.ioreq_null);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->io_stats.ioreq_null);
 >>>>>>> v3.18
@@ -1198,7 +1338,10 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 	} else if (id & FNIC_TAG_ABORT) {
 		/* Completion of abort cmd */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		switch (hdr_status) {
 		case FCPIO_SUCCESS:
 			break;
@@ -1224,6 +1367,9 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 					&term_stats->terminate_failures);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (CMD_STATE(sc) != FNIC_IOREQ_ABTS_PENDING) {
 			/* This is a late completion. Ignore it */
@@ -1231,11 +1377,14 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 			return;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CMD_STATE(sc) = FNIC_IOREQ_ABTS_COMPLETE;
 		CMD_ABTS_STATUS(sc) = hdr_status;
 
 		CMD_FLAGS(sc) |= FNIC_IO_ABT_TERM_DONE;
 =======
+=======
+>>>>>>> v3.18
 		CMD_ABTS_STATUS(sc) = hdr_status;
 		CMD_FLAGS(sc) |= FNIC_IO_ABT_TERM_DONE;
 
@@ -1248,6 +1397,9 @@ static void fnic_fcpio_itmf_cmpl_handler(struct fnic *fnic,
 		if (!(CMD_FLAGS(sc) & (FNIC_IO_ABORTED | FNIC_IO_DONE)))
 			atomic64_inc(&misc_stats->no_icmnd_itmf_cmpls);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 			      "abts cmpl recd. id %d status %s\n",
@@ -1353,7 +1505,10 @@ static int fnic_fcpio_cmpl_handler(struct vnic_dev *vdev,
 
 	switch (desc->hdr.type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case FCPIO_ICMND_CMPL: /* fw completed a command */
 	case FCPIO_ITMF_CMPL: /* fw completed itmf (abort cmd, lun reset)*/
 	case FCPIO_FLOGI_REG_CMPL: /* fw completed flogi_reg */
@@ -1366,6 +1521,9 @@ static int fnic_fcpio_cmpl_handler(struct vnic_dev *vdev,
 	}
 
 	switch (desc->hdr.type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case FCPIO_ACK: /* fw copied copy wq desc to its queue */
 		fnic_fcpio_ack_handler(fnic, cq_index, desc);
@@ -1421,7 +1579,11 @@ int fnic_wq_copy_cmpl_handler(struct fnic *fnic, int copy_work_to_do)
 static void fnic_cleanup_io(struct fnic *fnic, int exclude_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -1430,6 +1592,7 @@ static void fnic_cleanup_io(struct fnic *fnic, int exclude_id)
 	struct scsi_cmnd *sc;
 	spinlock_t *io_lock;
 	unsigned long start_time = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	for (i = 0; i < FNIC_MAX_IO_REQ; i++) {
@@ -1443,6 +1606,8 @@ static void fnic_cleanup_io(struct fnic *fnic, int exclude_id)
 		io_lock = fnic_io_lock_hash(fnic, sc);
 		spin_lock_irqsave(io_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct fnic_stats *fnic_stats = &fnic->fnic_stats;
 
 	for (i = 0; i < fnic->fnic_max_tag_id; i++) {
@@ -1457,6 +1622,9 @@ static void fnic_cleanup_io(struct fnic *fnic, int exclude_id)
 			continue;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		io_req = (struct fnic_io_req *)CMD_SP(sc);
 		if ((CMD_FLAGS(sc) & FNIC_DEVICE_RESET) &&
@@ -1496,9 +1664,12 @@ static void fnic_cleanup_io(struct fnic *fnic, int exclude_id)
 cleanup_scsi_cmd:
 		sc->result = DID_TRANSPORT_DISRUPTED << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host, "fnic_cleanup_io:"
 			      " DID_TRANSPORT_DISRUPTED\n");
 =======
+=======
+>>>>>>> v3.18
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 			      "%s: sc duration = %lu DID_TRANSPORT_DISRUPTED\n",
 			      __func__, (jiffies - start_time));
@@ -1507,6 +1678,9 @@ cleanup_scsi_cmd:
 			atomic64_dec(&fnic->io_cmpl_skip);
 		else
 			atomic64_inc(&fnic_stats->io_stats.io_completions);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Complete the command to SCSI */
@@ -1541,7 +1715,11 @@ void fnic_wq_copy_cleanup_handler(struct vnic_wq_copy *wq,
 	id &= FNIC_TAG_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id >= FNIC_MAX_IO_REQ)
+=======
+	if (id >= fnic->fnic_max_tag_id)
+>>>>>>> v3.18
 =======
 	if (id >= fnic->fnic_max_tag_id)
 >>>>>>> v3.18
@@ -1597,6 +1775,10 @@ static inline int fnic_queue_abort_io_req(struct fnic *fnic, int tag,
 	struct vnic_wq_copy *wq = &fnic->wq_copy[0];
 	struct Scsi_Host *host = fnic->lport->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
+>>>>>>> v3.18
 =======
 	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
 >>>>>>> v3.18
@@ -1622,6 +1804,10 @@ static inline int fnic_queue_abort_io_req(struct fnic *fnic, int tag,
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 			"fnic_queue_abort_io_req: failure: no descriptors\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&misc_stats->abts_cpwq_alloc_failures);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&misc_stats->abts_cpwq_alloc_failures);
 >>>>>>> v3.18
@@ -1632,13 +1818,19 @@ static inline int fnic_queue_abort_io_req(struct fnic *fnic, int tag,
 				     fnic->config.ra_tov, fnic->config.ed_tov);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	atomic64_inc(&fnic->fnic_stats.fw_stats.active_fw_reqs);
 	if (atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs) >
 		  atomic64_read(&fnic->fnic_stats.fw_stats.max_fw_reqs))
 		atomic64_set(&fnic->fnic_stats.fw_stats.max_fw_reqs,
 		  atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&fnic->wq_copy_lock[0], flags);
 	atomic_dec(&fnic->in_flight);
@@ -1651,6 +1843,10 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 	int tag;
 	int abt_tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int term_cnt = 0;
+>>>>>>> v3.18
 =======
 	int term_cnt = 0;
 >>>>>>> v3.18
@@ -1659,6 +1855,11 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 	unsigned long flags;
 	struct scsi_cmnd *sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct reset_stats *reset_stats = &fnic->fnic_stats.reset_stats;
+	struct terminate_stats *term_stats = &fnic->fnic_stats.term_stats;
+>>>>>>> v3.18
 =======
 	struct reset_stats *reset_stats = &fnic->fnic_stats.reset_stats;
 	struct terminate_stats *term_stats = &fnic->fnic_stats.term_stats;
@@ -1675,6 +1876,7 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (tag = 0; tag < FNIC_MAX_IO_REQ; tag++) {
 		abt_tag = tag;
 		sc = scsi_host_find_tag(fnic->lport->host, tag);
@@ -1684,6 +1886,8 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 		io_lock = fnic_io_lock_hash(fnic, sc);
 		spin_lock_irqsave(io_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	for (tag = 0; tag < fnic->fnic_max_tag_id; tag++) {
 		abt_tag = tag;
 		io_lock = fnic_io_lock_tag(fnic, tag);
@@ -1693,6 +1897,9 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 			spin_unlock_irqrestore(io_lock, flags);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		io_req = (struct fnic_io_req *)CMD_SP(sc);
@@ -1738,6 +1945,10 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 		CMD_ABTS_STATUS(sc) = FCPIO_INVALID_CODE;
 		if (CMD_FLAGS(sc) & FNIC_DEVICE_RESET) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			atomic64_inc(&reset_stats->device_reset_terminates);
+>>>>>>> v3.18
 =======
 			atomic64_inc(&reset_stats->device_reset_terminates);
 >>>>>>> v3.18
@@ -1778,15 +1989,21 @@ static void fnic_rport_exch_reset(struct fnic *fnic, u32 port_id)
 				CMD_FLAGS(sc) |= FNIC_IO_INTERNAL_TERM_ISSUED;
 			spin_unlock_irqrestore(io_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			atomic64_inc(&term_stats->terminates);
 			term_cnt++;
 		}
 	}
 	if (term_cnt > atomic64_read(&term_stats->max_terminates))
 		atomic64_set(&term_stats->max_terminates, term_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -1796,6 +2013,10 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 	int tag;
 	int abt_tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int term_cnt = 0;
+>>>>>>> v3.18
 =======
 	int term_cnt = 0;
 >>>>>>> v3.18
@@ -1805,6 +2026,7 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 	struct scsi_cmnd *sc;
 	struct scsi_lun fc_lun;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fc_rport_libfc_priv *rdata = rport->dd_data;
 	struct fc_lport *lport = rdata->local_port;
 	struct fnic *fnic = lport_priv(lport);
@@ -1812,6 +2034,8 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 	enum fnic_ioreq_state old_ioreq_state;
 
 =======
+=======
+>>>>>>> v3.18
 	struct fc_rport_libfc_priv *rdata;
 	struct fc_lport *lport;
 	struct fnic *fnic;
@@ -1837,6 +2061,9 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 		return;
 	}
 	fnic = lport_priv(lport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FNIC_SCSI_DBG(KERN_DEBUG,
 		      fnic->lport->host, "fnic_terminate_rport_io called"
@@ -1847,6 +2074,7 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 	if (fnic->in_remove)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (tag = 0; tag < FNIC_MAX_IO_REQ; tag++) {
 		abt_tag = tag;
@@ -1861,6 +2089,8 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 		io_lock = fnic_io_lock_hash(fnic, sc);
 		spin_lock_irqsave(io_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	reset_stats = &fnic->fnic_stats.reset_stats;
 	term_stats = &fnic->fnic_stats.term_stats;
 
@@ -1879,6 +2109,9 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 			spin_unlock_irqrestore(io_lock, flags);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		io_req = (struct fnic_io_req *)CMD_SP(sc);
@@ -1922,6 +2155,10 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 		CMD_ABTS_STATUS(sc) = FCPIO_INVALID_CODE;
 		if (CMD_FLAGS(sc) & FNIC_DEVICE_RESET) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			atomic64_inc(&reset_stats->device_reset_terminates);
+>>>>>>> v3.18
 =======
 			atomic64_inc(&reset_stats->device_reset_terminates);
 >>>>>>> v3.18
@@ -1962,15 +2199,21 @@ void fnic_terminate_rport_io(struct fc_rport *rport)
 				CMD_FLAGS(sc) |= FNIC_IO_INTERNAL_TERM_ISSUED;
 			spin_unlock_irqrestore(io_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			atomic64_inc(&term_stats->terminates);
 			term_cnt++;
 		}
 	}
 	if (term_cnt > atomic64_read(&term_stats->max_terminates))
 		atomic64_set(&term_stats->max_terminates, term_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -1993,11 +2236,17 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 	u32 task_req = 0;
 	struct scsi_lun fc_lun;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct fnic_stats *fnic_stats;
 	struct abort_stats *abts_stats;
 	struct terminate_stats *term_stats;
 	enum fnic_ioreq_state old_ioreq_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int tag;
 	DECLARE_COMPLETION_ONSTACK(tm_done);
@@ -2010,18 +2259,28 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 
 	fnic = lport_priv(lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	fnic_stats = &fnic->fnic_stats;
 	abts_stats = &fnic->fnic_stats.abts_stats;
 	term_stats = &fnic->fnic_stats.term_stats;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rport = starget_to_rport(scsi_target(sc->device));
 	tag = sc->request->tag;
 	FNIC_SCSI_DBG(KERN_DEBUG,
 		fnic->lport->host,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Abort Cmd called FCID 0x%x, LUN 0x%x TAG %x flags %x\n",
+=======
+		"Abort Cmd called FCID 0x%x, LUN 0x%llx TAG %x flags %x\n",
+>>>>>>> v3.18
 =======
 		"Abort Cmd called FCID 0x%x, LUN 0x%llx TAG %x flags %x\n",
 >>>>>>> v3.18
@@ -2067,6 +2326,10 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 	 * has already started.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	old_ioreq_state = CMD_STATE(sc);
+>>>>>>> v3.18
 =======
 	old_ioreq_state = CMD_STATE(sc);
 >>>>>>> v3.18
@@ -2083,13 +2346,19 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 	if (fc_remote_port_chkready(rport) == 0)
 		task_req = FCPIO_ITMF_ABT_TASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		task_req = FCPIO_ITMF_ABT_TASK_TERM;
 =======
+=======
+>>>>>>> v3.18
 	else {
 		atomic64_inc(&fnic_stats->misc_stats.rport_not_ready);
 		task_req = FCPIO_ITMF_ABT_TASK_TERM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Now queue the abort command to firmware */
@@ -2099,6 +2368,11 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 				    fc_lun.scsi_lun, io_req)) {
 		spin_lock_irqsave(io_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING)
+			CMD_STATE(sc) = old_ioreq_state;
+>>>>>>> v3.18
 =======
 		if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING)
 			CMD_STATE(sc) = old_ioreq_state;
@@ -2111,11 +2385,14 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 		goto fnic_abort_cmd_end;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (task_req == FCPIO_ITMF_ABT_TASK)
 		CMD_FLAGS(sc) |= FNIC_IO_ABTS_ISSUED;
 	else
 		CMD_FLAGS(sc) |= FNIC_IO_TERM_ISSUED;
 =======
+=======
+>>>>>>> v3.18
 	if (task_req == FCPIO_ITMF_ABT_TASK) {
 		CMD_FLAGS(sc) |= FNIC_IO_ABTS_ISSUED;
 		atomic64_inc(&fnic_stats->abts_stats.aborts);
@@ -2123,6 +2400,9 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 		CMD_FLAGS(sc) |= FNIC_IO_TERM_ISSUED;
 		atomic64_inc(&fnic_stats->term_stats.terminates);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2142,6 +2422,10 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 	io_req = (struct fnic_io_req *)CMD_SP(sc);
 	if (!io_req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&fnic_stats->io_stats.ioreq_null);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&fnic_stats->io_stats.ioreq_null);
 >>>>>>> v3.18
@@ -2154,9 +2438,12 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 
 	/* fw did not complete abort, timed out */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING) {
 		spin_unlock_irqrestore(io_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (CMD_ABTS_STATUS(sc) == FCPIO_INVALID_CODE) {
 		spin_unlock_irqrestore(io_lock, flags);
 		if (task_req == FCPIO_ITMF_ABT_TASK) {
@@ -2164,6 +2451,9 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 		} else {
 			atomic64_inc(&term_stats->terminate_drv_timeouts);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		CMD_FLAGS(sc) |= FNIC_IO_ABT_TERM_TIMED_OUT;
 		ret = FAILED;
@@ -2171,6 +2461,11 @@ int fnic_abort_cmd(struct scsi_cmnd *sc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CMD_STATE(sc) = FNIC_IOREQ_ABTS_COMPLETE;
+
+>>>>>>> v3.18
 =======
 	CMD_STATE(sc) = FNIC_IOREQ_ABTS_COMPLETE;
 
@@ -2213,6 +2508,10 @@ static inline int fnic_queue_dr_io_req(struct fnic *fnic,
 	struct vnic_wq_copy *wq = &fnic->wq_copy[0];
 	struct Scsi_Host *host = fnic->lport->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
+>>>>>>> v3.18
 =======
 	struct misc_stats *misc_stats = &fnic->fnic_stats.misc_stats;
 >>>>>>> v3.18
@@ -2238,6 +2537,10 @@ static inline int fnic_queue_dr_io_req(struct fnic *fnic,
 		FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 			  "queue_dr_io_req failure - no descriptors\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&misc_stats->devrst_cpwq_alloc_failures);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&misc_stats->devrst_cpwq_alloc_failures);
 >>>>>>> v3.18
@@ -2254,13 +2557,19 @@ static inline int fnic_queue_dr_io_req(struct fnic *fnic,
 				     fnic->config.ra_tov, fnic->config.ed_tov);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	atomic64_inc(&fnic->fnic_stats.fw_stats.active_fw_reqs);
 	if (atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs) >
 		  atomic64_read(&fnic->fnic_stats.fw_stats.max_fw_reqs))
 		atomic64_set(&fnic->fnic_stats.fw_stats.max_fw_reqs,
 		  atomic64_read(&fnic->fnic_stats.fw_stats.active_fw_reqs));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 lr_io_req_end:
 	spin_unlock_irqrestore(&fnic->wq_copy_lock[0], intr_flags);
@@ -2290,7 +2599,13 @@ static int fnic_clean_pending_aborts(struct fnic *fnic,
 	enum fnic_ioreq_state old_ioreq_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (tag = 0; tag < FNIC_MAX_IO_REQ; tag++) {
+=======
+	for (tag = 0; tag < fnic->fnic_max_tag_id; tag++) {
+		io_lock = fnic_io_lock_tag(fnic, tag);
+		spin_lock_irqsave(io_lock, flags);
+>>>>>>> v3.18
 =======
 	for (tag = 0; tag < fnic->fnic_max_tag_id; tag++) {
 		io_lock = fnic_io_lock_tag(fnic, tag);
@@ -2302,16 +2617,22 @@ static int fnic_clean_pending_aborts(struct fnic *fnic,
 		 * this lun
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!sc || sc == lr_sc || sc->device != lun_dev)
 			continue;
 
 		io_lock = fnic_io_lock_hash(fnic, sc);
 		spin_lock_irqsave(io_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		if (!sc || sc == lr_sc || sc->device != lun_dev) {
 			spin_unlock_irqrestore(io_lock, flags);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		io_req = (struct fnic_io_req *)CMD_SP(sc);
@@ -2342,12 +2663,18 @@ static int fnic_clean_pending_aborts(struct fnic *fnic,
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (io_req->abts_done)
 			shost_printk(KERN_ERR, fnic->lport->host,
 			  "%s: io_req->abts_done is set state is %s\n",
 			  __func__, fnic_ioreq_state_to_str(CMD_STATE(sc)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		old_ioreq_state = CMD_STATE(sc);
 		/*
@@ -2360,11 +2687,14 @@ static int fnic_clean_pending_aborts(struct fnic *fnic,
 		CMD_STATE(sc) = FNIC_IOREQ_ABTS_PENDING;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (io_req->abts_done)
 			shost_printk(KERN_ERR, fnic->lport->host,
 			  "%s: io_req->abts_done is set state is %s\n",
 			  __func__, fnic_ioreq_state_to_str(CMD_STATE(sc)));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		BUG_ON(io_req->abts_done);
@@ -2420,7 +2750,11 @@ static int fnic_clean_pending_aborts(struct fnic *fnic,
 
 		/* if abort is still pending with fw, fail */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING) {
+=======
+		if (CMD_ABTS_STATUS(sc) == FCPIO_INVALID_CODE) {
+>>>>>>> v3.18
 =======
 		if (CMD_ABTS_STATUS(sc) == FCPIO_INVALID_CODE) {
 >>>>>>> v3.18
@@ -2430,6 +2764,10 @@ static int fnic_clean_pending_aborts(struct fnic *fnic,
 			goto clean_pending_aborts_end;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		CMD_STATE(sc) = FNIC_IOREQ_ABTS_COMPLETE;
+>>>>>>> v3.18
 =======
 		CMD_STATE(sc) = FNIC_IOREQ_ABTS_COMPLETE;
 >>>>>>> v3.18
@@ -2527,6 +2865,11 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 	unsigned long start_time = 0;
 	struct scsi_lun fc_lun;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct fnic_stats *fnic_stats;
+	struct reset_stats *reset_stats;
+>>>>>>> v3.18
 =======
 	struct fnic_stats *fnic_stats;
 	struct reset_stats *reset_stats;
@@ -2543,11 +2886,14 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 
 	fnic = lport_priv(lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rport = starget_to_rport(scsi_target(sc->device));
 	FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 		      "Device reset called FCID 0x%x, LUN 0x%x sc 0x%p\n",
 =======
+=======
+>>>>>>> v3.18
 	fnic_stats = &fnic->fnic_stats;
 	reset_stats = &fnic->fnic_stats.reset_stats;
 
@@ -2556,6 +2902,9 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 	rport = starget_to_rport(scsi_target(sc->device));
 	FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 		      "Device reset called FCID 0x%x, LUN 0x%llx sc 0x%p\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		      rport->port_id, sc->device->lun, sc);
 
@@ -2564,13 +2913,19 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 
 	/* Check if remote port up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fc_remote_port_chkready(rport))
 		goto fnic_device_reset_end;
 =======
+=======
+>>>>>>> v3.18
 	if (fc_remote_port_chkready(rport)) {
 		atomic64_inc(&fnic_stats->misc_stats.rport_not_ready);
 		goto fnic_device_reset_end;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	CMD_FLAGS(sc) = FNIC_DEVICE_RESET;
@@ -2579,7 +2934,10 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 	tag = sc->request->tag;
 	if (unlikely(tag < 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * XXX(hch): current the midlayer fakes up a struct
 		 * request for the explicit reset ioctls, and those
@@ -2596,6 +2954,9 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 		if (shost_use_blk_mq(sc->device->host))
 			goto fnic_device_reset_end;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tag = fnic_scsi_host_start_tag(fnic, sc);
 		if (unlikely(tag == SCSI_NO_TAG))
@@ -2667,6 +3028,10 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 	 */
 	if (status == FCPIO_INVALID_CODE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		atomic64_inc(&reset_stats->device_reset_timeouts);
+>>>>>>> v3.18
 =======
 		atomic64_inc(&reset_stats->device_reset_timeouts);
 >>>>>>> v3.18
@@ -2677,8 +3042,13 @@ int fnic_device_reset(struct scsi_cmnd *sc)
 		int_to_scsilun(sc->device->lun, &fc_lun);
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Issue abort and terminate on the device reset request.
 		 * If q'ing of the abort fails, retry issue it after a delay.
+=======
+		 * Issue abort and terminate on device reset request.
+		 * If q'ing of terminate fails, retry it after a delay.
+>>>>>>> v3.18
 =======
 		 * Issue abort and terminate on device reset request.
 		 * If q'ing of terminate fails, retry it after a delay.
@@ -2789,11 +3159,17 @@ fnic_device_reset_end:
 		      (ret == SUCCESS) ?
 		      "SUCCESS" : "FAILED");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ret == FAILED)
 		atomic64_inc(&reset_stats->device_reset_failures);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2804,23 +3180,34 @@ int fnic_reset(struct Scsi_Host *shost)
 	struct fc_lport *lp;
 	struct fnic *fnic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = SUCCESS;
 
 	lp = shost_priv(shost);
 	fnic = lport_priv(lp);
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	struct reset_stats *reset_stats;
 
 	lp = shost_priv(shost);
 	fnic = lport_priv(lp);
 	reset_stats = &fnic->fnic_stats.reset_stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
 		      "fnic_reset called\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic64_inc(&reset_stats->fnic_resets);
+
+>>>>>>> v3.18
 =======
 	atomic64_inc(&reset_stats->fnic_resets);
 
@@ -2829,6 +3216,7 @@ int fnic_reset(struct Scsi_Host *shost)
 	 * Reset local port, this will clean up libFC exchanges,
 	 * reset remote port sessions, and if link is up, begin flogi
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (lp->tt.lport_reset(lp))
 		ret = FAILED;
@@ -2839,6 +3227,8 @@ int fnic_reset(struct Scsi_Host *shost)
 		      "SUCCESS" : "FAILED");
 
 =======
+=======
+>>>>>>> v3.18
 	ret = lp->tt.lport_reset(lp);
 
 	FNIC_SCSI_DBG(KERN_DEBUG, fnic->lport->host,
@@ -2851,6 +3241,9 @@ int fnic_reset(struct Scsi_Host *shost)
 	else
 		atomic64_inc(&reset_stats->fnic_reset_failures);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2877,7 +3270,11 @@ int fnic_host_reset(struct scsi_cmnd *sc)
 	 * successful, so before returning to scsi, fabric should be up
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = fnic_reset(shost);
+=======
+	ret = (fnic_reset(shost) == 0) ? SUCCESS : FAILED;
+>>>>>>> v3.18
 =======
 	ret = (fnic_reset(shost) == 0) ? SUCCESS : FAILED;
 >>>>>>> v3.18
@@ -3034,7 +3431,11 @@ int fnic_is_abts_pending(struct fnic *fnic, struct scsi_cmnd *lr_sc)
 
 	/* walk again to check, if IOs are still pending in fw */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (tag = 0; tag < FNIC_MAX_IO_REQ; tag++) {
+=======
+	for (tag = 0; tag < fnic->fnic_max_tag_id; tag++) {
+>>>>>>> v3.18
 =======
 	for (tag = 0; tag < fnic->fnic_max_tag_id; tag++) {
 >>>>>>> v3.18
@@ -3065,11 +3466,17 @@ int fnic_is_abts_pending(struct fnic *fnic, struct scsi_cmnd *lr_sc)
 			      fnic_ioreq_state_to_str(CMD_STATE(sc)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING) {
 			spin_unlock_irqrestore(io_lock, flags);
 			ret = 1;
 			continue;
 		}
+=======
+		if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING)
+			ret = 1;
+		spin_unlock_irqrestore(io_lock, flags);
+>>>>>>> v3.18
 =======
 		if (CMD_STATE(sc) == FNIC_IOREQ_ABTS_PENDING)
 			ret = 1;

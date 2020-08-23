@@ -45,6 +45,10 @@ int profile_init(void);
 int profile_setup(char *str);
 void profile_tick(int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int setup_profiling_timer(unsigned int multiplier);
+>>>>>>> v3.18
 =======
 int setup_profiling_timer(unsigned int multiplier);
 >>>>>>> v3.18

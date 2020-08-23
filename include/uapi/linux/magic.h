@@ -53,8 +53,11 @@
 #define REISER2FS_JR_SUPER_MAGIC_STRING	"ReIsEr3Fs"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SDCARDFS_SUPER_MAGIC	0xb550ca10
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SMB_SUPER_MAGIC		0x517B
@@ -77,7 +80,11 @@
 #define MTD_INODE_FS_MAGIC      0x11307854
 #define ANON_INODE_FS_MAGIC	0x09041934
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define BTRFS_TEST_MAGIC	0x73727279
+>>>>>>> v3.18
 =======
 #define BTRFS_TEST_MAGIC	0x73727279
 >>>>>>> v3.18

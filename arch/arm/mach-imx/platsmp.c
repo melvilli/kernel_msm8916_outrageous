@@ -21,8 +21,11 @@
 #include "hardware.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCU_STANDBY_ENABLE	(1 << 5)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 u32 g_diag_reg;
@@ -49,6 +52,7 @@ void __init imx_scu_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void imx_scu_standby_enable(void)
 {
 	u32 val = readl_relaxed(scu_base);
@@ -58,6 +62,9 @@ void imx_scu_standby_enable(void)
 }
 
 static int __cpuinit imx_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+static int imx_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static int imx_boot_secondary(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -100,8 +107,12 @@ static void __init imx_smp_prepare_cpus(unsigned int max_cpus)
 	 */
 	asm("mrc p15, 0, %0, c15, c0, 1" : "=r" (g_diag_reg) : : "cc");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__cpuc_flush_dcache_area(&g_diag_reg, sizeof(g_diag_reg));
 	outer_clean_range(__pa(&g_diag_reg), __pa(&g_diag_reg + 1));
+=======
+	sync_cache_w(&g_diag_reg);
+>>>>>>> v3.18
 =======
 	sync_cache_w(&g_diag_reg);
 >>>>>>> v3.18

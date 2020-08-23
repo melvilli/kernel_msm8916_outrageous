@@ -10,6 +10,10 @@
 #include <string.h>
 #include "thread_map.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util.h"
+>>>>>>> v3.18
 =======
 #include "util.h"
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ struct thread_map *thread_map__new_by_pid(pid_t pid)
 
 	for (i=0; i<items; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(namelist[i]);
+=======
+		zfree(&namelist[i]);
+>>>>>>> v3.18
 =======
 		zfree(&namelist[i]);
 >>>>>>> v3.18
@@ -126,7 +134,11 @@ struct thread_map *thread_map__new_by_uid(uid_t uid)
 
 		for (i = 0; i < items; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			free(namelist[i]);
+=======
+			zfree(&namelist[i]);
+>>>>>>> v3.18
 =======
 			zfree(&namelist[i]);
 >>>>>>> v3.18
@@ -147,6 +159,7 @@ out_free_threads:
 out_free_namelist:
 	for (i = 0; i < items; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(namelist[i]);
 	free(namelist);
 
@@ -154,11 +167,16 @@ out_free_closedir:
 	free(threads);
 	threads = NULL;
 =======
+=======
+>>>>>>> v3.18
 		zfree(&namelist[i]);
 	free(namelist);
 
 out_free_closedir:
 	zfree(&threads);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	goto out_closedir;
 }
@@ -215,7 +233,11 @@ static struct thread_map *thread_map__new_by_pid_str(const char *pid_str)
 		for (i = 0; i < items; i++) {
 			threads->map[j++] = atoi(namelist[i]->d_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			free(namelist[i]);
+=======
+			zfree(&namelist[i]);
+>>>>>>> v3.18
 =======
 			zfree(&namelist[i]);
 >>>>>>> v3.18
@@ -231,6 +253,7 @@ out:
 out_free_namelist:
 	for (i = 0; i < items; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(namelist[i]);
 	free(namelist);
 
@@ -241,6 +264,8 @@ out_free_threads:
 }
 
 =======
+=======
+>>>>>>> v3.18
 		zfree(&namelist[i]);
 	free(namelist);
 
@@ -260,6 +285,9 @@ struct thread_map *thread_map__new_dummy(void)
 	return threads;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct thread_map *thread_map__new_by_tid_str(const char *tid_str)
 {
@@ -272,6 +300,7 @@ static struct thread_map *thread_map__new_by_tid_str(const char *tid_str)
 
 	/* perf-stat expects threads to be generated even if tid not given */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tid_str) {
 		threads = malloc(sizeof(*threads) + sizeof(pid_t));
 		if (threads != NULL) {
@@ -280,6 +309,10 @@ static struct thread_map *thread_map__new_by_tid_str(const char *tid_str)
 		}
 		return threads;
 	}
+=======
+	if (!tid_str)
+		return thread_map__new_dummy();
+>>>>>>> v3.18
 =======
 	if (!tid_str)
 		return thread_map__new_dummy();
@@ -314,8 +347,12 @@ out:
 
 out_free_threads:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(threads);
 	threads = NULL;
+=======
+	zfree(&threads);
+>>>>>>> v3.18
 =======
 	zfree(&threads);
 >>>>>>> v3.18

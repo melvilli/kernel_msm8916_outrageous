@@ -31,15 +31,21 @@
 #include <linux/spinlock.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mman.h>
 #include <asm/mmu.h>
 #include <asm/spu.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hugetlb.h>
 #include <asm/mman.h>
 #include <asm/mmu.h>
 #include <asm/copro.h>
 #include <asm/hugetlb.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* some sanity checks */
@@ -112,7 +118,11 @@ static int slice_area_is_free(struct mm_struct *mm, unsigned long addr,
 		return 0;
 	vma = find_vma(mm, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (!vma || (addr + len) <= vm_start_gap(vma));
+=======
+	return (!vma || (addr + len) <= vma->vm_start);
+>>>>>>> v3.18
 =======
 	return (!vma || (addr + len) <= vma->vm_start);
 >>>>>>> v3.18
@@ -245,9 +255,13 @@ static void slice_convert(struct mm_struct *mm, struct slice_mask mask, int psiz
 	spin_unlock_irqrestore(&slice_convert_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SPU_BASE
 	spu_flush_all_slbs(mm);
 #endif
+=======
+	copro_flush_all_slbs(mm);
+>>>>>>> v3.18
 =======
 	copro_flush_all_slbs(mm);
 >>>>>>> v3.18
@@ -425,7 +439,11 @@ unsigned long slice_get_unmapped_area(unsigned long addr, unsigned long len,
 		return -EINVAL;
 	if (fixed && addr > (mm->task_size - len))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -692,9 +710,13 @@ void slice_set_psize(struct mm_struct *mm, unsigned long address,
 	spin_unlock_irqrestore(&slice_convert_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SPU_BASE
 	spu_flush_all_slbs(mm);
 #endif
+=======
+	copro_flush_all_slbs(mm);
+>>>>>>> v3.18
 =======
 	copro_flush_all_slbs(mm);
 >>>>>>> v3.18
@@ -709,6 +731,10 @@ void slice_set_range_psize(struct mm_struct *mm, unsigned long start,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_HUGETLB_PAGE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_HUGETLB_PAGE
 >>>>>>> v3.18
@@ -757,7 +783,11 @@ int is_hugepage_only_range(struct mm_struct *mm, unsigned long addr,
 	return !slice_check_fit(mask, available);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

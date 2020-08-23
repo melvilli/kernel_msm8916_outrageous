@@ -18,6 +18,7 @@
 #include <asm/bootinfo.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int early_init_dt_scan_memory_arch(unsigned long node,
 	const char *uname, int depth, void *data);
 
@@ -44,6 +45,8 @@ extern void __dt_setup_arch(struct boot_param_header *bph);
 									\
 	__dt_setup_arch(&__dtb_##sym##_begin);				\
 =======
+=======
+>>>>>>> v3.18
 extern void device_tree_init(void);
 
 struct boot_param_header;
@@ -55,6 +58,9 @@ extern void __dt_setup_arch(void *bph);
 	extern char __dtb_##sym##_begin[];				\
 									\
 	__dt_setup_arch(__dtb_##sym##_begin);				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 })
 

@@ -38,7 +38,10 @@
 #include <linux/fs.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/miscdevice.h>
@@ -46,6 +49,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/random.h>
+>>>>>>> v3.18
 =======
 #include <linux/random.h>
 >>>>>>> v3.18
@@ -64,7 +71,12 @@ static DEFINE_MUTEX(rng_mutex);
 static int data_avail;
 static u8 *rng_buffer, *rng_fillbuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned short current_quality = 700; /* an arbitrary 70% */
+=======
+static unsigned short current_quality;
+static unsigned short default_quality; /* = 0; default to "off" */
+>>>>>>> v3.18
 =======
 static unsigned short current_quality;
 static unsigned short default_quality; /* = 0; default to "off" */
@@ -74,10 +86,13 @@ module_param(current_quality, ushort, 0644);
 MODULE_PARM_DESC(current_quality,
 		 "current hwrng entropy estimation per mill");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void start_khwrngd(void);
 
 =======
+=======
+>>>>>>> v3.18
 module_param(default_quality, ushort, 0644);
 MODULE_PARM_DESC(default_quality,
 		 "default entropy content of hwrng per mill");
@@ -87,12 +102,16 @@ static void start_khwrngd(void);
 static inline int rng_get_data(struct hwrng *rng, u8 *buffer, size_t size,
 			       int wait);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static size_t rng_buffer_size(void)
 {
 	return SMP_CACHE_BYTES < 32 ? 32 : SMP_CACHE_BYTES;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int hwrng_init(struct hwrng *rng)
 {
@@ -105,6 +124,8 @@ static inline int hwrng_init(struct hwrng *rng)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static void add_early_randomness(struct hwrng *rng)
 {
 	unsigned char bytes[16];
@@ -131,6 +152,9 @@ static inline int hwrng_init(struct hwrng *rng)
 
 	if (current_quality == 0 && hwrng_fill)
 		kthread_stop(hwrng_fill);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (current_quality > 0 && !hwrng_fill)
 		start_khwrngd();
@@ -389,7 +413,11 @@ static int hwrng_fillfn(void *unused)
 					   rc * current_quality * 8 >> 10);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hwrng_fill = 0;
+=======
+	hwrng_fill = NULL;
+>>>>>>> v3.18
 =======
 	hwrng_fill = NULL;
 >>>>>>> v3.18
@@ -408,7 +436,10 @@ static void start_khwrngd(void)
 int hwrng_register(struct hwrng *rng)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int must_register_misc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err = -EINVAL;
@@ -443,7 +474,10 @@ int hwrng_register(struct hwrng *rng)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	must_register_misc = (current_rng == NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	old_rng = current_rng;
@@ -455,6 +489,7 @@ int hwrng_register(struct hwrng *rng)
 	}
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (must_register_misc) {
 		err = register_miscdev();
 		if (err) {
@@ -463,11 +498,16 @@ int hwrng_register(struct hwrng *rng)
 				current_rng = NULL;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (!old_rng) {
 		err = register_miscdev();
 		if (err) {
 			hwrng_cleanup(rng);
 			current_rng = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out_unlock;
 		}
@@ -475,7 +515,10 @@ int hwrng_register(struct hwrng *rng)
 	INIT_LIST_HEAD(&rng->list);
 	list_add_tail(&rng->list, &rng_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (old_rng && !rng->init) {
 		/*
@@ -488,6 +531,9 @@ int hwrng_register(struct hwrng *rng)
 		add_early_randomness(rng);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_unlock:
 	mutex_unlock(&rng_mutex);

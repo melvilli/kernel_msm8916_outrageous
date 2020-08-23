@@ -22,6 +22,7 @@ struct e8390_pkt_hdr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef notdef
 extern int ei_debug;
 #else
@@ -36,10 +37,16 @@ extern void eip_poll(struct net_device *dev);
 void ei_poll(struct net_device *dev);
 void eip_poll(struct net_device *dev);
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_NET_POLL_CONTROLLER
+void ei_poll(struct net_device *dev);
+void eip_poll(struct net_device *dev);
+>>>>>>> v3.18
 #endif
 
 
 /* Without I/O delay - non ISA or later chips */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void NS8390_init(struct net_device *dev, int startp);
 extern int ei_open(struct net_device *dev);
@@ -54,6 +61,8 @@ extern const struct net_device_ops ei_netdev_ops;
 
 extern struct net_device *__alloc_ei_netdev(int size);
 =======
+=======
+>>>>>>> v3.18
 void NS8390_init(struct net_device *dev, int startp);
 int ei_open(struct net_device *dev);
 int ei_close(struct net_device *dev);
@@ -66,6 +75,9 @@ struct net_device_stats *ei_get_stats(struct net_device *dev);
 extern const struct net_device_ops ei_netdev_ops;
 
 struct net_device *__alloc_ei_netdev(int size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct net_device *alloc_ei_netdev(void)
 {
@@ -73,6 +85,7 @@ static inline struct net_device *alloc_ei_netdev(void)
 }
 
 /* With I/O delay form */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void NS8390p_init(struct net_device *dev, int startp);
 extern int eip_open(struct net_device *dev);
@@ -87,6 +100,8 @@ extern const struct net_device_ops eip_netdev_ops;
 
 extern struct net_device *__alloc_eip_netdev(int size);
 =======
+=======
+>>>>>>> v3.18
 void NS8390p_init(struct net_device *dev, int startp);
 int eip_open(struct net_device *dev);
 int eip_close(struct net_device *dev);
@@ -99,6 +114,9 @@ struct net_device_stats *eip_get_stats(struct net_device *dev);
 extern const struct net_device_ops eip_netdev_ops;
 
 struct net_device *__alloc_eip_netdev(int size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct net_device *alloc_eip_netdev(void)
 {
@@ -136,6 +154,10 @@ struct ei_device {
 	spinlock_t page_lock;		/* Page register locks */
 	unsigned long priv;		/* Private field to store bus IDs etc. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 msg_enable;			/* debug message level */
+>>>>>>> v3.18
 =======
 	u32 msg_enable;			/* debug message level */
 >>>>>>> v3.18

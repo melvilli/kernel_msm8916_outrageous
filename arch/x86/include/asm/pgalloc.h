@@ -81,8 +81,11 @@ static inline void pmd_populate(struct mm_struct *mm, pmd_t *pmd,
 static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (pmd_t *)get_zeroed_page(GFP_KERNEL|__GFP_REPEAT);
 =======
+=======
+>>>>>>> v3.18
 	struct page *page;
 	page = alloc_pages(GFP_KERNEL | __GFP_REPEAT | __GFP_ZERO, 0);
 	if (!page)
@@ -92,6 +95,9 @@ static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
 		return NULL;
 	}
 	return (pmd_t *)page_address(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -99,6 +105,10 @@ static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
 {
 	BUG_ON((unsigned long)pmd & (PAGE_SIZE-1));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pgtable_pmd_page_dtor(virt_to_page(pmd));
+>>>>>>> v3.18
 =======
 	pgtable_pmd_page_dtor(virt_to_page(pmd));
 >>>>>>> v3.18

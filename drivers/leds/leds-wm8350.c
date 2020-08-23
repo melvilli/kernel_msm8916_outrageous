@@ -11,7 +11,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -207,7 +210,11 @@ static int wm8350_led_probe(struct platform_device *pdev)
 	struct regulator *isink, *dcdc;
 	struct wm8350_led *led;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8350_led_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct wm8350_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct wm8350_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

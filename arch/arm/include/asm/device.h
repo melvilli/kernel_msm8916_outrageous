@@ -26,7 +26,10 @@ struct pdev_archdata {
 	struct omap_device *od;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 dma_mask;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

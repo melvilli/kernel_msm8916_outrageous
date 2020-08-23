@@ -24,6 +24,10 @@
 #include <linux/module.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kmemleak.h>
+>>>>>>> v3.18
 =======
 #include <linux/kmemleak.h>
 >>>>>>> v3.18
@@ -86,7 +90,11 @@ struct vring_virtqueue
 
 	/* How to notify other side. FIXME: commonalize hcalls! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*notify)(struct virtqueue *vq);
+=======
+	bool (*notify)(struct virtqueue *vq);
+>>>>>>> v3.18
 =======
 	bool (*notify)(struct virtqueue *vq);
 >>>>>>> v3.18
@@ -106,6 +114,7 @@ struct vring_virtqueue
 
 #define to_vvq(_vq) container_of(_vq, struct vring_virtqueue, vq)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct scatterlist *sg_next_chained(struct scatterlist *sg,
 						  unsigned int *count)
@@ -138,10 +147,15 @@ static inline int vring_add_indirect(struct vring_virtqueue *vq,
 	struct scatterlist *sg;
 	int i, n;
 =======
+=======
+>>>>>>> v3.18
 static struct vring_desc *alloc_indirect(unsigned int total_sg, gfp_t gfp)
 {
 	struct vring_desc *desc;
 	unsigned int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -153,6 +167,7 @@ static struct vring_desc *alloc_indirect(unsigned int total_sg, gfp_t gfp)
 
 	desc = kmalloc(total_sg * sizeof(struct vring_desc), gfp);
 	if (!desc)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENOMEM;
 
@@ -196,21 +211,30 @@ static struct vring_desc *alloc_indirect(unsigned int total_sg, gfp_t gfp)
 
 	return head;
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 
 	for (i = 0; i < total_sg; i++)
 		desc[i].next = i+1;
 	return desc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline int virtqueue_add(struct virtqueue *_vq,
 				struct scatterlist *sgs[],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct scatterlist *(*next)
 				  (struct scatterlist *, unsigned int *),
 				unsigned int total_out,
 				unsigned int total_in,
+=======
+				unsigned int total_sg,
+>>>>>>> v3.18
 =======
 				unsigned int total_sg,
 >>>>>>> v3.18
@@ -222,13 +246,19 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 	struct vring_virtqueue *vq = to_vvq(_vq);
 	struct scatterlist *sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i, n, avail, uninitialized_var(prev), total_sg;
 	int head;
 =======
+=======
+>>>>>>> v3.18
 	struct vring_desc *desc;
 	unsigned int i, n, avail, descs_used, uninitialized_var(prev);
 	int head;
 	bool indirect;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	START_USE(vq);
@@ -236,12 +266,18 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 	BUG_ON(data == NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(vq->broken)) {
 		END_USE(vq);
 		return -EIO;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef DEBUG
 	{
@@ -256,6 +292,7 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 	}
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	total_sg = total_in + total_out;
 
@@ -276,6 +313,8 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 		pr_debug("Can't add buf len %i - avail = %i\n",
 			 total_sg, vq->vq.num_free);
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(total_sg > vq->vring.num);
 	BUG_ON(total_sg == 0);
 
@@ -310,6 +349,9 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 	if (vq->vq.num_free < descs_used) {
 		pr_debug("Can't add buf len %i - avail = %i\n",
 			 descs_used, vq->vq.num_free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* FIXME: for historical reasons, we force a notify here if
 		 * there are outgoing parts to the buffer.  Presumably the
@@ -321,6 +363,7 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 	}
 
 	/* We're about to use some buffers from the free list. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vq->vq.num_free -= total_sg;
 
@@ -351,6 +394,8 @@ static inline int virtqueue_add(struct virtqueue *_vq,
 
 add_head:
 =======
+=======
+>>>>>>> v3.18
 	vq->vq.num_free -= descs_used;
 
 	for (n = 0; n < out_sgs; n++) {
@@ -380,6 +425,9 @@ add_head:
 	else
 		vq->free_head = i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Set token. */
 	vq->data[head] = data;
@@ -407,6 +455,7 @@ add_head:
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * virtqueue_add_buf - expose buffer to other end
  * @vq: the struct virtqueue we're talking about.
@@ -441,6 +490,8 @@ EXPORT_SYMBOL_GPL(virtqueue_add_buf);
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * virtqueue_add_sgs - expose buffers to other end
  * @vq: the struct virtqueue we're talking about.
  * @sgs: array of terminated scatterlists.
@@ -453,7 +504,11 @@ EXPORT_SYMBOL_GPL(virtqueue_add_buf);
  * at the same time (except where noted).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero or a negative error (ie. ENOSPC, ENOMEM).
+=======
+ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
+>>>>>>> v3.18
 =======
  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
 >>>>>>> v3.18
@@ -465,6 +520,7 @@ int virtqueue_add_sgs(struct virtqueue *_vq,
 		      void *data,
 		      gfp_t gfp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int i, total_out, total_in;
 
@@ -482,6 +538,8 @@ int virtqueue_add_sgs(struct virtqueue *_vq,
 	return virtqueue_add(_vq, sgs, sg_next_chained,
 			     total_out, total_in, out_sgs, in_sgs, data, gfp);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i, total_sg = 0;
 
 	/* Count them first. */
@@ -491,6 +549,9 @@ int virtqueue_add_sgs(struct virtqueue *_vq,
 			total_sg++;
 	}
 	return virtqueue_add(_vq, sgs, total_sg, out_sgs, in_sgs, data, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(virtqueue_add_sgs);
@@ -499,8 +560,13 @@ EXPORT_SYMBOL_GPL(virtqueue_add_sgs);
  * virtqueue_add_outbuf - expose output buffers to other end
  * @vq: the struct virtqueue we're talking about.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sgs: array of scatterlists (need not be terminated!)
  * @num: the number of scatterlists readable by other side
+=======
+ * @sg: scatterlist (must be well-formed and terminated!)
+ * @num: the number of entries in @sg readable by other side
+>>>>>>> v3.18
 =======
  * @sg: scatterlist (must be well-formed and terminated!)
  * @num: the number of entries in @sg readable by other side
@@ -512,6 +578,7 @@ EXPORT_SYMBOL_GPL(virtqueue_add_sgs);
  * at the same time (except where noted).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero or a negative error (ie. ENOSPC, ENOMEM).
  */
 int virtqueue_add_outbuf(struct virtqueue *vq,
@@ -521,6 +588,8 @@ int virtqueue_add_outbuf(struct virtqueue *vq,
 {
 	return virtqueue_add(vq, &sg, sg_next_arr, num, 0, 1, 0, data, gfp);
 =======
+=======
+>>>>>>> v3.18
  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
  */
 int virtqueue_add_outbuf(struct virtqueue *vq,
@@ -529,6 +598,9 @@ int virtqueue_add_outbuf(struct virtqueue *vq,
 			 gfp_t gfp)
 {
 	return virtqueue_add(vq, &sg, num, 1, 0, data, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(virtqueue_add_outbuf);
@@ -537,8 +609,13 @@ EXPORT_SYMBOL_GPL(virtqueue_add_outbuf);
  * virtqueue_add_inbuf - expose input buffers to other end
  * @vq: the struct virtqueue we're talking about.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sgs: array of scatterlists (need not be terminated!)
  * @num: the number of scatterlists writable by other side
+=======
+ * @sg: scatterlist (must be well-formed and terminated!)
+ * @num: the number of entries in @sg writable by other side
+>>>>>>> v3.18
 =======
  * @sg: scatterlist (must be well-formed and terminated!)
  * @num: the number of entries in @sg writable by other side
@@ -550,6 +627,7 @@ EXPORT_SYMBOL_GPL(virtqueue_add_outbuf);
  * at the same time (except where noted).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero or a negative error (ie. ENOSPC, ENOMEM).
  */
 int virtqueue_add_inbuf(struct virtqueue *vq,
@@ -559,6 +637,8 @@ int virtqueue_add_inbuf(struct virtqueue *vq,
 {
 	return virtqueue_add(vq, &sg, sg_next_arr, 0, num, 0, 1, data, gfp);
 =======
+=======
+>>>>>>> v3.18
  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
  */
 int virtqueue_add_inbuf(struct virtqueue *vq,
@@ -567,6 +647,9 @@ int virtqueue_add_inbuf(struct virtqueue *vq,
 			gfp_t gfp)
 {
 	return virtqueue_add(vq, &sg, num, 0, 1, data, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(virtqueue_add_inbuf);
@@ -622,6 +705,7 @@ EXPORT_SYMBOL_GPL(virtqueue_kick_prepare);
  *
  * This does not need to be serialized.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 void virtqueue_notify(struct virtqueue *_vq)
 {
@@ -630,6 +714,8 @@ void virtqueue_notify(struct virtqueue *_vq)
 	/* Prod other side to tell it about changes. */
 	vq->notify(_vq);
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns false if host notify failed or queue is broken, otherwise true.
  */
@@ -646,6 +732,9 @@ bool virtqueue_notify(struct virtqueue *_vq)
 		return false;
 	}
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(virtqueue_notify);
@@ -655,7 +744,11 @@ EXPORT_SYMBOL_GPL(virtqueue_notify);
  * @vq: the struct virtqueue
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * After one or more virtqueue_add_buf calls, invoke this to kick
+=======
+ * After one or more virtqueue_add_* calls, invoke this to kick
+>>>>>>> v3.18
 =======
  * After one or more virtqueue_add_* calls, invoke this to kick
 >>>>>>> v3.18
@@ -664,12 +757,15 @@ EXPORT_SYMBOL_GPL(virtqueue_notify);
  * Caller must ensure we don't call this with other virtqueue
  * operations at the same time (except where noted).
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 void virtqueue_kick(struct virtqueue *vq)
 {
 	if (virtqueue_kick_prepare(vq))
 		virtqueue_notify(vq);
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns false if kick failed, otherwise true.
  */
@@ -678,6 +774,9 @@ bool virtqueue_kick(struct virtqueue *vq)
 	if (virtqueue_kick_prepare(vq))
 		return virtqueue_notify(vq);
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(virtqueue_kick);
@@ -727,7 +826,11 @@ static inline bool more_used(const struct vring_virtqueue *vq)
  *
  * Returns NULL if there are no used buffers, or the "data" token
 <<<<<<< HEAD
+<<<<<<< HEAD
  * handed to virtqueue_add_buf().
+=======
+ * handed to virtqueue_add_*().
+>>>>>>> v3.18
 =======
  * handed to virtqueue_add_*().
 >>>>>>> v3.18
@@ -918,7 +1021,11 @@ EXPORT_SYMBOL_GPL(virtqueue_enable_cb_delayed);
  * @vq: the struct virtqueue we're talking about.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns NULL or the "data" token handed to virtqueue_add_buf().
+=======
+ * Returns NULL or the "data" token handed to virtqueue_add_*().
+>>>>>>> v3.18
 =======
  * Returns NULL or the "data" token handed to virtqueue_add_*().
 >>>>>>> v3.18
@@ -978,7 +1085,11 @@ struct virtqueue *vring_new_virtqueue(unsigned int index,
 				      bool weak_barriers,
 				      void *pages,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      void (*notify)(struct virtqueue *),
+=======
+				      bool (*notify)(struct virtqueue *),
+>>>>>>> v3.18
 =======
 				      bool (*notify)(struct virtqueue *),
 >>>>>>> v3.18
@@ -1077,7 +1188,10 @@ unsigned int virtqueue_get_vring_size(struct virtqueue *_vq)
 EXPORT_SYMBOL_GPL(virtqueue_get_vring_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool virtqueue_is_broken(struct virtqueue *_vq)
 {
 	struct vring_virtqueue *vq = to_vvq(_vq);
@@ -1101,5 +1215,8 @@ void virtio_break_device(struct virtio_device *dev)
 }
 EXPORT_SYMBOL_GPL(virtio_break_device);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

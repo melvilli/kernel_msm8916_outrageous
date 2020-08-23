@@ -64,6 +64,7 @@ static s16 ath9k_hw_get_default_nf(struct ath_hw *ah,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 s16 ath9k_hw_getchan_noise(struct ath_hw *ah, struct ath9k_channel *chan)
 {
 	s8 noise = ATH_DEFAULT_NOISE_FLOOR;
@@ -72,6 +73,8 @@ s16 ath9k_hw_getchan_noise(struct ath_hw *ah, struct ath9k_channel *chan)
 		s8 delta = chan->noisefloor -
 			   ATH9K_NF_CAL_NOISE_THRESH -
 =======
+=======
+>>>>>>> v3.18
 s16 ath9k_hw_getchan_noise(struct ath_hw *ah, struct ath9k_channel *chan,
 			   s16 nf)
 {
@@ -79,6 +82,9 @@ s16 ath9k_hw_getchan_noise(struct ath_hw *ah, struct ath9k_channel *chan,
 
 	if (nf) {
 		s8 delta = nf - ATH9K_NF_CAL_NOISE_THRESH -
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   ath9k_hw_get_default_nf(ah, chan);
 		if (delta > 0)
@@ -130,7 +136,11 @@ static void ath9k_hw_update_nfcal_hist_buffer(struct ath_hw *ah,
 				"NFmid[%d] (%d) > MAX (%d), %s\n",
 				i, h[i].privNF, limit->max,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(cal->nfcal_interference ?
+=======
+				(test_bit(NFCAL_INTF, &cal->cal_flags) ?
+>>>>>>> v3.18
 =======
 				(test_bit(NFCAL_INTF, &cal->cal_flags) ?
 >>>>>>> v3.18
@@ -145,7 +155,11 @@ static void ath9k_hw_update_nfcal_hist_buffer(struct ath_hw *ah,
 			 * with our environment.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!cal->nfcal_interference)
+=======
+			if (!test_bit(NFCAL_INTF, &cal->cal_flags))
+>>>>>>> v3.18
 =======
 			if (!test_bit(NFCAL_INTF, &cal->cal_flags))
 >>>>>>> v3.18
@@ -160,7 +174,11 @@ static void ath9k_hw_update_nfcal_hist_buffer(struct ath_hw *ah,
 	 */
 	if (!high_nf_mid)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cal->nfcal_interference = false;
+=======
+		clear_bit(NFCAL_INTF, &cal->cal_flags);
+>>>>>>> v3.18
 =======
 		clear_bit(NFCAL_INTF, &cal->cal_flags);
 >>>>>>> v3.18
@@ -209,7 +227,10 @@ bool ath9k_hw_reset_calvalid(struct ath_hw *ah)
 {
 	struct ath_common *common = ath9k_hw_common(ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_conf *conf = &common->hw->conf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath9k_cal_list *currCal = ah->cal_list_curr;
@@ -234,7 +255,11 @@ bool ath9k_hw_reset_calvalid(struct ath_hw *ah)
 
 	ath_dbg(common, CALIBRATE, "Resetting Cal %d state for channel %u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		currCal->calData->calType, conf->chandef.chan->center_freq);
+=======
+		currCal->calData->calType, ah->curchan->chan->center_freq);
+>>>>>>> v3.18
 =======
 		currCal->calData->calType, ah->curchan->chan->center_freq);
 >>>>>>> v3.18
@@ -250,7 +275,11 @@ void ath9k_hw_start_nfcal(struct ath_hw *ah, bool update)
 {
 	if (ah->caldata)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ah->caldata->nfcal_pending = true;
+=======
+		set_bit(NFCAL_PENDING, &ah->caldata->cal_flags);
+>>>>>>> v3.18
 =======
 		set_bit(NFCAL_PENDING, &ah->caldata->cal_flags);
 >>>>>>> v3.18
@@ -276,7 +305,10 @@ void ath9k_hw_loadnf(struct ath_hw *ah, struct ath9k_channel *chan)
 	u8 chainmask = (ah->rxchainmask << 3) | ah->rxchainmask;
 	struct ath_common *common = ath9k_hw_common(ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_conf *conf = &common->hw->conf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s16 default_nf = ath9k_hw_get_default_nf(ah, chan);
@@ -289,7 +321,11 @@ void ath9k_hw_loadnf(struct ath_hw *ah, struct ath9k_channel *chan)
 			s16 nfval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((i >= AR5416_MAX_CHAINS) && !conf_is_ht40(conf))
+=======
+			if ((i >= AR5416_MAX_CHAINS) && !IS_CHAN_HT40(chan))
+>>>>>>> v3.18
 =======
 			if ((i >= AR5416_MAX_CHAINS) && !IS_CHAN_HT40(chan))
 >>>>>>> v3.18
@@ -355,7 +391,11 @@ void ath9k_hw_loadnf(struct ath_hw *ah, struct ath9k_channel *chan)
 	for (i = 0; i < NUM_NF_READINGS; i++) {
 		if (chainmask & (1 << i)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((i >= AR5416_MAX_CHAINS) && !conf_is_ht40(conf))
+=======
+			if ((i >= AR5416_MAX_CHAINS) && !IS_CHAN_HT40(chan))
+>>>>>>> v3.18
 =======
 			if ((i >= AR5416_MAX_CHAINS) && !IS_CHAN_HT40(chan))
 >>>>>>> v3.18
@@ -436,15 +476,21 @@ bool ath9k_hw_getnf(struct ath_hw *ah, struct ath9k_channel *chan)
 
 	h = caldata->nfCalHist;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	caldata->nfcal_pending = false;
 	ath9k_hw_update_nfcal_hist_buffer(ah, caldata, nfarray);
 	chan->noisefloor = h[0].privNF;
 	ah->noise = ath9k_hw_getchan_noise(ah, chan);
 =======
+=======
+>>>>>>> v3.18
 	clear_bit(NFCAL_PENDING, &caldata->cal_flags);
 	ath9k_hw_update_nfcal_hist_buffer(ah, caldata, nfarray);
 	chan->noisefloor = h[0].privNF;
 	ah->noise = ath9k_hw_getchan_noise(ah, chan, chan->noisefloor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return true;
 }
@@ -460,7 +506,10 @@ void ath9k_init_nfcal_hist_buffer(struct ath_hw *ah,
 	ah->caldata->channel = chan->channel;
 	ah->caldata->channelFlags = chan->channelFlags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->caldata->chanmode = chan->chanmode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	h = ah->caldata->nfCalHist;
@@ -492,7 +541,11 @@ void ath9k_hw_bstuck_nfcal(struct ath_hw *ah)
 	 * what is being done after a full reset.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!caldata->nfcal_pending)
+=======
+	if (!test_bit(NFCAL_PENDING, &caldata->cal_flags))
+>>>>>>> v3.18
 =======
 	if (!test_bit(NFCAL_PENDING, &caldata->cal_flags))
 >>>>>>> v3.18
@@ -501,7 +554,11 @@ void ath9k_hw_bstuck_nfcal(struct ath_hw *ah)
 		ath9k_hw_getnf(ah, ah->curchan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	caldata->nfcal_interference = true;
+=======
+	set_bit(NFCAL_INTF, &caldata->cal_flags);
+>>>>>>> v3.18
 =======
 	set_bit(NFCAL_INTF, &caldata->cal_flags);
 >>>>>>> v3.18

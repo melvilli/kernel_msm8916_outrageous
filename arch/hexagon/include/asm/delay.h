@@ -22,6 +22,10 @@
 #include <asm/param.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __delay(unsigned long cycles);
+>>>>>>> v3.18
 =======
 extern void __delay(unsigned long cycles);
 >>>>>>> v3.18

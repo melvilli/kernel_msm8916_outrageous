@@ -534,7 +534,11 @@ also have
       that were re-written, or (for 'check') would have been
       re-written.  As most raid levels work in units of pages rather
 <<<<<<< HEAD
+<<<<<<< HEAD
       than sectors, this my be larger than the number of actual errors
+=======
+      than sectors, this may be larger than the number of actual errors
+>>>>>>> v3.18
 =======
       than sectors, this may be larger than the number of actual errors
 >>>>>>> v3.18
@@ -571,6 +575,7 @@ also have
      other times.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    sync_max
      This is a number of sectors at which point a resync/recovery
      process will pause.  When a resync is active, the value can
@@ -578,6 +583,8 @@ also have
      effectively disables the limit.
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
    sync_speed
@@ -601,13 +608,19 @@ also have
      "sync_max", or can write 'idle' to "sync_action".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
      The value of 'max' for "sync_max" effectively disables the limit.
      When a resync is active, the value can only ever be increased,
      never decreased.
      The value of '0' is the minimum for "sync_min".
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Each active md device may also have attributes specific to the

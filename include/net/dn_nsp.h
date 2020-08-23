@@ -16,6 +16,7 @@
 /* dn_nsp.c functions prototyping */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dn_nsp_send_data_ack(struct sock *sk);
 extern void dn_nsp_send_oth_ack(struct sock *sk);
 extern void dn_nsp_delayed_ack(struct sock *sk);
@@ -40,6 +41,8 @@ extern int dn_nsp_backlog_rcv(struct sock *sk, struct sk_buff *skb);
 extern struct sk_buff *dn_alloc_skb(struct sock *sk, int size, gfp_t pri);
 extern struct sk_buff *dn_alloc_send_skb(struct sock *sk, size_t *size, int noblock, long timeo, int *err);
 =======
+=======
+>>>>>>> v3.18
 void dn_nsp_send_data_ack(struct sock *sk);
 void dn_nsp_send_oth_ack(struct sock *sk);
 void dn_nsp_delayed_ack(struct sock *sk);
@@ -66,6 +69,9 @@ int dn_nsp_backlog_rcv(struct sock *sk, struct sk_buff *skb);
 struct sk_buff *dn_alloc_skb(struct sock *sk, int size, gfp_t pri);
 struct sk_buff *dn_alloc_send_skb(struct sock *sk, size_t *size, int noblock,
 				  long timeo, int *err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NSP_REASON_OK 0		/* No error */

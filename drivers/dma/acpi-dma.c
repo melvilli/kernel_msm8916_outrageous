@@ -14,6 +14,10 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -35,18 +39,24 @@ static DEFINE_MUTEX(acpi_dma_lock);
  * @adma:	struct acpi_dma of the given DMA controller
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 1 on success, 0 when no information is available, or appropriate
  * errno value on error.
  *
  * In order to match a device from DSDT table to the corresponding CSRT device
  * we use MMIO address and IRQ.
 =======
+=======
+>>>>>>> v3.18
  * In order to match a device from DSDT table to the corresponding CSRT device
  * we use MMIO address and IRQ.
  *
  * Return:
  * 1 on success, 0 when no information is available, or appropriate errno value
  * on error.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int acpi_dma_parse_resource_group(const struct acpi_csrt_group *grp,
@@ -57,7 +67,10 @@ static int acpi_dma_parse_resource_group(const struct acpi_csrt_group *grp,
 	struct resource_list_entry *rentry;
 	resource_size_t mem = 0, irq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 vendor_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -90,9 +103,14 @@ static int acpi_dma_parse_resource_group(const struct acpi_csrt_group *grp,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vendor_id = le32_to_cpu(grp->vendor_id);
 	dev_dbg(&adev->dev, "matches with %.4s%04X (rev %u)\n",
 		(char *)&vendor_id, grp->device_id, grp->revision);
+=======
+	dev_dbg(&adev->dev, "matches with %.4s%04X (rev %u)\n",
+		(char *)&grp->vendor_id, grp->device_id, grp->revision);
+>>>>>>> v3.18
 =======
 	dev_dbg(&adev->dev, "matches with %.4s%04X (rev %u)\n",
 		(char *)&grp->vendor_id, grp->device_id, grp->revision);
@@ -125,7 +143,10 @@ static int acpi_dma_parse_resource_group(const struct acpi_csrt_group *grp,
  * We are using this table to get the request line range of the specific DMA
  * controller to be used later.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -168,16 +189,22 @@ static void acpi_dma_parse_csrt(struct acpi_device *adev, struct acpi_dma *adma)
  *			translation function
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 0 on success or appropriate errno value on error.
  *
  * Allocated memory should be freed with appropriate acpi_dma_controller_free()
  * call.
 =======
+=======
+>>>>>>> v3.18
  * Allocated memory should be freed with appropriate acpi_dma_controller_free()
  * call.
  *
  * Return:
  * 0 on success or appropriate errno value on error.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int acpi_dma_controller_register(struct device *dev,
@@ -223,6 +250,12 @@ EXPORT_SYMBOL_GPL(acpi_dma_controller_register);
  *
  * Memory allocated by acpi_dma_controller_register() is freed here.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return:
+ * 0 on success or appropriate errno value on error.
+>>>>>>> v3.18
 =======
  *
  * Return:
@@ -266,6 +299,12 @@ static void devm_acpi_dma_release(struct device *dev, void *res)
  * function are automatically freed on driver detach. See
  * acpi_dma_controller_register() for more information.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return:
+ * 0 on success or appropriate errno value on error.
+>>>>>>> v3.18
 =======
  *
  * Return:
@@ -305,7 +344,11 @@ EXPORT_SYMBOL_GPL(devm_acpi_dma_controller_register);
 void devm_acpi_dma_controller_free(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(devres_destroy(dev, devm_acpi_dma_release, NULL, NULL));
+=======
+	WARN_ON(devres_release(dev, devm_acpi_dma_release, NULL, NULL));
+>>>>>>> v3.18
 =======
 	WARN_ON(devres_release(dev, devm_acpi_dma_release, NULL, NULL));
 >>>>>>> v3.18
@@ -318,8 +361,11 @@ EXPORT_SYMBOL_GPL(devm_acpi_dma_controller_free);
  * @dma_spec:	dma specifier to update
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 0, if no information is avaiable, -1 on mismatch, and 1 otherwise.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Accordingly to ACPI 5.0 Specification Table 6-170 "Fixed DMA Resource
@@ -330,6 +376,12 @@ EXPORT_SYMBOL_GPL(devm_acpi_dma_controller_free);
  * That's why we can safely adjust slave_id when the appropriate controller is
  * found.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return:
+ * 0, if no information is avaiable, -1 on mismatch, and 1 otherwise.
+>>>>>>> v3.18
 =======
  *
  * Return:
@@ -394,7 +446,12 @@ static int acpi_dma_parse_fixed_dma(struct acpi_resource *res, void *data)
  * @index:	index of FixedDMA descriptor for @dev
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns pointer to appropriate dma channel on success or NULL on error.
+=======
+ * Return:
+ * Pointer to appropriate dma channel on success or an error pointer.
+>>>>>>> v3.18
 =======
  * Return:
  * Pointer to appropriate dma channel on success or an error pointer.
@@ -414,15 +471,21 @@ struct dma_chan *acpi_dma_request_slave_chan_by_index(struct device *dev,
 	/* Check if the device was enumerated by ACPI */
 	if (!dev || !ACPI_HANDLE(dev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
 
 	if (acpi_bus_get_device(ACPI_HANDLE(dev), &adev))
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 		return ERR_PTR(-ENODEV);
 
 	if (acpi_bus_get_device(ACPI_HANDLE(dev), &adev))
 		return ERR_PTR(-ENODEV);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&pdata, 0, sizeof(pdata));
@@ -439,7 +502,11 @@ struct dma_chan *acpi_dma_request_slave_chan_by_index(struct device *dev,
 
 	if (dma_spec->slave_id < 0 || dma_spec->chan_id < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-ENODEV);
 >>>>>>> v3.18
@@ -466,7 +533,11 @@ struct dma_chan *acpi_dma_request_slave_chan_by_index(struct device *dev,
 
 	mutex_unlock(&acpi_dma_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return chan;
+=======
+	return chan ? chan : ERR_PTR(-EPROBE_DEFER);
+>>>>>>> v3.18
 =======
 	return chan ? chan : ERR_PTR(-EPROBE_DEFER);
 >>>>>>> v3.18
@@ -483,7 +554,12 @@ EXPORT_SYMBOL_GPL(acpi_dma_request_slave_chan_by_index);
  * the first FixedDMA descriptor is TX and second is RX.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns pointer to appropriate dma channel on success or NULL on error.
+=======
+ * Return:
+ * Pointer to appropriate dma channel on success or an error pointer.
+>>>>>>> v3.18
 =======
  * Return:
  * Pointer to appropriate dma channel on success or an error pointer.
@@ -500,7 +576,11 @@ struct dma_chan *acpi_dma_request_slave_chan_by_name(struct device *dev,
 		index = 1;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-ENODEV);
 >>>>>>> v3.18
@@ -516,13 +596,19 @@ EXPORT_SYMBOL_GPL(acpi_dma_request_slave_chan_by_name);
  *
  * A simple translation function for ACPI based devices. Passes &struct
 <<<<<<< HEAD
+<<<<<<< HEAD
  * dma_spec to the DMA controller driver provided filter function. Returns
  * pointer to the channel if found or %NULL otherwise.
 =======
+=======
+>>>>>>> v3.18
  * dma_spec to the DMA controller driver provided filter function.
  *
  * Return:
  * Pointer to the channel if found or %NULL otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct dma_chan *acpi_dma_simple_xlate(struct acpi_dma_spec *dma_spec,

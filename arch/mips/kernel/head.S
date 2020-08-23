@@ -29,6 +29,7 @@
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * inputs are the text nasid in t1, data nasid in t2.
 	 */
 	.macro MAPPED_KERNEL_SETUP_TLB
@@ -70,6 +71,8 @@
 	/*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	 * For the moment disable interrupts, mark the kernel mode and
 	 * set ST0_KX so that the CPU does not spit fire when using
 	 * 64-bit addresses.  A full initialization of the CPU's status
@@ -77,6 +80,7 @@
 	 */
 	.macro	setup_c0_status set clr
 	.set	push
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
@@ -100,6 +104,8 @@
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	mfc0	t0, CP0_STATUS
 	or	t0, ST0_CU0|\set|0x1f|\clr
 	xor	t0, 0x1f|\clr
@@ -107,7 +113,10 @@
 	.set	noreorder
 	sll	zero,3				# ehb
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set	pop
@@ -164,6 +173,7 @@ NESTED(kernel_entry, 16, sp)			# kernel entry point
 0:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * In SMTC kernel, "CLI" is thread-specific, in TCStatus.
@@ -182,6 +192,8 @@ NESTED(kernel_entry, 16, sp)			# kernel entry point
 	mtc0	t0, CP0_STATUS
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PTR_LA		t0, __bss_start		# clear .bss
@@ -210,8 +222,11 @@ NESTED(kernel_entry, 16, sp)			# kernel entry point
 	END(kernel_entry)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
@@ -220,6 +235,7 @@ NESTED(kernel_entry, 16, sp)			# kernel entry point
  * function after setting up the stack and gp registers.
  */
 NESTED(smp_bootstrap, 16, sp)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
@@ -246,9 +262,14 @@ NESTED(smp_bootstrap, 16, sp)
 
 	__FINIT
 =======
+=======
+>>>>>>> v3.18
 	smp_slave_setup
 	setup_c0_status_sec
 	j	start_secondary
 	END(smp_bootstrap)
 #endif /* CONFIG_SMP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

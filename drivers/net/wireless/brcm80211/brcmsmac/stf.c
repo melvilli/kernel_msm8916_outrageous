@@ -88,7 +88,11 @@ brcms_c_stf_ss_algo_channel_get(struct brcms_c_info *wlc, u16 *ss_algo_channel,
 			    u16 chanspec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tx_power power = { };
+=======
+	struct tx_power power;
+>>>>>>> v3.18
 =======
 	struct tx_power power;
 >>>>>>> v3.18

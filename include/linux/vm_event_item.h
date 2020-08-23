@@ -38,6 +38,10 @@ enum vm_event_item { PGPGIN, PGPGOUT, PSWPIN, PSWPOUT,
 		KSWAPD_LOW_WMARK_HIT_QUICKLY, KSWAPD_HIGH_WMARK_HIT_QUICKLY,
 		PAGEOUTRUN, ALLOCSTALL, PGROTATED,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		DROP_PAGECACHE, DROP_SLAB,
+>>>>>>> v3.18
 =======
 		DROP_PAGECACHE, DROP_SLAB,
 >>>>>>> v3.18
@@ -76,7 +80,10 @@ enum vm_event_item { PGPGIN, PGPGOUT, PSWPIN, PSWPOUT,
 		THP_ZERO_PAGE_ALLOC_FAILED,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MEMORY_BALLOON
 		BALLOON_INFLATE,
 		BALLOON_DEFLATE,
@@ -96,6 +103,9 @@ enum vm_event_item { PGPGIN, PGPGOUT, PSWPIN, PSWPOUT,
 		VMACACHE_FIND_CALLS,
 		VMACACHE_FIND_HITS,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		NR_VM_EVENT_ITEMS
 };

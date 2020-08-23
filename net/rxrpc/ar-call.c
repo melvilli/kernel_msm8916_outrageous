@@ -13,6 +13,11 @@
 #include <linux/module.h>
 #include <linux/circ_buf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hashtable.h>
+#include <linux/spinlock_types.h>
+>>>>>>> v3.18
 =======
 #include <linux/hashtable.h>
 #include <linux/spinlock_types.h>
@@ -22,7 +27,10 @@
 #include "ar-internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Maximum lifetime of a call (in jiffies).
  */
@@ -33,6 +41,9 @@ unsigned rxrpc_max_call_lifetime = 60 * HZ;
  */
 unsigned rxrpc_dead_call_expiry = 2 * HZ;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const char *const rxrpc_call_states[] = {
 	[RXRPC_CALL_CLIENT_SEND_REQUEST]	= "ClSndReq",
@@ -57,8 +68,11 @@ struct kmem_cache *rxrpc_call_jar;
 LIST_HEAD(rxrpc_calls);
 DEFINE_RWLOCK(rxrpc_call_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int rxrpc_call_max_lifetime = 60;
 static unsigned int rxrpc_dead_call_timeout = 2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -69,7 +83,10 @@ static void rxrpc_ack_time_expired(unsigned long _call);
 static void rxrpc_resend_time_expired(unsigned long _call);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(rxrpc_call_hash_lock);
 static DEFINE_HASHTABLE(rxrpc_call_hash, 10);
 
@@ -209,6 +226,9 @@ struct rxrpc_call *rxrpc_find_call_hash(
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * allocate a new call
@@ -255,7 +275,11 @@ static struct rxrpc_call *rxrpc_alloc_call(gfp_t gfp)
 	call->rx_data_eaten = 0;
 	call->rx_first_oos = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call->ackr_win_top = call->rx_data_eaten + 1 + RXRPC_MAXACKS;
+=======
+	call->ackr_win_top = call->rx_data_eaten + 1 + rxrpc_rx_window_size;
+>>>>>>> v3.18
 =======
 	call->ackr_win_top = call->rx_data_eaten + 1 + rxrpc_rx_window_size;
 >>>>>>> v3.18
@@ -296,7 +320,10 @@ static struct rxrpc_call *rxrpc_alloc_client_call(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Record copies of information for hashtable lookup */
 	call->proto = rx->proto;
 	call->local = trans->local;
@@ -317,13 +344,20 @@ static struct rxrpc_call *rxrpc_alloc_client_call(
 	/* Add the new call to the hashtable */
 	rxrpc_call_hash_add(call);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock(&call->conn->trans->peer->lock);
 	list_add(&call->error_link, &call->conn->trans->peer->error_targets);
 	spin_unlock(&call->conn->trans->peer->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call->lifetimer.expires = jiffies + rxrpc_call_max_lifetime * HZ;
+=======
+	call->lifetimer.expires = jiffies + rxrpc_max_call_lifetime;
+>>>>>>> v3.18
 =======
 	call->lifetimer.expires = jiffies + rxrpc_max_call_lifetime;
 >>>>>>> v3.18
@@ -515,16 +549,22 @@ struct rxrpc_call *rxrpc_incoming_call(struct rxrpc_sock *rx,
 		call = rb_entry(parent, struct rxrpc_call, conn_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (call_id < call->call_id)
 			p = &(*p)->rb_left;
 		else if (call_id > call->call_id)
 =======
+=======
+>>>>>>> v3.18
 		/* The tree is sorted in order of the __be32 value without
 		 * turning it into host order.
 		 */
 		if ((__force u32)call_id < (__force u32)call->call_id)
 			p = &(*p)->rb_left;
 		else if ((__force u32)call_id > (__force u32)call->call_id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			p = &(*p)->rb_right;
 		else
@@ -551,10 +591,13 @@ struct rxrpc_call *rxrpc_incoming_call(struct rxrpc_sock *rx,
 	write_unlock_bh(&rxrpc_call_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_net("CALL incoming %d on CONN %d", call->debug_id, call->conn->debug_id);
 
 	call->lifetimer.expires = jiffies + rxrpc_call_max_lifetime * HZ;
 =======
+=======
+>>>>>>> v3.18
 	/* Record copies of information for hashtable lookup */
 	call->proto = rx->proto;
 	call->local = conn->trans->local;
@@ -580,6 +623,9 @@ struct rxrpc_call *rxrpc_incoming_call(struct rxrpc_sock *rx,
 	_net("CALL incoming %d on CONN %d", call->debug_id, call->conn->debug_id);
 
 	call->lifetimer.expires = jiffies + rxrpc_max_call_lifetime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add_timer(&call->lifetimer);
 	_leave(" = %p {%d} [new]", call, call->debug_id);
@@ -765,7 +811,11 @@ void rxrpc_release_call(struct rxrpc_call *call)
 	del_timer_sync(&call->ack_timer);
 	del_timer_sync(&call->lifetimer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call->deadspan.expires = jiffies + rxrpc_dead_call_timeout * HZ;
+=======
+	call->deadspan.expires = jiffies + rxrpc_dead_call_expiry;
+>>>>>>> v3.18
 =======
 	call->deadspan.expires = jiffies + rxrpc_dead_call_expiry;
 >>>>>>> v3.18
@@ -901,6 +951,12 @@ static void rxrpc_cleanup_call(struct rxrpc_call *call)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Remove the call from the hash */
+	rxrpc_call_hash_del(call);
+
+>>>>>>> v3.18
 =======
 	/* Remove the call from the hash */
 	rxrpc_call_hash_del(call);

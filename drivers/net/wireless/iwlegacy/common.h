@@ -859,9 +859,15 @@ struct il_hw_params {
  *
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il4965_update_chain_flags(struct il_priv *il);
 extern const u8 il_bcast_addr[ETH_ALEN];
 extern int il_queue_space(const struct il_queue *q);
+=======
+void il4965_update_chain_flags(struct il_priv *il);
+extern const u8 il_bcast_addr[ETH_ALEN];
+int il_queue_space(const struct il_queue *q);
+>>>>>>> v3.18
 =======
 void il4965_update_chain_flags(struct il_priv *il);
 extern const u8 il_bcast_addr[ETH_ALEN];
@@ -1130,6 +1136,10 @@ struct il_power_mgr {
 	int debug_sleep_level_override;
 	bool pci_pm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool ps_disabled;
+>>>>>>> v3.18
 =======
 	bool ps_disabled;
 >>>>>>> v3.18
@@ -1310,6 +1320,11 @@ struct il_priv {
 #define IL_MAX_HW_QUEUES	32
 	unsigned long queue_stopped[BITS_TO_LONGS(IL_MAX_HW_QUEUES)];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IL_STOP_REASON_PASSIVE	0
+	unsigned long stop_reason;
+>>>>>>> v3.18
 =======
 #define IL_STOP_REASON_PASSIVE	0
 	unsigned long stop_reason;
@@ -1611,7 +1626,11 @@ struct il_mod_params {
 	int num_of_queues;	/* def: HW dependent */
 	int disable_11n;	/* def: 0 = 11n capabilities enabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int amsdu_size_8K;	/* def: 1 = enable 8K amsdu size */
+=======
+	int amsdu_size_8K;	/* def: 0 = disable 8K amsdu size */
+>>>>>>> v3.18
 =======
 	int amsdu_size_8K;	/* def: 0 = disable 8K amsdu size */
 >>>>>>> v3.18
@@ -1740,7 +1759,12 @@ void il_mac_remove_interface(struct ieee80211_hw *hw,
 int il_mac_change_interface(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 			    enum nl80211_iftype newtype, bool newp2p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void il_mac_flush(struct ieee80211_hw *hw, u32 queues, bool drop);
+=======
+void il_mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+		  u32 queues, bool drop);
+>>>>>>> v3.18
 =======
 void il_mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 		  u32 queues, bool drop);
@@ -1750,7 +1774,11 @@ void il_free_txq_mem(struct il_priv *il);
 
 #ifdef CONFIG_IWLEGACY_DEBUGFS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il_update_stats(struct il_priv *il, bool is_tx, __le16 fc, u16 len);
+=======
+void il_update_stats(struct il_priv *il, bool is_tx, __le16 fc, u16 len);
+>>>>>>> v3.18
 =======
 void il_update_stats(struct il_priv *il, bool is_tx, __le16 fc, u16 len);
 >>>>>>> v3.18
@@ -1787,6 +1815,7 @@ void il_chswitch_done(struct il_priv *il, bool is_success);
 * TX
 ******************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il_txq_update_write_ptr(struct il_priv *il, struct il_tx_queue *txq);
 extern int il_tx_queue_init(struct il_priv *il, u32 txq_id);
 extern void il_tx_queue_reset(struct il_priv *il, u32 txq_id);
@@ -1794,12 +1823,17 @@ extern void il_tx_queue_unmap(struct il_priv *il, int txq_id);
 extern void il_tx_queue_free(struct il_priv *il, int txq_id);
 extern void il_setup_watchdog(struct il_priv *il);
 =======
+=======
+>>>>>>> v3.18
 void il_txq_update_write_ptr(struct il_priv *il, struct il_tx_queue *txq);
 int il_tx_queue_init(struct il_priv *il, u32 txq_id);
 void il_tx_queue_reset(struct il_priv *il, u32 txq_id);
 void il_tx_queue_unmap(struct il_priv *il, int txq_id);
 void il_tx_queue_free(struct il_priv *il, int txq_id);
 void il_setup_watchdog(struct il_priv *il);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************
  * TX power
@@ -1821,7 +1855,11 @@ int il_scan_cancel_timeout(struct il_priv *il, unsigned long ms);
 void il_force_scan_end(struct il_priv *il);
 int il_mac_hw_scan(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   struct cfg80211_scan_request *req);
+=======
+		   struct ieee80211_scan_request *hw_req);
+>>>>>>> v3.18
 =======
 		   struct ieee80211_scan_request *hw_req);
 >>>>>>> v3.18
@@ -1971,15 +2009,21 @@ il_is_ready_rf(struct il_priv *il)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il_send_bt_config(struct il_priv *il);
 extern int il_send_stats_request(struct il_priv *il, u8 flags, bool clear);
 extern void il_apm_stop(struct il_priv *il);
 extern void _il_apm_stop(struct il_priv *il);
 =======
+=======
+>>>>>>> v3.18
 void il_send_bt_config(struct il_priv *il);
 int il_send_stats_request(struct il_priv *il, u8 flags, bool clear);
 void il_apm_stop(struct il_priv *il);
 void _il_apm_stop(struct il_priv *il);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int il_apm_init(struct il_priv *il);
@@ -2015,6 +2059,7 @@ void il_tx_cmd_protection(struct il_priv *il, struct ieee80211_tx_info *info,
 irqreturn_t il_isr(int irq, void *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il_set_bit(struct il_priv *p, u32 r, u32 m);
 extern void il_clear_bit(struct il_priv *p, u32 r, u32 m);
 extern bool _il_grab_nic_access(struct il_priv *il);
@@ -2025,6 +2070,8 @@ extern void il_wr_prph(struct il_priv *il, u32 addr, u32 val);
 extern u32 il_read_targ_mem(struct il_priv *il, u32 addr);
 extern void il_write_targ_mem(struct il_priv *il, u32 addr, u32 val);
 =======
+=======
+>>>>>>> v3.18
 void il_set_bit(struct il_priv *p, u32 r, u32 m);
 void il_clear_bit(struct il_priv *p, u32 r, u32 m);
 bool _il_grab_nic_access(struct il_priv *il);
@@ -2048,6 +2095,9 @@ static inline bool il_need_reclaim(struct il_priv *il, struct il_rx_pkt *pkt)
 	       pkt->hdr.cmd != N_RX_PHY && pkt->hdr.cmd != N_RX &&
 	       pkt->hdr.cmd != N_RX_MPDU && pkt->hdr.cmd != N_COMPRESSED_BA;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void
@@ -2332,7 +2382,10 @@ il_set_swq_id(struct il_tx_queue *txq, u8 ac, u8 hwq)
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 _il_wake_queue(struct il_priv *il, u8 ac)
 {
 	if (atomic_dec_return(&il->queue_stop_count[ac]) <= 0)
@@ -2346,6 +2399,9 @@ _il_stop_queue(struct il_priv *il, u8 ac)
 		ieee80211_stop_queue(il->hw, ac);
 }
 static inline void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 il_wake_queue(struct il_priv *il, struct il_tx_queue *txq)
 {
@@ -2355,8 +2411,12 @@ il_wake_queue(struct il_priv *il, struct il_tx_queue *txq)
 
 	if (test_and_clear_bit(hwq, il->queue_stopped))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (atomic_dec_return(&il->queue_stop_count[ac]) <= 0)
 			ieee80211_wake_queue(il->hw, ac);
+=======
+		_il_wake_queue(il, ac);
+>>>>>>> v3.18
 =======
 		_il_wake_queue(il, ac);
 >>>>>>> v3.18
@@ -2371,9 +2431,12 @@ il_stop_queue(struct il_priv *il, struct il_tx_queue *txq)
 
 	if (!test_and_set_bit(hwq, il->queue_stopped))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (atomic_inc_return(&il->queue_stop_count[ac]) > 0)
 			ieee80211_stop_queue(il->hw, ac);
 =======
+=======
+>>>>>>> v3.18
 		_il_stop_queue(il, ac);
 }
 
@@ -2395,6 +2458,9 @@ il_stop_queues_by_reason(struct il_priv *il, int reason)
 	if (!test_and_set_bit(reason, &il->stop_reason))
 		for (ac = 0; ac < 4; ac++)
 			_il_stop_queue(il, ac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2954,6 +3020,7 @@ il4965_first_antenna(u8 mask)
  * the associated with, including A, B, G, and G w/ TGG protection
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il3945_rate_scale_init(struct ieee80211_hw *hw, s32 sta_id);
 
 /* Initialize station's rate scaling information after adding station */
@@ -2962,6 +3029,8 @@ extern void il4965_rs_rate_init(struct il_priv *il, struct ieee80211_sta *sta,
 extern void il3945_rs_rate_init(struct il_priv *il, struct ieee80211_sta *sta,
 				u8 sta_id);
 =======
+=======
+>>>>>>> v3.18
 void il3945_rate_scale_init(struct ieee80211_hw *hw, s32 sta_id);
 
 /* Initialize station's rate scaling information after adding station */
@@ -2969,6 +3038,9 @@ void il4965_rs_rate_init(struct il_priv *il, struct ieee80211_sta *sta,
 			 u8 sta_id);
 void il3945_rs_rate_init(struct il_priv *il, struct ieee80211_sta *sta,
 			 u8 sta_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -2982,8 +3054,13 @@ void il3945_rs_rate_init(struct il_priv *il, struct ieee80211_sta *sta,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int il4965_rate_control_register(void);
 extern int il3945_rate_control_register(void);
+=======
+int il4965_rate_control_register(void);
+int il3945_rate_control_register(void);
+>>>>>>> v3.18
 =======
 int il4965_rate_control_register(void);
 int il3945_rate_control_register(void);
@@ -2996,17 +3073,23 @@ int il3945_rate_control_register(void);
  * the driver is unloaded.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void il4965_rate_control_unregister(void);
 extern void il3945_rate_control_unregister(void);
 
 extern int il_power_update_mode(struct il_priv *il, bool force);
 extern void il_power_initialize(struct il_priv *il);
 =======
+=======
+>>>>>>> v3.18
 void il4965_rate_control_unregister(void);
 void il3945_rate_control_unregister(void);
 
 int il_power_update_mode(struct il_priv *il, bool force);
 void il_power_initialize(struct il_priv *il);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern u32 il_debug_level;

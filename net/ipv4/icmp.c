@@ -232,7 +232,10 @@ static inline void icmp_xmit_unlock(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int sysctl_icmp_msgs_per_sec __read_mostly = 1000;
 int sysctl_icmp_msgs_burst __read_mostly = 50;
 
@@ -283,14 +286,22 @@ bool icmp_global_allow(void)
 }
 EXPORT_SYMBOL(icmp_global_allow);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	Send an ICMP frame.
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool icmpv4_xrlim_allow(struct net *net, struct rtable *rt,
 				      struct flowi4 *fl4, int type, int code)
+=======
+static bool icmpv4_xrlim_allow(struct net *net, struct rtable *rt,
+			       struct flowi4 *fl4, int type, int code)
+>>>>>>> v3.18
 =======
 static bool icmpv4_xrlim_allow(struct net *net, struct rtable *rt,
 			       struct flowi4 *fl4, int type, int code)
@@ -312,9 +323,12 @@ static bool icmpv4_xrlim_allow(struct net *net, struct rtable *rt,
 
 	/* Limit if icmp type is enabled in ratemask. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((1 << type) & net->ipv4.sysctl_icmp_ratemask) {
 		struct inet_peer *peer = inet_getpeer_v4(net->ipv4.peers, fl4->daddr, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (!((1 << type) & net->ipv4.sysctl_icmp_ratemask))
 		goto out;
 
@@ -323,6 +337,9 @@ static bool icmpv4_xrlim_allow(struct net *net, struct rtable *rt,
 		struct inet_peer *peer;
 
 		peer = inet_getpeer_v4(net->ipv4.peers, fl4->daddr, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = inet_peer_xrlim_allow(peer,
 					   net->ipv4.sysctl_icmp_ratelimit);
@@ -425,6 +442,12 @@ static void icmp_reply(struct icmp_bxm *icmp_param, struct sk_buff *skb)
 	ipc.opt = NULL;
 	ipc.tx_flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ipc.ttl = 0;
+	ipc.tos = -1;
+
+>>>>>>> v3.18
 =======
 	ipc.ttl = 0;
 	ipc.tos = -1;
@@ -562,7 +585,11 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	struct iphdr *iph;
 	int room;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct icmp_bxm icmp_param;
+=======
+	struct icmp_bxm *icmp_param;
+>>>>>>> v3.18
 =======
 	struct icmp_bxm *icmp_param;
 >>>>>>> v3.18
@@ -588,7 +615,12 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 
 	if ((u8 *)iph < skb_in->head ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (skb_in->network_header + sizeof(*iph)) > skb_in->tail)
+=======
+	    (skb_network_header(skb_in) + sizeof(*iph)) >
+	    skb_tail_pointer(skb_in))
+>>>>>>> v3.18
 =======
 	    (skb_network_header(skb_in) + sizeof(*iph)) >
 	    skb_tail_pointer(skb_in))
@@ -647,10 +679,13 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk = icmp_xmit_lock(net);
 	if (sk == NULL)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	icmp_param = kmalloc(sizeof(*icmp_param), GFP_ATOMIC);
 	if (!icmp_param)
 		return;
@@ -658,6 +693,9 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	sk = icmp_xmit_lock(net);
 	if (sk == NULL)
 		goto out_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -686,7 +724,11 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	mark = IP4_REPLY_MARK(net, skb_in->mark);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ip_options_echo(&icmp_param.replyopts.opt.opt, skb_in))
+=======
+	if (ip_options_echo(&icmp_param->replyopts.opt.opt, skb_in))
+>>>>>>> v3.18
 =======
 	if (ip_options_echo(&icmp_param->replyopts.opt.opt, skb_in))
 >>>>>>> v3.18
@@ -697,6 +739,7 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	 *	Prepare data for ICMP header.
 	 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	icmp_param.data.icmph.type	 = type;
 	icmp_param.data.icmph.code	 = code;
@@ -713,6 +756,8 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	rt = icmp_route_lookup(net, &fl4, skb_in, iph, saddr, tos, mark,
 			       type, code, &icmp_param);
 =======
+=======
+>>>>>>> v3.18
 	icmp_param->data.icmph.type	 = type;
 	icmp_param->data.icmph.code	 = code;
 	icmp_param->data.icmph.un.gateway = info;
@@ -729,6 +774,9 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 
 	rt = icmp_route_lookup(net, &fl4, skb_in, iph, saddr, tos, mark,
 			       type, code, icmp_param);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(rt))
 		goto out_unlock;
@@ -742,6 +790,7 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	if (room > 576)
 		room = 576;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	room -= sizeof(struct iphdr) + icmp_param.replyopts.opt.opt.optlen;
 	room -= sizeof(struct icmphdr);
 
@@ -752,6 +801,8 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 
 	icmp_push_reply(&icmp_param, &fl4, &ipc, &rt);
 =======
+=======
+>>>>>>> v3.18
 	room -= sizeof(struct iphdr) + icmp_param->replyopts.opt.opt.optlen;
 	room -= sizeof(struct icmphdr);
 
@@ -761,12 +812,20 @@ void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 info)
 	icmp_param->head_len = sizeof(struct icmphdr);
 
 	icmp_push_reply(icmp_param, &fl4, &ipc, &rt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ende:
 	ip_rt_put(rt);
 out_unlock:
 	icmp_xmit_unlock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_free:
+	kfree(icmp_param);
+>>>>>>> v3.18
 =======
 out_free:
 	kfree(icmp_param);
@@ -786,6 +845,7 @@ static void icmp_socket_deliver(struct sk_buff *skb, u32 info)
 	 * avoid additional coding at protocol handlers.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pskb_may_pull(skb, iph->ihl * 4 + 8))
 		return;
 
@@ -801,6 +861,8 @@ static void icmp_socket_deliver(struct sk_buff *skb, u32 info)
 /*
  *	Handle ICMP_DEST_UNREACH, ICMP_TIME_EXCEED, and ICMP_QUENCH.
 =======
+=======
+>>>>>>> v3.18
 	if (!pskb_may_pull(skb, iph->ihl * 4 + 8)) {
 		ICMP_INC_STATS_BH(dev_net(skb->dev), ICMP_MIB_INERRORS);
 		return;
@@ -826,6 +888,9 @@ static bool icmp_tag_validation(int proto)
 /*
  *	Handle ICMP_DEST_UNREACH, ICMP_TIME_EXCEED, ICMP_QUENCH, and
  *	ICMP_PARAMETERPROB.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -862,11 +927,14 @@ static void icmp_unreach(struct sk_buff *skb)
 			break;
 		case ICMP_FRAG_NEEDED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ipv4_config.no_pmtu_disc) {
 				LIMIT_NETDEBUG(KERN_INFO pr_fmt("%pI4: fragmentation needed and DF set\n"),
 					       &iph->daddr);
 			} else {
 =======
+=======
+>>>>>>> v3.18
 			/* for documentation of the ip_no_pmtu_disc
 			 * values please see
 			 * Documentation/networking/ip-sysctl.txt
@@ -883,6 +951,9 @@ static void icmp_unreach(struct sk_buff *skb)
 					goto out;
 				/* fall through */
 			case 0:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				info = ntohs(icmph->un.frag.mtu);
 			}
@@ -1060,6 +1131,7 @@ int icmp_rcv(struct sk_buff *skb)
 	ICMP_INC_STATS_BH(net, ICMP_MIB_INMSGS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (skb->ip_summed) {
 	case CHECKSUM_COMPLETE:
 		if (!csum_fold(skb->csum))
@@ -1070,6 +1142,10 @@ int icmp_rcv(struct sk_buff *skb)
 		if (__skb_checksum_complete(skb))
 			goto csum_error;
 	}
+=======
+	if (skb_checksum_simple_validate(skb))
+		goto csum_error;
+>>>>>>> v3.18
 =======
 	if (skb_checksum_simple_validate(skb))
 		goto csum_error;

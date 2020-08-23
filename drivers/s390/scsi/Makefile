@@ -3,7 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 zfcp-objs := zfcp_aux.o zfcp_ccw.o zfcp_cfdc.o zfcp_dbf.o zfcp_erp.o \
+=======
+zfcp-objs := zfcp_aux.o zfcp_ccw.o zfcp_dbf.o zfcp_erp.o \
+>>>>>>> v3.18
 =======
 zfcp-objs := zfcp_aux.o zfcp_ccw.o zfcp_dbf.o zfcp_erp.o \
 >>>>>>> v3.18

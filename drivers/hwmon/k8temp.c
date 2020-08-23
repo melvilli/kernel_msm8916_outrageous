@@ -136,7 +136,11 @@ static SENSOR_DEVICE_ATTR_2(temp4_input, S_IRUGO, show_temp, NULL, 1, 1);
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(k8temp_ids) = {
+=======
+static const struct pci_device_id k8temp_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id k8temp_ids[] = {
 >>>>>>> v3.18

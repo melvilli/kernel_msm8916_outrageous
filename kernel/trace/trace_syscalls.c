@@ -176,7 +176,11 @@ print_syscall_exit(struct trace_iterator *iter, int flags,
 
 	if (!entry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		trace_seq_printf(s, "\n");
+=======
+		trace_seq_putc(s, '\n');
+>>>>>>> v3.18
 =======
 		trace_seq_putc(s, '\n');
 >>>>>>> v3.18
@@ -205,8 +209,13 @@ extern char *__bad_type_size(void);
 		sizeof(trace.name), is_signed_type(type)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static
 int  __set_enter_print_fmt(struct syscall_metadata *entry, char *buf, int len)
+=======
+static int __init
+__set_enter_print_fmt(struct syscall_metadata *entry, char *buf, int len)
+>>>>>>> v3.18
 =======
 static int __init
 __set_enter_print_fmt(struct syscall_metadata *entry, char *buf, int len)
@@ -238,7 +247,11 @@ __set_enter_print_fmt(struct syscall_metadata *entry, char *buf, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_syscall_print_fmt(struct ftrace_event_call *call)
+=======
+static int __init set_syscall_print_fmt(struct ftrace_event_call *call)
+>>>>>>> v3.18
 =======
 static int __init set_syscall_print_fmt(struct ftrace_event_call *call)
 >>>>>>> v3.18
@@ -267,7 +280,11 @@ static int __init set_syscall_print_fmt(struct ftrace_event_call *call)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void free_syscall_print_fmt(struct ftrace_event_call *call)
+=======
+static void __init free_syscall_print_fmt(struct ftrace_event_call *call)
+>>>>>>> v3.18
 =======
 static void __init free_syscall_print_fmt(struct ftrace_event_call *call)
 >>>>>>> v3.18
@@ -320,6 +337,10 @@ static void ftrace_syscall_enter(void *data, struct pt_regs *regs, long id)
 {
 	struct trace_array *tr = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ftrace_event_file *ftrace_file;
+>>>>>>> v3.18
 =======
 	struct ftrace_event_file *ftrace_file;
 >>>>>>> v3.18
@@ -336,8 +357,11 @@ static void ftrace_syscall_enter(void *data, struct pt_regs *regs, long id)
 	if (syscall_nr < 0 || syscall_nr >= NR_syscalls)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(syscall_nr, tr->enabled_enter_syscalls))
 =======
+=======
+>>>>>>> v3.18
 
 	/* Here we're inside tp handler's rcu_read_lock_sched (__DO_TRACE) */
 	ftrace_file = rcu_dereference_sched(tr->enter_syscall_files[syscall_nr]);
@@ -345,6 +369,9 @@ static void ftrace_syscall_enter(void *data, struct pt_regs *regs, long id)
 		return;
 
 	if (ftrace_trigger_soft_disabled(ftrace_file))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -368,10 +395,15 @@ static void ftrace_syscall_enter(void *data, struct pt_regs *regs, long id)
 	syscall_get_arguments(current, regs, 0, sys_data->nb_args, entry->args);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_current_check_discard(buffer, sys_data->enter_event,
 					  entry, event))
 		trace_current_buffer_unlock_commit(buffer, event,
 						   irq_flags, pc);
+=======
+	event_trigger_unlock_commit(ftrace_file, buffer, event, entry,
+				    irq_flags, pc);
+>>>>>>> v3.18
 =======
 	event_trigger_unlock_commit(ftrace_file, buffer, event, entry,
 				    irq_flags, pc);
@@ -382,6 +414,10 @@ static void ftrace_syscall_exit(void *data, struct pt_regs *regs, long ret)
 {
 	struct trace_array *tr = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ftrace_event_file *ftrace_file;
+>>>>>>> v3.18
 =======
 	struct ftrace_event_file *ftrace_file;
 >>>>>>> v3.18
@@ -397,8 +433,11 @@ static void ftrace_syscall_exit(void *data, struct pt_regs *regs, long ret)
 	if (syscall_nr < 0 || syscall_nr >= NR_syscalls)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(syscall_nr, tr->enabled_exit_syscalls))
 =======
+=======
+>>>>>>> v3.18
 
 	/* Here we're inside tp handler's rcu_read_lock_sched (__DO_TRACE()) */
 	ftrace_file = rcu_dereference_sched(tr->exit_syscall_files[syscall_nr]);
@@ -406,6 +445,9 @@ static void ftrace_syscall_exit(void *data, struct pt_regs *regs, long ret)
 		return;
 
 	if (ftrace_trigger_soft_disabled(ftrace_file))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -428,10 +470,15 @@ static void ftrace_syscall_exit(void *data, struct pt_regs *regs, long ret)
 	entry->ret = syscall_get_return_value(current, regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_current_check_discard(buffer, sys_data->exit_event,
 					  entry, event))
 		trace_current_buffer_unlock_commit(buffer, event,
 						   irq_flags, pc);
+=======
+	event_trigger_unlock_commit(ftrace_file, buffer, event, entry,
+				    irq_flags, pc);
+>>>>>>> v3.18
 =======
 	event_trigger_unlock_commit(ftrace_file, buffer, event, entry,
 				    irq_flags, pc);
@@ -453,7 +500,11 @@ static int reg_event_syscall_enter(struct ftrace_event_file *file,
 		ret = register_trace_sys_enter(ftrace_syscall_enter, tr);
 	if (!ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(num, tr->enabled_enter_syscalls);
+=======
+		rcu_assign_pointer(tr->enter_syscall_files[num], file);
+>>>>>>> v3.18
 =======
 		rcu_assign_pointer(tr->enter_syscall_files[num], file);
 >>>>>>> v3.18
@@ -475,7 +526,11 @@ static void unreg_event_syscall_enter(struct ftrace_event_file *file,
 	mutex_lock(&syscall_trace_lock);
 	tr->sys_refcount_enter--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(num, tr->enabled_enter_syscalls);
+=======
+	RCU_INIT_POINTER(tr->enter_syscall_files[num], NULL);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(tr->enter_syscall_files[num], NULL);
 >>>>>>> v3.18
@@ -499,7 +554,11 @@ static int reg_event_syscall_exit(struct ftrace_event_file *file,
 		ret = register_trace_sys_exit(ftrace_syscall_exit, tr);
 	if (!ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(num, tr->enabled_exit_syscalls);
+=======
+		rcu_assign_pointer(tr->exit_syscall_files[num], file);
+>>>>>>> v3.18
 =======
 		rcu_assign_pointer(tr->exit_syscall_files[num], file);
 >>>>>>> v3.18
@@ -521,7 +580,11 @@ static void unreg_event_syscall_exit(struct ftrace_event_file *file,
 	mutex_lock(&syscall_trace_lock);
 	tr->sys_refcount_exit--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(num, tr->enabled_exit_syscalls);
+=======
+	RCU_INIT_POINTER(tr->exit_syscall_files[num], NULL);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(tr->exit_syscall_files[num], NULL);
 >>>>>>> v3.18
@@ -531,7 +594,11 @@ static void unreg_event_syscall_exit(struct ftrace_event_file *file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_syscall_trace(struct ftrace_event_call *call)
+=======
+static int __init init_syscall_trace(struct ftrace_event_call *call)
+>>>>>>> v3.18
 =======
 static int __init init_syscall_trace(struct ftrace_event_call *call)
 >>>>>>> v3.18
@@ -642,11 +709,17 @@ static void perf_syscall_enter(void *ignore, struct pt_regs *regs, long id)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	head = this_cpu_ptr(sys_data->enter_event->perf_events);
 	if (hlist_empty(head))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* get the size after alignment with the u32 buffer size field */
 	size = sizeof(unsigned long) * sys_data->nb_args + sizeof(*rec);
@@ -654,10 +727,13 @@ static void perf_syscall_enter(void *ignore, struct pt_regs *regs, long id)
 	size -= sizeof(u32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ONCE(size > PERF_MAX_TRACE_SIZE,
 		      "perf buffer not large enough"))
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rec = (struct syscall_trace_enter *)perf_trace_buf_prepare(size,
@@ -669,8 +745,11 @@ static void perf_syscall_enter(void *ignore, struct pt_regs *regs, long id)
 	syscall_get_arguments(current, regs, 0, sys_data->nb_args,
 			       (unsigned long *)&rec->args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	head = this_cpu_ptr(sys_data->enter_event->perf_events);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	perf_trace_buf_submit(rec, size, rctx, 0, 1, regs, head, NULL);
@@ -731,16 +810,23 @@ static void perf_syscall_exit(void *ignore, struct pt_regs *regs, long ret)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	head = this_cpu_ptr(sys_data->exit_event->perf_events);
 	if (hlist_empty(head))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* We can probably do that at build time */
 	size = ALIGN(sizeof(*rec) + sizeof(u32), sizeof(u64));
 	size -= sizeof(u32);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Impossible, but be paranoid with the future
@@ -752,6 +838,8 @@ static void perf_syscall_exit(void *ignore, struct pt_regs *regs, long ret)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	rec = (struct syscall_trace_exit *)perf_trace_buf_prepare(size,
 				sys_data->exit_event->event.type, regs, &rctx);
 	if (!rec)
@@ -760,8 +848,11 @@ static void perf_syscall_exit(void *ignore, struct pt_regs *regs, long ret)
 	rec->nr = syscall_nr;
 	rec->ret = syscall_get_return_value(current, regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	head = this_cpu_ptr(sys_data->exit_event->perf_events);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	perf_trace_buf_submit(rec, size, rctx, 0, 1, regs, head, NULL);

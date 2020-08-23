@@ -7,6 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bootmem.h>
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/bootmem.h>
 #include <linux/init.h>
@@ -36,7 +41,11 @@ extern void sun3_dvma_init(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long iommu_use[IOMMU_TOTAL_ENTRIES];
+=======
+static unsigned long *iommu_use;
+>>>>>>> v3.18
 =======
 static unsigned long *iommu_use;
 >>>>>>> v3.18
@@ -255,7 +264,11 @@ static inline int free_baddr(unsigned long baddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dvma_init(void)
+=======
+void __init dvma_init(void)
+>>>>>>> v3.18
 =======
 void __init dvma_init(void)
 >>>>>>> v3.18
@@ -279,7 +292,11 @@ void __init dvma_init(void)
 	list_add(&(hole->list), &hole_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(iommu_use, 0, sizeof(iommu_use));
+=======
+	iommu_use = alloc_bootmem(IOMMU_TOTAL_ENTRIES * sizeof(unsigned long));
+>>>>>>> v3.18
 =======
 	iommu_use = alloc_bootmem(IOMMU_TOTAL_ENTRIES * sizeof(unsigned long));
 >>>>>>> v3.18
@@ -293,7 +310,11 @@ void __init dvma_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline unsigned long dvma_map_align(unsigned long kaddr, int len, int align)
+=======
+unsigned long dvma_map_align(unsigned long kaddr, int len, int align)
+>>>>>>> v3.18
 =======
 unsigned long dvma_map_align(unsigned long kaddr, int len, int align)
 >>>>>>> v3.18

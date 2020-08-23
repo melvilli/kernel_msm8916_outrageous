@@ -167,7 +167,11 @@ int __max730x_probe(struct max7301 *ts)
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = dev->platform_data;
+=======
+	pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -193,7 +197,11 @@ int __max730x_probe(struct max7301 *ts)
 
 	ts->chip.ngpio = PIN_NUMBER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts->chip.can_sleep = 1;
+=======
+	ts->chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	ts->chip.can_sleep = true;
 >>>>>>> v3.18
@@ -229,7 +237,10 @@ int __max730x_probe(struct max7301 *ts)
 
 exit_destroy:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_destroy(&ts->lock);
@@ -241,13 +252,17 @@ int __max730x_remove(struct device *dev)
 {
 	struct max7301 *ts = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (ts == NULL)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
 
@@ -263,12 +278,17 @@ int __max730x_remove(struct device *dev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	/* Power down the chip and disable IRQ output */
 	ts->write(dev, 0x04, 0x00);
 	gpiochip_remove(&ts->chip);
 	mutex_destroy(&ts->lock);
 	kfree(ts);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(__max730x_remove);

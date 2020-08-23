@@ -76,6 +76,7 @@ static inline void copy_to_user_page(struct vm_area_struct *vma,
 	memcpy((dst), (src), (len))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Invalidate a VA range; pads to L2 cacheline boundaries.
  *
@@ -93,6 +94,8 @@ static inline void __inv_buffer(void *buffer, size_t size)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Flush a VA range; pads to L2 cacheline boundaries. */
@@ -119,6 +122,7 @@ static inline void __finv_buffer(void *buffer, size_t size)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Invalidate a VA range and wait for it to be complete. */
 static inline void inv_buffer(void *buffer, size_t size)
 {
@@ -126,6 +130,8 @@ static inline void inv_buffer(void *buffer, size_t size)
 	mb();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -149,7 +155,10 @@ static inline void finv_buffer_local(void *buffer, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __tilepro__
 /* Invalidate a VA range; pads to L2 cacheline boundaries. */
 static inline void __inv_buffer(void *buffer, size_t size)
@@ -170,6 +179,9 @@ static inline void inv_buffer(void *buffer, size_t size)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Flush and invalidate a VA range that is homed remotely, waiting

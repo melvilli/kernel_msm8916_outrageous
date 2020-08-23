@@ -13,7 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -83,7 +86,10 @@
 #define USB_INTEL_USB3PRM      0xDC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * amd_chipset_gen values represent AMD different chipset generations
  */
@@ -103,13 +109,20 @@ struct amd_chipset_type {
 	u8 rev;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct amd_chipset_info {
 	struct pci_dev	*nb_dev;
 	struct pci_dev	*smbus_dev;
 	int nb_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sb_type;
+=======
+	struct amd_chipset_type sb_type;
+>>>>>>> v3.18
 =======
 	struct amd_chipset_type sb_type;
 >>>>>>> v3.18
@@ -121,10 +134,13 @@ static struct amd_chipset_info {
 static DEFINE_SPINLOCK(amd_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int usb_amd_find_chipset_info(void)
 {
 	u8 rev = 0;
 =======
+=======
+>>>>>>> v3.18
 /*
  * amd_chipset_sb_type_init - initialize amd chipset southbridge type
  *
@@ -185,6 +201,9 @@ EXPORT_SYMBOL_GPL(sb800_prefetch);
 
 int usb_amd_find_chipset_info(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 	struct amd_chipset_info info;
@@ -201,6 +220,7 @@ int usb_amd_find_chipset_info(void)
 	memset(&info, 0, sizeof(info));
 	spin_unlock_irqrestore(&amd_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info.smbus_dev = pci_get_device(PCI_VENDOR_ID_ATI, 0x4385, NULL);
 	if (info.smbus_dev) {
@@ -224,6 +244,8 @@ int usb_amd_find_chipset_info(void)
 
 	if (info.sb_type == 0) {
 =======
+=======
+>>>>>>> v3.18
 	if (!amd_chipset_sb_type_init(&info)) {
 		ret = 0;
 		goto commit;
@@ -235,6 +257,9 @@ int usb_amd_find_chipset_info(void)
 			info.sb_type.gen == AMD_CHIPSET_YANGTZE ||
 			(info.sb_type.gen == AMD_CHIPSET_SB700 &&
 			info.sb_type.rev > 0x3b)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (info.smbus_dev) {
 			pci_dev_put(info.smbus_dev);
@@ -291,7 +316,10 @@ commit:
 EXPORT_SYMBOL_GPL(usb_amd_find_chipset_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int usb_hcd_amd_remote_wakeup_quirk(struct pci_dev *pdev)
 {
 	/* Make sure amd chipset type has already been initialized */
@@ -325,6 +353,9 @@ bool usb_amd_prefetch_quirk(void)
 }
 EXPORT_SYMBOL_GPL(usb_amd_prefetch_quirk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The hardware normally enables the A-link power management feature, which
@@ -359,7 +390,13 @@ static void usb_amd_quirk_pll(int disable)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (amd_chipset.sb_type == 1 || amd_chipset.sb_type == 2) {
+=======
+	if (amd_chipset.sb_type.gen == AMD_CHIPSET_SB800 ||
+			amd_chipset.sb_type.gen == AMD_CHIPSET_HUDSON2 ||
+			amd_chipset.sb_type.gen == AMD_CHIPSET_BOLTON) {
+>>>>>>> v3.18
 =======
 	if (amd_chipset.sb_type.gen == AMD_CHIPSET_SB800 ||
 			amd_chipset.sb_type.gen == AMD_CHIPSET_HUDSON2 ||
@@ -376,7 +413,12 @@ static void usb_amd_quirk_pll(int disable)
 		outl_p(0x34, AB_INDX(addr));
 		val = inl_p(AB_DATA(addr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (amd_chipset.sb_type == 3) {
+=======
+	} else if (amd_chipset.sb_type.gen == AMD_CHIPSET_SB700 &&
+			amd_chipset.sb_type.rev <= 0x3b) {
+>>>>>>> v3.18
 =======
 	} else if (amd_chipset.sb_type.gen == AMD_CHIPSET_SB700 &&
 			amd_chipset.sb_type.rev <= 0x3b) {
@@ -494,7 +536,11 @@ void usb_amd_dev_put(void)
 	amd_chipset.smbus_dev = NULL;
 	amd_chipset.nb_type = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd_chipset.sb_type = 0;
+=======
+	memset(&amd_chipset.sb_type, 0, sizeof(amd_chipset.sb_type));
+>>>>>>> v3.18
 =======
 	memset(&amd_chipset.sb_type, 0, sizeof(amd_chipset.sb_type));
 >>>>>>> v3.18
@@ -628,8 +674,12 @@ static void quirk_usb_handoff_ohci(struct pci_dev *pdev)
 	void __iomem *base;
 	u32 control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 fminterval = 0;
 	bool no_fminterval = false;
+=======
+	u32 fminterval;
+>>>>>>> v3.18
 =======
 	u32 fminterval;
 >>>>>>> v3.18
@@ -643,6 +693,7 @@ static void quirk_usb_handoff_ohci(struct pci_dev *pdev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * ULi M5237 OHCI controller locks the whole system when accessing
 	 * the OHCI_FMINTERVAL offset.
@@ -650,6 +701,8 @@ static void quirk_usb_handoff_ohci(struct pci_dev *pdev)
 	if (pdev->vendor == PCI_VENDOR_ID_AL && pdev->device == 0x5237)
 		no_fminterval = true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	control = readl(base + OHCI_CONTROL);
@@ -691,9 +744,13 @@ static void quirk_usb_handoff_ohci(struct pci_dev *pdev)
 
 	/* software reset of the controller, preserving HcFmInterval */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!no_fminterval)
 		fminterval = readl(base + OHCI_FMINTERVAL);
 
+=======
+	fminterval = readl(base + OHCI_FMINTERVAL);
+>>>>>>> v3.18
 =======
 	fminterval = readl(base + OHCI_FMINTERVAL);
 >>>>>>> v3.18
@@ -706,9 +763,13 @@ static void quirk_usb_handoff_ohci(struct pci_dev *pdev)
 		udelay(1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!no_fminterval)
 		writel(fminterval, base + OHCI_FMINTERVAL);
+=======
+	writel(fminterval, base + OHCI_FMINTERVAL);
+>>>>>>> v3.18
 =======
 	writel(fminterval, base + OHCI_FMINTERVAL);
 >>>>>>> v3.18
@@ -920,6 +981,7 @@ static int handshake(void __iomem *ptr, u32 mask, u32 done,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_INTEL_LYNX_POINT_XHCI	0x8C31
 #define PCI_DEVICE_ID_INTEL_LYNX_POINT_LP_XHCI	0x9C31
 
@@ -948,6 +1010,8 @@ EXPORT_SYMBOL_GPL(usb_is_intel_switchable_xhci);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Intel's Panther Point chipset has two host controllers (EHCI and xHCI) that
  * share some number of ports.  These ports can be switched between either
@@ -967,10 +1031,13 @@ EXPORT_SYMBOL_GPL(usb_is_intel_switchable_xhci);
  * devices connect at SuperSpeed, rather than at USB 2.0 speeds.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void usb_enable_xhci_ports(struct pci_dev *xhci_pdev)
 {
 	u32		ports_available;
 =======
+=======
+>>>>>>> v3.18
 void usb_enable_intel_xhci_ports(struct pci_dev *xhci_pdev)
 {
 	u32		ports_available;
@@ -995,6 +1062,9 @@ void usb_enable_intel_xhci_ports(struct pci_dev *xhci_pdev)
 
 	if (!ehci_found)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Don't switchover the ports if the user hasn't compiled the xHCI
@@ -1026,7 +1096,11 @@ void usb_enable_intel_xhci_ports(struct pci_dev *xhci_pdev)
 	 */
 	pci_write_config_dword(xhci_pdev, USB_INTEL_USB3_PSSEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cpu_to_le32(ports_available));
+=======
+			ports_available);
+>>>>>>> v3.18
 =======
 			ports_available);
 >>>>>>> v3.18
@@ -1052,7 +1126,11 @@ void usb_enable_intel_xhci_ports(struct pci_dev *xhci_pdev)
 	 */
 	pci_write_config_dword(xhci_pdev, USB_INTEL_XUSB2PR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cpu_to_le32(ports_available));
+=======
+			ports_available);
+>>>>>>> v3.18
 =======
 			ports_available);
 >>>>>>> v3.18
@@ -1063,7 +1141,11 @@ void usb_enable_intel_xhci_ports(struct pci_dev *xhci_pdev)
 			"to xHCI: 0x%x\n", ports_available);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(usb_enable_xhci_ports);
+=======
+EXPORT_SYMBOL_GPL(usb_enable_intel_xhci_ports);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(usb_enable_intel_xhci_ports);
 >>>>>>> v3.18
@@ -1148,8 +1230,13 @@ static void quirk_usb_handoff_xhci(struct pci_dev *pdev)
 
 hc_init:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (usb_is_intel_switchable_xhci(pdev))
 		usb_enable_xhci_ports(pdev);
+=======
+	if (pdev->vendor == PCI_VENDOR_ID_INTEL)
+		usb_enable_intel_xhci_ports(pdev);
+>>>>>>> v3.18
 =======
 	if (pdev->vendor == PCI_VENDOR_ID_INTEL)
 		usb_enable_intel_xhci_ports(pdev);

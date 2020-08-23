@@ -25,6 +25,11 @@
 #include "async-thread.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct mutex uuid_mutex;
+
+>>>>>>> v3.18
 =======
 extern struct mutex uuid_mutex;
 
@@ -38,7 +43,10 @@ struct btrfs_pending_bios {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Use sequence counter to get consistent device stat data on
  * 32-bit processors.
@@ -52,15 +60,21 @@ struct btrfs_pending_bios {
 #define btrfs_device_data_ordered_init(device) do { } while (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct btrfs_device {
 	struct list_head dev_list;
 	struct list_head dev_alloc_list;
 	struct btrfs_fs_devices *fs_devices;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct btrfs_root *dev_root;
 
 =======
+=======
+>>>>>>> v3.18
 
 	struct btrfs_root *dev_root;
 
@@ -70,6 +84,9 @@ struct btrfs_device {
 
 	spinlock_t io_lock ____cacheline_aligned;
 	int running_pending;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* regular prio bios */
 	struct btrfs_pending_bios pending_bios;
@@ -77,13 +94,19 @@ struct btrfs_device {
 	struct btrfs_pending_bios pending_sync_bios;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int running_pending;
 	u64 generation;
 =======
+=======
+>>>>>>> v3.18
 	struct block_device *bdev;
 
 	/* the mode sent to blkdev_get */
 	fmode_t mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int writeable;
@@ -92,6 +115,7 @@ struct btrfs_device {
 	int can_discard;
 	int is_tgtdev_for_dev_replace;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spinlock_t io_lock;
 
@@ -106,20 +130,31 @@ struct btrfs_device {
 	seqcount_t data_seqcount;
 #endif
 >>>>>>> v3.18
+=======
+#ifdef __BTRFS_NEED_DEVICE_DATA_ORDERED
+	seqcount_t data_seqcount;
+#endif
+>>>>>>> v3.18
 
 	/* the internal btrfs device id */
 	u64 devid;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* size of the device */
 	u64 total_bytes;
 
 	/* size of the disk */
 =======
+=======
+>>>>>>> v3.18
 	/* size of the device in memory */
 	u64 total_bytes;
 
 	/* size of the device on disk */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 disk_total_bytes;
 
@@ -132,6 +167,11 @@ struct btrfs_device {
 	/* optimal io width for this device */
 	u32 io_width;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* type and info about this device */
+	u64 type;
+>>>>>>> v3.18
 =======
 	/* type and info about this device */
 	u64 type;
@@ -141,6 +181,7 @@ struct btrfs_device {
 	u32 sector_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* type and info about this device */
 	u64 type;
 
@@ -148,6 +189,8 @@ struct btrfs_device {
 	u8 uuid[BTRFS_UUID_SIZE];
 
 =======
+=======
+>>>>>>> v3.18
 	/* physical drive uuid (or lvm uuid) */
 	u8 uuid[BTRFS_UUID_SIZE];
 
@@ -173,6 +216,9 @@ struct btrfs_device {
 	struct bio *flush_bio;
 	struct completion flush_wait;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* per-device scrub information */
 	struct scrub_ctx *scrub_device;
@@ -189,6 +235,7 @@ struct btrfs_device {
 	struct radix_tree_root reada_zones;
 	struct radix_tree_root reada_extents;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* for sending down flush barriers */
 	struct bio *flush_bio;
@@ -209,6 +256,8 @@ struct btrfs_fs_devices {
 	u64 latest_devid;
 	u64 latest_trans;
 =======
+=======
+>>>>>>> v3.18
 	/* disk I/O failure stats. For detailed description refer to
 	 * enum btrfs_dev_stat_values in ioctl.h */
 	int dev_stats_valid;
@@ -288,6 +337,9 @@ BTRFS_DEVICE_GETSET_FUNCS(bytes_used);
 struct btrfs_fs_devices {
 	u8 fsid[BTRFS_FSID_SIZE]; /* FS specific uuid */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 num_devices;
 	u64 open_devices;
@@ -295,7 +347,10 @@ struct btrfs_fs_devices {
 	u64 missing_devices;
 	u64 total_rw_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 num_can_discard;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 total_devices;
@@ -304,7 +359,13 @@ struct btrfs_fs_devices {
 	/* all of the devices in the FS, protected by a mutex
 	 * so we can safely walk it to write out the supers without
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * worrying about add/remove by the multi-device code
+=======
+	 * worrying about add/remove by the multi-device code.
+	 * Scrubbing super can kick off supers writing by holding
+	 * this mutex lock.
+>>>>>>> v3.18
 =======
 	 * worrying about add/remove by the multi-device code.
 	 * Scrubbing super can kick off supers writing by holding
@@ -315,6 +376,10 @@ struct btrfs_fs_devices {
 	struct list_head devices;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head resized_devices;
+>>>>>>> v3.18
 =======
 	struct list_head resized_devices;
 >>>>>>> v3.18
@@ -334,6 +399,11 @@ struct btrfs_fs_devices {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BTRFS_BIO_INLINE_CSUM_SIZE	64
+
+>>>>>>> v3.18
 =======
 #define BTRFS_BIO_INLINE_CSUM_SIZE	64
 
@@ -348,10 +418,13 @@ struct btrfs_fs_devices {
  * struct btrfs_bio as we can into this over time.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct btrfs_io_bio {
 	unsigned long mirror_num;
 	unsigned long stripe_index;
 =======
+=======
+>>>>>>> v3.18
 typedef void (btrfs_io_bio_end_io_t) (struct btrfs_io_bio *bio, int err);
 struct btrfs_io_bio {
 	unsigned int mirror_num;
@@ -361,6 +434,9 @@ struct btrfs_io_bio {
 	u8 csum_inline[BTRFS_BIO_INLINE_CSUM_SIZE];
 	u8 *csum_allocated;
 	btrfs_io_bio_end_io_t *end_io;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bio bio;
 };
@@ -380,11 +456,14 @@ struct btrfs_bio;
 typedef void (btrfs_bio_end_io_t) (struct btrfs_bio *bio, int err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct btrfs_bio {
 	atomic_t stripes_pending;
 	bio_end_io_t *end_io;
 	struct bio *orig_bio;
 =======
+=======
+>>>>>>> v3.18
 #define BTRFS_BIO_ORIG_BIO_SUBMITTED	0x1
 
 struct btrfs_bio {
@@ -393,6 +472,9 @@ struct btrfs_bio {
 	bio_end_io_t *end_io;
 	struct bio *orig_bio;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *private;
 	atomic_t error;
@@ -455,6 +537,10 @@ struct map_lookup {
 #define BTRFS_BALANCE_ARGS_DRANGE	(1ULL << 3)
 #define BTRFS_BALANCE_ARGS_VRANGE	(1ULL << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BTRFS_BALANCE_ARGS_LIMIT	(1ULL << 5)
+>>>>>>> v3.18
 =======
 #define BTRFS_BALANCE_ARGS_LIMIT	(1ULL << 5)
 >>>>>>> v3.18
@@ -512,6 +598,12 @@ int btrfs_find_device_missing_or_by_path(struct btrfs_root *root,
 					 char *device_path,
 					 struct btrfs_device **device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct btrfs_device *btrfs_alloc_device(struct btrfs_fs_info *fs_info,
+					const u64 *devid,
+					const u8 *uuid);
+>>>>>>> v3.18
 =======
 struct btrfs_device *btrfs_alloc_device(struct btrfs_fs_info *fs_info,
 					const u64 *devid,
@@ -528,6 +620,10 @@ int btrfs_shrink_device(struct btrfs_device *device, u64 new_size);
 int btrfs_init_new_device(struct btrfs_root *root, char *path);
 int btrfs_init_dev_replace_tgtdev(struct btrfs_root *root, char *device_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  struct btrfs_device *srcdev,
+>>>>>>> v3.18
 =======
 				  struct btrfs_device *srcdev,
 >>>>>>> v3.18
@@ -539,20 +635,30 @@ int btrfs_recover_balance(struct btrfs_fs_info *fs_info);
 int btrfs_pause_balance(struct btrfs_fs_info *fs_info);
 int btrfs_cancel_balance(struct btrfs_fs_info *fs_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int btrfs_chunk_readonly(struct btrfs_root *root, u64 chunk_offset);
 int find_free_dev_extent(struct btrfs_device *device, u64 num_bytes,
 =======
+=======
+>>>>>>> v3.18
 int btrfs_create_uuid_tree(struct btrfs_fs_info *fs_info);
 int btrfs_check_uuid_tree(struct btrfs_fs_info *fs_info);
 int btrfs_chunk_readonly(struct btrfs_root *root, u64 chunk_offset);
 int find_free_dev_extent(struct btrfs_trans_handle *trans,
 			 struct btrfs_device *device, u64 num_bytes,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 u64 *start, u64 *max_avail);
 void btrfs_dev_stat_inc_and_print(struct btrfs_device *dev, int index);
 int btrfs_get_dev_stats(struct btrfs_root *root,
 			struct btrfs_ioctl_get_dev_stats *stats);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void btrfs_init_devices_late(struct btrfs_fs_info *fs_info);
+>>>>>>> v3.18
 =======
 void btrfs_init_devices_late(struct btrfs_fs_info *fs_info);
 >>>>>>> v3.18
@@ -572,7 +678,10 @@ unsigned long btrfs_full_stripe_len(struct btrfs_root *root,
 				    struct btrfs_mapping_tree *map_tree,
 				    u64 logical);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int btrfs_finish_chunk_alloc(struct btrfs_trans_handle *trans,
 				struct btrfs_root *extent_root,
 				u64 chunk_offset, u64 chunk_size);
@@ -584,13 +693,21 @@ static inline int btrfs_dev_stats_dirty(struct btrfs_device *dev)
 	return atomic_read(&dev->dev_stats_ccnt);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void btrfs_dev_stat_inc(struct btrfs_device *dev,
 				      int index)
 {
 	atomic_inc(dev->dev_stat_values + index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_stats_dirty = 1;
+=======
+	smp_mb__before_atomic();
+	atomic_inc(&dev->dev_stats_ccnt);
+>>>>>>> v3.18
 =======
 	smp_mb__before_atomic();
 	atomic_inc(&dev->dev_stats_ccnt);
@@ -610,7 +727,12 @@ static inline int btrfs_dev_stat_read_and_reset(struct btrfs_device *dev,
 
 	ret = atomic_xchg(dev->dev_stat_values + index, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_stats_dirty = 1;
+=======
+	smp_mb__before_atomic();
+	atomic_inc(&dev->dev_stats_ccnt);
+>>>>>>> v3.18
 =======
 	smp_mb__before_atomic();
 	atomic_inc(&dev->dev_stats_ccnt);
@@ -623,7 +745,12 @@ static inline void btrfs_dev_stat_set(struct btrfs_device *dev,
 {
 	atomic_set(dev->dev_stat_values + index, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_stats_dirty = 1;
+=======
+	smp_mb__before_atomic();
+	atomic_inc(&dev->dev_stats_ccnt);
+>>>>>>> v3.18
 =======
 	smp_mb__before_atomic();
 	atomic_inc(&dev->dev_stats_ccnt);
@@ -636,10 +763,16 @@ static inline void btrfs_dev_stat_reset(struct btrfs_device *dev,
 	btrfs_dev_stat_set(dev, index, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void btrfs_update_commit_device_size(struct btrfs_fs_info *fs_info);
 void btrfs_update_commit_device_bytes_used(struct btrfs_root *root,
 					struct btrfs_transaction *transaction);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

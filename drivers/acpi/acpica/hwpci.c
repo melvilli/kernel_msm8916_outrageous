@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -145,18 +149,24 @@ acpi_hw_derive_pci_id(struct acpi_pci_id *pci_id,
 
 		status = acpi_hw_process_pci_list(pci_id, list_head);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	/* Always delete the list */
 
 	acpi_hw_delete_pci_list(list_head);
 =======
+=======
+>>>>>>> v3.18
 
 		/* Delete the list */
 
 		acpi_hw_delete_pci_list(list_head);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }
@@ -201,11 +211,17 @@ acpi_hw_build_pci_list(acpi_handle root_pci_device,
 		status = acpi_get_parent(current_device, &parent_device);
 		if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			/* Must delete the list before exit */
 
 			acpi_hw_delete_pci_list(*return_list_head);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return (status);
 		}
@@ -220,11 +236,17 @@ acpi_hw_build_pci_list(acpi_handle root_pci_device,
 		list_element = ACPI_ALLOCATE(sizeof(struct acpi_pci_device));
 		if (!list_element) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			/* Must delete the list before exit */
 
 			acpi_hw_delete_pci_list(*return_list_head);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return (AE_NO_MEMORY);
 		}

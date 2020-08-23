@@ -331,7 +331,10 @@ int abx500_get_chip_id(struct device *dev);
 int abx500_event_registers_startup_state_get(struct device *dev, u8 *event);
 int abx500_startup_irq_enabled(struct device *dev, unsigned int irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void abx500_dump_all_banks(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

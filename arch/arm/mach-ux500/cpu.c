@@ -26,7 +26,10 @@
 
 #include "setup.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "devices.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -35,7 +38,10 @@
 #include "id.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ux500_restart(enum reboot_mode mode, const char *cmd)
 {
 	local_irq_disable();
@@ -44,6 +50,9 @@ void ux500_restart(enum reboot_mode mode, const char *cmd)
 	prcmu_system_reset(0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * FIXME: Should we set up the GPIO domain here?
@@ -59,6 +68,7 @@ void ux500_restart(enum reboot_mode mode, const char *cmd)
 */
 void __init ux500_init_irq(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void __iomem *dist_base;
 	void __iomem *cpu_base;
@@ -81,6 +91,10 @@ void __init ux500_init_irq(void)
 	gic_arch_extn.flags = IRQCHIP_SKIP_SET_WAKE | IRQCHIP_MASK_ON_SUSPEND;
 	irqchip_init();
 >>>>>>> v3.18
+=======
+	gic_arch_extn.flags = IRQCHIP_SKIP_SET_WAKE | IRQCHIP_MASK_ON_SUSPEND;
+	irqchip_init();
+>>>>>>> v3.18
 
 	/*
 	 * Init clocks here so that they are available for system timer
@@ -90,6 +104,7 @@ void __init ux500_init_irq(void)
 		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8500_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
 			       U8500_CLKRST3_BASE, U8500_CLKRST5_BASE,
 			       U8500_CLKRST6_BASE);
@@ -98,6 +113,8 @@ void __init ux500_init_irq(void)
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		u8500_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
 =======
+=======
+>>>>>>> v3.18
 
 		u8500_of_clk_init(U8500_CLKRST1_BASE,
 				  U8500_CLKRST2_BASE,
@@ -108,12 +125,16 @@ void __init ux500_init_irq(void)
 		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		u9540_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       U8500_CLKRST3_BASE, U8500_CLKRST5_BASE,
 			       U8500_CLKRST6_BASE);
 	} else if (cpu_is_u8540()) {
 		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K + SZ_4K - 1);
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K + SZ_4K - 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u8540_clk_init();
 	}
@@ -125,12 +146,17 @@ void __init ux500_init_late(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		u8540_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
 			       U8500_CLKRST3_BASE, U8500_CLKRST5_BASE,
 			       U8500_CLKRST6_BASE);
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char * __init ux500_get_machine(void)
 {
@@ -175,7 +201,11 @@ static void __init soc_info_populate(struct soc_device_attribute *soc_dev_attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device_attribute ux500_soc_attr =
+=======
+static const struct device_attribute ux500_soc_attr =
+>>>>>>> v3.18
 =======
 static const struct device_attribute ux500_soc_attr =
 >>>>>>> v3.18

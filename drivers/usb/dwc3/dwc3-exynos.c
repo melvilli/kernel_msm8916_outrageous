@@ -7,11 +7,14 @@
  * Author: Anton Tikhomirov <av.tikhomirov@samsung.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -20,6 +23,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -32,14 +38,20 @@
 #include <linux/clk.h>
 #include <linux/usb/otg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
 #include <linux/of.h>
 #include <linux/of_platform.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/usb/usb_phy_generic.h>
 #include <linux/of.h>
 #include <linux/of_platform.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct dwc3_exynos {
@@ -49,6 +61,11 @@ struct dwc3_exynos {
 
 	struct clk		*clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regulator	*vdd33;
+	struct regulator	*vdd10;
+>>>>>>> v3.18
 =======
 	struct regulator	*vdd33;
 	struct regulator	*vdd10;
@@ -58,7 +75,11 @@ struct dwc3_exynos {
 static int dwc3_exynos_register_phys(struct dwc3_exynos *exynos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nop_usb_xceiv_platform_data pdata;
+=======
+	struct usb_phy_generic_platform_data pdata;
+>>>>>>> v3.18
 =======
 	struct usb_phy_generic_platform_data pdata;
 >>>>>>> v3.18
@@ -68,7 +89,11 @@ static int dwc3_exynos_register_phys(struct dwc3_exynos *exynos)
 	memset(&pdata, 0x00, sizeof(pdata));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", PLATFORM_DEVID_AUTO);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", PLATFORM_DEVID_AUTO);
+>>>>>>> v3.18
 =======
 	pdev = platform_device_alloc("usb_phy_generic", PLATFORM_DEVID_AUTO);
 >>>>>>> v3.18
@@ -78,6 +103,10 @@ static int dwc3_exynos_register_phys(struct dwc3_exynos *exynos)
 	exynos->usb2_phy = pdev;
 	pdata.type = USB_PHY_TYPE_USB2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pdata.gpio_reset = -1;
+>>>>>>> v3.18
 =======
 	pdata.gpio_reset = -1;
 >>>>>>> v3.18
@@ -87,7 +116,11 @@ static int dwc3_exynos_register_phys(struct dwc3_exynos *exynos)
 		goto err1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", PLATFORM_DEVID_AUTO);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", PLATFORM_DEVID_AUTO);
+>>>>>>> v3.18
 =======
 	pdev = platform_device_alloc("usb_phy_generic", PLATFORM_DEVID_AUTO);
 >>>>>>> v3.18
@@ -142,6 +175,7 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	struct device_node	*node = dev->of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			ret = -ENOMEM;
 
 	exynos = devm_kzalloc(dev, sizeof(*exynos), GFP_KERNEL);
@@ -150,11 +184,16 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 		goto err1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	int			ret;
 
 	exynos = devm_kzalloc(dev, sizeof(*exynos), GFP_KERNEL);
 	if (!exynos)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -163,10 +202,16 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	 * Once we move to full device tree support this will vanish off.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->dma_mask)
 		dev->dma_mask = &dev->coherent_dma_mask;
 	if (!dev->coherent_dma_mask)
 		dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(32));
 	if (ret)
@@ -179,7 +224,11 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(dev, "couldn't register PHYs\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -189,8 +238,12 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	if (IS_ERR(clk)) {
 		dev_err(dev, "couldn't get clock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err1;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -202,7 +255,10 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	clk_prepare_enable(exynos->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	exynos->vdd33 = devm_regulator_get(dev, "vdd33");
 	if (IS_ERR(exynos->vdd33)) {
 		ret = PTR_ERR(exynos->vdd33);
@@ -225,13 +281,20 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 		goto err3;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (node) {
 		ret = of_platform_populate(node, NULL, NULL, dev);
 		if (ret) {
 			dev_err(dev, "failed to add dwc3 core\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err2;
+=======
+			goto err4;
+>>>>>>> v3.18
 =======
 			goto err4;
 >>>>>>> v3.18
@@ -240,7 +303,11 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 		dev_err(dev, "no device node, failed to add dwc3 core\n");
 		ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err2;
+=======
+		goto err4;
+>>>>>>> v3.18
 =======
 		goto err4;
 >>>>>>> v3.18
@@ -249,16 +316,22 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err2:
 	clk_disable_unprepare(clk);
 err1:
 =======
+=======
+>>>>>>> v3.18
 err4:
 	regulator_disable(exynos->vdd10);
 err3:
 	regulator_disable(exynos->vdd33);
 err2:
 	clk_disable_unprepare(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -274,6 +347,12 @@ static int dwc3_exynos_remove(struct platform_device *pdev)
 	clk_disable_unprepare(exynos->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	regulator_disable(exynos->vdd33);
+	regulator_disable(exynos->vdd10);
+
+>>>>>>> v3.18
 =======
 	regulator_disable(exynos->vdd33);
 	regulator_disable(exynos->vdd10);
@@ -298,6 +377,12 @@ static int dwc3_exynos_suspend(struct device *dev)
 	clk_disable(exynos->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	regulator_disable(exynos->vdd33);
+	regulator_disable(exynos->vdd10);
+
+>>>>>>> v3.18
 =======
 	regulator_disable(exynos->vdd33);
 	regulator_disable(exynos->vdd10);
@@ -310,7 +395,10 @@ static int dwc3_exynos_resume(struct device *dev)
 {
 	struct dwc3_exynos *exynos = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = regulator_enable(exynos->vdd33);
@@ -323,6 +411,9 @@ static int dwc3_exynos_resume(struct device *dev)
 		dev_err(dev, "Failed to enable VDD10 supply\n");
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk_enable(exynos->clk);
@@ -359,7 +450,11 @@ module_platform_driver(dwc3_exynos_driver);
 MODULE_ALIAS("platform:exynos-dwc3");
 MODULE_AUTHOR("Anton Tikhomirov <av.tikhomirov@samsung.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

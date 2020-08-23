@@ -104,7 +104,11 @@ out_nomem:
 static void hw_queue_dtor(struct hw_queue *queue)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pages_per_kpage = PAGE_SIZE / queue->pagesize;
+=======
+	int pages_per_kpage;
+>>>>>>> v3.18
 =======
 	int pages_per_kpage;
 >>>>>>> v3.18
@@ -114,6 +118,11 @@ static void hw_queue_dtor(struct hw_queue *queue)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pages_per_kpage = PAGE_SIZE / queue->pagesize;
+
+>>>>>>> v3.18
 =======
 	pages_per_kpage = PAGE_SIZE / queue->pagesize;
 

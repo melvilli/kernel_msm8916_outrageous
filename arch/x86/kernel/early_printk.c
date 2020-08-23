@@ -15,15 +15,21 @@
 #include <asm/pci-direct.h>
 #include <asm/fixmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mrst.h>
 #include <asm/pgtable.h>
 #include <linux/usb/ehci_def.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/intel-mid.h>
 #include <asm/pgtable.h>
 #include <linux/usb/ehci_def.h>
 #include <linux/efi.h>
 #include <asm/efi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Simple VGA output */
@@ -243,12 +249,18 @@ static int __init setup_early_printk(char *buf)
 		}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EARLY_PRINTK_EFI
 		if (!strncmp(buf, "efi", 3))
 			early_console_register(&early_efi_console, keep);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buf++;
 	}

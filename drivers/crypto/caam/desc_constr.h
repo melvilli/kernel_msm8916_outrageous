@@ -11,6 +11,10 @@
 #define CAAM_PTR_SZ sizeof(dma_addr_t)
 #define CAAM_DESC_BYTES_MAX (CAAM_CMD_SZ * MAX_CAAM_DESCSIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DESC_JOB_IO_LEN (CAAM_CMD_SZ * 5 + CAAM_PTR_SZ * 3)
+>>>>>>> v3.18
 =======
 #define DESC_JOB_IO_LEN (CAAM_CMD_SZ * 5 + CAAM_PTR_SZ * 3)
 >>>>>>> v3.18
@@ -115,7 +119,10 @@ static inline void append_cmd(u32 *desc, u32 command)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define append_u32 append_cmd
 
 static inline void append_u64(u32 *desc, u64 data)
@@ -136,6 +143,9 @@ static inline u32 *write_cmd(u32 *desc, u32 command)
 	return desc + 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void append_cmd_ptr(u32 *desc, dma_addr_t ptr, int len,
 				  u32 command)
@@ -150,7 +160,12 @@ static inline void append_cmd_ptr_extlen(u32 *desc, dma_addr_t ptr,
 {
 	append_cmd(desc, command);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_ptr(desc, ptr);
+=======
+	if (!(command & (SQIN_RTO | SQIN_PRE)))
+		append_ptr(desc, ptr);
+>>>>>>> v3.18
 =======
 	if (!(command & (SQIN_RTO | SQIN_PRE)))
 		append_ptr(desc, ptr);
@@ -166,6 +181,7 @@ static inline void append_cmd_data(u32 *desc, void *data, int len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 *append_jump(u32 *desc, u32 options)
 {
 	u32 *cmd = desc_end(desc);
@@ -176,6 +192,8 @@ static inline u32 *append_jump(u32 *desc, u32 options)
 	return cmd;
 }
 =======
+=======
+>>>>>>> v3.18
 #define APPEND_CMD_RET(cmd, op) \
 static inline u32 *append_##cmd(u32 *desc, u32 options) \
 { \
@@ -186,6 +204,9 @@ static inline u32 *append_##cmd(u32 *desc, u32 options) \
 }
 APPEND_CMD_RET(jump, JUMP)
 APPEND_CMD_RET(move, MOVE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void set_jump_tgt_here(u32 *desc, u32 *jump_cmd)
@@ -194,7 +215,10 @@ static inline void set_jump_tgt_here(u32 *desc, u32 *jump_cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void set_move_tgt_here(u32 *desc, u32 *move_cmd)
 {
 	*move_cmd &= ~MOVE_OFFSET_MASK;
@@ -202,6 +226,9 @@ static inline void set_move_tgt_here(u32 *desc, u32 *move_cmd)
 				 MOVE_OFFSET_MASK);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define APPEND_CMD(cmd, op) \
 static inline void append_##cmd(u32 *desc, u32 options) \
@@ -211,7 +238,10 @@ static inline void append_##cmd(u32 *desc, u32 options) \
 }
 APPEND_CMD(operation, OPERATION)
 <<<<<<< HEAD
+<<<<<<< HEAD
 APPEND_CMD(move, MOVE)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -235,11 +265,14 @@ static inline void append_##cmd(u32 *desc, dma_addr_t ptr, unsigned int len, \
 APPEND_CMD_PTR(key, KEY)
 APPEND_CMD_PTR(load, LOAD)
 <<<<<<< HEAD
+<<<<<<< HEAD
 APPEND_CMD_PTR(store, STORE)
 APPEND_CMD_PTR(fifo_load, FIFO_LOAD)
 APPEND_CMD_PTR(fifo_store, FIFO_STORE)
 
 =======
+=======
+>>>>>>> v3.18
 APPEND_CMD_PTR(fifo_load, FIFO_LOAD)
 APPEND_CMD_PTR(fifo_store, FIFO_STORE)
 
@@ -260,6 +293,9 @@ static inline void append_store(u32 *desc, dma_addr_t ptr, unsigned int len,
 		append_ptr(desc, ptr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define APPEND_SEQ_PTR_INTLEN(cmd, op) \
 static inline void append_seq_##cmd##_ptr_intlen(u32 *desc, dma_addr_t ptr, \
@@ -268,12 +304,18 @@ static inline void append_seq_##cmd##_ptr_intlen(u32 *desc, dma_addr_t ptr, \
 { \
 	PRINT_POS; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_cmd_ptr(desc, ptr, len, CMD_SEQ_##op##_PTR | options); \
 =======
+=======
+>>>>>>> v3.18
 	if (options & (SQIN_RTO | SQIN_PRE)) \
 		append_cmd(desc, CMD_SEQ_##op##_PTR | len | options); \
 	else \
 		append_cmd_ptr(desc, ptr, len, CMD_SEQ_##op##_PTR | options); \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 APPEND_SEQ_PTR_INTLEN(in, IN)
@@ -348,7 +390,11 @@ APPEND_CMD_RAW_IMM(load, LOAD, u32);
 #define APPEND_MATH(op, desc, dest, src_0, src_1, len) \
 append_cmd(desc, CMD_MATH | MATH_FUN_##op | MATH_DEST_##dest | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   MATH_SRC0_##src_0 | MATH_SRC1_##src_1 | (u32) (len & MATH_LEN_MASK));
+=======
+	MATH_SRC0_##src_0 | MATH_SRC1_##src_1 | (u32)len);
+>>>>>>> v3.18
 =======
 	MATH_SRC0_##src_0 | MATH_SRC1_##src_1 | (u32)len);
 >>>>>>> v3.18
@@ -372,6 +418,11 @@ append_cmd(desc, CMD_MATH | MATH_FUN_##op | MATH_DEST_##dest | \
 #define append_math_rshift(desc, dest, src0, src1, len) \
 	APPEND_MATH(RSHIFT, desc, dest, src0, src1, len)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define append_math_ldshift(desc, dest, src0, src1, len) \
+	APPEND_MATH(SHLD, desc, dest, src0, src1, len)
+>>>>>>> v3.18
 =======
 #define append_math_ldshift(desc, dest, src0, src1, len) \
 	APPEND_MATH(SHLD, desc, dest, src0, src1, len)
@@ -383,7 +434,11 @@ do { \
 	APPEND_MATH(op, desc, dest, src_0, src_1, CAAM_CMD_SZ); \
 	append_cmd(desc, data); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 } while (0);
+=======
+} while (0)
+>>>>>>> v3.18
 =======
 } while (0)
 >>>>>>> v3.18
@@ -407,7 +462,10 @@ do { \
 #define append_math_rshift_imm_u32(desc, dest, src0, src1, data) \
 	APPEND_MATH_IMM_u32(RSHIFT, desc, dest, src0, src1, data)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Exactly one source is IMM. Data is passed in as u64 value */
 #define APPEND_MATH_IMM_u64(op, desc, dest, src_0, src_1, data) \
@@ -439,4 +497,7 @@ do { \
 	APPEND_MATH_IMM_u64(LSHIFT, desc, dest, src0, src1, data)
 #define append_math_rshift_imm_u64(desc, dest, src0, src1, data) \
 	APPEND_MATH_IMM_u64(RSHIFT, desc, dest, src0, src1, data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

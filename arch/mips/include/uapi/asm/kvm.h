@@ -107,7 +107,10 @@ struct kvm_fpu {
 #define KVM_REG_MIPS_PC (KVM_REG_MIPS | KVM_REG_SIZE_U64 | 34)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* KVM specific control registers */
 
 /*
@@ -143,6 +146,9 @@ struct kvm_fpu {
 #define KVM_REG_MIPS_COUNT_HZ		(KVM_REG_MIPS | KVM_REG_SIZE_U64 | \
 					 0x20000 | 2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * KVM MIPS specific structures and definitions

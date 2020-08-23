@@ -14,8 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -25,7 +29,10 @@
 #include <linux/module.h>
 #include <linux/kmod.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -1724,7 +1731,10 @@ static int smsc95xx_resume(struct usb_interface *intf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int smsc95xx_reset_resume(struct usb_interface *intf)
 {
 	struct usbnet *dev = usb_get_intfdata(intf);
@@ -1737,6 +1747,9 @@ static int smsc95xx_reset_resume(struct usb_interface *intf)
 	return smsc95xx_resume(intf);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void smsc95xx_rx_csum_offload(struct sk_buff *skb)
 {
@@ -2029,7 +2042,11 @@ static struct usb_driver smsc95xx_driver = {
 	.suspend	= smsc95xx_suspend,
 	.resume		= smsc95xx_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reset_resume	= smsc95xx_resume,
+=======
+	.reset_resume	= smsc95xx_reset_resume,
+>>>>>>> v3.18
 =======
 	.reset_resume	= smsc95xx_reset_resume,
 >>>>>>> v3.18

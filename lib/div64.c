@@ -80,7 +80,10 @@ EXPORT_SYMBOL(div_s64_rem);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * div64_u64_rem - unsigned 64bit divide with 64bit divisor and remainder
  * @dividend:	64bit dividend
  * @divisor:	64bit divisor
@@ -121,6 +124,9 @@ EXPORT_SYMBOL(div64_u64_rem);
 #endif
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * div64_u64 - unsigned 64bit divide with 64bit divisor
  * @dividend:	64bit dividend

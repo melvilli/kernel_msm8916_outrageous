@@ -13,6 +13,11 @@
 #include <linux/serial_8250.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/edma.h>
+#include <linux/platform_data/gpio-davinci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/edma.h>
 #include <linux/platform_data/gpio-davinci.h>
@@ -22,7 +27,10 @@
 
 #include <mach/cputype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/edma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/irqs.h>
@@ -32,7 +40,10 @@
 #include <mach/serial.h>
 #include <mach/common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/gpio-davinci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -315,16 +326,22 @@ static struct clk_lookup dm644x_clks[] = {
 	CLK("vpss", "slave", &vpss_slave_clk),
 	CLK(NULL, "arm", &arm_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK(NULL, "uart0", &uart0_clk),
 	CLK(NULL, "uart1", &uart1_clk),
 	CLK(NULL, "uart2", &uart2_clk),
 	CLK("davinci_emac.1", NULL, &emac_clk),
 =======
+=======
+>>>>>>> v3.18
 	CLK("serial8250.0", NULL, &uart0_clk),
 	CLK("serial8250.1", NULL, &uart1_clk),
 	CLK("serial8250.2", NULL, &uart2_clk),
 	CLK("davinci_emac.1", NULL, &emac_clk),
 	CLK("davinci_mdio.0", "fck", &emac_clk),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLK("i2c_davinci.1", NULL, &i2c_clk),
 	CLK("palm_bk3710", NULL, &ide_clk),
@@ -341,7 +358,11 @@ static struct clk_lookup dm644x_clks[] = {
 	CLK(NULL, "timer0", &timer0_clk),
 	CLK(NULL, "timer1", &timer1_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("watchdog", NULL, &timer2_clk),
+=======
+	CLK("davinci-wdt", NULL, &timer2_clk),
+>>>>>>> v3.18
 =======
 	CLK("davinci-wdt", NULL, &timer2_clk),
 >>>>>>> v3.18
@@ -521,6 +542,7 @@ static u8 dm644x_default_priorities[DAVINCI_N_AINTC_IRQ] = {
 /*----------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const s8
 queue_tc_mapping[][2] = {
 	/* {event queue no, TC no} */
@@ -533,6 +555,9 @@ static const s8
 =======
 static s8
 >>>>>>> v3.18
+=======
+static s8
+>>>>>>> v3.18
 queue_priority_mapping[][2] = {
 	/* {event queue no, Priority} */
 	{0, 3},
@@ -542,12 +567,15 @@ queue_priority_mapping[][2] = {
 
 static struct edma_soc_info edma_cc0_info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.n_channel		= 64,
 	.n_region		= 4,
 	.n_slot			= 128,
 	.n_tc			= 2,
 	.n_cc			= 1,
 	.queue_tc_mapping	= queue_tc_mapping,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.queue_priority_mapping	= queue_priority_mapping,
@@ -602,6 +630,10 @@ static struct platform_device dm644x_edma_device = {
 static struct resource dm644x_asp_resources[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.name	= "mpu",
+>>>>>>> v3.18
 =======
 		.name	= "mpu",
 >>>>>>> v3.18
@@ -805,7 +837,10 @@ static struct platform_device dm644x_vpbe_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource dm644_gpio_resources[] = {
 	{	/* registers */
 		.start	= DAVINCI_GPIO_BASE,
@@ -829,6 +864,9 @@ int __init dm644x_gpio_register(void)
 				     ARRAY_SIZE(dm644_gpio_resources),
 				     &dm644_gpio_platform_data);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*----------------------------------------------------------------------*/
 
@@ -874,7 +912,11 @@ static struct davinci_timer_info dm644x_timer_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct plat_serial8250_port dm644x_serial_platform_data[] = {
+=======
+static struct plat_serial8250_port dm644x_serial0_platform_data[] = {
+>>>>>>> v3.18
 =======
 static struct plat_serial8250_port dm644x_serial0_platform_data[] = {
 >>>>>>> v3.18
@@ -888,12 +930,18 @@ static struct plat_serial8250_port dm644x_serial0_platform_data[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.flags	= 0,
 	}
 };
 static struct plat_serial8250_port dm644x_serial1_platform_data[] = {
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mapbase	= DAVINCI_UART1_BASE,
 		.irq		= IRQ_UARTINT1,
@@ -904,12 +952,18 @@ static struct plat_serial8250_port dm644x_serial1_platform_data[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.flags	= 0,
 	}
 };
 static struct plat_serial8250_port dm644x_serial2_platform_data[] = {
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mapbase	= DAVINCI_UART2_BASE,
 		.irq		= IRQ_UARTINT2,
@@ -919,6 +973,7 @@ static struct plat_serial8250_port dm644x_serial2_platform_data[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.flags		= 0
 	},
@@ -931,6 +986,8 @@ static struct platform_device dm644x_serial_device = {
 		.platform_data	= dm644x_serial_platform_data,
 	},
 =======
+=======
+>>>>>>> v3.18
 		.flags	= 0,
 	}
 };
@@ -959,6 +1016,9 @@ struct platform_device dm644x_serial_device[] = {
 	},
 	{
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -980,11 +1040,14 @@ static struct davinci_soc_info davinci_soc_info_dm644x = {
 	.intc_irq_num		= DAVINCI_N_AINTC_IRQ,
 	.timer_info		= &dm644x_timer_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gpio_type		= GPIO_TYPE_DAVINCI,
 	.gpio_base		= DAVINCI_GPIO_BASE,
 	.gpio_num		= 71,
 	.gpio_irq		= IRQ_GPIOBNK0,
 	.serial_dev		= &dm644x_serial_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.emac_pdata		= &dm644x_emac_pdata,
@@ -1031,6 +1094,11 @@ int __init dm644x_init_video(struct vpfe_config *vpfe_cfg,
 static int __init dm644x_init_devices(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+
+>>>>>>> v3.18
 =======
 	int ret = 0;
 
@@ -1043,17 +1111,23 @@ static int __init dm644x_init_devices(void)
 	platform_device_register(&dm644x_mdio_device);
 	platform_device_register(&dm644x_emac_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_add_alias(NULL, dev_name(&dm644x_mdio_device.dev),
 		      NULL, &dm644x_emac_device.dev);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = davinci_init_wdt();
 	if (ret)
 		pr_warn("%s: watchdog init failed: %d\n", __func__, ret);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 postcore_initcall(dm644x_init_devices);

@@ -107,7 +107,11 @@ deadline_add_request(struct request_queue *q, struct request *rq)
 	 * set expire time and add to fifo list
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rq_set_fifo_time(rq, jiffies + dd->fifo_expire[data_dir]);
+=======
+	rq->fifo_time = jiffies + dd->fifo_expire[data_dir];
+>>>>>>> v3.18
 =======
 	rq->fifo_time = jiffies + dd->fifo_expire[data_dir];
 >>>>>>> v3.18
@@ -179,9 +183,15 @@ deadline_merged_requests(struct request_queue *q, struct request *req,
 	 */
 	if (!list_empty(&req->queuelist) && !list_empty(&next->queuelist)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (time_before(rq_fifo_time(next), rq_fifo_time(req))) {
 			list_move(&req->queuelist, &next->queuelist);
 			rq_set_fifo_time(req, rq_fifo_time(next));
+=======
+		if (time_before(next->fifo_time, req->fifo_time)) {
+			list_move(&req->queuelist, &next->queuelist);
+			req->fifo_time = next->fifo_time;
+>>>>>>> v3.18
 =======
 		if (time_before(next->fifo_time, req->fifo_time)) {
 			list_move(&req->queuelist, &next->queuelist);
@@ -241,7 +251,11 @@ static inline int deadline_check_fifo(struct deadline_data *dd, int ddir)
 	 * rq is expired!
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (time_after_eq(jiffies, rq_fifo_time(rq)))
+=======
+	if (time_after_eq(jiffies, rq->fifo_time))
+>>>>>>> v3.18
 =======
 	if (time_after_eq(jiffies, rq->fifo_time))
 >>>>>>> v3.18
@@ -361,7 +375,11 @@ static int deadline_init_queue(struct request_queue *q, struct elevator_type *e)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dd = kmalloc_node(sizeof(*dd), GFP_KERNEL | __GFP_ZERO, q->node);
+=======
+	dd = kzalloc_node(sizeof(*dd), GFP_KERNEL, q->node);
+>>>>>>> v3.18
 =======
 	dd = kzalloc_node(sizeof(*dd), GFP_KERNEL, q->node);
 >>>>>>> v3.18

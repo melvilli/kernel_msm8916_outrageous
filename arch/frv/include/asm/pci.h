@@ -25,8 +25,11 @@ struct pci_dev;
 extern void pcibios_set_master(struct pci_dev *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void pcibios_penalize_isa_irq(int irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_MMU

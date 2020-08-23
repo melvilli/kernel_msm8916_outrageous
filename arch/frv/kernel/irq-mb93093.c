@@ -106,7 +106,10 @@ static struct irqaction fpga_irq[1]  = {
 	[0] = {
 		.handler	= fpga_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags		= IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name		= "fpga.0",

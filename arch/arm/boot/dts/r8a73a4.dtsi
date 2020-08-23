@@ -10,6 +10,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+
+>>>>>>> v3.18
 =======
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/interrupt-controller/irq.h>
@@ -43,6 +49,7 @@
 			<0 0xf1004000 0 0x2000>,
 			<0 0xf1006000 0 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <1 9 0xf04>;
 
 		gic-cpuif@4 {
@@ -53,10 +60,14 @@
 =======
 		interrupts = <1 9 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
 >>>>>>> v3.18
+=======
+		interrupts = <1 9 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
+>>>>>>> v3.18
 	};
 
 	timer {
 		compatible = "arm,armv7-timer";
+<<<<<<< HEAD
 <<<<<<< HEAD
 		interrupts = <1 13 0xf08>,
 				<1 14 0xf08>,
@@ -102,6 +113,8 @@
 		interrupt-parent = <&gic>;
 		interrupts = <0 69 4>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <1 13 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
 			     <1 14 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
 			     <1 11 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
@@ -413,6 +426,9 @@
 		interrupts = <0 167 IRQ_TYPE_LEVEL_HIGH>;
 		cap-sd-highspeed;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

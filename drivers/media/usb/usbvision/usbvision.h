@@ -204,6 +204,7 @@ enum {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Debugging aid */
 #define USBVISION_SAY_AND_WAIT(what) { \
 	wait_queue_head_t wq; \
@@ -212,6 +213,8 @@ enum {
 	interruptible_sleep_on_timeout(&wq, HZ * 3); \
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

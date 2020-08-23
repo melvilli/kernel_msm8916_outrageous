@@ -47,7 +47,11 @@ enum max77693_pmic_reg {
 	MAX77693_LED_REG_FLASH_INT			= 0x0E,
 	MAX77693_LED_REG_FLASH_INT_MASK			= 0x0F,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MAX77693_LED_REG_FLASH_INT_STATUS		= 0x10,
+=======
+	MAX77693_LED_REG_FLASH_STATUS			= 0x10,
+>>>>>>> v3.18
 =======
 	MAX77693_LED_REG_FLASH_STATUS			= 0x10,
 >>>>>>> v3.18
@@ -90,7 +94,10 @@ enum max77693_pmic_reg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MAX77693 ITORCH register */
 #define TORCH_IOUT1_SHIFT	0
 #define TORCH_IOUT2_SHIFT	4
@@ -163,6 +170,9 @@ enum max77693_pmic_reg {
 #define SAFEOUT_CTRL_ENSAFEOUT1_MASK	0x40
 #define SAFEOUT_CTRL_ENSAFEOUT2_MASK	0x80
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Slave addr = 0x4A: MUIC */
 enum max77693_muic_reg {
@@ -318,7 +328,10 @@ enum max77693_haptic_reg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* max77693-pmic LSCNFG configuraton register */
 #define MAX77693_PMIC_LOW_SYS_MASK      0x80
 #define MAX77693_PMIC_LOW_SYS_SHIFT     7
@@ -328,6 +341,9 @@ enum max77693_haptic_reg {
 #define MAX77693_CONFIG2_MEN            6
 #define MAX77693_CONFIG2_HTYP           5
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum max77693_irq_source {
 	LED_INT = 0,
@@ -341,7 +357,10 @@ enum max77693_irq_source {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SRC_IRQ_CHARGER			BIT(0)
 #define SRC_IRQ_TOP			BIT(1)
 #define SRC_IRQ_FLASH			BIT(2)
@@ -384,6 +403,9 @@ enum max77693_irq_source {
 #define MUIC_IRQ_INT3_CHG_ENABLED	BIT(4)
 #define MUIC_IRQ_INT3_BAT_DET		BIT(5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum max77693_irq {
 	/* PMIC - FLASH */
@@ -406,11 +428,17 @@ enum max77693_irq {
 	MAX77693_CHG_IRQ_CHGIN_I,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	MAX77693_IRQ_NR,
 };
 
 enum max77693_irq_muic {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* MUIC INT1 */
 	MAX77693_MUIC_IRQ_INT1_ADC,
@@ -435,7 +463,11 @@ enum max77693_irq_muic {
 	MAX77693_MUIC_IRQ_INT3_BAT_DET,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MAX77693_IRQ_NR,
+=======
+	MAX77693_MUIC_IRQ_NR,
+>>>>>>> v3.18
 =======
 	MAX77693_MUIC_IRQ_NR,
 >>>>>>> v3.18
@@ -454,12 +486,15 @@ struct max77693_dev {
 	struct regmap *regmap_haptic;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_domain *irq_domain;
 
 	int irq;
 	int irq_gpio;
 	bool wakeup;
 =======
+=======
+>>>>>>> v3.18
 	struct regmap_irq_chip_data *irq_data_led;
 	struct regmap_irq_chip_data *irq_data_topsys;
 	struct regmap_irq_chip_data *irq_data_charger;
@@ -467,6 +502,9 @@ struct max77693_dev {
 
 	int irq;
 	int irq_gpio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex irqlock;
 	int irq_masks_cur[MAX77693_IRQ_GROUP_NR];
@@ -478,6 +516,7 @@ enum max77693_types {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int max77693_read_reg(struct regmap *map, u8 reg, u8 *dest);
 extern int max77693_bulk_read(struct regmap *map, u8 reg, int count,
 				u8 *buf);
@@ -486,6 +525,8 @@ extern int max77693_bulk_write(struct regmap *map, u8 reg, int count,
 				u8 *buf);
 extern int max77693_update_reg(struct regmap *map, u8 reg, u8 val, u8 mask);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int max77693_irq_init(struct max77693_dev *max77686);

@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Module Name: utdebug - Debug print routines
+=======
+ * Module Name: utdebug - Debug print/trace routines
+>>>>>>> v3.18
 =======
  * Module Name: utdebug - Debug print/trace routines
 >>>>>>> v3.18
@@ -10,7 +14,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -50,7 +58,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -198,6 +211,10 @@ acpi_debug_print(u32 requested_debug_level,
 
 		acpi_gbl_prev_thread_id = thread_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		acpi_gbl_nesting_level = 0;
+>>>>>>> v3.18
 =======
 		acpi_gbl_nesting_level = 0;
 >>>>>>> v3.18
@@ -208,9 +225,12 @@ acpi_debug_print(u32 requested_debug_level,
 	 * current procedure nesting level, and the current procedure name
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_os_printf("%8s-%04ld ", module_name, line_number);
 
 =======
+=======
+>>>>>>> v3.18
 	acpi_os_printf("%9s-%04ld ", module_name, line_number);
 
 #ifdef ACPI_APPLICATION
@@ -220,20 +240,29 @@ acpi_debug_print(u32 requested_debug_level,
 	 * execution. Otherwise, multiple threads will keep resetting the
 	 * level.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ACPI_LV_THREADS & acpi_dbg_level) {
 		acpi_os_printf("[%u] ", (u32)thread_id);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_os_printf("[%02ld] %-22.22s: ",
 		       acpi_gbl_nesting_level,
 		       acpi_ut_trim_function_name(function_name));
 =======
+=======
+>>>>>>> v3.18
 	acpi_os_printf("[%02ld] ", acpi_gbl_nesting_level);
 #endif
 
 	acpi_os_printf("%-22.22s: ", acpi_ut_trim_function_name(function_name));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	va_start(args, format);
@@ -456,7 +485,13 @@ acpi_ut_exit(u32 line_number,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_gbl_nesting_level--;
+=======
+	if (acpi_gbl_nesting_level) {
+		acpi_gbl_nesting_level--;
+	}
+>>>>>>> v3.18
 =======
 	if (acpi_gbl_nesting_level) {
 		acpi_gbl_nesting_level--;
@@ -509,7 +544,13 @@ acpi_ut_status_exit(u32 line_number,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_gbl_nesting_level--;
+=======
+	if (acpi_gbl_nesting_level) {
+		acpi_gbl_nesting_level--;
+	}
+>>>>>>> v3.18
 =======
 	if (acpi_gbl_nesting_level) {
 		acpi_gbl_nesting_level--;
@@ -552,7 +593,13 @@ acpi_ut_value_exit(u32 line_number,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_gbl_nesting_level--;
+=======
+	if (acpi_gbl_nesting_level) {
+		acpi_gbl_nesting_level--;
+	}
+>>>>>>> v3.18
 =======
 	if (acpi_gbl_nesting_level) {
 		acpi_gbl_nesting_level--;
@@ -594,7 +641,13 @@ acpi_ut_ptr_exit(u32 line_number,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_gbl_nesting_level--;
+=======
+	if (acpi_gbl_nesting_level) {
+		acpi_gbl_nesting_level--;
+	}
+>>>>>>> v3.18
 =======
 	if (acpi_gbl_nesting_level) {
 		acpi_gbl_nesting_level--;
@@ -604,6 +657,7 @@ acpi_ut_ptr_exit(u32 line_number,
 
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*******************************************************************************
  *
@@ -751,6 +805,8 @@ acpi_ut_debug_dump_buffer(u8 *buffer, u32 count, u32 display, u32 component_id)
 	acpi_ut_dump_buffer(buffer, count, display, 0);
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef ACPI_APPLICATION
 /*******************************************************************************
  *
@@ -776,4 +832,7 @@ void ACPI_INTERNAL_VAR_XFACE acpi_log_error(const char *format, ...)
 
 ACPI_EXPORT_SYMBOL(acpi_log_error)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

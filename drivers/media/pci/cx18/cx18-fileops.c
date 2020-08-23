@@ -761,7 +761,11 @@ int cx18_v4l2_close(struct file *filp)
 		clear_bit(CX18_F_I_RADIO_USER, &cx->i_flags);
 		/* Switch tuner to TV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cx18_call_all(cx, core, s_std, cx->std);
+=======
+		cx18_call_all(cx, video, s_std, cx->std);
+>>>>>>> v3.18
 =======
 		cx18_call_all(cx, video, s_std, cx->std);
 >>>>>>> v3.18

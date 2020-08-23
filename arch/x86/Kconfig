@@ -17,6 +17,10 @@ config X86_64
 	depends on 64BIT
 	select X86_DEV_DMA_OPS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_USE_CMPXCHG_LOCKREF
+>>>>>>> v3.18
 =======
 	select ARCH_USE_CMPXCHG_LOCKREF
 >>>>>>> v3.18
@@ -25,12 +29,15 @@ config X86_64
 config X86
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
 	select HAVE_AOUT if X86_32
 	select HAVE_UNSTABLE_SCHED_CLOCK
 	select ARCH_SUPPORTS_NUMA_BALANCING
 	select ARCH_WANTS_PROT_NUMA_PROT_NONE
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_MIGHT_HAVE_ACPI_PDC if ACPI
 	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
 	select ARCH_HAS_FAST_MULTIPLIER
@@ -40,6 +47,9 @@ config X86
 	select HAVE_UNSTABLE_SCHED_CLOCK
 	select ARCH_SUPPORTS_NUMA_BALANCING if X86_64
 	select ARCH_SUPPORTS_INT128 if X86_64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_IDE
 	select HAVE_OPROFILE
@@ -54,8 +64,14 @@ config X86
 	select ARCH_WANT_FRAME_POINTERS
 	select HAVE_DMA_ATTRS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_DMA_CONTIGUOUS if !SWIOTLB
 	select HAVE_KRETPROBES
+=======
+	select HAVE_DMA_CONTIGUOUS
+	select HAVE_KRETPROBES
+	select GENERIC_EARLY_IOREMAP
+>>>>>>> v3.18
 =======
 	select HAVE_DMA_CONTIGUOUS
 	select HAVE_KRETPROBES
@@ -72,7 +88,10 @@ config X86
 	select HAVE_FUNCTION_GRAPH_TRACER
 	select HAVE_FUNCTION_GRAPH_FP_TEST
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_FUNCTION_TRACE_MCOUNT_TEST
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select HAVE_SYSCALL_TRACEPOINTS
@@ -91,6 +110,10 @@ config X86
 	select HAVE_KERNEL_XZ
 	select HAVE_KERNEL_LZO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KERNEL_LZ4
+>>>>>>> v3.18
 =======
 	select HAVE_KERNEL_LZ4
 >>>>>>> v3.18
@@ -110,7 +133,10 @@ config X86
 	select ARCH_BINFMT_ELF_RANDOMIZE_PIE
 	select HAVE_ARCH_JUMP_LABEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_TEXT_POKE_SMP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
@@ -124,6 +150,10 @@ config X86
 	select HAVE_BPF_JIT if X86_64
 	select HAVE_ARCH_TRANSPARENT_HUGEPAGE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 	select ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -137,6 +167,7 @@ config X86
 	select BUILDTIME_EXTABLE_SORT
 	select GENERIC_CMOS_UPDATE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CLOCKSOURCE_WATCHDOG
 	select GENERIC_CLOCKEVENTS
 	select ARCH_CLOCKSOURCE_DATA if X86_64
@@ -144,6 +175,8 @@ config X86
 	select GENERIC_TIME_VSYSCALL if X86_64
 	select KTIME_SCALAR if X86_32
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_ARCH_SOFT_DIRTY if X86_64
 	select CLOCKSOURCE_WATCHDOG
 	select GENERIC_CLOCKEVENTS
@@ -151,6 +184,9 @@ config X86
 	select CLOCKSOURCE_VALIDATE_LAST_CYCLE
 	select GENERIC_CLOCKEVENTS_BROADCAST if X86_64 || (X86_32 && X86_LOCAL_APIC)
 	select GENERIC_TIME_VSYSCALL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select GENERIC_STRNCPY_FROM_USER
 	select GENERIC_STRNLEN_USER
@@ -162,6 +198,10 @@ config X86
 	select CLONE_BACKWARDS if X86_32
 	select ARCH_USE_BUILTIN_BSWAP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_USE_QUEUE_RWLOCK
+>>>>>>> v3.18
 =======
 	select ARCH_USE_QUEUE_RWLOCK
 >>>>>>> v3.18
@@ -173,8 +213,11 @@ config X86
 	select HAVE_IRQ_EXIT_ON_IRQ_STACK if X86_64
 	select HAVE_CC_STACKPROTECTOR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_ATOMIC_RMW
 =======
+=======
+>>>>>>> v3.18
 	select GENERIC_CPU_AUTOPROBE
 	select HAVE_ARCH_AUDITSYSCALL
 	select ARCH_SUPPORTS_ATOMIC_RMW
@@ -182,6 +225,9 @@ config X86
 	select HAVE_ACPI_APEI_NMI if ACPI
 	select ACPI_LEGACY_TABLES_LOOKUP if ACPI
 	select X86_FEATURE_NAMES if PROC_FS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config INSTRUCTION_DECODER
@@ -189,11 +235,17 @@ config INSTRUCTION_DECODER
 	depends on KPROBES || PERF_EVENTS || UPROBES
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PERF_EVENTS_INTEL_UNCORE
 	def_bool y
 	depends on PERF_EVENTS && CPU_SUP_INTEL && PCI
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config OUTPUT_FORMAT
 	string
@@ -223,7 +275,11 @@ config SBUS
 config NEED_DMA_MAP_STATE
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86_64 || INTEL_IOMMU || DMA_API_DEBUG || SWIOTLB
+=======
+	depends on X86_64 || INTEL_IOMMU || DMA_API_DEBUG
+>>>>>>> v3.18
 =======
 	depends on X86_64 || INTEL_IOMMU || DMA_API_DEBUG
 >>>>>>> v3.18
@@ -263,9 +319,12 @@ config ARCH_HAS_CACHE_LINE_SIZE
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_HAS_CPU_AUTOPROBE
 	def_bool y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HAVE_SETUP_PER_CPU_AREA
@@ -284,13 +343,19 @@ config ARCH_SUSPEND_POSSIBLE
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_WANT_HUGE_PMD_SHARE
 	def_bool y
 
 config ARCH_WANT_GENERAL_HUGETLB
 	def_bool y
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ZONE_DMA32
 	bool
@@ -332,16 +397,22 @@ config ARCH_HWEIGHT_CFLAGS
 	default "-fcall-saved-rdi -fcall-saved-rsi -fcall-saved-rdx -fcall-saved-rcx -fcall-saved-r8 -fcall-saved-r9 -fcall-saved-r10 -fcall-saved-r11" if X86_64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_CPU_PROBE_RELEASE
 	def_bool y
 	depends on HOTPLUG_CPU
 
 config ARCH_SUPPORTS_UPROBES
 =======
+=======
+>>>>>>> v3.18
 config ARCH_SUPPORTS_UPROBES
 	def_bool y
 
 config FIX_EARLYCON_MEM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	def_bool y
 
@@ -365,6 +436,7 @@ config SMP
 	---help---
 	  This enables support for systems with more than one CPU. If you have
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
 
@@ -373,6 +445,8 @@ config SMP
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
 =======
+=======
+>>>>>>> v3.18
 	  a system with only one CPU, say N. If you have a system with more
 	  than one CPU, say Y.
 
@@ -380,6 +454,9 @@ config SMP
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  will run faster if you say N here.
 
@@ -399,7 +476,10 @@ config SMP
 	  If you don't know what to do here, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config X86_FEATURE_NAMES
 	bool "Processor feature human-readable names" if EMBEDDED
 	default y
@@ -411,6 +491,9 @@ config X86_FEATURE_NAMES
 
 	  If in doubt, say Y.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config X86_X2APIC
 	bool "Support x2apic"
@@ -453,6 +536,7 @@ config X86_EXTENDED_PLATFORM
 	  If you enable this option then you'll be able to select support
 	  for the following (non-PC) 32 bit x86 platforms:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		AMD Elan
 		NUMAQ (IBM/Sequent)
 		RDC R-321x SoC
@@ -461,11 +545,16 @@ config X86_EXTENDED_PLATFORM
 		Summit/EXA (IBM x440)
 		Unisys ES7000 IA32 series
 =======
+=======
+>>>>>>> v3.18
 		Goldfish (Android emulator)
 		AMD Elan
 		RDC R-321x SoC
 		SGI 320/540 (Visual Workstation)
 		STA2X11-based (e.g. Northville)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		Moorestown MID devices
 
@@ -534,7 +623,11 @@ config X86_UV
 config X86_GOLDFISH
        bool "Goldfish (Virtual Platform)"
 <<<<<<< HEAD
+<<<<<<< HEAD
        depends on X86_32
+=======
+       depends on X86_EXTENDED_PLATFORM
+>>>>>>> v3.18
 =======
        depends on X86_EXTENDED_PLATFORM
 >>>>>>> v3.18
@@ -548,6 +641,10 @@ config X86_INTEL_CE
 	depends on PCI
 	depends on PCI_GODIRECT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on X86_IO_APIC
+>>>>>>> v3.18
 =======
 	depends on X86_IO_APIC
 >>>>>>> v3.18
@@ -562,6 +659,7 @@ config X86_INTEL_CE
 	  This option compiles in support for the CE4100 SOC for settop
 	  boxes and media devices.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config X86_WANT_INTEL_MID
 	bool "Intel MID platform support"
@@ -600,6 +698,8 @@ config X86_MDFLD
 
 endif
 =======
+=======
+>>>>>>> v3.18
 config X86_INTEL_MID
 	bool "Intel MID platform support"
 	depends on X86_32
@@ -621,6 +721,9 @@ config X86_INTEL_MID
 
 	  Intel MID platforms are based on an Intel processor and chipset which
 	  consume less power than most of the x86 derivatives.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config X86_INTEL_LPSS
@@ -628,12 +731,15 @@ config X86_INTEL_LPSS
 	depends on ACPI
 	select COMMON_CLK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	---help---
 	  Select to build support for Intel Low Power Subsystem such as
 	  found on Intel Lynxpoint PCH. Selecting this option enables
 	  things like clock tree (common clock framework) which are needed
 	  by the LPSS peripheral drivers.
 =======
+=======
+>>>>>>> v3.18
 	select PINCTRL
 	---help---
 	  Select to build support for Intel Low Power Subsystem such as
@@ -670,6 +776,9 @@ config IOSF_MBI_DEBUG
 	  device they want to access.
 
 	  If you don't require the option or are in doubt, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config X86_RDC321X
@@ -688,6 +797,7 @@ config X86_32_NON_STANDARD
 	depends on X86_32 && SMP
 	depends on X86_EXTENDED_PLATFORM
 	---help---
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  This option compiles in the NUMAQ, Summit, bigsmp, ES7000,
 	  STA2X11, default subarchitectures.  It is intended for a generic
@@ -710,6 +820,8 @@ config X86_NUMAQ
 	  firmware with - send email to <Martin.Bligh@us.ibm.com>.
 
 =======
+=======
+>>>>>>> v3.18
 	  This option compiles in the bigsmp and STA2X11 default
 	  subarchitectures.  It is intended for a generic binary
 	  kernel. If you select them all, kernel will probe it one by
@@ -717,6 +829,9 @@ config X86_NUMAQ
 
 # Alphabetically sorted list of Non standard 32 bit platforms
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config X86_SUPPORTS_MEMORY_FAILURE
 	def_bool y
@@ -724,13 +839,17 @@ config X86_SUPPORTS_MEMORY_FAILURE
 	depends on X86_MCE
 	# On 32-bit this adds too big of NODES_SHIFT and we run out of page flags:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !X86_NUMAQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	# On 32-bit SPARSEMEM adds too big of SECTIONS_WIDTH:
 	depends on X86_64 || !SPARSEMEM
 	select ARCH_SUPPORTS_MEMORY_FAILURE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config X86_VISWS
 	bool "SGI 320/540 (Visual Workstation)"
@@ -745,6 +864,8 @@ config X86_VISWS
 	  A kernel compiled for the Visual Workstation will run on general
 	  PCs as well. See <file:Documentation/sgi-visws.txt> for details.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config STA2X11
@@ -764,6 +885,7 @@ config STA2X11
 	  standard PC machines.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config X86_SUMMIT
 	bool "Summit/EXA (IBM x440)"
 	depends on X86_32_NON_STANDARD
@@ -778,6 +900,8 @@ config X86_ES7000
 	  Support for Unisys ES7000 systems.  Say 'Y' here if this kernel is
 	  supposed to run on an IA32-based Unisys ES7000 system.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config X86_32_IRIS
@@ -836,6 +960,10 @@ config PARAVIRT_SPINLOCKS
 	bool "Paravirtualization layer for spinlocks"
 	depends on PARAVIRT && SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select UNINLINE_SPIN_UNLOCK
+>>>>>>> v3.18
 =======
 	select UNINLINE_SPIN_UNLOCK
 >>>>>>> v3.18
@@ -845,15 +973,21 @@ config PARAVIRT_SPINLOCKS
 	  (for example, block the virtual CPU rather than spinning).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Unfortunately the downside is an up to 5% performance hit on
 	  native kernels, with various workloads.
 
 	  If you are unsure how to answer this question, answer N.
 =======
+=======
+>>>>>>> v3.18
 	  It has a minimal impact on native kernels and gives a nice performance
 	  benefit on paravirtualized KVM / Xen kernels.
 
 	  If you are unsure how to answer this question, answer Y.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 source "arch/x86/xen/Kconfig"
@@ -871,7 +1005,10 @@ config KVM_GUEST
 	  timing infrastructure such as time of day, and system time
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KVM_DEBUG_FS
 	bool "Enable debug information for KVM Guests in debugfs"
 	depends on KVM_GUEST && DEBUG_FS
@@ -881,6 +1018,9 @@ config KVM_DEBUG_FS
 	  Statistics are displayed in debugfs filesystem. Enabling this option
 	  may incur significant overhead.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "arch/x86/lguest/Kconfig"
 
@@ -916,6 +1056,7 @@ config MEMTEST
 	  If you are unsure how to answer this question, answer N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config X86_SUMMIT_NUMA
 	def_bool y
 	depends on X86_32 && NUMA && X86_32_NON_STANDARD
@@ -924,6 +1065,8 @@ config X86_CYCLONE_TIMER
 	def_bool y
 	depends on X86_SUMMIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "arch/x86/Kconfig.cpu"
@@ -968,6 +1111,10 @@ config APB_TIMER
 config DMI
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DMI_SCAN_MACHINE_NON_EFI_FALLBACK
+>>>>>>> v3.18
 =======
 	select DMI_SCAN_MACHINE_NON_EFI_FALLBACK
 >>>>>>> v3.18
@@ -979,6 +1126,7 @@ config DMI
 	  BIOS code.
 
 config GART_IOMMU
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool "GART IOMMU support" if EXPERT
 	default y
@@ -995,6 +1143,8 @@ config GART_IOMMU
 	  device) unless CONFIG_IOMMU_DEBUG or iommu=force is specified
 	  too.
 =======
+=======
+>>>>>>> v3.18
 	bool "Old AMD GART IOMMU support"
 	select SWIOTLB
 	depends on X86_64 && PCI && AMD_NB
@@ -1014,6 +1164,9 @@ config GART_IOMMU
 	  32-bit limited device.
 
 	  If unsure, say Y.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config CALGARY_IOMMU
@@ -1071,6 +1224,7 @@ config NR_CPUS
 	int "Maximum number of CPUs" if SMP && !MAXSMP
 	range 2 8 if SMP && X86_32 && !X86_BIGSMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	range 2 512 if SMP && !MAXSMP
 	default "1" if !SMP
 	default "4096" if MAXSMP
@@ -1080,6 +1234,8 @@ config NR_CPUS
 	  This allows you to specify the maximum number of CPUs which this
 	  kernel will support.  The maximum supported value is 512 and the
 =======
+=======
+>>>>>>> v3.18
 	range 2 512 if SMP && !MAXSMP && !CPUMASK_OFFSTACK
 	range 2 8192 if SMP && !MAXSMP && CPUMASK_OFFSTACK && X86_64
 	default "1" if !SMP
@@ -1090,6 +1246,9 @@ config NR_CPUS
 	  This allows you to specify the maximum number of CPUs which this
 	  kernel will support.  If CPUMASK_OFFSTACK is enabled, the maximum
 	  supported value is 4096, otherwise the maximum value is 512.  The
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  minimum value which makes sense is 2.
 
@@ -1119,7 +1278,11 @@ source "kernel/Kconfig.preempt"
 config X86_UP_APIC
 	bool "Local APIC support on uniprocessors"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86_32 && !SMP && !X86_32_NON_STANDARD
+=======
+	depends on X86_32 && !SMP && !X86_32_NON_STANDARD && !PCI_MSI
+>>>>>>> v3.18
 =======
 	depends on X86_32 && !SMP && !X86_32_NON_STANDARD && !PCI_MSI
 >>>>>>> v3.18
@@ -1148,6 +1311,7 @@ config X86_UP_IOAPIC
 config X86_LOCAL_APIC
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86_64 || SMP || X86_32_NON_STANDARD || X86_UP_APIC
 
 config X86_IO_APIC
@@ -1158,6 +1322,8 @@ config X86_VISWS_APIC
 	def_bool y
 	depends on X86_32 && X86_VISWS
 =======
+=======
+>>>>>>> v3.18
 	depends on X86_64 || SMP || X86_32_NON_STANDARD || X86_UP_APIC || PCI_MSI
 
 config X86_IO_APIC
@@ -1165,6 +1331,9 @@ config X86_IO_APIC
 	depends on X86_64 || SMP || X86_32_NON_STANDARD || X86_UP_IOAPIC || PCI_MSI
 	select GENERIC_IRQ_LEGACY_ALLOC_HWIRQ
 	select IRQ_DOMAIN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config X86_REROUTE_FOR_BROKEN_BOOT_IRQS
@@ -1221,7 +1390,11 @@ config X86_ANCIENT_MCE
 	---help---
 	  Include support for machine check handling on old Pentium 5 or WinChip
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  systems. These typically need to be enabled explicitely on the command
+=======
+	  systems. These typically need to be enabled explicitly on the command
+>>>>>>> v3.18
 =======
 	  systems. These typically need to be enabled explicitly on the command
 >>>>>>> v3.18
@@ -1327,6 +1500,10 @@ config X86_REBOOTFIXUPS
 config MICROCODE
 	tristate "CPU microcode loading support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on CPU_SUP_AMD || CPU_SUP_INTEL
+>>>>>>> v3.18
 =======
 	depends on CPU_SUP_AMD || CPU_SUP_INTEL
 >>>>>>> v3.18
@@ -1356,9 +1533,15 @@ config MICROCODE_INTEL
 	  processors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  For latest news and information on obtaining all the required
 	  Intel ingredients for this driver, check:
 	  <http://www.urbanmyth.org/microcode/>.
+=======
+	  For the current Intel microcode data package go to
+	  <https://downloadcenter.intel.com> and search for
+	  'Linux Processor Microcode Data File'.
+>>>>>>> v3.18
 =======
 	  For the current Intel microcode data package go to
 	  <https://downloadcenter.intel.com> and search for
@@ -1378,6 +1561,7 @@ config MICROCODE_OLD_INTERFACE
 	depends on MICROCODE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MICROCODE_INTEL_LIB
 	def_bool y
 	depends on MICROCODE_INTEL
@@ -1386,6 +1570,8 @@ config MICROCODE_INTEL_EARLY
 	bool "Early load microcode"
 	depends on MICROCODE_INTEL && BLK_DEV_INITRD
 =======
+=======
+>>>>>>> v3.18
 config MICROCODE_INTEL_EARLY
 	def_bool n
 
@@ -1397,6 +1583,9 @@ config MICROCODE_EARLY
 	depends on MICROCODE=y && BLK_DEV_INITRD
 	select MICROCODE_INTEL_EARLY if MICROCODE_INTEL
 	select MICROCODE_AMD_EARLY if MICROCODE_AMD
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default y
 	help
@@ -1406,10 +1595,13 @@ config MICROCODE_EARLY
 	  microcode data is glued to the initrd, therefore it's safe to say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MICROCODE_EARLY
 	def_bool y
 	depends on MICROCODE_INTEL_EARLY
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config X86_MSR
@@ -1432,7 +1624,10 @@ config X86_CPUID
 choice
 	prompt "High Memory Support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default HIGHMEM64G if X86_NUMAQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default HIGHMEM4G
@@ -1441,7 +1636,10 @@ choice
 config NOHIGHMEM
 	bool "off"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !X86_NUMAQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1481,7 +1679,10 @@ config NOHIGHMEM
 config HIGHMEM4G
 	bool "4GB"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !X86_NUMAQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -1576,8 +1777,13 @@ config NUMA
 	bool "Numa Memory Allocation and Scheduler Support"
 	depends on SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86_64 || (X86_32 && HIGHMEM64G && (X86_NUMAQ || X86_BIGSMP || X86_SUMMIT && ACPI))
 	default y if (X86_NUMAQ || X86_SUMMIT || X86_BIGSMP)
+=======
+	depends on X86_64 || (X86_32 && HIGHMEM64G && X86_BIGSMP)
+	default y if X86_BIGSMP
+>>>>>>> v3.18
 =======
 	depends on X86_64 || (X86_32 && HIGHMEM64G && X86_BIGSMP)
 	default y if X86_BIGSMP
@@ -1593,6 +1799,7 @@ config NUMA
 	  (or later), AMD Opteron, or EM64T NUMA.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  For 32-bit this is only needed on (rare) 32-bit-only platforms
 	  that support NUMA topologies, such as NUMAQ / Summit, or if you
 	  boot a 32-bit kernel on a 64-bit NUMA platform.
@@ -1603,11 +1810,16 @@ comment "NUMA (Summit) requires SMP, 64GB highmem support, ACPI"
 	depends on X86_32 && X86_SUMMIT && (!HIGHMEM64G || !ACPI)
 
 =======
+=======
+>>>>>>> v3.18
 	  For 32-bit this is only needed if you boot a 32-bit
 	  kernel on a 64-bit NUMA platform.
 
 	  Otherwise, you should say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config AMD_NUMA
 	def_bool y
@@ -1651,7 +1863,10 @@ config NODES_SHIFT
 	default "10" if MAXSMP
 	default "6" if X86_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default "4" if X86_NUMAQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default "3"
@@ -1696,15 +1911,21 @@ config ARCH_SELECT_MEMORY_MODEL
 
 config ARCH_MEMORY_PROBE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_bool y
 	depends on X86_64 && MEMORY_HOTPLUG
 =======
+=======
+>>>>>>> v3.18
 	bool "Enable sysfs memory/probe interface"
 	depends on X86_64 && MEMORY_HOTPLUG
 	help
 	  This option enables a sysfs memory/probe interface for testing.
 	  See Documentation/memory-hotplug.txt for more information.
 	  If you are unsure how to answer this question, answer N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARCH_PROC_KCORE_TEXT
@@ -1922,6 +2143,10 @@ config EFI
 	depends on ACPI
 	select UCS2_STRING
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select EFI_RUNTIME_WRAPPERS
+>>>>>>> v3.18
 =======
 	select EFI_RUNTIME_WRAPPERS
 >>>>>>> v3.18
@@ -1939,7 +2164,11 @@ config EFI
 config EFI_STUB
        bool "EFI stub support"
 <<<<<<< HEAD
+<<<<<<< HEAD
        depends on EFI
+=======
+       depends on EFI && !X86_USE_3DNOW
+>>>>>>> v3.18
 =======
        depends on EFI && !X86_USE_3DNOW
 >>>>>>> v3.18
@@ -1949,8 +2178,11 @@ config EFI_STUB
 	  by EFI firmware without the use of a bootloader.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  See Documentation/x86/efi-stub.txt for more information.
 =======
+=======
+>>>>>>> v3.18
 	  See Documentation/efi-stub.txt for more information.
 
 config EFI_MIXED
@@ -1966,6 +2198,9 @@ config EFI_MIXED
 	   the EFI handover protocol must be used.
 
 	   If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SECCOMP
@@ -1999,10 +2234,13 @@ config KEXEC
 	  It is an ongoing process to be certain the hardware in a machine
 	  is properly shutdown, so do not be surprised if this code does not
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  initially work for you.  It may help to enable device hotplugging
 	  support.  As of this writing the exact hardware interface is
 	  strongly in flux, so no good recommendation can be made.
 =======
+=======
+>>>>>>> v3.18
 	  initially work for you.  As of this writing the exact hardware
 	  interface is strongly in flux, so no good recommendation can be
 	  made.
@@ -2041,6 +2279,9 @@ config KEXEC_BZIMAGE_VERIFY_SIG
 	select SYSTEM_TRUSTED_KEYRING
 	---help---
 	  Enable bzImage signature verification support.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config CRASH_DUMP
@@ -2121,6 +2362,7 @@ config RELOCATABLE
 	  Note: If CONFIG_RELOCATABLE=y, then the kernel runs from the address
 	  it has been loaded at and the compile time physical address
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  (CONFIG_PHYSICAL_START) is ignored.
 
 # Relocation on x86-32 needs some additional build support
@@ -2133,6 +2375,8 @@ config PHYSICAL_ALIGN
 	default "0x1000000"
 	range 0x2000 0x1000000
 =======
+=======
+>>>>>>> v3.18
 	  (CONFIG_PHYSICAL_START) is used as the minimum location.
 
 config RANDOMIZE_BASE
@@ -2195,6 +2439,9 @@ config PHYSICAL_ALIGN
 	default "0x200000"
 	range 0x2000 0x1000000 if X86_32
 	range 0x200000 0x1000000 if X86_64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This value puts the alignment restrictions on physical address
@@ -2214,6 +2461,12 @@ config PHYSICAL_ALIGN
 	  above alignment restrictions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  On 32-bit this value must be a multiple of 0x2000. On 64-bit
+	  this value must be a multiple of 0x200000.
+
+>>>>>>> v3.18
 =======
 	  On 32-bit this value must be a multiple of 0x2000. On 64-bit
 	  this value must be a multiple of 0x200000.
@@ -2224,7 +2477,11 @@ config PHYSICAL_ALIGN
 config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SMP && HOTPLUG
+=======
+	depends on SMP
+>>>>>>> v3.18
 =======
 	depends on SMP
 >>>>>>> v3.18
@@ -2281,6 +2538,7 @@ config DEBUG_HOTPLUG_CPU0
 
 config COMPAT_VDSO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_bool y
 	prompt "Compat VDSO support"
 	depends on X86_32 || IA32_EMULATION
@@ -2293,6 +2551,8 @@ config COMPAT_VDSO
 
 	  If unsure, say Y.
 =======
+=======
+>>>>>>> v3.18
 	def_bool n
 	prompt "Disable the 32-bit vDSO (needed for glibc 2.3.3)"
 	depends on X86_32 || IA32_EMULATION
@@ -2316,6 +2576,9 @@ config COMPAT_VDSO
 
 	  If unsure, say N: if you are compiling your own kernel, you
 	  are unlikely to be using a buggy version of glibc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config CMDLINE_BOOL
@@ -2376,7 +2639,10 @@ config USE_PERCPU_NUMA_NODE_ID
 	depends on NUMA
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_ENABLE_SPLIT_PMD_PTLOCK
 	def_bool y
 	depends on X86_64 || X86_PAE
@@ -2385,6 +2651,9 @@ config ARCH_ENABLE_HUGEPAGE_MIGRATION
 	def_bool y
 	depends on X86_64 && HUGETLB_PAGE && MIGRATION
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 menu "Power management and ACPI options"
 
@@ -2539,7 +2808,10 @@ config PCI
 	bool "PCI support"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_MSI if (X86_LOCAL_APIC && X86_IO_APIC)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -2789,24 +3061,33 @@ source "drivers/pci/hotplug/Kconfig"
 
 config RAPIDIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "RapidIO support"
 	depends on PCI
 	default n
 	help
 	  If you say Y here, the kernel will include drivers and
 =======
+=======
+>>>>>>> v3.18
 	tristate "RapidIO support"
 	depends on PCI
 	default n
 	help
 	  If enabled this option will include drivers and the core
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  infrastructure code to support RapidIO interconnect devices.
 
 source "drivers/rapidio/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config X86_SYSFB
 	bool "Mark VGA/VBE/EFI FB as generic system framebuffer"
 	help
@@ -2833,6 +3114,9 @@ config X86_SYSFB
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 
@@ -2897,10 +3181,13 @@ config HAVE_ATOMIC_IOMAP
 	depends on X86_32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_TEXT_POKE_SMP
 	bool
 	select STOP_MACHINE if SMP
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config X86_DEV_DMA_OPS
@@ -2912,11 +3199,17 @@ config X86_DMA_REMAP
 	depends on STA2X11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PMC_ATOM
 	def_bool y
         depends on PCI
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "net/Kconfig"
 

@@ -53,7 +53,11 @@ static irqreturn_t powerbutton_irq(int irq, void *_pwr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init twl4030_pwrbutton_probe(struct platform_device *pdev)
+=======
+static int twl4030_pwrbutton_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int twl4030_pwrbutton_probe(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -63,9 +67,15 @@ static int twl4030_pwrbutton_probe(struct platform_device *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwr = input_allocate_device();
 	if (!pwr) {
 		dev_dbg(&pdev->dev, "Can't allocate power button\n");
+=======
+	pwr = devm_input_allocate_device(&pdev->dev);
+	if (!pwr) {
+		dev_err(&pdev->dev, "Can't allocate power button\n");
+>>>>>>> v3.18
 =======
 	pwr = devm_input_allocate_device(&pdev->dev);
 	if (!pwr) {
@@ -81,6 +91,7 @@ static int twl4030_pwrbutton_probe(struct platform_device *pdev)
 	pwr->dev.parent = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_threaded_irq(irq, NULL, powerbutton_irq,
 			IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING,
 			"twl4030_pwrbutton", pwr);
@@ -88,17 +99,23 @@ static int twl4030_pwrbutton_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "Can't get IRQ for pwrbutton: %d\n", err);
 		goto free_input_dev;
 =======
+=======
+>>>>>>> v3.18
 	err = devm_request_threaded_irq(&pwr->dev, irq, NULL, powerbutton_irq,
 			IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING,
 			"twl4030_pwrbutton", pwr);
 	if (err < 0) {
 		dev_err(&pdev->dev, "Can't get IRQ for pwrbutton: %d\n", err);
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = input_register_device(pwr);
 	if (err) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_dbg(&pdev->dev, "Can't register power button: %d\n", err);
 		goto free_irq;
@@ -137,6 +154,8 @@ static struct platform_driver twl4030_pwrbutton_driver = {
 module_platform_driver_probe(twl4030_pwrbutton_driver,
 			twl4030_pwrbutton_probe);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "Can't register power button: %d\n", err);
 		return err;
 	}
@@ -164,6 +183,9 @@ static struct platform_driver twl4030_pwrbutton_driver = {
 	},
 };
 module_platform_driver(twl4030_pwrbutton_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_ALIAS("platform:twl4030_pwrbutton");

@@ -53,7 +53,11 @@ sys32_rt_sigreturn:
 	.align	32
 1:	ldx	[%g6 + TI_FLAGS], %l5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andcc	%l5, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT), %g0
+=======
+	andcc	%l5, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
+>>>>>>> v3.18
 =======
 	andcc	%l5, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
 >>>>>>> v3.18
@@ -103,8 +107,13 @@ sys_clone:
 	 add	%sp, PTREGS_OFF, %o2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.globl	ret_from_syscall
 ret_from_syscall:
+=======
+	.globl	ret_from_fork
+ret_from_fork:
+>>>>>>> v3.18
 =======
 	.globl	ret_from_fork
 ret_from_fork:
@@ -194,7 +203,11 @@ linux_sparc_syscall32:
 	srl	%i3, 0, %o3				! IEU0
 	srl	%i2, 0, %o2				! IEU0	Group
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT), %g0
+=======
+	andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
+>>>>>>> v3.18
 =======
 	andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
 >>>>>>> v3.18
@@ -222,7 +235,11 @@ linux_sparc_syscall:
 	mov	%i3, %o3				! IEU1
 	mov	%i4, %o4				! IEU0	Group
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT), %g0
+=======
+	andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
+>>>>>>> v3.18
 =======
 	andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
 >>>>>>> v3.18
@@ -241,7 +258,11 @@ ret_sys_call:
 	cmp	%o0, -ERESTART_RESTARTBLOCK
 	bgeu,pn	%xcc, 1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT), %g0
+=======
+	 andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
+>>>>>>> v3.18
 =======
 	 andcc	%l0, (_TIF_SYSCALL_TRACE|_TIF_SECCOMP|_TIF_SYSCALL_AUDIT|_TIF_SYSCALL_TRACEPOINT|_TIF_NOHZ), %g0
 >>>>>>> v3.18

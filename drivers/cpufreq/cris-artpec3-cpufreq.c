@@ -16,9 +16,15 @@ static struct notifier_block cris_sdram_freq_notifier_block = {
 
 static struct cpufreq_frequency_table cris_freq_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x01,	6000},
 	{0x02,	200000},
 	{0,	CPUFREQ_TABLE_END},
+=======
+	{0, 0x01, 6000},
+	{0, 0x02, 200000},
+	{0, 0, CPUFREQ_TABLE_END},
+>>>>>>> v3.18
 =======
 	{0, 0x01, 6000},
 	{0, 0x02, 200000},
@@ -34,6 +40,7 @@ static unsigned int cris_freq_get_cpu_frequency(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cris_freq_set_cpu_state(struct cpufreq_policy *policy,
 		unsigned int state)
 {
@@ -47,11 +54,16 @@ static void cris_freq_set_cpu_state(struct cpufreq_policy *policy,
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
 =======
+=======
+>>>>>>> v3.18
 static int cris_freq_target(struct cpufreq_policy *policy, unsigned int state)
 {
 	reg_clkgen_rw_clk_ctrl clk_ctrl;
 	clk_ctrl = REG_RD(clkgen, regi_clkgen, rw_clk_ctrl);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_disable();
 
@@ -65,6 +77,7 @@ static int cris_freq_target(struct cpufreq_policy *policy, unsigned int state)
 
 	local_irq_enable();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 };
@@ -88,11 +101,14 @@ static int cris_freq_target(struct cpufreq_policy *policy,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static int cris_freq_cpu_init(struct cpufreq_policy *policy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int result;
 
@@ -131,6 +147,8 @@ static struct cpufreq_driver cris_freq_driver = {
 	.name	= "cris_freq",
 	.attr	= cris_freq_attr,
 =======
+=======
+>>>>>>> v3.18
 	return cpufreq_generic_init(policy, cris_freq_table, 1000000);
 }
 
@@ -141,6 +159,9 @@ static struct cpufreq_driver cris_freq_driver = {
 	.init	= cris_freq_cpu_init,
 	.name	= "cris_freq",
 	.attr	= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

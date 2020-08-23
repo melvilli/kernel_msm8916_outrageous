@@ -19,6 +19,10 @@
 #include <linux/of_address.h>
 #include <linux/of_platform.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/syscon.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/syscon.h>
 >>>>>>> v3.18
@@ -30,7 +34,10 @@ static struct platform_driver syscon_driver;
 
 struct syscon {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regmap *regmap;
@@ -78,6 +85,7 @@ EXPORT_SYMBOL_GPL(syscon_regmap_lookup_by_compatible);
 static int syscon_match_pdevname(struct device *dev, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device *pdev = to_platform_device(dev);
 	const struct platform_device_id *id = platform_get_device_id(pdev);
 
@@ -85,6 +93,8 @@ static int syscon_match_pdevname(struct device *dev, void *data)
 		if (!strcmp(id->name, (const char *)data))
 			return 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return !strcmp(dev_name(dev), (const char *)data);
@@ -113,13 +123,19 @@ struct regmap *syscon_regmap_lookup_by_phandle(struct device_node *np,
 	struct regmap *regmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	syscon_np = of_parse_phandle(np, property, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (property)
 		syscon_np = of_parse_phandle(np, property, 0);
 	else
 		syscon_np = np;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!syscon_np)
 		return ERR_PTR(-ENODEV);
@@ -146,13 +162,19 @@ static int syscon_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct syscon *syscon;
 	struct resource *res;
 =======
+=======
+>>>>>>> v3.18
 	struct syscon_platform_data *pdata = dev_get_platdata(dev);
 	struct syscon *syscon;
 	struct resource *res;
 	void __iomem *base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	syscon = devm_kzalloc(dev, sizeof(*syscon), GFP_KERNEL);
@@ -164,6 +186,7 @@ static int syscon_probe(struct platform_device *pdev)
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	syscon->base = devm_ioremap(dev, res->start, resource_size(res));
 	if (!syscon->base)
 		return -ENOMEM;
@@ -171,6 +194,8 @@ static int syscon_probe(struct platform_device *pdev)
 	syscon_regmap_config.max_register = res->end - res->start - 3;
 	syscon->regmap = devm_regmap_init_mmio(dev, syscon->base,
 =======
+=======
+>>>>>>> v3.18
 	base = devm_ioremap(dev, res->start, resource_size(res));
 	if (!base)
 		return -ENOMEM;
@@ -179,6 +204,9 @@ static int syscon_probe(struct platform_device *pdev)
 	if (pdata)
 		syscon_regmap_config.name = pdata->label;
 	syscon->regmap = devm_regmap_init_mmio(dev, base,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&syscon_regmap_config);
 	if (IS_ERR(syscon->regmap)) {
@@ -189,7 +217,11 @@ static int syscon_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, syscon);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev, "regmap %pR registered\n", res);
+=======
+	dev_dbg(dev, "regmap %pR registered\n", res);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "regmap %pR registered\n", res);
 >>>>>>> v3.18

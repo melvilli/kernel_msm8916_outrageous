@@ -15,6 +15,7 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
 	SAVU_SIZE_CONTROL = 0x03,
 	SAVU_SIZE_PROFILE = 0x03,
@@ -40,6 +41,8 @@ enum savu_commands {
 	SAVU_COMMAND_SENSOR = 0xc,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct savu_mouse_report_special {
@@ -81,6 +84,7 @@ struct savu_roccat_report {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct savu_device {
 	int roccat_claimed;
 	int chrdev_minor;
@@ -88,6 +92,8 @@ struct savu_device {
 	struct mutex savu_lock;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

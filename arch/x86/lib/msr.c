@@ -9,7 +9,11 @@ struct msr *msrs_alloc(void)
 	msrs = alloc_percpu(struct msr);
 	if (!msrs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: error allocating msrs\n", __func__);
+=======
+		pr_warn("%s: error allocating msrs\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: error allocating msrs\n", __func__);
 >>>>>>> v3.18
@@ -26,7 +30,10 @@ void msrs_free(struct msr *msrs)
 }
 EXPORT_SYMBOL(msrs_free);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * Read an MSR with error handling
@@ -114,4 +121,7 @@ int msr_clear_bit(u32 msr, u8 bit)
 {
 	return __flip_bit(msr, bit, false);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

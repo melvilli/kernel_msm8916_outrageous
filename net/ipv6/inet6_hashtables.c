@@ -7,7 +7,11 @@
  *
  * Authors:	Lotsa people, from code originally in tcp, generalised here
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		by Arnaldo Carvalho de Melo <acme@mandriva.com>
+=======
+ *		by Arnaldo Carvalho de Melo <acme@mandriva.com>
+>>>>>>> v3.18
 =======
  *		by Arnaldo Carvalho de Melo <acme@mandriva.com>
 >>>>>>> v3.18
@@ -28,7 +32,10 @@
 #include <net/ip.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int inet6_ehashfn(struct net *net,
 				  const struct in6_addr *laddr,
 				  const u16 lport,
@@ -62,6 +69,9 @@ static int inet6_sk_ehashfn(const struct sock *sk)
 	return inet6_ehashfn(net, laddr, lport, faddr, fport);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __inet6_hash(struct sock *sk, struct inet_timewait_sock *tw)
 {
@@ -130,6 +140,7 @@ begin:
 		if (sk->sk_hash != hash)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (likely(INET6_MATCH(sk, net, saddr, daddr, ports, dif))) {
 			if (unlikely(!atomic_inc_not_zero(&sk->sk_refcnt)))
 				goto begintw;
@@ -168,6 +179,8 @@ begintw:
 	sk = NULL;
 out:
 =======
+=======
+>>>>>>> v3.18
 		if (!INET6_MATCH(sk, net, saddr, daddr, ports, dif))
 			continue;
 		if (unlikely(!atomic_inc_not_zero(&sk->sk_refcnt)))
@@ -184,6 +197,9 @@ out:
 out:
 	sk = NULL;
 found:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 	return sk;
@@ -200,16 +216,22 @@ static inline int compute_score(struct sock *sk, struct net *net,
 	if (net_eq(sock_net(sk), net) && inet_sk(sk)->inet_num == hnum &&
 	    sk->sk_family == PF_INET6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const struct ipv6_pinfo *np = inet6_sk(sk);
 
 		score = 1;
 		if (!ipv6_addr_any(&np->rcv_saddr)) {
 			if (!ipv6_addr_equal(&np->rcv_saddr, daddr))
 =======
+=======
+>>>>>>> v3.18
 
 		score = 1;
 		if (!ipv6_addr_any(&sk->sk_v6_rcv_saddr)) {
 			if (!ipv6_addr_equal(&sk->sk_v6_rcv_saddr, daddr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return -1;
 			score++;
@@ -254,7 +276,11 @@ begin:
 		} else if (score == hiscore && reuseport) {
 			matches++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (((u64)phash * matches) >> 32 == 0)
+=======
+			if (reciprocal_scale(phash, matches) == 0)
+>>>>>>> v3.18
 =======
 			if (reciprocal_scale(phash, matches) == 0)
 >>>>>>> v3.18
@@ -282,7 +308,10 @@ begin:
 	return result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(inet6_lookup_listener);
@@ -301,7 +330,10 @@ struct sock *inet6_lookup(struct net *net, struct inet_hashinfo *hashinfo,
 	return sk;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(inet6_lookup);
@@ -313,9 +345,14 @@ static int __inet6_check_established(struct inet_timewait_death_row *death_row,
 	struct inet_hashinfo *hinfo = death_row->hashinfo;
 	struct inet_sock *inet = inet_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct ipv6_pinfo *np = inet6_sk(sk);
 	const struct in6_addr *daddr = &np->rcv_saddr;
 	const struct in6_addr *saddr = &np->daddr;
+=======
+	const struct in6_addr *daddr = &sk->sk_v6_rcv_saddr;
+	const struct in6_addr *saddr = &sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 	const struct in6_addr *daddr = &sk->sk_v6_rcv_saddr;
 	const struct in6_addr *saddr = &sk->sk_v6_daddr;
@@ -330,7 +367,11 @@ static int __inet6_check_established(struct inet_timewait_death_row *death_row,
 	struct sock *sk2;
 	const struct hlist_nulls_node *node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inet_timewait_sock *tw;
+=======
+	struct inet_timewait_sock *tw = NULL;
+>>>>>>> v3.18
 =======
 	struct inet_timewait_sock *tw = NULL;
 >>>>>>> v3.18
@@ -338,6 +379,7 @@ static int __inet6_check_established(struct inet_timewait_death_row *death_row,
 
 	spin_lock(lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Check TIME-WAIT sockets first. */
 	sk_nulls_for_each(sk2, node, &head->twchain) {
@@ -367,6 +409,8 @@ unique:
 	/* Must record num and sport now. Otherwise we will see
 	 * in hash table socket with a funny identity. */
 =======
+=======
+>>>>>>> v3.18
 	sk_nulls_for_each(sk2, node, &head->chain) {
 		if (sk2->sk_hash != hash)
 			continue;
@@ -384,6 +428,9 @@ unique:
 	/* Must record num and sport now. Otherwise we will see
 	 * in hash table socket with a funny identity.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	inet->inet_num = lport;
 	inet->inet_sport = htons(lport);
@@ -418,9 +465,15 @@ static inline u32 inet6_sk_port_offset(const struct sock *sk)
 {
 	const struct inet_sock *inet = inet_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct ipv6_pinfo *np = inet6_sk(sk);
 	return secure_ipv6_port_ephemeral(np->rcv_saddr.s6_addr32,
 					  np->daddr.s6_addr32,
+=======
+
+	return secure_ipv6_port_ephemeral(sk->sk_v6_rcv_saddr.s6_addr32,
+					  sk->sk_v6_daddr.s6_addr32,
+>>>>>>> v3.18
 =======
 
 	return secure_ipv6_port_ephemeral(sk->sk_v6_rcv_saddr.s6_addr32,
@@ -436,7 +489,10 @@ int inet6_hash_connect(struct inet_timewait_death_row *death_row,
 			__inet6_check_established, __inet6_hash);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(inet6_hash_connect);

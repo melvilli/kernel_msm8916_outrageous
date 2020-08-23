@@ -347,7 +347,12 @@ struct net_device *alloc_arcdev(const char *name)
 
 	dev = alloc_netdev(sizeof(struct arcnet_local),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   name && *name ? name : "arc%d", arcdev_setup);
+=======
+			   name && *name ? name : "arc%d", NET_NAME_UNKNOWN,
+			   arcdev_setup);
+>>>>>>> v3.18
 =======
 			   name && *name ? name : "arc%d", NET_NAME_UNKNOWN,
 			   arcdev_setup);
@@ -782,7 +787,11 @@ irqreturn_t arcnet_interrupt(int irq, void *dev_id)
 		AINTMASK(0);
 		spin_unlock(&lp->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return IRQ_HANDLED;
+=======
+		return retval;
+>>>>>>> v3.18
 =======
 		return retval;
 >>>>>>> v3.18

@@ -11,6 +11,7 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/platform_device.h>
@@ -24,6 +25,8 @@
 #include <linux/pinctrl/consumer.h>
 #include <linux/err.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/kernel.h>
@@ -35,6 +38,9 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/workqueue.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct gpio_led_data {
@@ -52,7 +58,11 @@ struct gpio_led_data {
 static void gpio_led_work(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_led_data	*led_dat =
+=======
+	struct gpio_led_data *led_dat =
+>>>>>>> v3.18
 =======
 	struct gpio_led_data *led_dat =
 >>>>>>> v3.18
@@ -190,17 +200,23 @@ static struct gpio_leds_priv *gpio_leds_create_of(struct platform_device *pdev)
 
 	/* count LEDs in this device, so we know how much to allocate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = of_get_child_count(np);
 	if (!count)
 		return ERR_PTR(-ENODEV);
 
 	for_each_child_of_node(np, child)
 =======
+=======
+>>>>>>> v3.18
 	count = of_get_available_child_count(np);
 	if (!count)
 		return ERR_PTR(-ENODEV);
 
 	for_each_available_child_of_node(np, child)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (of_get_gpio(child, 0) == -EPROBE_DEFER)
 			return ERR_PTR(-EPROBE_DEFER);
@@ -211,7 +227,11 @@ static struct gpio_leds_priv *gpio_leds_create_of(struct platform_device *pdev)
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_child_of_node(np, child) {
+=======
+	for_each_available_child_of_node(np, child) {
+>>>>>>> v3.18
 =======
 	for_each_available_child_of_node(np, child) {
 >>>>>>> v3.18
@@ -235,9 +255,14 @@ static struct gpio_leds_priv *gpio_leds_create_of(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		led.retain_state_suspended =
 			(unsigned)of_property_read_bool(child,
 				"retain-state-suspended");
+=======
+		if (of_get_property(child, "retain-state-suspended", NULL))
+			led.retain_state_suspended = 1;
+>>>>>>> v3.18
 =======
 		if (of_get_property(child, "retain-state-suspended", NULL))
 			led.retain_state_suspended = 1;
@@ -264,6 +289,11 @@ static const struct of_device_id of_gpio_leds_match[] = {
 	{},
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+MODULE_DEVICE_TABLE(of, of_gpio_leds_match);
+>>>>>>> v3.18
 =======
 
 MODULE_DEVICE_TABLE(of, of_gpio_leds_match);
@@ -275,6 +305,7 @@ static struct gpio_leds_priv *gpio_leds_create_of(struct platform_device *pdev)
 }
 #endif /* CONFIG_OF_GPIO */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int gpio_led_probe(struct platform_device *pdev)
@@ -290,12 +321,17 @@ static int gpio_led_probe(struct platform_device *pdev)
 			"pins are not configured from the driver\n");
 
 =======
+=======
+>>>>>>> v3.18
 static int gpio_led_probe(struct platform_device *pdev)
 {
 	struct gpio_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	struct gpio_leds_priv *priv;
 	int i, ret = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdata && pdata->num_leds) {
 		priv = devm_kzalloc(&pdev->dev,
@@ -336,8 +372,11 @@ static int gpio_led_remove(struct platform_device *pdev)
 		delete_gpio_led(&priv->leds[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

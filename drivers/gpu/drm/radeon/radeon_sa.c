@@ -50,7 +50,11 @@ static void radeon_sa_bo_try_free(struct radeon_sa_manager *sa_manager);
 int radeon_sa_bo_manager_init(struct radeon_device *rdev,
 			      struct radeon_sa_manager *sa_manager,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      unsigned size, u32 align, u32 domain)
+=======
+			      unsigned size, u32 align, u32 domain, u32 flags)
+>>>>>>> v3.18
 =======
 			      unsigned size, u32 align, u32 domain, u32 flags)
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ int radeon_sa_bo_manager_init(struct radeon_device *rdev,
 
 	r = radeon_bo_create(rdev, size, align, true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     domain, NULL, &sa_manager->bo);
+=======
+			     domain, flags, NULL, NULL, &sa_manager->bo);
+>>>>>>> v3.18
 =======
 			     domain, flags, NULL, NULL, &sa_manager->bo);
 >>>>>>> v3.18
@@ -321,7 +329,11 @@ int radeon_sa_bo_new(struct radeon_device *rdev,
 		     struct radeon_sa_manager *sa_manager,
 		     struct radeon_sa_bo **sa_bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned size, unsigned align, bool block)
+=======
+		     unsigned size, unsigned align)
+>>>>>>> v3.18
 =======
 		     unsigned size, unsigned align)
 >>>>>>> v3.18
@@ -362,6 +374,7 @@ int radeon_sa_bo_new(struct radeon_device *rdev,
 		} while (radeon_sa_bo_next_hole(sa_manager, fences, tries));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < RADEON_NUM_RINGS; ++i) {
 			if (fences[i])
 				radeon_fence_ref(fences[i]);
@@ -375,20 +388,28 @@ int radeon_sa_bo_new(struct radeon_device *rdev,
 		/* if we have nothing to wait for block */
 		if (r == -ENOENT && block) {
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock(&sa_manager->wq.lock);
 		r = radeon_fence_wait_any(rdev, fences, false);
 		spin_lock(&sa_manager->wq.lock);
 		/* if we have nothing to wait for block */
 		if (r == -ENOENT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			r = wait_event_interruptible_locked(
 				sa_manager->wq, 
 				radeon_sa_event(sa_manager, size, align)
 			);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		} else if (r == -ENOENT) {
 			r = -ENOMEM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -433,6 +454,11 @@ void radeon_sa_bo_dump_debug_info(struct radeon_sa_manager *sa_manager,
 	spin_lock(&sa_manager->wq.lock);
 	list_for_each_entry(i, &sa_manager->olist, olist) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		uint64_t soffset = i->soffset + sa_manager->gpu_addr;
+		uint64_t eoffset = i->eoffset + sa_manager->gpu_addr;
+>>>>>>> v3.18
 =======
 		uint64_t soffset = i->soffset + sa_manager->gpu_addr;
 		uint64_t eoffset = i->eoffset + sa_manager->gpu_addr;
@@ -443,8 +469,13 @@ void radeon_sa_bo_dump_debug_info(struct radeon_sa_manager *sa_manager,
 			seq_printf(m, " ");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(m, "[0x%08x 0x%08x] size %8d",
 			   i->soffset, i->eoffset, i->eoffset - i->soffset);
+=======
+		seq_printf(m, "[0x%010llx 0x%010llx] size %8lld",
+			   soffset, eoffset, eoffset - soffset);
+>>>>>>> v3.18
 =======
 		seq_printf(m, "[0x%010llx 0x%010llx] size %8lld",
 			   soffset, eoffset, eoffset - soffset);

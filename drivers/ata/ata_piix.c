@@ -101,7 +101,11 @@
 enum {
 	PIIX_IOCFG		= 0x54, /* IDE I/O configuration register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ICH5_PMR		= 0x90, /* port mapping register */
+=======
+	ICH5_PMR		= 0x90, /* address map register */
+>>>>>>> v3.18
 =======
 	ICH5_PMR		= 0x90, /* address map register */
 >>>>>>> v3.18
@@ -238,7 +242,11 @@ static const struct pci_device_id piix_pci_tbl[] = {
 	/* 82801GB/GR/GH (ICH7, identical to ICH6) */
 	{ 0x8086, 0x27c0, PCI_ANY_ID, PCI_ANY_ID, 0, 0, ich6_sata },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 2801GBM/GHM (ICH7M, identical to ICH6M) */
+=======
+	/* 82801GBM/GHM (ICH7M, identical to ICH6M)  */
+>>>>>>> v3.18
 =======
 	/* 82801GBM/GHM (ICH7M, identical to ICH6M)  */
 >>>>>>> v3.18
@@ -534,7 +542,11 @@ static int ich_pata_cable_detect(struct ata_port *ap)
 	u8 mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check for specials - Acer Aspire 5602WLMi */
+=======
+	/* Check for specials */
+>>>>>>> v3.18
 =======
 	/* Check for specials */
 >>>>>>> v3.18
@@ -851,7 +863,11 @@ static bool piix_irq_check(struct ata_port *ap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1020,7 +1036,11 @@ static int piix_broken_suspend(void)
 static int piix_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1059,7 +1079,11 @@ static int piix_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg)
 static int piix_pci_device_resume(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1399,6 +1423,11 @@ static const int *piix_init_sata_map(struct pci_dev *pdev,
 	int i, invalid_map = 0;
 	u8 map_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char buf[32];
+	char *p = buf, *end = buf + sizeof(buf);
+>>>>>>> v3.18
 =======
 	char buf[32];
 	char *p = buf, *end = buf + sizeof(buf);
@@ -1409,7 +1438,10 @@ static const int *piix_init_sata_map(struct pci_dev *pdev,
 	map = map_db->map[map_value & map_db->mask];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&pdev->dev, "MAP [");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < 4; i++) {
@@ -1417,17 +1449,23 @@ static const int *piix_init_sata_map(struct pci_dev *pdev,
 		case RV:
 			invalid_map = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_cont(" XX");
 			break;
 
 		case NA:
 			pr_cont(" --");
 =======
+=======
+>>>>>>> v3.18
 			p += scnprintf(p, end - p, " XX");
 			break;
 
 		case NA:
 			p += scnprintf(p, end - p, " --");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -1436,17 +1474,23 @@ static const int *piix_init_sata_map(struct pci_dev *pdev,
 			pinfo[i / 2] = piix_port_info[ich_pata_100];
 			i++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_cont(" IDE IDE");
 			break;
 
 		default:
 			pr_cont(" P%d", map[i]);
 =======
+=======
+>>>>>>> v3.18
 			p += scnprintf(p, end - p, " IDE IDE");
 			break;
 
 		default:
 			p += scnprintf(p, end - p, " P%d", map[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (i & 1)
 				pinfo[i / 2].flags |= ATA_FLAG_SLAVE_POSS;
@@ -1454,7 +1498,11 @@ static const int *piix_init_sata_map(struct pci_dev *pdev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_cont(" ]\n");
+=======
+	dev_info(&pdev->dev, "MAP [%s ]\n", buf);
+>>>>>>> v3.18
 =======
 	dev_info(&pdev->dev, "MAP [%s ]\n", buf);
 >>>>>>> v3.18
@@ -1814,7 +1862,11 @@ static int piix_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 static void piix_remove_one(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1831,7 +1883,11 @@ static struct pci_driver piix_pci_driver = {
 	.probe			= piix_init_one,
 	.remove			= piix_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

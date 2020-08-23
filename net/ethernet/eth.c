@@ -59,7 +59,11 @@
 #include <net/ip.h>
 #include <net/dsa.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -138,7 +142,11 @@ int eth_rebuild_header(struct sk_buff *skb)
 #endif
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG
+=======
+		netdev_dbg(dev,
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev,
 >>>>>>> v3.18
@@ -155,7 +163,10 @@ EXPORT_SYMBOL(eth_rebuild_header);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * eth_get_headlen - determine the the length of header for an ethernet frame
  * @data: pointer to start of frame
  * @len: total length of frame
@@ -183,6 +194,9 @@ u32 eth_get_headlen(void *data, unsigned int len)
 EXPORT_SYMBOL(eth_get_headlen);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * eth_type_trans - determine the packet's protocol ID.
  * @skb: received socket data
@@ -195,7 +209,13 @@ EXPORT_SYMBOL(eth_get_headlen);
 __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ethhdr *eth;
+=======
+	unsigned short _service_access_point;
+	const unsigned short *sap;
+	const struct ethhdr *eth;
+>>>>>>> v3.18
 =======
 	unsigned short _service_access_point;
 	const unsigned short *sap;
@@ -213,6 +233,7 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 		else
 			skb->pkt_type = PACKET_MULTICAST;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -233,6 +254,11 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 						   dev->dev_addr)))
 		skb->pkt_type = PACKET_OTHERHOST;
 >>>>>>> v3.18
+=======
+	else if (unlikely(!ether_addr_equal_64bits(eth->h_dest,
+						   dev->dev_addr)))
+		skb->pkt_type = PACKET_OTHERHOST;
+>>>>>>> v3.18
 
 	/*
 	 * Some variants of DSA tagging don't have an ethertype field
@@ -241,6 +267,7 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 	 * and if so, set skb->protocol without looking at the packet.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netdev_uses_dsa_tags(dev))
 		return htons(ETH_P_DSA);
 	if (netdev_uses_trailer_tags(dev))
@@ -248,10 +275,15 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 
 	if (ntohs(eth->h_proto) >= ETH_P_802_3_MIN)
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(netdev_uses_dsa(dev)))
 		return htons(ETH_P_XDSA);
 
 	if (likely(ntohs(eth->h_proto) >= ETH_P_802_3_MIN))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return eth->h_proto;
 
@@ -262,7 +294,12 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 	 *      won't work for fault tolerant netware but does for the rest.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->len >= 2 && *(unsigned short *)(skb->data) == 0xFFFF)
+=======
+	sap = skb_header_pointer(skb, 0, sizeof(*sap), &_service_access_point);
+	if (sap && *sap == 0xFFFF)
+>>>>>>> v3.18
 =======
 	sap = skb_header_pointer(skb, 0, sizeof(*sap), &_service_access_point);
 	if (sap && *sap == 0xFFFF)
@@ -460,6 +497,7 @@ struct net_device *alloc_etherdev_mqs(int sizeof_priv, unsigned int txqs,
 				      unsigned int rxqs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return alloc_netdev_mqs(sizeof_priv, "eth%d", ether_setup, txqs, rxqs);
 }
 EXPORT_SYMBOL(alloc_etherdev_mqs);
@@ -487,6 +525,8 @@ ssize_t sysfs_format_mac(char *buf, const unsigned char *addr, int len)
 	l += scnprintf(buf + l, PAGE_SIZE - l, "\n");
 	return (ssize_t)l;
 =======
+=======
+>>>>>>> v3.18
 	return alloc_netdev_mqs(sizeof_priv, "eth%d", NET_NAME_UNKNOWN,
 				ether_setup, txqs, rxqs);
 }
@@ -495,6 +535,9 @@ EXPORT_SYMBOL(alloc_etherdev_mqs);
 ssize_t sysfs_format_mac(char *buf, const unsigned char *addr, int len)
 {
 	return scnprintf(buf, PAGE_SIZE, "%*phC\n", len, addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(sysfs_format_mac);

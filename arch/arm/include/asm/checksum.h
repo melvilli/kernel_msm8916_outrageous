@@ -88,6 +88,7 @@ csum_tcpudp_nofold(__be32 saddr, __be32 daddr, unsigned short len,
 		   unsigned short proto, __wsum sum)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__asm__(
 	"adds	%0, %1, %2		@ csum_tcpudp_nofold	\n\
 	adcs	%0, %0, %3					\n"
@@ -102,6 +103,8 @@ csum_tcpudp_nofold(__be32 saddr, __be32 daddr, unsigned short len,
 	: "r" (sum), "r" (daddr), "r" (saddr), "r" (len), "Ir" (htons(proto))
 	: "cc");
 =======
+=======
+>>>>>>> v3.18
 	u32 lenprot = len | proto << 16;
 	if (__builtin_constant_p(sum) && sum == 0) {
 		__asm__(
@@ -129,6 +132,9 @@ csum_tcpudp_nofold(__be32 saddr, __be32 daddr, unsigned short len,
 		: "r" (sum), "r" (daddr), "r" (saddr), "r" (lenprot)
 		: "cc");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sum;
 }	

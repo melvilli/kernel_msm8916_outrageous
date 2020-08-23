@@ -45,7 +45,11 @@ static struct resource tps80031_rtc_resources[] = {
 
 /* TPS80031 sub mfd devices */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell tps80031_cell[] = {
+=======
+static const struct mfd_cell tps80031_cell[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell tps80031_cell[] = {
 >>>>>>> v3.18
@@ -423,7 +427,11 @@ static int tps80031_probe(struct i2c_client *client,
 			  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps80031_platform_data *pdata = client->dev.platform_data;
+=======
+	struct tps80031_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct tps80031_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

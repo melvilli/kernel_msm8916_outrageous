@@ -662,6 +662,10 @@ static int hwicap_setup(struct device *dev, int id,
 	if (!drvdata->base_address) {
 		dev_err(dev, "ioremap() failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		retval = -ENOMEM;
+>>>>>>> v3.18
 =======
 		retval = -ENOMEM;
 >>>>>>> v3.18
@@ -726,7 +730,11 @@ static int hwicap_remove(struct device *dev)
 	struct hwicap_drvdata *drvdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drvdata = (struct hwicap_drvdata *)dev_get_drvdata(dev);
+=======
+	drvdata = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	drvdata = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -740,7 +748,10 @@ static int hwicap_remove(struct device *dev)
 	release_mem_region(drvdata->mem_start, drvdata->mem_size);
 	kfree(drvdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -855,7 +866,10 @@ static struct platform_driver hwicap_platform_driver = {
 	.remove = hwicap_drv_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = DRIVER_NAME,

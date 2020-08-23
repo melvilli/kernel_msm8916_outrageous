@@ -365,7 +365,12 @@ static void snd_card_cs4236_free(struct snd_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_cs423x_card_new(int dev, struct snd_card **cardp)
+=======
+static int snd_cs423x_card_new(struct device *pdev, int dev,
+			       struct snd_card **cardp)
+>>>>>>> v3.18
 =======
 static int snd_cs423x_card_new(struct device *pdev, int dev,
 			       struct snd_card **cardp)
@@ -375,8 +380,13 @@ static int snd_cs423x_card_new(struct device *pdev, int dev,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_card_cs4236), &card);
+=======
+	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_card_cs4236), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_card_cs4236), &card);
@@ -498,10 +508,16 @@ static int snd_cs423x_isa_probe(struct device *pdev,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_cs423x_card_new(dev, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, pdev);
+=======
+	err = snd_cs423x_card_new(pdev, dev, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 =======
 	err = snd_cs423x_card_new(pdev, dev, &card);
 	if (err < 0)
@@ -521,7 +537,10 @@ static int snd_cs423x_isa_remove(struct device *pdev,
 {
 	snd_card_free(dev_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -598,7 +617,11 @@ static int snd_cs423x_pnpbios_detect(struct pnp_dev *pdev,
 			break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_cs423x_card_new(dev, &card);
+=======
+	err = snd_cs423x_card_new(&pdev->dev, dev, &card);
+>>>>>>> v3.18
 =======
 	err = snd_cs423x_card_new(&pdev->dev, dev, &card);
 >>>>>>> v3.18
@@ -611,7 +634,10 @@ static int snd_cs423x_pnpbios_detect(struct pnp_dev *pdev,
 		return err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_cs423x_probe(card, dev)) < 0) {
@@ -627,7 +653,10 @@ static void snd_cs423x_pnp_remove(struct pnp_dev *pdev)
 {
 	snd_card_free(pnp_get_drvdata(pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pnp_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -670,7 +699,11 @@ static int snd_cs423x_pnpc_detect(struct pnp_card_link *pcard,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = snd_cs423x_card_new(dev, &card);
+=======
+	res = snd_cs423x_card_new(&pcard->card->dev, dev, &card);
+>>>>>>> v3.18
 =======
 	res = snd_cs423x_card_new(&pcard->card->dev, dev, &card);
 >>>>>>> v3.18
@@ -683,7 +716,10 @@ static int snd_cs423x_pnpc_detect(struct pnp_card_link *pcard,
 		return res;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((res = snd_cs423x_probe(card, dev)) < 0) {

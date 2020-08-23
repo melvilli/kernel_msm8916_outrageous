@@ -66,7 +66,11 @@ static int trace_test_buffer(struct trace_buffer *buf, unsigned long *count)
 	/* Don't allow flipping of max traces now */
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_spin_lock(&ftrace_max_lock);
+=======
+	arch_spin_lock(&buf->tr->max_lock);
+>>>>>>> v3.18
 =======
 	arch_spin_lock(&buf->tr->max_lock);
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ static int trace_test_buffer(struct trace_buffer *buf, unsigned long *count)
 	}
 	tracing_on();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_spin_unlock(&ftrace_max_lock);
+=======
+	arch_spin_unlock(&buf->tr->max_lock);
+>>>>>>> v3.18
 =======
 	arch_spin_unlock(&buf->tr->max_lock);
 >>>>>>> v3.18
@@ -170,11 +178,14 @@ static struct ftrace_ops test_probe3 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ftrace_ops test_global = {
 	.func		= trace_selftest_test_global_func,
 	.flags		= FTRACE_OPS_FL_GLOBAL | FTRACE_OPS_FL_RECURSION_SAFE,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void print_counts(void)
@@ -197,7 +208,11 @@ static void reset_counts(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int trace_selftest_ops(int cnt)
+=======
+static int trace_selftest_ops(struct trace_array *tr, int cnt)
+>>>>>>> v3.18
 =======
 static int trace_selftest_ops(struct trace_array *tr, int cnt)
 >>>>>>> v3.18
@@ -236,13 +251,19 @@ static int trace_selftest_ops(struct trace_array *tr, int cnt)
 	register_ftrace_function(&test_probe2);
 	register_ftrace_function(&test_probe3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_ftrace_function(&test_global);
 =======
+=======
+>>>>>>> v3.18
 	/* First time we are running with main function */
 	if (cnt > 1) {
 		ftrace_init_array_ops(tr, trace_selftest_test_global_func);
 		register_ftrace_function(tr->ops);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DYN_FTRACE_TEST_NAME();
@@ -256,13 +277,19 @@ static int trace_selftest_ops(struct trace_array *tr, int cnt)
 	if (trace_selftest_test_probe3_cnt != 1)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (trace_selftest_test_global_cnt == 0)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (cnt > 1) {
 		if (trace_selftest_test_global_cnt == 0)
 			goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DYN_FTRACE_TEST_NAME2();
@@ -300,13 +327,19 @@ static int trace_selftest_ops(struct trace_array *tr, int cnt)
 	if (trace_selftest_test_probe3_cnt != 3)
 		goto out_free;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (trace_selftest_test_global_cnt == 0)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (cnt > 1) {
 		if (trace_selftest_test_global_cnt == 0)
 			goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (trace_selftest_test_dyn_cnt == 0)
 		goto out_free;
@@ -333,7 +366,13 @@ static int trace_selftest_ops(struct trace_array *tr, int cnt)
 	unregister_ftrace_function(&test_probe2);
 	unregister_ftrace_function(&test_probe3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_ftrace_function(&test_global);
+=======
+	if (cnt > 1)
+		unregister_ftrace_function(tr->ops);
+	ftrace_reset_array_ops(tr);
+>>>>>>> v3.18
 =======
 	if (cnt > 1)
 		unregister_ftrace_function(tr->ops);
@@ -359,9 +398,15 @@ static int trace_selftest_ops(struct trace_array *tr, int cnt)
 
 /* Test dynamic code modification and ftrace filters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
 					   struct trace_array *tr,
 					   int (*func)(void))
+=======
+static int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
+						  struct trace_array *tr,
+						  int (*func)(void))
+>>>>>>> v3.18
 =======
 static int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
 						  struct trace_array *tr,
@@ -427,6 +472,11 @@ static int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
 	/* check the trace buffer */
 	ret = trace_test_buffer(&tr->trace_buffer, &count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ftrace_enabled = 1;
+>>>>>>> v3.18
 =======
 
 	ftrace_enabled = 1;
@@ -443,7 +493,11 @@ static int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
 
 	/* Test the ops with global tracing running */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = trace_selftest_ops(1);
+=======
+	ret = trace_selftest_ops(tr, 1);
+>>>>>>> v3.18
 =======
 	ret = trace_selftest_ops(tr, 1);
 >>>>>>> v3.18
@@ -458,7 +512,11 @@ static int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
 	/* Test the ops with global tracing off */
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = trace_selftest_ops(2);
+=======
+		ret = trace_selftest_ops(tr, 2);
+>>>>>>> v3.18
 =======
 		ret = trace_selftest_ops(tr, 2);
 >>>>>>> v3.18
@@ -703,7 +761,11 @@ out:
  * buffer to see if all is in order.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+__init int
+>>>>>>> v3.18
 =======
 __init int
 >>>>>>> v3.18
@@ -714,7 +776,10 @@ trace_selftest_startup_function(struct tracer *trace, struct trace_array *tr)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_FTRACE
 	if (ftrace_filter_param) {
 		printk(KERN_CONT " ... kernel command line filter set: force PASS ... ");
@@ -722,6 +787,9 @@ trace_selftest_startup_function(struct tracer *trace, struct trace_array *tr)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* make sure msleep has been recorded */
 	msleep(1);
@@ -744,6 +812,11 @@ trace_selftest_startup_function(struct tracer *trace, struct trace_array *tr)
 	/* check the trace buffer */
 	ret = trace_test_buffer(&tr->trace_buffer, &count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ftrace_enabled = 1;
+>>>>>>> v3.18
 =======
 
 	ftrace_enabled = 1;
@@ -809,7 +882,11 @@ static int trace_graph_entry_watchdog(struct ftrace_graph_ent *trace)
  * has been borrowed.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+__init int
+>>>>>>> v3.18
 =======
 __init int
 >>>>>>> v3.18
@@ -820,7 +897,10 @@ trace_selftest_startup_function_graph(struct tracer *trace,
 	unsigned long count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_FTRACE
 	if (ftrace_filter_param) {
 		printk(KERN_CONT " ... kernel command line filter set: force PASS ... ");
@@ -828,6 +908,9 @@ trace_selftest_startup_function_graph(struct tracer *trace,
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Simulate the init() callback but we attach a watchdog callback
@@ -884,7 +967,11 @@ int
 trace_selftest_startup_irqsoff(struct tracer *trace, struct trace_array *tr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long save_max = tracing_max_latency;
+=======
+	unsigned long save_max = tr->max_latency;
+>>>>>>> v3.18
 =======
 	unsigned long save_max = tr->max_latency;
 >>>>>>> v3.18
@@ -900,7 +987,11 @@ trace_selftest_startup_irqsoff(struct tracer *trace, struct trace_array *tr)
 
 	/* reset the max latency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
+=======
+	tr->max_latency = 0;
+>>>>>>> v3.18
 =======
 	tr->max_latency = 0;
 >>>>>>> v3.18
@@ -931,7 +1022,11 @@ trace_selftest_startup_irqsoff(struct tracer *trace, struct trace_array *tr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = save_max;
+=======
+	tr->max_latency = save_max;
+>>>>>>> v3.18
 =======
 	tr->max_latency = save_max;
 >>>>>>> v3.18
@@ -945,7 +1040,11 @@ int
 trace_selftest_startup_preemptoff(struct tracer *trace, struct trace_array *tr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long save_max = tracing_max_latency;
+=======
+	unsigned long save_max = tr->max_latency;
+>>>>>>> v3.18
 =======
 	unsigned long save_max = tr->max_latency;
 >>>>>>> v3.18
@@ -974,7 +1073,11 @@ trace_selftest_startup_preemptoff(struct tracer *trace, struct trace_array *tr)
 
 	/* reset the max latency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
+=======
+	tr->max_latency = 0;
+>>>>>>> v3.18
 =======
 	tr->max_latency = 0;
 >>>>>>> v3.18
@@ -1005,7 +1108,11 @@ trace_selftest_startup_preemptoff(struct tracer *trace, struct trace_array *tr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = save_max;
+=======
+	tr->max_latency = save_max;
+>>>>>>> v3.18
 =======
 	tr->max_latency = save_max;
 >>>>>>> v3.18
@@ -1019,7 +1126,11 @@ int
 trace_selftest_startup_preemptirqsoff(struct tracer *trace, struct trace_array *tr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long save_max = tracing_max_latency;
+=======
+	unsigned long save_max = tr->max_latency;
+>>>>>>> v3.18
 =======
 	unsigned long save_max = tr->max_latency;
 >>>>>>> v3.18
@@ -1048,7 +1159,11 @@ trace_selftest_startup_preemptirqsoff(struct tracer *trace, struct trace_array *
 
 	/* reset the max latency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
+=======
+	tr->max_latency = 0;
+>>>>>>> v3.18
 =======
 	tr->max_latency = 0;
 >>>>>>> v3.18
@@ -1087,7 +1202,11 @@ trace_selftest_startup_preemptirqsoff(struct tracer *trace, struct trace_array *
 
 	/* do the test by disabling interrupts first this time */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
+=======
+	tr->max_latency = 0;
+>>>>>>> v3.18
 =======
 	tr->max_latency = 0;
 >>>>>>> v3.18
@@ -1122,7 +1241,11 @@ out:
 out_no_start:
 	trace->reset(tr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = save_max;
+=======
+	tr->max_latency = save_max;
+>>>>>>> v3.18
 =======
 	tr->max_latency = save_max;
 >>>>>>> v3.18
@@ -1141,6 +1264,7 @@ trace_selftest_startup_nop(struct tracer *trace, struct trace_array *tr)
 #endif
 
 #ifdef CONFIG_SCHED_TRACER
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int trace_wakeup_test_thread(void *data)
 {
@@ -1185,6 +1309,8 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 	/* create a high prio thread */
 	p = kthread_run(trace_wakeup_test_thread, &isrt, "ftrace-test");
 =======
+=======
+>>>>>>> v3.18
 
 struct wakeup_test_data {
 	struct completion	is_ready;
@@ -1243,6 +1369,9 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 
 	/* create a -deadline thread */
 	p = kthread_run(trace_wakeup_test_thread, &data, "ftrace-test");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(p)) {
 		printk(KERN_CONT "Failed to create ftrace wakeup test thread ");
@@ -1250,8 +1379,13 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* make sure the thread is running at an RT prio */
 	wait_for_completion(&isrt);
+=======
+	/* make sure the thread is running at -deadline policy */
+	wait_for_completion(&data.is_ready);
+>>>>>>> v3.18
 =======
 	/* make sure the thread is running at -deadline policy */
 	wait_for_completion(&data.is_ready);
@@ -1266,17 +1400,23 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 
 	/* reset the max latency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
 
 	while (p->on_rq) {
 		/*
 		 * Sleep to make sure the RT thread is asleep too.
 =======
+=======
+>>>>>>> v3.18
 	tr->max_latency = 0;
 
 	while (p->on_rq) {
 		/*
 		 * Sleep to make sure the -deadline thread is asleep too.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * On virtual machines we can't rely on timings,
 		 * but we want to make sure this test still works.
@@ -1285,19 +1425,29 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&isrt);
 =======
+=======
+>>>>>>> v3.18
 	init_completion(&data.is_ready);
 
 	data.go = 1;
 	/* memory barrier is in the wake_up_process() */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wake_up_process(p);
 
 	/* Wait for the task to wake up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_for_completion(&isrt);
+=======
+	wait_for_completion(&data.is_ready);
+>>>>>>> v3.18
 =======
 	wait_for_completion(&data.is_ready);
 >>>>>>> v3.18
@@ -1307,7 +1457,10 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 	/* check both trace buffers */
 	ret = trace_test_buffer(&tr->trace_buffer, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("ret = %d\n", ret);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ret)
@@ -1318,7 +1471,11 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 	tracing_start();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = save_max;
+=======
+	tr->max_latency = save_max;
+>>>>>>> v3.18
 =======
 	tr->max_latency = save_max;
 >>>>>>> v3.18

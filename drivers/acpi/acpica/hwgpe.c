@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -132,6 +136,10 @@ acpi_hw_low_set_gpe(struct acpi_gpe_event_info *gpe_event_info, u32 action)
 
 	case ACPI_GPE_ENABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -140,6 +148,10 @@ acpi_hw_low_set_gpe(struct acpi_gpe_event_info *gpe_event_info, u32 action)
 
 	case ACPI_GPE_DISABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -148,6 +160,10 @@ acpi_hw_low_set_gpe(struct acpi_gpe_event_info *gpe_event_info, u32 action)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -216,7 +232,11 @@ acpi_status acpi_hw_clear_gpe(struct acpi_gpe_event_info * gpe_event_info)
 acpi_status
 acpi_hw_get_gpe_status(struct acpi_gpe_event_info * gpe_event_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       acpi_event_status * event_status)
+=======
+		       acpi_event_status *event_status)
+>>>>>>> v3.18
 =======
 		       acpi_event_status *event_status)
 >>>>>>> v3.18
@@ -234,7 +254,10 @@ acpi_hw_get_gpe_status(struct acpi_gpe_event_info * gpe_event_info,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* GPE currently handled? */
 
 	if ((gpe_event_info->flags & ACPI_GPE_DISPATCH_MASK) !=
@@ -242,6 +265,9 @@ acpi_hw_get_gpe_status(struct acpi_gpe_event_info * gpe_event_info,
 		local_event_status |= ACPI_EVENT_FLAG_HAS_HANDLER;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Get the info block for the entire GPE register */
 
@@ -424,17 +450,23 @@ acpi_hw_enable_wakeup_gpe_block(struct acpi_gpe_xrupt_info *gpe_xrupt_info,
 
 	for (i = 0; i < gpe_block->register_count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!gpe_block->register_info[i].enable_for_wake) {
 			continue;
 		}
 
 		/* Enable all "wake" GPEs in this register */
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * Enable all "wake" GPEs in this register and disable the
 		 * remaining ones.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		status =

@@ -8,12 +8,18 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm-generic/xor.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hardirq.h>
 #include <asm-generic/xor.h>
 #include <asm/hwcap.h>
 #include <asm/neon.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __XOR(a1, a2) a1 ^= a2
@@ -146,8 +152,11 @@ static struct xor_block_template xor_block_arm4regs = {
 		xor_speed(&xor_block_8regs);	\
 		xor_speed(&xor_block_32regs);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (0)
 =======
+=======
+>>>>>>> v3.18
 		NEON_TEMPLATES;			\
 	} while (0)
 
@@ -219,4 +228,7 @@ static struct xor_block_template xor_block_neon = {
 #else
 #define NEON_TEMPLATES
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

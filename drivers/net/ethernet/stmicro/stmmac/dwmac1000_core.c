@@ -33,11 +33,14 @@
 #include "dwmac1000.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_core_init(void __iomem *ioaddr)
 {
 	u32 value = readl(ioaddr + GMAC_CONTROL);
 	value |= GMAC_CORE_INIT;
 =======
+=======
+>>>>>>> v3.18
 static void dwmac1000_core_init(struct mac_device_info *hw, int mtu)
 {
 	void __iomem *ioaddr = hw->pcsr;
@@ -48,6 +51,9 @@ static void dwmac1000_core_init(struct mac_device_info *hw, int mtu)
 	if (mtu > 2000)
 		value |= GMAC_CONTROL_JE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(value, ioaddr + GMAC_CONTROL);
 
@@ -61,12 +67,15 @@ static void dwmac1000_core_init(struct mac_device_info *hw, int mtu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dwmac1000_rx_ipc_enable(void __iomem *ioaddr)
 {
 	u32 value = readl(ioaddr + GMAC_CONTROL);
 
 	value |= GMAC_CONTROL_IPC;
 =======
+=======
+>>>>>>> v3.18
 static int dwmac1000_rx_ipc_enable(struct mac_device_info *hw)
 {
 	void __iomem *ioaddr = hw->pcsr;
@@ -77,6 +86,9 @@ static int dwmac1000_rx_ipc_enable(struct mac_device_info *hw)
 	else
 		value &= ~GMAC_CONTROL_IPC;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(value, ioaddr + GMAC_CONTROL);
 
@@ -86,8 +98,14 @@ static int dwmac1000_rx_ipc_enable(struct mac_device_info *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_dump_regs(void __iomem *ioaddr)
 {
+=======
+static void dwmac1000_dump_regs(struct mac_device_info *hw)
+{
+	void __iomem *ioaddr = hw->pcsr;
+>>>>>>> v3.18
 =======
 static void dwmac1000_dump_regs(struct mac_device_info *hw)
 {
@@ -104,35 +122,48 @@ static void dwmac1000_dump_regs(struct mac_device_info *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_set_umac_addr(void __iomem *ioaddr, unsigned char *addr,
 				    unsigned int reg_n)
 {
 =======
+=======
+>>>>>>> v3.18
 static void dwmac1000_set_umac_addr(struct mac_device_info *hw,
 				    unsigned char *addr,
 				    unsigned int reg_n)
 {
 	void __iomem *ioaddr = hw->pcsr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stmmac_set_mac_addr(ioaddr, addr, GMAC_ADDR_HIGH(reg_n),
 			    GMAC_ADDR_LOW(reg_n));
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_get_umac_addr(void __iomem *ioaddr, unsigned char *addr,
 				    unsigned int reg_n)
 {
 =======
+=======
+>>>>>>> v3.18
 static void dwmac1000_get_umac_addr(struct mac_device_info *hw,
 				    unsigned char *addr,
 				    unsigned int reg_n)
 {
 	void __iomem *ioaddr = hw->pcsr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stmmac_get_mac_addr(ioaddr, addr, GMAC_ADDR_HIGH(reg_n),
 			    GMAC_ADDR_LOW(reg_n));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void dwmac1000_set_filter(struct net_device *dev, int id)
 {
@@ -153,6 +184,8 @@ static void dwmac1000_set_filter(struct net_device *dev, int id)
 	} else if (!netdev_mc_empty(dev)) {
 		u32 mc_filter[2];
 =======
+=======
+>>>>>>> v3.18
 static void dwmac1000_set_mchash(void __iomem *ioaddr, u32 *mcfilterbits,
 				 int mcbitslog2)
 {
@@ -199,12 +232,16 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 	} else if (dev->flags & IFF_ALLMULTI) {
 		value = GMAC_FRAME_FILTER_PM;	/* pass all multi */
 	} else if (!netdev_mc_empty(dev)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct netdev_hw_addr *ha;
 
 		/* Hash filter for multicast */
 		value = GMAC_FRAME_FILTER_HMC;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		memset(mc_filter, 0, sizeof(mc_filter));
 		netdev_for_each_mc_addr(ha, dev) {
@@ -213,6 +250,8 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 			 */
 			int bit_nr = bitrev32(~crc32_le(~0, ha->addr, 6)) >> 26;
 =======
+=======
+>>>>>>> v3.18
 		netdev_for_each_mc_addr(ha, dev) {
 			/* The upper n bits of the calculated CRC are used to
 			 * index the contents of the hash table. The number of
@@ -222,6 +261,9 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 			int bit_nr = bitrev32(~crc32_le(~0, ha->addr,
 					      ETH_ALEN)) >>
 					      (32 - mcbitslog2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* The most significant bit determines the register to
 			 * use (H/L) while the other 5 bits determine the bit
@@ -229,6 +271,7 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 			 */
 			mc_filter[bit_nr >> 5] |= 1 << (bit_nr & 31);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		writel(mc_filter[0], ioaddr + GMAC_HASH_LOW);
 		writel(mc_filter[1], ioaddr + GMAC_HASH_HIGH);
@@ -245,6 +288,8 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 		/* Switch to promiscuous mode if more than 16 addrs
 		 * are required
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	dwmac1000_set_mchash(ioaddr, mc_filter, mcbitslog2);
@@ -253,6 +298,9 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 	if (netdev_uc_count(dev) > perfect_addr_number)
 		/* Switch to promiscuous mode if more than unicast
 		 * addresses are requested than supported by hardware.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		value |= GMAC_FRAME_FILTER_PR;
@@ -262,7 +310,13 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 
 		netdev_for_each_uc_addr(ha, dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dwmac1000_set_umac_addr(ioaddr, ha->addr, reg);
+=======
+			stmmac_set_mac_addr(ioaddr, ha->addr,
+					    GMAC_ADDR_HIGH(reg),
+					    GMAC_ADDR_LOW(reg));
+>>>>>>> v3.18
 =======
 			stmmac_set_mac_addr(ioaddr, ha->addr,
 					    GMAC_ADDR_HIGH(reg),
@@ -277,6 +331,7 @@ static void dwmac1000_set_filter(struct mac_device_info *hw,
 	value |= GMAC_FRAME_FILTER_RA;
 #endif
 	writel(value, ioaddr + GMAC_FRAME_FILTER);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	CHIP_DBG(KERN_INFO "\tFilter: 0x%08x\n\tHash: HI 0x%08x, LO 0x%08x\n",
@@ -297,6 +352,8 @@ static void dwmac1000_flow_ctrl(void __iomem *ioaddr, unsigned int duplex,
 	if (fc & FLOW_TX) {
 		CHIP_DBG(KERN_DEBUG "\tTransmit Flow-Control ON\n");
 =======
+=======
+>>>>>>> v3.18
 }
 
 
@@ -313,13 +370,20 @@ static void dwmac1000_flow_ctrl(struct mac_device_info *hw, unsigned int duplex,
 	}
 	if (fc & FLOW_TX) {
 		pr_debug("\tTransmit Flow-Control ON\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		flow |= GMAC_FLOW_CTRL_TFE;
 	}
 
 	if (duplex) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CHIP_DBG(KERN_DEBUG "\tduplex mode: PAUSE %d\n", pause_time);
+=======
+		pr_debug("\tduplex mode: PAUSE %d\n", pause_time);
+>>>>>>> v3.18
 =======
 		pr_debug("\tduplex mode: PAUSE %d\n", pause_time);
 >>>>>>> v3.18
@@ -329,6 +393,7 @@ static void dwmac1000_flow_ctrl(struct mac_device_info *hw, unsigned int duplex,
 	writel(flow, ioaddr + GMAC_FLOW_CTRL);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void dwmac1000_pmt(void __iomem *ioaddr, unsigned long mode)
 {
@@ -341,6 +406,8 @@ static void dwmac1000_pmt(void __iomem *ioaddr, unsigned long mode)
 	if (mode & WAKE_UCAST) {
 		CHIP_DBG(KERN_DEBUG "GMAC: WOL on global unicast\n");
 =======
+=======
+>>>>>>> v3.18
 static void dwmac1000_pmt(struct mac_device_info *hw, unsigned long mode)
 {
 	void __iomem *ioaddr = hw->pcsr;
@@ -352,6 +419,9 @@ static void dwmac1000_pmt(struct mac_device_info *hw, unsigned long mode)
 	}
 	if (mode & WAKE_UCAST) {
 		pr_debug("GMAC: WOL on global unicast\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pmt |= global_unicast;
 	}
@@ -360,19 +430,26 @@ static void dwmac1000_pmt(struct mac_device_info *hw, unsigned long mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dwmac1000_irq_status(void __iomem *ioaddr,
 				struct stmmac_extra_stats *x)
 {
 =======
+=======
+>>>>>>> v3.18
 static int dwmac1000_irq_status(struct mac_device_info *hw,
 				struct stmmac_extra_stats *x)
 {
 	void __iomem *ioaddr = hw->pcsr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 intr_status = readl(ioaddr + GMAC_INT_STATUS);
 	int ret = 0;
 
 	/* Not used events (e.g. MMC interrupts) are not handled. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((intr_status & mmc_tx_irq)) {
 		CHIP_DBG(KERN_INFO "GMAC: MMC tx interrupt: 0x%08x\n",
@@ -392,6 +469,8 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 	if (unlikely(intr_status & pmt_irq)) {
 		CHIP_DBG(KERN_INFO "GMAC: received Magic frame\n");
 =======
+=======
+>>>>>>> v3.18
 	if ((intr_status & mmc_tx_irq))
 		x->mmc_tx_irq_n++;
 	if (unlikely(intr_status & mmc_rx_irq))
@@ -399,6 +478,9 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 	if (unlikely(intr_status & mmc_rx_csum_offload_irq))
 		x->mmc_rx_csum_offload_irq_n++;
 	if (unlikely(intr_status & pmt_irq)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* clear the PMT bits 5 and 6 by reading the PMT status reg */
 		readl(ioaddr + GMAC_PMT);
@@ -409,6 +491,7 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 		/* Clean LPI interrupt by reading the Reg 12 */
 		ret = readl(ioaddr + LPI_CTRL_STATUS);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ret & LPI_CTRL_STATUS_TLPIEN) {
 			CHIP_DBG(KERN_INFO "GMAC TX entered in LPI\n");
@@ -431,6 +514,8 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 	if ((intr_status & pcs_ane_irq) || (intr_status & pcs_link_irq)) {
 		CHIP_DBG(KERN_INFO "GMAC PCS ANE IRQ\n");
 =======
+=======
+>>>>>>> v3.18
 		if (ret & LPI_CTRL_STATUS_TLPIEN)
 			x->irq_tx_path_in_lpi_mode_n++;
 		if (ret & LPI_CTRL_STATUS_TLPIEX)
@@ -442,6 +527,9 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 	}
 
 	if ((intr_status & pcs_ane_irq) || (intr_status & pcs_link_irq)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		readl(ioaddr + GMAC_AN_STATUS);
 		x->irq_pcs_ane_n++;
@@ -449,7 +537,10 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 	if (intr_status & rgmii_irq) {
 		u32 status = readl(ioaddr + GMAC_S_R_GMII);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CHIP_DBG(KERN_INFO "GMAC RGMII/SGMII interrupt\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		x->irq_rgmii_n++;
@@ -469,18 +560,24 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 
 			x->pcs_link = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("Link is Up - %d/%s\n", (int)x->pcs_speed,
 				 x->pcs_duplex ? "Full" : "Half");
 		} else {
 			x->pcs_link = 0;
 			pr_debug("Link is Down\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("%s: Link is Up - %d/%s\n", __func__,
 				 (int)x->pcs_speed,
 				 x->pcs_duplex ? "Full" : "Half");
 		} else {
 			x->pcs_link = 0;
 			pr_debug("%s: Link is Down\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -489,8 +586,14 @@ static int dwmac1000_irq_status(struct mac_device_info *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_set_eee_mode(void __iomem *ioaddr)
 {
+=======
+static void dwmac1000_set_eee_mode(struct mac_device_info *hw)
+{
+	void __iomem *ioaddr = hw->pcsr;
+>>>>>>> v3.18
 =======
 static void dwmac1000_set_eee_mode(struct mac_device_info *hw)
 {
@@ -508,8 +611,14 @@ static void dwmac1000_set_eee_mode(struct mac_device_info *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_reset_eee_mode(void __iomem *ioaddr)
 {
+=======
+static void dwmac1000_reset_eee_mode(struct mac_device_info *hw)
+{
+	void __iomem *ioaddr = hw->pcsr;
+>>>>>>> v3.18
 =======
 static void dwmac1000_reset_eee_mode(struct mac_device_info *hw)
 {
@@ -523,8 +632,14 @@ static void dwmac1000_reset_eee_mode(struct mac_device_info *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_set_eee_pls(void __iomem *ioaddr, int link)
 {
+=======
+static void dwmac1000_set_eee_pls(struct mac_device_info *hw, int link)
+{
+	void __iomem *ioaddr = hw->pcsr;
+>>>>>>> v3.18
 =======
 static void dwmac1000_set_eee_pls(struct mac_device_info *hw, int link)
 {
@@ -543,8 +658,14 @@ static void dwmac1000_set_eee_pls(struct mac_device_info *hw, int link)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_set_eee_timer(void __iomem *ioaddr, int ls, int tw)
 {
+=======
+static void dwmac1000_set_eee_timer(struct mac_device_info *hw, int ls, int tw)
+{
+	void __iomem *ioaddr = hw->pcsr;
+>>>>>>> v3.18
 =======
 static void dwmac1000_set_eee_timer(struct mac_device_info *hw, int ls, int tw)
 {
@@ -563,6 +684,7 @@ static void dwmac1000_set_eee_timer(struct mac_device_info *hw, int ls, int tw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_ctrl_ane(void __iomem *ioaddr, bool restart)
 {
 	u32 value;
@@ -571,11 +693,16 @@ static void dwmac1000_ctrl_ane(void __iomem *ioaddr, bool restart)
 	/* auto negotiation enable and External Loopback enable */
 	value = GMAC_AN_CTRL_ANE | GMAC_AN_CTRL_ELE;
 =======
+=======
+>>>>>>> v3.18
 static void dwmac1000_ctrl_ane(struct mac_device_info *hw, bool restart)
 {
 	void __iomem *ioaddr = hw->pcsr;
 	/* auto negotiation enable and External Loopback enable */
 	u32 value = GMAC_AN_CTRL_ANE | GMAC_AN_CTRL_ELE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (restart)
@@ -585,8 +712,14 @@ static void dwmac1000_ctrl_ane(struct mac_device_info *hw, bool restart)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dwmac1000_get_adv(void __iomem *ioaddr, struct rgmii_adv *adv)
 {
+=======
+static void dwmac1000_get_adv(struct mac_device_info *hw, struct rgmii_adv *adv)
+{
+	void __iomem *ioaddr = hw->pcsr;
+>>>>>>> v3.18
 =======
 static void dwmac1000_get_adv(struct mac_device_info *hw, struct rgmii_adv *adv)
 {
@@ -630,7 +763,12 @@ static const struct stmmac_ops dwmac1000_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mac_device_info *dwmac1000_setup(void __iomem *ioaddr)
+=======
+struct mac_device_info *dwmac1000_setup(void __iomem *ioaddr, int mcbins,
+					int perfect_uc_entries)
+>>>>>>> v3.18
 =======
 struct mac_device_info *dwmac1000_setup(void __iomem *ioaddr, int mcbins,
 					int perfect_uc_entries)
@@ -644,7 +782,10 @@ struct mac_device_info *dwmac1000_setup(void __iomem *ioaddr, int mcbins,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mac->pcsr = ioaddr;
 	mac->multicast_filter_bins = mcbins;
 	mac->unicast_filter_entries = perfect_uc_entries;
@@ -653,6 +794,9 @@ struct mac_device_info *dwmac1000_setup(void __iomem *ioaddr, int mcbins,
 	if (mac->multicast_filter_bins)
 		mac->mcast_bits_log2 = ilog2(mac->multicast_filter_bins);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mac->mac = &dwmac1000_ops;
 	mac->dma = &dwmac1000_dma_ops;

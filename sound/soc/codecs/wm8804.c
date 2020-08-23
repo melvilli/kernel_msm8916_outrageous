@@ -64,6 +64,10 @@ struct wm8804_priv {
 	struct regulator_bulk_data supplies[WM8804_NUM_SUPPLIES];
 	struct notifier_block disable_nb[WM8804_NUM_SUPPLIES];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int mclk_div;
+>>>>>>> v3.18
 =======
 	int mclk_div;
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ WM8804_REGULATOR_EVENT(1)
 
 static const char *txsrc_text[] = { "S/PDIF RX", "AIF" };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SOC_ENUM_SINGLE_EXT_DECL(txsrc, txsrc_text);
+=======
+static SOC_ENUM_SINGLE_EXT_DECL(txsrc, txsrc_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_EXT_DECL(txsrc, txsrc_text);
 >>>>>>> v3.18
@@ -115,7 +123,11 @@ static int txsrc_get(struct snd_kcontrol *kcontrol,
 	unsigned int src;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec = snd_kcontrol_chip(kcontrol);
+=======
+	codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -135,7 +147,11 @@ static int txsrc_put(struct snd_kcontrol *kcontrol,
 	unsigned int src, txpwr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec = snd_kcontrol_chip(kcontrol);
+=======
+	codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -286,6 +302,7 @@ static int wm8804_hw_params(struct snd_pcm_substream *substream,
 	codec = dai->codec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		blen = 0x0;
@@ -295,6 +312,8 @@ static int wm8804_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		blen = 0x0;
@@ -303,13 +322,20 @@ static int wm8804_hw_params(struct snd_pcm_substream *substream,
 		blen = 0x1;
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		blen = 0x2;
 		break;
 	default:
 		dev_err(dai->dev, "Unsupported word length: %u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			params_format(params));
+=======
+			params_width(params));
+>>>>>>> v3.18
 =======
 			params_width(params));
 >>>>>>> v3.18
@@ -350,7 +376,11 @@ static struct {
 #define FIXED_PLL_SIZE ((1ULL << 22) * 10)
 static int pll_factors(struct pll_div *pll_div, unsigned int target,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       unsigned int source)
+=======
+		       unsigned int source, unsigned int mclk_div)
+>>>>>>> v3.18
 =======
 		       unsigned int source, unsigned int mclk_div)
 >>>>>>> v3.18
@@ -366,7 +396,12 @@ static int pll_factors(struct pll_div *pll_div, unsigned int target,
 	for (i = 0; i < ARRAY_SIZE(post_table); i++) {
 		tmp = target * post_table[i].div;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tmp >= 90000000 && tmp <= 100000000) {
+=======
+		if ((tmp >= 90000000 && tmp <= 100000000) &&
+		    (mclk_div == post_table[i].mclkdiv)) {
+>>>>>>> v3.18
 =======
 		if ((tmp >= 90000000 && tmp <= 100000000) &&
 		    (mclk_div == post_table[i].mclkdiv)) {
@@ -428,15 +463,21 @@ static int wm8804_set_pll(struct snd_soc_dai *dai, int pll_id,
 		int ret;
 		struct pll_div pll_div;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		ret = pll_factors(&pll_div, freq_out, freq_in);
 =======
+=======
+>>>>>>> v3.18
 		struct wm8804_priv *wm8804;
 
 		wm8804 = snd_soc_codec_get_drvdata(codec);
 
 		ret = pll_factors(&pll_div, freq_out, freq_in,
 				  wm8804->mclk_div);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			return ret;
@@ -502,6 +543,10 @@ static int wm8804_set_clkdiv(struct snd_soc_dai *dai,
 {
 	struct snd_soc_codec *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct wm8804_priv *wm8804;
+>>>>>>> v3.18
 =======
 	struct wm8804_priv *wm8804;
 >>>>>>> v3.18
@@ -513,11 +558,17 @@ static int wm8804_set_clkdiv(struct snd_soc_dai *dai,
 				    (div & 0x3) << 4);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case WM8804_MCLK_DIV:
 		wm8804 = snd_soc_codec_get_drvdata(codec);
 		wm8804->mclk_div = div;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_err(dai->dev, "Unknown clock divider: %d\n", div_id);
@@ -568,6 +619,7 @@ static int wm8804_set_bias_level(struct snd_soc_codec *codec,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int wm8804_suspend(struct snd_soc_codec *codec)
 {
@@ -587,6 +639,8 @@ static int wm8804_resume(struct snd_soc_codec *codec)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int wm8804_remove(struct snd_soc_codec *codec)
 {
 	struct wm8804_priv *wm8804;
@@ -599,7 +653,10 @@ static int wm8804_remove(struct snd_soc_codec *codec)
 		regulator_unregister_notifier(wm8804->supplies[i].consumer,
 					      &wm8804->disable_nb[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_bulk_free(ARRAY_SIZE(wm8804->supplies), wm8804->supplies);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -612,6 +669,7 @@ static int wm8804_probe(struct snd_soc_codec *codec)
 
 	wm8804 = snd_soc_codec_get_drvdata(codec);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	codec->control_data = wm8804->regmap;
 
@@ -626,10 +684,15 @@ static int wm8804_probe(struct snd_soc_codec *codec)
 
 	ret = regulator_bulk_get(codec->dev, ARRAY_SIZE(wm8804->supplies),
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(wm8804->supplies); i++)
 		wm8804->supplies[i].supply = wm8804_supply_names[i];
 
 	ret = devm_regulator_bulk_get(codec->dev, ARRAY_SIZE(wm8804->supplies),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 wm8804->supplies);
 	if (ret) {
@@ -656,7 +719,11 @@ static int wm8804_probe(struct snd_soc_codec *codec)
 	if (ret) {
 		dev_err(codec->dev, "Failed to enable supplies: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_reg_get;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -705,8 +772,11 @@ static int wm8804_probe(struct snd_soc_codec *codec)
 err_reg_enable:
 	regulator_bulk_disable(ARRAY_SIZE(wm8804->supplies), wm8804->supplies);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_reg_get:
 	regulator_bulk_free(ARRAY_SIZE(wm8804->supplies), wm8804->supplies);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -752,8 +822,11 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8804 = {
 	.probe = wm8804_probe,
 	.remove = wm8804_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend = wm8804_suspend,
 	.resume = wm8804_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_bias_level = wm8804_set_bias_level,
@@ -823,7 +896,11 @@ static struct spi_driver wm8804_spi_driver = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -879,7 +956,11 @@ static int __init wm8804_modinit(void)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -903,7 +984,11 @@ module_init(wm8804_modinit);
 static void __exit wm8804_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

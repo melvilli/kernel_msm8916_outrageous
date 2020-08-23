@@ -20,6 +20,10 @@
 
 struct bgpio_pdata {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *label;
+>>>>>>> v3.18
 =======
 	const char *label;
 >>>>>>> v3.18

@@ -2,8 +2,13 @@
  * net/tipc/bearer.c: TIPC bearer code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 1996-2006, Ericsson AB
  * Copyright (c) 2004-2006, 2010-2011, Wind River Systems
+=======
+ * Copyright (c) 1996-2006, 2013, Ericsson AB
+ * Copyright (c) 2004-2006, 2010-2013, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 1996-2006, 2013, Ericsson AB
  * Copyright (c) 2004-2006, 2010-2013, Wind River Systems
@@ -47,6 +52,7 @@
 #define MAX_ADDR_STR 60
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tipc_media *media_list[MAX_MEDIA];
 static u32 media_count;
 
@@ -54,6 +60,8 @@ struct tipc_bearer tipc_bearers[MAX_BEARERS];
 
 static void bearer_disable(struct tipc_bearer *b_ptr);
 =======
+=======
+>>>>>>> v3.18
 static struct tipc_media * const media_info_array[] = {
 	&eth_media_info,
 #ifdef CONFIG_TIPC_MEDIA_IB
@@ -65,6 +73,9 @@ static struct tipc_media * const media_info_array[] = {
 struct tipc_bearer __rcu *bearer_list[MAX_BEARERS + 1];
 
 static void bearer_disable(struct tipc_bearer *b_ptr, bool shutting_down);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -75,17 +86,23 @@ struct tipc_media *tipc_media_find(const char *name)
 	u32 i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < media_count; i++) {
 		if (!strcmp(media_list[i]->name, name))
 			return media_list[i];
 	}
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; media_info_array[i] != NULL; i++) {
 		if (!strcmp(media_info_array[i]->name, name))
 			break;
 	}
 	return media_info_array[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -96,6 +113,7 @@ static struct tipc_media *media_find_id(u8 type)
 {
 	u32 i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < media_count; i++) {
 		if (media_list[i]->type_id == type)
@@ -136,11 +154,16 @@ exit:
 		pr_warn("Media <%s> registration error\n", m_ptr->name);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; media_info_array[i] != NULL; i++) {
 		if (media_info_array[i]->type_id == type)
 			break;
 	}
 	return media_info_array[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -180,6 +203,7 @@ struct sk_buff *tipc_media_get_names(void)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock_bh(&tipc_net_lock);
 	for (i = 0; i < media_count; i++) {
 		tipc_cfg_append_tlv(buf, TIPC_TLV_MEDIA_NAME,
@@ -188,11 +212,16 @@ struct sk_buff *tipc_media_get_names(void)
 	}
 	read_unlock_bh(&tipc_net_lock);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; media_info_array[i] != NULL; i++) {
 		tipc_cfg_append_tlv(buf, TIPC_TLV_MEDIA_NAME,
 				    media_info_array[i]->name,
 				    strlen(media_info_array[i]->name) + 1);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return buf;
 }
@@ -251,6 +280,7 @@ struct tipc_bearer *tipc_bearer_find(const char *name)
 	u32 i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0, b_ptr = tipc_bearers; i < MAX_BEARERS; i++, b_ptr++) {
 		if (b_ptr->active && (!strcmp(b_ptr->name, name)))
 			return b_ptr;
@@ -277,6 +307,11 @@ struct tipc_bearer *tipc_bearer_find_interface(const char *if_name)
 		b_ptr = rtnl_dereference(bearer_list[i]);
 		if (b_ptr && (!strcmp(b_ptr->name, name)))
 >>>>>>> v3.18
+=======
+	for (i = 0; i < MAX_BEARERS; i++) {
+		b_ptr = rtnl_dereference(bearer_list[i]);
+		if (b_ptr && (!strcmp(b_ptr->name, name)))
+>>>>>>> v3.18
 			return b_ptr;
 	}
 	return NULL;
@@ -289,7 +324,11 @@ struct sk_buff *tipc_bearer_get_names(void)
 {
 	struct sk_buff *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tipc_bearer *b_ptr;
+=======
+	struct tipc_bearer *b;
+>>>>>>> v3.18
 =======
 	struct tipc_bearer *b;
 >>>>>>> v3.18
@@ -299,6 +338,7 @@ struct sk_buff *tipc_bearer_get_names(void)
 	if (!buf)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	read_lock_bh(&tipc_net_lock);
 	for (i = 0; i < media_count; i++) {
@@ -353,6 +393,8 @@ int tipc_bearer_blocked(struct tipc_bearer *b)
 
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; media_info_array[i] != NULL; i++) {
 		for (j = 0; j < MAX_BEARERS; j++) {
 			b = rtnl_dereference(bearer_list[j]);
@@ -392,6 +434,9 @@ void tipc_bearer_remove_dest(u32 bearer_id, u32 dest)
 		tipc_disc_remove_dest(b_ptr->link_req);
 	}
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -438,8 +483,11 @@ int tipc_enable_bearer(const char *name, u32 disc_domain, u32 priority)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_lock_bh(&tipc_net_lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	m_ptr = tipc_media_find(b_names.media_name);
@@ -447,7 +495,11 @@ int tipc_enable_bearer(const char *name, u32 disc_domain, u32 priority)
 		pr_warn("Bearer <%s> rejected, media <%s> not registered\n",
 			name, b_names.media_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -461,6 +513,7 @@ restart:
 	with_this_prio = 1;
 	for (i = MAX_BEARERS; i-- != 0; ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!tipc_bearers[i].active) {
 			bearer_id = i;
 			continue;
@@ -472,6 +525,8 @@ restart:
 		}
 		if ((tipc_bearers[i].priority == priority) &&
 =======
+=======
+>>>>>>> v3.18
 		b_ptr = rtnl_dereference(bearer_list[i]);
 		if (!b_ptr) {
 			bearer_id = i;
@@ -483,13 +538,20 @@ restart:
 			return -EINVAL;
 		}
 		if ((b_ptr->priority == priority) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    (++with_this_prio > 2)) {
 			if (priority-- == 0) {
 				pr_warn("Bearer <%s> rejected, duplicate priority\n",
 					name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto exit;
+=======
+				return -EINVAL;
+>>>>>>> v3.18
 =======
 				return -EINVAL;
 >>>>>>> v3.18
@@ -502,6 +564,7 @@ restart:
 	if (bearer_id >= MAX_BEARERS) {
 		pr_warn("Bearer <%s> rejected, bearer limit reached (%u)\n",
 			name, MAX_BEARERS);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto exit;
 	}
@@ -538,6 +601,8 @@ restart:
 exit:
 	write_unlock_bh(&tipc_net_lock);
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -574,11 +639,15 @@ exit:
 	pr_info("Enabled bearer <%s>, discovery domain %s, priority %u\n",
 		name,
 		tipc_addr_string_fill(addr_string, disc_domain), priority);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return res;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * tipc_block_bearer - Block the bearer with the given name, and reset all its links
  */
@@ -609,6 +678,8 @@ int tipc_block_bearer(const char *name)
 	spin_unlock_bh(&b_ptr->lock);
 	read_unlock_bh(&tipc_net_lock);
 =======
+=======
+>>>>>>> v3.18
  * tipc_reset_bearer - Reset all links established over this bearer
  */
 static int tipc_reset_bearer(struct tipc_bearer *b_ptr)
@@ -616,6 +687,9 @@ static int tipc_reset_bearer(struct tipc_bearer *b_ptr)
 	pr_info("Resetting bearer <%s>\n", b_ptr->name);
 	tipc_link_reset_list(b_ptr->identity);
 	tipc_disc_reset(b_ptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -623,6 +697,7 @@ static int tipc_reset_bearer(struct tipc_bearer *b_ptr)
 /**
  * bearer_disable
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Note: This routine assumes caller holds tipc_net_lock.
  */
@@ -643,6 +718,8 @@ static void bearer_disable(struct tipc_bearer *b_ptr)
 	spin_unlock_bh(&b_ptr->lock);
 	memset(b_ptr, 0, sizeof(struct tipc_bearer));
 =======
+=======
+>>>>>>> v3.18
  * Note: This routine assumes caller holds RTNL lock.
  */
 static void bearer_disable(struct tipc_bearer *b_ptr, bool shutting_down)
@@ -663,6 +740,9 @@ static void bearer_disable(struct tipc_bearer *b_ptr, bool shutting_down)
 		}
 	}
 	kfree_rcu(b_ptr, rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -672,7 +752,10 @@ int tipc_disable_bearer(const char *name)
 	int res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_lock_bh(&tipc_net_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	b_ptr = tipc_bearer_find(name);
@@ -680,6 +763,7 @@ int tipc_disable_bearer(const char *name)
 		pr_warn("Attempt to disable unknown bearer <%s>\n", name);
 		res = -EINVAL;
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bearer_disable(b_ptr);
 		res = 0;
@@ -700,6 +784,8 @@ void tipc_bearer_stop(void)
 	}
 	media_count = 0;
 =======
+=======
+>>>>>>> v3.18
 		bearer_disable(b_ptr, false);
 		res = 0;
 	}
@@ -921,5 +1007,8 @@ void tipc_bearer_stop(void)
 			bearer_list[i] = NULL;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

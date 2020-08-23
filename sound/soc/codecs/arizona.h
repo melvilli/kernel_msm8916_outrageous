@@ -58,7 +58,11 @@
 #define ARIZONA_CLK_147MHZ 6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARIZONA_MAX_DAI  4
+=======
+#define ARIZONA_MAX_DAI  6
+>>>>>>> v3.18
 =======
 #define ARIZONA_MAX_DAI  6
 >>>>>>> v3.18
@@ -86,7 +90,11 @@ struct arizona_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARIZONA_NUM_MIXER_INPUTS 99
+=======
+#define ARIZONA_NUM_MIXER_INPUTS 103
+>>>>>>> v3.18
 =======
 #define ARIZONA_NUM_MIXER_INPUTS 103
 >>>>>>> v3.18
@@ -116,7 +124,11 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 #define ARIZONA_MUX_CTL_DECL(name) \
 	const struct snd_kcontrol_new name##_mux =	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SOC_DAPM_VALUE_ENUM("Route", name##_enum)
+=======
+		SOC_DAPM_ENUM("Route", name##_enum)
+>>>>>>> v3.18
 =======
 		SOC_DAPM_ENUM("Route", name##_enum)
 >>>>>>> v3.18
@@ -141,7 +153,11 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 
 #define ARIZONA_MUX(name, ctrl) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_SOC_DAPM_VALUE_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
+=======
+	SND_SOC_DAPM_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
+>>>>>>> v3.18
 =======
 	SND_SOC_DAPM_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
 >>>>>>> v3.18
@@ -167,7 +183,12 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 	ARIZONA_MUX(name_str " Aux 6", &name##_aux6_mux)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARIZONA_MUX_ROUTES(name) \
+=======
+#define ARIZONA_MUX_ROUTES(widget, name) \
+	{ widget, NULL, name " Input" }, \
+>>>>>>> v3.18
 =======
 #define ARIZONA_MUX_ROUTES(widget, name) \
 	{ widget, NULL, name " Input" }, \
@@ -187,6 +208,7 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 
 #define ARIZONA_DSP_ROUTES(name) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ name, NULL, name " Aux 1" }, \
 	{ name, NULL, name " Aux 2" }, \
 	{ name, NULL, name " Aux 3" }, \
@@ -194,6 +216,8 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 	{ name, NULL, name " Aux 5" }, \
 	{ name, NULL, name " Aux 6" }, \
 =======
+=======
+>>>>>>> v3.18
 	{ name, NULL, name " Preloader"}, \
 	{ name " Preloader", NULL, name " Aux 1" }, \
 	{ name " Preloader", NULL, name " Aux 2" }, \
@@ -201,6 +225,9 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 	{ name " Preloader", NULL, name " Aux 4" }, \
 	{ name " Preloader", NULL, name " Aux 5" }, \
 	{ name " Preloader", NULL, name " Aux 6" }, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ARIZONA_MIXER_INPUT_ROUTES(name " Aux 1"), \
 	ARIZONA_MIXER_INPUT_ROUTES(name " Aux 2"), \
@@ -209,8 +236,13 @@ extern int arizona_mixer_values[ARIZONA_NUM_MIXER_INPUTS];
 	ARIZONA_MIXER_INPUT_ROUTES(name " Aux 5"), \
 	ARIZONA_MIXER_INPUT_ROUTES(name " Aux 6"), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ARIZONA_MIXER_ROUTES(name, name "L"), \
 	ARIZONA_MIXER_ROUTES(name, name "R")
+=======
+	ARIZONA_MIXER_ROUTES(name " Preloader", name "L"), \
+	ARIZONA_MIXER_ROUTES(name " Preloader", name "R")
+>>>>>>> v3.18
 =======
 	ARIZONA_MIXER_ROUTES(name " Preloader", name "L"), \
 	ARIZONA_MIXER_ROUTES(name " Preloader", name "R")
@@ -222,6 +254,11 @@ extern const int arizona_rate_val[ARIZONA_RATE_ENUM_SIZE];
 
 extern const struct soc_enum arizona_isrc_fsl[];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct soc_enum arizona_isrc_fsh[];
+extern const struct soc_enum arizona_asrc_rate1;
+>>>>>>> v3.18
 =======
 extern const struct soc_enum arizona_isrc_fsh[];
 extern const struct soc_enum arizona_asrc_rate1;
@@ -240,6 +277,11 @@ extern const struct soc_enum arizona_lhpf4_mode;
 
 extern const struct soc_enum arizona_ng_hold;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct soc_enum arizona_in_hpf_cut_enum;
+extern const struct soc_enum arizona_in_dmic_osr[];
+>>>>>>> v3.18
 =======
 extern const struct soc_enum arizona_in_hpf_cut_enum;
 extern const struct soc_enum arizona_in_dmic_osr[];
@@ -260,6 +302,10 @@ extern int arizona_set_sysclk(struct snd_soc_codec *codec, int clk_id,
 
 extern const struct snd_soc_dai_ops arizona_dai_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct snd_soc_dai_ops arizona_simple_dai_ops;
+>>>>>>> v3.18
 =======
 extern const struct snd_soc_dai_ops arizona_simple_dai_ops;
 >>>>>>> v3.18
@@ -292,6 +338,11 @@ extern int arizona_set_fll(struct arizona_fll *fll, int source,
 
 extern int arizona_init_spk(struct snd_soc_codec *codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int arizona_init_gpio(struct snd_soc_codec *codec);
+extern int arizona_init_mono(struct snd_soc_codec *codec);
+>>>>>>> v3.18
 =======
 extern int arizona_init_gpio(struct snd_soc_codec *codec);
 extern int arizona_init_mono(struct snd_soc_codec *codec);

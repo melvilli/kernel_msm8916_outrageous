@@ -15,7 +15,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "armada-370.dtsi"
+=======
+#include "armada-370.dtsi"
+>>>>>>> v3.18
 =======
 #include "armada-370.dtsi"
 >>>>>>> v3.18
@@ -35,15 +39,21 @@
 
 	soc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal-regs {
 			serial@12000 {
 				clock-frequency = <200000000>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <MBUS_ID(0xf0, 0x01) 0 0xd0000000 0x100000
 			  MBUS_ID(0x01, 0xe0) 0 0xfff00000 0x100000>;
 
 		internal-regs {
 			serial@12000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -54,6 +64,11 @@
 
 			mdio {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&mdio_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&mdio_pins>;
 				pinctrl-names = "default";
@@ -69,6 +84,11 @@
 
 			ethernet@70000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&ge0_rgmii_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&ge0_rgmii_pins>;
 				pinctrl-names = "default";
@@ -79,6 +99,11 @@
 			};
 			ethernet@74000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&ge1_rgmii_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&ge1_rgmii_pins>;
 				pinctrl-names = "default";
@@ -89,7 +114,10 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			i2c@11000 {
 				pinctrl-0 = <&i2c0_pins>;
 				pinctrl-names = "default";
@@ -107,6 +135,9 @@
 				status = "okay";
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mvsdio@d4000 {
 				pinctrl-0 = <&sdio_pins1>;
@@ -122,7 +153,10 @@
 				status = "disabled";
 				/* No CD or WP GPIOs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				broken-cd;
 			};
 
@@ -148,6 +182,9 @@
 					marvell,pins = "mpp5", "mpp7", "mpp9";
 					marvell,function = "gpo";
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -171,6 +208,7 @@
 				};
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			pcie-controller {
 				status = "okay";
@@ -191,6 +229,8 @@
 		};
 	};
 =======
+=======
+>>>>>>> v3.18
 		};
 
 		pcie-controller {
@@ -226,5 +266,8 @@
 	spdif_in: spdif-in {
 	      compatible = "linux,spdif-dir";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

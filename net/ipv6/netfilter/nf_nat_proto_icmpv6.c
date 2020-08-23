@@ -70,8 +70,13 @@ icmpv6_manip_pkt(struct sk_buff *skb,
 	l3proto->csum_update(skb, iphdroff, &hdr->icmp6_cksum,
 			     tuple, maniptype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdr->icmp6_code == ICMPV6_ECHO_REQUEST ||
 	    hdr->icmp6_code == ICMPV6_ECHO_REPLY) {
+=======
+	if (hdr->icmp6_type == ICMPV6_ECHO_REQUEST ||
+	    hdr->icmp6_type == ICMPV6_ECHO_REPLY) {
+>>>>>>> v3.18
 =======
 	if (hdr->icmp6_type == ICMPV6_ECHO_REQUEST ||
 	    hdr->icmp6_type == ICMPV6_ECHO_REPLY) {

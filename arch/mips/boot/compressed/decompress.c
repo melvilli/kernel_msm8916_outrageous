@@ -46,6 +46,7 @@ void error(char *x)
 
 #ifdef CONFIG_KERNEL_GZIP
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *memcpy(void *dest, const void *src, size_t n)
 {
 	int i;
@@ -58,10 +59,13 @@ void *memcpy(void *dest, const void *src, size_t n)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #include "../../../../lib/decompress_inflate.c"
 #endif
 
 #ifdef CONFIG_KERNEL_BZIP2
+<<<<<<< HEAD
 <<<<<<< HEAD
 void *memset(void *s, int c, size_t n)
 {
@@ -76,6 +80,8 @@ void *memset(void *s, int c, size_t n)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #include "../../../../lib/decompress_bunzip2.c"
 #endif
 
@@ -83,6 +89,9 @@ void *memset(void *s, int c, size_t n)
 #include "../../../../lib/decompress_unlz4.c"
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KERNEL_LZMA
 #include "../../../../lib/decompress_unlzma.c"
@@ -93,7 +102,10 @@ void *memset(void *s, int c, size_t n)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KERNEL_XZ
 #include "../../../../lib/decompress_unxz.c"
 #endif
@@ -110,12 +122,20 @@ void __stack_chk_fail(void)
 	error("stack-protector: Kernel stack is corrupted\n");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void decompress_kernel(unsigned long boot_heap_start)
 {
 	unsigned long zimage_start, zimage_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__stack_chk_guard_setup();
+
+>>>>>>> v3.18
 =======
 	__stack_chk_guard_setup();
 

@@ -27,7 +27,11 @@ void raw_icmp_error(struct sk_buff *, int, u32);
 int raw_local_deliver(struct sk_buff *, int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int 	raw_rcv(struct sock *, struct sk_buff *);
+=======
+int raw_rcv(struct sock *, struct sk_buff *);
+>>>>>>> v3.18
 =======
 int raw_rcv(struct sock *, struct sk_buff *);
 >>>>>>> v3.18
@@ -41,8 +45,13 @@ struct raw_hashinfo {
 
 #ifdef CONFIG_PROC_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  raw_proc_init(void);
 extern void raw_proc_exit(void);
+=======
+int raw_proc_init(void);
+void raw_proc_exit(void);
+>>>>>>> v3.18
 =======
 int raw_proc_init(void);
 void raw_proc_exit(void);

@@ -27,14 +27,20 @@
 #include <media/ov772x.h>
 #include <media/soc_camera.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-chip-ident.h>
 #include <media/v4l2-subdev.h>
 =======
+=======
+>>>>>>> v3.18
 #include <media/v4l2-clk.h>
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-subdev.h>
 #include <media/v4l2-image-sizes.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -368,10 +374,13 @@
 #define SCAL1_2_ACTRL   0x04 /* Auto scaling factor control */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VGA_WIDTH		640
 #define VGA_HEIGHT		480
 #define QVGA_WIDTH		320
 #define QVGA_HEIGHT		240
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OV772X_MAX_WIDTH	VGA_WIDTH
@@ -407,15 +416,21 @@ struct ov772x_priv {
 	struct v4l2_subdev                subdev;
 	struct v4l2_ctrl_handler	  hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ov772x_camera_info        *info;
 	const struct ov772x_color_format *cfmt;
 	const struct ov772x_win_size     *win;
 	int                               model;
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_clk			 *clk;
 	struct ov772x_camera_info        *info;
 	const struct ov772x_color_format *cfmt;
 	const struct ov772x_win_size     *win;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned short                    flag_vflip:1;
 	unsigned short                    flag_hflip:1;
@@ -638,6 +653,7 @@ static int ov772x_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ov772x_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
 {
@@ -649,6 +665,8 @@ static int ov772x_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -689,8 +707,14 @@ static int ov772x_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct ov772x_priv *priv = to_ov772x(sd);
+
+	return soc_camera_set_power(&client->dev, ssdd, priv->clk, on);
+>>>>>>> v3.18
 =======
 	struct ov772x_priv *priv = to_ov772x(sd);
 
@@ -992,11 +1016,17 @@ static int ov772x_video_probe(struct ov772x_priv *priv)
 	case OV7720:
 		devname     = "ov7720";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->model = V4L2_IDENT_OV7720;
 		break;
 	case OV7725:
 		devname     = "ov7725";
 		priv->model = V4L2_IDENT_OV7725;
+=======
+		break;
+	case OV7725:
+		devname     = "ov7725";
+>>>>>>> v3.18
 =======
 		break;
 	case OV7725:
@@ -1030,7 +1060,10 @@ static const struct v4l2_ctrl_ops ov772x_ctrl_ops = {
 
 static struct v4l2_subdev_core_ops ov772x_subdev_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident	= ov772x_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1124,9 +1157,12 @@ static int ov772x_probe(struct i2c_client *client,
 		return priv->hdl.error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ov772x_video_probe(priv);
 	if (ret < 0) {
 =======
+=======
+>>>>>>> v3.18
 	priv->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(priv->clk)) {
 		ret = PTR_ERR(priv->clk);
@@ -1137,6 +1173,9 @@ static int ov772x_probe(struct i2c_client *client,
 	if (ret < 0) {
 		v4l2_clk_put(priv->clk);
 eclkget:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		v4l2_ctrl_handler_free(&priv->hdl);
 	} else {
@@ -1144,6 +1183,10 @@ eclkget:
 		priv->win = &ov772x_win_sizes[0];
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1155,6 +1198,10 @@ static int ov772x_remove(struct i2c_client *client)
 	struct ov772x_priv *priv = to_ov772x(i2c_get_clientdata(client));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 =======
 	v4l2_clk_put(priv->clk);
 >>>>>>> v3.18

@@ -23,6 +23,7 @@ Optional properties:
 
  - ti,nand-ecc-opt:		A string setting the ECC layout to use. One of:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		"sw"		Software method (default)
 		"hw"		Hardware method
@@ -35,6 +36,8 @@ Optional properties:
 
 For inline partiton table parsing (optional):
 =======
+=======
+>>>>>>> v3.18
 		"sw"		1-bit Hamming ecc code via software
 		"hw"		<deprecated> use "ham1" instead
 		"hw-romcode"	<deprecated> use "ham1" instead
@@ -59,6 +62,9 @@ For inline partiton table parsing (optional):
 		Using ELM for ECC error correction frees some CPU cycles.
 
 For inline partition table parsing (optional):
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  - #address-cells: should be set to 1
@@ -83,6 +89,10 @@ Example for an AM33xx board:
 			nand-bus-width = <16>;
 			ti,nand-ecc-opt = "bch8";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ti,nand-xfer-type = "polled";
+>>>>>>> v3.18
 =======
 			ti,nand-xfer-type = "polled";
 >>>>>>> v3.18
@@ -110,7 +120,10 @@ Example for an AM33xx board:
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 How to select correct ECC scheme for your device ?
 --------------------------------------------------
 Higher ECC scheme usually means better protection against bit-flips and
@@ -154,4 +167,7 @@ on various other factors also like;
 		Number of ECC bytes per page = (2 + (2048 / 512) * 26) = 106 B
 		which can be accommodated in the OOB/Spare area of this device
 		(OOBSIZE=128). So this device can use BCH16 ecc-scheme.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

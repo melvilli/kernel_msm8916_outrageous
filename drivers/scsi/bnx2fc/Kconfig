@@ -1,5 +1,6 @@
 config SCSI_BNX2X_FCOE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Broadcom NetXtreme II FCoE support"
 	depends on PCI
 	select NETDEVICES
@@ -11,6 +12,8 @@ config SCSI_BNX2X_FCOE
 	---help---
 	This driver supports FCoE offload for the Broadcom NetXtreme II
 =======
+=======
+>>>>>>> v3.18
 	tristate "QLogic NetXtreme II FCoE support"
 	depends on PCI
 	depends on (IPV6 || IPV6=n)
@@ -22,5 +25,8 @@ config SCSI_BNX2X_FCOE
 	select CNIC
 	---help---
 	This driver supports FCoE offload for the QLogic NetXtreme II
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	devices.

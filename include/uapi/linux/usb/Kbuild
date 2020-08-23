@@ -9,10 +9,15 @@ header-y += g_printer.h
 header-y += gadgetfs.h
 header-y += midi.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += msm_ext_chg.h
 header-y += tmc.h
 header-y += video.h
 header-y += ccid_bridge.h
+=======
+header-y += tmc.h
+header-y += video.h
+>>>>>>> v3.18
 =======
 header-y += tmc.h
 header-y += video.h

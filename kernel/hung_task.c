@@ -16,6 +16,11 @@
 #include <linux/export.h>
 #include <linux/sysctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/utsname.h>
+#include <trace/events/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/utsname.h>
 #include <trace/events/sched.h>
@@ -25,7 +30,11 @@
  * The number of tasks checked:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __read_mostly sysctl_hung_task_check_count = PID_MAX_LIMIT;
+=======
+int __read_mostly sysctl_hung_task_check_count = PID_MAX_LIMIT;
+>>>>>>> v3.18
 =======
 int __read_mostly sysctl_hung_task_check_count = PID_MAX_LIMIT;
 >>>>>>> v3.18
@@ -45,7 +54,11 @@ int __read_mostly sysctl_hung_task_check_count = PID_MAX_LIMIT;
 unsigned long __read_mostly sysctl_hung_task_timeout_secs = CONFIG_DEFAULT_HUNG_TASK_TIMEOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __read_mostly sysctl_hung_task_warnings = 10;
+=======
+int __read_mostly sysctl_hung_task_warnings = 10;
+>>>>>>> v3.18
 =======
 int __read_mostly sysctl_hung_task_warnings = 10;
 >>>>>>> v3.18
@@ -64,13 +77,19 @@ unsigned int __read_mostly sysctl_hung_task_panic =
 static int __init hung_task_panic_setup(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysctl_hung_task_panic = simple_strtoul(str, NULL, 0);
 
 =======
+=======
+>>>>>>> v3.18
 	int rc = kstrtouint(str, 0, &sysctl_hung_task_panic);
 
 	if (rc)
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -112,10 +131,13 @@ static void check_hung_task(struct task_struct *t, unsigned long timeout)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sysctl_hung_task_warnings)
 		return;
 	sysctl_hung_task_warnings--;
 =======
+=======
+>>>>>>> v3.18
 
 	trace_sched_process_hang(t);
 
@@ -124,6 +146,9 @@ static void check_hung_task(struct task_struct *t, unsigned long timeout)
 
 	if (sysctl_hung_task_warnings > 0)
 		sysctl_hung_task_warnings--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -131,11 +156,14 @@ static void check_hung_task(struct task_struct *t, unsigned long timeout)
 	 * complain:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "INFO: task %s:%d blocked for more than "
 			"%ld seconds.\n", t->comm, t->pid, timeout);
 	printk(KERN_ERR "\"echo 0 > /proc/sys/kernel/hung_task_timeout_secs\""
 			" disables this message.\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_err("INFO: task %s:%d blocked for more than %ld seconds.\n",
 		t->comm, t->pid, timeout);
 	pr_err("      %s %s %.*s\n",
@@ -144,6 +172,9 @@ static void check_hung_task(struct task_struct *t, unsigned long timeout)
 		init_utsname()->version);
 	pr_err("\"echo 0 > /proc/sys/kernel/hung_task_timeout_secs\""
 		" disables this message.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sched_show_task(t);
 	debug_show_held_locks(t);
@@ -241,7 +272,10 @@ int proc_dohung_task_timeout_secs(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static atomic_t reset_hung_task = ATOMIC_INIT(0);
 
 void reset_hung_task_detector(void)
@@ -250,6 +284,9 @@ void reset_hung_task_detector(void)
 }
 EXPORT_SYMBOL_GPL(reset_hung_task_detector);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * kthread which checks for tasks stuck in D state
@@ -265,6 +302,12 @@ static int watchdog(void *dummy)
 			timeout = sysctl_hung_task_timeout_secs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (atomic_xchg(&reset_hung_task, 0))
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (atomic_xchg(&reset_hung_task, 0))
 			continue;
@@ -284,8 +327,12 @@ static int __init hung_task_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(hung_task_init);
+=======
+subsys_initcall(hung_task_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(hung_task_init);
 >>>>>>> v3.18

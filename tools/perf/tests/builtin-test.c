@@ -4,12 +4,18 @@
  * Builtin regression testing command: ever growing number of sanity tests
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "builtin.h"
 =======
+=======
+>>>>>>> v3.18
 #include <unistd.h>
 #include <string.h>
 #include "builtin.h"
 #include "hist.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "intlist.h"
 #include "tests.h"
@@ -58,11 +64,14 @@ static struct test {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.desc = "Test dso data interface",
 		.func = test__dso_data,
 	},
 	{
 =======
+=======
+>>>>>>> v3.18
 		.desc = "Test dso data read",
 		.func = test__dso_data,
 	},
@@ -75,6 +84,9 @@ static struct test {
 		.func = test__dso_data_reopen,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.desc = "roundtrip evsel->name check",
 		.func = test__perf_evsel__roundtrip_name_test,
@@ -93,7 +105,11 @@ static struct test {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.desc = "Test matching and linking mutliple hists",
+=======
+		.desc = "Test matching and linking multiple hists",
+>>>>>>> v3.18
 =======
 		.desc = "Test matching and linking multiple hists",
 >>>>>>> v3.18
@@ -120,7 +136,10 @@ static struct test {
 		.func = test__sw_clock_freq,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(__x86_64__) || defined(__i386__)
 	{
 		.desc = "Test converting perf time to TSC",
@@ -183,6 +202,9 @@ static struct test {
 		.desc = "Add fd to a fdarray, making it autogrow",
 		.func = test__fdarray__add,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.func = NULL,
@@ -214,7 +236,10 @@ static bool perf_test__matches(int curr, int argc, const char *argv[])
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int run_test(struct test *test)
 {
 	int status, err = -1, child = fork();
@@ -245,6 +270,9 @@ static int run_test(struct test *test)
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __cmd_test(int argc, const char *argv[], struct intlist *skiplist)
 {
@@ -275,7 +303,11 @@ static int __cmd_test(int argc, const char *argv[], struct intlist *skiplist)
 
 		pr_debug("\n--- start ---\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = tests[curr].func();
+=======
+		err = run_test(&tests[curr]);
+>>>>>>> v3.18
 =======
 		err = run_test(&tests[curr]);
 >>>>>>> v3.18
@@ -329,11 +361,17 @@ int cmd_test(int argc, const char **argv, const char *prefix __maybe_unused)
 	};
 	struct intlist *skiplist = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
         int ret = hists__init();
 
         if (ret < 0)
                 return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	argc = parse_options(argc, argv, test_options, test_usage, 0);
@@ -345,7 +383,11 @@ int cmd_test(int argc, const char **argv, const char *prefix __maybe_unused)
 	symbol_conf.try_vmlinux_path = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (symbol__init() < 0)
+=======
+	if (symbol__init(NULL) < 0)
+>>>>>>> v3.18
 =======
 	if (symbol__init(NULL) < 0)
 >>>>>>> v3.18

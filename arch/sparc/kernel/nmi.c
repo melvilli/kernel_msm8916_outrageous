@@ -69,6 +69,11 @@ EXPORT_SYMBOL(touch_nmi_watchdog);
 static void die_nmi(const char *str, struct pt_regs *regs, int do_panic)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int this_cpu = smp_processor_id();
+
+>>>>>>> v3.18
 =======
 	int this_cpu = smp_processor_id();
 
@@ -77,6 +82,7 @@ static void die_nmi(const char *str, struct pt_regs *regs, int do_panic)
 		       pt_regs_trap_type(regs), SIGINT) == NOTIFY_STOP)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	console_verbose();
 	bust_spinlocks(1);
@@ -96,10 +102,15 @@ static void die_nmi(const char *str, struct pt_regs *regs, int do_panic)
 	local_irq_enable();
 	do_exit(SIGBUS);
 =======
+=======
+>>>>>>> v3.18
 	if (do_panic || panic_on_oops)
 		panic("Watchdog detected hard LOCKUP on cpu %d", this_cpu);
 	else
 		WARN(1, "Watchdog detected hard LOCKUP on cpu %d", this_cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -124,17 +135,23 @@ notrace __kprobes void perfctr_irq(int irq, struct pt_regs *regs)
 
 	sum = local_cpu_data().irq0_irqs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__get_cpu_var(nmi_touch)) {
 		__get_cpu_var(nmi_touch) = 0;
 		touched = 1;
 	}
 	if (!touched && __get_cpu_var(last_irq_sum) == sum) {
 =======
+=======
+>>>>>>> v3.18
 	if (__this_cpu_read(nmi_touch)) {
 		__this_cpu_write(nmi_touch, 0);
 		touched = 1;
 	}
 	if (!touched && __this_cpu_read(last_irq_sum) == sum) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__this_cpu_inc(alert_counter);
 		if (__this_cpu_read(alert_counter) == 30 * nmi_hz)
@@ -142,15 +159,21 @@ notrace __kprobes void perfctr_irq(int irq, struct pt_regs *regs)
 				regs, panic_on_timeout);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_cpu_var(last_irq_sum) = sum;
 		__this_cpu_write(alert_counter, 0);
 	}
 	if (__get_cpu_var(wd_enabled)) {
 =======
+=======
+>>>>>>> v3.18
 		__this_cpu_write(last_irq_sum, sum);
 		__this_cpu_write(alert_counter, 0);
 	}
 	if (__this_cpu_read(wd_enabled)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pcr_ops->write_pic(0, pcr_ops->nmi_picl_value(nmi_hz));
 		pcr_ops->write_pcr(0, pcr_ops->pcr_nmi_enable);
@@ -169,7 +192,10 @@ static inline unsigned int get_nmi_count(int cpu)
 static __init void nmi_cpu_busy(void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_enable_in_hardirq();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (endflag == 0)
@@ -197,7 +223,11 @@ void stop_nmi_watchdog(void *unused)
 {
 	pcr_ops->write_pcr(0, pcr_ops->pcr_nmi_disable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(wd_enabled) = 0;
+=======
+	__this_cpu_write(wd_enabled, 0);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(wd_enabled, 0);
 >>>>>>> v3.18
@@ -254,7 +284,11 @@ error:
 void start_nmi_watchdog(void *unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(wd_enabled) = 1;
+=======
+	__this_cpu_write(wd_enabled, 1);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(wd_enabled, 1);
 >>>>>>> v3.18
@@ -269,7 +303,11 @@ void start_nmi_watchdog(void *unused)
 static void nmi_adjust_hz_one(void *unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!__get_cpu_var(wd_enabled))
+=======
+	if (!__this_cpu_read(wd_enabled))
+>>>>>>> v3.18
 =======
 	if (!__this_cpu_read(wd_enabled))
 >>>>>>> v3.18

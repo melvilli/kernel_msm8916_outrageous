@@ -15,7 +15,11 @@ Authors:
         Kyösti Mälkki <kmalkki@cc.hut.fi>
         Hong-Gunn Chew <hglinux@gunnet.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>
+=======
+        Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
         Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

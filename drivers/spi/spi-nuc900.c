@@ -10,9 +10,13 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
+=======
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/spinlock.h>
 >>>>>>> v3.18
@@ -43,7 +47,13 @@
 #define ENINT		(0x01 << 17)
 #define ENFLG		(0x01 << 16)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TXNUM		(0x03 << 8)
+=======
+#define SLEEP		(0x0f << 12)
+#define TXNUM		(0x03 << 8)
+#define TXBITLEN	(0x1f << 3)
+>>>>>>> v3.18
 =======
 #define SLEEP		(0x0f << 12)
 #define TXNUM		(0x03 << 8)
@@ -68,6 +78,7 @@ struct nuc900_spi {
 	unsigned char		*rx;
 	struct clk		*clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource		*ioarea;
 	struct spi_master	*master;
 	struct spi_device	*curdev;
@@ -75,6 +86,11 @@ struct nuc900_spi {
 	struct nuc900_spi_info *pdata;
 	spinlock_t		lock;
 	struct resource		*res;
+=======
+	struct spi_master	*master;
+	struct nuc900_spi_info *pdata;
+	spinlock_t		lock;
+>>>>>>> v3.18
 =======
 	struct spi_master	*master;
 	struct nuc900_spi_info *pdata;
@@ -137,8 +153,12 @@ static void nuc900_spi_chipsel(struct spi_device *spi, int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nuc900_spi_setup_txnum(struct nuc900_spi *hw,
 							unsigned int txnum)
+=======
+static void nuc900_spi_setup_txnum(struct nuc900_spi *hw, unsigned int txnum)
+>>>>>>> v3.18
 =======
 static void nuc900_spi_setup_txnum(struct nuc900_spi *hw, unsigned int txnum)
 >>>>>>> v3.18
@@ -149,11 +169,17 @@ static void nuc900_spi_setup_txnum(struct nuc900_spi *hw, unsigned int txnum)
 	spin_lock_irqsave(&hw->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = __raw_readl(hw->regs + USI_CNT);
 
 	if (!txnum)
 		val &= ~TXNUM;
 	else
+=======
+	val = __raw_readl(hw->regs + USI_CNT) & ~TXNUM;
+
+	if (txnum)
+>>>>>>> v3.18
 =======
 	val = __raw_readl(hw->regs + USI_CNT) & ~TXNUM;
 
@@ -176,7 +202,11 @@ static void nuc900_spi_setup_txbitlen(struct nuc900_spi *hw,
 	spin_lock_irqsave(&hw->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = __raw_readl(hw->regs + USI_CNT);
+=======
+	val = __raw_readl(hw->regs + USI_CNT) & ~TXBITLEN;
+>>>>>>> v3.18
 =======
 	val = __raw_readl(hw->regs + USI_CNT) & ~TXBITLEN;
 >>>>>>> v3.18
@@ -205,6 +235,7 @@ static void nuc900_spi_gobusy(struct nuc900_spi *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nuc900_spi_setupxfer(struct spi_device *spi,
 				 struct spi_transfer *t)
 {
@@ -216,6 +247,8 @@ static int nuc900_spi_setup(struct spi_device *spi)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned int hw_txbyte(struct nuc900_spi *hw, int count)
@@ -333,6 +366,7 @@ static void nuc900_set_sleep(struct nuc900_spi *hw, unsigned int sleep)
 	spin_lock_irqsave(&hw->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = __raw_readl(hw->regs + USI_CNT);
 
 	if (sleep)
@@ -340,11 +374,16 @@ static void nuc900_set_sleep(struct nuc900_spi *hw, unsigned int sleep)
 	else
 		val &= ~(0x0f << 12);
 =======
+=======
+>>>>>>> v3.18
 	val = __raw_readl(hw->regs + USI_CNT) & ~SLEEP;
 
 	if (sleep)
 		val |= (sleep << 12);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__raw_writel(val, hw->regs + USI_CNT);
 
@@ -392,6 +431,10 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 	struct nuc900_spi *hw;
 	struct spi_master *master;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource *res;
+>>>>>>> v3.18
 =======
 	struct resource *res;
 >>>>>>> v3.18
@@ -400,6 +443,7 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 	master = spi_alloc_master(&pdev->dev, sizeof(struct nuc900_spi));
 	if (master == NULL) {
 		dev_err(&pdev->dev, "No memory for spi_master\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = -ENOMEM;
 		goto err_nomem;
@@ -410,12 +454,17 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 	hw->pdata  = pdev->dev.platform_data;
 	hw->dev = &pdev->dev;
 =======
+=======
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
 	hw = spi_master_get_devdata(master);
 	hw->master = master;
 	hw->pdata  = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (hw->pdata == NULL) {
@@ -427,6 +476,7 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, hw);
 	init_completion(&hw->done);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	master->mode_bits          = SPI_MODE_0;
 	master->num_chipselect     = hw->pdata->num_cs;
@@ -461,6 +511,8 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	master->mode_bits          = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
 	if (hw->pdata->lsb)
 		master->mode_bits |= SPI_LSB_FIRST;
@@ -477,11 +529,15 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 		goto err_pdata;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hw->irq = platform_get_irq(pdev, 0);
 	if (hw->irq < 0) {
 		dev_err(&pdev->dev, "No IRQ specified\n");
 		err = -ENOENT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_irq;
 	}
@@ -498,6 +554,8 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 		err = PTR_ERR(hw->clk);
 		goto err_clk;
 =======
+=======
+>>>>>>> v3.18
 		goto err_pdata;
 	}
 
@@ -513,6 +571,9 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "No clock for device\n");
 		err = PTR_ERR(hw->clk);
 		goto err_pdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -530,6 +591,7 @@ static int nuc900_spi_probe(struct platform_device *pdev)
 err_register:
 	clk_disable(hw->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(hw->clk);
 err_clk:
 	free_irq(hw->irq, hw);
@@ -546,6 +608,10 @@ err_nomem:
 err_pdata:
 	spi_master_put(hw->master);
 >>>>>>> v3.18
+=======
+err_pdata:
+	spi_master_put(hw->master);
+>>>>>>> v3.18
 	return err;
 }
 
@@ -553,6 +619,7 @@ static int nuc900_spi_remove(struct platform_device *dev)
 {
 	struct nuc900_spi *hw = platform_get_drvdata(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	free_irq(hw->irq, hw);
 
@@ -568,6 +635,10 @@ static int nuc900_spi_remove(struct platform_device *dev)
 	release_mem_region(hw->res->start, resource_size(hw->res));
 	kfree(hw->ioarea);
 
+=======
+	spi_bitbang_stop(&hw->bitbang);
+	clk_disable(hw->clk);
+>>>>>>> v3.18
 =======
 	spi_bitbang_stop(&hw->bitbang);
 	clk_disable(hw->clk);

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/ni_6514.c
     driver for National Instruments PCI-6514
 
@@ -56,6 +57,8 @@ except maybe the 6514.
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 =======
+=======
+>>>>>>> v3.18
  * ni_65xx.c
  * Comedi driver for National Instruments PCI-65xx static dio boards
  *
@@ -130,11 +133,15 @@ except maybe the 6514.
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "../comedidev.h"
 
 #include "comedi_fc.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "mite.h"
 
@@ -190,6 +197,8 @@ static inline unsigned Filter_Enable(unsigned port)
 #define OverflowIntEnable		0x02
 #define EdgeIntEnable			0x01
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * PCI BAR1 Register Map
@@ -253,6 +262,9 @@ static inline unsigned Filter_Enable(unsigned port)
 #define NI_65XX_PORT_TO_CHAN(x)		((x) * 8)
 #define NI_65XX_CHAN_TO_PORT(x)		((x) / 8)
 #define NI_65XX_CHAN_TO_MASK(x)		(1 << ((x) % 8))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum ni_65xx_boardid {
@@ -286,7 +298,11 @@ struct ni_65xx_board {
 	unsigned num_di_ports;
 	unsigned num_do_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned invert_outputs:1;
+=======
+	unsigned legacy_invert:1;
+>>>>>>> v3.18
 =======
 	unsigned legacy_invert:1;
 >>>>>>> v3.18
@@ -325,7 +341,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.name		= "pci-6513",
 		.num_do_ports	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -334,7 +354,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.name		= "pxi-6513",
 		.num_do_ports	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -344,7 +368,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.num_di_ports	= 4,
 		.num_do_ports	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -354,7 +382,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.num_di_ports	= 4,
 		.num_do_ports	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -364,7 +396,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.num_di_ports	= 4,
 		.num_do_ports	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -374,7 +410,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.num_di_ports	= 4,
 		.num_do_ports	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -383,7 +423,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.name		= "pci-6516",
 		.num_do_ports	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -392,7 +436,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.name		= "pci-6517",
 		.num_do_ports	= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -402,7 +450,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.num_di_ports	= 2,
 		.num_do_ports	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -412,7 +464,11 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 		.num_di_ports	= 2,
 		.num_do_ports	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.invert_outputs	= 1,
+=======
+		.legacy_invert	= 1,
+>>>>>>> v3.18
 =======
 		.legacy_invert	= 1,
 >>>>>>> v3.18
@@ -444,6 +500,7 @@ static const struct ni_65xx_board ni_65xx_boards[] = {
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned ni_65xx_port_by_channel(unsigned channel)
 {
@@ -523,6 +580,8 @@ static int ni_65xx_config_filter(struct comedi_device *dev,
 
 	return 2;
 =======
+=======
+>>>>>>> v3.18
 static bool ni_65xx_legacy_invert_outputs;
 module_param_named(legacy_invert_outputs, ni_65xx_legacy_invert_outputs,
 		   bool, 0444);
@@ -604,11 +663,15 @@ static void ni_65xx_disable_edge_detection(struct comedi_device *dev)
 	ni_65xx_update_edge_detection(dev, 32, 0, 0);
 	/* clear edge detection for channels 64 to 95 */
 	ni_65xx_update_edge_detection(dev, 64, 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ni_65xx_dio_insn_config(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   struct comedi_insn *insn, unsigned int *data)
 {
@@ -648,6 +711,8 @@ static int ni_65xx_dio_insn_config(struct comedi_device *dev,
 	}
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				   struct comedi_insn *insn,
 				   unsigned int *data)
 {
@@ -712,11 +777,15 @@ static int ni_65xx_dio_insn_config(struct comedi_device *dev,
 	}
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 struct comedi_insn *insn, unsigned int *data)
 {
@@ -735,6 +804,8 @@ static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 		unsigned port_mask, port_data, port_read_bits;
 		int bitshift = base_port_channel - base_bitfield_channel;
 =======
+=======
+>>>>>>> v3.18
 				 struct comedi_insn *insn,
 				 unsigned int *data)
 {
@@ -750,6 +821,9 @@ static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 		int base_port_channel = NI_65XX_PORT_TO_CHAN(port_offset);
 		unsigned port_mask, port_data, bits;
 		int bitshift = base_port_channel - base_chan;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (bitshift >= 32)
@@ -765,6 +839,7 @@ static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 		}
 		port_mask &= 0xff;
 		port_data &= 0xff;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (port_mask) {
 			unsigned bits;
@@ -793,6 +868,8 @@ static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 
 		read_bits |= port_read_bits;
 =======
+=======
+>>>>>>> v3.18
 
 		/* update the outputs */
 		if (port_mask) {
@@ -813,6 +890,9 @@ static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 			bits >>= -bitshift;
 
 		read_bits |= bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	data[1] = read_bits;
@@ -822,6 +902,7 @@ static int ni_65xx_dio_insn_bits(struct comedi_device *dev,
 static irqreturn_t ni_65xx_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ni_65xx_private *devpriv = dev->private;
 	struct comedi_subdevice *s = &dev->subdevices[2];
@@ -838,6 +919,8 @@ static irqreturn_t ni_65xx_interrupt(int irq, void *d)
 
 	comedi_buf_put(s->async, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s = dev->read_subdev;
 	unsigned int status;
 
@@ -851,6 +934,9 @@ static irqreturn_t ni_65xx_interrupt(int irq, void *d)
 	       dev->mmio + NI_65XX_CLR_REG);
 
 	comedi_buf_put(s, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s->async->events |= COMEDI_CB_EOS;
 	comedi_event(dev, s);
@@ -886,7 +972,11 @@ static int ni_65xx_intr_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, 0);
 	err |= cfc_check_trigger_arg_is(&cmd->convert_arg, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, 1);
+=======
+	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
+>>>>>>> v3.18
 =======
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 >>>>>>> v3.18
@@ -896,10 +986,16 @@ static int ni_65xx_intr_cmdtest(struct comedi_device *dev,
 		return 3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* step 4: fix up any arguments */
 
 	if (err)
 		return 4;
+=======
+	/* Step 4: fix up any arguments */
+
+	/* Step 5: check channel list if it exists */
+>>>>>>> v3.18
 =======
 	/* Step 4: fix up any arguments */
 
@@ -913,6 +1009,7 @@ static int ni_65xx_intr_cmd(struct comedi_device *dev,
 			    struct comedi_subdevice *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ni_65xx_private *devpriv = dev->private;
 	/* struct comedi_cmd *cmd = &s->async->cmd; */
 
@@ -922,11 +1019,16 @@ static int ni_65xx_intr_cmd(struct comedi_device *dev,
 	       MasterInterruptEnable | EdgeIntEnable,
 	       devpriv->mite->daq_io_addr + Master_Interrupt_Control);
 =======
+=======
+>>>>>>> v3.18
 	writeb(NI_65XX_CLR_EDGE_INT | NI_65XX_CLR_OVERFLOW_INT,
 	       dev->mmio + NI_65XX_CLR_REG);
 	writeb(NI_65XX_CTRL_FALL_EDGE_ENA | NI_65XX_CTRL_RISE_EDGE_ENA |
 	       NI_65XX_CTRL_INT_ENA | NI_65XX_CTRL_EDGE_ENA,
 	       dev->mmio + NI_65XX_CTRL_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -936,9 +1038,13 @@ static int ni_65xx_intr_cancel(struct comedi_device *dev,
 			       struct comedi_subdevice *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ni_65xx_private *devpriv = dev->private;
 
 	writeb(0x00, devpriv->mite->daq_io_addr + Master_Interrupt_Control);
+=======
+	writeb(0x00, dev->mmio + NI_65XX_CTRL_REG);
+>>>>>>> v3.18
 =======
 	writeb(0x00, dev->mmio + NI_65XX_CTRL_REG);
 >>>>>>> v3.18
@@ -949,7 +1055,12 @@ static int ni_65xx_intr_cancel(struct comedi_device *dev,
 static int ni_65xx_intr_insn_bits(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct comedi_insn *insn, unsigned int *data)
+=======
+				  struct comedi_insn *insn,
+				  unsigned int *data)
+>>>>>>> v3.18
 =======
 				  struct comedi_insn *insn,
 				  unsigned int *data)
@@ -964,6 +1075,7 @@ static int ni_65xx_intr_insn_config(struct comedi_device *dev,
 				    struct comedi_insn *insn,
 				    unsigned int *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ni_65xx_private *devpriv = dev->private;
 
@@ -1000,6 +1112,8 @@ static int ni_65xx_intr_insn_config(struct comedi_device *dev,
 
 	return 2;
 =======
+=======
+>>>>>>> v3.18
 	switch (data[0]) {
 	case INSN_CONFIG_CHANGE_NOTIFY:
 		/* add instruction to check_insn_config_length() */
@@ -1062,6 +1176,9 @@ static int ni_65xx_mite_init(struct pci_dev *pcidev)
 	/* finished with MITE registers */
 	iounmap(mite_base);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1071,7 +1188,10 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
 	const struct ni_65xx_board *board = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ni_65xx_private *devpriv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct comedi_subdevice *s;
@@ -1089,6 +1209,7 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -1109,6 +1230,8 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	dev_info(dev->class_dev, "board: %s, ID=0x%02x", dev->board_name,
 	       readb(devpriv->mite->daq_io_addr + ID_Register));
 =======
+=======
+>>>>>>> v3.18
 	ret = ni_65xx_mite_init(pcidev);
 	if (ret)
 		return ret;
@@ -1130,6 +1253,9 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 
 	dev_info(dev->class_dev, "board: %s, ID=0x%02x", dev->board_name,
 	       readb(dev->mmio + NI_65XX_ID_REG));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 4);
@@ -1138,6 +1264,7 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 
 	s = &dev->subdevices[0];
 	if (board->num_di_ports) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		s->type = COMEDI_SUBD_DI;
 		s->subdev_flags = SDF_READABLE;
@@ -1154,6 +1281,8 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
 =======
+=======
+>>>>>>> v3.18
 		s->type		= COMEDI_SUBD_DI;
 		s->subdev_flags	= SDF_READABLE;
 		s->n_chan	= NI_65XX_PORT_TO_CHAN(board->num_di_ports);
@@ -1166,11 +1295,15 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 		s->private = (void *)0;
 	} else {
 		s->type		= COMEDI_SUBD_UNUSED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	s = &dev->subdevices[1];
 	if (board->num_do_ports) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		s->type = COMEDI_SUBD_DO;
 		s->subdev_flags = SDF_READABLE | SDF_WRITABLE;
@@ -1186,6 +1319,8 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
 =======
+=======
+>>>>>>> v3.18
 		s->type		= COMEDI_SUBD_DO;
 		s->subdev_flags	= SDF_WRITABLE;
 		s->n_chan	= NI_65XX_PORT_TO_CHAN(board->num_do_ports);
@@ -1212,11 +1347,15 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 		}
 	} else {
 		s->type		= COMEDI_SUBD_UNUSED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	s = &dev->subdevices[2];
 	if (board->num_dio_ports) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		s->type = COMEDI_SUBD_DIO;
 		s->subdev_flags = SDF_READABLE | SDF_WRITABLE;
@@ -1279,6 +1418,8 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		s->type		= COMEDI_SUBD_DIO;
 		s->subdev_flags	= SDF_READABLE | SDF_WRITABLE;
 		s->n_chan	= NI_65XX_PORT_TO_CHAN(board->num_dio_ports);
@@ -1319,12 +1460,16 @@ static int ni_65xx_auto_attach(struct comedi_device *dev,
 	ni_65xx_disable_input_filters(dev);
 	ni_65xx_disable_edge_detection(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static void ni_65xx_detach(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ni_65xx_private *devpriv = dev->private;
 	int i;
@@ -1353,6 +1498,8 @@ static struct comedi_driver ni_65xx_driver = {
 	.auto_attach = ni_65xx_auto_attach,
 	.detach = ni_65xx_detach,
 =======
+=======
+>>>>>>> v3.18
 	if (dev->mmio)
 		writeb(0x00, dev->mmio + NI_65XX_CTRL_REG);
 	comedi_pci_detach(dev);
@@ -1363,6 +1510,9 @@ static struct comedi_driver ni_65xx_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= ni_65xx_auto_attach,
 	.detach		= ni_65xx_detach,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1373,7 +1523,11 @@ static int ni_65xx_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ni_65xx_pci_table) = {
+=======
+static const struct pci_device_id ni_65xx_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ni_65xx_pci_table[] = {
 >>>>>>> v3.18
@@ -1413,7 +1567,11 @@ module_comedi_pci_driver(ni_65xx_driver, ni_65xx_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for NI PCI-65xx static dio boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for NI PCI-65xx static dio boards");
 >>>>>>> v3.18

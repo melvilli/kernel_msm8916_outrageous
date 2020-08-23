@@ -100,6 +100,10 @@ static int aat2870_ldo_is_enabled(struct regulator_dev *rdev)
 static struct regulator_ops aat2870_ldo_ops = {
 	.list_voltage = regulator_list_voltage_table,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.map_voltage = regulator_map_voltage_ascend,
+>>>>>>> v3.18
 =======
 	.map_voltage = regulator_map_voltage_ascend,
 >>>>>>> v3.18
@@ -179,9 +183,15 @@ static int aat2870_regulator_probe(struct platform_device *pdev)
 	config.dev = &pdev->dev;
 	config.driver_data = ri;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config.init_data = pdev->dev.platform_data;
 
 	rdev = regulator_register(&ri->desc, &config);
+=======
+	config.init_data = dev_get_platdata(&pdev->dev);
+
+	rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
+>>>>>>> v3.18
 =======
 	config.init_data = dev_get_platdata(&pdev->dev);
 
@@ -198,6 +208,7 @@ static int aat2870_regulator_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aat2870_regulator_remove(struct platform_device *pdev)
 {
 	struct regulator_dev *rdev = platform_get_drvdata(pdev);
@@ -208,6 +219,8 @@ static int aat2870_regulator_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver aat2870_regulator_driver = {
 	.driver = {
 		.name	= "aat2870-regulator",
@@ -215,7 +228,10 @@ static struct platform_driver aat2870_regulator_driver = {
 	},
 	.probe	= aat2870_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= aat2870_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

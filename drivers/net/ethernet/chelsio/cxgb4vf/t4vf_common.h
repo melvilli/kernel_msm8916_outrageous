@@ -40,10 +40,13 @@
 
 #define CHELSIO_CHIP_CODE(version, revision) (((version) << 4) | (revision))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CHELSIO_CHIP_VERSION(code) ((code) >> 4)
 #define CHELSIO_CHIP_RELEASE(code) ((code) & 0xf)
 
 =======
+=======
+>>>>>>> v3.18
 #define CHELSIO_CHIP_VERSION(code) (((code) >> 4) & 0xf)
 #define CHELSIO_CHIP_RELEASE(code) ((code) & 0xf)
 
@@ -54,11 +57,15 @@
  *   F  = "0" for PF 0..3; "4".."7" for PF4..7; and "8" for VFs
  *   PP = adapter product designation
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CHELSIO_T4		0x4
 #define CHELSIO_T5		0x5
 
 enum chip_type {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	T4_A1 = CHELSIO_CHIP_CODE(CHELSIO_T4, 0),
 	T4_A2 = CHELSIO_CHIP_CODE(CHELSIO_T4, 1),
@@ -69,6 +76,8 @@ enum chip_type {
 	T5_A1 = CHELSIO_CHIP_CODE(CHELSIO_T5, 0),
 	T5_FIRST_REV	= T5_A1,
 =======
+=======
+>>>>>>> v3.18
 	T4_A1 = CHELSIO_CHIP_CODE(CHELSIO_T4, 1),
 	T4_A2 = CHELSIO_CHIP_CODE(CHELSIO_T4, 2),
 	T4_FIRST_REV	= T4_A1,
@@ -77,6 +86,9 @@ enum chip_type {
 	T5_A0 = CHELSIO_CHIP_CODE(CHELSIO_T5, 0),
 	T5_A1 = CHELSIO_CHIP_CODE(CHELSIO_T5, 1),
 	T5_FIRST_REV	= T5_A0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	T5_LAST_REV	= T5_A1,
 };
@@ -152,6 +164,10 @@ struct dev_params {
 struct sge_params {
 	u32 sge_control;		/* padding, boundaries, lengths, etc. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 sge_control2;		/* T5: more of the same */
+>>>>>>> v3.18
 =======
 	u32 sge_control2;		/* T5: more of the same */
 >>>>>>> v3.18
@@ -161,6 +177,10 @@ struct sge_params {
 	u32 sge_fl_buffer_size[16];	/* free list buffer sizes */
 	u32 sge_ingress_rx_threshold;	/* RX counter interrupt threshold[4] */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 sge_congestion_control;     /* congestion thresholds, etc. */
+>>>>>>> v3.18
 =======
 	u32 sge_congestion_control;     /* congestion thresholds, etc. */
 >>>>>>> v3.18
@@ -236,6 +256,10 @@ struct adapter_params {
 	struct rss_params rss;		/* Receive Side Scaling */
 	struct vf_resources vfres;	/* Virtual Function Resource limits */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum chip_type chip;		/* chip code */
+>>>>>>> v3.18
 =======
 	enum chip_type chip;		/* chip code */
 >>>>>>> v3.18
@@ -257,13 +281,19 @@ static inline bool is_10g_port(const struct link_config *lc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool is_x_10g_port(const struct link_config *lc)
 {
 	return (lc->supported & FW_PORT_CAP_SPEED_10G) != 0 ||
 		(lc->supported & FW_PORT_CAP_SPEED_40G) != 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int core_ticks_per_usec(const struct adapter *adapter)
 {
@@ -299,7 +329,11 @@ static inline int t4vf_wr_mbox_ns(struct adapter *adapter, const void *cmd,
 static inline int is_t4(enum chip_type chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (chip >= T4_FIRST_REV && chip <= T4_LAST_REV);
+=======
+	return CHELSIO_CHIP_VERSION(chip) == CHELSIO_T4;
+>>>>>>> v3.18
 =======
 	return CHELSIO_CHIP_VERSION(chip) == CHELSIO_T4;
 >>>>>>> v3.18
@@ -310,7 +344,10 @@ int t4vf_port_init(struct adapter *, int);
 
 int t4vf_fw_reset(struct adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int t4vf_query_params(struct adapter *, unsigned int, const u32 *, u32 *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int t4vf_set_params(struct adapter *, unsigned int, const u32 *, const u32 *);

@@ -7,8 +7,11 @@
 #include <sys/mount.h>
 #include <sys/wait.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/vfs.h>
 #include <sys/statvfs.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <stdlib.h>
@@ -38,6 +41,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef MS_REC
 # define MS_REC 16384
 #endif
@@ -47,11 +51,16 @@
 #ifndef MS_STRICTATIME
 # define MS_STRICTATIME (1 << 24)
 =======
+=======
+>>>>>>> v3.18
 #ifndef MS_RELATIME
 #define MS_RELATIME (1 << 21)
 #endif
 #ifndef MS_STRICTATIME
 #define MS_STRICTATIME (1 << 24)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -65,7 +74,11 @@ static void die(char *fmt, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vmaybe_write_file(bool enoent_ok, char *filename, char *fmt, va_list ap)
+=======
+static void write_file(char *filename, char *fmt, ...)
+>>>>>>> v3.18
 =======
 static void write_file(char *filename, char *fmt, ...)
 >>>>>>> v3.18
@@ -75,14 +88,20 @@ static void write_file(char *filename, char *fmt, ...)
 	ssize_t written;
 	int buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	buf_len = vsnprintf(buf, sizeof(buf), fmt, ap);
 =======
+=======
+>>>>>>> v3.18
 	va_list ap;
 
 	va_start(ap, fmt);
 	buf_len = vsnprintf(buf, sizeof(buf), fmt, ap);
 	va_end(ap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (buf_len < 0) {
 		die("vsnprintf failed: %s\n",
@@ -95,8 +114,11 @@ static void write_file(char *filename, char *fmt, ...)
 	fd = open(filename, O_WRONLY);
 	if (fd < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((errno == ENOENT) && enoent_ok)
 			return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		die("open of %s failed: %s\n",
@@ -117,6 +139,7 @@ static void write_file(char *filename, char *fmt, ...)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void maybe_write_file(char *filename, char *fmt, ...)
 {
@@ -179,6 +202,8 @@ static int read_mnt_flags(const char *path)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void create_and_enter_userns(void)
 {
 	uid_t uid;
@@ -193,11 +218,14 @@ static void create_and_enter_userns(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	maybe_write_file("/proc/self/setgroups", "deny");
 	write_file("/proc/self/uid_map", "0 %d 1", uid);
 	write_file("/proc/self/gid_map", "0 %d 1", gid);
 
 =======
+=======
+>>>>>>> v3.18
 	write_file("/proc/self/uid_map", "0 %d 1", uid);
 	write_file("/proc/self/gid_map", "0 %d 1", gid);
 
@@ -205,6 +233,9 @@ static void create_and_enter_userns(void)
 		die("setgroups failed: %s\n",
 			strerror(errno));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (setgid(0) != 0) {
 		die ("setgid(0) failed %s\n",
@@ -218,8 +249,12 @@ static void create_and_enter_userns(void)
 
 static
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool test_unpriv_remount(const char *fstype, const char *mount_options,
 			 int mount_flags, int remount_flags, int invalid_flags)
+=======
+bool test_unpriv_remount(int mount_flags, int remount_flags, int invalid_flags)
+>>>>>>> v3.18
 =======
 bool test_unpriv_remount(int mount_flags, int remount_flags, int invalid_flags)
 >>>>>>> v3.18
@@ -256,11 +291,17 @@ bool test_unpriv_remount(int mount_flags, int remount_flags, int invalid_flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mount("testing", "/tmp", fstype, mount_flags, mount_options) != 0) {
 		die("mount of %s with options '%s' on /tmp failed: %s\n",
 		    fstype,
 		    mount_options? mount_options : "",
 		    strerror(errno));
+=======
+	if (mount("testing", "/tmp", "ramfs", mount_flags, NULL) != 0) {
+		die("mount of /tmp failed: %s\n",
+			strerror(errno));
+>>>>>>> v3.18
 =======
 	if (mount("testing", "/tmp", "ramfs", mount_flags, NULL) != 0) {
 		die("mount of /tmp failed: %s\n",
@@ -294,7 +335,11 @@ bool test_unpriv_remount(int mount_flags, int remount_flags, int invalid_flags)
 static bool test_unpriv_remount_simple(int mount_flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return test_unpriv_remount("ramfs", NULL, mount_flags, mount_flags, 0);
+=======
+	return test_unpriv_remount(mount_flags, mount_flags, 0);
+>>>>>>> v3.18
 =======
 	return test_unpriv_remount(mount_flags, mount_flags, 0);
 >>>>>>> v3.18
@@ -302,6 +347,7 @@ static bool test_unpriv_remount_simple(int mount_flags)
 
 static bool test_unpriv_remount_atime(int mount_flags, int invalid_flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return test_unpriv_remount("ramfs", NULL, mount_flags, mount_flags,
 				   invalid_flags);
@@ -370,10 +416,14 @@ static bool test_priv_mount_unpriv_remount(void)
 =======
 	return test_unpriv_remount(mount_flags, mount_flags, invalid_flags);
 >>>>>>> v3.18
+=======
+	return test_unpriv_remount(mount_flags, mount_flags, invalid_flags);
+>>>>>>> v3.18
 }
 
 int main(int argc, char **argv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!test_unpriv_remount_simple(MS_RDONLY)) {
 		die("MS_RDONLY malfunctions\n");
@@ -425,6 +475,8 @@ int main(int argc, char **argv)
 		die("Mount flags unexpectedly changed after remount\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!test_unpriv_remount_simple(MS_RDONLY|MS_NODEV)) {
 		die("MS_RDONLY malfunctions\n");
 	}
@@ -472,6 +524,9 @@ int main(int argc, char **argv)
 	{
 		die("Default atime malfunctions\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return EXIT_SUCCESS;
 }

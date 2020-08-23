@@ -81,6 +81,7 @@ static int acpi_topstar_fncx_switch(struct acpi_device *device, bool state)
 {
 	acpi_status status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union acpi_object fncx_params[1] = {
 		{ .type = ACPI_TYPE_INTEGER }
 	};
@@ -88,6 +89,11 @@ static int acpi_topstar_fncx_switch(struct acpi_device *device, bool state)
 
 	fncx_params[0].integer.value = state ? 0x86 : 0x87;
 	status = acpi_evaluate_object(device->handle, "FNCX", &fncx_arg_list, NULL);
+=======
+
+	status = acpi_execute_simple_method(device->handle, "FNCX",
+						state ? 0x86 : 0x87);
+>>>>>>> v3.18
 =======
 
 	status = acpi_execute_simple_method(device->handle, "FNCX",
@@ -108,10 +114,15 @@ static int acpi_topstar_init_hkey(struct topstar_hkey *hkey)
 
 	input = input_allocate_device();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!input) {
 		pr_err("Unable to allocate input device\n");
 		return -ENOMEM;
 	}
+=======
+	if (!input)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!input)
 		return -ENOMEM;

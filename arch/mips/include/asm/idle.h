@@ -2,6 +2,10 @@
 #define __ASM_IDLE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpuidle.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpuidle.h>
 >>>>>>> v3.18
@@ -12,7 +16,10 @@ extern void r4k_wait(void);
 extern asmlinkage void __r4k_wait(void);
 extern void r4k_wait_irqoff(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __pastwait(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -22,11 +29,14 @@ static inline int using_rollback_handler(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int address_is_in_r4k_wait_irqoff(unsigned long addr)
 {
 	return addr >= (unsigned long)r4k_wait_irqoff &&
 	       addr < (unsigned long)__pastwait;
 =======
+=======
+>>>>>>> v3.18
 extern int mips_cpuidle_wait_enter(struct cpuidle_device *dev,
 				   struct cpuidle_driver *drv, int index);
 
@@ -38,6 +48,9 @@ extern int mips_cpuidle_wait_enter(struct cpuidle_device *dev,
 	.flags			= CPUIDLE_FLAG_TIME_VALID,\
 	.name			= "wait",\
 	.desc			= "MIPS wait",\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

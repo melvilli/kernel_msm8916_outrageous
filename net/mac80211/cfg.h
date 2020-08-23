@@ -5,7 +5,11 @@
 #define __CFG_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct cfg80211_ops mac80211_config_ops;
+=======
+extern const struct cfg80211_ops mac80211_config_ops;
+>>>>>>> v3.18
 =======
 extern const struct cfg80211_ops mac80211_config_ops;
 >>>>>>> v3.18

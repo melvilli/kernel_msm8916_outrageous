@@ -43,11 +43,17 @@ int mlx4_en_timestamp_config(struct net_device *dev, int tx_type, int rx_filter)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (priv->hwtstamp_config.tx_type == tx_type &&
 	    priv->hwtstamp_config.rx_filter == rx_filter)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&mdev->state_lock);
 	if (priv->port_up) {
@@ -111,16 +117,22 @@ void mlx4_en_fill_hwtstamps(struct mlx4_en_dev *mdev,
 			    u64 timestamp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 nsec;
 
 	nsec = timecounter_cyc2time(&mdev->clock, timestamp);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	u64 nsec;
 
 	read_lock_irqsave(&mdev->clock_lock, flags);
 	nsec = timecounter_cyc2time(&mdev->clock, timestamp);
 	read_unlock_irqrestore(&mdev->clock_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(hwts, 0, sizeof(struct skb_shared_hwtstamps));
@@ -128,12 +140,15 @@ void mlx4_en_fill_hwtstamps(struct mlx4_en_dev *mdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mlx4_en_init_timestamp(struct mlx4_en_dev *mdev)
 {
 	struct mlx4_dev *dev = mdev->dev;
 	u64 ns;
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * mlx4_en_remove_timestamp - disable PTP device
  * @mdev: board private structure
@@ -309,6 +324,9 @@ void mlx4_en_init_timestamp(struct mlx4_en_dev *mdev)
 
 	rwlock_init(&mdev->clock_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(&mdev->cycles, 0, sizeof(mdev->cycles));
 	mdev->cycles.read = mlx4_en_read_clock;
@@ -322,16 +340,22 @@ void mlx4_en_init_timestamp(struct mlx4_en_dev *mdev)
 	mdev->cycles.mult =
 		clocksource_khz2mult(1000 * dev->caps.hca_core_clock, mdev->cycles.shift);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	timecounter_init(&mdev->clock, &mdev->cycles,
 			 ktime_to_ns(ktime_get_real()));
 =======
+=======
+>>>>>>> v3.18
 	mdev->nominal_c_mult = mdev->cycles.mult;
 
 	write_lock_irqsave(&mdev->clock_lock, flags);
 	timecounter_init(&mdev->clock, &mdev->cycles,
 			 ktime_to_ns(ktime_get_real()));
 	write_unlock_irqrestore(&mdev->clock_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Calculate period in seconds to call the overflow watchdog - to make
@@ -340,6 +364,7 @@ void mlx4_en_init_timestamp(struct mlx4_en_dev *mdev)
 	ns = cyclecounter_cyc2ns(&mdev->cycles, mdev->cycles.mask);
 	do_div(ns, NSEC_PER_SEC / 2 / HZ);
 	mdev->overflow_period = ns;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -353,6 +378,8 @@ void mlx4_en_ptp_overflow_check(struct mlx4_en_dev *mdev)
 		mdev->last_overflow_check = jiffies;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	/* Configure the PHC */
 	mdev->ptp_clock_info = mlx4_en_ptp_clock_info;
@@ -367,5 +394,8 @@ void mlx4_en_ptp_overflow_check(struct mlx4_en_dev *mdev)
 		mlx4_info(mdev, "registered PHC clock\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

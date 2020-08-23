@@ -159,7 +159,11 @@ static int ds1305_alarm_irq_enable(struct device *dev, unsigned int enabled)
 		buf[1] &= ~DS1305_AEI0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = spi_write_then_read(ds1305->spi, buf, sizeof buf, NULL, 0);
+=======
+	err = spi_write_then_read(ds1305->spi, buf, sizeof(buf), NULL, 0);
+>>>>>>> v3.18
 =======
 	err = spi_write_then_read(ds1305->spi, buf, sizeof(buf), NULL, 0);
 >>>>>>> v3.18
@@ -186,8 +190,13 @@ static int ds1305_get_time(struct device *dev, struct rtc_time *time)
 	 * since dma from stack is nonportable
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(ds1305->spi, &addr, sizeof addr,
 			buf, sizeof buf);
+=======
+	status = spi_write_then_read(ds1305->spi, &addr, sizeof(addr),
+			buf, sizeof(buf));
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(ds1305->spi, &addr, sizeof(addr),
 			buf, sizeof(buf));
@@ -247,7 +256,11 @@ static int ds1305_set_time(struct device *dev, struct rtc_time *time)
 
 	/* use write-then-read since dma from stack is nonportable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return spi_write_then_read(ds1305->spi, buf, sizeof buf,
+=======
+	return spi_write_then_read(ds1305->spi, buf, sizeof(buf),
+>>>>>>> v3.18
 =======
 	return spi_write_then_read(ds1305->spi, buf, sizeof(buf),
 >>>>>>> v3.18
@@ -300,8 +313,13 @@ static int ds1305_get_alarm(struct device *dev, struct rtc_wkalrm *alm)
 	 */
 	addr = DS1305_CONTROL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, &addr, sizeof addr,
 			ds1305->ctrl, sizeof ds1305->ctrl);
+=======
+	status = spi_write_then_read(spi, &addr, sizeof(addr),
+			ds1305->ctrl, sizeof(ds1305->ctrl));
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, &addr, sizeof(addr),
 			ds1305->ctrl, sizeof(ds1305->ctrl));
@@ -315,8 +333,13 @@ static int ds1305_get_alarm(struct device *dev, struct rtc_wkalrm *alm)
 	/* get and check ALM0 registers */
 	addr = DS1305_ALM0(DS1305_SEC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, &addr, sizeof addr,
 			buf, sizeof buf);
+=======
+	status = spi_write_then_read(spi, &addr, sizeof(addr),
+			buf, sizeof(buf));
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, &addr, sizeof(addr),
 			buf, sizeof(buf));
@@ -405,7 +428,11 @@ static int ds1305_set_alarm(struct device *dev, struct rtc_wkalrm *alm)
 		buf[1 + DS1305_HOUR], buf[1 + DS1305_WDAY]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, buf, sizeof buf, NULL, 0);
+=======
+	status = spi_write_then_read(spi, buf, sizeof(buf), NULL, 0);
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, buf, sizeof(buf), NULL, 0);
 >>>>>>> v3.18
@@ -502,7 +529,11 @@ static void ds1305_work(struct work_struct *work)
 	buf[2] = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, buf, sizeof buf,
+=======
+	status = spi_write_then_read(spi, buf, sizeof(buf),
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, buf, sizeof(buf),
 >>>>>>> v3.18
@@ -638,7 +669,11 @@ static int ds1305_probe(struct spi_device *spi)
 	int				status;
 	u8				addr, value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ds1305_platform_data	*pdata = spi->dev.platform_data;
+=======
+	struct ds1305_platform_data	*pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct ds1305_platform_data	*pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -663,8 +698,13 @@ static int ds1305_probe(struct spi_device *spi)
 	/* read and cache control registers */
 	addr = DS1305_CONTROL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, &addr, sizeof addr,
 			ds1305->ctrl, sizeof ds1305->ctrl);
+=======
+	status = spi_write_then_read(spi, &addr, sizeof(addr),
+			ds1305->ctrl, sizeof(ds1305->ctrl));
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, &addr, sizeof(addr),
 			ds1305->ctrl, sizeof(ds1305->ctrl));
@@ -700,7 +740,11 @@ static int ds1305_probe(struct spi_device *spi)
 		buf[0] = DS1305_WRITE | DS1305_CONTROL;
 		buf[1] = ds1305->ctrl[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = spi_write_then_read(spi, buf, sizeof buf, NULL, 0);
+=======
+		status = spi_write_then_read(spi, buf, sizeof(buf), NULL, 0);
+>>>>>>> v3.18
 =======
 		status = spi_write_then_read(spi, buf, sizeof(buf), NULL, 0);
 >>>>>>> v3.18
@@ -758,7 +802,11 @@ static int ds1305_probe(struct spi_device *spi)
 		buf[2] = ds1305->ctrl[1];
 		buf[3] = ds1305->ctrl[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = spi_write_then_read(spi, buf, sizeof buf, NULL, 0);
+=======
+		status = spi_write_then_read(spi, buf, sizeof(buf), NULL, 0);
+>>>>>>> v3.18
 =======
 		status = spi_write_then_read(spi, buf, sizeof(buf), NULL, 0);
 >>>>>>> v3.18
@@ -774,8 +822,13 @@ static int ds1305_probe(struct spi_device *spi)
 	/* see if non-Linux software set up AM/PM mode */
 	addr = DS1305_HOUR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, &addr, sizeof addr,
 				&value, sizeof value);
+=======
+	status = spi_write_then_read(spi, &addr, sizeof(addr),
+				&value, sizeof(value));
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, &addr, sizeof(addr),
 				&value, sizeof(value));
@@ -810,6 +863,7 @@ static int ds1305_probe(struct spi_device *spi)
 				0, dev_name(&ds1305->rtc->dev), ds1305);
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_dbg(&spi->dev, "request_irq %d --> %d\n",
 					spi->irq, status);
 			return status;
@@ -817,11 +871,16 @@ static int ds1305_probe(struct spi_device *spi)
 
 		device_set_wakeup_capable(&spi->dev, 1);
 =======
+=======
+>>>>>>> v3.18
 			dev_err(&spi->dev, "request_irq %d --> %d\n",
 					spi->irq, status);
 		} else {
 			device_set_wakeup_capable(&spi->dev, 1);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -829,8 +888,12 @@ static int ds1305_probe(struct spi_device *spi)
 	status = sysfs_create_bin_file(&spi->dev.kobj, &nvram);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&spi->dev, "register nvram --> %d\n", status);
 		return status;
+=======
+		dev_err(&spi->dev, "register nvram --> %d\n", status);
+>>>>>>> v3.18
 =======
 		dev_err(&spi->dev, "register nvram --> %d\n", status);
 >>>>>>> v3.18
@@ -853,7 +916,10 @@ static int ds1305_remove(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

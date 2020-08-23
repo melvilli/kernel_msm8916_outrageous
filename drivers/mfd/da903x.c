@@ -495,7 +495,11 @@ static int da903x_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da903x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct da903x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct da903x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

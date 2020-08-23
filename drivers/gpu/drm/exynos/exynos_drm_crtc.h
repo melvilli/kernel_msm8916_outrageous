@@ -16,11 +16,14 @@
 #define _EXYNOS_DRM_CRTC_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int exynos_drm_crtc_create(struct drm_device *dev, unsigned int nr);
 int exynos_drm_crtc_enable_vblank(struct drm_device *dev, int crtc);
 void exynos_drm_crtc_disable_vblank(struct drm_device *dev, int crtc);
 void exynos_drm_crtc_finish_pageflip(struct drm_device *dev, int crtc);
 =======
+=======
+>>>>>>> v3.18
 struct drm_device;
 struct drm_crtc;
 struct exynos_drm_manager;
@@ -48,6 +51,9 @@ int exynos_drm_crtc_get_pipe_from_type(struct drm_device *drm_dev,
  * signal.
  */
 void exynos_drm_crtc_te_handler(struct drm_crtc *crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

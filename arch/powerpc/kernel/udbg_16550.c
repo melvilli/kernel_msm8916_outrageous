@@ -19,6 +19,7 @@ extern u8 real_205_readb(volatile u8 __iomem  *addr);
 extern void real_205_writeb(u8 data, volatile u8 __iomem *addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct NS16550 {
 	/* this struct must be packed */
 	unsigned char rbr;  /* 0 */
@@ -37,6 +38,8 @@ struct NS16550 {
 #define dlm ier
 #define dlab lcr
 =======
+=======
+>>>>>>> v3.18
 #define UART_RBR	0
 #define UART_IER	1
 #define UART_FCR	2
@@ -50,6 +53,9 @@ struct NS16550 {
 #define UART_DLL	UART_RBR
 #define UART_DLM	UART_IER
 #define UART_DLAB	UART_LCR
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define LSR_DR   0x01  /* Data ready */
@@ -63,6 +69,7 @@ struct NS16550 {
 
 #define LCR_DLAB 0x80
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct NS16550 __iomem *udbg_comport;
 
@@ -111,6 +118,8 @@ void udbg_init_uart(void __iomem *comport, unsigned int speed,
 	unsigned int dll, base_bauds;
 
 =======
+=======
+>>>>>>> v3.18
 static u8 (*udbg_uart_in)(unsigned int reg);
 static void (*udbg_uart_out)(unsigned int reg, u8 data);
 
@@ -167,6 +176,9 @@ void udbg_uart_setup(unsigned int speed, unsigned int clock)
 	if (!udbg_uart_out)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (clock == 0)
 		clock = 1843200;
@@ -176,6 +188,7 @@ void udbg_uart_setup(unsigned int speed, unsigned int clock)
 	base_bauds = clock / 16;
 	dll = base_bauds / speed;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (comport) {
 		udbg_comport = (struct NS16550 __iomem *)comport;
@@ -217,6 +230,8 @@ unsigned int udbg_probe_uart_speed(void __iomem *comport, unsigned int clock)
 	/* check prescaling */
 	if (in_8(&port->mcr) & 0x80)
 =======
+=======
+>>>>>>> v3.18
 	udbg_uart_out(UART_LCR, 0x00);
 	udbg_uart_out(UART_IER, 0xff);
 	udbg_uart_out(UART_IER, 0x00);
@@ -248,6 +263,9 @@ unsigned int udbg_probe_uart_speed(unsigned int clock)
 
 	/* check prescaling */
 	if (udbg_uart_in(UART_MCR) & 0x80)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		prescaler = 4;
 	else
@@ -255,7 +273,11 @@ unsigned int udbg_probe_uart_speed(unsigned int clock)
 
 	/* restore the LCR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_8(&port->lcr, old_lcr);
+=======
+	udbg_uart_out(UART_LCR, old_lcr);
+>>>>>>> v3.18
 =======
 	udbg_uart_out(UART_LCR, old_lcr);
 >>>>>>> v3.18
@@ -270,6 +292,7 @@ unsigned int udbg_probe_uart_speed(unsigned int clock)
 	return speed;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PPC_MAPLE
 void udbg_maple_real_flush(void)
@@ -464,6 +487,8 @@ void __init udbg_init_wsp(void)
 }
 #endif /* CONFIG_PPC_EARLY_DEBUG_WSP */
 =======
+=======
+>>>>>>> v3.18
 static union {
 	unsigned char __iomem *mmio_base;
 	unsigned long pio_base;
@@ -605,4 +630,7 @@ void __init udbg_init_40x_realmode(void)
 }
 
 #endif /* CONFIG_PPC_EARLY_DEBUG_40x */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

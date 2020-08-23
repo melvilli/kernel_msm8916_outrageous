@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,9 +50,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFINE_ACPI_GLOBALS
 
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+#define DEFINE_ACPI_GLOBALS
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 #define DEFINE_ACPI_GLOBALS
@@ -65,6 +75,7 @@ ACPI_MODULE_NAME("utglobal")
  * Static global variable initialization.
  *
  ******************************************************************************/
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * We want the debug switches statically initialized so they
@@ -92,6 +103,9 @@ u32 acpi_gbl_startup_flags = 0;
 
 u8 acpi_gbl_shutdown = TRUE;
 
+=======
+/* Various state name strings */
+>>>>>>> v3.18
 =======
 /* Various state name strings */
 >>>>>>> v3.18
@@ -254,6 +268,7 @@ struct acpi_fixed_event_info acpi_gbl_fixed_event_info[ACPI_NUM_FIXED_EVENTS] = 
 #endif				/* !ACPI_REDUCED_HARDWARE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
  *
  * FUNCTION:    acpi_ut_init_globals
@@ -392,12 +407,18 @@ acpi_status acpi_ut_init_globals(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Public globals */
 
 ACPI_EXPORT_SYMBOL(acpi_gbl_FADT)
 ACPI_EXPORT_SYMBOL(acpi_dbg_level)
 ACPI_EXPORT_SYMBOL(acpi_dbg_layer)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ACPI_EXPORT_SYMBOL(acpi_gpe_count)
+>>>>>>> v3.18
 =======
 ACPI_EXPORT_SYMBOL(acpi_gpe_count)
 >>>>>>> v3.18

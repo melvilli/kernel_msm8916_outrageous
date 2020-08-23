@@ -2,7 +2,11 @@
  * shmob_drm_plane.c  --  SH Mobile DRM Planes
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Renesas Electronics Corporation
 >>>>>>> v3.18
@@ -171,7 +175,11 @@ void shmob_drm_plane_setup(struct drm_plane *plane)
 	struct shmob_drm_plane *splane = to_shmob_plane(plane);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (plane->fb == NULL || !plane->enabled)
+=======
+	if (plane->fb == NULL)
+>>>>>>> v3.18
 =======
 	if (plane->fb == NULL)
 >>>>>>> v3.18
@@ -230,11 +238,16 @@ static int shmob_drm_plane_disable(struct drm_plane *plane)
 static void shmob_drm_plane_destroy(struct drm_plane *plane)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct shmob_drm_plane *splane = to_shmob_plane(plane);
 
 	shmob_drm_plane_disable(plane);
 	drm_plane_cleanup(plane);
 	kfree(splane);
+=======
+	shmob_drm_plane_disable(plane);
+	drm_plane_cleanup(plane);
+>>>>>>> v3.18
 =======
 	shmob_drm_plane_disable(plane);
 	drm_plane_cleanup(plane);
@@ -265,7 +278,11 @@ int shmob_drm_plane_create(struct shmob_drm_device *sdev, unsigned int index)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	splane = kzalloc(sizeof(*splane), GFP_KERNEL);
+=======
+	splane = devm_kzalloc(sdev->dev, sizeof(*splane), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	splane = devm_kzalloc(sdev->dev, sizeof(*splane), GFP_KERNEL);
 >>>>>>> v3.18
@@ -279,8 +296,11 @@ int shmob_drm_plane_create(struct shmob_drm_device *sdev, unsigned int index)
 			     &shmob_drm_plane_funcs, formats,
 			     ARRAY_SIZE(formats), false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0)
 		kfree(splane);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

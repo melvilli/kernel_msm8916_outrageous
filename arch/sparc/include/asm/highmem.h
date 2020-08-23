@@ -32,7 +32,11 @@ extern pgprot_t kmap_prot;
 extern pte_t *pkmap_page_table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kmap_init(void) __init;
+=======
+void kmap_init(void) __init;
+>>>>>>> v3.18
 =======
 void kmap_init(void) __init;
 >>>>>>> v3.18
@@ -54,8 +58,13 @@ void kmap_init(void) __init;
 #define PKMAP_END (PKMAP_ADDR(LAST_PKMAP))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *kmap_high(struct page *page);
 extern void kunmap_high(struct page *page);
+=======
+void *kmap_high(struct page *page);
+void kunmap_high(struct page *page);
+>>>>>>> v3.18
 =======
 void *kmap_high(struct page *page);
 void kunmap_high(struct page *page);
@@ -78,8 +87,13 @@ static inline void kunmap(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *kmap_atomic(struct page *page);
 extern void __kunmap_atomic(void *kvaddr);
+=======
+void *kmap_atomic(struct page *page);
+void __kunmap_atomic(void *kvaddr);
+>>>>>>> v3.18
 =======
 void *kmap_atomic(struct page *page);
 void __kunmap_atomic(void *kvaddr);

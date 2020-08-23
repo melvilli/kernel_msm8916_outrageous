@@ -87,13 +87,19 @@
 		ranges = <0x00000000 0x00000000 0xffffffff>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		memory-controller@fff00000 {
 			compatible = "calxeda,hb-ddr-ctrl";
 			reg = <0xfff00000 0x1000>;
 			interrupts = <0 91 4>;
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		timer@fff10600 {
 			compatible = "arm,cortex-a9-twd-timer";

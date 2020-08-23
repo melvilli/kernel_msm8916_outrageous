@@ -1,8 +1,11 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/device.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -15,11 +18,14 @@ static int nouveau_agpmode = -1;
 module_param_named(agpmode, nouveau_agpmode, int, 0400);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long
 get_agp_mode(struct nouveau_drm *drm, unsigned long mode)
 {
 	struct nouveau_device *device = nv_device(drm->device);
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_agpmode_quirk {
 	u16 hostbridge_vendor;
 	u16 hostbridge_device;
@@ -42,12 +48,16 @@ get_agp_mode(struct nouveau_drm *drm, const struct drm_agp_info *info)
 	struct nouveau_agpmode_quirk *quirk = nouveau_agpmode_quirk_list;
 	int agpmode = nouveau_agpmode;
 	unsigned long mode = info->mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * FW seems to be broken on nv18, it makes the card lock up
 	 * randomly.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (device->chipset == 0x18)
 		mode &= ~PCI_AGP_COMMAND_FW;
@@ -59,6 +69,8 @@ get_agp_mode(struct nouveau_drm *drm, const struct drm_agp_info *info)
 		bool agpv3 = mode & 0x8;
 		int rate = agpv3 ? nouveau_agpmode / 4 : nouveau_agpmode;
 =======
+=======
+>>>>>>> v3.18
 	if (device->info.chipset == 0x18)
 		mode &= ~PCI_AGP_COMMAND_FW;
 
@@ -84,6 +96,9 @@ get_agp_mode(struct nouveau_drm *drm, const struct drm_agp_info *info)
 	if (agpmode > 0) {
 		bool agpv3 = mode & 0x8;
 		int rate = agpv3 ? agpmode / 4 : agpmode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		mode = (mode & ~0x7) | (rate & 0x7);
@@ -98,7 +113,11 @@ nouveau_agp_enabled(struct nouveau_drm *drm)
 	struct drm_device *dev = drm->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!drm_pci_device_is_agp(dev) || !dev->agp)
+=======
+	if (!dev->pdev || !drm_pci_device_is_agp(dev) || !dev->agp)
+>>>>>>> v3.18
 =======
 	if (!dev->pdev || !drm_pci_device_is_agp(dev) || !dev->agp)
 >>>>>>> v3.18
@@ -131,7 +150,11 @@ nouveau_agp_reset(struct nouveau_drm *drm)
 {
 #if __OS_HAS_AGP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
+=======
+	struct nvif_device *device = &drm->device;
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &drm->device;
 >>>>>>> v3.18
@@ -146,7 +169,11 @@ nouveau_agp_reset(struct nouveau_drm *drm)
 	 * already enabled in the AGP bridge and we disable the card's
 	 * AGP controller we might be locking ourselves out of it. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((nv_rd32(device, NV04_PBUS_PCI_NV_19) |
+=======
+	if ((nvif_rd32(device, NV04_PBUS_PCI_NV_19) |
+>>>>>>> v3.18
 =======
 	if ((nvif_rd32(device, NV04_PBUS_PCI_NV_19) |
 >>>>>>> v3.18
@@ -159,7 +186,11 @@ nouveau_agp_reset(struct nouveau_drm *drm)
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mode.mode  = get_agp_mode(drm, info.mode);
+=======
+		mode.mode  = get_agp_mode(drm, &info);
+>>>>>>> v3.18
 =======
 		mode.mode  = get_agp_mode(drm, &info);
 >>>>>>> v3.18
@@ -173,6 +204,7 @@ nouveau_agp_reset(struct nouveau_drm *drm)
 
 	/* clear busmaster bit, and disable AGP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	save[0] = nv_mask(device, NV04_PBUS_PCI_NV_1, 0x00000004, 0x00000000);
 	nv_wr32(device, NV04_PBUS_PCI_NV_19, 0);
 
@@ -183,6 +215,8 @@ nouveau_agp_reset(struct nouveau_drm *drm)
 	/* and restore bustmaster bit (gives effect of resetting AGP) */
 	nv_wr32(device, NV04_PBUS_PCI_NV_1, save[0]);
 =======
+=======
+>>>>>>> v3.18
 	save[0] = nvif_mask(device, NV04_PBUS_PCI_NV_1, 0x00000004, 0x00000000);
 	nvif_wr32(device, NV04_PBUS_PCI_NV_19, 0);
 
@@ -192,6 +226,9 @@ nouveau_agp_reset(struct nouveau_drm *drm)
 
 	/* and restore bustmaster bit (gives effect of resetting AGP) */
 	nvif_wr32(device, NV04_PBUS_PCI_NV_1, save[0]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -201,7 +238,10 @@ nouveau_agp_init(struct nouveau_drm *drm)
 {
 #if __OS_HAS_AGP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(drm->device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct drm_device *dev = drm->dev;
@@ -216,7 +256,11 @@ nouveau_agp_init(struct nouveau_drm *drm)
 	ret = drm_agp_acquire(dev);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_error(device, "unable to acquire AGP: %d\n", ret);
+=======
+		NV_ERROR(drm, "unable to acquire AGP: %d\n", ret);
+>>>>>>> v3.18
 =======
 		NV_ERROR(drm, "unable to acquire AGP: %d\n", ret);
 >>>>>>> v3.18
@@ -226,7 +270,11 @@ nouveau_agp_init(struct nouveau_drm *drm)
 	ret = drm_agp_info(dev, &info);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_error(device, "unable to get AGP info: %d\n", ret);
+=======
+		NV_ERROR(drm, "unable to get AGP info: %d\n", ret);
+>>>>>>> v3.18
 =======
 		NV_ERROR(drm, "unable to get AGP info: %d\n", ret);
 >>>>>>> v3.18
@@ -235,17 +283,23 @@ nouveau_agp_init(struct nouveau_drm *drm)
 
 	/* see agp.h for the AGPSTAT_* modes available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode.mode = get_agp_mode(drm, info.mode);
 
 	ret = drm_agp_enable(dev, mode);
 	if (ret) {
 		nv_error(device, "unable to enable AGP: %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	mode.mode = get_agp_mode(drm, &info);
 
 	ret = drm_agp_enable(dev, mode);
 	if (ret) {
 		NV_ERROR(drm, "unable to enable AGP: %d\n", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}

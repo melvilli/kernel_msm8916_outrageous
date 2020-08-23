@@ -11,6 +11,10 @@
  *   memcpy/copy_user author: Mark Vandevoorde
  * Copyright (C) 2007  Maciej W. Rozycki
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -90,12 +94,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXC(inst_reg,addr,handler)		\
 9:	inst_reg, addr;				\
 	.section __ex_table,"a";		\
 	PTR	9b, handler;			\
 	.previous
 =======
+=======
+>>>>>>> v3.18
 /* Instruction type */
 #define LD_INSN 1
 #define ST_INSN 2
@@ -141,6 +148,9 @@
 			insn reg, addr;				\
 		.endif;						\
 	.endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -153,6 +163,7 @@
 #ifdef USE_DOUBLE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOAD   ld
 #define LOADL  ldl
 #define LOADR  ldr
@@ -160,6 +171,8 @@
 #define STORER sdr
 #define STORE  sd
 =======
+=======
+>>>>>>> v3.18
 #define LOADK ld /* No exception */
 #define LOAD(reg, addr, handler)	EXC(ld, LD_INSN, reg, addr, handler)
 #define LOADL(reg, addr, handler)	EXC(ldl, LD_INSN, reg, addr, handler)
@@ -167,6 +180,9 @@
 #define STOREL(reg, addr, handler)	EXC(sdl, ST_INSN, reg, addr, handler)
 #define STORER(reg, addr, handler)	EXC(sdr, ST_INSN, reg, addr, handler)
 #define STORE(reg, addr, handler)	EXC(sd, ST_INSN, reg, addr, handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ADD    daddu
 #define SUB    dsubu
@@ -199,6 +215,7 @@
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOAD   lw
 #define LOADL  lwl
 #define LOADR  lwr
@@ -206,6 +223,8 @@
 #define STORER swr
 #define STORE  sw
 =======
+=======
+>>>>>>> v3.18
 #define LOADK lw /* No exception */
 #define LOAD(reg, addr, handler)	EXC(lw, LD_INSN, reg, addr, handler)
 #define LOADL(reg, addr, handler)	EXC(lwl, LD_INSN, reg, addr, handler)
@@ -213,6 +232,9 @@
 #define STOREL(reg, addr, handler)	EXC(swl, ST_INSN, reg, addr, handler)
 #define STORER(reg, addr, handler)	EXC(swr, ST_INSN, reg, addr, handler)
 #define STORE(reg, addr, handler)	EXC(sw, ST_INSN, reg, addr, handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ADD    addu
 #define SUB    subu
@@ -227,7 +249,10 @@
 #endif /* USE_DOUBLE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define LOADB(reg, addr, handler)	EXC(lb, LD_INSN, reg, addr, handler)
 #define STOREB(reg, addr, handler)	EXC(sb, ST_INSN, reg, addr, handler)
 
@@ -255,6 +280,9 @@
 #define PREFS(hint, addr) _PREF(hint, addr, SRC_PREFETCH)
 #define PREFD(hint, addr) _PREF(hint, addr, DST_PREFETCH)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CPU_LITTLE_ENDIAN
 #define LDFIRST LOADR
@@ -285,6 +313,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * t6 is used as a flag to note inatomic mode.
  */
@@ -307,6 +336,8 @@ FEXPORT(__copy_user)
 	li	t6, 0	/* not inatomic */
 __copy_user_common:
 =======
+=======
+>>>>>>> v3.18
 	.align	5
 
 	/*
@@ -324,6 +355,9 @@ __copy_user_common:
 	.hidden __memcpy /* make sure it does not leak */
 	.endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Note: dst & src may be unaligned, len may be 0
@@ -340,6 +374,7 @@ __copy_user_common:
 	 * If len < NBYTES use byte operations.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PREF(	0, 0(src) )
 	PREF(	1, 0(dst) )
 	sltu	t2, len, NBYTES
@@ -354,6 +389,8 @@ __copy_user_common:
 	 nop
 	bnez	t0, .Lsrc_unaligned_dst_aligned
 =======
+=======
+>>>>>>> v3.18
 	PREFS(	0, 0(src) )
 	PREFD(	1, 0(dst) )
 	sltu	t2, len, NBYTES
@@ -367,11 +404,15 @@ __copy_user_common:
 	bnez	t1, .Ldst_unaligned\@
 	 nop
 	bnez	t0, .Lsrc_unaligned_dst_aligned\@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * use delay slot for fall-through
 	 * src and dst are aligned; need to compute rem
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Lboth_aligned:
 	 SRL	t0, len, LOG_NBYTES+3	 # +3 for 8 units/iter
@@ -404,6 +445,8 @@ EXC(	STORE	t1, UNIT(-1)(dst),	.Ls_exc_p1u)
 	PREF(	0, 8*32(src) )
 	PREF(	1, 8*32(dst) )
 =======
+=======
+>>>>>>> v3.18
 .Lboth_aligned\@:
 	 SRL	t0, len, LOG_NBYTES+3	 # +3 for 8 units/iter
 	beqz	t0, .Lcleanup_both_aligned\@ # len < 8*NBYTES
@@ -434,6 +477,9 @@ EXC(	STORE	t1, UNIT(-1)(dst),	.Ls_exc_p1u)
 	STORE(t1, UNIT(-1)(dst), .Ls_exc_p1u\@)
 	PREFS(	0, 8*32(src) )
 	PREFD(	1, 8*32(dst) )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bne	len, rem, 1b
 	 nop
@@ -442,20 +488,27 @@ EXC(	STORE	t1, UNIT(-1)(dst),	.Ls_exc_p1u)
 	 * len == rem == the number of bytes left to copy < 8*NBYTES
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lcleanup_both_aligned:
 	beqz	len, .Ldone
 	 sltu	t0, len, 4*NBYTES
 	bnez	t0, .Lless_than_4units
 =======
+=======
+>>>>>>> v3.18
 .Lcleanup_both_aligned\@:
 	beqz	len, .Ldone\@
 	 sltu	t0, len, 4*NBYTES
 	bnez	t0, .Lless_than_4units\@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 and	rem, len, (NBYTES-1)	# rem = len % NBYTES
 	/*
 	 * len >= 4*NBYTES
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	LOAD	t0, UNIT(0)(src),	.Ll_exc)
 EXC(	LOAD	t1, UNIT(1)(src),	.Ll_exc_copy)
@@ -485,6 +538,8 @@ EXC(	LOAD	t0, 0(src),		.Ll_exc)
 	SUB	len, len, NBYTES
 EXC(	STORE	t0, 0(dst),		.Ls_exc_p1u)
 =======
+=======
+>>>>>>> v3.18
 	LOAD( t0, UNIT(0)(src),	.Ll_exc\@)
 	LOAD( t1, UNIT(1)(src),	.Ll_exc_copy\@)
 	LOAD( t2, UNIT(2)(src),	.Ll_exc_copy\@)
@@ -512,6 +567,9 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc_p1u)
 	ADD	src, src, NBYTES
 	SUB	len, len, NBYTES
 	STORE(t0, 0(dst), .Ls_exc_p1u\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set	reorder				/* DADDI_WAR */
 	ADD	dst, dst, NBYTES
@@ -531,6 +589,7 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc_p1u)
 	 */
 #define bits t2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beqz	len, .Ldone
 	 ADD	t1, dst, len	# t1 is just past last byte of dst
 	li	bits, 8*NBYTES
@@ -543,6 +602,8 @@ EXC(	STREST	t0, -1(t1),		.Ls_exc)
 	 move	len, zero
 .Ldst_unaligned:
 =======
+=======
+>>>>>>> v3.18
 	beqz	len, .Ldone\@
 	 ADD	t1, dst, len	# t1 is just past last byte of dst
 	li	bits, 8*NBYTES
@@ -554,6 +615,9 @@ EXC(	STREST	t0, -1(t1),		.Ls_exc)
 	jr	ra
 	 move	len, zero
 .Ldst_unaligned\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * dst is unaligned
@@ -565,6 +629,7 @@ EXC(	STREST	t0, -1(t1),		.Ls_exc)
 	 * Set match = (src and dst have same alignment)
 	 */
 #define match rem
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	LDFIRST t3, FIRST(0)(src),	.Ll_exc)
 	ADD	t2, zero, NBYTES
@@ -586,6 +651,8 @@ EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
 	 and	rem, len, (4*NBYTES-1)	 # rem = len % 4*NBYTES
 	PREF(	1, 3*32(dst) )
 =======
+=======
+>>>>>>> v3.18
 	LDFIRST(t3, FIRST(0)(src), .Ll_exc\@)
 	ADD	t2, zero, NBYTES
 	LDREST(t3, REST(0)(src), .Ll_exc_copy\@)
@@ -605,6 +672,9 @@ EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
 	beqz	t0, .Lcleanup_src_unaligned\@
 	 and	rem, len, (4*NBYTES-1)	 # rem = len % 4*NBYTES
 	PREFD(	1, 3*32(dst) )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 1:
 /*
@@ -614,6 +684,7 @@ EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
  * are to the same unit (unless src is aligned, but it's not).
  */
 	R10KCBARRIER(0(ra))
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	LDFIRST t0, FIRST(0)(src),	.Ll_exc)
 EXC(	LDFIRST t1, FIRST(1)(src),	.Ll_exc_copy)
@@ -626,6 +697,8 @@ EXC(	LDREST	t2, REST(2)(src),	.Ll_exc_copy)
 EXC(	LDREST	t3, REST(3)(src),	.Ll_exc_copy)
 	PREF(	0, 9*32(src) )		# 0 is PREF_LOAD  (not streamed)
 =======
+=======
+>>>>>>> v3.18
 	LDFIRST(t0, FIRST(0)(src), .Ll_exc\@)
 	LDFIRST(t1, FIRST(1)(src), .Ll_exc_copy\@)
 	SUB	len, len, 4*NBYTES
@@ -636,11 +709,15 @@ EXC(	LDREST	t3, REST(3)(src),	.Ll_exc_copy)
 	LDREST(t2, REST(2)(src), .Ll_exc_copy\@)
 	LDREST(t3, REST(3)(src), .Ll_exc_copy\@)
 	PREFS(	0, 9*32(src) )		# 0 is PREF_LOAD  (not streamed)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADD	src, src, 4*NBYTES
 #ifdef CONFIG_CPU_SB1
 	nop				# improves slotting
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	STORE	t0, UNIT(0)(dst),	.Ls_exc_p4u)
 EXC(	STORE	t1, UNIT(1)(dst),	.Ls_exc_p3u)
@@ -648,17 +725,23 @@ EXC(	STORE	t2, UNIT(2)(dst),	.Ls_exc_p2u)
 EXC(	STORE	t3, UNIT(3)(dst),	.Ls_exc_p1u)
 	PREF(	1, 9*32(dst) )		# 1 is PREF_STORE (not streamed)
 =======
+=======
+>>>>>>> v3.18
 	STORE(t0, UNIT(0)(dst),	.Ls_exc_p4u\@)
 	STORE(t1, UNIT(1)(dst),	.Ls_exc_p3u\@)
 	STORE(t2, UNIT(2)(dst),	.Ls_exc_p2u\@)
 	STORE(t3, UNIT(3)(dst),	.Ls_exc_p1u\@)
 	PREFD(	1, 9*32(dst) )		# 1 is PREF_STORE (not streamed)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set	reorder				/* DADDI_WAR */
 	ADD	dst, dst, 4*NBYTES
 	bne	len, rem, 1b
 	.set	noreorder
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Lcleanup_src_unaligned:
 	beqz	len, .Ldone
@@ -673,6 +756,8 @@ EXC(	LDREST	t0, REST(0)(src),	.Ll_exc_copy)
 	SUB	len, len, NBYTES
 EXC(	STORE	t0, 0(dst),		.Ls_exc_p1u)
 =======
+=======
+>>>>>>> v3.18
 .Lcleanup_src_unaligned\@:
 	beqz	len, .Ldone\@
 	 and	rem, len, NBYTES-1  # rem = len % NBYTES
@@ -685,12 +770,16 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc_p1u)
 	ADD	src, src, NBYTES
 	SUB	len, len, NBYTES
 	STORE(t0, 0(dst), .Ls_exc_p1u\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set	reorder				/* DADDI_WAR */
 	ADD	dst, dst, NBYTES
 	bne	len, rem, 1b
 	.set	noreorder
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Lcopy_bytes_checklen:
 	beqz	len, .Ldone
@@ -704,6 +793,8 @@ EXC(	lb	t0, N(src), .Ll_exc);	\
 	beqz	len, .Ldone;		\
 EXC(	 sb	t0, N(dst), .Ls_exc_p1)
 =======
+=======
+>>>>>>> v3.18
 .Lcopy_bytes_checklen\@:
 	beqz	len, .Ldone\@
 	 nop
@@ -715,6 +806,9 @@ EXC(	 sb	t0, N(dst), .Ls_exc_p1)
 	SUB	len, len, 1;		\
 	beqz	len, .Ldone\@;		\
 	STOREB(t0, N(dst), .Ls_exc_p1\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	COPY_BYTE(0)
@@ -725,6 +819,7 @@ EXC(	 sb	t0, N(dst), .Ls_exc_p1)
 	COPY_BYTE(4)
 	COPY_BYTE(5)
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	lb	t0, NBYTES-2(src), .Ll_exc)
 	SUB	len, len, 1
@@ -737,6 +832,8 @@ EXC(	 sb	t0, NBYTES-2(dst), .Ls_exc_p1)
 
 .Ll_exc_copy:
 =======
+=======
+>>>>>>> v3.18
 	LOADB(t0, NBYTES-2(src), .Ll_exc\@)
 	SUB	len, len, 1
 	jr	ra
@@ -751,6 +848,9 @@ EXC(	 sb	t0, NBYTES-2(dst), .Ls_exc_p1)
 	.endif
 
 .Ll_exc_copy\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Copy bytes from src until faulting load address (or until a
@@ -763,17 +863,23 @@ EXC(	 sb	t0, NBYTES-2(dst), .Ls_exc_p1)
 	 * Assumes src < THREAD_BUADDR($28)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD	t0, TI_TASK($28)
 	 nop
 	LOAD	t0, THREAD_BUADDR(t0)
 1:
 EXC(	lb	t1, 0(src),	.Ll_exc)
 =======
+=======
+>>>>>>> v3.18
 	LOADK	t0, TI_TASK($28)
 	 nop
 	LOADK	t0, THREAD_BUADDR(t0)
 1:
 	LOADB(t1, 0(src), .Ll_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADD	src, src, 1
 	sb	t1, 0(dst)	# can't fault -- we're copy_from_user
@@ -781,6 +887,7 @@ EXC(	lb	t1, 0(src),	.Ll_exc)
 	ADD	dst, dst, 1
 	bne	src, t0, 1b
 	.set	noreorder
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Ll_exc:
 	LOAD	t0, TI_TASK($28)
@@ -790,6 +897,8 @@ EXC(	lb	t1, 0(src),	.Ll_exc)
 	SUB	len, AT, t0		# len number of uncopied bytes
 	bnez	t6, .Ldone	/* Skip the zeroing part if inatomic */
 =======
+=======
+>>>>>>> v3.18
 .Ll_exc\@:
 	LOADK	t0, TI_TASK($28)
 	 nop
@@ -797,6 +906,9 @@ EXC(	lb	t1, 0(src),	.Ll_exc)
 	 nop
 	SUB	len, AT, t0		# len number of uncopied bytes
 	bnez	t6, .Ldone\@	/* Skip the zeroing part if inatomic */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Here's where we rely on src and dst being incremented in tandem,
@@ -812,7 +924,11 @@ EXC(	lb	t1, 0(src),	.Ll_exc)
 	.set	reorder				/* DADDI_WAR */
 	SUB	src, len, 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beqz	len, .Ldone
+=======
+	beqz	len, .Ldone\@
+>>>>>>> v3.18
 =======
 	beqz	len, .Ldone\@
 >>>>>>> v3.18
@@ -837,7 +953,11 @@ EXC(	lb	t1, 0(src),	.Ll_exc)
 #define SEXC(n)							\
 	.set	reorder;			/* DADDI_WAR */ \
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Ls_exc_p ## n ## u:						\
+=======
+.Ls_exc_p ## n ## u\@:						\
+>>>>>>> v3.18
 =======
 .Ls_exc_p ## n ## u\@:						\
 >>>>>>> v3.18
@@ -855,7 +975,11 @@ SEXC(2)
 SEXC(1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Ls_exc_p1:
+=======
+.Ls_exc_p1\@:
+>>>>>>> v3.18
 =======
 .Ls_exc_p1\@:
 >>>>>>> v3.18
@@ -864,14 +988,20 @@ SEXC(1)
 	jr	ra
 	.set	noreorder
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Ls_exc:
 	jr	ra
 	 nop
 =======
+=======
+>>>>>>> v3.18
 .Ls_exc\@:
 	jr	ra
 	 nop
 	.endm
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.align	5
@@ -924,7 +1054,10 @@ LEAF(__rmemcpy)					/* a0=dst a1=src a2=len */
 	 move	a2, zero
 	END(__rmemcpy)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * t6 is used as a flag to note inatomic mode.
@@ -993,4 +1126,7 @@ __BUILD_COPY_USER EVA_MODE USEROP USEROP
 END(__copy_in_user_eva)
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -15,7 +15,10 @@
 #include <asm/e820.h>
 #include <asm/pci_x86.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

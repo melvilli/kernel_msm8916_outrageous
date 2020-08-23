@@ -96,13 +96,19 @@
 #define BGMAC_GPIO_SELECT			0x194
 #define BGMAC_GPIO_OUTPUT_EN			0x198
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* For 0x1e0 see BCMA_CLKCTLST */
 =======
+=======
+>>>>>>> v3.18
 
 /* For 0x1e0 see BCMA_CLKCTLST. Below are BGMAC specific bits */
 #define  BGMAC_BCMA_CLKCTLST_MISC_PLL_REQ	0x00000100
 #define  BGMAC_BCMA_CLKCTLST_MISC_PLL_ST	0x01000000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BGMAC_HW_WAR				0x1e4
 #define BGMAC_PWR_CTL				0x1e8
@@ -194,6 +200,10 @@
 #define   BGMAC_CMDCFG_ES_100			0x00000004
 #define   BGMAC_CMDCFG_ES_1000			0x00000008
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   BGMAC_CMDCFG_ES_2500			0x0000000C
+>>>>>>> v3.18
 =======
 #define   BGMAC_CMDCFG_ES_2500			0x0000000C
 >>>>>>> v3.18
@@ -206,7 +216,13 @@
 #define  BGMAC_CMDCFG_HD			0x00000400	/* Set if in half duplex mode */
 #define  BGMAC_CMDCFG_HD_SHIFT			10
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  BGMAC_CMDCFG_SR			0x00000800	/* Set to reset mode */
+=======
+#define  BGMAC_CMDCFG_SR_REV0			0x00000800	/* Set to reset mode, for other revs */
+#define  BGMAC_CMDCFG_SR_REV4			0x00002000	/* Set to reset mode, only for core rev 4 */
+#define  BGMAC_CMDCFG_SR(rev)  ((rev == 4) ? BGMAC_CMDCFG_SR_REV4 : BGMAC_CMDCFG_SR_REV0)
+>>>>>>> v3.18
 =======
 #define  BGMAC_CMDCFG_SR_REV0			0x00000800	/* Set to reset mode, for other revs */
 #define  BGMAC_CMDCFG_SR_REV4			0x00002000	/* Set to reset mode, only for core rev 4 */
@@ -235,6 +251,7 @@
 #define BGMAC_TX_STATUS				0xb3c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BGMAC_PHY_CTL				0x00
 #define  BGMAC_PHY_CTL_SPEED_MSB		0x0040
 #define  BGMAC_PHY_CTL_DUPLEX			0x0100		/* duplex mode */
@@ -258,6 +275,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* BCMA GMAC core specific IO Control (BCMA_IOCTL) flags */
 #define BGMAC_BCMA_IOCTL_SW_CLKEN		0x00000004	/* PHY Clock Enable */
 #define BGMAC_BCMA_IOCTL_SW_RESET		0x00000008	/* PHY Reset */
@@ -276,10 +295,13 @@
 #define  BGMAC_DMA_TX_LOOPBACK			0x00000004
 #define  BGMAC_DMA_TX_FLUSH			0x00000010
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  BGMAC_DMA_TX_PARITY_DISABLE		0x00000800
 #define  BGMAC_DMA_TX_ADDREXT_MASK		0x00030000
 #define  BGMAC_DMA_TX_ADDREXT_SHIFT		16
 =======
+=======
+>>>>>>> v3.18
 #define  BGMAC_DMA_TX_MR_MASK			0x000000C0	/* Multiple outstanding reads */
 #define  BGMAC_DMA_TX_MR_SHIFT			6
 #define   BGMAC_DMA_TX_MR_1			0
@@ -308,6 +330,9 @@
 #define   BGMAC_DMA_TX_PT_2			1
 #define   BGMAC_DMA_TX_PT_4			2
 #define   BGMAC_DMA_TX_PT_8			3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BGMAC_DMA_TX_INDEX			0x04
 #define BGMAC_DMA_TX_RINGLO			0x08
@@ -337,9 +362,12 @@
 #define  BGMAC_DMA_RX_OVERFLOW_CONT		0x00000400
 #define  BGMAC_DMA_RX_PARITY_DISABLE		0x00000800
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  BGMAC_DMA_RX_ADDREXT_MASK		0x00030000
 #define  BGMAC_DMA_RX_ADDREXT_SHIFT		16
 =======
+=======
+>>>>>>> v3.18
 #define  BGMAC_DMA_RX_MR_MASK			0x000000C0	/* Multiple outstanding reads */
 #define  BGMAC_DMA_RX_MR_SHIFT			6
 #define   BGMAC_DMA_TX_MR_1			0
@@ -367,6 +395,9 @@
 #define   BGMAC_DMA_RX_PT_2			1
 #define   BGMAC_DMA_RX_PT_4			2
 #define   BGMAC_DMA_RX_PT_8			3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BGMAC_DMA_RX_INDEX			0x24
 #define BGMAC_DMA_RX_RINGLO			0x28
@@ -425,10 +456,13 @@
 #define BGMAC_CHIPCTL_1_RXC_DLL_BYPASS		0x00010000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BGMAC_SPEED_10				0x0001
 #define BGMAC_SPEED_100				0x0002
 #define BGMAC_SPEED_1000			0x0004
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BGMAC_WEIGHT	64
@@ -470,6 +504,11 @@ struct bgmac_dma_ring {
 	struct bgmac_dma_desc *cpu_base;
 	dma_addr_t dma_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 index_base; /* Used for unaligned rings only, otherwise 0 */
+	bool unaligned;
+>>>>>>> v3.18
 =======
 	u32 index_base; /* Used for unaligned rings only, otherwise 0 */
 	bool unaligned;
@@ -491,6 +530,10 @@ struct bgmac {
 	struct napi_struct napi;
 	struct mii_bus *mii_bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct phy_device *phy_dev;
+>>>>>>> v3.18
 =======
 	struct phy_device *phy_dev;
 >>>>>>> v3.18
@@ -509,10 +552,16 @@ struct bgmac {
 	u32 int_status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Speed-related */
 	int speed;
 	bool autoneg;
 	bool full_duplex;
+=======
+	/* Current MAC state */
+	int mac_speed;
+	int mac_duplex;
+>>>>>>> v3.18
 =======
 	/* Current MAC state */
 	int mac_speed;

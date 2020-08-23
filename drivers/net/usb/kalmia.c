@@ -16,7 +16,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -225,12 +228,18 @@ done:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_dbg(
 		dev->net,
 		"Sending package with length %i and padding %i. Header: %02x:%02x:%02x:%02x:%02x:%02x.",
 		content_len, padlen, header_start[0], header_start[1],
 		header_start[2], header_start[3], header_start[4],
 		header_start[5]);
+=======
+	netdev_dbg(dev->net,
+		"Sending package with length %i and padding %i. Header: %6phC.",
+		content_len, padlen, header_start);
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev->net,
 		"Sending package with length %i and padding %i. Header: %6phC.",
@@ -273,6 +282,7 @@ kalmia_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 				header_start, EXPECTED_UNKNOWN_HEADER_2,
 				sizeof(EXPECTED_UNKNOWN_HEADER_2))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				netdev_dbg(
 					dev->net,
 					"Received expected unknown frame header: %02x:%02x:%02x:%02x:%02x:%02x. Package length: %i\n",
@@ -289,6 +299,8 @@ kalmia_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 					header_start[2], header_start[3],
 					header_start[4], header_start[5],
 =======
+=======
+>>>>>>> v3.18
 				netdev_dbg(dev->net,
 					"Received expected unknown frame header: %6phC. Package length: %i\n",
 					header_start,
@@ -298,6 +310,9 @@ kalmia_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 				netdev_err(dev->net,
 					"Received unknown frame header: %6phC. Package length: %i\n",
 					header_start,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					skb->len - KALMIA_HEADER_LENGTH);
 				return 0;
@@ -305,12 +320,18 @@ kalmia_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 		}
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_dbg(
 				dev->net,
 				"Received header: %02x:%02x:%02x:%02x:%02x:%02x. Package length: %i\n",
 				header_start[0], header_start[1], header_start[2],
 				header_start[3], header_start[4], header_start[5],
 				skb->len - KALMIA_HEADER_LENGTH);
+=======
+			netdev_dbg(dev->net,
+				"Received header: %6phC. Package length: %i\n",
+				header_start, skb->len - KALMIA_HEADER_LENGTH);
+>>>>>>> v3.18
 =======
 			netdev_dbg(dev->net,
 				"Received header: %6phC. Package length: %i\n",
@@ -338,12 +359,18 @@ kalmia_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 			if (!is_last) {
 				header_start = skb->data + ether_packet_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				netdev_dbg(
 					dev->net,
 					"End header: %02x:%02x:%02x:%02x:%02x:%02x. Package length: %i\n",
 					header_start[0], header_start[1],
 					header_start[2], header_start[3],
 					header_start[4], header_start[5],
+=======
+				netdev_dbg(dev->net,
+					"End header: %6phC. Package length: %i\n",
+					header_start,
+>>>>>>> v3.18
 =======
 				netdev_dbg(dev->net,
 					"End header: %6phC. Package length: %i\n",

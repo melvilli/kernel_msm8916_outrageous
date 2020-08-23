@@ -76,13 +76,19 @@ void __init pci_xen_swiotlb_init(void)
 		dma_ops = &xen_swiotlb_dma_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Make sure ACS will be enabled */
 		pci_request_acs();
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 		/* Make sure ACS will be enabled */
 		pci_request_acs();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -100,13 +106,19 @@ int pci_xen_swiotlb_init_late(void)
 
 	dma_ops = &xen_swiotlb_dma_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure ACS will be enabled */
 	pci_request_acs();
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 	/* Make sure ACS will be enabled */
 	pci_request_acs();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

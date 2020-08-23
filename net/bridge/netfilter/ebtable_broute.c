@@ -24,8 +24,12 @@ static struct ebt_entries initial_chain = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ebt_replace_kernel initial_table =
 {
+=======
+static struct ebt_replace_kernel initial_table = {
+>>>>>>> v3.18
 =======
 static struct ebt_replace_kernel initial_table = {
 >>>>>>> v3.18
@@ -46,8 +50,12 @@ static int check(const struct ebt_table_info *info, unsigned int valid_hooks)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct ebt_table broute_table =
 {
+=======
+static const struct ebt_table broute_table = {
+>>>>>>> v3.18
 =======
 static const struct ebt_table broute_table = {
 >>>>>>> v3.18
@@ -73,7 +81,11 @@ static int __net_init broute_net_init(struct net *net)
 {
 	net->xt.broute_table = ebt_register_table(net, &broute_table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->xt.broute_table);
+=======
+	return PTR_ERR_OR_ZERO(net->xt.broute_table);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->xt.broute_table);
 >>>>>>> v3.18

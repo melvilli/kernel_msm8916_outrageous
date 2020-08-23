@@ -24,7 +24,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is used to catch non optimized PT_GUEST_(DIRTY|ACCESS)_SHIFT macro
  * uses for EPT without A/D paging type.
@@ -32,6 +35,9 @@
 extern u64 __pure __using_nonexistent_pte_bit(void)
 	       __compiletime_error("wrong use of PT_GUEST_(DIRTY|ACCESS)_SHIFT");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if PTTYPE == 64
 	#define pt_element_t u64
@@ -43,11 +49,17 @@ extern u64 __pure __using_nonexistent_pte_bit(void)
 	#define PT_INDEX(addr, level) PT64_INDEX(addr, level)
 	#define PT_LEVEL_BITS PT64_LEVEL_BITS
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	#define PT_GUEST_ACCESSED_MASK PT_ACCESSED_MASK
 	#define PT_GUEST_DIRTY_MASK PT_DIRTY_MASK
 	#define PT_GUEST_DIRTY_SHIFT PT_DIRTY_SHIFT
 	#define PT_GUEST_ACCESSED_SHIFT PT_ACCESSED_SHIFT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	#ifdef CONFIG_X86_64
 	#define PT_MAX_FULL_LEVELS 4
@@ -67,8 +79,11 @@ extern u64 __pure __using_nonexistent_pte_bit(void)
 	#define PT_LEVEL_BITS PT32_LEVEL_BITS
 	#define PT_MAX_FULL_LEVELS 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#define CMPXCHG cmpxchg
 =======
+=======
+>>>>>>> v3.18
 	#define PT_GUEST_ACCESSED_MASK PT_ACCESSED_MASK
 	#define PT_GUEST_DIRTY_MASK PT_DIRTY_MASK
 	#define PT_GUEST_DIRTY_SHIFT PT_DIRTY_SHIFT
@@ -89,6 +104,9 @@ extern u64 __pure __using_nonexistent_pte_bit(void)
 	#define PT_GUEST_ACCESSED_SHIFT __using_nonexistent_pte_bit()
 	#define CMPXCHG cmpxchg64
 	#define PT_MAX_FULL_LEVELS 4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	#error Invalid PTTYPE value
@@ -110,6 +128,10 @@ struct guest_walker {
 	gpa_t pte_gpa[PT_MAX_FULL_LEVELS];
 	pt_element_t __user *ptep_user[PT_MAX_FULL_LEVELS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool pte_writable[PT_MAX_FULL_LEVELS];
+>>>>>>> v3.18
 =======
 	bool pte_writable[PT_MAX_FULL_LEVELS];
 >>>>>>> v3.18
@@ -125,7 +147,10 @@ static gfn_t gpte_to_gfn_lvl(pt_element_t gpte, int lvl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void FNAME(protect_clean_gpte)(unsigned *access, unsigned gpte)
 {
 	unsigned mask;
@@ -160,6 +185,9 @@ static inline int FNAME(is_present_gpte)(unsigned long pte)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int FNAME(cmpxchg_gpte)(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 			       pt_element_t __user *ptep_user, unsigned index,
@@ -185,7 +213,10 @@ static int FNAME(cmpxchg_gpte)(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool FNAME(prefetch_invalid_gpte)(struct kvm_vcpu *vcpu,
 				  struct kvm_mmu_page *sp, u64 *spte,
 				  u64 gpte)
@@ -222,6 +253,9 @@ static inline unsigned FNAME(gpte_access)(struct kvm_vcpu *vcpu, u64 gpte)
 	return access;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int FNAME(update_accessed_dirty_bits)(struct kvm_vcpu *vcpu,
 					     struct kvm_mmu *mmu,
@@ -235,17 +269,24 @@ static int FNAME(update_accessed_dirty_bits)(struct kvm_vcpu *vcpu,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* dirty/accessed bits are not supported, so no need to update them */
 	if (!PT_GUEST_DIRTY_MASK)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (level = walker->max_level; level >= walker->level; --level) {
 		pte = orig_pte = walker->ptes[level - 1];
 		table_gfn = walker->table_gfn[level - 1];
 		ptep_user = walker->ptep_user[level - 1];
 		index = offset_in_page(ptep_user) / sizeof(pt_element_t);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(pte & PT_ACCESSED_MASK)) {
 			trace_kvm_mmu_set_accessed_bit(table_gfn, index, sizeof(pte));
@@ -255,6 +296,8 @@ static int FNAME(update_accessed_dirty_bits)(struct kvm_vcpu *vcpu,
 			trace_kvm_mmu_set_dirty_bit(table_gfn, index, sizeof(pte));
 			pte |= PT_DIRTY_MASK;
 =======
+=======
+>>>>>>> v3.18
 		if (!(pte & PT_GUEST_ACCESSED_MASK)) {
 			trace_kvm_mmu_set_accessed_bit(table_gfn, index, sizeof(pte));
 			pte |= PT_GUEST_ACCESSED_MASK;
@@ -263,13 +306,19 @@ static int FNAME(update_accessed_dirty_bits)(struct kvm_vcpu *vcpu,
 				!(pte & PT_GUEST_DIRTY_MASK)) {
 			trace_kvm_mmu_set_dirty_bit(table_gfn, index, sizeof(pte));
 			pte |= PT_GUEST_DIRTY_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (pte == orig_pte)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If the slot is read-only, simply do not process the accessed
 		 * and dirty bits.  This is the correct thing to do if the slot
@@ -286,6 +335,9 @@ static int FNAME(update_accessed_dirty_bits)(struct kvm_vcpu *vcpu,
 		if (unlikely(!walker->pte_writable[level - 1]))
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = FNAME(cmpxchg_gpte)(vcpu, mmu, ptep_user, index, orig_pte, pte);
 		if (ret)
@@ -328,7 +380,11 @@ retry_walk:
 		pte = mmu->get_pdptr(vcpu, (addr >> 30) & 3);
 		trace_kvm_mmu_paging_element(pte, walker->level);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!is_present_gpte(pte))
+=======
+		if (!FNAME(is_present_gpte)(pte))
+>>>>>>> v3.18
 =======
 		if (!FNAME(is_present_gpte)(pte))
 >>>>>>> v3.18
@@ -338,10 +394,16 @@ retry_walk:
 #endif
 	walker->max_level = walker->level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASSERT((!is_long_mode(vcpu) && is_pae(vcpu)) ||
 	       (mmu->get_cr3(vcpu) & CR3_NONPAE_RESERVED_BITS) == 0);
 
 	accessed_dirty = PT_ACCESSED_MASK;
+=======
+	ASSERT(!(is_long_mode(vcpu) && !is_pae(vcpu)));
+
+	accessed_dirty = PT_GUEST_ACCESSED_MASK;
+>>>>>>> v3.18
 =======
 	ASSERT(!(is_long_mode(vcpu) && !is_pae(vcpu)));
 
@@ -367,6 +429,7 @@ retry_walk:
 
 		real_gfn = mmu->translate_gpa(vcpu, gfn_to_gpa(table_gfn),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      PFERR_USER_MASK|PFERR_WRITE_MASK);
 		if (unlikely(real_gfn == UNMAPPED_GVA))
 			goto error;
@@ -374,6 +437,8 @@ retry_walk:
 
 		host_addr = gfn_to_hva(vcpu->kvm, real_gfn);
 =======
+=======
+>>>>>>> v3.18
 					      PFERR_USER_MASK|PFERR_WRITE_MASK,
 					      &walker->fault);
 
@@ -394,6 +459,9 @@ retry_walk:
 
 		host_addr = gfn_to_hva_prot(vcpu->kvm, real_gfn,
 					    &walker->pte_writable[walker->level - 1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(kvm_is_error_hva(host_addr)))
 			goto error;
@@ -406,17 +474,23 @@ retry_walk:
 		trace_kvm_mmu_paging_element(pte, walker->level);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unlikely(!is_present_gpte(pte)))
 			goto error;
 
 		if (unlikely(is_rsvd_bits_set(&vcpu->arch.mmu, pte,
 					      walker->level))) {
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(!FNAME(is_present_gpte)(pte)))
 			goto error;
 
 		if (unlikely(FNAME(is_rsvd_bits_set)(mmu, pte,
 					             walker->level))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			errcode |= PFERR_RSVD_MASK | PFERR_PRESENT_MASK;
 			goto error;
@@ -424,7 +498,11 @@ retry_walk:
 
 		accessed_dirty &= pte;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_access = pt_access & gpte_access(vcpu, pte);
+=======
+		pte_access = pt_access & FNAME(gpte_access)(vcpu, pte);
+>>>>>>> v3.18
 =======
 		pte_access = pt_access & FNAME(gpte_access)(vcpu, pte);
 >>>>>>> v3.18
@@ -433,7 +511,11 @@ retry_walk:
 	} while (!is_last_gpte(mmu, walker->level, pte));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(permission_fault(mmu, pte_access, access))) {
+=======
+	if (unlikely(permission_fault(vcpu, mmu, pte_access, access))) {
+>>>>>>> v3.18
 =======
 	if (unlikely(permission_fault(vcpu, mmu, pte_access, access))) {
 >>>>>>> v3.18
@@ -448,7 +530,11 @@ retry_walk:
 		gfn += pse36_gfn_delta(pte);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	real_gpa = mmu->translate_gpa(vcpu, gfn_to_gpa(gfn), access);
+=======
+	real_gpa = mmu->translate_gpa(vcpu, gfn_to_gpa(gfn), access, &walker->fault);
+>>>>>>> v3.18
 =======
 	real_gpa = mmu->translate_gpa(vcpu, gfn_to_gpa(gfn), access, &walker->fault);
 >>>>>>> v3.18
@@ -459,6 +545,7 @@ retry_walk:
 
 	if (!write_fault)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		protect_clean_gpte(&pte_access, pte);
 	else
 		/*
@@ -467,6 +554,8 @@ retry_walk:
 		 */
 		accessed_dirty &= pte >> (PT_DIRTY_SHIFT - PT_ACCESSED_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 		FNAME(protect_clean_gpte)(&pte_access, pte);
 	else
 		/*
@@ -476,6 +565,9 @@ retry_walk:
 		 */
 		accessed_dirty &= pte >>
 			(PT_GUEST_DIRTY_SHIFT - PT_GUEST_ACCESSED_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(!accessed_dirty)) {
@@ -502,7 +594,10 @@ error:
 	walker->fault.error_code_valid = true;
 	walker->fault.error_code = errcode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if PTTYPE == PTTYPE_EPT
 	/*
@@ -522,6 +617,9 @@ error:
 		vcpu->arch.exit_qualification |= ((pt_access & pte) & 0x7) << 3;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	walker->fault.address = addr;
 	walker->fault.nested_page_fault = mmu != vcpu->arch.walk_mmu;
@@ -538,6 +636,10 @@ static int FNAME(walk_addr)(struct guest_walker *walker,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if PTTYPE != PTTYPE_EPT
+>>>>>>> v3.18
 =======
 #if PTTYPE != PTTYPE_EPT
 >>>>>>> v3.18
@@ -549,6 +651,10 @@ static int FNAME(walk_addr_nested)(struct guest_walker *walker,
 					addr, access);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -562,7 +668,11 @@ FNAME(prefetch_gpte)(struct kvm_vcpu *vcpu, struct kvm_mmu_page *sp,
 	pfn_t pfn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (prefetch_invalid_gpte(vcpu, sp, spte, gpte))
+=======
+	if (FNAME(prefetch_invalid_gpte)(vcpu, sp, spte, gpte))
+>>>>>>> v3.18
 =======
 	if (FNAME(prefetch_invalid_gpte)(vcpu, sp, spte, gpte))
 >>>>>>> v3.18
@@ -572,8 +682,13 @@ FNAME(prefetch_gpte)(struct kvm_vcpu *vcpu, struct kvm_mmu_page *sp,
 
 	gfn = gpte_to_gfn(gpte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_access = sp->role.access & gpte_access(vcpu, gpte);
 	protect_clean_gpte(&pte_access, gpte);
+=======
+	pte_access = sp->role.access & FNAME(gpte_access)(vcpu, gpte);
+	FNAME(protect_clean_gpte)(&pte_access, gpte);
+>>>>>>> v3.18
 =======
 	pte_access = sp->role.access & FNAME(gpte_access)(vcpu, gpte);
 	FNAME(protect_clean_gpte)(&pte_access, gpte);
@@ -711,7 +826,11 @@ static int FNAME(fetch)(struct kvm_vcpu *vcpu, gva_t addr,
 
 		if (sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			link_shadow_page(it.sptep, sp);
+=======
+			link_shadow_page(it.sptep, sp, PT_GUEST_ACCESSED_MASK);
+>>>>>>> v3.18
 =======
 			link_shadow_page(it.sptep, sp, PT_GUEST_ACCESSED_MASK);
 >>>>>>> v3.18
@@ -735,7 +854,11 @@ static int FNAME(fetch)(struct kvm_vcpu *vcpu, gva_t addr,
 		sp = kvm_mmu_get_page(vcpu, direct_gfn, addr, it.level-1,
 				      true, direct_access, it.sptep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		link_shadow_page(it.sptep, sp);
+=======
+		link_shadow_page(it.sptep, sp, PT_GUEST_ACCESSED_MASK);
+>>>>>>> v3.18
 =======
 		link_shadow_page(it.sptep, sp, PT_GUEST_ACCESSED_MASK);
 >>>>>>> v3.18
@@ -825,16 +948,22 @@ static int FNAME(page_fault)(struct kvm_vcpu *vcpu, gva_t addr, u32 error_code,
 	pgprintk("%s: addr %lx err %x\n", __func__, addr, error_code);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(error_code & PFERR_RSVD_MASK))
 		return handle_mmio_page_fault(vcpu, addr, error_code,
 					      mmu_is_nested(vcpu));
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(error_code & PFERR_RSVD_MASK)) {
 		r = handle_mmio_page_fault(vcpu, addr, error_code,
 					      mmu_is_nested(vcpu));
 		if (likely(r != RET_MMIO_PF_INVALID))
 			return r;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	r = mmu_topup_memory_caches(vcpu);
@@ -1011,6 +1140,10 @@ static gpa_t FNAME(gva_to_gpa)(struct kvm_vcpu *vcpu, gva_t vaddr, u32 access,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if PTTYPE != PTTYPE_EPT
+>>>>>>> v3.18
 =======
 #if PTTYPE != PTTYPE_EPT
 >>>>>>> v3.18
@@ -1033,6 +1166,10 @@ static gpa_t FNAME(gva_to_gpa_nested)(struct kvm_vcpu *vcpu, gva_t vaddr,
 	return gpa;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1077,7 +1214,11 @@ static int FNAME(sync_page)(struct kvm_vcpu *vcpu, struct kvm_mmu_page *sp)
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (prefetch_invalid_gpte(vcpu, sp, &sp->spt[i], gpte)) {
+=======
+		if (FNAME(prefetch_invalid_gpte)(vcpu, sp, &sp->spt[i], gpte)) {
+>>>>>>> v3.18
 =======
 		if (FNAME(prefetch_invalid_gpte)(vcpu, sp, &sp->spt[i], gpte)) {
 >>>>>>> v3.18
@@ -1088,16 +1229,22 @@ static int FNAME(sync_page)(struct kvm_vcpu *vcpu, struct kvm_mmu_page *sp)
 		gfn = gpte_to_gfn(gpte);
 		pte_access = sp->role.access;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_access &= gpte_access(vcpu, gpte);
 		protect_clean_gpte(&pte_access, gpte);
 
 		if (sync_mmio_spte(&sp->spt[i], gfn, pte_access, &nr_present))
 =======
+=======
+>>>>>>> v3.18
 		pte_access &= FNAME(gpte_access)(vcpu, gpte);
 		FNAME(protect_clean_gpte)(&pte_access, gpte);
 
 		if (sync_mmio_spte(vcpu->kvm, &sp->spt[i], gfn, pte_access,
 		      &nr_present))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -1133,9 +1280,15 @@ static int FNAME(sync_page)(struct kvm_vcpu *vcpu, struct kvm_mmu_page *sp)
 #undef gpte_to_gfn_lvl
 #undef CMPXCHG
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #undef PT_GUEST_ACCESSED_MASK
 #undef PT_GUEST_DIRTY_MASK
 #undef PT_GUEST_DIRTY_SHIFT
 #undef PT_GUEST_ACCESSED_SHIFT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

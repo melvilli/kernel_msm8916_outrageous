@@ -118,6 +118,7 @@ enum {
 	PINMUX_INPUT_END,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINMUX_INPUT_PULLUP_BEGIN,
 	PTA7_IN_PU, PTA6_IN_PU, PTA5_IN_PU, PTA4_IN_PU,
 	PTA3_IN_PU, PTA2_IN_PU, PTA1_IN_PU, PTA0_IN_PU,
@@ -164,6 +165,8 @@ enum {
 	PTZ3_IN_PU, PTZ2_IN_PU, PTZ1_IN_PU, PTZ0_IN_PU,
 	PINMUX_INPUT_PULLUP_END,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PINMUX_OUTPUT_BEGIN,
@@ -576,6 +579,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
 	/* PTA GPIO */
 	PINMUX_DATA(PTA7_DATA, PTA7_IN, PTA7_OUT, PTA7_IN_PU),
@@ -637,6 +641,8 @@ static const pinmux_enum_t pinmux_data[] = {
 	PINMUX_DATA(PTF1_DATA, PTF1_IN, PTF1_OUT, PTF1_IN_PU),
 	PINMUX_DATA(PTF0_DATA, PTF0_IN, PTF0_OUT, PTF0_IN_PU),
 =======
+=======
+>>>>>>> v3.18
 static const u16 pinmux_data[] = {
 	/* PTA GPIO */
 	PINMUX_DATA(PTA7_DATA, PTA7_IN, PTA7_OUT),
@@ -697,6 +703,9 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(PTF2_DATA, PTF2_IN, PTF2_OUT),
 	PINMUX_DATA(PTF1_DATA, PTF1_IN, PTF1_OUT),
 	PINMUX_DATA(PTF0_DATA, PTF0_IN, PTF0_OUT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* PTG GPIO */
@@ -709,6 +718,7 @@ static const u16 pinmux_data[] = {
 
 	/* PTH GPIO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINMUX_DATA(PTH7_DATA, PTH7_IN, PTH7_OUT, PTH7_IN_PU),
 	PINMUX_DATA(PTH6_DATA, PTH6_IN, PTH6_OUT, PTH6_IN_PU),
 	PINMUX_DATA(PTH5_DATA, PTH5_IN, PTH5_OUT, PTH5_IN_PU),
@@ -718,6 +728,8 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(PTH1_DATA, PTH1_IN, PTH1_OUT, PTH1_IN_PU),
 	PINMUX_DATA(PTH0_DATA, PTH0_IN, PTH0_OUT, PTH0_IN_PU),
 =======
+=======
+>>>>>>> v3.18
 	PINMUX_DATA(PTH7_DATA, PTH7_IN, PTH7_OUT),
 	PINMUX_DATA(PTH6_DATA, PTH6_IN, PTH6_OUT),
 	PINMUX_DATA(PTH5_DATA, PTH5_IN, PTH5_OUT),
@@ -726,12 +738,16 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(PTH2_DATA, PTH2_IN, PTH2_OUT),
 	PINMUX_DATA(PTH1_DATA, PTH1_IN, PTH1_OUT),
 	PINMUX_DATA(PTH0_DATA, PTH0_IN, PTH0_OUT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* PTJ GPIO */
 	PINMUX_DATA(PTJ7_DATA, PTJ7_OUT),
 	PINMUX_DATA(PTJ6_DATA, PTJ6_OUT),
 	PINMUX_DATA(PTJ5_DATA, PTJ5_OUT),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PINMUX_DATA(PTJ3_DATA, PTJ3_IN, PTJ3_OUT, PTJ3_IN_PU),
 	PINMUX_DATA(PTJ2_DATA, PTJ2_IN, PTJ2_OUT, PTJ2_IN_PU),
@@ -877,6 +893,8 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(PTZ1_DATA, PTZ1_IN, PTZ1_OUT, PTZ1_IN_PU),
 	PINMUX_DATA(PTZ0_DATA, PTZ0_IN, PTZ0_OUT, PTZ0_IN_PU),
 =======
+=======
+>>>>>>> v3.18
 	PINMUX_DATA(PTJ3_DATA, PTJ3_IN, PTJ3_OUT),
 	PINMUX_DATA(PTJ2_DATA, PTJ2_IN, PTJ2_OUT),
 	PINMUX_DATA(PTJ1_DATA, PTJ1_IN, PTJ1_OUT),
@@ -1020,6 +1038,9 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(PTZ2_DATA, PTZ2_IN, PTZ2_OUT),
 	PINMUX_DATA(PTZ1_DATA, PTZ1_IN, PTZ1_OUT),
 	PINMUX_DATA(PTZ0_DATA, PTZ0_IN, PTZ0_OUT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* PTA FN */
@@ -1416,6 +1437,7 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
 	/* PTA */
 	PINMUX_GPIO(GPIO_PTA7, PTA7_DATA),
@@ -1643,6 +1665,8 @@ static struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(GPIO_PTZ1, PTZ1_DATA),
 	PINMUX_GPIO(GPIO_PTZ0, PTZ0_DATA),
 =======
+=======
+>>>>>>> v3.18
 static const struct sh_pfc_pin pinmux_pins[] = {
 	/* PTA */
 	PINMUX_GPIO(PTA7),
@@ -1869,6 +1893,9 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(PTZ2),
 	PINMUX_GPIO(PTZ1),
 	PINMUX_GPIO(PTZ0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2242,6 +2269,7 @@ static const struct pinmux_func pinmux_func_gpios[] = {
 static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 	{ PINMUX_CFG_REG("PACR", 0xa4050100, 16, 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PTA7_FN, PTA7_OUT, PTA7_IN_PU, PTA7_IN,
 		PTA6_FN, PTA6_OUT, PTA6_IN_PU, PTA6_IN,
 		PTA5_FN, PTA5_OUT, PTA5_IN_PU, PTA5_IN,
@@ -2301,6 +2329,8 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTF1_FN, PTF1_OUT, PTF1_IN_PU, PTF1_IN,
 		PTF0_FN, PTF0_OUT, PTF0_IN_PU, PTF0_IN }
 =======
+=======
+>>>>>>> v3.18
 		PTA7_FN, PTA7_OUT, 0, PTA7_IN,
 		PTA6_FN, PTA6_OUT, 0, PTA6_IN,
 		PTA5_FN, PTA5_OUT, 0, PTA5_IN,
@@ -2359,6 +2389,9 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTF2_FN, PTF2_OUT, 0, PTF2_IN,
 		PTF1_FN, PTF1_OUT, 0, PTF1_IN,
 		PTF0_FN, PTF0_OUT, 0, PTF0_IN }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{ PINMUX_CFG_REG("PGCR", 0xa405010c, 16, 2) {
@@ -2373,6 +2406,7 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 	},
 	{ PINMUX_CFG_REG("PHCR", 0xa405010e, 16, 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PTH7_FN, PTH7_OUT, PTH7_IN_PU, PTH7_IN,
 		PTH6_FN, PTH6_OUT, PTH6_IN_PU, PTH6_IN,
 		PTH5_FN, PTH5_OUT, PTH5_IN_PU, PTH5_IN,
@@ -2382,6 +2416,8 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTH1_FN, PTH1_OUT, PTH1_IN_PU, PTH1_IN,
 		PTH0_FN, PTH0_OUT, PTH0_IN_PU, PTH0_IN }
 =======
+=======
+>>>>>>> v3.18
 		PTH7_FN, PTH7_OUT, 0, PTH7_IN,
 		PTH6_FN, PTH6_OUT, 0, PTH6_IN,
 		PTH5_FN, PTH5_OUT, 0, PTH5_IN,
@@ -2390,6 +2426,9 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTH2_FN, PTH2_OUT, 0, PTH2_IN,
 		PTH1_FN, PTH1_OUT, 0, PTH1_IN,
 		PTH0_FN, PTH0_OUT, 0, PTH0_IN }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{ PINMUX_CFG_REG("PJCR", 0xa4050110, 16, 2) {
@@ -2397,6 +2436,7 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTJ6_FN, PTJ6_OUT, 0, 0,
 		PTJ5_FN, PTJ5_OUT, 0, 0,
 		0, 0, 0, 0,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		PTJ3_FN, PTJ3_OUT, PTJ3_IN_PU, PTJ3_IN,
 		PTJ2_FN, PTJ2_OUT, PTJ2_IN_PU, PTJ2_IN,
@@ -2543,6 +2583,8 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTZ1_FN, PTZ1_OUT, PTZ1_IN_PU, PTZ1_IN,
 		PTZ0_FN, PTZ0_OUT, PTZ0_IN_PU, PTZ0_IN }
 =======
+=======
+>>>>>>> v3.18
 		PTJ3_FN, PTJ3_OUT, 0, PTJ3_IN,
 		PTJ2_FN, PTJ2_OUT, 0, PTJ2_IN,
 		PTJ1_FN, PTJ1_OUT, 0, PTJ1_IN,
@@ -2687,6 +2729,9 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PTZ2_FN, PTZ2_OUT, 0, PTZ2_IN,
 		PTZ1_FN, PTZ1_OUT, 0, PTZ1_IN,
 		PTZ0_FN, PTZ0_OUT, 0, PTZ0_IN }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{ PINMUX_CFG_REG("PSELA", 0xa405014e, 16, 1) {
@@ -2882,7 +2927,10 @@ const struct sh_pfc_soc_info sh7724_pinmux_info = {
 	.name = "sh7724_pfc",
 	.input = { PINMUX_INPUT_BEGIN, PINMUX_INPUT_END },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.input_pu = { PINMUX_INPUT_PULLUP_BEGIN, PINMUX_INPUT_PULLUP_END },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.output = { PINMUX_OUTPUT_BEGIN, PINMUX_OUTPUT_END },

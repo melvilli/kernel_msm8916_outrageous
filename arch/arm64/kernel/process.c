@@ -35,7 +35,10 @@
 #include <linux/init.h>
 #include <linux/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cpuidle.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/elfcore.h>
@@ -61,6 +64,7 @@ unsigned long __stack_chk_guard __read_mostly;
 EXPORT_SYMBOL(__stack_chk_guard);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void setup_restart(void)
 {
@@ -93,10 +97,15 @@ void soft_restart(unsigned long addr)
 	phys_reset(addr);
 
 =======
+=======
+>>>>>>> v3.18
 void soft_restart(unsigned long addr)
 {
 	setup_mm_for_reboot();
 	cpu_soft_restart(virt_to_phys(cpu_reset), addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Should never get here */
 	BUG();
@@ -110,7 +119,10 @@ EXPORT_SYMBOL_GPL(pm_power_off);
 
 void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(arm_pm_restart);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -123,6 +135,7 @@ void arch_cpu_idle(void)
 	 * This should do all the clock switching and wait for interrupt
 	 * tricks
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpuidle_idle_call()) {
 		cpu_do_idle();
@@ -138,6 +151,10 @@ void arch_cpu_idle_enter(void)
 void arch_cpu_idle_exit(void)
 {
 	idle_notifier_call_chain(IDLE_END);
+=======
+	cpu_do_idle();
+	local_irq_enable();
+>>>>>>> v3.18
 =======
 	cpu_do_idle();
 	local_irq_enable();
@@ -211,7 +228,13 @@ void machine_restart(char *cmd)
 	/* Now call the architecture specific reboot code. */
 	if (arm_pm_restart)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		arm_pm_restart(REBOOT_HARD, cmd);
+=======
+		arm_pm_restart(reboot_mode, cmd);
+	else
+		do_kernel_restart(cmd);
+>>>>>>> v3.18
 =======
 		arm_pm_restart(reboot_mode, cmd);
 	else
@@ -225,6 +248,7 @@ void machine_restart(char *cmd)
 	while (1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * dump a block of kernel memory from around the given address
@@ -285,6 +309,8 @@ static void show_extra_register_data(struct pt_regs *regs, int nbytes)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __show_regs(struct pt_regs *regs)
 {
 	int i, top_reg;
@@ -312,9 +338,12 @@ void __show_regs(struct pt_regs *regs)
 			printk("\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Dump only kernel mode */
 	if (get_fs() == get_ds())
 		show_extra_register_data(regs, 256);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk("\n");
@@ -507,10 +536,13 @@ unsigned long arch_randomize_brk(struct mm_struct *mm)
 	return randomize_base(mm->brk);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 unsigned long randomize_et_dyn(unsigned long base)
 {
 	return randomize_base(base);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

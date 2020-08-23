@@ -199,7 +199,10 @@
 
 			mdio@10d40 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "mdio";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				compatible = "fsl,pq2fads-mdio-bitbang",
@@ -216,7 +219,10 @@
 					interrupts = <25 2>;
 					reg = <0x0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -226,7 +232,10 @@
 					interrupts = <25 2>;
 					reg = <0x3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};

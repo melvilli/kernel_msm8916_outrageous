@@ -78,7 +78,11 @@ EXPORT_SYMBOL_GPL(dasd_nofcx);
  */
 static char *dasd[256];
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param_array(dasd, charp, NULL, 0);
+=======
+module_param_array(dasd, charp, NULL, S_IRUGO);
+>>>>>>> v3.18
 =======
 module_param_array(dasd, charp, NULL, S_IRUGO);
 >>>>>>> v3.18
@@ -935,7 +939,11 @@ dasd_use_raw_store(struct device *dev, struct device_attribute *attr,
 		return PTR_ERR(devmap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(buf, 10, &val) != 0) || val > 1)
+=======
+	if ((kstrtoul(buf, 10, &val) != 0) || val > 1)
+>>>>>>> v3.18
 =======
 	if ((kstrtoul(buf, 10, &val) != 0) || val > 1)
 >>>>>>> v3.18
@@ -1234,7 +1242,11 @@ dasd_expires_store(struct device *dev, struct device_attribute *attr,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(buf, 10, &val) != 0) ||
+=======
+	if ((kstrtoul(buf, 10, &val) != 0) ||
+>>>>>>> v3.18
 =======
 	if ((kstrtoul(buf, 10, &val) != 0) ||
 >>>>>>> v3.18
@@ -1253,7 +1265,10 @@ dasd_expires_store(struct device *dev, struct device_attribute *attr,
 static DEVICE_ATTR(expires, 0644, dasd_expires_show, dasd_expires_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t
 dasd_retries_show(struct device *dev, struct device_attribute *attr, char *buf)
 {
@@ -1349,6 +1364,9 @@ dasd_timeout_store(struct device *dev, struct device_attribute *attr,
 static DEVICE_ATTR(timeout, 0644,
 		   dasd_timeout_show, dasd_timeout_store);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t dasd_reservation_policy_show(struct device *dev,
 					    struct device_attribute *attr,
@@ -1448,7 +1466,10 @@ static DEVICE_ATTR(last_known_reservation_state, 0644,
 		   dasd_reservation_state_show, dasd_reservation_state_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t dasd_pm_show(struct device *dev,
 			      struct device_attribute *attr, char *buf)
 {
@@ -1472,6 +1493,9 @@ static ssize_t dasd_pm_show(struct device *dev,
 
 static DEVICE_ATTR(path_masks, 0444, dasd_pm_show, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct attribute * dasd_attrs[] = {
 	&dev_attr_readonly.attr,
@@ -1487,16 +1511,22 @@ static struct attribute * dasd_attrs[] = {
 	&dev_attr_failfast.attr,
 	&dev_attr_expires.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&dev_attr_reservation_policy.attr,
 	&dev_attr_last_known_reservation_state.attr,
 	&dev_attr_safe_offline.attr,
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_retries.attr,
 	&dev_attr_timeout.attr,
 	&dev_attr_reservation_policy.attr,
 	&dev_attr_last_known_reservation_state.attr,
 	&dev_attr_safe_offline.attr,
 	&dev_attr_path_masks.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };

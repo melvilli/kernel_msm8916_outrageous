@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -130,8 +134,14 @@ struct acpi_exception_info {
 #define AE_OWNER_ID_LIMIT               EXCEP_ENV (0x001B)
 #define AE_NOT_CONFIGURED               EXCEP_ENV (0x001C)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define AE_CODE_ENV_MAX                 0x001C
+=======
+#define AE_ACCESS                       EXCEP_ENV (0x001D)
+
+#define AE_CODE_ENV_MAX                 0x001D
+>>>>>>> v3.18
 =======
 #define AE_ACCESS                       EXCEP_ENV (0x001D)
 
@@ -238,7 +248,11 @@ static const struct acpi_exception_info acpi_gbl_exception_names_env[] = {
 	EXCEP_TXT("AE_NO_NAMESPACE", "A namespace has not been loaded"),
 	EXCEP_TXT("AE_NO_MEMORY", "Insufficient dynamic memory"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEP_TXT("AE_NOT_FOUND", "The name was not found in the namespace"),
+=======
+	EXCEP_TXT("AE_NOT_FOUND", "A requested entity is not found"),
+>>>>>>> v3.18
 =======
 	EXCEP_TXT("AE_NOT_FOUND", "A requested entity is not found"),
 >>>>>>> v3.18
@@ -274,7 +288,12 @@ static const struct acpi_exception_info acpi_gbl_exception_names_env[] = {
 		  "There are no more Owner IDs available for ACPI tables or control methods"),
 	EXCEP_TXT("AE_NOT_CONFIGURED",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "The interface is not part of the current subsystem configuration")
+=======
+		  "The interface is not part of the current subsystem configuration"),
+	EXCEP_TXT("AE_ACCESS", "Permission denied for the requested operation")
+>>>>>>> v3.18
 =======
 		  "The interface is not part of the current subsystem configuration"),
 	EXCEP_TXT("AE_ACCESS", "Permission denied for the requested operation")

@@ -3,9 +3,15 @@
 
 #ifdef CONFIG_CONTEXT_TRACKING
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCHEDULE_USER bl	.schedule_user
 #else
 #define SCHEDULE_USER bl	.schedule
+=======
+#define SCHEDULE_USER bl	schedule_user
+#else
+#define SCHEDULE_USER bl	schedule
+>>>>>>> v3.18
 =======
 #define SCHEDULE_USER bl	schedule_user
 #else

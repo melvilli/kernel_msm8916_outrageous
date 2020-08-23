@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -38,6 +42,10 @@ void pch_gbe_phy_power_down(struct pch_gbe_hw *hw);
 void pch_gbe_phy_set_rgmii(struct pch_gbe_hw *hw);
 void pch_gbe_phy_init_setting(struct pch_gbe_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int pch_gbe_phy_disable_hibernate(struct pch_gbe_hw *hw);
+>>>>>>> v3.18
 =======
 int pch_gbe_phy_disable_hibernate(struct pch_gbe_hw *hw);
 >>>>>>> v3.18

@@ -140,12 +140,15 @@ static int dm355evm_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dm355evm_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -155,7 +158,10 @@ static int dm355evm_rtc_remove(struct platform_device *pdev)
 static struct platform_driver rtc_dm355evm_driver = {
 	.probe		= dm355evm_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= dm355evm_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

@@ -2,7 +2,13 @@
  * Device Tree for the ST-Ericsson Nomadik 8815 STn8815 SoC
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
+=======
+
+#include <dt-bindings/gpio/gpio.h>
+#include "skeleton.dtsi"
+>>>>>>> v3.18
 =======
 
 #include <dt-bindings/gpio/gpio.h>
@@ -28,6 +34,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtu0 {
 		/* Nomadik system timer */
 		reg = <0x101e2000 0x1000>;
@@ -37,6 +44,8 @@
 
 	mtu1 {
 =======
+=======
+>>>>>>> v3.18
 	mtu0: mtu@101e2000 {
 		/* Nomadik system timer */
 		compatible = "st,nomadik-mtu";
@@ -48,12 +57,20 @@
 	};
 
 	mtu1: mtu@101e3000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Secondary timer */
 		reg = <0x101e3000 0x1000>;
 		interrupt-parent = <&vica>;
 		interrupts = <5>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&timclk>, <&pclk>;
+		clock-names = "timclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 		clocks = <&timclk>, <&pclk>;
 		clock-names = "timclk", "apb_pclk";
@@ -71,6 +88,10 @@
 		#gpio-cells = <2>;
 		gpio-bank = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&pclk>;
+>>>>>>> v3.18
 =======
 		clocks = <&pclk>;
 >>>>>>> v3.18
@@ -87,6 +108,10 @@
 		#gpio-cells = <2>;
 		gpio-bank = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&pclk>;
+>>>>>>> v3.18
 =======
 		clocks = <&pclk>;
 >>>>>>> v3.18
@@ -103,6 +128,10 @@
 		#gpio-cells = <2>;
 		gpio-bank = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&pclk>;
+>>>>>>> v3.18
 =======
 		clocks = <&pclk>;
 >>>>>>> v3.18
@@ -119,11 +148,14 @@
 		#gpio-cells = <2>;
 		gpio-bank = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 
 	pinctrl {
 		compatible = "stericsson,nmk-pinctrl-stn8815";
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&pclk>;
 	};
 
@@ -674,6 +706,9 @@
 			clock-id = <63>;
 			clocks = <&clk48>; /* Guess */
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -688,7 +723,13 @@
 			<0x40800000 0x2000>;	/* NAND Base CMD */
 		reg-names = "fsmc_regs", "nand_data", "nand_addr", "nand_cmd";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = "okay";
+=======
+		clocks = <&hclksmc>;
+		status = "okay";
+		timings = /bits/ 8 <0 0 0 0x10 0x0a 0>;
+>>>>>>> v3.18
 =======
 		clocks = <&hclksmc>;
 		status = "okay";
@@ -736,6 +777,7 @@
 	/* I2C0 connected to the STw4811 power management chip */
 	i2c0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "i2c-gpio";
 		gpios = <&gpio1 31 0>, /* sda */
 			<&gpio1 30 0>; /* scl */
@@ -746,6 +788,8 @@
 			   compatible = "st,stw4811";
 			   reg = <0x2d>;
 =======
+=======
+>>>>>>> v3.18
 		compatible = "st,nomadik-i2c", "arm,primecell";
 		reg = <0x101f8000 0x1000>;
 		interrupt-parent = <&vica>;
@@ -767,6 +811,9 @@
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <3300000>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -774,12 +821,15 @@
 	/* I2C1 connected to various sensors */
 	i2c1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "i2c-gpio";
 		gpios = <&gpio1 22 0>, /* sda */
 			<&gpio1 21 0>; /* scl */
 		#address-cells = <1>;
 		#size-cells = <0>;
 =======
+=======
+>>>>>>> v3.18
 		compatible = "st,nomadik-i2c", "arm,primecell";
 		reg = <0x101f7000 0x1000>;
 		interrupt-parent = <&vica>;
@@ -791,6 +841,9 @@
 		clock-names = "mclk", "apb_pclk";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c1_default_mux>, <&i2c1_default_mode>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		camera@2d {
@@ -815,6 +868,12 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pinctrl-names = "default";
+		pinctrl-0 = <&i2c2_default_mode>;
+
+>>>>>>> v3.18
 =======
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c2_default_mode>;
@@ -833,7 +892,11 @@
 		ranges;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vica: intc@0x10140000 {
+=======
+		vica: intc@10140000 {
+>>>>>>> v3.18
 =======
 		vica: intc@10140000 {
 >>>>>>> v3.18
@@ -844,7 +907,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vicb: intc@0x10140020 {
+=======
+		vicb: intc@10140020 {
+>>>>>>> v3.18
 =======
 		vicb: intc@10140020 {
 >>>>>>> v3.18
@@ -860,11 +927,17 @@
 			interrupt-parent = <&vica>;
 			interrupts = <12>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&uart0clk>, <&pclkuart0>;
 			clock-names = "uartclk", "apb_pclk";
 			pinctrl-names = "default";
 			pinctrl-0 = <&uart0_default_mux>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -874,11 +947,17 @@
 			interrupt-parent = <&vica>;
 			interrupts = <17>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&uart1clk>, <&pclkuart1>;
 			clock-names = "uartclk", "apb_pclk";
 			pinctrl-names = "default";
 			pinctrl-0 = <&uart1_default_mux>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -888,6 +967,11 @@
 			interrupt-parent = <&vica>;
 			interrupts = <28>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&uart2clk>, <&pclkuart2>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&uart2clk>, <&pclkuart2>;
 			clock-names = "uartclk", "apb_pclk";
@@ -899,6 +983,11 @@
 			compatible = "arm,primecell";
 			reg = <0x101b0000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&rngcclk>, <&hclkrng>;
+			clock-names = "rng", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&rngcclk>, <&hclkrng>;
 			clock-names = "rng", "apb_pclk";
@@ -909,6 +998,11 @@
 			compatible = "arm,pl031", "arm,primecell";
 			reg = <0x101e8000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -921,6 +1015,11 @@
 			compatible = "arm,pl18x", "arm,primecell";
 			reg = <0x101f6000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&sdiclk>, <&pclksdi>;
+			clock-names = "mclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&sdiclk>, <&pclksdi>;
 			clock-names = "mclk", "apb_pclk";
@@ -930,17 +1029,23 @@
 			max-frequency = <48000000>;
 			bus-width = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mmc-cap-mmc-highspeed;
 			mmc-cap-sd-highspeed;
 			cd-gpios = <&gpio3 15 0x1>;
 			cd-inverted;
 =======
+=======
+>>>>>>> v3.18
 			cap-mmc-highspeed;
 			cap-sd-highspeed;
 			cd-gpios = <&gpio3 15 GPIO_ACTIVE_LOW>;
 			pinctrl-names = "default";
 			pinctrl-0 = <&mmcsd_default_mux>, <&mmcsd_default_mode>;
 			vmmc-supply = <&vmmc_regulator>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

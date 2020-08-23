@@ -3,7 +3,10 @@
  *
  * Copyright (C) 2011 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -22,7 +25,12 @@
 #define _LINUX_ION_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -41,7 +49,11 @@ struct ion_buffer;
    be converted to phys_addr_t.  For the time being many kernel interfaces
    do not accept phys_addr_t's that would have to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ion_phys_addr_t dma_addr_t
+=======
+#define ion_phys_addr_t unsigned long
+>>>>>>> v3.18
 =======
 #define ion_phys_addr_t unsigned long
 >>>>>>> v3.18
@@ -56,9 +68,12 @@ struct ion_buffer;
  * @base:	base address of heap in physical memory if applicable
  * @size:	size of the heap in bytes if applicable
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @has_outer_cache:    set to 1 if outer cache is used, 0 otherwise.
  * @extra_data:	Extra data specific to each heap type
  * @priv:	heap private data
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @align:	required alignment in physical memory if applicable
@@ -73,8 +88,11 @@ struct ion_platform_heap {
 	ion_phys_addr_t base;
 	size_t size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int has_outer_cache;
 	void *extra_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ion_phys_addr_t align;
@@ -84,9 +102,14 @@ struct ion_platform_heap {
 /**
  * struct ion_platform_data - array of platform heaps passed from board file
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @has_outer_cache:    set to 1 if outer cache is used, 0 otherwise.
  * @nr:    number of structures in the array
  * @heaps: array of platform_heap structions
+=======
+ * @nr:		number of structures in the array
+ * @heaps:	array of platform_heap structions
+>>>>>>> v3.18
 =======
  * @nr:		number of structures in the array
  * @heaps:	array of platform_heap structions
@@ -96,7 +119,10 @@ struct ion_platform_heap {
  */
 struct ion_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int has_outer_cache;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int nr;
@@ -104,8 +130,11 @@ struct ion_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ION
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -123,7 +152,10 @@ void ion_reserve(struct ion_platform_data *data);
  * ion_client_create() -  allocate a client and returns it
  * @dev:		the global ion device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @heap_type_mask:	mask of heaps this client can allocate from
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @name:		used for debugging
@@ -243,6 +275,7 @@ int ion_share_dma_buf_fd(struct ion_client *client, struct ion_handle *handle);
 struct ion_handle *ion_import_dma_buf(struct ion_client *client, int fd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline void ion_reserve(struct ion_platform_data *data)
 {
@@ -307,6 +340,8 @@ static inline int ion_handle_get_flags(struct ion_client *client,
 }
 
 #endif /* CONFIG_ION */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _LINUX_ION_H */

@@ -93,10 +93,13 @@ static void wlcore_started_vifs_iter(void *data, u8 *mac,
 				     struct ieee80211_vif *vif)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int *count = (int *)data;
 
 	if (!vif->bss_conf.idle)
 =======
+=======
+>>>>>>> v3.18
 	struct wl12xx_vif *wlvif = wl12xx_vif_to_data(vif);
 	bool active = false;
 	int *count = (int *)data;
@@ -122,6 +125,9 @@ static void wlcore_started_vifs_iter(void *data, u8 *mac,
 	}
 
 	if (active)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		(*count)++;
 }
@@ -195,7 +201,11 @@ wlcore_scan_get_channels(struct wl1271 *wl,
 
 		if (force_passive)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			flags |= IEEE80211_CHAN_PASSIVE_SCAN;
+=======
+			flags |= IEEE80211_CHAN_NO_IR;
+>>>>>>> v3.18
 =======
 			flags |= IEEE80211_CHAN_NO_IR;
 >>>>>>> v3.18
@@ -205,6 +215,7 @@ wlcore_scan_get_channels(struct wl1271 *wl,
 		    (!!(flags & IEEE80211_CHAN_RADAR) == radar) &&
 		    /* if radar is set, we ignore the passive flag */
 		    (radar ||
+<<<<<<< HEAD
 <<<<<<< HEAD
 		     !!(flags & IEEE80211_CHAN_PASSIVE_SCAN) == passive)) {
 			wl1271_debug(DEBUG_SCAN, "band %d, center_freq %d ",
@@ -219,6 +230,9 @@ wlcore_scan_get_channels(struct wl1271 *wl,
 				     min_dwell_time_active,
 				     max_dwell_time_active);
 
+=======
+		     !!(flags & IEEE80211_CHAN_NO_IR) == passive)) {
+>>>>>>> v3.18
 =======
 		     !!(flags & IEEE80211_CHAN_NO_IR) == passive)) {
 >>>>>>> v3.18
@@ -245,7 +259,11 @@ wlcore_scan_get_channels(struct wl1271 *wl,
 			    (channels[j].channel >= 12) &&
 			    (channels[j].channel <= 14) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    (flags & IEEE80211_CHAN_PASSIVE_SCAN) &&
+=======
+			    (flags & IEEE80211_CHAN_NO_IR) &&
+>>>>>>> v3.18
 =======
 			    (flags & IEEE80211_CHAN_NO_IR) &&
 >>>>>>> v3.18
@@ -263,7 +281,10 @@ wlcore_scan_get_channels(struct wl1271 *wl,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			wl1271_debug(DEBUG_SCAN, "freq %d, ch. %d, flags 0x%x, power %d, min/max_dwell %d/%d%s%s",
 				     req_channels[i]->center_freq,
 				     req_channels[i]->hw_value,
@@ -275,6 +296,9 @@ wlcore_scan_get_channels(struct wl1271 *wl,
 					", DFS" : "",
 				     flags & IEEE80211_CHAN_NO_IR ?
 					", NO-IR" : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			j++;
 		}
@@ -419,7 +443,11 @@ wlcore_scan_sched_scan_ssid_list(struct wl1271 *wl,
 	int ret = 0, type, i, j, n_match_ssids = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl1271_debug(DEBUG_CMD, "cmd sched scan ssid list");
+=======
+	wl1271_debug((DEBUG_CMD | DEBUG_SCAN), "cmd sched scan ssid list");
+>>>>>>> v3.18
 =======
 	wl1271_debug((DEBUG_CMD | DEBUG_SCAN), "cmd sched scan ssid list");
 >>>>>>> v3.18
@@ -501,8 +529,11 @@ wlcore_scan_sched_scan_ssid_list(struct wl1271 *wl,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl1271_dump(DEBUG_SCAN, "SSID_LIST: ", cmd, sizeof(*cmd));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = wl1271_cmd_send(wl, CMD_CONNECTION_SCAN_SSID_CFG, cmd,

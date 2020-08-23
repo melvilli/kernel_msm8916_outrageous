@@ -65,7 +65,11 @@ struct fib6_node {
 	__u16			fn_bit;		/* bit key */
 	__u16			fn_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32			fn_sernum;
+=======
+	int			fn_sernum;
+>>>>>>> v3.18
 =======
 	int			fn_sernum;
 >>>>>>> v3.18
@@ -119,7 +123,10 @@ struct rt6_info {
 	struct rt6key			rt6i_src;
 	struct rt6key			rt6i_prefsrc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32				rt6i_metric;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -127,11 +134,17 @@ struct rt6_info {
 	unsigned long			_rt6i_peer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32				rt6i_genid;
 
 	/* more non-fragment space at head required */
 	unsigned short			rt6i_nfheader_len;
 
+=======
+	u32				rt6i_metric;
+	/* more non-fragment space at head required */
+	unsigned short			rt6i_nfheader_len;
+>>>>>>> v3.18
 =======
 	u32				rt6i_metric;
 	/* more non-fragment space at head required */
@@ -219,6 +232,7 @@ static inline void ip6_rt_put(struct rt6_info *rt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct fib6_walker_t {
 	struct list_head lh;
 	struct fib6_node *root, *node;
@@ -229,6 +243,8 @@ struct fib6_walker_t {
 	unsigned int count;
 	int (*func)(struct fib6_walker_t *);
 =======
+=======
+>>>>>>> v3.18
 enum fib6_walk_state {
 #ifdef CONFIG_IPV6_SUBTREES
 	FWS_S,
@@ -248,6 +264,9 @@ struct fib6_walker {
 	unsigned int skip;
 	unsigned int count;
 	int (*func)(struct fib6_walker *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *args;
 };
@@ -304,6 +323,7 @@ typedef struct rt6_info *(*pol_lookup_t)(struct net *,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct fib6_table        *fib6_get_table(struct net *net, u32 id);
 extern struct fib6_table        *fib6_new_table(struct net *net, u32 id);
 extern struct dst_entry         *fib6_rule_lookup(struct net *net,
@@ -347,6 +367,8 @@ extern int			fib6_init(void);
 extern int			fib6_rules_init(void);
 extern void			fib6_rules_cleanup(void);
 =======
+=======
+>>>>>>> v3.18
 struct fib6_table *fib6_get_table(struct net *net, u32 id);
 struct fib6_table *fib6_new_table(struct net *net, u32 id);
 struct dst_entry *fib6_rule_lookup(struct net *net, struct flowi6 *fl6,
@@ -381,6 +403,9 @@ int ipv6_route_open(struct inode *inode, struct file *file);
 #ifdef CONFIG_IPV6_MULTIPLE_TABLES
 int fib6_rules_init(void);
 void fib6_rules_cleanup(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int               fib6_rules_init(void)

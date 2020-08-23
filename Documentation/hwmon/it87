@@ -3,11 +3,17 @@ Kernel driver it87
 
 Supported chips:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   * IT8603E/IT8623E
     Prefix: 'it8603'
     Addresses scanned: from Super I/O config space (8 I/O ports)
     Datasheet: Not publicly available
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   * IT8705F
     Prefix: 'it87'
@@ -61,7 +67,11 @@ Supported chips:
 Authors:
     Christophe Gauthron
 <<<<<<< HEAD
+<<<<<<< HEAD
     Jean Delvare <khali@linux-fr.org>
+=======
+    Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
     Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -102,9 +112,15 @@ Description
 -----------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This driver implements support for the IT8705F, IT8712F, IT8716F,
 IT8718F, IT8720F, IT8721F, IT8726F, IT8728F, IT8758E, IT8771E, IT8772E,
 IT8782F, IT8783E/F, and SiS950 chips.
+=======
+This driver implements support for the IT8603E, IT8623E, IT8705F, IT8712F,
+IT8716F, IT8718F, IT8720F, IT8721F, IT8726F, IT8728F, IT8758E, IT8771E,
+IT8772E, IT8782F, IT8783E/F, and SiS950 chips.
+>>>>>>> v3.18
 =======
 This driver implements support for the IT8603E, IT8623E, IT8705F, IT8712F,
 IT8716F, IT8718F, IT8720F, IT8721F, IT8726F, IT8728F, IT8758E, IT8771E,
@@ -147,11 +163,17 @@ The IT8728F, IT8771E, and IT8772E are considered compatible with the IT8721F,
 until a datasheet becomes available (hopefully.)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 The IT8603E/IT8623E is a custom design, hardware monitoring part is similar to
 IT8728F. It only supports 16-bit fan mode, the full speed mode of the
 fan is not supported (value 0 of pwmX_enable).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Temperatures are measured in degrees Celsius. An alarm is triggered once
 when the Overtemperature Shutdown limit is crossed.
@@ -170,6 +192,7 @@ maximum limit. Note that minimum in this case always means 'closest to
 zero'; this is important for negative voltage measurements. All voltage
 inputs can measure voltages between 0 and 4.08 volts, with a resolution of
 <<<<<<< HEAD
+<<<<<<< HEAD
 0.016 volt (except IT8721F/IT8758E and IT8728F: 0.012 volt.) The battery
 voltage in8 does not have limit registers.
 
@@ -178,6 +201,8 @@ internal and scaled inside the chip (in7 (optional for IT8782F and IT8783E/F),
 in8 and optionally in3). The driver handles this transparently so user-space
 doesn't have to care.
 =======
+=======
+>>>>>>> v3.18
 0.016 volt (except IT8603E, IT8721F/IT8758E and IT8728F: 0.012 volt.) The
 battery voltage in8 does not have limit registers.
 
@@ -188,6 +213,9 @@ are internal and scaled inside the chip:
 * in8 (always)
 * in9 (relevant for IT8603E only)
 The driver handles this transparently so user-space doesn't have to care.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The VID lines (IT8712F/IT8716F/IT8718F/IT8720F) encode the core voltage value:

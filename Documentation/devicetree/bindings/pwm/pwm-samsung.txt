@@ -16,6 +16,7 @@ Required properties:
 			  Exynos4210 rev0 SoCs
     samsung,exynos4210-pwm - for 32-bit timers present on Exynos4210,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           Exynos4x12 and Exynos5250 SoCs
 - reg: base address and size of register area
 - interrupts: list of timer interrupts (one interrupt per timer, starting at
@@ -28,6 +29,8 @@ Required properties:
      - bitmask of optional PWM flags:
         0x1 - invert PWM signal
 =======
+=======
+>>>>>>> v3.18
                           Exynos4x12, Exynos5250 and Exynos5420 SoCs
 - reg: base address and size of register area
 - interrupts: list of timer interrupts (one interrupt per timer, starting at
@@ -45,6 +48,9 @@ Required properties:
 - #pwm-cells: should be 3. See pwm.txt in this directory for a description of
   the cells format. The only third cell flag supported by this binding is
   PWM_POLARITY_INVERTED.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Optional properties:
@@ -59,6 +65,11 @@ Example:
 		interrupt-parent = <&vic0>;
 		interrupts = <23>, <24>, <25>, <27>, <28>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clock 67>;
+		clock-names = "timers";
+>>>>>>> v3.18
 =======
 		clocks = <&clock 67>;
 		clock-names = "timers";

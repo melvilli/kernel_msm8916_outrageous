@@ -28,16 +28,22 @@
 #include <linux/ioport.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 #include <linux/io.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/serial_s3c.h>
 #include <clocksource/samsung_pwm.h>
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <linux/platform_data/dma-s3c24xx.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <mach/hardware.h>
@@ -52,6 +58,7 @@
 
 #include <mach/regs-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 
 #include <plat/cpu.h>
@@ -60,12 +67,17 @@
 #include <plat/cpu-freq.h>
 #include <plat/pll.h>
 =======
+=======
+>>>>>>> v3.18
 #include <mach/dma.h>
 
 #include <plat/cpu.h>
 #include <plat/devs.h>
 #include <plat/cpu-freq.h>
 #include <plat/pwm-core.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "common.h"
@@ -88,7 +100,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2410_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c2410_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c2410_init_uarts,
@@ -100,7 +115,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2410_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c2410_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c2410_init_uarts,
@@ -112,7 +130,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2440_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c244x_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c244x_init_uarts,
@@ -124,7 +145,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2440_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c244x_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c244x_init_uarts,
@@ -136,7 +160,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2442_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c244x_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c244x_init_uarts,
@@ -148,7 +175,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2442_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c244x_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c244x_init_uarts,
@@ -160,7 +190,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2412_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c2412_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c2412_init_uarts,
@@ -172,7 +205,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2412_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c2412_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c2412_init_uarts,
@@ -184,7 +220,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2416_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c2416_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c2416_init_uarts,
@@ -196,7 +235,10 @@ static struct cpu_table cpu_ids[] __initdata = {
 		.idmask		= 0xffffffff,
 		.map_io		= s3c2443_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init_clocks	= s3c2443_init_clocks,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.init_uarts	= s3c2443_init_uarts,
@@ -265,7 +307,10 @@ static void s3c24xx_default_idle(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_pwm_variant s3c24xx_pwm_variant = {
 	.bits		= 16,
 	.div_base	= 1,
@@ -273,6 +318,9 @@ static struct samsung_pwm_variant s3c24xx_pwm_variant = {
 	.tclk_mask	= (1 << 4),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init s3c24xx_init_io(struct map_desc *mach_desc, int size)
 {
@@ -288,10 +336,13 @@ void __init s3c24xx_init_io(struct map_desc *mach_desc, int size)
 		samsung_cpu_id = s3c24xx_read_idcode_v4();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_cpu();
 
 	s3c_init_cpu(samsung_cpu_id, cpu_ids, ARRAY_SIZE(cpu_ids));
 =======
+=======
+>>>>>>> v3.18
 
 	s3c_init_cpu(samsung_cpu_id, cpu_ids, ARRAY_SIZE(cpu_ids));
 
@@ -312,6 +363,9 @@ void __init samsung_timer_init(void)
 
 	samsung_pwm_clocksource_init(S3C_VA_TIMER,
 					timer_irqs, &s3c24xx_pwm_variant);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -370,6 +424,7 @@ struct s3c24xx_uart_resources s3c2410_uart_resources[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* initialise all the clocks */
 
 void __init_or_cpufreq s3c24xx_setup_clocks(unsigned long fclk,
@@ -385,6 +440,8 @@ void __init_or_cpufreq s3c24xx_setup_clocks(unsigned long fclk,
 	clk_f.rate = fclk;
 }
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_S3C2410) || defined(CONFIG_CPU_S3C2412) || \
 	defined(CONFIG_CPU_S3C2440) || defined(CONFIG_CPU_S3C2442)
 static struct resource s3c2410_dma_resource[] = {
@@ -644,4 +701,7 @@ struct platform_device s3c2410_device_dclk = {
 	.resource	= s3c2410_dclk_resource,
 };
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

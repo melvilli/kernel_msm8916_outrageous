@@ -21,6 +21,10 @@
 #include <linux/fs.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cifs_fs_sb.h"
+>>>>>>> v3.18
 =======
 #include "cifs_fs_sb.h"
 >>>>>>> v3.18
@@ -66,6 +70,7 @@ cifs_utf16_bytes(const __le16 *from, int maxbytes,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * cifs_mapchar - convert a host-endian char to proper char in codepage
  * @target - where converted character should be copied
@@ -87,6 +92,8 @@ cifs_mapchar(char *target, const __u16 src_char, const struct nls_table *cp,
 		goto cp_convert;
 
 =======
+=======
+>>>>>>> v3.18
 int cifs_remap(struct cifs_sb_info *cifs_sb)
 {
 	int map_type;
@@ -105,6 +112,9 @@ int cifs_remap(struct cifs_sb_info *cifs_sb)
 static bool
 convert_sfu_char(const __u16 src_char, char *target)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * BB: Cannot handle remapping UNI_SLASH until all the calls to
@@ -132,6 +142,7 @@ convert_sfu_char(const __u16 src_char, char *target)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto cp_convert;
 	}
 
@@ -140,6 +151,8 @@ out:
 
 cp_convert:
 =======
+=======
+>>>>>>> v3.18
 		return false;
 	}
 	return true;
@@ -202,6 +215,9 @@ cifs_mapchar(char *target, const __u16 src_char, const struct nls_table *cp,
 		return len;
 
 	/* if character not one of seven in special remap set */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	len = cp->uni2char(src_char, target, NLS_MAX_CHARSET_SIZE);
 	if (len <= 0) {
@@ -209,7 +225,11 @@ cifs_mapchar(char *target, const __u16 src_char, const struct nls_table *cp,
 		len = 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	goto out;
+=======
+	return len;
+>>>>>>> v3.18
 =======
 	return len;
 >>>>>>> v3.18
@@ -240,7 +260,11 @@ cifs_mapchar(char *target, const __u16 src_char, const struct nls_table *cp,
 int
 cifs_from_utf16(char *to, const __le16 *from, int tolen, int fromlen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 const struct nls_table *codepage, bool mapchar)
+=======
+		const struct nls_table *codepage, int map_type)
+>>>>>>> v3.18
 =======
 		const struct nls_table *codepage, int map_type)
 >>>>>>> v3.18
@@ -271,7 +295,11 @@ cifs_from_utf16(char *to, const __le16 *from, int tolen, int fromlen,
 		 */
 		if (outlen >= safelen) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			charlen = cifs_mapchar(tmp, ftmp, codepage, mapchar);
+=======
+			charlen = cifs_mapchar(tmp, ftmp, codepage, map_type);
+>>>>>>> v3.18
 =======
 			charlen = cifs_mapchar(tmp, ftmp, codepage, map_type);
 >>>>>>> v3.18
@@ -281,7 +309,11 @@ cifs_from_utf16(char *to, const __le16 *from, int tolen, int fromlen,
 
 		/* put converted char into 'to' buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		charlen = cifs_mapchar(&to[outlen], ftmp, codepage, mapchar);
+=======
+		charlen = cifs_mapchar(&to[outlen], ftmp, codepage, map_type);
+>>>>>>> v3.18
 =======
 		charlen = cifs_mapchar(&to[outlen], ftmp, codepage, map_type);
 >>>>>>> v3.18
@@ -374,7 +406,11 @@ cifs_strndup_from_utf16(const char *src, const int maxlen,
 			return NULL;
 		cifs_from_utf16(dst, (__le16 *) src, len, maxlen, codepage,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       false);
+=======
+			       NO_MAP_UNI_RSVD);
+>>>>>>> v3.18
 =======
 			       NO_MAP_UNI_RSVD);
 >>>>>>> v3.18
@@ -391,7 +427,10 @@ cifs_strndup_from_utf16(const char *src, const int maxlen,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __le16 convert_to_sfu_char(char src_char)
 {
 	__le16 dest_char;
@@ -452,6 +491,9 @@ static __le16 convert_to_sfm_char(char src_char)
 	return dest_char;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Convert 16 bit Unicode pathname to wire format from string in current code
@@ -462,7 +504,11 @@ static __le16 convert_to_sfm_char(char src_char)
 int
 cifsConvertToUTF16(__le16 *target, const char *source, int srclen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 const struct nls_table *cp, int mapChars)
+=======
+		 const struct nls_table *cp, int map_chars)
+>>>>>>> v3.18
 =======
 		 const struct nls_table *cp, int map_chars)
 >>>>>>> v3.18
@@ -474,7 +520,11 @@ cifsConvertToUTF16(__le16 *target, const char *source, int srclen,
 	wchar_t tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mapChars)
+=======
+	if (map_chars == NO_MAP_UNI_RSVD)
+>>>>>>> v3.18
 =======
 	if (map_chars == NO_MAP_UNI_RSVD)
 >>>>>>> v3.18
@@ -483,6 +533,7 @@ cifsConvertToUTF16(__le16 *target, const char *source, int srclen,
 	for (i = 0; i < srclen; j++) {
 		src_char = source[i];
 		charlen = 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (src_char) {
 		case 0:
@@ -506,6 +557,8 @@ cifsConvertToUTF16(__le16 *target, const char *source, int srclen,
 			dst_char = cpu_to_le16(UNI_PIPE);
 			break;
 =======
+=======
+>>>>>>> v3.18
 
 		/* check if end of string */
 		if (src_char == 0)
@@ -518,6 +571,9 @@ cifsConvertToUTF16(__le16 *target, const char *source, int srclen,
 			dst_char = convert_to_sfm_char(src_char);
 		else
 			dst_char = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * FIXME: We can not handle remapping backslash (UNI_SLASH)
@@ -525,7 +581,11 @@ cifsConvertToUTF16(__le16 *target, const char *source, int srclen,
 		 * as they use backslash as separator.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
+=======
+		if (dst_char == 0) {
+>>>>>>> v3.18
 =======
 		if (dst_char == 0) {
 >>>>>>> v3.18

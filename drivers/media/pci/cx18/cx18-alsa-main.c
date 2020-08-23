@@ -146,18 +146,24 @@ static int snd_cx18_init(struct v4l2_device *v4l2_dev)
 
 	/* (2) Create a card instance */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_card_create(SNDRV_DEFAULT_IDX1, /* use first available id */
 			      SNDRV_DEFAULT_STR1, /* xid from end of shortname*/
 			      THIS_MODULE, 0, &sc);
 	if (ret) {
 		CX18_ALSA_ERR("%s: snd_card_create() failed with err %d\n",
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_card_new(&cx->pci_dev->dev,
 			   SNDRV_DEFAULT_IDX1, /* use first available id */
 			   SNDRV_DEFAULT_STR1, /* xid from end of shortname*/
 			   THIS_MODULE, 0, &sc);
 	if (ret) {
 		CX18_ALSA_ERR("%s: snd_card_new() failed with err %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      __func__, ret);
 		goto err_exit;

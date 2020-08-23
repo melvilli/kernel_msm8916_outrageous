@@ -25,6 +25,10 @@
 #include <asm/smp_plat.h>
 #include <asm/unwind.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/opcodes.h>
+>>>>>>> v3.18
 =======
 #include <asm/opcodes.h>
 >>>>>>> v3.18
@@ -65,6 +69,10 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 		const char *symname;
 		s32 offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u32 tmp;
+>>>>>>> v3.18
 =======
 		u32 tmp;
 >>>>>>> v3.18
@@ -98,6 +106,10 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 
 		case R_ARM_ABS32:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case R_ARM_TARGET1:
+>>>>>>> v3.18
 =======
 		case R_ARM_TARGET1:
 >>>>>>> v3.18
@@ -108,7 +120,12 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 		case R_ARM_CALL:
 		case R_ARM_JUMP24:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset = (*(u32 *)loc & 0x00ffffff) << 2;
+=======
+			offset = __mem_to_opcode_arm(*(u32 *)loc);
+			offset = (offset & 0x00ffffff) << 2;
+>>>>>>> v3.18
 =======
 			offset = __mem_to_opcode_arm(*(u32 *)loc);
 			offset = (offset & 0x00ffffff) << 2;
@@ -129,14 +146,20 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 
 			offset >>= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			*(u32 *)loc &= 0xff000000;
 			*(u32 *)loc |= offset & 0x00ffffff;
 =======
+=======
+>>>>>>> v3.18
 			offset &= 0x00ffffff;
 
 			*(u32 *)loc &= __opcode_to_mem_arm(0xff000000);
 			*(u32 *)loc |= __opcode_to_mem_arm(offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -146,8 +169,13 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 			* MOV PC,Rm.
 			*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       *(u32 *)loc &= 0xf000000f;
 		       *(u32 *)loc |= 0x01a0f000;
+=======
+		       *(u32 *)loc &= __opcode_to_mem_arm(0xf000000f);
+		       *(u32 *)loc |= __opcode_to_mem_arm(0x01a0f000);
+>>>>>>> v3.18
 =======
 		       *(u32 *)loc &= __opcode_to_mem_arm(0xf000000f);
 		       *(u32 *)loc |= __opcode_to_mem_arm(0x01a0f000);
@@ -162,7 +190,11 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 		case R_ARM_MOVW_ABS_NC:
 		case R_ARM_MOVT_ABS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset = *(u32 *)loc;
+=======
+			offset = tmp = __mem_to_opcode_arm(*(u32 *)loc);
+>>>>>>> v3.18
 =======
 			offset = tmp = __mem_to_opcode_arm(*(u32 *)loc);
 >>>>>>> v3.18
@@ -174,15 +206,21 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 				offset >>= 16;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(u32 *)loc &= 0xfff0f000;
 			*(u32 *)loc |= ((offset & 0xf000) << 4) |
 					(offset & 0x0fff);
 =======
+=======
+>>>>>>> v3.18
 			tmp &= 0xfff0f000;
 			tmp |= ((offset & 0xf000) << 4) |
 				(offset & 0x0fff);
 
 			*(u32 *)loc = __opcode_to_mem_arm(tmp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -190,8 +228,13 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 		case R_ARM_THM_CALL:
 		case R_ARM_THM_JUMP24:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			upper = *(u16 *)loc;
 			lower = *(u16 *)(loc + 2);
+=======
+			upper = __mem_to_opcode_thumb16(*(u16 *)loc);
+			lower = __mem_to_opcode_thumb16(*(u16 *)(loc + 2));
+>>>>>>> v3.18
 =======
 			upper = __mem_to_opcode_thumb16(*(u16 *)loc);
 			lower = __mem_to_opcode_thumb16(*(u16 *)(loc + 2));
@@ -245,12 +288,15 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 			j1 = sign ^ (~(offset >> 23) & 1);
 			j2 = sign ^ (~(offset >> 22) & 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(u16 *)loc = (u16)((upper & 0xf800) | (sign << 10) |
 					    ((offset >> 12) & 0x03ff));
 			*(u16 *)(loc + 2) = (u16)((lower & 0xd000) |
 						  (j1 << 13) | (j2 << 11) |
 						  ((offset >> 1) & 0x07ff));
 =======
+=======
+>>>>>>> v3.18
 			upper = (u16)((upper & 0xf800) | (sign << 10) |
 					    ((offset >> 12) & 0x03ff));
 			lower = (u16)((lower & 0xd000) |
@@ -259,14 +305,22 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 
 			*(u16 *)loc = __opcode_to_mem_thumb16(upper);
 			*(u16 *)(loc + 2) = __opcode_to_mem_thumb16(lower);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
 		case R_ARM_THM_MOVW_ABS_NC:
 		case R_ARM_THM_MOVT_ABS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			upper = *(u16 *)loc;
 			lower = *(u16 *)(loc + 2);
+=======
+			upper = __mem_to_opcode_thumb16(*(u16 *)loc);
+			lower = __mem_to_opcode_thumb16(*(u16 *)(loc + 2));
+>>>>>>> v3.18
 =======
 			upper = __mem_to_opcode_thumb16(*(u16 *)loc);
 			lower = __mem_to_opcode_thumb16(*(u16 *)(loc + 2));
@@ -292,6 +346,7 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 				offset >>= 16;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(u16 *)loc = (u16)((upper & 0xfbf0) |
 					    ((offset & 0xf000) >> 12) |
 					    ((offset & 0x0800) >> 1));
@@ -299,6 +354,8 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 						  ((offset & 0x0700) << 4) |
 						  (offset & 0x00ff));
 =======
+=======
+>>>>>>> v3.18
 			upper = (u16)((upper & 0xfbf0) |
 				      ((offset & 0xf000) >> 12) |
 				      ((offset & 0x0800) >> 1));
@@ -307,6 +364,9 @@ apply_relocate(Elf32_Shdr *sechdrs, const char *strtab, unsigned int symindex,
 				      (offset & 0x00ff));
 			*(u16 *)loc = __opcode_to_mem_thumb16(upper);
 			*(u16 *)(loc + 2) = __opcode_to_mem_thumb16(lower);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 #endif
@@ -362,8 +422,11 @@ int module_finalize(const Elf32_Ehdr *hdr, const Elf_Shdr *sechdrs,
 		if (strcmp(".ARM.exidx.init.text", secname) == 0)
 			maps[ARM_SEC_INIT].unw_sec = s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (strcmp(".ARM.exidx.devinit.text", secname) == 0)
 			maps[ARM_SEC_DEVINIT].unw_sec = s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (strcmp(".ARM.exidx", secname) == 0)
@@ -371,14 +434,18 @@ int module_finalize(const Elf32_Ehdr *hdr, const Elf_Shdr *sechdrs,
 		else if (strcmp(".ARM.exidx.exit.text", secname) == 0)
 			maps[ARM_SEC_EXIT].unw_sec = s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (strcmp(".ARM.exidx.devexit.text", secname) == 0)
 			maps[ARM_SEC_DEVEXIT].unw_sec = s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (strcmp(".ARM.exidx.text.unlikely", secname) == 0)
 			maps[ARM_SEC_UNLIKELY].unw_sec = s;
 		else if (strcmp(".ARM.exidx.text.hot", secname) == 0)
 			maps[ARM_SEC_HOT].unw_sec = s;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		else if (strcmp(".ARM.exidx.ref.text", secname) == 0)
 			maps[ARM_SEC_REF].unw_sec = s;
@@ -390,13 +457,20 @@ int module_finalize(const Elf32_Ehdr *hdr, const Elf_Shdr *sechdrs,
 		else if (strcmp(".init.text", secname) == 0)
 			maps[ARM_SEC_INIT].txt_sec = s;
 >>>>>>> v3.18
+=======
+		else if (strcmp(".init.text", secname) == 0)
+			maps[ARM_SEC_INIT].txt_sec = s;
+>>>>>>> v3.18
 		else if (strcmp(".text", secname) == 0)
 			maps[ARM_SEC_CORE].txt_sec = s;
 		else if (strcmp(".exit.text", secname) == 0)
 			maps[ARM_SEC_EXIT].txt_sec = s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (strcmp(".devexit.text", secname) == 0)
 			maps[ARM_SEC_DEVEXIT].txt_sec = s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (strcmp(".text.unlikely", secname) == 0)
@@ -404,8 +478,11 @@ int module_finalize(const Elf32_Ehdr *hdr, const Elf_Shdr *sechdrs,
 		else if (strcmp(".text.hot", secname) == 0)
 			maps[ARM_SEC_HOT].txt_sec = s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (strcmp(".ref.text", secname) == 0)
 			maps[ARM_SEC_REF].txt_sec = s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

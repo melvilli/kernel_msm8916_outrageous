@@ -177,6 +177,11 @@ skpinv:	addi	r6,r6,1				/* Increment */
 	lis	r6,(KERNELBASE & ~0xfff)@h
 	ori	r6,r6,(KERNELBASE & ~0xfff)@l
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rlwinm	r7,r25,0,0x03ffffff
+	add	r6,r7,r6
+>>>>>>> v3.18
 =======
 	rlwinm	r7,r25,0,0x03ffffff
 	add	r6,r7,r6

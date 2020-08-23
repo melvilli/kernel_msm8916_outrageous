@@ -8,6 +8,10 @@
 #include <linux/ktime.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/net.h>
+>>>>>>> v3.18
 =======
 #include <linux/net.h>
 >>>>>>> v3.18
@@ -19,6 +23,7 @@
 
 static u32 net_secret[NET_SECRET_SIZE] ____cacheline_aligned;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void net_secret_init(void)
 {
@@ -34,6 +39,11 @@ static void net_secret_init(void)
 		} while (!tmp);
 		cmpxchg(&net_secret[--i], 0, tmp);
 	}
+=======
+static __always_inline void net_secret_init(void)
+{
+	net_get_random_once(net_secret, sizeof(net_secret));
+>>>>>>> v3.18
 =======
 static __always_inline void net_secret_init(void)
 {
@@ -56,7 +66,11 @@ static u32 seq_scale(u32 seq)
 	 *	Choosing a clock of 64 ns period is OK. (period of 274 s)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return seq + (ktime_to_ns(ktime_get_real()) >> 6);
+=======
+	return seq + (ktime_get_real_ns() >> 6);
+>>>>>>> v3.18
 =======
 	return seq + (ktime_get_real_ns() >> 6);
 >>>>>>> v3.18
@@ -160,7 +174,11 @@ u64 secure_dccp_sequence_number(__be32 saddr, __be32 daddr,
 
 	seq = hash[0] | (((u64)hash[1]) << 32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq += ktime_to_ns(ktime_get_real());
+=======
+	seq += ktime_get_real_ns();
+>>>>>>> v3.18
 =======
 	seq += ktime_get_real_ns();
 >>>>>>> v3.18
@@ -192,7 +210,11 @@ u64 secure_dccpv6_sequence_number(__be32 *saddr, __be32 *daddr,
 
 	seq = hash[0] | (((u64)hash[1]) << 32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq += ktime_to_ns(ktime_get_real());
+=======
+	seq += ktime_get_real_ns();
+>>>>>>> v3.18
 =======
 	seq += ktime_get_real_ns();
 >>>>>>> v3.18

@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91rm9200.dtsi"
+=======
+#include "at91rm9200.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91rm9200.dtsi"
 >>>>>>> v3.18
@@ -30,7 +34,10 @@
 			clock-frequency = <18432000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -39,6 +46,9 @@
 		main_xtal {
 			clock-frequency = <18432000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -78,7 +88,11 @@
 		monitor_mute {
 			label = "Monitor mute";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 1 1>;
+=======
+			gpios = <&pioC 1 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 1 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

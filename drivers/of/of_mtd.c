@@ -51,7 +51,10 @@ EXPORT_SYMBOL_GPL(of_get_nand_ecc_mode);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * of_get_nand_ecc_step_size - Get ECC step size associated to
  * the required ECC strength (see below).
  * @np:	Pointer to the given device_node
@@ -86,6 +89,9 @@ int of_get_nand_ecc_strength(struct device_node *np)
 EXPORT_SYMBOL_GPL(of_get_nand_ecc_strength);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * of_get_nand_bus_width - Get nand bus witdh for given device_node
  * @np:	Pointer to the given device_node

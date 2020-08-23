@@ -118,11 +118,16 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 
 /* run from kstop_machine */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	/* The return code is returned via data */
 	writel(0, data);
 
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 {

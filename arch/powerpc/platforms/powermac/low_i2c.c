@@ -453,7 +453,11 @@ static int kw_i2c_xfer(struct pmac_i2c_bus *bus, u8 addrdir, int subsize,
 	if (use_irq) {
 		/* Clear completion */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(host->complete);
+=======
+		reinit_completion(&host->complete);
+>>>>>>> v3.18
 =======
 		reinit_completion(&host->complete);
 >>>>>>> v3.18
@@ -722,7 +726,11 @@ static int pmu_i2c_xfer(struct pmac_i2c_bus *bus, u8 addrdir, int subsize,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(comp);
+=======
+		reinit_completion(&comp);
+>>>>>>> v3.18
 =======
 		reinit_completion(&comp);
 >>>>>>> v3.18
@@ -757,7 +765,11 @@ static int pmu_i2c_xfer(struct pmac_i2c_bus *bus, u8 addrdir, int subsize,
 		hdr->bus = PMU_I2C_BUS_STATUS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(comp);
+=======
+		reinit_completion(&comp);
+>>>>>>> v3.18
 =======
 		reinit_completion(&comp);
 >>>>>>> v3.18

@@ -4,10 +4,13 @@ LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/dwarf-regs.o
 endif
 ifndef NO_LIBUNWIND
 <<<<<<< HEAD
+<<<<<<< HEAD
 LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/unwind.o
 endif
 LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/header.o
 =======
+=======
+>>>>>>> v3.18
 LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/unwind-libunwind.o
 endif
 ifndef NO_LIBDW_DWARF_UNWIND
@@ -22,4 +25,7 @@ LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/tsc.o
 LIB_H += arch/$(ARCH)/util/tsc.h
 HAVE_KVM_STAT_SUPPORT := 1
 LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/kvm-stat.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

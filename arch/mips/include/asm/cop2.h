@@ -12,7 +12,10 @@
 #include <linux/notifier.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_CAVIUM_OCTEON)
 
 extern void octeon_cop2_save(struct octeon_cop2_state *);
@@ -50,6 +53,9 @@ extern void nlm_cop2_restore(struct nlm_cop2_state *);
 #define cop2_restore(r)		do { (void)(r); } while (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum cu2_ops {
 	CU2_EXCEPTION,

@@ -245,13 +245,19 @@ static void __init lsmini_init(void)
 	orion5x_xor_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", LSMINI_NOR_BOOT_BASE,
 			      LSMINI_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    LSMINI_NOR_BOOT_BASE,
 				    LSMINI_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&lsmini_nor_flash);
 

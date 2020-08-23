@@ -28,7 +28,10 @@
 #define __DEVICE_CONFIG_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#include <linux/config.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -64,7 +67,10 @@ struct _version {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //config file
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/fs.h>
@@ -74,12 +80,17 @@ struct _version {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Max: 2378=2312Payload + 30HD +4CRC + 2Padding + 4Len + 8TSF + 4RSR
 #define PKT_BUF_SZ          2390
 
 #define MAX_UINTS           8
 #define OPTION_DEFAULT      { [0 ... MAX_UINTS-1] = -1}
 
+=======
+#define PKT_BUF_SZ          2390
+
+>>>>>>> v3.18
 =======
 #define PKT_BUF_SZ          2390
 
@@ -93,7 +104,11 @@ typedef enum  _chip_type {
 do {									\
 	if (!(x)) {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "assertion %s failed: file %s line %d\n", \
+=======
+		pr_err("assertion %s failed: file %s line %d\n", \
+>>>>>>> v3.18
 =======
 		pr_err("assertion %s failed: file %s line %d\n", \
 >>>>>>> v3.18

@@ -88,7 +88,10 @@
 #include "include/policy_unpack.h"
 #include "include/resource.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "include/sid.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -97,16 +100,22 @@
 struct aa_namespace *root_ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char *const profile_mode_names[] = {
 	"enforce",
 	"complain",
 	"kill",
 =======
+=======
+>>>>>>> v3.18
 const char *const aa_profile_mode_names[] = {
 	"enforce",
 	"complain",
 	"kill",
 	"unconfined",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -154,7 +163,10 @@ static bool policy_init(struct aa_policy *policy, const char *prefix,
 	INIT_LIST_HEAD(&policy->list);
 	INIT_LIST_HEAD(&policy->profiles);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_init(&policy->count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -169,7 +181,11 @@ static void policy_destroy(struct aa_policy *policy)
 {
 	/* still contains profiles -- invalid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!list_empty(&policy->profiles)) {
+=======
+	if (on_list_rcu(&policy->profiles)) {
+>>>>>>> v3.18
 =======
 	if (on_list_rcu(&policy->profiles)) {
 >>>>>>> v3.18
@@ -179,7 +195,11 @@ static void policy_destroy(struct aa_policy *policy)
 		BUG();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!list_empty(&policy->list)) {
+=======
+	if (on_list_rcu(&policy->list)) {
+>>>>>>> v3.18
 =======
 	if (on_list_rcu(&policy->list)) {
 >>>>>>> v3.18
@@ -198,7 +218,11 @@ static void policy_destroy(struct aa_policy *policy)
  * @name: name to search for  (NOT NULL)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: correct locks for the @head list be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -210,7 +234,11 @@ static struct aa_policy *__policy_find(struct list_head *head, const char *name)
 	struct aa_policy *policy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(policy, head, list) {
+=======
+	list_for_each_entry_rcu(policy, head, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry_rcu(policy, head, list) {
 >>>>>>> v3.18
@@ -227,7 +255,11 @@ static struct aa_policy *__policy_find(struct list_head *head, const char *name)
  * @len: length of match required
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: correct locks for the @head list be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -243,7 +275,11 @@ static struct aa_policy *__policy_strn_find(struct list_head *head,
 	struct aa_policy *policy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(policy, head, list) {
+=======
+	list_for_each_entry_rcu(policy, head, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry_rcu(policy, head, list) {
 >>>>>>> v3.18
@@ -324,7 +360,11 @@ static struct aa_namespace *alloc_namespace(const char *prefix,
 
 	INIT_LIST_HEAD(&ns->sub_ns);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rwlock_init(&ns->lock);
+=======
+	mutex_init(&ns->lock);
+>>>>>>> v3.18
 =======
 	mutex_init(&ns->lock);
 >>>>>>> v3.18
@@ -334,6 +374,7 @@ static struct aa_namespace *alloc_namespace(const char *prefix,
 	if (!ns->unconfined)
 		goto fail_unconfined;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ns->unconfined->sid = aa_alloc_sid();
 	ns->unconfined->flags = PFLAG_UNCONFINED | PFLAG_IX_ON_NAME_ERROR |
@@ -346,6 +387,8 @@ static struct aa_namespace *alloc_namespace(const char *prefix,
 	 */
 	ns->unconfined->ns = aa_get_namespace(ns);
 =======
+=======
+>>>>>>> v3.18
 	ns->unconfined->flags = PFLAG_IX_ON_NAME_ERROR |
 		PFLAG_IMMUTABLE | PFLAG_NS_COUNT;
 	ns->unconfined->mode = APPARMOR_UNCONFINED;
@@ -354,6 +397,9 @@ static struct aa_namespace *alloc_namespace(const char *prefix,
 	ns->unconfined->ns = ns;
 
 	atomic_set(&ns->uniq_null, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ns;
@@ -381,6 +427,7 @@ static void free_namespace(struct aa_namespace *ns)
 	aa_put_namespace(ns->parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ns->unconfined && ns->unconfined->ns == ns)
 		ns->unconfined->ns = NULL;
 
@@ -389,10 +436,15 @@ static void free_namespace(struct aa_namespace *ns)
 	ns->unconfined->ns = NULL;
 	aa_free_profile(ns->unconfined);
 >>>>>>> v3.18
+=======
+	ns->unconfined->ns = NULL;
+	aa_free_profile(ns->unconfined);
+>>>>>>> v3.18
 	kzfree(ns);
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * aa_free_namespace_kref - free aa_namespace by kref (see aa_put_namespace)
  * @kr: kref callback for freeing of a namespace  (NOT NULL)
@@ -405,6 +457,8 @@ void aa_free_namespace_kref(struct kref *kref)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * __aa_find_namespace - find a namespace on a list by @name
  * @head: list to search for namespace on  (NOT NULL)
  * @name: name of namespace to look for  (NOT NULL)
@@ -412,7 +466,11 @@ void aa_free_namespace_kref(struct kref *kref)
  * Returns: unrefcounted namespace
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: ns lock be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -439,9 +497,15 @@ struct aa_namespace *aa_find_namespace(struct aa_namespace *root,
 	struct aa_namespace *ns = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock(&root->lock);
 	ns = aa_get_namespace(__aa_find_namespace(&root->sub_ns, name));
 	read_unlock(&root->lock);
+=======
+	rcu_read_lock();
+	ns = aa_get_namespace(__aa_find_namespace(&root->sub_ns, name));
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	ns = aa_get_namespace(__aa_find_namespace(&root->sub_ns, name));
@@ -464,7 +528,11 @@ static struct aa_namespace *aa_prepare_namespace(const char *name)
 	root = aa_current_profile()->ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_lock(&root->lock);
+=======
+	mutex_lock(&root->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&root->lock);
 >>>>>>> v3.18
@@ -480,6 +548,7 @@ static struct aa_namespace *aa_prepare_namespace(const char *name)
 	/* released by caller */
 	ns = aa_get_namespace(__aa_find_namespace(&root->sub_ns, name));
 	if (!ns) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* namespace not found */
 		struct aa_namespace *new_ns;
@@ -507,6 +576,8 @@ static struct aa_namespace *aa_prepare_namespace(const char *name)
 out:
 	write_unlock(&root->lock);
 =======
+=======
+>>>>>>> v3.18
 		ns = alloc_namespace(root->base.hname, name);
 		if (!ns)
 			goto out;
@@ -524,6 +595,9 @@ out:
 	}
 out:
 	mutex_unlock(&root->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* return ref */
@@ -543,7 +617,11 @@ static void __list_add_profile(struct list_head *list,
 			       struct aa_profile *profile)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&profile->base.list, list);
+=======
+	list_add_rcu(&profile->base.list, list);
+>>>>>>> v3.18
 =======
 	list_add_rcu(&profile->base.list, list);
 >>>>>>> v3.18
@@ -565,6 +643,7 @@ static void __list_add_profile(struct list_head *list,
  */
 static void __list_remove_profile(struct aa_profile *profile)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_del_init(&profile->base.list);
 	if (!(profile->flags & PFLAG_NO_LIST_REF))
@@ -614,6 +693,10 @@ static void __replace_profile(struct aa_profile *old, struct aa_profile *new)
 	list_del_rcu(&profile->base.list);
 	aa_put_profile(profile);
 >>>>>>> v3.18
+=======
+	list_del_rcu(&profile->base.list);
+	aa_put_profile(profile);
+>>>>>>> v3.18
 }
 
 static void __profile_list_release(struct list_head *head);
@@ -630,7 +713,12 @@ static void __remove_profile(struct aa_profile *profile)
 	__profile_list_release(&profile->base.profiles);
 	/* released by free_profile */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	profile->replacedby = aa_get_profile(profile->ns->unconfined);
+=======
+	__aa_update_replacedby(profile, profile->ns->unconfined);
+	__aa_fs_profile_rmdir(profile);
+>>>>>>> v3.18
 =======
 	__aa_update_replacedby(profile, profile->ns->unconfined);
 	__aa_fs_profile_rmdir(profile);
@@ -663,7 +751,11 @@ static void destroy_namespace(struct aa_namespace *ns)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_lock(&ns->lock);
+=======
+	mutex_lock(&ns->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&ns->lock);
 >>>>>>> v3.18
@@ -674,12 +766,18 @@ static void destroy_namespace(struct aa_namespace *ns)
 	__ns_list_release(&ns->sub_ns);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_unlock(&ns->lock);
 =======
+=======
+>>>>>>> v3.18
 	if (ns->parent)
 		__aa_update_replacedby(ns->unconfined, ns->parent->unconfined);
 	__aa_fs_namespace_rmdir(ns);
 	mutex_unlock(&ns->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -691,6 +789,7 @@ static void destroy_namespace(struct aa_namespace *ns)
  */
 static void __remove_namespace(struct aa_namespace *ns)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct aa_profile *unconfined = ns->unconfined;
 
@@ -711,6 +810,11 @@ static void __remove_namespace(struct aa_namespace *ns)
 	/* release original ns->unconfined ref */
 	aa_put_profile(unconfined);
 	/* release ns->base.list ref, from removal above */
+=======
+	/* remove ns from namespace list */
+	list_del_rcu(&ns->base.list);
+	destroy_namespace(ns);
+>>>>>>> v3.18
 =======
 	/* remove ns from namespace list */
 	list_del_rcu(&ns->base.list);
@@ -762,7 +866,10 @@ void __init aa_free_root_ns(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void free_replacedby(struct aa_replacedby *r)
 {
@@ -841,6 +948,9 @@ void aa_free_profile_kref(struct kref *kref)
 	call_rcu(&p->rcu, aa_free_profile_rcu);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * aa_alloc_profile - allocate, initialize and return a new profile
@@ -858,6 +968,7 @@ struct aa_profile *aa_alloc_profile(const char *hname)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!policy_init(&profile->base, NULL, hname)) {
 		kzfree(profile);
 		return NULL;
@@ -866,6 +977,8 @@ struct aa_profile *aa_alloc_profile(const char *hname)
 	/* refcount released by caller */
 	return profile;
 =======
+=======
+>>>>>>> v3.18
 	profile->replacedby = kzalloc(sizeof(struct aa_replacedby), GFP_KERNEL);
 	if (!profile->replacedby)
 		goto fail;
@@ -883,6 +996,9 @@ fail:
 	kzfree(profile);
 
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -893,7 +1009,11 @@ fail:
  *
  * Create a null- complain mode profile used in learning mode.  The name of
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the profile is unique and follows the format of parent//null-sid.
+=======
+ * the profile is unique and follows the format of parent//null-<uniq>.
+>>>>>>> v3.18
 =======
  * the profile is unique and follows the format of parent//null-<uniq>.
 >>>>>>> v3.18
@@ -909,7 +1029,11 @@ struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat)
 	struct aa_profile *profile = NULL;
 	char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 sid = aa_alloc_sid();
+=======
+	int uniq = atomic_inc_return(&parent->ns->uniq_null);
+>>>>>>> v3.18
 =======
 	int uniq = atomic_inc_return(&parent->ns->uniq_null);
 >>>>>>> v3.18
@@ -919,7 +1043,11 @@ struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat)
 	if (!name)
 		goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(name, "%s//null-%x", parent->base.hname, sid);
+=======
+	sprintf(name, "%s//null-%x", parent->base.hname, uniq);
+>>>>>>> v3.18
 =======
 	sprintf(name, "%s//null-%x", parent->base.hname, uniq);
 >>>>>>> v3.18
@@ -930,7 +1058,10 @@ struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	profile->sid = sid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	profile->mode = APPARMOR_COMPLAIN;
@@ -940,6 +1071,7 @@ struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat)
 
 	/* released on free_profile */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	profile->parent = aa_get_profile(parent);
 	profile->ns = aa_get_namespace(parent->ns);
 
@@ -947,18 +1079,24 @@ struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat)
 	__list_add_profile(&parent->base.profiles, profile);
 	write_unlock(&profile->ns->lock);
 =======
+=======
+>>>>>>> v3.18
 	rcu_assign_pointer(profile->parent, aa_get_profile(parent));
 	profile->ns = aa_get_namespace(parent->ns);
 
 	mutex_lock(&profile->ns->lock);
 	__list_add_profile(&parent->base.profiles, profile);
 	mutex_unlock(&profile->ns->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* refcount released by caller */
 	return profile;
 
 fail:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	aa_free_sid(sid);
 	return NULL;
@@ -1047,6 +1185,11 @@ void aa_free_profile_kref(struct kref *kref)
 }
 
 >>>>>>> v3.18
+=======
+	return NULL;
+}
+
+>>>>>>> v3.18
 /* TODO: profile accounting - setup in remove */
 
 /**
@@ -1055,7 +1198,11 @@ void aa_free_profile_kref(struct kref *kref)
  * @name: name of profile (NOT NULL)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: ns lock protecting list be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -1074,7 +1221,11 @@ static struct aa_profile *__find_child(struct list_head *head, const char *name)
  * @len: length of @name substring to match
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: ns lock protecting list be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -1099,9 +1250,15 @@ struct aa_profile *aa_find_child(struct aa_profile *parent, const char *name)
 	struct aa_profile *profile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock(&parent->ns->lock);
 	profile = aa_get_profile(__find_child(&parent->base.profiles, name));
 	read_unlock(&parent->ns->lock);
+=======
+	rcu_read_lock();
+	profile = aa_get_profile(__find_child(&parent->base.profiles, name));
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	profile = aa_get_profile(__find_child(&parent->base.profiles, name));
@@ -1122,7 +1279,11 @@ struct aa_profile *aa_find_child(struct aa_profile *parent, const char *name)
  * is used to load a new profile.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: ns->lock be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -1158,7 +1319,11 @@ static struct aa_policy *__lookup_parent(struct aa_namespace *ns,
  * @hname: hierarchical profile name  (NOT NULL)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Requires: ns->lock be held
+=======
+ * Requires: rcu_read_lock be held
+>>>>>>> v3.18
 =======
  * Requires: rcu_read_lock be held
 >>>>>>> v3.18
@@ -1201,6 +1366,7 @@ struct aa_profile *aa_lookup_profile(struct aa_namespace *ns, const char *hname)
 	struct aa_profile *profile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock(&ns->lock);
 	profile = aa_get_profile(__lookup_profile(&ns->base, hname));
 	read_unlock(&ns->lock);
@@ -1209,6 +1375,8 @@ struct aa_profile *aa_lookup_profile(struct aa_namespace *ns, const char *hname)
 	if (!profile && strcmp(hname, "unconfined") == 0)
 		profile = aa_get_profile(ns->unconfined);
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	do {
 		profile = __lookup_profile(&ns->base, hname);
@@ -1218,6 +1386,9 @@ struct aa_profile *aa_lookup_profile(struct aa_namespace *ns, const char *hname)
 	/* the unconfined profile is not in the regular profile list */
 	if (!profile && strcmp(hname, "unconfined") == 0)
 		profile = aa_get_newest_profile(ns->unconfined);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* refcount released by caller */
@@ -1249,6 +1420,7 @@ static int replacement_allowed(struct aa_profile *profile, int noreplace,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __add_new_profile - simple wrapper around __list_add_profile
  * @ns: namespace that profile is being added to  (NOT NULL)
  * @policy: the policy container to add the profile to  (NOT NULL)
@@ -1269,6 +1441,8 @@ static void __add_new_profile(struct aa_namespace *ns, struct aa_policy *policy,
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * aa_audit_policy - Do auditing of policy changes
@@ -1297,6 +1471,7 @@ static int audit_policy(int op, gfp_t gfp, const char *name, const char *info,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool policy_view_capable(void)
 {
 	struct user_namespace *user_ns = current_user_ns();
@@ -1315,6 +1490,8 @@ bool policy_admin_capable(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * aa_may_manage_policy - can the current task manage policy
  * @op: the policy manipulation operation being done
@@ -1330,7 +1507,11 @@ bool aa_may_manage_policy(int op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!policy_admin_capable()) {
+=======
+	if (!capable(CAP_MAC_ADMIN)) {
+>>>>>>> v3.18
 =======
 	if (!capable(CAP_MAC_ADMIN)) {
 >>>>>>> v3.18
@@ -1342,7 +1523,10 @@ bool aa_may_manage_policy(int op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct aa_profile *__list_lookup_parent(struct list_head *lh,
 					       struct aa_profile *profile)
 {
@@ -1458,6 +1642,9 @@ static int __lookup_replace(struct aa_namespace *ns, const char *hname,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * aa_replace_profiles - replace profile(s) on the profile list
@@ -1473,6 +1660,7 @@ static int __lookup_replace(struct aa_namespace *ns, const char *hname,
  */
 ssize_t aa_replace_profiles(void *udata, size_t size, bool noreplace)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct aa_policy *policy;
 	struct aa_profile *old_profile = NULL, *new_profile = NULL;
@@ -1490,6 +1678,8 @@ ssize_t aa_replace_profiles(void *udata, size_t size, bool noreplace)
 		goto fail;
 	}
 =======
+=======
+>>>>>>> v3.18
 	const char *ns_name, *name = NULL, *info = NULL;
 	struct aa_namespace *ns = NULL;
 	struct aa_load_ent *ent, *tmp;
@@ -1501,6 +1691,9 @@ ssize_t aa_replace_profiles(void *udata, size_t size, bool noreplace)
 	error = aa_unpack(udata, size, &lh, &ns_name);
 	if (error)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* released below */
@@ -1512,6 +1705,7 @@ ssize_t aa_replace_profiles(void *udata, size_t size, bool noreplace)
 		goto fail;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	name = new_profile->base.hname;
 
@@ -1579,6 +1773,8 @@ out:
 	aa_put_profile(old_profile);
 	aa_put_profile(new_profile);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&ns->lock);
 	/* setup parent and ns info */
 	list_for_each_entry(ent, &lh, list) {
@@ -1699,15 +1895,21 @@ out:
 out:
 	aa_put_namespace(ns);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (error)
 		return error;
 	return size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail:
 	error = audit_policy(op, GFP_KERNEL, name, info, error);
 =======
+=======
+>>>>>>> v3.18
 fail_lock:
 	mutex_unlock(&ns->lock);
 fail:
@@ -1718,6 +1920,9 @@ fail:
 		aa_load_ent_free(ent);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	goto out;
 }
@@ -1753,6 +1958,7 @@ ssize_t aa_remove_profiles(char *fqname, size_t size)
 		char *ns_name;
 		name = aa_split_fqname(fqname, &ns_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ns_name) {
 			/* released below */
 			ns = aa_find_namespace(root, ns_name);
@@ -1762,12 +1968,17 @@ ssize_t aa_remove_profiles(char *fqname, size_t size)
 				goto fail;
 			}
 =======
+=======
+>>>>>>> v3.18
 		/* released below */
 		ns = aa_find_namespace(root, ns_name);
 		if (!ns) {
 			info = "namespace does not exist";
 			error = -ENOENT;
 			goto fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else
@@ -1777,6 +1988,7 @@ ssize_t aa_remove_profiles(char *fqname, size_t size)
 	if (!name) {
 		/* remove namespace - can only happen if fqname[0] == ':' */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_lock(&ns->parent->lock);
 		__remove_namespace(ns);
 		write_unlock(&ns->parent->lock);
@@ -1784,12 +1996,17 @@ ssize_t aa_remove_profiles(char *fqname, size_t size)
 		/* remove profile */
 		write_lock(&ns->lock);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&ns->parent->lock);
 		__remove_namespace(ns);
 		mutex_unlock(&ns->parent->lock);
 	} else {
 		/* remove profile */
 		mutex_lock(&ns->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		profile = aa_get_profile(__lookup_profile(&ns->base, name));
 		if (!profile) {
@@ -1800,7 +2017,11 @@ ssize_t aa_remove_profiles(char *fqname, size_t size)
 		name = profile->base.hname;
 		__remove_profile(profile);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_unlock(&ns->lock);
+=======
+		mutex_unlock(&ns->lock);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&ns->lock);
 >>>>>>> v3.18
@@ -1814,7 +2035,11 @@ ssize_t aa_remove_profiles(char *fqname, size_t size)
 
 fail_ns_lock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_unlock(&ns->lock);
+=======
+	mutex_unlock(&ns->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&ns->lock);
 >>>>>>> v3.18

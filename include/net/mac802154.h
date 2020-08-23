@@ -21,6 +21,10 @@
 
 #include <net/af_ieee802154.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/skbuff.h>
+>>>>>>> v3.18
 =======
 #include <linux/skbuff.h>
 >>>>>>> v3.18
@@ -55,7 +59,11 @@ struct ieee802154_hw_addr_filt {
 				 */
 	__le16	short_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	ieee_addr[IEEE802154_ADDR_LEN];
+=======
+	__le64	ieee_addr;
+>>>>>>> v3.18
 =======
 	__le64	ieee_addr;
 >>>>>>> v3.18
@@ -88,7 +96,10 @@ struct ieee802154_dev {
 /* Indicates that receiver will autorespond with ACK frames. */
 #define	IEEE802154_HW_AACK		0x00000002
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Indicates that transceiver will support transmit power setting. */
 #define	IEEE802154_HW_TXPOWER		0x00000004
 /* Indicates that transceiver will support listen before transmit. */
@@ -108,6 +119,9 @@ struct ieee802154_dev {
 					 IEEE802154_HW_CCA_ED_LEVEL | \
 					 IEEE802154_HW_CSMA_PARAMS | \
 					 IEEE802154_HW_FRAME_RETRIES)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* struct ieee802154_ops - callbacks from mac802154 to the driver
@@ -144,7 +158,10 @@ struct ieee802154_dev {
  *	  Set the device for listening on specified address.
  *	  Returns either zero, or negative errno.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * set_txpower:
  *	  Set radio transmit power in dB. Called with pib_lock held.
@@ -171,6 +188,9 @@ struct ieee802154_dev {
  * set_frame_retries
  *	  Sets the retransmission attempt limit. Called with pib_lock held.
  *	  Returns either zero, or negative errno.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct ieee802154_ops {
@@ -187,9 +207,12 @@ struct ieee802154_ops {
 					  struct ieee802154_hw_addr_filt *filt,
 					    unsigned long changed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		(*ieee_addr)(struct ieee802154_dev *dev,
 				     u8 addr[IEEE802154_ADDR_LEN]);
 =======
+=======
+>>>>>>> v3.18
 	int		(*ieee_addr)(struct ieee802154_dev *dev, __le64 addr);
 	int		(*set_txpower)(struct ieee802154_dev *dev, int db);
 	int		(*set_lbt)(struct ieee802154_dev *dev, bool on);
@@ -200,13 +223,20 @@ struct ieee802154_ops {
 					   u8 min_be, u8 max_be, u8 retries);
 	int		(*set_frame_retries)(struct ieee802154_dev *dev,
 					     s8 retries);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* Basic interface to register ieee802154 device */
 struct ieee802154_dev *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee802154_alloc_device(size_t priv_data_lex, struct ieee802154_ops *ops);
+=======
+ieee802154_alloc_device(size_t priv_data_len, struct ieee802154_ops *ops);
+>>>>>>> v3.18
 =======
 ieee802154_alloc_device(size_t priv_data_len, struct ieee802154_ops *ops);
 >>>>>>> v3.18

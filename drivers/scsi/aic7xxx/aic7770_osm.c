@@ -86,10 +86,16 @@ aic7770_probe(struct device *dev)
 
 	sprintf(buf, "ahc_eisa:%d", eisaBase >> 12);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name = kmalloc(strlen(buf) + 1, GFP_ATOMIC);
 	if (name == NULL)
 		return (ENOMEM);
 	strcpy(name, buf);
+=======
+	name = kstrdup(buf, GFP_ATOMIC);
+	if (name == NULL)
+		return (ENOMEM);
+>>>>>>> v3.18
 =======
 	name = kstrdup(buf, GFP_ATOMIC);
 	if (name == NULL)

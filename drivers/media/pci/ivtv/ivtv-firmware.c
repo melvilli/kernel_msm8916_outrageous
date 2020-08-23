@@ -66,7 +66,11 @@ retry:
 			   see if at least the right-sized file was loaded. If not, then we
 			   retry. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IVTV_INFO("Retry: file loaded was not %s (expected size %ld, got %zd)\n", fn, size, fw->size);
+=======
+			IVTV_INFO("Retry: file loaded was not %s (expected size %ld, got %zu)\n", fn, size, fw->size);
+>>>>>>> v3.18
 =======
 			IVTV_INFO("Retry: file loaded was not %s (expected size %ld, got %zu)\n", fn, size, fw->size);
 >>>>>>> v3.18
@@ -81,7 +85,11 @@ retry:
 			src++;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IVTV_INFO("Loaded %s firmware (%zd bytes)\n", fn, fw->size);
+=======
+		IVTV_INFO("Loaded %s firmware (%zu bytes)\n", fn, fw->size);
+>>>>>>> v3.18
 =======
 		IVTV_INFO("Loaded %s firmware (%zu bytes)\n", fn, fw->size);
 >>>>>>> v3.18

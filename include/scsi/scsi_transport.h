@@ -36,7 +36,11 @@ struct scsi_transport_template {
 	 * If set, called from sysfs and legacy procfs rescanning code.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*user_scan)(struct Scsi_Host *, uint, uint, uint);
+=======
+	int (*user_scan)(struct Scsi_Host *, uint, uint, u64);
+>>>>>>> v3.18
 =======
 	int (*user_scan)(struct Scsi_Host *, uint, uint, u64);
 >>>>>>> v3.18

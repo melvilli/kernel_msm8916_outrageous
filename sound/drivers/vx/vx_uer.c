@@ -61,9 +61,15 @@ static int vx_modify_board_inputs(struct vx_core *chip)
 static int vx_read_one_cbit(struct vx_core *chip, int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	int val;
 	spin_lock_irqsave(&chip->lock, flags);
+=======
+	int val;
+
+	mutex_lock(&chip->lock);
+>>>>>>> v3.18
 =======
 	int val;
 
@@ -79,7 +85,11 @@ static int vx_read_one_cbit(struct vx_core *chip, int index)
 		val = (vx_inl(chip, RUER) >> 7) & 0x01;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->lock, flags);
+=======
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->lock);
 >>>>>>> v3.18
@@ -94,9 +104,14 @@ static int vx_read_one_cbit(struct vx_core *chip, int index)
 static void vx_write_one_cbit(struct vx_core *chip, int index, int val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	val = !!val;	/* 0 or 1 */
 	spin_lock_irqsave(&chip->lock, flags);
+=======
+	val = !!val;	/* 0 or 1 */
+	mutex_lock(&chip->lock);
+>>>>>>> v3.18
 =======
 	val = !!val;	/* 0 or 1 */
 	mutex_lock(&chip->lock);
@@ -109,7 +124,11 @@ static void vx_write_one_cbit(struct vx_core *chip, int index, int val)
 		vx_outl(chip, RUER, (val << 7) | (index & XX_UER_CBITS_OFFSET_MASK));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->lock, flags);
+=======
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->lock);
 >>>>>>> v3.18
@@ -210,6 +229,7 @@ static int vx_calc_clock_from_freq(struct vx_core *chip, int freq)
 static void vx_change_clock_source(struct vx_core *chip, int source)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	/* we mute DAC to prevent clicks */
@@ -219,12 +239,17 @@ static void vx_change_clock_source(struct vx_core *chip, int source)
 	chip->clock_source = source;
 	spin_unlock_irqrestore(&chip->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	/* we mute DAC to prevent clicks */
 	vx_toggle_dac_mute(chip, 1);
 	mutex_lock(&chip->lock);
 	chip->ops->set_clock_source(chip, source);
 	chip->clock_source = source;
 	mutex_unlock(&chip->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* unmute */
 	vx_toggle_dac_mute(chip, 0);
@@ -238,17 +263,23 @@ void vx_set_internal_clock(struct vx_core *chip, unsigned int freq)
 {
 	int clock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	/* Get real clock value */
 	clock = vx_calc_clock_from_freq(chip, freq);
 	snd_printdd(KERN_DEBUG "set internal clock to 0x%x from freq %d\n", clock, freq);
 	spin_lock_irqsave(&chip->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Get real clock value */
 	clock = vx_calc_clock_from_freq(chip, freq);
 	snd_printdd(KERN_DEBUG "set internal clock to 0x%x from freq %d\n", clock, freq);
 	mutex_lock(&chip->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (vx_is_pcmcia(chip)) {
 		vx_outb(chip, HIFREQ, (clock >> 8) & 0x0f);
@@ -258,7 +289,11 @@ void vx_set_internal_clock(struct vx_core *chip, unsigned int freq)
 		vx_outl(chip, LOFREQ, clock & 0xff);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->lock, flags);
+=======
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->lock);
 >>>>>>> v3.18

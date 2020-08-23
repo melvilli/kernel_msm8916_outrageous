@@ -27,6 +27,10 @@
 #include <linux/init.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 #include <linux/regulator/machine.h>
 #include <linux/regulator/max8973-regulator.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/of_regulator.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/of_regulator.h>
 >>>>>>> v3.18
@@ -100,7 +108,10 @@ struct max8973_chip {
 	struct device *dev;
 	struct regulator_desc desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev *rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regmap *regmap;
@@ -112,6 +123,10 @@ struct max8973_chip {
 	int curr_gpio_val;
 	bool valid_dvs_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regulator_ops ops;
+>>>>>>> v3.18
 =======
 	struct regulator_ops ops;
 >>>>>>> v3.18
@@ -256,7 +271,11 @@ static unsigned int max8973_dcdc_get_mode(struct regulator_dev *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regulator_ops max8973_dcdc_ops = {
+=======
+static const struct regulator_ops max8973_dcdc_ops = {
+>>>>>>> v3.18
 =======
 static const struct regulator_ops max8973_dcdc_ops = {
 >>>>>>> v3.18
@@ -388,8 +407,14 @@ static int max8973_probe(struct i2c_client *client,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
 	if (!pdata) {
+=======
+	pdata = dev_get_platdata(&client->dev);
+
+	if (!pdata && !client->dev.of_node) {
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&client->dev);
 
@@ -401,10 +426,15 @@ static int max8973_probe(struct i2c_client *client,
 
 	max = devm_kzalloc(&client->dev, sizeof(*max), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!max) {
 		dev_err(&client->dev, "Memory allocation for max failed\n");
 		return -ENOMEM;
 	}
+=======
+	if (!max)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!max)
 		return -ENOMEM;
@@ -419,16 +449,22 @@ static int max8973_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, max);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max->dev = &client->dev;
 	max->desc.name = id->name;
 	max->desc.id = 0;
 	max->desc.ops = &max8973_dcdc_ops;
 =======
+=======
+>>>>>>> v3.18
 	max->ops = max8973_dcdc_ops;
 	max->dev = &client->dev;
 	max->desc.name = id->name;
 	max->desc.id = 0;
 	max->desc.ops = &max->ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	max->desc.type = REGULATOR_VOLTAGE;
 	max->desc.owner = THIS_MODULE;
@@ -436,6 +472,7 @@ static int max8973_probe(struct i2c_client *client,
 	max->desc.uV_step = MAX8973_VOLATGE_STEP;
 	max->desc.n_voltages = MAX8973_BUCK_N_VOLTAGE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!pdata->enable_ext_control) {
 		max->desc.enable_reg = MAX8973_VOUT;
@@ -452,6 +489,8 @@ static int max8973_probe(struct i2c_client *client,
 	max->lru_index[0] = max->curr_vout_reg;
 	max->valid_dvs_gpio = false;
 =======
+=======
+>>>>>>> v3.18
 	if (!pdata || !pdata->enable_ext_control) {
 		max->desc.enable_reg = MAX8973_VOUT;
 		max->desc.enable_mask = MAX8973_VOUT_ENABLE;
@@ -471,6 +510,9 @@ static int max8973_probe(struct i2c_client *client,
 	}
 
 	max->lru_index[0] = max->curr_vout_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (gpio_is_valid(max->dvs_gpio)) {
@@ -498,6 +540,7 @@ static int max8973_probe(struct i2c_client *client,
 		max->lru_index[0] = max->curr_vout_reg;
 		max->lru_index[max->curr_vout_reg] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	ret = max8973_init_dcdc(max, pdata);
@@ -509,6 +552,8 @@ static int max8973_probe(struct i2c_client *client,
 	config.dev = &client->dev;
 	config.init_data = pdata->reg_init_data;
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		max->valid_dvs_gpio = false;
 	}
@@ -524,6 +569,9 @@ static int max8973_probe(struct i2c_client *client,
 	config.dev = &client->dev;
 	config.init_data = pdata ? pdata->reg_init_data :
 		of_get_regulator_init_data(&client->dev, client->dev.of_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config.driver_data = max;
 	config.of_node = client->dev.of_node;
@@ -531,7 +579,11 @@ static int max8973_probe(struct i2c_client *client,
 
 	/* Register the regulators */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = regulator_register(&max->desc, &config);
+=======
+	rdev = devm_regulator_register(&client->dev, &max->desc, &config);
+>>>>>>> v3.18
 =======
 	rdev = devm_regulator_register(&client->dev, &max->desc, &config);
 >>>>>>> v3.18
@@ -542,6 +594,7 @@ static int max8973_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max->rdev = rdev;
 	return 0;
 }
@@ -551,6 +604,8 @@ static int max8973_remove(struct i2c_client *client)
 	struct max8973_chip *max = i2c_get_clientdata(client);
 
 	regulator_unregister(max->rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -570,7 +625,10 @@ static struct i2c_driver max8973_i2c_driver = {
 	},
 	.probe = max8973_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max8973_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max8973_id,

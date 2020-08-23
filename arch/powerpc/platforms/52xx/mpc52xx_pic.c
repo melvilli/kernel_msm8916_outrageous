@@ -120,7 +120,11 @@
 
 /* MPC5200 device tree match tables */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_pic_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_pic_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_pic_ids[] __initconst = {
 >>>>>>> v3.18
@@ -129,7 +133,11 @@ static const struct of_device_id mpc52xx_pic_ids[] __initconst = {
 	{}
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_sdma_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_sdma_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc52xx_sdma_ids[] __initconst = {
 >>>>>>> v3.18
@@ -349,7 +357,11 @@ static int mpc52xx_irqhost_map(struct irq_domain *h, unsigned int virq,
 	int l1irq;
 	int l2irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_chip *irqchip;
+=======
+	struct irq_chip *uninitialized_var(irqchip);
+>>>>>>> v3.18
 =======
 	struct irq_chip *uninitialized_var(irqchip);
 >>>>>>> v3.18

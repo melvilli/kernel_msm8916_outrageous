@@ -1,7 +1,12 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Debug support for HID Nintendo Wiimote devices
  * Copyright (c) 2011 David Herrmann
+=======
+ * Debug support for HID Nintendo Wii / Wii U peripherals
+ * Copyright (c) 2011-2013 David Herrmann <dh.herrmann@gmail.com>
+>>>>>>> v3.18
 =======
  * Debug support for HID Nintendo Wii / Wii U peripherals
  * Copyright (c) 2011-2013 David Herrmann <dh.herrmann@gmail.com>
@@ -133,7 +138,12 @@ static ssize_t wiidebug_drm_write(struct file *f, const char __user *u,
 							size_t s, loff_t *off)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wiimote_debug *dbg = f->private_data;
+=======
+	struct seq_file *sf = f->private_data;
+	struct wiimote_debug *dbg = sf->private;
+>>>>>>> v3.18
 =======
 	struct seq_file *sf = f->private_data;
 	struct wiimote_debug *dbg = sf->private;
@@ -151,7 +161,11 @@ static ssize_t wiidebug_drm_write(struct file *f, const char __user *u,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf[15] = 0;
+=======
+	buf[len] = 0;
+>>>>>>> v3.18
 =======
 	buf[len] = 0;
 >>>>>>> v3.18
@@ -165,11 +179,14 @@ static ssize_t wiidebug_drm_write(struct file *f, const char __user *u,
 
 	if (i == WIIPROTO_REQ_MAX)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		i = simple_strtoul(buf, NULL, 10);
 
 	spin_lock_irqsave(&dbg->wdata->state.lock, flags);
 	wiiproto_req_drm(dbg->wdata, (__u8) i);
 =======
+=======
+>>>>>>> v3.18
 		i = simple_strtoul(buf, NULL, 16);
 
 	spin_lock_irqsave(&dbg->wdata->state.lock, flags);
@@ -177,6 +194,9 @@ static ssize_t wiidebug_drm_write(struct file *f, const char __user *u,
 	wiiproto_req_drm(dbg->wdata, (__u8) i);
 	if (i != WIIPROTO_REQ_NULL)
 		dbg->wdata->state.flags |= WIIPROTO_FLAG_DRM_LOCKED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&dbg->wdata->state.lock, flags);
 

@@ -33,7 +33,12 @@
 #include <linux/nmi.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+#include <linux/mm.h>
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <linux/mm.h>
 #include <asm/unaligned.h>
@@ -47,11 +52,17 @@
 /* Firmware should respond within 1 milliseconds */
 #define FIRMWARE_TIMEOUT	(1 * NSEC_PER_MSEC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ACPI5_VENDOR_BIT	BIT(31)
 #define MEM_ERROR_MASK		(ACPI_EINJ_MEMORY_CORRECTABLE | \
 				ACPI_EINJ_MEMORY_UNCORRECTABLE | \
 				ACPI_EINJ_MEMORY_FATAL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -210,7 +221,11 @@ static void check_vendor_extension(u64 paddr,
 	if (!offset)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = acpi_os_map_memory(paddr + offset, sizeof(*v));
+=======
+	v = acpi_os_map_iomem(paddr + offset, sizeof(*v));
+>>>>>>> v3.18
 =======
 	v = acpi_os_map_iomem(paddr + offset, sizeof(*v));
 >>>>>>> v3.18
@@ -222,7 +237,11 @@ static void check_vendor_extension(u64 paddr,
 		(sbdf >> 11) & 0x1f, (sbdf >> 8) & 0x7,
 		 v->vendor_id, v->device_id, v->rev_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_os_unmap_memory(v, sizeof(*v));
+=======
+	acpi_os_unmap_iomem(v, sizeof(*v));
+>>>>>>> v3.18
 =======
 	acpi_os_unmap_iomem(v, sizeof(*v));
 >>>>>>> v3.18
@@ -232,7 +251,11 @@ static void *einj_get_parameter_address(void)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 paddrv4 = 0, paddrv5 = 0;
+=======
+	u64 pa_v4 = 0, pa_v5 = 0;
+>>>>>>> v3.18
 =======
 	u64 pa_v4 = 0, pa_v5 = 0;
 >>>>>>> v3.18
@@ -245,8 +268,12 @@ static void *einj_get_parameter_address(void)
 		    entry->register_region.space_id ==
 		    ACPI_ADR_SPACE_SYSTEM_MEMORY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(&paddrv4, &entry->register_region.address,
 			       sizeof(paddrv4));
+=======
+			pa_v4 = get_unaligned(&entry->register_region.address);
+>>>>>>> v3.18
 =======
 			pa_v4 = get_unaligned(&entry->register_region.address);
 >>>>>>> v3.18
@@ -254,6 +281,7 @@ static void *einj_get_parameter_address(void)
 		    entry->instruction == ACPI_EINJ_WRITE_REGISTER &&
 		    entry->register_region.space_id ==
 		    ACPI_ADR_SPACE_SYSTEM_MEMORY)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			memcpy(&paddrv5, &entry->register_region.address,
 			       sizeof(paddrv5));
@@ -278,6 +306,8 @@ static void *einj_get_parameter_address(void)
 		if (v4param->reserved1 || v4param->reserved2) {
 			acpi_os_unmap_memory(v4param, sizeof(*v4param));
 =======
+=======
+>>>>>>> v3.18
 			pa_v5 = get_unaligned(&entry->register_region.address);
 		entry++;
 	}
@@ -299,6 +329,9 @@ static void *einj_get_parameter_address(void)
 			return NULL;
 		if (v4param->reserved1 || v4param->reserved2) {
 			acpi_os_unmap_iomem(v4param, sizeof(*v4param));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return NULL;
 		}
@@ -420,7 +453,11 @@ static int __einj_error_trigger(u64 trigger_paddr, u32 type,
 	 * remove it from trigger table resources.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((param_extension || acpi5) && (type & 0x0038) && param2) {
+=======
+	if ((param_extension || acpi5) && (type & MEM_ERROR_MASK) && param2) {
+>>>>>>> v3.18
 =======
 	if ((param_extension || acpi5) && (type & MEM_ERROR_MASK) && param2) {
 >>>>>>> v3.18
@@ -468,7 +505,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __einj_error_inject(u32 type, u64 param1, u64 param2)
+=======
+static int __einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
+			       u64 param3, u64 param4)
+>>>>>>> v3.18
 =======
 static int __einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
 			       u64 param3, u64 param4)
@@ -489,7 +531,11 @@ static int __einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
 
 		v5param->type = type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (type & 0x80000000) {
+=======
+		if (type & ACPI5_VENDOR_BIT) {
+>>>>>>> v3.18
 =======
 		if (type & ACPI5_VENDOR_BIT) {
 >>>>>>> v3.18
@@ -507,13 +553,19 @@ static int __einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
 			}
 			v5param->flags = vendor_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (flags) {
 				v5param->flags = flags;
 				v5param->memory_address = param1;
 				v5param->memory_address_range = param2;
 				v5param->apicid = param3;
 				v5param->pcie_sbdf = param4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			switch (type) {
@@ -584,6 +636,7 @@ static int __einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
 
 /* Inject the specified hardware error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int einj_error_inject(u32 type, u64 param1, u64 param2)
 {
 	int rc;
@@ -591,6 +644,8 @@ static int einj_error_inject(u32 type, u64 param1, u64 param2)
 	mutex_lock(&einj_mutex);
 	rc = __einj_error_inject(type, param1, param2);
 =======
+=======
+>>>>>>> v3.18
 static int einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
 			     u64 param3, u64 param4)
 {
@@ -630,6 +685,9 @@ static int einj_error_inject(u32 type, u32 flags, u64 param1, u64 param2,
 inject:
 	mutex_lock(&einj_mutex);
 	rc = __einj_error_inject(type, flags, param1, param2, param3, param4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&einj_mutex);
 
@@ -638,14 +696,20 @@ inject:
 
 static u32 error_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 error_param1;
 static u64 error_param2;
 =======
+=======
+>>>>>>> v3.18
 static u32 error_flags;
 static u64 error_param1;
 static u64 error_param2;
 static u64 error_param3;
 static u64 error_param4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct dentry *einj_debug_dir;
 
@@ -715,7 +779,11 @@ static int error_type_set(void *data, u64 val)
 	 * are not enumerated by ACPI_EINJ_GET_ERROR_TYPE
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vendor = val & 0x80000000;
+=======
+	vendor = val & ACPI5_VENDOR_BIT;
+>>>>>>> v3.18
 =======
 	vendor = val & ACPI5_VENDOR_BIT;
 >>>>>>> v3.18
@@ -745,7 +813,12 @@ static int error_inject_set(void *data, u64 val)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return einj_error_inject(error_type, error_param1, error_param2);
+=======
+	return einj_error_inject(error_type, error_flags, error_param1, error_param2,
+		error_param3, error_param4);
+>>>>>>> v3.18
 =======
 	return einj_error_inject(error_type, error_flags, error_param1, error_param2,
 		error_param3, error_param4);
@@ -828,9 +901,12 @@ static int __init einj_init(void)
 		goto err_release;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	einj_param = einj_get_parameter_address();
 	if ((param_extension || acpi5) && einj_param) {
 =======
+=======
+>>>>>>> v3.18
 	rc = -ENOMEM;
 	einj_param = einj_get_parameter_address();
 	if ((param_extension || acpi5) && einj_param) {
@@ -838,6 +914,9 @@ static int __init einj_init(void)
 					    einj_debug_dir, &error_flags);
 		if (!fentry)
 			goto err_unmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fentry = debugfs_create_x64("param1", S_IRUSR | S_IWUSR,
 					    einj_debug_dir, &error_param1);
@@ -848,7 +927,10 @@ static int __init einj_init(void)
 		if (!fentry)
 			goto err_unmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		fentry = debugfs_create_x64("param3", S_IRUSR | S_IWUSR,
 					    einj_debug_dir, &error_param3);
 		if (!fentry)
@@ -857,6 +939,9 @@ static int __init einj_init(void)
 					    einj_debug_dir, &error_param4);
 		if (!fentry)
 			goto err_unmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		fentry = debugfs_create_x32("notrigger", S_IRUSR | S_IWUSR,
@@ -889,7 +974,11 @@ err_unmap:
 			sizeof(struct einj_parameter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_os_unmap_memory(einj_param, size);
+=======
+		acpi_os_unmap_iomem(einj_param, size);
+>>>>>>> v3.18
 =======
 		acpi_os_unmap_iomem(einj_param, size);
 >>>>>>> v3.18
@@ -915,7 +1004,11 @@ static void __exit einj_exit(void)
 			sizeof(struct einj_parameter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_os_unmap_memory(einj_param, size);
+=======
+		acpi_os_unmap_iomem(einj_param, size);
+>>>>>>> v3.18
 =======
 		acpi_os_unmap_iomem(einj_param, size);
 >>>>>>> v3.18

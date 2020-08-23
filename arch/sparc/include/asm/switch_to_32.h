@@ -100,9 +100,15 @@ extern struct thread_info *current_set[NR_CPUS];
 	} while(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void fpsave(unsigned long *fpregs, unsigned long *fsr,
 		   void *fpqueue, unsigned long *fpqdepth);
 extern void synchronize_user_stack(void);
+=======
+void fpsave(unsigned long *fpregs, unsigned long *fsr,
+	    void *fpqueue, unsigned long *fpqdepth);
+void synchronize_user_stack(void);
+>>>>>>> v3.18
 =======
 void fpsave(unsigned long *fpregs, unsigned long *fsr,
 	    void *fpqueue, unsigned long *fpqdepth);

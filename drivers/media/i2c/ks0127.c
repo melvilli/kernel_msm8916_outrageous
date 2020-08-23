@@ -43,7 +43,10 @@
 #include <linux/slab.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ks0127.h"
@@ -204,7 +207,10 @@ struct ks0127 {
 	struct v4l2_subdev sd;
 	v4l2_std_id	norm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		ident;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 		regs[256];
@@ -378,12 +384,18 @@ static void ks0127_and_or(struct v4l2_subdev *sd, u8 reg, u8 and_v, u8 or_v)
 static void ks0127_init(struct v4l2_subdev *sd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ks0127 *ks = to_ks0127(sd);
 	u8 *table = reg_defaults;
 	int i;
 
 	ks->ident = V4L2_IDENT_KS0127;
 
+=======
+	u8 *table = reg_defaults;
+	int i;
+
+>>>>>>> v3.18
 =======
 	u8 *table = reg_defaults;
 	int i;
@@ -410,7 +422,10 @@ static void ks0127_init(struct v4l2_subdev *sd)
 
 	if ((ks0127_read(sd, KS_STAT) & 0x80) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ks->ident = V4L2_IDENT_KS0122S;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		v4l2_dbg(1, debug, sd, "ks0122s found\n");
@@ -424,7 +439,10 @@ static void ks0127_init(struct v4l2_subdev *sd)
 
 	case 9:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ks->ident = V4L2_IDENT_KS0127B;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		v4l2_dbg(1, debug, sd, "ks0127B Revision A found\n");
@@ -635,7 +653,11 @@ static int ks0127_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd
 	int stat = V4L2_IN_ST_NO_SIGNAL;
 	u8 status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_std_id std = V4L2_STD_ALL;
+=======
+	v4l2_std_id std = pstd ? *pstd : V4L2_STD_ALL;
+>>>>>>> v3.18
 =======
 	v4l2_std_id std = pstd ? *pstd : V4L2_STD_ALL;
 >>>>>>> v3.18
@@ -644,6 +666,7 @@ static int ks0127_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd
 	if (!(status & 0x20))		 /* NOVID not set */
 		stat = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(status & 0x01))		      /* CLOCK set */
 		stat |= V4L2_IN_ST_NO_COLOR;
 	if ((status & 0x08))		   /* PALDET set */
@@ -651,6 +674,8 @@ static int ks0127_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd
 	else
 		std = V4L2_STD_NTSC;
 =======
+=======
+>>>>>>> v3.18
 	if (!(status & 0x01)) {		      /* CLOCK set */
 		stat |= V4L2_IN_ST_NO_COLOR;
 		std = V4L2_STD_UNKNOWN;
@@ -664,6 +689,9 @@ static int ks0127_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd
 		std &= V4L2_STD_525_60;
 	else
 		std &= V4L2_STD_625_50;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pstd)
 		*pstd = std;
@@ -685,6 +713,7 @@ static int ks0127_g_input_status(struct v4l2_subdev *sd, u32 *status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ks0127_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -702,10 +731,15 @@ static const struct v4l2_subdev_core_ops ks0127_core_ops = {
 
 static const struct v4l2_subdev_video_ops ks0127_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 /* ----------------------------------------------------------------------- */
 
 static const struct v4l2_subdev_video_ops ks0127_video_ops = {
 	.s_std = ks0127_s_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.s_routing = ks0127_s_routing,
 	.s_stream = ks0127_s_stream,
@@ -715,7 +749,10 @@ static const struct v4l2_subdev_video_ops ks0127_video_ops = {
 
 static const struct v4l2_subdev_ops ks0127_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.core = &ks0127_core_ops,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.video = &ks0127_video_ops,
@@ -734,7 +771,11 @@ static int ks0127_probe(struct i2c_client *client, const struct i2c_device_id *i
 		client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ks = kzalloc(sizeof(*ks), GFP_KERNEL);
+=======
+	ks = devm_kzalloc(&client->dev, sizeof(*ks), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ks = devm_kzalloc(&client->dev, sizeof(*ks), GFP_KERNEL);
 >>>>>>> v3.18
@@ -761,7 +802,10 @@ static int ks0127_remove(struct i2c_client *client)
 	ks0127_write(sd, KS_OFMTA, 0x20); /* tristate */
 	ks0127_write(sd, KS_CMDA, 0x2c | 0x80); /* power down */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_ks0127(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -9,7 +9,10 @@
  * CPU interrupt mask handling.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_V7M
 #define IRQMASK_REG_NAME_R "primask"
 #define IRQMASK_REG_NAME_W "primask"
@@ -20,6 +23,9 @@
 #define IRQMASK_I_BIT	PSR_I_BIT
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if __LINUX_ARM_ARCH__ >= 6
 
@@ -29,7 +35,11 @@ static inline unsigned long arch_local_irq_save(void)
 
 	asm volatile(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	mrs	%0, cpsr	@ arch_local_irq_save\n"
+=======
+		"	mrs	%0, " IRQMASK_REG_NAME_R "	@ arch_local_irq_save\n"
+>>>>>>> v3.18
 =======
 		"	mrs	%0, " IRQMASK_REG_NAME_R "	@ arch_local_irq_save\n"
 >>>>>>> v3.18
@@ -147,7 +157,11 @@ static inline unsigned long arch_local_save_flags(void)
 	unsigned long flags;
 	asm volatile(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	mrs	%0, cpsr	@ local_save_flags"
+=======
+		"	mrs	%0, " IRQMASK_REG_NAME_R "	@ local_save_flags"
+>>>>>>> v3.18
 =======
 		"	mrs	%0, " IRQMASK_REG_NAME_R "	@ local_save_flags"
 >>>>>>> v3.18
@@ -162,7 +176,11 @@ static inline void arch_local_irq_restore(unsigned long flags)
 {
 	asm volatile(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	msr	cpsr_c, %0	@ local_irq_restore"
+=======
+		"	msr	" IRQMASK_REG_NAME_W ", %0	@ local_irq_restore"
+>>>>>>> v3.18
 =======
 		"	msr	" IRQMASK_REG_NAME_W ", %0	@ local_irq_restore"
 >>>>>>> v3.18
@@ -174,15 +192,21 @@ static inline void arch_local_irq_restore(unsigned long flags)
 static inline int arch_irqs_disabled_flags(unsigned long flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return flags & PSR_I_BIT;
 }
 
 #endif
 #endif
 =======
+=======
+>>>>>>> v3.18
 	return flags & IRQMASK_I_BIT;
 }
 
 #endif /* ifdef __KERNEL__ */
 #endif /* ifndef __ASM_ARM_IRQFLAGS_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

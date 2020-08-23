@@ -33,7 +33,11 @@
 static int numachip_system __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct apic apic_numachip __read_mostly;
+=======
+static const struct apic apic_numachip;
+>>>>>>> v3.18
 =======
 static const struct apic apic_numachip;
 >>>>>>> v3.18
@@ -79,7 +83,11 @@ static int numachip_phys_pkg_id(int initial_apic_id, int index_msb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit numachip_wakeup_secondary(int phys_apicid, unsigned long start_rip)
+=======
+static int numachip_wakeup_secondary(int phys_apicid, unsigned long start_rip)
+>>>>>>> v3.18
 =======
 static int numachip_wakeup_secondary(int phys_apicid, unsigned long start_rip)
 >>>>>>> v3.18
@@ -226,7 +234,10 @@ static const struct apic apic_numachip __refconst = {
 	.dest_logical			= 0,
 	.check_apicid_used		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.check_apicid_present		= NULL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -236,6 +247,7 @@ static const struct apic apic_numachip __refconst = {
 	.ioapic_phys_id_map		= NULL,
 	.setup_apic_routing		= NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
@@ -244,6 +256,12 @@ static const struct apic apic_numachip __refconst = {
 	.enable_apic_mode		= NULL,
 	.phys_pkg_id			= numachip_phys_pkg_id,
 	.mps_oem_check			= NULL,
+=======
+	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+	.apicid_to_cpu_present		= NULL,
+	.check_phys_apicid_present	= default_check_phys_apicid_present,
+	.phys_pkg_id			= numachip_phys_pkg_id,
+>>>>>>> v3.18
 =======
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
@@ -265,10 +283,14 @@ static const struct apic apic_numachip __refconst = {
 
 	.wakeup_secondary_cpu		= numachip_wakeup_secondary,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 	.wait_for_init_deassert		= NULL,
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 =======
 	.wait_for_init_deassert		= false,
 >>>>>>> v3.18

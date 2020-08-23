@@ -224,7 +224,10 @@ DEFINE_EVENT(regmap_async, regmap_async_complete_done,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(regcache_drop_region,
 
 	TP_PROTO(struct device *dev, unsigned int from,
@@ -248,6 +251,9 @@ TRACE_EVENT(regcache_drop_region,
 		  (unsigned int)__entry->to)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_REGMAP_H */
 

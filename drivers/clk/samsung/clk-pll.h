@@ -13,6 +13,7 @@
 #define __SAMSUNG_CLK_PLL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum pll45xx_type {
 	pll_4500,
 	pll_4502,
@@ -36,6 +37,8 @@ extern struct clk * __init samsung_clk_register_pll46xx(const char *name,
 			const char *pname, const void __iomem *con_reg,
 			enum pll46xx_type type);
 =======
+=======
+>>>>>>> v3.18
 enum samsung_pll_type {
 	pll_2126,
 	pll_3000,
@@ -121,6 +124,9 @@ struct samsung_pll_rate_table {
 	unsigned int vsel;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct clk * __init samsung_clk_register_pll2550x(const char *name,
 			const char *pname, const void __iomem *reg_base,

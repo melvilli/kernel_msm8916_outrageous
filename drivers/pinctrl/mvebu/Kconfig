@@ -9,6 +9,10 @@ config PINCTRL_DOVE
 	bool
 	select PINCTRL_MVEBU
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MFD_SYSCON
+>>>>>>> v3.18
 =======
 	select MFD_SYSCON
 >>>>>>> v3.18
@@ -22,7 +26,10 @@ config PINCTRL_ARMADA_370
 	select PINCTRL_MVEBU
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_ARMADA_375
 	bool
 	select PINCTRL_MVEBU
@@ -31,16 +38,25 @@ config PINCTRL_ARMADA_38X
 	bool
 	select PINCTRL_MVEBU
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PINCTRL_ARMADA_XP
 	bool
 	select PINCTRL_MVEBU
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_ORION
 	bool
 	select PINCTRL_MVEBU
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

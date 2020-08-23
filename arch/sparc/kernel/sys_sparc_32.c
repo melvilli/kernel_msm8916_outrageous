@@ -25,6 +25,11 @@
 #include <asm/unistd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "systbls.h"
+
+>>>>>>> v3.18
 =======
 #include "systbls.h"
 
@@ -74,7 +79,11 @@ unsigned long arch_get_unmapped_area(struct file *filp, unsigned long addr, unsi
  * a pipe. It's not the way unix traditionally does this, though.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int sparc_pipe(struct pt_regs *regs)
+=======
+asmlinkage long sparc_pipe(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 asmlinkage long sparc_pipe(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -103,7 +112,11 @@ int sparc_mmap_check(unsigned long addr, unsigned long len)
 /* Linux version of mmap */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage unsigned long sys_mmap2(unsigned long addr, unsigned long len,
+=======
+asmlinkage long sys_mmap2(unsigned long addr, unsigned long len,
+>>>>>>> v3.18
 =======
 asmlinkage long sys_mmap2(unsigned long addr, unsigned long len,
 >>>>>>> v3.18
@@ -117,7 +130,11 @@ asmlinkage long sys_mmap2(unsigned long addr, unsigned long len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage unsigned long sys_mmap(unsigned long addr, unsigned long len,
+=======
+asmlinkage long sys_mmap(unsigned long addr, unsigned long len,
+>>>>>>> v3.18
 =======
 asmlinkage long sys_mmap(unsigned long addr, unsigned long len,
 >>>>>>> v3.18
@@ -215,7 +232,11 @@ SYSCALL_DEFINE5(rt_sigaction, int, sig,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int sys_getdomainname(char __user *name, int len)
+=======
+asmlinkage long sys_getdomainname(char __user *name, int len)
+>>>>>>> v3.18
 =======
 asmlinkage long sys_getdomainname(char __user *name, int len)
 >>>>>>> v3.18

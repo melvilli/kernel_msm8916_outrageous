@@ -46,7 +46,11 @@ EXPORT_SYMBOL(mm_cachebits);
 
 /* size of memory already mapped in head.S */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INIT_MAPPED_SIZE	(4UL<<20)
+=======
+extern __initdata unsigned long m68k_init_mapped_size;
+>>>>>>> v3.18
 =======
 extern __initdata unsigned long m68k_init_mapped_size;
 >>>>>>> v3.18
@@ -238,7 +242,11 @@ void __init paging_init(void)
 			m68k_num_memory--;
 			memmove(m68k_memory + i, m68k_memory + i + 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(m68k_num_memory - i) * sizeof(struct mem_info));
+=======
+				(m68k_num_memory - i) * sizeof(struct m68k_mem_info));
+>>>>>>> v3.18
 =======
 				(m68k_num_memory - i) * sizeof(struct m68k_mem_info));
 >>>>>>> v3.18
@@ -280,17 +288,23 @@ void __init paging_init(void)
 	addr = m68k_memory[0].addr;
 	size = m68k_memory[0].size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_bootmem_node(NODE_DATA(0), availmem, min(INIT_MAPPED_SIZE, size) - (availmem - addr));
 	map_node(0);
 	if (size > INIT_MAPPED_SIZE)
 		free_bootmem_node(NODE_DATA(0), addr + INIT_MAPPED_SIZE, size - INIT_MAPPED_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	free_bootmem_node(NODE_DATA(0), availmem,
 			  min(m68k_init_mapped_size, size) - (availmem - addr));
 	map_node(0);
 	if (size > m68k_init_mapped_size)
 		free_bootmem_node(NODE_DATA(0), addr + m68k_init_mapped_size,
 				  size - m68k_init_mapped_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 1; i < m68k_num_memory; i++)

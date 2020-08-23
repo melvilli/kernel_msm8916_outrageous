@@ -13,6 +13,7 @@
 #define _S3C_AUDIO_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s3c_dma_params {
 	struct s3c2410_dma_client *client;	/* stream identifier */
 	int channel;				/* Channel ID */
@@ -26,6 +27,8 @@ struct s3c_dma_params {
 int asoc_dma_platform_register(struct device *dev);
 void asoc_dma_platform_unregister(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 #include <sound/dmaengine_pcm.h>
 
 struct s3c_dma_params {
@@ -40,6 +43,9 @@ void samsung_asoc_init_dma_data(struct snd_soc_dai *dai,
 				struct s3c_dma_params *playback,
 				struct s3c_dma_params *capture);
 int samsung_asoc_dma_platform_register(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

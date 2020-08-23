@@ -77,7 +77,11 @@ static inline void set_value_reg32(volatile u32 *const addr,
 	__asm__ __volatile__(
 	"	.set	push				\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3				\n"
+=======
+	"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -103,7 +107,11 @@ static inline void set_reg32(volatile u32 *const addr,
 	__asm__ __volatile__(
 	"	.set	push				\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3				\n"
+=======
+	"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -128,7 +136,11 @@ static inline void clear_reg32(volatile u32 *const addr,
 	__asm__ __volatile__(
 	"	.set	push				\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3				\n"
+=======
+	"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -153,7 +165,11 @@ static inline void toggle_reg32(volatile u32 *const addr,
 	__asm__ __volatile__(
 	"	.set	push				\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3				\n"
+=======
+	"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -233,7 +249,11 @@ static inline u32 blocking_read_reg32(volatile u32 *const addr)
 	__asm__ __volatile__(					\
 	"	.set	push				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3				\n"	\
+=======
+	"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"	\
 >>>>>>> v3.18
@@ -246,7 +266,11 @@ static inline u32 blocking_read_reg32(volatile u32 *const addr)
 	__asm__ __volatile__(					\
 	"	.set	push				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3				\n"	\
+=======
+	"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000			\n"	\
 >>>>>>> v3.18

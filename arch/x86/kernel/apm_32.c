@@ -842,6 +842,7 @@ static int apm_do_idle(void)
 	u8 ret = 0;
 	int idled = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int polling;
 	int err = 0;
 
@@ -858,13 +859,20 @@ static int apm_do_idle(void)
 	int err = 0;
 
 >>>>>>> v3.18
+=======
+	int err = 0;
+
+>>>>>>> v3.18
 	if (!need_resched()) {
 		idled = 1;
 		ret = apm_bios_call_simple(APM_FUNC_IDLE, 0, 0, &eax, &err);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (polling)
 		current_thread_info()->status |= TS_POLLING;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

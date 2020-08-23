@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -151,8 +155,11 @@ struct acpi_table_rsdp {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_RSDP_REV0_SIZE     20	/* Size of original ACPI 1.0 RSDP */
 =======
+=======
+>>>>>>> v3.18
 /* Standalone struct for the ACPI 1.0 RSDP */
 
 struct acpi_rsdp_common {
@@ -171,6 +178,9 @@ struct acpi_rsdp_extension {
 	u8 extended_checksum;
 	u8 reserved[3];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
@@ -191,6 +201,12 @@ struct acpi_table_xsdt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ACPI_RSDT_ENTRY_SIZE        (sizeof (u32))
+#define ACPI_XSDT_ENTRY_SIZE        (sizeof (u64))
+
+>>>>>>> v3.18
 =======
 #define ACPI_RSDT_ENTRY_SIZE        (sizeof (u32))
 #define ACPI_XSDT_ENTRY_SIZE        (sizeof (u64))
@@ -282,7 +298,12 @@ struct acpi_table_fadt {
 	struct acpi_generic_address reset_register;	/* 64-bit address of the Reset register */
 	u8 reset_value;		/* Value to write to the reset_register port to reset the system */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved4[3];	/* Reserved, must be zero */
+=======
+	u16 arm_boot_flags;	/* ARM-Specific Boot Flags (see below for individual flags) (ACPI 5.1) */
+	u8 minor_revision;	/* FADT Minor Revision (ACPI 5.1) */
+>>>>>>> v3.18
 =======
 	u16 arm_boot_flags;	/* ARM-Specific Boot Flags (see below for individual flags) (ACPI 5.1) */
 	u8 minor_revision;	/* FADT Minor Revision (ACPI 5.1) */
@@ -302,7 +323,11 @@ struct acpi_table_fadt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Masks for FADT Boot Architecture Flags (boot_flags) [Vx]=Introduced in this FADT revision */
+=======
+/* Masks for FADT IA-PC Boot Architecture Flags (boot_flags) [Vx]=Introduced in this FADT revision */
+>>>>>>> v3.18
 =======
 /* Masks for FADT IA-PC Boot Architecture Flags (boot_flags) [Vx]=Introduced in this FADT revision */
 >>>>>>> v3.18
@@ -317,12 +342,18 @@ struct acpi_table_fadt {
 #define FADT2_REVISION_ID               3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Masks for FADT ARM Boot Architecture Flags (arm_boot_flags) ACPI 5.1 */
 
 #define ACPI_FADT_PSCI_COMPLIANT    (1)	/* 00: [V5+] PSCI 0.2+ is implemented */
 #define ACPI_FADT_PSCI_USE_HVC      (1<<1)	/* 01: [V5+] HVC must be used instead of SMC as the PSCI conduit */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Masks for FADT flags */
 
@@ -396,6 +427,7 @@ struct acpi_table_desc {
 /* Masks for Flags field above */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_TABLE_ORIGIN_UNKNOWN       (0)
 #define ACPI_TABLE_ORIGIN_MAPPED        (1)
 #define ACPI_TABLE_ORIGIN_ALLOCATED     (2)
@@ -403,11 +435,16 @@ struct acpi_table_desc {
 #define ACPI_TABLE_ORIGIN_MASK          (7)
 #define ACPI_TABLE_IS_LOADED            (8)
 =======
+=======
+>>>>>>> v3.18
 #define ACPI_TABLE_ORIGIN_EXTERNAL_VIRTUAL  (0)	/* Virtual address, external maintained */
 #define ACPI_TABLE_ORIGIN_INTERNAL_PHYSICAL (1)	/* Physical address, internally mapped */
 #define ACPI_TABLE_ORIGIN_INTERNAL_VIRTUAL  (2)	/* Virtual address, internallly allocated */
 #define ACPI_TABLE_ORIGIN_MASK              (3)
 #define ACPI_TABLE_IS_LOADED                (8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -437,7 +474,11 @@ struct acpi_table_desc {
  */
 #define ACPI_FADT_V1_SIZE       (u32) (ACPI_FADT_OFFSET (flags) + 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_FADT_V2_SIZE       (u32) (ACPI_FADT_OFFSET (reserved4[0]) + 3)
+=======
+#define ACPI_FADT_V2_SIZE       (u32) (ACPI_FADT_OFFSET (minor_revision) + 1)
+>>>>>>> v3.18
 =======
 #define ACPI_FADT_V2_SIZE       (u32) (ACPI_FADT_OFFSET (minor_revision) + 1)
 >>>>>>> v3.18

@@ -5,10 +5,13 @@ Required properties :
 
  - reg             : Offset and length of the register set for the device
 <<<<<<< HEAD
+<<<<<<< HEAD
  - compatible      : Should be "marvell,mv64xxx-i2c"
  - interrupts      : The interrupt number
  - clock-frequency : Desired I2C bus clock frequency in Hz.
 =======
+=======
+>>>>>>> v3.18
  - compatible      : Should be either:
                      - "allwinner,sun4i-a10-i2c"
                      - "allwinner,sun6i-a31-i2c"
@@ -29,6 +32,9 @@ default frequency is 100kHz
  - resets          : phandle to the parent reset controller. Mandatory
                      whenever you're using the "allwinner,sun6i-a31-i2c"
                      compatible.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Examples:
@@ -40,7 +46,10 @@ Examples:
 		clock-frequency = <100000>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 For the Armada XP:
 
@@ -50,4 +59,7 @@ For the Armada XP:
 		interrupts = <29>;
 		clock-frequency = <100000>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

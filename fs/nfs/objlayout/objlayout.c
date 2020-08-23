@@ -6,7 +6,11 @@
  *
  *  Benny Halevy <bhalevy@panasas.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *  Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *  Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -58,15 +62,21 @@ objlayout_alloc_layout_hdr(struct inode *inode, gfp_t gfp_flags)
 
 	objlay = kzalloc(sizeof(struct objlayout), gfp_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (objlay) {
 		spin_lock_init(&objlay->lock);
 		INIT_LIST_HEAD(&objlay->err_list);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!objlay)
 		return NULL;
 	spin_lock_init(&objlay->lock);
 	INIT_LIST_HEAD(&objlay->err_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dprintk("%s: Return %p\n", __func__, objlay);
 	return &objlay->pnfs_layout;
@@ -241,6 +251,7 @@ static void _rpc_read_complete(struct work_struct *work)
 {
 	struct rpc_task *task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_read_data *rdata;
 
 	dprintk("%s enter\n", __func__);
@@ -249,6 +260,8 @@ static void _rpc_read_complete(struct work_struct *work)
 
 	pnfs_ld_read_done(rdata);
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *hdr;
 
 	dprintk("%s enter\n", __func__);
@@ -256,12 +269,16 @@ static void _rpc_read_complete(struct work_struct *work)
 	hdr = container_of(task, struct nfs_pgio_header, task);
 
 	pnfs_ld_read_done(hdr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void
 objlayout_read_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nfs_read_data *rdata = oir->rpcdata;
 
@@ -271,6 +288,8 @@ objlayout_read_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 	else
 		rdata->header->pnfs_error = status;
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *hdr = oir->rpcdata;
 
 	oir->status = hdr->task.tk_status = status;
@@ -278,11 +297,15 @@ objlayout_read_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 		hdr->res.count = status;
 	else
 		hdr->pnfs_error = status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	objlayout_iodone(oir);
 	/* must not use oir after this point */
 
 	dprintk("%s: Return status=%zd eof=%d sync=%d\n", __func__,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status, rdata->res.eof, sync);
 
@@ -292,6 +315,8 @@ objlayout_read_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 		INIT_WORK(&rdata->task.u.tk_work, _rpc_read_complete);
 		schedule_work(&rdata->task.u.tk_work);
 =======
+=======
+>>>>>>> v3.18
 		status, hdr->res.eof, sync);
 
 	if (sync)
@@ -299,6 +324,9 @@ objlayout_read_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 	else {
 		INIT_WORK(&hdr->task.u.tk_work, _rpc_read_complete);
 		schedule_work(&hdr->task.u.tk_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -308,6 +336,7 @@ objlayout_read_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
  */
 enum pnfs_try_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 objlayout_read_pagelist(struct nfs_read_data *rdata)
 {
 	struct nfs_pgio_header *hdr = rdata->header;
@@ -315,11 +344,16 @@ objlayout_read_pagelist(struct nfs_read_data *rdata)
 	loff_t offset = rdata->args.offset;
 	size_t count = rdata->args.count;
 =======
+=======
+>>>>>>> v3.18
 objlayout_read_pagelist(struct nfs_pgio_header *hdr)
 {
 	struct inode *inode = hdr->inode;
 	loff_t offset = hdr->args.offset;
 	size_t count = hdr->args.count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 	loff_t eof;
@@ -329,8 +363,13 @@ objlayout_read_pagelist(struct nfs_pgio_header *hdr)
 		if (offset >= eof) {
 			err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rdata->res.count = 0;
 			rdata->res.eof = 1;
+=======
+			hdr->res.count = 0;
+			hdr->res.eof = 1;
+>>>>>>> v3.18
 =======
 			hdr->res.count = 0;
 			hdr->res.eof = 1;
@@ -342,6 +381,7 @@ objlayout_read_pagelist(struct nfs_pgio_header *hdr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdata->res.eof = (offset + count) >= eof;
 	_fix_verify_io_params(hdr->lseg, &rdata->args.pages,
 			      &rdata->args.pgbase,
@@ -352,6 +392,8 @@ objlayout_read_pagelist(struct nfs_pgio_header *hdr)
 
 	err = objio_read_pagelist(rdata);
 =======
+=======
+>>>>>>> v3.18
 	hdr->res.eof = (offset + count) >= eof;
 	_fix_verify_io_params(hdr->lseg, &hdr->args.pages,
 			      &hdr->args.pgbase,
@@ -361,6 +403,9 @@ objlayout_read_pagelist(struct nfs_pgio_header *hdr)
 		__func__, inode->i_ino, offset, count, hdr->res.eof);
 
 	err = objio_read_pagelist(hdr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	if (unlikely(err)) {
@@ -379,6 +424,7 @@ static void _rpc_write_complete(struct work_struct *work)
 {
 	struct rpc_task *task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_write_data *wdata;
 
 	dprintk("%s enter\n", __func__);
@@ -387,6 +433,8 @@ static void _rpc_write_complete(struct work_struct *work)
 
 	pnfs_ld_write_done(wdata);
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *hdr;
 
 	dprintk("%s enter\n", __func__);
@@ -394,12 +442,16 @@ static void _rpc_write_complete(struct work_struct *work)
 	hdr = container_of(task, struct nfs_pgio_header, task);
 
 	pnfs_ld_write_done(hdr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void
 objlayout_write_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nfs_write_data *wdata = oir->rpcdata;
 
@@ -410,6 +462,8 @@ objlayout_write_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 	} else {
 		wdata->header->pnfs_error = status;
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *hdr = oir->rpcdata;
 
 	oir->status = hdr->task.tk_status = status;
@@ -418,12 +472,16 @@ objlayout_write_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 		hdr->verf.committed = oir->committed;
 	} else {
 		hdr->pnfs_error = status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	objlayout_iodone(oir);
 	/* must not use oir after this point */
 
 	dprintk("%s: Return status %zd committed %d sync=%d\n", __func__,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status, wdata->verf.committed, sync);
 
@@ -433,6 +491,8 @@ objlayout_write_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 		INIT_WORK(&wdata->task.u.tk_work, _rpc_write_complete);
 		schedule_work(&wdata->task.u.tk_work);
 =======
+=======
+>>>>>>> v3.18
 		status, hdr->verf.committed, sync);
 
 	if (sync)
@@ -440,6 +500,9 @@ objlayout_write_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
 	else {
 		INIT_WORK(&hdr->task.u.tk_work, _rpc_write_complete);
 		schedule_work(&hdr->task.u.tk_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -448,6 +511,7 @@ objlayout_write_done(struct objlayout_io_res *oir, ssize_t status, bool sync)
  * Perform sync or async writes.
  */
 enum pnfs_try_status
+<<<<<<< HEAD
 <<<<<<< HEAD
 objlayout_write_pagelist(struct nfs_write_data *wdata,
 			 int how)
@@ -461,6 +525,8 @@ objlayout_write_pagelist(struct nfs_write_data *wdata,
 
 	err = objio_write_pagelist(wdata, how);
 =======
+=======
+>>>>>>> v3.18
 objlayout_write_pagelist(struct nfs_pgio_header *hdr, int how)
 {
 	int err;
@@ -470,6 +536,9 @@ objlayout_write_pagelist(struct nfs_pgio_header *hdr, int how)
 			      hdr->args.offset, hdr->args.count);
 
 	err = objio_write_pagelist(hdr, how);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(err)) {
 		hdr->pnfs_error = err;
@@ -687,6 +756,7 @@ loop_done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Get Device Info API for io engines
@@ -755,6 +825,8 @@ void objlayout_put_deviceinfo(struct pnfs_osd_deviceaddr *deviceaddr)
 	kfree(odi);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum {

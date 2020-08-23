@@ -124,7 +124,10 @@ unsigned long task_statm(struct mm_struct *mm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static pid_t pid_of_stack(struct proc_maps_private *priv,
 				struct vm_area_struct *vma, bool is_pid)
 {
@@ -144,6 +147,9 @@ static pid_t pid_of_stack(struct proc_maps_private *priv,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * display a single VMA to a sequenced file
@@ -186,7 +192,11 @@ static int nommu_vma_show(struct seq_file *m, struct vm_area_struct *vma,
 		seq_path(m, &file->f_path, "");
 	} else if (mm) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pid_t tid = vm_is_stack(priv->task, vma, is_pid);
+=======
+		pid_t tid = pid_of_stack(priv, vma, is_pid);
+>>>>>>> v3.18
 =======
 		pid_t tid = pid_of_stack(priv, vma, is_pid);
 >>>>>>> v3.18
@@ -239,6 +249,7 @@ static void *m_start(struct seq_file *m, loff_t *pos)
 
 	/* pin the task and mm whilst we play with them */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->task = get_pid_task(priv->pid, PIDTYPE_PID);
 	if (!priv->task)
 		return ERR_PTR(-ESRCH);
@@ -252,6 +263,8 @@ static void *m_start(struct seq_file *m, loff_t *pos)
 	down_read(&mm->mmap_sem);
 
 =======
+=======
+>>>>>>> v3.18
 	priv->task = get_proc_task(priv->inode);
 	if (!priv->task)
 		return ERR_PTR(-ESRCH);
@@ -261,12 +274,21 @@ static void *m_start(struct seq_file *m, loff_t *pos)
 		return NULL;
 
 	down_read(&mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* start from the Nth VMA */
 	for (p = rb_first(&mm->mm_rb); p; p = rb_next(p))
 		if (n-- == 0)
 			return p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	up_read(&mm->mmap_sem);
+	mmput(mm);
+>>>>>>> v3.18
 =======
 
 	up_read(&mm->mmap_sem);
@@ -280,12 +302,15 @@ static void m_stop(struct seq_file *m, void *_vml)
 	struct proc_maps_private *priv = m->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->task) {
 		struct mm_struct *mm = priv->task->mm;
 		up_read(&mm->mmap_sem);
 		mmput(mm);
 		put_task_struct(priv->task);
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR_OR_NULL(_vml)) {
 		up_read(&priv->mm->mmap_sem);
 		mmput(priv->mm);
@@ -293,6 +318,9 @@ static void m_stop(struct seq_file *m, void *_vml)
 	if (priv->task) {
 		put_task_struct(priv->task);
 		priv->task = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -324,6 +352,7 @@ static int maps_open(struct inode *inode, struct file *file,
 {
 	struct proc_maps_private *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -ENOMEM;
 
 	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
@@ -339,6 +368,8 @@ static int maps_open(struct inode *inode, struct file *file,
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	priv = __seq_open_private(file, ops, sizeof(*priv));
 	if (!priv)
@@ -366,6 +397,9 @@ static int map_release(struct inode *inode, struct file *file)
 		mmdrop(priv->mm);
 
 	return seq_release_private(inode, file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -384,7 +418,11 @@ const struct file_operations proc_pid_maps_operations = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= seq_release_private,
+=======
+	.release	= map_release,
+>>>>>>> v3.18
 =======
 	.release	= map_release,
 >>>>>>> v3.18
@@ -395,7 +433,11 @@ const struct file_operations proc_tid_maps_operations = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= seq_release_private,
+=======
+	.release	= map_release,
+>>>>>>> v3.18
 =======
 	.release	= map_release,
 >>>>>>> v3.18

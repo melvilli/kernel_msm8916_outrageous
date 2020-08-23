@@ -39,7 +39,10 @@
 #include "signal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEBUG_SIG 0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -69,8 +72,13 @@ struct rt_sigframe {
 	void __user *puc;
 	struct siginfo info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 64 bit ABI allows for 288 bytes below sp before decrementing it. */
 	char abigap[288];
+=======
+	/* New 64 bit little-endian ABI allows redzone of 512 bytes below sp */
+	char abigap[USER_REDZONE_SIZE];
+>>>>>>> v3.18
 =======
 	/* New 64 bit little-endian ABI allows redzone of 512 bytes below sp */
 	char abigap[USER_REDZONE_SIZE];
@@ -105,8 +113,11 @@ static long setup_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs,
 	long err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_fp_to_thread(current);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ALTIVEC
@@ -117,7 +128,12 @@ static long setup_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs,
 		flush_altivec_to_thread(current);
 		/* Copy 33 vec registers (vr0..31 and vscr) to the stack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err |= __copy_to_user(v_regs, current->thread.vr, 33 * sizeof(vector128));
+=======
+		err |= __copy_to_user(v_regs, &current->thread.vr_state,
+				      33 * sizeof(vector128));
+>>>>>>> v3.18
 =======
 		err |= __copy_to_user(v_regs, &current->thread.vr_state,
 				      33 * sizeof(vector128));
@@ -131,6 +147,11 @@ static long setup_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs,
 	 * use altivec.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpu_has_feature(CPU_FTR_ALTIVEC))
+		current->thread.vrsave = mfspr(SPRN_VRSAVE);
+>>>>>>> v3.18
 =======
 	if (cpu_has_feature(CPU_FTR_ALTIVEC))
 		current->thread.vrsave = mfspr(SPRN_VRSAVE);
@@ -213,7 +234,10 @@ static long setup_tm_sigcontexts(struct sigcontext __user *sc,
 	BUG_ON(!MSR_TM_ACTIVE(regs->msr));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Remove TM bits from thread's MSR.  The MSR in the sigcontext
 	 * just indicates to userland that we were doing a transaction, but we
 	 * don't want to return in transactional state.  This also ensures
@@ -221,6 +245,9 @@ static long setup_tm_sigcontexts(struct sigcontext __user *sc,
 	 */
 	regs->msr &= ~MSR_TS_MASK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	flush_fp_to_thread(current);
 
@@ -233,7 +260,11 @@ static long setup_tm_sigcontexts(struct sigcontext __user *sc,
 		flush_altivec_to_thread(current);
 		/* Copy 33 vec registers (vr0..31 and vscr) to the stack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err |= __copy_to_user(v_regs, current->thread.vr,
+=======
+		err |= __copy_to_user(v_regs, &current->thread.vr_state,
+>>>>>>> v3.18
 =======
 		err |= __copy_to_user(v_regs, &current->thread.vr_state,
 >>>>>>> v3.18
@@ -244,17 +275,23 @@ static long setup_tm_sigcontexts(struct sigcontext __user *sc,
 		if (msr & MSR_VEC)
 			err |= __copy_to_user(tm_v_regs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      current->thread.transact_vr,
 					      33 * sizeof(vector128));
 		else
 			err |= __copy_to_user(tm_v_regs,
 					      current->thread.vr,
 =======
+=======
+>>>>>>> v3.18
 					      &current->thread.transact_vr,
 					      33 * sizeof(vector128));
 		else
 			err |= __copy_to_user(tm_v_regs,
 					      &current->thread.vr_state,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      33 * sizeof(vector128));
 
@@ -267,6 +304,11 @@ static long setup_tm_sigcontexts(struct sigcontext __user *sc,
 	 * use altivec.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpu_has_feature(CPU_FTR_ALTIVEC))
+		current->thread.vrsave = mfspr(SPRN_VRSAVE);
+>>>>>>> v3.18
 =======
 	if (cpu_has_feature(CPU_FTR_ALTIVEC))
 		current->thread.vrsave = mfspr(SPRN_VRSAVE);
@@ -401,6 +443,7 @@ static long restore_sigcontext(struct pt_regs *regs, sigset_t *set, int sig,
 		return -EFAULT;
 	/* Copy 33 vec registers (vr0..31 and vscr) from the stack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v_regs != 0 && (msr & MSR_VEC) != 0)
 		err |= __copy_from_user(current->thread.vr, v_regs,
 					33 * sizeof(vector128));
@@ -412,6 +455,8 @@ static long restore_sigcontext(struct pt_regs *regs, sigset_t *set, int sig,
 	else
 		current->thread.vrsave = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (v_regs != NULL && (msr & MSR_VEC) != 0)
 		err |= __copy_from_user(&current->thread.vr_state, v_regs,
 					33 * sizeof(vector128));
@@ -424,6 +469,9 @@ static long restore_sigcontext(struct pt_regs *regs, sigset_t *set, int sig,
 		current->thread.vrsave = 0;
 	if (cpu_has_feature(CPU_FTR_ALTIVEC))
 		mtspr(SPRN_VRSAVE, current->thread.vrsave);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_ALTIVEC */
 	/* restore floating point */
@@ -440,7 +488,11 @@ static long restore_sigcontext(struct pt_regs *regs, sigset_t *set, int sig,
 	else
 		for (i = 0; i < 32 ; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			current->thread.fpr[i][TS_VSRLOWOFFSET] = 0;
+=======
+			current->thread.fp_state.fpr[i][TS_VSRLOWOFFSET] = 0;
+>>>>>>> v3.18
 =======
 			current->thread.fp_state.fpr[i][TS_VSRLOWOFFSET] = 0;
 >>>>>>> v3.18
@@ -484,10 +536,13 @@ static long restore_tm_sigcontexts(struct pt_regs *regs,
 	/* get MSR separately, transfer the LE bit if doing signal return */
 	err |= __get_user(msr, &sc->gp_regs[PT_MSR]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Don't allow reserved mode. */
 	if (MSR_TM_RESV(msr))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* pull in MSR TM from user context */
@@ -544,6 +599,7 @@ static long restore_tm_sigcontexts(struct pt_regs *regs,
 		return -EFAULT;
 	/* Copy 33 vec registers (vr0..31 and vscr) from the stack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v_regs != 0 && tm_v_regs != 0 && (msr & MSR_VEC) != 0) {
 		err |= __copy_from_user(current->thread.vr, v_regs,
 					33 * sizeof(vector128));
@@ -557,6 +613,8 @@ static long restore_tm_sigcontexts(struct pt_regs *regs,
 	/* Always get VRSAVE back */
 	if (v_regs != 0 && tm_v_regs != 0) {
 =======
+=======
+>>>>>>> v3.18
 	if (v_regs != NULL && tm_v_regs != NULL && (msr & MSR_VEC) != 0) {
 		err |= __copy_from_user(&current->thread.vr_state, v_regs,
 					33 * sizeof(vector128));
@@ -569,6 +627,9 @@ static long restore_tm_sigcontexts(struct pt_regs *regs,
 	}
 	/* Always get VRSAVE back */
 	if (v_regs != NULL && tm_v_regs != NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err |= __get_user(current->thread.vrsave,
 				  (u32 __user *)&v_regs[33]);
@@ -580,6 +641,11 @@ static long restore_tm_sigcontexts(struct pt_regs *regs,
 		current->thread.transact_vrsave = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpu_has_feature(CPU_FTR_ALTIVEC))
+		mtspr(SPRN_VRSAVE, current->thread.vrsave);
+>>>>>>> v3.18
 =======
 	if (cpu_has_feature(CPU_FTR_ALTIVEC))
 		mtspr(SPRN_VRSAVE, current->thread.vrsave);
@@ -602,8 +668,13 @@ static long restore_tm_sigcontexts(struct pt_regs *regs,
 	} else {
 		for (i = 0; i < 32 ; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			current->thread.fpr[i][TS_VSRLOWOFFSET] = 0;
 			current->thread.transact_fpr[i][TS_VSRLOWOFFSET] = 0;
+=======
+			current->thread.fp_state.fpr[i][TS_VSRLOWOFFSET] = 0;
+			current->thread.transact_fp.fpr[i][TS_VSRLOWOFFSET] = 0;
+>>>>>>> v3.18
 =======
 			current->thread.fp_state.fpr[i][TS_VSRLOWOFFSET] = 0;
 			current->thread.transact_fp.fpr[i][TS_VSRLOWOFFSET] = 0;
@@ -786,10 +857,13 @@ int sys_rt_sigreturn(unsigned long r3, unsigned long r4, unsigned long r5,
 
 badframe:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if DEBUG_SIG
 	printk("badframe in sys_rt_sigreturn, regs=%p uc=%p &uc->uc_mcontext=%p\n",
 	       regs, uc, &uc->uc_mcontext);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (show_unhandled_signals)
@@ -801,6 +875,7 @@ badframe:
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int handle_rt_signal64(int signr, struct k_sigaction *ka, siginfo_t *info,
 		sigset_t *set, struct pt_regs *regs)
@@ -815,12 +890,20 @@ int handle_rt_signal64(int signr, struct k_sigaction *ka, siginfo_t *info,
 int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 {
 >>>>>>> v3.18
+=======
+int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
+{
+>>>>>>> v3.18
 	struct rt_sigframe __user *frame;
 	unsigned long newsp = 0;
 	long err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = get_sigframe(ka, get_tm_stackpointer(regs), sizeof(*frame), 0);
+=======
+	frame = get_sigframe(ksig, get_tm_stackpointer(regs), sizeof(*frame), 0);
+>>>>>>> v3.18
 =======
 	frame = get_sigframe(ksig, get_tm_stackpointer(regs), sizeof(*frame), 0);
 >>>>>>> v3.18
@@ -830,7 +913,11 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	err |= __put_user(&frame->info, &frame->pinfo);
 	err |= __put_user(&frame->uc, &frame->puc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
 >>>>>>> v3.18
@@ -849,9 +936,15 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 		err |= setup_tm_sigcontexts(&frame->uc.uc_mcontext,
 					    &frame->uc_transact.uc_mcontext,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    regs, signr,
 					    NULL,
 					    (unsigned long)ka->sa.sa_handler);
+=======
+					    regs, ksig->sig,
+					    NULL,
+					    (unsigned long)ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 =======
 					    regs, ksig->sig,
 					    NULL,
@@ -862,8 +955,13 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	{
 		err |= __put_user(0, &frame->uc.uc_link);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err |= setup_sigcontext(&frame->uc.uc_mcontext, regs, signr,
 					NULL, (unsigned long)ka->sa.sa_handler,
+=======
+		err |= setup_sigcontext(&frame->uc.uc_mcontext, regs, ksig->sig,
+					NULL, (unsigned long)ksig->ka.sa.sa_handler,
+>>>>>>> v3.18
 =======
 		err |= setup_sigcontext(&frame->uc.uc_mcontext, regs, ksig->sig,
 					NULL, (unsigned long)ksig->ka.sa.sa_handler,
@@ -876,6 +974,7 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 
 	/* Make sure signal handler doesn't get spurious FP exceptions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->thread.fpscr.val = 0;
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 	/* Remove TM bits from thread's MSR.  The MSR in the sigcontext
@@ -884,6 +983,9 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	 */
 	regs->msr &= ~MSR_TS_MASK;
 #endif
+=======
+	current->thread.fp_state.fpscr = 0;
+>>>>>>> v3.18
 =======
 	current->thread.fp_state.fpscr = 0;
 >>>>>>> v3.18
@@ -898,7 +1000,10 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 		regs->link = (unsigned long) &frame->tramp[0];
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	funct_desc_ptr = (func_descr_t __user *) ka->sa.sa_handler;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -907,6 +1012,7 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	err |= put_user(regs->gpr[1], (unsigned long __user *)newsp);
 
 	/* Set up "regs" so we "return" to the signal handler. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err |= get_user(regs->nip, &funct_desc_ptr->entry);
 	/* enter the signal handler in big-endian mode */
@@ -917,6 +1023,8 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	regs->result = 0;
 	if (ka->sa.sa_flags & SA_SIGINFO) {
 =======
+=======
+>>>>>>> v3.18
 	if (is_elf2_task()) {
 		regs->nip = (unsigned long) ksig->ka.sa.sa_handler;
 		regs->gpr[12] = regs->nip;
@@ -940,6 +1048,9 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	regs->gpr[3] = ksig->sig;
 	regs->result = 0;
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err |= get_user(regs->gpr[4], (unsigned long __user *)&frame->pinfo);
 		err |= get_user(regs->gpr[5], (unsigned long __user *)&frame->puc);
@@ -950,6 +1061,7 @@ int handle_rt_signal64(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	if (err)
 		goto badframe;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 1;
 
@@ -963,14 +1075,23 @@ badframe:
 
 badframe:
 >>>>>>> v3.18
+=======
+	return 0;
+
+badframe:
+>>>>>>> v3.18
 	if (show_unhandled_signals)
 		printk_ratelimited(regs->msr & MSR_64BIT ? fmt64 : fmt32,
 				   current->comm, current->pid, "setup_rt_frame",
 				   (long)frame, regs->nip, regs->link);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	force_sigsegv(signr, current);
 	return 0;
+=======
+	return 1;
+>>>>>>> v3.18
 =======
 	return 1;
 >>>>>>> v3.18

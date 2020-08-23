@@ -33,8 +33,13 @@
 #include <linux/v4l2-dv-timings.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
 #include <media/v4l2-common.h>
+=======
+#include <media/v4l2-common.h>
+#include <media/v4l2-dv-timings.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-common.h>
 #include <media/v4l2-dv-timings.h>
@@ -72,11 +77,14 @@ MODULE_LICENSE("GPL");
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct i2c_reg_value {
 	u8 reg;
 	u8 value;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ad9389b_state_edid {
@@ -152,7 +160,11 @@ static int ad9389b_wr(struct v4l2_subdev *sd, u8 reg, u8 val)
 			return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_err(sd, "I2C Write Problem\n");
+=======
+	v4l2_err(sd, "%s: failed reg 0x%x, val 0x%x\n", __func__, reg, val);
+>>>>>>> v3.18
 =======
 	v4l2_err(sd, "%s: failed reg 0x%x, val 0x%x\n", __func__, reg, val);
 >>>>>>> v3.18
@@ -163,7 +175,11 @@ static int ad9389b_wr(struct v4l2_subdev *sd, u8 reg, u8 val)
    and then the value-mask (to be OR-ed). */
 static inline void ad9389b_wr_and_or(struct v4l2_subdev *sd, u8 reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						u8 clr_mask, u8 val_mask)
+=======
+				     u8 clr_mask, u8 val_mask)
+>>>>>>> v3.18
 =======
 				     u8 clr_mask, u8 val_mask)
 >>>>>>> v3.18
@@ -338,7 +354,11 @@ static int ad9389b_s_ctrl(struct v4l2_ctrl *ctrl)
 
 	v4l2_dbg(1, debug, sd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s: ctrl id: %d, ctrl->val %d\n", __func__, ctrl->id, ctrl->val);
+=======
+		 "%s: ctrl id: %d, ctrl->val %d\n", __func__, ctrl->id, ctrl->val);
+>>>>>>> v3.18
 =======
 		 "%s: ctrl id: %d, ctrl->val %d\n", __func__, ctrl->id, ctrl->val);
 >>>>>>> v3.18
@@ -347,7 +367,11 @@ static int ad9389b_s_ctrl(struct v4l2_ctrl *ctrl)
 		/* Set HDMI or DVI-D */
 		ad9389b_wr_and_or(sd, 0xaf, 0xfd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ctrl->val == V4L2_DV_TX_MODE_HDMI ? 0x02 : 0x00);
+=======
+				  ctrl->val == V4L2_DV_TX_MODE_HDMI ? 0x02 : 0x00);
+>>>>>>> v3.18
 =======
 				  ctrl->val == V4L2_DV_TX_MODE_HDMI ? 0x02 : 0x00);
 >>>>>>> v3.18
@@ -368,12 +392,15 @@ static const struct v4l2_ctrl_ops ad9389b_ctrl_ops = {
 static int ad9389b_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->val = ad9389b_rd(sd, reg->reg & 0xff);
@@ -384,6 +411,7 @@ static int ad9389b_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 static int ad9389b_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -392,11 +420,14 @@ static int ad9389b_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regi
 		return -EPERM;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ad9389b_wr(sd, reg->reg & 0xff, reg->val & 0xff);
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ad9389b_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
@@ -405,6 +436,8 @@ static int ad9389b_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_AD9389B, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ad9389b_log_status(struct v4l2_subdev *sd)
@@ -439,6 +472,7 @@ static int ad9389b_log_status(struct v4l2_subdev *sd)
 	v4l2_info(sd, "chip revision %d\n", state->chip_revision);
 	v4l2_info(sd, "power %s\n", state->power_on ? "on" : "off");
 	v4l2_info(sd, "%s hotplug, %s Rx Sense, %s EDID (%d block(s))\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			(ad9389b_rd(sd, 0x42) & MASK_AD9389B_HPD_DETECT) ?
 							"detected" : "no",
@@ -513,6 +547,8 @@ static int ad9389b_log_status(struct v4l2_subdev *sd)
 		v4l2_info(sd, "no timings set\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 		  (ad9389b_rd(sd, 0x42) & MASK_AD9389B_HPD_DETECT) ?
 		  "detected" : "no",
 		  (ad9389b_rd(sd, 0x42) & MASK_AD9389B_MSEN_DETECT) ?
@@ -570,6 +606,9 @@ static int ad9389b_log_status(struct v4l2_subdev *sd)
 				&state->dv_timings, false);
 	else
 		v4l2_info(sd, "no timings set\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -610,7 +649,11 @@ static int ad9389b_s_power(struct v4l2_subdev *sd, int on)
 	if (i > 1)
 		v4l2_dbg(1, debug, sd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"needed %d retries to powerup the ad9389b\n", i);
+=======
+			 "needed %d retries to powerup the ad9389b\n", i);
+>>>>>>> v3.18
 =======
 			 "needed %d retries to powerup the ad9389b\n", i);
 >>>>>>> v3.18
@@ -684,23 +727,32 @@ static int ad9389b_isr(struct v4l2_subdev *sd, u32 status, bool *handled)
 	/* clear detected interrupts */
 	ad9389b_wr(sd, 0x96, irq_status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (irq_status & (MASK_AD9389B_HPD_INT | MASK_AD9389B_MSEN_INT))
 =======
+=======
+>>>>>>> v3.18
 	/* enable interrupts */
 	ad9389b_set_isr(sd, true);
 
 	v4l2_dbg(1, debug, sd, "%s: irq_status 0x%x\n", __func__, irq_status);
 
 	if (irq_status & (MASK_AD9389B_HPD_INT))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ad9389b_check_monitor_present_status(sd);
 	if (irq_status & MASK_AD9389B_EDID_RDY_INT)
 		ad9389b_check_edid_status(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable interrupts */
 	ad9389b_set_isr(sd, true);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*handled = true;
@@ -710,7 +762,10 @@ static int ad9389b_isr(struct v4l2_subdev *sd, u32 status, bool *handled)
 static const struct v4l2_subdev_core_ops ad9389b_core_ops = {
 	.log_status = ad9389b_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = ad9389b_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -721,6 +776,7 @@ static const struct v4l2_subdev_core_ops ad9389b_core_ops = {
 	.interrupt_service_routine = ad9389b_isr,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* ------------------------------ PAD OPS ------------------------------ */
 
@@ -753,14 +809,19 @@ static const struct v4l2_subdev_pad_ops ad9389b_pad_ops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* ------------------------------ VIDEO OPS ------------------------------ */
 
 /* Enable/disable ad9389b output */
 static int ad9389b_s_stream(struct v4l2_subdev *sd, int enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ad9389b_state *state = get_ad9389b_state(sd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	v4l2_dbg(1, debug, sd, "%s: %sable\n", __func__, (enable ? "en" : "dis"));
@@ -771,13 +832,17 @@ static int ad9389b_s_stream(struct v4l2_subdev *sd, int enable)
 	} else {
 		ad9389b_s_power(sd, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		state->have_monitor = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct v4l2_dv_timings ad9389b_timings[] = {
 	V4L2_DV_BT_CEA_720X480P59_94,
@@ -841,6 +906,8 @@ static const struct v4l2_dv_timings ad9389b_timings[] = {
 	V4L2_DV_BT_DMT_1920X1080P60,
 	{},
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_dv_timings_cap ad9389b_timings_cap = {
 	.type = V4L2_DV_BT_656_1120,
 	/* keep this initialization for compatibility with GCC < 4.4.6 */
@@ -850,6 +917,9 @@ static const struct v4l2_dv_timings_cap ad9389b_timings_cap = {
 			V4L2_DV_BT_STD_GTF | V4L2_DV_BT_STD_CVT,
 		V4L2_DV_BT_CAP_PROGRESSIVE | V4L2_DV_BT_CAP_REDUCED_BLANKING |
 		V4L2_DV_BT_CAP_CUSTOM)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -858,13 +928,17 @@ static int ad9389b_s_dv_timings(struct v4l2_subdev *sd,
 {
 	struct ad9389b_state *state = get_ad9389b_state(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	v4l2_dbg(1, debug, sd, "%s:\n", __func__);
 
 	/* quick sanity check */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (timings->type != V4L2_DV_BT_656_1120)
 		return -EINVAL;
@@ -884,12 +958,17 @@ static int ad9389b_s_dv_timings(struct v4l2_subdev *sd,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!v4l2_valid_dv_timings(timings, &ad9389b_timings_cap, NULL, NULL))
 		return -EINVAL;
 
 	/* Fill the optional fields .standards and .flags in struct v4l2_dv_timings
 	   if the format is one of the CEA or DMT timings. */
 	v4l2_find_dv_timings_cap(timings, &ad9389b_timings_cap, 0, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	timings->bt.flags &= ~V4L2_DV_FL_REDUCED_FPS;
@@ -927,6 +1006,7 @@ static int ad9389b_g_dv_timings(struct v4l2_subdev *sd,
 
 static int ad9389b_enum_dv_timings(struct v4l2_subdev *sd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct v4l2_enum_dv_timings *timings)
 {
 	if (timings->index >= ARRAY_SIZE(ad9389b_timings))
@@ -950,6 +1030,8 @@ static int ad9389b_dv_timings_cap(struct v4l2_subdev *sd,
 	cap->bt.capabilities = V4L2_DV_BT_CAP_PROGRESSIVE |
 		V4L2_DV_BT_CAP_REDUCED_BLANKING | V4L2_DV_BT_CAP_CUSTOM;
 =======
+=======
+>>>>>>> v3.18
 				   struct v4l2_enum_dv_timings *timings)
 {
 	if (timings->pad != 0)
@@ -966,6 +1048,9 @@ static int ad9389b_dv_timings_cap(struct v4l2_subdev *sd,
 		return -EINVAL;
 
 	*cap = ad9389b_timings_cap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -975,7 +1060,10 @@ static const struct v4l2_subdev_video_ops ad9389b_video_ops = {
 	.s_dv_timings = ad9389b_s_dv_timings,
 	.g_dv_timings = ad9389b_g_dv_timings,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 };
 
 /* ------------------------------ PAD OPS ------------------------------ */
@@ -1003,12 +1091,20 @@ static int ad9389b_get_edid(struct v4l2_subdev *sd, struct v4l2_edid *edid)
 
 static const struct v4l2_subdev_pad_ops ad9389b_pad_ops = {
 	.get_edid = ad9389b_get_edid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.enum_dv_timings = ad9389b_enum_dv_timings,
 	.dv_timings_cap = ad9389b_dv_timings_cap,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ------------------------------ AUDIO OPS ------------------------------ */
+
+>>>>>>> v3.18
 =======
 /* ------------------------------ AUDIO OPS ------------------------------ */
 
@@ -1031,6 +1127,7 @@ static int ad9389b_s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 
 	switch (freq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 32000: N = 4096; break;
 	case 44100: N = 6272; break;
 	case 48000: N = 6144; break;
@@ -1041,6 +1138,8 @@ static int ad9389b_s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 	default:
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	case 32000:  N = 4096;  break;
 	case 44100:  N = 6272;  break;
 	case 48000:  N = 6144;  break;
@@ -1050,6 +1149,9 @@ static int ad9389b_s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 	case 192000: N = 24576; break;
 	default:
 	     return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1067,6 +1169,7 @@ static int ad9389b_s_i2s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 
 	switch (freq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 32000: i2s_sf = 0x30; break;
 	case 44100: i2s_sf = 0x00; break;
 	case 48000: i2s_sf = 0x20; break;
@@ -1077,6 +1180,8 @@ static int ad9389b_s_i2s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 	default:
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	case 32000:  i2s_sf = 0x30; break;
 	case 44100:  i2s_sf = 0x00; break;
 	case 48000:  i2s_sf = 0x20; break;
@@ -1086,6 +1191,9 @@ static int ad9389b_s_i2s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 	case 192000: i2s_sf = 0xe0; break;
 	default:
 	     return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1131,7 +1239,11 @@ static const struct v4l2_subdev_ops ad9389b_ops = {
 /* ----------------------------------------------------------------------- */
 static void ad9389b_dbg_dump_edid(int lvl, int debug, struct v4l2_subdev *sd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							int segment, u8 *buf)
+=======
+				  int segment, u8 *buf)
+>>>>>>> v3.18
 =======
 				  int segment, u8 *buf)
 >>>>>>> v3.18
@@ -1161,8 +1273,13 @@ static void ad9389b_edid_handler(struct work_struct *work)
 {
 	struct delayed_work *dwork = to_delayed_work(work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ad9389b_state *state = container_of(dwork,
 			struct ad9389b_state, edid_handler);
+=======
+	struct ad9389b_state *state =
+		container_of(dwork, struct ad9389b_state, edid_handler);
+>>>>>>> v3.18
 =======
 	struct ad9389b_state *state =
 		container_of(dwork, struct ad9389b_state, edid_handler);
@@ -1184,16 +1301,22 @@ static void ad9389b_edid_handler(struct work_struct *work)
 		if (state->edid.read_retries) {
 			state->edid.read_retries--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* EDID read failed, trigger a retry */
 			ad9389b_wr(sd, 0xc9, 0xf);
 			queue_delayed_work(state->work_queue,
 					&state->edid_handler, EDID_DELAY);
 =======
+=======
+>>>>>>> v3.18
 			v4l2_dbg(1, debug, sd, "%s: edid read failed\n", __func__);
 			ad9389b_s_power(sd, false);
 			ad9389b_s_power(sd, true);
 			queue_delayed_work(state->work_queue,
 					   &state->edid_handler, EDID_DELAY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 		}
@@ -1229,11 +1352,17 @@ static void ad9389b_setup(struct v4l2_subdev *sd)
 	/* Output format: RGB 4:4:4 */
 	ad9389b_wr_and_or(sd, 0x16, 0x3f, 0x0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* CSC fixed point: +/-2, 1st order interpolation 4:2:2 -> 4:4:4 up
 	   conversion, Aspect ratio: 16:9 */
 	ad9389b_wr_and_or(sd, 0x17, 0xe1, 0x0e);
 	/* Disable pixel repetition and CSC */
 	ad9389b_wr_and_or(sd, 0x3b, 0x9e, 0x0);
+=======
+	/* 1st order interpolation 4:2:2 -> 4:4:4 up conversion,
+	   Aspect ratio: 16:9 */
+	ad9389b_wr_and_or(sd, 0x17, 0xf9, 0x06);
+>>>>>>> v3.18
 =======
 	/* 1st order interpolation 4:2:2 -> 4:4:4 up conversion,
 	   Aspect ratio: 16:9 */
@@ -1269,7 +1398,11 @@ static void ad9389b_notify_monitor_detect(struct v4l2_subdev *sd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ad9389b_check_monitor_present_status(struct v4l2_subdev *sd)
+=======
+static void ad9389b_update_monitor_present_status(struct v4l2_subdev *sd)
+>>>>>>> v3.18
 =======
 static void ad9389b_update_monitor_present_status(struct v4l2_subdev *sd)
 >>>>>>> v3.18
@@ -1279,6 +1412,7 @@ static void ad9389b_update_monitor_present_status(struct v4l2_subdev *sd)
 	u8 status = ad9389b_rd(sd, 0x42);
 
 	v4l2_dbg(1, debug, sd, "%s: status: 0x%x%s%s\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 __func__,
 			 status,
@@ -1317,6 +1451,8 @@ static void ad9389b_update_monitor_present_status(struct v4l2_subdev *sd)
 			ad9389b_notify_monitor_detect(sd);
 		}
 =======
+=======
+>>>>>>> v3.18
 		 __func__,
 		 status,
 		 status & MASK_AD9389B_HPD_DETECT ? ", hotplug" : "",
@@ -1339,6 +1475,9 @@ static void ad9389b_update_monitor_present_status(struct v4l2_subdev *sd)
 		v4l2_dbg(1, debug, sd, "%s: hotplug not detected\n", __func__);
 		state->have_monitor = false;
 		ad9389b_notify_monitor_detect(sd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ad9389b_s_power(sd, false);
 		memset(&state->edid, 0, sizeof(struct ad9389b_state_edid));
@@ -1349,7 +1488,10 @@ static void ad9389b_update_monitor_present_status(struct v4l2_subdev *sd)
 	v4l2_ctrl_s_ctrl(state->rx_sense_ctrl, ad9389b_have_rx_sense(sd) ? 0x1 : 0x0);
 	v4l2_ctrl_s_ctrl(state->have_edid0_ctrl, state->edid.segments ? 0x1 : 0x0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* update with setting from ctrls */
 	ad9389b_s_ctrl(state->rgb_quantization_range_ctrl);
@@ -1379,11 +1521,15 @@ static void ad9389b_check_monitor_present_status(struct v4l2_subdev *sd)
 		ad9389b_s_power(sd, false);
 		ad9389b_update_monitor_present_status(sd);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static bool edid_block_verify_crc(u8 *edid_block)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	u8 sum = 0;
@@ -1395,6 +1541,8 @@ static bool edid_block_verify_crc(u8 *edid_block)
 
 static bool edid_segment_verify_crc(struct v4l2_subdev *sd, u32 segment)
 =======
+=======
+>>>>>>> v3.18
 	u8 sum = 0;
 	int i;
 
@@ -1404,6 +1552,9 @@ static bool edid_segment_verify_crc(struct v4l2_subdev *sd, u32 segment)
 }
 
 static bool edid_verify_crc(struct v4l2_subdev *sd, u32 segment)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ad9389b_state *state = get_ad9389b_state(sd);
@@ -1419,7 +1570,10 @@ static bool edid_verify_crc(struct v4l2_subdev *sd, u32 segment)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool edid_verify_header(struct v4l2_subdev *sd, u32 segment)
 {
 	static const u8 hdmi_header[] = {
@@ -1439,6 +1593,9 @@ static bool edid_verify_header(struct v4l2_subdev *sd, u32 segment)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 {
@@ -1449,7 +1606,11 @@ static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 
 	v4l2_dbg(1, debug, sd, "%s: edid ready (retries: %d)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 __func__, EDID_MAX_RETRIES - state->edid.read_retries);
+=======
+		 __func__, EDID_MAX_RETRIES - state->edid.read_retries);
+>>>>>>> v3.18
 =======
 		 __func__, EDID_MAX_RETRIES - state->edid.read_retries);
 >>>>>>> v3.18
@@ -1466,6 +1627,7 @@ static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 	ad9389b_edid_rd(sd, 256, &state->edid.data[segment * 256]);
 	ad9389b_dbg_dump_edid(2, debug, sd, segment,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&state->edid.data[segment * 256]);
 	if (segment == 0) {
 		state->edid.blocks = state->edid.data[0x7e] + 1;
@@ -1475,6 +1637,8 @@ static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 	if (!edid_segment_verify_crc(sd, segment)) {
 		/* edid crc error, force reread of edid segment */
 =======
+=======
+>>>>>>> v3.18
 			      &state->edid.data[segment * 256]);
 	if (segment == 0) {
 		state->edid.blocks = state->edid.data[0x7e] + 1;
@@ -1485,6 +1649,9 @@ static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 	    !edid_verify_header(sd, segment)) {
 		/* edid crc error, force reread of edid segment */
 		v4l2_err(sd, "%s: edid crc or header error\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ad9389b_s_power(sd, false);
 		ad9389b_s_power(sd, true);
@@ -1496,7 +1663,11 @@ static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 		/* Request next EDID segment */
 		v4l2_dbg(1, debug, sd, "%s: request segment %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__func__, state->edid.segments);
+=======
+			 __func__, state->edid.segments);
+>>>>>>> v3.18
 =======
 			 __func__, state->edid.segments);
 >>>>>>> v3.18
@@ -1505,7 +1676,11 @@ static bool ad9389b_check_edid_status(struct v4l2_subdev *sd)
 		state->edid.read_retries = EDID_MAX_RETRIES;
 		queue_delayed_work(state->work_queue,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&state->edid_handler, EDID_DELAY);
+=======
+				   &state->edid_handler, EDID_DELAY);
+>>>>>>> v3.18
 =======
 				   &state->edid_handler, EDID_DELAY);
 >>>>>>> v3.18
@@ -1553,9 +1728,15 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 
 	v4l_dbg(1, debug, client, "detecting ad9389b client on address 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			client->addr << 1);
 
 	state = kzalloc(sizeof(struct ad9389b_state), GFP_KERNEL);
+=======
+		client->addr << 1);
+
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		client->addr << 1);
 
@@ -1568,8 +1749,12 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 	if (pdata == NULL) {
 		v4l_err(client, "No platform data!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENODEV;
 		goto err_free;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -1589,6 +1774,7 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 			V4L2_CID_DV_TX_MODE, V4L2_DV_TX_MODE_HDMI,
 			0, V4L2_DV_TX_MODE_DVI_D);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->hdmi_mode_ctrl->is_private = true;
 	state->hotplug_ctrl = v4l2_ctrl_new_std(hdl, NULL,
 			V4L2_CID_DV_TX_HOTPLUG, 0, 1, 0, 0);
@@ -1600,19 +1786,27 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 			V4L2_CID_DV_TX_EDID_PRESENT, 0, 1, 0, 0);
 	state->have_edid0_ctrl->is_private = true;
 =======
+=======
+>>>>>>> v3.18
 	state->hotplug_ctrl = v4l2_ctrl_new_std(hdl, NULL,
 			V4L2_CID_DV_TX_HOTPLUG, 0, 1, 0, 0);
 	state->rx_sense_ctrl = v4l2_ctrl_new_std(hdl, NULL,
 			V4L2_CID_DV_TX_RXSENSE, 0, 1, 0, 0);
 	state->have_edid0_ctrl = v4l2_ctrl_new_std(hdl, NULL,
 			V4L2_CID_DV_TX_EDID_PRESENT, 0, 1, 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	state->rgb_quantization_range_ctrl =
 		v4l2_ctrl_new_std_menu(hdl, &ad9389b_ctrl_ops,
 			V4L2_CID_DV_TX_RGB_RANGE, V4L2_DV_RGB_RANGE_FULL,
 			0, V4L2_DV_RGB_RANGE_AUTO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->rgb_quantization_range_ctrl->is_private = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sd->ctrl_handler = hdl;
@@ -1622,12 +1816,18 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 		goto err_hdl;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	state->hdmi_mode_ctrl->is_private = true;
 	state->hotplug_ctrl->is_private = true;
 	state->rx_sense_ctrl->is_private = true;
 	state->have_edid0_ctrl->is_private = true;
 	state->rgb_quantization_range_ctrl->is_private = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	state->pad.flags = MEDIA_PAD_FL_SINK;
@@ -1643,7 +1843,11 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 	}
 	v4l2_dbg(1, debug, sd, "reg 0x41 0x%x, chip version (reg 0x00) 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ad9389b_rd(sd, 0x41), state->chip_revision);
+=======
+		 ad9389b_rd(sd, 0x41), state->chip_revision);
+>>>>>>> v3.18
 =======
 		 ad9389b_rd(sd, 0x41), state->chip_revision);
 >>>>>>> v3.18
@@ -1652,6 +1856,10 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 	if (state->edid_i2c_client == NULL) {
 		v4l2_err(sd, "failed to register edid i2c client\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 =======
 		err = -ENOMEM;
 >>>>>>> v3.18
@@ -1662,6 +1870,10 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 	if (state->work_queue == NULL) {
 		v4l2_err(sd, "could not create workqueue\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 =======
 		err = -ENOMEM;
 >>>>>>> v3.18
@@ -1676,7 +1888,11 @@ static int ad9389b_probe(struct i2c_client *client, const struct i2c_device_id *
 
 	v4l2_info(sd, "%s found @ 0x%x (%s)\n", client->name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  client->addr << 1, client->adapter->name);
+=======
+		  client->addr << 1, client->adapter->name);
+>>>>>>> v3.18
 =======
 		  client->addr << 1, client->adapter->name);
 >>>>>>> v3.18
@@ -1689,8 +1905,11 @@ err_entity:
 err_hdl:
 	v4l2_ctrl_handler_free(&state->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_free:
 	kfree(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -1718,7 +1937,10 @@ static int ad9389b_remove(struct i2c_client *client)
 	media_entity_cleanup(&sd->entity);
 	v4l2_ctrl_handler_free(sd->ctrl_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(get_ad9389b_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1728,8 +1950,13 @@ static int ad9389b_remove(struct i2c_client *client)
 
 static struct i2c_device_id ad9389b_id[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "ad9389b", V4L2_IDENT_AD9389B },
 	{ "ad9889b", V4L2_IDENT_AD9389B },
+=======
+	{ "ad9389b", 0 },
+	{ "ad9889b", 0 },
+>>>>>>> v3.18
 =======
 	{ "ad9389b", 0 },
 	{ "ad9889b", 0 },

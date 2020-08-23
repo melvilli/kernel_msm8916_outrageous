@@ -4,6 +4,11 @@
 #include <asm/unistd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 
@@ -46,7 +51,10 @@ int audit_classify_syscall(int abi, unsigned syscall)
 {
 #ifdef CONFIG_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern int sparc32_classify_syscall(unsigned);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (abi == AUDIT_ARCH_SPARC)
@@ -70,11 +78,14 @@ static int __init audit_classes_init(void)
 {
 #ifdef CONFIG_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern __u32 sparc32_dir_class[];
 	extern __u32 sparc32_write_class[];
 	extern __u32 sparc32_read_class[];
 	extern __u32 sparc32_chattr_class[];
 	extern __u32 sparc32_signal_class[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	audit_register_class(AUDIT_CLASS_WRITE_32, sparc32_write_class);

@@ -51,12 +51,15 @@ extern unsigned long ia64_max_iommu_merge_mask;
 #define PCI_DMA_BUS_IS_PHYS	(ia64_max_iommu_merge_mask == ~0UL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 pcibios_penalize_isa_irq (int irq, int active)
 {
 	/* We don't do dynamic PCI IRQ allocation */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/pci-dma-compat.h>
@@ -93,6 +96,7 @@ extern int pci_mmap_legacy_page_range(struct pci_bus *bus,
 #define pci_legacy_write platform_pci_legacy_write
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_window {
 	struct resource resource;
 	u64 offset;
@@ -107,6 +111,8 @@ struct pci_controller {
 	unsigned int windows;
 	struct pci_window *window;
 =======
+=======
+>>>>>>> v3.18
 struct iospace_resource {
 	struct list_head list;
 	struct resource res;
@@ -117,12 +123,19 @@ struct pci_controller {
 	void *iommu;
 	int segment;
 	int node;		/* nearest node with memory or NUMA_NO_NODE for global allocation */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	void *platform_data;
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

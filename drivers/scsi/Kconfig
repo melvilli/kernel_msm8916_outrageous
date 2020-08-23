@@ -41,6 +41,7 @@ config SCSI_DMA
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCSI_TGT
 	tristate "SCSI target support"
 	depends on SCSI
@@ -53,6 +54,8 @@ config SCSI_NETLINK
 	default	n
 	select NET
 =======
+=======
+>>>>>>> v3.18
 config SCSI_NETLINK
 	bool
 	default	n
@@ -68,6 +71,9 @@ config SCSI_MQ_DEFAULT
 	  still be overriden either way.
 
 	  If unsure say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SCSI_PROC_FS
@@ -88,7 +94,10 @@ config BLK_DEV_SD
 	tristate "SCSI disk support"
 	depends on SCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRC_T10DIF if BLK_DEV_INTEGRITY
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -219,6 +228,7 @@ config SCSI_ENCLOSURE
 	  certain enclosure conditions to be reported and is not required.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCSI_MULTI_LUN
 	bool "Probe all LUNs on each SCSI device"
 	depends on SCSI
@@ -233,6 +243,8 @@ config SCSI_MULTI_LUN
 	  those rare devices which reacts in an unexpected way when probed for
 	  multiple LUNs.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SCSI_CONSTANTS
@@ -288,6 +300,12 @@ config SCSI_SCAN_ASYNC
 	  or async on the kernel's command line.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  Note that this setting also affects whether resuming from
+	  system suspend will be performed asynchronously.
+
+>>>>>>> v3.18
 =======
 	  Note that this setting also affects whether resuming from
 	  system suspend will be performed asynchronously.
@@ -306,7 +324,11 @@ config SCSI_SPI_ATTRS
 config SCSI_FC_ATTRS
 	tristate "FiberChannel Transport Attributes"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SCSI
+=======
+	depends on SCSI && NET
+>>>>>>> v3.18
 =======
 	depends on SCSI && NET
 >>>>>>> v3.18
@@ -317,6 +339,7 @@ config SCSI_FC_ATTRS
 	  Otherwise, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCSI_FC_TGT_ATTRS
 	bool "SCSI target support for FiberChannel Transport Attributes"
 	depends on SCSI_FC_ATTRS
@@ -324,6 +347,8 @@ config SCSI_FC_TGT_ATTRS
 	help
 		If you want to use SCSI target mode drivers enable this option.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SCSI_ISCSI_ATTRS
@@ -353,6 +378,7 @@ config SCSI_SRP_ATTRS
 	  each attached SRP device to sysfs, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCSI_SRP_TGT_ATTRS
 	bool "SCSI target support for SRP Transport Attributes"
 	depends on SCSI_SRP_ATTRS
@@ -360,6 +386,8 @@ config SCSI_SRP_TGT_ATTRS
 	help
 		If you want to use SCSI target mode drivers enable this option.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endmenu
@@ -540,6 +568,7 @@ config SCSI_AACRAID
 
 source "drivers/scsi/aic7xxx/Kconfig.aic7xxx"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config SCSI_AIC7XXX_OLD
 	tristate "Adaptec AIC7xxx support (old driver)"
@@ -583,6 +612,8 @@ config SCSI_AIC7XXX_OLD
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 source "drivers/scsi/aic7xxx/Kconfig.aic79xx"
 source "drivers/scsi/aic94xx/Kconfig"
 source "drivers/scsi/mvsas/Kconfig"
@@ -610,7 +641,11 @@ config SCSI_DPT_I2O
 config SCSI_ADVANSYS
 	tristate "AdvanSys SCSI support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SCSI && VIRT_TO_BUS
+=======
+	depends on SCSI && VIRT_TO_BUS && !ARM
+>>>>>>> v3.18
 =======
 	depends on SCSI && VIRT_TO_BUS && !ARM
 >>>>>>> v3.18
@@ -649,6 +684,10 @@ config SCSI_ARCMSR
 	  module will be called arcmsr (modprobe arcmsr).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/scsi/esas2r/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/scsi/esas2r/Kconfig"
 >>>>>>> v3.18
@@ -685,7 +724,11 @@ config SCSI_BUSLOGIC
 config SCSI_FLASHPOINT
 	bool "FlashPoint support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SCSI_BUSLOGIC && PCI && X86_32
+=======
+	depends on SCSI_BUSLOGIC && PCI
+>>>>>>> v3.18
 =======
 	depends on SCSI_BUSLOGIC && PCI
 >>>>>>> v3.18
@@ -704,7 +747,10 @@ config VMWARE_PVSCSI
 	  module will be called vmw_pvscsi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config XEN_SCSI_FRONTEND
 	tristate "XEN SCSI frontend driver"
 	depends on SCSI && XEN
@@ -715,6 +761,9 @@ config XEN_SCSI_FRONTEND
 	  Only needed if the kernel is running in a XEN guest and generic
 	  SCSI access to a device is needed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HYPERV_STORAGE
 	tristate "Microsoft Hyper-V virtual storage driver"
@@ -726,7 +775,11 @@ config HYPERV_STORAGE
 config LIBFC
 	tristate "LibFC module"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 =======
 	depends on SCSI_FC_ATTRS
 >>>>>>> v3.18
@@ -737,7 +790,11 @@ config LIBFC
 config LIBFCOE
 	tristate "LibFCoE module"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select LIBFC
+=======
+	depends on LIBFC
+>>>>>>> v3.18
 =======
 	depends on LIBFC
 >>>>>>> v3.18
@@ -748,7 +805,11 @@ config FCOE
 	tristate "FCoE module"
 	depends on PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select LIBFCOE
+=======
+	depends on LIBFCOE
+>>>>>>> v3.18
 =======
 	depends on LIBFCOE
 >>>>>>> v3.18
@@ -759,7 +820,11 @@ config FCOE_FNIC
 	tristate "Cisco FNIC Driver"
 	depends on PCI && X86
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select LIBFCOE
+=======
+	depends on LIBFCOE
+>>>>>>> v3.18
 =======
 	depends on LIBFCOE
 >>>>>>> v3.18
@@ -970,6 +1035,7 @@ config SCSI_IBMVSCSI
 	  module will be called ibmvscsi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCSI_IBMVSCSIS
 	tristate "IBM Virtual SCSI Server support"
 	depends on PPC_PSERIES && SCSI_SRP && SCSI_SRP_TGT_ATTRS
@@ -989,10 +1055,15 @@ config SCSI_IBMVFC
 	depends on PPC_PSERIES && SCSI
 	select SCSI_FC_ATTRS
 =======
+=======
+>>>>>>> v3.18
 config SCSI_IBMVFC
 	tristate "IBM Virtual FC support"
 	depends on PPC_PSERIES && SCSI
 	depends on SCSI_FC_ATTRS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This is the IBM POWER Virtual FC Client
@@ -1444,7 +1515,11 @@ config SCSI_LPFC
 	tristate "Emulex LightPulse Fibre Channel Support"
 	depends on PCI && SCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 =======
 	depends on SCSI_FC_ATTRS
 >>>>>>> v3.18
@@ -1858,7 +1933,11 @@ config ZFCP
 	tristate "FCP host bus adapter driver for IBM eServer zSeries"
 	depends on S390 && QDIO && SCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 =======
 	depends on SCSI_FC_ATTRS
 >>>>>>> v3.18
@@ -1887,6 +1966,7 @@ config SCSI_PM8001
 	  based host adapters.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCSI_SRP
 	tristate "SCSI RDMA Protocol helper library"
 	depends on SCSI && PCI
@@ -1902,10 +1982,15 @@ config SCSI_BFA_FC
 	depends on PCI && SCSI
 	select SCSI_FC_ATTRS
 =======
+=======
+>>>>>>> v3.18
 config SCSI_BFA_FC
 	tristate "Brocade BFA Fibre Channel Support"
 	depends on PCI && SCSI
 	depends on SCSI_FC_ATTRS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This bfa driver supports all Brocade PCIe FC/FCOE host adapters.
@@ -1917,6 +2002,10 @@ config SCSI_VIRTIO
 	tristate "virtio-scsi support"
 	depends on VIRTIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select BLK_DEV_INTEGRITY
+>>>>>>> v3.18
 =======
 	select BLK_DEV_INTEGRITY
 >>>>>>> v3.18

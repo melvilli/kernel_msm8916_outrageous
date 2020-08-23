@@ -29,7 +29,10 @@
 #define DRV_NAME	"jme"
 #define DRV_VERSION	"1.0.8"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFX		DRV_NAME ": "
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

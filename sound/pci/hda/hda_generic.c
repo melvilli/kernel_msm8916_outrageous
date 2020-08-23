@@ -29,13 +29,19 @@
 #include <linux/string.h>
 #include <linux/bitops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sound/core.h>
 #include <sound/jack.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <sound/core.h>
 #include <sound/jack.h>
 #include <sound/tlv.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "hda_codec.h"
 #include "hda_local.h"
@@ -55,7 +61,11 @@ int snd_hda_gen_spec_init(struct hda_gen_spec *spec)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_spec_init);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_spec_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_spec_init);
 >>>>>>> v3.18
@@ -77,7 +87,11 @@ snd_hda_gen_add_kctl(struct hda_gen_spec *spec, const char *name,
 	return knew;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_add_kctl);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_add_kctl);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_add_kctl);
 >>>>>>> v3.18
@@ -94,7 +108,11 @@ static void free_kctls(struct hda_gen_spec *spec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_hda_gen_spec_free(struct hda_gen_spec *spec)
+=======
+static void snd_hda_gen_spec_free(struct hda_gen_spec *spec)
+>>>>>>> v3.18
 =======
 static void snd_hda_gen_spec_free(struct hda_gen_spec *spec)
 >>>>>>> v3.18
@@ -106,7 +124,10 @@ static void snd_hda_gen_spec_free(struct hda_gen_spec *spec)
 	snd_array_free(&spec->loopback_list);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_spec_free);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -156,6 +177,12 @@ static void parse_user_hints(struct hda_codec *codec)
 	if (val >= 0)
 		spec->line_in_auto_switch = !!val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	val = snd_hda_get_bool_hint(codec, "auto_mute_via_amp");
+	if (val >= 0)
+		spec->auto_mute_via_amp = !!val;
+>>>>>>> v3.18
 =======
 	val = snd_hda_get_bool_hint(codec, "auto_mute_via_amp");
 	if (val >= 0)
@@ -168,6 +195,12 @@ static void parse_user_hints(struct hda_codec *codec)
 	if (val >= 0)
 		spec->no_primary_hp = !val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	val = snd_hda_get_bool_hint(codec, "multi_io");
+	if (val >= 0)
+		spec->no_multi_io = !val;
+>>>>>>> v3.18
 =======
 	val = snd_hda_get_bool_hint(codec, "multi_io");
 	if (val >= 0)
@@ -295,7 +328,11 @@ struct nid_path *snd_hda_get_nid_path(struct hda_codec *codec,
 	return get_nid_path(codec, from_nid, to_nid, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_get_nid_path);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_get_nid_path);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_get_nid_path);
 >>>>>>> v3.18
@@ -317,7 +354,11 @@ int snd_hda_get_path_idx(struct hda_codec *codec, struct nid_path *path)
 	return idx + 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_get_path_idx);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_get_path_idx);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_get_path_idx);
 >>>>>>> v3.18
@@ -332,7 +373,11 @@ struct nid_path *snd_hda_get_path_from_idx(struct hda_codec *codec, int idx)
 	return snd_array_elem(&spec->paths, idx - 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_get_path_from_idx);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_get_path_from_idx);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_get_path_from_idx);
 >>>>>>> v3.18
@@ -387,6 +432,7 @@ static bool is_ctl_associated(struct hda_codec *codec, hda_nid_t nid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_nid_path(const char *pfx, struct nid_path *path)
 {
 	char buf[40];
@@ -401,6 +447,8 @@ static void print_nid_path(const char *pfx, struct nid_path *path)
 	}
 	snd_printdd("%s path: depth=%d %s\n", pfx, path->depth, buf);
 =======
+=======
+>>>>>>> v3.18
 static void print_nid_path(struct hda_codec *codec,
 			   const char *pfx, struct nid_path *path)
 {
@@ -415,6 +463,9 @@ static void print_nid_path(struct hda_codec *codec,
 				 path->path[i]);
 
 	codec_dbg(codec, "%s path: depth=%d '%s'\n", pfx, path->depth, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -490,7 +541,11 @@ bool snd_hda_parse_nid_path(struct hda_codec *codec, hda_nid_t from_nid,
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_parse_nid_path);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_parse_nid_path);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_parse_nid_path);
 >>>>>>> v3.18
@@ -525,7 +580,11 @@ snd_hda_add_new_path(struct hda_codec *codec, hda_nid_t from_nid,
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_add_new_path);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_add_new_path);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_add_new_path);
 >>>>>>> v3.18
@@ -583,6 +642,7 @@ static unsigned int amp_val_replace_channels(unsigned int val, unsigned int chs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* check whether the widget has the given amp capability for the direction */
 static bool check_amp_caps(struct hda_codec *codec, hda_nid_t nid,
 			   int dir, unsigned int bits)
@@ -597,6 +657,8 @@ static bool check_amp_caps(struct hda_codec *codec, hda_nid_t nid,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static bool same_amp_caps(struct hda_codec *codec, hda_nid_t nid1,
 			  hda_nid_t nid2, int dir)
 {
@@ -607,11 +669,14 @@ static bool same_amp_caps(struct hda_codec *codec, hda_nid_t nid1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nid_has_mute(codec, nid, dir) \
 	check_amp_caps(codec, nid, dir, (AC_AMPCAP_MUTE | AC_AMPCAP_MIN_MUTE))
 #define nid_has_volume(codec, nid, dir) \
 	check_amp_caps(codec, nid, dir, AC_AMPCAP_NUM_STEPS)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* look for a widget suitable for assigning a mute switch in the path */
@@ -635,12 +700,15 @@ static hda_nid_t look_for_out_vol_nid(struct hda_codec *codec,
 				      struct nid_path *path)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	for (i = path->depth - 1; i >= 0; i--) {
 		if (nid_has_volume(codec, path->path[i], HDA_OUTPUT))
 			return path->path[i];
 =======
+=======
+>>>>>>> v3.18
 	struct hda_gen_spec *spec = codec->spec;
 	int i;
 
@@ -650,6 +718,9 @@ static hda_nid_t look_for_out_vol_nid(struct hda_codec *codec,
 			continue;
 		if (nid_has_volume(codec, nid, HDA_OUTPUT))
 			return nid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -732,6 +803,7 @@ static int get_amp_val_to_activate(struct hda_codec *codec, hda_nid_t nid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* is this a stereo widget or a stereo-to-mono mix? */
 static bool is_stereo_amps(struct hda_codec *codec, hda_nid_t nid, int dir)
 {
@@ -751,11 +823,14 @@ static bool is_stereo_amps(struct hda_codec *codec, hda_nid_t nid, int dir)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* initialize the amp value (only at the first time) */
 static void init_amp(struct hda_codec *codec, hda_nid_t nid, int dir, int idx)
 {
 	unsigned int caps = query_amp_caps(codec, nid, dir);
 	int val = get_amp_val_to_activate(codec, nid, dir, caps, false);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (is_stereo_amps(codec, nid, dir))
@@ -774,6 +849,9 @@ static int update_amp(struct hda_codec *codec, hda_nid_t nid, int dir, int idx,
 	else
 		return snd_hda_codec_amp_update(codec, nid, 0, dir, idx,
 						mask, val);
+=======
+	snd_hda_codec_amp_init_stereo(codec, nid, dir, idx, 0xff, val);
+>>>>>>> v3.18
 =======
 	snd_hda_codec_amp_init_stereo(codec, nid, dir, idx, 0xff, val);
 >>>>>>> v3.18
@@ -817,7 +895,11 @@ static void activate_amp(struct hda_codec *codec, hda_nid_t nid, int dir,
 
 	val &= mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	update_amp(codec, nid, dir, idx, mask, val);
+=======
+	snd_hda_codec_amp_stereo(codec, nid, dir, idx, mask, val);
+>>>>>>> v3.18
 =======
 	snd_hda_codec_amp_stereo(codec, nid, dir, idx, mask, val);
 >>>>>>> v3.18
@@ -885,7 +967,11 @@ void snd_hda_activate_path(struct hda_codec *codec, struct nid_path *path,
 		}
 		if (enable && path->multi[i])
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_hda_codec_write_cache(codec, nid, 0,
+=======
+			snd_hda_codec_update_cache(codec, nid, 0,
+>>>>>>> v3.18
 =======
 			snd_hda_codec_update_cache(codec, nid, 0,
 >>>>>>> v3.18
@@ -901,7 +987,11 @@ void snd_hda_activate_path(struct hda_codec *codec, struct nid_path *path,
 		path->active = true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_activate_path);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_activate_path);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_activate_path);
 >>>>>>> v3.18
@@ -964,12 +1054,18 @@ static void resume_path_from_idx(struct hda_codec *codec, int path_idx)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hda_gen_mixer_mute_put(struct snd_kcontrol *kcontrol,
 				  struct snd_ctl_elem_value *ucontrol);
 static int hda_gen_bind_mute_put(struct snd_kcontrol *kcontrol,
 				 struct snd_ctl_elem_value *ucontrol);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	HDA_CTL_WIDGET_VOL,
@@ -979,9 +1075,12 @@ enum {
 static const struct snd_kcontrol_new control_templates[] = {
 	HDA_CODEC_VOLUME(NULL, 0, 0, 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HDA_CODEC_MUTE(NULL, 0, 0, 0),
 	HDA_BIND_MUTE(NULL, 0, 0, 0),
 =======
+=======
+>>>>>>> v3.18
 	/* only the put callback is replaced for handling the special mute */
 	{
 		.iface = SNDRV_CTL_ELEM_IFACE_MIXER,
@@ -998,6 +1097,9 @@ static const struct snd_kcontrol_new control_templates[] = {
 		.put = hda_gen_bind_mute_put, /* replaced */
 		.private_value = HDA_COMPOSE_AMP_VAL(0, 3, 0, 0),
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1023,7 +1125,11 @@ static int add_control_with_pfx(struct hda_gen_spec *spec, int type,
 				const char *sfx, int cidx, unsigned long val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44];
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -1109,7 +1215,10 @@ static int add_stereo_sw(struct hda_codec *codec, const char *pfx,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* playback mute control with the software mute bit check */
 static void sync_auto_mute_bits(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
@@ -1139,6 +1248,9 @@ static int hda_gen_bind_mute_put(struct snd_kcontrol *kcontrol,
 	return snd_hda_mixer_bind_switch_put(kcontrol, ucontrol);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* any ctl assigned to the path with the given index? */
 static bool path_has_mixer(struct hda_codec *codec, int path_idx, int ctl_type)
@@ -1251,6 +1363,10 @@ enum {
 static int assign_out_path_ctls(struct hda_codec *codec, struct nid_path *path)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hda_gen_spec *spec = codec->spec;
+>>>>>>> v3.18
 =======
 	struct hda_gen_spec *spec = codec->spec;
 >>>>>>> v3.18
@@ -1269,6 +1385,11 @@ static int assign_out_path_ctls(struct hda_codec *codec, struct nid_path *path)
 	if (nid) {
 		val = HDA_COMPOSE_AMP_VAL(nid, 3, 0, HDA_OUTPUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (spec->dac_min_mute)
+			val |= HDA_AMP_VAL_MIN_MUTE;
+>>>>>>> v3.18
 =======
 		if (spec->dac_min_mute)
 			val |= HDA_AMP_VAL_MIN_MUTE;
@@ -1305,7 +1426,11 @@ const struct badness_table hda_main_out_badness = {
 	.shared_surr_main = BAD_SHARED_SURROUND,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(hda_main_out_badness);
+=======
+EXPORT_SYMBOL_GPL(hda_main_out_badness);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(hda_main_out_badness);
 >>>>>>> v3.18
@@ -1319,7 +1444,11 @@ const struct badness_table hda_extra_out_badness = {
 	.shared_surr_main = BAD_NO_EXTRA_SURR_DAC,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(hda_extra_out_badness);
+=======
+EXPORT_SYMBOL_GPL(hda_extra_out_badness);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(hda_extra_out_badness);
 >>>>>>> v3.18
@@ -1424,7 +1553,11 @@ static int try_assign_dacs(struct hda_codec *codec, int num_outs,
 			badness += bad->no_dac;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* print_nid_path("output", path); */
+=======
+			/* print_nid_path(codec, "output", path); */
+>>>>>>> v3.18
 =======
 			/* print_nid_path(codec, "output", path); */
 >>>>>>> v3.18
@@ -1555,7 +1688,11 @@ static int fill_multi_ios(struct hda_codec *codec,
 				continue;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* print_nid_path("multiio", path); */
+=======
+			/* print_nid_path(codec, "multiio", path); */
+>>>>>>> v3.18
 =======
 			/* print_nid_path(codec, "multiio", path); */
 >>>>>>> v3.18
@@ -1616,7 +1753,11 @@ static bool map_singles(struct hda_codec *codec, int outs,
 			dacs[i] = dac;
 			found = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* print_nid_path("output", path); */
+=======
+			/* print_nid_path(codec, "output", path); */
+>>>>>>> v3.18
 =======
 			/* print_nid_path(codec, "output", path); */
 >>>>>>> v3.18
@@ -1658,7 +1799,11 @@ static int check_aamix_out_path(struct hda_codec *codec, int path_idx)
 	if (!path)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* print_nid_path("output-aamix", path); */
+=======
+	/* print_nid_path(codec, "output-aamix", path); */
+>>>>>>> v3.18
 =======
 	/* print_nid_path(codec, "output-aamix", path); */
 >>>>>>> v3.18
@@ -1769,7 +1914,12 @@ static int fill_and_eval_dacs(struct hda_codec *codec,
 					      spec->multiout.extra_out_nid,
 					      spec->speaker_paths);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (fill_mio_first && cfg->line_outs == 1 &&
+=======
+			if (!spec->no_multi_io &&
+			    fill_mio_first && cfg->line_outs == 1 &&
+>>>>>>> v3.18
 =======
 			if (!spec->no_multi_io &&
 			    fill_mio_first && cfg->line_outs == 1 &&
@@ -1787,7 +1937,11 @@ static int fill_and_eval_dacs(struct hda_codec *codec,
 				   spec->main_out_badness);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fill_mio_first &&
+=======
+	if (!spec->no_multi_io && fill_mio_first &&
+>>>>>>> v3.18
 =======
 	if (!spec->no_multi_io && fill_mio_first &&
 >>>>>>> v3.18
@@ -1819,7 +1973,12 @@ static int fill_and_eval_dacs(struct hda_codec *codec,
 		badness += err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cfg->line_outs == 1 && cfg->line_out_type != AUTO_PIN_SPEAKER_OUT) {
+=======
+	if (!spec->no_multi_io &&
+	    cfg->line_outs == 1 && cfg->line_out_type != AUTO_PIN_SPEAKER_OUT) {
+>>>>>>> v3.18
 =======
 	if (!spec->no_multi_io &&
 	    cfg->line_outs == 1 && cfg->line_out_type != AUTO_PIN_SPEAKER_OUT) {
@@ -1842,7 +2001,12 @@ static int fill_and_eval_dacs(struct hda_codec *codec,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cfg->hp_outs && cfg->line_out_type == AUTO_PIN_SPEAKER_OUT)
+=======
+	if (!spec->no_multi_io &&
+	    cfg->hp_outs && cfg->line_out_type == AUTO_PIN_SPEAKER_OUT)
+>>>>>>> v3.18
 =======
 	if (!spec->no_multi_io &&
 	    cfg->hp_outs && cfg->line_out_type == AUTO_PIN_SPEAKER_OUT)
@@ -1895,15 +2059,21 @@ static int fill_and_eval_dacs(struct hda_codec *codec,
 
 #ifdef DEBUG_BADNESS
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define debug_badness	snd_printdd
 #else
 #define debug_badness(...)
 =======
+=======
+>>>>>>> v3.18
 #define debug_badness(fmt, ...)						\
 	codec_dbg(codec, fmt, ##__VA_ARGS__)
 #else
 #define debug_badness(fmt, ...)						\
 	do { if (0) codec_dbg(codec, fmt, ##__VA_ARGS__); } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1916,7 +2086,11 @@ static inline void print_nid_path_idx(struct hda_codec *codec,
 	path = snd_hda_get_path_from_idx(codec, idx);
 	if (path)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print_nid_path(pfx, path);
+=======
+		print_nid_path(codec, pfx, path);
+>>>>>>> v3.18
 =======
 		print_nid_path(codec, pfx, path);
 >>>>>>> v3.18
@@ -1988,7 +2162,11 @@ static void fill_all_dac_nids(struct hda_codec *codec)
 			continue;
 		if (spec->num_all_dacs >= ARRAY_SIZE(spec->all_dacs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "hda: Too many DACs!\n");
+=======
+			codec_err(codec, "Too many DACs!\n");
+>>>>>>> v3.18
 =======
 			codec_err(codec, "Too many DACs!\n");
 >>>>>>> v3.18
@@ -2089,16 +2267,22 @@ static int parse_output_paths(struct hda_codec *codec)
 		if (path)
 			spec->vmaster_nid = look_for_out_vol_nid(codec, path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (spec->vmaster_nid)
 			snd_hda_set_vmaster_tlv(codec, spec->vmaster_nid,
 						HDA_OUTPUT, spec->vmaster_tlv);
 =======
+=======
+>>>>>>> v3.18
 		if (spec->vmaster_nid) {
 			snd_hda_set_vmaster_tlv(codec, spec->vmaster_nid,
 						HDA_OUTPUT, spec->vmaster_tlv);
 			if (spec->dac_min_mute)
 				spec->vmaster_tlv[3] |= TLV_DB_SCALE_MUTE;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2203,7 +2387,11 @@ static int create_extra_outs(struct hda_codec *codec, int num_pins,
 	for (i = 0; i < num_pins; i++) {
 		const char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char tmp[44];
+=======
+		char tmp[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 		char tmp[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -2247,7 +2435,12 @@ static int create_speaker_out_ctls(struct hda_codec *codec)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void call_hp_automute(struct hda_codec *codec, struct hda_jack_tbl *jack);
+=======
+static void call_hp_automute(struct hda_codec *codec,
+			     struct hda_jack_callback *jack);
+>>>>>>> v3.18
 =======
 static void call_hp_automute(struct hda_codec *codec,
 			     struct hda_jack_callback *jack);
@@ -2659,7 +2852,11 @@ static int create_hp_mic(struct hda_codec *codec)
 	/* we can't handle auto-mic together with HP-mic */
 	spec->suppress_auto_mic = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("hda-codec: Enable shared I/O jack on NID 0x%x\n", nid);
+=======
+	codec_dbg(codec, "Enable shared I/O jack on NID 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "Enable shared I/O jack on NID 0x%x\n", nid);
 >>>>>>> v3.18
@@ -2765,7 +2962,11 @@ static int create_out_jack_modes(struct hda_codec *codec, int num_pins,
 		if (get_out_jack_num_items(codec, pin) > 1) {
 			struct snd_kcontrol_new *knew;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			char name[44];
+=======
+			char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 			char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -2901,7 +3102,11 @@ static int create_in_jack_mode(struct hda_codec *codec, hda_nid_t pin)
 	struct hda_gen_spec *spec = codec->spec;
 	struct snd_kcontrol_new *knew;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44];
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -3125,7 +3330,11 @@ static int new_analog_input(struct hda_codec *codec, int input_idx,
 	if (!path)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_nid_path("loopback", path);
+=======
+	print_nid_path(codec, "loopback", path);
+>>>>>>> v3.18
 =======
 	print_nid_path(codec, "loopback", path);
 >>>>>>> v3.18
@@ -3157,7 +3366,11 @@ static int new_analog_input(struct hda_codec *codec, int input_idx,
 					    spec->mixer_merge_nid, 0);
 		if (path) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			print_nid_path("loopback-merge", path);
+=======
+			print_nid_path(codec, "loopback-merge", path);
+>>>>>>> v3.18
 =======
 			print_nid_path(codec, "loopback-merge", path);
 >>>>>>> v3.18
@@ -3240,7 +3453,11 @@ static int check_dyn_adc_switch(struct hda_codec *codec)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("hda-codec: enabling ADC switching\n");
+=======
+		codec_dbg(codec, "enabling ADC switching\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "enabling ADC switching\n");
 >>>>>>> v3.18
@@ -3268,7 +3485,11 @@ static int check_dyn_adc_switch(struct hda_codec *codec)
 	if (imux->num_items == 1 ||
 	    (imux->num_items == 2 && spec->hp_mic)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("hda-codec: reducing to a single ADC\n");
+=======
+		codec_dbg(codec, "reducing to a single ADC\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "reducing to a single ADC\n");
 >>>>>>> v3.18
@@ -3303,7 +3524,11 @@ static int parse_capture_source(struct hda_codec *codec, hda_nid_t pin,
 		if (!path)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print_nid_path("input", path);
+=======
+		print_nid_path(codec, "input", path);
+>>>>>>> v3.18
 =======
 		print_nid_path(codec, "input", path);
 >>>>>>> v3.18
@@ -3315,13 +3540,19 @@ static int parse_capture_source(struct hda_codec *codec, hda_nid_t pin,
 				spec->hp_mic_mux_idx = imux->num_items;
 			spec->imux_pins[imux->num_items] = pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_hda_add_imux_item(imux, label, cfg_idx, NULL);
 			imux_added = true;
 =======
+=======
+>>>>>>> v3.18
 			snd_hda_add_imux_item(codec, imux, label, cfg_idx, NULL);
 			imux_added = true;
 			if (spec->dyn_adc_switch)
 				spec->dyn_adc_idx[imux_idx] = c;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -3421,7 +3652,13 @@ static int create_input_ctls(struct hda_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mixer && spec->add_stereo_mix_input) {
+=======
+	/* add stereo mix when explicitly enabled via hint */
+	if (mixer && spec->add_stereo_mix_input &&
+	    snd_hda_get_bool_hint(codec, "add_stereo_mix_input") > 0) {
+>>>>>>> v3.18
 =======
 	/* add stereo mix when explicitly enabled via hint */
 	if (mixer && spec->add_stereo_mix_input &&
@@ -3539,7 +3776,11 @@ static int cap_put_caller(struct snd_kcontrol *kcontrol,
 	snd_hda_codec_flush_cache(codec); /* flush the updates */
 	if (err >= 0 && spec->cap_sync_hook)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spec->cap_sync_hook(codec, ucontrol);
+=======
+		spec->cap_sync_hook(codec, kcontrol, ucontrol);
+>>>>>>> v3.18
 =======
 		spec->cap_sync_hook(codec, kcontrol, ucontrol);
 >>>>>>> v3.18
@@ -3664,7 +3905,11 @@ static int cap_single_sw_put(struct snd_kcontrol *kcontrol,
 
 	if (spec->cap_sync_hook)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spec->cap_sync_hook(codec, ucontrol);
+=======
+		spec->cap_sync_hook(codec, kcontrol, ucontrol);
+>>>>>>> v3.18
 =======
 		spec->cap_sync_hook(codec, kcontrol, ucontrol);
 >>>>>>> v3.18
@@ -3678,7 +3923,11 @@ static int add_single_cap_ctl(struct hda_codec *codec, const char *label,
 {
 	struct hda_gen_spec *spec = codec->spec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char tmpname[44];
+=======
+	char tmpname[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char tmpname[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -3944,7 +4193,11 @@ static int parse_mic_boost(struct hda_codec *codec)
 		unsigned int val;
 		int idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char boost_label[44];
+=======
+		char boost_label[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 		char boost_label[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -3998,7 +4251,11 @@ static void parse_digital(struct hda_codec *codec)
 		if (!path)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print_nid_path("digout", path);
+=======
+		print_nid_path(codec, "digout", path);
+>>>>>>> v3.18
 =======
 		print_nid_path(codec, "digout", path);
 >>>>>>> v3.18
@@ -4012,7 +4269,11 @@ static void parse_digital(struct hda_codec *codec)
 			spec->multiout.slave_dig_outs = spec->slave_dig_outs;
 			if (nums >= ARRAY_SIZE(spec->slave_dig_outs) - 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18
@@ -4033,7 +4294,11 @@ static void parse_digital(struct hda_codec *codec)
 			path = snd_hda_add_new_path(codec, pin, dig_nid, 0);
 			if (path) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				print_nid_path("digin", path);
+=======
+				print_nid_path(codec, "digin", path);
+>>>>>>> v3.18
 =======
 				print_nid_path(codec, "digin", path);
 >>>>>>> v3.18
@@ -4093,7 +4358,11 @@ static int mux_select(struct hda_codec *codec, unsigned int adc_idx,
 	snd_hda_activate_path(codec, path, true, false);
 	if (spec->cap_sync_hook)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spec->cap_sync_hook(codec, NULL);
+=======
+		spec->cap_sync_hook(codec, NULL, NULL);
+>>>>>>> v3.18
 =======
 		spec->cap_sync_hook(codec, NULL, NULL);
 >>>>>>> v3.18
@@ -4110,7 +4379,12 @@ static int mux_select(struct hda_codec *codec, unsigned int adc_idx,
 static bool detect_jacks(struct hda_codec *codec, int num_pins, hda_nid_t *pins)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, present = 0;
+=======
+	int i;
+	bool present = false;
+>>>>>>> v3.18
 =======
 	int i;
 	bool present = false;
@@ -4124,7 +4398,12 @@ static bool detect_jacks(struct hda_codec *codec, int num_pins, hda_nid_t *pins)
 		if (snd_hda_codec_get_pin_target(codec, nid) & AC_PINCTL_IN_EN)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		present |= snd_hda_jack_detect(codec, nid);
+=======
+		if (snd_hda_jack_detect_state(codec, nid) == HDA_JACK_PRESENT)
+			present = true;
+>>>>>>> v3.18
 =======
 		if (snd_hda_jack_detect_state(codec, nid) == HDA_JACK_PRESENT)
 			present = true;
@@ -4136,7 +4415,11 @@ static bool detect_jacks(struct hda_codec *codec, int num_pins, hda_nid_t *pins)
 /* standard HP/line-out auto-mute helper */
 static void do_automute(struct hda_codec *codec, int num_pins, hda_nid_t *pins,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bool mute)
+=======
+			int *paths, bool mute)
+>>>>>>> v3.18
 =======
 			int *paths, bool mute)
 >>>>>>> v3.18
@@ -4150,7 +4433,10 @@ static void do_automute(struct hda_codec *codec, int num_pins, hda_nid_t *pins,
 		if (!nid)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (spec->auto_mute_via_amp) {
 			struct nid_path *path;
@@ -4170,6 +4456,9 @@ static void do_automute(struct hda_codec *codec, int num_pins, hda_nid_t *pins,
 			continue;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		oldval = snd_hda_codec_get_pin_target(codec, nid);
 		if (oldval & PIN_IN)
@@ -4198,6 +4487,10 @@ void snd_hda_gen_update_outputs(struct hda_codec *codec)
 {
 	struct hda_gen_spec *spec = codec->spec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int *paths;
+>>>>>>> v3.18
 =======
 	int *paths;
 >>>>>>> v3.18
@@ -4208,15 +4501,21 @@ void snd_hda_gen_update_outputs(struct hda_codec *codec)
 	 * but currently set only for master_mute, just to be safe
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_automute(codec, ARRAY_SIZE(spec->autocfg.hp_pins),
 		    spec->autocfg.hp_pins, spec->master_mute);
 =======
+=======
+>>>>>>> v3.18
 	if (spec->autocfg.line_out_type == AUTO_PIN_HP_OUT)
 		paths = spec->out_paths;
 	else
 		paths = spec->hp_paths;
 	do_automute(codec, ARRAY_SIZE(spec->autocfg.hp_pins),
 		    spec->autocfg.hp_pins, paths, spec->master_mute);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!spec->automute_speaker)
@@ -4226,15 +4525,21 @@ void snd_hda_gen_update_outputs(struct hda_codec *codec)
 	on |= spec->master_mute;
 	spec->speaker_muted = on;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_automute(codec, ARRAY_SIZE(spec->autocfg.speaker_pins),
 		    spec->autocfg.speaker_pins, on);
 =======
+=======
+>>>>>>> v3.18
 	if (spec->autocfg.line_out_type == AUTO_PIN_SPEAKER_OUT)
 		paths = spec->out_paths;
 	else
 		paths = spec->speaker_paths;
 	do_automute(codec, ARRAY_SIZE(spec->autocfg.speaker_pins),
 		    spec->autocfg.speaker_pins, paths, on);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* toggle line-out mutes if needed, too */
@@ -4249,16 +4554,22 @@ void snd_hda_gen_update_outputs(struct hda_codec *codec)
 	on |= spec->master_mute;
 	spec->line_out_muted = on;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_automute(codec, ARRAY_SIZE(spec->autocfg.line_out_pins),
 		    spec->autocfg.line_out_pins, on);
 }
 EXPORT_SYMBOL_HDA(snd_hda_gen_update_outputs);
 =======
+=======
+>>>>>>> v3.18
 	paths = spec->out_paths;
 	do_automute(codec, ARRAY_SIZE(spec->autocfg.line_out_pins),
 		    spec->autocfg.line_out_pins, paths, on);
 }
 EXPORT_SYMBOL_GPL(snd_hda_gen_update_outputs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void call_update_outputs(struct hda_codec *codec)
@@ -4269,11 +4580,14 @@ static void call_update_outputs(struct hda_codec *codec)
 	else
 		snd_hda_gen_update_outputs(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 /* standard HP-automute helper */
 void snd_hda_gen_hp_automute(struct hda_codec *codec, struct hda_jack_tbl *jack)
 =======
+=======
+>>>>>>> v3.18
 
 	/* sync the whole vmaster slaves to reflect the new auto-mute status */
 	if (spec->auto_mute_via_amp && !codec->bus->shutdown)
@@ -4283,6 +4597,9 @@ void snd_hda_gen_hp_automute(struct hda_codec *codec, struct hda_jack_tbl *jack)
 /* standard HP-automute helper */
 void snd_hda_gen_hp_automute(struct hda_codec *codec,
 			     struct hda_jack_callback *jack)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hda_gen_spec *spec = codec->spec;
@@ -4301,16 +4618,22 @@ void snd_hda_gen_hp_automute(struct hda_codec *codec,
 	call_update_outputs(codec);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_hp_automute);
 
 /* standard line-out-automute helper */
 void snd_hda_gen_line_automute(struct hda_codec *codec, struct hda_jack_tbl *jack)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(snd_hda_gen_hp_automute);
 
 /* standard line-out-automute helper */
 void snd_hda_gen_line_automute(struct hda_codec *codec,
 			       struct hda_jack_callback *jack)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hda_gen_spec *spec = codec->spec;
@@ -4329,16 +4652,22 @@ void snd_hda_gen_line_automute(struct hda_codec *codec,
 	call_update_outputs(codec);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_line_automute);
 
 /* standard mic auto-switch helper */
 void snd_hda_gen_mic_autoswitch(struct hda_codec *codec, struct hda_jack_tbl *jack)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(snd_hda_gen_line_automute);
 
 /* standard mic auto-switch helper */
 void snd_hda_gen_mic_autoswitch(struct hda_codec *codec,
 				struct hda_jack_callback *jack)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hda_gen_spec *spec = codec->spec;
@@ -4353,7 +4682,11 @@ void snd_hda_gen_mic_autoswitch(struct hda_codec *codec,
 		if (snd_hda_codec_get_pin_target(codec, pin) & AC_PINCTL_OUT_EN)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (snd_hda_jack_detect(codec, pin)) {
+=======
+		if (snd_hda_jack_detect_state(codec, pin) == HDA_JACK_PRESENT) {
+>>>>>>> v3.18
 =======
 		if (snd_hda_jack_detect_state(codec, pin) == HDA_JACK_PRESENT) {
 >>>>>>> v3.18
@@ -4364,16 +4697,22 @@ void snd_hda_gen_mic_autoswitch(struct hda_codec *codec,
 	mux_select(codec, 0, spec->am_entry[0].idx);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_mic_autoswitch);
 
 /* call appropriate hooks */
 static void call_hp_automute(struct hda_codec *codec, struct hda_jack_tbl *jack)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(snd_hda_gen_mic_autoswitch);
 
 /* call appropriate hooks */
 static void call_hp_automute(struct hda_codec *codec,
 			     struct hda_jack_callback *jack)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hda_gen_spec *spec = codec->spec;
@@ -4385,7 +4724,11 @@ static void call_hp_automute(struct hda_codec *codec,
 
 static void call_line_automute(struct hda_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct hda_jack_tbl *jack)
+=======
+			       struct hda_jack_callback *jack)
+>>>>>>> v3.18
 =======
 			       struct hda_jack_callback *jack)
 >>>>>>> v3.18
@@ -4399,7 +4742,11 @@ static void call_line_automute(struct hda_codec *codec,
 
 static void call_mic_autoswitch(struct hda_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct hda_jack_tbl *jack)
+=======
+				struct hda_jack_callback *jack)
+>>>>>>> v3.18
 =======
 				struct hda_jack_callback *jack)
 >>>>>>> v3.18
@@ -4551,9 +4898,14 @@ static int check_auto_mute_availability(struct hda_codec *codec)
 		if (!is_jack_detectable(codec, nid))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("hda-codec: Enable HP auto-muting on NID 0x%x\n",
 			    nid);
 		snd_hda_jack_detect_enable_callback(codec, nid, HDA_GEN_HP_EVENT,
+=======
+		codec_dbg(codec, "Enable HP auto-muting on NID 0x%x\n", nid);
+		snd_hda_jack_detect_enable_callback(codec, nid,
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "Enable HP auto-muting on NID 0x%x\n", nid);
 		snd_hda_jack_detect_enable_callback(codec, nid,
@@ -4569,9 +4921,14 @@ static int check_auto_mute_availability(struct hda_codec *codec)
 				if (!is_jack_detectable(codec, nid))
 					continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printdd("hda-codec: Enable Line-Out auto-muting on NID 0x%x\n", nid);
 				snd_hda_jack_detect_enable_callback(codec, nid,
 								    HDA_GEN_FRONT_EVENT,
+=======
+				codec_dbg(codec, "Enable Line-Out auto-muting on NID 0x%x\n", nid);
+				snd_hda_jack_detect_enable_callback(codec, nid,
+>>>>>>> v3.18
 =======
 				codec_dbg(codec, "Enable Line-Out auto-muting on NID 0x%x\n", nid);
 				snd_hda_jack_detect_enable_callback(codec, nid,
@@ -4618,7 +4975,10 @@ static bool auto_mic_check_imux(struct hda_codec *codec)
 		snd_hda_jack_detect_enable_callback(codec,
 						    spec->am_entry[i].pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    HDA_GEN_MIC_EVENT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 						    call_mic_autoswitch);
@@ -4697,7 +5057,11 @@ static int check_auto_mic_availability(struct hda_codec *codec)
 	spec->num_adc_nids = 1;
 	spec->cur_mux[0] = spec->am_entry[0].idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("hda-codec: Enable auto-mic switch on NID 0x%x/0x%x/0x%x\n",
+=======
+	codec_dbg(codec, "Enable auto-mic switch on NID 0x%x/0x%x/0x%x\n",
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "Enable auto-mic switch on NID 0x%x/0x%x/0x%x\n",
 >>>>>>> v3.18
@@ -4710,17 +5074,23 @@ static int check_auto_mic_availability(struct hda_codec *codec)
 
 /* power_filter hook; make inactive widgets into power down */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int snd_hda_gen_path_power_filter(struct hda_codec *codec,
 						  hda_nid_t nid,
 						  unsigned int power_state)
 {
 	if (power_state != AC_PWRST_D0)
 =======
+=======
+>>>>>>> v3.18
 unsigned int snd_hda_gen_path_power_filter(struct hda_codec *codec,
 						  hda_nid_t nid,
 						  unsigned int power_state)
 {
 	if (power_state != AC_PWRST_D0 || nid == codec->afg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return power_state;
 	if (get_wcaps_type(get_wcaps(codec, nid)) >= AC_WID_POWER)
@@ -4730,6 +5100,10 @@ unsigned int snd_hda_gen_path_power_filter(struct hda_codec *codec,
 	return AC_PWRST_D3;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_path_power_filter);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_path_power_filter);
 >>>>>>> v3.18
@@ -4746,12 +5120,15 @@ static void mute_all_mixer_nid(struct hda_codec *codec, hda_nid_t mix)
 	for (i = 0; i < nums; i++) {
 		if (has_amp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			update_amp(codec, mix, HDA_INPUT, i,
 				   0xff, HDA_AMP_MUTE);
 		else if (nid_has_volume(codec, conn[i], HDA_OUTPUT))
 			update_amp(codec, conn[i], HDA_OUTPUT, 0,
 				   0xff, HDA_AMP_MUTE);
 =======
+=======
+>>>>>>> v3.18
 			snd_hda_codec_amp_stereo(codec, mix,
 						 HDA_INPUT, i,
 						 0xff, HDA_AMP_MUTE);
@@ -4759,6 +5136,9 @@ static void mute_all_mixer_nid(struct hda_codec *codec, hda_nid_t mix)
 			snd_hda_codec_amp_stereo(codec, conn[i],
 						 HDA_OUTPUT, 0,
 						 0xff, HDA_AMP_MUTE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -4799,7 +5179,12 @@ int snd_hda_gen_parse_auto_config(struct hda_codec *codec,
 			goto dig_only;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0; /* can't find valid BIOS pin config */
+=======
+		if (!cfg->num_inputs && !cfg->dig_in_pin)
+			return 0; /* can't find valid BIOS pin config */
+>>>>>>> v3.18
 =======
 		if (!cfg->num_inputs && !cfg->dig_in_pin)
 			return 0; /* can't find valid BIOS pin config */
@@ -4872,7 +5257,10 @@ int snd_hda_gen_parse_auto_config(struct hda_codec *codec,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* add stereo mix if available and not enabled yet */
 	if (!spec->auto_mic && spec->mixer_nid &&
 	    spec->add_stereo_mix_input &&
@@ -4886,6 +5274,9 @@ int snd_hda_gen_parse_auto_config(struct hda_codec *codec,
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = create_capture_mixers(codec);
 	if (err < 0)
@@ -4940,7 +5331,11 @@ int snd_hda_gen_parse_auto_config(struct hda_codec *codec,
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_parse_auto_config);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_parse_auto_config);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_parse_auto_config);
 >>>>>>> v3.18
@@ -5026,7 +5421,11 @@ int snd_hda_gen_build_controls(struct hda_codec *codec)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_build_controls);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_build_controls);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_build_controls);
 >>>>>>> v3.18
@@ -5563,7 +5962,11 @@ int snd_hda_gen_build_pcms(struct hda_codec *codec)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_build_pcms);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_build_pcms);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_build_pcms);
 >>>>>>> v3.18
@@ -5641,7 +6044,10 @@ static void init_multi_io(struct hda_codec *codec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void init_aamix_paths(struct hda_codec *codec)
 {
 	struct hda_gen_spec *spec = codec->spec;
@@ -5659,6 +6065,9 @@ static void init_aamix_paths(struct hda_codec *codec)
 			   AUTO_PIN_SPEAKER_OUT);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* set up input pins and loopback paths */
 static void init_analog_input(struct hda_codec *codec)
@@ -5709,7 +6118,11 @@ static void init_input_src(struct hda_codec *codec)
 
 	if (spec->cap_sync_hook)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spec->cap_sync_hook(codec, NULL);
+=======
+		spec->cap_sync_hook(codec, NULL, NULL);
+>>>>>>> v3.18
 =======
 		spec->cap_sync_hook(codec, NULL, NULL);
 >>>>>>> v3.18
@@ -5767,6 +6180,10 @@ int snd_hda_gen_init(struct hda_codec *codec)
 	init_extra_out(codec);
 	init_multi_io(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_aamix_paths(codec);
+>>>>>>> v3.18
 =======
 	init_aamix_paths(codec);
 >>>>>>> v3.18
@@ -5788,7 +6205,11 @@ int snd_hda_gen_init(struct hda_codec *codec)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_init);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_init);
 >>>>>>> v3.18
@@ -5800,7 +6221,11 @@ EXPORT_SYMBOL_GPL(snd_hda_gen_init);
 void snd_hda_gen_free(struct hda_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_hda_detach_beep_device(codec);
+=======
+	snd_hda_apply_fixup(codec, HDA_FIXUP_ACT_FREE);
+>>>>>>> v3.18
 =======
 	snd_hda_apply_fixup(codec, HDA_FIXUP_ACT_FREE);
 >>>>>>> v3.18
@@ -5809,7 +6234,11 @@ void snd_hda_gen_free(struct hda_codec *codec)
 	codec->spec = NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_free);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_free);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_free);
 >>>>>>> v3.18
@@ -5825,7 +6254,11 @@ int snd_hda_gen_check_power_status(struct hda_codec *codec, hda_nid_t nid)
 	return snd_hda_check_amp_list_power(codec, &spec->loopback, nid);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_gen_check_power_status);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_gen_check_power_status);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_gen_check_power_status);
 >>>>>>> v3.18
@@ -5874,10 +6307,16 @@ error:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_parse_generic_codec);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(snd_hda_parse_generic_codec);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Generic HD-audio codec parser");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

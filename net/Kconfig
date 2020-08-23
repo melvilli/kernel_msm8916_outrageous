@@ -6,6 +6,11 @@ menuconfig NET
 	bool "Networking support"
 	select NLATTR
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GENERIC_NET_UTILS
+	select BPF
+>>>>>>> v3.18
 =======
 	select GENERIC_NET_UTILS
 	select BPF
@@ -87,6 +92,7 @@ source "net/netlabel/Kconfig"
 endif # if INET
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ANDROID_PARANOID_NETWORK
 	bool "Only allow certain groups to create sockets"
 	default y
@@ -103,6 +109,8 @@ config NET_ACTIVITY_STATS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config NETWORK_SECMARK
 	bool "Security Marking"
 	help
@@ -111,15 +119,21 @@ config NETWORK_SECMARK
 	  If you are unsure how to answer this question, answer N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NETWORK_PHY_TIMESTAMPING
 	bool "Timestamping in PHY devices"
 =======
+=======
+>>>>>>> v3.18
 config NET_PTP_CLASSIFY
 	def_bool n
 
 config NETWORK_PHY_TIMESTAMPING
 	bool "Timestamping in PHY devices"
 	select NET_PTP_CLASSIFY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This allows timestamping of network packets by PHYs with
@@ -203,16 +217,22 @@ config NETFILTER_ADVANCED
 
 config BRIDGE_NETFILTER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Bridged IP/ARP packets filtering"
 	depends on BRIDGE && NETFILTER && INET
 	depends on NETFILTER_ADVANCED
 	default y
 =======
+=======
+>>>>>>> v3.18
 	tristate "Bridged IP/ARP packets filtering"
 	depends on BRIDGE
 	depends on NETFILTER && INET
 	depends on NETFILTER_ADVANCED
 	default m
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  Enabling this option will let arptables resp. iptables see bridged
@@ -249,6 +269,10 @@ source "net/x25/Kconfig"
 source "net/lapb/Kconfig"
 source "net/phonet/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "net/6lowpan/Kconfig"
+>>>>>>> v3.18
 =======
 source "net/6lowpan/Kconfig"
 >>>>>>> v3.18
@@ -262,7 +286,12 @@ source "net/openvswitch/Kconfig"
 source "net/vmw_vsock/Kconfig"
 source "net/netlink/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "net/rmnet_data/Kconfig"
+=======
+source "net/mpls/Kconfig"
+source "net/hsr/Kconfig"
+>>>>>>> v3.18
 =======
 source "net/mpls/Kconfig"
 source "net/hsr/Kconfig"
@@ -285,6 +314,7 @@ config XPS
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NETPRIO_CGROUP
 	tristate "Network priority cgroup"
 	depends on CGROUPS
@@ -292,6 +322,8 @@ config NETPRIO_CGROUP
 	  Cgroup subsystem for use in assigning processes to network priorities on
 	  a per-interface basis
 =======
+=======
+>>>>>>> v3.18
 config CGROUP_NET_PRIO
 	bool "Network priority cgroup"
 	depends on CGROUPS
@@ -309,6 +341,9 @@ config CGROUP_NET_CLASSID
 config NET_RX_BUSY_POLL
 	boolean
 	default y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config BQL
@@ -329,6 +364,7 @@ config BPF_JIT
 	  this feature changing /proc/sys/net/core/bpf_jit_enable
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SOCKEV_NLMCAST
 	bool "Enable SOCKEV Netlink Multicast"
 	default n
@@ -338,6 +374,8 @@ config SOCKEV_NLMCAST
 	  user space entities need to be notified of socket events without
 	  having to poll /proc
 =======
+=======
+>>>>>>> v3.18
 config NET_FLOW_LIMIT
 	boolean
 	depends on RPS
@@ -349,6 +387,9 @@ config NET_FLOW_LIMIT
 	  maintain capacity for the other flows. This feature provides servers
 	  with many clients some protection against DoS by a single (spoofed)
 	  flow that greatly exceeds average workload.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 menu "Network testing"
@@ -356,7 +397,11 @@ menu "Network testing"
 config NET_PKTGEN
 	tristate "Packet Generator (USE WITH CAUTION)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PROC_FS
+=======
+	depends on INET && PROC_FS
+>>>>>>> v3.18
 =======
 	depends on INET && PROC_FS
 >>>>>>> v3.18
@@ -433,7 +478,10 @@ source "net/caif/Kconfig"
 source "net/ceph/Kconfig"
 source "net/nfc/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "net/ipc_router/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -454,7 +454,11 @@ static int max732x_irq_setup(struct max732x_chip *chip,
 {
 	struct i2c_client *client = chip->client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max732x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct max732x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct max732x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -517,7 +521,11 @@ static int max732x_irq_setup(struct max732x_chip *chip,
 {
 	struct i2c_client *client = chip->client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max732x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct max732x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct max732x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -573,7 +581,11 @@ static int max732x_setup_gpio(struct max732x_chip *chip,
 	}
 	gc->get = max732x_gpio_get_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gc->can_sleep = 1;
+=======
+	gc->can_sleep = true;
+>>>>>>> v3.18
 =======
 	gc->can_sleep = true;
 >>>>>>> v3.18
@@ -596,7 +608,11 @@ static int max732x_probe(struct i2c_client *client,
 	int ret, nr_port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -639,7 +655,10 @@ static int max732x_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (nr_port > 8 && !chip->client_dummy) {
 		dev_err(&client->dev,
 			"Failed to allocate second group I2C device\n");
@@ -647,6 +666,9 @@ static int max732x_probe(struct i2c_client *client,
 		goto out_failed;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&chip->lock);
 
@@ -674,6 +696,11 @@ static int max732x_probe(struct i2c_client *client,
 
 out_failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (chip->client_dummy)
+		i2c_unregister_device(chip->client_dummy);
+>>>>>>> v3.18
 =======
 	if (chip->client_dummy)
 		i2c_unregister_device(chip->client_dummy);
@@ -685,7 +712,11 @@ out_failed:
 static int max732x_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max732x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct max732x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct max732x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -703,12 +734,16 @@ static int max732x_remove(struct i2c_client *client)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gpiochip_remove(&chip->gpio_chip);
 	if (ret) {
 		dev_err(&client->dev, "%s failed, %d\n",
 				"gpiochip_remove()", ret);
 		return ret;
 	}
+=======
+	gpiochip_remove(&chip->gpio_chip);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&chip->gpio_chip);
 >>>>>>> v3.18

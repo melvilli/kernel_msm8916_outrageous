@@ -11,7 +11,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "mpc5121.dtsi"
+=======
+#include <mpc5121.dtsi>
+>>>>>>> v3.18
 =======
 #include <mpc5121.dtsi>
 >>>>>>> v3.18
@@ -144,8 +148,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc@80000000 {
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		osc {
 			clock-frequency = <25000000>;
@@ -154,6 +161,9 @@
 
 	soc@80000000 {
 		bus-frequency = <80000000>;	/* 80 MHz ips bus */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		clock@f00 {

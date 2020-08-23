@@ -201,8 +201,11 @@ static void psb_vdc_interrupt(struct drm_device *dev, uint32_t vdc_stat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t psb_irq_handler(DRM_IRQ_ARGS)
 =======
+=======
+>>>>>>> v3.18
 /*
  * SGX interrupt handler
  */
@@ -256,12 +259,19 @@ static void psb_sgx_interrupt(struct drm_device *dev, u32 stat_1, u32 stat_2)
 }
 
 irqreturn_t psb_irq_handler(int irq, void *arg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_device *dev = arg;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	uint32_t vdc_stat, dsp_int = 0, sgx_int = 0, hotplug_int = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 sgx_stat_1, sgx_stat_2;
+>>>>>>> v3.18
 =======
 	u32 sgx_stat_1, sgx_stat_2;
 >>>>>>> v3.18
@@ -294,6 +304,7 @@ irqreturn_t psb_irq_handler(int irq, void *arg)
 
 	if (sgx_int) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Not expected - we have it masked, shut it up */
 		u32 s, s2;
 		s = PSB_RSGX32(PSB_CR_EVENT_STATUS);
@@ -302,6 +313,11 @@ irqreturn_t psb_irq_handler(int irq, void *arg)
 		PSB_WSGX32(s2, PSB_CR_EVENT_HOST_CLEAR2);
 		/* if s & _PSB_CE_TWOD_COMPLETE we have 2D done but
 		   we may as well poll even if we add that ! */
+=======
+		sgx_stat_1 = PSB_RSGX32(PSB_CR_EVENT_STATUS);
+		sgx_stat_2 = PSB_RSGX32(PSB_CR_EVENT_STATUS2);
+		psb_sgx_interrupt(dev, sgx_stat_1, sgx_stat_2);
+>>>>>>> v3.18
 =======
 		sgx_stat_1 = PSB_RSGX32(PSB_CR_EVENT_STATUS);
 		sgx_stat_2 = PSB_RSGX32(PSB_CR_EVENT_STATUS2);
@@ -320,7 +336,11 @@ irqreturn_t psb_irq_handler(int irq, void *arg)
 	PSB_WVDC32(vdc_stat, PSB_INT_IDENTITY_R);
 	(void) PSB_RVDC32(PSB_INT_IDENTITY_R);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_READMEMORYBARRIER();
+=======
+	rmb();
+>>>>>>> v3.18
 =======
 	rmb();
 >>>>>>> v3.18
@@ -340,6 +360,7 @@ void psb_irq_preinstall(struct drm_device *dev)
 	spin_lock_irqsave(&dev_priv->irqmask_lock, irqflags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gma_power_is_on(dev))
 		PSB_WVDC32(0xFFFFFFFF, PSB_HWSTAM);
 	if (dev->vblank_enabled[0])
@@ -352,6 +373,8 @@ void psb_irq_preinstall(struct drm_device *dev)
 		dev_priv->vdc_irq_mask |= _MDFLD_PIPEB_EVENT_FLAG;
 	if (dev->vblank_enabled[2])
 =======
+=======
+>>>>>>> v3.18
 	if (gma_power_is_on(dev)) {
 		PSB_WVDC32(0xFFFFFFFF, PSB_HWSTAM);
 		PSB_WVDC32(0x00000000, PSB_INT_MASK_R);
@@ -368,6 +391,9 @@ void psb_irq_preinstall(struct drm_device *dev)
 	if (dev->vblank[1].enabled)
 		dev_priv->vdc_irq_mask |= _MDFLD_PIPEB_EVENT_FLAG;
 	if (dev->vblank[2].enabled)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_priv->vdc_irq_mask |= _MDFLD_PIPEC_EVENT_FLAG;
 	*/
@@ -376,7 +402,11 @@ void psb_irq_preinstall(struct drm_device *dev)
 	if (dev_priv->ops->hotplug)
 		dev_priv->vdc_irq_mask |= _PSB_IRQ_DISP_HOTSYNC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->vdc_irq_mask |= _PSB_IRQ_ASLE;
+=======
+	dev_priv->vdc_irq_mask |= _PSB_IRQ_ASLE | _PSB_IRQ_SGX_FLAG;
+>>>>>>> v3.18
 =======
 	dev_priv->vdc_irq_mask |= _PSB_IRQ_ASLE | _PSB_IRQ_SGX_FLAG;
 >>>>>>> v3.18
@@ -389,8 +419,12 @@ void psb_irq_preinstall(struct drm_device *dev)
 int psb_irq_postinstall(struct drm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_psb_private *dev_priv =
 	    (struct drm_psb_private *) dev->dev_private;
+=======
+	struct drm_psb_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 =======
 	struct drm_psb_private *dev_priv = dev->dev_private;
 >>>>>>> v3.18
@@ -399,19 +433,29 @@ int psb_irq_postinstall(struct drm_device *dev)
 	spin_lock_irqsave(&dev_priv->irqmask_lock, irqflags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Enable 2D and MMU fault interrupts */
 	PSB_WSGX32(_PSB_CE2_BIF_REQUESTER_FAULT, PSB_CR_EVENT_HOST_ENABLE2);
 	PSB_WSGX32(_PSB_CE_TWOD_COMPLETE, PSB_CR_EVENT_HOST_ENABLE);
 	PSB_RSGX32(PSB_CR_EVENT_HOST_ENABLE); /* Post */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* This register is safe even if display island is off */
 	PSB_WVDC32(dev_priv->vdc_irq_mask, PSB_INT_ENABLE_R);
 	PSB_WVDC32(0xFFFFFFFF, PSB_HWSTAM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->vblank_enabled[0])
+=======
+	if (dev->vblank[0].enabled)
+>>>>>>> v3.18
 =======
 	if (dev->vblank[0].enabled)
 >>>>>>> v3.18
@@ -420,7 +464,11 @@ int psb_irq_postinstall(struct drm_device *dev)
 		psb_disable_pipestat(dev_priv, 0, PIPE_VBLANK_INTERRUPT_ENABLE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->vblank_enabled[1])
+=======
+	if (dev->vblank[1].enabled)
+>>>>>>> v3.18
 =======
 	if (dev->vblank[1].enabled)
 >>>>>>> v3.18
@@ -429,7 +477,11 @@ int psb_irq_postinstall(struct drm_device *dev)
 		psb_disable_pipestat(dev_priv, 1, PIPE_VBLANK_INTERRUPT_ENABLE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->vblank_enabled[2])
+=======
+	if (dev->vblank[2].enabled)
+>>>>>>> v3.18
 =======
 	if (dev->vblank[2].enabled)
 >>>>>>> v3.18
@@ -457,6 +509,7 @@ void psb_irq_uninstall(struct drm_device *dev)
 	PSB_WVDC32(0xFFFFFFFF, PSB_HWSTAM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->vblank_enabled[0])
 		psb_disable_pipestat(dev_priv, 0, PIPE_VBLANK_INTERRUPT_ENABLE);
 
@@ -465,6 +518,8 @@ void psb_irq_uninstall(struct drm_device *dev)
 
 	if (dev->vblank_enabled[2])
 =======
+=======
+>>>>>>> v3.18
 	if (dev->vblank[0].enabled)
 		psb_disable_pipestat(dev_priv, 0, PIPE_VBLANK_INTERRUPT_ENABLE);
 
@@ -472,6 +527,9 @@ void psb_irq_uninstall(struct drm_device *dev)
 		psb_disable_pipestat(dev_priv, 1, PIPE_VBLANK_INTERRUPT_ENABLE);
 
 	if (dev->vblank[2].enabled)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		psb_disable_pipestat(dev_priv, 2, PIPE_VBLANK_INTERRUPT_ENABLE);
 
@@ -578,6 +636,7 @@ int psb_irq_disable_dpst(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PSB_FIXME
 static int psb_vblank_do_wait(struct drm_device *dev,
 			      unsigned int *sequence, atomic_t *counter)
@@ -593,6 +652,8 @@ static int psb_vblank_do_wait(struct drm_device *dev,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

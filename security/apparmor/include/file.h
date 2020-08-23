@@ -187,11 +187,14 @@ static inline void aa_free_file_rules(struct aa_file_rules *rules)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACC_FMODE(x) (("\000\004\002\006"[(x)&O_ACCMODE]) | (((x) << 1) & 0x40))
 
 /* from namei.c */
 #define MAP_OPEN_FLAGS(x) ((((x) + 1) & O_ACCMODE) ? (x) + 1 : (x))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -203,9 +206,12 @@ static inline void aa_free_file_rules(struct aa_file_rules *rules)
 static inline u32 aa_map_file_to_perms(struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int flags = MAP_OPEN_FLAGS(file->f_flags);
 	u32 perms = ACC_FMODE(file->f_mode);
 =======
+=======
+>>>>>>> v3.18
 	int flags = file->f_flags;
 	u32 perms = 0;
 
@@ -213,6 +219,9 @@ static inline u32 aa_map_file_to_perms(struct file *file)
 		perms |= MAY_WRITE;
 	if (file->f_mode & FMODE_READ)
 		perms |= MAY_READ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((flags & O_APPEND) && (perms & MAY_WRITE))

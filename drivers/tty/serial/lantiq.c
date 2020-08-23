@@ -155,11 +155,14 @@ lqasc_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 lqasc_enable_ms(struct uart_port *port)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int
@@ -322,7 +325,11 @@ lqasc_startup(struct uart_port *port)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ltq_port->clk)
+=======
+	if (!IS_ERR(ltq_port->clk))
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(ltq_port->clk))
 >>>>>>> v3.18
@@ -394,7 +401,11 @@ lqasc_shutdown(struct uart_port *port)
 	ltq_w32_mask(ASCTXFCON_TXFEN, ASCTXFCON_TXFFLU,
 		port->membase + LTQ_ASC_TXFCON);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ltq_port->clk)
+=======
+	if (!IS_ERR(ltq_port->clk))
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(ltq_port->clk))
 >>>>>>> v3.18
@@ -580,7 +591,10 @@ static struct uart_ops lqasc_pops = {
 	.start_tx =	lqasc_start_tx,
 	.stop_rx =	lqasc_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms =	lqasc_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl =	lqasc_break_ctl,
@@ -651,6 +665,12 @@ lqasc_console_setup(struct console *co, char *options)
 	port = &ltq_port->port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!IS_ERR(ltq_port->clk))
+		clk_enable(ltq_port->clk);
+
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(ltq_port->clk))
 		clk_enable(ltq_port->clk);
@@ -727,7 +747,11 @@ lqasc_probe(struct platform_device *pdev)
 
 	port->iotype	= SERIAL_IO_MEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->flags	= ASYNC_BOOT_AUTOCONF | UPF_IOREMAP;
+=======
+	port->flags	= UPF_BOOT_AUTOCONF | UPF_IOREMAP;
+>>>>>>> v3.18
 =======
 	port->flags	= UPF_BOOT_AUTOCONF | UPF_IOREMAP;
 >>>>>>> v3.18

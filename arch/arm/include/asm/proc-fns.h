@@ -61,7 +61,11 @@ extern struct processor {
 	 * Set the page table
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*switch_mm)(unsigned long pgd_phys, struct mm_struct *mm);
+=======
+	void (*switch_mm)(phys_addr_t pgd_phys, struct mm_struct *mm);
+>>>>>>> v3.18
 =======
 	void (*switch_mm)(phys_addr_t pgd_phys, struct mm_struct *mm);
 >>>>>>> v3.18
@@ -87,7 +91,11 @@ extern void cpu_proc_fin(void);
 extern int cpu_do_idle(void);
 extern void cpu_dcache_clean_area(void *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cpu_do_switch_mm(unsigned long pgd_phys, struct mm_struct *mm);
+=======
+extern void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm);
+>>>>>>> v3.18
 =======
 extern void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm);
 >>>>>>> v3.18
@@ -125,6 +133,7 @@ extern void cpu_resume(void);
 
 #ifdef CONFIG_ARM_LPAE
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_get_pgd()	\
 	({						\
 		unsigned long pg, pg2;			\
@@ -133,6 +142,8 @@ extern void cpu_resume(void);
 			:				\
 			: "cc");			\
 =======
+=======
+>>>>>>> v3.18
 
 #define cpu_get_ttbr(nr)					\
 	({							\
@@ -152,6 +163,9 @@ extern void cpu_resume(void);
 #define cpu_get_pgd()	\
 	({						\
 		u64 pg = cpu_get_ttbr(0);		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pg &= ~(PTRS_PER_PGD*sizeof(pgd_t)-1);	\
 		(pgd_t *)phys_to_virt(pg);		\
@@ -168,11 +182,17 @@ extern void cpu_resume(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else	/*!CONFIG_MMU */
 
 #define cpu_switch_mm(pgd,mm)	{ }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

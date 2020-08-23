@@ -24,7 +24,10 @@
 #define _ATL1E_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -503,6 +506,7 @@ extern char atl1e_driver_name[];
 extern char atl1e_driver_version[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void atl1e_check_options(struct atl1e_adapter *adapter);
 extern int atl1e_up(struct atl1e_adapter *adapter);
 extern void atl1e_down(struct atl1e_adapter *adapter);
@@ -510,11 +514,16 @@ extern void atl1e_reinit_locked(struct atl1e_adapter *adapter);
 extern s32 atl1e_reset_hw(struct atl1e_hw *hw);
 extern void atl1e_set_ethtool_ops(struct net_device *netdev);
 =======
+=======
+>>>>>>> v3.18
 void atl1e_check_options(struct atl1e_adapter *adapter);
 int atl1e_up(struct atl1e_adapter *adapter);
 void atl1e_down(struct atl1e_adapter *adapter);
 void atl1e_reinit_locked(struct atl1e_adapter *adapter);
 s32 atl1e_reset_hw(struct atl1e_hw *hw);
 void atl1e_set_ethtool_ops(struct net_device *netdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ATL1_E_H_ */

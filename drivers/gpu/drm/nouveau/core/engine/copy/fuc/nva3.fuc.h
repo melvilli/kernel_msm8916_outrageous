@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 nva3_pcopy_data[] = {
+=======
+uint32_t nva3_pcopy_data[] = {
+>>>>>>> v3.18
 =======
 uint32_t nva3_pcopy_data[] = {
 >>>>>>> v3.18
@@ -188,7 +192,11 @@ uint32_t nva3_pcopy_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 nva3_pcopy_code[] = {
+=======
+uint32_t nva3_pcopy_code[] = {
+>>>>>>> v3.18
 =======
 uint32_t nva3_pcopy_code[] = {
 >>>>>>> v3.18

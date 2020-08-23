@@ -4,7 +4,10 @@
 #include <linux/sunrpc/debug.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/ip_vs.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/syscalls.h>
@@ -142,8 +145,11 @@ static const struct bin_table bin_kern_table[] = {
 	{ CTL_INT,	KERN_MAX_LOCK_DEPTH,		"max_lock_depth" },
 	{ CTL_INT,	KERN_PANIC_ON_NMI,		"panic_on_unrecovered_nmi" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ CTL_INT,	KERN_BOOT_REASON,		"boot_reason" },
 	{ CTL_INT,	KERN_COLD_BOOT,			"cold_boot" },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{}
@@ -400,7 +406,10 @@ static const struct bin_table bin_net_ipv4_table[] = {
 	{ CTL_INT,	NET_TCP_BASE_MSS,			"tcp_base_mss" },
 	{ CTL_INT,	NET_IPV4_TCP_WORKAROUND_SIGNED_WINDOWS,	"tcp_workaround_signed_windows" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ CTL_INT,	NET_TCP_DMA_COPYBREAK,			"tcp_dma_copybreak" },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ CTL_INT,	NET_TCP_SLOW_START_AFTER_IDLE,		"tcp_slow_start_after_idle" },
@@ -535,7 +544,11 @@ static const struct bin_table bin_net_ipv6_conf_var_table[] = {
 	{ CTL_INT,	NET_IPV6_PROXY_NDP,			"proxy_ndp" },
 	{ CTL_INT,	NET_IPV6_ACCEPT_SOURCE_ROUTE,		"accept_source_route" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ CTL_INT,	NET_IPV6_ACCEPT_RA_PREFIX_ROUTE,	"accept_ra_prefix_route" },
+=======
+	{ CTL_INT,	NET_IPV6_ACCEPT_RA_FROM_LOCAL,		"accept_ra_from_local" },
+>>>>>>> v3.18
 =======
 	{ CTL_INT,	NET_IPV6_ACCEPT_RA_FROM_LOCAL,		"accept_ra_from_local" },
 >>>>>>> v3.18
@@ -1042,7 +1055,11 @@ static ssize_t bin_intvec(struct file *file,
 				goto out_kfree;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			str += snprintf(str, end - str, "%lu\t", value);
+=======
+			str += scnprintf(str, end - str, "%lu\t", value);
+>>>>>>> v3.18
 =======
 			str += scnprintf(str, end - str, "%lu\t", value);
 >>>>>>> v3.18
@@ -1117,7 +1134,11 @@ static ssize_t bin_ulongvec(struct file *file,
 				goto out_kfree;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			str += snprintf(str, end - str, "%lu\t", value);
+=======
+			str += scnprintf(str, end - str, "%lu\t", value);
+>>>>>>> v3.18
 =======
 			str += scnprintf(str, end - str, "%lu\t", value);
 >>>>>>> v3.18
@@ -1231,7 +1252,11 @@ static ssize_t bin_dn_node_address(struct file *file,
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = snprintf(buf, sizeof(buf), "%hu.%hu",
+=======
+		len = scnprintf(buf, sizeof(buf), "%hu.%hu",
+>>>>>>> v3.18
 =======
 		len = scnprintf(buf, sizeof(buf), "%hu.%hu",
 >>>>>>> v3.18

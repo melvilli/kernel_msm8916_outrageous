@@ -409,9 +409,12 @@
 #define __NR_kcmp		341
 #define __NR_finit_module	342
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define NR_syscalls		343
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr	343
 #define __NR_sched_getattr	344
 #define __NR_renameat2		345
@@ -421,6 +424,9 @@
 #define __NR_bpf		349
 
 #define NR_syscalls		350
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bitmask values returned from kern_features system call.  */

@@ -89,7 +89,10 @@ static struct sh_eth_plat_data sh7763_eth_pdata = {
 	.phy = 1,
 	.edmac_endian = EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type = SH_ETH_REG_GIGABIT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.phy_interface = PHY_INTERFACE_MODE_MII,
@@ -97,7 +100,11 @@ static struct sh_eth_plat_data sh7763_eth_pdata = {
 
 static struct platform_device sh7763rdp_eth_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name       = "sh-eth",
+=======
+	.name       = "sh7763-gether",
+>>>>>>> v3.18
 =======
 	.name       = "sh7763-gether",
 >>>>>>> v3.18

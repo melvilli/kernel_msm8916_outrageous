@@ -28,6 +28,10 @@
 #include <linux/console.h>
 #include <linux/vga_switcheroo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_runtime.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_runtime.h>
 >>>>>>> v3.18
@@ -42,6 +46,10 @@ struct vga_switcheroo_client {
 	int id;
 	bool active;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool driver_power_control;
+>>>>>>> v3.18
 =======
 	bool driver_power_control;
 >>>>>>> v3.18
@@ -141,7 +149,11 @@ EXPORT_SYMBOL(vga_switcheroo_unregister_handler);
 static int register_client(struct pci_dev *pdev,
 			   const struct vga_switcheroo_client_ops *ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   int id, bool active)
+=======
+			   int id, bool active, bool driver_power_control)
+>>>>>>> v3.18
 =======
 			   int id, bool active, bool driver_power_control)
 >>>>>>> v3.18
@@ -158,6 +170,10 @@ static int register_client(struct pci_dev *pdev,
 	client->id = id;
 	client->active = active;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	client->driver_power_control = driver_power_control;
+>>>>>>> v3.18
 =======
 	client->driver_power_control = driver_power_control;
 >>>>>>> v3.18
@@ -177,16 +193,22 @@ static int register_client(struct pci_dev *pdev,
 
 int vga_switcheroo_register_client(struct pci_dev *pdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   const struct vga_switcheroo_client_ops *ops)
 {
 	return register_client(pdev, ops, -1,
 			       pdev == vga_default_device());
 =======
+=======
+>>>>>>> v3.18
 				   const struct vga_switcheroo_client_ops *ops,
 				   bool driver_power_control)
 {
 	return register_client(pdev, ops, -1,
 			       pdev == vga_default_device(), driver_power_control);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(vga_switcheroo_register_client);
@@ -196,7 +218,11 @@ int vga_switcheroo_register_audio_client(struct pci_dev *pdev,
 					 int id, bool active)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return register_client(pdev, ops, id | ID_BIT_AUDIO, active);
+=======
+	return register_client(pdev, ops, id | ID_BIT_AUDIO, active, false);
+>>>>>>> v3.18
 =======
 	return register_client(pdev, ops, id | ID_BIT_AUDIO, active, false);
 >>>>>>> v3.18
@@ -287,16 +313,22 @@ static int vga_switcheroo_show(struct seq_file *m, void *v)
 	mutex_lock(&vgasr_mutex);
 	list_for_each_entry(client, &vgasr_priv.clients, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(m, "%d:%s%s:%c:%s:%s\n", i,
 			   client_id(client) == VGA_SWITCHEROO_DIS ? "DIS" : "IGD",
 			   client_is_vga(client) ? "" : "-Audio",
 			   client->active ? '+' : ' ',
 =======
+=======
+>>>>>>> v3.18
 		seq_printf(m, "%d:%s%s:%c:%s%s:%s\n", i,
 			   client_id(client) == VGA_SWITCHEROO_DIS ? "DIS" : "IGD",
 			   client_is_vga(client) ? "" : "-Audio",
 			   client->active ? '+' : ' ',
 			   client->driver_power_control ? "Dyn" : "",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   client->pwr_state ? "Pwr" : "Off",
 			   pci_name(client->pdev));
@@ -314,6 +346,11 @@ static int vga_switcheroo_debugfs_open(struct inode *inode, struct file *file)
 static int vga_switchon(struct vga_switcheroo_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (client->driver_power_control)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (client->driver_power_control)
 		return 0;
@@ -329,6 +366,11 @@ static int vga_switchon(struct vga_switcheroo_client *client)
 static int vga_switchoff(struct vga_switcheroo_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (client->driver_power_control)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (client->driver_power_control)
 		return 0;
@@ -449,6 +491,11 @@ vga_switcheroo_debugfs_write(struct file *filp, const char __user *ubuf,
 			if (client->active || client_is_audio(client))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (client->driver_power_control)
+				continue;
+>>>>>>> v3.18
 =======
 			if (client->driver_power_control)
 				continue;
@@ -465,6 +512,11 @@ vga_switcheroo_debugfs_write(struct file *filp, const char __user *ubuf,
 			if (client->active || client_is_audio(client))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (client->driver_power_control)
+				continue;
+>>>>>>> v3.18
 =======
 			if (client->driver_power_control)
 				continue;
@@ -622,7 +674,10 @@ err:
 }
 EXPORT_SYMBOL(vga_switcheroo_process_delayed_switch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void vga_switcheroo_power_switch(struct pci_dev *pdev, enum vga_switcheroo_state state)
 {
@@ -754,4 +809,7 @@ int vga_switcheroo_init_domain_pm_optimus_hdmi_audio(struct device *dev, struct 
 	return -EINVAL;
 }
 EXPORT_SYMBOL(vga_switcheroo_init_domain_pm_optimus_hdmi_audio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

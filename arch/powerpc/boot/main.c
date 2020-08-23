@@ -140,7 +140,11 @@ static struct addr_range prep_initrd(struct addr_range vmlinux, void *chosen,
  * The buffer is put in it's own section so that tools may locate it easier.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char cmdline[COMMAND_LINE_SIZE]
+=======
+static char cmdline[BOOT_COMMAND_LINE_SIZE]
+>>>>>>> v3.18
 =======
 static char cmdline[BOOT_COMMAND_LINE_SIZE]
 >>>>>>> v3.18
@@ -150,7 +154,11 @@ static void prep_cmdline(void *chosen)
 {
 	if (cmdline[0] == '\0')
 <<<<<<< HEAD
+<<<<<<< HEAD
 		getprop(chosen, "bootargs", cmdline, COMMAND_LINE_SIZE-1);
+=======
+		getprop(chosen, "bootargs", cmdline, BOOT_COMMAND_LINE_SIZE-1);
+>>>>>>> v3.18
 =======
 		getprop(chosen, "bootargs", cmdline, BOOT_COMMAND_LINE_SIZE-1);
 >>>>>>> v3.18
@@ -159,7 +167,11 @@ static void prep_cmdline(void *chosen)
 	/* If possible, edit the command line */
 	if (console_ops.edit_cmdline)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		console_ops.edit_cmdline(cmdline, COMMAND_LINE_SIZE);
+=======
+		console_ops.edit_cmdline(cmdline, BOOT_COMMAND_LINE_SIZE);
+>>>>>>> v3.18
 =======
 		console_ops.edit_cmdline(cmdline, BOOT_COMMAND_LINE_SIZE);
 >>>>>>> v3.18
@@ -187,7 +199,11 @@ void start(void)
 	if ((loader_info.cmdline_len > 0) && (cmdline[0] == '\0'))
 		memmove(cmdline, loader_info.cmdline,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			min(loader_info.cmdline_len, COMMAND_LINE_SIZE-1));
+=======
+			min(loader_info.cmdline_len, BOOT_COMMAND_LINE_SIZE-1));
+>>>>>>> v3.18
 =======
 			min(loader_info.cmdline_len, BOOT_COMMAND_LINE_SIZE-1));
 >>>>>>> v3.18

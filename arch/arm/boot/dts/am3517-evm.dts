@@ -8,17 +8,23 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
 
 / {
 	model = "TI AM3517 EVM (AM3517/05)";
 	compatible = "ti,am3517-evm", "ti,omap3";
 =======
+=======
+>>>>>>> v3.18
 #include "am3517.dtsi"
 
 / {
 	model = "TI AM3517 EVM (AM3517/05 TMDSEVM3517)";
 	compatible = "ti,am3517-evm", "ti,am3517", "ti,omap3";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memory {
@@ -26,7 +32,10 @@
 		reg = <0x80000000 0x10000000>; /* 256 MB */
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
         vmmc_fixed: vmmc {
                 compatible = "regulator-fixed";
@@ -42,6 +51,9 @@
 
 &davinci_mdio {
 	     status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -57,7 +69,10 @@
 	clock-frequency = <400000>;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &mmc1 {
 	vmmc-supply = <&vmmc_fixed>;
@@ -72,4 +87,7 @@
       status = "disabled";
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

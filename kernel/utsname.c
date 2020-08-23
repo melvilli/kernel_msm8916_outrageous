@@ -94,8 +94,13 @@ static void *utsns_get(struct task_struct *task)
 	struct nsproxy *nsproxy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	nsproxy = task_nsproxy(task);
+=======
+	task_lock(task);
+	nsproxy = task->nsproxy;
+>>>>>>> v3.18
 =======
 	task_lock(task);
 	nsproxy = task->nsproxy;
@@ -105,7 +110,11 @@ static void *utsns_get(struct task_struct *task)
 		get_uts_ns(ns);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
+=======
+	task_unlock(task);
+>>>>>>> v3.18
 =======
 	task_unlock(task);
 >>>>>>> v3.18
@@ -124,7 +133,11 @@ static int utsns_install(struct nsproxy *nsproxy, void *new)
 
 	if (!ns_capable(ns->user_ns, CAP_SYS_ADMIN) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !nsown_capable(CAP_SYS_ADMIN))
+=======
+	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
+>>>>>>> v3.18
 =======
 	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
 >>>>>>> v3.18

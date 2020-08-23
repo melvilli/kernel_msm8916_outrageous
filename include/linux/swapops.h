@@ -55,7 +55,11 @@ static inline pgoff_t swp_offset(swp_entry_t entry)
 static inline int is_swap_pte(pte_t pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return !pte_none(pte) && !pte_present(pte) && !pte_file(pte);
+=======
+	return !pte_none(pte) && !pte_present_nonuma(pte) && !pte_file(pte);
+>>>>>>> v3.18
 =======
 	return !pte_none(pte) && !pte_present_nonuma(pte) && !pte_file(pte);
 >>>>>>> v3.18
@@ -72,6 +76,11 @@ static inline swp_entry_t pte_to_swp_entry(pte_t pte)
 
 	BUG_ON(pte_file(pte));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (pte_swp_soft_dirty(pte))
+		pte = pte_swp_clear_soft_dirty(pte);
+>>>>>>> v3.18
 =======
 	if (pte_swp_soft_dirty(pte))
 		pte = pte_swp_clear_soft_dirty(pte);
@@ -147,7 +156,12 @@ static inline void make_migration_entry_read(swp_entry_t *entry)
 extern void migration_entry_wait(struct mm_struct *mm, pmd_t *pmd,
 					unsigned long address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void migration_entry_wait_huge(struct mm_struct *mm, pte_t *pte);
+=======
+extern void migration_entry_wait_huge(struct vm_area_struct *vma,
+		struct mm_struct *mm, pte_t *pte);
+>>>>>>> v3.18
 =======
 extern void migration_entry_wait_huge(struct vm_area_struct *vma,
 		struct mm_struct *mm, pte_t *pte);
@@ -164,8 +178,13 @@ static inline void make_migration_entry_read(swp_entry_t *entryp) { }
 static inline void migration_entry_wait(struct mm_struct *mm, pmd_t *pmd,
 					 unsigned long address) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void migration_entry_wait_huge(struct mm_struct *mm,
 					pte_t *pte) { }
+=======
+static inline void migration_entry_wait_huge(struct vm_area_struct *vma,
+		struct mm_struct *mm, pte_t *pte) { }
+>>>>>>> v3.18
 =======
 static inline void migration_entry_wait_huge(struct vm_area_struct *vma,
 		struct mm_struct *mm, pte_t *pte) { }

@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: WMM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -42,6 +46,12 @@
 #define IPTOS_OFFSET 5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool disable_tx_amsdu;
+module_param(disable_tx_amsdu, bool, 0644);
+
+>>>>>>> v3.18
 =======
 static bool disable_tx_amsdu;
 module_param(disable_tx_amsdu, bool, 0644);
@@ -72,6 +82,7 @@ static u8 tos_to_tid[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This table inverses the tos_to_tid operation to get a priority
  * which is in sequential order, and can be compared.
@@ -87,6 +98,8 @@ static u8 tos_to_tid_inv[] = {
 	0x06,
 	0x07};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u8 ac_to_tid[4][2] = { {1, 2}, {0, 3}, {4, 5}, {6, 7} };
@@ -118,7 +131,11 @@ mwifiex_wmm_ac_debug_print(const struct ieee_types_wmm_ac_parameters *ac_param)
  */
 static struct mwifiex_ra_list_tbl *
 <<<<<<< HEAD
+<<<<<<< HEAD
 mwifiex_wmm_allocate_ralist_node(struct mwifiex_adapter *adapter, u8 *ra)
+=======
+mwifiex_wmm_allocate_ralist_node(struct mwifiex_adapter *adapter, const u8 *ra)
+>>>>>>> v3.18
 =======
 mwifiex_wmm_allocate_ralist_node(struct mwifiex_adapter *adapter, const u8 *ra)
 >>>>>>> v3.18
@@ -135,7 +152,11 @@ mwifiex_wmm_allocate_ralist_node(struct mwifiex_adapter *adapter, const u8 *ra)
 	memcpy(ra_list->ra, ra, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ra_list->total_pkts_size = 0;
+=======
+	ra_list->total_pkt_count = 0;
+>>>>>>> v3.18
 =======
 	ra_list->total_pkt_count = 0;
 >>>>>>> v3.18
@@ -173,8 +194,12 @@ static u8 mwifiex_get_random_ba_threshold(void)
  * with the given RA.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 mwifiex_ralist_add(struct mwifiex_private *priv, u8 *ra)
+=======
+void mwifiex_ralist_add(struct mwifiex_private *priv, const u8 *ra)
+>>>>>>> v3.18
 =======
 void mwifiex_ralist_add(struct mwifiex_private *priv, const u8 *ra)
 >>>>>>> v3.18
@@ -198,9 +223,12 @@ void mwifiex_ralist_add(struct mwifiex_private *priv, const u8 *ra)
 
 		ra_list->is_11n_enabled = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!mwifiex_queuing_ra_based(priv)) {
 			ra_list->is_11n_enabled = IS_11N_ENABLED(priv);
 =======
+=======
+>>>>>>> v3.18
 		ra_list->tdls_link = false;
 		if (!mwifiex_queuing_ra_based(priv)) {
 			if (mwifiex_get_tdls_link_status(priv, ra) ==
@@ -211,6 +239,9 @@ void mwifiex_ralist_add(struct mwifiex_private *priv, const u8 *ra)
 			} else {
 				ra_list->is_11n_enabled = IS_11N_ENABLED(priv);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			ra_list->is_11n_enabled =
@@ -224,7 +255,11 @@ void mwifiex_ralist_add(struct mwifiex_private *priv, const u8 *ra)
 
 		if (ra_list->is_11n_enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ra_list->pkt_count = 0;
+=======
+			ra_list->ba_pkt_count = 0;
+>>>>>>> v3.18
 =======
 			ra_list->ba_pkt_count = 0;
 >>>>>>> v3.18
@@ -253,8 +288,14 @@ static void mwifiex_wmm_default_queue_priorities(struct mwifiex_private *priv)
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 mwifiex_wmm_queue_priorities_tid(struct mwifiex_wmm_desc *wmm)
 {
+=======
+mwifiex_wmm_queue_priorities_tid(struct mwifiex_private *priv)
+{
+	struct mwifiex_wmm_desc *wmm = &priv->wmm;
+>>>>>>> v3.18
 =======
 mwifiex_wmm_queue_priorities_tid(struct mwifiex_private *priv)
 {
@@ -270,7 +311,11 @@ mwifiex_wmm_queue_priorities_tid(struct mwifiex_private *priv)
 
 	for (i = 0; i < MAX_NUM_TID; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tos_to_tid_inv[tos_to_tid[i]] = (u8)i;
+=======
+		priv->tos_to_tid_inv[tos_to_tid[i]] = (u8)i;
+>>>>>>> v3.18
 =======
 		priv->tos_to_tid_inv[tos_to_tid[i]] = (u8)i;
 >>>>>>> v3.18
@@ -335,7 +380,11 @@ mwifiex_wmm_setup_queue_priorities(struct mwifiex_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mwifiex_wmm_queue_priorities_tid(&priv->wmm);
+=======
+	mwifiex_wmm_queue_priorities_tid(priv);
+>>>>>>> v3.18
 =======
 	mwifiex_wmm_queue_priorities_tid(priv);
 >>>>>>> v3.18
@@ -442,8 +491,12 @@ mwifiex_wmm_convert_tos_to_ac(struct mwifiex_adapter *adapter, u32 tos)
  * of TID to AC is taken care of internally.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8
 mwifiex_wmm_downgrade_tid(struct mwifiex_private *priv, u32 tid)
+=======
+u8 mwifiex_wmm_downgrade_tid(struct mwifiex_private *priv, u32 tid)
+>>>>>>> v3.18
 =======
 u8 mwifiex_wmm_downgrade_tid(struct mwifiex_private *priv, u32 tid)
 >>>>>>> v3.18
@@ -479,6 +532,7 @@ mwifiex_wmm_init(struct mwifiex_adapter *adapter)
 
 		for (i = 0; i < MAX_NUM_TID; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->aggr_prio_tbl[i].amsdu = tos_to_tid_inv[i];
 			priv->aggr_prio_tbl[i].ampdu_ap = tos_to_tid_inv[i];
 			priv->aggr_prio_tbl[i].ampdu_user = tos_to_tid_inv[i];
@@ -494,6 +548,8 @@ mwifiex_wmm_init(struct mwifiex_adapter *adapter)
 					= BA_STREAM_NOT_ALLOWED;
 
 =======
+=======
+>>>>>>> v3.18
 			if (!disable_tx_amsdu &&
 			    adapter->tx_buf_size > MWIFIEX_TX_DATA_BUF_SIZE_2K)
 				priv->aggr_prio_tbl[i].amsdu =
@@ -507,6 +563,9 @@ mwifiex_wmm_init(struct mwifiex_adapter *adapter)
 							priv->tos_to_tid_inv[i];
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mwifiex_set_ba_params(priv);
 		mwifiex_reset_11n_rx_seq_num(priv);
@@ -620,6 +679,10 @@ mwifiex_clean_txrx(struct mwifiex_private *priv)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sk_buff *skb, *tmp;
+>>>>>>> v3.18
 =======
 	struct sk_buff *skb, *tmp;
 >>>>>>> v3.18
@@ -641,6 +704,12 @@ mwifiex_clean_txrx(struct mwifiex_private *priv)
 		priv->adapter->if_ops.clean_pcie_ring(priv->adapter);
 	spin_unlock_irqrestore(&priv->wmm.ra_list_spinlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	skb_queue_walk_safe(&priv->tdls_txq, skb, tmp)
+		mwifiex_write_data_complete(priv->adapter, skb, 0, -1);
+>>>>>>> v3.18
 =======
 
 	skb_queue_walk_safe(&priv->tdls_txq, skb, tmp)
@@ -655,7 +724,11 @@ mwifiex_clean_txrx(struct mwifiex_private *priv)
 static struct mwifiex_ra_list_tbl *
 mwifiex_wmm_get_ralist_node(struct mwifiex_private *priv, u8 tid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    u8 *ra_addr)
+=======
+			    const u8 *ra_addr)
+>>>>>>> v3.18
 =======
 			    const u8 *ra_addr)
 >>>>>>> v3.18
@@ -679,8 +752,14 @@ mwifiex_wmm_get_ralist_node(struct mwifiex_private *priv, u8 tid,
  * retrieved.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mwifiex_ra_list_tbl *
 mwifiex_wmm_get_queue_raptr(struct mwifiex_private *priv, u8 tid, u8 *ra_addr)
+=======
+struct mwifiex_ra_list_tbl *
+mwifiex_wmm_get_queue_raptr(struct mwifiex_private *priv, u8 tid,
+			    const u8 *ra_addr)
+>>>>>>> v3.18
 =======
 struct mwifiex_ra_list_tbl *
 mwifiex_wmm_get_queue_raptr(struct mwifiex_private *priv, u8 tid,
@@ -735,7 +814,10 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 	u8 ra[ETH_ALEN], tid_down;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct list_head list_head;
 	int tdls_status = TDLS_NOT_SETUP;
 	struct ethhdr *eth_hdr = (struct ethhdr *)skb->data;
@@ -751,6 +833,9 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 		else if (memcmp(priv->cfg_bssid, ra, ETH_ALEN))
 			tdls_status = mwifiex_get_tdls_link_status(priv, ra);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!priv->media_connected && !mwifiex_is_skb_mgmt_frame(skb)) {
@@ -771,6 +856,7 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 	if (!mwifiex_queuing_ra_based(priv) &&
 	    !mwifiex_is_skb_mgmt_frame(skb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!list_empty(&priv->wmm.tid_tbl_ptr[tid_down].ra_list))
 			ra_list = list_first_entry(
 				&priv->wmm.tid_tbl_ptr[tid_down].ra_list,
@@ -778,6 +864,8 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 		else
 			ra_list = NULL;
 =======
+=======
+>>>>>>> v3.18
 		switch (tdls_status) {
 		case TDLS_SETUP_COMPLETE:
 			ra_list = mwifiex_wmm_get_queue_raptr(priv, tid_down,
@@ -799,6 +887,9 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 				ra_list = NULL;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		memcpy(ra, skb->data, ETH_ALEN);
@@ -816,6 +907,7 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 	skb_queue_tail(&ra_list->skb_head, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ra_list->total_pkts_size += skb->len;
 	ra_list->pkt_count++;
 
@@ -824,6 +916,8 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 		atomic_set(&priv->wmm.highest_queued_prio,
 			   tos_to_tid_inv[tid_down]);
 =======
+=======
+>>>>>>> v3.18
 	ra_list->ba_pkt_count++;
 	ra_list->total_pkt_count++;
 
@@ -831,6 +925,9 @@ mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 						priv->tos_to_tid_inv[tid_down])
 		atomic_set(&priv->wmm.highest_queued_prio,
 			   priv->tos_to_tid_inv[tid_down]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	atomic_inc(&priv->wmm.tx_pkts_queued);
@@ -855,7 +952,11 @@ int mwifiex_ret_wmm_get_status(struct mwifiex_private *priv,
 	u8 *curr = (u8 *) &resp->params.get_wmm_status;
 	uint16_t resp_len = le16_to_cpu(resp->size), tlv_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int valid = true;
+=======
+	bool valid = true;
+>>>>>>> v3.18
 =======
 	bool valid = true;
 >>>>>>> v3.18
@@ -873,6 +974,12 @@ int mwifiex_ret_wmm_get_status(struct mwifiex_private *priv,
 		tlv_len = le16_to_cpu(tlv_hdr->header.len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (resp_len < tlv_len + sizeof(tlv_hdr->header))
+			break;
+
+>>>>>>> v3.18
 =======
 		if (resp_len < tlv_len + sizeof(tlv_hdr->header))
 			break;
@@ -1005,6 +1112,7 @@ mwifiex_wmm_compute_drv_pkt_delay(struct mwifiex_private *priv,
 				  const struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ret_val;
 	struct timeval out_tstamp, in_tstamp;
 	u32 queue_delay;
@@ -1014,6 +1122,10 @@ mwifiex_wmm_compute_drv_pkt_delay(struct mwifiex_private *priv,
 
 	queue_delay = (out_tstamp.tv_sec - in_tstamp.tv_sec) * 1000;
 	queue_delay += (out_tstamp.tv_usec - in_tstamp.tv_usec) / 1000;
+=======
+	u32 queue_delay = ktime_to_ms(net_timedelta(skb->tstamp));
+	u8 ret_val;
+>>>>>>> v3.18
 =======
 	u32 queue_delay = ktime_to_ms(net_timedelta(skb->tstamp));
 	u8 ret_val;
@@ -1199,7 +1311,11 @@ mwifiex_send_single_packet(struct mwifiex_private *priv,
 	dev_dbg(adapter->dev, "data: dequeuing the packet %p %p\n", ptr, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr->total_pkts_size -= skb->len;
+=======
+	ptr->total_pkt_count--;
+>>>>>>> v3.18
 =======
 	ptr->total_pkt_count--;
 >>>>>>> v3.18
@@ -1228,8 +1344,13 @@ mwifiex_send_single_packet(struct mwifiex_private *priv,
 		skb_queue_tail(&ptr->skb_head, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptr->total_pkts_size += skb->len;
 		ptr->pkt_count++;
+=======
+		ptr->total_pkt_count++;
+		ptr->ba_pkt_count++;
+>>>>>>> v3.18
 =======
 		ptr->total_pkt_count++;
 		ptr->ba_pkt_count++;
@@ -1386,6 +1507,7 @@ mwifiex_dequeue_tx_packet(struct mwifiex_adapter *adapter)
 	if (!ptr->is_11n_enabled ||
 	    mwifiex_is_ba_stream_setup(priv, ptr, tid) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    priv->wps.session_enable ||
 	    ((priv->sec_info.wpa_enabled ||
 	      priv->sec_info.wpa2_enabled) &&
@@ -1397,6 +1519,8 @@ mwifiex_dequeue_tx_packet(struct mwifiex_adapter *adapter)
 		if (mwifiex_is_ampdu_allowed(priv, tid) &&
 		    ptr->pkt_count > ptr->ba_packet_thr) {
 =======
+=======
+>>>>>>> v3.18
 	    priv->wps.session_enable) {
 		if (ptr->is_11n_enabled &&
 		    mwifiex_is_ba_stream_setup(priv, ptr, tid) &&
@@ -1416,6 +1540,9 @@ mwifiex_dequeue_tx_packet(struct mwifiex_adapter *adapter)
 	} else {
 		if (mwifiex_is_ampdu_allowed(priv, ptr, tid) &&
 		    ptr->ba_pkt_count > ptr->ba_packet_thr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (mwifiex_space_avail_for_new_ba_stream(adapter)) {
 				mwifiex_create_ba_tbl(priv, ptr->ra, tid,

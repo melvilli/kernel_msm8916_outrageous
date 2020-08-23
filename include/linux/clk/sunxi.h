@@ -1,8 +1,12 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2012 Maxime Ripard
  *
  * Maxime Ripard <maxime.ripard@free-electrons.com>
+=======
+ * Copyright 2013 - Hans de Goede <hdegoede@redhat.com>
+>>>>>>> v3.18
 =======
  * Copyright 2013 - Hans de Goede <hdegoede@redhat.com>
 >>>>>>> v3.18
@@ -22,7 +26,13 @@
 #define __LINUX_CLK_SUNXI_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init sunxi_init_clocks(void);
+=======
+#include <linux/clk.h>
+
+void clk_sunxi_mmc_phase_control(struct clk *clk, u8 sample, u8 output);
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 

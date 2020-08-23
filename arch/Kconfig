@@ -87,9 +87,13 @@ config KPROBES_ON_FTRACE
 
 config UPROBES
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Transparent user-space probes (EXPERIMENTAL)"
 	depends on UPROBE_EVENT && PERF_EVENTS
 	default n
+=======
+	def_bool n
+>>>>>>> v3.18
 =======
 	def_bool n
 >>>>>>> v3.18
@@ -106,8 +110,11 @@ config UPROBES
 	    application. )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  If in doubt, say "N".
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HAVE_64BIT_ALIGNED_ACCESS
@@ -291,9 +298,12 @@ config HAVE_ARCH_JUMP_LABEL
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_ARCH_MUTEX_CPU_RELAX
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HAVE_RCU_TABLE_FREE
@@ -341,7 +351,10 @@ config HAVE_ARCH_SECCOMP_FILTER
 	  - seccomp syscall wired up
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  For best performance, an arch should use seccomp_phase1 and
 	  seccomp_phase2 directly.  It should call seccomp_phase1 for all
 	  syscalls if TIF_SECCOMP is set, but seccomp_phase1 does not
@@ -353,6 +366,9 @@ config HAVE_ARCH_SECCOMP_FILTER
 	  directly to seccomp_phase1; this avoids multiple calls
 	  to the syscall_xyz helpers for every syscall.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SECCOMP_FILTER
 	def_bool y
@@ -446,7 +462,10 @@ config HAVE_VIRT_CPU_ACCOUNTING
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HAVE_VIRT_CPU_ACCOUNTING_GEN
 	bool
 	default y if 64BIT
@@ -459,6 +478,9 @@ config HAVE_VIRT_CPU_ACCOUNTING_GEN
 	  locking is needed to protect against concurrent accesses.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HAVE_IRQ_TIME_ACCOUNTING
 	bool
@@ -470,6 +492,12 @@ config HAVE_ARCH_TRANSPARENT_HUGEPAGE
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config HAVE_ARCH_SOFT_DIRTY
+	bool
+
+>>>>>>> v3.18
 =======
 config HAVE_ARCH_SOFT_DIRTY
 	bool
@@ -500,6 +528,7 @@ config HAVE_UNDERSCORE_SYMBOL_PREFIX
 	  Some architectures generate an _ in front of C symbols; things like
 	  module loading and assembly files need to know about this.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config HAVE_ARCH_MMAP_RND_BITS
 	bool
@@ -569,6 +598,8 @@ config ARCH_MMAP_RND_COMPAT_BITS
 	  This value can be changed after boot using the
 	  /proc/sys/vm/mmap_rnd_compat_bits tunable
 =======
+=======
+>>>>>>> v3.18
 config HAVE_IRQ_EXIT_ON_IRQ_STACK
 	bool
 	help
@@ -578,6 +609,9 @@ config HAVE_IRQ_EXIT_ON_IRQ_STACK
 	  in the end of an hardirq.
 	  This spares a stack switch and improves cache usage on softirq
 	  processing.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #

@@ -29,6 +29,12 @@
 #include <mach/netx-regs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NETX_CLOCK_FREQ 100000000
+#define NETX_LATCH DIV_ROUND_CLOSEST(NETX_CLOCK_FREQ, HZ)
+
+>>>>>>> v3.18
 =======
 #define NETX_CLOCK_FREQ 100000000
 #define NETX_LATCH DIV_ROUND_CLOSEST(NETX_CLOCK_FREQ, HZ)
@@ -48,7 +54,11 @@ static void netx_set_mode(enum clock_event_mode mode,
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writel(LATCH, NETX_GPIO_COUNTER_MAX(TIMER_CLOCKEVENT));
+=======
+		writel(NETX_LATCH, NETX_GPIO_COUNTER_MAX(TIMER_CLOCKEVENT));
+>>>>>>> v3.18
 =======
 		writel(NETX_LATCH, NETX_GPIO_COUNTER_MAX(TIMER_CLOCKEVENT));
 >>>>>>> v3.18
@@ -110,7 +120,11 @@ netx_timer_interrupt(int irq, void *dev_id)
 static struct irqaction netx_timer_irq = {
 	.name		= "NetX Timer Tick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -129,7 +143,11 @@ void __init netx_timer_init(void)
 	writel(0, NETX_GPIO_COUNTER_CURRENT(0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(LATCH, NETX_GPIO_COUNTER_MAX(0));
+=======
+	writel(NETX_LATCH, NETX_GPIO_COUNTER_MAX(0));
+>>>>>>> v3.18
 =======
 	writel(NETX_LATCH, NETX_GPIO_COUNTER_MAX(0));
 >>>>>>> v3.18
@@ -156,7 +174,11 @@ void __init netx_timer_init(void)
 
 	clocksource_mmio_init(NETX_GPIO_COUNTER_CURRENT(TIMER_CLOCKSOURCE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"netx_timer", CLOCK_TICK_RATE, 200, 32, clocksource_mmio_readl_up);
+=======
+		"netx_timer", NETX_CLOCK_FREQ, 200, 32, clocksource_mmio_readl_up);
+>>>>>>> v3.18
 =======
 		"netx_timer", NETX_CLOCK_FREQ, 200, 32, clocksource_mmio_readl_up);
 >>>>>>> v3.18
@@ -165,7 +187,11 @@ void __init netx_timer_init(void)
 	 * Adding some safety ... */
 	netx_clockevent.cpumask = cpumask_of(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clockevents_config_and_register(&netx_clockevent, CLOCK_TICK_RATE,
+=======
+	clockevents_config_and_register(&netx_clockevent, NETX_CLOCK_FREQ,
+>>>>>>> v3.18
 =======
 	clockevents_config_and_register(&netx_clockevent, NETX_CLOCK_FREQ,
 >>>>>>> v3.18

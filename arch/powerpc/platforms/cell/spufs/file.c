@@ -2339,7 +2339,10 @@ static unsigned long long spufs_acct_time(struct spu_context *ctx,
 		enum spu_utilization_state state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long long time = ctx->stats.times[state];
@@ -2355,8 +2358,12 @@ static unsigned long long spufs_acct_time(struct spu_context *ctx,
 	 */
 	if (ctx->spu && ctx->stats.util_state == state) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ktime_get_ts(&ts);
 		time += timespec_to_ns(&ts) - ctx->stats.tstamp;
+=======
+		time += ktime_get_ns() - ctx->stats.tstamp;
+>>>>>>> v3.18
 =======
 		time += ktime_get_ns() - ctx->stats.tstamp;
 >>>>>>> v3.18

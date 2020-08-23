@@ -85,15 +85,21 @@ void __init realview_clk_init(void __iomem *sysbase, bool is_pb1176)
 	/* ICST VCO clock */
 	if (is_pb1176)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk = icst_clk_register(NULL, &realview_osc0_desc, sysbase);
 	else
 		clk = icst_clk_register(NULL, &realview_osc4_desc, sysbase);
 =======
+=======
+>>>>>>> v3.18
 		clk = icst_clk_register(NULL, &realview_osc0_desc,
 					"osc0", NULL, sysbase);
 	else
 		clk = icst_clk_register(NULL, &realview_osc4_desc,
 					"osc4", NULL, sysbase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk_register_clkdev(clk, NULL, "dev:clcd");

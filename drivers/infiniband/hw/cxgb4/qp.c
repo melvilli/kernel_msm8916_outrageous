@@ -59,7 +59,10 @@ module_param(max_fr_immd, int, 0644);
 MODULE_PARM_DESC(max_fr_immd, "fastreg threshold for using DSGL instead of immedate");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int alloc_ird(struct c4iw_dev *dev, u32 ird)
 {
 	int ret = 0;
@@ -85,6 +88,9 @@ static void free_ird(struct c4iw_dev *dev, int ird)
 	spin_unlock_irq(&dev->lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void set_state(struct c4iw_qp *qhp, enum c4iw_qp_state state)
 {
@@ -209,9 +215,15 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * RQT must be a power of 2.
 	 */
 	wq->rq.rqt_size = roundup_pow_of_two(wq->rq.size);
+=======
+	 * RQT must be a power of 2 and at least 16 deep.
+	 */
+	wq->rq.rqt_size = roundup_pow_of_two(max_t(u16, wq->rq.size, 16));
+>>>>>>> v3.18
 =======
 	 * RQT must be a power of 2 and at least 16 deep.
 	 */
@@ -247,6 +259,7 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 	wq->db = rdev->lldi.db_reg;
 	wq->gts = rdev->lldi.gts_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (user) {
 		wq->sq.udb = (u64)pci_resource_start(rdev->lldi.pdev, 2) +
 					(wq->sq.qid << rdev->qpshift);
@@ -255,6 +268,8 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 					(wq->rq.qid << rdev->qpshift);
 		wq->rq.udb &= PAGE_MASK;
 =======
+=======
+>>>>>>> v3.18
 	if (user || is_t5(rdev->lldi.adapter_type)) {
 		u32 off;
 
@@ -272,6 +287,9 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 			off += 128 * (wq->rq.qid & rdev->qpmask) + 8;
 			wq->rq.udb = (u64 __iomem *)(rdev->bar2_kva + off);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	wq->rdev = rdev;
@@ -303,7 +321,12 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 	 * eqsize is the number of 64B entries plus the status page size.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eqsize = wq->sq.size * T4_SQ_NUM_SLOTS + T4_EQ_STATUS_ENTRIES;
+=======
+	eqsize = wq->sq.size * T4_SQ_NUM_SLOTS +
+		rdev->hw_queue.t4_eq_status_entries;
+>>>>>>> v3.18
 =======
 	eqsize = wq->sq.size * T4_SQ_NUM_SLOTS +
 		rdev->hw_queue.t4_eq_status_entries;
@@ -333,7 +356,12 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 	 * eqsize is the number of 64B entries plus the status page size.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eqsize = wq->rq.size * T4_RQ_NUM_SLOTS + T4_EQ_STATUS_ENTRIES;
+=======
+	eqsize = wq->rq.size * T4_RQ_NUM_SLOTS +
+		rdev->hw_queue.t4_eq_status_entries;
+>>>>>>> v3.18
 =======
 	eqsize = wq->rq.size * T4_RQ_NUM_SLOTS +
 		rdev->hw_queue.t4_eq_status_entries;
@@ -364,14 +392,20 @@ static int create_qp(struct c4iw_rdev *rdev, struct t4_wq *wq,
 		goto free_dma;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDBG("%s sqid 0x%x rqid 0x%x kdb 0x%p squdb 0x%llx rqudb 0x%llx\n",
 	     __func__, wq->sq.qid, wq->rq.qid, wq->db,
 	     (unsigned long long)wq->sq.udb, (unsigned long long)wq->rq.udb);
 =======
+=======
+>>>>>>> v3.18
 	PDBG("%s sqid 0x%x rqid 0x%x kdb 0x%p squdb 0x%lx rqudb 0x%lx\n",
 	     __func__, wq->sq.qid, wq->rq.qid, wq->db,
 	     (__force unsigned long) wq->sq.udb,
 	     (__force unsigned long) wq->rq.udb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -497,6 +531,11 @@ static int build_rdma_send(struct t4_sq *sq, union t4_wr *wqe,
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wqe->send.r3 = 0;
+	wqe->send.r4 = 0;
+>>>>>>> v3.18
 =======
 	wqe->send.r3 = 0;
 	wqe->send.r4 = 0;
@@ -632,7 +671,12 @@ static int build_fastreg(struct t4_sq *sq, union t4_wr *wqe,
 	int rem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wr->wr.fast_reg.page_list_len > T4_MAX_FR_DEPTH)
+=======
+	if (wr->wr.fast_reg.page_list_len >
+	    t4_max_fr_depth(use_dsgl))
+>>>>>>> v3.18
 =======
 	if (wr->wr.fast_reg.page_list_len >
 	    t4_max_fr_depth(use_dsgl))
@@ -720,7 +764,10 @@ void c4iw_qp_rem_ref(struct ib_qp *qp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void add_to_fc_list(struct list_head *head, struct list_head *entry)
 {
 	if (list_empty(entry))
@@ -763,6 +810,9 @@ static int ring_kernel_rq_db(struct c4iw_qp *qhp, u16 inc)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 		   struct ib_send_wr **bad_wr)
@@ -773,7 +823,11 @@ int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 	enum fw_ri_wr_flags fw_flags;
 	struct c4iw_qp *qhp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union t4_wr *wqe;
+=======
+	union t4_wr *wqe = NULL;
+>>>>>>> v3.18
 =======
 	union t4_wr *wqe = NULL;
 >>>>>>> v3.18
@@ -806,7 +860,11 @@ int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 		if (wr->send_flags & IB_SEND_SOLICITED)
 			fw_flags |= FW_RI_SOLICITED_EVENT_FLAG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (wr->send_flags & IB_SEND_SIGNALED)
+=======
+		if (wr->send_flags & IB_SEND_SIGNALED || qhp->sq_sig_all)
+>>>>>>> v3.18
 =======
 		if (wr->send_flags & IB_SEND_SIGNALED || qhp->sq_sig_all)
 >>>>>>> v3.18
@@ -871,9 +929,12 @@ int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 		swsqe->idx = qhp->wq.sq.pidx;
 		swsqe->complete = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		swsqe->signaled = (wr->send_flags & IB_SEND_SIGNALED);
 		swsqe->wr_id = wr->wr_id;
 =======
+=======
+>>>>>>> v3.18
 		swsqe->signaled = (wr->send_flags & IB_SEND_SIGNALED) ||
 				  qhp->sq_sig_all;
 		swsqe->flushed = 0;
@@ -883,6 +944,9 @@ int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 					qhp->rhp->rdev.lldi.ports[0]);
 			getnstimeofday(&swsqe->host_ts);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		init_wr_hdr(wqe, qhp->wq.sq.pidx, fw_opcode, fw_flags, len16);
@@ -896,10 +960,13 @@ int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 		idx += DIV_ROUND_UP(len16*16, T4_EQ_ENTRY_SIZE);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (t4_wq_db_enabled(&qhp->wq))
 		t4_ring_sq_db(&qhp->wq, idx);
 	spin_unlock_irqrestore(&qhp->lock, flag);
 =======
+=======
+>>>>>>> v3.18
 	if (!qhp->rhp->rdev.status_page->db_off) {
 		t4_ring_sq_db(&qhp->wq, idx,
 			      is_t5(qhp->rhp->rdev.lldi.adapter_type), wqe);
@@ -908,6 +975,9 @@ int c4iw_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
 		spin_unlock_irqrestore(&qhp->lock, flag);
 		ring_kernel_sq_db(qhp, idx);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -918,7 +988,11 @@ int c4iw_post_receive(struct ib_qp *ibqp, struct ib_recv_wr *wr,
 	int err = 0;
 	struct c4iw_qp *qhp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union t4_recv_wr *wqe;
+=======
+	union t4_recv_wr *wqe = NULL;
+>>>>>>> v3.18
 =======
 	union t4_recv_wr *wqe = NULL;
 >>>>>>> v3.18
@@ -958,7 +1032,10 @@ int c4iw_post_receive(struct ib_qp *ibqp, struct ib_recv_wr *wr,
 
 		qhp->wq.rq.sw_rq[qhp->wq.rq.pidx].wr_id = wr->wr_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (c4iw_wr_log) {
 			qhp->wq.rq.sw_rq[qhp->wq.rq.pidx].sge_ts =
 				cxgb4_read_sge_timestamp(
@@ -966,6 +1043,9 @@ int c4iw_post_receive(struct ib_qp *ibqp, struct ib_recv_wr *wr,
 			getnstimeofday(
 				&qhp->wq.rq.sw_rq[qhp->wq.rq.pidx].host_ts);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		wqe->recv.opcode = FW_RI_RECV_WR;
@@ -983,10 +1063,13 @@ int c4iw_post_receive(struct ib_qp *ibqp, struct ib_recv_wr *wr,
 		num_wrs--;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (t4_wq_db_enabled(&qhp->wq))
 		t4_ring_rq_db(&qhp->wq, idx);
 	spin_unlock_irqrestore(&qhp->lock, flag);
 =======
+=======
+>>>>>>> v3.18
 	if (!qhp->rhp->rdev.status_page->db_off) {
 		t4_ring_rq_db(&qhp->wq, idx,
 			      is_t5(qhp->rhp->rdev.lldi.adapter_type), wqe);
@@ -995,6 +1078,9 @@ int c4iw_post_receive(struct ib_qp *ibqp, struct ib_recv_wr *wr,
 		spin_unlock_irqrestore(&qhp->lock, flag);
 		ring_kernel_rq_db(qhp, idx);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1181,7 +1267,11 @@ static void __flush_qp(struct c4iw_qp *qhp, struct c4iw_cq *rchp,
 {
 	int count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int flushed;
+=======
+	int rq_flushed, sq_flushed;
+>>>>>>> v3.18
 =======
 	int rq_flushed, sq_flushed;
 >>>>>>> v3.18
@@ -1192,6 +1282,7 @@ static void __flush_qp(struct c4iw_qp *qhp, struct c4iw_cq *rchp,
 	/* locking hierarchy: cq lock first, then qp lock. */
 	spin_lock_irqsave(&rchp->lock, flag);
 	spin_lock(&qhp->lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	c4iw_flush_hw_cq(&rchp->cq);
 	c4iw_count_rcqes(&rchp->cq, &qhp->wq, &count);
@@ -1204,6 +1295,8 @@ static void __flush_qp(struct c4iw_qp *qhp, struct c4iw_cq *rchp,
 		spin_unlock_irqrestore(&rchp->comp_handler_lock, flag);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (qhp->wq.flushed) {
 		spin_unlock(&qhp->lock);
@@ -1217,11 +1310,15 @@ static void __flush_qp(struct c4iw_qp *qhp, struct c4iw_cq *rchp,
 	rq_flushed = c4iw_flush_rq(&qhp->wq, &rchp->cq, count);
 	spin_unlock(&qhp->lock);
 	spin_unlock_irqrestore(&rchp->lock, flag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* locking hierarchy: cq lock first, then qp lock. */
 	spin_lock_irqsave(&schp->lock, flag);
 	spin_lock(&qhp->lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	c4iw_flush_hw_cq(&schp->cq);
 	c4iw_count_scqes(&schp->cq, &qhp->wq, &count);
@@ -1233,6 +1330,8 @@ static void __flush_qp(struct c4iw_qp *qhp, struct c4iw_cq *rchp,
 		(*schp->ibcq.comp_handler)(&schp->ibcq, schp->ibcq.cq_context);
 		spin_unlock_irqrestore(&schp->comp_handler_lock, flag);
 =======
+=======
+>>>>>>> v3.18
 	if (schp != rchp)
 		c4iw_flush_hw_cq(schp);
 	sq_flushed = c4iw_flush_sq(qhp);
@@ -1260,6 +1359,9 @@ static void __flush_qp(struct c4iw_qp *qhp, struct c4iw_cq *rchp,
 						   schp->ibcq.cq_context);
 			spin_unlock_irqrestore(&schp->comp_handler_lock, flag);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1270,17 +1372,23 @@ static void flush_qp(struct c4iw_qp *qhp)
 	unsigned long flag;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rchp = get_chp(qhp->rhp, qhp->attr.rcq);
 	schp = get_chp(qhp->rhp, qhp->attr.scq);
 
 	if (qhp->ibqp.uobject) {
 		t4_set_wq_in_error(&qhp->wq);
 =======
+=======
+>>>>>>> v3.18
 	rchp = to_c4iw_cq(qhp->ibqp.recv_cq);
 	schp = to_c4iw_cq(qhp->ibqp.send_cq);
 
 	t4_set_wq_in_error(&qhp->wq);
 	if (qhp->ibqp.uobject) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		t4_set_cq_in_error(&rchp->cq);
 		spin_lock_irqsave(&rchp->comp_handler_lock, flag);
@@ -1367,6 +1475,7 @@ static int rdma_init(struct c4iw_dev *rhp, struct c4iw_qp *qhp)
 	struct sk_buff *skb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDBG("%s qhp %p qid 0x%x tid %u\n", __func__, qhp, qhp->wq.sq.qid,
 	     qhp->ep->hwtid);
 
@@ -1374,6 +1483,8 @@ static int rdma_init(struct c4iw_dev *rhp, struct c4iw_qp *qhp)
 	if (!skb)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	PDBG("%s qhp %p qid 0x%x tid %u ird %u ord %u\n", __func__, qhp,
 	     qhp->wq.sq.qid, qhp->ep->hwtid, qhp->ep->ird, qhp->ep->ord);
 
@@ -1388,6 +1499,9 @@ static int rdma_init(struct c4iw_dev *rhp, struct c4iw_qp *qhp)
 		kfree_skb(skb);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_wr_txq(skb, CPL_PRIORITY_DATA, qhp->ep->txq_idx);
 
@@ -1440,11 +1554,14 @@ static int rdma_init(struct c4iw_dev *rhp, struct c4iw_qp *qhp)
 	ret = c4iw_ofld_send(&rhp->rdev, skb);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 
 	ret = c4iw_wait_for_reply(&rhp->rdev, &qhp->ep->com.wr_wait,
 				  qhp->ep->hwtid, qhp->wq.sq.qid, __func__);
 =======
+=======
+>>>>>>> v3.18
 		goto err1;
 
 	ret = c4iw_wait_for_reply(&rhp->rdev, &qhp->ep->com.wr_wait,
@@ -1453,12 +1570,16 @@ static int rdma_init(struct c4iw_dev *rhp, struct c4iw_qp *qhp)
 		goto out;
 err1:
 	free_ird(rhp, qhp->attr.max_ird);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	PDBG("%s ret %d\n", __func__, ret);
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Called by the library when the qp has user dbs disabled due to
@@ -1489,6 +1610,8 @@ static int ring_kernel_db(struct c4iw_qp *qhp, u32 qid, u16 inc)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
@@ -1531,7 +1654,11 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 		}
 		if (mask & C4IW_QP_ATTR_MAX_IRD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (attrs->max_ird > c4iw_max_read_depth) {
+=======
+			if (attrs->max_ird > cur_max_read_depth(rhp)) {
+>>>>>>> v3.18
 =======
 			if (attrs->max_ird > cur_max_read_depth(rhp)) {
 >>>>>>> v3.18
@@ -1545,17 +1672,23 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 
 	if (mask & C4IW_QP_ATTR_SQ_DB) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ring_kernel_db(qhp, qhp->wq.sq.qid, attrs->sq_db_inc);
 		goto out;
 	}
 	if (mask & C4IW_QP_ATTR_RQ_DB) {
 		ret = ring_kernel_db(qhp, qhp->wq.rq.qid, attrs->rq_db_inc);
 =======
+=======
+>>>>>>> v3.18
 		ret = ring_kernel_sq_db(qhp, attrs->sq_db_inc);
 		goto out;
 	}
 	if (mask & C4IW_QP_ATTR_RQ_DB) {
 		ret = ring_kernel_rq_db(qhp, attrs->rq_db_inc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -1607,6 +1740,10 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 		case C4IW_QP_STATE_CLOSING:
 			BUG_ON(atomic_read(&qhp->ep->com.kref.refcount) < 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			t4_set_wq_in_error(&qhp->wq);
+>>>>>>> v3.18
 =======
 			t4_set_wq_in_error(&qhp->wq);
 >>>>>>> v3.18
@@ -1618,8 +1755,11 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 				c4iw_get_ep(&qhp->ep->com);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (qhp->ibqp.uobject)
 				t4_set_wq_in_error(&qhp->wq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ret = rdma_fini(rhp, qhp, ep);
@@ -1627,6 +1767,7 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 				goto err;
 			break;
 		case C4IW_QP_STATE_TERMINATE:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			set_state(qhp, C4IW_QP_STATE_TERMINATE);
 			qhp->attr.layer_etype = attrs->layer_etype;
@@ -1644,6 +1785,8 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 			if (qhp->ibqp.uobject)
 				t4_set_wq_in_error(&qhp->wq);
 =======
+=======
+>>>>>>> v3.18
 			t4_set_wq_in_error(&qhp->wq);
 			set_state(qhp, C4IW_QP_STATE_TERMINATE);
 			qhp->attr.layer_etype = attrs->layer_etype;
@@ -1663,6 +1806,9 @@ int c4iw_modify_qp(struct c4iw_dev *rhp, struct c4iw_qp *qhp,
 		case C4IW_QP_STATE_ERROR:
 			t4_set_wq_in_error(&qhp->wq);
 			set_state(qhp, C4IW_QP_STATE_ERROR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!internal) {
 				abort = 1;
@@ -1767,6 +1913,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int enable_qp_db(int id, void *p, void *data)
 {
 	struct c4iw_qp *qp = p;
@@ -1775,6 +1922,8 @@ static int enable_qp_db(int id, void *p, void *data)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int c4iw_destroy_qp(struct ib_qp *ib_qp)
@@ -1795,6 +1944,7 @@ int c4iw_destroy_qp(struct ib_qp *ib_qp)
 	wait_event(qhp->wait, !qhp->ep);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&rhp->lock);
 	remove_handle_nolock(rhp, &rhp->qpidr, qhp->wq.sq.qid);
 	rhp->qpcnt--;
@@ -1812,6 +1962,8 @@ int c4iw_destroy_qp(struct ib_qp *ib_qp)
 	wait_event(qhp->wait, !atomic_read(&qhp->refcnt));
 
 =======
+=======
+>>>>>>> v3.18
 	remove_handle(rhp, &rhp->qpidr, qhp->wq.sq.qid);
 	atomic_dec(&qhp->refcnt);
 	wait_event(qhp->wait, !atomic_read(&qhp->refcnt));
@@ -1822,6 +1974,9 @@ int c4iw_destroy_qp(struct ib_qp *ib_qp)
 	spin_unlock_irq(&rhp->lock);
 	free_ird(rhp, qhp->attr.max_ird);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ucontext = ib_qp->uobject ?
 		   to_c4iw_ucontext(ib_qp->uobject->context) : NULL;
@@ -1834,6 +1989,7 @@ int c4iw_destroy_qp(struct ib_qp *ib_qp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int disable_qp_db(int id, void *p, void *data)
 {
 	struct c4iw_qp *qp = p;
@@ -1842,6 +1998,8 @@ static int disable_qp_db(int id, void *p, void *data)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
@@ -1854,7 +2012,11 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 	struct c4iw_cq *rchp;
 	struct c4iw_create_qp_resp uresp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sqsize, rqsize;
+=======
+	unsigned int sqsize, rqsize;
+>>>>>>> v3.18
 =======
 	unsigned int sqsize, rqsize;
 >>>>>>> v3.18
@@ -1878,6 +2040,7 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 		return ERR_PTR(-EINVAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rqsize = roundup(attrs->cap.max_recv_wr + 1, 16);
 	if (rqsize > T4_MAX_RQ_SIZE)
 		return ERR_PTR(-E2BIG);
@@ -1890,6 +2053,8 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 
 
 =======
+=======
+>>>>>>> v3.18
 	if (attrs->cap.max_recv_wr > rhp->rdev.hw_queue.t4_max_rq_size)
 		return ERR_PTR(-E2BIG);
 	rqsize = attrs->cap.max_recv_wr + 1;
@@ -1904,16 +2069,22 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 
 	ucontext = pd->uobject ? to_c4iw_ucontext(pd->uobject->context) : NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qhp = kzalloc(sizeof(*qhp), GFP_KERNEL);
 	if (!qhp)
 		return ERR_PTR(-ENOMEM);
 	qhp->wq.sq.size = sqsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qhp->wq.sq.memsize = (sqsize + 1) * sizeof *qhp->wq.sq.queue;
 	qhp->wq.rq.size = rqsize;
 	qhp->wq.rq.memsize = (rqsize + 1) * sizeof *qhp->wq.rq.queue;
 =======
+=======
+>>>>>>> v3.18
 	qhp->wq.sq.memsize =
 		(sqsize + rhp->rdev.hw_queue.t4_eq_status_entries) *
 		sizeof(*qhp->wq.sq.queue) + 16 * sizeof(__be64);
@@ -1922,6 +2093,9 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 	qhp->wq.rq.memsize =
 		(rqsize + rhp->rdev.hw_queue.t4_eq_status_entries) *
 		sizeof(*qhp->wq.rq.queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ucontext) {
@@ -1930,9 +2104,12 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDBG("%s sqsize %u sqmemsize %zu rqsize %u rqmemsize %zu\n",
 	     __func__, sqsize, qhp->wq.sq.memsize, rqsize, qhp->wq.rq.memsize);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = create_qp(&rhp->rdev, &qhp->wq, &schp->cq, &rchp->cq,
@@ -1959,8 +2136,14 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 	qhp->attr.enable_rdma_write = 1;
 	qhp->attr.enable_bind = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qhp->attr.max_ord = 1;
 	qhp->attr.max_ird = 1;
+=======
+	qhp->attr.max_ord = 0;
+	qhp->attr.max_ird = 0;
+	qhp->sq_sig_all = attrs->sq_sig_type == IB_SIGNAL_ALL_WR;
+>>>>>>> v3.18
 =======
 	qhp->attr.max_ord = 0;
 	qhp->attr.max_ird = 0;
@@ -1971,6 +2154,7 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 	init_waitqueue_head(&qhp->wait);
 	atomic_set(&qhp->refcnt, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(&rhp->lock);
 	if (rhp->db_state != NORMAL)
@@ -1986,6 +2170,9 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 			cxgb4_disable_db_coalescing(rhp->rdev.lldi.ports[0]);
 	ret = insert_handle_nolock(rhp, &rhp->qpidr, qhp, qhp->wq.sq.qid);
 	spin_unlock_irq(&rhp->lock);
+=======
+	ret = insert_handle(rhp, &rhp->qpidr, qhp, qhp->wq.sq.qid);
+>>>>>>> v3.18
 =======
 	ret = insert_handle(rhp, &rhp->qpidr, qhp, qhp->wq.sq.qid);
 >>>>>>> v3.18
@@ -2034,6 +2221,11 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 			uresp.ma_sync_key = ucontext->key;
 			ucontext->key += PAGE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		} else {
+			uresp.ma_sync_key =  0;
+>>>>>>> v3.18
 =======
 		} else {
 			uresp.ma_sync_key =  0;
@@ -2061,17 +2253,23 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 		insert_mmap(ucontext, mm2);
 		mm3->key = uresp.sq_db_gts_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mm3->addr = qhp->wq.sq.udb;
 		mm3->len = PAGE_SIZE;
 		insert_mmap(ucontext, mm3);
 		mm4->key = uresp.rq_db_gts_key;
 		mm4->addr = qhp->wq.rq.udb;
 =======
+=======
+>>>>>>> v3.18
 		mm3->addr = (__force unsigned long) qhp->wq.sq.udb;
 		mm3->len = PAGE_SIZE;
 		insert_mmap(ucontext, mm3);
 		mm4->key = uresp.rq_db_gts_key;
 		mm4->addr = (__force unsigned long) qhp->wq.rq.udb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mm4->len = PAGE_SIZE;
 		insert_mmap(ucontext, mm4);
@@ -2086,16 +2284,22 @@ struct ib_qp *c4iw_create_qp(struct ib_pd *pd, struct ib_qp_init_attr *attrs,
 	qhp->ibqp.qp_num = qhp->wq.sq.qid;
 	init_timer(&(qhp->timer));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDBG("%s qhp %p sq_num_entries %d, rq_num_entries %d qpid 0x%0x\n",
 	     __func__, qhp, qhp->attr.sq_num_entries, qhp->attr.rq_num_entries,
 	     qhp->wq.sq.qid);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&qhp->db_fc_entry);
 	PDBG("%s sq id %u size %u memsize %zu num_entries %u "
 	     "rq id %u size %u memsize %zu num_entries %u\n", __func__,
 	     qhp->wq.sq.qid, qhp->wq.sq.size, qhp->wq.sq.memsize,
 	     attrs->cap.max_send_wr, qhp->wq.rq.qid, qhp->wq.rq.size,
 	     qhp->wq.rq.memsize, attrs->cap.max_recv_wr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return &qhp->ibqp;
 err8:
@@ -2158,6 +2362,10 @@ int c4iw_ib_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 	 * Use SQ_PSN and RQ_PSN to pass in IDX_INC values for
 	 * ringing the queue db when we're in DB_FULL mode.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * Only allow this on T4 devices.
+>>>>>>> v3.18
 =======
 	 * Only allow this on T4 devices.
 >>>>>>> v3.18
@@ -2167,6 +2375,12 @@ int c4iw_ib_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 	mask |= (attr_mask & IB_QP_SQ_PSN) ? C4IW_QP_ATTR_SQ_DB : 0;
 	mask |= (attr_mask & IB_QP_RQ_PSN) ? C4IW_QP_ATTR_RQ_DB : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (is_t5(to_c4iw_qp(ibqp)->rhp->rdev.lldi.adapter_type) &&
+	    (mask & (C4IW_QP_ATTR_SQ_DB|C4IW_QP_ATTR_RQ_DB)))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (is_t5(to_c4iw_qp(ibqp)->rhp->rdev.lldi.adapter_type) &&
 	    (mask & (C4IW_QP_ATTR_SQ_DB|C4IW_QP_ATTR_RQ_DB)))
@@ -2191,13 +2405,19 @@ int c4iw_ib_query_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 	memset(init_attr, 0, sizeof *init_attr);
 	attr->qp_state = to_ib_qp_state(qhp->attr.state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	init_attr->cap.max_send_wr = qhp->attr.sq_num_entries;
 	init_attr->cap.max_recv_wr = qhp->attr.rq_num_entries;
 	init_attr->cap.max_send_sge = qhp->attr.sq_max_sges;
 	init_attr->cap.max_recv_sge = qhp->attr.sq_max_sges;
 	init_attr->cap.max_inline_data = T4_MAX_SEND_INLINE;
 	init_attr->sq_sig_type = qhp->sq_sig_all ? IB_SIGNAL_ALL_WR : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

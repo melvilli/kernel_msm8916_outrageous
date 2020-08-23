@@ -45,6 +45,10 @@
 #include <linux/bch.h>
 #include <linux/bitrev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jiffies.h>
+>>>>>>> v3.18
 =======
 #include <linux/jiffies.h>
 >>>>>>> v3.18
@@ -274,7 +278,11 @@ static int poll_status(struct docg4_priv *doc)
 
 	uint16_t flash_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int timeo;
+=======
+	unsigned long timeo;
+>>>>>>> v3.18
 =======
 	unsigned long timeo;
 >>>>>>> v3.18
@@ -286,6 +294,7 @@ static int poll_status(struct docg4_priv *doc)
 	flash_status = readw(docptr + DOC_FLASHCONTROL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timeo = 1000;
 	do {
 		cpu_relax();
@@ -295,6 +304,8 @@ static int poll_status(struct docg4_priv *doc)
 
 	if (!timeo) {
 =======
+=======
+>>>>>>> v3.18
 	timeo = jiffies + msecs_to_jiffies(200); /* generous timeout */
 	do {
 		cpu_relax();
@@ -303,16 +314,22 @@ static int poll_status(struct docg4_priv *doc)
 		 time_before(jiffies, timeo));
 
 	if (unlikely(!(flash_status & DOC_CTRL_FLASHREADY))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(doc->dev, "%s: timed out!\n", __func__);
 		return NAND_STATUS_FAIL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(timeo < 50))
 		dev_warn(doc->dev, "%s: nearly timed out; %d remaining\n",
 			 __func__, timeo);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -517,7 +534,11 @@ static uint8_t docg4_read_byte(struct mtd_info *mtd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_warn(doc->dev, "unexpectd call to read_byte()\n");
+=======
+	dev_warn(doc->dev, "unexpected call to read_byte()\n");
+>>>>>>> v3.18
 =======
 	dev_warn(doc->dev, "unexpected call to read_byte()\n");
 >>>>>>> v3.18
@@ -902,7 +923,11 @@ static int docg4_read_oob(struct mtd_info *mtd, struct nand_chip *nand,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void docg4_erase_block(struct mtd_info *mtd, int page)
+=======
+static int docg4_erase_block(struct mtd_info *mtd, int page)
+>>>>>>> v3.18
 =======
 static int docg4_erase_block(struct mtd_info *mtd, int page)
 >>>>>>> v3.18
@@ -950,6 +975,11 @@ static int docg4_erase_block(struct mtd_info *mtd, int page)
 	poll_status(doc);
 	write_nop(docptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return nand->waitfunc(mtd, nand);
+>>>>>>> v3.18
 =======
 
 	return nand->waitfunc(mtd, nand);
@@ -1129,7 +1159,10 @@ static int docg4_block_markbad(struct mtd_info *mtd, loff_t ofs)
 	struct docg4_priv *doc = nand->priv;
 	struct nand_bbt_descr *bbtd = nand->badblock_pattern;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int block = (int)(ofs >> nand->bbt_erase_shift);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int page = (int)(ofs >> nand->page_shift);
@@ -1147,9 +1180,12 @@ static int docg4_block_markbad(struct mtd_info *mtd, loff_t ofs)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* update bbt in memory */
 	nand->bbt[block / 4] |= 0x01 << ((block & 0x03) * 2);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* write bit-wise negation of pattern to oob buffer */
@@ -1162,8 +1198,11 @@ static int docg4_block_markbad(struct mtd_info *mtd, loff_t ofs)
 	docg4_write_page(mtd, nand, buf, 1);
 	ret = pageprog(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret)
 		mtd->ecc_stats.badblocks++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1290,8 +1329,12 @@ static void __init init_mtd_structs(struct mtd_info *mtd)
 	nand->read_buf = docg4_read_buf;
 	nand->write_buf = docg4_write_buf16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nand->scan_bbt = nand_default_bbt;
 	nand->erase_cmd = docg4_erase_block;
+=======
+	nand->erase = docg4_erase_block;
+>>>>>>> v3.18
 =======
 	nand->erase = docg4_erase_block;
 >>>>>>> v3.18
@@ -1417,7 +1460,10 @@ static int __init probe_docg4(struct platform_device *pdev)
 		struct docg4_priv *doc = nand->priv;
 		nand_release(mtd); /* deletes partitions and mtd devices */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		free_bch(doc->bch);
@@ -1432,7 +1478,10 @@ static int __exit cleanup_docg4(struct platform_device *pdev)
 	struct docg4_priv *doc = platform_get_drvdata(pdev);
 	nand_release(doc->mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_bch(doc->bch);

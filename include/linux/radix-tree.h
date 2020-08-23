@@ -61,7 +61,10 @@ static inline int radix_tree_is_indirect_ptr(void *ptr)
 #define RADIX_TREE_MAX_TAGS 3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __KERNEL__
 #define RADIX_TREE_MAP_SHIFT	(CONFIG_BASE_SMALL ? 4 : 6)
 #else
@@ -105,6 +108,9 @@ struct radix_tree_node {
 	unsigned long	tags[RADIX_TREE_MAX_TAGS][RADIX_TREE_TAG_LONGS];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* root tags are stored in gfp_mask, shifted by __GFP_BITS_SHIFT */
 struct radix_tree_root {
@@ -148,6 +154,10 @@ do {									\
  *
  * The notable exceptions to this rule are the following functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * __radix_tree_lookup
+>>>>>>> v3.18
 =======
  * __radix_tree_lookup
 >>>>>>> v3.18
@@ -267,10 +277,13 @@ static inline void radix_tree_replace_slot(void **pslot, void *item)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radix_tree_insert(struct radix_tree_root *, unsigned long, void *);
 void *radix_tree_lookup(struct radix_tree_root *, unsigned long);
 void **radix_tree_lookup_slot(struct radix_tree_root *, unsigned long);
 =======
+=======
+>>>>>>> v3.18
 int __radix_tree_create(struct radix_tree_root *root, unsigned long index,
 			struct radix_tree_node **nodep, void ***slotp);
 int radix_tree_insert(struct radix_tree_root *, unsigned long, void *);
@@ -281,6 +294,9 @@ void **radix_tree_lookup_slot(struct radix_tree_root *, unsigned long);
 bool __radix_tree_delete_node(struct radix_tree_root *root,
 			      struct radix_tree_node *node);
 void *radix_tree_delete_item(struct radix_tree_root *, unsigned long, void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void *radix_tree_delete(struct radix_tree_root *, unsigned long);
 unsigned int
@@ -290,11 +306,16 @@ unsigned int radix_tree_gang_lookup_slot(struct radix_tree_root *root,
 			void ***results, unsigned long *indices,
 			unsigned long first_index, unsigned int max_items);
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long radix_tree_next_hole(struct radix_tree_root *root,
 				unsigned long index, unsigned long max_scan);
 unsigned long radix_tree_prev_hole(struct radix_tree_root *root,
 				unsigned long index, unsigned long max_scan);
 int radix_tree_preload(gfp_t gfp_mask);
+=======
+int radix_tree_preload(gfp_t gfp_mask);
+int radix_tree_maybe_preload(gfp_t gfp_mask);
+>>>>>>> v3.18
 =======
 int radix_tree_preload(gfp_t gfp_mask);
 int radix_tree_maybe_preload(gfp_t gfp_mask);
@@ -391,6 +412,7 @@ void **radix_tree_next_chunk(struct radix_tree_root *root,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * radix_tree_iter_retry - retry this chunk of the iteration
  * @iter:	iterator state
  *
@@ -409,13 +431,19 @@ void **radix_tree_iter_retry(struct radix_tree_iter *iter)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * radix_tree_chunk_size - get current chunk size
  *
  * @iter:	pointer to radix tree iterator
  * Returns:	current chunk size
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __always_inline long
+=======
+static __always_inline unsigned
+>>>>>>> v3.18
 =======
 static __always_inline unsigned
 >>>>>>> v3.18
@@ -453,9 +481,15 @@ radix_tree_next_slot(void **slot, struct radix_tree_iter *iter, unsigned flags)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		long size = radix_tree_chunk_size(iter);
 
 		while (--size > 0) {
+=======
+		unsigned size = radix_tree_chunk_size(iter) - 1;
+
+		while (size--) {
+>>>>>>> v3.18
 =======
 		unsigned size = radix_tree_chunk_size(iter) - 1;
 

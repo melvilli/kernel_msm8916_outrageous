@@ -2,6 +2,7 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: "snps,dw-apb-timer-sp" or "snps,dw-apb-timer-osc"
 - reg: physical base address of the controller and length of memory mapped
   region.
@@ -25,6 +26,8 @@ Example:
 				reg = <0xffd00000 0x1000>;
 			};
 =======
+=======
+>>>>>>> v3.18
 - compatible: One of:
  	"snps,dw-apb-timer"
 	"snps,dw-apb-timer-sp" <DEPRECATED>
@@ -54,4 +57,7 @@ Example:
 		clocks = <&timer_clk>, <&timer_pclk>;
 		clock-names = "timer", "pclk";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

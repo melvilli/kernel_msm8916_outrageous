@@ -7,6 +7,10 @@
 #include <linux/pageblock-flags.h>
 #include <linux/memory.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hugetlb.h>
+>>>>>>> v3.18
 =======
 #include <linux/hugetlb.h>
 >>>>>>> v3.18
@@ -80,11 +84,17 @@ void unset_migratetype_isolate(struct page *page, unsigned migratetype)
 	struct zone *zone;
 	unsigned long flags, nr_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct page *isolated_page = NULL;
 	unsigned int order;
 	unsigned long page_idx, buddy_idx;
 	struct page *buddy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	zone = page_zone(page);
@@ -92,9 +102,12 @@ void unset_migratetype_isolate(struct page *page, unsigned migratetype)
 	if (get_pageblock_migratetype(page) != MIGRATE_ISOLATE)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_pages = move_freepages_block(zone, page, migratetype);
 	__mod_zone_freepage_state(zone, nr_pages, migratetype);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Because freepage with more than pageblock_order on isolated
@@ -128,12 +141,20 @@ void unset_migratetype_isolate(struct page *page, unsigned migratetype)
 		nr_pages = move_freepages_block(zone, page, migratetype);
 		__mod_zone_freepage_state(zone, nr_pages, migratetype);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_pageblock_migratetype(page, migratetype);
 	zone->nr_isolate_pageblock--;
 out:
 	spin_unlock_irqrestore(&zone->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (isolated_page)
+		__free_pages(isolated_page, order);
+>>>>>>> v3.18
 =======
 	if (isolated_page)
 		__free_pages(isolated_page, order);
@@ -281,9 +302,15 @@ int test_pages_isolated(unsigned long start_pfn, unsigned long end_pfn,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Note: pageblock_nr_page != MAX_ORDER. Then, chunks of free page
 	 * is not aligned to pageblock_nr_pages.
 	 * Then we just check pagetype fist.
+=======
+	 * Note: pageblock_nr_pages != MAX_ORDER. Then, chunks of free pages
+	 * are not aligned to pageblock_nr_pages.
+	 * Then we just check migratetype first.
+>>>>>>> v3.18
 =======
 	 * Note: pageblock_nr_pages != MAX_ORDER. Then, chunks of free pages
 	 * are not aligned to pageblock_nr_pages.
@@ -299,7 +326,11 @@ int test_pages_isolated(unsigned long start_pfn, unsigned long end_pfn,
 	if ((pfn < end_pfn) || !page)
 		return -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check all pages are free or Marked as ISOLATED */
+=======
+	/* Check all pages are free or marked as ISOLATED */
+>>>>>>> v3.18
 =======
 	/* Check all pages are free or marked as ISOLATED */
 >>>>>>> v3.18
@@ -317,7 +348,10 @@ struct page *alloc_migrate_target(struct page *page, unsigned long private,
 	gfp_t gfp_mask = GFP_USER | __GFP_MOVABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * TODO: allocate a destination hugepage from a nearest neighbor node,
 	 * accordance with memory policy of the user process if possible. For
@@ -331,6 +365,9 @@ struct page *alloc_migrate_target(struct page *page, unsigned long private,
 					    next_node(page_to_nid(page), dst));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (PageHighMem(page))
 		gfp_mask |= __GFP_HIGHMEM;

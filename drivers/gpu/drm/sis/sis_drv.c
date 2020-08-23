@@ -71,9 +71,14 @@ static const struct file_operations sis_driver_fops = {
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.mmap = drm_legacy_mmap,
 	.poll = drm_poll,
@@ -101,7 +106,11 @@ static int sis_driver_open(struct drm_device *dev, struct drm_file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
+=======
+static void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
+>>>>>>> v3.18
 =======
 static void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
 >>>>>>> v3.18
@@ -113,7 +122,11 @@ static void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
 
 static struct drm_driver driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_features = DRIVER_USE_AGP | DRIVER_USE_MTRR,
+=======
+	.driver_features = DRIVER_USE_AGP,
+>>>>>>> v3.18
 =======
 	.driver_features = DRIVER_USE_AGP,
 >>>>>>> v3.18
@@ -123,6 +136,10 @@ static struct drm_driver driver = {
 	.preclose = sis_reclaim_buffers_locked,
 	.postclose = sis_driver_postclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 >>>>>>> v3.18

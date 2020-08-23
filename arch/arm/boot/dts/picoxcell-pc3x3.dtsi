@@ -19,6 +19,7 @@
 
 	cpus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		#address-cells = <1>;
 		#size-cells = <0>;
 
@@ -27,6 +28,8 @@
 			cpu-clock = <&arm_clk>, "cpu";
 			reg = <0>;
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <0>;
 		#size-cells = <0>;
 
@@ -34,6 +37,9 @@
 			compatible = "arm,arm1176jz-s";
 			device_type = "cpu";
 			cpu-clock = <&arm_clk>, "cpu";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			d-cache-line-size = <32>;
 			d-cache-size = <32768>;

@@ -29,7 +29,11 @@ static bool ebt_mac_wormhash_contains(const struct ebt_mac_wormhash *wh,
 	int key = ((const unsigned char *)mac)[5];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(((char *) cmp) + 2, mac, 6);
+=======
+	ether_addr_copy(((char *) cmp) + 2, mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(((char *) cmp) + 2, mac);
 >>>>>>> v3.18

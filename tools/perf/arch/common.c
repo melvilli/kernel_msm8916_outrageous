@@ -13,12 +13,18 @@ const char *const arm_triplets[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 const char *const arm64_triplets[] = {
 	"aarch64-linux-android-",
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const char *const powerpc_triplets[] = {
 	"powerpc-unknown-linux-gnu-",
@@ -114,6 +120,11 @@ static const char *normalize_arch(char *arch)
 	if (!strcmp(arch, "sun4u") || !strncmp(arch, "sparc", 5))
 		return "sparc";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!strcmp(arch, "aarch64") || !strcmp(arch, "arm64"))
+		return "arm64";
+>>>>>>> v3.18
 =======
 	if (!strcmp(arch, "aarch64") || !strcmp(arch, "arm64"))
 		return "arm64";
@@ -168,8 +179,12 @@ static int perf_session_env__lookup_binutils_path(struct perf_session_env *env,
 		if (lookup_path(buf))
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(buf);
 		buf = NULL;
+=======
+		zfree(&buf);
+>>>>>>> v3.18
 =======
 		zfree(&buf);
 >>>>>>> v3.18
@@ -178,6 +193,11 @@ static int perf_session_env__lookup_binutils_path(struct perf_session_env *env,
 	if (!strcmp(arch, "arm"))
 		path_list = arm_triplets;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (!strcmp(arch, "arm64"))
+		path_list = arm64_triplets;
+>>>>>>> v3.18
 =======
 	else if (!strcmp(arch, "arm64"))
 		path_list = arm64_triplets;

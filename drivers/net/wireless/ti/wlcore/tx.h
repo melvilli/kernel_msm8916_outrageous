@@ -38,6 +38,10 @@
 #define TX_HW_ATTR_TX_DUMMY_REQ          BIT(13)
 #define TX_HW_ATTR_HOST_ENCRYPT          BIT(14)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TX_HW_ATTR_EAPOL_FRAME           BIT(15)
+>>>>>>> v3.18
 =======
 #define TX_HW_ATTR_EAPOL_FRAME           BIT(15)
 >>>>>>> v3.18
@@ -61,6 +65,12 @@
 #define WL1271_TID_MGMT 7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* stop a ROC for pending authentication reply after this time (ms) */
+#define WLCORE_PEND_AUTH_ROC_TIMEOUT     1000
+
+>>>>>>> v3.18
 =======
 /* stop a ROC for pending authentication reply after this time (ms) */
 #define WLCORE_PEND_AUTH_ROC_TIMEOUT     1000

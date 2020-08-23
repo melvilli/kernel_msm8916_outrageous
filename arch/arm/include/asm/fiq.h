@@ -34,7 +34,10 @@ struct fiq_handler {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FIQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int claim_fiq(struct fiq_handler *f);
@@ -42,6 +45,7 @@ extern void release_fiq(struct fiq_handler *f);
 extern void set_fiq_handler(void *start, unsigned int length);
 extern void enable_fiq(int fiq);
 extern void disable_fiq(int fiq);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void fiq_set_type(int fiq, unsigned int type);
 #else
@@ -55,6 +59,8 @@ static inline void enable_fiq(int fiq) { }
 static inline void disable_fiq(int fiq) { }
 static inline void fiq_set_type(int fiq, unsigned int type) { }
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

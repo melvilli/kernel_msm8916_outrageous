@@ -134,10 +134,13 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	TSB_STORE(TSB, TAG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Do a kernel page table walk.  Leaves physical PTE pointer in
 	 * REG1.  Jumps to FAIL_LABEL on early page table walk termination.
 	 * VADDR will not be clobbered, but REG2 will.
 =======
+=======
+>>>>>>> v3.18
 	/* Do a kernel page table walk.  Leaves valid PTE value in
 	 * REG1.  Jumps to FAIL_LABEL on early page table walk
 	 * termination.  VADDR will not be clobbered, but REG2 will.
@@ -156,6 +159,9 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	 * 4MB huge page.  For huge PUDs (which fall on bit 33, for
 	 * 8GB per PUD), we have to accomodate 256MB and 2GB huge
 	 * pages.  So for those we propagate bits 32 to 28.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 #define KERN_PGTABLE_WALK(VADDR, REG1, REG2, FAIL_LABEL)	\
@@ -163,6 +169,7 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	or		REG1, %lo(swapper_pg_dir), REG1; \
 	sllx		VADDR, 64 - (PGDIR_SHIFT + PGDIR_BITS), REG2; \
 	srlx		REG2, 64 - PAGE_SHIFT, REG2; \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	andn		REG2, 0x3, REG2; \
 	lduw		[REG1 + REG2], REG1; \
@@ -213,6 +220,8 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	or		REG, _PAGE_CP_4V|_PAGE_CV_4V|_PAGE_SZHUGE_4V, REG; \
 	.previous;
 =======
+=======
+>>>>>>> v3.18
 	andn		REG2, 0x7, REG2; \
 	ldx		[REG1 + REG2], REG1; \
 	brz,pn		REG1, FAIL_LABEL; \
@@ -250,6 +259,9 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	brgez,pn	REG1, FAIL_LABEL; \
 	 nop; \
 699:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* PMD has been loaded into REG1, interpret the value, seeing
@@ -257,6 +269,7 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	 * then jump to FAIL_LABEL.  If it is a HUGE PMD, and it
 	 * translates to a valid PTE, branch to PTE_LABEL.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * We translate the PMD by hand, one bit at a time,
 	 * constructing the huge PTE.
@@ -297,6 +310,8 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	ba,pt		%xcc, PTE_LABEL;				      \
 	 or		REG1, REG2, REG1;				      \
 =======
+=======
+>>>>>>> v3.18
 	 * We have to propagate the 4MB bit of the virtual address
 	 * because we are fabricating 8MB pages using 4MB hw pages.
 	 */
@@ -313,6 +328,9 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	and		VADDR, REG2, REG2;		\
 	brlz,pt		REG1, PTE_LABEL;		\
 	 or		REG1, REG2, REG1;		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 700:
 #else
@@ -334,6 +352,7 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	sllx		VADDR, 64 - (PGDIR_SHIFT + PGDIR_BITS), REG2; \
 	srlx		REG2, 64 - PAGE_SHIFT, REG2; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andn		REG2, 0x3, REG2; \
 	lduwa		[PHYS_PGD + REG2] ASI_PHYS_USE_EC, REG1; \
 	brz,pn		REG1, FAIL_LABEL; \
@@ -347,6 +366,8 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	srlx		REG2, 64 - (PAGE_SHIFT - 1), REG2; \
 	sllx		REG1, PMD_PADDR_SHIFT, REG1; \
 =======
+=======
+>>>>>>> v3.18
 	andn		REG2, 0x7, REG2; \
 	ldxa		[PHYS_PGD + REG2] ASI_PHYS_USE_EC, REG1; \
 	brz,pn		REG1, FAIL_LABEL; \
@@ -362,6 +383,9 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	USER_PGTABLE_CHECK_PMD_HUGE(VADDR, REG1, REG2, FAIL_LABEL, 800f) \
 	sllx		VADDR, 64 - PMD_SHIFT, REG2; \
 	srlx		REG2, 64 - PAGE_SHIFT, REG2; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	andn		REG2, 0x7, REG2; \
 	add		REG1, REG2, REG1; \
@@ -405,8 +429,11 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 #define KERNEL_TSB4M_NENTRIES	4096
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KTSB_PHYS_SHIFT		15
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Do a kernel TSB lookup at tl>0 on VADDR+TAG, branch to OK_LABEL
@@ -417,6 +444,7 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	 * VADDR and TAG will be preserved and not clobbered by this macro.
 	 */
 #define KERN_TSB_LOOKUP_TL1(VADDR, TAG, REG1, REG2, REG3, REG4, OK_LABEL) \
+<<<<<<< HEAD
 <<<<<<< HEAD
 661:	sethi		%hi(swapper_tsb), REG1;			\
 	or		REG1, %lo(swapper_tsb), REG1; \
@@ -430,6 +458,8 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	sllx		REG1, KTSB_PHYS_SHIFT, REG1; \
 	.previous; \
 =======
+=======
+>>>>>>> v3.18
 661:	sethi		%uhi(swapper_tsb), REG1; \
 	sethi		%hi(swapper_tsb), REG2; \
 	or		REG1, %ulo(swapper_tsb), REG1; \
@@ -439,6 +469,9 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	.previous; \
 	sllx		REG1, 32, REG1; \
 	or		REG1, REG2, REG1; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	srlx		VADDR, PAGE_SHIFT, REG2; \
 	and		REG2, (KERNEL_TSB_NENTRIES - 1), REG2; \
@@ -455,6 +488,7 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	 */
 #define KERN_TSB4M_LOOKUP_TL1(TAG, REG1, REG2, REG3, REG4, OK_LABEL) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 661:	sethi		%hi(swapper_4m_tsb), REG1;	     \
 	or		REG1, %lo(swapper_4m_tsb), REG1; \
 	.section	.swapper_4m_tsb_phys_patch, "ax"; \
@@ -467,6 +501,8 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	sllx		REG1, KTSB_PHYS_SHIFT, REG1; \
 	.previous; \
 =======
+=======
+>>>>>>> v3.18
 661:	sethi		%uhi(swapper_4m_tsb), REG1; \
 	sethi		%hi(swapper_4m_tsb), REG2; \
 	or		REG1, %ulo(swapper_4m_tsb), REG1; \
@@ -476,6 +512,9 @@ extern struct tsb_phys_patch_entry __tsb_phys_patch, __tsb_phys_patch_end;
 	.previous; \
 	sllx		REG1, 32, REG1; \
 	or		REG1, REG2, REG1; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	and		TAG, (KERNEL_TSB4M_NENTRIES - 1), REG2; \
 	sllx		REG2, 4, REG2; \

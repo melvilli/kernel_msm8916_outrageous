@@ -94,7 +94,11 @@ struct ip_vs_lblc_entry {
 	int			af;		/* address family */
 	union nf_inet_addr      addr;           /* destination IP address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ip_vs_dest __rcu	*dest;          /* real server (cache) */
+=======
+	struct ip_vs_dest	*dest;          /* real server (cache) */
+>>>>>>> v3.18
 =======
 	struct ip_vs_dest	*dest;          /* real server (cache) */
 >>>>>>> v3.18
@@ -123,7 +127,11 @@ struct ip_vs_lblc_table {
  */
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table vs_vars_table[] = {
+=======
+static struct ctl_table vs_vars_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table vs_vars_table[] = {
 >>>>>>> v3.18
@@ -138,6 +146,7 @@ static struct ctl_table vs_vars_table[] = {
 };
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void ip_vs_lblc_free(struct ip_vs_lblc_entry *en)
 {
@@ -154,6 +163,8 @@ static inline void ip_vs_lblc_free(struct ip_vs_lblc_entry *en)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void ip_vs_lblc_rcu_free(struct rcu_head *head)
 {
 	struct ip_vs_lblc_entry *en = container_of(head,
@@ -169,6 +180,9 @@ static inline void ip_vs_lblc_del(struct ip_vs_lblc_entry *en)
 	hlist_del_rcu(&en->list);
 	call_rcu(&en->rcu_head, ip_vs_lblc_rcu_free);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -225,6 +239,7 @@ ip_vs_lblc_get(int af, struct ip_vs_lblc_table *tbl,
 static inline struct ip_vs_lblc_entry *
 ip_vs_lblc_new(struct ip_vs_lblc_table *tbl, const union nf_inet_addr *daddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       struct ip_vs_dest *dest)
 {
 	struct ip_vs_lblc_entry *en;
@@ -255,6 +270,8 @@ ip_vs_lblc_new(struct ip_vs_lblc_table *tbl, const union nf_inet_addr *daddr,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	       u16 af, struct ip_vs_dest *dest)
 {
 	struct ip_vs_lblc_entry *en;
@@ -277,6 +294,9 @@ ip_vs_lblc_new(struct ip_vs_lblc_table *tbl, const union nf_inet_addr *daddr,
 	en->dest = dest;
 
 	ip_vs_lblc_hash(tbl, en);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return en;
@@ -296,9 +316,15 @@ static void ip_vs_lblc_flush(struct ip_vs_service *svc)
 	spin_lock_bh(&svc->sched_lock);
 	tbl->dead = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i<IP_VS_LBLC_TAB_SIZE; i++) {
 		hlist_for_each_entry_safe(en, next, &tbl->bucket[i], list) {
 			ip_vs_lblc_free(en);
+=======
+	for (i = 0; i < IP_VS_LBLC_TAB_SIZE; i++) {
+		hlist_for_each_entry_safe(en, next, &tbl->bucket[i], list) {
+			ip_vs_lblc_del(en);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < IP_VS_LBLC_TAB_SIZE; i++) {
 		hlist_for_each_entry_safe(en, next, &tbl->bucket[i], list) {
@@ -329,7 +355,11 @@ static inline void ip_vs_lblc_full_check(struct ip_vs_service *svc)
 	int i, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0, j=tbl->rover; i<IP_VS_LBLC_TAB_SIZE; i++) {
+=======
+	for (i = 0, j = tbl->rover; i < IP_VS_LBLC_TAB_SIZE; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0, j = tbl->rover; i < IP_VS_LBLC_TAB_SIZE; i++) {
 >>>>>>> v3.18
@@ -343,7 +373,11 @@ static inline void ip_vs_lblc_full_check(struct ip_vs_service *svc)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ip_vs_lblc_free(en);
+=======
+			ip_vs_lblc_del(en);
+>>>>>>> v3.18
 =======
 			ip_vs_lblc_del(en);
 >>>>>>> v3.18
@@ -393,7 +427,11 @@ static void ip_vs_lblc_check_expire(unsigned long data)
 		goal = tbl->max_size/2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0, j=tbl->rover; i<IP_VS_LBLC_TAB_SIZE; i++) {
+=======
+	for (i = 0, j = tbl->rover; i < IP_VS_LBLC_TAB_SIZE; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0, j = tbl->rover; i < IP_VS_LBLC_TAB_SIZE; i++) {
 >>>>>>> v3.18
@@ -405,7 +443,11 @@ static void ip_vs_lblc_check_expire(unsigned long data)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ip_vs_lblc_free(en);
+=======
+			ip_vs_lblc_del(en);
+>>>>>>> v3.18
 =======
 			ip_vs_lblc_del(en);
 >>>>>>> v3.18
@@ -420,7 +462,11 @@ static void ip_vs_lblc_check_expire(unsigned long data)
 
   out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mod_timer(&tbl->periodic_timer, jiffies+CHECK_EXPIRE_INTERVAL);
+=======
+	mod_timer(&tbl->periodic_timer, jiffies + CHECK_EXPIRE_INTERVAL);
+>>>>>>> v3.18
 =======
 	mod_timer(&tbl->periodic_timer, jiffies + CHECK_EXPIRE_INTERVAL);
 >>>>>>> v3.18
@@ -447,7 +493,11 @@ static int ip_vs_lblc_init_svc(struct ip_vs_service *svc)
 	 *    Initialize the hash buckets
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i<IP_VS_LBLC_TAB_SIZE; i++) {
+=======
+	for (i = 0; i < IP_VS_LBLC_TAB_SIZE; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < IP_VS_LBLC_TAB_SIZE; i++) {
 >>>>>>> v3.18
@@ -525,8 +575,13 @@ __ip_vs_lblc_schedule(struct ip_vs_service *svc)
 
 		doh = ip_vs_dest_conn_overhead(dest);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (loh * atomic_read(&dest->weight) >
 		    doh * atomic_read(&least->weight)) {
+=======
+		if ((__s64)loh * atomic_read(&dest->weight) >
+		    (__s64)doh * atomic_read(&least->weight)) {
+>>>>>>> v3.18
 =======
 		if ((__s64)loh * atomic_read(&dest->weight) >
 		    (__s64)doh * atomic_read(&least->weight)) {
@@ -574,6 +629,7 @@ is_overloaded(struct ip_vs_dest *dest, struct ip_vs_service *svc)
  */
 static struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
 {
 	struct ip_vs_lblc_table *tbl = svc->sched_data;
@@ -588,6 +644,8 @@ ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
 	/* First look in our cache */
 	en = ip_vs_lblc_get(svc->af, tbl, &iph.daddr);
 =======
+=======
+>>>>>>> v3.18
 ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		    struct ip_vs_iphdr *iph)
 {
@@ -599,6 +657,9 @@ ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 
 	/* First look in our cache */
 	en = ip_vs_lblc_get(svc->af, tbl, &iph->daddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (en) {
 		/* We only hold a read lock, but this is atomic */
@@ -614,7 +675,11 @@ ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dest = rcu_dereference(en->dest);
+=======
+		dest = en->dest;
+>>>>>>> v3.18
 =======
 		dest = en->dest;
 >>>>>>> v3.18
@@ -634,7 +699,11 @@ ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 	spin_lock_bh(&svc->sched_lock);
 	if (!tbl->dead)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ip_vs_lblc_new(tbl, &iph.daddr, dest);
+=======
+		ip_vs_lblc_new(tbl, &iph->daddr, svc->af, dest);
+>>>>>>> v3.18
 =======
 		ip_vs_lblc_new(tbl, &iph->daddr, svc->af, dest);
 >>>>>>> v3.18
@@ -643,8 +712,13 @@ ip_vs_lblc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 out:
 	IP_VS_DBG_BUF(6, "LBLC: destination IP address %s --> server %s:%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      IP_VS_DBG_ADDR(svc->af, &iph.daddr),
 		      IP_VS_DBG_ADDR(svc->af, &dest->addr), ntohs(dest->port));
+=======
+		      IP_VS_DBG_ADDR(svc->af, &iph->daddr),
+		      IP_VS_DBG_ADDR(dest->af, &dest->addr), ntohs(dest->port));
+>>>>>>> v3.18
 =======
 		      IP_VS_DBG_ADDR(svc->af, &iph->daddr),
 		      IP_VS_DBG_ADDR(dest->af, &dest->addr), ntohs(dest->port));
@@ -658,8 +732,12 @@ out:
  *      IPVS LBLC Scheduler structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ip_vs_scheduler ip_vs_lblc_scheduler =
 {
+=======
+static struct ip_vs_scheduler ip_vs_lblc_scheduler = {
+>>>>>>> v3.18
 =======
 static struct ip_vs_scheduler ip_vs_lblc_scheduler = {
 >>>>>>> v3.18
@@ -751,7 +829,11 @@ static void __exit ip_vs_lblc_cleanup(void)
 	unregister_ip_vs_scheduler(&ip_vs_lblc_scheduler);
 	unregister_pernet_subsys(&ip_vs_lblc_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+	rcu_barrier();
+>>>>>>> v3.18
 =======
 	rcu_barrier();
 >>>>>>> v3.18

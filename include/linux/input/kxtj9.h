@@ -47,7 +47,11 @@ struct kxtj9_platform_data {
 	#define RES_8BIT		0
 	#define RES_12BIT		(1 << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 res_ctl;
+=======
+	u8 res_12bit;
+>>>>>>> v3.18
 =======
 	u8 res_12bit;
 >>>>>>> v3.18

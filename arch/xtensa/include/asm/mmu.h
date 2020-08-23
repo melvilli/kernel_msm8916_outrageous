@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/asm-xtensa/mmu.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
@@ -9,7 +12,11 @@
  * for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2001 - 2005 Tensilica Inc.
+=======
+ * Copyright (C) 2001 - 2013 Tensilica Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2001 - 2013 Tensilica Inc.
 >>>>>>> v3.18
@@ -23,13 +30,19 @@
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Default "unsigned long" context */
 typedef unsigned long mm_context_t;
 =======
+=======
+>>>>>>> v3.18
 typedef struct {
 	unsigned long asid[NR_CPUS];
 	unsigned int cpu;
 } mm_context_t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_MMU */

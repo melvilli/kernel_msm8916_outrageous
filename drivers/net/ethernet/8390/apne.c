@@ -117,10 +117,13 @@ static const char version[] =
 static int apne_owned;	/* signal if card already owned */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct net_device * __init apne_probe(int unit)
 {
 	struct net_device *dev;
 =======
+=======
+>>>>>>> v3.18
 static u32 apne_msg_enable;
 module_param_named(msg_enable, apne_msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
 MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
@@ -130,6 +133,9 @@ struct net_device * __init apne_probe(int unit)
 	struct net_device *dev;
 	struct ei_device *ei_local;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef MANUAL_CONFIG
 	char tuple[8];
@@ -146,17 +152,23 @@ struct net_device * __init apne_probe(int unit)
 		return ERR_PTR(-ENODEV);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Looking for PCMCIA ethernet card : ");
 
 	/* check if a card is inserted */
 	if (!(PCMCIA_INSERTED)) {
 		printk("NO PCMCIA card inserted\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_info("Looking for PCMCIA ethernet card : ");
 
 	/* check if a card is inserted */
 	if (!(PCMCIA_INSERTED)) {
 		pr_cont("NO PCMCIA card inserted\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ERR_PTR(-ENODEV);
 	}
@@ -169,6 +181,11 @@ struct net_device * __init apne_probe(int unit)
 		netdev_boot_setup_check(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ei_local = netdev_priv(dev);
+	ei_local->msg_enable = apne_msg_enable;
+>>>>>>> v3.18
 =======
 	ei_local = netdev_priv(dev);
 	ei_local->msg_enable = apne_msg_enable;
@@ -181,7 +198,11 @@ struct net_device * __init apne_probe(int unit)
 	if ((pcmcia_copy_tuple(CISTPL_FUNCID, tuple, 8) < 3) ||
 		(tuple[2] != CISTPL_FUNCID_NETWORK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("not an ethernet card\n");
+=======
+		pr_cont("not an ethernet card\n");
+>>>>>>> v3.18
 =======
 		pr_cont("not an ethernet card\n");
 >>>>>>> v3.18
@@ -192,7 +213,11 @@ struct net_device * __init apne_probe(int unit)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("ethernet PCMCIA card inserted\n");
+=======
+	pr_cont("ethernet PCMCIA card inserted\n");
+>>>>>>> v3.18
 =======
 	pr_cont("ethernet PCMCIA card inserted\n");
 >>>>>>> v3.18
@@ -239,15 +264,21 @@ static int __init apne_probe1(struct net_device *dev, int ioaddr)
     static unsigned version_printed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (ei_debug  &&  version_printed++ == 0)
 	printk(version);
 
     printk("PCMCIA NE*000 ethercard probe");
 =======
+=======
+>>>>>>> v3.18
     if ((apne_msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
 		netdev_info(dev, version);
 
     netdev_info(dev, "PCMCIA NE*000 ethercard probe");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     /* Reset card. Who knows what dain-bramaged state it was left in. */
@@ -258,7 +289,11 @@ static int __init apne_probe1(struct net_device *dev, int ioaddr)
 	while ((inb(ioaddr + NE_EN0_ISR) & ENISR_RESET) == 0)
 		if (time_after(jiffies, reset_start_time + 2*HZ/100)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(" not found (no reset ack).\n");
+=======
+			pr_cont(" not found (no reset ack).\n");
+>>>>>>> v3.18
 =======
 			pr_cont(" not found (no reset ack).\n");
 >>>>>>> v3.18
@@ -333,7 +368,11 @@ static int __init apne_probe1(struct net_device *dev, int ioaddr)
 	stop_page = (wordlength == 2) ? 0x40 : 0x20;
     } else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(" not found.\n");
+=======
+	pr_cont(" not found.\n");
+>>>>>>> v3.18
 =======
 	pr_cont(" not found.\n");
 >>>>>>> v3.18
@@ -369,9 +408,15 @@ static int __init apne_probe1(struct net_device *dev, int ioaddr)
 	dev->dev_addr[i] = SA_prom[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     printk(" %pM\n", dev->dev_addr);
 
     printk("%s: %s found.\n", dev->name, name);
+=======
+    pr_cont(" %pM\n", dev->dev_addr);
+
+    netdev_info(dev, "%s found.\n", name);
+>>>>>>> v3.18
 =======
     pr_cont(" %pM\n", dev->dev_addr);
 
@@ -407,16 +452,22 @@ apne_reset_8390(struct net_device *dev)
 {
     unsigned long reset_start_time = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     init_pcmcia();
 
     if (ei_debug > 1) printk("resetting the 8390 t=%ld...", jiffies);
 =======
+=======
+>>>>>>> v3.18
     struct ei_device *ei_local = netdev_priv(dev);
 
     init_pcmcia();
 
     netif_dbg(ei_local, hw, dev, "resetting the 8390 t=%ld...\n", jiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     outb(inb(NE_BASE + NE_RESET), NE_BASE + NE_RESET);
@@ -428,8 +479,13 @@ apne_reset_8390(struct net_device *dev)
     while ((inb(NE_BASE+NE_EN0_ISR) & ENISR_RESET) == 0)
 	if (time_after(jiffies, reset_start_time + 2*HZ/100)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    printk("%s: ne_reset_8390() did not complete.\n", dev->name);
 	    break;
+=======
+		netdev_err(dev, "ne_reset_8390() did not complete.\n");
+		break;
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "ne_reset_8390() did not complete.\n");
 		break;
@@ -454,9 +510,15 @@ apne_get_8390_hdr(struct net_device *dev, struct e8390_pkt_hdr *hdr, int ring_pa
     /* This *shouldn't* happen. If it does, it's the last thing you'll see */
     if (ei_status.dmaing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: DMAing conflict in ne_get_8390_hdr "
 	   "[DMAstat:%d][irqlock:%d][intr:%d].\n",
 	   dev->name, ei_status.dmaing, ei_status.irqlock, dev->irq);
+=======
+	netdev_err(dev, "DMAing conflict in ne_get_8390_hdr "
+		   "[DMAstat:%d][irqlock:%d][intr:%d].\n",
+		   ei_status.dmaing, ei_status.irqlock, dev->irq);
+>>>>>>> v3.18
 =======
 	netdev_err(dev, "DMAing conflict in ne_get_8390_hdr "
 		   "[DMAstat:%d][irqlock:%d][intr:%d].\n",
@@ -507,9 +569,15 @@ apne_block_input(struct net_device *dev, int count, struct sk_buff *skb, int rin
     /* This *shouldn't* happen. If it does, it's the last thing you'll see */
     if (ei_status.dmaing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: DMAing conflict in ne_block_input "
 	   "[DMAstat:%d][irqlock:%d][intr:%d].\n",
 	   dev->name, ei_status.dmaing, ei_status.irqlock, dev->irq);
+=======
+		netdev_err(dev, "DMAing conflict in ne_block_input "
+			   "[DMAstat:%d][irqlock:%d][intr:%d].\n",
+			   ei_status.dmaing, ei_status.irqlock, dev->irq);
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "DMAing conflict in ne_block_input "
 			   "[DMAstat:%d][irqlock:%d][intr:%d].\n",
@@ -561,9 +629,15 @@ apne_block_output(struct net_device *dev, int count,
     /* This *shouldn't* happen. If it does, it's the last thing you'll see */
     if (ei_status.dmaing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: DMAing conflict in ne_block_output."
 	   "[DMAstat:%d][irqlock:%d][intr:%d]\n",
 	   dev->name, ei_status.dmaing, ei_status.irqlock, dev->irq);
+=======
+		netdev_err(dev, "DMAing conflict in ne_block_output."
+			   "[DMAstat:%d][irqlock:%d][intr:%d]\n",
+			   ei_status.dmaing, ei_status.irqlock, dev->irq);
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "DMAing conflict in ne_block_output."
 			   "[DMAstat:%d][irqlock:%d][intr:%d]\n",
@@ -599,7 +673,11 @@ apne_block_output(struct net_device *dev, int count,
     while ((inb(NE_BASE + NE_EN0_ISR) & ENISR_RDC) == 0)
 	if (time_after(jiffies, dma_start + 2*HZ/100)) {	/* 20ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: timeout waiting for Tx RDC.\n", dev->name);
+=======
+		netdev_warn(dev, "timeout waiting for Tx RDC.\n");
+>>>>>>> v3.18
 =======
 		netdev_warn(dev, "timeout waiting for Tx RDC.\n");
 >>>>>>> v3.18
@@ -626,8 +704,13 @@ static irqreturn_t apne_interrupt(int irq, void *dev_id)
         return IRQ_NONE;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (ei_debug > 3)
         printk("pcmcia intreq = %x\n", pcmcia_intreq);
+=======
+    if (apne_msg_enable & NETIF_MSG_INTR)
+	pr_debug("pcmcia intreq = %x\n", pcmcia_intreq);
+>>>>>>> v3.18
 =======
     if (apne_msg_enable & NETIF_MSG_INTR)
 	pr_debug("pcmcia intreq = %x\n", pcmcia_intreq);
@@ -646,9 +729,13 @@ static int __init apne_module_init(void)
 {
 	apne_dev = apne_probe(-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(apne_dev))
 		return PTR_ERR(apne_dev);
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(apne_dev);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(apne_dev);
 >>>>>>> v3.18

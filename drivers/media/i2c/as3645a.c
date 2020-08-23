@@ -814,7 +814,11 @@ static int as3645a_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flash = kzalloc(sizeof(*flash), GFP_KERNEL);
+=======
+	flash = devm_kzalloc(&client->dev, sizeof(*flash), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	flash = devm_kzalloc(&client->dev, sizeof(*flash), GFP_KERNEL);
 >>>>>>> v3.18
@@ -843,10 +847,15 @@ static int as3645a_probe(struct i2c_client *client,
 
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		v4l2_ctrl_handler_free(&flash->ctrls);
 		kfree(flash);
 	}
+=======
+	if (ret < 0)
+		v4l2_ctrl_handler_free(&flash->ctrls);
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 		v4l2_ctrl_handler_free(&flash->ctrls);
@@ -865,7 +874,10 @@ static int as3645a_remove(struct i2c_client *client)
 	media_entity_cleanup(&flash->subdev.entity);
 	mutex_destroy(&flash->power_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(flash);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

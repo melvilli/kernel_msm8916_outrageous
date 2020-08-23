@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * max8998.h - Voltage regulator driver for the Maxim 8998
+=======
+ * max8998-private.h - Voltage regulator driver for the Maxim 8998
+>>>>>>> v3.18
 =======
  * max8998-private.h - Voltage regulator driver for the Maxim 8998
 >>>>>>> v3.18
@@ -137,16 +141,22 @@ enum {
 #define MAX8998_ENRAMP                  (1 << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct max8998_dev - max8998 master device for sub-drivers
  * @dev: master device of the chip (can be used to access platform data)
 =======
+=======
+>>>>>>> v3.18
 struct irq_domain;
 
 /**
  * struct max8998_dev - max8998 master device for sub-drivers
  * @dev: master device of the chip (can be used to access platform data)
  * @pdata: platform data for the driver and subdrivers
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @i2c: i2c client private data for regulator
  * @rtc: i2c client private data for rtc
@@ -162,6 +172,10 @@ struct irq_domain;
 struct max8998_dev {
 	struct device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct max8998_platform_data *pdata;
+>>>>>>> v3.18
 =======
 	struct max8998_platform_data *pdata;
 >>>>>>> v3.18
@@ -171,7 +185,12 @@ struct max8998_dev {
 	struct mutex irqlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq_base;
+=======
+	unsigned int irq_base;
+	struct irq_domain *irq_domain;
+>>>>>>> v3.18
 =======
 	unsigned int irq_base;
 	struct irq_domain *irq_domain;
@@ -181,7 +200,11 @@ struct max8998_dev {
 	u8 irq_masks_cur[MAX8998_NUM_IRQ_REGS];
 	u8 irq_masks_cache[MAX8998_NUM_IRQ_REGS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int type;
+=======
+	unsigned long type;
+>>>>>>> v3.18
 =======
 	unsigned long type;
 >>>>>>> v3.18

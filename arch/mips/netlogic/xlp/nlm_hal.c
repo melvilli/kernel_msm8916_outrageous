@@ -45,6 +45,10 @@
 #include <asm/netlogic/xlp-hal/iomap.h>
 #include <asm/netlogic/xlp-hal/xlp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/netlogic/xlp-hal/bridge.h>
+>>>>>>> v3.18
 =======
 #include <asm/netlogic/xlp-hal/bridge.h>
 >>>>>>> v3.18
@@ -58,6 +62,7 @@ void nlm_node_init(int node)
 
 	nodep = nlm_get_node(node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nodep->sysbase = nlm_get_sys_regbase(node);
 	nodep->picbase = nlm_get_pic_regbase(node);
 	nodep->ebase = read_c0_ebase() & (~((1 << 12) - 1));
@@ -66,6 +71,8 @@ void nlm_node_init(int node)
 
 int nlm_irq_to_irt(int irq)
 =======
+=======
+>>>>>>> v3.18
 	if (node == 0)
 		nodep->coremask = 1;	/* node 0, boot cpu */
 	nodep->sysbase = nlm_get_sys_regbase(node);
@@ -107,12 +114,19 @@ static int xlp9xx_irq_to_irt(int irq)
 }
 
 static int xlp_irq_to_irt(int irq)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uint64_t pcibase;
 	int devoff, irt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	devoff = 0;
+>>>>>>> v3.18
 =======
 	devoff = 0;
 >>>>>>> v3.18
@@ -123,6 +137,7 @@ static int xlp_irq_to_irt(int irq)
 	case PIC_UART_1_IRQ:
 		devoff = XLP_IO_UART1_OFFSET(0);
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case PIC_EHCI_0_IRQ:
 		devoff = XLP_IO_USB_EHCI0_OFFSET(0);
@@ -155,6 +170,8 @@ static int xlp_irq_to_irt(int irq)
 		devoff = 0;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case PIC_MMC_IRQ:
 		devoff = XLP_IO_MMC_OFFSET(0);
 		break;
@@ -215,12 +232,16 @@ static int xlp_irq_to_irt(int irq)
 				break;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (devoff != 0) {
 		pcibase = nlm_pcicfg_base(devoff);
 		irt = nlm_read_reg(pcibase, XLP_PCI_IRTINFO_REG) & 0xffff;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* HW bug, I2C 1 irt entry is off by one */
 		if (irq == PIC_I2C_1_IRQ)
@@ -229,6 +250,8 @@ static int xlp_irq_to_irt(int irq)
 		/* HW bug, PCI IRT entries are bad on early silicon, fix */
 		irt = PIC_IRT_PCIE_LINK_INDEX(irq - PIC_PCIE_LINK_0_IRQ);
 =======
+=======
+>>>>>>> v3.18
 		/* HW weirdness, I2C IRT entry has to be fixed up */
 		switch (irq) {
 		case PIC_I2C_1_IRQ:
@@ -243,6 +266,9 @@ static int xlp_irq_to_irt(int irq)
 		/* HW bug, PCI IRT entries are bad on early silicon, fix */
 		irt = PIC_IRT_PCIE_LINK_INDEX(irq -
 					PIC_PCIE_LINK_LEGACY_IRQ_BASE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		irt = -1;
@@ -251,8 +277,11 @@ static int xlp_irq_to_irt(int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int nlm_get_core_frequency(int node, int core)
 =======
+=======
+>>>>>>> v3.18
 int nlm_irq_to_irt(int irq)
 {
 	/* return -2 for irqs without 1-1 mapping */
@@ -314,6 +343,9 @@ static unsigned int nlm_xlp2_get_core_frequency(int node, int core)
 }
 
 static unsigned int nlm_xlp_get_core_frequency(int node, int core)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int pll_divf, pll_divr, dfs_div, ext_div;
@@ -326,8 +358,13 @@ static unsigned int nlm_xlp_get_core_frequency(int node, int core)
 	pll_divf = ((rstval >> 10) & 0x7f) + 1;
 	pll_divr = ((rstval >> 8)  & 0x3) + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ext_div	 = ((rstval >> 30) & 0x3) + 1;
 	dfs_div	 = ((dfsval >> (core * 4)) & 0xf) + 1;
+=======
+	ext_div  = ((rstval >> 30) & 0x3) + 1;
+	dfs_div  = ((dfsval >> (core * 4)) & 0xf) + 1;
+>>>>>>> v3.18
 =======
 	ext_div  = ((rstval >> 30) & 0x3) + 1;
 	dfs_div  = ((dfsval >> (core * 4)) & 0xf) + 1;
@@ -337,10 +374,13 @@ static unsigned int nlm_xlp_get_core_frequency(int node, int core)
 	denom = 3 * pll_divr * ext_div * dfs_div;
 	do_div(num, denom);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (unsigned int)num;
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	return (unsigned int)num;
 }
@@ -507,13 +547,19 @@ unsigned int nlm_get_pic_frequency(int node)
 		return 133333333;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int nlm_get_cpu_frequency(void)
 {
 	return nlm_get_core_frequency(0, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Fills upto 8 pairs of entries containing the DRAM map of a node
@@ -560,4 +606,7 @@ int xlp_get_dram_map(int n, uint64_t *dram_map)
 	}
 	return rv;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

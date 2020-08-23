@@ -18,6 +18,10 @@
 extern const struct drm_crtc_helper_funcs cdv_intel_helper_funcs;
 extern const struct drm_crtc_funcs cdv_intel_crtc_funcs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct gma_clock_funcs cdv_clock_funcs;
+>>>>>>> v3.18
 =======
 extern const struct gma_clock_funcs cdv_clock_funcs;
 >>>>>>> v3.18
@@ -30,6 +34,7 @@ extern void cdv_hdmi_init(struct drm_device *dev, struct psb_intel_mode_device *
 extern struct drm_display_mode *cdv_intel_crtc_mode_get(struct drm_device *dev,
 					     struct drm_crtc *crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline void cdv_intel_wait_for_vblank(struct drm_device *dev)
 {
@@ -39,6 +44,10 @@ static inline void cdv_intel_wait_for_vblank(struct drm_device *dev)
 }
 
 
+=======
+extern void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc);
+extern void cdv_disable_sr(struct drm_device *dev);
+>>>>>>> v3.18
 =======
 extern void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc);
 extern void cdv_disable_sr(struct drm_device *dev);

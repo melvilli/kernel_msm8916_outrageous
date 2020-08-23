@@ -12,6 +12,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(NETLINK_H_20081202)
 #define NETLINK_H_20081202
 #include <linux/netdevice.h>
@@ -24,6 +25,8 @@ int netlink_send(struct sock *sock, int group, u16 type, void *msg, int len);
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifndef __GDM72XX_NETLINK_K_H__
 #define __GDM72XX_NETLINK_K_H__
 
@@ -36,4 +39,7 @@ void netlink_exit(struct sock *sock);
 int netlink_send(struct sock *sock, int group, u16 type, void *msg, int len);
 
 #endif /* __GDM72XX_NETLINK_K_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

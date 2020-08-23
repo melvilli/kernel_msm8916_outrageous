@@ -102,7 +102,11 @@ __rb_insert(struct rb_node *node, struct rb_root *root,
 				 *     p   u  -->   P   U
 				 *    /            /
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 *   n            N
+=======
+				 *   n            n
+>>>>>>> v3.18
 =======
 				 *   n            n
 >>>>>>> v3.18
@@ -523,7 +527,10 @@ void rb_replace_node(struct rb_node *victim, struct rb_node *new,
 }
 EXPORT_SYMBOL(rb_replace_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static struct rb_node *rb_left_deepest_node(const struct rb_node *node)
 {
@@ -564,4 +571,7 @@ struct rb_node *rb_first_postorder(const struct rb_root *root)
 	return rb_left_deepest_node(root->rb_node);
 }
 EXPORT_SYMBOL(rb_first_postorder);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

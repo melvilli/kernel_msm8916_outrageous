@@ -131,16 +131,22 @@ struct channel_subsystem {
 extern struct channel_subsystem *channel_subsystems[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void channel_subsystem_reinit(void);
 
 /* Helper functions to build lists for the slow path. */
 void css_schedule_eval(struct subchannel_id schid);
 void css_schedule_eval_all(void);
 =======
+=======
+>>>>>>> v3.18
 /* Helper functions to build lists for the slow path. */
 void css_schedule_eval(struct subchannel_id schid);
 void css_schedule_eval_all(void);
 void css_schedule_eval_all_unreg(unsigned long delay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int css_complete_work(void);
 

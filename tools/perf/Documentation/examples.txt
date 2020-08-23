@@ -67,7 +67,11 @@ well. For example the page allocations done by a 'git gc' can be
 captured the following way:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  titan:~/git> perf record -f -e kmem:mm_page_alloc -c 1 ./git gc
+=======
+ titan:~/git> perf record -e kmem:mm_page_alloc -c 1 ./git gc
+>>>>>>> v3.18
 =======
  titan:~/git> perf record -e kmem:mm_page_alloc -c 1 ./git gc
 >>>>>>> v3.18
@@ -125,7 +129,11 @@ allocations - to see precisely what kind of page allocations there
 are:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  titan:~/git> perf record -f -g -e kmem:mm_page_alloc -c 1 ./git gc
+=======
+ titan:~/git> perf record -g -e kmem:mm_page_alloc -c 1 ./git gc
+>>>>>>> v3.18
 =======
  titan:~/git> perf record -g -e kmem:mm_page_alloc -c 1 ./git gc
 >>>>>>> v3.18

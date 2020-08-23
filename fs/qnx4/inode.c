@@ -28,7 +28,10 @@
 static const struct super_operations qnx4_sops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qnx4_put_super(struct super_block *sb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct inode *qnx4_alloc_inode(struct super_block *sb);
@@ -41,7 +44,10 @@ static const struct super_operations qnx4_sops =
 	.alloc_inode	= qnx4_alloc_inode,
 	.destroy_inode	= qnx4_destroy_inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.put_super	= qnx4_put_super,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.statfs		= qnx4_statfs,
@@ -53,6 +59,10 @@ static int qnx4_remount(struct super_block *sb, int *flags, char *data)
 	struct qnx4_sb_info *qs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -159,7 +169,12 @@ static int qnx4_statfs(struct dentry *dentry, struct kstatfs *buf)
  * of the directory entry.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *qnx4_checkroot(struct super_block *sb)
+=======
+static const char *qnx4_checkroot(struct super_block *sb,
+				  struct qnx4_super_block *s)
+>>>>>>> v3.18
 =======
 static const char *qnx4_checkroot(struct super_block *sb,
 				  struct qnx4_super_block *s)
@@ -171,17 +186,23 @@ static const char *qnx4_checkroot(struct super_block *sb,
 	int i, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*(qnx4_sb(sb)->sb->RootDir.di_fname) != '/')
 		return "no qnx4 filesystem (no root dir).";
 	QNX4DEBUG((KERN_NOTICE "QNX4 filesystem found on dev %s.\n", sb->s_id));
 	rd = le32_to_cpu(qnx4_sb(sb)->sb->RootDir.di_first_xtnt.xtnt_blk) - 1;
 	rl = le32_to_cpu(qnx4_sb(sb)->sb->RootDir.di_first_xtnt.xtnt_size);
 =======
+=======
+>>>>>>> v3.18
 	if (s->RootDir.di_fname[0] != '/' || s->RootDir.di_fname[1] != '\0')
 		return "no qnx4 filesystem (no root dir).";
 	QNX4DEBUG((KERN_NOTICE "QNX4 filesystem found on dev %s.\n", sb->s_id));
 	rd = le32_to_cpu(s->RootDir.di_first_xtnt.xtnt_blk) - 1;
 	rl = le32_to_cpu(s->RootDir.di_first_xtnt.xtnt_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (j = 0; j < rl; j++) {
 		bh = sb_bread(sb, rd + j);	/* root dir, first block */
@@ -213,7 +234,10 @@ static int qnx4_fill_super(struct super_block *s, void *data, int silent)
 	const char *errmsg;
 	struct qnx4_sb_info *qs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -225,11 +249,17 @@ static int qnx4_fill_super(struct super_block *s, void *data, int silent)
 	sb_set_blocksize(s, QNX4_BLOCK_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	s->s_op = &qnx4_sops;
 	s->s_magic = QNX4_SUPER_MAGIC;
 	s->s_flags |= MS_RDONLY;	/* Yup, read-only yet */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Check the superblock signature. Since the qnx4 code is
 	   dangerous, we should leave as quickly as possible
@@ -237,6 +267,7 @@ static int qnx4_fill_super(struct super_block *s, void *data, int silent)
 	bh = sb_bread(s, 1);
 	if (!bh) {
 		printk(KERN_ERR "qnx4: unable to read the superblock\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto outnobh;
 	}
@@ -259,6 +290,8 @@ static int qnx4_fill_super(struct super_block *s, void *data, int silent)
 			printk(KERN_ERR "qnx4: %s\n", errmsg);
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -269,6 +302,9 @@ static int qnx4_fill_super(struct super_block *s, void *data, int silent)
  		if (!silent)
 			printk(KERN_ERR "qnx4: %s\n", errmsg);
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -276,6 +312,7 @@ static int qnx4_fill_super(struct super_block *s, void *data, int silent)
 	root = qnx4_iget(s, QNX4_ROOT_INO * QNX4_INODES_PER_BLOCK);
 	if (IS_ERR(root)) {
 		printk(KERN_ERR "qnx4: get inode failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = PTR_ERR(root);
  		goto outb;
@@ -307,6 +344,8 @@ static void qnx4_put_super(struct super_block *sb)
 	sb->s_fs_info = NULL;
 	return;
 =======
+=======
+>>>>>>> v3.18
 		return PTR_ERR(root);
  	}
 
@@ -325,6 +364,9 @@ static void qnx4_kill_sb(struct super_block *sb)
 		kfree(qs->BitMap);
 		kfree(qs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -477,7 +519,11 @@ static struct file_system_type qnx4_fs_type = {
 	.name		= "qnx4",
 	.mount		= qnx4_mount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.kill_sb	= kill_block_super,
+=======
+	.kill_sb	= qnx4_kill_sb,
+>>>>>>> v3.18
 =======
 	.kill_sb	= qnx4_kill_sb,
 >>>>>>> v3.18

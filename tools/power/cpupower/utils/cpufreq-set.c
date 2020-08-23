@@ -258,7 +258,11 @@ int cmd_freq_set(int argc, char **argv)
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((sscanf(optarg, "%s", gov)) != 1) {
+=======
+			if ((sscanf(optarg, "%19s", gov)) != 1) {
+>>>>>>> v3.18
 =======
 			if ((sscanf(optarg, "%19s", gov)) != 1) {
 >>>>>>> v3.18
@@ -325,6 +329,7 @@ int cmd_freq_set(int argc, char **argv)
 		printf(_("Setting cpu: %d\n"), cpu);
 		ret = do_one_cpu(cpu, &new_pol, freq, policychange);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret)
 			break;
 	}
@@ -334,6 +339,8 @@ int cmd_freq_set(int argc, char **argv)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		if (ret) {
 			print_error();
 			return ret;
@@ -341,5 +348,8 @@ int cmd_freq_set(int argc, char **argv)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

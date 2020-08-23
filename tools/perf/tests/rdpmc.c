@@ -3,6 +3,7 @@
 #include <signal.h>
 #include <sys/mman.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
 #include "perf.h"
 #include "debug.h"
@@ -13,6 +14,8 @@
 #define barrier() asm volatile("" ::: "memory")
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include "perf.h"
 #include "debug.h"
@@ -21,6 +24,9 @@
 
 #if defined(__x86_64__) || defined(__i386__)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 rdpmc(unsigned int counter)
 {
@@ -113,6 +119,10 @@ static int __test__rdpmc(void)
 	u64 delta_sum = 0;
         struct sigaction sa;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -122,17 +132,23 @@ static int __test__rdpmc(void)
 	sigaction(SIGSEGV, &sa, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fd = sys_perf_event_open(&attr, 0, -1, -1, 0);
 	if (fd < 0) {
 		pr_err("Error: sys_perf_event_open() syscall returned "
 		       "with %d (%s)\n", fd, strerror(errno));
 =======
+=======
+>>>>>>> v3.18
 	fd = sys_perf_event_open(&attr, 0, -1, -1,
 				 perf_event_open_cloexec_flag());
 	if (fd < 0) {
 		pr_err("Error: sys_perf_event_open() syscall returned "
 		       "with %d (%s)\n", fd,
 		       strerror_r(errno, sbuf, sizeof(sbuf)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 	}
@@ -141,7 +157,11 @@ static int __test__rdpmc(void)
 	if (addr == (void *)(-1)) {
 		pr_err("Error: mmap() syscall returned with (%s)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       strerror(errno));
+=======
+		       strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		       strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18

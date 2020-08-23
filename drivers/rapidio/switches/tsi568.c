@@ -20,6 +20,10 @@
 #include <linux/rio_ids.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -134,6 +138,7 @@ tsi568_em_init(struct rio_dev *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tsi568_switch_init(struct rio_dev *rdev, int do_enum)
 {
 	pr_debug("RIO: %s for %s\n", __func__, rio_name(rdev));
@@ -150,6 +155,8 @@ static int tsi568_switch_init(struct rio_dev *rdev, int do_enum)
 
 DECLARE_RIO_SWITCH_INIT(RIO_VID_TUNDRA, RIO_DID_TSI568, tsi568_switch_init);
 =======
+=======
+>>>>>>> v3.18
 static struct rio_switch_ops tsi568_switch_ops = {
 	.owner = THIS_MODULE,
 	.add_entry = tsi568_route_add_entry,
@@ -217,4 +224,7 @@ module_exit(tsi568_exit);
 MODULE_DESCRIPTION("IDT Tsi568 Serial RapidIO switch driver");
 MODULE_AUTHOR("Integrated Device Technology, Inc.");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

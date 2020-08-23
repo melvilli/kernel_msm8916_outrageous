@@ -70,7 +70,11 @@ struct oid_obj_priv {
 	unsigned char	dbg; /* 0: without OID debug message
 			      * 1: with OID debug message */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint(*oidfuns)(struct oid_par_priv *poid_par_priv);
+=======
+	uint (*oidfuns)(struct oid_par_priv *poid_par_priv);
+>>>>>>> v3.18
 =======
 	uint (*oidfuns)(struct oid_par_priv *poid_par_priv);
 >>>>>>> v3.18

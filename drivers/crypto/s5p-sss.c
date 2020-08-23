@@ -23,6 +23,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -34,9 +38,12 @@
 #include <crypto/ctr.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/cpu.h>
 #include <mach/dma.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define _SBF(s, v)                      ((v) << (s))
@@ -113,7 +120,11 @@
 
 /* AES registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SSS_REG_AES_CONTROL             0x4000
+=======
+#define SSS_REG_AES_CONTROL		0x00
+>>>>>>> v3.18
 =======
 #define SSS_REG_AES_CONTROL		0x00
 >>>>>>> v3.18
@@ -133,7 +144,11 @@
 #define SSS_AES_MODE_DECRYPT            _BIT(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SSS_REG_AES_STATUS              0x4004
+=======
+#define SSS_REG_AES_STATUS		0x04
+>>>>>>> v3.18
 =======
 #define SSS_REG_AES_STATUS		0x04
 >>>>>>> v3.18
@@ -142,17 +157,23 @@
 #define SSS_AES_OUTPUT_READY            _BIT(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SSS_REG_AES_IN_DATA(s)          (0x4010 + (s << 2))
 #define SSS_REG_AES_OUT_DATA(s)         (0x4020 + (s << 2))
 #define SSS_REG_AES_IV_DATA(s)          (0x4030 + (s << 2))
 #define SSS_REG_AES_CNT_DATA(s)         (0x4040 + (s << 2))
 #define SSS_REG_AES_KEY_DATA(s)         (0x4080 + (s << 2))
 =======
+=======
+>>>>>>> v3.18
 #define SSS_REG_AES_IN_DATA(s)		(0x10 + (s << 2))
 #define SSS_REG_AES_OUT_DATA(s)		(0x20 + (s << 2))
 #define SSS_REG_AES_IV_DATA(s)		(0x30 + (s << 2))
 #define SSS_REG_AES_CNT_DATA(s)		(0x40 + (s << 2))
 #define SSS_REG_AES_KEY_DATA(s)		(0x80 + (s << 2))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SSS_REG(dev, reg)               ((dev)->ioaddr + (SSS_REG_##reg))
@@ -160,11 +181,17 @@
 #define SSS_WRITE(dev, reg, val)        __raw_writel((val), SSS_REG(dev, reg))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SSS_AES_REG(dev, reg)           ((dev)->aes_ioaddr + SSS_REG_##reg)
 #define SSS_AES_WRITE(dev, reg, val)    __raw_writel((val), \
 						SSS_AES_REG(dev, reg))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* HW engine modes */
 #define FLAGS_AES_DECRYPT               _BIT(0)
@@ -176,7 +203,10 @@
 #define CRYPTO_QUEUE_LEN    1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct samsung_aes_variant - platform specific SSS driver data
  * @has_hash_irq: true if SSS module uses hash interrupt, false otherwise
@@ -191,6 +221,9 @@ struct samsung_aes_variant {
 	unsigned int		    aes_offset;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct s5p_aes_reqctx {
 	unsigned long mode;
@@ -209,6 +242,10 @@ struct s5p_aes_dev {
 	struct clk                 *clk;
 	void __iomem               *ioaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem               *aes_ioaddr;
+>>>>>>> v3.18
 =======
 	void __iomem               *aes_ioaddr;
 >>>>>>> v3.18
@@ -225,6 +262,11 @@ struct s5p_aes_dev {
 	bool                        busy;
 	spinlock_t                  lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct samsung_aes_variant *variant;
+>>>>>>> v3.18
 =======
 
 	struct samsung_aes_variant *variant;
@@ -234,7 +276,10 @@ struct s5p_aes_dev {
 static struct s5p_aes_dev *s5p_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct samsung_aes_variant s5p_aes_data = {
 	.has_hash_irq	= true,
 	.aes_offset	= 0x4000,
@@ -271,6 +316,9 @@ static inline struct samsung_aes_variant *find_s5p_sss_version
 			platform_get_device_id(pdev)->driver_data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void s5p_set_dma_indata(struct s5p_aes_dev *dev, struct scatterlist *sg)
 {
@@ -368,15 +416,21 @@ static void s5p_aes_tx(struct s5p_aes_dev *dev)
 
 		s5p_set_dma_outdata(dev, dev->sg_dst);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		s5p_aes_complete(dev, err);
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		s5p_aes_complete(dev, err);
 
 		dev->busy = true;
 		tasklet_schedule(&dev->tasklet);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -427,6 +481,7 @@ static void s5p_set_aes(struct s5p_aes_dev *dev,
 	void __iomem *keystart;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->ioaddr + SSS_REG_AES_IV_DATA(0), iv, 0x10);
 
 	if (keylen == AES_KEYSIZE_256)
@@ -436,6 +491,8 @@ static void s5p_set_aes(struct s5p_aes_dev *dev,
 	else
 		keystart = dev->ioaddr + SSS_REG_AES_KEY_DATA(4);
 =======
+=======
+>>>>>>> v3.18
 	if (iv)
 		memcpy(dev->aes_ioaddr + SSS_REG_AES_IV_DATA(0), iv, 0x10);
 
@@ -445,6 +502,9 @@ static void s5p_set_aes(struct s5p_aes_dev *dev,
 		keystart = dev->aes_ioaddr + SSS_REG_AES_KEY_DATA(2);
 	else
 		keystart = dev->aes_ioaddr + SSS_REG_AES_KEY_DATA(4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(keystart, key, keylen);
@@ -496,7 +556,11 @@ static void s5p_aes_crypt_start(struct s5p_aes_dev *dev, unsigned long mode)
 		goto outdata_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SSS_WRITE(dev, AES_CONTROL, aes_control);
+=======
+	SSS_AES_WRITE(dev, AES_CONTROL, aes_control);
+>>>>>>> v3.18
 =======
 	SSS_AES_WRITE(dev, AES_CONTROL, aes_control);
 >>>>>>> v3.18
@@ -531,11 +595,14 @@ static void s5p_tasklet_cb(unsigned long data)
 	backlog   = crypto_get_backlog(&dev->queue);
 	async_req = crypto_dequeue_request(&dev->queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&dev->lock, flags);
 
 	if (!async_req)
 		return;
 =======
+=======
+>>>>>>> v3.18
 
 	if (!async_req) {
 		dev->busy = false;
@@ -543,6 +610,9 @@ static void s5p_tasklet_cb(unsigned long data)
 		return;
 	}
 	spin_unlock_irqrestore(&dev->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (backlog)
@@ -563,8 +633,13 @@ static int s5p_aes_handle_req(struct s5p_aes_dev *dev,
 
 	spin_lock_irqsave(&dev->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->busy) {
 		err = -EAGAIN;
+=======
+	err = ablkcipher_enqueue_request(&dev->queue, req);
+	if (dev->busy) {
+>>>>>>> v3.18
 =======
 	err = ablkcipher_enqueue_request(&dev->queue, req);
 	if (dev->busy) {
@@ -575,7 +650,10 @@ static int s5p_aes_handle_req(struct s5p_aes_dev *dev,
 	dev->busy = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ablkcipher_enqueue_request(&dev->queue, req);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&dev->lock, flags);
@@ -703,6 +781,10 @@ static int s5p_aes_probe(struct platform_device *pdev)
 	struct device      *dev = &pdev->dev;
 	struct resource    *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct samsung_aes_variant *variant;
+>>>>>>> v3.18
 =======
 	struct samsung_aes_variant *variant;
 >>>>>>> v3.18
@@ -711,10 +793,13 @@ static int s5p_aes_probe(struct platform_device *pdev)
 		return -EEXIST;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pdata = devm_kzalloc(dev, sizeof(*pdata), GFP_KERNEL);
@@ -722,16 +807,22 @@ static int s5p_aes_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(dev, res->start,
 				     resource_size(res), pdev->name))
 		return -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	pdata->ioaddr = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(pdata->ioaddr))
 		return PTR_ERR(pdata->ioaddr);
 
 	variant = find_s5p_sss_version(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdata->clk = devm_clk_get(dev, "secss");
@@ -740,6 +831,7 @@ static int s5p_aes_probe(struct platform_device *pdev)
 		return -ENOENT;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_enable(pdata->clk);
 
@@ -762,6 +854,8 @@ static int s5p_aes_probe(struct platform_device *pdev)
 
 	pdata->irq_fc = platform_get_irq_byname(pdev, "feed control");
 =======
+=======
+>>>>>>> v3.18
 	err = clk_prepare_enable(pdata->clk);
 	if (err < 0) {
 		dev_err(dev, "Enabling SSS clk failed, err %d\n", err);
@@ -773,6 +867,9 @@ static int s5p_aes_probe(struct platform_device *pdev)
 	pdata->aes_ioaddr = pdata->ioaddr + variant->aes_offset;
 
 	pdata->irq_fc = platform_get_irq(pdev, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdata->irq_fc < 0) {
 		err = pdata->irq_fc;
@@ -787,7 +884,10 @@ static int s5p_aes_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (variant->has_hash_irq) {
 		pdata->irq_hash = platform_get_irq(pdev, 1);
 		if (pdata->irq_hash < 0) {
@@ -805,6 +905,9 @@ static int s5p_aes_probe(struct platform_device *pdev)
 
 	pdata->busy = false;
 	pdata->variant = variant;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata->dev = dev;
 	platform_set_drvdata(pdev, pdata);
@@ -833,10 +936,16 @@ static int s5p_aes_probe(struct platform_device *pdev)
 
  err_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(pdata->clk);
 
 	s5p_dev = NULL;
 	platform_set_drvdata(pdev, NULL);
+=======
+	clk_disable_unprepare(pdata->clk);
+
+	s5p_dev = NULL;
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(pdata->clk);
 
@@ -860,10 +969,16 @@ static int s5p_aes_remove(struct platform_device *pdev)
 	tasklet_kill(&pdata->tasklet);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(pdata->clk);
 
 	s5p_dev = NULL;
 	platform_set_drvdata(pdev, NULL);
+=======
+	clk_disable_unprepare(pdata->clk);
+
+	s5p_dev = NULL;
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(pdata->clk);
 
@@ -880,6 +995,10 @@ static struct platform_driver s5p_aes_crypto = {
 		.owner	= THIS_MODULE,
 		.name	= "s5p-secss",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = s5p_sss_dt_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = s5p_sss_dt_match,
 >>>>>>> v3.18

@@ -28,6 +28,7 @@
 #include <core/object.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 #include <subdev/bios.h>
 
@@ -39,12 +40,17 @@ struct nv50_fb_priv {
 
 static int types[0x80] = {
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 
 #include "nv50.h"
 
 int
 nv50_fb_memtype[0x80] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0,
@@ -56,6 +62,7 @@ nv50_fb_memtype[0x80] = {
 	1, 0, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2, 1, 1, 0, 0
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool
 nv50_fb_memtype_valid(struct nouveau_fb *pfb, u32 memtype)
@@ -247,10 +254,15 @@ nv50_fb_vram_del(struct nouveau_fb *pfb, struct nouveau_mem **pmem)
 
 	kfree(mem);
 =======
+=======
+>>>>>>> v3.18
 bool
 nv50_fb_memtype_valid(struct nouveau_fb *pfb, u32 memtype)
 {
 	return nv50_fb_memtype[(memtype & 0xff00) >> 8] != 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -440,7 +452,11 @@ nv50_fb_intr(struct nouveau_subdev *subdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -460,22 +476,29 @@ nv50_fb_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->r100c08_page = alloc_page(GFP_KERNEL | __GFP_ZERO);
 	if (priv->r100c08_page) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->r100c08 = pci_map_page(device->pdev, priv->r100c08_page,
 					     0, PAGE_SIZE,
 					     PCI_DMA_BIDIRECTIONAL);
 		if (pci_dma_mapping_error(device->pdev, priv->r100c08))
 			nv_warn(priv, "failed 0x100c08 page map\n");
 =======
+=======
+>>>>>>> v3.18
 		priv->r100c08 = dma_map_page(nv_device_base(device),
 					     priv->r100c08_page, 0, PAGE_SIZE,
 					     DMA_BIDIRECTIONAL);
 		if (dma_mapping_error(nv_device_base(device), priv->r100c08))
 			return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		nv_warn(priv, "failed 0x100c08 page alloc\n");
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->base.memtype_valid = nv50_fb_memtype_valid;
 	priv->base.ram.init = nv50_fb_vram_init;
@@ -487,11 +510,16 @@ nv50_fb_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 static void
 =======
+=======
+>>>>>>> v3.18
 	nv_subdev(priv)->intr = nv50_fb_intr;
 	return 0;
 }
 
 void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_fb_dtor(struct nouveau_object *object)
 {
@@ -500,8 +528,13 @@ nv50_fb_dtor(struct nouveau_object *object)
 
 	if (priv->r100c08_page) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_unmap_page(device->pdev, priv->r100c08, PAGE_SIZE,
 			       PCI_DMA_BIDIRECTIONAL);
+=======
+		dma_unmap_page(nv_device_base(device), priv->r100c08, PAGE_SIZE,
+			       DMA_BIDIRECTIONAL);
+>>>>>>> v3.18
 =======
 		dma_unmap_page(nv_device_base(device), priv->r100c08, PAGE_SIZE,
 			       DMA_BIDIRECTIONAL);
@@ -513,15 +546,21 @@ nv50_fb_dtor(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nv50_fb_init(struct nouveau_object *object)
 {
 	struct nouveau_device *device = nv_device(object);
 =======
+=======
+>>>>>>> v3.18
 int
 nv50_fb_init(struct nouveau_object *object)
 {
 	struct nv50_fb_impl *impl = (void *)object->oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nv50_fb_priv *priv = (void *)object;
 	int ret;
@@ -538,6 +577,7 @@ nv50_fb_init(struct nouveau_object *object)
 
 	/* This is needed to get meaningful information from 100c90
 	 * on traps. No idea what these values mean exactly. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (device->chipset) {
 	case 0x50:
@@ -564,6 +604,8 @@ nv50_fb_oclass = {
 	.handle = NV_SUBDEV(FB, 0x50),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	nv_wr32(priv, 0x100c90, impl->trap);
 	return 0;
 }
@@ -572,6 +614,9 @@ struct nouveau_oclass *
 nv50_fb_oclass = &(struct nv50_fb_impl) {
 	.base.base.handle = NV_SUBDEV(FB, 0x50),
 	.base.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv50_fb_ctor,
 		.dtor = nv50_fb_dtor,
@@ -579,10 +624,16 @@ nv50_fb_oclass = &(struct nv50_fb_impl) {
 		.fini = _nouveau_fb_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.base.memtype = nv50_fb_memtype_valid,
 	.base.ram = &nv50_ram_oclass,
 	.trap = 0x000707ff,
 }.base.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

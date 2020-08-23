@@ -22,6 +22,10 @@
 #include <linux/pid_namespace.h>
 #include <linux/user_namespace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/shmem_fs.h>
+>>>>>>> v3.18
 =======
 #include <linux/shmem_fs.h>
 >>>>>>> v3.18
@@ -61,7 +65,11 @@ static int setfl(int fd, struct file * filp, unsigned long arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_op && filp->f_op->check_flags)
+=======
+	if (filp->f_op->check_flags)
+>>>>>>> v3.18
 =======
 	if (filp->f_op->check_flags)
 >>>>>>> v3.18
@@ -73,8 +81,12 @@ static int setfl(int fd, struct file * filp, unsigned long arg)
 	 * ->fasync() is responsible for setting the FASYNC bit.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((arg ^ filp->f_flags) & FASYNC) && filp->f_op &&
 			filp->f_op->fasync) {
+=======
+	if (((arg ^ filp->f_flags) & FASYNC) && filp->f_op->fasync) {
+>>>>>>> v3.18
 =======
 	if (((arg ^ filp->f_flags) & FASYNC) && filp->f_op->fasync) {
 >>>>>>> v3.18
@@ -111,6 +123,7 @@ static void f_modown(struct file *filp, struct pid *pid, enum pid_type type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __f_setown(struct file *filp, struct pid *pid, enum pid_type type,
 		int force)
 {
@@ -127,6 +140,8 @@ EXPORT_SYMBOL(__f_setown);
 
 int f_setown(struct file *filp, unsigned long arg, int force)
 =======
+=======
+>>>>>>> v3.18
 void __f_setown(struct file *filp, struct pid *pid, enum pid_type type,
 		int force)
 {
@@ -136,13 +151,19 @@ void __f_setown(struct file *filp, struct pid *pid, enum pid_type type,
 EXPORT_SYMBOL(__f_setown);
 
 void f_setown(struct file *filp, unsigned long arg, int force)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	enum pid_type type;
 	struct pid *pid;
 	int who = arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	type = PIDTYPE_PID;
@@ -153,9 +174,14 @@ void f_setown(struct file *filp, unsigned long arg, int force)
 	rcu_read_lock();
 	pid = find_vpid(who);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = __f_setown(filp, pid, type, force);
 	rcu_read_unlock();
 	return result;
+=======
+	__f_setown(filp, pid, type, force);
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	__f_setown(filp, pid, type, force);
 	rcu_read_unlock();
@@ -214,7 +240,11 @@ static int f_setown_ex(struct file *filp, unsigned long arg)
 		ret = -ESRCH;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = __f_setown(filp, pid, type, 1);
+=======
+		 __f_setown(filp, pid, type, 1);
+>>>>>>> v3.18
 =======
 		 __f_setown(filp, pid, type, 1);
 >>>>>>> v3.18
@@ -310,10 +340,13 @@ static long do_fcntl(int fd, unsigned int cmd, unsigned long arg,
 		err = setfl(fd, filp, arg);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case F_GETLK:
 		err = fcntl_getlk(filp, (struct flock __user *) arg);
 		break;
 =======
+=======
+>>>>>>> v3.18
 #if BITS_PER_LONG != 32
 	/* 32-bit arches must use fcntl64() */
 	case F_OFD_GETLK:
@@ -327,6 +360,9 @@ static long do_fcntl(int fd, unsigned int cmd, unsigned long arg,
 	case F_OFD_SETLKW:
 #endif
 		/* Fallthrough */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case F_SETLK:
 	case F_SETLKW:
@@ -345,7 +381,12 @@ static long do_fcntl(int fd, unsigned int cmd, unsigned long arg,
 		break;
 	case F_SETOWN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = f_setown(filp, arg, 1);
+=======
+		f_setown(filp, arg, 1);
+		err = 0;
+>>>>>>> v3.18
 =======
 		f_setown(filp, arg, 1);
 		err = 0;
@@ -385,11 +426,17 @@ static long do_fcntl(int fd, unsigned int cmd, unsigned long arg,
 		err = pipe_fcntl(filp, cmd, arg);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case F_ADD_SEALS:
 	case F_GET_SEALS:
 		err = shmem_fcntl(filp, cmd, arg);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -454,6 +501,7 @@ SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 	
 	switch (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case F_GETLK64:
 			err = fcntl_getlk64(f.file, (struct flock64 __user *) arg);
 			break;
@@ -466,6 +514,8 @@ SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 			err = do_fcntl(fd, cmd, arg, f.file);
 			break;
 =======
+=======
+>>>>>>> v3.18
 	case F_GETLK64:
 	case F_OFD_GETLK:
 		err = fcntl_getlk64(f.file, cmd, (struct flock64 __user *) arg);
@@ -480,6 +530,9 @@ SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 	default:
 		err = do_fcntl(fd, cmd, arg, f.file);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out1:

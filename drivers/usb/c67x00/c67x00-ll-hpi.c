@@ -23,6 +23,10 @@
 
 #include <asm/byteorder.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -67,8 +71,13 @@ struct c67x00_lcp_int_data {
  *
  * The c67x00 chip also support control via SPI or HSS serial
 <<<<<<< HEAD
+<<<<<<< HEAD
  * interfaces.  However, this driver assumes that register access can
  * be performed from IRQ context.  While this is a safe assuption with
+=======
+ * interfaces. However, this driver assumes that register access can
+ * be performed from IRQ context. While this is a safe assumption with
+>>>>>>> v3.18
 =======
  * interfaces. However, this driver assumes that register access can
  * be performed from IRQ context. While this is a safe assumption with
@@ -83,9 +92,12 @@ struct c67x00_lcp_int_data {
 #define HPI_STATUS	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u16 hpi_read_reg(struct c67x00_device *dev, int reg)
 {
 =======
+=======
+>>>>>>> v3.18
 /*
  * According to CY7C67300 specification (tables 140 and 141) HPI read and
  * write cycle duration Tcyc must be at least 6T long, where T is 1/48MHz,
@@ -96,6 +108,9 @@ static inline u16 hpi_read_reg(struct c67x00_device *dev, int reg)
 static inline u16 hpi_read_reg(struct c67x00_device *dev, int reg)
 {
 	ndelay(HPI_T_CYC_NS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return __raw_readw(dev->hpi.base + reg * dev->hpi.regstep);
 }
@@ -103,6 +118,10 @@ static inline u16 hpi_read_reg(struct c67x00_device *dev, int reg)
 static inline void hpi_write_reg(struct c67x00_device *dev, int reg, u16 value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ndelay(HPI_T_CYC_NS);
+>>>>>>> v3.18
 =======
 	ndelay(HPI_T_CYC_NS);
 >>>>>>> v3.18

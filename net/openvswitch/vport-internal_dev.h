@@ -25,6 +25,11 @@
 int ovs_is_internal_dev(const struct net_device *);
 struct vport *ovs_internal_dev_get_vport(struct net_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int ovs_internal_dev_rtnl_link_register(void);
+void ovs_internal_dev_rtnl_link_unregister(void);
+>>>>>>> v3.18
 =======
 int ovs_internal_dev_rtnl_link_register(void);
 void ovs_internal_dev_rtnl_link_unregister(void);

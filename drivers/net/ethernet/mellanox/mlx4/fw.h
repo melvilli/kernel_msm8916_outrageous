@@ -135,6 +135,10 @@ struct mlx4_func_cap {
 	int	reserved_eq;
 	int	mcg_quota;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32	qp0_qkey;
+>>>>>>> v3.18
 =======
 	u32	qp0_qkey;
 >>>>>>> v3.18
@@ -145,6 +149,11 @@ struct mlx4_func_cap {
 	u8	physical_port;
 	u8	port_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8	flags1;
+	u64	phys_port_id;
+>>>>>>> v3.18
 =======
 	u8	flags1;
 	u64	phys_port_id;
@@ -185,6 +194,11 @@ struct mlx4_init_hca_param {
 	u8  steering_mode; /* for QUERY_HCA */
 	u64 dev_cap_enabled;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 cqe_size; /* For use only when CQE stride feature enabled */
+	u16 eqe_size; /* For use only when EQE stride feature enabled */
+>>>>>>> v3.18
 =======
 	u16 cqe_size; /* For use only when CQE stride feature enabled */
 	u16 eqe_size; /* For use only when EQE stride feature enabled */
@@ -235,6 +249,10 @@ int mlx4_UNMAP_ICM_AUX(struct mlx4_dev *dev);
 int mlx4_NOP(struct mlx4_dev *dev);
 int mlx4_MOD_STAT_CFG(struct mlx4_dev *dev, struct mlx4_mod_stat_cfg *cfg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void mlx4_opreq_action(struct work_struct *work);
+>>>>>>> v3.18
 =======
 void mlx4_opreq_action(struct work_struct *work);
 >>>>>>> v3.18

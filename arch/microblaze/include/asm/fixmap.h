@@ -59,6 +59,7 @@ extern void __set_fixmap(enum fixed_addresses idx,
 					phys_addr_t phys, pgprot_t flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define set_fixmap(idx, phys) \
 		__set_fixmap(idx, phys, PAGE_KERNEL)
 /*
@@ -106,12 +107,17 @@ static inline unsigned long virt_to_fix(const unsigned long vaddr)
 	return __virt_to_fix(vaddr);
 }
 =======
+=======
+>>>>>>> v3.18
 #define __FIXADDR_SIZE	(__end_of_fixed_addresses << PAGE_SHIFT)
 #define FIXADDR_START		(FIXADDR_TOP - __FIXADDR_SIZE)
 
 #define FIXMAP_PAGE_NOCACHE PAGE_KERNEL_CI
 
 #include <asm-generic/fixmap.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !__ASSEMBLY__ */

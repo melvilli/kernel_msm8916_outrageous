@@ -684,6 +684,10 @@ static void prepare_set(void) __acquires(set_atomicity_lock)
 
 	/* Flush all TLBs via a mov %cr3, %reg; mov %reg, %cr3 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
+>>>>>>> v3.18
 =======
 	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
 >>>>>>> v3.18
@@ -701,6 +705,10 @@ static void post_set(void) __releases(set_atomicity_lock)
 {
 	/* Flush TLBs (no need to flush caches - they are disabled) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
+>>>>>>> v3.18
 =======
 	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
 >>>>>>> v3.18
@@ -711,7 +719,11 @@ static void post_set(void) __releases(set_atomicity_lock)
 
 	/* Enable caches */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_cr0(read_cr0() & 0xbfffffff);
+=======
+	write_cr0(read_cr0() & ~X86_CR0_CD);
+>>>>>>> v3.18
 =======
 	write_cr0(read_cr0() & ~X86_CR0_CD);
 >>>>>>> v3.18

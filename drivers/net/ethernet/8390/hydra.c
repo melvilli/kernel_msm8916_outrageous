@@ -67,6 +67,10 @@ static void hydra_block_output(struct net_device *dev, int count,
 			       const unsigned char *buf, int start_page);
 static void hydra_remove_one(struct zorro_dev *z);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 hydra_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 hydra_msg_enable;
 >>>>>>> v3.18
@@ -118,7 +122,11 @@ static int hydra_init(struct zorro_dev *z)
 {
     struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
     unsigned long board = ZTWO_VADDR(z->resource.start);
+=======
+    unsigned long board = (unsigned long)ZTWO_VADDR(z->resource.start);
+>>>>>>> v3.18
 =======
     unsigned long board = (unsigned long)ZTWO_VADDR(z->resource.start);
 >>>>>>> v3.18
@@ -128,6 +136,10 @@ static int hydra_init(struct zorro_dev *z)
     int j;
     int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    struct ei_device *ei_local;
+>>>>>>> v3.18
 =======
     struct ei_device *ei_local;
 >>>>>>> v3.18
@@ -150,6 +162,11 @@ static int hydra_init(struct zorro_dev *z)
     stop_page = NESM_STOP_PG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    ei_local = netdev_priv(dev);
+    ei_local->msg_enable = hydra_msg_enable;
+>>>>>>> v3.18
 =======
     ei_local = netdev_priv(dev);
     ei_local->msg_enable = hydra_msg_enable;
@@ -205,8 +222,14 @@ static int hydra_open(struct net_device *dev)
 static int hydra_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (ei_debug > 1)
 	printk(KERN_DEBUG "%s: Shutting down ethercard.\n", dev->name);
+=======
+    struct ei_device *ei_local = netdev_priv(dev);
+
+    netif_dbg(ei_local, ifdown, dev, "Shutting down ethercard.\n");
+>>>>>>> v3.18
 =======
     struct ei_device *ei_local = netdev_priv(dev);
 
@@ -219,7 +242,11 @@ static int hydra_close(struct net_device *dev)
 static void hydra_reset_8390(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     printk(KERN_INFO "Hydra hw reset not there\n");
+=======
+    netdev_info(dev, "Hydra hw reset not there\n");
+>>>>>>> v3.18
 =======
     netdev_info(dev, "Hydra hw reset not there\n");
 >>>>>>> v3.18

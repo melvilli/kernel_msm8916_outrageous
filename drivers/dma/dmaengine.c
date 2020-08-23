@@ -66,6 +66,10 @@
 #include <linux/acpi_dma.h>
 #include <linux/of_dma.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mempool.h>
+>>>>>>> v3.18
 =======
 #include <linux/mempool.h>
 >>>>>>> v3.18
@@ -92,7 +96,12 @@ static struct dma_chan *dev_to_dma_chan(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_memcpy_count(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t memcpy_count_show(struct device *dev,
+				 struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t memcpy_count_show(struct device *dev,
 				 struct device_attribute *attr, char *buf)
@@ -116,14 +125,20 @@ static ssize_t memcpy_count_show(struct device *dev,
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t show_bytes_transferred(struct device *dev, struct device_attribute *attr,
 				      char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(memcpy_count);
 
 static ssize_t bytes_transferred_show(struct device *dev,
 				      struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dma_chan *chan;
@@ -144,13 +159,19 @@ static ssize_t bytes_transferred_show(struct device *dev,
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t show_in_use(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(bytes_transferred);
 
 static ssize_t in_use_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dma_chan *chan;
@@ -167,6 +188,7 @@ static ssize_t in_use_show(struct device *dev, struct device_attribute *attr,
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute dma_attrs[] = {
 	__ATTR(memcpy_count, S_IRUGO, show_memcpy_count, NULL),
@@ -175,6 +197,8 @@ static struct device_attribute dma_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(in_use);
 
 static struct attribute *dma_dev_attrs[] = {
@@ -184,6 +208,9 @@ static struct attribute *dma_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(dma_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void chan_dev_release(struct device *dev)
@@ -203,7 +230,11 @@ static void chan_dev_release(struct device *dev)
 static struct class dma_devclass = {
 	.name		= "dma",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= dma_attrs,
+=======
+	.dev_groups	= dma_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= dma_dev_groups,
 >>>>>>> v3.18
@@ -416,6 +447,7 @@ EXPORT_SYMBOL(dma_issue_pending_all);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * nth_chan - returns the nth channel of the given capability
  * @cap: capability to match
  * @n: nth channel desired
@@ -431,6 +463,8 @@ static struct dma_chan *nth_chan(enum dma_transaction_type cap, int n)
 	struct dma_chan *ret = NULL;
 	struct dma_chan *min = NULL;
 =======
+=======
+>>>>>>> v3.18
  * dma_chan_is_local - returns true if the channel is in the same numa-node as the cpu
  */
 static bool dma_chan_is_local(struct dma_chan *chan, int cpu)
@@ -455,6 +489,9 @@ static struct dma_chan *min_chan(enum dma_transaction_type cap, int cpu)
 	struct dma_chan *chan;
 	struct dma_chan *min = NULL;
 	struct dma_chan *localmin = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	list_for_each_entry(device, &dma_device_list, global_node) {
@@ -464,6 +501,7 @@ static struct dma_chan *min_chan(enum dma_transaction_type cap, int cpu)
 		list_for_each_entry(chan, &device->channels, device_node) {
 			if (!chan->client_count)
 				continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (!min)
 				min = chan;
@@ -487,6 +525,8 @@ static struct dma_chan *min_chan(enum dma_transaction_type cap, int cpu)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 			if (!min || chan->table_count < min->table_count)
 				min = chan;
 
@@ -503,6 +543,9 @@ static struct dma_chan *min_chan(enum dma_transaction_type cap, int cpu)
 		chan->table_count++;
 
 	return chan;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -521,7 +564,10 @@ static void dma_channel_rebalance(void)
 	int cpu;
 	int cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -543,6 +589,7 @@ static void dma_channel_rebalance(void)
 
 	/* redistribute available channels */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = 0;
 	for_each_dma_cap_mask(cap, dma_cap_mask_all)
 		for_each_online_cpu(cpu) {
@@ -551,6 +598,11 @@ static void dma_channel_rebalance(void)
 			else
 				chan = nth_chan(cap, -1);
 
+=======
+	for_each_dma_cap_mask(cap, dma_cap_mask_all)
+		for_each_online_cpu(cpu) {
+			chan = min_chan(cap, cpu);
+>>>>>>> v3.18
 =======
 	for_each_dma_cap_mask(cap, dma_cap_mask_all)
 		for_each_online_cpu(cpu) {
@@ -599,11 +651,14 @@ static struct dma_chan *private_candidate(const dma_cap_mask_t *mask,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * dma_request_channel - try to allocate an exclusive channel
  * @mask: capabilities that the channel must satisfy
  * @fn: optional callback to disposition available channels
  * @fn_param: opaque parameter to pass to dma_filter_fn
 =======
+=======
+>>>>>>> v3.18
  * dma_request_slave_channel - try to get specific channel exclusively
  * @chan: target channel
  */
@@ -664,6 +719,9 @@ EXPORT_SYMBOL_GPL(dma_get_any_slave_channel);
  * @fn_param: opaque parameter to pass to dma_filter_fn
  *
  * Returns pointer to appropriate DMA channel on success or NULL.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct dma_chan *__dma_request_channel(const dma_cap_mask_t *mask,
@@ -717,14 +775,20 @@ EXPORT_SYMBOL_GPL(__dma_request_channel);
  * @dev:	pointer to client device structure
  * @name:	slave channel name
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct dma_chan *dma_request_slave_channel(struct device *dev, const char *name)
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns pointer to appropriate DMA channel on success or an error pointer.
  */
 struct dma_chan *dma_request_slave_channel_reason(struct device *dev,
 						  const char *name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* If device-tree is present get slave info from here */
@@ -736,8 +800,11 @@ struct dma_chan *dma_request_slave_channel_reason(struct device *dev,
 		return acpi_dma_request_slave_chan_by_name(dev, name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	return ERR_PTR(-ENODEV);
 }
 EXPORT_SYMBOL_GPL(dma_request_slave_channel_reason);
@@ -756,6 +823,9 @@ struct dma_chan *dma_request_slave_channel(struct device *dev,
 	if (IS_ERR(ch))
 		return NULL;
 	return ch;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(dma_request_slave_channel);
@@ -850,11 +920,14 @@ static bool device_has_all_tx_types(struct dma_device *device)
 	#endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#if defined(CONFIG_ASYNC_MEMSET) || defined(CONFIG_ASYNC_MEMSET_MODULE)
 	if (!dma_has_cap(DMA_MEMSET, device->cap_mask))
 		return false;
 	#endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	#if defined(CONFIG_ASYNC_XOR) || defined(CONFIG_ASYNC_XOR_MODULE)
@@ -919,8 +992,11 @@ int dma_async_device_register(struct dma_device *device)
 	BUG_ON(dma_has_cap(DMA_PQ_VAL, device->cap_mask) &&
 		!device->device_prep_dma_pq_val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dma_has_cap(DMA_MEMSET, device->cap_mask) &&
 		!device->device_prep_dma_memset);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(dma_has_cap(DMA_INTERRUPT, device->cap_mask) &&
@@ -1070,6 +1146,7 @@ void dma_async_device_unregister(struct dma_device *device)
 EXPORT_SYMBOL(dma_async_device_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * dma_async_memcpy_buf_to_buf - offloaded copy between virtual addresses
  * @chan: DMA channel to offload copy to
@@ -1212,6 +1289,8 @@ dma_async_memcpy_pg_to_pg(struct dma_chan *chan, struct page *dest_pg,
 }
 EXPORT_SYMBOL(dma_async_memcpy_pg_to_pg);
 =======
+=======
+>>>>>>> v3.18
 struct dmaengine_unmap_pool {
 	struct kmem_cache *cache;
 	const char *name;
@@ -1340,6 +1419,9 @@ dmaengine_get_unmap_data(struct device *dev, int nr, gfp_t flags)
 	return unmap;
 }
 EXPORT_SYMBOL(dmaengine_get_unmap_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void dma_async_tx_descriptor_init(struct dma_async_tx_descriptor *tx,
@@ -1362,7 +1444,11 @@ dma_wait_for_async_tx(struct dma_async_tx_descriptor *tx)
 
 	if (!tx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return DMA_SUCCESS;
+=======
+		return DMA_COMPLETE;
+>>>>>>> v3.18
 =======
 		return DMA_COMPLETE;
 >>>>>>> v3.18
@@ -1420,11 +1506,17 @@ EXPORT_SYMBOL_GPL(dma_run_dependencies);
 static int __init dma_bus_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int err = dmaengine_init_unmap_pool();
 
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return class_register(&dma_devclass);
 }

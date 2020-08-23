@@ -24,7 +24,10 @@ config BFIN_MAC
 	depends on (BF516 || BF518 || BF526 || BF527 || BF536 || BF537)
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -57,8 +60,12 @@ config BFIN_RX_DESC_NUM
 	int "Number of receive buffer packets"
 	depends on BFIN_MAC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	range 20 100 if BFIN_MAC_USE_L1
 	range 20 800
+=======
+	range 20 64
+>>>>>>> v3.18
 =======
 	range 20 64
 >>>>>>> v3.18

@@ -147,8 +147,13 @@ static umode_t p9mode2unixmode(struct v9fs_session_info *v9ses,
 		int major = -1, minor = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strncpy(ext, stat->extension, sizeof(ext));
 		sscanf(ext, "%c %u %u", &type, &major, &minor);
+=======
+		strlcpy(ext, stat->extension, sizeof(ext));
+		sscanf(ext, "%c %i %i", &type, &major, &minor);
+>>>>>>> v3.18
 =======
 		strlcpy(ext, stat->extension, sizeof(ext));
 		sscanf(ext, "%c %i %i", &type, &major, &minor);
@@ -305,31 +310,43 @@ int v9fs_init_inode(struct v9fs_session_info *v9ses,
 		if (v9fs_proto_dotl(v9ses)) {
 			inode->i_op = &v9fs_file_inode_operations_dotl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (v9ses->cache)
 				inode->i_fop =
 					&v9fs_cached_file_operations_dotl;
 =======
+=======
+>>>>>>> v3.18
 			if (v9ses->cache == CACHE_LOOSE ||
 			    v9ses->cache == CACHE_FSCACHE)
 				inode->i_fop =
 					&v9fs_cached_file_operations_dotl;
 			else if (v9ses->cache == CACHE_MMAP)
 				inode->i_fop = &v9fs_mmap_file_operations_dotl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			else
 				inode->i_fop = &v9fs_file_operations_dotl;
 		} else {
 			inode->i_op = &v9fs_file_inode_operations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (v9ses->cache)
 				inode->i_fop = &v9fs_cached_file_operations;
 =======
+=======
+>>>>>>> v3.18
 			if (v9ses->cache == CACHE_LOOSE ||
 			    v9ses->cache == CACHE_FSCACHE)
 				inode->i_fop =
 					&v9fs_cached_file_operations;
 			else if (v9ses->cache == CACHE_MMAP)
 				inode->i_fop = &v9fs_mmap_file_operations;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			else
 				inode->i_fop = &v9fs_file_operations;
@@ -468,6 +485,7 @@ void v9fs_evict_inode(struct inode *inode)
 	struct v9fs_inode *v9inode = V9FS_I(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(inode->i_mapping, 0);
 	clear_inode(inode);
 	filemap_fdatawrite(inode->i_mapping);
@@ -476,11 +494,16 @@ void v9fs_evict_inode(struct inode *inode)
 	v9fs_cache_inode_put_cookie(inode);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	truncate_inode_pages_final(inode->i_mapping);
 	clear_inode(inode);
 	filemap_fdatawrite(inode->i_mapping);
 
 	v9fs_cache_inode_put_cookie(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* clunk the fid stashed in writeback_fid */
 	if (v9inode->writeback_fid) {
@@ -563,6 +586,7 @@ static struct inode *v9fs_qid_iget(struct super_block *sb,
 
 	v9fs_stat2inode(st, inode, sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_9P_FSCACHE
 	v9fs_cache_inode_get_cookie(inode);
 #endif
@@ -571,12 +595,17 @@ static struct inode *v9fs_qid_iget(struct super_block *sb,
 error:
 	iget_failed(inode);
 =======
+=======
+>>>>>>> v3.18
 	v9fs_cache_inode_get_cookie(inode);
 	unlock_new_inode(inode);
 	return inode;
 error:
 	unlock_new_inode(inode);
 	iput(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ERR_PTR(retval);
 
@@ -617,7 +646,11 @@ static int v9fs_at_to_dotl_flags(int flags)
  * @dir: directory inode that is being deleted
  * @dentry:  dentry that is being deleted
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @rmdir: removing a directory
+=======
+ * @flags: removing a directory
+>>>>>>> v3.18
 =======
  * @flags: removing a directory
 >>>>>>> v3.18
@@ -689,7 +722,11 @@ v9fs_create(struct v9fs_session_info *v9ses, struct inode *dir,
 	struct inode *inode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "name %s\n", dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, "name %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "name %pd\n", dentry);
 >>>>>>> v3.18
@@ -800,7 +837,11 @@ static int v9fs_vfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 	struct v9fs_session_info *v9ses;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "name %s\n", dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, "name %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "name %pd\n", dentry);
 >>>>>>> v3.18
@@ -827,7 +868,11 @@ static int v9fs_vfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
  * @dir:  inode that is being walked from
  * @dentry: dentry that is being walked to?
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @nameidata: path data
+=======
+ * @flags: lookup flags (unused)
+>>>>>>> v3.18
 =======
  * @flags: lookup flags (unused)
 >>>>>>> v3.18
@@ -839,7 +884,10 @@ struct dentry *v9fs_vfs_lookup(struct inode *dir, struct dentry *dentry,
 {
 	struct dentry *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct super_block *sb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v9fs_session_info *v9ses;
@@ -848,8 +896,13 @@ struct dentry *v9fs_vfs_lookup(struct inode *dir, struct dentry *dentry,
 	char *name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "dir: %p dentry: (%s) %p flags: %x\n",
 		 dir, dentry->d_name.name, dentry, flags);
+=======
+	p9_debug(P9_DEBUG_VFS, "dir: %p dentry: (%pd) %p flags: %x\n",
+		 dir, dentry, dentry, flags);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "dir: %p dentry: (%pd) %p flags: %x\n",
 		 dir, dentry, dentry, flags);
@@ -859,7 +912,10 @@ struct dentry *v9fs_vfs_lookup(struct inode *dir, struct dentry *dentry,
 		return ERR_PTR(-ENAMETOOLONG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb = dir->i_sb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	v9ses = v9fs_inode2v9ses(dir);
@@ -883,7 +939,11 @@ struct dentry *v9fs_vfs_lookup(struct inode *dir, struct dentry *dentry,
 	 * inode. But with cache disabled, lookup should do this.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v9ses->cache)
+=======
+	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
+>>>>>>> v3.18
 =======
 	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
 >>>>>>> v3.18
@@ -938,7 +998,11 @@ v9fs_vfs_atomic_open(struct inode *dir, struct dentry *dentry,
 
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fid = NULL;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -957,7 +1021,12 @@ v9fs_vfs_atomic_open(struct inode *dir, struct dentry *dentry,
 	v9inode = V9FS_I(dentry->d_inode);
 	mutex_lock(&v9inode->v_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v9ses->cache && !v9inode->writeback_fid &&
+=======
+	if ((v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE) &&
+	    !v9inode->writeback_fid &&
+>>>>>>> v3.18
 =======
 	if ((v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE) &&
 	    !v9inode->writeback_fid &&
@@ -985,10 +1054,15 @@ v9fs_vfs_atomic_open(struct inode *dir, struct dentry *dentry,
 
 	file->private_data = fid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_9P_FSCACHE
 	if (v9ses->cache)
 		v9fs_cache_inode_set_cookie(dentry->d_inode, file);
 #endif
+=======
+	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
+		v9fs_cache_inode_set_cookie(dentry->d_inode, file);
+>>>>>>> v3.18
 =======
 	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
 		v9fs_cache_inode_set_cookie(dentry->d_inode, file);
@@ -1139,7 +1213,10 @@ v9fs_vfs_getattr(struct vfsmount *mnt, struct dentry *dentry,
 		 struct kstat *stat)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v9fs_session_info *v9ses;
@@ -1148,7 +1225,10 @@ v9fs_vfs_getattr(struct vfsmount *mnt, struct dentry *dentry,
 
 	p9_debug(P9_DEBUG_VFS, "dentry: %p\n", dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	v9ses = v9fs_dentry2v9ses(dentry);
@@ -1279,7 +1359,11 @@ v9fs_stat2inode(struct p9_wstat *stat, struct inode *inode,
 			 * for non NULL stat->extension
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strncpy(ext, stat->extension, sizeof(ext));
+=======
+			strlcpy(ext, stat->extension, sizeof(ext));
+>>>>>>> v3.18
 =======
 			strlcpy(ext, stat->extension, sizeof(ext));
 >>>>>>> v3.18
@@ -1336,7 +1420,11 @@ static int v9fs_readlink(struct dentry *dentry, char *buffer, int buflen)
 	struct p9_wstat *st;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " %s\n", dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, " %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, " %pd\n", dentry);
 >>>>>>> v3.18
@@ -1363,8 +1451,13 @@ static int v9fs_readlink(struct dentry *dentry, char *buffer, int buflen)
 	memcpy(buffer, st->extension, retval);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "%s -> %s (%.*s)\n",
 		 dentry->d_name.name, st->extension, buflen, buffer);
+=======
+	p9_debug(P9_DEBUG_VFS, "%pd -> %s (%.*s)\n",
+		 dentry, st->extension, buflen, buffer);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "%pd -> %s (%.*s)\n",
 		 dentry, st->extension, buflen, buffer);
@@ -1389,7 +1482,11 @@ static void *v9fs_vfs_follow_link(struct dentry *dentry, struct nameidata *nd)
 	char *link = __getname();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "%s\n", dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, "%pd\n", dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "%pd\n", dentry);
 >>>>>>> v3.18
@@ -1424,8 +1521,13 @@ v9fs_vfs_put_link(struct dentry *dentry, struct nameidata *nd, void *p)
 	char *s = nd_get_link(nd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " %s %s\n",
 		 dentry->d_name.name, IS_ERR(s) ? "<error>" : s);
+=======
+	p9_debug(P9_DEBUG_VFS, " %pd %s\n",
+		 dentry, IS_ERR(s) ? "<error>" : s);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, " %pd %s\n",
 		 dentry, IS_ERR(s) ? "<error>" : s);
@@ -1439,7 +1541,11 @@ v9fs_vfs_put_link(struct dentry *dentry, struct nameidata *nd, void *p)
  * @dir: inode to create special file in
  * @dentry: dentry to create
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mode: mode to create special file
+=======
+ * @perm: mode to create special file
+>>>>>>> v3.18
 =======
  * @perm: mode to create special file
 >>>>>>> v3.18
@@ -1483,8 +1589,13 @@ static int
 v9fs_vfs_symlink(struct inode *dir, struct dentry *dentry, const char *symname)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " %lu,%s,%s\n",
 		 dir->i_ino, dentry->d_name.name, symname);
+=======
+	p9_debug(P9_DEBUG_VFS, " %lu,%pd,%s\n",
+		 dir->i_ino, dentry, symname);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, " %lu,%pd,%s\n",
 		 dir->i_ino, dentry, symname);
@@ -1510,8 +1621,13 @@ v9fs_vfs_link(struct dentry *old_dentry, struct inode *dir,
 	struct p9_fid *oldfid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " %lu,%s,%s\n",
 		 dir->i_ino, dentry->d_name.name, old_dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, " %lu,%pd,%pd\n",
+		 dir->i_ino, dentry, old_dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, " %lu,%pd,%pd\n",
 		 dir->i_ino, dentry, old_dentry);
@@ -1557,8 +1673,13 @@ v9fs_vfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t rde
 	u32 perm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " %lu,%s mode: %hx MAJOR: %u MINOR: %u\n",
 		 dir->i_ino, dentry->d_name.name, mode,
+=======
+	p9_debug(P9_DEBUG_VFS, " %lu,%pd mode: %hx MAJOR: %u MINOR: %u\n",
+		 dir->i_ino, dentry, mode,
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, " %lu,%pd mode: %hx MAJOR: %u MINOR: %u\n",
 		 dir->i_ino, dentry, mode,
@@ -1619,7 +1740,11 @@ int v9fs_refresh_inode(struct p9_fid *fid, struct inode *inode)
 	i_size = inode->i_size;
 	v9fs_stat2inode(st, inode, inode->i_sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v9ses->cache)
+=======
+	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
+>>>>>>> v3.18
 =======
 	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
 >>>>>>> v3.18

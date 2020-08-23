@@ -139,8 +139,12 @@ int v9fs_fid_xattr_set(struct p9_fid *fid, const char *name,
 		p9_debug(P9_DEBUG_VFS, "p9_client_xattrcreate failed %d\n",
 			 retval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p9_client_clunk(fid);
 		return retval;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -157,7 +161,11 @@ int v9fs_fid_xattr_set(struct p9_fid *fid, const char *name,
 			/* error in xattr write */
 			retval = write_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+			goto err;
+>>>>>>> v3.18
 =======
 			goto err;
 >>>>>>> v3.18
@@ -166,12 +174,18 @@ int v9fs_fid_xattr_set(struct p9_fid *fid, const char *name,
 		value_len -= write_count;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return p9_client_clunk(fid);
 =======
+=======
+>>>>>>> v3.18
 	retval = 0;
 err:
 	p9_client_clunk(fid);
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -183,6 +197,10 @@ ssize_t v9fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
 const struct xattr_handler *v9fs_xattr_handlers[] = {
 	&v9fs_xattr_user_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&v9fs_xattr_trusted_handler,
+>>>>>>> v3.18
 =======
 	&v9fs_xattr_trusted_handler,
 >>>>>>> v3.18
@@ -191,6 +209,12 @@ const struct xattr_handler *v9fs_xattr_handlers[] = {
 	&v9fs_xattr_acl_default_handler,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_9P_FS_SECURITY
+	&v9fs_xattr_security_handler,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_9P_FS_SECURITY
 	&v9fs_xattr_security_handler,

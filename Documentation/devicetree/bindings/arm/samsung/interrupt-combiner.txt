@@ -6,7 +6,11 @@ for the group. The interrupt request from each group are connected to a parent
 interrupt controller, such as GIC in case of Exynos4210.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The interrupt combiner controller consists of multiple combiners. Upto eight
+=======
+The interrupt combiner controller consists of multiple combiners. Up to eight
+>>>>>>> v3.18
 =======
 The interrupt combiner controller consists of multiple combiners. Up to eight
 >>>>>>> v3.18
@@ -19,8 +23,13 @@ controller module (which includes multiple combiners). A combiner in the
 interrupt controller module shares config/control registers with other
 combiners. For example, a 32-bit interrupt enable/disable config register
 <<<<<<< HEAD
+<<<<<<< HEAD
 can accommodate upto 4 interrupt combiners (with each combiner supporting
 upto 8 interrupt sources).
+=======
+can accommodate up to 4 interrupt combiners (with each combiner supporting
+up to 8 interrupt sources).
+>>>>>>> v3.18
 =======
 can accommodate up to 4 interrupt combiners (with each combiner supporting
 up to 8 interrupt sources).

@@ -15,10 +15,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution
@@ -66,7 +69,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -89,7 +95,11 @@
 #define PCI_DEVICE_ID_INTEL_AVOTON_SMT	0x1f15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISMT_DESC_ENTRIES	32	/* number of descriptor entries */
+=======
+#define ISMT_DESC_ENTRIES	2	/* number of descriptor entries */
+>>>>>>> v3.18
 =======
 #define ISMT_DESC_ENTRIES	2	/* number of descriptor entries */
 >>>>>>> v3.18
@@ -194,7 +204,11 @@ struct ismt_priv {
  * ismt_ids - PCI device IDs supported by this driver
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ismt_ids) = {
+=======
+static const struct pci_device_id ismt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ismt_ids[] = {
 >>>>>>> v3.18
@@ -359,6 +373,10 @@ static int ismt_process_desc(const struct ismt_desc *desc,
 			break;
 		case I2C_SMBUS_BLOCK_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case I2C_SMBUS_I2C_BLOCK_DATA:
+>>>>>>> v3.18
 =======
 		case I2C_SMBUS_I2C_BLOCK_DATA:
 >>>>>>> v3.18
@@ -516,7 +534,11 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 			desc->control |= ISMT_DESC_BLK;
 			priv->dma_buffer[0] = command;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(&priv->dma_buffer[1], &data->block[1], dma_size);
+=======
+			memcpy(&priv->dma_buffer[1], &data->block[1], dma_size - 1);
+>>>>>>> v3.18
 =======
 			memcpy(&priv->dma_buffer[1], &data->block[1], dma_size - 1);
 >>>>>>> v3.18
@@ -532,7 +554,10 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case I2C_SMBUS_I2C_BLOCK_DATA:
 		/* Make sure the length is valid */
 		if (data->block[0] < 1)
@@ -568,6 +593,9 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 		}
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_err(dev, "Unsupported transaction %d\n",
@@ -602,7 +630,11 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(priv->cmp);
+=======
+	reinit_completion(&priv->cmp);
+>>>>>>> v3.18
 =======
 	reinit_completion(&priv->cmp);
 >>>>>>> v3.18
@@ -647,6 +679,10 @@ static u32 ismt_func(struct i2c_adapter *adap)
 	       I2C_FUNC_SMBUS_PROC_CALL		|
 	       I2C_FUNC_SMBUS_BLOCK_DATA	|
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	       I2C_FUNC_SMBUS_I2C_BLOCK		|
+>>>>>>> v3.18
 =======
 	       I2C_FUNC_SMBUS_I2C_BLOCK		|
 >>>>>>> v3.18
@@ -951,6 +987,10 @@ ismt_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 			dev_err(&pdev->dev, "pci_set_dma_mask fail %p\n",
 				pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			err = -ENODEV;
+>>>>>>> v3.18
 =======
 			err = -ENODEV;
 >>>>>>> v3.18

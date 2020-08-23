@@ -41,15 +41,21 @@
 #include "vmwgfx_fence.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VMWGFX_DRIVER_DATE "20120209"
 #define VMWGFX_DRIVER_MAJOR 2
 #define VMWGFX_DRIVER_MINOR 4
 #define VMWGFX_DRIVER_PATCHLEVEL 0
 =======
+=======
+>>>>>>> v3.18
 #define VMWGFX_DRIVER_DATE "20140704"
 #define VMWGFX_DRIVER_MAJOR 2
 #define VMWGFX_DRIVER_MINOR 6
 #define VMWGFX_DRIVER_PATCHLEVEL 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VMWGFX_FILE_PAGE_OFFSET 0x00100000
 #define VMWGFX_FIFO_STATIC_SIZE (1024*1024)
@@ -58,10 +64,13 @@
 #define VMWGFX_MAX_DISPLAYS 16
 #define VMWGFX_CMD_BOUNCE_INIT_SIZE 32768
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define VMW_PL_GMR TTM_PL_PRIV0
 #define VMW_PL_FLAG_GMR TTM_PL_FLAG_PRIV0
 =======
+=======
+>>>>>>> v3.18
 #define VMWGFX_ENABLE_SCREEN_TARGET_OTABLE 0
 
 /*
@@ -80,6 +89,9 @@
 #define VMW_PL_FLAG_GMR TTM_PL_FLAG_PRIV0
 #define VMW_PL_MOB TTM_PL_PRIV1
 #define VMW_PL_FLAG_MOB TTM_PL_FLAG_PRIV1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VMW_RES_CONTEXT ttm_driver_type0
@@ -87,6 +99,10 @@
 #define VMW_RES_STREAM ttm_driver_type2
 #define VMW_RES_FENCE ttm_driver_type3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VMW_RES_SHADER ttm_driver_type4
+>>>>>>> v3.18
 =======
 #define VMW_RES_SHADER ttm_driver_type4
 >>>>>>> v3.18
@@ -96,6 +112,10 @@ struct vmw_fpriv {
 	struct ttm_object_file *tfile;
 	struct list_head fence_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool gb_aware;
+>>>>>>> v3.18
 =======
 	bool gb_aware;
 >>>>>>> v3.18
@@ -119,6 +139,10 @@ struct vmw_validate_buffer {
 	struct ttm_validate_buffer base;
 	struct drm_hash_item hash;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool validate_as_mob;
+>>>>>>> v3.18
 =======
 	bool validate_as_mob;
 >>>>>>> v3.18
@@ -139,6 +163,10 @@ struct vmw_resource {
 	struct list_head lru_head; /* Protected by the resource lock */
 	struct list_head mob_head; /* Protected by @backup reserved */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head binding_head; /* Protected by binding_mutex */
+>>>>>>> v3.18
 =======
 	struct list_head binding_head; /* Protected by binding_mutex */
 >>>>>>> v3.18
@@ -147,21 +175,30 @@ struct vmw_resource {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Resources that are managed using ioctls.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum vmw_res_type {
 	vmw_res_context,
 	vmw_res_surface,
 	vmw_res_stream,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vmw_res_max
 };
 
 =======
+=======
+>>>>>>> v3.18
 	vmw_res_shader,
 	vmw_res_max
 };
@@ -175,6 +212,9 @@ enum vmw_cmdbuf_res_type {
 
 struct vmw_cmdbuf_res_manager;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct vmw_cursor_snooper {
 	struct drm_crtc *crtc;
@@ -204,8 +244,13 @@ struct vmw_surface {
 struct vmw_marker_queue {
 	struct list_head head;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec lag;
 	struct timespec lag_time;
+=======
+	u64 lag;
+	u64 lag_time;
+>>>>>>> v3.18
 =======
 	u64 lag;
 	u64 lag_time;
@@ -227,6 +272,10 @@ struct vmw_fifo_state {
 
 struct vmw_relocation {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SVGAMobId *mob_loc;
+>>>>>>> v3.18
 =======
 	SVGAMobId *mob_loc;
 >>>>>>> v3.18
@@ -254,7 +303,10 @@ struct vmw_res_cache_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum vmw_dma_map_mode - indicate how to perform TTM page dma mappings.
  */
@@ -373,13 +425,20 @@ struct vmw_ctx_binding_state {
 	struct vmw_ctx_binding shaders[SVGA3D_SHADERTYPE_MAX];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct vmw_sw_context{
 	struct drm_open_hash res_ht;
 	bool res_ht_initialized;
 	bool kernel; /**< is the called made from the kernel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ttm_object_file *tfile;
+=======
+	struct vmw_fpriv *fp;
+>>>>>>> v3.18
 =======
 	struct vmw_fpriv *fp;
 >>>>>>> v3.18
@@ -392,7 +451,10 @@ struct vmw_sw_context{
 	uint32_t cmd_bounce_size;
 	struct list_head resource_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t fence_flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ttm_buffer_object *cur_query_bo;
@@ -403,6 +465,11 @@ struct vmw_sw_context{
 	bool needs_post_query_barrier;
 	struct vmw_resource *error_resource;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vmw_ctx_binding_state staged_bindings;
+	struct list_head staged_cmd_res;
+>>>>>>> v3.18
 =======
 	struct vmw_ctx_binding_state staged_bindings;
 	struct list_head staged_cmd_res;
@@ -439,6 +506,10 @@ struct vmw_private {
 	uint32_t vram_start;
 	uint32_t vram_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t prim_bb_mem;
+>>>>>>> v3.18
 =======
 	uint32_t prim_bb_mem;
 >>>>>>> v3.18
@@ -452,12 +523,15 @@ struct vmw_private {
 	int mmio_mtrr;
 	uint32_t capabilities;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t max_gmr_descriptors;
 	uint32_t max_gmr_ids;
 	uint32_t max_gmr_pages;
 	uint32_t memory_size;
 	bool has_gmr;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t max_gmr_ids;
 	uint32_t max_gmr_pages;
 	uint32_t max_mob_pages;
@@ -465,6 +539,9 @@ struct vmw_private {
 	uint32_t memory_size;
 	bool has_gmr;
 	bool has_mob;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex hw_mutex;
 
@@ -542,6 +619,10 @@ struct vmw_private {
 	struct vmw_sw_context ctx;
 	struct mutex cmdbuf_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex binding_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex binding_mutex;
 >>>>>>> v3.18
@@ -552,7 +633,10 @@ struct vmw_private {
 
 	bool stealth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool is_opened;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool enable_fb;
@@ -571,12 +655,18 @@ struct vmw_private {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Replace this with an rwsem as soon as we have down_xx_interruptible()
 	 */
 	struct ttm_lock reservation_sem;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Query processing. These members
 	 * are protected by the cmdbuf mutex.
@@ -598,7 +688,10 @@ struct vmw_private {
 	struct list_head res_lru[vmw_res_max];
 	uint32_t used_memory_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * DMA mapping stuff.
@@ -610,6 +703,9 @@ struct vmw_private {
 	 */
 	struct ttm_buffer_object *otable_bo;
 	struct vmw_otable *otables;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -659,7 +755,11 @@ void vmw_3d_resource_dec(struct vmw_private *dev_priv, bool hide_svga);
 
 extern int vmw_gmr_bind(struct vmw_private *dev_priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct page *pages[],
+=======
+			const struct vmw_sg_table *vsgt,
+>>>>>>> v3.18
 =======
 			const struct vmw_sg_table *vsgt,
 >>>>>>> v3.18
@@ -671,6 +771,7 @@ extern void vmw_gmr_unbind(struct vmw_private *dev_priv, int gmr_id);
  * Resource utilities - vmwgfx_resource.c
  */
 struct vmw_user_resource_conv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern const struct vmw_user_resource_conv *user_surface_converter;
 extern const struct vmw_user_resource_conv *user_context_converter;
@@ -690,6 +791,8 @@ extern int vmw_context_check(struct vmw_private *dev_priv,
 			     int id,
 			     struct vmw_resource **p_res);
 =======
+=======
+>>>>>>> v3.18
 
 extern void vmw_resource_unreference(struct vmw_resource **p_res);
 extern struct vmw_resource *vmw_resource_reference(struct vmw_resource *res);
@@ -698,6 +801,9 @@ vmw_resource_reference_unless_doomed(struct vmw_resource *res);
 extern int vmw_resource_validate(struct vmw_resource *res);
 extern int vmw_resource_reserve(struct vmw_resource *res, bool no_backup);
 extern bool vmw_resource_needs_backup(const struct vmw_resource *res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int vmw_user_lookup_handle(struct vmw_private *dev_priv,
 				  struct ttm_object_file *tfile,
@@ -710,6 +816,7 @@ extern int vmw_user_resource_lookup_handle(
 	uint32_t handle,
 	const struct vmw_user_resource_conv *converter,
 	struct vmw_resource **p_res);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void vmw_surface_res_free(struct vmw_resource *res);
 extern int vmw_surface_destroy_ioctl(struct drm_device *dev, void *data,
@@ -725,6 +832,8 @@ extern int vmw_surface_validate(struct vmw_private *dev_priv,
 				struct vmw_surface *srf);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 extern void vmw_dmabuf_bo_free(struct ttm_buffer_object *bo);
 extern int vmw_dmabuf_init(struct vmw_private *dev_priv,
 			   struct vmw_dma_buffer *vmw_bo,
@@ -734,7 +843,10 @@ extern int vmw_dmabuf_init(struct vmw_private *dev_priv,
 extern int vmw_user_dmabuf_verify_access(struct ttm_buffer_object *bo,
 				  struct ttm_object_file *tfile);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int vmw_user_dmabuf_alloc(struct vmw_private *dev_priv,
 				 struct ttm_object_file *tfile,
 				 uint32_t size,
@@ -744,12 +856,20 @@ extern int vmw_user_dmabuf_alloc(struct vmw_private *dev_priv,
 extern int vmw_user_dmabuf_reference(struct ttm_object_file *tfile,
 				     struct vmw_dma_buffer *dma_buf,
 				     uint32_t *handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int vmw_dmabuf_alloc_ioctl(struct drm_device *dev, void *data,
 				  struct drm_file *file_priv);
 extern int vmw_dmabuf_unref_ioctl(struct drm_device *dev, void *data,
 				  struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int vmw_user_dmabuf_synccpu_ioctl(struct drm_device *dev, void *data,
+					 struct drm_file *file_priv);
+>>>>>>> v3.18
 =======
 extern int vmw_user_dmabuf_synccpu_ioctl(struct drm_device *dev, void *data,
 					 struct drm_file *file_priv);
@@ -829,6 +949,10 @@ extern void vmw_fifo_commit(struct vmw_private *dev_priv, uint32_t bytes);
 extern int vmw_fifo_send_fence(struct vmw_private *dev_priv,
 			       uint32_t *seqno);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void vmw_fifo_ping_host_locked(struct vmw_private *, uint32_t reason);
+>>>>>>> v3.18
 =======
 extern void vmw_fifo_ping_host_locked(struct vmw_private *, uint32_t reason);
 >>>>>>> v3.18
@@ -851,6 +975,10 @@ extern int vmw_mmap(struct file *filp, struct vm_area_struct *vma);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const size_t vmw_tt_size;
+>>>>>>> v3.18
 =======
 extern const size_t vmw_tt_size;
 >>>>>>> v3.18
@@ -861,11 +989,14 @@ extern struct ttm_placement vmw_vram_gmr_placement;
 extern struct ttm_placement vmw_vram_gmr_ne_placement;
 extern struct ttm_placement vmw_sys_placement;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct ttm_placement vmw_evictable_placement;
 extern struct ttm_placement vmw_srf_placement;
 extern struct ttm_bo_driver vmw_bo_driver;
 extern int vmw_dma_quiescent(struct drm_device *dev);
 =======
+=======
+>>>>>>> v3.18
 extern struct ttm_placement vmw_sys_ne_placement;
 extern struct ttm_placement vmw_evictable_placement;
 extern struct ttm_placement vmw_srf_placement;
@@ -915,6 +1046,9 @@ static inline struct page *vmw_piter_page(struct vmw_piter *viter)
 {
 	return viter->page(viter);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -953,7 +1087,11 @@ extern void vmw_execbuf_copy_fence_user(struct vmw_private *dev_priv,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t vmw_irq_handler(DRM_IRQ_ARGS);
+=======
+extern irqreturn_t vmw_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 extern irqreturn_t vmw_irq_handler(int irq, void *arg);
 >>>>>>> v3.18
@@ -1076,7 +1214,10 @@ extern const struct ttm_mem_type_manager_func vmw_gmrid_manager_func;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Prime - vmwgfx_prime.c
  */
 
@@ -1202,6 +1343,9 @@ extern int vmw_cmdbuf_res_remove(struct vmw_cmdbuf_res_manager *man,
 
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Inline helper functions
  */

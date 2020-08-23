@@ -279,7 +279,11 @@
 #define __NR_getxattr		257
 #define __NR_lgetxattr		258
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_fgetxattr		259
+=======
+#define __NR_fgetxattr		269
+>>>>>>> v3.18
 =======
 #define __NR_fgetxattr		269
 >>>>>>> v3.18

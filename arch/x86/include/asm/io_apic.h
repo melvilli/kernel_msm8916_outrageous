@@ -99,6 +99,11 @@ struct IR_IO_APIC_route_entry {
 #define IOAPIC_EDGE     0
 #define IOAPIC_LEVEL    1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	IOAPIC_MAP_ALLOC		0x1
+#define	IOAPIC_MAP_CHECK		0x2
+>>>>>>> v3.18
 =======
 #define	IOAPIC_MAP_ALLOC		0x1
 #define	IOAPIC_MAP_CHECK		0x2
@@ -124,9 +129,12 @@ extern int mp_irq_entries;
 extern struct mpc_intsrc mp_irqs[MAX_IRQ_SOURCES];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* non-0 if default (table-less) MP configuration */
 extern int mpc_default_type;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Older SiS APIC requires we rewrite the index register */
@@ -142,9 +150,12 @@ extern int noioapicquirk;
 extern int noioapicreroute;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 1 if the timer IRQ uses the '8259A Virtual Wire' mode */
 extern int timer_through_8259;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -157,9 +168,12 @@ extern int timer_through_8259;
 struct io_apic_irq_attr;
 struct irq_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int io_apic_set_pci_routing(struct device *dev, int irq,
 		 struct io_apic_irq_attr *irq_attr);
 void setup_IO_APIC_irq_extra(u32 gsi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void ioapic_insert_resources(void);
@@ -168,9 +182,12 @@ extern int native_setup_ioapic_entry(int, struct IO_APIC_route_entry *,
 				     unsigned int, int,
 				     struct io_apic_irq_attr *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int native_setup_ioapic_entry(int, struct IO_APIC_route_entry *,
 				     unsigned int, int,
 				     struct io_apic_irq_attr *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void eoi_ioapic_irq(unsigned int irq, struct irq_cfg *cfg);
@@ -180,7 +197,10 @@ extern void native_compose_msi_msg(struct pci_dev *pdev,
 				   struct msi_msg *msg, u8 hpet_id);
 extern void native_eoi_ioapic_pin(int apic, int pin, int vector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int io_apic_setup_irq_pin_once(unsigned int irq, int node, struct io_apic_irq_attr *attr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -189,12 +209,15 @@ extern void mask_ioapic_entries(void);
 extern int restore_ioapic_entries(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int get_nr_irqs_gsi(void);
 
 extern void setup_ioapic_ids_from_mpc(void);
 extern void setup_ioapic_ids_from_mpc_nocheck(void);
 
 =======
+=======
+>>>>>>> v3.18
 extern void setup_ioapic_ids_from_mpc(void);
 extern void setup_ioapic_ids_from_mpc_nocheck(void);
 
@@ -215,11 +238,15 @@ struct ioapic_domain_cfg {
 	struct device_node		*dev;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mp_ioapic_gsi{
 	u32 gsi_base;
 	u32 gsi_end;
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct mp_ioapic_gsi  mp_gsi_routing[];
 extern u32 gsi_top;
@@ -227,6 +254,8 @@ int mp_find_ioapic(u32 gsi);
 int mp_find_ioapic_pin(int ioapic, u32 gsi);
 void __init mp_register_ioapic(int id, u32 address, u32 gsi_base);
 =======
+=======
+>>>>>>> v3.18
 extern u32 gsi_top;
 
 extern int mp_find_ioapic(u32 gsi);
@@ -240,6 +269,9 @@ extern int mp_irqdomain_map(struct irq_domain *domain, unsigned int virq,
 			    irq_hw_number_t hwirq);
 extern void mp_irqdomain_unmap(struct irq_domain *domain, unsigned int virq);
 extern int mp_set_gsi_attr(u32 gsi, int trigger, int polarity, int node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void __init pre_init_apic_IRQ0(void);
 
@@ -275,6 +307,11 @@ static inline void io_apic_modify(unsigned int apic, unsigned int reg, unsigned 
 extern void io_apic_eoi(unsigned int apic, unsigned int vector);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool mp_should_keep_irq(struct device *dev);
+
+>>>>>>> v3.18
 =======
 extern bool mp_should_keep_irq(struct device *dev);
 
@@ -283,6 +320,7 @@ extern bool mp_should_keep_irq(struct device *dev);
 
 #define io_apic_assign_pci_irqs 0
 #define setup_ioapic_ids_from_mpc x86_init_noop
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const int timer_through_8259 = 0;
 static inline void ioapic_insert_resources(void) { }
@@ -293,6 +331,8 @@ struct io_apic_irq_attr;
 static inline int io_apic_set_pci_routing(struct device *dev, int irq,
 		 struct io_apic_irq_attr *irq_attr) { return 0; }
 =======
+=======
+>>>>>>> v3.18
 static inline void ioapic_insert_resources(void) { }
 #define gsi_top (NR_IRQS_LEGACY)
 static inline int mp_find_ioapic(u32 gsi) { return 0; }
@@ -300,6 +340,9 @@ static inline u32 mp_pin_to_gsi(int ioapic, int pin) { return UINT_MAX; }
 static inline int mp_map_gsi_to_irq(u32 gsi, unsigned int flags) { return gsi; }
 static inline void mp_unmap_irq(int irq) { }
 static inline bool mp_should_keep_irq(struct device *dev) { return 1; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int save_ioapic_entries(void)

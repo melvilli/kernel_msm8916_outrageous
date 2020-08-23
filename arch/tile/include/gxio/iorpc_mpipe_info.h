@@ -28,6 +28,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GXIO_MPIPE_INFO_OP_INSTANCE_AUX IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1250)
+>>>>>>> v3.18
 =======
 #define GXIO_MPIPE_INFO_OP_INSTANCE_AUX IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1250)
 >>>>>>> v3.18
@@ -36,6 +40,7 @@
 #define GXIO_MPIPE_INFO_OP_CHECK_MMIO_OFFSET IORPC_OPCODE(IORPC_FORMAT_NONE_NOUSER, 0x8001)
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int gxio_mpipe_info_enumerate_aux(gxio_mpipe_info_context_t * context,
 				  unsigned int idx,
@@ -47,6 +52,8 @@ int gxio_mpipe_info_get_mmio_base(gxio_mpipe_info_context_t * context,
 
 int gxio_mpipe_info_check_mmio_offset(gxio_mpipe_info_context_t * context,
 =======
+=======
+>>>>>>> v3.18
 int gxio_mpipe_info_instance_aux(gxio_mpipe_info_context_t *context,
 				 _gxio_mpipe_link_name_t name);
 
@@ -59,6 +66,9 @@ int gxio_mpipe_info_get_mmio_base(gxio_mpipe_info_context_t *context,
 				  HV_PTE *base);
 
 int gxio_mpipe_info_check_mmio_offset(gxio_mpipe_info_context_t *context,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      unsigned long offset, unsigned long size);
 

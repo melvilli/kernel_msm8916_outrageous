@@ -32,6 +32,10 @@
 #include <linux/gpio.h>
 #include <linux/gpio-fan.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -174,7 +178,11 @@ static int get_fan_speed_index(struct gpio_fan_data *fan_data)
 		 "missing speed array entry for GPIO value 0x%x\n", ctrl_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -EINVAL;
+=======
+	return -ENODEV;
+>>>>>>> v3.18
 =======
 	return -ENODEV;
 >>>>>>> v3.18
@@ -318,12 +326,15 @@ exit_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev,
 			 struct device_attribute *attr, char *buf)
 {
 	return sprintf(buf, "gpio-fan\n");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static DEVICE_ATTR(pwm1, S_IRUGO | S_IWUSR, show_pwm, set_pwm);
@@ -336,8 +347,11 @@ static DEVICE_ATTR(fan1_input, S_IRUGO, show_rpm, NULL);
 static DEVICE_ATTR(fan1_target, S_IRUGO | S_IWUSR, show_rpm, set_rpm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static umode_t gpio_fan_is_visible(struct kobject *kobj,
@@ -347,9 +361,15 @@ static umode_t gpio_fan_is_visible(struct kobject *kobj,
 	struct gpio_fan_data *data = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (index == 1 && !data->alarm)
 		return 0;
 	if (index > 1 && !data->ctrl)
+=======
+	if (index == 0 && !data->alarm)
+		return 0;
+	if (index > 0 && !data->ctrl)
+>>>>>>> v3.18
 =======
 	if (index == 0 && !data->alarm)
 		return 0;
@@ -362,9 +382,14 @@ static umode_t gpio_fan_is_visible(struct kobject *kobj,
 
 static struct attribute *gpio_fan_attributes[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&dev_attr_name.attr,
 	&dev_attr_fan1_alarm.attr,		/* 1 */
 	&dev_attr_pwm1.attr,			/* 2 */
+=======
+	&dev_attr_fan1_alarm.attr,		/* 0 */
+	&dev_attr_pwm1.attr,			/* 1 */
+>>>>>>> v3.18
 =======
 	&dev_attr_fan1_alarm.attr,		/* 0 */
 	&dev_attr_pwm1.attr,			/* 1 */
@@ -384,12 +409,18 @@ static const struct attribute_group gpio_fan_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct attribute_group *gpio_fan_groups[] = {
 	&gpio_fan_group,
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fan_ctrl_init(struct gpio_fan_data *fan_data,
 			 struct gpio_fan_platform_data *pdata)
@@ -418,7 +449,11 @@ static int fan_ctrl_init(struct gpio_fan_data *fan_data,
 	fan_data->speed_index = get_fan_speed_index(fan_data);
 	if (fan_data->speed_index < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return fan_data->speed_index;
+>>>>>>> v3.18
 =======
 		return fan_data->speed_index;
 >>>>>>> v3.18
@@ -523,7 +558,11 @@ static int gpio_fan_get_of_pdata(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id of_gpio_fan_match[] = {
+=======
+static const struct of_device_id of_gpio_fan_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_gpio_fan_match[] = {
 >>>>>>> v3.18
@@ -537,7 +576,11 @@ static int gpio_fan_probe(struct platform_device *pdev)
 	int err;
 	struct gpio_fan_data *fan_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_fan_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct gpio_fan_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct gpio_fan_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -585,6 +628,7 @@ static int gpio_fan_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = sysfs_create_group(&pdev->dev.kobj, &gpio_fan_group);
 	if (err)
 		return err;
@@ -596,6 +640,8 @@ static int gpio_fan_probe(struct platform_device *pdev)
 		goto err_remove;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Make this driver part of hwmon class. */
 	fan_data->hwmon_dev =
 		devm_hwmon_device_register_with_groups(&pdev->dev,
@@ -603,11 +649,15 @@ static int gpio_fan_probe(struct platform_device *pdev)
 						       gpio_fan_groups);
 	if (IS_ERR(fan_data->hwmon_dev))
 		return PTR_ERR(fan_data->hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(&pdev->dev, "GPIO fan initialized\n");
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_remove:
@@ -623,6 +673,8 @@ static int gpio_fan_remove(struct platform_device *pdev)
 	sysfs_remove_group(&pdev->dev.kobj, &gpio_fan_group);
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -659,7 +711,10 @@ static SIMPLE_DEV_PM_OPS(gpio_fan_pm, gpio_fan_suspend, gpio_fan_resume);
 static struct platform_driver gpio_fan_driver = {
 	.probe		= gpio_fan_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= gpio_fan_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver	= {

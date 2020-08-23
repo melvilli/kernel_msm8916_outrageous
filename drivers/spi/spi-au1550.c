@@ -56,8 +56,11 @@ struct au1550_spi {
 	volatile psc_spi_t __iomem *regs;
 	int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned freq_max;
 	unsigned freq_min;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -147,7 +150,11 @@ static inline void au1550_spi_mask_ack_all(struct au1550_spi *hw)
 		| PSC_SPIMSK_RU | PSC_SPIMSK_TR | PSC_SPIMSK_TO
 		| PSC_SPIMSK_TU | PSC_SPIMSK_SD | PSC_SPIMSK_MD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -157,7 +164,11 @@ static inline void au1550_spi_mask_ack_all(struct au1550_spi *hw)
 		| PSC_SPIEVNT_RU | PSC_SPIEVNT_TR | PSC_SPIEVNT_TO
 		| PSC_SPIEVNT_TU | PSC_SPIEVNT_SD | PSC_SPIEVNT_MD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -169,15 +180,21 @@ static void au1550_spi_reset_fifos(struct au1550_spi *hw)
 
 	hw->regs->psc_spipcr = PSC_SPIPCR_RC | PSC_SPIPCR_TC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
 	do {
 		pcr = hw->regs->psc_spipcr;
 		au_sync();
 =======
+=======
+>>>>>>> v3.18
 	wmb(); /* drain writebuffer */
 	do {
 		pcr = hw->regs->psc_spipcr;
 		wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (pcr != 0);
 }
@@ -209,9 +226,15 @@ static void au1550_spi_chipsel(struct spi_device *spi, int value)
 
 		cfg = hw->regs->psc_spicfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
 		hw->regs->psc_spicfg = cfg & ~PSC_SPICFG_DE_ENABLE;
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+		hw->regs->psc_spicfg = cfg & ~PSC_SPICFG_DE_ENABLE;
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 		hw->regs->psc_spicfg = cfg & ~PSC_SPICFG_DE_ENABLE;
@@ -245,15 +268,21 @@ static void au1550_spi_chipsel(struct spi_device *spi, int value)
 
 		hw->regs->psc_spicfg = cfg | PSC_SPICFG_DE_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
 		do {
 			stat = hw->regs->psc_spistat;
 			au_sync();
 =======
+=======
+>>>>>>> v3.18
 		wmb(); /* drain writebuffer */
 		do {
 			stat = hw->regs->psc_spistat;
 			wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} while ((stat & PSC_SPISTAT_DR) == 0);
 
@@ -280,6 +309,7 @@ static int au1550_spi_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bpw < 4 || bpw > 24) {
 		dev_err(&spi->dev, "setupxfer: invalid bits_per_word=%d\n",
 			bpw);
@@ -294,14 +324,24 @@ static int au1550_spi_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 	if (!hz)
 		return -EINVAL;
 >>>>>>> v3.18
+=======
+	if (!hz)
+		return -EINVAL;
+>>>>>>> v3.18
 
 	au1550_spi_bits_handlers_set(hw, spi->bits_per_word);
 
 	cfg = hw->regs->psc_spicfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
 	hw->regs->psc_spicfg = cfg & ~PSC_SPICFG_DE_ENABLE;
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+	hw->regs->psc_spicfg = cfg & ~PSC_SPICFG_DE_ENABLE;
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 	hw->regs->psc_spicfg = cfg & ~PSC_SPICFG_DE_ENABLE;
@@ -321,7 +361,11 @@ static int au1550_spi_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 
 	hw->regs->psc_spicfg = cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -330,7 +374,11 @@ static int au1550_spi_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 		do {
 			stat = hw->regs->psc_spistat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			au_sync();
+=======
+			wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 			wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -342,6 +390,7 @@ static int au1550_spi_setupxfer(struct spi_device *spi, struct spi_transfer *t)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int au1550_spi_setup(struct spi_device *spi)
 {
@@ -366,6 +415,8 @@ static int au1550_spi_setup(struct spi_device *spi)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -483,17 +534,23 @@ static int au1550_spi_dma_txrxb(struct spi_device *spi, struct spi_transfer *t)
 	/* by default enable nearly all events interrupt */
 	hw->regs->psc_spimsk = PSC_SPIMSK_SD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
 
 	/* start the transfer */
 	hw->regs->psc_spipcr = PSC_SPIPCR_MS;
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	wmb(); /* drain writebuffer */
 
 	/* start the transfer */
 	hw->regs->psc_spipcr = PSC_SPIPCR_MS;
 	wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wait_for_completion(&hw->master_done);
@@ -524,7 +581,11 @@ static irqreturn_t au1550_spi_dma_irq_callback(struct au1550_spi *hw)
 	stat = hw->regs->psc_spistat;
 	evnt = hw->regs->psc_spievent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -583,7 +644,11 @@ static void au1550_spi_rx_word_##size(struct au1550_spi *hw)		\
 {									\
 	u32 fifoword = hw->regs->psc_spitxrx & (u32)(mask);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();							\
+=======
+	wmb(); /* drain writebuffer */					\
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */					\
 >>>>>>> v3.18
@@ -607,7 +672,11 @@ static void au1550_spi_tx_word_##size(struct au1550_spi *hw)		\
 		fifoword |= PSC_SPITXRX_LC;				\
 	hw->regs->psc_spitxrx = fifoword;				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();							\
+=======
+	wmb(); /* drain writebuffer */					\
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */					\
 >>>>>>> v3.18
@@ -646,7 +715,11 @@ static int au1550_spi_pio_txrxb(struct spi_device *spi, struct spi_transfer *t)
 
 		stat = hw->regs->psc_spistat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -657,17 +730,23 @@ static int au1550_spi_pio_txrxb(struct spi_device *spi, struct spi_transfer *t)
 	/* enable event interrupts */
 	hw->regs->psc_spimsk = mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
 
 	/* start the transfer */
 	hw->regs->psc_spipcr = PSC_SPIPCR_MS;
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	wmb(); /* drain writebuffer */
 
 	/* start the transfer */
 	hw->regs->psc_spipcr = PSC_SPIPCR_MS;
 	wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wait_for_completion(&hw->master_done);
@@ -683,7 +762,11 @@ static irqreturn_t au1550_spi_pio_irq_callback(struct au1550_spi *hw)
 	stat = hw->regs->psc_spistat;
 	evnt = hw->regs->psc_spievent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -717,7 +800,11 @@ static irqreturn_t au1550_spi_pio_irq_callback(struct au1550_spi *hw)
 		busy = 0;
 		stat = hw->regs->psc_spistat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -742,7 +829,11 @@ static irqreturn_t au1550_spi_pio_irq_callback(struct au1550_spi *hw)
 
 	hw->regs->psc_spievent = PSC_SPIEVNT_RR | PSC_SPIEVNT_TR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -765,9 +856,15 @@ static irqreturn_t au1550_spi_pio_irq_callback(struct au1550_spi *hw)
 	if (evnt & PSC_SPIEVNT_TU) {
 		hw->regs->psc_spievent = PSC_SPIEVNT_TU | PSC_SPIEVNT_MD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
 		hw->regs->psc_spipcr = PSC_SPIPCR_MS;
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+		hw->regs->psc_spipcr = PSC_SPIPCR_MS;
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 		hw->regs->psc_spipcr = PSC_SPIPCR_MS;
@@ -827,6 +924,7 @@ static void au1550_spi_setup_psc_as_spi(struct au1550_spi *hw)
 	/* set up the PSC for SPI mode */
 	hw->regs->psc_ctrl = PSC_CTRL_DISABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
 	hw->regs->psc_sel = PSC_SEL_PS_SPIMODE;
 	au_sync();
@@ -841,6 +939,8 @@ static void au1550_spi_setup_psc_as_spi(struct au1550_spi *hw)
 		stat = hw->regs->psc_spistat;
 		au_sync();
 =======
+=======
+>>>>>>> v3.18
 	wmb(); /* drain writebuffer */
 	hw->regs->psc_sel = PSC_SEL_PS_SPIMODE;
 	wmb(); /* drain writebuffer */
@@ -854,6 +954,9 @@ static void au1550_spi_setup_psc_as_spi(struct au1550_spi *hw)
 	do {
 		stat = hw->regs->psc_spistat;
 		wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while ((stat & PSC_SPISTAT_SR) == 0);
 
@@ -870,7 +973,11 @@ static void au1550_spi_setup_psc_as_spi(struct au1550_spi *hw)
 
 	hw->regs->psc_spicfg = cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -879,17 +986,23 @@ static void au1550_spi_setup_psc_as_spi(struct au1550_spi *hw)
 
 	hw->regs->psc_spicfg |= PSC_SPICFG_DE_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
 
 	do {
 		stat = hw->regs->psc_spistat;
 		au_sync();
 =======
+=======
+>>>>>>> v3.18
 	wmb(); /* drain writebuffer */
 
 	do {
 		stat = hw->regs->psc_spistat;
 		wmb(); /* drain writebuffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while ((stat & PSC_SPISTAT_DR) == 0);
 
@@ -914,18 +1027,24 @@ static int au1550_spi_probe(struct platform_device *pdev)
 	/* the spi->mode bits understood by this driver: */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH | SPI_LSB_FIRST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	hw = spi_master_get_devdata(master);
 
 	hw->master = spi_master_get(master);
 	hw->pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 24);
 
 	hw = spi_master_get_devdata(master);
 
 	hw->master = master;
 	hw->pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hw->dev = &pdev->dev;
 
@@ -989,7 +1108,10 @@ static int au1550_spi_probe(struct platform_device *pdev)
 	hw->bitbang.setup_transfer = au1550_spi_setupxfer;
 	hw->bitbang.chipselect = au1550_spi_chipsel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->bitbang.master->setup = au1550_spi_setup;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw->bitbang.txrx_bufs = au1550_spi_txrx_bufs;
@@ -1063,8 +1185,14 @@ static int au1550_spi_probe(struct platform_device *pdev)
 		int min_div = (2 << 0) * (2 * (4 + 1));
 		int max_div = (2 << 3) * (2 * (63 + 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw->freq_max = hw->pdata->mainclk_hz / min_div;
 		hw->freq_min = hw->pdata->mainclk_hz / (max_div + 1) + 1;
+=======
+		master->max_speed_hz = hw->pdata->mainclk_hz / min_div;
+		master->min_speed_hz =
+				hw->pdata->mainclk_hz / (max_div + 1) + 1;
+>>>>>>> v3.18
 =======
 		master->max_speed_hz = hw->pdata->mainclk_hz / min_div;
 		master->min_speed_hz =
@@ -1107,8 +1235,12 @@ err_no_txdma:
 
 err_ioremap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_resource(hw->ioarea);
 	kfree(hw->ioarea);
+=======
+	release_mem_region(r->start, sizeof(psc_spi_t));
+>>>>>>> v3.18
 =======
 	release_mem_region(r->start, sizeof(psc_spi_t));
 >>>>>>> v3.18
@@ -1132,8 +1264,12 @@ static int au1550_spi_remove(struct platform_device *pdev)
 	free_irq(hw->irq, hw);
 	iounmap((void __iomem *)hw->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_resource(hw->ioarea);
 	kfree(hw->ioarea);
+=======
+	release_mem_region(hw->ioarea->start, sizeof(psc_spi_t));
+>>>>>>> v3.18
 =======
 	release_mem_region(hw->ioarea->start, sizeof(psc_spi_t));
 >>>>>>> v3.18
@@ -1145,8 +1281,11 @@ static int au1550_spi_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_master_put(hw->master);
@@ -1158,6 +1297,10 @@ MODULE_ALIAS("platform:au1550-spi");
 
 static struct platform_driver au1550_spi_drv = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe = au1550_spi_probe,
+>>>>>>> v3.18
 =======
 	.probe = au1550_spi_probe,
 >>>>>>> v3.18
@@ -1175,7 +1318,10 @@ static int __init au1550_spi_init(void)
 	 * needed for proper byte ordering to spi fifo
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	switch (alchemy_get_cputype()) {
 	case ALCHEMY_CPU_AU1550:
 	case ALCHEMY_CPU_AU1200:
@@ -1185,6 +1331,9 @@ static int __init au1550_spi_init(void)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (usedma) {
 		ddma_memid = au1xxx_ddma_add_device(&au1550_spi_mem_dbdev);
@@ -1193,7 +1342,11 @@ static int __init au1550_spi_init(void)
 					"dbdma device\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return platform_driver_probe(&au1550_spi_drv, au1550_spi_probe);
+=======
+	return platform_driver_register(&au1550_spi_drv);
+>>>>>>> v3.18
 =======
 	return platform_driver_register(&au1550_spi_drv);
 >>>>>>> v3.18

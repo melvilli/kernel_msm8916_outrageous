@@ -24,11 +24,14 @@ static inline int hest_match_pci(struct acpi_hest_aer_common *p,
 				 struct pci_dev *pci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return	(0           == pci_domain_nr(pci->bus) &&
 		 p->bus      == pci->bus->number &&
 		 p->device   == PCI_SLOT(pci->devfn) &&
 		 p->function == PCI_FUNC(pci->devfn));
 =======
+=======
+>>>>>>> v3.18
 	return   ACPI_HEST_SEGMENT(p->bus) == pci_domain_nr(pci->bus) &&
 		 ACPI_HEST_BUS(p->bus)     == pci->bus->number &&
 		 p->device                 == PCI_SLOT(pci->devfn) &&
@@ -49,6 +52,9 @@ static inline bool hest_match_type(struct acpi_hest_header *hest_hdr,
 		(dev->class >> 16) == PCI_BASE_CLASS_BRIDGE))
 		return true;
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -58,7 +64,10 @@ struct aer_hest_parse_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hest_source_is_pcie_aer(struct acpi_hest_header *hest_hdr)
 {
 	if (hest_hdr->type == ACPI_HEST_TYPE_AER_ROOT_PORT ||
@@ -68,11 +77,15 @@ static int hest_source_is_pcie_aer(struct acpi_hest_header *hest_hdr)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int aer_hest_parse(struct acpi_hest_header *hest_hdr, void *data)
 {
 	struct aer_hest_parse_info *info = data;
 	struct acpi_hest_aer_common *p;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 pcie_type = 0;
 	u8 bridge = 0;
@@ -103,6 +116,8 @@ static int aer_hest_parse(struct acpi_hest_header *hest_hdr, void *data)
 			ff = !!(p->flags & ACPI_HEST_FIRMWARE_FIRST);
 	info->firmware_first = ff;
 =======
+=======
+>>>>>>> v3.18
 	int ff;
 
 	if (!hest_source_is_pcie_aer(hest_hdr))
@@ -127,6 +142,9 @@ static int aer_hest_parse(struct acpi_hest_header *hest_hdr, void *data)
 	} else
 		if (hest_match_pci(p, info->pci_dev))
 			info->firmware_first = ff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -152,6 +170,12 @@ static void aer_set_firmware_first(struct pci_dev *pci_dev)
 int pcie_aer_get_firmware_first(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pci_is_pcie(dev))
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (!pci_is_pcie(dev))
 		return 0;
@@ -164,6 +188,7 @@ int pcie_aer_get_firmware_first(struct pci_dev *dev)
 
 static bool aer_firmware_first;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int aer_hest_parse_aff(struct acpi_hest_header *hest_hdr, void *data)
 {
@@ -185,6 +210,8 @@ static int aer_hest_parse_aff(struct acpi_hest_header *hest_hdr, void *data)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * aer_acpi_firmware_first - Check if APEI should control AER.
  */
@@ -192,10 +219,13 @@ bool aer_acpi_firmware_first(void)
 {
 	static bool parsed = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!parsed) {
 		apei_hest_parse(aer_hest_parse_aff, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct aer_hest_parse_info info = {
 		.pci_dev	= NULL,	/* Check all PCIe devices */
 		.firmware_first	= 0,
@@ -204,6 +234,9 @@ bool aer_acpi_firmware_first(void)
 	if (!parsed) {
 		apei_hest_parse(aer_hest_parse, &info);
 		aer_firmware_first = info.firmware_first;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		parsed = true;
 	}

@@ -50,11 +50,17 @@ mode=mode	Sets the mode flags to the given (octal) value, regardless
 		will map to 600.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nofilenametruncate
 		The file system will return an error when filename exceeds
 		standard maximum filename length (30 characters).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 reserved=num	Sets the number of reserved blocks at the start of the
 		partition to num. You should never need this option.
@@ -189,9 +195,14 @@ this fs. For a most up-to-date list of bugs please consult
 fs/affs/Changes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Filenames are truncated to 30 characters without warning (this
 can be changed by setting the compile-time option AFFS_NO_TRUNCATE
 in include/linux/amigaffs.h).
+=======
+By default, filenames are truncated to 30 characters without warning.
+'nofilenametruncate' mount option can change that behavior.
+>>>>>>> v3.18
 =======
 By default, filenames are truncated to 30 characters without warning.
 'nofilenametruncate' mount option can change that behavior.

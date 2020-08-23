@@ -13,7 +13,11 @@
 #include <asm/sysrq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __show_regs(struct pt_regs *regs)
+=======
+void show_regs(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void show_regs(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -38,11 +42,14 @@ void show_regs(struct pt_regs *regs)
 	       PT_REGS_R13(regs), PT_REGS_R14(regs), PT_REGS_R15(regs));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void show_regs(struct pt_regs *regs)
 {
 	__show_regs(regs);
 	show_trace(current, (unsigned long *) &regs);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

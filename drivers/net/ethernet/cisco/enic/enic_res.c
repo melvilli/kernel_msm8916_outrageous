@@ -72,6 +72,10 @@ int enic_get_vnic_config(struct enic *enic)
 	GET_CONFIG(intr_timer_usec);
 	GET_CONFIG(loop_tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GET_CONFIG(num_arfs);
+>>>>>>> v3.18
 =======
 	GET_CONFIG(num_arfs);
 >>>>>>> v3.18

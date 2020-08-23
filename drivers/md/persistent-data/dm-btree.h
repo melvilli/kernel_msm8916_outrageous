@@ -138,7 +138,10 @@ int dm_btree_remove(struct dm_btree_info *info, dm_block_t root,
  * Returns < 0 on failure.  Otherwise the number of key entries that have
  * been filled out.  Remember trees can have zero entries, and as such have
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * no lowest key.
  */
 int dm_btree_find_lowest_key(struct dm_btree_info *info, dm_block_t root,
@@ -147,6 +150,9 @@ int dm_btree_find_lowest_key(struct dm_btree_info *info, dm_block_t root,
 /*
  * Returns < 0 on failure.  Otherwise the number of key entries that have
  * been filled out.  Remember trees can have zero entries, and as such have
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * no highest key.
  */

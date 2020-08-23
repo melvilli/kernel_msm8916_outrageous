@@ -4,7 +4,11 @@
 
 / {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compatible = "xtensa,ml605";
+=======
+	compatible = "cdns,xtensa-ml605";
+>>>>>>> v3.18
 =======
 	compatible = "cdns,xtensa-ml605";
 >>>>>>> v3.18

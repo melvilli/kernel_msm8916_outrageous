@@ -9,7 +9,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct atmel_lcdfb_info mimc200_lcdc_data;
+=======
+extern struct atmel_lcdfb_pdata mimc200_lcdc_data;
+>>>>>>> v3.18
 =======
 extern struct atmel_lcdfb_pdata mimc200_lcdc_data;
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ static struct fb_monspecs __initdata mimc200_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct atmel_lcdfb_info __initdata mimc200_lcdc_data = {
+=======
+struct atmel_lcdfb_pdata __initdata mimc200_lcdc_data = {
+>>>>>>> v3.18
 =======
 struct atmel_lcdfb_pdata __initdata mimc200_lcdc_data = {
 >>>>>>> v3.18

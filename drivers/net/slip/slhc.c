@@ -85,9 +85,14 @@ static unsigned char * put16(unsigned char *cp, unsigned short x);
 static unsigned short pull16(unsigned char **cpp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Allocate compression data structure
  *	slots must be in range 0 to 255 (zero meaning no compression)
  * Returns pointer to structure or ERR_PTR() on error.
+=======
+/* Initialize compression data structure
+ *	slots must be in range 0 to 255 (zero meaning no compression)
+>>>>>>> v3.18
 =======
 /* Initialize compression data structure
  *	slots must be in range 0 to 255 (zero meaning no compression)
@@ -101,9 +106,12 @@ slhc_init(int rslots, int tslots)
 	struct slcompress *comp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rslots < 0 || rslots > 255 || tslots < 0 || tslots > 255)
 		return ERR_PTR(-EINVAL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	comp = kzalloc(sizeof(struct slcompress), GFP_KERNEL);
@@ -111,7 +119,11 @@ slhc_init(int rslots, int tslots)
 		goto out_fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rslots > 0) {
+=======
+	if ( rslots > 0  &&  rslots < 256 ) {
+>>>>>>> v3.18
 =======
 	if ( rslots > 0  &&  rslots < 256 ) {
 >>>>>>> v3.18
@@ -123,7 +135,11 @@ slhc_init(int rslots, int tslots)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tslots > 0) {
+=======
+	if ( tslots > 0  &&  tslots < 256 ) {
+>>>>>>> v3.18
 =======
 	if ( tslots > 0  &&  tslots < 256 ) {
 >>>>>>> v3.18
@@ -162,7 +178,11 @@ out_free:
 	kfree(comp);
 out_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ERR_PTR(-ENOMEM);
+=======
+	return NULL;
+>>>>>>> v3.18
 =======
 	return NULL;
 >>>>>>> v3.18
@@ -421,7 +441,10 @@ found:
 			break;
 		goto uncompressed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case SPECIAL_I:

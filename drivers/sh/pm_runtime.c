@@ -22,12 +22,15 @@
 
 #ifdef CONFIG_PM_RUNTIME
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int default_platform_runtime_idle(struct device *dev)
 {
 	/* suspend synchronously to disable clocks immediately */
 	return pm_runtime_suspend(dev);
 =======
+=======
+>>>>>>> v3.18
 static int sh_pm_runtime_suspend(struct device *dev)
 {
 	int ret;
@@ -59,15 +62,23 @@ static int sh_pm_runtime_resume(struct device *dev)
 	}
 
 	return pm_generic_runtime_resume(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct dev_pm_domain default_pm_domain = {
 	.ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.runtime_suspend = pm_clk_suspend,
 		.runtime_resume = pm_clk_resume,
 		.runtime_idle = default_platform_runtime_idle,
+=======
+		.runtime_suspend = sh_pm_runtime_suspend,
+		.runtime_resume = sh_pm_runtime_resume,
+>>>>>>> v3.18
 =======
 		.runtime_suspend = sh_pm_runtime_suspend,
 		.runtime_resume = sh_pm_runtime_resume,
@@ -92,7 +103,10 @@ static struct pm_clk_notifier_block platform_bus_notifier = {
 static int __init sh_pm_runtime_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_ARCH_SHMOBILE_MULTI)) {
 		if (!of_machine_is_compatible("renesas,emev2") &&
 		    !of_machine_is_compatible("renesas,r7s72100") &&
@@ -110,11 +124,15 @@ static int __init sh_pm_runtime_init(void)
 			return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pm_clk_add_notifier(&platform_bus_type, &platform_bus_notifier);
 	return 0;
 }
 core_initcall(sh_pm_runtime_init);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __init sh_pm_runtime_late_init(void)
@@ -123,5 +141,7 @@ static int __init sh_pm_runtime_late_init(void)
 	return 0;
 }
 late_initcall(sh_pm_runtime_late_init);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

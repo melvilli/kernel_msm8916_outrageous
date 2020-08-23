@@ -163,7 +163,12 @@ static int ip_vs_wrr_dest_changed(struct ip_vs_service *svc,
  */
 static struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_wrr_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
+=======
+ip_vs_wrr_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
+		   struct ip_vs_iphdr *iph)
+>>>>>>> v3.18
 =======
 ip_vs_wrr_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		   struct ip_vs_iphdr *iph)
@@ -221,7 +226,11 @@ found:
 	IP_VS_DBG_BUF(6, "WRR: server %s:%u "
 		      "activeconns %d refcnt %d weight %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      IP_VS_DBG_ADDR(svc->af, &dest->addr), ntohs(dest->port),
+=======
+		      IP_VS_DBG_ADDR(dest->af, &dest->addr), ntohs(dest->port),
+>>>>>>> v3.18
 =======
 		      IP_VS_DBG_ADDR(dest->af, &dest->addr), ntohs(dest->port),
 >>>>>>> v3.18

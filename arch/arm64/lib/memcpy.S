@@ -58,7 +58,10 @@ D_h	.req	x14
 
 ENTRY(memcpy)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prfm    pldl1strm, [src, #(1*L1_CACHE_BYTES)]
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mov	dst, dstin
@@ -193,7 +196,10 @@ ENTRY(memcpy)
 	stp	D_l, D_h, [dst],#16
 	ldp	D_l, D_h, [src],#16
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prfm    pldl1strm, [src, #(4*L1_CACHE_BYTES)]
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	subs	count, count, #64

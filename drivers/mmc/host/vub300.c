@@ -2080,7 +2080,11 @@ static void vub300_enable_sdio_irq(struct mmc_host *mmc, int enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vub300_init_card(struct mmc_host *mmc, struct mmc_card *card)
+=======
+static void vub300_init_card(struct mmc_host *mmc, struct mmc_card *card)
+>>>>>>> v3.18
 =======
 static void vub300_init_card(struct mmc_host *mmc, struct mmc_card *card)
 >>>>>>> v3.18
@@ -2397,6 +2401,7 @@ static void vub300_disconnect(struct usb_interface *interface)
 static int vub300_suspend(struct usb_interface *intf, pm_message_t message)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vub300_mmc_host *vub300 = usb_get_intfdata(intf);
 	if (!vub300 || !vub300->mmc) {
 		return 0;
@@ -2408,10 +2413,14 @@ static int vub300_suspend(struct usb_interface *intf, pm_message_t message)
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int vub300_resume(struct usb_interface *intf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vub300_mmc_host *vub300 = usb_get_intfdata(intf);
 	if (!vub300 || !vub300->mmc) {
@@ -2421,6 +2430,9 @@ static int vub300_resume(struct usb_interface *intf)
 		mmc_resume_host(mmc);
 		return 0;
 	}
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

@@ -2,7 +2,10 @@
 #define _ASM_IRQ_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EXT_INTERRUPT	1
 #define IO_INTERRUPT	2
 #define THIN_INTERRUPT	3
@@ -34,6 +37,9 @@
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/hardirq.h>
 #include <linux/percpu.h>
@@ -41,12 +47,15 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum interruption_main_class {
 	EXTERNAL_INTERRUPT,
 	IO_INTERRUPT,
 	NR_IRQS
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum interruption_class {
@@ -64,6 +73,10 @@ enum interruption_class {
 	IRQEXT_CMC,
 	IRQEXT_CMR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IRQEXT_FTP,
+>>>>>>> v3.18
 =======
 	IRQEXT_FTP,
 >>>>>>> v3.18
@@ -84,6 +97,10 @@ enum interruption_class {
 	IRQIO_MSI,
 	IRQIO_VIR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IRQIO_VAI,
+>>>>>>> v3.18
 =======
 	IRQIO_VAI,
 >>>>>>> v3.18
@@ -101,7 +118,11 @@ DECLARE_PER_CPU_SHARED_ALIGNED(struct irq_stat, irq_stat);
 static __always_inline void inc_irq_stat(enum interruption_class irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).irqs[irq]++;
+=======
+	__this_cpu_inc(irq_stat.irqs[irq]);
+>>>>>>> v3.18
 =======
 	__this_cpu_inc(irq_stat.irqs[irq]);
 >>>>>>> v3.18
@@ -114,6 +135,7 @@ struct ext_code {
 
 typedef void (*ext_int_handler_t)(struct ext_code, unsigned int, unsigned long);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int register_external_interrupt(u16 code, ext_int_handler_t handler);
 int unregister_external_interrupt(u16 code, ext_int_handler_t handler);
@@ -132,6 +154,8 @@ void measurement_alert_subclass_unregister(void);
 						enable_irq(irq)
 #endif
 =======
+=======
+>>>>>>> v3.18
 int register_external_irq(u16 code, ext_int_handler_t handler);
 int unregister_external_irq(u16 code, ext_int_handler_t handler);
 
@@ -146,6 +170,9 @@ void irq_subclass_unregister(enum irq_subclass subclass);
 #define irq_canonicalize(irq)  (irq)
 
 #endif /* __ASSEMBLY__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_IRQ_H */

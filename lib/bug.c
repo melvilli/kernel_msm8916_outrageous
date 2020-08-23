@@ -38,6 +38,12 @@
     Jeremy Fitzhardinge <jeremy@goop.org> 2006
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) fmt
@@ -160,6 +166,7 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 	if (warning) {
 		/* this is a WARN_ON rather than BUG/BUG_ON */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "------------[ cut here ]------------\n");
 
 		if (file)
@@ -170,6 +177,8 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 			       "[verbose debug info unavailable]\n",
 			       (void *)bugaddr);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("------------[ cut here ]------------\n");
 
 		if (file)
@@ -177,6 +186,9 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 		else
 			pr_warn("WARNING: at %p [verbose debug info unavailable]\n",
 				(void *)bugaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		print_modules();
@@ -191,6 +203,7 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 
 	if (file)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "kernel BUG at %s:%u!\n",
 		       file, line);
 	else
@@ -198,10 +211,15 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 		       "[verbose debug info unavailable]\n",
 		       (void *)bugaddr);
 =======
+=======
+>>>>>>> v3.18
 		pr_crit("kernel BUG at %s:%u!\n", file, line);
 	else
 		pr_crit("Kernel BUG at %p [verbose debug info unavailable]\n",
 			(void *)bugaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return BUG_TRAP_TYPE_BUG;

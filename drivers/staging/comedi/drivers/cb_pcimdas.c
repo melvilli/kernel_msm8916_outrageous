@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -40,6 +43,7 @@ Configuration Options:
 Developed from cb_pcidas and skel by Richard Bytheway (mocelet@sucs.org).
 Only supports DIO, AO and simple AI in it's present form.
 <<<<<<< HEAD
+<<<<<<< HEAD
 No interrupts, multi channel or FIFO AI, although the card looks like it could support this.
 See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 */
@@ -47,6 +51,8 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 #include <linux/pci.h>
 #include <linux/delay.h>
 =======
+=======
+>>>>>>> v3.18
 No interrupts, multi channel or FIFO AI,
 although the card looks like it could support this.
 See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
@@ -54,6 +60,9 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 
 #include <linux/module.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
 
@@ -63,6 +72,7 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 #include "8255.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* #define CBPCIMDAS_DEBUG */
 #undef CBPCIMDAS_DEBUG
 
@@ -71,6 +81,10 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 /* sizes of io regions (bytes) */
 #define BADR3_SIZE 16
 
+=======
+/* Registers for the PCIM-DAS1602/16 */
+
+>>>>>>> v3.18
 =======
 /* Registers for the PCIM-DAS1602/16 */
 
@@ -106,6 +120,7 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 struct cb_pcimdas_private {
 	/* base addresses */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long BADR3;
 
 	/* Used for AO readback */
@@ -117,6 +132,8 @@ struct cb_pcimdas_private {
  * mode.
  */
 =======
+=======
+>>>>>>> v3.18
 	unsigned long daqio;
 	unsigned long BADR3;
 };
@@ -135,12 +152,16 @@ static int cb_pcimdas_ai_eoc(struct comedi_device *dev,
 	return -EBUSY;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn, unsigned int *data)
 {
 	struct cb_pcimdas_private *devpriv = dev->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int n, i;
 	unsigned int d;
@@ -149,12 +170,17 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 	unsigned short chanlims;
 	int maxchans;
 =======
+=======
+>>>>>>> v3.18
 	int n;
 	unsigned int d;
 	int chan = CR_CHAN(insn->chanspec);
 	unsigned short chanlims;
 	int maxchans;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*  only support sw initiated reads from a single channel */
@@ -175,15 +201,21 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 		outb(d, devpriv->BADR3 + 5);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb(0x01, devpriv->BADR3 + 6);	/* set bursting off, conversions on */
 	outb(0x00, devpriv->BADR3 + 7);	/* set range to 10V. UP/BP is controlled by a switch on the board */
 =======
+=======
+>>>>>>> v3.18
 
 	/* set bursting off, conversions on */
 	outb(0x01, devpriv->BADR3 + 6);
 
 	/* set range to 10V. UP/BP is controlled by a switch on the board */
 	outb(0x00, devpriv->BADR3 + 7);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -196,6 +228,7 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 	/* convert n samples */
 	for (n = 0; n < insn->n; n++) {
 		/* trigger conversion */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		outw(0, dev->iobase + 0);
 
@@ -215,6 +248,8 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 		/* read data */
 		data[n] = inw(dev->iobase + 0);
 =======
+=======
+>>>>>>> v3.18
 		outw(0, devpriv->daqio + 0);
 
 		/* wait for conversion to end */
@@ -224,6 +259,9 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 
 		/* read data */
 		data[n] = inw(devpriv->daqio + 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -231,6 +269,7 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 	return n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cb_pcimdas_ao_winsn(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
@@ -275,6 +314,8 @@ static int cb_pcimdas_ao_rinsn(struct comedi_device *dev,
 
 	return i;
 =======
+=======
+>>>>>>> v3.18
 static int cb_pcimdas_ao_insn_write(struct comedi_device *dev,
 				    struct comedi_subdevice *s,
 				    struct comedi_insn *insn,
@@ -293,6 +334,9 @@ static int cb_pcimdas_ao_insn_write(struct comedi_device *dev,
 	s->readback[chan] = val;
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -303,6 +347,7 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	struct cb_pcimdas_private *devpriv;
 	struct comedi_subdevice *s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long iobase_8255;
 	int ret;
 
@@ -311,17 +356,23 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 		return -ENOMEM;
 	dev->private = devpriv;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_pci_enable(dev);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->iobase = pci_resource_start(pcidev, 2);
 	devpriv->BADR3 = pci_resource_start(pcidev, 3);
@@ -335,6 +386,11 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 /* return -EINVAL; */
 /* } */
 /* dev->irq = pcidev->irq; */
+=======
+	devpriv->daqio = pci_resource_start(pcidev, 2);
+	devpriv->BADR3 = pci_resource_start(pcidev, 3);
+	dev->iobase = pci_resource_start(pcidev, 4);
+>>>>>>> v3.18
 =======
 	devpriv->daqio = pci_resource_start(pcidev, 2);
 	devpriv->BADR3 = pci_resource_start(pcidev, 3);
@@ -366,6 +422,7 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	/* ranges are hardware settable, but not software readable. */
 	s->range_table = &range_unknown;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_write = &cb_pcimdas_ao_winsn;
 	s->insn_read = &cb_pcimdas_ao_rinsn;
 
@@ -375,6 +432,8 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
 =======
+=======
+>>>>>>> v3.18
 	s->insn_write = cb_pcimdas_ao_insn_write;
 	s->insn_read = comedi_readback_insn_read;
 
@@ -387,11 +446,15 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	ret = subdev_8255_init(dev, s, NULL, 0x00);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void cb_pcimdas_detach(struct comedi_device *dev)
 {
@@ -402,12 +465,18 @@ static void cb_pcimdas_detach(struct comedi_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct comedi_driver cb_pcimdas_driver = {
 	.driver_name	= "cb_pcimdas",
 	.module		= THIS_MODULE,
 	.auto_attach	= cb_pcimdas_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= cb_pcimdas_detach,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -421,7 +490,11 @@ static int cb_pcimdas_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cb_pcimdas_pci_table) = {
+=======
+static const struct pci_device_id cb_pcimdas_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cb_pcimdas_pci_table[] = {
 >>>>>>> v3.18

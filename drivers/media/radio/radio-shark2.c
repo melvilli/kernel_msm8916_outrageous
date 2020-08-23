@@ -238,7 +238,11 @@ static void shark_unregister_leds(struct shark_device *shark)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void shark_resume_leds(struct shark_device *shark)
+=======
+static inline void shark_resume_leds(struct shark_device *shark)
+>>>>>>> v3.18
 =======
 static inline void shark_resume_leds(struct shark_device *shark)
 >>>>>>> v3.18

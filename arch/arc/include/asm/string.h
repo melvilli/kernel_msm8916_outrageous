@@ -18,8 +18,11 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __HAVE_ARCH_MEMSET
@@ -40,7 +43,10 @@ extern int strcmp(const char *cs, const char *ct);
 extern __kernel_size_t strlen(const char *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_ARC_STRING_H */

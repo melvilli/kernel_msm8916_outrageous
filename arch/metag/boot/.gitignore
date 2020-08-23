@@ -2,7 +2,11 @@ vmlinux*
 uImage*
 ramdisk.*
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.dtb
+=======
+*.dtb*
+>>>>>>> v3.18
 =======
 *.dtb*
 >>>>>>> v3.18

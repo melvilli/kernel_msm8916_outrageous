@@ -5,7 +5,10 @@
 menuconfig PCCARD
 	tristate "PCCard (PCMCIA/CardBus) support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -149,6 +152,7 @@ config TCIC
 	  PCMCIA cards are plugged into. If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PCMCIA_M8XX
 	tristate "MPC8xx PCMCIA support"
 	depends on PCCARD && PPC && 8xx
@@ -159,6 +163,8 @@ config PCMCIA_M8XX
 
 	  This driver is also available as a module called m8xx_pcmcia.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PCMCIA_ALCHEMY_DEVBOARD
@@ -210,6 +216,10 @@ config PCMCIA_SA1111
 	select PCMCIA_SOC_COMMON
 	select PCMCIA_SA11XX_BASE if ARCH_SA1100
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select PCMCIA_PXA2XX if ARCH_LUBBOCK && SA1111
+>>>>>>> v3.18
 =======
 	select PCMCIA_PXA2XX if ARCH_LUBBOCK && SA1111
 >>>>>>> v3.18
@@ -229,7 +239,10 @@ config PCMCIA_PXA2XX
 		    || MACH_VPAC270 || MACH_BALLOON3 || MACH_COLIBRI \
 		    || MACH_COLIBRI320 || MACH_H4700)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PCMCIA_SA1111 if ARCH_LUBBOCK && SA1111
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select PCMCIA_SOC_COMMON
@@ -257,7 +270,11 @@ config PCMCIA_DEBUG
 config PCMCIA_PROBE
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default y if ISA && !ARCH_SA1100 && !ARCH_CLPS711X && !PARISC
+=======
+	default y if ISA && !ARCH_SA1100 && !PARISC
+>>>>>>> v3.18
 =======
 	default y if ISA && !ARCH_SA1100 && !PARISC
 >>>>>>> v3.18
@@ -306,7 +323,11 @@ config BFIN_CFPCMCIA
 config AT91_CF
 	tristate "AT91 CompactFlash Controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCMCIA && ARCH_AT91RM9200
+=======
+	depends on PCMCIA && ARCH_AT91
+>>>>>>> v3.18
 =======
 	depends on PCMCIA && ARCH_AT91
 >>>>>>> v3.18

@@ -33,7 +33,11 @@ int mac_partition(struct parsed_partitions *state)
 	unsigned char *data;
 	int slot, blocks_in_map;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned secsize, datasize, partoffset;
+=======
+	unsigned secsize;
+>>>>>>> v3.18
 =======
 	unsigned secsize;
 >>>>>>> v3.18
@@ -55,6 +59,7 @@ int mac_partition(struct parsed_partitions *state)
 	secsize = be16_to_cpu(md->block_size);
 	put_dev_sector(sect);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	datasize = round_down(secsize, 512);
 	data = read_part_sector(state, datasize / 512, &sect);
 	if (!data)
@@ -64,10 +69,15 @@ int mac_partition(struct parsed_partitions *state)
 		return -1;
 	part = (struct mac_partition *) (data + partoffset);
 =======
+=======
+>>>>>>> v3.18
 	data = read_part_sector(state, secsize/512, &sect);
 	if (!data)
 		return -1;
 	part = (struct mac_partition *) (data + secsize%512);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (be16_to_cpu(part->signature) != MAC_PARTITION_MAGIC) {
 		put_dev_sector(sect);
@@ -97,7 +107,11 @@ int mac_partition(struct parsed_partitions *state)
 			be32_to_cpu(part->block_count) * (secsize/512));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strnicmp(part->type, "Linux_RAID", 10))
+=======
+		if (!strncasecmp(part->type, "Linux_RAID", 10))
+>>>>>>> v3.18
 =======
 		if (!strncasecmp(part->type, "Linux_RAID", 10))
 >>>>>>> v3.18
@@ -120,7 +134,11 @@ int mac_partition(struct parsed_partitions *state)
 
 			if (strcasecmp(part->type, "Apple_UNIX_SVR2") == 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    || (strnicmp(part->type, "Linux", 5) == 0
+=======
+			    || (strncasecmp(part->type, "Linux", 5) == 0
+>>>>>>> v3.18
 =======
 			    || (strncasecmp(part->type, "Linux", 5) == 0
 >>>>>>> v3.18
@@ -133,7 +151,11 @@ int mac_partition(struct parsed_partitions *state)
 					goodness++;
 				for (i = 0; i <= l - 4; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (strnicmp(part->name + i, "root",
+=======
+					if (strncasecmp(part->name + i, "root",
+>>>>>>> v3.18
 =======
 					if (strncasecmp(part->name + i, "root",
 >>>>>>> v3.18
@@ -143,7 +165,11 @@ int mac_partition(struct parsed_partitions *state)
 					}
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (strnicmp(part->name, "swap", 4) == 0)
+=======
+				if (strncasecmp(part->name, "swap", 4) == 0)
+>>>>>>> v3.18
 =======
 				if (strncasecmp(part->name, "swap", 4) == 0)
 >>>>>>> v3.18

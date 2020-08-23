@@ -20,6 +20,10 @@
 #include <linux/reboot.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_fdt.h>
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ static void ppa8548_show_cpuinfo(struct seq_file *m)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

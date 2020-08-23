@@ -14,7 +14,11 @@
 #define _ASM_X86_SYSCALL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/audit.h>
+=======
+#include <uapi/linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/audit.h>
 >>>>>>> v3.18
@@ -25,7 +29,12 @@
 #include <asm/unistd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const unsigned long sys_call_table[];
+=======
+typedef void (*sys_call_ptr_t)(void);
+extern const sys_call_ptr_t sys_call_table[];
+>>>>>>> v3.18
 =======
 typedef void (*sys_call_ptr_t)(void);
 extern const sys_call_ptr_t sys_call_table[];
@@ -100,8 +109,12 @@ static inline void syscall_set_arguments(struct task_struct *task,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int syscall_get_arch(struct task_struct *task,
 				   struct pt_regs *regs)
+=======
+static inline int syscall_get_arch(void)
+>>>>>>> v3.18
 =======
 static inline int syscall_get_arch(void)
 >>>>>>> v3.18
@@ -234,8 +247,12 @@ static inline void syscall_set_arguments(struct task_struct *task,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int syscall_get_arch(struct task_struct *task,
 				   struct pt_regs *regs)
+=======
+static inline int syscall_get_arch(void)
+>>>>>>> v3.18
 =======
 static inline int syscall_get_arch(void)
 >>>>>>> v3.18
@@ -251,7 +268,11 @@ static inline int syscall_get_arch(void)
 	 * x32 tasks should be considered AUDIT_ARCH_X86_64.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (task_thread_info(task)->status & TS_COMPAT)
+=======
+	if (task_thread_info(current)->status & TS_COMPAT)
+>>>>>>> v3.18
 =======
 	if (task_thread_info(current)->status & TS_COMPAT)
 >>>>>>> v3.18

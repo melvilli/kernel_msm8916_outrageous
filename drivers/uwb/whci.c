@@ -176,7 +176,11 @@ static int whci_probe(struct pci_dev *pci, const struct pci_device_id *id)
 	err = -ENOMEM;
 	card = kzalloc(sizeof(struct whci_card)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       + sizeof(struct whci_dev *) * (n_caps + 1),
+=======
+		       + sizeof(struct umc_dev *) * (n_caps + 1),
+>>>>>>> v3.18
 =======
 		       + sizeof(struct umc_dev *) * (n_caps + 1),
 >>>>>>> v3.18
@@ -258,6 +262,7 @@ static struct pci_driver whci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init whci_init(void)
 {
 	return pci_register_driver(&whci_driver);
@@ -271,6 +276,9 @@ static void __exit whci_exit(void)
 module_init(whci_init);
 module_exit(whci_exit);
 
+=======
+module_pci_driver(whci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(whci_driver);
 >>>>>>> v3.18

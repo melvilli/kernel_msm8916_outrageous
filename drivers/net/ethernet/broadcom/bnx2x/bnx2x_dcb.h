@@ -13,7 +13,11 @@
  * consent.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -139,8 +143,11 @@ enum {
 #define PFC_BRB1_REG_HIGH_LLFC_HIGH_THRESHOLD			170
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct cos_entry_help_data {
@@ -178,7 +185,10 @@ struct cos_help_data {
 			 IS_DCBX_PFC_PRI_ONLY_PAUSE((bp), (pg_pri))))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct pg_entry_help_data {
@@ -213,6 +223,12 @@ int bnx2x_dcbnl_update_applist(struct bnx2x *bp, bool delall);
 #endif /* BCM_DCBNL */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp);
+int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp);
+
+>>>>>>> v3.18
 =======
 int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp);
 int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp);

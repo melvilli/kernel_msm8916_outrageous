@@ -447,7 +447,12 @@ struct procfs_args {
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 osf_ufs_mount(const char *dirname, struct ufs_args __user *args, int flags)
+=======
+osf_ufs_mount(const char __user *dirname,
+	      struct ufs_args __user *args, int flags)
+>>>>>>> v3.18
 =======
 osf_ufs_mount(const char __user *dirname,
 	      struct ufs_args __user *args, int flags)
@@ -472,7 +477,12 @@ osf_ufs_mount(const char __user *dirname,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 osf_cdfs_mount(const char *dirname, struct cdfs_args __user *args, int flags)
+=======
+osf_cdfs_mount(const char __user *dirname,
+	       struct cdfs_args __user *args, int flags)
+>>>>>>> v3.18
 =======
 osf_cdfs_mount(const char __user *dirname,
 	       struct cdfs_args __user *args, int flags)
@@ -497,7 +507,12 @@ osf_cdfs_mount(const char __user *dirname,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 osf_procfs_mount(const char *dirname, struct procfs_args __user *args, int flags)
+=======
+osf_procfs_mount(const char __user *dirname,
+		 struct procfs_args __user *args, int flags)
+>>>>>>> v3.18
 =======
 osf_procfs_mount(const char __user *dirname,
 		 struct procfs_args __user *args, int flags)
@@ -516,6 +531,7 @@ SYSCALL_DEFINE4(osf_mount, unsigned long, typenr, const char __user *, path,
 {
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct filename *name;
 
 	name = getname(path);
@@ -532,6 +548,8 @@ SYSCALL_DEFINE4(osf_mount, unsigned long, typenr, const char __user *, path,
 	case 9:
 		retval = osf_procfs_mount(name->name, data, flag);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (typenr) {
 	case 1:
@@ -542,6 +560,9 @@ SYSCALL_DEFINE4(osf_mount, unsigned long, typenr, const char __user *, path,
 		break;
 	case 9:
 		retval = osf_procfs_mount(path, data, flag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -549,8 +570,12 @@ SYSCALL_DEFINE4(osf_mount, unsigned long, typenr, const char __user *, path,
 		printk("osf_mount(%ld, %x)\n", typenr, flag);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	putname(name);
  out:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

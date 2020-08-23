@@ -13,17 +13,27 @@
 #include <linux/dma-mapping.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dmaengine.h>
 #include <linux/of.h>
 
 #include <mach/dma.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <sound/core.h>
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -37,7 +47,11 @@ static int pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 	struct pxa2xx_runtime_data *prtd = runtime->private_data;
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma;
+=======
+	struct snd_dmaengine_dai_dma_data *dma;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma;
 >>>>>>> v3.18
@@ -55,7 +69,11 @@ static int pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 	if (prtd->params == NULL) {
 		prtd->params = dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = pxa_request_dma(prtd->params->name, DMA_PRIO_LOW,
+=======
+		ret = pxa_request_dma("name", DMA_PRIO_LOW,
+>>>>>>> v3.18
 =======
 		ret = pxa_request_dma("name", DMA_PRIO_LOW,
 >>>>>>> v3.18
@@ -67,7 +85,11 @@ static int pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,
 		pxa_free_dma(prtd->dma_ch);
 		prtd->params = dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = pxa_request_dma(prtd->params->name, DMA_PRIO_LOW,
+=======
+		ret = pxa_request_dma("name", DMA_PRIO_LOW,
+>>>>>>> v3.18
 =======
 		ret = pxa_request_dma("name", DMA_PRIO_LOW,
 >>>>>>> v3.18
@@ -108,14 +130,18 @@ static struct snd_pcm_ops pxa2xx_pcm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 pxa2xx_pcm_dmamask = DMA_BIT_MASK(32);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int pxa2xx_soc_pcm_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
 	struct snd_pcm *pcm = rtd->pcm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = 0;
 
@@ -124,11 +150,16 @@ static int pxa2xx_soc_pcm_new(struct snd_soc_pcm_runtime *rtd)
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(32);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pcm->streams[SNDRV_PCM_STREAM_PLAYBACK].substream) {
@@ -166,11 +197,14 @@ static int pxa2xx_soc_platform_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver pxa_pcm_driver = {
 	.driver = {
 			.name = "pxa-pcm-audio",
 			.owner = THIS_MODULE,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id snd_soc_pxa_audio_match[] = {
 	{ .compatible   = "mrvl,pxa-pcm-audio" },
@@ -183,6 +217,9 @@ static struct platform_driver pxa_pcm_driver = {
 		.name = "pxa-pcm-audio",
 		.owner = THIS_MODULE,
 		.of_match_table = of_match_ptr(snd_soc_pxa_audio_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 

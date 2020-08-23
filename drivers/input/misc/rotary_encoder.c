@@ -17,7 +17,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -28,6 +31,10 @@
 #include <linux/rotary_encoder.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -151,7 +158,11 @@ static irqreturn_t rotary_encoder_half_period_irq(int irq, void *dev_id)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id rotary_encoder_of_match[] = {
+=======
+static const struct of_device_id rotary_encoder_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id rotary_encoder_of_match[] = {
 >>>>>>> v3.18
@@ -329,8 +340,11 @@ static int rotary_encoder_remove(struct platform_device *pdev)
 		kfree(pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -110,12 +120,18 @@ struct iwl_ltr_config_cmd {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Radio LP RX Energy Threshold measured in dBm */
 #define POWER_LPRX_RSSI_THRESHOLD	75
 #define POWER_LPRX_RSSI_THRESHOLD_MAX	94
 #define POWER_LPRX_RSSI_THRESHOLD_MIN	30
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * enum iwl_power_flags - masks for power table command flags
@@ -126,9 +142,12 @@ struct iwl_ltr_config_cmd {
  * @POWER_FLAGS_SKIP_OVER_DTIM_MSK: '0' PM have to walk up every DTIM,
  *		'1' PM could sleep over DTIM till listen Interval.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @POWER_FLAGS_ADVANCE_PM_ENA_MSK: Advanced PM (uAPSD) enable mask
  * @POWER_FLAGS_LPRX_ENA_MSK: Low Power RX enable.
 =======
+=======
+>>>>>>> v3.18
  * @POWER_FLAGS_SNOOZE_ENA_MSK: Enable snoozing only if uAPSD is enabled and all
  *		access categories are both delivery and trigger enabled.
  * @POWER_FLAGS_BT_SCO_ENA: Enable BT SCO coex only if uAPSD and
@@ -137,6 +156,9 @@ struct iwl_ltr_config_cmd {
  * @POWER_FLAGS_LPRX_ENA_MSK: Low Power RX enable.
  * @POWER_FLAGS_AP_UAPSD_MISBEHAVING_ENA_MSK: AP/GO's uAPSD misbehaving
  *		detection enablement
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 enum iwl_power_flags {
@@ -144,14 +166,20 @@ enum iwl_power_flags {
 	POWER_FLAGS_POWER_MANAGEMENT_ENA_MSK	= BIT(1),
 	POWER_FLAGS_SKIP_OVER_DTIM_MSK		= BIT(2),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_FLAGS_ADVANCE_PM_ENA_MSK		= BIT(9),
 	POWER_FLAGS_LPRX_ENA_MSK		= BIT(11),
 =======
+=======
+>>>>>>> v3.18
 	POWER_FLAGS_SNOOZE_ENA_MSK		= BIT(5),
 	POWER_FLAGS_BT_SCO_ENA			= BIT(8),
 	POWER_FLAGS_ADVANCE_PM_ENA_MSK		= BIT(9),
 	POWER_FLAGS_LPRX_ENA_MSK		= BIT(11),
 	POWER_FLAGS_UAPSD_MISBEHAVING_ENA_MSK	= BIT(12),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -159,7 +187,12 @@ enum iwl_power_flags {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct iwl_powertable_cmd - Power Table Command
+=======
+ * struct iwl_powertable_cmd - legacy power command. Beside old API support this
+ *	is used also with a new	power API for device wide power settings.
+>>>>>>> v3.18
 =======
  * struct iwl_powertable_cmd - legacy power command. Beside old API support this
  *	is used also with a new	power API for device wide power settings.
@@ -177,7 +210,13 @@ enum iwl_power_flags {
  *			PSM transition - legacy PM
  * @sleep_interval:	not in use
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @keep_alive_beacons:	not in use
+=======
+ * @skip_dtim_periods:	Number of DTIM periods to skip if Skip over DTIM flag
+ *			is set. For example, if it is required to skip over
+ *			one DTIM, this value need to be set to 2 (DTIM periods).
+>>>>>>> v3.18
 =======
  * @skip_dtim_periods:	Number of DTIM periods to skip if Skip over DTIM flag
  *			is set. For example, if it is required to skip over
@@ -188,7 +227,11 @@ enum iwl_power_flags {
  */
 struct iwl_powertable_cmd {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* PM_POWER_TABLE_CMD_API_S_VER_5 */
+=======
+	/* PM_POWER_TABLE_CMD_API_S_VER_6 */
+>>>>>>> v3.18
 =======
 	/* PM_POWER_TABLE_CMD_API_S_VER_6 */
 >>>>>>> v3.18
@@ -199,11 +242,14 @@ struct iwl_powertable_cmd {
 	__le32 tx_data_timeout;
 	__le32 sleep_interval[IWL_POWER_VEC_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 keep_alive_beacons;
 	__le32 lprx_rssi_threshold;
 } __packed;
 
 =======
+=======
+>>>>>>> v3.18
 	__le32 skip_dtim_periods;
 	__le32 lprx_rssi_threshold;
 } __packed;
@@ -436,5 +482,8 @@ struct iwl_beacon_filter_cmd {
 
 #define IWL_BF_CMD_CONFIG_DEFAULTS IWL_BF_CMD_CONFIG(_DEFAULT)
 #define IWL_BF_CMD_CONFIG_D0I3 IWL_BF_CMD_CONFIG(_D0I3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

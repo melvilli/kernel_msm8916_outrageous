@@ -55,7 +55,10 @@ CONFIG_SGI_IOC4=y
 CONFIG_RAID_ATTRS=y
 CONFIG_SCSI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y

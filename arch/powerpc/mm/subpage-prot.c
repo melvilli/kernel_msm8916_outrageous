@@ -79,7 +79,11 @@ static void hpte_flush_range(struct mm_struct *mm, unsigned long addr,
 	arch_enter_lazy_mmu_mode();
 	for (; npages > 0; --npages) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_update(mm, addr, pte, 0, 0);
+=======
+		pte_update(mm, addr, pte, 0, 0, 0);
+>>>>>>> v3.18
 =======
 		pte_update(mm, addr, pte, 0, 0, 0);
 >>>>>>> v3.18
@@ -110,7 +114,11 @@ static void subpage_prot_clear(unsigned long addr, unsigned long len)
 	for (; addr < limit; addr = next) {
 		next = pmd_addr_end(addr, limit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (addr < 0x100000000) {
+=======
+		if (addr < 0x100000000UL) {
+>>>>>>> v3.18
 =======
 		if (addr < 0x100000000UL) {
 >>>>>>> v3.18
@@ -139,7 +147,10 @@ static void subpage_prot_clear(unsigned long addr, unsigned long len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 static int subpage_walk_pmd_entry(pmd_t *pmd, unsigned long addr,
 				  unsigned long end, struct mm_walk *walk)
@@ -187,6 +198,9 @@ static void subpage_mark_vma_nohuge(struct mm_struct *mm, unsigned long addr,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Copy in a subpage protection map for an address range.
@@ -227,16 +241,22 @@ long sys_subpage_prot(unsigned long addr, unsigned long len, u32 __user *map)
 
 	down_write(&mm->mmap_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (limit = addr + len; addr < limit; addr = next) {
 		next = pmd_addr_end(addr, limit);
 		err = -ENOMEM;
 		if (addr < 0x100000000) {
 =======
+=======
+>>>>>>> v3.18
 	subpage_mark_vma_nohuge(mm, addr, len);
 	for (limit = addr + len; addr < limit; addr = next) {
 		next = pmd_addr_end(addr, limit);
 		err = -ENOMEM;
 		if (addr < 0x100000000UL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			spm = spt->low_prot;
 		} else {

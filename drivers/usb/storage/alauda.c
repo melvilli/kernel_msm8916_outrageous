@@ -250,11 +250,15 @@ static void nand_init_ecc(void) {
 static void nand_compute_ecc(unsigned char *data, unsigned char *ecc) {
 	int i, j, a;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char par, bit, bits[8];
 
 	par = 0;
 	for (j = 0; j < 8; j++)
 		bits[j] = 0;
+=======
+	unsigned char par = 0, bit, bits[8] = {0};
+>>>>>>> v3.18
 =======
 	unsigned char par = 0, bit, bits[8] = {0};
 >>>>>>> v3.18
@@ -424,6 +428,7 @@ static int alauda_init_media(struct us_data *us)
 		return USB_STOR_TRANSPORT_ERROR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_stor_dbg(us, "Media signature: %02X %02X %02X %02X\n",
 		     data[0], data[1], data[2], data[3]);
 	media_info = alauda_card_find_id(data[1]);
@@ -433,11 +438,16 @@ static int alauda_init_media(struct us_data *us)
 			"%02X %02X %02X %02X\n",
 			data[0], data[1], data[2], data[3]);
 =======
+=======
+>>>>>>> v3.18
 	usb_stor_dbg(us, "Media signature: %4ph\n", data);
 	media_info = alauda_card_find_id(data[1]);
 	if (media_info == NULL) {
 		pr_warn("alauda_init_media: Unrecognised media signature: %4ph\n",
 			data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return USB_STOR_TRANSPORT_ERROR;
 	}
@@ -530,7 +540,11 @@ static int alauda_check_status2(struct us_data *us)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_stor_dbg(us, "%02X %02X %02X\n", data[0], data[1], data[2]);
+=======
+	usb_stor_dbg(us, "%3ph\n", data);
+>>>>>>> v3.18
 =======
 	usb_stor_dbg(us, "%3ph\n", data);
 >>>>>>> v3.18

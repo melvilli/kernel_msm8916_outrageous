@@ -13,6 +13,7 @@
 
 #include <linux/serial_8250.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dmaengine.h>
 
 struct uart_8250_dma {
@@ -24,6 +25,8 @@ struct uart_8250_dma {
 	int			tx_chan_id;
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/serial_reg.h>
 #include <linux/dmaengine.h>
 
@@ -35,6 +38,9 @@ struct uart_8250_dma {
 	void			*rx_param;
 	void			*tx_param;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dma_slave_config	rxconf;
 	struct dma_slave_config	txconf;
@@ -75,6 +81,10 @@ struct serial8250_config {
 	unsigned short	tx_loadsz;
 	unsigned char	fcr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char	rxtrig_bytes[UART_FCR_R_TRIG_MAX_STATE];
+>>>>>>> v3.18
 =======
 	unsigned char	rxtrig_bytes[UART_FCR_R_TRIG_MAX_STATE];
 >>>>>>> v3.18
@@ -89,6 +99,10 @@ struct serial8250_config {
 #define UART_CAP_RTOIE	(1 << 13)	/* UART needs IER bit 4 set (Xscale, Tegra) */
 #define UART_CAP_HFIFO	(1 << 14)	/* UART has a "hidden" FIFO */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UART_CAP_RPM	(1 << 15)	/* Runtime PM is active while idle */
+>>>>>>> v3.18
 =======
 #define UART_CAP_RPM	(1 << 15)	/* Runtime PM is active while idle */
 >>>>>>> v3.18
@@ -133,6 +147,11 @@ static inline void serial_dl_write(struct uart_8250_port *up, int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct uart_8250_port *serial8250_get_port(int line);
+
+>>>>>>> v3.18
 =======
 struct uart_8250_port *serial8250_get_port(int line);
 

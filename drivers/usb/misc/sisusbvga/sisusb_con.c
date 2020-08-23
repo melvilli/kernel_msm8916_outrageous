@@ -209,7 +209,11 @@ sisusbcon_init(struct vc_data *c, int init)
 	int cols, rows;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This is called by take_over_console(),
+=======
+	/* This is called by do_take_over_console(),
+>>>>>>> v3.18
 =======
 	/* This is called by do_take_over_console(),
 >>>>>>> v3.18
@@ -278,7 +282,11 @@ sisusbcon_deinit(struct vc_data *c)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This is called by take_over_console()
+=======
+	/* This is called by do_take_over_console()
+>>>>>>> v3.18
 =======
 	/* This is called by do_take_over_console()
 >>>>>>> v3.18
@@ -1499,8 +1507,14 @@ sisusb_console_init(struct sisusb_usb_data *sisusb, int first, int last)
 
 	/* Now grab the desired console(s) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = take_over_console(&sisusb_con, first - 1, last - 1, 0);
 
+=======
+	console_lock();
+	ret = do_take_over_console(&sisusb_con, first - 1, last - 1, 0);
+	console_unlock();
+>>>>>>> v3.18
 =======
 	console_lock();
 	ret = do_take_over_console(&sisusb_con, first - 1, last - 1, 0);
@@ -1550,12 +1564,15 @@ sisusb_console_exit(struct sisusb_usb_data *sisusb)
 	if (sisusb->haveconsole) {
 		for (i = 0; i < MAX_NR_CONSOLES; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sisusb->havethisconsole[i])
 				take_over_console(&sisusb_dummy_con, i, i, 0);
 				/* At this point, con_deinit for all our
 				 * consoles is executed by take_over_console().
 				 */
 =======
+=======
+>>>>>>> v3.18
 			if (sisusb->havethisconsole[i]) {
 				console_lock();
 				do_take_over_console(&sisusb_dummy_con, i, i, 0);
@@ -1564,6 +1581,9 @@ sisusb_console_exit(struct sisusb_usb_data *sisusb)
 				 * consoles is executed by do_take_over_console().
 				 */
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sisusb->haveconsole = 0;
 	}

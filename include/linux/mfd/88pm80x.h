@@ -18,7 +18,10 @@
 #include <linux/atomic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PM80X_VERSION_MASK		(0xFF)	/* 80X chip ID mask */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum {
@@ -303,8 +306,12 @@ struct pm80x_chip {
 	struct regmap_irq_chip *regmap_irq_chip;
 	struct regmap_irq_chip_data *irq_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char version;
 	int id;
+=======
+	int type;
+>>>>>>> v3.18
 =======
 	int type;
 >>>>>>> v3.18
@@ -317,9 +324,12 @@ struct pm80x_chip {
 struct pm80x_platform_data {
 	struct pm80x_rtc_pdata *rtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short power_page_addr;	/* power page I2C address */
 	unsigned short gpadc_page_addr;	/* gpadc page I2C address */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * For the regulator not defined, set regulators[not_defined] to be
 	 * NULL. num_regulators are the number of regulators supposed to be
@@ -328,6 +338,9 @@ struct pm80x_platform_data {
 	 */
 	struct regulator_init_data *regulators[PM800_ID_RG_MAX];
 	unsigned int num_regulators;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int irq_mode;		/* Clear interrupt by read/write(0/1) */
 	int batt_det;		/* enable/disable */
@@ -364,7 +377,11 @@ static inline int pm80x_dev_suspend(struct device *dev)
 
 	if (device_may_wakeup(dev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(irq, &chip->wu_flag);
+=======
+		set_bit((1 << irq), &chip->wu_flag);
+>>>>>>> v3.18
 =======
 		set_bit((1 << irq), &chip->wu_flag);
 >>>>>>> v3.18
@@ -380,7 +397,11 @@ static inline int pm80x_dev_resume(struct device *dev)
 
 	if (device_may_wakeup(dev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(irq, &chip->wu_flag);
+=======
+		clear_bit((1 << irq), &chip->wu_flag);
+>>>>>>> v3.18
 =======
 		clear_bit((1 << irq), &chip->wu_flag);
 >>>>>>> v3.18
@@ -390,8 +411,12 @@ static inline int pm80x_dev_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pm80x_init(struct i2c_client *client,
 		      const struct i2c_device_id *id);
+=======
+extern int pm80x_init(struct i2c_client *client);
+>>>>>>> v3.18
 =======
 extern int pm80x_init(struct i2c_client *client);
 >>>>>>> v3.18

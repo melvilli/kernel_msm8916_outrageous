@@ -46,8 +46,13 @@ static struct super_block *efivarfs_sb;
  * case-insensitive match on part 2.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efivarfs_d_compare(const struct dentry *parent, const struct inode *pinode,
 			      const struct dentry *dentry, const struct inode *inode,
+=======
+static int efivarfs_d_compare(const struct dentry *parent,
+			      const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 static int efivarfs_d_compare(const struct dentry *parent,
 			      const struct dentry *dentry,
@@ -69,8 +74,12 @@ static int efivarfs_d_compare(const struct dentry *parent,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efivarfs_d_hash(const struct dentry *dentry,
 			   const struct inode *inode, struct qstr *qstr)
+=======
+static int efivarfs_d_hash(const struct dentry *dentry, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 static int efivarfs_d_hash(const struct dentry *dentry, struct qstr *qstr)
 >>>>>>> v3.18
@@ -94,6 +103,7 @@ static int efivarfs_d_hash(const struct dentry *dentry, struct qstr *qstr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Retaining negative dentries for an in-memory filesystem just wastes
  * memory and lookup time: arrange for them to be deleted immediately.
@@ -108,10 +118,15 @@ static struct dentry_operations efivarfs_d_ops = {
 	.d_hash = efivarfs_d_hash,
 	.d_delete = efivarfs_delete_dentry,
 =======
+=======
+>>>>>>> v3.18
 static const struct dentry_operations efivarfs_d_ops = {
 	.d_compare = efivarfs_d_compare,
 	.d_hash = efivarfs_d_hash,
 	.d_delete = always_delete_dentry,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -125,7 +140,11 @@ static struct dentry *efivarfs_alloc_dentry(struct dentry *parent, char *name)
 	q.len = strlen(name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = efivarfs_d_hash(NULL, NULL, &q);
+=======
+	err = efivarfs_d_hash(NULL, &q);
+>>>>>>> v3.18
 =======
 	err = efivarfs_d_hash(NULL, &q);
 >>>>>>> v3.18
@@ -149,9 +168,14 @@ static int efivarfs_callback(efi_char16_t *name16, efi_guid_t vendor,
 	unsigned long size = 0;
 	char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len;
 	int err = -ENOMEM;
 	bool is_removable = false;
+=======
+	int len, i;
+	int err = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int len, i;
 	int err = -ENOMEM;
@@ -165,7 +189,11 @@ static int efivarfs_callback(efi_char16_t *name16, efi_guid_t vendor,
 	memcpy(&(entry->var.VendorGuid), &vendor, sizeof(efi_guid_t));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = ucs2_utf8size(entry->var.VariableName);
+=======
+	len = ucs2_strlen(entry->var.VariableName);
+>>>>>>> v3.18
 =======
 	len = ucs2_strlen(entry->var.VariableName);
 >>>>>>> v3.18
@@ -176,10 +204,15 @@ static int efivarfs_callback(efi_char16_t *name16, efi_guid_t vendor,
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ucs2_as_utf8(name, entry->var.VariableName, len);
 
 	if (efivar_variable_is_removable(entry->var.VendorGuid, name, len))
 		is_removable = true;
+=======
+	for (i = 0; i < len; i++)
+		name[i] = entry->var.VariableName[i] & 0xFF;
+>>>>>>> v3.18
 =======
 	for (i = 0; i < len; i++)
 		name[i] = entry->var.VariableName[i] & 0xFF;
@@ -192,8 +225,12 @@ static int efivarfs_callback(efi_char16_t *name16, efi_guid_t vendor,
 	name[len + EFI_VARIABLE_GUID_LEN+1] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = efivarfs_get_inode(sb, root->d_inode, S_IFREG | 0644, 0,
 				   is_removable);
+=======
+	inode = efivarfs_get_inode(sb, root->d_inode, S_IFREG | 0644, 0);
+>>>>>>> v3.18
 =======
 	inode = efivarfs_get_inode(sb, root->d_inode, S_IFREG | 0644, 0);
 >>>>>>> v3.18
@@ -253,7 +290,11 @@ static int efivarfs_fill_super(struct super_block *sb, void *data, int silent)
 	sb->s_time_gran         = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = efivarfs_get_inode(sb, NULL, S_IFDIR | 0755, 0, true);
+=======
+	inode = efivarfs_get_inode(sb, NULL, S_IFDIR | 0755, 0);
+>>>>>>> v3.18
 =======
 	inode = efivarfs_get_inode(sb, NULL, S_IFDIR | 0755, 0);
 >>>>>>> v3.18

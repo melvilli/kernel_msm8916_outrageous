@@ -1044,17 +1044,23 @@ static void igbvf_set_interrupt_capability(struct igbvf_adapter *adapter)
 			adapter->msix_entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = pci_enable_msix(adapter->pdev,
 		                      adapter->msix_entries, 3);
 	}
 
 	if (err) {
 =======
+=======
+>>>>>>> v3.18
 		err = pci_enable_msix_range(adapter->pdev,
 		                            adapter->msix_entries, 3, 3);
 	}
 
 	if (err < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* MSI-X failed */
 		dev_err(&adapter->pdev->dev,
@@ -1754,7 +1760,11 @@ static int igbvf_set_mac(struct net_device *netdev, void *p)
 	hw->mac.ops.rar_set(hw, hw->mac.addr, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(addr->sa_data, hw->mac.addr, 6))
+=======
+	if (!ether_addr_equal(addr->sa_data, hw->mac.addr))
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(addr->sa_data, hw->mac.addr))
 >>>>>>> v3.18
@@ -1923,6 +1933,7 @@ static int igbvf_tso(struct igbvf_adapter *adapter,
 {
 	struct e1000_adv_tx_context_desc *context_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i;
 	int err;
 	struct igbvf_buffer *buffer_info;
@@ -1938,6 +1949,8 @@ static int igbvf_tso(struct igbvf_adapter *adapter,
 			return err;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct igbvf_buffer *buffer_info;
 	u32 info = 0, tu_cmd = 0;
 	u32 mss_l4len_idx, l4len;
@@ -1950,6 +1963,9 @@ static int igbvf_tso(struct igbvf_adapter *adapter,
 	if (err < 0) {
 		dev_err(&adapter->pdev->dev, "igbvf_tso returning an error\n");
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2042,7 +2058,11 @@ static inline bool igbvf_tx_csum(struct igbvf_adapter *adapter,
 		if (skb->ip_summed == CHECKSUM_PARTIAL) {
 			switch (skb->protocol) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case __constant_htons(ETH_P_IP):
+=======
+			case htons(ETH_P_IP):
+>>>>>>> v3.18
 =======
 			case htons(ETH_P_IP):
 >>>>>>> v3.18
@@ -2051,7 +2071,11 @@ static inline bool igbvf_tx_csum(struct igbvf_adapter *adapter,
 					tu_cmd |= E1000_ADVTXD_TUCMD_L4T_TCP;
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case __constant_htons(ETH_P_IPV6):
+=======
+			case htons(ETH_P_IPV6):
+>>>>>>> v3.18
 =======
 			case htons(ETH_P_IPV6):
 >>>>>>> v3.18
@@ -2379,10 +2403,16 @@ static int igbvf_change_mtu(struct net_device *netdev, int new_mtu)
 	int max_frame = new_mtu + ETH_HLEN + ETH_FCS_LEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((new_mtu < 68) || (max_frame > MAX_JUMBO_FRAME_SIZE)) {
 		dev_err(&adapter->pdev->dev, "Invalid MTU setting\n");
 		return -EINVAL;
 	}
+=======
+	if (new_mtu < 68 || new_mtu > INT_MAX - ETH_HLEN - ETH_FCS_LEN ||
+	    max_frame > MAX_JUMBO_FRAME_SIZE)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (new_mtu < 68 || new_mtu > INT_MAX - ETH_HLEN - ETH_FCS_LEN ||
 	    max_frame > MAX_JUMBO_FRAME_SIZE)
@@ -2680,6 +2710,7 @@ static int igbvf_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	pci_using_dac = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(64));
 	if (!err) {
 		err = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(64));
@@ -2696,6 +2727,8 @@ static int igbvf_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				goto err_dma;
 			}
 =======
+=======
+>>>>>>> v3.18
 	err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
 	if (!err) {
 		pci_using_dac = 1;
@@ -2705,6 +2738,9 @@ static int igbvf_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 			dev_err(&pdev->dev, "No usable DMA "
 			        "configuration, aborting\n");
 			goto err_dma;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2753,7 +2789,11 @@ static int igbvf_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		err = ei->get_variants(adapter);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_ioremap;
+=======
+			goto err_get_variants;
+>>>>>>> v3.18
 =======
 			goto err_get_variants;
 >>>>>>> v3.18
@@ -2854,6 +2894,10 @@ err_hw_init:
 err_sw_init:
 	igbvf_reset_interrupt_capability(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_get_variants:
+>>>>>>> v3.18
 =======
 err_get_variants:
 >>>>>>> v3.18
@@ -2923,7 +2967,11 @@ static const struct pci_error_handlers igbvf_err_handler = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(igbvf_pci_tbl) = {
+=======
+static const struct pci_device_id igbvf_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id igbvf_pci_tbl[] = {
 >>>>>>> v3.18

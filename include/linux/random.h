@@ -9,7 +9,10 @@
 #include <uapi/linux/random.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void add_device_randomness(const void *, unsigned int);
@@ -28,6 +31,7 @@ extern const struct file_operations random_fops, urandom_fops;
 
 unsigned int get_random_int(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long get_random_long(void);
 unsigned long randomize_range(unsigned long start, unsigned long end, unsigned long len);
 
@@ -39,6 +43,8 @@ void prandom_reseed_late(void);
 u32 prandom_u32_state(struct rnd_state *);
 void prandom_bytes_state(struct rnd_state *state, void *buf, int nbytes);
 =======
+=======
+>>>>>>> v3.18
 unsigned long randomize_range(unsigned long start, unsigned long end, unsigned long len);
 
 u32 prandom_u32(void);
@@ -69,6 +75,9 @@ static inline u32 prandom_u32_max(u32 ep_ro)
 {
 	return (u32)(((u64) prandom_u32() * ep_ro) >> 32);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -89,14 +98,20 @@ static inline void prandom_seed_state(struct rnd_state *state, u64 seed)
 	u32 i = (seed >> 32) ^ (seed << 10) ^ seed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->s1 = __seed(i, 2);
 	state->s2 = __seed(i, 8);
 	state->s3 = __seed(i, 16);
 =======
+=======
+>>>>>>> v3.18
 	state->s1 = __seed(i,   2U);
 	state->s2 = __seed(i,   8U);
 	state->s3 = __seed(i,  16U);
 	state->s4 = __seed(i, 128U);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -112,7 +127,10 @@ static inline int arch_get_random_int(unsigned int *v)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int arch_has_random(void)
 {
 	return 0;
@@ -129,6 +147,9 @@ static inline int arch_has_random_seed(void)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

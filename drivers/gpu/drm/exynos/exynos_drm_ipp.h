@@ -49,16 +49,22 @@ struct drm_exynos_ipp_cmd_work {
  * A structure of command node.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @priv: IPP private infomation.
  * @list: list head to command queue information.
  * @event_list: list head of event.
  * @mem_list: list head to source,destination memory queue information.
  * @cmd_lock: lock for synchronization of access to ioctl.
 =======
+=======
+>>>>>>> v3.18
  * @list: list head to command queue information.
  * @event_list: list head of event.
  * @mem_list: list head to source,destination memory queue information.
  * @lock: lock for synchronization of access to ioctl.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @mem_lock: lock for synchronization of access to memory nodes.
  * @event_lock: lock for synchronization of access to scheduled event.
@@ -70,6 +76,7 @@ struct drm_exynos_ipp_cmd_work {
  * @event_work: event work structure.
  * @state: state of command node.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct drm_exynos_ipp_cmd_node {
 	struct exynos_drm_ipp_private *priv;
@@ -78,6 +85,8 @@ struct drm_exynos_ipp_cmd_node {
 	struct list_head	mem_list[EXYNOS_DRM_OPS_MAX];
 	struct mutex	cmd_lock;
 =======
+=======
+>>>>>>> v3.18
  * @filp: associated file pointer.
  */
 struct drm_exynos_ipp_cmd_node {
@@ -85,6 +94,9 @@ struct drm_exynos_ipp_cmd_node {
 	struct list_head	event_list;
 	struct list_head	mem_list[EXYNOS_DRM_OPS_MAX];
 	struct mutex	lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex	mem_lock;
 	struct mutex	event_lock;
@@ -96,6 +108,10 @@ struct drm_exynos_ipp_cmd_node {
 	struct drm_exynos_ipp_event_work *event_work;
 	enum drm_exynos_ipp_state	state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_file	*filp;
+>>>>>>> v3.18
 =======
 	struct drm_file	*filp;
 >>>>>>> v3.18
@@ -105,7 +121,11 @@ struct drm_exynos_ipp_cmd_node {
  * A structure of buffer information.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @gem_objs: Y, Cb, Cr each gem object.
+=======
+ * @handles: Y, Cb, Cr each gem object handle.
+>>>>>>> v3.18
 =======
  * @handles: Y, Cb, Cr each gem object handle.
 >>>>>>> v3.18
@@ -118,7 +138,11 @@ struct drm_exynos_ipp_buf_info {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * A structure of wb setting infomation.
+=======
+ * A structure of wb setting information.
+>>>>>>> v3.18
 =======
  * A structure of wb setting information.
 >>>>>>> v3.18
@@ -172,7 +196,10 @@ struct exynos_drm_ipp_ops {
  * @dev: platform device.
  * @drm_dev: drm device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ipp_id: id of ipp driver.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @dedicated: dedicated ipp device.
@@ -181,6 +208,10 @@ struct exynos_drm_ipp_ops {
  * @c_node: current command information.
  * @cmd_list: list head for command information.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cmd_lock: lock for synchronization of access to cmd_list.
+>>>>>>> v3.18
 =======
  * @cmd_lock: lock for synchronization of access to cmd_list.
 >>>>>>> v3.18
@@ -197,7 +228,10 @@ struct exynos_drm_ippdrv {
 	struct device	*dev;
 	struct drm_device	*drm_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	ipp_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool	dedicated;
@@ -206,7 +240,12 @@ struct exynos_drm_ippdrv {
 	struct drm_exynos_ipp_cmd_node *c_node;
 	struct list_head	cmd_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_exynos_ipp_prop_list *prop_list;
+=======
+	struct mutex	cmd_lock;
+	struct drm_exynos_ipp_prop_list prop_list;
+>>>>>>> v3.18
 =======
 	struct mutex	cmd_lock;
 	struct drm_exynos_ipp_prop_list prop_list;

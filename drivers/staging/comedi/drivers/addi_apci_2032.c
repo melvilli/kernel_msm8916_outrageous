@@ -21,6 +21,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -33,12 +34,17 @@
 #include <linux/pci.h>
 #include <linux/interrupt.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/interrupt.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "../comedidev.h"
@@ -72,6 +78,7 @@ static int apci2032_do_insn_bits(struct comedi_device *dev,
 				 unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -83,10 +90,15 @@ static int apci2032_do_insn_bits(struct comedi_device *dev,
 		outl(s->state, dev->iobase + APCI2032_DO_REG);
 	}
 =======
+=======
+>>>>>>> v3.18
 	s->state = inl(dev->iobase + APCI2032_DO_REG);
 
 	if (comedi_dio_update_state(s, data))
 		outl(s->state, dev->iobase + APCI2032_DO_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -114,6 +126,7 @@ static void apci2032_int_stop(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool apci2032_int_start(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       unsigned char enabled_isns)
@@ -138,6 +151,8 @@ static bool apci2032_int_start(struct comedi_device *dev,
 	return do_event;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int apci2032_int_cmdtest(struct comedi_device *dev,
@@ -172,7 +187,13 @@ static int apci2032_int_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->convert_arg, 0);
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->stop_src == TRIG_NONE)
+=======
+	if (cmd->stop_src == TRIG_COUNT)
+		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
+	else	/* TRIG_NONE */
+>>>>>>> v3.18
 =======
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
@@ -184,10 +205,16 @@ static int apci2032_int_cmdtest(struct comedi_device *dev,
 		return 3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* step 4: ignored */
 
 	if (err)
 		return 4;
+=======
+	/* Step 4: fix up any arguments */
+
+	/* Step 5: check channel list if it exists */
+>>>>>>> v3.18
 =======
 	/* Step 4: fix up any arguments */
 
@@ -206,7 +233,10 @@ static int apci2032_int_cmd(struct comedi_device *dev,
 	unsigned int n;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool do_event;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -216,12 +246,15 @@ static int apci2032_int_cmd(struct comedi_device *dev,
 
 	spin_lock_irqsave(&subpriv->spinlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_event = apci2032_int_start(dev, s, enabled_isns);
 	spin_unlock_irqrestore(&subpriv->spinlock, flags);
 
 	if (do_event)
 		comedi_event(dev, s);
 =======
+=======
+>>>>>>> v3.18
 
 	subpriv->enabled_isns = enabled_isns;
 	subpriv->stop_count = cmd->stop_arg;
@@ -229,6 +262,9 @@ static int apci2032_int_cmd(struct comedi_device *dev,
 	outl(enabled_isns, dev->iobase + APCI2032_INT_CTRL_REG);
 
 	spin_unlock_irqrestore(&subpriv->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -253,6 +289,10 @@ static irqreturn_t apci2032_interrupt(int irq, void *d)
 	struct comedi_device *dev = d;
 	struct comedi_subdevice *s = dev->read_subdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct comedi_cmd *cmd = &s->async->cmd;
+>>>>>>> v3.18
 =======
 	struct comedi_cmd *cmd = &s->async->cmd;
 >>>>>>> v3.18
@@ -282,6 +322,7 @@ static irqreturn_t apci2032_interrupt(int irq, void *d)
 
 	if (subpriv->active && (val & subpriv->enabled_isns) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned short bits;
 		unsigned int n, len;
 		unsigned int *chanlist;
@@ -298,6 +339,8 @@ static irqreturn_t apci2032_interrupt(int irq, void *d)
 			s->async->events |= COMEDI_CB_BLOCK | COMEDI_CB_EOS;
 			if (s->async->cmd.stop_src == TRIG_COUNT &&
 =======
+=======
+>>>>>>> v3.18
 		unsigned short bits = 0;
 		int i;
 
@@ -312,6 +355,9 @@ static irqreturn_t apci2032_interrupt(int irq, void *d)
 		if (comedi_buf_put(s, bits)) {
 			s->async->events |= COMEDI_CB_BLOCK | COMEDI_CB_EOS;
 			if (cmd->stop_src == TRIG_COUNT &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    subpriv->stop_count > 0) {
 				subpriv->stop_count--;
@@ -416,12 +462,18 @@ static void apci2032_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci2032_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->irq)
 		free_irq(dev->irq, dev);
 	if (dev->read_subdev)
 		kfree(dev->read_subdev->private);
 	comedi_spriv_free(dev, 1);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+	if (dev->read_subdev)
+		kfree(dev->read_subdev->private);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 	if (dev->read_subdev)
@@ -443,7 +495,11 @@ static int apci2032_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci2032_pci_table) = {
+=======
+static const struct pci_device_id apci2032_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci2032_pci_table[] = {
 >>>>>>> v3.18
@@ -462,7 +518,11 @@ module_comedi_pci_driver(apci2032_driver, apci2032_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("ADDI-DATA APCI-2032, 32 channel DO boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("ADDI-DATA APCI-2032, 32 channel DO boards");
 >>>>>>> v3.18

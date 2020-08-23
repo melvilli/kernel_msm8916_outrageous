@@ -20,8 +20,13 @@
 static void backtrace_test_normal(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Testing a backtrace from process context.\n");
 	printk("The following trace is a kernel self test and not a bug!\n");
+=======
+	pr_info("Testing a backtrace from process context.\n");
+	pr_info("The following trace is a kernel self test and not a bug!\n");
+>>>>>>> v3.18
 =======
 	pr_info("Testing a backtrace from process context.\n");
 	pr_info("The following trace is a kernel self test and not a bug!\n");
@@ -43,8 +48,13 @@ static DECLARE_TASKLET(backtrace_tasklet, &backtrace_test_irq_callback, 0);
 static void backtrace_test_irq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Testing a backtrace from irq context.\n");
 	printk("The following trace is a kernel self test and not a bug!\n");
+=======
+	pr_info("Testing a backtrace from irq context.\n");
+	pr_info("The following trace is a kernel self test and not a bug!\n");
+>>>>>>> v3.18
 =======
 	pr_info("Testing a backtrace from irq context.\n");
 	pr_info("The following trace is a kernel self test and not a bug!\n");
@@ -62,8 +72,13 @@ static void backtrace_test_saved(void)
 	unsigned long entries[8];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Testing a saved backtrace.\n");
 	printk("The following trace is a kernel self test and not a bug!\n");
+=======
+	pr_info("Testing a saved backtrace.\n");
+	pr_info("The following trace is a kernel self test and not a bug!\n");
+>>>>>>> v3.18
 =======
 	pr_info("Testing a saved backtrace.\n");
 	pr_info("The following trace is a kernel self test and not a bug!\n");
@@ -81,7 +96,11 @@ static void backtrace_test_saved(void)
 static void backtrace_test_saved(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Saved backtrace test skipped.\n");
+=======
+	pr_info("Saved backtrace test skipped.\n");
+>>>>>>> v3.18
 =======
 	pr_info("Saved backtrace test skipped.\n");
 >>>>>>> v3.18
@@ -91,7 +110,11 @@ static void backtrace_test_saved(void)
 static int backtrace_regression_test(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("====[ backtrace testing ]===========\n");
+=======
+	pr_info("====[ backtrace testing ]===========\n");
+>>>>>>> v3.18
 =======
 	pr_info("====[ backtrace testing ]===========\n");
 >>>>>>> v3.18
@@ -101,7 +124,11 @@ static int backtrace_regression_test(void)
 	backtrace_test_saved();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("====[ end of backtrace testing ]====\n");
+=======
+	pr_info("====[ end of backtrace testing ]====\n");
+>>>>>>> v3.18
 =======
 	pr_info("====[ end of backtrace testing ]====\n");
 >>>>>>> v3.18

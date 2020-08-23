@@ -34,10 +34,13 @@
  *      allows 32bit userspace application to access the buffers, but also
  *      requires all received packets to be copied.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  CONFIG_CAVIUM_OCTEON_NUM_PACKET_BUFFERS
  *      This kernel config option allows the user to control the number of
  *      packet and work queue buffers allocated by the driver. If this is zero,
  *      the driver uses the default from below.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  USE_SKBUFFS_IN_HW

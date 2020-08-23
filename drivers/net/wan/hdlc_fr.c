@@ -91,7 +91,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct {
+=======
+struct fr_hdr {
+>>>>>>> v3.18
 =======
 struct fr_hdr {
 >>>>>>> v3.18
@@ -117,6 +121,7 @@ struct fr_hdr {
 	unsigned ea2:	1;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 }__packed fr_hdr;
 
 
@@ -126,6 +131,8 @@ typedef struct pvc_device_struct {
 	struct net_device *ether;	/* bridged Ethernet interface	*/
 	struct pvc_device_struct *next;	/* Sorted in ascending DLCI order */
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 
@@ -134,6 +141,9 @@ struct pvc_device {
 	struct net_device *main;
 	struct net_device *ether;	/* bridged Ethernet interface	*/
 	struct pvc_device *next;	/* Sorted in ascending DLCI order */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int dlci;
 	int open_count;
@@ -148,17 +158,23 @@ struct pvc_device {
 		unsigned int bandwidth;	/* Cisco LMI reporting only */
 	}state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }pvc_device;
 
 struct frad_state {
 	fr_proto settings;
 	pvc_device *first_pvc;
 =======
+=======
+>>>>>>> v3.18
 };
 
 struct frad_state {
 	fr_proto settings;
 	struct pvc_device *first_pvc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int dce_pvc_count;
 
@@ -198,9 +214,15 @@ static inline struct frad_state* state(hdlc_device *hdlc)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline pvc_device* find_pvc(hdlc_device *hdlc, u16 dlci)
 {
 	pvc_device *pvc = state(hdlc)->first_pvc;
+=======
+static inline struct pvc_device *find_pvc(hdlc_device *hdlc, u16 dlci)
+{
+	struct pvc_device *pvc = state(hdlc)->first_pvc;
+>>>>>>> v3.18
 =======
 static inline struct pvc_device *find_pvc(hdlc_device *hdlc, u16 dlci)
 {
@@ -220,15 +242,21 @@ static inline struct pvc_device *find_pvc(hdlc_device *hdlc, u16 dlci)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pvc_device* add_pvc(struct net_device *dev, u16 dlci)
 {
 	hdlc_device *hdlc = dev_to_hdlc(dev);
 	pvc_device *pvc, **pvc_p = &state(hdlc)->first_pvc;
 =======
+=======
+>>>>>>> v3.18
 static struct pvc_device *add_pvc(struct net_device *dev, u16 dlci)
 {
 	hdlc_device *hdlc = dev_to_hdlc(dev);
 	struct pvc_device *pvc, **pvc_p = &state(hdlc)->first_pvc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (*pvc_p) {
@@ -240,7 +268,11 @@ static struct pvc_device *add_pvc(struct net_device *dev, u16 dlci)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc = kzalloc(sizeof(pvc_device), GFP_ATOMIC);
+=======
+	pvc = kzalloc(sizeof(*pvc), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	pvc = kzalloc(sizeof(*pvc), GFP_ATOMIC);
 >>>>>>> v3.18
@@ -259,7 +291,11 @@ static struct pvc_device *add_pvc(struct net_device *dev, u16 dlci)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int pvc_is_used(pvc_device *pvc)
+=======
+static inline int pvc_is_used(struct pvc_device *pvc)
+>>>>>>> v3.18
 =======
 static inline int pvc_is_used(struct pvc_device *pvc)
 >>>>>>> v3.18
@@ -269,7 +305,11 @@ static inline int pvc_is_used(struct pvc_device *pvc)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void pvc_carrier(int on, pvc_device *pvc)
+=======
+static inline void pvc_carrier(int on, struct pvc_device *pvc)
+>>>>>>> v3.18
 =======
 static inline void pvc_carrier(int on, struct pvc_device *pvc)
 >>>>>>> v3.18
@@ -295,17 +335,23 @@ static inline void pvc_carrier(int on, struct pvc_device *pvc)
 static inline void delete_unused_pvcs(hdlc_device *hdlc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device **pvc_p = &state(hdlc)->first_pvc;
 
 	while (*pvc_p) {
 		if (!pvc_is_used(*pvc_p)) {
 			pvc_device *pvc = *pvc_p;
 =======
+=======
+>>>>>>> v3.18
 	struct pvc_device **pvc_p = &state(hdlc)->first_pvc;
 
 	while (*pvc_p) {
 		if (!pvc_is_used(*pvc_p)) {
 			struct pvc_device *pvc = *pvc_p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef DEBUG_PVC
 			printk(KERN_DEBUG "freeing unused pvc: %p\n", pvc);
@@ -320,7 +366,12 @@ static inline void delete_unused_pvcs(hdlc_device *hdlc)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct net_device** get_dev_p(pvc_device *pvc, int type)
+=======
+static inline struct net_device **get_dev_p(struct pvc_device *pvc,
+					    int type)
+>>>>>>> v3.18
 =======
 static inline struct net_device **get_dev_p(struct pvc_device *pvc,
 					    int type)
@@ -404,7 +455,11 @@ static int fr_hard_header(struct sk_buff **skb_p, u16 dlci)
 static int pvc_open(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = dev->ml_priv;
+=======
+	struct pvc_device *pvc = dev->ml_priv;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = dev->ml_priv;
 >>>>>>> v3.18
@@ -428,7 +483,11 @@ static int pvc_open(struct net_device *dev)
 static int pvc_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = dev->ml_priv;
+=======
+	struct pvc_device *pvc = dev->ml_priv;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = dev->ml_priv;
 >>>>>>> v3.18
@@ -451,7 +510,11 @@ static int pvc_close(struct net_device *dev)
 static int pvc_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = dev->ml_priv;
+=======
+	struct pvc_device *pvc = dev->ml_priv;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = dev->ml_priv;
 >>>>>>> v3.18
@@ -483,7 +546,11 @@ static int pvc_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 static netdev_tx_t pvc_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = dev->ml_priv;
+=======
+	struct pvc_device *pvc = dev->ml_priv;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = dev->ml_priv;
 >>>>>>> v3.18
@@ -522,7 +589,11 @@ static netdev_tx_t pvc_xmit(struct sk_buff *skb, struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void fr_log_dlci_active(pvc_device *pvc)
+=======
+static inline void fr_log_dlci_active(struct pvc_device *pvc)
+>>>>>>> v3.18
 =======
 static inline void fr_log_dlci_active(struct pvc_device *pvc)
 >>>>>>> v3.18
@@ -551,7 +622,11 @@ static void fr_lmi_send(struct net_device *dev, int fullrep)
 	hdlc_device *hdlc = dev_to_hdlc(dev);
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = state(hdlc)->first_pvc;
+=======
+	struct pvc_device *pvc = state(hdlc)->first_pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = state(hdlc)->first_pvc;
 >>>>>>> v3.18
@@ -652,7 +727,11 @@ static void fr_set_link_state(int reliable, struct net_device *dev)
 {
 	hdlc_device *hdlc = dev_to_hdlc(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = state(hdlc)->first_pvc;
+=======
+	struct pvc_device *pvc = state(hdlc)->first_pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = state(hdlc)->first_pvc;
 >>>>>>> v3.18
@@ -742,7 +821,11 @@ static int fr_lmi_recv(struct net_device *dev, struct sk_buff *skb)
 {
 	hdlc_device *hdlc = dev_to_hdlc(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc;
+=======
+	struct pvc_device *pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc;
 >>>>>>> v3.18
@@ -963,15 +1046,21 @@ static int fr_rx(struct sk_buff *skb)
 	struct net_device *frad = skb->dev;
 	hdlc_device *hdlc = dev_to_hdlc(frad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fr_hdr *fh = (fr_hdr*)skb->data;
 	u8 *data = skb->data;
 	u16 dlci;
 	pvc_device *pvc;
 =======
+=======
+>>>>>>> v3.18
 	struct fr_hdr *fh = (struct fr_hdr *)skb->data;
 	u8 *data = skb->data;
 	u16 dlci;
 	struct pvc_device *pvc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct net_device *dev = NULL;
 
@@ -1129,7 +1218,11 @@ static void fr_close(struct net_device *dev)
 {
 	hdlc_device *hdlc = dev_to_hdlc(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = state(hdlc)->first_pvc;
+=======
+	struct pvc_device *pvc = state(hdlc)->first_pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = state(hdlc)->first_pvc;
 >>>>>>> v3.18
@@ -1151,7 +1244,11 @@ static void pvc_setup(struct net_device *dev)
 	dev->hard_header_len = 10;
 	dev->addr_len = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->priv_flags &= ~IFF_XMIT_DST_RELEASE;
+=======
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 =======
 	netif_keep_dst(dev);
 >>>>>>> v3.18
@@ -1169,7 +1266,11 @@ static int fr_add_pvc(struct net_device *frad, unsigned int dlci, int type)
 {
 	hdlc_device *hdlc = dev_to_hdlc(frad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc;
+=======
+	struct pvc_device *pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc;
 >>>>>>> v3.18
@@ -1188,16 +1289,22 @@ static int fr_add_pvc(struct net_device *frad, unsigned int dlci, int type)
 
 	if (type == ARPHRD_ETHER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = alloc_netdev(0, "pvceth%d", ether_setup);
 		dev->priv_flags &= ~IFF_TX_SKB_SHARING;
 	} else
 		dev = alloc_netdev(0, "pvc%d", pvc_setup);
 =======
+=======
+>>>>>>> v3.18
 		dev = alloc_netdev(0, "pvceth%d", NET_NAME_UNKNOWN,
 				   ether_setup);
 		dev->priv_flags &= ~IFF_TX_SKB_SHARING;
 	} else
 		dev = alloc_netdev(0, "pvc%d", NET_NAME_UNKNOWN, pvc_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!dev) {
@@ -1237,7 +1344,11 @@ static int fr_add_pvc(struct net_device *frad, unsigned int dlci, int type)
 static int fr_del_pvc(hdlc_device *hdlc, unsigned int dlci, int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc;
+=======
+	struct pvc_device *pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc;
 >>>>>>> v3.18
@@ -1269,7 +1380,11 @@ static void fr_destroy(struct net_device *frad)
 {
 	hdlc_device *hdlc = dev_to_hdlc(frad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvc_device *pvc = state(hdlc)->first_pvc;
+=======
+	struct pvc_device *pvc = state(hdlc)->first_pvc;
+>>>>>>> v3.18
 =======
 	struct pvc_device *pvc = state(hdlc)->first_pvc;
 >>>>>>> v3.18
@@ -1279,7 +1394,11 @@ static void fr_destroy(struct net_device *frad)
 
 	while (pvc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pvc_device *next = pvc->next;
+=======
+		struct pvc_device *next = pvc->next;
+>>>>>>> v3.18
 =======
 		struct pvc_device *next = pvc->next;
 >>>>>>> v3.18

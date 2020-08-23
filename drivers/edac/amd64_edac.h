@@ -163,6 +163,11 @@
  * PCI-defined configuration space registers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_AMD_15H_M30H_NB_F1 0x141b
+#define PCI_DEVICE_ID_AMD_15H_M30H_NB_F2 0x141c
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_AMD_15H_M30H_NB_F1 0x141b
 #define PCI_DEVICE_ID_AMD_15H_M30H_NB_F2 0x141c
@@ -172,6 +177,11 @@
 #define PCI_DEVICE_ID_AMD_16H_NB_F1	0x1531
 #define PCI_DEVICE_ID_AMD_16H_NB_F2	0x1532
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_AMD_16H_M30H_NB_F1 0x1581
+#define PCI_DEVICE_ID_AMD_16H_M30H_NB_F2 0x1582
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_AMD_16H_M30H_NB_F1 0x1581
 #define PCI_DEVICE_ID_AMD_16H_M30H_NB_F2 0x1582
@@ -184,8 +194,11 @@
 #define DRAM_LIMIT_LO			0x44
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dram_intlv_en(pvt, i)		((u8)((pvt->ranges[i].base.lo >> 8) & 0x7))
 =======
+=======
+>>>>>>> v3.18
 /*
  * F15 M30h D18F1x2[1C:00]
  */
@@ -197,6 +210,9 @@
  */
 #define DRAM_CONT_HIGH_OFF		0x240
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define dram_rw(pvt, i)			((u8)(pvt->ranges[i].base.lo & 0x3))
 #define dram_intlv_sel(pvt, i)		((u8)((pvt->ranges[i].lim.lo >> 8) & 0x7))
@@ -204,7 +220,10 @@
 
 #define DHAR				0xf0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dhar_valid(pvt)			((pvt)->dhar & BIT(0))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define dhar_mem_hoist_valid(pvt)	((pvt)->dhar & BIT(1))
@@ -254,8 +273,11 @@
 
 #define DCT_SEL_LO			0x110
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dct_sel_baseaddr(pvt)		((pvt)->dct_sel_lo & 0xFFFFF800)
 #define dct_sel_interleave_addr(pvt)	(((pvt)->dct_sel_lo >> 6) & 0x3)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define dct_high_range_enabled(pvt)	((pvt)->dct_sel_lo & BIT(0))
@@ -320,7 +342,13 @@ enum amd_families {
 	F10_CPUS,
 	F15_CPUS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	F16_CPUS,
+=======
+	F15_M30H_CPUS,
+	F16_CPUS,
+	F16_M30H_CPUS,
+>>>>>>> v3.18
 =======
 	F15_M30H_CPUS,
 	F16_CPUS,
@@ -366,11 +394,17 @@ struct amd64_pvt {
 
 	u16 mc_node_id;		/* MC index of this MC node */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 fam;			/* CPU family */
 	u8 model;		/* ... model */
 	u8 stepping;		/* ... stepping */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ext_model;		/* extended model value of this node */
 	int channel_count;
@@ -450,7 +484,10 @@ static inline u16 extract_syndrome(u64 status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u8 dct_sel_interleave_addr(struct amd64_pvt *pvt)
 {
 	if (pvt->fam == 0x15 && pvt->model >= 0x30)
@@ -459,6 +496,9 @@ static inline u8 dct_sel_interleave_addr(struct amd64_pvt *pvt)
 
 	return	((pvt)->dct_sel_lo >> 6) & 0x3;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * per-node ECC settings descriptor
@@ -511,8 +551,11 @@ struct low_ops {
 					 struct err_info *);
 	int (*dbam_to_cs)		(struct amd64_pvt *pvt, u8 dct, unsigned cs_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*read_dct_pci_cfg)		(struct amd64_pvt *pvt, int offset,
 					 u32 *val, const char *func);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -535,9 +578,12 @@ int __amd64_write_pci_cfg_dword(struct pci_dev *pdev, int offset,
 	__amd64_write_pci_cfg_dword(pdev, offset, val, __func__)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define amd64_read_dct_pci_cfg(pvt, offset, val) \
 	pvt->ops->read_dct_pci_cfg(pvt, offset, val, __func__)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int amd64_get_dram_hole_info(struct mem_ctl_info *mci, u64 *hole_base,
@@ -557,7 +603,10 @@ static inline void enable_caches(void *dummy)
 	write_cr0(read_cr0() & ~X86_CR0_CD);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline u8 dram_intlv_en(struct amd64_pvt *pvt, unsigned int i)
 {
@@ -588,4 +637,7 @@ static inline u32 dct_sel_baseaddr(struct amd64_pvt *pvt)
 	}
 	return (pvt)->dct_sel_lo & 0xFFFFF800;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

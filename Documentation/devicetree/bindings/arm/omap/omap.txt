@@ -22,7 +22,12 @@ Optional properties:
 - ti,no_idle_on_suspend: When present, it prevents the PM to idle the module
   during suspend.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+- ti,no-reset-on-init: When present, the module should not be reset at init
+- ti,no-idle-on-init: When present, the module should not be idled at init
+>>>>>>> v3.18
 =======
 - ti,no-reset-on-init: When present, the module should not be reset at init
 - ti,no-idle-on-init: When present, the module should not be idled at init
@@ -36,7 +41,10 @@ spinlock@1 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 SoC Type (optional):
 
 - General Purpose devices
@@ -105,6 +113,9 @@ SoCs:
 
 - AM4372
   compatible = "ti,am4372", "ti,am43"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Boards:
@@ -114,7 +125,11 @@ Boards:
 
 - OMAP3 Tobi with Overo : Commercial expansion board with daughter board
 <<<<<<< HEAD
+<<<<<<< HEAD
   compatible = "ti,omap3-tobi", "ti,omap3-overo", "ti,omap3"
+=======
+  compatible = "gumstix,omap3-overo-tobi", "gumstix,omap3-overo", "ti,omap3"
+>>>>>>> v3.18
 =======
   compatible = "gumstix,omap3-overo-tobi", "gumstix,omap3-overo", "ti,omap3"
 >>>>>>> v3.18
@@ -126,7 +141,10 @@ Boards:
   compatible = "ti,omap4-panda", "ti,omap4430"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - OMAP4 DuoVero with Parlor : Commercial expansion board with daughter board
   compatible = "gumstix,omap4-duovero-parlor", "gumstix,omap4-duovero", "ti,omap4430", "ti,omap4";
 
@@ -136,6 +154,9 @@ Boards:
 - OMAP4 VAR-DVK-OM44 : Commercial dev kit with VAR-OM44CustomBoard, VAR-SOM-OM44 w/WLAN and LCD touchscreen
   compatible = "variscite,var-dvk-om44", "variscite,var-som-om44", "ti,omap4460", "ti,omap4";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - OMAP3 EVM : Software Development Board for OMAP35x, AM/DM37x
   compatible = "ti,omap3-evm", "ti,omap3"
@@ -149,7 +170,10 @@ Boards:
 - OMAP5 EVM : Evaluation Module
   compatible = "ti,omap5-evm", "ti,omap5"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 - AM43x EPOS EVM
   compatible = "ti,am43x-epos-evm", "ti,am4372", "ti,am43"
@@ -165,4 +189,7 @@ Boards:
 
 - DRA722 EVM: Software Development Board for DRA722
   compatible = "ti,dra72-evm", "ti,dra722", "ti,dra72", "ti,dra7"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

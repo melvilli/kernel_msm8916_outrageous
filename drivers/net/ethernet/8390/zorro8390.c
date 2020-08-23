@@ -45,6 +45,11 @@ static const char version[] =
 	"8390.c:v1.10cvs 9/23/94 Donald Becker (becker@cesdis.gsfc.nasa.gov)\n";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 zorro8390_msg_enable;
+
+>>>>>>> v3.18
 =======
 static u32 zorro8390_msg_enable;
 
@@ -92,9 +97,15 @@ static void zorro8390_reset_8390(struct net_device *dev)
 {
 	unsigned long reset_start_time = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ei_debug > 1)
 		netdev_dbg(dev, "resetting - t=%ld...\n", jiffies);
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	netif_dbg(ei_local, hw, dev, "resetting - t=%ld...\n", jiffies);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 
@@ -131,8 +142,14 @@ static void zorro8390_get_8390_hdr(struct net_device *dev,
 	 */
 	if (ei_status.dmaing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netdev_err(dev, "%s: DMAing conflict [DMAstat:%d][irqlock:%d]\n",
 			   __func__, ei_status.dmaing, ei_status.irqlock);
+=======
+		netdev_warn(dev,
+			    "%s: DMAing conflict [DMAstat:%d][irqlock:%d]\n",
+			    __func__, ei_status.dmaing, ei_status.irqlock);
+>>>>>>> v3.18
 =======
 		netdev_warn(dev,
 			    "%s: DMAing conflict [DMAstat:%d][irqlock:%d]\n",
@@ -248,7 +265,11 @@ static void zorro8390_block_output(struct net_device *dev, int count,
 		if (time_after(jiffies, dma_start + 2 * HZ / 100)) {
 					/* 20ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_err(dev, "timeout waiting for Tx RDC\n");
+=======
+			netdev_warn(dev, "timeout waiting for Tx RDC\n");
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "timeout waiting for Tx RDC\n");
 >>>>>>> v3.18
@@ -270,8 +291,14 @@ static int zorro8390_open(struct net_device *dev)
 static int zorro8390_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1)
 		netdev_dbg(dev, "Shutting down ethercard\n");
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	netif_dbg(ei_local, ifdown, dev, "Shutting down ethercard\n");
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 
@@ -315,7 +342,11 @@ static const struct net_device_ops zorro8390_netdev_ops = {
 
 static int zorro8390_init(struct net_device *dev, unsigned long board,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  const char *name, unsigned long ioaddr)
+=======
+			  const char *name, void __iomem *ioaddr)
+>>>>>>> v3.18
 =======
 			  const char *name, void __iomem *ioaddr)
 >>>>>>> v3.18
@@ -325,6 +356,10 @@ static int zorro8390_init(struct net_device *dev, unsigned long board,
 	unsigned char SA_prom[32];
 	int start_page, stop_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -390,7 +425,11 @@ static int zorro8390_init(struct net_device *dev, unsigned long board,
 	stop_page = NESM_STOP_PG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->base_addr = ioaddr;
+=======
+	dev->base_addr = (unsigned long)ioaddr;
+>>>>>>> v3.18
 =======
 	dev->base_addr = (unsigned long)ioaddr;
 >>>>>>> v3.18
@@ -423,6 +462,12 @@ static int zorro8390_init(struct net_device *dev, unsigned long board,
 	dev->netdev_ops = &zorro8390_netdev_ops;
 	__NS8390_init(dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ei_local->msg_enable = zorro8390_msg_enable;
+
+>>>>>>> v3.18
 =======
 
 	ei_local->msg_enable = zorro8390_msg_enable;

@@ -27,7 +27,10 @@
 #include <linux/iio/sysfs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct {
 	u32 usage_id;
 	int unit; /* 0 for default others from HID sensor spec */
@@ -62,6 +65,9 @@ static struct {
 	{HID_USAGE_SENSOR_PRESSURE, HID_USAGE_SENSOR_UNITS_PASCAL, 1, 0},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pow_10(unsigned power)
 {
@@ -151,7 +157,10 @@ static u32 convert_to_vtf_format(int size, int exp, int val1, int val2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 s32 hid_sensor_read_poll_value(struct hid_sensor_common *st)
 {
 	s32 value = 0;
@@ -172,6 +181,9 @@ s32 hid_sensor_read_poll_value(struct hid_sensor_common *st)
 }
 EXPORT_SYMBOL(hid_sensor_read_poll_value);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int hid_sensor_read_samp_freq_value(struct hid_sensor_common *st,
 				int *val1, int *val2)
@@ -270,12 +282,15 @@ int hid_sensor_write_raw_hyst_value(struct hid_sensor_common *st,
 EXPORT_SYMBOL(hid_sensor_write_raw_hyst_value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hid_sensor_parse_common_attributes(struct hid_sensor_hub_device *hsdev,
 					u32 usage_id,
 					struct hid_sensor_common *st)
 {
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * This fuction applies the unit exponent to the scale.
  * For example:
@@ -361,13 +376,19 @@ int hid_sensor_get_reporting_interval(struct hid_sensor_hub_device *hsdev,
 					u32 usage_id,
 					struct hid_sensor_common *st)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sensor_hub_input_get_attribute_info(hsdev,
 					HID_FEATURE_REPORT, usage_id,
 					HID_USAGE_SENSOR_PROP_REPORT_INTERVAL,
 					&st->poll);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Default unit of measure is milliseconds */
 	if (st->poll.units == 0)
 		st->poll.units = HID_USAGE_SENSOR_UNITS_MILLISECOND;
@@ -382,6 +403,9 @@ int hid_sensor_parse_common_attributes(struct hid_sensor_hub_device *hsdev,
 
 
 	hid_sensor_get_reporting_interval(hsdev, usage_id, st);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sensor_hub_input_get_attribute_info(hsdev,

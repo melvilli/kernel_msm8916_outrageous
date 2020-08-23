@@ -98,8 +98,11 @@ static int sch_gpio_core_direction_out(struct gpio_chip *gc,
 	unsigned short offset, bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch_gpio_core_set(gc, gpio_num, val);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock(&gpio_lock);
@@ -113,7 +116,10 @@ static int sch_gpio_core_direction_out(struct gpio_chip *gc,
 
 	spin_unlock(&gpio_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * according to the datasheet, writing to the level register has no
@@ -125,6 +131,9 @@ static int sch_gpio_core_direction_out(struct gpio_chip *gc,
 	 * and an external pull-up is connected.
 	 */
 	sch_gpio_core_set(gc, gpio_num, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -196,8 +205,11 @@ static int sch_gpio_resume_direction_out(struct gpio_chip *gc,
 	unsigned short offset, bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch_gpio_resume_set(gc, gpio_num, val);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	offset = RGIO + gpio_num / 8;
@@ -211,7 +223,10 @@ static int sch_gpio_resume_direction_out(struct gpio_chip *gc,
 
 	spin_unlock(&gpio_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	* according to the datasheet, writing to the level register has no
@@ -223,6 +238,9 @@ static int sch_gpio_resume_direction_out(struct gpio_chip *gc,
 	* and an external pull-up is connected.
 	*/
 	sch_gpio_resume_set(gc, gpio_num, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -307,8 +325,12 @@ static int sch_gpio_probe(struct platform_device *pdev)
 
 err_sch_gpio_resume:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpiochip_remove(&sch_gpio_core))
 		dev_err(&pdev->dev, "%s gpiochip_remove failed\n", __func__);
+=======
+	gpiochip_remove(&sch_gpio_core);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&sch_gpio_core);
 >>>>>>> v3.18
@@ -325,6 +347,7 @@ static int sch_gpio_remove(struct platform_device *pdev)
 	struct resource *res;
 	if (gpio_ba) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int err;
 
 		err  = gpiochip_remove(&sch_gpio_core);
@@ -340,14 +363,22 @@ static int sch_gpio_remove(struct platform_device *pdev)
 		gpiochip_remove(&sch_gpio_core);
 		gpiochip_remove(&sch_gpio_resume);
 >>>>>>> v3.18
+=======
+
+		gpiochip_remove(&sch_gpio_core);
+		gpiochip_remove(&sch_gpio_resume);
+>>>>>>> v3.18
 
 		res = platform_get_resource(pdev, IORESOURCE_IO, 0);
 
 		release_region(res->start, resource_size(res));
 		gpio_ba = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

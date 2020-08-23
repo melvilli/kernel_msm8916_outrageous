@@ -1305,7 +1305,11 @@ static int ocfs2_wait_for_mask(struct ocfs2_mask_waiter *mw)
 	wait_for_completion(&mw->mw_complete);
 	/* Re-arm the completion in case we want to wait on it again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(mw->mw_complete);
+=======
+	reinit_completion(&mw->mw_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&mw->mw_complete);
 >>>>>>> v3.18
@@ -1360,7 +1364,11 @@ static int ocfs2_wait_for_mask_interruptible(struct ocfs2_mask_waiter *mw,
 		ret = mw->mw_status;
 	/* Re-arm the completion in case we want to wait on it again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(mw->mw_complete);
+=======
+	reinit_completion(&mw->mw_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&mw->mw_complete);
 >>>>>>> v3.18
@@ -2553,11 +2561,14 @@ int ocfs2_super_lock(struct ocfs2_super *osb,
 	 * everything is up to the caller :) */
 	status = ocfs2_should_refresh_lock_res(lockres);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status < 0) {
 		ocfs2_cluster_unlock(osb, lockres, level);
 		mlog_errno(status);
 		goto bail;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (status) {
@@ -2909,6 +2920,7 @@ static int ocfs2_dlm_debug_release(struct inode *inode, struct file *file)
 static int ocfs2_dlm_debug_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	struct ocfs2_dlm_seq_priv *priv;
 	struct seq_file *seq;
@@ -2921,6 +2933,8 @@ static int ocfs2_dlm_debug_open(struct inode *inode, struct file *file)
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct ocfs2_dlm_seq_priv *priv;
 	struct ocfs2_super *osb;
 
@@ -2930,12 +2944,16 @@ static int ocfs2_dlm_debug_open(struct inode *inode, struct file *file)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	osb = inode->i_private;
 	ocfs2_get_dlm_debug(osb->osb_dlm_debug);
 	priv->p_dlm_debug = osb->osb_dlm_debug;
 	INIT_LIST_HEAD(&priv->p_iter_res.l_debug_list);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = seq_open(file, &ocfs2_dlm_seq_ops);
 	if (ret) {
@@ -2953,10 +2971,15 @@ static int ocfs2_dlm_debug_open(struct inode *inode, struct file *file)
 out:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	ocfs2_add_lockres_tracking(&priv->p_iter_res,
 				   priv->p_dlm_debug);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3027,6 +3050,11 @@ int ocfs2_dlm_init(struct ocfs2_super *osb)
 	/* for now, uuid == domain */
 	status = ocfs2_cluster_connect(osb->osb_cluster_stack,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				       osb->osb_cluster_name,
+				       strlen(osb->osb_cluster_name),
+>>>>>>> v3.18
 =======
 				       osb->osb_cluster_name,
 				       strlen(osb->osb_cluster_name),
@@ -3041,7 +3069,11 @@ int ocfs2_dlm_init(struct ocfs2_super *osb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = ocfs2_cluster_this_node(&osb->node_num);
+=======
+	status = ocfs2_cluster_this_node(conn, &osb->node_num);
+>>>>>>> v3.18
 =======
 	status = ocfs2_cluster_this_node(conn, &osb->node_num);
 >>>>>>> v3.18
@@ -3182,6 +3214,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void ocfs2_process_blocked_lock(struct ocfs2_super *osb,
+				       struct ocfs2_lock_res *lockres);
+
+>>>>>>> v3.18
 =======
 static void ocfs2_process_blocked_lock(struct ocfs2_super *osb,
 				       struct ocfs2_lock_res *lockres);
@@ -3194,18 +3232,24 @@ static void ocfs2_process_blocked_lock(struct ocfs2_super *osb,
  *
  * You can *not* attempt to call cluster_lock on this lockres anymore. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ocfs2_mark_lockres_freeing(struct ocfs2_lock_res *lockres)
 {
 	int status;
 	struct ocfs2_mask_waiter mw;
 	unsigned long flags;
 =======
+=======
+>>>>>>> v3.18
 void ocfs2_mark_lockres_freeing(struct ocfs2_super *osb,
 				struct ocfs2_lock_res *lockres)
 {
 	int status;
 	struct ocfs2_mask_waiter mw;
 	unsigned long flags, flags2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ocfs2_init_mask_waiter(&mw);
@@ -3213,7 +3257,10 @@ void ocfs2_mark_lockres_freeing(struct ocfs2_super *osb,
 	spin_lock_irqsave(&lockres->l_lock, flags);
 	lockres->l_flags |= OCFS2_LOCK_FREEING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (lockres->l_flags & OCFS2_LOCK_QUEUED && current == osb->dc_task) {
 		/*
 		 * We know the downconvert is queued but not in progress
@@ -3248,6 +3295,9 @@ void ocfs2_mark_lockres_freeing(struct ocfs2_super *osb,
 		ocfs2_process_blocked_lock(osb, lockres);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (lockres->l_flags & OCFS2_LOCK_QUEUED) {
 		lockres_add_mask_waiter(lockres, &mw, OCFS2_LOCK_QUEUED, 0);
@@ -3270,7 +3320,11 @@ void ocfs2_simple_drop_lockres(struct ocfs2_super *osb,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocfs2_mark_lockres_freeing(lockres);
+=======
+	ocfs2_mark_lockres_freeing(osb, lockres);
+>>>>>>> v3.18
 =======
 	ocfs2_mark_lockres_freeing(osb, lockres);
 >>>>>>> v3.18
@@ -3360,6 +3414,7 @@ static int ocfs2_downconvert_lock(struct ocfs2_super *osb,
 	     lockres->l_level, new_level);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * On DLM_LKF_VALBLK, fsdlm behaves differently with o2cb. It always
 	 * expects DLM_LKF_VALBLK being set if the LKB has LVB, so that
@@ -3370,6 +3425,8 @@ static int ocfs2_downconvert_lock(struct ocfs2_super *osb,
 	    lockres->l_ops->flags & LOCK_TYPE_USES_LVB)
 		lvb = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (lvb)
@@ -4080,6 +4137,7 @@ static void ocfs2_downconvert_thread_do_work(struct ocfs2_super *osb)
 
 	processed = osb->blocked_lock_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * blocked lock processing in this loop might call iput which can
 	 * remove items off osb->blocked_lock_list. Downconvert up to
@@ -4087,6 +4145,11 @@ static void ocfs2_downconvert_thread_do_work(struct ocfs2_super *osb)
 	 * removed in ocfs2_mark_lockres_freeing when downconverting.
 	 */
 	while (processed && !list_empty(&osb->blocked_lock_list)) {
+=======
+	while (processed) {
+		BUG_ON(list_empty(&osb->blocked_lock_list));
+
+>>>>>>> v3.18
 =======
 	while (processed) {
 		BUG_ON(list_empty(&osb->blocked_lock_list));

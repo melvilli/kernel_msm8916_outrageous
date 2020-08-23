@@ -8,11 +8,14 @@
  * All rights reserved.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #ifndef CAN_BCM_H
 #define CAN_BCM_H
 =======
+=======
+>>>>>>> v3.18
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -49,6 +52,9 @@
 
 #ifndef _UAPI_CAN_BCM_H
 #define _UAPI_CAN_BCM_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/types.h>
@@ -103,7 +109,11 @@ enum {
 #define RX_RTR_FRAME        0x0400
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CAN_BCM_H */
+=======
+#endif /* !_UAPI_CAN_BCM_H */
+>>>>>>> v3.18
 =======
 #endif /* !_UAPI_CAN_BCM_H */
 >>>>>>> v3.18

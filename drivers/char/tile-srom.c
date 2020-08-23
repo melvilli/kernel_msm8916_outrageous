@@ -21,7 +21,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>	/* printk() */
@@ -81,6 +84,10 @@ MODULE_LICENSE("GPL");
 static int srom_devs;			/* Number of SROM partitions */
 static struct cdev srom_cdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct platform_device *srom_parent;
+>>>>>>> v3.18
 =======
 static struct platform_device *srom_parent;
 >>>>>>> v3.18
@@ -281,6 +288,7 @@ static ssize_t srom_write(struct file *filp, const char __user *buf,
 
 /* Provide our own implementation so we can use srom->total_size. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 loff_t srom_llseek(struct file *filp, loff_t offset, int origin)
 {
 	struct srom_dev *srom = filp->private_data;
@@ -312,6 +320,8 @@ loff_t srom_llseek(struct file *filp, loff_t offset, int origin)
 static ssize_t total_show(struct device *dev,
 			  struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 loff_t srom_llseek(struct file *file, loff_t offset, int origin)
 {
 	struct srom_dev *srom = file->private_data;
@@ -320,39 +330,55 @@ loff_t srom_llseek(struct file *file, loff_t offset, int origin)
 
 static ssize_t total_size_show(struct device *dev,
 			       struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct srom_dev *srom = dev_get_drvdata(dev);
 	return sprintf(buf, "%u\n", srom->total_size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t sector_show(struct device *dev,
 			   struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(total_size);
 
 static ssize_t sector_size_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct srom_dev *srom = dev_get_drvdata(dev);
 	return sprintf(buf, "%u\n", srom->sector_size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t page_show(struct device *dev,
 			 struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(sector_size);
 
 static ssize_t page_size_show(struct device *dev,
 			      struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct srom_dev *srom = dev_get_drvdata(dev);
 	return sprintf(buf, "%u\n", srom->page_size);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute srom_dev_attrs[] = {
@@ -362,6 +388,8 @@ static struct device_attribute srom_dev_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(page_size);
 
 static struct attribute *srom_dev_attrs[] = {
@@ -371,6 +399,9 @@ static struct attribute *srom_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(srom_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static char *srom_devnode(struct device *dev, umode_t *mode)
@@ -414,9 +445,15 @@ static int srom_setup_minor(struct srom_dev *srom, int index)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = device_create(srom_class, &platform_bus,
 			    MKDEV(srom_major, index), srom, "%d", index);
 	return PTR_RET(dev);
+=======
+	dev = device_create(srom_class, &srom_parent->dev,
+			    MKDEV(srom_major, index), srom, "%d", index);
+	return PTR_ERR_OR_ZERO(dev);
+>>>>>>> v3.18
 =======
 	dev = device_create(srom_class, &srom_parent->dev,
 			    MKDEV(srom_major, index), srom, "%d", index);
@@ -485,7 +522,10 @@ static int srom_init(void)
 		goto fail_chrdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Create a parent device */
 	srom_parent = platform_device_register_simple("srom", -1, NULL, 0);
 	if (IS_ERR(srom_parent)) {
@@ -493,6 +533,9 @@ static int srom_init(void)
 		goto fail_pdev;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Create a sysfs class. */
 	srom_class = class_create(THIS_MODULE, "srom");
@@ -501,7 +544,11 @@ static int srom_init(void)
 		goto fail_cdev;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srom_class->dev_attrs = srom_dev_attrs;
+=======
+	srom_class->dev_groups = srom_dev_groups;
+>>>>>>> v3.18
 =======
 	srom_class->dev_groups = srom_dev_groups;
 >>>>>>> v3.18
@@ -522,6 +569,11 @@ fail_class:
 	class_destroy(srom_class);
 fail_cdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_device_unregister(srom_parent);
+fail_pdev:
+>>>>>>> v3.18
 =======
 	platform_device_unregister(srom_parent);
 fail_pdev:
@@ -543,6 +595,10 @@ static void srom_cleanup(void)
 	class_destroy(srom_class);
 	cdev_del(&srom_cdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_device_unregister(srom_parent);
+>>>>>>> v3.18
 =======
 	platform_device_unregister(srom_parent);
 >>>>>>> v3.18

@@ -139,7 +139,10 @@ void __init imx31_init_early(void)
 {
 	mxc_set_cpu_type(MXC_CPU_MX31);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxc_arch_reset_init(MX31_IO_ADDRESS(MX31_WDOG_BASE_ADDR));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	arch_ioremap_caller = imx3_ioremap_caller;
@@ -178,6 +181,10 @@ void __init imx31_soc_init(void)
 	imx3_init_l2x0();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxc_arch_reset_init(MX31_IO_ADDRESS(MX31_WDOG_BASE_ADDR));
+>>>>>>> v3.18
 =======
 	mxc_arch_reset_init(MX31_IO_ADDRESS(MX31_WDOG_BASE_ADDR));
 >>>>>>> v3.18
@@ -224,7 +231,10 @@ void __init imx35_init_early(void)
 	mxc_set_cpu_type(MXC_CPU_MX35);
 	mxc_iomux_v3_init(MX35_IO_ADDRESS(MX35_IOMUXC_BASE_ADDR));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxc_arch_reset_init(MX35_IO_ADDRESS(MX35_WDOG_BASE_ADDR));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	arm_pm_idle = imx3_idle;
@@ -283,6 +293,10 @@ void __init imx35_soc_init(void)
 	imx3_init_l2x0();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxc_arch_reset_init(MX35_IO_ADDRESS(MX35_WDOG_BASE_ADDR));
+>>>>>>> v3.18
 =======
 	mxc_arch_reset_init(MX35_IO_ADDRESS(MX35_WDOG_BASE_ADDR));
 >>>>>>> v3.18

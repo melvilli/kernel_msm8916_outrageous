@@ -147,6 +147,10 @@ static struct platform_driver puv3_pwm_driver = {
 	.driver = {
 		.name = "PKUnity-v3-PWM",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 >>>>>>> v3.18

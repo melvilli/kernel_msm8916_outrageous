@@ -11,15 +11,21 @@
    the Free Software Foundation; either version 2, or (at your option)
    any later version.
 <<<<<<< HEAD
+<<<<<<< HEAD
    
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
 =======
+=======
+>>>>>>> v3.18
 
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 
@@ -33,7 +39,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * find which device holds a particular offset 
+=======
+ * find which device holds a particular offset
+>>>>>>> v3.18
 =======
  * find which device holds a particular offset
 >>>>>>> v3.18
@@ -109,12 +119,15 @@ static int linear_mergeable_bvec(struct request_queue *q,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * In linear_congested() conf->raid_disks is used as a copy of
  * mddev->raid_disks to iterate conf->disks[], because conf->raid_disks
  * and conf->disks[] are created in linear_conf(), they are always
  * consitent with each other, but mddev->raid_disks does not.
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int linear_congested(void *data, int bits)
@@ -130,7 +143,11 @@ static int linear_congested(void *data, int bits)
 	conf = rcu_dereference(mddev->private);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < conf->raid_disks && !ret ; i++) {
+=======
+	for (i = 0; i < mddev->raid_disks && !ret ; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < mddev->raid_disks && !ret ; i++) {
 >>>>>>> v3.18
@@ -221,6 +238,7 @@ static struct linear_conf *linear_conf(struct mddev *mddev, int raid_disks)
 			conf->disks[i].rdev->sectors;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * conf->raid_disks is copy of mddev->raid_disks. The reason to
 	 * keep a copy of mddev->raid_disks in struct linear_conf is,
@@ -234,6 +252,8 @@ static struct linear_conf *linear_conf(struct mddev *mddev, int raid_disks)
 	 */
 	conf->raid_disks = raid_disks;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return conf;
@@ -293,6 +313,7 @@ static int linear_add(struct mddev *mddev, struct md_rdev *rdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* newconf->raid_disks already keeps a copy of * the increased
 	 * value of mddev->raid_disks, WARN_ONCE() is just used to make
 	 * sure of this. It is possible that oldconf is still referenced
@@ -301,13 +322,18 @@ static int linear_add(struct mddev *mddev, struct md_rdev *rdev)
 	 */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	oldconf = rcu_dereference_protected(mddev->private,
 					    lockdep_is_held(
 						    &mddev->reconfig_mutex));
 	mddev->raid_disks++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ONCE(mddev->raid_disks != newconf->raid_disks,
 		"copied raid_disks doesn't match mddev->raid_disks");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rcu_assign_pointer(mddev->private, newconf);
@@ -343,13 +369,19 @@ static int linear_stop (struct mddev *mddev)
 static void linear_make_request(struct mddev *mddev, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dev_info *tmp_dev;
 	sector_t start_sector;
 =======
+=======
+>>>>>>> v3.18
 	char b[BDEVNAME_SIZE];
 	struct dev_info *tmp_dev;
 	struct bio *split;
 	sector_t start_sector, end_sector, data_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(bio->bi_rw & REQ_FLUSH)) {
@@ -357,6 +389,7 @@ static void linear_make_request(struct mddev *mddev, struct bio *bio)
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rcu_read_lock();
 	tmp_dev = which_dev(mddev, bio->bi_sector);
@@ -410,6 +443,8 @@ static void linear_make_request(struct mddev *mddev, struct bio *bio)
 
 	generic_make_request(bio);
 =======
+=======
+>>>>>>> v3.18
 	do {
 		rcu_read_lock();
 
@@ -459,6 +494,9 @@ out_of_bounds:
 	       (unsigned long long)tmp_dev->rdev->sectors,
 	       (unsigned long long)start_sector);
 	bio_io_error(bio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -469,7 +507,10 @@ static void linear_status (struct seq_file *seq, struct mddev *mddev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct md_personality linear_personality =
@@ -496,7 +537,10 @@ static void linear_exit (void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_init(linear_init);

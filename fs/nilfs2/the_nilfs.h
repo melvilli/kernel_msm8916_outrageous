@@ -34,6 +34,10 @@
 
 struct nilfs_sc_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct nilfs_sysfs_dev_subgroups;
+>>>>>>> v3.18
 =======
 struct nilfs_sysfs_dev_subgroups;
 >>>>>>> v3.18
@@ -50,6 +54,10 @@ enum {
  * struct the_nilfs - struct to supervise multiple nilfs mount points
  * @ns_flags: flags
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ns_flushed_device: flag indicating if all volatile data was flushed
+>>>>>>> v3.18
 =======
  * @ns_flushed_device: flag indicating if all volatile data was flushed
 >>>>>>> v3.18
@@ -63,6 +71,10 @@ enum {
  * @ns_sbsize: size of valid data in super block
  * @ns_mount_state: file system state
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ns_sb_update_freq: interval of periodical update of superblocks (in seconds)
+>>>>>>> v3.18
 =======
  * @ns_sb_update_freq: interval of periodical update of superblocks (in seconds)
 >>>>>>> v3.18
@@ -108,10 +120,13 @@ enum {
  * @ns_first_ino: first not-special inode number
  * @ns_crc_seed: seed value of CRC32 calculation
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct the_nilfs {
 	unsigned long		ns_flags;
 =======
+=======
+>>>>>>> v3.18
  * @ns_dev_kobj: /sys/fs/<nilfs>/<device>
  * @ns_dev_kobj_unregister: completion state
  * @ns_dev_subgroups: <device> subgroups pointer
@@ -119,6 +134,9 @@ struct the_nilfs {
 struct the_nilfs {
 	unsigned long		ns_flags;
 	int			ns_flushed_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct block_device    *ns_bdev;
@@ -137,6 +155,10 @@ struct the_nilfs {
 	unsigned		ns_sbsize;
 	unsigned		ns_mount_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		ns_sb_update_freq;
+>>>>>>> v3.18
 =======
 	unsigned		ns_sb_update_freq;
 >>>>>>> v3.18
@@ -215,12 +237,18 @@ struct the_nilfs {
 	int			ns_first_ino;
 	u32			ns_crc_seed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* /sys/fs/<nilfs>/<device> */
 	struct kobject ns_dev_kobj;
 	struct completion ns_dev_kobj_unregister;
 	struct nilfs_sysfs_dev_subgroups *ns_dev_subgroups;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -267,6 +295,11 @@ THE_NILFS_FNS(SB_DIRTY, sb_dirty)
  * @inodes_count: number of inodes
  * @blocks_count: number of blocks
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @snapshot_kobj: /sys/fs/<nilfs>/<device>/mounted_snapshots/<snapshot>
+ * @snapshot_kobj_unregister: completion state for kernel object
+>>>>>>> v3.18
 =======
  * @snapshot_kobj: /sys/fs/<nilfs>/<device>/mounted_snapshots/<snapshot>
  * @snapshot_kobj_unregister: completion state for kernel object
@@ -281,15 +314,21 @@ struct nilfs_root {
 	struct inode *ifile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t inodes_count;
 	atomic_t blocks_count;
 =======
+=======
+>>>>>>> v3.18
 	atomic64_t inodes_count;
 	atomic64_t blocks_count;
 
 	/* /sys/fs/<nilfs>/<device>/mounted_snapshots/<snapshot> */
 	struct kobject snapshot_kobj;
 	struct completion snapshot_kobj_unregister;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -303,7 +342,12 @@ static inline int nilfs_sb_need_update(struct the_nilfs *nilfs)
 {
 	u64 t = get_seconds();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return t < nilfs->ns_sbwtime || t > nilfs->ns_sbwtime + NILFS_SB_FREQ;
+=======
+	return t < nilfs->ns_sbwtime ||
+		t > nilfs->ns_sbwtime + nilfs->ns_sb_update_freq;
+>>>>>>> v3.18
 =======
 	return t < nilfs->ns_sbwtime ||
 		t > nilfs->ns_sbwtime + nilfs->ns_sb_update_freq;
@@ -407,7 +451,10 @@ static inline int nilfs_segment_is_active(struct the_nilfs *nilfs, __u64 n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int nilfs_flush_device(struct the_nilfs *nilfs)
 {
 	int err;
@@ -428,5 +475,8 @@ static inline int nilfs_flush_device(struct the_nilfs *nilfs)
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _THE_NILFS_H */

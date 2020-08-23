@@ -792,8 +792,12 @@ static void ttusb_free_iso_urbs(struct ttusb *ttusb)
 
 	for (i = 0; i < ISO_BUF_COUNT; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ttusb->iso_urb[i])
 			usb_free_urb(ttusb->iso_urb[i]);
+=======
+		usb_free_urb(ttusb->iso_urb[i]);
+>>>>>>> v3.18
 =======
 		usb_free_urb(ttusb->iso_urb[i]);
 >>>>>>> v3.18
@@ -809,11 +813,17 @@ static int ttusb_alloc_iso_urbs(struct ttusb *ttusb)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttusb->iso_buffer = pci_alloc_consistent(NULL,
 						 ISO_FRAME_SIZE *
 						 FRAMES_PER_ISO_BUF *
 						 ISO_BUF_COUNT,
 						 &ttusb->iso_dma_handle);
+=======
+	ttusb->iso_buffer = pci_zalloc_consistent(NULL,
+						  ISO_FRAME_SIZE * FRAMES_PER_ISO_BUF * ISO_BUF_COUNT,
+						  &ttusb->iso_dma_handle);
+>>>>>>> v3.18
 =======
 	ttusb->iso_buffer = pci_zalloc_consistent(NULL,
 						  ISO_FRAME_SIZE * FRAMES_PER_ISO_BUF * ISO_BUF_COUNT,
@@ -827,9 +837,12 @@ static int ttusb_alloc_iso_urbs(struct ttusb *ttusb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(ttusb->iso_buffer, 0,
 	       ISO_FRAME_SIZE * FRAMES_PER_ISO_BUF * ISO_BUF_COUNT);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < ISO_BUF_COUNT; i++) {
@@ -1782,6 +1795,11 @@ err_i2c_del_adapter:
 err_unregister_adapter:
 	dvb_unregister_adapter (&ttusb->adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ttusb_free_iso_urbs(ttusb);
+	kfree(ttusb);
+>>>>>>> v3.18
 =======
 	ttusb_free_iso_urbs(ttusb);
 	kfree(ttusb);

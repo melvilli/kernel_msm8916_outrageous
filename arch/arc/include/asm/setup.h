@@ -30,9 +30,14 @@ struct cpuinfo_data {
 
 extern int root_mountflags, end_mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int running_on_hw;
 
 void __init setup_processor(void);
+=======
+
+void setup_processor(void);
+>>>>>>> v3.18
 =======
 
 void setup_processor(void);

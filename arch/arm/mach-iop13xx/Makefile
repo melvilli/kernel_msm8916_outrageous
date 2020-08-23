@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y			:=
 obj-m			:=
 obj-n			:=
 obj-			:=
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ARCH_IOP13XX) += setup.o

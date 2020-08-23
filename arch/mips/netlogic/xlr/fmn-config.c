@@ -37,6 +37,10 @@
 #include <linux/interrupt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 >>>>>>> v3.18
@@ -192,7 +196,11 @@ void xlr_board_info_setup(void)
 
 	num_core = hweight32(nlm_current_node()->coremask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	processor_id = read_c0_prid() & 0xff00;
+=======
+	processor_id = read_c0_prid() & PRID_IMP_MASK;
+>>>>>>> v3.18
 =======
 	processor_id = read_c0_prid() & PRID_IMP_MASK;
 >>>>>>> v3.18

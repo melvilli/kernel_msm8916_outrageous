@@ -27,7 +27,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -212,13 +215,19 @@ static ssize_t isl29003_store_range(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(buf, 10, &val) < 0) || (val > 3))
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 10, &val);
 	if (ret)
 		return ret;
 
 	if (val > 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -251,13 +260,19 @@ static ssize_t isl29003_store_resolution(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(buf, 10, &val) < 0) || (val > 3))
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 10, &val);
 	if (ret)
 		return ret;
 
 	if (val > 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -287,13 +302,19 @@ static ssize_t isl29003_store_mode(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(buf, 10, &val) < 0) || (val > 2))
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 10, &val);
 	if (ret)
 		return ret;
 
 	if (val > 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -326,13 +347,19 @@ static ssize_t isl29003_store_power_state(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(buf, 10, &val) < 0) || (val > 1))
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(buf, 10, &val);
 	if (ret)
 		return ret;
 
 	if (val > 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 

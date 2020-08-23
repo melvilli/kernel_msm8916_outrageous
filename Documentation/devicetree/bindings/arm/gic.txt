@@ -12,6 +12,10 @@ Main node required properties:
 
 - compatible : should be one of:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"arm,gic-400"
+>>>>>>> v3.18
 =======
 	"arm,gic-400"
 >>>>>>> v3.18
@@ -20,6 +24,10 @@ Main node required properties:
 	"arm,cortex-a7-gic"
 	"arm,arm11mp-gic"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"brcm,brahma-b15-gic"
+>>>>>>> v3.18
 =======
 	"brcm,brahma-b15-gic"
 >>>>>>> v3.18
@@ -58,12 +66,18 @@ Optional
   cpu-offset * cpu-nr.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - arm,routable-irqs : Total number of gic irq inputs which are not directly
 		  connected from the peripherals, but are routed dynamically
 		  by a crossbar/multiplexer preceding the GIC. The GIC irq
 		  input line is assigned dynamically when the corresponding
 		  peripheral's crossbar line is mapped.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 
@@ -73,6 +87,10 @@ Example:
 		#address-cells = <1>;
 		interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		arm,routable-irqs = <160>;
+>>>>>>> v3.18
 =======
 		arm,routable-irqs = <160>;
 >>>>>>> v3.18

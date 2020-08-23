@@ -11,7 +11,11 @@ extern int coda_fake_statfs;
 
 void coda_destroy_inodecache(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int coda_init_inodecache(void);
+=======
+int __init coda_init_inodecache(void);
+>>>>>>> v3.18
 =======
 int __init coda_init_inodecache(void);
 >>>>>>> v3.18

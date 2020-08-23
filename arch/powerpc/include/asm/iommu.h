@@ -31,11 +31,14 @@
 #include <asm/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IOMMU_PAGE_SHIFT      12
 #define IOMMU_PAGE_SIZE       (ASM_CONST(1) << IOMMU_PAGE_SHIFT)
 #define IOMMU_PAGE_MASK       (~((1 << IOMMU_PAGE_SHIFT) - 1))
 #define IOMMU_PAGE_ALIGN(addr) _ALIGN_UP(addr, IOMMU_PAGE_SIZE)
 =======
+=======
+>>>>>>> v3.18
 #define IOMMU_PAGE_SHIFT_4K      12
 #define IOMMU_PAGE_SIZE_4K       (ASM_CONST(1) << IOMMU_PAGE_SHIFT_4K)
 #define IOMMU_PAGE_MASK_4K       (~((1 << IOMMU_PAGE_SHIFT_4K) - 1))
@@ -44,12 +47,16 @@
 #define IOMMU_PAGE_SIZE(tblptr) (ASM_CONST(1) << (tblptr)->it_page_shift)
 #define IOMMU_PAGE_MASK(tblptr) (~((1 << (tblptr)->it_page_shift) - 1))
 #define IOMMU_PAGE_ALIGN(addr, tblptr) _ALIGN_UP(addr, IOMMU_PAGE_SIZE(tblptr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Boot time flags */
 extern int iommu_is_off;
 extern int iommu_force_on;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Pure 2^n version of get_order */
 static __inline__ __attribute_const__ int get_iommu_order(unsigned long size)
@@ -58,6 +65,8 @@ static __inline__ __attribute_const__ int get_iommu_order(unsigned long size)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -91,9 +100,12 @@ struct iommu_table {
 	struct iommu_pool pools[IOMMU_NR_POOLS];
 	unsigned long *it_map;       /* A simple allocation bitmap for now */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long  it_page_shift;/* table iommu page size */
 #ifdef CONFIG_IOMMU_API
 	struct iommu_group *it_group;
@@ -109,6 +121,9 @@ int get_iommu_order(unsigned long size, struct iommu_table *tbl)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct scatterlist;
 
@@ -131,7 +146,10 @@ extern void iommu_free_table(struct iommu_table *tbl, const char *node_name);
 extern struct iommu_table *iommu_init_table(struct iommu_table * tbl,
 					    int nid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IOMMU_API
 extern void iommu_register_group(struct iommu_table *tbl,
 				 int pci_domain_number, unsigned long pe_num);
@@ -160,6 +178,9 @@ static inline void set_iommu_table_base_and_group(struct device *dev,
 	set_iommu_table_base(dev, base);
 	iommu_add_device(dev);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int iommu_map_sg(struct device *dev, struct iommu_table *tbl,
@@ -189,6 +210,7 @@ extern void iommu_init_early_dart(void);
 extern void iommu_init_early_pasemi(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 extern void pci_iommu_init(void);
 extern void pci_direct_iommu_init(void);
@@ -196,6 +218,8 @@ extern void pci_direct_iommu_init(void);
 static inline void pci_iommu_init(void) { }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void alloc_dart_table(void);
@@ -214,7 +238,10 @@ static inline void iommu_restore(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* The API to support IOMMU operations for VFIO */
 extern int iommu_tce_clear_param_check(struct iommu_table *tbl,
 		unsigned long ioba, unsigned long tce_value,
@@ -236,6 +263,9 @@ extern void iommu_release_ownership(struct iommu_table *tbl);
 
 extern enum dma_data_direction iommu_tce_direction(unsigned long tce);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __KERNEL__ */
 #endif /* _ASM_IOMMU_H */

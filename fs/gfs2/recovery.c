@@ -53,9 +53,15 @@ int gfs2_replay_read_block(struct gfs2_jdesc *jd, unsigned int blk,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gfs2_revoke_add(struct gfs2_sbd *sdp, u64 blkno, unsigned int where)
 {
 	struct list_head *head = &sdp->sd_revoke_list;
+=======
+int gfs2_revoke_add(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
+{
+	struct list_head *head = &jd->jd_revoke_list;
+>>>>>>> v3.18
 =======
 int gfs2_revoke_add(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
 {
@@ -88,7 +94,11 @@ int gfs2_revoke_add(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gfs2_revoke_check(struct gfs2_sbd *sdp, u64 blkno, unsigned int where)
+=======
+int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
+>>>>>>> v3.18
 =======
 int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
 >>>>>>> v3.18
@@ -98,7 +108,11 @@ int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
 	int found = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(rr, &sdp->sd_revoke_list, rr_list) {
+=======
+	list_for_each_entry(rr, &jd->jd_revoke_list, rr_list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(rr, &jd->jd_revoke_list, rr_list) {
 >>>>>>> v3.18
@@ -112,8 +126,13 @@ int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wrap = (rr->rr_where < sdp->sd_replay_tail);
 	a = (sdp->sd_replay_tail < where);
+=======
+	wrap = (rr->rr_where < jd->jd_replay_tail);
+	a = (jd->jd_replay_tail < where);
+>>>>>>> v3.18
 =======
 	wrap = (rr->rr_where < jd->jd_replay_tail);
 	a = (jd->jd_replay_tail < where);
@@ -125,9 +144,15 @@ int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void gfs2_revoke_clean(struct gfs2_sbd *sdp)
 {
 	struct list_head *head = &sdp->sd_revoke_list;
+=======
+void gfs2_revoke_clean(struct gfs2_jdesc *jd)
+{
+	struct list_head *head = &jd->jd_revoke_list;
+>>>>>>> v3.18
 =======
 void gfs2_revoke_clean(struct gfs2_jdesc *jd)
 {
@@ -480,7 +505,11 @@ void gfs2_recover_func(struct work_struct *work)
 	struct gfs2_sbd *sdp = GFS2_SB(jd->jd_inode);
 	struct gfs2_log_header_host head;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gfs2_holder j_gh, ji_gh, t_gh;
+=======
+	struct gfs2_holder j_gh, ji_gh, thaw_gh;
+>>>>>>> v3.18
 =======
 	struct gfs2_holder j_gh, ji_gh, thaw_gh;
 >>>>>>> v3.18
@@ -538,17 +567,23 @@ void gfs2_recover_func(struct work_struct *work)
 		t = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Acquire a shared hold on the transaction lock */
 
 		error = gfs2_glock_nq_init(sdp->sd_trans_gl, LM_ST_SHARED,
 					   LM_FLAG_NOEXP | LM_FLAG_PRIORITY |
 					   GL_NOCACHE, &t_gh);
 =======
+=======
+>>>>>>> v3.18
 		/* Acquire a shared hold on the freeze lock */
 
 		error = gfs2_glock_nq_init(sdp->sd_freeze_gl, LM_ST_SHARED,
 					   LM_FLAG_NOEXP | LM_FLAG_PRIORITY,
 					   &thaw_gh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (error)
 			goto fail_gunlock_ji;
@@ -576,7 +611,11 @@ void gfs2_recover_func(struct work_struct *work)
 				"device\n", jd->jd_jid);
 			error = -EROFS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail_gunlock_tr;
+=======
+			goto fail_gunlock_thaw;
+>>>>>>> v3.18
 =======
 			goto fail_gunlock_thaw;
 >>>>>>> v3.18
@@ -591,7 +630,11 @@ void gfs2_recover_func(struct work_struct *work)
 			lops_after_scan(jd, error, pass);
 			if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto fail_gunlock_tr;
+=======
+				goto fail_gunlock_thaw;
+>>>>>>> v3.18
 =======
 				goto fail_gunlock_thaw;
 >>>>>>> v3.18
@@ -600,9 +643,15 @@ void gfs2_recover_func(struct work_struct *work)
 		error = clean_journal(jd, &head);
 		if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail_gunlock_tr;
 
 		gfs2_glock_dq_uninit(&t_gh);
+=======
+			goto fail_gunlock_thaw;
+
+		gfs2_glock_dq_uninit(&thaw_gh);
+>>>>>>> v3.18
 =======
 			goto fail_gunlock_thaw;
 
@@ -624,8 +673,13 @@ void gfs2_recover_func(struct work_struct *work)
 	goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail_gunlock_tr:
 	gfs2_glock_dq_uninit(&t_gh);
+=======
+fail_gunlock_thaw:
+	gfs2_glock_dq_uninit(&thaw_gh);
+>>>>>>> v3.18
 =======
 fail_gunlock_thaw:
 	gfs2_glock_dq_uninit(&thaw_gh);
@@ -648,12 +702,15 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gfs2_recovery_wait(void *word)
 {
 	schedule();
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int gfs2_recover_journal(struct gfs2_jdesc *jd, bool wait)
@@ -669,7 +726,11 @@ int gfs2_recover_journal(struct gfs2_jdesc *jd, bool wait)
 
 	if (wait)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wait_on_bit(&jd->jd_flags, JDF_RECOVERY, gfs2_recovery_wait,
+=======
+		wait_on_bit(&jd->jd_flags, JDF_RECOVERY,
+>>>>>>> v3.18
 =======
 		wait_on_bit(&jd->jd_flags, JDF_RECOVERY,
 >>>>>>> v3.18

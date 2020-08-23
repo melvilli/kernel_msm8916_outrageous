@@ -28,6 +28,12 @@
 #include <linux/platform_device.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/of_address.h>
@@ -728,7 +734,10 @@ static void crypto4xx_stop_all(struct crypto4xx_core_device *core_dev)
 	crypto4xx_destroy_gdr(core_dev->dev);
 	crypto4xx_destroy_sdr(core_dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(core_dev->device, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(core_dev->dev->ce_base);
@@ -1300,7 +1309,11 @@ static struct platform_driver crypto4xx_driver = {
 	},
 	.probe		= crypto4xx_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= crypto4xx_remove,
+=======
+	.remove		= __exit_p(crypto4xx_remove),
+>>>>>>> v3.18
 =======
 	.remove		= __exit_p(crypto4xx_remove),
 >>>>>>> v3.18

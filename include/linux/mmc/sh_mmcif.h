@@ -17,7 +17,10 @@
 #include <linux/io.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sh_dma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -37,8 +40,11 @@
 
 struct sh_mmcif_plat_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_pwr)(struct platform_device *pdev, int state);
 	void (*down_pwr)(struct platform_device *pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*get_cd)(struct platform_device *pdef);
@@ -46,6 +52,11 @@ struct sh_mmcif_plat_data {
 	unsigned int		slave_id_rx;
 	bool			use_cd_gpio : 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			ccs_unsupported : 1;
+	bool			clk_ctrl2_present : 1;
+>>>>>>> v3.18
 =======
 	bool			ccs_unsupported : 1;
 	bool			clk_ctrl2_present : 1;
@@ -74,6 +85,10 @@ struct sh_mmcif_plat_data {
 #define MMCIF_CE_HOST_STS1	0x00000048
 #define MMCIF_CE_HOST_STS2	0x0000004C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MMCIF_CE_CLK_CTRL2	0x00000070
+>>>>>>> v3.18
 =======
 #define MMCIF_CE_CLK_CTRL2	0x00000070
 >>>>>>> v3.18

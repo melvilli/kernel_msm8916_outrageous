@@ -13,6 +13,11 @@ struct proc_dir_entry;
 struct module;
 struct irq_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct irq_domain;
+struct pt_regs;
+>>>>>>> v3.18
 =======
 struct irq_domain;
 struct pt_regs;
@@ -37,8 +42,12 @@ struct pt_regs;
  * @lock:		locking for SMP
  * @affinity_hint:	hint to user space for preferred irq affinity
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @affinity_notify:	list of notification clients for affinity changes
  * @affinity_work:	Work queue for handling affinity change notifications
+=======
+ * @affinity_notify:	context for notification of affinity changes
+>>>>>>> v3.18
 =======
  * @affinity_notify:	context for notification of affinity changes
 >>>>>>> v3.18
@@ -47,12 +56,18 @@ struct pt_regs;
  * @threads_active:	number of irqaction threads currently running
  * @wait_for_threads:	wait queue for sync_irq to wait for threaded handlers
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @nr_actions:		number of installed actions on this descriptor
  * @no_suspend_depth:	number of irqactions on a irq descriptor with
  *			IRQF_NO_SUSPEND set
  * @force_resume_depth:	number of irqactions on a irq descriptor with
  *			IRQF_FORCE_RESUME set
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @dir:		/proc/irq/ procfs entry
  * @name:		flow handler name for /proc/interrupts output
@@ -79,9 +94,13 @@ struct irq_desc {
 #ifdef CONFIG_SMP
 	const struct cpumask	*affinity_hint;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	affinity_notify;
 	struct work_struct	affinity_work;
 	struct mutex		notify_lock;
+=======
+	struct irq_affinity_notify *affinity_notify;
+>>>>>>> v3.18
 =======
 	struct irq_affinity_notify *affinity_notify;
 >>>>>>> v3.18
@@ -93,12 +112,18 @@ struct irq_desc {
 	atomic_t		threads_active;
 	wait_queue_head_t       wait_for_threads;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 	unsigned int		nr_actions;
 	unsigned int		no_suspend_depth;
 	unsigned int		force_resume_depth;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 	struct proc_dir_entry	*dir;
@@ -151,7 +176,10 @@ static inline void generic_handle_irq_desc(unsigned int irq, struct irq_desc *de
 int generic_handle_irq(unsigned int irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HANDLE_DOMAIN_IRQ
 /*
  * Convert a HW interrupt number to a logical one using a IRQ domain,
@@ -169,6 +197,9 @@ static inline int handle_domain_irq(struct irq_domain *domain,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Test to see if a driver has successfully requested an irq */
 static inline int irq_has_action(unsigned int irq)

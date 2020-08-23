@@ -12,6 +12,10 @@
 #include "cache.h"
 #include "exec_cmd.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/hist.h"  /* perf_hist_config */
+>>>>>>> v3.18
 =======
 #include "util/hist.h"  /* perf_hist_config */
 >>>>>>> v3.18
@@ -226,7 +230,12 @@ static int perf_parse_file(config_fn_t fn, void *data)
 
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int c = get_next_char();
+=======
+		int line, c = get_next_char();
+
+>>>>>>> v3.18
 =======
 		int line, c = get_next_char();
 
@@ -270,9 +279,12 @@ static int perf_parse_file(config_fn_t fn, void *data)
 			break;
 		var[baselen] = tolower(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (get_value(fn, data, var, baselen+1) < 0)
 			break;
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * The get_value function might or might not reach the '\n',
@@ -283,6 +295,9 @@ static int perf_parse_file(config_fn_t fn, void *data)
 			config_linenr = line;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	die("bad config file line %d in %s", config_linenr, config_file_name);
@@ -308,7 +323,10 @@ static int parse_unit_factor(const char *end, unsigned long *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int perf_parse_llong(const char *value, long long *ret)
 {
 	if (value && *value) {
@@ -324,6 +342,9 @@ static int perf_parse_llong(const char *value, long long *ret)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int perf_parse_long(const char *value, long *ret)
 {
@@ -347,7 +368,10 @@ static void die_bad_config(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u64 perf_config_u64(const char *name, const char *value)
 {
 	long long ret = 0;
@@ -357,6 +381,9 @@ u64 perf_config_u64(const char *name, const char *value)
 	return (u64) ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int perf_config_int(const char *name, const char *value)
 {
@@ -402,7 +429,10 @@ static int perf_default_core_config(const char *var __maybe_unused,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int perf_ui_config(const char *var, const char *value)
 {
 	/* Add other config variables here. */
@@ -413,6 +443,9 @@ static int perf_ui_config(const char *var, const char *value)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int perf_default_config(const char *var, const char *value,
 			void *dummy __maybe_unused)
@@ -421,7 +454,10 @@ int perf_default_config(const char *var, const char *value,
 		return perf_default_core_config(var, value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!prefixcmp(var, "hist."))
 		return perf_hist_config(var, value);
 
@@ -431,6 +467,9 @@ int perf_default_config(const char *var, const char *value,
 	if (!prefixcmp(var, "call-graph."))
 		return perf_callchain_config(var, value);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Add other config variables here. */
 	return 0;

@@ -86,7 +86,10 @@ static int m68kspkr_remove(struct platform_device *dev)
 
 	input_unregister_device(input_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* turn off the speaker */

@@ -28,6 +28,7 @@ static int get_free_idx(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool tls_desc_okay(const struct user_desc *info)
 {
 	/*
@@ -82,6 +83,8 @@ static bool tls_desc_okay(const struct user_desc *info)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void set_tls_desc(struct task_struct *p, int idx,
 			 const struct user_desc *info, int n)
 {
@@ -96,7 +99,11 @@ static void set_tls_desc(struct task_struct *p, int idx,
 
 	while (n-- > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (LDT_empty(info) || LDT_zero(info))
+=======
+		if (LDT_empty(info))
+>>>>>>> v3.18
 =======
 		if (LDT_empty(info))
 >>>>>>> v3.18
@@ -126,9 +133,12 @@ int do_set_thread_area(struct task_struct *p, int idx,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tls_desc_okay(&info))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (idx == -1)
@@ -258,7 +268,10 @@ int regset_tls_set(struct task_struct *target, const struct user_regset *regset,
 	struct user_desc infobuf[GDT_ENTRY_TLS_ENTRIES];
 	const struct user_desc *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -275,10 +288,13 @@ int regset_tls_set(struct task_struct *target, const struct user_regset *regset,
 		info = infobuf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < count / sizeof(struct user_desc); i++)
 		if (!tls_desc_okay(info + i))
 			return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	set_tls_desc(target,

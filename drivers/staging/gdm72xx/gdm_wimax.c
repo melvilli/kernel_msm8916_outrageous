@@ -36,6 +36,7 @@
 
 struct evt_entry {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head list;
 	struct net_device *dev;
 	char evt_data[EVT_MAX_SIZE];
@@ -49,12 +50,17 @@ static struct evt_entry *get_event_entry(void);
 static void put_event_entry(struct evt_entry *e);
 
 =======
+=======
+>>>>>>> v3.18
 	struct	list_head list;
 	struct	net_device *dev;
 	char	evt_data[EVT_MAX_SIZE];
 	int	size;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct {
 	int ref_cnt;
@@ -62,7 +68,10 @@ static struct {
 	struct list_head evtq;
 	spinlock_t evt_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head freeq;
@@ -71,6 +80,7 @@ static struct {
 
 static u8 gdm_wimax_macaddr[6] = {0x00, 0x0a, 0x3b, 0xf0, 0x01, 0x30};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void gdm_wimax_ind_fsm_update(struct net_device *dev, struct fsm_s *fsm);
 static void gdm_wimax_ind_if_updown(struct net_device *dev, int if_up);
@@ -224,11 +234,16 @@ static inline int gdm_wimax_header(struct sk_buff **pskb)
 	struct sk_buff *skb = *pskb;
 	int ret = 0;
 =======
+=======
+>>>>>>> v3.18
 static inline int gdm_wimax_header(struct sk_buff **pskb)
 {
 	u16 buf[HCI_HEADER_SIZE / sizeof(u16)];
 	struct hci_s *hci = (struct hci_s *)buf;
 	struct sk_buff *skb = *pskb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(skb_headroom(skb) < HCI_HEADER_SIZE)) {
@@ -245,6 +260,7 @@ static inline int gdm_wimax_header(struct sk_buff **pskb)
 
 	skb_push(skb, HCI_HEADER_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf[0] = H2B(WIMAX_TX_SDU);
 	buf[1] = H2B(skb->len - HCI_HEADER_SIZE);
 	memcpy(skb->data, buf, HCI_HEADER_SIZE);
@@ -252,6 +268,8 @@ static inline int gdm_wimax_header(struct sk_buff **pskb)
 	*pskb = skb;
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	hci->cmd_evt = cpu_to_be16(WIMAX_TX_SDU);
 	hci->length = cpu_to_be16(skb->len - HCI_HEADER_SIZE);
 	memcpy(skb->data, buf, HCI_HEADER_SIZE);
@@ -289,6 +307,9 @@ static void put_event_entry(struct evt_entry *e)
 	BUG_ON(!e);
 
 	list_add_tail(&e->list, &wm_event.freeq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -298,6 +319,7 @@ static void gdm_wimax_event_rcv(struct net_device *dev, u16 type, void *msg,
 	struct nic *nic = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#if defined(DEBUG_HCI)
 	u8 *buf = (u8 *) msg;
 	u16 hci_cmd =  (buf[0]<<8) | buf[1];
@@ -305,18 +327,26 @@ static void gdm_wimax_event_rcv(struct net_device *dev, u16 type, void *msg,
 	printk(KERN_DEBUG "H=>D: 0x%04x(%d)\n", hci_cmd, hci_len);
 	#endif
 =======
+=======
+>>>>>>> v3.18
 	u8 *buf = (u8 *)msg;
 	u16 hci_cmd =  (buf[0]<<8) | buf[1];
 	u16 hci_len = (buf[2]<<8) | buf[3];
 
 	netdev_dbg(dev, "H=>D: 0x%04x(%d)\n", hci_cmd, hci_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gdm_wimax_send(nic, msg, len);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __gdm_wimax_event_send(struct work_struct *work)
 {
 	int idx;
@@ -341,6 +371,9 @@ static void __gdm_wimax_event_send(struct work_struct *work)
 	spin_unlock_irqrestore(&wm_event.evt_lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int gdm_wimax_event_init(void)
 {
@@ -387,6 +420,7 @@ static void gdm_wimax_event_exit(void)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct evt_entry *alloc_event_entry(void)
 {
@@ -444,11 +478,14 @@ static void __gdm_wimax_event_send(struct work_struct *work)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int gdm_wimax_event_send(struct net_device *dev, char *buf, int size)
 {
 	struct evt_entry *e;
 	unsigned long flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	#if defined(DEBUG_HCI)
 	u16 hci_cmd =  ((u8)buf[0]<<8) | (u8)buf[1];
@@ -456,10 +493,15 @@ static int gdm_wimax_event_send(struct net_device *dev, char *buf, int size)
 	printk(KERN_DEBUG "D=>H: 0x%04x(%d)\n", hci_cmd, hci_len);
 	#endif
 =======
+=======
+>>>>>>> v3.18
 	u16 hci_cmd =  ((u8)buf[0]<<8) | (u8)buf[1];
 	u16 hci_len = ((u8)buf[2]<<8) | (u8)buf[3];
 
 	netdev_dbg(dev, "D=>H: 0x%04x(%d)\n", hci_cmd, hci_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&wm_event.evt_lock, flags);
@@ -498,7 +540,11 @@ int gdm_wimax_send_tx(struct sk_buff *skb, struct net_device *dev)
 
 	ret = gdm_wimax_send_with_cb(nic, skb->data, skb->len, tx_complete,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					nic);
+=======
+				     nic);
+>>>>>>> v3.18
 =======
 				     nic);
 >>>>>>> v3.18
@@ -513,8 +559,13 @@ int gdm_wimax_send_tx(struct sk_buff *skb, struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nic->stats.tx_packets++;
 	nic->stats.tx_bytes += skb->len - HCI_HEADER_SIZE;
+=======
+	dev->stats.tx_packets++;
+	dev->stats.tx_bytes += skb->len - HCI_HEADER_SIZE;
+>>>>>>> v3.18
 =======
 	dev->stats.tx_packets++;
 	dev->stats.tx_bytes += skb->len - HCI_HEADER_SIZE;
@@ -527,12 +578,15 @@ static int gdm_wimax_tx(struct sk_buff *skb, struct net_device *dev)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nic *nic = netdev_priv(dev);
 	struct fsm_s *fsm = (struct fsm_s *) nic->sdk_data[SIOC_DATA_FSM].buf;
 
 	#if defined(DEBUG_SDU)
 	dump_eth_packet("TX", skb->data, skb->len);
 	#endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -542,6 +596,7 @@ static int gdm_wimax_tx(struct sk_buff *skb, struct net_device *dev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	#if !defined(LOOPBACK_TEST)
 	if (!fsm)
@@ -554,6 +609,8 @@ static int gdm_wimax_tx(struct sk_buff *skb, struct net_device *dev)
 	}
 	#endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_WIMAX_GDM72XX_QOS)
@@ -576,7 +633,11 @@ static void __gdm_wimax_set_mac_addr(struct net_device *dev, char *mac_addr)
 {
 	u16 hci_pkt_buf[32 / sizeof(u16)];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *pkt = (u8 *) &hci_pkt_buf[0];
+=======
+	struct hci_s *hci = (struct hci_s *)hci_pkt_buf;
+>>>>>>> v3.18
 =======
 	struct hci_s *hci = (struct hci_s *)hci_pkt_buf;
 >>>>>>> v3.18
@@ -591,6 +652,7 @@ static void __gdm_wimax_set_mac_addr(struct net_device *dev, char *mac_addr)
 	 * SetInformation(MAC Address)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hci_pkt_buf[0] = H2B(WIMAX_SET_INFO);	/* cmd_evt */
 	hci_pkt_buf[1] = H2B(8);			/* size */
 	pkt[4] = 0; /* T */
@@ -599,6 +661,8 @@ static void __gdm_wimax_set_mac_addr(struct net_device *dev, char *mac_addr)
 
 	gdm_wimax_send(nic, pkt, HCI_HEADER_SIZE + 8);
 =======
+=======
+>>>>>>> v3.18
 	hci->cmd_evt = cpu_to_be16(WIMAX_SET_INFO);
 	hci->length = cpu_to_be16(8);
 	hci->data[0] = 0; /* T */
@@ -606,6 +670,9 @@ static void __gdm_wimax_set_mac_addr(struct net_device *dev, char *mac_addr)
 	memcpy(&hci->data[2], mac_addr, dev->addr_len); /* V */
 
 	gdm_wimax_send(nic, hci, HCI_HEADER_SIZE + 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -626,12 +693,15 @@ static int gdm_wimax_set_mac_addr(struct net_device *dev, void *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct net_device_stats *gdm_wimax_stats(struct net_device *dev)
 {
 	struct nic *nic = netdev_priv(dev);
 
 	return &nic->stats;
 =======
+=======
+>>>>>>> v3.18
 static void gdm_wimax_ind_if_updown(struct net_device *dev, int if_up)
 {
 	u16 buf[32 / sizeof(u16)];
@@ -646,6 +716,9 @@ static void gdm_wimax_ind_if_updown(struct net_device *dev, int if_up)
 	hci->data[0] = up_down;
 
 	gdm_wimax_event_send(dev, (char *)hci, HCI_HEADER_SIZE+sizeof(up_down));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -653,7 +726,11 @@ static int gdm_wimax_open(struct net_device *dev)
 {
 	struct nic *nic = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsm_s *fsm = (struct fsm_s *) nic->sdk_data[SIOC_DATA_FSM].buf;
+=======
+	struct fsm_s *fsm = (struct fsm_s *)nic->sdk_data[SIOC_DATA_FSM].buf;
+>>>>>>> v3.18
 =======
 	struct fsm_s *fsm = (struct fsm_s *)nic->sdk_data[SIOC_DATA_FSM].buf;
 >>>>>>> v3.18
@@ -669,7 +746,11 @@ static int gdm_wimax_close(struct net_device *dev)
 {
 	struct nic *nic = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsm_s *fsm = (struct fsm_s *) nic->sdk_data[SIOC_DATA_FSM].buf;
+=======
+	struct fsm_s *fsm = (struct fsm_s *)nic->sdk_data[SIOC_DATA_FSM].buf;
+>>>>>>> v3.18
 =======
 	struct fsm_s *fsm = (struct fsm_s *)nic->sdk_data[SIOC_DATA_FSM].buf;
 >>>>>>> v3.18
@@ -700,7 +781,11 @@ static int gdm_wimax_ioctl_get_data(struct data_s *dst, struct data_s *src)
 		if (!dst->buf)
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_to_user(dst->buf, src->buf, size))
+=======
+		if (copy_to_user((void __user *)dst->buf, src->buf, size))
+>>>>>>> v3.18
 =======
 		if (copy_to_user((void __user *)dst->buf, src->buf, size))
 >>>>>>> v3.18
@@ -727,7 +812,11 @@ static int gdm_wimax_ioctl_set_data(struct data_s *dst, struct data_s *src)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(dst->buf, src->buf, src->size)) {
+=======
+	if (copy_from_user(dst->buf, (void __user *)src->buf, src->size)) {
+>>>>>>> v3.18
 =======
 	if (copy_from_user(dst->buf, (void __user *)src->buf, src->size)) {
 >>>>>>> v3.18
@@ -748,12 +837,15 @@ static void gdm_wimax_cleanup_ioctl(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void gdm_update_fsm(struct net_device *dev, struct fsm_s *new_fsm)
 {
 	struct nic *nic = netdev_priv(dev);
 	struct fsm_s *cur_fsm =
 		(struct fsm_s *) nic->sdk_data[SIOC_DATA_FSM].buf;
 =======
+=======
+>>>>>>> v3.18
 static void gdm_wimax_ind_fsm_update(struct net_device *dev, struct fsm_s *fsm)
 {
 	u16 buf[32 / sizeof(u16)];
@@ -773,6 +865,9 @@ static void gdm_update_fsm(struct net_device *dev, struct fsm_s *new_fsm)
 	struct nic *nic = netdev_priv(dev);
 	struct fsm_s *cur_fsm = (struct fsm_s *)
 					nic->sdk_data[SIOC_DATA_FSM].buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!cur_fsm)
@@ -780,15 +875,21 @@ static void gdm_update_fsm(struct net_device *dev, struct fsm_s *new_fsm)
 
 	if (cur_fsm->m_status != new_fsm->m_status ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cur_fsm->c_status != new_fsm->c_status) {
 		if (new_fsm->m_status == M_CONNECTED)
 			netif_carrier_on(dev);
 		else if (cur_fsm->m_status == M_CONNECTED) {
 =======
+=======
+>>>>>>> v3.18
 	    cur_fsm->c_status != new_fsm->c_status) {
 		if (new_fsm->m_status == M_CONNECTED) {
 			netif_carrier_on(dev);
 		} else if (cur_fsm->m_status == M_CONNECTED) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			netif_carrier_off(dev);
 			#if defined(CONFIG_WIMAX_GDM72XX_QOS)
@@ -802,7 +903,11 @@ static void gdm_update_fsm(struct net_device *dev, struct fsm_s *new_fsm)
 static int gdm_wimax_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm_req_s *req = (struct wm_req_s *) ifr;
+=======
+	struct wm_req_s *req = (struct wm_req_s *)ifr;
+>>>>>>> v3.18
 =======
 	struct wm_req_s *req = (struct wm_req_s *)ifr;
 >>>>>>> v3.18
@@ -822,8 +927,13 @@ static int gdm_wimax_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 		}
 		if (req->cmd == SIOCG_DATA) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = gdm_wimax_ioctl_get_data(&req->data,
 						&nic->sdk_data[req->data_id]);
+=======
+			ret = gdm_wimax_ioctl_get_data(
+				&req->data, &nic->sdk_data[req->data_id]);
+>>>>>>> v3.18
 =======
 			ret = gdm_wimax_ioctl_get_data(
 				&req->data, &nic->sdk_data[req->data_id]);
@@ -833,16 +943,22 @@ static int gdm_wimax_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 		} else if (req->cmd == SIOCS_DATA) {
 			if (req->data_id == SIOC_DATA_FSM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/*NOTE: gdm_update_fsm should be called
 				before gdm_wimax_ioctl_set_data is called*/
 				gdm_update_fsm(dev,
 						(struct fsm_s *) req->data.buf);
 =======
+=======
+>>>>>>> v3.18
 				/* NOTE: gdm_update_fsm should be called
 				 * before gdm_wimax_ioctl_set_data is called.
 				 */
 				gdm_update_fsm(dev,
 					       (struct fsm_s *)req->data.buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			ret = gdm_wimax_ioctl_set_data(
@@ -863,6 +979,7 @@ static void gdm_wimax_prepare_device(struct net_device *dev)
 {
 	struct nic *nic = netdev_priv(dev);
 	u16 buf[32 / sizeof(u16)];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct hci_s *hci = (struct hci_s *) buf;
 	u16 len = 0;
@@ -887,6 +1004,8 @@ static void gdm_wimax_prepare_device(struct net_device *dev)
 	#if defined(CONFIG_WIMAX_GDM72XX_WIMAX2)
 	val |= (1<<BIT_AGGREGATION);
 =======
+=======
+>>>>>>> v3.18
 	struct hci_s *hci = (struct hci_s *)buf;
 	u16 len = 0;
 	u32 val = 0;
@@ -905,11 +1024,15 @@ static void gdm_wimax_prepare_device(struct net_device *dev)
 	#endif
 	#if defined(CONFIG_WIMAX_GDM72XX_WIMAX2)
 	val |= T_CAPABILITY_AGGREGATION;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	#endif
 
 	/* Set capability */
 	len = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hci->cmd_evt = H2B(WIMAX_SET_INFO);
 	hci->data[len++] = TLV_T(T_CAPABILITY);
@@ -922,6 +1045,8 @@ static void gdm_wimax_prepare_device(struct net_device *dev)
 
 	netdev_info(dev, "GDM WiMax Set CAPABILITY: 0x%08X\n", DB2H(val));
 =======
+=======
+>>>>>>> v3.18
 	hci->cmd_evt = cpu_to_be16(WIMAX_SET_INFO);
 	hci->data[len++] = TLV_T(T_CAPABILITY);
 	hci->data[len++] = TLV_L(T_CAPABILITY);
@@ -932,6 +1057,9 @@ static void gdm_wimax_prepare_device(struct net_device *dev)
 	gdm_wimax_send(nic, hci, HCI_HEADER_SIZE+len);
 
 	netdev_info(dev, "GDM WiMax Set CAPABILITY: 0x%08X\n", val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -943,7 +1071,11 @@ static int gdm_wimax_hci_get_tlv(u8 *buf, u8 *T, u16 *L, u8 **V)
 	*T = buf[0];
 	if (buf[1] == 0x82) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*L = B2H(__U82U16(&buf[2]));
+=======
+		*L = be16_to_cpu(__U82U16(&buf[2]));
+>>>>>>> v3.18
 =======
 		*L = be16_to_cpu(__U82U16(&buf[2]));
 >>>>>>> v3.18
@@ -960,7 +1092,11 @@ static int gdm_wimax_hci_get_tlv(u8 *buf, u8 *T, u16 *L, u8 **V)
 
 static int gdm_wimax_get_prepared_info(struct net_device *dev, char *buf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					int len)
+=======
+				       int len)
+>>>>>>> v3.18
 =======
 				       int len)
 >>>>>>> v3.18
@@ -971,8 +1107,13 @@ static int gdm_wimax_get_prepared_info(struct net_device *dev, char *buf,
 	int pos = HCI_HEADER_SIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd_evt = B2H(*(u16 *)&buf[0]);
 	cmd_len = B2H(*(u16 *)&buf[2]);
+=======
+	cmd_evt = be16_to_cpup((const __be16 *)&buf[0]);
+	cmd_len = be16_to_cpup((const __be16 *)&buf[2]);
+>>>>>>> v3.18
 =======
 	cmd_evt = be16_to_cpup((const __be16 *)&buf[0]);
 	cmd_len = be16_to_cpup((const __be16 *)&buf[2]);
@@ -1013,6 +1154,7 @@ static int gdm_wimax_get_prepared_info(struct net_device *dev, char *buf,
 static void gdm_wimax_netif_rx(struct net_device *dev, char *buf, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nic *nic = netdev_priv(dev);
 	struct sk_buff *skb;
 	int ret;
@@ -1026,6 +1168,11 @@ static void gdm_wimax_netif_rx(struct net_device *dev, char *buf, int len)
 	int ret;
 
 >>>>>>> v3.18
+=======
+	struct sk_buff *skb;
+	int ret;
+
+>>>>>>> v3.18
 	skb = dev_alloc_skb(len + 2);
 	if (!skb) {
 		netdev_err(dev, "%s: dev_alloc_skb failed!\n", __func__);
@@ -1034,8 +1181,13 @@ static void gdm_wimax_netif_rx(struct net_device *dev, char *buf, int len)
 	skb_reserve(skb, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nic->stats.rx_packets++;
 	nic->stats.rx_bytes += len;
+=======
+	dev->stats.rx_packets++;
+	dev->stats.rx_bytes += len;
+>>>>>>> v3.18
 =======
 	dev->stats.rx_packets++;
 	dev->stats.rx_bytes += len;
@@ -1061,6 +1213,7 @@ static void gdm_wimax_transmit_aggr_pkt(struct net_device *dev, char *buf,
 
 	while (len > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hci = (struct hci_s *) buf;
 
 		if (B2H(hci->cmd_evt) != WIMAX_RX_SDU) {
@@ -1071,6 +1224,8 @@ static void gdm_wimax_transmit_aggr_pkt(struct net_device *dev, char *buf,
 
 		length = B2H(hci->length);
 =======
+=======
+>>>>>>> v3.18
 		hci = (struct hci_s *)buf;
 
 		if (hci->cmd_evt != cpu_to_be16(WIMAX_RX_SDU)) {
@@ -1080,6 +1235,9 @@ static void gdm_wimax_transmit_aggr_pkt(struct net_device *dev, char *buf,
 		}
 
 		length = be16_to_cpu(hci->length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gdm_wimax_netif_rx(dev, hci->data, length);
 
@@ -1106,8 +1264,13 @@ static void gdm_wimax_transmit_pkt(struct net_device *dev, char *buf, int len)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd_evt = B2H(*(u16 *)&buf[0]);
 	cmd_len = B2H(*(u16 *)&buf[2]);
+=======
+	cmd_evt = be16_to_cpup((const __be16 *)&buf[0]);
+	cmd_len = be16_to_cpup((const __be16 *)&buf[2]);
+>>>>>>> v3.18
 =======
 	cmd_evt = be16_to_cpup((const __be16 *)&buf[0]);
 	cmd_len = be16_to_cpup((const __be16 *)&buf[2]);
@@ -1124,7 +1287,11 @@ static void gdm_wimax_transmit_pkt(struct net_device *dev, char *buf, int len)
 	case WIMAX_RX_SDU_AGGR:
 		gdm_wimax_transmit_aggr_pkt(dev, &buf[HCI_HEADER_SIZE],
 <<<<<<< HEAD
+<<<<<<< HEAD
 						cmd_len);
+=======
+					    cmd_len);
+>>>>>>> v3.18
 =======
 					    cmd_len);
 >>>>>>> v3.18
@@ -1152,6 +1319,7 @@ static void gdm_wimax_transmit_pkt(struct net_device *dev, char *buf, int len)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void gdm_wimax_ind_fsm_update(struct net_device *dev, struct fsm_s *fsm)
 {
@@ -1185,6 +1353,8 @@ static void gdm_wimax_ind_if_updown(struct net_device *dev, int if_up)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void rx_complete(void *arg, void *data, int len)
 {
 	struct nic *nic = arg;
@@ -1200,9 +1370,15 @@ static void prepare_rx_complete(void *arg, void *data, int len)
 
 	ret = gdm_wimax_get_prepared_info(nic->netdev, data, len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == 1)
 		gdm_wimax_rcv_with_cb(nic, rx_complete, nic);
 	else {
+=======
+	if (ret == 1) {
+		gdm_wimax_rcv_with_cb(nic, rx_complete, nic);
+	} else {
+>>>>>>> v3.18
 =======
 	if (ret == 1) {
 		gdm_wimax_rcv_with_cb(nic, rx_complete, nic);
@@ -1213,10 +1389,13 @@ static void prepare_rx_complete(void *arg, void *data, int len)
 				   "get_prepared_info failed(%d)\n", ret);
 		gdm_wimax_rcv_with_cb(nic, prepare_rx_complete, nic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		#if 0
 		/* Re-prepare WiMax device */
 		gdm_wimax_prepare_device(nic->netdev);
 		#endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1229,6 +1408,7 @@ static void start_rx_proc(struct nic *nic)
 
 static struct net_device_ops gdm_netdev_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ndo_open				= gdm_wimax_open,
 	.ndo_stop				= gdm_wimax_close,
 	.ndo_set_config			= gdm_wimax_set_config,
@@ -1237,12 +1417,17 @@ static struct net_device_ops gdm_netdev_ops = {
 	.ndo_set_mac_address	= gdm_wimax_set_mac_addr,
 	.ndo_do_ioctl			= gdm_wimax_ioctl,
 =======
+=======
+>>>>>>> v3.18
 	.ndo_open		= gdm_wimax_open,
 	.ndo_stop		= gdm_wimax_close,
 	.ndo_set_config		= gdm_wimax_set_config,
 	.ndo_start_xmit		= gdm_wimax_tx,
 	.ndo_set_mac_address	= gdm_wimax_set_mac_addr,
 	.ndo_do_ioctl		= gdm_wimax_ioctl,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1253,8 +1438,13 @@ int register_wimax_device(struct phy_dev *phy_dev, struct device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = (struct net_device *)alloc_netdev(sizeof(*nic),
 						"wm%d", ether_setup);
+=======
+	dev = alloc_netdev(sizeof(*nic), "wm%d", NET_NAME_UNKNOWN,
+			   ether_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(*nic), "wm%d", NET_NAME_UNKNOWN,
 			   ether_setup);
@@ -1273,8 +1463,11 @@ int register_wimax_device(struct phy_dev *phy_dev, struct device *pdev)
 
 	nic = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(nic, 0, sizeof(*nic));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nic->netdev = dev;
@@ -1293,12 +1486,16 @@ int register_wimax_device(struct phy_dev *phy_dev, struct device *pdev)
 		goto cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#if defined(LOOPBACK_TEST)
 	netif_start_queue(dev);
 	netif_carrier_on(dev);
 	#else
 	netif_carrier_off(dev);
 	#endif
+=======
+	netif_carrier_off(dev);
+>>>>>>> v3.18
 =======
 	netif_carrier_off(dev);
 >>>>>>> v3.18
@@ -1324,7 +1521,11 @@ void unregister_wimax_device(struct phy_dev *phy_dev)
 {
 	struct nic *nic = netdev_priv(phy_dev->netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsm_s *fsm = (struct fsm_s *) nic->sdk_data[SIOC_DATA_FSM].buf;
+=======
+	struct fsm_s *fsm = (struct fsm_s *)nic->sdk_data[SIOC_DATA_FSM].buf;
+>>>>>>> v3.18
 =======
 	struct fsm_s *fsm = (struct fsm_s *)nic->sdk_data[SIOC_DATA_FSM].buf;
 >>>>>>> v3.18

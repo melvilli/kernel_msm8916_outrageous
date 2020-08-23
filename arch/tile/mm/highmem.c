@@ -104,7 +104,11 @@ static void kmap_atomic_register(struct page *page, int type,
 
 	/* With interrupts disabled, now fill in the per-cpu info. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amp = &__get_cpu_var(amps).per_type[type];
+=======
+	amp = this_cpu_ptr(&amps.per_type[type]);
+>>>>>>> v3.18
 =======
 	amp = this_cpu_ptr(&amps.per_type[type]);
 >>>>>>> v3.18
@@ -119,7 +123,10 @@ static void kmap_atomic_register(struct page *page, int type,
 	list_add(&amp->list, &amp_list);
 	set_pte(ptep, pteval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_flush_lazy_mmu_mode();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -267,7 +274,10 @@ void __kunmap_atomic(void *kvaddr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_flush_lazy_mmu_mode();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pagefault_enable();

@@ -99,11 +99,17 @@
  *  - add time_gran to fuse_init_out
  *  - add reserved space to fuse_init_out
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *  - add FATTR_CTIME
  *  - add ctime and ctimensec to fuse_setattr_in
  *  - add FUSE_RENAME2 request
  *  - add FUSE_NO_OPEN_SUPPORT flag
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -201,6 +207,10 @@ struct fuse_file_lock {
 #define FATTR_MTIME_NOW	(1 << 8)
 #define FATTR_LOCKOWNER	(1 << 9)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FATTR_CTIME	(1 << 10)
+>>>>>>> v3.18
 =======
 #define FATTR_CTIME	(1 << 10)
 >>>>>>> v3.18
@@ -237,6 +247,10 @@ struct fuse_file_lock {
  * FUSE_ASYNC_DIO: asynchronous direct I/O submission
  * FUSE_WRITEBACK_CACHE: use writeback cache for buffered writes
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * FUSE_NO_OPEN_SUPPORT: kernel supports zero-message opens
+>>>>>>> v3.18
 =======
  * FUSE_NO_OPEN_SUPPORT: kernel supports zero-message opens
 >>>>>>> v3.18
@@ -259,8 +273,12 @@ struct fuse_file_lock {
 #define FUSE_ASYNC_DIO		(1 << 15)
 #define FUSE_WRITEBACK_CACHE	(1 << 16)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define FUSE_SHORTCIRCUIT	(1 << 31)
+=======
+#define FUSE_NO_OPEN_SUPPORT	(1 << 17)
+>>>>>>> v3.18
 =======
 #define FUSE_NO_OPEN_SUPPORT	(1 << 17)
 >>>>>>> v3.18
@@ -372,7 +390,11 @@ enum fuse_opcode {
 	FUSE_FALLOCATE     = 43,
 	FUSE_READDIRPLUS   = 44,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FUSE_CANONICAL_PATH= 2016,
+=======
+	FUSE_RENAME2       = 45,
+>>>>>>> v3.18
 =======
 	FUSE_RENAME2       = 45,
 >>>>>>> v3.18
@@ -455,13 +477,19 @@ struct fuse_rename_in {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct fuse_rename2_in {
 	uint64_t	newdir;
 	uint32_t	flags;
 	uint32_t	padding;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct fuse_link_in {
 	uint64_t	oldnodeid;
@@ -476,15 +504,21 @@ struct fuse_setattr_in {
 	uint64_t	atime;
 	uint64_t	mtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint64_t	unused2;
 	uint32_t	atimensec;
 	uint32_t	mtimensec;
 	uint32_t	unused3;
 =======
+=======
+>>>>>>> v3.18
 	uint64_t	ctime;
 	uint32_t	atimensec;
 	uint32_t	mtimensec;
 	uint32_t	ctimensec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t	mode;
 	uint32_t	unused4;
@@ -509,7 +543,11 @@ struct fuse_open_out {
 	uint64_t	fh;
 	uint32_t	open_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int32_t         lower_fd;/* lower layer file descriptor */
+=======
+	uint32_t	padding;
+>>>>>>> v3.18
 =======
 	uint32_t	padding;
 >>>>>>> v3.18

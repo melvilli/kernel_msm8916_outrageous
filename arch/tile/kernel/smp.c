@@ -21,9 +21,12 @@
 #include <linux/module.h>
 #include <asm/cacheflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 HV_Topology smp_topology __write_once;
 =======
+=======
+>>>>>>> v3.18
 #include <asm/homecache.h>
 
 /*
@@ -31,6 +34,9 @@ HV_Topology smp_topology __write_once;
  * so make the variable aligned to "long".
  */
 HV_Topology smp_topology __write_once __aligned(sizeof(long));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(smp_topology);
 
@@ -111,8 +117,13 @@ static void smp_start_cpu_interrupt(void)
 static void smp_stop_cpu_interrupt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpu_online(smp_processor_id(), 0);
 	arch_local_irq_disable_all();
+=======
+	arch_local_irq_disable_all();
+	set_cpu_online(smp_processor_id(), 0);
+>>>>>>> v3.18
 =======
 	arch_local_irq_disable_all();
 	set_cpu_online(smp_processor_id(), 0);
@@ -183,11 +194,14 @@ void flush_icache_range(unsigned long start, unsigned long end)
 {
 	struct ipi_flush flush = { start, end };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
 	on_each_cpu(ipi_flush_icache_range, &flush, 1);
 	preempt_enable();
 }
 =======
+=======
+>>>>>>> v3.18
 
 	/* If invoked with irqs disabled, we can not issue IPIs. */
 	if (irqs_disabled())
@@ -200,6 +214,9 @@ void flush_icache_range(unsigned long start, unsigned long end)
 	}
 }
 EXPORT_SYMBOL(flush_icache_range);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -207,7 +224,11 @@ EXPORT_SYMBOL(flush_icache_range);
 static irqreturn_t handle_reschedule_ipi(int irq, void *token)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).irq_resched_count++;
+=======
+	__this_cpu_inc(irq_stat.irq_resched_count);
+>>>>>>> v3.18
 =======
 	__this_cpu_inc(irq_stat.irq_resched_count);
 >>>>>>> v3.18

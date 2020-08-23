@@ -31,6 +31,7 @@
 #include <engine/disp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dport.h"
 
 #define DBG(fmt, args...) nv_debug(dp->disp, "DP:%04x:%04x: " fmt,             \
@@ -38,16 +39,22 @@
 #define ERR(fmt, args...) nv_error(dp->disp, "DP:%04x:%04x: " fmt,             \
 				   dp->outp->hasht, dp->outp->hashm, ##args)
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/class.h>
 
 #include "dport.h"
 #include "outpdp.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /******************************************************************************
  * link training
  *****************************************************************************/
 struct dp_state {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct nouveau_dp_func *func;
 	struct nouveau_disp *disp;
@@ -60,11 +67,20 @@ struct dp_state {
 =======
 	struct nvkm_output_dp *outp;
 >>>>>>> v3.18
+=======
+	struct nvkm_output_dp *outp;
+>>>>>>> v3.18
 	int link_nr;
 	u32 link_bw;
 	u8  stat[6];
 	u8  conf[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool pc2;
+	u8  pc2stat;
+	u8  pc2conf[2];
+>>>>>>> v3.18
 =======
 	bool pc2;
 	u8  pc2stat;
@@ -76,6 +92,7 @@ static int
 dp_set_link_config(struct dp_state *dp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_disp *disp = dp->disp;
 	struct nouveau_bios *bios = nouveau_bios(disp);
 	struct nvbios_init init = {
@@ -85,6 +102,8 @@ dp_set_link_config(struct dp_state *dp)
 		.outp = dp->outp,
 		.crtc = dp->head,
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output_dp_impl *impl = (void *)nv_oclass(dp->outp);
 	struct nvkm_output_dp *outp = dp->outp;
 	struct nouveau_disp *disp = nouveau_disp(outp);
@@ -95,11 +114,15 @@ dp_set_link_config(struct dp_state *dp)
 		.offset = 0x0000,
 		.outp = &outp->base.info,
 		.crtc = -1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.execute = 1,
 	};
 	u32 lnkcmp;
 	u8 sink[2];
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	DBG("%d lanes at %d KB/s\n", dp->link_nr, dp->link_bw);
@@ -116,6 +139,8 @@ dp_set_link_config(struct dp_state *dp)
 	if ((lnkcmp = dp->info.lnkcmp)) {
 		if (dp->version < 0x30) {
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	DBG("%d lanes at %d KB/s\n", dp->link_nr, dp->link_bw);
@@ -123,6 +148,9 @@ dp_set_link_config(struct dp_state *dp)
 	/* set desired link configuration on the source */
 	if ((lnkcmp = dp->outp->info.lnkcmp)) {
 		if (outp->version < 0x30) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			while ((dp->link_bw / 10) < nv_ro16(bios, lnkcmp))
 				lnkcmp += 4;
@@ -137,11 +165,14 @@ dp_set_link_config(struct dp_state *dp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dp->func->lnk_ctl(dp->disp, dp->outp, dp->head,
 				 dp->link_nr, dp->link_bw / 27000,
 				 dp->dpcd[DPCD_RC02] &
 					  DPCD_RC02_ENHANCED_FRAME_CAP);
 =======
+=======
+>>>>>>> v3.18
 	ret = impl->lnk_ctl(outp, dp->link_nr, dp->link_bw / 27000,
 			    outp->dpcd[DPCD_RC02] &
 				       DPCD_RC02_ENHANCED_FRAME_CAP);
@@ -160,12 +191,16 @@ dp_set_link_config(struct dp_state *dp)
 		sink[1] |= DPCD_LC01_ENHANCED_FRAME_EN;
 
 	return nv_wraux(outp->base.edid, DPCD_LC00_LINK_BW_SET, sink, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void
 dp_set_training_pattern(struct dp_state *dp, u8 pattern)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 sink_tp;
 
@@ -214,6 +249,8 @@ dp_link_train_update(struct dp_state *dp, u32 delay)
 
 	DBG("status %*ph\n", 6, dp->stat);
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output_dp_impl *impl = (void *)nv_oclass(dp->outp);
 	struct nvkm_output_dp *outp = dp->outp;
 	u8 sink_tp;
@@ -297,6 +334,9 @@ dp_link_train_update(struct dp_state *dp, bool pc, u32 delay)
 		DBG("status %6ph\n", dp->stat);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -312,8 +352,13 @@ dp_link_train_cr(struct dp_state *dp)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dp_link_train_commit(dp) ||
 		    dp_link_train_update(dp, 100))
+=======
+		if (dp_link_train_commit(dp, false) ||
+		    dp_link_train_update(dp, false, 100))
+>>>>>>> v3.18
 =======
 		if (dp_link_train_commit(dp, false) ||
 		    dp_link_train_update(dp, false, 100))
@@ -344,6 +389,7 @@ static int
 dp_link_train_eq(struct dp_state *dp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool eq_done = false, cr_done = true;
 	int tries = 0, i;
 
@@ -352,6 +398,8 @@ dp_link_train_eq(struct dp_state *dp)
 	do {
 		if (dp_link_train_update(dp, 400))
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output_dp *outp = dp->outp;
 	bool eq_done = false, cr_done = true;
 	int tries = 0, i;
@@ -365,6 +413,9 @@ dp_link_train_eq(struct dp_state *dp)
 		if ((tries &&
 		    dp_link_train_commit(dp, dp->pc2)) ||
 		    dp_link_train_update(dp, dp->pc2, 400))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -378,9 +429,12 @@ dp_link_train_eq(struct dp_state *dp)
 				eq_done = false;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (dp_link_train_commit(dp))
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} while (!eq_done && cr_done && ++tries <= 5);
@@ -392,12 +446,15 @@ static void
 dp_link_train_init(struct dp_state *dp, bool spread)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvbios_init init = {
 		.subdev = nv_subdev(dp->disp),
 		.bios = nouveau_bios(dp->disp),
 		.outp = dp->outp,
 		.crtc = dp->head,
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output_dp *outp = dp->outp;
 	struct nouveau_disp *disp = nouveau_disp(outp);
 	struct nouveau_bios *bios = nouveau_bios(disp);
@@ -406,12 +463,16 @@ dp_link_train_init(struct dp_state *dp, bool spread)
 		.bios = bios,
 		.outp = &outp->base.info,
 		.crtc = -1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.execute = 1,
 	};
 
 	/* set desired spread */
 	if (spread)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		init.offset = dp->info.script[2];
 	else
@@ -421,6 +482,8 @@ dp_link_train_init(struct dp_state *dp, bool spread)
 	/* pre-train script */
 	init.offset = dp->info.script[0];
 =======
+=======
+>>>>>>> v3.18
 		init.offset = outp->info.script[2];
 	else
 		init.offset = outp->info.script[3];
@@ -428,6 +491,9 @@ dp_link_train_init(struct dp_state *dp, bool spread)
 
 	/* pre-train script */
 	init.offset = outp->info.script[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nvbios_exec(&init);
 }
@@ -436,12 +502,15 @@ static void
 dp_link_train_fini(struct dp_state *dp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvbios_init init = {
 		.subdev = nv_subdev(dp->disp),
 		.bios = nouveau_bios(dp->disp),
 		.outp = dp->outp,
 		.crtc = dp->head,
 =======
+=======
+>>>>>>> v3.18
 	struct nvkm_output_dp *outp = dp->outp;
 	struct nouveau_disp *disp = nouveau_disp(outp);
 	struct nouveau_bios *bios = nouveau_bios(disp);
@@ -450,11 +519,15 @@ dp_link_train_fini(struct dp_state *dp)
 		.bios = bios,
 		.outp = &outp->base.info,
 		.crtc = -1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.execute = 1,
 	};
 
 	/* post-train script */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	init.offset = dp->info.script[1],
 	nvbios_exec(&init);
@@ -523,6 +596,8 @@ nouveau_dp_train(struct nouveau_disp *disp, const struct nouveau_dp_func *func,
 			link_bw++;
 		dp->link_bw = link_bw[0];
 =======
+=======
+>>>>>>> v3.18
 	init.offset = outp->info.script[1],
 	nvbios_exec(&init);
 }
@@ -588,6 +663,9 @@ nouveau_dp_train(struct work_struct *w)
 			cfg++;
 		dp->link_bw = cfg->bw * 27000;
 		dp->link_nr = cfg->nr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* program selected link configuration */
@@ -599,6 +677,7 @@ nouveau_dp_train(struct work_struct *w)
 			    !dp_link_train_eq(dp))
 				break;
 		} else
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ret >= 1) {
 			/* dp_set_link_config() handled training */
@@ -616,6 +695,8 @@ nouveau_dp_train(struct work_struct *w)
 	dp_link_train_fini(dp);
 	return true;
 =======
+=======
+>>>>>>> v3.18
 		if (ret) {
 			/* dp_set_link_config() handled training, or
 			 * we failed to communicate with the sink.
@@ -636,5 +717,8 @@ nouveau_dp_train(struct work_struct *w)
 	atomic_set(&outp->lt.done, 1);
 	wake_up(&outp->lt.wait);
 	nvkm_notify_get(&outp->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

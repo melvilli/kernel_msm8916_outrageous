@@ -15,8 +15,12 @@
 #define DMAE0_IRQ	evt2irq(0xbc0)	/* DMA Error IRQ*/
 #define SH_DMAC_BASE0	0xFE008020
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_CPU_SUBTYPE_SH7763) || \
 	defined(CONFIG_CPU_SUBTYPE_SH7764)
+=======
+#elif defined(CONFIG_CPU_SUBTYPE_SH7763)
+>>>>>>> v3.18
 =======
 #elif defined(CONFIG_CPU_SUBTYPE_SH7763)
 >>>>>>> v3.18

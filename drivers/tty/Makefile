@@ -7,9 +7,12 @@ obj-$(CONFIG_MAGIC_SYSRQ)	+= sysrq.o
 obj-$(CONFIG_N_HDLC)		+= n_hdlc.o
 obj-$(CONFIG_N_GSM)		+= n_gsm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_N_SMUX)		+= n_smux.o smux_debug.o
 obj-$(CONFIG_N_SMUX_LOOPBACK)	+= smux_test.o smux_loopback.o
 obj-$(CONFIG_SMUX_CTL)		+= smux_ctl.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_TRACE_ROUTER)	+= n_tracerouter.o

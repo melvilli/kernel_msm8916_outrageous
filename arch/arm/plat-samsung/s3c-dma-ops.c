@@ -83,7 +83,12 @@ static int s3c_dma_prepare(unsigned ch, struct samsung_dma_prep *param)
 {
 	struct cb_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = (param->cap == DMA_CYCLIC) ? param->period : param->len;
+=======
+	dma_addr_t pos = param->buf;
+	dma_addr_t end = param->buf + param->len;
+>>>>>>> v3.18
 =======
 	dma_addr_t pos = param->buf;
 	dma_addr_t end = param->buf + param->len;
@@ -100,8 +105,11 @@ static int s3c_dma_prepare(unsigned ch, struct samsung_dma_prep *param)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c2410_dma_enqueue(ch, (void *)data, param->buf, len);
 =======
+=======
+>>>>>>> v3.18
 	if (param->cap != DMA_CYCLIC) {
 		s3c2410_dma_enqueue(ch, (void *)data, param->buf, param->len);
 		return 0;
@@ -111,6 +119,9 @@ static int s3c_dma_prepare(unsigned ch, struct samsung_dma_prep *param)
 		s3c2410_dma_enqueue(ch, (void *)data, pos, param->period);
 		pos += param->period;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

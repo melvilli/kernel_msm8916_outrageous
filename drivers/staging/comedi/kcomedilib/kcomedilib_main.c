@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -31,8 +34,11 @@
 #include <linux/sched.h>
 #include <linux/fcntl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
 #include <linux/ioport.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -49,7 +55,11 @@ MODULE_LICENSE("GPL");
 struct comedi_device *comedi_open(const char *filename)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct comedi_device *dev;
+=======
+	struct comedi_device *dev, *retval = NULL;
+>>>>>>> v3.18
 =======
 	struct comedi_device *dev, *retval = NULL;
 >>>>>>> v3.18
@@ -59,7 +69,12 @@ struct comedi_device *comedi_open(const char *filename)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	minor = simple_strtoul(filename + 11, NULL, 0);
+=======
+	if (kstrtouint(filename + 11, 0, &minor))
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (kstrtouint(filename + 11, 0, &minor))
 		return NULL;
@@ -68,6 +83,7 @@ struct comedi_device *comedi_open(const char *filename)
 	if (minor >= COMEDI_NUM_BOARD_MINORS)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev = comedi_dev_from_minor(minor);
 
@@ -88,6 +104,8 @@ int comedi_close(struct comedi_device *d)
 	module_put(dev->driver->module);
 
 =======
+=======
+>>>>>>> v3.18
 	dev = comedi_dev_get_from_minor(minor);
 	if (!dev)
 		return NULL;
@@ -109,6 +127,9 @@ EXPORT_SYMBOL_GPL(comedi_open);
 int comedi_close(struct comedi_device *dev)
 {
 	comedi_dev_put(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -120,8 +141,11 @@ static int comedi_do_insn(struct comedi_device *dev,
 {
 	struct comedi_subdevice *s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	mutex_lock(&dev->mutex);
@@ -130,6 +154,9 @@ static int comedi_do_insn(struct comedi_device *dev,
 		ret = -EINVAL;
 		goto error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* a subdevice instruction */
@@ -178,9 +205,12 @@ static int comedi_do_insn(struct comedi_device *dev,
 error:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&dev->mutex);
 	return ret;
 }
@@ -205,6 +235,9 @@ int comedi_dio_get_config(struct comedi_device *dev, unsigned int subdev,
 	return ret;
 }
 EXPORT_SYMBOL_GPL(comedi_dio_get_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int comedi_dio_config(struct comedi_device *dev, unsigned int subdev,
@@ -223,6 +256,7 @@ int comedi_dio_config(struct comedi_device *dev, unsigned int subdev,
 EXPORT_SYMBOL_GPL(comedi_dio_config);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int comedi_dio_bitfield(struct comedi_device *dev, unsigned int subdev,
 			unsigned int mask, unsigned int *bits)
 {
@@ -233,6 +267,8 @@ int comedi_dio_bitfield(struct comedi_device *dev, unsigned int subdev,
 	memset(&insn, 0, sizeof(insn));
 	insn.insn = INSN_BITS;
 =======
+=======
+>>>>>>> v3.18
 int comedi_dio_bitfield2(struct comedi_device *dev, unsigned int subdev,
 			 unsigned int mask, unsigned int *bits,
 			 unsigned int base_channel)
@@ -251,6 +287,9 @@ int comedi_dio_bitfield2(struct comedi_device *dev, unsigned int subdev,
 	memset(&insn, 0, sizeof(insn));
 	insn.insn = INSN_BITS;
 	insn.chanspec = base_channel;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	insn.n = 2;
 	insn.subdev = subdev;
@@ -258,6 +297,7 @@ int comedi_dio_bitfield2(struct comedi_device *dev, unsigned int subdev,
 	data[0] = mask;
 	data[1] = *bits;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = comedi_do_insn(dev, &insn, data);
 
@@ -267,6 +307,8 @@ int comedi_dio_bitfield2(struct comedi_device *dev, unsigned int subdev,
 }
 EXPORT_SYMBOL_GPL(comedi_dio_bitfield);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Most drivers ignore the base channel in insn->chanspec.
 	 * Fix this here if the subdevice has <= 32 channels.
@@ -287,12 +329,16 @@ EXPORT_SYMBOL_GPL(comedi_dio_bitfield);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(comedi_dio_bitfield2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int comedi_find_subdevice_by_type(struct comedi_device *dev, int type,
 				  unsigned int subd)
 {
 	struct comedi_subdevice *s;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (subd > dev->n_subdevices)
@@ -305,6 +351,8 @@ int comedi_find_subdevice_by_type(struct comedi_device *dev, int type,
 	}
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 	int ret = -ENODEV;
 
 	down_read(&dev->attach_lock);
@@ -318,6 +366,9 @@ int comedi_find_subdevice_by_type(struct comedi_device *dev, int type,
 		}
 	up_read(&dev->attach_lock);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(comedi_find_subdevice_by_type);
@@ -325,10 +376,13 @@ EXPORT_SYMBOL_GPL(comedi_find_subdevice_by_type);
 int comedi_get_n_channels(struct comedi_device *dev, unsigned int subdevice)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct comedi_subdevice *s = &dev->subdevices[subdevice];
 
 	return s->n_chan;
 =======
+=======
+>>>>>>> v3.18
 	int n;
 
 	down_read(&dev->attach_lock);
@@ -339,6 +393,9 @@ int comedi_get_n_channels(struct comedi_device *dev, unsigned int subdevice)
 	up_read(&dev->attach_lock);
 
 	return n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(comedi_get_n_channels);

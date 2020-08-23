@@ -384,7 +384,11 @@ static int power5_marked_instr_event(u64 event)
 
 static int power5_compute_mmcr(u64 event[], int n_ev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       unsigned int hwc[], unsigned long mmcr[])
+=======
+			       unsigned int hwc[], unsigned long mmcr[], struct perf_event *pevents[])
+>>>>>>> v3.18
 =======
 			       unsigned int hwc[], unsigned long mmcr[], struct perf_event *pevents[])
 >>>>>>> v3.18

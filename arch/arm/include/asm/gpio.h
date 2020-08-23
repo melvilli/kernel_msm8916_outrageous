@@ -6,12 +6,15 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* not all ARM platforms necessarily support this API ... */
 #ifdef CONFIG_NEED_MACH_GPIO_H
 #include <mach/gpio.h>
 #endif
 
 #ifndef __ARM_GPIOLIB_COMPLEX
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Note: this may rely upon the value of ARCH_NR_GPIOS set in mach/gpio.h */
@@ -22,7 +25,10 @@
 #define gpio_set_value  __gpio_set_value
 #define gpio_cansleep   __gpio_cansleep
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

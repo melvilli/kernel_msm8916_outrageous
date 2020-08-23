@@ -871,7 +871,10 @@ ssize_t nilfs_sufile_get_suinfo(struct inode *sufile, __u64 segnum, void *buf,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * nilfs_sufile_set_suinfo - sets segment usage info
  * @sufile: inode of segment usage file
  * @buf: array of suinfo_update
@@ -1155,6 +1158,9 @@ out_sem:
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * nilfs_sufile_read - read or get sufile inode
  * @sb: super block instance
@@ -1173,7 +1179,10 @@ int nilfs_sufile_read(struct super_block *sb, size_t susize,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (susize > sb->s_blocksize) {
 		printk(KERN_ERR
 		       "NILFS: too large segment usage size: %zu bytes.\n",
@@ -1186,6 +1195,9 @@ int nilfs_sufile_read(struct super_block *sb, size_t susize,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sufile = nilfs_iget_locked(sb, NULL, NILFS_SUFILE_INO);
 	if (unlikely(!sufile))

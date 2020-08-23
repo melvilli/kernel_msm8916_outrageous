@@ -19,6 +19,10 @@
 #include "psb_drv.h"
 #include "psb_reg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "mmu.h"
+>>>>>>> v3.18
 =======
 #include "mmu.h"
 >>>>>>> v3.18
@@ -51,6 +55,7 @@
  * but on average it should be fast.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct psb_mmu_driver {
 	/* protects driver- and pd structures. Always take in read mode
@@ -99,6 +104,8 @@ struct psb_mmu_pd {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline uint32_t psb_mmu_pt_index(uint32_t offset)
 {
 	return (offset >> PSB_PTE_SHIFT) & 0x3FF;
@@ -110,6 +117,10 @@ static inline uint32_t psb_mmu_pd_index(uint32_t offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_X86)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_X86)
 >>>>>>> v3.18
@@ -119,8 +130,12 @@ static inline void psb_clflush(void *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void psb_mmu_clflush(struct psb_mmu_driver *driver,
 				   void *addr)
+=======
+static inline void psb_mmu_clflush(struct psb_mmu_driver *driver, void *addr)
+>>>>>>> v3.18
 =======
 static inline void psb_mmu_clflush(struct psb_mmu_driver *driver, void *addr)
 >>>>>>> v3.18
@@ -132,6 +147,7 @@ static inline void psb_mmu_clflush(struct psb_mmu_driver *driver, void *addr)
 	psb_clflush(addr);
 	mb();
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static void psb_page_clflush(struct psb_mmu_driver *driver, struct page* page)
@@ -170,6 +186,8 @@ static void psb_mmu_flush_pd_locked(struct psb_mmu_driver *driver,
 }
 
 =======
+=======
+>>>>>>> v3.18
 #else
 
 static inline void psb_mmu_clflush(struct psb_mmu_driver *driver, void *addr)
@@ -198,6 +216,9 @@ static void psb_mmu_flush_pd_locked(struct psb_mmu_driver *driver, int force)
 }
 
 #if 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void psb_mmu_flush_pd(struct psb_mmu_driver *driver, int force)
 {
@@ -205,6 +226,7 @@ static void psb_mmu_flush_pd(struct psb_mmu_driver *driver, int force)
 	psb_mmu_flush_pd_locked(driver, force);
 	up_write(&driver->sem);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void psb_mmu_flush(struct psb_mmu_driver *driver, int rc_prot)
@@ -214,6 +236,8 @@ void psb_mmu_flush(struct psb_mmu_driver *driver, int rc_prot)
 	if (rc_prot)
 		up_write(&driver->sem);
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 void psb_mmu_flush(struct psb_mmu_driver *driver)
@@ -240,16 +264,22 @@ void psb_mmu_flush(struct psb_mmu_driver *driver)
 	if (driver->msvdx_mmu_invaldc)
 		atomic_set(driver->msvdx_mmu_invaldc, 1);
 	up_write(&driver->sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void psb_mmu_set_pd_context(struct psb_mmu_pd *pd, int hw_context)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*ttm_tt_cache_flush(&pd->p, 1);*/
 	psb_pages_clflush(pd->driver, &pd->p, 1);
 	down_write(&pd->driver->sem);
 =======
+=======
+>>>>>>> v3.18
 	struct drm_device *dev = pd->driver->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	uint32_t offset = (hw_context == 0) ? PSB_CR_BIF_DIR_LIST_BASE0 :
@@ -257,6 +287,9 @@ void psb_mmu_set_pd_context(struct psb_mmu_pd *pd, int hw_context)
 
 	down_write(&pd->driver->sem);
 	PSB_WSGX32(page_to_pfn(pd->p) << PAGE_SHIFT, offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wmb();
 	psb_mmu_flush_pd_locked(pd->driver, 1);
@@ -269,7 +302,10 @@ static inline unsigned long psb_pd_addr_end(unsigned long addr,
 					    unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	addr = (addr + PSB_PDE_MASK + 1) & ~PSB_PDE_MASK;
@@ -312,6 +348,7 @@ struct psb_mmu_pd *psb_mmu_alloc_pd(struct psb_mmu_driver *driver,
 
 	if (!trap_pagefaults) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pd->invalid_pde =
 		    psb_mmu_mask_pte(page_to_pfn(pd->dummy_pt),
 				     invalid_type);
@@ -319,10 +356,15 @@ struct psb_mmu_pd *psb_mmu_alloc_pd(struct psb_mmu_driver *driver,
 		    psb_mmu_mask_pte(page_to_pfn(pd->dummy_page),
 				     invalid_type);
 =======
+=======
+>>>>>>> v3.18
 		pd->invalid_pde = psb_mmu_mask_pte(page_to_pfn(pd->dummy_pt),
 						   invalid_type);
 		pd->invalid_pte = psb_mmu_mask_pte(page_to_pfn(pd->dummy_page),
 						   invalid_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		pd->invalid_pde = 0;
@@ -375,6 +417,11 @@ void psb_mmu_free_pagedir(struct psb_mmu_pd *pd)
 {
 	struct psb_mmu_driver *driver = pd->driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_device *dev = driver->dev;
+	struct drm_psb_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 =======
 	struct drm_device *dev = driver->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -384,13 +431,19 @@ void psb_mmu_free_pagedir(struct psb_mmu_pd *pd)
 
 	down_write(&driver->sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pd->hw_context != -1)
 		psb_mmu_flush_pd_locked(driver, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (pd->hw_context != -1) {
 		PSB_WSGX32(0, PSB_CR_BIF_DIR_LIST_BASE0 + pd->hw_context * 4);
 		psb_mmu_flush_pd_locked(driver, 1);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Should take the spinlock here, but we don't need to do that
@@ -439,7 +492,11 @@ static struct psb_mmu_pt *psb_mmu_alloc_pt(struct psb_mmu_pd *pd)
 		*ptes++ = pd->invalid_pte;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#if defined(CONFIG_X86)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_X86)
 >>>>>>> v3.18
@@ -452,7 +509,11 @@ static struct psb_mmu_pt *psb_mmu_alloc_pt(struct psb_mmu_pd *pd)
 		mb();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -467,7 +528,11 @@ static struct psb_mmu_pt *psb_mmu_alloc_pt(struct psb_mmu_pd *pd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct psb_mmu_pt *psb_mmu_pt_alloc_map_lock(struct psb_mmu_pd *pd,
+=======
+struct psb_mmu_pt *psb_mmu_pt_alloc_map_lock(struct psb_mmu_pd *pd,
+>>>>>>> v3.18
 =======
 struct psb_mmu_pt *psb_mmu_pt_alloc_map_lock(struct psb_mmu_pd *pd,
 >>>>>>> v3.18
@@ -503,7 +568,11 @@ struct psb_mmu_pt *psb_mmu_pt_alloc_map_lock(struct psb_mmu_pd *pd,
 
 		if (pd->hw_context != -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			psb_mmu_clflush(pd->driver, (void *) &v[index]);
+=======
+			psb_mmu_clflush(pd->driver, (void *)&v[index]);
+>>>>>>> v3.18
 =======
 			psb_mmu_clflush(pd->driver, (void *)&v[index]);
 >>>>>>> v3.18
@@ -544,8 +613,12 @@ static void psb_mmu_pt_unmap_unlock(struct psb_mmu_pt *pt)
 
 		if (pd->hw_context != -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			psb_mmu_clflush(pd->driver,
 					(void *) &v[pt->index]);
+=======
+			psb_mmu_clflush(pd->driver, (void *)&v[pt->index]);
+>>>>>>> v3.18
 =======
 			psb_mmu_clflush(pd->driver, (void *)&v[pt->index]);
 >>>>>>> v3.18
@@ -560,8 +633,13 @@ static void psb_mmu_pt_unmap_unlock(struct psb_mmu_pt *pt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void psb_mmu_set_pte(struct psb_mmu_pt *pt,
 				   unsigned long addr, uint32_t pte)
+=======
+static inline void psb_mmu_set_pte(struct psb_mmu_pt *pt, unsigned long addr,
+				   uint32_t pte)
+>>>>>>> v3.18
 =======
 static inline void psb_mmu_set_pte(struct psb_mmu_pt *pt, unsigned long addr,
 				   uint32_t pte)
@@ -576,6 +654,7 @@ static inline void psb_mmu_invalidate_pte(struct psb_mmu_pt *pt,
 	pt->v[psb_mmu_pt_index(addr)] = pt->pd->invalid_pte;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void psb_mmu_mirror_gtt(struct psb_mmu_pd *pd,
@@ -620,6 +699,8 @@ struct psb_mmu_pd *psb_mmu_get_default_pd(struct psb_mmu_driver *driver)
 
 	return pd;
 =======
+=======
+>>>>>>> v3.18
 struct psb_mmu_pd *psb_mmu_get_default_pd(struct psb_mmu_driver *driver)
 {
 	struct psb_mmu_pd *pd;
@@ -638,22 +719,32 @@ uint32_t psb_get_default_pd_addr(struct psb_mmu_driver *driver)
 
 	pd = psb_mmu_get_default_pd(driver);
 	return page_to_pfn(pd->p) << PAGE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void psb_mmu_driver_takedown(struct psb_mmu_driver *driver)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct drm_device *dev = driver->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 
 	PSB_WSGX32(driver->bif_ctrl, PSB_CR_BIF_CTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	psb_mmu_free_pagedir(driver->default_pd);
 	kfree(driver);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct psb_mmu_driver *psb_mmu_driver_init(uint8_t __iomem * registers,
 					int trap_pagefaults,
@@ -662,6 +753,8 @@ struct psb_mmu_driver *psb_mmu_driver_init(uint8_t __iomem * registers,
 {
 	struct psb_mmu_driver *driver;
 =======
+=======
+>>>>>>> v3.18
 struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 					   int trap_pagefaults,
 					   int invalid_type,
@@ -669,6 +762,9 @@ struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 {
 	struct psb_mmu_driver *driver;
 	struct drm_psb_private *dev_priv = dev->dev_private;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	driver = kmalloc(sizeof(*driver), GFP_KERNEL);
@@ -676,8 +772,13 @@ struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 	if (!driver)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	driver->dev_priv = dev_priv;
 
+=======
+
+	driver->dev = dev;
+>>>>>>> v3.18
 =======
 
 	driver->dev = dev;
@@ -691,6 +792,7 @@ struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 	init_rwsem(&driver->sem);
 	down_write(&driver->sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	driver->register_map = registers;
 	atomic_set(&driver->needs_tlbflush, 1);
 
@@ -703,6 +805,8 @@ struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 		 * clflush size is determined at kernel setup for x86_64
 		 *  but not for i386. We have to do it here.
 =======
+=======
+>>>>>>> v3.18
 	atomic_set(&driver->needs_tlbflush, 1);
 	driver->msvdx_mmu_invaldc = msvdx_mmu_invaldc;
 
@@ -721,6 +825,9 @@ struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 		/*
 		 * clflush size is determined at kernel setup for x86_64 but not
 		 * for i386. We have to do it here.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 
@@ -733,6 +840,10 @@ struct psb_mmu_driver *psb_mmu_driver_init(struct drm_device *dev,
 		driver->clflush_mask = ~driver->clflush_mask;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -746,9 +857,15 @@ out_err1:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd,
 			       unsigned long address, uint32_t num_pages,
 			       uint32_t desired_tile_stride,
+=======
+#if defined(CONFIG_X86)
+static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
+			       uint32_t num_pages, uint32_t desired_tile_stride,
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_X86)
 static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
@@ -768,11 +885,16 @@ static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
 	unsigned long clflush_mask = pd->driver->clflush_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pd->driver->has_clflush) {
 		/*ttm_tt_cache_flush(&pd->p, num_pages);*/
 		psb_pages_clflush(pd->driver, &pd->p, num_pages);
 		return;
 	}
+=======
+	if (!pd->driver->has_clflush)
+		return;
+>>>>>>> v3.18
 =======
 	if (!pd->driver->has_clflush)
 		return;
@@ -798,10 +920,15 @@ static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
 				continue;
 			do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				psb_clflush(&pt->v
 					    [psb_mmu_pt_index(addr)]);
 			} while (addr +=
 				 clflush_add,
+=======
+				psb_clflush(&pt->v[psb_mmu_pt_index(addr)]);
+			} while (addr += clflush_add,
+>>>>>>> v3.18
 =======
 				psb_clflush(&pt->v[psb_mmu_pt_index(addr)]);
 			} while (addr += clflush_add,
@@ -815,7 +942,10 @@ static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
 	mb();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
 			       uint32_t num_pages, uint32_t desired_tile_stride,
@@ -824,6 +954,9 @@ static void psb_mmu_flush_ptes(struct psb_mmu_pd *pd, unsigned long address,
 	drm_ttm_cache_flush();
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void psb_mmu_remove_pfn_sequence(struct psb_mmu_pd *pd,
@@ -861,7 +994,11 @@ out:
 
 	if (pd->hw_context != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_mmu_flush(pd->driver, 0);
+=======
+		psb_mmu_flush(pd->driver);
+>>>>>>> v3.18
 =======
 		psb_mmu_flush(pd->driver);
 >>>>>>> v3.18
@@ -892,7 +1029,11 @@ void psb_mmu_remove_pages(struct psb_mmu_pd *pd, unsigned long address,
 	row_add = hw_tile_stride << PAGE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* down_read(&pd->driver->sem); */
+=======
+	down_read(&pd->driver->sem);
+>>>>>>> v3.18
 =======
 	down_read(&pd->driver->sem);
 >>>>>>> v3.18
@@ -924,15 +1065,21 @@ void psb_mmu_remove_pages(struct psb_mmu_pd *pd, unsigned long address,
 				   desired_tile_stride, hw_tile_stride);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* up_read(&pd->driver->sem); */
 
 	if (pd->hw_context != -1)
 		psb_mmu_flush(pd->driver, 0);
 =======
+=======
+>>>>>>> v3.18
 	up_read(&pd->driver->sem);
 
 	if (pd->hw_context != -1)
 		psb_mmu_flush(pd->driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -947,7 +1094,11 @@ int psb_mmu_insert_pfn_sequence(struct psb_mmu_pd *pd, uint32_t start_pfn,
 	unsigned long next;
 	unsigned long f_address = address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int ret = -ENOMEM;
 >>>>>>> v3.18
@@ -973,6 +1124,10 @@ int psb_mmu_insert_pfn_sequence(struct psb_mmu_pd *pd, uint32_t start_pfn,
 
 	} while (addr = next, next != end);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ret = 0;
+>>>>>>> v3.18
 =======
 	ret = 0;
 >>>>>>> v3.18
@@ -985,9 +1140,15 @@ out:
 
 	if (pd->hw_context != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_mmu_flush(pd->driver, 1);
 
 	return ret;
+=======
+		psb_mmu_flush(pd->driver);
+
+	return 0;
+>>>>>>> v3.18
 =======
 		psb_mmu_flush(pd->driver);
 
@@ -998,8 +1159,13 @@ out:
 int psb_mmu_insert_pages(struct psb_mmu_pd *pd, struct page **pages,
 			 unsigned long address, uint32_t num_pages,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 uint32_t desired_tile_stride,
 			 uint32_t hw_tile_stride, int type)
+=======
+			 uint32_t desired_tile_stride, uint32_t hw_tile_stride,
+			 int type)
+>>>>>>> v3.18
 =======
 			 uint32_t desired_tile_stride, uint32_t hw_tile_stride,
 			 int type)
@@ -1016,7 +1182,11 @@ int psb_mmu_insert_pages(struct psb_mmu_pd *pd, struct page **pages,
 	unsigned long row_add;
 	unsigned long f_address = address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int ret = -ENOMEM;
 >>>>>>> v3.18
@@ -1043,6 +1213,7 @@ int psb_mmu_insert_pages(struct psb_mmu_pd *pd, struct page **pages,
 			next = psb_pd_addr_end(addr, end);
 			pt = psb_mmu_pt_alloc_map_lock(pd, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!pt) {
 				ret = -ENOMEM;
 				goto out;
@@ -1052,11 +1223,16 @@ int psb_mmu_insert_pages(struct psb_mmu_pd *pd, struct page **pages,
 				    psb_mmu_mask_pte(page_to_pfn(*pages++),
 						     type);
 =======
+=======
+>>>>>>> v3.18
 			if (!pt)
 				goto out;
 			do {
 				pte = psb_mmu_mask_pte(page_to_pfn(*pages++),
 						       type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				psb_mmu_set_pte(pt, addr, pte);
 				pt->count++;
@@ -1068,6 +1244,11 @@ int psb_mmu_insert_pages(struct psb_mmu_pd *pd, struct page **pages,
 		address += row_add;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ret = 0;
+>>>>>>> v3.18
 =======
 
 	ret = 0;
@@ -1081,7 +1262,11 @@ out:
 
 	if (pd->hw_context != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_mmu_flush(pd->driver, 1);
+=======
+		psb_mmu_flush(pd->driver);
+>>>>>>> v3.18
 =======
 		psb_mmu_flush(pd->driver);
 >>>>>>> v3.18

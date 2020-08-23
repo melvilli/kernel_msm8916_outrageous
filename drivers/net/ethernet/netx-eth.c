@@ -14,8 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -321,8 +325,11 @@ static int netx_eth_enable(struct net_device *ndev)
 	int running, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(ndev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ndev->netdev_ops = &netx_eth_netdev_ops;
@@ -398,7 +405,11 @@ static int netx_eth_drv_probe(struct platform_device *pdev)
 	priv = netdev_priv(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = (struct netxeth_platform_data *)pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -434,7 +445,10 @@ exit_free_xc:
 	free_xc(priv->xc);
 exit_free_netdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(ndev);
@@ -445,11 +459,17 @@ exit:
 static int netx_eth_drv_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&pdev->dev);
 	struct netx_eth_priv *priv = netdev_priv(ndev);
 
 	platform_set_drvdata(pdev, NULL);
 
+=======
+	struct net_device *ndev = platform_get_drvdata(pdev);
+	struct netx_eth_priv *priv = netdev_priv(ndev);
+
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(pdev);
 	struct netx_eth_priv *priv = netdev_priv(ndev);

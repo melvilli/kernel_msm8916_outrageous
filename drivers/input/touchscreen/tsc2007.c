@@ -27,12 +27,18 @@
 #include <linux/i2c.h>
 #include <linux/i2c/tsc2007.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm.h>
 
 #if defined(CONFIG_HAS_EARLYSUSPEND)
 #include <linux/earlysuspend.h>
 #define TSC2007_SUSPEND_LEVEL 1
 #endif
+=======
+#include <linux/of_device.h>
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/of.h>
@@ -79,7 +85,10 @@ struct tsc2007 {
 	struct input_dev	*input;
 	char			phys[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct delayed_work	work;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -88,6 +97,7 @@ struct tsc2007 {
 	u16			model;
 	u16			x_plate_ohms;
 	u16			max_rt;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long		poll_delay;
 	unsigned long		poll_period;
@@ -111,6 +121,8 @@ struct tsc2007 {
 	struct early_suspend	early_suspend;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		poll_period;
 	int			fuzzx;
 	int			fuzzy;
@@ -124,6 +136,9 @@ struct tsc2007 {
 
 	int			(*get_pendown_state)(struct device *);
 	void			(*clear_penirq)(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -162,6 +177,7 @@ static void tsc2007_read_values(struct tsc2007 *tsc, struct ts_event *tc)
 	tc->z2 = tsc2007_xfer(tsc, READ_Z2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tsc->invert_x == true)
 		tc->x = MAX_12BIT - tc->x;
 
@@ -174,6 +190,8 @@ static void tsc2007_read_values(struct tsc2007 *tsc, struct ts_event *tc)
 	if (tsc->invert_z2 == true)
 		tc->z2 = MAX_12BIT - tc->z2;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Prepare for next touch reading - power down ADC, enable PENIRQ */
@@ -201,6 +219,7 @@ static u32 tsc2007_calculate_pressure(struct tsc2007 *tsc, struct ts_event *tc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tsc2007_send_up_event(struct tsc2007 *tsc)
 {
 	struct input_dev *input = tsc->input;
@@ -224,6 +243,10 @@ static void tsc2007_work(struct work_struct *work)
 static bool tsc2007_is_pen_down(struct tsc2007 *ts)
 {
 >>>>>>> v3.18
+=======
+static bool tsc2007_is_pen_down(struct tsc2007 *ts)
+{
+>>>>>>> v3.18
 	/*
 	 * NOTE: We can't rely on the pressure to determine the pen down
 	 * state, even though this controller has a pressure sensor.
@@ -234,6 +257,7 @@ static bool tsc2007_is_pen_down(struct tsc2007 *ts)
 	 * The only safe way to check for the pen up condition is in the
 	 * work function by reading the pen signal state (it's a GPIO
 	 * and IRQ). Unfortunately such callback is not always available,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * in that case we have rely on the pressure anyway.
 	 */
@@ -309,6 +333,8 @@ static irqreturn_t tsc2007_irq(int irq, void *handle)
 				      msecs_to_jiffies(ts->poll_delay));
 	}
 =======
+=======
+>>>>>>> v3.18
 	 * in that case we assume that the pen is down and expect caller
 	 * to fall back on the pressure reading.
 	 */
@@ -385,6 +411,9 @@ static irqreturn_t tsc2007_hard_irq(int irq, void *handle)
 
 	if (tsc2007_is_pen_down(ts))
 		return IRQ_WAKE_THREAD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ts->clear_penirq)
@@ -393,6 +422,7 @@ static irqreturn_t tsc2007_hard_irq(int irq, void *handle)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tsc2007_free_irq(struct tsc2007 *ts)
 {
@@ -426,6 +456,8 @@ static int tsc2007_suspend(struct device *dev)
 			return rc;
 		}
 =======
+=======
+>>>>>>> v3.18
 static void tsc2007_stop(struct tsc2007 *ts)
 {
 	ts->stopped = true;
@@ -450,12 +482,16 @@ static int tsc2007_open(struct input_dev *input_dev)
 	if (err < 0) {
 		tsc2007_stop(ts);
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tsc2007_resume(struct device *dev)
 {
@@ -514,6 +550,8 @@ static int tsc2007_probe(struct i2c_client *client,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static void tsc2007_close(struct input_dev *input_dev)
 {
 	struct tsc2007 *ts = input_get_drvdata(input_dev);
@@ -623,11 +661,15 @@ static int tsc2007_probe(struct i2c_client *client,
 	struct input_dev *input_dev;
 	int err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!i2c_check_functionality(client->adapter,
 				     I2C_FUNC_SMBUS_READ_WORD_DATA))
 		return -EIO;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ts = kzalloc(sizeof(struct tsc2007), GFP_KERNEL);
 	input_dev = input_allocate_device();
@@ -636,6 +678,8 @@ static int tsc2007_probe(struct i2c_client *client,
 		goto err_free_mem;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ts = devm_kzalloc(&client->dev, sizeof(struct tsc2007), GFP_KERNEL);
 	if (!ts)
 		return -ENOMEM;
@@ -652,11 +696,15 @@ static int tsc2007_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	i2c_set_clientdata(client, ts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ts->client = client;
 	ts->irq = client->irq;
 	ts->input = input_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	INIT_DELAYED_WORK(&ts->work, tsc2007_work);
 
@@ -679,6 +727,9 @@ static int tsc2007_probe(struct i2c_client *client,
 =======
 	init_waitqueue_head(&ts->wait);
 >>>>>>> v3.18
+=======
+	init_waitqueue_head(&ts->wait);
+>>>>>>> v3.18
 
 	snprintf(ts->phys, sizeof(ts->phys),
 		 "%s/input0", dev_name(&client->dev));
@@ -687,6 +738,7 @@ static int tsc2007_probe(struct i2c_client *client,
 	input_dev->phys = ts->phys;
 	input_dev->id.bustype = BUS_I2C;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input_dev->evbit[0] = BIT_MASK(EV_KEY) | BIT_MASK(EV_ABS);
 	input_dev->keybit[BIT_WORD(BTN_TOUCH)] = BIT_MASK(BTN_TOUCH);
@@ -756,6 +808,8 @@ static int tsc2007_remove(struct i2c_client *client)
 	input_unregister_device(ts->input);
 	kfree(ts);
 =======
+=======
+>>>>>>> v3.18
 	input_dev->open = tsc2007_open;
 	input_dev->close = tsc2007_close;
 
@@ -804,6 +858,9 @@ static int tsc2007_remove(struct i2c_client *client)
 			"Failed to register input device: %d\n", err);
 		return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -817,7 +874,10 @@ static const struct i2c_device_id tsc2007_idtable[] = {
 MODULE_DEVICE_TABLE(i2c, tsc2007_idtable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id tsc2007_of_match[] = {
 	{ .compatible = "ti,tsc2007" },
@@ -826,11 +886,15 @@ static const struct of_device_id tsc2007_of_match[] = {
 MODULE_DEVICE_TABLE(of, tsc2007_of_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver tsc2007_driver = {
 	.driver = {
 		.owner	= THIS_MODULE,
 		.name	= "tsc2007",
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm = &tsc2007_pm_ops,
@@ -840,10 +904,15 @@ static struct i2c_driver tsc2007_driver = {
 	.probe		= tsc2007_probe,
 	.remove		= tsc2007_remove,
 =======
+=======
+>>>>>>> v3.18
 		.of_match_table = of_match_ptr(tsc2007_of_match),
 	},
 	.id_table	= tsc2007_idtable,
 	.probe		= tsc2007_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

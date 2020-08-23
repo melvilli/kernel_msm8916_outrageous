@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9263.dtsi"
+=======
+#include "at91sam9263.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9263.dtsi"
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 			clock-frequency = <12000000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -43,6 +50,9 @@
 		main_xtal {
 			clock-frequency = <12000000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -59,11 +69,14 @@
 
 			usb1: gadget@fff78000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				atmel,vbus-gpio = <&pioB 11 0>;
 				status = "okay";
 			};
 
 =======
+=======
+>>>>>>> v3.18
 				atmel,vbus-gpio = <&pioB 11 GPIO_ACTIVE_HIGH>;
 				status = "okay";
 			};
@@ -82,6 +95,9 @@
 				atmel,wakeup-counter = <10>;
 				atmel,wakeup-rtt-timer;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -144,7 +160,11 @@
 		user_led {
 			label = "user_led";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 21 0>;
+=======
+			gpios = <&pioB 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 21 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -160,7 +180,11 @@
 		user_pb {
 			label = "user_pb";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 10 1>;
+=======
+			gpios = <&pioB 10 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 10 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

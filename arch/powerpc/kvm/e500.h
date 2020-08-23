@@ -23,6 +23,10 @@
 #include <asm/mmu-book3e.h>
 #include <asm/tlb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cputhreads.h>
+>>>>>>> v3.18
 =======
 #include <asm/cputhreads.h>
 >>>>>>> v3.18
@@ -36,12 +40,15 @@ enum vcpu_ftr {
 
 /* entry is mapped somewhere in host TLB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E500_TLB_VALID		(1 << 0)
 /* TLB1 entry is mapped by host TLB1, tracked by bitmaps */
 #define E500_TLB_BITMAP		(1 << 1)
 /* TLB1 entry is mapped by host TLB0 */
 #define E500_TLB_TLB0		(1 << 2)
 =======
+=======
+>>>>>>> v3.18
 #define E500_TLB_VALID		(1 << 31)
 /* TLB1 entry is mapped by host TLB1, tracked by bitmaps */
 #define E500_TLB_BITMAP		(1 << 30)
@@ -49,6 +56,9 @@ enum vcpu_ftr {
 #define E500_TLB_TLB0		(1 << 29)
 /* bits [6-5] MAS2_X1 and MAS2_X0 and [4-0] bits for WIMGE */
 #define E500_TLB_MAS2_ATTR	(0x7f)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct tlbe_ref {
@@ -132,7 +142,11 @@ static inline struct kvmppc_vcpu_e500 *to_e500(struct kvm_vcpu *vcpu)
 #define E500_TLB_SUPER_PERM_MASK (MAS3_SX|MAS3_SR|MAS3_SW)
 #define MAS2_ATTRIB_MASK \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  (MAS2_X0 | MAS2_X1)
+=======
+	  (MAS2_X0 | MAS2_X1 | MAS2_E | MAS2_G)
+>>>>>>> v3.18
 =======
 	  (MAS2_X0 | MAS2_X1 | MAS2_E | MAS2_G)
 >>>>>>> v3.18
@@ -306,7 +320,10 @@ void kvmppc_e500_tlbil_all(struct kvmppc_vcpu_e500 *vcpu_e500);
 #define get_tlbmiss_tid(vcpu)           get_cur_pid(vcpu)
 #define get_tlb_sts(gtlbe)              (gtlbe->mas1 & MAS1_TS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * These functions should be called with preemption disabled
@@ -326,6 +343,9 @@ static inline int get_lpid(struct kvm_vcpu *vcpu)
 {
 	return get_thread_specific_lpid(vcpu->kvm->arch.lpid);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 unsigned int kvmppc_e500_get_tlb_stid(struct kvm_vcpu *vcpu,

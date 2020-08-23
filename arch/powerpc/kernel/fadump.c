@@ -59,7 +59,11 @@ int __init early_init_dt_scan_fw_dump(unsigned long node,
 	int i, num_sections;
 	int size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int *token;
+=======
+	const __be32 *token;
+>>>>>>> v3.18
 =======
 	const __be32 *token;
 >>>>>>> v3.18
@@ -74,15 +78,21 @@ int __init early_init_dt_scan_fw_dump(unsigned long node,
 	token = of_get_flat_dt_prop(node, "ibm,configure-kernel-dump", NULL);
 	if (!token)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	fw_dump.fadump_supported = 1;
 	fw_dump.ibm_configure_kernel_dump = *token;
 =======
+=======
+>>>>>>> v3.18
 		return 1;
 
 	fw_dump.fadump_supported = 1;
 	fw_dump.ibm_configure_kernel_dump = be32_to_cpu(*token);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -104,7 +114,11 @@ int __init early_init_dt_scan_fw_dump(unsigned long node,
 
 	if (!sections)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return 1;
+>>>>>>> v3.18
 =======
 		return 1;
 >>>>>>> v3.18
@@ -126,6 +140,10 @@ int __init early_init_dt_scan_fw_dump(unsigned long node,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -166,17 +184,23 @@ static unsigned long init_fadump_mem_struct(struct fadump_mem_struct *fdm,
 	addr = addr & PAGE_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fdm->header.dump_format_version = 0x00000001;
 	fdm->header.dump_num_sections = 3;
 	fdm->header.dump_status_flag = 0;
 	fdm->header.offset_first_dump_section =
 		(u32)offsetof(struct fadump_mem_struct, cpu_state_data);
 =======
+=======
+>>>>>>> v3.18
 	fdm->header.dump_format_version = cpu_to_be32(0x00000001);
 	fdm->header.dump_num_sections = cpu_to_be16(3);
 	fdm->header.dump_status_flag = 0;
 	fdm->header.offset_first_dump_section =
 		cpu_to_be32((u32)offsetof(struct fadump_mem_struct, cpu_state_data));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -193,6 +217,7 @@ static unsigned long init_fadump_mem_struct(struct fadump_mem_struct *fdm,
 
 	/* Kernel dump sections */
 	/* cpu state data section. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fdm->cpu_state_data.request_flag = FADUMP_REQUEST_FLAG;
 	fdm->cpu_state_data.source_data_type = FADUMP_CPU_STATE_DATA;
@@ -216,6 +241,8 @@ static unsigned long init_fadump_mem_struct(struct fadump_mem_struct *fdm,
 	fdm->rmr_region.source_len = fw_dump.boot_memory_size;
 	fdm->rmr_region.destination_address = addr;
 =======
+=======
+>>>>>>> v3.18
 	fdm->cpu_state_data.request_flag = cpu_to_be32(FADUMP_REQUEST_FLAG);
 	fdm->cpu_state_data.source_data_type = cpu_to_be16(FADUMP_CPU_STATE_DATA);
 	fdm->cpu_state_data.source_address = 0;
@@ -237,6 +264,9 @@ static unsigned long init_fadump_mem_struct(struct fadump_mem_struct *fdm,
 	fdm->rmr_region.source_address = cpu_to_be64(RMA_START);
 	fdm->rmr_region.source_len = cpu_to_be64(fw_dump.boot_memory_size);
 	fdm->rmr_region.destination_address = cpu_to_be64(addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addr += fw_dump.boot_memory_size;
 
@@ -323,7 +353,11 @@ int __init fadump_reserve_mem(void)
 	 */
 	if (fdm_active)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fw_dump.boot_memory_size = fdm_active->rmr_region.source_len;
+=======
+		fw_dump.boot_memory_size = be64_to_cpu(fdm_active->rmr_region.source_len);
+>>>>>>> v3.18
 =======
 		fw_dump.boot_memory_size = be64_to_cpu(fdm_active->rmr_region.source_len);
 >>>>>>> v3.18
@@ -369,8 +403,13 @@ int __init fadump_reserve_mem(void)
 
 		fw_dump.fadumphdr_addr =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				fdm_active->rmr_region.destination_address +
 				fdm_active->rmr_region.source_len;
+=======
+				be64_to_cpu(fdm_active->rmr_region.destination_address) +
+				be64_to_cpu(fdm_active->rmr_region.source_len);
+>>>>>>> v3.18
 =======
 				be64_to_cpu(fdm_active->rmr_region.destination_address) +
 				be64_to_cpu(fdm_active->rmr_region.source_len);
@@ -532,9 +571,15 @@ fadump_read_registers(struct fadump_reg_entry *reg_entry, struct pt_regs *regs)
 	memset(regs, 0, sizeof(struct pt_regs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (reg_entry->reg_id != REG_ID("CPUEND")) {
 		fadump_set_regval(regs, reg_entry->reg_id,
 					reg_entry->reg_value);
+=======
+	while (be64_to_cpu(reg_entry->reg_id) != REG_ID("CPUEND")) {
+		fadump_set_regval(regs, be64_to_cpu(reg_entry->reg_id),
+					be64_to_cpu(reg_entry->reg_value));
+>>>>>>> v3.18
 =======
 	while (be64_to_cpu(reg_entry->reg_id) != REG_ID("CPUEND")) {
 		fadump_set_regval(regs, be64_to_cpu(reg_entry->reg_id),
@@ -669,22 +714,29 @@ static int __init fadump_build_cpu_notes(const struct fadump_mem_struct *fdm)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = fdm->cpu_state_data.destination_address;
 	vaddr = __va(addr);
 
 	reg_header = vaddr;
 	if (reg_header->magic_number != REGSAVE_AREA_MAGIC) {
 =======
+=======
+>>>>>>> v3.18
 	addr = be64_to_cpu(fdm->cpu_state_data.destination_address);
 	vaddr = __va(addr);
 
 	reg_header = vaddr;
 	if (be64_to_cpu(reg_header->magic_number) != REGSAVE_AREA_MAGIC) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "Unable to read register save area.\n");
 		return -ENOENT;
 	}
 	pr_debug("--------CPU State Data------------\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_debug("Magic Number: %llx\n", reg_header->magic_number);
 	pr_debug("NumCpuOffset: %x\n", reg_header->num_cpu_offset);
@@ -692,11 +744,16 @@ static int __init fadump_build_cpu_notes(const struct fadump_mem_struct *fdm)
 	vaddr += reg_header->num_cpu_offset;
 	num_cpus = *((u32 *)(vaddr));
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("Magic Number: %llx\n", be64_to_cpu(reg_header->magic_number));
 	pr_debug("NumCpuOffset: %x\n", be32_to_cpu(reg_header->num_cpu_offset));
 
 	vaddr += be32_to_cpu(reg_header->num_cpu_offset);
 	num_cpus = be32_to_cpu(*((__be32 *)(vaddr)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_debug("NumCpus     : %u\n", num_cpus);
 	vaddr += sizeof(u32);
@@ -721,7 +778,11 @@ static int __init fadump_build_cpu_notes(const struct fadump_mem_struct *fdm)
 
 	for (i = 0; i < num_cpus; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (reg_entry->reg_id != REG_ID("CPUSTRT")) {
+=======
+		if (be64_to_cpu(reg_entry->reg_id) != REG_ID("CPUSTRT")) {
+>>>>>>> v3.18
 =======
 		if (be64_to_cpu(reg_entry->reg_id) != REG_ID("CPUSTRT")) {
 >>>>>>> v3.18
@@ -731,8 +792,13 @@ static int __init fadump_build_cpu_notes(const struct fadump_mem_struct *fdm)
 		}
 		/* Lower 4 bytes of reg_value contains logical cpu id */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu = reg_entry->reg_value & FADUMP_CPU_ID_MASK;
 		if (!cpumask_test_cpu(cpu, &fdh->cpu_online_mask)) {
+=======
+		cpu = be64_to_cpu(reg_entry->reg_value) & FADUMP_CPU_ID_MASK;
+		if (fdh && !cpumask_test_cpu(cpu, &fdh->cpu_online_mask)) {
+>>>>>>> v3.18
 =======
 		cpu = be64_to_cpu(reg_entry->reg_value) & FADUMP_CPU_ID_MASK;
 		if (fdh && !cpumask_test_cpu(cpu, &fdh->cpu_online_mask)) {
@@ -754,15 +820,21 @@ static int __init fadump_build_cpu_notes(const struct fadump_mem_struct *fdm)
 	fadump_final_note(note_buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("Updating elfcore header (%llx) with cpu notes\n",
 							fdh->elfcorehdr_addr);
 	fadump_update_elfcore_header((char *)__va(fdh->elfcorehdr_addr));
 =======
+=======
+>>>>>>> v3.18
 	if (fdh) {
 		pr_debug("Updating elfcore header (%llx) with cpu notes\n",
 							fdh->elfcorehdr_addr);
 		fadump_update_elfcore_header((char *)__va(fdh->elfcorehdr_addr));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -789,7 +861,11 @@ static int __init process_fadump(const struct fadump_mem_struct *fdm_active)
 
 	/* Check if the dump data is valid. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((fdm_active->header.dump_status_flag == FADUMP_ERROR_FLAG) ||
+=======
+	if ((be16_to_cpu(fdm_active->header.dump_status_flag) == FADUMP_ERROR_FLAG) ||
+>>>>>>> v3.18
 =======
 	if ((be16_to_cpu(fdm_active->header.dump_status_flag) == FADUMP_ERROR_FLAG) ||
 >>>>>>> v3.18
@@ -929,7 +1005,11 @@ static inline unsigned long fadump_relocate(unsigned long paddr)
 {
 	if (paddr > RMA_START && paddr < fw_dump.boot_memory_size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return fdm.rmr_region.destination_address + paddr;
+=======
+		return be64_to_cpu(fdm.rmr_region.destination_address) + paddr;
+>>>>>>> v3.18
 =======
 		return be64_to_cpu(fdm.rmr_region.destination_address) + paddr;
 >>>>>>> v3.18
@@ -1007,7 +1087,11 @@ static int fadump_create_elfcore_headers(char *bufp)
 			 * the correct offset.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phdr->p_offset = fdm.rmr_region.destination_address;
+=======
+			phdr->p_offset = be64_to_cpu(fdm.rmr_region.destination_address);
+>>>>>>> v3.18
 =======
 			phdr->p_offset = be64_to_cpu(fdm.rmr_region.destination_address);
 >>>>>>> v3.18
@@ -1060,7 +1144,11 @@ static void register_fadump(void)
 	fadump_setup_crash_memory_ranges();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = fdm.rmr_region.destination_address + fdm.rmr_region.source_len;
+=======
+	addr = be64_to_cpu(fdm.rmr_region.destination_address) + be64_to_cpu(fdm.rmr_region.source_len);
+>>>>>>> v3.18
 =======
 	addr = be64_to_cpu(fdm.rmr_region.destination_address) + be64_to_cpu(fdm.rmr_region.source_len);
 >>>>>>> v3.18
@@ -1136,7 +1224,11 @@ void fadump_cleanup(void)
 	if (fw_dump.dump_active) {
 		init_fadump_mem_struct(&fdm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fdm_active->cpu_state_data.destination_address);
+=======
+			be64_to_cpu(fdm_active->cpu_state_data.destination_address));
+>>>>>>> v3.18
 =======
 			be64_to_cpu(fdm_active->cpu_state_data.destination_address));
 >>>>>>> v3.18
@@ -1180,7 +1272,11 @@ static void fadump_invalidate_release_mem(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destination_address = fdm_active->cpu_state_data.destination_address;
+=======
+	destination_address = be64_to_cpu(fdm_active->cpu_state_data.destination_address);
+>>>>>>> v3.18
 =======
 	destination_address = be64_to_cpu(fdm_active->cpu_state_data.destination_address);
 >>>>>>> v3.18
@@ -1304,6 +1400,7 @@ static int fadump_region_show(struct seq_file *m, void *private)
 			"CPU : [%#016llx-%#016llx] %#llx bytes, "
 			"Dumped: %#llx\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fdm_ptr->cpu_state_data.destination_address,
 			fdm_ptr->cpu_state_data.destination_address +
 			fdm_ptr->cpu_state_data.source_len - 1,
@@ -1330,6 +1427,8 @@ static int fadump_region_show(struct seq_file *m, void *private)
 		(fw_dump.reserve_dump_area_start ==
 		fdm_ptr->cpu_state_data.destination_address))
 =======
+=======
+>>>>>>> v3.18
 			be64_to_cpu(fdm_ptr->cpu_state_data.destination_address),
 			be64_to_cpu(fdm_ptr->cpu_state_data.destination_address) +
 			be64_to_cpu(fdm_ptr->cpu_state_data.source_len) - 1,
@@ -1355,6 +1454,9 @@ static int fadump_region_show(struct seq_file *m, void *private)
 	if (!fdm_active ||
 		(fw_dump.reserve_dump_area_start ==
 		be64_to_cpu(fdm_ptr->cpu_state_data.destination_address)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 
@@ -1364,15 +1466,21 @@ static int fadump_region_show(struct seq_file *m, void *private)
 			"Dumped: %#llx\n",
 			(unsigned long long)fw_dump.reserve_dump_area_start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fdm_ptr->cpu_state_data.destination_address - 1,
 			fdm_ptr->cpu_state_data.destination_address -
 			fw_dump.reserve_dump_area_start,
 			fdm_ptr->cpu_state_data.destination_address -
 =======
+=======
+>>>>>>> v3.18
 			be64_to_cpu(fdm_ptr->cpu_state_data.destination_address) - 1,
 			be64_to_cpu(fdm_ptr->cpu_state_data.destination_address) -
 			fw_dump.reserve_dump_area_start,
 			be64_to_cpu(fdm_ptr->cpu_state_data.destination_address) -
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fw_dump.reserve_dump_area_start);
 out:

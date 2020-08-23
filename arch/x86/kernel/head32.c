@@ -30,7 +30,11 @@ static void __init i386_default_early_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init i386_start_kernel(void)
+=======
+asmlinkage __visible void __init i386_start_kernel(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void __init i386_start_kernel(void)
 >>>>>>> v3.18
@@ -40,8 +44,13 @@ asmlinkage __visible void __init i386_start_kernel(void)
 	/* Call the subarch specific early setup function */
 	switch (boot_params.hdr.hardware_subarch) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case X86_SUBARCH_MRST:
 		x86_mrst_early_setup();
+=======
+	case X86_SUBARCH_INTEL_MID:
+		x86_intel_mid_early_setup();
+>>>>>>> v3.18
 =======
 	case X86_SUBARCH_INTEL_MID:
 		x86_intel_mid_early_setup();

@@ -37,6 +37,7 @@
  * @srf:            The surface metadata.
  * @size:           TTM accounting size for the surface.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct vmw_user_surface {
 	struct ttm_base_object base;
@@ -44,6 +45,8 @@ struct vmw_user_surface {
 	uint32_t size;
 	uint32_t backup_handle;
 =======
+=======
+>>>>>>> v3.18
  * @master:         master of the creating client. Used for security check.
  */
 struct vmw_user_surface {
@@ -51,6 +54,9 @@ struct vmw_user_surface {
 	struct vmw_surface srf;
 	uint32_t size;
 	struct drm_master *master;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -79,7 +85,10 @@ static int vmw_legacy_srf_unbind(struct vmw_resource *res,
 static int vmw_legacy_srf_create(struct vmw_resource *res);
 static int vmw_legacy_srf_destroy(struct vmw_resource *res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vmw_gb_surface_create(struct vmw_resource *res);
 static int vmw_gb_surface_bind(struct vmw_resource *res,
 			       struct ttm_validate_buffer *val_buf);
@@ -88,6 +97,9 @@ static int vmw_gb_surface_unbind(struct vmw_resource *res,
 				 struct ttm_validate_buffer *val_buf);
 static int vmw_gb_surface_destroy(struct vmw_resource *res);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct vmw_user_resource_conv user_surface_conv = {
@@ -115,7 +127,10 @@ static const struct vmw_res_func vmw_legacy_surface_func = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct vmw_res_func vmw_gb_surface_func = {
 	.res_type = vmw_res_surface,
 	.needs_backup = true,
@@ -128,6 +143,9 @@ static const struct vmw_res_func vmw_gb_surface_func = {
 	.unbind = vmw_gb_surface_unbind
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct vmw_surface_dma - SVGA3D DMA command
@@ -328,12 +346,18 @@ static void vmw_hw_surface_destroy(struct vmw_resource *res)
 	void *cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (res->func->destroy == vmw_gb_surface_destroy) {
 		(void) vmw_gb_surface_destroy(res);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (res->id != -1) {
 
@@ -594,6 +618,7 @@ static int vmw_surface_init(struct vmw_private *dev_priv,
 
 	BUG_ON(res_free == NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) vmw_3d_resource_inc(dev_priv, false);
 	ret = vmw_resource_init(dev_priv, res, true, res_free,
 				&vmw_legacy_surface_func);
@@ -601,6 +626,8 @@ static int vmw_surface_init(struct vmw_private *dev_priv,
 	if (unlikely(ret != 0)) {
 		vmw_3d_resource_dec(dev_priv, false);
 =======
+=======
+>>>>>>> v3.18
 	if (!dev_priv->has_mob)
 		(void) vmw_3d_resource_inc(dev_priv, false);
 	ret = vmw_resource_init(dev_priv, res, true, res_free,
@@ -610,6 +637,9 @@ static int vmw_surface_init(struct vmw_private *dev_priv,
 	if (unlikely(ret != 0)) {
 		if (!dev_priv->has_mob)
 			vmw_3d_resource_dec(dev_priv, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		res_free(res);
 		return ret;
@@ -637,7 +667,12 @@ static struct vmw_resource *
 vmw_user_surface_base_to_res(struct ttm_base_object *base)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return &(container_of(base, struct vmw_user_surface, base)->srf.res);
+=======
+	return &(container_of(base, struct vmw_user_surface,
+			      prime.base)->srf.res);
+>>>>>>> v3.18
 =======
 	return &(container_of(base, struct vmw_user_surface,
 			      prime.base)->srf.res);
@@ -658,17 +693,23 @@ static void vmw_user_surface_free(struct vmw_resource *res)
 	uint32_t size = user_srf->size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(srf->offsets);
 	kfree(srf->sizes);
 	kfree(srf->snooper.image);
 	ttm_base_object_kfree(user_srf, base);
 =======
+=======
+>>>>>>> v3.18
 	if (user_srf->master)
 		drm_master_put(&user_srf->master);
 	kfree(srf->offsets);
 	kfree(srf->sizes);
 	kfree(srf->snooper.image);
 	ttm_prime_object_kfree(user_srf, prime);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ttm_mem_global_free(vmw_mem_glob(dev_priv), size);
 }
@@ -687,7 +728,11 @@ static void vmw_user_surface_base_release(struct ttm_base_object **p_base)
 	struct ttm_base_object *base = *p_base;
 	struct vmw_user_surface *user_srf =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    container_of(base, struct vmw_user_surface, base);
+=======
+	    container_of(base, struct vmw_user_surface, prime.base);
+>>>>>>> v3.18
 =======
 	    container_of(base, struct vmw_user_surface, prime.base);
 >>>>>>> v3.18
@@ -744,7 +789,10 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	uint32_t num_sizes;
 	uint32_t size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const struct svga3d_surface_desc *desc;
@@ -755,6 +803,7 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 
 	num_sizes = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < DRM_VMW_MAX_SURFACE_FACES; ++i) {
 		if (req->mip_levels[i] > DRM_VMW_MAX_MIP_LEVELS)
 			return -EINVAL;
@@ -764,11 +813,16 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	if (num_sizes > DRM_VMW_MAX_SURFACE_FACES * DRM_VMW_MAX_MIP_LEVELS ||
 	    num_sizes == 0)
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < DRM_VMW_MAX_SURFACE_FACES; ++i)
 		num_sizes += req->mip_levels[i];
 
 	if (num_sizes > DRM_VMW_MAX_SURFACE_FACES *
 	    DRM_VMW_MAX_MIP_LEVELS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -784,7 +838,11 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
+=======
+	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
+>>>>>>> v3.18
 =======
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
 >>>>>>> v3.18
@@ -842,7 +900,11 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	srf->base_size = *srf->sizes;
 	srf->autogen_filter = SVGA3D_TEX_FILTER_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srf->multisample_count = 1;
+=======
+	srf->multisample_count = 0;
+>>>>>>> v3.18
 =======
 	srf->multisample_count = 0;
 >>>>>>> v3.18
@@ -887,13 +949,19 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	srf->snooper.crtc = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	user_srf->base.shareable = false;
 	user_srf->base.tfile = NULL;
 =======
+=======
+>>>>>>> v3.18
 	user_srf->prime.base.shareable = false;
 	user_srf->prime.base.tfile = NULL;
 	if (drm_is_primary_client(file_priv))
 		user_srf->master = drm_master_get(file_priv->master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/**
@@ -906,11 +974,14 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 		goto out_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = vmw_resource_reference(&srf->res);
 	ret = ttm_base_object_init(tfile, &user_srf->base,
 				   req->shareable, VMW_RES_SURFACE,
 				   &vmw_user_surface_base_release, NULL);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * A gb-aware client referencing a shared surface will
 	 * expect a backup buffer to be present.
@@ -933,6 +1004,9 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	ret = ttm_prime_object_init(tfile, res->backup_size, &user_srf->prime,
 				    req->shareable, VMW_RES_SURFACE,
 				    &vmw_user_surface_base_release, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(ret != 0)) {
@@ -942,15 +1016,21 @@ int vmw_surface_define_ioctl(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rep->sid = user_srf->base.hash.key;
 	vmw_resource_unreference(&res);
 
 	ttm_read_unlock(&vmaster->lock);
 =======
+=======
+>>>>>>> v3.18
 	rep->sid = user_srf->prime.base.hash.key;
 	vmw_resource_unreference(&res);
 
 	ttm_read_unlock(&dev_priv->reservation_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 out_no_copy:
@@ -959,12 +1039,15 @@ out_no_offsets:
 	kfree(srf->sizes);
 out_no_sizes:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_base_object_kfree(user_srf, base);
 out_no_user_srf:
 	ttm_mem_global_free(vmw_mem_glob(dev_priv), size);
 out_unlock:
 	ttm_read_unlock(&vmaster->lock);
 =======
+=======
+>>>>>>> v3.18
 	ttm_prime_object_kfree(user_srf, prime);
 out_no_user_srf:
 	ttm_mem_global_free(vmw_mem_glob(dev_priv), size);
@@ -1044,6 +1127,9 @@ out_no_lookup:
 	if (handle_type == DRM_VMW_HANDLE_PRIME)
 		(void) ttm_ref_object_base_unref(tfile, handle, TTM_REF_USAGE);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1060,6 +1146,10 @@ int vmw_surface_reference_ioctl(struct drm_device *dev, void *data,
 				struct drm_file *file_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vmw_private *dev_priv = vmw_priv(dev);
+>>>>>>> v3.18
 =======
 	struct vmw_private *dev_priv = vmw_priv(dev);
 >>>>>>> v3.18
@@ -1072,6 +1162,7 @@ int vmw_surface_reference_ioctl(struct drm_device *dev, void *data,
 	struct vmw_user_surface *user_srf;
 	struct drm_vmw_size __user *user_sizes;
 	struct ttm_base_object *base;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = -EINVAL;
 
@@ -1094,6 +1185,8 @@ int vmw_surface_reference_ioctl(struct drm_device *dev, void *data,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = vmw_surface_handle_reference(dev_priv, file_priv, req->sid,
@@ -1104,6 +1197,9 @@ int vmw_surface_reference_ioctl(struct drm_device *dev, void *data,
 	user_srf = container_of(base, struct vmw_user_surface, prime.base);
 	srf = &user_srf->srf;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rep->flags = srf->flags;
 	rep->format = srf->format;
@@ -1112,6 +1208,7 @@ int vmw_surface_reference_ioctl(struct drm_device *dev, void *data,
 	    rep->size_addr;
 
 	if (user_sizes)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = copy_to_user(user_sizes, srf->sizes,
 				   srf->num_sizes * sizeof(*srf->sizes));
@@ -1123,6 +1220,8 @@ int vmw_surface_reference_ioctl(struct drm_device *dev, void *data,
 out_bad_resource:
 out_no_reference:
 =======
+=======
+>>>>>>> v3.18
 		ret = copy_to_user(user_sizes, &srf->base_size,
 				   sizeof(srf->base_size));
 	if (unlikely(ret != 0)) {
@@ -1554,6 +1653,9 @@ int vmw_gb_surface_reference_ioctl(struct drm_device *dev, void *data,
 	rep->crep.buffer_size = srf->res.backup->base.num_pages * PAGE_SIZE;
 
 out_bad_resource:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ttm_base_object_unref(&base);
 

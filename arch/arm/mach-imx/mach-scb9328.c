@@ -138,7 +138,10 @@ MACHINE_START(SCB9328, "Synertronixx scb9328")
 	.init_early = imx1_init_early,
 	.init_irq = mx1_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx1_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= scb9328_timer_init,

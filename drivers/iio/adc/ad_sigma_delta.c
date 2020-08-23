@@ -189,7 +189,11 @@ static int ad_sd_calibrate(struct ad_sigma_delta *sigma_delta,
 	spi_bus_lock(sigma_delta->spi->master);
 	sigma_delta->bus_locked = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(sigma_delta->completion);
+=======
+	reinit_completion(&sigma_delta->completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&sigma_delta->completion);
 >>>>>>> v3.18
@@ -264,7 +268,11 @@ int ad_sigma_delta_single_conversion(struct iio_dev *indio_dev,
 	spi_bus_lock(sigma_delta->spi->master);
 	sigma_delta->bus_locked = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(sigma_delta->completion);
+=======
+	reinit_completion(&sigma_delta->completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&sigma_delta->completion);
 >>>>>>> v3.18
@@ -352,7 +360,11 @@ static int ad_sd_buffer_postdisable(struct iio_dev *indio_dev)
 	struct ad_sigma_delta *sigma_delta = iio_device_get_drvdata(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(sigma_delta->completion);
+=======
+	reinit_completion(&sigma_delta->completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&sigma_delta->completion);
 >>>>>>> v3.18
@@ -381,10 +393,13 @@ static irqreturn_t ad_sd_trigger_handler(int irq, void *p)
 	memset(data, 0x00, 16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Guaranteed to be aligned with 8 byte boundary */
 	if (indio_dev->scan_timestamp)
 		((s64 *)data)[1] = pf->timestamp;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg_size = indio_dev->channels[0].scan_type.realbits +
@@ -407,7 +422,11 @@ static irqreturn_t ad_sd_trigger_handler(int irq, void *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_push_to_buffers(indio_dev, (uint8_t *)data);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, data, pf->timestamp);
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(indio_dev, data, pf->timestamp);
 >>>>>>> v3.18
@@ -421,7 +440,10 @@ static irqreturn_t ad_sd_trigger_handler(int irq, void *p)
 
 static const struct iio_buffer_setup_ops ad_sd_buffer_setup_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.preenable = &iio_sw_buffer_preenable,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.postenable = &ad_sd_buffer_postenable,
@@ -438,7 +460,11 @@ static irqreturn_t ad_sd_data_rdy_trig_poll(int irq, void *private)
 	disable_irq_nosync(irq);
 	sigma_delta->irq_dis = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_trigger_poll(sigma_delta->trig, iio_get_time_ns());
+=======
+	iio_trigger_poll(sigma_delta->trig);
+>>>>>>> v3.18
 =======
 	iio_trigger_poll(sigma_delta->trig);
 >>>>>>> v3.18

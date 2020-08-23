@@ -19,7 +19,10 @@ config BLACKFIN
 	select HAVE_FUNCTION_GRAPH_TRACER
 	select HAVE_FUNCTION_TRACER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_FUNCTION_TRACE_MCOUNT_TEST
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select HAVE_IDE
@@ -38,6 +41,10 @@ config BLACKFIN
 	select GENERIC_ATOMIC64
 	select GENERIC_IRQ_PROBE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GENERIC_IRQ_SHOW
+>>>>>>> v3.18
 =======
 	select GENERIC_IRQ_SHOW
 >>>>>>> v3.18
@@ -47,6 +54,10 @@ config BLACKFIN
 	select HAVE_MOD_ARCH_SPECIFIC
 	select MODULES_USE_ELF_RELA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_DEBUG_STACKOVERFLOW
+>>>>>>> v3.18
 =======
 	select HAVE_DEBUG_STACKOVERFLOW
 >>>>>>> v3.18
@@ -263,7 +274,11 @@ config NR_CPUS
 config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SMP && HOTPLUG
+=======
+	depends on SMP
+>>>>>>> v3.18
 =======
 	depends on SMP
 >>>>>>> v3.18
@@ -296,7 +311,11 @@ config BF_REV_0_0
 config BF_REV_0_1
 	bool "0.1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (BF51x || BF52x || (BF54x && !BF54xM))
+=======
+	depends on (BF51x || BF52x || (BF54x && !BF54xM) || BF60x)
+>>>>>>> v3.18
 =======
 	depends on (BF51x || BF52x || (BF54x && !BF54xM) || BF60x)
 >>>>>>> v3.18
@@ -335,7 +354,10 @@ config BF53x
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_ADI
 	def_bool y
 	depends on (BF51x || BF52x || BF53x || BF538 || BF539 || BF561)
@@ -344,6 +366,9 @@ config PINCTRL
 	def_bool y
 	depends on BF54x || BF60x
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MEM_MT48LC64M4A2FB_7E
 	bool
@@ -693,7 +718,11 @@ config TICKSOURCE_CORETMR
 endmenu
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "Clock souce"
+=======
+menu "Clock source"
+>>>>>>> v3.18
 =======
 menu "Clock source"
 >>>>>>> v3.18
@@ -893,6 +922,7 @@ config SYS_BFIN_SPINLOCK_L1
 	  into L1 instruction memory. (less latency)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IP_CHECKSUM_L1
 	bool "Locate IP Checksum function in L1 Memory"
 	default n
@@ -901,6 +931,8 @@ config IP_CHECKSUM_L1
 	  If enabled, the IP Checksum function is linked
 	  into L1 instruction memory. (less latency)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CACHELINE_ALIGNED_L1

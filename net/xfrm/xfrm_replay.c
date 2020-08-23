@@ -62,9 +62,15 @@ static void xfrm_replay_notify(struct xfrm_state *x, int event)
 	switch (event) {
 	case XFRM_REPLAY_UPDATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (x->replay_maxdiff &&
 		    (x->replay.seq - x->preplay.seq < x->replay_maxdiff) &&
 		    (x->replay.oseq - x->preplay.oseq < x->replay_maxdiff)) {
+=======
+		if (!x->replay_maxdiff ||
+		    ((x->replay.seq - x->preplay.seq < x->replay_maxdiff) &&
+		    (x->replay.oseq - x->preplay.oseq < x->replay_maxdiff))) {
+>>>>>>> v3.18
 =======
 		if (!x->replay_maxdiff ||
 		    ((x->replay.seq - x->preplay.seq < x->replay_maxdiff) &&
@@ -136,8 +142,12 @@ static int xfrm_replay_check(struct xfrm_state *x,
 
 	diff = x->replay.seq - seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (diff >= min_t(unsigned int, x->props.replay_window,
 			  sizeof(x->replay.bitmap) * 8)) {
+=======
+	if (diff >= x->props.replay_window) {
+>>>>>>> v3.18
 =======
 	if (diff >= x->props.replay_window) {
 >>>>>>> v3.18
@@ -313,14 +323,20 @@ static void xfrm_replay_notify_bmp(struct xfrm_state *x, int event)
 	switch (event) {
 	case XFRM_REPLAY_UPDATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (x->replay_maxdiff &&
 		    (replay_esn->seq - preplay_esn->seq < x->replay_maxdiff) &&
 		    (replay_esn->oseq - preplay_esn->oseq < x->replay_maxdiff)) {
 =======
+=======
+>>>>>>> v3.18
 		if (!x->replay_maxdiff ||
 		    ((replay_esn->seq - preplay_esn->seq < x->replay_maxdiff) &&
 		    (replay_esn->oseq - preplay_esn->oseq
 		     < x->replay_maxdiff))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (x->xflags & XFRM_TIME_DEFER)
 				event = XFRM_REPLAY_TIMEOUT;
@@ -371,6 +387,7 @@ static void xfrm_replay_notify_esn(struct xfrm_state *x, int event)
 	switch (event) {
 	case XFRM_REPLAY_UPDATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!x->replay_maxdiff)
 			break;
 
@@ -394,6 +411,8 @@ static void xfrm_replay_notify_esn(struct xfrm_state *x, int event)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 		if (x->replay_maxdiff) {
 			if (replay_esn->seq_hi == preplay_esn->seq_hi)
 				seq_diff = replay_esn->seq - preplay_esn->seq;
@@ -418,6 +437,9 @@ static void xfrm_replay_notify_esn(struct xfrm_state *x, int event)
 		else
 			return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 

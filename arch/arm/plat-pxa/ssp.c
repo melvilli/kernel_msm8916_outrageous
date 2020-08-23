@@ -31,6 +31,11 @@
 #include <linux/spi/pxa2xx_spi.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -66,7 +71,10 @@ struct ssp_device *pxa_ssp_request(int port, const char *label)
 EXPORT_SYMBOL(pxa_ssp_request);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ssp_device *pxa_ssp_request_of(const struct device_node *of_node,
 				      const char *label)
 {
@@ -91,6 +99,9 @@ struct ssp_device *pxa_ssp_request_of(const struct device_node *of_node,
 }
 EXPORT_SYMBOL(pxa_ssp_request_of);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pxa_ssp_free(struct ssp_device *ssp)
 {
@@ -104,6 +115,7 @@ void pxa_ssp_free(struct ssp_device *ssp)
 }
 EXPORT_SYMBOL(pxa_ssp_free);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pxa_ssp_probe(struct platform_device *pdev)
 {
@@ -155,6 +167,8 @@ static int pxa_ssp_probe(struct platform_device *pdev)
 		ret = -EBUSY;
 		goto err_free_clk;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id pxa_ssp_of_ids[] = {
 	{ .compatible = "mrvl,pxa25x-ssp",	.data = (void *) PXA25x_SSP },
@@ -244,11 +258,15 @@ static int pxa_ssp_probe(struct platform_device *pdev)
 	if (res == NULL) {
 		dev_err(dev, "failed to request memory resource\n");
 		return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ssp->phys_base = res->start;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ssp->mmio_base = ioremap(res->start, resource_size(res));
 	if (ssp->mmio_base == NULL) {
@@ -256,15 +274,21 @@ static int pxa_ssp_probe(struct platform_device *pdev)
 		ret = -ENODEV;
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	ssp->mmio_base = devm_ioremap(dev, res->start, resource_size(res));
 	if (ssp->mmio_base == NULL) {
 		dev_err(dev, "failed to ioremap() registers\n");
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ssp->irq = platform_get_irq(pdev, 0);
 	if (ssp->irq < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_err(&pdev->dev, "no IRQ resource defined\n");
 		ret = -ENODEV;
@@ -278,6 +302,8 @@ static int pxa_ssp_probe(struct platform_device *pdev)
 	ssp->use_count = 0;
 	ssp->type = (int)id->driver_data;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "no IRQ resource defined\n");
 		return -ENODEV;
 	}
@@ -299,6 +325,9 @@ static int pxa_ssp_probe(struct platform_device *pdev)
 
 	ssp->use_count = 0;
 	ssp->of_node = dev->of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&ssp_lock);
@@ -306,6 +335,7 @@ static int pxa_ssp_probe(struct platform_device *pdev)
 	mutex_unlock(&ssp_lock);
 
 	platform_set_drvdata(pdev, ssp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 
@@ -318,6 +348,10 @@ err_free_clk:
 err_free:
 	kfree(ssp);
 	return ret;
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -353,6 +387,10 @@ static const struct platform_device_id ssp_id_table[] = {
 	{ "pxa25x-nssp",	PXA25x_NSSP },
 	{ "pxa27x-ssp",		PXA27x_SSP },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "pxa3xx-ssp",		PXA3xx_SSP },
+>>>>>>> v3.18
 =======
 	{ "pxa3xx-ssp",		PXA3xx_SSP },
 >>>>>>> v3.18
@@ -366,8 +404,14 @@ static struct platform_driver pxa_ssp_driver = {
 	.remove		= pxa_ssp_remove,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 		.name	= "pxa2xx-ssp",
+=======
+		.owner		= THIS_MODULE,
+		.name		= "pxa2xx-ssp",
+		.of_match_table	= of_match_ptr(pxa_ssp_of_ids),
+>>>>>>> v3.18
 =======
 		.owner		= THIS_MODULE,
 		.name		= "pxa2xx-ssp",

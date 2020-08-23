@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  linux/arch/arm/mach-mmp/include/mach/sram.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  SRAM Memory Management
@@ -15,8 +18,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_SRAM_H
 #define __ASM_ARCH_SRAM_H
+=======
+#ifndef __DMA_MMP_TDMA_H
+#define __DMA_MMP_TDMA_H
+>>>>>>> v3.18
 =======
 #ifndef __DMA_MMP_TDMA_H
 #define __DMA_MMP_TDMA_H
@@ -41,7 +49,11 @@ struct sram_platdata {
 extern struct gen_pool *sram_get_gpool(char *pool_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_SRAM_H */
+=======
+#endif /* __DMA_MMP_TDMA_H */
+>>>>>>> v3.18
 =======
 #endif /* __DMA_MMP_TDMA_H */
 >>>>>>> v3.18

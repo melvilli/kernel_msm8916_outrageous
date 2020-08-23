@@ -29,11 +29,17 @@
 #define __VMWGFX_DRM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef __KERNEL__
 #include <drm/drm.h>
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DRM_VMW_MAX_SURFACE_FACES 6
 #define DRM_VMW_MAX_MIP_LEVELS 24
@@ -63,12 +69,18 @@
 #define DRM_VMW_PRESENT_READBACK     19
 #define DRM_VMW_UPDATE_LAYOUT        20
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRM_VMW_CREATE_SHADER        21
 #define DRM_VMW_UNREF_SHADER         22
 #define DRM_VMW_GB_SURFACE_CREATE    23
 #define DRM_VMW_GB_SURFACE_REF       24
 #define DRM_VMW_SYNCCPU              25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*************************************************************************/
@@ -91,7 +103,10 @@
 #define DRM_VMW_PARAM_MAX_FB_SIZE      5
 #define DRM_VMW_PARAM_FIFO_HW_VERSION  6
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRM_VMW_PARAM_MAX_SURF_MEMORY  7
 #define DRM_VMW_PARAM_3D_CAPS_SIZE     8
 #define DRM_VMW_PARAM_MAX_MOB_MEMORY   9
@@ -105,6 +120,9 @@ enum drm_vmw_handle_type {
 	DRM_VMW_HANDLE_LEGACY = 0,
 	DRM_VMW_HANDLE_PRIME = 1
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -196,6 +214,10 @@ struct drm_vmw_surface_create_req {
  *
  * @sid: Surface id of created surface or surface to destroy or reference.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @handle_type: Handle type for DRM_VMW_REF_SURFACE Ioctl.
+>>>>>>> v3.18
 =======
  * @handle_type: Handle type for DRM_VMW_REF_SURFACE Ioctl.
 >>>>>>> v3.18
@@ -208,7 +230,11 @@ struct drm_vmw_surface_create_req {
 struct drm_vmw_surface_arg {
 	int32_t sid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t pad64;
+=======
+	enum drm_vmw_handle_type handle_type;
+>>>>>>> v3.18
 =======
 	enum drm_vmw_handle_type handle_type;
 >>>>>>> v3.18
@@ -827,7 +853,10 @@ struct drm_vmw_update_layout_arg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*************************************************************************/
 /**
@@ -1077,5 +1106,8 @@ struct drm_vmw_synccpu_arg {
 	uint32_t pad64;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

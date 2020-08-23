@@ -13,6 +13,11 @@
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk/at91_pmc.h>
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk/at91_pmc.h>
 #include <linux/platform_device.h>
@@ -24,8 +29,13 @@
 #include <asm/system_misc.h>
 #include <mach/at91sam9g45.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
 #include <mach/cpu.h>
+=======
+#include <mach/cpu.h>
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/cpu.h>
 #include <mach/hardware.h>
@@ -35,15 +45,21 @@
 #include "soc.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "clock.h"
 #include "sam9_smc.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "sam9_smc.h"
 #include "pm.h"
 
 #if defined(CONFIG_OLD_CLK_AT91)
 #include "clock.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Clocks
@@ -199,7 +215,11 @@ static struct clk adc_op_clk = {
 	.name		= "adc_op_clk",
 	.type		= CLK_TYPE_PERIPHERAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rate_hz	= 13200000,
+=======
+	.rate_hz	= 300000,
+>>>>>>> v3.18
 =======
 	.rate_hz	= 300000,
 >>>>>>> v3.18
@@ -272,6 +292,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID(NULL, "atmel_tdes", &aestdessha_clk),
 	CLKDEV_CON_DEV_ID(NULL, "atmel_aes", &aestdessha_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "at91sam9rl-pwm", &pwm_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID(NULL, "at91sam9rl-pwm", &pwm_clk),
 >>>>>>> v3.18
@@ -293,6 +317,11 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID("spi_clk", "fffa4000.spi", &spi0_clk),
 	CLKDEV_CON_DEV_ID("spi_clk", "fffa8000.spi", &spi1_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID("hclk", "600000.gadget", &utmi_clk),
+	CLKDEV_CON_DEV_ID("pclk", "600000.gadget", &udphs_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID("hclk", "600000.gadget", &utmi_clk),
 	CLKDEV_CON_DEV_ID("pclk", "600000.gadget", &udphs_clk),
@@ -313,6 +342,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	/* Fake adc clock */
 	CLKDEV_CON_ID("adc_clk", &tsc_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "fffb8000.pwm", &pwm_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID(NULL, "fffb8000.pwm", &pwm_clk),
 >>>>>>> v3.18
@@ -362,6 +395,12 @@ static void __init at91sam9g45_register_clocks(void)
 	clk_register(&pck1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define at91sam9g45_register_clocks NULL
+#endif
+>>>>>>> v3.18
 =======
 #else
 #define at91sam9g45_register_clocks NULL
@@ -403,8 +442,11 @@ static void __init at91sam9g45_map_io(void)
 static void __init at91sam9g45_ioremap_registers(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_ioremap_shdwc(AT91SAM9G45_BASE_SHDWC);
 	at91_ioremap_rstc(AT91SAM9G45_BASE_RSTC);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	at91_ioremap_ramc(0, AT91SAM9G45_BASE_DDRSDRC1, 512);
@@ -413,6 +455,10 @@ static void __init at91sam9g45_ioremap_registers(void)
 	at91sam9_ioremap_smc(0, AT91SAM9G45_BASE_SMC);
 	at91_ioremap_matrix(AT91SAM9G45_BASE_MATRIX);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_pm_set_standby(at91_ddr_standby);
+>>>>>>> v3.18
 =======
 	at91_pm_set_standby(at91_ddr_standby);
 >>>>>>> v3.18
@@ -422,8 +468,11 @@ static void __init at91sam9g45_initialize(void)
 {
 	arm_pm_idle = at91sam9_idle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arm_pm_restart = at91sam9g45_restart;
 	at91_extern_irq = (1 << AT91SAM9G45_ID_IRQ0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -435,7 +484,10 @@ static void __init at91sam9g45_initialize(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource rstc_resources[] = {
 	[0] = {
 		.start  = AT91SAM9G45_BASE_RSTC,
@@ -480,6 +532,9 @@ static void __init at91sam9g45_register_devices(void)
 	platform_device_register(&shdwc_device);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Interrupt initialization
@@ -524,6 +579,7 @@ static unsigned int at91sam9g45_default_irq_priority[NR_AIC_IRQS] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 AT91_SOC_START(at91sam9g45)
 	.map_io = at91sam9g45_map_io,
 	.default_irq_priority = at91sam9g45_default_irq_priority,
@@ -531,6 +587,8 @@ AT91_SOC_START(at91sam9g45)
 	.register_clocks = at91sam9g45_register_clocks,
 	.init = at91sam9g45_initialize,
 =======
+=======
+>>>>>>> v3.18
 static void __init at91sam9g45_init_time(void)
 {
 	at91sam926x_pit_init(NR_IRQS_LEGACY + AT91_ID_SYS);
@@ -545,5 +603,8 @@ AT91_SOC_START(at91sam9g45)
 	.register_devices = at91sam9g45_register_devices,
 	.init = at91sam9g45_initialize,
 	.init_time = at91sam9g45_init_time,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 AT91_SOC_END

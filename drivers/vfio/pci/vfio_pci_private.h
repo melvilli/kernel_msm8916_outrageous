@@ -55,8 +55,14 @@ struct vfio_pci_device {
 	bool			bardirty;
 	bool			has_vga;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_saved_state	*pci_saved_state;
 	atomic_t		refcnt;
+=======
+	bool			needs_reset;
+	struct pci_saved_state	*pci_saved_state;
+	int			refcnt;
+>>>>>>> v3.18
 =======
 	bool			needs_reset;
 	struct pci_saved_state	*pci_saved_state;

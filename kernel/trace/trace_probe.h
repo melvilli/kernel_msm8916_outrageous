@@ -82,7 +82,10 @@
 #define convert_rloc_to_loc(dl, offs)	((u32)(dl) + (offs))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static nokprobe_inline void *get_rloc_data(u32 *dl)
 {
 	return (u8 *)dl + get_rloc_offs(*dl);
@@ -94,6 +97,9 @@ static nokprobe_inline void *get_loc_data(u32 *dl, void *ent)
 	return (u8 *)ent + get_rloc_offs(*dl);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Data fetch function type */
 typedef	void (*fetch_func_t)(struct pt_regs *, void *, void *);
@@ -110,6 +116,10 @@ enum {
 	FETCH_MTD_deref,
 	FETCH_MTD_bitfield,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FETCH_MTD_file_offset,
+>>>>>>> v3.18
 =======
 	FETCH_MTD_file_offset,
 >>>>>>> v3.18
@@ -134,7 +144,10 @@ struct fetch_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* For defining macros, define string/string_size types */
 typedef u32 string;
 typedef u32 string_size;
@@ -276,6 +289,9 @@ alloc_symbol_cache(const char *sym, long offset)
 }
 #endif /* CONFIG_KPROBE_EVENT */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct probe_arg {
 	struct fetch_param	fetch;
@@ -287,8 +303,11 @@ struct probe_arg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __kprobes void call_fetch(struct fetch_param *fprm,
 =======
+=======
+>>>>>>> v3.18
 struct trace_probe {
 	unsigned int			flags;	/* For TP_FLAG_* */
 	struct ftrace_event_class	class;
@@ -315,6 +334,9 @@ static inline bool trace_probe_is_registered(struct trace_probe *tp)
 }
 
 static nokprobe_inline void call_fetch(struct fetch_param *fprm,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 struct pt_regs *regs, void *dest)
 {
@@ -334,7 +356,10 @@ static inline int is_good_name(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct event_file_link *
 find_event_file_link(struct trace_probe *tp, struct ftrace_event_file *file)
 {
@@ -347,6 +372,9 @@ find_event_file_link(struct trace_probe *tp, struct ftrace_event_file *file)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int traceprobe_parse_probe_arg(char *arg, ssize_t *size,
 		   struct probe_arg *parg, bool is_return, bool is_kprobe);
@@ -365,7 +393,10 @@ extern ssize_t traceprobe_probes_write(struct file *file,
 
 extern int traceprobe_command(const char *buf, int (*createfn)(int, char**));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Sum up total data length for dynamic arraies (strings) */
 static nokprobe_inline int
@@ -416,4 +447,7 @@ store_trace_args(int ent_size, struct trace_probe *tp, struct pt_regs *regs,
 }
 
 extern int set_print_fmt(struct trace_probe *tp, bool is_return);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

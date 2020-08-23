@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -21,6 +24,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -36,6 +40,8 @@ s64 ieee754sp_tlong(ieee754sp x)
 
 	CLEARCX;
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -52,6 +58,9 @@ s64 ieee754sp_tlong(union ieee754sp x)
 	COMPXDP;		/* <-- need 64-bit mantissa tmp */
 
 	ieee754_clearcx();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	EXPLODEXSP;
@@ -62,17 +71,23 @@ s64 ieee754sp_tlong(union ieee754sp x)
 	case IEEE754_CLASS_QNAN:
 	case IEEE754_CLASS_INF:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754di_xcpt(ieee754di_indef(), "sp_tlong", x);
 	case IEEE754_CLASS_ZERO:
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754di_indef();
 
 	case IEEE754_CLASS_ZERO:
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IEEE754_CLASS_DNORM:
 	case IEEE754_CLASS_NORM:
@@ -84,6 +99,7 @@ s64 ieee754sp_tlong(union ieee754sp x)
 			return -0x8000000000000000LL;
 		/* Set invalid. We will only use overflow for floating
 		   point overflow */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754di_xcpt(ieee754di_indef(), "sp_tlong", x);
@@ -98,6 +114,8 @@ s64 ieee754sp_tlong(union ieee754sp x)
 		int odd;
 
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754di_indef();
 	}
@@ -105,6 +123,9 @@ s64 ieee754sp_tlong(union ieee754sp x)
 	if (xe > SP_FBITS) {
 		xm <<= xe - SP_FBITS;
 	} else if (xe < SP_FBITS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (xe < -1) {
 			residue = xm;
@@ -112,6 +133,7 @@ s64 ieee754sp_tlong(union ieee754sp x)
 			sticky = residue != 0;
 			xm = 0;
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			residue = xm << (32 - SP_MBITS + xe);
 			round = (residue >> 31) != 0;
@@ -132,6 +154,8 @@ s64 ieee754sp_tlong(union ieee754sp x)
 			break;
 		case IEEE754_RD:	/* toward -Infinity */
 =======
+=======
+>>>>>>> v3.18
 			residue = xm << (32 - SP_FBITS + xe);
 			round = (residue >> 31) != 0;
 			sticky = (residue << 1) != 0;
@@ -150,6 +174,9 @@ s64 ieee754sp_tlong(union ieee754sp x)
 				xm++;
 			break;
 		case FPU_CSR_RD:	/* toward -Infinity */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((round || sticky) && xs)
 				xm++;
@@ -158,17 +185,23 @@ s64 ieee754sp_tlong(union ieee754sp x)
 		if ((xm >> 63) != 0) {
 			/* This can happen after rounding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SETCX(IEEE754_INVALID_OPERATION);
 			return ieee754di_xcpt(ieee754di_indef(), "sp_tlong", x);
 		}
 		if (round || sticky)
 			SETCX(IEEE754_INEXACT);
 =======
+=======
+>>>>>>> v3.18
 			ieee754_setcx(IEEE754_INVALID_OPERATION);
 			return ieee754di_indef();
 		}
 		if (round || sticky)
 			ieee754_setcx(IEEE754_INEXACT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (xs)
@@ -176,6 +209,7 @@ s64 ieee754sp_tlong(union ieee754sp x)
 	else
 		return xm;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -190,5 +224,7 @@ u64 ieee754sp_tulong(ieee754sp x)
 	return (u64) ieee754sp_tlong(ieee754sp_sub(x, hb)) |
 	    (1ULL << 63);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

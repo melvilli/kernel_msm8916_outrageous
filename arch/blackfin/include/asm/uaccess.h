@@ -178,6 +178,7 @@ static inline unsigned long __must_check
 copy_from_user(void *to, const void __user *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_READ, from, n))) {
 		memcpy(to, (const void __force *)from, n);
 		return 0;
@@ -185,11 +186,16 @@ copy_from_user(void *to, const void __user *from, unsigned long n)
 	memset(to, 0, n);
 	return n;
 =======
+=======
+>>>>>>> v3.18
 	if (access_ok(VERIFY_READ, from, n))
 		memcpy(to, (const void __force *)from, n);
 	else
 		return n;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

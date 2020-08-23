@@ -96,6 +96,7 @@ struct dn_fib_table {
  * dn_fib.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dn_fib_init(void);
 extern void dn_fib_cleanup(void);
 
@@ -112,6 +113,8 @@ extern void dn_fib_flush(void);
 extern void dn_fib_select_multipath(const struct flowidn *fld,
 					struct dn_fib_res *res);
 =======
+=======
+>>>>>>> v3.18
 void dn_fib_init(void);
 void dn_fib_cleanup(void);
 
@@ -124,26 +127,36 @@ int dn_fib_semantic_match(int type, struct dn_fib_info *fi,
 void dn_fib_release_info(struct dn_fib_info *fi);
 void dn_fib_flush(void);
 void dn_fib_select_multipath(const struct flowidn *fld, struct dn_fib_res *res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * dn_tables.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct dn_fib_table *dn_fib_get_table(u32 n, int creat);
 extern struct dn_fib_table *dn_fib_empty_table(void);
 extern void dn_fib_table_init(void);
 extern void dn_fib_table_cleanup(void);
 =======
+=======
+>>>>>>> v3.18
 struct dn_fib_table *dn_fib_get_table(u32 n, int creat);
 struct dn_fib_table *dn_fib_empty_table(void);
 void dn_fib_table_init(void);
 void dn_fib_table_cleanup(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * dn_rules.c
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void dn_fib_rules_init(void);
 extern void dn_fib_rules_cleanup(void);
@@ -154,6 +167,8 @@ extern int dn_fib_dump(struct sk_buff *skb, struct netlink_callback *cb);
 
 extern void dn_fib_free_info(struct dn_fib_info *fi);
 =======
+=======
+>>>>>>> v3.18
 void dn_fib_rules_init(void);
 void dn_fib_rules_cleanup(void);
 unsigned int dnet_addr_type(__le16 addr);
@@ -162,6 +177,9 @@ int dn_fib_lookup(struct flowidn *fld, struct dn_fib_res *res);
 int dn_fib_dump(struct sk_buff *skb, struct netlink_callback *cb);
 
 void dn_fib_free_info(struct dn_fib_info *fi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void dn_fib_info_put(struct dn_fib_info *fi)

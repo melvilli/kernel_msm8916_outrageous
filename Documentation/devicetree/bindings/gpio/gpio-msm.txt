@@ -12,10 +12,13 @@ Required properties:
 - interrupts : Specify the TLMM summary interrupt number
 - ngpio : Specify the number of MSM GPIOs
 <<<<<<< HEAD
+<<<<<<< HEAD
 - qcom,direct-connect-irqs : Specifies the number of GPIOs that can be used as
   direct connect interrupts
 Optional properties:
 - qcom,subsys-id: subsystem id to which gpio interrupts must be routed
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -30,6 +33,7 @@ Example:
 		reg = <0xfd510000 0x4000>;
 		interrupts = <0 208 0>;
 		ngpio = <150>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		qcom,direct-connect-irqs = <8>;
 	};
@@ -50,6 +54,9 @@ of_get_named_gpio with "cs-gpios" as the name parameter.
 Please refer to the file: include/linux/of_gpio.h for the
 complete list of APIs the driver can use to extract gpio
 information from the device tree.
+=======
+	};
+>>>>>>> v3.18
 =======
 	};
 >>>>>>> v3.18

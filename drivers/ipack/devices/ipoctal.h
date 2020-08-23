@@ -13,7 +13,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _IPOCTAL_H
+=======
+#ifndef _IPOCTAL_H_
+>>>>>>> v3.18
 =======
 #ifndef _IPOCTAL_H_
 >>>>>>> v3.18

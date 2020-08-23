@@ -192,9 +192,12 @@ void __init time_init_deferred(void)
 	struct resource *resource = NULL;
 	struct clock_event_device *ce_dev = &hexagon_clockevent_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *dn;
 	struct resource r;
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -236,7 +239,10 @@ void __init time_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __delay(unsigned long cycles)
 {
 	unsigned long long start = __vmgettime();
@@ -246,6 +252,9 @@ void __delay(unsigned long cycles)
 }
 EXPORT_SYMBOL(__delay);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This could become parametric or perhaps even computed at run-time,

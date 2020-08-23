@@ -216,8 +216,14 @@ static int send_mad_to_wire(struct mlx4_ib_demux_ctx *ctx, struct ib_mad *mad)
 	mlx4_ib_query_ah(dev->sm_ah[ctx->port - 1], &ah_attr);
 	spin_unlock(&dev->sm_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mlx4_ib_send_to_wire(dev, mlx4_master_func_num(dev->dev), ctx->port,
 				    IB_QPT_GSI, 0, 1, IB_QP1_QKEY, &ah_attr, mad);
+=======
+	return mlx4_ib_send_to_wire(dev, mlx4_master_func_num(dev->dev),
+				    ctx->port, IB_QPT_GSI, 0, 1, IB_QP1_QKEY,
+				    &ah_attr, NULL, mad);
+>>>>>>> v3.18
 =======
 	return mlx4_ib_send_to_wire(dev, mlx4_master_func_num(dev->dev),
 				    ctx->port, IB_QPT_GSI, 0, 1, IB_QP1_QKEY,
@@ -490,7 +496,11 @@ static u8 get_leave_state(struct mcast_group *group)
 			leave_state |= (1 << i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return leave_state & (group->rec.scope_join_state & 0xf);
+=======
+	return leave_state & (group->rec.scope_join_state & 7);
+>>>>>>> v3.18
 =======
 	return leave_state & (group->rec.scope_join_state & 7);
 >>>>>>> v3.18
@@ -569,8 +579,13 @@ static void mlx4_ib_mcg_timeout_handler(struct work_struct *work)
 			mcg_warn_group(group, "DRIVER BUG\n");
 	} else if (group->state == MCAST_LEAVE_SENT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (group->rec.scope_join_state & 0xf)
 			group->rec.scope_join_state &= 0xf0;
+=======
+		if (group->rec.scope_join_state & 7)
+			group->rec.scope_join_state &= 0xf8;
+>>>>>>> v3.18
 =======
 		if (group->rec.scope_join_state & 7)
 			group->rec.scope_join_state &= 0xf8;
@@ -615,7 +630,11 @@ static int handle_join_req(struct mcast_group *group, u8 join_mask,
 			   struct mcast_req *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 group_join_state = group->rec.scope_join_state & 0xf;
+=======
+	u8 group_join_state = group->rec.scope_join_state & 7;
+>>>>>>> v3.18
 =======
 	u8 group_join_state = group->rec.scope_join_state & 7;
 >>>>>>> v3.18
@@ -704,8 +723,13 @@ static void mlx4_ib_mcg_work_handler(struct work_struct *work)
 
 			resp_join_state = ((struct ib_sa_mcmember_data *)
 <<<<<<< HEAD
+<<<<<<< HEAD
 						group->response_sa_mad.data)->scope_join_state & 0xf;
 			cur_join_state = group->rec.scope_join_state & 0xf;
+=======
+						group->response_sa_mad.data)->scope_join_state & 7;
+			cur_join_state = group->rec.scope_join_state & 7;
+>>>>>>> v3.18
 =======
 						group->response_sa_mad.data)->scope_join_state & 7;
 			cur_join_state = group->rec.scope_join_state & 7;
@@ -729,7 +753,11 @@ process_requests:
 				       group_list);
 		sa_data = (struct ib_sa_mcmember_data *)req->sa_mad.data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		req_join_state = sa_data->scope_join_state & 0xf;
+=======
+		req_join_state = sa_data->scope_join_state & 0x7;
+>>>>>>> v3.18
 =======
 		req_join_state = sa_data->scope_join_state & 0x7;
 >>>>>>> v3.18

@@ -26,7 +26,10 @@
 #include <arch/spr_def.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Extract two 32-bit bit values that were read into one register. */
 #ifdef __BIG_ENDIAN__
 #define GET_FIRST_INT(rd, rs) shrsi rd, rs, 32
@@ -36,6 +39,9 @@
 #define GET_SECOND_INT(rd, rs) shrsi rd, rs, 32
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This module contains the entry code for kernel images. It performs the
@@ -59,17 +65,23 @@ ENTRY(_start)
 	  movei r3, KERNEL_PL
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal hv_init
 	/* Get a reasonable default ASID in r0 */
 	{
 	  move r0, zero
 	  jal hv_inquire_asid
 =======
+=======
+>>>>>>> v3.18
 	jal _hv_init
 	/* Get a reasonable default ASID in r0 */
 	{
 	  move r0, zero
 	  jal _hv_inquire_asid
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -82,7 +94,11 @@ ENTRY(_start)
 	 */
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  v4int_l r2, zero, r0    /* ASID for hv_install_context */
+=======
+	  GET_FIRST_INT(r2, r0)    /* ASID for hv_install_context */
+>>>>>>> v3.18
 =======
 	  GET_FIRST_INT(r2, r0)    /* ASID for hv_install_context */
 >>>>>>> v3.18
@@ -102,7 +118,11 @@ ENTRY(_start)
 	  /* After initializing swapper_pgprot, HV_PTE_GLOBAL is set. */
 	  bfextu r7, r1, HV_PTE_INDEX_GLOBAL, HV_PTE_INDEX_GLOBAL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  inv r4
+=======
+	  finv r4
+>>>>>>> v3.18
 =======
 	  finv r4
 >>>>>>> v3.18
@@ -150,7 +170,11 @@ ENTRY(_start)
 	{
 	  moveli r3, CTX_PAGE_FLAG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  j hv_install_context
+=======
+	  j _hv_install_context
+>>>>>>> v3.18
 =======
 	  j _hv_install_context
 >>>>>>> v3.18
@@ -158,6 +182,7 @@ ENTRY(_start)
 1:
 
 	/* Install the interrupt base. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	moveli r0, hw2_last(MEM_SV_START)
 	shl16insli r0, r0, hw1(MEM_SV_START)
@@ -178,6 +203,8 @@ ENTRY(_start)
 	{
 	  v4int_l r6, zero, r0    /* r6 = x */
 =======
+=======
+>>>>>>> v3.18
 	moveli r0, hw2_last(intrpt_start)
 	shl16insli r0, r0, hw1(intrpt_start)
 	shl16insli r0, r0, hw0(intrpt_start)
@@ -191,6 +218,9 @@ ENTRY(_start)
 	}
 	{
 	  GET_FIRST_INT(r6, r0)   /* r6 = x */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  mul_lu_lu r4, r4, r5
 	}
@@ -203,7 +233,11 @@ ENTRY(_start)
 	 * Load up our per-cpu offset.  When the first (master) tile
 	 * boots, this value is still zero, so we will load boot_pc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * with start_kernel, and boot_sp with init_stack + THREAD_SIZE.
+=======
+	 * with start_kernel, and boot_sp with at the top of init_stack.
+>>>>>>> v3.18
 =======
 	 * with start_kernel, and boot_sp with at the top of init_stack.
 >>>>>>> v3.18
@@ -251,9 +285,15 @@ ENTRY(_start)
 	ld r0, r0
 	ld sp, r1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	or r4, sp, r4
 	mtspr SPR_SYSTEM_SAVE_K_0, r4  /* save ksp0 + cpu */
 	addi sp, sp, -STACK_TOP_DELTA
+=======
+	shli r4, r4, CPU_SHIFT
+	bfins r4, sp, 0, CPU_SHIFT-1
+	mtspr SPR_SYSTEM_SAVE_K_0, r4  /* save ksp0 + cpu */
+>>>>>>> v3.18
 =======
 	shli r4, r4, CPU_SHIFT
 	bfins r4, sp, 0, CPU_SHIFT-1

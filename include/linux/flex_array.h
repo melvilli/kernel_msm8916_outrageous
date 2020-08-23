@@ -3,6 +3,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reciprocal_div.h>
+>>>>>>> v3.18
 =======
 #include <linux/reciprocal_div.h>
 >>>>>>> v3.18
@@ -27,7 +31,11 @@ struct flex_array {
 			int total_nr_elements;
 			int elems_per_part;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 reciprocal_elems;
+=======
+			struct reciprocal_value reciprocal_elems;
+>>>>>>> v3.18
 =======
 			struct reciprocal_value reciprocal_elems;
 >>>>>>> v3.18

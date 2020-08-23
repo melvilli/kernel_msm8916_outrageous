@@ -40,6 +40,7 @@
 #include "ieee802154.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_multicast_group ieee802154_coord_mcgrp = {
 	.name		= IEEE802154_MCAST_COORD_NAME,
 };
@@ -51,6 +52,8 @@ static struct genl_multicast_group ieee802154_beacon_mcgrp = {
 int ieee802154_nl_assoc_indic(struct net_device *dev,
 		struct ieee802154_addr *addr, u8 cap)
 =======
+=======
+>>>>>>> v3.18
 static int nla_put_hwaddr(struct sk_buff *msg, int type, __le64 hwaddr)
 {
 	return nla_put_u64(msg, type, swab64((__force u64)hwaddr));
@@ -74,6 +77,9 @@ static __le16 nla_get_shortaddr(const struct nlattr *nla)
 int ieee802154_nl_assoc_indic(struct net_device *dev,
 			      struct ieee802154_addr *addr,
 			      u8 cap)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct sk_buff *msg;
@@ -81,7 +87,11 @@ int ieee802154_nl_assoc_indic(struct net_device *dev,
 	pr_debug("%s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr->addr_type != IEEE802154_ADDR_LONG) {
+=======
+	if (addr->mode != IEEE802154_ADDR_LONG) {
+>>>>>>> v3.18
 =======
 	if (addr->mode != IEEE802154_ADDR_LONG) {
 >>>>>>> v3.18
@@ -98,6 +108,7 @@ int ieee802154_nl_assoc_indic(struct net_device *dev,
 	    nla_put(msg, IEEE802154_ATTR_HW_ADDR, IEEE802154_ADDR_LEN,
 		    dev->dev_addr) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nla_put(msg, IEEE802154_ATTR_SRC_HW_ADDR, IEEE802154_ADDR_LEN,
 		    addr->hwaddr) ||
 	    nla_put_u8(msg, IEEE802154_ATTR_CAPABILITY, cap))
@@ -105,12 +116,17 @@ int ieee802154_nl_assoc_indic(struct net_device *dev,
 
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
 =======
+=======
+>>>>>>> v3.18
 	    nla_put_hwaddr(msg, IEEE802154_ATTR_SRC_HW_ADDR,
 			   addr->extended_addr) ||
 	    nla_put_u8(msg, IEEE802154_ATTR_CAPABILITY, cap))
 		goto nla_put_failure;
 
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 nla_put_failure:
@@ -120,8 +136,13 @@ nla_put_failure:
 EXPORT_SYMBOL(ieee802154_nl_assoc_indic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ieee802154_nl_assoc_confirm(struct net_device *dev, u16 short_addr,
 		u8 status)
+=======
+int ieee802154_nl_assoc_confirm(struct net_device *dev, __le16 short_addr,
+				u8 status)
+>>>>>>> v3.18
 =======
 int ieee802154_nl_assoc_confirm(struct net_device *dev, __le16 short_addr,
 				u8 status)
@@ -140,15 +161,21 @@ int ieee802154_nl_assoc_confirm(struct net_device *dev, __le16 short_addr,
 	    nla_put(msg, IEEE802154_ATTR_HW_ADDR, IEEE802154_ADDR_LEN,
 		    dev->dev_addr) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nla_put_u16(msg, IEEE802154_ATTR_SHORT_ADDR, short_addr) ||
 	    nla_put_u8(msg, IEEE802154_ATTR_STATUS, status))
 		goto nla_put_failure;
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
 =======
+=======
+>>>>>>> v3.18
 	    nla_put_shortaddr(msg, IEEE802154_ATTR_SHORT_ADDR, short_addr) ||
 	    nla_put_u8(msg, IEEE802154_ATTR_STATUS, status))
 		goto nla_put_failure;
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 nla_put_failure:
@@ -159,7 +186,12 @@ EXPORT_SYMBOL(ieee802154_nl_assoc_confirm);
 
 int ieee802154_nl_disassoc_indic(struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ieee802154_addr *addr, u8 reason)
+=======
+				 struct ieee802154_addr *addr,
+				 u8 reason)
+>>>>>>> v3.18
 =======
 				 struct ieee802154_addr *addr,
 				 u8 reason)
@@ -179,6 +211,7 @@ int ieee802154_nl_disassoc_indic(struct net_device *dev,
 		    dev->dev_addr))
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr->addr_type == IEEE802154_ADDR_LONG) {
 		if (nla_put(msg, IEEE802154_ATTR_SRC_HW_ADDR, IEEE802154_ADDR_LEN,
 			    addr->hwaddr))
@@ -187,6 +220,8 @@ int ieee802154_nl_disassoc_indic(struct net_device *dev,
 		if (nla_put_u16(msg, IEEE802154_ATTR_SRC_SHORT_ADDR,
 				addr->short_addr))
 =======
+=======
+>>>>>>> v3.18
 	if (addr->mode == IEEE802154_ADDR_LONG) {
 		if (nla_put_hwaddr(msg, IEEE802154_ATTR_SRC_HW_ADDR,
 				   addr->extended_addr))
@@ -194,13 +229,20 @@ int ieee802154_nl_disassoc_indic(struct net_device *dev,
 	} else {
 		if (nla_put_shortaddr(msg, IEEE802154_ATTR_SRC_SHORT_ADDR,
 				      addr->short_addr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto nla_put_failure;
 	}
 	if (nla_put_u8(msg, IEEE802154_ATTR_REASON, reason))
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
+=======
+	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+>>>>>>> v3.18
 =======
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
 >>>>>>> v3.18
@@ -228,7 +270,11 @@ int ieee802154_nl_disassoc_confirm(struct net_device *dev, u8 status)
 	    nla_put_u8(msg, IEEE802154_ATTR_STATUS, status))
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
+=======
+	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+>>>>>>> v3.18
 =======
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
 >>>>>>> v3.18
@@ -240,8 +286,13 @@ nla_put_failure:
 EXPORT_SYMBOL(ieee802154_nl_disassoc_confirm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ieee802154_nl_beacon_indic(struct net_device *dev,
 		u16 panid, u16 coord_addr)
+=======
+int ieee802154_nl_beacon_indic(struct net_device *dev, __le16 panid,
+			       __le16 coord_addr)
+>>>>>>> v3.18
 =======
 int ieee802154_nl_beacon_indic(struct net_device *dev, __le16 panid,
 			       __le16 coord_addr)
@@ -260,16 +311,22 @@ int ieee802154_nl_beacon_indic(struct net_device *dev, __le16 panid,
 	    nla_put(msg, IEEE802154_ATTR_HW_ADDR, IEEE802154_ADDR_LEN,
 		    dev->dev_addr) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nla_put_u16(msg, IEEE802154_ATTR_COORD_SHORT_ADDR, coord_addr) ||
 	    nla_put_u16(msg, IEEE802154_ATTR_COORD_PAN_ID, panid))
 		goto nla_put_failure;
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
 =======
+=======
+>>>>>>> v3.18
 	    nla_put_shortaddr(msg, IEEE802154_ATTR_COORD_SHORT_ADDR,
 			      coord_addr) ||
 	    nla_put_shortaddr(msg, IEEE802154_ATTR_COORD_PAN_ID, panid))
 		goto nla_put_failure;
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 nla_put_failure:
@@ -280,8 +337,14 @@ EXPORT_SYMBOL(ieee802154_nl_beacon_indic);
 
 int ieee802154_nl_scan_confirm(struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 status, u8 scan_type, u32 unscanned, u8 page,
 		u8 *edl/* , struct list_head *pan_desc_list */)
+=======
+			       u8 status, u8 scan_type,
+			       u32 unscanned, u8 page,
+			       u8 *edl/* , struct list_head *pan_desc_list */)
+>>>>>>> v3.18
 =======
 			       u8 status, u8 scan_type,
 			       u32 unscanned, u8 page,
@@ -308,7 +371,11 @@ int ieee802154_nl_scan_confirm(struct net_device *dev,
 	     nla_put(msg, IEEE802154_ATTR_ED_LIST, 27, edl)))
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
+=======
+	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+>>>>>>> v3.18
 =======
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
 >>>>>>> v3.18
@@ -336,7 +403,11 @@ int ieee802154_nl_start_confirm(struct net_device *dev, u8 status)
 	    nla_put_u8(msg, IEEE802154_ATTR_STATUS, status))
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ieee802154_nl_mcast(msg, ieee802154_coord_mcgrp.id);
+=======
+	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
+>>>>>>> v3.18
 =======
 	return ieee802154_nl_mcast(msg, IEEE802154_COORD_MCGRP);
 >>>>>>> v3.18
@@ -349,22 +420,29 @@ EXPORT_SYMBOL(ieee802154_nl_start_confirm);
 
 static int ieee802154_nl_fill_iface(struct sk_buff *msg, u32 portid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 seq, int flags, struct net_device *dev)
 {
 	void *hdr;
 	struct wpan_phy *phy;
 =======
+=======
+>>>>>>> v3.18
 				    u32 seq, int flags, struct net_device *dev)
 {
 	void *hdr;
 	struct wpan_phy *phy;
 	struct ieee802154_mlme_ops *ops;
 	__le16 short_addr, pan_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("%s\n", __func__);
 
 	hdr = genlmsg_put(msg, 0, seq, &nl802154_family, flags,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		IEEE802154_LIST_IFACE);
 	if (!hdr)
@@ -374,6 +452,8 @@ static int ieee802154_nl_fill_iface(struct sk_buff *msg, u32 portid,
 	BUG_ON(!phy);
 
 =======
+=======
+>>>>>>> v3.18
 			  IEEE802154_LIST_IFACE);
 	if (!hdr)
 		goto out;
@@ -385,6 +465,9 @@ static int ieee802154_nl_fill_iface(struct sk_buff *msg, u32 portid,
 	short_addr = ops->get_short_addr(dev);
 	pan_id = ops->get_pan_id(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (nla_put_string(msg, IEEE802154_ATTR_DEV_NAME, dev->name) ||
 	    nla_put_string(msg, IEEE802154_ATTR_PHY_NAME, wpan_phy_name(phy)) ||
@@ -392,12 +475,15 @@ static int ieee802154_nl_fill_iface(struct sk_buff *msg, u32 portid,
 	    nla_put(msg, IEEE802154_ATTR_HW_ADDR, IEEE802154_ADDR_LEN,
 		    dev->dev_addr) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nla_put_u16(msg, IEEE802154_ATTR_SHORT_ADDR,
 			ieee802154_mlme_ops(dev)->get_short_addr(dev)) ||
 	    nla_put_u16(msg, IEEE802154_ATTR_PAN_ID,
 			ieee802154_mlme_ops(dev)->get_pan_id(dev)))
 		goto nla_put_failure;
 =======
+=======
+>>>>>>> v3.18
 	    nla_put_shortaddr(msg, IEEE802154_ATTR_SHORT_ADDR, short_addr) ||
 	    nla_put_shortaddr(msg, IEEE802154_ATTR_PAN_ID, pan_id))
 		goto nla_put_failure;
@@ -425,6 +511,9 @@ static int ieee802154_nl_fill_iface(struct sk_buff *msg, u32 portid,
 			goto nla_put_failure;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wpan_phy_put(phy);
 	return genlmsg_end(msg, hdr);
@@ -444,6 +533,7 @@ static struct net_device *ieee802154_nl_get_dev(struct genl_info *info)
 	if (info->attrs[IEEE802154_ATTR_DEV_NAME]) {
 		char name[IFNAMSIZ + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nla_strlcpy(name, info->attrs[IEEE802154_ATTR_DEV_NAME],
 				sizeof(name));
 		dev = dev_get_by_name(&init_net, name);
@@ -453,6 +543,8 @@ static struct net_device *ieee802154_nl_get_dev(struct genl_info *info)
 	else
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 
 		nla_strlcpy(name, info->attrs[IEEE802154_ATTR_DEV_NAME],
 			    sizeof(name));
@@ -463,6 +555,9 @@ static struct net_device *ieee802154_nl_get_dev(struct genl_info *info)
 	} else {
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!dev)
@@ -477,8 +572,12 @@ static struct net_device *ieee802154_nl_get_dev(struct genl_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ieee802154_associate_req(struct sk_buff *skb,
 		struct genl_info *info)
+=======
+int ieee802154_associate_req(struct sk_buff *skb, struct genl_info *info)
+>>>>>>> v3.18
 =======
 int ieee802154_associate_req(struct sk_buff *skb, struct genl_info *info)
 >>>>>>> v3.18
@@ -503,6 +602,7 @@ int ieee802154_associate_req(struct sk_buff *skb, struct genl_info *info)
 
 	if (info->attrs[IEEE802154_ATTR_COORD_HW_ADDR]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr.addr_type = IEEE802154_ADDR_LONG;
 		nla_memcpy(addr.hwaddr,
 				info->attrs[IEEE802154_ATTR_COORD_HW_ADDR],
@@ -514,6 +614,8 @@ int ieee802154_associate_req(struct sk_buff *skb, struct genl_info *info)
 	}
 	addr.pan_id = nla_get_u16(info->attrs[IEEE802154_ATTR_COORD_PAN_ID]);
 =======
+=======
+>>>>>>> v3.18
 		addr.mode = IEEE802154_ADDR_LONG;
 		addr.extended_addr = nla_get_hwaddr(
 				info->attrs[IEEE802154_ATTR_COORD_HW_ADDR]);
@@ -524,6 +626,9 @@ int ieee802154_associate_req(struct sk_buff *skb, struct genl_info *info)
 	}
 	addr.pan_id = nla_get_shortaddr(
 			info->attrs[IEEE802154_ATTR_COORD_PAN_ID]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (info->attrs[IEEE802154_ATTR_PAGE])
@@ -542,8 +647,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ieee802154_associate_resp(struct sk_buff *skb,
 		struct genl_info *info)
+=======
+int ieee802154_associate_resp(struct sk_buff *skb, struct genl_info *info)
+>>>>>>> v3.18
 =======
 int ieee802154_associate_resp(struct sk_buff *skb, struct genl_info *info)
 >>>>>>> v3.18
@@ -564,6 +673,7 @@ int ieee802154_associate_resp(struct sk_buff *skb, struct genl_info *info)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr.addr_type = IEEE802154_ADDR_LONG;
 	nla_memcpy(addr.hwaddr, info->attrs[IEEE802154_ATTR_DEST_HW_ADDR],
 			IEEE802154_ADDR_LEN);
@@ -573,6 +683,8 @@ int ieee802154_associate_resp(struct sk_buff *skb, struct genl_info *info)
 	ret = ieee802154_mlme_ops(dev)->assoc_resp(dev, &addr,
 		nla_get_u16(info->attrs[IEEE802154_ATTR_DEST_SHORT_ADDR]),
 =======
+=======
+>>>>>>> v3.18
 	addr.mode = IEEE802154_ADDR_LONG;
 	addr.extended_addr = nla_get_hwaddr(
 			info->attrs[IEEE802154_ATTR_DEST_HW_ADDR]);
@@ -580,6 +692,9 @@ int ieee802154_associate_resp(struct sk_buff *skb, struct genl_info *info)
 
 	ret = ieee802154_mlme_ops(dev)->assoc_resp(dev, &addr,
 		nla_get_shortaddr(info->attrs[IEEE802154_ATTR_DEST_SHORT_ADDR]),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nla_get_u8(info->attrs[IEEE802154_ATTR_STATUS]));
 
@@ -589,8 +704,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ieee802154_disassociate_req(struct sk_buff *skb,
 		struct genl_info *info)
+=======
+int ieee802154_disassociate_req(struct sk_buff *skb, struct genl_info *info)
+>>>>>>> v3.18
 =======
 int ieee802154_disassociate_req(struct sk_buff *skb, struct genl_info *info)
 >>>>>>> v3.18
@@ -601,7 +720,11 @@ int ieee802154_disassociate_req(struct sk_buff *skb, struct genl_info *info)
 
 	if ((!info->attrs[IEEE802154_ATTR_DEST_HW_ADDR] &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		!info->attrs[IEEE802154_ATTR_DEST_SHORT_ADDR]) ||
+=======
+	    !info->attrs[IEEE802154_ATTR_DEST_SHORT_ADDR]) ||
+>>>>>>> v3.18
 =======
 	    !info->attrs[IEEE802154_ATTR_DEST_SHORT_ADDR]) ||
 >>>>>>> v3.18
@@ -616,6 +739,7 @@ int ieee802154_disassociate_req(struct sk_buff *skb, struct genl_info *info)
 
 	if (info->attrs[IEEE802154_ATTR_DEST_HW_ADDR]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr.addr_type = IEEE802154_ADDR_LONG;
 		nla_memcpy(addr.hwaddr,
 				info->attrs[IEEE802154_ATTR_DEST_HW_ADDR],
@@ -624,12 +748,17 @@ int ieee802154_disassociate_req(struct sk_buff *skb, struct genl_info *info)
 		addr.addr_type = IEEE802154_ADDR_SHORT;
 		addr.short_addr = nla_get_u16(
 =======
+=======
+>>>>>>> v3.18
 		addr.mode = IEEE802154_ADDR_LONG;
 		addr.extended_addr = nla_get_hwaddr(
 				info->attrs[IEEE802154_ATTR_DEST_HW_ADDR]);
 	} else {
 		addr.mode = IEEE802154_ADDR_SHORT;
 		addr.short_addr = nla_get_shortaddr(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				info->attrs[IEEE802154_ATTR_DEST_SHORT_ADDR]);
 	}
@@ -644,6 +773,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * PANid, channel, beacon_order = 15, superframe_order = 15,
  * PAN_coordinator, battery_life_extension = 0,
@@ -651,11 +781,16 @@ out:
 */
 static int ieee802154_start_req(struct sk_buff *skb, struct genl_info *info)
 =======
+=======
+>>>>>>> v3.18
 /* PANid, channel, beacon_order = 15, superframe_order = 15,
  * PAN_coordinator, battery_life_extension = 0,
  * coord_realignment = 0, security_enable = 0
 */
 int ieee802154_start_req(struct sk_buff *skb, struct genl_info *info)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net_device *dev;
@@ -684,16 +819,22 @@ int ieee802154_start_req(struct sk_buff *skb, struct genl_info *info)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr.addr_type = IEEE802154_ADDR_SHORT;
 	addr.short_addr = nla_get_u16(
 			info->attrs[IEEE802154_ATTR_COORD_SHORT_ADDR]);
 	addr.pan_id = nla_get_u16(info->attrs[IEEE802154_ATTR_COORD_PAN_ID]);
 =======
+=======
+>>>>>>> v3.18
 	addr.mode = IEEE802154_ADDR_SHORT;
 	addr.short_addr = nla_get_shortaddr(
 			info->attrs[IEEE802154_ATTR_COORD_SHORT_ADDR]);
 	addr.pan_id = nla_get_shortaddr(
 			info->attrs[IEEE802154_ATTR_COORD_PAN_ID]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	channel = nla_get_u8(info->attrs[IEEE802154_ATTR_CHANNEL]);
@@ -710,7 +851,11 @@ int ieee802154_start_req(struct sk_buff *skb, struct genl_info *info)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr.short_addr == IEEE802154_ADDR_BROADCAST) {
+=======
+	if (addr.short_addr == cpu_to_le16(IEEE802154_ADDR_BROADCAST)) {
+>>>>>>> v3.18
 =======
 	if (addr.short_addr == cpu_to_le16(IEEE802154_ADDR_BROADCAST)) {
 >>>>>>> v3.18
@@ -728,7 +873,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ieee802154_scan_req(struct sk_buff *skb, struct genl_info *info)
+=======
+int ieee802154_scan_req(struct sk_buff *skb, struct genl_info *info)
+>>>>>>> v3.18
 =======
 int ieee802154_scan_req(struct sk_buff *skb, struct genl_info *info)
 >>>>>>> v3.18
@@ -762,8 +911,13 @@ int ieee802154_scan_req(struct sk_buff *skb, struct genl_info *info)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ieee802154_mlme_ops(dev)->scan_req(dev, type, channels, page,
 			duration);
+=======
+	ret = ieee802154_mlme_ops(dev)->scan_req(dev, type, channels,
+						 page, duration);
+>>>>>>> v3.18
 =======
 	ret = ieee802154_mlme_ops(dev)->scan_req(dev, type, channels,
 						 page, duration);
@@ -775,17 +929,23 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ieee802154_list_iface(struct sk_buff *skb,
 	struct genl_info *info)
 {
 	/* Request for interface name, index, type, IEEE address,
 	   PAN Id, short address */
 =======
+=======
+>>>>>>> v3.18
 int ieee802154_list_iface(struct sk_buff *skb, struct genl_info *info)
 {
 	/* Request for interface name, index, type, IEEE address,
 	 * PAN Id, short address
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sk_buff *msg;
 	struct net_device *dev = NULL;
@@ -803,7 +963,11 @@ int ieee802154_list_iface(struct sk_buff *skb, struct genl_info *info)
 
 	rc = ieee802154_nl_fill_iface(msg, info->snd_portid, info->snd_seq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0, dev);
+=======
+				      0, dev);
+>>>>>>> v3.18
 =======
 				      0, dev);
 >>>>>>> v3.18
@@ -819,11 +983,17 @@ out_dev:
 	dev_put(dev);
 	return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }
 
 static int ieee802154_dump_iface(struct sk_buff *skb,
 	struct netlink_callback *cb)
+=======
+}
+
+int ieee802154_dump_iface(struct sk_buff *skb, struct netlink_callback *cb)
+>>>>>>> v3.18
 =======
 }
 
@@ -844,7 +1014,12 @@ int ieee802154_dump_iface(struct sk_buff *skb, struct netlink_callback *cb)
 
 		if (ieee802154_nl_fill_iface(skb, NETLINK_CB(cb->skb).portid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cb->nlh->nlmsg_seq, NLM_F_MULTI, dev) < 0)
+=======
+					     cb->nlh->nlmsg_seq,
+					     NLM_F_MULTI, dev) < 0)
+>>>>>>> v3.18
 =======
 					     cb->nlh->nlmsg_seq,
 					     NLM_F_MULTI, dev) < 0)
@@ -858,6 +1033,7 @@ cont:
 	return skb->len;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct genl_ops ieee802154_coordinator_ops[] = {
 	IEEE802154_OP(IEEE802154_ASSOCIATE_REQ, ieee802154_associate_req),
@@ -897,6 +1073,8 @@ int nl802154_mac_register(void)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 int ieee802154_set_macparams(struct sk_buff *skb, struct genl_info *info)
 {
 	struct net_device *dev = NULL;
@@ -1796,4 +1974,7 @@ int ieee802154_llsec_dump_seclevels(struct sk_buff *skb,
 {
 	return ieee802154_llsec_dump_table(skb, cb, llsec_iter_seclevels);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

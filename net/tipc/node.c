@@ -2,8 +2,13 @@
  * net/tipc/node.c: TIPC node management routines
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2006, 2012 Ericsson AB
  * Copyright (c) 2005-2006, 2010-2011, Wind River Systems
+=======
+ * Copyright (c) 2000-2006, 2012-2014, Ericsson AB
+ * Copyright (c) 2005-2006, 2010-2014, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2006, 2012-2014, Ericsson AB
  * Copyright (c) 2005-2006, 2010-2014, Wind River Systems
@@ -44,6 +49,10 @@
 #include "node.h"
 #include "name_distr.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "socket.h"
+>>>>>>> v3.18
 =======
 #include "socket.h"
 >>>>>>> v3.18
@@ -54,6 +63,7 @@ static void node_lost_contact(struct tipc_node *n_ptr);
 static void node_established_contact(struct tipc_node *n_ptr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_SPINLOCK(node_create_lock);
 
 static struct hlist_head node_htable[NODE_HTABLE_SIZE];
@@ -62,6 +72,8 @@ static u32 tipc_num_nodes;
 
 static atomic_t tipc_num_links = ATOMIC_INIT(0);
 =======
+=======
+>>>>>>> v3.18
 static struct hlist_head node_htable[NODE_HTABLE_SIZE];
 LIST_HEAD(tipc_node_list);
 static u32 tipc_num_nodes;
@@ -74,6 +86,9 @@ struct tipc_sock_conn {
 	u32 peer_node;
 	struct list_head list;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -98,6 +113,7 @@ struct tipc_node *tipc_node_find(u32 addr)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each_entry(node, &node_htable[tipc_hashfn(addr)], hash) {
 		if (node->addr == addr)
 			return node;
@@ -115,6 +131,8 @@ struct tipc_node *tipc_node_find(u32 addr)
  * but this is a non-trivial change.)
  */
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	hlist_for_each_entry_rcu(node, &node_htable[tipc_hashfn(addr)], hash) {
 		if (node->addr == addr) {
@@ -126,11 +144,15 @@ struct tipc_node *tipc_node_find(u32 addr)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tipc_node *tipc_node_create(u32 addr)
 {
 	struct tipc_node *n_ptr, *temp_node;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&node_create_lock);
 
@@ -144,11 +166,16 @@ struct tipc_node *tipc_node_create(u32 addr)
 	if (!n_ptr) {
 		spin_unlock_bh(&node_create_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&node_list_lock);
 
 	n_ptr = kzalloc(sizeof(*n_ptr), GFP_ATOMIC);
 	if (!n_ptr) {
 		spin_unlock_bh(&node_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_warn("Node creation failed, no memory\n");
 		return NULL;
@@ -160,6 +187,7 @@ struct tipc_node *tipc_node_create(u32 addr)
 	INIT_LIST_HEAD(&n_ptr->list);
 	INIT_LIST_HEAD(&n_ptr->nsub);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	hlist_add_head(&n_ptr->hash, &node_htable[tipc_hashfn(addr)]);
 
@@ -170,6 +198,8 @@ struct tipc_node *tipc_node_create(u32 addr)
 	list_add_tail(&n_ptr->list, &temp_node->list);
 	n_ptr->block_setup = WAIT_PEER_DOWN;
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&n_ptr->conn_sks);
 	__skb_queue_head_init(&n_ptr->waiting_sks);
 
@@ -181,11 +211,15 @@ struct tipc_node *tipc_node_create(u32 addr)
 	}
 	list_add_tail_rcu(&n_ptr->list, &temp_node->list);
 	n_ptr->action_flags = TIPC_WAIT_PEER_LINKS_DOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	n_ptr->signature = INVALID_NODE_SIG;
 
 	tipc_num_nodes++;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_unlock_bh(&node_create_lock);
 	return n_ptr;
@@ -197,6 +231,8 @@ void tipc_node_delete(struct tipc_node *n_ptr)
 	hlist_del(&n_ptr->hash);
 	kfree(n_ptr);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_bh(&node_list_lock);
 	return n_ptr;
 }
@@ -206,13 +242,19 @@ static void tipc_node_delete(struct tipc_node *n_ptr)
 	list_del_rcu(&n_ptr->list);
 	hlist_del_rcu(&n_ptr->hash);
 	kfree_rcu(n_ptr, rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tipc_num_nodes--;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void tipc_node_stop(void)
 {
 	struct tipc_node *node, *t_node;
@@ -288,6 +330,9 @@ void tipc_node_abort_sock_conns(struct list_head *conns)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * tipc_node_link_up - handle addition of link
@@ -300,20 +345,27 @@ void tipc_node_link_up(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 
 	n_ptr->working_links++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_info("Established link <%s> on network plane %c\n",
 		l_ptr->name, l_ptr->b_ptr->net_plane);
 =======
+=======
+>>>>>>> v3.18
 	n_ptr->action_flags |= TIPC_NOTIFY_LINK_UP;
 	n_ptr->link_id = l_ptr->peer_bearer_id << 16 | l_ptr->bearer_id;
 
 	pr_info("Established link <%s> on network plane %c\n",
 		l_ptr->name, l_ptr->net_plane);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!active[0]) {
 		active[0] = active[1] = l_ptr;
 		node_established_contact(n_ptr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 	}
@@ -326,6 +378,8 @@ void tipc_node_link_up(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 		active[0] = l_ptr;
 		return;
 =======
+=======
+>>>>>>> v3.18
 		goto exit;
 	}
 	if (l_ptr->priority < active[0]->priority) {
@@ -336,6 +390,9 @@ void tipc_node_link_up(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 	if (l_ptr->priority == active[0]->priority) {
 		active[0] = l_ptr;
 		goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	pr_info("Old link <%s> becomes standby\n", active[0]->name);
@@ -343,11 +400,17 @@ void tipc_node_link_up(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 		pr_info("Old link <%s> becomes standby\n", active[1]->name);
 	active[0] = active[1] = l_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 exit:
 	/* Leave room for changeover header when returning 'mtu' to users: */
 	n_ptr->act_mtus[0] = active[0]->max_pkt - INT_H_SIZE;
 	n_ptr->act_mtus[1] = active[1]->max_pkt - INT_H_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -387,6 +450,7 @@ void tipc_node_link_down(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 
 	n_ptr->working_links--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!tipc_link_is_active(l_ptr)) {
 		pr_info("Lost standby link <%s> on network plane %c\n",
@@ -396,6 +460,8 @@ void tipc_node_link_down(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 	pr_info("Lost link <%s> on network plane %c\n",
 		l_ptr->name, l_ptr->b_ptr->net_plane);
 =======
+=======
+>>>>>>> v3.18
 	n_ptr->action_flags |= TIPC_NOTIFY_LINK_DOWN;
 	n_ptr->link_id = l_ptr->peer_bearer_id << 16 | l_ptr->bearer_id;
 
@@ -406,6 +472,9 @@ void tipc_node_link_down(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 	}
 	pr_info("Lost link <%s> on network plane %c\n",
 		l_ptr->name, l_ptr->net_plane);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	active = &n_ptr->active_links[0];
@@ -417,10 +486,13 @@ void tipc_node_link_down(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 		node_select_active_links(n_ptr);
 	if (tipc_node_is_up(n_ptr))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tipc_link_changeover(l_ptr);
 	else
 		node_lost_contact(n_ptr);
 =======
+=======
+>>>>>>> v3.18
 		tipc_link_failover_send_queue(l_ptr);
 	else
 		node_lost_contact(n_ptr);
@@ -437,6 +509,9 @@ void tipc_node_link_down(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 		n_ptr->act_mtus[0] = MAX_MSG_SIZE;
 		n_ptr->act_mtus[1] = MAX_MSG_SIZE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -446,11 +521,14 @@ int tipc_node_active_links(struct tipc_node *n_ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tipc_node_redundant_links(struct tipc_node *n_ptr)
 {
 	return n_ptr->working_links > 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int tipc_node_is_up(struct tipc_node *n_ptr)
@@ -461,13 +539,19 @@ int tipc_node_is_up(struct tipc_node *n_ptr)
 void tipc_node_attach_link(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n_ptr->links[l_ptr->b_ptr->identity] = l_ptr;
 	atomic_inc(&tipc_num_links);
 =======
+=======
+>>>>>>> v3.18
 	n_ptr->links[l_ptr->bearer_id] = l_ptr;
 	spin_lock_bh(&node_list_lock);
 	tipc_num_links++;
 	spin_unlock_bh(&node_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	n_ptr->link_cnt++;
 }
@@ -475,10 +559,13 @@ void tipc_node_attach_link(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 void tipc_node_detach_link(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n_ptr->links[l_ptr->b_ptr->identity] = NULL;
 	atomic_dec(&tipc_num_links);
 	n_ptr->link_cnt--;
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < MAX_BEARERS; i++) {
@@ -490,13 +577,20 @@ void tipc_node_detach_link(struct tipc_node *n_ptr, struct tipc_link *l_ptr)
 		spin_unlock_bh(&node_list_lock);
 		n_ptr->link_cnt--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void node_established_contact(struct tipc_node *n_ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tipc_k_signal((Handler)tipc_named_node_up, n_ptr->addr);
+=======
+	n_ptr->action_flags |= TIPC_NOTIFY_NODE_UP;
+>>>>>>> v3.18
 =======
 	n_ptr->action_flags |= TIPC_NOTIFY_NODE_UP;
 >>>>>>> v3.18
@@ -505,6 +599,7 @@ static void node_established_contact(struct tipc_node *n_ptr)
 	tipc_bclink_add_node(n_ptr->addr);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void node_name_purge_complete(unsigned long node_addr)
 {
@@ -522,6 +617,8 @@ static void node_name_purge_complete(unsigned long node_addr)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void node_lost_contact(struct tipc_node *n_ptr)
 {
 	char addr_string[16];
@@ -532,6 +629,7 @@ static void node_lost_contact(struct tipc_node *n_ptr)
 
 	/* Flush broadcast link info associated with lost node */
 	if (n_ptr->bclink.recv_permitted) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		while (n_ptr->bclink.deferred_head) {
 			struct sk_buff *buf = n_ptr->bclink.deferred_head;
@@ -544,12 +642,17 @@ static void node_lost_contact(struct tipc_node *n_ptr)
 			kfree_skb(n_ptr->bclink.defragm);
 			n_ptr->bclink.defragm = NULL;
 =======
+=======
+>>>>>>> v3.18
 		kfree_skb_list(n_ptr->bclink.deferred_head);
 		n_ptr->bclink.deferred_size = 0;
 
 		if (n_ptr->bclink.reasm_buf) {
 			kfree_skb(n_ptr->bclink.reasm_buf);
 			n_ptr->bclink.reasm_buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -570,6 +673,7 @@ static void node_lost_contact(struct tipc_node *n_ptr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Notify subscribers */
 	tipc_nodesub_notify(n_ptr);
 
@@ -577,6 +681,8 @@ static void node_lost_contact(struct tipc_node *n_ptr)
 	n_ptr->block_setup = WAIT_PEER_DOWN | WAIT_NAMES_GONE;
 	tipc_k_signal((Handler)node_name_purge_complete, n_ptr->addr);
 =======
+=======
+>>>>>>> v3.18
 	n_ptr->action_flags &= ~TIPC_WAIT_OWN_LINKS_DOWN;
 
 	/* Notify subscribers and prevent re-contact with node until
@@ -584,6 +690,9 @@ static void node_lost_contact(struct tipc_node *n_ptr)
 	 */
 	n_ptr->action_flags |= TIPC_WAIT_PEER_LINKS_DOWN |
 			       TIPC_NOTIFY_NODE_DOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -604,9 +713,15 @@ struct sk_buff *tipc_node_get_nodes(const void *req_tlv_area, int req_tlv_space)
 						   " (network address)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock_bh(&tipc_net_lock);
 	if (!tipc_num_nodes) {
 		read_unlock_bh(&tipc_net_lock);
+=======
+	spin_lock_bh(&node_list_lock);
+	if (!tipc_num_nodes) {
+		spin_unlock_bh(&node_list_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&node_list_lock);
 	if (!tipc_num_nodes) {
@@ -618,6 +733,7 @@ struct sk_buff *tipc_node_get_nodes(const void *req_tlv_area, int req_tlv_space)
 	/* For now, get space for all other nodes */
 	payload_size = TLV_SPACE(sizeof(node_info)) * tipc_num_nodes;
 	if (payload_size > 32768u) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		read_unlock_bh(&tipc_net_lock);
 		return tipc_cfg_reply_error_string(TIPC_CFG_NOT_SUPPORTED
@@ -632,6 +748,8 @@ struct sk_buff *tipc_node_get_nodes(const void *req_tlv_area, int req_tlv_space)
 	/* Add TLVs for all nodes in scope */
 	list_for_each_entry(n_ptr, &tipc_node_list, list) {
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_bh(&node_list_lock);
 		return tipc_cfg_reply_error_string(TIPC_CFG_NOT_SUPPORTED
 						   " (too many nodes)");
@@ -645,6 +763,9 @@ struct sk_buff *tipc_node_get_nodes(const void *req_tlv_area, int req_tlv_space)
 	/* Add TLVs for all nodes in scope */
 	rcu_read_lock();
 	list_for_each_entry_rcu(n_ptr, &tipc_node_list, list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!tipc_in_scope(domain, n_ptr->addr))
 			continue;
@@ -654,8 +775,12 @@ struct sk_buff *tipc_node_get_nodes(const void *req_tlv_area, int req_tlv_space)
 				    &node_info, sizeof(node_info));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	read_unlock_bh(&tipc_net_lock);
+=======
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_unlock();
 >>>>>>> v3.18
@@ -682,6 +807,7 @@ struct sk_buff *tipc_node_get_links(const void *req_tlv_area, int req_tlv_space)
 		return tipc_cfg_reply_none();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock_bh(&tipc_net_lock);
 
 	/* Get space for all unicast links + broadcast link */
@@ -698,6 +824,8 @@ struct sk_buff *tipc_node_get_links(const void *req_tlv_area, int req_tlv_space)
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&node_list_lock);
 	/* Get space for all unicast links + broadcast link */
 	payload_size = TLV_SPACE((sizeof(link_info)) * (tipc_num_links + 1));
@@ -711,6 +839,9 @@ struct sk_buff *tipc_node_get_links(const void *req_tlv_area, int req_tlv_space)
 	buf = tipc_cfg_reply_alloc(payload_size);
 	if (!buf)
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Add TLV for broadcast link */
@@ -721,7 +852,12 @@ struct sk_buff *tipc_node_get_links(const void *req_tlv_area, int req_tlv_space)
 
 	/* Add TLVs for any other links in scope */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(n_ptr, &tipc_node_list, list) {
+=======
+	rcu_read_lock();
+	list_for_each_entry_rcu(n_ptr, &tipc_node_list, list) {
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	list_for_each_entry_rcu(n_ptr, &tipc_node_list, list) {
@@ -743,11 +879,14 @@ struct sk_buff *tipc_node_get_links(const void *req_tlv_area, int req_tlv_space)
 		tipc_node_unlock(n_ptr);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	read_unlock_bh(&tipc_net_lock);
 	return buf;
 }
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_unlock();
 	return buf;
 }
@@ -834,4 +973,7 @@ void tipc_node_unlock(struct tipc_node *node)
 		tipc_nametbl_withdraw(TIPC_LINK_STATE, addr,
 				      link_id, addr);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

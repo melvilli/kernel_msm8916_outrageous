@@ -13,6 +13,7 @@
 /*
  * Calling convention :
 <<<<<<< HEAD
+<<<<<<< HEAD
  * rdi : skb pointer
  * esi : offset of byte(s) to fetch in skb (can be scratched)
  * r8  : copy of skb->data
@@ -21,6 +22,8 @@
 #define SKBDATA	%r8
 #define SKF_MAX_NEG_OFF    $(-0x200000) /* SKF_LL_OFF from filter.h */
 =======
+=======
+>>>>>>> v3.18
  * rbx : skb pointer (callee saved)
  * esi : offset of byte(s) to fetch in skb (can be scratched)
  * r10 : copy of skb->data
@@ -31,6 +34,9 @@
 #define MAX_BPF_STACK (512 /* from filter.h */ + \
 	32 /* space for rbx,r13,r14,r15 */ + \
 	8 /* space for skb_copy_bits */)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 sk_load_word:
@@ -82,6 +88,7 @@ sk_load_byte_positive_offset:
 	ret
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * sk_load_byte_msh - BPF_S_LDX_B_MSH helper
  *
@@ -111,10 +118,16 @@ sk_load_byte_msh_positive_offset:
 #define bpf_slow_path_common(LEN)		\
 	mov	%rbx, %rdi; /* arg1 == skb */	\
 >>>>>>> v3.18
+=======
+/* rsi contains offset and can be scratched */
+#define bpf_slow_path_common(LEN)		\
+	mov	%rbx, %rdi; /* arg1 == skb */	\
+>>>>>>> v3.18
 	push	%r9;				\
 	push	SKBDATA;			\
 /* rsi already has offset */			\
 	mov	$LEN,%ecx;	/* len */	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	lea	-12(%rbp),%rdx;			\
 	call	skb_copy_bits;			\
@@ -123,11 +136,16 @@ sk_load_byte_msh_positive_offset:
 	pop	%r9;				\
 	pop	%rdi
 =======
+=======
+>>>>>>> v3.18
 	lea	- MAX_BPF_STACK + 32(%rbp),%rdx;			\
 	call	skb_copy_bits;			\
 	test    %eax,%eax;			\
 	pop	SKBDATA;			\
 	pop	%r9;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -135,7 +153,11 @@ bpf_slow_path_word:
 	bpf_slow_path_common(4)
 	js	bpf_error
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	-12(%rbp),%eax
+=======
+	mov	- MAX_BPF_STACK + 32(%rbp),%eax
+>>>>>>> v3.18
 =======
 	mov	- MAX_BPF_STACK + 32(%rbp),%eax
 >>>>>>> v3.18
@@ -146,7 +168,11 @@ bpf_slow_path_half:
 	bpf_slow_path_common(2)
 	js	bpf_error
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	-12(%rbp),%ax
+=======
+	mov	- MAX_BPF_STACK + 32(%rbp),%ax
+>>>>>>> v3.18
 =======
 	mov	- MAX_BPF_STACK + 32(%rbp),%ax
 >>>>>>> v3.18
@@ -157,6 +183,7 @@ bpf_slow_path_half:
 bpf_slow_path_byte:
 	bpf_slow_path_common(1)
 	js	bpf_error
+<<<<<<< HEAD
 <<<<<<< HEAD
 	movzbl	-12(%rbp),%eax
 	ret
@@ -174,11 +201,16 @@ bpf_slow_path_byte_msh:
 #define sk_negative_common(SIZE)				\
 	push	%rdi;	/* save skb */				\
 =======
+=======
+>>>>>>> v3.18
 	movzbl	- MAX_BPF_STACK + 32(%rbp),%eax
 	ret
 
 #define sk_negative_common(SIZE)				\
 	mov	%rbx, %rdi; /* arg1 == skb */			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	push	%r9;						\
 	push	SKBDATA;					\
@@ -189,10 +221,15 @@ bpf_slow_path_byte_msh:
 	pop	SKBDATA;					\
 	pop	%r9;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pop	%rdi;						\
 	jz	bpf_error
 
 
+=======
+	jz	bpf_error
+
+>>>>>>> v3.18
 =======
 	jz	bpf_error
 
@@ -228,6 +265,7 @@ sk_load_byte_negative_offset:
 	ret
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bpf_slow_path_byte_msh_neg:
 	cmp	SKF_MAX_NEG_OFF, %esi
 	jl	bpf_error
@@ -246,6 +284,8 @@ bpf_error:
 	xor		%eax,%eax
 	mov		-8(%rbp),%rbx
 =======
+=======
+>>>>>>> v3.18
 bpf_error:
 # force a return 0 from jit handler
 	xor	%eax,%eax
@@ -253,6 +293,9 @@ bpf_error:
 	mov	- MAX_BPF_STACK + 8(%rbp),%r13
 	mov	- MAX_BPF_STACK + 16(%rbp),%r14
 	mov	- MAX_BPF_STACK + 24(%rbp),%r15
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	leaveq
 	ret

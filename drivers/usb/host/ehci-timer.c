@@ -73,6 +73,10 @@ static unsigned event_delays_ns[] = {
 	1125 * NSEC_PER_USEC,	/* EHCI_HRTIMER_UNLINK_INTR */
 	2 * NSEC_PER_MSEC,	/* EHCI_HRTIMER_FREE_ITDS */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	5 * NSEC_PER_MSEC,	/* EHCI_HRTIMER_START_UNLINK_INTR */
+>>>>>>> v3.18
 =======
 	5 * NSEC_PER_MSEC,	/* EHCI_HRTIMER_START_UNLINK_INTR */
 >>>>>>> v3.18
@@ -220,7 +224,10 @@ static void ehci_handle_controller_death(struct ehci_hcd *ehci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* start to unlink interrupt QHs  */
 static void ehci_handle_start_intr_unlinks(struct ehci_hcd *ehci)
 {
@@ -251,6 +258,9 @@ static void ehci_handle_start_intr_unlinks(struct ehci_hcd *ehci)
 		++ehci->intr_unlink_wait_cycle;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Handle unlinked interrupt QHs once they are gone from the hardware */
@@ -274,7 +284,11 @@ static void ehci_handle_intr_unlinks(struct ehci_hcd *ehci)
 		if (!stopped && qh->unlink_cycle == ehci->intr_unlink_cycle)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del(&qh->unlink_node);
+=======
+		list_del_init(&qh->unlink_node);
+>>>>>>> v3.18
 =======
 		list_del_init(&qh->unlink_node);
 >>>>>>> v3.18
@@ -405,6 +419,10 @@ static void (*event_handlers[])(struct ehci_hcd *) = {
 	ehci_handle_intr_unlinks,	/* EHCI_HRTIMER_UNLINK_INTR */
 	end_free_itds,			/* EHCI_HRTIMER_FREE_ITDS */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ehci_handle_start_intr_unlinks,	/* EHCI_HRTIMER_START_UNLINK_INTR */
+>>>>>>> v3.18
 =======
 	ehci_handle_start_intr_unlinks,	/* EHCI_HRTIMER_START_UNLINK_INTR */
 >>>>>>> v3.18

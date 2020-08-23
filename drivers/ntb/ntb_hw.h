@@ -46,6 +46,7 @@
  * Jon Mason <jon.mason@intel.com>
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define PCI_DEVICE_ID_INTEL_NTB_B2B_JSF		0x3725
 #define PCI_DEVICE_ID_INTEL_NTB_CLASSIC_JSF	0x3726
@@ -72,6 +73,8 @@
 #define NTB_NUM_MW		2
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ntb.h>
 
 #define PCI_DEVICE_ID_INTEL_NTB_B2B_JSF		0x3725
@@ -115,6 +118,9 @@ static inline void writeq(u64 val, void __iomem *addr)
 
 #define NTB_HB_TIMEOUT		msecs_to_jiffies(1000)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum ntb_hw_event {
 	NTB_EVENT_SW_EVENT0 = 0,
@@ -133,6 +139,7 @@ struct ntb_mw {
 
 struct ntb_db_cb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*callback) (void *data, int db_num);
 	unsigned int db_num;
 	void *data;
@@ -140,6 +147,8 @@ struct ntb_db_cb {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int (*callback)(void *data, int db_num);
 	unsigned int db_num;
 	void *data;
@@ -149,11 +158,15 @@ struct ntb_db_cb {
 
 #define WA_SNB_ERR	0x00000001
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ntb_device {
 	struct pci_dev *pdev;
 	struct msix_entry *msix_entries;
 	void __iomem *reg_base;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ntb_mw mw[NTB_NUM_MW];
 	struct {
@@ -168,6 +181,8 @@ struct ntb_device {
 		void __iomem *sbar2_xlat;
 		void __iomem *sbar4_xlat;
 =======
+=======
+>>>>>>> v3.18
 	struct ntb_mw *mw;
 	struct {
 		unsigned char max_mw;
@@ -182,6 +197,9 @@ struct ntb_device {
 		void __iomem *bar2_xlat;
 		void __iomem *bar4_xlat;
 		void __iomem *bar5_xlat;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		void __iomem *spad_write;
 		void __iomem *spad_read;
@@ -200,6 +218,7 @@ struct ntb_device {
 	unsigned char bits_per_vector;
 	unsigned char max_cbs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char link_status;
 	struct delayed_work hb_timer;
 	unsigned long last_ts;
@@ -209,6 +228,8 @@ struct ntb_device {
 
 /**
 =======
+=======
+>>>>>>> v3.18
 	unsigned char link_width;
 	unsigned char link_speed;
 	unsigned char link_status;
@@ -252,6 +273,9 @@ static inline unsigned char ntb_max_mw(struct ntb_device *ndev)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ntb_hw_link_status() - return the hardware link status
  * @ndev: pointer to ntb_device instance
@@ -270,7 +294,11 @@ static inline bool ntb_hw_link_status(struct ntb_device *ndev)
  * @ndev: pointer to ntb_device instance
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Given the ntb pointer return the pci_dev pointerfor the NTB hardware device
+=======
+ * Given the ntb pointer, return the pci_dev pointer for the NTB hardware device
+>>>>>>> v3.18
 =======
  * Given the ntb pointer, return the pci_dev pointer for the NTB hardware device
 >>>>>>> v3.18
@@ -302,17 +330,23 @@ void ntb_unregister_transport(struct ntb_device *ndev);
 void ntb_set_mw_addr(struct ntb_device *ndev, unsigned int mw, u64 addr);
 int ntb_register_db_callback(struct ntb_device *ndev, unsigned int idx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     void *data, void (*db_cb_func) (void *data,
 							     int db_num));
 void ntb_unregister_db_callback(struct ntb_device *ndev, unsigned int idx);
 int ntb_register_event_callback(struct ntb_device *ndev,
 				void (*event_cb_func) (void *handle,
 =======
+=======
+>>>>>>> v3.18
 			     void *data, int (*db_cb_func)(void *data,
 							   int db_num));
 void ntb_unregister_db_callback(struct ntb_device *ndev, unsigned int idx);
 int ntb_register_event_callback(struct ntb_device *ndev,
 				void (*event_cb_func)(void *handle,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						      enum ntb_hw_event event));
 void ntb_unregister_event_callback(struct ntb_device *ndev);
@@ -322,14 +356,20 @@ int ntb_read_local_spad(struct ntb_device *ndev, unsigned int idx, u32 *val);
 int ntb_write_remote_spad(struct ntb_device *ndev, unsigned int idx, u32 val);
 int ntb_read_remote_spad(struct ntb_device *ndev, unsigned int idx, u32 *val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem *ntb_get_mw_vbase(struct ntb_device *ndev, unsigned int mw);
 resource_size_t ntb_get_mw_size(struct ntb_device *ndev, unsigned int mw);
 void ntb_ring_sdb(struct ntb_device *ndev, unsigned int idx);
 =======
+=======
+>>>>>>> v3.18
 resource_size_t ntb_get_mw_base(struct ntb_device *ndev, unsigned int mw);
 void __iomem *ntb_get_mw_vbase(struct ntb_device *ndev, unsigned int mw);
 u64 ntb_get_mw_size(struct ntb_device *ndev, unsigned int mw);
 void ntb_ring_doorbell(struct ntb_device *ndev, unsigned int idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void *ntb_find_transport(struct pci_dev *pdev);
 

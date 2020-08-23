@@ -16,7 +16,11 @@ extern const struct gfs2_glock_operations gfs2_meta_glops;
 extern const struct gfs2_glock_operations gfs2_inode_glops;
 extern const struct gfs2_glock_operations gfs2_rgrp_glops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct gfs2_glock_operations gfs2_trans_glops;
+=======
+extern const struct gfs2_glock_operations gfs2_freeze_glops;
+>>>>>>> v3.18
 =======
 extern const struct gfs2_glock_operations gfs2_freeze_glops;
 >>>>>>> v3.18

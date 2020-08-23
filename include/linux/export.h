@@ -44,7 +44,11 @@ extern struct module __this_module;
  * generate a checksums for some symbols */
 #define __CRC_SYMBOL(sym, sec)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void *__crc_##sym __attribute__((weak));		\
+=======
+	extern __visible void *__crc_##sym __attribute__((weak));		\
+>>>>>>> v3.18
 =======
 	extern __visible void *__crc_##sym __attribute__((weak));		\
 >>>>>>> v3.18
@@ -64,7 +68,12 @@ extern struct module __this_module;
 	__attribute__((section("__ksymtab_strings"), aligned(1))) \
 	= VMLINUX_SYMBOL_STR(sym);				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const struct kernel_symbol __ksymtab_##sym	\
+=======
+	extern const struct kernel_symbol __ksymtab_##sym;	\
+	__visible const struct kernel_symbol __ksymtab_##sym	\
+>>>>>>> v3.18
 =======
 	extern const struct kernel_symbol __ksymtab_##sym;	\
 	__visible const struct kernel_symbol __ksymtab_##sym	\

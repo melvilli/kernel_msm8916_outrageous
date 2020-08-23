@@ -368,6 +368,7 @@ static pci_ers_result_t broadcast_error_message(struct pci_dev *dev,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * aer_do_secondary_bus_reset - perform secondary bus reset
  * @dev: pointer to bridge's pci_dev data structure
  *
@@ -412,6 +413,8 @@ static pci_ers_result_t default_downstream_reset_link(struct pci_dev *dev)
 	dev_printk(KERN_DEBUG, &dev->dev,
 		"Downstream Port link has been reset\n");
 =======
+=======
+>>>>>>> v3.18
  * default_reset_link - default reset function
  * @dev: pointer to pci_dev data structure
  *
@@ -422,6 +425,9 @@ static pci_ers_result_t default_reset_link(struct pci_dev *dev)
 {
 	pci_reset_bridge_secondary_bus(dev);
 	dev_printk(KERN_DEBUG, &dev->dev, "downstream link has been reset\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return PCI_ERS_RESULT_RECOVERED;
 }
@@ -472,8 +478,14 @@ static pci_ers_result_t reset_link(struct pci_dev *dev)
 	if (driver && driver->reset_link) {
 		status = driver->reset_link(udev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (pci_pcie_type(udev) == PCI_EXP_TYPE_DOWNSTREAM) {
 		status = default_downstream_reset_link(udev);
+=======
+	} else if (pci_pcie_type(udev) == PCI_EXP_TYPE_DOWNSTREAM ||
+		pci_pcie_type(udev) == PCI_EXP_TYPE_ROOT_PORT) {
+		status = default_reset_link(udev);
+>>>>>>> v3.18
 =======
 	} else if (pci_pcie_type(udev) == PCI_EXP_TYPE_DOWNSTREAM ||
 		pci_pcie_type(udev) == PCI_EXP_TYPE_ROOT_PORT) {
@@ -577,7 +589,11 @@ static void handle_error_source(struct pcie_device *aerdev,
 	if (info->severity == AER_CORRECTABLE) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Correctable error does not need software intevention.
+=======
+		 * Correctable error does not need software intervention.
+>>>>>>> v3.18
 =======
 		 * Correctable error does not need software intervention.
 >>>>>>> v3.18
@@ -598,8 +614,12 @@ static void aer_recover_work_func(struct work_struct *work);
 #define AER_RECOVER_RING_SIZE		(1 << AER_RECOVER_RING_ORDER)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aer_recover_entry
 {
+=======
+struct aer_recover_entry {
+>>>>>>> v3.18
 =======
 struct aer_recover_entry {
 >>>>>>> v3.18
@@ -634,7 +654,11 @@ void aer_recover_queue(int domain, unsigned int bus, unsigned int devfn,
 
 	spin_lock_irqsave(&aer_recover_ring_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kfifo_put(&aer_recover_ring, &entry))
+=======
+	if (kfifo_put(&aer_recover_ring, entry))
+>>>>>>> v3.18
 =======
 	if (kfifo_put(&aer_recover_ring, entry))
 >>>>>>> v3.18
@@ -849,6 +873,11 @@ void aer_isr(struct work_struct *work)
 		aer_isr_one_error(p_device, &e_src);
 	mutex_unlock(&rpc->rpc_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	wake_up(&rpc->wait_release);
+>>>>>>> v3.18
 =======
 
 	wake_up(&rpc->wait_release);

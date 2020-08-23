@@ -1,7 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-y = -Idrivers/gpu/host1x
 
 host1x-y = \
+=======
+host1x-y = \
+	bus.o \
+>>>>>>> v3.18
 =======
 host1x-y = \
 	bus.o \
@@ -14,6 +19,7 @@ host1x-y = \
 	job.o \
 	debug.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw/host1x01.o
 
 ccflags-y += -Iinclude/drm
@@ -24,10 +30,15 @@ host1x-$(CONFIG_DRM_TEGRA) += drm/output.o drm/rgb.o drm/hdmi.o
 host1x-$(CONFIG_DRM_TEGRA) += drm/gem.o
 host1x-$(CONFIG_DRM_TEGRA) += drm/gr2d.o
 =======
+=======
+>>>>>>> v3.18
 	mipi.o \
 	hw/host1x01.o \
 	hw/host1x02.o \
 	hw/host1x04.o
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_TEGRA_HOST1X) += host1x.o

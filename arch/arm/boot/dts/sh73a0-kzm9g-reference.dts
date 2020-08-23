@@ -13,12 +13,18 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "sh73a0.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include "sh73a0.dtsi"
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -26,9 +32,12 @@
 	compatible = "renesas,kzm9g-reference", "renesas,sh73a0";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chosen {
 		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel earlyprintk=sh-sci.4,115200";
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		serial4 = &scifa4;
 	};
@@ -48,6 +57,9 @@
 
 	chosen {
 		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel rw";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -75,7 +87,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	vmmc_sdhi0: regulator@2 {
 		compatible = "regulator-fixed";
 		regulator-name = "SDHI0 Vcc";
@@ -94,6 +109,9 @@
 		enable-active-high;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lan9220@10000000 {
 		compatible = "smsc,lan9220", "smsc,lan9115";
@@ -101,7 +119,11 @@
 		phy-mode = "mii";
 		interrupt-parent = <&irqpin0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <3 0>;	/* active low */
+=======
+		interrupts = <3 IRQ_TYPE_EDGE_FALLING>;
+>>>>>>> v3.18
 =======
 		interrupts = <3 IRQ_TYPE_EDGE_FALLING>;
 >>>>>>> v3.18
@@ -112,10 +134,13 @@
 		vdd33a-supply = <&reg_3p3v>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 &mmcif {
 =======
+=======
+>>>>>>> v3.18
 
 	leds {
 		compatible = "gpio-leds";
@@ -299,6 +324,9 @@
 	pinctrl-0 = <&mmcif_pins>;
 	pinctrl-names = "default";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bus-width = <8>;
 	vmmc-supply = <&reg_1p8v>;
@@ -306,9 +334,12 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 &sdhi0 {
 	vmmc-supply = <&reg_3p3v>;
 =======
+=======
+>>>>>>> v3.18
 &pfc {
 	i2c3_pins: i2c3 {
 		renesas,groups = "i2c3_1";
@@ -361,6 +392,9 @@
 	pinctrl-names = "default";
 
 	vmmc-supply = <&vmmc_sdhi0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bus-width = <4>;
 	status = "okay";
@@ -368,19 +402,28 @@
 
 &sdhi2 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vmmc-supply = <&reg_3p3v>;
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&sdhi2_pins>;
 	pinctrl-names = "default";
 
 	vmmc-supply = <&vmmc_sdhi2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bus-width = <4>;
 	broken-cd;
 	status = "okay";
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &sh_fsi2 {
 	pinctrl-0 = <&fsia_pins>;
@@ -388,4 +431,7 @@
 
 	status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

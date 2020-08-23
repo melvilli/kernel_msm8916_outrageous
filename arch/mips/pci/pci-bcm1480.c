@@ -40,6 +40,10 @@
 #include <linux/console.h>
 #include <linux/tty.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vt.h>
+>>>>>>> v3.18
 =======
 #include <linux/vt.h>
 >>>>>>> v3.18
@@ -262,7 +266,13 @@ static int __init bcm1480_pcibios_init(void)
 
 #ifdef CONFIG_VGA_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	take_over_console(&vga_con, 0, MAX_NR_CONSOLES-1, 1);
+=======
+	console_lock();
+	do_take_over_console(&vga_con, 0, MAX_NR_CONSOLES-1, 1);
+	console_unlock();
+>>>>>>> v3.18
 =======
 	console_lock();
 	do_take_over_console(&vga_con, 0, MAX_NR_CONSOLES-1, 1);

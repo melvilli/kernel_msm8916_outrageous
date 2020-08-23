@@ -511,6 +511,11 @@ typedef struct {
 #define DRM_RADEON_GEM_BUSY		0x2a
 #define DRM_RADEON_GEM_VA		0x2b
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_RADEON_GEM_OP		0x2c
+#define DRM_RADEON_GEM_USERPTR		0x2d
+>>>>>>> v3.18
 =======
 #define DRM_RADEON_GEM_OP		0x2c
 #define DRM_RADEON_GEM_USERPTR		0x2d
@@ -558,6 +563,11 @@ typedef struct {
 #define DRM_IOCTL_RADEON_GEM_BUSY	DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_BUSY, struct drm_radeon_gem_busy)
 #define DRM_IOCTL_RADEON_GEM_VA		DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_VA, struct drm_radeon_gem_va)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_IOCTL_RADEON_GEM_OP		DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_OP, struct drm_radeon_gem_op)
+#define DRM_IOCTL_RADEON_GEM_USERPTR	DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_USERPTR, struct drm_radeon_gem_userptr)
+>>>>>>> v3.18
 =======
 #define DRM_IOCTL_RADEON_GEM_OP		DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_OP, struct drm_radeon_gem_op)
 #define DRM_IOCTL_RADEON_GEM_USERPTR	DRM_IOWR(DRM_COMMAND_BASE + DRM_RADEON_GEM_USERPTR, struct drm_radeon_gem_userptr)
@@ -805,8 +815,11 @@ struct drm_radeon_gem_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RADEON_GEM_NO_BACKING_STORE 1
 =======
+=======
+>>>>>>> v3.18
 #define RADEON_GEM_NO_BACKING_STORE	(1 << 0)
 #define RADEON_GEM_GTT_UC		(1 << 1)
 #define RADEON_GEM_GTT_WC		(1 << 2)
@@ -814,6 +827,9 @@ struct drm_radeon_gem_info {
 #define RADEON_GEM_CPU_ACCESS		(1 << 3)
 /* CPU access is not expected to work for this BO */
 #define RADEON_GEM_NO_CPU_ACCESS	(1 << 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct drm_radeon_gem_create {
@@ -825,7 +841,10 @@ struct drm_radeon_gem_create {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is not a reliable API and you should expect it to fail for any
  * number of reasons and have fallback path that do not use userptr to
@@ -843,6 +862,9 @@ struct drm_radeon_gem_userptr {
 	uint32_t		handle;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RADEON_TILING_MACRO				0x1
 #define RADEON_TILING_MICRO				0x2
@@ -925,7 +947,10 @@ struct drm_radeon_gem_pwrite {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Sets or returns a value associated with a buffer. */
 struct drm_radeon_gem_op {
 	uint32_t	handle; /* buffer */
@@ -936,6 +961,9 @@ struct drm_radeon_gem_op {
 #define RADEON_GEM_OP_GET_INITIAL_DOMAIN	0
 #define RADEON_GEM_OP_SET_INITIAL_DOMAIN	1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RADEON_VA_MAP			1
 #define RADEON_VA_UNMAP			2
@@ -973,6 +1001,10 @@ struct drm_radeon_gem_va {
 #define RADEON_CS_RING_DMA          2
 #define RADEON_CS_RING_UVD          3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RADEON_CS_RING_VCE          4
+>>>>>>> v3.18
 =======
 #define RADEON_CS_RING_VCE          4
 >>>>>>> v3.18
@@ -987,6 +1019,10 @@ struct drm_radeon_cs_chunk {
 
 /* drm_radeon_cs_reloc.flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RADEON_RELOC_PRIO_MASK		(0xf << 0)
+>>>>>>> v3.18
 =======
 #define RADEON_RELOC_PRIO_MASK		(0xf << 0)
 >>>>>>> v3.18
@@ -1043,8 +1079,11 @@ struct drm_radeon_cs {
 /* query if CP DMA is supported on the compute ring */
 #define RADEON_INFO_SI_CP_DMA_COMPUTE	0x17
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 /* CIK macrotile mode array */
 #define RADEON_INFO_CIK_MACROTILE_MODE_ARRAY	0x18
 /* query the number of render backends */
@@ -1059,6 +1098,9 @@ struct drm_radeon_cs {
 #define RADEON_INFO_VRAM_USAGE		0x1e
 #define RADEON_INFO_GTT_USAGE		0x1f
 #define RADEON_INFO_ACTIVE_CU_COUNT	0x20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct drm_radeon_info {
@@ -1086,6 +1128,11 @@ struct drm_radeon_info {
 #define SI_TILE_MODE_DEPTH_STENCIL_2D_8AA	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CIK_TILE_MODE_DEPTH_STENCIL_1D		5
+
+>>>>>>> v3.18
 =======
 #define CIK_TILE_MODE_DEPTH_STENCIL_1D		5
 

@@ -34,6 +34,7 @@
 #ifdef	CONFIG_PM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ehci_hub_control(
 	struct usb_hcd	*hcd,
 	u16		typeReq,
@@ -43,11 +44,16 @@ static int ehci_hub_control(
 	u16		wLength
 );
 =======
+=======
+>>>>>>> v3.18
 static int persist_enabled_on_companion(struct usb_device *udev, void *unused)
 {
 	return !udev->maxchild && udev->persist_enabled &&
 		udev->bus->root_hub->speed < USB_SPEED_HIGH;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* After a power loss, ports that were owned by the companion must be
@@ -65,7 +71,10 @@ static void ehci_handover_companion_ports(struct ehci_hcd *ehci)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * USB 1.1 devices are mostly HIDs, which don't need to persist across
 	 * suspends. If we ensure that none of our companion's devices have
@@ -76,6 +85,9 @@ static void ehci_handover_companion_ports(struct ehci_hcd *ehci)
 	if (!usb_for_each_dev(NULL, persist_enabled_on_companion))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Make sure the ports are powered */
 	port = HCS_N_PORTS(ehci->hcs_params);
@@ -189,7 +201,11 @@ static void ehci_adjust_port_wakeup_flags(struct ehci_hcd *ehci,
 
 	/* clear phy low-power mode before changing wakeup flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ehci->has_hostpc) {
+=======
+	if (ehci->has_tdi_phy_lpm) {
+>>>>>>> v3.18
 =======
 	if (ehci->has_tdi_phy_lpm) {
 >>>>>>> v3.18
@@ -221,8 +237,11 @@ static void ehci_adjust_port_wakeup_flags(struct ehci_hcd *ehci,
 				t2 |= PORT_WKOC_E | PORT_WKCONN_E;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ehci_vdbg(ehci, "port %d, %08x -> %08x\n",
 				port + 1, t1, t2);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ehci_writel(ehci, t2, reg);
@@ -230,7 +249,11 @@ static void ehci_adjust_port_wakeup_flags(struct ehci_hcd *ehci,
 
 	/* enter phy low-power mode again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ehci->has_hostpc) {
+=======
+	if (ehci->has_tdi_phy_lpm) {
+>>>>>>> v3.18
 =======
 	if (ehci->has_tdi_phy_lpm) {
 >>>>>>> v3.18
@@ -251,7 +274,11 @@ static void ehci_adjust_port_wakeup_flags(struct ehci_hcd *ehci,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ehci_bus_suspend(struct usb_hcd *hcd)
+=======
+static int ehci_bus_suspend (struct usb_hcd *hcd)
+>>>>>>> v3.18
 =======
 static int ehci_bus_suspend (struct usb_hcd *hcd)
 >>>>>>> v3.18
@@ -261,18 +288,24 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 	int			mask;
 	int			changed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ehci_dbg(ehci, "suspend root hub\n");
 
 	if (time_before_eq(jiffies, ehci->next_statechange))
 		usleep_range(10000, 10000);
 =======
+=======
+>>>>>>> v3.18
 	bool			fs_idle_delay;
 
 	ehci_dbg(ehci, "suspend root hub\n");
 
 	if (time_before (jiffies, ehci->next_statechange))
 		msleep(5);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* stop the schedules */
@@ -304,6 +337,10 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 	ehci->owned_ports = 0;
 	changed = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fs_idle_delay = false;
+>>>>>>> v3.18
 =======
 	fs_idle_delay = false;
 >>>>>>> v3.18
@@ -318,6 +355,7 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 			set_bit(port, &ehci->owned_ports);
 		else if ((t1 & PORT_PE) && !(t1 & PORT_SUSPEND)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*clear RS bit before setting SUSP bit
 			* and wait for HCH to get set*/
 			if (ehci->susp_sof_bug) {
@@ -326,6 +364,8 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 				spin_lock_irq(&ehci->lock);
 			}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			t2 |= PORT_SUSPEND;
@@ -347,9 +387,12 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 
 		if (t1 != t2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ehci_vdbg (ehci, "port %d, %08x -> %08x\n",
 				port + 1, t1, t2);
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * On some controllers, Wake-On-Disconnect will
 			 * generate false wakeup signals until the bus
@@ -360,11 +403,15 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 					ehci_port_speed(ehci, t2) ==
 						USB_PORT_STAT_HIGH_SPEED)
 				fs_idle_delay = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ehci_writel(ehci, t2, reg);
 			changed = 1;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (changed && ehci->has_hostpc) {
@@ -373,6 +420,8 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 		spin_lock_irq(&ehci->lock);
 
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irq(&ehci->lock);
 
 	if ((changed && ehci->has_tdi_phy_lpm) || fs_idle_delay) {
@@ -385,6 +434,9 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 
 	if (changed && ehci->has_tdi_phy_lpm) {
 		spin_lock_irq(&ehci->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		port = HCS_N_PORTS(ehci->hcs_params);
 		while (port--) {
@@ -399,8 +451,13 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 					"succeeded" : "failed");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	spin_unlock_irq(&ehci->lock);
+=======
+		spin_unlock_irq(&ehci->lock);
+	}
+>>>>>>> v3.18
 =======
 		spin_unlock_irq(&ehci->lock);
 	}
@@ -411,9 +468,14 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 		udelay(150);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if this bit is set, controller is already halted */
 	if (!ehci->susp_sof_bug)
 		ehci_halt(ehci); /* turn off now-idle HC */
+=======
+	/* turn off now-idle HC */
+	ehci_halt (ehci);
+>>>>>>> v3.18
 =======
 	/* turn off now-idle HC */
 	ehci_halt (ehci);
@@ -429,6 +491,10 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 	end_unlink_async(ehci);
 	unlink_empty_async_suspended(ehci);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ehci_handle_start_intr_unlinks(ehci);
+>>>>>>> v3.18
 =======
 	ehci_handle_start_intr_unlinks(ehci);
 >>>>>>> v3.18
@@ -452,15 +518,21 @@ static int ehci_bus_suspend (struct usb_hcd *hcd)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(ehci_bus_suspend);
 
 /* caller has locked the root hub, and should reset/reinit on error */
 int __maybe_unused ehci_bus_resume(struct usb_hcd *hcd)
 =======
+=======
+>>>>>>> v3.18
 
 
 /* caller has locked the root hub, and should reset/reinit on error */
 static int ehci_bus_resume (struct usb_hcd *hcd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ehci_hcd		*ehci = hcd_to_ehci (hcd);
@@ -470,8 +542,13 @@ static int ehci_bus_resume (struct usb_hcd *hcd)
 	unsigned long		resume_needed = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (time_before_eq(jiffies, ehci->next_statechange))
 		usleep_range(10000, 10000);
+=======
+	if (time_before (jiffies, ehci->next_statechange))
+		msleep(5);
+>>>>>>> v3.18
 =======
 	if (time_before (jiffies, ehci->next_statechange))
 		msleep(5);
@@ -508,9 +585,12 @@ static int ehci_bus_resume (struct usb_hcd *hcd)
 	ehci_writel(ehci, (u32) ehci->async->qh_dma, &ehci->regs->async_next);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*CMD_RUN will be set after, PORT_RESUME gets cleared*/
 	if (ehci->resume_sof_bug)
 		ehci->command &= ~CMD_RUN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* restore CMD_RUN, framelist size, and irq threshold */
@@ -541,7 +621,11 @@ static int ehci_bus_resume (struct usb_hcd *hcd)
 
 	/* clear phy low-power mode before resume */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ehci->bus_suspended && ehci->has_hostpc) {
+=======
+	if (ehci->bus_suspended && ehci->has_tdi_phy_lpm) {
+>>>>>>> v3.18
 =======
 	if (ehci->bus_suspended && ehci->has_tdi_phy_lpm) {
 >>>>>>> v3.18
@@ -577,6 +661,7 @@ static int ehci_bus_resume (struct usb_hcd *hcd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ehci->resume_sof_bug && resume_needed) {
 		/* root hub has only one port.
 		 * PORT_RESUME gets cleared automatically. */
@@ -588,6 +673,8 @@ static int ehci_bus_resume (struct usb_hcd *hcd)
 		goto skip_clear_resume;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* msleep for 20ms only if code is trying to resume port */
@@ -606,11 +693,17 @@ static int ehci_bus_resume (struct usb_hcd *hcd)
 			temp &= ~(PORT_RWC_BITS | PORT_SUSPEND | PORT_RESUME);
 			ehci_writel(ehci, temp, &ehci->regs->port_status [i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ehci_vdbg (ehci, "resumed port %d\n", i + 1);
 		}
 	}
 
 skip_clear_resume:
+=======
+		}
+	}
+
+>>>>>>> v3.18
 =======
 		}
 	}
@@ -636,7 +729,10 @@ skip_clear_resume:
 	return -ESHUTDOWN;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(ehci_bus_resume);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -743,10 +839,13 @@ ehci_hub_status_data (struct usb_hcd *hcd, char *buf)
 	u32		ppcd = ~0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if !USB_SUSPEND, root hub timers won't get shut down ... */
 	if (ehci->rh_state != EHCI_RH_RUNNING)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* init status to no-changes */
@@ -793,7 +892,11 @@ ehci_hub_status_data (struct usb_hcd *hcd, char *buf)
 		/*
 		 * Return status information even for ports with OWNER set.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Otherwise khubd wouldn't see the disconnect event when a
+=======
+		 * Otherwise hub_wq wouldn't see the disconnect event when a
+>>>>>>> v3.18
 =======
 		 * Otherwise hub_wq wouldn't see the disconnect event when a
 >>>>>>> v3.18
@@ -857,7 +960,11 @@ ehci_hub_descriptor (
 
 /*-------------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_EHCI_EHSET
+=======
+#ifdef CONFIG_USB_HCD_TEST_MODE
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_USB_HCD_TEST_MODE
 >>>>>>> v3.18
@@ -871,6 +978,7 @@ static void usb_ehset_completion(struct urb *urb)
 	complete(done);
 }
 static int submit_single_step_set_feature(
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct usb_hcd  *hcd,
 	struct urb      *urb,
@@ -894,6 +1002,8 @@ request_single_step_set_feature_urb(
 	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
 	struct usb_host_endpoint	*ep;
 =======
+=======
+>>>>>>> v3.18
 	struct usb_hcd	*hcd,
 	struct urb	*urb,
 	int		is_setup
@@ -914,6 +1024,9 @@ static struct urb *request_single_step_set_feature_urb(
 	struct urb *urb;
 	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
 	struct usb_host_endpoint *ep;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	urb = usb_alloc_urb(0, GFP_KERNEL);
@@ -923,7 +1036,11 @@ static struct urb *request_single_step_set_feature_urb(
 	urb->pipe = usb_rcvctrlpipe(udev, 0);
 	ep = (usb_pipein(urb->pipe) ? udev->ep_in : udev->ep_out)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			[usb_pipeendpoint(urb->pipe)];
+=======
+				[usb_pipeendpoint(urb->pipe)];
+>>>>>>> v3.18
 =======
 				[usb_pipeendpoint(urb->pipe)];
 >>>>>>> v3.18
@@ -933,10 +1050,13 @@ static struct urb *request_single_step_set_feature_urb(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize the various URB fields as these are used
 	 * by the HCD driver to queue it and as well as
 	 * when completion happens.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	urb->ep = ep;
@@ -948,8 +1068,12 @@ static struct urb *request_single_step_set_feature_urb(
 	urb->status = -EINPROGRESS;
 	urb->actual_length = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	urb->transfer_flags = (urb->transfer_flags & ~URB_DIR_MASK)
 				| URB_DIR_IN ;
+=======
+	urb->transfer_flags = URB_DIR_IN;
+>>>>>>> v3.18
 =======
 	urb->transfer_flags = URB_DIR_IN;
 >>>>>>> v3.18
@@ -976,8 +1100,13 @@ static int ehset_single_step_set_feature(struct usb_hcd *hcd, int port)
 	struct usb_ctrlrequest *dr;
 	struct urb *urb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_device *udev ;
 	struct ehci_hcd	*ehci = hcd_to_ehci(hcd);
+=======
+	struct usb_device *udev;
+	struct ehci_hcd *ehci = hcd_to_ehci(hcd);
+>>>>>>> v3.18
 =======
 	struct usb_device *udev;
 	struct ehci_hcd *ehci = hcd_to_ehci(hcd);
@@ -1012,7 +1141,11 @@ static int ehset_single_step_set_feature(struct usb_hcd *hcd, int port)
 		goto cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Now complete just the SETUP stage */
+=======
+	/* Submit just the SETUP stage */
+>>>>>>> v3.18
 =======
 	/* Submit just the SETUP stage */
 >>>>>>> v3.18
@@ -1027,8 +1160,13 @@ static int ehset_single_step_set_feature(struct usb_hcd *hcd, int port)
 	}
 	msleep(15 * 1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Complete remaining DATA and status stages */
 	/* No need to free the URB, we can reuse the same */
+=======
+
+	/* Complete remaining DATA and STATUS stages using the same URB */
+>>>>>>> v3.18
 =======
 
 	/* Complete remaining DATA and STATUS stages using the same URB */
@@ -1052,15 +1190,21 @@ cleanup:
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 /*-------------------------------------------------------------------------*/
 
 static int ehci_hub_control (
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_USB_HCD_TEST_MODE */
 /*-------------------------------------------------------------------------*/
 
 int ehci_hub_control(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct usb_hcd	*hcd,
 	u16		typeReq,
@@ -1108,7 +1252,11 @@ int ehci_hub_control(
 		/*
 		 * Even if OWNER is set, so the port is owned by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * companion controller, khubd needs to be able to clear
+=======
+		 * companion controller, hub_wq needs to be able to clear
+>>>>>>> v3.18
 =======
 		 * companion controller, hub_wq needs to be able to clear
 >>>>>>> v3.18
@@ -1132,7 +1280,11 @@ int ehci_hub_control(
 			if ((hcd->self.otg_port == (wIndex + 1))
 			    && hcd->self.b_hnp_enable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				otg_start_hnp(hcd->phy->otg);
+=======
+				otg_start_hnp(hcd->usb_phy->otg);
+>>>>>>> v3.18
 =======
 				otg_start_hnp(hcd->usb_phy->otg);
 >>>>>>> v3.18
@@ -1146,7 +1298,11 @@ int ehci_hub_control(
 
 			/* clear phy low-power mode before resume */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ehci->has_hostpc) {
+=======
+			if (ehci->has_tdi_phy_lpm) {
+>>>>>>> v3.18
 =======
 			if (ehci->has_tdi_phy_lpm) {
 >>>>>>> v3.18
@@ -1163,6 +1319,11 @@ int ehci_hub_control(
 			ehci->reset_done[wIndex] = jiffies
 					+ msecs_to_jiffies(20);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			set_bit(wIndex, &ehci->resuming_ports);
+			usb_hcd_start_port_resume(&hcd->self, wIndex);
+>>>>>>> v3.18
 =======
 			set_bit(wIndex, &ehci->resuming_ports);
 			usb_hcd_start_port_resume(&hcd->self, wIndex);
@@ -1221,7 +1382,11 @@ int ehci_hub_control(
 			 * automatically, even if they _do_ support per-port
 			 * power switching; they're allowed to just limit the
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * current.  khubd will turn the power back on.
+=======
+			 * current.  hub_wq will turn the power back on.
+>>>>>>> v3.18
 =======
 			 * current.  hub_wq will turn the power back on.
 >>>>>>> v3.18
@@ -1236,17 +1401,23 @@ int ehci_hub_control(
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* whoever resumes must GetPortStatus to complete it!! */
 		if (temp & PORT_RESUME) {
 
 			/* Remote Wakeup received? */
 			if (!ehci->reset_done[wIndex]) {
 =======
+=======
+>>>>>>> v3.18
 		/* no reset or resume pending */
 		if (!ehci->reset_done[wIndex]) {
 
 			/* Remote Wakeup received? */
 			if (temp & PORT_RESUME) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* resume signaling for 20 msec */
 				ehci->reset_done[wIndex] = jiffies
@@ -1258,6 +1429,7 @@ int ehci_hub_control(
 						ehci->reset_done[wIndex]);
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* resume completed? */
 			else if (time_after_eq(jiffies,
@@ -1292,6 +1464,8 @@ int ehci_hub_control(
 			ehci->reset_done [wIndex] = 0;
 			clear_bit(wIndex, &ehci->resuming_ports);
 =======
+=======
+>>>>>>> v3.18
 		/* reset or resume not yet complete */
 		} else if (!time_after_eq(jiffies, ehci->reset_done[wIndex])) {
 			;	/* wait until it is complete */
@@ -1320,6 +1494,9 @@ int ehci_hub_control(
 		} else {
 			status |= USB_PORT_STAT_C_RESET << 16;
 			ehci->reset_done [wIndex] = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* force reset to complete */
@@ -1329,7 +1506,11 @@ int ehci_hub_control(
 			 * this bit; seems too long to spin routinely...
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			retval = handshake(ehci, status_reg,
+=======
+			retval = ehci_handshake(ehci, status_reg,
+>>>>>>> v3.18
 =======
 			retval = ehci_handshake(ehci, status_reg,
 >>>>>>> v3.18
@@ -1346,11 +1527,14 @@ int ehci_hub_control(
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(temp & (PORT_RESUME|PORT_RESET))) {
 			ehci->reset_done[wIndex] = 0;
 			clear_bit(wIndex, &ehci->resuming_ports);
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* transfer dedicated ports to the companion hc */
@@ -1365,7 +1549,11 @@ int ehci_hub_control(
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Even if OWNER is set, there's no harm letting khubd
+=======
+		 * Even if OWNER is set, there's no harm letting hub_wq
+>>>>>>> v3.18
 =======
 		 * Even if OWNER is set, there's no harm letting hub_wq
 >>>>>>> v3.18
@@ -1407,10 +1595,15 @@ int ehci_hub_control(
 			status |= USB_PORT_STAT_C_SUSPEND << 16;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	VERBOSE_DEBUG
 	if (status & ~0xffff)	/* only if wPortChange is interesting */
 #endif
 		dbg_port (ehci, "GetStatus", wIndex + 1, temp);
+=======
+		if (status & ~0xffff)	/* only if wPortChange is interesting */
+			dbg_port(ehci, "GetStatus", wIndex + 1, temp);
+>>>>>>> v3.18
 =======
 		if (status & ~0xffff)	/* only if wPortChange is interesting */
 			dbg_port(ehci, "GetStatus", wIndex + 1, temp);
@@ -1455,6 +1648,7 @@ int ehci_hub_control(
 					|| (temp & PORT_RESET) != 0)
 				goto error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* port gets suspended as part of bus suspend routine */
 			if (!ehci->susp_sof_bug)
 				ehci_writel(ehci, temp | PORT_SUSPEND,
@@ -1480,6 +1674,8 @@ int ehci_hub_control(
 						status_reg);
 			if (ehci->has_hostpc) {
 =======
+=======
+>>>>>>> v3.18
 
 			/* After above check the port must be connected.
 			 * Set appropriate bit thus could put phy into low power
@@ -1489,6 +1685,9 @@ int ehci_hub_control(
 			temp |= PORT_WKDISC_E | PORT_WKOC_E;
 			ehci_writel(ehci, temp | PORT_SUSPEND, status_reg);
 			if (ehci->has_tdi_phy_lpm) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				spin_unlock_irqrestore(&ehci->lock, flags);
 				msleep(5);/* 5ms for HCD enter low pwr mode */
@@ -1510,7 +1709,11 @@ int ehci_hub_control(
 			break;
 		case USB_PORT_FEAT_RESET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (temp & PORT_RESUME)
+=======
+			if (temp & (PORT_SUSPEND|PORT_RESUME))
+>>>>>>> v3.18
 =======
 			if (temp & (PORT_SUSPEND|PORT_RESUME))
 >>>>>>> v3.18
@@ -1528,7 +1731,10 @@ int ehci_hub_control(
 				temp |= PORT_OWNER;
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ehci_vdbg (ehci, "port %d reset\n", wIndex + 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				temp |= PORT_RESET;
@@ -1541,6 +1747,7 @@ int ehci_hub_control(
 				ehci->reset_done [wIndex] = jiffies
 						+ msecs_to_jiffies (50);
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (ehci->reset_sof_bug && (temp & PORT_RESET) &&
 					hcd->driver->reset_sof_bug_handler) {
@@ -1559,6 +1766,9 @@ int ehci_hub_control(
 =======
 			ehci_writel(ehci, temp, status_reg);
 >>>>>>> v3.18
+=======
+			ehci_writel(ehci, temp, status_reg);
+>>>>>>> v3.18
 			break;
 
 		/* For downstream facing ports (these):  one hub port is put
@@ -1568,6 +1778,7 @@ int ehci_hub_control(
 		 * about the EHCI-specific stuff.
 		 */
 		case USB_PORT_FEAT_TEST:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (selector && selector <= 5) {
 				spin_unlock_irqrestore(&ehci->lock, flags);
@@ -1608,6 +1819,8 @@ int ehci_hub_control(
 				goto error;
 			break;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_USB_HCD_TEST_MODE
 			if (selector == EHSET_TEST_SINGLE_STEP_SET_FEATURE) {
 				spin_unlock_irqrestore(&ehci->lock, flags);
@@ -1643,6 +1856,9 @@ int ehci_hub_control(
 			ehci_writel(ehci, temp, status_reg);
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			goto error;
@@ -1660,6 +1876,10 @@ error_exit:
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ehci_hub_control);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ehci_hub_control);
 >>>>>>> v3.18

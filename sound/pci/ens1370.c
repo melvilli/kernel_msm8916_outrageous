@@ -447,7 +447,11 @@ struct ensoniq {
 static irqreturn_t snd_audiopci_interrupt(int irq, void *dev_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_audiopci_ids) = {
+=======
+static const struct pci_device_id snd_audiopci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_audiopci_ids[] = {
 >>>>>>> v3.18
@@ -530,7 +534,11 @@ static unsigned int snd_es1371_wait_src_ready(struct ensoniq * ensoniq)
 		cond_resched();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "wait src ready timeout 0x%lx [0x%x]\n",
+=======
+	dev_err(ensoniq->card->dev, "wait src ready timeout 0x%lx [0x%x]\n",
+>>>>>>> v3.18
 =======
 	dev_err(ensoniq->card->dev, "wait src ready timeout 0x%lx [0x%x]\n",
 >>>>>>> v3.18
@@ -596,7 +604,11 @@ static void snd_es1370_codec_write(struct snd_ak4531 *ak4531,
 
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG
+=======
+	dev_dbg(ensoniq->card->dev,
+>>>>>>> v3.18
 =======
 	dev_dbg(ensoniq->card->dev,
 >>>>>>> v3.18
@@ -611,7 +623,11 @@ static void snd_es1370_codec_write(struct snd_ak4531 *ak4531,
 		schedule_timeout_uninterruptible(1);
 	} while (time_after(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "codec write timeout, status = 0x%x\n",
+=======
+	dev_err(ensoniq->card->dev, "codec write timeout, status = 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_err(ensoniq->card->dev, "codec write timeout, status = 0x%x\n",
 >>>>>>> v3.18
@@ -666,7 +682,11 @@ static void snd_es1371_codec_write(struct snd_ac97 *ac97,
 	}
 	mutex_unlock(&ensoniq->src_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "codec write timeout at 0x%lx [0x%x]\n",
+=======
+	dev_err(ensoniq->card->dev, "codec write timeout at 0x%lx [0x%x]\n",
+>>>>>>> v3.18
 =======
 	dev_err(ensoniq->card->dev, "codec write timeout at 0x%lx [0x%x]\n",
 >>>>>>> v3.18
@@ -727,8 +747,13 @@ static unsigned short snd_es1371_codec_read(struct snd_ac97 *ac97,
 			mutex_unlock(&ensoniq->src_mutex);
 			if (++fail > 10) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "codec read timeout (final) "
 					   "at 0x%lx, reg = 0x%x [0x%x]\n",
+=======
+				dev_err(ensoniq->card->dev,
+					"codec read timeout (final) at 0x%lx, reg = 0x%x [0x%x]\n",
+>>>>>>> v3.18
 =======
 				dev_err(ensoniq->card->dev,
 					"codec read timeout (final) at 0x%lx, reg = 0x%x [0x%x]\n",
@@ -742,7 +767,11 @@ static unsigned short snd_es1371_codec_read(struct snd_ac97 *ac97,
 	}
 	mutex_unlock(&ensoniq->src_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "es1371: codec read timeout at 0x%lx [0x%x]\n",
+=======
+	dev_err(ensoniq->card->dev, "codec read timeout at 0x%lx [0x%x]\n",
+>>>>>>> v3.18
 =======
 	dev_err(ensoniq->card->dev, "codec read timeout at 0x%lx [0x%x]\n",
 >>>>>>> v3.18
@@ -1826,7 +1855,11 @@ static int snd_ensoniq_1370_mixer(struct ensoniq *ensoniq)
 
 #ifdef CHIP1371
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_ensoniq_get_joystick_port(int dev)
+=======
+static int snd_ensoniq_get_joystick_port(struct ensoniq *ensoniq, int dev)
+>>>>>>> v3.18
 =======
 static int snd_ensoniq_get_joystick_port(struct ensoniq *ensoniq, int dev)
 >>>>>>> v3.18
@@ -1842,7 +1875,12 @@ static int snd_ensoniq_get_joystick_port(struct ensoniq *ensoniq, int dev)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ens1371: invalid joystick port %#x", joystick_port[dev]);
+=======
+		dev_err(ensoniq->card->dev,
+			"invalid joystick port %#x", joystick_port[dev]);
+>>>>>>> v3.18
 =======
 		dev_err(ensoniq->card->dev,
 			"invalid joystick port %#x", joystick_port[dev]);
@@ -1852,7 +1890,11 @@ static int snd_ensoniq_get_joystick_port(struct ensoniq *ensoniq, int dev)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int snd_ensoniq_get_joystick_port(int dev)
+=======
+static int snd_ensoniq_get_joystick_port(struct ensoniq *ensoniq, int dev)
+>>>>>>> v3.18
 =======
 static int snd_ensoniq_get_joystick_port(struct ensoniq *ensoniq, int dev)
 >>>>>>> v3.18
@@ -1867,7 +1909,11 @@ static int snd_ensoniq_create_gameport(struct ensoniq *ensoniq, int dev)
 	int io_port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io_port = snd_ensoniq_get_joystick_port(dev);
+=======
+	io_port = snd_ensoniq_get_joystick_port(ensoniq, dev);
+>>>>>>> v3.18
 =======
 	io_port = snd_ensoniq_get_joystick_port(ensoniq, dev);
 >>>>>>> v3.18
@@ -1882,7 +1928,12 @@ static int snd_ensoniq_create_gameport(struct ensoniq *ensoniq, int dev)
 				break;
 		if (io_port > 0x218) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "ens137x: no gameport ports available\n");
+=======
+			dev_warn(ensoniq->card->dev,
+				 "no gameport ports available\n");
+>>>>>>> v3.18
 =======
 			dev_warn(ensoniq->card->dev,
 				 "no gameport ports available\n");
@@ -1894,7 +1945,12 @@ static int snd_ensoniq_create_gameport(struct ensoniq *ensoniq, int dev)
 	default:
 		if (!request_region(io_port, 8, "ens137x: gameport")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "ens137x: gameport io port 0x%#x in use\n",
+=======
+			dev_warn(ensoniq->card->dev,
+				 "gameport io port %#x in use\n",
+>>>>>>> v3.18
 =======
 			dev_warn(ensoniq->card->dev,
 				 "gameport io port %#x in use\n",
@@ -1908,7 +1964,12 @@ static int snd_ensoniq_create_gameport(struct ensoniq *ensoniq, int dev)
 	ensoniq->gameport = gp = gameport_allocate_port();
 	if (!gp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ens137x: cannot allocate memory for gameport\n");
+=======
+		dev_err(ensoniq->card->dev,
+			"cannot allocate memory for gameport\n");
+>>>>>>> v3.18
 =======
 		dev_err(ensoniq->card->dev,
 			"cannot allocate memory for gameport\n");
@@ -2001,7 +2062,11 @@ static int snd_ensoniq_free(struct ensoniq *ensoniq)
 	if (ensoniq->irq >= 0)
 		synchronize_irq(ensoniq->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(ensoniq->pci, 3);
+=======
+	pci_set_power_state(ensoniq->pci, PCI_D3hot);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(ensoniq->pci, PCI_D3hot);
 >>>>>>> v3.18
@@ -2148,8 +2213,12 @@ static int snd_ensoniq_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR DRIVER_NAME ": pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -2207,7 +2276,11 @@ static int snd_ensoniq_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_audiopci_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, ensoniq)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -2219,7 +2292,11 @@ static int snd_ensoniq_create(struct snd_card *card,
 	if (snd_dma_alloc_pages(SNDRV_DMA_TYPE_DEV, snd_dma_pci_data(pci),
 				16, &ensoniq->dma_bug) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to allocate space for phantom area - dma_bug\n");
+=======
+		dev_err(card->dev, "unable to allocate space for phantom area - dma_bug\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to allocate space for phantom area - dma_bug\n");
 >>>>>>> v3.18
@@ -2258,8 +2335,11 @@ static int snd_ensoniq_create(struct snd_card *card,
 	snd_ensoniq_proc_init(ensoniq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rensoniq = ensoniq;
@@ -2518,7 +2598,12 @@ static int snd_audiopci_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -2583,7 +2668,10 @@ static void snd_audiopci_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

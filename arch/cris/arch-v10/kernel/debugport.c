@@ -20,7 +20,10 @@
 #include <linux/tty.h>
 #include <arch/svinto.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>             /* Get SIMCOUT. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -322,12 +325,15 @@ console_write(struct console *co, const char *buf, unsigned int len)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SVINTO_SIM
 	/* no use to simulate the serial debug output */
 	SIMCOUT(buf, len);
 	return;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         console_write_direct(co, buf, len);

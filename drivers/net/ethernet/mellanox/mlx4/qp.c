@@ -36,7 +36,10 @@
 #include <linux/gfp.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -254,7 +257,11 @@ void __mlx4_qp_release_range(struct mlx4_dev *dev, int base_qpn, int cnt)
 	if (mlx4_is_qp_reserved(dev, (u32) base_qpn))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free_range(&qp_table->bitmap, base_qpn, cnt);
+=======
+	mlx4_bitmap_free_range(&qp_table->bitmap, base_qpn, cnt, MLX4_USE_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free_range(&qp_table->bitmap, base_qpn, cnt, MLX4_USE_RR);
 >>>>>>> v3.18
@@ -273,8 +280,13 @@ void mlx4_qp_release_range(struct mlx4_dev *dev, int base_qpn, int cnt)
 			       MLX4_CMD_TIME_CLASS_A, MLX4_CMD_WRAPPED);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "Failed to release qp range"
 				  " base:%d cnt:%d\n", base_qpn, cnt);
+=======
+			mlx4_warn(dev, "Failed to release qp range base:%d cnt:%d\n",
+				  base_qpn, cnt);
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "Failed to release qp range base:%d cnt:%d\n",
 				  base_qpn, cnt);
@@ -286,7 +298,11 @@ void mlx4_qp_release_range(struct mlx4_dev *dev, int base_qpn, int cnt)
 EXPORT_SYMBOL_GPL(mlx4_qp_release_range);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn)
+=======
+int __mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
+>>>>>>> v3.18
 =======
 int __mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
 >>>>>>> v3.18
@@ -295,6 +311,7 @@ int __mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
 	struct mlx4_qp_table *qp_table = &priv->qp_table;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = mlx4_table_get(dev, &qp_table->qp_table, qpn);
 	if (err)
@@ -314,6 +331,8 @@ int __mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
 
 	err = mlx4_table_get(dev, &qp_table->cmpt_table, qpn);
 =======
+=======
+>>>>>>> v3.18
 	err = mlx4_table_get(dev, &qp_table->qp_table, qpn, gfp);
 	if (err)
 		goto err_out;
@@ -331,6 +350,9 @@ int __mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
 		goto err_put_altc;
 
 	err = mlx4_table_get(dev, &qp_table->cmpt_table, qpn, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		goto err_put_rdmarc;
@@ -354,7 +376,11 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn)
+=======
+static int mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
+>>>>>>> v3.18
 =======
 static int mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
 >>>>>>> v3.18
@@ -368,7 +394,11 @@ static int mlx4_qp_alloc_icm(struct mlx4_dev *dev, int qpn, gfp_t gfp)
 				    MLX4_CMD_WRAPPED);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __mlx4_qp_alloc_icm(dev, qpn);
+=======
+	return __mlx4_qp_alloc_icm(dev, qpn, gfp);
+>>>>>>> v3.18
 =======
 	return __mlx4_qp_alloc_icm(dev, qpn, gfp);
 >>>>>>> v3.18
@@ -401,7 +431,11 @@ static void mlx4_qp_free_icm(struct mlx4_dev *dev, int qpn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp)
+=======
+int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp, gfp_t gfp)
+>>>>>>> v3.18
 =======
 int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp, gfp_t gfp)
 >>>>>>> v3.18
@@ -416,7 +450,11 @@ int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp, gfp_t gfp)
 	qp->qpn = qpn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_qp_alloc_icm(dev, qpn);
+=======
+	err = mlx4_qp_alloc_icm(dev, qpn, gfp);
+>>>>>>> v3.18
 =======
 	err = mlx4_qp_alloc_icm(dev, qpn, gfp);
 >>>>>>> v3.18
@@ -443,7 +481,10 @@ err_icm:
 EXPORT_SYMBOL_GPL(mlx4_qp_alloc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MLX4_UPDATE_QP_SUPPORTED_ATTRS MLX4_UPDATE_QP_SMAC
 int mlx4_update_qp(struct mlx4_dev *dev, u32 qpn,
 		   enum mlx4_update_qp_attr attr,
@@ -487,6 +528,9 @@ int mlx4_update_qp(struct mlx4_dev *dev, u32 qpn,
 }
 EXPORT_SYMBOL_GPL(mlx4_update_qp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void mlx4_qp_remove(struct mlx4_dev *dev, struct mlx4_qp *qp)
 {
@@ -579,8 +623,12 @@ int mlx4_init_qp_table(struct mlx4_dev *dev)
 
 	err = mlx4_bitmap_init(&qp_table->bitmap, dev->caps.num_qps,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       (1 << 23) - 1, dev->phys_caps.base_sqpn + 8 +
 			       16 * MLX4_MFUNC_MAX * !!mlx4_is_master(dev),
+=======
+			       (1 << 23) - 1, mlx4_num_reserved_sqps(dev),
+>>>>>>> v3.18
 =======
 			       (1 << 23) - 1, mlx4_num_reserved_sqps(dev),
 >>>>>>> v3.18
@@ -682,8 +730,12 @@ int mlx4_qp_to_ready(struct mlx4_dev *dev, struct mlx4_mtt *mtt,
 				     context, 0, 0, qp);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Failed to bring QP to state: "
 				 "%d with error: %d\n",
+=======
+			mlx4_err(dev, "Failed to bring QP to state: %d with error: %d\n",
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Failed to bring QP to state: %d with error: %d\n",
 >>>>>>> v3.18

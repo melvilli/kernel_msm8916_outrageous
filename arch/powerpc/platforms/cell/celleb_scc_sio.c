@@ -46,7 +46,11 @@ static int __init txx9_serial_init(void)
 	int i;
 	struct uart_port req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq irq;
+=======
+	struct of_phandle_args irq;
+>>>>>>> v3.18
 =======
 	struct of_phandle_args irq;
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ static int __init txx9_serial_init(void)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (of_irq_map_one(node, i, &irq))
+=======
+			if (of_irq_parse_one(node, i, &irq))
+>>>>>>> v3.18
 =======
 			if (of_irq_parse_one(node, i, &irq))
 >>>>>>> v3.18
@@ -75,8 +83,12 @@ static int __init txx9_serial_init(void)
 			req.membase = ioremap(req.mapbase, 0x24);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			req.irq = irq_create_of_mapping(irq.controller,
 				irq.specifier, irq.size);
+=======
+			req.irq = irq_create_of_mapping(&irq);
+>>>>>>> v3.18
 =======
 			req.irq = irq_create_of_mapping(&irq);
 >>>>>>> v3.18

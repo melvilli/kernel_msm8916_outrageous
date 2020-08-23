@@ -11,7 +11,13 @@ struct drbd_interval {
 	sector_t end;		/* highest interval end in subtree */
 	int local:1		/* local or remote request? */;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int waiting:1;
+=======
+	int waiting:1;		/* someone is waiting for this to complete */
+	int completed:1;	/* this has been completed already;
+				 * ignore for conflict detection */
+>>>>>>> v3.18
 =======
 	int waiting:1;		/* someone is waiting for this to complete */
 	int completed:1;	/* this has been completed already;

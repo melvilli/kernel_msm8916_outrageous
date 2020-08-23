@@ -68,9 +68,15 @@ struct tsb {
 } __attribute__((aligned(TSB_ENTRY_ALIGNMENT)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __tsb_insert(unsigned long ent, unsigned long tag, unsigned long pte);
 extern void tsb_flush(unsigned long ent, unsigned long tag);
 extern void tsb_init(struct tsb *tsb, unsigned long size);
+=======
+void __tsb_insert(unsigned long ent, unsigned long tag, unsigned long pte);
+void tsb_flush(unsigned long ent, unsigned long tag);
+void tsb_init(struct tsb *tsb, unsigned long size);
+>>>>>>> v3.18
 =======
 void __tsb_insert(unsigned long ent, unsigned long tag, unsigned long pte);
 void tsb_flush(unsigned long ent, unsigned long tag);
@@ -100,7 +106,10 @@ typedef struct {
 	unsigned long		sparc64_ctx_val;
 	unsigned long		huge_pte_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page		*pgtable_page;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tsb_config	tsb_block[MM_NUM_TSBS];

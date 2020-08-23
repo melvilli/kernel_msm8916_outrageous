@@ -711,17 +711,23 @@ enum i2400m_bri {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void i2400m_bm_cmd_prepare(struct i2400m_bootrom_header *);
 extern int i2400m_dev_bootstrap(struct i2400m *, enum i2400m_bri);
 extern int i2400m_read_mac_addr(struct i2400m *);
 extern int i2400m_bootrom_init(struct i2400m *, enum i2400m_bri);
 extern int i2400m_is_boot_barker(struct i2400m *, const void *, size_t);
 =======
+=======
+>>>>>>> v3.18
 void i2400m_bm_cmd_prepare(struct i2400m_bootrom_header *);
 int i2400m_dev_bootstrap(struct i2400m *, enum i2400m_bri);
 int i2400m_read_mac_addr(struct i2400m *);
 int i2400m_bootrom_init(struct i2400m *, enum i2400m_bri);
 int i2400m_is_boot_barker(struct i2400m *, const void *, size_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline
 int i2400m_is_d2h_barker(const void *buf)
@@ -730,7 +736,11 @@ int i2400m_is_d2h_barker(const void *buf)
 	return le32_to_cpu(*barker) == I2400M_D2H_MSG_BARKER;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void i2400m_unknown_barker(struct i2400m *, const void *, size_t);
+=======
+void i2400m_unknown_barker(struct i2400m *, const void *, size_t);
+>>>>>>> v3.18
 =======
 void i2400m_unknown_barker(struct i2400m *, const void *, size_t);
 >>>>>>> v3.18
@@ -802,6 +812,7 @@ unsigned i2400m_brh_get_signature(const struct i2400m_bootrom_header *hdr)
  * Driver / device setup and internal functions
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void i2400m_init(struct i2400m *);
 extern int i2400m_reset(struct i2400m *, enum i2400m_reset_type);
 extern void i2400m_netdev_setup(struct net_device *net_dev);
@@ -829,6 +840,8 @@ extern int i2400m_tx(struct i2400m *, const void *, size_t, enum i2400m_pt);
 extern int i2400m_debugfs_add(struct i2400m *);
 extern void i2400m_debugfs_rm(struct i2400m *);
 =======
+=======
+>>>>>>> v3.18
 void i2400m_init(struct i2400m *);
 int i2400m_reset(struct i2400m *, enum i2400m_reset_type);
 void i2400m_netdev_setup(struct net_device *net_dev);
@@ -854,6 +867,9 @@ int i2400m_tx(struct i2400m *, const void *, size_t, enum i2400m_pt);
 #ifdef CONFIG_DEBUG_FS
 int i2400m_debugfs_add(struct i2400m *);
 void i2400m_debugfs_rm(struct i2400m *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int i2400m_debugfs_add(struct i2400m *i2400m)
@@ -865,8 +881,13 @@ static inline void i2400m_debugfs_rm(struct i2400m *i2400m) {}
 
 /* Initialize/shutdown the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int i2400m_dev_initialize(struct i2400m *);
 extern void i2400m_dev_shutdown(struct i2400m *);
+=======
+int i2400m_dev_initialize(struct i2400m *);
+void i2400m_dev_shutdown(struct i2400m *);
+>>>>>>> v3.18
 =======
 int i2400m_dev_initialize(struct i2400m *);
 void i2400m_dev_shutdown(struct i2400m *);
@@ -919,21 +940,28 @@ void i2400m_put(struct i2400m *i2400m)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int i2400m_dev_reset_handle(struct i2400m *, const char *);
 extern int i2400m_pre_reset(struct i2400m *);
 extern int i2400m_post_reset(struct i2400m *);
 extern void i2400m_error_recovery(struct i2400m *);
 =======
+=======
+>>>>>>> v3.18
 int i2400m_dev_reset_handle(struct i2400m *, const char *);
 int i2400m_pre_reset(struct i2400m *);
 int i2400m_post_reset(struct i2400m *);
 void i2400m_error_recovery(struct i2400m *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * _setup()/_release() are called by the probe/disconnect functions of
  * the bus-specific drivers.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int i2400m_setup(struct i2400m *, enum i2400m_bri bm_flags);
 extern void i2400m_release(struct i2400m *);
@@ -942,12 +970,17 @@ extern int i2400m_rx(struct i2400m *, struct sk_buff *);
 extern struct i2400m_msg_hdr *i2400m_tx_msg_get(struct i2400m *, size_t *);
 extern void i2400m_tx_msg_sent(struct i2400m *);
 =======
+=======
+>>>>>>> v3.18
 int i2400m_setup(struct i2400m *, enum i2400m_bri bm_flags);
 void i2400m_release(struct i2400m *);
 
 int i2400m_rx(struct i2400m *, struct sk_buff *);
 struct i2400m_msg_hdr *i2400m_tx_msg_get(struct i2400m *, size_t *);
 void i2400m_tx_msg_sent(struct i2400m *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -961,6 +994,7 @@ struct device *i2400m_dev(struct i2400m *i2400m)
 	return i2400m->wimax_dev.net_dev->dev.parent;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int i2400m_msg_check_status(const struct i2400m_l3l4_hdr *,
 				   char *, size_t);
@@ -977,6 +1011,8 @@ extern struct sk_buff *i2400m_get_device_info(struct i2400m *);
 extern int i2400m_firmware_check(struct i2400m *);
 extern int i2400m_set_idle_timeout(struct i2400m *, unsigned);
 =======
+=======
+>>>>>>> v3.18
 int i2400m_msg_check_status(const struct i2400m_l3l4_hdr *, char *, size_t);
 int i2400m_msg_size_check(struct i2400m *, const struct i2400m_l3l4_hdr *,
 			  size_t);
@@ -990,6 +1026,9 @@ int i2400m_cmd_exit_idle(struct i2400m *);
 struct sk_buff *i2400m_get_device_info(struct i2400m *);
 int i2400m_firmware_check(struct i2400m *);
 int i2400m_set_idle_timeout(struct i2400m *, unsigned);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline
@@ -999,10 +1038,16 @@ struct usb_endpoint_descriptor *usb_get_epd(struct usb_interface *iface, int ep)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int i2400m_op_rfkill_sw_toggle(struct wimax_dev *,
 				      enum wimax_rf_state);
 extern void i2400m_report_tlv_rf_switches_status(
 	struct i2400m *, const struct i2400m_tlv_rf_switches_status *);
+=======
+int i2400m_op_rfkill_sw_toggle(struct wimax_dev *, enum wimax_rf_state);
+void i2400m_report_tlv_rf_switches_status(struct i2400m *,
+					  const struct i2400m_tlv_rf_switches_status *);
+>>>>>>> v3.18
 =======
 int i2400m_op_rfkill_sw_toggle(struct wimax_dev *, enum wimax_rf_state);
 void i2400m_report_tlv_rf_switches_status(struct i2400m *,
@@ -1052,8 +1097,13 @@ void __i2400m_msleep(unsigned ms)
 
 /* module initialization helpers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int i2400m_barker_db_init(const char *);
 extern void i2400m_barker_db_exit(void);
+=======
+int i2400m_barker_db_init(const char *);
+void i2400m_barker_db_exit(void);
+>>>>>>> v3.18
 =======
 int i2400m_barker_db_init(const char *);
 void i2400m_barker_db_exit(void);

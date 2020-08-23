@@ -14,6 +14,7 @@
 #include <linux/init.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reciprocal_div.h>
 #include <linux/if_team.h>
 
@@ -26,13 +27,21 @@ static u32 random_N(unsigned int N)
 #include <linux/if_team.h>
 
 >>>>>>> v3.18
+=======
+#include <linux/if_team.h>
+
+>>>>>>> v3.18
 static bool rnd_transmit(struct team *team, struct sk_buff *skb)
 {
 	struct team_port *port;
 	int port_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_index = random_N(team->en_port_count);
+=======
+	port_index = prandom_u32_max(team->en_port_count);
+>>>>>>> v3.18
 =======
 	port_index = prandom_u32_max(team->en_port_count);
 >>>>>>> v3.18

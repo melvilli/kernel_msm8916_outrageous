@@ -123,7 +123,11 @@ void wl18xx_scan_completed(struct wl1271 *wl, struct wl12xx_vif *wlvif);
 int wl18xx_sched_scan_start(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			    struct cfg80211_sched_scan_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct ieee80211_sched_scan_ies *ies);
+=======
+			    struct ieee80211_scan_ies *ies);
+>>>>>>> v3.18
 =======
 			    struct ieee80211_scan_ies *ies);
 >>>>>>> v3.18

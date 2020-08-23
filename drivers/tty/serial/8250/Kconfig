@@ -13,9 +13,14 @@ config SERIAL_8250
 	  servers, or users that have one of the various bus mice instead of a
 	  serial mouse and don't intend to use their machine's standard serial
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  port for anything.  (Note that the Cyclades and Stallion multi
 	  serial port drivers do not need this driver built in for them to
 	  work.)
+=======
+	  port for anything.  (Note that the Cyclades multi serial port driver
+	  does not need this driver built in for it to work.)
+>>>>>>> v3.18
 =======
 	  port for anything.  (Note that the Cyclades multi serial port driver
 	  does not need this driver built in for it to work.)
@@ -48,7 +53,11 @@ config SERIAL_8250_DEPRECATED_OPTIONS
 	  8250.nr_uarts=4. We now renamed the module back to 8250, but if
 	  anybody noticed in 3.7 and changed their userspace we still have to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  keep the 8350_core.* options around until they revert the changes
+=======
+	  keep the 8250_core.* options around until they revert the changes
+>>>>>>> v3.18
 =======
 	  keep the 8250_core.* options around until they revert the changes
 >>>>>>> v3.18
@@ -72,6 +81,10 @@ config SERIAL_8250_CONSOLE
 	depends on SERIAL_8250=y
 	select SERIAL_CORE_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SERIAL_EARLYCON
+>>>>>>> v3.18
 =======
 	select SERIAL_EARLYCON
 >>>>>>> v3.18
@@ -105,11 +118,14 @@ config SERIAL_8250_CONSOLE
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config FIX_EARLYCON_MEM
 	bool
 	depends on X86
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SERIAL_8250_GSC
@@ -134,6 +150,11 @@ config SERIAL_8250_PCI
 	  disable this feature if you only need legacy serial support.
 	  Saves about 9K.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  Note that serial ports on NetMos 9835 Multi-I/O cards are handled
+	  by the parport_serial driver, enabled with CONFIG_PARPORT_SERIAL.
+>>>>>>> v3.18
 =======
 	  Note that serial ports on NetMos 9835 Multi-I/O cards are handled
 	  by the parport_serial driver, enabled with CONFIG_PARPORT_SERIAL.
@@ -323,7 +344,10 @@ config SERIAL_8250_RT288X
 	  serial port, say Y to this option. The driver can handle up to 2 serial
 	  ports. If unsure, say N.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config SERIAL_8250_FINTEK
 	tristate "Support for Fintek F81216A LPC to 4 UART"
@@ -339,4 +363,7 @@ config SERIAL_8250_MT6577
 	help
 	  If you have a Mediatek based board and want to use the
 	  serial port, say Y to this option. If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

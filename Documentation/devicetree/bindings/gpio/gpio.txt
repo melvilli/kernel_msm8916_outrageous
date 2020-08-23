@@ -14,17 +14,23 @@ properties, each containing a 'gpio-list':
 			 (controller specific)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 GPIO properties should be named "[<name>-]gpios".  Exact
 meaning of each gpios property must be documented in the device tree
 binding for each device.
 
 For example, the following could be used to describe gpios pins to use
 =======
+=======
+>>>>>>> v3.18
 GPIO properties should be named "[<name>-]gpios". The exact
 meaning of each gpios property must be documented in the device tree
 binding for each device.
 
 For example, the following could be used to describe GPIO pins used
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 as chip select lines; with chip selects 0, 1 and 3 populated, and chip
 select 2 left empty:
@@ -53,7 +59,11 @@ Exact meaning of each specifier cell is controller specific, and must
 be documented in the device tree binding for the device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Example of the node using GPIOs:
+=======
+Example of a node using GPIOs:
+>>>>>>> v3.18
 =======
 Example of a node using GPIOs:
 >>>>>>> v3.18
@@ -64,8 +74,11 @@ Example of a node using GPIOs:
 
 In this example gpio-specifier is "18 0" and encodes GPIO pin number,
 <<<<<<< HEAD
+<<<<<<< HEAD
 and empty GPIO flags as accepted by the "qe_pio_e" gpio-controller.
 =======
+=======
+>>>>>>> v3.18
 and GPIO flags as accepted by the "qe_pio_e" gpio-controller.
 
 1.1) GPIO specifier best practices
@@ -110,14 +123,23 @@ particular signal polarity choice. If software chooses to program the device
 to generate or receive a signal of the opposite polarity, software will be
 responsible for correctly interpreting (inverting) the GPIO signal at the GPIO
 controller.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 2) gpio-controller nodes
 ------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Every GPIO controller node must both an empty "gpio-controller"
 property, and have #gpio-cells contain the size of the gpio-specifier.
+=======
+Every GPIO controller node must contain both an empty "gpio-controller"
+property, and a #gpio-cells integer property, which indicates the number of
+cells in a gpio-specifier.
+>>>>>>> v3.18
 =======
 Every GPIO controller node must contain both an empty "gpio-controller"
 property, and a #gpio-cells integer property, which indicates the number of
@@ -127,6 +149,7 @@ cells in a gpio-specifier.
 Example of two SOC GPIO banks defined as gpio-controller nodes:
 
 	qe_pio_a: gpio-controller@1400 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		#gpio-cells = <2>;
 		compatible = "fsl,qe-pario-bank-a", "fsl,qe-pario-bank";
@@ -159,6 +182,8 @@ request the corresponding pin before any gpio usage.
 For this, the gpio controller can use a pinctrl phandle and pins to
 announce the pinrange to the pin ctrl subsystem. For example,
 =======
+=======
+>>>>>>> v3.18
 		compatible = "fsl,qe-pario-bank-a", "fsl,qe-pario-bank";
 		reg = <0x1400 0x18>;
 		gpio-controller;
@@ -217,6 +242,9 @@ compatibility reasons, and would still be required even in new device
 trees that need to be compatible with older software.
 
 Example 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	qe_pio_e: gpio-controller@1460 {
@@ -225,6 +253,7 @@ Example 1:
 		reg = <0x1460 0x18>;
 		gpio-controller;
 		gpio-ranges = <&pinctrl1 0 20 10>, <&pinctrl2 10 50 20>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     }
@@ -240,6 +269,8 @@ where,
 The pinctrl node must have "#gpio-range-cells" property to show number of
 arguments to pass with phandle from gpio controllers node.
 =======
+=======
+>>>>>>> v3.18
 	};
 
 Here, a single GPIO controller has GPIOs 0..9 routed to pin controller
@@ -266,4 +297,7 @@ Example 2:
 Here, three GPIO ranges are defined wrt. two pin controllers. pinctrl1 GPIO
 ranges are defined using pin numbers whereas the GPIO ranges wrt. pinctrl2
 are named "foo" and "bar".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

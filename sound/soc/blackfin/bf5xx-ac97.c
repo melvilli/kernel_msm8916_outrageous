@@ -199,7 +199,11 @@ static void bf5xx_ac97_cold_reset(struct snd_ac97 *ac97)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops bf5xx_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops bf5xx_ac97_ops = {
 >>>>>>> v3.18
@@ -209,7 +213,10 @@ static struct snd_ac97_bus_ops bf5xx_ac97_ops = {
 	.reset	= bf5xx_ac97_cold_reset,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -239,9 +246,15 @@ static int bf5xx_ac97_resume(struct snd_soc_dai *dai)
 
 #if defined(CONFIG_SND_BF5XX_MULTICHAN_SUPPORT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sport_set_multichannel(sport, 16, 0x3FF, 1);
 #else
 	ret = sport_set_multichannel(sport, 16, 0x1F, 1);
+=======
+	ret = sport_set_multichannel(sport, 16, 0x3FF, 0x3FF, 1);
+#else
+	ret = sport_set_multichannel(sport, 16, 0x1F, 0x1F, 1);
+>>>>>>> v3.18
 =======
 	ret = sport_set_multichannel(sport, 16, 0x3FF, 0x3FF, 1);
 #else
@@ -307,6 +320,7 @@ static int asoc_bfin_ac97_probe(struct platform_device *pdev)
 #ifdef CONFIG_SND_BF5XX_HAVE_COLD_RESET
 	/* Request PB3 as reset pin */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_request(CONFIG_SND_BF5XX_RESET_GPIO_NUM, "SND_AD198x RESET")) {
 		pr_err("Failed to request GPIO_%d for reset\n",
 				CONFIG_SND_BF5XX_RESET_GPIO_NUM);
@@ -315,6 +329,8 @@ static int asoc_bfin_ac97_probe(struct platform_device *pdev)
 	}
 	gpio_direction_output(CONFIG_SND_BF5XX_RESET_GPIO_NUM, 1);
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_gpio_request_one(&pdev->dev,
 				    CONFIG_SND_BF5XX_RESET_GPIO_NUM,
 				    GPIOF_OUT_INIT_HIGH, "SND_AD198x RESET");
@@ -324,6 +340,9 @@ static int asoc_bfin_ac97_probe(struct platform_device *pdev)
 			CONFIG_SND_BF5XX_RESET_GPIO_NUM, ret);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -337,9 +356,15 @@ static int asoc_bfin_ac97_probe(struct platform_device *pdev)
 	/*SPORT works in TDM mode to simulate AC97 transfers*/
 #if defined(CONFIG_SND_BF5XX_MULTICHAN_SUPPORT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sport_set_multichannel(sport_handle, 16, 0x3FF, 1);
 #else
 	ret = sport_set_multichannel(sport_handle, 16, 0x1F, 1);
+=======
+	ret = sport_set_multichannel(sport_handle, 16, 0x3FF, 0x3FF, 1);
+#else
+	ret = sport_set_multichannel(sport_handle, 16, 0x1F, 0x1F, 1);
+>>>>>>> v3.18
 =======
 	ret = sport_set_multichannel(sport_handle, 16, 0x3FF, 0x3FF, 1);
 #else
@@ -367,13 +392,19 @@ static int asoc_bfin_ac97_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_set_ac97_ops(&bf5xx_ac97_ops);
 	if (ret != 0) {
 		dev_err(&pdev->dev, "Failed to set AC'97 ops: %d\n", ret);
 		goto sport_config_err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_component(&pdev->dev, &bfin_ac97_component,
 					 &bfin_ac97_dai, 1);
@@ -390,10 +421,14 @@ sport_config_err:
 	sport_done(sport_handle);
 sport_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SND_BF5XX_HAVE_COLD_RESET
 	gpio_free(CONFIG_SND_BF5XX_RESET_GPIO_NUM);
 gpio_err:
 #endif
+=======
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18
@@ -408,9 +443,13 @@ static int asoc_bfin_ac97_remove(struct platform_device *pdev)
 	snd_soc_unregister_component(&pdev->dev);
 	sport_done(sport_handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SND_BF5XX_HAVE_COLD_RESET
 	gpio_free(CONFIG_SND_BF5XX_RESET_GPIO_NUM);
 #endif
+=======
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18

@@ -37,6 +37,11 @@
 
 #define PIC_CLK_HZ			66666666
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pic_timer_freq()		PIC_CLK_HZ
+
+>>>>>>> v3.18
 =======
 #define pic_timer_freq()		PIC_CLK_HZ
 

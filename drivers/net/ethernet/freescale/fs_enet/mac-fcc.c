@@ -21,7 +21,10 @@
 #include <linux/ioport.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -36,7 +39,13 @@
 #include <linux/platform_device.h>
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_device.h>
+=======
+#include <linux/of_address.h>
+#include <linux/of_device.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_device.h>
@@ -98,7 +107,11 @@ static int do_pd_setup(struct fs_enet_private *fep)
 	int ret = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fep->interrupt = of_irq_to_resource(ofdev->dev.of_node, 0, NULL);
+=======
+	fep->interrupt = irq_of_parse_and_map(ofdev->dev.of_node, 0);
+>>>>>>> v3.18
 =======
 	fep->interrupt = irq_of_parse_and_map(ofdev->dev.of_node, 0);
 >>>>>>> v3.18
@@ -138,6 +151,10 @@ out:
 
 #define FCC_NAPI_RX_EVENT_MSK	(FCC_ENET_RXF | FCC_ENET_RXB)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FCC_NAPI_TX_EVENT_MSK	(FCC_ENET_TXB)
+>>>>>>> v3.18
 =======
 #define FCC_NAPI_TX_EVENT_MSK	(FCC_ENET_TXB)
 >>>>>>> v3.18
@@ -154,6 +171,10 @@ static int setup_data(struct net_device *dev)
 
 	fep->ev_napi_rx = FCC_NAPI_RX_EVENT_MSK;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fep->ev_napi_tx = FCC_NAPI_TX_EVENT_MSK;
+>>>>>>> v3.18
 =======
 	fep->ev_napi_tx = FCC_NAPI_TX_EVENT_MSK;
 >>>>>>> v3.18
@@ -467,7 +488,10 @@ static void napi_disable_rx(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void napi_clear_tx_event(struct net_device *dev)
 {
 	struct fs_enet_private *fep = netdev_priv(dev);
@@ -492,6 +516,9 @@ static void napi_disable_tx(struct net_device *dev)
 	C16(fccp, fcc_fccm, FCC_NAPI_TX_EVENT_MSK);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rx_bd_done(struct net_device *dev)
 {
@@ -620,6 +647,12 @@ const struct fs_ops fs_fcc_ops = {
 	.napi_enable_rx		= napi_enable_rx,
 	.napi_disable_rx	= napi_disable_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.napi_clear_tx_event	= napi_clear_tx_event,
+	.napi_enable_tx		= napi_enable_tx,
+	.napi_disable_tx	= napi_disable_tx,
+>>>>>>> v3.18
 =======
 	.napi_clear_tx_event	= napi_clear_tx_event,
 	.napi_enable_tx		= napi_enable_tx,

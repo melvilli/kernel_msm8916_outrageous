@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2009 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -36,11 +42,17 @@
 #define EFX_DUMMY_FIELD_LBN 0
 #define EFX_DUMMY_FIELD_WIDTH 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EFX_WORD_0_LBN 0
 #define EFX_WORD_0_WIDTH 16
 #define EFX_WORD_1_LBN 16
 #define EFX_WORD_1_WIDTH 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EFX_DWORD_0_LBN 0
 #define EFX_DWORD_0_WIDTH 32

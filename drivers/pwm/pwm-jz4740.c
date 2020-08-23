@@ -166,7 +166,10 @@ static int jz4740_pwm_probe(struct platform_device *pdev)
 {
 	struct jz4740_pwm_chip *jz4740;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -175,7 +178,11 @@ static int jz4740_pwm_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jz4740->clk = clk_get(NULL, "ext");
+=======
+	jz4740->clk = devm_clk_get(&pdev->dev, "ext");
+>>>>>>> v3.18
 =======
 	jz4740->clk = devm_clk_get(&pdev->dev, "ext");
 >>>>>>> v3.18
@@ -187,6 +194,7 @@ static int jz4740_pwm_probe(struct platform_device *pdev)
 	jz4740->chip.npwm = NUM_PWM;
 	jz4740->chip.base = -1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = pwmchip_add(&jz4740->chip);
 	if (ret < 0) {
@@ -202,11 +210,17 @@ static int jz4740_pwm_probe(struct platform_device *pdev)
 
 	return pwmchip_add(&jz4740->chip);
 >>>>>>> v3.18
+=======
+	platform_set_drvdata(pdev, jz4740);
+
+	return pwmchip_add(&jz4740->chip);
+>>>>>>> v3.18
 }
 
 static int jz4740_pwm_remove(struct platform_device *pdev)
 {
 	struct jz4740_pwm_chip *jz4740 = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -217,6 +231,10 @@ static int jz4740_pwm_remove(struct platform_device *pdev)
 	clk_put(jz4740->clk);
 
 	return 0;
+=======
+
+	return pwmchip_remove(&jz4740->chip);
+>>>>>>> v3.18
 =======
 
 	return pwmchip_remove(&jz4740->chip);

@@ -54,7 +54,11 @@ MODULE_PARM_DESC(copybreak,
  *   Class, Class Mask, private data (not used) }
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ixgb_pci_tbl) = {
+=======
+static const struct pci_device_id ixgb_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ixgb_pci_tbl[] = {
 >>>>>>> v3.18
@@ -413,6 +417,7 @@ ixgb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	pci_using_dac = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(64));
 	if (!err) {
 		err = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(64));
@@ -428,6 +433,8 @@ ixgb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				goto err_dma_mask;
 			}
 =======
+=======
+>>>>>>> v3.18
 	err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
 	if (!err) {
 		pci_using_dac = 1;
@@ -436,6 +443,9 @@ ixgb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		if (err) {
 			pr_err("No usable DMA configuration, aborting\n");
 			goto err_dma_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -734,8 +744,13 @@ ixgb_setup_tx_resources(struct ixgb_adapter *adapter)
 	txdr->size = ALIGN(txdr->size, 4096);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txdr->desc = dma_alloc_coherent(&pdev->dev, txdr->size, &txdr->dma,
 					GFP_KERNEL | __GFP_ZERO);
+=======
+	txdr->desc = dma_zalloc_coherent(&pdev->dev, txdr->size, &txdr->dma,
+					 GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	txdr->desc = dma_zalloc_coherent(&pdev->dev, txdr->size, &txdr->dma,
 					 GFP_KERNEL);
@@ -1247,13 +1262,17 @@ ixgb_tso(struct ixgb_adapter *adapter, struct sk_buff *skb)
 	u8 ipcss, ipcso, tucss, tucso, hdr_len;
 	u16 ipcse, tucse, mss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (likely(skb_is_gso(skb))) {
 		struct ixgb_buffer *buffer_info;
 		struct iphdr *iph;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (skb_header_cloned(skb)) {
@@ -1262,11 +1281,16 @@ ixgb_tso(struct ixgb_adapter *adapter, struct sk_buff *skb)
 				return err;
 		}
 =======
+=======
+>>>>>>> v3.18
 		int err;
 
 		err = skb_cow_head(skb, 0);
 		if (err < 0)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		hdr_len = skb_transport_offset(skb) + tcp_hdrlen(skb);

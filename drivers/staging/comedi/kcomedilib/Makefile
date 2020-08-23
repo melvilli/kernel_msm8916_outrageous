@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-$(CONFIG_COMEDI_DEBUG)		:= -DDEBUG
+
+>>>>>>> v3.18
 =======
 ccflags-$(CONFIG_COMEDI_DEBUG)		:= -DDEBUG
 

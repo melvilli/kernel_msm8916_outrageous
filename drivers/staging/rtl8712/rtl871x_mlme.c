@@ -63,7 +63,12 @@ static sint _init_mlme_priv(struct _adapter *padapter)
 	set_scanned_network_val(pmlmepriv, 0);
 	memset(&pmlmepriv->assoc_ssid, 0, sizeof(struct ndis_802_11_ssid));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pbuf = _malloc(MAX_BSS_CNT * (sizeof(struct wlan_network)));
+=======
+	pbuf = kmalloc(MAX_BSS_CNT * (sizeof(struct wlan_network)),
+		       GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	pbuf = kmalloc(MAX_BSS_CNT * (sizeof(struct wlan_network)),
 		       GFP_ATOMIC);
@@ -74,8 +79,13 @@ static sint _init_mlme_priv(struct _adapter *padapter)
 	pnetwork = (struct wlan_network *)pbuf;
 	for (i = 0; i < MAX_BSS_CNT; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_init_listhead(&(pnetwork->list));
 		list_insert_tail(&(pnetwork->list),
+=======
+		INIT_LIST_HEAD(&(pnetwork->list));
+		list_add_tail(&(pnetwork->list),
+>>>>>>> v3.18
 =======
 		INIT_LIST_HEAD(&(pnetwork->list));
 		list_add_tail(&(pnetwork->list),
@@ -99,6 +109,7 @@ struct wlan_network *_r8712_alloc_network(struct mlme_priv *pmlmepriv)
 	struct list_head *plist = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (_queue_empty(free_queue) == true)
 		return NULL;
 	spin_lock_irqsave(&free_queue->lock, irqL);
@@ -106,12 +117,17 @@ struct wlan_network *_r8712_alloc_network(struct mlme_priv *pmlmepriv)
 	pnetwork = LIST_CONTAINOR(plist , struct wlan_network, list);
 	list_delete(&pnetwork->list);
 =======
+=======
+>>>>>>> v3.18
 	if (list_empty(&free_queue->queue))
 		return NULL;
 	spin_lock_irqsave(&free_queue->lock, irqL);
 	plist = free_queue->queue.next;
 	pnetwork = LIST_CONTAINOR(plist , struct wlan_network, list);
 	list_del_init(&pnetwork->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pnetwork->last_scanned = jiffies;
 	pmlmepriv->num_of_scanned++;
@@ -136,8 +152,13 @@ static void _free_network(struct mlme_priv *pmlmepriv,
 		return;
 	spin_lock_irqsave(&free_queue->lock, irqL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_delete(&pnetwork->list);
 	list_insert_tail(&pnetwork->list, &free_queue->queue);
+=======
+	list_del_init(&pnetwork->list);
+	list_add_tail(&pnetwork->list, &free_queue->queue);
+>>>>>>> v3.18
 =======
 	list_del_init(&pnetwork->list);
 	list_add_tail(&pnetwork->list, &free_queue->queue);
@@ -156,8 +177,13 @@ static void _free_network_nolock(struct mlme_priv *pmlmepriv,
 	if (pnetwork->fixed == true)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_delete(&pnetwork->list);
 	list_insert_tail(&pnetwork->list, get_list_head(free_queue));
+=======
+	list_del_init(&pnetwork->list);
+	list_add_tail(&pnetwork->list, &free_queue->queue);
+>>>>>>> v3.18
 =======
 	list_del_init(&pnetwork->list);
 	list_add_tail(&pnetwork->list, &free_queue->queue);
@@ -182,17 +208,23 @@ static struct wlan_network *_r8712_find_network(struct  __queue *scanned_queue,
 		return NULL;
 	spin_lock_irqsave(&scanned_queue->lock, irqL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(scanned_queue);
 	plist = get_next(phead);
 	while (plist != phead) {
 		pnetwork = LIST_CONTAINOR(plist, struct wlan_network, list);
 		plist = get_next(plist);
 =======
+=======
+>>>>>>> v3.18
 	phead = &scanned_queue->queue;
 	plist = phead->next;
 	while (plist != phead) {
 		pnetwork = LIST_CONTAINOR(plist, struct wlan_network, list);
 		plist = plist->next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!memcmp(addr, pnetwork->network.MacAddress, ETH_ALEN))
 			break;
@@ -211,17 +243,23 @@ static void _free_network_queue(struct _adapter *padapter)
 
 	spin_lock_irqsave(&scanned_queue->lock, irqL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(scanned_queue);
 	plist = get_next(phead);
 	while (end_of_queue_search(phead, plist) == false) {
 		pnetwork = LIST_CONTAINOR(plist, struct wlan_network, list);
 		plist = get_next(plist);
 =======
+=======
+>>>>>>> v3.18
 	phead = &scanned_queue->queue;
 	plist = phead->next;
 	while (end_of_queue_search(phead, plist) == false) {
 		pnetwork = LIST_CONTAINOR(plist, struct wlan_network, list);
 		plist = plist->next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		_free_network(pmlmepriv, pnetwork);
 	}
@@ -360,8 +398,13 @@ struct	wlan_network *r8712_get_oldest_wlan_network(
 	struct	wlan_network	*oldest = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(scanned_queue);
 	plist = get_next(phead);
+=======
+	phead = &scanned_queue->queue;
+	plist = phead->next;
+>>>>>>> v3.18
 =======
 	phead = &scanned_queue->queue;
 	plist = phead->next;
@@ -377,7 +420,11 @@ struct	wlan_network *r8712_get_oldest_wlan_network(
 				oldest = pwlan;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		plist = get_next(plist);
+=======
+		plist = plist->next;
+>>>>>>> v3.18
 =======
 		plist = plist->next;
 >>>>>>> v3.18
@@ -452,8 +499,13 @@ static void update_scanned_network(struct _adapter *adapter,
 	struct wlan_network *oldest = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(queue);
 	plist = get_next(phead);
+=======
+	phead = &queue->queue;
+	plist = phead->next;
+>>>>>>> v3.18
 =======
 	phead = &queue->queue;
 	plist = phead->next;
@@ -472,7 +524,11 @@ static void update_scanned_network(struct _adapter *adapter,
 			oldest = pnetwork;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		plist = get_next(plist);
+=======
+		plist = plist->next;
+>>>>>>> v3.18
 =======
 		plist = plist->next;
 >>>>>>> v3.18
@@ -483,7 +539,11 @@ static void update_scanned_network(struct _adapter *adapter,
 	 * with this beacon's information */
 	if (end_of_queue_search(phead, plist) == true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (_queue_empty(&pmlmepriv->free_bss_pool) == true) {
+=======
+		if (list_empty(&pmlmepriv->free_bss_pool.queue)) {
+>>>>>>> v3.18
 =======
 		if (list_empty(&pmlmepriv->free_bss_pool.queue)) {
 >>>>>>> v3.18
@@ -504,7 +564,11 @@ static void update_scanned_network(struct _adapter *adapter,
 			target->Length = bssid_ex_sz;
 			memcpy(&pnetwork->network, target, bssid_ex_sz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_insert_tail(&pnetwork->list, &queue->queue);
+=======
+			list_add_tail(&pnetwork->list, &queue->queue);
+>>>>>>> v3.18
 =======
 			list_add_tail(&pnetwork->list, &queue->queue);
 >>>>>>> v3.18
@@ -661,7 +725,11 @@ void r8712_surveydone_event_callback(struct _adapter *adapter, u8 *pbuf)
 
 	if (pmlmepriv->to_join == true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true)) {
+=======
+		if (check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true) {
+>>>>>>> v3.18
 =======
 		if (check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true) {
 >>>>>>> v3.18
@@ -801,8 +869,12 @@ void r8712_joinbss_event_callback(struct _adapter *adapter, u8 *pbuf)
 
 	if (sizeof(struct list_head) == 4 * sizeof(u32)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pnetwork = (struct wlan_network *)
 			_malloc(sizeof(struct wlan_network));
+=======
+		pnetwork = kmalloc(sizeof(struct wlan_network), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		pnetwork = kmalloc(sizeof(struct wlan_network), GFP_ATOMIC);
 >>>>>>> v3.18
@@ -1123,9 +1195,12 @@ void r8712_got_addbareq_event_callback(struct _adapter *adapter, u8 *pbuf)
 	struct	recv_reorder_ctrl *precvreorder_ctrl = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_info(adapter->pnetdev, "%s: mac = %pM, seq = %d, tid = %d\n",
 		    __func__, pAddbareq_pram->MacAddress,
 	    pAddbareq_pram->StartSeqNum, pAddbareq_pram->tid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	psta = r8712_get_stainfo(pstapriv, pAddbareq_pram->MacAddress);
@@ -1224,8 +1299,13 @@ int r8712_select_and_join_from_scan(struct mlme_priv *pmlmepriv)
 	adapter = (struct _adapter *)pmlmepriv->nic_hdl;
 	queue = &pmlmepriv->scanned_queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(queue);
 	pmlmepriv->pscanned = get_next(phead);
+=======
+	phead = &queue->queue;
+	pmlmepriv->pscanned = phead->next;
+>>>>>>> v3.18
 =======
 	phead = &queue->queue;
 	pmlmepriv->pscanned = phead->next;
@@ -1244,7 +1324,11 @@ int r8712_select_and_join_from_scan(struct mlme_priv *pmlmepriv)
 		if (pnetwork == NULL)
 			return _FAIL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pmlmepriv->pscanned = get_next(pmlmepriv->pscanned);
+=======
+		pmlmepriv->pscanned = pmlmepriv->pscanned->next;
+>>>>>>> v3.18
 =======
 		pmlmepriv->pscanned = pmlmepriv->pscanned->next;
 >>>>>>> v3.18
@@ -1306,6 +1390,7 @@ sint r8712_set_auth(struct _adapter *adapter,
 	struct cmd_obj *pcmd;
 	struct setauth_parm *psetauthparm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sint ret = _SUCCESS;
 
 	pcmd = (struct cmd_obj *)_malloc(sizeof(struct cmd_obj));
@@ -1315,19 +1400,27 @@ sint r8712_set_auth(struct _adapter *adapter,
 	psetauthparm = (struct setauth_parm *)_malloc(
 			sizeof(struct setauth_parm));
 =======
+=======
+>>>>>>> v3.18
 
 	pcmd = kmalloc(sizeof(*pcmd), GFP_ATOMIC);
 	if (pcmd == NULL)
 		return _FAIL;
 
 	psetauthparm = kzalloc(sizeof(*psetauthparm), GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (psetauthparm == NULL) {
 		kfree((unsigned char *)pcmd);
 		return _FAIL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(psetauthparm, 0, sizeof(struct setauth_parm));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	psetauthparm->mode = (u8)psecuritypriv->AuthAlgrthm;
@@ -1337,9 +1430,15 @@ sint r8712_set_auth(struct _adapter *adapter,
 	pcmd->rsp = NULL;
 	pcmd->rspsz = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_init_listhead(&pcmd->list);
 	r8712_enqueue_cmd(pcmdpriv, pcmd);
 	return ret;
+=======
+	INIT_LIST_HEAD(&pcmd->list);
+	r8712_enqueue_cmd(pcmdpriv, pcmd);
+	return _SUCCESS;
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&pcmd->list);
 	r8712_enqueue_cmd(pcmdpriv, pcmd);
@@ -1356,6 +1455,7 @@ sint r8712_set_key(struct _adapter *adapter,
 	struct setkey_parm *psetkeyparm;
 	u8 keylen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pcmd = (struct cmd_obj *)_malloc(sizeof(struct cmd_obj));
 	if (pcmd == NULL)
@@ -1367,6 +1467,8 @@ sint r8712_set_key(struct _adapter *adapter,
 	}
 	memset(psetkeyparm, 0, sizeof(struct setkey_parm));
 =======
+=======
+>>>>>>> v3.18
 	sint ret = _SUCCESS;
 
 	pcmd = kmalloc(sizeof(*pcmd), GFP_ATOMIC);
@@ -1377,6 +1479,9 @@ sint r8712_set_key(struct _adapter *adapter,
 		ret = _FAIL;
 		goto err_free_cmd;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (psecuritypriv->AuthAlgrthm == 2) { /* 802.1X */
 		psetkeyparm->algorithm =
@@ -1400,13 +1505,19 @@ sint r8712_set_key(struct _adapter *adapter,
 		break;
 	case _TKIP_:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (keyid < 1 || keyid > 2)
 			return _FAIL;
 =======
+=======
+>>>>>>> v3.18
 		if (keyid < 1 || keyid > 2) {
 			ret = _FAIL;
 			goto err_free_parm;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		keylen = 16;
 		memcpy(psetkeyparm->key,
@@ -1415,13 +1526,19 @@ sint r8712_set_key(struct _adapter *adapter,
 		break;
 	case _AES_:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (keyid < 1 || keyid > 2)
 			return _FAIL;
 =======
+=======
+>>>>>>> v3.18
 		if (keyid < 1 || keyid > 2) {
 			ret = _FAIL;
 			goto err_free_parm;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		keylen = 16;
 		memcpy(psetkeyparm->key,
@@ -1430,7 +1547,12 @@ sint r8712_set_key(struct _adapter *adapter,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return _FAIL;
+=======
+		ret = _FAIL;
+		goto err_free_parm;
+>>>>>>> v3.18
 =======
 		ret = _FAIL;
 		goto err_free_parm;
@@ -1442,10 +1564,13 @@ sint r8712_set_key(struct _adapter *adapter,
 	pcmd->rsp = NULL;
 	pcmd->rspsz = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_init_listhead(&pcmd->list);
 	r8712_enqueue_cmd(pcmdpriv, pcmd);
 	return _SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&pcmd->list);
 	r8712_enqueue_cmd(pcmdpriv, pcmd);
 	return ret;
@@ -1455,6 +1580,9 @@ err_free_parm:
 err_free_cmd:
 	kfree(pcmd);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1795,7 +1923,11 @@ void r8712_update_registrypriv_dev_network(struct _adapter *adapter)
 
 	pdev_network->Privacy = cpu_to_le32(psecuritypriv->PrivacyAlgrthm
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    > 0 ? 1 : 0) ; /* adhoc no 802.1x */
+=======
+					    > 0 ? 1 : 0); /* adhoc no 802.1x */
+>>>>>>> v3.18
 =======
 					    > 0 ? 1 : 0); /* adhoc no 802.1x */
 >>>>>>> v3.18
@@ -1944,7 +2076,11 @@ static void update_ht_cap(struct _adapter *padapter, u8 *pie, uint ie_len)
 				 pcur_network->network.MacAddress);
 	if (psta) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < 16 ; i++) {
+=======
+		for (i = 0; i < 16; i++) {
+>>>>>>> v3.18
 =======
 		for (i = 0; i < 16; i++) {
 >>>>>>> v3.18

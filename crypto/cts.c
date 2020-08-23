@@ -203,7 +203,12 @@ static int cts_cbc_decrypt(struct crypto_cts_ctx *ctx,
 	memcpy(s + bsize + lastn, tmp + lastn, bsize - lastn);
 	/* 6. Decrypt En to create Pn-1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(iv, 0, sizeof(iv));
+=======
+	memzero_explicit(iv, sizeof(iv));
+
+>>>>>>> v3.18
 =======
 	memzero_explicit(iv, sizeof(iv));
 
@@ -356,6 +361,9 @@ module_exit(crypto_cts_module_exit);
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("CTS-CBC CipherText Stealing for CBC");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cts");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

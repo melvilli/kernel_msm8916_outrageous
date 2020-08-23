@@ -845,7 +845,11 @@ static void if_usb_prog_firmware(struct lbs_private *priv, int ret,
 	if (check_fwfile_format(cardp->fw->data, cardp->fw->size)) {
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 =======
 		goto done;
 >>>>>>> v3.18
@@ -866,7 +870,11 @@ restart:
 		lbs_deb_usbd(&cardp->udev->dev, "URB submission is failed\n");
 		ret = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 =======
 		goto done;
 >>>>>>> v3.18
@@ -892,7 +900,11 @@ restart:
 		if (if_usb_submit_rx_urb(cardp) < 0)
 			ret = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 =======
 		goto done;
 >>>>>>> v3.18
@@ -903,7 +915,11 @@ restart:
 		}
 		ret = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 =======
 		goto done;
 >>>>>>> v3.18
@@ -938,7 +954,11 @@ restart:
 		pr_info("FW download failure, time = %d ms\n", i * 100);
 		ret = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 =======
 		goto done;
 >>>>>>> v3.18
@@ -949,7 +969,11 @@ restart:
 
 	if (lbs_start_card(priv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 =======
 		goto done;
 >>>>>>> v3.18
@@ -964,11 +988,16 @@ restart:
 		priv->ehs_remove_supported = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  release_fw:
 	release_firmware(cardp->fw);
 	cardp->fw = NULL;
 
  done:
+=======
+ done:
+	cardp->fw = NULL;
+>>>>>>> v3.18
 =======
  done:
 	cardp->fw = NULL;

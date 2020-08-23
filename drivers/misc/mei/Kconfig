@@ -35,7 +35,10 @@ config INTEL_MEI_ME
 	  82X38/X48 Express
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTEL_MEI_TXE
 	tristate "Intel Trusted Execution Environment with ME Interface"
 	select INTEL_MEI
@@ -45,4 +48,7 @@ config INTEL_MEI_TXE
 
 	  Supported SoCs:
 	  Intel Bay Trail
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

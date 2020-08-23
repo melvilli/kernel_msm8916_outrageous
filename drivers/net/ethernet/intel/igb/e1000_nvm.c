@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  * This program is free software; you can redistribute it and/or modify it
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/if_ether.h>
@@ -506,6 +512,10 @@ s32 igb_write_nvm_spi(struct e1000_hw *hw, u16 offset, u16 words, u16 *data)
 		while (widx < words) {
 			u16 word_out = data[widx];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -738,12 +748,15 @@ out:
 void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 eeprom_verh, eeprom_verl, comb_verh, comb_verl, comb_offset;
 	u16 fw_version;
 
 	memset(fw_vers, 0, sizeof(struct e1000_fw_version));
 
 =======
+=======
+>>>>>>> v3.18
 	u16 eeprom_verh, eeprom_verl, etrack_test, fw_version;
 	u8 q, hval, rem, result;
 	u16 comb_verh, comb_verl, comb_offset;
@@ -754,6 +767,9 @@ void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 	 * used to create the nvm images. Check which data format we have.
 	 */
 	hw->nvm.ops.read(hw, NVM_ETRACK_HIWORD, 1, &etrack_test);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (hw->mac.type) {
 	case e1000_i211:
@@ -762,6 +778,7 @@ void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 	case e1000_82575:
 	case e1000_82576:
 	case e1000_82580:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case e1000_i354:
 	case e1000_i350:
@@ -788,6 +805,8 @@ void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 		hw->nvm.ops.read(hw, NVM_COMB_VER_PTR, 1, &comb_offset);
 		if ((comb_offset != 0x0) && (comb_offset != NVM_VER_INVALID)) {
 =======
+=======
+>>>>>>> v3.18
 		/* Use this format, unless EETRACK ID exists,
 		 * then use alternate format
 		 */
@@ -812,6 +831,9 @@ void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 		hw->nvm.ops.read(hw, NVM_COMB_VER_PTR, 1, &comb_offset);
 		if ((comb_offset != 0x0) &&
 		    (comb_offset != NVM_VER_INVALID)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			hw->nvm.ops.read(hw, (NVM_COMB_VER_OFF + comb_offset
@@ -829,8 +851,13 @@ void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 					comb_verl >> NVM_COMB_VER_SHFT;
 				fw_vers->or_build =
 <<<<<<< HEAD
+<<<<<<< HEAD
 					((comb_verl << NVM_COMB_VER_SHFT)
 					| (comb_verh >> NVM_COMB_VER_SHFT));
+=======
+					(comb_verl << NVM_COMB_VER_SHFT)
+					| (comb_verh >> NVM_COMB_VER_SHFT);
+>>>>>>> v3.18
 =======
 					(comb_verl << NVM_COMB_VER_SHFT)
 					| (comb_verh >> NVM_COMB_VER_SHFT);
@@ -842,10 +869,13 @@ void igb_get_fw_version(struct e1000_hw *hw, struct e1000_fw_version *fw_vers)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	}
 	return;
 =======
+=======
+>>>>>>> v3.18
 		return;
 	}
 	hw->nvm.ops.read(hw, NVM_VERSION, 1, &fw_version);
@@ -875,5 +905,8 @@ etrack_id:
 		fw_vers->etrack_id = (eeprom_verh << NVM_ETRACK_SHIFT)
 			| eeprom_verl;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

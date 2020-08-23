@@ -21,6 +21,7 @@
 #include <linux/clkdev.h>
 #include <linux/clk/bcm2835.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clk-provider.h>
 #include <linux/of.h>
 
@@ -29,6 +30,10 @@ static const __initconst struct of_device_id clk_match[] = {
 	{ }
 };
 
+=======
+#include <linux/of.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 
@@ -69,8 +74,11 @@ void __init bcm2835_init_clocks(void)
 	if (ret)
 		pr_err("uart1_pclk alias not registered\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	of_clk_init(clk_match);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

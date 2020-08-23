@@ -15,7 +15,12 @@ extern int crush_do_rule(const struct crush_map *map,
 			 int ruleno,
 			 int x, int *result, int result_max,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 const __u32 *weights);
+=======
+			 const __u32 *weights, int weight_max,
+			 int *scratch);
+>>>>>>> v3.18
 =======
 			 const __u32 *weights, int weight_max,
 			 int *scratch);

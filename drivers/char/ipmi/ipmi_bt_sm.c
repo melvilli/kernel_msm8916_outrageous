@@ -202,7 +202,11 @@ static unsigned int bt_init_data(struct si_sm_data *bt, struct si_sm_io *io)
 	bt->state = BT_STATE_IDLE;	/* start here */
 	bt->complete = BT_STATE_IDLE;	/* end here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bt->BT_CAP_req2rsp = BT_NORMAL_TIMEOUT * 1000000;
+=======
+	bt->BT_CAP_req2rsp = BT_NORMAL_TIMEOUT * USEC_PER_SEC;
+>>>>>>> v3.18
 =======
 	bt->BT_CAP_req2rsp = BT_NORMAL_TIMEOUT * USEC_PER_SEC;
 >>>>>>> v3.18
@@ -618,7 +622,11 @@ static enum si_sm_result bt_event(struct si_sm_data *bt, long time)
 		HOST2BMC(3);		/* Cmd == Soft reset */
 		BT_CONTROL(BT_H2B_ATN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bt->timeout = BT_RESET_DELAY * 1000000;
+=======
+		bt->timeout = BT_RESET_DELAY * USEC_PER_SEC;
+>>>>>>> v3.18
 =======
 		bt->timeout = BT_RESET_DELAY * USEC_PER_SEC;
 >>>>>>> v3.18
@@ -660,7 +668,11 @@ static enum si_sm_result bt_event(struct si_sm_data *bt, long time)
 		if ((i == 8) && !BT_CAP[2]) {
 			bt->BT_CAP_outreqs = BT_CAP[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bt->BT_CAP_req2rsp = BT_CAP[6] * 1000000;
+=======
+			bt->BT_CAP_req2rsp = BT_CAP[6] * USEC_PER_SEC;
+>>>>>>> v3.18
 =======
 			bt->BT_CAP_req2rsp = BT_CAP[6] * USEC_PER_SEC;
 >>>>>>> v3.18
@@ -671,7 +683,11 @@ static enum si_sm_result bt_event(struct si_sm_data *bt, long time)
 			bt->BT_CAP_outreqs = 1;
 		printk(KERN_WARNING "IPMI BT: req2rsp=%ld secs retries=%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bt->BT_CAP_req2rsp / 1000000L, bt->BT_CAP_retries);
+=======
+			bt->BT_CAP_req2rsp / USEC_PER_SEC, bt->BT_CAP_retries);
+>>>>>>> v3.18
 =======
 			bt->BT_CAP_req2rsp / USEC_PER_SEC, bt->BT_CAP_retries);
 >>>>>>> v3.18

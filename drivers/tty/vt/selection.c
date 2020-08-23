@@ -25,6 +25,10 @@
 #include <linux/tiocl.h>
 #include <linux/console.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/tty_flip.h>
+>>>>>>> v3.18
 =======
 #include <linux/tty_flip.h>
 >>>>>>> v3.18
@@ -351,8 +355,13 @@ int paste_selection(struct tty_struct *tty)
 
 	ld = tty_ldisc_ref_wait(tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* FIXME: this is completely unsafe */
+=======
+	tty_buffer_lock_exclusive(&vc->port);
+
+>>>>>>> v3.18
 =======
 	tty_buffer_lock_exclusive(&vc->port);
 
@@ -366,8 +375,13 @@ int paste_selection(struct tty_struct *tty)
 		}
 		count = sel_buffer_lth - pasted;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		count = min(count, tty->receive_room);
 		ld->ops->receive_buf(tty, sel_buffer + pasted, NULL, count);
+=======
+		count = tty_ldisc_receive_buf(ld, sel_buffer + pasted, NULL,
+					      count);
+>>>>>>> v3.18
 =======
 		count = tty_ldisc_receive_buf(ld, sel_buffer + pasted, NULL,
 					      count);
@@ -378,6 +392,10 @@ int paste_selection(struct tty_struct *tty)
 	__set_current_state(TASK_RUNNING);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tty_buffer_unlock_exclusive(&vc->port);
+>>>>>>> v3.18
 =======
 	tty_buffer_unlock_exclusive(&vc->port);
 >>>>>>> v3.18
